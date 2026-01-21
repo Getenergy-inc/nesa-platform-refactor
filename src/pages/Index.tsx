@@ -1,16 +1,22 @@
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Award, Play, Menu, Globe, Users, Eye, Ticket, PlayCircle, ChevronRight } from "lucide-react";
+import { useSeason } from "@/contexts/SeasonContext";
 import heroCeremony from "@/assets/hero-ceremony.jpg";
 
 export default function Index() {
+  const { currentEdition, getBannerText, loading } = useSeason();
+
   const quickActions = [
     { label: "Refer", icon: Users, href: "/refer" },
     { label: "Nominate", icon: Award, href: "/nominate" },
-    { label: "Vision 2035", icon: Eye, href: "/vision" },
+    { label: `Vision ${currentEdition.ceremonyYear + 9}`, icon: Eye, href: "/vision" },
     { label: "Tickets", icon: Ticket, href: "/tickets" },
     { label: "Watch", icon: PlayCircle, href: "/media" },
   ];
+
+  // Dynamic banner text from season config
+  const bannerText = getBannerText();
 
   return (
     <div className="min-h-screen bg-secondary">
@@ -50,32 +56,32 @@ export default function Index() {
 
         {/* Content */}
         <div className="container relative z-10 flex min-h-screen flex-col items-center justify-center px-6 pt-20 text-center">
-          {/* Announcement Badge */}
+          {/* Announcement Badge - Dynamic from SeasonConfig */}
           <div className="mb-8 inline-flex items-center gap-2 rounded-full border border-primary/40 bg-secondary/60 px-5 py-2.5 backdrop-blur-sm">
             <Award className="h-4 w-4 text-primary" />
             <span className="text-sm font-medium text-secondary-foreground">
-              NESA-Africa 2025 — Nominations Open Now
+              {loading ? "Loading..." : bannerText}
             </span>
           </div>
 
-          {/* Main Heading */}
+          {/* Main Heading - Uses edition tagline */}
           <h1 className="mb-4 max-w-4xl">
             <span className="font-display text-4xl font-bold text-secondary-foreground md:text-6xl lg:text-7xl">
-              Honoring Africa's{" "}
+              {currentEdition.tagline.split(" ").slice(0, -1).join(" ")}{" "}
             </span>
             <span className="font-cursive text-5xl text-primary md:text-7xl lg:text-8xl">
-              Changemakers
+              {currentEdition.tagline.split(" ").slice(-1)[0]}
             </span>
           </h1>
 
-          {/* Subtitle */}
+          {/* Subtitle - Uses edition theme */}
           <p className="mb-6 font-display text-xl text-secondary-foreground/90 md:text-2xl">
-            Building the Future of Education
+            {currentEdition.theme}
           </p>
 
-          {/* Description */}
+          {/* Description - Dynamic edition name */}
           <p className="mb-10 max-w-3xl text-base text-secondary-foreground/70 md:text-lg">
-            At the New Education Standard Award Africa (NESA-Africa) 2025, we celebrate 
+            At the {currentEdition.name}, we celebrate 
             the real changemakers shaping the future of education across Africa. A pan-African 
             celebration of educational transformation, social impact, and legacy.
           </p>
@@ -177,7 +183,7 @@ export default function Index() {
         </div>
       </section>
 
-      {/* CTA Section */}
+      {/* CTA Section - Dynamic edition name */}
       <section className="bg-secondary py-20">
         <div className="container px-6 text-center">
           <h2 className="mb-4 font-display text-3xl font-bold text-secondary-foreground md:text-4xl">
@@ -201,7 +207,7 @@ export default function Index() {
         </div>
       </section>
 
-      {/* Footer */}
+      {/* Footer - Dynamic year from edition */}
       <footer className="border-t border-border/10 bg-secondary py-8">
         <div className="container px-6">
           <div className="flex flex-col items-center justify-between gap-4 md:flex-row">
@@ -216,7 +222,7 @@ export default function Index() {
               </span>
             </div>
             <p className="text-sm text-secondary-foreground/50">
-              © 2025 NESA Africa. All rights reserved.
+              © {currentEdition.displayYear} NESA Africa. All rights reserved.
             </p>
           </div>
         </div>

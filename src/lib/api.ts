@@ -1,12 +1,20 @@
 // Unified API client for NESA Africa platform
 import { supabase } from "@/integrations/supabase/client";
-import type { StageAction, StageStatus } from "@/config/season";
+import type { StageAction } from "@/config/season";
 import type { AppRole } from "@/config/roles";
+
+// Local type for API responses (different from config types)
+export interface ApiStageStatus {
+  action: StageAction;
+  isOpen: boolean;
+  opensAt?: Date;
+  closesAt?: Date;
+}
 
 // ==========================================
 // STAGE API
 // ==========================================
-export async function fetchCurrentStage(): Promise<StageStatus[]> {
+export async function fetchCurrentStage(): Promise<ApiStageStatus[]> {
   const { data, error } = await supabase
     .from("stage_config")
     .select(`
