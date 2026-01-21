@@ -1,96 +1,129 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
-All colors MUST be HSL.
+/* NESA Africa Design System
+   Inspired by African elegance, gold excellence awards, and modern governance
+   Colors: Rich gold, deep charcoal, warm earth tones
 */
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    /* Core Brand Colors */
+    --background: 30 10% 98%;
+    --foreground: 30 15% 8%;
 
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card: 30 15% 99%;
+    --card-foreground: 30 15% 8%;
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --popover: 30 15% 99%;
+    --popover-foreground: 30 15% 8%;
 
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
+    /* Gold - Primary brand color */
+    --primary: 42 85% 52%;
+    --primary-foreground: 30 15% 8%;
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    /* Secondary - Deep charcoal */
+    --secondary: 30 8% 12%;
+    --secondary-foreground: 30 10% 98%;
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    /* Muted earth tones */
+    --muted: 30 12% 92%;
+    --muted-foreground: 30 8% 45%;
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    /* Accent - Warm terracotta */
+    --accent: 18 75% 48%;
+    --accent-foreground: 30 10% 98%;
 
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
+    /* States */
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 30 10% 98%;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    --success: 142 70% 45%;
+    --success-foreground: 30 10% 98%;
+
+    --warning: 38 92% 50%;
+    --warning-foreground: 30 15% 8%;
+
+    /* Borders & Inputs */
+    --border: 30 15% 88%;
+    --input: 30 15% 88%;
+    --ring: 42 85% 52%;
 
     --radius: 0.5rem;
 
-    --sidebar-background: 0 0% 98%;
+    /* Sidebar */
+    --sidebar-background: 30 8% 6%;
+    --sidebar-foreground: 30 10% 90%;
+    --sidebar-primary: 42 85% 52%;
+    --sidebar-primary-foreground: 30 15% 8%;
+    --sidebar-accent: 30 8% 12%;
+    --sidebar-accent-foreground: 30 10% 90%;
+    --sidebar-border: 30 8% 15%;
+    --sidebar-ring: 42 85% 52%;
 
-    --sidebar-foreground: 240 5.3% 26.1%;
+    /* Extended palette */
+    --gold: 42 85% 52%;
+    --gold-light: 42 80% 65%;
+    --gold-dark: 42 90% 38%;
+    --charcoal: 30 8% 12%;
+    --charcoal-light: 30 8% 18%;
+    --terracotta: 18 75% 48%;
+    --earth: 30 25% 35%;
+    --cream: 40 40% 95%;
+    --ivory: 45 50% 97%;
 
-    --sidebar-primary: 240 5.9% 10%;
+    /* Gradients */
+    --gradient-gold: linear-gradient(135deg, hsl(42 90% 45%) 0%, hsl(42 85% 58%) 50%, hsl(38 80% 50%) 100%);
+    --gradient-dark: linear-gradient(180deg, hsl(30 8% 6%) 0%, hsl(30 8% 12%) 100%);
+    --gradient-hero: linear-gradient(180deg, hsl(30 8% 6%) 0%, hsl(30 8% 10%) 40%, hsl(30 15% 8%) 100%);
+    --gradient-shine: linear-gradient(90deg, transparent 0%, hsla(42, 85%, 52%, 0.3) 50%, transparent 100%);
 
-    --sidebar-primary-foreground: 0 0% 98%;
-
-    --sidebar-accent: 240 4.8% 95.9%;
-
-    --sidebar-accent-foreground: 240 5.9% 10%;
-
-    --sidebar-border: 220 13% 91%;
-
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    /* Shadows */
+    --shadow-gold: 0 4px 20px -4px hsla(42, 85%, 52%, 0.35);
+    --shadow-lg: 0 10px 40px -15px hsla(30, 15%, 8%, 0.2);
+    --shadow-card: 0 2px 12px -2px hsla(30, 15%, 8%, 0.08);
   }
 
   .dark {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
+    --background: 30 8% 6%;
+    --foreground: 30 10% 95%;
 
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
+    --card: 30 8% 8%;
+    --card-foreground: 30 10% 95%;
 
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
+    --popover: 30 8% 8%;
+    --popover-foreground: 30 10% 95%;
 
-    --primary: 210 40% 98%;
-    --primary-foreground: 222.2 47.4% 11.2%;
+    --primary: 42 85% 55%;
+    --primary-foreground: 30 15% 8%;
 
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
+    --secondary: 30 8% 18%;
+    --secondary-foreground: 30 10% 95%;
 
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
+    --muted: 30 8% 15%;
+    --muted-foreground: 30 8% 60%;
 
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
+    --accent: 18 75% 52%;
+    --accent-foreground: 30 10% 98%;
 
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 30 10% 98%;
 
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 212.7 26.8% 83.9%;
-    --sidebar-background: 240 5.9% 10%;
-    --sidebar-foreground: 240 4.8% 95.9%;
-    --sidebar-primary: 224.3 76.3% 48%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 3.7% 15.9%;
-    --sidebar-accent-foreground: 240 4.8% 95.9%;
-    --sidebar-border: 240 3.7% 15.9%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    --border: 30 8% 18%;
+    --input: 30 8% 18%;
+    --ring: 42 85% 55%;
+
+    --sidebar-background: 30 8% 4%;
+    --sidebar-foreground: 30 10% 90%;
+    --sidebar-primary: 42 85% 55%;
+    --sidebar-primary-foreground: 30 15% 8%;
+    --sidebar-accent: 30 8% 10%;
+    --sidebar-accent-foreground: 30 10% 90%;
+    --sidebar-border: 30 8% 12%;
+    --sidebar-ring: 42 85% 55%;
   }
 }
 
@@ -100,6 +133,78 @@ All colors MUST be HSL.
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground font-sans antialiased;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-display font-bold tracking-tight;
+  }
+}
+
+@layer utilities {
+  .text-gradient-gold {
+    @apply bg-clip-text text-transparent;
+    background-image: var(--gradient-gold);
+  }
+
+  .bg-gradient-gold {
+    background-image: var(--gradient-gold);
+  }
+
+  .bg-gradient-dark {
+    background-image: var(--gradient-dark);
+  }
+
+  .bg-gradient-hero {
+    background-image: var(--gradient-hero);
+  }
+
+  .shadow-gold {
+    box-shadow: var(--shadow-gold);
+  }
+
+  .shadow-card {
+    box-shadow: var(--shadow-card);
+  }
+
+  .shine {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .shine::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: var(--gradient-shine);
+    transform: translateX(-100%);
+    animation: shine 3s ease-in-out infinite;
+  }
+
+  @keyframes shine {
+    0%, 100% { transform: translateX(-100%); }
+    50% { transform: translateX(100%); }
+  }
+
+  .pattern-african {
+    background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23c9a227' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  }
+
+  .animate-float {
+    animation: float 6s ease-in-out infinite;
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-20px); }
+  }
+
+  .animate-pulse-gold {
+    animation: pulse-gold 2s ease-in-out infinite;
+  }
+
+  @keyframes pulse-gold {
+    0%, 100% { box-shadow: 0 0 0 0 hsla(42, 85%, 52%, 0.4); }
+    50% { box-shadow: 0 0 0 15px hsla(42, 85%, 52%, 0); }
   }
 }
