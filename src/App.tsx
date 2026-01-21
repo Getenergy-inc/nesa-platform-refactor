@@ -4,7 +4,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { AuthProvider } from "@/contexts/AuthContext";
-import { StageProvider } from "@/contexts/StageContext";
+import { SeasonProvider } from "@/contexts/SeasonContext";
 import Index from "./pages/Index";
 import Login from "./pages/auth/Login";
 import Register from "./pages/auth/Register";
@@ -17,7 +17,7 @@ const App = () => (
   <QueryClientProvider client={queryClient}>
     <TooltipProvider>
       <AuthProvider>
-        <StageProvider>
+        <SeasonProvider>
           <Toaster />
           <Sonner />
           <BrowserRouter>
@@ -29,7 +29,7 @@ const App = () => (
               <Route path="*" element={<NotFound />} />
             </Routes>
           </BrowserRouter>
-        </StageProvider>
+        </SeasonProvider>
       </AuthProvider>
     </TooltipProvider>
   </QueryClientProvider>
