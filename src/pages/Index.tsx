@@ -1,160 +1,222 @@
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
-import { Award, Users, Vote, Trophy, ArrowRight, Star, Globe, Calendar } from "lucide-react";
+import { Award, Play, Menu, Globe, Users, Eye, Ticket, PlayCircle, ChevronRight } from "lucide-react";
+import heroCeremony from "@/assets/hero-ceremony.jpg";
 
 export default function Index() {
-  const stats = [
-    { label: "Countries", value: "54", icon: Globe },
-    { label: "Categories", value: "10+", icon: Award },
-    { label: "Nominees", value: "500+", icon: Users },
-    { label: "Years", value: "9", icon: Calendar },
-  ];
-
-  const categories = [
-    { name: "Music", icon: "🎵" },
-    { name: "Film & TV", icon: "🎬" },
-    { name: "Sports", icon: "⚽" },
-    { name: "Business", icon: "💼" },
-    { name: "Technology", icon: "💻" },
-    { name: "Arts & Culture", icon: "🎨" },
+  const quickActions = [
+    { label: "Refer", icon: Users, href: "/refer" },
+    { label: "Nominate", icon: Award, href: "/nominate" },
+    { label: "Vision 2035", icon: Eye, href: "/vision" },
+    { label: "Tickets", icon: Ticket, href: "/tickets" },
+    { label: "Watch", icon: PlayCircle, href: "/media" },
   ];
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-secondary">
       {/* Navigation */}
-      <nav className="fixed top-0 z-50 w-full border-b border-border/50 bg-background/80 backdrop-blur-md">
-        <div className="container flex h-16 items-center justify-between">
-          <Link to="/" className="flex items-center gap-2">
-            <div className="flex h-10 w-10 items-center justify-center rounded-full bg-gradient-gold">
-              <Award className="h-5 w-5 text-secondary" />
-            </div>
-            <span className="font-display text-xl font-bold">NESA Africa</span>
-          </Link>
-          <div className="hidden items-center gap-6 md:flex">
-            <Link to="/categories" className="text-sm font-medium text-muted-foreground hover:text-foreground">Categories</Link>
-            <Link to="/nominees" className="text-sm font-medium text-muted-foreground hover:text-foreground">Nominees</Link>
-            <Link to="/vote" className="text-sm font-medium text-muted-foreground hover:text-foreground">Vote</Link>
-            <Link to="/media" className="text-sm font-medium text-muted-foreground hover:text-foreground">Media</Link>
-          </div>
+      <nav className="absolute top-0 z-50 w-full">
+        <div className="container flex h-20 items-center justify-between px-6">
           <div className="flex items-center gap-3">
-            <Button variant="ghost" asChild><Link to="/login">Sign In</Link></Button>
-            <Button className="bg-gradient-gold text-secondary font-semibold" asChild>
-              <Link to="/register">Get Started</Link>
-            </Button>
+            <div className="flex h-12 w-20 items-center justify-center rounded bg-primary/90 px-2">
+              <span className="font-display text-xs font-bold leading-tight text-secondary">
+                SCEF<br />
+                <span className="text-[8px] font-normal">Santos Creations Education Foundation</span>
+              </span>
+            </div>
+          </div>
+          <div className="flex items-center gap-4">
+            <button className="flex items-center gap-2 text-sm text-secondary-foreground/80 hover:text-secondary-foreground">
+              <Globe className="h-4 w-4" />
+              English
+            </button>
+            <button className="text-secondary-foreground/80 hover:text-secondary-foreground">
+              <Menu className="h-6 w-6" />
+            </button>
           </div>
         </div>
       </nav>
 
       {/* Hero Section */}
-      <section className="relative min-h-screen bg-secondary pt-16 overflow-hidden">
-        <div className="absolute inset-0 pattern-african opacity-30" />
-        <div className="container relative z-10 flex min-h-[calc(100vh-4rem)] flex-col items-center justify-center py-20 text-center">
-          <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/10 px-4 py-2">
-            <Star className="h-4 w-4 text-primary" />
-            <span className="text-sm font-medium text-primary">Nominations Now Open for 2025</span>
+      <section className="relative min-h-screen overflow-hidden">
+        {/* Background Image */}
+        <div 
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+          style={{ backgroundImage: `url(${heroCeremony})` }}
+        >
+          {/* Gradient Overlay */}
+          <div className="absolute inset-0 bg-gradient-to-b from-secondary/70 via-secondary/50 to-secondary/90" />
+        </div>
+
+        {/* Content */}
+        <div className="container relative z-10 flex min-h-screen flex-col items-center justify-center px-6 pt-20 text-center">
+          {/* Announcement Badge */}
+          <div className="mb-8 inline-flex items-center gap-2 rounded-full border border-primary/40 bg-secondary/60 px-5 py-2.5 backdrop-blur-sm">
+            <Award className="h-4 w-4 text-primary" />
+            <span className="text-sm font-medium text-secondary-foreground">
+              NESA-Africa 2025 — Nominations Open Now
+            </span>
           </div>
-          <h1 className="mb-6 max-w-4xl font-display text-5xl font-bold leading-tight text-secondary-foreground md:text-7xl">
-            Celebrating
-            <span className="text-gradient-gold"> African Excellence</span>
+
+          {/* Main Heading */}
+          <h1 className="mb-4 max-w-4xl">
+            <span className="font-display text-4xl font-bold text-secondary-foreground md:text-6xl lg:text-7xl">
+              Honoring Africa's{" "}
+            </span>
+            <span className="font-cursive text-5xl text-primary md:text-7xl lg:text-8xl">
+              Changemakers
+            </span>
           </h1>
-          <p className="mb-10 max-w-2xl text-lg text-muted-foreground md:text-xl">
-            The premier platform recognizing outstanding achievements across Africa. 
-            Nominate, vote, and celebrate the extraordinary individuals shaping our continent.
+
+          {/* Subtitle */}
+          <p className="mb-6 font-display text-xl text-secondary-foreground/90 md:text-2xl">
+            Building the Future of Education
           </p>
+
+          {/* Description */}
+          <p className="mb-10 max-w-3xl text-base text-secondary-foreground/70 md:text-lg">
+            At the New Education Standard Award Africa (NESA-Africa) 2025, we celebrate 
+            the real changemakers shaping the future of education across Africa. A pan-African 
+            celebration of educational transformation, social impact, and legacy.
+          </p>
+
+          {/* CTA Buttons */}
           <div className="flex flex-col gap-4 sm:flex-row">
-            <Button size="lg" className="bg-gradient-gold text-secondary font-semibold shadow-gold hover:opacity-90" asChild>
-              <Link to="/nominate">
-                Nominate Now <ArrowRight className="ml-2 h-5 w-5" />
+            <Button 
+              size="lg" 
+              variant="outline" 
+              className="border-secondary-foreground/30 bg-transparent text-secondary-foreground hover:bg-secondary-foreground/10"
+              asChild
+            >
+              <Link to="/about">
+                <Play className="mr-2 h-4 w-4" />
+                Read More About NESA
               </Link>
             </Button>
-            <Button size="lg" variant="outline" className="border-border bg-transparent text-secondary-foreground hover:bg-muted" asChild>
-              <Link to="/categories">Explore Categories</Link>
+            <Button 
+              size="lg" 
+              className="bg-primary text-primary-foreground font-semibold hover:bg-primary/90"
+              asChild
+            >
+              <Link to="/nominate">
+                <Award className="mr-2 h-4 w-4" />
+                Nominate Now
+              </Link>
             </Button>
           </div>
-        </div>
-        <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-background to-transparent" />
-      </section>
 
-      {/* Stats Section */}
-      <section className="py-16 bg-background">
-        <div className="container">
-          <div className="grid grid-cols-2 gap-6 md:grid-cols-4">
-            {stats.map((stat) => (
-              <Card key={stat.label} className="border-0 bg-muted/50 text-center">
-                <CardContent className="pt-6">
-                  <stat.icon className="mx-auto mb-3 h-8 w-8 text-primary" />
-                  <div className="font-display text-3xl font-bold text-foreground">{stat.value}</div>
-                  <div className="text-sm text-muted-foreground">{stat.label}</div>
-                </CardContent>
-              </Card>
-            ))}
+          {/* Decorative Star */}
+          <div className="absolute right-10 top-1/3 hidden lg:block">
+            <svg className="h-16 w-16 text-primary opacity-60" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 2L9.19 8.63L2 9.24L7.46 13.97L5.82 21L12 17.27L18.18 21L16.54 13.97L22 9.24L14.81 8.63L12 2Z" />
+            </svg>
+          </div>
+        </div>
+
+        {/* Quick Actions Bar */}
+        <div className="absolute bottom-0 left-0 right-0 z-20">
+          <div className="container px-6">
+            <div className="flex items-center justify-center gap-2 border-t border-secondary-foreground/10 bg-secondary/80 py-4 backdrop-blur-sm md:gap-8">
+              {quickActions.map((action) => (
+                <Link
+                  key={action.label}
+                  to={action.href}
+                  className="group flex flex-col items-center gap-1.5 px-4 py-2 text-secondary-foreground/70 transition-colors hover:text-primary"
+                >
+                  <action.icon className="h-5 w-5 md:h-6 md:w-6" />
+                  <span className="text-xs font-medium md:text-sm">{action.label}</span>
+                </Link>
+              ))}
+            </div>
           </div>
         </div>
       </section>
 
-      {/* Categories Preview */}
-      <section className="py-20 bg-muted/30">
-        <div className="container">
-          <div className="mb-12 text-center">
-            <h2 className="mb-4 font-display text-3xl font-bold md:text-4xl">Award Categories</h2>
-            <p className="mx-auto max-w-2xl text-muted-foreground">
-              Excellence recognized across diverse fields that drive Africa's growth and global influence.
+      {/* About Section */}
+      <section className="bg-background py-20">
+        <div className="container px-6">
+          <div className="mx-auto max-w-4xl text-center">
+            <h2 className="mb-6 font-display text-3xl font-bold md:text-4xl">
+              About NESA Africa
+            </h2>
+            <p className="mb-8 text-lg text-muted-foreground">
+              The New Education Standard Award Africa (NESA-Africa) is the continent's premier 
+              recognition platform for excellence in education. We honor individuals, institutions, 
+              and innovations that are transforming learning outcomes across Africa.
             </p>
-          </div>
-          <div className="grid gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6">
-            {categories.map((cat) => (
-              <Card key={cat.name} className="group cursor-pointer border-border/50 transition-all hover:border-primary hover:shadow-lg">
-                <CardContent className="flex flex-col items-center py-8 text-center">
-                  <span className="mb-3 text-4xl">{cat.icon}</span>
-                  <span className="font-medium text-foreground group-hover:text-primary">{cat.name}</span>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-          <div className="mt-8 text-center">
-            <Button variant="outline" asChild>
-              <Link to="/categories">View All Categories <ArrowRight className="ml-2 h-4 w-4" /></Link>
-            </Button>
+            <div className="grid gap-8 md:grid-cols-3">
+              <div className="rounded-xl bg-muted/50 p-6 text-center">
+                <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-primary/10">
+                  <Award className="h-7 w-7 text-primary" />
+                </div>
+                <h3 className="mb-2 font-display text-xl font-semibold">10+ Categories</h3>
+                <p className="text-sm text-muted-foreground">
+                  Recognizing excellence across diverse educational fields
+                </p>
+              </div>
+              <div className="rounded-xl bg-muted/50 p-6 text-center">
+                <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-primary/10">
+                  <Globe className="h-7 w-7 text-primary" />
+                </div>
+                <h3 className="mb-2 font-display text-xl font-semibold">54 Countries</h3>
+                <p className="text-sm text-muted-foreground">
+                  Pan-African reach celebrating the entire continent
+                </p>
+              </div>
+              <div className="rounded-xl bg-muted/50 p-6 text-center">
+                <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-primary/10">
+                  <Users className="h-7 w-7 text-primary" />
+                </div>
+                <h3 className="mb-2 font-display text-xl font-semibold">500+ Nominees</h3>
+                <p className="text-sm text-muted-foreground">
+                  Outstanding individuals and institutions recognized
+                </p>
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
       {/* CTA Section */}
-      <section className="py-20 bg-secondary">
-        <div className="container text-center">
-          <div className="mx-auto max-w-2xl">
-            <Trophy className="mx-auto mb-6 h-16 w-16 text-primary" />
-            <h2 className="mb-4 font-display text-3xl font-bold text-secondary-foreground md:text-4xl">
-              Ready to Celebrate Excellence?
-            </h2>
-            <p className="mb-8 text-muted-foreground">
-              Join thousands of Africans in recognizing the remarkable achievements that shape our continent's future.
-            </p>
-            <div className="flex flex-col justify-center gap-4 sm:flex-row">
-              <Button size="lg" className="bg-gradient-gold text-secondary font-semibold" asChild>
-                <Link to="/register">Create Account</Link>
-              </Button>
-              <Button size="lg" variant="outline" className="border-border text-secondary-foreground" asChild>
-                <Link to="/nominate">Submit Nomination</Link>
-              </Button>
-            </div>
+      <section className="bg-secondary py-20">
+        <div className="container px-6 text-center">
+          <h2 className="mb-4 font-display text-3xl font-bold text-secondary-foreground md:text-4xl">
+            Be Part of the Movement
+          </h2>
+          <p className="mx-auto mb-8 max-w-2xl text-secondary-foreground/70">
+            Nominate a changemaker, vote for your favorites, or attend the grand ceremony. 
+            Join thousands across Africa in celebrating educational excellence.
+          </p>
+          <div className="flex flex-col justify-center gap-4 sm:flex-row">
+            <Button size="lg" className="bg-primary text-primary-foreground font-semibold" asChild>
+              <Link to="/register">
+                Create Account
+                <ChevronRight className="ml-2 h-4 w-4" />
+              </Link>
+            </Button>
+            <Button size="lg" variant="outline" className="border-secondary-foreground/30 text-secondary-foreground" asChild>
+              <Link to="/categories">Explore Categories</Link>
+            </Button>
           </div>
         </div>
       </section>
 
       {/* Footer */}
-      <footer className="border-t bg-background py-12">
-        <div className="container">
-          <div className="flex flex-col items-center justify-between gap-6 md:flex-row">
-            <div className="flex items-center gap-2">
-              <div className="flex h-8 w-8 items-center justify-center rounded-full bg-gradient-gold">
-                <Award className="h-4 w-4 text-secondary" />
+      <footer className="border-t border-border/10 bg-secondary py-8">
+        <div className="container px-6">
+          <div className="flex flex-col items-center justify-between gap-4 md:flex-row">
+            <div className="flex items-center gap-3">
+              <div className="flex h-10 w-16 items-center justify-center rounded bg-primary/90 px-2">
+                <span className="font-display text-[10px] font-bold leading-tight text-secondary">
+                  SCEF
+                </span>
               </div>
-              <span className="font-display font-bold">NESA Africa</span>
+              <span className="text-sm text-secondary-foreground/60">
+                Santos Creations Education Foundation
+              </span>
             </div>
-            <p className="text-sm text-muted-foreground">
-              © 2025 NESA Africa. Celebrating African Excellence.
+            <p className="text-sm text-secondary-foreground/50">
+              © 2025 NESA Africa. All rights reserved.
             </p>
           </div>
         </div>
