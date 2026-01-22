@@ -6,7 +6,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { HelmetProvider } from "react-helmet-async";
 import { AuthProvider } from "@/contexts/AuthContext";
 import { SeasonProvider } from "@/contexts/SeasonContext";
-import NESAAfrica from "./pages/NESAAfrica";
+import NESAAfrica from "./pages/programs/NESAAfrica";
 import Categories from "./pages/Categories";
 import Login from "./pages/auth/Login";
 import Register from "./pages/auth/Register";
@@ -28,7 +28,8 @@ const App = () => (
             <Sonner />
             <BrowserRouter>
               <Routes>
-                <Route path="/" element={<NESAAfrica />} />
+              <Route path="/" element={<NESAAfrica />} />
+              <Route path="/programs/nesa-africa" element={<NESAAfrica />} />
                 <Route path="/categories" element={<Categories />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/register" element={<Register />} />
