@@ -85,6 +85,14 @@
     --shadow-gold: 0 4px 20px -4px hsla(42, 85%, 52%, 0.35);
     --shadow-lg: 0 10px 40px -15px hsla(30, 15%, 8%, 0.2);
     --shadow-card: 0 2px 12px -2px hsla(30, 15%, 8%, 0.08);
+
+    /* NESA Navy Theme */
+    --nesa-navy: 207 42% 26%;
+    --nesa-navy-dark: 207 45% 18%;
+    --nesa-gold: 42 52% 55%;
+    --nesa-gold-muted: 42 40% 45%;
+    --nesa-text: 210 20% 90%;
+    --nesa-text-muted: 210 15% 75%;
   }
 
   .dark {
