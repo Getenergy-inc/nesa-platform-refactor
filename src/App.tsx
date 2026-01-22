@@ -12,6 +12,7 @@ import Login from "./pages/auth/Login";
 import Register from "./pages/auth/Register";
 import Nominate from "./pages/Nominate";
 import Dashboard from "./pages/Dashboard";
+import NRCDashboard from "./pages/NRCDashboard";
 import Unauthorized from "./pages/Unauthorized";
 import NotFound from "./pages/NotFound";
 
@@ -34,6 +35,7 @@ const App = () => (
                 <Route path="/nominate" element={<Nominate />} />
                 <Route path="/dashboard" element={<Dashboard />} />
                 <Route path="/dashboard/nominations" element={<Dashboard />} />
+                <Route path="/nrc" element={<NRCDashboard />} />
                 <Route path="/unauthorized" element={<Unauthorized />} />
                 <Route path="*" element={<NotFound />} />
               </Routes>
