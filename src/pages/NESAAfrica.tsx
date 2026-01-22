@@ -348,25 +348,44 @@ export default function NESAAfrica() {
             <div className="absolute inset-0 bg-gradient-to-b from-secondary/80 via-secondary/60 to-secondary/95" />
           </div>
 
-          {/* Animated Spotlights */}
+          {/* Dramatic Spotlight Effects */}
           <div className="pointer-events-none absolute inset-0 overflow-hidden">
-            <div className="absolute -left-20 top-0 h-96 w-20 rotate-[25deg] bg-gradient-to-b from-primary/20 to-transparent blur-3xl animate-spotlight-left" />
-            <div className="absolute -right-20 top-0 h-96 w-20 rotate-[-25deg] bg-gradient-to-b from-primary/20 to-transparent blur-3xl animate-spotlight-right" />
+            {/* Left Spotlight Beam */}
+            <div className="absolute -left-32 top-0 h-[120vh] w-64 origin-top rotate-[25deg] bg-gradient-to-b from-primary/30 via-primary/10 to-transparent blur-2xl animate-spotlight-left" />
+            
+            {/* Right Spotlight Beam */}
+            <div className="absolute -right-32 top-0 h-[120vh] w-64 origin-top rotate-[-25deg] bg-gradient-to-b from-primary/30 via-primary/10 to-transparent blur-2xl animate-spotlight-right" />
+            
+            {/* Center Stage Glow */}
+            <div className="absolute left-1/2 top-1/3 h-96 w-96 -translate-x-1/2 -translate-y-1/2 rounded-full bg-primary/10 blur-[120px] animate-pulse-glow" />
+            
+            {/* Additional Ambient Spotlights */}
+            <div className="absolute left-1/4 top-20 h-80 w-40 rotate-[15deg] bg-gradient-to-b from-primary/15 to-transparent blur-3xl animate-spotlight-left" style={{ animationDelay: "1s" }} />
+            <div className="absolute right-1/4 top-20 h-80 w-40 rotate-[-15deg] bg-gradient-to-b from-primary/15 to-transparent blur-3xl animate-spotlight-right" style={{ animationDelay: "1.5s" }} />
           </div>
 
-          {/* Floating Particles */}
+          {/* Floating Particles / Stage Dust */}
           <div className="pointer-events-none absolute inset-0">
-            {[...Array(15)].map((_, i) => (
+            {[...Array(25)].map((_, i) => (
               <div
                 key={i}
-                className="absolute h-1 w-1 rounded-full bg-primary/60 animate-twinkle"
+                className="absolute rounded-full bg-primary animate-twinkle"
                 style={{
                   left: `${Math.random() * 100}%`,
                   top: `${Math.random() * 100}%`,
-                  animationDelay: `${Math.random() * 2}s`,
+                  animationDelay: `${Math.random() * 3}s`,
+                  animationDuration: `${2 + Math.random() * 2}s`,
+                  width: `${2 + Math.random() * 4}px`,
+                  height: `${2 + Math.random() * 4}px`,
                 }}
               />
             ))}
+          </div>
+
+          {/* Corner Accent Glows */}
+          <div className="pointer-events-none absolute inset-0 overflow-hidden">
+            <div className="absolute -bottom-20 -left-20 h-80 w-80 rounded-full bg-primary/20 blur-[100px]" />
+            <div className="absolute -bottom-20 -right-20 h-80 w-80 rounded-full bg-primary/20 blur-[100px]" />
           </div>
 
           {/* Hero Content */}
