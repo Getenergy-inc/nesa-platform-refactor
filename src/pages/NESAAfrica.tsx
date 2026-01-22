@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import { useSeason } from "@/contexts/SeasonContext";
@@ -6,16 +7,25 @@ import { EventCountdown } from "@/components/ui/event-countdown";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
+import { Separator } from "@/components/ui/separator";
 import { 
   Award, Trophy, Star, Users, Calendar, 
   ArrowRight, CheckCircle, Vote, Medal, Sparkles,
   Play, ExternalLink, Globe, Crown, Gem,
   BookOpen, Target, Building2, Heart, Radio,
   GraduationCap, School, Accessibility, Eye,
-  Menu, Ticket, PlayCircle, ChevronRight, Clock, MapPin
+  Menu, Ticket, PlayCircle, ChevronRight, Clock, MapPin, X
 } from "lucide-react";
 import heroCeremony from "@/assets/hero-ceremony.jpg";
 import heroVideo from "@/assets/nesa-hero-bg-video.mp4";
+
+const navLinks = [
+  { label: "Categories", href: "/categories", icon: Award },
+  { label: "Nominees", href: "/nominees", icon: Users },
+  { label: "Vote", href: "/vote", icon: Vote },
+  { label: "NESA TV", href: "/media", icon: PlayCircle },
+];
 
 // Key Event Dates for Countdowns
 const tvShowEvents = [
@@ -186,6 +196,7 @@ const quickActions = [
 export default function NESAAfrica() {
   const { currentEdition, getBannerText } = useSeason();
   const bannerText = getBannerText();
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   return (
     <>
@@ -214,19 +225,102 @@ export default function NESAAfrica() {
               </Link>
             </div>
             <div className="hidden items-center gap-6 md:flex">
-              <Link to="/categories" className="text-sm font-medium text-secondary-foreground/70 transition-colors hover:text-secondary-foreground">Categories</Link>
-              <Link to="/nominees" className="text-sm font-medium text-secondary-foreground/70 transition-colors hover:text-secondary-foreground">Nominees</Link>
-              <Link to="/vote" className="text-sm font-medium text-secondary-foreground/70 transition-colors hover:text-secondary-foreground">Vote</Link>
-              <Link to="/media" className="text-sm font-medium text-secondary-foreground/70 transition-colors hover:text-secondary-foreground">NESA TV</Link>
+              {navLinks.map((link) => (
+                <Link 
+                  key={link.label}
+                  to={link.href} 
+                  className="text-sm font-medium text-secondary-foreground/70 transition-colors hover:text-secondary-foreground"
+                >
+                  {link.label}
+                </Link>
+              ))}
             </div>
             <div className="flex items-center gap-3">
               <button className="flex items-center gap-2 text-sm text-secondary-foreground/70 hover:text-secondary-foreground">
                 <Globe className="h-4 w-4" />
                 <span className="hidden sm:inline">English</span>
               </button>
-              <Button variant="ghost" size="icon" className="text-secondary-foreground md:hidden">
-                <Menu className="h-5 w-5" />
-              </Button>
+              
+              {/* Mobile Menu */}
+              <Sheet open={mobileMenuOpen} onOpenChange={setMobileMenuOpen}>
+                <SheetTrigger asChild>
+                  <Button variant="ghost" size="icon" className="text-secondary-foreground md:hidden">
+                    <Menu className="h-5 w-5" />
+                  </Button>
+                </SheetTrigger>
+                <SheetContent side="right" className="w-80 bg-secondary border-border/20">
+                  <SheetHeader className="text-left">
+                    <SheetTitle className="flex items-center gap-3 text-secondary-foreground">
+                      <div className="flex h-10 w-16 items-center justify-center rounded bg-primary px-2">
+                        <span className="font-display text-[10px] font-bold leading-tight text-secondary">
+                          SCEF
+                        </span>
+                      </div>
+                      NESA Africa
+                    </SheetTitle>
+                  </SheetHeader>
+                  
+                  <div className="mt-8 flex flex-col gap-2">
+                    {navLinks.map((link) => (
+                      <Link
+                        key={link.label}
+                        to={link.href}
+                        onClick={() => setMobileMenuOpen(false)}
+                        className="flex items-center gap-3 rounded-lg px-4 py-3 text-secondary-foreground/80 transition-colors hover:bg-secondary-foreground/10 hover:text-secondary-foreground"
+                      >
+                        <link.icon className="h-5 w-5 text-primary" />
+                        <span className="font-medium">{link.label}</span>
+                      </Link>
+                    ))}
+                  </div>
+                  
+                  <Separator className="my-6 bg-border/30" />
+                  
+                  <div className="flex flex-col gap-3">
+                    <Button 
+                      variant="outline" 
+                      className="w-full justify-start border-secondary-foreground/20 text-secondary-foreground"
+                      asChild
+                      onClick={() => setMobileMenuOpen(false)}
+                    >
+                      <Link to="/login">
+                        <Users className="mr-2 h-4 w-4" />
+                        Sign In
+                      </Link>
+                    </Button>
+                    <Button 
+                      className="w-full bg-primary text-primary-foreground"
+                      asChild
+                      onClick={() => setMobileMenuOpen(false)}
+                    >
+                      <Link to="/register">
+                        <Sparkles className="mr-2 h-4 w-4" />
+                        Get Started
+                      </Link>
+                    </Button>
+                  </div>
+                  
+                  <Separator className="my-6 bg-border/30" />
+                  
+                  <div className="space-y-2">
+                    <p className="text-xs font-semibold uppercase tracking-wider text-secondary-foreground/50">Quick Actions</p>
+                    <div className="grid grid-cols-2 gap-2">
+                      {quickActions.slice(0, 4).map((action) => (
+                        <Link
+                          key={action.label}
+                          to={action.href}
+                          onClick={() => setMobileMenuOpen(false)}
+                          className="flex flex-col items-center gap-1 rounded-lg bg-secondary-foreground/5 p-3 text-secondary-foreground/70 transition-colors hover:bg-secondary-foreground/10 hover:text-primary"
+                        >
+                          <action.icon className="h-5 w-5" />
+                          <span className="text-xs font-medium">{action.label}</span>
+                        </Link>
+                      ))}
+                    </div>
+                  </div>
+                </SheetContent>
+              </Sheet>
+              
               <Button variant="ghost" className="hidden text-secondary-foreground md:inline-flex" asChild>
                 <Link to="/login">Sign In</Link>
               </Button>
