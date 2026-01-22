@@ -89,19 +89,19 @@ export function VisionDocumentSection() {
   };
 
   return (
-    <section id="vision-2035" className="bg-nesa-navy py-16 md:py-20">
+    <section id="vision-2035" className="bg-secondary py-16 md:py-20">
       <div className="container">
         <div className="max-w-4xl mx-auto">
-          <p className="text-nesa-gold text-sm font-medium mb-2 text-center">
+          <p className="text-primary text-sm font-medium mb-2 text-center">
             Strategic Vision Document
           </p>
           <h2 className="font-display text-3xl md:text-4xl font-bold text-white mb-2 text-center">
             NESA-AFRICA VISION 2035
           </h2>
-          <p className="text-nesa-text-muted text-center mb-4">
+          <p className="text-secondary-foreground/70 text-center mb-4">
             Setting Africa's Education Standards. Recognising Impact. Delivering Legacy.
           </p>
-          <p className="text-nesa-text-muted text-center mb-8 max-w-2xl mx-auto">
+          <p className="text-secondary-foreground/70 text-center mb-8 max-w-2xl mx-auto">
             Vision 2035 defines NESA-Africa's 10-year strategic direction — moving from an
             awards-led initiative into a continent-wide education standards and impact institution
             that connects recognition with lasting social transformation.
@@ -111,7 +111,7 @@ export function VisionDocumentSection() {
             <Button
               variant="outline"
               onClick={handleExpandAll}
-              className="border-nesa-gold/30 text-nesa-gold hover:bg-nesa-gold/10 rounded-full gap-2"
+              className="border-primary/30 text-primary hover:bg-primary/10 rounded-full gap-2"
             >
               {expandAll ? (
                 <>
@@ -137,12 +137,12 @@ export function VisionDocumentSection() {
               <AccordionItem
                 key={section.id}
                 value={section.id}
-                className="bg-nesa-navy-dark/50 border border-nesa-gold/10 rounded-xl overflow-hidden"
+                className="bg-charcoal/50 border border-primary/10 rounded-xl overflow-hidden"
               >
-                <AccordionTrigger className="px-6 py-4 text-white hover:text-nesa-gold hover:no-underline">
+                <AccordionTrigger className="px-6 py-4 text-white hover:text-primary hover:no-underline">
                   {section.title}
                 </AccordionTrigger>
-                <AccordionContent className="px-6 pb-4 text-nesa-text-muted whitespace-pre-line">
+                <AccordionContent className="px-6 pb-4 text-secondary-foreground/70 whitespace-pre-line">
                   {section.content}
                 </AccordionContent>
               </AccordionItem>

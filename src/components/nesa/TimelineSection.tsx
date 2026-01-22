@@ -64,13 +64,13 @@ const timeline: TimelineItem[] = [
 
 export function TimelineSection() {
   return (
-    <section className="bg-nesa-navy-dark py-16 md:py-20">
+    <section className="bg-charcoal py-16 md:py-20">
       <div className="container">
         <div className="text-center mb-12">
           <h2 className="font-display text-3xl md:text-4xl font-bold text-white mb-4">
             Programme Timeline
           </h2>
-          <p className="text-nesa-text-muted max-w-2xl mx-auto">
+          <p className="text-secondary-foreground/70 max-w-2xl mx-auto">
             Complete schedule from public education phase through legacy implementation.
           </p>
         </div>
@@ -78,25 +78,25 @@ export function TimelineSection() {
         <div className="max-w-4xl mx-auto">
           <div className="relative">
             {/* Vertical line */}
-            <div className="absolute left-6 top-0 bottom-0 w-0.5 bg-nesa-gold/20 hidden md:block" />
+            <div className="absolute left-6 top-0 bottom-0 w-0.5 bg-primary/20 hidden md:block" />
 
             <div className="space-y-4">
               {timeline.map((item) => (
                 <div key={item.number} className="flex gap-4 md:gap-6">
                   {/* Number circle */}
                   <div className="relative flex-shrink-0">
-                    <div className="h-12 w-12 rounded-full bg-nesa-gold/10 border border-nesa-gold/30 flex items-center justify-center">
-                      <span className="text-nesa-gold font-bold">{item.number}</span>
+                    <div className="h-12 w-12 rounded-full bg-primary/10 border border-primary/30 flex items-center justify-center">
+                      <span className="text-primary font-bold">{item.number}</span>
                     </div>
                   </div>
 
                   {/* Content */}
-                  <div className="flex-1 bg-nesa-navy rounded-xl p-4 border border-nesa-gold/10">
+                  <div className="flex-1 bg-secondary rounded-xl p-4 border border-primary/10">
                     <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1 mb-1">
                       <h3 className="font-semibold text-white">{item.title}</h3>
-                      <span className="text-nesa-gold text-sm">{item.date}</span>
+                      <span className="text-primary text-sm">{item.date}</span>
                     </div>
-                    <p className="text-nesa-text-muted text-sm">{item.description}</p>
+                    <p className="text-secondary-foreground/70 text-sm">{item.description}</p>
                   </div>
                 </div>
               ))}

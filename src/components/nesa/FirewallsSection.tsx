@@ -25,7 +25,7 @@ const firewalls = [
 
 export function FirewallsSection() {
   return (
-    <section className="bg-nesa-navy-dark py-16 md:py-20">
+    <section className="bg-charcoal py-16 md:py-20">
       <div className="container">
         <div className="text-center mb-12">
           <h2 className="font-display text-3xl md:text-4xl font-bold text-white mb-4">
@@ -37,13 +37,13 @@ export function FirewallsSection() {
           {firewalls.map((item) => (
             <div
               key={item.title}
-              className="bg-nesa-navy rounded-xl p-6 border border-nesa-gold/10 text-center hover:border-nesa-gold/30 transition-colors"
+              className="bg-secondary rounded-xl p-6 border border-primary/10 text-center hover:border-primary/30 transition-colors"
             >
-              <div className="h-12 w-12 rounded-full bg-nesa-gold/10 flex items-center justify-center mx-auto mb-4">
-                <item.icon className="h-6 w-6 text-nesa-gold" />
+              <div className="h-12 w-12 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-4">
+                <item.icon className="h-6 w-6 text-primary" />
               </div>
               <h3 className="font-semibold text-white mb-2">{item.title}</h3>
-              <p className="text-nesa-text-muted text-sm">{item.description}</p>
+              <p className="text-secondary-foreground/70 text-sm">{item.description}</p>
             </div>
           ))}
         </div>
