@@ -8,6 +8,7 @@ import { AuthProvider } from "@/contexts/AuthContext";
 import { SeasonProvider } from "@/contexts/SeasonContext";
 import NESAAfrica from "./pages/programs/NESAAfrica";
 import Categories from "./pages/Categories";
+import Programs from "./pages/Programs";
 import Login from "./pages/auth/Login";
 import Register from "./pages/auth/Register";
 import Nominate from "./pages/Nominate";
@@ -29,8 +30,9 @@ const App = () => (
             <BrowserRouter>
               <Routes>
               <Route path="/" element={<NESAAfrica />} />
+              <Route path="/programs" element={<Programs />} />
               <Route path="/programs/nesa-africa" element={<NESAAfrica />} />
-                <Route path="/categories" element={<Categories />} />
+              <Route path="/categories" element={<Categories />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/register" element={<Register />} />
                 <Route path="/nominate" element={<Nominate />} />
