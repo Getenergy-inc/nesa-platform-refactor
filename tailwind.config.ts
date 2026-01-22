@@ -83,6 +83,14 @@ export default {
         earth: "hsl(var(--earth))",
         cream: "hsl(var(--cream))",
         ivory: "hsl(var(--ivory))",
+        nesa: {
+          navy: "hsl(var(--nesa-navy))",
+          "navy-dark": "hsl(var(--nesa-navy-dark))",
+          gold: "hsl(var(--nesa-gold))",
+          "gold-muted": "hsl(var(--nesa-gold-muted))",
+          text: "hsl(var(--nesa-text))",
+          "text-muted": "hsl(var(--nesa-text-muted))",
+        },
       },
       borderRadius: {
         lg: "var(--radius)",
