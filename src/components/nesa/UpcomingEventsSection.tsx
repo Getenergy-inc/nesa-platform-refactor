@@ -34,14 +34,14 @@ function EventGroup({
   return (
     <div className="space-y-4">
       <div className="flex items-center gap-2">
-        <Icon className="h-5 w-5 text-nesa-gold" />
+        <Icon className="h-5 w-5 text-primary" />
         <h3 className="text-lg font-semibold text-white">{title}</h3>
       </div>
       <div className="space-y-4">
         {events.map((event) => (
           <div 
             key={event.name} 
-            className="bg-nesa-navy-dark/50 rounded-xl p-4 border border-nesa-gold/10"
+            className="bg-charcoal/50 rounded-xl p-4 border border-primary/10"
           >
             <CountdownTimer targetDate={event.date} label={event.name} />
           </div>
@@ -53,13 +53,13 @@ function EventGroup({
 
 export function UpcomingEventsSection() {
   return (
-    <section className="bg-nesa-navy py-16 md:py-20">
+    <section className="bg-secondary py-16 md:py-20">
       <div className="container">
         <div className="text-center mb-12">
           <h2 className="font-display text-3xl md:text-4xl font-bold text-white mb-4">
             Upcoming TV Shows, Voting & Events
           </h2>
-          <p className="text-nesa-text-muted max-w-2xl mx-auto">
+          <p className="text-secondary-foreground/70 max-w-2xl mx-auto">
             Live countdown to NESA-Africa's major milestones, public voting windows, and broadcast events
           </p>
         </div>

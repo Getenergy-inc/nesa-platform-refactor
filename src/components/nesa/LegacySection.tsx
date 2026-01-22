@@ -10,20 +10,20 @@ const facilities = [
 
 export function LegacySection() {
   return (
-    <section className="bg-nesa-navy py-16 md:py-20">
+    <section className="bg-secondary py-16 md:py-20">
       <div className="container">
         <div className="max-w-4xl mx-auto">
-          <p className="text-nesa-gold text-sm font-medium mb-2">Post-Award Legacy Phase</p>
+          <p className="text-primary text-sm font-medium mb-2">Post-Award Legacy Phase</p>
           <h2 className="font-display text-3xl md:text-4xl font-bold text-white mb-4">
             Rebuild My School Africa
           </h2>
 
-          <div className="flex items-center gap-2 text-nesa-text-muted mb-6">
-            <Calendar className="h-4 w-4 text-nesa-gold" />
+          <div className="flex items-center gap-2 text-secondary-foreground/70 mb-6">
+            <Calendar className="h-4 w-4 text-primary" />
             <span>June 2026 – June 2027 • Implemented via EduAid-Africa</span>
           </div>
 
-          <p className="text-nesa-text-muted mb-8 leading-relaxed">
+          <p className="text-secondary-foreground/70 mb-8 leading-relaxed">
             Translate recognition into direct, measurable education impact by rebuilding or
             renovating one Special Needs Education facility in each African region.
           </p>
@@ -33,7 +33,7 @@ export function LegacySection() {
             {regions.map((region) => (
               <span
                 key={region}
-                className="px-4 py-2 bg-nesa-gold/10 border border-nesa-gold/20 rounded-full text-nesa-gold text-sm"
+                className="px-4 py-2 bg-primary/10 border border-primary/20 rounded-full text-primary text-sm"
               >
                 {region}
               </span>
@@ -41,11 +41,11 @@ export function LegacySection() {
           </div>
 
           {/* Facilities */}
-          <div className="bg-nesa-navy-dark/50 rounded-xl p-6 border border-nesa-gold/10 mb-8">
+          <div className="bg-charcoal/50 rounded-xl p-6 border border-primary/10 mb-8">
             <ul className="space-y-3">
               {facilities.map((facility) => (
-                <li key={facility} className="flex items-center gap-3 text-nesa-text">
-                  <Check className="h-5 w-5 text-nesa-gold flex-shrink-0" />
+                <li key={facility} className="flex items-center gap-3 text-secondary-foreground">
+                  <Check className="h-5 w-5 text-primary flex-shrink-0" />
                   {facility}
                 </li>
               ))}
@@ -53,11 +53,11 @@ export function LegacySection() {
           </div>
 
           {/* Funding */}
-          <div className="flex items-start gap-3 bg-nesa-navy-dark/50 rounded-xl p-4 border border-nesa-gold/10">
-            <Coins className="h-5 w-5 text-nesa-gold flex-shrink-0 mt-0.5" />
+          <div className="flex items-start gap-3 bg-charcoal/50 rounded-xl p-4 border border-primary/10">
+            <Coins className="h-5 w-5 text-primary flex-shrink-0 mt-0.5" />
             <div>
-              <p className="text-nesa-gold text-sm font-medium mb-1">Funding Channels</p>
-              <p className="text-nesa-text-muted text-sm">
+              <p className="text-primary text-sm font-medium mb-1">Funding Channels</p>
+              <p className="text-secondary-foreground/70 text-sm">
                 Ticket contributions • EduAid-Africa donations • CSR & partner contributions •
                 Post-award campaigns
               </p>
