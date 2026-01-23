@@ -1,11 +1,10 @@
-import { forwardRef } from "react";
 import { Link } from "react-router-dom";
 
-export const NESAFooter = forwardRef<HTMLElement>(function NESAFooter(_, ref) {
+export function NESAFooter() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer ref={ref} className="bg-charcoal border-t border-gold/20 py-10">
+    <footer className="bg-charcoal border-t border-gold/20 py-10">
       <div className="container">
         <div className="flex flex-col md:flex-row items-center justify-between gap-6">
           <div className="flex items-center gap-3">
@@ -30,4 +29,4 @@ export const NESAFooter = forwardRef<HTMLElement>(function NESAFooter(_, ref) {
       </div>
     </footer>
   );
-});
+}

@@ -29,13 +29,7 @@ export function NESAHero() {
           <div className="absolute inset-0 z-10">
             {/* Animated gradient skeleton */}
             <div className="absolute inset-0 bg-charcoal animate-pulse" />
-            <div 
-              className="absolute inset-0 bg-gradient-to-r from-charcoal via-charcoal-light/20 to-charcoal"
-              style={{
-                backgroundSize: '200% 100%',
-                animation: 'shimmer 1.5s infinite linear',
-              }}
-            />
+            <div className="absolute inset-0 animate-shimmer" />
             {/* Loading indicator */}
             <div className="absolute inset-0 flex items-center justify-center">
               <div className="flex flex-col items-center gap-4">
