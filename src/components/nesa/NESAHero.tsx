@@ -1,10 +1,8 @@
-import { useState } from "react";
 import { Play, Trophy, Users, Award, FileText, Ticket, PlayCircle } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { useSeason } from "@/contexts/SeasonContext";
-import heroImage from "@/assets/hero-ceremony.jpg";
-import nesaHeroBgVideo from "@/assets/nesa-hero-bg-video.mp4";
+import stageBackdrop from "@/assets/nesa-stage-backdrop.jpg";
 
 const quickNavItems = [
   { icon: Users, label: "Refer", href: "#refer" },
@@ -17,64 +15,20 @@ const quickNavItems = [
 export function NESAHero() {
   const { currentEdition, getBannerText } = useSeason();
   const bannerText = getBannerText();
-  const [videoFailed, setVideoFailed] = useState(false);
-  const [videoLoading, setVideoLoading] = useState(true);
 
   return (
     <section className="relative min-h-[90vh] flex flex-col bg-charcoal">
-      {/* Video Background with Image Fallback */}
+      {/* 3D Stage Backdrop Image */}
       <div className="absolute inset-0">
-        {/* Loading skeleton - shows while video is buffering */}
-        {videoLoading && !videoFailed && (
-          <div className="absolute inset-0 z-10">
-            {/* Animated gradient skeleton */}
-            <div className="absolute inset-0 bg-charcoal animate-pulse" />
-            <div className="absolute inset-0 animate-shimmer" />
-            {/* Loading indicator */}
-            <div className="absolute inset-0 flex items-center justify-center">
-              <div className="flex flex-col items-center gap-4">
-                <div className="w-12 h-12 border-2 border-gold/30 border-t-gold rounded-full animate-spin" />
-                <span className="text-gold/60 text-sm font-medium">Loading...</span>
-              </div>
-            </div>
-          </div>
-        )}
-
-        {/* Fallback image - always present, video overlays when working */}
         <img
-          src={heroImage}
-          alt="NESA-Africa Ceremony Stage"
-          className={`absolute inset-0 w-full h-full object-cover object-center transition-opacity duration-500 ${
-            videoLoading && !videoFailed ? 'opacity-0' : 'opacity-100'
-          }`}
-          onLoad={() => setVideoLoading(false)}
+          src={stageBackdrop}
+          alt="NESA-Africa 2025 Award Stage"
+          className="absolute inset-0 w-full h-full object-cover object-center"
         />
         
-        {/* Video - hidden when failed */}
-        {!videoFailed && (
-          <video
-            autoPlay
-            muted
-            loop
-            playsInline
-            poster={heroImage}
-            className={`absolute inset-0 w-full h-full object-cover object-center transition-opacity duration-500 ${
-              videoLoading ? 'opacity-0' : 'opacity-100'
-            }`}
-            onError={() => {
-              setVideoFailed(true);
-              setVideoLoading(false);
-            }}
-            onStalled={() => setVideoFailed(true)}
-            onCanPlayThrough={() => setVideoLoading(false)}
-            onLoadedData={() => setVideoLoading(false)}
-          >
-            <source src={nesaHeroBgVideo} type="video/mp4" />
-          </video>
-        )}
-        
-        {/* Dark gradient overlay for gold/black theme */}
-        <div className="absolute inset-0 bg-gradient-to-b from-charcoal/80 via-charcoal/60 to-charcoal" />
+        {/* Dark gradient overlay for text readability */}
+        <div className="absolute inset-0 bg-gradient-to-b from-charcoal/70 via-charcoal/50 to-charcoal/90" />
+        <div className="absolute inset-0 bg-gradient-to-r from-charcoal/60 via-transparent to-charcoal/60" />
       </div>
 
       {/* Gold Spotlight Effects */}
