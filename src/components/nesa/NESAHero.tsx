@@ -17,18 +17,19 @@ export function NESAHero() {
   const bannerText = getBannerText();
 
   return (
-    <section className="relative min-h-[90vh] flex flex-col bg-charcoal">
-      {/* 3D Stage Backdrop Image */}
+    <section className="relative min-h-[90vh] flex flex-col bg-charcoal overflow-hidden">
+      {/* 3D Stage Backdrop Image with Ken Burns Effect */}
       <div className="absolute inset-0">
         <img
           src={stageBackdrop}
           alt="NESA-Africa 2025 Award Stage"
-          className="absolute inset-0 w-full h-full object-cover object-center"
+          className="absolute inset-0 w-full h-full object-cover object-center animate-ken-burns"
         />
         
-        {/* Dark gradient overlay for text readability */}
-        <div className="absolute inset-0 bg-gradient-to-b from-charcoal/70 via-charcoal/50 to-charcoal/90" />
-        <div className="absolute inset-0 bg-gradient-to-r from-charcoal/60 via-transparent to-charcoal/60" />
+        {/* Layered overlays for depth and text readability */}
+        <div className="absolute inset-0 bg-charcoal/40" />
+        <div className="absolute inset-0 bg-gradient-to-b from-charcoal/80 via-charcoal/50 to-charcoal/95" />
+        <div className="absolute inset-0 bg-gradient-to-r from-charcoal/70 via-transparent to-charcoal/70" />
       </div>
 
       {/* Gold Spotlight Effects */}
