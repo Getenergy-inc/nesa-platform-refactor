@@ -7,16 +7,16 @@ const stats = [
 
 export function StatsStrip() {
   return (
-    <section className="bg-secondary border-y border-primary/20 py-12">
+    <section className="bg-charcoal border-y border-gold/20 py-12">
       <div className="container">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
           {stats.map((stat) => (
             <div
               key={stat.label}
-              className="text-center p-4 rounded-xl bg-charcoal/50 border border-primary/10"
+              className="text-center p-4 rounded-xl bg-charcoal-light border border-gold/20"
             >
-              <p className="text-3xl md:text-4xl font-bold text-primary mb-1">{stat.value}</p>
-              <p className="text-sm text-secondary-foreground/70">{stat.label}</p>
+              <p className="text-3xl md:text-4xl font-bold text-gold mb-1">{stat.value}</p>
+              <p className="text-sm text-white/70">{stat.label}</p>
             </div>
           ))}
         </div>

@@ -46,7 +46,7 @@ export function NominationPathSection() {
           <h2 className="font-display text-3xl md:text-4xl font-bold text-white mb-4">
             Choose Your Nomination Path
           </h2>
-          <p className="text-secondary-foreground/70 max-w-2xl mx-auto">
+          <p className="text-white/70 max-w-2xl mx-auto">
             Select the appropriate award category based on the nominee's achievements and recognition type.
           </p>
         </div>
@@ -55,32 +55,32 @@ export function NominationPathSection() {
           {nominationPaths.map((path) => (
             <div
               key={path.title}
-              className="bg-secondary rounded-2xl p-6 border border-primary/20 hover:border-primary/40 transition-colors"
+              className="bg-charcoal-light rounded-2xl p-6 border border-gold/20 hover:border-gold/40 transition-colors"
             >
               <div className="flex items-center gap-3 mb-4">
-                <div className="h-12 w-12 rounded-xl bg-primary/10 flex items-center justify-center">
-                  <path.icon className="h-6 w-6 text-primary" />
+                <div className="h-12 w-12 rounded-xl bg-gold/10 flex items-center justify-center">
+                  <path.icon className="h-6 w-6 text-gold" />
                 </div>
-                <span className="text-xs font-medium text-primary uppercase tracking-wider">
+                <span className="text-xs font-medium text-gold uppercase tracking-wider">
                   {path.badge}
                 </span>
               </div>
 
               <h3 className="text-xl font-bold text-white mb-1">{path.title}</h3>
-              <p className="text-primary text-sm mb-3">{path.period}</p>
-              <p className="text-secondary-foreground/70 text-sm mb-4">{path.description}</p>
+              <p className="text-gold text-sm mb-3">{path.period}</p>
+              <p className="text-white/70 text-sm mb-4">{path.description}</p>
 
               <ul className="space-y-2 mb-6">
                 {path.bullets.map((bullet) => (
-                  <li key={bullet} className="flex items-center gap-2 text-sm text-secondary-foreground">
-                    <Check className="h-4 w-4 text-primary flex-shrink-0" />
+                  <li key={bullet} className="flex items-center gap-2 text-sm text-white/80">
+                    <Check className="h-4 w-4 text-gold flex-shrink-0" />
                     {bullet}
                   </li>
                 ))}
               </ul>
 
               <Link to="/nominate">
-                <Button className="w-full bg-primary hover:bg-primary/90 text-primary-foreground font-semibold rounded-full">
+                <Button className="w-full bg-gold hover:bg-gold-dark text-charcoal font-semibold rounded-full shadow-gold">
                   Nominate Now
                 </Button>
               </Link>

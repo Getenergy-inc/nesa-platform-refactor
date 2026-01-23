@@ -12,7 +12,7 @@ const actions = [
 
 export function GetInvolvedSection() {
   return (
-    <section className="bg-secondary py-16 md:py-20">
+    <section className="bg-charcoal py-16 md:py-20">
       <div className="container">
         <div className="text-center mb-10">
           <h2 className="font-display text-3xl md:text-4xl font-bold text-white mb-4">
@@ -25,7 +25,7 @@ export function GetInvolvedSection() {
             <Link key={action.label} to={action.href}>
               <Button
                 size="lg"
-                className="bg-primary hover:bg-primary/90 text-primary-foreground font-semibold rounded-full px-8 gap-2"
+                className="bg-gold hover:bg-gold-dark text-charcoal font-semibold rounded-full px-8 gap-2 shadow-gold"
               >
                 <action.icon className="h-5 w-5" />
                 {action.label}

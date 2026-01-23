@@ -70,13 +70,13 @@ const phases: Phase[] = [
 
 export function AwardPhasesSection() {
   return (
-    <section className="bg-secondary py-16 md:py-20">
+    <section className="bg-charcoal py-16 md:py-20">
       <div className="container">
         <div className="text-center mb-12">
           <h2 className="font-display text-3xl md:text-4xl font-bold text-white mb-4">
             Award Phases
           </h2>
-          <p className="text-secondary-foreground/70 max-w-2xl mx-auto">
+          <p className="text-white/70 max-w-2xl mx-auto">
             Four structured phases from baseline recognition to the highest continental honour.
           </p>
         </div>
@@ -85,30 +85,30 @@ export function AwardPhasesSection() {
           {phases.map((phase) => (
             <div
               key={phase.name}
-              className="bg-charcoal/50 rounded-2xl p-6 border border-primary/10 hover:border-primary/30 transition-colors"
+              className="bg-charcoal-light rounded-2xl p-6 border border-gold/20 hover:border-gold/40 transition-colors"
             >
               <div className="flex items-start justify-between mb-4">
                 <div>
-                  <p className="text-primary text-sm font-medium">Phase {phase.number}</p>
+                  <p className="text-gold text-sm font-medium">Phase {phase.number}</p>
                   <h3 className="text-xl font-bold text-white">{phase.name}</h3>
-                  <p className="text-secondary-foreground/70 text-sm">{phase.subtitle}</p>
+                  <p className="text-white/70 text-sm">{phase.subtitle}</p>
                 </div>
               </div>
 
               <div className="flex flex-wrap gap-4 mb-4 text-sm">
-                <span className="text-secondary-foreground/70">
-                  <span className="text-primary">Period:</span> {phase.period}
+                <span className="text-white/70">
+                  <span className="text-gold">Period:</span> {phase.period}
                 </span>
-                <span className="flex items-center gap-1 text-secondary-foreground/70">
-                  <Tv className="h-3.5 w-3.5 text-primary" />
-                  <span className="text-primary">Show:</span> {phase.showDate}
+                <span className="flex items-center gap-1 text-white/70">
+                  <Tv className="h-3.5 w-3.5 text-gold" />
+                  <span className="text-gold">Show:</span> {phase.showDate}
                 </span>
               </div>
 
               <ul className="space-y-2">
                 {phase.bullets.map((bullet) => (
-                  <li key={bullet} className="flex items-start gap-2 text-sm text-secondary-foreground">
-                    <Check className="h-4 w-4 text-primary flex-shrink-0 mt-0.5" />
+                  <li key={bullet} className="flex items-start gap-2 text-sm text-white/80">
+                    <Check className="h-4 w-4 text-gold flex-shrink-0 mt-0.5" />
                     {bullet}
                   </li>
                 ))}
