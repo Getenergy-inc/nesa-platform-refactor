@@ -43,6 +43,10 @@ import Gala from "./pages/media/Gala";
 // Support Pages
 import Donate from "./pages/Donate";
 import Judges from "./pages/Judges";
+import Partners from "./pages/Partners";
+import Chapters from "./pages/Chapters";
+import Volunteer from "./pages/Volunteer";
+import Contact from "./pages/Contact";
 
 const queryClient = new QueryClient();
 
@@ -96,6 +100,10 @@ const App = () => (
                 {/* Support */}
                 <Route path="/donate" element={<Donate />} />
                 <Route path="/judges" element={<Judges />} />
+                <Route path="/partners" element={<Partners />} />
+                <Route path="/chapters" element={<Chapters />} />
+                <Route path="/volunteer" element={<Volunteer />} />
+                <Route path="/contact" element={<Contact />} />
                 
                 {/* Utility */}
                 <Route path="/unauthorized" element={<Unauthorized />} />
