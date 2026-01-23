@@ -40,6 +40,10 @@ import Shows from "./pages/media/Shows";
 import Webinars from "./pages/media/Webinars";
 import Gala from "./pages/media/Gala";
 
+// Support Pages
+import Donate from "./pages/Donate";
+import Judges from "./pages/Judges";
+
 const queryClient = new QueryClient();
 
 const App = () => (
@@ -88,6 +92,10 @@ const App = () => (
                 <Route path="/dashboard" element={<Dashboard />} />
                 <Route path="/dashboard/nominations" element={<Dashboard />} />
                 <Route path="/nrc" element={<NRCDashboard />} />
+                
+                {/* Support */}
+                <Route path="/donate" element={<Donate />} />
+                <Route path="/judges" element={<Judges />} />
                 
                 {/* Utility */}
                 <Route path="/unauthorized" element={<Unauthorized />} />
