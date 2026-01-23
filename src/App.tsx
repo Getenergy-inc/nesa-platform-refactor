@@ -47,6 +47,7 @@ import Partners from "./pages/Partners";
 import Chapters from "./pages/Chapters";
 import Volunteer from "./pages/Volunteer";
 import Contact from "./pages/Contact";
+import Vote from "./pages/Vote";
 
 const queryClient = new QueryClient();
 
@@ -93,6 +94,7 @@ const App = () => (
                 
                 {/* User Actions */}
                 <Route path="/nominate" element={<Nominate />} />
+                <Route path="/vote" element={<Vote />} />
                 <Route path="/dashboard" element={<Dashboard />} />
                 <Route path="/dashboard/nominations" element={<Dashboard />} />
                 <Route path="/nrc" element={<NRCDashboard />} />
