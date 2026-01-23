@@ -6,6 +6,8 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { HelmetProvider } from "react-helmet-async";
 import { AuthProvider } from "@/contexts/AuthContext";
 import { SeasonProvider } from "@/contexts/SeasonContext";
+
+// Pages
 import NESAAfrica from "./pages/programs/NESAAfrica";
 import Categories from "./pages/Categories";
 import Programs from "./pages/Programs";
@@ -16,6 +18,20 @@ import Dashboard from "./pages/Dashboard";
 import NRCDashboard from "./pages/NRCDashboard";
 import Unauthorized from "./pages/Unauthorized";
 import NotFound from "./pages/NotFound";
+
+// About Pages
+import About from "./pages/about/About";
+import Vision2035 from "./pages/about/Vision2035";
+import Governance from "./pages/about/Governance";
+import Timeline from "./pages/about/Timeline";
+import SCEF from "./pages/about/SCEF";
+
+// Award Pages
+import PlatinumAward from "./pages/awards/PlatinumAward";
+import IconAward from "./pages/awards/IconAward";
+import GoldAward from "./pages/awards/GoldAward";
+import BlueGarnetAward from "./pages/awards/BlueGarnetAward";
+import Winners from "./pages/awards/Winners";
 
 const queryClient = new QueryClient();
 
@@ -29,16 +45,37 @@ const App = () => (
             <Sonner />
             <BrowserRouter>
               <Routes>
-              <Route path="/" element={<NESAAfrica />} />
-              <Route path="/programs" element={<Programs />} />
-              <Route path="/programs/nesa-africa" element={<NESAAfrica />} />
-              <Route path="/categories" element={<Categories />} />
+                {/* Landing */}
+                <Route path="/" element={<NESAAfrica />} />
+                <Route path="/programs" element={<Programs />} />
+                <Route path="/programs/nesa-africa" element={<NESAAfrica />} />
+                
+                {/* About */}
+                <Route path="/about" element={<About />} />
+                <Route path="/about/vision-2035" element={<Vision2035 />} />
+                <Route path="/about/governance" element={<Governance />} />
+                <Route path="/about/timeline" element={<Timeline />} />
+                <Route path="/about/scef" element={<SCEF />} />
+                
+                {/* Awards */}
+                <Route path="/categories" element={<Categories />} />
+                <Route path="/awards/platinum" element={<PlatinumAward />} />
+                <Route path="/awards/icon" element={<IconAward />} />
+                <Route path="/awards/gold" element={<GoldAward />} />
+                <Route path="/awards/blue-garnet" element={<BlueGarnetAward />} />
+                <Route path="/awards/winners" element={<Winners />} />
+                
+                {/* Auth */}
                 <Route path="/login" element={<Login />} />
                 <Route path="/register" element={<Register />} />
+                
+                {/* User Actions */}
                 <Route path="/nominate" element={<Nominate />} />
                 <Route path="/dashboard" element={<Dashboard />} />
                 <Route path="/dashboard/nominations" element={<Dashboard />} />
                 <Route path="/nrc" element={<NRCDashboard />} />
+                
+                {/* Utility */}
                 <Route path="/unauthorized" element={<Unauthorized />} />
                 <Route path="*" element={<NotFound />} />
               </Routes>
