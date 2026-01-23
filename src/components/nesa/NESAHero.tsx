@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Play, Trophy, Users, Award, FileText, Ticket, PlayCircle } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -16,21 +17,35 @@ const quickNavItems = [
 export function NESAHero() {
   const { currentEdition, getBannerText } = useSeason();
   const bannerText = getBannerText();
+  const [videoFailed, setVideoFailed] = useState(false);
 
   return (
     <section className="relative min-h-[90vh] flex flex-col bg-charcoal">
       {/* Video Background with Image Fallback */}
       <div className="absolute inset-0">
-        <video
-          autoPlay
-          muted
-          loop
-          playsInline
-          poster={heroImage}
-          className="w-full h-full object-cover object-center"
-        >
-          <source src={nesaHeroBgVideo} type="video/mp4" />
-        </video>
+        {/* Fallback image - always present, video overlays when working */}
+        <img
+          src={heroImage}
+          alt="NESA-Africa Ceremony Stage"
+          className="absolute inset-0 w-full h-full object-cover object-center"
+        />
+        
+        {/* Video - hidden when failed */}
+        {!videoFailed && (
+          <video
+            autoPlay
+            muted
+            loop
+            playsInline
+            poster={heroImage}
+            className="absolute inset-0 w-full h-full object-cover object-center"
+            onError={() => setVideoFailed(true)}
+            onStalled={() => setVideoFailed(true)}
+          >
+            <source src={nesaHeroBgVideo} type="video/mp4" />
+          </video>
+        )}
+        
         {/* Dark gradient overlay for gold/black theme */}
         <div className="absolute inset-0 bg-gradient-to-b from-charcoal/80 via-charcoal/60 to-charcoal" />
       </div>
