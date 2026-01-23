@@ -1,4 +1,5 @@
 import { BookOpen, Award, Building } from "lucide-react";
+import { useSeason } from "@/contexts/SeasonContext";
 
 const pillars = [
   {
@@ -22,16 +23,21 @@ const pillars = [
 ];
 
 export function ProgrammeOverviewSection() {
+  const { currentEdition } = useSeason();
+  const ceremonyYear = currentEdition.displayYear + 1;
+  const programmeEndYear = ceremonyYear + 1;
+  const dateRange = `October ${currentEdition.displayYear} – June ${programmeEndYear}`;
+
   return (
     <section className="bg-charcoal py-16 md:py-20">
       <div className="container">
         <div className="text-center mb-12">
-          <p className="text-gold text-sm font-medium mb-2">October 2025 – June 2027</p>
+          <p className="text-gold text-sm font-medium mb-2">{dateRange}</p>
           <h2 className="font-display text-3xl md:text-4xl font-bold text-white mb-4">
             Programme Overview
           </h2>
           <p className="text-white/70 max-w-3xl mx-auto">
-            NESA-Africa 2025 is a standards-based continental education recognition and accountability
+            {currentEdition.name} is a standards-based continental education recognition and accountability
             programme designed to document verified education service, engage the public through
             structured participation, and leave a post-award legacy through inclusive education
             infrastructure.

@@ -6,7 +6,7 @@ This document describes all public routes in the NESA-Africa platform.
 
 | Route | Page | Description |
 |-------|------|-------------|
-| `/` | NESA Landing Page | Main landing page for NESA-Africa (redirects to /programs/nesa-africa) |
+| `/` | NESA Landing Page | Main landing page for NESA-Africa (flagship program) |
 | `/programs` | Programs Index | Overview of all SCEF programs |
 | `/programs/nesa-africa` | NESA-Africa Landing | Full NESA-Africa landing page with all sections |
 | `/categories` | Award Categories | Browse all award categories and subcategories |
@@ -21,10 +21,10 @@ These routes are protected by the StageGate system and show a `StageLocked` mess
 | Route | Required Stage | Description |
 |-------|----------------|-------------|
 | `/nominate` | `nominations` | Nomination submission form |
-| `/vote` | `public_voting` | Public voting interface |
-| `/jury` | `jury_scoring` | Jury scoring dashboard (role-protected) |
-| `/results` | `results` | Results and winners |
-| `/certificates` | `certificates` | Certificate download and verification |
+| `/vote` | `public_voting` | Public voting interface (planned) |
+| `/jury` | `jury_scoring` | Jury scoring dashboard (role-protected, planned) |
+| `/results` | `results` | Results and winners (planned) |
+| `/certificates` | `certificates` | Certificate download and verification (planned) |
 
 ## Dashboard Routes (Authenticated)
 
@@ -56,3 +56,17 @@ These routes are protected by the StageGate system and show a `StageLocked` mess
 - Stage gating is handled by the `StageGate` component from `@/components/governance/StageGate`
 - Role protection uses the `ProtectedRoute` component
 - Season-aware metadata is provided via `useSeason()` hook
+- All date/year references are dynamic (no hardcoded years in UI)
+
+## Configuration Files
+
+- `src/config/season.ts` - Season editions and transition rules
+- `src/config/schedule.ts` - Event scheduling and date calculations
+- `src/config/nesaSeasonConfig.ts` - Phase definitions and category metadata
+
+## API Endpoints
+
+| Endpoint | Description |
+|----------|-------------|
+| `/functions/v1/stage` | Current stage flags and season key |
+| `/functions/v1/season` | Full season configuration with current/next edition |

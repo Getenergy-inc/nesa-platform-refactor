@@ -1,4 +1,7 @@
+import { useSeason } from "@/contexts/SeasonContext";
+
 export function QuoteBlock() {
+  const { currentEdition } = useSeason();
   const keywords = ["Education", "Recognition", "Public Participation", "Legacy Impact"];
 
   return (
@@ -7,7 +10,7 @@ export function QuoteBlock() {
         <div className="max-w-3xl mx-auto text-center">
           <blockquote className="mb-8">
             <p className="font-display text-2xl md:text-3xl text-white italic leading-relaxed">
-              "NESA-Africa 2025 is not an event. It is a standards-led education accountability
+              "{currentEdition.name} is not an event. It is a standards-led education accountability
               cycle that connects:"
             </p>
           </blockquote>

@@ -13,11 +13,25 @@ export interface NominationPath {
   id: string;
   title: string;
   badge: string;
-  period: string;
+  periodType: "lifetime" | "annual" | "merit";
   description: string;
   features: string[];
   link: string;
   iconName: string;
+}
+
+// Helper to build period string based on type
+export function buildPeriodString(periodType: NominationPath["periodType"], displayYear: number): string {
+  switch (periodType) {
+    case "lifetime":
+      return `2005–${displayYear}`;
+    case "annual":
+      return "Annual Competition";
+    case "merit":
+      return "Merit-Based";
+    default:
+      return "";
+  }
 }
 
 // Award categories for display on landing page
@@ -72,7 +86,7 @@ export const NOMINATION_PATHS_DISPLAY: NominationPath[] = [
     id: "lifetime",
     title: "Lifetime Achievement",
     badge: "Africa Icon Blue Garnet Award",
-    period: "2005–2025",
+    periodType: "lifetime",
     description: "Reserved for lifetime achievement. Nominees must have 10+ years institutional achievements.",
     features: ["Institutional Achievements", "Long-term Impact", "Legacy Recognition"],
     link: "/categories/africa-lifetime-education-icon",
@@ -82,7 +96,7 @@ export const NOMINATION_PATHS_DISPLAY: NominationPath[] = [
     id: "public-voting",
     title: "Public Voting",
     badge: "Blue Garnet & Gold Certificate Awards",
-    period: "Annual Competition",
+    periodType: "annual",
     description: "Open competition with public participation through AGC voting and expert judging.",
     features: ["Public Voting", "Expert Judging", "135 Subcategories"],
     link: "/categories",
@@ -92,7 +106,7 @@ export const NOMINATION_PATHS_DISPLAY: NominationPath[] = [
     id: "expert-selection",
     title: "Expert Selection",
     badge: "Platinum Certificate of Recognition",
-    period: "Merit-Based",
+    periodType: "merit",
     description: "Merit-based recognition through expert panel evaluation and institutional review.",
     features: ["No Voting", "Internal Judging", "Global Nomination"],
     link: "/categories",
