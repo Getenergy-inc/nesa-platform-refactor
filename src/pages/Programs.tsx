@@ -1,5 +1,6 @@
 import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
+import { useSeason } from "@/contexts/SeasonContext";
 import { ArrowRight, Award, GraduationCap, Users, Globe, Calendar, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -79,8 +80,10 @@ const programs: Program[] = [
 ];
 
 export default function Programs() {
+  const { currentEdition } = useSeason();
   const featuredProgram = programs.find((p) => p.featured);
   const otherPrograms = programs.filter((p) => !p.featured);
+  const currentYear = new Date().getFullYear();
 
   return (
     <>
@@ -127,7 +130,7 @@ export default function Programs() {
             <div className="mx-auto max-w-3xl text-center">
               <Badge variant="outline" className="mb-4 border-primary/30 text-primary">
                 <Calendar className="mr-1.5 h-3 w-3" />
-                2025 Season Active
+                {currentEdition.displayYear} Season Active
               </Badge>
               <h1 className="mb-4 text-4xl font-bold tracking-tight sm:text-5xl">
                 Our <span className="text-primary">Programs</span>
@@ -303,7 +306,7 @@ export default function Programs() {
         {/* Footer */}
         <footer className="border-t border-border/40 bg-secondary/30 py-8">
           <div className="container text-center text-sm text-muted-foreground">
-            <p>© 2025 Santa Claus Educational Foundation. All rights reserved.</p>
+            <p>© {currentYear} Santa Claus Educational Foundation. All rights reserved.</p>
           </div>
         </footer>
       </div>

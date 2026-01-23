@@ -1,8 +1,11 @@
+import { forwardRef } from "react";
 import { Link } from "react-router-dom";
 
-export function NESAFooter() {
+export const NESAFooter = forwardRef<HTMLElement>(function NESAFooter(_, ref) {
+  const currentYear = new Date().getFullYear();
+
   return (
-    <footer className="bg-charcoal border-t border-gold/20 py-10">
+    <footer ref={ref} className="bg-charcoal border-t border-gold/20 py-10">
       <div className="container">
         <div className="flex flex-col md:flex-row items-center justify-between gap-6">
           <div className="flex items-center gap-3">
@@ -21,10 +24,10 @@ export function NESAFooter() {
           </nav>
 
           <p className="text-white/50 text-sm">
-            © 2025 Santa Claus Educational Foundation. All rights reserved.
+            © {currentYear} Santa Claus Educational Foundation. All rights reserved.
           </p>
         </div>
       </div>
     </footer>
   );
-}
+});

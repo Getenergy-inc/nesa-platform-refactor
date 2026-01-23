@@ -1,10 +1,11 @@
+import { forwardRef } from "react";
 import { Award, ExternalLink } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 
-export function FinalCTASection() {
+export const FinalCTASection = forwardRef<HTMLElement>(function FinalCTASection(_, ref) {
   return (
-    <section className="bg-charcoal py-16 md:py-20">
+    <section ref={ref} className="bg-charcoal py-16 md:py-20">
       <div className="container">
         <div className="max-w-3xl mx-auto text-center">
           <div className="h-16 w-16 rounded-full bg-gold/20 flex items-center justify-center mx-auto mb-6">
@@ -35,4 +36,4 @@ export function FinalCTASection() {
       </div>
     </section>
   );
-}
+});

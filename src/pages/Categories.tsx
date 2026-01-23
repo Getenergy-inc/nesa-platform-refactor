@@ -1,6 +1,7 @@
 import { useState, useMemo } from "react";
 import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
+import { useSeason } from "@/contexts/SeasonContext";
 import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
@@ -97,6 +98,7 @@ interface Subcategory {
 }
 
 export default function Categories() {
+  const { currentEdition } = useSeason();
   const [searchQuery, setSearchQuery] = useState("");
   const [expandedCategories, setExpandedCategories] = useState<Set<string>>(new Set());
 
@@ -196,7 +198,7 @@ export default function Categories() {
   return (
     <>
       <Helmet>
-        <title>Award Categories | NESA-Africa 2025</title>
+        <title>Award Categories | {currentEdition.name}</title>
         <meta name="description" content="Explore all NESA-Africa award categories and subcategories. Nominate excellence across education, leadership, technology, and more." />
       </Helmet>
 
@@ -229,7 +231,7 @@ export default function Categories() {
         <main className="container px-6 py-8">
           {/* Hero */}
           <div className="mb-8 text-center">
-            <Badge className="mb-4 bg-primary/10 text-primary">NESA-Africa 2025</Badge>
+            <Badge className="mb-4 bg-primary/10 text-primary">{currentEdition.name}</Badge>
             <h2 className="mb-4 font-display text-3xl font-bold md:text-4xl">
               Award Categories
             </h2>

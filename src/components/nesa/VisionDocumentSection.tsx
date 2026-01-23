@@ -7,75 +7,84 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import { useSeason } from "@/contexts/SeasonContext";
 
-const sections = [
-  {
-    id: "intro",
-    title: "1. Introduction",
-    content: `The New Education Standards Awards Africa (NESA-Africa) is a continental education standards, recognition, and accountability platform established to elevate education impact, public trust, and measurable outcomes across Africa.
+function buildSections(displayYear: number) {
+  const endYear = displayYear + 10;
+  
+  return [
+    {
+      id: "intro",
+      title: "1. Introduction",
+      content: `The New Education Standards Awards Africa (NESA-Africa) is a continental education standards, recognition, and accountability platform established to elevate education impact, public trust, and measurable outcomes across Africa.
 
-Vision 2035 defines NESA-Africa's 10-year strategic direction — moving from an awards-led initiative into a continent-wide education standards and impact institution that connects recognition with lasting social transformation.
+Vision ${endYear} defines NESA-Africa's 10-year strategic direction — moving from an awards-led initiative into a continent-wide education standards and impact institution that connects recognition with lasting social transformation.
 
 This vision aligns with:
 • SDG 4 — Quality Education
 • African Union Agenda 2063
 • National education reform agendas
 • CSR and philanthropic accountability frameworks`,
-  },
-  {
-    id: "problem",
-    title: "2. The Problem NESA-Africa Addresses",
-    content: "Details about the educational challenges NESA-Africa aims to solve across the continent.",
-  },
-  {
-    id: "vision",
-    title: "3. Vision Statement",
-    content: "The long-term vision for education standards and recognition in Africa by 2035.",
-  },
-  {
-    id: "mission",
-    title: "4. Mission Statement",
-    content: "The mission guiding NESA-Africa's operations and initiatives.",
-  },
-  {
-    id: "pillars",
-    title: "5. Core Pillars of Vision 2035",
-    content: "The foundational pillars supporting NESA-Africa's strategic direction.",
-  },
-  {
-    id: "milestones",
-    title: "6. Strategic Milestones (2025–2035)",
-    content: "Key milestones and targets for the next decade.",
-  },
-  {
-    id: "platinum",
-    title: "7. Role of Platinum Certification",
-    content: "How Platinum certification serves as the baseline recognition layer.",
-  },
-  {
-    id: "governance",
-    title: "8. Governance & Integrity",
-    content: "The governance framework ensuring transparency and integrity.",
-  },
-  {
-    id: "success",
-    title: "9. What Success Looks Like by 2035",
-    content: "Measurable outcomes and indicators of success by 2035.",
-  },
-  {
-    id: "conclusion",
-    title: "10. Conclusion",
-    content: `Vision 2035 aligns with continental and global frameworks:
+    },
+    {
+      id: "problem",
+      title: "2. The Problem NESA-Africa Addresses",
+      content: "Details about the educational challenges NESA-Africa aims to solve across the continent.",
+    },
+    {
+      id: "vision",
+      title: "3. Vision Statement",
+      content: `The long-term vision for education standards and recognition in Africa by ${endYear}.`,
+    },
+    {
+      id: "mission",
+      title: "4. Mission Statement",
+      content: "The mission guiding NESA-Africa's operations and initiatives.",
+    },
+    {
+      id: "pillars",
+      title: `5. Core Pillars of Vision ${endYear}`,
+      content: "The foundational pillars supporting NESA-Africa's strategic direction.",
+    },
+    {
+      id: "milestones",
+      title: `6. Strategic Milestones (${displayYear}–${endYear})`,
+      content: "Key milestones and targets for the next decade.",
+    },
+    {
+      id: "platinum",
+      title: "7. Role of Platinum Certification",
+      content: "How Platinum certification serves as the baseline recognition layer.",
+    },
+    {
+      id: "governance",
+      title: "8. Governance & Integrity",
+      content: "The governance framework ensuring transparency and integrity.",
+    },
+    {
+      id: "success",
+      title: `9. What Success Looks Like by ${endYear}`,
+      content: `Measurable outcomes and indicators of success by ${endYear}.`,
+    },
+    {
+      id: "conclusion",
+      title: "10. Conclusion",
+      content: `Vision ${endYear} aligns with continental and global frameworks:
 • SDG 4
 • AU Agenda 2063
 • ECOWAS
 • SADC
 • EAC
 • ECCAS`,
-  },
-];
+    },
+  ];
+}
 
 export function VisionDocumentSection() {
+  const { currentEdition } = useSeason();
+  const sections = buildSections(currentEdition.displayYear);
+  const visionEndYear = currentEdition.displayYear + 10;
+  
   const [expandAll, setExpandAll] = useState(false);
   const [openItems, setOpenItems] = useState<string[]>([]);
 
@@ -96,13 +105,13 @@ export function VisionDocumentSection() {
             Strategic Vision Document
           </p>
           <h2 className="font-display text-3xl md:text-4xl font-bold text-white mb-2 text-center">
-            NESA-AFRICA VISION 2035
+            NESA-AFRICA VISION {visionEndYear}
           </h2>
           <p className="text-white/70 text-center mb-4">
             Setting Africa's Education Standards. Recognising Impact. Delivering Legacy.
           </p>
           <p className="text-white/70 text-center mb-8 max-w-2xl mx-auto">
-            Vision 2035 defines NESA-Africa's 10-year strategic direction — moving from an
+            Vision {visionEndYear} defines NESA-Africa's 10-year strategic direction — moving from an
             awards-led initiative into a continent-wide education standards and impact institution
             that connects recognition with lasting social transformation.
           </p>

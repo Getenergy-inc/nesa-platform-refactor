@@ -1,6 +1,7 @@
 import { Award, Vote, Users, Check } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
+import { useSeason } from "@/contexts/SeasonContext";
 
 interface PathCard {
   icon: React.ElementType;
@@ -11,34 +12,39 @@ interface PathCard {
   bullets: string[];
 }
 
-const nominationPaths: PathCard[] = [
-  {
-    icon: Award,
-    badge: "Lifetime Achievement",
-    title: "Africa Icon Blue Garnet Award",
-    period: "2005–2025",
-    description: "Reserved for lifetime achievement. Nominees must have 10+ years institutional achievements.",
-    bullets: ["Institutional Achievements", "Long-term Impact", "Legacy Recognition"],
-  },
-  {
-    icon: Vote,
-    badge: "Public Voting",
-    title: "Blue Garnet & Gold Certificate Awards",
-    period: "Annual Competition",
-    description: "Open competition with public participation through AGC voting and expert judging.",
-    bullets: ["Public Voting", "Expert Judging", "135 Subcategories"],
-  },
-  {
-    icon: Users,
-    badge: "Expert Selection",
-    title: "Platinum Certificate of Recognition",
-    period: "Merit-Based",
-    description: "Merit-based recognition through expert panel evaluation and institutional review.",
-    bullets: ["No Voting", "Internal Judging", "Global Nomination"],
-  },
-];
+function buildNominationPaths(displayYear: number): PathCard[] {
+  return [
+    {
+      icon: Award,
+      badge: "Lifetime Achievement",
+      title: "Africa Icon Blue Garnet Award",
+      period: `2005–${displayYear}`,
+      description: "Reserved for lifetime achievement. Nominees must have 10+ years institutional achievements.",
+      bullets: ["Institutional Achievements", "Long-term Impact", "Legacy Recognition"],
+    },
+    {
+      icon: Vote,
+      badge: "Public Voting",
+      title: "Blue Garnet & Gold Certificate Awards",
+      period: "Annual Competition",
+      description: "Open competition with public participation through AGC voting and expert judging.",
+      bullets: ["Public Voting", "Expert Judging", "135 Subcategories"],
+    },
+    {
+      icon: Users,
+      badge: "Expert Selection",
+      title: "Platinum Certificate of Recognition",
+      period: "Merit-Based",
+      description: "Merit-based recognition through expert panel evaluation and institutional review.",
+      bullets: ["No Voting", "Internal Judging", "Global Nomination"],
+    },
+  ];
+}
 
 export function NominationPathSection() {
+  const { currentEdition } = useSeason();
+  const nominationPaths = buildNominationPaths(currentEdition.displayYear);
+
   return (
     <section className="bg-charcoal py-16 md:py-20">
       <div className="container">
