@@ -1,14 +1,14 @@
 import { Calendar, Check, Coins } from "lucide-react";
-
-const regions = ["North Africa", "West Africa", "East Africa", "Central Africa", "Southern Africa"];
-
-const facilities = [
-  "Inclusive classrooms",
-  "Accessibility & assistive facilities",
-  "Learning resources for children with disabilities",
-];
+import { useSeason } from "@/contexts/SeasonContext";
+import { LEGACY_REGIONS } from "@/config/schedule";
+import { LEGACY_FOCUS_AREAS, FUNDING_CHANNELS } from "@/features/landing/data/categories";
 
 export function LegacySection() {
+  const { currentEdition } = useSeason();
+  const ceremonyYear = currentEdition.displayYear + 1;
+  const legacyEndYear = ceremonyYear + 1;
+  const dateRange = `June ${ceremonyYear} – June ${legacyEndYear}`;
+
   return (
     <section className="bg-charcoal py-16 md:py-20">
       <div className="container">
@@ -20,7 +20,7 @@ export function LegacySection() {
 
           <div className="flex items-center gap-2 text-white/70 mb-6">
             <Calendar className="h-4 w-4 text-gold" />
-            <span>June 2026 – June 2027 • Implemented via EduAid-Africa</span>
+            <span>{dateRange} • Implemented via EduAid-Africa</span>
           </div>
 
           <p className="text-white/70 mb-8 leading-relaxed">
@@ -30,7 +30,7 @@ export function LegacySection() {
 
           {/* Regions */}
           <div className="flex flex-wrap gap-2 mb-8">
-            {regions.map((region) => (
+            {LEGACY_REGIONS.map((region) => (
               <span
                 key={region}
                 className="px-4 py-2 bg-gold/10 border border-gold/20 rounded-full text-gold text-sm"
@@ -43,7 +43,7 @@ export function LegacySection() {
           {/* Facilities */}
           <div className="bg-charcoal-light rounded-xl p-6 border border-gold/20 mb-8">
             <ul className="space-y-3">
-              {facilities.map((facility) => (
+              {LEGACY_FOCUS_AREAS.map((facility) => (
                 <li key={facility} className="flex items-center gap-3 text-white">
                   <Check className="h-5 w-5 text-gold flex-shrink-0" />
                   {facility}
@@ -58,8 +58,7 @@ export function LegacySection() {
             <div>
               <p className="text-gold text-sm font-medium mb-1">Funding Channels</p>
               <p className="text-white/70 text-sm">
-                Ticket contributions • EduAid-Africa donations • CSR & partner contributions •
-                Post-award campaigns
+                {FUNDING_CHANNELS.join(" • ")}
               </p>
             </div>
           </div>

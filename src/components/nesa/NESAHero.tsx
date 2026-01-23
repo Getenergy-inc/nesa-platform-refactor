@@ -1,7 +1,9 @@
 import { Play, Trophy, Users, Award, FileText, Ticket, PlayCircle } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
+import { useSeason } from "@/contexts/SeasonContext";
 import heroImage from "@/assets/hero-ceremony.jpg";
+import nesaHeroBgVideo from "@/assets/nesa-hero-bg-video.mp4";
 
 const quickNavItems = [
   { icon: Users, label: "Refer", href: "#refer" },
@@ -12,15 +14,23 @@ const quickNavItems = [
 ];
 
 export function NESAHero() {
+  const { currentEdition, getBannerText } = useSeason();
+  const bannerText = getBannerText();
+
   return (
     <section className="relative min-h-[90vh] flex flex-col bg-charcoal">
-      {/* Background Image */}
+      {/* Video Background with Image Fallback */}
       <div className="absolute inset-0">
-        <img
-          src={heroImage}
-          alt="Awards ceremony stage with trophies"
+        <video
+          autoPlay
+          muted
+          loop
+          playsInline
+          poster={heroImage}
           className="w-full h-full object-cover object-center"
-        />
+        >
+          <source src={nesaHeroBgVideo} type="video/mp4" />
+        </video>
         {/* Dark gradient overlay for gold/black theme */}
         <div className="absolute inset-0 bg-gradient-to-b from-charcoal/80 via-charcoal/60 to-charcoal" />
       </div>
@@ -51,11 +61,11 @@ export function NESAHero() {
 
       {/* Hero Content */}
       <div className="relative flex-1 flex flex-col items-center justify-center text-center px-4 py-16">
-        {/* Badge */}
+        {/* Stage-aware Badge */}
         <div className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-charcoal/80 border border-gold/40 backdrop-blur-sm mb-8">
           <Award className="h-4 w-4 text-gold" />
           <span className="text-sm font-medium text-white">
-            NESA-Africa 2025 — Nominations Open Now
+            {bannerText}
           </span>
         </div>
 
@@ -65,14 +75,14 @@ export function NESAHero() {
           <span className="text-gold">Changemakers</span>
         </h1>
 
-        {/* Subheadline */}
+        {/* Subheadline - from config */}
         <p className="text-xl sm:text-2xl font-medium text-gold mb-6">
-          Building the Future of Education
+          {currentEdition.theme}
         </p>
 
         {/* Description */}
         <p className="text-white/80 text-base sm:text-lg max-w-3xl mb-10 leading-relaxed">
-          At the New Education Standard Award Africa (NESA–Africa) 2025, we celebrate the real
+          At the New Education Standard Award Africa ({currentEdition.name}), we celebrate the real
           changemakers shaping the future of education across Africa. A pan-African celebration
           of educational transformation, social impact, and legacy.
         </p>
