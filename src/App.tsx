@@ -33,6 +33,13 @@ import GoldAward from "./pages/awards/GoldAward";
 import BlueGarnetAward from "./pages/awards/BlueGarnetAward";
 import Winners from "./pages/awards/Winners";
 
+// Media Pages
+import MediaHub from "./pages/media/MediaHub";
+import NESATV from "./pages/media/NESATV";
+import Shows from "./pages/media/Shows";
+import Webinars from "./pages/media/Webinars";
+import Gala from "./pages/media/Gala";
+
 const queryClient = new QueryClient();
 
 const App = () => (
@@ -64,6 +71,13 @@ const App = () => (
                 <Route path="/awards/gold" element={<GoldAward />} />
                 <Route path="/awards/blue-garnet" element={<BlueGarnetAward />} />
                 <Route path="/awards/winners" element={<Winners />} />
+                
+                {/* Media */}
+                <Route path="/media" element={<MediaHub />} />
+                <Route path="/media/tv" element={<NESATV />} />
+                <Route path="/media/shows" element={<Shows />} />
+                <Route path="/media/webinars" element={<Webinars />} />
+                <Route path="/media/gala" element={<Gala />} />
                 
                 {/* Auth */}
                 <Route path="/login" element={<Login />} />
