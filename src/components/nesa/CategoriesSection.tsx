@@ -56,7 +56,7 @@ export function CategoriesSection() {
           <h2 className="font-display text-3xl md:text-4xl font-bold text-white mb-4">
             Award Categories
           </h2>
-          <p className="text-secondary-foreground/70 max-w-2xl mx-auto">
+          <p className="text-white/70 max-w-2xl mx-auto">
             Multiple award tracks recognizing excellence at every level of education across Africa.
           </p>
         </div>
@@ -65,18 +65,18 @@ export function CategoriesSection() {
           {categories.map((cat) => (
             <div
               key={cat.title}
-              className="bg-secondary rounded-xl p-6 border border-primary/10 hover:border-primary/30 transition-colors"
+              className="bg-charcoal-light rounded-xl p-6 border border-gold/20 hover:border-gold/40 transition-colors"
             >
               <div className="flex items-center gap-3 mb-4">
-                <div className="h-10 w-10 rounded-lg bg-primary/10 flex items-center justify-center">
-                  <cat.icon className="h-5 w-5 text-primary" />
+                <div className="h-10 w-10 rounded-lg bg-gold/10 flex items-center justify-center">
+                  <cat.icon className="h-5 w-5 text-gold" />
                 </div>
-                <span className="text-xs font-medium text-primary uppercase tracking-wider">
+                <span className="text-xs font-medium text-gold uppercase tracking-wider">
                   {cat.badge}
                 </span>
               </div>
               <h3 className="font-semibold text-white mb-2">{cat.title}</h3>
-              <p className="text-secondary-foreground/70 text-sm">{cat.description}</p>
+              <p className="text-white/70 text-sm">{cat.description}</p>
             </div>
           ))}
         </div>
@@ -86,7 +86,7 @@ export function CategoriesSection() {
             <Button
               variant="outline"
               size="lg"
-              className="border-primary text-primary hover:bg-primary/10 rounded-full"
+              className="border-gold text-gold hover:bg-gold/10 rounded-full"
             >
               View All Categories
             </Button>

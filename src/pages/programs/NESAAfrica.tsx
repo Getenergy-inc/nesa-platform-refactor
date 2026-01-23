@@ -33,7 +33,7 @@ export default function NESAAfrica() {
         />
       </Helmet>
 
-      <div className="min-h-screen bg-secondary">
+      <div className="min-h-screen bg-charcoal">
         <NESAHeader />
         <NESAHero />
         <KeyDatesBanner />

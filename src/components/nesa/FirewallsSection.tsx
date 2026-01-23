@@ -37,13 +37,13 @@ export function FirewallsSection() {
           {firewalls.map((item) => (
             <div
               key={item.title}
-              className="bg-secondary rounded-xl p-6 border border-primary/10 text-center hover:border-primary/30 transition-colors"
+              className="bg-charcoal-light rounded-xl p-6 border border-gold/20 text-center hover:border-gold/40 transition-colors"
             >
-              <div className="h-12 w-12 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-4">
-                <item.icon className="h-6 w-6 text-primary" />
+              <div className="h-12 w-12 rounded-full bg-gold/10 flex items-center justify-center mx-auto mb-4">
+                <item.icon className="h-6 w-6 text-gold" />
               </div>
               <h3 className="font-semibold text-white mb-2">{item.title}</h3>
-              <p className="text-secondary-foreground/70 text-sm">{item.description}</p>
+              <p className="text-white/70 text-sm">{item.description}</p>
             </div>
           ))}
         </div>

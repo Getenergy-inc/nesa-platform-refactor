@@ -15,15 +15,15 @@ export function QuoteBlock() {
           <div className="flex flex-wrap justify-center gap-3 md:gap-6 mb-8">
             {keywords.map((keyword, index) => (
               <span key={keyword} className="flex items-center gap-2 md:gap-3">
-                <span className="text-primary font-semibold text-lg">{keyword}</span>
+                <span className="text-gold font-semibold text-lg">{keyword}</span>
                 {index < keywords.length - 1 && (
-                  <span className="text-primary/50">•</span>
+                  <span className="text-gold/50">•</span>
                 )}
               </span>
             ))}
           </div>
 
-          <p className="text-secondary-foreground/70">
+          <p className="text-white/70">
             Delivered with governance, transparency, and continental relevance.
           </p>
         </div>

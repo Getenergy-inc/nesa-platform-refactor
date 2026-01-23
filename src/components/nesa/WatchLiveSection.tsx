@@ -9,7 +9,7 @@ export function WatchLiveSection() {
           <h2 className="font-display text-3xl md:text-4xl font-bold text-white mb-4">
             Watch Live
           </h2>
-          <p className="text-secondary-foreground/70 mb-8">
+          <p className="text-white/70 mb-8">
             NESA Africa TV broadcasts on social media, partner stations, and the CAST TV box/app.
           </p>
 
@@ -17,7 +17,7 @@ export function WatchLiveSection() {
             <Button
               variant="outline"
               size="lg"
-              className="border-primary/30 text-primary hover:bg-primary/10 rounded-full gap-2"
+              className="border-gold/40 text-gold hover:bg-gold/10 rounded-full gap-2"
             >
               <Youtube className="h-5 w-5" />
               YouTube
@@ -25,7 +25,7 @@ export function WatchLiveSection() {
             <Button
               variant="outline"
               size="lg"
-              className="border-primary/30 text-primary hover:bg-primary/10 rounded-full gap-2"
+              className="border-gold/40 text-gold hover:bg-gold/10 rounded-full gap-2"
             >
               <Facebook className="h-5 w-5" />
               Facebook
@@ -33,7 +33,7 @@ export function WatchLiveSection() {
             <Button
               variant="outline"
               size="lg"
-              className="border-primary/30 text-primary hover:bg-primary/10 rounded-full gap-2"
+              className="border-gold/40 text-gold hover:bg-gold/10 rounded-full gap-2"
             >
               <Tv className="h-5 w-5" />
               CAST TV App

@@ -1,32 +1,38 @@
 import { useCountdown } from "@/hooks/useCountdown";
 
 interface CountdownTimerProps {
-  targetDate: Date | string;
+  targetDate: Date;
   label: string;
-  className?: string;
 }
 
-export function CountdownTimer({ targetDate, label, className = "" }: CountdownTimerProps) {
-  const { days, hours, minutes, seconds, isExpired } = useCountdown(targetDate);
+export function CountdownTimer({ targetDate, label }: CountdownTimerProps) {
+  const { days, hours, minutes, seconds } = useCountdown(targetDate);
 
-  if (isExpired) {
-    return (
-      <div className={`text-center ${className}`}>
-        <p className="text-primary font-medium">{label}</p>
-        <p className="text-secondary-foreground/60 text-sm mt-1">Event has passed</p>
-      </div>
-    );
-  }
+  const blocks = [
+    { value: days, label: "Days" },
+    { value: hours, label: "Hrs" },
+    { value: minutes, label: "Min" },
+    { value: seconds, label: "Sec" },
+  ];
 
   return (
-    <div className={`${className}`}>
-      <p className="text-primary font-medium mb-3">{label}</p>
+    <div className="flex flex-col items-center gap-3">
       <div className="flex gap-2">
-        <TimeBlock value={days} unit="Days" />
-        <TimeBlock value={hours} unit="Hrs" />
-        <TimeBlock value={minutes} unit="Min" />
-        <TimeBlock value={seconds} unit="Sec" />
+        {blocks.map((block) => (
+          <div
+            key={block.label}
+            className="flex flex-col items-center bg-charcoal-light border border-gold/30 rounded-lg px-3 py-2 min-w-[50px]"
+          >
+            <span className="text-xl sm:text-2xl font-bold text-gold tabular-nums">
+              {String(block.value).padStart(2, "0")}
+            </span>
+            <span className="text-[10px] text-white/60 uppercase tracking-wide">
+              {block.label}
+            </span>
+          </div>
+        ))}
       </div>
+      <p className="text-xs text-white/70 text-center">{label}</p>
     </div>
   );
 }
