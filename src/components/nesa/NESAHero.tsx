@@ -18,16 +18,42 @@ export function NESAHero() {
   const { currentEdition, getBannerText } = useSeason();
   const bannerText = getBannerText();
   const [videoFailed, setVideoFailed] = useState(false);
+  const [videoLoading, setVideoLoading] = useState(true);
 
   return (
     <section className="relative min-h-[90vh] flex flex-col bg-charcoal">
       {/* Video Background with Image Fallback */}
       <div className="absolute inset-0">
+        {/* Loading skeleton - shows while video is buffering */}
+        {videoLoading && !videoFailed && (
+          <div className="absolute inset-0 z-10">
+            {/* Animated gradient skeleton */}
+            <div className="absolute inset-0 bg-charcoal animate-pulse" />
+            <div 
+              className="absolute inset-0 bg-gradient-to-r from-charcoal via-charcoal-light/20 to-charcoal"
+              style={{
+                backgroundSize: '200% 100%',
+                animation: 'shimmer 1.5s infinite linear',
+              }}
+            />
+            {/* Loading indicator */}
+            <div className="absolute inset-0 flex items-center justify-center">
+              <div className="flex flex-col items-center gap-4">
+                <div className="w-12 h-12 border-2 border-gold/30 border-t-gold rounded-full animate-spin" />
+                <span className="text-gold/60 text-sm font-medium">Loading...</span>
+              </div>
+            </div>
+          </div>
+        )}
+
         {/* Fallback image - always present, video overlays when working */}
         <img
           src={heroImage}
           alt="NESA-Africa Ceremony Stage"
-          className="absolute inset-0 w-full h-full object-cover object-center"
+          className={`absolute inset-0 w-full h-full object-cover object-center transition-opacity duration-500 ${
+            videoLoading && !videoFailed ? 'opacity-0' : 'opacity-100'
+          }`}
+          onLoad={() => setVideoLoading(false)}
         />
         
         {/* Video - hidden when failed */}
@@ -38,9 +64,16 @@ export function NESAHero() {
             loop
             playsInline
             poster={heroImage}
-            className="absolute inset-0 w-full h-full object-cover object-center"
-            onError={() => setVideoFailed(true)}
+            className={`absolute inset-0 w-full h-full object-cover object-center transition-opacity duration-500 ${
+              videoLoading ? 'opacity-0' : 'opacity-100'
+            }`}
+            onError={() => {
+              setVideoFailed(true);
+              setVideoLoading(false);
+            }}
             onStalled={() => setVideoFailed(true)}
+            onCanPlayThrough={() => setVideoLoading(false)}
+            onLoadedData={() => setVideoLoading(false)}
           >
             <source src={nesaHeroBgVideo} type="video/mp4" />
           </video>
