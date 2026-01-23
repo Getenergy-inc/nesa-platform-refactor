@@ -1,15 +1,12 @@
 import { Calendar } from "lucide-react";
-
-const webinarTopics = [
-  "Education for All & SDG 4",
-  "CSR & Private Sector Education Impact",
-  "NGOs & Community-Driven Education",
-  "STEM & Innovation",
-  "Creative Arts & Education",
-  "Inclusion, Disability & Special Needs",
-];
+import { useSeason } from "@/contexts/SeasonContext";
+import { WEBINAR_THEMES } from "@/config/schedule";
 
 export function Phase1Section() {
+  const { currentEdition } = useSeason();
+  const ceremonyYear = currentEdition.displayYear + 1;
+  const dateRange = `14 October ${currentEdition.displayYear} – June ${ceremonyYear}`;
+
   return (
     <section className="bg-charcoal py-16 md:py-20">
       <div className="container">
@@ -21,7 +18,7 @@ export function Phase1Section() {
           
           <div className="flex items-center gap-2 text-white/70 mb-6">
             <Calendar className="h-4 w-4 text-gold" />
-            <span>14 October 2025 – June 2026</span>
+            <span>{dateRange}</span>
           </div>
 
           <p className="text-white/70 mb-8 leading-relaxed">
@@ -31,12 +28,12 @@ export function Phase1Section() {
           </p>
 
           <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-3 mb-8">
-            {webinarTopics.map((topic) => (
+            {WEBINAR_THEMES.map((item) => (
               <div
-                key={topic}
+                key={item.id}
                 className="bg-charcoal-light rounded-lg px-4 py-3 border border-gold/20 text-white text-sm"
               >
-                {topic}
+                {item.theme}
               </div>
             ))}
           </div>

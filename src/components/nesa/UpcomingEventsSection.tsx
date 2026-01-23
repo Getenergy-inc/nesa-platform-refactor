@@ -1,26 +1,7 @@
 import { Tv, Vote, Trophy } from "lucide-react";
 import { CountdownTimer } from "./CountdownTimer";
-
-interface EventItem {
-  name: string;
-  date: Date;
-}
-
-const tvShows: EventItem[] = [
-  { name: "Platinum Recognition Show", date: new Date("2026-02-28T19:00:00") },
-  { name: "Africa Icon Recognition Show", date: new Date("2026-03-28T19:00:00") },
-  { name: "Gold Certificate Winners Show", date: new Date("2026-05-17T19:00:00") },
-];
-
-const votingWindows: EventItem[] = [
-  { name: "Gold Public Voting Opens", date: new Date("2026-04-10T00:00:00") },
-  { name: "Blue Garnet Voting Opens", date: new Date("2026-05-18T00:00:00") },
-];
-
-const galaEvents: EventItem[] = [
-  { name: "Blue Garnet Awards Gala", date: new Date("2026-06-27T18:00:00") },
-  { name: "Rebuild My School Africa Launch", date: new Date("2026-06-28T10:00:00") },
-];
+import { useSeason } from "@/contexts/SeasonContext";
+import { buildScheduledEvents, DEFAULT_SCHEDULE_TEMPLATE, type ScheduledEvent } from "@/config/schedule";
 
 function EventGroup({ 
   icon: Icon, 
@@ -29,7 +10,7 @@ function EventGroup({
 }: { 
   icon: React.ElementType; 
   title: string; 
-  events: EventItem[] 
+  events: ScheduledEvent[] 
 }) {
   return (
     <div className="space-y-4">
@@ -40,7 +21,7 @@ function EventGroup({
       <div className="space-y-4">
         {events.map((event) => (
           <div 
-            key={event.name} 
+            key={event.id} 
             className="bg-charcoal-light rounded-xl p-4 border border-gold/20"
           >
             <CountdownTimer targetDate={event.date} label={event.name} />
@@ -52,6 +33,14 @@ function EventGroup({
 }
 
 export function UpcomingEventsSection() {
+  const { currentEdition } = useSeason();
+  
+  // Build events from config for the current season
+  const events = buildScheduledEvents(currentEdition.displayYear, DEFAULT_SCHEDULE_TEMPLATE);
+  
+  // Combine gala and legacy events for display
+  const galaAndLegacy = [...events.galas, ...events.legacy];
+
   return (
     <section className="bg-charcoal py-16 md:py-20">
       <div className="container">
@@ -65,9 +54,9 @@ export function UpcomingEventsSection() {
         </div>
 
         <div className="grid md:grid-cols-3 gap-8">
-          <EventGroup icon={Tv} title="📺 Live TV Shows" events={tvShows} />
-          <EventGroup icon={Vote} title="🗳️ Public Voting Windows" events={votingWindows} />
-          <EventGroup icon={Trophy} title="🏆 Gala & Legacy Events" events={galaEvents} />
+          <EventGroup icon={Tv} title="📺 Live TV Shows" events={events.tvShows} />
+          <EventGroup icon={Vote} title="🗳️ Public Voting Windows" events={events.votingWindows} />
+          <EventGroup icon={Trophy} title="🏆 Gala & Legacy Events" events={galaAndLegacy} />
         </div>
       </div>
     </section>
