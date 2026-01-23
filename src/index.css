@@ -245,6 +245,19 @@
     0% { background-position: -200% 0; }
     100% { background-position: 200% 0; }
   }
+  
+  /* Ken Burns zoom animation for hero backdrop */
+  @keyframes ken-burns {
+    0% { 
+      transform: scale(1); 
+    }
+    50% { 
+      transform: scale(1.08); 
+    }
+    100% { 
+      transform: scale(1); 
+    }
+  }
 
   .animate-spotlight-left { animation: spotlight-left 4s ease-in-out infinite; }
   .animate-spotlight-right { animation: spotlight-right 4s ease-in-out infinite; }
@@ -256,5 +269,8 @@
     background: linear-gradient(90deg, transparent 0%, hsla(42, 85%, 52%, 0.3) 50%, transparent 100%);
     background-size: 200% 100%;
     animation: shimmer 3s ease-in-out infinite;
+  }
+  .animate-ken-burns { 
+    animation: ken-burns 25s ease-in-out infinite; 
   }
 }
