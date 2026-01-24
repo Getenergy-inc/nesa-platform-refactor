@@ -1,0 +1,341 @@
+import { useState, useMemo } from "react";
+import { useQuery } from "@tanstack/react-query";
+import { Link } from "react-router-dom";
+import { Search, Users, Award, Building2, MapPin, Filter } from "lucide-react";
+import { supabase } from "@/integrations/supabase/client";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import { Card, CardContent } from "@/components/ui/card";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Skeleton } from "@/components/ui/skeleton";
+import { NESAHeader } from "@/components/nesa/NESAHeader";
+import { NESAFooter } from "@/components/nesa/NESAFooter";
+
+interface Nominee {
+  id: string;
+  name: string;
+  slug: string;
+  title: string | null;
+  organization: string | null;
+  bio: string | null;
+  photo_url: string | null;
+  status: string;
+  is_platinum: boolean;
+  public_votes: number;
+  subcategories: {
+    name: string;
+    slug: string;
+    categories: {
+      id: string;
+      name: string;
+      slug: string;
+    };
+  };
+  chapters?: {
+    name: string;
+    region: string | null;
+  } | null;
+}
+
+interface Category {
+  id: string;
+  name: string;
+  slug: string;
+}
+
+export default function Nominees() {
+  const [searchQuery, setSearchQuery] = useState("");
+  const [selectedCategory, setSelectedCategory] = useState<string>("all");
+
+  // Fetch categories
+  const { data: categories = [] } = useQuery({
+    queryKey: ["categories"],
+    queryFn: async () => {
+      const { data, error } = await supabase
+        .from("categories")
+        .select("id, name, slug")
+        .eq("is_active", true)
+        .order("display_order");
+      if (error) throw error;
+      return data as Category[];
+    },
+  });
+
+  // Fetch approved nominees
+  const { data: nominees = [], isLoading } = useQuery({
+    queryKey: ["nominees-directory"],
+    queryFn: async () => {
+      const { data, error } = await supabase
+        .from("nominees")
+        .select(`
+          id,
+          name,
+          slug,
+          title,
+          organization,
+          bio,
+          photo_url,
+          status,
+          is_platinum,
+          public_votes,
+          subcategories!inner(
+            name,
+            slug,
+            categories!inner(id, name, slug),
+            chapters(name, region)
+          ),
+          seasons!inner(is_active)
+        `)
+        .eq("seasons.is_active", true)
+        .in("status", ["approved", "platinum"])
+        .order("name");
+
+      if (error) throw error;
+      return (data || []).map((n: any) => ({
+        ...n,
+        subcategories: n.subcategories,
+        chapters: n.subcategories?.chapters || null,
+      })) as Nominee[];
+    },
+  });
+
+  // Filter nominees
+  const filteredNominees = useMemo(() => {
+    return nominees.filter((nominee) => {
+      const matchesSearch =
+        searchQuery === "" ||
+        nominee.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        nominee.organization?.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        nominee.title?.toLowerCase().includes(searchQuery.toLowerCase());
+
+      const matchesCategory =
+        selectedCategory === "all" ||
+        nominee.subcategories?.categories?.id === selectedCategory;
+
+      return matchesSearch && matchesCategory;
+    });
+  }, [nominees, searchQuery, selectedCategory]);
+
+  const getInitials = (name: string) => {
+    return name
+      .split(" ")
+      .map((n) => n[0])
+      .join("")
+      .toUpperCase()
+      .slice(0, 2);
+  };
+
+  return (
+    <div className="min-h-screen bg-charcoal">
+      <NESAHeader />
+
+      {/* Hero Section */}
+      <section className="relative pt-24 pb-16 bg-gradient-to-b from-charcoal via-charcoal/95 to-charcoal">
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-gold/5 via-transparent to-transparent" />
+        <div className="container mx-auto px-4 relative z-10">
+          <div className="max-w-3xl mx-auto text-center">
+            <Badge className="mb-4 bg-gold/20 text-gold border-gold/30">
+              <Users className="w-3 h-3 mr-1" />
+              Education Champions Directory
+            </Badge>
+            <h1 className="font-display text-4xl md:text-5xl lg:text-6xl text-ivory mb-4">
+              Meet Our <span className="text-gold">Nominees</span>
+            </h1>
+            <p className="text-lg text-ivory/70 mb-8">
+              Discover the remarkable educators, innovators, and institutions transforming education across Africa.
+            </p>
+
+            {/* Search and Filters */}
+            <div className="flex flex-col sm:flex-row gap-4 max-w-2xl mx-auto">
+              <div className="relative flex-1">
+                <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-ivory/40" />
+                <Input
+                  placeholder="Search nominees by name, organization..."
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  className="pl-10 bg-charcoal-light border-gold/20 text-ivory placeholder:text-ivory/40 focus:border-gold"
+                />
+              </div>
+              <Select value={selectedCategory} onValueChange={setSelectedCategory}>
+                <SelectTrigger className="w-full sm:w-[200px] bg-charcoal-light border-gold/20 text-ivory">
+                  <Filter className="w-4 h-4 mr-2 text-gold" />
+                  <SelectValue placeholder="All Categories" />
+                </SelectTrigger>
+                <SelectContent className="bg-charcoal-light border-gold/20">
+                  <SelectItem value="all" className="text-ivory hover:bg-gold/10">
+                    All Categories
+                  </SelectItem>
+                  {categories.map((cat) => (
+                    <SelectItem
+                      key={cat.id}
+                      value={cat.id}
+                      className="text-ivory hover:bg-gold/10"
+                    >
+                      {cat.name}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Stats Strip */}
+      <section className="border-y border-gold/10 bg-charcoal-light/50">
+        <div className="container mx-auto px-4 py-6">
+          <div className="flex flex-wrap justify-center gap-8 md:gap-16">
+            <div className="text-center">
+              <div className="text-3xl font-bold text-gold">{nominees.length}</div>
+              <div className="text-sm text-ivory/60">Total Nominees</div>
+            </div>
+            <div className="text-center">
+              <div className="text-3xl font-bold text-gold">
+                {nominees.filter((n) => n.is_platinum).length}
+              </div>
+              <div className="text-sm text-ivory/60">Platinum Verified</div>
+            </div>
+            <div className="text-center">
+              <div className="text-3xl font-bold text-gold">{categories.length}</div>
+              <div className="text-sm text-ivory/60">Award Categories</div>
+            </div>
+            <div className="text-center">
+              <div className="text-3xl font-bold text-gold">
+                {filteredNominees.length}
+              </div>
+              <div className="text-sm text-ivory/60">Showing</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Nominees Grid */}
+      <section className="py-16">
+        <div className="container mx-auto px-4">
+          {isLoading ? (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+              {[...Array(8)].map((_, i) => (
+                <Card key={i} className="bg-charcoal-light border-gold/10">
+                  <CardContent className="p-6">
+                    <div className="flex flex-col items-center text-center">
+                      <Skeleton className="w-20 h-20 rounded-full mb-4" />
+                      <Skeleton className="h-5 w-32 mb-2" />
+                      <Skeleton className="h-4 w-24 mb-4" />
+                      <Skeleton className="h-3 w-full mb-2" />
+                      <Skeleton className="h-3 w-3/4" />
+                    </div>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+          ) : filteredNominees.length === 0 ? (
+            <div className="text-center py-16">
+              <Users className="w-16 h-16 text-ivory/20 mx-auto mb-4" />
+              <h3 className="text-xl font-semibold text-ivory mb-2">No Nominees Found</h3>
+              <p className="text-ivory/60 mb-6">
+                {searchQuery || selectedCategory !== "all"
+                  ? "Try adjusting your search or filter criteria."
+                  : "Check back soon as nominations are being reviewed."}
+              </p>
+              {(searchQuery || selectedCategory !== "all") && (
+                <Button
+                  variant="outline"
+                  onClick={() => {
+                    setSearchQuery("");
+                    setSelectedCategory("all");
+                  }}
+                  className="border-gold/30 text-gold hover:bg-gold/10"
+                >
+                  Clear Filters
+                </Button>
+              )}
+            </div>
+          ) : (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+              {filteredNominees.map((nominee) => (
+                <NomineeCard key={nominee.id} nominee={nominee} getInitials={getInitials} />
+              ))}
+            </div>
+          )}
+        </div>
+      </section>
+
+      <NESAFooter />
+    </div>
+  );
+}
+
+function NomineeCard({
+  nominee,
+  getInitials,
+}: {
+  nominee: Nominee;
+  getInitials: (name: string) => string;
+}) {
+  return (
+    <Link to={`/nominees/${nominee.slug}`}>
+      <Card className="group bg-charcoal-light border-gold/10 hover:border-gold/30 transition-all duration-300 hover:shadow-lg hover:shadow-gold/5 h-full">
+        <CardContent className="p-6">
+          <div className="flex flex-col items-center text-center">
+            {/* Avatar */}
+            <div className="relative mb-4">
+              <Avatar className="w-20 h-20 border-2 border-gold/20 group-hover:border-gold/40 transition-colors">
+                <AvatarImage src={nominee.photo_url || undefined} alt={nominee.name} />
+                <AvatarFallback className="bg-gold/20 text-gold text-lg font-semibold">
+                  {getInitials(nominee.name)}
+                </AvatarFallback>
+              </Avatar>
+              {nominee.is_platinum && (
+                <div className="absolute -bottom-1 -right-1 bg-gold rounded-full p-1">
+                  <Award className="w-4 h-4 text-charcoal" />
+                </div>
+              )}
+            </div>
+
+            {/* Name & Title */}
+            <h3 className="font-semibold text-ivory group-hover:text-gold transition-colors line-clamp-1">
+              {nominee.name}
+            </h3>
+            {nominee.title && (
+              <p className="text-sm text-ivory/60 line-clamp-1 mt-1">{nominee.title}</p>
+            )}
+
+            {/* Organization */}
+            {nominee.organization && (
+              <div className="flex items-center gap-1 mt-2 text-xs text-ivory/50">
+                <Building2 className="w-3 h-3" />
+                <span className="line-clamp-1">{nominee.organization}</span>
+              </div>
+            )}
+
+            {/* Category Badge */}
+            <Badge
+              variant="outline"
+              className="mt-3 border-gold/20 text-gold/80 text-xs"
+            >
+              {nominee.subcategories?.categories?.name || "Uncategorized"}
+            </Badge>
+
+            {/* Region if available */}
+            {nominee.chapters?.region && (
+              <div className="flex items-center gap-1 mt-2 text-xs text-ivory/40">
+                <MapPin className="w-3 h-3" />
+                <span>{nominee.chapters.region} Africa</span>
+              </div>
+            )}
+
+            {/* Votes */}
+            <div className="mt-4 pt-4 border-t border-gold/10 w-full">
+              <div className="flex items-center justify-center gap-2 text-sm">
+                <span className="text-gold font-semibold">{nominee.public_votes}</span>
+                <span className="text-ivory/50">votes</span>
+              </div>
+            </div>
+          </div>
+        </CardContent>
+      </Card>
+    </Link>
+  );
+}
