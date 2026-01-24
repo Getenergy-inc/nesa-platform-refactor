@@ -48,6 +48,12 @@ import Chapters from "./pages/Chapters";
 import Volunteer from "./pages/Volunteer";
 import Contact from "./pages/Contact";
 import Vote from "./pages/Vote";
+import FAQ from "./pages/FAQ";
+import Nominees from "./pages/Nominees";
+import NomineeProfile from "./pages/NomineeProfile";
+import Endorsements from "./pages/Endorsements";
+import Press from "./pages/Press";
+import Policies from "./pages/Policies";
 
 const queryClient = new QueryClient();
 
@@ -103,9 +109,16 @@ const App = () => (
                 <Route path="/donate" element={<Donate />} />
                 <Route path="/judges" element={<Judges />} />
                 <Route path="/partners" element={<Partners />} />
+                <Route path="/endorsements" element={<Endorsements />} />
                 <Route path="/chapters" element={<Chapters />} />
                 <Route path="/volunteer" element={<Volunteer />} />
                 <Route path="/contact" element={<Contact />} />
+                <Route path="/faq" element={<FAQ />} />
+                <Route path="/nominees" element={<Nominees />} />
+                <Route path="/nominees/:slug" element={<NomineeProfile />} />
+                <Route path="/press" element={<Press />} />
+                <Route path="/policies" element={<Policies />} />
+                <Route path="/policies/:slug" element={<Policies />} />
                 
                 {/* Utility */}
                 <Route path="/unauthorized" element={<Unauthorized />} />
