@@ -1,4 +1,5 @@
 import { Toaster } from "@/components/ui/toaster";
+import Nominees from "./pages/Nominees";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
@@ -94,6 +95,7 @@ const App = () => (
                 
                 {/* User Actions */}
                 <Route path="/nominate" element={<Nominate />} />
+                <Route path="/nominees" element={<Nominees />} />
                 <Route path="/vote" element={<Vote />} />
                 <Route path="/dashboard" element={<Dashboard />} />
                 <Route path="/dashboard/nominations" element={<Dashboard />} />
