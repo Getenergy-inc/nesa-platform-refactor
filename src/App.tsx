@@ -1,6 +1,7 @@
 import { Toaster } from "@/components/ui/toaster";
 import Nominees from "./pages/Nominees";
 import NomineeProfile from "./pages/NomineeProfile";
+import CertificateVerify from "./pages/CertificateVerify";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
@@ -82,6 +83,7 @@ const App = () => (
                 <Route path="/awards/gold" element={<GoldAward />} />
                 <Route path="/awards/blue-garnet" element={<BlueGarnetAward />} />
                 <Route path="/awards/winners" element={<Winners />} />
+                <Route path="/certificates/verify" element={<CertificateVerify />} />
                 
                 {/* Media */}
                 <Route path="/media" element={<MediaHub />} />
