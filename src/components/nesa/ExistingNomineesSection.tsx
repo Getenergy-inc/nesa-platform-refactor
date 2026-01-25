@@ -1,12 +1,15 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
+import { useAuth } from "@/contexts/AuthContext";
+import { renominateNominee } from "@/lib/api";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Skeleton } from "@/components/ui/skeleton";
+import { toast } from "sonner";
 import { 
   Users, 
   Eye, 
@@ -14,7 +17,9 @@ import {
   ChevronUp, 
   Award, 
   ExternalLink,
-  UserPlus
+  UserPlus,
+  Loader2,
+  Heart
 } from "lucide-react";
 
 interface ExistingNominee {
@@ -40,9 +45,11 @@ export function ExistingNomineesSection({
   subcategoryName,
   categoryName 
 }: ExistingNomineesSectionProps) {
+  const { user } = useAuth();
   const [nominees, setNominees] = useState<ExistingNominee[]>([]);
   const [loading, setLoading] = useState(true);
   const [expanded, setExpanded] = useState(false);
+  const [renominatingId, setRenominatingId] = useState<string | null>(null);
 
   useEffect(() => {
     async function fetchNominees() {
@@ -88,6 +95,42 @@ export function ExistingNomineesSection({
       .join("")
       .toUpperCase()
       .slice(0, 2);
+  };
+
+  const handleRenominate = async (nominee: ExistingNominee) => {
+    if (!user) {
+      toast.error("Please log in to endorse", {
+        action: {
+          label: "Log In",
+          onClick: () => window.location.href = "/auth/login",
+        },
+      });
+      return;
+    }
+
+    setRenominatingId(nominee.id);
+    try {
+      await renominateNominee(nominee.id, `Quick endorsement from nomination page`);
+      toast.success(`Endorsed ${nominee.name}!`, {
+        description: "Your support has been recorded.",
+      });
+      // Update local state to reflect the change
+      setNominees(prev => prev.map(n => 
+        n.id === nominee.id 
+          ? { ...n, renomination_count: n.renomination_count + 1 }
+          : n
+      ));
+    } catch (error: any) {
+      if (error.message?.includes("200")) {
+        toast.error("Maximum endorsement limit reached");
+      } else {
+        toast.error("Failed to endorse", {
+          description: error.message || "Please try again",
+        });
+      }
+    } finally {
+      setRenominatingId(null);
+    }
   };
 
   if (loading) {
@@ -195,14 +238,30 @@ export function ExistingNomineesSection({
                   </div>
                 </div>
 
-                <Link 
-                  to={`/nominees/${nominee.slug}`}
-                  className="opacity-0 group-hover:opacity-100 transition-opacity"
-                >
-                  <Button size="sm" variant="ghost" className="h-8 px-2">
-                    <ExternalLink className="h-3.5 w-3.5" />
+                <div className="flex items-center gap-1 shrink-0">
+                  <Button 
+                    size="sm" 
+                    variant="ghost" 
+                    className="h-8 px-2 text-primary hover:text-primary hover:bg-primary/10"
+                    onClick={() => handleRenominate(nominee)}
+                    disabled={renominatingId === nominee.id}
+                    title={user ? "Endorse this nominee" : "Log in to endorse"}
+                  >
+                    {renominatingId === nominee.id ? (
+                      <Loader2 className="h-3.5 w-3.5 animate-spin" />
+                    ) : (
+                      <Heart className="h-3.5 w-3.5" />
+                    )}
                   </Button>
-                </Link>
+                  <Link 
+                    to={`/nominees/${nominee.slug}`}
+                    className="opacity-0 group-hover:opacity-100 transition-opacity"
+                  >
+                    <Button size="sm" variant="ghost" className="h-8 px-2">
+                      <ExternalLink className="h-3.5 w-3.5" />
+                    </Button>
+                  </Link>
+                </div>
               </div>
             ))}
           </div>
