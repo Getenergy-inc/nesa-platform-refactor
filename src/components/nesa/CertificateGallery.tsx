@@ -5,13 +5,14 @@ import { Award, ZoomIn, Shield, Clock, Star } from "lucide-react";
 
 import platinumCertificate from "@/assets/certificates/platinum-certificate.jpeg";
 import goldCertificate from "@/assets/certificates/gold-certificate.jpeg";
+import blueGarnetCertificate from "@/assets/certificates/blue-garnet-certificate.jpeg";
 import iconCertificate from "@/assets/certificates/icon-certificate.jpeg";
 
 interface CertificateInfo {
   id: string;
   name: string;
   image: string;
-  tier: "platinum" | "gold" | "icon";
+  tier: "platinum" | "gold" | "blue-garnet" | "icon";
   validity: string;
   description: string;
   features: string[];
@@ -47,6 +48,20 @@ const certificates: CertificateInfo[] = [
     ]
   },
   {
+    id: "blue-garnet",
+    name: "Blue Garnet Certificate",
+    image: blueGarnetCertificate,
+    tier: "blue-garnet",
+    validity: "Lifetime",
+    description: "For Achieving Education Excellence Across Africa",
+    features: [
+      "Highest competitive honor",
+      "60% Jury / 40% Public scoring",
+      "9 continental winners",
+      "QR verification enabled"
+    ]
+  },
+  {
     id: "icon",
     name: "Africa Education Icon",
     image: iconCertificate,
@@ -75,11 +90,17 @@ const tierStyles = {
     badge: "bg-gold text-charcoal",
     text: "text-amber-800"
   },
-  icon: {
-    bg: "bg-gradient-to-br from-blue-100 to-indigo-200",
-    border: "border-blue-400/50",
+  "blue-garnet": {
+    bg: "bg-gradient-to-br from-blue-200 to-slate-300",
+    border: "border-blue-500/50",
     badge: "bg-blue-700 text-white",
     text: "text-blue-800"
+  },
+  icon: {
+    bg: "bg-gradient-to-br from-indigo-100 to-blue-200",
+    border: "border-indigo-400/50",
+    badge: "bg-indigo-700 text-white",
+    text: "text-indigo-800"
   }
 };
 
@@ -185,7 +206,7 @@ export function CertificateGallery() {
           </p>
         </div>
 
-        <div className="grid md:grid-cols-3 gap-6 lg:gap-8">
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
           {certificates.map((cert) => (
             <CertificateCard key={cert.id} cert={cert} />
           ))}
