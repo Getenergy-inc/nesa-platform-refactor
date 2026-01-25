@@ -10,7 +10,12 @@ import {
   UserCheck,
   AlertTriangle,
   CheckCircle2,
-  Mail
+  Mail,
+  Award,
+  Download,
+  QrCode,
+  Clock,
+  RefreshCw
 } from "lucide-react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -86,6 +91,13 @@ export default function Policies() {
                 >
                   <Scale className="w-4 h-4 mr-2" />
                   Governance
+                </TabsTrigger>
+                <TabsTrigger 
+                  value="certificates" 
+                  className="flex-1 min-w-[140px] data-[state=active]:bg-gold data-[state=active]:text-charcoal"
+                >
+                  <Award className="w-4 h-4 mr-2" />
+                  Certificates
                 </TabsTrigger>
               </TabsList>
 
@@ -344,6 +356,139 @@ export default function Policies() {
                     <p className="text-muted-foreground mt-4">
                       This ensures award outcomes reflect genuine merit, not financial influence.
                     </p>
+                  </PolicyBlock>
+                </PolicySection>
+              </TabsContent>
+
+              {/* Certificate Policies */}
+              <TabsContent value="certificates" className="space-y-6">
+                <PolicySection
+                  icon={Award}
+                  title="Certificate Policies"
+                  description="Guidelines for downloading, verifying, and maintaining your NESA certificates"
+                >
+                  <PolicyBlock title="1. Platinum Certificate Download" icon={Download}>
+                    <p className="text-muted-foreground mb-4">
+                      To download your Platinum Certificate, follow these steps:
+                    </p>
+                    <ol className="list-decimal pl-6 space-y-3 text-muted-foreground">
+                      <li>
+                        <strong>Log in to your account:</strong> Access your dashboard at{" "}
+                        <span className="text-primary font-medium">nesa.africa/dashboard</span>
+                      </li>
+                      <li>
+                        <strong>Navigate to Certificates:</strong> Click on the "My Certificates" section in your dashboard
+                      </li>
+                      <li>
+                        <strong>Select your certificate:</strong> Find your Platinum Certificate from the list
+                      </li>
+                      <li>
+                        <strong>Download:</strong> Click the "Download PDF" button to save your certificate
+                      </li>
+                    </ol>
+                    <div className="mt-4 p-4 bg-primary/5 rounded-lg border border-primary/20">
+                      <p className="text-sm text-foreground flex items-start gap-2">
+                        <CheckCircle2 className="w-4 h-4 text-primary mt-0.5 shrink-0" />
+                        <span>Certificates are available for download immediately after approval by the National Review Committee (NRC).</span>
+                      </p>
+                    </div>
+                  </PolicyBlock>
+
+                  <PolicyBlock title="2. Certificate Validity Periods" icon={Clock}>
+                    <p className="text-muted-foreground mb-4">
+                      NESA certificates have different validity periods based on award tier:
+                    </p>
+                    <div className="space-y-3">
+                      <div className="flex items-start gap-3 p-3 bg-muted/50 rounded-lg">
+                        <Badge className="bg-amber-500/20 text-amber-600 border-amber-500/30 shrink-0">Platinum</Badge>
+                        <div>
+                          <p className="font-medium text-foreground">1 Year Validity</p>
+                          <p className="text-sm text-muted-foreground">Renewable annually upon continued excellence demonstration</p>
+                        </div>
+                      </div>
+                      <div className="flex items-start gap-3 p-3 bg-muted/50 rounded-lg">
+                        <Badge className="bg-yellow-500/20 text-yellow-600 border-yellow-500/30 shrink-0">Gold</Badge>
+                        <div>
+                          <p className="font-medium text-foreground">Season-Based Recognition</p>
+                          <p className="text-sm text-muted-foreground">Valid for the award season year</p>
+                        </div>
+                      </div>
+                      <div className="flex items-start gap-3 p-3 bg-muted/50 rounded-lg">
+                        <Badge className="bg-blue-500/20 text-blue-600 border-blue-500/30 shrink-0">Blue Garnet</Badge>
+                        <div>
+                          <p className="font-medium text-foreground">Lifetime Recognition</p>
+                          <p className="text-sm text-muted-foreground">Permanent honor for highest achievement</p>
+                        </div>
+                      </div>
+                      <div className="flex items-start gap-3 p-3 bg-muted/50 rounded-lg">
+                        <Badge className="bg-purple-500/20 text-purple-600 border-purple-500/30 shrink-0">Icon</Badge>
+                        <div>
+                          <p className="font-medium text-foreground">Lifetime Recognition</p>
+                          <p className="text-sm text-muted-foreground">Permanent honor for transformational impact</p>
+                        </div>
+                      </div>
+                    </div>
+                  </PolicyBlock>
+
+                  <PolicyBlock title="3. Certificate Verification" icon={QrCode}>
+                    <p className="text-muted-foreground mb-4">
+                      All NESA certificates include QR code authentication for global verification:
+                    </p>
+                    <ul className="list-disc pl-6 space-y-2 text-muted-foreground">
+                      <li>Each certificate has a unique verification code</li>
+                      <li>Scan the QR code or visit <span className="text-primary font-medium">/certificates/verify</span></li>
+                      <li>Enter the verification code to confirm authenticity</li>
+                      <li>Verification displays nominee name, award tier, and validity status</li>
+                    </ul>
+                    <div className="mt-4 p-4 bg-destructive/10 rounded-lg border border-destructive/20">
+                      <p className="text-sm text-foreground flex items-start gap-2">
+                        <AlertTriangle className="w-4 h-4 text-destructive mt-0.5 shrink-0" />
+                        <span>Report any fraudulent certificates to <strong>governance@nesa.africa</strong></span>
+                      </p>
+                    </div>
+                  </PolicyBlock>
+
+                  <PolicyBlock title="4. Certificate Renewal (Platinum)" icon={RefreshCw}>
+                    <p className="text-muted-foreground mb-4">
+                      Platinum certificates require annual renewal. Here's the process:
+                    </p>
+                    <ul className="list-disc pl-6 space-y-2 text-muted-foreground">
+                      <li><strong>45-day reminder:</strong> You'll receive an email notification before expiry</li>
+                      <li><strong>Renewal application:</strong> Submit updated evidence of continued excellence</li>
+                      <li><strong>NRC review:</strong> Your renewal is reviewed by the National Review Committee</li>
+                      <li><strong>New certificate:</strong> Upon approval, a new 1-year certificate is issued</li>
+                    </ul>
+                    <div className="mt-4 p-4 bg-primary/5 rounded-lg border border-primary/20">
+                      <p className="text-sm text-foreground flex items-start gap-2">
+                        <CheckCircle2 className="w-4 h-4 text-primary mt-0.5 shrink-0" />
+                        <span>Renewal is free of charge. Simply demonstrate continued commitment to education excellence.</span>
+                      </p>
+                    </div>
+                  </PolicyBlock>
+
+                  <PolicyBlock title="5. Certificate Branding Policy" icon={Shield}>
+                    <p className="text-muted-foreground mb-4">
+                      To maintain brand neutrality and educational integrity:
+                    </p>
+                    <ul className="list-disc pl-6 space-y-2 text-muted-foreground">
+                      <li>NESA branding is <strong>not</strong> displayed on certificates</li>
+                      <li>Certificates focus on the recipient's achievement and verification</li>
+                      <li>Sponsor logos are never included on certificates</li>
+                      <li>This ensures recognition is merit-based, not commercially influenced</li>
+                    </ul>
+                  </PolicyBlock>
+
+                  <PolicyBlock title="6. Download Troubleshooting" icon={AlertTriangle}>
+                    <p className="text-muted-foreground mb-4">
+                      If you're unable to download your certificate:
+                    </p>
+                    <ul className="list-disc pl-6 space-y-2 text-muted-foreground">
+                      <li><strong>Check approval status:</strong> Ensure your nomination has been approved by NRC</li>
+                      <li><strong>Verify email:</strong> Confirm your email address is verified in account settings</li>
+                      <li><strong>Browser compatibility:</strong> Try using Chrome, Firefox, or Safari</li>
+                      <li><strong>Disable blockers:</strong> Temporarily disable popup blockers or ad blockers</li>
+                      <li><strong>Contact support:</strong> Email <span className="text-primary font-medium">support@nesa.africa</span> with your nominee ID</li>
+                    </ul>
                   </PolicyBlock>
                 </PolicySection>
               </TabsContent>
