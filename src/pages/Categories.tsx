@@ -1,5 +1,5 @@
 import { useState, useMemo } from "react";
-import { Link } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import { useSeason } from "@/contexts/SeasonContext";
 import { useQuery } from "@tanstack/react-query";
@@ -9,74 +9,50 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 import { Skeleton } from "@/components/ui/skeleton";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
 import { 
   Award, ChevronDown, ChevronRight, Search, ArrowLeft,
-  GraduationCap, BookOpen, Cpu, Heart, Building, Crown,
-  Users, Globe, Star, Music, Film, Trophy, Briefcase,
-  Palette, Stethoscope, Menu
+  Building2, Building, Laptop, Radio, Heart, Users, FlaskConical,
+  Palette, MapPin, BookOpen, Microscope, Church, Moon, Landmark,
+  Globe, Plane, Crown, Trophy
 } from "lucide-react";
+import {
+  NESA_CATEGORIES,
+  TIER_INFO,
+  type CategoryScope,
+  type AwardTier,
+} from "@/config/nesaCategories";
 
-// Icon mapping
+// Icon mapping for category icons
 const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
-  GraduationCap,
-  BookOpen,
-  Cpu,
-  Heart,
+  Building2,
   Building,
-  Crown,
+  Laptop,
+  Radio,
+  Heart,
   Users,
-  Globe,
-  Star,
-  Award,
-  Music,
-  Film,
-  Trophy,
-  Briefcase,
+  FlaskConical,
   Palette,
-  Stethoscope,
+  MapPin,
+  BookOpen,
+  Microscope,
+  Church,
+  Moon,
+  Landmark,
+  Globe,
+  Plane,
+  Crown,
+  Award,
+  Trophy,
 };
 
-// Tier configuration matching NESA award structure
-const tierConfig: Record<string, { name: string; color: string; votingMethod: string; description: string }> = {
-  platinum: {
-    name: "Platinum",
-    color: "#E5E4E2",
-    votingMethod: "NRC Selection",
-    description: "Highest honor, NRC-selected nominees",
-  },
-  gold: {
-    name: "Gold",
-    color: "#FFD700",
-    votingMethod: "100% Public Voting",
-    description: "Public voting determines winners",
-  },
-  "blue-garnet": {
-    name: "Blue Garnet",
-    color: "#1E3A5F",
-    votingMethod: "40% Public + 60% Jury",
-    description: "Combined jury and public evaluation",
-  },
-  icon: {
-    name: "Icon",
-    color: "#9B59B6",
-    votingMethod: "Jury Selection",
-    description: "Lifetime achievement recognition",
-  },
-};
-
-// Category to tier mapping (based on NESA structure)
-const categoryTierMap: Record<string, string> = {
-  "education": "gold",
-  "leadership": "platinum",
-  "technology": "blue-garnet",
-  "humanitarian": "gold",
-  "health": "gold",
-  "business": "blue-garnet",
-  "arts-culture": "gold",
-  "sports": "gold",
-  "music": "gold",
-  "film-television": "gold",
+// Scope badge config
+const scopeBadgeConfig: Record<CategoryScope, { label: string; className: string }> = {
+  AFRICA_REGIONAL: { label: "Africa Regional", className: "bg-green-100 text-green-800 border-green-300" },
+  NIGERIA: { label: "Nigeria", className: "bg-emerald-100 text-emerald-800 border-emerald-300" },
+  INTERNATIONAL: { label: "International", className: "bg-blue-100 text-blue-800 border-blue-300" },
+  ICON: { label: "Lifetime Achievement", className: "bg-purple-100 text-purple-800 border-purple-300" },
 };
 
 interface Category {
@@ -97,10 +73,39 @@ interface Subcategory {
   display_order: number | null;
 }
 
+// Get tier info based on category slug
+function getCategoryTierInfo(categorySlug: string): { tier: AwardTier; info: typeof TIER_INFO["platinum"] } | null {
+  const configCategory = NESA_CATEGORIES.find((c) => c.slug === categorySlug);
+  if (!configCategory) return null;
+  
+  // Determine primary tier based on tier applicability
+  if (configCategory.tierApplicability.icon) {
+    return { tier: "icon", info: TIER_INFO["icon"] };
+  }
+  if (configCategory.tierApplicability.blueGarnet) {
+    return { tier: "blue-garnet", info: TIER_INFO["blue-garnet"] };
+  }
+  if (configCategory.tierApplicability.gold) {
+    return { tier: "gold", info: TIER_INFO["gold"] };
+  }
+  if (configCategory.tierApplicability.platinum) {
+    return { tier: "platinum", info: TIER_INFO["platinum"] };
+  }
+  return { tier: "gold", info: TIER_INFO["gold"] };
+}
+
+// Get scope from category slug
+function getCategoryScope(categorySlug: string): CategoryScope {
+  const configCategory = NESA_CATEGORIES.find((c) => c.slug === categorySlug);
+  return configCategory?.scope || "NIGERIA";
+}
+
 export default function Categories() {
   const { currentEdition } = useSeason();
+  const [searchParams] = useSearchParams();
   const [searchQuery, setSearchQuery] = useState("");
   const [expandedCategories, setExpandedCategories] = useState<Set<string>>(new Set());
+  const [activeTab, setActiveTab] = useState<string>(searchParams.get("view") || "africa");
 
   // Fetch categories
   const { data: categories, isLoading: loadingCategories } = useQuery({
@@ -142,23 +147,52 @@ export default function Categories() {
     }, {} as Record<string, Subcategory[]>);
   }, [subcategories]);
 
-  // Filter categories and subcategories by search
+  // Filter categories by scope (tab) and search
   const filteredCategories = useMemo(() => {
     if (!categories) return [];
-    if (!searchQuery.trim()) return categories;
     
-    const query = searchQuery.toLowerCase();
-    return categories.filter((cat) => {
-      const categoryMatch = cat.name.toLowerCase().includes(query) || 
-                           cat.description?.toLowerCase().includes(query);
-      const subs = subcategoriesByCategory[cat.id] || [];
-      const subMatch = subs.some((sub) => 
-        sub.name.toLowerCase().includes(query) || 
-        sub.description?.toLowerCase().includes(query)
-      );
-      return categoryMatch || subMatch;
+    // First filter by tab (scope)
+    let filtered = categories.filter((cat) => {
+      const scope = getCategoryScope(cat.slug);
+      if (activeTab === "africa") {
+        return scope === "AFRICA_REGIONAL" || scope === "INTERNATIONAL" || scope === "ICON";
+      } else if (activeTab === "nigeria") {
+        return scope === "NIGERIA";
+      }
+      return true;
     });
-  }, [categories, subcategoriesByCategory, searchQuery]);
+
+    // Then filter by search
+    if (searchQuery.trim()) {
+      const query = searchQuery.toLowerCase();
+      filtered = filtered.filter((cat) => {
+        const categoryMatch = cat.name.toLowerCase().includes(query) || 
+                             cat.description?.toLowerCase().includes(query);
+        const subs = subcategoriesByCategory[cat.id] || [];
+        const subMatch = subs.some((sub) => 
+          sub.name.toLowerCase().includes(query) || 
+          sub.description?.toLowerCase().includes(query)
+        );
+        return categoryMatch || subMatch;
+      });
+    }
+
+    return filtered;
+  }, [categories, subcategoriesByCategory, searchQuery, activeTab]);
+
+  // Count categories by scope
+  const categoryCounts = useMemo(() => {
+    if (!categories) return { africa: 0, nigeria: 0, total: 0 };
+    
+    let africa = 0, nigeria = 0;
+    categories.forEach((cat) => {
+      const scope = getCategoryScope(cat.slug);
+      if (scope === "NIGERIA") nigeria++;
+      else africa++;
+    });
+    
+    return { africa, nigeria, total: categories.length };
+  }, [categories]);
 
   // Toggle category expansion
   const toggleCategory = (categoryId: string) => {
@@ -173,19 +207,14 @@ export default function Categories() {
     });
   };
 
-  // Expand all that match search
   const expandAll = () => {
-    if (categories) {
-      setExpandedCategories(new Set(categories.map((c) => c.id)));
+    if (filteredCategories) {
+      setExpandedCategories(new Set(filteredCategories.map((c) => c.id)));
     }
   };
 
   const collapseAll = () => {
     setExpandedCategories(new Set());
-  };
-
-  const getTier = (categorySlug: string) => {
-    return tierConfig[categoryTierMap[categorySlug] || "gold"];
   };
 
   const getIcon = (iconName: string | null) => {
@@ -199,7 +228,7 @@ export default function Categories() {
     <>
       <Helmet>
         <title>Award Categories | {currentEdition.name}</title>
-        <meta name="description" content="Explore all NESA-Africa award categories and subcategories. Nominate excellence across education, leadership, technology, and more." />
+        <meta name="description" content="Explore all 17 NESA-Africa award categories and 138+ subcategories. Recognizing excellence across education, CSR, technology, and social impact across Africa." />
       </Helmet>
 
       <div className="min-h-screen bg-background">
@@ -215,7 +244,7 @@ export default function Categories() {
               <div>
                 <h1 className="font-display text-lg font-bold">Award Categories</h1>
                 <p className="text-xs text-muted-foreground">
-                  {categories?.length || 0} categories • {totalSubcategories} subcategories
+                  {categoryCounts.total} categories • {totalSubcategories} subcategories
                 </p>
               </div>
             </div>
@@ -233,27 +262,40 @@ export default function Categories() {
           <div className="mb-8 text-center">
             <Badge className="mb-4 bg-primary/10 text-primary">{currentEdition.name}</Badge>
             <h2 className="mb-4 font-display text-3xl font-bold md:text-4xl">
-              Award Categories
+              17 Official Award Categories
             </h2>
             <p className="mx-auto max-w-2xl text-muted-foreground">
-              Explore our comprehensive categories recognizing excellence across education, 
-              leadership, technology, and social impact in Africa.
+              Celebrating excellence in education, corporate responsibility, technology, 
+              and social impact across the African continent.
             </p>
           </div>
 
           {/* Tier Legend */}
-          <div className="mb-8 flex flex-wrap justify-center gap-4">
-            {Object.entries(tierConfig).map(([key, tier]) => (
-              <div key={key} className="flex items-center gap-2 rounded-full border px-4 py-2">
-                <div 
-                  className="h-3 w-3 rounded-full" 
-                  style={{ backgroundColor: tier.color }} 
-                />
-                <span className="text-sm font-medium">{tier.name}</span>
+          <div className="mb-8 flex flex-wrap justify-center gap-3">
+            {Object.entries(TIER_INFO).map(([key, tier]) => (
+              <div 
+                key={key} 
+                className={`flex items-center gap-2 rounded-full border px-4 py-2 ${tier.bgColor} ${tier.borderColor}`}
+              >
+                <span className={`text-sm font-medium ${tier.color}`}>{tier.shortName}</span>
                 <span className="text-xs text-muted-foreground">({tier.votingMethod})</span>
               </div>
             ))}
           </div>
+
+          {/* Tabs for Africa First vs Nigeria */}
+          <Tabs value={activeTab} onValueChange={setActiveTab} className="mb-6">
+            <TabsList className="grid w-full max-w-md mx-auto grid-cols-2">
+              <TabsTrigger value="africa" className="flex items-center gap-2">
+                <Globe className="h-4 w-4" />
+                Africa First ({categoryCounts.africa})
+              </TabsTrigger>
+              <TabsTrigger value="nigeria" className="flex items-center gap-2">
+                <MapPin className="h-4 w-4" />
+                Nigeria ({categoryCounts.nigeria})
+              </TabsTrigger>
+            </TabsList>
+          </Tabs>
 
           {/* Search & Controls */}
           <div className="mb-6 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
@@ -299,9 +341,13 @@ export default function Categories() {
             <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
               {filteredCategories.map((category) => {
                 const Icon = getIcon(category.icon_name);
-                const tier = getTier(category.slug);
+                const tierInfo = getCategoryTierInfo(category.slug);
+                const scope = getCategoryScope(category.slug);
+                const scopeBadge = scopeBadgeConfig[scope];
                 const subs = subcategoriesByCategory[category.id] || [];
                 const isExpanded = expandedCategories.has(category.id);
+
+                const tier = tierInfo?.info || TIER_INFO["gold"];
 
                 return (
                   <Collapsible
@@ -310,28 +356,25 @@ export default function Categories() {
                     onOpenChange={() => toggleCategory(category.id)}
                   >
                     <Card className="overflow-hidden transition-all hover:shadow-lg">
-                      <div 
-                        className="h-1" 
-                        style={{ backgroundColor: tier.color }} 
-                      />
+                      <div className={`h-1 ${tier.bgColor.replace('bg-', 'bg-')}`} />
                       <CardHeader className="pb-2">
-                        <div className="flex items-start justify-between">
+                        <div className="flex items-start justify-between gap-2">
                           <div 
-                            className="flex h-12 w-12 items-center justify-center rounded-full"
-                            style={{ backgroundColor: `${tier.color}20` }}
+                            className={`flex h-12 w-12 items-center justify-center rounded-full ${tier.bgColor}`}
                           >
-                            <Icon className="h-6 w-6" style={{ color: tier.color }} />
+                            <Icon className={`h-6 w-6 ${tier.color}`} />
                           </div>
-                          <Badge 
-                            variant="outline" 
-                            className="text-xs"
-                            style={{ borderColor: tier.color, color: tier.color }}
-                          >
-                            {tier.name}
-                          </Badge>
+                          <div className="flex flex-col items-end gap-1">
+                            <Badge variant="outline" className={`text-xs ${scopeBadge.className}`}>
+                              {scopeBadge.label}
+                            </Badge>
+                            <Badge variant="outline" className={`text-xs ${tier.bgColor} ${tier.color} ${tier.borderColor}`}>
+                              {tier.shortName}
+                            </Badge>
+                          </div>
                         </div>
-                        <CardTitle className="font-display">{category.name}</CardTitle>
-                        <CardDescription>{category.description}</CardDescription>
+                        <CardTitle className="font-display text-base leading-tight">{category.name}</CardTitle>
+                        <CardDescription className="text-xs line-clamp-2">{category.description}</CardDescription>
                       </CardHeader>
                       <CardContent className="pt-0">
                         <div className="mb-3 flex items-center justify-between text-sm">
@@ -344,13 +387,13 @@ export default function Categories() {
                         </div>
                         
                         <CollapsibleTrigger asChild>
-                          <Button variant="ghost" className="w-full justify-between">
+                          <Button variant="ghost" className="w-full justify-between text-sm">
                             {isExpanded ? "Hide Subcategories" : "View Subcategories"}
                             <ChevronDown className={`h-4 w-4 transition-transform ${isExpanded ? "rotate-180" : ""}`} />
                           </Button>
                         </CollapsibleTrigger>
 
-                        <CollapsibleContent className="mt-3 space-y-2">
+                        <CollapsibleContent className="mt-3 space-y-2 max-h-64 overflow-y-auto">
                           {subs.length === 0 ? (
                             <p className="text-sm text-muted-foreground italic">
                               No subcategories available yet.
@@ -360,17 +403,12 @@ export default function Categories() {
                               <Link
                                 key={sub.id}
                                 to={`/nominate?subcategory=${sub.id}`}
-                                className="flex items-center justify-between rounded-lg border p-3 transition-colors hover:bg-muted"
+                                className="flex items-center justify-between rounded-lg border p-2 transition-colors hover:bg-muted"
                               >
-                                <div>
-                                  <p className="font-medium text-sm">{sub.name}</p>
-                                  {sub.description && (
-                                    <p className="text-xs text-muted-foreground line-clamp-1">
-                                      {sub.description}
-                                    </p>
-                                  )}
+                                <div className="flex-1 min-w-0">
+                                  <p className="font-medium text-sm truncate">{sub.name}</p>
                                 </div>
-                                <ChevronRight className="h-4 w-4 text-muted-foreground" />
+                                <ChevronRight className="h-4 w-4 text-muted-foreground flex-shrink-0" />
                               </Link>
                             ))
                           )}
@@ -382,6 +420,26 @@ export default function Categories() {
               })}
             </div>
           )}
+
+          {/* Summary Stats */}
+          <div className="mt-12 grid grid-cols-2 md:grid-cols-4 gap-4">
+            <Card className="text-center p-4">
+              <div className="text-2xl font-bold text-primary">17</div>
+              <div className="text-sm text-muted-foreground">Official Categories</div>
+            </Card>
+            <Card className="text-center p-4">
+              <div className="text-2xl font-bold text-primary">{totalSubcategories}</div>
+              <div className="text-sm text-muted-foreground">Total Subcategories</div>
+            </Card>
+            <Card className="text-center p-4">
+              <div className="text-2xl font-bold text-primary">5</div>
+              <div className="text-sm text-muted-foreground">African Regions</div>
+            </Card>
+            <Card className="text-center p-4">
+              <div className="text-2xl font-bold text-primary">4</div>
+              <div className="text-sm text-muted-foreground">Award Tiers</div>
+            </Card>
+          </div>
 
           {/* CTA */}
           <div className="mt-12 rounded-xl bg-secondary p-8 text-center">

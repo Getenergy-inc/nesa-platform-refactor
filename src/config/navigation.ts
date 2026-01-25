@@ -106,10 +106,16 @@ export const MAIN_NAV: NavItem[] = [
     icon: Trophy,
     children: [
       {
-        label: "Award Categories",
-        href: "/categories",
-        description: "Explore all 17 award categories",
-        badge: "180+ subcategories",
+        label: "Categories (Africa First)",
+        href: "/categories?view=africa",
+        description: "Africa Regional, International & Icon categories",
+        badge: "9 categories",
+      },
+      {
+        label: "Nigeria Categories",
+        href: "/categories?view=nigeria",
+        description: "Nigeria-specific award categories",
+        badge: "8 categories",
       },
       {
         label: "Platinum Certificate",

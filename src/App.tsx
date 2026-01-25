@@ -23,6 +23,7 @@ import Dashboard from "./pages/Dashboard";
 import NRCDashboard from "./pages/NRCDashboard";
 import Unauthorized from "./pages/Unauthorized";
 import NotFound from "./pages/NotFound";
+import CategoryDetail from "./pages/CategoryDetail";
 
 // About Pages
 import About from "./pages/about/About";
@@ -80,6 +81,7 @@ const App = () => (
                 
                 {/* Awards */}
                 <Route path="/categories" element={<Categories />} />
+                <Route path="/categories/:slug" element={<CategoryDetail />} />
                 <Route path="/awards/platinum" element={<PlatinumAward />} />
                 <Route path="/awards/icon" element={<IconAward />} />
                 <Route path="/awards/gold" element={<GoldAward />} />

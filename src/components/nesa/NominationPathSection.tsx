@@ -28,7 +28,7 @@ function buildNominationPaths(displayYear: number): PathCard[] {
       title: "Blue Garnet & Gold Certificate Awards",
       period: "Annual Competition",
       description: "Open competition with public participation through AGC voting and expert judging.",
-      bullets: ["Public Voting", "Expert Judging", "135 Subcategories"],
+      bullets: ["Public Voting", "Expert Judging", "138+ Subcategories"],
     },
     {
       icon: Users,
