@@ -48,6 +48,7 @@ import Gala from "./pages/media/Gala";
 
 // Support Pages
 import Donate from "./pages/Donate";
+import EduAid from "./pages/EduAid";
 import Judges from "./pages/Judges";
 import Partners from "./pages/Partners";
 import Chapters from "./pages/Chapters";
@@ -114,6 +115,7 @@ const App = () => (
                 
                 {/* Support */}
                 <Route path="/donate" element={<Donate />} />
+                <Route path="/eduaid" element={<EduAid />} />
                 <Route path="/judges" element={<Judges />} />
                 <Route path="/partners" element={<Partners />} />
                 <Route path="/chapters" element={<Chapters />} />
