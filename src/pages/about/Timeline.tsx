@@ -72,10 +72,10 @@ export default function Timeline() {
   return (
     <>
       <Helmet>
-        <title>Programme Timeline | NESA-Africa {currentEdition?.displayYear}</title>
+        <title>{`Programme Timeline | NESA-Africa ${currentEdition?.displayYear || ''}`}</title>
         <meta
           name="description"
-          content={`Key dates and milestones for NESA-Africa ${currentEdition?.displayYear} — from nominations through the live Awards Gala.`}
+          content={`Key dates and milestones for NESA-Africa ${currentEdition?.displayYear || ''} — from nominations through the live Awards Gala.`}
         />
       </Helmet>
 
