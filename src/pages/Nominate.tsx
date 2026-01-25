@@ -12,7 +12,8 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Badge } from "@/components/ui/badge";
 import { toast } from "sonner";
-import { Award, Upload, X, ArrowLeft, CheckCircle, FileText, Image as ImageIcon, User, Building, FileCheck, Globe, MapPin, Trophy, Star } from "lucide-react";
+import { Award, Upload, X, ArrowLeft, CheckCircle, FileText, Image as ImageIcon, User, Building, FileCheck, Globe, MapPin, Trophy, Star, ChevronRight, Home } from "lucide-react";
+import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from "@/components/ui/breadcrumb";
 import { 
   NESA_CATEGORIES, 
   CategoryDefinition, 
@@ -319,19 +320,44 @@ export default function Nominate() {
     <div className="min-h-screen bg-background">
       {/* Header */}
       <header className="border-b bg-card">
-        <div className="container flex h-16 items-center gap-4 px-6">
-          <Button variant="ghost" size="icon" asChild>
-            <Link to="/">
-              <ArrowLeft className="h-5 w-5" />
-            </Link>
-          </Button>
-          <div className="flex items-center gap-3">
-            <div className="flex h-10 w-10 items-center justify-center rounded-full bg-primary/10">
-              <Award className="h-5 w-5 text-primary" />
-            </div>
-            <div>
-              <h1 className="font-display text-lg font-bold">Submit Nomination</h1>
-              <p className="text-xs text-muted-foreground">{currentEdition.name}</p>
+        <div className="container px-6">
+          {/* Breadcrumb */}
+          <div className="py-2 border-b border-border/50">
+            <Breadcrumb>
+              <BreadcrumbList>
+                <BreadcrumbItem>
+                  <BreadcrumbLink asChild>
+                    <Link to="/" className="flex items-center gap-1 text-muted-foreground hover:text-foreground">
+                      <Home className="h-3.5 w-3.5" />
+                      Home
+                    </Link>
+                  </BreadcrumbLink>
+                </BreadcrumbItem>
+                <BreadcrumbSeparator>
+                  <ChevronRight className="h-3.5 w-3.5" />
+                </BreadcrumbSeparator>
+                <BreadcrumbItem>
+                  <BreadcrumbPage className="font-medium">Nominate</BreadcrumbPage>
+                </BreadcrumbItem>
+              </BreadcrumbList>
+            </Breadcrumb>
+          </div>
+          
+          {/* Main Header */}
+          <div className="flex h-16 items-center gap-4">
+            <Button variant="ghost" size="icon" asChild>
+              <Link to="/">
+                <ArrowLeft className="h-5 w-5" />
+              </Link>
+            </Button>
+            <div className="flex items-center gap-3">
+              <div className="flex h-10 w-10 items-center justify-center rounded-full bg-primary/10">
+                <Award className="h-5 w-5 text-primary" />
+              </div>
+              <div>
+                <h1 className="font-display text-lg font-bold">Submit Nomination</h1>
+                <p className="text-xs text-muted-foreground">{currentEdition.name}</p>
+              </div>
             </div>
           </div>
         </div>
