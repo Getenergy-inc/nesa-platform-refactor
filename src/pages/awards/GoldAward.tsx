@@ -2,6 +2,7 @@ import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
 import { NESAHeader } from "@/components/nesa/NESAHeader";
 import { NESAFooter } from "@/components/nesa/NESAFooter";
+import { CertificateGallery } from "@/components/nesa/CertificateGallery";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -160,6 +161,9 @@ export default function GoldAward() {
             </div>
           </div>
         </section>
+
+        {/* Certificate Gallery */}
+        <CertificateGallery />
 
         {/* CTA */}
         <section className="bg-charcoal/95 py-16 lg:py-24">
