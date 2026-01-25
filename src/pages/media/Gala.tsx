@@ -4,16 +4,16 @@ import { NESAHeader } from "@/components/nesa/NESAHeader";
 import { NESAFooter } from "@/components/nesa/NESAFooter";
 import { useSeason } from "@/contexts/SeasonContext";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import {
   ArrowLeft,
   Award,
-  Calendar,
   Clock,
   Globe,
   MapPin,
   Medal,
+  Mic,
   Play,
   Radio,
   Star,
@@ -22,6 +22,8 @@ import {
   Tv,
   Users,
 } from "lucide-react";
+
+import galaHeroImage from "@/assets/events/award-gala.jpeg";
 
 const galaSegments = [
   { time: "18:00", title: "Red Carpet & Arrivals", duration: "1 hr", icon: Star },
@@ -55,9 +57,20 @@ export default function Gala() {
       <div className="min-h-screen bg-charcoal">
         <NESAHeader />
 
-        {/* Hero */}
-        <section className="relative bg-gradient-to-b from-charcoal to-charcoal/95 py-20 lg:py-28">
-          <div className="container mx-auto px-4">
+        {/* Hero with Gala Image */}
+        <section className="relative min-h-[70vh] flex items-center overflow-hidden">
+          {/* Background Image */}
+          <div className="absolute inset-0">
+            <img
+              src={galaHeroImage}
+              alt="NESA-Africa Awards Gala"
+              className="h-full w-full object-cover"
+            />
+            <div className="absolute inset-0 bg-gradient-to-r from-charcoal via-charcoal/80 to-charcoal/40" />
+            <div className="absolute inset-0 bg-gradient-to-t from-charcoal via-transparent to-transparent" />
+          </div>
+
+          <div className="container relative z-10 mx-auto px-4 py-20 lg:py-28">
             <Link
               to="/media"
               className="mb-6 inline-flex items-center gap-2 text-sm text-white/60 hover:text-primary"
@@ -70,10 +83,10 @@ export default function Gala() {
                 <Trophy className="h-6 w-6 text-primary" />
                 <Badge className="bg-purple-500/20 text-purple-400">June 2026</Badge>
               </div>
-              <h1 className="mb-6 font-display text-4xl font-bold text-white md:text-5xl">
+              <h1 className="mb-6 font-display text-4xl font-bold text-white md:text-5xl lg:text-6xl">
                 NESA-Africa <span className="text-primary">Awards Gala</span>
               </h1>
-              <p className="mb-8 text-lg text-white/70">
+              <p className="mb-8 text-lg text-white/80 md:text-xl">
                 A spectacular 6-hour live ceremony celebrating Africa's education champions.
                 The Blue Garnet winners are revealed in the grand finale.
               </p>
@@ -189,6 +202,36 @@ export default function Gala() {
                     </Button>
                   </CardContent>
                 </Card>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Presenter/Anchor CTA */}
+        <section className="bg-gradient-to-b from-charcoal to-purple-950/30 py-16 lg:py-24">
+          <div className="container mx-auto px-4">
+            <div className="mx-auto max-w-4xl text-center">
+              <Mic className="mx-auto mb-6 h-12 w-12 text-primary" />
+              <h2 className="mb-4 font-display text-3xl font-bold text-white">
+                Be Part of the Show
+              </h2>
+              <p className="mx-auto mb-8 max-w-2xl text-lg text-white/70">
+                We're looking for talented presenters and anchors to host segments of the 
+                NESA-Africa Awards Gala. Join us in celebrating Africa's education champions.
+              </p>
+              <div className="flex flex-wrap justify-center gap-4">
+                <Button asChild size="lg" className="bg-primary text-primary-foreground">
+                  <Link to="/contact?subject=presenter">
+                    <Mic className="mr-2 h-5 w-5" />
+                    Apply as Presenter
+                  </Link>
+                </Button>
+                <Button asChild size="lg" variant="outline" className="border-white/20 text-white hover:bg-white/10">
+                  <Link to="/volunteer">
+                    <Users className="mr-2 h-5 w-5" />
+                    Volunteer at Gala
+                  </Link>
+                </Button>
               </div>
             </div>
           </div>

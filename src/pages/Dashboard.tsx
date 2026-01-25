@@ -4,6 +4,7 @@ import { useAuth } from "@/contexts/AuthContext";
 import { useSeason } from "@/contexts/SeasonContext";
 import { supabase } from "@/integrations/supabase/client";
 import { ProtectedRoute } from "@/components/ProtectedRoute";
+import { MyCertificates } from "@/components/dashboard/MyCertificates";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -205,6 +206,7 @@ function DashboardContent() {
         <Tabs defaultValue="nominations">
           <TabsList className="mb-6">
             <TabsTrigger value="nominations">My Nominations</TabsTrigger>
+            <TabsTrigger value="certificates">My Certificates</TabsTrigger>
             <TabsTrigger value="votes">My Votes</TabsTrigger>
             <TabsTrigger value="profile">Profile</TabsTrigger>
           </TabsList>
@@ -251,6 +253,10 @@ function DashboardContent() {
                 ))}
               </div>
             )}
+          </TabsContent>
+
+          <TabsContent value="certificates">
+            <MyCertificates />
           </TabsContent>
 
           <TabsContent value="votes">

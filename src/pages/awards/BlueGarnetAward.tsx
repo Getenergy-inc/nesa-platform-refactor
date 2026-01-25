@@ -2,11 +2,11 @@ import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
 import { NESAHeader } from "@/components/nesa/NESAHeader";
 import { NESAFooter } from "@/components/nesa/NESAFooter";
+import { CertificateGallery } from "@/components/nesa/CertificateGallery";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { ArrowLeft, Award, Calendar, Play, Scale, Star, Trophy, Users } from "lucide-react";
-
+import { ArrowLeft, Award, Calendar, Play, Scale, Trophy, Users } from "lucide-react";
 const scoringBreakdown = [
   { label: "Jury Scoring", percentage: 60, color: "bg-purple-500" },
   { label: "Public Voting", percentage: 40, color: "bg-yellow-500" },
@@ -167,6 +167,9 @@ export default function BlueGarnetAward() {
             </div>
           </div>
         </section>
+
+        {/* Certificate Gallery */}
+        <CertificateGallery />
 
         <NESAFooter />
       </div>
