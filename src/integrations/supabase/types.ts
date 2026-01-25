@@ -185,6 +185,66 @@ export type Database = {
         }
         Relationships: []
       }
+      donations: {
+        Row: {
+          amount: number
+          created_at: string | null
+          currency: string
+          donor_country: string | null
+          donor_email: string
+          donor_name: string | null
+          donor_phone: string | null
+          id: string
+          impact_description: string | null
+          is_anonymous: boolean | null
+          metadata: Json | null
+          payment_provider: string | null
+          payment_reference: string | null
+          program: string
+          status: string
+          updated_at: string | null
+          user_id: string | null
+        }
+        Insert: {
+          amount: number
+          created_at?: string | null
+          currency?: string
+          donor_country?: string | null
+          donor_email: string
+          donor_name?: string | null
+          donor_phone?: string | null
+          id?: string
+          impact_description?: string | null
+          is_anonymous?: boolean | null
+          metadata?: Json | null
+          payment_provider?: string | null
+          payment_reference?: string | null
+          program?: string
+          status?: string
+          updated_at?: string | null
+          user_id?: string | null
+        }
+        Update: {
+          amount?: number
+          created_at?: string | null
+          currency?: string
+          donor_country?: string | null
+          donor_email?: string
+          donor_name?: string | null
+          donor_phone?: string | null
+          id?: string
+          impact_description?: string | null
+          is_anonymous?: boolean | null
+          metadata?: Json | null
+          payment_provider?: string | null
+          payment_reference?: string | null
+          program?: string
+          status?: string
+          updated_at?: string | null
+          user_id?: string | null
+        }
+        Relationships: []
+      }
       media: {
         Row: {
           created_at: string | null
