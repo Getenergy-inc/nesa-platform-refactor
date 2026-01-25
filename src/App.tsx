@@ -54,6 +54,7 @@ import Chapters from "./pages/Chapters";
 import Volunteer from "./pages/Volunteer";
 import Contact from "./pages/Contact";
 import Vote from "./pages/Vote";
+import Tickets from "./pages/Tickets";
 
 const queryClient = new QueryClient();
 
@@ -95,6 +96,7 @@ const App = () => (
                 <Route path="/media/shows" element={<Shows />} />
                 <Route path="/media/webinars" element={<Webinars />} />
                 <Route path="/media/gala" element={<Gala />} />
+                <Route path="/tickets" element={<Tickets />} />
                 
                 {/* Auth */}
                 <Route path="/login" element={<Login />} />
