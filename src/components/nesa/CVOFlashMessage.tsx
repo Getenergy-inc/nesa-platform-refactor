@@ -109,7 +109,7 @@ export function CVOFlashMessage({ isOpen, onClose }: CVOFlashMessageProps) {
 
                 <div className="mt-4 pt-4 border-t border-gold/20">
                   <p className="text-gold font-display text-lg font-semibold">
-                    Santos Akhilele Okungbowa
+                    Babashola-Santos V. Aderibigbe
                   </p>
                   <p className="text-white/50 text-sm">
                     Founder & CVO, Santos Creations Educational Foundation
