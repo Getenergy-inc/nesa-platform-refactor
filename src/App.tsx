@@ -3,6 +3,7 @@ import Nominees from "./pages/Nominees";
 import NomineeProfile from "./pages/NomineeProfile";
 import CertificateVerify from "./pages/CertificateVerify";
 import Results from "./pages/Results";
+import Policies from "./pages/Policies";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
@@ -114,6 +115,7 @@ const App = () => (
                 <Route path="/chapters" element={<Chapters />} />
                 <Route path="/volunteer" element={<Volunteer />} />
                 <Route path="/contact" element={<Contact />} />
+                <Route path="/policies" element={<Policies />} />
                 
                 {/* Utility */}
                 <Route path="/unauthorized" element={<Unauthorized />} />
