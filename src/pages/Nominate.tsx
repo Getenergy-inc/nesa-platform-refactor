@@ -377,7 +377,10 @@ export default function Nominate() {
                 <CardHeader>
                   <CardTitle className="font-display">Select Category</CardTitle>
                   <CardDescription>
-                    Choose from {activeCategories.length} official NESA award categories across Africa and Nigeria
+                    Choose from {activeCategories.length} official NESA award categories across Africa and Nigeria.{" "}
+                    <Link to="/categories" className="text-primary hover:underline inline-flex items-center gap-1">
+                      Browse all categories <ArrowLeft className="h-3 w-3 rotate-180" />
+                    </Link>
                   </CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-6">
