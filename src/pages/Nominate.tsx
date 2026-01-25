@@ -12,8 +12,11 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Badge } from "@/components/ui/badge";
 import { Alert, AlertDescription } from "@/components/ui/alert";
+import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import { Separator } from "@/components/ui/separator";
+import { ScrollArea } from "@/components/ui/scroll-area";
 import { toast } from "sonner";
-import { Award, Upload, X, ArrowLeft, CheckCircle, FileText, Image as ImageIcon, User, Building, FileCheck, Globe, MapPin, Trophy, Star, ChevronRight, Home, Save, RotateCcw, Trash2 } from "lucide-react";
+import { Award, Upload, X, ArrowLeft, CheckCircle, FileText, Image as ImageIcon, User, Building, FileCheck, Globe, MapPin, Trophy, Star, ChevronRight, Home, Save, RotateCcw, Trash2, Eye } from "lucide-react";
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from "@/components/ui/breadcrumb";
 import { 
   NESA_CATEGORIES, 
@@ -64,6 +67,7 @@ export default function Nominate() {
   const [step, setStep] = useState(1);
   const [showDraftBanner, setShowDraftBanner] = useState(true);
   const [lastSaved, setLastSaved] = useState<Date | null>(null);
+  const [showConfirmDialog, setShowConfirmDialog] = useState(false);
 
   // Get active categories from config
   const activeCategories = useMemo(() => 
@@ -908,17 +912,12 @@ export default function Nominate() {
                         Save
                       </Button>
                       <Button
-                        type="submit"
-                        disabled={submitting || justification.length < 50}
+                        type="button"
+                        disabled={justification.length < 50}
+                        onClick={() => setShowConfirmDialog(true)}
                       >
-                        {submitting ? (
-                          "Submitting..."
-                        ) : (
-                          <>
-                            <FileCheck className="mr-2 h-4 w-4" />
-                            Submit Nomination
-                          </>
-                        )}
+                        <Eye className="mr-2 h-4 w-4" />
+                        Review & Submit
                       </Button>
                     </div>
                   </div>
@@ -926,6 +925,149 @@ export default function Nominate() {
               </Card>
             )}
           </form>
+
+          {/* Confirmation Dialog */}
+          <Dialog open={showConfirmDialog} onOpenChange={setShowConfirmDialog}>
+            <DialogContent className="max-w-2xl max-h-[90vh]">
+              <DialogHeader>
+                <DialogTitle className="font-display flex items-center gap-2">
+                  <Award className="h-5 w-5 text-primary" />
+                  Review Your Nomination
+                </DialogTitle>
+                <DialogDescription>
+                  Please review all details before submitting. This action cannot be undone.
+                </DialogDescription>
+              </DialogHeader>
+              
+              <ScrollArea className="max-h-[60vh] pr-4">
+                <div className="space-y-6">
+                  {/* Category Info */}
+                  <div className="space-y-2">
+                    <h4 className="text-sm font-semibold text-muted-foreground uppercase tracking-wide">Category</h4>
+                    <div className="rounded-lg border bg-muted/30 p-4 space-y-2">
+                      <div className="flex items-center justify-between">
+                        <span className="font-medium">{selectedCategory?.name}</span>
+                        {scopeBadge && (
+                          <Badge 
+                            variant="outline"
+                            style={{ borderColor: scopeBadge.color, color: scopeBadge.color }}
+                          >
+                            {scopeBadge.label}
+                          </Badge>
+                        )}
+                      </div>
+                      <p className="text-sm text-muted-foreground">
+                        {dbSubcategories.find(s => s.id === selectedSubcategoryId)?.name}
+                      </p>
+                      <div className="flex items-center gap-2 text-xs">
+                        <span className="text-muted-foreground">Tier Path:</span>
+                        <span className="font-medium">{tierPath.map(t => TIER_INFO[t].shortName).join(" → ")}</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <Separator />
+
+                  {/* Nominee Info */}
+                  <div className="space-y-2">
+                    <h4 className="text-sm font-semibold text-muted-foreground uppercase tracking-wide">Nominee</h4>
+                    <div className="rounded-lg border bg-muted/30 p-4">
+                      <div className="flex items-start gap-4">
+                        {nomineePhoto ? (
+                          <img 
+                            src={nomineePhoto.url} 
+                            alt={nomineeName}
+                            className="h-16 w-16 rounded-full object-cover"
+                          />
+                        ) : (
+                          <div className="h-16 w-16 rounded-full bg-muted flex items-center justify-center">
+                            <User className="h-8 w-8 text-muted-foreground" />
+                          </div>
+                        )}
+                        <div className="flex-1 space-y-1">
+                          <p className="font-semibold text-lg">{nomineeName}</p>
+                          {nomineeTitle && (
+                            <p className="text-sm text-muted-foreground">{nomineeTitle}</p>
+                          )}
+                          {nomineeOrganization && (
+                            <p className="text-sm flex items-center gap-1">
+                              <Building className="h-3 w-3" />
+                              {nomineeOrganization}
+                            </p>
+                          )}
+                        </div>
+                      </div>
+                      {nomineeBio && (
+                        <p className="mt-3 text-sm text-muted-foreground border-t pt-3">
+                          {nomineeBio}
+                        </p>
+                      )}
+                    </div>
+                  </div>
+
+                  <Separator />
+
+                  {/* Justification */}
+                  <div className="space-y-2">
+                    <h4 className="text-sm font-semibold text-muted-foreground uppercase tracking-wide">Justification</h4>
+                    <div className="rounded-lg border bg-muted/30 p-4">
+                      <p className="text-sm whitespace-pre-wrap">{justification}</p>
+                    </div>
+                  </div>
+
+                  {/* Evidence Files */}
+                  {uploadedFiles.length > 0 && (
+                    <>
+                      <Separator />
+                      <div className="space-y-2">
+                        <h4 className="text-sm font-semibold text-muted-foreground uppercase tracking-wide">
+                          Supporting Evidence ({uploadedFiles.length} files)
+                        </h4>
+                        <div className="rounded-lg border bg-muted/30 p-4 space-y-2">
+                          {uploadedFiles.map((file) => (
+                            <div key={file.path} className="flex items-center gap-2 text-sm">
+                              {file.type.startsWith("image/") ? (
+                                <ImageIcon className="h-4 w-4 text-muted-foreground" />
+                              ) : (
+                                <FileText className="h-4 w-4 text-muted-foreground" />
+                              )}
+                              <span>{file.name}</span>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    </>
+                  )}
+                </div>
+              </ScrollArea>
+
+              <DialogFooter className="gap-2 sm:gap-0">
+                <Button 
+                  variant="outline" 
+                  onClick={() => setShowConfirmDialog(false)}
+                  disabled={submitting}
+                >
+                  Go Back & Edit
+                </Button>
+                <Button 
+                  onClick={(e) => {
+                    setShowConfirmDialog(false);
+                    handleSubmit(e as unknown as React.FormEvent);
+                  }}
+                  disabled={submitting}
+                >
+                  {submitting ? (
+                    "Submitting..."
+                  ) : (
+                    <>
+                      <FileCheck className="mr-2 h-4 w-4" />
+                      Confirm & Submit
+                    </>
+                  )}
+                </Button>
+              </DialogFooter>
+            </DialogContent>
+          </Dialog>
         </StageGate>
       </main>
     </div>
