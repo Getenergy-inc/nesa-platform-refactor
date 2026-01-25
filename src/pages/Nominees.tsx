@@ -1,7 +1,7 @@
 import { useState, useMemo } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { Link } from "react-router-dom";
-import { Search, Users, Award, Building2, MapPin, Filter } from "lucide-react";
+import { Search, Users, Award, Building2, MapPin, Filter, ChevronLeft, ChevronRight } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
@@ -12,6 +12,8 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Skeleton } from "@/components/ui/skeleton";
 import { NESAHeader } from "@/components/nesa/NESAHeader";
 import { NESAFooter } from "@/components/nesa/NESAFooter";
+
+const ITEMS_PER_PAGE = 12;
 
 interface Nominee {
   id: string;
@@ -48,6 +50,7 @@ interface Category {
 export default function Nominees() {
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategory, setSelectedCategory] = useState<string>("all");
+  const [currentPage, setCurrentPage] = useState(1);
 
   // Fetch categories
   const { data: categories = [] } = useQuery({
@@ -118,6 +121,24 @@ export default function Nominees() {
     });
   }, [nominees, searchQuery, selectedCategory]);
 
+  // Pagination
+  const totalPages = Math.ceil(filteredNominees.length / ITEMS_PER_PAGE);
+  const paginatedNominees = useMemo(() => {
+    const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
+    return filteredNominees.slice(startIndex, startIndex + ITEMS_PER_PAGE);
+  }, [filteredNominees, currentPage]);
+
+  // Reset to page 1 when filters change
+  const handleSearchChange = (value: string) => {
+    setSearchQuery(value);
+    setCurrentPage(1);
+  };
+
+  const handleCategoryChange = (value: string) => {
+    setSelectedCategory(value);
+    setCurrentPage(1);
+  };
+
   const getInitials = (name: string) => {
     return name
       .split(" ")
@@ -154,11 +175,11 @@ export default function Nominees() {
                 <Input
                   placeholder="Search nominees by name, organization..."
                   value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
+                  onChange={(e) => handleSearchChange(e.target.value)}
                   className="pl-10 bg-charcoal-light border-gold/20 text-ivory placeholder:text-ivory/40 focus:border-gold"
                 />
               </div>
-              <Select value={selectedCategory} onValueChange={setSelectedCategory}>
+              <Select value={selectedCategory} onValueChange={handleCategoryChange}>
                 <SelectTrigger className="w-full sm:w-[200px] bg-charcoal-light border-gold/20 text-ivory">
                   <Filter className="w-4 h-4 mr-2 text-gold" />
                   <SelectValue placeholder="All Categories" />
@@ -245,6 +266,7 @@ export default function Nominees() {
                   onClick={() => {
                     setSearchQuery("");
                     setSelectedCategory("all");
+                    setCurrentPage(1);
                   }}
                   className="border-gold/30 text-gold hover:bg-gold/10"
                 >
@@ -253,11 +275,79 @@ export default function Nominees() {
               )}
             </div>
           ) : (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-              {filteredNominees.map((nominee) => (
-                <NomineeCard key={nominee.id} nominee={nominee} getInitials={getInitials} />
-              ))}
-            </div>
+            <>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                {paginatedNominees.map((nominee) => (
+                  <NomineeCard key={nominee.id} nominee={nominee} getInitials={getInitials} />
+                ))}
+              </div>
+
+              {/* Pagination Controls */}
+              {totalPages > 1 && (
+                <div className="mt-12 flex items-center justify-center gap-2">
+                  <Button
+                    variant="outline"
+                    size="icon"
+                    onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}
+                    disabled={currentPage === 1}
+                    className="border-gold/30 text-gold hover:bg-gold/10 disabled:opacity-50"
+                  >
+                    <ChevronLeft className="h-4 w-4" />
+                  </Button>
+
+                  <div className="flex items-center gap-1">
+                    {Array.from({ length: totalPages }, (_, i) => i + 1)
+                      .filter((page) => {
+                        // Show first, last, and pages near current
+                        return (
+                          page === 1 ||
+                          page === totalPages ||
+                          Math.abs(page - currentPage) <= 1
+                        );
+                      })
+                      .map((page, index, arr) => {
+                        // Add ellipsis between gaps
+                        const prevPage = arr[index - 1];
+                        const showEllipsisBefore = prevPage && page - prevPage > 1;
+
+                        return (
+                          <div key={page} className="flex items-center gap-1">
+                            {showEllipsisBefore && (
+                              <span className="px-2 text-ivory/40">...</span>
+                            )}
+                            <Button
+                              variant={currentPage === page ? "default" : "outline"}
+                              size="sm"
+                              onClick={() => setCurrentPage(page)}
+                              className={
+                                currentPage === page
+                                  ? "bg-gold text-charcoal hover:bg-gold-dark"
+                                  : "border-gold/30 text-gold hover:bg-gold/10"
+                              }
+                            >
+                              {page}
+                            </Button>
+                          </div>
+                        );
+                      })}
+                  </div>
+
+                  <Button
+                    variant="outline"
+                    size="icon"
+                    onClick={() => setCurrentPage((p) => Math.min(totalPages, p + 1))}
+                    disabled={currentPage === totalPages}
+                    className="border-gold/30 text-gold hover:bg-gold/10 disabled:opacity-50"
+                  >
+                    <ChevronRight className="h-4 w-4" />
+                  </Button>
+
+                  <span className="ml-4 text-sm text-ivory/60">
+                    Page {currentPage} of {totalPages}
+                  </span>
+                </div>
+              )}
+            </>
           )}
         </div>
       </section>
