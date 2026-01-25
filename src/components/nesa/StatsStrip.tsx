@@ -1,8 +1,8 @@
 const stats = [
   { value: "15+", label: "Years Running" },
   { value: "54", label: "African Countries" },
-  { value: "10,000+", label: "Nominees" },
-  { value: "1,000+", label: "Awardees" },
+  { value: "17", label: "Award Categories" },
+  { value: "141+", label: "Sub-Categories" },
 ];
 
 export function StatsStrip() {
