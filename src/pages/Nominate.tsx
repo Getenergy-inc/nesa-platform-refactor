@@ -29,6 +29,7 @@ import {
 } from "@/config/nesaCategories";
 import { useNominationDraft } from "@/hooks/useNominationDraft";
 import { formatDistanceToNow } from "date-fns";
+import { ExistingNomineesSection } from "@/components/nesa/ExistingNomineesSection";
 
 interface DbSubcategory {
   id: string;
@@ -612,6 +613,15 @@ export default function Nominate() {
                       <p>No subcategories found for this category.</p>
                       <p className="text-sm">Please contact support or try another category.</p>
                     </div>
+                  )}
+
+                  {/* Existing Nominees Section */}
+                  {selectedSubcategoryId && (
+                    <ExistingNomineesSection
+                      subcategoryId={selectedSubcategoryId}
+                      subcategoryName={dbSubcategories.find(s => s.id === selectedSubcategoryId)?.name}
+                      categoryName={selectedCategory?.name}
+                    />
                   )}
 
                   <div className="flex justify-between">
