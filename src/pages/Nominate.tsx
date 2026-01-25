@@ -1,4 +1,4 @@
-import { useState, useEffect, useMemo } from "react";
+import { useState, useEffect, useMemo, useCallback } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { useAuth } from "@/contexts/AuthContext";
 import { useSeason } from "@/contexts/SeasonContext";
@@ -11,8 +11,9 @@ import { Textarea } from "@/components/ui/textarea";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Badge } from "@/components/ui/badge";
+import { Alert, AlertDescription } from "@/components/ui/alert";
 import { toast } from "sonner";
-import { Award, Upload, X, ArrowLeft, CheckCircle, FileText, Image as ImageIcon, User, Building, FileCheck, Globe, MapPin, Trophy, Star, ChevronRight, Home } from "lucide-react";
+import { Award, Upload, X, ArrowLeft, CheckCircle, FileText, Image as ImageIcon, User, Building, FileCheck, Globe, MapPin, Trophy, Star, ChevronRight, Home, Save, RotateCcw, Trash2 } from "lucide-react";
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from "@/components/ui/breadcrumb";
 import { 
   NESA_CATEGORIES, 
@@ -23,6 +24,8 @@ import {
   TIER_INFO,
   AwardTier
 } from "@/config/nesaCategories";
+import { useNominationDraft } from "@/hooks/useNominationDraft";
+import { formatDistanceToNow } from "date-fns";
 
 interface DbSubcategory {
   id: string;
@@ -43,6 +46,7 @@ export default function Nominate() {
   const { user, loading: authLoading } = useAuth();
   const { currentEdition } = useSeason();
   const navigate = useNavigate();
+  const { hasDraft, draftDate, saveDraft, loadDraft, clearDraft } = useNominationDraft();
 
   // Form state
   const [dbSubcategories, setDbSubcategories] = useState<DbSubcategory[]>([]);
@@ -58,6 +62,8 @@ export default function Nominate() {
   const [uploading, setUploading] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const [step, setStep] = useState(1);
+  const [showDraftBanner, setShowDraftBanner] = useState(true);
+  const [lastSaved, setLastSaved] = useState<Date | null>(null);
 
   // Get active categories from config
   const activeCategories = useMemo(() => 
@@ -116,6 +122,46 @@ export default function Nominate() {
       navigate("/login", { state: { from: "/nominate" } });
     }
   }, [user, authLoading, navigate]);
+
+  // Handle saving draft
+  const handleSaveDraft = useCallback(() => {
+    saveDraft({
+      selectedCategoryId,
+      selectedSubcategoryId,
+      nomineeName,
+      nomineeTitle,
+      nomineeOrganization,
+      nomineeBio,
+      justification,
+      step,
+    });
+    setLastSaved(new Date());
+    toast.success("Draft saved successfully");
+  }, [selectedCategoryId, selectedSubcategoryId, nomineeName, nomineeTitle, nomineeOrganization, nomineeBio, justification, step, saveDraft]);
+
+  // Handle restoring draft
+  const handleRestoreDraft = useCallback(() => {
+    const draft = loadDraft();
+    if (draft) {
+      setSelectedCategoryId(draft.selectedCategoryId);
+      setSelectedSubcategoryId(draft.selectedSubcategoryId);
+      setNomineeName(draft.nomineeName);
+      setNomineeTitle(draft.nomineeTitle);
+      setNomineeOrganization(draft.nomineeOrganization);
+      setNomineeBio(draft.nomineeBio);
+      setJustification(draft.justification);
+      setStep(draft.step);
+      setShowDraftBanner(false);
+      toast.success("Draft restored successfully");
+    }
+  }, [loadDraft]);
+
+  // Handle discarding draft
+  const handleDiscardDraft = useCallback(() => {
+    clearDraft();
+    setShowDraftBanner(false);
+    toast.success("Draft discarded");
+  }, [clearDraft]);
 
   const handleFileUpload = async (e: React.ChangeEvent<HTMLInputElement>, isPhoto: boolean = false) => {
     const files = e.target.files;
@@ -254,6 +300,8 @@ export default function Nominate() {
         return;
       }
 
+      // Clear draft on successful submission
+      clearDraft();
       toast.success("Nomination submitted successfully!");
       navigate("/dashboard/nominations");
     } catch (error) {
@@ -365,6 +413,29 @@ export default function Nominate() {
 
       <main className="container max-w-3xl px-6 py-8">
         <StageGate action="nominations" fallback={<StageLocked action="nominations" />}>
+          {/* Draft Recovery Banner */}
+          {hasDraft && showDraftBanner && (
+            <Alert className="mb-6 border-primary/50 bg-primary/5">
+              <RotateCcw className="h-4 w-4" />
+              <AlertDescription className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+                <span>
+                  You have an unsaved draft from{" "}
+                  <strong>{draftDate ? formatDistanceToNow(draftDate, { addSuffix: true }) : "earlier"}</strong>
+                </span>
+                <div className="flex gap-2">
+                  <Button size="sm" variant="outline" onClick={handleDiscardDraft}>
+                    <Trash2 className="mr-1 h-3 w-3" />
+                    Discard
+                  </Button>
+                  <Button size="sm" onClick={handleRestoreDraft}>
+                    <RotateCcw className="mr-1 h-3 w-3" />
+                    Restore Draft
+                  </Button>
+                </div>
+              </AlertDescription>
+            </Alert>
+          )}
+
           {/* Progress Steps */}
           <div className="mb-8">
             <div className="flex items-center justify-between">
@@ -539,7 +610,16 @@ export default function Nominate() {
                     </div>
                   )}
 
-                  <div className="flex justify-end">
+                  <div className="flex justify-between">
+                    <Button
+                      type="button"
+                      variant="outline"
+                      onClick={handleSaveDraft}
+                      disabled={!selectedCategoryId}
+                    >
+                      <Save className="mr-2 h-4 w-4" />
+                      Save Draft
+                    </Button>
                     <Button
                       type="button"
                       onClick={() => setStep(2)}
@@ -548,6 +628,11 @@ export default function Nominate() {
                       Continue
                     </Button>
                   </div>
+                  {lastSaved && (
+                    <p className="text-xs text-muted-foreground text-right">
+                      Last saved {formatDistanceToNow(lastSaved, { addSuffix: true })}
+                    </p>
+                  )}
                 </CardContent>
               </Card>
             )}
@@ -665,17 +750,27 @@ export default function Nominate() {
                     </p>
                   </div>
 
-                  <div className="flex justify-between">
+                  <div className="flex justify-between items-center">
                     <Button type="button" variant="outline" onClick={() => setStep(1)}>
                       Back
                     </Button>
-                    <Button
-                      type="button"
-                      onClick={() => setStep(3)}
-                      disabled={!canProceedToStep3}
-                    >
-                      Continue
-                    </Button>
+                    <div className="flex gap-2">
+                      <Button
+                        type="button"
+                        variant="ghost"
+                        onClick={handleSaveDraft}
+                      >
+                        <Save className="mr-2 h-4 w-4" />
+                        Save Draft
+                      </Button>
+                      <Button
+                        type="button"
+                        onClick={() => setStep(3)}
+                        disabled={!canProceedToStep3}
+                      >
+                        Continue
+                      </Button>
+                    </div>
                   </div>
                 </CardContent>
               </Card>
@@ -799,24 +894,33 @@ export default function Nominate() {
                     </div>
                   </div>
 
-                  <div className="flex justify-between">
+                  <div className="flex justify-between items-center">
                     <Button type="button" variant="outline" onClick={() => setStep(2)}>
                       Back
                     </Button>
-                    <Button
-                      type="submit"
-                      disabled={submitting || justification.length < 50}
-                      className="bg-primary"
-                    >
-                      {submitting ? (
-                        "Submitting..."
-                      ) : (
-                        <>
-                          <FileCheck className="mr-2 h-4 w-4" />
-                          Submit Nomination
-                        </>
-                      )}
-                    </Button>
+                    <div className="flex gap-2">
+                      <Button
+                        type="button"
+                        variant="ghost"
+                        onClick={handleSaveDraft}
+                      >
+                        <Save className="mr-2 h-4 w-4" />
+                        Save
+                      </Button>
+                      <Button
+                        type="submit"
+                        disabled={submitting || justification.length < 50}
+                      >
+                        {submitting ? (
+                          "Submitting..."
+                        ) : (
+                          <>
+                            <FileCheck className="mr-2 h-4 w-4" />
+                            Submit Nomination
+                          </>
+                        )}
+                      </Button>
+                    </div>
                   </div>
                 </CardContent>
               </Card>
