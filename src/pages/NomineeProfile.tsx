@@ -33,6 +33,7 @@ interface NomineeDetails {
   jury_score: number;
   final_score: number;
   evidence_urls: string[] | null;
+  renomination_count: number;
   created_at: string;
   subcategories: {
     name: string;
@@ -80,6 +81,7 @@ export default function NomineeProfile() {
           jury_score,
           final_score,
           evidence_urls,
+          renomination_count,
           created_at,
           subcategories!inner(
             name,
@@ -407,6 +409,14 @@ export default function NomineeProfile() {
                   </CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-4">
+                  {/* Renomination Count Display */}
+                  <div className="text-center p-4 bg-charcoal rounded-lg">
+                    <div className="text-3xl font-bold text-gold mb-1">
+                      {nominee.renomination_count.toLocaleString()}
+                    </div>
+                    <div className="text-sm text-ivory/60">Endorsements</div>
+                  </div>
+
                   <p className="text-sm text-ivory/60">
                     Believe in {nominee.name.split(" ")[0]}'s work? Renominate to show your support!
                   </p>
