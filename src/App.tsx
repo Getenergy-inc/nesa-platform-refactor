@@ -2,6 +2,7 @@ import { Toaster } from "@/components/ui/toaster";
 import Nominees from "./pages/Nominees";
 import NomineeProfile from "./pages/NomineeProfile";
 import CertificateVerify from "./pages/CertificateVerify";
+import Results from "./pages/Results";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
@@ -101,6 +102,7 @@ const App = () => (
                 <Route path="/nominees" element={<Nominees />} />
                 <Route path="/nominees/:slug" element={<NomineeProfile />} />
                 <Route path="/vote" element={<Vote />} />
+                <Route path="/results" element={<Results />} />
                 <Route path="/dashboard" element={<Dashboard />} />
                 <Route path="/dashboard/nominations" element={<Dashboard />} />
                 <Route path="/nrc" element={<NRCDashboard />} />
