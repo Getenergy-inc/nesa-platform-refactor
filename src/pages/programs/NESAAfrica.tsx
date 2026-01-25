@@ -1,6 +1,7 @@
 import { Helmet } from "react-helmet-async";
 import { NESAHeader } from "@/components/nesa/NESAHeader";
 import { NESAHero } from "@/components/nesa/NESAHero";
+import { CVOMessageSection } from "@/components/nesa/CVOMessageSection";
 import { KeyDatesBanner } from "@/components/nesa/KeyDatesBanner";
 import { UpcomingEventsSection } from "@/components/nesa/UpcomingEventsSection";
 import { NominationPathSection } from "@/components/nesa/NominationPathSection";
@@ -37,6 +38,7 @@ export default function NESAAfrica() {
       <div className="min-h-screen bg-charcoal">
         <NESAHeader />
         <NESAHero />
+        <CVOMessageSection />
         <KeyDatesBanner />
         <UpcomingEventsSection />
         <NominationPathSection />
