@@ -12,6 +12,7 @@ import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Separator } from "@/components/ui/separator";
+import { Progress } from "@/components/ui/progress";
 import { Skeleton } from "@/components/ui/skeleton";
 import { toast } from "sonner";
 import { NESAHeader } from "@/components/nesa/NESAHeader";
@@ -410,11 +411,28 @@ export default function NomineeProfile() {
                 </CardHeader>
                 <CardContent className="space-y-4">
                   {/* Renomination Count Display */}
-                  <div className="text-center p-4 bg-charcoal rounded-lg">
-                    <div className="text-3xl font-bold text-gold mb-1">
-                      {nominee.renomination_count.toLocaleString()}
+                  <div className="p-4 bg-charcoal rounded-lg space-y-3">
+                    <div className="flex items-center justify-between">
+                      <span className="text-sm text-ivory/60">Endorsements</span>
+                      <span className="text-sm font-medium text-ivory/80">
+                        {nominee.renomination_count} / 200
+                      </span>
                     </div>
-                    <div className="text-sm text-ivory/60">Endorsements</div>
+                    <Progress 
+                      value={(nominee.renomination_count / 200) * 100} 
+                      className="h-2 bg-charcoal-light [&>div]:bg-gradient-to-r [&>div]:from-gold [&>div]:to-gold-light"
+                    />
+                    <div className="text-center">
+                      <span className="text-2xl font-bold text-gold">
+                        {Math.round((nominee.renomination_count / 200) * 100)}%
+                      </span>
+                      <span className="text-sm text-ivory/50 ml-1">complete</span>
+                    </div>
+                    {nominee.renomination_count >= 200 && (
+                      <div className="text-center text-xs text-gold/80 bg-gold/10 rounded-md py-1.5">
+                        🎉 Maximum endorsements reached!
+                      </div>
+                    )}
                   </div>
 
                   <p className="text-sm text-ivory/60">
