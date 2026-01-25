@@ -45,10 +45,10 @@ export default function Gala() {
   return (
     <>
       <Helmet>
-        <title>Awards Gala | NESA-Africa {currentEdition?.displayYear} Live Ceremony</title>
+        <title>{`Awards Gala | NESA-Africa ${currentEdition?.displayYear || ''} Live Ceremony`}</title>
         <meta
           name="description"
-          content={`Watch the NESA-Africa ${currentEdition?.displayYear} Awards Gala — a spectacular 6-hour live ceremony announcing Blue Garnet winners.`}
+          content={`Watch the NESA-Africa ${currentEdition?.displayYear || ''} Awards Gala — a spectacular 6-hour live ceremony announcing Blue Garnet winners.`}
         />
       </Helmet>
 
