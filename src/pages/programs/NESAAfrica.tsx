@@ -21,6 +21,7 @@ import { VisionDocumentSection } from "@/components/nesa/VisionDocumentSection";
 import { WatchMediaSection } from "@/components/nesa/WatchMediaSection";
 import { FinalCTASection } from "@/components/nesa/FinalCTASection";
 import { NESAFooter } from "@/components/nesa/NESAFooter";
+import { JudgesSection } from "@/components/nesa/JudgesSection";
 
 export default function NESAAfrica() {
   return (
@@ -51,6 +52,7 @@ export default function NESAAfrica() {
         <GetInvolvedSection />
         <FirewallsSection />
         <SponsorsSection />
+        <JudgesSection />
         <CategoriesSection />
         <VisionDocumentSection />
         <WatchMediaSection />
