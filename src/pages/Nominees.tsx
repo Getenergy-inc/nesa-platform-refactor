@@ -1,7 +1,7 @@
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect, useRef, useCallback } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { Link } from "react-router-dom";
-import { Search, Users, Award, Building2, MapPin, Filter, ChevronLeft, ChevronRight } from "lucide-react";
+import { Search, Users, Award, Building2, MapPin, Filter, ChevronLeft, ChevronRight, LayoutGrid, List, Loader2 } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
@@ -10,6 +10,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Skeleton } from "@/components/ui/skeleton";
+import { Toggle } from "@/components/ui/toggle";
 import { NESAHeader } from "@/components/nesa/NESAHeader";
 import { NESAFooter } from "@/components/nesa/NESAFooter";
 
@@ -51,6 +52,9 @@ export default function Nominees() {
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategory, setSelectedCategory] = useState<string>("all");
   const [currentPage, setCurrentPage] = useState(1);
+  const [useInfiniteScroll, setUseInfiniteScroll] = useState(false);
+  const [visibleCount, setVisibleCount] = useState(ITEMS_PER_PAGE);
+  const loadMoreRef = useRef<HTMLDivElement>(null);
 
   // Fetch categories
   const { data: categories = [] } = useQuery({
@@ -128,16 +132,57 @@ export default function Nominees() {
     return filteredNominees.slice(startIndex, startIndex + ITEMS_PER_PAGE);
   }, [filteredNominees, currentPage]);
 
-  // Reset to page 1 when filters change
+  // Infinite scroll nominees
+  const infiniteScrollNominees = useMemo(() => {
+    return filteredNominees.slice(0, visibleCount);
+  }, [filteredNominees, visibleCount]);
+
+  const hasMore = visibleCount < filteredNominees.length;
+
+  // Reset when filters change
   const handleSearchChange = (value: string) => {
     setSearchQuery(value);
     setCurrentPage(1);
+    setVisibleCount(ITEMS_PER_PAGE);
   };
 
   const handleCategoryChange = (value: string) => {
     setSelectedCategory(value);
     setCurrentPage(1);
+    setVisibleCount(ITEMS_PER_PAGE);
   };
+
+  // Infinite scroll intersection observer
+  const handleObserver = useCallback(
+    (entries: IntersectionObserverEntry[]) => {
+      const [entry] = entries;
+      if (entry.isIntersecting && hasMore && useInfiniteScroll) {
+        setVisibleCount((prev) => Math.min(prev + ITEMS_PER_PAGE, filteredNominees.length));
+      }
+    },
+    [hasMore, useInfiniteScroll, filteredNominees.length]
+  );
+
+  useEffect(() => {
+    const element = loadMoreRef.current;
+    if (!element || !useInfiniteScroll) return;
+
+    const observer = new IntersectionObserver(handleObserver, {
+      root: null,
+      rootMargin: "100px",
+      threshold: 0,
+    });
+
+    observer.observe(element);
+    return () => observer.disconnect();
+  }, [handleObserver, useInfiniteScroll]);
+
+  // Reset visible count when switching modes
+  useEffect(() => {
+    if (useInfiniteScroll) {
+      setVisibleCount(ITEMS_PER_PAGE);
+    }
+  }, [useInfiniteScroll]);
 
   const getInitials = (name: string) => {
     return name
@@ -147,6 +192,8 @@ export default function Nominees() {
       .toUpperCase()
       .slice(0, 2);
   };
+
+  const displayedNominees = useInfiniteScroll ? infiniteScrollNominees : paginatedNominees;
 
   return (
     <div className="min-h-screen bg-charcoal">
@@ -235,6 +282,37 @@ export default function Nominees() {
       {/* Nominees Grid */}
       <section className="py-16">
         <div className="container mx-auto px-4">
+          {/* View Mode Toggle */}
+          {!isLoading && filteredNominees.length > 0 && (
+            <div className="flex items-center justify-between mb-6">
+              <p className="text-sm text-ivory/60">
+                {useInfiniteScroll 
+                  ? `Showing ${infiniteScrollNominees.length} of ${filteredNominees.length}`
+                  : `Page ${currentPage} of ${totalPages}`
+                }
+              </p>
+              <div className="flex items-center gap-2">
+                <span className="text-sm text-ivory/60">View:</span>
+                <Toggle
+                  pressed={!useInfiniteScroll}
+                  onPressedChange={() => setUseInfiniteScroll(false)}
+                  className="data-[state=on]:bg-gold data-[state=on]:text-charcoal"
+                  aria-label="Pagination view"
+                >
+                  <LayoutGrid className="h-4 w-4" />
+                </Toggle>
+                <Toggle
+                  pressed={useInfiniteScroll}
+                  onPressedChange={() => setUseInfiniteScroll(true)}
+                  className="data-[state=on]:bg-gold data-[state=on]:text-charcoal"
+                  aria-label="Infinite scroll view"
+                >
+                  <List className="h-4 w-4" />
+                </Toggle>
+              </div>
+            </div>
+          )}
+
           {isLoading ? (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
               {[...Array(8)].map((_, i) => (
@@ -267,6 +345,7 @@ export default function Nominees() {
                     setSearchQuery("");
                     setSelectedCategory("all");
                     setCurrentPage(1);
+                    setVisibleCount(ITEMS_PER_PAGE);
                   }}
                   className="border-gold/30 text-gold hover:bg-gold/10"
                 >
@@ -277,13 +356,29 @@ export default function Nominees() {
           ) : (
             <>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-                {paginatedNominees.map((nominee) => (
+                {displayedNominees.map((nominee) => (
                   <NomineeCard key={nominee.id} nominee={nominee} getInitials={getInitials} />
                 ))}
               </div>
 
+              {/* Infinite Scroll Loader */}
+              {useInfiniteScroll && (
+                <div ref={loadMoreRef} className="mt-8 flex justify-center">
+                  {hasMore ? (
+                    <div className="flex items-center gap-2 text-ivory/60">
+                      <Loader2 className="h-5 w-5 animate-spin" />
+                      <span>Loading more...</span>
+                    </div>
+                  ) : (
+                    <p className="text-ivory/40 text-sm">
+                      You've reached the end — {filteredNominees.length} nominees shown
+                    </p>
+                  )}
+                </div>
+              )}
+
               {/* Pagination Controls */}
-              {totalPages > 1 && (
+              {!useInfiniteScroll && totalPages > 1 && (
                 <div className="mt-12 flex items-center justify-center gap-2">
                   <Button
                     variant="outline"
@@ -298,7 +393,6 @@ export default function Nominees() {
                   <div className="flex items-center gap-1">
                     {Array.from({ length: totalPages }, (_, i) => i + 1)
                       .filter((page) => {
-                        // Show first, last, and pages near current
                         return (
                           page === 1 ||
                           page === totalPages ||
@@ -306,7 +400,6 @@ export default function Nominees() {
                         );
                       })
                       .map((page, index, arr) => {
-                        // Add ellipsis between gaps
                         const prevPage = arr[index - 1];
                         const showEllipsisBefore = prevPage && page - prevPage > 1;
 
