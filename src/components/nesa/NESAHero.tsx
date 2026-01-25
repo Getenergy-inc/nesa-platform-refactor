@@ -2,14 +2,15 @@ import { Play, Trophy, Users, Award, FileText, Ticket, PlayCircle } from "lucide
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { useSeason } from "@/contexts/SeasonContext";
+import { NESALogo } from "@/components/nesa/NESALogo";
 import stageBackdrop from "@/assets/nesa-stage-backdrop.jpg";
 
 const quickNavItems = [
   { icon: Users, label: "Refer", href: "#refer" },
   { icon: Award, label: "Nominate", href: "/nominate" },
-  { icon: FileText, label: "Vision 2035", href: "#vision-2035" },
-  { icon: Ticket, label: "Tickets", href: "#tickets" },
-  { icon: PlayCircle, label: "Watch", href: "#watch" },
+  { icon: FileText, label: "Vision 2035", href: "/about/vision-2035" },
+  { icon: Ticket, label: "Tickets", href: "/tickets" },
+  { icon: PlayCircle, label: "Watch", href: "/media/tv" },
 ];
 
 export function NESAHero() {
@@ -58,6 +59,11 @@ export function NESAHero() {
 
       {/* Hero Content */}
       <div className="relative flex-1 flex flex-col items-center justify-center text-center px-4 py-16">
+        {/* NESA Logo Icon */}
+        <div className="mb-6">
+          <NESALogo variant="icon" size="lg" />
+        </div>
+
         {/* Stage-aware Badge */}
         <div className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-charcoal/80 border border-gold/40 backdrop-blur-sm mb-8">
           <Award className="h-4 w-4 text-gold" />
@@ -84,15 +90,17 @@ export function NESAHero() {
           of educational transformation, social impact, and legacy.
         </p>
 
-        {/* CTA Buttons */}
+        {/* CTA Buttons with NESA branding */}
         <div className="flex flex-col sm:flex-row gap-4">
-          <Button
-            size="lg"
-            className="bg-gold hover:bg-gold-dark text-charcoal font-semibold rounded-full px-8 gap-2 shadow-gold"
-          >
-            <Play className="h-4 w-4" />
-            Read More About NESA
-          </Button>
+          <Link to="/about">
+            <Button
+              size="lg"
+              className="bg-gold hover:bg-gold-dark text-charcoal font-semibold rounded-full px-8 gap-2 shadow-gold"
+            >
+              <NESALogo variant="icon" size="sm" className="h-4 w-4" />
+              Read More About NESA
+            </Button>
+          </Link>
           <Link to="/nominate">
             <Button
               size="lg"

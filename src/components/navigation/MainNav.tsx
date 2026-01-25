@@ -31,6 +31,7 @@ import {
 import { cn } from "@/lib/utils";
 import { useAuth } from "@/contexts/AuthContext";
 import { MAIN_NAV, MOBILE_NAV, type NavItem } from "@/config/navigation";
+import { NESALogo } from "@/components/nesa/NESALogo";
 
 // ============================================================================
 // DESKTOP NAVIGATION
@@ -141,7 +142,10 @@ function MobileNav() {
       </SheetTrigger>
       <SheetContent side="right" className="w-[300px] bg-charcoal border-l border-gold/20 p-0">
         <SheetHeader className="p-4 border-b border-gold/20">
-          <SheetTitle className="text-gold font-display">Menu</SheetTitle>
+          <SheetTitle className="flex items-center gap-2">
+            <NESALogo variant="icon" size="sm" />
+            <span className="text-gold font-display">Menu</span>
+          </SheetTitle>
         </SheetHeader>
         
         <nav className="flex flex-col h-full">
@@ -366,10 +370,8 @@ export function MainNav() {
     <header className="sticky top-0 z-50 w-full bg-charcoal/95 backdrop-blur-md border-b border-gold/20">
       <div className="container flex h-16 items-center justify-between">
         {/* Logo */}
-        <Link to="/" className="flex items-center gap-3">
-          <div className="h-10 w-auto bg-charcoal-light rounded flex items-center justify-center border border-gold/30 px-3">
-            <span className="text-gold font-display font-bold text-sm tracking-wide">NESA-Africa</span>
-          </div>
+        <Link to="/" className="flex items-center">
+          <NESALogo variant="full" size="md" />
         </Link>
 
         {/* Desktop Navigation */}

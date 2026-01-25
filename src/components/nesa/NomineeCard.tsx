@@ -4,6 +4,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Award, Building2, MapPin, RotateCcw, ThumbsUp, Loader2 } from "lucide-react";
+import { NESAStamp } from "@/components/nesa/NESALogo";
 
 export interface NomineeCardData {
   id: string;
@@ -60,11 +61,9 @@ export function NomineeCard({
 
   const cardContent = (
     <Card className="group relative bg-charcoal-light border-gold/10 hover:border-gold/30 transition-all duration-300 hover:shadow-lg hover:shadow-gold/5 h-full overflow-hidden">
-      {/* NESA-Africa Badge - Top Left */}
+      {/* NESA-Africa Stamp - Top Left */}
       <div className="absolute top-2 left-2 z-10">
-        <div className="bg-charcoal/90 backdrop-blur-sm border border-gold/30 rounded px-1.5 py-0.5 flex items-center gap-1">
-          <span className="text-gold font-display text-[10px] font-bold tracking-wide">NESA</span>
-        </div>
+        <NESAStamp size="sm" />
       </div>
 
       <CardContent className={isCompact ? "p-4" : "p-6"}>
