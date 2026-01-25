@@ -3,7 +3,7 @@
 
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { ChevronDown, Menu, X, Globe, User, LogOut } from "lucide-react";
+import { ChevronDown, Menu, X, Globe, User, LogOut, MessageSquare } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   NavigationMenu,
@@ -32,12 +32,16 @@ import { cn } from "@/lib/utils";
 import { useAuth } from "@/contexts/AuthContext";
 import { MAIN_NAV, MOBILE_NAV, type NavItem } from "@/config/navigation";
 import { NESALogo } from "@/components/nesa/NESALogo";
+import { CVOFlashMessage, CVOMessageTrigger } from "@/components/nesa/CVOFlashMessage";
+
+// Global state for CVO message (shared between desktop and mobile)
+let setCVOMessageOpen: ((open: boolean) => void) | null = null;
 
 // ============================================================================
 // DESKTOP NAVIGATION
 // ============================================================================
 
-function DesktopNav() {
+function DesktopNav({ onOpenCVOMessage }: { onOpenCVOMessage: () => void }) {
   const location = useLocation();
 
   return (
@@ -52,7 +56,19 @@ function DesktopNav() {
                   {item.label}
                 </NavigationMenuTrigger>
                 <NavigationMenuContent>
-                  <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px] bg-charcoal border border-gold/20">
+                  <ul className={cn(
+                    "grid gap-3 p-4 bg-charcoal border border-gold/20",
+                    item.label === "About" 
+                      ? "w-[420px]" 
+                      : "w-[400px] md:w-[500px] md:grid-cols-2 lg:w-[600px]"
+                  )}>
+                    {/* CVO Message Trigger - Only for About menu */}
+                    {item.label === "About" && (
+                      <li className="col-span-full border-b border-gold/10 pb-3 mb-1">
+                        <CVOMessageTrigger onClick={onOpenCVOMessage} variant="dropdown" />
+                      </li>
+                    )}
+                    
                     {item.children.map((child) => (
                       <li key={child.href}>
                         <NavigationMenuLink asChild>
@@ -112,7 +128,7 @@ function DesktopNav() {
 // MOBILE NAVIGATION
 // ============================================================================
 
-function MobileNav() {
+function MobileNav({ onOpenCVOMessage }: { onOpenCVOMessage: () => void }) {
   const [open, setOpen] = useState(false);
   const [expandedItems, setExpandedItems] = useState<string[]>([]);
   const location = useLocation();
@@ -126,6 +142,11 @@ function MobileNav() {
 
   const handleLinkClick = () => {
     setOpen(false);
+  };
+
+  const handleCVOClick = () => {
+    setOpen(false);
+    onOpenCVOMessage();
   };
 
   return (
@@ -198,6 +219,13 @@ function MobileNav() {
                       </button>
                       {expandedItems.includes(item.href) && (
                         <div className="bg-charcoal-light/30 py-1">
+                          {/* CVO Message for About menu in mobile */}
+                          {item.label === "About" && (
+                            <div className="px-4 py-2 border-b border-gold/10 mb-1">
+                              <CVOMessageTrigger onClick={handleCVOClick} variant="dropdown" />
+                            </div>
+                          )}
+                          
                           {item.children.map((child) => (
                             <Link
                               key={child.href}
@@ -366,37 +394,47 @@ function UserMenu() {
 // ============================================================================
 
 export function MainNav() {
+  const [cvoMessageOpen, setCVOMessageOpen] = useState(false);
+
   return (
-    <header className="sticky top-0 z-50 w-full bg-charcoal/95 backdrop-blur-md border-b border-gold/20">
-      <div className="container flex h-16 items-center justify-between">
-        {/* Logo */}
-        <Link to="/" className="flex items-center">
-          <NESALogo variant="full" size="md" />
-        </Link>
+    <>
+      <header className="sticky top-0 z-50 w-full bg-charcoal/95 backdrop-blur-md border-b border-gold/20">
+        <div className="container flex h-16 items-center justify-between">
+          {/* Logo */}
+          <Link to="/" className="flex items-center">
+            <NESALogo variant="full" size="md" />
+          </Link>
 
-        {/* Desktop Navigation */}
-        <DesktopNav />
+          {/* Desktop Navigation */}
+          <DesktopNav onOpenCVOMessage={() => setCVOMessageOpen(true)} />
 
-        {/* Right Side */}
-        <div className="flex items-center gap-2">
-          {/* Language Selector */}
-          <Button
-            variant="ghost"
-            size="sm"
-            className="hidden sm:flex text-white/90 hover:text-gold hover:bg-gold/10 gap-2"
-          >
-            <Globe className="h-4 w-4" />
-            <span className="hidden md:inline">EN</span>
-          </Button>
+          {/* Right Side */}
+          <div className="flex items-center gap-2">
+            {/* Language Selector */}
+            <Button
+              variant="ghost"
+              size="sm"
+              className="hidden sm:flex text-white/90 hover:text-gold hover:bg-gold/10 gap-2"
+            >
+              <Globe className="h-4 w-4" />
+              <span className="hidden md:inline">EN</span>
+            </Button>
 
-          {/* User Menu (Desktop) */}
-          <UserMenu />
+            {/* User Menu (Desktop) */}
+            <UserMenu />
 
-          {/* Mobile Menu */}
-          <MobileNav />
+            {/* Mobile Menu */}
+            <MobileNav onOpenCVOMessage={() => setCVOMessageOpen(true)} />
+          </div>
         </div>
-      </div>
-    </header>
+      </header>
+
+      {/* CVO Flash Message Modal */}
+      <CVOFlashMessage 
+        isOpen={cvoMessageOpen} 
+        onClose={() => setCVOMessageOpen(false)} 
+      />
+    </>
   );
 }
 
