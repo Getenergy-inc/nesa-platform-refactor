@@ -1,4 +1,5 @@
 import { cn } from "@/lib/utils";
+import nesaStamp from "@/assets/nesa-stamp.jpeg";
 
 interface NESALogoProps {
   className?: string;
@@ -8,7 +9,7 @@ interface NESALogoProps {
 
 /**
  * NESA-Africa Logo Component
- * Based on the official NESA branding with the star burst design
+ * Uses the official NESA stamp image
  */
 export function NESALogo({ className, variant = "full", size = "md" }: NESALogoProps) {
   const sizeClasses = {
@@ -26,46 +27,16 @@ export function NESALogo({ className, variant = "full", size = "md" }: NESALogoP
           className
         )}
       >
-        {/* Star burst icon representing education excellence */}
-        <svg
-          viewBox="0 0 40 40"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-          className="h-full w-full"
-        >
-          {/* Outer glow/ring */}
-          <circle
-            cx="20"
-            cy="20"
-            r="18"
-            stroke="currentColor"
-            strokeWidth="1.5"
-            className="text-gold/40"
-          />
-          
-          {/* Central star with rays */}
-          <g className="text-gold">
-            {/* Main 8-point star */}
-            <path
-              d="M20 4L22.5 15.5L34 12L24.5 20L34 28L22.5 24.5L20 36L17.5 24.5L6 28L15.5 20L6 12L17.5 15.5L20 4Z"
-              fill="currentColor"
-              fillOpacity="0.9"
-            />
-            {/* Inner highlight */}
-            <circle cx="20" cy="20" r="5" fill="currentColor" />
-          </g>
-          
-          {/* Accent dots at cardinal points */}
-          <circle cx="20" cy="2" r="1.5" className="fill-gold" />
-          <circle cx="38" cy="20" r="1.5" className="fill-gold" />
-          <circle cx="20" cy="38" r="1.5" className="fill-gold" />
-          <circle cx="2" cy="20" r="1.5" className="fill-gold" />
-        </svg>
+        <img 
+          src={nesaStamp} 
+          alt="NESA Africa" 
+          className="h-full w-full object-contain rounded-full"
+        />
       </div>
     );
   }
 
-  // Full logo with text
+  // Full logo with image and text
   return (
     <div
       className={cn(
@@ -74,26 +45,13 @@ export function NESALogo({ className, variant = "full", size = "md" }: NESALogoP
         className
       )}
     >
-      {/* Logo Icon */}
+      {/* Logo Image */}
       <div className="relative flex items-center justify-center h-full aspect-square">
-        <svg
-          viewBox="0 0 40 40"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-          className="h-full w-full"
-        >
-          {/* Central star with rays */}
-          <g className="text-gold">
-            {/* Main 8-point star */}
-            <path
-              d="M20 4L22.5 15.5L34 12L24.5 20L34 28L22.5 24.5L20 36L17.5 24.5L6 28L15.5 20L6 12L17.5 15.5L20 4Z"
-              fill="currentColor"
-              fillOpacity="0.9"
-            />
-            {/* Inner highlight */}
-            <circle cx="20" cy="20" r="4" fill="currentColor" />
-          </g>
-        </svg>
+        <img 
+          src={nesaStamp} 
+          alt="NESA Africa" 
+          className="h-full w-full object-contain rounded-full"
+        />
       </div>
 
       {/* Text */}
@@ -117,36 +75,24 @@ export function NESALogo({ className, variant = "full", size = "md" }: NESALogoP
  */
 export function NESAStamp({ className, size = "sm" }: { className?: string; size?: "xs" | "sm" | "md" }) {
   const sizeConfig = {
-    xs: { container: "px-1 py-0.5", icon: "h-3 w-3", text: "text-[8px]" },
-    sm: { container: "px-1.5 py-0.5", icon: "h-4 w-4", text: "text-[10px]" },
-    md: { container: "px-2 py-1", icon: "h-5 w-5", text: "text-xs" },
+    xs: "h-5 w-5",
+    sm: "h-6 w-6",
+    md: "h-8 w-8",
   };
-
-  const config = sizeConfig[size];
 
   return (
     <div
       className={cn(
-        "inline-flex items-center gap-1 bg-charcoal/90 backdrop-blur-sm border border-gold/30 rounded",
-        config.container,
+        "inline-flex items-center justify-center",
+        sizeConfig[size],
         className
       )}
     >
-      {/* Mini star icon */}
-      <svg
-        viewBox="0 0 24 24"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-        className={cn("text-gold", config.icon)}
-      >
-        <path
-          d="M12 2L13.5 9.5L21 8L15 12L21 16L13.5 14.5L12 22L10.5 14.5L3 16L9 12L3 8L10.5 9.5L12 2Z"
-          fill="currentColor"
-        />
-      </svg>
-      <span className={cn("text-gold font-display font-bold tracking-wide", config.text)}>
-        NESA
-      </span>
+      <img 
+        src={nesaStamp} 
+        alt="NESA" 
+        className="h-full w-full object-contain rounded-full shadow-lg"
+      />
     </div>
   );
 }
