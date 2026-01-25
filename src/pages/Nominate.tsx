@@ -1,7 +1,7 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { useAuth } from "@/contexts/AuthContext";
-import { useSeason, useStageGate } from "@/contexts/SeasonContext";
+import { useSeason } from "@/contexts/SeasonContext";
 import { StageGate, StageLocked } from "@/components/StageGate";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
@@ -10,17 +10,20 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Badge } from "@/components/ui/badge";
 import { toast } from "sonner";
-import { Award, Upload, X, ArrowLeft, CheckCircle, FileText, Image as ImageIcon, User, Building, FileCheck } from "lucide-react";
+import { Award, Upload, X, ArrowLeft, CheckCircle, FileText, Image as ImageIcon, User, Building, FileCheck, Globe, MapPin, Trophy, Star } from "lucide-react";
+import { 
+  NESA_CATEGORIES, 
+  CategoryDefinition, 
+  getScopeBadge, 
+  getTierPath, 
+  isCompetitiveCategory,
+  TIER_INFO,
+  AwardTier
+} from "@/config/nesaCategories";
 
-interface Category {
-  id: string;
-  name: string;
-  slug: string;
-  description: string | null;
-}
-
-interface Subcategory {
+interface DbSubcategory {
   id: string;
   name: string;
   slug: string;
@@ -41,10 +44,9 @@ export default function Nominate() {
   const navigate = useNavigate();
 
   // Form state
-  const [categories, setCategories] = useState<Category[]>([]);
-  const [subcategories, setSubcategories] = useState<Subcategory[]>([]);
-  const [selectedCategory, setSelectedCategory] = useState<string>("");
-  const [selectedSubcategory, setSelectedSubcategory] = useState<string>("");
+  const [dbSubcategories, setDbSubcategories] = useState<DbSubcategory[]>([]);
+  const [selectedCategoryId, setSelectedCategoryId] = useState<string>("");
+  const [selectedSubcategoryId, setSelectedSubcategoryId] = useState<string>("");
   const [nomineeName, setNomineeName] = useState("");
   const [nomineeTitle, setNomineeTitle] = useState("");
   const [nomineeOrganization, setNomineeOrganization] = useState("");
@@ -56,44 +58,55 @@ export default function Nominate() {
   const [submitting, setSubmitting] = useState(false);
   const [step, setStep] = useState(1);
 
-  // Load categories
-  useEffect(() => {
-    async function loadCategories() {
-      const { data, error } = await supabase
-        .from("categories")
-        .select("*")
-        .eq("is_active", true)
-        .order("display_order");
+  // Get active categories from config
+  const activeCategories = useMemo(() => 
+    NESA_CATEGORIES.filter(cat => cat.isActive).sort((a, b) => a.displayOrder - b.displayOrder),
+    []
+  );
 
-      if (!error && data) {
-        setCategories(data);
-      }
-    }
-    loadCategories();
-  }, []);
+  // Find selected category from config
+  const selectedCategory = useMemo(() => 
+    activeCategories.find(cat => cat.id === selectedCategoryId),
+    [activeCategories, selectedCategoryId]
+  );
 
-  // Load subcategories when category changes
+  // Load subcategories from database when category changes
   useEffect(() => {
     async function loadSubcategories() {
-      if (!selectedCategory) {
-        setSubcategories([]);
+      if (!selectedCategoryId) {
+        setDbSubcategories([]);
+        return;
+      }
+
+      // First, get the database category ID by slug
+      const categorySlug = selectedCategory?.slug;
+      if (!categorySlug) return;
+
+      const { data: dbCategory, error: catError } = await supabase
+        .from("categories")
+        .select("id")
+        .eq("slug", categorySlug)
+        .single();
+
+      if (catError || !dbCategory) {
+        console.error("Category not found in DB:", catError);
         return;
       }
 
       const { data, error } = await supabase
         .from("subcategories")
         .select("*")
-        .eq("category_id", selectedCategory)
+        .eq("category_id", dbCategory.id)
         .eq("is_active", true)
         .order("display_order");
 
       if (!error && data) {
-        setSubcategories(data);
-        setSelectedSubcategory("");
+        setDbSubcategories(data);
+        setSelectedSubcategoryId("");
       }
     }
     loadSubcategories();
-  }, [selectedCategory]);
+  }, [selectedCategoryId, selectedCategory?.slug]);
 
   // Redirect to login if not authenticated
   useEffect(() => {
@@ -187,7 +200,7 @@ export default function Nominate() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    if (!selectedSubcategory) {
+    if (!selectedSubcategoryId) {
       toast.error("Please select a category and subcategory");
       return;
     }
@@ -219,7 +232,7 @@ export default function Nominate() {
 
       const { error } = await supabase.from("nominations").insert({
         season_id: season.id,
-        subcategory_id: selectedSubcategory,
+        subcategory_id: selectedSubcategoryId,
         nominee_name: nomineeName.trim(),
         nominee_title: nomineeTitle.trim() || null,
         nominee_organization: nomineeOrganization.trim() || null,
@@ -250,8 +263,49 @@ export default function Nominate() {
     }
   };
 
-  const canProceedToStep2 = selectedCategory && selectedSubcategory;
+  const canProceedToStep2 = selectedCategoryId && selectedSubcategoryId;
   const canProceedToStep3 = nomineeName.trim().length > 0;
+
+  // Get tier path for selected category
+  const tierPath = selectedCategory ? getTierPath(selectedCategory) : [];
+  const scopeBadge = selectedCategory ? getScopeBadge(selectedCategory.scope) : null;
+  const isCompetitive = selectedCategory ? isCompetitiveCategory(selectedCategory) : false;
+
+  // Render tier badges
+  const renderTierBadges = (category: CategoryDefinition) => {
+    const tiers = getTierPath(category);
+    return (
+      <div className="flex flex-wrap gap-1">
+        {tiers.map((tier) => (
+          <Badge 
+            key={tier} 
+            variant="outline" 
+            className="text-xs"
+            style={{ 
+              borderColor: TIER_INFO[tier].color, 
+              color: TIER_INFO[tier].color 
+            }}
+          >
+            {TIER_INFO[tier].shortName}
+          </Badge>
+        ))}
+      </div>
+    );
+  };
+
+  // Get scope icon
+  const getScopeIcon = (scope: string) => {
+    switch (scope) {
+      case "AFRICA_REGIONAL":
+        return <Globe className="h-4 w-4" />;
+      case "NIGERIA":
+        return <MapPin className="h-4 w-4" />;
+      case "ICON":
+        return <Star className="h-4 w-4" />;
+      default:
+        return <Trophy className="h-4 w-4" />;
+    }
+  };
 
   if (authLoading) {
     return (
@@ -323,46 +377,136 @@ export default function Nominate() {
                 <CardHeader>
                   <CardTitle className="font-display">Select Category</CardTitle>
                   <CardDescription>
-                    Choose the award category that best fits your nominee
+                    Choose from {activeCategories.length} official NESA award categories across Africa and Nigeria
                   </CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-6">
                   <div className="space-y-2">
                     <Label htmlFor="category">Award Category</Label>
-                    <Select value={selectedCategory} onValueChange={setSelectedCategory}>
+                    <Select value={selectedCategoryId} onValueChange={setSelectedCategoryId}>
                       <SelectTrigger id="category">
                         <SelectValue placeholder="Select a category" />
                       </SelectTrigger>
                       <SelectContent>
-                        {categories.map((cat) => (
-                          <SelectItem key={cat.id} value={cat.id}>
-                            {cat.name}
-                          </SelectItem>
-                        ))}
+                        {activeCategories.map((cat) => {
+                          const badge = getScopeBadge(cat.scope);
+                          return (
+                            <SelectItem key={cat.id} value={cat.id}>
+                              <div className="flex items-center gap-2">
+                                <span>{cat.name}</span>
+                                <Badge 
+                                  variant="outline" 
+                                  className="ml-auto text-xs"
+                                  style={{ borderColor: badge.color, color: badge.color }}
+                                >
+                                  {badge.label}
+                                </Badge>
+                              </div>
+                            </SelectItem>
+                          );
+                        })}
                       </SelectContent>
                     </Select>
-                    {selectedCategory && categories.find((c) => c.id === selectedCategory)?.description && (
-                      <p className="text-sm text-muted-foreground">
-                        {categories.find((c) => c.id === selectedCategory)?.description}
-                      </p>
-                    )}
                   </div>
 
-                  {selectedCategory && subcategories.length > 0 && (
+                  {/* Category Info Card */}
+                  {selectedCategory && (
+                    <div className="rounded-lg border bg-muted/30 p-4 space-y-4">
+                      <div className="flex items-start justify-between">
+                        <div className="space-y-1">
+                          <h4 className="font-semibold">{selectedCategory.name}</h4>
+                          <p className="text-sm text-muted-foreground">{selectedCategory.description}</p>
+                        </div>
+                        {scopeBadge && (
+                          <Badge 
+                            variant="secondary"
+                            className="flex items-center gap-1"
+                            style={{ backgroundColor: `${scopeBadge.color}20`, color: scopeBadge.color }}
+                          >
+                            {getScopeIcon(selectedCategory.scope)}
+                            {scopeBadge.label}
+                          </Badge>
+                        )}
+                      </div>
+
+                      <div className="grid grid-cols-2 gap-4 text-sm">
+                        <div>
+                          <span className="text-muted-foreground">Selection Method:</span>
+                          <p className="font-medium">{selectedCategory.selectionMethod}</p>
+                        </div>
+                        <div>
+                          <span className="text-muted-foreground">Competition:</span>
+                          <p className="font-medium">
+                            {isCompetitive ? (
+                              <span className="text-amber-600">Competitive</span>
+                            ) : (
+                              <span className="text-emerald-600">Non-Competitive</span>
+                            )}
+                          </p>
+                        </div>
+                      </div>
+
+                      <div>
+                        <span className="text-sm text-muted-foreground">Eligible Tiers:</span>
+                        <div className="mt-1">
+                          {renderTierBadges(selectedCategory)}
+                        </div>
+                      </div>
+
+                      {tierPath.length > 0 && (
+                        <div className="border-t pt-3">
+                          <p className="text-xs text-muted-foreground mb-2">Award Progression Path:</p>
+                          <div className="flex items-center gap-2 flex-wrap">
+                            {tierPath.map((tier, index) => (
+                              <div key={tier} className="flex items-center gap-2">
+                                <div 
+                                  className="px-3 py-1 rounded-full text-xs font-medium"
+                                  style={{ 
+                                    backgroundColor: TIER_INFO[tier].bgColor, 
+                                    color: TIER_INFO[tier].color,
+                                    border: `1px solid ${TIER_INFO[tier].borderColor}`
+                                  }}
+                                >
+                                  {TIER_INFO[tier].name}
+                                </div>
+                                {index < tierPath.length - 1 && (
+                                  <span className="text-muted-foreground">→</span>
+                                )}
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      )}
+                    </div>
+                  )}
+
+                  {selectedCategoryId && dbSubcategories.length > 0 && (
                     <div className="space-y-2">
-                      <Label htmlFor="subcategory">Subcategory</Label>
-                      <Select value={selectedSubcategory} onValueChange={setSelectedSubcategory}>
+                      <Label htmlFor="subcategory">
+                        Subcategory
+                        <span className="ml-2 text-xs text-muted-foreground">
+                          ({dbSubcategories.length} available)
+                        </span>
+                      </Label>
+                      <Select value={selectedSubcategoryId} onValueChange={setSelectedSubcategoryId}>
                         <SelectTrigger id="subcategory">
                           <SelectValue placeholder="Select a subcategory" />
                         </SelectTrigger>
                         <SelectContent>
-                          {subcategories.map((sub) => (
+                          {dbSubcategories.map((sub) => (
                             <SelectItem key={sub.id} value={sub.id}>
                               {sub.name}
                             </SelectItem>
                           ))}
                         </SelectContent>
                       </Select>
+                    </div>
+                  )}
+
+                  {selectedCategoryId && dbSubcategories.length === 0 && (
+                    <div className="text-center py-4 text-muted-foreground">
+                      <p>No subcategories found for this category.</p>
+                      <p className="text-sm">Please contact support or try another category.</p>
                     </div>
                   )}
 
@@ -389,6 +533,19 @@ export default function Nominate() {
                   </CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-6">
+                  {/* Selected Category Summary */}
+                  {selectedCategory && (
+                    <div className="flex items-center justify-between rounded-lg bg-muted/50 px-4 py-2">
+                      <div className="flex items-center gap-2">
+                        {getScopeIcon(selectedCategory.scope)}
+                        <span className="font-medium">{selectedCategory.shortName}</span>
+                      </div>
+                      <span className="text-sm text-muted-foreground">
+                        {dbSubcategories.find(s => s.id === selectedSubcategoryId)?.name}
+                      </span>
+                    </div>
+                  )}
+
                   {/* Photo Upload */}
                   <div className="space-y-2">
                     <Label>Nominee Photo (Optional)</Label>
@@ -577,21 +734,34 @@ export default function Nominate() {
                   <div className="rounded-lg bg-muted/50 p-4">
                     <h4 className="mb-3 font-semibold">Nomination Summary</h4>
                     <div className="space-y-2 text-sm">
-                      <div className="flex justify-between">
+                      <div className="flex justify-between items-start">
                         <span className="text-muted-foreground">Category:</span>
-                        <span className="font-medium">
-                          {categories.find((c) => c.id === selectedCategory)?.name}
-                        </span>
+                        <div className="text-right">
+                          <span className="font-medium">{selectedCategory?.name}</span>
+                          {scopeBadge && (
+                            <Badge 
+                              variant="outline" 
+                              className="ml-2 text-xs"
+                              style={{ borderColor: scopeBadge.color, color: scopeBadge.color }}
+                            >
+                              {scopeBadge.label}
+                            </Badge>
+                          )}
+                        </div>
                       </div>
                       <div className="flex justify-between">
                         <span className="text-muted-foreground">Subcategory:</span>
                         <span className="font-medium">
-                          {subcategories.find((s) => s.id === selectedSubcategory)?.name}
+                          {dbSubcategories.find((s) => s.id === selectedSubcategoryId)?.name}
                         </span>
                       </div>
                       <div className="flex justify-between">
                         <span className="text-muted-foreground">Nominee:</span>
                         <span className="font-medium">{nomineeName}</span>
+                      </div>
+                      <div className="flex justify-between">
+                        <span className="text-muted-foreground">Eligible Tiers:</span>
+                        <span className="font-medium">{tierPath.map(t => TIER_INFO[t].shortName).join(" → ")}</span>
                       </div>
                       <div className="flex justify-between">
                         <span className="text-muted-foreground">Evidence Files:</span>
