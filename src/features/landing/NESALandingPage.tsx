@@ -19,6 +19,7 @@ import { WatchLiveSection } from "@/components/nesa/WatchLiveSection";
 import { GetInvolvedSection } from "@/components/nesa/GetInvolvedSection";
 import { FirewallsSection } from "@/components/nesa/FirewallsSection";
 import { SponsorsSection } from "@/components/nesa/SponsorsSection";
+import { EndorsedBySection } from "@/components/nesa/EndorsedBySection";
 import { CategoriesSection } from "@/components/nesa/CategoriesSection";
 import { VisionDocumentSection } from "@/components/nesa/VisionDocumentSection";
 import { WatchMediaSection } from "@/components/nesa/WatchMediaSection";
@@ -60,6 +61,7 @@ export function NESALandingPage() {
         <WatchLiveSection />
         <GetInvolvedSection />
         <FirewallsSection />
+        <EndorsedBySection />
         <SponsorsSection />
         <CategoriesSection />
         <VisionDocumentSection />
