@@ -1,9 +1,10 @@
 import { useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
+import { QRCodeSVG } from "qrcode.react";
 import { 
   Shield, Search, CheckCircle2, XCircle, Award, Calendar,
-  Building2, User, Clock, BadgeCheck, AlertTriangle, QrCode
+  Building2, User, Clock, BadgeCheck, AlertTriangle, QrCode, Download
 } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { Input } from "@/components/ui/input";
@@ -295,6 +296,34 @@ export default function CertificateVerify() {
                       <div className="text-right">
                         <div className="text-sm text-ivory/50 mb-1">Season</div>
                         <p className="text-ivory">{certificate.seasons.name}</p>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* QR Code Section */}
+                  <div className="mt-6 p-4 bg-charcoal rounded-lg">
+                    <div className="flex items-center gap-2 text-sm text-ivory/50 mb-3">
+                      <QrCode className="w-4 h-4" />
+                      Verification QR Code
+                    </div>
+                    <div className="flex flex-col sm:flex-row items-center gap-4">
+                      <div className="bg-white p-3 rounded-lg">
+                        <QRCodeSVG
+                          value={`${window.location.origin}/certificates/verify?code=${certificate.verification_code}`}
+                          size={120}
+                          level="H"
+                          includeMargin={false}
+                          bgColor="#ffffff"
+                          fgColor="#1a1a1a"
+                        />
+                      </div>
+                      <div className="flex-1 text-center sm:text-left">
+                        <p className="text-ivory/70 text-sm mb-2">
+                          Scan this QR code to instantly verify this certificate's authenticity.
+                        </p>
+                        <p className="text-xs text-ivory/40 break-all">
+                          {`${window.location.origin}/certificates/verify?code=${certificate.verification_code}`}
+                        </p>
                       </div>
                     </div>
                   </div>
