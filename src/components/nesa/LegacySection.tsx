@@ -1,7 +1,21 @@
 import { Calendar, Check, Coins } from "lucide-react";
 import { useSeason } from "@/contexts/SeasonContext";
 import { LEGACY_REGIONS } from "@/config/schedule";
-import { LEGACY_FOCUS_AREAS, FUNDING_CHANNELS } from "@/features/landing/data/categories";
+
+// Legacy focus areas
+const LEGACY_FOCUS_AREAS = [
+  "Inclusive classrooms",
+  "Accessibility & assistive facilities",
+  "Learning resources for children with disabilities",
+];
+
+// Funding channels
+const FUNDING_CHANNELS = [
+  "Ticket contributions",
+  "EduAid-Africa donations",
+  "CSR & partner contributions",
+  "Post-award campaigns",
+];
 
 export function LegacySection() {
   const { currentEdition } = useSeason();
