@@ -1,9 +1,10 @@
+import { useState } from "react";
 import { useParams, Link } from "react-router-dom";
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { 
   ArrowLeft, Award, Building2, MapPin, Vote, Share2, 
   Twitter, Facebook, Linkedin, Link2, Calendar, Trophy,
-  Users, ExternalLink, CheckCircle2
+  Users, ExternalLink, CheckCircle2, UserPlus, Loader2
 } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
@@ -15,6 +16,8 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { toast } from "sonner";
 import { NESAHeader } from "@/components/nesa/NESAHeader";
 import { NESAFooter } from "@/components/nesa/NESAFooter";
+import { useAuth } from "@/contexts/AuthContext";
+import { renominateNominee } from "@/lib/api";
 
 interface NomineeDetails {
   id: string;
@@ -54,6 +57,9 @@ interface NomineeDetails {
 
 export default function NomineeProfile() {
   const { slug } = useParams<{ slug: string }>();
+  const { user } = useAuth();
+  const queryClient = useQueryClient();
+  const [isRenominating, setIsRenominating] = useState(false);
 
   const { data: nominee, isLoading, error } = useQuery({
     queryKey: ["nominee", slug],
@@ -126,6 +132,40 @@ export default function NomineeProfile() {
     }
 
     window.open(urls[platform], "_blank", "width=600,height=400");
+  };
+
+  const handleRenominate = async () => {
+    if (!user) {
+      toast.error("Please log in to renominate", {
+        action: {
+          label: "Log In",
+          onClick: () => window.location.href = "/auth/login",
+        },
+      });
+      return;
+    }
+
+    if (!nominee) return;
+
+    setIsRenominating(true);
+    try {
+      await renominateNominee(nominee.id, `Renomination from profile page by user ${user.id}`);
+      toast.success(`Successfully endorsed ${nominee.name}!`, {
+        description: "Your support has been recorded.",
+      });
+      // Refresh nominee data to show updated count
+      queryClient.invalidateQueries({ queryKey: ["nominee", slug] });
+    } catch (error: any) {
+      if (error.message?.includes("200")) {
+        toast.error("Maximum renomination limit reached for this nominee");
+      } else {
+        toast.error("Failed to renominate", {
+          description: error.message || "Please try again later",
+        });
+      }
+    } finally {
+      setIsRenominating(false);
+    }
   };
 
   if (isLoading) {
@@ -355,6 +395,44 @@ export default function NomineeProfile() {
                       Vote Now
                     </Link>
                   </Button>
+                </CardContent>
+              </Card>
+
+              {/* Renominate Card */}
+              <Card className="bg-charcoal-light border-gold/20">
+                <CardHeader>
+                  <CardTitle className="text-ivory flex items-center gap-2">
+                    <UserPlus className="w-5 h-5 text-gold" />
+                    Endorse Nominee
+                  </CardTitle>
+                </CardHeader>
+                <CardContent className="space-y-4">
+                  <p className="text-sm text-ivory/60">
+                    Believe in {nominee.name.split(" ")[0]}'s work? Renominate to show your support!
+                  </p>
+                  <Button
+                    onClick={handleRenominate}
+                    disabled={isRenominating}
+                    variant="outline"
+                    className="w-full border-gold/30 text-gold hover:bg-gold/10 hover:text-gold font-semibold"
+                  >
+                    {isRenominating ? (
+                      <>
+                        <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+                        Endorsing...
+                      </>
+                    ) : (
+                      <>
+                        <UserPlus className="w-4 h-4 mr-2" />
+                        Renominate
+                      </>
+                    )}
+                  </Button>
+                  {!user && (
+                    <p className="text-xs text-ivory/40 text-center">
+                      You must be logged in to renominate
+                    </p>
+                  )}
                 </CardContent>
               </Card>
 
