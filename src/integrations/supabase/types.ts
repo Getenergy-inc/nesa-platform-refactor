@@ -347,6 +347,8 @@ export type Database = {
           organization: string | null
           photo_url: string | null
           public_votes: number | null
+          region: string | null
+          renomination_count: number
           review_notes: string | null
           reviewed_at: string | null
           season_id: string
@@ -370,6 +372,8 @@ export type Database = {
           organization?: string | null
           photo_url?: string | null
           public_votes?: number | null
+          region?: string | null
+          renomination_count?: number
           review_notes?: string | null
           reviewed_at?: string | null
           season_id: string
@@ -393,6 +397,8 @@ export type Database = {
           organization?: string | null
           photo_url?: string | null
           public_votes?: number | null
+          region?: string | null
+          renomination_count?: number
           review_notes?: string | null
           reviewed_at?: string | null
           season_id?: string

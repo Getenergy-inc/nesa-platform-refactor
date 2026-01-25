@@ -1,18 +1,15 @@
 import { useState, useMemo, useEffect, useRef, useCallback } from "react";
 import { useQuery } from "@tanstack/react-query";
-import { Link } from "react-router-dom";
-import { Search, Users, Award, Building2, MapPin, Filter, ChevronLeft, ChevronRight, LayoutGrid, List, Loader2 } from "lucide-react";
+import { Search, Users, Filter, ChevronLeft, ChevronRight, LayoutGrid, List, Loader2 } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Card, CardContent } from "@/components/ui/card";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Skeleton } from "@/components/ui/skeleton";
 import { Toggle } from "@/components/ui/toggle";
 import { NESAHeader } from "@/components/nesa/NESAHeader";
 import { NESAFooter } from "@/components/nesa/NESAFooter";
+import { NomineeCard, NomineeCardSkeleton, type NomineeCardData } from "@/components/nesa/NomineeCard";
 
 const ITEMS_PER_PAGE = 12;
 
@@ -184,14 +181,7 @@ export default function Nominees() {
     }
   }, [useInfiniteScroll]);
 
-  const getInitials = (name: string) => {
-    return name
-      .split(" ")
-      .map((n) => n[0])
-      .join("")
-      .toUpperCase()
-      .slice(0, 2);
-  };
+  // Note: getInitials is now handled by the NomineeCard component
 
   const displayedNominees = useInfiniteScroll ? infiniteScrollNominees : paginatedNominees;
 
@@ -316,17 +306,7 @@ export default function Nominees() {
           {isLoading ? (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
               {[...Array(8)].map((_, i) => (
-                <Card key={i} className="bg-charcoal-light border-gold/10">
-                  <CardContent className="p-6">
-                    <div className="flex flex-col items-center text-center">
-                      <Skeleton className="w-20 h-20 rounded-full mb-4" />
-                      <Skeleton className="h-5 w-32 mb-2" />
-                      <Skeleton className="h-4 w-24 mb-4" />
-                      <Skeleton className="h-3 w-full mb-2" />
-                      <Skeleton className="h-3 w-3/4" />
-                    </div>
-                  </CardContent>
-                </Card>
+                <NomineeCardSkeleton key={i} />
               ))}
             </div>
           ) : filteredNominees.length === 0 ? (
@@ -356,9 +336,22 @@ export default function Nominees() {
           ) : (
             <>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-                {displayedNominees.map((nominee) => (
-                  <NomineeCard key={nominee.id} nominee={nominee} getInitials={getInitials} />
-                ))}
+                {displayedNominees.map((nominee) => {
+                  // Map to NomineeCardData format
+                  const cardData: NomineeCardData = {
+                    id: nominee.id,
+                    name: nominee.name,
+                    slug: nominee.slug,
+                    title: nominee.title,
+                    organization: nominee.organization,
+                    photoUrl: nominee.photo_url,
+                    isPlatinum: nominee.is_platinum,
+                    publicVotes: nominee.public_votes,
+                    categoryName: nominee.subcategories?.categories?.name,
+                    region: nominee.chapters?.region || undefined,
+                  };
+                  return <NomineeCard key={nominee.id} nominee={cardData} />;
+                })}
               </div>
 
               {/* Infinite Scroll Loader */}
@@ -447,78 +440,5 @@ export default function Nominees() {
 
       <NESAFooter />
     </div>
-  );
-}
-
-function NomineeCard({
-  nominee,
-  getInitials,
-}: {
-  nominee: Nominee;
-  getInitials: (name: string) => string;
-}) {
-  return (
-    <Link to={`/nominees/${nominee.slug}`}>
-      <Card className="group bg-charcoal-light border-gold/10 hover:border-gold/30 transition-all duration-300 hover:shadow-lg hover:shadow-gold/5 h-full">
-        <CardContent className="p-6">
-          <div className="flex flex-col items-center text-center">
-            {/* Avatar */}
-            <div className="relative mb-4">
-              <Avatar className="w-20 h-20 border-2 border-gold/20 group-hover:border-gold/40 transition-colors">
-                <AvatarImage src={nominee.photo_url || undefined} alt={nominee.name} />
-                <AvatarFallback className="bg-gold/20 text-gold text-lg font-semibold">
-                  {getInitials(nominee.name)}
-                </AvatarFallback>
-              </Avatar>
-              {nominee.is_platinum && (
-                <div className="absolute -bottom-1 -right-1 bg-gold rounded-full p-1">
-                  <Award className="w-4 h-4 text-charcoal" />
-                </div>
-              )}
-            </div>
-
-            {/* Name & Title */}
-            <h3 className="font-semibold text-ivory group-hover:text-gold transition-colors line-clamp-1">
-              {nominee.name}
-            </h3>
-            {nominee.title && (
-              <p className="text-sm text-ivory/60 line-clamp-1 mt-1">{nominee.title}</p>
-            )}
-
-            {/* Organization */}
-            {nominee.organization && (
-              <div className="flex items-center gap-1 mt-2 text-xs text-ivory/50">
-                <Building2 className="w-3 h-3" />
-                <span className="line-clamp-1">{nominee.organization}</span>
-              </div>
-            )}
-
-            {/* Category Badge */}
-            <Badge
-              variant="outline"
-              className="mt-3 border-gold/20 text-gold/80 text-xs"
-            >
-              {nominee.subcategories?.categories?.name || "Uncategorized"}
-            </Badge>
-
-            {/* Region if available */}
-            {nominee.chapters?.region && (
-              <div className="flex items-center gap-1 mt-2 text-xs text-ivory/40">
-                <MapPin className="w-3 h-3" />
-                <span>{nominee.chapters.region} Africa</span>
-              </div>
-            )}
-
-            {/* Votes */}
-            <div className="mt-4 pt-4 border-t border-gold/10 w-full">
-              <div className="flex items-center justify-center gap-2 text-sm">
-                <span className="text-gold font-semibold">{nominee.public_votes}</span>
-                <span className="text-ivory/50">votes</span>
-              </div>
-            </div>
-          </div>
-        </CardContent>
-      </Card>
-    </Link>
   );
 }

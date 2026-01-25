@@ -284,6 +284,116 @@ export async function submitNomination(input: NominationInput): Promise<{ id: st
   return { id: data.id };
 }
 
+// Renominate an existing nominee - increments counter + logs audit event
+export async function renominateNominee(nomineeId: string, justification?: string): Promise<void> {
+  const { data: user } = await supabase.auth.getUser();
+  if (!user.user) throw new Error("Must be logged in to renominate");
+
+  // Get the nominee to check it exists
+  const { data: nominee, error: fetchError } = await supabase
+    .from("nominees")
+    .select("id, renomination_count, name")
+    .eq("id", nomineeId)
+    .maybeSingle();
+
+  if (fetchError || !nominee) throw new Error("Nominee not found");
+
+  // Check if renomination limit reached (200 max)
+  if ((nominee.renomination_count ?? 0) >= 200) {
+    throw new Error("This nominee has reached the maximum renomination limit");
+  }
+
+  // Increment the renomination count (trigger will handle audit log)
+  const { error: updateError } = await supabase
+    .from("nominees")
+    .update({ 
+      renomination_count: (nominee.renomination_count ?? 0) + 1 
+    })
+    .eq("id", nomineeId);
+
+  if (updateError) throw updateError;
+
+  // Also create a nomination record for tracking
+  const { data: season } = await supabase
+    .from("seasons")
+    .select("id")
+    .eq("is_active", true)
+    .single();
+
+  if (season) {
+    // Get the nominee's subcategory
+    const { data: nomineeDetails } = await supabase
+      .from("nominees")
+      .select("subcategory_id, name, title, organization, bio, photo_url")
+      .eq("id", nomineeId)
+      .single();
+
+    if (nomineeDetails) {
+      await supabase.from("nominations").insert({
+        season_id: season.id,
+        subcategory_id: nomineeDetails.subcategory_id,
+        nominee_name: nomineeDetails.name,
+        nominee_title: nomineeDetails.title,
+        nominee_organization: nomineeDetails.organization,
+        nominee_bio: nomineeDetails.bio,
+        nominee_photo_url: nomineeDetails.photo_url,
+        justification: justification || "Re-nomination of existing nominee",
+        nominator_id: user.user.id,
+        created_nominee_id: nomineeId, // Link to existing nominee
+      });
+    }
+  }
+}
+
+// Search for existing nominees by name
+export async function searchExistingNominees(query: string, subcategoryId?: string): Promise<Nominee[]> {
+  let queryBuilder = supabase
+    .from("nominees")
+    .select(`
+      id,
+      name,
+      slug,
+      title,
+      organization,
+      bio,
+      photo_url,
+      status,
+      is_platinum,
+      public_votes,
+      jury_score,
+      final_score,
+      renomination_count,
+      subcategory_id,
+      season_id
+    `)
+    .ilike("name", `%${query}%`)
+    .limit(10);
+
+  if (subcategoryId) {
+    queryBuilder = queryBuilder.eq("subcategory_id", subcategoryId);
+  }
+
+  const { data, error } = await queryBuilder;
+  if (error) throw error;
+
+  return (data || []).map(nom => ({
+    id: nom.id,
+    subcategoryId: nom.subcategory_id,
+    seasonId: nom.season_id,
+    name: nom.name,
+    slug: nom.slug,
+    title: nom.title,
+    organization: nom.organization,
+    bio: nom.bio,
+    photoUrl: nom.photo_url,
+    status: nom.status,
+    isPlatinum: nom.is_platinum,
+    publicVotes: nom.public_votes,
+    juryScore: Number(nom.jury_score),
+    finalScore: Number(nom.final_score),
+  }));
+}
+
 // ==========================================
 // VOTING API
 // ==========================================
