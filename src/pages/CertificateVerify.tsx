@@ -302,13 +302,51 @@ export default function CertificateVerify() {
 
                   {/* QR Code Section */}
                   <div className="mt-6 p-4 bg-charcoal rounded-lg">
-                    <div className="flex items-center gap-2 text-sm text-ivory/50 mb-3">
-                      <QrCode className="w-4 h-4" />
-                      Verification QR Code
+                    <div className="flex items-center justify-between mb-3">
+                      <div className="flex items-center gap-2 text-sm text-ivory/50">
+                        <QrCode className="w-4 h-4" />
+                        Verification QR Code
+                      </div>
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        onClick={() => {
+                          const svg = document.getElementById('certificate-qr-code');
+                          if (!svg) return;
+                          
+                          const svgData = new XMLSerializer().serializeToString(svg);
+                          const canvas = document.createElement('canvas');
+                          const ctx = canvas.getContext('2d');
+                          const img = new Image();
+                          
+                          canvas.width = 300;
+                          canvas.height = 300;
+                          
+                          img.onload = () => {
+                            if (ctx) {
+                              ctx.fillStyle = '#ffffff';
+                              ctx.fillRect(0, 0, canvas.width, canvas.height);
+                              ctx.drawImage(img, 15, 15, 270, 270);
+                              
+                              const link = document.createElement('a');
+                              link.download = `NESA-QR-${certificate.verification_code}.png`;
+                              link.href = canvas.toDataURL('image/png');
+                              link.click();
+                            }
+                          };
+                          
+                          img.src = 'data:image/svg+xml;base64,' + btoa(unescape(encodeURIComponent(svgData)));
+                        }}
+                        className="border-gold/30 text-gold hover:bg-gold/10"
+                      >
+                        <Download className="w-4 h-4 mr-2" />
+                        Download QR
+                      </Button>
                     </div>
                     <div className="flex flex-col sm:flex-row items-center gap-4">
                       <div className="bg-white p-3 rounded-lg">
                         <QRCodeSVG
+                          id="certificate-qr-code"
                           value={`${window.location.origin}/certificates/verify?code=${certificate.verification_code}`}
                           size={120}
                           level="H"
