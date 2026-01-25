@@ -1,13 +1,15 @@
+import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { Link } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/contexts/AuthContext";
-import { useSeason } from "@/contexts/SeasonContext";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
-import { Award, Download, ExternalLink, QrCode, Medal, Star, Trophy } from "lucide-react";
+import { Award, Download, ExternalLink, FileText, QrCode, Medal, Star, Trophy } from "lucide-react";
+import { generateCertificatePDF, downloadCertificatePDF } from "@/lib/certificateGenerator";
+import { useToast } from "@/hooks/use-toast";
 
 import platinumCertificate from "@/assets/certificates/platinum-certificate.jpeg";
 import goldCertificate from "@/assets/certificates/gold-certificate.jpeg";
@@ -72,7 +74,8 @@ interface Certificate {
 
 export function MyCertificates() {
   const { user } = useAuth();
-  const { currentEdition } = useSeason();
+  const { toast } = useToast();
+  const [downloadingId, setDownloadingId] = useState<string | null>(null);
 
   const { data: certificates, isLoading } = useQuery({
     queryKey: ["my-certificates", user?.id],
@@ -129,6 +132,41 @@ export function MyCertificates() {
     },
     enabled: !!user,
   });
+
+  const handleDownloadPDF = async (cert: Certificate) => {
+    setDownloadingId(cert.id);
+    try {
+      const blob = await generateCertificatePDF({
+        nomineeName: cert.nominee.name,
+        nomineeTitle: cert.nominee.title,
+        nomineeOrganization: cert.nominee.organization,
+        tier: cert.tier as "platinum" | "gold" | "blue_garnet" | "icon",
+        verificationCode: cert.verification_code,
+        seasonName: cert.season.name,
+        seasonYear: cert.season.year,
+        issuedAt: cert.issued_at,
+        expiresAt: cert.expires_at,
+        isLifetime: cert.is_lifetime,
+      });
+
+      const filename = `NESA-${cert.tier}-certificate-${cert.verification_code}.pdf`;
+      downloadCertificatePDF(blob, filename);
+
+      toast({
+        title: "Certificate Downloaded",
+        description: `Your ${tierConfig[cert.tier]?.label || cert.tier} certificate has been downloaded.`,
+      });
+    } catch (error) {
+      console.error("Failed to generate PDF:", error);
+      toast({
+        title: "Download Failed",
+        description: "Could not generate certificate PDF. Please try again.",
+        variant: "destructive",
+      });
+    } finally {
+      setDownloadingId(null);
+    }
+  };
 
   if (isLoading) {
     return (
@@ -215,13 +253,19 @@ export function MyCertificates() {
                         <QrCode className="h-4 w-4" />
                       </Link>
                     </Button>
-                    {cert.download_url && (
-                      <Button asChild variant="ghost" size="icon" title="Download Certificate">
-                        <a href={cert.download_url} target="_blank" rel="noopener noreferrer">
-                          <Download className="h-4 w-4" />
-                        </a>
-                      </Button>
-                    )}
+                    <Button
+                      variant="ghost"
+                      size="icon"
+                      title="Download PDF Certificate"
+                      onClick={() => handleDownloadPDF(cert)}
+                      disabled={downloadingId === cert.id}
+                    >
+                      {downloadingId === cert.id ? (
+                        <FileText className="h-4 w-4 animate-pulse" />
+                      ) : (
+                        <Download className="h-4 w-4" />
+                      )}
+                    </Button>
                   </div>
                 </div>
               );

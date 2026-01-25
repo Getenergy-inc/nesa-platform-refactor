@@ -1,12 +1,14 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useSearchParams } from "react-router-dom";
 import { NESAHeader } from "@/components/nesa/NESAHeader";
 import { NESAFooter } from "@/components/nesa/NESAFooter";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { Badge } from "@/components/ui/badge";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { 
   Mail, 
   Phone, 
@@ -19,7 +21,11 @@ import {
   Facebook,
   Twitter,
   Linkedin,
-  Instagram
+  Instagram,
+  Mic,
+  Video,
+  Award,
+  Upload,
 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 
@@ -56,7 +62,8 @@ const departments = [
   { name: "Partnerships", email: "partners@nesa-africa.org" },
   { name: "Media & Press", email: "media@nesa-africa.org" },
   { name: "Volunteer Program", email: "volunteer@nesa-africa.org" },
-  { name: "Chapter Support", email: "chapters@nesa-africa.org" }
+  { name: "Chapter Support", email: "chapters@nesa-africa.org" },
+  { name: "Presenter Applications", email: "gala@nesa-africa.org" },
 ];
 
 const regionalOffices = [
@@ -69,20 +76,45 @@ const regionalOffices = [
 
 export default function Contact() {
   const { toast } = useToast();
+  const [searchParams] = useSearchParams();
+  const subjectParam = searchParams.get("subject");
+  const isPresenterApplication = subjectParam === "presenter";
+
+  const [activeTab, setActiveTab] = useState<string>(isPresenterApplication ? "presenter" : "general");
+
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     subject: "",
-    department: "",
+    department: isPresenterApplication ? "Presenter Applications" : "",
     message: ""
   });
+
+  const [presenterData, setPresenterData] = useState({
+    name: "",
+    email: "",
+    phone: "",
+    country: "",
+    experience: "",
+    languages: "",
+    portfolioUrl: "",
+    socialMedia: "",
+    bio: "",
+    motivation: "",
+  });
+
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  useEffect(() => {
+    if (isPresenterApplication) {
+      setActiveTab("presenter");
+    }
+  }, [isPresenterApplication]);
+
+  const handleGeneralSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
     
-    // Simulate form submission
     await new Promise(resolve => setTimeout(resolve, 1000));
     
     toast({
@@ -91,6 +123,32 @@ export default function Contact() {
     });
     
     setFormData({ name: "", email: "", subject: "", department: "", message: "" });
+    setIsSubmitting(false);
+  };
+
+  const handlePresenterSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    
+    await new Promise(resolve => setTimeout(resolve, 1500));
+    
+    toast({
+      title: "Application Submitted!",
+      description: "Thank you for applying to be a Gala presenter. Our team will review your application and contact you within 7 business days.",
+    });
+    
+    setPresenterData({
+      name: "",
+      email: "",
+      phone: "",
+      country: "",
+      experience: "",
+      languages: "",
+      portfolioUrl: "",
+      socialMedia: "",
+      bio: "",
+      motivation: "",
+    });
     setIsSubmitting(false);
   };
 
@@ -142,90 +200,247 @@ export default function Contact() {
       <section className="py-16">
         <div className="container mx-auto px-4">
           <div className="grid lg:grid-cols-2 gap-12">
-            {/* Contact Form */}
+            {/* Contact Forms with Tabs */}
             <Card>
               <CardHeader>
-                <CardTitle className="flex items-center gap-2">
-                  <MessageSquare className="w-5 h-5 text-nesa-gold" />
-                  Send Us a Message
-                </CardTitle>
+                <Tabs value={activeTab} onValueChange={setActiveTab}>
+                  <TabsList className="grid w-full grid-cols-2">
+                    <TabsTrigger value="general">
+                      <MessageSquare className="mr-2 h-4 w-4" />
+                      General Inquiry
+                    </TabsTrigger>
+                    <TabsTrigger value="presenter">
+                      <Mic className="mr-2 h-4 w-4" />
+                      Presenter Application
+                    </TabsTrigger>
+                  </TabsList>
+                </Tabs>
               </CardHeader>
               <CardContent>
-                <form onSubmit={handleSubmit} className="space-y-4">
-                  <div className="grid md:grid-cols-2 gap-4">
-                    <div className="space-y-2">
-                      <Label htmlFor="name">Full Name</Label>
-                      <Input
-                        id="name"
-                        placeholder="Your name"
-                        value={formData.name}
-                        onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                        required
-                      />
+                <Tabs value={activeTab} onValueChange={setActiveTab}>
+                  {/* General Contact Form */}
+                  <TabsContent value="general" className="mt-0">
+                    <form onSubmit={handleGeneralSubmit} className="space-y-4">
+                      <div className="grid md:grid-cols-2 gap-4">
+                        <div className="space-y-2">
+                          <Label htmlFor="name">Full Name</Label>
+                          <Input
+                            id="name"
+                            placeholder="Your name"
+                            value={formData.name}
+                            onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                            required
+                          />
+                        </div>
+                        <div className="space-y-2">
+                          <Label htmlFor="email">Email Address</Label>
+                          <Input
+                            id="email"
+                            type="email"
+                            placeholder="your@email.com"
+                            value={formData.email}
+                            onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                            required
+                          />
+                        </div>
+                      </div>
+                      <div className="space-y-2">
+                        <Label htmlFor="department">Department</Label>
+                        <select
+                          id="department"
+                          className="w-full h-10 px-3 rounded-md border border-input bg-background text-sm"
+                          value={formData.department}
+                          onChange={(e) => setFormData({ ...formData, department: e.target.value })}
+                          required
+                        >
+                          <option value="">Select a department</option>
+                          {departments.map((dept, index) => (
+                            <option key={index} value={dept.name}>{dept.name}</option>
+                          ))}
+                        </select>
+                      </div>
+                      <div className="space-y-2">
+                        <Label htmlFor="subject">Subject</Label>
+                        <Input
+                          id="subject"
+                          placeholder="What is this regarding?"
+                          value={formData.subject}
+                          onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
+                          required
+                        />
+                      </div>
+                      <div className="space-y-2">
+                        <Label htmlFor="message">Message</Label>
+                        <Textarea
+                          id="message"
+                          placeholder="Your message..."
+                          rows={5}
+                          value={formData.message}
+                          onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                          required
+                        />
+                      </div>
+                      <Button 
+                        type="submit" 
+                        className="w-full bg-primary hover:bg-primary/90"
+                        disabled={isSubmitting}
+                      >
+                        {isSubmitting ? "Sending..." : (
+                          <>
+                            <Send className="w-4 h-4 mr-2" />
+                            Send Message
+                          </>
+                        )}
+                      </Button>
+                    </form>
+                  </TabsContent>
+
+                  {/* Presenter Application Form */}
+                  <TabsContent value="presenter" className="mt-0">
+                    <div className="mb-6 rounded-lg bg-primary/10 p-4">
+                      <div className="flex items-center gap-3 mb-2">
+                        <Mic className="h-5 w-5 text-primary" />
+                        <h3 className="font-semibold">Become a Gala Presenter</h3>
+                      </div>
+                      <p className="text-sm text-muted-foreground">
+                        We're looking for dynamic presenters and anchors to host segments of the 
+                        NESA-Africa Awards Gala. Share your experience and portfolio below.
+                      </p>
                     </div>
-                    <div className="space-y-2">
-                      <Label htmlFor="email">Email Address</Label>
-                      <Input
-                        id="email"
-                        type="email"
-                        placeholder="your@email.com"
-                        value={formData.email}
-                        onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                        required
-                      />
-                    </div>
-                  </div>
-                  <div className="space-y-2">
-                    <Label htmlFor="department">Department</Label>
-                    <select
-                      id="department"
-                      className="w-full h-10 px-3 rounded-md border border-input bg-background text-sm"
-                      value={formData.department}
-                      onChange={(e) => setFormData({ ...formData, department: e.target.value })}
-                      required
-                    >
-                      <option value="">Select a department</option>
-                      {departments.map((dept, index) => (
-                        <option key={index} value={dept.name}>{dept.name}</option>
-                      ))}
-                    </select>
-                  </div>
-                  <div className="space-y-2">
-                    <Label htmlFor="subject">Subject</Label>
-                    <Input
-                      id="subject"
-                      placeholder="What is this regarding?"
-                      value={formData.subject}
-                      onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
-                      required
-                    />
-                  </div>
-                  <div className="space-y-2">
-                    <Label htmlFor="message">Message</Label>
-                    <Textarea
-                      id="message"
-                      placeholder="Your message..."
-                      rows={5}
-                      value={formData.message}
-                      onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                      required
-                    />
-                  </div>
-                  <Button 
-                    type="submit" 
-                    className="w-full bg-nesa-gold hover:bg-nesa-gold/90 text-black"
-                    disabled={isSubmitting}
-                  >
-                    {isSubmitting ? (
-                      "Sending..."
-                    ) : (
-                      <>
-                        <Send className="w-4 h-4 mr-2" />
-                        Send Message
-                      </>
-                    )}
-                  </Button>
-                </form>
+
+                    <form onSubmit={handlePresenterSubmit} className="space-y-4">
+                      <div className="grid md:grid-cols-2 gap-4">
+                        <div className="space-y-2">
+                          <Label htmlFor="p-name">Full Name *</Label>
+                          <Input
+                            id="p-name"
+                            placeholder="Your name"
+                            value={presenterData.name}
+                            onChange={(e) => setPresenterData({ ...presenterData, name: e.target.value })}
+                            required
+                          />
+                        </div>
+                        <div className="space-y-2">
+                          <Label htmlFor="p-email">Email Address *</Label>
+                          <Input
+                            id="p-email"
+                            type="email"
+                            placeholder="your@email.com"
+                            value={presenterData.email}
+                            onChange={(e) => setPresenterData({ ...presenterData, email: e.target.value })}
+                            required
+                          />
+                        </div>
+                      </div>
+
+                      <div className="grid md:grid-cols-2 gap-4">
+                        <div className="space-y-2">
+                          <Label htmlFor="p-phone">Phone Number *</Label>
+                          <Input
+                            id="p-phone"
+                            type="tel"
+                            placeholder="+234 XXX XXX XXXX"
+                            value={presenterData.phone}
+                            onChange={(e) => setPresenterData({ ...presenterData, phone: e.target.value })}
+                            required
+                          />
+                        </div>
+                        <div className="space-y-2">
+                          <Label htmlFor="p-country">Country *</Label>
+                          <Input
+                            id="p-country"
+                            placeholder="e.g. Nigeria"
+                            value={presenterData.country}
+                            onChange={(e) => setPresenterData({ ...presenterData, country: e.target.value })}
+                            required
+                          />
+                        </div>
+                      </div>
+
+                      <div className="space-y-2">
+                        <Label htmlFor="p-experience">Hosting/Presenting Experience *</Label>
+                        <Textarea
+                          id="p-experience"
+                          placeholder="Describe your experience hosting events, TV shows, podcasts, or live broadcasts..."
+                          rows={3}
+                          value={presenterData.experience}
+                          onChange={(e) => setPresenterData({ ...presenterData, experience: e.target.value })}
+                          required
+                        />
+                      </div>
+
+                      <div className="grid md:grid-cols-2 gap-4">
+                        <div className="space-y-2">
+                          <Label htmlFor="p-languages">Languages Spoken *</Label>
+                          <Input
+                            id="p-languages"
+                            placeholder="e.g. English, French, Swahili"
+                            value={presenterData.languages}
+                            onChange={(e) => setPresenterData({ ...presenterData, languages: e.target.value })}
+                            required
+                          />
+                        </div>
+                        <div className="space-y-2">
+                          <Label htmlFor="p-portfolio">Portfolio/Showreel URL</Label>
+                          <Input
+                            id="p-portfolio"
+                            type="url"
+                            placeholder="https://youtube.com/..."
+                            value={presenterData.portfolioUrl}
+                            onChange={(e) => setPresenterData({ ...presenterData, portfolioUrl: e.target.value })}
+                          />
+                        </div>
+                      </div>
+
+                      <div className="space-y-2">
+                        <Label htmlFor="p-social">Social Media Handles</Label>
+                        <Input
+                          id="p-social"
+                          placeholder="e.g. @yourhandle (Instagram, Twitter/X, LinkedIn)"
+                          value={presenterData.socialMedia}
+                          onChange={(e) => setPresenterData({ ...presenterData, socialMedia: e.target.value })}
+                        />
+                      </div>
+
+                      <div className="space-y-2">
+                        <Label htmlFor="p-bio">Short Bio *</Label>
+                        <Textarea
+                          id="p-bio"
+                          placeholder="Tell us about yourself in 2-3 sentences..."
+                          rows={2}
+                          value={presenterData.bio}
+                          onChange={(e) => setPresenterData({ ...presenterData, bio: e.target.value })}
+                          required
+                        />
+                      </div>
+
+                      <div className="space-y-2">
+                        <Label htmlFor="p-motivation">Why do you want to host the NESA-Africa Gala? *</Label>
+                        <Textarea
+                          id="p-motivation"
+                          placeholder="Share your motivation and what you would bring to the event..."
+                          rows={3}
+                          value={presenterData.motivation}
+                          onChange={(e) => setPresenterData({ ...presenterData, motivation: e.target.value })}
+                          required
+                        />
+                      </div>
+
+                      <Button 
+                        type="submit" 
+                        className="w-full bg-primary hover:bg-primary/90"
+                        disabled={isSubmitting}
+                      >
+                        {isSubmitting ? "Submitting Application..." : (
+                          <>
+                            <Award className="w-4 h-4 mr-2" />
+                            Submit Application
+                          </>
+                        )}
+                      </Button>
+                    </form>
+                  </TabsContent>
+                </Tabs>
               </CardContent>
             </Card>
 
