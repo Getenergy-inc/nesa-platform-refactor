@@ -8,8 +8,6 @@ import {
   Filter, 
   Trophy, 
   Users, 
-  Building2,
-  ChevronRight,
   ThumbsUp,
   Loader2,
   AlertCircle
@@ -19,11 +17,11 @@ import { Input } from "@/components/ui/input";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { StageGate } from "@/components/StageGate";
 import { NESAHeader } from "@/components/nesa/NESAHeader";
 import { NESAFooter } from "@/components/nesa/NESAFooter";
+import { NomineeCard, NomineeCardSkeleton, type NomineeCardData } from "@/components/nesa/NomineeCard";
 import { useSeason } from "@/contexts/SeasonContext";
 import { useAuth } from "@/contexts/AuthContext";
 import { supabase } from "@/integrations/supabase/client";
@@ -238,15 +236,6 @@ export default function Vote() {
     }
   };
 
-  const getInitials = (name: string) => {
-    return name
-      .split(" ")
-      .map(n => n[0])
-      .join("")
-      .toUpperCase()
-      .slice(0, 2);
-  };
-
   return (
     <>
       <Helmet>
@@ -435,24 +424,22 @@ export default function Vote() {
                   </TabsList>
 
                   <TabsContent value="all">
-                    <NomineeGrid 
+                    <NomineeVoteGrid 
                       nominees={filteredNominees}
                       userVotes={userVotes}
                       votingNomineeId={votingNomineeId}
                       onVote={handleVote}
-                      getInitials={getInitials}
                       user={user}
                     />
                   </TabsContent>
 
                   {Object.entries(nomineesByCategory).map(([catSlug, catNominees]) => (
                     <TabsContent key={catSlug} value={catSlug}>
-                      <NomineeGrid 
+                      <NomineeVoteGrid 
                         nominees={catNominees}
                         userVotes={userVotes}
                         votingNomineeId={votingNomineeId}
                         onVote={handleVote}
-                        getInitials={getInitials}
                         user={user}
                       />
                     </TabsContent>
@@ -477,7 +464,6 @@ export default function Vote() {
               <Button size="lg" className="bg-gold hover:bg-gold-dark text-charcoal font-semibold">
                 <Trophy className="mr-2 h-4 w-4" />
                 Nominate a Changemaker
-                <ChevronRight className="ml-2 h-4 w-4" />
               </Button>
             </Link>
           </div>
@@ -489,112 +475,51 @@ export default function Vote() {
   );
 }
 
-// Separate component for the nominee grid to keep code organized
-interface NomineeGridProps {
+// Separate component for the nominee grid using shared NomineeCard
+interface NomineeVoteGridProps {
   nominees: Nominee[];
   userVotes: string[];
   votingNomineeId: string | null;
   onVote: (nomineeId: string) => void;
-  getInitials: (name: string) => string;
   user: { id: string } | null;
 }
 
-function NomineeGrid({ 
+function NomineeVoteGrid({ 
   nominees, 
   userVotes, 
   votingNomineeId, 
-  onVote, 
-  getInitials,
+  onVote,
   user 
-}: NomineeGridProps) {
+}: NomineeVoteGridProps) {
   return (
     <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
       {nominees.map((nominee) => {
         const hasVoted = userVotes.includes(nominee.id);
         const isVoting = votingNomineeId === nominee.id;
 
+        const cardData: NomineeCardData = {
+          id: nominee.id,
+          name: nominee.name,
+          slug: nominee.slug,
+          title: nominee.title,
+          organization: nominee.organization,
+          photoUrl: nominee.photo_url,
+          publicVotes: nominee.public_votes,
+          categoryName: nominee.subcategories?.categories?.name,
+          country: nominee.subcategories?.chapters?.country,
+          region: nominee.subcategories?.chapters?.region || undefined,
+        };
+
         return (
-          <Card 
-            key={nominee.id} 
-            className="group overflow-hidden hover:shadow-lg transition-all duration-300 hover:-translate-y-1"
-          >
-            <CardContent className="p-0">
-              {/* Nominee Header */}
-              <div className="relative bg-gradient-to-br from-charcoal/90 to-charcoal p-6">
-                <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(196,160,82,0.15),transparent_70%)]" />
-                <div className="relative flex flex-col items-center text-center">
-                  <Avatar className="h-20 w-20 border-2 border-gold/30 mb-3">
-                    <AvatarImage src={nominee.photo_url || undefined} alt={nominee.name} />
-                    <AvatarFallback className="bg-gold/20 text-gold font-semibold text-lg">
-                      {getInitials(nominee.name)}
-                    </AvatarFallback>
-                  </Avatar>
-                  <h3 className="font-display font-bold text-white text-lg line-clamp-1">
-                    {nominee.name}
-                  </h3>
-                  {nominee.title && (
-                    <p className="text-white/60 text-sm line-clamp-1">{nominee.title}</p>
-                  )}
-                </div>
-              </div>
-
-              {/* Nominee Details */}
-              <div className="p-4 space-y-3">
-                {nominee.organization && (
-                  <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                    <Building2 className="h-4 w-4 flex-shrink-0" />
-                    <span className="line-clamp-1">{nominee.organization}</span>
-                  </div>
-                )}
-                
-                <div className="flex flex-wrap gap-1.5">
-                  <Badge variant="secondary" className="text-xs">
-                    {nominee.subcategories.categories.name}
-                  </Badge>
-                  {nominee.subcategories.chapters && (
-                    <Badge variant="outline" className="text-xs">
-                      {nominee.subcategories.chapters.country}
-                    </Badge>
-                  )}
-                </div>
-
-                {/* Vote Count */}
-                <div className="flex items-center justify-between pt-2 border-t">
-                  <div className="flex items-center gap-1.5 text-sm">
-                    <ThumbsUp className="h-4 w-4 text-gold" />
-                    <span className="font-semibold">{nominee.public_votes || 0}</span>
-                    <span className="text-muted-foreground">votes</span>
-                  </div>
-
-                  {user ? (
-                    <Button
-                      size="sm"
-                      onClick={() => onVote(nominee.id)}
-                      disabled={hasVoted || isVoting}
-                      className={hasVoted 
-                        ? "bg-green-600 hover:bg-green-600 text-white cursor-default" 
-                        : "bg-gold hover:bg-gold-dark text-charcoal"
-                      }
-                    >
-                      {isVoting ? (
-                        <Loader2 className="h-4 w-4 animate-spin" />
-                      ) : hasVoted ? (
-                        <>✓ Voted</>
-                      ) : (
-                        <>Vote</>
-                      )}
-                    </Button>
-                  ) : (
-                    <Link to="/login">
-                      <Button size="sm" variant="outline">
-                        Login to Vote
-                      </Button>
-                    </Link>
-                  )}
-                </div>
-              </div>
-            </CardContent>
-          </Card>
+          <NomineeCard
+            key={nominee.id}
+            nominee={cardData}
+            variant="voting"
+            hasVoted={hasVoted}
+            isVoting={isVoting}
+            onVote={() => onVote(nominee.id)}
+            showLoginToVote={!user}
+          />
         );
       })}
     </div>
