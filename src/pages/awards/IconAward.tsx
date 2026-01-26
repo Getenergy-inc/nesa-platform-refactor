@@ -3,10 +3,14 @@ import { Link } from "react-router-dom";
 import { NESAHeader } from "@/components/nesa/NESAHeader";
 import { NESAFooter } from "@/components/nesa/NESAFooter";
 import { CertificateGallery } from "@/components/nesa/CertificateGallery";
+import { AwardTVShowSection } from "@/components/awards/AwardTVShowSection";
+import { getTVShowByAward } from "@/config/awardTVShows";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { ArrowLeft, Award, Globe, Heart, Star, Trophy, Users } from "lucide-react";
+
+const iconTVShow = getTVShowByAward("icon");
 
 const subcategories = [
   {
@@ -145,6 +149,9 @@ export default function IconAward() {
             </div>
           </div>
         </section>
+
+        {/* TV Show Section */}
+        {iconTVShow && <AwardTVShowSection show={iconTVShow} accentColor="blue" />}
 
         {/* Certificate Gallery */}
         <CertificateGallery />
