@@ -32,11 +32,9 @@ Deno.serve(async (req) => {
 
     // Get authenticated user
     const getUser = async () => {
-      if (!authHeader?.startsWith("Bearer ")) return null;
-      const token = authHeader.replace("Bearer ", "");
-      const { data, error } = await supabase.auth.getClaims(token);
-      if (error || !data?.claims) return null;
-      return data.claims.sub;
+      const { data: { user }, error } = await supabase.auth.getUser();
+      if (error || !user) return null;
+      return user.id;
     };
 
     // Check admin role
