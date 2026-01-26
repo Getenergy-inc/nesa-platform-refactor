@@ -44,3 +44,9 @@ export * from "./wallet";
 
 // OLC (Chapter) APIs
 export * from "./olc";
+
+// Referrals APIs
+export * from "./referrals";
+
+// Dashboard APIs
+export * from "./dashboard";
