@@ -12,6 +12,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { HelmetProvider } from "react-helmet-async";
 import { AuthProvider } from "@/contexts/AuthContext";
 import { SeasonProvider } from "@/contexts/SeasonContext";
+import { PublicLayout } from "@/components/layout/PublicLayout";
 
 // Pages
 import NESAAfrica from "./pages/programs/NESAAfrica";
@@ -66,6 +67,11 @@ import { OLCDashboard, OLCMembers, OLCSettlements, OLCWallet } from "./pages/olc
 
 const queryClient = new QueryClient();
 
+// Wrapper component that applies PublicLayout
+const WithLayout = ({ children, showFooter = true }: { children: React.ReactNode; showFooter?: boolean }) => (
+  <PublicLayout showFooter={showFooter}>{children}</PublicLayout>
+);
+
 const App = () => (
   <HelmetProvider>
     <QueryClientProvider client={queryClient}>
@@ -76,75 +82,79 @@ const App = () => (
             <Sonner />
             <BrowserRouter>
               <Routes>
-                {/* Landing */}
+                {/* Landing - has its own header/footer */}
                 <Route path="/" element={<NESAAfrica />} />
-                <Route path="/programs" element={<Programs />} />
                 <Route path="/programs/nesa-africa" element={<NESAAfrica />} />
                 
+                {/* Programs */}
+                <Route path="/programs" element={<WithLayout><Programs /></WithLayout>} />
+                
                 {/* About */}
-                <Route path="/about" element={<About />} />
-                <Route path="/about/vision-2035" element={<Vision2035 />} />
-                <Route path="/about/governance" element={<Governance />} />
-                <Route path="/about/timeline" element={<Timeline />} />
-                <Route path="/about/scef" element={<SCEF />} />
+                <Route path="/about" element={<WithLayout><About /></WithLayout>} />
+                <Route path="/about/vision-2035" element={<WithLayout><Vision2035 /></WithLayout>} />
+                <Route path="/about/governance" element={<WithLayout><Governance /></WithLayout>} />
+                <Route path="/about/timeline" element={<WithLayout><Timeline /></WithLayout>} />
+                <Route path="/about/scef" element={<WithLayout><SCEF /></WithLayout>} />
                 
                 {/* Awards */}
-                <Route path="/categories" element={<Categories />} />
-                <Route path="/categories/:slug" element={<CategoryDetail />} />
-                <Route path="/awards/platinum" element={<PlatinumAward />} />
-                <Route path="/awards/icon" element={<IconAward />} />
-                <Route path="/awards/gold" element={<GoldAward />} />
-                <Route path="/awards/blue-garnet" element={<BlueGarnetAward />} />
-                <Route path="/awards/winners" element={<Winners />} />
-                <Route path="/certificates/verify" element={<CertificateVerify />} />
-                <Route path="/verify/:hash" element={<VerifyCertificate />} />
+                <Route path="/categories" element={<WithLayout><Categories /></WithLayout>} />
+                <Route path="/categories/:slug" element={<WithLayout><CategoryDetail /></WithLayout>} />
+                <Route path="/awards/platinum" element={<WithLayout><PlatinumAward /></WithLayout>} />
+                <Route path="/awards/icon" element={<WithLayout><IconAward /></WithLayout>} />
+                <Route path="/awards/gold" element={<WithLayout><GoldAward /></WithLayout>} />
+                <Route path="/awards/blue-garnet" element={<WithLayout><BlueGarnetAward /></WithLayout>} />
+                <Route path="/awards/winners" element={<WithLayout><Winners /></WithLayout>} />
+                <Route path="/certificates/verify" element={<WithLayout><CertificateVerify /></WithLayout>} />
+                <Route path="/verify/:hash" element={<WithLayout><VerifyCertificate /></WithLayout>} />
                 
                 {/* Nominee Response Routes */}
-                <Route path="/nominee/accept/:token" element={<NomineeAccept />} />
-                <Route path="/nominee/decline/:token" element={<NomineeDecline />} />
+                <Route path="/nominee/accept/:token" element={<WithLayout><NomineeAccept /></WithLayout>} />
+                <Route path="/nominee/decline/:token" element={<WithLayout><NomineeDecline /></WithLayout>} />
                 
                 {/* Media */}
-                <Route path="/media" element={<MediaHub />} />
-                <Route path="/media/tv" element={<NESATV />} />
-                <Route path="/media/shows" element={<Shows />} />
-                <Route path="/media/webinars" element={<Webinars />} />
-                <Route path="/media/gala" element={<Gala />} />
-                <Route path="/tickets" element={<Tickets />} />
+                <Route path="/media" element={<WithLayout><MediaHub /></WithLayout>} />
+                <Route path="/media/tv" element={<WithLayout><NESATV /></WithLayout>} />
+                <Route path="/media/shows" element={<WithLayout><Shows /></WithLayout>} />
+                <Route path="/media/webinars" element={<WithLayout><Webinars /></WithLayout>} />
+                <Route path="/media/gala" element={<WithLayout><Gala /></WithLayout>} />
+                <Route path="/tickets" element={<WithLayout><Tickets /></WithLayout>} />
                 
-                {/* Auth */}
-                <Route path="/login" element={<Login />} />
-                <Route path="/register" element={<Register />} />
+                {/* Auth - minimal layout */}
+                <Route path="/login" element={<WithLayout showFooter={false}><Login /></WithLayout>} />
+                <Route path="/register" element={<WithLayout showFooter={false}><Register /></WithLayout>} />
                 
                 {/* User Actions */}
-                <Route path="/nominate" element={<Nominate />} />
-                <Route path="/nominees" element={<Nominees />} />
-                <Route path="/nominees/:slug" element={<NomineeProfile />} />
-                <Route path="/vote" element={<Vote />} />
-                <Route path="/results" element={<Results />} />
+                <Route path="/nominate" element={<WithLayout><Nominate /></WithLayout>} />
+                <Route path="/nominees" element={<WithLayout><Nominees /></WithLayout>} />
+                <Route path="/nominees/:slug" element={<WithLayout><NomineeProfile /></WithLayout>} />
+                <Route path="/vote" element={<WithLayout><Vote /></WithLayout>} />
+                <Route path="/results" element={<WithLayout><Results /></WithLayout>} />
+                
+                {/* Dashboards - use their own layout */}
                 <Route path="/dashboard" element={<Dashboard />} />
                 <Route path="/dashboard/nominations" element={<Dashboard />} />
                 <Route path="/nrc" element={<NRCDashboard />} />
                 
-                {/* OLC Coordinator Routes */}
+                {/* OLC Coordinator Routes - use their own layout */}
                 <Route path="/olc/dashboard" element={<OLCDashboard />} />
                 <Route path="/olc/members" element={<OLCMembers />} />
                 <Route path="/olc/wallet" element={<OLCWallet />} />
                 <Route path="/olc/settlements" element={<OLCSettlements />} />
                 
                 {/* Support */}
-                <Route path="/donate" element={<Donate />} />
-                <Route path="/eduaid" element={<EduAid />} />
-                <Route path="/rebuild" element={<Rebuild />} />
-                <Route path="/judges" element={<Judges />} />
-                <Route path="/partners" element={<Partners />} />
-                <Route path="/chapters" element={<Chapters />} />
-                <Route path="/volunteer" element={<Volunteer />} />
-                <Route path="/contact" element={<Contact />} />
-                <Route path="/policies" element={<Policies />} />
+                <Route path="/donate" element={<WithLayout><Donate /></WithLayout>} />
+                <Route path="/eduaid" element={<WithLayout><EduAid /></WithLayout>} />
+                <Route path="/rebuild" element={<WithLayout><Rebuild /></WithLayout>} />
+                <Route path="/judges" element={<WithLayout><Judges /></WithLayout>} />
+                <Route path="/partners" element={<WithLayout><Partners /></WithLayout>} />
+                <Route path="/chapters" element={<WithLayout><Chapters /></WithLayout>} />
+                <Route path="/volunteer" element={<WithLayout><Volunteer /></WithLayout>} />
+                <Route path="/contact" element={<WithLayout><Contact /></WithLayout>} />
+                <Route path="/policies" element={<WithLayout><Policies /></WithLayout>} />
                 
                 {/* Utility */}
-                <Route path="/unauthorized" element={<Unauthorized />} />
-                <Route path="*" element={<NotFound />} />
+                <Route path="/unauthorized" element={<WithLayout><Unauthorized /></WithLayout>} />
+                <Route path="*" element={<WithLayout><NotFound /></WithLayout>} />
               </Routes>
             </BrowserRouter>
           </SeasonProvider>

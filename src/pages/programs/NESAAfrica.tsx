@@ -22,6 +22,7 @@ import { WatchMediaSection } from "@/components/nesa/WatchMediaSection";
 import { FinalCTASection } from "@/components/nesa/FinalCTASection";
 import { NESAFooter } from "@/components/nesa/NESAFooter";
 import { JudgesSection } from "@/components/nesa/JudgesSection";
+import { MobileBottomNav } from "@/components/navigation/MainNav";
 
 export default function NESAAfrica() {
   return (
@@ -34,7 +35,7 @@ export default function NESAAfrica() {
         />
       </Helmet>
 
-      <div className="min-h-screen bg-charcoal">
+      <div className="min-h-screen bg-charcoal pb-16 lg:pb-0">
         <NESAHeader />
         <NESAHero />
         <KeyDatesBanner />
@@ -59,6 +60,8 @@ export default function NESAAfrica() {
         <FinalCTASection />
         <NESAFooter />
       </div>
+      
+      <MobileBottomNav />
     </>
   );
 }
