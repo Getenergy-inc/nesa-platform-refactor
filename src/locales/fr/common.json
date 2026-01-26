@@ -1,0 +1,68 @@
+{
+  "nav": {
+    "home": "Accueil",
+    "about": "À propos",
+    "awards": "Prix",
+    "media": "Médias",
+    "getInvolved": "Participer",
+    "login": "Connexion",
+    "register": "S'inscrire",
+    "dashboard": "Tableau de bord",
+    "logout": "Déconnexion"
+  },
+  "hero": {
+    "headline": "Honorer les Acteurs du Changement Éducatif en Afrique",
+    "subheadline": "Promouvoir et Réaliser l'Éducation Pour Tous en Afrique",
+    "nominateNow": "Nommer Maintenant",
+    "watchLive": "Regarder en Direct"
+  },
+  "stats": {
+    "africanRegions": "Régions Africaines",
+    "awardCategories": "Catégories de Prix",
+    "subCategories": "Sous-Catégories"
+  },
+  "awards": {
+    "platinum": "Prix Platine",
+    "gold": "Prix Or",
+    "blueGarnet": "Prix Grenat Bleu",
+    "icon": "Prix Icône",
+    "viewAll": "Voir Tous les Prix"
+  },
+  "actions": {
+    "nominate": "Nommer",
+    "vote": "Voter",
+    "donate": "Faire un Don",
+    "watchNow": "Regarder",
+    "learnMore": "En Savoir Plus",
+    "getTickets": "Obtenir des Billets",
+    "viewDetails": "Voir les Détails",
+    "submit": "Soumettre",
+    "cancel": "Annuler",
+    "save": "Enregistrer",
+    "close": "Fermer"
+  },
+  "footer": {
+    "quickLinks": "Liens Rapides",
+    "resources": "Ressources",
+    "connect": "Nous Contacter",
+    "subscribe": "S'abonner",
+    "emailPlaceholder": "Entrez votre email",
+    "copyright": "© {{year}} NESA-Africa. Tous droits réservés.",
+    "privacy": "Politique de Confidentialité",
+    "terms": "Conditions d'Utilisation",
+    "governance": "Gouvernance"
+  },
+  "language": {
+    "selectLanguage": "Choisir la Langue",
+    "currentLanguage": "Langue Actuelle"
+  },
+  "errors": {
+    "notFound": "Page Non Trouvée",
+    "unauthorized": "Non Autorisé",
+    "serverError": "Une erreur s'est produite"
+  },
+  "loading": {
+    "pleaseWait": "Veuillez patienter...",
+    "loading": "Chargement..."
+  }
+}

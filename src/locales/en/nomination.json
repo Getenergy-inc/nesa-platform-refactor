@@ -1,0 +1,55 @@
+{
+  "form": {
+    "title": "Nomination Form",
+    "step1": "Nominee Information",
+    "step2": "Category Selection",
+    "step3": "Justification",
+    "step4": "Evidence",
+    "step5": "Review & Submit"
+  },
+  "fields": {
+    "nomineeName": "Nominee Name",
+    "nomineeEmail": "Nominee Email",
+    "nomineePhone": "Phone Number",
+    "organization": "Organization",
+    "title": "Title/Position",
+    "country": "Country",
+    "region": "Region",
+    "category": "Award Category",
+    "subcategory": "Sub-Category",
+    "justification": "Why does this nominee deserve recognition?",
+    "evidence": "Supporting Evidence",
+    "uploadFiles": "Upload Files"
+  },
+  "placeholders": {
+    "enterName": "Enter nominee's full name",
+    "enterEmail": "nominee@example.com",
+    "enterPhone": "+234 XXX XXX XXXX",
+    "enterOrganization": "Organization or institution name",
+    "enterTitle": "e.g., Principal, Director, Teacher",
+    "selectCountry": "Select country",
+    "selectRegion": "Select region",
+    "selectCategory": "Choose a category",
+    "selectSubcategory": "Choose a sub-category",
+    "writeJustification": "Describe the nominee's contributions and impact..."
+  },
+  "validation": {
+    "required": "This field is required",
+    "invalidEmail": "Please enter a valid email",
+    "invalidPhone": "Please enter a valid phone number",
+    "minLength": "Must be at least {{min}} characters",
+    "maxFiles": "Maximum {{max}} files allowed"
+  },
+  "status": {
+    "pending": "Pending",
+    "underReview": "Under Review",
+    "approved": "Approved",
+    "rejected": "Rejected",
+    "platinum": "Platinum"
+  },
+  "messages": {
+    "submitted": "Nomination submitted successfully!",
+    "thankYou": "Thank you for your nomination. The nominee will receive an acceptance letter.",
+    "error": "Failed to submit nomination. Please try again."
+  }
+}

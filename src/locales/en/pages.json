@@ -1,0 +1,50 @@
+{
+  "about": {
+    "title": "About NESA-Africa",
+    "mission": "Our Mission",
+    "vision": "Our Vision",
+    "governance": "Governance",
+    "timeline": "Timeline"
+  },
+  "categories": {
+    "title": "Award Categories",
+    "description": "Explore our 17 award categories recognizing excellence across Africa's education sector",
+    "viewNominees": "View Nominees",
+    "subcategories": "Subcategories"
+  },
+  "nominees": {
+    "title": "Nominees",
+    "searchPlaceholder": "Search nominees...",
+    "filterByCategory": "Filter by Category",
+    "noNominees": "No Nominees Yet",
+    "beFirst": "Be the first to nominate someone in this category"
+  },
+  "vote": {
+    "title": "Vote for Excellence",
+    "description": "Cast your vote for Africa's education champions",
+    "votingOpen": "Voting is Open",
+    "votingClosed": "Voting is Closed",
+    "voteNow": "Vote Now",
+    "yourVote": "Your Vote Matters"
+  },
+  "results": {
+    "title": "Results",
+    "winners": "Winners",
+    "finalists": "Finalists",
+    "allResults": "All Results"
+  },
+  "media": {
+    "title": "Media Hub",
+    "nesaTV": "NESA Africa TV",
+    "webinars": "Webinars",
+    "gala": "Award Gala",
+    "shows": "Shows"
+  },
+  "contact": {
+    "title": "Contact Us",
+    "name": "Your Name",
+    "email": "Email Address",
+    "message": "Your Message",
+    "send": "Send Message"
+  }
+}

@@ -1,0 +1,68 @@
+{
+  "nav": {
+    "home": "መነሻ",
+    "about": "ስለ",
+    "awards": "ሽልማቶች",
+    "media": "ሚዲያ",
+    "getInvolved": "ተሳተፍ",
+    "login": "ግባ",
+    "register": "ተመዝገብ",
+    "dashboard": "ዳሽቦርድ",
+    "logout": "ውጣ"
+  },
+  "hero": {
+    "headline": "የአፍሪካ የትምህርት ለውጥ አመንጪዎችን ማክበር",
+    "subheadline": "በአፍሪካ ለሁሉም ትምህርት መደገፍ እና ማሳካት",
+    "nominateNow": "አሁን ይሰይሙ",
+    "watchLive": "በቀጥታ ይመልከቱ"
+  },
+  "stats": {
+    "africanRegions": "የአፍሪካ ክልሎች",
+    "awardCategories": "የሽልማት ምድቦች",
+    "subCategories": "ንኡስ ምድቦች"
+  },
+  "awards": {
+    "platinum": "ፕላቲኒየም ሽልማት",
+    "gold": "ወርቅ ሽልማት",
+    "blueGarnet": "ሰማያዊ ጋርኔት ሽልማት",
+    "icon": "አዶ ሽልማት",
+    "viewAll": "ሁሉንም ሽልማቶች ይመልከቱ"
+  },
+  "actions": {
+    "nominate": "ይሰይሙ",
+    "vote": "ድምጽ ይስጡ",
+    "donate": "ልገሳ ያድርጉ",
+    "watchNow": "አሁን ይመልከቱ",
+    "learnMore": "ተጨማሪ ይወቁ",
+    "getTickets": "ትኬቶችን ያግኙ",
+    "viewDetails": "ዝርዝሮችን ይመልከቱ",
+    "submit": "ያስገቡ",
+    "cancel": "ይሰርዙ",
+    "save": "ያስቀምጡ",
+    "close": "ይዝጉ"
+  },
+  "footer": {
+    "quickLinks": "ፈጣን አገናኞች",
+    "resources": "መረጃዎች",
+    "connect": "ያግኙን",
+    "subscribe": "ይመዝገቡ",
+    "emailPlaceholder": "ኢሜልዎን ያስገቡ",
+    "copyright": "© {{year}} NESA-Africa። መብቶች በሙሉ የተጠበቁ ናቸው።",
+    "privacy": "የግል ፖሊሲ",
+    "terms": "የአገልግሎት ውሎች",
+    "governance": "አስተዳደር"
+  },
+  "language": {
+    "selectLanguage": "ቋንቋ ይምረጡ",
+    "currentLanguage": "የአሁኑ ቋንቋ"
+  },
+  "errors": {
+    "notFound": "ገጽ አልተገኘም",
+    "unauthorized": "ፈቃድ የለም",
+    "serverError": "የሆነ ችግር ተከስቷል"
+  },
+  "loading": {
+    "pleaseWait": "እባክዎ ይጠብቁ...",
+    "loading": "በመጫን ላይ..."
+  }
+}

@@ -1,0 +1,49 @@
+{
+  "user": {
+    "title": "My Dashboard",
+    "wallet": "Wallet",
+    "nominations": "My Nominations",
+    "certificates": "My Certificates",
+    "profile": "Profile"
+  },
+  "wallet": {
+    "balance": "Balance",
+    "topUp": "Top Up",
+    "withdraw": "Withdraw",
+    "transactions": "Transactions",
+    "recentActivity": "Recent Activity",
+    "noTransactions": "No transactions yet"
+  },
+  "nrc": {
+    "title": "NRC Dashboard",
+    "queue": "Review Queue",
+    "pending": "Pending",
+    "underReview": "Under Review",
+    "approved": "Approved",
+    "rejected": "Rejected",
+    "assign": "Assign to Me",
+    "approve": "Approve",
+    "reject": "Reject",
+    "needsInfo": "Needs More Info"
+  },
+  "jury": {
+    "title": "Jury Dashboard",
+    "assignments": "My Assignments",
+    "scoring": "Scoring",
+    "coiDeclaration": "Conflict of Interest",
+    "submitScore": "Submit Score"
+  },
+  "chapter": {
+    "title": "Chapter Dashboard",
+    "members": "Members",
+    "performance": "Performance",
+    "settlements": "Settlements"
+  },
+  "admin": {
+    "title": "Admin Dashboard",
+    "overview": "Overview",
+    "finance": "Finance",
+    "governance": "Governance",
+    "technical": "Technical"
+  }
+}

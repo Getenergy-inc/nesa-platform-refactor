@@ -1,0 +1,68 @@
+{
+  "nav": {
+    "home": "الرئيسية",
+    "about": "حول",
+    "awards": "الجوائز",
+    "media": "الإعلام",
+    "getInvolved": "شارك معنا",
+    "login": "تسجيل الدخول",
+    "register": "إنشاء حساب",
+    "dashboard": "لوحة التحكم",
+    "logout": "تسجيل الخروج"
+  },
+  "hero": {
+    "headline": "تكريم صناع التغيير في التعليم الأفريقي",
+    "subheadline": "الدعوة وتحقيق التعليم للجميع في أفريقيا",
+    "nominateNow": "رشّح الآن",
+    "watchLive": "شاهد مباشرة"
+  },
+  "stats": {
+    "africanRegions": "المناطق الأفريقية",
+    "awardCategories": "فئات الجوائز",
+    "subCategories": "الفئات الفرعية"
+  },
+  "awards": {
+    "platinum": "جائزة البلاتين",
+    "gold": "جائزة الذهب",
+    "blueGarnet": "جائزة العقيق الأزرق",
+    "icon": "جائزة الأيقونة",
+    "viewAll": "عرض جميع الجوائز"
+  },
+  "actions": {
+    "nominate": "ترشيح",
+    "vote": "تصويت",
+    "donate": "تبرع",
+    "watchNow": "شاهد الآن",
+    "learnMore": "اعرف المزيد",
+    "getTickets": "احصل على تذاكر",
+    "viewDetails": "عرض التفاصيل",
+    "submit": "إرسال",
+    "cancel": "إلغاء",
+    "save": "حفظ",
+    "close": "إغلاق"
+  },
+  "footer": {
+    "quickLinks": "روابط سريعة",
+    "resources": "الموارد",
+    "connect": "تواصل معنا",
+    "subscribe": "اشترك",
+    "emailPlaceholder": "أدخل بريدك الإلكتروني",
+    "copyright": "© {{year}} نيسا-أفريقيا. جميع الحقوق محفوظة.",
+    "privacy": "سياسة الخصوصية",
+    "terms": "شروط الخدمة",
+    "governance": "الحوكمة"
+  },
+  "language": {
+    "selectLanguage": "اختر اللغة",
+    "currentLanguage": "اللغة الحالية"
+  },
+  "errors": {
+    "notFound": "الصفحة غير موجودة",
+    "unauthorized": "غير مصرح",
+    "serverError": "حدث خطأ ما"
+  },
+  "loading": {
+    "pleaseWait": "يرجى الانتظار...",
+    "loading": "جاري التحميل..."
+  }
+}

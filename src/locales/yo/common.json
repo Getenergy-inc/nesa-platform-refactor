@@ -1,0 +1,68 @@
+{
+  "nav": {
+    "home": "Ilé",
+    "about": "Nípa",
+    "awards": "Àwọn Ẹ̀bùn",
+    "media": "Àwọn Ìwé",
+    "getInvolved": "Dara pọ̀ mọ́",
+    "login": "Wọlé",
+    "register": "Forúkọ sílẹ̀",
+    "dashboard": "Dashibọọdu",
+    "logout": "Jáde"
+  },
+  "hero": {
+    "headline": "Bọ̀wọ̀ fún Àwọn Tí Ń Yí Ẹ̀kọ́ Padà ní Áfríkà",
+    "subheadline": "Gbẹ́gbọ̀ọ̀n àti Mú Ẹ̀kọ́ Ṣẹ fún Gbogbo Ènìyàn ní Áfríkà",
+    "nominateNow": "Yàn Báyìí",
+    "watchLive": "Wo Taara"
+  },
+  "stats": {
+    "africanRegions": "Àwọn Ẹkùn Áfríkà",
+    "awardCategories": "Àwọn Ẹ̀ka Ẹ̀bùn",
+    "subCategories": "Àwọn Ẹ̀ka Kékeré"
+  },
+  "awards": {
+    "platinum": "Ẹ̀bùn Platinum",
+    "gold": "Ẹ̀bùn Wúrà",
+    "blueGarnet": "Ẹ̀bùn Garnet Búlúù",
+    "icon": "Ẹ̀bùn Àmì",
+    "viewAll": "Wo Gbogbo Ẹ̀bùn"
+  },
+  "actions": {
+    "nominate": "Yàn",
+    "vote": "Dìbò",
+    "donate": "Ṣètọrẹ",
+    "watchNow": "Wo Báyìí",
+    "learnMore": "Kẹ́kọ̀ọ́ Síwájú",
+    "getTickets": "Gba Tíkẹ́ẹ̀tì",
+    "viewDetails": "Wo Àwọn Àlàyé",
+    "submit": "Fi sílẹ̀",
+    "cancel": "Fagilé",
+    "save": "Tọ́jú",
+    "close": "Pa"
+  },
+  "footer": {
+    "quickLinks": "Àwọn Àjọṣepọ̀ Tó Yára",
+    "resources": "Àwọn Ohun Èlò",
+    "connect": "Kan sí Wa",
+    "subscribe": "Forúkọ sílẹ̀",
+    "emailPlaceholder": "Tẹ ìmeélì rẹ sí",
+    "copyright": "© {{year}} NESA-Africa. Gbogbo ẹ̀tọ́ ni a pa mọ́.",
+    "privacy": "Ìlànà Àṣírí",
+    "terms": "Àwọn Òfin Iṣẹ́",
+    "governance": "Ìṣàkóso"
+  },
+  "language": {
+    "selectLanguage": "Yan Èdè",
+    "currentLanguage": "Èdè Lọ́wọ́lọ́wọ́"
+  },
+  "errors": {
+    "notFound": "A kò rí ojú-ìwé náà",
+    "unauthorized": "A kò fún ọ láyè",
+    "serverError": "Nǹkan kan ṣẹlẹ̀"
+  },
+  "loading": {
+    "pleaseWait": "Jọ̀wọ́ dúró...",
+    "loading": "Ń gbéjáde..."
+  }
+}

@@ -1,0 +1,68 @@
+{
+  "nav": {
+    "home": "Gida",
+    "about": "Game da",
+    "awards": "Kyaututtuka",
+    "media": "Kafofin Watsa Labarai",
+    "getInvolved": "Shiga",
+    "login": "Shiga",
+    "register": "Yi Rajista",
+    "dashboard": "Dashibod",
+    "logout": "Fita"
+  },
+  "hero": {
+    "headline": "Girmama Masu Canza Ilimi a Afirka",
+    "subheadline": "Bayar da Shawarar da Cimma Ilimi ga Duka a Afirka",
+    "nominateNow": "Zaɓa Yanzu",
+    "watchLive": "Kalli Kai Tsaye"
+  },
+  "stats": {
+    "africanRegions": "Yankunan Afirka",
+    "awardCategories": "Rukunin Kyaututtuka",
+    "subCategories": "Ƙananan Rukuni"
+  },
+  "awards": {
+    "platinum": "Kyautar Platinum",
+    "gold": "Kyautar Zinari",
+    "blueGarnet": "Kyautar Garnet Shuɗi",
+    "icon": "Kyautar Alama",
+    "viewAll": "Duba Duk Kyaututtuka"
+  },
+  "actions": {
+    "nominate": "Zaɓa",
+    "vote": "Zaɓe",
+    "donate": "Ba da Gudummawa",
+    "watchNow": "Kalli Yanzu",
+    "learnMore": "Ƙara Koyo",
+    "getTickets": "Sami Tikiti",
+    "viewDetails": "Duba Cikakkun Bayanai",
+    "submit": "Tura",
+    "cancel": "Soke",
+    "save": "Ajiye",
+    "close": "Rufe"
+  },
+  "footer": {
+    "quickLinks": "Hanyoyin Sauri",
+    "resources": "Albarkatu",
+    "connect": "Tuntube Mu",
+    "subscribe": "Biyan Kuɗi",
+    "emailPlaceholder": "Shigar da imel ɗinka",
+    "copyright": "© {{year}} NESA-Africa. Duk hakkokin mallaka.",
+    "privacy": "Manufar Sirri",
+    "terms": "Sharuɗɗan Sabis",
+    "governance": "Mulki"
+  },
+  "language": {
+    "selectLanguage": "Zaɓi Harshe",
+    "currentLanguage": "Harshen Yanzu"
+  },
+  "errors": {
+    "notFound": "Ba a Sami Shafi ba",
+    "unauthorized": "Ba a Yarda ba",
+    "serverError": "Wani abu ya faru ba daidai ba"
+  },
+  "loading": {
+    "pleaseWait": "Da fatan jira...",
+    "loading": "Ana lodawa..."
+  }
+}

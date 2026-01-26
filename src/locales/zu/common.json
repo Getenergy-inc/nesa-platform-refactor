@@ -1,0 +1,68 @@
+{
+  "nav": {
+    "home": "Ikhaya",
+    "about": "Mayelana",
+    "awards": "Imiklomelo",
+    "media": "Abezindaba",
+    "getInvolved": "Hlanganyela",
+    "login": "Ngena",
+    "register": "Bhalisa",
+    "dashboard": "Idashbhodi",
+    "logout": "Phuma"
+  },
+  "hero": {
+    "headline": "Ukuhlonipha Abashintshi Bemfundo Base-Afrika",
+    "subheadline": "Ukumela Nokuzuza Imfundo Yawo Wonke Umuntu E-Afrika",
+    "nominateNow": "Qoka Manje",
+    "watchLive": "Bukela Bukhoma"
+  },
+  "stats": {
+    "africanRegions": "Izifunda Zase-Afrika",
+    "awardCategories": "Izigaba Zemiklomelo",
+    "subCategories": "Izigabana"
+  },
+  "awards": {
+    "platinum": "Umklomelo WePlatinam",
+    "gold": "Umklomelo WeGolide",
+    "blueGarnet": "Umklomelo WeGarnet Eluhlaza",
+    "icon": "Umklomelo Wophawu",
+    "viewAll": "Buka Yonke Imiklomelo"
+  },
+  "actions": {
+    "nominate": "Qoka",
+    "vote": "Vota",
+    "donate": "Nikela",
+    "watchNow": "Bukela Manje",
+    "learnMore": "Funda Kabanzi",
+    "getTickets": "Thola Amathikithi",
+    "viewDetails": "Buka Imininingwane",
+    "submit": "Thumela",
+    "cancel": "Khansela",
+    "save": "Gcina",
+    "close": "Vala"
+  },
+  "footer": {
+    "quickLinks": "Izixhumanisi Ezisheshayo",
+    "resources": "Izinsiza",
+    "connect": "Xhumana Nathi",
+    "subscribe": "Bhalisela",
+    "emailPlaceholder": "Faka i-imeyili yakho",
+    "copyright": "© {{year}} NESA-Africa. Onke amalungelo agodliwe.",
+    "privacy": "Inqubomgomo Yobumfihlo",
+    "terms": "Imigomo Yesevisi",
+    "governance": "Ukuphatha"
+  },
+  "language": {
+    "selectLanguage": "Khetha Ulimi",
+    "currentLanguage": "Ulimi Lwamanje"
+  },
+  "errors": {
+    "notFound": "Ikhasi Alitholakalanga",
+    "unauthorized": "Awuvumelekile",
+    "serverError": "Kukhona okungahambanga kahle"
+  },
+  "loading": {
+    "pleaseWait": "Sicela ulinde...",
+    "loading": "Iyalayisha..."
+  }
+}
