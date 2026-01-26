@@ -252,6 +252,12 @@ export default function Nominate() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
+    if (!user) {
+      toast.error("Please log in to submit a nomination");
+      navigate("/auth/login", { state: { from: "/nominate" } });
+      return;
+    }
+
     if (!selectedSubcategoryId) {
       toast.error("Please select a category and subcategory");
       return;
@@ -275,10 +281,18 @@ export default function Nominate() {
         .from("seasons")
         .select("id")
         .eq("is_active", true)
-        .single();
+        .maybeSingle();
 
-      if (seasonError || !season) {
-        toast.error("No active season found");
+      if (seasonError) {
+        console.error("Season error:", seasonError);
+        toast.error("Failed to fetch active season. Please try again.");
+        setSubmitting(false);
+        return;
+      }
+
+      if (!season) {
+        toast.error("No active season found. Nominations may be closed.");
+        setSubmitting(false);
         return;
       }
 
@@ -292,16 +306,17 @@ export default function Nominate() {
         nominee_photo_url: nomineePhoto?.url || null,
         evidence_urls: uploadedFiles.map((f) => f.url),
         justification: justification.trim(),
-        nominator_id: user!.id,
+        nominator_id: user.id,
       });
 
       if (error) {
-        if (error.message.includes("stage")) {
+        console.error("Submission error:", error);
+        if (error.message.includes("row-level security") || error.message.includes("stage")) {
           toast.error("Nominations are currently closed");
         } else {
           toast.error("Failed to submit nomination. Please try again.");
         }
-        console.error("Submission error:", error);
+        setSubmitting(false);
         return;
       }
 
