@@ -3,7 +3,7 @@
 
 import { useState, forwardRef } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { ChevronDown, Menu, Globe, User, LogOut, Home, Award, Ticket, Play, Heart } from "lucide-react";
+import { ChevronDown, Menu, Globe, User, LogOut, Home, Award, Ticket, Play, Heart, LayoutDashboard } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   NavigationMenu,
@@ -412,8 +412,8 @@ function UserMenu() {
 
 const mobileQuickActions = [
   { icon: Home, label: "Home", href: "/" },
+  { icon: LayoutDashboard, label: "Dashboard", href: "/dashboard" },
   { icon: Award, label: "Nominate", href: "/nominate" },
-  { icon: Ticket, label: "Tickets", href: "/tickets" },
   { icon: Play, label: "Watch", href: "/media/tv" },
   { icon: Heart, label: "Donate", href: "/donate" },
 ];

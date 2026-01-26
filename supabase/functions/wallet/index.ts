@@ -168,8 +168,14 @@ Deno.serve(async (req) => {
         return errorResponse("Invalid payment provider");
       }
 
-      // Calculate AGC (1 USD = 10 AGC default rate)
-      const exchangeRate = 10;
+      // Get dynamic exchange rate from platform_config
+      const { data: fxConfig } = await adminSupabase
+        .from("platform_config")
+        .select("value")
+        .eq("key", "agc_exchange_rate")
+        .maybeSingle();
+      
+      const exchangeRate = fxConfig?.value?.usd_to_agc || 10;
       const agcAmount = amount_usd * exchangeRate;
 
       const { data: payment, error } = await adminSupabase
