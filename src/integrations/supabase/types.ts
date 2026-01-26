@@ -145,6 +145,7 @@ export type Database = {
       }
       chapters: {
         Row: {
+          coordinator_user_id: string | null
           country: string
           created_at: string | null
           description: string | null
@@ -153,11 +154,13 @@ export type Database = {
           lead_user_id: string | null
           logo_url: string | null
           name: string
+          referral_code: string | null
           region: string | null
           slug: string
           updated_at: string | null
         }
         Insert: {
+          coordinator_user_id?: string | null
           country: string
           created_at?: string | null
           description?: string | null
@@ -166,11 +169,13 @@ export type Database = {
           lead_user_id?: string | null
           logo_url?: string | null
           name: string
+          referral_code?: string | null
           region?: string | null
           slug: string
           updated_at?: string | null
         }
         Update: {
+          coordinator_user_id?: string | null
           country?: string
           created_at?: string | null
           description?: string | null
@@ -179,11 +184,20 @@ export type Database = {
           lead_user_id?: string | null
           logo_url?: string | null
           name?: string
+          referral_code?: string | null
           region?: string | null
           slug?: string
           updated_at?: string | null
         }
-        Relationships: []
+        Relationships: [
+          {
+            foreignKeyName: "chapters_coordinator_user_id_fkey"
+            columns: ["coordinator_user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["user_id"]
+          },
+        ]
       }
       coi_declarations: {
         Row: {
@@ -255,6 +269,105 @@ export type Database = {
           updated_at?: string | null
         }
         Relationships: []
+      }
+      disbursement_lines: {
+        Row: {
+          amount_usd: number
+          created_at: string | null
+          destination_account_id: string | null
+          destination_external: string | null
+          id: string
+          run_id: string
+          split_key: string
+          status: string | null
+        }
+        Insert: {
+          amount_usd: number
+          created_at?: string | null
+          destination_account_id?: string | null
+          destination_external?: string | null
+          id?: string
+          run_id: string
+          split_key: string
+          status?: string | null
+        }
+        Update: {
+          amount_usd?: number
+          created_at?: string | null
+          destination_account_id?: string | null
+          destination_external?: string | null
+          id?: string
+          run_id?: string
+          split_key?: string
+          status?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "disbursement_lines_destination_account_id_fkey"
+            columns: ["destination_account_id"]
+            isOneToOne: false
+            referencedRelation: "wallet_accounts"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "disbursement_lines_destination_account_id_fkey"
+            columns: ["destination_account_id"]
+            isOneToOne: false
+            referencedRelation: "wallet_balances"
+            referencedColumns: ["account_id"]
+          },
+          {
+            foreignKeyName: "disbursement_lines_run_id_fkey"
+            columns: ["run_id"]
+            isOneToOne: false
+            referencedRelation: "disbursement_runs"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      disbursement_runs: {
+        Row: {
+          completed_at: string | null
+          created_at: string | null
+          created_by: string | null
+          id: string
+          notes: string | null
+          run_date: string
+          season_id: string
+          status: Database["public"]["Enums"]["disbursement_status"]
+          total_amount_usd: number | null
+        }
+        Insert: {
+          completed_at?: string | null
+          created_at?: string | null
+          created_by?: string | null
+          id?: string
+          notes?: string | null
+          run_date: string
+          season_id: string
+          status?: Database["public"]["Enums"]["disbursement_status"]
+          total_amount_usd?: number | null
+        }
+        Update: {
+          completed_at?: string | null
+          created_at?: string | null
+          created_by?: string | null
+          id?: string
+          notes?: string | null
+          run_date?: string
+          season_id?: string
+          status?: Database["public"]["Enums"]["disbursement_status"]
+          total_amount_usd?: number | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "disbursement_runs_season_id_fkey"
+            columns: ["season_id"]
+            isOneToOne: false
+            referencedRelation: "seasons"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       donations: {
         Row: {
@@ -656,6 +769,66 @@ export type Database = {
           },
         ]
       }
+      payment_intents: {
+        Row: {
+          account_id: string
+          agc_amount: number
+          amount_usd: number
+          created_at: string | null
+          exchange_rate: number | null
+          expires_at: string | null
+          id: string
+          metadata: Json | null
+          provider: Database["public"]["Enums"]["payment_provider"]
+          provider_ref: string | null
+          status: Database["public"]["Enums"]["payment_status"]
+          updated_at: string | null
+        }
+        Insert: {
+          account_id: string
+          agc_amount: number
+          amount_usd: number
+          created_at?: string | null
+          exchange_rate?: number | null
+          expires_at?: string | null
+          id?: string
+          metadata?: Json | null
+          provider: Database["public"]["Enums"]["payment_provider"]
+          provider_ref?: string | null
+          status?: Database["public"]["Enums"]["payment_status"]
+          updated_at?: string | null
+        }
+        Update: {
+          account_id?: string
+          agc_amount?: number
+          amount_usd?: number
+          created_at?: string | null
+          exchange_rate?: number | null
+          expires_at?: string | null
+          id?: string
+          metadata?: Json | null
+          provider?: Database["public"]["Enums"]["payment_provider"]
+          provider_ref?: string | null
+          status?: Database["public"]["Enums"]["payment_status"]
+          updated_at?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "payment_intents_account_id_fkey"
+            columns: ["account_id"]
+            isOneToOne: false
+            referencedRelation: "wallet_accounts"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "payment_intents_account_id_fkey"
+            columns: ["account_id"]
+            isOneToOne: false
+            referencedRelation: "wallet_balances"
+            referencedColumns: ["account_id"]
+          },
+        ]
+      }
       profiles: {
         Row: {
           avatar_url: string | null
@@ -666,6 +839,8 @@ export type Database = {
           full_name: string | null
           id: string
           phone: string | null
+          referred_by_chapter_id: string | null
+          referred_by_user_id: string | null
           updated_at: string | null
           user_id: string
         }
@@ -678,6 +853,8 @@ export type Database = {
           full_name?: string | null
           id?: string
           phone?: string | null
+          referred_by_chapter_id?: string | null
+          referred_by_user_id?: string | null
           updated_at?: string | null
           user_id: string
         }
@@ -690,8 +867,95 @@ export type Database = {
           full_name?: string | null
           id?: string
           phone?: string | null
+          referred_by_chapter_id?: string | null
+          referred_by_user_id?: string | null
           updated_at?: string | null
           user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "profiles_referred_by_user_id_fkey"
+            columns: ["referred_by_user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      referral_events: {
+        Row: {
+          created_at: string | null
+          event_type: Database["public"]["Enums"]["referral_event_type"]
+          id: string
+          is_paid: boolean | null
+          referred_user_id: string
+          referrer_id: string
+          referrer_type: Database["public"]["Enums"]["referral_owner_type"]
+          reward_agc: number | null
+          value_usd: number | null
+        }
+        Insert: {
+          created_at?: string | null
+          event_type: Database["public"]["Enums"]["referral_event_type"]
+          id?: string
+          is_paid?: boolean | null
+          referred_user_id: string
+          referrer_id: string
+          referrer_type: Database["public"]["Enums"]["referral_owner_type"]
+          reward_agc?: number | null
+          value_usd?: number | null
+        }
+        Update: {
+          created_at?: string | null
+          event_type?: Database["public"]["Enums"]["referral_event_type"]
+          id?: string
+          is_paid?: boolean | null
+          referred_user_id?: string
+          referrer_id?: string
+          referrer_type?: Database["public"]["Enums"]["referral_owner_type"]
+          reward_agc?: number | null
+          value_usd?: number | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "referral_events_referred_user_id_fkey"
+            columns: ["referred_user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["user_id"]
+          },
+        ]
+      }
+      referrals: {
+        Row: {
+          created_at: string | null
+          id: string
+          is_active: boolean | null
+          owner_id: string
+          owner_type: Database["public"]["Enums"]["referral_owner_type"]
+          referral_code: string
+          total_earnings_agc: number | null
+          total_referrals: number | null
+        }
+        Insert: {
+          created_at?: string | null
+          id?: string
+          is_active?: boolean | null
+          owner_id: string
+          owner_type: Database["public"]["Enums"]["referral_owner_type"]
+          referral_code: string
+          total_earnings_agc?: number | null
+          total_referrals?: number | null
+        }
+        Update: {
+          created_at?: string | null
+          id?: string
+          is_active?: boolean | null
+          owner_id?: string
+          owner_type?: Database["public"]["Enums"]["referral_owner_type"]
+          referral_code?: string
+          total_earnings_agc?: number | null
+          total_referrals?: number | null
         }
         Relationships: []
       }
@@ -778,28 +1042,117 @@ export type Database = {
           },
         ]
       }
-      seasons: {
+      revenue_splits: {
         Row: {
           created_at: string | null
+          destination_description: string | null
+          id: string
+          is_active: boolean | null
+          percent: number
+          season_id: string
+          split_key: string
+          updated_at: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          destination_description?: string | null
+          id?: string
+          is_active?: boolean | null
+          percent: number
+          season_id: string
+          split_key: string
+          updated_at?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          destination_description?: string | null
+          id?: string
+          is_active?: boolean | null
+          percent?: number
+          season_id?: string
+          split_key?: string
+          updated_at?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "revenue_splits_season_id_fkey"
+            columns: ["season_id"]
+            isOneToOne: false
+            referencedRelation: "seasons"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      roles: {
+        Row: {
+          code: Database["public"]["Enums"]["role_code"]
+          created_at: string | null
+          description: string | null
+          id: string
+          label: string
+        }
+        Insert: {
+          code: Database["public"]["Enums"]["role_code"]
+          created_at?: string | null
+          description?: string | null
+          id?: string
+          label: string
+        }
+        Update: {
+          code?: Database["public"]["Enums"]["role_code"]
+          created_at?: string | null
+          description?: string | null
+          id?: string
+          label?: string
+        }
+        Relationships: []
+      }
+      seasons: {
+        Row: {
+          blue_garnet_open: boolean | null
+          certificate_download_open: boolean | null
+          code: string | null
+          config: Json | null
+          created_at: string | null
+          ends_at: string | null
+          gold_voting_open: boolean | null
           id: string
           is_active: boolean | null
           name: string
+          nomination_open: boolean | null
+          starts_at: string | null
           updated_at: string | null
           year: number
         }
         Insert: {
+          blue_garnet_open?: boolean | null
+          certificate_download_open?: boolean | null
+          code?: string | null
+          config?: Json | null
           created_at?: string | null
+          ends_at?: string | null
+          gold_voting_open?: boolean | null
           id?: string
           is_active?: boolean | null
           name: string
+          nomination_open?: boolean | null
+          starts_at?: string | null
           updated_at?: string | null
           year: number
         }
         Update: {
+          blue_garnet_open?: boolean | null
+          certificate_download_open?: boolean | null
+          code?: string | null
+          config?: Json | null
           created_at?: string | null
+          ends_at?: string | null
+          gold_voting_open?: boolean | null
           id?: string
           is_active?: boolean | null
           name?: string
+          nomination_open?: boolean | null
+          starts_at?: string | null
           updated_at?: string | null
           year?: number
         }
@@ -953,21 +1306,35 @@ export type Database = {
           created_at: string | null
           id: string
           role: Database["public"]["Enums"]["app_role"]
+          role_code: Database["public"]["Enums"]["role_code"] | null
+          scope_chapter_id: string | null
           user_id: string
         }
         Insert: {
           created_at?: string | null
           id?: string
           role: Database["public"]["Enums"]["app_role"]
+          role_code?: Database["public"]["Enums"]["role_code"] | null
+          scope_chapter_id?: string | null
           user_id: string
         }
         Update: {
           created_at?: string | null
           id?: string
           role?: Database["public"]["Enums"]["app_role"]
+          role_code?: Database["public"]["Enums"]["role_code"] | null
+          scope_chapter_id?: string | null
           user_id?: string
         }
-        Relationships: []
+        Relationships: [
+          {
+            foreignKeyName: "user_roles_scope_chapter_fkey"
+            columns: ["scope_chapter_id"]
+            isOneToOne: false
+            referencedRelation: "chapters"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       votes: {
         Row: {
@@ -1017,20 +1384,142 @@ export type Database = {
           },
         ]
       }
+      wallet_accounts: {
+        Row: {
+          created_at: string | null
+          currency: string
+          id: string
+          is_active: boolean | null
+          owner_id: string
+          owner_type: Database["public"]["Enums"]["wallet_owner_type"]
+          updated_at: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          currency?: string
+          id?: string
+          is_active?: boolean | null
+          owner_id: string
+          owner_type: Database["public"]["Enums"]["wallet_owner_type"]
+          updated_at?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          currency?: string
+          id?: string
+          is_active?: boolean | null
+          owner_id?: string
+          owner_type?: Database["public"]["Enums"]["wallet_owner_type"]
+          updated_at?: string | null
+        }
+        Relationships: []
+      }
+      wallet_ledger_entries: {
+        Row: {
+          account_id: string
+          agc_amount: number
+          created_at: string | null
+          created_by: string | null
+          description: string | null
+          direction: Database["public"]["Enums"]["wallet_direction"]
+          entry_type: Database["public"]["Enums"]["wallet_entry_type"]
+          id: string
+          is_withdrawable: boolean | null
+          reference_id: string | null
+          reference_type: string | null
+          usd_amount: number
+        }
+        Insert: {
+          account_id: string
+          agc_amount?: number
+          created_at?: string | null
+          created_by?: string | null
+          description?: string | null
+          direction: Database["public"]["Enums"]["wallet_direction"]
+          entry_type: Database["public"]["Enums"]["wallet_entry_type"]
+          id?: string
+          is_withdrawable?: boolean | null
+          reference_id?: string | null
+          reference_type?: string | null
+          usd_amount?: number
+        }
+        Update: {
+          account_id?: string
+          agc_amount?: number
+          created_at?: string | null
+          created_by?: string | null
+          description?: string | null
+          direction?: Database["public"]["Enums"]["wallet_direction"]
+          entry_type?: Database["public"]["Enums"]["wallet_entry_type"]
+          id?: string
+          is_withdrawable?: boolean | null
+          reference_id?: string | null
+          reference_type?: string | null
+          usd_amount?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "wallet_ledger_entries_account_id_fkey"
+            columns: ["account_id"]
+            isOneToOne: false
+            referencedRelation: "wallet_accounts"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "wallet_ledger_entries_account_id_fkey"
+            columns: ["account_id"]
+            isOneToOne: false
+            referencedRelation: "wallet_balances"
+            referencedColumns: ["account_id"]
+          },
+        ]
+      }
     }
     Views: {
-      [_ in never]: never
+      wallet_balances: {
+        Row: {
+          account_id: string | null
+          agc_bonus: number | null
+          agc_non_withdrawable: number | null
+          agc_total: number | null
+          agc_withdrawable: number | null
+          currency: string | null
+          owner_id: string | null
+          owner_type: Database["public"]["Enums"]["wallet_owner_type"] | null
+          usd_balance: number | null
+        }
+        Relationships: []
+      }
     }
     Functions: {
+      generate_referral_code: { Args: { p_prefix?: string }; Returns: string }
       get_current_season: { Args: never; Returns: string }
       get_user_roles: {
         Args: { _user_id: string }
         Returns: Database["public"]["Enums"]["app_role"][]
       }
+      get_user_wallet: { Args: { p_user_id: string }; Returns: string }
+      get_wallet_balance: {
+        Args: { p_account_id: string }
+        Returns: {
+          agc_bonus: number
+          agc_non_withdrawable: number
+          agc_total: number
+          agc_withdrawable: number
+          usd_balance: number
+        }[]
+      }
       has_role: {
         Args: {
           _role: Database["public"]["Enums"]["app_role"]
           _user_id: string
+        }
+        Returns: boolean
+      }
+      has_role_code: {
+        Args: {
+          p_role_code: Database["public"]["Enums"]["role_code"]
+          p_user_id: string
         }
         Returns: boolean
       }
@@ -1046,12 +1535,37 @@ export type Database = {
     Enums: {
       app_role: "user" | "nrc" | "jury" | "chapter" | "sponsor" | "admin"
       certificate_tier: "gold" | "platinum" | "blue_garnet" | "icon"
+      disbursement_status: "DRAFT" | "COMPLETED" | "FAILED"
       nomination_status:
         | "pending"
         | "under_review"
         | "approved"
         | "rejected"
         | "platinum"
+      payment_provider: "PAYSTACK" | "FLUTTERWAVE" | "LEMFI" | "TAPTAPSEND"
+      payment_status:
+        | "INITIATED"
+        | "PENDING"
+        | "SUCCESS"
+        | "FAILED"
+        | "CANCELLED"
+      referral_event_type:
+        | "SIGNUP"
+        | "NOMINATION_PAID"
+        | "VOTE_PAID"
+        | "DONATION"
+        | "TICKET"
+      referral_owner_type: "USER" | "CHAPTER"
+      role_code:
+        | "USER"
+        | "NOMINEE"
+        | "AMBASSADOR"
+        | "OLC_COORDINATOR"
+        | "NRC"
+        | "JURY"
+        | "SPONSOR"
+        | "ADMIN"
+        | "SUPER_ADMIN"
       stage_action:
         | "nominations"
         | "public_voting"
@@ -1061,6 +1575,20 @@ export type Database = {
       transaction_status: "pending" | "confirmed" | "failed" | "refunded"
       transaction_type: "donation" | "sponsorship" | "ticket"
       vote_type: "public" | "jury"
+      wallet_direction: "CREDIT" | "DEBIT"
+      wallet_entry_type:
+        | "TOPUP"
+        | "NOMINATION_FEE"
+        | "VOTE_FEE"
+        | "DONATION"
+        | "TICKET"
+        | "REFERRAL_BONUS"
+        | "AMBASSADOR_BONUS"
+        | "CHAPTER_BONUS"
+        | "WITHDRAW_REQUEST"
+        | "WITHDRAW_APPROVED"
+        | "ADJUSTMENT"
+      wallet_owner_type: "USER" | "CHAPTER" | "PLATFORM"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -1190,12 +1718,40 @@ export const Constants = {
     Enums: {
       app_role: ["user", "nrc", "jury", "chapter", "sponsor", "admin"],
       certificate_tier: ["gold", "platinum", "blue_garnet", "icon"],
+      disbursement_status: ["DRAFT", "COMPLETED", "FAILED"],
       nomination_status: [
         "pending",
         "under_review",
         "approved",
         "rejected",
         "platinum",
+      ],
+      payment_provider: ["PAYSTACK", "FLUTTERWAVE", "LEMFI", "TAPTAPSEND"],
+      payment_status: [
+        "INITIATED",
+        "PENDING",
+        "SUCCESS",
+        "FAILED",
+        "CANCELLED",
+      ],
+      referral_event_type: [
+        "SIGNUP",
+        "NOMINATION_PAID",
+        "VOTE_PAID",
+        "DONATION",
+        "TICKET",
+      ],
+      referral_owner_type: ["USER", "CHAPTER"],
+      role_code: [
+        "USER",
+        "NOMINEE",
+        "AMBASSADOR",
+        "OLC_COORDINATOR",
+        "NRC",
+        "JURY",
+        "SPONSOR",
+        "ADMIN",
+        "SUPER_ADMIN",
       ],
       stage_action: [
         "nominations",
@@ -1207,6 +1763,21 @@ export const Constants = {
       transaction_status: ["pending", "confirmed", "failed", "refunded"],
       transaction_type: ["donation", "sponsorship", "ticket"],
       vote_type: ["public", "jury"],
+      wallet_direction: ["CREDIT", "DEBIT"],
+      wallet_entry_type: [
+        "TOPUP",
+        "NOMINATION_FEE",
+        "VOTE_FEE",
+        "DONATION",
+        "TICKET",
+        "REFERRAL_BONUS",
+        "AMBASSADOR_BONUS",
+        "CHAPTER_BONUS",
+        "WITHDRAW_REQUEST",
+        "WITHDRAW_APPROVED",
+        "ADJUSTMENT",
+      ],
+      wallet_owner_type: ["USER", "CHAPTER", "PLATFORM"],
     },
   },
 } as const
