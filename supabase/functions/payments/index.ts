@@ -1,9 +1,114 @@
-import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
+import { createClient, SupabaseClient } from "https://esm.sh/@supabase/supabase-js@2";
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
   "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type",
 };
+
+// ============================================================
+// REFERRAL REWARD TRIGGER (BUG-001 fix)
+// Triggers referral rewards when payments complete
+// ============================================================
+type ReferralEventType = "NOMINATION_PAID" | "VOTE_PAID" | "DONATION" | "TICKET" | "SIGNUP";
+
+async function triggerReferralReward(
+  supabase: SupabaseClient,
+  userId: string, 
+  eventType: ReferralEventType,
+  amount: number,
+  currency: string
+): Promise<void> {
+  try {
+    // Convert to USD for reward calculation
+    let valueUsd = amount;
+    if (currency === "NGN") {
+      valueUsd = amount / 1600; // Approximate NGN to USD
+    } else if (currency !== "USD") {
+      valueUsd = amount / 5; // Default fallback rate
+    }
+
+    // Get user's referrer info from profile
+    const { data: profile } = await supabase
+      .from("profiles")
+      .select("referred_by_user_id, referred_by_chapter_id")
+      .eq("user_id", userId)
+      .maybeSingle();
+
+    if (!profile?.referred_by_user_id && !profile?.referred_by_chapter_id) {
+      // No referrer, nothing to do
+      return;
+    }
+
+    const referrerType = profile.referred_by_chapter_id ? "CHAPTER" : "USER";
+    const referrerId = profile.referred_by_chapter_id || profile.referred_by_user_id;
+
+    // Calculate reward (5% of transaction value)
+    const rewardAgc = valueUsd * 0.5; // 5% commission in AGC (1 USD = 10 AGC, so 0.05 * 10 = 0.5)
+
+    // Create referral event
+    const { error: eventError } = await supabase.from("referral_events").insert({
+      referrer_type: referrerType,
+      referrer_id: referrerId,
+      referred_user_id: userId,
+      event_type: eventType,
+      reward_agc: rewardAgc,
+      value_usd: valueUsd,
+      is_paid: false,
+    });
+
+    if (eventError) {
+      console.error("Failed to create referral event:", eventError);
+      return;
+    }
+
+    // Get referrer's wallet account
+    const { data: referrerWallet } = await supabase
+      .from("wallet_accounts")
+      .select("id")
+      .eq("owner_type", referrerType)
+      .eq("owner_id", referrerId)
+      .maybeSingle();
+
+    if (referrerWallet) {
+      // Credit the referrer's wallet
+      const { error: ledgerError } = await supabase.from("wallet_ledger_entries").insert({
+        account_id: referrerWallet.id,
+        entry_type: referrerType === "CHAPTER" ? "CHAPTER_BONUS" : "REFERRAL_BONUS",
+        direction: "CREDIT",
+        agc_amount: rewardAgc,
+        usd_amount: valueUsd * 0.05,
+        is_withdrawable: true,
+        description: `Referral bonus: ${eventType}`,
+        reference_type: "referral_event",
+      });
+
+      if (ledgerError) {
+        console.error("Failed to credit referrer wallet:", ledgerError);
+      }
+    }
+
+    // Update referral totals (increment)
+    const { data: currentReferral } = await supabase
+      .from("referrals")
+      .select("total_earnings_agc")
+      .eq("owner_type", referrerType)
+      .eq("owner_id", referrerId)
+      .maybeSingle();
+
+    if (currentReferral) {
+      const newTotal = (currentReferral.total_earnings_agc || 0) + rewardAgc;
+      await supabase
+        .from("referrals")
+        .update({ total_earnings_agc: newTotal })
+        .eq("owner_type", referrerType)
+        .eq("owner_id", referrerId);
+    }
+
+    console.log(`Referral reward triggered: ${eventType} -> ${referrerType}:${referrerId} (${rewardAgc} AGC)`);
+  } catch (error) {
+    console.error("Error triggering referral reward:", error);
+  }
+}
 
 Deno.serve(async (req) => {
   // Handle CORS preflight
@@ -215,12 +320,26 @@ Deno.serve(async (req) => {
               console.error("Failed to update transaction:", updateError);
             }
 
-            // If it's a donation, also update donations table
+            // Get full transaction details
             const { data: tx } = await supabase
               .from("transactions")
-              .select("user_id, amount, currency, metadata")
+              .select("user_id, amount, currency, metadata, transaction_type")
               .eq("id", transactionId)
               .single();
+
+            if (tx?.user_id) {
+              // Trigger referral reward for paid transactions (BUG-001 fix)
+              await triggerReferralReward(
+                supabase,
+                tx.user_id,
+                tx.transaction_type === "nomination" ? "NOMINATION_PAID" 
+                  : tx.transaction_type === "vote" ? "VOTE_PAID"
+                  : tx.transaction_type === "ticket" ? "TICKET"
+                  : "DONATION",
+                tx.amount,
+                tx.currency
+              );
+            }
 
             if (tx?.metadata?.program) {
               await supabase.from("donations").insert({
