@@ -1,0 +1,68 @@
+{
+  "nav": {
+    "home": "Início",
+    "about": "Sobre",
+    "awards": "Prémios",
+    "media": "Mídia",
+    "getInvolved": "Participe",
+    "login": "Entrar",
+    "register": "Registar",
+    "dashboard": "Painel",
+    "logout": "Sair"
+  },
+  "hero": {
+    "headline": "Honrando os Transformadores da Educação Africana",
+    "subheadline": "Defendendo e Alcançando Educação Para Todos em África",
+    "nominateNow": "Nomear Agora",
+    "watchLive": "Assistir ao Vivo"
+  },
+  "stats": {
+    "africanRegions": "Regiões Africanas",
+    "awardCategories": "Categorias de Prémios",
+    "subCategories": "Subcategorias"
+  },
+  "awards": {
+    "platinum": "Prémio Platina",
+    "gold": "Prémio Ouro",
+    "blueGarnet": "Prémio Granada Azul",
+    "icon": "Prémio Ícone",
+    "viewAll": "Ver Todos os Prémios"
+  },
+  "actions": {
+    "nominate": "Nomear",
+    "vote": "Votar",
+    "donate": "Doar",
+    "watchNow": "Assistir Agora",
+    "learnMore": "Saiba Mais",
+    "getTickets": "Obter Bilhetes",
+    "viewDetails": "Ver Detalhes",
+    "submit": "Enviar",
+    "cancel": "Cancelar",
+    "save": "Guardar",
+    "close": "Fechar"
+  },
+  "footer": {
+    "quickLinks": "Links Rápidos",
+    "resources": "Recursos",
+    "connect": "Contacte-nos",
+    "subscribe": "Subscrever",
+    "emailPlaceholder": "Introduza o seu email",
+    "copyright": "© {{year}} NESA-Africa. Todos os direitos reservados.",
+    "privacy": "Política de Privacidade",
+    "terms": "Termos de Serviço",
+    "governance": "Governança"
+  },
+  "language": {
+    "selectLanguage": "Selecionar Idioma",
+    "currentLanguage": "Idioma Atual"
+  },
+  "errors": {
+    "notFound": "Página Não Encontrada",
+    "unauthorized": "Não Autorizado",
+    "serverError": "Algo correu mal"
+  },
+  "loading": {
+    "pleaseWait": "Por favor aguarde...",
+    "loading": "A carregar..."
+  }
+}

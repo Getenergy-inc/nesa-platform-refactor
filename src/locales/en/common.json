@@ -1,0 +1,68 @@
+{
+  "nav": {
+    "home": "Home",
+    "about": "About",
+    "awards": "Awards",
+    "media": "Media",
+    "getInvolved": "Get Involved",
+    "login": "Login",
+    "register": "Register",
+    "dashboard": "Dashboard",
+    "logout": "Logout"
+  },
+  "hero": {
+    "headline": "Honoring Africa's Education Changemakers",
+    "subheadline": "Advocating & Achieving Education For All In Africa",
+    "nominateNow": "Nominate Now",
+    "watchLive": "Watch Live"
+  },
+  "stats": {
+    "africanRegions": "African Regions",
+    "awardCategories": "Award Categories",
+    "subCategories": "Sub-Categories"
+  },
+  "awards": {
+    "platinum": "Platinum Award",
+    "gold": "Gold Award",
+    "blueGarnet": "Blue Garnet Award",
+    "icon": "Icon Award",
+    "viewAll": "View All Awards"
+  },
+  "actions": {
+    "nominate": "Nominate",
+    "vote": "Vote",
+    "donate": "Donate",
+    "watchNow": "Watch Now",
+    "learnMore": "Learn More",
+    "getTickets": "Get Tickets",
+    "viewDetails": "View Details",
+    "submit": "Submit",
+    "cancel": "Cancel",
+    "save": "Save",
+    "close": "Close"
+  },
+  "footer": {
+    "quickLinks": "Quick Links",
+    "resources": "Resources",
+    "connect": "Connect",
+    "subscribe": "Subscribe",
+    "emailPlaceholder": "Enter your email",
+    "copyright": "© {{year}} NESA-Africa. All rights reserved.",
+    "privacy": "Privacy Policy",
+    "terms": "Terms of Service",
+    "governance": "Governance"
+  },
+  "language": {
+    "selectLanguage": "Select Language",
+    "currentLanguage": "Current Language"
+  },
+  "errors": {
+    "notFound": "Page Not Found",
+    "unauthorized": "Unauthorized",
+    "serverError": "Something went wrong"
+  },
+  "loading": {
+    "pleaseWait": "Please wait...",
+    "loading": "Loading..."
+  }
+}

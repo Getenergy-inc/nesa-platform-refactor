@@ -1,0 +1,68 @@
+{
+  "nav": {
+    "home": "Nyumbani",
+    "about": "Kuhusu",
+    "awards": "Tuzo",
+    "media": "Vyombo vya Habari",
+    "getInvolved": "Shiriki",
+    "login": "Ingia",
+    "register": "Jisajili",
+    "dashboard": "Dashibodi",
+    "logout": "Ondoka"
+  },
+  "hero": {
+    "headline": "Kutukuza Wabadilishaji wa Elimu Afrika",
+    "subheadline": "Kutetea na Kufikia Elimu kwa Wote Afrika",
+    "nominateNow": "Teua Sasa",
+    "watchLive": "Tazama Moja kwa Moja"
+  },
+  "stats": {
+    "africanRegions": "Mikoa ya Afrika",
+    "awardCategories": "Kategoria za Tuzo",
+    "subCategories": "Kategoria Ndogo"
+  },
+  "awards": {
+    "platinum": "Tuzo ya Platinamu",
+    "gold": "Tuzo ya Dhahabu",
+    "blueGarnet": "Tuzo ya Garnet Bluu",
+    "icon": "Tuzo ya Aikoni",
+    "viewAll": "Tazama Tuzo Zote"
+  },
+  "actions": {
+    "nominate": "Teua",
+    "vote": "Piga Kura",
+    "donate": "Changia",
+    "watchNow": "Tazama Sasa",
+    "learnMore": "Jifunze Zaidi",
+    "getTickets": "Pata Tiketi",
+    "viewDetails": "Tazama Maelezo",
+    "submit": "Wasilisha",
+    "cancel": "Ghairi",
+    "save": "Hifadhi",
+    "close": "Funga"
+  },
+  "footer": {
+    "quickLinks": "Viungo vya Haraka",
+    "resources": "Rasilimali",
+    "connect": "Wasiliana Nasi",
+    "subscribe": "Jisajili",
+    "emailPlaceholder": "Ingiza barua pepe yako",
+    "copyright": "© {{year}} NESA-Africa. Haki zote zimehifadhiwa.",
+    "privacy": "Sera ya Faragha",
+    "terms": "Masharti ya Huduma",
+    "governance": "Utawala"
+  },
+  "language": {
+    "selectLanguage": "Chagua Lugha",
+    "currentLanguage": "Lugha ya Sasa"
+  },
+  "errors": {
+    "notFound": "Ukurasa Haujapatikana",
+    "unauthorized": "Hauruhusiwi",
+    "serverError": "Kuna kitu kimeenda vibaya"
+  },
+  "loading": {
+    "pleaseWait": "Tafadhali subiri...",
+    "loading": "Inapakia..."
+  }
+}

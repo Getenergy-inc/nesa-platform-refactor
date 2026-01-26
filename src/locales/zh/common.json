@@ -1,0 +1,68 @@
+{
+  "nav": {
+    "home": "首页",
+    "about": "关于",
+    "awards": "奖项",
+    "media": "媒体",
+    "getInvolved": "参与其中",
+    "login": "登录",
+    "register": "注册",
+    "dashboard": "仪表板",
+    "logout": "退出"
+  },
+  "hero": {
+    "headline": "表彰非洲教育变革者",
+    "subheadline": "倡导并实现非洲全民教育",
+    "nominateNow": "立即提名",
+    "watchLive": "观看直播"
+  },
+  "stats": {
+    "africanRegions": "非洲地区",
+    "awardCategories": "奖项类别",
+    "subCategories": "子类别"
+  },
+  "awards": {
+    "platinum": "铂金奖",
+    "gold": "金奖",
+    "blueGarnet": "蓝石榴石奖",
+    "icon": "标志性奖",
+    "viewAll": "查看所有奖项"
+  },
+  "actions": {
+    "nominate": "提名",
+    "vote": "投票",
+    "donate": "捐赠",
+    "watchNow": "立即观看",
+    "learnMore": "了解更多",
+    "getTickets": "获取门票",
+    "viewDetails": "查看详情",
+    "submit": "提交",
+    "cancel": "取消",
+    "save": "保存",
+    "close": "关闭"
+  },
+  "footer": {
+    "quickLinks": "快速链接",
+    "resources": "资源",
+    "connect": "联系我们",
+    "subscribe": "订阅",
+    "emailPlaceholder": "输入您的电子邮件",
+    "copyright": "© {{year}} NESA-Africa。保留所有权利。",
+    "privacy": "隐私政策",
+    "terms": "服务条款",
+    "governance": "治理"
+  },
+  "language": {
+    "selectLanguage": "选择语言",
+    "currentLanguage": "当前语言"
+  },
+  "errors": {
+    "notFound": "页面未找到",
+    "unauthorized": "未授权",
+    "serverError": "出了点问题"
+  },
+  "loading": {
+    "pleaseWait": "请稍候...",
+    "loading": "加载中..."
+  }
+}
