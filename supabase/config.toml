@@ -35,3 +35,15 @@ verify_jwt = false
 
 [functions.wallet]
 verify_jwt = false
+
+[functions.dashboard]
+verify_jwt = false
+
+[functions.referrals]
+verify_jwt = false
+
+[functions.olc]
+verify_jwt = false
+
+[functions.admin]
+verify_jwt = false

@@ -1,21 +1,18 @@
 /**
  * NESA-Africa GFA Wallet API Client
  * 
- * API methods for wallet operations, payments, and referrals.
+ * API methods for wallet operations, payments, and withdrawals.
  */
 
-import { api } from "./http";
+import { api, type ApiResponse } from "./http";
 import type {
   WalletAccount,
   WalletBalance,
   WalletLedgerEntry,
   PaymentIntent,
-  Referral,
-  ReferralEvent,
   WalletDashboardData,
   TopupRequest,
   TopupResponse,
-  PaymentProvider,
 } from "@/types/wallet";
 
 // ============================================================================
@@ -24,109 +21,114 @@ import type {
 
 /**
  * Get the current user's wallet account
+ * GET /wallet/me
  */
-export async function getMyWallet() {
+export async function getMyWallet(): Promise<ApiResponse<{ account: WalletAccount; balance: WalletBalance }>> {
   return api.get<{ account: WalletAccount; balance: WalletBalance }>("wallet", "/me");
 }
 
 /**
- * Get wallet dashboard data (account, balance, recent transactions, referral)
+ * Get wallet balances (admin only)
+ * GET /wallet/balances
  */
-export async function getWalletDashboard() {
-  return api.get<WalletDashboardData>("wallet", "/dashboard");
-}
-
-/**
- * Get wallet by account ID (admin)
- */
-export async function getWalletById(accountId: string) {
-  return api.get<{ account: WalletAccount; balance: WalletBalance }>("wallet", `/${accountId}`);
+export async function getWalletBalances(): Promise<ApiResponse<WalletBalance[]>> {
+  return api.get<WalletBalance[]>("wallet", "/balances");
 }
 
 // ============================================================================
-// LEDGER ENTRIES
+// TRANSACTIONS
 // ============================================================================
 
-/**
- * Get ledger entries for the current user's wallet
- */
-export async function getMyLedgerEntries(limit = 50, offset = 0) {
-  return api.get<{ entries: WalletLedgerEntry[]; total: number }>(
-    "wallet",
-    "/ledger",
-    { limit, offset }
-  );
+interface TransactionsResponse {
+  data: WalletLedgerEntry[];
+  meta: {
+    page: number;
+    limit: number;
+    total: number;
+    totalPages: number;
+  };
 }
 
 /**
- * Get ledger entries by entry type
+ * Get paginated wallet transactions
+ * GET /wallet/transactions?page=&limit=&type=
  */
-export async function getLedgerByType(entryType: string, limit = 50, offset = 0) {
-  return api.get<{ entries: WalletLedgerEntry[]; total: number }>(
-    "wallet",
-    "/ledger",
-    { entry_type: entryType, limit, offset }
-  );
+export async function getWalletTransactions(
+  page = 1,
+  limit = 20,
+  type?: string
+): Promise<ApiResponse<WalletLedgerEntry[]>> {
+  const params: Record<string, string | number> = { page, limit };
+  if (type) params.type = type;
+  return api.get<WalletLedgerEntry[]>("wallet", "/transactions", params);
 }
 
 // ============================================================================
-// PAYMENTS / TOP-UP
+// TOP-UP
 // ============================================================================
 
 /**
  * Initialize a top-up payment
+ * POST /wallet/topup/init
  */
-export async function initTopup(request: TopupRequest) {
-  return api.post<TopupResponse>("wallet", "/topup", request);
+export async function initTopup(request: TopupRequest): Promise<ApiResponse<TopupResponse>> {
+  return api.post<TopupResponse>("wallet", "/topup/init", request);
 }
 
 /**
  * Get payment intent by ID
  */
-export async function getPaymentIntent(paymentId: string) {
+export async function getPaymentIntent(paymentId: string): Promise<ApiResponse<{ payment: PaymentIntent }>> {
   return api.get<{ payment: PaymentIntent }>("wallet", `/payments/${paymentId}`);
 }
 
-/**
- * Get payment history
- */
-export async function getPaymentHistory(limit = 20, offset = 0) {
-  return api.get<{ payments: PaymentIntent[]; total: number }>(
-    "wallet",
-    "/payments",
-    { limit, offset }
-  );
-}
-
 // ============================================================================
-// REFERRALS
+// WITHDRAWALS
 // ============================================================================
 
-/**
- * Get the current user's referral info
- */
-export async function getMyReferral() {
-  return api.get<{ referral: Referral; events: ReferralEvent[] }>("wallet", "/referral");
+interface WithdrawRequestPayload {
+  amount_agc: number;
+  destination: string;
+}
+
+interface WithdrawResponse {
+  request_id: string;
+  status: string;
+  amount_agc: number;
 }
 
 /**
- * Get referral by code (public lookup for signup)
+ * Request a withdrawal
+ * POST /wallet/withdraw/request
  */
-export async function lookupReferralCode(code: string) {
-  return api.get<{ valid: boolean; owner_type?: string; owner_id?: string }>(
-    "wallet",
-    `/referral/lookup/${encodeURIComponent(code)}`
-  );
+export async function requestWithdrawal(
+  payload: WithdrawRequestPayload
+): Promise<ApiResponse<WithdrawResponse>> {
+  return api.post<WithdrawResponse>("wallet", "/withdraw/request", payload);
 }
 
 /**
- * Get referral events (people referred + earnings)
+ * Approve a withdrawal (admin only)
+ * POST /wallet/withdraw/approve
  */
-export async function getReferralEvents(limit = 50, offset = 0) {
-  return api.get<{ events: ReferralEvent[]; total: number }>(
+export async function approveWithdrawal(
+  requestId: string
+): Promise<ApiResponse<{ approved: boolean; request_id: string }>> {
+  return api.post<{ approved: boolean; request_id: string }>("wallet", "/withdraw/approve", { request_id: requestId });
+}
+
+/**
+ * Reject a withdrawal (admin only)
+ * POST /wallet/withdraw/reject
+ */
+export async function rejectWithdrawal(
+  requestId: string,
+  reason?: string
+): Promise<ApiResponse<{ rejected: boolean; request_id: string; refunded_agc: number }>> {
+  return api.post<{ rejected: boolean; request_id: string; refunded_agc: number }>(
     "wallet",
-    "/referral/events",
-    { limit, offset }
+    "/withdraw/reject",
+    { request_id: requestId, reason }
   );
 }
 
@@ -136,7 +138,24 @@ export async function getReferralEvents(limit = 50, offset = 0) {
 
 export const walletAdmin = {
   /**
+   * Get all wallet accounts
+   * GET /wallet/admin/accounts
+   */
+  async listWallets(
+    ownerType?: string,
+    limit = 50,
+    offset = 0
+  ): Promise<ApiResponse<{ accounts: WalletAccount[]; total: number }>> {
+    return api.get<{ accounts: WalletAccount[]; total: number }>(
+      "wallet",
+      "/admin/accounts",
+      { owner_type: ownerType, limit, offset }
+    );
+  },
+
+  /**
    * Credit a wallet (admin only)
+   * POST /wallet/admin/credit
    */
   async creditWallet(
     accountId: string,
@@ -146,21 +165,21 @@ export const walletAdmin = {
     options?: {
       usdAmount?: number;
       isWithdrawable?: boolean;
-      referenceType?: string;
-      referenceId?: string;
     }
-  ) {
-    return api.post<{ entry: WalletLedgerEntry }>("wallet", "/admin/credit", {
+  ): Promise<ApiResponse<WalletLedgerEntry>> {
+    return api.post<WalletLedgerEntry>("wallet", "/admin/credit", {
       account_id: accountId,
       agc_amount: agcAmount,
       entry_type: entryType,
       description,
-      ...options,
+      usd_amount: options?.usdAmount,
+      is_withdrawable: options?.isWithdrawable,
     });
   },
 
   /**
    * Debit a wallet (admin only)
+   * POST /wallet/admin/debit
    */
   async debitWallet(
     accountId: string,
@@ -169,38 +188,23 @@ export const walletAdmin = {
     description: string,
     options?: {
       usdAmount?: number;
-      referenceType?: string;
-      referenceId?: string;
     }
-  ) {
-    return api.post<{ entry: WalletLedgerEntry }>("wallet", "/admin/debit", {
+  ): Promise<ApiResponse<WalletLedgerEntry>> {
+    return api.post<WalletLedgerEntry>("wallet", "/admin/debit", {
       account_id: accountId,
       agc_amount: agcAmount,
       entry_type: entryType,
       description,
-      ...options,
+      usd_amount: options?.usdAmount,
     });
   },
 
   /**
-   * Get all wallets (admin)
-   */
-  async listWallets(ownerType?: string, limit = 50, offset = 0) {
-    return api.get<{ accounts: WalletAccount[]; total: number }>(
-      "wallet",
-      "/admin/accounts",
-      { owner_type: ownerType, limit, offset }
-    );
-  },
-
-  /**
    * Get platform wallet
+   * GET /wallet/admin/platform
    */
-  async getPlatformWallet() {
-    return api.get<{ account: WalletAccount; balance: WalletBalance }>(
-      "wallet",
-      "/admin/platform"
-    );
+  async getPlatformWallet(): Promise<ApiResponse<{ account: WalletAccount; balance: WalletBalance }>> {
+    return api.get<{ account: WalletAccount; balance: WalletBalance }>("wallet", "/admin/platform");
   },
 };
 
@@ -219,9 +223,9 @@ export function formatAgc(amount: number): string {
  * Format USD amount
  */
 export function formatUsd(amount: number): string {
-  return new Intl.NumberFormat('en-US', {
-    style: 'currency',
-    currency: 'USD',
+  return new Intl.NumberFormat("en-US", {
+    style: "currency",
+    currency: "USD",
   }).format(amount);
 }
 
@@ -230,17 +234,17 @@ export function formatUsd(amount: number): string {
  */
 export function getEntryTypeLabel(type: string): string {
   const labels: Record<string, string> = {
-    TOPUP: 'Top Up',
-    NOMINATION_FEE: 'Nomination Fee',
-    VOTE_FEE: 'Voting Fee',
-    DONATION: 'Donation',
-    TICKET: 'Ticket Purchase',
-    REFERRAL_BONUS: 'Referral Bonus',
-    AMBASSADOR_BONUS: 'Ambassador Bonus',
-    CHAPTER_BONUS: 'Chapter Bonus',
-    WITHDRAW_REQUEST: 'Withdrawal Request',
-    WITHDRAW_APPROVED: 'Withdrawal Approved',
-    ADJUSTMENT: 'Adjustment',
+    TOPUP: "Top Up",
+    NOMINATION_FEE: "Nomination Fee",
+    VOTE_FEE: "Voting Fee",
+    DONATION: "Donation",
+    TICKET: "Ticket Purchase",
+    REFERRAL_BONUS: "Referral Bonus",
+    AMBASSADOR_BONUS: "Ambassador Bonus",
+    CHAPTER_BONUS: "Chapter Bonus",
+    WITHDRAW_REQUEST: "Withdrawal Request",
+    WITHDRAW_APPROVED: "Withdrawal Approved",
+    ADJUSTMENT: "Adjustment",
   };
   return labels[type] || type;
 }
@@ -249,5 +253,5 @@ export function getEntryTypeLabel(type: string): string {
  * Check if entry type is a credit type
  */
 export function isCredit(direction: string): boolean {
-  return direction === 'CREDIT';
+  return direction === "CREDIT";
 }

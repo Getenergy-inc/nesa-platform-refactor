@@ -16,100 +16,92 @@ import type {
 // Dashboard
 // ============================================================================
 
+/**
+ * Get OLC coordinator dashboard data
+ * GET /dashboard/olc
+ */
 export async function getOLCDashboard(): Promise<ApiResponse<OLCDashboardData>> {
-  return api.get<OLCDashboardData>("wallet", "/dashboard/olc");
+  return api.get<OLCDashboardData>("dashboard", "/olc");
 }
 
 // ============================================================================
 // Members
 // ============================================================================
 
-export async function getChapterMembers(chapterId: string): Promise<ApiResponse<ChapterMember[]>> {
-  return api.get<ChapterMember[]>("wallet", "/olc/members", { chapter_id: chapterId });
+/**
+ * Get chapter members
+ * GET /olc/members
+ */
+export async function getChapterMembers(
+  page = 1,
+  limit = 20,
+  status?: string
+): Promise<ApiResponse<ChapterMember[]>> {
+  const params: Record<string, string | number> = { page, limit };
+  if (status) params.status = status;
+  return api.get<ChapterMember[]>("olc", "/members", params);
 }
 
+/**
+ * Verify a chapter member
+ * POST /olc/members/verify
+ */
 export async function verifyMember(
-  memberId: string,
+  memberUserId: string,
   status: "verified" | "rejected"
-): Promise<ApiResponse<{ success: boolean }>> {
-  return api.post<{ success: boolean }>("wallet", "/olc/members/verify", {
-    member_id: memberId,
+): Promise<ApiResponse<{ verified: boolean; member_user_id: string }>> {
+  return api.post<{ verified: boolean; member_user_id: string }>("olc", "/members/verify", {
+    member_user_id: memberUserId,
     status,
   });
-}
-
-// ============================================================================
-// Events
-// ============================================================================
-
-export async function getChapterEvents(chapterId: string): Promise<ApiResponse<ChapterEvent[]>> {
-  return api.get<ChapterEvent[]>("wallet", "/olc/events", { chapter_id: chapterId });
-}
-
-export interface CreateEventPayload {
-  title: string;
-  description?: string;
-  event_date: string;
-  location?: string;
-}
-
-export async function createChapterEvent(
-  chapterId: string,
-  event: CreateEventPayload
-): Promise<ApiResponse<ChapterEvent>> {
-  return api.post<ChapterEvent>("wallet", "/olc/events", {
-    chapter_id: chapterId,
-    ...event,
-  });
-}
-
-export async function updateChapterEvent(
-  eventId: string,
-  updates: Partial<CreateEventPayload & { status: ChapterEvent["status"] }>
-): Promise<ApiResponse<ChapterEvent>> {
-  return api.patch<ChapterEvent>("wallet", `/olc/events/${eventId}`, updates);
-}
-
-export async function deleteChapterEvent(eventId: string): Promise<ApiResponse<{ success: boolean }>> {
-  return api.delete<{ success: boolean }>("wallet", `/olc/events/${eventId}`);
 }
 
 // ============================================================================
 // Settlements
 // ============================================================================
 
-export async function getSettlementHistory(chapterId: string): Promise<ApiResponse<SettlementRequest[]>> {
-  return api.get<SettlementRequest[]>("wallet", "/olc/settlements", { chapter_id: chapterId });
+/**
+ * Get settlement requests history
+ * GET /olc/settlements
+ */
+export async function getSettlementHistory(): Promise<ApiResponse<SettlementRequest[]>> {
+  return api.get<SettlementRequest[]>("olc", "/settlements");
 }
 
+/**
+ * Request a settlement
+ * POST /olc/settlements/request
+ */
 export async function requestSettlement(
-  chapterId: string,
+  amountUsd: number,
   notes?: string
-): Promise<ApiResponse<SettlementRequest>> {
-  return api.post<SettlementRequest>("wallet", "/olc/settlements/request", {
-    chapter_id: chapterId,
-    notes,
-  });
+): Promise<ApiResponse<{ request_id: string; status: string; amount_usd: number; agc_amount: number }>> {
+  return api.post<{ request_id: string; status: string; amount_usd: number; agc_amount: number }>(
+    "olc",
+    "/settlements/request",
+    { amount_usd: amountUsd, notes }
+  );
 }
 
 // ============================================================================
-// Referral Tree
+// Media
 // ============================================================================
 
-export interface ReferralTreeNode {
-  user_id: string;
-  email: string;
-  full_name: string | null;
-  event_type: string;
-  reward_agc: number;
-  value_usd: number;
-  created_at: string;
-}
-
-export async function getChapterReferralTree(chapterId: string): Promise<ApiResponse<ReferralTreeNode[]>> {
-  return api.get<ReferralTreeNode[]>("wallet", "/referrals/tree", {
-    scope: "chapter",
-    chapter_id: chapterId,
+/**
+ * Submit media for the chapter
+ * POST /olc/media/submit
+ */
+export async function submitChapterMedia(
+  url: string,
+  title: string,
+  description?: string,
+  mediaType?: string
+): Promise<ApiResponse<{ media_id: string; status: string; message: string }>> {
+  return api.post<{ media_id: string; status: string; message: string }>("olc", "/media/submit", {
+    url,
+    title,
+    description,
+    media_type: mediaType,
   });
 }
 
@@ -121,13 +113,9 @@ const olcApi = {
   getOLCDashboard,
   getChapterMembers,
   verifyMember,
-  getChapterEvents,
-  createChapterEvent,
-  updateChapterEvent,
-  deleteChapterEvent,
   getSettlementHistory,
   requestSettlement,
-  getChapterReferralTree,
+  submitChapterMedia,
 };
 
 export default olcApi;
