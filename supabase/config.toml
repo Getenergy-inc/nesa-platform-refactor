@@ -47,3 +47,9 @@ verify_jwt = false
 
 [functions.admin]
 verify_jwt = false
+
+[functions.nominations]
+verify_jwt = false
+
+[functions.verify]
+verify_jwt = false

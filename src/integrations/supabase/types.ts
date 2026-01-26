@@ -14,6 +14,95 @@ export type Database = {
   }
   public: {
     Tables: {
+      acceptance_letters: {
+        Row: {
+          created_at: string | null
+          delivery_channel: string | null
+          delivery_status: string | null
+          id: string
+          nominee_id: string
+          opened_at: string | null
+          responded_at: string | null
+          response: Database["public"]["Enums"]["acceptance_status"] | null
+          sent_at: string | null
+          token: string
+          token_expires_at: string
+        }
+        Insert: {
+          created_at?: string | null
+          delivery_channel?: string | null
+          delivery_status?: string | null
+          id?: string
+          nominee_id: string
+          opened_at?: string | null
+          responded_at?: string | null
+          response?: Database["public"]["Enums"]["acceptance_status"] | null
+          sent_at?: string | null
+          token: string
+          token_expires_at: string
+        }
+        Update: {
+          created_at?: string | null
+          delivery_channel?: string | null
+          delivery_status?: string | null
+          id?: string
+          nominee_id?: string
+          opened_at?: string | null
+          responded_at?: string | null
+          response?: Database["public"]["Enums"]["acceptance_status"] | null
+          sent_at?: string | null
+          token?: string
+          token_expires_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "acceptance_letters_nominee_id_fkey"
+            columns: ["nominee_id"]
+            isOneToOne: true
+            referencedRelation: "nominees"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      audit_events: {
+        Row: {
+          action: string
+          actor_id: string | null
+          actor_role: string | null
+          created_at: string | null
+          entity_id: string | null
+          entity_type: string
+          id: string
+          ip_address: string | null
+          metadata: Json | null
+          user_agent: string | null
+        }
+        Insert: {
+          action: string
+          actor_id?: string | null
+          actor_role?: string | null
+          created_at?: string | null
+          entity_id?: string | null
+          entity_type: string
+          id?: string
+          ip_address?: string | null
+          metadata?: Json | null
+          user_agent?: string | null
+        }
+        Update: {
+          action?: string
+          actor_id?: string | null
+          actor_role?: string | null
+          created_at?: string | null
+          entity_id?: string | null
+          entity_type?: string
+          id?: string
+          ip_address?: string | null
+          metadata?: Json | null
+          user_agent?: string | null
+        }
+        Relationships: []
+      }
       audit_logs: {
         Row: {
           action: string
@@ -89,42 +178,110 @@ export type Database = {
         }
         Relationships: []
       }
+      certificate_verifications: {
+        Row: {
+          certificate_id: string
+          created_at: string | null
+          id: string
+          result: string
+          verification_hash: string
+          verified_at: string | null
+          verifier_ip: string | null
+          verifier_user_agent: string | null
+        }
+        Insert: {
+          certificate_id: string
+          created_at?: string | null
+          id?: string
+          result: string
+          verification_hash: string
+          verified_at?: string | null
+          verifier_ip?: string | null
+          verifier_user_agent?: string | null
+        }
+        Update: {
+          certificate_id?: string
+          created_at?: string | null
+          id?: string
+          result?: string
+          verification_hash?: string
+          verified_at?: string | null
+          verifier_ip?: string | null
+          verifier_user_agent?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "certificate_verifications_certificate_id_fkey"
+            columns: ["certificate_id"]
+            isOneToOne: false
+            referencedRelation: "certificates"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       certificates: {
         Row: {
           created_at: string | null
+          download_locked: boolean | null
           download_url: string | null
           expires_at: string | null
           id: string
           is_lifetime: boolean | null
           issued_at: string | null
           nominee_id: string
+          qr_url: string | null
+          renewed_from_id: string | null
+          revoke_reason: string | null
+          revoked_at: string | null
           season_id: string
+          serial_number: string | null
+          status: Database["public"]["Enums"]["certificate_status"] | null
           tier: Database["public"]["Enums"]["certificate_tier"]
+          unlocked_at: string | null
           verification_code: string
+          verification_hash: string | null
         }
         Insert: {
           created_at?: string | null
+          download_locked?: boolean | null
           download_url?: string | null
           expires_at?: string | null
           id?: string
           is_lifetime?: boolean | null
           issued_at?: string | null
           nominee_id: string
+          qr_url?: string | null
+          renewed_from_id?: string | null
+          revoke_reason?: string | null
+          revoked_at?: string | null
           season_id: string
+          serial_number?: string | null
+          status?: Database["public"]["Enums"]["certificate_status"] | null
           tier: Database["public"]["Enums"]["certificate_tier"]
+          unlocked_at?: string | null
           verification_code: string
+          verification_hash?: string | null
         }
         Update: {
           created_at?: string | null
+          download_locked?: boolean | null
           download_url?: string | null
           expires_at?: string | null
           id?: string
           is_lifetime?: boolean | null
           issued_at?: string | null
           nominee_id?: string
+          qr_url?: string | null
+          renewed_from_id?: string | null
+          revoke_reason?: string | null
+          revoked_at?: string | null
           season_id?: string
+          serial_number?: string | null
+          status?: Database["public"]["Enums"]["certificate_status"] | null
           tier?: Database["public"]["Enums"]["certificate_tier"]
+          unlocked_at?: string | null
           verification_code?: string
+          verification_hash?: string | null
         }
         Relationships: [
           {
@@ -132,6 +289,13 @@ export type Database = {
             columns: ["nominee_id"]
             isOneToOne: false
             referencedRelation: "nominees"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "certificates_renewed_from_id_fkey"
+            columns: ["renewed_from_id"]
+            isOneToOne: false
+            referencedRelation: "certificates"
             referencedColumns: ["id"]
           },
           {
@@ -429,6 +593,60 @@ export type Database = {
         }
         Relationships: []
       }
+      evidence_bundles: {
+        Row: {
+          created_at: string | null
+          file_types: string[] | null
+          file_urls: string[] | null
+          id: string
+          nomination_id: string | null
+          nominee_id: string | null
+          notes: string | null
+          tags: string[] | null
+          updated_at: string | null
+          uploaded_by: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          file_types?: string[] | null
+          file_urls?: string[] | null
+          id?: string
+          nomination_id?: string | null
+          nominee_id?: string | null
+          notes?: string | null
+          tags?: string[] | null
+          updated_at?: string | null
+          uploaded_by?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          file_types?: string[] | null
+          file_urls?: string[] | null
+          id?: string
+          nomination_id?: string | null
+          nominee_id?: string | null
+          notes?: string | null
+          tags?: string[] | null
+          updated_at?: string | null
+          uploaded_by?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "evidence_bundles_nomination_id_fkey"
+            columns: ["nomination_id"]
+            isOneToOne: false
+            referencedRelation: "nominations"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "evidence_bundles_nominee_id_fkey"
+            columns: ["nominee_id"]
+            isOneToOne: false
+            referencedRelation: "nominees"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       faqs: {
         Row: {
           answer: string
@@ -591,12 +809,72 @@ export type Database = {
           },
         ]
       }
+      misuse_reports: {
+        Row: {
+          admin_notes: string | null
+          certificate_id: string
+          created_at: string | null
+          evidence_urls: string[] | null
+          id: string
+          reason: string
+          reporter_email: string | null
+          reporter_name: string | null
+          reporter_user_id: string | null
+          reviewed_at: string | null
+          reviewed_by: string | null
+          status: Database["public"]["Enums"]["misuse_report_status"] | null
+          updated_at: string | null
+          verification_hash: string | null
+        }
+        Insert: {
+          admin_notes?: string | null
+          certificate_id: string
+          created_at?: string | null
+          evidence_urls?: string[] | null
+          id?: string
+          reason: string
+          reporter_email?: string | null
+          reporter_name?: string | null
+          reporter_user_id?: string | null
+          reviewed_at?: string | null
+          reviewed_by?: string | null
+          status?: Database["public"]["Enums"]["misuse_report_status"] | null
+          updated_at?: string | null
+          verification_hash?: string | null
+        }
+        Update: {
+          admin_notes?: string | null
+          certificate_id?: string
+          created_at?: string | null
+          evidence_urls?: string[] | null
+          id?: string
+          reason?: string
+          reporter_email?: string | null
+          reporter_name?: string | null
+          reporter_user_id?: string | null
+          reviewed_at?: string | null
+          reviewed_by?: string | null
+          status?: Database["public"]["Enums"]["misuse_report_status"] | null
+          updated_at?: string | null
+          verification_hash?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "misuse_reports_certificate_id_fkey"
+            columns: ["certificate_id"]
+            isOneToOne: false
+            referencedRelation: "certificates"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       nominations: {
         Row: {
           created_at: string | null
           created_nominee_id: string | null
           evidence_urls: string[] | null
           id: string
+          identity_hash: string | null
           justification: string | null
           nominator_id: string
           nominee_bio: string | null
@@ -608,6 +886,7 @@ export type Database = {
           review_notes: string | null
           reviewed_at: string | null
           season_id: string
+          source: Database["public"]["Enums"]["nomination_source"] | null
           status: Database["public"]["Enums"]["nomination_status"] | null
           subcategory_id: string
           updated_at: string | null
@@ -617,6 +896,7 @@ export type Database = {
           created_nominee_id?: string | null
           evidence_urls?: string[] | null
           id?: string
+          identity_hash?: string | null
           justification?: string | null
           nominator_id: string
           nominee_bio?: string | null
@@ -628,6 +908,7 @@ export type Database = {
           review_notes?: string | null
           reviewed_at?: string | null
           season_id: string
+          source?: Database["public"]["Enums"]["nomination_source"] | null
           status?: Database["public"]["Enums"]["nomination_status"] | null
           subcategory_id: string
           updated_at?: string | null
@@ -637,6 +918,7 @@ export type Database = {
           created_nominee_id?: string | null
           evidence_urls?: string[] | null
           id?: string
+          identity_hash?: string | null
           justification?: string | null
           nominator_id?: string
           nominee_bio?: string | null
@@ -648,6 +930,7 @@ export type Database = {
           review_notes?: string | null
           reviewed_at?: string | null
           season_id?: string
+          source?: Database["public"]["Enums"]["nomination_source"] | null
           status?: Database["public"]["Enums"]["nomination_status"] | null
           subcategory_id?: string
           updated_at?: string | null
@@ -678,17 +961,31 @@ export type Database = {
       }
       nominees: {
         Row: {
+          acceptance_status:
+            | Database["public"]["Enums"]["acceptance_status"]
+            | null
+          acceptance_token: string | null
+          acceptance_token_expires_at: string | null
+          accepted_at: string | null
           bio: string | null
+          country: string | null
           created_at: string | null
+          email: string | null
           evidence_urls: string[] | null
           final_score: number | null
+          first_letter_sent: boolean | null
           id: string
+          identity_hash: string | null
           is_platinum: boolean | null
           jury_score: number | null
+          logo_url: string | null
           name: string
           nominator_user_id: string | null
           nrc_reviewer_id: string | null
+          nrc_verified: boolean | null
+          nrc_verified_at: string | null
           organization: string | null
+          phone: string | null
           photo_url: string | null
           public_votes: number | null
           region: string | null
@@ -703,17 +1000,31 @@ export type Database = {
           updated_at: string | null
         }
         Insert: {
+          acceptance_status?:
+            | Database["public"]["Enums"]["acceptance_status"]
+            | null
+          acceptance_token?: string | null
+          acceptance_token_expires_at?: string | null
+          accepted_at?: string | null
           bio?: string | null
+          country?: string | null
           created_at?: string | null
+          email?: string | null
           evidence_urls?: string[] | null
           final_score?: number | null
+          first_letter_sent?: boolean | null
           id?: string
+          identity_hash?: string | null
           is_platinum?: boolean | null
           jury_score?: number | null
+          logo_url?: string | null
           name: string
           nominator_user_id?: string | null
           nrc_reviewer_id?: string | null
+          nrc_verified?: boolean | null
+          nrc_verified_at?: string | null
           organization?: string | null
+          phone?: string | null
           photo_url?: string | null
           public_votes?: number | null
           region?: string | null
@@ -728,17 +1039,31 @@ export type Database = {
           updated_at?: string | null
         }
         Update: {
+          acceptance_status?:
+            | Database["public"]["Enums"]["acceptance_status"]
+            | null
+          acceptance_token?: string | null
+          acceptance_token_expires_at?: string | null
+          accepted_at?: string | null
           bio?: string | null
+          country?: string | null
           created_at?: string | null
+          email?: string | null
           evidence_urls?: string[] | null
           final_score?: number | null
+          first_letter_sent?: boolean | null
           id?: string
+          identity_hash?: string | null
           is_platinum?: boolean | null
           jury_score?: number | null
+          logo_url?: string | null
           name?: string
           nominator_user_id?: string | null
           nrc_reviewer_id?: string | null
+          nrc_verified?: boolean | null
+          nrc_verified_at?: string | null
           organization?: string | null
+          phone?: string | null
           photo_url?: string | null
           public_votes?: number | null
           region?: string | null
@@ -768,6 +1093,66 @@ export type Database = {
             referencedColumns: ["id"]
           },
         ]
+      }
+      notifications: {
+        Row: {
+          channels: string[] | null
+          created_at: string | null
+          error_message: string | null
+          id: string
+          idempotency_key: string | null
+          payload: Json | null
+          read_at: string | null
+          recipient_email: string | null
+          recipient_id: string | null
+          recipient_phone: string | null
+          retry_count: number | null
+          scheduled_for: string | null
+          sent_at: string | null
+          status: Database["public"]["Enums"]["notification_status"] | null
+          subject: string | null
+          template: string
+          updated_at: string | null
+        }
+        Insert: {
+          channels?: string[] | null
+          created_at?: string | null
+          error_message?: string | null
+          id?: string
+          idempotency_key?: string | null
+          payload?: Json | null
+          read_at?: string | null
+          recipient_email?: string | null
+          recipient_id?: string | null
+          recipient_phone?: string | null
+          retry_count?: number | null
+          scheduled_for?: string | null
+          sent_at?: string | null
+          status?: Database["public"]["Enums"]["notification_status"] | null
+          subject?: string | null
+          template: string
+          updated_at?: string | null
+        }
+        Update: {
+          channels?: string[] | null
+          created_at?: string | null
+          error_message?: string | null
+          id?: string
+          idempotency_key?: string | null
+          payload?: Json | null
+          read_at?: string | null
+          recipient_email?: string | null
+          recipient_id?: string | null
+          recipient_phone?: string | null
+          retry_count?: number | null
+          scheduled_for?: string | null
+          sent_at?: string | null
+          status?: Database["public"]["Enums"]["notification_status"] | null
+          subject?: string | null
+          template?: string
+          updated_at?: string | null
+        }
+        Relationships: []
       }
       payment_intents: {
         Row: {
@@ -1522,6 +1907,19 @@ export type Database = {
       }
     }
     Functions: {
+      check_certificate_unlock: {
+        Args: { p_nominee_id: string }
+        Returns: boolean
+      }
+      generate_identity_hash: {
+        Args: {
+          p_country?: string
+          p_email?: string
+          p_name: string
+          p_phone?: string
+        }
+        Returns: string
+      }
       generate_referral_code: { Args: { p_prefix?: string }; Returns: string }
       get_current_season: { Args: never; Returns: string }
       get_user_roles: {
@@ -1563,15 +1961,25 @@ export type Database = {
       }
     }
     Enums: {
+      acceptance_status: "PENDING" | "SENT" | "ACCEPTED" | "DECLINED"
       app_role: "user" | "nrc" | "jury" | "chapter" | "sponsor" | "admin"
+      certificate_status: "ACTIVE" | "EXPIRED" | "REVOKED" | "RENEWED"
       certificate_tier: "gold" | "platinum" | "blue_garnet" | "icon"
       disbursement_status: "DRAFT" | "COMPLETED" | "FAILED"
+      misuse_report_status:
+        | "PENDING"
+        | "REVIEWING"
+        | "FLAGGED"
+        | "DISMISSED"
+        | "REVOKED"
+      nomination_source: "START_MEMBER" | "NRC" | "PUBLIC"
       nomination_status:
         | "pending"
         | "under_review"
         | "approved"
         | "rejected"
         | "platinum"
+      notification_status: "PENDING" | "SENT" | "FAILED" | "READ"
       payment_provider: "PAYSTACK" | "FLUTTERWAVE" | "LEMFI" | "TAPTAPSEND"
       payment_status:
         | "INITIATED"
@@ -1746,9 +2154,19 @@ export type CompositeTypes<
 export const Constants = {
   public: {
     Enums: {
+      acceptance_status: ["PENDING", "SENT", "ACCEPTED", "DECLINED"],
       app_role: ["user", "nrc", "jury", "chapter", "sponsor", "admin"],
+      certificate_status: ["ACTIVE", "EXPIRED", "REVOKED", "RENEWED"],
       certificate_tier: ["gold", "platinum", "blue_garnet", "icon"],
       disbursement_status: ["DRAFT", "COMPLETED", "FAILED"],
+      misuse_report_status: [
+        "PENDING",
+        "REVIEWING",
+        "FLAGGED",
+        "DISMISSED",
+        "REVOKED",
+      ],
+      nomination_source: ["START_MEMBER", "NRC", "PUBLIC"],
       nomination_status: [
         "pending",
         "under_review",
@@ -1756,6 +2174,7 @@ export const Constants = {
         "rejected",
         "platinum",
       ],
+      notification_status: ["PENDING", "SENT", "FAILED", "READ"],
       payment_provider: ["PAYSTACK", "FLUTTERWAVE", "LEMFI", "TAPTAPSEND"],
       payment_status: [
         "INITIATED",

@@ -50,3 +50,11 @@ export * from "./referrals";
 
 // Dashboard APIs
 export * from "./dashboard";
+
+// Nominations APIs (new nomination system)
+export { default as nominationsApi, submitNomination, acceptNomination, declineNomination, getNomineeStatus } from "./nominations";
+export type { NominationPayload, NominationResult, NomineeStatus, AcceptanceResult, NominationSource, AcceptanceStatus } from "./nominations";
+
+// Verification APIs
+export { default as verifyApi, verifyCertificate, reportMisuse } from "./verify";
+export type { CertificateVerificationResult, CertificateVerificationStatus, MisuseReportPayload, MisuseReportResult } from "./verify";
