@@ -2,6 +2,7 @@ import { Toaster } from "@/components/ui/toaster";
 import Nominees from "./pages/Nominees";
 import NomineeProfile from "./pages/NomineeProfile";
 import CertificateVerify from "./pages/CertificateVerify";
+import VerifyCertificate from "./pages/VerifyCertificate";
 import Results from "./pages/Results";
 import Policies from "./pages/Policies";
 import { Toaster as Sonner } from "@/components/ui/sonner";
@@ -24,6 +25,8 @@ import NRCDashboard from "./pages/NRCDashboard";
 import Unauthorized from "./pages/Unauthorized";
 import NotFound from "./pages/NotFound";
 import CategoryDetail from "./pages/CategoryDetail";
+import NomineeAccept from "./pages/NomineeAccept";
+import NomineeDecline from "./pages/NomineeDecline";
 
 // About Pages
 import About from "./pages/about/About";
@@ -94,6 +97,11 @@ const App = () => (
                 <Route path="/awards/blue-garnet" element={<BlueGarnetAward />} />
                 <Route path="/awards/winners" element={<Winners />} />
                 <Route path="/certificates/verify" element={<CertificateVerify />} />
+                <Route path="/verify/:hash" element={<VerifyCertificate />} />
+                
+                {/* Nominee Response Routes */}
+                <Route path="/nominee/accept/:token" element={<NomineeAccept />} />
+                <Route path="/nominee/decline/:token" element={<NomineeDecline />} />
                 
                 {/* Media */}
                 <Route path="/media" element={<MediaHub />} />

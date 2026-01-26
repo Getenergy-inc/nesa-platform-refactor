@@ -175,10 +175,10 @@ serve(async (req: Request): Promise<Response> => {
         );
       }
 
-      // Get nomination details
+      // Get nomination details with source
       const { data: nomination, error: fetchError } = await supabase
         .from("nominations")
-        .select("*")
+        .select("*, source")
         .eq("id", payload.nominationId)
         .single();
 
@@ -190,14 +190,26 @@ serve(async (req: Request): Promise<Response> => {
       }
 
       let newStatus = nomination.status;
-      let createdNomineeId = null;
+      let createdNomineeId = nomination.created_nominee_id;
 
       switch (payload.decision) {
         case "APPROVE":
           newStatus = "approved";
           
-          // Create nominee record from nomination
-          if (payload.createNominee !== false) {
+          // If nominee already exists (via dedup), just update NRC verification
+          if (createdNomineeId) {
+            await supabase
+              .from("nominees")
+              .update({
+                nrc_verified: true,
+                nrc_verified_at: new Date().toISOString(),
+                nrc_reviewer_id: userData.user.id,
+                review_notes: payload.notes,
+                status: "approved",
+              })
+              .eq("id", createdNomineeId);
+          } else if (payload.createNominee !== false) {
+            // Create nominee record from nomination
             const slug = nomination.nominee_name
               .toLowerCase()
               .replace(/[^a-z0-9\s-]/g, "")
@@ -219,8 +231,13 @@ serve(async (req: Request): Promise<Response> => {
                 season_id: nomination.season_id,
                 nominator_user_id: nomination.nominator_id,
                 nrc_reviewer_id: userData.user.id,
+                nrc_verified: true,
+                nrc_verified_at: new Date().toISOString(),
                 reviewed_at: new Date().toISOString(),
                 status: "approved",
+                acceptance_status: "PENDING",
+                first_letter_sent: false,
+                renomination_count: 1,
               })
               .select("id")
               .single();
@@ -232,6 +249,18 @@ serve(async (req: Request): Promise<Response> => {
 
         case "REJECT":
           newStatus = "rejected";
+          // If nominee exists, mark as rejected too
+          if (createdNomineeId) {
+            await supabase
+              .from("nominees")
+              .update({
+                nrc_verified: false,
+                nrc_reviewer_id: userData.user.id,
+                review_notes: payload.notes,
+                status: "rejected",
+              })
+              .eq("id", createdNomineeId);
+          }
           break;
 
         case "NEEDS_INFO":
@@ -256,6 +285,23 @@ serve(async (req: Request): Promise<Response> => {
       if (updateError) throw updateError;
 
       // Log audit event
+      await supabase.from("audit_events").insert({
+        actor_id: userData.user.id,
+        actor_role: hasAdminRole ? "admin" : "nrc",
+        action: `nrc_decision_${payload.decision.toLowerCase()}`,
+        entity_type: "nomination",
+        entity_id: payload.nominationId,
+        metadata: {
+          old_status: nomination.status,
+          new_status: newStatus,
+          decision: payload.decision,
+          notes: payload.notes,
+          created_nominee_id: createdNomineeId,
+          source: nomination.source,
+        },
+      });
+
+      // Also log to legacy audit_logs for compatibility
       await supabase.from("audit_logs").insert({
         action: `nrc_decision_${payload.decision.toLowerCase()}`,
         entity_type: "nomination",
@@ -275,6 +321,7 @@ serve(async (req: Request): Promise<Response> => {
           success: true,
           nomination: updated,
           createdNomineeId,
+          nrc_verified: payload.decision === "APPROVE",
         }),
         { headers: { ...corsHeaders, "Content-Type": "application/json" } }
       );

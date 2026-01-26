@@ -34,10 +34,10 @@ serve(async (req: Request): Promise<Response> => {
         .from("certificates")
         .select(`
           *,
-          nominees(id, name, slug, title, organization, photo_url),
+          nominees(id, name, slug, title, organization, photo_url, acceptance_status, renomination_count),
           seasons(id, name, year)
         `)
-        .eq("verification_code", code)
+        .or(`verification_code.eq.${code},verification_hash.eq.${code}`)
         .maybeSingle();
 
       if (error) throw error;
@@ -49,21 +49,27 @@ serve(async (req: Request): Promise<Response> => {
         );
       }
 
-      // Check expiry
+      // Check status
+      const isRevoked = cert.status === "REVOKED";
       const isExpired = cert.expires_at && new Date(cert.expires_at) < new Date();
       const isLifetime = cert.is_lifetime;
+      const isValid = !isRevoked && (!isExpired || isLifetime);
 
       return new Response(
         JSON.stringify({
-          valid: !isExpired || isLifetime,
+          valid: isValid,
+          status: isRevoked ? "REVOKED" : (isExpired && !isLifetime) ? "EXPIRED" : "VALID",
           certificate: {
             id: cert.id,
             tier: cert.tier,
+            serialNumber: cert.serial_number,
             verificationCode: cert.verification_code,
             issuedAt: cert.issued_at,
             expiresAt: cert.expires_at,
             isLifetime: cert.is_lifetime,
-            isExpired,
+            isExpired: isExpired && !isLifetime,
+            isRevoked,
+            downloadLocked: cert.download_locked,
             nominee: cert.nominees,
             season: cert.seasons,
           },
