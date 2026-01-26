@@ -20,3 +20,15 @@ verify_jwt = false
 
 [functions.stage]
 verify_jwt = false
+
+[functions.jury]
+verify_jwt = false
+
+[functions.payments]
+verify_jwt = false
+
+[functions.content]
+verify_jwt = false
+
+[functions.uploads]
+verify_jwt = false
