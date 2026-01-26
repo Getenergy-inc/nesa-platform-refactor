@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 import { NESAHeader } from "@/components/nesa/NESAHeader";
 import { NESAFooter } from "@/components/nesa/NESAFooter";
 import { CertificateGallery } from "@/components/nesa/CertificateGallery";
+import { AwardTVShowSection } from "@/components/awards/AwardTVShowSection";
+import { getTVShowByAward } from "@/config/awardTVShows";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -31,6 +33,8 @@ const steps = [
   { step: 3, title: "Approval", description: "Upon verification, Platinum Certificate is issued." },
   { step: 4, title: "Download", description: "Access your QR-verifiable certificate from your dashboard." },
 ];
+
+const platinumTVShow = getTVShowByAward("platinum");
 
 export default function PlatinumAward() {
   return (
@@ -157,6 +161,9 @@ export default function PlatinumAward() {
             </div>
           </div>
         </section>
+
+        {/* TV Show Section */}
+        {platinumTVShow && <AwardTVShowSection show={platinumTVShow} accentColor="amber" />}
 
         {/* Certificate Gallery */}
         <CertificateGallery />

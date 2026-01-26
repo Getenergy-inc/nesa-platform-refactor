@@ -3,10 +3,14 @@ import { Link } from "react-router-dom";
 import { NESAHeader } from "@/components/nesa/NESAHeader";
 import { NESAFooter } from "@/components/nesa/NESAFooter";
 import { CertificateGallery } from "@/components/nesa/CertificateGallery";
+import { AwardTVShowSection } from "@/components/awards/AwardTVShowSection";
+import { getTVShowByAward } from "@/config/awardTVShows";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { ArrowLeft, Award, Calendar, Play, Scale, Trophy, Users } from "lucide-react";
+
+const blueGarnetTVShow = getTVShowByAward("blue-garnet");
 const scoringBreakdown = [
   { label: "Jury Scoring", percentage: 60, color: "bg-purple-500" },
   { label: "Public Voting", percentage: 40, color: "bg-yellow-500" },
@@ -167,6 +171,9 @@ export default function BlueGarnetAward() {
             </div>
           </div>
         </section>
+
+        {/* TV Show Section */}
+        {blueGarnetTVShow && <AwardTVShowSection show={blueGarnetTVShow} accentColor="purple" />}
 
         {/* Certificate Gallery */}
         <CertificateGallery />

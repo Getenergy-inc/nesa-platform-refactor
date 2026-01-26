@@ -3,10 +3,14 @@ import { Link } from "react-router-dom";
 import { NESAHeader } from "@/components/nesa/NESAHeader";
 import { NESAFooter } from "@/components/nesa/NESAFooter";
 import { CertificateGallery } from "@/components/nesa/CertificateGallery";
+import { AwardTVShowSection } from "@/components/awards/AwardTVShowSection";
+import { getTVShowByAward } from "@/config/awardTVShows";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { ArrowLeft, Award, Globe, Medal, Trophy, Users, Vote } from "lucide-react";
+
+const goldTVShow = getTVShowByAward("gold");
 
 const features = [
   { icon: Vote, title: "100% Public Voting", description: "Winners determined entirely by public votes — no jury influence." },
@@ -161,6 +165,9 @@ export default function GoldAward() {
             </div>
           </div>
         </section>
+
+        {/* TV Show Section */}
+        {goldTVShow && <AwardTVShowSection show={goldTVShow} accentColor="gold" />}
 
         {/* Certificate Gallery */}
         <CertificateGallery />
