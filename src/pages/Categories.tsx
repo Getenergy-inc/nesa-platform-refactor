@@ -231,32 +231,7 @@ export default function Categories() {
         <meta name="description" content="Explore all 17 NESA-Africa award categories and 138+ subcategories. Recognizing excellence across education, CSR, technology, and social impact across Africa." />
       </Helmet>
 
-      <div className="min-h-screen bg-background">
-        {/* Header */}
-        <header className="sticky top-0 z-40 border-b bg-background/95 backdrop-blur">
-          <div className="container flex h-16 items-center justify-between px-6">
-            <div className="flex items-center gap-4">
-              <Button variant="ghost" size="icon" asChild>
-                <Link to="/">
-                  <ArrowLeft className="h-5 w-5" />
-                </Link>
-              </Button>
-              <div>
-                <h1 className="font-display text-lg font-bold">Award Categories</h1>
-                <p className="text-xs text-muted-foreground">
-                  {categoryCounts.total} categories • {totalSubcategories} subcategories
-                </p>
-              </div>
-            </div>
-            <Button asChild>
-              <Link to="/nominate">
-                <Award className="mr-2 h-4 w-4" />
-                Nominate
-              </Link>
-            </Button>
-          </div>
-        </header>
-
+      <div className="min-h-screen bg-charcoal">
         <main className="container px-6 py-8">
           {/* Hero */}
           <div className="mb-8 text-center">
