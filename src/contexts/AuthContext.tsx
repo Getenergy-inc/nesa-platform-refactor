@@ -8,7 +8,7 @@ interface AuthContextType {
   session: Session | null;
   roles: AppRole[];
   loading: boolean;
-  signUp: (email: string, password: string, fullName?: string) => Promise<void>;
+  signUp: (email: string, password: string, fullName?: string, referralCode?: string) => Promise<void>;
   signIn: (email: string, password: string) => Promise<void>;
   signOut: () => Promise<void>;
   hasRole: (role: AppRole) => boolean;
@@ -68,8 +68,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     return () => subscription.unsubscribe();
   }, []);
 
-  const signUp = async (email: string, password: string, fullName?: string) => {
-    const { error } = await supabase.auth.signUp({
+  const signUp = async (email: string, password: string, fullName?: string, referralCode?: string) => {
+    const { error, data } = await supabase.auth.signUp({
       email,
       password,
       options: {
@@ -78,6 +78,39 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       },
     });
     if (error) throw error;
+    
+    // If signup successful and referral code provided, link referrer
+    if (data.user && referralCode) {
+      // Look up the referrer by code
+      const { data: referral } = await supabase
+        .from("referrals")
+        .select("owner_id, owner_type")
+        .eq("referral_code", referralCode)
+        .eq("is_active", true)
+        .maybeSingle();
+      
+      if (referral) {
+        // Update profile with referrer info
+        if (referral.owner_type === "USER") {
+          await supabase.from("profiles").update({
+            referred_by_user_id: referral.owner_id
+          }).eq("user_id", data.user.id);
+        } else if (referral.owner_type === "CHAPTER") {
+          await supabase.from("profiles").update({
+            referred_by_chapter_id: referral.owner_id
+          }).eq("user_id", data.user.id);
+        }
+        
+        // Create referral event for signup
+        await supabase.from("referral_events").insert({
+          referrer_type: referral.owner_type,
+          referrer_id: referral.owner_id,
+          referred_user_id: data.user.id,
+          event_type: "SIGNUP",
+          reward_agc: 10, // Default signup bonus
+        });
+      }
+    }
   };
 
   const signIn = async (email: string, password: string) => {
