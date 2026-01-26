@@ -2,3 +2,21 @@ project_id = "sjghitoydzpirpqjules"
 
 [functions.import-nominees]
 verify_jwt = false
+
+[functions.health]
+verify_jwt = false
+
+[functions.nrc]
+verify_jwt = false
+
+[functions.voting]
+verify_jwt = false
+
+[functions.certificates]
+verify_jwt = false
+
+[functions.season]
+verify_jwt = false
+
+[functions.stage]
+verify_jwt = false
