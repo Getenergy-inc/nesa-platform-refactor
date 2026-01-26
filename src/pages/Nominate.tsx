@@ -249,8 +249,10 @@ export default function Nominate() {
     }
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
+  const handleSubmit = async (e?: React.FormEvent) => {
+    if (e) {
+      e.preventDefault();
+    }
 
     if (!user) {
       toast.error("Please log in to submit a nomination");
@@ -1075,9 +1077,9 @@ export default function Nominate() {
                   Go Back & Edit
                 </Button>
                 <Button 
-                  onClick={(e) => {
+                  onClick={() => {
                     setShowConfirmDialog(false);
-                    handleSubmit(e as unknown as React.FormEvent);
+                    handleSubmit();
                   }}
                   disabled={submitting}
                 >
