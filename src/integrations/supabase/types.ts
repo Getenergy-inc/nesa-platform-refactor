@@ -185,6 +185,77 @@ export type Database = {
         }
         Relationships: []
       }
+      coi_declarations: {
+        Row: {
+          created_at: string | null
+          declared_at: string | null
+          id: string
+          judge_user_id: string
+          nominee_id: string
+          reason: string
+        }
+        Insert: {
+          created_at?: string | null
+          declared_at?: string | null
+          id?: string
+          judge_user_id: string
+          nominee_id: string
+          reason: string
+        }
+        Update: {
+          created_at?: string | null
+          declared_at?: string | null
+          id?: string
+          judge_user_id?: string
+          nominee_id?: string
+          reason?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "coi_declarations_nominee_id_fkey"
+            columns: ["nominee_id"]
+            isOneToOne: false
+            referencedRelation: "nominees"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      content_pages: {
+        Row: {
+          author_id: string | null
+          content: string | null
+          created_at: string | null
+          id: string
+          is_published: boolean | null
+          metadata: Json | null
+          slug: string
+          title: string
+          updated_at: string | null
+        }
+        Insert: {
+          author_id?: string | null
+          content?: string | null
+          created_at?: string | null
+          id?: string
+          is_published?: boolean | null
+          metadata?: Json | null
+          slug: string
+          title: string
+          updated_at?: string | null
+        }
+        Update: {
+          author_id?: string | null
+          content?: string | null
+          created_at?: string | null
+          id?: string
+          is_published?: boolean | null
+          metadata?: Json | null
+          slug?: string
+          title?: string
+          updated_at?: string | null
+        }
+        Relationships: []
+      }
       donations: {
         Row: {
           amount: number
@@ -244,6 +315,106 @@ export type Database = {
           user_id?: string | null
         }
         Relationships: []
+      }
+      faqs: {
+        Row: {
+          answer: string
+          category: string | null
+          created_at: string | null
+          display_order: number | null
+          id: string
+          is_active: boolean | null
+          question: string
+          updated_at: string | null
+        }
+        Insert: {
+          answer: string
+          category?: string | null
+          created_at?: string | null
+          display_order?: number | null
+          id?: string
+          is_active?: boolean | null
+          question: string
+          updated_at?: string | null
+        }
+        Update: {
+          answer?: string
+          category?: string | null
+          created_at?: string | null
+          display_order?: number | null
+          id?: string
+          is_active?: boolean | null
+          question?: string
+          updated_at?: string | null
+        }
+        Relationships: []
+      }
+      jury_assignments: {
+        Row: {
+          assigned_at: string | null
+          category_id: string | null
+          comment: string | null
+          created_at: string | null
+          id: string
+          judge_user_id: string
+          nominee_id: string
+          score: number | null
+          scored_at: string | null
+          season_id: string
+          status: string | null
+          updated_at: string | null
+        }
+        Insert: {
+          assigned_at?: string | null
+          category_id?: string | null
+          comment?: string | null
+          created_at?: string | null
+          id?: string
+          judge_user_id: string
+          nominee_id: string
+          score?: number | null
+          scored_at?: string | null
+          season_id: string
+          status?: string | null
+          updated_at?: string | null
+        }
+        Update: {
+          assigned_at?: string | null
+          category_id?: string | null
+          comment?: string | null
+          created_at?: string | null
+          id?: string
+          judge_user_id?: string
+          nominee_id?: string
+          score?: number | null
+          scored_at?: string | null
+          season_id?: string
+          status?: string | null
+          updated_at?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "jury_assignments_category_id_fkey"
+            columns: ["category_id"]
+            isOneToOne: false
+            referencedRelation: "categories"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "jury_assignments_nominee_id_fkey"
+            columns: ["nominee_id"]
+            isOneToOne: false
+            referencedRelation: "nominees"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "jury_assignments_season_id_fkey"
+            columns: ["season_id"]
+            isOneToOne: false
+            referencedRelation: "seasons"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       media: {
         Row: {
@@ -523,6 +694,89 @@ export type Database = {
           user_id?: string
         }
         Relationships: []
+      }
+      results: {
+        Row: {
+          category_id: string
+          computed_at: string | null
+          created_at: string | null
+          final_score: number | null
+          id: string
+          is_winner: boolean | null
+          jury_score: number | null
+          nominee_id: string
+          public_score: number | null
+          public_votes: number | null
+          rank: number | null
+          season_id: string
+          subcategory_id: string | null
+          tier: string | null
+          updated_at: string | null
+        }
+        Insert: {
+          category_id: string
+          computed_at?: string | null
+          created_at?: string | null
+          final_score?: number | null
+          id?: string
+          is_winner?: boolean | null
+          jury_score?: number | null
+          nominee_id: string
+          public_score?: number | null
+          public_votes?: number | null
+          rank?: number | null
+          season_id: string
+          subcategory_id?: string | null
+          tier?: string | null
+          updated_at?: string | null
+        }
+        Update: {
+          category_id?: string
+          computed_at?: string | null
+          created_at?: string | null
+          final_score?: number | null
+          id?: string
+          is_winner?: boolean | null
+          jury_score?: number | null
+          nominee_id?: string
+          public_score?: number | null
+          public_votes?: number | null
+          rank?: number | null
+          season_id?: string
+          subcategory_id?: string | null
+          tier?: string | null
+          updated_at?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "results_category_id_fkey"
+            columns: ["category_id"]
+            isOneToOne: false
+            referencedRelation: "categories"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "results_nominee_id_fkey"
+            columns: ["nominee_id"]
+            isOneToOne: false
+            referencedRelation: "nominees"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "results_season_id_fkey"
+            columns: ["season_id"]
+            isOneToOne: false
+            referencedRelation: "seasons"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "results_subcategory_id_fkey"
+            columns: ["subcategory_id"]
+            isOneToOne: false
+            referencedRelation: "subcategories"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       seasons: {
         Row: {
