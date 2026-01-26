@@ -37,10 +37,11 @@ import type {
 
 export default function AdminDashboard() {
   const { user, hasRole, loading: authLoading } = useAuth();
-  const { season } = useSeason();
+  const { currentEdition } = useSeason();
   
   // State for all data
   const [loading, setLoading] = useState(true);
+  const [seasonId, setSeasonId] = useState<string | null>(null);
   const [financeData, setFinanceData] = useState<FinanceOverview | null>(null);
   const [nominationTrends, setNominationTrends] = useState<NominationTrend[]>([]);
   const [chapters, setChapters] = useState<ChapterPerformance[]>([]);
@@ -58,7 +59,26 @@ export default function AdminDashboard() {
   const [providerStatus, setProviderStatus] = useState<PaymentProviderStatus[]>([]);
   const [apiLogs, setApiLogs] = useState<APILogSummary[]>([]);
 
-  // Check authorization
+  // Fetch current season ID - must be before early returns
+  useEffect(() => {
+    const fetchSeasonId = async () => {
+      const { data } = await supabase
+        .from("seasons")
+        .select("id")
+        .eq("is_active", true)
+        .maybeSingle();
+      if (data) setSeasonId(data.id);
+    };
+    fetchSeasonId();
+  }, [currentEdition]);
+
+  // Load initial data - must be before early returns
+  useEffect(() => {
+    if (!seasonId || authLoading || !user || !hasRole("admin")) return;
+    loadDashboardData();
+  }, [seasonId, authLoading, user]);
+
+  // Check authorization - after all hooks
   if (!authLoading && !user) {
     return <Navigate to="/login" replace />;
   }
@@ -66,12 +86,6 @@ export default function AdminDashboard() {
   if (!authLoading && !hasRole("admin")) {
     return <Navigate to="/unauthorized" replace />;
   }
-
-  // Load initial data
-  useEffect(() => {
-    if (!season?.id) return;
-    loadDashboardData();
-  }, [season?.id]);
 
   const loadDashboardData = async () => {
     setLoading(true);
@@ -259,36 +273,36 @@ export default function AdminDashboard() {
   };
 
   const loadRevenueSplits = async () => {
-    if (!season?.id) return;
+    if (!seasonId) return;
     
     const { data } = await supabase
       .from("revenue_splits")
       .select("*")
-      .eq("season_id", season.id)
+      .eq("season_id", seasonId)
       .order("split_key");
 
     setRevenueSplits((data ?? []) as RevenueSplit[]);
   };
 
   const loadDisbursementRuns = async () => {
-    if (!season?.id) return;
+    if (!seasonId) return;
 
     const { data } = await supabase
       .from("disbursement_runs")
       .select("*")
-      .eq("season_id", season.id)
+      .eq("season_id", seasonId)
       .order("run_date", { ascending: false });
 
     setDisbursementRuns((data ?? []) as DisbursementRun[]);
   };
 
   const loadStages = async () => {
-    if (!season?.id) return;
+    if (!seasonId) return;
 
     const { data } = await supabase
       .from("stage_config")
       .select("*")
-      .eq("season_id", season.id)
+      .eq("season_id", seasonId)
       .order("action");
 
     setStages((data ?? []) as StageConfig[]);
@@ -351,12 +365,12 @@ export default function AdminDashboard() {
   };
 
   const handleRunDisbursement = async (notes: string) => {
-    if (!season?.id) return;
+    if (!seasonId) return;
 
     const { error } = await supabase
       .from("disbursement_runs")
       .insert({
-        season_id: season.id,
+        season_id: seasonId,
         run_date: new Date().toISOString().split('T')[0],
         status: 'DRAFT',
         notes,
