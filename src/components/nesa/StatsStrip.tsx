@@ -1,8 +1,7 @@
 import { motion } from "framer-motion";
 
 const stats = [
-  { value: "15+", label: "Years of Excellence", color: "text-gold" },
-  { value: "54", label: "African Countries", color: "text-gold" },
+  { value: "5", label: "African Regions", color: "text-gold" },
   { value: "17", label: "Award Categories", color: "text-gold" },
   { value: "141+", label: "Sub-Categories", color: "text-gold" },
 ];
