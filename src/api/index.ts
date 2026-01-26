@@ -26,3 +26,18 @@ export type { Certificate as CertificateData, VerificationResult, IssueCertifica
 // Admin APIs
 export { default as adminApi, migrations, roles, audit } from "./admin";
 export type { ImportNominee, ImportResult, DryRunResult, AuditLog, UserRole } from "./admin";
+
+// Jury APIs
+export * from "./jury";
+
+// Payments APIs
+export * from "./payments";
+
+// Content/CMS APIs
+export * from "./content";
+
+// Uploads APIs
+export * from "./uploads";
+
+// Wallet/GFA APIs
+export * from "./wallet";

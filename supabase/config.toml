@@ -32,3 +32,6 @@ verify_jwt = false
 
 [functions.uploads]
 verify_jwt = false
+
+[functions.wallet]
+verify_jwt = false
