@@ -389,6 +389,14 @@ export const CHAPTER_DASHBOARD_NAV: NavItem[] = [
   { label: "Reports", href: "/chapter/reports", icon: BookOpen },
 ];
 
+// OLC Coordinator Dashboard Navigation
+export const OLC_DASHBOARD_NAV: NavItem[] = [
+  { label: "OLC Dashboard", href: "/olc/dashboard", icon: Home },
+  { label: "Chapter Members", href: "/olc/members", icon: Users },
+  { label: "Chapter Wallet", href: "/olc/wallet", icon: Wallet },
+  { label: "Settlements", href: "/olc/settlements", icon: Coins },
+];
+
 export const ADMIN_DASHBOARD_NAV: NavItem[] = [
   { label: "Admin Home", href: "/admin", icon: Home },
   { label: "Stage Control", href: "/admin/stages", icon: Settings },
@@ -509,6 +517,12 @@ export const PAGE_REGISTRY: PageDefinition[] = [
   { path: "/chapter/events", title: "Local Events", description: "Chapter events", component: "ChapterEvents", category: "dashboard", requiredRoles: ["chapter", "admin"] },
   { path: "/chapter/nominations", title: "Local Nominations", description: "Chapter nominations", component: "ChapterNominations", category: "dashboard", requiredRoles: ["chapter", "admin"] },
   { path: "/chapter/reports", title: "Reports", description: "Chapter reports", component: "ChapterReports", category: "dashboard", requiredRoles: ["chapter", "admin"] },
+  
+  // ==================== OLC COORDINATOR DASHBOARD ====================
+  { path: "/olc/dashboard", title: "OLC Dashboard", description: "Chapter coordinator dashboard", component: "OLCDashboard", category: "dashboard", requiredRoles: ["chapter", "admin"] },
+  { path: "/olc/members", title: "Chapter Members", description: "Manage chapter members", component: "OLCMembers", category: "dashboard", requiredRoles: ["chapter", "admin"] },
+  { path: "/olc/wallet", title: "Chapter Wallet", description: "Chapter wallet transactions", component: "OLCWallet", category: "dashboard", requiredRoles: ["chapter", "admin"] },
+  { path: "/olc/settlements", title: "Settlements", description: "Settlement request history", component: "OLCSettlements", category: "dashboard", requiredRoles: ["chapter", "admin"] },
   
   // ==================== ADMIN DASHBOARD ====================
   { path: "/admin", title: "Admin Dashboard", description: "Platform administration", component: "AdminDashboard", category: "admin", requiredRoles: ["admin"] },

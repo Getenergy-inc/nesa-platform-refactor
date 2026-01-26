@@ -58,6 +58,9 @@ import Contact from "./pages/Contact";
 import Vote from "./pages/Vote";
 import Tickets from "./pages/Tickets";
 
+// OLC Pages
+import { OLCDashboard, OLCMembers, OLCSettlements, OLCWallet } from "./pages/olc";
+
 const queryClient = new QueryClient();
 
 const App = () => (
@@ -113,6 +116,12 @@ const App = () => (
                 <Route path="/dashboard" element={<Dashboard />} />
                 <Route path="/dashboard/nominations" element={<Dashboard />} />
                 <Route path="/nrc" element={<NRCDashboard />} />
+                
+                {/* OLC Coordinator Routes */}
+                <Route path="/olc/dashboard" element={<OLCDashboard />} />
+                <Route path="/olc/members" element={<OLCMembers />} />
+                <Route path="/olc/wallet" element={<OLCWallet />} />
+                <Route path="/olc/settlements" element={<OLCSettlements />} />
                 
                 {/* Support */}
                 <Route path="/donate" element={<Donate />} />
