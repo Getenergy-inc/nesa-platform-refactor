@@ -1,0 +1,22 @@
+{
+  "_meta": {
+    "source": "repository_search",
+    "extractedAt": "2026-01-26T00:00:00Z",
+    "description": "Nominees extracted from codebase search - no hardcoded nominee data found",
+    "files_searched": [
+      "src/pages/Nominees.tsx",
+      "src/pages/awards/Winners.tsx",
+      "src/components/nesa/ExistingNomineesSection.tsx",
+      "supabase/functions/import-nominees/index.ts"
+    ]
+  },
+  "nominees": [],
+  "notes": [
+    "No hardcoded nominee lists found in frontend code",
+    "Winners.tsx contains placeholder 'Coming Soon' data only",
+    "ExistingNomineesSection.tsx fetches from Supabase dynamically",
+    "Nominees.tsx uses React Query to fetch from nominees table",
+    "All nominee data is expected to be database-driven",
+    "The import-nominees edge function exists for bulk imports"
+  ]
+}

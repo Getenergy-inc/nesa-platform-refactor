@@ -1,0 +1,255 @@
+{
+  "id": "category-subcategory-mapping",
+  "version": "1.0.0",
+  "description": "Complete mapping of PRD-correct category and subcategory slugs for NESA-Africa",
+  "generated": "2026-01-26",
+  "categories": [
+    {
+      "id": "cat-01",
+      "slug": "best-csr-education-africa",
+      "name": "Best CSR in Education (Africa Regional)",
+      "scope": "AFRICA_REGIONAL",
+      "subcategories": [
+        {"slug": "csr-africa-banking-north-africa", "name": "Banking & Finance CSR (North Africa)"},
+        {"slug": "csr-africa-telecom-north-africa", "name": "Telecommunications CSR (North Africa)"},
+        {"slug": "csr-africa-tech-north-africa", "name": "Technology & ICT CSR (North Africa)"},
+        {"slug": "csr-africa-oil-north-africa", "name": "Oil & Gas CSR (North Africa)"},
+        {"slug": "csr-africa-food-north-africa", "name": "Food & Beverages CSR (North Africa)"},
+        {"slug": "csr-africa-aviation-north-africa", "name": "Aviation CSR (North Africa)"},
+        {"slug": "csr-africa-banking-west-africa", "name": "Banking & Finance CSR (West Africa)"},
+        {"slug": "csr-africa-telecom-west-africa", "name": "Telecommunications CSR (West Africa)"},
+        {"slug": "csr-africa-tech-west-africa", "name": "Technology & ICT CSR (West Africa)"},
+        {"slug": "csr-africa-oil-west-africa", "name": "Oil & Gas CSR (West Africa)"},
+        {"slug": "csr-africa-food-west-africa", "name": "Food & Beverages CSR (West Africa)"},
+        {"slug": "csr-africa-aviation-west-africa", "name": "Aviation CSR (West Africa)"},
+        {"slug": "csr-africa-banking-east-africa", "name": "Banking & Finance CSR (East Africa)"},
+        {"slug": "csr-africa-telecom-east-africa", "name": "Telecommunications CSR (East Africa)"},
+        {"slug": "csr-africa-tech-east-africa", "name": "Technology & ICT CSR (East Africa)"},
+        {"slug": "csr-africa-oil-east-africa", "name": "Oil & Gas CSR (East Africa)"},
+        {"slug": "csr-africa-food-east-africa", "name": "Food & Beverages CSR (East Africa)"},
+        {"slug": "csr-africa-aviation-east-africa", "name": "Aviation CSR (East Africa)"},
+        {"slug": "csr-africa-banking-central-africa", "name": "Banking & Finance CSR (Central Africa)"},
+        {"slug": "csr-africa-telecom-central-africa", "name": "Telecommunications CSR (Central Africa)"},
+        {"slug": "csr-africa-tech-central-africa", "name": "Technology & ICT CSR (Central Africa)"},
+        {"slug": "csr-africa-oil-central-africa", "name": "Oil & Gas CSR (Central Africa)"},
+        {"slug": "csr-africa-food-central-africa", "name": "Food & Beverages CSR (Central Africa)"},
+        {"slug": "csr-africa-aviation-central-africa", "name": "Aviation CSR (Central Africa)"},
+        {"slug": "csr-africa-banking-southern-africa", "name": "Banking & Finance CSR (Southern Africa)"},
+        {"slug": "csr-africa-telecom-southern-africa", "name": "Telecommunications CSR (Southern Africa)"},
+        {"slug": "csr-africa-tech-southern-africa", "name": "Technology & ICT CSR (Southern Africa)"},
+        {"slug": "csr-africa-oil-southern-africa", "name": "Oil & Gas CSR (Southern Africa)"},
+        {"slug": "csr-africa-food-southern-africa", "name": "Food & Beverages CSR (Southern Africa)"},
+        {"slug": "csr-africa-aviation-southern-africa", "name": "Aviation CSR (Southern Africa)"}
+      ]
+    },
+    {
+      "id": "cat-02",
+      "slug": "best-csr-education-nigeria",
+      "name": "Best CSR in Education (Nigeria)",
+      "scope": "NIGERIA",
+      "subcategories": [
+        {"slug": "csr-ng-banking", "name": "Banking & Finance"},
+        {"slug": "csr-ng-telecom", "name": "Telecommunications"},
+        {"slug": "csr-ng-oil", "name": "Oil & Gas"},
+        {"slug": "csr-ng-food", "name": "Food & Beverages"},
+        {"slug": "csr-ng-manufacturing", "name": "Manufacturing"},
+        {"slug": "csr-ng-aviation", "name": "Aviation"},
+        {"slug": "csr-ng-tech-it", "name": "Technology & IT"},
+        {"slug": "csr-ng-realestate", "name": "Real Estate & Construction"},
+        {"slug": "csr-ng-retail", "name": "Retail & E-Commerce"},
+        {"slug": "csr-ng-pharma", "name": "Pharmaceuticals"},
+        {"slug": "csr-ng-insurance", "name": "Insurance"},
+        {"slug": "csr-ng-conglomerates", "name": "Conglomerates"},
+        {"slug": "csr-ng-media", "name": "Media & Entertainment"},
+        {"slug": "csr-ng-agric", "name": "Agriculture & Agribusiness"},
+        {"slug": "csr-ng-health", "name": "Health Care & Hospitals"},
+        {"slug": "csr-ng-professional", "name": "Professional Services"},
+        {"slug": "csr-ng-fintech", "name": "FinTech"},
+        {"slug": "csr-ng-microfinance", "name": "Microfinance Banks"},
+        {"slug": "csr-ng-emerging-telecom", "name": "Emerging Telecommunications"},
+        {"slug": "csr-ng-software", "name": "Technology & Software"},
+        {"slug": "csr-ng-realestate-dev", "name": "Real Estate Development"},
+        {"slug": "csr-ng-commercial-retail", "name": "Commercial Retail"},
+        {"slug": "csr-ng-hospitality", "name": "Hotels & Hospitality"}
+      ]
+    },
+    {
+      "id": "cat-03",
+      "slug": "best-edutech-organisation-africa",
+      "name": "Best EduTech Organisation (Africa Regional)",
+      "scope": "AFRICA_REGIONAL",
+      "subcategories_pattern": "Region-multiplied: startup, established, social-impact × 5 regions"
+    },
+    {
+      "id": "cat-04",
+      "slug": "best-media-educational-advocacy-nigeria",
+      "name": "Best Media Organisation in Educational Advocacy (Nigeria)",
+      "scope": "NIGERIA",
+      "subcategories": [
+        {"slug": "media-ng-print", "name": "Print Media Educational Advocacy"},
+        {"slug": "media-ng-radio", "name": "Radio Educational Programme Excellence"},
+        {"slug": "media-ng-tv", "name": "Television Educational Content"},
+        {"slug": "media-ng-digital", "name": "Digital Media Educational Advocacy"}
+      ]
+    },
+    {
+      "id": "cat-05",
+      "slug": "best-ngo-education-nigeria",
+      "name": "Best NGO Contribution to Education (Nigeria)",
+      "scope": "NIGERIA",
+      "subcategories": [
+        {"slug": "ngo-ng-infrastructure", "name": "Educational Infrastructure Development"},
+        {"slug": "ngo-ng-materials", "name": "Donation of Educational Materials"},
+        {"slug": "ngo-ng-scholarship", "name": "Education Aid & Scholarship Support"},
+        {"slug": "ngo-ng-youth", "name": "Youth Empowerment through Education"},
+        {"slug": "ngo-ng-women", "name": "Women & Girls' Education Empowerment"}
+      ]
+    },
+    {
+      "id": "cat-06",
+      "slug": "best-ngo-education-africa",
+      "name": "Best NGO Contribution to Education for All (Africa Regional)",
+      "scope": "AFRICA_REGIONAL",
+      "subcategories_pattern": "Region-multiplied: infrastructure, scholarship, materials, youth, women × 5 regions"
+    },
+    {
+      "id": "cat-07",
+      "slug": "best-stem-education-africa",
+      "name": "Best STEM Education Programme (Africa Regional)",
+      "scope": "AFRICA_REGIONAL",
+      "subcategories_pattern": "Region-multiplied: inclusive, digital, community, girls × 5 regions"
+    },
+    {
+      "id": "cat-08",
+      "slug": "creative-arts-education-nigeria",
+      "name": "Creative Arts Industry Contribution to Education (Nigeria)",
+      "scope": "NIGERIA",
+      "subcategories": [
+        {"slug": "arts-ng-nollywood", "name": "Nollywood Educational Content"},
+        {"slug": "arts-ng-music", "name": "Music Industry Contribution"},
+        {"slug": "arts-ng-literature", "name": "Literature & Artistic Works"},
+        {"slug": "arts-ng-visual", "name": "Visual Arts Educational Impact"},
+        {"slug": "arts-ng-performing", "name": "Performing Arts & Education"},
+        {"slug": "arts-ng-film", "name": "Film & Media for Education"},
+        {"slug": "arts-ng-campaigns", "name": "Creative Advocacy Campaigns"}
+      ]
+    },
+    {
+      "id": "cat-09",
+      "slug": "best-education-friendly-state-nigeria",
+      "name": "Best Education-Friendly State (Nigeria)",
+      "scope": "NIGERIA",
+      "subcategories": [
+        {"slug": "state-ng-nc", "name": "North Central"},
+        {"slug": "state-ng-ne", "name": "North East"},
+        {"slug": "state-ng-nw", "name": "North West"},
+        {"slug": "state-ng-se", "name": "South East"},
+        {"slug": "state-ng-ss", "name": "South South"},
+        {"slug": "state-ng-sw", "name": "South West"}
+      ]
+    },
+    {
+      "id": "cat-10",
+      "slug": "best-library-tertiary-nigeria",
+      "name": "Best Library in Nigerian Tertiary Institutions",
+      "scope": "NIGERIA",
+      "subcategories": [
+        {"slug": "library-ng-fed-uni", "name": "Federal Universities"},
+        {"slug": "library-ng-state-uni", "name": "State Universities"},
+        {"slug": "library-ng-private-uni", "name": "Private Universities"},
+        {"slug": "library-ng-fed-poly", "name": "Federal Polytechnics"},
+        {"slug": "library-ng-state-poly", "name": "State Polytechnics"},
+        {"slug": "library-ng-coe", "name": "Colleges of Education"},
+        {"slug": "library-ng-private-colleges", "name": "Private Colleges & Specialised Institutions"},
+        {"slug": "library-ng-nursing", "name": "Colleges of Nursing & Allied Health"}
+      ]
+    },
+    {
+      "id": "cat-11",
+      "slug": "best-research-development-nigeria",
+      "name": "Best Research & Development Contribution to Education (Nigeria)",
+      "scope": "NIGERIA",
+      "subcategories": [
+        {"slug": "rd-ng-academic", "name": "Academic Research Excellence"},
+        {"slug": "rd-ng-policy", "name": "Policy Research & Advocacy"},
+        {"slug": "rd-ng-innovation", "name": "Educational Innovation Research"}
+      ]
+    },
+    {
+      "id": "cat-12",
+      "slug": "christian-education-impact-africa",
+      "name": "Christian Education Impact (Africa Regional)",
+      "scope": "AFRICA_REGIONAL",
+      "subcategories": [
+        {"slug": "christian-schools", "name": "Christian Schools & Institutions"},
+        {"slug": "christian-scholarship", "name": "Christian Scholarship Programmes"},
+        {"slug": "christian-youth", "name": "Christian Youth Education Initiatives"}
+      ]
+    },
+    {
+      "id": "cat-13",
+      "slug": "islamic-education-impact-africa",
+      "name": "Islamic Education Impact (Africa Regional)",
+      "scope": "AFRICA_REGIONAL",
+      "subcategories": [
+        {"slug": "islamic-schools", "name": "Islamic Schools & Institutions"},
+        {"slug": "islamic-scholarship", "name": "Islamic Scholarship Programmes"},
+        {"slug": "islamic-youth", "name": "Islamic Youth Education Initiatives"}
+      ]
+    },
+    {
+      "id": "cat-14",
+      "slug": "political-leaders-education-nigeria",
+      "name": "Political Leaders Educational Support (Nigeria)",
+      "scope": "NIGERIA",
+      "subcategories": [
+        {"slug": "political-executive", "name": "Executive Office Education Support"},
+        {"slug": "political-legislative", "name": "Legislative Education Advocacy"},
+        {"slug": "political-local", "name": "Local Government Education Initiatives"}
+      ]
+    },
+    {
+      "id": "cat-15",
+      "slug": "international-bilateral-education",
+      "name": "International & Bilateral Contributors to Education",
+      "scope": "INTERNATIONAL",
+      "subcategories": [
+        {"slug": "intl-govt", "name": "Government & Bilateral Aid"},
+        {"slug": "intl-ngo", "name": "International NGOs"},
+        {"slug": "intl-foundation", "name": "Global Foundations"},
+        {"slug": "intl-multilateral", "name": "Multilateral Organizations"}
+      ]
+    },
+    {
+      "id": "cat-16",
+      "slug": "diaspora-education-impact",
+      "name": "Diaspora Association Educational Impact",
+      "scope": "INTERNATIONAL",
+      "subcategories": [
+        {"slug": "diaspora-scholarship", "name": "Diaspora Scholarship Programmes"},
+        {"slug": "diaspora-infrastructure", "name": "Diaspora Educational Infrastructure"},
+        {"slug": "diaspora-mentorship", "name": "Diaspora Mentorship & Exchange"}
+      ]
+    },
+    {
+      "id": "cat-17",
+      "slug": "africa-education-icon-award",
+      "name": "Africa Education Icon Award (2005–2025)",
+      "scope": "ICON",
+      "subcategories": [
+        {"slug": "icon-philanthropy", "name": "Africa Education Philanthropy Icon of the Decade"},
+        {"slug": "icon-literary", "name": "Literary & New Curriculum Advocate Icon of the Decade"},
+        {"slug": "icon-technical", "name": "Africa Technical Educator Icon of the Decade"}
+      ]
+    }
+  ],
+  "invalid_categories_mapping": {
+    "music": {"target": "creative-arts-education-nigeria", "subcategory": "arts-ng-music"},
+    "film": {"target": "creative-arts-education-nigeria", "subcategory": "arts-ng-film"},
+    "nollywood": {"target": "creative-arts-education-nigeria", "subcategory": "arts-ng-nollywood"},
+    "entertainment": {"target": "creative-arts-education-nigeria", "subcategory": null},
+    "sports": {"target": null, "action": "REJECT"},
+    "best actor": {"target": null, "action": "REJECT"},
+    "best musician": {"target": null, "action": "REJECT"}
+  }
+}
