@@ -324,6 +324,7 @@ export default function Nominate() {
 
       // Clear draft on successful submission
       clearDraft();
+      setShowConfirmDialog(false);
       toast.success("Nomination submitted successfully!");
       navigate("/dashboard/nominations");
     } catch (error) {
@@ -1077,9 +1078,9 @@ export default function Nominate() {
                   Go Back & Edit
                 </Button>
                 <Button 
-                  onClick={() => {
-                    setShowConfirmDialog(false);
-                    handleSubmit();
+                  onClick={async () => {
+                    await handleSubmit();
+                    // Dialog will close on successful navigation
                   }}
                   disabled={submitting}
                 >
