@@ -22,6 +22,7 @@ import { WatchMediaSection } from "@/components/nesa/WatchMediaSection";
 import { FinalCTASection } from "@/components/nesa/FinalCTASection";
 import { NESAFooter } from "@/components/nesa/NESAFooter";
 import { JudgesSection } from "@/components/nesa/JudgesSection";
+import { NomineesShowcaseSection } from "@/components/nesa/NomineesShowcaseSection";
 import { MobileBottomNav } from "@/components/navigation/MainNav";
 
 export default function NESAAfrica() {
@@ -52,6 +53,7 @@ export default function NESAAfrica() {
         <WatchLiveSection />
         <GetInvolvedSection />
         <FirewallsSection />
+        <NomineesShowcaseSection />
         <SponsorsSection />
         <JudgesSection />
         <CategoriesSection />
