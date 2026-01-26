@@ -109,15 +109,15 @@ export function NESAHero() {
         {/* Headline with gradient text */}
         <h1 className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-white mb-3 sm:mb-4 max-w-4xl leading-tight px-2">
           Honoring Africa's{" "}
-          <span className="text-gradient-fun block sm:inline">Changemakers</span>
+          <span className="text-gradient-fun block sm:inline">Education Changemakers</span>
           <span className="inline-block ml-2 animate-wiggle">✨</span>
         </h1>
 
         {/* Fun subheadline */}
         <div className="flex items-center justify-center gap-2 mb-4 sm:mb-6">
           <Rocket className="h-5 w-5 text-gold animate-bounce-fun" />
-          <p className="text-lg sm:text-xl md:text-2xl font-medium text-gold px-4">
-            {currentEdition.theme}
+          <p className="text-lg sm:text-xl md:text-2xl font-medium text-gold px-4 text-center">
+            Advocating & Achieving Education For All In Africa
           </p>
           <Star className="h-5 w-5 text-gold animate-bounce-fun" style={{ animationDelay: '0.2s' }} />
         </div>
@@ -125,7 +125,7 @@ export function NESAHero() {
         {/* Description with emoji accents */}
         <p className="text-white/80 text-sm sm:text-base md:text-lg max-w-3xl mb-8 sm:mb-10 leading-relaxed px-4 sm:px-6">
           At the New Education Standard Award Africa ({currentEdition.name}), we celebrate the real
-          changemakers shaping the future of education across Africa 🌍
+          changemakers building the future of education across Africa 🌍
         </p>
 
         {/* CTA Buttons with fun hover effects */}
