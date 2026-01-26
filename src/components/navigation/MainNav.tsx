@@ -411,30 +411,46 @@ function UserMenu() {
 // ============================================================================
 
 const mobileQuickActions = [
-  { icon: Home, label: "Home", href: "/" },
-  { icon: LayoutDashboard, label: "Dashboard", href: "/dashboard" },
-  { icon: Award, label: "Nominate", href: "/nominate" },
-  { icon: Play, label: "Watch", href: "/media/tv" },
-  { icon: Heart, label: "Donate", href: "/donate" },
+  { icon: Home, label: "Home", href: "/", emoji: "🏠" },
+  { icon: LayoutDashboard, label: "Dashboard", href: "/dashboard", emoji: "📊" },
+  { icon: Award, label: "Nominate", href: "/nominate", emoji: "🏆" },
+  { icon: Play, label: "Watch", href: "/media/tv", emoji: "📺" },
+  { icon: Heart, label: "Donate", href: "/donate", emoji: "💝" },
 ];
 
 export function MobileBottomNav() {
   const location = useLocation();
   
   return (
-    <nav className="fixed bottom-0 left-0 right-0 z-40 lg:hidden bg-charcoal/95 backdrop-blur-md border-t border-gold/20 safe-area-inset-bottom">
+    <nav className="fixed bottom-0 left-0 right-0 z-40 lg:hidden glass-dark border-t border-gold/30 safe-area-inset-bottom">
+      {/* Fun gradient top border */}
+      <div className="absolute top-0 left-0 right-0 h-0.5 bg-gradient-to-r from-gold via-purple-500 to-cyan-500 animate-gradient-shift" style={{ backgroundSize: '400% 400%' }} />
+      
       <div className="flex justify-around items-center py-2 px-2">
-        {mobileQuickActions.map((item) => (
+        {mobileQuickActions.map((item, index) => (
           <Link
             key={item.href}
             to={item.href}
             className={cn(
-              "flex flex-col items-center gap-1 p-2 rounded-lg transition-colors min-w-[56px] touch-manipulation",
-              "hover:bg-gold/10 active:scale-95",
-              location.pathname === item.href ? "text-gold" : "text-white/60"
+              "group flex flex-col items-center gap-1 p-2 rounded-xl transition-all min-w-[56px] touch-manipulation",
+              "hover:bg-gold/20 active:scale-90",
+              location.pathname === item.href 
+                ? "text-gold bg-gold/10 scale-105" 
+                : "text-white/60 hover:text-gold"
             )}
+            style={{ animationDelay: `${index * 0.05}s` }}
           >
-            <item.icon className="h-5 w-5" />
+            <div className="relative">
+              <item.icon className={cn(
+                "h-5 w-5 transition-all duration-200",
+                location.pathname === item.href && "scale-110"
+              )} />
+              {location.pathname === item.href && (
+                <span className="absolute -top-1 -right-1 text-xs animate-bounce-fun">
+                  {item.emoji}
+                </span>
+              )}
+            </div>
             <span className="text-[10px] font-medium">{item.label}</span>
           </Link>
         ))}
