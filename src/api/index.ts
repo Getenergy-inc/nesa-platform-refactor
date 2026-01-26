@@ -42,8 +42,8 @@ export * from "./uploads";
 // Wallet/GFA APIs
 export * from "./wallet";
 
-// OLC (Chapter) APIs
-export * from "./olc";
+// OLC (Chapter) APIs (excluding getOLCDashboard which is in dashboard.ts)
+export { default as olcApi, getChapterMembers, verifyMember, getSettlementHistory, requestSettlement, submitChapterMedia } from "./olc";
 
 // Referrals APIs
 export * from "./referrals";
