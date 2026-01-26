@@ -1,4 +1,4 @@
-import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
+import { createClient, SupabaseClient } from "https://esm.sh/@supabase/supabase-js@2";
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
@@ -17,6 +17,96 @@ const errorResponse = (message: string, status = 400) =>
     JSON.stringify({ ok: false, error: message }),
     { status, headers: { ...corsHeaders, "Content-Type": "application/json" } }
   );
+
+// ============================================================
+// REFERRAL REWARD TRIGGER (BUG-001 fix)
+// Triggers referral rewards when wallet top-ups complete
+// ============================================================
+type ReferralEventType = "NOMINATION_PAID" | "VOTE_PAID" | "DONATION" | "TICKET" | "TOPUP" | "SIGNUP";
+
+async function triggerReferralReward(
+  adminClient: SupabaseClient,
+  userId: string, 
+  eventType: ReferralEventType,
+  valueUsd: number
+): Promise<void> {
+  try {
+    // Get user's referrer info from profile
+    const { data: profile } = await adminClient
+      .from("profiles")
+      .select("referred_by_user_id, referred_by_chapter_id")
+      .eq("user_id", userId)
+      .maybeSingle();
+
+    if (!profile?.referred_by_user_id && !profile?.referred_by_chapter_id) {
+      return; // No referrer, nothing to do
+    }
+
+    const referrerType = profile.referred_by_chapter_id ? "CHAPTER" : "USER";
+    const referrerId = profile.referred_by_chapter_id || profile.referred_by_user_id;
+
+    // Calculate reward (5% of transaction value in AGC, 1 USD = 10 AGC)
+    const rewardAgc = valueUsd * 0.5; // 5% commission: 0.05 * 10 AGC/USD = 0.5
+
+    // Create referral event
+    const { error: eventError } = await adminClient.from("referral_events").insert({
+      referrer_type: referrerType,
+      referrer_id: referrerId,
+      referred_user_id: userId,
+      event_type: eventType,
+      reward_agc: rewardAgc,
+      value_usd: valueUsd,
+      is_paid: false,
+    });
+
+    if (eventError) {
+      console.error("Failed to create referral event:", eventError);
+      return;
+    }
+
+    // Get referrer's wallet account
+    const { data: referrerWallet } = await adminClient
+      .from("wallet_accounts")
+      .select("id")
+      .eq("owner_type", referrerType)
+      .eq("owner_id", referrerId)
+      .maybeSingle();
+
+    if (referrerWallet) {
+      // Credit the referrer's wallet
+      await adminClient.from("wallet_ledger_entries").insert({
+        account_id: referrerWallet.id,
+        entry_type: referrerType === "CHAPTER" ? "CHAPTER_BONUS" : "REFERRAL_BONUS",
+        direction: "CREDIT",
+        agc_amount: rewardAgc,
+        usd_amount: valueUsd * 0.05,
+        is_withdrawable: true,
+        description: `Referral bonus: ${eventType}`,
+        reference_type: "referral_event",
+      });
+    }
+
+    // Update referral totals
+    const { data: currentReferral } = await adminClient
+      .from("referrals")
+      .select("total_earnings_agc")
+      .eq("owner_type", referrerType)
+      .eq("owner_id", referrerId)
+      .maybeSingle();
+
+    if (currentReferral) {
+      await adminClient
+        .from("referrals")
+        .update({ total_earnings_agc: (currentReferral.total_earnings_agc || 0) + rewardAgc })
+        .eq("owner_type", referrerType)
+        .eq("owner_id", referrerId);
+    }
+
+    console.log(`Referral reward triggered: ${eventType} -> ${referrerType}:${referrerId} (${rewardAgc} AGC)`);
+  } catch (error) {
+    console.error("Error triggering referral reward:", error);
+  }
+}
 
 Deno.serve(async (req) => {
   if (req.method === "OPTIONS") {
@@ -212,8 +302,78 @@ Deno.serve(async (req) => {
     }
 
     // ============================================================
-    // ROUTE: POST /wallet/withdraw/request - Request withdrawal
+    // ROUTE: POST /wallet/topup/confirm - Confirm payment and trigger referral (BUG-001 fix)
     // ============================================================
+    if (action === "topup" && subAction === "confirm" && req.method === "POST") {
+      const userId = await requireAuth();
+      if (!userId) return errorResponse("Unauthorized", 401);
+
+      const body = await req.json();
+      const { payment_intent_id, provider_reference } = body;
+
+      if (!payment_intent_id) return errorResponse("payment_intent_id required");
+
+      // Get the payment intent
+      const { data: payment, error: fetchError } = await adminSupabase
+        .from("payment_intents")
+        .select("*, wallet_accounts!inner(owner_id, owner_type)")
+        .eq("id", payment_intent_id)
+        .maybeSingle();
+
+      if (fetchError || !payment) return errorResponse("Payment intent not found", 404);
+      
+      // Verify ownership
+      if (payment.wallet_accounts.owner_type !== "USER" || payment.wallet_accounts.owner_id !== userId) {
+        return errorResponse("Forbidden", 403);
+      }
+
+      if (payment.status === "COMPLETED") {
+        return errorResponse("Payment already confirmed");
+      }
+
+      // Update payment status
+      const { error: updateError } = await adminSupabase
+        .from("payment_intents")
+        .update({ 
+          status: "COMPLETED", 
+          provider_ref: provider_reference || payment.provider_ref 
+        })
+        .eq("id", payment_intent_id);
+
+      if (updateError) throw updateError;
+
+      // Credit the wallet
+      await adminSupabase.from("wallet_ledger_entries").insert({
+        account_id: payment.account_id,
+        entry_type: "TOPUP",
+        direction: "CREDIT",
+        agc_amount: payment.agc_amount,
+        usd_amount: payment.amount_usd,
+        is_withdrawable: true,
+        description: `Wallet top-up via ${payment.provider}`,
+        reference_type: "payment_intent",
+        reference_id: payment_intent_id,
+      });
+
+      // Trigger referral reward (BUG-001 fix)
+      await triggerReferralReward(adminSupabase, userId, "TOPUP", payment.amount_usd);
+
+      // Audit log
+      await adminSupabase.from("audit_logs").insert({
+        action: "topup_confirmed",
+        entity_type: "payment_intent",
+        entity_id: payment_intent_id,
+        user_id: userId,
+        new_values: { agc_amount: payment.agc_amount, amount_usd: payment.amount_usd },
+      });
+
+      return respond({ 
+        confirmed: true, 
+        agc_credited: payment.agc_amount,
+        referral_triggered: true 
+      });
+    }
+
     if (action === "withdraw" && subAction === "request" && req.method === "POST") {
       const userId = await requireAuth();
       if (!userId) return errorResponse("Unauthorized", 401);
