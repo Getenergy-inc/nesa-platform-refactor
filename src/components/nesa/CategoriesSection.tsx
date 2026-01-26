@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 import { 
   Building2, Building, Laptop, Radio, Heart, Users, FlaskConical,
   Palette, MapPin, BookOpen, Microscope, Church, Moon, Landmark,
-  Globe, Plane, Crown, ChevronRight, Sparkles
+  Globe, Plane, Crown, ChevronRight
 } from "lucide-react";
 import {
   NESA_CATEGORIES,
@@ -34,12 +34,12 @@ const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
   Crown,
 };
 
-// Scope badge config with fun emojis
-const scopeBadgeConfig: Record<CategoryScope, { label: string; className: string; emoji: string }> = {
-  AFRICA_REGIONAL: { label: "Africa Regional", className: "bg-green-500/20 text-green-400 border-green-500/30", emoji: "🌍" },
-  NIGERIA: { label: "Nigeria", className: "bg-emerald-500/20 text-emerald-400 border-emerald-500/30", emoji: "🇳🇬" },
-  INTERNATIONAL: { label: "International", className: "bg-blue-500/20 text-blue-400 border-blue-500/30", emoji: "🌐" },
-  ICON: { label: "Lifetime", className: "bg-purple-500/20 text-purple-400 border-purple-500/30", emoji: "👑" },
+// Scope badge config
+const scopeBadgeConfig: Record<CategoryScope, { label: string; className: string }> = {
+  AFRICA_REGIONAL: { label: "Africa Regional", className: "bg-green-500/20 text-green-400 border-green-500/30" },
+  NIGERIA: { label: "Nigeria", className: "bg-emerald-500/20 text-emerald-400 border-emerald-500/30" },
+  INTERNATIONAL: { label: "International", className: "bg-blue-500/20 text-blue-400 border-blue-500/30" },
+  ICON: { label: "Lifetime", className: "bg-purple-500/20 text-purple-400 border-purple-500/30" },
 };
 
 // Get first 6 categories for display
@@ -48,13 +48,6 @@ const displayCategories = NESA_CATEGORIES.slice(0, 6);
 export function CategoriesSection() {
   return (
     <section className="bg-charcoal py-16 md:py-20 relative overflow-hidden">
-      {/* Fun background elements */}
-      <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-20 left-10 text-6xl opacity-10 animate-float-emoji">🏆</div>
-        <div className="absolute bottom-20 right-10 text-6xl opacity-10 animate-float-emoji" style={{ animationDelay: '1s' }}>⭐</div>
-        <div className="absolute top-1/2 left-1/4 text-4xl opacity-10 animate-float-emoji" style={{ animationDelay: '2s' }}>✨</div>
-      </div>
-
       <div className="container relative z-10">
         <motion.div 
           className="text-center mb-12"
@@ -62,32 +55,30 @@ export function CategoriesSection() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
         >
-          <Badge className="mb-4 bg-gradient-to-r from-gold/20 to-purple-500/20 text-gold border-gold/30 animate-rainbow-border">
-            <Sparkles className="w-3 h-3 mr-1" />
-            17 Official Categories 🎯
+          <Badge className="mb-4 bg-gold/10 text-gold border-gold/30">
+            17 Official Categories
           </Badge>
           <h2 className="font-display text-3xl md:text-4xl font-bold text-white mb-4">
-            Award Categories <span className="animate-wiggle inline-block">🏅</span>
+            Award Categories
           </h2>
           <p className="text-white/70 max-w-2xl mx-auto">
             Recognizing excellence across education, corporate responsibility, technology, 
-            and social impact throughout the African continent ✨
+            and social impact throughout the African continent.
           </p>
         </motion.div>
 
-        {/* Tier Legend with fun styling */}
+        {/* Tier Legend */}
         <div className="flex flex-wrap justify-center gap-3 mb-10">
           {Object.entries(TIER_INFO).map(([key, tier], index) => (
             <motion.div 
               key={key} 
-              initial={{ opacity: 0, scale: 0 }}
+              initial={{ opacity: 0, scale: 0.9 }}
               whileInView={{ opacity: 1, scale: 1 }}
               transition={{ delay: index * 0.1 }}
               viewport={{ once: true }}
-              whileHover={{ scale: 1.1 }}
-              className={`flex items-center gap-2 rounded-full border-2 px-4 py-2 ${tier.bgColor} ${tier.borderColor} cursor-default hover:shadow-lg transition-all`}
+              className={`flex items-center gap-2 rounded-full border px-4 py-2 ${tier.bgColor} ${tier.borderColor} transition-all`}
             >
-              <span className={`text-xs font-bold ${tier.color}`}>{tier.shortName}</span>
+              <span className={`text-xs font-semibold ${tier.color}`}>{tier.shortName}</span>
             </motion.div>
           ))}
         </div>
@@ -115,15 +106,15 @@ export function CategoriesSection() {
               >
                 <Link
                   to={`/categories/${cat.slug}`}
-                  className="group block glass-dark rounded-2xl p-6 border-2 border-transparent hover:border-gold/50 transition-all hover:shadow-[0_0_30px_rgba(201,162,39,0.2)] hover-pop"
+                  className="group block bg-white/5 backdrop-blur-sm rounded-2xl p-6 border border-white/10 hover:border-gold/40 transition-all duration-300"
                 >
                   <div className="flex items-center justify-between mb-4">
                     <div className="flex items-center gap-3">
-                      <div className="h-12 w-12 rounded-xl bg-gradient-to-br from-gold/20 to-purple-500/20 flex items-center justify-center group-hover:scale-110 transition-transform">
-                        <Icon className="h-6 w-6 text-gold group-hover:animate-wiggle" />
+                      <div className="h-12 w-12 rounded-xl bg-gold/10 flex items-center justify-center group-hover:bg-gold/20 transition-colors">
+                        <Icon className="h-6 w-6 text-gold" />
                       </div>
                       <Badge variant="outline" className={`text-xs ${scopeBadge.className}`}>
-                        {scopeBadge.emoji} {scopeBadge.label}
+                        {scopeBadge.label}
                       </Badge>
                     </div>
                     <ChevronRight className="h-5 w-5 text-white/40 group-hover:text-gold group-hover:translate-x-1 transition-all" />
@@ -142,7 +133,7 @@ export function CategoriesSection() {
                       {tier.shortName}
                     </Badge>
                     <span className="text-xs text-white/50">
-                      {cat.subcategories.length} subcategories ✨
+                      {cat.subcategories.length} subcategories
                     </span>
                   </div>
                 </Link>
@@ -161,20 +152,20 @@ export function CategoriesSection() {
             <Button
               variant="outline"
               size="lg"
-              className="border-2 border-gold text-gold hover:bg-gold/20 rounded-full w-full sm:w-auto hover-pop transition-all group"
+              className="border-2 border-gold text-gold hover:bg-gold/10 rounded-full w-full sm:w-auto transition-all group"
             >
-              <Globe className="mr-2 h-4 w-4 group-hover:animate-wiggle" />
-              Africa First Categories 🌍
+              <Globe className="mr-2 h-4 w-4" />
+              Africa First Categories
             </Button>
           </Link>
           <Link to="/categories?view=nigeria">
             <Button
               variant="outline"
               size="lg"
-              className="border-2 border-emerald-500 text-emerald-400 hover:bg-emerald-500/20 rounded-full w-full sm:w-auto hover-pop transition-all group"
+              className="border-2 border-emerald-500 text-emerald-400 hover:bg-emerald-500/10 rounded-full w-full sm:w-auto transition-all group"
             >
-              <MapPin className="mr-2 h-4 w-4 group-hover:animate-wiggle" />
-              Nigeria Categories 🇳🇬
+              <MapPin className="mr-2 h-4 w-4" />
+              Nigeria Categories
             </Button>
           </Link>
         </motion.div>
