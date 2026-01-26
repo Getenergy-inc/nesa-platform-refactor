@@ -1,0 +1,41 @@
+{
+  "_meta": {
+    "version": "1.0.0",
+    "generatedAt": "2026-01-26T00:00:00Z",
+    "description": "Canonical deduped nominee import file for NESA-Africa 2025",
+    "schema_version": "1.0",
+    "total_count": 0,
+    "ready_for_import": true
+  },
+  "nominees": [],
+  "schema": {
+    "required_fields": ["fullName", "categoryName", "subcategoryName", "status"],
+    "optional_fields": ["legacySource", "legacyId", "organisation", "country", "region", "tierEligibility", "profileBio", "imageUrl", "evidenceLinks", "createdAt", "updatedAt"],
+    "status_values": ["submitted", "in_review", "approved", "rejected", "platinum"],
+    "legacySource_values": ["live", "repo", "refactorzip", "manual"],
+    "tierEligibility_values": ["platinum", "gold", "blue-garnet", "icon"]
+  },
+  "import_instructions": {
+    "endpoint": "POST /functions/v1/import-nominees",
+    "auth": "Bearer token required (admin role)",
+    "dry_run_first": true,
+    "batch_limit": 500
+  },
+  "example_record": {
+    "legacySource": "manual",
+    "legacyId": null,
+    "fullName": "Example Nominee Name",
+    "organisation": "Example Organization",
+    "country": "Nigeria",
+    "region": "West",
+    "categoryName": "Best CSR in Education (Nigeria)",
+    "subcategoryName": "Banking & Finance",
+    "tierEligibility": ["platinum", "gold", "blue-garnet"],
+    "profileBio": "Brief biography of the nominee...",
+    "imageUrl": "https://example.com/photo.jpg",
+    "evidenceLinks": ["https://example.com/evidence1.pdf"],
+    "status": "approved",
+    "createdAt": "2026-01-01T00:00:00Z",
+    "updatedAt": "2026-01-26T00:00:00Z"
+  }
+}

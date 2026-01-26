@@ -1,0 +1,15 @@
+{
+  "_meta": {
+    "source": "live_database",
+    "extractedAt": "2026-01-26T00:00:00Z",
+    "description": "Nominees currently in the Supabase nominees table",
+    "total_count": 0
+  },
+  "nominees": [],
+  "notes": [
+    "Database query returned 0 nominees",
+    "The nominees table exists but is empty",
+    "Categories (17) and subcategories (138) are properly seeded",
+    "Ready for nominee import via import-nominees edge function"
+  ]
+}
