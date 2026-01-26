@@ -16,6 +16,7 @@ import {
   JURY_DASHBOARD_NAV,
   ADMIN_DASHBOARD_NAV,
   CHAPTER_DASHBOARD_NAV,
+  OLC_DASHBOARD_NAV,
   type NavItem,
 } from "@/config/navigation";
 import type { AppRole } from "@/config/roles";
@@ -51,6 +52,7 @@ export function DashboardLayout({ children, title, breadcrumbs }: DashboardLayou
   }
   if (hasRole("chapter") || hasRole("admin")) {
     sidebarSections.push({ title: "Chapter", items: CHAPTER_DASHBOARD_NAV, roles: ["chapter", "admin"] });
+    sidebarSections.push({ title: "OLC Coordinator", items: OLC_DASHBOARD_NAV, roles: ["chapter", "admin"] });
   }
   if (hasRole("admin")) {
     sidebarSections.push({ title: "Admin", items: ADMIN_DASHBOARD_NAV, roles: ["admin"] });

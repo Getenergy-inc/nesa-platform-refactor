@@ -41,3 +41,6 @@ export * from "./uploads";
 
 // Wallet/GFA APIs
 export * from "./wallet";
+
+// OLC (Chapter) APIs
+export * from "./olc";
