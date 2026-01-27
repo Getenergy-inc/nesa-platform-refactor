@@ -36,11 +36,6 @@ export function LanguageSwitcher({ variant = 'default', className }: LanguageSwi
   const handleLanguageChange = async (locale: SupportedLocale) => {
     await changeLanguage(locale);
     setIsOpen(false);
-    // Force reload to apply RTL changes if needed
-    const newConfig = getLocaleConfig(locale);
-    if (newConfig.dir !== currentConfig.dir) {
-      window.location.reload();
-    }
   };
 
   return (

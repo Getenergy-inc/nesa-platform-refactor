@@ -123,6 +123,7 @@ i18n
   .use(initReactI18next)
   .init({
     resources,
+    lng: localStorage.getItem(LOCALE_STORAGE_KEY) || DEFAULT_LOCALE,
     fallbackLng: DEFAULT_LOCALE,
     supportedLngs: SUPPORTED_LOCALES.map(l => l.code),
     
@@ -132,7 +133,7 @@ i18n
     
     // Detection options
     detection: {
-      order: ['querystring', 'localStorage', 'navigator'],
+      order: ['localStorage', 'querystring', 'navigator'],
       lookupQuerystring: 'lang',
       lookupLocalStorage: LOCALE_STORAGE_KEY,
       caches: ['localStorage'],
@@ -144,6 +145,8 @@ i18n
     
     react: {
       useSuspense: false, // Disable suspense for SSR compatibility
+      bindI18n: 'languageChanged loaded', // Re-render on language change
+      bindI18nStore: 'added removed',
     },
   });
 
@@ -156,17 +159,19 @@ export default i18n;
 /**
  * Change the current language
  */
-export function changeLanguage(locale: SupportedLocale): Promise<void> {
-  return i18n.changeLanguage(locale).then(() => {
-    localStorage.setItem(LOCALE_STORAGE_KEY, locale);
-    
-    // Update document direction for RTL languages
-    const config = SUPPORTED_LOCALES.find(l => l.code === locale);
-    if (config) {
-      document.documentElement.dir = config.dir;
-      document.documentElement.lang = locale;
-    }
-  });
+export async function changeLanguage(locale: SupportedLocale): Promise<void> {
+  // Store in localStorage first
+  localStorage.setItem(LOCALE_STORAGE_KEY, locale);
+  
+  // Update document direction for RTL languages
+  const config = SUPPORTED_LOCALES.find(l => l.code === locale);
+  if (config) {
+    document.documentElement.dir = config.dir;
+    document.documentElement.lang = locale;
+  }
+  
+  // Change the i18n language (this triggers re-render)
+  await i18n.changeLanguage(locale);
 }
 
 /**
