@@ -5,7 +5,6 @@
 
 import i18n from 'i18next';
 import { initReactI18next } from 'react-i18next';
-import LanguageDetector from 'i18next-browser-languagedetector';
 
 import {
   DEFAULT_LOCALE,
@@ -21,17 +20,27 @@ import enNomination from '@/locales/en/nomination.json';
 import enDashboard from '@/locales/en/dashboard.json';
 
 import frCommon from '@/locales/fr/common.json';
+import frPages from '@/locales/fr/pages.json';
 import arCommon from '@/locales/ar/common.json';
+import arPages from '@/locales/ar/pages.json';
 import ptCommon from '@/locales/pt/common.json';
+import ptPages from '@/locales/pt/pages.json';
 import swCommon from '@/locales/sw/common.json';
+import swPages from '@/locales/sw/pages.json';
 import haCommon from '@/locales/ha/common.json';
+import haPages from '@/locales/ha/pages.json';
 import yoCommon from '@/locales/yo/common.json';
+import yoPages from '@/locales/yo/pages.json';
 import amCommon from '@/locales/am/common.json';
+import amPages from '@/locales/am/pages.json';
 import zuCommon from '@/locales/zu/common.json';
+import zuPages from '@/locales/zu/pages.json';
 import zhCommon from '@/locales/zh/common.json';
+import zhPages from '@/locales/zh/pages.json';
 import hiCommon from '@/locales/hi/common.json';
+import hiPages from '@/locales/hi/pages.json';
 
-// Build resources object
+// Build resources object with all translations
 const resources = {
   en: {
     common: enCommon,
@@ -41,89 +50,83 @@ const resources = {
   },
   fr: {
     common: frCommon,
-    pages: enPages, // Fallback to English
+    pages: frPages,
     nomination: enNomination,
     dashboard: enDashboard,
   },
   ar: {
     common: arCommon,
-    pages: enPages,
+    pages: arPages,
     nomination: enNomination,
     dashboard: enDashboard,
   },
   pt: {
     common: ptCommon,
-    pages: enPages,
+    pages: ptPages,
     nomination: enNomination,
     dashboard: enDashboard,
   },
   sw: {
     common: swCommon,
-    pages: enPages,
+    pages: swPages,
     nomination: enNomination,
     dashboard: enDashboard,
   },
   ha: {
     common: haCommon,
-    pages: enPages,
+    pages: haPages,
     nomination: enNomination,
     dashboard: enDashboard,
   },
   yo: {
     common: yoCommon,
-    pages: enPages,
+    pages: yoPages,
     nomination: enNomination,
     dashboard: enDashboard,
   },
   am: {
     common: amCommon,
-    pages: enPages,
+    pages: amPages,
     nomination: enNomination,
     dashboard: enDashboard,
   },
   zu: {
     common: zuCommon,
-    pages: enPages,
+    pages: zuPages,
     nomination: enNomination,
     dashboard: enDashboard,
   },
   zh: {
     common: zhCommon,
-    pages: enPages,
+    pages: zhPages,
     nomination: enNomination,
     dashboard: enDashboard,
   },
   hi: {
     common: hiCommon,
-    pages: enPages,
+    pages: hiPages,
     nomination: enNomination,
     dashboard: enDashboard,
   },
 };
 
-// Custom language detector that respects our locale priority
-const customDetector = {
-  name: 'nesaLocaleDetector',
-  lookup() {
-    // 1. Check localStorage
+// Get stored language or default
+const getInitialLanguage = (): string => {
+  if (typeof window !== 'undefined') {
     const stored = localStorage.getItem(LOCALE_STORAGE_KEY);
     if (stored && SUPPORTED_LOCALES.some(l => l.code === stored)) {
       return stored;
     }
-    return null;
-  },
-  cacheUserLanguage(lng: string) {
-    localStorage.setItem(LOCALE_STORAGE_KEY, lng);
-  },
+  }
+  return DEFAULT_LOCALE;
 };
 
 // Initialize i18n
 i18n
-  .use(LanguageDetector)
   .use(initReactI18next)
   .init({
     resources,
-    lng: localStorage.getItem(LOCALE_STORAGE_KEY) || DEFAULT_LOCALE,
+    lng: getInitialLanguage(),
     fallbackLng: DEFAULT_LOCALE,
     supportedLngs: SUPPORTED_LOCALES.map(l => l.code),
     
@@ -131,28 +134,14 @@ i18n
     ns: ['common', 'pages', 'nomination', 'dashboard'],
     defaultNS: 'common',
     
-    // Detection options
-    detection: {
-      order: ['localStorage', 'querystring', 'navigator'],
-      lookupQuerystring: 'lang',
-      lookupLocalStorage: LOCALE_STORAGE_KEY,
-      caches: ['localStorage'],
-    },
-    
     interpolation: {
       escapeValue: false, // React already escapes
     },
     
     react: {
-      useSuspense: false, // Disable suspense for SSR compatibility
-      bindI18n: 'languageChanged loaded', // Re-render on language change
-      bindI18nStore: 'added removed',
+      useSuspense: false,
     },
   });
-
-// Add custom detector
-const languageDetector = new LanguageDetector();
-languageDetector.addDetector(customDetector);
 
 export default i18n;
 
@@ -160,7 +149,7 @@ export default i18n;
  * Change the current language
  */
 export async function changeLanguage(locale: SupportedLocale): Promise<void> {
-  // Store in localStorage first
+  // Store in localStorage
   localStorage.setItem(LOCALE_STORAGE_KEY, locale);
   
   // Update document direction for RTL languages
@@ -170,7 +159,7 @@ export async function changeLanguage(locale: SupportedLocale): Promise<void> {
     document.documentElement.lang = locale;
   }
   
-  // Change the i18n language (this triggers re-render)
+  // Change the i18n language
   await i18n.changeLanguage(locale);
 }
 

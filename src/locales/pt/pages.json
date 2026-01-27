@@ -1,72 +1,21 @@
 {
   "landing": {
     "hero": {
-      "badge": "Votação Pública Agora Aberta",
-      "headline": "Homenageando os",
-      "headlineAccent": "Agentes de Mudança na Educação Africana",
-      "subheadline": "Defendendo e Alcançando Educação Para Todos na África",
-      "description": "O New Education Standard Award Africa ({{editionName}}) celebra líderes visionários, instituições e inovadores construindo o futuro da educação em toda a África.",
-      "discoverMore": "Descobrir Mais",
-      "nominateNow": "Nomear Agora"
-    }
-  },
-  "about": {
-    "hero": {
-      "badge": "Edição {{year}}",
-      "title": "Sobre",
-      "titleAccent": "NESA-Africa"
+      "badge": "Votação Pública Aberta",
+      "title": "Honrando os",
+      "titleHighlight": "Agentes de Mudança na Educação",
+      "tagline": "Defendendo Educação Para Todos na África",
+      "description": "O New Education Standard Award Africa ({{edition}}) celebra líderes, instituições e inovadores.",
+      "discoverMore": "Saiba Mais",
+      "nominateNow": "Nomear Agora",
+      "stats": { "nominees": "Nomeados", "countries": "Países", "categories": "Categorias" },
+      "quickNav": { "refer": "Indicar", "nominate": "Nomear", "vision": "Visão 2035", "tickets": "Ingressos", "watch": "Assistir" }
     },
-    "mission": {
-      "title": "Nossa Missão",
-      "description": "Reconhecer, validar e celebrar indivíduos, organizações e instituições que impulsionam a Educação Para Todos na África."
-    },
-    "pillars": {
-      "title": "Nossos Quatro Pilares",
-      "recognition": {
-        "title": "Reconhecimento",
-        "description": "Celebrando os campeões da educação africana através de prêmios baseados no mérito em 17 categorias."
-      },
-      "accountability": {
-        "title": "Responsabilidade",
-        "description": "Firewalls de governança garantem independência dos patrocinadores e integridade da votação."
-      },
-      "continentalReach": {
-        "title": "Alcance Continental",
-        "description": "Abordagem regional abrangendo todas as 5 regiões africanas mais Diáspora e Amigos da África."
-      },
-      "impact": {
-        "title": "Impacto",
-        "description": "Impulsionando a Educação Para Todos através de visibilidade, validação e engajamento voluntário."
-      }
-    }
-  },
-  "categories": {
-    "hero": {
-      "title": "17 Categorias de Prêmios Oficiais",
-      "description": "Celebrando a excelência em educação, responsabilidade corporativa, tecnologia e impacto social em todo o continente africano."
-    },
-    "cta": {
-      "title": "Pronto para Nomear?",
-      "description": "Reconheça a excelência na educação africana enviando uma nomeação hoje.",
-      "submitNomination": "Enviar Nomeação",
-      "viewNominees": "Ver Nomeados"
-    }
+    "stats": { "regions": "Regiões Africanas", "categories": "Categorias de Prémios", "subcategories": "Subcategorias" }
   },
   "auth": {
-    "login": {
-      "title": "Bem-vindo de Volta",
-      "description": "Entre para continuar celebrando a excelência africana",
-      "signIn": "Entrar"
-    },
-    "register": {
-      "title": "Junte-se ao NESA Africa",
-      "description": "Crie sua conta para nomear, votar e celebrar a excelência africana",
-      "createAccount": "Criar Conta"
-    }
+    "login": { "title": "Bem-vindo de Volta", "subtitle": "Entre para continuar", "email": "Email", "emailPlaceholder": "Digite seu email", "password": "Senha", "passwordPlaceholder": "Digite sua senha", "forgotPassword": "Esqueceu a senha?", "signIn": "Entrar", "signingIn": "Entrando...", "noAccount": "Não tem conta?", "createOne": "Crie uma", "welcomeBack": "Bem-vindo de volta!", "invalidCredentials": "Credenciais inválidas" },
+    "register": { "title": "Junte-se ao NESA Africa", "subtitle": "Crie sua conta", "fullName": "Nome Completo", "fullNamePlaceholder": "Digite seu nome", "email": "Email", "emailPlaceholder": "Digite seu email", "password": "Senha", "passwordPlaceholder": "Crie uma senha", "passwordHint": "Mínimo 6 caracteres", "referralCode": "Código de Indicação (Opcional)", "referralCodePlaceholder": "Digite o código", "referralBonus": "🎁 Vocês dois ganharão bônus!", "createAccount": "Criar Conta", "creatingAccount": "Criando conta...", "haveAccount": "Já tem conta?", "signIn": "Entrar", "successMessage": "Conta criada!", "failedMessage": "Falha ao criar conta" }
   },
-  "footer": {
-    "tagline": "Celebrando os Campeões da Educação Africana desde 2010",
-    "quickLinks": "Links Rápidos",
-    "getInTouch": "Entre em Contato"
-  }
+  "footer": { "tagline": "Celebrando Campeões da Educação desde 2010", "quickLinks": "Links Rápidos", "getInTouch": "Entre em Contato", "scefFoundation": "Fundação SCEF", "madeWith": "Feito com", "forEducation": "para a Educação Africana", "copyright": "© {{year}} SCEF", "links": { "home": "Início", "programs": "Programas", "categories": "Categorias", "nominate": "Nomear" } }
 }

@@ -2,105 +2,20 @@
   "landing": {
     "hero": {
       "badge": "التصويت العام مفتوح الآن",
-      "headline": "تكريم",
-      "headlineAccent": "صناع التغيير في التعليم الأفريقي",
-      "subheadline": "الدعوة وتحقيق التعليم للجميع في أفريقيا",
-      "description": "جائزة معيار التعليم الجديد أفريقيا ({{editionName}}) تحتفي بالقادة الرؤيويين والمؤسسات والمبتكرين الذين يبنون مستقبل التعليم عبر أفريقيا.",
+      "title": "تكريم",
+      "titleHighlight": "صناع التغيير في التعليم الأفريقي",
+      "tagline": "الدعوة وتحقيق التعليم للجميع في أفريقيا",
+      "description": "جائزة المعيار التعليمي الجديد أفريقيا ({{edition}}) تحتفي بالقادة الرؤيويين والمؤسسات والمبتكرين.",
       "discoverMore": "اكتشف المزيد",
-      "nominateNow": "رشّح الآن"
-    }
-  },
-  "about": {
-    "hero": {
-      "badge": "إصدار {{year}}",
-      "title": "حول",
-      "titleAccent": "نيسا-أفريقيا"
+      "nominateNow": "رشح الآن",
+      "stats": { "nominees": "المرشحون", "countries": "الدول", "categories": "الفئات" },
+      "quickNav": { "refer": "إحالة", "nominate": "ترشيح", "vision": "رؤية 2035", "tickets": "التذاكر", "watch": "مشاهدة" }
     },
-    "mission": {
-      "title": "مهمتنا",
-      "description": "الاعتراف والتحقق من والاحتفاء بالأفراد والمنظمات والمؤسسات التي تقود التعليم للجميع عبر أفريقيا."
-    },
-    "pillars": {
-      "title": "ركائزنا الأربع",
-      "recognition": {
-        "title": "التقدير",
-        "description": "الاحتفاء بأبطال التعليم الأفريقي من خلال جوائز قائمة على الجدارة في 17 فئة."
-      },
-      "accountability": {
-        "title": "المساءلة",
-        "description": "جدران الحماية الحوكمية تضمن استقلال الرعاة ونزاهة التصويت."
-      },
-      "continentalReach": {
-        "title": "الامتداد القاري",
-        "description": "نهج إقليمي يغطي المناطق الأفريقية الخمس بالإضافة إلى المغتربين وأصدقاء أفريقيا."
-      },
-      "impact": {
-        "title": "التأثير",
-        "description": "دفع التعليم للجميع من خلال الظهور والتحقق والمشاركة التطوعية."
-      }
-    }
-  },
-  "categories": {
-    "hero": {
-      "title": "17 فئة جائزة رسمية",
-      "description": "الاحتفاء بالتميز في التعليم والمسؤولية الاجتماعية للشركات والتكنولوجيا والأثر الاجتماعي عبر القارة الأفريقية."
-    },
-    "cta": {
-      "title": "هل أنت مستعد للترشيح؟",
-      "description": "اعترف بالتميز في التعليم الأفريقي بتقديم ترشيح اليوم.",
-      "submitNomination": "تقديم ترشيح",
-      "viewNominees": "عرض المرشحين"
-    }
-  },
-  "nominees": {
-    "hero": {
-      "badge": "دليل أبطال التعليم",
-      "title": "تعرف على",
-      "titleAccent": "مرشحينا",
-      "description": "اكتشف المعلمين والمبتكرين والمؤسسات الرائعة التي تحول التعليم عبر أفريقيا."
-    }
-  },
-  "vote": {
-    "hero": {
-      "badge": "التصويت العام",
-      "title": "صوّت لـ",
-      "titleAccent": "أبطال التعليم في أفريقيا",
-      "description": "صوتك يساعد في الاعتراف والاحتفاء بالأفراد والمنظمات المتميزة التي تحول التعليم عبر القارة."
-    }
-  },
-  "contact": {
-    "hero": {
-      "badge": "تواصل معنا",
-      "title": "اتصل بـ",
-      "titleAccent": "نيسا-أفريقيا",
-      "description": "لديك أسئلة حول الترشيحات أو الشراكات أو تريد المشاركة؟ نحن هنا للمساعدة."
-    }
+    "stats": { "regions": "المناطق الأفريقية", "categories": "فئات الجوائز", "subcategories": "الفئات الفرعية" }
   },
   "auth": {
-    "login": {
-      "title": "مرحباً بعودتك",
-      "description": "سجّل دخولك لمواصلة الاحتفاء بالتميز الأفريقي",
-      "email": "البريد الإلكتروني",
-      "password": "كلمة المرور",
-      "forgotPassword": "نسيت كلمة المرور؟",
-      "signIn": "تسجيل الدخول",
-      "noAccount": "ليس لديك حساب؟",
-      "createOne": "أنشئ واحداً"
-    },
-    "register": {
-      "title": "انضم إلى نيسا أفريقيا",
-      "description": "أنشئ حسابك للترشيح والتصويت والاحتفاء بالتميز الأفريقي",
-      "fullName": "الاسم الكامل",
-      "createAccount": "إنشاء حساب",
-      "hasAccount": "لديك حساب بالفعل؟",
-      "signIn": "تسجيل الدخول"
-    }
+    "login": { "title": "مرحباً بعودتك", "subtitle": "سجل الدخول لمواصلة الاحتفاء", "email": "البريد الإلكتروني", "emailPlaceholder": "أدخل بريدك", "password": "كلمة المرور", "passwordPlaceholder": "أدخل كلمة المرور", "forgotPassword": "نسيت كلمة المرور؟", "signIn": "تسجيل الدخول", "signingIn": "جاري الدخول...", "noAccount": "ليس لديك حساب؟", "createOne": "أنشئ حساباً", "welcomeBack": "مرحباً بعودتك!", "invalidCredentials": "بيانات غير صحيحة" },
+    "register": { "title": "انضم إلى NESA Africa", "subtitle": "أنشئ حسابك", "fullName": "الاسم الكامل", "fullNamePlaceholder": "أدخل اسمك", "email": "البريد الإلكتروني", "emailPlaceholder": "أدخل بريدك", "password": "كلمة المرور", "passwordPlaceholder": "أنشئ كلمة مرور", "passwordHint": "6 أحرف على الأقل", "referralCode": "رمز الإحالة (اختياري)", "referralCodePlaceholder": "أدخل الرمز", "referralBonus": "🎁 ستحصلان على مكافأة!", "createAccount": "إنشاء حساب", "creatingAccount": "جاري الإنشاء...", "haveAccount": "لديك حساب؟", "signIn": "سجل الدخول", "successMessage": "تم إنشاء الحساب!", "failedMessage": "فشل الإنشاء" }
   },
-  "footer": {
-    "tagline": "الاحتفاء بأبطال التعليم الأفريقي منذ 2010",
-    "quickLinks": "روابط سريعة",
-    "getInTouch": "تواصل معنا",
-    "madeWith": "صُنع بـ",
-    "forAfricanEducation": "من أجل التعليم الأفريقي"
-  }
+  "footer": { "tagline": "الاحتفاء بأبطال التعليم منذ 2010", "quickLinks": "روابط سريعة", "getInTouch": "تواصل معنا", "scefFoundation": "مؤسسة SCEF", "madeWith": "صنع بـ", "forEducation": "للتعليم الأفريقي", "copyright": "© {{year}} SCEF", "links": { "home": "الرئيسية", "programs": "البرامج", "categories": "الفئات", "nominate": "ترشيح" } }
 }

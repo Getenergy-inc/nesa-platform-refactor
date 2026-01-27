@@ -1,106 +1,21 @@
 {
   "landing": {
     "hero": {
-      "badge": "公众投票现已开放",
-      "headline": "表彰非洲的",
-      "headlineAccent": "教育变革者",
-      "subheadline": "倡导并实现非洲全民教育",
-      "description": "非洲新教育标准奖 ({{editionName}}) 表彰正在构建非洲教育未来的有远见的领导者、机构和创新者。",
+      "badge": "公开投票现已开放",
+      "title": "表彰非洲",
+      "titleHighlight": "教育变革者",
+      "tagline": "倡导并实现全民教育在非洲",
+      "description": "新教育标准非洲奖 ({{edition}}) 表彰在非洲各地构建教育未来的领导者和创新者。",
       "discoverMore": "了解更多",
-      "nominateNow": "立即提名"
-    }
-  },
-  "about": {
-    "hero": {
-      "badge": "{{year}} 版",
-      "title": "关于",
-      "titleAccent": "NESA-Africa"
+      "nominateNow": "立即提名",
+      "stats": { "nominees": "提名者", "countries": "国家", "categories": "类别" },
+      "quickNav": { "refer": "推荐", "nominate": "提名", "vision": "2035愿景", "tickets": "门票", "watch": "观看" }
     },
-    "mission": {
-      "title": "我们的使命",
-      "description": "认可、验证和表彰推动非洲全民教育的个人、组织和机构。"
-    },
-    "pillars": {
-      "title": "我们的四大支柱",
-      "recognition": {
-        "title": "认可",
-        "description": "通过17个类别的基于绩效的奖项表彰非洲教育冠军。"
-      },
-      "accountability": {
-        "title": "问责",
-        "description": "治理级防火墙确保赞助商独立性和投票完整性。"
-      },
-      "continentalReach": {
-        "title": "大陆覆盖",
-        "description": "区域优先方法覆盖所有5个非洲地区以及海外侨民和非洲之友。"
-      },
-      "impact": {
-        "title": "影响",
-        "description": "通过可见性、验证和志愿者参与推动全民教育。"
-      }
-    }
-  },
-  "categories": {
-    "hero": {
-      "title": "17个官方奖项类别",
-      "description": "表彰非洲大陆在教育、企业社会责任、技术和社会影响方面的卓越成就。"
-    },
-    "cta": {
-      "title": "准备提名了吗？",
-      "description": "今天就提交提名，认可非洲教育的卓越成就。",
-      "submitNomination": "提交提名",
-      "viewNominees": "查看提名者"
-    }
-  },
-  "nominees": {
-    "hero": {
-      "badge": "教育冠军目录",
-      "title": "认识我们的",
-      "titleAccent": "提名者",
-      "description": "发现正在改变非洲教育的杰出教育工作者、创新者和机构。"
-    }
-  },
-  "vote": {
-    "hero": {
-      "badge": "公众投票",
-      "title": "为非洲的",
-      "titleAccent": "教育冠军投票",
-      "description": "您的投票有助于认可和表彰正在改变整个非洲大陆教育的杰出个人和组织。"
-    }
-  },
-  "contact": {
-    "hero": {
-      "badge": "联系我们",
-      "title": "联系",
-      "titleAccent": "NESA-Africa",
-      "description": "有关于提名、合作伙伴关系的问题，或想参与其中？我们随时为您提供帮助。"
-    }
+    "stats": { "regions": "非洲地区", "categories": "奖项类别", "subcategories": "子类别" }
   },
   "auth": {
-    "login": {
-      "title": "欢迎回来",
-      "description": "登录以继续庆祝非洲卓越成就",
-      "email": "电子邮件",
-      "password": "密码",
-      "forgotPassword": "忘记密码？",
-      "signIn": "登录",
-      "noAccount": "没有账户？",
-      "createOne": "创建一个"
-    },
-    "register": {
-      "title": "加入 NESA Africa",
-      "description": "创建您的账户以提名、投票并庆祝非洲卓越成就",
-      "fullName": "全名",
-      "createAccount": "创建账户",
-      "hasAccount": "已有账户？",
-      "signIn": "登录"
-    }
+    "login": { "title": "欢迎回来", "subtitle": "登录以继续", "email": "电子邮件", "emailPlaceholder": "输入邮箱", "password": "密码", "passwordPlaceholder": "输入密码", "forgotPassword": "忘记密码？", "signIn": "登录", "signingIn": "登录中...", "noAccount": "没有账户？", "createOne": "创建一个", "welcomeBack": "欢迎回来！", "invalidCredentials": "凭据无效" },
+    "register": { "title": "加入NESA Africa", "subtitle": "创建账户", "fullName": "全名", "fullNamePlaceholder": "输入姓名", "email": "电子邮件", "emailPlaceholder": "输入邮箱", "password": "密码", "passwordPlaceholder": "创建密码", "passwordHint": "至少6个字符", "referralCode": "推荐码（可选）", "referralCodePlaceholder": "输入推荐码", "referralBonus": "🎁 双方都将获得奖励！", "createAccount": "创建账户", "creatingAccount": "创建中...", "haveAccount": "已有账户？", "signIn": "登录", "successMessage": "账户创建成功！", "failedMessage": "创建失败" }
   },
-  "footer": {
-    "tagline": "自2010年起表彰非洲教育冠军",
-    "quickLinks": "快速链接",
-    "getInTouch": "联系我们",
-    "madeWith": "用",
-    "forAfricanEducation": "为非洲教育制作"
-  }
+  "footer": { "tagline": "自2010年以来庆祝非洲教育冠军", "quickLinks": "快速链接", "getInTouch": "联系我们", "scefFoundation": "SCEF基金会", "madeWith": "用", "forEducation": "为非洲教育制作", "copyright": "© {{year}} SCEF", "links": { "home": "首页", "programs": "项目", "categories": "类别", "nominate": "提名" } }
 }
