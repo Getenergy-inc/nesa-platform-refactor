@@ -1,0 +1,72 @@
+{
+  "landing": {
+    "hero": {
+      "badge": "Kupiga Kura kwa Umma Kumefunguliwa Sasa",
+      "headline": "Kutoa Heshima kwa",
+      "headlineAccent": "Waletaji wa Mabadiliko ya Elimu Afrika",
+      "subheadline": "Kutetea na Kufikia Elimu kwa Wote Afrika",
+      "description": "Tuzo ya Kiwango Kipya cha Elimu Afrika ({{editionName}}) inasherehekea viongozi wenye maono, taasisi na wabunifu wanaojenga mustakabali wa elimu kote Afrika.",
+      "discoverMore": "Gundua Zaidi",
+      "nominateNow": "Teua Sasa"
+    }
+  },
+  "about": {
+    "hero": {
+      "badge": "Toleo la {{year}}",
+      "title": "Kuhusu",
+      "titleAccent": "NESA-Afrika"
+    },
+    "mission": {
+      "title": "Dhamira Yetu",
+      "description": "Kutambua, kuthibitisha na kusherehekea watu binafsi, mashirika na taasisi zinazoendeleza Elimu kwa Wote kote Afrika."
+    },
+    "pillars": {
+      "title": "Nguzo Zetu Nne",
+      "recognition": {
+        "title": "Utambuzi",
+        "description": "Kusherehekea mabingwa wa elimu wa Afrika kupitia tuzo zinazotegemea sifa katika makundi 17."
+      },
+      "accountability": {
+        "title": "Uwajibikaji",
+        "description": "Firewall za utawala zinahakikisha uhuru wa wadhamini na uadilifu wa kupiga kura."
+      },
+      "continentalReach": {
+        "title": "Ufikiaji wa Bara",
+        "description": "Mbinu ya kikanda kwanza inayofunika mikoa yote 5 ya Afrika pamoja na Diaspora na Marafiki wa Afrika."
+      },
+      "impact": {
+        "title": "Athari",
+        "description": "Kuendeleza Elimu kwa Wote kupitia uonekano, uthibitisho na ushiriki wa kujitolea."
+      }
+    }
+  },
+  "categories": {
+    "hero": {
+      "title": "Makundi 17 ya Tuzo Rasmi",
+      "description": "Kusherehekea ubora katika elimu, wajibu wa kijamii wa kampuni, teknolojia na athari za kijamii kote bara la Afrika."
+    },
+    "cta": {
+      "title": "Uko Tayari Kuteua?",
+      "description": "Tambua ubora katika elimu ya Afrika kwa kuwasilisha uteuzi leo.",
+      "submitNomination": "Wasilisha Uteuzi",
+      "viewNominees": "Tazama Walioteulwa"
+    }
+  },
+  "auth": {
+    "login": {
+      "title": "Karibu Tena",
+      "description": "Ingia ili kuendelea kusherehekea ubora wa Afrika",
+      "signIn": "Ingia"
+    },
+    "register": {
+      "title": "Jiunge na NESA Afrika",
+      "description": "Unda akaunti yako kuteua, kupiga kura na kusherehekea ubora wa Afrika",
+      "createAccount": "Unda Akaunti"
+    }
+  },
+  "footer": {
+    "tagline": "Kusherehekea Mabingwa wa Elimu wa Afrika tangu 2010",
+    "quickLinks": "Viungo vya Haraka",
+    "getInTouch": "Wasiliana Nasi"
+  }
+}

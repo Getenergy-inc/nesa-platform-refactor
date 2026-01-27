@@ -1,0 +1,72 @@
+{
+  "landing": {
+    "hero": {
+      "badge": "Votação Pública Agora Aberta",
+      "headline": "Homenageando os",
+      "headlineAccent": "Agentes de Mudança na Educação Africana",
+      "subheadline": "Defendendo e Alcançando Educação Para Todos na África",
+      "description": "O New Education Standard Award Africa ({{editionName}}) celebra líderes visionários, instituições e inovadores construindo o futuro da educação em toda a África.",
+      "discoverMore": "Descobrir Mais",
+      "nominateNow": "Nomear Agora"
+    }
+  },
+  "about": {
+    "hero": {
+      "badge": "Edição {{year}}",
+      "title": "Sobre",
+      "titleAccent": "NESA-Africa"
+    },
+    "mission": {
+      "title": "Nossa Missão",
+      "description": "Reconhecer, validar e celebrar indivíduos, organizações e instituições que impulsionam a Educação Para Todos na África."
+    },
+    "pillars": {
+      "title": "Nossos Quatro Pilares",
+      "recognition": {
+        "title": "Reconhecimento",
+        "description": "Celebrando os campeões da educação africana através de prêmios baseados no mérito em 17 categorias."
+      },
+      "accountability": {
+        "title": "Responsabilidade",
+        "description": "Firewalls de governança garantem independência dos patrocinadores e integridade da votação."
+      },
+      "continentalReach": {
+        "title": "Alcance Continental",
+        "description": "Abordagem regional abrangendo todas as 5 regiões africanas mais Diáspora e Amigos da África."
+      },
+      "impact": {
+        "title": "Impacto",
+        "description": "Impulsionando a Educação Para Todos através de visibilidade, validação e engajamento voluntário."
+      }
+    }
+  },
+  "categories": {
+    "hero": {
+      "title": "17 Categorias de Prêmios Oficiais",
+      "description": "Celebrando a excelência em educação, responsabilidade corporativa, tecnologia e impacto social em todo o continente africano."
+    },
+    "cta": {
+      "title": "Pronto para Nomear?",
+      "description": "Reconheça a excelência na educação africana enviando uma nomeação hoje.",
+      "submitNomination": "Enviar Nomeação",
+      "viewNominees": "Ver Nomeados"
+    }
+  },
+  "auth": {
+    "login": {
+      "title": "Bem-vindo de Volta",
+      "description": "Entre para continuar celebrando a excelência africana",
+      "signIn": "Entrar"
+    },
+    "register": {
+      "title": "Junte-se ao NESA Africa",
+      "description": "Crie sua conta para nomear, votar e celebrar a excelência africana",
+      "createAccount": "Criar Conta"
+    }
+  },
+  "footer": {
+    "tagline": "Celebrando os Campeões da Educação Africana desde 2010",
+    "quickLinks": "Links Rápidos",
+    "getInTouch": "Entre em Contato"
+  }
+}
