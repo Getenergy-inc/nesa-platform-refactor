@@ -1,21 +1,23 @@
 import { Trophy, Users, Award, FileText, Ticket, PlayCircle, Sparkles, ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import { Button } from "@/components/ui/button";
 import { useSeason } from "@/contexts/SeasonContext";
 import { NESALogo } from "@/components/nesa/NESALogo";
 import stageBackdrop from "@/assets/nesa-stage-backdrop.jpg";
 
-const quickNavItems = [
-  { icon: Users, label: "Refer", href: "#refer" },
-  { icon: Award, label: "Nominate", href: "/nominate" },
-  { icon: FileText, label: "Vision 2035", href: "/about/vision-2035" },
-  { icon: Ticket, label: "Tickets", href: "/tickets" },
-  { icon: PlayCircle, label: "Watch", href: "/media/tv" },
-];
-
 export function NESAHero() {
+  const { t } = useTranslation("pages");
   const { currentEdition, getBannerText } = useSeason();
   const bannerText = getBannerText();
+
+  const quickNavItems = [
+    { icon: Users, label: t("landing.hero.quickNav.refer"), href: "#refer" },
+    { icon: Award, label: t("landing.hero.quickNav.nominate"), href: "/nominate" },
+    { icon: FileText, label: t("landing.hero.quickNav.vision"), href: "/about/vision-2035" },
+    { icon: Ticket, label: t("landing.hero.quickNav.tickets"), href: "/tickets" },
+    { icon: PlayCircle, label: t("landing.hero.quickNav.watch"), href: "/media/tv" },
+  ];
 
   return (
     <section className="relative min-h-[85vh] sm:min-h-[90vh] flex flex-col bg-charcoal overflow-hidden">
@@ -74,19 +76,18 @@ export function NESAHero() {
 
         {/* Headline - Elegant with gold accent */}
         <h1 className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-white mb-3 sm:mb-4 max-w-4xl leading-tight px-2 animate-fade-in" style={{ animationDelay: '0.2s' }}>
-          Honoring Africa's{" "}
-          <span className="text-gold">Education Changemakers</span>
+          {t("landing.hero.title")}{" "}
+          <span className="text-gold">{t("landing.hero.titleHighlight")}</span>
         </h1>
 
         {/* Subheadline - Clean and impactful */}
         <p className="text-lg sm:text-xl md:text-2xl font-medium text-gold/90 mb-4 sm:mb-6 max-w-2xl px-4 animate-fade-in" style={{ animationDelay: '0.3s' }}>
-          Advocating & Achieving Education For All In Africa
+          {t("landing.hero.tagline")}
         </p>
 
         {/* Description - Professional tone */}
         <p className="text-white/75 text-sm sm:text-base md:text-lg max-w-3xl mb-8 sm:mb-10 leading-relaxed px-4 sm:px-6 animate-fade-in" style={{ animationDelay: '0.4s' }}>
-          The New Education Standard Award Africa ({currentEdition.name}) celebrates 
-          visionary leaders, institutions, and innovators building the future of education across Africa.
+          {t("landing.hero.description", { edition: currentEdition.name })}
         </p>
 
         {/* CTA Buttons - Sophisticated hover effects */}
@@ -96,7 +97,7 @@ export function NESAHero() {
               size="lg"
               className="w-full sm:w-auto bg-gold hover:bg-gold-dark text-charcoal font-semibold rounded-full px-6 sm:px-8 gap-2 shadow-lg hover:shadow-gold/30 min-h-[48px] touch-manipulation transition-all duration-300"
             >
-              Discover More
+              {t("landing.hero.discoverMore")}
               <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
             </Button>
           </Link>
@@ -107,7 +108,7 @@ export function NESAHero() {
               className="w-full sm:w-auto border-2 border-gold text-gold hover:bg-gold/10 hover:border-gold-light rounded-full px-6 sm:px-8 gap-2 min-h-[48px] touch-manipulation transition-all duration-300"
             >
               <Trophy className="h-4 w-4" />
-              Nominate Now
+              {t("landing.hero.nominateNow")}
             </Button>
           </Link>
         </div>
@@ -115,9 +116,9 @@ export function NESAHero() {
         {/* Stats preview - Clean and professional */}
         <div className="flex flex-wrap justify-center gap-4 sm:gap-8 mt-8 sm:mt-10 animate-fade-in" style={{ animationDelay: '0.6s' }}>
           {[
-            { label: "Nominees", value: "2,500+" },
-            { label: "Countries", value: "54" },
-            { label: "Categories", value: "17" },
+            { label: t("landing.hero.stats.nominees"), value: "2,500+" },
+            { label: t("landing.hero.stats.countries"), value: "54" },
+            { label: t("landing.hero.stats.categories"), value: "17" },
           ].map((stat, i) => (
             <div 
               key={stat.label}

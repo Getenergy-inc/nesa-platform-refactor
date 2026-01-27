@@ -1,12 +1,15 @@
 import { motion } from "framer-motion";
-
-const stats = [
-  { value: "5", label: "African Regions", color: "text-gold" },
-  { value: "17", label: "Award Categories", color: "text-gold" },
-  { value: "141+", label: "Sub-Categories", color: "text-gold" },
-];
+import { useTranslation } from "react-i18next";
 
 export function StatsStrip() {
+  const { t } = useTranslation("pages");
+  
+  const stats = [
+    { value: "5", label: t("landing.stats.regions"), color: "text-gold" },
+    { value: "17", label: t("landing.stats.categories"), color: "text-gold" },
+    { value: "141+", label: t("landing.stats.subcategories"), color: "text-gold" },
+  ];
+
   return (
     <section className="bg-charcoal border-y border-gold/20 py-12 overflow-hidden">
       <div className="container">

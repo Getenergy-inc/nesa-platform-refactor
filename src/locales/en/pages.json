@@ -2,10 +2,10 @@
   "landing": {
     "hero": {
       "badge": "Public Voting Now Open",
-      "headline": "Honoring Africa's",
-      "headlineAccent": "Education Changemakers",
-      "subheadline": "Advocating & Achieving Education For All In Africa",
-      "description": "The New Education Standard Award Africa ({{editionName}}) celebrates visionary leaders, institutions, and innovators building the future of education across Africa.",
+      "title": "Honoring Africa's",
+      "titleHighlight": "Education Changemakers",
+      "tagline": "Advocating & Achieving Education For All In Africa",
+      "description": "The New Education Standard Award Africa ({{edition}}) celebrates visionary leaders, institutions, and innovators building the future of education across Africa.",
       "discoverMore": "Discover More",
       "nominateNow": "Nominate Now",
       "stats": {
@@ -16,15 +16,15 @@
       "quickNav": {
         "refer": "Refer",
         "nominate": "Nominate",
-        "vision2035": "Vision 2035",
+        "vision": "Vision 2035",
         "tickets": "Tickets",
         "watch": "Watch"
       }
     },
     "stats": {
-      "africanRegions": "African Regions",
-      "awardCategories": "Award Categories",
-      "subCategories": "Sub-Categories"
+      "regions": "African Regions",
+      "categories": "Award Categories",
+      "subcategories": "Sub-Categories"
     },
     "watchLive": {
       "title": "Watch Live",
@@ -335,32 +335,38 @@
   "auth": {
     "login": {
       "title": "Welcome Back",
-      "description": "Sign in to continue celebrating African excellence",
+      "subtitle": "Sign in to continue celebrating African excellence",
       "email": "Email",
+      "emailPlaceholder": "Enter your email",
       "password": "Password",
+      "passwordPlaceholder": "Enter your password",
       "forgotPassword": "Forgot password?",
       "signIn": "Sign In",
       "signingIn": "Signing in...",
       "noAccount": "Don't have an account?",
       "createOne": "Create one",
-      "success": "Welcome back to NESA Africa!",
-      "error": "Invalid credentials"
+      "welcomeBack": "Welcome back to NESA Africa!",
+      "invalidCredentials": "Invalid credentials"
     },
     "register": {
       "title": "Join NESA Africa",
-      "description": "Create your account to nominate, vote, and celebrate African excellence",
+      "subtitle": "Create your account to nominate, vote, and celebrate African excellence",
       "fullName": "Full Name",
+      "fullNamePlaceholder": "Enter your full name",
       "email": "Email",
+      "emailPlaceholder": "Enter your email",
       "password": "Password",
+      "passwordPlaceholder": "Create a password",
       "passwordHint": "Minimum 6 characters",
       "referralCode": "Referral Code (Optional)",
+      "referralCodePlaceholder": "Enter referral code",
       "referralBonus": "🎁 You'll both earn bonus AGC!",
       "createAccount": "Create Account",
       "creatingAccount": "Creating account...",
-      "hasAccount": "Already have an account?",
+      "haveAccount": "Already have an account?",
       "signIn": "Sign in",
-      "success": "Account created successfully! Welcome to NESA Africa.",
-      "error": "Failed to create account"
+      "successMessage": "Account created successfully! Welcome to NESA Africa.",
+      "failedMessage": "Failed to create account"
     }
   },
   "nominate": {
@@ -393,7 +399,13 @@
     "getInTouch": "Get in Touch",
     "scefFoundation": "SCEF Foundation",
     "madeWith": "Made with",
-    "forAfricanEducation": "for African Education",
-    "copyright": "© {{year}} Santa Claus Educational Foundation"
+    "forEducation": "for African Education",
+    "copyright": "© {{year}} Santa Claus Educational Foundation",
+    "links": {
+      "home": "Home",
+      "programs": "Programs",
+      "categories": "Categories",
+      "nominate": "Nominate"
+    }
   }
 }

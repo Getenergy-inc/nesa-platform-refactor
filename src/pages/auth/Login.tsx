@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import { useAuth } from "@/contexts/AuthContext";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -10,6 +11,7 @@ import { Award, Mail, Lock, Home, Trophy, Users, Play } from "lucide-react";
 import { NESALogo } from "@/components/nesa/NESALogo";
 
 export default function Login() {
+  const { t } = useTranslation("pages");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
@@ -22,10 +24,10 @@ export default function Login() {
 
     try {
       await signIn(email, password);
-      toast.success("Welcome back to NESA Africa!");
+      toast.success(t("auth.login.welcomeBack"));
       navigate("/dashboard");
     } catch (error: any) {
-      toast.error(error.message || "Invalid credentials");
+      toast.error(error.message || t("auth.login.invalidCredentials"));
     } finally {
       setLoading(false);
     }
@@ -75,21 +77,21 @@ export default function Login() {
           <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-gradient-gold shadow-gold">
             <Award className="h-8 w-8 text-secondary" />
           </div>
-          <CardTitle className="font-display text-2xl">Welcome Back</CardTitle>
+          <CardTitle className="font-display text-2xl">{t("auth.login.title")}</CardTitle>
           <CardDescription>
-            Sign in to continue celebrating African excellence
+            {t("auth.login.subtitle")}
           </CardDescription>
         </CardHeader>
         <form onSubmit={handleSubmit}>
           <CardContent className="space-y-4">
             <div className="space-y-2">
-              <Label htmlFor="email">Email</Label>
+              <Label htmlFor="email">{t("auth.login.email")}</Label>
               <div className="relative">
                 <Mail className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
                 <Input
                   id="email"
                   type="email"
-                  placeholder="Enter your email"
+                  placeholder={t("auth.login.emailPlaceholder")}
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   required
@@ -99,12 +101,12 @@ export default function Login() {
             </div>
             <div className="space-y-2">
               <div className="flex items-center justify-between">
-                <Label htmlFor="password">Password</Label>
+                <Label htmlFor="password">{t("auth.login.password")}</Label>
                 <Link
                   to="/forgot-password"
                   className="text-xs text-primary hover:underline"
                 >
-                  Forgot password?
+                  {t("auth.login.forgotPassword")}
                 </Link>
               </div>
               <div className="relative">
@@ -112,7 +114,7 @@ export default function Login() {
                 <Input
                   id="password"
                   type="password"
-                  placeholder="Enter your password"
+                  placeholder={t("auth.login.passwordPlaceholder")}
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   required
@@ -127,12 +129,12 @@ export default function Login() {
               className="w-full bg-gradient-gold text-secondary font-semibold hover:opacity-90 shadow-gold"
               disabled={loading}
             >
-              {loading ? "Signing in..." : "Sign In"}
+              {loading ? t("auth.login.signingIn") : t("auth.login.signIn")}
             </Button>
             <p className="text-center text-sm text-muted-foreground">
-              Don't have an account?{" "}
+              {t("auth.login.noAccount")}{" "}
               <Link to="/register" className="font-medium text-primary hover:underline">
-                Create one
+                {t("auth.login.createOne")}
               </Link>
             </p>
           </CardFooter>
