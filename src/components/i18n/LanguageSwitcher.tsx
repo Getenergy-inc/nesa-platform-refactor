@@ -28,14 +28,14 @@ interface LanguageSwitcherProps {
 }
 
 export function LanguageSwitcher({ variant = 'default', className }: LanguageSwitcherProps) {
-  const { t } = useTranslation();
+  const { i18n } = useTranslation();
   const [isOpen, setIsOpen] = useState(false);
   const currentLocale = getCurrentLanguage();
   const currentConfig = getLocaleConfig(currentLocale);
 
   const handleLanguageChange = async (locale: SupportedLocale) => {
-    await changeLanguage(locale);
     setIsOpen(false);
+    await changeLanguage(locale);
   };
 
   return (
@@ -66,7 +66,7 @@ export function LanguageSwitcher({ variant = 'default', className }: LanguageSwi
         <ScrollArea className="h-80">
           <div className="p-2">
             <p className="px-2 py-1.5 text-xs font-medium text-white/50">
-              {t('language.selectLanguage')}
+              Select Language
             </p>
             {SUPPORTED_LOCALES.map((locale) => (
               <DropdownMenuItem
@@ -75,7 +75,7 @@ export function LanguageSwitcher({ variant = 'default', className }: LanguageSwi
                 className={cn(
                   'flex items-center gap-3 px-2 py-2 cursor-pointer rounded-md',
                   'text-white hover:bg-gold/10 focus:bg-gold/10',
-                  currentLocale === locale.code && 'bg-gold/5'
+                  i18n.language === locale.code && 'bg-gold/5'
                 )}
               >
                 <span className="text-lg">{locale.flag}</span>
@@ -83,7 +83,7 @@ export function LanguageSwitcher({ variant = 'default', className }: LanguageSwi
                   <p className="text-sm font-medium">{locale.nativeLabel}</p>
                   <p className="text-xs text-white/50">{locale.label}</p>
                 </div>
-                {currentLocale === locale.code && (
+                {i18n.language === locale.code && (
                   <Check className="h-4 w-4 text-gold" />
                 )}
               </DropdownMenuItem>
