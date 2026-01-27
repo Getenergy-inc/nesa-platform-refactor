@@ -1,0 +1,49 @@
+{
+  "landing": {
+    "hero": {
+      "badge": "Jefa Kuri'a na Jama'a Yanzu a Buɗe",
+      "headline": "Girmama",
+      "headlineAccent": "Masu Canza Ilimi a Afirka",
+      "subheadline": "Kare da Cimma Ilimi ga Kowa a Afirka",
+      "description": "Kyautar Ma'aunin Ilimi Sabuwa ta Afirka ({{editionName}}) tana murnar shugabanni masu hangen nesa, cibiyoyi da masu kirkirar abubuwa da ke gina makomar ilimi a duk fadin Afirka.",
+      "discoverMore": "Gano Ƙari",
+      "nominateNow": "Tsaya Yanzu"
+    }
+  },
+  "about": {
+    "hero": {
+      "badge": "Bugu na {{year}}",
+      "title": "Game da",
+      "titleAccent": "NESA-Afirka"
+    },
+    "mission": {
+      "title": "Manufarmu",
+      "description": "Gane, tabbatar da murnar mutane, ƙungiyoyi da cibiyoyin da ke haɓaka Ilimi ga Kowa a duk fadin Afirka."
+    }
+  },
+  "categories": {
+    "hero": {
+      "title": "Rukuni 17 na Kyaututtuka na Hukuma",
+      "description": "Murnar nagarta a ilimi, alhakin kamfani, fasaha da tasirin zamantakewa a duk nahiyar Afirka."
+    },
+    "cta": {
+      "title": "Kuna Shirye Tsayar?",
+      "submitNomination": "Aika Tsayawa",
+      "viewNominees": "Duba Wadanda Aka Tsaya"
+    }
+  },
+  "auth": {
+    "login": {
+      "title": "Barka da Dawowa",
+      "signIn": "Shiga"
+    },
+    "register": {
+      "title": "Shiga NESA Afirka",
+      "createAccount": "Ƙirƙiri Asusu"
+    }
+  },
+  "footer": {
+    "tagline": "Murnar Zakaru na Ilimi na Afirka tun 2010",
+    "quickLinks": "Hanyoyin Sauri"
+  }
+}

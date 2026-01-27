@@ -1,0 +1,106 @@
+{
+  "landing": {
+    "hero": {
+      "badge": "公众投票现已开放",
+      "headline": "表彰非洲的",
+      "headlineAccent": "教育变革者",
+      "subheadline": "倡导并实现非洲全民教育",
+      "description": "非洲新教育标准奖 ({{editionName}}) 表彰正在构建非洲教育未来的有远见的领导者、机构和创新者。",
+      "discoverMore": "了解更多",
+      "nominateNow": "立即提名"
+    }
+  },
+  "about": {
+    "hero": {
+      "badge": "{{year}} 版",
+      "title": "关于",
+      "titleAccent": "NESA-Africa"
+    },
+    "mission": {
+      "title": "我们的使命",
+      "description": "认可、验证和表彰推动非洲全民教育的个人、组织和机构。"
+    },
+    "pillars": {
+      "title": "我们的四大支柱",
+      "recognition": {
+        "title": "认可",
+        "description": "通过17个类别的基于绩效的奖项表彰非洲教育冠军。"
+      },
+      "accountability": {
+        "title": "问责",
+        "description": "治理级防火墙确保赞助商独立性和投票完整性。"
+      },
+      "continentalReach": {
+        "title": "大陆覆盖",
+        "description": "区域优先方法覆盖所有5个非洲地区以及海外侨民和非洲之友。"
+      },
+      "impact": {
+        "title": "影响",
+        "description": "通过可见性、验证和志愿者参与推动全民教育。"
+      }
+    }
+  },
+  "categories": {
+    "hero": {
+      "title": "17个官方奖项类别",
+      "description": "表彰非洲大陆在教育、企业社会责任、技术和社会影响方面的卓越成就。"
+    },
+    "cta": {
+      "title": "准备提名了吗？",
+      "description": "今天就提交提名，认可非洲教育的卓越成就。",
+      "submitNomination": "提交提名",
+      "viewNominees": "查看提名者"
+    }
+  },
+  "nominees": {
+    "hero": {
+      "badge": "教育冠军目录",
+      "title": "认识我们的",
+      "titleAccent": "提名者",
+      "description": "发现正在改变非洲教育的杰出教育工作者、创新者和机构。"
+    }
+  },
+  "vote": {
+    "hero": {
+      "badge": "公众投票",
+      "title": "为非洲的",
+      "titleAccent": "教育冠军投票",
+      "description": "您的投票有助于认可和表彰正在改变整个非洲大陆教育的杰出个人和组织。"
+    }
+  },
+  "contact": {
+    "hero": {
+      "badge": "联系我们",
+      "title": "联系",
+      "titleAccent": "NESA-Africa",
+      "description": "有关于提名、合作伙伴关系的问题，或想参与其中？我们随时为您提供帮助。"
+    }
+  },
+  "auth": {
+    "login": {
+      "title": "欢迎回来",
+      "description": "登录以继续庆祝非洲卓越成就",
+      "email": "电子邮件",
+      "password": "密码",
+      "forgotPassword": "忘记密码？",
+      "signIn": "登录",
+      "noAccount": "没有账户？",
+      "createOne": "创建一个"
+    },
+    "register": {
+      "title": "加入 NESA Africa",
+      "description": "创建您的账户以提名、投票并庆祝非洲卓越成就",
+      "fullName": "全名",
+      "createAccount": "创建账户",
+      "hasAccount": "已有账户？",
+      "signIn": "登录"
+    }
+  },
+  "footer": {
+    "tagline": "自2010年起表彰非洲教育冠军",
+    "quickLinks": "快速链接",
+    "getInTouch": "联系我们",
+    "madeWith": "用",
+    "forAfricanEducation": "为非洲教育制作"
+  }
+}

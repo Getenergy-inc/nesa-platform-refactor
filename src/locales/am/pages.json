@@ -1,0 +1,49 @@
+{
+  "landing": {
+    "hero": {
+      "badge": "የህዝብ ድምጽ አሁን ክፍት ነው",
+      "headline": "የአፍሪካ",
+      "headlineAccent": "የትምህርት ለውጥ አመንጪዎችን ማክበር",
+      "subheadline": "በአፍሪካ ለሁሉም ትምህርት መደገፍ እና ማሳካት",
+      "description": "አዲስ የትምህርት ደረጃ ሽልማት አፍሪካ ({{editionName}}) በመላው አፍሪካ የትምህርት የወደፊት እየገነቡ ያሉ ራዕይ ያላቸው መሪዎችን፣ ተቋማትን እና ፈጣሪዎችን ያከብራል።",
+      "discoverMore": "ተጨማሪ ያግኙ",
+      "nominateNow": "አሁን ይሰይሙ"
+    }
+  },
+  "about": {
+    "hero": {
+      "badge": "የ{{year}} እትም",
+      "title": "ስለ",
+      "titleAccent": "NESA-አፍሪካ"
+    },
+    "mission": {
+      "title": "ተልእኳችን",
+      "description": "በመላው አፍሪካ ለሁሉም ትምህርትን የሚያስፈጽሙ ግለሰቦችን፣ ድርጅቶችን እና ተቋማትን መለየት፣ ማረጋገጥ እና ማክበር።"
+    }
+  },
+  "categories": {
+    "hero": {
+      "title": "17 ኦፊሴላዊ የሽልማት ምድቦች",
+      "description": "በመላው የአፍሪካ አህጉር ትምህርት፣ የድርጅት ማህበራዊ ኃላፊነት፣ ቴክኖሎጂ እና ማህበራዊ ተጽእኖ ላይ ጥሩነትን ማክበር።"
+    },
+    "cta": {
+      "title": "ለመሰየም ዝግጁ ነዎት?",
+      "submitNomination": "ስያሜ ያስገቡ",
+      "viewNominees": "የተሰየሙትን ይመልከቱ"
+    }
+  },
+  "auth": {
+    "login": {
+      "title": "እንኳን ደህና መጡ",
+      "signIn": "ይግቡ"
+    },
+    "register": {
+      "title": "NESA አፍሪካ ይቀላቀሉ",
+      "createAccount": "መለያ ይፍጠሩ"
+    }
+  },
+  "footer": {
+    "tagline": "ከ2010 ጀምሮ የአፍሪካ የትምህርት ሻምፒዮኖችን ማክበር",
+    "quickLinks": "ፈጣን አገናኞች"
+  }
+}

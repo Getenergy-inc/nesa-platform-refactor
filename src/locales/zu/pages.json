@@ -1,0 +1,49 @@
+{
+  "landing": {
+    "hero": {
+      "badge": "Ukuvota Komphakathi Kuvuliwe Manje",
+      "headline": "Ukuhlonipha",
+      "headlineAccent": "Abashintshi Bemfundo e-Afrika",
+      "subheadline": "Ukweseka Nokufeza Imfundo Yawo Wonke Umuntu e-Afrika",
+      "description": "I-New Education Standard Award Africa ({{editionName}}) ibungaza abaholi abanombono, izikhungo nabanobuhlakani abakha ikusasa lemfundo kulo lonke i-Afrika.",
+      "discoverMore": "Thola Okwengeziwe",
+      "nominateNow": "Qoka Manje"
+    }
+  },
+  "about": {
+    "hero": {
+      "badge": "Uhlelo luka-{{year}}",
+      "title": "Mayelana",
+      "titleAccent": "ne-NESA-Afrika"
+    },
+    "mission": {
+      "title": "Inhloso Yethu",
+      "description": "Ukuqaphela, ukuqinisekisa nokubungaza abantu, izinhlangano nezikhungo eziqhuba Imfundo Yawo Wonke Umuntu kulo lonke i-Afrika."
+    }
+  },
+  "categories": {
+    "hero": {
+      "title": "Izigaba Zemiklomelo Esemthethweni Eziyi-17",
+      "description": "Ukubungaza ubuhle kwezemfundo, umthwalo womphakathi wenkampani, ubuchwepheshe nomthelela womphakathi kulo lonke izwekazi lase-Afrika."
+    },
+    "cta": {
+      "title": "Ulungele Ukuqoka?",
+      "submitNomination": "Thumela Ukuqokwa",
+      "viewNominees": "Buka Abaqokiwe"
+    }
+  },
+  "auth": {
+    "login": {
+      "title": "Siyakwamukela Futhi",
+      "signIn": "Ngena"
+    },
+    "register": {
+      "title": "Joyina i-NESA Afrika",
+      "createAccount": "Dala I-Akhawunti"
+    }
+  },
+  "footer": {
+    "tagline": "Ukubungaza Amaqhawe Emfundo e-Afrika kusukela ngo-2010",
+    "quickLinks": "Izixhumanisi Ezisheshayo"
+  }
+}

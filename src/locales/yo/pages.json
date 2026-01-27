@@ -1,0 +1,49 @@
+{
+  "landing": {
+    "hero": {
+      "badge": "Ìdìbò Àwùjọ Ṣí Sílẹ̀ Báyìí",
+      "headline": "Bọ̀wọ̀ fún",
+      "headlineAccent": "Àwọn Tí Ń Yí Ẹ̀kọ́ Padà ní Áfríkà",
+      "subheadline": "Gbẹ́gbọ̀ọ̀n àti Mú Ẹ̀kọ́ Ṣẹ fún Gbogbo Ènìyàn ní Áfríkà",
+      "description": "Ẹ̀bùn Ìdìwọ̀n Ẹ̀kọ́ Títun Áfríkà ({{editionName}}) ń sọrí àwọn aṣáájú oníràn, àwọn ilé-iṣẹ́ àti àwọn olùdásílẹ̀ tí ń kọ́ ọjọ́ iwájú ẹ̀kọ́ ní gbogbo Áfríkà.",
+      "discoverMore": "Ṣàwárí Síwájú",
+      "nominateNow": "Yàn Báyìí"
+    }
+  },
+  "about": {
+    "hero": {
+      "badge": "Àtẹ̀jáde {{year}}",
+      "title": "Nípa",
+      "titleAccent": "NESA-Áfríkà"
+    },
+    "mission": {
+      "title": "Iṣẹ́ Àṣàyàn Wa",
+      "description": "Láti mọ, ṣe ìdánilójú àti ṣe àyẹyẹ àwọn ènìyàn, àwọn àjọ àti àwọn ilé-iṣẹ́ tí ń fàgbàrà mú Ẹ̀kọ́ fún Gbogbo Ènìyàn ní gbogbo Áfríkà."
+    }
+  },
+  "categories": {
+    "hero": {
+      "title": "Ẹ̀ka Ẹ̀bùn 17 Tí Ó Jẹ́ Ìpìlẹ̀",
+      "description": "Ṣe àyẹyẹ ìfẹ́ nípa ẹ̀kọ́, ojúṣe àwùjọ ìlú-iṣẹ́, ìmọ̀-ẹ̀rọ àti ìsẹ̀lẹ̀ àwùjọ ní gbogbo ilẹ̀ Áfríkà."
+    },
+    "cta": {
+      "title": "Ṣe O Ti Múra Láti Yàn?",
+      "submitNomination": "Fi Ìyàn Síẹ",
+      "viewNominees": "Wo Àwọn Tí A Yàn"
+    }
+  },
+  "auth": {
+    "login": {
+      "title": "Kú Àbọ̀ Padà",
+      "signIn": "Wọlé"
+    },
+    "register": {
+      "title": "Darapọ̀ mọ́ NESA Áfríkà",
+      "createAccount": "Ṣẹ̀dá Àkọọ́lẹ̀"
+    }
+  },
+  "footer": {
+    "tagline": "Ṣe àyẹyẹ Àwọn Akíkanjú Ẹ̀kọ́ Áfríkà láti 2010",
+    "quickLinks": "Àwọn Àjọṣepọ̀ Tó Yára"
+  }
+}
