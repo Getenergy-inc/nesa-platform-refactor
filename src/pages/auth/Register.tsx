@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link, useNavigate, useSearchParams } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import { useAuth } from "@/contexts/AuthContext";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -9,6 +10,7 @@ import { toast } from "sonner";
 import { Award, Mail, Lock, User, Gift } from "lucide-react";
 
 export default function Register() {
+  const { t } = useTranslation("pages");
   const [searchParams] = useSearchParams();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -30,10 +32,10 @@ export default function Register() {
 
     try {
       await signUp(email, password, fullName, referralCode || undefined);
-      toast.success("Account created successfully! Welcome to NESA Africa.");
+      toast.success(t("auth.register.successMessage"));
       navigate("/dashboard");
     } catch (error: any) {
-      toast.error(error.message || "Failed to create account");
+      toast.error(error.message || t("auth.register.failedMessage"));
     } finally {
       setLoading(false);
     }
@@ -46,21 +48,21 @@ export default function Register() {
           <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-gradient-gold shadow-gold">
             <Award className="h-8 w-8 text-secondary" />
           </div>
-          <CardTitle className="font-display text-2xl">Join NESA Africa</CardTitle>
+          <CardTitle className="font-display text-2xl">{t("auth.register.title")}</CardTitle>
           <CardDescription>
-            Create your account to nominate, vote, and celebrate African excellence
+            {t("auth.register.subtitle")}
           </CardDescription>
         </CardHeader>
         <form onSubmit={handleSubmit}>
           <CardContent className="space-y-4">
             <div className="space-y-2">
-              <Label htmlFor="fullName">Full Name</Label>
+              <Label htmlFor="fullName">{t("auth.register.fullName")}</Label>
               <div className="relative">
                 <User className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
                 <Input
                   id="fullName"
                   type="text"
-                  placeholder="Enter your full name"
+                  placeholder={t("auth.register.fullNamePlaceholder")}
                   value={fullName}
                   onChange={(e) => setFullName(e.target.value)}
                   className="pl-10"
@@ -68,13 +70,13 @@ export default function Register() {
               </div>
             </div>
             <div className="space-y-2">
-              <Label htmlFor="email">Email</Label>
+              <Label htmlFor="email">{t("auth.register.email")}</Label>
               <div className="relative">
                 <Mail className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
                 <Input
                   id="email"
                   type="email"
-                  placeholder="Enter your email"
+                  placeholder={t("auth.register.emailPlaceholder")}
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   required
@@ -83,13 +85,13 @@ export default function Register() {
               </div>
             </div>
             <div className="space-y-2">
-              <Label htmlFor="password">Password</Label>
+              <Label htmlFor="password">{t("auth.register.password")}</Label>
               <div className="relative">
                 <Lock className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
                 <Input
                   id="password"
                   type="password"
-                  placeholder="Create a password"
+                  placeholder={t("auth.register.passwordPlaceholder")}
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   required
@@ -97,23 +99,23 @@ export default function Register() {
                   className="pl-10"
                 />
               </div>
-              <p className="text-xs text-muted-foreground">Minimum 6 characters</p>
+              <p className="text-xs text-muted-foreground">{t("auth.register.passwordHint")}</p>
             </div>
             <div className="space-y-2">
-              <Label htmlFor="referralCode">Referral Code (Optional)</Label>
+              <Label htmlFor="referralCode">{t("auth.register.referralCode")}</Label>
               <div className="relative">
                 <Gift className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
                 <Input
                   id="referralCode"
                   type="text"
-                  placeholder="Enter referral code"
+                  placeholder={t("auth.register.referralCodePlaceholder")}
                   value={referralCode}
                   onChange={(e) => setReferralCode(e.target.value)}
                   className="pl-10"
                 />
               </div>
               {referralCode && (
-                <p className="text-xs text-primary">🎁 You'll both earn bonus AGC!</p>
+                <p className="text-xs text-primary">{t("auth.register.referralBonus")}</p>
               )}
             </div>
           </CardContent>
@@ -123,12 +125,12 @@ export default function Register() {
               className="w-full bg-gradient-gold text-secondary font-semibold hover:opacity-90 shadow-gold"
               disabled={loading}
             >
-              {loading ? "Creating account..." : "Create Account"}
+              {loading ? t("auth.register.creatingAccount") : t("auth.register.createAccount")}
             </Button>
             <p className="text-center text-sm text-muted-foreground">
-              Already have an account?{" "}
+              {t("auth.register.haveAccount")}{" "}
               <Link to="/login" className="font-medium text-primary hover:underline">
-                Sign in
+                {t("auth.register.signIn")}
               </Link>
             </p>
           </CardFooter>

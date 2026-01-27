@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import { NESALogo } from "@/components/nesa/NESALogo";
 import { Heart, Twitter, Instagram, Linkedin, Youtube, Mail } from "lucide-react";
 
@@ -9,15 +10,16 @@ const socialLinks = [
   { icon: Youtube, href: "#", label: "YouTube" },
 ];
 
-const quickLinks = [
-  { label: "Home", href: "/" },
-  { label: "Programs", href: "/programs" },
-  { label: "Categories", href: "/categories" },
-  { label: "Nominate", href: "/nominate" },
-];
-
 export function NESAFooter() {
+  const { t } = useTranslation("pages");
   const currentYear = new Date().getFullYear();
+
+  const quickLinks = [
+    { label: t("footer.links.home"), href: "/" },
+    { label: t("footer.links.programs"), href: "/programs" },
+    { label: t("footer.links.categories"), href: "/categories" },
+    { label: t("footer.links.nominate"), href: "/nominate" },
+  ];
 
   return (
     <footer className="bg-charcoal border-t border-gold/20 pt-12 pb-6">
@@ -29,7 +31,7 @@ export function NESAFooter() {
               <NESALogo variant="full" size="sm" />
             </div>
             <p className="text-white/60 text-sm mb-4">
-              Celebrating Africa's Education Champions since 2010
+              {t("footer.tagline")}
             </p>
             {/* Social Links */}
             <div className="flex gap-3 justify-center md:justify-start">
@@ -48,7 +50,7 @@ export function NESAFooter() {
 
           {/* Quick Links */}
           <div className="text-center">
-            <h4 className="text-white font-semibold mb-4">Quick Links</h4>
+            <h4 className="text-white font-semibold mb-4">{t("footer.quickLinks")}</h4>
             <nav className="flex flex-wrap justify-center gap-4">
               {quickLinks.map((link) => (
                 <Link 
@@ -64,7 +66,7 @@ export function NESAFooter() {
 
           {/* Contact */}
           <div className="text-center md:text-right">
-            <h4 className="text-white font-semibold mb-4">Get in Touch</h4>
+            <h4 className="text-white font-semibold mb-4">{t("footer.getInTouch")}</h4>
             <a 
               href="mailto:hello@nesa.africa" 
               className="inline-flex items-center gap-2 text-white/60 hover:text-gold transition-colors"
@@ -85,7 +87,7 @@ export function NESAFooter() {
         <div className="border-t border-gold/10 pt-6">
           <div className="flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-white/50">
             <p className="flex items-center gap-1">
-              Made with <Heart className="h-3 w-3 text-red-500" /> for African Education
+              {t("footer.madeWith")} <Heart className="h-3 w-3 text-red-500" /> {t("footer.forEducation")}
             </p>
             <p>
               © {currentYear} Santa Claus Educational Foundation
