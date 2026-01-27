@@ -4,18 +4,408 @@
       "badge": "Kura ya Umma Imefunguliwa",
       "title": "Kutukuza",
       "titleHighlight": "Wabadilishaji wa Elimu Afrika",
-      "tagline": "Kutetea Elimu kwa Wote Afrika",
-      "description": "Tuzo ya Kiwango Kipya cha Elimu Afrika ({{edition}}) inasherehekea viongozi na taasisi.",
+      "tagline": "Kutetea na Kufikia Elimu kwa Wote Afrika",
+      "description": "Tuzo ya Kiwango Kipya cha Elimu Afrika ({{edition}}) inasherehekea viongozi wenye maono, taasisi na wabunifu wanaoojenga mustakabali wa elimu kote Afrika.",
       "discoverMore": "Gundua Zaidi",
       "nominateNow": "Pendekeza Sasa",
-      "stats": { "nominees": "Waliopendekzwa", "countries": "Nchi", "categories": "Makundi" },
-      "quickNav": { "refer": "Rejelea", "nominate": "Pendekeza", "vision": "Maono 2035", "tickets": "Tiketi", "watch": "Tazama" }
+      "stats": {
+        "nominees": "Waliopendekezwa",
+        "countries": "Nchi",
+        "categories": "Makundi"
+      },
+      "quickNav": {
+        "refer": "Rejelea",
+        "nominate": "Pendekeza",
+        "vision": "Maono 2035",
+        "tickets": "Tiketi",
+        "watch": "Tazama"
+      }
     },
-    "stats": { "regions": "Mikoa ya Afrika", "categories": "Makundi ya Tuzo", "subcategories": "Makundi Madogo" }
+    "stats": {
+      "regions": "Mikoa ya Afrika",
+      "categories": "Makundi ya Tuzo",
+      "subcategories": "Makundi Madogo"
+    },
+    "watchLive": {
+      "title": "Tazama Moja kwa Moja",
+      "description": "NESA Africa TV inapeperusha kwenye mitandao ya kijamii, vituo vya washirika na programu ya CAST TV.",
+      "youtube": "YouTube",
+      "facebook": "Facebook",
+      "castTV": "Programu ya CAST TV"
+    },
+    "quote": {
+      "text": "{{editionName}} si tukio. Ni mzunguko wa uwajibikaji wa elimu unaounganisha:",
+      "keywords": {
+        "education": "Elimu",
+        "recognition": "Utambuzi",
+        "publicParticipation": "Ushiriki wa Umma",
+        "legacyImpact": "Athari ya Kudumu"
+      },
+      "footer": "Inawasilishwa na utawala, uwazi na umuhimu wa bara."
+    }
+  },
+  "about": {
+    "title": "Kuhusu NESA-Afrika",
+    "mission": "Dhamira Yetu",
+    "vision": "Maono Yetu",
+    "governance": "Utawala",
+    "timeline": "Ratiba",
+    "meta": {
+      "title": "Kuhusu NESA-Afrika | Tuzo ya Kiwango Kipya cha Elimu Afrika",
+      "description": "NESA-Afrika ni jukwaa la uwajibikaji wa elimu linalotambua wabadilishaji wanaunda mustakabali wa elimu Afrika."
+    },
+    "hero": {
+      "badge": "Toleo la {{year}}",
+      "title": "Kuhusu",
+      "titleAccent": "NESA-Afrika",
+      "description": "Tuzo ya Kiwango Kipya cha Elimu Afrika si tovuti ya tuzo. Ni jukwaa la uwajibikaji wa elimu linalosherehekea mashujaa wa elimu wa Afrika.",
+      "exploreCategories": "Chunguza Makundi",
+      "nominateNow": "Pendekeza Sasa"
+    },
+    "missionSection": {
+      "title": "Dhamira Yetu",
+      "description": "Kutambua, kuthibitisha na kusherehekea watu binafsi na taasisi zinazoendesha Elimu kwa Wote kote Afrika."
+    },
+    "pillars": {
+      "title": "Nguzo Zetu Nne",
+      "recognition": {
+        "title": "Utambuzi",
+        "description": "Kusherehekea mashujaa wa elimu wa Afrika kupitia tuzo zinazotegemea ustahiki."
+      },
+      "accountability": {
+        "title": "Uwajibikaji",
+        "description": "Ulinzi wa utawala unahakikisha uhuru wa wadhamini na uadilifu wa kura."
+      },
+      "continentalReach": {
+        "title": "Kufikia Bara",
+        "description": "Mbinu ya kikanda inayofunika mikoa yote 5 ya Afrika pamoja na Diaspora."
+      },
+      "impact": {
+        "title": "Athari",
+        "description": "Kuendeleza Elimu kwa Wote kupitia mwonekano na uthibitishaji."
+      }
+    },
+    "awardTiers": {
+      "title": "Viwango vya Tuzo",
+      "description": "Majukwaa manne tofauti ya utambuzi yenye vigezo vya kipekee.",
+      "platinum": {
+        "title": "Cheti cha Platinum",
+        "description": "Utambuzi wa msingi kwa mchango wa Elimu kwa Wote. Si ya ushindani, imethibitishwa na NRC."
+      },
+      "icon": {
+        "title": "Ikoni ya Elimu ya Afrika",
+        "description": "Utambuzi wa mafanikio ya maisha. Makundi 3 madogo katika Afrika, Diaspora na Marafiki wa Afrika."
+      },
+      "gold": {
+        "title": "Cheti cha Dhahabu",
+        "description": "Utambuzi wa ushindani kupitia kura ya umma 100%."
+      },
+      "blueGarnet": {
+        "title": "Tuzo ya Blue Garnet",
+        "description": "Heshima ya juu zaidi — 60% jaji, 40% kura ya umma. Washindi 9 kwenye Gala."
+      }
+    },
+    "learnMore": "Jifunze Zaidi",
+    "quickLinks": {
+      "vision2035": "Maono 2035",
+      "governance": "Utawala",
+      "timeline": "Ratiba",
+      "scef": "Msingi wa SCEF"
+    }
+  },
+  "categories": {
+    "title": "Makundi ya Tuzo",
+    "description": "Chunguza makundi yetu 17 ya tuzo yanayotambua ubora katika sekta ya elimu ya Afrika",
+    "viewNominees": "Tazama Waliopendekezwa",
+    "subcategories": "Makundi madogo",
+    "meta": {
+      "title": "Makundi ya Tuzo | {{editionName}}",
+      "description": "Chunguza makundi yote 17 ya NESA-Afrika na makundi madogo 138+."
+    },
+    "hero": {
+      "title": "Makundi 17 Rasmi ya Tuzo",
+      "description": "Kusherehekea ubora katika elimu, uwajibikaji wa kijamii na teknolojia kote Afrika."
+    },
+    "tabs": {
+      "africaFirst": "Afrika Kwanza",
+      "nigeria": "Nigeria"
+    },
+    "search": {
+      "placeholder": "Tafuta makundi..."
+    },
+    "controls": {
+      "expandAll": "Panua Yote",
+      "collapseAll": "Kunja Yote"
+    },
+    "card": {
+      "subcategories": "makundi madogo",
+      "viewSubcategories": "Tazama Makundi Madogo",
+      "hideSubcategories": "Ficha Makundi Madogo",
+      "noSubcategories": "Hakuna makundi madogo yaliyopatikana."
+    },
+    "empty": {
+      "title": "Hakuna makundi yaliyopatikana",
+      "description": "Jaribu kurekebisha utaftaji wako."
+    },
+    "stats": {
+      "officialCategories": "Makundi Rasmi",
+      "totalSubcategories": "Jumla ya Makundi Madogo",
+      "africanRegions": "Mikoa ya Afrika",
+      "awardTiers": "Viwango vya Tuzo"
+    },
+    "cta": {
+      "title": "Uko Tayari Kupendekeza?",
+      "description": "Tambua ubora kwa kuwasilisha pendekezo leo.",
+      "submitNomination": "Wasilisha Pendekezo",
+      "viewNominees": "Tazama Waliopendekezwa"
+    }
+  },
+  "nominees": {
+    "title": "Waliopendekezwa",
+    "searchPlaceholder": "Tafuta waliopendekezwa...",
+    "filterByCategory": "Chuja kwa Kundi",
+    "noNominees": "Hakuna Waliopendekezwa",
+    "beFirst": "Kuwa wa kwanza kupendekeza mtu",
+    "meta": {
+      "title": "Orodha ya Mashujaa wa Elimu | NESA-Afrika"
+    },
+    "hero": {
+      "badge": "Orodha ya Mashujaa wa Elimu",
+      "title": "Kutana na",
+      "titleAccent": "Waliopendekezwa Wetu",
+      "description": "Gundua walimu na taasisi za ajabu zinazobadilisha elimu kote Afrika."
+    },
+    "search": {
+      "placeholder": "Tafuta kwa jina, shirika..."
+    },
+    "filter": {
+      "allCategories": "Makundi Yote"
+    },
+    "stats": {
+      "totalNominees": "Jumla ya Waliopendekezwa",
+      "platinumVerified": "Waliothibitishwa Platinum",
+      "awardCategories": "Makundi ya Tuzo",
+      "showing": "Inaonyesha"
+    },
+    "view": {
+      "showing": "Inaonyesha {{current}} kati ya {{total}}",
+      "page": "Ukurasa {{current}} wa {{total}}",
+      "viewLabel": "Mtazamo:"
+    },
+    "empty": {
+      "title": "Hakuna Waliopendekezwa Waliopatikana",
+      "description": "Jaribu kurekebisha vigezo vyako vya utaftaji.",
+      "noNominees": "Mapendekezo yanakaguliwa.",
+      "clearFilters": "Futa Vichujio"
+    },
+    "pagination": {
+      "reachedEnd": "Umefikia mwisho — waliopendekezwa {{count}} wameonyeshwa",
+      "loadingMore": "Inapakia...",
+      "page": "Ukurasa {{current}} wa {{total}}"
+    }
+  },
+  "vote": {
+    "title": "Pigia Kura Ubora",
+    "description": "Pigia kura mashujaa wa elimu wa Afrika",
+    "votingOpen": "Kura Imefunguliwa",
+    "votingClosed": "Kura Imefungwa",
+    "voteNow": "Pigia Kura Sasa",
+    "yourVote": "Kura Yako Inajalisha",
+    "meta": {
+      "title": "Pigia Kura Waliopendekezwa | {{editionName}}",
+      "description": "Pigia kura wabadilishaji wa elimu katika tuzo za {{editionName}}."
+    },
+    "hero": {
+      "badge": "Kura ya Umma",
+      "title": "Pigia Kura Mashujaa wa",
+      "titleAccent": "Elimu wa Afrika",
+      "description": "Kura yako inasaidia kutambua wanaobadilisha elimu kote barani."
+    },
+    "filters": {
+      "searchPlaceholder": "Tafuta waliopendekezwa...",
+      "allCategories": "Makundi Yote",
+      "allRegions": "Mikoa Yote"
+    },
+    "regions": {
+      "westAfrica": "Afrika Magharibi",
+      "eastAfrica": "Afrika Mashariki",
+      "southernAfrica": "Kusini mwa Afrika",
+      "northAfrica": "Afrika Kaskazini",
+      "centralAfrica": "Afrika ya Kati"
+    },
+    "stats": {
+      "totalNominees": "Jumla ya Waliopendekezwa",
+      "categories": "Makundi",
+      "totalVotes": "Jumla ya Kura",
+      "yourVotes": "Kura Zako"
+    },
+    "loading": "Inapakia waliopendekezwa...",
+    "empty": {
+      "title": "Hakuna Waliopendekezwa Waliopatikana",
+      "description": "Jaribu kurekebisha vichujio vyako.",
+      "noApproved": "Hakuna waliopendekezwa walioidhinishwa kwa kura.",
+      "clearFilters": "Futa Vichujio"
+    },
+    "tabs": {
+      "all": "Wote"
+    },
+    "cta": {
+      "title": "Unajua Mtu Anayefanya Tofauti?",
+      "description": "Mapendekezo ni hatua ya kwanza ya kutambua mashujaa wa elimu.",
+      "nominateButton": "Pendekeza Mbadilishaji"
+    },
+    "actions": {
+      "vote": "Pigia Kura",
+      "voted": "Umepigia Kura",
+      "voting": "Inapigia kura...",
+      "loginToVote": "Ingia ili kupiga kura",
+      "alreadyVoted": "Tayari umempigia kura mpendekezwa huyu",
+      "voteClosed": "Kura imefungwa kwa sasa",
+      "voteSuccess": "Kura imerekodiwa kwa mafanikio!",
+      "voteFailed": "Kura imeshindwa. Jaribu tena."
+    }
+  },
+  "results": {
+    "title": "Matokeo",
+    "winners": "Washindi",
+    "finalists": "Waliofika Fainali",
+    "allResults": "Matokeo Yote"
+  },
+  "media": {
+    "title": "Kituo cha Vyombo vya Habari",
+    "nesaTV": "NESA Afrika TV",
+    "webinars": "Webina",
+    "gala": "Sherehe ya Tuzo",
+    "shows": "Vipindi"
+  },
+  "contact": {
+    "title": "Wasiliana Nasi",
+    "name": "Jina Lako",
+    "email": "Barua Pepe",
+    "message": "Ujumbe Wako",
+    "send": "Tuma Ujumbe",
+    "meta": {
+      "title": "Wasiliana na NESA-Afrika",
+      "description": "Maswali kuhusu mapendekezo au ushirikiano? Tuko hapa kusaidia."
+    },
+    "hero": {
+      "badge": "Wasiliana Nasi",
+      "title": "Wasiliana na",
+      "titleAccent": "NESA-Afrika",
+      "description": "Maswali kuhusu mapendekezo au ushirikiano? Tuko hapa kusaidia."
+    },
+    "info": {
+      "email": {
+        "title": "Tutumie Barua Pepe",
+        "description": "Kwa maswali ya jumla na msaada wa mapendekezo"
+      },
+      "phone": {
+        "title": "Tupigie",
+        "description": "Jumatatu hadi Ijumaa, 9 asubuhi - 5 jioni WAT"
+      },
+      "address": {
+        "title": "Tutembelee",
+        "description": "Sekretarieti ya Pan-Afrika"
+      },
+      "hours": {
+        "title": "Saa za Ofisi",
+        "description": "Imefungwa Jumapili na sikukuu"
+      }
+    },
+    "form": {
+      "tabs": {
+        "general": "Swali la Jumla",
+        "presenter": "Maombi ya Mwandishi"
+      },
+      "fields": {
+        "fullName": "Jina Kamili",
+        "email": "Barua Pepe",
+        "phone": "Nambari ya Simu",
+        "country": "Nchi",
+        "department": "Idara",
+        "subject": "Mada",
+        "message": "Ujumbe"
+      },
+      "submit": {
+        "sending": "Inatuma...",
+        "send": "Tuma Ujumbe"
+      }
+    }
   },
   "auth": {
-    "login": { "title": "Karibu Tena", "subtitle": "Ingia kuendelea", "email": "Barua pepe", "emailPlaceholder": "Ingiza barua pepe", "password": "Neno la siri", "passwordPlaceholder": "Ingiza neno la siri", "forgotPassword": "Umesahau?", "signIn": "Ingia", "signingIn": "Inaingia...", "noAccount": "Huna akaunti?", "createOne": "Unda moja", "welcomeBack": "Karibu tena!", "invalidCredentials": "Taarifa si sahihi" },
-    "register": { "title": "Jiunge na NESA Africa", "subtitle": "Unda akaunti yako", "fullName": "Jina Kamili", "fullNamePlaceholder": "Ingiza jina", "email": "Barua pepe", "emailPlaceholder": "Ingiza barua pepe", "password": "Neno la siri", "passwordPlaceholder": "Unda neno la siri", "passwordHint": "Herufi 6+", "referralCode": "Msimbo wa Rufaa", "referralCodePlaceholder": "Ingiza msimbo", "referralBonus": "🎁 Mtapata zawadi!", "createAccount": "Unda Akaunti", "creatingAccount": "Inaunda...", "haveAccount": "Una akaunti?", "signIn": "Ingia", "successMessage": "Akaunti imeundwa!", "failedMessage": "Imeshindwa" }
+    "login": {
+      "title": "Karibu Tena",
+      "subtitle": "Ingia kuendelea kusherehekea ubora wa Afrika",
+      "email": "Barua Pepe",
+      "emailPlaceholder": "Ingiza barua pepe yako",
+      "password": "Neno la Siri",
+      "passwordPlaceholder": "Ingiza neno la siri",
+      "forgotPassword": "Umesahau neno la siri?",
+      "signIn": "Ingia",
+      "signingIn": "Inaingia...",
+      "noAccount": "Huna akaunti?",
+      "createOne": "Unda moja",
+      "welcomeBack": "Karibu tena NESA Afrika!",
+      "invalidCredentials": "Taarifa si sahihi"
+    },
+    "register": {
+      "title": "Jiunge na NESA Afrika",
+      "subtitle": "Unda akaunti yako kupendekeza, kupiga kura na kusherehekea ubora wa Afrika",
+      "fullName": "Jina Kamili",
+      "fullNamePlaceholder": "Ingiza jina lako kamili",
+      "email": "Barua Pepe",
+      "emailPlaceholder": "Ingiza barua pepe yako",
+      "password": "Neno la Siri",
+      "passwordPlaceholder": "Unda neno la siri",
+      "passwordHint": "Herufi 6 au zaidi",
+      "referralCode": "Msimbo wa Rufaa (Hiari)",
+      "referralCodePlaceholder": "Ingiza msimbo wa rufaa",
+      "referralBonus": "🎁 Mtapata zawadi ya AGC!",
+      "createAccount": "Unda Akaunti",
+      "creatingAccount": "Inaunda akaunti...",
+      "haveAccount": "Tayari una akaunti?",
+      "signIn": "Ingia",
+      "successMessage": "Akaunti imeundwa kwa mafanikio! Karibu NESA Afrika.",
+      "failedMessage": "Imeshindwa kuunda akaunti"
+    }
   },
-  "footer": { "tagline": "Kusherehekea Mashujaa wa Elimu tangu 2010", "quickLinks": "Viungo vya Haraka", "getInTouch": "Wasiliana Nasi", "scefFoundation": "Msingi wa SCEF", "madeWith": "Imetengenezwa kwa", "forEducation": "kwa Elimu ya Afrika", "copyright": "© {{year}} SCEF", "links": { "home": "Nyumbani", "programs": "Programu", "categories": "Makundi", "nominate": "Pendekeza" } }
+  "nominate": {
+    "meta": {
+      "title": "Wasilisha Pendekezo | {{editionName}}"
+    },
+    "header": {
+      "title": "Wasilisha Pendekezo",
+      "breadcrumb": "Pendekeza"
+    },
+    "steps": {
+      "category": "Kundi",
+      "nomineeDetails": "Maelezo ya Mpendekezwa",
+      "evidence": "Ushahidi"
+    }
+  },
+  "dashboard": {
+    "title": "Dashibodi",
+    "wallet": {
+      "title": "Mkoba",
+      "balance": "Salio",
+      "topUp": "Jaza",
+      "withdraw": "Toa",
+      "transactions": "Miamala ya Hivi Karibuni"
+    }
+  },
+  "footer": {
+    "tagline": "Kusherehekea Mashujaa wa Elimu wa Afrika tangu 2010",
+    "quickLinks": "Viungo vya Haraka",
+    "getInTouch": "Wasiliana Nasi",
+    "scefFoundation": "Msingi wa SCEF",
+    "madeWith": "Imetengenezwa kwa",
+    "forEducation": "kwa Elimu ya Afrika",
+    "copyright": "© {{year}} Santa Claus Educational Foundation",
+    "links": {
+      "home": "Nyumbani",
+      "programs": "Programu",
+      "categories": "Makundi",
+      "nominate": "Pendekeza"
+    }
+  }
 }

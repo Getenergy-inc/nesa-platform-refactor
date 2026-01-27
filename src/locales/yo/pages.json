@@ -2,48 +2,410 @@
   "landing": {
     "hero": {
       "badge": "Ìdìbò Àwùjọ Ṣí Sílẹ̀ Báyìí",
-      "headline": "Bọ̀wọ̀ fún",
-      "headlineAccent": "Àwọn Tí Ń Yí Ẹ̀kọ́ Padà ní Áfríkà",
-      "subheadline": "Gbẹ́gbọ̀ọ̀n àti Mú Ẹ̀kọ́ Ṣẹ fún Gbogbo Ènìyàn ní Áfríkà",
-      "description": "Ẹ̀bùn Ìdìwọ̀n Ẹ̀kọ́ Títun Áfríkà ({{editionName}}) ń sọrí àwọn aṣáájú oníràn, àwọn ilé-iṣẹ́ àti àwọn olùdásílẹ̀ tí ń kọ́ ọjọ́ iwájú ẹ̀kọ́ ní gbogbo Áfríkà.",
+      "title": "Bọ̀wọ̀ fún",
+      "titleHighlight": "Àwọn Tí Ń Yí Ẹ̀kọ́ Padà ní Áfríkà",
+      "tagline": "Gbẹ́gbọ̀ọ̀n àti Mú Ẹ̀kọ́ Ṣẹ fún Gbogbo Ènìyàn ní Áfríkà",
+      "description": "Ẹ̀bùn Ìdìwọ̀n Ẹ̀kọ́ Títun Áfríkà ({{edition}}) ń sọrí àwọn aṣáájú oníràn, àwọn ilé-iṣẹ́ àti àwọn olùdásílẹ̀ tí ń kọ́ ọjọ́ iwájú ẹ̀kọ́ ní gbogbo Áfríkà.",
       "discoverMore": "Ṣàwárí Síwájú",
-      "nominateNow": "Yàn Báyìí"
+      "nominateNow": "Yàn Báyìí",
+      "stats": {
+        "nominees": "Àwọn Tí A Yàn",
+        "countries": "Orílẹ̀-èdè",
+        "categories": "Ẹ̀ka"
+      },
+      "quickNav": {
+        "refer": "Tọ́ka Sí",
+        "nominate": "Yàn",
+        "vision": "Ìran 2035",
+        "tickets": "Tíkẹ́tì",
+        "watch": "Wo"
+      }
+    },
+    "stats": {
+      "regions": "Àwọn Ẹkùn Áfríkà",
+      "categories": "Ẹ̀ka Ẹ̀bùn",
+      "subcategories": "Ẹ̀ka-Kékeré"
+    },
+    "watchLive": {
+      "title": "Wo Láàyè",
+      "description": "NESA Áfríkà TV ń tan káàkiri lórí àwọn ìkànnì àwùjọ, àwọn ibùdó alábàáṣepọ̀ àti ètò CAST TV.",
+      "youtube": "YouTube",
+      "facebook": "Facebook",
+      "castTV": "Ètò CAST TV"
+    },
+    "quote": {
+      "text": "{{editionName}} kìí ṣe ìṣẹ̀lẹ̀. Ó jẹ́ ìyíká ìsirò ẹ̀kọ́ tí ó dá lórí ìdìwọ̀n tí ó so pọ̀:",
+      "keywords": {
+        "education": "Ẹ̀kọ́",
+        "recognition": "Ìmọ̀ràn",
+        "publicParticipation": "Ìkópa Gbogbo Ènìyàn",
+        "legacyImpact": "Ipa Ogún"
+      },
+      "footer": "Tí a fi ìṣàkóso, ìmọ́lẹ̀ àti ìbámu pẹ̀lú kọ́ntínẹ́ntì gba."
     }
   },
   "about": {
+    "title": "Nípa NESA-Áfríkà",
+    "mission": "Iṣẹ́ Àṣàyàn Wa",
+    "vision": "Ìran Wa",
+    "governance": "Ìṣàkóso",
+    "timeline": "Àkókò",
+    "meta": {
+      "title": "Nípa NESA-Áfríkà | Ẹ̀bùn Ìdìwọ̀n Ẹ̀kọ́ Títun Áfríkà",
+      "description": "NESA-Áfríkà jẹ́ pẹpẹ ìsirò ẹ̀kọ́ tí ń mọ̀ àwọn tí ń yí padà tí ń ṣe ọjọ́ iwájú ẹ̀kọ́ ní Áfríkà."
+    },
     "hero": {
       "badge": "Àtẹ̀jáde {{year}}",
       "title": "Nípa",
-      "titleAccent": "NESA-Áfríkà"
+      "titleAccent": "NESA-Áfríkà",
+      "description": "Ẹ̀bùn Ìdìwọ̀n Ẹ̀kọ́ Títun Áfríkà kìí ṣe ojú-ewé ẹ̀bùn. Ó jẹ́ pẹpẹ ìsirò ẹ̀kọ́ tí ń ṣe ayẹyẹ àwọn akíkanjú ẹ̀kọ́ Áfríkà.",
+      "exploreCategories": "Ṣàwárí Ẹ̀ka",
+      "nominateNow": "Yàn Báyìí"
     },
-    "mission": {
+    "missionSection": {
       "title": "Iṣẹ́ Àṣàyàn Wa",
-      "description": "Láti mọ, ṣe ìdánilójú àti ṣe àyẹyẹ àwọn ènìyàn, àwọn àjọ àti àwọn ilé-iṣẹ́ tí ń fàgbàrà mú Ẹ̀kọ́ fún Gbogbo Ènìyàn ní gbogbo Áfríkà."
+      "description": "Láti mọ, ṣe ìdánilójú àti ṣe àyẹyẹ àwọn ènìyàn àti àwọn ilé-iṣẹ́ tí ń fàgbàrà mú Ẹ̀kọ́ fún Gbogbo Ènìyàn ní gbogbo Áfríkà."
+    },
+    "pillars": {
+      "title": "Àwọn Ọ̀wọ̀n Mẹ́rin Wa",
+      "recognition": {
+        "title": "Ìmọ̀ràn",
+        "description": "Ṣe àyẹyẹ àwọn akíkanjú ẹ̀kọ́ Áfríkà nípasẹ̀ ẹ̀bùn tó dá lórí ẹ̀tọ́."
+      },
+      "accountability": {
+        "title": "Ìsirò",
+        "description": "Ààbò ìṣàkóso ń rí i dájú pé òmìnira àwọn aláàánú àti ìmọ́tótó ìdìbò."
+      },
+      "continentalReach": {
+        "title": "Ìdégbée Kọ́ntínẹ́ntì",
+        "description": "Ọ̀nà ẹkùn-àkọ́kọ́ tí ó bò gbogbo àwọn ẹkùn 5 Áfríkà pẹ̀lú Àwọn tí ń gbé lóde."
+      },
+      "impact": {
+        "title": "Ipa",
+        "description": "Mú Ẹ̀kọ́ fún Gbogbo Ènìyàn lọ níwájú nípasẹ̀ ìhàn àti ìdánilójú."
+      }
+    },
+    "awardTiers": {
+      "title": "Ìpele Ẹ̀bùn",
+      "description": "Pẹpẹ mẹ́rin tó yàtọ̀ fún ìmọ̀ràn pẹ̀lú àwọn ìlànà aláìlégbé.",
+      "platinum": {
+        "title": "Ìwé-ẹ̀rí Platinum",
+        "description": "Ìmọ̀ràn ìpìlẹ̀ fún ìfúnni sí Ẹ̀kọ́ fún Gbogbo Ènìyàn. Kìí ṣe ìdíje, NRC ti fìdí rẹ̀ múlẹ̀."
+      },
+      "icon": {
+        "title": "Àmì Ẹ̀kọ́ Áfríkà",
+        "description": "Ìmọ̀ràn àṣeyọrí ìgbésí ayé. Ẹ̀ka-kékeré 3 ní Áfríkà, Àwọn tí ń gbé lóde àti Ọ̀rẹ́ Áfríkà."
+      },
+      "gold": {
+        "title": "Ìwé-ẹ̀rí Wúrà",
+        "description": "Ìmọ̀ràn ìdíje nípasẹ̀ ìdìbò gbogbo ènìyàn 100%."
+      },
+      "blueGarnet": {
+        "title": "Ẹ̀bùn Blue Garnet",
+        "description": "Ọlá gíga jùlọ — 60% àwọn onídàájọ́, 40% ìdìbò gbogbo ènìyàn. Àwọn olùborí 9 ní Gala."
+      }
+    },
+    "learnMore": "Kọ́ Síwájú",
+    "quickLinks": {
+      "vision2035": "Ìran 2035",
+      "governance": "Ìṣàkóso",
+      "timeline": "Àkókò",
+      "scef": "Ìpìlẹ̀ SCEF"
     }
   },
   "categories": {
+    "title": "Ẹ̀ka Ẹ̀bùn",
+    "description": "Ṣàwárí àwọn ẹ̀ka ẹ̀bùn 17 wa tí ó ń mọ̀ ìfẹ́ ní ẹ̀ka ẹ̀kọ́ Áfríkà",
+    "viewNominees": "Wo Àwọn Tí A Yàn",
+    "subcategories": "Ẹ̀ka-kékeré",
+    "meta": {
+      "title": "Ẹ̀ka Ẹ̀bùn | {{editionName}}",
+      "description": "Ṣàwárí gbogbo àwọn ẹ̀ka 17 NESA-Áfríkà àti ẹ̀ka-kékeré 138+."
+    },
     "hero": {
-      "title": "Ẹ̀ka Ẹ̀bùn 17 Tí Ó Jẹ́ Ìpìlẹ̀",
-      "description": "Ṣe àyẹyẹ ìfẹ́ nípa ẹ̀kọ́, ojúṣe àwùjọ ìlú-iṣẹ́, ìmọ̀-ẹ̀rọ àti ìsẹ̀lẹ̀ àwùjọ ní gbogbo ilẹ̀ Áfríkà."
+      "title": "Ẹ̀ka 17 Ẹ̀bùn Tí Ó Jẹ́ Ìpìlẹ̀",
+      "description": "Ṣe àyẹyẹ ìfẹ́ nípa ẹ̀kọ́, ojúṣe àwùjọ àti ìmọ̀-ẹ̀rọ ní gbogbo ilẹ̀ Áfríkà."
+    },
+    "tabs": {
+      "africaFirst": "Áfríkà Àkọ́kọ́",
+      "nigeria": "Nàìjíríà"
+    },
+    "search": {
+      "placeholder": "Wá ẹ̀ka..."
+    },
+    "controls": {
+      "expandAll": "Tàn Gbogbo Rẹ̀",
+      "collapseAll": "Pa Gbogbo Rẹ̀"
+    },
+    "card": {
+      "subcategories": "ẹ̀ka-kékeré",
+      "viewSubcategories": "Wo Ẹ̀ka-kékeré",
+      "hideSubcategories": "Pa Ẹ̀ka-kékeré Mọ́",
+      "noSubcategories": "Kò sí ẹ̀ka-kékeré."
+    },
+    "empty": {
+      "title": "A kò rí ẹ̀ka kankan",
+      "description": "Gbìyànjú láti ṣàtúnṣe àwárí rẹ."
+    },
+    "stats": {
+      "officialCategories": "Ẹ̀ka Tí Ó Jẹ́ Ìpìlẹ̀",
+      "totalSubcategories": "Àpapọ̀ Ẹ̀ka-kékeré",
+      "africanRegions": "Àwọn Ẹkùn Áfríkà",
+      "awardTiers": "Ìpele Ẹ̀bùn"
     },
     "cta": {
       "title": "Ṣe O Ti Múra Láti Yàn?",
+      "description": "Mọ̀ ìfẹ́ nípa fífi ìyàn síẹ lónìí.",
       "submitNomination": "Fi Ìyàn Síẹ",
       "viewNominees": "Wo Àwọn Tí A Yàn"
+    }
+  },
+  "nominees": {
+    "title": "Àwọn Tí A Yàn",
+    "searchPlaceholder": "Wá àwọn tí a yàn...",
+    "filterByCategory": "Yọ nípasẹ̀ Ẹ̀ka",
+    "noNominees": "Kò Sí Àwọn Tí A Yàn",
+    "beFirst": "Jẹ́ èní àkọ́kọ́ láti yan ẹnìkan",
+    "meta": {
+      "title": "Àkójọpọ̀ Àwọn Akíkanjú Ẹ̀kọ́ | NESA-Áfríkà"
+    },
+    "hero": {
+      "badge": "Àkójọpọ̀ Àwọn Akíkanjú Ẹ̀kọ́",
+      "title": "Pàdé",
+      "titleAccent": "Àwọn Tí A Yàn",
+      "description": "Ṣàwárí àwọn olùkọ́ àti àwọn ilé-iṣẹ́ tó dára jùlọ tí ń yí ẹ̀kọ́ padà ní gbogbo Áfríkà."
+    },
+    "search": {
+      "placeholder": "Wá nípasẹ̀ orúkọ, àjọ..."
+    },
+    "filter": {
+      "allCategories": "Gbogbo Ẹ̀ka"
+    },
+    "stats": {
+      "totalNominees": "Àpapọ̀ Àwọn Tí A Yàn",
+      "platinumVerified": "Ti Fìdí Múlẹ̀ Platinum",
+      "awardCategories": "Ẹ̀ka Ẹ̀bùn",
+      "showing": "Ó Ń Fihàn"
+    },
+    "view": {
+      "showing": "Ó ń fihàn {{current}} nínú {{total}}",
+      "page": "Ojú-ìwé {{current}} nínú {{total}}",
+      "viewLabel": "Ìwòran:"
+    },
+    "empty": {
+      "title": "A kò rí Àwọn Tí A Yàn",
+      "description": "Gbìyànjú láti ṣàtúnṣe àwọn ohun tí ó ń wá.",
+      "noNominees": "A ń ṣàyẹ̀wò àwọn ìyàn.",
+      "clearFilters": "Pa Àwọn Àṣàyàn Rẹ́"
+    },
+    "pagination": {
+      "reachedEnd": "O ti dé òpin — a ti fihàn àwọn tí a yàn {{count}}",
+      "loadingMore": "Ó ń gbé karí...",
+      "page": "Ojú-ìwé {{current}} nínú {{total}}"
+    }
+  },
+  "vote": {
+    "title": "Dìbò fún Ìfẹ́",
+    "description": "Dìbò fún àwọn akíkanjú ẹ̀kọ́ Áfríkà",
+    "votingOpen": "Ìdìbò Ti Ṣí",
+    "votingClosed": "Ìdìbò Ti Pa",
+    "voteNow": "Dìbò Báyìí",
+    "yourVote": "Ìdìbò Rẹ Ṣe Pàtàkì",
+    "meta": {
+      "title": "Dìbò fún Àwọn Tí A Yàn | {{editionName}}",
+      "description": "Dìbò fún àwọn tí ń yí ẹ̀kọ́ padà nínú àwọn ẹ̀bùn {{editionName}}."
+    },
+    "hero": {
+      "badge": "Ìdìbò Gbogbo Ènìyàn",
+      "title": "Dìbò fún Àwọn Akíkanjú",
+      "titleAccent": "Ẹ̀kọ́ Áfríkà",
+      "description": "Ìdìbò rẹ ń ṣe ìrànlọ́wọ́ láti mọ̀ àwọn tí ń yí ẹ̀kọ́ padà ní gbogbo kọ́ntínẹ́ntì."
+    },
+    "filters": {
+      "searchPlaceholder": "Wá àwọn tí a yàn...",
+      "allCategories": "Gbogbo Ẹ̀ka",
+      "allRegions": "Gbogbo Ẹkùn"
+    },
+    "regions": {
+      "westAfrica": "Ìwọ̀ Oòrùn Áfríkà",
+      "eastAfrica": "Ìlà Oòrùn Áfríkà",
+      "southernAfrica": "Gúúsù Áfríkà",
+      "northAfrica": "Àríwá Áfríkà",
+      "centralAfrica": "Àárín Áfríkà"
+    },
+    "stats": {
+      "totalNominees": "Àpapọ̀ Àwọn Tí A Yàn",
+      "categories": "Ẹ̀ka",
+      "totalVotes": "Àpapọ̀ Ìdìbò",
+      "yourVotes": "Ìdìbò Rẹ"
+    },
+    "loading": "Ó ń gbé àwọn tí a yàn karí...",
+    "empty": {
+      "title": "A kò Rí Àwọn Tí A Yàn",
+      "description": "Gbìyànjú láti ṣàtúnṣe àwọn àṣàyàn rẹ.",
+      "noApproved": "Kò sí àwọn tí a fọwọ́ sí fún ìdìbò.",
+      "clearFilters": "Pa Àwọn Àṣàyàn Rẹ́"
+    },
+    "tabs": {
+      "all": "Gbogbo"
+    },
+    "cta": {
+      "title": "Ṣé O Mọ̀ Ẹnìkan Tí Ń Ṣe Ìyàtọ̀?",
+      "description": "Ìyàn ni ìgbésẹ̀ àkọ́kọ́ láti mọ̀ àwọn akíkanjú ẹ̀kọ́.",
+      "nominateButton": "Yan Olùyípadà"
+    },
+    "actions": {
+      "vote": "Dìbò",
+      "voted": "Ti Dìbò",
+      "voting": "Ó ń dìbò...",
+      "loginToVote": "Wọlé láti dìbò",
+      "alreadyVoted": "O ti dìbò fún ẹni tí a yàn yìí tẹ́lẹ̀",
+      "voteClosed": "Ìdìbò ti pa lọ́wọ́lọ́wọ́",
+      "voteSuccess": "A ti kọ ìdìbò sílẹ̀ dáadáa!",
+      "voteFailed": "Ìdìbò kùnà. Gbìyànjú lẹ́ẹ̀kan síi."
+    }
+  },
+  "results": {
+    "title": "Àwọn Èsì",
+    "winners": "Àwọn Olùborí",
+    "finalists": "Àwọn Tó Dé Ìparí",
+    "allResults": "Gbogbo Èsì"
+  },
+  "media": {
+    "title": "Ibùdó Àwọn Mídíà",
+    "nesaTV": "NESA Áfríkà TV",
+    "webinars": "Àwọn Ẹ̀kọ́ Orí Ayelujara",
+    "gala": "Àsè Ẹ̀bùn",
+    "shows": "Àwọn Ètò"
+  },
+  "contact": {
+    "title": "Kàn Sí Wa",
+    "name": "Orúkọ Rẹ",
+    "email": "Ímeèlì",
+    "message": "Ìfirándẹ́ Rẹ",
+    "send": "Fi Ìfirándẹ́ Ránṣẹ́",
+    "meta": {
+      "title": "Kàn Sí NESA-Áfríkà",
+      "description": "Àwọn ìbéèrè nípa ìyàn tàbí àjọṣepọ̀? A wà níbí láti ràn ọ́ lọ́wọ́."
+    },
+    "hero": {
+      "badge": "Kàn Sí Wa",
+      "title": "Kàn Sí",
+      "titleAccent": "NESA-Áfríkà",
+      "description": "Àwọn ìbéèrè nípa ìyàn tàbí àjọṣepọ̀? A wà níbí láti ràn ọ́ lọ́wọ́."
+    },
+    "info": {
+      "email": {
+        "title": "Fi Ímeèlì Ránṣẹ́",
+        "description": "Fún àwọn ìbéèrè gbogbogbò àti àtìlẹ́yìn ìyàn"
+      },
+      "phone": {
+        "title": "Pe Wa",
+        "description": "Ọjọ́ Ajé sí Ọjọ́ Ẹtì, 9 owùrọ́ - 5 ìrọ̀lẹ́ WAT"
+      },
+      "address": {
+        "title": "Bẹ̀wò Sí Wa",
+        "description": "Ilé-iṣẹ́ Pan-Áfríkà"
+      },
+      "hours": {
+        "title": "Àkókò Ọ́fíìsì",
+        "description": "A pa ní Ọjọ́ Àìkú àti àwọn ọjọ́ ìsinmi"
+      }
+    },
+    "form": {
+      "tabs": {
+        "general": "Ìbéèrè Gbogbogbò",
+        "presenter": "Ìgbékalẹ̀ Alágbékalẹ̀"
+      },
+      "fields": {
+        "fullName": "Orúkọ Kíkún",
+        "email": "Ímeèlì",
+        "phone": "Nọ́mbà Fóònù",
+        "country": "Orílẹ̀-èdè",
+        "department": "Ẹ̀ka",
+        "subject": "Àkòrí",
+        "message": "Ìfirándẹ́"
+      },
+      "submit": {
+        "sending": "Ó ń fi ránṣẹ́...",
+        "send": "Fi Ìfirándẹ́ Ránṣẹ́"
+      }
     }
   },
   "auth": {
     "login": {
       "title": "Kú Àbọ̀ Padà",
-      "signIn": "Wọlé"
+      "subtitle": "Wọlé láti tẹ̀síwájú ṣe àyẹyẹ ìfẹ́ Áfríkà",
+      "email": "Ímeèlì",
+      "emailPlaceholder": "Tẹ ímeèlì rẹ sílẹ̀",
+      "password": "Ọ̀rọ̀ Àṣírí",
+      "passwordPlaceholder": "Tẹ ọ̀rọ̀ àṣírí rẹ sílẹ̀",
+      "forgotPassword": "Ṣé o gbàgbé ọ̀rọ̀ àṣírí?",
+      "signIn": "Wọlé",
+      "signingIn": "Ó ń wọlé...",
+      "noAccount": "Ṣé o kò ní àkọọ́lẹ̀?",
+      "createOne": "Ṣẹ̀dá ọ̀kan",
+      "welcomeBack": "Kú àbọ̀ padà sí NESA Áfríkà!",
+      "invalidCredentials": "Àwọn ẹ̀rí kò tọ́"
     },
     "register": {
       "title": "Darapọ̀ mọ́ NESA Áfríkà",
-      "createAccount": "Ṣẹ̀dá Àkọọ́lẹ̀"
+      "subtitle": "Ṣẹ̀dá àkọọ́lẹ̀ rẹ láti yan, dìbò àti ṣe àyẹyẹ ìfẹ́ Áfríkà",
+      "fullName": "Orúkọ Kíkún",
+      "fullNamePlaceholder": "Tẹ orúkọ kíkún rẹ sílẹ̀",
+      "email": "Ímeèlì",
+      "emailPlaceholder": "Tẹ ímeèlì rẹ sílẹ̀",
+      "password": "Ọ̀rọ̀ Àṣírí",
+      "passwordPlaceholder": "Ṣẹ̀dá ọ̀rọ̀ àṣírí",
+      "passwordHint": "Ó kéré jù lẹ́tà 6",
+      "referralCode": "Àmì Ìtọ́kasí (Àṣàyàn)",
+      "referralCodePlaceholder": "Tẹ àmì ìtọ́kasí sílẹ̀",
+      "referralBonus": "🎁 Ẹ méjèèjì yóò gba AGC àfikún!",
+      "createAccount": "Ṣẹ̀dá Àkọọ́lẹ̀",
+      "creatingAccount": "Ó ń ṣẹ̀dá àkọọ́lẹ̀...",
+      "haveAccount": "Ṣé o ti ní àkọọ́lẹ̀?",
+      "signIn": "Wọlé",
+      "successMessage": "A ti ṣẹ̀dá àkọọ́lẹ̀! Ẹ kú àbọ̀ sí NESA Áfríkà.",
+      "failedMessage": "Kò le ṣẹ̀dá àkọọ́lẹ̀"
+    }
+  },
+  "nominate": {
+    "meta": {
+      "title": "Fi Ìyàn Síẹ | {{editionName}}"
+    },
+    "header": {
+      "title": "Fi Ìyàn Síẹ",
+      "breadcrumb": "Yàn"
+    },
+    "steps": {
+      "category": "Ẹ̀ka",
+      "nomineeDetails": "Àwọn Àlàyé Ẹni Tí A Yàn",
+      "evidence": "Ẹ̀rí"
+    }
+  },
+  "dashboard": {
+    "title": "Pánẹ́ẹ̀lì",
+    "wallet": {
+      "title": "Àpamọ́wọ́",
+      "balance": "Ìdókòwò",
+      "topUp": "Fi Kun",
+      "withdraw": "Yọ",
+      "transactions": "Àwọn Ìṣòwò Tuntun"
     }
   },
   "footer": {
     "tagline": "Ṣe àyẹyẹ Àwọn Akíkanjú Ẹ̀kọ́ Áfríkà láti 2010",
-    "quickLinks": "Àwọn Àjọṣepọ̀ Tó Yára"
+    "quickLinks": "Àwọn Àjọṣepọ̀ Tó Yára",
+    "getInTouch": "Kàn Sí Wa",
+    "scefFoundation": "Ìpìlẹ̀ SCEF",
+    "madeWith": "A ṣe pẹ̀lú",
+    "forEducation": "fún Ẹ̀kọ́ Áfríkà",
+    "copyright": "© {{year}} Santa Claus Educational Foundation",
+    "links": {
+      "home": "Ilé",
+      "programs": "Àwọn Ètò",
+      "categories": "Ẹ̀ka",
+      "nominate": "Yàn"
+    }
   }
 }

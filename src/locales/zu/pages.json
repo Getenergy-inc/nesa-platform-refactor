@@ -2,48 +2,410 @@
   "landing": {
     "hero": {
       "badge": "Ukuvota Komphakathi Kuvuliwe Manje",
-      "headline": "Ukuhlonipha",
-      "headlineAccent": "Abashintshi Bemfundo e-Afrika",
-      "subheadline": "Ukweseka Nokufeza Imfundo Yawo Wonke Umuntu e-Afrika",
-      "description": "I-New Education Standard Award Africa ({{editionName}}) ibungaza abaholi abanombono, izikhungo nabanobuhlakani abakha ikusasa lemfundo kulo lonke i-Afrika.",
+      "title": "Ukuhlonipha",
+      "titleHighlight": "Abashintshi Bemfundo e-Afrika",
+      "tagline": "Ukweseka Nokufeza Imfundo Yawo Wonke Umuntu e-Afrika",
+      "description": "I-New Education Standard Award Africa ({{edition}}) ibungaza abaholi abanombono, izikhungo nabanobuhlakani abakha ikusasa lemfundo kulo lonke i-Afrika.",
       "discoverMore": "Thola Okwengeziwe",
-      "nominateNow": "Qoka Manje"
+      "nominateNow": "Qoka Manje",
+      "stats": {
+        "nominees": "Abaqokiwe",
+        "countries": "Amazwe",
+        "categories": "Izigaba"
+      },
+      "quickNav": {
+        "refer": "Thumela",
+        "nominate": "Qoka",
+        "vision": "Umbono 2035",
+        "tickets": "Amathikithi",
+        "watch": "Bheka"
+      }
+    },
+    "stats": {
+      "regions": "Izifunda Zase-Afrika",
+      "categories": "Izigaba Zemiklomelo",
+      "subcategories": "Izigabana"
+    },
+    "watchLive": {
+      "title": "Bheka Bukhoma",
+      "description": "I-NESA Afrika TV isakaza kumaphephandaba okuxhumana nomphakathi, iziteshi zamakhambi ne-app ye-CAST TV.",
+      "youtube": "YouTube",
+      "facebook": "Facebook",
+      "castTV": "I-App ye-CAST TV"
+    },
+    "quote": {
+      "text": "{{editionName}} akuyona imicimbi. Yinqubo yokubalisa kwezemfundo esekelwe emazingeni exhuma:",
+      "keywords": {
+        "education": "Imfundo",
+        "recognition": "Ukwamukelwa",
+        "publicParticipation": "Ukubamba Iqhaza Komphakathi",
+        "legacyImpact": "Umthelela Wefa"
+      },
+      "footer": "Kulethwa ngokubusa, ukusebenza obala nokufaneleka kwezwekazi."
     }
   },
   "about": {
+    "title": "Mayelana ne-NESA-Afrika",
+    "mission": "Inhloso Yethu",
+    "vision": "Umbono Wethu",
+    "governance": "Ukubusa",
+    "timeline": "Isikhathi",
+    "meta": {
+      "title": "Mayelana ne-NESA-Afrika | I-New Education Standard Award Africa",
+      "description": "I-NESA-Afrika yinkundla yokubalisa kwezemfundo eqaphela abashintshi abakha ikusasa lemfundo e-Afrika."
+    },
     "hero": {
       "badge": "Uhlelo luka-{{year}}",
       "title": "Mayelana",
-      "titleAccent": "ne-NESA-Afrika"
+      "titleAccent": "ne-NESA-Afrika",
+      "description": "I-New Education Standard Award Africa akuyona iwebhusayithi yemiklomelo. Yinkundla yokubalisa kwezemfundo ebungaza amaqhawe emfundo ase-Afrika.",
+      "exploreCategories": "Hlola Izigaba",
+      "nominateNow": "Qoka Manje"
     },
-    "mission": {
+    "missionSection": {
       "title": "Inhloso Yethu",
-      "description": "Ukuqaphela, ukuqinisekisa nokubungaza abantu, izinhlangano nezikhungo eziqhuba Imfundo Yawo Wonke Umuntu kulo lonke i-Afrika."
+      "description": "Ukuqaphela, ukuqinisekisa nokubungaza abantu nezikhungo eziqhuba Imfundo Yawo Wonke Umuntu kulo lonke i-Afrika."
+    },
+    "pillars": {
+      "title": "Izinsika Zethu Ezine",
+      "recognition": {
+        "title": "Ukwamukelwa",
+        "description": "Ukubungaza amaqhawe emfundo ase-Afrika ngemiklomelo esekelwe ebunyeni."
+      },
+      "accountability": {
+        "title": "Ukubalisa",
+        "description": "Izivikelo zokubusa ziqinisekisa inkululeko yabasekeli nobuqotho bokuvota."
+      },
+      "continentalReach": {
+        "title": "Ukufinyelela Kwezwekazi",
+        "description": "Indlela yesifunda-kuqala ehlanganisa zonke izifunda eziyi-5 zase-Afrika kanye ne-Diaspora."
+      },
+      "impact": {
+        "title": "Umthelela",
+        "description": "Ukuqhuba Imfundo Yawo Wonke Umuntu ngokubonakala nokuqinisekisa."
+      }
+    },
+    "awardTiers": {
+      "title": "Amazinga Emiklomelo",
+      "description": "Izinkundla ezine ezihlukile zokwamukelwa ezinezinqubo eziyingqayizivele.",
+      "platinum": {
+        "title": "Isitifiketi se-Platinum",
+        "description": "Ukwamukelwa kwisisekelo ngomnikelo Wemfundo Yawo Wonke Umuntu. Akukho ukuncintisana, kuqinisekiswe yi-NRC."
+      },
+      "icon": {
+        "title": "I-Afrika Education Icon",
+        "description": "Ukwamukelwa kwempumelelo yempilo. Izigabana ezi-3 e-Afrika, e-Diaspora naBangani Base-Afrika."
+      },
+      "gold": {
+        "title": "Isitifiketi Segolide",
+        "description": "Ukwamukelwa kokuncintisana ngokuvota komphakathi okuyikhulu-phesenti."
+      },
+      "blueGarnet": {
+        "title": "Umklomelo we-Blue Garnet",
+        "description": "Udumo oluphezulu — 60% abahluleleli, 40% ukuvota komphakathi. Abaphumeleli abayi-9 ku-Gala."
+      }
+    },
+    "learnMore": "Funda Kabanzi",
+    "quickLinks": {
+      "vision2035": "Umbono 2035",
+      "governance": "Ukubusa",
+      "timeline": "Isikhathi",
+      "scef": "I-SCEF Foundation"
     }
   },
   "categories": {
+    "title": "Izigaba Zemiklomelo",
+    "description": "Hlola izigaba zethu eziyi-17 zemiklomelo eziqaphela ubuhle emkhakheni wezemfundo wase-Afrika",
+    "viewNominees": "Buka Abaqokiwe",
+    "subcategories": "Izigabana",
+    "meta": {
+      "title": "Izigaba Zemiklomelo | {{editionName}}",
+      "description": "Hlola zonke izigaba eziyi-17 ze-NESA-Afrika nezigabana ezingaphezu kuka-138."
+    },
     "hero": {
       "title": "Izigaba Zemiklomelo Esemthethweni Eziyi-17",
-      "description": "Ukubungaza ubuhle kwezemfundo, umthwalo womphakathi wenkampani, ubuchwepheshe nomthelela womphakathi kulo lonke izwekazi lase-Afrika."
+      "description": "Ukubungaza ubuhle kwezemfundo, umthwalo womphakathi neteknoloji kulo lonke izwekazi lase-Afrika."
+    },
+    "tabs": {
+      "africaFirst": "I-Afrika Kuqala",
+      "nigeria": "INigeria"
+    },
+    "search": {
+      "placeholder": "Sesha izigaba..."
+    },
+    "controls": {
+      "expandAll": "Vula Konke",
+      "collapseAll": "Goqa Konke"
+    },
+    "card": {
+      "subcategories": "izigabana",
+      "viewSubcategories": "Buka Izigabana",
+      "hideSubcategories": "Fihla Izigabana",
+      "noSubcategories": "Azikho izigabana."
+    },
+    "empty": {
+      "title": "Azikho izigaba ezitholiwe",
+      "description": "Zama ukulungisa ukusesha kwakho."
+    },
+    "stats": {
+      "officialCategories": "Izigaba Ezisemthethweni",
+      "totalSubcategories": "Isamba Sezigabana",
+      "africanRegions": "Izifunda Zase-Afrika",
+      "awardTiers": "Amazinga Emiklomelo"
     },
     "cta": {
       "title": "Ulungele Ukuqoka?",
+      "description": "Qaphela ubuhle ngokuthumela ukuqokwa namuhla.",
       "submitNomination": "Thumela Ukuqokwa",
       "viewNominees": "Buka Abaqokiwe"
+    }
+  },
+  "nominees": {
+    "title": "Abaqokiwe",
+    "searchPlaceholder": "Sesha abaqokiwe...",
+    "filterByCategory": "Hlunga Ngesigaba",
+    "noNominees": "Abaqokiwe Abakho",
+    "beFirst": "Yiba ngowokuqala ukuqoka umuntu",
+    "meta": {
+      "title": "Uhlu Lwamaqhawe Emfundo | NESA-Afrika"
+    },
+    "hero": {
+      "badge": "Uhlu Lwamaqhawe Emfundo",
+      "title": "Hlangana",
+      "titleAccent": "Nabaqokiwe Bethu",
+      "description": "Thola othisha nezikhungo ezimangalisayo eziguqula imfundo kulo lonke i-Afrika."
+    },
+    "search": {
+      "placeholder": "Sesha ngegama, inhlangano..."
+    },
+    "filter": {
+      "allCategories": "Zonke Izigaba"
+    },
+    "stats": {
+      "totalNominees": "Isamba Sabaqokiwe",
+      "platinumVerified": "Okuqinisekisiwe kwe-Platinum",
+      "awardCategories": "Izigaba Zemiklomelo",
+      "showing": "Kuboniswa"
+    },
+    "view": {
+      "showing": "Kuboniswa {{current}} kwe-{{total}}",
+      "page": "Ikhasi {{current}} le-{{total}}",
+      "viewLabel": "Umbono:"
+    },
+    "empty": {
+      "title": "Abaqokiwe Abatholakalanga",
+      "description": "Zama ukulungisa izinqubo zokusesha.",
+      "noNominees": "Ukuqokwa kuyabuyekezwa.",
+      "clearFilters": "Sula Izihluzi"
+    },
+    "pagination": {
+      "reachedEnd": "Ufinyelele ekugcineni — abaqokiwe abangu-{{count}} babonisiwe",
+      "loadingMore": "Iyalayisha...",
+      "page": "Ikhasi {{current}} le-{{total}}"
+    }
+  },
+  "vote": {
+    "title": "Vota Ngobuhle",
+    "description": "Vota amaqhawe emfundo ase-Afrika",
+    "votingOpen": "Ukuvota Kuvuliwe",
+    "votingClosed": "Ukuvota Kuvaliwe",
+    "voteNow": "Vota Manje",
+    "yourVote": "Ivoti Lakho Libalulekile",
+    "meta": {
+      "title": "Vota Abaqokiwe | {{editionName}}",
+      "description": "Vota abashintshi bemfundo kumiklomelo ye-{{editionName}}."
+    },
+    "hero": {
+      "badge": "Ukuvota Komphakathi",
+      "title": "Vota Amaqhawe",
+      "titleAccent": "Emfundo Ase-Afrika",
+      "description": "Ivoti lakho lisiza ukuqaphela labo abaguqula imfundo kulo lonke izwekazi."
+    },
+    "filters": {
+      "searchPlaceholder": "Sesha abaqokiwe...",
+      "allCategories": "Zonke Izigaba",
+      "allRegions": "Zonke Izifunda"
+    },
+    "regions": {
+      "westAfrica": "INtshonalanga Afrika",
+      "eastAfrica": "IMpumalanga Afrika",
+      "southernAfrica": "INingizimu ye-Afrika",
+      "northAfrica": "INyakatho Afrika",
+      "centralAfrica": "I-Afrika Ephakathi"
+    },
+    "stats": {
+      "totalNominees": "Isamba Sabaqokiwe",
+      "categories": "Izigaba",
+      "totalVotes": "Isamba Samavoti",
+      "yourVotes": "Amavoti Akho"
+    },
+    "loading": "Ilayisha abaqokiwe...",
+    "empty": {
+      "title": "Abaqokiwe Abatholakalanga",
+      "description": "Zama ukulungisa izihluzi zakho.",
+      "noApproved": "Abaqokiwe abagunyaziwe abekho ukuvota.",
+      "clearFilters": "Sula Izihluzi"
+    },
+    "tabs": {
+      "all": "Konke"
+    },
+    "cta": {
+      "title": "Uyamazi Othile Owenza Umehluko?",
+      "description": "Ukuqokwa yisinyathelo sokuqala sokuqaphela amaqhawe emfundo.",
+      "nominateButton": "Qoka Umshintshi"
+    },
+    "actions": {
+      "vote": "Vota",
+      "voted": "Uvotiwe",
+      "voting": "Iyavota...",
+      "loginToVote": "Ngena ukuvota",
+      "alreadyVoted": "Usuvotelile lo muntu oqokiwe",
+      "voteClosed": "Ukuvota okwamanje kuvaliwe",
+      "voteSuccess": "Ivoti libhaliswe ngempumelelo!",
+      "voteFailed": "Ukuvota kuhlulekile. Zama futhi."
+    }
+  },
+  "results": {
+    "title": "Imiphumela",
+    "winners": "Abaphumeleli",
+    "finalists": "Abafinyelela Ekugcineni",
+    "allResults": "Yonke Imiphumela"
+  },
+  "media": {
+    "title": "Isikhungo Somthombo",
+    "nesaTV": "I-NESA Afrika TV",
+    "webinars": "Ama-Webinar",
+    "gala": "I-Gala Yomklomelo",
+    "shows": "Imibukiso"
+  },
+  "contact": {
+    "title": "Xhumana Nathi",
+    "name": "Igama Lakho",
+    "email": "I-imeyili",
+    "message": "Umlayezo Wakho",
+    "send": "Thumela Umlayezo",
+    "meta": {
+      "title": "Xhumana ne-NESA-Afrika",
+      "description": "Imibuzo mayelana nokuqokwa noma ubudlelwano? Silapha ukusiza."
+    },
+    "hero": {
+      "badge": "Xhumana Nathi",
+      "title": "Xhumana",
+      "titleAccent": "ne-NESA-Afrika",
+      "description": "Imibuzo mayelana nokuqokwa noma ubudlelwano? Silapha ukusiza."
+    },
+    "info": {
+      "email": {
+        "title": "Sithumelele I-imeyili",
+        "description": "Ngemibuzo ejwayelekile nokusekela ukuqokwa"
+      },
+      "phone": {
+        "title": "Shayela Thina",
+        "description": "NgoMsombuluko kuya kuLwesihlanu, 9 ekuseni - 5 ntambama WAT"
+      },
+      "address": {
+        "title": "Sivakashele",
+        "description": "I-Pan-African Secretariat"
+      },
+      "hours": {
+        "title": "Amahora Ehhovisi",
+        "description": "Ivaliwe ngeSonto nangezinsuku zeholide"
+      }
+    },
+    "form": {
+      "tabs": {
+        "general": "Umbuzo Ojwayelekile",
+        "presenter": "Isicelo Somethuli"
+      },
+      "fields": {
+        "fullName": "Igama Eligcwele",
+        "email": "I-imeyili",
+        "phone": "Inombolo Yocingo",
+        "country": "Izwe",
+        "department": "Umnyango",
+        "subject": "Isihloko",
+        "message": "Umlayezo"
+      },
+      "submit": {
+        "sending": "Iyathumela...",
+        "send": "Thumela Umlayezo"
+      }
     }
   },
   "auth": {
     "login": {
       "title": "Siyakwamukela Futhi",
-      "signIn": "Ngena"
+      "subtitle": "Ngena ukuze uqhubeke nokubungaza ubuhle base-Afrika",
+      "email": "I-imeyili",
+      "emailPlaceholder": "Faka i-imeyili yakho",
+      "password": "Iphasiwedi",
+      "passwordPlaceholder": "Faka iphasiwedi yakho",
+      "forgotPassword": "Ukhohlwe iphasiwedi?",
+      "signIn": "Ngena",
+      "signingIn": "Inangena...",
+      "noAccount": "Awunayo i-akhawunti?",
+      "createOne": "Yenza eyodwa",
+      "welcomeBack": "Siyakwamukela emuva ku-NESA Afrika!",
+      "invalidCredentials": "Imininingwane engalungile"
     },
     "register": {
       "title": "Joyina i-NESA Afrika",
-      "createAccount": "Dala I-Akhawunti"
+      "subtitle": "Yenza i-akhawunti yakho ukuqoka, ukuvota nokubungaza ubuhle base-Afrika",
+      "fullName": "Igama Eligcwele",
+      "fullNamePlaceholder": "Faka igama lakho eligcwele",
+      "email": "I-imeyili",
+      "emailPlaceholder": "Faka i-imeyili yakho",
+      "password": "Iphasiwedi",
+      "passwordPlaceholder": "Yenza iphasiwedi",
+      "passwordHint": "Okungenani izinhlamvu eziyisi-6",
+      "referralCode": "Ikhodi Yesifaniselo (Ukukhetha)",
+      "referralCodePlaceholder": "Faka ikhodi yesifaniselo",
+      "referralBonus": "🎁 Nobabili nizothola ibhonasi ye-AGC!",
+      "createAccount": "Dala I-Akhawunti",
+      "creatingAccount": "Idala i-akhawunti...",
+      "haveAccount": "Usunayo i-akhawunti?",
+      "signIn": "Ngena",
+      "successMessage": "I-akhawunti idaliwe ngempumelelo! Siyakwamukela ku-NESA Afrika.",
+      "failedMessage": "Kwehlulekile ukudala i-akhawunti"
+    }
+  },
+  "nominate": {
+    "meta": {
+      "title": "Thumela Ukuqokwa | {{editionName}}"
+    },
+    "header": {
+      "title": "Thumela Ukuqokwa",
+      "breadcrumb": "Qoka"
+    },
+    "steps": {
+      "category": "Isigaba",
+      "nomineeDetails": "Imininingwane Yoqokiwe",
+      "evidence": "Ubufakazi"
+    }
+  },
+  "dashboard": {
+    "title": "Ideshibodi",
+    "wallet": {
+      "title": "Isikhwama",
+      "balance": "Ibhalansi",
+      "topUp": "Gcwalisa",
+      "withdraw": "Khipha",
+      "transactions": "Izinto Zakamuva Zokuthengisa"
     }
   },
   "footer": {
     "tagline": "Ukubungaza Amaqhawe Emfundo e-Afrika kusukela ngo-2010",
-    "quickLinks": "Izixhumanisi Ezisheshayo"
+    "quickLinks": "Izixhumanisi Ezisheshayo",
+    "getInTouch": "Xhumana Nathi",
+    "scefFoundation": "I-SCEF Foundation",
+    "madeWith": "Yenziwe nge",
+    "forEducation": "yeMfundo Yase-Afrika",
+    "copyright": "© {{year}} Santa Claus Educational Foundation",
+    "links": {
+      "home": "Ikhaya",
+      "programs": "Izinhlelo",
+      "categories": "Izigaba",
+      "nominate": "Qoka"
+    }
   }
 }

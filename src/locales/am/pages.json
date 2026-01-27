@@ -2,48 +2,410 @@
   "landing": {
     "hero": {
       "badge": "የህዝብ ድምጽ አሁን ክፍት ነው",
-      "headline": "የአፍሪካ",
-      "headlineAccent": "የትምህርት ለውጥ አመንጪዎችን ማክበር",
-      "subheadline": "በአፍሪካ ለሁሉም ትምህርት መደገፍ እና ማሳካት",
-      "description": "አዲስ የትምህርት ደረጃ ሽልማት አፍሪካ ({{editionName}}) በመላው አፍሪካ የትምህርት የወደፊት እየገነቡ ያሉ ራዕይ ያላቸው መሪዎችን፣ ተቋማትን እና ፈጣሪዎችን ያከብራል።",
+      "title": "የአፍሪካ",
+      "titleHighlight": "የትምህርት ለውጥ አመንጪዎችን ማክበር",
+      "tagline": "በአፍሪካ ለሁሉም ትምህርት መደገፍ እና ማሳካት",
+      "description": "አዲስ የትምህርት ደረጃ ሽልማት አፍሪካ ({{edition}}) በመላው አፍሪካ የትምህርት የወደፊት እየገነቡ ያሉ ራዕይ ያላቸው መሪዎችን፣ ተቋማትን እና ፈጣሪዎችን ያከብራል።",
       "discoverMore": "ተጨማሪ ያግኙ",
-      "nominateNow": "አሁን ይሰይሙ"
+      "nominateNow": "አሁን ይሰይሙ",
+      "stats": {
+        "nominees": "ተመራጮች",
+        "countries": "ሀገራት",
+        "categories": "ምድቦች"
+      },
+      "quickNav": {
+        "refer": "ምረጃ ይስጡ",
+        "nominate": "ይሰይሙ",
+        "vision": "ራዕይ 2035",
+        "tickets": "ቲኬቶች",
+        "watch": "ይመልከቱ"
+      }
+    },
+    "stats": {
+      "regions": "የአፍሪካ ክልሎች",
+      "categories": "የሽልማት ምድቦች",
+      "subcategories": "ንዑስ ምድቦች"
+    },
+    "watchLive": {
+      "title": "በቀጥታ ይመልከቱ",
+      "description": "NESA አፍሪካ TV በማህበራዊ ሚዲያ፣ በአጋር ጣቢያዎች እና በ CAST TV መተግበሪያ ላይ ያሰራጫል።",
+      "youtube": "YouTube",
+      "facebook": "Facebook",
+      "castTV": "CAST TV መተግበሪያ"
+    },
+    "quote": {
+      "text": "{{editionName}} ክስተት አይደለም። በመስፈርቶች ላይ የተመሰረተ የትምህርት ተጠያቂነት ዑደት ነው የሚያገናኘው:",
+      "keywords": {
+        "education": "ትምህርት",
+        "recognition": "እውቅና",
+        "publicParticipation": "የህዝብ ተሳትፎ",
+        "legacyImpact": "የዘላቂ ተጽዕኖ"
+      },
+      "footer": "በአስተዳደር፣ ግልጽነት እና አህጉራዊ ተዛማጅነት ይቀርባል።"
     }
   },
   "about": {
+    "title": "ስለ NESA-አፍሪካ",
+    "mission": "ተልእኳችን",
+    "vision": "ራዕያችን",
+    "governance": "አስተዳደር",
+    "timeline": "የጊዜ ሰሌዳ",
+    "meta": {
+      "title": "ስለ NESA-አፍሪካ | አዲስ የትምህርት ደረጃ ሽልማት አፍሪካ",
+      "description": "NESA-አፍሪካ በአፍሪካ የትምህርት የወደፊት ቅርጽ እየቀረጹ ያሉ ለውጥ አመንጪዎችን የሚያውቅ የትምህርት ተጠያቂነት መድረክ ነው።"
+    },
     "hero": {
       "badge": "የ{{year}} እትም",
       "title": "ስለ",
-      "titleAccent": "NESA-አፍሪካ"
+      "titleAccent": "NESA-አፍሪካ",
+      "description": "አዲስ የትምህርት ደረጃ ሽልማት አፍሪካ የሽልማት ድህረ ገጽ አይደለም። የአፍሪካ ትምህርት ሻምፒዮኖችን የሚያከብር የትምህርት ተጠያቂነት መድረክ ነው።",
+      "exploreCategories": "ምድቦችን ያስሱ",
+      "nominateNow": "አሁን ይሰይሙ"
     },
-    "mission": {
+    "missionSection": {
       "title": "ተልእኳችን",
-      "description": "በመላው አፍሪካ ለሁሉም ትምህርትን የሚያስፈጽሙ ግለሰቦችን፣ ድርጅቶችን እና ተቋማትን መለየት፣ ማረጋገጥ እና ማክበር።"
+      "description": "በመላው አፍሪካ ለሁሉም ትምህርትን የሚያስፈጽሙ ግለሰቦችን እና ተቋማትን መለየት፣ ማረጋገጥ እና ማክበር።"
+    },
+    "pillars": {
+      "title": "አራቱ ምሰሶዎቻችን",
+      "recognition": {
+        "title": "እውቅና",
+        "description": "በብቃት ላይ የተመሰረቱ ሽልማቶች አማካኝነት የአፍሪካ ትምህርት ሻምፒዮኖችን ማክበር።"
+      },
+      "accountability": {
+        "title": "ተጠያቂነት",
+        "description": "የአስተዳደር ጥበቃዎች የስፖንሰር ነፃነት እና የድምጽ ታማኝነትን ያረጋግጣሉ።"
+      },
+      "continentalReach": {
+        "title": "አህጉራዊ ተደራሽነት",
+        "description": "ሁሉንም 5 የአፍሪካ ክልሎች እና ዳያስፖራን የሚሸፍን ክልል-ቀዳሚ አካሄድ።"
+      },
+      "impact": {
+        "title": "ተጽዕኖ",
+        "description": "በታይነት እና ማረጋገጫ አማካኝነት ለሁሉም ትምህርትን ማሳደግ።"
+      }
+    },
+    "awardTiers": {
+      "title": "የሽልማት ደረጃዎች",
+      "description": "ልዩ መስፈርቶች ያሏቸው አራት የተለያዩ የእውቅና መድረኮች።",
+      "platinum": {
+        "title": "ፕላቲኒየም ምስክር ወረቀት",
+        "description": "ለሁሉም ትምህርት አስተዋፅዖ መሰረታዊ እውቅና። ውድድር የሌለው፣ በ NRC የተረጋገጠ።"
+      },
+      "icon": {
+        "title": "የአፍሪካ ትምህርት አዶ",
+        "description": "የዕድሜ ልክ ስኬት እውቅና። በአፍሪካ፣ ዳያስፖራ እና የአፍሪካ ጓደኞች 3 ንዑስ ምድቦች።"
+      },
+      "gold": {
+        "title": "የወርቅ ምስክር ወረቀት",
+        "description": "በ100% የህዝብ ድምጽ ተወዳዳሪ እውቅና።"
+      },
+      "blueGarnet": {
+        "title": "ብሉ ጋርኔት ሽልማት",
+        "description": "ከፍተኛ ክብር — 60% ዳኛ፣ 40% የህዝብ ድምጽ። 9 አሸናፊዎች በጋላ ላይ።"
+      }
+    },
+    "learnMore": "ተጨማሪ ይወቁ",
+    "quickLinks": {
+      "vision2035": "ራዕይ 2035",
+      "governance": "አስተዳደር",
+      "timeline": "የጊዜ ሰሌዳ",
+      "scef": "SCEF ፋውንዴሽን"
     }
   },
   "categories": {
+    "title": "የሽልማት ምድቦች",
+    "description": "በአፍሪካ ትምህርት ዘርፍ ውስጥ ልዩነትን የሚያውቁ 17 የሽልማት ምድቦቻችንን ያስሱ",
+    "viewNominees": "ተመራጮችን ይመልከቱ",
+    "subcategories": "ንዑስ ምድቦች",
+    "meta": {
+      "title": "የሽልማት ምድቦች | {{editionName}}",
+      "description": "ሁሉንም 17 NESA-አፍሪካ ምድቦች እና 138+ ንዑስ ምድቦችን ያስሱ።"
+    },
     "hero": {
       "title": "17 ኦፊሴላዊ የሽልማት ምድቦች",
-      "description": "በመላው የአፍሪካ አህጉር ትምህርት፣ የድርጅት ማህበራዊ ኃላፊነት፣ ቴክኖሎጂ እና ማህበራዊ ተጽእኖ ላይ ጥሩነትን ማክበር።"
+      "description": "በመላው የአፍሪካ አህጉር ትምህርት፣ ማህበራዊ ኃላፊነት እና ቴክኖሎጂ ላይ ጥሩነትን ማክበር።"
+    },
+    "tabs": {
+      "africaFirst": "አፍሪካ ቅድሚያ",
+      "nigeria": "ናይጄሪያ"
+    },
+    "search": {
+      "placeholder": "ምድቦችን ይፈልጉ..."
+    },
+    "controls": {
+      "expandAll": "ሁሉንም ያስፋፉ",
+      "collapseAll": "ሁሉንም ያጥፉ"
+    },
+    "card": {
+      "subcategories": "ንዑስ ምድቦች",
+      "viewSubcategories": "ንዑስ ምድቦችን ይመልከቱ",
+      "hideSubcategories": "ንዑስ ምድቦችን ይደብቁ",
+      "noSubcategories": "ንዑስ ምድቦች የሉም።"
+    },
+    "empty": {
+      "title": "ምድቦች አልተገኙም",
+      "description": "ፍለጋዎን ለማስተካከል ይሞክሩ።"
+    },
+    "stats": {
+      "officialCategories": "ኦፊሴላዊ ምድቦች",
+      "totalSubcategories": "ጠቅላላ ንዑስ ምድቦች",
+      "africanRegions": "የአፍሪካ ክልሎች",
+      "awardTiers": "የሽልማት ደረጃዎች"
     },
     "cta": {
       "title": "ለመሰየም ዝግጁ ነዎት?",
+      "description": "ዛሬ ስያሜ በማቅረብ ልዩነትን ይወቁ።",
       "submitNomination": "ስያሜ ያስገቡ",
-      "viewNominees": "የተሰየሙትን ይመልከቱ"
+      "viewNominees": "ተመራጮችን ይመልከቱ"
+    }
+  },
+  "nominees": {
+    "title": "ተመራጮች",
+    "searchPlaceholder": "ተመራጮችን ይፈልጉ...",
+    "filterByCategory": "በምድብ ያጣሩ",
+    "noNominees": "ተመራጮች የሉም",
+    "beFirst": "የመጀመሪያው ሰይሚ ይሁኑ",
+    "meta": {
+      "title": "የትምህርት ሻምፒዮኖች ማውጫ | NESA-አፍሪካ"
+    },
+    "hero": {
+      "badge": "የትምህርት ሻምፒዮኖች ማውጫ",
+      "title": "ያግኙ",
+      "titleAccent": "ተመራጮቻችንን",
+      "description": "በመላው አፍሪካ ትምህርትን የሚለውጡ አስደናቂ አስተማሪዎች እና ተቋማትን ያግኙ።"
+    },
+    "search": {
+      "placeholder": "በስም፣ ድርጅት ይፈልጉ..."
+    },
+    "filter": {
+      "allCategories": "ሁሉም ምድቦች"
+    },
+    "stats": {
+      "totalNominees": "ጠቅላላ ተመራጮች",
+      "platinumVerified": "ፕላቲኒየም የተረጋገጠ",
+      "awardCategories": "የሽልማት ምድቦች",
+      "showing": "እያሳየ"
+    },
+    "view": {
+      "showing": "{{current}} ከ {{total}} እያሳየ",
+      "page": "ገጽ {{current}} ከ {{total}}",
+      "viewLabel": "እይታ:"
+    },
+    "empty": {
+      "title": "ተመራጮች አልተገኙም",
+      "description": "የፍለጋ መስፈርቶችዎን ለማስተካከል ይሞክሩ።",
+      "noNominees": "ስያሜዎች በመገምገም ላይ ናቸው።",
+      "clearFilters": "ማጣሪያዎችን ያጽዱ"
+    },
+    "pagination": {
+      "reachedEnd": "መጨረሻ ላይ ደርሰዋል — {{count}} ተመራጮች ታይተዋል",
+      "loadingMore": "በመጫን ላይ...",
+      "page": "ገጽ {{current}} ከ {{total}}"
+    }
+  },
+  "vote": {
+    "title": "ለልዩነት ድምጽ ይስጡ",
+    "description": "ለአፍሪካ ትምህርት ሻምፒዮኖች ድምጽ ይስጡ",
+    "votingOpen": "ድምጽ መስጠት ክፍት ነው",
+    "votingClosed": "ድምጽ መስጠት ተዘግቷል",
+    "voteNow": "አሁን ድምጽ ይስጡ",
+    "yourVote": "ድምጽዎ ጠቃሚ ነው",
+    "meta": {
+      "title": "ለተመራጮች ድምጽ ይስጡ | {{editionName}}",
+      "description": "በ{{editionName}} ሽልማቶች ውስጥ ለትምህርት ለውጥ አመንጪዎች ድምጽ ይስጡ።"
+    },
+    "hero": {
+      "badge": "የህዝብ ድምጽ",
+      "title": "ለአፍሪካ ትምህርት",
+      "titleAccent": "ሻምፒዮኖች ድምጽ ይስጡ",
+      "description": "ድምጽዎ በመላው አህጉሪቱ ትምህርትን የሚለውጡትን ለማወቅ ይረዳል።"
+    },
+    "filters": {
+      "searchPlaceholder": "ተመራጮችን ይፈልጉ...",
+      "allCategories": "ሁሉም ምድቦች",
+      "allRegions": "ሁሉም ክልሎች"
+    },
+    "regions": {
+      "westAfrica": "ምዕራብ አፍሪካ",
+      "eastAfrica": "ምስራቅ አፍሪካ",
+      "southernAfrica": "ደቡብ አፍሪካ",
+      "northAfrica": "ሰሜን አፍሪካ",
+      "centralAfrica": "መካከለኛው አፍሪካ"
+    },
+    "stats": {
+      "totalNominees": "ጠቅላላ ተመራጮች",
+      "categories": "ምድቦች",
+      "totalVotes": "ጠቅላላ ድምጾች",
+      "yourVotes": "ድምጾችዎ"
+    },
+    "loading": "ተመራጮች በመጫን ላይ...",
+    "empty": {
+      "title": "ተመራጮች አልተገኙም",
+      "description": "ማጣሪያዎችዎን ለማስተካከል ይሞክሩ።",
+      "noApproved": "ለድምጽ የፀደቁ ተመራጮች የሉም።",
+      "clearFilters": "ማጣሪያዎችን ያጽዱ"
+    },
+    "tabs": {
+      "all": "ሁሉም"
+    },
+    "cta": {
+      "title": "ልዩነት እያደረገ ያለ ሰው ያውቃሉ?",
+      "description": "ስያሜዎች የትምህርት ሻምፒዮኖችን ለማወቅ የመጀመሪያው እርምጃ ናቸው።",
+      "nominateButton": "ለውጥ አመንጪ ይሰይሙ"
+    },
+    "actions": {
+      "vote": "ድምጽ ይስጡ",
+      "voted": "ድምጽ ሰጥተዋል",
+      "voting": "ድምጽ በመስጠት ላይ...",
+      "loginToVote": "ድምጽ ለመስጠት ይግቡ",
+      "alreadyVoted": "ለዚህ ተመራጭ አስቀድመው ድምጽ ሰጥተዋል",
+      "voteClosed": "ድምጽ መስጠት አሁን ተዘግቷል",
+      "voteSuccess": "ድምጽ በተሳካ ሁኔታ ተመዝግቧል!",
+      "voteFailed": "ድምጽ መስጠት አልተሳካም። እንደገና ይሞክሩ።"
+    }
+  },
+  "results": {
+    "title": "ውጤቶች",
+    "winners": "አሸናፊዎች",
+    "finalists": "ፍጻሜ ላይ የደረሱ",
+    "allResults": "ሁሉም ውጤቶች"
+  },
+  "media": {
+    "title": "ሚዲያ ማዕከል",
+    "nesaTV": "NESA አፍሪካ TV",
+    "webinars": "ዌብናሮች",
+    "gala": "የሽልማት ጋላ",
+    "shows": "ትርኢቶች"
+  },
+  "contact": {
+    "title": "ያግኙን",
+    "name": "ስምዎ",
+    "email": "ኢሜይል",
+    "message": "መልእክትዎ",
+    "send": "መልእክት ይላኩ",
+    "meta": {
+      "title": "NESA-አፍሪካን ያግኙ",
+      "description": "ስለ ስያሜዎች ወይም ሽርክና ጥያቄዎች? ለማገዝ እዚህ ነን።"
+    },
+    "hero": {
+      "badge": "ያግኙን",
+      "title": "ያግኙ",
+      "titleAccent": "NESA-አፍሪካን",
+      "description": "ስለ ስያሜዎች ወይም ሽርክና ጥያቄዎች? ለማገዝ እዚህ ነን።"
+    },
+    "info": {
+      "email": {
+        "title": "ኢሜይል ይላኩ",
+        "description": "ለአጠቃላይ ጥያቄዎች እና ስያሜ ድጋፍ"
+      },
+      "phone": {
+        "title": "ይደውሉልን",
+        "description": "ሰኞ እስከ አርብ፣ ከጠዋቱ 9 - ከምሽቱ 5 WAT"
+      },
+      "address": {
+        "title": "ይጎብኙን",
+        "description": "ፓን-አፍሪካ ሴክሬታሪያት"
+      },
+      "hours": {
+        "title": "የቢሮ ሰዓታት",
+        "description": "እሁድ እና በዓላት ላይ ዝግ"
+      }
+    },
+    "form": {
+      "tabs": {
+        "general": "አጠቃላይ ጥያቄ",
+        "presenter": "የአቅራቢ ማመልከቻ"
+      },
+      "fields": {
+        "fullName": "ሙሉ ስም",
+        "email": "ኢሜይል",
+        "phone": "ስልክ ቁጥር",
+        "country": "ሀገር",
+        "department": "ክፍል",
+        "subject": "ርዕሰ ጉዳይ",
+        "message": "መልእክት"
+      },
+      "submit": {
+        "sending": "በመላክ ላይ...",
+        "send": "መልእክት ይላኩ"
+      }
     }
   },
   "auth": {
     "login": {
       "title": "እንኳን ደህና መጡ",
-      "signIn": "ይግቡ"
+      "subtitle": "የአፍሪካን ልዩነት ለማክበር ለመቀጠል ይግቡ",
+      "email": "ኢሜይል",
+      "emailPlaceholder": "ኢሜይልዎን ያስገቡ",
+      "password": "የይለፍ ቃል",
+      "passwordPlaceholder": "የይለፍ ቃልዎን ያስገቡ",
+      "forgotPassword": "የይለፍ ቃል ረሱ?",
+      "signIn": "ይግቡ",
+      "signingIn": "በመግባት ላይ...",
+      "noAccount": "መለያ የለዎትም?",
+      "createOne": "ይፍጠሩ",
+      "welcomeBack": "እንኳን ወደ NESA አፍሪካ በደህና ተመለሱ!",
+      "invalidCredentials": "ልክ ያልሆነ ምስክርነት"
     },
     "register": {
       "title": "NESA አፍሪካ ይቀላቀሉ",
-      "createAccount": "መለያ ይፍጠሩ"
+      "subtitle": "ለመሰየም፣ ድምጽ ለመስጠት እና የአፍሪካን ልዩነት ለማክበር መለያዎን ይፍጠሩ",
+      "fullName": "ሙሉ ስም",
+      "fullNamePlaceholder": "ሙሉ ስምዎን ያስገቡ",
+      "email": "ኢሜይል",
+      "emailPlaceholder": "ኢሜይልዎን ያስገቡ",
+      "password": "የይለፍ ቃል",
+      "passwordPlaceholder": "የይለፍ ቃል ይፍጠሩ",
+      "passwordHint": "ቢያንስ 6 ቁምፊዎች",
+      "referralCode": "የማጣቀሻ ኮድ (አማራጭ)",
+      "referralCodePlaceholder": "የማጣቀሻ ኮድ ያስገቡ",
+      "referralBonus": "🎁 ሁለታችሁም ጉርሻ AGC ታገኛላችሁ!",
+      "createAccount": "መለያ ይፍጠሩ",
+      "creatingAccount": "መለያ በመፍጠር ላይ...",
+      "haveAccount": "መለያ አለዎት?",
+      "signIn": "ይግቡ",
+      "successMessage": "መለያ በተሳካ ሁኔታ ተፈጠረ! እንኳን ወደ NESA አፍሪካ በደህና መጡ።",
+      "failedMessage": "መለያ መፍጠር አልተሳካም"
+    }
+  },
+  "nominate": {
+    "meta": {
+      "title": "ስያሜ ያስገቡ | {{editionName}}"
+    },
+    "header": {
+      "title": "ስያሜ ያስገቡ",
+      "breadcrumb": "ይሰይሙ"
+    },
+    "steps": {
+      "category": "ምድብ",
+      "nomineeDetails": "የተመራጭ ዝርዝሮች",
+      "evidence": "ማስረጃ"
+    }
+  },
+  "dashboard": {
+    "title": "ዳሽቦርድ",
+    "wallet": {
+      "title": "ቦርሳ",
+      "balance": "ቀሪ ሂሳብ",
+      "topUp": "ይሙሉ",
+      "withdraw": "ያውጡ",
+      "transactions": "የቅርብ ጊዜ ግብይቶች"
     }
   },
   "footer": {
     "tagline": "ከ2010 ጀምሮ የአፍሪካ የትምህርት ሻምፒዮኖችን ማክበር",
-    "quickLinks": "ፈጣን አገናኞች"
+    "quickLinks": "ፈጣን አገናኞች",
+    "getInTouch": "ያግኙን",
+    "scefFoundation": "SCEF ፋውንዴሽን",
+    "madeWith": "በ",
+    "forEducation": "ለአፍሪካ ትምህርት የተሰራ",
+    "copyright": "© {{year}} Santa Claus Educational Foundation",
+    "links": {
+      "home": "መነሻ",
+      "programs": "ፕሮግራሞች",
+      "categories": "ምድቦች",
+      "nominate": "ይሰይሙ"
+    }
   }
 }

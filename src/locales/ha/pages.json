@@ -2,48 +2,410 @@
   "landing": {
     "hero": {
       "badge": "Jefa Kuri'a na Jama'a Yanzu a Buɗe",
-      "headline": "Girmama",
-      "headlineAccent": "Masu Canza Ilimi a Afirka",
-      "subheadline": "Kare da Cimma Ilimi ga Kowa a Afirka",
-      "description": "Kyautar Ma'aunin Ilimi Sabuwa ta Afirka ({{editionName}}) tana murnar shugabanni masu hangen nesa, cibiyoyi da masu kirkirar abubuwa da ke gina makomar ilimi a duk fadin Afirka.",
+      "title": "Girmama",
+      "titleHighlight": "Masu Canza Ilimi a Afirka",
+      "tagline": "Kare da Cimma Ilimi ga Kowa a Afirka",
+      "description": "Kyautar Ma'aunin Ilimi Sabuwa ta Afirka ({{edition}}) tana murnar shugabanni masu hangen nesa, cibiyoyi da masu kirkirar abubuwa da ke gina makomar ilimi a duk fadin Afirka.",
       "discoverMore": "Gano Ƙari",
-      "nominateNow": "Tsaya Yanzu"
+      "nominateNow": "Tsaya Yanzu",
+      "stats": {
+        "nominees": "Wadanda Aka Tsaya",
+        "countries": "Ƙasashe",
+        "categories": "Rukunoni"
+      },
+      "quickNav": {
+        "refer": "Bayar da Shawarar",
+        "nominate": "Tsaya",
+        "vision": "Hangen Nesa 2035",
+        "tickets": "Tikiti",
+        "watch": "Kallo"
+      }
+    },
+    "stats": {
+      "regions": "Yankuna na Afirka",
+      "categories": "Rukunonin Kyaututtuka",
+      "subcategories": "Ƙananan Rukunoni"
+    },
+    "watchLive": {
+      "title": "Kallo Kai Tsaye",
+      "description": "NESA Africa TV tana watsa shirye-shirye a kafofin watsa labarun zamantakewa, tashoshin abokan hulɗa da aikace-aikacen CAST TV.",
+      "youtube": "YouTube",
+      "facebook": "Facebook",
+      "castTV": "Aikace-aikacen CAST TV"
+    },
+    "quote": {
+      "text": "{{editionName}} ba taron ba ne. Zagaye ne na lissafin ilimi wanda ke haɗa:",
+      "keywords": {
+        "education": "Ilimi",
+        "recognition": "Sanin Kai",
+        "publicParticipation": "Shiga Jama'a",
+        "legacyImpact": "Tasirin Gado"
+      },
+      "footer": "An bayar da shi tare da mulki, gaskiya da muhimmancin nahiya."
     }
   },
   "about": {
+    "title": "Game da NESA-Afirka",
+    "mission": "Manufarmu",
+    "vision": "Hangen Nesa",
+    "governance": "Mulki",
+    "timeline": "Jadawalin Lokaci",
+    "meta": {
+      "title": "Game da NESA-Afirka | Kyautar Ma'aunin Ilimi Sabuwa ta Afirka",
+      "description": "NESA-Afirka wani dandali ne na lissafin ilimi da ke gane masu canza al'amura da ke tsara makomar ilimi a Afirka."
+    },
     "hero": {
       "badge": "Bugu na {{year}}",
       "title": "Game da",
-      "titleAccent": "NESA-Afirka"
+      "titleAccent": "NESA-Afirka",
+      "description": "Kyautar Ma'aunin Ilimi Sabuwa ta Afirka ba gidan yanar gizo na kyaututtuka ba ne. Dandali ne na lissafin ilimi da ke murnar zakarun ilimi na Afirka.",
+      "exploreCategories": "Bincika Rukunoni",
+      "nominateNow": "Tsaya Yanzu"
     },
-    "mission": {
+    "missionSection": {
       "title": "Manufarmu",
-      "description": "Gane, tabbatar da murnar mutane, ƙungiyoyi da cibiyoyin da ke haɓaka Ilimi ga Kowa a duk fadin Afirka."
+      "description": "Gane, tabbatar da murnar mutane da cibiyoyi da ke tallafawa Ilimi ga Kowa a duk fadin Afirka."
+    },
+    "pillars": {
+      "title": "Ginshikanmu Huɗu",
+      "recognition": {
+        "title": "Sanin Kai",
+        "description": "Murnar zakarun ilimi na Afirka ta hanyar kyaututtuka da suka dogara da cancanta."
+      },
+      "accountability": {
+        "title": "Lissafi",
+        "description": "Kariyar mulki tana tabbatar da 'yancin masu tallafawa da amincin jefa kuri'a."
+      },
+      "continentalReach": {
+        "title": "Isasshen Nahiya",
+        "description": "Hanyar yanki-farko da ke rufe dukkan yankuna 5 na Afirka da kuma waɗanda ke waje."
+      },
+      "impact": {
+        "title": "Tasiri",
+        "description": "Haɓaka Ilimi ga Kowa ta hanyar gani da tabbatarwa."
+      }
+    },
+    "awardTiers": {
+      "title": "Matakan Kyaututtuka",
+      "description": "Dandali huɗu na daban-daban tare da ma'auni na musamman.",
+      "platinum": {
+        "title": "Satifiket na Platinum",
+        "description": "Sanin tushe don gudummawa ga Ilimi ga Kowa. Ba mai fafatawa ba, NRC ta tabbatar."
+      },
+      "icon": {
+        "title": "Alamar Ilimi na Afirka",
+        "description": "Sanin nasarorin rayuwa. Ƙananan rukunoni 3 a Afirka, waɗanda ke waje da Abokan Afirka."
+      },
+      "gold": {
+        "title": "Satifiket na Zinare",
+        "description": "Sanin gasa ta hanyar jefa kuri'ar jama'a 100%."
+      },
+      "blueGarnet": {
+        "title": "Kyautar Blue Garnet",
+        "description": "Babban girmamawa — 60% alkali, 40% jefa kuri'ar jama'a. Masu nasara 9 a Gala."
+      }
+    },
+    "learnMore": "Ƙara Koyo",
+    "quickLinks": {
+      "vision2035": "Hangen Nesa 2035",
+      "governance": "Mulki",
+      "timeline": "Jadawalin Lokaci",
+      "scef": "Gidauniyar SCEF"
     }
   },
   "categories": {
+    "title": "Rukunonin Kyaututtuka",
+    "description": "Bincika rukunonin kyaututtuka 17 da ke gane inganci a sashen ilimi na Afirka",
+    "viewNominees": "Duba Wadanda Aka Tsaya",
+    "subcategories": "Ƙananan rukunoni",
+    "meta": {
+      "title": "Rukunonin Kyaututtuka | {{editionName}}",
+      "description": "Bincika dukkan rukunoni 17 na NESA-Afirka da ƙananan rukunoni 138+."
+    },
     "hero": {
-      "title": "Rukuni 17 na Kyaututtuka na Hukuma",
-      "description": "Murnar nagarta a ilimi, alhakin kamfani, fasaha da tasirin zamantakewa a duk nahiyar Afirka."
+      "title": "Rukunoni 17 na Kyaututtuka na Hukuma",
+      "description": "Murnar nagarta a ilimi, alhakin kamfani da fasaha a duk nahiyar Afirka."
+    },
+    "tabs": {
+      "africaFirst": "Afirka Farko",
+      "nigeria": "Nijeriya"
+    },
+    "search": {
+      "placeholder": "Nema rukunoni..."
+    },
+    "controls": {
+      "expandAll": "Faɗaɗa Duka",
+      "collapseAll": "Rufe Duka"
+    },
+    "card": {
+      "subcategories": "ƙananan rukunoni",
+      "viewSubcategories": "Duba Ƙananan Rukunoni",
+      "hideSubcategories": "Ɓoye Ƙananan Rukunoni",
+      "noSubcategories": "Babu ƙananan rukunoni."
+    },
+    "empty": {
+      "title": "Ba a sami rukunoni ba",
+      "description": "Gwada daidaita nemarka."
+    },
+    "stats": {
+      "officialCategories": "Rukunoni na Hukuma",
+      "totalSubcategories": "Jumlar Ƙananan Rukunoni",
+      "africanRegions": "Yankuna na Afirka",
+      "awardTiers": "Matakan Kyaututtuka"
     },
     "cta": {
       "title": "Kuna Shirye Tsayar?",
+      "description": "Gane inganci ta hanyar aika tsayawa yau.",
       "submitNomination": "Aika Tsayawa",
       "viewNominees": "Duba Wadanda Aka Tsaya"
+    }
+  },
+  "nominees": {
+    "title": "Wadanda Aka Tsaya",
+    "searchPlaceholder": "Nemo wadanda aka tsaya...",
+    "filterByCategory": "Tace ta Rukuni",
+    "noNominees": "Babu Wadanda Aka Tsaya",
+    "beFirst": "Kasance na farko da zai tsaya wani",
+    "meta": {
+      "title": "Kundin Zakarun Ilimi | NESA-Afirka"
+    },
+    "hero": {
+      "badge": "Kundin Zakarun Ilimi",
+      "title": "Hadu da",
+      "titleAccent": "Wadanda Aka Tsaya",
+      "description": "Gano malamai da cibiyoyi masu ban sha'awa da ke canza ilimi a duk fadin Afirka."
+    },
+    "search": {
+      "placeholder": "Nema ta suna, ƙungiya..."
+    },
+    "filter": {
+      "allCategories": "Dukkan Rukunoni"
+    },
+    "stats": {
+      "totalNominees": "Jumlar Wadanda Aka Tsaya",
+      "platinumVerified": "An Tabbatar da Platinum",
+      "awardCategories": "Rukunonin Kyaututtuka",
+      "showing": "Ana Nuna"
+    },
+    "view": {
+      "showing": "Ana nuna {{current}} daga cikin {{total}}",
+      "page": "Shafi {{current}} daga cikin {{total}}",
+      "viewLabel": "Kallo:"
+    },
+    "empty": {
+      "title": "Ba a Sami Wadanda Aka Tsaya Ba",
+      "description": "Gwada daidaita ma'aunin nemarka.",
+      "noNominees": "Ana duba tsayawa.",
+      "clearFilters": "Goge Tacewa"
+    },
+    "pagination": {
+      "reachedEnd": "Ka isa ƙarshe — an nuna wadanda aka tsaya {{count}}",
+      "loadingMore": "Ana lodi...",
+      "page": "Shafi {{current}} daga cikin {{total}}"
+    }
+  },
+  "vote": {
+    "title": "Jefa Kuri'a don Nagarta",
+    "description": "Jefa kuri'a ga zakarun ilimi na Afirka",
+    "votingOpen": "Jefa Kuri'a a Buɗe",
+    "votingClosed": "Jefa Kuri'a a Rufe",
+    "voteNow": "Jefa Kuri'a Yanzu",
+    "yourVote": "Kuri'arka Tana da Muhimmanci",
+    "meta": {
+      "title": "Jefa Kuri'a ga Wadanda Aka Tsaya | {{editionName}}",
+      "description": "Jefa kuri'a ga masu canza ilimi a kyaututtukan {{editionName}}."
+    },
+    "hero": {
+      "badge": "Jefa Kuri'ar Jama'a",
+      "title": "Jefa Kuri'a ga Zakarun",
+      "titleAccent": "Ilimi na Afirka",
+      "description": "Kuri'arka tana taimakawa wajen gane waɗanda ke canza ilimi a duk nahiyar."
+    },
+    "filters": {
+      "searchPlaceholder": "Nemo wadanda aka tsaya...",
+      "allCategories": "Dukkan Rukunoni",
+      "allRegions": "Dukkan Yankuna"
+    },
+    "regions": {
+      "westAfrica": "Yammacin Afirka",
+      "eastAfrica": "Gabashin Afirka",
+      "southernAfrica": "Kudancin Afirka",
+      "northAfrica": "Arewacin Afirka",
+      "centralAfrica": "Tsakiyar Afirka"
+    },
+    "stats": {
+      "totalNominees": "Jumlar Wadanda Aka Tsaya",
+      "categories": "Rukunoni",
+      "totalVotes": "Jumlar Kuri'u",
+      "yourVotes": "Kuri'unku"
+    },
+    "loading": "Ana lodi wadanda aka tsaya...",
+    "empty": {
+      "title": "Ba a Sami Wadanda Aka Tsaya Ba",
+      "description": "Gwada daidaita tacewarka.",
+      "noApproved": "Babu wadanda aka amince da su da za a jefa musu kuri'a.",
+      "clearFilters": "Goge Tacewa"
+    },
+    "tabs": {
+      "all": "Duka"
+    },
+    "cta": {
+      "title": "Ka San Wani Da Ke Yin Bambanci?",
+      "description": "Tsayawa shi ne mataki na farko na gane zakarun ilimi.",
+      "nominateButton": "Tsaya Mai Canjawa"
+    },
+    "actions": {
+      "vote": "Jefa Kuri'a",
+      "voted": "An Jefa Kuri'a",
+      "voting": "Ana jefa kuri'a...",
+      "loginToVote": "Shiga don jefa kuri'a",
+      "alreadyVoted": "Ka riga ka jefa kuri'a ga wannan mai tsayawa",
+      "voteClosed": "Jefa kuri'a a yanzu a rufe",
+      "voteSuccess": "An yi nasarar rubuta kuri'a!",
+      "voteFailed": "Jefa kuri'a ta kasa. Sake gwadawa."
+    }
+  },
+  "results": {
+    "title": "Sakamako",
+    "winners": "Masu Nasara",
+    "finalists": "Wadanda Suka Kai Ƙarshe",
+    "allResults": "Dukkan Sakamako"
+  },
+  "media": {
+    "title": "Cibiyar Kafofin Watsa Labarai",
+    "nesaTV": "NESA Afirka TV",
+    "webinars": "Taruka ta Intanet",
+    "gala": "Bikin Kyaututtuka",
+    "shows": "Shirye-shirye"
+  },
+  "contact": {
+    "title": "Tuntube Mu",
+    "name": "Sunan ka",
+    "email": "Imel",
+    "message": "Saƙon ka",
+    "send": "Aika Saƙo",
+    "meta": {
+      "title": "Tuntubi NESA-Afirka",
+      "description": "Tambayoyi game da tsayawa ko haɗin gwiwa? Muna nan don taimakawa."
+    },
+    "hero": {
+      "badge": "Tuntube Mu",
+      "title": "Tuntubi",
+      "titleAccent": "NESA-Afirka",
+      "description": "Tambayoyi game da tsayawa ko haɗin gwiwa? Muna nan don taimakawa."
+    },
+    "info": {
+      "email": {
+        "title": "Aika Imel",
+        "description": "Don tambayoyi na gaba ɗaya da tallafin tsayawa"
+      },
+      "phone": {
+        "title": "Kira Mu",
+        "description": "Litinin zuwa Juma'a, 9 na safe - 5 na yamma WAT"
+      },
+      "address": {
+        "title": "Ziyarce Mu",
+        "description": "Sakatariyar Pan-Afirka"
+      },
+      "hours": {
+        "title": "Sa'o'in Ofis",
+        "description": "A rufe ranar Lahadi da ranakun hutu"
+      }
+    },
+    "form": {
+      "tabs": {
+        "general": "Tambaya ta Gaba Ɗaya",
+        "presenter": "Aikace-aikacen Mai Gabatarwa"
+      },
+      "fields": {
+        "fullName": "Cikakken Suna",
+        "email": "Imel",
+        "phone": "Lambar Waya",
+        "country": "Ƙasa",
+        "department": "Sashe",
+        "subject": "Batu",
+        "message": "Saƙo"
+      },
+      "submit": {
+        "sending": "Ana aikawa...",
+        "send": "Aika Saƙo"
+      }
     }
   },
   "auth": {
     "login": {
       "title": "Barka da Dawowa",
-      "signIn": "Shiga"
+      "subtitle": "Shiga don ci gaba da murnar nagarta na Afirka",
+      "email": "Imel",
+      "emailPlaceholder": "Shigar da imel ɗinka",
+      "password": "Kalmar Sirri",
+      "passwordPlaceholder": "Shigar da kalmar sirri",
+      "forgotPassword": "Ka manta kalmar sirri?",
+      "signIn": "Shiga",
+      "signingIn": "Ana shiga...",
+      "noAccount": "Ba ka da asusu?",
+      "createOne": "Ƙirƙira ɗaya",
+      "welcomeBack": "Barka da dawowa NESA Afirka!",
+      "invalidCredentials": "Bayanan shiga ba daidai ba ne"
     },
     "register": {
       "title": "Shiga NESA Afirka",
-      "createAccount": "Ƙirƙiri Asusu"
+      "subtitle": "Ƙirƙiri asusunka don tsayawa, jefa kuri'a da murnar nagarta na Afirka",
+      "fullName": "Cikakken Suna",
+      "fullNamePlaceholder": "Shigar da cikakken sunanka",
+      "email": "Imel",
+      "emailPlaceholder": "Shigar da imel ɗinka",
+      "password": "Kalmar Sirri",
+      "passwordPlaceholder": "Ƙirƙira kalmar sirri",
+      "passwordHint": "Aƙalla haruffa 6",
+      "referralCode": "Lambar Bayar da Shawarar (Zaɓi)",
+      "referralCodePlaceholder": "Shigar da lambar bayar da shawarar",
+      "referralBonus": "🎁 Dukanku za ku sami ƙarin AGC!",
+      "createAccount": "Ƙirƙiri Asusu",
+      "creatingAccount": "Ana ƙirƙira asusu...",
+      "haveAccount": "Kana da asusu?",
+      "signIn": "Shiga",
+      "successMessage": "An ƙirƙiri asusu! Barka da zuwa NESA Afirka.",
+      "failedMessage": "An kasa ƙirƙira asusu"
+    }
+  },
+  "nominate": {
+    "meta": {
+      "title": "Aika Tsayawa | {{editionName}}"
+    },
+    "header": {
+      "title": "Aika Tsayawa",
+      "breadcrumb": "Tsaya"
+    },
+    "steps": {
+      "category": "Rukuni",
+      "nomineeDetails": "Bayanan Mai Tsayawa",
+      "evidence": "Shaida"
+    }
+  },
+  "dashboard": {
+    "title": "Dashboard",
+    "wallet": {
+      "title": "Wallet",
+      "balance": "Ma'auni",
+      "topUp": "Cika",
+      "withdraw": "Cire",
+      "transactions": "Ma'amaloli na Kwanan Nan"
     }
   },
   "footer": {
     "tagline": "Murnar Zakaru na Ilimi na Afirka tun 2010",
-    "quickLinks": "Hanyoyin Sauri"
+    "quickLinks": "Hanyoyin Sauri",
+    "getInTouch": "Tuntube Mu",
+    "scefFoundation": "Gidauniyar SCEF",
+    "madeWith": "An yi da",
+    "forEducation": "don Ilimin Afirka",
+    "copyright": "© {{year}} Santa Claus Educational Foundation",
+    "links": {
+      "home": "Gida",
+      "programs": "Shirye-shirye",
+      "categories": "Rukunoni",
+      "nominate": "Tsaya"
+    }
   }
 }

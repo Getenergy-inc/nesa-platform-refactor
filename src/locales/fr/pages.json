@@ -25,29 +25,312 @@
       "regions": "Régions Africaines",
       "categories": "Catégories de Prix",
       "subcategories": "Sous-Catégories"
+    },
+    "watchLive": {
+      "title": "Regarder en Direct",
+      "description": "NESA Africa TV diffuse sur les réseaux sociaux, les chaînes partenaires et l'application CAST TV.",
+      "youtube": "YouTube",
+      "facebook": "Facebook",
+      "castTV": "Application CAST TV"
+    },
+    "quote": {
+      "text": "{{editionName}} n'est pas un événement. C'est un cycle de responsabilité éducative basé sur des normes qui connecte :",
+      "keywords": {
+        "education": "Éducation",
+        "recognition": "Reconnaissance",
+        "publicParticipation": "Participation Publique",
+        "legacyImpact": "Impact Durable"
+      },
+      "footer": "Livré avec gouvernance, transparence et pertinence continentale."
     }
   },
   "about": {
     "title": "À Propos de NESA-Africa",
     "mission": "Notre Mission",
     "vision": "Notre Vision",
-    "governance": "Gouvernance"
+    "governance": "Gouvernance",
+    "timeline": "Chronologie",
+    "meta": {
+      "title": "À Propos de NESA-Africa | New Education Standard Award Africa",
+      "description": "NESA-Africa est une plateforme de responsabilité éducative reconnaissant les acteurs du changement qui façonnent l'avenir de l'éducation en Afrique."
+    },
+    "hero": {
+      "badge": "Édition {{year}}",
+      "title": "À Propos de",
+      "titleAccent": "NESA-Africa",
+      "description": "Le New Education Standard Award Africa n'est pas un site de prix. C'est une plateforme de responsabilité éducative célébrant les champions de l'éducation africaine.",
+      "exploreCategories": "Explorer les Catégories",
+      "nominateNow": "Nominer Maintenant"
+    },
+    "missionSection": {
+      "title": "Notre Mission",
+      "description": "Reconnaître, valider et célébrer les individus et institutions qui font avancer l'Éducation Pour Tous en Afrique."
+    },
+    "pillars": {
+      "title": "Nos Quatre Piliers",
+      "recognition": {
+        "title": "Reconnaissance",
+        "description": "Célébrer les champions de l'éducation africaine à travers des prix basés sur le mérite."
+      },
+      "accountability": {
+        "title": "Responsabilité",
+        "description": "Des pare-feux de gouvernance assurent l'indépendance et l'intégrité du vote."
+      },
+      "continentalReach": {
+        "title": "Portée Continentale",
+        "description": "Approche régionale couvrant les 5 régions africaines plus la Diaspora."
+      },
+      "impact": {
+        "title": "Impact",
+        "description": "Promouvoir l'Éducation Pour Tous à travers la visibilité et la validation."
+      }
+    },
+    "awardTiers": {
+      "title": "Niveaux de Prix",
+      "description": "Quatre plateformes de reconnaissance distinctes avec des critères uniques.",
+      "platinum": {
+        "title": "Certificat Platinum",
+        "description": "Reconnaissance de base pour contribution à l'Éducation Pour Tous. Non compétitif, vérifié par le NRC."
+      },
+      "icon": {
+        "title": "Icône de l'Éducation Africaine",
+        "description": "Reconnaissance de carrière. 3 sous-catégories en Afrique, Diaspora et Amis de l'Afrique."
+      },
+      "gold": {
+        "title": "Certificat Or",
+        "description": "Reconnaissance compétitive par vote public à 100%."
+      },
+      "blueGarnet": {
+        "title": "Prix Blue Garnet",
+        "description": "Plus haute distinction — 60% jury, 40% vote public. 9 gagnants au Gala."
+      }
+    },
+    "learnMore": "En Savoir Plus",
+    "quickLinks": {
+      "vision2035": "Vision 2035",
+      "governance": "Gouvernance",
+      "timeline": "Chronologie",
+      "scef": "Fondation SCEF"
+    }
   },
   "categories": {
     "title": "Catégories de Prix",
-    "description": "Explorez nos 17 catégories de prix"
+    "description": "Explorez nos 17 catégories de prix reconnaissant l'excellence dans le secteur éducatif africain",
+    "viewNominees": "Voir les Nominés",
+    "subcategories": "Sous-catégories",
+    "meta": {
+      "title": "Catégories de Prix | {{editionName}}",
+      "description": "Explorez toutes les 17 catégories NESA-Africa et 138+ sous-catégories."
+    },
+    "hero": {
+      "title": "17 Catégories Officielles de Prix",
+      "description": "Célébrer l'excellence en éducation, responsabilité sociale et technologie à travers l'Afrique."
+    },
+    "tabs": {
+      "africaFirst": "Afrique d'Abord",
+      "nigeria": "Nigeria"
+    },
+    "search": {
+      "placeholder": "Rechercher des catégories..."
+    },
+    "controls": {
+      "expandAll": "Tout Développer",
+      "collapseAll": "Tout Réduire"
+    },
+    "card": {
+      "subcategories": "sous-catégories",
+      "viewSubcategories": "Voir les Sous-catégories",
+      "hideSubcategories": "Masquer les Sous-catégories",
+      "noSubcategories": "Aucune sous-catégorie disponible."
+    },
+    "empty": {
+      "title": "Aucune catégorie trouvée",
+      "description": "Essayez d'ajuster votre recherche."
+    },
+    "stats": {
+      "officialCategories": "Catégories Officielles",
+      "totalSubcategories": "Total Sous-catégories",
+      "africanRegions": "Régions Africaines",
+      "awardTiers": "Niveaux de Prix"
+    },
+    "cta": {
+      "title": "Prêt à Nominer ?",
+      "description": "Reconnaissez l'excellence en soumettant une nomination aujourd'hui.",
+      "submitNomination": "Soumettre une Nomination",
+      "viewNominees": "Voir les Nominés"
+    }
   },
   "nominees": {
     "title": "Nominés",
-    "searchPlaceholder": "Rechercher des nominés..."
+    "searchPlaceholder": "Rechercher des nominés...",
+    "filterByCategory": "Filtrer par Catégorie",
+    "noNominees": "Aucun Nominé",
+    "beFirst": "Soyez le premier à nominer quelqu'un",
+    "meta": {
+      "title": "Répertoire des Champions de l'Éducation | NESA-Africa"
+    },
+    "hero": {
+      "badge": "Répertoire des Champions de l'Éducation",
+      "title": "Découvrez Nos",
+      "titleAccent": "Nominés",
+      "description": "Découvrez les éducateurs et institutions remarquables qui transforment l'éducation en Afrique."
+    },
+    "search": {
+      "placeholder": "Rechercher par nom, organisation..."
+    },
+    "filter": {
+      "allCategories": "Toutes les Catégories"
+    },
+    "stats": {
+      "totalNominees": "Total Nominés",
+      "platinumVerified": "Vérifiés Platinum",
+      "awardCategories": "Catégories de Prix",
+      "showing": "Affichage"
+    },
+    "view": {
+      "showing": "Affichage {{current}} sur {{total}}",
+      "page": "Page {{current}} sur {{total}}",
+      "viewLabel": "Vue :"
+    },
+    "empty": {
+      "title": "Aucun Nominé Trouvé",
+      "description": "Essayez d'ajuster vos critères de recherche.",
+      "noNominees": "Les nominations sont en cours de révision.",
+      "clearFilters": "Effacer les Filtres"
+    },
+    "pagination": {
+      "reachedEnd": "Fin atteinte — {{count}} nominés affichés",
+      "loadingMore": "Chargement...",
+      "page": "Page {{current}} sur {{total}}"
+    }
   },
   "vote": {
     "title": "Voter pour l'Excellence",
-    "voteNow": "Voter Maintenant"
+    "description": "Votez pour les champions de l'éducation africaine",
+    "votingOpen": "Vote Ouvert",
+    "votingClosed": "Vote Fermé",
+    "voteNow": "Voter Maintenant",
+    "yourVote": "Votre Vote Compte",
+    "meta": {
+      "title": "Voter pour les Nominés | {{editionName}}",
+      "description": "Votez pour les acteurs du changement éducatif dans les prix {{editionName}}."
+    },
+    "hero": {
+      "badge": "Vote Public",
+      "title": "Votez pour les",
+      "titleAccent": "Champions de l'Éducation",
+      "description": "Votre vote aide à reconnaître ceux qui transforment l'éducation à travers le continent."
+    },
+    "filters": {
+      "searchPlaceholder": "Rechercher des nominés...",
+      "allCategories": "Toutes les Catégories",
+      "allRegions": "Toutes les Régions"
+    },
+    "regions": {
+      "westAfrica": "Afrique de l'Ouest",
+      "eastAfrica": "Afrique de l'Est",
+      "southernAfrica": "Afrique Australe",
+      "northAfrica": "Afrique du Nord",
+      "centralAfrica": "Afrique Centrale"
+    },
+    "stats": {
+      "totalNominees": "Total Nominés",
+      "categories": "Catégories",
+      "totalVotes": "Total Votes",
+      "yourVotes": "Vos Votes"
+    },
+    "loading": "Chargement des nominés...",
+    "empty": {
+      "title": "Aucun Nominé Trouvé",
+      "description": "Essayez d'ajuster vos filtres.",
+      "noApproved": "Aucun nominé approuvé disponible pour le vote.",
+      "clearFilters": "Effacer les Filtres"
+    },
+    "tabs": {
+      "all": "Tous"
+    },
+    "cta": {
+      "title": "Connaissez Quelqu'un Qui Fait la Différence ?",
+      "description": "Les nominations sont la première étape pour reconnaître les champions de l'éducation.",
+      "nominateButton": "Nominer un Champion"
+    },
+    "actions": {
+      "vote": "Voter",
+      "voted": "Voté",
+      "voting": "Vote en cours...",
+      "loginToVote": "Connectez-vous pour voter",
+      "alreadyVoted": "Vous avez déjà voté pour ce nominé",
+      "voteClosed": "Le vote est actuellement fermé",
+      "voteSuccess": "Vote enregistré avec succès !",
+      "voteFailed": "Échec du vote. Réessayez."
+    }
+  },
+  "results": {
+    "title": "Résultats",
+    "winners": "Gagnants",
+    "finalists": "Finalistes",
+    "allResults": "Tous les Résultats"
+  },
+  "media": {
+    "title": "Médiathèque",
+    "nesaTV": "NESA Africa TV",
+    "webinars": "Webinaires",
+    "gala": "Gala de Remise des Prix",
+    "shows": "Émissions"
   },
   "contact": {
     "title": "Nous Contacter",
-    "send": "Envoyer"
+    "name": "Votre Nom",
+    "email": "Adresse Email",
+    "message": "Votre Message",
+    "send": "Envoyer le Message",
+    "meta": {
+      "title": "Contacter NESA-Africa",
+      "description": "Questions sur les nominations ou partenariats ? Nous sommes là pour vous aider."
+    },
+    "hero": {
+      "badge": "Contactez-Nous",
+      "title": "Contacter",
+      "titleAccent": "NESA-Africa",
+      "description": "Questions sur les nominations ou partenariats ? Nous sommes là pour vous aider."
+    },
+    "info": {
+      "email": {
+        "title": "Envoyez-nous un Email",
+        "description": "Pour les demandes générales et le support des nominations"
+      },
+      "phone": {
+        "title": "Appelez-nous",
+        "description": "Lundi au Vendredi, 9h - 17h WAT"
+      },
+      "address": {
+        "title": "Visitez-nous",
+        "description": "Secrétariat Panafricain"
+      },
+      "hours": {
+        "title": "Heures d'Ouverture",
+        "description": "Fermé les dimanches et jours fériés"
+      }
+    },
+    "form": {
+      "tabs": {
+        "general": "Demande Générale",
+        "presenter": "Candidature Présentateur"
+      },
+      "fields": {
+        "fullName": "Nom Complet",
+        "email": "Adresse Email",
+        "phone": "Numéro de Téléphone",
+        "country": "Pays",
+        "department": "Département",
+        "subject": "Sujet",
+        "message": "Message"
+      },
+      "submit": {
+        "sending": "Envoi...",
+        "send": "Envoyer le Message"
+      }
+    }
   },
   "auth": {
     "login": {
@@ -84,6 +367,30 @@
       "signIn": "Se connecter",
       "successMessage": "Compte créé avec succès ! Bienvenue sur NESA Africa.",
       "failedMessage": "Échec de la création du compte"
+    }
+  },
+  "nominate": {
+    "meta": {
+      "title": "Soumettre une Nomination | {{editionName}}"
+    },
+    "header": {
+      "title": "Soumettre une Nomination",
+      "breadcrumb": "Nominer"
+    },
+    "steps": {
+      "category": "Catégorie",
+      "nomineeDetails": "Détails du Nominé",
+      "evidence": "Preuves"
+    }
+  },
+  "dashboard": {
+    "title": "Tableau de Bord",
+    "wallet": {
+      "title": "Portefeuille",
+      "balance": "Solde",
+      "topUp": "Recharger",
+      "withdraw": "Retirer",
+      "transactions": "Transactions Récentes"
     }
   },
   "footer": {
