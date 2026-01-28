@@ -2,21 +2,11 @@ import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
 import { CertificateGallery } from "@/components/nesa/CertificateGallery";
 import { AwardTVShowSection } from "@/components/awards/AwardTVShowSection";
+import { AwardHeroSection } from "@/components/awards/AwardHeroSection";
 import { getTVShowByAward } from "@/config/awardTVShows";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import {
-  ArrowLeft,
-  Award,
-  Calendar,
-  CheckCircle,
-  FileCheck,
-  Medal,
-  RefreshCw,
-  Shield,
-  Users,
-} from "lucide-react";
+import { Award, FileCheck, Medal, RefreshCw, Shield } from "lucide-react";
 
 const benefits = [
   { icon: Medal, title: "Recognition", description: "Official recognition of your contribution to education in Africa." },
@@ -47,74 +37,20 @@ export default function PlatinumAward() {
 
       <div className="min-h-screen bg-charcoal">
         {/* Hero */}
-        <section className="relative bg-gradient-to-b from-charcoal to-charcoal/95 py-20 lg:py-28">
-          <div className="container mx-auto px-4">
-            <Link
-              to="/categories"
-              className="mb-6 inline-flex items-center gap-2 text-sm text-white/60 hover:text-primary"
-            >
-              <ArrowLeft className="h-4 w-4" />
-              Back to Categories
-            </Link>
-            <div className="max-w-3xl">
-              <Badge className="mb-4 bg-amber-500/20 text-amber-400">Entry-Level Recognition</Badge>
-              <h1 className="mb-6 font-display text-4xl font-bold text-white md:text-5xl">
-                <span className="text-amber-400">Platinum</span> Certificate of Recognition
-              </h1>
-              <p className="mb-8 text-lg text-white/70">
-                Baseline recognition for individuals and organizations contributing to
-                Education for All in Africa. Non-competitive, NRC verified, valid for 1 year.
-              </p>
-              <Button asChild size="lg" className="bg-primary text-primary-foreground">
-                <Link to="/nominate">
-                  <Award className="mr-2 h-5 w-5" />
-                  Get Nominated
-                </Link>
-              </Button>
-            </div>
-          </div>
-        </section>
-
-        {/* Key Info */}
-        <section className="bg-charcoal/95 py-16 lg:py-24">
-          <div className="container mx-auto px-4">
-            <div className="mx-auto grid max-w-4xl gap-8 md:grid-cols-3">
-              <Card className="border-white/10 bg-white/5 text-center">
-                <CardHeader>
-                  <CardTitle className="flex flex-col items-center gap-2 text-white">
-                    <Users className="h-8 w-8 text-amber-400" />
-                    Non-Competitive
-                  </CardTitle>
-                </CardHeader>
-                <CardContent className="text-white/60">
-                  All valid nominations that pass NRC review receive recognition.
-                </CardContent>
-              </Card>
-              <Card className="border-white/10 bg-white/5 text-center">
-                <CardHeader>
-                  <CardTitle className="flex flex-col items-center gap-2 text-white">
-                    <Shield className="h-8 w-8 text-amber-400" />
-                    NRC Verified
-                  </CardTitle>
-                </CardHeader>
-                <CardContent className="text-white/60">
-                  Every nomination is validated by the Nominee Research Corps.
-                </CardContent>
-              </Card>
-              <Card className="border-white/10 bg-white/5 text-center">
-                <CardHeader>
-                  <CardTitle className="flex flex-col items-center gap-2 text-white">
-                    <Calendar className="h-8 w-8 text-amber-400" />
-                    1-Year Validity
-                  </CardTitle>
-                </CardHeader>
-                <CardContent className="text-white/60">
-                  Certificate valid for one year with simple renewal process.
-                </CardContent>
-              </Card>
-            </div>
-          </div>
-        </section>
+        <AwardHeroSection
+          variant="platinum"
+          title="Platinum"
+          titleAccent="Certificate"
+          description="The foundational recognition for all NESA nominees. A non-competitive, governance-verified certificate of excellence across 17 education categories."
+          primaryAction={{
+            label: "Submit Nomination",
+            href: "/nominate",
+            icon: Award,
+          }}
+          secondaryAction={{
+            label: "28 Feb 2026",
+          }}
+        />
 
         {/* Benefits */}
         <section className="bg-charcoal py-16 lg:py-24">
@@ -126,7 +62,7 @@ export default function PlatinumAward() {
               {benefits.map((benefit) => (
                 <Card key={benefit.title} className="border-white/10 bg-white/5">
                   <CardHeader className="text-center">
-                    <benefit.icon className="mx-auto mb-2 h-8 w-8 text-amber-400" />
+                    <benefit.icon className="mx-auto mb-2 h-8 w-8 text-slate-300" />
                     <CardTitle className="text-white">{benefit.title}</CardTitle>
                   </CardHeader>
                   <CardContent className="text-center text-white/60">
@@ -147,7 +83,7 @@ export default function PlatinumAward() {
             <div className="mx-auto grid max-w-4xl gap-6 md:grid-cols-2 lg:grid-cols-4">
               {steps.map((s) => (
                 <div key={s.step} className="relative text-center">
-                  <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-amber-500/20 text-xl font-bold text-amber-400">
+                  <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-slate-500/20 text-xl font-bold text-slate-300">
                     {s.step}
                   </div>
                   <h3 className="mb-2 font-semibold text-white">{s.title}</h3>
