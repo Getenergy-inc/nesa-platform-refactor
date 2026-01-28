@@ -1,21 +1,22 @@
 # NESA-Africa Legacy Nominee Migration Runbook
 
-**Version:** 1.0.0  
-**Last Updated:** 2026-01-26
+**Version:** 2.0.0  
+**Last Updated:** 2026-01-28
 
 ---
 
 ## Overview
 
-This runbook documents the complete process for extracting, normalizing, and importing legacy nominees into the NESA-Africa platform.
+This runbook documents the complete process for extracting, normalizing, and importing legacy nominees from the Prisma/Express backend into the new Lovable NESA-Africa platform.
 
 ---
 
 ## Prerequisites
 
 - [ ] Admin access to Supabase project (`sjghitoydzpirpqjules`)
+- [ ] Access to legacy Supabase/Postgres database (from nesaserver)
 - [ ] Node.js 18+ installed
-- [ ] Access to legacy data sources (CMS exports, ZIPs, etc.)
+- [ ] Legacy backend ZIP extracted
 
 ---
 
@@ -23,73 +24,82 @@ This runbook documents the complete process for extracting, normalizing, and imp
 
 | File | Purpose |
 |------|---------|
-| `nominees.raw.repo.json` | Nominees extracted from codebase |
-| `nominees.raw.live.json` | Nominees from live database |
+| `nesaserver.zip` | Legacy backend codebase (Prisma schema reference) |
+| `category-mapping.json` | PRD 17-category mapping |
 | `nominees.final.json` | Canonical deduped import file |
 | `nominees.dedupe.report.md` | Deduplication audit report |
-| `nominees.mapping.todo.md` | Items requiring manual category mapping |
-| `runbook.md` | This file |
+| `LOVABLE_IMPORT_EXPORT_PROMPT.md` | AI prompt for import assistance |
+| `scripts/export-from-legacy-prisma.ts` | **NEW** - Legacy Prisma export script |
 | `scripts/extract-from-zip.ts` | ZIP extraction script |
-| `scripts/live-extraction-guide.md` | Guide for scraping live site |
 | `scripts/normalize-and-dedupe.ts` | Normalization script |
 | `scripts/import-nominees.ts` | Import execution script |
 
 ---
 
-## Step 1: Collect Source Data
+## Step 1: Export from Legacy Database
 
-### 1.1 Repository Search (DONE)
+### 1.1 Set Environment Variables
 ```bash
-# Already completed - results in nominees.raw.repo.json
-# No hardcoded nominees found in codebase
+export LEGACY_SUPABASE_URL="https://your-legacy-project.supabase.co"
+export LEGACY_SUPABASE_SERVICE_KEY="eyJ..."
 ```
 
-### 1.2 Live Database Export (DONE)
-```bash
-# Already completed - results in nominees.raw.live.json
-# Database currently has 0 nominees
-```
-
-### 1.3 ZIP Archive Extraction
-```bash
-# If ZIP files are available:
-cd migration
-npx ts-node scripts/extract-from-zip.ts /path/to/archive.zip
-```
-
-### 1.4 Live Site Scraping (if needed)
-See `scripts/live-extraction-guide.md` for Chrome DevTools approach.
-
----
-
-## Step 2: Normalize Data
-
-### 2.1 Run Normalization Script
+### 1.2 Run Export Script
 ```bash
 cd migration
-npx ts-node scripts/normalize-and-dedupe.ts
+npx ts-node scripts/export-from-legacy-prisma.ts
 ```
 
-### 2.2 Review Output
-- Check `nominees.dedupe.report.md` for duplicates
-- Review `nominees.mapping.todo.md` for manual mapping tasks
-- Verify `nominees.final.json` looks correct
+### 1.3 Review Output
+The script generates:
+
+**Raw Legacy Exports (for audit):**
+- `exports/legacy_nominees.json`
+- `exports/legacy_nomination_records.json`
+- `exports/legacy_documents.json`
+- `exports/legacy_certificates.json`
+
+**PRD-Ready Imports:**
+- `exports/prd_nominees.json` / `.csv`
+- `exports/prd_nominations.json` / `.csv`
+- `exports/import_summary.json`
 
 ---
 
-## Step 3: Manual Review
+## Step 2: Review Category Mappings
 
-### 3.1 Category Mapping
-- Open `nominees.mapping.todo.md`
-- For each unmapped nominee, assign correct category/subcategory
-- Mark each as APPROVE, REJECT, or DISCUSS
+### 2.1 Check Unmapped Nominees
+```bash
+cat exports/import_summary.json | jq '.category_mapping_needed'
+```
 
-### 3.2 Update Final File
-After manual review, update `nominees.final.json` with corrected mappings.
+### 2.2 Update Category Mappings
+Edit `category-mapping.json` to add any missing legacy→new category mappings.
+
+### 2.3 Re-run Export
+After updating mappings, re-run the export script.
 
 ---
 
-## Step 4: Import to Database
+## Step 3: Validate Data Quality
+
+### 3.1 Check for Duplicates
+Review `prd_nominees.csv` for duplicate names/orgs.
+
+### 3.2 Verify Renomination Counts
+```bash
+# Sum of all renomination_count_total should match nomination_records_total
+cat exports/prd_nominees.json | jq '[.[].renomination_count_total] | add'
+```
+
+### 3.3 Check Channel Distribution
+```bash
+cat exports/import_summary.json | jq '.channels'
+```
+
+---
+
+## Step 4: Import to New Database
 
 ### 4.1 Get Admin Token
 ```typescript
@@ -100,7 +110,7 @@ const supabase = createClient(
   'your-service-role-key'
 );
 
-const { data, error } = await supabase.auth.signInWithPassword({
+const { data } = await supabase.auth.signInWithPassword({
   email: 'admin@nesa-africa.org',
   password: 'your-password'
 });
@@ -110,47 +120,12 @@ console.log(data.session.access_token);
 
 ### 4.2 Dry Run Import
 ```bash
-curl -X POST \
-  "https://sjghitoydzpirpqjules.supabase.co/functions/v1/import-nominees" \
-  -H "Authorization: Bearer YOUR_ADMIN_TOKEN" \
-  -H "Content-Type: application/json" \
-  -d '{
-    "nominees": [...],
-    "dry_run": true
-  }'
-```
-
-Expected response:
-```json
-{
-  "dry_run": true,
-  "would_import": 150,
-  "validation_errors": [],
-  "sample_records": [...]
-}
+DRY_RUN=true ADMIN_TOKEN=xxx npx ts-node scripts/import-nominees.ts
 ```
 
 ### 4.3 Actual Import
 ```bash
-curl -X POST \
-  "https://sjghitoydzpirpqjules.supabase.co/functions/v1/import-nominees" \
-  -H "Authorization: Bearer YOUR_ADMIN_TOKEN" \
-  -H "Content-Type: application/json" \
-  -d '{
-    "nominees": [...],
-    "dry_run": false
-  }'
-```
-
-Expected response:
-```json
-{
-  "success": true,
-  "imported": 150,
-  "failed": 0,
-  "errors": [],
-  "created_ids": ["uuid-1", "uuid-2", ...]
-}
+ADMIN_TOKEN=xxx npx ts-node scripts/import-nominees.ts
 ```
 
 ---
@@ -161,70 +136,76 @@ Expected response:
 ```sql
 SELECT COUNT(*) as total FROM nominees;
 SELECT status, COUNT(*) FROM nominees GROUP BY status;
-SELECT c.name, COUNT(n.id) 
-FROM categories c 
-LEFT JOIN subcategories s ON s.category_id = c.id 
-LEFT JOIN nominees n ON n.subcategory_id = s.id 
-GROUP BY c.name;
 ```
 
-### 5.2 Check Audit Logs
+### 5.2 Check Renomination Counts Preserved
 ```sql
-SELECT * FROM audit_logs 
-WHERE action = 'bulk_import_nominees' 
-ORDER BY created_at DESC 
-LIMIT 5;
+SELECT name, renomination_count 
+FROM nominees 
+WHERE renomination_count > 0 
+ORDER BY renomination_count DESC 
+LIMIT 20;
 ```
 
 ### 5.3 Verify Frontend
 1. Visit `/nominees` page
-2. Confirm nominees appear in directory
+2. Confirm nominees appear with correct categories
 3. Test search and filters
-4. Click through to individual nominee profiles
+4. Verify nominee profiles show work done / evidence
 
 ---
 
-## Step 6: Cleanup
+## Step 6: Post-Import Tasks
 
-### 6.1 Archive Migration Files
+### 6.1 Generate Email Notification Job
+Create batch email to all imported nominees with:
+- New profile links
+- Updated platform information
+- Re-verification instructions (if needed)
+
+### 6.2 Archive Migration Files
 ```bash
-tar -czvf migration-archive-2026-01-26.tar.gz migration/
+tar -czvf migration-archive-$(date +%Y-%m-%d).tar.gz migration/exports/
 ```
 
-### 6.2 Document Issues
-Log any issues encountered in project documentation.
-
 ---
 
-## Idempotency Notes
+## Data Preservation Details
 
-The import process is designed to be idempotent:
+### Brand/Org Info
+- `organization` → `organization` (direct)
+- `website` → stored in `evidence_urls` array
+- `linkedinProfile` → stored in `evidence_urls` array
+- `profileImageUrl` → `photo_url`
+- `logoUrl` → `logo_url`
 
-1. **Slug uniqueness:** Each nominee gets a unique slug based on name + timestamp
-2. **Re-running:** Running import twice will create duplicates - avoid unless needed
-3. **Updates:** Use separate UPDATE queries for existing records
+### Work Done
+- Combined from `nominationReason` + `nominatorMessage` fields
+- Stored in nominee `bio` + nomination `justification`
+- Evidence links from `SupportingDocument` table
 
-To safely re-run:
-1. Delete all nominees first (if full re-import needed)
-2. Or filter out already-imported records by comparing slugs
+### Renomination History
+- `nominationCount` → `renomination_count`
+- Full nomination history in `nominations` table
+- Channel tracking: START_MEMBER, NRC, PUBLIC
 
 ---
 
 ## Troubleshooting
 
-### Error: "Unauthorized - missing token"
-- Ensure Bearer token is included in Authorization header
-- Check token hasn't expired
-
-### Error: "Forbidden - admin access required"
-- User must have 'admin' role in user_roles table
-
 ### Error: "No subcategory found"
-- Check category/subcategory slugs match database
-- Run: `SELECT slug FROM subcategories ORDER BY slug;`
+1. Check legacy category name against `category-mapping.json`
+2. Add mapping if missing
+3. Re-run export
 
-### Error: "Maximum 500 nominees per import batch"
-- Split import into batches of 500 or fewer
+### Error: "Duplicate identity hash"
+1. Review duplicate candidates in export
+2. Manually merge or dedupe
+3. Re-run import
+
+### Error: "RLS policy violation"
+1. Ensure using admin token with correct role
+2. Check `user_roles` table for admin role
 
 ---
 
