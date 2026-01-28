@@ -1,8 +1,6 @@
 import { useState } from "react";
 import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
-import { NESAHeader } from "@/components/nesa/NESAHeader";
-import { NESAFooter } from "@/components/nesa/NESAFooter";
 import { useSeason } from "@/contexts/SeasonContext";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -170,8 +168,6 @@ export default function Tickets() {
       </Helmet>
 
       <div className="min-h-screen bg-background">
-        <NESAHeader />
-
         {/* Hero */}
         <section className="relative h-64 overflow-hidden">
           <img
@@ -413,8 +409,6 @@ export default function Tickets() {
             </div>
           </div>
         </main>
-
-        <NESAFooter />
       </div>
     </>
   );

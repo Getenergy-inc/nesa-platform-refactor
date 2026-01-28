@@ -17,8 +17,6 @@ import {
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { NESAHeader } from "@/components/nesa/NESAHeader";
-import { NESAFooter } from "@/components/nesa/NESAFooter";
 
 // SCEF Color theme for RMSA
 const rmsaColors = {
@@ -97,8 +95,6 @@ export default function Rebuild() {
       </Helmet>
 
       <div className="min-h-screen bg-charcoal">
-        <NESAHeader />
-
         {/* Hero Section */}
         <section className="relative pt-24 pb-16 overflow-hidden">
           {/* Background gradient */}
@@ -398,8 +394,6 @@ export default function Rebuild() {
             </div>
           </div>
         </section>
-
-        <NESAFooter />
       </div>
     </>
   );

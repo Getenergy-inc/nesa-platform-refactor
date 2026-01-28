@@ -1,7 +1,5 @@
 import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
-import { NESAHeader } from "@/components/nesa/NESAHeader";
-import { NESAFooter } from "@/components/nesa/NESAFooter";
 import { useSeason } from "@/contexts/SeasonContext";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -71,8 +69,6 @@ export default function Donate() {
       </Helmet>
 
       <div className="min-h-screen bg-charcoal">
-        <NESAHeader />
-
         {/* Hero */}
         <section className="relative bg-gradient-to-b from-charcoal to-charcoal/95 py-20 lg:py-28">
           <div className="container mx-auto px-4">
@@ -379,8 +375,6 @@ export default function Donate() {
             </div>
           </div>
         </section>
-
-        <NESAFooter />
       </div>
     </>
   );

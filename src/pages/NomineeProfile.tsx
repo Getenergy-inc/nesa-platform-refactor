@@ -15,8 +15,6 @@ import { Separator } from "@/components/ui/separator";
 import { Progress } from "@/components/ui/progress";
 import { Skeleton } from "@/components/ui/skeleton";
 import { toast } from "sonner";
-import { NESAHeader } from "@/components/nesa/NESAHeader";
-import { NESAFooter } from "@/components/nesa/NESAFooter";
 import { useAuth } from "@/contexts/AuthContext";
 import { renominateNominee } from "@/lib/api";
 
@@ -174,11 +172,9 @@ export default function NomineeProfile() {
   if (isLoading) {
     return (
       <div className="min-h-screen bg-charcoal">
-        <NESAHeader />
         <div className="container mx-auto px-4 py-24">
           <ProfileSkeleton />
         </div>
-        <NESAFooter />
       </div>
     );
   }
@@ -186,7 +182,6 @@ export default function NomineeProfile() {
   if (error || !nominee) {
     return (
       <div className="min-h-screen bg-charcoal">
-        <NESAHeader />
         <div className="container mx-auto px-4 py-24">
           <div className="max-w-2xl mx-auto text-center">
             <Users className="w-16 h-16 text-ivory/20 mx-auto mb-4" />
@@ -202,15 +197,12 @@ export default function NomineeProfile() {
             </Button>
           </div>
         </div>
-        <NESAFooter />
       </div>
     );
   }
 
   return (
     <div className="min-h-screen bg-charcoal">
-      <NESAHeader />
-
       {/* Hero Section */}
       <section className="relative pt-24 pb-16 bg-gradient-to-b from-charcoal via-charcoal/95 to-charcoal overflow-hidden">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-gold/5 via-transparent to-transparent" />
@@ -531,8 +523,6 @@ export default function NomineeProfile() {
           </div>
         </div>
       </section>
-
-      <NESAFooter />
     </div>
   );
 }
