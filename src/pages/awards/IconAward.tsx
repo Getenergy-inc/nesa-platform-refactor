@@ -49,7 +49,7 @@ export default function IconAward() {
           variant="icon"
           title="Africa Education"
           titleAccent="Icon"
-          description="Honouring 9 exceptional individuals who have shaped education across Africa over the past decade (2014–2024)."
+          description="Honouring 9 exceptional individuals who have shaped education across Africa over 10 continuous years of advocating education for all in Africa (2005–2025)."
           features={["3 Icons per subcategory", "Selected across Africa, Diaspora & Friends of Africa"]}
           primaryAction={{
             label: "Nominate an Icon",
