@@ -7,8 +7,6 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Toggle } from "@/components/ui/toggle";
-import { NESAHeader } from "@/components/nesa/NESAHeader";
-import { NESAFooter } from "@/components/nesa/NESAFooter";
 import { NomineeCard, NomineeCardSkeleton, type NomineeCardData } from "@/components/nesa/NomineeCard";
 
 const ITEMS_PER_PAGE = 12;
@@ -187,8 +185,6 @@ export default function Nominees() {
 
   return (
     <div className="min-h-screen bg-charcoal">
-      <NESAHeader />
-
       {/* Hero Section */}
       <section className="relative pt-24 pb-16 bg-gradient-to-b from-charcoal via-charcoal/95 to-charcoal">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-gold/5 via-transparent to-transparent" />
@@ -437,8 +433,6 @@ export default function Nominees() {
           )}
         </div>
       </section>
-
-      <NESAFooter />
     </div>
   );
 }

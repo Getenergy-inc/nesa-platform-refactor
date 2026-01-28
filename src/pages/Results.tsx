@@ -23,8 +23,6 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { StageGate } from "@/components/StageGate";
-import { NESAHeader } from "@/components/nesa/NESAHeader";
-import { NESAFooter } from "@/components/nesa/NESAFooter";
 import { useSeason } from "@/contexts/SeasonContext";
 import { supabase } from "@/integrations/supabase/client";
 
@@ -217,8 +215,6 @@ export default function Results() {
           content={`View the official award winners and results for ${currentEdition.name}. Celebrating Africa's outstanding education changemakers.`}
         />
       </Helmet>
-
-      <NESAHeader />
 
       <main className="min-h-screen bg-background">
         {/* Hero Section */}
@@ -427,8 +423,6 @@ export default function Results() {
           </div>
         </section>
       </main>
-
-      <NESAFooter />
     </>
   );
 }

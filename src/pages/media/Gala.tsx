@@ -1,7 +1,5 @@
 import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
-import { NESAHeader } from "@/components/nesa/NESAHeader";
-import { NESAFooter } from "@/components/nesa/NESAFooter";
 import { useSeason } from "@/contexts/SeasonContext";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -55,8 +53,6 @@ export default function Gala() {
       </Helmet>
 
       <div className="min-h-screen bg-charcoal">
-        <NESAHeader />
-
         {/* Hero with Gala Image */}
         <section className="relative min-h-[70vh] flex items-center overflow-hidden">
           {/* Background Image */}
@@ -257,8 +253,6 @@ export default function Gala() {
             </div>
           </div>
         </section>
-
-        <NESAFooter />
       </div>
     </>
   );
