@@ -2,11 +2,12 @@ import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
 import { CertificateGallery } from "@/components/nesa/CertificateGallery";
 import { AwardTVShowSection } from "@/components/awards/AwardTVShowSection";
+import { AwardHeroSection } from "@/components/awards/AwardHeroSection";
 import { getTVShowByAward } from "@/config/awardTVShows";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { ArrowLeft, Award, Globe, Heart, Star, Trophy, Users } from "lucide-react";
+import { Award, Globe, Heart, Star, Trophy, Users } from "lucide-react";
 
 const iconTVShow = getTVShowByAward("icon");
 
@@ -44,55 +45,21 @@ export default function IconAward() {
 
       <div className="min-h-screen bg-charcoal">
         {/* Hero */}
-        <section className="relative bg-gradient-to-b from-charcoal to-charcoal/95 py-20 lg:py-28">
-          <div className="container mx-auto px-4">
-            <Link
-              to="/categories"
-              className="mb-6 inline-flex items-center gap-2 text-sm text-white/60 hover:text-primary"
-            >
-              <ArrowLeft className="h-4 w-4" />
-              Back to Categories
-            </Link>
-            <div className="max-w-3xl">
-              <Badge className="mb-4 bg-blue-500/20 text-blue-400">Lifetime Achievement</Badge>
-              <h1 className="mb-6 font-display text-4xl font-bold text-white md:text-5xl">
-                Africa <span className="text-blue-400">Education Icon</span> Award
-              </h1>
-              <p className="mb-8 text-lg text-white/70">
-                The highest personal honour recognizing individuals with exceptional lifetime
-                contributions to education transformation across Africa and beyond.
-              </p>
-              <div className="flex flex-wrap gap-4">
-                <Button asChild size="lg" className="bg-primary text-primary-foreground">
-                  <Link to="/nominate">
-                    <Star className="mr-2 h-5 w-5" />
-                    Nominate an Icon
-                  </Link>
-                </Button>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Stats */}
-        <section className="bg-charcoal/95 py-12">
-          <div className="container mx-auto px-4">
-            <div className="mx-auto grid max-w-3xl gap-8 text-center md:grid-cols-3">
-              <div>
-                <div className="mb-2 text-4xl font-bold text-blue-400">9</div>
-                <div className="text-white/60">Icons per Season</div>
-              </div>
-              <div>
-                <div className="mb-2 text-4xl font-bold text-blue-400">3</div>
-                <div className="text-white/60">Subcategories</div>
-              </div>
-              <div>
-                <div className="mb-2 text-4xl font-bold text-blue-400">Lifetime</div>
-                <div className="text-white/60">Recognition</div>
-              </div>
-            </div>
-          </div>
-        </section>
+        <AwardHeroSection
+          variant="icon"
+          title="Africa Education"
+          titleAccent="Icon"
+          description="Honouring 9 exceptional individuals who have shaped education across Africa over the past decade (2014–2024)."
+          features={["3 Icons per subcategory", "Selected across Africa, Diaspora & Friends of Africa"]}
+          primaryAction={{
+            label: "Nominate an Icon",
+            href: "/nominate",
+            icon: Award,
+          }}
+          secondaryAction={{
+            label: "Icon Show: 28 Mar 2026",
+          }}
+        />
 
         {/* Subcategories */}
         <section className="bg-charcoal py-16 lg:py-24">
@@ -102,16 +69,16 @@ export default function IconAward() {
             </h2>
             <div className="grid gap-6 md:grid-cols-3">
               {subcategories.map((cat) => (
-                <Card key={cat.title} className="border-white/10 bg-gradient-to-br from-blue-500/10 to-transparent">
+                <Card key={cat.title} className="border-white/10 bg-gradient-to-br from-gold/10 to-transparent">
                   <CardHeader>
-                    <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-blue-500/20">
-                      <cat.icon className="h-6 w-6 text-blue-400" />
+                    <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-gold/20">
+                      <cat.icon className="h-6 w-6 text-gold" />
                     </div>
                     <CardTitle className="text-white">{cat.title}</CardTitle>
                     <CardDescription className="text-white/60">{cat.description}</CardDescription>
                   </CardHeader>
                   <CardContent>
-                    <Badge variant="outline" className="border-blue-500/30 text-blue-400">
+                    <Badge variant="outline" className="border-gold/30 text-gold">
                       {cat.count} Icons per Season
                     </Badge>
                   </CardContent>
@@ -137,7 +104,7 @@ export default function IconAward() {
                   "Advocacy for Education for All principles",
                 ].map((criterion, i) => (
                   <div key={i} className="flex items-start gap-3 rounded-lg bg-white/5 p-4">
-                    <Trophy className="mt-0.5 h-5 w-5 flex-shrink-0 text-blue-400" />
+                    <Trophy className="mt-0.5 h-5 w-5 flex-shrink-0 text-gold" />
                     <span className="text-white/80">{criterion}</span>
                   </div>
                 ))}
@@ -147,7 +114,7 @@ export default function IconAward() {
         </section>
 
         {/* TV Show Section */}
-        {iconTVShow && <AwardTVShowSection show={iconTVShow} accentColor="blue" />}
+        {iconTVShow && <AwardTVShowSection show={iconTVShow} accentColor="gold" />}
 
         {/* Certificate Gallery */}
         <CertificateGallery />
