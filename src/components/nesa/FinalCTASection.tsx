@@ -68,7 +68,7 @@ export function FinalCTASection() {
             {[
               { text: "54 Countries" },
               { text: "2,500+ Nominees" },
-              { text: "15+ Years" },
+              { text: "15+ Years of Vision Conception" },
             ].map((item) => (
               <div 
                 key={item.text}
