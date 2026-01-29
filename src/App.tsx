@@ -58,6 +58,7 @@ import Judges from "./pages/Judges";
 import Partners from "./pages/Partners";
 import Chapters from "./pages/Chapters";
 import Volunteer from "./pages/Volunteer";
+import Ambassadors from "./pages/Ambassadors";
 import Contact from "./pages/Contact";
 import Vote from "./pages/Vote";
 import Tickets from "./pages/Tickets";
@@ -149,6 +150,7 @@ const App = () => (
                 <Route path="/partners" element={<WithLayout><Partners /></WithLayout>} />
                 <Route path="/chapters" element={<WithLayout><Chapters /></WithLayout>} />
                 <Route path="/volunteer" element={<WithLayout><Volunteer /></WithLayout>} />
+                <Route path="/ambassadors" element={<WithLayout><Ambassadors /></WithLayout>} />
                 <Route path="/contact" element={<WithLayout><Contact /></WithLayout>} />
                 <Route path="/policies" element={<WithLayout><Policies /></WithLayout>} />
                 
