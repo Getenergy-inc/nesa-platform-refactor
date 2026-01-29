@@ -1,5 +1,3 @@
-import { NESAHeader } from "@/components/nesa/NESAHeader";
-import { NESAFooter } from "@/components/nesa/NESAFooter";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -105,8 +103,6 @@ const currentPartners = [
 export default function Partners() {
   return (
     <div className="min-h-screen bg-background">
-      <NESAHeader />
-      
       {/* Hero Section */}
       <section className="relative bg-gradient-to-br from-nesa-gold/20 via-background to-nesa-gold/10 py-20">
         <div className="container mx-auto px-4">
@@ -228,8 +224,6 @@ export default function Partners() {
           </Link>
         </div>
       </section>
-
-      <NESAFooter />
     </div>
   );
 }

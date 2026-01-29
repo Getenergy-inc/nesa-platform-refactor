@@ -21,8 +21,6 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
-import { NESAHeader } from "@/components/nesa/NESAHeader";
-import { NESAFooter } from "@/components/nesa/NESAFooter";
 import { useSeason } from "@/contexts/SeasonContext";
 
 const LAST_UPDATED = "January 2025";
@@ -39,8 +37,6 @@ export default function Policies() {
           content="Review NESA Africa's Privacy Policy, Terms of Service, and Governance Guidelines. Transparency and accountability in recognizing education excellence."
         />
       </Helmet>
-
-      <NESAHeader />
 
       <main className="min-h-screen bg-background">
         {/* Hero Section */}
@@ -513,8 +509,6 @@ export default function Policies() {
           </div>
         </section>
       </main>
-
-      <NESAFooter />
     </>
   );
 }

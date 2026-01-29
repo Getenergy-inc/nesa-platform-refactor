@@ -19,8 +19,6 @@ import { Badge } from "@/components/ui/badge";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { StageGate } from "@/components/StageGate";
-import { NESAHeader } from "@/components/nesa/NESAHeader";
-import { NESAFooter } from "@/components/nesa/NESAFooter";
 import { NomineeCard, NomineeCardSkeleton, type NomineeCardData } from "@/components/nesa/NomineeCard";
 import { useSeason } from "@/contexts/SeasonContext";
 import { useAuth } from "@/contexts/AuthContext";
@@ -246,8 +244,6 @@ export default function Vote() {
         />
       </Helmet>
 
-      <NESAHeader />
-
       <main className="min-h-screen bg-background">
         {/* Hero Section */}
         <section className="relative bg-gradient-to-br from-charcoal via-charcoal/95 to-charcoal py-16 md:py-24">
@@ -469,8 +465,6 @@ export default function Vote() {
           </div>
         </section>
       </main>
-
-      <NESAFooter />
     </>
   );
 }
