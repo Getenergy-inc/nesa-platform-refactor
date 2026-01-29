@@ -1,7 +1,5 @@
 import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
-import { NESAHeader } from "@/components/nesa/NESAHeader";
-import { NESAFooter } from "@/components/nesa/NESAFooter";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -149,8 +147,6 @@ export default function EduAid() {
       </Helmet>
 
       <div className="min-h-screen bg-charcoal">
-        <NESAHeader />
-
         {/* Hero Section - EduAid Branded */}
         <section 
           className="relative py-24 lg:py-32 overflow-hidden"
@@ -700,8 +696,6 @@ export default function EduAid() {
             </div>
           </div>
         </section>
-
-        <NESAFooter />
       </div>
     </>
   );

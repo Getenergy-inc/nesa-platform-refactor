@@ -12,8 +12,6 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
-import { NESAHeader } from "@/components/nesa/NESAHeader";
-import { NESAFooter } from "@/components/nesa/NESAFooter";
 
 interface CertificateData {
   id: string;
@@ -102,8 +100,6 @@ export default function CertificateVerify() {
 
   return (
     <div className="min-h-screen bg-charcoal">
-      <NESAHeader />
-
       {/* Hero Section */}
       <section className="relative pt-24 pb-16 bg-gradient-to-b from-charcoal via-charcoal/95 to-charcoal">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-gold/5 via-transparent to-transparent" />
@@ -404,8 +400,6 @@ export default function CertificateVerify() {
           </div>
         </div>
       </section>
-
-      <NESAFooter />
     </div>
   );
 }
