@@ -62,6 +62,7 @@ import Ambassadors from "./pages/Ambassadors";
 import Contact from "./pages/Contact";
 import Vote from "./pages/Vote";
 import Tickets from "./pages/Tickets";
+import BuyYourTicket from "./pages/BuyYourTicket";
 
 // OLC Pages
 import { OLCDashboard, OLCMembers, OLCSettlements, OLCWallet } from "./pages/olc";
@@ -119,6 +120,7 @@ const App = () => (
                 <Route path="/media/webinars" element={<WithLayout><Webinars /></WithLayout>} />
                 <Route path="/media/gala" element={<WithLayout><Gala /></WithLayout>} />
                 <Route path="/tickets" element={<WithLayout><Tickets /></WithLayout>} />
+                <Route path="/buy-your-ticket" element={<WithLayout><BuyYourTicket /></WithLayout>} />
                 
                 {/* Auth - minimal layout */}
                 <Route path="/login" element={<WithLayout showFooter={false}><Login /></WithLayout>} />
