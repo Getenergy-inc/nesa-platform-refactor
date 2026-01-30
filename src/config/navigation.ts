@@ -203,6 +203,12 @@ export const MAIN_NAV: NavItem[] = [
         description: "Represent NESA-Africa in your region",
         icon: UserPlus,
       },
+      {
+        label: "Buy Your Ticket",
+        href: "/buy-your-ticket",
+        description: "Get tickets for the NESA-Africa Gala 2026",
+        icon: Ticket,
+      },
     ],
   },
   {
