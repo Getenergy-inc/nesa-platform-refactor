@@ -3,7 +3,6 @@ import { Helmet } from "react-helmet-async";
 import { Link, Navigate } from "react-router-dom";
 import { DashboardLayout } from "@/components/layout/DashboardLayout";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { GFAWalletIcon } from "@/components/ui/GFAWalletIcon";
@@ -22,7 +21,7 @@ interface WalletBalance {
 interface Transaction {
   id: string;
   direction: "CREDIT" | "DEBIT";
-  amount_agc: number;
+  amount: number;
   reason: string;
   source_type: string;
   created_at: string;
@@ -79,20 +78,20 @@ export default function Wallet() {
           p_account_id: account.id,
         });
 
-        if (balanceData && balanceData.length > 0) {
-          setBalance(balanceData[0]);
+        if (balanceData && Array.isArray(balanceData) && balanceData.length > 0) {
+          setBalance(balanceData[0] as WalletBalance);
         }
 
-        // Get transactions
+        // Get transactions - use amount column (the actual column name)
         const { data: txData } = await supabase
           .from("wallet_ledger_entries")
-          .select("id, direction, amount_agc, reason, source_type, created_at")
+          .select("id, direction, amount, reason, source_type, created_at")
           .eq("account_id", account.id)
           .order("created_at", { ascending: false })
           .limit(20);
 
         if (txData) {
-          setTransactions(txData as Transaction[]);
+          setTransactions(txData as unknown as Transaction[]);
         }
       }
     } catch (e) {
@@ -218,7 +217,7 @@ export default function Wallet() {
                               </div>
                             </div>
                             <div className={`font-bold ${isCredit ? "text-primary" : "text-destructive"}`}>
-                              {isCredit ? "+" : "-"}{tx.amount_agc} AGC
+                              {isCredit ? "+" : "-"}{tx.amount} AGC
                             </div>
                           </div>
                         );
