@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" fill="none">
+  <rect width="400" height="400" fill="#1a1a2e"/>
+  <circle cx="200" cy="180" r="80" fill="#FFD700"/>
+  <circle cx="200" cy="180" r="65" fill="#1a1a2e"/>
+  <circle cx="200" cy="180" r="55" fill="#D4AF37"/>
+  <text x="200" y="175" text-anchor="middle" fill="#1a1a2e" font-family="Arial" font-size="24" font-weight="bold">NESA</text>
+  <text x="200" y="195" text-anchor="middle" fill="#1a1a2e" font-family="Arial" font-size="12">AFRICA</text>
+  <rect x="195" y="260" width="10" height="40" fill="#888"/>
+  <text x="200" y="350" text-anchor="middle" fill="#888" font-family="Arial" font-size="14">Lapel Pin / Badge</text>
+  <text x="200" y="375" text-anchor="middle" fill="#FFD700" font-family="Arial" font-size="18" font-weight="bold">$10</text>
+</svg>

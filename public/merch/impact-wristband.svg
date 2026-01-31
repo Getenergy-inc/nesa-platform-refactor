@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" fill="none">
+  <rect width="400" height="400" fill="#1a1a2e"/>
+  <ellipse cx="200" cy="200" rx="140" ry="60" stroke="#FFD700" stroke-width="8" fill="none"/>
+  <ellipse cx="200" cy="200" rx="100" ry="40" stroke="#FFD700" stroke-width="4" fill="none"/>
+  <text x="200" y="205" text-anchor="middle" fill="#FFD700" font-family="Arial" font-size="20" font-weight="bold">NESA</text>
+  <text x="200" y="350" text-anchor="middle" fill="#888" font-family="Arial" font-size="14">Impact Wristband</text>
+  <text x="200" y="375" text-anchor="middle" fill="#FFD700" font-family="Arial" font-size="18" font-weight="bold">$5</text>
+</svg>

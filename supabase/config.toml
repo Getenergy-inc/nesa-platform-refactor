@@ -53,3 +53,9 @@ verify_jwt = false
 
 [functions.verify]
 verify_jwt = false
+
+[functions.shop]
+verify_jwt = false
+
+[functions.settlement]
+verify_jwt = false

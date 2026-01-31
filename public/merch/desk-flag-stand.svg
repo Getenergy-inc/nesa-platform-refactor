@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" fill="none">
+  <rect width="400" height="400" fill="#1a1a2e"/>
+  <rect x="195" y="100" width="10" height="180" fill="#888"/>
+  <ellipse cx="200" cy="290" rx="60" ry="15" fill="#555"/>
+  <rect x="205" y="100" width="120" height="80" fill="#FFD700"/>
+  <rect x="210" y="105" width="110" height="70" fill="#1a1a2e"/>
+  <text x="265" y="135" text-anchor="middle" fill="#FFD700" font-family="Arial" font-size="16" font-weight="bold">NESA</text>
+  <text x="265" y="155" text-anchor="middle" fill="#FFD700" font-family="Arial" font-size="10">AFRICA</text>
+  <text x="265" y="170" text-anchor="middle" fill="#888" font-family="Arial" font-size="8">2026</text>
+  <text x="200" y="350" text-anchor="middle" fill="#888" font-family="Arial" font-size="14">Desk Flag + Stand</text>
+  <text x="200" y="375" text-anchor="middle" fill="#FFD700" font-family="Arial" font-size="18" font-weight="bold">$45</text>
+</svg>

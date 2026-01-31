@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" fill="none">
+  <rect width="400" height="400" fill="#1a1a2e"/>
+  <path d="M110 90 L70 130 L90 150 L110 130 L110 290 L290 290 L290 130 L310 150 L330 130 L290 90 L240 100 Q200 130 160 100 L110 90" fill="#2d2d44"/>
+  <path d="M160 90 Q200 60 240 90 Q240 120 200 140 Q160 120 160 90" fill="#333355"/>
+  <rect x="130" y="200" width="60" height="70" rx="4" fill="#333355"/>
+  <rect x="210" y="200" width="60" height="70" rx="4" fill="#333355"/>
+  <circle cx="200" cy="160" r="35" fill="#FFD700"/>
+  <text x="200" y="158" text-anchor="middle" fill="#1a1a2e" font-family="Arial" font-size="14" font-weight="bold">NESA</text>
+  <text x="200" y="172" text-anchor="middle" fill="#1a1a2e" font-family="Arial" font-size="8">AFRICA</text>
+  <text x="200" y="350" text-anchor="middle" fill="#888" font-family="Arial" font-size="14">Hoodie / Sweatshirt</text>
+  <text x="200" y="375" text-anchor="middle" fill="#FFD700" font-family="Arial" font-size="18" font-weight="bold">$60</text>
+</svg>

@@ -72,6 +72,9 @@ import { Shop, ProductDetail, Cart, Checkout, OrderConfirmation, BulkOrders } fr
 // OLC Pages
 import { OLCDashboard, OLCMembers, OLCSettlements, OLCWallet } from "./pages/olc";
 
+// Admin Pages
+import { AdminDashboard, AdminOrders, AdminImpact } from "./pages/admin";
+
 const queryClient = new QueryClient();
 
 // Wrapper component that applies PublicLayout
@@ -165,6 +168,11 @@ const App = () => (
                 <Route path="/olc/members" element={<OLCMembers />} />
                 <Route path="/olc/wallet" element={<OLCWallet />} />
                 <Route path="/olc/settlements" element={<OLCSettlements />} />
+                
+                {/* Admin Routes - use their own layout */}
+                <Route path="/admin" element={<AdminDashboard />} />
+                <Route path="/admin/orders" element={<AdminOrders />} />
+                <Route path="/admin/impact" element={<AdminImpact />} />
                 
                 {/* Support */}
                 <Route path="/donate" element={<WithLayout><Donate /></WithLayout>} />
