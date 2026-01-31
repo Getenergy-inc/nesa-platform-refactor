@@ -29,7 +29,7 @@ export function SettlementInstructionCard() {
           </p>
         </div>
 
-        {/* GFA Wzip 2% Markup */}
+        {/* GFA Wzip 2% Additive Markup */}
         <div className="p-4 rounded-lg bg-chart-1/10 border border-chart-1/30">
           <h4 className="font-medium mb-2 flex items-center gap-2">
             <GFAWalletIcon size={16} />
@@ -37,17 +37,17 @@ export function SettlementInstructionCard() {
             GFA Wzip Processing Markup
           </h4>
           <p className="text-sm mb-2">
-            <strong>{GFA_WZIP_MARKUP_PERCENT}% mandatory processing fee</strong> is deducted from all payments
-            before fund distribution. This supports the GFA Wzip payment gateway operations.
+            <strong>+{GFA_WZIP_MARKUP_PERCENT}% additive processing fee</strong> is charged on top of 
+            all payments. Fund accounts receive the full base amount; GFA Wzip receives the markup.
           </p>
-          <Badge variant="outline">Deducted FIRST before revenue split</Badge>
+          <Badge variant="outline">Additive: $100 base → $102 total → $100 to funds + $2 to GFA Wzip</Badge>
         </div>
 
         {/* Split Breakdown */}
         <div>
           <h4 className="font-medium mb-3 flex items-center gap-2">
             <FileText className="h-4 w-4" />
-            Daily Split Allocation (After 2% GFA Wzip Markup)
+            Daily Split Allocation (Fund accounts receive 100% of base)
           </h4>
           <div className="space-y-2">
             {SETTLEMENT_SPLIT_DISPLAY.map((split) => (

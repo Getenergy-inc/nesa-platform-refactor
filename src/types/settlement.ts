@@ -57,6 +57,7 @@ export interface SettlementRun {
 export interface SettlementTotals {
   currencies: CurrencyTotal[];
   gfa_wzip_markup_percent?: number;
+  model?: 'ADDITIVE_MARKUP' | 'DEDUCTIVE'; // ADDITIVE = markup on top, DEDUCTIVE = markup from net
   message?: string;
 }
 
@@ -66,7 +67,8 @@ export interface CurrencyTotal {
   fees: number;
   net: number;
   gfa_wzip_markup: number;
-  net_after_markup: number;
+  base_to_funds: number;      // Full base amount distributed to funds (not reduced by markup)
+  total_distributed: number;  // base_to_funds + gfa_wzip_markup
   allocations: AllocationTotal[];
 }
 
@@ -140,15 +142,16 @@ export interface SettlementDashboardData {
 // SPLIT CONFIGURATION (DISPLAY CONSTANTS)
 // ============================================================================
 
-// GFA Wzip 2% markup (deducted FIRST before fund splits)
+// GFA Wzip 2% markup (ADDITIVE - charged on top, not deducted from fund distributions)
+// Customer pays: base * 1.02, funds receive full base amount, GFA Wzip receives 2% markup
 export const GFA_WZIP_MARKUP_PERCENT = 2;
 
 export const SETTLEMENT_SPLIT_DISPLAY = [
-  { key: 'GFA_WZIP', name: 'GFA Wzip Processing (2%)', percent: 2, color: 'hsl(var(--chart-1))', isMarkup: true },
-  { key: 'NESA', name: 'NESA-Africa', percent: 49, color: 'hsl(var(--primary))', note: '50% of remaining 98%' },
-  { key: 'SCEF', name: 'SCEF', percent: 19.6, color: 'hsl(var(--accent))', note: '20% of remaining 98%' },
-  { key: 'EDUAID', name: 'EduAid-Africa', percent: 9.8, color: 'hsl(210 100% 50%)', note: '10% of remaining 98%' },
-  { key: 'REBUILD', name: 'Rebuild My School Africa', percent: 9.8, color: 'hsl(150 100% 40%)', note: '10% of remaining 98%' },
-  { key: 'LOCAL_CHAPTER', name: 'Local Chapter', percent: 6.86, color: 'hsl(45 100% 50%)', note: '7% of remaining 98%' },
-  { key: 'CVO', name: 'CVO Discretionary', percent: 2.94, color: 'hsl(280 100% 60%)', note: '3% of remaining 98%' },
+  { key: 'GFA_WZIP', name: 'GFA Wzip Processing (+2%)', percent: 2, color: 'hsl(var(--chart-1))', isMarkup: true, note: 'Additive markup on top of base' },
+  { key: 'NESA', name: 'NESA-Africa', percent: 50, color: 'hsl(var(--primary))', note: '50% of base amount' },
+  { key: 'SCEF', name: 'SCEF', percent: 20, color: 'hsl(var(--accent))', note: '20% of base amount' },
+  { key: 'EDUAID', name: 'EduAid-Africa', percent: 10, color: 'hsl(210 100% 50%)', note: '10% of base amount' },
+  { key: 'REBUILD', name: 'Rebuild My School Africa', percent: 10, color: 'hsl(150 100% 40%)', note: '10% of base amount' },
+  { key: 'LOCAL_CHAPTER', name: 'Local Chapter', percent: 7, color: 'hsl(45 100% 50%)', note: '7% of base amount' },
+  { key: 'CVO', name: 'CVO Discretionary', percent: 3, color: 'hsl(280 100% 60%)', note: '3% of base amount' },
 ] as const;

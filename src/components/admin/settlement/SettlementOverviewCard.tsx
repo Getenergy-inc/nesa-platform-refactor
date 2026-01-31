@@ -19,7 +19,8 @@ interface SettlementOverviewProps {
         currency: string;
         net: number;
         gfa_wzip_markup?: number;
-        net_after_markup?: number;
+        base_to_funds?: number;
+        total_distributed?: number;
       }>;
     };
   };
@@ -56,8 +57,13 @@ export function SettlementOverviewCard({ lastRun, onRefresh }: SettlementOvervie
     0
   ) || 0;
 
-  const totalNetAfterMarkup = lastRun?.totals_json?.currencies?.reduce(
-    (sum, c) => sum + (c.net_after_markup || 0),
+  const totalBaseToFunds = lastRun?.totals_json?.currencies?.reduce(
+    (sum, c) => sum + (c.base_to_funds || 0),
+    0
+  ) || 0;
+
+  const totalDistributed = lastRun?.totals_json?.currencies?.reduce(
+    (sum, c) => sum + (c.total_distributed || 0),
     0
   ) || 0;
 
@@ -71,7 +77,7 @@ export function SettlementOverviewCard({ lastRun, onRefresh }: SettlementOvervie
               GFA Wzip Settlement Splitter
             </CardTitle>
             <CardDescription>
-              2% GFA Wzip markup + automatic daily revenue distribution
+              +2% GFA Wzip additive markup + automatic daily revenue distribution
             </CardDescription>
           </div>
           <Button
@@ -90,16 +96,19 @@ export function SettlementOverviewCard({ lastRun, onRefresh }: SettlementOvervie
         </div>
       </CardHeader>
       <CardContent>
-        {/* GFA Wzip 2% Markup Banner */}
+        {/* GFA Wzip 2% Additive Markup Banner */}
         <div className="mb-6 p-4 rounded-lg bg-primary/10 border border-primary/20">
           <div className="flex items-center gap-2 mb-2">
             <Percent className="h-4 w-4 text-primary" />
             <span className="font-medium text-primary">GFA Wzip Processing Fee</span>
-            <Badge variant="secondary">2% Markup</Badge>
+            <Badge variant="secondary">+2% Additive Markup</Badge>
           </div>
           <p className="text-sm text-muted-foreground">
-            All payments processed through GFA Wzip include a mandatory 2% markup 
-            deposited to the GFA Wzip account before fund distribution.
+            Customer pays base + 2% markup. Fund accounts receive the full base amount;
+            GFA Wzip receives the 2% markup on top.
+          </p>
+          <p className="text-xs text-muted-foreground mt-1">
+            Example: $100 base → Customer pays $102 → $100 to funds + $2 to GFA Wzip
           </p>
         </div>
 
@@ -130,12 +139,16 @@ export function SettlementOverviewCard({ lastRun, onRefresh }: SettlementOvervie
                 <p className="font-medium">${totalNet.toLocaleString()}</p>
               </div>
               <div>
-                <span className="text-muted-foreground">GFA Wzip (2%)</span>
+                <span className="text-muted-foreground">GFA Wzip (+2%)</span>
                 <p className="font-medium text-primary">${totalGfaWzipMarkup.toLocaleString()}</p>
               </div>
               <div>
-                <span className="text-muted-foreground">Distributed</span>
-                <p className="font-medium">${totalNetAfterMarkup.toLocaleString()}</p>
+                <span className="text-muted-foreground">To Funds</span>
+                <p className="font-medium">${totalBaseToFunds.toLocaleString()}</p>
+              </div>
+              <div>
+                <span className="text-muted-foreground">Total Distributed</span>
+                <p className="font-medium text-green-600">${totalDistributed.toLocaleString()}</p>
               </div>
             </div>
           </div>
