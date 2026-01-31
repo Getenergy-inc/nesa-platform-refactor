@@ -1,7 +1,8 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { SETTLEMENT_SPLIT_DISPLAY } from "@/types/settlement";
-import { Building2, FileText, Info } from "lucide-react";
+import { SETTLEMENT_SPLIT_DISPLAY, GFA_WZIP_MARKUP_PERCENT } from "@/types/settlement";
+import { Building2, FileText, Info, Percent } from "lucide-react";
+import { GFAWalletIcon } from "@/components/ui/GFAWalletIcon";
 
 export function SettlementInstructionCard() {
   return (
@@ -28,17 +29,33 @@ export function SettlementInstructionCard() {
           </p>
         </div>
 
+        {/* GFA Wzip 2% Markup */}
+        <div className="p-4 rounded-lg bg-chart-1/10 border border-chart-1/30">
+          <h4 className="font-medium mb-2 flex items-center gap-2">
+            <GFAWalletIcon size={16} />
+            <Percent className="h-4 w-4" />
+            GFA Wzip Processing Markup
+          </h4>
+          <p className="text-sm mb-2">
+            <strong>{GFA_WZIP_MARKUP_PERCENT}% mandatory processing fee</strong> is deducted from all payments
+            before fund distribution. This supports the GFA Wzip payment gateway operations.
+          </p>
+          <Badge variant="outline">Deducted FIRST before revenue split</Badge>
+        </div>
+
         {/* Split Breakdown */}
         <div>
           <h4 className="font-medium mb-3 flex items-center gap-2">
             <FileText className="h-4 w-4" />
-            Daily Split Allocation (NET collected)
+            Daily Split Allocation (After 2% GFA Wzip Markup)
           </h4>
           <div className="space-y-2">
             {SETTLEMENT_SPLIT_DISPLAY.map((split) => (
               <div
                 key={split.key}
-                className="flex items-center justify-between p-2 rounded bg-muted/50"
+                className={`flex items-center justify-between p-2 rounded ${
+                  'isMarkup' in split && split.isMarkup ? 'bg-chart-1/10 border border-chart-1/30' : 'bg-muted/50'
+                }`}
               >
                 <div className="flex items-center gap-2">
                   <div
@@ -46,6 +63,9 @@ export function SettlementInstructionCard() {
                     style={{ backgroundColor: split.color }}
                   />
                   <span className="text-sm">{split.name}</span>
+                  {'isMarkup' in split && split.isMarkup && (
+                    <Badge variant="secondary" className="text-xs">First</Badge>
+                  )}
                 </div>
                 <Badge variant="outline">{split.percent}%</Badge>
               </div>

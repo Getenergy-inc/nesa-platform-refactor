@@ -56,6 +56,7 @@ export interface SettlementRun {
 
 export interface SettlementTotals {
   currencies: CurrencyTotal[];
+  gfa_wzip_markup_percent?: number;
   message?: string;
 }
 
@@ -64,6 +65,8 @@ export interface CurrencyTotal {
   gross: number;
   fees: number;
   net: number;
+  gfa_wzip_markup: number;
+  net_after_markup: number;
   allocations: AllocationTotal[];
 }
 
@@ -137,11 +140,15 @@ export interface SettlementDashboardData {
 // SPLIT CONFIGURATION (DISPLAY CONSTANTS)
 // ============================================================================
 
+// GFA Wzip 2% markup (deducted FIRST before fund splits)
+export const GFA_WZIP_MARKUP_PERCENT = 2;
+
 export const SETTLEMENT_SPLIT_DISPLAY = [
-  { key: 'NESA', name: 'NESA-Africa', percent: 50, color: 'hsl(var(--primary))' },
-  { key: 'SCEF', name: 'SCEF', percent: 20, color: 'hsl(var(--accent))' },
-  { key: 'EDUAID', name: 'EduAid-Africa', percent: 10, color: 'hsl(210 100% 50%)' },
-  { key: 'REBUILD', name: 'Rebuild My School Africa', percent: 10, color: 'hsl(150 100% 40%)' },
-  { key: 'LOCAL_CHAPTER', name: 'Local Chapter', percent: 7, color: 'hsl(45 100% 50%)' },
-  { key: 'CVO', name: 'CVO Discretionary', percent: 3, color: 'hsl(280 100% 60%)' },
+  { key: 'GFA_WZIP', name: 'GFA Wzip Processing (2%)', percent: 2, color: 'hsl(var(--chart-1))', isMarkup: true },
+  { key: 'NESA', name: 'NESA-Africa', percent: 49, color: 'hsl(var(--primary))', note: '50% of remaining 98%' },
+  { key: 'SCEF', name: 'SCEF', percent: 19.6, color: 'hsl(var(--accent))', note: '20% of remaining 98%' },
+  { key: 'EDUAID', name: 'EduAid-Africa', percent: 9.8, color: 'hsl(210 100% 50%)', note: '10% of remaining 98%' },
+  { key: 'REBUILD', name: 'Rebuild My School Africa', percent: 9.8, color: 'hsl(150 100% 40%)', note: '10% of remaining 98%' },
+  { key: 'LOCAL_CHAPTER', name: 'Local Chapter', percent: 6.86, color: 'hsl(45 100% 50%)', note: '7% of remaining 98%' },
+  { key: 'CVO', name: 'CVO Discretionary', percent: 2.94, color: 'hsl(280 100% 60%)', note: '3% of remaining 98%' },
 ] as const;

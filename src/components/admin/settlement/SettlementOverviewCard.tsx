@@ -1,11 +1,12 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { SETTLEMENT_SPLIT_DISPLAY } from "@/types/settlement";
-import { Clock, DollarSign, TrendingUp, RefreshCw } from "lucide-react";
+import { SETTLEMENT_SPLIT_DISPLAY, GFA_WZIP_MARKUP_PERCENT } from "@/types/settlement";
+import { Clock, DollarSign, TrendingUp, RefreshCw, Percent } from "lucide-react";
 import { useState } from "react";
 import { toast } from "sonner";
 import { triggerSettlement } from "@/api/settlement";
+import { GFAWalletIcon } from "@/components/ui/GFAWalletIcon";
 
 interface SettlementOverviewProps {
   lastRun?: {
@@ -17,6 +18,8 @@ interface SettlementOverviewProps {
       currencies?: Array<{
         currency: string;
         net: number;
+        gfa_wzip_markup?: number;
+        net_after_markup?: number;
       }>;
     };
   };
@@ -48,17 +51,27 @@ export function SettlementOverviewCard({ lastRun, onRefresh }: SettlementOvervie
     0
   ) || 0;
 
+  const totalGfaWzipMarkup = lastRun?.totals_json?.currencies?.reduce(
+    (sum, c) => sum + (c.gfa_wzip_markup || 0),
+    0
+  ) || 0;
+
+  const totalNetAfterMarkup = lastRun?.totals_json?.currencies?.reduce(
+    (sum, c) => sum + (c.net_after_markup || 0),
+    0
+  ) || 0;
+
   return (
     <Card>
       <CardHeader>
         <div className="flex items-center justify-between">
           <div>
             <CardTitle className="flex items-center gap-2">
-              <DollarSign className="h-5 w-5" />
-              24-Hour Settlement Splitter
+              <GFAWalletIcon size={20} />
+              GFA Wzip Settlement Splitter
             </CardTitle>
             <CardDescription>
-              Automatic daily revenue distribution to fund accounts
+              2% GFA Wzip markup + automatic daily revenue distribution
             </CardDescription>
           </div>
           <Button
@@ -77,6 +90,19 @@ export function SettlementOverviewCard({ lastRun, onRefresh }: SettlementOvervie
         </div>
       </CardHeader>
       <CardContent>
+        {/* GFA Wzip 2% Markup Banner */}
+        <div className="mb-6 p-4 rounded-lg bg-primary/10 border border-primary/20">
+          <div className="flex items-center gap-2 mb-2">
+            <Percent className="h-4 w-4 text-primary" />
+            <span className="font-medium text-primary">GFA Wzip Processing Fee</span>
+            <Badge variant="secondary">2% Markup</Badge>
+          </div>
+          <p className="text-sm text-muted-foreground">
+            All payments processed through GFA Wzip include a mandatory 2% markup 
+            deposited to the GFA Wzip account before fund distribution.
+          </p>
+        </div>
+
         {/* Last Run Status */}
         {lastRun && (
           <div className="mb-6 p-4 rounded-lg bg-muted/50">
@@ -94,22 +120,22 @@ export function SettlementOverviewCard({ lastRun, onRefresh }: SettlementOvervie
                 {lastRun.status}
               </Badge>
             </div>
-            <div className="grid grid-cols-3 gap-4 text-sm">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">
               <div>
                 <span className="text-muted-foreground">Payments</span>
                 <p className="font-medium">{lastRun.payments_processed}</p>
               </div>
               <div>
-                <span className="text-muted-foreground">Net Distributed</span>
+                <span className="text-muted-foreground">Net Collected</span>
                 <p className="font-medium">${totalNet.toLocaleString()}</p>
               </div>
               <div>
-                <span className="text-muted-foreground">Completed</span>
-                <p className="font-medium">
-                  {lastRun.completed_at
-                    ? new Date(lastRun.completed_at).toLocaleString()
-                    : "—"}
-                </p>
+                <span className="text-muted-foreground">GFA Wzip (2%)</span>
+                <p className="font-medium text-primary">${totalGfaWzipMarkup.toLocaleString()}</p>
+              </div>
+              <div>
+                <span className="text-muted-foreground">Distributed</span>
+                <p className="font-medium">${totalNetAfterMarkup.toLocaleString()}</p>
               </div>
             </div>
           </div>
