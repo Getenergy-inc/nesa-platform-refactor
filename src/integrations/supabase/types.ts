@@ -1552,6 +1552,57 @@ export type Database = {
           },
         ]
       }
+      partnership_leads: {
+        Row: {
+          amount: number | null
+          country: string | null
+          created_at: string | null
+          email: string
+          id: string
+          interest_area: string | null
+          lead_type: string
+          name: string
+          notes: string | null
+          organization: string | null
+          phone: string | null
+          status: string
+          tier: string | null
+          updated_at: string | null
+        }
+        Insert: {
+          amount?: number | null
+          country?: string | null
+          created_at?: string | null
+          email: string
+          id?: string
+          interest_area?: string | null
+          lead_type?: string
+          name: string
+          notes?: string | null
+          organization?: string | null
+          phone?: string | null
+          status?: string
+          tier?: string | null
+          updated_at?: string | null
+        }
+        Update: {
+          amount?: number | null
+          country?: string | null
+          created_at?: string | null
+          email?: string
+          id?: string
+          interest_area?: string | null
+          lead_type?: string
+          name?: string
+          notes?: string | null
+          organization?: string | null
+          phone?: string | null
+          status?: string
+          tier?: string | null
+          updated_at?: string | null
+        }
+        Relationships: []
+      }
       payment_intents: {
         Row: {
           account_id: string
@@ -2213,6 +2264,216 @@ export type Database = {
             referencedColumns: ["id"]
           },
         ]
+      }
+      sponsor_campaigns: {
+        Row: {
+          created_at: string | null
+          credit_per_claim_agc: number
+          end_at: string
+          id: string
+          landing_slug: string | null
+          name: string
+          pool_remaining_agc: number
+          pool_total_agc: number
+          sponsor_id: string
+          start_at: string
+          status: string
+          updated_at: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          credit_per_claim_agc?: number
+          end_at: string
+          id?: string
+          landing_slug?: string | null
+          name: string
+          pool_remaining_agc?: number
+          pool_total_agc?: number
+          sponsor_id: string
+          start_at: string
+          status?: string
+          updated_at?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          credit_per_claim_agc?: number
+          end_at?: string
+          id?: string
+          landing_slug?: string | null
+          name?: string
+          pool_remaining_agc?: number
+          pool_total_agc?: number
+          sponsor_id?: string
+          start_at?: string
+          status?: string
+          updated_at?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "sponsor_campaigns_sponsor_id_fkey"
+            columns: ["sponsor_id"]
+            isOneToOne: false
+            referencedRelation: "sponsors"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      sponsor_claims: {
+        Row: {
+          amount_agc: number
+          campaign_id: string
+          created_at: string | null
+          id: string
+          reason: string | null
+          status: string
+          user_id: string
+        }
+        Insert: {
+          amount_agc: number
+          campaign_id: string
+          created_at?: string | null
+          id?: string
+          reason?: string | null
+          status?: string
+          user_id: string
+        }
+        Update: {
+          amount_agc?: number
+          campaign_id?: string
+          created_at?: string | null
+          id?: string
+          reason?: string | null
+          status?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "sponsor_claims_campaign_id_fkey"
+            columns: ["campaign_id"]
+            isOneToOne: false
+            referencedRelation: "sponsor_campaigns"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      sponsor_clicks: {
+        Row: {
+          anon_id: string | null
+          campaign_id: string | null
+          created_at: string | null
+          id: string
+          ip_hash: string | null
+          link_id: string | null
+          user_id: string | null
+        }
+        Insert: {
+          anon_id?: string | null
+          campaign_id?: string | null
+          created_at?: string | null
+          id?: string
+          ip_hash?: string | null
+          link_id?: string | null
+          user_id?: string | null
+        }
+        Update: {
+          anon_id?: string | null
+          campaign_id?: string | null
+          created_at?: string | null
+          id?: string
+          ip_hash?: string | null
+          link_id?: string | null
+          user_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "sponsor_clicks_campaign_id_fkey"
+            columns: ["campaign_id"]
+            isOneToOne: false
+            referencedRelation: "sponsor_campaigns"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "sponsor_clicks_link_id_fkey"
+            columns: ["link_id"]
+            isOneToOne: false
+            referencedRelation: "sponsor_links"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      sponsor_links: {
+        Row: {
+          campaign_id: string
+          code: string
+          created_at: string | null
+          id: string
+          source: string | null
+        }
+        Insert: {
+          campaign_id: string
+          code: string
+          created_at?: string | null
+          id?: string
+          source?: string | null
+        }
+        Update: {
+          campaign_id?: string
+          code?: string
+          created_at?: string | null
+          id?: string
+          source?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "sponsor_links_campaign_id_fkey"
+            columns: ["campaign_id"]
+            isOneToOne: false
+            referencedRelation: "sponsor_campaigns"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      sponsors: {
+        Row: {
+          created_at: string | null
+          cta_links_json: Json | null
+          description: string | null
+          id: string
+          logo_url: string | null
+          name: string
+          slug: string
+          status: string
+          tier: string
+          updated_at: string | null
+          website_url: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          cta_links_json?: Json | null
+          description?: string | null
+          id?: string
+          logo_url?: string | null
+          name: string
+          slug: string
+          status?: string
+          tier?: string
+          updated_at?: string | null
+          website_url?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          cta_links_json?: Json | null
+          description?: string | null
+          id?: string
+          logo_url?: string | null
+          name?: string
+          slug?: string
+          status?: string
+          tier?: string
+          updated_at?: string | null
+          website_url?: string | null
+        }
+        Relationships: []
       }
       stage_config: {
         Row: {

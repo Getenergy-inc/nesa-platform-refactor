@@ -46,7 +46,7 @@ export default function SponsorLanding() {
 
   useEffect(() => {
     if (slug) {
-      loadSponsor();
+      loadSponsorData();
       logClick();
     }
   }, [slug]);
@@ -57,45 +57,35 @@ export default function SponsorLanding() {
     }
   }, [user, campaign]);
 
-  const loadSponsor = async () => {
+  const loadSponsorData = async () => {
     if (!slug) return;
     setLoading(true);
     
-    // Load sponsor
-    const { data: sponsorData, error: sponsorError } = await supabase
-      .from("sponsors")
-      .select("*")
-      .eq("slug", slug)
-      .eq("status", "ACTIVE")
-      .single();
+    try {
+      // Use edge function to get sponsor data (avoids type issues with new tables)
+      const { data, error } = await supabase.functions.invoke("sponsors", {
+        method: "POST",
+        body: { action: "get", slug },
+      });
 
-    if (sponsorError || !sponsorData) {
+      if (error || !data?.ok) {
+        navigate("/partners");
+        return;
+      }
+
+      if (data.sponsor) {
+        setSponsor(data.sponsor);
+      }
+
+      if (data.campaign) {
+        setCampaign(data.campaign);
+      }
+    } catch (e) {
+      console.error("Failed to load sponsor:", e);
       navigate("/partners");
-      return;
+    } finally {
+      setLoading(false);
     }
-
-    setSponsor({
-      ...sponsorData,
-      cta_links: (sponsorData.cta_links_json as { label: string; url: string }[]) || [],
-    });
-
-    // Load active campaign
-    const now = new Date().toISOString();
-    const { data: campaignData } = await supabase
-      .from("sponsor_campaigns")
-      .select("*")
-      .eq("sponsor_id", sponsorData.id)
-      .eq("status", "ACTIVE")
-      .lte("start_at", now)
-      .gte("end_at", now)
-      .gt("pool_remaining_agc", 0)
-      .single();
-
-    if (campaignData) {
-      setCampaign(campaignData);
-    }
-
-    setLoading(false);
   };
 
   const logClick = async () => {
@@ -113,15 +103,17 @@ export default function SponsorLanding() {
   const checkExistingClaim = async () => {
     if (!user || !campaign) return;
     
-    const { data } = await supabase
-      .from("sponsor_claims")
-      .select("id")
-      .eq("campaign_id", campaign.id)
-      .eq("user_id", user.id)
-      .single();
-
-    if (data) {
-      setClaimed(true);
+    try {
+      const { data } = await supabase.functions.invoke("sponsors", {
+        method: "POST",
+        body: { action: "check-claim", campaignId: campaign.id },
+      });
+      
+      if (data?.claimed) {
+        setClaimed(true);
+      }
+    } catch (e) {
+      // Silent fail
     }
   };
 
@@ -147,8 +139,9 @@ export default function SponsorLanding() {
       } else {
         setClaimError(data?.error || "Claim failed");
       }
-    } catch (e: any) {
-      setClaimError(e.message || "Failed to claim credits");
+    } catch (e: unknown) {
+      const message = e instanceof Error ? e.message : "Failed to claim credits";
+      setClaimError(message);
     } finally {
       setClaiming(false);
     }
@@ -197,7 +190,7 @@ export default function SponsorLanding() {
                 )}
                 
                 {/* CTA Links */}
-                {sponsor.cta_links.length > 0 && (
+                {sponsor.cta_links && sponsor.cta_links.length > 0 && (
                   <div className="flex flex-wrap justify-center gap-3 mb-6">
                     {sponsor.cta_links.map((link, i) => (
                       <Button key={i} variant="outline" asChild>

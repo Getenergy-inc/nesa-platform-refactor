@@ -68,6 +68,8 @@ import BuyYourTicket from "./pages/BuyYourTicket";
 import GFAWzipWallet from "./pages/GFAWzipWallet";
 import GFAWzipLinks from "./pages/GFAWzipLinks";
 import { Shop, ProductDetail, Cart, Checkout, OrderConfirmation, BulkOrders } from "./pages/shop";
+import { SponsorLanding } from "./pages/sponsors";
+import Wallet from "./pages/Wallet";
 
 // OLC Pages
 import { OLCDashboard, OLCMembers, OLCSettlements, OLCWallet } from "./pages/olc";
@@ -169,6 +171,8 @@ const App = () => (
                 <Route path="/getfinance" element={<GFAWzipWallet />} />
                 <Route path="/gfawzip-wallet" element={<GFAWzipWallet />} />
                 <Route path="/links" element={<GFAWzipLinks />} />
+                <Route path="/wallet" element={<Wallet />} />
+                <Route path="/sponsors/:slug" element={<SponsorLanding />} />
                 <Route path="/results" element={<WithLayout><Results /></WithLayout>} />
                 
                 {/* Dashboards - use their own layout */}
