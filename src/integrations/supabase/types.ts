@@ -142,6 +142,128 @@ export type Database = {
         }
         Relationships: []
       }
+      bulk_order_leads: {
+        Row: {
+          branding_request: string | null
+          contact_email: string
+          contact_name: string
+          contact_phone: string | null
+          country: string | null
+          created_at: string | null
+          estimated_quantity: number | null
+          id: string
+          notes: string | null
+          organization_name: string
+          products_interested: string[] | null
+          status: string | null
+          updated_at: string | null
+        }
+        Insert: {
+          branding_request?: string | null
+          contact_email: string
+          contact_name: string
+          contact_phone?: string | null
+          country?: string | null
+          created_at?: string | null
+          estimated_quantity?: number | null
+          id?: string
+          notes?: string | null
+          organization_name: string
+          products_interested?: string[] | null
+          status?: string | null
+          updated_at?: string | null
+        }
+        Update: {
+          branding_request?: string | null
+          contact_email?: string
+          contact_name?: string
+          contact_phone?: string | null
+          country?: string | null
+          created_at?: string | null
+          estimated_quantity?: number | null
+          id?: string
+          notes?: string | null
+          organization_name?: string
+          products_interested?: string[] | null
+          status?: string | null
+          updated_at?: string | null
+        }
+        Relationships: []
+      }
+      cart_items: {
+        Row: {
+          cart_id: string
+          created_at: string | null
+          id: string
+          product_id: string
+          quantity: number
+          unit_price_usd: number
+        }
+        Insert: {
+          cart_id: string
+          created_at?: string | null
+          id?: string
+          product_id: string
+          quantity?: number
+          unit_price_usd: number
+        }
+        Update: {
+          cart_id?: string
+          created_at?: string | null
+          id?: string
+          product_id?: string
+          quantity?: number
+          unit_price_usd?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "cart_items_cart_id_fkey"
+            columns: ["cart_id"]
+            isOneToOne: false
+            referencedRelation: "carts"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "cart_items_product_id_fkey"
+            columns: ["product_id"]
+            isOneToOne: false
+            referencedRelation: "products"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      carts: {
+        Row: {
+          anon_id: string | null
+          created_at: string | null
+          id: string
+          updated_at: string | null
+          user_id: string | null
+        }
+        Insert: {
+          anon_id?: string | null
+          created_at?: string | null
+          id?: string
+          updated_at?: string | null
+          user_id?: string | null
+        }
+        Update: {
+          anon_id?: string | null
+          created_at?: string | null
+          id?: string
+          updated_at?: string | null
+          user_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "carts_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["user_id"]
+          },
+        ]
+      }
       categories: {
         Row: {
           created_at: string | null
@@ -1281,6 +1403,155 @@ export type Database = {
         }
         Relationships: []
       }
+      order_items: {
+        Row: {
+          created_at: string | null
+          id: string
+          order_id: string
+          product_id: string
+          product_image_url: string | null
+          product_name: string
+          quantity: number
+          unit_price_usd: number
+        }
+        Insert: {
+          created_at?: string | null
+          id?: string
+          order_id: string
+          product_id: string
+          product_image_url?: string | null
+          product_name: string
+          quantity?: number
+          unit_price_usd: number
+        }
+        Update: {
+          created_at?: string | null
+          id?: string
+          order_id?: string
+          product_id?: string
+          product_image_url?: string | null
+          product_name?: string
+          quantity?: number
+          unit_price_usd?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "order_items_order_id_fkey"
+            columns: ["order_id"]
+            isOneToOne: false
+            referencedRelation: "orders"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "order_items_product_id_fkey"
+            columns: ["product_id"]
+            isOneToOne: false
+            referencedRelation: "products"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      orders: {
+        Row: {
+          agc_bonus_amount: number | null
+          created_at: string | null
+          email: string
+          fulfilled_at: string | null
+          full_name: string
+          fx_markup_amount: number | null
+          fx_rate: number | null
+          id: string
+          impact_destination:
+            | Database["public"]["Enums"]["impact_destination"]
+            | null
+          paid_at: string | null
+          pay_amount_total: number | null
+          pay_currency: string | null
+          phone: string | null
+          provider: string | null
+          provider_ref: string | null
+          receipt_number: string | null
+          receipt_payload_json: Json | null
+          referral_code: string | null
+          referrer_user_id: string | null
+          refunded_at: string | null
+          shipping_usd: number | null
+          status: Database["public"]["Enums"]["order_status"]
+          subtotal_usd: number
+          total_usd: number
+          updated_at: string | null
+          user_id: string | null
+        }
+        Insert: {
+          agc_bonus_amount?: number | null
+          created_at?: string | null
+          email: string
+          fulfilled_at?: string | null
+          full_name: string
+          fx_markup_amount?: number | null
+          fx_rate?: number | null
+          id?: string
+          impact_destination?:
+            | Database["public"]["Enums"]["impact_destination"]
+            | null
+          paid_at?: string | null
+          pay_amount_total?: number | null
+          pay_currency?: string | null
+          phone?: string | null
+          provider?: string | null
+          provider_ref?: string | null
+          receipt_number?: string | null
+          receipt_payload_json?: Json | null
+          referral_code?: string | null
+          referrer_user_id?: string | null
+          refunded_at?: string | null
+          shipping_usd?: number | null
+          status?: Database["public"]["Enums"]["order_status"]
+          subtotal_usd: number
+          total_usd: number
+          updated_at?: string | null
+          user_id?: string | null
+        }
+        Update: {
+          agc_bonus_amount?: number | null
+          created_at?: string | null
+          email?: string
+          fulfilled_at?: string | null
+          full_name?: string
+          fx_markup_amount?: number | null
+          fx_rate?: number | null
+          id?: string
+          impact_destination?:
+            | Database["public"]["Enums"]["impact_destination"]
+            | null
+          paid_at?: string | null
+          pay_amount_total?: number | null
+          pay_currency?: string | null
+          phone?: string | null
+          provider?: string | null
+          provider_ref?: string | null
+          receipt_number?: string | null
+          receipt_payload_json?: Json | null
+          referral_code?: string | null
+          referrer_user_id?: string | null
+          refunded_at?: string | null
+          shipping_usd?: number | null
+          status?: Database["public"]["Enums"]["order_status"]
+          subtotal_usd?: number
+          total_usd?: number
+          updated_at?: string | null
+          user_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "orders_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["user_id"]
+          },
+        ]
+      }
       payment_intents: {
         Row: {
           account_id: string
@@ -1400,6 +1671,63 @@ export type Database = {
           updated_at?: string | null
           updated_by?: string | null
           value?: Json
+        }
+        Relationships: []
+      }
+      products: {
+        Row: {
+          category: Database["public"]["Enums"]["product_category"]
+          created_at: string | null
+          description: string | null
+          display_order: number | null
+          id: string
+          image_url: string | null
+          impact_default:
+            | Database["public"]["Enums"]["impact_destination"]
+            | null
+          is_active: boolean | null
+          is_limited: boolean | null
+          name: string
+          price_usd: number
+          slug: string
+          stock_qty: number | null
+          updated_at: string | null
+        }
+        Insert: {
+          category?: Database["public"]["Enums"]["product_category"]
+          created_at?: string | null
+          description?: string | null
+          display_order?: number | null
+          id?: string
+          image_url?: string | null
+          impact_default?:
+            | Database["public"]["Enums"]["impact_destination"]
+            | null
+          is_active?: boolean | null
+          is_limited?: boolean | null
+          name: string
+          price_usd: number
+          slug: string
+          stock_qty?: number | null
+          updated_at?: string | null
+        }
+        Update: {
+          category?: Database["public"]["Enums"]["product_category"]
+          created_at?: string | null
+          description?: string | null
+          display_order?: number | null
+          id?: string
+          image_url?: string | null
+          impact_default?:
+            | Database["public"]["Enums"]["impact_destination"]
+            | null
+          is_active?: boolean | null
+          is_limited?: boolean | null
+          name?: string
+          price_usd?: number
+          slug?: string
+          stock_qty?: number | null
+          updated_at?: string | null
         }
         Relationships: []
       }
@@ -1842,6 +2170,50 @@ export type Database = {
         }
         Relationships: []
       }
+      shipping_addresses: {
+        Row: {
+          address_line1: string
+          address_line2: string | null
+          city: string
+          country: string
+          created_at: string | null
+          id: string
+          order_id: string
+          postal_code: string | null
+          state: string | null
+        }
+        Insert: {
+          address_line1: string
+          address_line2?: string | null
+          city: string
+          country: string
+          created_at?: string | null
+          id?: string
+          order_id: string
+          postal_code?: string | null
+          state?: string | null
+        }
+        Update: {
+          address_line1?: string
+          address_line2?: string | null
+          city?: string
+          country?: string
+          created_at?: string | null
+          id?: string
+          order_id?: string
+          postal_code?: string | null
+          state?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "shipping_addresses_order_id_fkey"
+            columns: ["order_id"]
+            isOneToOne: false
+            referencedRelation: "orders"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       stage_config: {
         Row: {
           action: Database["public"]["Enums"]["stage_action"]
@@ -2189,6 +2561,7 @@ export type Database = {
         }
         Returns: string
       }
+      generate_receipt_number: { Args: never; Returns: string }
       generate_referral_code: { Args: { p_prefix?: string }; Returns: string }
       get_current_season: { Args: never; Returns: string }
       get_user_roles: {
@@ -2235,6 +2608,11 @@ export type Database = {
       certificate_status: "ACTIVE" | "EXPIRED" | "REVOKED" | "RENEWED"
       certificate_tier: "gold" | "platinum" | "blue_garnet" | "icon"
       disbursement_status: "DRAFT" | "COMPLETED" | "FAILED"
+      impact_destination:
+        | "REBUILD_MY_SCHOOL"
+        | "EDUAID_AFRICA"
+        | "SPONSOR_STUDENT"
+        | "TVET_GRANT"
       misuse_report_status:
         | "PENDING"
         | "REVIEWING"
@@ -2249,6 +2627,7 @@ export type Database = {
         | "rejected"
         | "platinum"
       notification_status: "PENDING" | "SENT" | "FAILED" | "READ"
+      order_status: "PENDING" | "PAID" | "FAILED" | "REFUNDED" | "FULFILLED"
       payment_provider: "PAYSTACK" | "FLUTTERWAVE" | "LEMFI" | "TAPTAPSEND"
       payment_status:
         | "INITIATED"
@@ -2256,6 +2635,7 @@ export type Database = {
         | "SUCCESS"
         | "FAILED"
         | "CANCELLED"
+      product_category: "APPAREL" | "ACCESSORIES" | "LIMITED" | "BUNDLES"
       referral_event_type:
         | "SIGNUP"
         | "NOMINATION_PAID"
@@ -2436,6 +2816,12 @@ export const Constants = {
       certificate_status: ["ACTIVE", "EXPIRED", "REVOKED", "RENEWED"],
       certificate_tier: ["gold", "platinum", "blue_garnet", "icon"],
       disbursement_status: ["DRAFT", "COMPLETED", "FAILED"],
+      impact_destination: [
+        "REBUILD_MY_SCHOOL",
+        "EDUAID_AFRICA",
+        "SPONSOR_STUDENT",
+        "TVET_GRANT",
+      ],
       misuse_report_status: [
         "PENDING",
         "REVIEWING",
@@ -2452,6 +2838,7 @@ export const Constants = {
         "platinum",
       ],
       notification_status: ["PENDING", "SENT", "FAILED", "READ"],
+      order_status: ["PENDING", "PAID", "FAILED", "REFUNDED", "FULFILLED"],
       payment_provider: ["PAYSTACK", "FLUTTERWAVE", "LEMFI", "TAPTAPSEND"],
       payment_status: [
         "INITIATED",
@@ -2460,6 +2847,7 @@ export const Constants = {
         "FAILED",
         "CANCELLED",
       ],
+      product_category: ["APPAREL", "ACCESSORIES", "LIMITED", "BUNDLES"],
       referral_event_type: [
         "SIGNUP",
         "NOMINATION_PAID",
