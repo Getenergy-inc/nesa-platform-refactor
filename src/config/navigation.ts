@@ -173,10 +173,23 @@ export const MAIN_NAV: NavItem[] = [
         icon: Building,
       },
       {
-        label: "Vote with AfriGoldcoin",
-        href: "/vote",
-        description: "Cast your vote for Gold Certificate nominees",
+        label: "Vote with AGC",
+        href: "/vote-with-agc",
+        description: "Vote using Afri Gold Coin credits",
         icon: Coins,
+        badge: "New",
+      },
+      {
+        label: "About AGC",
+        href: "/about-agc",
+        description: "Learn about Afri Gold Coin voting credits",
+        icon: Coins,
+      },
+      {
+        label: "Public Voting",
+        href: "/vote",
+        description: "Cast your vote for nominees",
+        icon: Vote,
         stageGated: "public_voting",
       },
       {
