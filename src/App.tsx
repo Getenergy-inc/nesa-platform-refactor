@@ -130,13 +130,13 @@ const App = () => (
                 <Route path="/tickets" element={<WithLayout><Tickets /></WithLayout>} />
                 <Route path="/buy-your-ticket" element={<WithLayout><BuyYourTicket /></WithLayout>} />
                 
-                {/* Shop / Merchandise */}
+                {/* Shop / Merchandise - specific routes before dynamic :slug */}
                 <Route path="/shop" element={<WithLayout><Shop /></WithLayout>} />
-                <Route path="/shop/:slug" element={<WithLayout><ProductDetail /></WithLayout>} />
                 <Route path="/shop/cart" element={<WithLayout><Cart /></WithLayout>} />
                 <Route path="/shop/checkout" element={<WithLayout><Checkout /></WithLayout>} />
-                <Route path="/shop/orders/:id" element={<WithLayout><OrderConfirmation /></WithLayout>} />
                 <Route path="/shop/bulk-orders" element={<WithLayout><BulkOrders /></WithLayout>} />
+                <Route path="/shop/orders/:id" element={<WithLayout><OrderConfirmation /></WithLayout>} />
+                <Route path="/shop/:slug" element={<WithLayout><ProductDetail /></WithLayout>} />
                 
                 {/* Auth - minimal layout */}
                 <Route path="/login" element={<WithLayout showFooter={false}><Login /></WithLayout>} />
