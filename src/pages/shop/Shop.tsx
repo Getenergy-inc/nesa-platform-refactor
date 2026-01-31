@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
-import { PublicLayout } from "@/components/layout/PublicLayout";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -9,7 +8,7 @@ import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { GFAWalletIcon } from "@/components/ui/GFAWalletIcon";
 import { ShoppingCart, Gift, Heart, Building2, Sparkles, Package } from "lucide-react";
 import { getProducts, addToLocalCart, getLocalCart } from "@/api/shop";
-import { AGC_BONUS_RATE, CATEGORY_LABELS, type Product, type ProductCategory } from "@/types/shop";
+import { AGC_BONUS_RATE, type Product } from "@/types/shop";
 import { toast } from "sonner";
 
 const CATEGORIES: { value: string; label: string }[] = [
@@ -52,12 +51,12 @@ export default function Shop() {
   };
 
   return (
-    <PublicLayout>
+    <>
       <Helmet>
         <title>Shop to Sponsor Impact | NESA-Africa Merchandise Store</title>
         <meta
           name="description"
-          content="Shop official NESA-Africa merchandise and directly fund education impact across Africa. Every purchase supports EduAid-Africa + SCEF services. Secure multi-currency checkout, instant receipts, and bonus AGC voting credits."
+          content="Shop official NESA-Africa merchandise and fund education impact across Africa. Every purchase supports EduAid-Africa + SCEF services, including Rebuild My School (2026–2027). Secure multi-currency checkout, instant receipts, and bonus voting credits."
         />
       </Helmet>
 
@@ -243,6 +242,6 @@ export default function Shop() {
           </div>
         </section>
       </div>
-    </PublicLayout>
+    </>
   );
 }

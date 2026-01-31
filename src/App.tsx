@@ -138,6 +138,19 @@ const App = () => (
                 <Route path="/shop/orders/:id" element={<WithLayout><OrderConfirmation /></WithLayout>} />
                 <Route path="/shop/:slug" element={<WithLayout><ProductDetail /></WithLayout>} />
                 
+                {/* Shop route aliases - redirect old/guessed URLs to /shop */}
+                <Route path="/merchandise" element={<WithLayout><Shop /></WithLayout>} />
+                <Route path="/merch" element={<WithLayout><Shop /></WithLayout>} />
+                <Route path="/store" element={<WithLayout><Shop /></WithLayout>} />
+                <Route path="/buy-merchandise" element={<WithLayout><Shop /></WithLayout>} />
+                <Route path="/shop-now" element={<WithLayout><Shop /></WithLayout>} />
+                
+                {/* Cart, Checkout, and Orders route aliases */}
+                <Route path="/cart" element={<WithLayout><Cart /></WithLayout>} />
+                <Route path="/checkout" element={<WithLayout><Checkout /></WithLayout>} />
+                <Route path="/orders/:id" element={<WithLayout><OrderConfirmation /></WithLayout>} />
+                <Route path="/bulk-orders" element={<WithLayout><BulkOrders /></WithLayout>} />
+                
                 {/* Auth - minimal layout */}
                 <Route path="/login" element={<WithLayout showFooter={false}><Login /></WithLayout>} />
                 <Route path="/register" element={<WithLayout showFooter={false}><Register /></WithLayout>} />

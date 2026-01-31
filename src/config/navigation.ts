@@ -205,8 +205,8 @@ export const MAIN_NAV: NavItem[] = [
         icon: Map,
       },
       {
-        label: "Buy Merchandise",
-        href: "/merchandise",
+        label: "Shop Merchandise",
+        href: "/shop",
         description: "Official NESA-Africa merchandise",
         icon: ShoppingBag,
       },
@@ -340,6 +340,7 @@ export const FOOTER_NAV: NavSection[] = [
       { label: "Partners", href: "/partners" },
       { label: "Chapters", href: "/chapters" },
       { label: "Volunteer", href: "/volunteer" },
+      { label: "Shop Merchandise", href: "/shop" },
     ],
   },
   {
