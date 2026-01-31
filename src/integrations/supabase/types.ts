@@ -434,6 +434,50 @@ export type Database = {
         }
         Relationships: []
       }
+      disbursement_batches: {
+        Row: {
+          created_at: string | null
+          currency: string
+          id: string
+          settlement_run_id: string
+          status: Database["public"]["Enums"]["transfer_status"]
+          total_fees: number
+          total_gross: number
+          total_net: number
+          updated_at: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          currency?: string
+          id?: string
+          settlement_run_id: string
+          status?: Database["public"]["Enums"]["transfer_status"]
+          total_fees?: number
+          total_gross?: number
+          total_net?: number
+          updated_at?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          currency?: string
+          id?: string
+          settlement_run_id?: string
+          status?: Database["public"]["Enums"]["transfer_status"]
+          total_fees?: number
+          total_gross?: number
+          total_net?: number
+          updated_at?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "disbursement_batches_settlement_run_id_fkey"
+            columns: ["settlement_run_id"]
+            isOneToOne: false
+            referencedRelation: "settlement_runs"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       disbursement_lines: {
         Row: {
           amount_usd: number
@@ -529,6 +573,59 @@ export type Database = {
             columns: ["season_id"]
             isOneToOne: false
             referencedRelation: "seasons"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      disbursement_transfers: {
+        Row: {
+          amount: number
+          confirmed_at: string | null
+          created_at: string | null
+          currency: string
+          destination_account_ref: string | null
+          disbursement_batch_id: string
+          external_reference: string | null
+          fund_account_key: string
+          id: string
+          partner_key: string | null
+          percentage_applied: number
+          status: Database["public"]["Enums"]["transfer_status"]
+        }
+        Insert: {
+          amount: number
+          confirmed_at?: string | null
+          created_at?: string | null
+          currency?: string
+          destination_account_ref?: string | null
+          disbursement_batch_id: string
+          external_reference?: string | null
+          fund_account_key: string
+          id?: string
+          partner_key?: string | null
+          percentage_applied: number
+          status?: Database["public"]["Enums"]["transfer_status"]
+        }
+        Update: {
+          amount?: number
+          confirmed_at?: string | null
+          created_at?: string | null
+          currency?: string
+          destination_account_ref?: string | null
+          disbursement_batch_id?: string
+          external_reference?: string | null
+          fund_account_key?: string
+          id?: string
+          partner_key?: string | null
+          percentage_applied?: number
+          status?: Database["public"]["Enums"]["transfer_status"]
+        }
+        Relationships: [
+          {
+            foreignKeyName: "disbursement_transfers_disbursement_batch_id_fkey"
+            columns: ["disbursement_batch_id"]
+            isOneToOne: false
+            referencedRelation: "disbursement_batches"
             referencedColumns: ["id"]
           },
         ]
@@ -676,6 +773,36 @@ export type Database = {
           id?: string
           is_active?: boolean | null
           question?: string
+          updated_at?: string | null
+        }
+        Relationships: []
+      }
+      fund_accounts: {
+        Row: {
+          created_at: string | null
+          description: string | null
+          display_name: string
+          id: string
+          is_active: boolean | null
+          key: string
+          updated_at: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          description?: string | null
+          display_name: string
+          id?: string
+          is_active?: boolean | null
+          key: string
+          updated_at?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          description?: string | null
+          display_name?: string
+          id?: string
+          is_active?: boolean | null
+          key?: string
           updated_at?: string | null
         }
         Relationships: []
@@ -1159,13 +1286,19 @@ export type Database = {
           account_id: string
           agc_amount: number
           amount_usd: number
+          chapter_id: string | null
           created_at: string | null
           exchange_rate: number | null
           expires_at: string | null
           id: string
+          is_settled: boolean | null
           metadata: Json | null
+          net_amount: number | null
+          processor_fee: number | null
           provider: Database["public"]["Enums"]["payment_provider"]
           provider_ref: string | null
+          settled_at: string | null
+          settled_run_id: string | null
           status: Database["public"]["Enums"]["payment_status"]
           updated_at: string | null
         }
@@ -1173,13 +1306,19 @@ export type Database = {
           account_id: string
           agc_amount: number
           amount_usd: number
+          chapter_id?: string | null
           created_at?: string | null
           exchange_rate?: number | null
           expires_at?: string | null
           id?: string
+          is_settled?: boolean | null
           metadata?: Json | null
+          net_amount?: number | null
+          processor_fee?: number | null
           provider: Database["public"]["Enums"]["payment_provider"]
           provider_ref?: string | null
+          settled_at?: string | null
+          settled_run_id?: string | null
           status?: Database["public"]["Enums"]["payment_status"]
           updated_at?: string | null
         }
@@ -1187,13 +1326,19 @@ export type Database = {
           account_id?: string
           agc_amount?: number
           amount_usd?: number
+          chapter_id?: string | null
           created_at?: string | null
           exchange_rate?: number | null
           expires_at?: string | null
           id?: string
+          is_settled?: boolean | null
           metadata?: Json | null
+          net_amount?: number | null
+          processor_fee?: number | null
           provider?: Database["public"]["Enums"]["payment_provider"]
           provider_ref?: string | null
+          settled_at?: string | null
+          settled_run_id?: string | null
           status?: Database["public"]["Enums"]["payment_status"]
           updated_at?: string | null
         }
@@ -1211,6 +1356,20 @@ export type Database = {
             isOneToOne: false
             referencedRelation: "wallet_balances"
             referencedColumns: ["account_id"]
+          },
+          {
+            foreignKeyName: "payment_intents_chapter_id_fkey"
+            columns: ["chapter_id"]
+            isOneToOne: false
+            referencedRelation: "chapters"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "payment_intents_settled_run_id_fkey"
+            columns: ["settled_run_id"]
+            isOneToOne: false
+            referencedRelation: "settlement_runs"
+            referencedColumns: ["id"]
           },
         ]
       }
@@ -1570,6 +1729,116 @@ export type Database = {
           starts_at?: string | null
           updated_at?: string | null
           year?: number
+        }
+        Relationships: []
+      }
+      settlement_adjustments: {
+        Row: {
+          adjustment_type: string
+          amount: number
+          created_at: string | null
+          currency: string
+          fund_reversals: Json
+          id: string
+          original_payment_id: string | null
+          reason: string | null
+          settlement_run_id: string | null
+        }
+        Insert: {
+          adjustment_type: string
+          amount: number
+          created_at?: string | null
+          currency?: string
+          fund_reversals?: Json
+          id?: string
+          original_payment_id?: string | null
+          reason?: string | null
+          settlement_run_id?: string | null
+        }
+        Update: {
+          adjustment_type?: string
+          amount?: number
+          created_at?: string | null
+          currency?: string
+          fund_reversals?: Json
+          id?: string
+          original_payment_id?: string | null
+          reason?: string | null
+          settlement_run_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "settlement_adjustments_settlement_run_id_fkey"
+            columns: ["settlement_run_id"]
+            isOneToOne: false
+            referencedRelation: "settlement_runs"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      settlement_runs: {
+        Row: {
+          completed_at: string | null
+          created_at: string | null
+          error_message: string | null
+          id: string
+          idempotency_key: string
+          payments_processed: number | null
+          status: Database["public"]["Enums"]["settlement_status"]
+          totals_json: Json | null
+          window_end: string
+          window_start: string
+        }
+        Insert: {
+          completed_at?: string | null
+          created_at?: string | null
+          error_message?: string | null
+          id?: string
+          idempotency_key: string
+          payments_processed?: number | null
+          status?: Database["public"]["Enums"]["settlement_status"]
+          totals_json?: Json | null
+          window_end: string
+          window_start: string
+        }
+        Update: {
+          completed_at?: string | null
+          created_at?: string | null
+          error_message?: string | null
+          id?: string
+          idempotency_key?: string
+          payments_processed?: number | null
+          status?: Database["public"]["Enums"]["settlement_status"]
+          totals_json?: Json | null
+          window_end?: string
+          window_start?: string
+        }
+        Relationships: []
+      }
+      settlement_split_rules: {
+        Row: {
+          allocations: Json
+          created_at: string | null
+          id: string
+          is_enabled: boolean | null
+          scope: string
+          updated_at: string | null
+        }
+        Insert: {
+          allocations: Json
+          created_at?: string | null
+          id?: string
+          is_enabled?: boolean | null
+          scope?: string
+          updated_at?: string | null
+        }
+        Update: {
+          allocations?: Json
+          created_at?: string | null
+          id?: string
+          is_enabled?: boolean | null
+          scope?: string
+          updated_at?: string | null
         }
         Relationships: []
       }
@@ -2004,6 +2273,7 @@ export type Database = {
         | "SPONSOR"
         | "ADMIN"
         | "SUPER_ADMIN"
+      settlement_status: "STARTED" | "PROCESSING" | "COMPLETED" | "FAILED"
       stage_action:
         | "nominations"
         | "public_voting"
@@ -2012,6 +2282,13 @@ export type Database = {
         | "certificates"
       transaction_status: "pending" | "confirmed" | "failed" | "refunded"
       transaction_type: "donation" | "sponsorship" | "ticket"
+      transfer_status:
+        | "CREATED"
+        | "PENDING"
+        | "PROCESSING"
+        | "SENT"
+        | "CONFIRMED"
+        | "FAILED"
       vote_type: "public" | "jury"
       wallet_direction: "CREDIT" | "DEBIT"
       wallet_entry_type:
@@ -2202,6 +2479,7 @@ export const Constants = {
         "ADMIN",
         "SUPER_ADMIN",
       ],
+      settlement_status: ["STARTED", "PROCESSING", "COMPLETED", "FAILED"],
       stage_action: [
         "nominations",
         "public_voting",
@@ -2211,6 +2489,14 @@ export const Constants = {
       ],
       transaction_status: ["pending", "confirmed", "failed", "refunded"],
       transaction_type: ["donation", "sponsorship", "ticket"],
+      transfer_status: [
+        "CREATED",
+        "PENDING",
+        "PROCESSING",
+        "SENT",
+        "CONFIRMED",
+        "FAILED",
+      ],
       vote_type: ["public", "jury"],
       wallet_direction: ["CREDIT", "DEBIT"],
       wallet_entry_type: [
