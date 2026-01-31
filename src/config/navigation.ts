@@ -222,6 +222,13 @@ export const MAIN_NAV: NavItem[] = [
         description: "Get tickets for the NESA-Africa Gala 2026",
         icon: Ticket,
       },
+      {
+        label: "GFAWzip Wallet",
+        href: "/gfawzip",
+        description: "Multi-currency payments via GetFinance.africa",
+        icon: Wallet,
+        badge: "New",
+      },
     ],
   },
   {
@@ -492,6 +499,8 @@ export const PAGE_REGISTRY: PageDefinition[] = [
   // Events
   { path: "/events", title: "Events", description: "Upcoming events", component: "Events", category: "public" },
   { path: "/tickets", title: "Tickets", description: "Event tickets", component: "Tickets", category: "public", stageGated: "tickets" },
+  { path: "/buy-your-ticket", title: "Buy Your Ticket", description: "Gala tickets", component: "BuyYourTicket", category: "public" },
+  { path: "/gfawzip", title: "GFAWzip Wallet", description: "Multi-currency payments", component: "GFAWzipWallet", category: "public" },
   { path: "/events/tourism", title: "Education Tourism", description: "Educational experiences", component: "Tourism", category: "public" },
   
   // Support
