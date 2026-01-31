@@ -61,6 +61,8 @@ import Volunteer from "./pages/Volunteer";
 import Ambassadors from "./pages/Ambassadors";
 import Contact from "./pages/Contact";
 import Vote from "./pages/Vote";
+import VoteWithAGC from "./pages/VoteWithAGC";
+import AboutAGC from "./pages/AboutAGC";
 import Tickets from "./pages/Tickets";
 import BuyYourTicket from "./pages/BuyYourTicket";
 
@@ -131,6 +133,8 @@ const App = () => (
                 <Route path="/nominees" element={<WithLayout><Nominees /></WithLayout>} />
                 <Route path="/nominees/:slug" element={<WithLayout><NomineeProfile /></WithLayout>} />
                 <Route path="/vote" element={<WithLayout><Vote /></WithLayout>} />
+                <Route path="/vote-with-agc" element={<WithLayout><VoteWithAGC /></WithLayout>} />
+                <Route path="/about-agc" element={<WithLayout><AboutAGC /></WithLayout>} />
                 <Route path="/results" element={<WithLayout><Results /></WithLayout>} />
                 
                 {/* Dashboards - use their own layout */}
