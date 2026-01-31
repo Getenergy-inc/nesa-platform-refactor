@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" fill="none">
+  <rect width="400" height="400" fill="#1a1a2e"/>
+  <ellipse cx="200" cy="220" rx="120" ry="40" fill="#2d2d44"/>
+  <path d="M80 220 Q80 120 200 100 Q320 120 320 220" fill="#333355"/>
+  <ellipse cx="200" cy="100" rx="60" ry="20" fill="#444466"/>
+  <path d="M140 180 L260 180 L280 220 L120 220 Z" fill="#FFD700"/>
+  <text x="200" y="210" text-anchor="middle" fill="#1a1a2e" font-family="Arial" font-size="20" font-weight="bold">NESA</text>
+  <text x="200" y="350" text-anchor="middle" fill="#888" font-family="Arial" font-size="14">Branded Cap</text>
+  <text x="200" y="375" text-anchor="middle" fill="#FFD700" font-family="Arial" font-size="18" font-weight="bold">$15</text>
+</svg>

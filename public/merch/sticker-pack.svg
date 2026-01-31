@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" fill="none">
+  <rect width="400" height="400" fill="#1a1a2e"/>
+  <rect x="60" y="80" width="80" height="80" rx="8" fill="#FFD700"/>
+  <rect x="160" y="60" width="80" height="80" rx="8" fill="#D4AF37"/>
+  <rect x="260" y="90" width="80" height="80" rx="8" fill="#B8860B"/>
+  <rect x="80" y="180" width="80" height="80" rx="8" fill="#DAA520"/>
+  <rect x="180" y="200" width="80" height="80" rx="8" fill="#FFD700"/>
+  <text x="200" y="350" text-anchor="middle" fill="#888" font-family="Arial" font-size="14">Sticker Pack (5 pcs)</text>
+  <text x="200" y="375" text-anchor="middle" fill="#FFD700" font-family="Arial" font-size="18" font-weight="bold">$7</text>
+</svg>
