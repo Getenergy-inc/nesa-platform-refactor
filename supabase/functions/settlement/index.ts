@@ -10,6 +10,7 @@ interface SplitAllocation {
   target: string;
   mode: string;
   value: number;
+  note?: string;
 }
 
 interface CurrencyBucket {
@@ -17,6 +18,8 @@ interface CurrencyBucket {
   totalGross: number;
   totalFees: number;
   totalNet: number;
+  gfaWzipMarkup: number;
+  netAfterMarkup: number;
   payments: Array<{
     id: string;
     amount: number;
@@ -25,6 +28,9 @@ interface CurrencyBucket {
     chapterId: string | null;
   }>;
 }
+
+// Default GFA Wzip markup percentage (2%)
+const DEFAULT_GFA_WZIP_MARKUP = 0.02;
 
 Deno.serve(async (req) => {
   // Handle CORS
@@ -51,6 +57,19 @@ Deno.serve(async (req) => {
         // No body or invalid JSON - use defaults
       }
     }
+
+    // Fetch GFA Wzip markup percentage from platform config
+    const { data: markupConfig } = await supabase
+      .from("platform_config")
+      .select("value")
+      .eq("key", "gfa_wzip_markup_percent")
+      .single();
+    
+    const gfaWzipMarkupPercent = markupConfig?.value 
+      ? parseFloat(markupConfig.value) 
+      : DEFAULT_GFA_WZIP_MARKUP;
+
+    console.log(`[Settlement] GFA Wzip markup: ${gfaWzipMarkupPercent * 100}%`);
 
     // Calculate 24-hour window
     const now = new Date();
@@ -189,6 +208,8 @@ Deno.serve(async (req) => {
           totalGross: 0,
           totalFees: 0,
           totalNet: 0,
+          gfaWzipMarkup: 0,
+          netAfterMarkup: 0,
           payments: [],
         });
       }
@@ -206,11 +227,17 @@ Deno.serve(async (req) => {
       });
     }
 
+    // Calculate GFA Wzip 2% markup for each currency bucket
+    for (const [, bucket] of currencyBuckets) {
+      bucket.gfaWzipMarkup = Math.round(bucket.totalNet * gfaWzipMarkupPercent * 100) / 100;
+      bucket.netAfterMarkup = Math.round((bucket.totalNet - bucket.gfaWzipMarkup) * 100) / 100;
+    }
+
     // Track chapter allocations for LOCAL_CHAPTER split
     const chapterAllocations: Map<string, number> = new Map();
 
     // Process each currency bucket
-    const totalsJson: Record<string, unknown> = { currencies: [] };
+    const totalsJson: Record<string, unknown> = { currencies: [], gfa_wzip_markup_percent: gfaWzipMarkupPercent * 100 };
     const disbursementBatches: Array<{
       batchId: string;
       currency: string;
@@ -222,7 +249,7 @@ Deno.serve(async (req) => {
     }> = [];
 
     for (const [currency, bucket] of currencyBuckets) {
-      console.log(`[Settlement] Processing ${currency}: gross=${bucket.totalGross}, fees=${bucket.totalFees}, net=${bucket.totalNet}`);
+      console.log(`[Settlement] Processing ${currency}: gross=${bucket.totalGross}, fees=${bucket.totalFees}, net=${bucket.totalNet}, gfaWzipMarkup=${bucket.gfaWzipMarkup}, netAfterMarkup=${bucket.netAfterMarkup}`);
 
       // Create disbursement batch
       const { data: batch, error: batchError } = await supabase
@@ -245,17 +272,38 @@ Deno.serve(async (req) => {
       const transfers: Array<{ fundKey: string; amount: number; percentage: number }> = [];
       let allocatedTotal = 0;
 
-      // Calculate splits
+      // FIRST: Create GFA Wzip 2% markup transfer (before all other splits)
+      const gfaWzipAmount = bucket.gfaWzipMarkup;
+      transfers.push({
+        fundKey: "GFA_WZIP",
+        amount: gfaWzipAmount,
+        percentage: gfaWzipMarkupPercent * 100,
+      });
+
+      await supabase.from("disbursement_transfers").insert({
+        disbursement_batch_id: batch.id,
+        fund_account_key: "GFA_WZIP",
+        amount: gfaWzipAmount,
+        currency,
+        percentage_applied: gfaWzipMarkupPercent * 100,
+        status: "CREATED",
+      });
+
+      // THEN: Calculate splits on NET AFTER MARKUP
+      const netForSplit = bucket.netAfterMarkup;
+
       for (let i = 0; i < allocations.length; i++) {
         const allocation = allocations[i];
-        let amount = Math.round(bucket.totalNet * allocation.value * 100) / 100;
+        let amount = Math.round(netForSplit * allocation.value * 100) / 100;
         let fundKey = allocation.target.replace("FUND:", "");
 
         // Handle LOCAL_CHAPTER special case
         if (fundKey === "LOCAL_CHAPTER") {
-          // Sum up chapter-specific allocations from payments
+          // Sum up chapter-specific allocations from payments (using net after markup proportion)
+          const markupMultiplier = bucket.netAfterMarkup / bucket.totalNet;
           for (const payment of bucket.payments) {
-            const chapterShare = Math.round(payment.net * allocation.value * 100) / 100;
+            const adjustedNet = payment.net * markupMultiplier;
+            const chapterShare = Math.round(adjustedNet * allocation.value * 100) / 100;
             const chapterKey = payment.chapterId
               ? `LOCAL_CHAPTER:${payment.chapterId}`
               : "LOCAL_CHAPTER:UNASSIGNED";
@@ -287,7 +335,7 @@ Deno.serve(async (req) => {
         } else {
           // Adjust last non-chapter allocation to account for rounding
           if (i === allocations.length - 1 && fundKey !== "LOCAL_CHAPTER") {
-            amount = Math.round((bucket.totalNet - allocatedTotal) * 100) / 100;
+            amount = Math.round((netForSplit - allocatedTotal) * 100) / 100;
           }
 
           allocatedTotal += amount;
@@ -319,6 +367,8 @@ Deno.serve(async (req) => {
         gross: bucket.totalGross,
         fees: bucket.totalFees,
         net: bucket.totalNet,
+        gfa_wzip_markup: bucket.gfaWzipMarkup,
+        net_after_markup: bucket.netAfterMarkup,
         allocations: transfers,
       });
 

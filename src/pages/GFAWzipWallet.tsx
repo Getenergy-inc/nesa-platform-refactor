@@ -25,16 +25,20 @@ import {
 
 const GFAWZIP_URL = "https://www.getfinance.africa";
 
+// 2% GFA Wzip processing markup
+const GFA_WZIP_MARKUP_PERCENT = 2;
+
 const TRUST_FEATURES = [
   { icon: Globe, label: "Multi-Currency" },
   { icon: FileText, label: "Instant Receipts" },
   { icon: Shield, label: "Secure Checkout" },
+  { icon: null, label: "2% Processing Fee", isMarkup: true },
   { icon: null, label: "Wallet Audit Trail", isGFA: true },
 ];
 
 const PAYMENT_STEPS = [
   { step: 1, title: "Choose", description: "Ticket / Donate / Sponsor" },
-  { step: 2, title: "Checkout", description: "Using GFAWzip Wallet (multi-currency)" },
+  { step: 2, title: "Checkout", description: "GFAWzip Wallet (2% markup included)" },
   { step: 3, title: "Receive", description: "Receipt/confirmation instantly" },
   { step: 4, title: "Earn", description: "AGC voting credits in your wallet" },
 ];
@@ -163,10 +167,12 @@ export default function GFAWzipWallet() {
         {/* Trust Bar */}
         <section className="py-8 bg-card/50 border-y border-border">
           <div className="container mx-auto px-4">
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+            <div className="grid grid-cols-2 md:grid-cols-5 gap-6">
               {TRUST_FEATURES.map((feature) => (
                 <div key={feature.label} className="flex items-center justify-center gap-3">
-                  {feature.isGFA ? (
+                  {'isMarkup' in feature && feature.isMarkup ? (
+                    <Badge variant="secondary" className="text-xs">2%</Badge>
+                  ) : feature.isGFA ? (
                     <GFAWalletIcon size={24} />
                   ) : feature.icon ? (
                     <feature.icon className="h-6 w-6 text-gold" />
@@ -213,6 +219,39 @@ export default function GFAWzipWallet() {
                     </p>
                   </CardContent>
                 </Card>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* 2% Processing Fee Section */}
+        <section className="py-12 bg-primary/5 border-y border-primary/20">
+          <div className="container mx-auto px-4">
+            <div className="max-w-3xl mx-auto text-center">
+              <Badge variant="secondary" className="mb-4">Payment Processing</Badge>
+              <h2 className="text-2xl font-display font-bold text-foreground mb-4">
+                {GFA_WZIP_MARKUP_PERCENT}% GFA Wzip Processing Fee
+              </h2>
+              <p className="text-muted-foreground mb-6">
+                All payments processed through GFA Wzip include a transparent {GFA_WZIP_MARKUP_PERCENT}% markup 
+                that supports the payment gateway infrastructure and multi-currency operations.
+              </p>
+              <div className="grid md:grid-cols-3 gap-4 text-sm">
+                <div className="p-4 rounded-lg bg-card border border-border">
+                  <CheckCircle className="h-6 w-6 text-primary mx-auto mb-2" />
+                  <p className="font-medium">Transparent</p>
+                  <p className="text-muted-foreground text-xs">Clearly disclosed before checkout</p>
+                </div>
+                <div className="p-4 rounded-lg bg-card border border-border">
+                  <Shield className="h-6 w-6 text-primary mx-auto mb-2" />
+                  <p className="font-medium">Supports Operations</p>
+                  <p className="text-muted-foreground text-xs">Powers secure payment infrastructure</p>
+                </div>
+                <div className="p-4 rounded-lg bg-card border border-border">
+                  <FileText className="h-6 w-6 text-primary mx-auto mb-2" />
+                  <p className="font-medium">Audit Trail</p>
+                  <p className="text-muted-foreground text-xs">All fees recorded in settlement reports</p>
+                </div>
               </div>
             </div>
           </div>
