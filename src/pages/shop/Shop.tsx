@@ -164,18 +164,21 @@ export default function Shop() {
                 {products.map((product) => (
                   <Card key={product.id} className="bg-card border-border group hover:border-primary/50 transition-colors overflow-hidden">
                     <Link to={`/shop/${product.slug}`}>
-                      <div className="aspect-square bg-muted relative overflow-hidden">
+                    <div className="aspect-square bg-muted relative overflow-hidden">
                         {product.image_url ? (
                           <img
-                            src={product.image_url}
+                            src={`${product.image_url}?v=2`}
                             alt={product.name}
-                            className="w-full h-full object-cover group-hover:scale-105 transition-transform"
+                            className="w-full h-full object-cover group-hover:scale-105 transition-transform bg-card"
+                            onError={(e) => {
+                              e.currentTarget.style.display = 'none';
+                              e.currentTarget.nextElementSibling?.classList.remove('hidden');
+                            }}
                           />
-                        ) : (
-                          <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-primary/20 to-gold/20">
-                            <Package className="h-12 w-12 text-muted-foreground" />
-                          </div>
-                        )}
+                        ) : null}
+                        <div className={`w-full h-full flex items-center justify-center bg-gradient-to-br from-primary/20 to-gold/20 ${product.image_url ? 'hidden absolute inset-0' : ''}`}>
+                          <Package className="h-12 w-12 text-muted-foreground" />
+                        </div>
                         {product.is_limited && (
                           <Badge className="absolute top-2 left-2 bg-gold text-secondary">
                             <Sparkles className="h-3 w-3 mr-1" />

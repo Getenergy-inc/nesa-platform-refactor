@@ -98,15 +98,18 @@ export default function ProductDetail() {
             <div className="aspect-square rounded-xl overflow-hidden bg-card border border-border">
               {product.image_url ? (
                 <img
-                  src={product.image_url}
+                  src={`${product.image_url}?v=2`}
                   alt={product.name}
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-cover bg-card"
+                  onError={(e) => {
+                    e.currentTarget.style.display = 'none';
+                    e.currentTarget.nextElementSibling?.classList.remove('hidden');
+                  }}
                 />
-              ) : (
-                <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-primary/20 to-gold/20">
-                  <Package className="h-24 w-24 text-muted-foreground" />
-                </div>
-              )}
+              ) : null}
+              <div className={`w-full h-full flex items-center justify-center bg-gradient-to-br from-primary/20 to-gold/20 ${product.image_url ? 'hidden' : ''}`}>
+                <Package className="h-24 w-24 text-muted-foreground" />
+              </div>
             </div>
 
             {/* Info */}
