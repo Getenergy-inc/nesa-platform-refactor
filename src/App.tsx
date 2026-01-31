@@ -67,6 +67,7 @@ import Tickets from "./pages/Tickets";
 import BuyYourTicket from "./pages/BuyYourTicket";
 import GFAWzipWallet from "./pages/GFAWzipWallet";
 import GFAWzipLinks from "./pages/GFAWzipLinks";
+import { Shop, ProductDetail, Cart, Checkout, OrderConfirmation, BulkOrders } from "./pages/shop";
 
 // OLC Pages
 import { OLCDashboard, OLCMembers, OLCSettlements, OLCWallet } from "./pages/olc";
@@ -125,6 +126,14 @@ const App = () => (
                 <Route path="/media/gala" element={<WithLayout><Gala /></WithLayout>} />
                 <Route path="/tickets" element={<WithLayout><Tickets /></WithLayout>} />
                 <Route path="/buy-your-ticket" element={<WithLayout><BuyYourTicket /></WithLayout>} />
+                
+                {/* Shop / Merchandise */}
+                <Route path="/shop" element={<WithLayout><Shop /></WithLayout>} />
+                <Route path="/shop/:slug" element={<WithLayout><ProductDetail /></WithLayout>} />
+                <Route path="/shop/cart" element={<WithLayout><Cart /></WithLayout>} />
+                <Route path="/shop/checkout" element={<WithLayout><Checkout /></WithLayout>} />
+                <Route path="/shop/orders/:id" element={<WithLayout><OrderConfirmation /></WithLayout>} />
+                <Route path="/shop/bulk-orders" element={<WithLayout><BulkOrders /></WithLayout>} />
                 
                 {/* Auth - minimal layout */}
                 <Route path="/login" element={<WithLayout showFooter={false}><Login /></WithLayout>} />
