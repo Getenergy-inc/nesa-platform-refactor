@@ -6,8 +6,8 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Badge } from "@/components/ui/badge";
+import { GFAWalletIcon } from "@/components/ui/GFAWalletIcon";
 import {
-  Wallet,
   ExternalLink,
   Ticket,
   Heart,
@@ -29,7 +29,7 @@ const TRUST_FEATURES = [
   { icon: Globe, label: "Multi-Currency" },
   { icon: FileText, label: "Instant Receipts" },
   { icon: Shield, label: "Secure Checkout" },
-  { icon: Wallet, label: "Wallet Audit Trail" },
+  { icon: null, label: "Wallet Audit Trail", isGFA: true },
 ];
 
 const PAYMENT_STEPS = [
@@ -122,8 +122,8 @@ export default function GFAWzipWallet() {
                   className="bg-gradient-gold text-secondary font-semibold shadow-gold"
                   asChild
                 >
-                  <a href={GFAWZIP_URL} target="_blank" rel="noopener noreferrer">
-                    <Wallet className="mr-2 h-5 w-5" />
+                  <a href={GFAWZIP_URL} target="_blank" rel="noopener noreferrer" className="flex items-center">
+                    <GFAWalletIcon size={20} className="mr-2" />
                     Open GFAWzip Wallet
                     <ExternalLink className="ml-2 h-4 w-4" />
                   </a>
@@ -166,7 +166,11 @@ export default function GFAWzipWallet() {
             <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
               {TRUST_FEATURES.map((feature) => (
                 <div key={feature.label} className="flex items-center justify-center gap-3">
-                  <feature.icon className="h-6 w-6 text-gold" />
+                  {feature.isGFA ? (
+                    <GFAWalletIcon size={24} />
+                  ) : feature.icon ? (
+                    <feature.icon className="h-6 w-6 text-gold" />
+                  ) : null}
                   <span className="text-foreground font-medium">{feature.label}</span>
                 </div>
               ))}
@@ -436,8 +440,8 @@ export default function GFAWzipWallet() {
                   className="bg-gradient-gold text-secondary font-semibold shadow-gold"
                   asChild
                 >
-                  <a href={GFAWZIP_URL} target="_blank" rel="noopener noreferrer">
-                    <Wallet className="mr-2 h-5 w-5" />
+                  <a href={GFAWZIP_URL} target="_blank" rel="noopener noreferrer" className="flex items-center">
+                    <GFAWalletIcon size={20} className="mr-2" />
                     Open GFAWzip Wallet
                     <ExternalLink className="ml-2 h-4 w-4" />
                   </a>

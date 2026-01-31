@@ -1,7 +1,8 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
-import { Coins, ArrowRightLeft, Wallet, TrendingUp } from "lucide-react";
+import { GFAWalletIcon } from "@/components/ui/GFAWalletIcon";
+import { Coins, ArrowRightLeft, TrendingUp } from "lucide-react";
 import { formatAgc, formatAgcc, AGC_CONVERSION_RATE } from "@/config/agcConfig";
 
 interface AGCWalletCardProps {
@@ -26,7 +27,7 @@ export function AGCWalletCard({
       <Card className="bg-gradient-to-br from-primary/10 via-background to-gold/5 border-primary/20">
         <CardHeader className="pb-2">
           <CardTitle className="flex items-center gap-2 text-lg">
-            <Wallet className="h-5 w-5 text-primary" />
+            <GFAWalletIcon size={20} />
             AGC Wallet
           </CardTitle>
         </CardHeader>
@@ -45,7 +46,7 @@ export function AGCWalletCard({
     <Card className="bg-gradient-to-br from-primary/10 via-background to-gold/5 border-primary/20">
       <CardHeader className="pb-2">
         <CardTitle className="flex items-center gap-2 text-lg">
-          <Wallet className="h-5 w-5 text-primary" />
+          <GFAWalletIcon size={20} />
           AGC Wallet
         </CardTitle>
       </CardHeader>

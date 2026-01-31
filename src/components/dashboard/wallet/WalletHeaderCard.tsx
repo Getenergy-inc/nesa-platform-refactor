@@ -1,7 +1,7 @@
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Card, CardContent } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
-import { Wallet } from "lucide-react";
+import { GFAWalletIcon } from "@/components/ui/GFAWalletIcon";
 import { useAuth } from "@/contexts/AuthContext";
 
 interface WalletHeaderCardProps {
@@ -40,7 +40,7 @@ export function WalletHeaderCard({ loading }: WalletHeaderCardProps) {
         </Avatar>
         <div className="flex-1">
           <div className="flex items-center gap-2">
-            <Wallet className="h-5 w-5 text-primary" />
+            <GFAWalletIcon size={24} />
             <h2 className="font-display text-xl font-bold">GFA Wallet for NESA-Africa</h2>
           </div>
           <p className="text-sm text-muted-foreground">{user?.email}</p>

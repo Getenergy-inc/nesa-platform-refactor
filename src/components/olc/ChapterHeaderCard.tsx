@@ -2,7 +2,8 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Card, CardContent } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Badge } from "@/components/ui/badge";
-import { Wallet, MapPin } from "lucide-react";
+import { GFAWalletIcon } from "@/components/ui/GFAWalletIcon";
+import { MapPin } from "lucide-react";
 import type { Chapter } from "@/types/olc";
 
 interface ChapterHeaderCardProps {
@@ -40,7 +41,7 @@ export function ChapterHeaderCard({ chapter, loading }: ChapterHeaderCardProps) 
         </Avatar>
         <div className="flex-1">
           <div className="flex items-center gap-2 flex-wrap">
-            <Wallet className="h-5 w-5 text-emerald-600" />
+            <GFAWalletIcon size={24} />
             <h2 className="font-display text-xl font-bold">GFA Wallet for NESA-Africa</h2>
             <Badge variant="secondary" className="bg-emerald-500/10 text-emerald-600 border-emerald-500/30">
               <MapPin className="mr-1 h-3 w-3" />

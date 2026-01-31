@@ -10,9 +10,10 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
-import { Loader2, CreditCard, Zap } from "lucide-react";
+import { Loader2, CreditCard } from "lucide-react";
 import { toast } from "sonner";
 import { initTopup } from "@/api/wallet";
+import { GFAWalletIcon } from "@/components/ui/GFAWalletIcon";
 import type { PaymentProvider } from "@/types/wallet";
 
 interface TopUpDialogProps {
@@ -75,7 +76,7 @@ export function TopUpDialog({ open, onOpenChange, onSuccess }: TopUpDialogProps)
       <DialogContent className="sm:max-w-md">
         <DialogHeader>
           <DialogTitle className="flex items-center gap-2">
-            <Zap className="h-5 w-5 text-primary" />
+            <GFAWalletIcon size={20} />
             Top Up Wallet
           </DialogTitle>
           <DialogDescription>
