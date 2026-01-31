@@ -20,8 +20,8 @@ import {
   Shield,
   Sparkles,
   Users,
-  Wallet,
 } from "lucide-react";
+import { GFAWalletIcon } from "@/components/ui/GFAWalletIcon";
 import { useState } from "react";
 
 const donationAmounts = [
@@ -311,8 +311,8 @@ export default function Donate() {
                       benefits and voting power — not a security or stored value.
                     </p>
                     <Button asChild variant="outline" size="sm" className="border-primary/50 text-primary hover:bg-primary/10">
-                      <Link to="/wallet">
-                        <Wallet className="mr-2 h-4 w-4" />
+                      <Link to="/gfawzip" className="flex items-center">
+                        <GFAWalletIcon size={16} className="mr-2" />
                         Learn More
                       </Link>
                     </Button>
