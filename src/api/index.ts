@@ -58,3 +58,6 @@ export type { NominationPayload, NominationResult, NomineeStatus, AcceptanceResu
 // Verification APIs
 export { default as verifyApi, verifyCertificate, reportMisuse } from "./verify";
 export type { CertificateVerificationResult, CertificateVerificationStatus, MisuseReportPayload, MisuseReportResult } from "./verify";
+
+// Settlement APIs
+export * from "./settlement";
