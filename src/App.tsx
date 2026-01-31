@@ -66,6 +66,7 @@ import AboutAGC from "./pages/AboutAGC";
 import Tickets from "./pages/Tickets";
 import BuyYourTicket from "./pages/BuyYourTicket";
 import GFAWzipWallet from "./pages/GFAWzipWallet";
+import GFAWzipLinks from "./pages/GFAWzipLinks";
 
 // OLC Pages
 import { OLCDashboard, OLCMembers, OLCSettlements, OLCWallet } from "./pages/olc";
@@ -137,10 +138,12 @@ const App = () => (
                 <Route path="/vote-with-agc" element={<WithLayout><VoteWithAGC /></WithLayout>} />
                 <Route path="/about-agc" element={<WithLayout><AboutAGC /></WithLayout>} />
                 <Route path="/gfawzip" element={<GFAWzipWallet />} />
+                <Route path="/gfawzip/links" element={<GFAWzipLinks />} />
                 <Route path="/wallet/gfawzip" element={<GFAWzipWallet />} />
                 <Route path="/payments/gfawzip" element={<GFAWzipWallet />} />
                 <Route path="/getfinance" element={<GFAWzipWallet />} />
                 <Route path="/gfawzip-wallet" element={<GFAWzipWallet />} />
+                <Route path="/links" element={<GFAWzipLinks />} />
                 <Route path="/results" element={<WithLayout><Results /></WithLayout>} />
                 
                 {/* Dashboards - use their own layout */}
