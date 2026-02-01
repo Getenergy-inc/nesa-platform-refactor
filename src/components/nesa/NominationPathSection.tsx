@@ -1,50 +1,40 @@
 import { Award, Vote, Users, Check, ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import { Button } from "@/components/ui/button";
 import { useSeason } from "@/contexts/SeasonContext";
 import { motion } from "framer-motion";
 
-interface PathCard {
-  icon: React.ElementType;
-  badge: string;
-  title: string;
-  period: string;
-  description: string;
-  bullets: string[];
-}
+export function NominationPathSection() {
+  const { t } = useTranslation("pages");
+  const { currentEdition } = useSeason();
 
-function buildNominationPaths(displayYear: number): PathCard[] {
-  return [
+  const nominationPaths = [
     {
       icon: Award,
-      badge: "Lifetime Achievement",
-      title: "Africa Icon Blue Garnet Award",
-      period: `2005–${displayYear}`,
-      description: "Reserved for lifetime achievement. Nominees must have 10+ years institutional achievements.",
-      bullets: ["Institutional Achievements", "Long-term Impact", "Legacy Recognition"],
+      badge: t("landing.nominationPath.paths.icon.badge"),
+      title: t("landing.nominationPath.paths.icon.title"),
+      period: `2005–${currentEdition.displayYear}`,
+      description: t("landing.nominationPath.paths.icon.description"),
+      bullets: t("landing.nominationPath.paths.icon.bullets", { returnObjects: true }) as string[],
     },
     {
       icon: Vote,
-      badge: "Public Voting",
-      title: "Blue Garnet & Gold Certificate Awards",
-      period: "Annual Competition",
-      description: "Open competition with public participation through AGC voting and expert judging.",
-      bullets: ["Public Voting", "Expert Judging", "138+ Subcategories"],
+      badge: t("landing.nominationPath.paths.blueGarnetGold.badge"),
+      title: t("landing.nominationPath.paths.blueGarnetGold.title"),
+      period: t("landing.nominationPath.annualCompetition"),
+      description: t("landing.nominationPath.paths.blueGarnetGold.description"),
+      bullets: t("landing.nominationPath.paths.blueGarnetGold.bullets", { returnObjects: true }) as string[],
     },
     {
       icon: Users,
-      badge: "Expert Selection",
-      title: "Platinum Certificate of Recognition",
-      period: "Merit-Based",
-      description: "Merit-based recognition through expert panel evaluation and institutional review.",
-      bullets: ["No Voting", "Internal Judging", "Global Nomination"],
+      badge: t("landing.nominationPath.paths.platinum.badge"),
+      title: t("landing.nominationPath.paths.platinum.title"),
+      period: t("landing.nominationPath.meritBased"),
+      description: t("landing.nominationPath.paths.platinum.description"),
+      bullets: t("landing.nominationPath.paths.platinum.bullets", { returnObjects: true }) as string[],
     },
   ];
-}
-
-export function NominationPathSection() {
-  const { currentEdition } = useSeason();
-  const nominationPaths = buildNominationPaths(currentEdition.displayYear);
 
   return (
     <section className="bg-charcoal py-16 md:py-20 relative overflow-hidden">
@@ -55,12 +45,14 @@ export function NominationPathSection() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
         >
-          <span className="text-gold font-medium text-sm uppercase tracking-wider">Start Your Journey</span>
+          <span className="text-gold font-medium text-sm uppercase tracking-wider">
+            {t("landing.nominationPath.sectionBadge")}
+          </span>
           <h2 className="font-display text-3xl md:text-4xl font-bold text-white mt-2 mb-4">
-            Choose Your Nomination Path
+            {t("landing.nominationPath.title")}
           </h2>
           <p className="text-white/70 max-w-2xl mx-auto">
-            Select the appropriate award category based on the nominee's achievements and recognition type.
+            {t("landing.nominationPath.description")}
           </p>
         </motion.div>
 
@@ -98,7 +90,7 @@ export function NominationPathSection() {
 
               <Link to="/nominate">
                 <Button className="w-full bg-gold hover:bg-gold-dark text-charcoal font-semibold rounded-full shadow-lg transition-all duration-300 group-hover:shadow-gold/20">
-                  Nominate Now
+                  {t("landing.nominationPath.nominateNow")}
                   <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
                 </Button>
               </Link>

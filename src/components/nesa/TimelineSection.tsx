@@ -1,7 +1,9 @@
+import { useTranslation } from "react-i18next";
 import { useSeason } from "@/contexts/SeasonContext";
 import { buildTimeline } from "@/config/schedule";
 
 export function TimelineSection() {
+  const { t } = useTranslation("pages");
   const { currentEdition } = useSeason();
   
   // Build timeline from config for the current season
@@ -12,10 +14,10 @@ export function TimelineSection() {
       <div className="container">
         <div className="text-center mb-12">
           <h2 className="font-display text-3xl md:text-4xl font-bold text-white mb-4">
-            Programme Timeline
+            {t("landing.timeline.title")}
           </h2>
           <p className="text-white/70 max-w-2xl mx-auto">
-            Complete schedule from public education phase through legacy implementation.
+            {t("landing.timeline.description")}
           </p>
         </div>
 

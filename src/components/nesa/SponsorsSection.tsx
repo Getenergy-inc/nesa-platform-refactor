@@ -1,5 +1,6 @@
 import { Handshake, ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import { Button } from "@/components/ui/button";
 import { NESAStamp } from "./NESALogo";
 import sponsor1 from "@/assets/sponsors/sponsor-1.png";
@@ -29,6 +30,7 @@ const sponsors: Sponsor[] = [
  * Links to full Partners page for detailed view
  */
 export function SponsorsSection() {
+  const { t } = useTranslation("pages");
   const activeSponsors = sponsors.filter((s) => s.isActive);
 
   return (
@@ -40,12 +42,12 @@ export function SponsorsSection() {
             <div className="flex items-center gap-2">
               <Handshake className="h-5 w-5 text-gold" />
               <span className="text-gold font-display font-semibold text-lg">
-                Our Partners & Sponsors
+                {t("landing.sponsors.title")}
               </span>
             </div>
             <div className="hidden md:block h-6 w-px bg-gold/20" />
             <span className="hidden md:block text-white/50 text-sm">
-              {activeSponsors.length} organizations supporting education excellence
+              {t("landing.sponsors.organizationsCount", { count: activeSponsors.length })}
             </span>
           </div>
 
@@ -80,7 +82,7 @@ export function SponsorsSection() {
           >
             <Link to="/partners">
               <NESAStamp size="xs" />
-              View All
+              {t("landing.sponsors.viewAll")}
               <ArrowRight className="h-4 w-4" />
             </Link>
           </Button>
