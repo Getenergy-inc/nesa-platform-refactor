@@ -2,12 +2,26 @@ import { Award, Shield } from "lucide-react";
 import csacefa from "@/assets/endorsements/csacefa.png";
 import faweKenya from "@/assets/endorsements/fawe-kenya.png";
 
-const logos = [
-  { id: "csacefa", name: "CSACEFA", src: csacefa },
-  { id: "fawe", name: "FAWE Kenya", src: faweKenya },
+// CMS-ready endorsement data structure
+export interface Endorser {
+  id: string;
+  name: string;
+  logo: string;
+  country?: string;
+  website?: string;
+  endorsementDate?: string;
+  isActive: boolean;
+}
+
+// Current endorsers - ready for CMS integration
+const endorsers: Endorser[] = [
+  { id: "csacefa", name: "Civil Society Action Coalition on Education for All", logo: csacefa, country: "Nigeria", isActive: true },
+  { id: "fawe-kenya", name: "Forum for African Women Educationalists - Kenya", logo: faweKenya, country: "Kenya", isActive: true },
 ];
 
 export function TrustLogosStrip() {
+  const activeEndorsers = endorsers.filter((e) => e.isActive);
+
   return (
     <section className="bg-charcoal-light/50 border-y border-gold/10 py-6">
       <div className="container">
@@ -30,14 +44,14 @@ export function TrustLogosStrip() {
             
             {/* Scrolling Logos */}
             <div className="flex animate-scroll-x">
-              {[...logos, ...logos, ...logos].map((logo, index) => (
+              {[...activeEndorsers, ...activeEndorsers, ...activeEndorsers].map((endorser, index) => (
                 <div
-                  key={`${logo.id}-${index}`}
+                  key={`${endorser.id}-${index}`}
                   className="flex-shrink-0 mx-6 h-10 w-20 flex items-center justify-center"
                 >
                   <img
-                    src={logo.src}
-                    alt={logo.name}
+                    src={endorser.logo}
+                    alt={endorser.name}
                     className="max-h-full max-w-full object-contain opacity-90 hover:opacity-100 hover:scale-110 transition-all duration-300"
                   />
                 </div>
