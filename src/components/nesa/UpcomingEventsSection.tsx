@@ -1,4 +1,4 @@
-import { Tv, Vote, Trophy } from "lucide-react";
+import { Tv, Vote, Trophy, Coins } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { CountdownTimer } from "./CountdownTimer";
 import { useSeason } from "@/contexts/SeasonContext";
@@ -7,11 +7,13 @@ import { buildScheduledEvents, DEFAULT_SCHEDULE_TEMPLATE, type ScheduledEvent } 
 function EventGroup({ 
   icon: Icon, 
   title, 
-  events 
+  events,
+  note
 }: { 
   icon: React.ElementType; 
   title: string; 
-  events: ScheduledEvent[] 
+  events: ScheduledEvent[];
+  note?: string;
 }) {
   return (
     <div className="space-y-4">
@@ -29,6 +31,12 @@ function EventGroup({
           </div>
         ))}
       </div>
+      {note && (
+        <div className="flex items-start gap-2 p-3 rounded-lg bg-gold/5 border border-gold/20">
+          <Coins className="h-4 w-4 text-gold flex-shrink-0 mt-0.5" />
+          <p className="text-xs text-white/70">{note}</p>
+        </div>
+      )}
     </div>
   );
 }
@@ -48,10 +56,10 @@ export function UpcomingEventsSection() {
       <div className="container">
         <div className="text-center mb-12">
           <h2 className="font-display text-3xl md:text-4xl font-bold text-white mb-4">
-            {t("landing.upcomingEvents.title")}
+            Live Countdown: Shows, Voting Windows & Gala
           </h2>
           <p className="text-white/70 max-w-2xl mx-auto">
-            {t("landing.upcomingEvents.description")}
+            Track every milestone across the NESA-Africa awards cycle—from recognition shows to voting windows and the Blue Garnet Gala.
           </p>
         </div>
 
@@ -64,7 +72,8 @@ export function UpcomingEventsSection() {
           <EventGroup 
             icon={Vote} 
             title={t("landing.upcomingEvents.votingWindows")} 
-            events={events.votingWindows} 
+            events={events.votingWindows}
+            note="Public participation happens during official windows. Vote using AGC voting points earned through platform participation."
           />
           <EventGroup 
             icon={Trophy} 

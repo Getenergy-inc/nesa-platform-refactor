@@ -1,4 +1,4 @@
-import { Award, ExternalLink, ArrowRight } from "lucide-react";
+import { Award, ExternalLink, ArrowRight, Vote, Coins } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { Button } from "@/components/ui/button";
@@ -33,11 +33,19 @@ export function FinalCTASection() {
             {t("landing.finalCTA.title")} <span className="text-gold">{t("landing.finalCTA.titleAccent")}</span>
           </h2>
           
-          <p className="text-white/70 text-lg mb-8 max-w-2xl mx-auto">
+          <p className="text-white/70 text-lg mb-4 max-w-2xl mx-auto">
             {t("landing.finalCTA.description")}
           </p>
 
-          <div className="flex flex-col sm:flex-row justify-center gap-4">
+          {/* AGC Strip */}
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gold/10 border border-gold/30 mb-8">
+            <Coins className="h-4 w-4 text-gold" />
+            <span className="text-sm text-white/80">
+              Earn voting points. Vote with AGC for Gold & Blue Garnet.
+            </span>
+          </div>
+
+          <div className="flex flex-col sm:flex-row justify-center gap-4 mb-6">
             <Link to="/nominate" className="group">
               <Button 
                 size="lg" 
@@ -47,14 +55,39 @@ export function FinalCTASection() {
                 <ArrowRight className="h-5 w-5 group-hover:translate-x-1 transition-transform" />
               </Button>
             </Link>
-            <a href="https://nesa.africa" target="_blank" rel="noopener noreferrer" className="group">
+            <Link to="/vote" className="group">
               <Button 
                 size="lg" 
                 variant="outline" 
                 className="border-2 border-gold text-gold hover:bg-gold/10 rounded-full px-10 gap-2 transition-all min-h-[56px] text-lg"
               >
-                <ExternalLink className="h-5 w-5" />
-                {t("landing.finalCTA.visitNESA")}
+                <Vote className="h-5 w-5" />
+                Vote Now
+              </Button>
+            </Link>
+          </div>
+
+          {/* Secondary Actions */}
+          <div className="flex flex-wrap justify-center gap-3">
+            <Link to="/buy-your-ticket">
+              <Button variant="ghost" className="text-gold/70 hover:text-gold hover:bg-gold/10 rounded-full">
+                Get Tickets
+              </Button>
+            </Link>
+            <Link to="/donate">
+              <Button variant="ghost" className="text-gold/70 hover:text-gold hover:bg-gold/10 rounded-full">
+                Donate
+              </Button>
+            </Link>
+            <Link to="/partners">
+              <Button variant="ghost" className="text-gold/70 hover:text-gold hover:bg-gold/10 rounded-full">
+                Partner
+              </Button>
+            </Link>
+            <a href="https://nesa.africa" target="_blank" rel="noopener noreferrer">
+              <Button variant="ghost" className="text-gold/70 hover:text-gold hover:bg-gold/10 rounded-full gap-1">
+                <ExternalLink className="h-4 w-4" />
+                nesa.africa
               </Button>
             </a>
           </div>

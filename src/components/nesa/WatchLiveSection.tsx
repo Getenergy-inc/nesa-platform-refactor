@@ -12,8 +12,11 @@ export function WatchLiveSection() {
           <h2 className="font-display text-3xl md:text-4xl font-bold text-white mb-4">
             {t("landing.watchLive.title")}
           </h2>
-          <p className="text-white/70 mb-8">
+          <p className="text-white/70 mb-4">
             {t("landing.watchLive.description")}
+          </p>
+          <p className="text-white/60 text-sm mb-8">
+            Watch official shows to stay informed and engaged in the awards cycle.
           </p>
 
           <div className="flex flex-wrap justify-center gap-4">

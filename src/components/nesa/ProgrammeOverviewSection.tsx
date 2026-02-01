@@ -1,4 +1,4 @@
-import { BookOpen, Award, Building } from "lucide-react";
+import { BookOpen, Award, Building, Coins } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { useSeason } from "@/contexts/SeasonContext";
 
@@ -43,7 +43,7 @@ export function ProgrammeOverviewSection() {
           </p>
         </div>
 
-        <div className="grid md:grid-cols-3 gap-6">
+        <div className="grid md:grid-cols-3 gap-6 mb-8">
           {pillars.map((pillar) => (
             <div
               key={pillar.title}
@@ -57,6 +57,16 @@ export function ProgrammeOverviewSection() {
               <p className="text-white/70 text-sm">{pillar.description}</p>
             </div>
           ))}
+        </div>
+
+        {/* AGC Participation Note */}
+        <div className="max-w-2xl mx-auto">
+          <div className="flex items-center justify-center gap-2 p-4 rounded-xl bg-gold/5 border border-gold/20">
+            <Coins className="h-5 w-5 text-gold flex-shrink-0" />
+            <p className="text-sm text-white/80">
+              AGC voting points enable structured, auditable public participation during official voting stages.
+            </p>
+          </div>
         </div>
       </div>
     </section>
