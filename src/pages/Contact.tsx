@@ -31,8 +31,8 @@ const contactInfo = [
   {
     icon: Mail,
     title: "Email Us",
-    details: ["info@nesa-africa.org", "nominations@nesa-africa.org"],
-    description: "For general inquiries and nomination support"
+    details: ["info@nesa.africa", "support@nesa.africa"],
+    description: "For general inquiries and support"
   },
   {
     icon: Phone,
@@ -55,21 +55,23 @@ const contactInfo = [
 ];
 
 const departments = [
-  { name: "General Inquiries", email: "info@nesa-africa.org" },
-  { name: "Nominations", email: "nominations@nesa-africa.org" },
-  { name: "Partnerships", email: "partners@nesa-africa.org" },
-  { name: "Media & Press", email: "media@nesa-africa.org" },
-  { name: "Volunteer Program", email: "volunteer@nesa-africa.org" },
-  { name: "Chapter Support", email: "chapters@nesa-africa.org" },
-  { name: "Presenter Applications", email: "gala@nesa-africa.org" },
+  { name: "General Inquiries", email: "info@nesa.africa" },
+  { name: "Nominations & Nominees", email: "nominees@nesa.africa" },
+  { name: "Partners & Sponsors", email: "partners@nesa.africa" },
+  { name: "Media & Press", email: "press@nesa.africa" },
+  { name: "Volunteer & Engagement", email: "engagement@nesa.africa" },
+  { name: "Chapters Support", email: "chapters@nesa.africa" },
+  { name: "Gala & Events", email: "events@nesa.africa" },
+  { name: "Judges & Jury", email: "judges@nesa.africa" },
+  { name: "Ambassadors", email: "ambassadors@nesa.africa" },
 ];
 
 const regionalOffices = [
-  { region: "West Africa", city: "Lagos, Nigeria", phone: "+234 XXX XXX XXXX" },
-  { region: "East Africa", city: "Nairobi, Kenya", phone: "+254 XXX XXX XXX" },
-  { region: "Southern Africa", city: "Johannesburg, South Africa", phone: "+27 XX XXX XXXX" },
-  { region: "North Africa", city: "Cairo, Egypt", phone: "+20 XX XXX XXXX" },
-  { region: "Central Africa", city: "Kinshasa, DRC", phone: "+243 XXX XXX XXX" }
+  { region: "West Africa", city: "Lagos, Nigeria", email: "westafrica@nesa.africa" },
+  { region: "East Africa", city: "Nairobi, Kenya", email: "eastafrica@nesa.africa" },
+  { region: "Southern Africa", city: "Johannesburg, South Africa", email: "southernafrica@nesa.africa" },
+  { region: "North Africa", city: "Cairo, Egypt", email: "northafrica@nesa.africa" },
+  { region: "Central Africa", city: "Kinshasa, DRC", email: "centralafrica@nesa.africa" }
 ];
 
 export default function Contact() {
@@ -508,7 +510,9 @@ export default function Contact() {
                     {office.region}
                   </Badge>
                   <p className="font-semibold">{office.city}</p>
-                  <p className="text-sm text-muted-foreground">{office.phone}</p>
+                  <a href={`mailto:${office.email}`} className="text-sm text-nesa-gold hover:underline">
+                    {office.email}
+                  </a>
                 </CardContent>
               </Card>
             ))}
