@@ -7,7 +7,7 @@ export function WatchSection() {
   const channels = [
     {
       icon: Tv,
-      name: "NESA-TV",
+      name: "NESA Africa TV",
       description: "Official award shows and recognition ceremonies",
       href: "/media/tv",
     },

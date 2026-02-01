@@ -109,7 +109,7 @@ export function VoteWithAGCSection() {
               </div>
               <div className="p-3 rounded-xl bg-gold/5 border border-gold/20">
                 <p className="text-gold font-semibold text-sm">+1 AGCc</p>
-                <p className="text-white/60 text-xs">Watch NESA TV</p>
+                <p className="text-white/60 text-xs">Watch NESA Africa TV</p>
               </div>
               <div className="p-3 rounded-xl bg-gold/5 border border-gold/20">
                 <p className="text-gold font-semibold text-sm">+1 AGCc</p>

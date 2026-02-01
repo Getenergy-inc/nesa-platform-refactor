@@ -193,7 +193,7 @@ export default function Gala() {
                     <Button asChild variant="outline" className="w-full border-white/20 text-white hover:bg-white/10">
                       <Link to="/media/tv">
                         <Play className="mr-2 h-4 w-4" />
-                        Go to NESA TV
+                        Go to NESA Africa TV
                       </Link>
                     </Button>
                   </CardContent>
