@@ -1,4 +1,5 @@
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
+import { z } from "https://esm.sh/zod@3.22.4";
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
@@ -16,6 +17,70 @@ const errorResponse = (message: string, status = 400) =>
     JSON.stringify({ ok: false, error: message }),
     { status, headers: { ...corsHeaders, "Content-Type": "application/json" } }
   );
+
+// ================================================================
+// INPUT VALIDATION SCHEMAS (zod)
+// ================================================================
+
+// FX Rate validation - reasonable bounds for exchange rates
+const FxRateSchema = z.object({
+  rate: z.number().min(0.001).max(1000).positive({
+    message: "Rate must be a positive number between 0.001 and 1000"
+  }),
+});
+
+// Disbursement run validation
+const DisbursementSchema = z.object({
+  season_id: z.string().uuid("Invalid season ID format").optional(),
+  notes: z.string().max(1000, "Notes must be 1000 characters or less").optional(),
+});
+
+// Season stage update validation
+const SeasonStageUpdateSchema = z.object({
+  nomination_open: z.boolean().optional(),
+  gold_voting_open: z.boolean().optional(),
+  blue_garnet_open: z.boolean().optional(),
+  certificate_download_open: z.boolean().optional(),
+}).refine(data => Object.keys(data).some(k => typeof data[k as keyof typeof data] === "boolean"), {
+  message: "At least one stage field must be provided",
+});
+
+// Stage config update validation with date range checks
+const StageConfigUpdateSchema = z.object({
+  stage_id: z.string().uuid("Invalid stage ID format"),
+  is_open: z.boolean().optional(),
+  opens_at: z.string().datetime({ message: "opens_at must be a valid ISO datetime" }).optional(),
+  closes_at: z.string().datetime({ message: "closes_at must be a valid ISO datetime" }).optional(),
+}).refine(data => {
+  // If both dates provided, ensure closes_at > opens_at
+  if (data.opens_at && data.closes_at) {
+    return new Date(data.closes_at) > new Date(data.opens_at);
+  }
+  return true;
+}, { message: "closes_at must be after opens_at" }).refine(data => {
+  // Validate dates are within reasonable range (±5 years)
+  const now = Date.now();
+  const fiveYearsMs = 5 * 365 * 24 * 60 * 60 * 1000;
+  
+  if (data.opens_at) {
+    const opensTime = new Date(data.opens_at).getTime();
+    if (opensTime < now - fiveYearsMs || opensTime > now + fiveYearsMs) {
+      return false;
+    }
+  }
+  if (data.closes_at) {
+    const closesTime = new Date(data.closes_at).getTime();
+    if (closesTime < now - fiveYearsMs || closesTime > now + fiveYearsMs) {
+      return false;
+    }
+  }
+  return true;
+}, { message: "Dates must be within 5 years of current date" });
+
+// Helper to format zod errors
+const formatZodError = (error: z.ZodError): string => {
+  return error.errors.map(e => `${e.path.join('.')}: ${e.message}`).join(', ');
+};
 
 Deno.serve(async (req) => {
   if (req.method === "OPTIONS") {
@@ -44,15 +109,21 @@ Deno.serve(async (req) => {
     );
 
     // Auth middleware - all admin endpoints require admin role
+    // Uses getClaims() for proper JWT verification per Supabase signing-keys approach
     const requireAdmin = async (): Promise<string | null> => {
       if (!authHeader?.startsWith("Bearer ")) return null;
-      const { data: { user }, error } = await supabase.auth.getUser();
-      if (error || !user) return null;
+      
+      const token = authHeader.replace("Bearer ", "");
+      const { data: claimsData, error: claimsError } = await supabase.auth.getClaims(token);
+      if (claimsError || !claimsData?.claims) return null;
+      
+      const userId = claimsData.claims.sub as string;
+      if (!userId) return null;
 
-      const { data: isAdmin } = await supabase.rpc("has_role", { _user_id: user.id, _role: "admin" });
+      const { data: isAdmin } = await supabase.rpc("has_role", { _user_id: userId, _role: "admin" });
       if (!isAdmin) return null;
 
-      return user.id;
+      return userId;
     };
 
     const userId = await requireAdmin();
@@ -160,9 +231,13 @@ Deno.serve(async (req) => {
       // POST /admin/finance/fx-rate/set
       if (action === "fx-rate" && resourceId === "set" && req.method === "POST") {
         const body = await req.json();
-        const { rate } = body;
-
-        if (!rate || rate <= 0) return errorResponse("Invalid rate");
+        
+        // Validate input using zod schema
+        const parseResult = FxRateSchema.safeParse(body);
+        if (!parseResult.success) {
+          return errorResponse(formatZodError(parseResult.error), 400);
+        }
+        const { rate } = parseResult.data;
 
         // In production, save to a config table
         await adminSupabase.from("audit_logs").insert({
@@ -180,9 +255,26 @@ Deno.serve(async (req) => {
       // POST /admin/finance/disburse/run
       if (action === "disburse" && resourceId === "run" && req.method === "POST") {
         const body = await req.json();
-        const seasonId = body.season_id || (await getActiveSeason())?.id;
+        
+        // Validate input using zod schema
+        const parseResult = DisbursementSchema.safeParse(body);
+        if (!parseResult.success) {
+          return errorResponse(formatZodError(parseResult.error), 400);
+        }
+        const validatedBody = parseResult.data;
+        
+        const seasonId = validatedBody.season_id || (await getActiveSeason())?.id;
 
         if (!seasonId) return errorResponse("No active season");
+
+        // Verify season exists before proceeding
+        const { data: season } = await adminSupabase
+          .from("seasons")
+          .select("id")
+          .eq("id", seasonId)
+          .maybeSingle();
+        
+        if (!season) return errorResponse("Season not found", 404);
 
         // Get revenue splits
         const { data: splits } = await adminSupabase
@@ -193,7 +285,7 @@ Deno.serve(async (req) => {
 
         if (!splits?.length) return errorResponse("No revenue splits configured");
 
-        // Create disbursement run
+        // Create disbursement run with validated notes
         const { data: run, error: runError } = await adminSupabase
           .from("disbursement_runs")
           .insert({
@@ -201,7 +293,7 @@ Deno.serve(async (req) => {
             run_date: new Date().toISOString().split("T")[0],
             status: "DRAFT",
             created_by: userId,
-            notes: body.notes || "Manual disbursement run",
+            notes: validatedBody.notes || "Manual disbursement run",
           })
           .select()
           .single();
@@ -358,6 +450,12 @@ Deno.serve(async (req) => {
         const seasonId = resourceId;
         const body = await req.json();
 
+        // Validate using zod schema
+        const parseResult = SeasonStageUpdateSchema.safeParse(body);
+        if (!parseResult.success) {
+          return errorResponse(formatZodError(parseResult.error), 400);
+        }
+
         // Allowed fields for stage control
         const allowedFields = [
           "nomination_open",
@@ -421,9 +519,14 @@ Deno.serve(async (req) => {
       // POST /admin/seasons/:id/stages/update
       if (action === "stages" && resourceId === "update" && req.method === "POST") {
         const body = await req.json();
-        const { stage_id, is_open, opens_at, closes_at } = body;
-
-        if (!stage_id) return errorResponse("stage_id required");
+        
+        // Validate using zod schema with date range checks
+        const parseResult = StageConfigUpdateSchema.safeParse(body);
+        if (!parseResult.success) {
+          return errorResponse(formatZodError(parseResult.error), 400);
+        }
+        
+        const { stage_id, is_open, opens_at, closes_at } = parseResult.data;
 
         const updates: Record<string, unknown> = { updated_at: new Date().toISOString() };
         if (typeof is_open === "boolean") updates.is_open = is_open;
