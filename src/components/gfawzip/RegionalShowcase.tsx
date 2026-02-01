@@ -1,5 +1,6 @@
 import { Badge } from "@/components/ui/badge";
 import { GFAWalletIcon } from "@/components/ui/GFAWalletIcon";
+import { Coins } from "lucide-react";
 import southernAfricanImage from "@/assets/gfawzip-southern-african.jpg";
 import northernAfricanImage from "@/assets/gfawzip-northern-african.jpg";
 import eastAfricanImage from "@/assets/gfawzip-east-african.jpg";
@@ -41,10 +42,16 @@ export function RegionalShowcase() {
     <section className="py-16 bg-muted/20">
       <div className="container mx-auto px-4">
         <div className="text-center mb-12">
-          <Badge variant="secondary" className="mb-4">Across the Continent</Badge>
+          <Badge className="mb-4 bg-gold/20 text-gold border-gold/30 font-semibold">
+            GFAWzip for NESA-Africa 2025
+          </Badge>
           <h2 className="text-3xl font-display font-bold text-foreground mb-4">
             GFAWzip Connects All of Africa
           </h2>
+          <p className="text-lg text-gold font-semibold flex items-center justify-center gap-2 mb-2">
+            <Coins className="h-5 w-5" />
+            Earn AfriGold Coins with Every Payment
+          </p>
           <p className="text-muted-foreground max-w-2xl mx-auto">
             From North to South, East to West — supporting NESA-Africa changemakers through seamless payments.
           </p>

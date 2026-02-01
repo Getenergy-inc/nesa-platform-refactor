@@ -52,8 +52,8 @@ export default function GFAWzipWallet() {
             <div className="grid lg:grid-cols-2 gap-12 items-center">
               {/* Left Content */}
               <div className="text-center lg:text-left">
-                <Badge className="mb-4 bg-primary/20 text-primary border-primary/30">
-                  Official Payment Partner
+                <Badge className="mb-4 bg-gold/20 text-gold border-gold/30 font-semibold">
+                  GFAWzip for NESA-Africa 2025
                 </Badge>
                 
                 {/* GFA Logo Prominent Display */}
@@ -70,9 +70,20 @@ export default function GFAWzipWallet() {
                     </span>
                   </div>
                 </div>
+
+                {/* Prominent AGC Earning Message */}
+                <div className="mb-6 p-4 rounded-xl bg-gradient-to-r from-gold/10 to-primary/10 border border-gold/30">
+                  <p className="text-xl md:text-2xl font-display font-bold text-gold flex items-center justify-center lg:justify-start gap-2">
+                    <Coins className="h-6 w-6" />
+                    Earn AfriGold Coins (AGC)
+                  </p>
+                  <p className="text-sm text-muted-foreground mt-1">
+                    Every $1 spent = 5 AGC voting credits for NESA-Africa 2025
+                  </p>
+                </div>
                 
-                <p className="text-xl md:text-2xl text-gold mb-4">
-                  Pay in any currency. Get instant receipts. Earn AGC voting credits.
+                <p className="text-lg text-foreground/80 mb-4">
+                  Pay in any currency. Get instant receipts. Earn voting credits.
                 </p>
                 <p className="text-muted-foreground mb-8 max-w-xl mx-auto lg:mx-0">
                   Secure, transparent checkout with multi-currency support for NESA-Africa payments.
@@ -326,9 +337,16 @@ export default function GFAWzipWallet() {
         <section className="py-16 bg-gradient-to-r from-primary/20 to-gold/20">
           <div className="container mx-auto px-4">
             <div className="max-w-2xl mx-auto text-center">
-              <h2 className="text-2xl font-display font-bold text-foreground mb-6">
+              <Badge className="mb-4 bg-gold/20 text-gold border-gold/30 font-semibold">
+                GFAWzip for NESA-Africa 2025
+              </Badge>
+              <h2 className="text-2xl font-display font-bold text-foreground mb-2">
                 Ready to Get Started?
               </h2>
+              <p className="text-lg text-gold font-semibold mb-6 flex items-center justify-center gap-2">
+                <Coins className="h-5 w-5" />
+                Earn AfriGold Coins with every payment!
+              </p>
               <div className="flex flex-wrap justify-center gap-4">
                 <Button
                   size="lg"

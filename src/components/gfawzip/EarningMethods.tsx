@@ -1,5 +1,6 @@
 import { Card, CardContent } from "@/components/ui/card";
-import { Gift, Clock, Users, type LucideIcon } from "lucide-react";
+import { Badge } from "@/components/ui/badge";
+import { Gift, Clock, Users, Coins, type LucideIcon } from "lucide-react";
 import { AGCDisclaimer } from "./AGCDisclaimer";
 
 interface EarningMethod {
@@ -20,12 +21,21 @@ export function EarningMethods() {
     <section className="py-16 bg-muted/30">
       <div className="container mx-auto px-4">
         <div className="max-w-4xl mx-auto">
-          <h2 className="text-3xl font-display font-bold text-foreground mb-4 text-center">
-            Earn AGC Voting Credits
-          </h2>
-          <p className="text-center text-muted-foreground mb-6">
-            Participate and earn voting credits through various activities.
-          </p>
+          <div className="text-center mb-8">
+            <Badge className="mb-4 bg-gold/20 text-gold border-gold/30 font-semibold">
+              GFAWzip for NESA-Africa 2025
+            </Badge>
+            <h2 className="text-3xl font-display font-bold text-foreground mb-2 flex items-center justify-center gap-3">
+              <Coins className="h-8 w-8 text-gold" />
+              Earn AfriGold Coins (AGC)
+            </h2>
+            <p className="text-lg text-gold font-semibold mb-2">
+              Vote for your favorite nominees with AGC!
+            </p>
+            <p className="text-muted-foreground">
+              Participate and earn voting credits through various activities.
+            </p>
+          </div>
 
           <AGCDisclaimer />
 

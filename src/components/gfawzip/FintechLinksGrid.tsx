@@ -162,12 +162,14 @@ export function FintechLinksGrid() {
       <div className="container mx-auto px-4">
         <div className="max-w-5xl mx-auto">
           <div className="text-center mb-10">
-            <Badge variant="secondary" className="mb-4">Payment Partners</Badge>
+            <Badge className="mb-4 bg-gold/20 text-gold border-gold/30 font-semibold">
+              GFAWzip for NESA-Africa 2025 — Earn AfriGold Coins
+            </Badge>
             <h2 className="text-3xl font-display font-bold text-foreground mb-4">
               Available Payment Methods
             </h2>
             <p className="text-muted-foreground max-w-2xl mx-auto">
-              Choose from multiple payment providers based on your region. All payments include a transparent 2% GFA Wzip processing fee.
+              Choose from multiple payment providers based on your region. <span className="text-gold font-medium">Every $1 = 5 AGC voting credits!</span>
             </p>
           </div>
 
