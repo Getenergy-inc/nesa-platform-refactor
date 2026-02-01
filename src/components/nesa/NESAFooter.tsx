@@ -90,7 +90,7 @@ export function NESAFooter() {
               {t("footer.madeWith")} <Heart className="h-3 w-3 text-red-500" /> {t("footer.forEducation")}
             </p>
             <p>
-              © {currentYear} Santa Claus Educational Foundation
+              © {currentYear} Santos Creations Educational Foundation
             </p>
           </div>
         </div>
