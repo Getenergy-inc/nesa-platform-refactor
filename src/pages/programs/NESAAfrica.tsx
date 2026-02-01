@@ -1,28 +1,24 @@
 import { Helmet } from "react-helmet-async";
 import { NESAHeader } from "@/components/nesa/NESAHeader";
-import { NESAHero } from "@/components/nesa/NESAHero";
-import { KeyDatesBanner } from "@/components/nesa/KeyDatesBanner";
+import { TrophyHeroSection } from "@/components/nesa/TrophyHeroSection";
+import { TrustLogosStrip } from "@/components/nesa/TrustLogosStrip";
+import { QuickActionBar } from "@/components/nesa/QuickActionBar";
+import { WhatsLiveSection } from "@/components/nesa/WhatsLiveSection";
+import { NominationPathsCards } from "@/components/nesa/NominationPathsCards";
+import { VoteWithAGCSection } from "@/components/nesa/VoteWithAGCSection";
+import { HowItWorksVisual } from "@/components/nesa/HowItWorksVisual";
+import { LegacyImpactSection } from "@/components/nesa/LegacyImpactSection";
+import { IntegritySection } from "@/components/nesa/IntegritySection";
 import { UpcomingEventsSection } from "@/components/nesa/UpcomingEventsSection";
-import { NominationPathSection } from "@/components/nesa/NominationPathSection";
-import { StatsStrip } from "@/components/nesa/StatsStrip";
-import { ProgrammeOverviewSection } from "@/components/nesa/ProgrammeOverviewSection";
-import { Phase1Section } from "@/components/nesa/Phase1Section";
 import { AwardPhasesSection } from "@/components/nesa/AwardPhasesSection";
 import { TimelineSection } from "@/components/nesa/TimelineSection";
-import { LegacySection } from "@/components/nesa/LegacySection";
-import { QuoteBlock } from "@/components/nesa/QuoteBlock";
-import { HowItWorksSection } from "@/components/nesa/HowItWorksSection";
-import { WatchLiveSection } from "@/components/nesa/WatchLiveSection";
-import { GetInvolvedSection } from "@/components/nesa/GetInvolvedSection";
-import { FirewallsSection } from "@/components/nesa/FirewallsSection";
+import { WatchSection } from "@/components/nesa/WatchSection";
+import { NomineesShowcaseSection } from "@/components/nesa/NomineesShowcaseSection";
 import { SponsorsSection } from "@/components/nesa/SponsorsSection";
+import { JudgesSection } from "@/components/nesa/JudgesSection";
 import { CategoriesSection } from "@/components/nesa/CategoriesSection";
-import { VisionDocumentSection } from "@/components/nesa/VisionDocumentSection";
-import { WatchMediaSection } from "@/components/nesa/WatchMediaSection";
 import { FinalCTASection } from "@/components/nesa/FinalCTASection";
 import { NESAFooter } from "@/components/nesa/NESAFooter";
-import { JudgesSection } from "@/components/nesa/JudgesSection";
-import { NomineesShowcaseSection } from "@/components/nesa/NomineesShowcaseSection";
 import { MobileBottomNav } from "@/components/navigation/MainNav";
 
 export default function NESAAfrica() {
@@ -38,27 +34,23 @@ export default function NESAAfrica() {
 
       <div className="min-h-screen bg-charcoal pb-16 lg:pb-0">
         <NESAHeader />
-        <NESAHero />
-        <KeyDatesBanner />
+        <TrophyHeroSection />
+        <TrustLogosStrip />
+        <QuickActionBar />
+        <WhatsLiveSection />
+        <NominationPathsCards />
+        <VoteWithAGCSection />
+        <HowItWorksVisual />
+        <LegacyImpactSection />
+        <IntegritySection />
         <UpcomingEventsSection />
-        <NominationPathSection />
-        <StatsStrip />
-        <ProgrammeOverviewSection />
-        <Phase1Section />
         <AwardPhasesSection />
         <TimelineSection />
-        <LegacySection />
-        <QuoteBlock />
-        <HowItWorksSection />
-        <WatchLiveSection />
-        <GetInvolvedSection />
-        <FirewallsSection />
+        <WatchSection />
         <NomineesShowcaseSection />
         <SponsorsSection />
         <JudgesSection />
         <CategoriesSection />
-        <VisionDocumentSection />
-        <WatchMediaSection />
         <FinalCTASection />
         <NESAFooter />
       </div>
