@@ -3,10 +3,15 @@ import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import { PublicLayout } from "@/components/layout/PublicLayout";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { GFAWalletIcon } from "@/components/ui/GFAWalletIcon";
+import {
+  TrustBar,
+  PaymentSteps,
+  EarningMethods,
+  GFAWzipFAQ,
+} from "@/components/gfawzip";
 import {
   ExternalLink,
   Ticket,
@@ -16,72 +21,11 @@ import {
   Globe,
   FileText,
   CheckCircle,
-  Gift,
-  Users,
-  Clock,
   Coins,
-  ArrowRight,
 } from "lucide-react";
 
 const GFAWZIP_URL = "https://www.getfinance.africa";
-
-// 2% GFA Wzip processing markup
 const GFA_WZIP_MARKUP_PERCENT = 2;
-
-const TRUST_FEATURES = [
-  { icon: Globe, label: "Multi-Currency" },
-  { icon: FileText, label: "Instant Receipts" },
-  { icon: Shield, label: "Secure Checkout" },
-  { icon: null, label: "2% Processing Fee", isMarkup: true },
-  { icon: null, label: "Wallet Audit Trail", isGFA: true },
-];
-
-const PAYMENT_STEPS = [
-  { step: 1, title: "Choose", description: "Ticket / Donate / Sponsor" },
-  { step: 2, title: "Checkout", description: "GFAWzip Wallet (2% markup included)" },
-  { step: 3, title: "Receive", description: "Receipt/confirmation instantly" },
-  { step: 4, title: "Earn", description: "AGC voting credits in your wallet" },
-];
-
-const EARNING_METHODS = [
-  { icon: Gift, title: "Support Bonus", description: "$1 = 5 Bonus AGC (eligible transactions)" },
-  { icon: Clock, title: "Daily Sign-in", description: "+1 AGCc/day (10 AGCc = 1 AGC)" },
-  { icon: Users, title: "Referral (1st Payment)", description: "+15 AGC when referred user pays" },
-  { icon: Users, title: "Referral (2nd Payment)", description: "+5 AGC on second payment" },
-];
-
-const FAQS = [
-  {
-    question: "Can I withdraw AGC?",
-    answer: "No. AGC is non-tradeable voting credit. There is no cash-out, no withdrawals, and no payouts.",
-  },
-  {
-    question: "Is AGC cryptocurrency?",
-    answer: "No. AGC is an internal voting credit used only within the SCEF/NESA-Africa ecosystem.",
-  },
-  {
-    question: "What do I receive after payment?",
-    answer: "You receive instant receipts, QR e-tickets (for ticket purchases), donation confirmations, or sponsorship acknowledgements.",
-  },
-  {
-    question: "How do I earn AGC from payments?",
-    answer: "$1 = 5 Bonus AGC for eligible transactions. Credits are added to your wallet after successful payment.",
-  },
-  {
-    question: "Where do I see my AGC?",
-    answer: "Visit your Wallet (/wallet) to view your balance and complete transaction history.",
-  },
-];
-
-function AGCDisclaimer() {
-  return (
-    <div className="bg-warning/10 border border-warning/30 rounded-lg p-3 text-center">
-      <p className="text-sm text-warning font-medium">
-        ⚠️ AGC is non-tradeable voting credit — no withdrawals, no cash-out, no payouts.
-      </p>
-    </div>
-  );
-}
 
 export default function GFAWzipWallet() {
   useEffect(() => {
@@ -154,7 +98,7 @@ export default function GFAWzipWallet() {
                   </Link>
                 </Button>
                 <Button variant="ghost" size="sm" asChild>
-                  <Link to="/dashboard">
+                  <Link to="/wallet">
                     <Coins className="mr-2 h-4 w-4" />
                     View My Wallet
                   </Link>
@@ -164,25 +108,7 @@ export default function GFAWzipWallet() {
           </div>
         </section>
 
-        {/* Trust Bar */}
-        <section className="py-8 bg-card/50 border-y border-border">
-          <div className="container mx-auto px-4">
-            <div className="grid grid-cols-2 md:grid-cols-5 gap-6">
-              {TRUST_FEATURES.map((feature) => (
-                <div key={feature.label} className="flex items-center justify-center gap-3">
-                  {'isMarkup' in feature && feature.isMarkup ? (
-                    <Badge variant="secondary" className="text-xs">2%</Badge>
-                  ) : feature.isGFA ? (
-                    <GFAWalletIcon size={24} />
-                  ) : feature.icon ? (
-                    <feature.icon className="h-6 w-6 text-gold" />
-                  ) : null}
-                  <span className="text-foreground font-medium">{feature.label}</span>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
+        <TrustBar />
 
         {/* What is GFAWzip */}
         <section className="py-16">
@@ -233,8 +159,8 @@ export default function GFAWzipWallet() {
                 {GFA_WZIP_MARKUP_PERCENT}% GFA Wzip Processing Fee
               </h2>
               <p className="text-muted-foreground mb-6">
-                All payments processed through GFA Wzip include a transparent {GFA_WZIP_MARKUP_PERCENT}% markup 
-                that supports the payment gateway infrastructure and multi-currency operations.
+                All payments processed through GFA Wzip include a transparent {GFA_WZIP_MARKUP_PERCENT}%
+                markup that supports the payment gateway infrastructure and multi-currency operations.
               </p>
               <div className="grid md:grid-cols-3 gap-4 text-sm">
                 <div className="p-4 rounded-lg bg-card border border-border">
@@ -348,70 +274,8 @@ export default function GFAWzipWallet() {
           </div>
         </section>
 
-        {/* Earn AGC */}
-        <section className="py-16 bg-card/30">
-          <div className="container mx-auto px-4">
-            <div className="max-w-4xl mx-auto">
-              <h2 className="text-3xl font-display font-bold text-foreground mb-4 text-center">
-                Earn AGC Voting Credits
-              </h2>
-              <p className="text-center text-muted-foreground mb-6">
-                Participate and earn voting credits through various activities.
-              </p>
-              
-              <AGCDisclaimer />
-              
-              <div className="grid md:grid-cols-2 gap-6 mt-8">
-                {EARNING_METHODS.map((method) => (
-                  <Card key={method.title} className="bg-card border-border">
-                    <CardContent className="pt-6 flex items-start gap-4">
-                      <div className="p-3 rounded-lg bg-primary/10">
-                        <method.icon className="h-6 w-6 text-primary" />
-                      </div>
-                      <div>
-                        <h3 className="font-semibold text-foreground">{method.title}</h3>
-                        <p className="text-sm text-muted-foreground">{method.description}</p>
-                      </div>
-                    </CardContent>
-                  </Card>
-                ))}
-              </div>
-
-              <p className="text-xs text-muted-foreground text-center mt-6">
-                Sponsors may fund public participation pools that grant claimable AGC voting credits (where enabled).
-              </p>
-            </div>
-          </div>
-        </section>
-
-        {/* How It Works */}
-        <section className="py-16">
-          <div className="container mx-auto px-4">
-            <div className="max-w-4xl mx-auto">
-              <h2 className="text-3xl font-display font-bold text-foreground mb-8 text-center">
-                How It Works
-              </h2>
-              <div className="grid md:grid-cols-4 gap-6">
-                {PAYMENT_STEPS.map((step, index) => (
-                  <div key={step.step} className="relative">
-                    <Card className="bg-card border-border h-full">
-                      <CardContent className="pt-6 text-center">
-                        <div className="w-12 h-12 rounded-full bg-gradient-gold text-secondary font-bold text-xl flex items-center justify-center mx-auto mb-4">
-                          {step.step}
-                        </div>
-                        <h3 className="font-semibold text-foreground mb-2">{step.title}</h3>
-                        <p className="text-sm text-muted-foreground">{step.description}</p>
-                      </CardContent>
-                    </Card>
-                    {index < PAYMENT_STEPS.length - 1 && (
-                      <ArrowRight className="hidden md:block absolute top-1/2 -right-3 transform -translate-y-1/2 h-6 w-6 text-muted-foreground z-10" />
-                    )}
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </section>
+        <EarningMethods />
+        <PaymentSteps />
 
         {/* Trust & Integrity */}
         <section className="py-16 bg-card/30">
@@ -439,32 +303,7 @@ export default function GFAWzipWallet() {
           </div>
         </section>
 
-        {/* FAQ */}
-        <section className="py-16">
-          <div className="container mx-auto px-4">
-            <div className="max-w-2xl mx-auto">
-              <h2 className="text-3xl font-display font-bold text-foreground mb-8 text-center">
-                Frequently Asked Questions
-              </h2>
-              <Accordion type="single" collapsible className="w-full">
-                {FAQS.map((faq, index) => (
-                  <AccordionItem key={index} value={`faq-${index}`}>
-                    <AccordionTrigger className="text-left text-foreground">
-                      {faq.question}
-                    </AccordionTrigger>
-                    <AccordionContent className="text-muted-foreground">
-                      {faq.answer}
-                    </AccordionContent>
-                  </AccordionItem>
-                ))}
-              </Accordion>
-
-              <div className="mt-8">
-                <AGCDisclaimer />
-              </div>
-            </div>
-          </div>
-        </section>
+        <GFAWzipFAQ />
 
         {/* Bottom CTA */}
         <section className="py-16 bg-gradient-to-r from-primary/20 to-gold/20">
@@ -492,7 +331,7 @@ export default function GFAWzipWallet() {
                   </Link>
                 </Button>
                 <Button size="lg" variant="outline" asChild>
-                  <Link to="/dashboard">
+                  <Link to="/wallet">
                     <Coins className="mr-2 h-5 w-5" />
                     View Wallet
                   </Link>
