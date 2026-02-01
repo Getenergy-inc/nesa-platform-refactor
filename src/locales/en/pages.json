@@ -101,13 +101,22 @@
       "title": "Award Phases",
       "description": "Four structured phases from baseline recognition to the highest continental honour.",
       "period": "Period",
-      "show": "Show"
+      "show": "Show",
+      "phase": "Phase"
+    },
+    "keyDates": {
+      "blueGarnetGala": "Blue Garnet Awards Gala",
+      "comingSoon": "Coming Soon",
+      "location": "Lagos, Nigeria",
+      "eduAidWebinars": "EduAid Webinars"
     },
     "nominationPath": {
       "sectionBadge": "Start Your Journey",
       "title": "Choose Your Nomination Path",
       "description": "Select the appropriate award category based on the nominee's achievements and recognition type.",
       "nominateNow": "Nominate Now",
+      "annualCompetition": "Annual Competition",
+      "meritBased": "Merit-Based",
       "paths": {
         "icon": {
           "badge": "Lifetime Achievement",
@@ -246,12 +255,43 @@
       }
     },
     "sponsors": {
-      "title": "Our Sponsors",
-      "description": "Partnering with industry leaders to drive education excellence across Africa."
+      "title": "Our Partners & Sponsors",
+      "description": "Partnering with industry leaders to drive education excellence across Africa.",
+      "organizationsCount": "{{count}} organizations supporting education excellence",
+      "viewAll": "View All"
     },
     "endorsedBy": {
       "title": "Endorsed By",
-      "description": "Trusted by leading education organizations across the continent."
+      "description": "Leading educational organizations and institutions across Africa trust and endorse NESA's mission to celebrate excellence in education.",
+      "trustedBy": "Trusted By Leaders",
+      "stats": {
+        "organizations": "Organizations",
+        "countries": "Countries",
+        "reach": "Reach"
+      },
+      "viewAllPartners": "View All Partners & Sponsors",
+      "becomeEndorser": "Become an Endorser"
+    },
+    "categories": {
+      "badge": "17 Official Categories",
+      "title": "Award Categories",
+      "description": "Recognizing excellence across education, corporate responsibility, technology, and social impact throughout the African continent.",
+      "subcategoriesCount": "{{count}} subcategories",
+      "africaFirst": "Africa First Categories",
+      "nigeriaCategories": "Nigeria Categories",
+      "scopes": {
+        "africaRegional": "Africa Regional",
+        "nigeria": "Nigeria",
+        "international": "International",
+        "lifetime": "Lifetime"
+      }
+    },
+    "watchMedia": {
+      "badge": "Media Hub",
+      "title": "Watch: NESA-Africa",
+      "description": "Watch the vision behind NESA Africa, past award highlights, and exclusive interviews with African educators shaping the future of education.",
+      "showLess": "Show Less",
+      "viewAll": "View All {{count}} Videos"
     }
   },
   "about": {

@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Play, Video, X } from "lucide-react";
+import { useTranslation } from "react-i18next";
 import { Button } from "@/components/ui/button";
 import { programVideos, type ProgramVideo } from "@/config/programVideos";
 
@@ -101,6 +102,7 @@ function VideoModal({ video, onClose }: { video: ProgramVideo; onClose: () => vo
 }
 
 export function WatchMediaSection() {
+  const { t } = useTranslation("pages");
   const [activeVideo, setActiveVideo] = useState<ProgramVideo | null>(null);
   const [showAll, setShowAll] = useState(false);
 
@@ -114,14 +116,13 @@ export function WatchMediaSection() {
           <div className="text-center mb-12">
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gold/10 border border-gold/20 mb-4">
               <Video className="h-4 w-4 text-gold" />
-              <span className="text-sm font-medium text-gold">Media Hub</span>
+              <span className="text-sm font-medium text-gold">{t("landing.watchMedia.badge")}</span>
             </div>
             <h2 className="font-display text-3xl md:text-4xl font-bold text-white mb-4">
-              Watch: NESA-Africa
+              {t("landing.watchMedia.title")}
             </h2>
             <p className="text-white/70 max-w-2xl mx-auto">
-              Watch the vision behind NESA Africa, past award highlights, and exclusive interviews
-              with African educators shaping the future of education.
+              {t("landing.watchMedia.description")}
             </p>
           </div>
 
@@ -145,7 +146,7 @@ export function WatchMediaSection() {
                 onClick={() => setShowAll(!showAll)}
               >
                 <Video className="h-4 w-4" />
-                {showAll ? "Show Less" : `View All ${programVideos.length} Videos`}
+                {showAll ? t("landing.watchMedia.showLess") : t("landing.watchMedia.viewAll", { count: programVideos.length })}
               </Button>
             </div>
           )}

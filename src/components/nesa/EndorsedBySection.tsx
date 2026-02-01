@@ -1,5 +1,6 @@
 import { Award, Building2, ExternalLink } from "lucide-react";
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import { Button } from "@/components/ui/button";
 import { NESAStamp } from "./NESALogo";
 
@@ -72,6 +73,7 @@ const endorsements: Endorsement[] = [
 ];
 
 export function EndorsedBySection() {
+  const { t } = useTranslation("pages");
   const activeEndorsements = endorsements.filter((e) => e.isActive);
 
   return (
@@ -81,13 +83,13 @@ export function EndorsedBySection() {
         <div className="text-center mb-12">
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gold/10 border border-gold/20 mb-6">
             <Award className="h-4 w-4 text-gold" />
-            <span className="text-sm font-medium text-gold">Trusted By Leaders</span>
+            <span className="text-sm font-medium text-gold">{t("landing.endorsedBy.trustedBy")}</span>
           </div>
           <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4">
-            Endorsed By
+            {t("landing.endorsedBy.title")}
           </h2>
           <p className="text-white/70 max-w-2xl mx-auto text-lg">
-            Leading educational organizations and institutions across Africa trust and endorse NESA's mission to celebrate excellence in education.
+            {t("landing.endorsedBy.description")}
           </p>
         </div>
 
@@ -134,17 +136,17 @@ export function EndorsedBySection() {
           <div className="inline-flex items-center gap-6 mb-8">
             <div className="text-center">
               <div className="text-3xl font-display font-bold text-gold">{activeEndorsements.length}+</div>
-              <div className="text-white/60 text-sm">Organizations</div>
+              <div className="text-white/60 text-sm">{t("landing.endorsedBy.stats.organizations")}</div>
             </div>
             <div className="h-8 w-px bg-gold/20" />
             <div className="text-center">
               <div className="text-3xl font-display font-bold text-gold">15+</div>
-              <div className="text-white/60 text-sm">Countries</div>
+              <div className="text-white/60 text-sm">{t("landing.endorsedBy.stats.countries")}</div>
             </div>
             <div className="h-8 w-px bg-gold/20" />
             <div className="text-center">
               <div className="text-3xl font-display font-bold text-gold">1M+</div>
-              <div className="text-white/60 text-sm">Reach</div>
+              <div className="text-white/60 text-sm">{t("landing.endorsedBy.stats.reach")}</div>
             </div>
           </div>
 
@@ -156,7 +158,7 @@ export function EndorsedBySection() {
             >
               <Link to="/partners">
                 <NESAStamp size="xs" />
-                View All Partners & Sponsors
+                {t("landing.endorsedBy.viewAllPartners")}
                 <ExternalLink className="h-4 w-4" />
               </Link>
             </Button>
@@ -165,7 +167,7 @@ export function EndorsedBySection() {
               className="bg-gold text-charcoal hover:bg-gold-light gap-2"
             >
               <Link to="/contact?subject=partnership">
-                Become an Endorser
+                {t("landing.endorsedBy.becomeEndorser")}
               </Link>
             </Button>
           </div>

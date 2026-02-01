@@ -1,24 +1,27 @@
 import { BookOpen, Award, Star, Trophy, Medal, Building } from "lucide-react";
-
-const steps = [
-  { icon: BookOpen, label: "Webinar" },
-  { icon: Award, label: "Platinum" },
-  { icon: Star, label: "Icon" },
-  { icon: Medal, label: "Gold" },
-  { icon: Trophy, label: "Blue Garnet" },
-  { icon: Building, label: "RMSA Legacy" },
-];
+import { useTranslation } from "react-i18next";
 
 export function HowItWorksSection() {
+  const { t } = useTranslation("pages");
+
+  const steps = [
+    { icon: BookOpen, labelKey: "landing.howItWorks.steps.webinar" },
+    { icon: Award, labelKey: "landing.howItWorks.steps.platinum" },
+    { icon: Star, labelKey: "landing.howItWorks.steps.icon" },
+    { icon: Medal, labelKey: "landing.howItWorks.steps.gold" },
+    { icon: Trophy, labelKey: "landing.howItWorks.steps.blueGarnet" },
+    { icon: Building, labelKey: "landing.howItWorks.steps.rmsaLegacy" },
+  ];
+
   return (
     <section className="bg-charcoal py-16 md:py-20">
       <div className="container">
         <div className="text-center mb-12">
           <h2 className="font-display text-3xl md:text-4xl font-bold text-white mb-4">
-            How NESA Works
+            {t("landing.howItWorks.title")}
           </h2>
           <p className="text-white/70 max-w-2xl mx-auto">
-            A structured lifecycle from public education to lasting legacy impact.
+            {t("landing.howItWorks.description")}
           </p>
         </div>
 
@@ -29,12 +32,12 @@ export function HowItWorksSection() {
 
             <div className="grid grid-cols-3 md:grid-cols-6 gap-4">
               {steps.map((step, index) => (
-                <div key={step.label} className="relative flex flex-col items-center text-center">
+                <div key={step.labelKey} className="relative flex flex-col items-center text-center">
                   {/* Icon */}
                   <div className="relative z-10 h-16 w-16 rounded-full bg-charcoal-light border-2 border-gold/30 flex items-center justify-center mb-3">
                     <step.icon className="h-7 w-7 text-gold" />
                   </div>
-                  <span className="text-white text-sm font-medium">{step.label}</span>
+                  <span className="text-white text-sm font-medium">{t(step.labelKey)}</span>
 
                   {/* Arrow (except last) */}
                   {index < steps.length - 1 && (

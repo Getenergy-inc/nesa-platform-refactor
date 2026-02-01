@@ -1,32 +1,34 @@
 import { BookOpen, Award, Building } from "lucide-react";
+import { useTranslation } from "react-i18next";
 import { useSeason } from "@/contexts/SeasonContext";
 
-const pillars = [
-  {
-    icon: BookOpen,
-    category: "Public Education & Awareness",
-    title: "EduAid-Africa Webinar Series",
-    description: "Stakeholder education on challenges, standards, and informed participation",
-  },
-  {
-    icon: Award,
-    category: "Recognition & Standards",
-    title: "NESA-Africa Awards Cycle",
-    description: "Standards-based continental education recognition and accountability",
-  },
-  {
-    icon: Building,
-    category: "Legacy Impact",
-    title: "Rebuild My School Africa",
-    description: "Post-award infrastructure projects for inclusive education",
-  },
-];
-
 export function ProgrammeOverviewSection() {
+  const { t } = useTranslation("pages");
   const { currentEdition } = useSeason();
   const ceremonyYear = currentEdition.displayYear + 1;
   const programmeEndYear = ceremonyYear + 1;
   const dateRange = `October ${currentEdition.displayYear} – June ${programmeEndYear}`;
+
+  const pillars = [
+    {
+      icon: BookOpen,
+      category: t("landing.programmeOverview.pillars.publicEducation.category"),
+      title: t("landing.programmeOverview.pillars.publicEducation.title"),
+      description: t("landing.programmeOverview.pillars.publicEducation.description"),
+    },
+    {
+      icon: Award,
+      category: t("landing.programmeOverview.pillars.recognition.category"),
+      title: t("landing.programmeOverview.pillars.recognition.title"),
+      description: t("landing.programmeOverview.pillars.recognition.description"),
+    },
+    {
+      icon: Building,
+      category: t("landing.programmeOverview.pillars.legacy.category"),
+      title: t("landing.programmeOverview.pillars.legacy.title"),
+      description: t("landing.programmeOverview.pillars.legacy.description"),
+    },
+  ];
 
   return (
     <section className="bg-charcoal py-16 md:py-20">
@@ -34,13 +36,10 @@ export function ProgrammeOverviewSection() {
         <div className="text-center mb-12">
           <p className="text-gold text-sm font-medium mb-2">{dateRange}</p>
           <h2 className="font-display text-3xl md:text-4xl font-bold text-white mb-4">
-            Programme Overview
+            {t("landing.programmeOverview.title")}
           </h2>
           <p className="text-white/70 max-w-3xl mx-auto">
-            {currentEdition.name} is a standards-based continental education recognition and accountability
-            programme designed to document verified education service, engage the public through
-            structured participation, and leave a post-award legacy through inclusive education
-            infrastructure.
+            {t("landing.programmeOverview.description", { edition: currentEdition.name })}
           </p>
         </div>
 

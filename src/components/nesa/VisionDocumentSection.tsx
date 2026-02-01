@@ -1,5 +1,6 @@
 import { ChevronDown, ChevronUp } from "lucide-react";
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 import { Button } from "@/components/ui/button";
 import {
   Accordion,
@@ -9,90 +10,24 @@ import {
 } from "@/components/ui/accordion";
 import { useSeason } from "@/contexts/SeasonContext";
 
-function buildSections(displayYear: number) {
-  const endYear = displayYear + 10;
-  
-  return [
-    {
-      id: "intro",
-      title: "1. Introduction",
-      content: `The New Education Standards Awards Africa (NESA-Africa) is a continental education standards, recognition, and accountability platform established to elevate education impact, public trust, and measurable outcomes across Africa.
-
-Vision ${endYear} defines NESA-Africa's 10-year strategic direction — moving from an awards-led initiative into a continent-wide education standards and impact institution that connects recognition with lasting social transformation.
-
-This vision aligns with:
-• SDG 4 — Quality Education
-• African Union Agenda 2063
-• National education reform agendas
-• CSR and philanthropic accountability frameworks`,
-    },
-    {
-      id: "problem",
-      title: "2. The Problem NESA-Africa Addresses",
-      content: "Details about the educational challenges NESA-Africa aims to solve across the continent.",
-    },
-    {
-      id: "vision",
-      title: "3. Vision Statement",
-      content: `The long-term vision for education standards and recognition in Africa by ${endYear}.`,
-    },
-    {
-      id: "mission",
-      title: "4. Mission Statement",
-      content: "The mission guiding NESA-Africa's operations and initiatives.",
-    },
-    {
-      id: "pillars",
-      title: `5. Core Pillars of Vision ${endYear}`,
-      content: "The foundational pillars supporting NESA-Africa's strategic direction.",
-    },
-    {
-      id: "milestones",
-      title: `6. Strategic Milestones (${displayYear}–${endYear})`,
-      content: "Key milestones and targets for the next decade.",
-    },
-    {
-      id: "platinum",
-      title: "7. Role of Platinum Certification",
-      content: "How Platinum certification serves as the baseline recognition layer.",
-    },
-    {
-      id: "governance",
-      title: "8. Governance & Integrity",
-      content: "The governance framework ensuring transparency and integrity.",
-    },
-    {
-      id: "success",
-      title: `9. What Success Looks Like by ${endYear}`,
-      content: `Measurable outcomes and indicators of success by ${endYear}.`,
-    },
-    {
-      id: "conclusion",
-      title: "10. Conclusion",
-      content: `Vision ${endYear} aligns with continental and global frameworks:
-• SDG 4
-• AU Agenda 2063
-• ECOWAS
-• SADC
-• EAC
-• ECCAS`,
-    },
-  ];
-}
-
 export function VisionDocumentSection() {
+  const { t } = useTranslation("pages");
   const { currentEdition } = useSeason();
-  const sections = buildSections(currentEdition.displayYear);
   const visionEndYear = currentEdition.displayYear + 10;
   
   const [expandAll, setExpandAll] = useState(false);
   const [openItems, setOpenItems] = useState<string[]>([]);
 
+  const sectionKeys = [
+    "intro", "problem", "vision", "mission", "pillars",
+    "milestones", "platinum", "governance", "success", "conclusion"
+  ];
+
   const handleExpandAll = () => {
     if (expandAll) {
       setOpenItems([]);
     } else {
-      setOpenItems(sections.map((s) => s.id));
+      setOpenItems(sectionKeys);
     }
     setExpandAll(!expandAll);
   };
@@ -102,18 +37,16 @@ export function VisionDocumentSection() {
       <div className="container">
         <div className="max-w-4xl mx-auto">
           <p className="text-gold text-sm font-medium mb-2 text-center">
-            Strategic Vision Document
+            {t("landing.vision.badge")}
           </p>
           <h2 className="font-display text-3xl md:text-4xl font-bold text-white mb-2 text-center">
-            NESA-AFRICA VISION {visionEndYear}
+            {t("landing.vision.title", { year: visionEndYear })}
           </h2>
           <p className="text-white/70 text-center mb-4">
-            Setting Africa's Education Standards. Recognising Impact. Delivering Legacy.
+            {t("landing.vision.tagline")}
           </p>
           <p className="text-white/70 text-center mb-8 max-w-2xl mx-auto">
-            Vision {visionEndYear} defines NESA-Africa's 10-year strategic direction — moving from an
-            awards-led initiative into a continent-wide education standards and impact institution
-            that connects recognition with lasting social transformation.
+            {t("landing.vision.description", { year: visionEndYear })}
           </p>
 
           <div className="flex justify-center mb-6">
@@ -125,12 +58,12 @@ export function VisionDocumentSection() {
               {expandAll ? (
                 <>
                   <ChevronUp className="h-4 w-4" />
-                  Collapse All Sections
+                  {t("landing.vision.collapseAll")}
                 </>
               ) : (
                 <>
                   <ChevronDown className="h-4 w-4" />
-                  Expand All Sections
+                  {t("landing.vision.expandAll")}
                 </>
               )}
             </Button>
@@ -142,17 +75,17 @@ export function VisionDocumentSection() {
             onValueChange={setOpenItems}
             className="space-y-3"
           >
-            {sections.map((section) => (
+            {sectionKeys.map((sectionKey) => (
               <AccordionItem
-                key={section.id}
-                value={section.id}
+                key={sectionKey}
+                value={sectionKey}
                 className="bg-charcoal-light border border-gold/20 rounded-xl overflow-hidden"
               >
                 <AccordionTrigger className="px-6 py-4 text-white hover:text-gold hover:no-underline">
-                  {section.title}
+                  {t(`landing.vision.sections.${sectionKey}.title`)}
                 </AccordionTrigger>
                 <AccordionContent className="px-6 pb-4 text-white/70 whitespace-pre-line">
-                  {section.content}
+                  {t(`landing.vision.sections.${sectionKey}.content`)}
                 </AccordionContent>
               </AccordionItem>
             ))}

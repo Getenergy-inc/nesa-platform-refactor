@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { motion } from "framer-motion";
@@ -34,18 +35,20 @@ const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
   Crown,
 };
 
-// Scope badge config
-const scopeBadgeConfig: Record<CategoryScope, { label: string; className: string }> = {
-  AFRICA_REGIONAL: { label: "Africa Regional", className: "bg-green-500/20 text-green-400 border-green-500/30" },
-  NIGERIA: { label: "Nigeria", className: "bg-emerald-500/20 text-emerald-400 border-emerald-500/30" },
-  INTERNATIONAL: { label: "International", className: "bg-blue-500/20 text-blue-400 border-blue-500/30" },
-  ICON: { label: "Lifetime", className: "bg-purple-500/20 text-purple-400 border-purple-500/30" },
-};
-
 // Get first 6 categories for display
 const displayCategories = NESA_CATEGORIES.slice(0, 6);
 
 export function CategoriesSection() {
+  const { t } = useTranslation("pages");
+
+  // Scope badge config with translations
+  const scopeBadgeConfig: Record<CategoryScope, { labelKey: string; className: string }> = {
+    AFRICA_REGIONAL: { labelKey: "landing.categories.scopes.africaRegional", className: "bg-green-500/20 text-green-400 border-green-500/30" },
+    NIGERIA: { labelKey: "landing.categories.scopes.nigeria", className: "bg-emerald-500/20 text-emerald-400 border-emerald-500/30" },
+    INTERNATIONAL: { labelKey: "landing.categories.scopes.international", className: "bg-blue-500/20 text-blue-400 border-blue-500/30" },
+    ICON: { labelKey: "landing.categories.scopes.lifetime", className: "bg-purple-500/20 text-purple-400 border-purple-500/30" },
+  };
+
   return (
     <section className="bg-charcoal py-16 md:py-20 relative overflow-hidden">
       <div className="container relative z-10">
@@ -56,14 +59,13 @@ export function CategoriesSection() {
           viewport={{ once: true }}
         >
           <Badge className="mb-4 bg-gold/10 text-gold border-gold/30">
-            17 Official Categories
+            {t("landing.categories.badge")}
           </Badge>
           <h2 className="font-display text-3xl md:text-4xl font-bold text-white mb-4">
-            Award Categories
+            {t("landing.categories.title")}
           </h2>
           <p className="text-white/70 max-w-2xl mx-auto">
-            Recognizing excellence across education, corporate responsibility, technology, 
-            and social impact throughout the African continent.
+            {t("landing.categories.description")}
           </p>
         </motion.div>
 
@@ -114,7 +116,7 @@ export function CategoriesSection() {
                         <Icon className="h-6 w-6 text-gold" />
                       </div>
                       <Badge variant="outline" className={`text-xs ${scopeBadge.className}`}>
-                        {scopeBadge.label}
+                        {t(scopeBadge.labelKey)}
                       </Badge>
                     </div>
                     <ChevronRight className="h-5 w-5 text-white/40 group-hover:text-gold group-hover:translate-x-1 transition-all" />
@@ -133,7 +135,7 @@ export function CategoriesSection() {
                       {tier.shortName}
                     </Badge>
                     <span className="text-xs text-white/50">
-                      {cat.subcategories.length} subcategories
+                      {t("landing.categories.subcategoriesCount", { count: cat.subcategories.length })}
                     </span>
                   </div>
                 </Link>
@@ -155,7 +157,7 @@ export function CategoriesSection() {
               className="border-2 border-gold text-gold hover:bg-gold/10 rounded-full w-full sm:w-auto transition-all group"
             >
               <Globe className="mr-2 h-4 w-4" />
-              Africa First Categories
+              {t("landing.categories.africaFirst")}
             </Button>
           </Link>
           <Link to="/categories?view=nigeria">
@@ -165,7 +167,7 @@ export function CategoriesSection() {
               className="border-2 border-emerald-500 text-emerald-400 hover:bg-emerald-500/10 rounded-full w-full sm:w-auto transition-all group"
             >
               <MapPin className="mr-2 h-4 w-4" />
-              Nigeria Categories
+              {t("landing.categories.nigeriaCategories")}
             </Button>
           </Link>
         </motion.div>
