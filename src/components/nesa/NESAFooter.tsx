@@ -68,11 +68,11 @@ export function NESAFooter() {
           <div className="text-center md:text-right">
             <h4 className="text-white font-semibold mb-4">{t("footer.getInTouch")}</h4>
             <a 
-              href="mailto:hello@nesa.africa" 
+              href="mailto:info@nesa.africa" 
               className="inline-flex items-center gap-2 text-white/60 hover:text-gold transition-colors"
             >
               <Mail className="h-4 w-4" />
-              hello@nesa.africa
+              info@nesa.africa
             </a>
             <div className="mt-4 flex justify-center md:justify-end">
               <div className="px-4 py-2 rounded-full bg-white/5 text-sm border border-white/10">
