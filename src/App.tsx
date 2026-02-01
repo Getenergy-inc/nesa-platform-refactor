@@ -168,14 +168,14 @@ const App = () => (
                 <Route path="/about-agc" element={<WithLayout><AboutAGC /></WithLayout>} />
                 <Route path="/earn-voting-credits" element={<WithLayout><EarnVotingCredits /></WithLayout>} />
                 <Route path="/claim-voting-credits" element={<WithLayout><ClaimVotingCredits /></WithLayout>} />
-                <Route path="/gfawzip" element={<GFAWzipWallet />} />
-                <Route path="/gfawzip/links" element={<GFAWzipLinks />} />
-                <Route path="/wallet/gfawzip" element={<GFAWzipWallet />} />
-                <Route path="/payments/gfawzip" element={<GFAWzipWallet />} />
-                <Route path="/getfinance" element={<GFAWzipWallet />} />
-                <Route path="/gfawzip-wallet" element={<GFAWzipWallet />} />
-                <Route path="/links" element={<GFAWzipLinks />} />
-                <Route path="/wallet" element={<Wallet />} />
+                <Route path="/gfawzip" element={<WithLayout><GFAWzipWallet /></WithLayout>} />
+                <Route path="/gfawzip/links" element={<WithLayout><GFAWzipLinks /></WithLayout>} />
+                <Route path="/wallet/gfawzip" element={<WithLayout><GFAWzipWallet /></WithLayout>} />
+                <Route path="/payments/gfawzip" element={<WithLayout><GFAWzipWallet /></WithLayout>} />
+                <Route path="/getfinance" element={<WithLayout><GFAWzipWallet /></WithLayout>} />
+                <Route path="/gfawzip-wallet" element={<WithLayout><GFAWzipWallet /></WithLayout>} />
+                <Route path="/links" element={<WithLayout><GFAWzipLinks /></WithLayout>} />
+                <Route path="/wallet" element={<WithLayout><Wallet /></WithLayout>} />
                 <Route path="/sponsors/:slug" element={<SponsorLanding />} />
                 <Route path="/results" element={<WithLayout><Results /></WithLayout>} />
                 

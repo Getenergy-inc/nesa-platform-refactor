@@ -3,7 +3,7 @@
 
 import { useState, forwardRef } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { ChevronDown, Menu, Globe, User, LogOut, Home, Award, Ticket, Play, Heart, LayoutDashboard } from "lucide-react";
+import { ChevronDown, Menu, Globe, User, LogOut, Home, Award, Ticket, Play, Heart, LayoutDashboard, Vote } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   NavigationMenu,
@@ -413,10 +413,10 @@ function UserMenu() {
 
 const mobileQuickActions = [
   { icon: Home, label: "Home", href: "/" },
-  { icon: LayoutDashboard, label: "Dashboard", href: "/dashboard" },
   { icon: Award, label: "Nominate", href: "/nominate" },
+  { icon: Vote, label: "Vote", href: "/vote" },
   { icon: Play, label: "Watch", href: "/media/tv" },
-  { icon: Heart, label: "Donate", href: "/donate" },
+  { icon: LayoutDashboard, label: "Dashboard", href: "/dashboard" },
 ];
 
 export function MobileBottomNav() {
@@ -424,23 +424,23 @@ export function MobileBottomNav() {
   
   return (
     <nav className="fixed bottom-0 left-0 right-0 z-40 lg:hidden bg-charcoal/95 backdrop-blur-md border-t border-gold/20 safe-area-inset-bottom">
-      <div className="flex justify-around items-center py-2 px-2">
+      <div className="flex justify-around items-center py-2 px-1">
         {mobileQuickActions.map((item) => (
           <Link
             key={item.href}
             to={item.href}
             className={cn(
-              "flex flex-col items-center gap-1 p-2 rounded-lg transition-all min-w-[56px] touch-manipulation",
+              "flex flex-col items-center justify-center gap-0.5 p-2 rounded-lg transition-all min-w-[60px] min-h-[52px] touch-manipulation active:scale-95",
               location.pathname === item.href 
-                ? "text-gold" 
-                : "text-white/60 hover:text-gold"
+                ? "text-gold bg-gold/10" 
+                : "text-white/60 hover:text-gold hover:bg-gold/5"
             )}
           >
             <item.icon className={cn(
               "h-5 w-5 transition-transform",
               location.pathname === item.href && "scale-110"
             )} />
-            <span className="text-[10px] font-medium">{item.label}</span>
+            <span className="text-[10px] font-medium leading-tight">{item.label}</span>
           </Link>
         ))}
       </div>
