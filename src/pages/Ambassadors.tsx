@@ -75,7 +75,7 @@ const benefits = [
   "NESA Africa 2025 Ambassador ID Card",
   "Access to training, international mentorship, and webinars",
   "Up to 10–20% referral/commission on funds raised or partners you introduce",
-  "Media features on NESA TV & \"It's In Me\" Radio",
+  "Media features on NESA Africa TV & \"It's In Me\" Radio",
   "Opportunity to earn allowances during major campaigns",
   "Discounted access to NESA-Africa events, merchandise, and courses",
   "Eligible for leadership or chapter appointment roles in your region",

@@ -347,7 +347,7 @@ export const FOOTER_NAV: NavSection[] = [
     id: "media",
     label: "Media",
     items: [
-      { label: "NESA TV", href: "/media/tv" },
+      { label: "NESA Africa TV", href: "/media/tv" },
       { label: "Online Shows", href: "/media/shows" },
       { label: "Webinars", href: "/media/webinars" },
       { label: "Gala", href: "/media/gala" },
@@ -444,7 +444,7 @@ export const MOBILE_NAV: NavItem[] = [
   { label: "Categories", href: "/categories", icon: Trophy },
   { label: "Nominate", href: "/nominate", icon: FileCheck },
   { label: "Vote", href: "/vote", icon: Vote },
-  { label: "NESA TV", href: "/media/tv", icon: Tv },
+  { label: "NESA Africa TV", href: "/media/tv", icon: Tv },
   { label: "Donate", href: "/donate", icon: Heart },
 ];
 
