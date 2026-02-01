@@ -51,23 +51,23 @@ export function SponsorsSection() {
             </span>
           </div>
 
-          {/* Center: Logo Marquee */}
-          <div className="relative flex-1 max-w-xl overflow-hidden">
+          {/* Center: Logo Display */}
+          <div className="relative flex-1 max-w-2xl overflow-hidden">
             {/* Gradient Masks */}
-            <div className="absolute left-0 top-0 bottom-0 w-12 bg-gradient-to-r from-charcoal to-transparent z-10" />
-            <div className="absolute right-0 top-0 bottom-0 w-12 bg-gradient-to-l from-charcoal to-transparent z-10" />
+            <div className="absolute left-0 top-0 bottom-0 w-8 bg-gradient-to-r from-charcoal to-transparent z-10" />
+            <div className="absolute right-0 top-0 bottom-0 w-8 bg-gradient-to-l from-charcoal to-transparent z-10" />
             
             {/* Scrolling Container */}
             <div className="flex animate-scroll-x">
               {[...activeSponsors, ...activeSponsors, ...activeSponsors].map((sponsor, index) => (
                 <div
                   key={`${sponsor.id}-${index}`}
-                  className="flex-shrink-0 mx-4 h-10 w-24 flex items-center justify-center"
+                  className="flex-shrink-0 mx-6 h-12 w-28 flex items-center justify-center bg-white/5 rounded-lg px-3 py-2 border border-white/10 hover:border-gold/30 hover:bg-white/10 transition-all duration-300"
                 >
                   <img
                     src={sponsor.logo}
                     alt={sponsor.name}
-                    className="max-h-full max-w-full object-contain filter brightness-0 invert opacity-60 hover:opacity-100 transition-opacity"
+                    className="max-h-full max-w-full object-contain rounded"
                   />
                 </div>
               ))}
