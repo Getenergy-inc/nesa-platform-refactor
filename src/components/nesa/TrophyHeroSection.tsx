@@ -76,19 +76,35 @@ export function TrophyHeroSection() {
               Advocating & Achieving Education For All In Africa
             </p>
 
-            {/* Description */}
-            <p className="text-white/80 text-base lg:text-lg mb-6 leading-relaxed max-w-xl">
-              The New Education Standard Award Africa celebrates visionary leaders, institutions, 
-              and innovators building the future of education—while funding measurable legacy 
-              impact through Rebuild My School Africa.
-            </p>
-
-            {/* AGC Voting Strip */}
-            <div className="flex items-center gap-2 px-4 py-3 rounded-xl bg-gold/10 border border-gold/30 mb-8 max-w-lg">
-              <Coins className="h-5 w-5 text-gold flex-shrink-0" />
-              <p className="text-sm text-white/90">
-                Earn voting points through participation. <span className="text-gold font-semibold">Vote with AGC</span> for Gold and Blue Garnet winners.
-              </p>
+            {/* AGC Value Proposition - Primary Marketing Message */}
+            <div className="relative mb-8 max-w-xl">
+              <div className="absolute -inset-1 bg-gradient-to-r from-gold/30 via-blue-500/20 to-gold/30 rounded-2xl blur-lg opacity-60" />
+              <div className="relative p-5 rounded-2xl bg-charcoal/80 backdrop-blur-sm border border-gold/40">
+                <div className="flex items-center gap-3 mb-3">
+                  <div className="h-10 w-10 rounded-xl bg-gold/20 flex items-center justify-center">
+                    <Coins className="h-5 w-5 text-gold" />
+                  </div>
+                  <div>
+                    <h3 className="text-white font-semibold text-lg">Earn. Vote. Impact.</h3>
+                    <p className="text-gold text-sm font-medium">Your Participation Powers Change</p>
+                  </div>
+                </div>
+                <p className="text-white/90 text-base leading-relaxed mb-4">
+                  <span className="text-gold font-semibold">Earn voting points</span> through participation. 
+                  <span className="text-gold font-semibold"> Vote with AGC</span> for <span className="text-gold">Gold</span> and <span className="text-blue-400">Blue Garnet</span> winners.
+                </p>
+                <div className="flex flex-wrap gap-2">
+                  <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-gold/10 text-gold text-xs font-medium border border-gold/30">
+                    <Sparkles className="h-3 w-3" /> Nominate = +5 AGC
+                  </span>
+                  <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-gold/10 text-gold text-xs font-medium border border-gold/30">
+                    Daily Sign-in = +1 AGC
+                  </span>
+                  <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-blue-500/10 text-blue-400 text-xs font-medium border border-blue-500/30">
+                    1 Vote = 1 AGC
+                  </span>
+                </div>
+              </div>
             </div>
 
             {/* Primary CTAs */}

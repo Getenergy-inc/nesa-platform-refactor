@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { Award, Vote, PlayCircle, Ticket } from "lucide-react";
+import { Award, Vote, PlayCircle, Ticket, Coins } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 export function QuickActionBar() {
@@ -50,10 +50,13 @@ export function QuickActionBar() {
           </Link>
         </div>
         
-        {/* AGC Disclaimer for Vote */}
-        <p className="text-center text-[10px] text-white/50 mt-1.5">
-          Vote with AGC (non-tradeable voting credit)
-        </p>
+        {/* AGC Marketing Message */}
+        <div className="flex items-center justify-center gap-1.5 mt-2 px-2 py-1.5 rounded-lg bg-gold/5 border border-gold/20">
+          <Coins className="h-3 w-3 text-gold" />
+          <p className="text-[10px] text-gold font-medium">
+            Earn voting points → Vote with AGC for Gold & Blue Garnet winners
+          </p>
+        </div>
       </div>
     </div>
   );
