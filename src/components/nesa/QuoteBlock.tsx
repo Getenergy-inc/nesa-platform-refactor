@@ -1,8 +1,16 @@
+import { useTranslation } from "react-i18next";
 import { useSeason } from "@/contexts/SeasonContext";
 
 export function QuoteBlock() {
+  const { t } = useTranslation("pages");
   const { currentEdition } = useSeason();
-  const keywords = ["Education", "Recognition", "Public Participation", "Legacy Impact"];
+  
+  const keywords = [
+    t("landing.quote.keywords.education"),
+    t("landing.quote.keywords.recognition"),
+    t("landing.quote.keywords.publicParticipation"),
+    t("landing.quote.keywords.legacyImpact"),
+  ];
 
   return (
     <section className="bg-charcoal py-16 md:py-20">
@@ -10,8 +18,7 @@ export function QuoteBlock() {
         <div className="max-w-3xl mx-auto text-center">
           <blockquote className="mb-8">
             <p className="font-display text-2xl md:text-3xl text-white italic leading-relaxed">
-              "{currentEdition.name} is not an event. It is a standards-led education accountability
-              cycle that connects:"
+              "{t("landing.quote.text", { editionName: currentEdition.name })}"
             </p>
           </blockquote>
 
@@ -27,7 +34,7 @@ export function QuoteBlock() {
           </div>
 
           <p className="text-white/70">
-            Delivered with governance, transparency, and continental relevance.
+            {t("landing.quote.footer")}
           </p>
         </div>
       </div>

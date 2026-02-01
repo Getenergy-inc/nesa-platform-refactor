@@ -27,6 +27,22 @@
       "subcategories": "Sub-Categories",
       "diaspora": "+ Diaspora + Friends of Africa"
     },
+    "upcomingEvents": {
+      "title": "Upcoming TV Shows, Voting & Events",
+      "description": "Live countdown to NESA-Africa's major milestones, public voting windows, and broadcast events",
+      "tvShows": "📺 Live TV Shows",
+      "votingWindows": "🗳️ Public Voting Windows",
+      "galaEvents": "🏆 Gala & Legacy Events"
+    },
+    "phase1": {
+      "badge": "Phase 1 — Public Education & Awareness",
+      "title": "EduAid-Africa Webinar Series",
+      "description": "The official public education and engagement framework for NESA-Africa — educating stakeholders on education challenges, NESA standards, and preparing the public for nominations and voting.",
+      "frequency": "Frequency",
+      "frequencyValue": "2–4 webinars monthly",
+      "speakers": "Pan-African speakers & practitioners",
+      "archived": "Recorded and archived for public access"
+    },
     "watchLive": {
       "title": "Watch Live",
       "description": "NESA Africa TV broadcasts on social media, partner stations, and the CAST TV box/app.",

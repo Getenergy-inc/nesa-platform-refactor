@@ -1,4 +1,5 @@
 import { Tv, Vote, Trophy } from "lucide-react";
+import { useTranslation } from "react-i18next";
 import { CountdownTimer } from "./CountdownTimer";
 import { useSeason } from "@/contexts/SeasonContext";
 import { buildScheduledEvents, DEFAULT_SCHEDULE_TEMPLATE, type ScheduledEvent } from "@/config/schedule";
@@ -33,6 +34,7 @@ function EventGroup({
 }
 
 export function UpcomingEventsSection() {
+  const { t } = useTranslation("pages");
   const { currentEdition } = useSeason();
   
   // Build events from config for the current season
@@ -46,17 +48,29 @@ export function UpcomingEventsSection() {
       <div className="container">
         <div className="text-center mb-12">
           <h2 className="font-display text-3xl md:text-4xl font-bold text-white mb-4">
-            Upcoming TV Shows, Voting & Events
+            {t("landing.upcomingEvents.title")}
           </h2>
           <p className="text-white/70 max-w-2xl mx-auto">
-            Live countdown to NESA-Africa's major milestones, public voting windows, and broadcast events
+            {t("landing.upcomingEvents.description")}
           </p>
         </div>
 
         <div className="grid md:grid-cols-3 gap-8">
-          <EventGroup icon={Tv} title="📺 Live TV Shows" events={events.tvShows} />
-          <EventGroup icon={Vote} title="🗳️ Public Voting Windows" events={events.votingWindows} />
-          <EventGroup icon={Trophy} title="🏆 Gala & Legacy Events" events={galaAndLegacy} />
+          <EventGroup 
+            icon={Tv} 
+            title={t("landing.upcomingEvents.tvShows")} 
+            events={events.tvShows} 
+          />
+          <EventGroup 
+            icon={Vote} 
+            title={t("landing.upcomingEvents.votingWindows")} 
+            events={events.votingWindows} 
+          />
+          <EventGroup 
+            icon={Trophy} 
+            title={t("landing.upcomingEvents.galaEvents")} 
+            events={galaAndLegacy} 
+          />
         </div>
       </div>
     </section>

@@ -1,8 +1,10 @@
 import { Calendar } from "lucide-react";
+import { useTranslation } from "react-i18next";
 import { useSeason } from "@/contexts/SeasonContext";
 import { WEBINAR_THEMES } from "@/config/schedule";
 
 export function Phase1Section() {
+  const { t } = useTranslation("pages");
   const { currentEdition } = useSeason();
   const ceremonyYear = currentEdition.displayYear + 1;
   const dateRange = `14 October ${currentEdition.displayYear} – June ${ceremonyYear}`;
@@ -11,9 +13,9 @@ export function Phase1Section() {
     <section className="bg-charcoal py-16 md:py-20">
       <div className="container">
         <div className="max-w-4xl mx-auto">
-          <p className="text-gold text-sm font-medium mb-2">Phase 1 — Public Education & Awareness</p>
+          <p className="text-gold text-sm font-medium mb-2">{t("landing.phase1.badge")}</p>
           <h2 className="font-display text-3xl md:text-4xl font-bold text-white mb-4">
-            EduAid-Africa Webinar Series
+            {t("landing.phase1.title")}
           </h2>
           
           <div className="flex items-center gap-2 text-white/70 mb-6">
@@ -22,9 +24,7 @@ export function Phase1Section() {
           </div>
 
           <p className="text-white/70 mb-8 leading-relaxed">
-            The official public education and engagement framework for NESA-Africa — educating
-            stakeholders on education challenges, NESA standards, and preparing the public for
-            nominations and voting.
+            {t("landing.phase1.description")}
           </p>
 
           <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-3 mb-8">
@@ -40,9 +40,9 @@ export function Phase1Section() {
 
           <div className="bg-charcoal-light rounded-xl p-4 border border-gold/20">
             <p className="text-white/70 text-sm text-center">
-              <span className="text-gold">Frequency:</span> 2–4 webinars monthly •{" "}
-              <span className="text-gold">Pan-African speakers & practitioners</span> •{" "}
-              Recorded and archived for public access
+              <span className="text-gold">{t("landing.phase1.frequency")}:</span> {t("landing.phase1.frequencyValue")} •{" "}
+              <span className="text-gold">{t("landing.phase1.speakers")}</span> •{" "}
+              {t("landing.phase1.archived")}
             </p>
           </div>
         </div>
