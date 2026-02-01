@@ -1,9 +1,12 @@
 import { Award, ExternalLink, ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
 
 export function FinalCTASection() {
+  const { t } = useTranslation("pages");
+
   return (
     <section className="bg-charcoal py-16 md:py-20 relative overflow-hidden">
       {/* Subtle background gradient */}
@@ -27,12 +30,11 @@ export function FinalCTASection() {
           </motion.div>
 
           <h2 className="font-display text-3xl md:text-5xl font-bold text-white mb-4">
-            Nominate a Champion of <span className="text-gold">Education</span>
+            {t("landing.finalCTA.title")} <span className="text-gold">{t("landing.finalCTA.titleAccent")}</span>
           </h2>
           
           <p className="text-white/70 text-lg mb-8 max-w-2xl mx-auto">
-            Know someone making an exceptional impact in African education? 
-            Submit your nomination today and help us celebrate excellence.
+            {t("landing.finalCTA.description")}
           </p>
 
           <div className="flex flex-col sm:flex-row justify-center gap-4">
@@ -41,7 +43,7 @@ export function FinalCTASection() {
                 size="lg" 
                 className="bg-gold hover:bg-gold-dark text-charcoal font-bold rounded-full px-10 gap-2 shadow-lg hover:shadow-gold/30 transition-all min-h-[56px] text-lg"
               >
-                Submit Nomination
+                {t("landing.finalCTA.submitNomination")}
                 <ArrowRight className="h-5 w-5 group-hover:translate-x-1 transition-transform" />
               </Button>
             </Link>
@@ -52,7 +54,7 @@ export function FinalCTASection() {
                 className="border-2 border-gold text-gold hover:bg-gold/10 rounded-full px-10 gap-2 transition-all min-h-[56px] text-lg"
               >
                 <ExternalLink className="h-5 w-5" />
-                Visit NESA Africa
+                {t("landing.finalCTA.visitNESA")}
               </Button>
             </a>
           </div>
@@ -66,12 +68,12 @@ export function FinalCTASection() {
             viewport={{ once: true }}
           >
             {[
-              { text: "54 Countries" },
-              { text: "2,500+ Nominees" },
-              { text: "15+ Years of Vision Conception" },
+              { key: "countries", text: t("landing.finalCTA.trustIndicators.countries") },
+              { key: "nominees", text: t("landing.finalCTA.trustIndicators.nominees") },
+              { key: "years", text: t("landing.finalCTA.trustIndicators.years") },
             ].map((item) => (
               <div 
-                key={item.text}
+                key={item.key}
                 className="flex items-center gap-2 text-sm text-white/60"
               >
                 <div className="w-1.5 h-1.5 rounded-full bg-gold" />
