@@ -88,7 +88,7 @@ export default function Programs() {
   return (
     <>
       <Helmet>
-        <title>Programs | SCEF - Santa Claus Educational Foundation</title>
+        <title>Programs | SCEF - Santos Creations Educational Foundation</title>
         <meta
           name="description"
           content="Explore SCEF's educational programs transforming Africa's future through recognition, support, and innovation."
@@ -306,7 +306,7 @@ export default function Programs() {
         {/* Footer */}
         <footer className="border-t border-border/40 bg-secondary/30 py-8">
           <div className="container text-center text-sm text-muted-foreground">
-            <p>© {currentYear} Santa Claus Educational Foundation. All rights reserved.</p>
+            <p>© {currentYear} Santos Creations Educational Foundation. All rights reserved.</p>
           </div>
         </footer>
       </div>
