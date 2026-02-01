@@ -85,6 +85,17 @@ export async function getEligibility() {
 }
 
 /**
+ * Get user's wallet balance for voting
+ */
+export async function getVotingBalance() {
+  return api.get<{
+    accountId: string;
+    balanceAgcc: number;
+    balanceAgc: number;
+  }>("voting", "/balance");
+}
+
+/**
  * Get public vote tallies
  */
 export async function getTally(params?: {
@@ -102,12 +113,13 @@ export async function getMyVotes() {
 }
 
 /**
- * Cast a public vote
+ * Cast a public vote (deducts AGC)
  */
-export async function castVote(nomineeId: string) {
-  return api.post<VoteResult>("voting", "/vote", {
+export async function castVote(nomineeId: string, voteCount: number = 1) {
+  return api.post<VoteResult & { agcSpent: number; newBalance: number }>("voting", "/vote", {
     nomineeId,
     voteType: "public",
+    voteCount,
   });
 }
 
@@ -134,6 +146,7 @@ export async function hasVotedFor(nomineeId: string): Promise<boolean> {
 
 export default {
   getEligibility,
+  getVotingBalance,
   getTally,
   getMyVotes,
   castVote,

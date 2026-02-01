@@ -98,15 +98,29 @@ export default function VoteWithAGC() {
   const [votingNomineeId, setVotingNomineeId] = useState<string | null>(null);
   const [voteQuantity, setVoteQuantity] = useState<Record<string, number>>({});
 
-  // Mock wallet data (replace with real API call)
-  const [walletData] = useState({
-    agccBalance: 45,
-    agcBalance: 12,
-    loading: false,
-  });
-
   const currentPhase = getCurrentVotingPhase();
   const votingOpen = isVotingOpen();
+
+  // Fetch wallet balance from API
+  const { data: walletData, isLoading: walletLoading, refetch: refetchWallet } = useQuery({
+    queryKey: ["voting-balance", user?.id],
+    queryFn: async () => {
+      const response = await fetch(
+        `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/voting/balance`,
+        {
+          headers: {
+            Authorization: `Bearer ${(await supabase.auth.getSession()).data.session?.access_token}`,
+          },
+        }
+      );
+      if (!response.ok) throw new Error("Failed to fetch balance");
+      return response.json();
+    },
+    enabled: !!user,
+  });
+
+  const agccBalance = walletData?.balanceAgcc || 0;
+  const agcBalance = walletData?.balanceAgc || 0;
 
   // Scroll to section if hash is present
   useEffect(() => {
@@ -170,7 +184,7 @@ export default function VoteWithAGC() {
   });
 
   // Fetch user's votes to prevent double voting
-  const { data: userVotes = [] } = useQuery({
+  const { data: userVotes = [], refetch: refetchUserVotes } = useQuery({
     queryKey: ["user-votes", user?.id],
     queryFn: async () => {
       if (!user) return [];
@@ -217,7 +231,7 @@ export default function VoteWithAGC() {
     return grouped;
   }, [filteredNominees]);
 
-  // Handle vote
+  // Handle vote using edge function
   const handleVote = async (nomineeId: string) => {
     if (!user) {
       toast.error("Please log in to vote");
@@ -232,7 +246,7 @@ export default function VoteWithAGC() {
     const qty = voteQuantity[nomineeId] || 1;
     const cost = qty; // 1 AGC per vote
 
-    if (walletData.agcBalance < cost) {
+    if (agcBalance < cost) {
       toast.error(`Insufficient AGC. You need ${cost} AGC to cast ${qty} vote(s).`);
       return;
     }
@@ -245,39 +259,42 @@ export default function VoteWithAGC() {
     setVotingNomineeId(nomineeId);
 
     try {
-      const { data: seasonData } = await supabase
-        .from("seasons")
-        .select("id")
-        .eq("is_active", true)
-        .single();
+      const session = await supabase.auth.getSession();
+      const response = await fetch(
+        `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/voting/vote`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${session.data.session?.access_token}`,
+          },
+          body: JSON.stringify({
+            nomineeId,
+            voteType: "public",
+            voteCount: qty,
+          }),
+        }
+      );
 
-      if (!seasonData) {
-        toast.error("No active season found");
-        return;
-      }
+      const result = await response.json();
 
-      const { error: voteError } = await supabase.from("votes").insert({
-        voter_id: user.id,
-        nominee_id: nomineeId,
-        season_id: seasonData.id,
-        vote_type: "public",
-        score: qty,
-      });
-
-      if (voteError) {
-        if (voteError.message.includes("stage")) {
+      if (!response.ok) {
+        if (result.error === "Insufficient AGC balance") {
+          toast.error(`Insufficient AGC. You need ${result.required} AGC, but only have ${result.available}.`);
+        } else if (result.error?.includes("stage")) {
           toast.error("Voting is currently closed");
         } else {
-          throw voteError;
+          toast.error(result.error || "Failed to cast vote");
         }
         return;
       }
 
-      // Increment vote count
-      await supabase.rpc("increment_public_votes", { nominee_id: nomineeId });
-
-      toast.success(`Vote cast successfully! (${cost} AGC spent)`);
+      toast.success(`Vote cast successfully! (${result.agcSpent} AGC spent)`);
+      
+      // Refresh data
       refetch();
+      refetchUserVotes();
+      refetchWallet();
     } catch (error) {
       console.error("Vote error:", error);
       toast.error("Failed to cast vote. Please try again.");
@@ -286,9 +303,9 @@ export default function VoteWithAGC() {
     }
   };
 
-  const handleConvert = () => {
+  const handleConvert = async () => {
     toast.info("Converting AGCc to AGC...");
-    // TODO: Implement actual conversion API call
+    // TODO: Implement actual conversion API call via wallet edge function
   };
 
   return (
@@ -385,11 +402,11 @@ export default function VoteWithAGC() {
             <AGCRulesCard />
             {user ? (
               <AGCWalletCard
-                agccBalance={walletData.agccBalance}
-                agcBalance={walletData.agcBalance}
-                loading={walletData.loading}
+                agccBalance={agccBalance}
+                agcBalance={agcBalance}
+                loading={walletLoading}
                 onConvert={handleConvert}
-                canConvert={true}
+                canConvert={agccBalance >= 10}
               />
             ) : (
               <Card className="flex items-center justify-center">
