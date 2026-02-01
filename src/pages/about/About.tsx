@@ -20,6 +20,10 @@ import {
   Lightbulb,
 } from "lucide-react";
 import africanSchoolImage from "@/assets/african-school-classroom.jpg";
+import recognitionImage from "@/assets/pillars/recognition.jpg";
+import accountabilityImage from "@/assets/pillars/accountability.jpg";
+import continentalReachImage from "@/assets/pillars/continental-reach.jpg";
+import legacyImpactImage from "@/assets/pillars/legacy-impact.jpg";
 
 const pillars = [
   {
@@ -27,24 +31,28 @@ const pillars = [
     title: "Recognition",
     description: "Celebrating Africa's education champions through merit-based awards across 17 categories.",
     gradient: "from-gold/20 to-gold/5",
+    image: recognitionImage,
   },
   {
     icon: Shield,
     title: "Accountability",
     description: "Governance-grade firewalls ensure sponsor independence and voting integrity.",
     gradient: "from-blue-500/20 to-blue-500/5",
+    image: accountabilityImage,
   },
   {
     icon: Globe,
     title: "Continental Reach",
     description: "Region-first approach covering all 5 African regions plus Diaspora and Friends of Africa.",
     gradient: "from-emerald-500/20 to-emerald-500/5",
+    image: continentalReachImage,
   },
   {
     icon: Heart,
     title: "Legacy Impact",
     description: "Driving Education for All through visibility, validation, and Rebuild My School Africa.",
     gradient: "from-rose-500/20 to-rose-500/5",
+    image: legacyImpactImage,
   },
 ];
 
@@ -256,13 +264,22 @@ export default function About() {
             viewport={{ once: true }}
             className="grid gap-6 md:grid-cols-2 lg:grid-cols-4"
           >
-            {pillars.map((pillar, index) => (
+            {pillars.map((pillar) => (
               <motion.div key={pillar.title} variants={itemVariants}>
-                <Card className={`h-full border-white/10 bg-gradient-to-br ${pillar.gradient} backdrop-blur-sm hover:border-gold/30 transition-all duration-300 group`}>
-                  <CardHeader>
-                    <div className="mb-4 flex h-14 w-14 items-center justify-center rounded-2xl bg-charcoal/50 border border-white/10 group-hover:border-gold/30 transition-colors">
-                      <pillar.icon className="h-7 w-7 text-gold" />
+                <Card className="h-full border-white/10 bg-charcoal/50 backdrop-blur-sm hover:border-gold/30 transition-all duration-300 group overflow-hidden">
+                  {/* Image */}
+                  <div className="relative h-48 overflow-hidden">
+                    <img 
+                      src={pillar.image} 
+                      alt={pillar.title}
+                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                    />
+                    <div className={`absolute inset-0 bg-gradient-to-t ${pillar.gradient} to-charcoal/80`} />
+                    <div className="absolute bottom-4 left-4 flex h-12 w-12 items-center justify-center rounded-xl bg-charcoal/80 backdrop-blur-sm border border-white/20">
+                      <pillar.icon className="h-6 w-6 text-gold" />
                     </div>
+                  </div>
+                  <CardHeader className="pb-2">
                     <CardTitle className="text-white text-xl">{pillar.title}</CardTitle>
                   </CardHeader>
                   <CardContent>
