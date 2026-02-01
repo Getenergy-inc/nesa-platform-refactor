@@ -63,8 +63,8 @@ export function CampaignBanner() {
             
             {/* Headline */}
             <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4">
-              NESA-Africa 2025 –{" "}
-              <span className="text-gold">Now Accepting Nominations</span>
+              New Education Standard Award Africa 2025 —{" "}
+              <span className="text-gold">Nominations Open Now</span>
             </h2>
             
             {/* Description */}
