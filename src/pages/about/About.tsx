@@ -116,10 +116,10 @@ export default function About() {
   return (
     <>
       <Helmet>
-        <title>About NESA-Africa | New Education Standard Award Africa</title>
+        <title>About | New Education Standard Award Africa (NESA-Africa)</title>
         <meta
           name="description"
-          content="NESA-Africa is a governance-grade education accountability platform recognizing Africa's changemakers shaping the future of education."
+          content="Learn about NESA-Africa — a governance-grade education accountability platform honoring Africa's changemakers since 2005. Vision 2035: Advocating & Achieving Education For All In Africa."
         />
       </Helmet>
 
@@ -136,7 +136,7 @@ export default function About() {
           <div className="absolute inset-0 bg-gradient-to-t from-charcoal via-transparent to-charcoal/50" />
         </div>
 
-        <div className="container relative z-10 mx-auto px-4 py-20 lg:py-32">
+      <div className="container relative z-10 mx-auto px-4 py-20 lg:py-32">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <motion.div
               initial={{ opacity: 0, x: -30 }}
@@ -144,20 +144,20 @@ export default function About() {
               transition={{ duration: 0.6 }}
             >
               <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gold/10 border border-gold/30 mb-6">
-                <Sparkles className="h-4 w-4 text-gold" />
-                <span className="text-sm font-medium text-gold">{currentEdition?.displayYear} Edition</span>
+                <GraduationCap className="h-4 w-4 text-gold" />
+                <span className="text-sm font-medium text-gold">Since 2005 • Vision 2035</span>
               </div>
               
               <h1 className="mb-6 font-display text-4xl font-bold text-white md:text-5xl lg:text-6xl leading-tight">
-                About <span className="text-gold">NESA-Africa</span>
+                New Education Standard Award <span className="text-gold">Africa</span>
               </h1>
               
               <p className="mb-4 text-xl text-white/90 font-medium">
-                More than an awards platform.
+                More than awards. A movement for education excellence.
               </p>
               
               <p className="mb-8 text-lg text-white/70 leading-relaxed max-w-xl">
-                NESA-Africa is a <strong className="text-white">governance-grade education accountability system</strong> — 
+                NESA-Africa is a <strong className="text-white">governance-grade education accountability platform</strong> —
                 celebrating, validating, and amplifying Africa's education champions while funding 
                 measurable legacy impact through <span className="text-gold">Rebuild My School Africa</span>.
               </p>
