@@ -76,6 +76,30 @@ export function TrophyHeroSection() {
               Advocating & Achieving Education For All In Africa
             </p>
 
+            {/* Nomination Call-to-Action */}
+            <div className="relative mb-6 max-w-xl">
+              <div className="absolute -inset-1 bg-gradient-to-r from-gold/40 via-gold/20 to-gold/40 rounded-2xl blur-lg opacity-50" />
+              <div className="relative p-5 rounded-2xl bg-charcoal/80 backdrop-blur-sm border border-gold/40">
+                <div className="flex items-start gap-3 mb-3">
+                  <div className="h-10 w-10 rounded-xl bg-gold/20 flex items-center justify-center flex-shrink-0">
+                    <Trophy className="h-5 w-5 text-gold" />
+                  </div>
+                  <div>
+                    <h3 className="text-white font-semibold text-lg leading-tight">
+                      Nominate a Changemaker
+                    </h3>
+                    <p className="text-gold text-sm font-medium">
+                      Advocating the Achievement of Education For All in Africa
+                    </p>
+                  </div>
+                </div>
+                <p className="text-white/90 text-base leading-relaxed mb-3">
+                  Know someone driving educational transformation? <span className="text-gold font-semibold">Nominate them</span> and 
+                  <span className="text-gold font-semibold"> earn +5 voting points</span> when they're verified.
+                </p>
+              </div>
+            </div>
+
             {/* AGC Value Proposition - Primary Marketing Message */}
             <div className="relative mb-8 max-w-xl">
               <div className="absolute -inset-1 bg-gradient-to-r from-gold/30 via-blue-500/20 to-gold/30 rounded-2xl blur-lg opacity-60" />
@@ -93,17 +117,33 @@ export function TrophyHeroSection() {
                   <span className="text-gold font-semibold">Earn voting points</span> through participation. 
                   <span className="text-gold font-semibold"> Vote with AGC</span> for <span className="text-gold">Gold</span> and <span className="text-blue-400">Blue Garnet</span> winners.
                 </p>
-                <div className="flex flex-wrap gap-2">
-                  <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-gold/10 text-gold text-xs font-medium border border-gold/30">
-                    <Sparkles className="h-3 w-3" /> Nominate = +5 AGC
+                <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
+                  <span className="inline-flex items-center justify-center gap-1.5 px-3 py-2 rounded-lg bg-gold/10 text-gold text-xs font-medium border border-gold/30">
+                    <Sparkles className="h-3 w-3" /> Nominate +5
                   </span>
-                  <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-gold/10 text-gold text-xs font-medium border border-gold/30">
-                    Daily Sign-in = +1 AGC
+                  <span className="inline-flex items-center justify-center gap-1.5 px-3 py-2 rounded-lg bg-gold/10 text-gold text-xs font-medium border border-gold/30">
+                    Daily +1
                   </span>
-                  <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-blue-500/10 text-blue-400 text-xs font-medium border border-blue-500/30">
+                  <span className="inline-flex items-center justify-center gap-1.5 px-3 py-2 rounded-lg bg-gold/10 text-gold text-xs font-medium border border-gold/30">
+                    Referral +15
+                  </span>
+                  <span className="inline-flex items-center justify-center gap-1.5 px-3 py-2 rounded-lg bg-gold/10 text-gold text-xs font-medium border border-gold/30">
+                    Watch TV +1
+                  </span>
+                  <span className="inline-flex items-center justify-center gap-1.5 px-3 py-2 rounded-lg bg-gold/10 text-gold text-xs font-medium border border-gold/30">
+                    Share +1
+                  </span>
+                  <span className="inline-flex items-center justify-center gap-1.5 px-3 py-2 rounded-lg bg-blue-500/10 text-blue-400 text-xs font-medium border border-blue-500/30">
                     1 Vote = 1 AGC
                   </span>
                 </div>
+                <Link 
+                  to="/earn-voting-credits" 
+                  className="inline-flex items-center gap-1.5 mt-4 text-gold hover:text-gold-light text-sm font-medium transition-colors"
+                >
+                  See all earning methods
+                  <ArrowRight className="h-3.5 w-3.5" />
+                </Link>
               </div>
             </div>
 
