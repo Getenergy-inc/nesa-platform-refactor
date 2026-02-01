@@ -8,16 +8,25 @@ import { useState, useEffect } from "react";
 import { NESALogo3D } from "@/components/nesa/NESALogo3D";
 import stageBackdropVideo from "@/assets/nesa-stage-backdrop-motion.mp4";
 import stageBackdropFallback from "@/assets/nesa-stage-backdrop.jpg";
-import blueGarnetTrophy from "@/assets/blue-garnet-trophy.jpg";
+import blueGarnetTrophyIcon from "@/assets/blue-garnet-trophy-icon.png";
+import blueGarnetTrophyWinners from "@/assets/blue-garnet-trophy-winners.png";
+
+// Carousel items: Blue Garnet Icon, Blue Garnet Winners, NESA Logo
+const CAROUSEL_ITEMS = ["trophy-icon", "trophy-winners", "logo"] as const;
+type CarouselItem = typeof CAROUSEL_ITEMS[number];
 
 export function TrophyHeroSection() {
   const { t } = useTranslation("pages");
   const { getBannerText } = useSeason();
-  const [showTrophy, setShowTrophy] = useState(true);
+  const [currentItem, setCurrentItem] = useState<CarouselItem>("trophy-icon");
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setShowTrophy((prev) => !prev);
+      setCurrentItem((prev) => {
+        const currentIndex = CAROUSEL_ITEMS.indexOf(prev);
+        const nextIndex = (currentIndex + 1) % CAROUSEL_ITEMS.length;
+        return CAROUSEL_ITEMS[nextIndex];
+      });
     }, 3000);
     return () => clearInterval(interval);
   }, []);
@@ -262,9 +271,9 @@ export function TrophyHeroSection() {
               <div className="absolute -inset-2 sm:-inset-4 bg-gradient-to-t from-blue-600/40 via-gold/30 to-transparent blur-2xl sm:blur-3xl rounded-full" />
               
               <AnimatePresence mode="wait">
-                {showTrophy ? (
+                {currentItem === "trophy-icon" && (
                   <motion.div
-                    key="trophy"
+                    key="trophy-icon"
                     initial={{ opacity: 0, scale: 0.8, rotateY: -90 }}
                     animate={{ opacity: 1, scale: 1, rotateY: 0 }}
                     exit={{ opacity: 0, scale: 0.8, rotateY: 90 }}
@@ -273,7 +282,7 @@ export function TrophyHeroSection() {
                   >
                     <div className="absolute -inset-1 bg-gradient-to-br from-gold/50 via-blue-500/30 to-gold/50 rounded-xl sm:rounded-2xl blur-sm opacity-60" />
                     <img
-                      src={blueGarnetTrophy}
+                      src={blueGarnetTrophyIcon}
                       alt="Blue Garnet Award Trophy"
                       className="relative w-36 sm:w-56 md:w-64 lg:w-72 h-auto rounded-xl sm:rounded-2xl shadow-2xl shadow-blue-900/60 border border-white/10"
                     />
@@ -286,7 +295,33 @@ export function TrophyHeroSection() {
                       </div>
                     </div>
                   </motion.div>
-                ) : (
+                )}
+                {currentItem === "trophy-winners" && (
+                  <motion.div
+                    key="trophy-winners"
+                    initial={{ opacity: 0, scale: 0.8, rotateY: -90 }}
+                    animate={{ opacity: 1, scale: 1, rotateY: 0 }}
+                    exit={{ opacity: 0, scale: 0.8, rotateY: 90 }}
+                    transition={{ duration: 0.6, ease: "easeInOut" }}
+                    className="relative group"
+                  >
+                    <div className="absolute -inset-1 bg-gradient-to-br from-blue-500/50 via-gold/30 to-blue-500/50 rounded-xl sm:rounded-2xl blur-sm opacity-60" />
+                    <img
+                      src={blueGarnetTrophyWinners}
+                      alt="Blue Garnet Winners Trophy"
+                      className="relative w-36 sm:w-56 md:w-64 lg:w-72 h-auto rounded-xl sm:rounded-2xl shadow-2xl shadow-blue-900/60 border border-white/10"
+                    />
+                    
+                    {/* Floating badge - Compact on mobile */}
+                    <div className="absolute -bottom-2 -right-2 sm:-bottom-3 sm:-right-6 px-2 sm:px-4 py-1 sm:py-2 rounded-lg sm:rounded-xl bg-charcoal/95 backdrop-blur-md border border-blue-500/50 shadow-xl">
+                      <div className="text-center">
+                        <p className="text-blue-400 font-display font-bold text-xs sm:text-base md:text-lg">Winners</p>
+                        <p className="text-white/70 text-[10px] sm:text-xs">Gold & Blue Garnet</p>
+                      </div>
+                    </div>
+                  </motion.div>
+                )}
+                {currentItem === "logo" && (
                   <motion.div
                     key="logo"
                     initial={{ opacity: 0, scale: 0.8, rotateY: 90 }}
