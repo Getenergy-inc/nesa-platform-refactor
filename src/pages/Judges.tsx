@@ -36,10 +36,10 @@ const responsibilities = [
 ];
 
 const timeline = [
-  { phase: "Application", date: "Jan - Mar", status: "open" },
-  { phase: "Review & Selection", date: "Apr - May", status: "upcoming" },
-  { phase: "Onboarding", date: "Jun - Jul", status: "upcoming" },
-  { phase: "Scoring Period", date: "Nov - Dec", status: "upcoming" },
+  { phase: "Application", date: "Feb 2026 – Mar 31, 2026", status: "open" },
+  { phase: "Review & Selection", date: "Apr 2026", status: "upcoming" },
+  { phase: "Onboarding", date: "Apr 2026", status: "upcoming" },
+  { phase: "Scoring Period", date: "Apr – Jun 2026", status: "upcoming" },
   { phase: "Gala Attendance", date: "Jun 2026", status: "upcoming" },
 ];
 
