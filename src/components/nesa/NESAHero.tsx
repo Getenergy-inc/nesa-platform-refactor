@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { Button } from "@/components/ui/button";
 import { useSeason } from "@/contexts/SeasonContext";
-import { NESALogo } from "@/components/nesa/NESALogo";
+import { NESALogo3D } from "@/components/nesa/NESALogo3D";
 import stageBackdrop from "@/assets/nesa-stage-backdrop.jpg";
 
 export function NESAHero() {
@@ -61,9 +61,9 @@ export function NESAHero() {
 
       {/* Hero Content */}
       <div className="relative flex-1 flex flex-col items-center justify-center text-center px-4 sm:px-6 py-12 sm:py-16">
-        {/* NESA Logo Icon - Elegant fade in */}
-        <div className="mb-4 sm:mb-6 animate-fade-in">
-          <NESALogo variant="icon" size="lg" className="h-16 w-16 sm:h-20 sm:w-20" />
+        {/* NESA Logo Icon - 3D Motion Graphics */}
+        <div className="mb-6 sm:mb-8">
+          <NESALogo3D size="xl" />
         </div>
 
         {/* Badge - Professional with subtle accent */}
