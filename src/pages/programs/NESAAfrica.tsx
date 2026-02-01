@@ -5,6 +5,7 @@ import { TrustLogosStrip } from "@/components/nesa/TrustLogosStrip";
 import { QuickActionBar } from "@/components/nesa/QuickActionBar";
 import { WhatsLiveSection } from "@/components/nesa/WhatsLiveSection";
 import { NominationPathsCards } from "@/components/nesa/NominationPathsCards";
+import { GoldCertificateSection } from "@/components/nesa/GoldCertificateSection";
 import { VoteWithAGCSection } from "@/components/nesa/VoteWithAGCSection";
 import { HowItWorksVisual } from "@/components/nesa/HowItWorksVisual";
 import { LegacyImpactSection } from "@/components/nesa/LegacyImpactSection";
@@ -39,6 +40,7 @@ export default function NESAAfrica() {
         <QuickActionBar />
         <WhatsLiveSection />
         <NominationPathsCards />
+        <GoldCertificateSection />
         <VoteWithAGCSection />
         <HowItWorksVisual />
         <LegacyImpactSection />
