@@ -1,0 +1,49 @@
+{
+  "user": {
+    "title": "የእኔ ዳሽቦርድ",
+    "wallet": "ቦርሳ",
+    "nominations": "ስያሜዎቼ",
+    "certificates": "የምስክር ወረቀቶቼ",
+    "profile": "መገለጫ"
+  },
+  "wallet": {
+    "balance": "ቀሪ ሂሳብ",
+    "topUp": "ይሙሉ",
+    "withdraw": "ያውጡ",
+    "transactions": "ግብይቶች",
+    "recentActivity": "የቅርብ ጊዜ እንቅስቃሴ",
+    "noTransactions": "ግብይቶች የሉም"
+  },
+  "nrc": {
+    "title": "የ NRC ዳሽቦርድ",
+    "queue": "የግምገማ ወረፋ",
+    "pending": "በመጠባበቅ ላይ",
+    "underReview": "በግምገማ ላይ",
+    "approved": "ፀድቋል",
+    "rejected": "ውድቅ ሆኗል",
+    "assign": "ለእኔ ይመድቡ",
+    "approve": "ያፀድቁ",
+    "reject": "ውድቅ ያድርጉ",
+    "needsInfo": "መረጃ ይፈልጋል"
+  },
+  "jury": {
+    "title": "የዳኛ ዳሽቦርድ",
+    "assignments": "ምደባዎቼ",
+    "scoring": "ነጥብ መስጠት",
+    "coiDeclaration": "የጥቅም ግጭት",
+    "submitScore": "ነጥብ ያስገቡ"
+  },
+  "chapter": {
+    "title": "የምዕራፍ ዳሽቦርድ",
+    "members": "አባላት",
+    "performance": "አፈፃፀም",
+    "settlements": "ክፍያዎች"
+  },
+  "admin": {
+    "title": "የአስተዳዳሪ ዳሽቦርድ",
+    "overview": "ማጠቃለያ",
+    "finance": "ፋይናንስ",
+    "governance": "አስተዳደር",
+    "technical": "ቴክኒካዊ"
+  }
+}

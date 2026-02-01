@@ -1,0 +1,49 @@
+{
+  "user": {
+    "title": "Dashibod Dina",
+    "wallet": "Walat",
+    "nominations": "Zaɓe-zaɓena",
+    "certificates": "Takardun Shaidana",
+    "profile": "Bayani"
+  },
+  "wallet": {
+    "balance": "Ma'auni",
+    "topUp": "Cika",
+    "withdraw": "Fitar",
+    "transactions": "Ma'amaloli",
+    "recentActivity": "Ayyukan Kwanan Nan",
+    "noTransactions": "Babu ma'amaloli"
+  },
+  "nrc": {
+    "title": "Dashibod NRC",
+    "queue": "Layin Duba",
+    "pending": "Ana Jira",
+    "underReview": "Ana Duba",
+    "approved": "An Amince",
+    "rejected": "An Ƙi",
+    "assign": "Ɗauko Mini",
+    "approve": "Amince",
+    "reject": "Ƙi",
+    "needsInfo": "Yana Buƙatar Bayani"
+  },
+  "jury": {
+    "title": "Dashibod Mai Shari'a",
+    "assignments": "Ayyukana",
+    "scoring": "Maki",
+    "coiDeclaration": "Rikicin Sha'awa",
+    "submitScore": "Aika Maki"
+  },
+  "chapter": {
+    "title": "Dashibod Babi",
+    "members": "Mambobi",
+    "performance": "Aiki",
+    "settlements": "Biyan Kuɗi"
+  },
+  "admin": {
+    "title": "Dashibod Admin",
+    "overview": "Bayanin Gaba Ɗaya",
+    "finance": "Kuɗi",
+    "governance": "Mulki",
+    "technical": "Fasaha"
+  }
+}

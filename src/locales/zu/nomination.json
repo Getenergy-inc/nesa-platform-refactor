@@ -1,0 +1,55 @@
+{
+  "form": {
+    "title": "Ifomu Lokuqokwa",
+    "step1": "Ulwazi Loqokiwe",
+    "step2": "Ukukhetha Isigaba",
+    "step3": "Isizathu",
+    "step4": "Ubufakazi",
+    "step5": "Ukubuyekeza Nokuthumela"
+  },
+  "fields": {
+    "nomineeName": "Igama Loqokiwe",
+    "nomineeEmail": "I-imeyili Yoqokiwe",
+    "nomineePhone": "Inombolo Yocingo",
+    "organization": "Inhlangano",
+    "title": "Isihloko/Isikhundla",
+    "country": "Izwe",
+    "region": "Isifunda",
+    "category": "Isigaba Somklomelo",
+    "subcategory": "Isigabana",
+    "justification": "Kungani lo muntu oqokiwe efanelwe ukwamukelwa?",
+    "evidence": "Ubufakazi Obusekela",
+    "uploadFiles": "Layisha Amafayela"
+  },
+  "placeholders": {
+    "enterName": "Faka igama eligcwele lomuntu oqokiwe",
+    "enterEmail": "nominee@isibonelo.com",
+    "enterPhone": "+27 XX XXX XXXX",
+    "enterOrganization": "Igama lenhlangano noma lesikhungo",
+    "enterTitle": "isb: Umqondisi, Uprofesa, Uthisha",
+    "selectCountry": "Khetha izwe",
+    "selectRegion": "Khetha isifunda",
+    "selectCategory": "Khetha isigaba",
+    "selectSubcategory": "Khetha isigabana",
+    "writeJustification": "Chaza iminikelo nomthelela woqokiwe..."
+  },
+  "validation": {
+    "required": "Le nsimu iyadingeka",
+    "invalidEmail": "Sicela ufake i-imeyili efanele",
+    "invalidPhone": "Sicela ufake inombolo efanele",
+    "minLength": "Kufanele ibe okungenani izinhlamvu ezingu-{{min}}",
+    "maxFiles": "Okokuningi amafayela angu-{{max}}"
+  },
+  "status": {
+    "pending": "Ilinde",
+    "underReview": "Iyabuyekezwa",
+    "approved": "Ivunyiwe",
+    "rejected": "Yenqatshiwe",
+    "platinum": "Platinum"
+  },
+  "messages": {
+    "submitted": "Ukuqokwa kuthunyelwe ngempumelelo!",
+    "thankYou": "Siyabonga ngokuqoka kwakho. Oqokiwe uzothola incwadi yokwamukela.",
+    "error": "Yehlulekile ukuthumela. Sicela uzame futhi."
+  }
+}

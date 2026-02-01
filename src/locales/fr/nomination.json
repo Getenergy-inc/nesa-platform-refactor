@@ -1,0 +1,55 @@
+{
+  "form": {
+    "title": "Formulaire de Nomination",
+    "step1": "Informations du Nominé",
+    "step2": "Sélection de Catégorie",
+    "step3": "Justification",
+    "step4": "Preuves",
+    "step5": "Révision & Soumission"
+  },
+  "fields": {
+    "nomineeName": "Nom du Nominé",
+    "nomineeEmail": "Email du Nominé",
+    "nomineePhone": "Numéro de Téléphone",
+    "organization": "Organisation",
+    "title": "Titre/Poste",
+    "country": "Pays",
+    "region": "Région",
+    "category": "Catégorie de Prix",
+    "subcategory": "Sous-Catégorie",
+    "justification": "Pourquoi ce nominé mérite-t-il une reconnaissance ?",
+    "evidence": "Preuves à l'Appui",
+    "uploadFiles": "Télécharger des Fichiers"
+  },
+  "placeholders": {
+    "enterName": "Entrez le nom complet du nominé",
+    "enterEmail": "nomine@exemple.com",
+    "enterPhone": "+33 X XX XX XX XX",
+    "enterOrganization": "Nom de l'organisation ou institution",
+    "enterTitle": "ex: Directeur, Professeur, Enseignant",
+    "selectCountry": "Sélectionnez un pays",
+    "selectRegion": "Sélectionnez une région",
+    "selectCategory": "Choisissez une catégorie",
+    "selectSubcategory": "Choisissez une sous-catégorie",
+    "writeJustification": "Décrivez les contributions et l'impact du nominé..."
+  },
+  "validation": {
+    "required": "Ce champ est obligatoire",
+    "invalidEmail": "Veuillez entrer un email valide",
+    "invalidPhone": "Veuillez entrer un numéro valide",
+    "minLength": "Doit contenir au moins {{min}} caractères",
+    "maxFiles": "Maximum {{max}} fichiers autorisés"
+  },
+  "status": {
+    "pending": "En Attente",
+    "underReview": "En Révision",
+    "approved": "Approuvé",
+    "rejected": "Rejeté",
+    "platinum": "Platinum"
+  },
+  "messages": {
+    "submitted": "Nomination soumise avec succès !",
+    "thankYou": "Merci pour votre nomination. Le nominé recevra une lettre d'acceptation.",
+    "error": "Échec de la soumission. Veuillez réessayer."
+  }
+}

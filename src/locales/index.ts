@@ -11,18 +11,63 @@ import enDashboard from './en/dashboard.json';
 
 // French
 import frCommon from './fr/common.json';
+import frPages from './fr/pages.json';
+import frNomination from './fr/nomination.json';
+import frDashboard from './fr/dashboard.json';
 
 // Arabic
 import arCommon from './ar/common.json';
+import arPages from './ar/pages.json';
+import arNomination from './ar/nomination.json';
+import arDashboard from './ar/dashboard.json';
+
+// Portuguese
+import ptCommon from './pt/common.json';
+import ptPages from './pt/pages.json';
+import ptNomination from './pt/nomination.json';
+import ptDashboard from './pt/dashboard.json';
+
+// Swahili
+import swCommon from './sw/common.json';
+import swPages from './sw/pages.json';
+import swNomination from './sw/nomination.json';
+import swDashboard from './sw/dashboard.json';
+
+// Hausa
+import haCommon from './ha/common.json';
+import haPages from './ha/pages.json';
+import haNomination from './ha/nomination.json';
+import haDashboard from './ha/dashboard.json';
+
+// Yoruba
+import yoCommon from './yo/common.json';
+import yoPages from './yo/pages.json';
+import yoNomination from './yo/nomination.json';
+import yoDashboard from './yo/dashboard.json';
+
+// Amharic
+import amCommon from './am/common.json';
+import amPages from './am/pages.json';
+import amNomination from './am/nomination.json';
+import amDashboard from './am/dashboard.json';
+
+// Zulu
+import zuCommon from './zu/common.json';
+import zuPages from './zu/pages.json';
+import zuNomination from './zu/nomination.json';
+import zuDashboard from './zu/dashboard.json';
 
 // Chinese
 import zhCommon from './zh/common.json';
+import zhPages from './zh/pages.json';
+import zhNomination from './zh/nomination.json';
+import zhDashboard from './zh/dashboard.json';
 
 // Hindi
 import hiCommon from './hi/common.json';
-
-// For languages without full translations, we'll fall back to English
-// These will be auto-translated via the translation job system
+import hiPages from './hi/pages.json';
+import hiNomination from './hi/nomination.json';
+import hiDashboard from './hi/dashboard.json';
 
 export const resources = {
   en: {
@@ -33,63 +78,63 @@ export const resources = {
   },
   fr: {
     common: frCommon,
-    pages: enPages, // Fallback to English until translated
-    nomination: enNomination,
-    dashboard: enDashboard,
+    pages: frPages,
+    nomination: frNomination,
+    dashboard: frDashboard,
   },
   ar: {
     common: arCommon,
-    pages: enPages,
-    nomination: enNomination,
-    dashboard: enDashboard,
+    pages: arPages,
+    nomination: arNomination,
+    dashboard: arDashboard,
   },
   pt: {
-    common: enCommon, // Will be auto-translated
-    pages: enPages,
-    nomination: enNomination,
-    dashboard: enDashboard,
+    common: ptCommon,
+    pages: ptPages,
+    nomination: ptNomination,
+    dashboard: ptDashboard,
   },
   sw: {
-    common: enCommon,
-    pages: enPages,
-    nomination: enNomination,
-    dashboard: enDashboard,
+    common: swCommon,
+    pages: swPages,
+    nomination: swNomination,
+    dashboard: swDashboard,
   },
   ha: {
-    common: enCommon,
-    pages: enPages,
-    nomination: enNomination,
-    dashboard: enDashboard,
+    common: haCommon,
+    pages: haPages,
+    nomination: haNomination,
+    dashboard: haDashboard,
   },
   yo: {
-    common: enCommon,
-    pages: enPages,
-    nomination: enNomination,
-    dashboard: enDashboard,
+    common: yoCommon,
+    pages: yoPages,
+    nomination: yoNomination,
+    dashboard: yoDashboard,
   },
   am: {
-    common: enCommon,
-    pages: enPages,
-    nomination: enNomination,
-    dashboard: enDashboard,
+    common: amCommon,
+    pages: amPages,
+    nomination: amNomination,
+    dashboard: amDashboard,
   },
   zu: {
-    common: enCommon,
-    pages: enPages,
-    nomination: enNomination,
-    dashboard: enDashboard,
+    common: zuCommon,
+    pages: zuPages,
+    nomination: zuNomination,
+    dashboard: zuDashboard,
   },
   zh: {
     common: zhCommon,
-    pages: enPages,
-    nomination: enNomination,
-    dashboard: enDashboard,
+    pages: zhPages,
+    nomination: zhNomination,
+    dashboard: zhDashboard,
   },
   hi: {
     common: hiCommon,
-    pages: enPages,
-    nomination: enNomination,
-    dashboard: enDashboard,
+    pages: hiPages,
+    nomination: hiNomination,
+    dashboard: hiDashboard,
   },
 };
 

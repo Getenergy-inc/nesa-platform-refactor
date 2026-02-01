@@ -1,0 +1,55 @@
+{
+  "form": {
+    "title": "Fọ́ọ̀mù Ìyàn",
+    "step1": "Àlàyé Ẹni Tí A Yàn",
+    "step2": "Yíyàn Ẹ̀ka",
+    "step3": "Ìdí",
+    "step4": "Ẹ̀rí",
+    "step5": "Àyẹ̀wò & Fíránṣẹ́"
+  },
+  "fields": {
+    "nomineeName": "Orúkọ Ẹni Tí A Yàn",
+    "nomineeEmail": "Ímeèlì Ẹni Tí A Yàn",
+    "nomineePhone": "Nọ́mbà Fóònù",
+    "organization": "Àjọ",
+    "title": "Oyè/Ipò",
+    "country": "Orílẹ̀-èdè",
+    "region": "Ẹkùn",
+    "category": "Ẹ̀ka Ẹ̀bùn",
+    "subcategory": "Ẹ̀ka-Kékeré",
+    "justification": "Kí ló dé tí ẹni yìí ṣe yẹ fún ìmọ̀ràn?",
+    "evidence": "Ẹ̀rí Àtìlẹ́yìn",
+    "uploadFiles": "Gbe Fáìlì Síi"
+  },
+  "placeholders": {
+    "enterName": "Tẹ orúkọ kíkún ẹni tí a yàn sílẹ̀",
+    "enterEmail": "nominee@àpẹẹrẹ.com",
+    "enterPhone": "+234 XXX XXX XXXX",
+    "enterOrganization": "Orúkọ àjọ tàbí ilé-ẹ̀kọ́",
+    "enterTitle": "àpẹẹrẹ: Olùdarí, Ọ̀jọ̀gbọ́n, Olùkọ́",
+    "selectCountry": "Yan orílẹ̀-èdè",
+    "selectRegion": "Yan ẹkùn",
+    "selectCategory": "Yan ẹ̀ka",
+    "selectSubcategory": "Yan ẹ̀ka-kékeré",
+    "writeJustification": "Ṣàlàyé àwọn àfikún àti ipa ẹni tí a yàn..."
+  },
+  "validation": {
+    "required": "A nílò fíìlù yìí",
+    "invalidEmail": "Jọ̀wọ́ tẹ ímeèlì tó tọ́",
+    "invalidPhone": "Jọ̀wọ́ tẹ nọ́mbà fóònù tó tọ́",
+    "minLength": "Ó gbọ́dọ̀ jẹ́ ó kéré jù lẹ́tà {{min}}",
+    "maxFiles": "Ó pọ̀ jù fáìlì {{max}}"
+  },
+  "status": {
+    "pending": "Ndúró",
+    "underReview": "Ń Ṣàyẹ̀wò",
+    "approved": "Ti Fọwọ́ Sí",
+    "rejected": "Ti Kọ̀",
+    "platinum": "Platinum"
+  },
+  "messages": {
+    "submitted": "A ti fi ìyàn ránṣẹ́ dáadáa!",
+    "thankYou": "A dúpẹ́ fún ìyàn rẹ. Ẹni tí a yàn yóò gba lẹ́tà ìgbàwọ́lé.",
+    "error": "Kò ṣàṣeyọrí. Jọ̀wọ́ gbìyànjú lẹ́ẹ̀kan síi."
+  }
+}

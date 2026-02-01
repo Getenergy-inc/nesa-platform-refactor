@@ -1,0 +1,55 @@
+{
+  "form": {
+    "title": "提名表",
+    "step1": "被提名人信息",
+    "step2": "类别选择",
+    "step3": "理由",
+    "step4": "证据",
+    "step5": "审核并提交"
+  },
+  "fields": {
+    "nomineeName": "被提名人姓名",
+    "nomineeEmail": "被提名人邮箱",
+    "nomineePhone": "电话号码",
+    "organization": "组织",
+    "title": "职位",
+    "country": "国家",
+    "region": "地区",
+    "category": "奖项类别",
+    "subcategory": "子类别",
+    "justification": "为什么这位被提名人值得表彰？",
+    "evidence": "支持证据",
+    "uploadFiles": "上传文件"
+  },
+  "placeholders": {
+    "enterName": "输入被提名人全名",
+    "enterEmail": "nominee@example.com",
+    "enterPhone": "+86 XXX XXXX XXXX",
+    "enterOrganization": "组织或机构名称",
+    "enterTitle": "例如：校长、主任、教师",
+    "selectCountry": "选择国家",
+    "selectRegion": "选择地区",
+    "selectCategory": "选择类别",
+    "selectSubcategory": "选择子类别",
+    "writeJustification": "描述被提名人的贡献和影响..."
+  },
+  "validation": {
+    "required": "此字段为必填项",
+    "invalidEmail": "请输入有效的邮箱地址",
+    "invalidPhone": "请输入有效的电话号码",
+    "minLength": "至少需要 {{min}} 个字符",
+    "maxFiles": "最多允许 {{max}} 个文件"
+  },
+  "status": {
+    "pending": "待处理",
+    "underReview": "审核中",
+    "approved": "已批准",
+    "rejected": "已拒绝",
+    "platinum": "铂金"
+  },
+  "messages": {
+    "submitted": "提名提交成功！",
+    "thankYou": "感谢您的提名。被提名人将收到接受信函。",
+    "error": "提交失败，请重试。"
+  }
+}

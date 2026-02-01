@@ -1,0 +1,49 @@
+{
+  "user": {
+    "title": "मेरा डैशबोर्ड",
+    "wallet": "वॉलेट",
+    "nominations": "मेरे नामांकन",
+    "certificates": "मेरे प्रमाणपत्र",
+    "profile": "प्रोफ़ाइल"
+  },
+  "wallet": {
+    "balance": "शेष राशि",
+    "topUp": "रिचार्ज करें",
+    "withdraw": "निकालें",
+    "transactions": "लेनदेन",
+    "recentActivity": "हाल की गतिविधि",
+    "noTransactions": "कोई लेनदेन नहीं"
+  },
+  "nrc": {
+    "title": "NRC डैशबोर्ड",
+    "queue": "समीक्षा कतार",
+    "pending": "लंबित",
+    "underReview": "समीक्षाधीन",
+    "approved": "स्वीकृत",
+    "rejected": "अस्वीकृत",
+    "assign": "मुझे सौंपें",
+    "approve": "स्वीकृत करें",
+    "reject": "अस्वीकार करें",
+    "needsInfo": "जानकारी चाहिए"
+  },
+  "jury": {
+    "title": "जूरी डैशबोर्ड",
+    "assignments": "मेरे कार्य",
+    "scoring": "स्कोरिंग",
+    "coiDeclaration": "हितों का टकराव",
+    "submitScore": "स्कोर जमा करें"
+  },
+  "chapter": {
+    "title": "चैप्टर डैशबोर्ड",
+    "members": "सदस्य",
+    "performance": "प्रदर्शन",
+    "settlements": "निपटान"
+  },
+  "admin": {
+    "title": "एडमिन डैशबोर्ड",
+    "overview": "अवलोकन",
+    "finance": "वित्त",
+    "governance": "शासन",
+    "technical": "तकनीकी"
+  }
+}

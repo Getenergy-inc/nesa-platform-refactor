@@ -1,0 +1,49 @@
+{
+  "user": {
+    "title": "Ideshibodi Yami",
+    "wallet": "Isikhwama",
+    "nominations": "Ukuqokwa Kwami",
+    "certificates": "Izitifiketi Zami",
+    "profile": "Iphrofayili"
+  },
+  "wallet": {
+    "balance": "Ibhalansi",
+    "topUp": "Gcwalisa",
+    "withdraw": "Khipha",
+    "transactions": "Izinto Zokuthengisa",
+    "recentActivity": "Umsebenzi Wakamuva",
+    "noTransactions": "Azikho izinto zokuthengisa"
+  },
+  "nrc": {
+    "title": "Ideshibodi ye-NRC",
+    "queue": "Umugqa Wokubuyekeza",
+    "pending": "Ilinde",
+    "underReview": "Iyabuyekezwa",
+    "approved": "Ivunyiwe",
+    "rejected": "Yenqatshiwe",
+    "assign": "Zenzele Mina",
+    "approve": "Vuma",
+    "reject": "Nqaba",
+    "needsInfo": "Idinga Ulwazi"
+  },
+  "jury": {
+    "title": "Ideshibodi Yejaji",
+    "assignments": "Izabelelo Zami",
+    "scoring": "Ukubala Amaphuzu",
+    "coiDeclaration": "Ukuphikisana Kwezintshisekelo",
+    "submitScore": "Thumela Amaphuzu"
+  },
+  "chapter": {
+    "title": "Ideshibodi Yesahluko",
+    "members": "Amalungu",
+    "performance": "Ukusebenza",
+    "settlements": "Izinkokhelo"
+  },
+  "admin": {
+    "title": "Ideshibodi ka-Admin",
+    "overview": "Ukubuka Konke",
+    "finance": "Ezezimali",
+    "governance": "Ukubusa",
+    "technical": "Obuchwepheshe"
+  }
+}

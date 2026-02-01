@@ -1,0 +1,55 @@
+{
+  "form": {
+    "title": "Fomu ya Uteuzi",
+    "step1": "Maelezo ya Mteuliwa",
+    "step2": "Uchaguzi wa Kategoria",
+    "step3": "Sababu",
+    "step4": "Ushahidi",
+    "step5": "Ukaguaji na Kuwasilisha"
+  },
+  "fields": {
+    "nomineeName": "Jina la Mteuliwa",
+    "nomineeEmail": "Barua Pepe ya Mteuliwa",
+    "nomineePhone": "Nambari ya Simu",
+    "organization": "Shirika",
+    "title": "Cheo/Nafasi",
+    "country": "Nchi",
+    "region": "Mkoa",
+    "category": "Kategoria ya Tuzo",
+    "subcategory": "Kategoria Ndogo",
+    "justification": "Kwa nini mteuliwa huyu anastahili kutambuliwa?",
+    "evidence": "Ushahidi wa Kusaidia",
+    "uploadFiles": "Pakia Faili"
+  },
+  "placeholders": {
+    "enterName": "Ingiza jina kamili la mteuliwa",
+    "enterEmail": "mteuliwa@mfano.com",
+    "enterPhone": "+255 XXX XXX XXX",
+    "enterOrganization": "Jina la shirika au taasisi",
+    "enterTitle": "mfano: Mkurugenzi, Profesa, Mwalimu",
+    "selectCountry": "Chagua nchi",
+    "selectRegion": "Chagua mkoa",
+    "selectCategory": "Chagua kategoria",
+    "selectSubcategory": "Chagua kategoria ndogo",
+    "writeJustification": "Eleza michango na athari za mteuliwa..."
+  },
+  "validation": {
+    "required": "Sehemu hii inahitajika",
+    "invalidEmail": "Tafadhali ingiza barua pepe halali",
+    "invalidPhone": "Tafadhali ingiza nambari halali",
+    "minLength": "Lazima iwe angalau herufi {{min}}",
+    "maxFiles": "Kiwango cha juu cha faili {{max}}"
+  },
+  "status": {
+    "pending": "Inasubiri",
+    "underReview": "Inakaguliwa",
+    "approved": "Imeidhinishwa",
+    "rejected": "Imekataliwa",
+    "platinum": "Platinamu"
+  },
+  "messages": {
+    "submitted": "Uteuzi umewasilishwa kwa mafanikio!",
+    "thankYou": "Asante kwa uteuzi wako. Mteuliwa atapokea barua ya kukubali.",
+    "error": "Imeshindwa kuwasilisha. Tafadhali jaribu tena."
+  }
+}

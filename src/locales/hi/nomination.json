@@ -1,0 +1,55 @@
+{
+  "form": {
+    "title": "नामांकन फॉर्म",
+    "step1": "नामांकित की जानकारी",
+    "step2": "श्रेणी चयन",
+    "step3": "औचित्य",
+    "step4": "साक्ष्य",
+    "step5": "समीक्षा और जमा करें"
+  },
+  "fields": {
+    "nomineeName": "नामांकित का नाम",
+    "nomineeEmail": "नामांकित का ईमेल",
+    "nomineePhone": "फ़ोन नंबर",
+    "organization": "संगठन",
+    "title": "पद/पदवी",
+    "country": "देश",
+    "region": "क्षेत्र",
+    "category": "पुरस्कार श्रेणी",
+    "subcategory": "उप-श्रेणी",
+    "justification": "यह नामांकित मान्यता के योग्य क्यों है?",
+    "evidence": "सहायक साक्ष्य",
+    "uploadFiles": "फ़ाइलें अपलोड करें"
+  },
+  "placeholders": {
+    "enterName": "नामांकित का पूरा नाम दर्ज करें",
+    "enterEmail": "nominee@example.com",
+    "enterPhone": "+91 XXXXX XXXXX",
+    "enterOrganization": "संगठन या संस्था का नाम",
+    "enterTitle": "उदा: प्रधानाचार्य, निदेशक, शिक्षक",
+    "selectCountry": "देश चुनें",
+    "selectRegion": "क्षेत्र चुनें",
+    "selectCategory": "श्रेणी चुनें",
+    "selectSubcategory": "उप-श्रेणी चुनें",
+    "writeJustification": "नामांकित के योगदान और प्रभाव का वर्णन करें..."
+  },
+  "validation": {
+    "required": "यह फ़ील्ड आवश्यक है",
+    "invalidEmail": "कृपया वैध ईमेल दर्ज करें",
+    "invalidPhone": "कृपया वैध फ़ोन नंबर दर्ज करें",
+    "minLength": "कम से कम {{min}} अक्षर होने चाहिए",
+    "maxFiles": "अधिकतम {{max}} फ़ाइलें अनुमत"
+  },
+  "status": {
+    "pending": "लंबित",
+    "underReview": "समीक्षाधीन",
+    "approved": "स्वीकृत",
+    "rejected": "अस्वीकृत",
+    "platinum": "प्लेटिनम"
+  },
+  "messages": {
+    "submitted": "नामांकन सफलतापूर्वक जमा हुआ!",
+    "thankYou": "आपके नामांकन के लिए धन्यवाद। नामांकित को स्वीकृति पत्र प्राप्त होगा।",
+    "error": "जमा करने में विफल। कृपया पुनः प्रयास करें।"
+  }
+}

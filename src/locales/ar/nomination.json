@@ -1,0 +1,55 @@
+{
+  "form": {
+    "title": "نموذج الترشيح",
+    "step1": "معلومات المرشح",
+    "step2": "اختيار الفئة",
+    "step3": "التبرير",
+    "step4": "الأدلة",
+    "step5": "المراجعة والإرسال"
+  },
+  "fields": {
+    "nomineeName": "اسم المرشح",
+    "nomineeEmail": "بريد المرشح الإلكتروني",
+    "nomineePhone": "رقم الهاتف",
+    "organization": "المنظمة",
+    "title": "اللقب/المنصب",
+    "country": "البلد",
+    "region": "المنطقة",
+    "category": "فئة الجائزة",
+    "subcategory": "الفئة الفرعية",
+    "justification": "لماذا يستحق هذا المرشح التقدير؟",
+    "evidence": "الأدلة الداعمة",
+    "uploadFiles": "رفع الملفات"
+  },
+  "placeholders": {
+    "enterName": "أدخل الاسم الكامل للمرشح",
+    "enterEmail": "nominee@example.com",
+    "enterPhone": "+966 XX XXX XXXX",
+    "enterOrganization": "اسم المنظمة أو المؤسسة",
+    "enterTitle": "مثال: مدير، أستاذ، معلم",
+    "selectCountry": "اختر البلد",
+    "selectRegion": "اختر المنطقة",
+    "selectCategory": "اختر فئة",
+    "selectSubcategory": "اختر فئة فرعية",
+    "writeJustification": "صف مساهمات المرشح وتأثيره..."
+  },
+  "validation": {
+    "required": "هذا الحقل مطلوب",
+    "invalidEmail": "يرجى إدخال بريد إلكتروني صحيح",
+    "invalidPhone": "يرجى إدخال رقم هاتف صحيح",
+    "minLength": "يجب أن يحتوي على {{min}} أحرف على الأقل",
+    "maxFiles": "الحد الأقصى {{max}} ملفات"
+  },
+  "status": {
+    "pending": "قيد الانتظار",
+    "underReview": "قيد المراجعة",
+    "approved": "تمت الموافقة",
+    "rejected": "مرفوض",
+    "platinum": "بلاتينيوم"
+  },
+  "messages": {
+    "submitted": "تم إرسال الترشيح بنجاح!",
+    "thankYou": "شكراً لترشيحك. سيتلقى المرشح رسالة قبول.",
+    "error": "فشل في إرسال الترشيح. يرجى المحاولة مرة أخرى."
+  }
+}

@@ -1,0 +1,55 @@
+{
+  "form": {
+    "title": "Fom na Zaɓe",
+    "step1": "Bayanan Wanda Aka Zaɓa",
+    "step2": "Zaɓin Rukuni",
+    "step3": "Dalili",
+    "step4": "Shaida",
+    "step5": "Duba & Tura"
+  },
+  "fields": {
+    "nomineeName": "Sunan Wanda Aka Zaɓa",
+    "nomineeEmail": "Imel na Wanda Aka Zaɓa",
+    "nomineePhone": "Lambar Waya",
+    "organization": "Ƙungiya",
+    "title": "Matsayi",
+    "country": "Ƙasa",
+    "region": "Yanki",
+    "category": "Rukunin Kyauta",
+    "subcategory": "Ƙaramin Rukuni",
+    "justification": "Me ya sa wannan ɗan takara ya cancanci karramawa?",
+    "evidence": "Shaidar Goyon Baya",
+    "uploadFiles": "Ɗora Fayiloli"
+  },
+  "placeholders": {
+    "enterName": "Shigar da cikakken sunan ɗan takara",
+    "enterEmail": "nominee@misali.com",
+    "enterPhone": "+234 XXX XXX XXXX",
+    "enterOrganization": "Sunan ƙungiya ko hukuma",
+    "enterTitle": "misali: Darakta, Farfesa, Malami",
+    "selectCountry": "Zaɓi ƙasa",
+    "selectRegion": "Zaɓi yanki",
+    "selectCategory": "Zaɓi rukuni",
+    "selectSubcategory": "Zaɓi ƙaramin rukuni",
+    "writeJustification": "Bayyana gudummawar ɗan takara da tasirinsa..."
+  },
+  "validation": {
+    "required": "Ana buƙatar wannan fili",
+    "invalidEmail": "Da fatan shigar da ingantaccen imel",
+    "invalidPhone": "Da fatan shigar da ingantaccen lambar waya",
+    "minLength": "Dole ya zama aƙalla haruffa {{min}}",
+    "maxFiles": "Mafi girman fayiloli {{max}}"
+  },
+  "status": {
+    "pending": "Ana Jira",
+    "underReview": "Ana Duba",
+    "approved": "An Amince",
+    "rejected": "An Ƙi",
+    "platinum": "Platinum"
+  },
+  "messages": {
+    "submitted": "An tura zaɓen cikin nasara!",
+    "thankYou": "Na gode da zaɓenka. Ɗan takara zai karɓi wasiƙar karɓa.",
+    "error": "An kasa turawa. Da fatan sake gwadawa."
+  }
+}
