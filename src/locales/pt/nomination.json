@@ -1,0 +1,55 @@
+{
+  "form": {
+    "title": "Formulário de Nomeação",
+    "step1": "Informações do Nomeado",
+    "step2": "Seleção de Categoria",
+    "step3": "Justificativa",
+    "step4": "Evidências",
+    "step5": "Revisão e Envio"
+  },
+  "fields": {
+    "nomineeName": "Nome do Nomeado",
+    "nomineeEmail": "Email do Nomeado",
+    "nomineePhone": "Número de Telefone",
+    "organization": "Organização",
+    "title": "Título/Cargo",
+    "country": "País",
+    "region": "Região",
+    "category": "Categoria do Prémio",
+    "subcategory": "Subcategoria",
+    "justification": "Por que este nomeado merece reconhecimento?",
+    "evidence": "Evidências de Apoio",
+    "uploadFiles": "Carregar Arquivos"
+  },
+  "placeholders": {
+    "enterName": "Digite o nome completo do nomeado",
+    "enterEmail": "nomeado@exemplo.com",
+    "enterPhone": "+351 XXX XXX XXX",
+    "enterOrganization": "Nome da organização ou instituição",
+    "enterTitle": "ex: Diretor, Professor, Educador",
+    "selectCountry": "Selecione o país",
+    "selectRegion": "Selecione a região",
+    "selectCategory": "Escolha uma categoria",
+    "selectSubcategory": "Escolha uma subcategoria",
+    "writeJustification": "Descreva as contribuições e impacto do nomeado..."
+  },
+  "validation": {
+    "required": "Este campo é obrigatório",
+    "invalidEmail": "Por favor, insira um email válido",
+    "invalidPhone": "Por favor, insira um número válido",
+    "minLength": "Deve ter pelo menos {{min}} caracteres",
+    "maxFiles": "Máximo de {{max}} arquivos permitidos"
+  },
+  "status": {
+    "pending": "Pendente",
+    "underReview": "Em Revisão",
+    "approved": "Aprovado",
+    "rejected": "Rejeitado",
+    "platinum": "Platinum"
+  },
+  "messages": {
+    "submitted": "Nomeação enviada com sucesso!",
+    "thankYou": "Obrigado pela nomeação. O nomeado receberá uma carta de aceitação.",
+    "error": "Falha ao enviar. Por favor, tente novamente."
+  }
+}

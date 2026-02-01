@@ -1,0 +1,49 @@
+{
+  "user": {
+    "title": "Mon Tableau de Bord",
+    "wallet": "Portefeuille",
+    "nominations": "Mes Nominations",
+    "certificates": "Mes Certificats",
+    "profile": "Profil"
+  },
+  "wallet": {
+    "balance": "Solde",
+    "topUp": "Recharger",
+    "withdraw": "Retirer",
+    "transactions": "Transactions",
+    "recentActivity": "Activité Récente",
+    "noTransactions": "Aucune transaction"
+  },
+  "nrc": {
+    "title": "Tableau de Bord NRC",
+    "queue": "File d'Attente",
+    "pending": "En Attente",
+    "underReview": "En Révision",
+    "approved": "Approuvé",
+    "rejected": "Rejeté",
+    "assign": "M'Assigner",
+    "approve": "Approuver",
+    "reject": "Rejeter",
+    "needsInfo": "Besoin d'Infos"
+  },
+  "jury": {
+    "title": "Tableau de Bord Jury",
+    "assignments": "Mes Affectations",
+    "scoring": "Notation",
+    "coiDeclaration": "Conflit d'Intérêts",
+    "submitScore": "Soumettre Note"
+  },
+  "chapter": {
+    "title": "Tableau de Bord Chapitre",
+    "members": "Membres",
+    "performance": "Performance",
+    "settlements": "Règlements"
+  },
+  "admin": {
+    "title": "Tableau de Bord Admin",
+    "overview": "Aperçu",
+    "finance": "Finance",
+    "governance": "Gouvernance",
+    "technical": "Technique"
+  }
+}

@@ -1,0 +1,49 @@
+{
+  "user": {
+    "title": "我的仪表板",
+    "wallet": "钱包",
+    "nominations": "我的提名",
+    "certificates": "我的证书",
+    "profile": "个人资料"
+  },
+  "wallet": {
+    "balance": "余额",
+    "topUp": "充值",
+    "withdraw": "提现",
+    "transactions": "交易记录",
+    "recentActivity": "最近活动",
+    "noTransactions": "暂无交易"
+  },
+  "nrc": {
+    "title": "NRC 仪表板",
+    "queue": "审核队列",
+    "pending": "待处理",
+    "underReview": "审核中",
+    "approved": "已批准",
+    "rejected": "已拒绝",
+    "assign": "分配给我",
+    "approve": "批准",
+    "reject": "拒绝",
+    "needsInfo": "需要更多信息"
+  },
+  "jury": {
+    "title": "评委仪表板",
+    "assignments": "我的任务",
+    "scoring": "评分",
+    "coiDeclaration": "利益冲突",
+    "submitScore": "提交分数"
+  },
+  "chapter": {
+    "title": "分会仪表板",
+    "members": "成员",
+    "performance": "表现",
+    "settlements": "结算"
+  },
+  "admin": {
+    "title": "管理员仪表板",
+    "overview": "概览",
+    "finance": "财务",
+    "governance": "治理",
+    "technical": "技术"
+  }
+}

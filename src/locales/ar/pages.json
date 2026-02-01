@@ -5,17 +5,407 @@
       "title": "تكريم",
       "titleHighlight": "صناع التغيير في التعليم الأفريقي",
       "tagline": "الدعوة وتحقيق التعليم للجميع في أفريقيا",
-      "description": "جائزة المعيار التعليمي الجديد أفريقيا ({{edition}}) تحتفي بالقادة الرؤيويين والمؤسسات والمبتكرين.",
+      "description": "جائزة المعيار التعليمي الجديد أفريقيا ({{edition}}) تحتفي بالقادة الرؤيويين والمؤسسات والمبتكرين الذين يبنون مستقبل التعليم في جميع أنحاء أفريقيا.",
       "discoverMore": "اكتشف المزيد",
       "nominateNow": "رشح الآن",
-      "stats": { "nominees": "المرشحون", "countries": "الدول", "categories": "الفئات" },
-      "quickNav": { "refer": "إحالة", "nominate": "ترشيح", "vision": "رؤية 2035", "tickets": "التذاكر", "watch": "مشاهدة" }
+      "stats": {
+        "nominees": "المرشحون",
+        "countries": "الدول",
+        "categories": "الفئات"
+      },
+      "quickNav": {
+        "refer": "إحالة",
+        "nominate": "ترشيح",
+        "vision": "رؤية 2035",
+        "tickets": "التذاكر",
+        "watch": "مشاهدة"
+      }
     },
-    "stats": { "regions": "المناطق الأفريقية", "categories": "فئات الجوائز", "subcategories": "الفئات الفرعية" }
+    "stats": {
+      "regions": "المناطق الأفريقية",
+      "categories": "فئات الجوائز",
+      "subcategories": "الفئات الفرعية"
+    },
+    "watchLive": {
+      "title": "شاهد مباشرة",
+      "description": "تبث NESA أفريقيا TV على وسائل التواصل الاجتماعي والمحطات الشريكة وتطبيق CAST TV.",
+      "youtube": "يوتيوب",
+      "facebook": "فيسبوك",
+      "castTV": "تطبيق CAST TV"
+    },
+    "quote": {
+      "text": "{{editionName}} ليس حدثًا. إنها دورة مساءلة تعليمية قائمة على المعايير تربط:",
+      "keywords": {
+        "education": "التعليم",
+        "recognition": "التقدير",
+        "publicParticipation": "المشاركة العامة",
+        "legacyImpact": "التأثير الدائم"
+      },
+      "footer": "تُقدم بالحوكمة والشفافية والأهمية القارية."
+    }
+  },
+  "about": {
+    "title": "حول NESA-أفريقيا",
+    "mission": "مهمتنا",
+    "vision": "رؤيتنا",
+    "governance": "الحوكمة",
+    "timeline": "الجدول الزمني",
+    "meta": {
+      "title": "حول NESA-أفريقيا | جائزة المعيار التعليمي الجديد أفريقيا",
+      "description": "NESA-أفريقيا هي منصة مساءلة تعليمية تعترف بصانعي التغيير الذين يشكلون مستقبل التعليم في أفريقيا."
+    },
+    "hero": {
+      "badge": "إصدار {{year}}",
+      "title": "حول",
+      "titleAccent": "NESA-أفريقيا",
+      "description": "جائزة المعيار التعليمي الجديد أفريقيا ليست موقع جوائز. إنها منصة مساءلة تعليمية تحتفي بأبطال التعليم في أفريقيا.",
+      "exploreCategories": "استكشف الفئات",
+      "nominateNow": "رشح الآن"
+    },
+    "missionSection": {
+      "title": "مهمتنا",
+      "description": "التعرف على الأفراد والمنظمات والمؤسسات التي تقود التعليم للجميع في جميع أنحاء أفريقيا والتحقق منها والاحتفاء بها."
+    },
+    "pillars": {
+      "title": "ركائزنا الأربع",
+      "recognition": {
+        "title": "التقدير",
+        "description": "الاحتفاء بأبطال التعليم في أفريقيا من خلال جوائز قائمة على الجدارة في 17 فئة."
+      },
+      "accountability": {
+        "title": "المساءلة",
+        "description": "جدران الحماية على مستوى الحوكمة تضمن استقلالية الراعي ونزاهة التصويت."
+      },
+      "continentalReach": {
+        "title": "الوصول القاري",
+        "description": "نهج المنطقة أولاً يغطي جميع مناطق أفريقيا الخمس بالإضافة إلى الشتات وأصدقاء أفريقيا."
+      },
+      "impact": {
+        "title": "التأثير",
+        "description": "دفع التعليم للجميع من خلال الظهور والتحقق ومشاركة المتطوعين."
+      }
+    },
+    "awardTiers": {
+      "title": "مستويات الجوائز",
+      "description": "أربع منصات تقدير مميزة، لكل منها معايير وعمليات اختيار فريدة.",
+      "platinum": {
+        "title": "شهادة البلاتين",
+        "description": "تقدير أساسي للمساهمة في التعليم للجميع. غير تنافسي، موثق من NRC، صالح لمدة سنة."
+      },
+      "icon": {
+        "title": "أيقونة التعليم الأفريقي",
+        "description": "تقدير الإنجاز مدى الحياة. 3 فئات فرعية عبر أفريقيا والشتات وأصدقاء أفريقيا."
+      },
+      "gold": {
+        "title": "شهادة الذهب",
+        "description": "تقدير تنافسي من خلال التصويت العام بنسبة 100%."
+      },
+      "blueGarnet": {
+        "title": "جائزة الجارنت الأزرق",
+        "description": "أعلى تكريم — 60% لجنة تحكيم، 40% تصويت عام. 9 فائزين يُعلن عنهم في الحفل."
+      }
+    },
+    "learnMore": "اعرف المزيد",
+    "quickLinks": {
+      "vision2035": "رؤية 2035",
+      "governance": "الحوكمة والجدران النارية",
+      "timeline": "الجدول الزمني للبرنامج",
+      "scef": "مؤسسة SCEF"
+    }
+  },
+  "categories": {
+    "title": "فئات الجوائز",
+    "description": "استكشف 17 فئة جوائز لدينا التي تعترف بالتميز في قطاع التعليم الأفريقي",
+    "viewNominees": "عرض المرشحين",
+    "subcategories": "الفئات الفرعية",
+    "meta": {
+      "title": "فئات الجوائز | {{editionName}}",
+      "description": "استكشف جميع فئات NESA-أفريقيا الـ 17 وأكثر من 138 فئة فرعية."
+    },
+    "hero": {
+      "title": "17 فئة جوائز رسمية",
+      "description": "الاحتفاء بالتميز في التعليم والمسؤولية المؤسسية والتكنولوجيا والأثر الاجتماعي عبر القارة الأفريقية."
+    },
+    "tabs": {
+      "africaFirst": "أفريقيا أولاً",
+      "nigeria": "نيجيريا"
+    },
+    "search": {
+      "placeholder": "ابحث في الفئات أو الفئات الفرعية..."
+    },
+    "controls": {
+      "expandAll": "توسيع الكل",
+      "collapseAll": "طي الكل"
+    },
+    "card": {
+      "subcategories": "فئات فرعية",
+      "viewSubcategories": "عرض الفئات الفرعية",
+      "hideSubcategories": "إخفاء الفئات الفرعية",
+      "noSubcategories": "لا توجد فئات فرعية متاحة بعد."
+    },
+    "empty": {
+      "title": "لم يتم العثور على فئات",
+      "description": "حاول تعديل استعلام البحث الخاص بك."
+    },
+    "stats": {
+      "officialCategories": "الفئات الرسمية",
+      "totalSubcategories": "إجمالي الفئات الفرعية",
+      "africanRegions": "المناطق الأفريقية",
+      "awardTiers": "مستويات الجوائز"
+    },
+    "cta": {
+      "title": "هل أنت مستعد للترشيح؟",
+      "description": "اعترف بالتميز في التعليم الأفريقي من خلال تقديم ترشيح اليوم.",
+      "submitNomination": "تقديم ترشيح",
+      "viewNominees": "عرض المرشحين"
+    }
+  },
+  "nominees": {
+    "title": "المرشحون",
+    "searchPlaceholder": "ابحث عن المرشحين...",
+    "filterByCategory": "تصفية حسب الفئة",
+    "noNominees": "لا يوجد مرشحون بعد",
+    "beFirst": "كن أول من يرشح شخصًا في هذه الفئة",
+    "meta": {
+      "title": "دليل أبطال التعليم | NESA-أفريقيا"
+    },
+    "hero": {
+      "badge": "دليل أبطال التعليم",
+      "title": "تعرف على",
+      "titleAccent": "مرشحينا",
+      "description": "اكتشف المعلمين والمبتكرين والمؤسسات الرائعة التي تحول التعليم عبر أفريقيا."
+    },
+    "search": {
+      "placeholder": "ابحث عن المرشحين بالاسم أو المنظمة..."
+    },
+    "filter": {
+      "allCategories": "جميع الفئات"
+    },
+    "stats": {
+      "totalNominees": "إجمالي المرشحين",
+      "platinumVerified": "موثق بلاتينيوم",
+      "awardCategories": "فئات الجوائز",
+      "showing": "عرض"
+    },
+    "view": {
+      "showing": "عرض {{current}} من {{total}}",
+      "page": "صفحة {{current}} من {{total}}",
+      "viewLabel": "عرض:"
+    },
+    "empty": {
+      "title": "لم يتم العثور على مرشحين",
+      "description": "حاول تعديل معايير البحث أو التصفية.",
+      "noNominees": "تحقق مرة أخرى قريبًا حيث يتم مراجعة الترشيحات.",
+      "clearFilters": "مسح المرشحات"
+    },
+    "pagination": {
+      "reachedEnd": "لقد وصلت إلى النهاية — تم عرض {{count}} مرشح",
+      "loadingMore": "جاري التحميل...",
+      "page": "صفحة {{current}} من {{total}}"
+    }
+  },
+  "vote": {
+    "title": "صوت للتميز",
+    "description": "أدلِ بصوتك لأبطال التعليم في أفريقيا",
+    "votingOpen": "التصويت مفتوح",
+    "votingClosed": "التصويت مغلق",
+    "voteNow": "صوت الآن",
+    "yourVote": "صوتك مهم",
+    "meta": {
+      "title": "صوت للمرشحين | {{editionName}}",
+      "description": "أدلِ بصوتك لصانعي التغيير التعليمي المتميزين في جوائز {{editionName}}."
+    },
+    "hero": {
+      "badge": "التصويت العام",
+      "title": "صوت لأبطال",
+      "titleAccent": "التعليم في أفريقيا",
+      "description": "يساعد صوتك في التعرف على الأفراد والمنظمات المتميزة التي تحول التعليم عبر القارة والاحتفاء بها."
+    },
+    "filters": {
+      "searchPlaceholder": "ابحث عن المرشحين...",
+      "allCategories": "جميع الفئات",
+      "allRegions": "جميع المناطق"
+    },
+    "regions": {
+      "westAfrica": "غرب أفريقيا",
+      "eastAfrica": "شرق أفريقيا",
+      "southernAfrica": "جنوب أفريقيا",
+      "northAfrica": "شمال أفريقيا",
+      "centralAfrica": "وسط أفريقيا"
+    },
+    "stats": {
+      "totalNominees": "إجمالي المرشحين",
+      "categories": "الفئات",
+      "totalVotes": "إجمالي الأصوات",
+      "yourVotes": "أصواتك"
+    },
+    "loading": "جاري تحميل المرشحين...",
+    "empty": {
+      "title": "لم يتم العثور على مرشحين",
+      "description": "حاول تعديل المرشحات لرؤية المزيد من النتائج.",
+      "noApproved": "لا يوجد مرشحون معتمدون متاحون للتصويت حاليًا.",
+      "clearFilters": "مسح المرشحات"
+    },
+    "tabs": {
+      "all": "الكل"
+    },
+    "cta": {
+      "title": "هل تعرف شخصًا يصنع فرقًا؟",
+      "description": "الترشيحات هي الخطوة الأولى للتعرف على صانعي التغيير في التعليم في أفريقيا.",
+      "nominateButton": "رشح صانع تغيير"
+    },
+    "actions": {
+      "vote": "صوت",
+      "voted": "تم التصويت",
+      "voting": "جاري التصويت...",
+      "loginToVote": "يرجى تسجيل الدخول للتصويت",
+      "alreadyVoted": "لقد صوتت بالفعل لهذا المرشح",
+      "voteClosed": "التصويت مغلق حاليًا",
+      "voteSuccess": "تم التصويت بنجاح!",
+      "voteFailed": "فشل التصويت. يرجى المحاولة مرة أخرى."
+    }
+  },
+  "results": {
+    "title": "النتائج",
+    "winners": "الفائزون",
+    "finalists": "المتأهلون للنهائيات",
+    "allResults": "جميع النتائج"
+  },
+  "media": {
+    "title": "مركز الإعلام",
+    "nesaTV": "NESA أفريقيا TV",
+    "webinars": "الندوات عبر الإنترنت",
+    "gala": "حفل الجوائز",
+    "shows": "العروض"
+  },
+  "contact": {
+    "title": "اتصل بنا",
+    "name": "اسمك",
+    "email": "البريد الإلكتروني",
+    "message": "رسالتك",
+    "send": "إرسال الرسالة",
+    "meta": {
+      "title": "اتصل بـ NESA-أفريقيا",
+      "description": "هل لديك أسئلة حول الترشيحات أو الشراكات أو تريد المشاركة؟ نحن هنا للمساعدة."
+    },
+    "hero": {
+      "badge": "تواصل معنا",
+      "title": "اتصل",
+      "titleAccent": "بـ NESA-أفريقيا",
+      "description": "هل لديك أسئلة حول الترشيحات أو الشراكات أو تريد المشاركة؟ نحن هنا للمساعدة."
+    },
+    "info": {
+      "email": {
+        "title": "راسلنا",
+        "description": "للاستفسارات العامة ودعم الترشيحات"
+      },
+      "phone": {
+        "title": "اتصل بنا",
+        "description": "من الاثنين إلى الجمعة، 9 صباحًا - 5 مساءً بتوقيت WAT"
+      },
+      "address": {
+        "title": "زرنا",
+        "description": "الأمانة العامة لعموم أفريقيا"
+      },
+      "hours": {
+        "title": "ساعات العمل",
+        "description": "مغلق أيام الأحد والعطلات الرسمية"
+      }
+    },
+    "form": {
+      "tabs": {
+        "general": "استفسار عام",
+        "presenter": "طلب مقدم"
+      },
+      "fields": {
+        "fullName": "الاسم الكامل",
+        "email": "البريد الإلكتروني",
+        "phone": "رقم الهاتف",
+        "country": "البلد",
+        "department": "القسم",
+        "subject": "الموضوع",
+        "message": "الرسالة"
+      },
+      "submit": {
+        "sending": "جاري الإرسال...",
+        "send": "إرسال الرسالة"
+      }
+    }
   },
   "auth": {
-    "login": { "title": "مرحباً بعودتك", "subtitle": "سجل الدخول لمواصلة الاحتفاء", "email": "البريد الإلكتروني", "emailPlaceholder": "أدخل بريدك", "password": "كلمة المرور", "passwordPlaceholder": "أدخل كلمة المرور", "forgotPassword": "نسيت كلمة المرور؟", "signIn": "تسجيل الدخول", "signingIn": "جاري الدخول...", "noAccount": "ليس لديك حساب؟", "createOne": "أنشئ حساباً", "welcomeBack": "مرحباً بعودتك!", "invalidCredentials": "بيانات غير صحيحة" },
-    "register": { "title": "انضم إلى NESA Africa", "subtitle": "أنشئ حسابك", "fullName": "الاسم الكامل", "fullNamePlaceholder": "أدخل اسمك", "email": "البريد الإلكتروني", "emailPlaceholder": "أدخل بريدك", "password": "كلمة المرور", "passwordPlaceholder": "أنشئ كلمة مرور", "passwordHint": "6 أحرف على الأقل", "referralCode": "رمز الإحالة (اختياري)", "referralCodePlaceholder": "أدخل الرمز", "referralBonus": "🎁 ستحصلان على مكافأة!", "createAccount": "إنشاء حساب", "creatingAccount": "جاري الإنشاء...", "haveAccount": "لديك حساب؟", "signIn": "سجل الدخول", "successMessage": "تم إنشاء الحساب!", "failedMessage": "فشل الإنشاء" }
+    "login": {
+      "title": "مرحبًا بعودتك",
+      "subtitle": "سجل الدخول لمواصلة الاحتفاء بالتميز الأفريقي",
+      "email": "البريد الإلكتروني",
+      "emailPlaceholder": "أدخل بريدك الإلكتروني",
+      "password": "كلمة المرور",
+      "passwordPlaceholder": "أدخل كلمة المرور",
+      "forgotPassword": "نسيت كلمة المرور؟",
+      "signIn": "تسجيل الدخول",
+      "signingIn": "جاري تسجيل الدخول...",
+      "noAccount": "ليس لديك حساب؟",
+      "createOne": "أنشئ واحدًا",
+      "welcomeBack": "مرحبًا بعودتك إلى NESA أفريقيا!",
+      "invalidCredentials": "بيانات اعتماد غير صالحة"
+    },
+    "register": {
+      "title": "انضم إلى NESA أفريقيا",
+      "subtitle": "أنشئ حسابك للترشيح والتصويت والاحتفاء بالتميز الأفريقي",
+      "fullName": "الاسم الكامل",
+      "fullNamePlaceholder": "أدخل اسمك الكامل",
+      "email": "البريد الإلكتروني",
+      "emailPlaceholder": "أدخل بريدك الإلكتروني",
+      "password": "كلمة المرور",
+      "passwordPlaceholder": "أنشئ كلمة مرور",
+      "passwordHint": "6 أحرف على الأقل",
+      "referralCode": "رمز الإحالة (اختياري)",
+      "referralCodePlaceholder": "أدخل رمز الإحالة",
+      "referralBonus": "🎁 ستحصلان كلاكما على مكافأة AGC!",
+      "createAccount": "إنشاء حساب",
+      "creatingAccount": "جاري إنشاء الحساب...",
+      "haveAccount": "لديك حساب بالفعل؟",
+      "signIn": "سجل الدخول",
+      "successMessage": "تم إنشاء الحساب بنجاح! مرحبًا بك في NESA أفريقيا.",
+      "failedMessage": "فشل في إنشاء الحساب"
+    }
   },
-  "footer": { "tagline": "الاحتفاء بأبطال التعليم منذ 2010", "quickLinks": "روابط سريعة", "getInTouch": "تواصل معنا", "scefFoundation": "مؤسسة SCEF", "madeWith": "صنع بـ", "forEducation": "للتعليم الأفريقي", "copyright": "© {{year}} SCEF", "links": { "home": "الرئيسية", "programs": "البرامج", "categories": "الفئات", "nominate": "ترشيح" } }
+  "nominate": {
+    "meta": {
+      "title": "تقديم ترشيح | {{editionName}}"
+    },
+    "header": {
+      "title": "تقديم ترشيح",
+      "breadcrumb": "ترشيح"
+    },
+    "steps": {
+      "category": "الفئة",
+      "nomineeDetails": "تفاصيل المرشح",
+      "evidence": "الأدلة"
+    }
+  },
+  "dashboard": {
+    "title": "لوحة التحكم",
+    "wallet": {
+      "title": "المحفظة",
+      "balance": "الرصيد",
+      "topUp": "شحن",
+      "withdraw": "سحب",
+      "transactions": "المعاملات الأخيرة"
+    }
+  },
+  "footer": {
+    "tagline": "الاحتفاء بأبطال التعليم في أفريقيا منذ 2010",
+    "quickLinks": "روابط سريعة",
+    "getInTouch": "تواصل معنا",
+    "scefFoundation": "مؤسسة SCEF",
+    "madeWith": "صنع بـ",
+    "forEducation": "للتعليم الأفريقي",
+    "copyright": "© {{year}} مؤسسة سانتا كلوز التعليمية",
+    "links": {
+      "home": "الرئيسية",
+      "programs": "البرامج",
+      "categories": "الفئات",
+      "nominate": "ترشيح"
+    }
+  }
 }

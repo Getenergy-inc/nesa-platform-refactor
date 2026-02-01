@@ -1,0 +1,49 @@
+{
+  "user": {
+    "title": "لوحة التحكم",
+    "wallet": "المحفظة",
+    "nominations": "ترشيحاتي",
+    "certificates": "شهاداتي",
+    "profile": "الملف الشخصي"
+  },
+  "wallet": {
+    "balance": "الرصيد",
+    "topUp": "شحن",
+    "withdraw": "سحب",
+    "transactions": "المعاملات",
+    "recentActivity": "النشاط الأخير",
+    "noTransactions": "لا توجد معاملات"
+  },
+  "nrc": {
+    "title": "لوحة تحكم NRC",
+    "queue": "قائمة الانتظار",
+    "pending": "قيد الانتظار",
+    "underReview": "قيد المراجعة",
+    "approved": "تمت الموافقة",
+    "rejected": "مرفوض",
+    "assign": "تعيين لي",
+    "approve": "موافقة",
+    "reject": "رفض",
+    "needsInfo": "يحتاج معلومات"
+  },
+  "jury": {
+    "title": "لوحة تحكم لجنة التحكيم",
+    "assignments": "مهامي",
+    "scoring": "التقييم",
+    "coiDeclaration": "تضارب المصالح",
+    "submitScore": "إرسال الدرجة"
+  },
+  "chapter": {
+    "title": "لوحة تحكم الفرع",
+    "members": "الأعضاء",
+    "performance": "الأداء",
+    "settlements": "التسويات"
+  },
+  "admin": {
+    "title": "لوحة تحكم المسؤول",
+    "overview": "نظرة عامة",
+    "finance": "المالية",
+    "governance": "الحوكمة",
+    "technical": "التقنية"
+  }
+}

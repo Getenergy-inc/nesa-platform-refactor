@@ -1,0 +1,49 @@
+{
+  "user": {
+    "title": "Pánẹ́ẹ̀lì Mi",
+    "wallet": "Àpamọ́wọ́",
+    "nominations": "Àwọn Ìyàn Mi",
+    "certificates": "Àwọn Ìwé-ẹ̀rí Mi",
+    "profile": "Ìpèsè"
+  },
+  "wallet": {
+    "balance": "Ìdókòwò",
+    "topUp": "Fi Kun",
+    "withdraw": "Yọ",
+    "transactions": "Àwọn Ìṣòwò",
+    "recentActivity": "Ìṣe Àìpẹ́",
+    "noTransactions": "Kò sí ìṣòwò"
+  },
+  "nrc": {
+    "title": "Pánẹ́ẹ̀lì NRC",
+    "queue": "Ìtòròsí",
+    "pending": "Ndúró",
+    "underReview": "Ń Ṣàyẹ̀wò",
+    "approved": "Ti Fọwọ́ Sí",
+    "rejected": "Ti Kọ̀",
+    "assign": "Fi Fún Mi",
+    "approve": "Fọwọ́ Sí",
+    "reject": "Kọ̀",
+    "needsInfo": "Nílò Àlàyé"
+  },
+  "jury": {
+    "title": "Pánẹ́ẹ̀lì Onídàájọ́",
+    "assignments": "Àwọn Iṣẹ́ Mi",
+    "scoring": "Ṣíṣe Mákì",
+    "coiDeclaration": "Ìṣòro Àníyàn",
+    "submitScore": "Fi Mákì Ránṣẹ́"
+  },
+  "chapter": {
+    "title": "Pánẹ́ẹ̀lì Ẹ̀ka",
+    "members": "Àwọn Ọmọ Ẹgbẹ́",
+    "performance": "Iṣẹ́",
+    "settlements": "Ìsanwó"
+  },
+  "admin": {
+    "title": "Pánẹ́ẹ̀lì Alákòóso",
+    "overview": "Àkópọ̀",
+    "finance": "Owó",
+    "governance": "Ìṣàkóso",
+    "technical": "Ìmọ̀-ẹ̀rọ"
+  }
+}

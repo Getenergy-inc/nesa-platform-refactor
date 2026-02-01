@@ -1,0 +1,49 @@
+{
+  "user": {
+    "title": "Meu Painel",
+    "wallet": "Carteira",
+    "nominations": "Minhas Nomeações",
+    "certificates": "Meus Certificados",
+    "profile": "Perfil"
+  },
+  "wallet": {
+    "balance": "Saldo",
+    "topUp": "Recarregar",
+    "withdraw": "Sacar",
+    "transactions": "Transações",
+    "recentActivity": "Atividade Recente",
+    "noTransactions": "Sem transações"
+  },
+  "nrc": {
+    "title": "Painel NRC",
+    "queue": "Fila de Revisão",
+    "pending": "Pendente",
+    "underReview": "Em Revisão",
+    "approved": "Aprovado",
+    "rejected": "Rejeitado",
+    "assign": "Atribuir a Mim",
+    "approve": "Aprovar",
+    "reject": "Rejeitar",
+    "needsInfo": "Precisa de Informações"
+  },
+  "jury": {
+    "title": "Painel do Júri",
+    "assignments": "Minhas Atribuições",
+    "scoring": "Pontuação",
+    "coiDeclaration": "Conflito de Interesse",
+    "submitScore": "Enviar Pontuação"
+  },
+  "chapter": {
+    "title": "Painel do Capítulo",
+    "members": "Membros",
+    "performance": "Desempenho",
+    "settlements": "Liquidações"
+  },
+  "admin": {
+    "title": "Painel Admin",
+    "overview": "Visão Geral",
+    "finance": "Finanças",
+    "governance": "Governança",
+    "technical": "Técnico"
+  }
+}

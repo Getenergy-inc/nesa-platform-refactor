@@ -1,0 +1,55 @@
+{
+  "form": {
+    "title": "የስያሜ ቅጽ",
+    "step1": "የተመራጭ መረጃ",
+    "step2": "ምድብ ምርጫ",
+    "step3": "ማስረጃ",
+    "step4": "ማስረጃ",
+    "step5": "ግምገማ እና ማስገባት"
+  },
+  "fields": {
+    "nomineeName": "የተመራጭ ስም",
+    "nomineeEmail": "የተመራጭ ኢሜይል",
+    "nomineePhone": "ስልክ ቁጥር",
+    "organization": "ድርጅት",
+    "title": "ማዕረግ/ቦታ",
+    "country": "ሀገር",
+    "region": "ክልል",
+    "category": "የሽልማት ምድብ",
+    "subcategory": "ንዑስ ምድብ",
+    "justification": "ይህ ተመራጭ ለምን እውቅና ይገባዋል?",
+    "evidence": "ደጋፊ ማስረጃ",
+    "uploadFiles": "ፋይሎችን ይስቀሉ"
+  },
+  "placeholders": {
+    "enterName": "የተመራጩን ሙሉ ስም ያስገቡ",
+    "enterEmail": "nominee@example.com",
+    "enterPhone": "+251 XX XXX XXXX",
+    "enterOrganization": "የድርጅት ወይም ተቋም ስም",
+    "enterTitle": "ለምሳሌ: ዳይሬክተር, ፕሮፌሰር, መምህር",
+    "selectCountry": "ሀገር ይምረጡ",
+    "selectRegion": "ክልል ይምረጡ",
+    "selectCategory": "ምድብ ይምረጡ",
+    "selectSubcategory": "ንዑስ ምድብ ይምረጡ",
+    "writeJustification": "የተመራጩን አስተዋፅዖ እና ተፅዕኖ ይግለፁ..."
+  },
+  "validation": {
+    "required": "ይህ መስክ ያስፈልጋል",
+    "invalidEmail": "እባክዎ ትክክለኛ ኢሜይል ያስገቡ",
+    "invalidPhone": "እባክዎ ትክክለኛ ስልክ ቁጥር ያስገቡ",
+    "minLength": "ቢያንስ {{min}} ቁምፊዎች መሆን አለበት",
+    "maxFiles": "ከፍተኛው {{max}} ፋይሎች"
+  },
+  "status": {
+    "pending": "በመጠባበቅ ላይ",
+    "underReview": "በግምገማ ላይ",
+    "approved": "ፀድቋል",
+    "rejected": "ውድቅ ሆኗል",
+    "platinum": "ፕላቲኒየም"
+  },
+  "messages": {
+    "submitted": "ስያሜ በተሳካ ሁኔታ ቀርቧል!",
+    "thankYou": "ለስያሜዎ እናመሰግናለን። ተመራጩ የመቀበያ ደብዳቤ ይደርሰዋል።",
+    "error": "ማስገባት አልተሳካም። እባክዎ እንደገና ይሞክሩ።"
+  }
+}

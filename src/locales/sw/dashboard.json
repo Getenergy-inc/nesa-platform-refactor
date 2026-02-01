@@ -1,0 +1,49 @@
+{
+  "user": {
+    "title": "Dashibodi Yangu",
+    "wallet": "Pochi",
+    "nominations": "Uteuzi Wangu",
+    "certificates": "Vyeti Vyangu",
+    "profile": "Wasifu"
+  },
+  "wallet": {
+    "balance": "Salio",
+    "topUp": "Jaza",
+    "withdraw": "Ondoa",
+    "transactions": "Miamala",
+    "recentActivity": "Shughuli za Hivi Karibuni",
+    "noTransactions": "Hakuna miamala"
+  },
+  "nrc": {
+    "title": "Dashibodi ya NRC",
+    "queue": "Foleni ya Mapitio",
+    "pending": "Inasubiri",
+    "underReview": "Inakaguliwa",
+    "approved": "Imeidhinishwa",
+    "rejected": "Imekataliwa",
+    "assign": "Jipe Mimi",
+    "approve": "Idhinisha",
+    "reject": "Kataa",
+    "needsInfo": "Inahitaji Maelezo"
+  },
+  "jury": {
+    "title": "Dashibodi ya Juri",
+    "assignments": "Kazi Zangu",
+    "scoring": "Kuendelea Pointi",
+    "coiDeclaration": "Mgongano wa Maslahi",
+    "submitScore": "Wasilisha Pointi"
+  },
+  "chapter": {
+    "title": "Dashibodi ya Sura",
+    "members": "Wanachama",
+    "performance": "Utendaji",
+    "settlements": "Malipo"
+  },
+  "admin": {
+    "title": "Dashibodi ya Msimamizi",
+    "overview": "Muhtasari",
+    "finance": "Fedha",
+    "governance": "Utawala",
+    "technical": "Ufundi"
+  }
+}
