@@ -6,7 +6,8 @@ import { useSeason } from "@/contexts/SeasonContext";
 import { motion, AnimatePresence } from "framer-motion";
 import { useState, useEffect } from "react";
 import { NESALogo3D } from "@/components/nesa/NESALogo3D";
-import stageBackdrop from "@/assets/nesa-stage-backdrop.jpg";
+import stageBackdropVideo from "@/assets/nesa-stage-backdrop-motion.mp4";
+import stageBackdropFallback from "@/assets/nesa-stage-backdrop.jpg";
 import blueGarnetTrophy from "@/assets/blue-garnet-trophy.jpg";
 
 export function TrophyHeroSection() {
@@ -24,13 +25,18 @@ export function TrophyHeroSection() {
 
   return (
     <section className="relative min-h-[90vh] flex items-center bg-charcoal overflow-hidden">
-      {/* Stage Backdrop with Ken Burns Effect */}
+      {/* Stage Backdrop Motion Graphics */}
       <div className="absolute inset-0">
-        <img
-          src={stageBackdrop}
-          alt="NESA-Africa Award Stage"
-          className="absolute inset-0 w-full h-full object-cover object-center animate-ken-burns"
-        />
+        <video
+          autoPlay
+          loop
+          muted
+          playsInline
+          poster={stageBackdropFallback}
+          className="absolute inset-0 w-full h-full object-cover object-center"
+        >
+          <source src={stageBackdropVideo} type="video/mp4" />
+        </video>
         
         {/* Layered overlays for depth and text readability */}
         <div className="absolute inset-0 bg-charcoal/60" />
