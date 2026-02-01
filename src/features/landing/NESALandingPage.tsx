@@ -1,33 +1,27 @@
 // NESA-Africa Landing Page Feature
-// Main entry point that assembles all landing page sections
+// Marketing-led welcome page with visual storytelling and governance integrity
 
 import { Helmet } from "react-helmet-async";
-import { NESAHeader } from "@/components/nesa/NESAHeader";
-import { NESAHero } from "@/components/nesa/NESAHero";
-import { QuickActionBar } from "@/components/nesa/QuickActionBar";
-import { KeyDatesBanner } from "@/components/nesa/KeyDatesBanner";
+import { TrophyHeroSection } from "@/components/nesa/TrophyHeroSection";
+import { TrustLogosStrip } from "@/components/nesa/TrustLogosStrip";
+import { WhatsLiveSection } from "@/components/nesa/WhatsLiveSection";
+import { NominationPathsCards } from "@/components/nesa/NominationPathsCards";
+import { VoteWithAGCSection } from "@/components/nesa/VoteWithAGCSection";
+import { HowItWorksVisual } from "@/components/nesa/HowItWorksVisual";
+import { LegacyImpactSection } from "@/components/nesa/LegacyImpactSection";
+import { IntegritySection } from "@/components/nesa/IntegritySection";
+import { WatchSection } from "@/components/nesa/WatchSection";
+import { NomineesShowcaseSection } from "@/components/nesa/NomineesShowcaseSection";
 import { UpcomingEventsSection } from "@/components/nesa/UpcomingEventsSection";
-import { NominationPathSection } from "@/components/nesa/NominationPathSection";
-import { StatsStrip } from "@/components/nesa/StatsStrip";
-import { ProgrammeOverviewSection } from "@/components/nesa/ProgrammeOverviewSection";
-import { Phase1Section } from "@/components/nesa/Phase1Section";
 import { AwardPhasesSection } from "@/components/nesa/AwardPhasesSection";
 import { TimelineSection } from "@/components/nesa/TimelineSection";
-import { LegacySection } from "@/components/nesa/LegacySection";
-import { QuoteBlock } from "@/components/nesa/QuoteBlock";
-import { HowItWorksSection } from "@/components/nesa/HowItWorksSection";
-import { WatchLiveSection } from "@/components/nesa/WatchLiveSection";
-import { GetInvolvedSection } from "@/components/nesa/GetInvolvedSection";
-import { FirewallsSection } from "@/components/nesa/FirewallsSection";
-import { NomineesShowcaseSection } from "@/components/nesa/NomineesShowcaseSection";
 import { SponsorsSection } from "@/components/nesa/SponsorsSection";
-import { EndorsedBySection } from "@/components/nesa/EndorsedBySection";
-import { CategoriesSection } from "@/components/nesa/CategoriesSection";
 import { JudgesSection } from "@/components/nesa/JudgesSection";
-import { VisionDocumentSection } from "@/components/nesa/VisionDocumentSection";
-import { WatchMediaSection } from "@/components/nesa/WatchMediaSection";
+import { CategoriesSection } from "@/components/nesa/CategoriesSection";
 import { FinalCTASection } from "@/components/nesa/FinalCTASection";
 import { NESAFooter } from "@/components/nesa/NESAFooter";
+import { NESAHeader } from "@/components/nesa/NESAHeader";
+import { QuickActionBar } from "@/components/nesa/QuickActionBar";
 import { useSeason } from "@/contexts/SeasonContext";
 
 export function NESALandingPage() {
@@ -50,63 +44,54 @@ export function NESALandingPage() {
       <div className="min-h-screen bg-charcoal">
         <NESAHeader />
         
-        {/* 1. Hero - Conversion-first with AGC messaging */}
-        <NESAHero />
+        {/* 1. Trophy Hero - Conversion-first with Blue Garnet visual */}
+        <TrophyHeroSection />
         
-        {/* 2. Quick Action Bar - Sticky on mobile */}
+        {/* 2. Trust Logos Strip - Endorsements & sponsors immediately after hero */}
+        <TrustLogosStrip />
+        
+        {/* 3. Quick Action Bar - Mobile-sticky CTAs */}
         <QuickActionBar />
         
-        {/* Key Dates Banner */}
-        <KeyDatesBanner />
+        {/* 4. What's Live - Dynamic blocks encouraging repeat visits */}
+        <WhatsLiveSection />
         
-        {/* 3. Upcoming Events - Live Countdown */}
+        {/* 5. Nomination Paths - Scannable cards with clear CTAs */}
+        <NominationPathsCards />
+        
+        {/* 6. Vote with AGC - Visual storytelling block */}
+        <VoteWithAGCSection />
+        
+        {/* 7. How It Works - Icon flow journey */}
+        <HowItWorksVisual />
+        
+        {/* 8. Legacy Impact - Rebuild My School Africa */}
+        <LegacyImpactSection />
+        
+        {/* 9. Integrity Section - Firewalls & governance (moved higher) */}
+        <IntegritySection />
+        
+        {/* 10. Upcoming Events - Countdown timers */}
         <UpcomingEventsSection />
         
-        {/* 4. Choose Your Path - Nomination paths */}
-        <NominationPathSection />
-        
-        {/* Stats Strip - De-emphasized */}
-        <StatsStrip />
-        
-        {/* 5. Programme Overview with AGC note */}
-        <ProgrammeOverviewSection />
-        
-        {/* 6. Award Phases with Vote with AGC */}
+        {/* 11. Award Phases - Programme details */}
         <AwardPhasesSection />
         
-        {/* 7. Programme Timeline with AGC tooltips */}
+        {/* 12. Timeline - Full programme timeline */}
         <TimelineSection />
         
-        {/* 8. Post-Award Legacy: Rebuild My School Africa */}
-        <LegacySection />
+        {/* 13. Watch Section - Media engagement */}
+        <WatchSection />
         
-        {/* Quote Block */}
-        <QuoteBlock />
-        
-        {/* 9. How NESA Works with AGC note */}
-        <HowItWorksSection />
-        
-        {/* 10. Watch Live */}
-        <WatchLiveSection />
-        
-        {/* Get Involved */}
-        <GetInvolvedSection />
-        
-        {/* 11. Firewalls & Integrity - Moved higher, with AGC disclaimer */}
-        <FirewallsSection />
-        
-        {/* 12. Digital Nominees Board */}
+        {/* 14. Digital Nominees Board */}
         <NomineesShowcaseSection />
         
-        {/* 13. Partners, Sponsors, Judges, Categories, Vision, Media */}
-        <EndorsedBySection />
+        {/* 15. Sponsors, Judges, Categories - Supporting sections */}
         <SponsorsSection />
         <JudgesSection />
         <CategoriesSection />
-        <VisionDocumentSection />
-        <WatchMediaSection />
         
-        {/* Final CTA */}
+        {/* 16. Final CTA */}
         <FinalCTASection />
         
         <NESAFooter />
