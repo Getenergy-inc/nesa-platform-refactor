@@ -89,25 +89,50 @@ export function VoteWithAGCSection() {
               points that let you support nominees for <span className="text-gold">Gold</span> and <span className="text-blue-400">Blue Garnet</span> awards.
             </p>
             
-            {/* Earning Methods Highlight */}
-            <div className="grid grid-cols-2 gap-3 mb-6">
+            {/* Earning Methods Highlight - Expanded Grid */}
+            <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 mb-6">
               <div className="p-3 rounded-xl bg-gold/5 border border-gold/20">
-                <p className="text-gold font-semibold text-sm">+5 AGC</p>
-                <p className="text-white/60 text-xs">Per Verified Nomination</p>
+                <p className="text-gold font-semibold text-sm">+5 AGCc</p>
+                <p className="text-white/60 text-xs">Verified Nomination</p>
               </div>
               <div className="p-3 rounded-xl bg-gold/5 border border-gold/20">
-                <p className="text-gold font-semibold text-sm">+1 AGC</p>
-                <p className="text-white/60 text-xs">Daily Sign-in Bonus</p>
+                <p className="text-gold font-semibold text-sm">+1 AGCc</p>
+                <p className="text-white/60 text-xs">Daily Sign-in</p>
               </div>
               <div className="p-3 rounded-xl bg-gold/5 border border-gold/20">
                 <p className="text-gold font-semibold text-sm">+15 AGC</p>
-                <p className="text-white/60 text-xs">First Referral Payment</p>
+                <p className="text-white/60 text-xs">First Referral</p>
+              </div>
+              <div className="p-3 rounded-xl bg-gold/5 border border-gold/20">
+                <p className="text-gold font-semibold text-sm">+5 AGC</p>
+                <p className="text-white/60 text-xs">Second Referral</p>
+              </div>
+              <div className="p-3 rounded-xl bg-gold/5 border border-gold/20">
+                <p className="text-gold font-semibold text-sm">+1 AGCc</p>
+                <p className="text-white/60 text-xs">Watch NESA TV</p>
+              </div>
+              <div className="p-3 rounded-xl bg-gold/5 border border-gold/20">
+                <p className="text-gold font-semibold text-sm">+1 AGCc</p>
+                <p className="text-white/60 text-xs">Social Sharing</p>
+              </div>
+              <div className="p-3 rounded-xl bg-gold/5 border border-gold/20">
+                <p className="text-gold font-semibold text-sm">+2 AGCc</p>
+                <p className="text-white/60 text-xs">Signup & Verify</p>
+              </div>
+              <div className="p-3 rounded-xl bg-gold/5 border border-gold/20">
+                <p className="text-gold font-semibold text-sm">Sponsor</p>
+                <p className="text-white/60 text-xs">Funded AGC</p>
               </div>
               <div className="p-3 rounded-xl bg-blue-500/5 border border-blue-500/20">
                 <p className="text-blue-400 font-semibold text-sm">1 Vote = 1 AGC</p>
-                <p className="text-white/60 text-xs">Simple, Transparent</p>
+                <p className="text-white/60 text-xs">Simple Voting</p>
               </div>
             </div>
+            
+            {/* Conversion Note */}
+            <p className="text-xs text-white/50 mb-4 p-2 rounded-lg bg-white/5 border border-white/10">
+              💡 <span className="text-gold">10 AGCc = 1 AGC</span> — AGCc auto-converts to AGC for voting.
+            </p>
 
             {/* Key Points */}
             <ul className="space-y-3 mb-8">
