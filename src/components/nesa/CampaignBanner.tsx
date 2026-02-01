@@ -1,3 +1,12 @@
+/**
+ * CampaignBanner Component
+ * 
+ * INTERNAL CONSISTENCY NOTE (NOT PUBLIC):
+ * Platinum Certificate submissions include both new nominations and 
+ * re-nominations with enhanced impact data and supporting evidence.
+ * Both pathways are reviewed using identical Platinum impact standards.
+ */
+
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Award, ArrowRight, CheckCircle2, Sparkles, RefreshCw } from "lucide-react";
