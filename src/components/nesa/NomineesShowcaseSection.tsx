@@ -234,13 +234,15 @@ export function NomineesShowcaseSection() {
             ))}
           </div>
         ) : filteredNominees.length === 0 ? (
-          <div className="text-center py-16">
+          <div className="text-center py-16 bg-white/5 rounded-2xl border border-gold/20">
             <Award className="h-16 w-16 text-gold/30 mx-auto mb-4" />
             <h3 className="text-xl font-semibold text-white mb-2">No Nominees Yet</h3>
-            <p className="text-white/60 mb-6">Be the first to nominate a changemaker!</p>
-            <Button asChild className="bg-gold hover:bg-gold-dark text-charcoal">
+            <p className="text-white/60 mb-6 max-w-md mx-auto">
+              Be the first to nominate a changemaker and help recognize Africa's education heroes!
+            </p>
+            <Button asChild size="lg" className="bg-gold hover:bg-gold-dark text-charcoal font-semibold rounded-full px-8">
               <Link to="/nominate">
-                Nominate Now
+                Be the First to Nominate
                 <ChevronRight className="ml-2 h-4 w-4" />
               </Link>
             </Button>

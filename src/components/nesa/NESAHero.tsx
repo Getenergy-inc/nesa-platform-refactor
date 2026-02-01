@@ -1,7 +1,8 @@
-import { Trophy, Users, Award, FileText, Ticket, PlayCircle, Sparkles, ArrowRight } from "lucide-react";
+import { Trophy, Users, Award, FileText, Ticket, PlayCircle, Sparkles, ArrowRight, Vote, Coins } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
 import { useSeason } from "@/contexts/SeasonContext";
 import { NESALogo3D } from "@/components/nesa/NESALogo3D";
 import stageBackdrop from "@/assets/nesa-stage-backdrop.jpg";
@@ -12,11 +13,11 @@ export function NESAHero() {
   const bannerText = getBannerText();
 
   const quickNavItems = [
-    { icon: Users, label: t("landing.hero.quickNav.refer"), href: "#refer" },
-    { icon: Award, label: t("landing.hero.quickNav.nominate"), href: "/nominate" },
-    { icon: FileText, label: t("landing.hero.quickNav.vision"), href: "/about/vision-2035" },
-    { icon: Ticket, label: t("landing.hero.quickNav.tickets"), href: "/tickets" },
-    { icon: PlayCircle, label: t("landing.hero.quickNav.watch"), href: "/media/tv" },
+    { icon: Users, label: "Refer", href: "#refer" },
+    { icon: Award, label: "Nominate", href: "/nominate" },
+    { icon: FileText, label: "Vision 2035", href: "/about/vision-2035" },
+    { icon: Ticket, label: "Tickets", href: "/buy-your-ticket" },
+    { icon: PlayCircle, label: "Watch", href: "/media/tv" },
   ];
 
   return (
@@ -85,47 +86,77 @@ export function NESAHero() {
           {t("landing.hero.tagline")}
         </p>
 
-        {/* Description - Professional tone */}
-        <p className="text-white/75 text-sm sm:text-base md:text-lg max-w-3xl mb-8 sm:mb-10 leading-relaxed px-4 sm:px-6 animate-fade-in" style={{ animationDelay: '0.4s' }}>
-          {t("landing.hero.description", { edition: currentEdition.name })}
+        {/* NEW: Compelling description paragraph */}
+        <p className="text-white/75 text-sm sm:text-base md:text-lg max-w-3xl mb-6 leading-relaxed px-4 sm:px-6 animate-fade-in" style={{ animationDelay: '0.4s' }}>
+          The New Education Standard Award Africa (NESA-Africa) celebrates visionary leaders, institutions, and innovators building the future of education across Africa—while funding measurable legacy impact through Rebuild My School Africa.
         </p>
 
-        {/* CTA Buttons - Sophisticated hover effects */}
+        {/* NEW: AGC Voting Strip */}
+        <div className="flex items-center gap-2 px-4 sm:px-6 py-2.5 rounded-full bg-gold/10 border border-gold/30 mb-6 sm:mb-8 animate-fade-in" style={{ animationDelay: '0.45s' }}>
+          <Coins className="h-4 w-4 text-gold" />
+          <span className="text-sm text-white/90">
+            Earn voting points through participation. <span className="text-gold font-medium">Vote with AGC</span> for Gold and Blue Garnet winners.
+          </span>
+        </div>
+
+        {/* PRIMARY CTA Buttons - Conversion focused */}
         <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 w-full sm:w-auto px-4 sm:px-0 animate-fade-in" style={{ animationDelay: '0.5s' }}>
-          <Link to="/about" className="w-full sm:w-auto group">
+          {/* Primary: Nominate Now */}
+          <Link to="/nominate" className="w-full sm:w-auto group">
             <Button
               size="lg"
               className="w-full sm:w-auto bg-gold hover:bg-gold-dark text-charcoal font-semibold rounded-full px-6 sm:px-8 gap-2 shadow-lg hover:shadow-gold/30 min-h-[48px] touch-manipulation transition-all duration-300"
             >
-              {t("landing.hero.discoverMore")}
+              <Trophy className="h-4 w-4" />
+              Nominate Now
               <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
             </Button>
           </Link>
-          <Link to="/nominate" className="w-full sm:w-auto group">
+          
+          {/* Primary: Vote — Gold Certificate */}
+          <Link to="/vote?tier=gold" className="w-full sm:w-auto group">
             <Button
               size="lg"
-              variant="outline"
-              className="w-full sm:w-auto border-2 border-gold text-gold hover:bg-gold/10 hover:border-gold-light rounded-full px-6 sm:px-8 gap-2 min-h-[48px] touch-manipulation transition-all duration-300"
+              className="w-full sm:w-auto bg-[hsl(45,100%,50%)] hover:bg-[hsl(45,100%,45%)] text-charcoal font-semibold rounded-full px-6 sm:px-8 gap-2 shadow-lg min-h-[48px] touch-manipulation transition-all duration-300"
             >
-              <Trophy className="h-4 w-4" />
-              {t("landing.hero.nominateNow")}
+              <Vote className="h-4 w-4" />
+              Vote — Gold Certificate
+            </Button>
+          </Link>
+          
+          {/* Primary: Vote — Blue Garnet Award */}
+          <Link to="/vote?tier=bluegarnet" className="w-full sm:w-auto group">
+            <Button
+              size="lg"
+              className="w-full sm:w-auto bg-[hsl(220,70%,50%)] hover:bg-[hsl(220,70%,45%)] text-white font-semibold rounded-full px-6 sm:px-8 gap-2 shadow-lg min-h-[48px] touch-manipulation transition-all duration-300"
+            >
+              <Award className="h-4 w-4" />
+              Vote — Blue Garnet Award
             </Button>
           </Link>
         </div>
 
-        {/* Stats preview - Clean and professional */}
-        <div className="flex flex-wrap justify-center gap-4 sm:gap-8 mt-8 sm:mt-10 animate-fade-in" style={{ animationDelay: '0.6s' }}>
+        {/* Secondary: Discover More */}
+        <div className="mt-4 animate-fade-in" style={{ animationDelay: '0.55s' }}>
+          <Link to="/about" className="group inline-flex items-center gap-2 text-gold/80 hover:text-gold transition-colors">
+            <span className="text-sm underline-offset-4 hover:underline">Discover More</span>
+            <ArrowRight className="h-3.5 w-3.5 group-hover:translate-x-1 transition-transform" />
+          </Link>
+        </div>
+
+        {/* Stats preview - De-emphasized but present */}
+        <div className="flex flex-wrap justify-center gap-4 sm:gap-6 mt-8 sm:mt-10 animate-fade-in opacity-70" style={{ animationDelay: '0.6s' }}>
           {[
             { label: t("landing.hero.stats.nominees"), value: "2,500+" },
             { label: t("landing.hero.stats.countries"), value: "54" },
             { label: t("landing.hero.stats.categories"), value: "17" },
-          ].map((stat, i) => (
+          ].map((stat) => (
             <div 
               key={stat.label}
-              className="flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 backdrop-blur-sm border border-white/10"
+              className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5 backdrop-blur-sm border border-white/10 text-sm"
             >
-              <span className="text-gold font-bold">{stat.value}</span>
-              <span className="text-white/60 text-sm">{stat.label}</span>
+              <span className="text-gold/80 font-medium">{stat.value}</span>
+              <span className="text-white/50 text-xs">{stat.label}</span>
             </div>
           ))}
         </div>
