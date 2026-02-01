@@ -6,9 +6,11 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { GFAWalletIcon } from "@/components/ui/GFAWalletIcon";
-import { Loader2, ArrowUpRight, ArrowDownLeft, Gift, Vote, Ticket, Users, ShoppingBag } from "lucide-react";
+import { Loader2, ArrowUpRight, ArrowDownLeft, Gift, Vote, Ticket, Users, ShoppingBag, Sparkles, Share2 } from "lucide-react";
 import { useAuth } from "@/contexts/AuthContext";
 import { supabase } from "@/integrations/supabase/client";
+import { ReferralLinkCard } from "@/components/tickets";
+import { AGC_NON_TRADEABLE_DISCLAIMER, AGC_BONUS_RATES } from "@/constants/agc";
 
 interface WalletBalance {
   agc_total: number;
@@ -32,19 +34,23 @@ const REASON_ICONS: Record<string, React.ElementType> = {
   VOTE_SPEND: Vote,
   TICKET_BONUS: Ticket,
   REFERRAL_BONUS: Users,
+  REFERRAL_BONUS_TICKET: Users,
   SHOP_BONUS: ShoppingBag,
   DAILY_SIGNIN: Gift,
   NOMINATION_REWARD: Gift,
+  BONUS_FOR_PAYMENT: Ticket,
 };
 
 const REASON_LABELS: Record<string, string> = {
-  SPONSOR_PUBLIC_CREDIT: "Sponsor Credit",
+  SPONSOR_PUBLIC_CREDIT: "Sponsor Pool Credit",
   VOTE_SPEND: "Vote Spend",
-  TICKET_BONUS: "Ticket Bonus",
-  REFERRAL_BONUS: "Referral Bonus",
-  SHOP_BONUS: "Shop Bonus",
+  TICKET_BONUS: "Ticket Bonus AGC",
+  REFERRAL_BONUS: "Referral Bonus AGC",
+  REFERRAL_BONUS_TICKET: "Referral Bonus AGC",
+  SHOP_BONUS: "Shop Bonus AGC",
   DAILY_SIGNIN: "Daily Sign-in",
   NOMINATION_REWARD: "Nomination Reward",
+  BONUS_FOR_PAYMENT: "Ticket Bonus AGC",
 };
 
 export default function Wallet() {
@@ -166,9 +172,15 @@ export default function Wallet() {
 
                   <div className="mt-6 flex flex-wrap gap-3">
                     <Button asChild>
-                      <Link to="/vote-with-agc">
+                      <Link to="/vote">
                         <Vote className="mr-2 h-4 w-4" />
                         Vote with AGC
+                      </Link>
+                    </Button>
+                    <Button variant="outline" asChild>
+                      <Link to="/earn-voting-credits">
+                        <Sparkles className="mr-2 h-4 w-4" />
+                        Earn More
                       </Link>
                     </Button>
                     <Button variant="outline" asChild>
@@ -180,6 +192,11 @@ export default function Wallet() {
                   </div>
                 </CardContent>
               </Card>
+
+              {/* Referral Section */}
+              <div className="mb-8">
+                <ReferralLinkCard />
+              </div>
 
               {/* Transactions */}
               <Card className="bg-card border-border mb-8">
@@ -246,10 +263,18 @@ export default function Wallet() {
                         <ul className="space-y-2 text-sm">
                           <li>• Daily sign-in: +1 AGCc</li>
                           <li>• Verified nominations: +5 AGCc</li>
-                          <li>• Referral bonuses: +15 AGC (first purchase), +5 AGC (second)</li>
-                          <li>• Shop purchases: $1 = 5 AGC bonus</li>
+                          <li>• Ticket/shop purchase: ${AGC_BONUS_RATES.purchaseBonus} AGC per $1 spent</li>
+                          <li>• Referral bonus: +{AGC_BONUS_RATES.referralFirstPurchase} AGC (first purchase), +{AGC_BONUS_RATES.referralSecondPurchase} AGC (second)</li>
                           <li>• Sponsor campaigns: varies by sponsor</li>
                         </ul>
+                        <div className="mt-3">
+                          <Button asChild size="sm" variant="outline">
+                            <Link to="/earn-voting-credits">
+                              <Sparkles className="mr-2 h-3 w-3" />
+                              View All Earning Methods
+                            </Link>
+                          </Button>
+                        </div>
                       </AccordionContent>
                     </AccordionItem>
                     <AccordionItem value="can-withdraw">
@@ -268,7 +293,7 @@ export default function Wallet() {
                   {/* Disclaimer */}
                   <div className="mt-6 p-4 bg-warning/10 border border-warning/30 rounded-lg">
                     <p className="text-xs text-warning text-center">
-                      ⚠️ AGC is non-tradeable voting credit — no withdrawals, no cash-out, no payouts.
+                      ⚠️ {AGC_NON_TRADEABLE_DISCLAIMER}
                     </p>
                   </div>
                 </CardContent>

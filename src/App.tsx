@@ -63,6 +63,8 @@ import Contact from "./pages/Contact";
 import Vote from "./pages/Vote";
 import VoteWithAGC from "./pages/VoteWithAGC";
 import AboutAGC from "./pages/AboutAGC";
+import EarnVotingCredits from "./pages/EarnVotingCredits";
+import ClaimVotingCredits from "./pages/ClaimVotingCredits";
 import Tickets from "./pages/Tickets";
 import BuyYourTicket from "./pages/BuyYourTicket";
 import GFAWzipWallet from "./pages/GFAWzipWallet";
@@ -164,6 +166,8 @@ const App = () => (
                 <Route path="/vote" element={<WithLayout><Vote /></WithLayout>} />
                 <Route path="/vote-with-agc" element={<WithLayout><VoteWithAGC /></WithLayout>} />
                 <Route path="/about-agc" element={<WithLayout><AboutAGC /></WithLayout>} />
+                <Route path="/earn-voting-credits" element={<WithLayout><EarnVotingCredits /></WithLayout>} />
+                <Route path="/claim-voting-credits" element={<WithLayout><ClaimVotingCredits /></WithLayout>} />
                 <Route path="/gfawzip" element={<GFAWzipWallet />} />
                 <Route path="/gfawzip/links" element={<GFAWzipLinks />} />
                 <Route path="/wallet/gfawzip" element={<GFAWzipWallet />} />

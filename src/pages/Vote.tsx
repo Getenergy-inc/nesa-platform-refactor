@@ -10,7 +10,10 @@ import {
   Users, 
   ThumbsUp,
   Loader2,
-  AlertCircle
+  AlertCircle,
+  Wallet,
+  Sparkles,
+  Gift
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -258,10 +261,34 @@ export default function Vote() {
                 Vote for Africa's{" "}
                 <span className="text-gold">Education Champions</span>
               </h1>
-              <p className="text-white/70 text-lg mb-8">
-                Your vote helps recognize and celebrate the outstanding individuals and 
-                organizations transforming education across the continent.
+              <p className="text-white/70 text-lg mb-4">
+                Voting uses AGC voting credits. <span className="font-semibold text-gold">1 vote = 1 AGC</span>
               </p>
+              <p className="text-white/60 text-sm mb-6">
+                AGC is non-tradeable: no cash-out, no withdrawals, no payouts.
+              </p>
+              
+              {/* Action Buttons */}
+              <div className="flex flex-wrap justify-center gap-3 mb-8">
+                <Button asChild variant="outline" className="border-white/30 text-white hover:bg-white/10">
+                  <Link to="/wallet">
+                    <Wallet className="mr-2 h-4 w-4" />
+                    View My Wallet
+                  </Link>
+                </Button>
+                <Button asChild className="bg-gold hover:bg-gold-dark text-charcoal">
+                  <Link to="/earn-voting-credits">
+                    <Sparkles className="mr-2 h-4 w-4" />
+                    Earn Voting Credits
+                  </Link>
+                </Button>
+                <Button asChild variant="outline" className="border-gold/50 text-gold hover:bg-gold/10">
+                  <Link to="/claim-voting-credits">
+                    <Gift className="mr-2 h-4 w-4" />
+                    Claim Sponsor Credits
+                  </Link>
+                </Button>
+              </div>
             </div>
           </div>
         </section>
