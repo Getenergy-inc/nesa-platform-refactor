@@ -46,7 +46,7 @@ export function TrustLogosStrip() {
                   <img
                     src={logo.src}
                     alt={logo.name}
-                    className="max-h-full max-w-full object-contain filter brightness-0 invert opacity-50 hover:opacity-80 transition-opacity"
+                    className="max-h-full max-w-full object-contain opacity-90 hover:opacity-100 hover:scale-110 transition-all duration-300"
                   />
                 </div>
               ))}
