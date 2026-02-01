@@ -63,21 +63,27 @@ export function NESALogo3D({ className, size = "lg" }: NESALogo3DProps) {
         }}
       />
 
-      {/* 3D Container with floating animation */}
+      {/* 3D Container with 360 degree rotation */}
       <motion.div
         className="relative h-full w-full"
         style={{
           transformStyle: "preserve-3d",
         }}
         animate={{
-          rotateY: [0, 15, 0, -15, 0],
-          rotateX: [0, 10, 0, -10, 0],
-          y: [0, -8, 0, -8, 0],
+          rotateY: 360,
+          y: [0, -6, 0],
         }}
         transition={{
-          duration: 8,
-          repeat: Infinity,
-          ease: "easeInOut",
+          rotateY: {
+            duration: 6,
+            repeat: Infinity,
+            ease: "linear",
+          },
+          y: {
+            duration: 3,
+            repeat: Infinity,
+            ease: "easeInOut",
+          },
         }}
       >
         {/* Back shadow layer for depth */}
