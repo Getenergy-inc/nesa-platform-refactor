@@ -1,18 +1,10 @@
 import { Award, Shield } from "lucide-react";
 import csacefa from "@/assets/endorsements/csacefa.png";
 import faweKenya from "@/assets/endorsements/fawe-kenya.png";
-import scef from "@/assets/endorsements/scef.png";
-import gfawzip from "@/assets/endorsements/gfawzip.png";
-import pancokrato from "@/assets/endorsements/pancokrato.png";
-import getenergy from "@/assets/endorsements/getenergy.png";
 
 const logos = [
   { id: "csacefa", name: "CSACEFA", src: csacefa },
   { id: "fawe", name: "FAWE Kenya", src: faweKenya },
-  { id: "scef", name: "Santos Creations Educational Foundation", src: scef },
-  { id: "gfawzip", name: "GFA Wzip", src: gfawzip },
-  { id: "pancokrato", name: "PancoKrato Integrated Services", src: pancokrato },
-  { id: "getenergy", name: "GetEnergy.ng", src: getenergy },
 ];
 
 export function TrustLogosStrip() {
