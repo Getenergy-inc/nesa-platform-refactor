@@ -4,6 +4,7 @@
 import { Helmet } from "react-helmet-async";
 import { TrophyHeroSection } from "@/components/nesa/TrophyHeroSection";
 import { TrustLogosStrip } from "@/components/nesa/TrustLogosStrip";
+import { CampaignBanner } from "@/components/nesa/CampaignBanner";
 import { WhatsLiveSection } from "@/components/nesa/WhatsLiveSection";
 import { NominationPathsCards } from "@/components/nesa/NominationPathsCards";
 import { VoteWithAGCSection } from "@/components/nesa/VoteWithAGCSection";
@@ -49,7 +50,10 @@ export function NESALandingPage() {
         {/* 2. Trust Logos Strip - Endorsements & sponsors immediately after hero */}
         <TrustLogosStrip />
         
-        {/* 3. Quick Action Bar - Mobile-sticky CTAs */}
+        {/* 3. Campaign Banner - 2025 Nominations Open */}
+        <CampaignBanner />
+        
+        {/* 4. Quick Action Bar - Mobile-sticky CTAs */}
         <QuickActionBar />
         
         {/* 4. What's Live - Dynamic blocks encouraging repeat visits */}
