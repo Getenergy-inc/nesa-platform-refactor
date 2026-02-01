@@ -77,17 +77,37 @@ export function VoteWithAGCSection() {
             {/* Badge */}
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gold/10 border border-gold/30 mb-6">
               <Coins className="h-4 w-4 text-gold" />
-              <span className="text-sm font-medium text-gold">Structured Public Participation</span>
+              <span className="text-sm font-medium text-gold">Earn. Vote. Impact.</span>
             </div>
 
             <h2 className="font-display text-3xl md:text-4xl font-bold text-white mb-4">
-              Vote with <span className="text-gold">AGC</span>
+              Earn Voting Points. <span className="text-gold">Vote with AGC.</span>
             </h2>
 
-            <p className="text-white/70 text-lg mb-6 leading-relaxed">
-              Afri Gold Coins (AGC) are voting points earned through your participation on the NESA-Africa platform. 
-              They enable structured, auditable public input during official voting windows.
+            <p className="text-white/70 text-lg mb-4 leading-relaxed">
+              Your participation on NESA-Africa earns you <span className="text-gold font-semibold">Afri Gold Coins (AGC)</span>—voting 
+              points that let you support nominees for <span className="text-gold">Gold</span> and <span className="text-blue-400">Blue Garnet</span> awards.
             </p>
+            
+            {/* Earning Methods Highlight */}
+            <div className="grid grid-cols-2 gap-3 mb-6">
+              <div className="p-3 rounded-xl bg-gold/5 border border-gold/20">
+                <p className="text-gold font-semibold text-sm">+5 AGC</p>
+                <p className="text-white/60 text-xs">Per Verified Nomination</p>
+              </div>
+              <div className="p-3 rounded-xl bg-gold/5 border border-gold/20">
+                <p className="text-gold font-semibold text-sm">+1 AGC</p>
+                <p className="text-white/60 text-xs">Daily Sign-in Bonus</p>
+              </div>
+              <div className="p-3 rounded-xl bg-gold/5 border border-gold/20">
+                <p className="text-gold font-semibold text-sm">+15 AGC</p>
+                <p className="text-white/60 text-xs">First Referral Payment</p>
+              </div>
+              <div className="p-3 rounded-xl bg-blue-500/5 border border-blue-500/20">
+                <p className="text-blue-400 font-semibold text-sm">1 Vote = 1 AGC</p>
+                <p className="text-white/60 text-xs">Simple, Transparent</p>
+              </div>
+            </div>
 
             {/* Key Points */}
             <ul className="space-y-3 mb-8">
