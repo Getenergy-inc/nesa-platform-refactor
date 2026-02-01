@@ -11,6 +11,7 @@ import {
   PaymentSteps,
   EarningMethods,
   GFAWzipFAQ,
+  FintechLinksGrid,
 } from "@/components/gfawzip";
 import {
   ExternalLink,
@@ -250,29 +251,7 @@ export default function GFAWzipWallet() {
           </div>
         </section>
 
-        {/* Multi-Currency */}
-        <section className="py-16">
-          <div className="container mx-auto px-4">
-            <div className="max-w-4xl mx-auto text-center">
-              <h2 className="text-3xl font-display font-bold text-foreground mb-6">
-                Multi-Currency Payments
-              </h2>
-              <p className="text-muted-foreground mb-8 max-w-2xl mx-auto">
-                Pay in any currency; available payment methods appear based on your location.
-              </p>
-              <div className="flex flex-wrap justify-center gap-3">
-                {["Paystack", "Transactpay", "TapTap Send", "Zelle", "Bancable"].map((method) => (
-                  <Badge key={method} variant="secondary" className="text-sm py-2 px-4">
-                    {method}
-                  </Badge>
-                ))}
-              </div>
-              <p className="text-xs text-muted-foreground mt-4">
-                Additional options may appear depending on location/currency.
-              </p>
-            </div>
-          </div>
-        </section>
+        <FintechLinksGrid />
 
         <EarningMethods />
         <PaymentSteps />
