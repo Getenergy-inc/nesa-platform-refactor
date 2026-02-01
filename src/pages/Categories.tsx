@@ -23,6 +23,7 @@ import {
   type CategoryScope,
   type AwardTier,
 } from "@/config/nesaCategories";
+import { getCategoryImage } from "@/config/categoryImages";
 
 // Icon mapping for category icons
 const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
@@ -330,24 +331,51 @@ export default function Categories() {
                     open={isExpanded}
                     onOpenChange={() => toggleCategory(category.id)}
                   >
-                    <Card className="overflow-hidden transition-all hover:shadow-lg">
-                      <div className={`h-1 ${tier.bgColor.replace('bg-', 'bg-')}`} />
-                      <CardHeader className="pb-2">
-                        <div className="flex items-start justify-between gap-2">
-                          <div 
-                            className={`flex h-12 w-12 items-center justify-center rounded-full ${tier.bgColor}`}
-                          >
-                            <Icon className={`h-6 w-6 ${tier.color}`} />
-                          </div>
-                          <div className="flex flex-col items-end gap-1">
-                            <Badge variant="outline" className={`text-xs ${scopeBadge.className}`}>
-                              {scopeBadge.label}
-                            </Badge>
-                            <Badge variant="outline" className={`text-xs ${tier.bgColor} ${tier.color} ${tier.borderColor}`}>
-                              {tier.shortName}
-                            </Badge>
+                    <Card className="overflow-hidden transition-all hover:shadow-lg group">
+                      {/* Category Image */}
+                      {getCategoryImage(category.slug) && (
+                        <div className="relative h-40 overflow-hidden">
+                          <img 
+                            src={getCategoryImage(category.slug)!} 
+                            alt={category.name}
+                            className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                          />
+                          <div className="absolute inset-0 bg-gradient-to-t from-charcoal/90 via-charcoal/40 to-transparent" />
+                          <div className="absolute bottom-3 left-3 right-3 flex items-center justify-between">
+                            <div 
+                              className={`flex h-10 w-10 items-center justify-center rounded-full ${tier.bgColor} backdrop-blur-sm`}
+                            >
+                              <Icon className={`h-5 w-5 ${tier.color}`} />
+                            </div>
+                            <div className="flex gap-1">
+                              <Badge variant="outline" className={`text-xs ${scopeBadge.className} backdrop-blur-sm`}>
+                                {scopeBadge.label}
+                              </Badge>
+                            </div>
                           </div>
                         </div>
+                      )}
+                      {!getCategoryImage(category.slug) && (
+                        <div className={`h-1 ${tier.bgColor.replace('bg-', 'bg-')}`} />
+                      )}
+                      <CardHeader className="pb-2">
+                        {!getCategoryImage(category.slug) && (
+                          <div className="flex items-start justify-between gap-2">
+                            <div 
+                              className={`flex h-12 w-12 items-center justify-center rounded-full ${tier.bgColor}`}
+                            >
+                              <Icon className={`h-6 w-6 ${tier.color}`} />
+                            </div>
+                            <div className="flex flex-col items-end gap-1">
+                              <Badge variant="outline" className={`text-xs ${scopeBadge.className}`}>
+                                {scopeBadge.label}
+                              </Badge>
+                              <Badge variant="outline" className={`text-xs ${tier.bgColor} ${tier.color} ${tier.borderColor}`}>
+                                {tier.shortName}
+                              </Badge>
+                            </div>
+                          </div>
+                        )}
                         <CardTitle className="font-display text-base leading-tight">{category.name}</CardTitle>
                         <CardDescription className="text-xs line-clamp-2">{category.description}</CardDescription>
                       </CardHeader>
@@ -356,9 +384,9 @@ export default function Categories() {
                           <span className="text-muted-foreground">
                             {subs.length} subcategories
                           </span>
-                          <span className="text-xs text-muted-foreground">
-                            {tier.votingMethod}
-                          </span>
+                          <Badge variant="outline" className={`text-xs ${tier.bgColor} ${tier.color} ${tier.borderColor}`}>
+                            {tier.shortName}
+                          </Badge>
                         </div>
                         
                         <CollapsibleTrigger asChild>
