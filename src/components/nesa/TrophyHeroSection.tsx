@@ -194,8 +194,8 @@ export function TrophyHeroSection() {
           transition={{ delay: 0.6 }}
         >
           {[
-            { label: "Nominees", value: "2,500+" },
-            { label: "Countries", value: "54" },
+            { label: "African Countries", value: "54" },
+            { label: "Regions + Diaspora", value: "5" },
             { label: "Categories", value: "17" },
             { label: "Years of Vision", value: "15+" },
           ].map((stat) => (
