@@ -16,7 +16,7 @@ const PAYMENT_STEPS: PaymentStep[] = [
 
 export function PaymentSteps() {
   return (
-    <section className="py-16">
+    <section className="py-16 bg-muted/20">
       <div className="container mx-auto px-4">
         <div className="max-w-4xl mx-auto">
           <h2 className="text-3xl font-display font-bold text-foreground mb-8 text-center">
@@ -25,7 +25,7 @@ export function PaymentSteps() {
           <div className="grid md:grid-cols-4 gap-6">
             {PAYMENT_STEPS.map((step, index) => (
               <div key={step.step} className="relative">
-                <Card className="bg-card border-border h-full">
+                <Card className="bg-card shadow-card border-border h-full">
                   <CardContent className="pt-6 text-center">
                     <div className="w-12 h-12 rounded-full bg-gradient-gold text-secondary font-bold text-xl flex items-center justify-center mx-auto mb-4">
                       {step.step}
