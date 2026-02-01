@@ -21,24 +21,53 @@ import enDashboard from '@/locales/en/dashboard.json';
 
 import frCommon from '@/locales/fr/common.json';
 import frPages from '@/locales/fr/pages.json';
+import frNomination from '@/locales/fr/nomination.json';
+import frDashboard from '@/locales/fr/dashboard.json';
+
 import arCommon from '@/locales/ar/common.json';
 import arPages from '@/locales/ar/pages.json';
+import arNomination from '@/locales/ar/nomination.json';
+import arDashboard from '@/locales/ar/dashboard.json';
+
 import ptCommon from '@/locales/pt/common.json';
 import ptPages from '@/locales/pt/pages.json';
+import ptNomination from '@/locales/pt/nomination.json';
+import ptDashboard from '@/locales/pt/dashboard.json';
+
 import swCommon from '@/locales/sw/common.json';
 import swPages from '@/locales/sw/pages.json';
+import swNomination from '@/locales/sw/nomination.json';
+import swDashboard from '@/locales/sw/dashboard.json';
+
 import haCommon from '@/locales/ha/common.json';
 import haPages from '@/locales/ha/pages.json';
+import haNomination from '@/locales/ha/nomination.json';
+import haDashboard from '@/locales/ha/dashboard.json';
+
 import yoCommon from '@/locales/yo/common.json';
 import yoPages from '@/locales/yo/pages.json';
+import yoNomination from '@/locales/yo/nomination.json';
+import yoDashboard from '@/locales/yo/dashboard.json';
+
 import amCommon from '@/locales/am/common.json';
 import amPages from '@/locales/am/pages.json';
+import amNomination from '@/locales/am/nomination.json';
+import amDashboard from '@/locales/am/dashboard.json';
+
 import zuCommon from '@/locales/zu/common.json';
 import zuPages from '@/locales/zu/pages.json';
+import zuNomination from '@/locales/zu/nomination.json';
+import zuDashboard from '@/locales/zu/dashboard.json';
+
 import zhCommon from '@/locales/zh/common.json';
 import zhPages from '@/locales/zh/pages.json';
+import zhNomination from '@/locales/zh/nomination.json';
+import zhDashboard from '@/locales/zh/dashboard.json';
+
 import hiCommon from '@/locales/hi/common.json';
 import hiPages from '@/locales/hi/pages.json';
+import hiNomination from '@/locales/hi/nomination.json';
+import hiDashboard from '@/locales/hi/dashboard.json';
 
 // Build resources object with all translations
 const resources = {
@@ -51,62 +80,62 @@ const resources = {
   fr: {
     common: frCommon,
     pages: frPages,
-    nomination: enNomination,
-    dashboard: enDashboard,
+    nomination: frNomination,
+    dashboard: frDashboard,
   },
   ar: {
     common: arCommon,
     pages: arPages,
-    nomination: enNomination,
-    dashboard: enDashboard,
+    nomination: arNomination,
+    dashboard: arDashboard,
   },
   pt: {
     common: ptCommon,
     pages: ptPages,
-    nomination: enNomination,
-    dashboard: enDashboard,
+    nomination: ptNomination,
+    dashboard: ptDashboard,
   },
   sw: {
     common: swCommon,
     pages: swPages,
-    nomination: enNomination,
-    dashboard: enDashboard,
+    nomination: swNomination,
+    dashboard: swDashboard,
   },
   ha: {
     common: haCommon,
     pages: haPages,
-    nomination: enNomination,
-    dashboard: enDashboard,
+    nomination: haNomination,
+    dashboard: haDashboard,
   },
   yo: {
     common: yoCommon,
     pages: yoPages,
-    nomination: enNomination,
-    dashboard: enDashboard,
+    nomination: yoNomination,
+    dashboard: yoDashboard,
   },
   am: {
     common: amCommon,
     pages: amPages,
-    nomination: enNomination,
-    dashboard: enDashboard,
+    nomination: amNomination,
+    dashboard: amDashboard,
   },
   zu: {
     common: zuCommon,
     pages: zuPages,
-    nomination: enNomination,
-    dashboard: enDashboard,
+    nomination: zuNomination,
+    dashboard: zuDashboard,
   },
   zh: {
     common: zhCommon,
     pages: zhPages,
-    nomination: enNomination,
-    dashboard: enDashboard,
+    nomination: zhNomination,
+    dashboard: zhDashboard,
   },
   hi: {
     common: hiCommon,
     pages: hiPages,
-    nomination: enNomination,
-    dashboard: enDashboard,
+    nomination: hiNomination,
+    dashboard: hiDashboard,
   },
 };
 
