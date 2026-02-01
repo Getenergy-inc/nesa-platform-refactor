@@ -12,6 +12,7 @@ import {
   EarningMethods,
   GFAWzipFAQ,
   FintechLinksGrid,
+  RegionalShowcase,
 } from "@/components/gfawzip";
 import {
   ExternalLink,
@@ -285,6 +286,8 @@ export default function GFAWzipWallet() {
             </div>
           </div>
         </section>
+
+        <RegionalShowcase />
 
         <FintechLinksGrid />
 
