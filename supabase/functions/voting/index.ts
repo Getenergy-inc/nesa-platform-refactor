@@ -21,7 +21,6 @@ serve(async (req: Request): Promise<Response> => {
 
     // GET /voting/eligibility - Check voting eligibility (public)
     if (req.method === "GET" && path === "/eligibility") {
-      // Get active season
       const { data: season } = await supabase
         .from("seasons")
         .select("id")
@@ -39,7 +38,6 @@ serve(async (req: Request): Promise<Response> => {
         );
       }
 
-      // Get stage config
       const { data: stages } = await supabase
         .from("stage_config")
         .select("action, is_open, opens_at, closes_at")
@@ -50,7 +48,6 @@ serve(async (req: Request): Promise<Response> => {
         stagesOpen[stage.action] = stage.is_open || false;
       }
 
-      // Check auth
       const authHeader = req.headers.get("Authorization");
       let userId: string | null = null;
       
@@ -72,7 +69,6 @@ serve(async (req: Request): Promise<Response> => {
         );
       }
 
-      // Check if public voting is open
       const publicVotingOpen = stagesOpen["public_voting"] || false;
 
       return new Response(
@@ -87,12 +83,53 @@ serve(async (req: Request): Promise<Response> => {
       );
     }
 
+    // GET /voting/balance - Get user's AGC balance for voting
+    if (req.method === "GET" && path === "/balance") {
+      const authHeader = req.headers.get("Authorization");
+      if (!authHeader?.startsWith("Bearer ")) {
+        return new Response(
+          JSON.stringify({ error: "Authentication required" }),
+          { status: 401, headers: { ...corsHeaders, "Content-Type": "application/json" } }
+        );
+      }
+
+      const token = authHeader.replace("Bearer ", "");
+      const { data: userData, error: userError } = await supabase.auth.getUser(token);
+      
+      if (userError || !userData.user) {
+        return new Response(
+          JSON.stringify({ error: "Invalid token" }),
+          { status: 401, headers: { ...corsHeaders, "Content-Type": "application/json" } }
+        );
+      }
+
+      // Ensure user has wallet
+      const { data: accountId } = await supabase.rpc("ensure_user_wallet", {
+        _user_id: userData.user.id,
+      });
+
+      // Get balance
+      const { data: balance } = await supabase.rpc("get_user_wallet_balance", {
+        _user_id: userData.user.id,
+      });
+
+      const walletBalance = balance?.[0] || { account_id: accountId, balance_agcc: 0, balance_agc: 0 };
+
+      return new Response(
+        JSON.stringify({
+          accountId: walletBalance.account_id,
+          balanceAgcc: walletBalance.balance_agcc || 0,
+          balanceAgc: Number(walletBalance.balance_agc) || 0,
+        }),
+        { headers: { ...corsHeaders, "Content-Type": "application/json" } }
+      );
+    }
+
     // GET /voting/tally - Get public vote tallies (public, stage-gated)
     if (req.method === "GET" && path === "/tally") {
       const categorySlug = url.searchParams.get("category");
       const subcategoryId = url.searchParams.get("subcategory");
 
-      // Get active season
       const { data: season } = await supabase
         .from("seasons")
         .select("id")
@@ -106,7 +143,6 @@ serve(async (req: Request): Promise<Response> => {
         );
       }
 
-      // Build query for approved nominees with vote counts
       let query = supabase
         .from("nominees")
         .select(`
@@ -140,7 +176,6 @@ serve(async (req: Request): Promise<Response> => {
       const { data, error } = await query.limit(100);
       if (error) throw error;
 
-      // Aggregate by category
       const tally: Record<string, any> = {};
       
       for (const nominee of data || []) {
@@ -230,7 +265,7 @@ serve(async (req: Request): Promise<Response> => {
       );
     }
 
-    // POST /voting/vote - Cast a vote (authenticated, stage-gated)
+    // POST /voting/vote - Cast a vote (authenticated, stage-gated, AGC-deducted)
     if (req.method === "POST" && (path === "" || path === "/" || path === "/vote")) {
       const authHeader = req.headers.get("Authorization");
       if (!authHeader?.startsWith("Bearer ")) {
@@ -250,7 +285,7 @@ serve(async (req: Request): Promise<Response> => {
         );
       }
 
-      const { nomineeId, voteType = "public" } = await req.json();
+      const { nomineeId, voteType = "public", voteCount = 1 } = await req.json();
 
       if (!nomineeId) {
         return new Response(
@@ -258,6 +293,9 @@ serve(async (req: Request): Promise<Response> => {
           { status: 400, headers: { ...corsHeaders, "Content-Type": "application/json" } }
         );
       }
+
+      const votes = Math.max(1, Math.min(100, parseInt(voteCount) || 1)); // Limit to 1-100 votes
+      const agcCost = votes; // 1 AGC per vote
 
       // Get active season
       const { data: season } = await supabase
@@ -298,20 +336,52 @@ serve(async (req: Request): Promise<Response> => {
         }
       }
 
-      // Check for duplicate vote
-      const { data: existing } = await supabase
-        .from("votes")
-        .select("id")
-        .eq("voter_id", userData.user.id)
-        .eq("nominee_id", nomineeId)
-        .eq("season_id", season.id)
-        .eq("vote_type", voteType)
-        .maybeSingle();
+      // Check for duplicate vote (only for public votes, jury can update)
+      if (voteType === "public") {
+        const { data: existing } = await supabase
+          .from("votes")
+          .select("id")
+          .eq("voter_id", userData.user.id)
+          .eq("nominee_id", nomineeId)
+          .eq("season_id", season.id)
+          .eq("vote_type", voteType)
+          .maybeSingle();
 
-      if (existing) {
+        if (existing) {
+          return new Response(
+            JSON.stringify({ error: "Already voted for this nominee" }),
+            { status: 409, headers: { ...corsHeaders, "Content-Type": "application/json" } }
+          );
+        }
+      }
+
+      // Ensure user has wallet
+      const { data: accountId, error: walletError } = await supabase.rpc("ensure_user_wallet", {
+        _user_id: userData.user.id,
+      });
+
+      if (walletError || !accountId) {
         return new Response(
-          JSON.stringify({ error: "Already voted for this nominee" }),
-          { status: 409, headers: { ...corsHeaders, "Content-Type": "application/json" } }
+          JSON.stringify({ error: "Failed to access wallet" }),
+          { status: 500, headers: { ...corsHeaders, "Content-Type": "application/json" } }
+        );
+      }
+
+      // Get current balance
+      const { data: balanceData } = await supabase.rpc("get_user_wallet_balance", {
+        _user_id: userData.user.id,
+      });
+
+      const currentBalance = balanceData?.[0]?.balance_agc || 0;
+
+      if (currentBalance < agcCost) {
+        return new Response(
+          JSON.stringify({ 
+            error: "Insufficient AGC balance",
+            required: agcCost,
+            available: currentBalance,
+          }),
+          { status: 402, headers: { ...corsHeaders, "Content-Type": "application/json" } }
         );
       }
 
@@ -323,18 +393,50 @@ serve(async (req: Request): Promise<Response> => {
           nominee_id: nomineeId,
           season_id: season.id,
           vote_type: voteType,
-          score: 1,
+          score: votes,
         })
         .select()
         .single();
 
       if (voteError) throw voteError;
 
+      // Deduct AGC from wallet
+      const { error: txError } = await supabase.rpc("record_wallet_transaction", {
+        _account_id: accountId,
+        _tx_type: "SPEND",
+        _source: "VOTE_SPEND",
+        _amount_agcc: 0,
+        _amount_agc: -agcCost, // Negative for deduction
+        _reference_type: "VOTE",
+        _reference_id: vote.id,
+        _description: `Voted ${votes} time(s) for nominee`,
+        _metadata: { nominee_id: nomineeId, vote_count: votes },
+        _created_by: userData.user.id,
+      });
+
+      if (txError) {
+        // Rollback vote if transaction fails
+        await supabase.from("votes").delete().eq("id", vote.id);
+        throw txError;
+      }
+
       // Increment nominee vote count
-      await supabase.rpc("increment_public_votes", { nominee_id: nomineeId });
+      for (let i = 0; i < votes; i++) {
+        await supabase.rpc("increment_public_votes", { nominee_id: nomineeId });
+      }
+
+      // Get new balance
+      const { data: newBalanceData } = await supabase.rpc("get_user_wallet_balance", {
+        _user_id: userData.user.id,
+      });
 
       return new Response(
-        JSON.stringify({ success: true, vote }),
+        JSON.stringify({ 
+          success: true, 
+          vote,
+          agcSpent: agcCost,
+          newBalance: newBalanceData?.[0]?.balance_agc || 0,
+        }),
         { headers: { ...corsHeaders, "Content-Type": "application/json" } }
       );
     }

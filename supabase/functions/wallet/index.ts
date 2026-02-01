@@ -163,14 +163,22 @@ Deno.serve(async (req) => {
       return data;
     };
 
-    // Get wallet balance
+    // Get wallet balance (includes new AGCc/AGC fields from updated view)
     const getWalletBalance = async (accountId: string) => {
       const { data } = await supabase
         .from("wallet_balances")
         .select("*")
         .eq("account_id", accountId)
         .maybeSingle();
-      return data || { agc_total: 0, agc_withdrawable: 0, agc_non_withdrawable: 0, agc_bonus: 0, usd_balance: 0 };
+      return data || { 
+        balance_agcc: 0, 
+        balance_agc: 0, 
+        agc_total: 0, 
+        agc_withdrawable: 0, 
+        agc_non_withdrawable: 0, 
+        agc_bonus: 0, 
+        usd_balance: 0 
+      };
     };
 
     // ============================================================

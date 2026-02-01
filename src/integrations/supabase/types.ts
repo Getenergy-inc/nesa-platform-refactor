@@ -2826,6 +2826,72 @@ export type Database = {
           },
         ]
       }
+      wallet_transactions: {
+        Row: {
+          account_id: string
+          amount_agc: number
+          amount_agcc: number
+          balance_agc_after: number
+          balance_agcc_after: number
+          created_at: string
+          created_by: string | null
+          description: string | null
+          id: string
+          metadata: Json | null
+          reference_id: string | null
+          reference_type: string | null
+          source: Database["public"]["Enums"]["agc_source"] | null
+          tx_type: Database["public"]["Enums"]["wallet_tx_type"]
+        }
+        Insert: {
+          account_id: string
+          amount_agc?: number
+          amount_agcc?: number
+          balance_agc_after?: number
+          balance_agcc_after?: number
+          created_at?: string
+          created_by?: string | null
+          description?: string | null
+          id?: string
+          metadata?: Json | null
+          reference_id?: string | null
+          reference_type?: string | null
+          source?: Database["public"]["Enums"]["agc_source"] | null
+          tx_type: Database["public"]["Enums"]["wallet_tx_type"]
+        }
+        Update: {
+          account_id?: string
+          amount_agc?: number
+          amount_agcc?: number
+          balance_agc_after?: number
+          balance_agcc_after?: number
+          created_at?: string
+          created_by?: string | null
+          description?: string | null
+          id?: string
+          metadata?: Json | null
+          reference_id?: string | null
+          reference_type?: string | null
+          source?: Database["public"]["Enums"]["agc_source"] | null
+          tx_type?: Database["public"]["Enums"]["wallet_tx_type"]
+        }
+        Relationships: [
+          {
+            foreignKeyName: "wallet_transactions_account_id_fkey"
+            columns: ["account_id"]
+            isOneToOne: false
+            referencedRelation: "wallet_accounts"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "wallet_transactions_account_id_fkey"
+            columns: ["account_id"]
+            isOneToOne: false
+            referencedRelation: "wallet_balances"
+            referencedColumns: ["account_id"]
+          },
+        ]
+      }
     }
     Views: {
       public_profiles: {
@@ -2862,10 +2928,47 @@ export type Database = {
           agc_non_withdrawable: number | null
           agc_total: number | null
           agc_withdrawable: number | null
+          balance_agc: number | null
+          balance_agcc: number | null
+          created_at: string | null
           currency: string | null
+          is_active: boolean | null
           owner_id: string | null
           owner_type: Database["public"]["Enums"]["wallet_owner_type"] | null
+          updated_at: string | null
           usd_balance: number | null
+        }
+        Insert: {
+          account_id?: string | null
+          agc_bonus?: never
+          agc_non_withdrawable?: never
+          agc_total?: never
+          agc_withdrawable?: never
+          balance_agc?: never
+          balance_agcc?: never
+          created_at?: string | null
+          currency?: string | null
+          is_active?: boolean | null
+          owner_id?: string | null
+          owner_type?: Database["public"]["Enums"]["wallet_owner_type"] | null
+          updated_at?: string | null
+          usd_balance?: never
+        }
+        Update: {
+          account_id?: string | null
+          agc_bonus?: never
+          agc_non_withdrawable?: never
+          agc_total?: never
+          agc_withdrawable?: never
+          balance_agc?: never
+          balance_agcc?: never
+          created_at?: string | null
+          currency?: string | null
+          is_active?: boolean | null
+          owner_id?: string | null
+          owner_type?: Database["public"]["Enums"]["wallet_owner_type"] | null
+          updated_at?: string | null
+          usd_balance?: never
         }
         Relationships: []
       }
@@ -2875,6 +2978,7 @@ export type Database = {
         Args: { p_nominee_id: string }
         Returns: boolean
       }
+      ensure_user_wallet: { Args: { _user_id: string }; Returns: string }
       generate_identity_hash: {
         Args: {
           p_country?: string
@@ -2892,6 +2996,14 @@ export type Database = {
         Returns: Database["public"]["Enums"]["app_role"][]
       }
       get_user_wallet: { Args: { p_user_id: string }; Returns: string }
+      get_user_wallet_balance: {
+        Args: { _user_id: string }
+        Returns: {
+          account_id: string
+          balance_agc: number
+          balance_agcc: number
+        }[]
+      }
       get_wallet_balance: {
         Args: { p_account_id: string }
         Returns: {
@@ -2924,9 +3036,59 @@ export type Database = {
         Args: { _action: Database["public"]["Enums"]["stage_action"] }
         Returns: boolean
       }
+      record_wallet_transaction: {
+        Args: {
+          _account_id: string
+          _amount_agc: number
+          _amount_agcc: number
+          _created_by?: string
+          _description?: string
+          _metadata?: Json
+          _reference_id?: string
+          _reference_type?: string
+          _source: Database["public"]["Enums"]["agc_source"]
+          _tx_type: Database["public"]["Enums"]["wallet_tx_type"]
+        }
+        Returns: {
+          account_id: string
+          amount_agc: number
+          amount_agcc: number
+          balance_agc_after: number
+          balance_agcc_after: number
+          created_at: string
+          created_by: string | null
+          description: string | null
+          id: string
+          metadata: Json | null
+          reference_id: string | null
+          reference_type: string | null
+          source: Database["public"]["Enums"]["agc_source"] | null
+          tx_type: Database["public"]["Enums"]["wallet_tx_type"]
+        }
+        SetofOptions: {
+          from: "*"
+          to: "wallet_transactions"
+          isOneToOne: true
+          isSetofReturn: false
+        }
+      }
     }
     Enums: {
       acceptance_status: "PENDING" | "SENT" | "ACCEPTED" | "DECLINED"
+      agc_source:
+        | "DAILY_SIGNIN"
+        | "NOMINATION_VERIFIED"
+        | "REFERRAL_SIGNUP"
+        | "REFERRAL_FIRST_PAYMENT"
+        | "REFERRAL_SECOND_PAYMENT"
+        | "WATCH_TV"
+        | "SOCIAL_SHARE"
+        | "SPONSOR_FUNDED"
+        | "CONVERSION"
+        | "VOTE_SPEND"
+        | "ADMIN_BONUS"
+        | "PURCHASE_BONUS"
+        | "WELCOME_CREDITS"
       app_role: "user" | "nrc" | "jury" | "chapter" | "sponsor" | "admin"
       certificate_status: "ACTIVE" | "EXPIRED" | "REVOKED" | "RENEWED"
       certificate_tier: "gold" | "platinum" | "blue_garnet" | "icon"
@@ -3007,6 +3169,14 @@ export type Database = {
         | "WITHDRAW_APPROVED"
         | "ADJUSTMENT"
       wallet_owner_type: "USER" | "CHAPTER" | "PLATFORM"
+      wallet_tx_type:
+        | "EARN"
+        | "CONVERT"
+        | "SPEND"
+        | "ADJUSTMENT"
+        | "REVERSAL"
+        | "TRANSFER_IN"
+        | "TRANSFER_OUT"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -3135,6 +3305,21 @@ export const Constants = {
   public: {
     Enums: {
       acceptance_status: ["PENDING", "SENT", "ACCEPTED", "DECLINED"],
+      agc_source: [
+        "DAILY_SIGNIN",
+        "NOMINATION_VERIFIED",
+        "REFERRAL_SIGNUP",
+        "REFERRAL_FIRST_PAYMENT",
+        "REFERRAL_SECOND_PAYMENT",
+        "WATCH_TV",
+        "SOCIAL_SHARE",
+        "SPONSOR_FUNDED",
+        "CONVERSION",
+        "VOTE_SPEND",
+        "ADMIN_BONUS",
+        "PURCHASE_BONUS",
+        "WELCOME_CREDITS",
+      ],
       app_role: ["user", "nrc", "jury", "chapter", "sponsor", "admin"],
       certificate_status: ["ACTIVE", "EXPIRED", "REVOKED", "RENEWED"],
       certificate_tier: ["gold", "platinum", "blue_garnet", "icon"],
@@ -3224,6 +3409,15 @@ export const Constants = {
         "ADJUSTMENT",
       ],
       wallet_owner_type: ["USER", "CHAPTER", "PLATFORM"],
+      wallet_tx_type: [
+        "EARN",
+        "CONVERT",
+        "SPEND",
+        "ADJUSTMENT",
+        "REVERSAL",
+        "TRANSFER_IN",
+        "TRANSFER_OUT",
+      ],
     },
   },
 } as const
