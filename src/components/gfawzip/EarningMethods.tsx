@@ -17,7 +17,7 @@ const EARNING_METHODS: EarningMethod[] = [
 
 export function EarningMethods() {
   return (
-    <section className="py-16 bg-card/30">
+    <section className="py-16 bg-muted/30">
       <div className="container mx-auto px-4">
         <div className="max-w-4xl mx-auto">
           <h2 className="text-3xl font-display font-bold text-foreground mb-4 text-center">
@@ -31,7 +31,7 @@ export function EarningMethods() {
 
           <div className="grid md:grid-cols-2 gap-6 mt-8">
             {EARNING_METHODS.map((method) => (
-              <Card key={method.title} className="bg-card border-border">
+              <Card key={method.title} className="bg-card shadow-card border-border">
                 <CardContent className="pt-6 flex items-start gap-4">
                   <div className="p-3 rounded-lg bg-primary/10">
                     <method.icon className="h-6 w-6 text-primary" />

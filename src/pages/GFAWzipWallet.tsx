@@ -42,7 +42,7 @@ export default function GFAWzipWallet() {
         />
       </Helmet>
 
-      <div className="min-h-screen bg-gradient-to-b from-charcoal via-charcoal-light to-charcoal">
+      <div className="min-h-screen bg-background">
         {/* Hero Section */}
         <section className="relative py-16 lg:py-24">
           <div className="container mx-auto px-4">
@@ -118,7 +118,7 @@ export default function GFAWzipWallet() {
                 What is GFAWzip Wallet?
               </h2>
               <div className="grid md:grid-cols-3 gap-6">
-                <Card className="bg-card/50 border-border">
+                <Card className="bg-card shadow-card border-border hover:shadow-lg transition-shadow">
                   <CardContent className="pt-6">
                     <Globe className="h-10 w-10 text-primary mb-4" />
                     <h3 className="font-semibold text-foreground mb-2">Official Payment Hub</h3>
@@ -127,7 +127,7 @@ export default function GFAWzipWallet() {
                     </p>
                   </CardContent>
                 </Card>
-                <Card className="bg-card/50 border-border">
+                <Card className="bg-card shadow-card border-border hover:shadow-lg transition-shadow">
                   <CardContent className="pt-6">
                     <Ticket className="h-10 w-10 text-primary mb-4" />
                     <h3 className="font-semibold text-foreground mb-2">Pay for Services</h3>
@@ -136,7 +136,7 @@ export default function GFAWzipWallet() {
                     </p>
                   </CardContent>
                 </Card>
-                <Card className="bg-card/50 border-border">
+                <Card className="bg-card shadow-card border-border hover:shadow-lg transition-shadow">
                   <CardContent className="pt-6">
                     <FileText className="h-10 w-10 text-primary mb-4" />
                     <h3 className="font-semibold text-foreground mb-2">Instant Receipts</h3>
@@ -184,14 +184,14 @@ export default function GFAWzipWallet() {
         </section>
 
         {/* What You Get */}
-        <section className="py-16 bg-card/30">
+        <section className="py-16 bg-muted/30">
           <div className="container mx-auto px-4">
             <div className="max-w-4xl mx-auto">
               <h2 className="text-3xl font-display font-bold text-foreground mb-8 text-center">
                 What You Get After Payment
               </h2>
               <div className="grid md:grid-cols-3 gap-6">
-                <Card className="bg-card border-border">
+                <Card className="bg-card shadow-card border-border">
                   <CardHeader>
                     <Ticket className="h-8 w-8 text-gold mb-2" />
                     <CardTitle className="text-lg">Ticket Payments</CardTitle>
@@ -209,7 +209,7 @@ export default function GFAWzipWallet() {
                     </ul>
                   </CardContent>
                 </Card>
-                <Card className="bg-card border-border">
+                <Card className="bg-card shadow-card border-border">
                   <CardHeader>
                     <Heart className="h-8 w-8 text-gold mb-2" />
                     <CardTitle className="text-lg">Donations</CardTitle>
@@ -227,7 +227,7 @@ export default function GFAWzipWallet() {
                     </ul>
                   </CardContent>
                 </Card>
-                <Card className="bg-card border-border">
+                <Card className="bg-card shadow-card border-border">
                   <CardHeader>
                     <Award className="h-8 w-8 text-gold mb-2" />
                     <CardTitle className="text-lg">Sponsorship</CardTitle>
@@ -278,7 +278,7 @@ export default function GFAWzipWallet() {
         <PaymentSteps />
 
         {/* Trust & Integrity */}
-        <section className="py-16 bg-card/30">
+        <section className="py-16 bg-muted/30">
           <div className="container mx-auto px-4">
             <div className="max-w-2xl mx-auto text-center">
               <Shield className="h-12 w-12 text-gold mx-auto mb-4" />

@@ -19,7 +19,7 @@ const TRUST_FEATURES: TrustFeature[] = [
 
 export function TrustBar() {
   return (
-    <section className="py-8 bg-card/50 border-y border-border">
+    <section className="py-8 bg-secondary/5 border-y border-border">
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-2 md:grid-cols-5 gap-6">
           {TRUST_FEATURES.map((feature) => (
@@ -29,7 +29,7 @@ export function TrustBar() {
               ) : feature.isGFA ? (
                 <GFAWalletIcon size={24} />
               ) : feature.icon ? (
-                <feature.icon className="h-6 w-6 text-gold" />
+                <feature.icon className="h-6 w-6 text-primary" />
               ) : null}
               <span className="text-foreground font-medium">{feature.label}</span>
             </div>
