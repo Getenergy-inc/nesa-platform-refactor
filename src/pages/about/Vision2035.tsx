@@ -4,7 +4,6 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import {
   ArrowLeft,
-  BookOpen,
   Calendar,
   Download,
   Globe,
@@ -13,6 +12,7 @@ import {
   TrendingUp,
   Users,
 } from "lucide-react";
+import { AfricaRegionsMap } from "@/components/nesa/AfricaRegionsMap";
 
 const milestones = [
   { year: "2025", title: "Foundation Year", description: "Launch of continental awards with 17 categories and region-first approach." },
@@ -72,8 +72,11 @@ export default function Vision2035() {
           </div>
         </section>
 
+        {/* Africa Regions Map with 5 Bridges */}
+        <AfricaRegionsMap />
+
         {/* Four Pillars */}
-        <section className="bg-charcoal/95 py-16 lg:py-24">
+        <section className="bg-charcoal py-16 lg:py-24">
           <div className="container mx-auto px-4">
             <h2 className="mb-12 text-center font-display text-3xl font-bold text-white">
               Four Pillars of Vision 2035
