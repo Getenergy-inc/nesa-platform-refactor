@@ -24,7 +24,8 @@
     "stats": {
       "regions": "Régions Africaines",
       "categories": "Catégories de Prix",
-      "subcategories": "Sous-Catégories"
+      "subcategories": "Sous-Catégories",
+      "diaspora": "+ Diaspora + Amis de l'Afrique"
     },
     "watchLive": {
       "title": "Regarder en Direct",
@@ -42,6 +43,199 @@
         "legacyImpact": "Impact Durable"
       },
       "footer": "Livré avec gouvernance, transparence et pertinence continentale."
+    },
+    "howItWorks": {
+      "title": "Comment NESA Fonctionne",
+      "description": "Un cycle de vie structuré de l'éducation publique à l'impact durable.",
+      "steps": {
+        "webinar": "Webinaire",
+        "platinum": "Platine",
+        "icon": "Icône",
+        "gold": "Or",
+        "blueGarnet": "Blue Garnet",
+        "rmsaLegacy": "Héritage RMSA"
+      }
+    },
+    "programmeOverview": {
+      "title": "Aperçu du Programme",
+      "description": "{{edition}} est un programme de reconnaissance et de responsabilité éducative continentale basé sur des normes, conçu pour documenter le service éducatif vérifié.",
+      "pillars": {
+        "publicEducation": {
+          "category": "Éducation et Sensibilisation Publiques",
+          "title": "Série de Webinaires EduAid-Africa",
+          "description": "Éducation des parties prenantes sur les défis, les normes et la participation éclairée"
+        },
+        "recognition": {
+          "category": "Reconnaissance et Normes",
+          "title": "Cycle des Prix NESA-Africa",
+          "description": "Reconnaissance et responsabilité éducative continentale basée sur des normes"
+        },
+        "legacy": {
+          "category": "Impact Durable",
+          "title": "Reconstruire Mon École Afrique",
+          "description": "Projets d'infrastructure post-prix pour l'éducation inclusive"
+        }
+      }
+    },
+    "timeline": {
+      "title": "Calendrier du Programme",
+      "description": "Calendrier complet de la phase d'éducation publique à la mise en œuvre de l'héritage."
+    },
+    "awardPhases": {
+      "title": "Phases des Prix",
+      "description": "Quatre phases structurées de la reconnaissance de base à la plus haute distinction continentale.",
+      "period": "Période",
+      "show": "Émission"
+    },
+    "nominationPath": {
+      "sectionBadge": "Commencez Votre Parcours",
+      "title": "Choisissez Votre Voie de Nomination",
+      "description": "Sélectionnez la catégorie de prix appropriée en fonction des réalisations et du type de reconnaissance du nominé.",
+      "nominateNow": "Nominer Maintenant",
+      "paths": {
+        "icon": {
+          "badge": "Réalisation à Vie",
+          "title": "Prix Africa Icon Blue Garnet",
+          "description": "Réservé aux réalisations à vie. Les nominés doivent avoir 10+ ans de réalisations institutionnelles.",
+          "bullets": ["Réalisations Institutionnelles", "Impact à Long Terme", "Reconnaissance de l'Héritage"]
+        },
+        "blueGarnetGold": {
+          "badge": "Vote Public",
+          "title": "Prix Blue Garnet et Certificat Or",
+          "description": "Compétition ouverte avec participation publique via le vote AGC et le jugement d'experts.",
+          "bullets": ["Vote Public", "Jugement d'Experts", "138+ Sous-catégories"]
+        },
+        "platinum": {
+          "badge": "Sélection d'Experts",
+          "title": "Certificat de Reconnaissance Platine",
+          "description": "Reconnaissance basée sur le mérite par évaluation d'un panel d'experts.",
+          "bullets": ["Pas de Vote", "Jugement Interne", "Nomination Mondiale"]
+        }
+      }
+    },
+    "legacy": {
+      "badge": "Phase d'Héritage Post-Prix",
+      "title": "Reconstruire Mon École Afrique",
+      "implementedVia": "Mis en œuvre via EduAid-Africa",
+      "description": "Traduire la reconnaissance en impact éducatif direct et mesurable en reconstruisant ou rénovant un établissement d'éducation spécialisée dans chaque région africaine.",
+      "focusAreas": {
+        "title": "Domaines Prioritaires",
+        "items": [
+          "Salles de classe inclusives",
+          "Accessibilité et installations d'assistance",
+          "Ressources d'apprentissage pour enfants handicapés"
+        ]
+      },
+      "fundingChannels": {
+        "title": "Canaux de Financement",
+        "items": [
+          "Contributions des billets",
+          "Dons EduAid-Africa",
+          "Contributions RSE et partenaires",
+          "Campagnes post-prix"
+        ]
+      }
+    },
+    "firewalls": {
+      "title": "Pare-feux et Intégrité",
+      "items": {
+        "platinum": {
+          "title": "Platine",
+          "description": "Non compétitif. Vérification NRC + contrôles de gouvernance."
+        },
+        "gold": {
+          "title": "Étape Or",
+          "description": "100% vote public uniquement — pas de juges."
+        },
+        "blueGarnet": {
+          "title": "Blue Garnet",
+          "description": "60% jury + 40% public. Journaux d'audit et contrôles anti-fraude."
+        },
+        "sponsors": {
+          "title": "Sponsors",
+          "description": "Les sponsors et endosseurs ne peuvent pas influencer ou sélectionner les gagnants."
+        }
+      }
+    },
+    "getInvolved": {
+      "title": "Impliquez-vous",
+      "actions": {
+        "nominate": "Nominer",
+        "vote": "Voter",
+        "getTickets": "Obtenir des Billets",
+        "donate": "Donner",
+        "partner": "Partenaire"
+      }
+    },
+    "vision": {
+      "badge": "Document de Vision Stratégique",
+      "title": "VISION NESA-AFRICA {{year}}",
+      "tagline": "Établir les Normes Éducatives de l'Afrique. Reconnaître l'Impact. Livrer l'Héritage.",
+      "description": "La Vision {{year}} définit la direction stratégique de 10 ans de NESA-Africa.",
+      "expandAll": "Développer Toutes les Sections",
+      "collapseAll": "Réduire Toutes les Sections",
+      "sections": {
+        "intro": {
+          "title": "1. Introduction",
+          "content": "NESA-Africa est une plateforme continentale de normes, reconnaissance et responsabilité éducatives."
+        },
+        "problem": {
+          "title": "2. Le Problème que NESA-Africa Résout",
+          "content": "Détails sur les défis éducatifs que NESA-Africa vise à résoudre."
+        },
+        "vision": {
+          "title": "3. Énoncé de Vision",
+          "content": "La vision à long terme pour les normes et la reconnaissance éducatives en Afrique."
+        },
+        "mission": {
+          "title": "4. Énoncé de Mission",
+          "content": "La mission guidant les opérations et initiatives de NESA-Africa."
+        },
+        "pillars": {
+          "title": "5. Piliers Fondamentaux de la Vision",
+          "content": "Les piliers fondamentaux soutenant la direction stratégique de NESA-Africa."
+        },
+        "milestones": {
+          "title": "6. Jalons Stratégiques",
+          "content": "Jalons et objectifs clés pour la prochaine décennie."
+        },
+        "platinum": {
+          "title": "7. Rôle de la Certification Platine",
+          "content": "Comment la certification Platine sert de couche de reconnaissance de base."
+        },
+        "governance": {
+          "title": "8. Gouvernance et Intégrité",
+          "content": "Le cadre de gouvernance assurant transparence et intégrité."
+        },
+        "success": {
+          "title": "9. À Quoi Ressemble le Succès",
+          "content": "Résultats mesurables et indicateurs de succès."
+        },
+        "conclusion": {
+          "title": "10. Conclusion",
+          "content": "La Vision s'aligne avec les cadres continentaux et mondiaux."
+        }
+      }
+    },
+    "finalCTA": {
+      "title": "Nominez un Champion de",
+      "titleAccent": "l'Éducation",
+      "description": "Connaissez-vous quelqu'un ayant un impact exceptionnel sur l'éducation africaine? Soumettez votre nomination aujourd'hui.",
+      "submitNomination": "Soumettre une Nomination",
+      "visitNESA": "Visiter NESA Africa",
+      "trustIndicators": {
+        "countries": "54 Pays",
+        "nominees": "2 500+ Nominés",
+        "years": "15+ Ans de Conception de Vision"
+      }
+    },
+    "sponsors": {
+      "title": "Nos Sponsors",
+      "description": "Partenariat avec les leaders de l'industrie pour promouvoir l'excellence éducative."
+    },
+    "endorsedBy": {
+      "title": "Approuvé Par",
+      "description": "Approuvé par les principales organisations éducatives du continent."
     }
   },
   "about": {
@@ -52,13 +246,13 @@
     "timeline": "Chronologie",
     "meta": {
       "title": "À Propos de NESA-Africa | New Education Standard Award Africa",
-      "description": "NESA-Africa est une plateforme de responsabilité éducative reconnaissant les acteurs du changement qui façonnent l'avenir de l'éducation en Afrique."
+      "description": "NESA-Africa est une plateforme de responsabilité éducative reconnaissant les acteurs du changement."
     },
     "hero": {
       "badge": "Édition {{year}}",
       "title": "À Propos de",
       "titleAccent": "NESA-Africa",
-      "description": "Le New Education Standard Award Africa n'est pas un site de prix. C'est une plateforme de responsabilité éducative célébrant les champions de l'éducation africaine.",
+      "description": "Le New Education Standard Award Africa n'est pas un site de prix. C'est une plateforme de responsabilité éducative.",
       "exploreCategories": "Explorer les Catégories",
       "nominateNow": "Nominer Maintenant"
     },
@@ -89,12 +283,12 @@
       "title": "Niveaux de Prix",
       "description": "Quatre plateformes de reconnaissance distinctes avec des critères uniques.",
       "platinum": {
-        "title": "Certificat Platinum",
-        "description": "Reconnaissance de base pour contribution à l'Éducation Pour Tous. Non compétitif, vérifié par le NRC."
+        "title": "Certificat Platine",
+        "description": "Reconnaissance de base pour contribution à l'Éducation Pour Tous."
       },
       "icon": {
         "title": "Icône de l'Éducation Africaine",
-        "description": "Reconnaissance de carrière. 3 sous-catégories en Afrique, Diaspora et Amis de l'Afrique."
+        "description": "Reconnaissance de carrière. 3 sous-catégories."
       },
       "gold": {
         "title": "Certificat Or",
@@ -102,7 +296,7 @@
       },
       "blueGarnet": {
         "title": "Prix Blue Garnet",
-        "description": "Plus haute distinction — 60% jury, 40% vote public. 9 gagnants au Gala."
+        "description": "Plus haute distinction — 60% jury, 40% vote public."
       }
     },
     "learnMore": "En Savoir Plus",
@@ -124,7 +318,7 @@
     },
     "hero": {
       "title": "17 Catégories Officielles de Prix",
-      "description": "Célébrer l'excellence en éducation, responsabilité sociale et technologie à travers l'Afrique."
+      "description": "Célébrer l'excellence en éducation et technologie à travers l'Afrique."
     },
     "tabs": {
       "africaFirst": "Afrique d'Abord",
@@ -155,7 +349,7 @@
     },
     "cta": {
       "title": "Prêt à Nominer ?",
-      "description": "Reconnaissez l'excellence en soumettant une nomination aujourd'hui.",
+      "description": "Reconnaissez l'excellence en soumettant une nomination.",
       "submitNomination": "Soumettre une Nomination",
       "viewNominees": "Voir les Nominés"
     }
@@ -170,10 +364,10 @@
       "title": "Répertoire des Champions de l'Éducation | NESA-Africa"
     },
     "hero": {
-      "badge": "Répertoire des Champions de l'Éducation",
+      "badge": "Répertoire des Champions",
       "title": "Découvrez Nos",
       "titleAccent": "Nominés",
-      "description": "Découvrez les éducateurs et institutions remarquables qui transforment l'éducation en Afrique."
+      "description": "Découvrez les éducateurs remarquables qui transforment l'éducation en Afrique."
     },
     "search": {
       "placeholder": "Rechercher par nom, organisation..."
@@ -183,7 +377,7 @@
     },
     "stats": {
       "totalNominees": "Total Nominés",
-      "platinumVerified": "Vérifiés Platinum",
+      "platinumVerified": "Vérifiés Platine",
       "awardCategories": "Catégories de Prix",
       "showing": "Affichage"
     },
@@ -194,7 +388,7 @@
     },
     "empty": {
       "title": "Aucun Nominé Trouvé",
-      "description": "Essayez d'ajuster vos critères de recherche.",
+      "description": "Essayez d'ajuster vos critères.",
       "noNominees": "Les nominations sont en cours de révision.",
       "clearFilters": "Effacer les Filtres"
     },
@@ -213,13 +407,13 @@
     "yourVote": "Votre Vote Compte",
     "meta": {
       "title": "Voter pour les Nominés | {{editionName}}",
-      "description": "Votez pour les acteurs du changement éducatif dans les prix {{editionName}}."
+      "description": "Votez pour les acteurs du changement éducatif."
     },
     "hero": {
       "badge": "Vote Public",
       "title": "Votez pour les",
       "titleAccent": "Champions de l'Éducation",
-      "description": "Votre vote aide à reconnaître ceux qui transforment l'éducation à travers le continent."
+      "description": "Votre vote aide à reconnaître ceux qui transforment l'éducation."
     },
     "filters": {
       "searchPlaceholder": "Rechercher des nominés...",
@@ -243,7 +437,7 @@
     "empty": {
       "title": "Aucun Nominé Trouvé",
       "description": "Essayez d'ajuster vos filtres.",
-      "noApproved": "Aucun nominé approuvé disponible pour le vote.",
+      "noApproved": "Aucun nominé approuvé disponible.",
       "clearFilters": "Effacer les Filtres"
     },
     "tabs": {
@@ -251,7 +445,7 @@
     },
     "cta": {
       "title": "Connaissez Quelqu'un Qui Fait la Différence ?",
-      "description": "Les nominations sont la première étape pour reconnaître les champions de l'éducation.",
+      "description": "Les nominations sont la première étape pour reconnaître les champions.",
       "nominateButton": "Nominer un Champion"
     },
     "actions": {
@@ -259,9 +453,9 @@
       "voted": "Voté",
       "voting": "Vote en cours...",
       "loginToVote": "Connectez-vous pour voter",
-      "alreadyVoted": "Vous avez déjà voté pour ce nominé",
-      "voteClosed": "Le vote est actuellement fermé",
-      "voteSuccess": "Vote enregistré avec succès !",
+      "alreadyVoted": "Vous avez déjà voté",
+      "voteClosed": "Le vote est fermé",
+      "voteSuccess": "Vote enregistré !",
       "voteFailed": "Échec du vote. Réessayez."
     }
   },
@@ -269,14 +463,22 @@
     "title": "Résultats",
     "winners": "Gagnants",
     "finalists": "Finalistes",
-    "allResults": "Tous les Résultats"
+    "allResults": "Tous les Résultats",
+    "meta": {
+      "title": "Résultats des Prix | NESA-Africa",
+      "description": "Voir les gagnants et finalistes des prix NESA-Africa."
+    }
   },
   "media": {
     "title": "Médiathèque",
     "nesaTV": "NESA Africa TV",
     "webinars": "Webinaires",
     "gala": "Gala de Remise des Prix",
-    "shows": "Émissions"
+    "shows": "Émissions",
+    "meta": {
+      "title": "Médiathèque | NESA-Africa",
+      "description": "Regardez NESA Africa TV, webinaires et couverture du gala."
+    }
   },
   "contact": {
     "title": "Nous Contacter",
@@ -286,18 +488,18 @@
     "send": "Envoyer le Message",
     "meta": {
       "title": "Contacter NESA-Africa",
-      "description": "Questions sur les nominations ou partenariats ? Nous sommes là pour vous aider."
+      "description": "Questions sur les nominations ou partenariats ?"
     },
     "hero": {
       "badge": "Contactez-Nous",
       "title": "Contacter",
       "titleAccent": "NESA-Africa",
-      "description": "Questions sur les nominations ou partenariats ? Nous sommes là pour vous aider."
+      "description": "Questions sur les nominations ou partenariats ?"
     },
     "info": {
       "email": {
         "title": "Envoyez-nous un Email",
-        "description": "Pour les demandes générales et le support des nominations"
+        "description": "Pour les demandes générales"
       },
       "phone": {
         "title": "Appelez-nous",
@@ -335,7 +537,7 @@
   "auth": {
     "login": {
       "title": "Bon Retour",
-      "subtitle": "Connectez-vous pour continuer à célébrer l'excellence africaine",
+      "subtitle": "Connectez-vous pour continuer",
       "email": "Email",
       "emailPlaceholder": "Entrez votre email",
       "password": "Mot de passe",
@@ -343,30 +545,30 @@
       "forgotPassword": "Mot de passe oublié ?",
       "signIn": "Se Connecter",
       "signingIn": "Connexion...",
-      "noAccount": "Vous n'avez pas de compte ?",
+      "noAccount": "Pas de compte ?",
       "createOne": "Créer un",
       "welcomeBack": "Bon retour sur NESA Africa !",
       "invalidCredentials": "Identifiants invalides"
     },
     "register": {
       "title": "Rejoindre NESA Africa",
-      "subtitle": "Créez votre compte pour nominer, voter et célébrer l'excellence africaine",
+      "subtitle": "Créez votre compte pour nominer et voter",
       "fullName": "Nom Complet",
-      "fullNamePlaceholder": "Entrez votre nom complet",
+      "fullNamePlaceholder": "Entrez votre nom",
       "email": "Email",
       "emailPlaceholder": "Entrez votre email",
       "password": "Mot de passe",
       "passwordPlaceholder": "Créez un mot de passe",
       "passwordHint": "Minimum 6 caractères",
       "referralCode": "Code de Parrainage (Optionnel)",
-      "referralCodePlaceholder": "Entrez le code de parrainage",
-      "referralBonus": "🎁 Vous gagnerez tous les deux des AGC bonus !",
+      "referralCodePlaceholder": "Entrez le code",
+      "referralBonus": "🎁 Vous gagnerez des AGC bonus !",
       "createAccount": "Créer un Compte",
-      "creatingAccount": "Création du compte...",
-      "haveAccount": "Vous avez déjà un compte ?",
+      "creatingAccount": "Création...",
+      "haveAccount": "Déjà un compte ?",
       "signIn": "Se connecter",
-      "successMessage": "Compte créé avec succès ! Bienvenue sur NESA Africa.",
-      "failedMessage": "Échec de la création du compte"
+      "successMessage": "Compte créé ! Bienvenue.",
+      "failedMessage": "Échec de la création"
     }
   },
   "nominate": {
@@ -381,6 +583,33 @@
       "category": "Catégorie",
       "nomineeDetails": "Détails du Nominé",
       "evidence": "Preuves"
+    },
+    "form": {
+      "selectCategory": "Sélectionner une Catégorie",
+      "selectSubcategory": "Sélectionner une Sous-catégorie",
+      "nomineeName": "Nom du Nominé",
+      "nomineeTitle": "Titre/Poste",
+      "nomineeOrganization": "Organisation",
+      "nomineeBio": "Biographie",
+      "justification": "Justification",
+      "uploadEvidence": "Télécharger des Preuves",
+      "uploadPhoto": "Télécharger une Photo",
+      "saveDraft": "Sauvegarder le Brouillon",
+      "restoreDraft": "Restaurer le Brouillon",
+      "discardDraft": "Supprimer",
+      "draftSaved": "Brouillon sauvegardé",
+      "draftRestored": "Brouillon restauré",
+      "draftDiscarded": "Brouillon supprimé",
+      "submit": "Soumettre la Nomination",
+      "submitting": "Soumission...",
+      "successMessage": "Nomination soumise !",
+      "errorMessage": "Échec. Réessayez."
+    },
+    "validation": {
+      "categoryRequired": "Sélectionnez une catégorie",
+      "subcategoryRequired": "Sélectionnez une sous-catégorie",
+      "nameRequired": "Entrez le nom du nominé",
+      "justificationRequired": "Fournissez une justification"
     }
   },
   "dashboard": {
@@ -391,6 +620,78 @@
       "topUp": "Recharger",
       "withdraw": "Retirer",
       "transactions": "Transactions Récentes"
+    },
+    "nominations": {
+      "title": "Mes Nominations",
+      "pending": "En Attente",
+      "approved": "Approuvées",
+      "rejected": "Rejetées"
+    },
+    "certificates": {
+      "title": "Mes Certificats",
+      "download": "Télécharger",
+      "verify": "Vérifier"
+    }
+  },
+  "tickets": {
+    "title": "Obtenez Vos Billets",
+    "description": "Réservez votre place à la cérémonie des prix",
+    "meta": {
+      "title": "Billets | Gala NESA-Africa",
+      "description": "Achetez des billets pour le Gala NESA-Africa."
+    },
+    "tiers": {
+      "standard": {
+        "title": "Standard",
+        "description": "Places générales"
+      },
+      "vip": {
+        "title": "VIP",
+        "description": "Places premium avec avantages"
+      },
+      "platinum": {
+        "title": "Platine",
+        "description": "Premier rang avec accès lounge VIP"
+      }
+    },
+    "cta": {
+      "buyNow": "Acheter Maintenant",
+      "notifyMe": "Me Notifier",
+      "soldOut": "Épuisé"
+    }
+  },
+  "donate": {
+    "title": "Soutenir l'Éducation",
+    "description": "Votre don aide à reconstruire des écoles en Afrique",
+    "meta": {
+      "title": "Donner | NESA-Africa",
+      "description": "Soutenez l'éducation africaine."
+    },
+    "amounts": {
+      "custom": "Montant Personnalisé"
+    },
+    "cta": {
+      "donateNow": "Donner Maintenant",
+      "monthlyGiving": "Don Mensuel"
+    }
+  },
+  "shop": {
+    "title": "Boutique NESA",
+    "description": "Marchandise officielle NESA-Africa",
+    "meta": {
+      "title": "Boutique | NESA-Africa",
+      "description": "Achetez la marchandise officielle."
+    },
+    "cart": {
+      "title": "Panier",
+      "empty": "Votre panier est vide",
+      "checkout": "Paiement",
+      "continueShopping": "Continuer les Achats"
+    },
+    "product": {
+      "addToCart": "Ajouter au Panier",
+      "outOfStock": "Rupture de Stock",
+      "quantity": "Quantité"
     }
   },
   "footer": {
@@ -405,7 +706,28 @@
       "home": "Accueil",
       "programs": "Programmes",
       "categories": "Catégories",
-      "nominate": "Nominer"
+      "nominate": "Nominer",
+      "about": "À Propos",
+      "contact": "Contact",
+      "privacy": "Politique de Confidentialité",
+      "terms": "Conditions d'Utilisation"
+    }
+  },
+  "errors": {
+    "notFound": {
+      "title": "Page Non Trouvée",
+      "description": "La page recherchée n'existe pas.",
+      "backHome": "Retour à l'Accueil"
+    },
+    "unauthorized": {
+      "title": "Accès Refusé",
+      "description": "Vous n'avez pas la permission d'accéder à cette page.",
+      "backHome": "Retour à l'Accueil"
+    },
+    "serverError": {
+      "title": "Erreur Serveur",
+      "description": "Nous rencontrons des difficultés techniques.",
+      "retry": "Réessayer"
     }
   }
 }
