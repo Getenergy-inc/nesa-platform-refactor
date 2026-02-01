@@ -1,18 +1,18 @@
 import { Award, Shield } from "lucide-react";
-import faweKenya from "@/assets/endorsements/fawe-kenya.jpeg";
-import csacefa from "@/assets/endorsements/csacefa.jpeg";
-import sponsor1 from "@/assets/sponsors/sponsor-1.png";
-import sponsor2 from "@/assets/sponsors/sponsor-2.png";
-import sponsor3 from "@/assets/sponsors/sponsor-3.png";
-import sponsor4 from "@/assets/sponsors/sponsor-4.png";
+import csacefa from "@/assets/endorsements/csacefa.png";
+import faweKenya from "@/assets/endorsements/fawe-kenya.png";
+import scef from "@/assets/endorsements/scef.png";
+import gfawzip from "@/assets/endorsements/gfawzip.png";
+import pancokrato from "@/assets/endorsements/pancokrato.png";
+import getenergy from "@/assets/endorsements/getenergy.png";
 
 const logos = [
-  { id: "fawe", name: "FAWE Kenya", src: faweKenya },
   { id: "csacefa", name: "CSACEFA", src: csacefa },
-  { id: "partner1", name: "Partner 1", src: sponsor1 },
-  { id: "partner2", name: "Partner 2", src: sponsor2 },
-  { id: "partner3", name: "Partner 3", src: sponsor3 },
-  { id: "partner4", name: "Partner 4", src: sponsor4 },
+  { id: "fawe", name: "FAWE Kenya", src: faweKenya },
+  { id: "scef", name: "Santos Creations Educational Foundation", src: scef },
+  { id: "gfawzip", name: "GFA Wzip", src: gfawzip },
+  { id: "pancokrato", name: "PancoKrato Integrated Services", src: pancokrato },
+  { id: "getenergy", name: "GetEnergy.ng", src: getenergy },
 ];
 
 export function TrustLogosStrip() {
