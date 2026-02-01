@@ -262,6 +262,13 @@ export type Database = {
             referencedRelation: "profiles"
             referencedColumns: ["user_id"]
           },
+          {
+            foreignKeyName: "carts_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "public_profiles"
+            referencedColumns: ["user_id"]
+          },
         ]
       }
       categories: {
@@ -481,6 +488,13 @@ export type Database = {
             columns: ["coordinator_user_id"]
             isOneToOne: false
             referencedRelation: "profiles"
+            referencedColumns: ["user_id"]
+          },
+          {
+            foreignKeyName: "chapters_coordinator_user_id_fkey"
+            columns: ["coordinator_user_id"]
+            isOneToOne: false
+            referencedRelation: "public_profiles"
             referencedColumns: ["user_id"]
           },
         ]
@@ -1550,6 +1564,13 @@ export type Database = {
             referencedRelation: "profiles"
             referencedColumns: ["user_id"]
           },
+          {
+            foreignKeyName: "orders_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "public_profiles"
+            referencedColumns: ["user_id"]
+          },
         ]
       }
       partnership_leads: {
@@ -1833,6 +1854,13 @@ export type Database = {
             referencedRelation: "profiles"
             referencedColumns: ["id"]
           },
+          {
+            foreignKeyName: "profiles_referred_by_user_id_fkey"
+            columns: ["referred_by_user_id"]
+            isOneToOne: false
+            referencedRelation: "public_profiles"
+            referencedColumns: ["id"]
+          },
         ]
       }
       referral_events: {
@@ -1875,6 +1903,13 @@ export type Database = {
             columns: ["referred_user_id"]
             isOneToOne: false
             referencedRelation: "profiles"
+            referencedColumns: ["user_id"]
+          },
+          {
+            foreignKeyName: "referral_events_referred_user_id_fkey"
+            columns: ["referred_user_id"]
+            isOneToOne: false
+            referencedRelation: "public_profiles"
             referencedColumns: ["user_id"]
           },
         ]
@@ -2793,6 +2828,33 @@ export type Database = {
       }
     }
     Views: {
+      public_profiles: {
+        Row: {
+          avatar_url: string | null
+          bio: string | null
+          created_at: string | null
+          full_name: string | null
+          id: string | null
+          user_id: string | null
+        }
+        Insert: {
+          avatar_url?: string | null
+          bio?: string | null
+          created_at?: string | null
+          full_name?: string | null
+          id?: string | null
+          user_id?: string | null
+        }
+        Update: {
+          avatar_url?: string | null
+          bio?: string | null
+          created_at?: string | null
+          full_name?: string | null
+          id?: string | null
+          user_id?: string | null
+        }
+        Relationships: []
+      }
       wallet_balances: {
         Row: {
           account_id: string | null
