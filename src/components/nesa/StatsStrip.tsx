@@ -5,7 +5,8 @@ export function StatsStrip() {
   const { t } = useTranslation("pages");
   
   const stats = [
-    { value: "5 Regions", label: "+ Diaspora + Friends of Africa", color: "text-gold" },
+    { value: "54", label: "African Countries", color: "text-gold" },
+    { value: "5", label: "Regions + Diaspora", color: "text-gold" },
     { value: "17", label: t("landing.stats.categories"), color: "text-gold" },
     { value: "141+", label: t("landing.stats.subcategories"), color: "text-gold" },
   ];

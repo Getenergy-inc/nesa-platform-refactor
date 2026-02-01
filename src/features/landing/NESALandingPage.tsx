@@ -14,7 +14,6 @@ import { WatchSection } from "@/components/nesa/WatchSection";
 import { NomineesShowcaseSection } from "@/components/nesa/NomineesShowcaseSection";
 import { UpcomingEventsSection } from "@/components/nesa/UpcomingEventsSection";
 import { AwardPhasesSection } from "@/components/nesa/AwardPhasesSection";
-import { TimelineSection } from "@/components/nesa/TimelineSection";
 import { SponsorsSection } from "@/components/nesa/SponsorsSection";
 import { JudgesSection } from "@/components/nesa/JudgesSection";
 import { CategoriesSection } from "@/components/nesa/CategoriesSection";
@@ -74,11 +73,8 @@ export function NESALandingPage() {
         {/* 10. Upcoming Events - Countdown timers */}
         <UpcomingEventsSection />
         
-        {/* 11. Award Phases - Programme details */}
+        {/* 11. Award Phases & Timeline - Programme details (consolidated) */}
         <AwardPhasesSection />
-        
-        {/* 12. Timeline - Full programme timeline */}
-        <TimelineSection />
         
         {/* 13. Watch Section - Media engagement */}
         <WatchSection />
