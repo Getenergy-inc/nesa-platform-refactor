@@ -3,10 +3,10 @@ import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { Button } from "@/components/ui/button";
 import { NESAStamp } from "./NESALogo";
-import sponsor1 from "@/assets/sponsors/sponsor-1.png";
-import sponsor2 from "@/assets/sponsors/sponsor-2.png";
-import sponsor3 from "@/assets/sponsors/sponsor-3.png";
-import sponsor4 from "@/assets/sponsors/sponsor-4.png";
+import scef from "@/assets/endorsements/scef.png";
+import gfawzip from "@/assets/endorsements/gfawzip.png";
+import pancokrato from "@/assets/endorsements/pancokrato.png";
+import getenergy from "@/assets/endorsements/getenergy.png";
 
 // CMS-ready sponsor data structure
 export interface Sponsor {
@@ -19,10 +19,10 @@ export interface Sponsor {
 }
 
 const sponsors: Sponsor[] = [
-  { id: "1", name: "Partner 1", logo: sponsor1, tier: "platinum", isActive: true },
-  { id: "2", name: "Partner 2", logo: sponsor2, tier: "gold", isActive: true },
-  { id: "3", name: "Partner 3", logo: sponsor3, tier: "silver", isActive: true },
-  { id: "4", name: "Partner 4", logo: sponsor4, tier: "bronze", isActive: true },
+  { id: "scef", name: "Santos Creations Educational Foundation", logo: scef, tier: "platinum", isActive: true },
+  { id: "gfawzip", name: "GFA Wzip", logo: gfawzip, tier: "gold", isActive: true },
+  { id: "getenergy", name: "GetEnergy.ng", logo: getenergy, tier: "silver", isActive: true },
+  { id: "pancokrato", name: "PancoKrato Integrated Services", logo: pancokrato, tier: "bronze", isActive: true },
 ];
 
 /**
