@@ -81,7 +81,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     
     // If signup successful and referral code provided, link referrer
     if (data.user && referralCode) {
-      // Look up the referrer by code
+      // First check the referrals table (for user and chapter referrals)
       const { data: referral } = await supabase
         .from("referrals")
         .select("owner_id, owner_type")
@@ -109,6 +109,30 @@ export function AuthProvider({ children }: { children: ReactNode }) {
           event_type: "SIGNUP",
           reward_agc: 10, // Default signup bonus
         });
+      } else {
+        // Fallback: Check chapters.referral_code directly (for chapter codes like CH-NIG-xxx)
+        const { data: chapter } = await supabase
+          .from("chapters")
+          .select("id")
+          .eq("referral_code", referralCode)
+          .eq("is_active", true)
+          .maybeSingle();
+        
+        if (chapter) {
+          // Update profile with chapter referrer
+          await supabase.from("profiles").update({
+            referred_by_chapter_id: chapter.id
+          }).eq("user_id", data.user.id);
+          
+          // Create referral event for chapter signup
+          await supabase.from("referral_events").insert({
+            referrer_type: "CHAPTER",
+            referrer_id: chapter.id,
+            referred_user_id: data.user.id,
+            event_type: "SIGNUP",
+            reward_agc: 10, // Default signup bonus
+          });
+        }
       }
     }
   };

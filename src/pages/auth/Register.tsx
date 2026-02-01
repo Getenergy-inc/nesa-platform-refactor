@@ -1,13 +1,22 @@
 import { useState, useEffect } from "react";
 import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import { useQuery } from "@tanstack/react-query";
 import { useAuth } from "@/contexts/AuthContext";
+import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { toast } from "sonner";
-import { Award, Mail, Lock, User, Gift } from "lucide-react";
+import { Award, Mail, Lock, User, Gift, MapPin } from "lucide-react";
 
 export default function Register() {
   const { t } = useTranslation("pages");
@@ -16,22 +25,66 @@ export default function Register() {
   const [password, setPassword] = useState("");
   const [fullName, setFullName] = useState("");
   const [referralCode, setReferralCode] = useState(searchParams.get("ref") || "");
+  const [selectedChapterId, setSelectedChapterId] = useState<string>("");
   const [loading, setLoading] = useState(false);
   const { signUp } = useAuth();
   const navigate = useNavigate();
 
-  // Capture referral code from URL
+  // Fetch active chapters for dropdown
+  const { data: chapters = [] } = useQuery({
+    queryKey: ["chapters-active"],
+    queryFn: async () => {
+      const { data, error } = await supabase
+        .from("chapters")
+        .select("id, name, country, region, referral_code")
+        .eq("is_active", true)
+        .order("name");
+      if (error) throw error;
+      return data || [];
+    },
+  });
+
+  // Capture referral code from URL and auto-select chapter if it's a chapter code
   useEffect(() => {
     const refCode = searchParams.get("ref");
-    if (refCode) setReferralCode(refCode);
-  }, [searchParams]);
+    if (refCode) {
+      setReferralCode(refCode);
+      // Check if it's a chapter referral code (starts with CH-)
+      if (refCode.startsWith("CH-")) {
+        const matchingChapter = chapters.find(ch => ch.referral_code === refCode);
+        if (matchingChapter) {
+          setSelectedChapterId(matchingChapter.id);
+        }
+      }
+    }
+  }, [searchParams, chapters]);
+
+  // When chapter is selected, update the referral code
+  const handleChapterChange = (chapterId: string) => {
+    setSelectedChapterId(chapterId);
+    if (chapterId && chapterId !== "none") {
+      const chapter = chapters.find(ch => ch.id === chapterId);
+      if (chapter?.referral_code) {
+        setReferralCode(chapter.referral_code);
+      }
+    }
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
 
     try {
-      await signUp(email, password, fullName, referralCode || undefined);
+      // If a chapter is selected but no referral code, use the chapter's code
+      let finalReferralCode = referralCode;
+      if (selectedChapterId && selectedChapterId !== "none" && !referralCode) {
+        const chapter = chapters.find(ch => ch.id === selectedChapterId);
+        if (chapter?.referral_code) {
+          finalReferralCode = chapter.referral_code;
+        }
+      }
+
+      await signUp(email, password, fullName, finalReferralCode || undefined);
       toast.success(t("auth.register.successMessage"));
       navigate("/dashboard");
     } catch (error: any) {
@@ -40,6 +93,14 @@ export default function Register() {
       setLoading(false);
     }
   };
+
+  // Group chapters by region for better UX
+  const chaptersByRegion = chapters.reduce((acc, chapter) => {
+    const region = chapter.region || "Other";
+    if (!acc[region]) acc[region] = [];
+    acc[region].push(chapter);
+    return acc;
+  }, {} as Record<string, typeof chapters>);
 
   return (
     <div className="flex min-h-screen items-center justify-center bg-gradient-hero px-4 py-12 pattern-african">
@@ -101,6 +162,38 @@ export default function Register() {
               </div>
               <p className="text-xs text-muted-foreground">{t("auth.register.passwordHint")}</p>
             </div>
+
+            {/* Chapter Selection Dropdown */}
+            <div className="space-y-2">
+              <Label htmlFor="chapter">Join a Local Chapter (Optional)</Label>
+              <div className="relative">
+                <MapPin className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground z-10 pointer-events-none" />
+                <Select value={selectedChapterId} onValueChange={handleChapterChange}>
+                  <SelectTrigger className="pl-10 bg-background">
+                    <SelectValue placeholder="Select your country chapter" />
+                  </SelectTrigger>
+                  <SelectContent className="bg-background border border-border z-50 max-h-60">
+                    <SelectItem value="none">No chapter selected</SelectItem>
+                    {Object.entries(chaptersByRegion).map(([region, regionChapters]) => (
+                      <div key={region}>
+                        <div className="px-2 py-1.5 text-xs font-semibold text-muted-foreground bg-muted/50">
+                          {region}
+                        </div>
+                        {regionChapters.map((chapter) => (
+                          <SelectItem key={chapter.id} value={chapter.id}>
+                            {chapter.name} ({chapter.country})
+                          </SelectItem>
+                        ))}
+                      </div>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </div>
+              <p className="text-xs text-muted-foreground">
+                Connect with educators in your country and earn chapter bonuses
+              </p>
+            </div>
+
             <div className="space-y-2">
               <Label htmlFor="referralCode">{t("auth.register.referralCode")}</Label>
               <div className="relative">
