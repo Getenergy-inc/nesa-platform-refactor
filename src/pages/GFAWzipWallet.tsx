@@ -24,6 +24,7 @@ import {
   CheckCircle,
   Coins,
 } from "lucide-react";
+import gfawzipHeroImage from "@/assets/gfawzip-hero-woman.jpg";
 
 const GFAWZIP_URL = "https://www.getfinance.africa";
 const GFA_WZIP_MARKUP_PERCENT = 2;
@@ -45,65 +46,99 @@ export default function GFAWzipWallet() {
 
       <div className="min-h-screen bg-background">
         {/* Hero Section */}
-        <section className="relative py-16 lg:py-24">
+        <section className="relative py-16 lg:py-24 overflow-hidden">
           <div className="container mx-auto px-4">
-            <div className="max-w-4xl mx-auto text-center">
-              <Badge className="mb-4 bg-primary/20 text-primary border-primary/30">
-                Official Payment Partner
-              </Badge>
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-display font-bold text-foreground mb-6">
-                GFAWzip Wallet
-                <span className="block text-2xl md:text-3xl text-muted-foreground mt-2">
-                  (GetFinance.africa)
-                </span>
-              </h1>
-              <p className="text-xl md:text-2xl text-gold mb-4">
-                Pay in any currency. Get instant receipts. Earn AGC voting credits.
-              </p>
-              <p className="text-muted-foreground mb-8 max-w-2xl mx-auto">
-                Secure, transparent checkout with multi-currency support for NESA-Africa payments.
-              </p>
+            <div className="grid lg:grid-cols-2 gap-12 items-center">
+              {/* Left Content */}
+              <div className="text-center lg:text-left">
+                <Badge className="mb-4 bg-primary/20 text-primary border-primary/30">
+                  Official Payment Partner
+                </Badge>
+                
+                {/* GFA Logo Prominent Display */}
+                <div className="flex items-center justify-center lg:justify-start gap-4 mb-6">
+                  <div className="p-3 rounded-2xl bg-card shadow-lg border border-border">
+                    <GFAWalletIcon size={64} className="rounded-lg" />
+                  </div>
+                  <div>
+                    <h1 className="text-3xl md:text-4xl lg:text-5xl font-display font-bold text-foreground">
+                      GFAWzip Wallet
+                    </h1>
+                    <span className="text-lg md:text-xl text-muted-foreground">
+                      GetFinance.africa
+                    </span>
+                  </div>
+                </div>
+                
+                <p className="text-xl md:text-2xl text-gold mb-4">
+                  Pay in any currency. Get instant receipts. Earn AGC voting credits.
+                </p>
+                <p className="text-muted-foreground mb-8 max-w-xl mx-auto lg:mx-0">
+                  Secure, transparent checkout with multi-currency support for NESA-Africa payments.
+                </p>
 
-              {/* Primary CTAs */}
-              <div className="flex flex-wrap justify-center gap-4 mb-8">
-                <Button
-                  size="lg"
-                  className="bg-gradient-gold text-secondary font-semibold shadow-gold"
-                  asChild
-                >
-                  <a href={GFAWZIP_URL} target="_blank" rel="noopener noreferrer" className="flex items-center">
-                    <GFAWalletIcon size={20} className="mr-2" />
-                    Open GFAWzip Wallet
-                    <ExternalLink className="ml-2 h-4 w-4" />
-                  </a>
-                </Button>
-                <Button size="lg" variant="outline" asChild>
-                  <Link to="/buy-your-ticket">
-                    <Ticket className="mr-2 h-5 w-5" />
-                    Buy Your Ticket
-                  </Link>
-                </Button>
+                {/* Primary CTAs */}
+                <div className="flex flex-wrap justify-center lg:justify-start gap-4 mb-6">
+                  <Button
+                    size="lg"
+                    className="bg-gradient-gold text-secondary font-semibold shadow-gold"
+                    asChild
+                  >
+                    <a href={GFAWZIP_URL} target="_blank" rel="noopener noreferrer" className="flex items-center">
+                      <GFAWalletIcon size={20} className="mr-2" />
+                      Open GFAWzip Wallet
+                      <ExternalLink className="ml-2 h-4 w-4" />
+                    </a>
+                  </Button>
+                  <Button size="lg" variant="outline" asChild>
+                    <Link to="/buy-your-ticket">
+                      <Ticket className="mr-2 h-5 w-5" />
+                      Buy Your Ticket
+                    </Link>
+                  </Button>
+                </div>
+
+                <div className="flex flex-wrap justify-center lg:justify-start gap-3">
+                  <Button variant="ghost" size="sm" asChild>
+                    <Link to="/donate">
+                      <Heart className="mr-2 h-4 w-4" />
+                      Donate
+                    </Link>
+                  </Button>
+                  <Button variant="ghost" size="sm" asChild>
+                    <Link to="/partners">
+                      <Award className="mr-2 h-4 w-4" />
+                      Sponsor NESA-Africa
+                    </Link>
+                  </Button>
+                  <Button variant="ghost" size="sm" asChild>
+                    <Link to="/wallet">
+                      <Coins className="mr-2 h-4 w-4" />
+                      View My Wallet
+                    </Link>
+                  </Button>
+                </div>
               </div>
 
-              <div className="flex flex-wrap justify-center gap-3">
-                <Button variant="ghost" size="sm" asChild>
-                  <Link to="/donate">
-                    <Heart className="mr-2 h-4 w-4" />
-                    Donate
-                  </Link>
-                </Button>
-                <Button variant="ghost" size="sm" asChild>
-                  <Link to="/partners">
-                    <Award className="mr-2 h-4 w-4" />
-                    Sponsor NESA-Africa
-                  </Link>
-                </Button>
-                <Button variant="ghost" size="sm" asChild>
-                  <Link to="/wallet">
-                    <Coins className="mr-2 h-4 w-4" />
-                    View My Wallet
-                  </Link>
-                </Button>
+              {/* Right Image */}
+              <div className="relative">
+                <div className="relative rounded-2xl overflow-hidden shadow-2xl border border-border">
+                  <img
+                    src={gfawzipHeroImage}
+                    alt="African woman making mobile payment with GFAWzip"
+                    className="w-full h-auto object-cover"
+                  />
+                  {/* GFA Logo Overlay */}
+                  <div className="absolute bottom-4 right-4 p-2 bg-card/90 backdrop-blur-sm rounded-xl shadow-lg border border-border">
+                    <div className="flex items-center gap-2">
+                      <GFAWalletIcon size={32} />
+                      <span className="text-sm font-semibold text-foreground">GFAWzip</span>
+                    </div>
+                  </div>
+                </div>
+                {/* Decorative elements */}
+                <div className="absolute -top-4 -right-4 w-24 h-24 bg-primary/10 rounded-full blur-2xl" />
+                <div className="absolute -bottom-4 -left-4 w-32 h-32 bg-gold/10 rounded-full blur-2xl" />
               </div>
             </div>
           </div>
