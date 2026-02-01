@@ -3,13 +3,23 @@ import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { Button } from "@/components/ui/button";
 import { useSeason } from "@/contexts/SeasonContext";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
+import { useState, useEffect } from "react";
+import { NESALogo3D } from "@/components/nesa/NESALogo3D";
 import stageBackdrop from "@/assets/nesa-stage-backdrop.jpg";
 import blueGarnetTrophy from "@/assets/blue-garnet-trophy.jpg";
 
 export function TrophyHeroSection() {
   const { t } = useTranslation("pages");
   const { getBannerText } = useSeason();
+  const [showTrophy, setShowTrophy] = useState(true);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setShowTrophy((prev) => !prev);
+    }, 3000);
+    return () => clearInterval(interval);
+  }, []);
   const bannerText = getBannerText();
 
   return (
@@ -119,39 +129,59 @@ export function TrophyHeroSection() {
             </Link>
           </motion.div>
 
-          {/* Right: Trophy Image - Strategically Positioned */}
+          {/* Right: Trophy/Logo Carousel */}
           <motion.div 
             className="order-1 lg:order-2 flex justify-center lg:justify-end"
-            initial={{ opacity: 0, scale: 0.9, y: 20 }}
-            animate={{ opacity: 1, scale: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.3 }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.5 }}
           >
-            <div className="relative">
-              {/* Glow effect behind trophy */}
+            <div className="relative h-72 sm:h-80 lg:h-96 w-56 sm:w-72 lg:w-80 flex items-center justify-center">
+              {/* Glow effect */}
               <div className="absolute -inset-4 bg-gradient-to-t from-blue-600/40 via-gold/30 to-transparent blur-3xl rounded-full" />
               
-              {/* Trophy Image with Premium Frame */}
-              <div className="relative group">
-                <div className="absolute -inset-1 bg-gradient-to-br from-gold/50 via-blue-500/30 to-gold/50 rounded-2xl blur-sm opacity-60 group-hover:opacity-80 transition-opacity" />
-                <img
-                  src={blueGarnetTrophy}
-                  alt="Blue Garnet Award Trophy"
-                  className="relative w-56 sm:w-72 lg:w-80 h-auto rounded-2xl shadow-2xl shadow-blue-900/60 border border-white/10"
-                />
-                
-                {/* Floating badge */}
-                <motion.div 
-                  className="absolute -bottom-3 -right-3 sm:-right-6 px-4 py-2 rounded-xl bg-charcoal/95 backdrop-blur-md border border-gold/50 shadow-xl"
-                  initial={{ opacity: 0, x: 10 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: 0.8 }}
-                >
-                  <div className="text-center">
-                    <p className="text-gold font-display font-bold text-base sm:text-lg">Blue Garnet</p>
-                    <p className="text-white/70 text-xs">Africa's Highest Honor</p>
-                  </div>
-                </motion.div>
-              </div>
+              <AnimatePresence mode="wait">
+                {showTrophy ? (
+                  <motion.div
+                    key="trophy"
+                    initial={{ opacity: 0, scale: 0.8, rotateY: -90 }}
+                    animate={{ opacity: 1, scale: 1, rotateY: 0 }}
+                    exit={{ opacity: 0, scale: 0.8, rotateY: 90 }}
+                    transition={{ duration: 0.6, ease: "easeInOut" }}
+                    className="relative group"
+                  >
+                    <div className="absolute -inset-1 bg-gradient-to-br from-gold/50 via-blue-500/30 to-gold/50 rounded-2xl blur-sm opacity-60" />
+                    <img
+                      src={blueGarnetTrophy}
+                      alt="Blue Garnet Award Trophy"
+                      className="relative w-56 sm:w-64 lg:w-72 h-auto rounded-2xl shadow-2xl shadow-blue-900/60 border border-white/10"
+                    />
+                    
+                    {/* Floating badge */}
+                    <div className="absolute -bottom-3 -right-3 sm:-right-6 px-4 py-2 rounded-xl bg-charcoal/95 backdrop-blur-md border border-gold/50 shadow-xl">
+                      <div className="text-center">
+                        <p className="text-gold font-display font-bold text-base sm:text-lg">Blue Garnet</p>
+                        <p className="text-white/70 text-xs">Africa's Highest Honor</p>
+                      </div>
+                    </div>
+                  </motion.div>
+                ) : (
+                  <motion.div
+                    key="logo"
+                    initial={{ opacity: 0, scale: 0.8, rotateY: 90 }}
+                    animate={{ opacity: 1, scale: 1, rotateY: 0 }}
+                    exit={{ opacity: 0, scale: 0.8, rotateY: -90 }}
+                    transition={{ duration: 0.6, ease: "easeInOut" }}
+                    className="flex flex-col items-center gap-4"
+                  >
+                    <NESALogo3D size="xl" />
+                    <div className="px-4 py-2 rounded-xl bg-charcoal/95 backdrop-blur-md border border-gold/50 shadow-xl">
+                      <p className="text-gold font-display font-bold text-base sm:text-lg text-center">NESA-Africa</p>
+                      <p className="text-white/70 text-xs text-center">New Education Standard Award</p>
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
             </div>
           </motion.div>
         </div>
