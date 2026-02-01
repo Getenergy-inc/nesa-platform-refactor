@@ -2,6 +2,7 @@ import { Helmet } from "react-helmet-async";
 import { NESAHeader } from "@/components/nesa/NESAHeader";
 import { TrophyHeroSection } from "@/components/nesa/TrophyHeroSection";
 import { TrustLogosStrip } from "@/components/nesa/TrustLogosStrip";
+import { CampaignBanner } from "@/components/nesa/CampaignBanner";
 import { QuickActionBar } from "@/components/nesa/QuickActionBar";
 import { WhatsLiveSection } from "@/components/nesa/WhatsLiveSection";
 import { NominationPathsCards } from "@/components/nesa/NominationPathsCards";
@@ -37,6 +38,7 @@ export default function NESAAfrica() {
         <NESAHeader />
         <TrophyHeroSection />
         <TrustLogosStrip />
+        <CampaignBanner />
         <QuickActionBar />
         <WhatsLiveSection />
         <NominationPathsCards />
