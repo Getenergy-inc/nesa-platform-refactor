@@ -1,30 +1,41 @@
-import { Trophy, Users, Award, ArrowRight, Coins, Vote, Sparkles } from "lucide-react";
+import { Trophy, Award, ArrowRight, Coins, Vote, Sparkles } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
 import { useSeason } from "@/contexts/SeasonContext";
 import { motion } from "framer-motion";
+import stageBackdrop from "@/assets/nesa-stage-backdrop.jpg";
 import blueGarnetTrophy from "@/assets/blue-garnet-trophy.jpg";
 
 export function TrophyHeroSection() {
   const { t } = useTranslation("pages");
-  const { currentEdition, getBannerText } = useSeason();
+  const { getBannerText } = useSeason();
   const bannerText = getBannerText();
 
   return (
     <section className="relative min-h-[90vh] flex items-center bg-charcoal overflow-hidden">
-      {/* Background with gradient overlay */}
-      <div className="absolute inset-0 bg-gradient-to-br from-charcoal via-charcoal-light/20 to-charcoal" />
+      {/* Stage Backdrop with Ken Burns Effect */}
+      <div className="absolute inset-0">
+        <img
+          src={stageBackdrop}
+          alt="NESA-Africa Award Stage"
+          className="absolute inset-0 w-full h-full object-cover object-center animate-ken-burns"
+        />
+        
+        {/* Layered overlays for depth and text readability */}
+        <div className="absolute inset-0 bg-charcoal/60" />
+        <div className="absolute inset-0 bg-gradient-to-b from-charcoal/70 via-charcoal/40 to-charcoal/90" />
+        <div className="absolute inset-0 bg-gradient-to-r from-charcoal/70 via-transparent to-charcoal/50" />
+      </div>
       
-      {/* Subtle spotlight effects */}
-      <div className="pointer-events-none absolute inset-0 overflow-hidden">
-        <div className="absolute -left-20 top-0 h-[80vh] w-40 rotate-[20deg] bg-gradient-to-b from-gold/10 to-transparent blur-3xl" />
-        <div className="absolute -right-20 top-0 h-[80vh] w-40 rotate-[-20deg] bg-gradient-to-b from-blue-600/10 to-transparent blur-3xl" />
+      {/* Elegant Gold Spotlight Effects */}
+      <div className="pointer-events-none absolute inset-0 overflow-hidden hidden sm:block">
+        <div className="absolute -left-20 top-0 h-[80vh] w-40 rotate-[20deg] bg-gradient-to-b from-gold/15 to-transparent blur-3xl animate-spotlight-left" />
+        <div className="absolute -right-20 top-0 h-[80vh] w-40 rotate-[-20deg] bg-gradient-to-b from-gold/15 to-transparent blur-3xl animate-spotlight-right" />
       </div>
 
       <div className="container relative z-10 py-12 lg:py-20">
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+        <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
           {/* Left: Content */}
           <motion.div 
             className="order-2 lg:order-1"
@@ -33,7 +44,7 @@ export function TrophyHeroSection() {
             transition={{ duration: 0.6 }}
           >
             {/* Badge */}
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 backdrop-blur-md border border-gold/40 mb-6">
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-md border border-gold/40 mb-6">
               <Sparkles className="h-4 w-4 text-gold" />
               <span className="text-sm font-medium text-white">{bannerText}</span>
             </div>
@@ -50,7 +61,7 @@ export function TrophyHeroSection() {
             </p>
 
             {/* Description */}
-            <p className="text-white/70 text-base lg:text-lg mb-6 leading-relaxed max-w-xl">
+            <p className="text-white/80 text-base lg:text-lg mb-6 leading-relaxed max-w-xl">
               The New Education Standard Award Africa celebrates visionary leaders, institutions, 
               and innovators building the future of education—while funding measurable legacy 
               impact through Rebuild My School Africa.
@@ -108,32 +119,38 @@ export function TrophyHeroSection() {
             </Link>
           </motion.div>
 
-          {/* Right: Trophy Image */}
+          {/* Right: Trophy Image - Strategically Positioned */}
           <motion.div 
             className="order-1 lg:order-2 flex justify-center lg:justify-end"
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
+            initial={{ opacity: 0, scale: 0.9, y: 20 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.3 }}
           >
             <div className="relative">
               {/* Glow effect behind trophy */}
-              <div className="absolute inset-0 bg-gradient-to-t from-blue-600/30 via-gold/20 to-transparent blur-3xl scale-110" />
+              <div className="absolute -inset-4 bg-gradient-to-t from-blue-600/40 via-gold/30 to-transparent blur-3xl rounded-full" />
               
-              {/* Trophy Image */}
-              <div className="relative">
+              {/* Trophy Image with Premium Frame */}
+              <div className="relative group">
+                <div className="absolute -inset-1 bg-gradient-to-br from-gold/50 via-blue-500/30 to-gold/50 rounded-2xl blur-sm opacity-60 group-hover:opacity-80 transition-opacity" />
                 <img
                   src={blueGarnetTrophy}
                   alt="Blue Garnet Award Trophy"
-                  className="w-64 sm:w-80 lg:w-96 h-auto rounded-2xl shadow-2xl shadow-blue-900/50"
+                  className="relative w-56 sm:w-72 lg:w-80 h-auto rounded-2xl shadow-2xl shadow-blue-900/60 border border-white/10"
                 />
                 
                 {/* Floating badge */}
-                <div className="absolute -bottom-4 -right-4 sm:-right-8 px-4 py-2 rounded-xl bg-charcoal/90 backdrop-blur-md border border-gold/40 shadow-lg">
+                <motion.div 
+                  className="absolute -bottom-3 -right-3 sm:-right-6 px-4 py-2 rounded-xl bg-charcoal/95 backdrop-blur-md border border-gold/50 shadow-xl"
+                  initial={{ opacity: 0, x: 10 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: 0.8 }}
+                >
                   <div className="text-center">
-                    <p className="text-gold font-display font-bold text-lg">Blue Garnet</p>
+                    <p className="text-gold font-display font-bold text-base sm:text-lg">Blue Garnet</p>
                     <p className="text-white/70 text-xs">Africa's Highest Honor</p>
                   </div>
-                </div>
+                </motion.div>
               </div>
             </div>
           </motion.div>
@@ -144,7 +161,7 @@ export function TrophyHeroSection() {
           className="flex flex-wrap justify-center gap-4 sm:gap-8 mt-12 pt-8 border-t border-white/10"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.5 }}
+          transition={{ delay: 0.6 }}
         >
           {[
             { label: "Nominees", value: "2,500+" },
