@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect } from "react";
 import { Helmet } from "react-helmet-async";
+import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { useSeason } from "@/contexts/SeasonContext";
 import { Button } from "@/components/ui/button";
@@ -31,6 +32,8 @@ import {
   ArrowRight,
   Info,
   Clock,
+  Share2,
+  Vote,
 } from "lucide-react";
 
 import galaHeroImage from "@/assets/events/award-gala.jpeg";
@@ -41,26 +44,29 @@ import {
   PAYMENT_METHODS,
   GALA_EVENT,
   GALA_FAQS,
-  AGC_DISCLOSURE,
   CHECKOUT_INFO,
-  type TicketTier,
   type DonationFrequencyType,
   type DonationCauseType,
 } from "@/config/galaConfig";
+import { AGC_BONUS_RATES, VOTING_SERVICES, REFERRAL_EARN_COPY } from "@/constants/agc";
+import { TicketTierCards, ReferralLinkCard, AgcDisclosure } from "@/components/tickets";
+import { useReferralCode } from "@/hooks/useReferralCode";
 
 export default function BuyYourTicket() {
   const { currentEdition } = useSeason();
   const { toast } = useToast();
+  const { referralCode } = useReferralCode();
   
   // Refs for scroll
   const ticketSectionRef = useRef<HTMLDivElement>(null);
   const donationSectionRef = useRef<HTMLDivElement>(null);
+  const referralSectionRef = useRef<HTMLDivElement>(null);
   
   // State
   const [selectedTier, setSelectedTier] = useState<string>("PREMIUM");
   const [quantity, setQuantity] = useState(1);
   const [isProcessing, setIsProcessing] = useState(false);
-  const [selectedCause, setSelectedCause] = useState<DonationCauseType>("EDUAID_GENERAL");
+  const [selectedCause, setSelectedCause] = useState<DonationCauseType>("REBUILD_MY_SCHOOL");
   const [donationAmount, setDonationAmount] = useState<string>("50");
   const [donationTab, setDonationTab] = useState<DonationFrequencyType>("ONE_TIME");
   const [showStickyBar, setShowStickyBar] = useState(false);
@@ -76,6 +82,7 @@ export default function BuyYourTicket() {
 
   const selectedTicket = TICKET_TIERS.find((t) => t.id === selectedTier);
   const subtotal = selectedTicket ? selectedTicket.price * quantity : 0;
+  const bonusAgc = subtotal * AGC_BONUS_RATES.purchaseBonus;
 
   const handleQuantityChange = (delta: number) => {
     const newQty = quantity + delta;
@@ -97,7 +104,7 @@ export default function BuyYourTicket() {
     
     toast({
       title: "🎟️ Ticket Reserved!",
-      description: `Your ${quantity}x ${selectedTicket?.name} ticket(s) have been reserved. QR e-ticket + receipt sent to your email.`,
+      description: `Your ${quantity}x ${selectedTicket?.name} ticket(s) have been reserved. +${bonusAgc} AGC bonus credited! QR e-ticket sent to your email.`,
     });
     setIsProcessing(false);
   };
@@ -114,13 +121,6 @@ export default function BuyYourTicket() {
     setIsProcessing(false);
   };
 
-  const tierIcons: Record<string, typeof Star> = {
-    GENERAL: Ticket,
-    PREMIUM: Star,
-    VIP: Sparkles,
-    VVIP: Gift,
-  };
-
   return (
     <>
       <Helmet>
@@ -133,7 +133,7 @@ export default function BuyYourTicket() {
 
       <div className="min-h-screen bg-background">
         {/* Hero Section */}
-        <section className="relative min-h-[60vh] overflow-hidden">
+        <section className="relative min-h-[70vh] overflow-hidden">
           <img
             src={galaHeroImage}
             alt="NESA-Africa Gala"
@@ -141,7 +141,7 @@ export default function BuyYourTicket() {
           />
           <div className="absolute inset-0 bg-gradient-to-b from-charcoal/90 via-charcoal/70 to-charcoal" />
           
-          <div className="relative z-10 flex min-h-[60vh] flex-col items-center justify-center px-4 text-center">
+          <div className="relative z-10 flex min-h-[70vh] flex-col items-center justify-center px-4 text-center">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
@@ -160,22 +160,14 @@ export default function BuyYourTicket() {
                 NESA-Africa Gala {GALA_EVENT.year}
               </p>
               
-              <p className="mx-auto mt-6 max-w-2xl text-lg text-white/80">
-                Join education leaders, innovators, partners, and changemakers from across Africa 
-                and the diaspora for an unforgettable night of celebration and impact.
+              <p className="mx-auto mt-4 text-2xl font-light text-white/90 italic">
+                One night. One continent. One mission.
               </p>
-
-              {/* Impact Notice */}
-              <div className="mx-auto mt-8 max-w-xl rounded-xl border border-primary/30 bg-primary/10 p-4">
-                <div className="flex items-center justify-center gap-2 text-primary">
-                  <Heart className="h-5 w-5" />
-                  <span className="font-semibold">Every Ticket Funds EduAid-Africa Impact</span>
-                </div>
-                <p className="mt-2 text-sm text-white/70">
-                  Every ticket purchased helps fund EduAid-Africa services, including the 
-                  <strong className="text-white"> Rebuild My School (2026–2027)</strong> – NESA-Africa Legacy Project.
-                </p>
-              </div>
+              
+              <p className="mx-auto mt-6 max-w-2xl text-lg text-white/80">
+                Join education leaders, innovators, partners, and changemakers from Africa and the diaspora 
+                for a red-carpet celebration of impact—and a powerful commitment to rebuild education where it matters most.
+              </p>
 
               {/* Hero CTAs */}
               <div className="mt-8 flex flex-wrap justify-center gap-4">
@@ -211,74 +203,114 @@ export default function BuyYourTicket() {
         </section>
 
         <main className="container mx-auto px-4 py-12">
-          {/* Ticket Section */}
-          <section ref={ticketSectionRef} className="scroll-mt-24">
+          {/* Impact Section */}
+          <section className="mb-16">
+            <Card className="border-primary/30 bg-gradient-to-r from-primary/5 to-primary/10">
+              <CardContent className="p-8">
+                <div className="flex items-start gap-4">
+                  <div className="p-3 rounded-full bg-primary/20">
+                    <Heart className="h-6 w-6 text-primary" />
+                  </div>
+                  <div>
+                    <h2 className="font-display text-2xl font-bold mb-2">
+                      ❤️ Your Ticket = Real Impact
+                    </h2>
+                    <p className="text-muted-foreground mb-4">
+                      Every ticket purchased directly supports EduAid-Africa + SCEF services, including:
+                    </p>
+                    <div className="p-4 rounded-lg bg-card/50 border border-primary/20">
+                      <p className="font-semibold text-primary">
+                        Rebuild My School (2026–2027) — NESA-Africa Legacy Project
+                      </p>
+                      <p className="text-sm text-muted-foreground mt-1">
+                        Helping schools—especially special-needs and underserved communities—get the support they deserve.
+                      </p>
+                    </div>
+                    <p className="mt-4 text-lg font-medium">
+                      Attend. Celebrate. Rebuild.
+                    </p>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          </section>
+
+          {/* Refer & Earn Section */}
+          <section ref={referralSectionRef} className="mb-16 scroll-mt-24">
             <div className="mb-8 text-center">
-              <h2 className="font-display text-3xl font-bold">Select Your Ticket</h2>
-              <p className="mt-2 text-muted-foreground">Choose your gala experience</p>
+              <Badge className="mb-3 bg-gold/20 text-gold border-gold/30">
+                <Sparkles className="mr-2 h-3 w-3" />
+                NEW
+              </Badge>
+              <h2 className="font-display text-3xl font-bold">
+                🚀 Refer & Earn Voting Credits
+              </h2>
+              <p className="mt-2 text-muted-foreground">
+                Invite friends to buy tickets and earn extra AGC voting credits.
+              </p>
             </div>
 
-            <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
-              {TICKET_TIERS.map((tier) => {
-                const Icon = tierIcons[tier.id] || Ticket;
-                const isSelected = selectedTier === tier.id;
-
-                return (
-                  <motion.div
-                    key={tier.id}
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                  >
-                    <Card
-                      className={`relative cursor-pointer transition-all hover:shadow-lg ${
-                        isSelected ? "border-primary ring-2 ring-primary/30" : "border-border"
-                      }`}
-                      onClick={() => { setSelectedTier(tier.id); setQuantity(1); }}
-                    >
-                      {tier.id === "VIP" && (
-                        <Badge className="absolute -top-3 left-1/2 -translate-x-1/2 bg-primary">
-                          Popular
-                        </Badge>
-                      )}
-                      <CardHeader className="text-center pb-2">
-                        <div className="mx-auto mb-2 flex h-12 w-12 items-center justify-center rounded-full bg-primary/10">
-                          <Icon className="h-6 w-6 text-primary" />
-                        </div>
-                        <CardTitle className="text-lg">{tier.name}</CardTitle>
-                        <div className="text-3xl font-bold text-primary">
-                          ${tier.price}
-                          <span className="text-sm font-normal text-muted-foreground"> USD</span>
-                        </div>
-                      </CardHeader>
-                      <CardContent className="space-y-3">
-                        <p className="text-center text-sm text-muted-foreground">
-                          {tier.seatingNote}
-                        </p>
-                        <Separator />
-                        <ul className="space-y-2">
-                          {tier.features.slice(0, 5).map((feature, i) => (
-                            <li key={i} className="flex items-start gap-2 text-sm">
-                              <Check className="mt-0.5 h-4 w-4 shrink-0 text-success" />
-                              <span>{feature}</span>
-                            </li>
-                          ))}
-                          {tier.features.length > 5 && (
-                            <li className="text-sm text-muted-foreground">
-                              +{tier.features.length - 5} more
-                            </li>
-                          )}
-                        </ul>
-                        <div className="flex items-center justify-center gap-2 rounded-lg bg-muted p-2 text-xs">
-                          <QrCode className="h-4 w-4 text-primary" />
-                          <span>Instant QR e-ticket + receipt</span>
-                        </div>
-                      </CardContent>
-                    </Card>
-                  </motion.div>
-                );
-              })}
+            <div className="grid gap-8 lg:grid-cols-2">
+              <ReferralLinkCard />
+              
+              <Card>
+                <CardHeader>
+                  <CardTitle className="flex items-center gap-2">
+                    <Vote className="h-5 w-5 text-primary" />
+                    Where AGC is Used for Voting
+                  </CardTitle>
+                </CardHeader>
+                <CardContent className="space-y-3">
+                  {VOTING_SERVICES.map((service, i) => (
+                    <div key={i} className="flex items-start gap-3 p-3 rounded-lg bg-muted/30">
+                      <Check className="h-5 w-5 text-success shrink-0 mt-0.5" />
+                      <div>
+                        <p className="font-medium">{service.name}</p>
+                        <p className="text-sm text-muted-foreground">{service.description}</p>
+                      </div>
+                    </div>
+                  ))}
+                  <AgcDisclosure variant="inline" className="mt-4 justify-center" />
+                </CardContent>
+              </Card>
             </div>
+          </section>
+
+          {/* Why Attend Section */}
+          <section className="mb-16">
+            <div className="mb-8 text-center">
+              <h2 className="font-display text-3xl font-bold">✨ Why You Should Be in the Room</h2>
+            </div>
+            <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+              {[
+                { icon: Star, title: "Celebrate Africa's education champions" },
+                { icon: Users, title: "Network with decision-makers (education, policy, CSR, philanthropy)" },
+                { icon: Heart, title: "Be counted as a supporter of education access and equity" },
+                { icon: QrCode, title: "Instant QR e-ticket confirmation" },
+              ].map((item, i) => (
+                <Card key={i} className="text-center">
+                  <CardContent className="p-6">
+                    <item.icon className="mx-auto h-8 w-8 text-primary mb-3" />
+                    <p className="font-medium">{item.title}</p>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+          </section>
+
+          {/* Ticket Section */}
+          <section ref={ticketSectionRef} className="mb-16 scroll-mt-24">
+            <div className="mb-8 text-center">
+              <h2 className="font-display text-3xl font-bold">🎫 Ticket Seats & Prices</h2>
+              <p className="mt-2 text-muted-foreground">
+                Prices shown in USD. Pay in any currency—your final total is shown before you confirm.
+              </p>
+            </div>
+
+            <TicketTierCards 
+              selectedTier={selectedTier}
+              onSelectTier={(tier) => { setSelectedTier(tier); setQuantity(1); }}
+            />
 
             {/* Checkout Note */}
             <p className="mt-6 text-center text-sm text-muted-foreground">
@@ -326,6 +358,19 @@ export default function BuyYourTicket() {
                     <span className="text-primary">${subtotal} USD</span>
                   </div>
 
+                  {/* Bonus AGC preview */}
+                  <div className="flex items-center justify-center gap-2 rounded-lg bg-gold/10 p-3 text-sm">
+                    <Gift className="h-4 w-4 text-gold" />
+                    <span>You'll earn <span className="font-bold text-gold">+{bonusAgc} AGC</span> bonus voting credits!</span>
+                  </div>
+
+                  {referralCode && (
+                    <div className="flex items-center gap-2 rounded-lg bg-primary/10 p-2 text-xs">
+                      <Users className="h-4 w-4 text-primary" />
+                      <span>Referral code applied: <span className="font-mono font-bold">{referralCode}</span></span>
+                    </div>
+                  )}
+
                   <Button
                     onClick={handlePurchase}
                     disabled={isProcessing}
@@ -349,11 +394,36 @@ export default function BuyYourTicket() {
             )}
           </section>
 
+          {/* Bonus AGC Section */}
+          <section className="mb-16">
+            <Card className="border-gold/30 bg-gradient-to-r from-gold/5 to-gold/10">
+              <CardHeader className="text-center">
+                <CardTitle className="flex items-center justify-center gap-2">
+                  <Gift className="h-6 w-6 text-gold" />
+                  🪙 Bonus AGC Voting Credits
+                </CardTitle>
+                <CardDescription>
+                  Every ticket purchase earns Bonus Afri-Gold Coins (AGC) for voting across SCEF services.
+                </CardDescription>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <div className="text-center p-4 rounded-lg bg-card/50">
+                  <p className="text-lg">
+                    For every <span className="font-bold">$1 (USD-equivalent)</span> you pay, you receive{" "}
+                    <span className="font-bold text-gold text-2xl">{AGC_BONUS_RATES.purchaseBonus} AGC</span> Bonus.
+                  </p>
+                </div>
+                
+                <AgcDisclosure variant="card" />
+              </CardContent>
+            </Card>
+          </section>
+
           {/* Donation Section */}
-          <section ref={donationSectionRef} className="mt-24 scroll-mt-24">
+          <section ref={donationSectionRef} className="mb-16 scroll-mt-24">
             <div className="mb-8 text-center">
               <h2 className="font-display text-3xl font-bold">
-                Donate to SCEF Services
+                🎁 Donate to SCEF Services
               </h2>
               <p className="mt-2 text-muted-foreground">One-Time or Monthly</p>
             </div>
@@ -375,7 +445,7 @@ export default function BuyYourTicket() {
 
                       {/* Cause Selection */}
                       <div>
-                        <Label className="mb-3 block">Select Cause</Label>
+                        <Label className="mb-3 block">Choose a Cause</Label>
                         <RadioGroup value={selectedCause} onValueChange={(v) => setSelectedCause(v as DonationCauseType)}>
                           <div className="grid gap-3 sm:grid-cols-2">
                             {DONATION_CAUSES.map((cause) => (
@@ -462,92 +532,13 @@ export default function BuyYourTicket() {
                 </Tabs>
               </CardContent>
             </Card>
-
-            {/* Donation CTAs */}
-            <div className="mt-8 flex flex-wrap justify-center gap-4">
-              <Button variant="outline" onClick={() => setDonationTab("ONE_TIME")}>
-                <Heart className="mr-2 h-4 w-4" />
-                Donate Now
-              </Button>
-              <Button variant="outline" onClick={() => setDonationTab("MONTHLY")}>
-                <Clock className="mr-2 h-4 w-4" />
-                Start Monthly Giving
-              </Button>
-              <Button variant="outline" onClick={() => setDonationTab("CORPORATE")}>
-                <Users className="mr-2 h-4 w-4" />
-                Sponsor a Project
-              </Button>
-            </div>
-          </section>
-
-          {/* How Payment Works */}
-          <section className="mt-24">
-            <div className="mb-8 text-center">
-              <h2 className="font-display text-3xl font-bold">How Payment Works</h2>
-              <p className="mt-2 text-muted-foreground">(Important)</p>
-            </div>
-
-            <div className="mx-auto max-w-4xl grid gap-6 md:grid-cols-2">
-              {/* AGC Disclosure */}
-              <Card className="border-amber-500/30 bg-amber-500/5">
-                <CardHeader>
-                  <CardTitle className="flex items-center gap-2 text-lg">
-                    <Info className="h-5 w-5 text-amber-500" />
-                    {AGC_DISCLOSURE.title}
-                  </CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <ul className="space-y-2">
-                    {AGC_DISCLOSURE.points.map((point, i) => (
-                      <li key={i} className="flex items-start gap-2 text-sm">
-                        <span className="text-amber-500">•</span>
-                        <span>{point}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </CardContent>
-              </Card>
-
-              {/* Checkout Delivers */}
-              <Card>
-                <CardHeader>
-                  <CardTitle className="flex items-center gap-2 text-lg">
-                    <Receipt className="h-5 w-5 text-primary" />
-                    Checkout Provides
-                  </CardTitle>
-                </CardHeader>
-                <CardContent className="space-y-4">
-                  <div>
-                    <p className="text-sm font-medium">Ticket Purchase:</p>
-                    <ul className="mt-1 space-y-1">
-                      {CHECKOUT_INFO.ticketDeliverables.map((d, i) => (
-                        <li key={i} className="flex items-center gap-2 text-sm text-muted-foreground">
-                          <Check className="h-4 w-4 text-success" />
-                          {d}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                  <div>
-                    <p className="text-sm font-medium">Donation:</p>
-                    <ul className="mt-1 space-y-1">
-                      {CHECKOUT_INFO.donationDeliverables.map((d, i) => (
-                        <li key={i} className="flex items-center gap-2 text-sm text-muted-foreground">
-                          <Check className="h-4 w-4 text-success" />
-                          {d}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                </CardContent>
-              </Card>
-            </div>
           </section>
 
           {/* Payment Options */}
-          <section className="mt-24">
+          <section className="mb-16">
             <div className="mb-8 text-center">
-              <h2 className="font-display text-3xl font-bold">Multi-Currency Payment Options</h2>
+              <h2 className="font-display text-3xl font-bold">💳 Pay in Any Currency</h2>
+              <p className="mt-2 text-muted-foreground">Fast + Secure</p>
             </div>
 
             <div className="mx-auto max-w-2xl">
@@ -569,11 +560,11 @@ export default function BuyYourTicket() {
           </section>
 
           {/* Exchange-Markup Fundraising */}
-          <section className="mt-24">
+          <section className="mb-16">
             <Card className="mx-auto max-w-3xl border-primary/30 bg-primary/5">
               <CardHeader>
                 <CardTitle className="text-center">
-                  SCEF Exchange-Markup Fundraising
+                  💱 SCEF Exchange-Markup Fundraising
                 </CardTitle>
                 <CardDescription className="text-center">
                   Monthly Receipt Report
@@ -584,19 +575,79 @@ export default function BuyYourTicket() {
                   SCEF uses a transparent exchange-rate markup on supported multi-currency 
                   transactions as a fundraising strategy.
                 </p>
-                <p>
-                  The markup is shown at checkout before you confirm.
-                </p>
-                <p>
-                  Your total monthly exchange-markup donation is compiled and sent monthly 
-                  as a <strong>Fundraising Receipt Report</strong> (with dates + transaction references).
-                </p>
+                <ul className="space-y-2">
+                  <li className="flex items-start gap-2">
+                    <Check className="h-4 w-4 text-primary mt-0.5" />
+                    <span>The markup is shown at checkout before you confirm</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <Check className="h-4 w-4 text-primary mt-0.5" />
+                    <span>Your total monthly exchange-markup fundraising contribution is compiled and sent monthly as a <strong>Fundraising Receipt Report</strong> (with dates + transaction references)</span>
+                  </li>
+                </ul>
               </CardContent>
             </Card>
           </section>
 
+          {/* What You Receive */}
+          <section className="mb-16">
+            <div className="mb-8 text-center">
+              <h2 className="font-display text-3xl font-bold">🧾 What You Receive</h2>
+            </div>
+            <div className="mx-auto max-w-2xl grid gap-4 md:grid-cols-2">
+              <Card>
+                <CardContent className="p-4">
+                  <h3 className="font-semibold flex items-center gap-2">
+                    <Ticket className="h-4 w-4 text-primary" />
+                    Ticket Purchase
+                  </h3>
+                  <ul className="mt-2 space-y-1 text-sm text-muted-foreground">
+                    <li>• Receipt + QR e-ticket (instant)</li>
+                    <li>• Bonus AGC credited to wallet</li>
+                  </ul>
+                </CardContent>
+              </Card>
+              <Card>
+                <CardContent className="p-4">
+                  <h3 className="font-semibold flex items-center gap-2">
+                    <Heart className="h-4 w-4 text-primary" />
+                    Donation
+                  </h3>
+                  <ul className="mt-2 space-y-1 text-sm text-muted-foreground">
+                    <li>• Receipt/confirmation</li>
+                    <li>• Monthly receipts for recurring</li>
+                  </ul>
+                </CardContent>
+              </Card>
+              <Card>
+                <CardContent className="p-4">
+                  <h3 className="font-semibold flex items-center gap-2">
+                    <Users className="h-4 w-4 text-primary" />
+                    Referral Rewards
+                  </h3>
+                  <ul className="mt-2 space-y-1 text-sm text-muted-foreground">
+                    <li>• AGC credited to wallet</li>
+                    <li>• For voting only</li>
+                  </ul>
+                </CardContent>
+              </Card>
+              <Card>
+                <CardContent className="p-4">
+                  <h3 className="font-semibold flex items-center gap-2">
+                    <Wallet className="h-4 w-4 text-primary" />
+                    Monthly Giving
+                  </h3>
+                  <ul className="mt-2 space-y-1 text-sm text-muted-foreground">
+                    <li>• Monthly receipts + history</li>
+                    <li>• Manage/cancel anytime</li>
+                  </ul>
+                </CardContent>
+              </Card>
+            </div>
+          </section>
+
           {/* FAQs */}
-          <section className="mt-24">
+          <section className="mb-16">
             <div className="mb-8 text-center">
               <h2 className="font-display text-3xl font-bold">Frequently Asked Questions</h2>
             </div>
@@ -613,18 +664,28 @@ export default function BuyYourTicket() {
                     </AccordionContent>
                   </AccordionItem>
                 ))}
+                <AccordionItem value="faq-extra-1">
+                  <AccordionTrigger className="text-left">
+                    Can I earn AGC without buying a ticket?
+                  </AccordionTrigger>
+                  <AccordionContent>
+                    Yes—AGC can be earned through other SCEF activities like daily check-ins, verified nominations, 
+                    and referrals. Sponsors may also fund public voting credits. Check the{" "}
+                    <Link to="/earn-voting-credits" className="text-primary underline">Earn Voting Credits</Link> page.
+                  </AccordionContent>
+                </AccordionItem>
               </Accordion>
             </div>
           </section>
 
           {/* Final CTA */}
-          <section className="mt-24 rounded-2xl bg-gradient-to-r from-primary/20 via-primary/10 to-primary/20 p-8 md:p-12">
+          <section className="rounded-2xl bg-gradient-to-r from-primary/20 via-primary/10 to-primary/20 p-8 md:p-12">
             <div className="text-center">
               <h2 className="font-display text-3xl font-bold md:text-4xl">
-                Attend. Celebrate. Rebuild. Sponsor.
+                This is bigger than a night out.
               </h2>
-              <p className="mx-auto mt-4 max-w-xl text-muted-foreground">
-                Be part of the movement transforming education across Africa.
+              <p className="mx-auto mt-4 max-w-xl text-lg text-muted-foreground">
+                It's a vote of confidence in Africa's education future.
               </p>
 
               <div className="mt-8 flex flex-wrap justify-center gap-4">
@@ -635,6 +696,14 @@ export default function BuyYourTicket() {
                 >
                   <Ticket className="mr-2 h-5 w-5" />
                   Select Tickets
+                </Button>
+                <Button
+                  size="lg"
+                  variant="outline"
+                  onClick={() => scrollToSection(referralSectionRef)}
+                >
+                  <Share2 className="mr-2 h-5 w-5" />
+                  Get My Referral Link
                 </Button>
                 <Button
                   size="lg"
