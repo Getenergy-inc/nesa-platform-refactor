@@ -20,6 +20,18 @@ export interface AwardTVShow {
   };
 }
 
+// Channel URL for linking (not embedding)
+export const NESA_YOUTUBE_CHANNEL = "https://www.youtube.com/@Nesa.africaTV";
+
+// Social links shared across all shows
+const sharedSocialLinks = {
+  youtube: NESA_YOUTUBE_CHANNEL,
+  linkedin: "https://linkedin.com/company/nesa-africa",
+  twitter: "https://twitter.com/nesaafrica",
+  instagram: "https://instagram.com/nesaafrica",
+  facebook: "https://facebook.com/nesaafrica",
+};
+
 export const awardTVShows: AwardTVShow[] = [
   {
     awardId: "platinum",
@@ -31,13 +43,7 @@ export const awardTVShows: AwardTVShow[] = [
     duration: "3 hours",
     episodes: 12,
     features: ["NRC-verified nominees", "Impact stories", "Certificate ceremonies"],
-    socialLinks: {
-      youtube: "https://www.youtube.com/@Nesa.africaTV",
-      linkedin: "https://linkedin.com/company/nesa-africa",
-      twitter: "https://twitter.com/nesaafrica",
-      instagram: "https://instagram.com/nesaafrica",
-      facebook: "https://facebook.com/nesaafrica",
-    },
+    socialLinks: sharedSocialLinks,
   },
   {
     awardId: "gold",
@@ -49,13 +55,7 @@ export const awardTVShows: AwardTVShow[] = [
     duration: "3 hours",
     episodes: 15,
     features: ["Live voting updates", "Regional spotlights", "Winner announcements"],
-    socialLinks: {
-      youtube: "https://www.youtube.com/@Nesa.africaTV",
-      linkedin: "https://linkedin.com/company/nesa-africa",
-      twitter: "https://twitter.com/nesaafrica",
-      instagram: "https://instagram.com/nesaafrica",
-      facebook: "https://facebook.com/nesaafrica",
-    },
+    socialLinks: sharedSocialLinks,
   },
   {
     awardId: "blue-garnet",
@@ -67,13 +67,7 @@ export const awardTVShows: AwardTVShow[] = [
     duration: "3 hours",
     episodes: 6,
     features: ["Finalist profiles", "Jury insights", "Gala countdown"],
-    socialLinks: {
-      youtube: "https://www.youtube.com/@Nesa.africaTV",
-      linkedin: "https://linkedin.com/company/nesa-africa",
-      twitter: "https://twitter.com/nesaafrica",
-      instagram: "https://instagram.com/nesaafrica",
-      facebook: "https://facebook.com/nesaafrica",
-    },
+    socialLinks: sharedSocialLinks,
   },
   {
     awardId: "icon",
@@ -85,13 +79,7 @@ export const awardTVShows: AwardTVShow[] = [
     duration: "3 hours",
     episodes: 9,
     features: ["Lifetime achievements", "Legacy interviews", "Documentary segments"],
-    socialLinks: {
-      youtube: "https://www.youtube.com/@Nesa.africaTV",
-      linkedin: "https://linkedin.com/company/nesa-africa",
-      twitter: "https://twitter.com/nesaafrica",
-      instagram: "https://instagram.com/nesaafrica",
-      facebook: "https://facebook.com/nesaafrica",
-    },
+    socialLinks: sharedSocialLinks,
   },
 ];
 

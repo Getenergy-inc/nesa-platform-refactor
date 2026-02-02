@@ -135,13 +135,27 @@ export function AwardTVShowSection({ show, accentColor = "gold" }: AwardTVShowSe
       <Dialog open={isPlaying} onOpenChange={setIsPlaying}>
         <DialogContent className="max-w-4xl border-none bg-black/95 p-0">
           <div className="relative aspect-video w-full">
-            <iframe
-              src={`${show.videoUrl}?autoplay=1`}
-              title={show.showName}
-              className="absolute inset-0 h-full w-full"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowFullScreen
-            />
+            {show.videoUrl.includes("/embed/") ? (
+              <iframe
+                src={`${show.videoUrl}?autoplay=1`}
+                title={show.showName}
+                className="absolute inset-0 h-full w-full"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+              />
+            ) : (
+              <div className="flex h-full items-center justify-center">
+                <a
+                  href={show.videoUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex flex-col items-center gap-4 text-white hover:text-primary transition-colors"
+                >
+                  <Play className="h-16 w-16" />
+                  <span>Watch on YouTube</span>
+                </a>
+              </div>
+            )}
           </div>
         </DialogContent>
       </Dialog>
