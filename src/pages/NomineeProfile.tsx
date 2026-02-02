@@ -21,6 +21,7 @@ import {
 } from "@/lib/nesaData";
 import { NomineeCard, type NomineeCardData } from "@/components/nesa/NomineeCard";
 import { RenominateCard } from "@/components/nesa/RenominateCard";
+import { NomineeReferralCard } from "@/components/nesa/NomineeReferralCard";
 
 export default function NomineeProfile() {
   const { slug: rawSlug } = useParams<{ slug: string }>();
@@ -286,6 +287,12 @@ export default function NomineeProfile() {
 
             {/* Sidebar */}
             <div className="space-y-6">
+              {/* Referral Card - Share & Support */}
+              <NomineeReferralCard
+                nomineeName={nominee.name}
+                nomineeSlug={nominee.slug}
+              />
+
               {/* Renominate Card - Primary CTA */}
               {dbNomineeId && (
                 <RenominateCard
