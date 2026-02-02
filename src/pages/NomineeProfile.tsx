@@ -1,4 +1,4 @@
-import { useMemo } from "react";
+import { useMemo, useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import { 
   ArrowLeft, Award, MapPin, Share2, 
@@ -11,6 +11,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Separator } from "@/components/ui/separator";
 import { toast } from "sonner";
+import { supabase } from "@/integrations/supabase/client";
 import { 
   getNomineeBySlug, 
   getRelatedNominees, 
@@ -18,14 +19,37 @@ import {
   type EnrichedNominee 
 } from "@/lib/nesaData";
 import { NomineeCard, type NomineeCardData } from "@/components/nesa/NomineeCard";
+import { RenominateCard } from "@/components/nesa/RenominateCard";
 
 export default function NomineeProfile() {
   const { slug } = useParams<{ slug: string }>();
+  const [dbNomineeId, setDbNomineeId] = useState<string | null>(null);
+  const [renominationCount, setRenominationCount] = useState(0);
 
   // Get nominee from CSV data
   const nominee = useMemo(() => {
     if (!slug) return undefined;
     return getNomineeBySlug(slug);
+  }, [slug]);
+
+  // Fetch the actual nominee ID and renomination count from database
+  useEffect(() => {
+    async function fetchNomineeData() {
+      if (!slug) return;
+      
+      const { data } = await supabase
+        .from("nominees")
+        .select("id, renomination_count")
+        .eq("slug", slug)
+        .maybeSingle();
+      
+      if (data) {
+        setDbNomineeId(data.id);
+        setRenominationCount(data.renomination_count ?? 0);
+      }
+    }
+    
+    fetchNomineeData();
   }, [slug]);
 
   // Get related nominees
@@ -239,6 +263,15 @@ export default function NomineeProfile() {
 
             {/* Sidebar */}
             <div className="space-y-6">
+              {/* Renominate Card - Primary CTA */}
+              {dbNomineeId && (
+                <RenominateCard
+                  nomineeId={dbNomineeId}
+                  nomineeName={nominee.name}
+                  initialRenominationCount={renominationCount}
+                />
+              )}
+
               {/* Share Card */}
               <Card className="bg-charcoal-light border-gold/20">
                 <CardHeader>
