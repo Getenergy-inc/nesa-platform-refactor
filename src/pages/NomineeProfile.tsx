@@ -22,9 +22,12 @@ import { NomineeCard, type NomineeCardData } from "@/components/nesa/NomineeCard
 import { RenominateCard } from "@/components/nesa/RenominateCard";
 
 export default function NomineeProfile() {
-  const { slug } = useParams<{ slug: string }>();
+  const { slug: rawSlug } = useParams<{ slug: string }>();
   const [dbNomineeId, setDbNomineeId] = useState<string | null>(null);
   const [renominationCount, setRenominationCount] = useState(0);
+
+  // Decode the URL-encoded slug
+  const slug = rawSlug ? decodeURIComponent(rawSlug) : undefined;
 
   // Get nominee from CSV data
   const nominee = useMemo(() => {
@@ -33,14 +36,24 @@ export default function NomineeProfile() {
   }, [slug]);
 
   // Fetch the actual nominee ID and renomination count from database
+  // Note: DB lookup uses name-based slug for compatibility
   useEffect(() => {
     async function fetchNomineeData() {
-      if (!slug) return;
+      if (!nominee) return;
+      
+      // Try to find by the full unique slug first, then fall back to name-based slug
+      const nameSlug = nominee.name
+        .toLowerCase()
+        .trim()
+        .replace(/\s+/g, "-")
+        .replace(/[^a-z0-9-]/g, "")
+        .replace(/-+/g, "-")
+        .replace(/^-|-$/g, "");
       
       const { data } = await supabase
         .from("nominees")
         .select("id, renomination_count")
-        .eq("slug", slug)
+        .or(`slug.eq.${slug},slug.eq.${nameSlug}`)
         .maybeSingle();
       
       if (data) {
@@ -50,7 +63,7 @@ export default function NomineeProfile() {
     }
     
     fetchNomineeData();
-  }, [slug]);
+  }, [slug, nominee]);
 
   // Get related nominees
   const relatedNominees = useMemo(() => {

@@ -471,7 +471,7 @@ function WinnersGrid({ winners, allWinners, getInitials, getWinnerTier }: Winner
 
                 <div className="flex-1 min-w-0">
                   <Link
-                    to={`/nominees/${winner.slug}`}
+                    to={`/nominees/${encodeURIComponent(winner.slug)}`}
                     className="font-semibold text-foreground hover:text-gold transition-colors line-clamp-1"
                   >
                     {winner.name}
@@ -519,7 +519,7 @@ function WinnersGrid({ winners, allWinners, getInitials, getWinnerTier }: Winner
 
               {/* View Profile Link */}
               <Link
-                to={`/nominees/${winner.slug}`}
+                to={`/nominees/${encodeURIComponent(winner.slug)}`}
                 className="mt-4 flex items-center justify-center gap-2 text-sm text-gold hover:text-gold-dark transition-colors"
               >
                 View Profile

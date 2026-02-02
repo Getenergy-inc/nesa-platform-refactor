@@ -254,7 +254,7 @@ export function ExistingNomineesSection({
                     )}
                   </Button>
                   <Link 
-                    to={`/nominees/${nominee.slug}`}
+                    to={`/nominees/${encodeURIComponent(nominee.slug)}`}
                     className="opacity-0 group-hover:opacity-100 transition-opacity"
                   >
                     <Button size="sm" variant="ghost" className="h-8 px-2">

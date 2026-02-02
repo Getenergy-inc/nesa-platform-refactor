@@ -194,7 +194,7 @@ export function NomineeCard({
   }
 
   return (
-    <Link to={`/nominees/${nominee.slug}`} className={className}>
+    <Link to={`/nominees/${encodeURIComponent(nominee.slug)}`} className={className}>
       {cardContent}
     </Link>
   );
