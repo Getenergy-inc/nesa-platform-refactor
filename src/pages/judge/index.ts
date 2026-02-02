@@ -7,3 +7,5 @@ export { default as JudgeVerify } from "./JudgeVerify";
 // Judge Portal Pages (authenticated)
 export { default as JudgeDashboard } from "./JudgeDashboard";
 export { default as JudgePortal } from "./JudgePortal";
+export { default as JuryScoring } from "./JuryScoring";
+export { default as JuryCOI } from "./JuryCOI";
