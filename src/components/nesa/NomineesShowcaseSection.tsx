@@ -245,22 +245,29 @@ function NomineeShowcaseCard({
           <NESALogo variant="icon" size="sm" className="h-6 w-6 opacity-70" />
         </div>
 
-        {/* Photo */}
+        {/* Photo / Logo */}
         <div className="relative mb-3">
-          <div className="w-16 h-16 mx-auto rounded-full overflow-hidden bg-gold/10 border-2 border-gold/30 group-hover:border-gold transition-colors">
-            {nominee.imageUrl ? (
-              <img 
-                src={nominee.imageUrl} 
-                alt={nominee.name}
-                className="w-full h-full object-cover"
-                onError={handleImageError}
-              />
-            ) : (
-              <div className="w-full h-full flex items-center justify-center text-gold text-xl font-bold">
-                {nominee.name.charAt(0)}
+          {(() => {
+            const isLogo = nominee.imageType === "logo";
+            const altText = isLogo ? `${nominee.name} logo` : `${nominee.name} photo`;
+            
+            return (
+              <div className={`w-16 h-16 mx-auto rounded-full overflow-hidden border-2 border-gold/30 group-hover:border-gold transition-colors flex items-center justify-center ${isLogo ? "bg-white/90 p-1" : "bg-gold/10"}`}>
+                {nominee.imageUrl ? (
+                  <img 
+                    src={nominee.imageUrl} 
+                    alt={altText}
+                    className={isLogo ? "object-contain max-h-full max-w-full" : "object-cover w-full h-full"}
+                    onError={handleImageError}
+                  />
+                ) : (
+                  <div className="w-full h-full flex items-center justify-center text-gold text-xl font-bold">
+                    {nominee.name.charAt(0)}
+                  </div>
+                )}
               </div>
-            )}
-          </div>
+            );
+          })()}
           
           {/* Play Icon for video link */}
           <a

@@ -16,6 +16,8 @@ import awardsCSV from "@/data/awards-nominees.csv?raw";
 // TYPES
 // ============================================================================
 
+export type NomineeImageType = "photo" | "logo";
+
 export interface Nominee {
   id: string;
   name: string;
@@ -25,6 +27,8 @@ export interface Nominee {
   achievement: string;
   state?: string;
   country?: string;
+  /** Whether this is a person photo or organization logo */
+  imageType: NomineeImageType;
 }
 
 export interface Subcategory {
@@ -163,6 +167,50 @@ export function generateUniqueNomineeSlug(
   return parts.join("--");
 }
 
+// Keywords indicating an organization/company (vs a person)
+const ORGANIZATION_KEYWORDS = [
+  "ltd", "limited", "inc", "llc", "company", "corporation", "corp", "group",
+  "foundation", "ministry", "university", "college", "school", "institute",
+  "bank", "plc", "ngo", "association", "society", "council", "commission",
+  "agency", "authority", "department", "organization", "organisation",
+  "trust", "charity", "network", "alliance", "centre", "center", "hospital",
+  "clinic", "media", "broadcast", "television", "radio", "press", "publishing"
+];
+
+/**
+ * Determine if a nominee name represents an organization (logo) vs a person (photo)
+ */
+export function isOrganization(name: string): boolean {
+  const lowerName = name.toLowerCase();
+  return ORGANIZATION_KEYWORDS.some(keyword => lowerName.includes(keyword));
+}
+
+/**
+ * Get the image type based on nominee name
+ */
+export function getImageType(name: string): NomineeImageType {
+  return isOrganization(name) ? "logo" : "photo";
+}
+
+/**
+ * Normalize year references in text: replace 2024 with 2025, 2014-2024 with 2005-2025
+ */
+export function normalizeYearReferences(text: string): string {
+  if (!text) return text;
+  return text
+    // Replace ranges
+    .replace(/2014[-–—]2024/g, "2005–2025")
+    .replace(/2014 to 2024/gi, "2005 to 2025")
+    .replace(/2020[-–—]2024/g, "2020–2025")
+    .replace(/2013[-–—]2024/g, "2013–2025")
+    // Replace standalone years in award context
+    .replace(/Award[s]?\s+2024/gi, "Awards 2025")
+    .replace(/NESA[\s-]*2024/gi, "NESA 2025")
+    .replace(/2024\s+Award/gi, "2025 Award")
+    .replace(/\(2014-2024\)/g, "(2005–2025)")
+    .replace(/\(2024\)/g, "(2025)");
+}
+
 /**
  * Get the full image URL with fallback
  */
@@ -271,9 +319,12 @@ function parseCSV(): ParsedData {
   result.data.forEach((row, rowIndex) => {
     const rowNum = rowIndex + 2; // Account for header row
 
-    // Get award-level data
-    const awardTitle = row["title"];
-    const awardDescription = row["description"] || "";
+    // Get award-level data - normalize year references
+    const rawAwardTitle = row["title"];
+    const rawAwardDescription = row["description"] || "";
+    
+    const awardTitle = normalizeYearReferences(rawAwardTitle);
+    const awardDescription = normalizeYearReferences(rawAwardDescription);
 
     if (!awardTitle) {
       warnings.push({ row: rowNum, field: "title", reason: "Missing award title" });
@@ -285,10 +336,11 @@ function parseCSV(): ParsedData {
     // Parse regular subcategories (subCategories/N/...)
     const subcategories: Subcategory[] = [];
     for (let i = 0; i <= 20; i++) {
-      const subcatTitle = row[`subCategories/${i}/title`];
-      if (!subcatTitle) continue;
+      const rawSubcatTitle = row[`subCategories/${i}/title`];
+      if (!rawSubcatTitle) continue;
 
-      const subcatDescription = row[`subCategories/${i}/description`] || "";
+      const subcatTitle = normalizeYearReferences(rawSubcatTitle);
+      const subcatDescription = normalizeYearReferences(row[`subCategories/${i}/description`] || "");
       const subcatSlug = generateSlug(subcatTitle);
 
       // Parse nominees for this subcategory
@@ -298,7 +350,8 @@ function parseCSV(): ParsedData {
         if (!nomineeName) continue;
 
         const nomineeImage = row[`subCategories/${i}/nominees/${j}/image`] || "";
-        const nomineeAchievement = row[`subCategories/${i}/nominees/${j}/achievement`] || "";
+        const rawAchievement = row[`subCategories/${i}/nominees/${j}/achievement`] || "";
+        const nomineeAchievement = normalizeYearReferences(rawAchievement);
         const nomineeState = row[`subCategories/${i}/nominees/${j}/state`] || "";
         const nomineeCountry = row[`subCategories/${i}/nominees/${j}/country`] || "";
 
@@ -314,6 +367,7 @@ function parseCSV(): ParsedData {
           achievement: nomineeAchievement,
           state: nomineeState || undefined,
           country: nomineeCountry || undefined,
+          imageType: getImageType(nomineeName),
         });
       }
 
@@ -353,10 +407,11 @@ function parseCSV(): ParsedData {
 
       // Parse subcategories within this region
       for (let s = 0; s <= 10; s++) {
-        const subcatTitle = row[`regions/${r}/subCategories/${s}/title`];
-        if (!subcatTitle) continue;
+        const rawSubcatTitle = row[`regions/${r}/subCategories/${s}/title`];
+        if (!rawSubcatTitle) continue;
 
-        const subcatDescription = row[`regions/${r}/subCategories/${s}/description`] || "";
+        const subcatTitle = normalizeYearReferences(rawSubcatTitle);
+        const subcatDescription = normalizeYearReferences(row[`regions/${r}/subCategories/${s}/description`] || "");
         const subcatSlug = generateSlug(subcatTitle);
 
         // Parse nominees for this regional subcategory
@@ -366,7 +421,8 @@ function parseCSV(): ParsedData {
           if (!nomineeName) continue;
 
           const nomineeImage = row[`regions/${r}/subCategories/${s}/nominees/${n}/image`] || "";
-          const nomineeAchievement = row[`regions/${r}/subCategories/${s}/nominees/${n}/achievement`] || "";
+          const rawAchievement = row[`regions/${r}/subCategories/${s}/nominees/${n}/achievement`] || "";
+          const nomineeAchievement = normalizeYearReferences(rawAchievement);
           const nomineeState = row[`regions/${r}/subCategories/${s}/nominees/${n}/state`] || "";
           const nomineeCountry = row[`regions/${r}/subCategories/${s}/nominees/${n}/country`] || "";
 
@@ -382,6 +438,7 @@ function parseCSV(): ParsedData {
             achievement: nomineeAchievement,
             state: nomineeState || undefined,
             country: nomineeCountry || undefined,
+            imageType: getImageType(nomineeName),
           });
         }
 
