@@ -345,6 +345,122 @@ export async function renominateNominee(nomineeId: string, justification?: strin
   }
 }
 
+// ==========================================
+// RENOMINATION API (Detailed Submissions)
+// ==========================================
+export interface RenominationInput {
+  nomineeId?: string;
+  nomineeSlug: string;
+  nomineeName: string;
+  awardSlug?: string;
+  awardTitle?: string;
+  subcategorySlug?: string;
+  subcategoryTitle?: string;
+  groupSlug?: string;
+  groupName?: string;
+  updatedName?: string;
+  updatedAchievement?: string;
+  updatedCountry?: string;
+  updatedState?: string;
+  contactEmail?: string;
+  note?: string;
+  sessionId?: string;
+}
+
+// Rate limiting state (client-side basic check)
+const renominationRateLimit: Record<string, number[]> = {};
+const RATE_LIMIT_WINDOW_MS = 60000; // 1 minute
+const RATE_LIMIT_MAX = 3; // max 3 submissions per minute
+
+function checkRateLimit(sessionId: string): boolean {
+  const now = Date.now();
+  const timestamps = renominationRateLimit[sessionId] || [];
+  
+  // Filter out old timestamps
+  const recentTimestamps = timestamps.filter(t => now - t < RATE_LIMIT_WINDOW_MS);
+  renominationRateLimit[sessionId] = recentTimestamps;
+  
+  if (recentTimestamps.length >= RATE_LIMIT_MAX) {
+    return false;
+  }
+  
+  renominationRateLimit[sessionId].push(now);
+  return true;
+}
+
+export async function submitRenomination(input: RenominationInput): Promise<{ id: string }> {
+  const { data: userData } = await supabase.auth.getUser();
+  const submitterId = userData.user?.id || null;
+  const sessionId = input.sessionId || submitterId || "anonymous";
+  
+  // Basic rate limiting
+  if (!checkRateLimit(sessionId)) {
+    throw new Error("Too many submissions. Please wait a moment before trying again.");
+  }
+  
+  // Validate email if provided
+  if (input.contactEmail) {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(input.contactEmail)) {
+      throw new Error("Invalid email address format");
+    }
+  }
+  
+  // Validate note length
+  if (input.note && input.note.length > 500) {
+    throw new Error("Note must be 500 characters or less");
+  }
+
+  // Insert into renominations table
+  const { data, error } = await supabase
+    .from("renominations")
+    .insert({
+      nominee_id: input.nomineeId || null,
+      nominee_slug: input.nomineeSlug,
+      nominee_name: input.nomineeName,
+      award_slug: input.awardSlug || null,
+      award_title: input.awardTitle || null,
+      subcategory_slug: input.subcategorySlug || null,
+      subcategory_title: input.subcategoryTitle || null,
+      group_slug: input.groupSlug || null,
+      group_name: input.groupName || null,
+      updated_name: input.updatedName || null,
+      updated_achievement: input.updatedAchievement || null,
+      updated_country: input.updatedCountry || null,
+      updated_state: input.updatedState || null,
+      contact_email: input.contactEmail || null,
+      note: input.note || null,
+      submitter_id: submitterId,
+      submitter_session_id: input.sessionId || null,
+      status: "pending",
+    })
+    .select("id")
+    .single();
+
+  if (error) throw error;
+
+  // Also increment the nominee's renomination count if we have a nominee_id
+  if (input.nomineeId) {
+    // Get current count
+    const { data: nominee } = await supabase
+      .from("nominees")
+      .select("renomination_count")
+      .eq("id", input.nomineeId)
+      .maybeSingle();
+
+    if (nominee && (nominee.renomination_count ?? 0) < 200) {
+      await supabase
+        .from("nominees")
+        .update({ 
+          renomination_count: (nominee.renomination_count ?? 0) + 1 
+        })
+        .eq("id", input.nomineeId);
+    }
+  }
+
+  return { id: data.id };
+}
+
 // Search for existing nominees by name
 export async function searchExistingNominees(query: string, subcategoryId?: string): Promise<Nominee[]> {
   let queryBuilder = supabase

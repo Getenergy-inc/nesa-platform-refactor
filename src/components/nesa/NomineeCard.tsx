@@ -222,7 +222,7 @@ export function NomineeCard({
             </div>
           )}
 
-          {/* Action Buttons - Vote & Endorse */}
+          {/* Action Buttons - Vote & Renominate */}
           {showActions && !isCompact && (
             <div className="mt-4 pt-3 border-t border-gold/10 w-full">
               <NomineeActions
@@ -232,6 +232,8 @@ export function NomineeCard({
                   nomineeName: nominee.name,
                   awardTitle: nominee.categoryName,
                   subcategoryTitle: nominee.subcategoryName,
+                  groupName: nominee.region ? `${nominee.region} Africa` : undefined,
+                  country: nominee.country,
                   renominationCount: nominee.renominationCount,
                 }}
                 variant="compact"

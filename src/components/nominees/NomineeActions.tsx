@@ -97,10 +97,10 @@ export function NomineeActions({
                 ? "h-8 px-3"
                 : ""
             } border-gold/30 text-gold hover:bg-gold/10`}
-            title="Endorse this nominee"
+            title="Renominate / Endorse this nominee"
           >
             <RotateCcw className={`${isIconOnly ? "h-4 w-4" : "h-4 w-4 mr-1.5"}`} />
-            {!isIconOnly && "Endorse"}
+            {!isIconOnly && "Renominate"}
           </Button>
         )}
       </div>
@@ -123,8 +123,13 @@ export function NomineeActions({
         onOpenChange={setRenominateModalOpen}
         nomineeId={nominee.nomineeId}
         nomineeName={nominee.nomineeName}
+        nomineeSlug={nominee.nomineeSlug}
+        awardSlug={nominee.awardSlug}
         awardTitle={nominee.awardTitle}
+        subcategorySlug={nominee.subcategorySlug}
         subcategoryTitle={nominee.subcategoryTitle}
+        groupSlug={nominee.groupSlug}
+        groupName={nominee.groupName}
         currentCount={nominee.renominationCount}
         onRenominateSuccess={onRenominateSuccess}
       />
