@@ -4,10 +4,10 @@ import { NESALogo } from "@/components/nesa/NESALogo";
 import { Heart, Twitter, Instagram, Linkedin, Youtube, Mail } from "lucide-react";
 
 const socialLinks = [
-  { icon: Twitter, href: "#", label: "Twitter" },
-  { icon: Instagram, href: "#", label: "Instagram" },
-  { icon: Linkedin, href: "#", label: "LinkedIn" },
-  { icon: Youtube, href: "#", label: "YouTube" },
+  { icon: Twitter, href: "https://twitter.com/nesaafrica", label: "Twitter" },
+  { icon: Instagram, href: "https://instagram.com/nesaafrica", label: "Instagram" },
+  { icon: Linkedin, href: "https://linkedin.com/company/nesa-africa", label: "LinkedIn" },
+  { icon: Youtube, href: "https://www.youtube.com/@Nesa.africaTV", label: "YouTube" },
 ];
 
 export function NESAFooter() {

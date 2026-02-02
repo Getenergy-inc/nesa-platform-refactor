@@ -32,11 +32,11 @@ export const awardTVShows: AwardTVShow[] = [
     episodes: 12,
     features: ["NRC-verified nominees", "Impact stories", "Certificate ceremonies"],
     socialLinks: {
-      youtube: "https://youtube.com/@nesaafricatv",
+      youtube: "https://www.youtube.com/@Nesa.africaTV",
       linkedin: "https://linkedin.com/company/nesa-africa",
-      twitter: "https://twitter.com/nesaafricatv",
-      instagram: "https://instagram.com/nesaafricatv",
-      facebook: "https://facebook.com/nesaafricatv",
+      twitter: "https://twitter.com/nesaafrica",
+      instagram: "https://instagram.com/nesaafrica",
+      facebook: "https://facebook.com/nesaafrica",
     },
   },
   {
@@ -50,11 +50,11 @@ export const awardTVShows: AwardTVShow[] = [
     episodes: 15,
     features: ["Live voting updates", "Regional spotlights", "Winner announcements"],
     socialLinks: {
-      youtube: "https://youtube.com/@nesaafricatv",
+      youtube: "https://www.youtube.com/@Nesa.africaTV",
       linkedin: "https://linkedin.com/company/nesa-africa",
-      twitter: "https://twitter.com/nesaafricatv",
-      instagram: "https://instagram.com/nesaafricatv",
-      facebook: "https://facebook.com/nesaafricatv",
+      twitter: "https://twitter.com/nesaafrica",
+      instagram: "https://instagram.com/nesaafrica",
+      facebook: "https://facebook.com/nesaafrica",
     },
   },
   {
@@ -68,11 +68,11 @@ export const awardTVShows: AwardTVShow[] = [
     episodes: 6,
     features: ["Finalist profiles", "Jury insights", "Gala countdown"],
     socialLinks: {
-      youtube: "https://youtube.com/@nesaafricatv",
+      youtube: "https://www.youtube.com/@Nesa.africaTV",
       linkedin: "https://linkedin.com/company/nesa-africa",
-      twitter: "https://twitter.com/nesaafricatv",
-      instagram: "https://instagram.com/nesaafricatv",
-      facebook: "https://facebook.com/nesaafricatv",
+      twitter: "https://twitter.com/nesaafrica",
+      instagram: "https://instagram.com/nesaafrica",
+      facebook: "https://facebook.com/nesaafrica",
     },
   },
   {
@@ -86,11 +86,11 @@ export const awardTVShows: AwardTVShow[] = [
     episodes: 9,
     features: ["Lifetime achievements", "Legacy interviews", "Documentary segments"],
     socialLinks: {
-      youtube: "https://youtube.com/@nesaafricatv",
+      youtube: "https://www.youtube.com/@Nesa.africaTV",
       linkedin: "https://linkedin.com/company/nesa-africa",
-      twitter: "https://twitter.com/nesaafricatv",
-      instagram: "https://instagram.com/nesaafricatv",
-      facebook: "https://facebook.com/nesaafricatv",
+      twitter: "https://twitter.com/nesaafrica",
+      instagram: "https://instagram.com/nesaafrica",
+      facebook: "https://facebook.com/nesaafrica",
     },
   },
 ];

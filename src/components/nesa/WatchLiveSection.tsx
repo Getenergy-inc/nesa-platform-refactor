@@ -24,17 +24,23 @@ export function WatchLiveSection() {
               variant="outline"
               size="lg"
               className="border-gold/40 text-gold hover:bg-gold/10 rounded-full gap-2"
+              asChild
             >
-              <Youtube className="h-5 w-5" />
-              YouTube
+              <a href="https://www.youtube.com/@Nesa.africaTV" target="_blank" rel="noopener noreferrer">
+                <Youtube className="h-5 w-5" />
+                YouTube
+              </a>
             </Button>
             <Button
               variant="outline"
               size="lg"
               className="border-gold/40 text-gold hover:bg-gold/10 rounded-full gap-2"
+              asChild
             >
-              <Facebook className="h-5 w-5" />
-              Facebook
+              <a href="https://facebook.com/nesaafrica" target="_blank" rel="noopener noreferrer">
+                <Facebook className="h-5 w-5" />
+                Facebook
+              </a>
             </Button>
             <Button
               variant="outline"
