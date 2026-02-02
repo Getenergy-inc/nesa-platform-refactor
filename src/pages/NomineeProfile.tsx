@@ -281,7 +281,7 @@ export default function NomineeProfile() {
                       </p>
                     </div>
                   )}
-                  {/* Primary Actions - Vote & Endorse */}
+                  {/* Primary Actions - Vote & Renominate */}
                   {dbNomineeId && (
                     <div className="mt-6 flex flex-wrap gap-3">
                       <NomineeActions
@@ -289,8 +289,13 @@ export default function NomineeProfile() {
                           nomineeId: dbNomineeId,
                           nomineeSlug: nominee.slug,
                           nomineeName: nominee.name,
+                          awardSlug: nominee.awardSlug,
                           awardTitle: nominee.awardTitle,
+                          subcategorySlug: nominee.subcategorySlug,
                           subcategoryTitle: nominee.subcategoryTitle,
+                          groupSlug: nominee.geographicCategory,
+                          groupName: nominee.regionName,
+                          country: nominee.country,
                           renominationCount: renominationCount,
                         }}
                         onRenominateSuccess={() => setRenominationCount(c => c + 1)}

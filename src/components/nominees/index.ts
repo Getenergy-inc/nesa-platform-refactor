@@ -7,4 +7,4 @@
 
 export { NomineeActions, type NomineeActionsData } from "./NomineeActions";
 export { VoteModal } from "./VoteModal";
-export { RenominateModal } from "./RenominateModal";
+export { RenominateModal, type RenominateModalProps } from "./RenominateModal";

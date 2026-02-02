@@ -2204,6 +2204,102 @@ export type Database = {
         }
         Relationships: []
       }
+      renominations: {
+        Row: {
+          award_slug: string | null
+          award_title: string | null
+          contact_email: string | null
+          created_at: string
+          group_name: string | null
+          group_slug: string | null
+          id: string
+          nominee_id: string | null
+          nominee_name: string
+          nominee_slug: string
+          note: string | null
+          review_notes: string | null
+          reviewed_at: string | null
+          reviewed_by: string | null
+          status: string
+          subcategory_slug: string | null
+          subcategory_title: string | null
+          submitter_id: string | null
+          submitter_session_id: string | null
+          updated_achievement: string | null
+          updated_at: string | null
+          updated_country: string | null
+          updated_name: string | null
+          updated_state: string | null
+        }
+        Insert: {
+          award_slug?: string | null
+          award_title?: string | null
+          contact_email?: string | null
+          created_at?: string
+          group_name?: string | null
+          group_slug?: string | null
+          id?: string
+          nominee_id?: string | null
+          nominee_name: string
+          nominee_slug: string
+          note?: string | null
+          review_notes?: string | null
+          reviewed_at?: string | null
+          reviewed_by?: string | null
+          status?: string
+          subcategory_slug?: string | null
+          subcategory_title?: string | null
+          submitter_id?: string | null
+          submitter_session_id?: string | null
+          updated_achievement?: string | null
+          updated_at?: string | null
+          updated_country?: string | null
+          updated_name?: string | null
+          updated_state?: string | null
+        }
+        Update: {
+          award_slug?: string | null
+          award_title?: string | null
+          contact_email?: string | null
+          created_at?: string
+          group_name?: string | null
+          group_slug?: string | null
+          id?: string
+          nominee_id?: string | null
+          nominee_name?: string
+          nominee_slug?: string
+          note?: string | null
+          review_notes?: string | null
+          reviewed_at?: string | null
+          reviewed_by?: string | null
+          status?: string
+          subcategory_slug?: string | null
+          subcategory_title?: string | null
+          submitter_id?: string | null
+          submitter_session_id?: string | null
+          updated_achievement?: string | null
+          updated_at?: string | null
+          updated_country?: string | null
+          updated_name?: string | null
+          updated_state?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "renominations_nominee_id_fkey"
+            columns: ["nominee_id"]
+            isOneToOne: false
+            referencedRelation: "nominees"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "renominations_nominee_id_fkey"
+            columns: ["nominee_id"]
+            isOneToOne: false
+            referencedRelation: "public_nominees"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       results: {
         Row: {
           category_id: string
