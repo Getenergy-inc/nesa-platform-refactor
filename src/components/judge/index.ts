@@ -5,3 +5,4 @@ export { COIDialog } from "./COIDialog";
 export { DossierDialog } from "./DossierDialog";
 export { JudgesSidebar } from "./JudgesSidebar";
 export { JudgesArenaLayout } from "./JudgesArenaLayout";
+export { JudgeProtectedRoute } from "./JudgeProtectedRoute";
