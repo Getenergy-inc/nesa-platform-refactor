@@ -2,6 +2,11 @@
  * NESA-Africa CSV-Driven Nominee Data Layer
  * Single source of truth for all award nominees
  * Parses flattened nested CSV and provides view models for UI
+ * 
+ * Organized by:
+ * - 5 African Regions (North, East, West, South, Central)
+ * - Diaspora
+ * - Friends of Africa / International
  */
 
 import Papa from "papaparse";
@@ -57,10 +62,41 @@ export interface RegionalAward {
   totalNominees: number;
 }
 
+// Geographic categories for UI filtering
+export type GeographicCategory = 
+  | "all"
+  | "africa-regions" 
+  | "diaspora" 
+  | "friends-of-africa"
+  | "north-africa"
+  | "east-africa"
+  | "west-africa"
+  | "south-africa"
+  | "central-africa";
+
+export interface GeographicGroup {
+  id: GeographicCategory;
+  name: string;
+  description: string;
+  nomineeCount: number;
+  subcategories?: string[];
+}
+
 export interface ParseWarning {
   row: number;
   field: string;
   reason: string;
+}
+
+// Enriched nominee with context
+export interface EnrichedNominee extends Nominee {
+  awardTitle: string;
+  awardSlug: string;
+  subcategoryTitle: string;
+  subcategorySlug: string;
+  regionName?: string;
+  regionSlug?: string;
+  geographicCategory: GeographicCategory;
 }
 
 // ============================================================================
@@ -69,6 +105,25 @@ export interface ParseWarning {
 
 const ASSET_BASE_URL = import.meta.env.VITE_ASSET_BASE_URL || "";
 const PLACEHOLDER_IMAGE = "/images/placeholder.svg";
+
+// Keywords to identify geographic categories
+const DIASPORA_KEYWORDS = ["diaspora"];
+const FRIENDS_OF_AFRICA_KEYWORDS = [
+  "global education excellence",
+  "international",
+  "bilateral",
+  "embassy",
+  "global",
+  "leadership training organization"
+];
+
+const AFRICA_REGION_NAMES: Record<string, GeographicCategory> = {
+  "north africa": "north-africa",
+  "east africa": "east-africa",
+  "west africa": "west-africa",
+  "south africa": "south-africa",
+  "central africa": "central-africa",
+};
 
 // ============================================================================
 // UTILITY FUNCTIONS
@@ -104,10 +159,52 @@ export function getImageUrl(imagePath: string | undefined | null): string {
 }
 
 /**
+ * Handle image error by setting placeholder
+ */
+export function handleImageError(e: React.SyntheticEvent<HTMLImageElement>) {
+  const target = e.currentTarget;
+  if (target.src !== PLACEHOLDER_IMAGE) {
+    target.src = PLACEHOLDER_IMAGE;
+  }
+}
+
+/**
  * Generate unique ID
  */
 function generateId(): string {
   return Math.random().toString(36).substring(2, 11);
+}
+
+/**
+ * Determine geographic category from award title
+ */
+function getGeographicCategoryFromTitle(title: string): GeographicCategory {
+  const lowerTitle = title.toLowerCase();
+  
+  if (DIASPORA_KEYWORDS.some(k => lowerTitle.includes(k))) {
+    return "diaspora";
+  }
+  
+  if (FRIENDS_OF_AFRICA_KEYWORDS.some(k => lowerTitle.includes(k))) {
+    return "friends-of-africa";
+  }
+  
+  return "all";
+}
+
+/**
+ * Determine geographic category from region name
+ */
+function getGeographicCategoryFromRegion(regionName: string): GeographicCategory {
+  const lowerRegion = regionName.toLowerCase();
+  
+  for (const [key, category] of Object.entries(AFRICA_REGION_NAMES)) {
+    if (lowerRegion.includes(key)) {
+      return category;
+    }
+  }
+  
+  return "africa-regions";
 }
 
 // ============================================================================
@@ -355,14 +452,16 @@ export function getRegionalAwardDetail(awardSlug: string): RegionalAward | undef
 }
 
 /**
- * Get all nominees across all awards (flattened)
+ * Get all nominees across all awards (flattened) with enriched data
  */
-export function getAllNominees(): Array<Nominee & { awardTitle: string; awardSlug: string; subcategoryTitle: string; subcategorySlug: string; regionName?: string }> {
+export function getAllNominees(): EnrichedNominee[] {
   const data = getParsedData();
-  const allNominees: Array<Nominee & { awardTitle: string; awardSlug: string; subcategoryTitle: string; subcategorySlug: string; regionName?: string }> = [];
+  const allNominees: EnrichedNominee[] = [];
 
   // From regular awards
   data.awards.forEach((award) => {
+    const awardGeoCategory = getGeographicCategoryFromTitle(award.title);
+    
     award.subcategories.forEach((subcat) => {
       subcat.nominees.forEach((nominee) => {
         allNominees.push({
@@ -371,6 +470,7 @@ export function getAllNominees(): Array<Nominee & { awardTitle: string; awardSlu
           awardSlug: award.slug,
           subcategoryTitle: subcat.title,
           subcategorySlug: subcat.slug,
+          geographicCategory: awardGeoCategory,
         });
       });
     });
@@ -379,6 +479,8 @@ export function getAllNominees(): Array<Nominee & { awardTitle: string; awardSlu
   // From regional awards
   data.regionalAwards.forEach((award) => {
     award.regions.forEach((region) => {
+      const regionGeoCategory = getGeographicCategoryFromRegion(region.name);
+      
       region.subcategories.forEach((subcat) => {
         subcat.nominees.forEach((nominee) => {
           allNominees.push({
@@ -388,6 +490,8 @@ export function getAllNominees(): Array<Nominee & { awardTitle: string; awardSlu
             subcategoryTitle: subcat.title,
             subcategorySlug: subcat.slug,
             regionName: region.name,
+            regionSlug: region.slug,
+            geographicCategory: regionGeoCategory,
           });
         });
       });
@@ -398,9 +502,91 @@ export function getAllNominees(): Array<Nominee & { awardTitle: string; awardSlu
 }
 
 /**
+ * Get nominees filtered by geographic category
+ */
+export function getNomineesByGeography(category: GeographicCategory): EnrichedNominee[] {
+  const allNominees = getAllNominees();
+  
+  if (category === "all") {
+    return allNominees;
+  }
+  
+  if (category === "africa-regions") {
+    // Include all African regions
+    const africaCategories: GeographicCategory[] = [
+      "north-africa", "east-africa", "west-africa", "south-africa", "central-africa"
+    ];
+    return allNominees.filter(n => africaCategories.includes(n.geographicCategory));
+  }
+  
+  return allNominees.filter(n => n.geographicCategory === category);
+}
+
+/**
+ * Get geographic group summaries for UI tabs
+ */
+export function getGeographicGroups(): GeographicGroup[] {
+  const allNominees = getAllNominees();
+  
+  const africaCategories: GeographicCategory[] = [
+    "north-africa", "east-africa", "west-africa", "south-africa", "central-africa"
+  ];
+  
+  const groups: GeographicGroup[] = [
+    {
+      id: "all",
+      name: "All Nominees",
+      description: "View all nominees across all categories",
+      nomineeCount: allNominees.length,
+    },
+    {
+      id: "africa-regions",
+      name: "Africa Regions",
+      description: "Nominees from the 5 African regions",
+      nomineeCount: allNominees.filter(n => africaCategories.includes(n.geographicCategory)).length,
+      subcategories: ["North Africa", "East Africa", "West Africa", "South Africa", "Central Africa"],
+    },
+    {
+      id: "diaspora",
+      name: "Diaspora",
+      description: "African diaspora educational contributions",
+      nomineeCount: allNominees.filter(n => n.geographicCategory === "diaspora").length,
+    },
+    {
+      id: "friends-of-africa",
+      name: "Friends of Africa",
+      description: "International organizations supporting African education",
+      nomineeCount: allNominees.filter(n => n.geographicCategory === "friends-of-africa").length,
+    },
+  ];
+  
+  return groups;
+}
+
+/**
+ * Get Africa region breakdown
+ */
+export function getAfricaRegions(): GeographicGroup[] {
+  const allNominees = getAllNominees();
+  
+  const regions: { id: GeographicCategory; name: string; description: string }[] = [
+    { id: "north-africa", name: "North Africa", description: "Egypt, Morocco, Algeria, Tunisia, Libya" },
+    { id: "east-africa", name: "East Africa", description: "Kenya, Tanzania, Uganda, Ethiopia, Rwanda" },
+    { id: "west-africa", name: "West Africa", description: "Nigeria, Ghana, Senegal, Ivory Coast" },
+    { id: "south-africa", name: "Southern Africa", description: "South Africa, Botswana, Zimbabwe, Namibia" },
+    { id: "central-africa", name: "Central Africa", description: "DRC, Cameroon, Congo, Gabon" },
+  ];
+  
+  return regions.map(r => ({
+    ...r,
+    nomineeCount: allNominees.filter(n => n.geographicCategory === r.id).length,
+  }));
+}
+
+/**
  * Search nominees by name or achievement
  */
-export function searchNominees(query: string): Array<Nominee & { awardTitle: string; awardSlug: string; subcategoryTitle: string; subcategorySlug: string; regionName?: string }> {
+export function searchNominees(query: string): EnrichedNominee[] {
   if (!query || query.trim().length < 2) {
     return [];
   }
@@ -411,7 +597,8 @@ export function searchNominees(query: string): Array<Nominee & { awardTitle: str
       nominee.name.toLowerCase().includes(lowerQuery) ||
       nominee.achievement.toLowerCase().includes(lowerQuery) ||
       nominee.country?.toLowerCase().includes(lowerQuery) ||
-      nominee.state?.toLowerCase().includes(lowerQuery)
+      nominee.state?.toLowerCase().includes(lowerQuery) ||
+      nominee.regionName?.toLowerCase().includes(lowerQuery)
   );
 }
 
@@ -424,29 +611,37 @@ export function getStats(): {
   totalSubcategories: number;
   totalNominees: number;
   totalRegions: number;
+  africaRegionsCount: number;
+  diasporaCount: number;
+  friendsOfAfricaCount: number;
 } {
   const data = getParsedData();
+  const allNominees = getAllNominees();
   
   let totalSubcategories = 0;
-  let totalNominees = 0;
   
   data.awards.forEach((award) => {
     totalSubcategories += award.subcategoryCount;
-    totalNominees += award.nomineeCount;
   });
 
   let totalRegions = 0;
   data.regionalAwards.forEach((award) => {
     totalRegions += award.regions.length;
-    totalNominees += award.totalNominees;
   });
+
+  const africaCategories: GeographicCategory[] = [
+    "north-africa", "east-africa", "west-africa", "south-africa", "central-africa"
+  ];
 
   return {
     totalAwards: data.awards.length,
     totalRegionalAwards: data.regionalAwards.length,
     totalSubcategories,
-    totalNominees,
+    totalNominees: allNominees.length,
     totalRegions,
+    africaRegionsCount: allNominees.filter(n => africaCategories.includes(n.geographicCategory)).length,
+    diasporaCount: allNominees.filter(n => n.geographicCategory === "diaspora").length,
+    friendsOfAfricaCount: allNominees.filter(n => n.geographicCategory === "friends-of-africa").length,
   };
 }
 
@@ -497,16 +692,25 @@ export function getRegionOptions(): Array<{ value: string; label: string }> {
   return Array.from(regionsSet.entries()).map(([value, label]) => ({ value, label }));
 }
 
+/**
+ * Get geographic category options for filter dropdown
+ */
+export function getGeographicCategoryOptions(): Array<{ value: GeographicCategory; label: string }> {
+  return [
+    { value: "all", label: "All Categories" },
+    { value: "africa-regions", label: "Africa Regions" },
+    { value: "north-africa", label: "North Africa" },
+    { value: "east-africa", label: "East Africa" },
+    { value: "west-africa", label: "West Africa" },
+    { value: "south-africa", label: "Southern Africa" },
+    { value: "central-africa", label: "Central Africa" },
+    { value: "diaspora", label: "Diaspora" },
+    { value: "friends-of-africa", label: "Friends of Africa" },
+  ];
+}
+
 // ============================================================================
-// IMAGE COMPONENT HELPER
+// EXPORT FOR IMAGE ERROR HANDLING
 // ============================================================================
 
-/**
- * Handler for image load errors - returns placeholder URL
- */
-export function handleImageError(event: React.SyntheticEvent<HTMLImageElement>): void {
-  const img = event.currentTarget;
-  if (!img.src.includes(PLACEHOLDER_IMAGE)) {
-    img.src = PLACEHOLDER_IMAGE;
-  }
-}
+export { PLACEHOLDER_IMAGE };
