@@ -1,37 +1,15 @@
 import { useState } from "react";
 import { Helmet } from "react-helmet-async";
-import { Link, Navigate } from "react-router-dom";
-import { useAuth } from "@/contexts/AuthContext";
 import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { toast } from "sonner";
-import { 
-  Gavel, 
-  ArrowLeft,
-  Star,
-  CheckCircle,
-  Clock,
-  Shield,
-  Loader2
-} from "lucide-react";
-import {
-  useJuryAssignments,
-  useNomineeDossier,
-  useSubmitScore,
-  useDeclareCOI,
-} from "@/hooks/useJuryData";
+import { Star, CheckCircle, Clock, Shield, Loader2 } from "lucide-react";
+import { useJuryAssignments, useNomineeDossier, useSubmitScore, useDeclareCOI } from "@/hooks/useJuryData";
 import type { JuryAssignment } from "@/hooks/useJuryData";
-import {
-  AssignmentCard,
-  ScoreDialog,
-  COIDialog,
-  DossierDialog,
-} from "@/components/judge";
+import { AssignmentCard, ScoreDialog, COIDialog, DossierDialog } from "@/components/judge";
+import { JudgesArenaLayout } from "@/components/judge/JudgesArenaLayout";
 
 export default function JuryScoring() {
-  const { user, roles, loading: authLoading } = useAuth();
-  
   const { data: assignments, isLoading } = useJuryAssignments();
   const submitScoreMutation = useSubmitScore();
   const declareCOIMutation = useDeclareCOI();
@@ -44,23 +22,6 @@ export default function JuryScoring() {
   const { data: dossier, isLoading: dossierLoading } = useNomineeDossier(
     dossierDialogOpen ? selectedAssignment?.nominee_id || null : null
   );
-
-  if (authLoading) {
-    return (
-      <div className="min-h-screen bg-charcoal flex items-center justify-center">
-        <Loader2 className="h-8 w-8 text-gold animate-spin" />
-      </div>
-    );
-  }
-
-  if (!user) {
-    return <Navigate to={`/login?next=${encodeURIComponent("/judge/scoring")}`} replace />;
-  }
-
-  const isJudge = roles.includes("jury") || roles.includes("admin");
-  if (!isJudge) {
-    return <Navigate to="/unauthorized" replace />;
-  }
 
   const handleScore = (assignment: JuryAssignment) => {
     setSelectedAssignment(assignment);
@@ -107,26 +68,8 @@ export default function JuryScoring() {
         <title>Scoring Queue | Judges Arena</title>
       </Helmet>
 
-      <div className="min-h-screen bg-charcoal">
-        <header className="bg-charcoal border-b border-gold/20">
-          <div className="container py-4">
-            <div className="flex items-center gap-4">
-              <Button asChild variant="ghost" size="sm" className="text-white/60 hover:text-white">
-                <Link to="/judge/dashboard">
-                  <ArrowLeft className="mr-2 h-4 w-4" />
-                  Back to Dashboard
-                </Link>
-              </Button>
-              <div className="h-4 w-px bg-white/20" />
-              <div className="flex items-center gap-2">
-                <Gavel className="h-5 w-5 text-gold" />
-                <span className="font-semibold text-white">Scoring Queue</span>
-              </div>
-            </div>
-          </div>
-        </header>
-
-        <main className="container py-8">
+      <JudgesArenaLayout title="Scoring Queue" description="Manage your nominee evaluations">
+        <div className="p-6">
           <Tabs defaultValue="pending" className="space-y-6">
             <TabsList className="bg-white/5 border border-white/10">
               <TabsTrigger value="pending" className="data-[state=active]:bg-gold data-[state=active]:text-black">
@@ -157,18 +100,8 @@ export default function JuryScoring() {
                 <div className="grid md:grid-cols-2 gap-4">
                   {pendingAssignments.map((assignment) => (
                     <div key={assignment.id} className="relative">
-                      <AssignmentCard
-                        assignment={assignment}
-                        onScore={handleScore}
-                        onViewDossier={handleViewDossier}
-                      />
-                      <Button
-                        variant="ghost"
-                        size="sm"
-                        className="absolute top-2 right-2 text-white/40 hover:text-orange-400"
-                        onClick={() => handleDeclareCOI(assignment)}
-                        title="Declare COI"
-                      >
+                      <AssignmentCard assignment={assignment} onScore={handleScore} onViewDossier={handleViewDossier} />
+                      <Button variant="ghost" size="sm" className="absolute top-2 right-2 text-white/40 hover:text-orange-400" onClick={() => handleDeclareCOI(assignment)} title="Declare COI">
                         <Shield className="h-4 w-4" />
                       </Button>
                     </div>
@@ -186,11 +119,7 @@ export default function JuryScoring() {
               ) : (
                 <div className="grid md:grid-cols-2 gap-4">
                   {completedAssignments.map((assignment) => (
-                    <AssignmentCard
-                      key={assignment.id}
-                      assignment={assignment}
-                      onViewDossier={handleViewDossier}
-                    />
+                    <AssignmentCard key={assignment.id} assignment={assignment} onViewDossier={handleViewDossier} />
                   ))}
                 </div>
               )}
@@ -205,40 +134,18 @@ export default function JuryScoring() {
               ) : (
                 <div className="grid md:grid-cols-2 gap-4">
                   {recusedAssignments.map((assignment) => (
-                    <AssignmentCard
-                      key={assignment.id}
-                      assignment={assignment}
-                    />
+                    <AssignmentCard key={assignment.id} assignment={assignment} />
                   ))}
                 </div>
               )}
             </TabsContent>
           </Tabs>
-        </main>
-      </div>
+        </div>
+      </JudgesArenaLayout>
 
-      <ScoreDialog
-        assignment={selectedAssignment}
-        open={scoreDialogOpen}
-        onOpenChange={setScoreDialogOpen}
-        onSubmit={handleSubmitScore}
-        isSubmitting={submitScoreMutation.isPending}
-      />
-
-      <COIDialog
-        assignment={selectedAssignment}
-        open={coiDialogOpen}
-        onOpenChange={setCOIDialogOpen}
-        onSubmit={handleSubmitCOI}
-        isSubmitting={declareCOIMutation.isPending}
-      />
-
-      <DossierDialog
-        dossier={dossier}
-        isLoading={dossierLoading}
-        open={dossierDialogOpen}
-        onOpenChange={setDossierDialogOpen}
-      />
+      <ScoreDialog assignment={selectedAssignment} open={scoreDialogOpen} onOpenChange={setScoreDialogOpen} onSubmit={handleSubmitScore} isSubmitting={submitScoreMutation.isPending} />
+      <COIDialog assignment={selectedAssignment} open={coiDialogOpen} onOpenChange={setCOIDialogOpen} onSubmit={handleSubmitCOI} isSubmitting={declareCOIMutation.isPending} />
+      <DossierDialog dossier={dossier} isLoading={dossierLoading} open={dossierDialogOpen} onOpenChange={setDossierDialogOpen} />
     </>
   );
 }

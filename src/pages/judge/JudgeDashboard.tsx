@@ -1,21 +1,18 @@
 import { useState } from "react";
 import { Helmet } from "react-helmet-async";
-import { Link, Navigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useAuth } from "@/contexts/AuthContext";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
 import { toast } from "sonner";
 import { 
-  Gavel, 
-  Users, 
-  FileCheck, 
   Star,
   Shield,
-  ArrowRight,
   AlertCircle,
+  RefreshCw,
+  FileCheck,
   Loader2,
-  RefreshCw
+  Gavel
 } from "lucide-react";
 import {
   useJuryAssignments,
@@ -32,9 +29,10 @@ import {
   COIDialog,
   DossierDialog,
 } from "@/components/judge";
+import { JudgesArenaLayout } from "@/components/judge/JudgesArenaLayout";
 
 export default function JudgeDashboard() {
-  const { user, roles, loading: authLoading } = useAuth();
+  const { user } = useAuth();
   
   // Data hooks
   const { data: assignments, isLoading: assignmentsLoading, refetch } = useJuryAssignments();
@@ -54,26 +52,6 @@ export default function JudgeDashboard() {
   const { data: dossier, isLoading: dossierLoading } = useNomineeDossier(
     dossierDialogOpen ? selectedAssignment?.nominee_id || null : null
   );
-
-  if (authLoading) {
-    return (
-      <div className="min-h-screen bg-charcoal flex items-center justify-center">
-        <div className="text-center">
-          <Loader2 className="h-8 w-8 text-gold animate-spin mx-auto mb-4" />
-          <p className="text-white/70">Loading dashboard...</p>
-        </div>
-      </div>
-    );
-  }
-
-  if (!user) {
-    return <Navigate to={`/login?next=${encodeURIComponent("/judge/dashboard")}`} replace />;
-  }
-
-  const isJudge = roles.includes("jury") || roles.includes("admin");
-  if (!isJudge) {
-    return <Navigate to="/unauthorized" replace />;
-  }
 
   const handleScore = (assignment: JuryAssignment) => {
     setSelectedAssignment(assignment);
@@ -120,34 +98,8 @@ export default function JudgeDashboard() {
         <title>Judges Arena | NESA-Africa</title>
       </Helmet>
 
-      <div className="min-h-screen bg-charcoal">
-        {/* Header */}
-        <header className="bg-charcoal border-b border-gold/20">
-          <div className="container py-4">
-            <div className="flex items-center justify-between">
-              <div className="flex items-center gap-3">
-                <div className="h-10 w-10 rounded-full bg-gold/20 flex items-center justify-center">
-                  <Gavel className="h-5 w-5 text-gold" />
-                </div>
-                <div>
-                  <h1 className="text-lg font-bold text-white">Judges Arena</h1>
-                  <p className="text-sm text-white/60">NESA-Africa Blue Garnet Jury Panel</p>
-                </div>
-              </div>
-              <div className="flex items-center gap-4">
-                <Badge className="bg-gold/20 text-gold border-gold/30">
-                  <Users className="mr-1 h-3 w-3" />
-                  Jury Member
-                </Badge>
-                <Button asChild variant="outline" size="sm" className="border-white/20 text-white hover:bg-white/10">
-                  <Link to="/">Exit Arena</Link>
-                </Button>
-              </div>
-            </div>
-          </div>
-        </header>
-
-        <main className="container py-8">
+      <JudgesArenaLayout title="Dashboard" description="Your jury workspace overview">
+        <div className="p-6">
           {/* Welcome Message */}
           <div className="mb-8 flex items-start justify-between">
             <div>
@@ -264,31 +216,8 @@ export default function JudgeDashboard() {
             </Card>
           )}
 
-          {/* Navigation Links */}
-          <div className="mt-8 pt-8 border-t border-white/10">
-            <div className="flex flex-wrap gap-4">
-              <Button asChild variant="outline" className="border-white/20 text-white hover:bg-white/10">
-                <Link to="/judge/scoring">
-                  <Star className="mr-2 h-4 w-4" />
-                  All Assignments
-                </Link>
-              </Button>
-              <Button asChild variant="outline" className="border-white/20 text-white hover:bg-white/10">
-                <Link to="/judge/coi">
-                  <Shield className="mr-2 h-4 w-4" />
-                  COI Declarations ({recusedAssignments.length})
-                </Link>
-              </Button>
-              <Button asChild variant="outline" className="border-white/20 text-white hover:bg-white/10">
-                <Link to="/about/governance">
-                  <FileCheck className="mr-2 h-4 w-4" />
-                  Governance Framework
-                </Link>
-              </Button>
-            </div>
-          </div>
-        </main>
-      </div>
+        </div>
+      </JudgesArenaLayout>
 
       {/* Dialogs */}
       <ScoreDialog
