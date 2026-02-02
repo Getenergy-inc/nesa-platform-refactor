@@ -971,6 +971,87 @@ export type Database = {
         }
         Relationships: []
       }
+      judge_applications: {
+        Row: {
+          approved_at: string | null
+          bio: string | null
+          country: string | null
+          created_at: string | null
+          cv_url: string | null
+          email: string
+          expertise_areas: string[] | null
+          full_name: string
+          id: string
+          linkedin_url: string | null
+          organization: string | null
+          phone: string | null
+          rejected_at: string | null
+          rejection_reason: string | null
+          review_notes: string | null
+          reviewed_by: string | null
+          status: string
+          title: string | null
+          updated_at: string | null
+          user_id: string | null
+          verification_token: string | null
+          verification_token_expires_at: string | null
+          verified_at: string | null
+          years_experience: number | null
+        }
+        Insert: {
+          approved_at?: string | null
+          bio?: string | null
+          country?: string | null
+          created_at?: string | null
+          cv_url?: string | null
+          email: string
+          expertise_areas?: string[] | null
+          full_name: string
+          id?: string
+          linkedin_url?: string | null
+          organization?: string | null
+          phone?: string | null
+          rejected_at?: string | null
+          rejection_reason?: string | null
+          review_notes?: string | null
+          reviewed_by?: string | null
+          status?: string
+          title?: string | null
+          updated_at?: string | null
+          user_id?: string | null
+          verification_token?: string | null
+          verification_token_expires_at?: string | null
+          verified_at?: string | null
+          years_experience?: number | null
+        }
+        Update: {
+          approved_at?: string | null
+          bio?: string | null
+          country?: string | null
+          created_at?: string | null
+          cv_url?: string | null
+          email?: string
+          expertise_areas?: string[] | null
+          full_name?: string
+          id?: string
+          linkedin_url?: string | null
+          organization?: string | null
+          phone?: string | null
+          rejected_at?: string | null
+          rejection_reason?: string | null
+          review_notes?: string | null
+          reviewed_by?: string | null
+          status?: string
+          title?: string | null
+          updated_at?: string | null
+          user_id?: string | null
+          verification_token?: string | null
+          verification_token_expires_at?: string | null
+          verified_at?: string | null
+          years_experience?: number | null
+        }
+        Relationships: []
+      }
       jury_assignments: {
         Row: {
           assigned_at: string | null

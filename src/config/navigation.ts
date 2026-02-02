@@ -7,6 +7,7 @@ import {
   Building,
   Calendar,
   ChevronDown,
+  Clock,
   Coins,
   FileCheck,
   Gavel,
@@ -161,10 +162,35 @@ export const MAIN_NAV: NavItem[] = [
         stageGated: "nominations",
       },
       {
-        label: "Become a Judge",
+        label: "Judges",
         href: "/judges",
-        description: "Join the expert jury panel",
+        description: "NESA-Africa Jury Panel",
         icon: Gavel,
+        children: [
+          {
+            label: "Apply to be a Judge",
+            href: "/judge/apply",
+            description: "Submit your application to join the jury",
+            icon: FileCheck,
+          },
+          {
+            label: "Check Application Status",
+            href: "/judge/status",
+            description: "Track your judge application",
+            icon: Clock,
+          },
+          {
+            label: "Judge Login",
+            href: "/login?next=/judge/dashboard",
+            description: "Sign in to the Judges Arena",
+            icon: Gavel,
+          },
+          {
+            label: "About Judges",
+            href: "/judges",
+            description: "Learn about the jury panel",
+          },
+        ],
       },
       {
         label: "Sponsors",
@@ -337,6 +363,7 @@ export const FOOTER_NAV: NavSection[] = [
     items: [
       { label: "Nominate", href: "/nominate" },
       { label: "Vote", href: "/vote" },
+      { label: "Apply to be a Judge", href: "/judge/apply" },
       { label: "Partners", href: "/partners" },
       { label: "Chapters", href: "/chapters" },
       { label: "Volunteer", href: "/volunteer" },

@@ -54,6 +54,9 @@ import Donate from "./pages/Donate";
 import EduAid from "./pages/EduAid";
 import Rebuild from "./pages/Rebuild";
 import Judges from "./pages/Judges";
+
+// Judge Portal Pages
+import { JudgeApply, JudgeStatus, JudgeSignup, JudgeVerify, JudgeDashboard, JudgePortal } from "./pages/judge";
 import Partners from "./pages/Partners";
 import Chapters from "./pages/Chapters";
 import Volunteer from "./pages/Volunteer";
@@ -207,6 +210,16 @@ const App = () => (
                 <Route path="/eduaid" element={<WithLayout><EduAid /></WithLayout>} />
                 <Route path="/rebuild" element={<WithLayout><Rebuild /></WithLayout>} />
                 <Route path="/judges" element={<WithLayout><Judges /></WithLayout>} />
+                
+                {/* Judge Application Flow (Public) */}
+                <Route path="/judge/apply" element={<WithLayout><JudgeApply /></WithLayout>} />
+                <Route path="/judge/status" element={<WithLayout><JudgeStatus /></WithLayout>} />
+                <Route path="/judge/signup" element={<JudgeSignup />} />
+                <Route path="/judge/verify" element={<JudgeVerify />} />
+                
+                {/* Judge Portal Routes (Authenticated) */}
+                <Route path="/judge" element={<JudgePortal />} />
+                <Route path="/judge/dashboard" element={<JudgeDashboard />} />
                 <Route path="/partners" element={<WithLayout><Partners /></WithLayout>} />
                 <Route path="/chapters" element={<WithLayout><Chapters /></WithLayout>} />
                 <Route path="/volunteer" element={<WithLayout><Volunteer /></WithLayout>} />

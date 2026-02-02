@@ -43,14 +43,22 @@ export function JudgesSection() {
           ))}
         </div>
 
-        {/* CTA */}
-        <div className="text-center">
+        {/* CTAs */}
+        <div className="flex flex-wrap justify-center gap-4">
           <Button
             asChild
             size="lg"
             className="bg-gold hover:bg-gold-dark text-charcoal font-semibold rounded-full px-8"
           >
-            <Link to="/judges">See All Judges</Link>
+            <Link to="/judge/apply">Apply to be a Judge</Link>
+          </Button>
+          <Button
+            asChild
+            size="lg"
+            variant="outline"
+            className="border-gold/30 text-gold hover:bg-gold/10 rounded-full px-8"
+          >
+            <Link to="/judges">Learn More</Link>
           </Button>
         </div>
       </div>

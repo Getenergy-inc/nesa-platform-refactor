@@ -74,10 +74,38 @@ export default function Judges() {
                 Shape the future of African education recognition. Join our distinguished
                 panel of experts who evaluate and select Blue Garnet Award winners.
               </p>
-              <Button size="lg" className="bg-primary text-primary-foreground">
-                <FileText className="mr-2 h-5 w-5" />
-                Apply Now
-              </Button>
+              <div className="flex flex-wrap justify-center gap-4">
+                <Button asChild size="lg" className="bg-primary text-primary-foreground">
+                  <Link to="/judge/apply">
+                    <FileText className="mr-2 h-5 w-5" />
+                    Apply Now
+                  </Link>
+                </Button>
+                <Button asChild size="lg" variant="outline" className="border-white/20 text-white hover:bg-white/10">
+                  <Link to="/judge/status">
+                    Check Application Status
+                  </Link>
+                </Button>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Quick Links Bar */}
+        <section className="bg-charcoal border-b border-white/10">
+          <div className="container mx-auto px-4 py-4">
+            <div className="flex flex-wrap justify-center gap-4 text-sm">
+              <Link to="/judge/apply" className="text-gold hover:underline flex items-center gap-1">
+                <FileText className="h-4 w-4" /> Apply to be a Judge
+              </Link>
+              <span className="text-white/30">|</span>
+              <Link to="/judge/status" className="text-white/70 hover:text-gold flex items-center gap-1">
+                <Clock className="h-4 w-4" /> Check Status
+              </Link>
+              <span className="text-white/30">|</span>
+              <Link to="/login?next=/judge/dashboard" className="text-white/70 hover:text-gold flex items-center gap-1">
+                <Gavel className="h-4 w-4" /> Judge Login
+              </Link>
             </div>
           </div>
         </section>
@@ -229,9 +257,11 @@ export default function Judges() {
               Africa's most impactful education champions.
             </p>
             <div className="flex flex-wrap justify-center gap-4">
-              <Button size="lg" className="bg-primary text-primary-foreground">
-                <FileText className="mr-2 h-5 w-5" />
-                Submit Application
+              <Button asChild size="lg" className="bg-primary text-primary-foreground">
+                <Link to="/judge/apply">
+                  <FileText className="mr-2 h-5 w-5" />
+                  Submit Application
+                </Link>
               </Button>
               <Button asChild size="lg" variant="outline" className="border-white/20 text-white hover:bg-white/10">
                 <Link to="/contact">Contact Us</Link>
