@@ -212,8 +212,8 @@ export default function JudgeStatus() {
                 <p className="text-white/60 mb-4">
                   We couldn't find an application with that email address.
                 </p>
-                <Button asChild className="bg-gold hover:bg-gold-dark text-charcoal">
-                  <Link to="/judge/apply">
+                  <Button asChild className="bg-gold hover:bg-gold-dark text-charcoal">
+                  <Link to="/judgeapply">
                     Apply Now
                     <ArrowRight className="ml-2 h-4 w-4" />
                   </Link>
@@ -287,7 +287,7 @@ export default function JudgeStatus() {
                       asChild 
                       className="w-full bg-gold hover:bg-gold-dark text-charcoal font-semibold"
                     >
-                      <Link to={`/judge/signup?email=${encodeURIComponent(application.email)}`}>
+                      <Link to={`/judge-signup?email=${encodeURIComponent(application.email)}`}>
                         <UserPlus className="mr-2 h-4 w-4" />
                         Create Your Judge Account
                       </Link>
@@ -299,7 +299,7 @@ export default function JudgeStatus() {
                       asChild 
                       className="w-full bg-gold hover:bg-gold-dark text-charcoal font-semibold"
                     >
-                      <Link to="/login">
+                      <Link to="/login?next=/judge/dashboard">
                         Sign In to Judges Arena
                         <ArrowRight className="ml-2 h-4 w-4" />
                       </Link>

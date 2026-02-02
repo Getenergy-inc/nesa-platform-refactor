@@ -2,12 +2,15 @@ import { useState } from "react";
 import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { useAuth } from "@/contexts/AuthContext";
+import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { toast } from "sonner";
-import { Award, Mail, Lock } from "lucide-react";
+import { Award, Mail, Lock, ShieldCheck } from "lucide-react";
+import { JudgeOTPNotice, JudgeOTPHelperText } from "@/components/auth/JudgeOTPNotice";
+import { markOTPVerified } from "@/components/judge/JudgeOTPGate";
 
 export default function Login() {
   const { t } = useTranslation("pages");
@@ -25,12 +28,49 @@ export default function Login() {
     || searchParams.get("redirect") 
     || "/dashboard";
 
+  // Check if this is a judge-related redirect
+  const isJudgeLogin = nextUrl.startsWith("/judge");
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
 
     try {
       await signIn(email, password);
+      
+      // Check if user is a judge (has jury role)
+      const { data: userData } = await supabase.auth.getUser();
+      if (userData?.user) {
+        const { data: roles } = await supabase
+          .from("user_roles")
+          .select("role")
+          .eq("user_id", userData.user.id);
+        
+        const isJudge = roles?.some(r => r.role === "jury" || r.role === "admin");
+        
+        if (isJudge && nextUrl.startsWith("/judge")) {
+          // Redirect judges to OTP verification for arena access
+          toast.success(t("auth.login.welcomeBack"));
+          
+          // Send OTP email
+          const { error: otpError } = await supabase.auth.signInWithOtp({
+            email: email,
+            options: {
+              shouldCreateUser: false,
+            },
+          });
+
+          if (otpError) {
+            console.error("OTP send error:", otpError);
+            // If OTP fails, still proceed but log the error
+            toast.warning("OTP verification may be required");
+          }
+
+          navigate(`/otp?email=${encodeURIComponent(email)}&redirect=${encodeURIComponent(nextUrl)}`);
+          return;
+        }
+      }
+      
       toast.success(t("auth.login.welcomeBack"));
       // Navigate to the next URL or dashboard
       navigate(nextUrl);
@@ -55,6 +95,11 @@ export default function Login() {
         </CardHeader>
         <form onSubmit={handleSubmit}>
           <CardContent className="space-y-4">
+            {/* Judge OTP Notice - Show for judge-related logins */}
+            {isJudgeLogin && (
+              <JudgeOTPNotice />
+            )}
+
             <div className="space-y-2">
               <Label htmlFor="email">{t("auth.login.email")}</Label>
               <div className="relative">
@@ -102,6 +147,12 @@ export default function Login() {
             >
               {loading ? t("auth.login.signingIn") : t("auth.login.signIn")}
             </Button>
+            
+            {/* Judge OTP helper text */}
+            {isJudgeLogin && (
+              <JudgeOTPHelperText />
+            )}
+            
             <p className="text-center text-sm text-muted-foreground">
               {t("auth.login.noAccount")}{" "}
               <Link to="/register" className="font-medium text-primary hover:underline">
