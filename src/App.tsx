@@ -56,7 +56,7 @@ import Rebuild from "./pages/Rebuild";
 import Judges from "./pages/Judges";
 
 // Judge Portal Pages
-import { JudgeApply, JudgeStatus, JudgeSignup, JudgeVerify, JudgeDashboard, JudgePortal, JuryScoring, JuryCOI } from "./pages/judge";
+import { JudgeApply, JudgeStatus, JudgeSignup, JudgeVerify, JudgeDashboard, JudgePortal, JuryScoring, JuryCOI, JudgeRubric, JudgeGuidelines, JudgePanel, JudgeHelp, JudgeSettings } from "./pages/judge";
 import Partners from "./pages/Partners";
 import Chapters from "./pages/Chapters";
 import Volunteer from "./pages/Volunteer";
@@ -230,6 +230,11 @@ const App = () => (
                 <Route path="/judge/dashboard" element={<JudgeDashboard />} />
                 <Route path="/judge/scoring" element={<JuryScoring />} />
                 <Route path="/judge/coi" element={<JuryCOI />} />
+                <Route path="/judge/rubric" element={<JudgeRubric />} />
+                <Route path="/judge/guidelines" element={<JudgeGuidelines />} />
+                <Route path="/judge/panel" element={<JudgePanel />} />
+                <Route path="/judge/help" element={<JudgeHelp />} />
+                <Route path="/judge/settings" element={<JudgeSettings />} />
                 <Route path="/partners" element={<WithLayout><Partners /></WithLayout>} />
                 <Route path="/chapters" element={<WithLayout><Chapters /></WithLayout>} />
                 <Route path="/volunteer" element={<WithLayout><Volunteer /></WithLayout>} />
