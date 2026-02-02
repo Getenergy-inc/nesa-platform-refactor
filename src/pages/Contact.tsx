@@ -24,6 +24,7 @@ import {
   Video,
   Award,
   Upload,
+  Youtube,
 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 
@@ -474,17 +475,17 @@ export default function Contact() {
                 </CardHeader>
                 <CardContent>
                   <div className="flex gap-4">
-                    <a href="#" className="w-10 h-10 bg-muted rounded-full flex items-center justify-center hover:bg-nesa-gold hover:text-black transition-colors">
+                    <a href="https://facebook.com/nesaafrica" target="_blank" rel="noopener noreferrer" className="w-10 h-10 bg-muted rounded-full flex items-center justify-center hover:bg-nesa-gold hover:text-black transition-colors">
                       <Facebook className="w-5 h-5" />
                     </a>
-                    <a href="#" className="w-10 h-10 bg-muted rounded-full flex items-center justify-center hover:bg-nesa-gold hover:text-black transition-colors">
+                    <a href="https://twitter.com/nesaafrica" target="_blank" rel="noopener noreferrer" className="w-10 h-10 bg-muted rounded-full flex items-center justify-center hover:bg-nesa-gold hover:text-black transition-colors">
                       <Twitter className="w-5 h-5" />
                     </a>
-                    <a href="#" className="w-10 h-10 bg-muted rounded-full flex items-center justify-center hover:bg-nesa-gold hover:text-black transition-colors">
+                    <a href="https://linkedin.com/company/nesa-africa" target="_blank" rel="noopener noreferrer" className="w-10 h-10 bg-muted rounded-full flex items-center justify-center hover:bg-nesa-gold hover:text-black transition-colors">
                       <Linkedin className="w-5 h-5" />
                     </a>
-                    <a href="#" className="w-10 h-10 bg-muted rounded-full flex items-center justify-center hover:bg-nesa-gold hover:text-black transition-colors">
-                      <Instagram className="w-5 h-5" />
+                    <a href="https://www.youtube.com/@Nesa.africaTV" target="_blank" rel="noopener noreferrer" className="w-10 h-10 bg-muted rounded-full flex items-center justify-center hover:bg-nesa-gold hover:text-black transition-colors">
+                      <Youtube className="w-5 h-5" />
                     </a>
                   </div>
                   <p className="text-sm text-muted-foreground mt-4">

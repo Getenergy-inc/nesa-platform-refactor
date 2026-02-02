@@ -25,7 +25,7 @@ import {
 
 // Social media links for NESA Africa TV
 const socialLinks = [
-  { icon: Youtube, href: "https://youtube.com/@nesaafricatv", label: "YouTube", color: "hover:text-red-500" },
+  { icon: Youtube, href: "https://www.youtube.com/@Nesa.africaTV", label: "YouTube", color: "hover:text-red-500" },
   { icon: Linkedin, href: "https://linkedin.com/company/nesa-africa", label: "LinkedIn", color: "hover:text-blue-500" },
   { icon: Twitter, href: "https://twitter.com/nesaafrica", label: "Twitter", color: "hover:text-sky-400" },
   { icon: Instagram, href: "https://instagram.com/nesaafrica", label: "Instagram", color: "hover:text-pink-500" },
@@ -270,8 +270,8 @@ function NomineeShowcaseCard({
           })()}
           
           {/* Play Icon for video link */}
-          <a
-            href="https://youtube.com/@nesaafricatv"
+                  <a
+                    href="https://www.youtube.com/@Nesa.africaTV"
             target="_blank"
             rel="noopener noreferrer"
             className="absolute -bottom-1 right-1/2 translate-x-1/2 h-6 w-6 bg-red-600 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity hover:scale-110"

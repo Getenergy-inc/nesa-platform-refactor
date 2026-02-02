@@ -338,7 +338,7 @@ export default function Shows() {
                   className="border-gold/40 text-gold hover:bg-gold/10 rounded-full gap-2"
                   asChild
                 >
-                  <a href="https://youtube.com/@nesaafrica" target="_blank" rel="noopener noreferrer">
+                  <a href="https://www.youtube.com/@Nesa.africaTV" target="_blank" rel="noopener noreferrer">
                     <Youtube className="h-5 w-5" />
                     YouTube
                   </a>
