@@ -62,6 +62,13 @@ export type Database = {
             referencedRelation: "nominees"
             referencedColumns: ["id"]
           },
+          {
+            foreignKeyName: "acceptance_letters_nominee_id_fkey"
+            columns: ["nominee_id"]
+            isOneToOne: true
+            referencedRelation: "public_nominees"
+            referencedColumns: ["id"]
+          },
         ]
       }
       audit_events: {
@@ -421,6 +428,13 @@ export type Database = {
             referencedColumns: ["id"]
           },
           {
+            foreignKeyName: "certificates_nominee_id_fkey"
+            columns: ["nominee_id"]
+            isOneToOne: false
+            referencedRelation: "public_nominees"
+            referencedColumns: ["id"]
+          },
+          {
             foreignKeyName: "certificates_renewed_from_id_fkey"
             columns: ["renewed_from_id"]
             isOneToOne: false
@@ -530,6 +544,13 @@ export type Database = {
             columns: ["nominee_id"]
             isOneToOne: false
             referencedRelation: "nominees"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "coi_declarations_nominee_id_fkey"
+            columns: ["nominee_id"]
+            isOneToOne: false
+            referencedRelation: "public_nominees"
             referencedColumns: ["id"]
           },
         ]
@@ -878,6 +899,13 @@ export type Database = {
             referencedRelation: "nominees"
             referencedColumns: ["id"]
           },
+          {
+            foreignKeyName: "evidence_bundles_nominee_id_fkey"
+            columns: ["nominee_id"]
+            isOneToOne: false
+            referencedRelation: "public_nominees"
+            referencedColumns: ["id"]
+          },
         ]
       }
       faqs: {
@@ -999,6 +1027,13 @@ export type Database = {
             columns: ["nominee_id"]
             isOneToOne: false
             referencedRelation: "nominees"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "jury_assignments_nominee_id_fkey"
+            columns: ["nominee_id"]
+            isOneToOne: false
+            referencedRelation: "public_nominees"
             referencedColumns: ["id"]
           },
           {
@@ -1204,6 +1239,13 @@ export type Database = {
             columns: ["created_nominee_id"]
             isOneToOne: false
             referencedRelation: "nominees"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "nominations_created_nominee_id_fkey"
+            columns: ["created_nominee_id"]
+            isOneToOne: false
+            referencedRelation: "public_nominees"
             referencedColumns: ["id"]
           },
           {
@@ -2149,6 +2191,13 @@ export type Database = {
             referencedColumns: ["id"]
           },
           {
+            foreignKeyName: "results_nominee_id_fkey"
+            columns: ["nominee_id"]
+            isOneToOne: false
+            referencedRelation: "public_nominees"
+            referencedColumns: ["id"]
+          },
+          {
             foreignKeyName: "results_season_id_fkey"
             columns: ["season_id"]
             isOneToOne: false
@@ -2862,6 +2911,13 @@ export type Database = {
             referencedColumns: ["id"]
           },
           {
+            foreignKeyName: "votes_nominee_id_fkey"
+            columns: ["nominee_id"]
+            isOneToOne: false
+            referencedRelation: "public_nominees"
+            referencedColumns: ["id"]
+          },
+          {
             foreignKeyName: "votes_season_id_fkey"
             columns: ["season_id"]
             isOneToOne: false
@@ -3028,6 +3084,102 @@ export type Database = {
       }
     }
     Views: {
+      public_nominees: {
+        Row: {
+          acceptance_status:
+            | Database["public"]["Enums"]["acceptance_status"]
+            | null
+          bio: string | null
+          country: string | null
+          created_at: string | null
+          final_score: number | null
+          id: string | null
+          is_platinum: boolean | null
+          jury_score: number | null
+          logo_url: string | null
+          name: string | null
+          nrc_verified: boolean | null
+          organization: string | null
+          photo_url: string | null
+          public_votes: number | null
+          region: string | null
+          renomination_count: number | null
+          season_id: string | null
+          slug: string | null
+          status: Database["public"]["Enums"]["nomination_status"] | null
+          subcategory_id: string | null
+          title: string | null
+          updated_at: string | null
+        }
+        Insert: {
+          acceptance_status?:
+            | Database["public"]["Enums"]["acceptance_status"]
+            | null
+          bio?: string | null
+          country?: string | null
+          created_at?: string | null
+          final_score?: number | null
+          id?: string | null
+          is_platinum?: boolean | null
+          jury_score?: number | null
+          logo_url?: string | null
+          name?: string | null
+          nrc_verified?: boolean | null
+          organization?: string | null
+          photo_url?: string | null
+          public_votes?: number | null
+          region?: string | null
+          renomination_count?: number | null
+          season_id?: string | null
+          slug?: string | null
+          status?: Database["public"]["Enums"]["nomination_status"] | null
+          subcategory_id?: string | null
+          title?: string | null
+          updated_at?: string | null
+        }
+        Update: {
+          acceptance_status?:
+            | Database["public"]["Enums"]["acceptance_status"]
+            | null
+          bio?: string | null
+          country?: string | null
+          created_at?: string | null
+          final_score?: number | null
+          id?: string | null
+          is_platinum?: boolean | null
+          jury_score?: number | null
+          logo_url?: string | null
+          name?: string | null
+          nrc_verified?: boolean | null
+          organization?: string | null
+          photo_url?: string | null
+          public_votes?: number | null
+          region?: string | null
+          renomination_count?: number | null
+          season_id?: string | null
+          slug?: string | null
+          status?: Database["public"]["Enums"]["nomination_status"] | null
+          subcategory_id?: string | null
+          title?: string | null
+          updated_at?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "nominees_season_id_fkey"
+            columns: ["season_id"]
+            isOneToOne: false
+            referencedRelation: "seasons"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "nominees_subcategory_id_fkey"
+            columns: ["subcategory_id"]
+            isOneToOne: false
+            referencedRelation: "subcategories"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       public_profiles: {
         Row: {
           avatar_url: string | null
