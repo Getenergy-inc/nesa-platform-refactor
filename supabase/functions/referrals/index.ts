@@ -1,25 +1,30 @@
-import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
+/**
+ * Referrals Edge Function
+ * 
+ * Manages user and chapter referral programs.
+ * 
+ * Endpoints:
+ *   GET  /referrals/me           - Get user's referral info
+ *   POST /referrals/invite       - Generate invite link
+ *   GET  /referrals/tree         - Get referral tree
+ *   GET  /referrals/earnings     - Get earnings breakdown
+ *   GET  /referrals/lookup/:code - Public code validation (no auth)
+ */
 
-const corsHeaders = {
-  "Access-Control-Allow-Origin": "*",
-  "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type",
-};
-
-const respond = (data: unknown, meta?: Record<string, unknown>, status = 200) =>
-  new Response(
-    JSON.stringify({ ok: true, data, ...(meta && { meta }) }),
-    { status, headers: { ...corsHeaders, "Content-Type": "application/json" } }
-  );
-
-const errorResponse = (message: string, status = 400) =>
-  new Response(
-    JSON.stringify({ ok: false, error: message }),
-    { status, headers: { ...corsHeaders, "Content-Type": "application/json" } }
-  );
+import {
+  corsHeaders,
+  handleCorsPreflightRequest,
+  ok,
+  err,
+  createUserClient,
+  createAdminClient,
+  getAuthUser,
+  hasRoleCode,
+} from "../_shared/index.ts";
 
 Deno.serve(async (req) => {
   if (req.method === "OPTIONS") {
-    return new Response(null, { headers: corsHeaders });
+    return handleCorsPreflightRequest();
   }
 
   try {
@@ -27,77 +32,41 @@ Deno.serve(async (req) => {
     const pathParts = url.pathname.split("/").filter(Boolean);
     const action = pathParts[1] || "";
 
-    const authHeader = req.headers.get("Authorization");
-    const supabase = createClient(
-      Deno.env.get("SUPABASE_URL")!,
-      Deno.env.get("SUPABASE_ANON_KEY")!,
-      { global: { headers: { Authorization: authHeader || "" } } }
-    );
-
-    const adminSupabase = createClient(
-      Deno.env.get("SUPABASE_URL")!,
-      Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!,
-      { auth: { persistSession: false } }
-    );
-
-    const requireAuth = async (): Promise<string | null> => {
-      if (!authHeader?.startsWith("Bearer ")) return null;
-      const { data: { user }, error } = await supabase.auth.getUser();
-      if (error || !user) return null;
-      return user.id;
-    };
-
-    const hasRoleCode = async (userId: string, roleCode: string) => {
-      const { data } = await supabase.rpc("has_role_code", { p_user_id: userId, p_role_code: roleCode });
-      return data === true;
-    };
+    const supabase = createUserClient(req);
+    const adminSupabase = createAdminClient();
 
     // ============================================================
     // GET /referrals/me - Get user's referral info
     // ============================================================
     if (action === "me" && req.method === "GET") {
-      const userId = await requireAuth();
-      if (!userId) return errorResponse("Unauthorized", 401);
+      const userId = await getAuthUser(supabase, req);
+      if (!userId) return err("Unauthorized", 401);
 
-      const { data: referral } = await supabase
-        .from("referrals")
-        .select("*")
-        .eq("owner_type", "USER")
-        .eq("owner_id", userId)
-        .maybeSingle();
+      const [referralRes, eventsRes] = await Promise.all([
+        supabase.from("referrals").select("*").eq("owner_type", "USER").eq("owner_id", userId).maybeSingle(),
+        supabase.from("referral_events").select("*").eq("referrer_type", "USER").eq("referrer_id", userId)
+          .order("created_at", { ascending: false }).limit(50),
+      ]);
 
-      const { data: events } = await supabase
-        .from("referral_events")
-        .select("*")
-        .eq("referrer_type", "USER")
-        .eq("referrer_id", userId)
-        .order("created_at", { ascending: false })
-        .limit(50);
-
-      // Calculate earnings summary
+      const events = eventsRes.data || [];
       const earnings = {
-        total_agc: events?.reduce((sum, e) => sum + (e.reward_agc || 0), 0) || 0,
-        total_referrals: events?.filter(e => e.event_type === "SIGNUP").length || 0,
-        paid_conversions: events?.filter(e => 
+        total_agc: events.reduce((sum, e) => sum + (e.reward_agc || 0), 0),
+        total_referrals: events.filter(e => e.event_type === "SIGNUP").length,
+        paid_conversions: events.filter(e => 
           ["NOMINATION_PAID", "VOTE_PAID", "TICKET", "DONATION"].includes(e.event_type)
-        ).length || 0,
+        ).length,
       };
 
-      return respond({
-        referral,
-        recentEvents: events || [],
-        earnings,
-      });
+      return ok({ referral: referralRes.data, recentEvents: events, earnings });
     }
 
     // ============================================================
     // POST /referrals/invite - Generate/get invite link
     // ============================================================
     if (action === "invite" && req.method === "POST") {
-      const userId = await requireAuth();
-      if (!userId) return errorResponse("Unauthorized", 401);
+      const userId = await getAuthUser(supabase, req);
+      if (!userId) return err("Unauthorized", 401);
 
-      // Get or create referral
       let { data: referral } = await supabase
         .from("referrals")
         .select("*")
@@ -124,7 +93,7 @@ Deno.serve(async (req) => {
       const baseUrl = Deno.env.get("SITE_URL") || "https://nesa.africa";
       const inviteLink = `${baseUrl}/register?ref=${referral.referral_code}`;
 
-      return respond({
+      return ok({
         referral_code: referral.referral_code,
         invite_link: inviteLink,
         is_active: referral.is_active,
@@ -135,20 +104,18 @@ Deno.serve(async (req) => {
     // GET /referrals/tree - Get referral tree
     // ============================================================
     if (action === "tree" && req.method === "GET") {
-      const userId = await requireAuth();
-      if (!userId) return errorResponse("Unauthorized", 401);
+      const userId = await getAuthUser(supabase, req);
+      if (!userId) return err("Unauthorized", 401);
 
       const scope = url.searchParams.get("scope") || "user";
 
       if (scope === "user") {
-        // Get users referred by this user
         const { data: referred } = await adminSupabase
           .from("profiles")
           .select("id, user_id, full_name, email, created_at")
           .eq("referred_by_user_id", userId)
           .order("created_at", { ascending: false });
 
-        // Get referral events for these users
         const referredUserIds = referred?.map(r => r.user_id) || [];
         const { data: events } = await adminSupabase
           .from("referral_events")
@@ -169,13 +136,13 @@ Deno.serve(async (req) => {
           };
         });
 
-        return respond(tree);
+        return ok(tree);
       }
 
       if (scope === "chapter") {
-        // Get chapter where user is coordinator
-        const isOLC = await hasRoleCode(userId, "OLC_COORDINATOR");
-        if (!isOLC) return errorResponse("Forbidden", 403);
+        if (!(await hasRoleCode(supabase, userId, "OLC_COORDINATOR"))) {
+          return err("Forbidden", 403);
+        }
 
         const { data: chapter } = await supabase
           .from("chapters")
@@ -183,9 +150,8 @@ Deno.serve(async (req) => {
           .eq("coordinator_user_id", userId)
           .maybeSingle();
 
-        if (!chapter) return errorResponse("No chapter assigned", 404);
+        if (!chapter) return err("No chapter assigned", 404);
 
-        // Get users referred by this chapter
         const { data: referred } = await adminSupabase
           .from("profiles")
           .select("id, user_id, full_name, email, created_at")
@@ -212,18 +178,18 @@ Deno.serve(async (req) => {
           };
         });
 
-        return respond(tree);
+        return ok(tree);
       }
 
-      return errorResponse("Invalid scope");
+      return err("Invalid scope");
     }
 
     // ============================================================
     // GET /referrals/earnings - Get earnings breakdown
     // ============================================================
     if (action === "earnings" && req.method === "GET") {
-      const userId = await requireAuth();
-      if (!userId) return errorResponse("Unauthorized", 401);
+      const userId = await getAuthUser(supabase, req);
+      if (!userId) return err("Unauthorized", 401);
 
       const groupBy = url.searchParams.get("groupBy") || "type";
 
@@ -236,29 +202,25 @@ Deno.serve(async (req) => {
       if (groupBy === "type") {
         const byType: Record<string, { count: number; total_agc: number }> = {};
         (events || []).forEach(e => {
-          if (!byType[e.event_type]) {
-            byType[e.event_type] = { count: 0, total_agc: 0 };
-          }
+          if (!byType[e.event_type]) byType[e.event_type] = { count: 0, total_agc: 0 };
           byType[e.event_type].count += 1;
           byType[e.event_type].total_agc += e.reward_agc || 0;
         });
-        return respond(byType);
+        return ok(byType);
       }
 
       if (groupBy === "month") {
         const byMonth: Record<string, { count: number; total_agc: number }> = {};
         (events || []).forEach(e => {
           const month = e.created_at?.substring(0, 7) || "unknown";
-          if (!byMonth[month]) {
-            byMonth[month] = { count: 0, total_agc: 0 };
-          }
+          if (!byMonth[month]) byMonth[month] = { count: 0, total_agc: 0 };
           byMonth[month].count += 1;
           byMonth[month].total_agc += e.reward_agc || 0;
         });
-        return respond(byMonth);
+        return ok(byMonth);
       }
 
-      return respond(events || []);
+      return ok(events || []);
     }
 
     // ============================================================
@@ -266,7 +228,7 @@ Deno.serve(async (req) => {
     // ============================================================
     if (action === "lookup" && req.method === "GET") {
       const code = pathParts[2];
-      if (!code) return errorResponse("Code required");
+      if (!code) return err("Code required");
 
       const { data: referral } = await adminSupabase
         .from("referrals")
@@ -275,9 +237,7 @@ Deno.serve(async (req) => {
         .eq("is_active", true)
         .maybeSingle();
 
-      if (!referral) {
-        return respond({ valid: false });
-      }
+      if (!referral) return ok({ valid: false });
 
       // Get owner name for display
       let ownerName = null;
@@ -297,21 +257,13 @@ Deno.serve(async (req) => {
         ownerName = chapter?.name;
       }
 
-      return respond({
-        valid: true,
-        owner_type: referral.owner_type,
-        owner_name: ownerName,
-      });
+      return ok({ valid: true, owner_type: referral.owner_type, owner_name: ownerName });
     }
 
-    return errorResponse("Not found", 404);
-
+    return err("Not found", 404);
   } catch (error: unknown) {
     console.error("Referrals function error:", error);
     const message = error instanceof Error ? error.message : "Internal server error";
-    return new Response(
-      JSON.stringify({ ok: false, error: message }),
-      { status: 500, headers: { ...corsHeaders, "Content-Type": "application/json" } }
-    );
+    return err(message, 500);
   }
 });
