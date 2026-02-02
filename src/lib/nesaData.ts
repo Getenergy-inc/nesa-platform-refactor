@@ -584,6 +584,24 @@ export function getAfricaRegions(): GeographicGroup[] {
 }
 
 /**
+ * Get a single nominee by slug
+ */
+export function getNomineeBySlug(slug: string): EnrichedNominee | undefined {
+  if (!slug) return undefined;
+  const lowerSlug = slug.toLowerCase().trim();
+  return getAllNominees().find((n) => n.slug === lowerSlug);
+}
+
+/**
+ * Get related nominees (same subcategory, excluding current)
+ */
+export function getRelatedNominees(nominee: EnrichedNominee, limit: number = 4): EnrichedNominee[] {
+  return getAllNominees()
+    .filter((n) => n.subcategorySlug === nominee.subcategorySlug && n.slug !== nominee.slug)
+    .slice(0, limit);
+}
+
+/**
  * Search nominees by name or achievement
  */
 export function searchNominees(query: string): EnrichedNominee[] {
