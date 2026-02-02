@@ -1,4 +1,5 @@
 import { useState, useMemo, useEffect, useRef, useCallback } from "react";
+import { Link } from "react-router-dom";
 import { Search, Users, Filter, ChevronLeft, ChevronRight, LayoutGrid, List, Loader2, MapPin, Globe2, Building2, Heart } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
@@ -347,28 +348,39 @@ export default function Nominees() {
             </div>
           ) : filteredNominees.length === 0 ? (
             <div className="text-center py-16">
-              <Users className="w-16 h-16 text-ivory/20 mx-auto mb-4" />
-              <h3 className="text-xl font-semibold text-ivory mb-2">No Nominees Found</h3>
-              <p className="text-ivory/60 mb-6">
+              <div className="w-20 h-20 mx-auto mb-6 rounded-full bg-gold/10 flex items-center justify-center">
+                <Search className="w-10 h-10 text-gold/40" />
+              </div>
+              <h3 className="text-2xl font-display text-ivory mb-3">
                 {searchQuery || selectedAward !== "all" || selectedCategory !== "all"
-                  ? "Try adjusting your search or filter criteria."
-                  : "Check back soon as nominations are being reviewed."}
+                  ? "No matching nominees"
+                  : "Nominees coming soon"}
+              </h3>
+              <p className="text-ivory/60 mb-8 max-w-md mx-auto">
+                {searchQuery || selectedAward !== "all" || selectedCategory !== "all"
+                  ? "We couldn't find any nominees matching your current filters. Try broadening your search or exploring a different category."
+                  : "Our nomination review committee is currently evaluating submissions. Check back soon to discover inspiring education champions."}
               </p>
               {(searchQuery || selectedAward !== "all" || selectedCategory !== "all") && (
-                <Button
-                  variant="outline"
-                  onClick={() => {
-                    setSearchQuery("");
-                    setSelectedAward("all");
-                    setSelectedCategory("all");
-                    setSelectedRegion("all");
-                    setCurrentPage(1);
-                    setVisibleCount(ITEMS_PER_PAGE);
-                  }}
-                  className="border-gold/30 text-gold hover:bg-gold/10"
-                >
-                  Clear Filters
-                </Button>
+                <div className="flex flex-col sm:flex-row gap-3 justify-center">
+                  <Button
+                    variant="outline"
+                    onClick={() => {
+                      setSearchQuery("");
+                      setSelectedAward("all");
+                      setSelectedCategory("all");
+                      setSelectedRegion("all");
+                      setCurrentPage(1);
+                      setVisibleCount(ITEMS_PER_PAGE);
+                    }}
+                    className="border-gold/30 text-gold hover:bg-gold/10"
+                  >
+                    Clear All Filters
+                  </Button>
+                  <Button asChild className="bg-gold hover:bg-gold-dark text-charcoal">
+                    <Link to="/nominate">Nominate Someone</Link>
+                  </Button>
+                </div>
               )}
             </div>
           ) : (

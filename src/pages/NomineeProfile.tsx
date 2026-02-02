@@ -184,17 +184,29 @@ export default function NomineeProfile() {
       <div className="min-h-screen bg-charcoal">
         <div className="container mx-auto px-4 py-24">
           <div className="max-w-2xl mx-auto text-center">
-            <Users className="w-16 h-16 text-ivory/20 mx-auto mb-4" />
-            <h1 className="text-2xl font-display text-ivory mb-4">Nominee Not Found</h1>
-            <p className="text-ivory/60 mb-8">
-              This nominee profile doesn't exist or hasn't been approved yet.
+            <div className="w-24 h-24 mx-auto mb-6 rounded-full bg-gold/10 flex items-center justify-center">
+              <Users className="w-12 h-12 text-gold/40" />
+            </div>
+            <h1 className="text-3xl font-display text-ivory mb-4">Profile Not Available</h1>
+            <p className="text-ivory/60 mb-4 max-w-md mx-auto">
+              This nominee profile may be under review, pending approval, or the link may be incorrect.
             </p>
-            <Button asChild className="bg-gold hover:bg-gold-dark text-charcoal">
-              <Link to="/nominees">
-                <ArrowLeft className="w-4 h-4 mr-2" />
-                Back to Nominees
-              </Link>
-            </Button>
+            <p className="text-ivory/40 text-sm mb-8 max-w-md mx-auto">
+              Only approved nominees appear in our public directory. If you believe this is an error, please contact our support team.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-3 justify-center">
+              <Button asChild className="bg-gold hover:bg-gold-dark text-charcoal">
+                <Link to="/nominees">
+                  <ArrowLeft className="w-4 h-4 mr-2" />
+                  Browse All Nominees
+                </Link>
+              </Button>
+              <Button asChild variant="outline" className="border-gold/30 text-gold hover:bg-gold/10">
+                <Link to="/nominate">
+                  Nominate Someone
+                </Link>
+              </Button>
+            </div>
           </div>
         </div>
       </div>
