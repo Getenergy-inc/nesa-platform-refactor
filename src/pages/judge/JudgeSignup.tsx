@@ -60,11 +60,11 @@ export default function JudgeSignup() {
     },
   });
 
-  // Verify the application exists and is approved
+  // Verify the application exists and is approved (or email_verified)
   useEffect(() => {
     async function verifyApplication() {
       if (!email) {
-        setError("No email provided. Please start from the application status page.");
+        setError("no_email");
         setIsLoading(false);
         return;
       }
@@ -79,17 +79,22 @@ export default function JudgeSignup() {
         if (fetchError) throw fetchError;
 
         if (!data) {
-          setError("No application found with this email. Please apply first.");
+          setError("no_application");
         } else if (data.status === "account_created" || data.status === "onboarded") {
-          setError("An account has already been created for this application. Please sign in.");
-        } else if (data.status !== "approved") {
-          setError(`Your application status is "${data.status}". Only approved applications can create accounts.`);
-        } else {
+          setError("already_created");
+        } else if (data.status === "submitted") {
+          setError("not_verified");
+        } else if (data.status === "rejected") {
+          setError("rejected");
+        } else if (data.status === "email_verified" || data.status === "approved" || data.status === "under_review") {
+          // Allow account creation for verified applications (admin may skip approval step)
           setApplication(data as ApplicationData);
+        } else {
+          setError(`unknown_status:${data.status}`);
         }
       } catch (err: any) {
         console.error("Error verifying application:", err);
-        setError("Failed to verify your application. Please try again.");
+        setError("fetch_error");
       } finally {
         setIsLoading(false);
       }
@@ -149,10 +154,10 @@ export default function JudgeSignup() {
         // Don't throw - we can fix this manually
       }
 
-      toast.success("Account created successfully! Please check your email to verify.");
+      toast.success("Account created successfully! Please check your email to verify, then sign in.");
       
-      // Redirect to login or dashboard
-      navigate("/login?from=judge-signup");
+      // Redirect to login with next pointing to judge status
+      navigate("/login?next=/judge/status");
 
     } catch (error: any) {
       console.error("Error creating account:", error);
@@ -174,6 +179,42 @@ export default function JudgeSignup() {
   }
 
   if (error) {
+    const errorConfig: Record<string, { title: string; message: string; action: { label: string; href: string } }> = {
+      no_email: {
+        title: "Missing Email",
+        message: "You must verify your judge application first before creating an account.",
+        action: { label: "Apply to be a Judge", href: "/judge/apply" },
+      },
+      no_application: {
+        title: "No Application Found",
+        message: "We couldn't find an application with this email. Please apply first.",
+        action: { label: "Apply Now", href: "/judge/apply" },
+      },
+      already_created: {
+        title: "Account Already Exists",
+        message: "An account has already been created for this application. Please sign in.",
+        action: { label: "Sign In", href: "/login?next=/judge/dashboard" },
+      },
+      not_verified: {
+        title: "Email Not Verified",
+        message: "Please verify your email first. Check your inbox for the verification link.",
+        action: { label: "Check Application Status", href: "/judge/status" },
+      },
+      rejected: {
+        title: "Application Not Approved",
+        message: "Unfortunately, your application was not approved at this time.",
+        action: { label: "Contact Support", href: "/contact" },
+      },
+      fetch_error: {
+        title: "Something Went Wrong",
+        message: "Failed to verify your application. Please try again.",
+        action: { label: "Try Again", href: "/judge/status" },
+      },
+    };
+
+    const errorKey = error.startsWith("unknown_status") ? "fetch_error" : error;
+    const config = errorConfig[errorKey] || errorConfig.fetch_error;
+
     return (
       <>
         <Helmet>
@@ -183,32 +224,16 @@ export default function JudgeSignup() {
           <Card className="max-w-md w-full border-white/10 bg-charcoal-light">
             <CardContent className="py-8 text-center">
               <AlertCircle className="h-12 w-12 text-yellow-500 mx-auto mb-4" />
-              <h3 className="text-lg font-semibold text-white mb-2">Cannot Create Account</h3>
-              <p className="text-white/60 mb-6">{error}</p>
+              <h3 className="text-lg font-semibold text-white mb-2">{config.title}</h3>
+              <p className="text-white/60 mb-6">{config.message}</p>
               
               <div className="flex flex-col gap-2">
-                {error.includes("sign in") ? (
-                  <Button asChild className="bg-gold hover:bg-gold-dark text-charcoal">
-                    <Link to="/login">
-                      Sign In
-                      <ArrowRight className="ml-2 h-4 w-4" />
-                    </Link>
-                  </Button>
-                ) : error.includes("apply") ? (
-                  <Button asChild className="bg-gold hover:bg-gold-dark text-charcoal">
-                    <Link to="/judge/apply">
-                      Apply Now
-                      <ArrowRight className="ml-2 h-4 w-4" />
-                    </Link>
-                  </Button>
-                ) : (
-                  <Button asChild className="bg-gold hover:bg-gold-dark text-charcoal">
-                    <Link to="/judge/status">
-                      Check Application Status
-                      <ArrowRight className="ml-2 h-4 w-4" />
-                    </Link>
-                  </Button>
-                )}
+                <Button asChild className="bg-gold hover:bg-gold-dark text-charcoal">
+                  <Link to={config.action.href}>
+                    {config.action.label}
+                    <ArrowRight className="ml-2 h-4 w-4" />
+                  </Link>
+                </Button>
                 
                 <Button asChild variant="outline" className="border-white/20 text-white hover:bg-white/10">
                   <Link to="/">Return to Home</Link>
