@@ -6,3 +6,4 @@ export { DossierDialog } from "./DossierDialog";
 export { JudgesSidebar } from "./JudgesSidebar";
 export { JudgesArenaLayout } from "./JudgesArenaLayout";
 export { JudgeProtectedRoute } from "./JudgeProtectedRoute";
+export { JudgeOTPGate, markOTPVerified, clearOTPVerification } from "./JudgeOTPGate";

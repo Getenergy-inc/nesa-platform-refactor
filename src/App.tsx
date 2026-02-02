@@ -20,6 +20,7 @@ import Categories from "./pages/Categories";
 import Programs from "./pages/Programs";
 import Login from "./pages/auth/Login";
 import Register from "./pages/auth/Register";
+import OTPVerification from "./pages/auth/OTPVerification";
 import Nominate from "./pages/Nominate";
 import Dashboard from "./pages/Dashboard";
 import Unauthorized from "./pages/Unauthorized";
@@ -58,6 +59,7 @@ import Judges from "./pages/Judges";
 // Judge Portal Pages
 import { JudgeApply, JudgeStatus, JudgeSignup, JudgeVerify, JudgeDashboard, JudgePortal, JuryScoring, JuryCOI, JudgeRubric, JudgeGuidelines, JudgePanel, JudgeHelp, JudgeSettings } from "./pages/judge";
 import { JudgeProtectedRoute } from "./components/judge";
+import { JudgeOTPGate } from "./components/judge/JudgeOTPGate";
 import Partners from "./pages/Partners";
 import Chapters from "./pages/Chapters";
 import Volunteer from "./pages/Volunteer";
@@ -164,6 +166,9 @@ const App = () => (
                 {/* Auth - minimal layout */}
                 <Route path="/login" element={<WithLayout showFooter={false}><Login /></WithLayout>} />
                 <Route path="/register" element={<WithLayout showFooter={false}><Register /></WithLayout>} />
+                <Route path="/otp" element={<OTPVerification />} />
+                <Route path="/account/otp" element={<OTPVerification />} />
+                <Route path="/account/login" element={<WithLayout showFooter={false}><Login /></WithLayout>} />
                 
                 {/* User Actions */}
                 <Route path="/nominate" element={<WithLayout><Nominate /></WithLayout>} />
