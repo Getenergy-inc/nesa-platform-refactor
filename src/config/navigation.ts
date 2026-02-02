@@ -169,19 +169,19 @@ export const MAIN_NAV: NavItem[] = [
         children: [
           {
             label: "Apply to be a Judge",
-            href: "/judge/apply",
+            href: "/judgeapply",
             description: "Submit your application to join the jury",
             icon: FileCheck,
           },
           {
             label: "Check Application Status",
-            href: "/judge/status",
+            href: "/judge-status",
             description: "Track your judge application",
             icon: Clock,
           },
           {
             label: "Judge Login",
-            href: "/login?next=/judge/dashboard",
+            href: "/login?next=/judge",
             description: "Sign in to the Judges Arena",
             icon: Gavel,
           },
@@ -363,7 +363,7 @@ export const FOOTER_NAV: NavSection[] = [
     items: [
       { label: "Nominate", href: "/nominate" },
       { label: "Vote", href: "/vote" },
-      { label: "Apply to be a Judge", href: "/judge/apply" },
+      { label: "Apply to be a Judge", href: "/judgeapply" },
       { label: "Partners", href: "/partners" },
       { label: "Chapters", href: "/chapters" },
       { label: "Volunteer", href: "/volunteer" },

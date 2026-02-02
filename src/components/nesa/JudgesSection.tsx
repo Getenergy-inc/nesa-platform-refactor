@@ -50,7 +50,7 @@ export function JudgesSection() {
             size="lg"
             className="bg-gold hover:bg-gold-dark text-charcoal font-semibold rounded-full px-8"
           >
-            <Link to="/judge/apply">Apply to be a Judge</Link>
+            <Link to="/judgeapply">Apply to be a Judge</Link>
           </Button>
           <Button
             asChild
@@ -58,7 +58,7 @@ export function JudgesSection() {
             variant="outline"
             className="border-gold/30 text-gold hover:bg-gold/10 rounded-full px-8"
           >
-            <Link to="/judge/status">Check Application Status</Link>
+            <Link to="/judge-status">Check Application Status</Link>
           </Button>
           <Button
             asChild

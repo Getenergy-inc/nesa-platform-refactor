@@ -138,12 +138,15 @@ export default function JudgeVerify() {
 
               <div className="flex flex-col gap-2 pt-4">
                 <Button asChild className="bg-gold hover:bg-gold-dark text-charcoal">
-                  <Link to="/judge/status">
-                    Check Application Status
+                  <Link to={`/judge-signup?email=${encodeURIComponent(email || '')}`}>
+                    Create Judge Account
                     <ArrowRight className="ml-2 h-4 w-4" />
                   </Link>
                 </Button>
                 <Button asChild variant="outline" className="border-white/20 text-white hover:bg-white/10">
+                  <Link to="/judge-status">Check Application Status</Link>
+                </Button>
+                <Button asChild variant="ghost" className="text-white/60 hover:text-white hover:bg-white/5">
                   <Link to="/">Return to Home</Link>
                 </Button>
               </div>

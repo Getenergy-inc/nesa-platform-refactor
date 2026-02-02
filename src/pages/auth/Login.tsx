@@ -18,8 +18,12 @@ export default function Login() {
   const { signIn } = useAuth();
   const navigate = useNavigate();
 
-  // Get the redirect URL from query params (supports both 'next' and 'from')
-  const nextUrl = searchParams.get("next") || searchParams.get("from") || "/dashboard";
+  // Get the redirect URL from query params (supports 'next', 'from', 'callbackUrl', 'redirect')
+  const nextUrl = searchParams.get("next") 
+    || searchParams.get("from") 
+    || searchParams.get("callbackUrl") 
+    || searchParams.get("redirect") 
+    || "/dashboard";
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
