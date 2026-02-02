@@ -1,11 +1,11 @@
 import { Link } from "react-router-dom";
 import { Card, CardContent } from "@/components/ui/card";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Award, Building2, MapPin, RotateCcw, ThumbsUp, Loader2 } from "lucide-react";
 import { NESAStamp } from "@/components/nesa/NESALogo";
 import { type NomineeImageType, isOrganization } from "@/lib/nesaData";
+import { NomineeActions, type NomineeActionsData } from "@/components/nominees";
 
 export interface NomineeCardData {
   id: string;
@@ -36,6 +36,10 @@ interface NomineeCardProps {
   isVoting?: boolean;
   onVote?: () => void;
   showLoginToVote?: boolean;
+  // Action buttons
+  showActions?: boolean;
+  onVoteSuccess?: () => void;
+  onRenominateSuccess?: () => void;
 }
 
 // Helper to get initials
@@ -64,6 +68,9 @@ export function NomineeCard({
   isVoting = false,
   onVote,
   showLoginToVote = false,
+  showActions = false,
+  onVoteSuccess,
+  onRenominateSuccess,
 }: NomineeCardProps) {
   const isCompact = variant === "compact";
   const isVotingVariant = variant === "voting";
@@ -192,7 +199,7 @@ export function NomineeCard({
                       }}
                       disabled={hasVoted || isVoting}
                       className={hasVoted 
-                        ? "bg-green-600 hover:bg-green-600 text-white cursor-default" 
+                        ? "bg-emerald-600 hover:bg-emerald-600 text-white cursor-default" 
                         : "bg-gold hover:bg-gold-dark text-charcoal"
                       }
                     >
@@ -212,6 +219,25 @@ export function NomineeCard({
                   <span className="text-ivory/50">votes</span>
                 </div>
               )}
+            </div>
+          )}
+
+          {/* Action Buttons - Vote & Endorse */}
+          {showActions && !isCompact && (
+            <div className="mt-4 pt-3 border-t border-gold/10 w-full">
+              <NomineeActions
+                nominee={{
+                  nomineeId: nominee.id,
+                  nomineeSlug: nominee.slug,
+                  nomineeName: nominee.name,
+                  awardTitle: nominee.categoryName,
+                  subcategoryTitle: nominee.subcategoryName,
+                  renominationCount: nominee.renominationCount,
+                }}
+                variant="compact"
+                onVoteSuccess={onVoteSuccess}
+                onRenominateSuccess={onRenominateSuccess}
+              />
             </div>
           )}
         </div>

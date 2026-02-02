@@ -1,0 +1,10 @@
+/**
+ * Nominee Components Index
+ * 
+ * Reusable components for displaying and interacting with nominees
+ * across the entire NESA-Africa platform.
+ */
+
+export { NomineeActions, type NomineeActionsData } from "./NomineeActions";
+export { VoteModal } from "./VoteModal";
+export { RenominateModal } from "./RenominateModal";
