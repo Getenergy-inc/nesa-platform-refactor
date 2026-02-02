@@ -1,11 +1,12 @@
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Gavel, Users, Award, LayoutGrid, ShieldCheck } from "lucide-react";
+import { GOVERNANCE_STATS } from "@/lib/regions";
 
 const stats = [
-  { value: "50+", label: "Expert Judges", icon: Users },
-  { value: "17", label: "Categories", icon: LayoutGrid },
-  { value: "141", label: "Sub-Categories", icon: Award },
+  { value: String(GOVERNANCE_STATS.judges), label: "Expert Judges", icon: Users },
+  { value: String(GOVERNANCE_STATS.categories), label: "Categories", icon: LayoutGrid },
+  { value: String(GOVERNANCE_STATS.subcategories), label: "Sub-Categories", icon: Award },
   { value: "100%", label: "Transparency", icon: ShieldCheck },
 ];
 

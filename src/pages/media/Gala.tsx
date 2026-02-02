@@ -35,7 +35,7 @@ const galaSegments = [
 const highlights = [
   { icon: Clock, label: "6 Hours", description: "Live broadcast" },
   { icon: Trophy, label: "9 Blue Garnet", description: "Winners announced" },
-  { icon: Globe, label: "54 Countries", description: "Live viewing" },
+  { icon: Globe, label: "7 Regions", description: "Live viewing" },
   { icon: Users, label: "1M+", description: "Expected viewers" },
 ];
 
