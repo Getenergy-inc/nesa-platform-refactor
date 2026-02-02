@@ -14,7 +14,7 @@ import {
   ArrowRight,
   AlertCircle
 } from "lucide-react";
-import { markOTPVerified } from "@/components/judge/JudgeOTPGate";
+import { markOTPVerified } from "@/components/judge/JudgeArenaGuard";
 
 export default function OTPVerification() {
   const [searchParams] = useSearchParams();

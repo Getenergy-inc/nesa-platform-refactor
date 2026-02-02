@@ -76,13 +76,13 @@ export default function Judges() {
               </p>
               <div className="flex flex-wrap justify-center gap-4">
                 <Button asChild size="lg" className="bg-primary text-primary-foreground">
-                  <Link to="/judge/apply">
+                  <Link to="/judgeapply">
                     <FileText className="mr-2 h-5 w-5" />
                     Apply Now
                   </Link>
                 </Button>
                 <Button asChild size="lg" variant="outline" className="border-white/20 text-white hover:bg-white/10">
-                  <Link to="/judge/status">
+                  <Link to="/judge-status">
                     Check Application Status
                   </Link>
                 </Button>
@@ -95,11 +95,11 @@ export default function Judges() {
         <section className="bg-charcoal border-b border-white/10">
           <div className="container mx-auto px-4 py-4">
             <div className="flex flex-wrap justify-center gap-4 text-sm">
-              <Link to="/judge/apply" className="text-gold hover:underline flex items-center gap-1">
+              <Link to="/judgeapply" className="text-gold hover:underline flex items-center gap-1">
                 <FileText className="h-4 w-4" /> Apply to be a Judge
               </Link>
               <span className="text-white/30">|</span>
-              <Link to="/judge/status" className="text-white/70 hover:text-gold flex items-center gap-1">
+              <Link to="/judge-status" className="text-white/70 hover:text-gold flex items-center gap-1">
                 <Clock className="h-4 w-4" /> Check Status
               </Link>
               <span className="text-white/30">|</span>
@@ -258,7 +258,7 @@ export default function Judges() {
             </p>
             <div className="flex flex-wrap justify-center gap-4">
               <Button asChild size="lg" className="bg-primary text-primary-foreground">
-                <Link to="/judge/apply">
+                <Link to="/judgeapply">
                   <FileText className="mr-2 h-5 w-5" />
                   Submit Application
                 </Link>
