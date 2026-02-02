@@ -1,3 +1,4 @@
+// Judge Portal Components
 export { JuryStatsGrid } from "./JuryStatsGrid";
 export { AssignmentCard } from "./AssignmentCard";
 export { ScoreDialog } from "./ScoreDialog";
@@ -5,5 +6,8 @@ export { COIDialog } from "./COIDialog";
 export { DossierDialog } from "./DossierDialog";
 export { JudgesSidebar } from "./JudgesSidebar";
 export { JudgesArenaLayout } from "./JudgesArenaLayout";
+
+// Route Protection
 export { JudgeProtectedRoute } from "./JudgeProtectedRoute";
-export { JudgeOTPGate, markOTPVerified, clearOTPVerification } from "./JudgeOTPGate";
+export { JudgeArenaGuard, markOTPVerified, clearOTPVerification } from "./JudgeArenaGuard";
+export { JudgeOTPGate } from "./JudgeOTPGate";

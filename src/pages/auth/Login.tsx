@@ -10,7 +10,7 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { toast } from "sonner";
 import { Award, Mail, Lock, ShieldCheck } from "lucide-react";
 import { JudgeOTPNotice, JudgeOTPHelperText } from "@/components/auth/JudgeOTPNotice";
-import { markOTPVerified } from "@/components/judge/JudgeOTPGate";
+import { markOTPVerified } from "@/components/judge/JudgeArenaGuard";
 
 export default function Login() {
   const { t } = useTranslation("pages");

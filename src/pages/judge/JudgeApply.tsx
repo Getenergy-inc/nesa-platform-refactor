@@ -170,7 +170,7 @@ export default function JudgeApply() {
 
               <div className="flex flex-col gap-2 pt-4">
                 <Button asChild className="bg-gold text-charcoal hover:bg-gold-dark">
-                  <Link to="/judge/status">
+                  <Link to="/judge-status">
                     Check Application Status
                     <ArrowRight className="ml-2 h-4 w-4" />
                   </Link>
@@ -213,7 +213,7 @@ export default function JudgeApply() {
           <div className="mb-6 p-4 rounded-lg bg-white/5 border border-white/10 flex items-center justify-between">
             <span className="text-white/70 text-sm">Already submitted an application?</span>
             <Button asChild variant="link" className="text-gold p-0 h-auto">
-              <Link to="/judge/status">Check your status →</Link>
+              <Link to="/judge-status">Check your status →</Link>
             </Button>
           </div>
 

@@ -59,7 +59,7 @@ import Judges from "./pages/Judges";
 // Judge Portal Pages
 import { JudgeApply, JudgeStatus, JudgeSignup, JudgeVerify, JudgeDashboard, JudgePortal, JuryScoring, JuryCOI, JudgeRubric, JudgeGuidelines, JudgePanel, JudgeHelp, JudgeSettings } from "./pages/judge";
 import { JudgeProtectedRoute } from "./components/judge";
-import { JudgeOTPGate } from "./components/judge/JudgeOTPGate";
+import { JudgeArenaGuard } from "./components/judge/JudgeArenaGuard";
 import Partners from "./pages/Partners";
 import Chapters from "./pages/Chapters";
 import Volunteer from "./pages/Volunteer";
@@ -231,16 +231,16 @@ const App = () => (
                 <Route path="/judge-verify" element={<JudgeVerify />} />
                 <Route path="/judge-signup" element={<JudgeSignup />} />
                 
-                {/* Judge Portal Routes (Authenticated + Protected) */}
-                <Route path="/judge" element={<JudgeProtectedRoute><JudgeDashboard /></JudgeProtectedRoute>} />
-                <Route path="/judge/dashboard" element={<JudgeProtectedRoute><JudgeDashboard /></JudgeProtectedRoute>} />
-                <Route path="/judge/scoring" element={<JudgeProtectedRoute><JuryScoring /></JudgeProtectedRoute>} />
-                <Route path="/judge/coi" element={<JudgeProtectedRoute><JuryCOI /></JudgeProtectedRoute>} />
-                <Route path="/judge/rubric" element={<JudgeProtectedRoute><JudgeRubric /></JudgeProtectedRoute>} />
-                <Route path="/judge/guidelines" element={<JudgeProtectedRoute><JudgeGuidelines /></JudgeProtectedRoute>} />
-                <Route path="/judge/panel" element={<JudgeProtectedRoute><JudgePanel /></JudgeProtectedRoute>} />
-                <Route path="/judge/help" element={<JudgeProtectedRoute><JudgeHelp /></JudgeProtectedRoute>} />
-                <Route path="/judge/settings" element={<JudgeProtectedRoute><JudgeSettings /></JudgeProtectedRoute>} />
+                {/* Judge Portal Routes (Authenticated + Protected + OTP enforced) */}
+                <Route path="/judge" element={<JudgeArenaGuard><JudgeDashboard /></JudgeArenaGuard>} />
+                <Route path="/judge/dashboard" element={<JudgeArenaGuard><JudgeDashboard /></JudgeArenaGuard>} />
+                <Route path="/judge/scoring" element={<JudgeArenaGuard><JuryScoring /></JudgeArenaGuard>} />
+                <Route path="/judge/coi" element={<JudgeArenaGuard><JuryCOI /></JudgeArenaGuard>} />
+                <Route path="/judge/rubric" element={<JudgeArenaGuard><JudgeRubric /></JudgeArenaGuard>} />
+                <Route path="/judge/guidelines" element={<JudgeArenaGuard><JudgeGuidelines /></JudgeArenaGuard>} />
+                <Route path="/judge/panel" element={<JudgeArenaGuard><JudgePanel /></JudgeArenaGuard>} />
+                <Route path="/judge/help" element={<JudgeArenaGuard><JudgeHelp /></JudgeArenaGuard>} />
+                <Route path="/judge/settings" element={<JudgeArenaGuard><JudgeSettings /></JudgeArenaGuard>} />
                 <Route path="/partners" element={<WithLayout><Partners /></WithLayout>} />
                 <Route path="/chapters" element={<WithLayout><Chapters /></WithLayout>} />
                 <Route path="/volunteer" element={<WithLayout><Volunteer /></WithLayout>} />

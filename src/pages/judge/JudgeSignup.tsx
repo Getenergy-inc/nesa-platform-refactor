@@ -183,12 +183,12 @@ export default function JudgeSignup() {
       no_email: {
         title: "Missing Email",
         message: "You must verify your judge application first before creating an account.",
-        action: { label: "Apply to be a Judge", href: "/judge/apply" },
+        action: { label: "Apply to be a Judge", href: "/judgeapply" },
       },
       no_application: {
         title: "No Application Found",
         message: "We couldn't find an application with this email. Please apply first.",
-        action: { label: "Apply Now", href: "/judge/apply" },
+        action: { label: "Apply Now", href: "/judgeapply" },
       },
       already_created: {
         title: "Account Already Exists",
