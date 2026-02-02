@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 import { 
   Youtube, 
   Linkedin, 
@@ -12,7 +13,24 @@ import {
   Play, 
   ChevronRight,
   Users,
-  Award
+  Award,
+  Grid3X3,
+  Building2,
+  Building,
+  Laptop,
+  Radio,
+  Heart,
+  FlaskConical,
+  Palette,
+  MapPin,
+  BookOpen,
+  Microscope,
+  Church,
+  Moon,
+  GraduationCap,
+  Globe,
+  Crown,
+  Star
 } from "lucide-react";
 import { NESALogo } from "@/components/nesa/NESALogo";
 import { 
@@ -22,6 +40,29 @@ import {
   handleImageError,
   type Nominee
 } from "@/lib/nesaData";
+import { NESA_CATEGORIES } from "@/config/nesaCategories";
+
+// Icon mapping for categories
+const CATEGORY_ICONS: Record<string, React.ComponentType<{ className?: string }>> = {
+  Building2,
+  Building,
+  Laptop,
+  Radio,
+  Heart,
+  Users,
+  FlaskConical,
+  Palette,
+  MapPin,
+  BookOpen,
+  Microscope,
+  Church,
+  Moon,
+  GraduationCap,
+  Globe,
+  Crown,
+  Star,
+  Award,
+};
 
 // Social media links for NESA Africa TV
 const socialLinks = [
@@ -113,6 +154,58 @@ export function NomineesShowcaseSection() {
               ))}
             </div>
           </div>
+        </motion.div>
+
+        {/* Category Viewing Buttons - All 17 Award Categories */}
+        <motion.div 
+          className="mb-10"
+          initial={{ opacity: 0, y: 10 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.1 }}
+        >
+          <div className="flex items-center justify-between mb-4">
+            <h3 className="text-sm font-medium text-white/70 flex items-center gap-2">
+              <Grid3X3 className="h-4 w-4 text-gold" />
+              Browse by Award Category
+            </h3>
+            <Link 
+              to="/categories" 
+              className="text-xs text-gold hover:text-gold-light transition-colors flex items-center gap-1"
+            >
+              View All Categories
+              <ChevronRight className="h-3 w-3" />
+            </Link>
+          </div>
+          
+          <ScrollArea className="w-full whitespace-nowrap">
+            <div className="flex gap-2 pb-3">
+              {NESA_CATEGORIES.filter(cat => cat.isActive).map((category) => {
+                const IconComponent = CATEGORY_ICONS[category.iconName] || Award;
+                return (
+                  <Link
+                    key={category.id}
+                    to={`/categories/${category.slug}`}
+                    className="group flex-shrink-0"
+                  >
+                    <div className="flex items-center gap-2 px-4 py-2.5 rounded-full bg-white/5 border border-white/10 hover:border-gold/40 hover:bg-gold/10 transition-all duration-200">
+                      <IconComponent className="h-4 w-4 text-gold/70 group-hover:text-gold transition-colors" />
+                      <span className="text-sm text-white/80 group-hover:text-white whitespace-nowrap transition-colors">
+                        {category.shortName}
+                      </span>
+                      <Badge 
+                        variant="outline" 
+                        className="text-[10px] px-1.5 py-0 h-4 text-white/50 border-white/20 group-hover:border-gold/30 group-hover:text-gold/70"
+                      >
+                        {category.subcategories.length}
+                      </Badge>
+                    </div>
+                  </Link>
+                );
+              })}
+            </div>
+            <ScrollBar orientation="horizontal" className="h-2" />
+          </ScrollArea>
         </motion.div>
 
         {/* Award Filter Tabs */}
