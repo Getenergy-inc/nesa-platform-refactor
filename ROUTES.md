@@ -32,7 +32,15 @@ These routes are protected by the StageGate system and show a `StageLocked` mess
 |-------|---------------|-------------|
 | `/dashboard` | `user` | User dashboard with nominations |
 | `/dashboard/nominations` | `user` | User's nomination history |
-| `/nrc` | `nrc` | NRC (Nominee Research Corps) review dashboard |
+
+## NRC Portal Routes (Authenticated)
+
+| Route | Required Role | Description |
+|-------|---------------|-------------|
+| `/nrc` | `nrc`, `admin` | NRC dashboard overview |
+| `/nrc/my-queue` | `nrc`, `admin` | Individual reviewer workspace with assigned nominations |
+| `/nrc/members` | `admin` | NRC member management (30-member cap) |
+| `/nrc/settings` | `nrc`, `admin` | Personal NRC workspace preferences |
 
 ## Anchor Links (Landing Page Sections)
 

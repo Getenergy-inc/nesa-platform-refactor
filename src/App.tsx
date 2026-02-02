@@ -22,7 +22,6 @@ import Login from "./pages/auth/Login";
 import Register from "./pages/auth/Register";
 import Nominate from "./pages/Nominate";
 import Dashboard from "./pages/Dashboard";
-import NRCDashboard from "./pages/NRCDashboard";
 import Unauthorized from "./pages/Unauthorized";
 import NotFound from "./pages/NotFound";
 import CategoryDetail from "./pages/CategoryDetail";
@@ -75,6 +74,9 @@ import Wallet from "./pages/Wallet";
 
 // OLC Pages
 import { OLCDashboard, OLCMembers, OLCSettlements, OLCWallet } from "./pages/olc";
+
+// NRC Portal Pages
+import { NRCPortal, NRCMyQueue, NRCMembers as NRCMembersPage, NRCSettings } from "./pages/nrc";
 
 // Admin Pages
 import { AdminDashboard, AdminOrders, AdminImpact } from "./pages/admin";
@@ -182,7 +184,12 @@ const App = () => (
                 {/* Dashboards - use their own layout */}
                 <Route path="/dashboard" element={<Dashboard />} />
                 <Route path="/dashboard/nominations" element={<Dashboard />} />
-                <Route path="/nrc" element={<NRCDashboard />} />
+                
+                {/* NRC Portal Routes */}
+                <Route path="/nrc" element={<NRCPortal />} />
+                <Route path="/nrc/my-queue" element={<NRCMyQueue />} />
+                <Route path="/nrc/members" element={<NRCMembersPage />} />
+                <Route path="/nrc/settings" element={<NRCSettings />} />
                 
                 {/* OLC Coordinator Routes - use their own layout */}
                 <Route path="/olc/dashboard" element={<OLCDashboard />} />

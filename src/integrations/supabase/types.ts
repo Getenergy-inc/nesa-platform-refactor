@@ -1417,6 +1417,140 @@ export type Database = {
         }
         Relationships: []
       }
+      nrc_invitations: {
+        Row: {
+          accepted_at: string | null
+          created_at: string | null
+          email: string
+          expires_at: string
+          id: string
+          invited_by: string
+          status: string
+          token: string
+        }
+        Insert: {
+          accepted_at?: string | null
+          created_at?: string | null
+          email: string
+          expires_at: string
+          id?: string
+          invited_by: string
+          status?: string
+          token: string
+        }
+        Update: {
+          accepted_at?: string | null
+          created_at?: string | null
+          email?: string
+          expires_at?: string
+          id?: string
+          invited_by?: string
+          status?: string
+          token?: string
+        }
+        Relationships: []
+      }
+      nrc_members: {
+        Row: {
+          approval_rate: number | null
+          assigned_region: string | null
+          created_at: string | null
+          id: string
+          invited_by: string | null
+          joined_at: string | null
+          last_active_at: string | null
+          max_queue_size: number | null
+          review_count: number | null
+          specialization: string[] | null
+          status: string
+          updated_at: string | null
+          user_id: string
+        }
+        Insert: {
+          approval_rate?: number | null
+          assigned_region?: string | null
+          created_at?: string | null
+          id?: string
+          invited_by?: string | null
+          joined_at?: string | null
+          last_active_at?: string | null
+          max_queue_size?: number | null
+          review_count?: number | null
+          specialization?: string[] | null
+          status?: string
+          updated_at?: string | null
+          user_id: string
+        }
+        Update: {
+          approval_rate?: number | null
+          assigned_region?: string | null
+          created_at?: string | null
+          id?: string
+          invited_by?: string | null
+          joined_at?: string | null
+          last_active_at?: string | null
+          max_queue_size?: number | null
+          review_count?: number | null
+          specialization?: string[] | null
+          status?: string
+          updated_at?: string | null
+          user_id?: string
+        }
+        Relationships: []
+      }
+      nrc_queue: {
+        Row: {
+          assigned_by: string | null
+          assigned_to: string
+          completed_at: string | null
+          created_at: string | null
+          due_date: string | null
+          id: string
+          nomination_id: string
+          notes: string | null
+          priority: number | null
+          started_at: string | null
+          status: string
+          updated_at: string | null
+        }
+        Insert: {
+          assigned_by?: string | null
+          assigned_to: string
+          completed_at?: string | null
+          created_at?: string | null
+          due_date?: string | null
+          id?: string
+          nomination_id: string
+          notes?: string | null
+          priority?: number | null
+          started_at?: string | null
+          status?: string
+          updated_at?: string | null
+        }
+        Update: {
+          assigned_by?: string | null
+          assigned_to?: string
+          completed_at?: string | null
+          created_at?: string | null
+          due_date?: string | null
+          id?: string
+          nomination_id?: string
+          notes?: string | null
+          priority?: number | null
+          started_at?: string | null
+          status?: string
+          updated_at?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "nrc_queue_nomination_id_fkey"
+            columns: ["nomination_id"]
+            isOneToOne: true
+            referencedRelation: "nominations"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       order_items: {
         Row: {
           created_at: string | null
@@ -2974,6 +3108,10 @@ export type Database = {
       }
     }
     Functions: {
+      auto_assign_nrc_nomination: {
+        Args: { p_nomination_id: string }
+        Returns: string
+      }
       check_certificate_unlock: {
         Args: { p_nominee_id: string }
         Returns: boolean
