@@ -97,6 +97,8 @@ export interface EnrichedNominee extends Nominee {
   regionName?: string;
   regionSlug?: string;
   geographicCategory: GeographicCategory;
+  // All CSV-imported nominees are considered approved by default
+  status: "approved" | "pending" | "rejected";
 }
 
 // ============================================================================
@@ -141,6 +143,24 @@ export function generateSlug(text: string): string {
     .replace(/[^a-z0-9-]/g, "")
     .replace(/-+/g, "-")
     .replace(/^-|-$/g, "");
+}
+
+/**
+ * Generate a unique slug for a nominee by combining name, award, subcategory, and optionally region
+ * Format: name--award--subcategory or name--award--subcategory--region
+ */
+export function generateUniqueNomineeSlug(
+  nomineeName: string,
+  awardSlug: string,
+  subcategorySlug: string,
+  regionSlug?: string
+): string {
+  const nameSlug = generateSlug(nomineeName);
+  const parts = [nameSlug, awardSlug, subcategorySlug];
+  if (regionSlug) {
+    parts.push(regionSlug);
+  }
+  return parts.join("--");
 }
 
 /**
@@ -282,10 +302,13 @@ function parseCSV(): ParsedData {
         const nomineeState = row[`subCategories/${i}/nominees/${j}/state`] || "";
         const nomineeCountry = row[`subCategories/${i}/nominees/${j}/country`] || "";
 
+        // Generate unique slug: name--award--subcategory
+        const uniqueSlug = generateUniqueNomineeSlug(nomineeName, awardSlug, subcatSlug);
+
         nominees.push({
           id: generateId(),
           name: nomineeName,
-          slug: generateSlug(nomineeName),
+          slug: uniqueSlug,
           image: nomineeImage,
           imageUrl: getImageUrl(nomineeImage),
           achievement: nomineeAchievement,
@@ -347,10 +370,13 @@ function parseCSV(): ParsedData {
           const nomineeState = row[`regions/${r}/subCategories/${s}/nominees/${n}/state`] || "";
           const nomineeCountry = row[`regions/${r}/subCategories/${s}/nominees/${n}/country`] || "";
 
+          // Generate unique slug: name--award--subcategory--region
+          const uniqueSlug = generateUniqueNomineeSlug(nomineeName, awardSlug, subcatSlug, regionSlug);
+
           nominees.push({
             id: generateId(),
             name: nomineeName,
-            slug: generateSlug(nomineeName),
+            slug: uniqueSlug,
             image: nomineeImage,
             imageUrl: getImageUrl(nomineeImage),
             achievement: nomineeAchievement,
@@ -471,6 +497,7 @@ export function getAllNominees(): EnrichedNominee[] {
           subcategoryTitle: subcat.title,
           subcategorySlug: subcat.slug,
           geographicCategory: awardGeoCategory,
+          status: "approved", // All CSV-imported nominees are approved by default
         });
       });
     });
@@ -492,6 +519,7 @@ export function getAllNominees(): EnrichedNominee[] {
             regionName: region.name,
             regionSlug: region.slug,
             geographicCategory: regionGeoCategory,
+            status: "approved", // All CSV-imported nominees are approved by default
           });
         });
       });

@@ -237,7 +237,7 @@ function NomineeShowcaseCard({
       viewport={{ once: true }}
     >
       <Link
-        to={`/nominees/${nominee.slug}`}
+        to={`/nominees/${encodeURIComponent(nominee.slug)}`}
         className="group block bg-white/5 backdrop-blur-sm rounded-2xl p-4 border border-white/10 hover:border-gold/40 transition-all duration-300 hover:bg-white/10 relative"
       >
         {/* NESA Badge */}

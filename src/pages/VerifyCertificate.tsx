@@ -271,7 +271,7 @@ export default function VerifyCertificate() {
               {/* Actions */}
               <div className="flex flex-col gap-3">
                 <Button variant="outline" asChild>
-                  <Link to={`/nominees/${result.nominee.slug}`}>
+                  <Link to={`/nominees/${encodeURIComponent(result.nominee.slug)}`}>
                     <User className="h-4 w-4 mr-2" />
                     View Nominee Profile
                   </Link>
