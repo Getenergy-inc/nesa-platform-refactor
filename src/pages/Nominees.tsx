@@ -1,124 +1,63 @@
 import { useState, useMemo, useEffect, useRef, useCallback } from "react";
-import { useQuery } from "@tanstack/react-query";
-import { Search, Users, Filter, ChevronLeft, ChevronRight, LayoutGrid, List, Loader2 } from "lucide-react";
-import { supabase } from "@/integrations/supabase/client";
+import { Search, Users, Filter, ChevronLeft, ChevronRight, LayoutGrid, List, Loader2, MapPin } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Toggle } from "@/components/ui/toggle";
 import { NomineeCard, NomineeCardSkeleton, type NomineeCardData } from "@/components/nesa/NomineeCard";
+import { 
+  getAllNominees, 
+  getAwardOptions, 
+  getRegionOptions, 
+  getStats,
+  handleImageError 
+} from "@/lib/nesaData";
 
 const ITEMS_PER_PAGE = 12;
 
-interface Nominee {
-  id: string;
-  name: string;
-  slug: string;
-  title: string | null;
-  organization: string | null;
-  bio: string | null;
-  photo_url: string | null;
-  status: string;
-  is_platinum: boolean;
-  public_votes: number;
-  subcategories: {
-    name: string;
-    slug: string;
-    categories: {
-      id: string;
-      name: string;
-      slug: string;
-    };
-  };
-  chapters?: {
-    name: string;
-    region: string | null;
-  } | null;
-}
-
-interface Category {
-  id: string;
-  name: string;
-  slug: string;
-}
-
 export default function Nominees() {
   const [searchQuery, setSearchQuery] = useState("");
-  const [selectedCategory, setSelectedCategory] = useState<string>("all");
+  const [selectedAward, setSelectedAward] = useState<string>("all");
+  const [selectedRegion, setSelectedRegion] = useState<string>("all");
   const [currentPage, setCurrentPage] = useState(1);
   const [useInfiniteScroll, setUseInfiniteScroll] = useState(false);
   const [visibleCount, setVisibleCount] = useState(ITEMS_PER_PAGE);
+  const [isLoading, setIsLoading] = useState(true);
   const loadMoreRef = useRef<HTMLDivElement>(null);
 
-  // Fetch categories
-  const { data: categories = [] } = useQuery({
-    queryKey: ["categories"],
-    queryFn: async () => {
-      const { data, error } = await supabase
-        .from("categories")
-        .select("id, name, slug")
-        .eq("is_active", true)
-        .order("display_order");
-      if (error) throw error;
-      return data as Category[];
-    },
-  });
+  // Load CSV data
+  const allNominees = useMemo(() => {
+    setIsLoading(true);
+    const nominees = getAllNominees();
+    setIsLoading(false);
+    return nominees;
+  }, []);
 
-  // Fetch approved nominees
-  const { data: nominees = [], isLoading } = useQuery({
-    queryKey: ["nominees-directory"],
-    queryFn: async () => {
-      const { data, error } = await supabase
-        .from("nominees")
-        .select(`
-          id,
-          name,
-          slug,
-          title,
-          organization,
-          bio,
-          photo_url,
-          status,
-          is_platinum,
-          public_votes,
-          subcategories!inner(
-            name,
-            slug,
-            categories!inner(id, name, slug),
-            chapters(name, region)
-          ),
-          seasons!inner(is_active)
-        `)
-        .eq("seasons.is_active", true)
-        .in("status", ["approved", "platinum"])
-        .order("name");
-
-      if (error) throw error;
-      return (data || []).map((n: any) => ({
-        ...n,
-        subcategories: n.subcategories,
-        chapters: n.subcategories?.chapters || null,
-      })) as Nominee[];
-    },
-  });
+  const awardOptions = useMemo(() => getAwardOptions(), []);
+  const regionOptions = useMemo(() => getRegionOptions(), []);
+  const stats = useMemo(() => getStats(), []);
 
   // Filter nominees
   const filteredNominees = useMemo(() => {
-    return nominees.filter((nominee) => {
+    return allNominees.filter((nominee) => {
       const matchesSearch =
         searchQuery === "" ||
         nominee.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        nominee.organization?.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        nominee.title?.toLowerCase().includes(searchQuery.toLowerCase());
+        nominee.achievement?.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        nominee.country?.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        nominee.state?.toLowerCase().includes(searchQuery.toLowerCase());
 
-      const matchesCategory =
-        selectedCategory === "all" ||
-        nominee.subcategories?.categories?.id === selectedCategory;
+      const matchesAward =
+        selectedAward === "all" || nominee.awardSlug === selectedAward;
 
-      return matchesSearch && matchesCategory;
+      const matchesRegion =
+        selectedRegion === "all" ||
+        nominee.regionName?.toLowerCase().includes(selectedRegion.toLowerCase());
+
+      return matchesSearch && matchesAward && matchesRegion;
     });
-  }, [nominees, searchQuery, selectedCategory]);
+  }, [allNominees, searchQuery, selectedAward, selectedRegion]);
 
   // Pagination
   const totalPages = Math.ceil(filteredNominees.length / ITEMS_PER_PAGE);
@@ -141,8 +80,14 @@ export default function Nominees() {
     setVisibleCount(ITEMS_PER_PAGE);
   };
 
-  const handleCategoryChange = (value: string) => {
-    setSelectedCategory(value);
+  const handleAwardChange = (value: string) => {
+    setSelectedAward(value);
+    setCurrentPage(1);
+    setVisibleCount(ITEMS_PER_PAGE);
+  };
+
+  const handleRegionChange = (value: string) => {
+    setSelectedRegion(value);
     setCurrentPage(1);
     setVisibleCount(ITEMS_PER_PAGE);
   };
@@ -179,8 +124,6 @@ export default function Nominees() {
     }
   }, [useInfiniteScroll]);
 
-  // Note: getInitials is now handled by the NomineeCard component
-
   const displayedNominees = useInfiniteScroll ? infiniteScrollNominees : paginatedNominees;
 
   return (
@@ -202,36 +145,59 @@ export default function Nominees() {
             </p>
 
             {/* Search and Filters */}
-            <div className="flex flex-col sm:flex-row gap-4 max-w-2xl mx-auto">
+            <div className="flex flex-col gap-4 max-w-3xl mx-auto">
               <div className="relative flex-1">
                 <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-ivory/40" />
                 <Input
-                  placeholder="Search nominees by name, organization..."
+                  placeholder="Search nominees by name, achievement, country..."
                   value={searchQuery}
                   onChange={(e) => handleSearchChange(e.target.value)}
                   className="pl-10 bg-charcoal-light border-gold/20 text-ivory placeholder:text-ivory/40 focus:border-gold"
                 />
               </div>
-              <Select value={selectedCategory} onValueChange={handleCategoryChange}>
-                <SelectTrigger className="w-full sm:w-[200px] bg-charcoal-light border-gold/20 text-ivory">
-                  <Filter className="w-4 h-4 mr-2 text-gold" />
-                  <SelectValue placeholder="All Categories" />
-                </SelectTrigger>
-                <SelectContent className="bg-charcoal-light border-gold/20">
-                  <SelectItem value="all" className="text-ivory hover:bg-gold/10">
-                    All Categories
-                  </SelectItem>
-                  {categories.map((cat) => (
-                    <SelectItem
-                      key={cat.id}
-                      value={cat.id}
-                      className="text-ivory hover:bg-gold/10"
-                    >
-                      {cat.name}
+              <div className="flex flex-col sm:flex-row gap-4">
+                <Select value={selectedAward} onValueChange={handleAwardChange}>
+                  <SelectTrigger className="w-full sm:w-[220px] bg-charcoal-light border-gold/20 text-ivory">
+                    <Filter className="w-4 h-4 mr-2 text-gold" />
+                    <SelectValue placeholder="All Awards" />
+                  </SelectTrigger>
+                  <SelectContent className="bg-charcoal-light border-gold/20 max-h-[300px]">
+                    <SelectItem value="all" className="text-ivory hover:bg-gold/10">
+                      All Awards
                     </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
+                    {awardOptions.map((opt) => (
+                      <SelectItem
+                        key={opt.value}
+                        value={opt.value}
+                        className="text-ivory hover:bg-gold/10"
+                      >
+                        {opt.label}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+
+                <Select value={selectedRegion} onValueChange={handleRegionChange}>
+                  <SelectTrigger className="w-full sm:w-[180px] bg-charcoal-light border-gold/20 text-ivory">
+                    <MapPin className="w-4 h-4 mr-2 text-gold" />
+                    <SelectValue placeholder="All Regions" />
+                  </SelectTrigger>
+                  <SelectContent className="bg-charcoal-light border-gold/20">
+                    <SelectItem value="all" className="text-ivory hover:bg-gold/10">
+                      All Regions
+                    </SelectItem>
+                    {regionOptions.map((opt) => (
+                      <SelectItem
+                        key={opt.value}
+                        value={opt.value}
+                        className="text-ivory hover:bg-gold/10"
+                      >
+                        {opt.label}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </div>
             </div>
           </div>
         </div>
@@ -242,23 +208,19 @@ export default function Nominees() {
         <div className="container mx-auto px-4 py-6">
           <div className="flex flex-wrap justify-center gap-8 md:gap-16">
             <div className="text-center">
-              <div className="text-3xl font-bold text-gold">{nominees.length}</div>
+              <div className="text-3xl font-bold text-gold">{stats.totalNominees}</div>
               <div className="text-sm text-ivory/60">Total Nominees</div>
             </div>
             <div className="text-center">
-              <div className="text-3xl font-bold text-gold">
-                {nominees.filter((n) => n.is_platinum).length}
-              </div>
-              <div className="text-sm text-ivory/60">Platinum Verified</div>
-            </div>
-            <div className="text-center">
-              <div className="text-3xl font-bold text-gold">{categories.length}</div>
+              <div className="text-3xl font-bold text-gold">{stats.totalAwards + stats.totalRegionalAwards}</div>
               <div className="text-sm text-ivory/60">Award Categories</div>
             </div>
             <div className="text-center">
-              <div className="text-3xl font-bold text-gold">
-                {filteredNominees.length}
-              </div>
+              <div className="text-3xl font-bold text-gold">{stats.totalRegions}</div>
+              <div className="text-sm text-ivory/60">African Regions</div>
+            </div>
+            <div className="text-center">
+              <div className="text-3xl font-bold text-gold">{filteredNominees.length}</div>
               <div className="text-sm text-ivory/60">Showing</div>
             </div>
           </div>
@@ -310,16 +272,17 @@ export default function Nominees() {
               <Users className="w-16 h-16 text-ivory/20 mx-auto mb-4" />
               <h3 className="text-xl font-semibold text-ivory mb-2">No Nominees Found</h3>
               <p className="text-ivory/60 mb-6">
-                {searchQuery || selectedCategory !== "all"
+                {searchQuery || selectedAward !== "all" || selectedRegion !== "all"
                   ? "Try adjusting your search or filter criteria."
                   : "Check back soon as nominations are being reviewed."}
               </p>
-              {(searchQuery || selectedCategory !== "all") && (
+              {(searchQuery || selectedAward !== "all" || selectedRegion !== "all") && (
                 <Button
                   variant="outline"
                   onClick={() => {
                     setSearchQuery("");
-                    setSelectedCategory("all");
+                    setSelectedAward("all");
+                    setSelectedRegion("all");
                     setCurrentPage(1);
                     setVisibleCount(ITEMS_PER_PAGE);
                   }}
@@ -338,15 +301,22 @@ export default function Nominees() {
                     id: nominee.id,
                     name: nominee.name,
                     slug: nominee.slug,
-                    title: nominee.title,
-                    organization: nominee.organization,
-                    photoUrl: nominee.photo_url,
-                    isPlatinum: nominee.is_platinum,
-                    publicVotes: nominee.public_votes,
-                    categoryName: nominee.subcategories?.categories?.name,
-                    region: nominee.chapters?.region || undefined,
+                    title: nominee.achievement || undefined,
+                    organization: undefined,
+                    photoUrl: nominee.imageUrl,
+                    isPlatinum: false,
+                    publicVotes: 0,
+                    categoryName: nominee.subcategoryTitle,
+                    region: nominee.regionName,
+                    country: nominee.country,
                   };
-                  return <NomineeCard key={nominee.id} nominee={cardData} />;
+                  return (
+                    <NomineeCard 
+                      key={nominee.id} 
+                      nominee={cardData}
+                      showVotes={false}
+                    />
+                  );
                 })}
               </div>
 
