@@ -8,7 +8,6 @@ import {
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Separator } from "@/components/ui/separator";
 import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
@@ -22,6 +21,7 @@ import {
 import { NomineeCard, type NomineeCardData } from "@/components/nesa/NomineeCard";
 import { RenominateCard } from "@/components/nesa/RenominateCard";
 import { NomineeReferralCard } from "@/components/nesa/NomineeReferralCard";
+import { NomineeActions } from "@/components/nominees";
 
 export default function NomineeProfile() {
   const { slug: rawSlug } = useParams<{ slug: string }>();
@@ -279,6 +279,22 @@ export default function NomineeProfile() {
                       <p className="text-ivory/80 leading-relaxed whitespace-pre-line">
                         {nominee.achievement}
                       </p>
+                    </div>
+                  )}
+                  {/* Primary Actions - Vote & Endorse */}
+                  {dbNomineeId && (
+                    <div className="mt-6 flex flex-wrap gap-3">
+                      <NomineeActions
+                        nominee={{
+                          nomineeId: dbNomineeId,
+                          nomineeSlug: nominee.slug,
+                          nomineeName: nominee.name,
+                          awardTitle: nominee.awardTitle,
+                          subcategoryTitle: nominee.subcategoryTitle,
+                          renominationCount: renominationCount,
+                        }}
+                        onRenominateSuccess={() => setRenominationCount(c => c + 1)}
+                      />
                     </div>
                   )}
                 </CardContent>
