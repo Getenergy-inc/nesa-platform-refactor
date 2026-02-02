@@ -115,7 +115,7 @@ export default function Judges() {
           <div className="container mx-auto px-4">
             <div className="mx-auto grid max-w-3xl gap-8 text-center md:grid-cols-4">
               <div>
-                <div className="mb-2 text-3xl font-bold text-primary">25+</div>
+                <div className="mb-2 text-3xl font-bold text-primary">27</div>
                 <div className="text-sm text-white/60">Jury Members</div>
               </div>
               <div>
@@ -127,8 +127,8 @@ export default function Judges() {
                 <div className="text-sm text-white/60">Weight in Final Score</div>
               </div>
               <div>
-                <div className="mb-2 text-3xl font-bold text-primary">15+</div>
-                <div className="text-sm text-white/60">Countries Represented</div>
+                <div className="mb-2 text-3xl font-bold text-primary">7</div>
+                <div className="text-sm text-white/60">Regional Groups</div>
               </div>
             </div>
           </div>

@@ -41,10 +41,10 @@ export function NRCLayout({ children }: NRCLayoutProps) {
               <Award className="h-5 w-5 text-primary" />
             </Link>
             <div>
-              <h1 className="font-display text-lg font-bold">NRC Portal</h1>
+              <h1 className="font-display text-lg font-bold">Hybrid NRC Portal</h1>
               <div className="flex items-center gap-2">
                 <p className="text-xs text-muted-foreground">
-                  Nominee Research Corps
+                  30 Volunteers • Blended Verification Model
                 </p>
                 <Badge variant="outline" className="text-[10px]">
                   {currentEdition.name}

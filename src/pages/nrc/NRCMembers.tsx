@@ -185,9 +185,9 @@ function NRCMembersContent() {
         {/* Header */}
         <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
           <div>
-            <h2 className="font-display text-2xl font-bold">NRC Members</h2>
+            <h2 className="font-display text-2xl font-bold">Hybrid NRC Members</h2>
             <p className="text-muted-foreground">
-              Manage the Nominee Research Corps team
+              Manage the 30-member Nominee Research Corps (Hybrid Model: core + volunteer support)
             </p>
           </div>
 

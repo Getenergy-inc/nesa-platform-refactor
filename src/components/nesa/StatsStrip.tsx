@@ -1,14 +1,15 @@
 import { motion } from "framer-motion";
 import { useTranslation } from "react-i18next";
+import { GOVERNANCE_STATS } from "@/lib/regions";
 
 export function StatsStrip() {
   const { t } = useTranslation("pages");
   
   const stats = [
-    { value: "54", label: "African Countries", color: "text-gold" },
-    { value: "5", label: "Regions + Diaspora", color: "text-gold" },
-    { value: "17", label: t("landing.stats.categories"), color: "text-gold" },
-    { value: "141+", label: t("landing.stats.subcategories"), color: "text-gold" },
+    { value: "5+2", label: "Regions + Diaspora + Friends", color: "text-gold" },
+    { value: String(GOVERNANCE_STATS.judges), label: "Expert Judges", color: "text-gold" },
+    { value: String(GOVERNANCE_STATS.categories), label: t("landing.stats.categories"), color: "text-gold" },
+    { value: `${GOVERNANCE_STATS.subcategories}+`, label: t("landing.stats.subcategories"), color: "text-gold" },
   ];
 
   return (

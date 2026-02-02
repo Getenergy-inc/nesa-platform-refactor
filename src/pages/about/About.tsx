@@ -43,7 +43,7 @@ const pillars = [
   {
     icon: Globe,
     title: "Continental Reach",
-    description: "Region-first approach covering all 5 African regions plus Diaspora and Friends of Africa.",
+    description: "Region-first approach covering all 5 African regions, the African Diaspora, and Friends of Africa.",
     gradient: "from-emerald-500/20 to-emerald-500/5",
     image: continentalReachImage,
   },
@@ -57,10 +57,10 @@ const pillars = [
 ];
 
 const impactStats = [
-  { value: "54", label: "African Countries", icon: Globe },
-  { value: "5", label: "Regions + Diaspora", icon: Building2 },
+  { value: "5+2", label: "Regions + Diaspora + Friends", icon: Globe },
+  { value: "27", label: "Expert Judges", icon: Building2 },
   { value: "17", label: "Award Categories", icon: Award },
-  { value: "15+", label: "Years of Vision", icon: Lightbulb },
+  { value: "20", label: "Years of Vision (2005–2025)", icon: Lightbulb },
 ];
 
 const awardTiers = [

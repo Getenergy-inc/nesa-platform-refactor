@@ -148,7 +148,7 @@ export function NESAHero() {
         <div className="flex flex-wrap justify-center gap-4 sm:gap-6 mt-8 sm:mt-10 animate-fade-in opacity-70" style={{ animationDelay: '0.6s' }}>
           {[
             { label: t("landing.hero.stats.nominees"), value: "2,500+" },
-            { label: t("landing.hero.stats.countries"), value: "54" },
+            { label: "Regions", value: "5+2" },
             { label: t("landing.hero.stats.categories"), value: "17" },
           ].map((stat) => (
             <div 

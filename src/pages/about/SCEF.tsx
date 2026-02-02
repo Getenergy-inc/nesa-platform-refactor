@@ -150,9 +150,9 @@ export default function SCEF() {
             <div className="grid gap-8 text-center md:grid-cols-4">
               {[
                 { value: "4", label: "Active Programmes" },
-                { value: "54", label: "African Countries" },
+                { value: "5+2", label: "Regional Groups" },
                 { value: "1M+", label: "Lives Impacted" },
-                { value: "2015", label: "Founded" },
+                { value: "2005", label: "Vision Conceived" },
               ].map((stat) => (
                 <div key={stat.label}>
                   <div className="mb-2 text-4xl font-bold text-primary">{stat.value}</div>
