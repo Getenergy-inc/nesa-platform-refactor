@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import { Navigate, useLocation } from "react-router-dom";
 import { useAuth } from "@/contexts/AuthContext";
 import { Loader2 } from "lucide-react";
@@ -23,7 +22,8 @@ export default function JudgePortal() {
 
   // Not logged in - redirect to login with return URL
   if (!user) {
-    return <Navigate to={`/login?next=${encodeURIComponent("/judge/dashboard")}`} replace />;
+    const returnUrl = location.pathname + location.search;
+    return <Navigate to={`/login?next=${encodeURIComponent(returnUrl)}`} replace />;
   }
 
   // Check if user has jury role

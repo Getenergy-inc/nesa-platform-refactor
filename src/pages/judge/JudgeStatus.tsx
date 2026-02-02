@@ -54,7 +54,7 @@ const STATUS_CONFIG: Record<string, { label: string; color: string; icon: React.
     label: "Email Verified",
     color: "bg-yellow-500/20 text-yellow-400 border-yellow-500/30",
     icon: CheckCircle,
-    description: "Your email has been verified. Your application is now awaiting review by our committee.",
+    description: "Your email has been verified. You can now create your judge account to proceed.",
   },
   under_review: {
     label: "Under Review",
@@ -282,7 +282,7 @@ export default function JudgeStatus() {
                     </div>
                   )}
 
-                  {application.status === "approved" && (
+                  {(application.status === "approved" || application.status === "email_verified") && (
                     <Button 
                       asChild 
                       className="w-full bg-gold hover:bg-gold-dark text-charcoal font-semibold"

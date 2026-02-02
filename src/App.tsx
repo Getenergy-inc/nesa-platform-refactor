@@ -217,6 +217,14 @@ const App = () => (
                 <Route path="/judge/signup" element={<JudgeSignup />} />
                 <Route path="/judge/verify" element={<JudgeVerify />} />
                 
+                {/* Judge route aliases (legacy/expected URLs) */}
+                <Route path="/judgeapply" element={<WithLayout><JudgeApply /></WithLayout>} />
+                <Route path="/judge-apply" element={<WithLayout><JudgeApply /></WithLayout>} />
+                <Route path="/judge-application-form" element={<WithLayout><JudgeApply /></WithLayout>} />
+                <Route path="/judge-status" element={<WithLayout><JudgeStatus /></WithLayout>} />
+                <Route path="/judge-verify" element={<JudgeVerify />} />
+                <Route path="/judge-signup" element={<JudgeSignup />} />
+                
                 {/* Judge Portal Routes (Authenticated) */}
                 <Route path="/judge" element={<JudgePortal />} />
                 <Route path="/judge/dashboard" element={<JudgeDashboard />} />

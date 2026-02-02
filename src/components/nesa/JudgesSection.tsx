@@ -58,6 +58,14 @@ export function JudgesSection() {
             variant="outline"
             className="border-gold/30 text-gold hover:bg-gold/10 rounded-full px-8"
           >
+            <Link to="/judge/status">Check Application Status</Link>
+          </Button>
+          <Button
+            asChild
+            size="lg"
+            variant="outline"
+            className="border-white/30 text-white hover:bg-white/10 rounded-full px-8"
+          >
             <Link to="/judges">Learn More</Link>
           </Button>
         </div>
