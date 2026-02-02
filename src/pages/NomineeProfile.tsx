@@ -16,6 +16,7 @@ import {
   getNomineeBySlug, 
   getRelatedNominees, 
   handleImageError,
+  isOrganization,
   type EnrichedNominee 
 } from "@/lib/nesaData";
 import { NomineeCard, type NomineeCardData } from "@/components/nesa/NomineeCard";
@@ -184,20 +185,29 @@ export default function NomineeProfile() {
               <Card className="bg-charcoal-light border-gold/20">
                 <CardContent className="p-8">
                   <div className="flex flex-col md:flex-row gap-6">
-                    {/* Avatar */}
+                    {/* Avatar / Logo */}
                     <div className="flex-shrink-0">
-                      <div className="relative">
-                        <Avatar className="w-32 h-32 border-4 border-gold/30">
-                          <AvatarImage 
-                            src={nominee.imageUrl} 
-                            alt={nominee.name}
-                            onError={handleImageError}
-                          />
-                          <AvatarFallback className="bg-gold/20 text-gold text-3xl font-semibold">
-                            {getInitials(nominee.name)}
-                          </AvatarFallback>
-                        </Avatar>
-                      </div>
+                      {(() => {
+                        const isLogo = nominee.imageType === "logo" || isOrganization(nominee.name);
+                        const altText = isLogo ? `${nominee.name} logo` : `${nominee.name} photo`;
+                        
+                        return (
+                          <div className={`relative w-32 h-32 rounded-full border-4 border-gold/30 overflow-hidden flex items-center justify-center ${isLogo ? "bg-white/90 p-3" : "bg-gold/20"}`}>
+                            {nominee.imageUrl ? (
+                              <img 
+                                src={nominee.imageUrl} 
+                                alt={altText}
+                                className={isLogo ? "object-contain max-h-full max-w-full" : "object-cover w-full h-full"}
+                                onError={handleImageError}
+                              />
+                            ) : (
+                              <span className="text-gold text-3xl font-semibold">
+                                {getInitials(nominee.name)}
+                              </span>
+                            )}
+                          </div>
+                        );
+                      })()}
                     </div>
 
                     {/* Info */}

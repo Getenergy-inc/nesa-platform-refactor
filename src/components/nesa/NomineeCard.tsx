@@ -5,6 +5,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Award, Building2, MapPin, RotateCcw, ThumbsUp, Loader2 } from "lucide-react";
 import { NESAStamp } from "@/components/nesa/NESALogo";
+import { type NomineeImageType, isOrganization } from "@/lib/nesaData";
 
 export interface NomineeCardData {
   id: string;
@@ -20,6 +21,8 @@ export interface NomineeCardData {
   region?: string;
   renominationCount?: number;
   country?: string;
+  /** Whether this is a person photo or organization logo */
+  imageType?: NomineeImageType;
 }
 
 interface NomineeCardProps {
@@ -45,6 +48,12 @@ function getInitials(name: string): string {
     .slice(0, 2);
 }
 
+// Determine if nominee is an organization based on imageType or name heuristic
+function getEffectiveImageType(nominee: NomineeCardData): NomineeImageType {
+  if (nominee.imageType) return nominee.imageType;
+  return isOrganization(nominee.name) ? "logo" : "photo";
+}
+
 export function NomineeCard({
   nominee,
   showVotes = true,
@@ -58,6 +67,11 @@ export function NomineeCard({
 }: NomineeCardProps) {
   const isCompact = variant === "compact";
   const isVotingVariant = variant === "voting";
+  const imageType = getEffectiveImageType(nominee);
+  const isLogo = imageType === "logo";
+  
+  // Generate accessible alt text
+  const altText = isLogo ? `${nominee.name} logo` : `${nominee.name} photo`;
 
   const cardContent = (
     <Card className="group relative bg-charcoal-light border-gold/10 hover:border-gold/30 transition-all duration-300 hover:shadow-lg hover:shadow-gold/5 h-full overflow-hidden">
@@ -68,14 +82,31 @@ export function NomineeCard({
 
       <CardContent className={isCompact ? "p-4" : "p-6"}>
         <div className="flex flex-col items-center text-center">
-          {/* Avatar */}
+          {/* Avatar / Logo */}
           <div className="relative mb-4 mt-2">
-            <Avatar className={`${isCompact ? "w-16 h-16" : "w-20 h-20"} border-2 border-gold/20 group-hover:border-gold/40 transition-colors`}>
-              <AvatarImage src={nominee.photoUrl || undefined} alt={nominee.name} />
-              <AvatarFallback className="bg-gold/20 text-gold text-lg font-semibold">
+            <div 
+              className={`${isCompact ? "w-16 h-16" : "w-20 h-20"} rounded-full border-2 border-gold/20 group-hover:border-gold/40 transition-colors overflow-hidden flex items-center justify-center ${isLogo ? "bg-white/90 p-2" : "bg-gold/20"}`}
+            >
+              {nominee.photoUrl ? (
+                <img 
+                  src={nominee.photoUrl} 
+                  alt={altText}
+                  className={`${isLogo ? "object-contain max-h-full max-w-full" : "object-cover w-full h-full"}`}
+                  onError={(e) => {
+                    const target = e.currentTarget;
+                    target.style.display = 'none';
+                    // Show fallback
+                    const fallback = target.nextElementSibling as HTMLElement;
+                    if (fallback) fallback.style.display = 'flex';
+                  }}
+                />
+              ) : null}
+              <div 
+                className={`${nominee.photoUrl ? 'hidden' : 'flex'} items-center justify-center w-full h-full text-gold text-lg font-semibold`}
+              >
                 {getInitials(nominee.name)}
-              </AvatarFallback>
-            </Avatar>
+              </div>
+            </div>
             {nominee.isPlatinum && (
               <div className="absolute -bottom-1 -right-1 bg-gold rounded-full p-1">
                 <Award className="w-4 h-4 text-charcoal" />
