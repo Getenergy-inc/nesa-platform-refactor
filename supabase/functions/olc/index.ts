@@ -1,25 +1,43 @@
-import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
+/**
+ * OLC (Offline Local Chapter) Edge Function
+ * 
+ * Provides chapter coordinator management endpoints.
+ * 
+ * Endpoints:
+ *   GET  /olc/members           - Get chapter members
+ *   POST /olc/members/verify    - Verify a member
+ *   GET  /olc/settlements       - Get settlement requests
+ *   POST /olc/settlements/request - Request settlement
+ *   POST /olc/media/submit      - Submit chapter media
+ */
 
-const corsHeaders = {
-  "Access-Control-Allow-Origin": "*",
-  "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type",
-};
+import {
+  corsHeaders,
+  handleCorsPreflightRequest,
+  ok,
+  err,
+  createUserClient,
+  createAdminClient,
+  getAuthUser,
+  hasRole,
+  hasRoleCode,
+} from "../_shared/index.ts";
 
-const respond = (data: unknown, meta?: Record<string, unknown>, status = 200) =>
-  new Response(
-    JSON.stringify({ ok: true, data, ...(meta && { meta }) }),
-    { status, headers: { ...corsHeaders, "Content-Type": "application/json" } }
-  );
+import { SupabaseClient } from "https://esm.sh/@supabase/supabase-js@2";
 
-const errorResponse = (message: string, status = 400) =>
-  new Response(
-    JSON.stringify({ ok: false, error: message }),
-    { status, headers: { ...corsHeaders, "Content-Type": "application/json" } }
-  );
+// Helper: Get coordinator's chapter
+async function getCoordinatorChapter(supabase: SupabaseClient, userId: string) {
+  const { data } = await supabase
+    .from("chapters")
+    .select("*")
+    .eq("coordinator_user_id", userId)
+    .maybeSingle();
+  return data;
+}
 
 Deno.serve(async (req) => {
   if (req.method === "OPTIONS") {
-    return new Response(null, { headers: corsHeaders });
+    return handleCorsPreflightRequest();
   }
 
   try {
@@ -28,75 +46,38 @@ Deno.serve(async (req) => {
     const action = pathParts[1] || "";
     const subAction = pathParts[2] || "";
 
-    const authHeader = req.headers.get("Authorization");
-    const supabase = createClient(
-      Deno.env.get("SUPABASE_URL")!,
-      Deno.env.get("SUPABASE_ANON_KEY")!,
-      { global: { headers: { Authorization: authHeader || "" } } }
-    );
-
-    const adminSupabase = createClient(
-      Deno.env.get("SUPABASE_URL")!,
-      Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!,
-      { auth: { persistSession: false } }
-    );
-
-    const requireAuth = async (): Promise<string | null> => {
-      if (!authHeader?.startsWith("Bearer ")) return null;
-      const { data: { user }, error } = await supabase.auth.getUser();
-      if (error || !user) return null;
-      return user.id;
-    };
-
-    const hasRole = async (userId: string, role: string) => {
-      const { data } = await supabase.rpc("has_role", { _user_id: userId, _role: role });
-      return data === true;
-    };
-
-    const hasRoleCode = async (userId: string, roleCode: string) => {
-      const { data } = await supabase.rpc("has_role_code", { p_user_id: userId, p_role_code: roleCode });
-      return data === true;
-    };
-
-    // Get coordinator's chapter
-    const getCoordinatorChapter = async (userId: string) => {
-      const { data } = await supabase
-        .from("chapters")
-        .select("*")
-        .eq("coordinator_user_id", userId)
-        .maybeSingle();
-      return data;
-    };
+    const supabase = createUserClient(req);
+    const adminSupabase = createAdminClient();
 
     // ============================================================
     // GET /olc/members - Get chapter members
     // ============================================================
     if (action === "members" && req.method === "GET" && !subAction) {
-      const userId = await requireAuth();
-      if (!userId) return errorResponse("Unauthorized", 401);
+      const userId = await getAuthUser(supabase, req);
+      if (!userId) return err("Unauthorized", 401);
 
-      const isOLC = await hasRoleCode(userId, "OLC_COORDINATOR");
-      const isAdmin = await hasRole(userId, "admin");
-      if (!isOLC && !isAdmin) return errorResponse("Forbidden", 403);
+      const [isOLC, isAdmin] = await Promise.all([
+        hasRoleCode(supabase, userId, "OLC_COORDINATOR"),
+        hasRole(supabase, userId, "admin"),
+      ]);
+      if (!isOLC && !isAdmin) return err("Forbidden", 403);
 
-      const chapter = await getCoordinatorChapter(userId);
-      if (!chapter && !isAdmin) return errorResponse("No chapter assigned", 404);
+      const chapter = await getCoordinatorChapter(supabase, userId);
+      if (!chapter && !isAdmin) return err("No chapter assigned", 404);
 
       const chapterId = chapter?.id;
       const page = parseInt(url.searchParams.get("page") || "1");
       const limit = Math.min(parseInt(url.searchParams.get("limit") || "20"), 100);
       const offset = (page - 1) * limit;
-      const status = url.searchParams.get("status");
 
       // Get members referred by this chapter
-      let query = adminSupabase
+      const { data: members, count, error } = await adminSupabase
         .from("profiles")
         .select("*", { count: "exact" })
         .eq("referred_by_chapter_id", chapterId || "")
         .order("created_at", { ascending: false })
         .range(offset, offset + limit - 1);
 
-      const { data: members, count, error } = await query;
       if (error) throw error;
 
       // Get user roles for each member
@@ -112,7 +93,7 @@ Deno.serve(async (req) => {
         roles: memberRoles?.filter(r => r.user_id === m.user_id) || [],
       }));
 
-      return respond(enrichedMembers, {
+      return ok(enrichedMembers, {
         page,
         limit,
         total: count || 0,
@@ -124,21 +105,23 @@ Deno.serve(async (req) => {
     // POST /olc/members/verify - Verify a member
     // ============================================================
     if (action === "members" && subAction === "verify" && req.method === "POST") {
-      const userId = await requireAuth();
-      if (!userId) return errorResponse("Unauthorized", 401);
+      const userId = await getAuthUser(supabase, req);
+      if (!userId) return err("Unauthorized", 401);
 
-      const isOLC = await hasRoleCode(userId, "OLC_COORDINATOR");
-      const isAdmin = await hasRole(userId, "admin");
-      if (!isOLC && !isAdmin) return errorResponse("Forbidden", 403);
+      const [isOLC, isAdmin] = await Promise.all([
+        hasRoleCode(supabase, userId, "OLC_COORDINATOR"),
+        hasRole(supabase, userId, "admin"),
+      ]);
+      if (!isOLC && !isAdmin) return err("Forbidden", 403);
 
-      const chapter = await getCoordinatorChapter(userId);
-      if (!chapter && !isAdmin) return errorResponse("No chapter assigned", 404);
+      const chapter = await getCoordinatorChapter(supabase, userId);
+      if (!chapter && !isAdmin) return err("No chapter assigned", 404);
 
       const body = await req.json();
       const { member_user_id, status } = body;
 
-      if (!member_user_id) return errorResponse("member_user_id required");
-      if (!["verified", "rejected"].includes(status)) return errorResponse("Invalid status");
+      if (!member_user_id) return err("member_user_id required");
+      if (!["verified", "rejected"].includes(status)) return err("Invalid status");
 
       // Verify the member belongs to this chapter
       const { data: member } = await adminSupabase
@@ -148,11 +131,10 @@ Deno.serve(async (req) => {
         .eq("referred_by_chapter_id", chapter?.id || "")
         .maybeSingle();
 
-      if (!member && !isAdmin) return errorResponse("Member not found in this chapter", 404);
+      if (!member && !isAdmin) return err("Member not found in this chapter", 404);
 
       // If verified, add AMBASSADOR role
       if (status === "verified") {
-        // Check if already has ambassador role
         const { data: existingRole } = await adminSupabase
           .from("user_roles")
           .select("id")
@@ -179,22 +161,24 @@ Deno.serve(async (req) => {
         new_values: { status, chapter_id: chapter?.id },
       });
 
-      return respond({ verified: status === "verified", member_user_id });
+      return ok({ verified: status === "verified", member_user_id });
     }
 
     // ============================================================
     // GET /olc/settlements - Get settlement requests
     // ============================================================
     if (action === "settlements" && req.method === "GET" && !subAction) {
-      const userId = await requireAuth();
-      if (!userId) return errorResponse("Unauthorized", 401);
+      const userId = await getAuthUser(supabase, req);
+      if (!userId) return err("Unauthorized", 401);
 
-      const isOLC = await hasRoleCode(userId, "OLC_COORDINATOR");
-      const isAdmin = await hasRole(userId, "admin");
-      if (!isOLC && !isAdmin) return errorResponse("Forbidden", 403);
+      const [isOLC, isAdmin] = await Promise.all([
+        hasRoleCode(supabase, userId, "OLC_COORDINATOR"),
+        hasRole(supabase, userId, "admin"),
+      ]);
+      if (!isOLC && !isAdmin) return err("Forbidden", 403);
 
-      const chapter = await getCoordinatorChapter(userId);
-      if (!chapter && !isAdmin) return errorResponse("No chapter assigned", 404);
+      const chapter = await getCoordinatorChapter(supabase, userId);
+      if (!chapter && !isAdmin) return err("No chapter assigned", 404);
 
       // Get chapter wallet
       const { data: wallet } = await supabase
@@ -204,7 +188,7 @@ Deno.serve(async (req) => {
         .eq("owner_id", chapter?.id || "")
         .maybeSingle();
 
-      if (!wallet) return respond([]);
+      if (!wallet) return ok([]);
 
       // Get withdrawal-related entries
       const { data: settlements } = await adminSupabase
@@ -215,26 +199,27 @@ Deno.serve(async (req) => {
         .order("created_at", { ascending: false })
         .limit(50);
 
-      return respond(settlements || []);
+      return ok(settlements || []);
     }
 
     // ============================================================
     // POST /olc/settlements/request - Request settlement
     // ============================================================
     if (action === "settlements" && subAction === "request" && req.method === "POST") {
-      const userId = await requireAuth();
-      if (!userId) return errorResponse("Unauthorized", 401);
+      const userId = await getAuthUser(supabase, req);
+      if (!userId) return err("Unauthorized", 401);
 
-      const isOLC = await hasRoleCode(userId, "OLC_COORDINATOR");
-      if (!isOLC) return errorResponse("Forbidden", 403);
+      if (!(await hasRoleCode(supabase, userId, "OLC_COORDINATOR"))) {
+        return err("Forbidden", 403);
+      }
 
-      const chapter = await getCoordinatorChapter(userId);
-      if (!chapter) return errorResponse("No chapter assigned", 404);
+      const chapter = await getCoordinatorChapter(supabase, userId);
+      if (!chapter) return err("No chapter assigned", 404);
 
       const body = await req.json();
       const { amount_usd, notes } = body;
 
-      if (!amount_usd || amount_usd <= 0) return errorResponse("Invalid amount");
+      if (!amount_usd || amount_usd <= 0) return err("Invalid amount");
 
       // Get chapter wallet
       const { data: wallet } = await supabase
@@ -244,7 +229,7 @@ Deno.serve(async (req) => {
         .eq("owner_id", chapter.id)
         .maybeSingle();
 
-      if (!wallet) return errorResponse("Chapter wallet not found", 404);
+      if (!wallet) return err("Chapter wallet not found", 404);
 
       // Check balance
       const { data: balance } = await supabase
@@ -255,7 +240,7 @@ Deno.serve(async (req) => {
 
       const availableUsd = balance?.usd_balance || 0;
       if (amount_usd > availableUsd) {
-        return errorResponse("Insufficient balance");
+        return err("Insufficient balance");
       }
 
       const agcAmount = amount_usd * 10; // 1 USD = 10 AGC
@@ -287,7 +272,7 @@ Deno.serve(async (req) => {
         new_values: { chapter_id: chapter.id, amount_usd, agc_amount: agcAmount },
       });
 
-      return respond({
+      return ok({
         request_id: entry.id,
         status: "pending",
         amount_usd,
@@ -299,21 +284,21 @@ Deno.serve(async (req) => {
     // POST /olc/media/submit - Submit media for chapter
     // ============================================================
     if (action === "media" && subAction === "submit" && req.method === "POST") {
-      const userId = await requireAuth();
-      if (!userId) return errorResponse("Unauthorized", 401);
+      const userId = await getAuthUser(supabase, req);
+      if (!userId) return err("Unauthorized", 401);
 
-      const isOLC = await hasRoleCode(userId, "OLC_COORDINATOR");
-      if (!isOLC) return errorResponse("Forbidden", 403);
+      if (!(await hasRoleCode(supabase, userId, "OLC_COORDINATOR"))) {
+        return err("Forbidden", 403);
+      }
 
-      const chapter = await getCoordinatorChapter(userId);
-      if (!chapter) return errorResponse("No chapter assigned", 404);
+      const chapter = await getCoordinatorChapter(supabase, userId);
+      if (!chapter) return err("No chapter assigned", 404);
 
       const body = await req.json();
       const { url: mediaUrl, title, description, media_type } = body;
 
-      if (!mediaUrl || !title) return errorResponse("URL and title required");
+      if (!mediaUrl || !title) return err("URL and title required");
 
-      // Generate slug from title
       const slug = title.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
 
       const { data: media, error } = await adminSupabase
@@ -339,21 +324,17 @@ Deno.serve(async (req) => {
         new_values: { chapter_id: chapter.id, title, media_type },
       });
 
-      return respond({
+      return ok({
         media_id: media.id,
         status: "pending_approval",
         message: "Media submitted for admin review",
       });
     }
 
-    return errorResponse("Not found", 404);
-
+    return err("Not found", 404);
   } catch (error: unknown) {
     console.error("OLC function error:", error);
     const message = error instanceof Error ? error.message : "Internal server error";
-    return new Response(
-      JSON.stringify({ ok: false, error: message }),
-      { status: 500, headers: { ...corsHeaders, "Content-Type": "application/json" } }
-    );
+    return err(message, 500);
   }
 });

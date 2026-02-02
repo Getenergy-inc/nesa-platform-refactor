@@ -1,9 +1,12 @@
-import { serve } from "https://deno.land/std@0.190.0/http/server.ts";
+/**
+ * Health Check Edge Function
+ * 
+ * Public endpoint for system health monitoring.
+ * GET /health - Returns system status and service availability
+ */
 
-const corsHeaders = {
-  "Access-Control-Allow-Origin": "*",
-  "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type",
-};
+import { corsHeaders, handleCorsPreflightRequest } from "../_shared/cors.ts";
+import { ok, err } from "../_shared/response.ts";
 
 interface HealthResponse {
   status: "ok" | "degraded" | "error";
@@ -19,9 +22,9 @@ interface HealthResponse {
 
 const startTime = Date.now();
 
-serve(async (req: Request): Promise<Response> => {
+Deno.serve(async (req: Request): Promise<Response> => {
   if (req.method === "OPTIONS") {
-    return new Response(null, { headers: corsHeaders });
+    return handleCorsPreflightRequest();
   }
 
   try {
@@ -47,19 +50,10 @@ serve(async (req: Request): Promise<Response> => {
       uptime: Math.floor((Date.now() - startTime) / 1000),
     };
 
-    return new Response(JSON.stringify(response), {
-      status: allOk ? 200 : 503,
-      headers: { ...corsHeaders, "Content-Type": "application/json" },
-    });
-  } catch (error: any) {
+    return ok(response, undefined, allOk ? 200 : 503);
+  } catch (error: unknown) {
     console.error("Health check error:", error);
-    return new Response(
-      JSON.stringify({
-        status: "error",
-        timestamp: new Date().toISOString(),
-        error: error.message,
-      }),
-      { status: 500, headers: { ...corsHeaders, "Content-Type": "application/json" } }
-    );
+    const message = error instanceof Error ? error.message : "Unknown error";
+    return err(message, 500);
   }
 });
