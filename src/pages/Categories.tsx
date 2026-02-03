@@ -405,7 +405,7 @@ export default function Categories() {
                             subs.map((sub) => (
                               <Link
                                 key={sub.id}
-                                to={`/nominate?subcategory=${sub.id}`}
+                                to={`/nominees?subcategory=${sub.id}`}
                                 className="flex items-center justify-between rounded-lg border p-2 transition-colors hover:bg-muted"
                               >
                                 <div className="flex-1 min-w-0">

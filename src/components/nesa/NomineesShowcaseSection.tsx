@@ -333,9 +333,14 @@ function NomineeShowcaseCard({
         to={`/nominees/${encodeURIComponent(nominee.slug)}`}
         className="group block bg-white/5 backdrop-blur-sm rounded-2xl p-4 border border-white/10 hover:border-gold/40 transition-all duration-300 hover:bg-white/10 relative"
       >
-        {/* NESA Badge */}
-        <div className="absolute top-2 left-2 z-10">
-          <NESALogo variant="icon" size="sm" className="h-6 w-6 opacity-70" />
+        {/* NESA Badge - using img directly to avoid ref issues */}
+        <div className="absolute top-2 left-2 z-10 h-6 w-6 opacity-70">
+          <img 
+            src="/nesa-stamp.jpeg" 
+            alt="NESA" 
+            className="h-full w-full object-contain rounded-full"
+            loading="lazy"
+          />
         </div>
 
         {/* Photo / Logo */}

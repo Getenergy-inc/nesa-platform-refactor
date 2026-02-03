@@ -6,6 +6,7 @@ import { AwardHeroSection } from "@/components/awards/AwardHeroSection";
 import { getTVShowByAward } from "@/config/awardTVShows";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Breadcrumbs } from "@/components/ui/breadcrumbs";
 import { Award, Globe, Trophy, Users, Vote, Coins, ArrowRight, Check, Sparkles } from "lucide-react";
 import { motion } from "framer-motion";
 import goldCertificateImage from "@/assets/certificates/gold-certificate-showcase.jpg";
@@ -39,6 +40,17 @@ export default function GoldAward() {
       </Helmet>
 
       <div className="min-h-screen bg-charcoal">
+        {/* Breadcrumbs */}
+        <div className="container mx-auto px-4 pt-20">
+          <Breadcrumbs 
+            items={[
+              { label: "Awards", href: "/categories" },
+              { label: "Gold Certificate" },
+            ]}
+            className="text-ivory/60"
+          />
+        </div>
+
         {/* Hero */}
         <AwardHeroSection
           variant="gold"
