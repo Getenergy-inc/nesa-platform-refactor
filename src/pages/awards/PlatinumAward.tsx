@@ -6,6 +6,7 @@ import { AwardHeroSection } from "@/components/awards/AwardHeroSection";
 import { getTVShowByAward } from "@/config/awardTVShows";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Breadcrumbs } from "@/components/ui/breadcrumbs";
 import { Award, FileCheck, Medal, RefreshCw, Shield } from "lucide-react";
 
 const benefits = [
@@ -36,6 +37,17 @@ export default function PlatinumAward() {
       </Helmet>
 
       <div className="min-h-screen bg-charcoal">
+        {/* Breadcrumbs */}
+        <div className="container mx-auto px-4 pt-20">
+          <Breadcrumbs 
+            items={[
+              { label: "Awards", href: "/categories" },
+              { label: "Platinum Certificate" },
+            ]}
+            className="text-ivory/60"
+          />
+        </div>
+
         {/* Hero */}
         <AwardHeroSection
           variant="platinum"

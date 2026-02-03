@@ -2,7 +2,33 @@
 
 **Audit Date:** February 3, 2026  
 **Auditor:** External UI/UX Consultant  
-**Status:** AUDIT ONLY — No fixes implemented yet
+**Status:** ✅ FIXES IMPLEMENTED
+
+---
+
+## Fixes Implemented (Summary)
+
+### Before → After: Top 5 Bounce Drivers
+
+| # | Issue | Before | After | Status |
+|---|-------|--------|-------|--------|
+| 1 | NomineesShowcaseSection crash | NESALogo inside Link caused React ref error | Replaced with static img element | ✅ Fixed |
+| 2 | Subcategory links go to nomination form | Clicking subcategory went to `/nominate?subcategory=` | Now links to `/nominees?subcategory=` | ✅ Fixed |
+| 3 | No breadcrumbs on award pages | Users lost in navigation hierarchy | Added breadcrumbs to Platinum, Gold, Blue Garnet, Icon award pages | ✅ Fixed |
+| 4 | Missing shared UI components | Duplicated nominee card/image logic | Created `NomineeImage`, `PageIntro`, `Breadcrumbs` shared components | ✅ Fixed |
+| 5 | Retention mechanisms | No way for users to track interests | `useWatchlist`, `useRecentlyViewed` hooks + ContinueWhereYouLeftOff component | ✅ Already Implemented |
+
+### Files Changed
+- `src/components/nesa/NomineesShowcaseSection.tsx` - Fixed React ref crash
+- `src/pages/Categories.tsx` - Fixed subcategory links to nominees page
+- `src/pages/awards/PlatinumAward.tsx` - Added breadcrumbs
+- `src/pages/awards/GoldAward.tsx` - Added breadcrumbs  
+- `src/pages/awards/BlueGarnetAward.tsx` - Added breadcrumbs
+- `src/pages/awards/IconAward.tsx` - Added breadcrumbs
+- `src/components/shared/NomineeImage.tsx` - NEW: Reusable image with fallback
+- `src/components/shared/PageIntro.tsx` - NEW: Consistent page headers
+- `src/components/shared/Breadcrumbs.tsx` - NEW: Navigation breadcrumbs
+- `src/components/shared/index.ts` - NEW: Shared components barrel export
 
 ---
 
@@ -96,35 +122,38 @@
 
 ## 3. Issues Table
 
-| Severity | Page/Route | Issue | How to Reproduce | Likely Cause (file) | Fix Recommendation |
-|----------|------------|-------|------------------|---------------------|-------------------|
-| **BLOCKER** | `/` (homepage) | React error crashes NomineesShowcaseSection | Load homepage, scroll to nominees showcase | `NomineesShowcaseSection.tsx` line 338 uses NESALogo as child of Link without forwardRef | Ensure NESALogo has forwardRef or restructure component |
-| **BLOCKER** | Global | Console errors on every page load | Open any page with DevTools | NESALogo in NomineesShowcaseSection not handling refs | Same as above |
-| **Major** | `/categories` | Subcategory links go to nomination form, not nominee list | Click any subcategory in expanded category card | `Categories.tsx` line 406-409 links to `/nominate?subcategory=` | Link to `/nominees?subcategory=` instead |
-| **Major** | `/nominees` | No way to filter by subcategory despite URL support | Navigate to `/nominees?subcategory=ID` | `Nominees.tsx` doesn't parse subcategory param | Add subcategory filter logic |
-| **Major** | `/nominate` | File is 1103 lines — unmaintainable | Open file for editing | Organic growth without refactoring | Split into smaller components |
-| **Major** | Homepage | AGC explained in 7+ different places | Scroll homepage, visit VoteWithAGCSection, GoldCertificateSection, NominationPathsCards, etc. | Content duplication across components | Consolidate to single VoteWithAGCSection |
-| **Major** | `/vote` | Votes table may not exist yet | Attempt to vote | `Vote.tsx` line 211 inserts to `votes` table | Verify table exists in DB |
-| **Minor** | Homepage | "What's New" section uses hardcoded dates from Feb 2026 | View WhatsNewSection | `WhatsNewSection.tsx` lines 14-40 | Make dates relative or dynamic |
-| **Minor** | `/nominees` | Sort by "Newest" just reverses array | Use sort dropdown | `Nominees.tsx` line 240-241 | Sort by created_at if available |
-| **Minor** | `/categories` | Tab count shows Africa(17)/Nigeria(0) — Nigeria tab empty | Switch to Nigeria tab | No Nigeria-scoped categories in config | Verify category scopes |
-| **Minor** | Nav | Mobile bottom nav icons lack labels on some items | View on mobile | `MainNav.tsx` MobileBottomNav | Add labels for accessibility |
-| **Minor** | Multiple | Repeated phrase "Earn. Vote. Impact." appears 5+ times | Search codebase | Scattered across components | Define in constants |
+| Severity | Page/Route | Issue | How to Reproduce | Likely Cause (file) | Fix Recommendation | Status |
+|----------|------------|-------|------------------|---------------------|-------------------|--------|
+| **BLOCKER** | `/` (homepage) | React error crashes NomineesShowcaseSection | Load homepage, scroll to nominees showcase | `NomineesShowcaseSection.tsx` line 338 uses NESALogo as child of Link without forwardRef | Ensure NESALogo has forwardRef or restructure component | ✅ **Fixed** |
+| **BLOCKER** | Global | Console errors on every page load | Open any page with DevTools | NESALogo in NomineesShowcaseSection not handling refs | Same as above | ✅ **Fixed** |
+| **Major** | `/categories` | Subcategory links go to nomination form, not nominee list | Click any subcategory in expanded category card | `Categories.tsx` line 406-409 links to `/nominate?subcategory=` | Link to `/nominees?subcategory=` instead | ✅ **Fixed** |
+| **Major** | `/nominees` | No way to filter by subcategory despite URL support | Navigate to `/nominees?subcategory=ID` | `Nominees.tsx` doesn't parse subcategory param | Add subcategory filter logic | ⏳ Partial (URL preserved, filter UI needed) |
+| **Major** | `/nominate` | File is 1103 lines — unmaintainable | Open file for editing | Organic growth without refactoring | Split into smaller components | ⏳ Later |
+| **Major** | Homepage | AGC explained in 7+ different places | Scroll homepage, visit VoteWithAGCSection, GoldCertificateSection, NominationPathsCards, etc. | Content duplication across components | Consolidate to single VoteWithAGCSection | ⏳ Later |
+| **Major** | `/vote` | Votes table may not exist yet | Attempt to vote | `Vote.tsx` line 211 inserts to `votes` table | Verify table exists in DB | ⏳ Not Fixed |
+| **Major** | Award Pages | No breadcrumbs on award tier pages | Navigate to `/awards/platinum`, `/awards/gold`, etc. | Missing navigation context | Add breadcrumbs | ✅ **Fixed** |
+| **Minor** | Homepage | "What's New" section uses hardcoded dates from Feb 2026 | View WhatsNewSection | `WhatsNewSection.tsx` lines 14-40 | Make dates relative or dynamic | ⏳ Not Fixed |
+| **Minor** | `/nominees` | Sort by "Newest" just reverses array | Use sort dropdown | `Nominees.tsx` line 240-241 | Sort by created_at if available | ⏳ Not Fixed |
+| **Minor** | `/categories` | Tab count shows Africa(17)/Nigeria(0) — Nigeria tab empty | Switch to Nigeria tab | No Nigeria-scoped categories in config | Verify category scopes | ⏳ Not Fixed |
+| **Minor** | Nav | Mobile bottom nav icons lack labels on some items | View on mobile | `MainNav.tsx` MobileBottomNav | Add labels for accessibility | ⏳ Not Fixed |
+| **Minor** | Multiple | Repeated phrase "Earn. Vote. Impact." appears 5+ times | Search codebase | Scattered across components | Define in constants | ⏳ Not Fixed |
 
 ---
 
 ## 4. Top 10 Bounce Drivers (Ranked)
 
-1. **BLOCKER: Console errors crash NomineesShowcaseSection** — Users see broken page or React error boundary
-2. **Confusing subcategory navigation** — Clicking subcategory goes to nomination form instead of nominees
-3. **AGC jargon overload** — "AGC", "voting points", "credits" explained differently in 7+ places
-4. **No clear first-time visitor path** — StartHereSection exists but below hero fold
-5. **CTA overload in hero** — 3 buttons + stats strip compete for attention
-6. **Voting blocked by StageGate** — Users can't vote outside voting windows with no clear explanation
-7. **Missing subcategory filter in directory** — URL param exists but filter doesn't work
-8. **Long forms without progress** — Nominate page has 4 steps but no visual progress bar
-9. **Hardcoded dates in "What's New"** — Content appears stale after dates pass
-10. **No breadcrumbs on many pages** — CategoryDetail has them, but Award pages and media pages don't
+| # | Issue | Impact | Status |
+|---|-------|--------|--------|
+| 1 | Console errors crash NomineesShowcaseSection | Users see broken page or React error boundary | ✅ **Fixed** |
+| 2 | Confusing subcategory navigation | Clicking subcategory goes to nomination form instead of nominees | ✅ **Fixed** |
+| 3 | No breadcrumbs on award pages | Users lost in navigation hierarchy | ✅ **Fixed** |
+| 4 | AGC jargon overload | "AGC", "voting points", "credits" explained differently in 7+ places | ⏳ Later |
+| 5 | No clear first-time visitor path | StartHereSection exists but below hero fold | ✅ Already exists |
+| 6 | CTA overload in hero | 3 buttons + stats strip compete for attention | ⏳ Later |
+| 7 | Voting blocked by StageGate | Users can't vote outside voting windows with no clear explanation | ⏳ Later |
+| 8 | Missing subcategory filter in directory | URL param exists but filter doesn't work | ⏳ Partial |
+| 9 | Long forms without progress | Nominate page has 4 steps but no visual progress bar | ⏳ Later |
+| 10 | Hardcoded dates in "What's New" | Content appears stale after dates pass | ⏳ Later |
 
 ---
 
@@ -247,40 +276,56 @@
 ## 9. Fix Plan
 
 ### NOW (Same Day) — Critical
-1. **Fix NomineesShowcaseSection crash** — Remove NESALogo from inside Link or wrap in div
-2. **Fix subcategory links** — Change `/nominate?subcategory=` to `/nominees?subcategory=` in Categories.tsx
-3. **Add subcategory filter support** — Parse and use subcategory URL param in Nominees.tsx
+1. ✅ **Fix NomineesShowcaseSection crash** — Replaced NESALogo with static img element
+2. ✅ **Fix subcategory links** — Changed `/nominate?subcategory=` to `/nominees?subcategory=` in Categories.tsx
+3. ⏳ **Add subcategory filter support** — Parse and use subcategory URL param in Nominees.tsx (URL preserved, filter UI TBD)
 
 ### NEXT (This Week) — High Priority
-4. **Consolidate AGC content** — Remove duplicate AGC explanations, keep only VoteWithAGCSection
-5. **Add breadcrumbs to award pages** — PlatinumAward, GoldAward, BlueGarnetAward, IconAward
-6. **Hero video optimization** — Add loading="lazy" + poster image preload
-7. **Split Nominate.tsx** — Extract step components into separate files
-8. **Make "What's New" dates dynamic** — Use relative date formatting
+4. ⏳ **Consolidate AGC content** — Remove duplicate AGC explanations, keep only VoteWithAGCSection
+5. ✅ **Add breadcrumbs to award pages** — PlatinumAward, GoldAward, BlueGarnetAward, IconAward
+6. ⏳ **Hero video optimization** — Add loading="lazy" + poster image preload
+7. ⏳ **Split Nominate.tsx** — Extract step components into separate files
+8. ⏳ **Make "What's New" dates dynamic** — Use relative date formatting
 
 ### LATER (Backlog) — Polish
-9. **Improve mobile bottom nav** — Increase height to 60px, add labels
-10. **Add virtualization to nominee list** — Use react-virtual for large lists
-11. **WebP trophy images** — Convert and add srcset
-12. **Verify votes table exists** — Check DB schema
-13. **Delete unused hero component** — Remove NESAHero.tsx if not used
-14. **Remove duplicate components** — Consolidate NominationPath* and HowItWorks*
+9. ⏳ **Improve mobile bottom nav** — Increase height to 60px, add labels
+10. ⏳ **Add virtualization to nominee list** — Use react-virtual for large lists
+11. ⏳ **WebP trophy images** — Convert and add srcset
+12. ⏳ **Verify votes table exists** — Check DB schema
+13. ⏳ **Delete unused hero component** — Remove NESAHero.tsx if not used
+14. ⏳ **Remove duplicate components** — Consolidate NominationPath* and HowItWorks*
 
 ---
 
 ## Appendix: File References
 
-### Critical Files to Fix
-- `src/components/nesa/NomineesShowcaseSection.tsx` — Line 338 (NESALogo crash)
-- `src/pages/Categories.tsx` — Lines 406-409 (wrong subcategory link)
-- `src/pages/Nominees.tsx` — Add subcategory filter
+### Critical Files Fixed ✅
+- `src/components/nesa/NomineesShowcaseSection.tsx` — Line 338 (NESALogo crash) → **FIXED**
+- `src/pages/Categories.tsx` — Lines 406-409 (wrong subcategory link) → **FIXED**
+- `src/pages/awards/PlatinumAward.tsx` — Added breadcrumbs → **FIXED**
+- `src/pages/awards/GoldAward.tsx` — Added breadcrumbs → **FIXED**
+- `src/pages/awards/BlueGarnetAward.tsx` — Added breadcrumbs → **FIXED**
+- `src/pages/awards/IconAward.tsx` — Added breadcrumbs → **FIXED**
 
-### Large Files to Refactor
+### New Shared Components Created ✅
+- `src/components/shared/NomineeImage.tsx` — Reusable image with fallback
+- `src/components/shared/PageIntro.tsx` — Consistent page headers
+- `src/components/shared/Breadcrumbs.tsx` — Navigation breadcrumbs
+- `src/components/shared/index.ts` — Barrel export
+
+### Retention Mechanisms Already Implemented ✅
+- `src/hooks/useWatchlist.ts` — Follow nominees/awards in localStorage
+- `src/hooks/useRecentlyViewed.ts` — Track viewing history
+- `src/components/nesa/ContinueWhereYouLeftOff.tsx` — Return visitor module
+- `src/components/nesa/StartHereSection.tsx` — First-time visitor orientation
+- `src/components/nesa/WhatsNewSection.tsx` — Weekly updates module
+
+### Large Files to Refactor (Later)
 - `src/pages/Nominate.tsx` — 1103 lines
 - `src/pages/Nominees.tsx` — 697 lines
 - `src/pages/Vote.tsx` — 548 lines
 
-### Content Duplication Hotspots
+### Content Duplication Hotspots (Later)
 - `src/components/nesa/VoteWithAGCSection.tsx` — Primary AGC section
 - `src/components/nesa/GoldCertificateSection.tsx` — Duplicate AGC info
 - `src/components/nesa/NESAHero.tsx` — AGC strip (may be unused)
@@ -289,4 +334,15 @@
 
 ---
 
-*End of Audit Report. No fixes have been implemented. Ready for implementation phase.*
+## Journey Testing Results
+
+| Journey | Steps | Result |
+|---------|-------|--------|
+| A: Home → Awards → Subcategory → Nominee → Back | Home → Categories → Expand → Click subcategory → View nominee → Back | ✅ **PASS** (subcategory now links to nominees) |
+| B: Directory/Search → Filter → Open Nominee → Back | Nominees → Search/filter → Click card → Back | ✅ **PASS** (URL params preserved) |
+| C: Vote Flow | Vote page → filters → vote button | ⏳ Blocked by StageGate (expected) |
+| D: Renominate Flow | Nominee profile → Renominate button | ⏳ Requires auth (expected) |
+
+---
+
+*End of Audit Report. Critical fixes implemented. Remaining items tracked for future iterations.*
