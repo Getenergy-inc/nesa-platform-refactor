@@ -142,48 +142,56 @@ function enrichNominee(nominee: DatabaseNominee): EnrichedDatabaseNominee {
 }
 
 async function fetchNominees(): Promise<EnrichedDatabaseNominee[]> {
-  const { data, error } = await supabase
-    .from("nominees")
+  // Fetch from public_nominees view (security-hardened, excludes PII)
+  const { data: nominees, error: nomineesError } = await supabase
+    .from("public_nominees")
+    .select("*")
+    .order("name");
+
+  if (nomineesError) {
+    console.error("Error fetching nominees:", nomineesError);
+    throw nomineesError;
+  }
+
+  if (!nominees || nominees.length === 0) return [];
+
+  // Get subcategory IDs to fetch category info
+  const subcategoryIds = [...new Set(nominees.map(n => n.subcategory_id))];
+  
+  const { data: subcategories, error: subcatError } = await supabase
+    .from("subcategories")
     .select(`
       id,
       name,
       slug,
-      title,
-      bio,
-      organization,
-      country,
-      region,
-      photo_url,
-      logo_url,
-      status,
-      is_platinum,
-      public_votes,
-      subcategory_id,
-      season_id,
-      subcategories!inner (
+      category_id,
+      categories!inner (
         id,
         name,
-        slug,
-        category_id,
-        categories!inner (
-          id,
-          name,
-          slug
-        )
+        slug
       )
     `)
-    .in("status", ["approved", "platinum"])
-    .order("name");
+    .in("id", subcategoryIds);
 
-  if (error) {
-    console.error("Error fetching nominees:", error);
-    throw error;
+  if (subcatError) {
+    console.error("Error fetching subcategories:", subcatError);
   }
 
-  if (!data) return [];
+  // Build subcategory lookup map
+  const subcatMap = new Map<string, { name: string; slug: string; categoryName: string; categorySlug: string }>();
+  subcategories?.forEach((sc: any) => {
+    subcatMap.set(sc.id, {
+      name: sc.name,
+      slug: sc.slug,
+      categoryName: sc.categories?.name || "General",
+      categorySlug: sc.categories?.slug || "general",
+    });
+  });
 
-  // Transform the joined data
-  return data.map((row: any) => {
+  // Transform nominees with category info
+  return nominees.map((row: any) => {
+    const subcatInfo = subcatMap.get(row.subcategory_id);
+    
     const nominee: DatabaseNominee = {
       id: row.id,
       name: row.name,
@@ -200,10 +208,10 @@ async function fetchNominees(): Promise<EnrichedDatabaseNominee[]> {
       public_votes: row.public_votes,
       subcategory_id: row.subcategory_id,
       season_id: row.season_id,
-      subcategory_name: row.subcategories?.name,
-      subcategory_slug: row.subcategories?.slug,
-      category_name: row.subcategories?.categories?.name,
-      category_slug: row.subcategories?.categories?.slug,
+      subcategory_name: subcatInfo?.name,
+      subcategory_slug: subcatInfo?.slug,
+      category_name: subcatInfo?.categoryName,
+      category_slug: subcatInfo?.categorySlug,
     };
     return enrichNominee(nominee);
   });
