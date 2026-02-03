@@ -1,8 +1,9 @@
-import { Building, Heart, Users, ArrowRight, Check, MapPin } from "lucide-react";
+import { Building, Heart, Users, Check, MapPin } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
 import { LEGACY_REGIONS } from "@/config/schedule";
+import specialNeedsSchool from "@/assets/special-needs-school-africa.jpg";
 
 export function LegacyImpactSection() {
   const impactStats = [
@@ -20,8 +21,18 @@ export function LegacyImpactSection() {
   ];
 
   return (
-    <section className="bg-charcoal py-16 md:py-20 overflow-hidden">
-      <div className="container">
+    <section className="relative py-16 md:py-20 overflow-hidden">
+      {/* Background Image with Overlay */}
+      <div className="absolute inset-0 z-0">
+        <img 
+          src={specialNeedsSchool} 
+          alt="Special needs school in Africa" 
+          className="w-full h-full object-cover"
+        />
+        <div className="absolute inset-0 bg-gradient-to-b from-charcoal/95 via-charcoal/90 to-charcoal/95" />
+      </div>
+      
+      <div className="container relative z-10">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           {/* Left: Content */}
           <motion.div
