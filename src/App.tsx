@@ -28,6 +28,7 @@ import NotFound from "./pages/NotFound";
 import CategoryDetail from "./pages/CategoryDetail";
 import NomineeAccept from "./pages/NomineeAccept";
 import NomineeDecline from "./pages/NomineeDecline";
+import NomineeDashboard from "./pages/nominee/NomineeDashboard";
 
 // About Pages
 import About from "./pages/about/About";
@@ -130,8 +131,9 @@ const App = () => (
                 <Route path="/verify/:hash" element={<WithLayout><VerifyCertificate /></WithLayout>} />
                 
                 {/* Nominee Response Routes */}
-                <Route path="/nominee/accept/:token" element={<WithLayout><NomineeAccept /></WithLayout>} />
-                <Route path="/nominee/decline/:token" element={<WithLayout><NomineeDecline /></WithLayout>} />
+                <Route path="/nominee/accept/:token" element={<NomineeAccept />} />
+                <Route path="/nominee/decline/:token" element={<NomineeDecline />} />
+                <Route path="/nominee/dashboard/:token" element={<NomineeDashboard />} />
                 
                 {/* Media */}
                 <Route path="/media" element={<WithLayout><MediaHub /></WithLayout>} />

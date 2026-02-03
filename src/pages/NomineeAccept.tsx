@@ -145,6 +145,7 @@ export default function NomineeAccept() {
           nomineeName={nominee.name}
           certificateDownloadLocked={result.certificate_download_locked ?? true}
           renominationsNeeded={result.renominations_needed ?? 200}
+          token={token}
         />
       </div>
     );
