@@ -2,251 +2,291 @@
 
 **Audit Date:** February 3, 2026  
 **Auditor:** External UI/UX Consultant  
-**Goal:** Reduce bounce rate, improve clarity, achieve 90% return visitor retention (4 days/week engagement)
+**Status:** AUDIT ONLY — No fixes implemented yet
 
 ---
 
-## What Changed (Post-Audit Fixes)
+## 1. Route/Page Inventory
 
-| Fix | Status | Impact |
-|-----|--------|--------|
-| Fixed React forwardRef warnings on NESALogo/NESALogo3D | ✅ Done | Console clean |
-| Added "Start Here" section for first-time visitors | ✅ Done | High |
-| Added "What's New This Week" dynamic module | ✅ Done | High |
-| Implemented Follow/Watchlist localStorage system | ✅ Done | High |
-| Added persistent filters in URL (search, category, sort) | ✅ Done | Medium |
-| Added "Continue Where You Left Off" feature | ✅ Done | Medium |
-| Added breadcrumbs on all deep pages via Breadcrumbs component | ✅ Exists | Medium |
-| Improved mobile tap targets on bottom nav | ✅ Done | Medium |
-| Added focus-visible states for accessibility | ✅ Done | Low |
+| Route | Purpose | Notes |
+|-------|---------|-------|
+| `/` | Homepage landing (NESAAfrica) | Has own header/footer |
+| `/programs/nesa-africa` | Same as `/` | Duplicate route |
+| `/programs` | Programs overview | Uses PublicLayout |
+| `/about` | About NESA page | Institutional info |
+| `/about/vision-2035` | Vision 2035 strategy | |
+| `/about/governance` | Governance structure | |
+| `/about/timeline` | Event timeline | |
+| `/about/scef` | SCEF foundation | |
+| `/categories` | Award categories (17 official) | With DB-backed subcategories |
+| `/categories/:slug` | Category detail with subcategories | Has breadcrumbs |
+| `/awards/platinum` | Platinum tier info | |
+| `/awards/icon` | Icon tier info | |
+| `/awards/gold` | Gold tier info | |
+| `/awards/blue-garnet` | Blue Garnet tier info | |
+| `/awards/winners` | Winners hall of fame | |
+| `/nominees` | Nominee directory with filters | Supports URL params |
+| `/nominees/:slug` | Individual nominee profile | Has related nominees |
+| `/nominate` | Nomination form (multi-step) | 1103 lines — very large file |
+| `/vote` | Voting page with filters | Stage-gated |
+| `/vote-with-agc` | AGC voting info | |
+| `/about-agc` | AGC explanation | |
+| `/earn-voting-credits` | How to earn AGC | |
+| `/claim-voting-credits` | Claim sponsor credits | |
+| `/media` | Media hub | |
+| `/media/tv` | NESA TV | |
+| `/media/shows` | Online shows | |
+| `/media/webinars` | Webinars | |
+| `/media/gala` | Gala coverage | |
+| `/tickets` | Ticket info | |
+| `/buy-your-ticket` | Ticket purchase | |
+| `/shop` | Merchandise store | |
+| `/shop/cart` | Shopping cart | |
+| `/shop/checkout` | Checkout flow | |
+| `/donate` | Donation page | |
+| `/judges` | Judge recruitment | |
+| `/judge/apply` | Judge application | |
+| `/contact` | Contact form | |
+| `/login` | Login page | |
+| `/register` | Registration page | |
+| `/dashboard` | User dashboard | Own layout |
+| `/wallet` | User wallet | |
+| `/gfawzip` | GFAWzip wallet | Multiple route aliases |
+| `/admin/*` | Admin routes | Protected |
+| `/nrc/*` | NRC portal routes | Protected |
+| `/olc/*` | OLC portal routes | Protected |
+| `/judge/*` | Judge portal routes | Protected + OTP |
 
----
-
-## Route/Page Inventory
-
-| Route | Purpose | Status |
-|-------|---------|--------|
-| `/` | Homepage (redirects to NESAAfrica) | ✅ Working |
-| `/programs/nesa-africa` | Main landing page | ✅ Working |
-| `/nominees` | Directory with filters/search | ✅ Working |
-| `/nominees/:slug` | Nominee profile | ✅ Working |
-| `/categories` | Award categories overview | ✅ Working |
-| `/categories/:slug` | Category detail | ✅ Working |
-| `/awards/platinum` | Platinum tier info | ✅ Working |
-| `/awards/gold` | Gold tier info | ✅ Working |
-| `/awards/blue-garnet` | Blue Garnet tier info | ✅ Working |
-| `/awards/icon` | Icon tier info | ✅ Working |
-| `/nominate` | Nomination form | ✅ Working |
-| `/vote` | Voting page | ✅ Working |
-| `/vote?tier=gold` | Gold voting | ✅ Working |
-| `/vote?tier=bluegarnet` | Blue Garnet voting | ✅ Working |
-| `/about` | About NESA | ✅ Working |
-| `/about-agc` | AGC explanation | ✅ Working |
-| `/media/tv` | NESA TV | ✅ Working |
-| `/media/shows` | Online shows | ✅ Working |
-| `/contact` | Contact form | ✅ Working |
-| `/faq` | FAQ page | ⚠️ May need route |
-
----
-
-## Top User Journeys Tested
-
-### Journey A: Home → Awards → Subcategory → Nominee → Browse More
-- ✅ Hero loads, CTAs visible
-- ✅ Categories page shows 17 categories
-- ✅ Nominee profiles load with enrichment
-- ✅ "Browse all nominees" link works
-- ✅ Back button preserves filter state
-
-### Journey B: Search/Directory → Filter → Open Nominee
-- ✅ Filters persist in URL
-- ✅ Search by name/country works
-- ✅ Sorting options (A-Z, Votes, Newest) work
-- ✅ Infinite scroll and pagination both work
-- ✅ Data source indicator shows (DB vs Static)
-
-### Journey C: Vote/Renominate Flows
-- ✅ Vote page accessible with tier param
-- ✅ CTAs route correctly from hero
-- ⚠️ Requires auth to complete voting
+**Observations:**
+- 90+ routes defined in App.tsx
+- Multiple route aliases (e.g., `/shop`, `/merchandise`, `/store` all go to Shop)
+- Homepage has two identical routes (`/` and `/programs/nesa-africa`)
 
 ---
 
-## Issues Table
+## 2. Top User Journeys to Test
 
-| # | Severity | Page/Route | Issue | Repro | Fix Plan | Status |
-|---|----------|------------|-------|-------|----------|--------|
-| 1 | ~~Major~~ | Global | React ref warnings in console | Load any page | Add forwardRef to NESALogo components | ✅ Fixed |
-| 2 | Major | Homepage | Hero video may delay LCP | Load on slow 3G | Add loading="lazy" or poster preload | 🔵 Backlog |
-| 3 | Major | Homepage | 3+ CTAs compete in hero | Visual inspection | Already reduced to 2 primary | ✅ Addressed |
-| 4 | Minor | `/faq` | Route may 404 | Click FAQ link | Add route or redirect | ⚠️ Needs check |
-| 5 | Minor | Carousel | CLS possible on mobile | Resize to 320px | Add explicit dimensions | 🔵 Backlog |
-| 6 | Minor | Media | No "New" badges on content | View /media/tv | Add date-based badge logic | 🔵 Backlog |
+### Journey A: Home → Awards → Subcategory → Nominee → Back → Continue Browsing
+1. Load `/` 
+2. Click on "Explore Awards" or Categories CTA
+3. Navigate to `/categories`
+4. Expand a category → click subcategory link (goes to `/nominate?subcategory=ID`)
+5. ⚠️ **Issue:** Subcategory links go to nomination form, not to filtered nominees
 
----
+### Journey B: Directory/Search → Filter → Open Nominee → Back to Results
+1. Navigate to `/nominees`
+2. Use search and filter controls
+3. Click on nominee card → opens `/nominees/:slug`
+4. ✅ URL preserves filters (q, category, award, sort, page)
+5. Back button returns to filtered view
 
-## Top 10 Bounce Drivers (Ranked)
+### Journey C: Vote Flow
+1. Navigate to `/vote`
+2. Page shows hero + "View My Wallet" + "Earn Voting Credits" CTAs
+3. ⚠️ **Issue:** StageGate blocks voting when not in voting phase
+4. Voting requires authentication
+5. 1 vote = 1 AGC (clearly stated)
 
-1. **No first-time visitor orientation** → Fixed with StartHereSection
-2. **No return-visit hooks** → Fixed with Watchlist + Recently Viewed
-3. **Filters reset on back** → Fixed with URL persistence
-4. **CTA overload in hero** → Reduced to 2 primary CTAs
-5. **AGC jargon unexplained** → Hero now explains briefly; VoteWithAGCSection details
-6. **No "What's New" freshness** → Fixed with WhatsNewSection
-7. **Hero video LCP delay** → Partially addressed (poster image)
-8. **AGC explained multiple times** → Consolidated to single section
-9. **Mobile tap targets small** → Increased to 48px+ minimum
-10. **Missing focus states** → Added focus-visible globally
-
----
-
-## Mobile UX Review (320/375/414 widths)
-
-### Positive Findings
-- ✅ Cards stack correctly to single column
-- ✅ Touch targets meet 48px minimum
-- ✅ Filter tabs scroll horizontally
-- ✅ Bottom nav has safe area padding
-- ✅ Hero CTAs stack vertically on mobile
-
-### Issues
-- ⚠️ Trophy carousel items cramped at 320px
-- ⚠️ Video autoplay may drain battery (consider lazy loading)
-- ⚠️ Some long category names truncate awkwardly
-
-### Recommendations
-- Add `loading="lazy"` to hero video
-- Increase bottom nav height to 60px
-- Consider abbreviated labels on mobile tabs
+### Journey D: Renominate Flow
+1. View nominee profile at `/nominees/:slug`
+2. RenominateCard component visible
+3. ⚠️ **Issue:** Requires auth — no guest flow
 
 ---
 
-## Accessibility Findings
+## 3. Issues Table
 
-### ✅ Positive
-- Semantic heading structure maintained (H1 → H2 → H3)
-- ARIA labels on icon-only buttons
-- Breadcrumbs have proper nav role
-- Color contrast generally good (gold on charcoal)
-
-### ⚠️ Issues
-- Trophy images now have descriptive alt text
-- Video lacks captions/transcript (accessibility gap)
-- Modal focus trap needs testing
-
-### Recommendations
-- Add `aria-label` to video elements
-- Ensure ESC closes all modals
-- Test with screen reader
+| Severity | Page/Route | Issue | How to Reproduce | Likely Cause (file) | Fix Recommendation |
+|----------|------------|-------|------------------|---------------------|-------------------|
+| **BLOCKER** | `/` (homepage) | React error crashes NomineesShowcaseSection | Load homepage, scroll to nominees showcase | `NomineesShowcaseSection.tsx` line 338 uses NESALogo as child of Link without forwardRef | Ensure NESALogo has forwardRef or restructure component |
+| **BLOCKER** | Global | Console errors on every page load | Open any page with DevTools | NESALogo in NomineesShowcaseSection not handling refs | Same as above |
+| **Major** | `/categories` | Subcategory links go to nomination form, not nominee list | Click any subcategory in expanded category card | `Categories.tsx` line 406-409 links to `/nominate?subcategory=` | Link to `/nominees?subcategory=` instead |
+| **Major** | `/nominees` | No way to filter by subcategory despite URL support | Navigate to `/nominees?subcategory=ID` | `Nominees.tsx` doesn't parse subcategory param | Add subcategory filter logic |
+| **Major** | `/nominate` | File is 1103 lines — unmaintainable | Open file for editing | Organic growth without refactoring | Split into smaller components |
+| **Major** | Homepage | AGC explained in 7+ different places | Scroll homepage, visit VoteWithAGCSection, GoldCertificateSection, NominationPathsCards, etc. | Content duplication across components | Consolidate to single VoteWithAGCSection |
+| **Major** | `/vote` | Votes table may not exist yet | Attempt to vote | `Vote.tsx` line 211 inserts to `votes` table | Verify table exists in DB |
+| **Minor** | Homepage | "What's New" section uses hardcoded dates from Feb 2026 | View WhatsNewSection | `WhatsNewSection.tsx` lines 14-40 | Make dates relative or dynamic |
+| **Minor** | `/nominees` | Sort by "Newest" just reverses array | Use sort dropdown | `Nominees.tsx` line 240-241 | Sort by created_at if available |
+| **Minor** | `/categories` | Tab count shows Africa(17)/Nigeria(0) — Nigeria tab empty | Switch to Nigeria tab | No Nigeria-scoped categories in config | Verify category scopes |
+| **Minor** | Nav | Mobile bottom nav icons lack labels on some items | View on mobile | `MainNav.tsx` MobileBottomNav | Add labels for accessibility |
+| **Minor** | Multiple | Repeated phrase "Earn. Vote. Impact." appears 5+ times | Search codebase | Scattered across components | Define in constants |
 
 ---
 
-## Performance Findings
+## 4. Top 10 Bounce Drivers (Ranked)
 
-### LCP Risks
-1. Hero background video (large MP4)
-2. Trophy image carousel (3 images)
-3. Multiple Framer Motion animations
+1. **BLOCKER: Console errors crash NomineesShowcaseSection** — Users see broken page or React error boundary
+2. **Confusing subcategory navigation** — Clicking subcategory goes to nomination form instead of nominees
+3. **AGC jargon overload** — "AGC", "voting points", "credits" explained differently in 7+ places
+4. **No clear first-time visitor path** — StartHereSection exists but below hero fold
+5. **CTA overload in hero** — 3 buttons + stats strip compete for attention
+6. **Voting blocked by StageGate** — Users can't vote outside voting windows with no clear explanation
+7. **Missing subcategory filter in directory** — URL param exists but filter doesn't work
+8. **Long forms without progress** — Nominate page has 4 steps but no visual progress bar
+9. **Hardcoded dates in "What's New"** — Content appears stale after dates pass
+10. **No breadcrumbs on many pages** — CategoryDetail has them, but Award pages and media pages don't
+
+---
+
+## 5. Mobile Review Notes (320 / 375 / 414 widths)
+
+### 320px (iPhone SE, small Android)
+- ⚠️ Trophy carousel in hero is cramped
+- ⚠️ Category tabs overflow and require horizontal scroll
+- ⚠️ Long category names truncate awkwardly
+- ✅ Nominee cards stack correctly
+- ✅ Bottom nav visible with safe area padding
+
+### 375px (iPhone 12/13/14)
+- ✅ Hero CTAs stack vertically
+- ✅ Stats strip scrolls horizontally
+- ⚠️ Filter tabs in /nominees still tight
+- ✅ Cards have appropriate padding
+
+### 414px (iPhone Plus, larger Android)
+- ✅ Two-column grid works for some card layouts
+- ✅ Bottom nav icons have adequate spacing
+- ⚠️ Some modals still cramped
+
+### General Mobile Issues
+- Bottom nav height is 52px — meets 48px minimum but could be 60px
+- Video autoplay in hero may drain battery
+- No explicit loading="lazy" on hero video
+- Filter dropdowns work but feel small on touch
+
+---
+
+## 6. Accessibility Notes
+
+### Headings
+- ✅ Most pages have single H1
+- ⚠️ Homepage has H1 in TrophyHeroSection + potentially duplicate in nested sections
+- ✅ Heading hierarchy generally respected (H1 → H2 → H3)
+
+### Keyboard Focus
+- ⚠️ Some buttons lack visible focus states
+- ✅ Tabs and collapsibles are keyboard accessible
+- ⚠️ Modal focus trap needs verification
+
+### Alt Text
+- ✅ Trophy images have alt text ("Blue Garnet Award Trophy")
+- ✅ NESALogo has alt="NESA Africa"
+- ⚠️ Nominee photos have alt but fallback div doesn't have role
+- ⚠️ Category images have alt but no fallback
+
+### Contrast
+- ✅ Gold on charcoal meets AA
+- ✅ White text on dark backgrounds good
+- ⚠️ Some `text-white/40` and `text-white/50` may fail contrast
+
+### Screen Reader
+- ⚠️ Video lacks captions/transcript
+- ✅ ARIA labels on icon-only buttons
+- ✅ Breadcrumbs have nav role
+
+---
+
+## 7. Performance Notes
+
+### Likely LCP Issues
+1. **Hero video** (`stageBackdropVideo`) — Large MP4 autoplays on load
+2. **Trophy carousel** — 3 images preloaded (`blueGarnetTrophyIcon`, `blueGarnetTrophyWinners`, NESA stamp)
+3. **Multiple framer-motion animations** — Text fade-ins delay first paint
+
+### Likely CLS Issues
+1. **Trophy carousel switching** — No reserved height, may shift layout
+2. **Lazy-loaded sections** — No skeleton reserving space
+3. **Font loading** — Playfair Display may cause FOIT
+
+### Heavy Renders
+1. **NomineesShowcaseSection** — Renders 50 nominees with motion effects
+2. **Nominees page** — Renders full filtered list without virtualization
+3. **Categories page** — Collapsible items with nested queries
+
+### Image Misuse
+1. **No WebP sources** — Trophy images are PNG/JPG
+2. **No srcset** — Images served at single resolution
+3. **Large images not lazy-loaded** — Category images in grid
 
 ### Bundle Concerns
-- `framer-motion` ~150KB (used heavily)
-- `recharts` imported but may not be code-split
-- `lucide-react` tree-shaking active
-
-### Recommendations
-1. ✅ Video has poster fallback
-2. 🔵 Consider `<picture>` with WebP for trophies
-3. 🔵 Check `prefers-reduced-motion` support
-4. ✅ Below-fold sections lazy loaded
+1. `framer-motion` ~150KB — used on many pages
+2. `recharts` imported for dashboards but not code-split
+3. Large Nominate.tsx (1103 lines) in main bundle
 
 ---
 
-## Retention Mechanisms Implemented
+## 8. Content Problems
 
-### 1. Follow/Watchlist System (useWatchlist.ts)
-- Users can click "Follow" on nominee profiles
-- Stored in localStorage
-- Accessible via FollowButton component
+### Repeated Sections/Phrases
 
-### 2. Persistent Filters (URL State)
-- URL updates with `?category=...&award=...&q=...&sort=...`
-- Shareable filtered views
-- Browser back/forward respects state
+| Phrase/Concept | Locations Found |
+|----------------|-----------------|
+| "Earn. Vote. Impact." | VoteWithAGCSection, GoldCertificateSection, NominationPathsCards, NominationPathSection |
+| "1 Vote = 1 AGC" | Vote.tsx, GoldAward.tsx, VoteWithAGCSection, GoldCertificateSection |
+| "Vote with AGC" | 17 files (132 matches) |
+| "Earn Voting Points" | 7 files (44 matches) |
+| AGC explanation | VoteWithAGCSection, NESAHero, HowItWorksVisual, NominationPathsCards, GetInvolvedSection, GoldCertificateSection, TrophyHeroSection |
 
-### 3. Recently Viewed Tracking (useRecentlyViewed.ts)
-- Last 10 viewed nominees stored
-- "Continue Where You Left Off" section on return
+### Unclear Value Proposition
+- Hero says "Honoring Africa's Education Changemakers" — good
+- But immediately throws users into "Vote Gold" / "Vote Blue Garnet" CTAs without explaining what those mean
+- AGC mentioned before user understands what NESA is
 
-### 4. What's New Module (WhatsNewSection.tsx)
-- Date-stamped updates
-- Structured for future CMS
+### Confusing Navigation Labels
+- "Categories" vs "Awards" — users may conflate
+- "Nominate" appears in nav + hero + multiple sections
+- "Vote" vs "Vote with AGC" vs "Earn Voting Credits" — three separate nav items
 
----
-
-## QA Checklist
-
-| Check | Status |
-|-------|--------|
-| No console errors (ref warnings) | ✅ Fixed |
-| No broken internal links / 404s | ✅ Tested (except /faq) |
-| Forms show validation + success states | ✅ Yes |
-| All pages have unique titles/descriptions | ✅ Via Helmet |
-| No repeated homepage sections adding no value | ✅ Streamlined |
-| Mobile: no giant images | ✅ Responsive |
-| Mobile: no layout shifts | ⚠️ Carousel may cause minor CLS |
-| Filters persist in URL | ✅ Yes |
-| Search works across fields | ✅ Yes |
-| Sorting options work | ✅ Yes |
+### Duplicate Components
+- `NESAHero.tsx` and `TrophyHeroSection.tsx` both exist — which is used?
+- `NominationPathSection.tsx` and `NominationPathsCards.tsx` — similar purpose
+- `HowItWorksSection.tsx` and `HowItWorksVisual.tsx` — both exist
 
 ---
 
-## Key Files Modified
+## 9. Fix Plan
 
-### Console Warning Fix
-- `src/components/nesa/NESALogo.tsx` — Added forwardRef
-- `src/components/nesa/NESALogo3D.tsx` — Added forwardRef
+### NOW (Same Day) — Critical
+1. **Fix NomineesShowcaseSection crash** — Remove NESALogo from inside Link or wrap in div
+2. **Fix subcategory links** — Change `/nominate?subcategory=` to `/nominees?subcategory=` in Categories.tsx
+3. **Add subcategory filter support** — Parse and use subcategory URL param in Nominees.tsx
 
-### Retention Features
-- `src/pages/programs/NESAAfrica.tsx` — Added StartHereSection, WhatsNewSection, ContinueWhereYouLeftOff
-- `src/components/nesa/StartHereSection.tsx` — First-time visitor orientation
-- `src/components/nesa/WhatsNewSection.tsx` — Freshness module
-- `src/components/nesa/ContinueWhereYouLeftOff.tsx` — Recently viewed
-- `src/hooks/useWatchlist.ts` — Follow/watchlist localStorage
-- `src/hooks/useRecentlyViewed.ts` — View history localStorage
-- `src/components/ui/FollowButton.tsx` — Follow button component
+### NEXT (This Week) — High Priority
+4. **Consolidate AGC content** — Remove duplicate AGC explanations, keep only VoteWithAGCSection
+5. **Add breadcrumbs to award pages** — PlatinumAward, GoldAward, BlueGarnetAward, IconAward
+6. **Hero video optimization** — Add loading="lazy" + poster image preload
+7. **Split Nominate.tsx** — Extract step components into separate files
+8. **Make "What's New" dates dynamic** — Use relative date formatting
 
-### Filter Persistence
-- `src/pages/Nominees.tsx` — URL state sync for filters/search/sort
-
----
-
-## Before/After Summary
-
-### Before
-- Console showed ref warnings on every page load
-- First-time visitors had no clear path to start
-- No reason for returning visitors to check back
-- Filters reset when navigating away
-- Hero had 5+ competing CTAs
-
-### After
-- Clean console (no warnings)
-- "Start Here" section guides new users
-- "What's New" + "Continue Where You Left Off" for returning users
-- URL preserves all filter/search/sort state
-- Hero has 2 clear primary CTAs
+### LATER (Backlog) — Polish
+9. **Improve mobile bottom nav** — Increase height to 60px, add labels
+10. **Add virtualization to nominee list** — Use react-virtual for large lists
+11. **WebP trophy images** — Convert and add srcset
+12. **Verify votes table exists** — Check DB schema
+13. **Delete unused hero component** — Remove NESAHero.tsx if not used
+14. **Remove duplicate components** — Consolidate NominationPath* and HowItWorks*
 
 ---
 
-## Remaining Known Issues
+## Appendix: File References
 
-| Issue | Priority | Reason |
-|-------|----------|--------|
-| Hero video LCP on slow connections | Low | Has poster fallback; lazy load optional |
-| /faq route may need creation | Low | Low traffic page |
-| Video accessibility (captions) | Medium | Content team needs to provide |
-| Mobile carousel CLS | Low | Minor visual impact |
+### Critical Files to Fix
+- `src/components/nesa/NomineesShowcaseSection.tsx` — Line 338 (NESALogo crash)
+- `src/pages/Categories.tsx` — Lines 406-409 (wrong subcategory link)
+- `src/pages/Nominees.tsx` — Add subcategory filter
+
+### Large Files to Refactor
+- `src/pages/Nominate.tsx` — 1103 lines
+- `src/pages/Nominees.tsx` — 697 lines
+- `src/pages/Vote.tsx` — 548 lines
+
+### Content Duplication Hotspots
+- `src/components/nesa/VoteWithAGCSection.tsx` — Primary AGC section
+- `src/components/nesa/GoldCertificateSection.tsx` — Duplicate AGC info
+- `src/components/nesa/NESAHero.tsx` — AGC strip (may be unused)
+- `src/components/nesa/NominationPathsCards.tsx` — AGC mentions
+- `src/components/nesa/NominationPathSection.tsx` — Similar to above
 
 ---
 
-*Report generated by UX Audit system. Last updated: February 3, 2026*
+*End of Audit Report. No fixes have been implemented. Ready for implementation phase.*
