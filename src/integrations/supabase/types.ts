@@ -1345,6 +1345,84 @@ export type Database = {
           },
         ]
       }
+      nominee_enrichments: {
+        Row: {
+          approved_at: string | null
+          approved_by: string | null
+          as_of_date: string
+          created_at: string
+          education_for_all_contributions: string[] | null
+          highlights: string[] | null
+          id: string
+          image_approved: boolean | null
+          image_candidates: Json | null
+          image_license: string | null
+          image_source_url: string | null
+          image_type: string | null
+          image_url: string | null
+          kind: string
+          kind_override: boolean | null
+          last_generated_at: string | null
+          nominee_slug: string
+          notes: string | null
+          social_links: Json | null
+          sources: Json | null
+          status: string
+          summary_2025: string | null
+          updated_at: string
+        }
+        Insert: {
+          approved_at?: string | null
+          approved_by?: string | null
+          as_of_date?: string
+          created_at?: string
+          education_for_all_contributions?: string[] | null
+          highlights?: string[] | null
+          id?: string
+          image_approved?: boolean | null
+          image_candidates?: Json | null
+          image_license?: string | null
+          image_source_url?: string | null
+          image_type?: string | null
+          image_url?: string | null
+          kind: string
+          kind_override?: boolean | null
+          last_generated_at?: string | null
+          nominee_slug: string
+          notes?: string | null
+          social_links?: Json | null
+          sources?: Json | null
+          status?: string
+          summary_2025?: string | null
+          updated_at?: string
+        }
+        Update: {
+          approved_at?: string | null
+          approved_by?: string | null
+          as_of_date?: string
+          created_at?: string
+          education_for_all_contributions?: string[] | null
+          highlights?: string[] | null
+          id?: string
+          image_approved?: boolean | null
+          image_candidates?: Json | null
+          image_license?: string | null
+          image_source_url?: string | null
+          image_type?: string | null
+          image_url?: string | null
+          kind?: string
+          kind_override?: boolean | null
+          last_generated_at?: string | null
+          nominee_slug?: string
+          notes?: string | null
+          social_links?: Json | null
+          sources?: Json | null
+          status?: string
+          summary_2025?: string | null
+          updated_at?: string
+        }
+        Relationships: []
+      }
       nominees: {
         Row: {
           acceptance_status:
