@@ -1,6 +1,6 @@
 import { useState, useMemo, useEffect, useRef, useCallback } from "react";
 import { Link } from "react-router-dom";
-import { Search, Users, Filter, ChevronLeft, ChevronRight, LayoutGrid, List, Loader2, MapPin, Globe2, Building2, Heart } from "lucide-react";
+import { Search, Users, Filter, ChevronLeft, ChevronRight, LayoutGrid, List, Loader2, MapPin, Globe2, Building2, Heart, Database, FileText } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -9,14 +9,19 @@ import { Toggle } from "@/components/ui/toggle";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { NomineeCard, NomineeCardSkeleton, type NomineeCardData } from "@/components/nesa/NomineeCard";
 import { 
-  getAllNominees, 
-  getNomineesByGeography,
-  getGeographicGroups,
-  getAfricaRegions,
-  getAwardOptions, 
-  getGeographicCategoryOptions,
-  getStats,
-  handleImageError,
+  useNominees, 
+  getNomineesByGeography as getDbNomineesByGeography,
+  getGeographicStats,
+  getCategoryOptions,
+  type EnrichedDatabaseNominee 
+} from "@/hooks/useNominees";
+import { 
+  getAllNominees as getCsvNominees, 
+  getNomineesByGeography as getCsvNomineesByGeography,
+  getGeographicGroups as getCsvGeographicGroups,
+  getAfricaRegions as getCsvAfricaRegions,
+  getAwardOptions as getCsvAwardOptions, 
+  getStats as getCsvStats,
   type GeographicCategory,
   type EnrichedNominee
 } from "@/lib/nesaData";
@@ -31,6 +36,58 @@ const categoryIcons: Record<string, React.ReactNode> = {
   "friends-of-africa": <Heart className="w-4 h-4" />,
 };
 
+// Unified nominee type for display
+interface DisplayNominee {
+  id: string;
+  name: string;
+  slug: string;
+  achievement: string;
+  photoUrl: string;
+  country?: string;
+  region?: string;
+  categoryName: string;
+  categorySlug: string;
+  geographicCategory: GeographicCategory;
+  isPlatinum: boolean;
+  publicVotes: number;
+}
+
+// Convert database nominee to display format
+function dbToDisplay(nominee: EnrichedDatabaseNominee): DisplayNominee {
+  return {
+    id: nominee.id,
+    name: nominee.name,
+    slug: nominee.slug,
+    achievement: nominee.achievement,
+    photoUrl: nominee.photoUrl,
+    country: nominee.country || undefined,
+    region: nominee.region || undefined,
+    categoryName: nominee.categoryName,
+    categorySlug: nominee.categorySlug,
+    geographicCategory: nominee.geographicCategory,
+    isPlatinum: nominee.isPlatinum,
+    publicVotes: nominee.publicVotes,
+  };
+}
+
+// Convert CSV nominee to display format
+function csvToDisplay(nominee: EnrichedNominee): DisplayNominee {
+  return {
+    id: nominee.id,
+    name: nominee.name,
+    slug: nominee.slug,
+    achievement: nominee.achievement || "",
+    photoUrl: nominee.imageUrl,
+    country: nominee.country,
+    region: nominee.regionName,
+    categoryName: nominee.awardTitle,
+    categorySlug: nominee.awardSlug,
+    geographicCategory: nominee.geographicCategory,
+    isPlatinum: false,
+    publicVotes: 0,
+  };
+}
+
 export default function Nominees() {
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategory, setSelectedCategory] = useState<GeographicCategory>("all");
@@ -39,32 +96,94 @@ export default function Nominees() {
   const [currentPage, setCurrentPage] = useState(1);
   const [useInfiniteScroll, setUseInfiniteScroll] = useState(false);
   const [visibleCount, setVisibleCount] = useState(ITEMS_PER_PAGE);
-  const [isLoading, setIsLoading] = useState(true);
   const loadMoreRef = useRef<HTMLDivElement>(null);
 
-  // Load data
-  const geographicGroups = useMemo(() => getGeographicGroups(), []);
-  const africaRegions = useMemo(() => getAfricaRegions(), []);
-  const awardOptions = useMemo(() => getAwardOptions(), []);
-  const stats = useMemo(() => getStats(), []);
+  // Fetch from database
+  const { data: dbNominees, isLoading: dbLoading, error: dbError } = useNominees();
 
-  // Get nominees based on geographic category
+  // Determine data source: prefer database if it has data, fallback to CSV
+  const useDatabase = dbNominees && dbNominees.length > 0;
+  const dataSource = useDatabase ? "database" : "csv";
+
+  // Get all nominees based on data source
+  const allNominees = useMemo((): DisplayNominee[] => {
+    if (useDatabase && dbNominees) {
+      return dbNominees.map(dbToDisplay);
+    }
+    // Fallback to CSV
+    return getCsvNominees().map(csvToDisplay);
+  }, [useDatabase, dbNominees]);
+
+  // Geographic groups and stats
+  const geographicGroups = useMemo(() => {
+    if (useDatabase && dbNominees) {
+      const stats = getGeographicStats(dbNominees);
+      return [
+        { id: "all" as GeographicCategory, name: "All Nominees", description: "View all nominees", nomineeCount: stats.total },
+        { id: "africa-regions" as GeographicCategory, name: "Africa Regions", description: "African regional nominees", nomineeCount: stats.africaRegions },
+        { id: "diaspora" as GeographicCategory, name: "Diaspora", description: "African diaspora", nomineeCount: stats.diaspora },
+        { id: "friends-of-africa" as GeographicCategory, name: "Friends of Africa", description: "International supporters", nomineeCount: stats.friendsOfAfrica },
+      ];
+    }
+    return getCsvGeographicGroups();
+  }, [useDatabase, dbNominees]);
+
+  const africaRegions = useMemo(() => {
+    if (useDatabase && dbNominees) {
+      const stats = getGeographicStats(dbNominees);
+      return [
+        { id: "north-africa" as GeographicCategory, name: "North Africa", nomineeCount: stats.byRegion["north-africa"] || 0 },
+        { id: "east-africa" as GeographicCategory, name: "East Africa", nomineeCount: stats.byRegion["east-africa"] || 0 },
+        { id: "west-africa" as GeographicCategory, name: "West Africa", nomineeCount: stats.byRegion["west-africa"] || 0 },
+        { id: "south-africa" as GeographicCategory, name: "South Africa", nomineeCount: stats.byRegion["south-africa"] || 0 },
+        { id: "central-africa" as GeographicCategory, name: "Central Africa", nomineeCount: stats.byRegion["central-africa"] || 0 },
+      ];
+    }
+    return getCsvAfricaRegions();
+  }, [useDatabase, dbNominees]);
+
+  const awardOptions = useMemo(() => {
+    if (useDatabase && dbNominees) {
+      return getCategoryOptions(dbNominees);
+    }
+    return getCsvAwardOptions();
+  }, [useDatabase, dbNominees]);
+
+  const stats = useMemo(() => {
+    if (useDatabase && dbNominees) {
+      const s = getGeographicStats(dbNominees);
+      return {
+        totalNominees: s.total,
+        africaRegionsCount: s.africaRegions,
+        diasporaCount: s.diaspora,
+        friendsOfAfricaCount: s.friendsOfAfrica,
+      };
+    }
+    return getCsvStats();
+  }, [useDatabase, dbNominees]);
+
+  // Filter nominees by geographic category
   const baseNominees = useMemo(() => {
-    setIsLoading(true);
-    let nominees: EnrichedNominee[];
+    let filtered = allNominees;
     
-    // If a specific Africa region is selected
-    if (selectedRegion !== "all" && selectedCategory === "africa-regions") {
-      nominees = getNomineesByGeography(selectedRegion);
-    } else {
-      nominees = getNomineesByGeography(selectedCategory);
+    if (selectedCategory !== "all") {
+      if (selectedCategory === "africa-regions") {
+        if (selectedRegion !== "all") {
+          filtered = filtered.filter(n => n.geographicCategory === selectedRegion);
+        } else {
+          filtered = filtered.filter(n => 
+            ["north-africa", "east-africa", "west-africa", "south-africa", "central-africa"].includes(n.geographicCategory)
+          );
+        }
+      } else {
+        filtered = filtered.filter(n => n.geographicCategory === selectedCategory);
+      }
     }
     
-    setIsLoading(false);
-    return nominees;
-  }, [selectedCategory, selectedRegion]);
+    return filtered;
+  }, [allNominees, selectedCategory, selectedRegion]);
 
-  // Filter nominees
+  // Apply search and award filters
   const filteredNominees = useMemo(() => {
     return baseNominees.filter((nominee) => {
       const matchesSearch =
@@ -72,11 +191,10 @@ export default function Nominees() {
         nominee.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
         nominee.achievement?.toLowerCase().includes(searchQuery.toLowerCase()) ||
         nominee.country?.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        nominee.state?.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        nominee.regionName?.toLowerCase().includes(searchQuery.toLowerCase());
+        nominee.region?.toLowerCase().includes(searchQuery.toLowerCase());
 
       const matchesAward =
-        selectedAward === "all" || nominee.awardSlug === selectedAward;
+        selectedAward === "all" || nominee.categorySlug === selectedAward;
 
       return matchesSearch && matchesAward;
     });
@@ -155,6 +273,7 @@ export default function Nominees() {
   }, [useInfiniteScroll]);
 
   const displayedNominees = useInfiniteScroll ? infiniteScrollNominees : paginatedNominees;
+  const isLoading = dbLoading;
 
   return (
     <div className="min-h-screen bg-charcoal">
@@ -173,6 +292,20 @@ export default function Nominees() {
             <p className="text-lg text-ivory/70 mb-6">
               Discover the remarkable educators, innovators, and institutions transforming education across Africa.
             </p>
+            {/* Data source indicator */}
+            <Badge variant="outline" className="border-gold/30 text-ivory/60 text-xs">
+              {dataSource === "database" ? (
+                <>
+                  <Database className="w-3 h-3 mr-1" />
+                  Live Database
+                </>
+              ) : (
+                <>
+                  <FileText className="w-3 h-3 mr-1" />
+                  Static Data
+                </>
+              )}
+            </Badge>
           </div>
         </div>
       </section>
@@ -387,25 +520,24 @@ export default function Nominees() {
             <>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
                 {displayedNominees.map((nominee) => {
-                  // Map to NomineeCardData format
                   const cardData: NomineeCardData = {
                     id: nominee.id,
                     name: nominee.name,
                     slug: nominee.slug,
                     title: nominee.achievement || undefined,
                     organization: undefined,
-                    photoUrl: nominee.imageUrl,
-                    isPlatinum: false,
-                    publicVotes: 0,
-                    categoryName: nominee.subcategoryTitle,
-                    region: nominee.regionName,
+                    photoUrl: nominee.photoUrl,
+                    isPlatinum: nominee.isPlatinum,
+                    publicVotes: nominee.publicVotes,
+                    categoryName: nominee.categoryName,
+                    region: nominee.region,
                     country: nominee.country,
                   };
                   return (
                     <NomineeCard 
                       key={nominee.id} 
                       nominee={cardData}
-                      showVotes={false}
+                      showVotes={dataSource === "database"}
                     />
                   );
                 })}
