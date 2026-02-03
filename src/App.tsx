@@ -13,6 +13,7 @@ import { HelmetProvider } from "react-helmet-async";
 import { AuthProvider } from "@/contexts/AuthContext";
 import { SeasonProvider } from "@/contexts/SeasonContext";
 import { PublicLayout } from "@/components/layout/PublicLayout";
+import { CustomerCareChat } from "@/components/support/CustomerCareChat";
 
 // Pages
 import NESAAfrica from "./pages/programs/NESAAfrica";
@@ -113,6 +114,7 @@ const App = () => (
           <SeasonProvider>
             <Toaster />
             <Sonner />
+            <CustomerCareChat />
             <BrowserRouter>
               <Routes>
                 {/* Landing - has its own header/footer */}
