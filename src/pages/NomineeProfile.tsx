@@ -21,8 +21,9 @@ import {
 import { NomineeCard, type NomineeCardData } from "@/components/nesa/NomineeCard";
 import { RenominateCard } from "@/components/nesa/RenominateCard";
 import { NomineeReferralCard } from "@/components/nesa/NomineeReferralCard";
-import { NomineeActions } from "@/components/nominees";
+import { NomineeActions, EnrichedProfileCard } from "@/components/nominees";
 import { getResolvedNomineeImage } from "@/hooks/useResolvedNomineeImages";
+import { getEnrichedProfile } from "@/hooks/useEnrichedProfiles";
 
 export default function NomineeProfile() {
   const { slug: rawSlug } = useParams<{ slug: string }>();
@@ -277,8 +278,8 @@ export default function NomineeProfile() {
                     </div>
                   )}
 
-                  {/* Achievement/Bio */}
-                  {nominee.achievement && (
+                  {/* Achievement/Bio - only show if no enriched profile */}
+                  {nominee.achievement && !getEnrichedProfile(nominee.slug)?.summary_2025 && (
                     <div>
                       <h3 className="text-sm font-medium text-ivory/50 uppercase tracking-wider mb-3">
                         Achievement
@@ -288,6 +289,22 @@ export default function NomineeProfile() {
                       </p>
                     </div>
                   )}
+                  
+                  {/* Enriched Profile Content */}
+                  {(() => {
+                    const enrichedProfile = getEnrichedProfile(nominee.slug);
+                    if (enrichedProfile && enrichedProfile.status === "approved") {
+                      return (
+                        <div className="mt-6">
+                          <EnrichedProfileCard 
+                            profile={enrichedProfile} 
+                            nomineeName={nominee.name} 
+                          />
+                        </div>
+                      );
+                    }
+                    return null;
+                  })()}
                   {/* Primary Actions - Vote & Renominate */}
                   {dbNomineeId && (
                     <div className="mt-6 flex flex-wrap gap-3">
