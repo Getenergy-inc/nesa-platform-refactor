@@ -6,6 +6,7 @@ import { Award, Building2, MapPin, RotateCcw, ThumbsUp, Loader2 } from "lucide-r
 import { NESAStamp } from "@/components/nesa/NESALogo";
 import { type NomineeImageType, isOrganization } from "@/lib/nesaData";
 import { NomineeActions, type NomineeActionsData } from "@/components/nominees";
+import { getResolvedNomineeImage, getImageDisplayClasses } from "@/hooks/useResolvedNomineeImages";
 
 export interface NomineeCardData {
   id: string;
@@ -52,10 +53,15 @@ function getInitials(name: string): string {
     .slice(0, 2);
 }
 
-// Determine if nominee is an organization based on imageType or name heuristic
+// Determine if nominee is an organization based on imageType, override, or name heuristic
 function getEffectiveImageType(nominee: NomineeCardData): NomineeImageType {
-  if (nominee.imageType) return nominee.imageType;
-  return isOrganization(nominee.name) ? "logo" : "photo";
+  // Use the resolved image to get the kind (which respects overrides)
+  const resolved = getResolvedNomineeImage(
+    nominee.slug,
+    nominee.name,
+    nominee.photoUrl || undefined
+  );
+  return resolved.kind === "organization" ? "logo" : "photo";
 }
 
 export function NomineeCard({
