@@ -2,7 +2,7 @@ import { Handshake, ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { Button } from "@/components/ui/button";
-import { NESAStamp } from "./NESALogo";
+
 import scef from "@/assets/endorsements/scef.png";
 import gfawzip from "@/assets/endorsements/gfawzip.png";
 import pancokrato from "@/assets/endorsements/pancokrato.png";
@@ -75,17 +75,20 @@ export function SponsorsSection() {
           </div>
 
           {/* Right: CTA */}
-          <Button
-            asChild
-            variant="ghost"
-            className="text-gold hover:text-gold hover:bg-gold/10 gap-2 whitespace-nowrap"
-          >
-            <Link to="/partners">
-              <NESAStamp size="xs" />
+          <Link to="/partners">
+            <Button
+              variant="ghost"
+              className="text-gold hover:text-gold hover:bg-gold/10 gap-2 whitespace-nowrap"
+            >
+              <img 
+                src="/nesa-stamp.jpeg" 
+                alt="NESA" 
+                className="h-5 w-5 rounded-full object-contain" 
+              />
               {t("landing.sponsors.viewAll")}
               <ArrowRight className="h-4 w-4" />
-            </Link>
-          </Button>
+            </Button>
+          </Link>
         </div>
       </div>
     </section>
