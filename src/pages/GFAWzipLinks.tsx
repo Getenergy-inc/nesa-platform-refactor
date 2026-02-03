@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
-import { PublicLayout } from "@/components/layout/PublicLayout";
+
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -100,7 +100,7 @@ export default function GFAWzipLinks() {
   }, []);
 
   return (
-    <PublicLayout>
+    <>
       <Helmet>
         <title>GFAWzip Links | Quick Access to All Wallet Features</title>
         <meta
@@ -352,6 +352,6 @@ export default function GFAWzipLinks() {
           </div>
         </section>
       </div>
-    </PublicLayout>
+    </>
   );
 }

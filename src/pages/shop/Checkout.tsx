@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
-import { PublicLayout } from "@/components/layout/PublicLayout";
+
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -97,16 +97,14 @@ export default function Checkout() {
 
   if (loading) {
     return (
-      <PublicLayout>
-        <div className="min-h-screen bg-gradient-to-b from-charcoal via-charcoal-light to-charcoal flex items-center justify-center">
-          <div className="animate-pulse text-muted-foreground">Loading checkout...</div>
-        </div>
-      </PublicLayout>
+      <div className="min-h-screen bg-gradient-to-b from-charcoal via-charcoal-light to-charcoal flex items-center justify-center">
+        <div className="animate-pulse text-muted-foreground">Loading checkout...</div>
+      </div>
     );
   }
 
   return (
-    <PublicLayout>
+    <>
       <Helmet>
         <title>Checkout | NESA-Africa Merchandise</title>
         <meta name="description" content="Complete your purchase and support education in Africa." />
@@ -321,6 +319,6 @@ export default function Checkout() {
           </div>
         </section>
       </div>
-    </PublicLayout>
+    </>
   );
 }

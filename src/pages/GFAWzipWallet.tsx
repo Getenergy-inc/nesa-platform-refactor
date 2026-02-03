@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
-import { PublicLayout } from "@/components/layout/PublicLayout";
+
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -36,7 +36,7 @@ export default function GFAWzipWallet() {
   }, []);
 
   return (
-    <PublicLayout>
+    <>
       <Helmet>
         <title>GFAWzip Wallet | Multi-Currency Payments for NESA-Africa</title>
         <meta
@@ -376,6 +376,6 @@ export default function GFAWzipWallet() {
           </div>
         </section>
       </div>
-    </PublicLayout>
+    </>
   );
 }
