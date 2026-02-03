@@ -63,6 +63,27 @@ export interface AcceptanceResult {
   renominations_needed?: number;
 }
 
+export interface AcceptanceDetails {
+  id: string;
+  name: string;
+  title?: string;
+  organization?: string;
+  bio?: string;
+  photo_url?: string;
+  logo_url?: string;
+  country?: string;
+  region?: string;
+  acceptance_status: AcceptanceStatus;
+  is_expired: boolean;
+  renomination_count: number;
+  categories: Array<{
+    category: string;
+    subcategory: string;
+    justification?: string;
+  }>;
+  primary_justification?: string;
+}
+
 // ==========================================
 // API FUNCTIONS
 // ==========================================
@@ -95,9 +116,17 @@ export async function getNomineeStatus(nomineeId: string) {
   return api.get<NomineeStatus>("nominations", `/status/${nomineeId}`);
 }
 
+/**
+ * Get nominee details for acceptance page (by token)
+ */
+export async function getAcceptanceDetails(token: string) {
+  return api.get<AcceptanceDetails>("nominations", `/accept-details/${token}`);
+}
+
 export default {
   submit: submitNomination,
   accept: acceptNomination,
   decline: declineNomination,
   getStatus: getNomineeStatus,
+  getAcceptanceDetails,
 };
