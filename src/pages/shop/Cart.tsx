@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
-import { PublicLayout } from "@/components/layout/PublicLayout";
+
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { GFAWalletIcon } from "@/components/ui/GFAWalletIcon";
@@ -47,7 +47,7 @@ export default function Cart() {
   const bonusAGC = Math.floor(total * AGC_BONUS_RATE);
 
   return (
-    <PublicLayout>
+    <>
       <Helmet>
         <title>Shopping Cart | NESA-Africa Merchandise</title>
         <meta name="description" content="Review your cart and proceed to checkout." />
@@ -232,6 +232,6 @@ export default function Cart() {
           </section>
         )}
       </div>
-    </PublicLayout>
+    </>
   );
 }

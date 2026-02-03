@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
-import { PublicLayout } from "@/components/layout/PublicLayout";
+
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -84,7 +84,7 @@ export default function BulkOrders() {
 
   if (submitted) {
     return (
-      <PublicLayout>
+      <>
         <Helmet>
           <title>Request Received | NESA-Africa Bulk Orders</title>
         </Helmet>
@@ -111,12 +111,12 @@ export default function BulkOrders() {
             </CardContent>
           </Card>
         </div>
-      </PublicLayout>
+      </>
     );
   }
 
   return (
-    <PublicLayout>
+    <>
       <Helmet>
         <title>Bulk Corporate Orders | NESA-Africa Merchandise</title>
         <meta
@@ -317,6 +317,6 @@ export default function BulkOrders() {
           </div>
         </div>
       </div>
-    </PublicLayout>
+    </>
   );
 }

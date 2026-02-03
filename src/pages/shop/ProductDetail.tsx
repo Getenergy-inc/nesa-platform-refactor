@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
-import { PublicLayout } from "@/components/layout/PublicLayout";
+
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -53,18 +53,16 @@ export default function ProductDetail() {
 
   if (loading) {
     return (
-      <PublicLayout>
-        <div className="min-h-screen bg-gradient-to-b from-charcoal via-charcoal-light to-charcoal flex items-center justify-center">
-          <div className="animate-pulse text-muted-foreground">Loading...</div>
-        </div>
-      </PublicLayout>
+      <div className="min-h-screen bg-gradient-to-b from-charcoal via-charcoal-light to-charcoal flex items-center justify-center">
+        <div className="animate-pulse text-muted-foreground">Loading...</div>
+      </div>
     );
   }
 
   if (!product) return null;
 
   return (
-    <PublicLayout>
+    <>
       <Helmet>
         <title>{product.name} | NESA-Africa Merchandise</title>
         <meta name="description" content={product.description || `Shop ${product.name} and support education in Africa.`} />
@@ -220,6 +218,6 @@ export default function ProductDetail() {
           </div>
         </section>
       </div>
-    </PublicLayout>
+    </>
   );
 }

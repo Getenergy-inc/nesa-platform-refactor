@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
-import { PublicLayout } from "@/components/layout/PublicLayout";
+
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -35,34 +35,30 @@ export default function OrderConfirmation() {
 
   if (loading) {
     return (
-      <PublicLayout>
-        <div className="min-h-screen bg-gradient-to-b from-charcoal via-charcoal-light to-charcoal flex items-center justify-center">
-          <div className="animate-pulse text-muted-foreground">Loading order...</div>
-        </div>
-      </PublicLayout>
+      <div className="min-h-screen bg-gradient-to-b from-charcoal via-charcoal-light to-charcoal flex items-center justify-center">
+        <div className="animate-pulse text-muted-foreground">Loading order...</div>
+      </div>
     );
   }
 
   if (!order) {
     return (
-      <PublicLayout>
-        <div className="min-h-screen bg-gradient-to-b from-charcoal via-charcoal-light to-charcoal flex items-center justify-center">
-          <Card className="max-w-md bg-card border-border">
-            <CardContent className="pt-8 pb-6 text-center">
-              <Package className="h-12 w-12 text-muted-foreground mx-auto mb-4" />
-              <h2 className="text-xl font-semibold text-foreground mb-2">Order not found</h2>
-              <Button asChild className="mt-4">
-                <Link to="/shop">Back to Shop</Link>
-              </Button>
-            </CardContent>
-          </Card>
-        </div>
-      </PublicLayout>
+      <div className="min-h-screen bg-gradient-to-b from-charcoal via-charcoal-light to-charcoal flex items-center justify-center">
+        <Card className="max-w-md bg-card border-border">
+          <CardContent className="pt-8 pb-6 text-center">
+            <Package className="h-12 w-12 text-muted-foreground mx-auto mb-4" />
+            <h2 className="text-xl font-semibold text-foreground mb-2">Order not found</h2>
+            <Button asChild className="mt-4">
+              <Link to="/shop">Back to Shop</Link>
+            </Button>
+          </CardContent>
+        </Card>
+      </div>
     );
   }
 
   return (
-    <PublicLayout>
+    <>
       <Helmet>
         <title>Order Confirmed | NESA-Africa Merchandise</title>
         <meta name="description" content="Your order has been placed successfully." />
@@ -233,6 +229,6 @@ export default function OrderConfirmation() {
           </div>
         </div>
       </div>
-    </PublicLayout>
+    </>
   );
 }

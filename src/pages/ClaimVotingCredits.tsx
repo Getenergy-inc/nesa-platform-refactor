@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { PublicLayout } from "@/components/layout/PublicLayout";
+
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -129,7 +129,7 @@ export default function ClaimVotingCredits() {
   };
 
   return (
-    <PublicLayout>
+    <>
       <Helmet>
         <title>Claim Sponsor Voting Credits | NESA-Africa</title>
         <meta
@@ -343,6 +343,6 @@ export default function ClaimVotingCredits() {
           </div>
         </div>
       </main>
-    </PublicLayout>
+    </>
   );
 }

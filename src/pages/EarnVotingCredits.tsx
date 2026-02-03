@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { PublicLayout } from "@/components/layout/PublicLayout";
+
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -73,7 +73,7 @@ export default function EarnVotingCredits() {
   };
 
   return (
-    <PublicLayout>
+    <>
       <Helmet>
         <title>Earn Voting Credits (AGC) | NESA-Africa</title>
         <meta
@@ -212,6 +212,6 @@ export default function EarnVotingCredits() {
           </section>
         </div>
       </main>
-    </PublicLayout>
+    </>
   );
 }
