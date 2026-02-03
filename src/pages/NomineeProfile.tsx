@@ -22,6 +22,7 @@ import { NomineeCard, type NomineeCardData } from "@/components/nesa/NomineeCard
 import { RenominateCard } from "@/components/nesa/RenominateCard";
 import { NomineeReferralCard } from "@/components/nesa/NomineeReferralCard";
 import { NomineeActions } from "@/components/nominees";
+import { getResolvedNomineeImage } from "@/hooks/useResolvedNomineeImages";
 
 export default function NomineeProfile() {
   const { slug: rawSlug } = useParams<{ slug: string }>();
@@ -188,15 +189,21 @@ export default function NomineeProfile() {
                   <div className="flex flex-col md:flex-row gap-6">
                     {/* Avatar / Logo */}
                     <div className="flex-shrink-0">
-                      {(() => {
-                        const isLogo = nominee.imageType === "logo" || isOrganization(nominee.name);
+                    {(() => {
+                        // Use resolved image which respects admin overrides
+                        const resolved = getResolvedNomineeImage(
+                          nominee.slug,
+                          nominee.name,
+                          nominee.imageUrl
+                        );
+                        const isLogo = resolved.kind === "organization";
                         const altText = isLogo ? `${nominee.name} logo` : `${nominee.name} photo`;
                         
                         return (
                           <div className={`relative w-32 h-32 rounded-full border-4 border-gold/30 overflow-hidden flex items-center justify-center ${isLogo ? "bg-white/90 p-3" : "bg-gold/20"}`}>
-                            {nominee.imageUrl ? (
+                            {resolved.imageUrl && resolved.source !== "fallback" ? (
                               <img 
-                                src={nominee.imageUrl} 
+                                src={resolved.imageUrl} 
                                 alt={altText}
                                 className={isLogo ? "object-contain max-h-full max-w-full" : "object-cover w-full h-full"}
                                 onError={handleImageError}
