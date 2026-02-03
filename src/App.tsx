@@ -86,7 +86,7 @@ import { OLCDashboard, OLCMembers, OLCSettlements, OLCWallet } from "./pages/olc
 import { NRCPortal, NRCMyQueue, NRCMembers as NRCMembersPage, NRCSettings } from "./pages/nrc";
 
 // Admin Pages
-import { AdminDashboard, AdminOrders, AdminImpact, AdminNomineeImages } from "./pages/admin";
+import { AdminDashboard, AdminOrders, AdminImpact, AdminNomineeImages, AdminNomineeProfiles } from "./pages/admin";
 
 const queryClient = new QueryClient();
 
@@ -213,6 +213,7 @@ const App = () => (
                 <Route path="/admin/orders" element={<AdminOrders />} />
                 <Route path="/admin/impact" element={<AdminImpact />} />
                 <Route path="/admin/nominee-images" element={<AdminNomineeImages />} />
+                <Route path="/admin/nominee-profiles" element={<AdminNomineeProfiles />} />
                 
                 {/* Support */}
                 <Route path="/donate" element={<WithLayout><Donate /></WithLayout>} />
