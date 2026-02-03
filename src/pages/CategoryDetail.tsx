@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Skeleton } from "@/components/ui/skeleton";
+import { Breadcrumbs } from "@/components/ui/breadcrumbs";
 import { 
   Award, ArrowLeft, ChevronRight,
   Building2, Building, Laptop, Radio, Heart, Users, FlaskConical,
@@ -189,6 +190,15 @@ export default function CategoryDetail() {
         </header>
 
         <main className="container px-6 py-8">
+          {/* Breadcrumbs */}
+          <Breadcrumbs 
+            items={[
+              { label: "Categories", href: "/categories" },
+              { label: category.name },
+            ]}
+            className="mb-6"
+          />
+
           {/* Hero */}
           <div className="mb-8">
             <div className="flex items-start gap-4 mb-4">

@@ -2,27 +2,31 @@ import { Helmet } from "react-helmet-async";
 import { NESAHeader } from "@/components/nesa/NESAHeader";
 import { TrophyHeroSection } from "@/components/nesa/TrophyHeroSection";
 import { TrustLogosStrip } from "@/components/nesa/TrustLogosStrip";
-import { CampaignBanner } from "@/components/nesa/CampaignBanner";
 import { QuickActionBar } from "@/components/nesa/QuickActionBar";
 import { WhatsLiveSection } from "@/components/nesa/WhatsLiveSection";
 import { NominationPathsCards } from "@/components/nesa/NominationPathsCards";
-import { GoldCertificateSection } from "@/components/nesa/GoldCertificateSection";
 import { VoteWithAGCSection } from "@/components/nesa/VoteWithAGCSection";
 import { HowItWorksVisual } from "@/components/nesa/HowItWorksVisual";
 import { LegacyImpactSection } from "@/components/nesa/LegacyImpactSection";
-import { IntegritySection } from "@/components/nesa/IntegritySection";
 import { UpcomingEventsSection } from "@/components/nesa/UpcomingEventsSection";
-import { AwardPhasesSection } from "@/components/nesa/AwardPhasesSection";
-import { TimelineSection } from "@/components/nesa/TimelineSection";
 import { WatchSection } from "@/components/nesa/WatchSection";
 import { NomineesShowcaseSection } from "@/components/nesa/NomineesShowcaseSection";
 import { SponsorsSection } from "@/components/nesa/SponsorsSection";
-import { JudgesSection } from "@/components/nesa/JudgesSection";
 import { CategoriesSection } from "@/components/nesa/CategoriesSection";
 import { FinalCTASection } from "@/components/nesa/FinalCTASection";
 import { NESAFooter } from "@/components/nesa/NESAFooter";
 import { MobileBottomNav } from "@/components/navigation/MainNav";
 
+/**
+ * NESA-Africa Landing Page
+ * 
+ * Streamlined for reduced bounce rate:
+ * - Hero + Trust indicators above fold
+ * - Single AGC explanation (VoteWithAGCSection)
+ * - Consolidated timeline (UpcomingEventsSection)
+ * - Removed duplicate sections: CampaignBanner, GoldCertificateSection, 
+ *   IntegritySection, AwardPhasesSection, TimelineSection, JudgesSection
+ */
 export default function NESAAfrica() {
   return (
     <>
@@ -30,32 +34,53 @@ export default function NESAAfrica() {
         <title>NESA-Africa 2025 | New Education Standard Award Africa</title>
         <meta
           name="description"
-          content="Honoring Africa's Changemakers. NESA-Africa 2025 celebrates the real changemakers shaping the future of education across Africa."
+          content="Honoring Africa's Education Changemakers. NESA-Africa 2025 celebrates the real changemakers shaping the future of education across Africa."
         />
       </Helmet>
 
       <div className="min-h-screen bg-charcoal pb-16 lg:pb-0">
         <NESAHeader />
+        
+        {/* Above the Fold: Hero + Trust */}
         <TrophyHeroSection />
         <TrustLogosStrip />
-        <CampaignBanner />
+        
+        {/* Sticky Quick Actions */}
         <QuickActionBar />
+        
+        {/* What's Happening Now */}
         <WhatsLiveSection />
+        
+        {/* Choose Your Path */}
         <NominationPathsCards />
-        <GoldCertificateSection />
+        
+        {/* AGC Voting System (single consolidated section) */}
         <VoteWithAGCSection />
+        
+        {/* How It Works */}
         <HowItWorksVisual />
+        
+        {/* Legacy Impact */}
         <LegacyImpactSection />
-        <IntegritySection />
+        
+        {/* Key Dates & Countdowns (consolidated timeline) */}
         <UpcomingEventsSection />
-        <AwardPhasesSection />
-        <TimelineSection />
+        
+        {/* Media */}
         <WatchSection />
+        
+        {/* Featured Nominees */}
         <NomineesShowcaseSection />
+        
+        {/* Partners & Sponsors */}
         <SponsorsSection />
-        <JudgesSection />
+        
+        {/* Categories Overview */}
         <CategoriesSection />
+        
+        {/* Final Call to Action */}
         <FinalCTASection />
+        
         <NESAFooter />
       </div>
       

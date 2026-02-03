@@ -1,5 +1,6 @@
 import { useMemo, useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
 import { 
   ArrowLeft, Award, MapPin, Share2, 
   Twitter, Facebook, Linkedin, Link2, 
@@ -9,6 +10,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
+import { Breadcrumbs } from "@/components/ui/breadcrumbs";
 import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
 import { 
@@ -167,20 +169,36 @@ export default function NomineeProfile() {
   const geoBadge = getGeographicBadge(nominee.geographicCategory);
 
   return (
-    <div className="min-h-screen bg-charcoal">
-      {/* Hero Section */}
-      <section className="relative pt-24 pb-16 bg-gradient-to-b from-charcoal via-charcoal/95 to-charcoal overflow-hidden">
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-gold/5 via-transparent to-transparent" />
-        
-        <div className="container mx-auto px-4 relative z-10">
-          {/* Back Link */}
-          <Link 
-            to="/nominees" 
-            className="inline-flex items-center gap-2 text-ivory/60 hover:text-gold transition-colors mb-8"
-          >
-            <ArrowLeft className="w-4 h-4" />
-            Back to Nominees
-          </Link>
+    <>
+      <Helmet>
+        <title>{nominee.name} | NESA-Africa Nominee</title>
+        <meta name="description" content={`${nominee.name} - Nominated for ${nominee.awardTitle} in ${nominee.subcategoryTitle}. Vote and support this NESA-Africa nominee.`} />
+      </Helmet>
+      
+      <div className="min-h-screen bg-charcoal">
+        {/* Hero Section */}
+        <section className="relative pt-24 pb-16 bg-gradient-to-b from-charcoal via-charcoal/95 to-charcoal overflow-hidden">
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-gold/5 via-transparent to-transparent" />
+          
+          <div className="container mx-auto px-4 relative z-10">
+            {/* Breadcrumbs */}
+            <Breadcrumbs 
+              items={[
+                { label: "Nominees", href: "/nominees" },
+                { label: nominee.awardTitle, href: `/categories/${nominee.awardSlug}` },
+                { label: nominee.name },
+              ]}
+              className="mb-6"
+            />
+
+            {/* Back Link */}
+            <Link 
+              to="/nominees" 
+              className="inline-flex items-center gap-2 text-ivory/60 hover:text-gold transition-colors mb-8"
+            >
+              <ArrowLeft className="w-4 h-4" />
+              Back to Nominees
+            </Link>
 
           <div className="grid lg:grid-cols-3 gap-8">
             {/* Main Profile Card */}
@@ -454,6 +472,7 @@ export default function NomineeProfile() {
           </div>
         </section>
       )}
-    </div>
+      </div>
+    </>
   );
 }

@@ -1,9 +1,15 @@
-import { Award, ExternalLink, ArrowRight, Vote, Coins } from "lucide-react";
+import { Award, ExternalLink, ArrowRight, Vote, Ticket } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
 
+/**
+ * FinalCTASection - Streamlined final call to action
+ * 
+ * Removed duplicate AGC messaging (now in VoteWithAGCSection only)
+ * Focus: Nominate + Vote + Tickets
+ */
 export function FinalCTASection() {
   const { t } = useTranslation("pages");
 
@@ -33,17 +39,9 @@ export function FinalCTASection() {
             {t("landing.finalCTA.title")} <span className="text-gold">{t("landing.finalCTA.titleAccent")}</span>
           </h2>
           
-          <p className="text-white/70 text-lg mb-4 max-w-2xl mx-auto">
+          <p className="text-white/70 text-lg mb-8 max-w-2xl mx-auto">
             {t("landing.finalCTA.description")}
           </p>
-
-          {/* AGC Strip */}
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gold/10 border border-gold/30 mb-8">
-            <Coins className="h-4 w-4 text-gold" />
-            <span className="text-sm text-white/80">
-              Earn voting points. Vote with AGC for Gold & Blue Garnet.
-            </span>
-          </div>
 
           <div className="flex flex-col sm:flex-row justify-center gap-4 mb-6">
             <Link to="/nominate" className="group">
@@ -70,8 +68,9 @@ export function FinalCTASection() {
           {/* Secondary Actions */}
           <div className="flex flex-wrap justify-center gap-3">
             <Link to="/buy-your-ticket">
-              <Button variant="ghost" className="text-gold/70 hover:text-gold hover:bg-gold/10 rounded-full">
-                Get Tickets
+              <Button variant="ghost" className="text-gold/70 hover:text-gold hover:bg-gold/10 rounded-full gap-2">
+                <Ticket className="h-4 w-4" />
+                Get Gala Tickets
               </Button>
             </Link>
             <Link to="/donate">
@@ -81,18 +80,12 @@ export function FinalCTASection() {
             </Link>
             <Link to="/partners">
               <Button variant="ghost" className="text-gold/70 hover:text-gold hover:bg-gold/10 rounded-full">
-                Partner
+                Partner With Us
               </Button>
             </Link>
-            <a href="https://nesa.africa" target="_blank" rel="noopener noreferrer">
-              <Button variant="ghost" className="text-gold/70 hover:text-gold hover:bg-gold/10 rounded-full gap-1">
-                <ExternalLink className="h-4 w-4" />
-                nesa.africa
-              </Button>
-            </a>
           </div>
 
-          {/* Trust indicators - Clean and professional */}
+          {/* Trust indicators */}
           <motion.div 
             className="flex flex-wrap justify-center gap-6 mt-10"
             initial={{ opacity: 0 }}
