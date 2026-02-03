@@ -1,4 +1,10 @@
 import { Toaster } from "@/components/ui/toaster";
+import Nominees from "./pages/Nominees";
+import NomineeProfile from "./pages/NomineeProfile";
+import CertificateVerify from "./pages/CertificateVerify";
+import VerifyCertificate from "./pages/VerifyCertificate";
+import Results from "./pages/Results";
+import Policies from "./pages/Policies";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
@@ -7,101 +13,92 @@ import { HelmetProvider } from "react-helmet-async";
 import { AuthProvider } from "@/contexts/AuthContext";
 import { SeasonProvider } from "@/contexts/SeasonContext";
 import { PublicLayout } from "@/components/layout/PublicLayout";
-import { JudgeArenaGuard } from "./components/judge/JudgeArenaGuard";
-import { optimizedQueryConfig } from "@/lib/performance";
 
-// Import all lazy-loaded routes
-import {
-  NESAAfrica,
-  Categories,
-  Programs,
-  Login,
-  Register,
-  OTPVerification,
-  Nominees,
-  NomineeProfile,
-  Nominate,
-  NomineeAccept,
-  NomineeDecline,
-  NomineeDashboard,
-  About,
-  Vision2035,
-  Governance,
-  Timeline,
-  SCEF,
-  PlatinumAward,
-  IconAward,
-  GoldAward,
-  BlueGarnetAward,
-  Winners,
-  CategoryDetail,
-  CertificateVerify,
-  VerifyCertificate,
-  Results,
-  MediaHub,
-  NESATV,
-  Shows,
-  Webinars,
-  Gala,
-  Tickets,
-  BuyYourTicket,
-  Shop,
-  ProductDetail,
-  Cart,
-  Checkout,
-  OrderConfirmation,
-  BulkOrders,
-  Vote,
-  VoteWithAGC,
-  AboutAGC,
-  EarnVotingCredits,
-  ClaimVotingCredits,
-  GFAWzipWallet,
-  GFAWzipLinks,
-  Wallet,
-  Donate,
-  EduAid,
-  Rebuild,
-  Judges,
-  Partners,
-  Chapters,
-  Volunteer,
-  Ambassadors,
-  Contact,
-  Policies,
-  SponsorLanding,
-  Dashboard,
-  JudgeApply,
-  JudgeStatus,
-  JudgeSignup,
-  JudgeVerify,
-  JudgeDashboard,
-  JuryScoring,
-  JuryCOI,
-  JudgeRubric,
-  JudgeGuidelines,
-  JudgePanel,
-  JudgeHelp,
-  JudgeSettings,
-  NRCPortal,
-  NRCMyQueue,
-  NRCMembers,
-  NRCSettings,
-  OLCDashboard,
-  OLCMembers,
-  OLCWallet,
-  OLCSettlements,
-  AdminDashboard,
-  AdminOrders,
-  AdminImpact,
-  AdminNomineeImages,
-  AdminNomineeProfiles,
-  Unauthorized,
-  NotFound,
-} from "@/lib/lazy-routes";
+// Pages
+import NESAAfrica from "./pages/programs/NESAAfrica";
+import Categories from "./pages/Categories";
+import Programs from "./pages/Programs";
+import Login from "./pages/auth/Login";
+import Register from "./pages/auth/Register";
+import OTPVerification from "./pages/auth/OTPVerification";
+import Nominate from "./pages/Nominate";
+import Dashboard from "./pages/Dashboard";
+import Unauthorized from "./pages/Unauthorized";
+import NotFound from "./pages/NotFound";
+import CategoryDetail from "./pages/CategoryDetail";
+import NomineeAccept from "./pages/NomineeAccept";
+import NomineeDecline from "./pages/NomineeDecline";
+import NomineeDashboard from "./pages/nominee/NomineeDashboard";
+
+// About Pages
+import About from "./pages/about/About";
+import Vision2035 from "./pages/about/Vision2035";
+import Governance from "./pages/about/Governance";
+import Timeline from "./pages/about/Timeline";
+import SCEF from "./pages/about/SCEF";
+
+// Award Pages
+import PlatinumAward from "./pages/awards/PlatinumAward";
+import IconAward from "./pages/awards/IconAward";
+import GoldAward from "./pages/awards/GoldAward";
+import BlueGarnetAward from "./pages/awards/BlueGarnetAward";
+import Winners from "./pages/awards/Winners";
+
+// Media Pages
+import MediaHub from "./pages/media/MediaHub";
+import NESATV from "./pages/media/NESATV";
+import Shows from "./pages/media/Shows";
+import Webinars from "./pages/media/Webinars";
+import Gala from "./pages/media/Gala";
+
+// Support Pages
+import Donate from "./pages/Donate";
+import EduAid from "./pages/EduAid";
+import Rebuild from "./pages/Rebuild";
+import Judges from "./pages/Judges";
+
+// Judge Portal Pages
+import { JudgeApply, JudgeStatus, JudgeSignup, JudgeVerify, JudgeDashboard, JudgePortal, JuryScoring, JuryCOI, JudgeRubric, JudgeGuidelines, JudgePanel, JudgeHelp, JudgeSettings } from "./pages/judge";
+import { JudgeArenaGuard } from "./components/judge/JudgeArenaGuard";
+import Partners from "./pages/Partners";
+import Chapters from "./pages/Chapters";
+import Volunteer from "./pages/Volunteer";
+import Ambassadors from "./pages/Ambassadors";
+import Contact from "./pages/Contact";
+import Vote from "./pages/Vote";
+import VoteWithAGC from "./pages/VoteWithAGC";
+import AboutAGC from "./pages/AboutAGC";
+import EarnVotingCredits from "./pages/EarnVotingCredits";
+import ClaimVotingCredits from "./pages/ClaimVotingCredits";
+import Tickets from "./pages/Tickets";
+import BuyYourTicket from "./pages/BuyYourTicket";
+import GFAWzipWallet from "./pages/GFAWzipWallet";
+import GFAWzipLinks from "./pages/GFAWzipLinks";
+import { Shop, ProductDetail, Cart, Checkout, OrderConfirmation, BulkOrders } from "./pages/shop";
+import { SponsorLanding } from "./pages/sponsors";
+import Wallet from "./pages/Wallet";
+
+// OLC Pages
+import { OLCDashboard, OLCMembers, OLCSettlements, OLCWallet } from "./pages/olc";
+
+// NRC Portal Pages
+import { NRCPortal, NRCMyQueue, NRCMembers as NRCMembersPage, NRCSettings } from "./pages/nrc";
+
+// Admin Pages
+import { AdminDashboard, AdminOrders, AdminImpact, AdminNomineeImages, AdminNomineeProfiles } from "./pages/admin";
 
 // Optimized QueryClient with caching strategy
-const queryClient = new QueryClient(optimizedQueryConfig);
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      staleTime: 1000 * 60 * 5, // 5 minutes
+      gcTime: 1000 * 60 * 30, // 30 minutes
+      refetchOnWindowFocus: false,
+      refetchOnMount: false,
+      retry: 1,
+    },
+  },
+});
 
 // Wrapper component that applies PublicLayout
 const WithLayout = ({ children, showFooter = true }: { children: React.ReactNode; showFooter?: boolean }) => (
@@ -212,7 +209,7 @@ const App = () => (
                 {/* NRC Portal Routes */}
                 <Route path="/nrc" element={<NRCPortal />} />
                 <Route path="/nrc/my-queue" element={<NRCMyQueue />} />
-                <Route path="/nrc/members" element={<NRCMembers />} />
+                <Route path="/nrc/members" element={<NRCMembersPage />} />
                 <Route path="/nrc/settings" element={<NRCSettings />} />
                 
                 {/* OLC Coordinator Routes - use their own layout */}
