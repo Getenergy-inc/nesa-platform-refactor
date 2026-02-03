@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import { NESALogo } from "@/components/nesa/NESALogo";
 import { Heart, Twitter, Instagram, Linkedin, Youtube, Mail } from "lucide-react";
+import nesaStamp from "@/assets/nesa-stamp.jpeg";
 
 const socialLinks = [
   { icon: Twitter, href: "https://twitter.com/nesaafrica", label: "Twitter" },
@@ -27,8 +27,12 @@ export function NESAFooter() {
         <div className="grid md:grid-cols-3 gap-8 mb-8">
           {/* Brand */}
           <div className="text-center md:text-left">
-            <div className="flex items-center gap-4 justify-center md:justify-start mb-4">
-              <NESALogo variant="full" size="sm" />
+            <div className="flex items-center gap-3 justify-center md:justify-start mb-4">
+              <img src={nesaStamp} alt="NESA Africa" className="h-10 w-10 rounded-full object-contain" />
+              <div className="flex flex-col leading-tight">
+                <span className="text-xs text-gold/70 font-medium tracking-wider uppercase">New Education Standard Awards</span>
+                <span className="text-lg font-display font-bold text-gold">AFRICA</span>
+              </div>
             </div>
             <p className="text-white/60 text-sm mb-4">
               {t("footer.tagline")}
