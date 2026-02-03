@@ -1,21 +1,65 @@
 import { useState, useEffect } from "react";
-import { useParams, Link, useNavigate } from "react-router-dom";
-import { acceptNomination } from "@/api/nominations";
+import { useParams, Link } from "react-router-dom";
+import { acceptNomination, getAcceptanceDetails, AcceptanceDetails } from "@/api/nominations";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
+import { Skeleton } from "@/components/ui/skeleton";
 import { toast } from "sonner";
-import { CheckCircle, Loader2, Award, ArrowRight, Home, PartyPopper } from "lucide-react";
-import { NESALogo } from "@/components/nesa/NESALogo";
+import { CheckCircle, Loader2, AlertCircle, Clock, XCircle } from "lucide-react";
+import {
+  AcceptanceLetterHeader,
+  AcceptanceCategoriesList,
+  AcceptanceNextSteps,
+  AcceptanceSuccessCard,
+} from "@/components/acceptance";
 
 export default function NomineeAccept() {
   const { token } = useParams<{ token: string }>();
-  const navigate = useNavigate();
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
+  const [submitting, setSubmitting] = useState(false);
   const [accepted, setAccepted] = useState(false);
+  const [nominee, setNominee] = useState<AcceptanceDetails | null>(null);
+  const [error, setError] = useState<string | null>(null);
   const [result, setResult] = useState<{
     certificate_download_locked?: boolean;
     renominations_needed?: number;
   } | null>(null);
+
+  useEffect(() => {
+    async function loadDetails() {
+      if (!token) {
+        setError("Invalid acceptance link");
+        setLoading(false);
+        return;
+      }
+
+      try {
+        const response = await getAcceptanceDetails(token);
+        setNominee(response.data);
+
+        // Check if already responded
+        if (response.data.acceptance_status === "ACCEPTED") {
+          setAccepted(true);
+          setResult({
+            certificate_download_locked: response.data.renomination_count < 200,
+            renominations_needed: Math.max(0, 200 - response.data.renomination_count),
+          });
+        } else if (response.data.acceptance_status === "DECLINED") {
+          setError("This nomination has already been declined.");
+        }
+      } catch (err: any) {
+        if (err.message?.includes("expired")) {
+          setError("This acceptance link has expired. Please contact support for a new link.");
+        } else {
+          setError(err.message || "Failed to load nomination details");
+        }
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    loadDetails();
+  }, [token]);
 
   const handleAccept = async () => {
     if (!token) {
@@ -23,7 +67,7 @@ export default function NomineeAccept() {
       return;
     }
 
-    setLoading(true);
+    setSubmitting(true);
     try {
       const response = await acceptNomination(token);
       setResult(response.data);
@@ -32,56 +76,59 @@ export default function NomineeAccept() {
     } catch (error: any) {
       toast.error(error.message || "Failed to accept nomination");
     } finally {
-      setLoading(false);
+      setSubmitting(false);
     }
   };
 
-  if (accepted && result) {
+  // Loading state
+  if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-primary/5 via-background to-primary/10 p-4">
-        <Card className="max-w-lg w-full text-center overflow-hidden">
-          <div className="bg-gradient-to-r from-primary/20 to-primary/10 p-8">
-            <PartyPopper className="h-16 w-16 text-primary mx-auto mb-4" />
-            <h1 className="text-2xl font-display font-bold">Congratulations!</h1>
-          </div>
+        <Card className="max-w-2xl w-full">
           <CardContent className="p-8 space-y-6">
-            <div className="space-y-2">
-              <CheckCircle className="h-12 w-12 text-green-500 mx-auto" />
-              <h2 className="text-xl font-semibold">Nomination Accepted</h2>
-              <p className="text-muted-foreground">
-                You have successfully accepted your nomination for the NESA-Africa 2025 awards.
-              </p>
+            <div className="flex justify-center">
+              <Skeleton className="h-20 w-48" />
             </div>
+            <Skeleton className="h-8 w-3/4 mx-auto" />
+            <Skeleton className="h-4 w-1/2 mx-auto" />
+            <div className="space-y-3">
+              <Skeleton className="h-20 w-full" />
+              <Skeleton className="h-20 w-full" />
+            </div>
+            <Skeleton className="h-12 w-full" />
+          </CardContent>
+        </Card>
+      </div>
+    );
+  }
 
-            <div className="bg-muted/50 rounded-lg p-4 space-y-2">
-              <div className="flex items-center justify-center gap-2 text-primary">
-                <Award className="h-5 w-5" />
-                <span className="font-medium">Platinum Certificate Issued</span>
+  // Error state
+  if (error) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-background p-4">
+        <Card className="max-w-lg w-full text-center">
+          <CardContent className="p-8 space-y-6">
+            <div className="flex justify-center">
+              <div className="bg-destructive/10 p-4 rounded-full">
+                {error.includes("expired") ? (
+                  <Clock className="h-12 w-12 text-destructive" />
+                ) : error.includes("declined") ? (
+                  <XCircle className="h-12 w-12 text-muted-foreground" />
+                ) : (
+                  <AlertCircle className="h-12 w-12 text-destructive" />
+                )}
               </div>
-              {result.certificate_download_locked && (
-                <p className="text-sm text-muted-foreground">
-                  Your certificate will be available for download after receiving{" "}
-                  <strong>{result.renominations_needed}</strong> more endorsements.
-                </p>
-              )}
-              {!result.certificate_download_locked && (
-                <p className="text-sm text-muted-foreground">
-                  Your certificate is ready for download in your dashboard.
-                </p>
-              )}
             </div>
-
-            <div className="flex flex-col gap-3">
-              <Button onClick={() => navigate("/dashboard/certificates")}>
-                <Award className="h-4 w-4 mr-2" />
-                View My Certificates
-                <ArrowRight className="h-4 w-4 ml-2" />
+            <div className="space-y-2">
+              <h2 className="text-xl font-semibold">Unable to Process</h2>
+              <p className="text-muted-foreground">{error}</p>
+            </div>
+            <div className="flex flex-col gap-2">
+              <Button asChild>
+                <Link to="/contact">Contact Support</Link>
               </Button>
-              <Button variant="outline" asChild>
-                <Link to="/">
-                  <Home className="h-4 w-4 mr-2" />
-                  Return Home
-                </Link>
+              <Button variant="ghost" asChild>
+                <Link to="/">Return Home</Link>
               </Button>
             </div>
           </CardContent>
@@ -90,50 +137,92 @@ export default function NomineeAccept() {
     );
   }
 
+  // Success state
+  if (accepted && result && nominee) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-primary/5 via-background to-primary/10 p-4 py-12">
+        <AcceptanceSuccessCard
+          nomineeName={nominee.name}
+          certificateDownloadLocked={result.certificate_download_locked ?? true}
+          renominationsNeeded={result.renominations_needed ?? 200}
+        />
+      </div>
+    );
+  }
+
+  // Main acceptance letter view
+  if (!nominee) {
+    return null;
+  }
+
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-primary/5 via-background to-primary/10 p-4">
-      <Card className="max-w-lg w-full text-center">
-        <CardHeader className="space-y-4">
-          <NESALogo variant="full" className="h-16 mx-auto" />
-          <CardTitle className="text-2xl font-display">Accept Your Nomination</CardTitle>
-          <CardDescription>
-            You've been nominated for the NESA-Africa 2025 Excellence Awards! 
-            By accepting, you agree to participate in the recognition process.
-          </CardDescription>
-        </CardHeader>
-        <CardContent className="space-y-6">
-          <div className="bg-primary/5 rounded-lg p-4 text-sm text-muted-foreground">
-            <p className="mb-2">
-              <strong>Upon acceptance, you will:</strong>
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-primary/5 via-background to-primary/10 p-4 py-12">
+      <Card className="max-w-2xl w-full shadow-xl border-0">
+        <CardContent className="p-6 md:p-10 space-y-8">
+          {/* Header */}
+          <AcceptanceLetterHeader nomineeName={nominee.name} />
+
+          {/* Congratulations Message */}
+          <div className="space-y-4">
+            <p className="text-lg font-medium text-primary">Congratulations!</p>
+            <p className="text-muted-foreground leading-relaxed">
+              You have been nominated for the{" "}
+              <strong className="text-foreground">
+                New Education Standard Awards Africa (NESA-Africa) 2025
+              </strong>
+              , under the following category(ies):
             </p>
-            <ul className="list-disc list-inside space-y-1 text-left">
-              <li>Receive a Platinum Certificate of Recognition</li>
-              <li>Be listed in the official Nominees directory</li>
-              <li>Be eligible for Gold, Blue Garnet, and Icon awards</li>
-              <li>Gain access to your nominee dashboard</li>
-            </ul>
           </div>
 
-          <div className="flex flex-col gap-3">
-            <Button 
-              size="lg" 
+          {/* Categories List */}
+          <AcceptanceCategoriesList categories={nominee.categories} />
+
+          {/* Recognition Reason */}
+          {nominee.primary_justification && (
+            <div className="bg-muted/30 rounded-lg p-4 border-l-4 border-primary">
+              <p className="text-sm text-muted-foreground mb-1">
+                This nomination recognizes your outstanding contributions to education through:
+              </p>
+              <p className="text-foreground italic">"{nominee.primary_justification}"</p>
+            </div>
+          )}
+
+          {/* Next Steps */}
+          <AcceptanceNextSteps />
+
+          {/* CTA Buttons */}
+          <div className="space-y-4 pt-4">
+            <Button
+              size="lg"
               onClick={handleAccept}
-              disabled={loading}
-              className="w-full"
+              disabled={submitting}
+              className="w-full text-lg py-6"
             >
-              {loading && <Loader2 className="h-4 w-4 mr-2 animate-spin" />}
-              {!loading && <CheckCircle className="h-4 w-4 mr-2" />}
-              Accept Nomination
+              {submitting && <Loader2 className="h-5 w-5 mr-2 animate-spin" />}
+              {!submitting && <CheckCircle className="h-5 w-5 mr-2" />}
+              Accept My Nomination & Activate Dashboard
             </Button>
-            <Button 
-              variant="ghost" 
-              asChild
-              className="text-muted-foreground"
-            >
-              <Link to={`/nominee/decline/${token}`}>
-                I'd like to decline instead
-              </Link>
-            </Button>
+
+            <div className="text-center">
+              <Button variant="ghost" size="sm" asChild className="text-muted-foreground">
+                <Link to={`/nominee/decline/${token}`}>
+                  I'd like to decline this nomination
+                </Link>
+              </Button>
+            </div>
+          </div>
+
+          {/* Closing */}
+          <div className="text-center text-sm text-muted-foreground pt-4 border-t space-y-2">
+            <p>
+              We are honored to have you join Africa's largest educational recognition movement.
+            </p>
+            <p className="text-xs">
+              Questions? Contact us at{" "}
+              <a href="mailto:nominees@nesa.africa" className="text-primary hover:underline">
+                nominees@nesa.africa
+              </a>
+            </p>
           </div>
         </CardContent>
       </Card>

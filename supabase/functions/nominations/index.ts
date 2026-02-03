@@ -289,6 +289,98 @@ serve(async (req: Request): Promise<Response> => {
     }
 
     // ===========================================
+    // GET /nominations/accept-details/:token - Get nominee info for acceptance page
+    // ===========================================
+    if (req.method === "GET" && path.startsWith("/accept-details/")) {
+      const token = path.replace("/accept-details/", "");
+
+      if (!token) {
+        return new Response(
+          JSON.stringify({ error: "Token required" }),
+          { status: 400, headers: { ...corsHeaders, "Content-Type": "application/json" } }
+        );
+      }
+
+      // Find nominee by acceptance token with related data
+      const { data: nominee, error: findError } = await supabase
+        .from("nominees")
+        .select(`
+          id, name, title, organization, bio, photo_url, logo_url,
+          acceptance_status, acceptance_token_expires_at, renomination_count,
+          country, region,
+          subcategory:subcategories (
+            id, name,
+            category:categories (id, name)
+          )
+        `)
+        .eq("acceptance_token", token)
+        .maybeSingle();
+
+      if (findError || !nominee) {
+        return new Response(
+          JSON.stringify({ error: "Invalid or expired token" }),
+          { status: 404, headers: { ...corsHeaders, "Content-Type": "application/json" } }
+        );
+      }
+
+      // Check token expiry
+      if (nominee.acceptance_token_expires_at && new Date(nominee.acceptance_token_expires_at) < new Date()) {
+        return new Response(
+          JSON.stringify({ error: "Token has expired", expired: true }),
+          { status: 400, headers: { ...corsHeaders, "Content-Type": "application/json" } }
+        );
+      }
+
+      // Get all categories this nominee has been nominated for
+      const { data: nominations } = await supabase
+        .from("nominations")
+        .select(`
+          id, justification, created_at,
+          subcategory:subcategories (
+            id, name,
+            category:categories (id, name)
+          )
+        `)
+        .eq("created_nominee_id", nominee.id)
+        .order("created_at", { ascending: false });
+
+      // Extract unique categories
+      const categoriesMap = new Map();
+      nominations?.forEach((nom: any) => {
+        if (nom.subcategory?.category) {
+          const key = `${nom.subcategory.category.id}-${nom.subcategory.id}`;
+          if (!categoriesMap.has(key)) {
+            categoriesMap.set(key, {
+              category: nom.subcategory.category.name,
+              subcategory: nom.subcategory.name,
+              justification: nom.justification,
+            });
+          }
+        }
+      });
+
+      return new Response(
+        JSON.stringify({
+          id: nominee.id,
+          name: nominee.name,
+          title: nominee.title,
+          organization: nominee.organization,
+          bio: nominee.bio,
+          photo_url: nominee.photo_url,
+          logo_url: nominee.logo_url,
+          country: nominee.country,
+          region: nominee.region,
+          acceptance_status: nominee.acceptance_status,
+          is_expired: false,
+          renomination_count: nominee.renomination_count,
+          categories: Array.from(categoriesMap.values()),
+          primary_justification: nominations?.[0]?.justification || null,
+        }),
+        { headers: { ...corsHeaders, "Content-Type": "application/json" } }
+      );
+    }
+
+    // ===========================================
     // POST /nominations/accept - Nominee accepts
     // ===========================================
     if (req.method === "POST" && path === "/accept") {
