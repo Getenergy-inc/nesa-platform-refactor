@@ -7,7 +7,7 @@ export interface ChatMessage {
   timestamp: Date;
 }
 
-const CHAT_URL = `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/support-chat`;
+const CHAT_URL = `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/chat`;
 
 export function useCustomerCareChat() {
   const [messages, setMessages] = useState<ChatMessage[]>([]);
