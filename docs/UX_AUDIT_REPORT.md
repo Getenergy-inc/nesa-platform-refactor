@@ -17,6 +17,7 @@
 | 3 | No breadcrumbs on award pages | Users lost in navigation hierarchy | Added breadcrumbs to Platinum, Gold, Blue Garnet, Icon award pages | ✅ Fixed |
 | 4 | Missing shared UI components | Duplicated nominee card/image logic | Created `NomineeImage`, `PageIntro`, `Breadcrumbs` shared components | ✅ Fixed |
 | 5 | Retention mechanisms | No way for users to track interests | `useWatchlist`, `useRecentlyViewed` hooks + ContinueWhereYouLeftOff component | ✅ Already Implemented |
+| 6 | **Homepage above-the-fold cluttered** | 3 paragraphs + 3 CTAs + 4 stats + sticky bar with 5 buttons | **1 sentence value prop + 2 CTAs + 3 trust bullets + simplified sticky bar** | ✅ Fixed |
 
 ### Files Changed
 - `src/components/nesa/NomineesShowcaseSection.tsx` - Fixed React ref crash
@@ -29,6 +30,9 @@
 - `src/components/shared/PageIntro.tsx` - NEW: Consistent page headers
 - `src/components/shared/Breadcrumbs.tsx` - NEW: Navigation breadcrumbs
 - `src/components/shared/index.ts` - NEW: Shared components barrel export
+- `src/components/nesa/TrophyHeroSection.tsx` - Streamlined above-the-fold content
+- `src/components/nesa/TrustLogosStrip.tsx` - Simplified endorsement strip
+- `src/components/nesa/QuickActionBar.tsx` - Reduced to 2 buttons only
 
 ---
 
