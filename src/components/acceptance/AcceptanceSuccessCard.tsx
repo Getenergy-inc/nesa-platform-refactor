@@ -7,14 +7,18 @@ interface AcceptanceSuccessCardProps {
   nomineeName: string;
   certificateDownloadLocked: boolean;
   renominationsNeeded: number;
+  token?: string;
 }
 
 export function AcceptanceSuccessCard({
   nomineeName,
   certificateDownloadLocked,
   renominationsNeeded,
+  token,
 }: AcceptanceSuccessCardProps) {
   const navigate = useNavigate();
+
+  const dashboardUrl = token ? `/nominee/dashboard/${token}` : "/dashboard/certificates";
 
   return (
     <Card className="max-w-2xl w-full overflow-hidden border-0 shadow-2xl">
@@ -74,15 +78,15 @@ export function AcceptanceSuccessCard({
             <div className="flex items-center gap-3 p-3 bg-muted/50 rounded-lg">
               <LayoutDashboard className="h-5 w-5 text-primary" />
               <div className="text-sm">
-                <p className="font-medium">Access Your Dashboard</p>
-                <p className="text-muted-foreground">Update your profile and track progress</p>
+                <p className="font-medium">Access Your Nominee Dashboard</p>
+                <p className="text-muted-foreground">Update your profile, track endorsements, and share your story</p>
               </div>
             </div>
             <div className="flex items-center gap-3 p-3 bg-muted/50 rounded-lg">
               <Share2 className="h-5 w-5 text-primary" />
               <div className="text-sm">
                 <p className="font-medium">Share Your Nomination</p>
-                <p className="text-muted-foreground">Mobilize support from your network</p>
+                <p className="text-muted-foreground">Mobilize support — each share increases your visibility</p>
               </div>
             </div>
           </div>
@@ -92,11 +96,11 @@ export function AcceptanceSuccessCard({
         <div className="flex flex-col gap-3 pt-4">
           <Button 
             size="lg" 
-            onClick={() => navigate("/dashboard/certificates")}
+            onClick={() => navigate(dashboardUrl)}
             className="w-full"
           >
             <LayoutDashboard className="h-5 w-5 mr-2" />
-            Go to My Dashboard
+            Go to My Nominee Dashboard
             <ArrowRight className="h-5 w-5 ml-2" />
           </Button>
           <Button variant="outline" asChild>
