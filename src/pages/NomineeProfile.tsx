@@ -11,6 +11,7 @@ import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import { Breadcrumbs } from "@/components/ui/breadcrumbs";
+import { FollowButton } from "@/components/ui/FollowButton";
 import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
 import { 
@@ -26,11 +27,13 @@ import { NomineeReferralCard } from "@/components/nesa/NomineeReferralCard";
 import { NomineeActions, EnrichedProfileCard } from "@/components/nominees";
 import { getResolvedNomineeImage } from "@/hooks/useResolvedNomineeImages";
 import { getEnrichedProfile } from "@/hooks/useEnrichedProfiles";
+import { useRecentlyViewed } from "@/hooks/useRecentlyViewed";
 
 export default function NomineeProfile() {
   const { slug: rawSlug } = useParams<{ slug: string }>();
   const [dbNomineeId, setDbNomineeId] = useState<string | null>(null);
   const [renominationCount, setRenominationCount] = useState(0);
+  const { addToRecentlyViewed } = useRecentlyViewed();
 
   // Decode the URL-encoded slug
   const slug = rawSlug ? decodeURIComponent(rawSlug) : undefined;
@@ -40,6 +43,20 @@ export default function NomineeProfile() {
     if (!slug) return undefined;
     return getNomineeBySlug(slug);
   }, [slug]);
+
+  // Track recently viewed
+  useEffect(() => {
+    if (nominee) {
+      addToRecentlyViewed({
+        id: nominee.id,
+        slug: nominee.slug,
+        name: nominee.name,
+        type: "nominee",
+        imageUrl: nominee.imageUrl,
+        subtitle: nominee.awardTitle,
+      });
+    }
+  }, [nominee?.id]); // Only trigger when nominee ID changes
 
   // Fetch the actual nominee ID and renomination count from database
   // Note: DB lookup uses name-based slug for compatibility
@@ -257,11 +274,23 @@ export default function NomineeProfile() {
                         <p className="text-lg text-ivory/70 mb-3">{nominee.achievement}</p>
                       )}
 
-                      <div className="flex flex-wrap gap-4 text-sm text-ivory/60">
+                      <div className="flex flex-wrap items-center gap-4 text-sm text-ivory/60">
                         <div className="flex items-center gap-1">
                           <MapPin className="w-4 h-4 text-gold/60" />
                           <span>{getLocationDisplay(nominee)}</span>
                         </div>
+                        {/* Follow Button */}
+                        <FollowButton
+                          item={{
+                            id: nominee.id,
+                            slug: nominee.slug,
+                            name: nominee.name,
+                            type: "nominee",
+                            imageUrl: nominee.imageUrl,
+                            subtitle: nominee.awardTitle,
+                          }}
+                          size="sm"
+                        />
                       </div>
                     </div>
                   </div>
