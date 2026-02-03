@@ -50,6 +50,7 @@ import {
 import { useEnrichedProfiles } from "@/hooks/useEnrichedProfiles";
 import { getAllNominees, type EnrichedNominee } from "@/lib/nesaData";
 import { classifyNominee } from "@/lib/nomineeClassifier";
+import { NomineeImportCard } from "@/components/admin/NomineeImportCard";
 import type { 
   EnrichedNomineeProfile, 
   NomineeSource, 
@@ -605,6 +606,9 @@ export default function AdminNomineeProfiles() {
           </CardContent>
         </Card>
       </div>
+
+      {/* CSV Import Section */}
+      <NomineeImportCard />
 
       {/* Main content */}
       <div className="grid grid-cols-3 gap-6 h-[calc(100vh-320px)]">
