@@ -31,7 +31,7 @@ import {
 import { cn } from "@/lib/utils";
 import { useAuth } from "@/contexts/AuthContext";
 import { MAIN_NAV, MOBILE_NAV, type NavItem } from "@/config/navigation";
-import { NESALogo } from "@/components/nesa/NESALogo";
+import nesaStamp from "@/assets/nesa-stamp.jpeg";
 import { CVOFlashMessage, CVOMessageTrigger } from "@/components/nesa/CVOFlashMessage";
 import { LanguageSwitcher } from "@/components/i18n";
 
@@ -162,7 +162,7 @@ function MobileNav({ onOpenCVOMessage }: { onOpenCVOMessage: () => void }) {
       <SheetContent side="right" className="w-[320px] sm:w-[350px] bg-charcoal border-l border-gold/20 p-0 overflow-hidden">
         <SheetHeader className="p-4 border-b border-gold/20">
           <SheetTitle className="flex items-center gap-2">
-            <NESALogo variant="icon" size="sm" />
+            <img src={nesaStamp} alt="NESA" className="h-6 w-6 rounded-full object-contain" />
             <span className="text-gold font-display">Menu</span>
           </SheetTitle>
         </SheetHeader>
@@ -460,8 +460,12 @@ export function MainNav() {
       <header className="sticky top-0 z-50 w-full bg-charcoal/95 backdrop-blur-md border-b border-gold/20">
         <div className="container flex h-14 sm:h-16 items-center justify-between px-4">
           {/* Logo */}
-          <Link to="/" className="flex items-center shrink-0">
-            <NESALogo variant="full" size="md" className="h-8 sm:h-10" />
+          <Link to="/" className="flex items-center shrink-0 gap-2">
+            <img src={nesaStamp} alt="NESA Africa" className="h-8 sm:h-10 w-8 sm:w-10 rounded-full object-contain" />
+            <div className="hidden sm:flex flex-col leading-tight">
+              <span className="text-[8px] text-gold/70 font-medium tracking-[0.2em] uppercase">New Education Standard Awards</span>
+              <span className="text-sm font-display font-bold text-gold tracking-wide">AFRICA</span>
+            </div>
           </Link>
 
           {/* Desktop Navigation */}
