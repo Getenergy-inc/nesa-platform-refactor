@@ -16,16 +16,19 @@ import { CategoriesSection } from "@/components/nesa/CategoriesSection";
 import { FinalCTASection } from "@/components/nesa/FinalCTASection";
 import { NESAFooter } from "@/components/nesa/NESAFooter";
 import { MobileBottomNav } from "@/components/navigation/MainNav";
+import { StartHereSection } from "@/components/nesa/StartHereSection";
+import { WhatsNewSection } from "@/components/nesa/WhatsNewSection";
+import { ContinueWhereYouLeftOff } from "@/components/nesa/ContinueWhereYouLeftOff";
 
 /**
  * NESA-Africa Landing Page
  * 
  * Streamlined for reduced bounce rate:
  * - Hero + Trust indicators above fold
+ * - "Start Here" section for first-time visitors
+ * - "What's New" for returning visitors
  * - Single AGC explanation (VoteWithAGCSection)
  * - Consolidated timeline (UpcomingEventsSection)
- * - Removed duplicate sections: CampaignBanner, GoldCertificateSection, 
- *   IntegritySection, AwardPhasesSection, TimelineSection, JudgesSection
  */
 export default function NESAAfrica() {
   return (
@@ -45,8 +48,17 @@ export default function NESAAfrica() {
         <TrophyHeroSection />
         <TrustLogosStrip />
         
+        {/* Continue Where You Left Off (only shows if user has history) */}
+        <ContinueWhereYouLeftOff />
+        
         {/* Sticky Quick Actions */}
         <QuickActionBar />
+        
+        {/* START HERE: First-time visitor orientation */}
+        <StartHereSection />
+        
+        {/* WHAT'S NEW: Returning visitor freshness */}
+        <WhatsNewSection />
         
         {/* What's Happening Now */}
         <WhatsLiveSection />

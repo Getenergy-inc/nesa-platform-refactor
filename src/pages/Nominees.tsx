@@ -1,6 +1,6 @@
 import { useState, useMemo, useEffect, useRef, useCallback } from "react";
-import { Link } from "react-router-dom";
-import { Search, Users, Filter, ChevronLeft, ChevronRight, LayoutGrid, List, Loader2, MapPin, Globe2, Building2, Heart, Database, FileText } from "lucide-react";
+import { Link, useSearchParams } from "react-router-dom";
+import { Search, Users, Filter, ChevronLeft, ChevronRight, LayoutGrid, List, Loader2, MapPin, Globe2, Building2, Heart, Database, FileText, SortAsc } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -27,6 +27,9 @@ import {
 } from "@/lib/nesaData";
 
 const ITEMS_PER_PAGE = 12;
+
+// Sorting options
+type SortOption = "name-asc" | "name-desc" | "newest" | "votes";
 
 // Icons for geographic categories
 const categoryIcons: Record<string, React.ReactNode> = {
@@ -89,14 +92,37 @@ function csvToDisplay(nominee: EnrichedNominee): DisplayNominee {
 }
 
 export default function Nominees() {
-  const [searchQuery, setSearchQuery] = useState("");
-  const [selectedCategory, setSelectedCategory] = useState<GeographicCategory>("all");
-  const [selectedAward, setSelectedAward] = useState<string>("all");
-  const [selectedRegion, setSelectedRegion] = useState<GeographicCategory | "all">("all");
-  const [currentPage, setCurrentPage] = useState(1);
+  const [searchParams, setSearchParams] = useSearchParams();
+  
+  // Initialize state from URL params for persistence
+  const [searchQuery, setSearchQuery] = useState(searchParams.get("q") || "");
+  const [selectedCategory, setSelectedCategory] = useState<GeographicCategory>(
+    (searchParams.get("category") as GeographicCategory) || "all"
+  );
+  const [selectedAward, setSelectedAward] = useState<string>(searchParams.get("award") || "all");
+  const [selectedRegion, setSelectedRegion] = useState<GeographicCategory | "all">(
+    (searchParams.get("region") as GeographicCategory) || "all"
+  );
+  const [sortBy, setSortBy] = useState<SortOption>(
+    (searchParams.get("sort") as SortOption) || "name-asc"
+  );
+  const [currentPage, setCurrentPage] = useState(parseInt(searchParams.get("page") || "1", 10));
   const [useInfiniteScroll, setUseInfiniteScroll] = useState(false);
   const [visibleCount, setVisibleCount] = useState(ITEMS_PER_PAGE);
   const loadMoreRef = useRef<HTMLDivElement>(null);
+
+  // Sync state changes to URL for shareable links
+  useEffect(() => {
+    const params = new URLSearchParams();
+    if (searchQuery) params.set("q", searchQuery);
+    if (selectedCategory !== "all") params.set("category", selectedCategory);
+    if (selectedAward !== "all") params.set("award", selectedAward);
+    if (selectedRegion !== "all") params.set("region", selectedRegion);
+    if (sortBy !== "name-asc") params.set("sort", sortBy);
+    if (currentPage > 1 && !useInfiniteScroll) params.set("page", currentPage.toString());
+    
+    setSearchParams(params, { replace: true });
+  }, [searchQuery, selectedCategory, selectedAward, selectedRegion, sortBy, currentPage, useInfiniteScroll, setSearchParams]);
 
   // Fetch from database
   const { data: dbNominees, isLoading: dbLoading, error: dbError } = useNominees();
@@ -183,9 +209,9 @@ export default function Nominees() {
     return filtered;
   }, [allNominees, selectedCategory, selectedRegion]);
 
-  // Apply search and award filters
+  // Apply search and award filters, then sort
   const filteredNominees = useMemo(() => {
-    return baseNominees.filter((nominee) => {
+    let result = baseNominees.filter((nominee) => {
       const matchesSearch =
         searchQuery === "" ||
         nominee.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -198,7 +224,26 @@ export default function Nominees() {
 
       return matchesSearch && matchesAward;
     });
-  }, [baseNominees, searchQuery, selectedAward]);
+
+    // Apply sorting
+    switch (sortBy) {
+      case "name-asc":
+        result.sort((a, b) => a.name.localeCompare(b.name));
+        break;
+      case "name-desc":
+        result.sort((a, b) => b.name.localeCompare(a.name));
+        break;
+      case "votes":
+        result.sort((a, b) => b.publicVotes - a.publicVotes);
+        break;
+      case "newest":
+        // For now, just reverse the default order as a proxy for "newest"
+        result.reverse();
+        break;
+    }
+
+    return result;
+  }, [baseNominees, searchQuery, selectedAward, sortBy]);
 
   // Pagination
   const totalPages = Math.ceil(filteredNominees.length / ITEMS_PER_PAGE);
@@ -374,10 +419,10 @@ export default function Nominees() {
         </div>
       </section>
 
-      {/* Search and Filters */}
+      {/* Search, Filters, and Sort */}
       <section className="py-6 bg-charcoal">
         <div className="container mx-auto px-4">
-          <div className="flex flex-col md:flex-row gap-4 max-w-4xl mx-auto">
+          <div className="flex flex-col md:flex-row gap-4 max-w-5xl mx-auto">
             <div className="relative flex-1">
               <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-ivory/40" />
               <Input
@@ -388,7 +433,7 @@ export default function Nominees() {
               />
             </div>
             <Select value={selectedAward} onValueChange={handleAwardChange}>
-              <SelectTrigger className="w-full md:w-[260px] bg-charcoal-light border-gold/20 text-ivory">
+              <SelectTrigger className="w-full md:w-[220px] bg-charcoal-light border-gold/20 text-ivory">
                 <Filter className="w-4 h-4 mr-2 text-gold" />
                 <SelectValue placeholder="All Awards" />
               </SelectTrigger>
@@ -405,6 +450,27 @@ export default function Nominees() {
                     {opt.label.length > 50 ? opt.label.substring(0, 50) + "..." : opt.label}
                   </SelectItem>
                 ))}
+              </SelectContent>
+            </Select>
+            {/* Sort Dropdown */}
+            <Select value={sortBy} onValueChange={(v) => setSortBy(v as SortOption)}>
+              <SelectTrigger className="w-full md:w-[160px] bg-charcoal-light border-gold/20 text-ivory">
+                <SortAsc className="w-4 h-4 mr-2 text-gold" />
+                <SelectValue placeholder="Sort by" />
+              </SelectTrigger>
+              <SelectContent className="bg-charcoal-light border-gold/20">
+                <SelectItem value="name-asc" className="text-ivory hover:bg-gold/10">
+                  Name (A–Z)
+                </SelectItem>
+                <SelectItem value="name-desc" className="text-ivory hover:bg-gold/10">
+                  Name (Z–A)
+                </SelectItem>
+                <SelectItem value="votes" className="text-ivory hover:bg-gold/10">
+                  Most Votes
+                </SelectItem>
+                <SelectItem value="newest" className="text-ivory hover:bg-gold/10">
+                  Newest First
+                </SelectItem>
               </SelectContent>
             </Select>
           </div>
