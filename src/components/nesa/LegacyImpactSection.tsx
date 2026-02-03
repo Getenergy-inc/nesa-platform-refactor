@@ -1,27 +1,39 @@
-import { Building, Heart, Users, Check, MapPin } from "lucide-react";
+import { Trophy, Vote, Heart, ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
-import { LEGACY_REGIONS } from "@/config/schedule";
 import specialNeedsSchool from "@/assets/special-needs-school-africa.jpg";
 
 export function LegacyImpactSection() {
-  const impactStats = [
-    { value: "5+", label: "Regions Covered" },
-    { value: "100+", label: "Schools Targeted" },
-    { value: "50K+", label: "Students Impacted" },
-  ];
-
-  const focusAreas = [
-    "Classroom Blocks",
-    "STEM Labs",
-    "Libraries",
-    "Sanitation Facilities",
-    "Special Needs Facilities",
+  const actionPaths = [
+    {
+      icon: Trophy,
+      title: "Nominate",
+      description: "Recognize educators transforming special needs education in your region",
+      cta: "Submit Nomination",
+      link: "/nominate",
+      color: "gold",
+    },
+    {
+      icon: Vote,
+      title: "Vote",
+      description: "Support nominees with AGC votes to help them win recognition",
+      cta: "Vote Now",
+      link: "/vote",
+      color: "blue",
+    },
+    {
+      icon: Heart,
+      title: "Support a School",
+      description: "Fund inclusive education facilities in your Africa region",
+      cta: "Donate to EduAid",
+      link: "/donate",
+      color: "emerald",
+    },
   ];
 
   return (
-    <section className="relative py-16 md:py-20 overflow-hidden">
+    <section className="relative py-16 md:py-24 overflow-hidden">
       {/* Background Image with Overlay */}
       <div className="absolute inset-0 z-0">
         <img 
@@ -29,111 +41,97 @@ export function LegacyImpactSection() {
           alt="Special needs school in Africa" 
           className="w-full h-full object-cover"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-charcoal/95 via-charcoal/90 to-charcoal/95" />
+        <div className="absolute inset-0 bg-gradient-to-b from-charcoal/90 via-charcoal/85 to-charcoal/95" />
       </div>
       
       <div className="container relative z-10">
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
-          {/* Left: Content */}
-          <motion.div
-            initial={{ opacity: 0, x: -30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-          >
-            {/* Badge */}
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-emerald-500/10 border border-emerald-500/30 mb-6">
-              <Building className="h-4 w-4 text-emerald-400" />
-              <span className="text-sm font-medium text-emerald-400">Post-Award Legacy</span>
-            </div>
+        {/* Header */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="text-center max-w-3xl mx-auto mb-12"
+        >
+          <span className="inline-block px-4 py-1.5 rounded-full bg-emerald-500/20 border border-emerald-500/30 text-emerald-400 text-sm font-medium mb-4">
+            Post-Award Legacy
+          </span>
+          <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4">
+            Rebuild My School <span className="text-emerald-400">Africa</span>
+          </h2>
+          <p className="text-white/80 text-lg">
+            Every nomination, vote, and donation upgrades inclusive education facilities 
+            for special needs students across Africa's regions.
+          </p>
+        </motion.div>
 
-            <h2 className="font-display text-3xl md:text-4xl font-bold text-white mb-4">
-              Rebuild My School <span className="text-emerald-400">Africa</span>
-            </h2>
+        {/* Three Action Paths */}
+        <div className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+          {actionPaths.map((path, index) => (
+            <motion.div
+              key={path.title}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ delay: index * 0.1 }}
+              viewport={{ once: true }}
+              className={`
+                relative bg-white/5 backdrop-blur-sm rounded-2xl p-6 border 
+                ${path.color === 'gold' ? 'border-gold/30 hover:border-gold/50' : ''}
+                ${path.color === 'blue' ? 'border-blue-500/30 hover:border-blue-500/50' : ''}
+                ${path.color === 'emerald' ? 'border-emerald-500/30 hover:border-emerald-500/50' : ''}
+                transition-all duration-300 hover:bg-white/10
+              `}
+            >
+              {/* Icon */}
+              <div className={`
+                w-14 h-14 rounded-xl flex items-center justify-center mb-4
+                ${path.color === 'gold' ? 'bg-gold/20' : ''}
+                ${path.color === 'blue' ? 'bg-blue-500/20' : ''}
+                ${path.color === 'emerald' ? 'bg-emerald-500/20' : ''}
+              `}>
+                <path.icon className={`
+                  h-7 w-7
+                  ${path.color === 'gold' ? 'text-gold' : ''}
+                  ${path.color === 'blue' ? 'text-blue-400' : ''}
+                  ${path.color === 'emerald' ? 'text-emerald-400' : ''}
+                `} />
+              </div>
 
-            <p className="text-white/70 text-lg mb-6 leading-relaxed">
-              Recognition becomes real impact. Every nomination, every vote, every ticket 
-              contributes to upgrading inclusive and special needs education facilities 
-              across Africa's regions.
-            </p>
+              {/* Content */}
+              <h3 className="text-xl font-display font-bold text-white mb-2">
+                {path.title}
+              </h3>
+              <p className="text-white/70 text-sm mb-6 leading-relaxed">
+                {path.description}
+              </p>
 
-            {/* Focus Areas */}
-            <div className="grid grid-cols-2 gap-3 mb-8">
-              {focusAreas.map((area) => (
-                <div key={area} className="flex items-center gap-2 text-white/80 text-sm">
-                  <Check className="h-4 w-4 text-emerald-400 flex-shrink-0" />
-                  <span>{area}</span>
-                </div>
-              ))}
-            </div>
-
-            {/* CTA Buttons */}
-            <div className="flex flex-wrap gap-3">
-              <Link to="/partners">
-                <Button className="bg-emerald-500 hover:bg-emerald-600 text-white font-semibold rounded-full gap-2">
-                  <Building className="h-4 w-4" />
-                  Sponsor a School
-                </Button>
-              </Link>
-              <Link to="/donate">
-                <Button variant="outline" className="border-emerald-500/40 text-emerald-400 hover:bg-emerald-500/10 rounded-full gap-2">
-                  <Heart className="h-4 w-4" />
-                  Donate
-                </Button>
-              </Link>
-              <Link to="/partners">
-                <Button variant="outline" className="border-emerald-500/40 text-emerald-400 hover:bg-emerald-500/10 rounded-full gap-2">
-                  <Users className="h-4 w-4" />
-                  Partner
-                </Button>
-              </Link>
-            </div>
-          </motion.div>
-
-          {/* Right: Visual Stats & Map */}
-          <motion.div
-            initial={{ opacity: 0, x: 30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            className="relative"
-          >
-            {/* Stats Cards */}
-            <div className="grid grid-cols-3 gap-4 mb-6">
-              {impactStats.map((stat, index) => (
-                <motion.div
-                  key={stat.label}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ delay: index * 0.1 }}
-                  viewport={{ once: true }}
-                  className="bg-white/5 rounded-xl p-4 text-center border border-emerald-500/20"
+              {/* CTA */}
+              <Link to={path.link}>
+                <Button 
+                  className={`
+                    w-full rounded-full gap-2 font-semibold
+                    ${path.color === 'gold' ? 'bg-gold hover:bg-gold-dark text-charcoal' : ''}
+                    ${path.color === 'blue' ? 'bg-blue-500 hover:bg-blue-600 text-white' : ''}
+                    ${path.color === 'emerald' ? 'bg-emerald-500 hover:bg-emerald-600 text-white' : ''}
+                  `}
                 >
-                  <div className="text-2xl font-display font-bold text-emerald-400 mb-1">
-                    {stat.value}
-                  </div>
-                  <div className="text-white/50 text-xs">{stat.label}</div>
-                </motion.div>
-              ))}
-            </div>
-
-            {/* Regions */}
-            <div className="bg-white/5 rounded-xl p-6 border border-emerald-500/20">
-              <div className="flex items-center gap-2 mb-4">
-                <MapPin className="h-5 w-5 text-emerald-400" />
-                <h4 className="text-white font-semibold">Target Regions</h4>
-              </div>
-              <div className="flex flex-wrap gap-2">
-                {LEGACY_REGIONS.map((region) => (
-                  <span
-                    key={region}
-                    className="px-3 py-1.5 bg-emerald-500/10 border border-emerald-500/20 rounded-full text-emerald-400 text-sm"
-                  >
-                    {region}
-                  </span>
-                ))}
-              </div>
-            </div>
-          </motion.div>
+                  {path.cta}
+                  <ArrowRight className="h-4 w-4" />
+                </Button>
+              </Link>
+            </motion.div>
+          ))}
         </div>
+
+        {/* Bottom tagline */}
+        <motion.p
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          transition={{ delay: 0.4 }}
+          viewport={{ once: true }}
+          className="text-center text-white/50 text-sm mt-10"
+        >
+          Implemented via Santos Creations Educational Foundation • EduAid Programme
+        </motion.p>
       </div>
     </section>
   );
