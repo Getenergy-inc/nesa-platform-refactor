@@ -4,8 +4,8 @@ import { Quote } from "lucide-react";
 export function CVOMessage() {
   return (
     <motion.div
-      initial={{ opacity: 0, x: 30 }}
-      animate={{ opacity: 1, x: 0 }}
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
       transition={{ delay: 0.3, type: "spring", stiffness: 120 }}
       className="flex-1 text-center md:text-left"
     >
@@ -14,11 +14,12 @@ export function CVOMessage() {
         <motion.div
           animate={{ opacity: [0.3, 0.6, 0.3] }}
           transition={{ repeat: Infinity, duration: 3 }}
+          className="flex justify-center md:justify-start"
         >
-          <Quote className="absolute -top-2 -left-2 h-8 w-8 text-gold/20" />
+          <Quote className="h-6 w-6 md:h-8 md:w-8 text-gold/30 mb-2" />
         </motion.div>
         
-        <blockquote className="text-base md:text-lg text-white/90 leading-relaxed pl-6 md:pl-8 font-light">
+        <blockquote className="text-sm md:text-lg text-white/90 leading-relaxed font-light px-2 md:px-0">
           <motion.span
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -46,12 +47,12 @@ export function CVOMessage() {
         initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.55 }}
-        className="mt-5 pt-4 border-t border-gold/20"
+        className="mt-5 pt-4 border-t border-gold/20 text-center md:text-left"
       >
-        <p className="text-gold font-display text-xl font-semibold tracking-wide">
+        <p className="text-gold font-display text-lg md:text-xl font-semibold tracking-wide">
           Babashola-Santos V. Aderibigbe
         </p>
-        <p className="text-white/50 text-sm mt-0.5">
+        <p className="text-white/50 text-xs md:text-sm mt-0.5">
           Founder & CVO, Santos Creations Educational Foundation
         </p>
         <motion.p
