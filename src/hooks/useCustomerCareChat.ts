@@ -1,4 +1,4 @@
-import { useState, useCallback } from "react";
+import { useState, useCallback, useRef } from "react";
 
 export interface ChatMessage {
   id: string;
@@ -7,12 +7,20 @@ export interface ChatMessage {
   timestamp: Date;
 }
 
+export interface ChatMetadata {
+  detectedIntent?: string;
+  suggestedCta?: string;
+  isEscalated?: boolean;
+}
+
 const CHAT_URL = `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/chat`;
 
 export function useCustomerCareChat() {
   const [messages, setMessages] = useState<ChatMessage[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [metadata, setMetadata] = useState<ChatMetadata>({});
+  const conversationIdRef = useRef<string>(crypto.randomUUID());
 
   const sendMessage = useCallback(async (content: string) => {
     if (!content.trim() || isLoading) return;
@@ -63,8 +71,24 @@ export function useCustomerCareChat() {
           "Content-Type": "application/json",
           Authorization: `Bearer ${import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY}`,
         },
-        body: JSON.stringify({ messages: apiMessages }),
+        body: JSON.stringify({ 
+          messages: apiMessages,
+          conversationId: conversationIdRef.current,
+        }),
       });
+
+      // Extract metadata from response headers
+      const detectedIntent = resp.headers.get("X-Detected-Intent");
+      const suggestedCta = resp.headers.get("X-Suggested-CTA");
+      const isEscalated = resp.headers.get("X-Escalated") === "true";
+      
+      if (detectedIntent || suggestedCta || isEscalated) {
+        setMetadata({
+          detectedIntent: detectedIntent || undefined,
+          suggestedCta: suggestedCta || undefined,
+          isEscalated,
+        });
+      }
 
       if (!resp.ok) {
         const errorData = await resp.json().catch(() => ({}));
@@ -141,12 +165,15 @@ export function useCustomerCareChat() {
   const clearChat = useCallback(() => {
     setMessages([]);
     setError(null);
+    setMetadata({});
+    conversationIdRef.current = crypto.randomUUID();
   }, []);
 
   return {
     messages,
     isLoading,
     error,
+    metadata,
     sendMessage,
     clearChat,
   };
