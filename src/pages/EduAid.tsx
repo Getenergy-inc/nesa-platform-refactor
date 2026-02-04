@@ -54,34 +54,44 @@ const impactStats = [
   { value: "₦85M+", label: "Funds Distributed", icon: HandCoins },
 ];
 
+// Program images - imported as ES6 modules
+import scholarshipFundImg from "@/assets/eduaid/scholarship-fund.jpg";
+import learningMaterialsImg from "@/assets/eduaid/learning-materials.jpg";
+import digitalEducationImg from "@/assets/eduaid/digital-education.jpg";
+import teacherTrainingImg from "@/assets/eduaid/teacher-training.jpg";
+
 const programs = [
   {
     title: "Scholarship Fund",
     description: "Providing full and partial scholarships to underprivileged students across Africa.",
     icon: GraduationCap,
-    beneficiaries: "5,000+ students annually",
+    beneficiaries: "350+ students annually",
     color: eduaidColors.green,
+    image: scholarshipFundImg,
   },
   {
     title: "Learning Materials",
     description: "Distributing textbooks, notebooks, and school supplies to students in need.",
     icon: BookOpen,
-    beneficiaries: "100,000+ materials distributed",
+    beneficiaries: "8,500+ materials distributed",
     color: eduaidColors.brown,
+    image: learningMaterialsImg,
   },
   {
     title: "Digital Education",
     description: "Equipping students with tablets, laptops, and internet access for modern learning.",
     icon: Laptop,
-    beneficiaries: "2,500+ devices deployed",
+    beneficiaries: "180+ devices deployed",
     color: eduaidColors.lightGreen,
+    image: digitalEducationImg,
   },
   {
     title: "Teacher Training",
     description: "Professional development programs for educators to enhance teaching quality.",
     icon: Users,
-    beneficiaries: "500+ teachers trained",
+    beneficiaries: "75+ teachers trained",
     color: eduaidColors.darkGreen,
+    image: teacherTrainingImg,
   },
 ];
 
@@ -301,25 +311,33 @@ export default function EduAid() {
               {programs.map((program) => (
                 <Card 
                   key={program.title}
-                  className="border-white/10 bg-white/5 hover:bg-white/10 transition-colors overflow-hidden"
+                  className="border-white/10 bg-white/5 hover:bg-white/10 transition-all duration-300 overflow-hidden group"
                 >
-                  <div 
-                    className="h-1 w-full"
-                    style={{ backgroundColor: program.color }}
-                  />
-                  <CardHeader>
+                  {/* Program Image */}
+                  <div className="relative h-44 overflow-hidden">
+                    <img 
+                      src={program.image} 
+                      alt={program.title}
+                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                    />
                     <div 
-                      className="w-14 h-14 rounded-xl flex items-center justify-center mb-4"
-                      style={{ backgroundColor: `${program.color}20` }}
+                      className="absolute inset-0 bg-gradient-to-t from-charcoal/90 via-charcoal/30 to-transparent"
+                    />
+                    <div 
+                      className="absolute top-3 left-3 w-12 h-12 rounded-xl flex items-center justify-center backdrop-blur-sm"
+                      style={{ backgroundColor: `${program.color}90` }}
                     >
-                      <program.icon className="h-7 w-7" style={{ color: program.color }} />
+                      <program.icon className="h-6 w-6 text-white" />
                     </div>
-                    <CardTitle className="text-white text-xl">{program.title}</CardTitle>
-                    <CardDescription className="text-white/60">
+                  </div>
+                  
+                  <CardHeader className="pt-4 pb-2">
+                    <CardTitle className="text-white text-lg">{program.title}</CardTitle>
+                    <CardDescription className="text-white/60 text-sm">
                       {program.description}
                     </CardDescription>
                   </CardHeader>
-                  <CardContent>
+                  <CardContent className="pt-0">
                     <div 
                       className="text-sm font-medium px-3 py-1.5 rounded-full inline-block"
                       style={{ 
