@@ -13,10 +13,18 @@ import {
   ArrowRight,
   Globe,
   School,
-  Hammer
+  Hammer,
+  ExternalLink
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+
+// Import school images
+import westAfricaSchool from "@/assets/schools/west-africa-special-needs-school.jpg";
+import eastAfricaSchool from "@/assets/schools/east-africa-special-needs-school.jpg";
+import southernAfricaSchool from "@/assets/schools/southern-africa-special-needs-school.jpg";
+import centralAfricaSchool from "@/assets/schools/central-africa-special-needs-school.jpg";
+import northAfricaSchool from "@/assets/schools/north-africa-special-needs-school.jpg";
 
 // SCEF Color theme for RMSA
 const rmsaColors = {
@@ -24,6 +32,65 @@ const rmsaColors = {
   secondary: "#4a7c23", // Green
   accent: "#d4a017", // Gold accent
 };
+
+// Featured Special Needs Schools - One per African Region
+const featuredSchools = [
+  {
+    name: "Hope Academy for Special Needs",
+    region: "West Africa",
+    country: "Nigeria",
+    location: "Lagos State",
+    students: 245,
+    needs: ["Wheelchair ramps", "Sensory rooms", "Accessible toilets"],
+    status: "Priority Project",
+    image: westAfricaSchool,
+    description: "A pioneering special needs school serving children with physical and learning disabilities in Lagos. Currently lacking basic accessibility infrastructure.",
+  },
+  {
+    name: "Sunrise Inclusive School",
+    region: "East Africa",
+    country: "Kenya",
+    location: "Nairobi County",
+    students: 180,
+    needs: ["Assistive technology", "Teacher training", "Classroom renovation"],
+    status: "In Progress",
+    image: eastAfricaSchool,
+    description: "Serving deaf and hearing-impaired students in Kenya's capital. Needs modern assistive devices and renovated learning spaces.",
+  },
+  {
+    name: "Rainbow Learning Centre",
+    region: "Southern Africa",
+    country: "South Africa",
+    location: "Johannesburg",
+    students: 312,
+    needs: ["Therapy rooms", "Playground equipment", "Transport vehicles"],
+    status: "Fundraising",
+    image: southernAfricaSchool,
+    description: "One of the largest special needs facilities in Gauteng, supporting children with autism and developmental disabilities.",
+  },
+  {
+    name: "Unity Special Education Centre",
+    region: "Central Africa",
+    country: "Cameroon",
+    location: "Yaoundé",
+    students: 156,
+    needs: ["Building expansion", "Medical room", "Learning materials"],
+    status: "Assessment Phase",
+    image: centralAfricaSchool,
+    description: "A community-driven school providing education to children with various disabilities in Cameroon's capital city.",
+  },
+  {
+    name: "Al-Noor Inclusive Academy",
+    region: "North Africa",
+    country: "Morocco",
+    location: "Casablanca",
+    students: 198,
+    needs: ["Elevator installation", "Braille resources", "Staff training"],
+    status: "Priority Project",
+    image: northAfricaSchool,
+    description: "Serving visually impaired and physically disabled children. Requires urgent accessibility upgrades to the multi-story building.",
+  },
+];
 
 const impactRegions = [
   { name: "West Africa", countries: "Nigeria, Ghana, Senegal", schools: 12 },
@@ -82,6 +149,21 @@ const donationTiers = [
     label: "Transformer",
   },
 ];
+
+function getStatusColor(status: string) {
+  switch (status) {
+    case "Priority Project":
+      return "bg-red-500/20 text-red-400 border-red-500/30";
+    case "In Progress":
+      return "bg-green-500/20 text-green-400 border-green-500/30";
+    case "Fundraising":
+      return "bg-gold/20 text-gold border-gold/30";
+    case "Assessment Phase":
+      return "bg-blue-500/20 text-blue-400 border-blue-500/30";
+    default:
+      return "bg-gray-500/20 text-gray-400 border-gray-500/30";
+  }
+}
 
 export default function Rebuild() {
   return (
@@ -175,8 +257,125 @@ export default function Rebuild() {
           </div>
         </section>
 
-        {/* Mission Section */}
+        {/* Featured Schools Section - NEW */}
         <section className="py-16 md:py-24">
+          <div className="container mx-auto px-4">
+            <div className="text-center mb-12">
+              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gold/10 border border-gold/30 mb-4">
+                <Heart className="h-4 w-4 text-gold" />
+                <span className="text-sm font-medium text-gold">Priority Schools</span>
+              </div>
+              <h2 className="text-3xl md:text-4xl font-display font-bold text-white mb-4">
+                Featured <span className="text-[#4a7c23]">Special Needs Schools</span>
+              </h2>
+              <p className="text-white/60 max-w-2xl mx-auto">
+                Five schools representing each African region — each serving children with disabilities 
+                and awaiting critical infrastructure support.
+              </p>
+            </div>
+
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {featuredSchools.map((school) => (
+                <Card 
+                  key={school.name}
+                  className="bg-charcoal border-gold/20 hover:border-[#4a7c23]/50 transition-all group overflow-hidden"
+                >
+                  {/* School Image */}
+                  <div className="relative h-48 overflow-hidden">
+                    <img 
+                      src={school.image} 
+                      alt={`${school.name} - ${school.region}`}
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-charcoal via-transparent to-transparent" />
+                    
+                    {/* Region Badge */}
+                    <div className="absolute top-3 left-3">
+                      <span className="px-3 py-1 rounded-full text-xs font-medium bg-[#4a7c23] text-white">
+                        {school.region}
+                      </span>
+                    </div>
+                    
+                    {/* Status Badge */}
+                    <div className="absolute top-3 right-3">
+                      <span className={`px-3 py-1 rounded-full text-xs font-medium border ${getStatusColor(school.status)}`}>
+                        {school.status}
+                      </span>
+                    </div>
+                    
+                    {/* Student Count */}
+                    <div className="absolute bottom-3 right-3 flex items-center gap-1 bg-charcoal/80 backdrop-blur-sm px-2 py-1 rounded-full">
+                      <Users className="h-3 w-3 text-gold" />
+                      <span className="text-xs text-white font-medium">{school.students} students</span>
+                    </div>
+                  </div>
+
+                  <CardHeader className="pb-2">
+                    <CardTitle className="text-lg text-white group-hover:text-[#4a7c23] transition-colors">
+                      {school.name}
+                    </CardTitle>
+                    <div className="flex items-center gap-2 text-sm text-white/60">
+                      <MapPin className="h-3.5 w-3.5" />
+                      <span>{school.location}, {school.country}</span>
+                    </div>
+                  </CardHeader>
+
+                  <CardContent className="space-y-4">
+                    <CardDescription className="text-white/70 text-sm leading-relaxed">
+                      {school.description}
+                    </CardDescription>
+
+                    {/* Needs Tags */}
+                    <div className="space-y-2">
+                      <span className="text-xs font-medium text-[#8b6914] uppercase tracking-wider">Critical Needs:</span>
+                      <div className="flex flex-wrap gap-1.5">
+                        {school.needs.map((need) => (
+                          <span 
+                            key={need}
+                            className="px-2 py-0.5 rounded text-xs bg-[#8b6914]/20 text-[#d4a017] border border-[#8b6914]/30"
+                          >
+                            {need}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+
+                    {/* Support Button */}
+                    <Button 
+                      asChild
+                      size="sm"
+                      className="w-full bg-[#4a7c23] hover:bg-[#4a7c23]/90 text-white mt-2 group-hover:scale-[1.02] transition-transform"
+                    >
+                      <Link to={`/donate?program=rebuild&school=${encodeURIComponent(school.name)}`}>
+                        <Heart className="h-4 w-4 mr-2" />
+                        Support This School
+                      </Link>
+                    </Button>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+
+            {/* View All Schools CTA */}
+            <div className="text-center mt-10">
+              <Button 
+                asChild
+                variant="outline"
+                size="lg"
+                className="border-[#4a7c23]/50 text-[#4a7c23] hover:bg-[#4a7c23]/10"
+              >
+                <Link to="/contact?subject=schools">
+                  <School className="h-5 w-5 mr-2" />
+                  Nominate a School
+                  <ExternalLink className="h-4 w-4 ml-2" />
+                </Link>
+              </Button>
+            </div>
+          </div>
+        </section>
+
+        {/* Mission Section */}
+        <section className="py-16 md:py-24 bg-charcoal-light/30">
           <div className="container mx-auto px-4">
             <div className="grid lg:grid-cols-2 gap-12 items-center">
               <div>
@@ -229,7 +428,7 @@ export default function Rebuild() {
         </section>
 
         {/* Project Phases */}
-        <section className="py-16 bg-charcoal-light/30">
+        <section className="py-16">
           <div className="container mx-auto px-4">
             <div className="text-center mb-12">
               <h2 className="text-3xl md:text-4xl font-display font-bold text-white mb-4">
@@ -262,7 +461,7 @@ export default function Rebuild() {
         </section>
 
         {/* Regional Impact */}
-        <section className="py-16 md:py-24">
+        <section className="py-16 md:py-24 bg-charcoal-light/30">
           <div className="container mx-auto px-4">
             <div className="text-center mb-12">
               <h2 className="text-3xl md:text-4xl font-display font-bold text-white mb-4">
@@ -277,7 +476,7 @@ export default function Rebuild() {
               {impactRegions.map((region) => (
                 <div 
                   key={region.name}
-                  className="p-6 rounded-xl border border-gold/20 bg-charcoal-light/30 hover:border-[#4a7c23]/50 transition-colors"
+                  className="p-6 rounded-xl border border-gold/20 bg-charcoal hover:border-[#4a7c23]/50 transition-colors"
                 >
                   <div className="flex items-start gap-4">
                     <div className="w-12 h-12 rounded-full bg-[#4a7c23]/20 flex items-center justify-center flex-shrink-0">
