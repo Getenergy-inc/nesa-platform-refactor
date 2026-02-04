@@ -9,9 +9,13 @@ import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import {
   ArrowRight,
   BookOpen,
+  Building,
   CheckCircle,
   CreditCard,
+  Droplets,
   ExternalLink,
+  Film,
+  Globe,
   GraduationCap,
   HandCoins,
   Handshake,
@@ -22,9 +26,11 @@ import {
   School,
   Shield,
   Sparkles,
+  Stethoscope,
   Target,
   Trophy,
   Users,
+  Video,
   Wallet,
 } from "lucide-react";
 import { useState } from "react";
@@ -59,6 +65,9 @@ import scholarshipFundImg from "@/assets/eduaid/scholarship-fund.jpg";
 import learningMaterialsImg from "@/assets/eduaid/learning-materials.jpg";
 import digitalEducationImg from "@/assets/eduaid/digital-education.jpg";
 import teacherTrainingImg from "@/assets/eduaid/teacher-training.jpg";
+import washProgramImg from "@/assets/eduaid/wash-program.jpg";
+import videoUpdatesImg from "@/assets/eduaid/video-updates.jpg";
+import partnershipsImg from "@/assets/eduaid/partnerships.jpg";
 
 const programs = [
   {
@@ -92,6 +101,76 @@ const programs = [
     beneficiaries: "75+ teachers trained",
     color: eduaidColors.darkGreen,
     image: teacherTrainingImg,
+  },
+];
+
+// WASH Program - Water, Hygiene, Sanitation, and Health
+const washProgram = {
+  title: "WASH in Schools Initiative",
+  tagline: "Water, Hygiene, Sanitation & Health Training",
+  description: "A comprehensive program to improve water access, sanitation facilities, and health education in public schools across Africa.",
+  image: washProgramImg,
+  objectives: [
+    { label: "Clean Water", desc: "Install boreholes and water tanks in 50 public schools", icon: Droplets },
+    { label: "Sanitation", desc: "Build or renovate gender-segregated toilets in target schools", icon: Building },
+    { label: "Hygiene Education", desc: "Workshops on handwashing, menstrual hygiene, and waste disposal", icon: Heart },
+    { label: "First-Aid Training", desc: "Equip teachers and students with essential health skills", icon: Stethoscope },
+  ],
+  stats: [
+    { value: "50,000", label: "Students to benefit" },
+    { value: "2,500", label: "Teachers trained" },
+    { value: "50", label: "Target schools" },
+    { value: "$750K", label: "Program budget" },
+  ],
+  sdgs: ["Goal 3: Good Health", "Goal 6: Clean Water & Sanitation"],
+};
+
+// Weekly Video Updates PRD
+const videoUpdates = {
+  title: "Weekly Video Updates",
+  tagline: "Transparency Through Storytelling",
+  description: "Follow our impact journey with weekly video updates on program progress, success stories, and upcoming events.",
+  image: videoUpdatesImg,
+  features: [
+    "2–5 minute engaging videos",
+    "Program progress & milestones",
+    "Beneficiary success stories",
+    "Event announcements",
+  ],
+  platforms: ["YouTube", "Facebook", "Instagram", "LinkedIn"],
+};
+
+// Partner Categories from document
+const partnerCategories = [
+  {
+    name: "International Development",
+    icon: Globe,
+    examples: ["World Bank Group", "African Development Bank", "UNESCO", "UNICEF", "USAID"],
+  },
+  {
+    name: "Corporate Foundations",
+    icon: Building,
+    examples: ["Bill & Melinda Gates Foundation", "Mastercard Foundation", "Ford Foundation", "Google.org"],
+  },
+  {
+    name: "African Foundations",
+    icon: Heart,
+    examples: ["Tony Elumelu Foundation", "Dangote Foundation", "MTN Foundation", "Aga Khan Foundation"],
+  },
+  {
+    name: "Financial Institutions",
+    icon: HandCoins,
+    examples: ["Standard Chartered", "Ecobank Foundation", "Access Bank", "GTBank Foundation"],
+  },
+  {
+    name: "Technology Companies",
+    icon: Laptop,
+    examples: ["Microsoft Philanthropies", "IBM Foundation", "HP Foundation", "Cisco Networking Academy"],
+  },
+  {
+    name: "Embassies & Agencies",
+    icon: MapPin,
+    examples: ["Embassy of Japan", "British High Commission", "German Embassy", "NEPAD"],
   },
 ];
 
@@ -407,8 +486,168 @@ export default function EduAid() {
           </div>
         </section>
 
+        {/* WASH Program Section */}
+        <section className="py-20" style={{ backgroundColor: `${eduaidColors.green}08` }}>
+          <div className="container mx-auto px-4">
+            <div className="grid lg:grid-cols-2 gap-12 items-center">
+              {/* Image Side */}
+              <div className="relative">
+                <div 
+                  className="absolute -inset-4 rounded-3xl blur-2xl opacity-20"
+                  style={{ backgroundColor: eduaidColors.green }}
+                />
+                <img 
+                  src={washProgram.image}
+                  alt={washProgram.title}
+                  className="relative rounded-2xl w-full h-80 object-cover shadow-2xl"
+                />
+                <div className="absolute bottom-4 left-4 right-4 flex gap-2 flex-wrap">
+                  {washProgram.sdgs.map((sdg) => (
+                    <Badge 
+                      key={sdg}
+                      className="text-white border-0 backdrop-blur-sm"
+                      style={{ backgroundColor: `${eduaidColors.green}90` }}
+                    >
+                      {sdg}
+                    </Badge>
+                  ))}
+                </div>
+              </div>
+
+              {/* Content Side */}
+              <div>
+                <Badge 
+                  className="mb-4 text-white border-0"
+                  style={{ backgroundColor: eduaidColors.brown }}
+                >
+                  Featured Initiative
+                </Badge>
+                <h2 className="font-display text-3xl md:text-4xl font-bold text-white mb-2">
+                  {washProgram.title}
+                </h2>
+                <p className="text-lg mb-4" style={{ color: eduaidColors.lightGreen }}>
+                  {washProgram.tagline}
+                </p>
+                <p className="text-white/70 mb-8">
+                  {washProgram.description}
+                </p>
+
+                {/* Objectives Grid */}
+                <div className="grid grid-cols-2 gap-4 mb-8">
+                  {washProgram.objectives.map((obj) => (
+                    <div 
+                      key={obj.label}
+                      className="p-4 rounded-xl"
+                      style={{ backgroundColor: `${eduaidColors.green}10` }}
+                    >
+                      <obj.icon className="h-6 w-6 mb-2" style={{ color: eduaidColors.green }} />
+                      <h4 className="font-semibold text-white text-sm">{obj.label}</h4>
+                      <p className="text-white/60 text-xs mt-1">{obj.desc}</p>
+                    </div>
+                  ))}
+                </div>
+
+                {/* Stats */}
+                <div className="grid grid-cols-4 gap-4">
+                  {washProgram.stats.map((stat) => (
+                    <div key={stat.label} className="text-center">
+                      <div className="text-xl font-bold" style={{ color: eduaidColors.lightGreen }}>
+                        {stat.value}
+                      </div>
+                      <div className="text-xs text-white/50">{stat.label}</div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Video Updates Section */}
+        <section className="py-20 bg-charcoal">
+          <div className="container mx-auto px-4">
+            <div className="grid lg:grid-cols-2 gap-12 items-center">
+              {/* Content Side */}
+              <div className="order-2 lg:order-1">
+                <Badge 
+                  variant="outline"
+                  className="mb-4"
+                  style={{ borderColor: eduaidColors.brown, color: eduaidColors.brown }}
+                >
+                  <Video className="mr-2 h-3 w-3" />
+                  Weekly Updates
+                </Badge>
+                <h2 className="font-display text-3xl md:text-4xl font-bold text-white mb-2">
+                  {videoUpdates.title}
+                </h2>
+                <p className="text-lg mb-4" style={{ color: eduaidColors.lightGreen }}>
+                  {videoUpdates.tagline}
+                </p>
+                <p className="text-white/70 mb-6">
+                  {videoUpdates.description}
+                </p>
+
+                {/* Features */}
+                <ul className="space-y-3 mb-6">
+                  {videoUpdates.features.map((feature) => (
+                    <li key={feature} className="flex items-center gap-3 text-white/80">
+                      <CheckCircle className="h-5 w-5" style={{ color: eduaidColors.green }} />
+                      {feature}
+                    </li>
+                  ))}
+                </ul>
+
+                {/* Platforms */}
+                <div className="flex flex-wrap gap-2 mb-6">
+                  {videoUpdates.platforms.map((platform) => (
+                    <Badge 
+                      key={platform}
+                      variant="outline"
+                      className="text-white/70"
+                      style={{ borderColor: `${eduaidColors.green}40` }}
+                    >
+                      {platform}
+                    </Badge>
+                  ))}
+                </div>
+
+                <Button 
+                  asChild
+                  size="lg"
+                  className="text-white"
+                  style={{ backgroundColor: eduaidColors.green }}
+                >
+                  <Link to="/media/webinars">
+                    <Film className="mr-2 h-5 w-5" />
+                    Watch Our Updates
+                  </Link>
+                </Button>
+              </div>
+
+              {/* Image Side */}
+              <div className="order-1 lg:order-2 relative">
+                <div 
+                  className="absolute -inset-4 rounded-3xl blur-2xl opacity-15"
+                  style={{ backgroundColor: eduaidColors.brown }}
+                />
+                <img 
+                  src={videoUpdates.image}
+                  alt={videoUpdates.title}
+                  className="relative rounded-2xl w-full h-80 object-cover shadow-2xl"
+                />
+                <div 
+                  className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-20 h-20 rounded-full flex items-center justify-center backdrop-blur-sm cursor-pointer hover:scale-110 transition-transform"
+                  style={{ backgroundColor: `${eduaidColors.green}90` }}
+                >
+                  <Play className="h-8 w-8 text-white ml-1" />
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
         {/* Donation Section */}
-        <section 
+        <section
           id="donate" 
           className="py-20"
           style={{ 
@@ -635,6 +874,51 @@ export default function EduAid() {
                   </CardContent>
                 </Card>
               ))}
+            </div>
+
+            {/* Partner Categories */}
+            <div className="mt-16">
+              <h3 className="text-center text-xl font-semibold text-white mb-8">
+                100+ Organizations Ready to Partner
+              </h3>
+              <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+                {partnerCategories.map((cat) => (
+                  <div 
+                    key={cat.name}
+                    className="p-4 rounded-xl text-center group hover:scale-105 transition-transform"
+                    style={{ backgroundColor: `${eduaidColors.green}10` }}
+                  >
+                    <div 
+                      className="w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-3 group-hover:scale-110 transition-transform"
+                      style={{ backgroundColor: `${eduaidColors.green}20` }}
+                    >
+                      <cat.icon className="h-6 w-6" style={{ color: eduaidColors.green }} />
+                    </div>
+                    <h4 className="text-white text-sm font-medium mb-2">{cat.name}</h4>
+                    <div className="space-y-1">
+                      {cat.examples.slice(0, 2).map((ex) => (
+                        <p key={ex} className="text-white/50 text-xs truncate">{ex}</p>
+                      ))}
+                      <p className="text-xs" style={{ color: eduaidColors.lightGreen }}>
+                        +{cat.examples.length - 2} more
+                      </p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+              <div className="text-center mt-8">
+                <Button 
+                  asChild
+                  variant="outline"
+                  className="text-white hover:bg-white/10"
+                  style={{ borderColor: `${eduaidColors.brown}50` }}
+                >
+                  <Link to="/contact?subject=eduaid-partnership">
+                    <Handshake className="mr-2 h-4 w-4" />
+                    View Full Partner Directory
+                  </Link>
+                </Button>
+              </div>
             </div>
           </div>
         </section>
