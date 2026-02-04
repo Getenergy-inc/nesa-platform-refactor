@@ -1112,6 +1112,44 @@ export type Database = {
         }
         Relationships: []
       }
+      judge_chat_messages: {
+        Row: {
+          created_at: string
+          id: string
+          is_edited: boolean | null
+          message: string
+          reply_to_id: string | null
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          is_edited?: boolean | null
+          message: string
+          reply_to_id?: string | null
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          is_edited?: boolean | null
+          message?: string
+          reply_to_id?: string | null
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "judge_chat_messages_reply_to_id_fkey"
+            columns: ["reply_to_id"]
+            isOneToOne: false
+            referencedRelation: "judge_chat_messages"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       jury_assignments: {
         Row: {
           assigned_at: string | null
