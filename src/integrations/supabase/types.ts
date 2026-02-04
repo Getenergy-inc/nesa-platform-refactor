@@ -847,6 +847,51 @@ export type Database = {
         }
         Relationships: []
       }
+      escalation_logs: {
+        Row: {
+          admin_notes: string | null
+          conversation_history: Json
+          conversation_id: string
+          created_at: string | null
+          escalation_reason: string | null
+          id: string
+          reviewed_at: string | null
+          reviewed_by: string | null
+          status: string | null
+          trigger_keywords: string[]
+          updated_at: string | null
+          user_id: string | null
+        }
+        Insert: {
+          admin_notes?: string | null
+          conversation_history: Json
+          conversation_id: string
+          created_at?: string | null
+          escalation_reason?: string | null
+          id?: string
+          reviewed_at?: string | null
+          reviewed_by?: string | null
+          status?: string | null
+          trigger_keywords: string[]
+          updated_at?: string | null
+          user_id?: string | null
+        }
+        Update: {
+          admin_notes?: string | null
+          conversation_history?: Json
+          conversation_id?: string
+          created_at?: string | null
+          escalation_reason?: string | null
+          id?: string
+          reviewed_at?: string | null
+          reviewed_by?: string | null
+          status?: string | null
+          trigger_keywords?: string[]
+          updated_at?: string | null
+          user_id?: string | null
+        }
+        Relationships: []
+      }
       evidence_bundles: {
         Row: {
           created_at: string | null
@@ -913,30 +958,45 @@ export type Database = {
           answer: string
           category: string | null
           created_at: string | null
+          cta_hint: string | null
           display_order: number | null
+          escalation_flag: boolean | null
           id: string
+          intent_keywords: string[] | null
           is_active: boolean | null
           question: string
+          tags: string[] | null
+          tone: string | null
           updated_at: string | null
         }
         Insert: {
           answer: string
           category?: string | null
           created_at?: string | null
+          cta_hint?: string | null
           display_order?: number | null
+          escalation_flag?: boolean | null
           id?: string
+          intent_keywords?: string[] | null
           is_active?: boolean | null
           question: string
+          tags?: string[] | null
+          tone?: string | null
           updated_at?: string | null
         }
         Update: {
           answer?: string
           category?: string | null
           created_at?: string | null
+          cta_hint?: string | null
           display_order?: number | null
+          escalation_flag?: boolean | null
           id?: string
+          intent_keywords?: string[] | null
           is_active?: boolean | null
           question?: string
+          tags?: string[] | null
+          tone?: string | null
           updated_at?: string | null
         }
         Relationships: []
