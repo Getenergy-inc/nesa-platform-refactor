@@ -48,10 +48,10 @@ const donationAmounts = [
 ];
 
 const impactStats = [
-  { value: "25,000+", label: "Students Supported", icon: GraduationCap },
-  { value: "150+", label: "Partner Schools", icon: School },
-  { value: "35", label: "African Countries", icon: MapPin },
-  { value: "₦500M+", label: "Funds Distributed", icon: HandCoins },
+  { value: "2,500+", label: "Students Supported", icon: GraduationCap },
+  { value: "45+", label: "Partner Schools", icon: School },
+  { value: "12", label: "African Countries", icon: MapPin },
+  { value: "₦85M+", label: "Funds Distributed", icon: HandCoins },
 ];
 
 const programs = [
