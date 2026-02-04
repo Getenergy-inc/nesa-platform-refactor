@@ -28,6 +28,7 @@ import {
   Settings,
   HelpCircle,
   BookOpen,
+  MessageCircle,
 } from "lucide-react";
 
 const ARENA_NAV = [
@@ -37,6 +38,7 @@ const ARENA_NAV = [
       { label: "Dashboard", href: "/judge/dashboard", icon: LayoutDashboard },
       { label: "Scoring Queue", href: "/judge/scoring", icon: Star },
       { label: "COI Declarations", href: "/judge/coi", icon: Shield },
+      { label: "Chat Room", href: "/judge/chat", icon: MessageCircle },
     ],
   },
   {

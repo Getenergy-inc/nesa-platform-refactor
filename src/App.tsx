@@ -59,7 +59,7 @@ import Rebuild from "./pages/Rebuild";
 import Judges from "./pages/Judges";
 
 // Judge Portal Pages
-import { JudgeApply, JudgeStatus, JudgeSignup, JudgeVerify, JudgeDashboard, JudgePortal, JuryScoring, JuryCOI, JudgeRubric, JudgeGuidelines, JudgePanel, JudgeHelp, JudgeSettings } from "./pages/judge";
+import { JudgeApply, JudgeStatus, JudgeSignup, JudgeVerify, JudgeDashboard, JudgePortal, JuryScoring, JuryCOI, JudgeRubric, JudgeGuidelines, JudgePanel, JudgeHelp, JudgeSettings, JudgeChatRoom } from "./pages/judge";
 import { JudgeArenaGuard } from "./components/judge/JudgeArenaGuard";
 import Partners from "./pages/Partners";
 import Chapters from "./pages/Chapters";
@@ -252,6 +252,7 @@ const App = () => (
                 <Route path="/judge/dashboard" element={<JudgeArenaGuard><JudgeDashboard /></JudgeArenaGuard>} />
                 <Route path="/judge/scoring" element={<JudgeArenaGuard><JuryScoring /></JudgeArenaGuard>} />
                 <Route path="/judge/coi" element={<JudgeArenaGuard><JuryCOI /></JudgeArenaGuard>} />
+                <Route path="/judge/chat" element={<JudgeArenaGuard><JudgeChatRoom /></JudgeArenaGuard>} />
                 <Route path="/judge/rubric" element={<JudgeArenaGuard><JudgeRubric /></JudgeArenaGuard>} />
                 <Route path="/judge/guidelines" element={<JudgeArenaGuard><JudgeGuidelines /></JudgeArenaGuard>} />
                 <Route path="/judge/panel" element={<JudgeArenaGuard><JudgePanel /></JudgeArenaGuard>} />
