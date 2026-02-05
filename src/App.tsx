@@ -68,6 +68,7 @@ import Ambassadors from "./pages/Ambassadors";
 import Contact from "./pages/Contact";
 import Vote from "./pages/Vote";
 import VoteWithAGC from "./pages/VoteWithAGC";
+import { GoldVoting, BlueGarnetVoting } from "./pages/vote";
 import AboutAGC from "./pages/AboutAGC";
 import EarnVotingCredits from "./pages/EarnVotingCredits";
 import ClaimVotingCredits from "./pages/ClaimVotingCredits";
@@ -190,6 +191,8 @@ const App = () => (
                 <Route path="/nominees/:slug" element={<WithLayout><NomineeProfile /></WithLayout>} />
                 <Route path="/vote" element={<WithLayout><Vote /></WithLayout>} />
                 <Route path="/vote-with-agc" element={<WithLayout><VoteWithAGC /></WithLayout>} />
+                <Route path="/vote/gold" element={<WithLayout><GoldVoting /></WithLayout>} />
+                <Route path="/vote/blue-garnet" element={<WithLayout><BlueGarnetVoting /></WithLayout>} />
                 <Route path="/about-agc" element={<WithLayout><AboutAGC /></WithLayout>} />
                 <Route path="/earn-voting-credits" element={<WithLayout><EarnVotingCredits /></WithLayout>} />
                 <Route path="/claim-voting-credits" element={<WithLayout><ClaimVotingCredits /></WithLayout>} />
