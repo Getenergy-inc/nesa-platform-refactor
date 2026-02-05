@@ -15,3 +15,4 @@ export { default as JudgePanel } from "./JudgePanel";
 export { default as JudgeHelp } from "./JudgeHelp";
 export { default as JudgeSettings } from "./JudgeSettings";
 export { default as JudgeChatRoom } from "./JudgeChatRoom";
+export { default as JudgeIconLifetime } from "./JudgeIconLifetime";

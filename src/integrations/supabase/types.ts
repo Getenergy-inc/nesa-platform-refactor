@@ -4334,6 +4334,12 @@ export type Database = {
         Returns: boolean
       }
       check_nrc_quorum: { Args: { p_nomination_id: string }; Returns: Json }
+      compute_blue_garnet_results: {
+        Args: { p_season_id: string }
+        Returns: Json
+      }
+      compute_gold_results: { Args: { p_season_id: string }; Returns: Json }
+      detect_vote_fraud: { Args: { p_season_id: string }; Returns: Json }
       ensure_user_wallet: { Args: { _user_id: string }; Returns: string }
       escalate_overdue_nrc_assignments: { Args: never; Returns: number }
       generate_identity_hash: {
@@ -4392,6 +4398,10 @@ export type Database = {
       is_stage_open: {
         Args: { _action: Database["public"]["Enums"]["stage_action"] }
         Returns: boolean
+      }
+      publish_results: {
+        Args: { p_contest_type: string; p_season_id: string }
+        Returns: Json
       }
       record_wallet_transaction: {
         Args: {
