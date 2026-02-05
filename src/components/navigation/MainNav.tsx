@@ -419,34 +419,40 @@ const mobileQuickActions = [
   { icon: LayoutDashboard, label: "Dashboard", href: "/dashboard" },
 ];
 
-export function MobileBottomNav() {
-  const location = useLocation();
-  
-  return (
-    <nav className="fixed bottom-0 left-0 right-0 z-40 lg:hidden bg-charcoal/95 backdrop-blur-md border-t border-gold/20 safe-area-inset-bottom">
-      <div className="flex justify-around items-center py-2 px-1">
-        {mobileQuickActions.map((item) => (
-          <Link
-            key={item.href}
-            to={item.href}
-            className={cn(
-              "flex flex-col items-center justify-center gap-0.5 p-2 rounded-lg transition-all min-w-[60px] min-h-[52px] touch-manipulation active:scale-95",
-              location.pathname === item.href 
-                ? "text-gold bg-gold/10" 
-                : "text-white/60 hover:text-gold hover:bg-gold/5"
-            )}
-          >
-            <item.icon className={cn(
-              "h-5 w-5 transition-transform",
-              location.pathname === item.href && "scale-110"
-            )} />
-            <span className="text-[10px] font-medium leading-tight">{item.label}</span>
-          </Link>
-        ))}
-      </div>
-    </nav>
-  );
-}
+export const MobileBottomNav = forwardRef<HTMLElement, object>(
+  function MobileBottomNav(_, ref) {
+    const location = useLocation();
+    
+    return (
+      <nav 
+        ref={ref}
+        className="fixed bottom-0 left-0 right-0 z-40 lg:hidden bg-charcoal/95 backdrop-blur-md border-t border-gold/20 safe-area-inset-bottom"
+      >
+        <div className="flex justify-around items-center py-2 px-1">
+          {mobileQuickActions.map((item) => (
+            <Link
+              key={item.href}
+              to={item.href}
+              className={cn(
+                "flex flex-col items-center justify-center gap-0.5 p-2 rounded-lg transition-all min-w-[60px] min-h-[52px] touch-manipulation active:scale-95",
+                location.pathname === item.href 
+                  ? "text-gold bg-gold/10" 
+                  : "text-white/60 hover:text-gold hover:bg-gold/5"
+              )}
+            >
+              <item.icon className={cn(
+                "h-5 w-5 transition-transform",
+                location.pathname === item.href && "scale-110"
+              )} />
+              <span className="text-[10px] font-medium leading-tight">{item.label}</span>
+            </Link>
+          ))}
+        </div>
+      </nav>
+    );
+  }
+);
+MobileBottomNav.displayName = "MobileBottomNav";
 
 // ============================================================================
 // MAIN NAVIGATION HEADER
