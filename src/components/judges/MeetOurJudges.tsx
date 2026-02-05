@@ -11,13 +11,14 @@ export interface JudgeProfile {
 }
 
 // Featured judges data - based on actual platform judges
+// Photos are representative placeholders until actual photos are uploaded
 export const FEATURED_JUDGES: JudgeProfile[] = [
   {
     name: "Oluwadaisi Patricia Aderibigbe Santos",
     title: "Educationalist",
     country: "Nigeria",
     expertise: "Education",
-    photo: "https://images.unsplash.com/photo-1531123897727-8f129e1688ce?w=400&h=500&fit=crop&crop=face",
+    photo: "https://images.unsplash.com/photo-1589156280159-27698a70f29e?w=400&h=500&fit=crop&crop=face",
   },
   {
     name: "Damilola O.",
@@ -28,7 +29,7 @@ export const FEATURED_JUDGES: JudgeProfile[] = [
   },
   {
     name: "Benneth Osarieme Ogbeiwi",
-    title: "Head at Adrenaline Entertainment\nFormer Host at MTN Project Fame",
+    title: "Head at Adrenaline Entertainment, Former Host at MTN Project Fame",
     country: "Nigeria",
     expertise: "Philanthropy & Social Impact",
     photo: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=500&fit=crop&crop=face",
@@ -48,17 +49,17 @@ export const FEATURED_JUDGES: JudgeProfile[] = [
     photo: "https://images.unsplash.com/photo-1560250097-0b93528c311a?w=400&h=500&fit=crop&crop=face",
   },
   {
-    name: "Prof. Amina Okonkwo",
-    title: "Vice-Chancellor, University of Lagos",
-    country: "Nigeria",
-    expertise: "Higher Education",
-    photo: "https://images.unsplash.com/photo-1589156280159-27698a70f29e?w=400&h=500&fit=crop&crop=face",
+    name: "Dr. Grace Mbeki",
+    title: "Senior Lecturer, Dar es Salaam University",
+    country: "Tanzania",
+    expertise: "Primary Education",
+    photo: "https://images.unsplash.com/photo-1531123897727-8f129e1688ce?w=400&h=500&fit=crop&crop=face",
   },
   {
-    name: "Dr. Kwame Asante",
-    title: "Director General, Ghana Education Service",
+    name: "Prof. Samuel Owusu",
+    title: "Provost, Ashesi University",
     country: "Ghana",
-    expertise: "Policy & Governance",
+    expertise: "EdTech Innovation",
     photo: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&h=500&fit=crop&crop=face",
   },
   {
