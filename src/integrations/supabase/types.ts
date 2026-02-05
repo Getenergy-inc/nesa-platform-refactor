@@ -650,6 +650,76 @@ export type Database = {
         }
         Relationships: []
       }
+      contests: {
+        Row: {
+          category_id: string | null
+          closes_at: string | null
+          contest_type: Database["public"]["Enums"]["contest_type"]
+          created_at: string | null
+          description: string | null
+          id: string
+          is_active: boolean | null
+          metadata: Json | null
+          name: string
+          opens_at: string | null
+          season_id: string
+          subcategory_id: string | null
+          updated_at: string | null
+        }
+        Insert: {
+          category_id?: string | null
+          closes_at?: string | null
+          contest_type: Database["public"]["Enums"]["contest_type"]
+          created_at?: string | null
+          description?: string | null
+          id?: string
+          is_active?: boolean | null
+          metadata?: Json | null
+          name: string
+          opens_at?: string | null
+          season_id: string
+          subcategory_id?: string | null
+          updated_at?: string | null
+        }
+        Update: {
+          category_id?: string | null
+          closes_at?: string | null
+          contest_type?: Database["public"]["Enums"]["contest_type"]
+          created_at?: string | null
+          description?: string | null
+          id?: string
+          is_active?: boolean | null
+          metadata?: Json | null
+          name?: string
+          opens_at?: string | null
+          season_id?: string
+          subcategory_id?: string | null
+          updated_at?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "contests_category_id_fkey"
+            columns: ["category_id"]
+            isOneToOne: false
+            referencedRelation: "categories"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "contests_season_id_fkey"
+            columns: ["season_id"]
+            isOneToOne: false
+            referencedRelation: "seasons"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "contests_subcategory_id_fkey"
+            columns: ["subcategory_id"]
+            isOneToOne: false
+            referencedRelation: "subcategories"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       disbursement_batches: {
         Row: {
           created_at: string | null
@@ -1060,6 +1130,91 @@ export type Database = {
         }
         Relationships: []
       }
+      fraud_flags: {
+        Row: {
+          admin_notes: string | null
+          created_at: string | null
+          description: string | null
+          device_hash: string | null
+          evidence: Json | null
+          flag_status: string | null
+          flag_type: string
+          id: string
+          ip_hash: string | null
+          nominee_id: string | null
+          resolved_at: string | null
+          resolved_by: string | null
+          season_id: string
+          severity: string
+          time_window_seconds: number | null
+          updated_at: string | null
+          vote_count: number | null
+          voter_id: string | null
+        }
+        Insert: {
+          admin_notes?: string | null
+          created_at?: string | null
+          description?: string | null
+          device_hash?: string | null
+          evidence?: Json | null
+          flag_status?: string | null
+          flag_type: string
+          id?: string
+          ip_hash?: string | null
+          nominee_id?: string | null
+          resolved_at?: string | null
+          resolved_by?: string | null
+          season_id: string
+          severity?: string
+          time_window_seconds?: number | null
+          updated_at?: string | null
+          vote_count?: number | null
+          voter_id?: string | null
+        }
+        Update: {
+          admin_notes?: string | null
+          created_at?: string | null
+          description?: string | null
+          device_hash?: string | null
+          evidence?: Json | null
+          flag_status?: string | null
+          flag_type?: string
+          id?: string
+          ip_hash?: string | null
+          nominee_id?: string | null
+          resolved_at?: string | null
+          resolved_by?: string | null
+          season_id?: string
+          severity?: string
+          time_window_seconds?: number | null
+          updated_at?: string | null
+          vote_count?: number | null
+          voter_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "fraud_flags_nominee_id_fkey"
+            columns: ["nominee_id"]
+            isOneToOne: false
+            referencedRelation: "nominees"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "fraud_flags_nominee_id_fkey"
+            columns: ["nominee_id"]
+            isOneToOne: false
+            referencedRelation: "public_nominees"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "fraud_flags_season_id_fkey"
+            columns: ["season_id"]
+            isOneToOne: false
+            referencedRelation: "seasons"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       fund_accounts: {
         Row: {
           created_at: string | null
@@ -1276,6 +1431,63 @@ export type Database = {
           },
           {
             foreignKeyName: "jury_assignments_season_id_fkey"
+            columns: ["season_id"]
+            isOneToOne: false
+            referencedRelation: "seasons"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      jury_submissions: {
+        Row: {
+          completed_assignments: number | null
+          confirmation_hash: string | null
+          contest_id: string | null
+          created_at: string | null
+          id: string
+          is_locked: boolean | null
+          judge_user_id: string
+          recused_assignments: number | null
+          season_id: string
+          submitted_at: string | null
+          total_assignments: number | null
+        }
+        Insert: {
+          completed_assignments?: number | null
+          confirmation_hash?: string | null
+          contest_id?: string | null
+          created_at?: string | null
+          id?: string
+          is_locked?: boolean | null
+          judge_user_id: string
+          recused_assignments?: number | null
+          season_id: string
+          submitted_at?: string | null
+          total_assignments?: number | null
+        }
+        Update: {
+          completed_assignments?: number | null
+          confirmation_hash?: string | null
+          contest_id?: string | null
+          created_at?: string | null
+          id?: string
+          is_locked?: boolean | null
+          judge_user_id?: string
+          recused_assignments?: number | null
+          season_id?: string
+          submitted_at?: string | null
+          total_assignments?: number | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "jury_submissions_contest_id_fkey"
+            columns: ["contest_id"]
+            isOneToOne: false
+            referencedRelation: "contests"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "jury_submissions_season_id_fkey"
             columns: ["season_id"]
             isOneToOne: false
             referencedRelation: "seasons"
@@ -2851,7 +3063,11 @@ export type Database = {
       results: {
         Row: {
           category_id: string
+          computation_id: string | null
+          computation_inputs: Json | null
+          computation_log: string | null
           computed_at: string | null
+          contest_id: string | null
           created_at: string | null
           final_score: number | null
           id: string
@@ -2860,15 +3076,24 @@ export type Database = {
           nominee_id: string
           public_score: number | null
           public_votes: number | null
+          published_at: string | null
+          published_by: string | null
           rank: number | null
+          result_status: string | null
           season_id: string
           subcategory_id: string | null
           tier: string | null
           updated_at: string | null
+          verified_at: string | null
+          verified_by: string | null
         }
         Insert: {
           category_id: string
+          computation_id?: string | null
+          computation_inputs?: Json | null
+          computation_log?: string | null
           computed_at?: string | null
+          contest_id?: string | null
           created_at?: string | null
           final_score?: number | null
           id?: string
@@ -2877,15 +3102,24 @@ export type Database = {
           nominee_id: string
           public_score?: number | null
           public_votes?: number | null
+          published_at?: string | null
+          published_by?: string | null
           rank?: number | null
+          result_status?: string | null
           season_id: string
           subcategory_id?: string | null
           tier?: string | null
           updated_at?: string | null
+          verified_at?: string | null
+          verified_by?: string | null
         }
         Update: {
           category_id?: string
+          computation_id?: string | null
+          computation_inputs?: Json | null
+          computation_log?: string | null
           computed_at?: string | null
+          contest_id?: string | null
           created_at?: string | null
           final_score?: number | null
           id?: string
@@ -2894,11 +3128,16 @@ export type Database = {
           nominee_id?: string
           public_score?: number | null
           public_votes?: number | null
+          published_at?: string | null
+          published_by?: string | null
           rank?: number | null
+          result_status?: string | null
           season_id?: string
           subcategory_id?: string | null
           tier?: string | null
           updated_at?: string | null
+          verified_at?: string | null
+          verified_by?: string | null
         }
         Relationships: [
           {
@@ -2906,6 +3145,13 @@ export type Database = {
             columns: ["category_id"]
             isOneToOne: false
             referencedRelation: "categories"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "results_contest_id_fkey"
+            columns: ["contest_id"]
+            isOneToOne: false
+            referencedRelation: "contests"
             referencedColumns: ["id"]
           },
           {
@@ -3596,38 +3842,121 @@ export type Database = {
           },
         ]
       }
+      vote_rejections: {
+        Row: {
+          contest_id: string | null
+          created_at: string | null
+          device_hash: string | null
+          id: string
+          ip_hash: string | null
+          metadata: Json | null
+          nominee_id: string | null
+          rejection_reason: Database["public"]["Enums"]["vote_rejection_reason"]
+          season_id: string | null
+          voter_id: string | null
+        }
+        Insert: {
+          contest_id?: string | null
+          created_at?: string | null
+          device_hash?: string | null
+          id?: string
+          ip_hash?: string | null
+          metadata?: Json | null
+          nominee_id?: string | null
+          rejection_reason: Database["public"]["Enums"]["vote_rejection_reason"]
+          season_id?: string | null
+          voter_id?: string | null
+        }
+        Update: {
+          contest_id?: string | null
+          created_at?: string | null
+          device_hash?: string | null
+          id?: string
+          ip_hash?: string | null
+          metadata?: Json | null
+          nominee_id?: string | null
+          rejection_reason?: Database["public"]["Enums"]["vote_rejection_reason"]
+          season_id?: string | null
+          voter_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "vote_rejections_contest_id_fkey"
+            columns: ["contest_id"]
+            isOneToOne: false
+            referencedRelation: "contests"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "vote_rejections_season_id_fkey"
+            columns: ["season_id"]
+            isOneToOne: false
+            referencedRelation: "seasons"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       votes: {
         Row: {
+          category_id: string | null
           comment: string | null
+          contest_id: string | null
           created_at: string | null
+          device_hash: string | null
           id: string
+          ip_hash: string | null
           nominee_id: string
           score: number | null
           season_id: string
+          subcategory_id: string | null
           vote_type: Database["public"]["Enums"]["vote_type"]
           voter_id: string
         }
         Insert: {
+          category_id?: string | null
           comment?: string | null
+          contest_id?: string | null
           created_at?: string | null
+          device_hash?: string | null
           id?: string
+          ip_hash?: string | null
           nominee_id: string
           score?: number | null
           season_id: string
+          subcategory_id?: string | null
           vote_type: Database["public"]["Enums"]["vote_type"]
           voter_id: string
         }
         Update: {
+          category_id?: string | null
           comment?: string | null
+          contest_id?: string | null
           created_at?: string | null
+          device_hash?: string | null
           id?: string
+          ip_hash?: string | null
           nominee_id?: string
           score?: number | null
           season_id?: string
+          subcategory_id?: string | null
           vote_type?: Database["public"]["Enums"]["vote_type"]
           voter_id?: string
         }
         Relationships: [
+          {
+            foreignKeyName: "votes_category_id_fkey"
+            columns: ["category_id"]
+            isOneToOne: false
+            referencedRelation: "categories"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "votes_contest_id_fkey"
+            columns: ["contest_id"]
+            isOneToOne: false
+            referencedRelation: "contests"
+            referencedColumns: ["id"]
+          },
           {
             foreignKeyName: "votes_nominee_id_fkey"
             columns: ["nominee_id"]
@@ -3647,6 +3976,13 @@ export type Database = {
             columns: ["season_id"]
             isOneToOne: false
             referencedRelation: "seasons"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "votes_subcategory_id_fkey"
+            columns: ["subcategory_id"]
+            isOneToOne: false
+            referencedRelation: "subcategories"
             referencedColumns: ["id"]
           },
         ]
@@ -4118,6 +4454,11 @@ export type Database = {
       app_role: "user" | "nrc" | "jury" | "chapter" | "sponsor" | "admin"
       certificate_status: "ACTIVE" | "EXPIRED" | "REVOKED" | "RENEWED"
       certificate_tier: "gold" | "platinum" | "blue_garnet" | "icon"
+      contest_type:
+        | "GOLD_PUBLIC"
+        | "BLUE_PUBLIC"
+        | "BLUE_JUDGES"
+        | "ICON_LIFETIME_JUDGES"
       disbursement_status: "DRAFT" | "COMPLETED" | "FAILED"
       impact_destination:
         | "REBUILD_MY_SCHOOL"
@@ -4198,6 +4539,14 @@ export type Database = {
         | "SENT"
         | "CONFIRMED"
         | "FAILED"
+      vote_rejection_reason:
+        | "DUPLICATE_VOTE"
+        | "STAGE_CLOSED"
+        | "NOT_VERIFIED"
+        | "NOT_ELIGIBLE"
+        | "INSUFFICIENT_BALANCE"
+        | "COI_CONFLICT"
+        | "RATE_LIMITED"
       vote_type: "public" | "jury"
       wallet_direction: "CREDIT" | "DEBIT"
       wallet_entry_type:
@@ -4373,6 +4722,12 @@ export const Constants = {
       app_role: ["user", "nrc", "jury", "chapter", "sponsor", "admin"],
       certificate_status: ["ACTIVE", "EXPIRED", "REVOKED", "RENEWED"],
       certificate_tier: ["gold", "platinum", "blue_garnet", "icon"],
+      contest_type: [
+        "GOLD_PUBLIC",
+        "BLUE_PUBLIC",
+        "BLUE_JUDGES",
+        "ICON_LIFETIME_JUDGES",
+      ],
       disbursement_status: ["DRAFT", "COMPLETED", "FAILED"],
       impact_destination: [
         "REBUILD_MY_SCHOOL",
@@ -4462,6 +4817,15 @@ export const Constants = {
         "SENT",
         "CONFIRMED",
         "FAILED",
+      ],
+      vote_rejection_reason: [
+        "DUPLICATE_VOTE",
+        "STAGE_CLOSED",
+        "NOT_VERIFIED",
+        "NOT_ELIGIBLE",
+        "INSUFFICIENT_BALANCE",
+        "COI_CONFLICT",
+        "RATE_LIMITED",
       ],
       vote_type: ["public", "jury"],
       wallet_direction: ["CREDIT", "DEBIT"],
