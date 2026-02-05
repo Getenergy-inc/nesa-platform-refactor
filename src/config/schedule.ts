@@ -86,6 +86,13 @@ export function formatSingleDate(
 // Schedule template - dates relative to award year
 // This defines WHEN events happen relative to the NESA year
 export interface ScheduleTemplate {
+  nominationReview: {
+    nrcReviewStart: { monthDay: string; yearOffset: 0 | 1 };
+    nrcReviewEnd: { monthDay: string; yearOffset: 0 | 1 };
+    jurySelectionStart: { monthDay: string; yearOffset: 0 | 1 };
+    jurySelectionEnd: { monthDay: string; yearOffset: 0 | 1 };
+    juryOnboarding: { monthDay: string; yearOffset: 0 | 1 };
+  };
   tvShows: {
     platinumRecognition: { monthDay: string; yearOffset: 0 | 1 };
     africaIconRecognition: { monthDay: string; yearOffset: 0 | 1 };
@@ -115,6 +122,13 @@ export interface ScheduleTemplate {
 
 // Default schedule template - NESA 2025 pattern (ceremony in 2026)
 export const DEFAULT_SCHEDULE_TEMPLATE: ScheduleTemplate = {
+  nominationReview: {
+    nrcReviewStart: { monthDay: "02-01", yearOffset: 1 },
+    nrcReviewEnd: { monthDay: "03-31", yearOffset: 1 },
+    jurySelectionStart: { monthDay: "02-01", yearOffset: 1 },
+    jurySelectionEnd: { monthDay: "03-31", yearOffset: 1 },
+    juryOnboarding: { monthDay: "04-01", yearOffset: 1 },
+  },
   tvShows: {
     platinumRecognition: { monthDay: "02-28", yearOffset: 1 },
     africaIconRecognition: { monthDay: "03-28", yearOffset: 1 },
@@ -231,6 +245,20 @@ export function buildTimeline(
       isActive: true,
     },
     {
+      id: "nrc-review",
+      phase: "NRC Nominee Review",
+      dateRange: `1 Feb – 31 Mar ${ceremonyYear}`,
+      description: "Nominee Research Corps verifies all nominations for eligibility and governance compliance",
+      type: "recognition",
+    },
+    {
+      id: "jury-selection",
+      phase: "Jury Selection & Onboarding",
+      dateRange: `Feb – Apr ${ceremonyYear}`,
+      description: "Applications reviewed, jury members selected and onboarded for scoring duties",
+      type: "recognition",
+    },
+    {
       id: "platinum-show",
       phase: "Platinum Recognition Show",
       dateRange: `28 February ${ceremonyYear}`,
@@ -285,7 +313,7 @@ export function buildTimeline(
       id: "rmsa-legacy",
       phase: "Rebuild My School Africa",
       dateRange: `Jun ${ceremonyYear} – Jun ${ceremonyYear + 1}`,
-      description: "Legacy phase: 5 Special Needs facilities across Africa's regions",
+      description: "Legacy phase: 5 Special Needs facilities across African regions",
       type: "legacy",
     },
   ];
