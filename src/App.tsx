@@ -59,7 +59,8 @@ import Rebuild from "./pages/Rebuild";
 import Judges from "./pages/Judges";
 
 // Judge Portal Pages
-import { JudgeApply, JudgeStatus, JudgeSignup, JudgeVerify, JudgeDashboard, JudgePortal, JuryScoring, JuryCOI, JudgeRubric, JudgeGuidelines, JudgePanel, JudgeHelp, JudgeSettings, JudgeChatRoom } from "./pages/judge";
+import { JudgeApply, JudgeStatus, JudgeSignup, JudgeVerify, JudgeDashboard, JudgePortal, JuryScoring, JuryCOI, JudgeRubric, JudgeGuidelines, JudgePanel, JudgeHelp, JudgeSettings, JudgeChatRoom, JudgeIconLifetime } from "./pages/judge";
+import { JudgeArenaGuard } from "./components/judge/JudgeArenaGuard";
 import { JudgeArenaGuard } from "./components/judge/JudgeArenaGuard";
 import Partners from "./pages/Partners";
 import Chapters from "./pages/Chapters";
@@ -87,7 +88,7 @@ import { OLCDashboard, OLCMembers, OLCSettlements, OLCWallet } from "./pages/olc
 import { NRCPortal, NRCMyQueue, NRCMembers as NRCMembersPage, NRCSettings } from "./pages/nrc";
 
 // Admin Pages
-import { AdminDashboard, AdminOrders, AdminImpact, AdminNomineeImages, AdminNomineeProfiles } from "./pages/admin";
+import { AdminDashboard, AdminOrders, AdminImpact, AdminNomineeImages, AdminNomineeProfiles, AdminVotingGovernance } from "./pages/admin";
 
 // Optimized QueryClient with caching strategy
 const queryClient = new QueryClient({
@@ -229,6 +230,7 @@ const App = () => (
                 <Route path="/admin/impact" element={<AdminImpact />} />
                 <Route path="/admin/nominee-images" element={<AdminNomineeImages />} />
                 <Route path="/admin/nominee-profiles" element={<AdminNomineeProfiles />} />
+                <Route path="/admin/voting" element={<AdminVotingGovernance />} />
                 
                 {/* Support */}
                 <Route path="/donate" element={<WithLayout><Donate /></WithLayout>} />
@@ -261,6 +263,7 @@ const App = () => (
                 <Route path="/judge/panel" element={<JudgeArenaGuard><JudgePanel /></JudgeArenaGuard>} />
                 <Route path="/judge/help" element={<JudgeArenaGuard><JudgeHelp /></JudgeArenaGuard>} />
                 <Route path="/judge/settings" element={<JudgeArenaGuard><JudgeSettings /></JudgeArenaGuard>} />
+                <Route path="/judge/icon-lifetime" element={<JudgeArenaGuard><JudgeIconLifetime /></JudgeArenaGuard>} />
                 <Route path="/partners" element={<WithLayout><Partners /></WithLayout>} />
                 <Route path="/chapters" element={<WithLayout><Chapters /></WithLayout>} />
                 <Route path="/volunteer" element={<WithLayout><Volunteer /></WithLayout>} />
