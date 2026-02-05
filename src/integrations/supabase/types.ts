@@ -71,6 +71,65 @@ export type Database = {
           },
         ]
       }
+      ai_nrc_assessments: {
+        Row: {
+          category_fit_score: number | null
+          created_at: string | null
+          evidence_score: number | null
+          explanation_summary: string | null
+          id: string
+          identity_verified: boolean | null
+          model_version: string | null
+          nomination_id: string
+          processing_time_ms: number | null
+          reason_codes: Json | null
+          recommendation: string
+          risk_score: number | null
+          rubric_version: string | null
+          updated_at: string | null
+        }
+        Insert: {
+          category_fit_score?: number | null
+          created_at?: string | null
+          evidence_score?: number | null
+          explanation_summary?: string | null
+          id?: string
+          identity_verified?: boolean | null
+          model_version?: string | null
+          nomination_id: string
+          processing_time_ms?: number | null
+          reason_codes?: Json | null
+          recommendation: string
+          risk_score?: number | null
+          rubric_version?: string | null
+          updated_at?: string | null
+        }
+        Update: {
+          category_fit_score?: number | null
+          created_at?: string | null
+          evidence_score?: number | null
+          explanation_summary?: string | null
+          id?: string
+          identity_verified?: boolean | null
+          model_version?: string | null
+          nomination_id?: string
+          processing_time_ms?: number | null
+          reason_codes?: Json | null
+          recommendation?: string
+          risk_score?: number | null
+          rubric_version?: string | null
+          updated_at?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "ai_nrc_assessments_nomination_id_fkey"
+            columns: ["nomination_id"]
+            isOneToOne: false
+            referencedRelation: "nominations"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       audit_events: {
         Row: {
           action: string
@@ -1353,6 +1412,7 @@ export type Database = {
           id: string
           identity_hash: string | null
           justification: string | null
+          last_query_at: string | null
           nominator_id: string
           nominee_bio: string | null
           nominee_name: string
@@ -1360,13 +1420,17 @@ export type Database = {
           nominee_photo_url: string | null
           nominee_title: string | null
           nrc_reviewer_id: string | null
+          query_count: number | null
           review_notes: string | null
           reviewed_at: string | null
+          rubric_version: string | null
           season_id: string
+          sla_deadline: string | null
           source: Database["public"]["Enums"]["nomination_source"] | null
           status: Database["public"]["Enums"]["nomination_status"] | null
           subcategory_id: string
           updated_at: string | null
+          workflow_status: string | null
         }
         Insert: {
           created_at?: string | null
@@ -1375,6 +1439,7 @@ export type Database = {
           id?: string
           identity_hash?: string | null
           justification?: string | null
+          last_query_at?: string | null
           nominator_id: string
           nominee_bio?: string | null
           nominee_name: string
@@ -1382,13 +1447,17 @@ export type Database = {
           nominee_photo_url?: string | null
           nominee_title?: string | null
           nrc_reviewer_id?: string | null
+          query_count?: number | null
           review_notes?: string | null
           reviewed_at?: string | null
+          rubric_version?: string | null
           season_id: string
+          sla_deadline?: string | null
           source?: Database["public"]["Enums"]["nomination_source"] | null
           status?: Database["public"]["Enums"]["nomination_status"] | null
           subcategory_id: string
           updated_at?: string | null
+          workflow_status?: string | null
         }
         Update: {
           created_at?: string | null
@@ -1397,6 +1466,7 @@ export type Database = {
           id?: string
           identity_hash?: string | null
           justification?: string | null
+          last_query_at?: string | null
           nominator_id?: string
           nominee_bio?: string | null
           nominee_name?: string
@@ -1404,13 +1474,17 @@ export type Database = {
           nominee_photo_url?: string | null
           nominee_title?: string | null
           nrc_reviewer_id?: string | null
+          query_count?: number | null
           review_notes?: string | null
           reviewed_at?: string | null
+          rubric_version?: string | null
           season_id?: string
+          sla_deadline?: string | null
           source?: Database["public"]["Enums"]["nomination_source"] | null
           status?: Database["public"]["Enums"]["nomination_status"] | null
           subcategory_id?: string
           updated_at?: string | null
+          workflow_status?: string | null
         }
         Relationships: [
           {
@@ -1716,6 +1790,104 @@ export type Database = {
         }
         Relationships: []
       }
+      nrc_assignment_rules: {
+        Row: {
+          config: Json | null
+          created_at: string | null
+          escalation_hours: number | null
+          id: string
+          is_active: boolean | null
+          max_reviewers: number | null
+          min_reviewers: number | null
+          rule_name: string
+          rule_type: string
+          sla_hours: number | null
+          updated_at: string | null
+        }
+        Insert: {
+          config?: Json | null
+          created_at?: string | null
+          escalation_hours?: number | null
+          id?: string
+          is_active?: boolean | null
+          max_reviewers?: number | null
+          min_reviewers?: number | null
+          rule_name: string
+          rule_type: string
+          sla_hours?: number | null
+          updated_at?: string | null
+        }
+        Update: {
+          config?: Json | null
+          created_at?: string | null
+          escalation_hours?: number | null
+          id?: string
+          is_active?: boolean | null
+          max_reviewers?: number | null
+          min_reviewers?: number | null
+          rule_name?: string
+          rule_type?: string
+          sla_hours?: number | null
+          updated_at?: string | null
+        }
+        Relationships: []
+      }
+      nrc_evidence_queries: {
+        Row: {
+          created_at: string | null
+          due_date: string | null
+          id: string
+          nomination_id: string
+          query_text: string
+          query_type: string
+          required_evidence_types: string[] | null
+          resolved_at: string | null
+          responded_at: string | null
+          response_evidence_urls: string[] | null
+          response_text: string | null
+          reviewer_user_id: string
+          status: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          due_date?: string | null
+          id?: string
+          nomination_id: string
+          query_text: string
+          query_type: string
+          required_evidence_types?: string[] | null
+          resolved_at?: string | null
+          responded_at?: string | null
+          response_evidence_urls?: string[] | null
+          response_text?: string | null
+          reviewer_user_id: string
+          status?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          due_date?: string | null
+          id?: string
+          nomination_id?: string
+          query_text?: string
+          query_type?: string
+          required_evidence_types?: string[] | null
+          resolved_at?: string | null
+          responded_at?: string | null
+          response_evidence_urls?: string[] | null
+          response_text?: string | null
+          reviewer_user_id?: string
+          status?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "nrc_evidence_queries_nomination_id_fkey"
+            columns: ["nomination_id"]
+            isOneToOne: false
+            referencedRelation: "nominations"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       nrc_invitations: {
         Row: {
           accepted_at: string | null
@@ -1753,45 +1925,69 @@ export type Database = {
         Row: {
           approval_rate: number | null
           assigned_region: string | null
+          avg_review_time_hours: number | null
+          category_checks: number | null
           created_at: string | null
+          current_assignments: number | null
+          evidence_checks: number | null
           id: string
+          identity_checks: number | null
           invited_by: string | null
+          is_available: boolean | null
           joined_at: string | null
           last_active_at: string | null
           max_queue_size: number | null
+          nrc_role: string | null
           review_count: number | null
           specialization: string[] | null
           status: string
+          total_reviews: number | null
           updated_at: string | null
           user_id: string
         }
         Insert: {
           approval_rate?: number | null
           assigned_region?: string | null
+          avg_review_time_hours?: number | null
+          category_checks?: number | null
           created_at?: string | null
+          current_assignments?: number | null
+          evidence_checks?: number | null
           id?: string
+          identity_checks?: number | null
           invited_by?: string | null
+          is_available?: boolean | null
           joined_at?: string | null
           last_active_at?: string | null
           max_queue_size?: number | null
+          nrc_role?: string | null
           review_count?: number | null
           specialization?: string[] | null
           status?: string
+          total_reviews?: number | null
           updated_at?: string | null
           user_id: string
         }
         Update: {
           approval_rate?: number | null
           assigned_region?: string | null
+          avg_review_time_hours?: number | null
+          category_checks?: number | null
           created_at?: string | null
+          current_assignments?: number | null
+          evidence_checks?: number | null
           id?: string
+          identity_checks?: number | null
           invited_by?: string | null
+          is_available?: boolean | null
           joined_at?: string | null
           last_active_at?: string | null
           max_queue_size?: number | null
+          nrc_role?: string | null
           review_count?: number | null
           specialization?: string[] | null
           status?: string
+          total_reviews?: number | null
           updated_at?: string | null
           user_id?: string
         }
@@ -1846,6 +2042,182 @@ export type Database = {
             columns: ["nomination_id"]
             isOneToOne: true
             referencedRelation: "nominations"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      nrc_reviews: {
+        Row: {
+          category_fit: boolean | null
+          completed_at: string | null
+          created_at: string | null
+          decision: string
+          duplication_status: string | null
+          evidence_authenticity: string | null
+          evidence_sufficiency: number | null
+          id: string
+          identity_match: boolean | null
+          nomination_id: string
+          review_type: string
+          reviewer_notes: string | null
+          reviewer_user_id: string
+          started_at: string | null
+          suggested_category_id: string | null
+          suggested_subcategory_id: string | null
+          timeframe_fit: boolean | null
+        }
+        Insert: {
+          category_fit?: boolean | null
+          completed_at?: string | null
+          created_at?: string | null
+          decision: string
+          duplication_status?: string | null
+          evidence_authenticity?: string | null
+          evidence_sufficiency?: number | null
+          id?: string
+          identity_match?: boolean | null
+          nomination_id: string
+          review_type: string
+          reviewer_notes?: string | null
+          reviewer_user_id: string
+          started_at?: string | null
+          suggested_category_id?: string | null
+          suggested_subcategory_id?: string | null
+          timeframe_fit?: boolean | null
+        }
+        Update: {
+          category_fit?: boolean | null
+          completed_at?: string | null
+          created_at?: string | null
+          decision?: string
+          duplication_status?: string | null
+          evidence_authenticity?: string | null
+          evidence_sufficiency?: number | null
+          id?: string
+          identity_match?: boolean | null
+          nomination_id?: string
+          review_type?: string
+          reviewer_notes?: string | null
+          reviewer_user_id?: string
+          started_at?: string | null
+          suggested_category_id?: string | null
+          suggested_subcategory_id?: string | null
+          timeframe_fit?: boolean | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "nrc_reviews_nomination_id_fkey"
+            columns: ["nomination_id"]
+            isOneToOne: false
+            referencedRelation: "nominations"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "nrc_reviews_suggested_category_id_fkey"
+            columns: ["suggested_category_id"]
+            isOneToOne: false
+            referencedRelation: "categories"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "nrc_reviews_suggested_subcategory_id_fkey"
+            columns: ["suggested_subcategory_id"]
+            isOneToOne: false
+            referencedRelation: "subcategories"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      nrc_verification_summaries: {
+        Row: {
+          ai_evidence_score: number | null
+          ai_recommendation: string | null
+          approve_count: number | null
+          category_verified: boolean | null
+          created_at: string | null
+          decision_at: string | null
+          evidence_verified: boolean | null
+          final_decision: string
+          id: string
+          identity_verified: boolean | null
+          lead_reviewer_id: string | null
+          nomination_id: string
+          nominee_id: string | null
+          primary_reviewer_id: string | null
+          reject_count: number | null
+          review_count: number | null
+          risk_cleared: boolean | null
+          secondary_reviewer_id: string | null
+          summary_generated_at: string | null
+          summary_pdf_url: string | null
+          updated_at: string | null
+        }
+        Insert: {
+          ai_evidence_score?: number | null
+          ai_recommendation?: string | null
+          approve_count?: number | null
+          category_verified?: boolean | null
+          created_at?: string | null
+          decision_at?: string | null
+          evidence_verified?: boolean | null
+          final_decision: string
+          id?: string
+          identity_verified?: boolean | null
+          lead_reviewer_id?: string | null
+          nomination_id: string
+          nominee_id?: string | null
+          primary_reviewer_id?: string | null
+          reject_count?: number | null
+          review_count?: number | null
+          risk_cleared?: boolean | null
+          secondary_reviewer_id?: string | null
+          summary_generated_at?: string | null
+          summary_pdf_url?: string | null
+          updated_at?: string | null
+        }
+        Update: {
+          ai_evidence_score?: number | null
+          ai_recommendation?: string | null
+          approve_count?: number | null
+          category_verified?: boolean | null
+          created_at?: string | null
+          decision_at?: string | null
+          evidence_verified?: boolean | null
+          final_decision?: string
+          id?: string
+          identity_verified?: boolean | null
+          lead_reviewer_id?: string | null
+          nomination_id?: string
+          nominee_id?: string | null
+          primary_reviewer_id?: string | null
+          reject_count?: number | null
+          review_count?: number | null
+          risk_cleared?: boolean | null
+          secondary_reviewer_id?: string | null
+          summary_generated_at?: string | null
+          summary_pdf_url?: string | null
+          updated_at?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "nrc_verification_summaries_nomination_id_fkey"
+            columns: ["nomination_id"]
+            isOneToOne: true
+            referencedRelation: "nominations"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "nrc_verification_summaries_nominee_id_fkey"
+            columns: ["nominee_id"]
+            isOneToOne: false
+            referencedRelation: "nominees"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "nrc_verification_summaries_nominee_id_fkey"
+            columns: ["nominee_id"]
+            isOneToOne: false
+            referencedRelation: "public_nominees"
             referencedColumns: ["id"]
           },
         ]
@@ -3613,6 +3985,10 @@ export type Database = {
       }
     }
     Functions: {
+      assign_nrc_reviewers: {
+        Args: { p_nomination_id: string; p_num_reviewers?: number }
+        Returns: Json
+      }
       auto_assign_nrc_nomination: {
         Args: { p_nomination_id: string }
         Returns: string
@@ -3621,7 +3997,9 @@ export type Database = {
         Args: { p_nominee_id: string }
         Returns: boolean
       }
+      check_nrc_quorum: { Args: { p_nomination_id: string }; Returns: Json }
       ensure_user_wallet: { Args: { _user_id: string }; Returns: string }
+      escalate_overdue_nrc_assignments: { Args: never; Returns: number }
       generate_identity_hash: {
         Args: {
           p_country?: string
@@ -3732,6 +4110,11 @@ export type Database = {
         | "ADMIN_BONUS"
         | "PURCHASE_BONUS"
         | "WELCOME_CREDITS"
+      ai_recommendation:
+        | "RECOMMEND_ELIGIBLE"
+        | "RECOMMEND_INELIGIBLE"
+        | "NEEDS_MORE_EVIDENCE"
+        | "FLAG_FOR_RISK_REVIEW"
       app_role: "user" | "nrc" | "jury" | "chapter" | "sponsor" | "admin"
       certificate_status: "ACTIVE" | "EXPIRED" | "REVOKED" | "RENEWED"
       certificate_tier: "gold" | "platinum" | "blue_garnet" | "icon"
@@ -3755,6 +4138,24 @@ export type Database = {
         | "rejected"
         | "platinum"
       notification_status: "PENDING" | "SENT" | "FAILED" | "READ"
+      nrc_review_decision:
+        | "APPROVE"
+        | "REJECT"
+        | "REQUEST_MORE_EVIDENCE"
+        | "RECLASSIFY"
+        | "ESCALATE"
+      nrc_reviewer_role: "nrc_reviewer" | "nrc_lead" | "nrc_auditor"
+      nrc_workflow_status:
+        | "DRAFT"
+        | "SUBMITTED_PENDING_ACCEPTANCE"
+        | "DECLINED"
+        | "ACCEPTED_PENDING_NRC"
+        | "NRC_ASSIGNED"
+        | "NRC_IN_REVIEW"
+        | "NRC_QUERY_SENT"
+        | "VERIFIED_BY_NRC"
+        | "REJECTED_BY_NRC"
+        | "PUBLISHED_FOR_VOTING"
       order_status: "PENDING" | "PAID" | "FAILED" | "REFUNDED" | "FULFILLED"
       payment_provider: "PAYSTACK" | "FLUTTERWAVE" | "LEMFI" | "TAPTAPSEND"
       payment_status:
@@ -3963,6 +4364,12 @@ export const Constants = {
         "PURCHASE_BONUS",
         "WELCOME_CREDITS",
       ],
+      ai_recommendation: [
+        "RECOMMEND_ELIGIBLE",
+        "RECOMMEND_INELIGIBLE",
+        "NEEDS_MORE_EVIDENCE",
+        "FLAG_FOR_RISK_REVIEW",
+      ],
       app_role: ["user", "nrc", "jury", "chapter", "sponsor", "admin"],
       certificate_status: ["ACTIVE", "EXPIRED", "REVOKED", "RENEWED"],
       certificate_tier: ["gold", "platinum", "blue_garnet", "icon"],
@@ -3989,6 +4396,26 @@ export const Constants = {
         "platinum",
       ],
       notification_status: ["PENDING", "SENT", "FAILED", "READ"],
+      nrc_review_decision: [
+        "APPROVE",
+        "REJECT",
+        "REQUEST_MORE_EVIDENCE",
+        "RECLASSIFY",
+        "ESCALATE",
+      ],
+      nrc_reviewer_role: ["nrc_reviewer", "nrc_lead", "nrc_auditor"],
+      nrc_workflow_status: [
+        "DRAFT",
+        "SUBMITTED_PENDING_ACCEPTANCE",
+        "DECLINED",
+        "ACCEPTED_PENDING_NRC",
+        "NRC_ASSIGNED",
+        "NRC_IN_REVIEW",
+        "NRC_QUERY_SENT",
+        "VERIFIED_BY_NRC",
+        "REJECTED_BY_NRC",
+        "PUBLISHED_FOR_VOTING",
+      ],
       order_status: ["PENDING", "PAID", "FAILED", "REFUNDED", "FULFILLED"],
       payment_provider: ["PAYSTACK", "FLUTTERWAVE", "LEMFI", "TAPTAPSEND"],
       payment_status: [
