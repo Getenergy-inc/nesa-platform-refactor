@@ -18,6 +18,7 @@ import {
   Trophy,
   Users,
 } from "lucide-react";
+import { MeetOurJudgesSection } from "@/components/judges/MeetOurJudges";
 
 const requirements = [
   { icon: GraduationCap, title: "Academic Excellence", description: "Minimum of PhD or equivalent professional experience in education or related field." },
@@ -134,8 +135,11 @@ export default function Judges() {
           </div>
         </section>
 
+        {/* Meet Our Judges */}
+        <MeetOurJudgesSection />
+
         {/* Requirements */}
-        <section className="bg-charcoal py-16 lg:py-24">
+        <section className="bg-charcoal/95 py-16 lg:py-24">
           <div className="container mx-auto px-4">
             <h2 className="mb-12 text-center font-display text-3xl font-bold text-white">
               Eligibility Requirements
