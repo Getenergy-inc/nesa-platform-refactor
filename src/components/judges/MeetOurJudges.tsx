@@ -2,72 +2,72 @@ import { motion } from "framer-motion";
 import { Badge } from "@/components/ui/badge";
 import { MapPin } from "lucide-react";
 
+// Import actual judge photos
+import judge1 from "@/assets/judges/judge1.png";
+import judge6 from "@/assets/judges/judge6.png";
+import judge7 from "@/assets/judges/judge7.png";
+import judge8 from "@/assets/judges/judge8.png";
+import judge9 from "@/assets/judges/judge9.png";
+import judge10 from "@/assets/judges/judge10.png";
+
 export interface JudgeProfile {
   name: string;
   title: string;
   country: string;
   expertise: string;
   photo: string;
+  bio: string;
 }
 
-// Featured judges data - based on actual platform judges
-// Photos are representative placeholders until actual photos are uploaded
+// Actual NESA-Africa judges from the official website
 export const FEATURED_JUDGES: JudgeProfile[] = [
   {
-    name: "Oluwadaisi Patricia Aderibigbe Santos",
-    title: "Educationalist",
-    country: "Nigeria",
-    expertise: "Education",
-    photo: "https://images.unsplash.com/photo-1589156280159-27698a70f29e?w=400&h=500&fit=crop&crop=face",
-  },
-  {
-    name: "Damilola O.",
-    title: "QHSSE Manager",
-    country: "Nigeria",
-    expertise: "Quality & Safety",
-    photo: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400&h=500&fit=crop&crop=face",
-  },
-  {
-    name: "Benneth Osarieme Ogbeiwi",
+    name: "Mr Benneth Osarieme Ogbeiwi",
     title: "Head at Adrenaline Entertainment, Former Host at MTN Project Fame",
     country: "Nigeria",
-    expertise: "Philanthropy & Social Impact",
-    photo: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=500&fit=crop&crop=face",
+    expertise: "Music & Arts Education",
+    photo: judge1,
+    bio: "A highly motivated individual with over two decades of experience sharing knowledge in music & the arts. His doggedness makes it impossible for individuals to deviate from the cause.",
+  },
+  {
+    name: "Damilola Omotosho",
+    title: "HSEQ Implementation & ESG Consultant",
+    country: "Nigeria",
+    expertise: "Quality & Safety",
+    photo: judge7,
+    bio: "Sustainability advocate and Cambridge-certified professional influencing energy transition literacy and corporate ESG frameworks in Africa.",
   },
   {
     name: "Dr Juliet Ihiabe",
-    title: "Executive Director of Family Bond Helping Foundation",
+    title: "Executive Director, Family Bond Helping Foundation",
     country: "Nigeria",
     expertise: "Philanthropy & Social Impact",
-    photo: "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=400&h=500&fit=crop&crop=face",
+    photo: judge8,
+    bio: "Championing access to education through health interventions, especially for women and children in underserved areas.",
   },
   {
-    name: "Paul-Kayode Joash",
-    title: "Chief Rainmaker at MyDoubleDou International",
+    name: "Paul Kayode Joash",
+    title: "Chief Rainmaker at MyDoubleDouble International",
     country: "Nigeria",
-    expertise: "Business",
-    photo: "https://images.unsplash.com/photo-1560250097-0b93528c311a?w=400&h=500&fit=crop&crop=face",
+    expertise: "Business & Coaching",
+    photo: judge9,
+    bio: "A prolific international inspirational Speaker, Sales/Marketing Guru and Personal & Business Transformation Coach. Host of MyDoubleDouble TV/Radio.",
   },
   {
-    name: "Dr. Grace Mbeki",
-    title: "Senior Lecturer, Dar es Salaam University",
-    country: "Tanzania",
-    expertise: "Primary Education",
-    photo: "https://images.unsplash.com/photo-1531123897727-8f129e1688ce?w=400&h=500&fit=crop&crop=face",
+    name: "Oluwadaisi Patricia Aderibigbe Santos",
+    title: "Veteran Educationalist",
+    country: "Nigeria",
+    expertise: "Education",
+    photo: judge10,
+    bio: "A trailblazer in women-led educational reform and a pillar of early childhood learning advocacy across Nigeria.",
   },
   {
-    name: "Prof. Samuel Owusu",
-    title: "Provost, Ashesi University",
-    country: "Ghana",
-    expertise: "EdTech Innovation",
-    photo: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&h=500&fit=crop&crop=face",
-  },
-  {
-    name: "Dr. Fatou Diallo",
-    title: "Regional Advisor, UNESCO BREDA",
-    country: "Senegal",
-    expertise: "International Education",
-    photo: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400&h=500&fit=crop&crop=face",
+    name: "Dr. Aminah Danjumah",
+    title: "Yeelen Education Project",
+    country: "Nigeria",
+    expertise: "Rural Education",
+    photo: judge6,
+    bio: "Dedication to improving rural education, particularly for girls. Created an innovative mobile library system and successful partnership with government.",
   },
 ];
 
@@ -149,8 +149,8 @@ export function MeetOurJudgesSection() {
           </p>
         </motion.div>
 
-        {/* Judges Grid - Matching screenshot layout */}
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+        {/* Judges Grid */}
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {FEATURED_JUDGES.map((judge, index) => (
             <JudgeCard key={judge.name} judge={judge} index={index} />
           ))}
@@ -164,7 +164,7 @@ export function MeetOurJudgesSection() {
           transition={{ delay: 0.5 }}
           className="text-center mt-12 text-white/50 text-sm"
         >
-          Showing 8 of 27 jury members • Full panel accessible to approved judges
+          Showing 6 of 91 jury members • Full panel accessible to approved judges
         </motion.p>
       </div>
     </section>
