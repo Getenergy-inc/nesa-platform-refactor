@@ -164,7 +164,7 @@ export function MeetOurJudgesSection() {
           transition={{ delay: 0.5 }}
           className="text-center mt-12 text-white/50 text-sm"
         >
-          Showing 6 of 91 jury members • Full panel accessible to approved judges
+          Showing 6 of 27 jury members • Full panel accessible to approved judges
         </motion.p>
       </div>
     </section>
