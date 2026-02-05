@@ -60,6 +60,81 @@ export interface AGCFAQ {
 // VOTING CALENDAR 2026
 // ============================================================================
 
+export const PROGRAMME_TIMELINE_2026 = [
+  {
+    id: 'nrc-review',
+    phase: 'NRC Nominee Review',
+    period: '1 Feb – 31 Mar 2026',
+    description: 'Nominee Research Corps verifies all nominations for eligibility and governance compliance',
+    status: 'upcoming' as const,
+  },
+  {
+    id: 'jury-selection',
+    phase: 'Jury Selection',
+    period: 'Feb – Mar 2026',
+    description: 'Applications reviewed and independent jury members selected',
+    status: 'upcoming' as const,
+  },
+  {
+    id: 'platinum-show',
+    phase: 'Platinum Recognition Show',
+    period: '28 February 2026',
+    description: '3-hour TV Show — Non-competitive baseline recognition of service',
+    status: 'upcoming' as const,
+  },
+  {
+    id: 'icon-show',
+    phase: 'Africa Education Icon Show',
+    period: '28 March 2026',
+    description: '3-hour TV Show — Lifetime impact recognition (9 Icons)',
+    status: 'upcoming' as const,
+  },
+  {
+    id: 'jury-onboarding',
+    phase: 'Jury Onboarding',
+    period: 'April 2026',
+    description: 'Selected jury members complete orientation and training',
+    status: 'upcoming' as const,
+  },
+  {
+    id: 'gold-voting',
+    phase: 'Gold Certificate Voting',
+    period: '10 Apr – 16 May 2026',
+    description: '100% public voting across 135 sub-categories using AGC',
+    status: 'upcoming' as const,
+    votingPhase: 'GOLD_CERTIFICATE' as VotingPhase,
+  },
+  {
+    id: 'gold-show',
+    phase: 'Gold Certificate Winners Show',
+    period: '17 May 2026',
+    description: '3-hour TV Show — 135 Gold winners announced',
+    status: 'upcoming' as const,
+  },
+  {
+    id: 'blue-garnet-voting',
+    phase: 'Blue Garnet Award Voting',
+    period: '18 May – 17 Jun 2026',
+    description: '40% public vote + 60% independent jury review',
+    status: 'upcoming' as const,
+    votingPhase: 'BLUE_GARNET' as VotingPhase,
+  },
+  {
+    id: 'blue-garnet-gala',
+    phase: 'Blue Garnet Awards Gala',
+    period: '27 June 2026',
+    description: 'Grand ceremony in Lagos + live broadcast — 9 Blue Garnet Award winners',
+    status: 'upcoming' as const,
+  },
+  {
+    id: 'rmsa-launch',
+    phase: 'Rebuild My School Africa',
+    period: 'Jun 2026 – Jun 2027',
+    description: 'Legacy phase: 5 Special Needs facilities across African regions',
+    status: 'upcoming' as const,
+  },
+];
+
 export const VOTING_PHASES: VotingPhaseConfig[] = [
   {
     id: 'GOLD_CERTIFICATE',
