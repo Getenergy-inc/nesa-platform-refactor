@@ -1,6 +1,7 @@
 import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
 import { useSeason } from "@/contexts/SeasonContext";
+import { PROGRAMME_TIMELINE_2026 } from "@/config/agcConfig";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import {
@@ -14,55 +15,32 @@ import {
   Trophy,
   Users,
   Vote,
+  Star,
+  Award,
+  Tv,
+  Heart,
+  Coins,
 } from "lucide-react";
 
-const phases = [
-  {
-    id: "nominations",
-    title: "Nominations",
-    icon: FileCheck,
-    dates: "March – June 2025",
-    status: "active",
-    description: "Submit nominations for Platinum, Gold, and Icon categories.",
-    actions: ["Submit nomination", "Gather evidence", "Track status"],
-  },
-  {
-    id: "nrc_review",
-    title: "NRC Review",
-    icon: Users,
-    dates: "June – August 2025",
-    status: "upcoming",
-    description: "Nominee Research Corps validates all submissions.",
-    actions: ["Evidence verification", "Background checks", "Platinum issuance"],
-  },
-  {
-    id: "public_voting",
-    title: "Public Voting",
-    icon: Vote,
-    dates: "September – November 2025",
-    status: "upcoming",
-    description: "Public votes for Gold Certificate nominees.",
-    actions: ["Cast votes", "Share nominees", "Track rankings"],
-  },
-  {
-    id: "jury_scoring",
-    title: "Jury Scoring",
-    icon: Trophy,
-    dates: "November – December 2025",
-    status: "upcoming",
-    description: "Jury panel scores Blue Garnet finalists (60% weight).",
-    actions: ["Sealed scoring", "Jury deliberation", "Final ranking"],
-  },
-  {
-    id: "gala",
-    title: "Awards Gala",
-    icon: Play,
-    dates: "June 2026",
-    status: "upcoming",
-    description: "Live 6-hour ceremony announcing all winners.",
-    actions: ["Live broadcast", "Winner announcements", "Certificate ceremony"],
-  },
-];
+// Map phase IDs to icons
+const phaseIcons: Record<string, React.ComponentType<{ className?: string }>> = {
+  'nrc-review': FileCheck,
+  'jury-selection': Users,
+  'platinum-show': Star,
+  'icon-show': Award,
+  'jury-onboarding': Users,
+  'gold-voting': Vote,
+  'gold-show': Tv,
+  'blue-garnet-voting': Vote,
+  'blue-garnet-gala': Trophy,
+  'rmsa-launch': Heart,
+};
+
+// Check if phase involves voting (for AGC badge)
+const isVotingPhase = (phase: string) => {
+  const votingKeywords = ["gold", "blue garnet", "voting", "public"];
+  return votingKeywords.some(keyword => phase.toLowerCase().includes(keyword));
+};
 
 export default function Timeline() {
   const { currentEdition } = useSeason();
@@ -114,10 +92,10 @@ export default function Timeline() {
               <div className="absolute left-6 top-0 hidden h-full w-0.5 bg-white/10 md:left-1/2 md:block md:-translate-x-1/2" />
 
               <div className="space-y-8">
-                {phases.map((phase, i) => {
-                  const Icon = phase.icon;
-                  const isActive = phase.status === "active";
-                  const isCompleted = phase.status === "completed";
+                {PROGRAMME_TIMELINE_2026.map((phase, i) => {
+                  const Icon = phaseIcons[phase.id] || FileCheck;
+                  const isActive = phase.status === "active" as string;
+                  const isCompleted = phase.status === ("completed" as string);
 
                   return (
                     <div
@@ -153,9 +131,15 @@ export default function Timeline() {
                       >
                         <CardHeader>
                           <div className="flex items-center justify-between">
-                            <CardTitle className="flex items-center gap-3 text-white">
+                            <CardTitle className="flex items-center gap-2 text-white">
                               <Icon className={`h-5 w-5 md:hidden ${isActive ? "text-primary" : "text-white/60"}`} />
-                              {phase.title}
+                              {phase.phase}
+                              {isVotingPhase(phase.phase) && (
+                                <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-primary/10 text-primary text-[10px] font-medium">
+                                  <Coins className="h-3 w-3" />
+                                  AGC
+                                </span>
+                              )}
                             </CardTitle>
                             <Badge
                               variant="outline"
@@ -172,19 +156,16 @@ export default function Timeline() {
                           </div>
                           <div className="flex items-center gap-2 text-sm text-white/60">
                             <Clock className="h-4 w-4" />
-                            {phase.dates}
+                            {phase.period}
                           </div>
                         </CardHeader>
                         <CardContent className="space-y-4">
                           <p className="text-white/70">{phase.description}</p>
-                          <ul className="space-y-1">
-                            {phase.actions.map((action) => (
-                              <li key={action} className="flex items-center gap-2 text-sm text-white/60">
-                                <Circle className="h-1.5 w-1.5 fill-current" />
-                                {action}
-                              </li>
-                            ))}
-                          </ul>
+                          {isVotingPhase(phase.phase) && (
+                            <p className="text-white/50 text-xs">
+                              Vote with AGC (non-tradeable voting credit)
+                            </p>
+                          )}
                         </CardContent>
                       </Card>
 
