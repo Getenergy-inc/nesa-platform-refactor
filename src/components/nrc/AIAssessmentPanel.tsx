@@ -23,7 +23,6 @@ import {
   Bot,
   RefreshCw,
   Loader2,
-  Info,
 } from "lucide-react";
 import type { AINRCAssessment } from "@/types/nrcAutomation";
 import { AI_RECOMMENDATION_LABELS, NRC_REASON_CODES } from "@/config/nrcConfig";
@@ -79,11 +78,6 @@ function ScoreGauge({
     : score < thresholds.medium 
     ? "text-warning" 
     : "text-success";
-  const bgColor = score < thresholds.low 
-    ? "bg-destructive" 
-    : score < thresholds.medium 
-    ? "bg-warning" 
-    : "bg-success";
 
   return (
     <div className="space-y-1.5">
@@ -91,7 +85,7 @@ function ScoreGauge({
         <span className="text-muted-foreground">{label}</span>
         <span className={cn("font-semibold", color)}>{score}%</span>
       </div>
-      <Progress value={percentage} className={cn("h-2", bgColor)} />
+      <Progress value={percentage} className="h-2" />
     </div>
   );
 }
