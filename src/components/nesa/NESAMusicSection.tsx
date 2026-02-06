@@ -1,7 +1,7 @@
 // NESA Africa Music Section
 // Allows users to preview and unlock official NESA songs via AGC, Stripe, or free preview
 
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { Music, Play, Pause, Lock, Coins, CreditCard, Volume2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -16,8 +16,7 @@ interface NESASong {
   title: string;
   artist: string;
   cover: string;
-  previewUrl?: string;
-  fullUrl?: string;
+  audioUrl: string;
   agcPrice: number;
   usdPrice: number;
   duration: string;
@@ -29,8 +28,7 @@ const nesaSongs: NESASong[] = [
     title: "NESA Africa Anthem",
     artist: "NESA Africa",
     cover: nesaSong1Cover,
-    previewUrl: undefined, // Add actual preview URL when available
-    fullUrl: undefined, // Add actual full song URL when available
+    audioUrl: "/audio/nesa-song-1.mp3",
     agcPrice: 50,
     usdPrice: 2.99,
     duration: "3:45",
@@ -40,28 +38,24 @@ const nesaSongs: NESASong[] = [
     title: "Education For All",
     artist: "NESA Africa",
     cover: nesaSong2Cover,
-    previewUrl: undefined,
-    fullUrl: undefined,
+    audioUrl: "/audio/nesa-song-2.mp3",
     agcPrice: 50,
     usdPrice: 2.99,
     duration: "4:12",
   },
 ];
 
-function SongCard({ song }: { song: NESASong }) {
-  const [isPlaying, setIsPlaying] = useState(false);
-  const [isUnlocked, setIsUnlocked] = useState(false);
+function SongCard({ song, currentlyPlaying, onPlay }: { 
+  song: NESASong; 
+  currentlyPlaying: string | null;
+  onPlay: (songId: string) => void;
+}) {
+  const [isUnlocked] = useState(true); // Songs are free to play for now
+  const isPlaying = currentlyPlaying === song.id;
   const { toast } = useToast();
 
-  const handlePreview = () => {
-    if (!song.previewUrl) {
-      toast({
-        title: "Preview Coming Soon",
-        description: "This song preview will be available shortly.",
-      });
-      return;
-    }
-    setIsPlaying(!isPlaying);
+  const handlePlay = () => {
+    onPlay(song.id);
   };
 
   const handlePayWithAGC = () => {
@@ -87,18 +81,35 @@ function SongCard({ song }: { song: NESASong }) {
     >
       <Card className="bg-charcoal-light border-gold/20 overflow-hidden hover:border-gold/40 transition-all duration-300 group">
         <CardContent className="p-0">
-          {/* Album Cover */}
+          {/* Album Cover with Animation */}
           <div className="relative aspect-square overflow-hidden">
-            <img
+            <motion.img
               src={song.cover}
               alt={song.title}
-              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+              className="w-full h-full object-cover"
+              animate={isPlaying ? {
+                scale: [1, 1.05, 1],
+              } : {}}
+              transition={isPlaying ? {
+                duration: 2,
+                repeat: Infinity,
+                ease: "easeInOut"
+              } : {}}
             />
             
-            {/* Play Overlay */}
-            <div className="absolute inset-0 bg-charcoal/50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+            {/* Animated Overlay when playing */}
+            {isPlaying && (
+              <motion.div 
+                className="absolute inset-0 bg-gradient-to-t from-gold/30 via-transparent to-transparent"
+                animate={{ opacity: [0.3, 0.6, 0.3] }}
+                transition={{ duration: 1.5, repeat: Infinity }}
+              />
+            )}
+            
+            {/* Play/Pause Button Overlay */}
+            <div className={`absolute inset-0 bg-charcoal/50 flex items-center justify-center transition-opacity duration-300 ${isPlaying ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'}`}>
               <button
-                onClick={handlePreview}
+                onClick={handlePlay}
                 className="h-16 w-16 rounded-full bg-gold/90 hover:bg-gold flex items-center justify-center shadow-lg transform hover:scale-110 transition-all"
               >
                 {isPlaying ? (
@@ -108,6 +119,24 @@ function SongCard({ song }: { song: NESASong }) {
                 )}
               </button>
             </div>
+
+            {/* Audio Visualizer when playing */}
+            {isPlaying && (
+              <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-1">
+                {[...Array(5)].map((_, i) => (
+                  <motion.div
+                    key={i}
+                    className="w-1 bg-gold rounded-full"
+                    animate={{ height: [8, 24, 8] }}
+                    transition={{
+                      duration: 0.5,
+                      repeat: Infinity,
+                      delay: i * 0.1,
+                    }}
+                  />
+                ))}
+              </div>
+            )}
 
             {/* Duration Badge */}
             <Badge className="absolute bottom-2 right-2 bg-charcoal/80 text-white border-0">
@@ -122,6 +151,13 @@ function SongCard({ song }: { song: NESASong }) {
                 </div>
               </div>
             )}
+
+            {/* Now Playing indicator */}
+            {isPlaying && (
+              <Badge className="absolute top-2 left-2 bg-gold text-charcoal border-0 animate-pulse">
+                Now Playing
+              </Badge>
+            )}
           </div>
 
           {/* Song Info */}
@@ -133,15 +169,24 @@ function SongCard({ song }: { song: NESASong }) {
               <p className="text-white/60 text-sm">{song.artist}</p>
             </div>
 
-            {/* Preview Button */}
+            {/* Play Button */}
             <Button
               variant="outline"
               size="sm"
-              onClick={handlePreview}
-              className="w-full border-gold/30 text-gold hover:bg-gold/10 gap-2"
+              onClick={handlePlay}
+              className={`w-full gap-2 ${isPlaying ? 'border-gold text-gold bg-gold/10' : 'border-gold/30 text-gold hover:bg-gold/10'}`}
             >
-              <Volume2 className="h-4 w-4" />
-              {isPlaying ? "Pause Preview" : "Free 30s Preview"}
+              {isPlaying ? (
+                <>
+                  <Pause className="h-4 w-4" />
+                  Pause
+                </>
+              ) : (
+                <>
+                  <Volume2 className="h-4 w-4" />
+                  Play Now
+                </>
+              )}
             </Button>
 
             {/* Payment Options */}
@@ -172,6 +217,43 @@ function SongCard({ song }: { song: NESASong }) {
 }
 
 export function NESAMusicSection() {
+  const [currentlyPlaying, setCurrentlyPlaying] = useState<string | null>(null);
+  const audioRef = useRef<HTMLAudioElement | null>(null);
+
+  useEffect(() => {
+    // Cleanup audio on unmount
+    return () => {
+      if (audioRef.current) {
+        audioRef.current.pause();
+        audioRef.current = null;
+      }
+    };
+  }, []);
+
+  const handlePlay = (songId: string) => {
+    const song = nesaSongs.find(s => s.id === songId);
+    if (!song) return;
+
+    if (currentlyPlaying === songId) {
+      // Pause current song
+      if (audioRef.current) {
+        audioRef.current.pause();
+      }
+      setCurrentlyPlaying(null);
+    } else {
+      // Stop previous song
+      if (audioRef.current) {
+        audioRef.current.pause();
+      }
+      
+      // Play new song
+      audioRef.current = new Audio(song.audioUrl);
+      audioRef.current.play();
+      audioRef.current.onended = () => setCurrentlyPlaying(null);
+      setCurrentlyPlaying(songId);
+    }
+  };
+
   return (
     <section id="music" className="bg-charcoal py-16 md:py-20">
       <div className="container">
@@ -205,14 +287,19 @@ export function NESAMusicSection() {
             className="text-white/70 max-w-2xl mx-auto"
           >
             Listen to our official anthems celebrating education across Africa. 
-            Unlock with AGC credits or purchase directly.
+            Play now or unlock exclusive content with AGC credits.
           </motion.p>
         </div>
 
         {/* Songs Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-6 max-w-2xl mx-auto">
           {nesaSongs.map((song) => (
-            <SongCard key={song.id} song={song} />
+            <SongCard 
+              key={song.id} 
+              song={song} 
+              currentlyPlaying={currentlyPlaying}
+              onPlay={handlePlay}
+            />
           ))}
         </div>
 
