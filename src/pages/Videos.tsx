@@ -2,13 +2,13 @@ import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
 import { ArrowLeft, Tv, ExternalLink } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
-import { videos, validateVideos } from "@/data/videos";
-import { logValidationWarning } from "@/lib/validate";
+import { videos } from "@/data/videos";
+import { validateVideos } from "@/lib/validate";
 import { VideoGallery } from "@/components/VideoGallery";
 import { YOUTUBE_CHANNEL } from "@/lib/youtube";
 
 // Validate data on load
-logValidationWarning("Videos", validateVideos());
+validateVideos(videos);
 
 export default function Videos() {
   return (

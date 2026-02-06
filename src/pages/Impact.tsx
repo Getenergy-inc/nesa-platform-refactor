@@ -2,12 +2,12 @@ import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
 import { ArrowLeft, Heart, ExternalLink } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
-import { impactItems, validateImpactItems } from "@/data/impact";
-import { logValidationWarning } from "@/lib/validate";
+import { impactItems } from "@/data/impact";
+import { validateImpact } from "@/lib/validate";
 import { ImpactList, ImpactSources } from "@/components/ImpactList";
 
 // Validate data on load
-logValidationWarning("Impact", validateImpactItems());
+validateImpact(impactItems);
 
 export default function Impact() {
   return (

@@ -1,70 +1,70 @@
 /**
  * Centralized Validation Utilities
- * Runtime validation for data integrity
+ * Runtime validation for data integrity with strict type checking
  */
 
-import type { Award } from "@/data/awards";
-import type { ImpactItem } from "@/data/impact";
-import type { Video } from "@/data/videos";
+type AnyRecord = Record<string, unknown>;
 
-/**
- * Validate a single award entry
- */
-export function validateAward(award: Award): boolean {
-  return Boolean(
-    award.title &&
-    award.organization &&
-    award.year &&
-    award.description &&
-    award.sourceUrl &&
-    award.sourceUrl.startsWith('http')
-  );
+export function requireString(v: unknown, field: string): string {
+  if (typeof v !== "string" || !v.trim()) throw new Error(`Invalid "${field}"`);
+  return v;
 }
 
-/**
- * Validate all awards
- */
-export function validateAwards(awards: Award[]): boolean {
-  return awards.every(validateAward);
+export function requireNumber(v: unknown, field: string): number {
+  if (typeof v !== "number" || Number.isNaN(v)) throw new Error(`Invalid "${field}"`);
+  return v;
 }
 
-/**
- * Validate a single impact item
- */
-export function validateImpactItem(item: ImpactItem): boolean {
-  return Boolean(
-    item.title &&
-    item.date &&
-    item.description &&
-    item.sourceUrl &&
-    item.sourceUrl.startsWith('http')
-  );
+export function requireUrl(v: unknown, field: string): string {
+  const s = requireString(v, field);
+  try {
+    new URL(s);
+    return s;
+  } catch {
+    throw new Error(`Invalid URL in "${field}"`);
+  }
 }
 
-/**
- * Validate all impact items
- */
-export function validateImpactItems(items: ImpactItem[]): boolean {
-  return items.every(validateImpactItem);
+export function validateAwards(data: unknown) {
+  if (!Array.isArray(data)) throw new Error("awards must be an array");
+  return data.map((x, i) => {
+    const r = x as AnyRecord;
+    return {
+      title: requireString(r.title, `awards[${i}].title`),
+      organization: requireString(r.organization, `awards[${i}].organization`),
+      year: requireNumber(r.year, `awards[${i}].year`),
+      description: requireString(r.description, `awards[${i}].description`),
+      location: typeof r.location === "string" ? r.location : undefined,
+      sourceUrl: requireUrl(r.sourceUrl, `awards[${i}].sourceUrl`)
+    };
+  });
 }
 
-/**
- * Validate a single video entry
- */
-export function validateVideo(video: Video): boolean {
-  return Boolean(
-    video.title &&
-    video.videoId &&
-    video.videoId.length === 11 && // YouTube video IDs are 11 characters
-    video.date
-  );
+export function validateImpact(data: unknown) {
+  if (!Array.isArray(data)) throw new Error("impact must be an array");
+  return data.map((x, i) => {
+    const r = x as AnyRecord;
+    return {
+      title: requireString(r.title, `impact[${i}].title`),
+      date: requireString(r.date, `impact[${i}].date`),
+      description: requireString(r.description, `impact[${i}].description`),
+      location: typeof r.location === "string" ? r.location : undefined,
+      sourceUrl: requireUrl(r.sourceUrl, `impact[${i}].sourceUrl`)
+    };
+  });
 }
 
-/**
- * Validate all videos
- */
-export function validateVideos(videos: Video[]): boolean {
-  return videos.every(validateVideo);
+export function validateVideos(data: unknown) {
+  if (!Array.isArray(data)) throw new Error("videos must be an array");
+  return data.map((x, i) => {
+    const r = x as AnyRecord;
+    return {
+      title: requireString(r.title, `videos[${i}].title`),
+      videoId: requireString(r.videoId, `videos[${i}].videoId`),
+      date: typeof r.date === "string" ? r.date : undefined,
+      group: typeof r.group === "string" ? r.group : undefined
+    };
+  });
 }
 
 /**
