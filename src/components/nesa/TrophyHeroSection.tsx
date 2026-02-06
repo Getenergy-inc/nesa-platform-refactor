@@ -117,15 +117,15 @@ export function TrophyHeroSection() {
             <div className="flex flex-wrap gap-4 sm:gap-6 justify-center lg:justify-start text-sm">
               <div className="flex items-center gap-2 text-white/70">
                 <Globe className="h-4 w-4 text-gold" />
-                <span>54 African Countries</span>
+                <span>5 Regions + Diaspora & Friends of Africa</span>
               </div>
               <div className="flex items-center gap-2 text-white/70">
                 <Users className="h-4 w-4 text-gold" />
-                <span>5,000+ Nominees</span>
+                <span>1,760+ Nominees</span>
               </div>
               <div className="flex items-center gap-2 text-white/70">
                 <Calendar className="h-4 w-4 text-gold" />
-                <span>15 Years of Excellence</span>
+                <span>15 Years of Vision Conception</span>
               </div>
             </div>
           </motion.div>
