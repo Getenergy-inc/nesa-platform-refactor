@@ -5,126 +5,64 @@
  */
 
 export interface Video {
-  id: string;
-  videoId: string; // YouTube video ID
   title: string;
-  description?: string;
-  duration?: string;
-  views?: string;
+  videoId: string;
   date: string;
-  playlist?: string;
-  featured?: boolean;
+  group?: string;
 }
 
-export interface VideoPlaylist {
-  id: string;
-  name: string;
-  description?: string;
-}
-
-// YouTube embed base URL (privacy-enhanced)
-export const YOUTUBE_EMBED_BASE = "https://www.youtube-nocookie.com/embed";
-
-// Channel information
-export const YOUTUBE_CHANNEL = {
-  id: "Nesa.africaTV",
-  url: "https://www.youtube.com/@Nesa.africaTV",
-  name: "NESA Africa TV",
-};
-
-// Video playlists
-export const playlists: VideoPlaylist[] = [
-  { id: "featured", name: "Featured", description: "Top featured content" },
-  { id: "shows", name: "Shows", description: "Regular programming and shows" },
-  { id: "events", name: "Events", description: "Award ceremonies and summits" },
-  { id: "documentaries", name: "Documentaries", description: "Educational documentaries" },
-];
-
-// All videos
 export const videos: Video[] = [
   {
-    id: "platinum-show-special",
-    videoId: "MrErQY7qWRs",
     title: "The Platinum Show - Special Edition",
-    description: "Exclusive interview with education champions across Africa",
-    duration: "1:45:00",
-    views: "2.5K views",
-    date: "Feb 2025",
-    playlist: "shows",
-    featured: true,
+    videoId: "MrErQY7qWRs",
+    date: "2025-02-01",
+    group: "Shows",
   },
   {
-    id: "education-summit-2025",
-    videoId: "Hdu_qlFLfrQ",
     title: "Education for All Summit 2025",
-    description: "Highlights from the continental education summit",
-    duration: "2:30:00",
-    views: "3.8K views",
-    date: "Jan 2025",
-    playlist: "events",
-    featured: true,
+    videoId: "Hdu_qlFLfrQ",
+    date: "2025-01-15",
+    group: "Events",
   },
   {
-    id: "nominations-2025",
-    videoId: "VDVRZrPwNRA",
     title: "NESA Africa 2025 Nominations Announcement",
-    description: "Official announcement of the 2025 award season nominees",
-    duration: "45:00",
-    views: "5.2K views",
-    date: "Jan 2025",
-    playlist: "events",
-    featured: true,
+    videoId: "VDVRZrPwNRA",
+    date: "2025-01-10",
+    group: "Events",
   },
   {
-    id: "meet-judges-2025",
-    videoId: "aP0SskrfioI",
     title: "Meet the Judges - Season 2025",
-    description: "Introduction to the distinguished NESA Africa 2025 judging panel",
-    duration: "1:00:00",
-    views: "4.1K views",
-    date: "Jan 2025",
-    playlist: "shows",
-    featured: true,
+    videoId: "aP0SskrfioI",
+    date: "2025-01-05",
+    group: "Shows",
   },
   {
-    id: "rebuild-my-school",
-    videoId: "DDREAU_bmRk",
     title: "Rebuild My School Africa Documentary",
-    description: "Documentary showcasing school infrastructure initiatives across Africa",
-    duration: "35:00",
-    views: "8.7K views",
-    date: "Dec 2024",
-    playlist: "documentaries",
-    featured: true,
+    videoId: "DDREAU_bmRk",
+    date: "2024-12-15",
+    group: "Documentaries",
   },
   {
-    id: "gala-highlights-2025",
-    videoId: "nQCXDX_X3rs",
     title: "NESA Africa Awards 2025 Gala Highlights",
-    description: "Best moments from the NESA Africa 2025 Awards Gala ceremony",
-    duration: "1:20:00",
-    views: "15K views",
-    date: "Nov 2024",
-    playlist: "events",
-    featured: true,
+    videoId: "nQCXDX_X3rs",
+    date: "2024-11-20",
+    group: "Events",
   },
 ];
 
 /**
- * Get the embed URL for a video
+ * Get unique video groups
  */
-export function getEmbedUrl(videoId: string, options?: { 
-  rel?: boolean; 
-  modestbranding?: boolean;
-  autoplay?: boolean;
-}): string {
-  const params = new URLSearchParams();
-  if (options?.rel === false) params.set('rel', '0');
-  if (options?.modestbranding !== false) params.set('modestbranding', '1');
-  if (options?.autoplay) params.set('autoplay', '1');
-  
-  const queryString = params.toString();
-  return `${YOUTUBE_EMBED_BASE}/${videoId}${queryString ? `?${queryString}` : ''}`;
+export function getVideoGroups(): string[] {
+  const groups = new Set(videos.map(v => v.group).filter(Boolean) as string[]);
+  return Array.from(groups);
+}
+
+/**
+ * Get videos by group
+ */
+export function getVideosByGroup(group: string): Video[] {
+  return videos.filter(video => video.group === group);
 }
 
 /**
@@ -132,31 +70,9 @@ export function getEmbedUrl(videoId: string, options?: {
  */
 export function validateVideos(): boolean {
   return videos.every(video => 
-    video.id && 
-    video.videoId && 
-    video.videoId.length === 11 && // YouTube video IDs are 11 characters
     video.title && 
+    video.videoId && 
+    video.videoId.length === 11 &&
     video.date
   );
-}
-
-/**
- * Get videos by playlist
- */
-export function getVideosByPlaylist(playlistId: string): Video[] {
-  return videos.filter(video => video.playlist === playlistId);
-}
-
-/**
- * Get featured videos
- */
-export function getFeaturedVideos(): Video[] {
-  return videos.filter(video => video.featured);
-}
-
-/**
- * Get the main featured video
- */
-export function getMainFeaturedVideo(): Video | undefined {
-  return videos.find(video => video.featured);
 }

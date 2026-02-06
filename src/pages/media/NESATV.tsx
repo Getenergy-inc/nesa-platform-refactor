@@ -16,16 +16,11 @@ import {
   Video,
   Youtube,
 } from "lucide-react";
-import { 
-  videos, 
-  YOUTUBE_EMBED_BASE, 
-  YOUTUBE_CHANNEL, 
-  getEmbedUrl,
-  getMainFeaturedVideo,
-} from "@/data/videos";
+import { videos } from "@/data/videos";
+import { YOUTUBE_CHANNEL, getEmbedUrl } from "@/lib/youtube";
 
-// Get featured video from data
-const featuredVideo = getMainFeaturedVideo();
+// Get first video as featured
+const featuredVideo = videos[0] || null;
 
 const channels = [
   { id: "english", name: "English", flag: "🇬🇧", live: true },
@@ -187,7 +182,7 @@ export default function NESATV() {
                           {video.title}
                         </h3>
                         <div className="flex items-center justify-between text-sm text-white/50">
-                          <span>{video.views}</span>
+                          {video.group && <span>{video.group}</span>}
                           <span>{video.date}</span>
                         </div>
                       </div>
