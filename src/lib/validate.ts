@@ -12,7 +12,6 @@ import type { Video } from "@/data/videos";
  */
 export function validateAward(award: Award): boolean {
   return Boolean(
-    award.id &&
     award.title &&
     award.organization &&
     award.year &&
