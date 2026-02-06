@@ -3,7 +3,7 @@
 // All proceeds support NESA Africa and EduAid Africa
 
 import { useState, useRef, useEffect } from "react";
-import { Music, Play, Pause, Download, Coins, CreditCard, Heart } from "lucide-react";
+import { Music, Play, Pause, Download, Coins, CreditCard, Heart, Video, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -18,6 +18,7 @@ interface NESASong {
   artist: string;
   cover: string;
   audioUrl: string;
+  videoUrl: string;
   agcPrice: number;
   usdPrice: number;
   duration: string;
@@ -30,8 +31,9 @@ const nesaSongs: NESASong[] = [
     artist: "NESA Africa",
     cover: nesaSong1Cover,
     audioUrl: "/audio/nesa-song-1.mp3",
-    agcPrice: 15, // $1 = 5 AGC, so $3 = 15 AGC minimum
-    usdPrice: 3,  // Minimum $3 donation
+    videoUrl: "/videos/nesa-africa-anthem-video.mp4",
+    agcPrice: 15,
+    usdPrice: 3,
     duration: "3:45",
   },
   {
@@ -40,11 +42,53 @@ const nesaSongs: NESASong[] = [
     artist: "NESA Africa",
     cover: nesaSong2Cover,
     audioUrl: "/audio/nesa-song-2.mp3",
+    videoUrl: "/videos/education-for-all-video.mp4",
     agcPrice: 15,
     usdPrice: 3,
     duration: "4:12",
   },
 ];
+
+// Video Modal Component
+function VideoModal({ song, onClose }: { song: NESASong; onClose: () => void }) {
+  return (
+    <div 
+      className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-charcoal/95 backdrop-blur-sm animate-fade-in"
+      onClick={onClose}
+    >
+      <div 
+        className="relative w-full max-w-4xl bg-charcoal rounded-2xl border border-gold/20 overflow-hidden shadow-2xl animate-scale-in"
+        onClick={(e) => e.stopPropagation()}
+      >
+        {/* Header */}
+        <div className="flex items-center justify-between p-4 border-b border-gold/10">
+          <div>
+            <h3 className="font-display text-xl font-semibold text-white">
+              {song.title}
+            </h3>
+            <p className="text-white/60 text-sm">Official Music Video</p>
+          </div>
+          <button 
+            onClick={onClose}
+            className="h-10 w-10 rounded-full bg-charcoal-light hover:bg-gold/20 text-white/70 hover:text-gold transition-colors flex items-center justify-center"
+          >
+            <X className="h-5 w-5" />
+          </button>
+        </div>
+
+        {/* Video Player */}
+        <div className="aspect-video bg-black">
+          <video
+            src={song.videoUrl}
+            controls
+            autoPlay
+            className="w-full h-full"
+          />
+        </div>
+      </div>
+    </div>
+  );
+}
 
 function SongCard({ song, currentlyPlaying, onPlay }: { 
   song: NESASong; 
@@ -52,6 +96,7 @@ function SongCard({ song, currentlyPlaying, onPlay }: {
   onPlay: (songId: string) => void;
 }) {
   const [isPurchased, setIsPurchased] = useState(false);
+  const [showVideo, setShowVideo] = useState(false);
   const isPlaying = currentlyPlaying === song.id;
   const { toast } = useToast();
 
@@ -229,10 +274,21 @@ function SongCard({ song, currentlyPlaying, onPlay }: {
               )}
             </Button>
 
+            {/* Watch Music Video Button */}
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={() => setShowVideo(true)}
+              className="w-full gap-2 border-primary/30 text-primary hover:bg-primary/10"
+            >
+              <Video className="h-4 w-4" />
+              Watch Music Video
+            </Button>
+
             {/* Download Options */}
             <div className="space-y-2">
-              <p className="text-xs text-white/50 text-center flex items-center justify-center gap-1">
-                <Heart className="h-3 w-3 text-red-400" />
+              <p className="text-xs text-muted-foreground text-center flex items-center justify-center gap-1">
+                <Heart className="h-3 w-3 text-destructive" />
                 Support NESA Africa & EduAid Africa
               </p>
               
@@ -240,7 +296,7 @@ function SongCard({ song, currentlyPlaying, onPlay }: {
                 <Button
                   size="sm"
                   onClick={handleDirectDownload}
-                  className="w-full bg-green-600 hover:bg-green-700 text-white gap-2"
+                  className="w-full bg-primary hover:bg-primary/90 text-primary-foreground gap-2"
                 >
                   <Download className="h-4 w-4" />
                   Download Now
@@ -270,6 +326,11 @@ function SongCard({ song, currentlyPlaying, onPlay }: {
           </div>
         </CardContent>
       </Card>
+      
+      {/* Video Modal */}
+      {showVideo && (
+        <VideoModal song={song} onClose={() => setShowVideo(false)} />
+      )}
     </motion.div>
   );
 }
