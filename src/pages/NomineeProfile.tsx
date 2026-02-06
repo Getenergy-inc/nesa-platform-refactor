@@ -19,6 +19,7 @@ import {
   getRelatedNominees, 
   handleImageError,
   isOrganization,
+  normalizeYearReferences,
   type EnrichedNominee 
 } from "@/lib/nesaData";
 import { NomineeCard, type NomineeCardData } from "@/components/nesa/NomineeCard";
@@ -262,16 +263,16 @@ export default function NomineeProfile() {
                           {geoBadge.label}
                         </Badge>
                         <Badge variant="outline" className="border-gold/20 text-gold/80">
-                          {nominee.awardTitle}
+                          {normalizeYearReferences(nominee.awardTitle)}
                         </Badge>
                       </div>
 
                       <h1 className="font-display text-3xl md:text-4xl text-ivory mb-2">
-                        {nominee.name}
+                        {normalizeYearReferences(nominee.name)}
                       </h1>
 
                       {nominee.achievement && (
-                        <p className="text-lg text-ivory/70 mb-3">{nominee.achievement}</p>
+                        <p className="text-lg text-ivory/70 mb-3">{normalizeYearReferences(nominee.achievement)}</p>
                       )}
 
                       <div className="flex flex-wrap items-center gap-4 text-sm text-ivory/60">
@@ -284,10 +285,10 @@ export default function NomineeProfile() {
                           item={{
                             id: nominee.id,
                             slug: nominee.slug,
-                            name: nominee.name,
+                            name: normalizeYearReferences(nominee.name),
                             type: "nominee",
                             imageUrl: nominee.imageUrl,
-                            subtitle: nominee.awardTitle,
+                            subtitle: normalizeYearReferences(nominee.awardTitle),
                           }}
                           size="sm"
                         />
@@ -305,10 +306,10 @@ export default function NomineeProfile() {
                     <div className="inline-flex items-center gap-2 text-gold">
                       <Trophy className="w-5 h-5" />
                       <span className="text-lg font-medium">
-                        {nominee.awardTitle}
+                        {normalizeYearReferences(nominee.awardTitle)}
                       </span>
                       <span className="text-ivory/50">—</span>
-                      <span className="text-ivory/70">{nominee.subcategoryTitle}</span>
+                      <span className="text-ivory/70">{normalizeYearReferences(nominee.subcategoryTitle)}</span>
                     </div>
                   </div>
 
@@ -332,7 +333,7 @@ export default function NomineeProfile() {
                         Achievement
                       </h3>
                       <p className="text-ivory/80 leading-relaxed whitespace-pre-line">
-                        {nominee.achievement}
+                        {normalizeYearReferences(nominee.achievement)}
                       </p>
                     </div>
                   )}

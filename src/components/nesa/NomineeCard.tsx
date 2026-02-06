@@ -4,7 +4,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Award, Building2, MapPin, RotateCcw, ThumbsUp, Loader2 } from "lucide-react";
 import { NESAStamp } from "@/components/nesa/NESALogo";
-import { type NomineeImageType, isOrganization } from "@/lib/nesaData";
+import { type NomineeImageType, isOrganization, normalizeYearReferences } from "@/lib/nesaData";
 import { NomineeActions, type NomineeActionsData } from "@/components/nominees";
 import { getResolvedNomineeImage, getImageDisplayClasses } from "@/hooks/useResolvedNomineeImages";
 
@@ -129,11 +129,11 @@ export function NomineeCard({
 
           {/* Name & Title */}
           <h3 className={`font-semibold text-ivory group-hover:text-gold transition-colors line-clamp-1 ${isCompact ? "text-sm" : ""}`}>
-            {nominee.name}
+            {normalizeYearReferences(nominee.name)}
           </h3>
           {nominee.title && (
             <p className={`text-ivory/60 line-clamp-1 mt-1 ${isCompact ? "text-xs" : "text-sm"}`}>
-              {nominee.title}
+              {normalizeYearReferences(nominee.title)}
             </p>
           )}
 
@@ -141,7 +141,7 @@ export function NomineeCard({
           {nominee.organization && !isCompact && (
             <div className="flex items-center gap-1 mt-2 text-xs text-ivory/50">
               <Building2 className="w-3 h-3" />
-              <span className="line-clamp-1">{nominee.organization}</span>
+              <span className="line-clamp-1">{normalizeYearReferences(nominee.organization)}</span>
             </div>
           )}
 
@@ -151,7 +151,7 @@ export function NomineeCard({
               variant="outline"
               className={`mt-3 border-gold/20 text-gold/80 ${isCompact ? "text-[10px]" : "text-xs"}`}
             >
-              {nominee.categoryName}
+              {normalizeYearReferences(nominee.categoryName)}
             </Badge>
           )}
 
