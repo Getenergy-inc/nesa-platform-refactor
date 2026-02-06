@@ -23,48 +23,48 @@ const YOUTUBE_CHANNEL_ID = "Nesa.africaTV";
 const YOUTUBE_CHANNEL_URL = `https://www.youtube.com/@${YOUTUBE_CHANNEL_ID}`;
 const YOUTUBE_EMBED_BASE = "https://www.youtube-nocookie.com/embed";
 
-// Featured video (replace VIDEO_ID with actual video ID from the channel)
-const FEATURED_VIDEO_ID = "dQw4w9WgXcQ"; // TODO: Replace with actual NESA video ID
+// Featured video (main player)
+const FEATURED_VIDEO_ID = "MrErQY7qWRs";
 
-// Recent/Archived videos from the channel (replace videoId with actual YouTube video IDs)
+// Recent/Archived videos from the channel
 const channelVideos = [
   { 
-    videoId: FEATURED_VIDEO_ID,
+    videoId: "MrErQY7qWRs",
     title: "The Platinum Show - Special Edition", 
     views: "2.5K views", 
     duration: "1:45:00",
     date: "Feb 2025"
   },
   { 
-    videoId: FEATURED_VIDEO_ID,
+    videoId: "Hdu_qlFLfrQ",
     title: "Education for All Summit 2025", 
     views: "3.8K views", 
     duration: "2:30:00",
     date: "Jan 2025"
   },
   { 
-    videoId: FEATURED_VIDEO_ID,
+    videoId: "VDVRZrPwNRA",
     title: "NESA Africa 2025 Nominations Announcement", 
     views: "5.2K views", 
     duration: "45:00",
     date: "Jan 2025"
   },
   { 
-    videoId: FEATURED_VIDEO_ID,
+    videoId: "aP0SskrfioI",
     title: "Meet the Judges - Season 2025", 
     views: "4.1K views", 
     duration: "1:00:00",
     date: "Jan 2025"
   },
   { 
-    videoId: FEATURED_VIDEO_ID,
+    videoId: "Hdu_qlFLfrQ",
     title: "Rebuild My School Africa Documentary", 
     views: "8.7K views", 
     duration: "35:00",
     date: "Dec 2024"
   },
   { 
-    videoId: FEATURED_VIDEO_ID,
+    videoId: "VDVRZrPwNRA",
     title: "NESA Africa Awards 2025 Gala Highlights", 
     views: "15K views", 
     duration: "1:20:00",
