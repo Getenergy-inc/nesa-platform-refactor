@@ -244,7 +244,7 @@ export default function Gala() {
             </p>
             <div className="mx-auto max-w-2xl rounded-xl border border-white/10 bg-white/5 p-12">
               <Play className="mx-auto mb-4 h-16 w-16 text-primary" />
-              <h3 className="mb-2 text-xl font-semibold text-white">NESA-Africa 2024 Gala Highlights</h3>
+              <h3 className="mb-2 text-xl font-semibold text-white">NESA-Africa 2025 Gala Highlights</h3>
               <p className="mb-6 text-white/60">45 minutes of unforgettable moments</p>
               <Button className="bg-primary text-primary-foreground">
                 <Play className="mr-2 h-4 w-4" />

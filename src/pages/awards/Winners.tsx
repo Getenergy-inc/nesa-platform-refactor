@@ -68,7 +68,7 @@ export default function Winners() {
                   2025
                 </Badge>
                 <Badge variant="outline" className="cursor-pointer border-white/20 text-white hover:bg-white/10">
-                  2024
+                  2023
                 </Badge>
               </div>
             </div>
