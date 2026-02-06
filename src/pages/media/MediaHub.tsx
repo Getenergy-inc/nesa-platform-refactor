@@ -49,7 +49,7 @@ const mediaCategories = [
 const featuredContent = [
   { title: "The Platinum Show", duration: "3 hrs", type: "Online Show" },
   { title: "Education for All Summit", duration: "75 min", type: "Webinar" },
-  { title: "NESA Africa 2024 Gala Highlights", duration: "45 min", type: "Archive" },
+  { title: "NESA Africa 2025 Gala Highlights", duration: "45 min", type: "Archive" },
 ];
 
 export default function MediaHub() {
