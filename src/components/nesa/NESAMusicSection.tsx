@@ -38,7 +38,7 @@ const nesaSongs: NESASong[] = [
   },
   {
     id: "nesa-song-2",
-    title: "Education For All",
+    title: "NESA Africa Anthem 2",
     artist: "NESA Africa",
     cover: nesaSong2Cover,
     audioUrl: "/audio/nesa-song-2.mp3",
