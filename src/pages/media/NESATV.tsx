@@ -149,17 +149,25 @@ export default function NESATV() {
                 </a>
               </div>
 
-              {/* Main Live Player - YouTube Embed */}
+              {/* Main Live Player - YouTube Link Card */}
               <div className="w-full lg:w-[560px]">
-                <div className="aspect-video overflow-hidden rounded-xl border border-white/10 bg-black">
-                  <iframe
-                    src={`https://www.youtube.com/embed?listType=user_uploads&list=${YOUTUBE_CHANNEL_ID}`}
-                    title="NESA Africa TV"
-                    className="h-full w-full"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                    allowFullScreen
-                  />
-                </div>
+                <a
+                  href={`${YOUTUBE_CHANNEL_URL}/streams`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group block"
+                >
+                  <div className="aspect-video overflow-hidden rounded-xl border border-white/10 bg-gradient-to-br from-red-900/50 to-charcoal-light relative flex items-center justify-center hover:border-red-500/50 transition-all">
+                    <div className="absolute inset-0 bg-[url('https://img.youtube.com/vi/live_stream/maxresdefault.jpg')] bg-cover bg-center opacity-30" />
+                    <div className="relative z-10 text-center p-6">
+                      <div className="w-20 h-20 mx-auto mb-4 rounded-full bg-red-600 flex items-center justify-center group-hover:scale-110 transition-transform shadow-lg shadow-red-600/30">
+                        <Play className="h-10 w-10 text-white ml-1" />
+                      </div>
+                      <p className="text-white font-semibold text-lg mb-1">Watch Live on YouTube</p>
+                      <p className="text-white/60 text-sm">Click to open NESA Africa TV streams</p>
+                    </div>
+                  </div>
+                </a>
                 <p className="mt-2 text-center text-sm text-white/50">
                   Powered by YouTube • @{YOUTUBE_CHANNEL_ID}
                 </p>
@@ -314,15 +322,34 @@ export default function NESATV() {
                     </CardDescription>
                   </CardHeader>
                   <CardContent>
-                    {/* Embedded YouTube Streams Playlist */}
-                    <div className="aspect-video rounded-lg overflow-hidden mb-4">
-                      <iframe
-                        src={`https://www.youtube.com/embed/videoseries?list=UU${YOUTUBE_CHANNEL_ID.replace('@', '')}`}
-                        title="NESA Africa TV Streams"
-                        className="h-full w-full"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                        allowFullScreen
-                      />
+                    {/* Live Streams Grid */}
+                    <div className="grid gap-4 md:grid-cols-2 mb-6">
+                      {[
+                        { title: "NESA Africa Live Stream", desc: "Watch our 24/7 live broadcast" },
+                        { title: "The Platinum Show Live", desc: "Weekly education excellence showcase" },
+                        { title: "Education Summit 2025", desc: "Live coverage of key events" },
+                        { title: "Award Ceremony Replays", desc: "Watch past ceremony highlights" },
+                      ].map((stream, index) => (
+                        <a
+                          key={index}
+                          href={`${YOUTUBE_CHANNEL_URL}/streams`}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="group"
+                        >
+                          <div className="rounded-lg bg-white/5 p-4 hover:bg-white/10 transition-all border border-white/10 hover:border-red-500/30">
+                            <div className="flex items-center gap-3 mb-2">
+                              <div className="w-10 h-10 rounded-full bg-red-600/20 flex items-center justify-center">
+                                <Play className="h-5 w-5 text-red-500" />
+                              </div>
+                              <div>
+                                <h4 className="text-white font-medium group-hover:text-red-400 transition-colors">{stream.title}</h4>
+                                <p className="text-white/50 text-sm">{stream.desc}</p>
+                              </div>
+                            </div>
+                          </div>
+                        </a>
+                      ))}
                     </div>
                     <div className="text-center">
                       <a
