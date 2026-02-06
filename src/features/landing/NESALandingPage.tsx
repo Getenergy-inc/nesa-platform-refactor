@@ -26,6 +26,7 @@ const IntegritySection = lazy(() => import("@/components/nesa/IntegritySection")
 const UpcomingEventsSection = lazy(() => import("@/components/nesa/UpcomingEventsSection").then(m => ({ default: m.UpcomingEventsSection })));
 const AwardPhasesSection = lazy(() => import("@/components/nesa/AwardPhasesSection").then(m => ({ default: m.AwardPhasesSection })));
 const WatchSection = lazy(() => import("@/components/nesa/WatchSection").then(m => ({ default: m.WatchSection })));
+const NESAMusicSection = lazy(() => import("@/components/nesa/NESAMusicSection").then(m => ({ default: m.NESAMusicSection })));
 const NomineesShowcaseSection = lazy(() => import("@/components/nesa/NomineesShowcaseSection").then(m => ({ default: m.NomineesShowcaseSection })));
 const SponsorsSection = lazy(() => import("@/components/nesa/SponsorsSection").then(m => ({ default: m.SponsorsSection })));
 const JudgesSection = lazy(() => import("@/components/nesa/JudgesSection").then(m => ({ default: m.JudgesSection })));
@@ -108,6 +109,11 @@ export function NESALandingPage() {
         {/* 13. Watch Section - Media engagement */}
         <LazySection>
           <WatchSection />
+        </LazySection>
+        
+        {/* 13b. NESA Music Section - Official Songs */}
+        <LazySection>
+          <NESAMusicSection />
         </LazySection>
         
         {/* 14. Digital Nominees Board */}
