@@ -18,8 +18,8 @@ export const programVideos: ProgramVideo[] = [
     thumbnailUrl: "/assets/nesa-africa-song-1.jpeg"
   },
   {
-    programId: "education-for-all-video",
-    programName: "Education For All - Official Music Video",
+    programId: "nesa-anthem-2-video",
+    programName: "NESA Africa Anthem 2 - Official Music Video",
     videoType: "local",
     videoUrl: "/videos/education-for-all-video.mp4",
     thumbnailUrl: "/assets/nesa-africa-song-2.jpeg"
