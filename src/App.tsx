@@ -279,6 +279,11 @@ const App = () => (
                 <Route path="/contact" element={<WithLayout><Contact /></WithLayout>} />
                 <Route path="/policies" element={<WithLayout><Policies /></WithLayout>} />
                 
+                {/* Get Involved - Endorse NESA */}
+                <Route path="/get-involved/endorse-nesa-africa" element={<WithLayout><EndorseNESA /></WithLayout>} />
+                <Route path="/endorse" element={<WithLayout><EndorseNESA /></WithLayout>} />
+                <Route path="/endorse-nesa" element={<WithLayout><EndorseNESA /></WithLayout>} />
+                
                 {/* Utility */}
                 <Route path="/unauthorized" element={<WithLayout><Unauthorized /></WithLayout>} />
                 <Route path="*" element={<WithLayout><NotFound /></WithLayout>} />
