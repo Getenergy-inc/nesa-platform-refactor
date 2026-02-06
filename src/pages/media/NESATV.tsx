@@ -57,14 +57,14 @@ const channelVideos = [
     date: "Jan 2025"
   },
   { 
-    videoId: "Hdu_qlFLfrQ",
+    videoId: "DDREAU_bmRk",
     title: "Rebuild My School Africa Documentary", 
     views: "8.7K views", 
     duration: "35:00",
     date: "Dec 2024"
   },
   { 
-    videoId: "VDVRZrPwNRA",
+    videoId: "nQCXDX_X3rs",
     title: "NESA Africa Awards 2025 Gala Highlights", 
     views: "15K views", 
     duration: "1:20:00",
