@@ -1,28 +1,22 @@
 import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
-import { ArrowLeft, Heart, Users, Building2, Rocket, Target, ExternalLink } from "lucide-react";
+import { ArrowLeft, Heart, ExternalLink } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
-import { impactItems, getImpactByType } from "@/data/impact";
-import { validateImpactItems, logValidationWarning } from "@/lib/validate";
+import { impactItems, validateImpactItems } from "@/data/impact";
+import { logValidationWarning } from "@/lib/validate";
 import { ImpactList, ImpactSources } from "@/components/ImpactList";
 
 // Validate data on load
-logValidationWarning("Impact", validateImpactItems(impactItems));
+logValidationWarning("Impact", validateImpactItems());
 
 export default function Impact() {
-  const programs = getImpactByType('program');
-  const initiatives = getImpactByType('initiative');
-  const partnerships = getImpactByType('partnership');
-  const milestones = getImpactByType('milestone');
-  const campaigns = getImpactByType('campaign');
-
   return (
     <>
       <Helmet>
         <title>Social Impact | Education For All | NESA Africa</title>
         <meta
           name="description"
-          content="Explore the social impact of Education For All initiatives - programs, partnerships, milestones, and campaigns advancing education across Africa."
+          content="Explore the social impact of Education For All initiatives - programs, partnerships, and milestones advancing education across Africa."
         />
       </Helmet>
 
@@ -56,57 +50,12 @@ export default function Impact() {
           </div>
         </section>
 
-        {/* Programs */}
-        {programs.length > 0 && (
-          <section className="py-12 lg:py-16">
-            <div className="container mx-auto px-4">
-              <div className="mb-8 flex items-center gap-3">
-                <Target className="h-6 w-6 text-blue-400" />
-                <h2 className="text-2xl font-bold text-white">Programs</h2>
-              </div>
-              <ImpactList items={programs} />
-            </div>
-          </section>
-        )}
-
-        {/* Initiatives */}
-        {initiatives.length > 0 && (
-          <section className="bg-charcoal/80 py-12 lg:py-16">
-            <div className="container mx-auto px-4">
-              <div className="mb-8 flex items-center gap-3">
-                <Rocket className="h-6 w-6 text-purple-400" />
-                <h2 className="text-2xl font-bold text-white">Initiatives</h2>
-              </div>
-              <ImpactList items={initiatives} />
-            </div>
-          </section>
-        )}
-
-        {/* Partnerships */}
-        {partnerships.length > 0 && (
-          <section className="py-12 lg:py-16">
-            <div className="container mx-auto px-4">
-              <div className="mb-8 flex items-center gap-3">
-                <Users className="h-6 w-6 text-green-400" />
-                <h2 className="text-2xl font-bold text-white">Partnerships</h2>
-              </div>
-              <ImpactList items={partnerships} />
-            </div>
-          </section>
-        )}
-
-        {/* Milestones & Campaigns */}
-        {(milestones.length > 0 || campaigns.length > 0) && (
-          <section className="bg-charcoal/80 py-12 lg:py-16">
-            <div className="container mx-auto px-4">
-              <div className="mb-8 flex items-center gap-3">
-                <Building2 className="h-6 w-6 text-amber-400" />
-                <h2 className="text-2xl font-bold text-white">Milestones & Campaigns</h2>
-              </div>
-              <ImpactList items={[...milestones, ...campaigns]} />
-            </div>
-          </section>
-        )}
+        {/* Impact Grid */}
+        <section className="py-12 lg:py-16">
+          <div className="container mx-auto px-4">
+            <ImpactList items={impactItems} />
+          </div>
+        </section>
 
         {/* Sources Section */}
         <section className="bg-charcoal py-12 lg:py-16 border-t border-white/10">
