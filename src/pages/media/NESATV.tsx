@@ -11,66 +11,21 @@ import {
   ExternalLink,
   Globe,
   Languages,
-  Play,
   Radio,
   Tv,
   Video,
   Youtube,
 } from "lucide-react";
+import { 
+  videos, 
+  YOUTUBE_EMBED_BASE, 
+  YOUTUBE_CHANNEL, 
+  getEmbedUrl,
+  getMainFeaturedVideo,
+} from "@/data/videos";
 
-// NESA Africa TV YouTube Channel ID
-const YOUTUBE_CHANNEL_ID = "Nesa.africaTV";
-const YOUTUBE_CHANNEL_URL = `https://www.youtube.com/@${YOUTUBE_CHANNEL_ID}`;
-const YOUTUBE_EMBED_BASE = "https://www.youtube-nocookie.com/embed";
-
-// Featured video (main player)
-const FEATURED_VIDEO_ID = "MrErQY7qWRs";
-
-// Recent/Archived videos from the channel
-const channelVideos = [
-  { 
-    videoId: "MrErQY7qWRs",
-    title: "The Platinum Show - Special Edition", 
-    views: "2.5K views", 
-    duration: "1:45:00",
-    date: "Feb 2025"
-  },
-  { 
-    videoId: "Hdu_qlFLfrQ",
-    title: "Education for All Summit 2025", 
-    views: "3.8K views", 
-    duration: "2:30:00",
-    date: "Jan 2025"
-  },
-  { 
-    videoId: "VDVRZrPwNRA",
-    title: "NESA Africa 2025 Nominations Announcement", 
-    views: "5.2K views", 
-    duration: "45:00",
-    date: "Jan 2025"
-  },
-  { 
-    videoId: "aP0SskrfioI",
-    title: "Meet the Judges - Season 2025", 
-    views: "4.1K views", 
-    duration: "1:00:00",
-    date: "Jan 2025"
-  },
-  { 
-    videoId: "DDREAU_bmRk",
-    title: "Rebuild My School Africa Documentary", 
-    views: "8.7K views", 
-    duration: "35:00",
-    date: "Dec 2024"
-  },
-  { 
-    videoId: "nQCXDX_X3rs",
-    title: "NESA Africa Awards 2025 Gala Highlights", 
-    views: "15K views", 
-    duration: "1:20:00",
-    date: "Nov 2024"
-  },
-];
+// Get featured video from data
+const featuredVideo = getMainFeaturedVideo();
 
 const channels = [
   { id: "english", name: "English", flag: "🇬🇧", live: true },
@@ -129,7 +84,7 @@ export default function NESATV() {
                   and exclusive NESA-Africa programming.
                 </p>
                 <a
-                  href={YOUTUBE_CHANNEL_URL}
+                  href={YOUTUBE_CHANNEL.url}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex"
@@ -145,16 +100,18 @@ export default function NESATV() {
               {/* Main Video Player - YouTube Embed */}
               <div className="w-full lg:w-[560px]">
                 <div className="aspect-video overflow-hidden rounded-xl border border-white/10 bg-black">
-                  <iframe
-                    src={`${YOUTUBE_EMBED_BASE}/${FEATURED_VIDEO_ID}?rel=0&modestbranding=1`}
-                    title="NESA Africa TV"
-                    className="h-full w-full"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                    allowFullScreen
-                  />
+                  {featuredVideo && (
+                    <iframe
+                      src={getEmbedUrl(featuredVideo.videoId, { rel: false })}
+                      title="NESA Africa TV"
+                      className="h-full w-full"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                      allowFullScreen
+                    />
+                  )}
                 </div>
                 <p className="mt-2 text-center text-sm text-white/50">
-                  Powered by YouTube • @{YOUTUBE_CHANNEL_ID}
+                  Powered by YouTube • @{YOUTUBE_CHANNEL.id}
                 </p>
               </div>
             </div>
@@ -198,7 +155,7 @@ export default function NESATV() {
                 Latest Videos
               </h2>
               <a
-                href={`${YOUTUBE_CHANNEL_URL}/videos`}
+                href={`${YOUTUBE_CHANNEL.url}/videos`}
                 target="_blank"
                 rel="noopener noreferrer"
               >
@@ -211,14 +168,14 @@ export default function NESATV() {
 
             {/* Video Grid */}
             <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-              {channelVideos.map((video) => (
+              {videos.map((video) => (
                 <div key={video.videoId} className="group">
                   <Card className="h-full border-white/10 bg-white/5 hover:border-primary/30 hover:bg-white/10 transition-all overflow-hidden">
                     <CardContent className="p-0">
                       {/* Embedded Video Player */}
                       <div className="aspect-video bg-black">
                         <iframe
-                          src={`${YOUTUBE_EMBED_BASE}/${video.videoId}?rel=0&modestbranding=1`}
+                          src={getEmbedUrl(video.videoId, { rel: false })}
                           title={video.title}
                           className="h-full w-full"
                           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
@@ -307,17 +264,19 @@ export default function NESATV() {
                   <CardContent>
                     {/* Embedded Streams Player */}
                     <div className="aspect-video rounded-lg overflow-hidden mb-6 bg-black">
-                      <iframe
-                        src={`${YOUTUBE_EMBED_BASE}/${FEATURED_VIDEO_ID}?rel=0&modestbranding=1`}
-                        title="NESA Africa TV Streams"
-                        className="h-full w-full"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                        allowFullScreen
-                      />
+                      {featuredVideo && (
+                        <iframe
+                          src={getEmbedUrl(featuredVideo.videoId, { rel: false })}
+                          title="NESA Africa TV Streams"
+                          className="h-full w-full"
+                          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                          allowFullScreen
+                        />
+                      )}
                     </div>
                     <div className="text-center">
                       <a
-                        href={`${YOUTUBE_CHANNEL_URL}/streams`}
+                        href={`${YOUTUBE_CHANNEL.url}/streams`}
                         target="_blank"
                         rel="noopener noreferrer"
                       >
@@ -367,7 +326,7 @@ export default function NESATV() {
                         Subscribe to NESA Africa TV on YouTube for the latest content!
                       </p>
                       <a
-                        href={YOUTUBE_CHANNEL_URL}
+                        href={YOUTUBE_CHANNEL.url}
                         target="_blank"
                         rel="noopener noreferrer"
                       >

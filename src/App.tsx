@@ -37,6 +37,8 @@ import Vision2035 from "./pages/about/Vision2035";
 import Governance from "./pages/about/Governance";
 import Timeline from "./pages/about/Timeline";
 import SCEF from "./pages/about/SCEF";
+import AwardsRecognition from "./pages/about/AwardsRecognition";
+import SocialImpact from "./pages/about/SocialImpact";
 
 // Award Pages
 import PlatinumAward from "./pages/awards/PlatinumAward";
@@ -131,6 +133,8 @@ const App = () => (
                 <Route path="/about/governance" element={<WithLayout><Governance /></WithLayout>} />
                 <Route path="/about/timeline" element={<WithLayout><Timeline /></WithLayout>} />
                 <Route path="/about/scef" element={<WithLayout><SCEF /></WithLayout>} />
+                <Route path="/about/awards-recognition" element={<WithLayout><AwardsRecognition /></WithLayout>} />
+                <Route path="/about/social-impact" element={<WithLayout><SocialImpact /></WithLayout>} />
                 
                 {/* Awards */}
                 <Route path="/categories" element={<WithLayout><Categories /></WithLayout>} />
