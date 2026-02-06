@@ -33,11 +33,8 @@ export function validateAwards(awards: Award[]): boolean {
  */
 export function validateImpactItem(item: ImpactItem): boolean {
   return Boolean(
-    item.id &&
     item.title &&
-    item.organization &&
-    item.type &&
-    item.year &&
+    item.date &&
     item.description &&
     item.sourceUrl &&
     item.sourceUrl.startsWith('http')
