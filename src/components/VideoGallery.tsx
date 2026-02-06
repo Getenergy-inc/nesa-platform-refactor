@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Play, Calendar } from "lucide-react";
-import { getEmbedUrl, getThumbnailUrl } from "@/lib/youtube";
+import { getYouTubeEmbedUrl, getThumbnailUrl } from "@/lib/youtube";
 import type { Video } from "@/data/videos";
 
 interface VideoCardProps {
@@ -55,11 +55,7 @@ interface VideoPlayerProps {
 }
 
 export function VideoPlayer({ video, autoplay = false }: VideoPlayerProps) {
-  const embedUrl = getEmbedUrl(video.videoId, { 
-    rel: false, 
-    modestbranding: true,
-    autoplay 
-  });
+  const embedUrl = getYouTubeEmbedUrl(video.videoId);
 
   return (
     <div className="relative aspect-video rounded-lg overflow-hidden bg-black">

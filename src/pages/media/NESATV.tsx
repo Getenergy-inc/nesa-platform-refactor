@@ -17,7 +17,7 @@ import {
   Youtube,
 } from "lucide-react";
 import { videos } from "@/data/videos";
-import { YOUTUBE_CHANNEL, getEmbedUrl } from "@/lib/youtube";
+import { YOUTUBE_CHANNEL, getYouTubeEmbedUrl } from "@/lib/youtube";
 
 // Get first video as featured
 const featuredVideo = videos[0] || null;
@@ -97,7 +97,7 @@ export default function NESATV() {
                 <div className="aspect-video overflow-hidden rounded-xl border border-white/10 bg-black">
                   {featuredVideo && (
                     <iframe
-                      src={getEmbedUrl(featuredVideo.videoId, { rel: false })}
+                      src={getYouTubeEmbedUrl(featuredVideo.videoId)}
                       title="NESA Africa TV"
                       className="h-full w-full"
                       allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
@@ -170,7 +170,7 @@ export default function NESATV() {
                       {/* Embedded Video Player */}
                       <div className="aspect-video bg-black">
                         <iframe
-                          src={getEmbedUrl(video.videoId, { rel: false })}
+                          src={getYouTubeEmbedUrl(video.videoId)}
                           title={video.title}
                           className="h-full w-full"
                           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
@@ -261,7 +261,7 @@ export default function NESATV() {
                     <div className="aspect-video rounded-lg overflow-hidden mb-6 bg-black">
                       {featuredVideo && (
                         <iframe
-                          src={getEmbedUrl(featuredVideo.videoId, { rel: false })}
+                          src={getYouTubeEmbedUrl(featuredVideo.videoId)}
                           title="NESA Africa TV Streams"
                           className="h-full w-full"
                           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
