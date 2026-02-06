@@ -63,12 +63,7 @@ export default function Videos() {
         {/* Video Gallery */}
         <section className="py-12 lg:py-16">
           <div className="container mx-auto px-4">
-            <VideoGallery 
-              videos={videos} 
-              columns={3}
-              showPlayer={true}
-              showGroupFilter={true}
-            />
+            <VideoGallery videos={videos} />
           </div>
         </section>
       </div>
