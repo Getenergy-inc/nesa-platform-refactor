@@ -69,23 +69,3 @@ export const impactItems: ImpactItem[] = [
     sourceUrl: "https://au.int/en/pressreleases/20251006/au-concludes-pacted-2025-launch-multilingual-platform-and-recognition",
   },
 ];
-
-/**
- * Validate impact data at runtime
- */
-export function validateImpactItems(): boolean {
-  return impactItems.every(item => 
-    item.title && 
-    item.date && 
-    item.description && 
-    item.sourceUrl &&
-    item.sourceUrl.startsWith('http')
-  );
-}
-
-/**
- * Get impact items by year
- */
-export function getImpactByYear(year: string): ImpactItem[] {
-  return impactItems.filter(item => item.date.includes(year));
-}

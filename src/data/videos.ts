@@ -7,7 +7,7 @@
 export interface Video {
   title: string;
   videoId: string;
-  date: string;
+  date?: string;
   group?: string;
 }
 
@@ -49,30 +49,3 @@ export const videos: Video[] = [
     group: "Events",
   },
 ];
-
-/**
- * Get unique video groups
- */
-export function getVideoGroups(): string[] {
-  const groups = new Set(videos.map(v => v.group).filter(Boolean) as string[]);
-  return Array.from(groups);
-}
-
-/**
- * Get videos by group
- */
-export function getVideosByGroup(group: string): Video[] {
-  return videos.filter(video => video.group === group);
-}
-
-/**
- * Validate videos data at runtime
- */
-export function validateVideos(): boolean {
-  return videos.every(video => 
-    video.title && 
-    video.videoId && 
-    video.videoId.length === 11 &&
-    video.date
-  );
-}

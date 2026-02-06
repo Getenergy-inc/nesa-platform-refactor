@@ -3,11 +3,11 @@ import { Link } from "react-router-dom";
 import { ArrowLeft, Trophy, ExternalLink } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { awards } from "@/data/awards";
-import { validateAwards, logValidationWarning } from "@/lib/validate";
+import { validateAwards } from "@/lib/validate";
 import { AwardsList, AwardsSources } from "@/components/AwardsList";
 
 // Validate data on load
-logValidationWarning("Awards", validateAwards(awards));
+validateAwards(awards);
 
 export default function Awards() {
   return (

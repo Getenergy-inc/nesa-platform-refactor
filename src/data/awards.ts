@@ -78,33 +78,3 @@ export const awards: Award[] = [
     sourceUrl: "https://www.unesco.org/en/prizes/ict-education",
   },
 ];
-
-/**
- * Validate awards data at runtime
- */
-export function validateAwards(): boolean {
-  return awards.every(award => 
-    award.title && 
-    award.organization && 
-    award.year && 
-    award.description && 
-    award.sourceUrl &&
-    award.sourceUrl.startsWith('http')
-  );
-}
-
-/**
- * Get awards by year
- */
-export function getAwardsByYear(year: number): Award[] {
-  return awards.filter(award => award.year === year);
-}
-
-/**
- * Get awards by organization
- */
-export function getAwardsByOrganization(organization: string): Award[] {
-  return awards.filter(award => 
-    award.organization.toLowerCase().includes(organization.toLowerCase())
-  );
-}
