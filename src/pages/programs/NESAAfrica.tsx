@@ -10,6 +10,7 @@ import { HowItWorksVisual } from "@/components/nesa/HowItWorksVisual";
 import { LegacyImpactSection } from "@/components/nesa/LegacyImpactSection";
 import { UpcomingEventsSection } from "@/components/nesa/UpcomingEventsSection";
 import { WatchSection } from "@/components/nesa/WatchSection";
+import { NESAMusicSection } from "@/components/nesa/NESAMusicSection";
 import { NomineesShowcaseSection } from "@/components/nesa/NomineesShowcaseSection";
 import { SponsorsSection } from "@/components/nesa/SponsorsSection";
 import { CategoriesSection } from "@/components/nesa/CategoriesSection";
@@ -80,6 +81,9 @@ export default function NESAAfrica() {
         
         {/* Media */}
         <WatchSection />
+        
+        {/* Official Music */}
+        <NESAMusicSection />
         
         {/* Featured Nominees */}
         <NomineesShowcaseSection />
