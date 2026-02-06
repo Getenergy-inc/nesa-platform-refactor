@@ -234,10 +234,10 @@ export default function Partners() {
                   </Link>
                 </Button>
                 <Button size="lg" variant="outline" asChild>
-                  <a href="#" target="_blank" rel="noopener noreferrer">
+                  <Link to="/contact?type=partnership">
                     <Download className="mr-2 h-5 w-5" />
-                    Download Partnership Deck
-                  </a>
+                    Request Partnership Deck
+                  </Link>
                 </Button>
                 <Button size="lg" variant="ghost" asChild>
                   <Link to="/media/tv">

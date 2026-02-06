@@ -74,7 +74,7 @@ export function QuickActionsRow({ onTopUp }: QuickActionsRowProps) {
     {
       label: "Refer",
       icon: <Users className="h-4 w-4" />,
-      href: "#referral",
+      href: "/dashboard#referral",
       variant: "outline",
     },
   ];

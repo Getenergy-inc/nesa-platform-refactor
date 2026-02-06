@@ -101,7 +101,7 @@ export function TrophyHeroSection() {
                   Nominate Now
                 </Button>
               </Link>
-              <Link to="/awards">
+              <Link to="/categories">
                 <Button
                   size="lg"
                   variant="outline"

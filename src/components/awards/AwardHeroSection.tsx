@@ -145,9 +145,9 @@ export function AwardHeroSection({
                 {primaryAction.label}
               </Link>
             </Button>
-            {secondaryAction && (
+            {secondaryAction && secondaryAction.href && (
               <Button asChild size="lg" className={cn("gap-2", styles.secondaryBtn)}>
-                <Link to={secondaryAction.href || "#"}>
+                <Link to={secondaryAction.href}>
                   <Calendar className="h-5 w-5" />
                   {secondaryAction.label}
                 </Link>
