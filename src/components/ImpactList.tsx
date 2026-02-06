@@ -12,7 +12,7 @@ export function ImpactList({ items }: { items: Impact[] }) {
   const sorted = [...items].sort((a, b) => (a.date < b.date ? 1 : -1));
   
   return (
-    <section>
+    <section className="space-y-8">
       <div className="grid gap-4">
         {sorted.map((i) => (
           <article 
@@ -39,33 +39,35 @@ export function ImpactList({ items }: { items: Impact[] }) {
           </article>
         ))}
       </div>
+      
+      {/* Sources Section */}
+      <div className="border-t border-white/10 pt-6">
+        <h2 className="text-lg font-bold text-white mb-4 flex items-center gap-2">
+          <ExternalLink className="h-4 w-4 text-primary" />
+          Sources & Citations
+        </h2>
+        <div className="bg-muted/30 rounded-lg p-4">
+          <ul className="space-y-2 list-none m-0 p-0">
+            {sorted.map((item, index) => (
+              <li key={`source-${item.title}-${index}`} className="flex items-start gap-2 text-sm">
+                <span className="text-white/40">•</span>
+                <div>
+                  <span className="text-white/70">{item.title}</span>
+                  <span className="text-white/40 mx-2">—</span>
+                  <a
+                    href={item.sourceUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-primary hover:underline"
+                  >
+                    {new URL(item.sourceUrl).hostname}
+                  </a>
+                </div>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
     </section>
-  );
-}
-
-export function ImpactSources({ items }: { items: Impact[] }) {
-  return (
-    <div className="bg-muted/30 rounded-lg p-6">
-      <ul className="space-y-3 list-none m-0 p-0">
-        {items.map((item, index) => (
-          <li key={`${item.title}-${index}`} className="flex items-start gap-3">
-            <span className="text-white/40">•</span>
-            <div>
-              <span className="text-white/80">{item.title}</span>
-              <span className="text-white/40 mx-2">—</span>
-              <a
-                href={item.sourceUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-primary hover:underline inline-flex items-center gap-1"
-              >
-                View Source
-                <ExternalLink className="h-3 w-3" />
-              </a>
-            </div>
-          </li>
-        ))}
-      </ul>
-    </div>
   );
 }

@@ -16,10 +16,12 @@ import {
   Video,
   Youtube,
 } from "lucide-react";
-import { videos } from "@/data/videos";
+import rawVideos from "@/data/videos.json";
+import { validateVideos } from "@/lib/validate";
 import { YOUTUBE_CHANNEL, getYouTubeEmbedUrl } from "@/lib/youtube";
 
-// Get first video as featured
+// Validate and get videos from JSON
+const videos = validateVideos(rawVideos);
 const featuredVideo = videos[0] || null;
 
 const channels = [
@@ -92,7 +94,7 @@ export default function NESATV() {
                 </a>
               </div>
 
-              {/* Main Video Player - YouTube Embed */}
+              {/* Main Video Player - YouTube Embed (nocookie) */}
               <div className="w-full lg:w-[560px]">
                 <div className="aspect-video overflow-hidden rounded-xl border border-white/10 bg-black">
                   {featuredVideo && (
@@ -161,13 +163,13 @@ export default function NESATV() {
               </a>
             </div>
 
-            {/* Video Grid */}
+            {/* Video Grid - All using youtube-nocookie.com */}
             <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
               {videos.map((video) => (
                 <div key={video.videoId} className="group">
                   <Card className="h-full border-white/10 bg-white/5 hover:border-primary/30 hover:bg-white/10 transition-all overflow-hidden">
                     <CardContent className="p-0">
-                      {/* Embedded Video Player */}
+                      {/* Embedded Video Player using nocookie */}
                       <div className="aspect-video bg-black">
                         <iframe
                           src={getYouTubeEmbedUrl(video.videoId)}
@@ -257,7 +259,7 @@ export default function NESATV() {
                     </CardDescription>
                   </CardHeader>
                   <CardContent>
-                    {/* Embedded Streams Player */}
+                    {/* Embedded Streams Player using nocookie */}
                     <div className="aspect-video rounded-lg overflow-hidden mb-6 bg-black">
                       {featuredVideo && (
                         <iframe
