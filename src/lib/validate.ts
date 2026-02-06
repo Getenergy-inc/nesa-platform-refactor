@@ -53,10 +53,9 @@ export function validateImpactItems(items: ImpactItem[]): boolean {
  */
 export function validateVideo(video: Video): boolean {
   return Boolean(
-    video.id &&
+    video.title &&
     video.videoId &&
     video.videoId.length === 11 && // YouTube video IDs are 11 characters
-    video.title &&
     video.date
   );
 }

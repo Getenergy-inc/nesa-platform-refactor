@@ -2,13 +2,13 @@ import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
 import { ArrowLeft, Tv, ExternalLink } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
-import { videos, playlists } from "@/data/videos";
-import { validateVideos, logValidationWarning } from "@/lib/validate";
+import { videos, validateVideos } from "@/data/videos";
+import { logValidationWarning } from "@/lib/validate";
 import { VideoGallery } from "@/components/VideoGallery";
 import { YOUTUBE_CHANNEL } from "@/lib/youtube";
 
 // Validate data on load
-logValidationWarning("Videos", validateVideos(videos));
+logValidationWarning("Videos", validateVideos());
 
 export default function Videos() {
   return (
@@ -65,9 +65,9 @@ export default function Videos() {
           <div className="container mx-auto px-4">
             <VideoGallery 
               videos={videos} 
-              playlists={playlists}
               columns={3}
               showPlayer={true}
+              showGroupFilter={true}
             />
           </div>
         </section>
