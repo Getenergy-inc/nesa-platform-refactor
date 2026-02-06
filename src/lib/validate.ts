@@ -1,6 +1,6 @@
 /**
- * Centralized Validation Utilities
- * Runtime validation for data integrity with strict type checking
+ * Runtime Validation Utilities
+ * Strict type checking for JSON data integrity
  */
 
 type AnyRecord = Record<string, unknown>;
@@ -65,13 +65,4 @@ export function validateVideos(data: unknown) {
       group: typeof r.group === "string" ? r.group : undefined
     };
   });
-}
-
-/**
- * Log validation warnings in development
- */
-export function logValidationWarning(dataType: string, isValid: boolean): void {
-  if (!isValid && process.env.NODE_ENV === 'development') {
-    console.warn(`${dataType} data validation failed - some items may have missing required fields`);
-  }
 }

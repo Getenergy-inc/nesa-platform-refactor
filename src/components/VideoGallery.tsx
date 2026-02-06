@@ -16,7 +16,7 @@ export function VideoGallery({ videos }: { videos: Video[] }) {
   }, {});
 
   return (
-    <section>
+    <section className="space-y-8">
       {Object.entries(grouped).map(([group, items]) => (
         <div key={group} className="mb-8">
           <h2 className="text-xl font-bold text-white mb-4">{group}</h2>

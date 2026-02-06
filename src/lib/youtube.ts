@@ -1,6 +1,6 @@
 /**
  * YouTube Utilities
- * Privacy-enhanced YouTube embed helpers
+ * Privacy-enhanced YouTube embed helpers using youtube-nocookie.com
  */
 
 // Channel information
@@ -12,7 +12,7 @@ export const YOUTUBE_CHANNEL = {
 
 /**
  * Get the privacy-enhanced embed URL for a YouTube video
- * Uses nocookie to reduce tracking and avoid embedding full youtube pages
+ * Uses youtube-nocookie.com to reduce tracking and avoid ERR_BLOCKED_BY_RESPONSE
  */
 export function getYouTubeEmbedUrl(videoId: string): string {
   return `https://www.youtube-nocookie.com/embed/${encodeURIComponent(videoId)}`;
