@@ -30,8 +30,8 @@ const nesaSongs: NESASong[] = [
     artist: "NESA Africa",
     cover: nesaSong1Cover,
     audioUrl: "/audio/nesa-song-1.mp3",
-    agcPrice: 50,
-    usdPrice: 10, // $1 = 5 AGC, so 50 AGC = $10
+    agcPrice: 15, // $1 = 5 AGC, so $3 = 15 AGC minimum
+    usdPrice: 3,  // Minimum $3 donation
     duration: "3:45",
   },
   {
@@ -40,8 +40,8 @@ const nesaSongs: NESASong[] = [
     artist: "NESA Africa",
     cover: nesaSong2Cover,
     audioUrl: "/audio/nesa-song-2.mp3",
-    agcPrice: 50,
-    usdPrice: 10,
+    agcPrice: 15,
+    usdPrice: 3,
     duration: "4:12",
   },
 ];
@@ -345,7 +345,7 @@ export function NESAMusicSection() {
             className="text-white/70 max-w-2xl mx-auto"
           >
             Listen to our official anthems celebrating education across Africa. 
-            Download with <span className="text-gold font-semibold">50 AGC</span> or <span className="text-gold font-semibold">$10</span> — 
+            Download with <span className="text-gold font-semibold">15+ AGC</span> or <span className="text-gold font-semibold">$3+</span> — 
             all proceeds support <span className="text-primary">NESA Africa</span> & <span className="text-primary">EduAid Africa</span> initiatives.
           </motion.p>
         </div>
