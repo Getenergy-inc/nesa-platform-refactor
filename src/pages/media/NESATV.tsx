@@ -8,13 +8,76 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import {
   ArrowLeft,
   Calendar,
+  ExternalLink,
   Globe,
   Languages,
   Play,
   Radio,
   Tv,
   Video,
+  Youtube,
 } from "lucide-react";
+
+// NESA Africa TV YouTube Channel ID
+const YOUTUBE_CHANNEL_ID = "Nesa.africaTV";
+const YOUTUBE_CHANNEL_URL = `https://www.youtube.com/@${YOUTUBE_CHANNEL_ID}`;
+
+// Featured videos from the NESA Africa TV channel
+const featuredVideos = [
+  { 
+    id: "live_stream", 
+    title: "NESA Africa TV Live Stream", 
+    description: "Watch our 24/7 live broadcast",
+    type: "Live",
+    embedUrl: `https://www.youtube.com/embed/live_stream?channel=UC${YOUTUBE_CHANNEL_ID}`,
+  },
+];
+
+// Recent/Archived videos from the channel
+const channelVideos = [
+  { 
+    id: "1", 
+    title: "The Platinum Show - Special Edition", 
+    views: "2.5K views", 
+    duration: "1:45:00",
+    date: "Feb 2025"
+  },
+  { 
+    id: "2", 
+    title: "Education for All Summit 2025", 
+    views: "3.8K views", 
+    duration: "2:30:00",
+    date: "Jan 2025"
+  },
+  { 
+    id: "3", 
+    title: "NESA Africa 2025 Nominations Announcement", 
+    views: "5.2K views", 
+    duration: "45:00",
+    date: "Jan 2025"
+  },
+  { 
+    id: "4", 
+    title: "Meet the Judges - Season 2025", 
+    views: "4.1K views", 
+    duration: "1:00:00",
+    date: "Jan 2025"
+  },
+  { 
+    id: "5", 
+    title: "Rebuild My School Africa Documentary", 
+    views: "8.7K views", 
+    duration: "35:00",
+    date: "Dec 2024"
+  },
+  { 
+    id: "6", 
+    title: "NESA Africa Awards 2024 Gala Highlights", 
+    views: "15K views", 
+    duration: "1:20:00",
+    date: "Nov 2024"
+  },
+];
 
 const channels = [
   { id: "english", name: "English", flag: "🇬🇧", live: true },
@@ -30,13 +93,6 @@ const schedule = [
   { time: "15:00", title: "The Platinum Hour", type: "Recorded" },
   { time: "18:00", title: "Education Champions", type: "Live" },
   { time: "21:00", title: "NESA Africa Tonight", type: "Live" },
-];
-
-const recentVideos = [
-  { title: "Education Summit 2025 Highlights", views: "12K", duration: "45:00" },
-  { title: "Interview: Africa's Education Icons", views: "8.5K", duration: "32:15" },
-  { title: "Gold Category Nominees Revealed", views: "15K", duration: "28:00" },
-  { title: "Behind the Scenes: NRC Review Process", views: "6.2K", duration: "18:45" },
 ];
 
 export default function NESATV() {
@@ -79,18 +135,34 @@ export default function NESATV() {
                   24/7 multilingual education broadcasting. Watch live streams, on-demand content,
                   and exclusive NESA-Africa programming.
                 </p>
+                <a
+                  href={YOUTUBE_CHANNEL_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex"
+                >
+                  <Button className="gap-2 bg-red-600 hover:bg-red-700 text-white">
+                    <Youtube className="h-5 w-5" />
+                    Subscribe on YouTube
+                    <ExternalLink className="h-4 w-4" />
+                  </Button>
+                </a>
               </div>
 
-              {/* Live Player Placeholder */}
-              <div className="w-full lg:w-[480px]">
+              {/* Main Live Player - YouTube Embed */}
+              <div className="w-full lg:w-[560px]">
                 <div className="aspect-video overflow-hidden rounded-xl border border-white/10 bg-black">
-                  <div className="flex h-full items-center justify-center">
-                    <div className="text-center">
-                      <Play className="mx-auto mb-4 h-16 w-16 text-primary" />
-                      <p className="text-white/60">Live stream starting soon</p>
-                    </div>
-                  </div>
+                  <iframe
+                    src={`https://www.youtube.com/embed?listType=user_uploads&list=${YOUTUBE_CHANNEL_ID}`}
+                    title="NESA Africa TV"
+                    className="h-full w-full"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    allowFullScreen
+                  />
                 </div>
+                <p className="mt-2 text-center text-sm text-white/50">
+                  Powered by YouTube • @{YOUTUBE_CHANNEL_ID}
+                </p>
               </div>
             </div>
           </div>
@@ -124,8 +196,63 @@ export default function NESATV() {
           </div>
         </section>
 
+        {/* Video Gallery */}
+        <section className="bg-charcoal py-12 lg:py-16">
+          <div className="container mx-auto px-4">
+            <div className="mb-8 flex items-center justify-between">
+              <h2 className="text-2xl font-bold text-white flex items-center gap-2">
+                <Video className="h-6 w-6 text-primary" />
+                Latest Videos
+              </h2>
+              <a
+                href={`${YOUTUBE_CHANNEL_URL}/videos`}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <Button variant="outline" size="sm" className="gap-2 border-white/20 text-white hover:bg-white/10">
+                  View All on YouTube
+                  <ExternalLink className="h-4 w-4" />
+                </Button>
+              </a>
+            </div>
+
+            {/* Video Grid */}
+            <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+              {channelVideos.map((video, index) => (
+                <a
+                  key={video.id}
+                  href={`${YOUTUBE_CHANNEL_URL}/videos`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group"
+                >
+                  <Card className="h-full border-white/10 bg-white/5 hover:border-primary/30 hover:bg-white/10 transition-all">
+                    <CardContent className="p-4">
+                      {/* Thumbnail placeholder */}
+                      <div className="relative aspect-video mb-4 rounded-lg bg-charcoal-light overflow-hidden flex items-center justify-center group-hover:ring-2 ring-primary/50 transition-all">
+                        <div className="absolute inset-0 bg-gradient-to-br from-primary/20 to-transparent" />
+                        <Play className="h-12 w-12 text-primary group-hover:scale-110 transition-transform" />
+                        <Badge className="absolute top-2 right-2 bg-black/70 text-white text-xs">
+                          {video.duration}
+                        </Badge>
+                      </div>
+                      <h3 className="font-semibold text-white line-clamp-2 mb-2 group-hover:text-primary transition-colors">
+                        {video.title}
+                      </h3>
+                      <div className="flex items-center justify-between text-sm text-white/50">
+                        <span>{video.views}</span>
+                        <span>{video.date}</span>
+                      </div>
+                    </CardContent>
+                  </Card>
+                </a>
+              ))}
+            </div>
+          </div>
+        </section>
+
         {/* Content Tabs */}
-        <section className="bg-charcoal py-16 lg:py-24">
+        <section className="bg-charcoal/95 py-16 lg:py-24">
           <div className="container mx-auto px-4">
             <Tabs defaultValue="schedule" className="mx-auto max-w-4xl">
               <TabsList className="mb-8 grid w-full grid-cols-3 bg-white/5">
@@ -133,9 +260,9 @@ export default function NESATV() {
                   <Calendar className="mr-2 h-4 w-4" />
                   Schedule
                 </TabsTrigger>
-                <TabsTrigger value="recent" className="data-[state=active]:bg-primary/20 data-[state=active]:text-primary">
-                  <Video className="mr-2 h-4 w-4" />
-                  Recent
+                <TabsTrigger value="streams" className="data-[state=active]:bg-primary/20 data-[state=active]:text-primary">
+                  <Radio className="mr-2 h-4 w-4" />
+                  Live Streams
                 </TabsTrigger>
                 <TabsTrigger value="about" className="data-[state=active]:bg-primary/20 data-[state=active]:text-primary">
                   <Globe className="mr-2 h-4 w-4" />
@@ -175,28 +302,43 @@ export default function NESATV() {
                 </Card>
               </TabsContent>
 
-              <TabsContent value="recent">
-                <div className="grid gap-4">
-                  {recentVideos.map((video) => (
-                    <div
-                      key={video.title}
-                      className="flex items-center justify-between rounded-lg border border-white/10 bg-white/5 p-4"
-                    >
-                      <div className="flex items-center gap-4">
-                        <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-primary/10">
-                          <Play className="h-5 w-5 text-primary" />
-                        </div>
-                        <div>
-                          <h3 className="font-medium text-white">{video.title}</h3>
-                          <p className="text-sm text-white/60">{video.views} views • {video.duration}</p>
-                        </div>
-                      </div>
-                      <Button size="sm" variant="outline" className="border-white/20 text-white hover:bg-white/10">
-                        Watch
-                      </Button>
+              <TabsContent value="streams">
+                <Card className="border-white/10 bg-white/5">
+                  <CardHeader>
+                    <CardTitle className="text-white flex items-center gap-2">
+                      <Youtube className="h-5 w-5 text-red-500" />
+                      Live Streams & Archives
+                    </CardTitle>
+                    <CardDescription className="text-white/60">
+                      Watch live and archived streams from our YouTube channel
+                    </CardDescription>
+                  </CardHeader>
+                  <CardContent>
+                    {/* Embedded YouTube Streams Playlist */}
+                    <div className="aspect-video rounded-lg overflow-hidden mb-4">
+                      <iframe
+                        src={`https://www.youtube.com/embed/videoseries?list=UU${YOUTUBE_CHANNEL_ID.replace('@', '')}`}
+                        title="NESA Africa TV Streams"
+                        className="h-full w-full"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowFullScreen
+                      />
                     </div>
-                  ))}
-                </div>
+                    <div className="text-center">
+                      <a
+                        href={`${YOUTUBE_CHANNEL_URL}/streams`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        <Button className="gap-2 bg-red-600 hover:bg-red-700 text-white">
+                          <Youtube className="h-5 w-5" />
+                          View All Streams on YouTube
+                          <ExternalLink className="h-4 w-4" />
+                        </Button>
+                      </a>
+                    </div>
+                  </CardContent>
+                </Card>
               </TabsContent>
 
               <TabsContent value="about">
@@ -226,6 +368,24 @@ export default function NESATV() {
                         <div className="mb-2 text-2xl font-bold text-primary">54</div>
                         <div className="text-sm text-white/60">Countries</div>
                       </div>
+                    </div>
+                    
+                    {/* Subscribe CTA */}
+                    <div className="pt-6 text-center border-t border-white/10 mt-6">
+                      <p className="mb-4 text-white/80">
+                        Subscribe to NESA Africa TV on YouTube for the latest content!
+                      </p>
+                      <a
+                        href={YOUTUBE_CHANNEL_URL}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        <Button className="gap-2 bg-red-600 hover:bg-red-700 text-white">
+                          <Youtube className="h-5 w-5" />
+                          Subscribe Now
+                          <ExternalLink className="h-4 w-4" />
+                        </Button>
+                      </a>
                     </div>
                   </CardContent>
                 </Card>
