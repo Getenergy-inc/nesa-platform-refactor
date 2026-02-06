@@ -82,6 +82,7 @@ import GFAWzipLinks from "./pages/GFAWzipLinks";
 import { Shop, ProductDetail, Cart, Checkout, OrderConfirmation, BulkOrders } from "./pages/shop";
 import { SponsorLanding } from "./pages/sponsors";
 import Wallet from "./pages/Wallet";
+import EndorseNESA from "./pages/EndorseNESA";
 
 // OLC Pages
 import { OLCDashboard, OLCMembers, OLCSettlements, OLCWallet } from "./pages/olc";

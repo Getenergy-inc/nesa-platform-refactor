@@ -94,8 +94,8 @@ export default function EndorseNESA() {
         <div className="min-h-screen bg-background flex items-center justify-center p-4">
           <Card className="max-w-lg w-full text-center">
             <CardContent className="pt-8 pb-6 space-y-4">
-              <div className="w-16 h-16 mx-auto rounded-full bg-green-100 dark:bg-green-900/30 flex items-center justify-center">
-                <Users className="h-8 w-8 text-green-600 dark:text-green-400" />
+              <div className="w-16 h-16 mx-auto rounded-full bg-primary/10 flex items-center justify-center">
+                <Users className="h-8 w-8 text-primary" />
               </div>
               <h1 className="font-display text-2xl font-bold text-foreground">
                 Thank You for Your Endorsement!
