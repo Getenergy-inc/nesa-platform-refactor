@@ -65,7 +65,7 @@ const channelVideos = [
   },
   { 
     videoId: "VIDEO_ID_6",
-    title: "NESA Africa Awards 2024 Gala Highlights", 
+    title: "NESA Africa Awards 2025 Gala Highlights", 
     views: "15K views", 
     duration: "1:20:00",
     date: "Nov 2024"
