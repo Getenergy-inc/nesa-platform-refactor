@@ -1,8 +1,8 @@
 import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
-import { ArrowLeft, Trophy, Globe, Building, ExternalLink } from "lucide-react";
+import { ArrowLeft, Trophy, ExternalLink } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
-import { awards, getAwardsByCategory } from "@/data/awards";
+import { awards } from "@/data/awards";
 import { validateAwards, logValidationWarning } from "@/lib/validate";
 import { AwardsList, AwardsSources } from "@/components/AwardsList";
 
@@ -10,9 +10,6 @@ import { AwardsList, AwardsSources } from "@/components/AwardsList";
 logValidationWarning("Awards", validateAwards(awards));
 
 export default function Awards() {
-  const internationalAwards = getAwardsByCategory('international');
-  const continentalAwards = getAwardsByCategory('continental');
-
   return (
     <>
       <Helmet>
@@ -53,27 +50,10 @@ export default function Awards() {
           </div>
         </section>
 
-        {/* International Awards */}
+        {/* Awards Grid */}
         <section className="py-12 lg:py-16">
           <div className="container mx-auto px-4">
-            <div className="mb-8 flex items-center gap-3">
-              <Globe className="h-6 w-6 text-blue-400" />
-              <h2 className="text-2xl font-bold text-white">International Recognition</h2>
-            </div>
-            
-            <AwardsList awards={internationalAwards} />
-          </div>
-        </section>
-
-        {/* Continental Awards */}
-        <section className="bg-charcoal/80 py-12 lg:py-16">
-          <div className="container mx-auto px-4">
-            <div className="mb-8 flex items-center gap-3">
-              <Building className="h-6 w-6 text-amber-400" />
-              <h2 className="text-2xl font-bold text-white">Continental Awards</h2>
-            </div>
-            
-            <AwardsList awards={continentalAwards} />
+            <AwardsList awards={awards} />
           </div>
         </section>
 
