@@ -1,76 +1,52 @@
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { ExternalLink, Calendar, MapPin } from "lucide-react";
-import type { ImpactItem } from "@/data/impact";
+import { ExternalLink } from "lucide-react";
 
-interface ImpactCardProps {
-  item: ImpactItem;
-}
+type Impact = {
+  title: string;
+  date: string;
+  description: string;
+  location?: string;
+  sourceUrl: string;
+};
 
-export function ImpactCard({ item }: ImpactCardProps) {
+export function ImpactList({ items }: { items: Impact[] }) {
+  const sorted = [...items].sort((a, b) => (a.date < b.date ? 1 : -1));
+  
   return (
-    <Card className="h-full border-white/10 bg-white/5 hover:border-primary/30 hover:bg-white/10 transition-all">
-      <CardHeader className="pb-3">
-        <div className="flex items-start justify-between gap-2">
-          <span className="flex items-center gap-1 text-xs text-white/50">
-            <Calendar className="h-3 w-3" />
-            {item.date}
-          </span>
-        </div>
-        <CardTitle className="text-lg text-white mt-2">{item.title}</CardTitle>
-      </CardHeader>
-      <CardContent className="space-y-3">
-        <p className="text-sm text-white/60">{item.description}</p>
-        
-        {item.location && (
-          <div className="flex items-center gap-1 text-xs text-white/50">
-            <MapPin className="h-3 w-3" />
-            {item.location}
-          </div>
-        )}
-        
-        <a
-          href={item.sourceUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="inline-flex items-center gap-1 text-xs text-primary hover:underline mt-2"
-        >
-          Learn More
-          <ExternalLink className="h-3 w-3" />
-        </a>
-      </CardContent>
-    </Card>
+    <section>
+      <div className="grid gap-4">
+        {sorted.map((i) => (
+          <article 
+            key={`${i.title}-${i.date}`} 
+            className="p-4 border border-white/10 bg-secondary/5 rounded-xl shadow-card hover:shadow-lg hover:border-primary/30 transition-all"
+          >
+            <h3 className="text-lg font-semibold text-white m-0">{i.title}</h3>
+            <p className="my-2 text-sm text-white/70">
+              <strong className="text-white/90">{i.date}</strong>
+              {i.location ? ` • ${i.location}` : ""}
+            </p>
+            <p className="my-2 text-sm text-white/60">{i.description}</p>
+            <p className="mt-3 mb-0 text-xs">
+              <a 
+                href={i.sourceUrl} 
+                target="_blank" 
+                rel="noreferrer"
+                className="text-primary hover:underline inline-flex items-center gap-1"
+              >
+                View Source
+                <ExternalLink className="h-3 w-3" />
+              </a>
+            </p>
+          </article>
+        ))}
+      </div>
+    </section>
   );
 }
 
-interface ImpactListProps {
-  items: ImpactItem[];
-  columns?: 1 | 2 | 3;
-}
-
-export function ImpactList({ items, columns = 3 }: ImpactListProps) {
-  const gridCols = {
-    1: "grid-cols-1",
-    2: "md:grid-cols-2",
-    3: "md:grid-cols-2 lg:grid-cols-3",
-  };
-
+export function ImpactSources({ items }: { items: Impact[] }) {
   return (
-    <div className={`grid gap-6 ${gridCols[columns]}`}>
-      {items.map((item, index) => (
-        <ImpactCard key={`${item.title}-${index}`} item={item} />
-      ))}
-    </div>
-  );
-}
-
-interface ImpactSourcesProps {
-  items: ImpactItem[];
-}
-
-export function ImpactSources({ items }: ImpactSourcesProps) {
-  return (
-    <div className="bg-white/5 rounded-lg p-6">
-      <ul className="space-y-3">
+    <div className="bg-muted/30 rounded-lg p-6">
+      <ul className="space-y-3 list-none m-0 p-0">
         {items.map((item, index) => (
           <li key={`${item.title}-${index}`} className="flex items-start gap-3">
             <span className="text-white/40">•</span>
