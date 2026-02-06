@@ -1,0 +1,82 @@
+{
+  "deadlines": {
+    "nomineeEndorsement": "2025-09-20",
+    "institutionalEndorsement": "2025-11-30"
+  },
+  "types": [
+    {
+      "id": "free",
+      "title": "Free Endorsement",
+      "description": "Goodwill support without financial commitment",
+      "isPaid": false
+    },
+    {
+      "id": "paid",
+      "title": "Paid Endorsement",
+      "description": "With donation or sponsorship contribution",
+      "isPaid": true
+    }
+  ],
+  "tiers": [
+    {
+      "id": "bronze",
+      "name": "Bronze",
+      "priceUsd": 50,
+      "benefits": [
+        "Logo on endorser wall",
+        "Digital certificate of endorsement",
+        "Social media mention"
+      ]
+    },
+    {
+      "id": "silver",
+      "name": "Silver",
+      "priceUsd": 150,
+      "benefits": [
+        "All Bronze benefits",
+        "Featured in newsletter",
+        "Logo on awards program"
+      ]
+    },
+    {
+      "id": "gold",
+      "name": "Gold",
+      "priceUsd": 500,
+      "benefits": [
+        "All Silver benefits",
+        "VIP event invitations",
+        "Speaking opportunity at gala"
+      ]
+    },
+    {
+      "id": "platinum",
+      "name": "Platinum",
+      "priceUsd": 1000,
+      "benefits": [
+        "All Gold benefits",
+        "Premium logo placement",
+        "Board recognition",
+        "Exclusive networking access"
+      ]
+    }
+  ],
+  "paymentMethods": [
+    { "id": "card", "name": "Credit/Debit Card" },
+    { "id": "bank", "name": "Bank Transfer" },
+    { "id": "mobile", "name": "Mobile Money" },
+    { "id": "crypto", "name": "Cryptocurrency" }
+  ],
+  "countries": [
+    "Nigeria", "Kenya", "South Africa", "Ghana", "Tanzania", "Uganda", 
+    "Rwanda", "Ethiopia", "Egypt", "Morocco", "Algeria", "Senegal", 
+    "Cameroon", "Ivory Coast", "Angola", "Mozambique", "Zimbabwe",
+    "Botswana", "Namibia", "Zambia", "Malawi", "Madagascar", "Mauritius",
+    "Other"
+  ],
+  "fileUploadLimits": {
+    "logoMaxSizeMb": 2,
+    "logoAllowedTypes": ["image/svg+xml", "image/png", "image/jpeg"],
+    "videoMaxSizeMb": 200,
+    "videoAllowedTypes": ["video/mp4", "video/mov", "video/avi"]
+  }
+}

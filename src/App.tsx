@@ -82,6 +82,7 @@ import GFAWzipLinks from "./pages/GFAWzipLinks";
 import { Shop, ProductDetail, Cart, Checkout, OrderConfirmation, BulkOrders } from "./pages/shop";
 import { SponsorLanding } from "./pages/sponsors";
 import Wallet from "./pages/Wallet";
+import EndorseNESA from "./pages/EndorseNESA";
 
 // OLC Pages
 import { OLCDashboard, OLCMembers, OLCSettlements, OLCWallet } from "./pages/olc";
@@ -277,6 +278,11 @@ const App = () => (
                 <Route path="/ambassadors" element={<WithLayout><Ambassadors /></WithLayout>} />
                 <Route path="/contact" element={<WithLayout><Contact /></WithLayout>} />
                 <Route path="/policies" element={<WithLayout><Policies /></WithLayout>} />
+                
+                {/* Get Involved - Endorse NESA */}
+                <Route path="/get-involved/endorse-nesa-africa" element={<WithLayout><EndorseNESA /></WithLayout>} />
+                <Route path="/endorse" element={<WithLayout><EndorseNESA /></WithLayout>} />
+                <Route path="/endorse-nesa" element={<WithLayout><EndorseNESA /></WithLayout>} />
                 
                 {/* Utility */}
                 <Route path="/unauthorized" element={<WithLayout><Unauthorized /></WithLayout>} />
