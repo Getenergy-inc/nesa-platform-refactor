@@ -166,7 +166,7 @@ export function EndorsedBySection() {
               asChild
               className="bg-gold text-charcoal hover:bg-gold-light gap-2"
             >
-              <Link to="/contact?subject=partnership">
+              <Link to="/get-involved/endorse-nesa-africa">
                 {t("landing.endorsedBy.becomeEndorser")}
               </Link>
             </Button>
