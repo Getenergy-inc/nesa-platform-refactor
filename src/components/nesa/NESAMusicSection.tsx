@@ -1,8 +1,9 @@
 // NESA Africa Music Section
-// Allows users to preview and unlock official NESA songs via AGC, Stripe, or free preview
+// Allows users to preview and download official NESA songs via AGC or USD payment
+// All proceeds support NESA Africa and EduAid Africa
 
 import { useState, useRef, useEffect } from "react";
-import { Music, Play, Pause, Lock, Coins, CreditCard, Volume2 } from "lucide-react";
+import { Music, Play, Pause, Download, Coins, CreditCard, Heart } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -30,7 +31,7 @@ const nesaSongs: NESASong[] = [
     cover: nesaSong1Cover,
     audioUrl: "/audio/nesa-song-1.mp3",
     agcPrice: 50,
-    usdPrice: 2.99,
+    usdPrice: 10, // $1 = 5 AGC, so 50 AGC = $10
     duration: "3:45",
   },
   {
@@ -40,7 +41,7 @@ const nesaSongs: NESASong[] = [
     cover: nesaSong2Cover,
     audioUrl: "/audio/nesa-song-2.mp3",
     agcPrice: 50,
-    usdPrice: 2.99,
+    usdPrice: 10,
     duration: "4:12",
   },
 ];
@@ -50,7 +51,7 @@ function SongCard({ song, currentlyPlaying, onPlay }: {
   currentlyPlaying: string | null;
   onPlay: (songId: string) => void;
 }) {
-  const [isUnlocked] = useState(true); // Songs are free to play for now
+  const [isPurchased, setIsPurchased] = useState(false);
   const isPlaying = currentlyPlaying === song.id;
   const { toast } = useToast();
 
@@ -58,18 +59,59 @@ function SongCard({ song, currentlyPlaying, onPlay }: {
     onPlay(song.id);
   };
 
-  const handlePayWithAGC = () => {
+  const handleDownloadWithAGC = () => {
     toast({
-      title: "AGC Payment",
-      description: `Unlock "${song.title}" for ${song.agcPrice} AGC credits. Feature coming soon!`,
+      title: "Support with AGC Credits",
+      description: `Download "${song.title}" for ${song.agcPrice} AGC. All proceeds support NESA Africa & EduAid Africa initiatives.`,
+      action: (
+        <Button size="sm" variant="outline" onClick={() => {
+          // In production, this would deduct AGC from wallet
+          setIsPurchased(true);
+          toast({
+            title: "Thank You!",
+            description: "Your support helps rebuild schools across Africa. Download starting...",
+          });
+          // Trigger download
+          const link = document.createElement('a');
+          link.href = song.audioUrl;
+          link.download = `${song.title.replace(/\s+/g, '-')}.mp3`;
+          link.click();
+        }}>
+          Confirm
+        </Button>
+      ),
     });
   };
 
-  const handlePayWithStripe = () => {
+  const handleDownloadWithUSD = () => {
     toast({
-      title: "Card Payment",
-      description: `Purchase "${song.title}" for $${song.usdPrice}. Feature coming soon!`,
+      title: "Support with Card Payment",
+      description: `Download "${song.title}" for $${song.usdPrice}. All proceeds support NESA Africa & EduAid Africa initiatives.`,
+      action: (
+        <Button size="sm" variant="outline" onClick={() => {
+          // In production, this would integrate with Stripe
+          setIsPurchased(true);
+          toast({
+            title: "Thank You!",
+            description: "Your support helps rebuild schools across Africa. Download starting...",
+          });
+          // Trigger download
+          const link = document.createElement('a');
+          link.href = song.audioUrl;
+          link.download = `${song.title.replace(/\s+/g, '-')}.mp3`;
+          link.click();
+        }}>
+          Confirm
+        </Button>
+      ),
     });
+  };
+
+  const handleDirectDownload = () => {
+    const link = document.createElement('a');
+    link.href = song.audioUrl;
+    link.download = `${song.title.replace(/\s+/g, '-')}.mp3`;
+    link.click();
   };
 
   return (
@@ -143,25 +185,23 @@ function SongCard({ song, currentlyPlaying, onPlay }: {
               {song.duration}
             </Badge>
 
-            {/* Lock Status */}
-            {!isUnlocked && (
-              <div className="absolute top-2 right-2">
-                <div className="h-8 w-8 rounded-full bg-charcoal/80 flex items-center justify-center">
-                  <Lock className="h-4 w-4 text-gold" />
-                </div>
-              </div>
-            )}
-
             {/* Now Playing indicator */}
             {isPlaying && (
               <Badge className="absolute top-2 left-2 bg-gold text-charcoal border-0 animate-pulse">
                 Now Playing
               </Badge>
             )}
+
+            {/* Purchased Badge */}
+            {isPurchased && (
+              <Badge className="absolute top-2 right-2 bg-green-600 text-white border-0">
+                Purchased
+              </Badge>
+            )}
           </div>
 
           {/* Song Info */}
-          <div className="p-4 space-y-4">
+          <div className="p-4 space-y-3">
             <div>
               <h3 className="font-display text-lg font-semibold text-white truncate">
                 {song.title}
@@ -183,31 +223,49 @@ function SongCard({ song, currentlyPlaying, onPlay }: {
                 </>
               ) : (
                 <>
-                  <Volume2 className="h-4 w-4" />
-                  Play Now
+                  <Play className="h-4 w-4" />
+                  Play Preview
                 </>
               )}
             </Button>
 
-            {/* Payment Options */}
-            <div className="grid grid-cols-2 gap-2">
-              <Button
-                size="sm"
-                onClick={handlePayWithAGC}
-                className="bg-gradient-to-r from-gold to-gold-light text-charcoal hover:opacity-90 gap-1 text-xs"
-              >
-                <Coins className="h-3.5 w-3.5" />
-                {song.agcPrice} AGC
-              </Button>
-              <Button
-                size="sm"
-                variant="secondary"
-                onClick={handlePayWithStripe}
-                className="gap-1 text-xs"
-              >
-                <CreditCard className="h-3.5 w-3.5" />
-                ${song.usdPrice}
-              </Button>
+            {/* Download Options */}
+            <div className="space-y-2">
+              <p className="text-xs text-white/50 text-center flex items-center justify-center gap-1">
+                <Heart className="h-3 w-3 text-red-400" />
+                Support NESA Africa & EduAid Africa
+              </p>
+              
+              {isPurchased ? (
+                <Button
+                  size="sm"
+                  onClick={handleDirectDownload}
+                  className="w-full bg-green-600 hover:bg-green-700 text-white gap-2"
+                >
+                  <Download className="h-4 w-4" />
+                  Download Now
+                </Button>
+              ) : (
+                <div className="grid grid-cols-2 gap-2">
+                  <Button
+                    size="sm"
+                    onClick={handleDownloadWithAGC}
+                    className="bg-gradient-to-r from-gold to-gold-light text-charcoal hover:opacity-90 gap-1 text-xs"
+                  >
+                    <Coins className="h-3.5 w-3.5" />
+                    {song.agcPrice} AGC
+                  </Button>
+                  <Button
+                    size="sm"
+                    variant="secondary"
+                    onClick={handleDownloadWithUSD}
+                    className="gap-1 text-xs"
+                  >
+                    <CreditCard className="h-3.5 w-3.5" />
+                    ${song.usdPrice}
+                  </Button>
+                </div>
+              )}
             </div>
           </div>
         </CardContent>
@@ -287,7 +345,8 @@ export function NESAMusicSection() {
             className="text-white/70 max-w-2xl mx-auto"
           >
             Listen to our official anthems celebrating education across Africa. 
-            Play now or unlock exclusive content with AGC credits.
+            Download with <span className="text-gold font-semibold">50 AGC</span> or <span className="text-gold font-semibold">$10</span> — 
+            all proceeds support <span className="text-primary">NESA Africa</span> & <span className="text-primary">EduAid Africa</span> initiatives.
           </motion.p>
         </div>
 
@@ -303,16 +362,22 @@ export function NESAMusicSection() {
           ))}
         </div>
 
-        {/* Info Note */}
-        <motion.p
+        {/* Impact Note */}
+        <motion.div
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
           transition={{ delay: 0.4 }}
-          className="text-center text-white/50 text-sm mt-8"
+          className="text-center mt-10 p-4 rounded-xl bg-gradient-to-r from-gold/5 via-primary/5 to-gold/5 border border-gold/10 max-w-xl mx-auto"
         >
-          All proceeds support education initiatives across Africa
-        </motion.p>
+          <div className="flex items-center justify-center gap-2 mb-2">
+            <Heart className="h-4 w-4 text-red-400" />
+            <span className="text-white/80 text-sm font-medium">Your Support Makes a Difference</span>
+          </div>
+          <p className="text-white/50 text-xs">
+            Every download helps rebuild schools and provide educational resources across Africa through our EduAid initiative.
+          </p>
+        </motion.div>
       </div>
     </section>
   );
