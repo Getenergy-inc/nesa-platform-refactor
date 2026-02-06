@@ -11,6 +11,20 @@ export interface ProgramVideo {
 
 export const programVideos: ProgramVideo[] = [
   {
+    programId: "nesa-anthem-video",
+    programName: "NESA Africa Anthem - Official Music Video",
+    videoType: "local",
+    videoUrl: "/videos/nesa-africa-anthem-video.mp4",
+    thumbnailUrl: "/assets/nesa-africa-song-1.jpeg"
+  },
+  {
+    programId: "education-for-all-video",
+    programName: "Education For All - Official Music Video",
+    videoType: "local",
+    videoUrl: "/videos/education-for-all-video.mp4",
+    thumbnailUrl: "/assets/nesa-africa-song-2.jpeg"
+  },
+  {
     programId: "nesa-africa",
     programName: "NESA-Africa",
     videoType: "youtube",
