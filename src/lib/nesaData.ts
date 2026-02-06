@@ -193,17 +193,19 @@ export function getImageType(name: string): NomineeImageType {
 }
 
 /**
- * Normalize year references in text: replace legacy years with 2025 context
+ * Normalize year references in text: convert 2024 to 2025 and fix legacy ranges
  */
 export function normalizeYearReferences(text: string): string {
   if (!text) return text;
   return text
-    // Replace ranges
+    // Convert 2024 to 2025 first
+    .replace(/2024/g, "2025")
+    // Replace ranges to correct format
     .replace(/2014[-–—]2025/g, "2005–2025")
     .replace(/2014 to 2025/gi, "2005 to 2025")
     .replace(/2020[-–—]2025/g, "2020–2025")
     .replace(/2013[-–—]2025/g, "2013–2025")
-    // Replace standalone years in award context
+    // Clean up award context
     .replace(/Award[s]?\s+2025/gi, "Awards 2025")
     .replace(/NESA[\s-]*2025/gi, "NESA 2025")
     .replace(/2025\s+Award/gi, "2025 Award")
