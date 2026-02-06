@@ -1,12 +1,12 @@
 import { Link } from "react-router-dom";
-import { Trophy, Vote, ArrowRight } from "lucide-react";
+import { Trophy, Vote, Heart } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 /**
  * QuickActionBar - Minimal sticky mobile bar
  * 
  * Shows ONLY when user scrolls past hero.
- * 2 buttons max to avoid decision paralysis.
+ * 3 buttons for key actions.
  */
 export function QuickActionBar() {
   return (
@@ -30,6 +30,17 @@ export function QuickActionBar() {
           >
             <Vote className="h-4 w-4" />
             Vote
+          </Button>
+        </Link>
+
+        <Link to="/donate" className="flex-1">
+          <Button
+            size="sm"
+            variant="outline"
+            className="w-full border-primary/40 text-primary hover:bg-primary/10 font-semibold rounded-lg gap-1.5 h-10"
+          >
+            <Heart className="h-4 w-4" />
+            Donate
           </Button>
         </Link>
       </div>
