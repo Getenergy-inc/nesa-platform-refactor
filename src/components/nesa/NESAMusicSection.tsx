@@ -9,6 +9,7 @@ import { Badge } from "@/components/ui/badge";
 import { motion } from "framer-motion";
 import { useToast } from "@/hooks/use-toast";
 import nesaSong1Cover from "@/assets/nesa-africa-song-1.jpeg";
+import nesaSong2Cover from "@/assets/nesa-africa-song-2.jpeg";
 
 interface NESASong {
   id: string;
@@ -38,7 +39,7 @@ const nesaSongs: NESASong[] = [
     id: "nesa-song-2",
     title: "Education For All",
     artist: "NESA Africa",
-    cover: nesaSong1Cover, // Using same cover for now
+    cover: nesaSong2Cover,
     previewUrl: undefined,
     fullUrl: undefined,
     agcPrice: 50,
