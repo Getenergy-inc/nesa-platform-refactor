@@ -13,7 +13,7 @@ export function NESAHero() {
   const bannerText = getBannerText();
 
   const quickNavItems = [
-    { icon: Users, label: "Refer", href: "#refer" },
+    { icon: Users, label: "Refer", href: "/dashboard#referral" },
     { icon: Award, label: "Nominate", href: "/nominate" },
     { icon: FileText, label: "Vision 2035", href: "/about/vision-2035" },
     { icon: Ticket, label: "Tickets", href: "/buy-your-ticket" },
