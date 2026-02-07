@@ -69,7 +69,7 @@ export function CategoriesSection() {
           </p>
         </motion.div>
 
-        {/* Tier Legend */}
+        {/* Tier Legend - Clickable CTAs */}
         <div className="flex flex-wrap justify-center gap-3 mb-10">
           {Object.entries(TIER_INFO).map(([key, tier], index) => (
             <motion.div 
@@ -78,9 +78,16 @@ export function CategoriesSection() {
               whileInView={{ opacity: 1, scale: 1 }}
               transition={{ delay: index * 0.1 }}
               viewport={{ once: true }}
-              className={`flex items-center gap-2 rounded-full border px-4 py-2 ${tier.bgColor} ${tier.borderColor} transition-all`}
             >
-              <span className={`text-xs font-semibold ${tier.color}`}>{tier.shortName}</span>
+              <Link
+                to={`/awards/${key}`}
+                className={`group flex items-center gap-2 rounded-full border px-4 py-2 ${tier.bgColor} ${tier.borderColor} hover:scale-105 hover:shadow-lg active:scale-95 transition-all duration-200 cursor-pointer`}
+              >
+                <span className={`text-xs font-semibold ${tier.color} group-hover:brightness-125 transition-all`}>
+                  {tier.shortName}
+                </span>
+                <ChevronRight className={`h-3 w-3 ${tier.color} opacity-0 group-hover:opacity-100 group-hover:translate-x-0.5 transition-all`} />
+              </Link>
             </motion.div>
           ))}
         </div>
