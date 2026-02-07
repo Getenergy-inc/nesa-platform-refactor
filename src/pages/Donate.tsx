@@ -15,6 +15,7 @@ import {
   Users,
 } from "lucide-react";
 import { useState } from "react";
+import { MiniMusicPlayer } from "@/components/nesa/MiniMusicPlayer";
 
 // Regional education images
 import westAfricaImg from "@/assets/regions/west-africa-education.jpg";
@@ -224,6 +225,20 @@ export default function Donate() {
                   </p>
                 </CardContent>
               </Card>
+            </div>
+          </div>
+        </section>
+
+        {/* Music For A Cause - Mini Player */}
+        <section className="py-8">
+          <div className="container mx-auto px-4">
+            <div className="mx-auto max-w-xl">
+              <div className="text-center mb-4">
+                <p className="text-sm text-white/60">
+                  <span className="text-gold font-medium">Music for a Cause</span> — Stream our anthems while you give
+                </p>
+              </div>
+              <MiniMusicPlayer />
             </div>
           </div>
         </section>
