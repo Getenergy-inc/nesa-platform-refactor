@@ -48,6 +48,27 @@ import GoldAward from "./pages/awards/GoldAward";
 import BlueGarnetAward from "./pages/awards/BlueGarnetAward";
 import Winners from "./pages/awards/Winners";
 
+// Category Pages (data-driven)
+import {
+  CSREducationAfrica,
+  CSREducationNigeria,
+  EduTechAfrica,
+  MediaAdvocacyNigeria,
+  NGOEducationNigeria,
+  NGOEducationAfrica,
+  STEMEducationAfrica,
+  CreativeArtsNigeria,
+  EducationFriendlyStateNigeria,
+  LibraryNigeria,
+  ResearchDevelopmentNigeria,
+  ChristianEducationAfrica,
+  IslamicEducationAfrica,
+  PoliticalLeadersNigeria,
+  InternationalEducation,
+  DiasporaEducation,
+  AfricaEducationIcon,
+} from "./pages/categories";
+
 // Media Pages
 import MediaHub from "./pages/media/MediaHub";
 import NESATV from "./pages/media/NESATV";
@@ -151,6 +172,25 @@ const App = () => (
                 <Route path="/awards/winners" element={<WithLayout><Winners /></WithLayout>} />
                 <Route path="/certificates/verify" element={<WithLayout><CertificateVerify /></WithLayout>} />
                 <Route path="/verify/:hash" element={<WithLayout><VerifyCertificate /></WithLayout>} />
+                
+                {/* Dynamic Category Pages (data-driven) */}
+                <Route path="/category/csr-education-africa" element={<WithLayout><CSREducationAfrica /></WithLayout>} />
+                <Route path="/category/csr-education-nigeria" element={<WithLayout><CSREducationNigeria /></WithLayout>} />
+                <Route path="/category/edutech-africa" element={<WithLayout><EduTechAfrica /></WithLayout>} />
+                <Route path="/category/media-advocacy-nigeria" element={<WithLayout><MediaAdvocacyNigeria /></WithLayout>} />
+                <Route path="/category/ngo-education-nigeria" element={<WithLayout><NGOEducationNigeria /></WithLayout>} />
+                <Route path="/category/ngo-education-africa" element={<WithLayout><NGOEducationAfrica /></WithLayout>} />
+                <Route path="/category/stem-education-africa" element={<WithLayout><STEMEducationAfrica /></WithLayout>} />
+                <Route path="/category/creative-arts-nigeria" element={<WithLayout><CreativeArtsNigeria /></WithLayout>} />
+                <Route path="/category/education-friendly-state-nigeria" element={<WithLayout><EducationFriendlyStateNigeria /></WithLayout>} />
+                <Route path="/category/library-nigeria" element={<WithLayout><LibraryNigeria /></WithLayout>} />
+                <Route path="/category/research-development-nigeria" element={<WithLayout><ResearchDevelopmentNigeria /></WithLayout>} />
+                <Route path="/category/christian-education-africa" element={<WithLayout><ChristianEducationAfrica /></WithLayout>} />
+                <Route path="/category/islamic-education-africa" element={<WithLayout><IslamicEducationAfrica /></WithLayout>} />
+                <Route path="/category/political-leaders-nigeria" element={<WithLayout><PoliticalLeadersNigeria /></WithLayout>} />
+                <Route path="/category/international-education" element={<WithLayout><InternationalEducation /></WithLayout>} />
+                <Route path="/category/diaspora-education" element={<WithLayout><DiasporaEducation /></WithLayout>} />
+                <Route path="/category/africa-education-icon" element={<WithLayout><AfricaEducationIcon /></WithLayout>} />
                 
                 {/* Nominee Response Routes */}
                 <Route path="/nominee/accept/:token" element={<NomineeAccept />} />
