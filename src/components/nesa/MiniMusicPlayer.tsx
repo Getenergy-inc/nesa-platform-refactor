@@ -16,8 +16,8 @@ import { motion, AnimatePresence } from "framer-motion";
 import { cn } from "@/lib/utils";
 
 // Import song covers
-import nesaSong1Cover from "@/assets/music/nesa-song-1-cover.jpg";
-import nesaSong2Cover from "@/assets/music/nesa-song-2-cover.jpg";
+import nesaSong1Cover from "@/assets/nesa-africa-song-1.jpeg";
+import nesaSong2Cover from "@/assets/nesa-africa-song-2.jpeg";
 
 interface Song {
   id: string;
