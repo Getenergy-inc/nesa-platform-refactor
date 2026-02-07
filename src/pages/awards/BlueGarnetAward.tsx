@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { CertificateGallery } from "@/components/nesa/CertificateGallery";
 import { AwardTVShowSection } from "@/components/awards/AwardTVShowSection";
 import { AwardHeroSection } from "@/components/awards/AwardHeroSection";
+import { AwardCategoriesGrid } from "@/components/awards/AwardCategoriesGrid";
 import { getTVShowByAward } from "@/config/awardTVShows";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -150,6 +151,14 @@ export default function BlueGarnetAward() {
 
         {/* TV Show Section */}
         {blueGarnetTVShow && <AwardTVShowSection show={blueGarnetTVShow} accentColor="blue" />}
+
+        {/* Award Categories */}
+        <AwardCategoriesGrid 
+          tier="blue-garnet"
+          accentColor="blue"
+          title="Blue Garnet Award Categories"
+          description="All 17 official NESA-Africa categories compete for the Blue Garnet Award — Africa's highest education honour."
+        />
 
         {/* Certificate Gallery */}
         <CertificateGallery />

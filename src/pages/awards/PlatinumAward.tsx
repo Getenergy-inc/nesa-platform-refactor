@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { CertificateGallery } from "@/components/nesa/CertificateGallery";
 import { AwardTVShowSection } from "@/components/awards/AwardTVShowSection";
 import { AwardHeroSection } from "@/components/awards/AwardHeroSection";
+import { AwardCategoriesGrid } from "@/components/awards/AwardCategoriesGrid";
 import { getTVShowByAward } from "@/config/awardTVShows";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -108,6 +109,14 @@ export default function PlatinumAward() {
 
         {/* TV Show Section */}
         {platinumTVShow && <AwardTVShowSection show={platinumTVShow} accentColor="amber" />}
+
+        {/* Award Categories */}
+        <AwardCategoriesGrid 
+          tier="platinum"
+          accentColor="slate"
+          title="Platinum Certificate Categories"
+          description="All 17 official NESA-Africa categories are eligible for the Platinum Certificate recognition."
+        />
 
         {/* Certificate Gallery */}
         <CertificateGallery />
