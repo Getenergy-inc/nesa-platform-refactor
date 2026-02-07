@@ -1,4 +1,5 @@
-import { Shield, Vote, Scale, Users, AlertTriangle } from "lucide-react";
+import { Shield, Vote, Scale, Users, AlertTriangle, ArrowRight } from "lucide-react";
+import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 
 export function FirewallsSection() {
@@ -9,21 +10,25 @@ export function FirewallsSection() {
       icon: Shield,
       title: "Platinum",
       description: "Non-competitive. Verification + governance checks.",
+      href: "/awards/platinum",
     },
     {
       icon: Vote,
-      title: "Gold Stage",
+      title: "Gold",
       description: "Public participation only. Transparent audit trail.",
+      href: "/awards/gold",
     },
     {
       icon: Scale,
       title: "Blue Garnet",
       description: "Jury + public participation balance. Anti-fraud controls.",
+      href: "/awards/blue-garnet",
     },
     {
       icon: Users,
-      title: "Sponsors",
-      description: "Sponsors and endorsers cannot influence winners.",
+      title: "Icon",
+      description: "Lifetime achievement recognition for education leaders.",
+      href: "/awards/icon",
     },
   ];
 
@@ -41,16 +46,21 @@ export function FirewallsSection() {
 
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
           {firewalls.map((item) => (
-            <div
+            <Link
               key={item.title}
-              className="bg-charcoal rounded-xl p-6 border border-gold/20 text-center hover:border-gold/40 transition-colors"
+              to={item.href}
+              className="group bg-charcoal rounded-xl p-6 border border-gold/20 text-center hover:border-gold/40 hover:bg-charcoal-light transition-all duration-300"
             >
-              <div className="h-12 w-12 rounded-full bg-gold/10 flex items-center justify-center mx-auto mb-4">
+              <div className="h-12 w-12 rounded-full bg-gold/10 flex items-center justify-center mx-auto mb-4 group-hover:bg-gold/20 transition-colors">
                 <item.icon className="h-6 w-6 text-gold" />
               </div>
-              <h3 className="font-semibold text-white mb-2">{item.title}</h3>
-              <p className="text-white/70 text-sm">{item.description}</p>
-            </div>
+              <h3 className="font-semibold text-white mb-2 group-hover:text-gold transition-colors">{item.title}</h3>
+              <p className="text-white/70 text-sm mb-3">{item.description}</p>
+              <div className="flex items-center justify-center gap-1 text-xs text-gold/60 group-hover:text-gold transition-colors">
+                <span>Learn more</span>
+                <ArrowRight className="h-3 w-3 group-hover:translate-x-1 transition-transform" />
+              </div>
+            </Link>
           ))}
         </div>
 
