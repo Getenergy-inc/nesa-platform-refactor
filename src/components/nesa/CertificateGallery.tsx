@@ -1,7 +1,9 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import { Badge } from "@/components/ui/badge";
-import { Award, ZoomIn, Shield, Clock, Star } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Award, ZoomIn, Shield, Clock, Star, ArrowRight } from "lucide-react";
 
 import platinumCertificate from "@/assets/certificates/platinum-certificate.jpeg";
 import goldCertificate from "@/assets/certificates/gold-certificate.jpeg";
@@ -16,6 +18,7 @@ interface CertificateInfo {
   validity: string;
   description: string;
   features: string[];
+  href: string;
 }
 
 const certificates: CertificateInfo[] = [
@@ -31,7 +34,8 @@ const certificates: CertificateInfo[] = [
       "Non-competitive achievement",
       "Annual renewal required",
       "QR verification enabled"
-    ]
+    ],
+    href: "/awards/platinum"
   },
   {
     id: "gold",
@@ -45,7 +49,8 @@ const certificates: CertificateInfo[] = [
       "Qualifies for Blue Garnet",
       "Regional representation",
       "QR verification enabled"
-    ]
+    ],
+    href: "/awards/gold"
   },
   {
     id: "blue-garnet",
@@ -59,7 +64,8 @@ const certificates: CertificateInfo[] = [
       "60% Jury / 40% Public scoring",
       "9 continental winners",
       "QR verification enabled"
-    ]
+    ],
+    href: "/awards/blue-garnet"
   },
   {
     id: "icon",
@@ -73,7 +79,8 @@ const certificates: CertificateInfo[] = [
       "Jury-selected recognition",
       "Permanent legacy status",
       "Global authentication"
-    ]
+    ],
+    href: "/awards/icon"
   }
 ];
 
@@ -109,12 +116,12 @@ function CertificateCard({ cert }: { cert: CertificateInfo }) {
   
   return (
     <Dialog>
-      <DialogTrigger asChild>
-        <div 
-          className={`group relative rounded-2xl overflow-hidden cursor-pointer transition-all duration-300 hover:scale-[1.02] hover:shadow-2xl ${style.bg} ${style.border} border-2`}
-        >
-          {/* Certificate Image */}
-          <div className="relative aspect-[4/3] overflow-hidden">
+      <div 
+        className={`group relative rounded-2xl overflow-hidden transition-all duration-300 hover:scale-[1.02] hover:shadow-2xl ${style.bg} ${style.border} border-2`}
+      >
+        {/* Certificate Image - Opens Dialog */}
+        <DialogTrigger asChild>
+          <div className="relative aspect-[4/3] overflow-hidden cursor-pointer">
             <img 
               src={cert.image} 
               alt={cert.name}
@@ -128,37 +135,49 @@ function CertificateCard({ cert }: { cert: CertificateInfo }) {
               </div>
             </div>
           </div>
+        </DialogTrigger>
 
-          {/* Certificate Info */}
-          <div className="p-5">
-            <div className="flex items-center justify-between mb-3">
-              <Badge className={style.badge}>
-                {cert.tier === "icon" ? "Icon Award" : `${cert.tier.charAt(0).toUpperCase() + cert.tier.slice(1)} Tier`}
-              </Badge>
-              <div className={`flex items-center gap-1 text-sm ${style.text}`}>
-                <Clock className="h-3.5 w-3.5" />
-                <span>{cert.validity}</span>
-              </div>
-            </div>
-            
-            <h3 className={`font-display text-xl font-bold mb-2 ${style.text}`}>
-              {cert.name}
-            </h3>
-            <p className={`text-sm ${style.text} opacity-80 mb-4`}>
-              {cert.description}
-            </p>
-
-            <div className="space-y-2">
-              {cert.features.slice(0, 2).map((feature, idx) => (
-                <div key={idx} className={`flex items-center gap-2 text-xs ${style.text}`}>
-                  <Star className="h-3 w-3 fill-current" />
-                  <span>{feature}</span>
-                </div>
-              ))}
+        {/* Certificate Info */}
+        <div className="p-5">
+          <div className="flex items-center justify-between mb-3">
+            <Badge className={style.badge}>
+              {cert.tier === "icon" ? "Icon Award" : `${cert.tier.charAt(0).toUpperCase() + cert.tier.slice(1)} Tier`}
+            </Badge>
+            <div className={`flex items-center gap-1 text-sm ${style.text}`}>
+              <Clock className="h-3.5 w-3.5" />
+              <span>{cert.validity}</span>
             </div>
           </div>
+          
+          <h3 className={`font-display text-xl font-bold mb-2 ${style.text}`}>
+            {cert.name}
+          </h3>
+          <p className={`text-sm ${style.text} opacity-80 mb-4`}>
+            {cert.description}
+          </p>
+
+          <div className="space-y-2 mb-4">
+            {cert.features.slice(0, 2).map((feature, idx) => (
+              <div key={idx} className={`flex items-center gap-2 text-xs ${style.text}`}>
+                <Star className="h-3 w-3 fill-current" />
+                <span>{feature}</span>
+              </div>
+            ))}
+          </div>
+
+          {/* Learn More Link */}
+          <Link to={cert.href}>
+            <Button 
+              variant="ghost" 
+              size="sm" 
+              className={`w-full ${style.text} hover:bg-black/10 gap-2`}
+            >
+              Learn More
+              <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
+            </Button>
+          </Link>
         </div>
-      </DialogTrigger>
+      </div>
 
       <DialogContent className="max-w-4xl p-0 overflow-hidden bg-charcoal border-gold/20">
         <div className="relative">
@@ -174,7 +193,7 @@ function CertificateCard({ cert }: { cert: CertificateInfo }) {
             <h3 className="font-display text-2xl font-bold text-white">{cert.name}</h3>
           </div>
           <p className="text-white/70 mb-4">{cert.description}</p>
-          <div className="grid grid-cols-2 gap-3">
+          <div className="grid grid-cols-2 gap-3 mb-4">
             {cert.features.map((feature, idx) => (
               <div key={idx} className="flex items-center gap-2 text-sm text-white/80">
                 <Shield className="h-4 w-4 text-gold" />
@@ -182,6 +201,12 @@ function CertificateCard({ cert }: { cert: CertificateInfo }) {
               </div>
             ))}
           </div>
+          <Link to={cert.href}>
+            <Button className="w-full bg-gold hover:bg-gold-dark text-charcoal gap-2">
+              View Award Details
+              <ArrowRight className="h-4 w-4" />
+            </Button>
+          </Link>
         </div>
       </DialogContent>
     </Dialog>
