@@ -1,10 +1,11 @@
-import { Trophy, ArrowRight, Sparkles, Users, Globe, Calendar } from "lucide-react";
+import { Trophy, ArrowRight, Sparkles, Users, Globe, Calendar, ChevronDown } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { useSeason } from "@/contexts/SeasonContext";
 import { motion, AnimatePresence } from "framer-motion";
 import { useState, useEffect } from "react";
 import { NESALogo3D } from "@/components/nesa/NESALogo3D";
+import { FloatingParticles } from "@/components/ui/floating-particles";
 import stageBackdropVideo from "@/assets/nesa-stage-backdrop-motion.mp4";
 import stageBackdropFallback from "@/assets/nesa-stage-backdrop.jpg";
 import blueGarnetTrophyIcon from "@/assets/blue-garnet-trophy-icon.png";
@@ -22,12 +23,17 @@ type CarouselItem = typeof CAROUSEL_ITEMS[number];
  * - 1 primary CTA (Nominate)
  * - 1 secondary CTA (Explore Awards)
  * - 3 trust bullets
+ * - Floating particles for premium feel
  */
 export function TrophyHeroSection() {
   const { getBannerText } = useSeason();
   const [currentItem, setCurrentItem] = useState<CarouselItem>("trophy-icon");
+  const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
+    // Trigger animations after mount
+    setIsVisible(true);
+    
     const interval = setInterval(() => {
       setCurrentItem((prev) => {
         const currentIndex = CAROUSEL_ITEMS.indexOf(prev);
@@ -40,8 +46,12 @@ export function TrophyHeroSection() {
 
   const bannerText = getBannerText();
 
+  const scrollToContent = () => {
+    window.scrollTo({ top: window.innerHeight * 0.8, behavior: 'smooth' });
+  };
+
   return (
-    <section className="relative min-h-[80vh] sm:min-h-[85vh] flex items-center bg-charcoal overflow-hidden">
+    <section className="relative min-h-[85vh] sm:min-h-[90vh] flex items-center bg-charcoal overflow-hidden">
       {/* Stage Backdrop */}
       <div className="absolute inset-0">
         <video
@@ -54,14 +64,25 @@ export function TrophyHeroSection() {
         >
           <source src={stageBackdropVideo} type="video/mp4" />
         </video>
-        <div className="absolute inset-0 bg-charcoal/65" />
-        <div className="absolute inset-0 bg-gradient-to-b from-charcoal/60 via-transparent to-charcoal/90" />
+        <div className="absolute inset-0 bg-charcoal/60" />
+        <div className="absolute inset-0 bg-gradient-to-b from-charcoal/50 via-transparent to-charcoal/95" />
       </div>
+      
+      {/* Floating Particles - Premium ambient effect */}
+      <FloatingParticles count={25} color="gold" className="opacity-60" />
       
       {/* Spotlight Effects - Desktop only */}
       <div className="pointer-events-none absolute inset-0 overflow-hidden hidden lg:block">
-        <div className="absolute -left-20 top-0 h-[70vh] w-32 rotate-[20deg] bg-gradient-to-b from-gold/12 to-transparent blur-3xl animate-spotlight-left" />
-        <div className="absolute -right-20 top-0 h-[70vh] w-32 rotate-[-20deg] bg-gradient-to-b from-gold/12 to-transparent blur-3xl animate-spotlight-right" />
+        <motion.div 
+          className="absolute -left-20 top-0 h-[70vh] w-40 rotate-[20deg] bg-gradient-to-b from-gold/15 to-transparent blur-3xl"
+          animate={{ opacity: [0.3, 0.6, 0.3] }}
+          transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+        />
+        <motion.div 
+          className="absolute -right-20 top-0 h-[70vh] w-40 rotate-[-20deg] bg-gradient-to-b from-gold/15 to-transparent blur-3xl"
+          animate={{ opacity: [0.3, 0.6, 0.3] }}
+          transition={{ duration: 4, repeat: Infinity, ease: "easeInOut", delay: 2 }}
+        />
       </div>
 
       <div className="container relative z-10 py-8 sm:py-12 lg:py-16">
@@ -90,25 +111,30 @@ export function TrophyHeroSection() {
               Nominate outstanding educators and institutions for Africa's premier education award.
             </p>
 
-            {/* CTAs: 1 Primary + 1 Secondary */}
+            {/* CTAs: 1 Primary + 1 Secondary with pulse effect */}
             <div className="flex flex-col sm:flex-row gap-3 justify-center lg:justify-start mb-8">
               <Link to="/nominate">
-                <Button
-                  size="lg"
-                  className="w-full sm:w-auto bg-gold hover:bg-gold-dark text-charcoal font-bold rounded-full px-8 gap-2 shadow-lg hover:shadow-gold/25 transition-all h-12 text-base"
+                <motion.div
+                  animate={{ scale: [1, 1.02, 1] }}
+                  transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
                 >
-                  <Trophy className="h-5 w-5" />
-                  Nominate Now
-                </Button>
+                  <Button
+                    size="lg"
+                    className="w-full sm:w-auto bg-gold hover:bg-gold-dark text-charcoal font-bold rounded-full px-8 gap-2 shadow-lg shadow-gold/20 hover:shadow-gold/40 transition-all h-12 text-base group"
+                  >
+                    <Trophy className="h-5 w-5 group-hover:rotate-12 transition-transform" />
+                    Nominate Now
+                  </Button>
+                </motion.div>
               </Link>
               <Link to="/categories">
                 <Button
                   size="lg"
                   variant="outline"
-                  className="w-full sm:w-auto border-white/30 text-white hover:bg-white/10 rounded-full px-6 gap-2 h-12 text-base"
+                  className="w-full sm:w-auto border-white/30 text-white hover:bg-white/10 hover:border-gold/50 rounded-full px-6 gap-2 h-12 text-base transition-all"
                 >
                   Explore Awards
-                  <ArrowRight className="h-4 w-4" />
+                  <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
                 </Button>
               </Link>
             </div>

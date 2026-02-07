@@ -163,35 +163,58 @@ export function DynamicCategoryPage({ categoryTitle, nominationType }: DynamicCa
                     </p>
                     
                     {/* Continental Regions */}
-                    <div className="flex flex-wrap gap-2 mb-3">
+                    <motion.div 
+                      className="flex flex-wrap gap-2 mb-3"
+                      initial="hidden"
+                      animate="visible"
+                      variants={{
+                        hidden: { opacity: 0 },
+                        visible: { 
+                          opacity: 1,
+                          transition: { staggerChildren: 0.05 }
+                        }
+                      }}
+                    >
                       {regions.filter(r => isContinentalRegion(r)).map((region) => {
                         const style = REGION_STYLES[region];
                         const isSelected = selectedRegion === region;
                         return (
-                          <Button
+                          <motion.div
                             key={region}
-                            variant="outline"
-                            size="sm"
-                            onClick={() => {
-                              setSelectedRegion(region);
-                              setCurrentSlide(0);
+                            variants={{
+                              hidden: { opacity: 0, scale: 0.9 },
+                              visible: { opacity: 1, scale: 1 }
                             }}
-                            className={cn(
-                              "rounded-full transition-all gap-1.5",
-                              isSelected
-                                ? `${style.bg} ${style.text} ${style.border} border-2`
-                                : "border-white/20 text-white/70 hover:bg-white/10"
-                            )}
                           >
-                            {getRegionIcon(region)}
-                            {region}
-                          </Button>
+                            <Button
+                              variant="outline"
+                              size="sm"
+                              onClick={() => {
+                                setSelectedRegion(region);
+                                setCurrentSlide(0);
+                              }}
+                              className={cn(
+                                "rounded-full transition-all duration-300 gap-1.5 hover:scale-105",
+                                isSelected
+                                  ? `${style.bg} ${style.text} ${style.border} border-2 shadow-lg`
+                                  : "border-white/20 text-white/70 hover:bg-white/10 hover:border-white/40"
+                              )}
+                            >
+                              {getRegionIcon(region)}
+                              {region}
+                            </Button>
+                          </motion.div>
                         );
                       })}
-                    </div>
+                    </motion.div>
                     
                     {/* Diaspora & Friends of Africa - Separate Row with Distinction */}
-                    <div className="flex flex-wrap gap-2">
+                    <motion.div 
+                      className="flex flex-wrap gap-2"
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: 0.3 }}
+                    >
                       {regions.filter(r => !isContinentalRegion(r)).map((region) => {
                         const style = REGION_STYLES[region];
                         const isSelected = selectedRegion === region;
@@ -205,10 +228,10 @@ export function DynamicCategoryPage({ categoryTitle, nominationType }: DynamicCa
                               setCurrentSlide(0);
                             }}
                             className={cn(
-                              "rounded-full transition-all gap-1.5",
+                              "rounded-full transition-all duration-300 gap-1.5 hover:scale-105",
                               isSelected
-                                ? `${style.bg} ${style.text} ${style.border} border-2`
-                                : `border-dashed ${style.border} ${style.text}/70 hover:${style.bg}`
+                                ? `${style.bg} ${style.text} ${style.border} border-2 shadow-lg`
+                                : `border-dashed ${style.border} ${style.text}/70 hover:bg-white/5`
                             )}
                           >
                             {getRegionIcon(region)}
@@ -216,7 +239,7 @@ export function DynamicCategoryPage({ categoryTitle, nominationType }: DynamicCa
                           </Button>
                         );
                       })}
-                    </div>
+                    </motion.div>
                   </div>
                 )}
 

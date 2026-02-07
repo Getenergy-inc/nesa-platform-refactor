@@ -73,15 +73,20 @@ export function StartHereSection() {
               key={path.title}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ delay: index * 0.1 }}
+              transition={{ delay: index * 0.1, duration: 0.4 }}
               viewport={{ once: true }}
+              whileHover={{ y: -4, transition: { duration: 0.2 } }}
             >
               <Link to={path.href}>
-                <div className={`group relative h-full bg-white/5 rounded-xl p-6 border ${path.borderColor} hover:bg-white/10 transition-all duration-300`}>
-                  {/* Icon */}
-                  <div className={`h-12 w-12 rounded-xl ${path.bgColor} flex items-center justify-center mb-4`}>
+                <div className={`group relative h-full bg-white/5 rounded-xl p-6 border ${path.borderColor} hover:bg-white/10 hover:shadow-lg hover:shadow-${path.color.replace('text-', '')}/10 transition-all duration-300`}>
+                  {/* Icon with hover animation */}
+                  <motion.div 
+                    className={`h-12 w-12 rounded-xl ${path.bgColor} flex items-center justify-center mb-4`}
+                    whileHover={{ scale: 1.1, rotate: 5 }}
+                    transition={{ duration: 0.2 }}
+                  >
                     <path.icon className={`h-6 w-6 ${path.color}`} />
-                  </div>
+                  </motion.div>
                   
                   {/* Content */}
                   <h3 className="text-white font-semibold text-lg mb-2 group-hover:text-gold transition-colors">
@@ -91,11 +96,14 @@ export function StartHereSection() {
                     {path.description}
                   </p>
 
-                  {/* Arrow */}
-                  <div className="flex items-center gap-1 text-sm text-white/40 group-hover:text-gold transition-colors">
+                  {/* Arrow with slide animation */}
+                  <div className="flex items-center gap-1 text-sm text-white/40 group-hover:text-gold transition-all">
                     <span>Explore</span>
-                    <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
+                    <ArrowRight className="h-4 w-4 group-hover:translate-x-2 transition-transform duration-300" />
                   </div>
+                  
+                  {/* Subtle glow on hover */}
+                  <div className={`absolute inset-0 rounded-xl ${path.bgColor} opacity-0 group-hover:opacity-20 transition-opacity duration-300 blur-xl -z-10`} />
                 </div>
               </Link>
             </motion.div>
