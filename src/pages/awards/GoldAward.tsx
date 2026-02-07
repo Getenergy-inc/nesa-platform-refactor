@@ -245,12 +245,12 @@ export default function GoldAward() {
         {/* TV Show Section */}
         {goldTVShow && <AwardTVShowSection show={goldTVShow} accentColor="gold" />}
 
-        {/* Award Categories */}
+        {/* Award Categories - 9 Gold/Blue Garnet categories */}
         <AwardCategoriesGrid 
           tier="gold"
           accentColor="amber"
           title="Gold Certificate Categories"
-          description="All 17 official NESA-Africa categories participate in the Gold Certificate public voting stage."
+          description="9 major categories compete for Gold Certificate through 100% public voting across all African regions."
         />
 
         {/* Certificate Gallery */}

@@ -110,12 +110,12 @@ export default function PlatinumAward() {
         {/* TV Show Section */}
         {platinumTVShow && <AwardTVShowSection show={platinumTVShow} accentColor="amber" />}
 
-        {/* Award Categories */}
+        {/* Award Categories - 8 Core Platinum categories */}
         <AwardCategoriesGrid 
           tier="platinum"
           accentColor="slate"
-          title="Platinum Certificate Categories"
-          description="All 17 official NESA-Africa categories are eligible for the Platinum Certificate recognition."
+          title="Core Platinum Categories"
+          description="8 specialized categories eligible for Platinum Certificate recognition through NRC verification."
         />
 
         {/* Certificate Gallery */}
