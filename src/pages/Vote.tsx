@@ -27,6 +27,7 @@ import { useSeason } from "@/contexts/SeasonContext";
 import { useAuth } from "@/contexts/AuthContext";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
+import { MiniMusicPlayer } from "@/components/nesa/MiniMusicPlayer";
 
 interface Nominee {
   id: string;
@@ -491,6 +492,9 @@ export default function Vote() {
             </Link>
           </div>
         </section>
+
+        {/* Floating Mini Music Player */}
+        <MiniMusicPlayer variant="compact" />
       </main>
     </>
   );

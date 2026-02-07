@@ -24,6 +24,7 @@ import recognitionImage from "@/assets/pillars/recognition.jpg";
 import accountabilityImage from "@/assets/pillars/accountability.jpg";
 import continentalReachImage from "@/assets/pillars/continental-reach.jpg";
 import legacyImpactImage from "@/assets/pillars/legacy-impact.jpg";
+import { MiniMusicPlayer } from "@/components/nesa/MiniMusicPlayer";
 
 const pillars = [
   {
@@ -223,6 +224,9 @@ export default function About() {
           </div>
         </div>
       </section>
+
+      {/* Mini Music Player Banner */}
+      <MiniMusicPlayer variant="banner" />
 
       {/* Mission Statement */}
       <section className="bg-gradient-to-b from-charcoal to-charcoal/95 py-20 lg:py-28">
