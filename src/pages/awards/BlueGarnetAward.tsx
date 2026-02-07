@@ -152,12 +152,12 @@ export default function BlueGarnetAward() {
         {/* TV Show Section */}
         {blueGarnetTVShow && <AwardTVShowSection show={blueGarnetTVShow} accentColor="blue" />}
 
-        {/* Award Categories */}
+        {/* Award Categories - 9 Blue Garnet categories (same as Gold, feeds from Gold winners) */}
         <AwardCategoriesGrid 
           tier="blue-garnet"
           accentColor="blue"
           title="Blue Garnet Award Categories"
-          description="All 17 official NESA-Africa categories compete for the Blue Garnet Award — Africa's highest education honour."
+          description="9 major categories compete for Blue Garnet — Gold winners advance to this stage with 60% jury + 40% public scoring."
         />
 
         {/* Certificate Gallery */}

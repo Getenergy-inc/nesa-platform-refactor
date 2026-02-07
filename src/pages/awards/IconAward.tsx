@@ -129,12 +129,12 @@ export default function IconAward() {
         {/* TV Show Section */}
         {iconTVShow && <AwardTVShowSection show={iconTVShow} accentColor="gold" />}
 
-        {/* Award Categories */}
+        {/* Award Categories - 1 Icon category with 3 subcategories */}
         <AwardCategoriesGrid 
           tier="icon"
           accentColor="purple"
-          title="Icon Award Categories"
-          description="The Africa Education Icon recognizes lifetime achievement in education leadership."
+          title="Africa Education Icon"
+          description="1 lifetime achievement category with 3 subcategories: Philanthropy Icon, Literary Advocate Icon, and Technical Educator Icon."
         />
 
         {/* Certificate Gallery */}
