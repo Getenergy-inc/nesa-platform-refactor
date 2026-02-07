@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { 
-  Award, ChevronLeft, ChevronRight, Users, ArrowRight, Globe
+  Award, ChevronLeft, ChevronRight, Users, ArrowRight, Globe, Plane, Handshake
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import {
@@ -15,9 +15,13 @@ import {
   getSubCategories,
   getSubCategoryImage,
   hasRegions,
+  getCategoryRegions,
   FALLBACK_IMAGE,
+  REGION_STYLES,
+  isContinentalRegion,
   type Category,
   type SubCategory,
+  type AfricanRegion,
 } from "@/data/awardData";
 
 interface DynamicCategoryPageProps {
@@ -25,8 +29,15 @@ interface DynamicCategoryPageProps {
   nominationType?: string;
 }
 
+// Get icon for region type
+function getRegionIcon(region: AfricanRegion) {
+  if (region === "Diaspora") return <Plane className="h-3 w-3" />;
+  if (region === "Friends of Africa") return <Handshake className="h-3 w-3" />;
+  return <Globe className="h-3 w-3" />;
+}
+
 export function DynamicCategoryPage({ categoryTitle, nominationType }: DynamicCategoryPageProps) {
-  const [selectedRegion, setSelectedRegion] = useState<string | undefined>();
+  const [selectedRegion, setSelectedRegion] = useState<AfricanRegion | undefined>();
   const [currentSlide, setCurrentSlide] = useState(0);
 
   // Find category by exact title
@@ -35,7 +46,7 @@ export function DynamicCategoryPage({ categoryTitle, nominationType }: DynamicCa
   // Get regions if available
   const regions = useMemo(() => {
     if (!category || !hasRegions(category)) return [];
-    return category.regions!.map((r) => r.name);
+    return getCategoryRegions(category);
   }, [category]);
 
   // Set default region
@@ -85,6 +96,9 @@ export function DynamicCategoryPage({ categoryTitle, nominationType }: DynamicCa
     const subcat = encodeURIComponent(sub.title);
     return `/nominees?category=${cat}&subcategory=${subcat}`;
   };
+
+  // Get current region style
+  const currentRegionStyle = selectedRegion ? REGION_STYLES[selectedRegion] : null;
 
   // Not found state
   if (!category) {
@@ -140,35 +154,96 @@ export function DynamicCategoryPage({ categoryTitle, nominationType }: DynamicCa
                   {category.description}
                 </p>
                 
-                {/* Region Selector */}
+                {/* Region Selector with Visual Distinction */}
                 {regions.length > 0 && (
                   <div className="mb-8">
                     <p className="text-white/50 text-sm mb-3 flex items-center gap-2">
                       <Globe className="h-4 w-4" />
                       Select Region
                     </p>
+                    
+                    {/* Continental Regions */}
+                    <div className="flex flex-wrap gap-2 mb-3">
+                      {regions.filter(r => isContinentalRegion(r)).map((region) => {
+                        const style = REGION_STYLES[region];
+                        const isSelected = selectedRegion === region;
+                        return (
+                          <Button
+                            key={region}
+                            variant="outline"
+                            size="sm"
+                            onClick={() => {
+                              setSelectedRegion(region);
+                              setCurrentSlide(0);
+                            }}
+                            className={cn(
+                              "rounded-full transition-all gap-1.5",
+                              isSelected
+                                ? `${style.bg} ${style.text} ${style.border} border-2`
+                                : "border-white/20 text-white/70 hover:bg-white/10"
+                            )}
+                          >
+                            {getRegionIcon(region)}
+                            {region}
+                          </Button>
+                        );
+                      })}
+                    </div>
+                    
+                    {/* Diaspora & Friends of Africa - Separate Row with Distinction */}
                     <div className="flex flex-wrap gap-2">
-                      {regions.map((region) => (
-                        <Button
-                          key={region}
-                          variant={selectedRegion === region ? "default" : "outline"}
-                          size="sm"
-                          onClick={() => {
-                            setSelectedRegion(region);
-                            setCurrentSlide(0);
-                          }}
-                          className={cn(
-                            "rounded-full transition-all",
-                            selectedRegion === region
-                              ? "bg-gold text-charcoal hover:bg-gold-dark"
-                              : "border-white/20 text-white hover:bg-white/10"
-                          )}
-                        >
-                          {region}
-                        </Button>
-                      ))}
+                      {regions.filter(r => !isContinentalRegion(r)).map((region) => {
+                        const style = REGION_STYLES[region];
+                        const isSelected = selectedRegion === region;
+                        return (
+                          <Button
+                            key={region}
+                            variant="outline"
+                            size="sm"
+                            onClick={() => {
+                              setSelectedRegion(region);
+                              setCurrentSlide(0);
+                            }}
+                            className={cn(
+                              "rounded-full transition-all gap-1.5",
+                              isSelected
+                                ? `${style.bg} ${style.text} ${style.border} border-2`
+                                : `border-dashed ${style.border} ${style.text}/70 hover:${style.bg}`
+                            )}
+                          >
+                            {getRegionIcon(region)}
+                            {region}
+                          </Button>
+                        );
+                      })}
                     </div>
                   </div>
+                )}
+
+                {/* Selected Region Badge */}
+                {selectedRegion && currentRegionStyle && (
+                  <motion.div
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    className={cn(
+                      "inline-flex items-center gap-2 px-4 py-2 rounded-full mb-6",
+                      currentRegionStyle.bg,
+                      currentRegionStyle.border,
+                      "border"
+                    )}
+                  >
+                    {getRegionIcon(selectedRegion)}
+                    <span className={cn("font-medium", currentRegionStyle.text)}>
+                      {selectedRegion}
+                    </span>
+                    {!isContinentalRegion(selectedRegion) && (
+                      <span className="text-xs text-white/50">
+                        {selectedRegion === "Diaspora" 
+                          ? "— Africans living abroad" 
+                          : "— Global allies of Africa"}
+                      </span>
+                    )}
+                  </motion.div>
                 )}
 
                 <div className="flex flex-wrap gap-4">
@@ -271,7 +346,9 @@ export function DynamicCategoryPage({ categoryTitle, nominationType }: DynamicCa
                 <h2 className="font-display text-2xl md:text-3xl font-bold text-white mb-2">
                   Subcategories
                   {selectedRegion && (
-                    <span className="text-gold"> — {selectedRegion}</span>
+                    <span className={cn("ml-2", currentRegionStyle?.text || "text-gold")}>
+                      — {selectedRegion}
+                    </span>
                   )}
                 </h2>
                 <p className="text-white/60">
@@ -312,6 +389,21 @@ export function DynamicCategoryPage({ categoryTitle, nominationType }: DynamicCa
                         {sub.nominees.length > 0 && (
                           <Badge className="absolute top-3 right-3 bg-gold/90 text-charcoal">
                             {sub.nominees.length} Nominee{sub.nominees.length !== 1 ? "s" : ""}
+                          </Badge>
+                        )}
+
+                        {/* Region indicator for global regions */}
+                        {selectedRegion && !isContinentalRegion(selectedRegion) && (
+                          <Badge 
+                            className={cn(
+                              "absolute top-3 left-3",
+                              currentRegionStyle?.bg,
+                              currentRegionStyle?.text,
+                              currentRegionStyle?.border
+                            )}
+                          >
+                            {getRegionIcon(selectedRegion)}
+                            <span className="ml-1">{selectedRegion}</span>
                           </Badge>
                         )}
                       </div>
@@ -364,7 +456,7 @@ export function DynamicCategoryPage({ categoryTitle, nominationType }: DynamicCa
               Know Someone Making a Difference?
             </h2>
             <p className="text-white/70 mb-8 max-w-xl mx-auto">
-              Nominate outstanding individuals and organizations contributing to education in Africa.
+              Nominate outstanding individuals and organizations contributing to education across Africa, the Diaspora, and Friends of Africa.
             </p>
             <div className="flex flex-wrap justify-center gap-4">
               <Button asChild size="lg" className="bg-gold hover:bg-gold-dark text-charcoal font-semibold rounded-full gap-2">

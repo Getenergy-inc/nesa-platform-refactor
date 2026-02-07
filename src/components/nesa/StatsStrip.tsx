@@ -1,15 +1,32 @@
 import { motion } from "framer-motion";
 import { useTranslation } from "react-i18next";
-import { GOVERNANCE_STATS } from "@/lib/regions";
+import { GOVERNANCE_STATS, REGIONAL_BRAND_MESSAGING } from "@/lib/regions";
 
 export function StatsStrip() {
   const { t } = useTranslation("pages");
   
   const stats = [
-    { value: "5+2", label: "Regions + Diaspora + Friends", color: "text-gold" },
-    { value: String(GOVERNANCE_STATS.judges), label: "Expert Judges", color: "text-gold" },
-    { value: String(GOVERNANCE_STATS.categories), label: t("landing.stats.categories"), color: "text-gold" },
-    { value: `${GOVERNANCE_STATS.subcategories}+`, label: t("landing.stats.subcategories"), color: "text-gold" },
+    { 
+      value: "5+2", 
+      label: REGIONAL_BRAND_MESSAGING.shortTagline, 
+      color: "text-gold",
+      subLabel: "Continental + Global"
+    },
+    { 
+      value: String(GOVERNANCE_STATS.judges), 
+      label: "Expert Judges", 
+      color: "text-gold" 
+    },
+    { 
+      value: String(GOVERNANCE_STATS.categories), 
+      label: t("landing.stats.categories"), 
+      color: "text-gold" 
+    },
+    { 
+      value: `${GOVERNANCE_STATS.subcategories}+`, 
+      label: t("landing.stats.subcategories"), 
+      color: "text-gold" 
+    },
   ];
 
   return (
@@ -28,7 +45,12 @@ export function StatsStrip() {
               <p className={`text-3xl md:text-5xl font-bold ${stat.color} mb-2`}>
                 {stat.value}
               </p>
-              <p className="text-sm text-white/60 group-hover:text-white/80 transition-colors">{stat.label}</p>
+              <p className="text-sm text-white/60 group-hover:text-white/80 transition-colors">
+                {stat.label}
+              </p>
+              {stat.subLabel && (
+                <p className="text-xs text-white/40 mt-1">{stat.subLabel}</p>
+              )}
             </motion.div>
           ))}
         </div>

@@ -1,6 +1,24 @@
 // ============================================================================
 // NESA-AFRICA AWARD DATA - Data-Driven Category Structure
+// Uses canonical 7-region structure: 5 African regions + Diaspora + Friends of Africa
 // ============================================================================
+
+import { 
+  AFRICAN_REGIONS, 
+  AfricanRegion, 
+  REGION_SHORT_DESCRIPTIONS,
+  getContinentalRegions,
+  isContinentalRegion 
+} from "@/lib/regions";
+
+// Re-export region utilities for convenience
+export { 
+  AFRICAN_REGIONS, 
+  REGION_SHORT_DESCRIPTIONS, 
+  getContinentalRegions, 
+  isContinentalRegion 
+};
+export type { AfricanRegion };
 
 /**
  * Represents a nominee within a subcategory
@@ -24,9 +42,10 @@ export interface SubCategory {
 
 /**
  * Represents a region for region-based categories
+ * Uses the canonical AfricanRegion type from regions.ts
  */
 export interface Region {
-  name: string;
+  name: AfricanRegion;
   subCategories: SubCategory[];
 }
 
@@ -39,6 +58,8 @@ export interface Category {
   description: string;
   regions?: Region[];
   subCategories?: SubCategory[];
+  /** If true, includes Diaspora and Friends of Africa in region selector */
+  includeGlobalRegions?: boolean;
 }
 
 // ============================================================================
@@ -47,73 +68,52 @@ export interface Category {
 export const FALLBACK_IMAGE = "/images/nesa-card2.png";
 
 // ============================================================================
+// REGION STYLING (visual differentiation for continental vs global regions)
+// ============================================================================
+export const REGION_STYLES: Record<AfricanRegion, { bg: string; text: string; border: string; icon: string }> = {
+  "North Africa": { bg: "bg-amber-500/10", text: "text-amber-400", border: "border-amber-500/30", icon: "🌍" },
+  "West Africa": { bg: "bg-emerald-500/10", text: "text-emerald-400", border: "border-emerald-500/30", icon: "🌍" },
+  "Central Africa": { bg: "bg-sky-500/10", text: "text-sky-400", border: "border-sky-500/30", icon: "🌍" },
+  "East Africa": { bg: "bg-violet-500/10", text: "text-violet-400", border: "border-violet-500/30", icon: "🌍" },
+  "Southern Africa": { bg: "bg-rose-500/10", text: "text-rose-400", border: "border-rose-500/30", icon: "🌍" },
+  "Diaspora": { bg: "bg-gold/10", text: "text-gold", border: "border-gold/30", icon: "✈️" },
+  "Friends of Africa": { bg: "bg-blue-500/10", text: "text-blue-400", border: "border-blue-500/30", icon: "🤝" },
+};
+
+// ============================================================================
+// HELPER: Generate standard region structure for Africa-wide categories
+// ============================================================================
+function createAfricaRegionalSubcategories(subcategoryTemplates: Omit<SubCategory, "nominees">[]): Region[] {
+  return AFRICAN_REGIONS.map((regionName) => ({
+    name: regionName,
+    subCategories: subcategoryTemplates.map(template => ({
+      ...template,
+      nominees: [],
+    })),
+  }));
+}
+
+// ============================================================================
 // CATEGORIES DATA
 // ============================================================================
 
 export const categories: Category[] = [
   // =========================================================================
   // CATEGORY 1 — BEST CSR IN EDUCATION (AFRICA REGIONAL)
+  // Uses all 7 regions including Diaspora and Friends of Africa
   // =========================================================================
   {
     title: "Best CSR in Education (Africa Regional)",
-    description: "Recognizing corporate social responsibility initiatives advancing education across the African continent",
-    regions: [
-      {
-        name: "North Africa",
-        subCategories: [
-          { title: "Banking & Finance CSR", description: "Banks and financial institutions supporting educational initiatives", nominees: [] },
-          { title: "Telecommunications CSR", description: "Telecom companies investing in education", nominees: [] },
-          { title: "Technology & ICT CSR", description: "Tech companies driving educational innovation", nominees: [] },
-          { title: "Oil & Gas CSR", description: "Energy sector contributions to education", nominees: [] },
-          { title: "Food & Beverages CSR", description: "Food industry supporting educational causes", nominees: [] },
-          { title: "Aviation CSR", description: "Aviation industry educational initiatives", nominees: [] },
-        ],
-      },
-      {
-        name: "West Africa",
-        subCategories: [
-          { title: "Banking & Finance CSR", description: "Banks and financial institutions supporting educational initiatives", nominees: [] },
-          { title: "Telecommunications CSR", description: "Telecom companies investing in education", nominees: [] },
-          { title: "Technology & ICT CSR", description: "Tech companies driving educational innovation", nominees: [] },
-          { title: "Oil & Gas CSR", description: "Energy sector contributions to education", nominees: [] },
-          { title: "Food & Beverages CSR", description: "Food industry supporting educational causes", nominees: [] },
-          { title: "Aviation CSR", description: "Aviation industry educational initiatives", nominees: [] },
-        ],
-      },
-      {
-        name: "East Africa",
-        subCategories: [
-          { title: "Banking & Finance CSR", description: "Banks and financial institutions supporting educational initiatives", nominees: [] },
-          { title: "Telecommunications CSR", description: "Telecom companies investing in education", nominees: [] },
-          { title: "Technology & ICT CSR", description: "Tech companies driving educational innovation", nominees: [] },
-          { title: "Oil & Gas CSR", description: "Energy sector contributions to education", nominees: [] },
-          { title: "Food & Beverages CSR", description: "Food industry supporting educational causes", nominees: [] },
-          { title: "Aviation CSR", description: "Aviation industry educational initiatives", nominees: [] },
-        ],
-      },
-      {
-        name: "Central Africa",
-        subCategories: [
-          { title: "Banking & Finance CSR", description: "Banks and financial institutions supporting educational initiatives", nominees: [] },
-          { title: "Telecommunications CSR", description: "Telecom companies investing in education", nominees: [] },
-          { title: "Technology & ICT CSR", description: "Tech companies driving educational innovation", nominees: [] },
-          { title: "Oil & Gas CSR", description: "Energy sector contributions to education", nominees: [] },
-          { title: "Food & Beverages CSR", description: "Food industry supporting educational causes", nominees: [] },
-          { title: "Aviation CSR", description: "Aviation industry educational initiatives", nominees: [] },
-        ],
-      },
-      {
-        name: "Southern Africa",
-        subCategories: [
-          { title: "Banking & Finance CSR", description: "Banks and financial institutions supporting educational initiatives", nominees: [] },
-          { title: "Telecommunications CSR", description: "Telecom companies investing in education", nominees: [] },
-          { title: "Technology & ICT CSR", description: "Tech companies driving educational innovation", nominees: [] },
-          { title: "Oil & Gas CSR", description: "Energy sector contributions to education", nominees: [] },
-          { title: "Food & Beverages CSR", description: "Food industry supporting educational causes", nominees: [] },
-          { title: "Aviation CSR", description: "Aviation industry educational initiatives", nominees: [] },
-        ],
-      },
-    ],
+    description: "Recognizing corporate social responsibility initiatives advancing education across Africa, the Diaspora, and Friends of Africa",
+    includeGlobalRegions: true,
+    regions: createAfricaRegionalSubcategories([
+      { title: "Banking & Finance CSR", description: "Banks and financial institutions supporting educational initiatives" },
+      { title: "Telecommunications CSR", description: "Telecom companies investing in education" },
+      { title: "Technology & ICT CSR", description: "Tech companies driving educational innovation" },
+      { title: "Oil & Gas CSR", description: "Energy sector contributions to education" },
+      { title: "Food & Beverages CSR", description: "Food industry supporting educational causes" },
+      { title: "Aviation CSR", description: "Aviation industry educational initiatives" },
+    ]),
   },
 
   // =========================================================================
@@ -154,49 +154,13 @@ export const categories: Category[] = [
   // =========================================================================
   {
     title: "Best EduTech Organisation (Africa Regional)",
-    description: "Honoring technology-driven education innovations transforming learning across Africa",
-    regions: [
-      {
-        name: "North Africa",
-        subCategories: [
-          { title: "EduTech Startup", description: "Innovative startups transforming African education", nominees: [] },
-          { title: "EduTech Established Company", description: "Established companies with proven educational technology", nominees: [] },
-          { title: "EduTech Social Impact Initiative", description: "Tech initiatives driving educational access", nominees: [] },
-        ],
-      },
-      {
-        name: "West Africa",
-        subCategories: [
-          { title: "EduTech Startup", description: "Innovative startups transforming African education", nominees: [] },
-          { title: "EduTech Established Company", description: "Established companies with proven educational technology", nominees: [] },
-          { title: "EduTech Social Impact Initiative", description: "Tech initiatives driving educational access", nominees: [] },
-        ],
-      },
-      {
-        name: "East Africa",
-        subCategories: [
-          { title: "EduTech Startup", description: "Innovative startups transforming African education", nominees: [] },
-          { title: "EduTech Established Company", description: "Established companies with proven educational technology", nominees: [] },
-          { title: "EduTech Social Impact Initiative", description: "Tech initiatives driving educational access", nominees: [] },
-        ],
-      },
-      {
-        name: "Central Africa",
-        subCategories: [
-          { title: "EduTech Startup", description: "Innovative startups transforming African education", nominees: [] },
-          { title: "EduTech Established Company", description: "Established companies with proven educational technology", nominees: [] },
-          { title: "EduTech Social Impact Initiative", description: "Tech initiatives driving educational access", nominees: [] },
-        ],
-      },
-      {
-        name: "Southern Africa",
-        subCategories: [
-          { title: "EduTech Startup", description: "Innovative startups transforming African education", nominees: [] },
-          { title: "EduTech Established Company", description: "Established companies with proven educational technology", nominees: [] },
-          { title: "EduTech Social Impact Initiative", description: "Tech initiatives driving educational access", nominees: [] },
-        ],
-      },
-    ],
+    description: "Honoring technology-driven education innovations transforming learning across Africa and the Diaspora",
+    includeGlobalRegions: true,
+    regions: createAfricaRegionalSubcategories([
+      { title: "EduTech Startup", description: "Innovative startups transforming African education" },
+      { title: "EduTech Established Company", description: "Established companies with proven educational technology" },
+      { title: "EduTech Social Impact Initiative", description: "Tech initiatives driving educational access" },
+    ]),
   },
 
   // =========================================================================
@@ -233,59 +197,15 @@ export const categories: Category[] = [
   // =========================================================================
   {
     title: "Best NGO Contribution to Education for All (Africa Regional)",
-    description: "Honoring NGOs advancing inclusive education across the African continent",
-    regions: [
-      {
-        name: "North Africa",
-        subCategories: [
-          { title: "Educational Infrastructure", description: "Building educational facilities across Africa", nominees: [] },
-          { title: "Education Aid & Scholarships", description: "Providing scholarships and financial support", nominees: [] },
-          { title: "Educational Materials & Resources", description: "Distributing learning materials", nominees: [] },
-          { title: "Youth Skills & Learning Programmes", description: "Skills training for African youth", nominees: [] },
-          { title: "Women & Girls' Education Advocacy", description: "Championing female education", nominees: [] },
-        ],
-      },
-      {
-        name: "West Africa",
-        subCategories: [
-          { title: "Educational Infrastructure", description: "Building educational facilities across Africa", nominees: [] },
-          { title: "Education Aid & Scholarships", description: "Providing scholarships and financial support", nominees: [] },
-          { title: "Educational Materials & Resources", description: "Distributing learning materials", nominees: [] },
-          { title: "Youth Skills & Learning Programmes", description: "Skills training for African youth", nominees: [] },
-          { title: "Women & Girls' Education Advocacy", description: "Championing female education", nominees: [] },
-        ],
-      },
-      {
-        name: "East Africa",
-        subCategories: [
-          { title: "Educational Infrastructure", description: "Building educational facilities across Africa", nominees: [] },
-          { title: "Education Aid & Scholarships", description: "Providing scholarships and financial support", nominees: [] },
-          { title: "Educational Materials & Resources", description: "Distributing learning materials", nominees: [] },
-          { title: "Youth Skills & Learning Programmes", description: "Skills training for African youth", nominees: [] },
-          { title: "Women & Girls' Education Advocacy", description: "Championing female education", nominees: [] },
-        ],
-      },
-      {
-        name: "Central Africa",
-        subCategories: [
-          { title: "Educational Infrastructure", description: "Building educational facilities across Africa", nominees: [] },
-          { title: "Education Aid & Scholarships", description: "Providing scholarships and financial support", nominees: [] },
-          { title: "Educational Materials & Resources", description: "Distributing learning materials", nominees: [] },
-          { title: "Youth Skills & Learning Programmes", description: "Skills training for African youth", nominees: [] },
-          { title: "Women & Girls' Education Advocacy", description: "Championing female education", nominees: [] },
-        ],
-      },
-      {
-        name: "Southern Africa",
-        subCategories: [
-          { title: "Educational Infrastructure", description: "Building educational facilities across Africa", nominees: [] },
-          { title: "Education Aid & Scholarships", description: "Providing scholarships and financial support", nominees: [] },
-          { title: "Educational Materials & Resources", description: "Distributing learning materials", nominees: [] },
-          { title: "Youth Skills & Learning Programmes", description: "Skills training for African youth", nominees: [] },
-          { title: "Women & Girls' Education Advocacy", description: "Championing female education", nominees: [] },
-        ],
-      },
-    ],
+    description: "Honoring NGOs advancing inclusive education across Africa, the Diaspora, and Friends of Africa",
+    includeGlobalRegions: true,
+    regions: createAfricaRegionalSubcategories([
+      { title: "Educational Infrastructure", description: "Building educational facilities across Africa" },
+      { title: "Education Aid & Scholarships", description: "Providing scholarships and financial support" },
+      { title: "Educational Materials & Resources", description: "Distributing learning materials" },
+      { title: "Youth Skills & Learning Programmes", description: "Skills training for African youth" },
+      { title: "Women & Girls' Education Advocacy", description: "Championing female education" },
+    ]),
   },
 
   // =========================================================================
@@ -293,54 +213,14 @@ export const categories: Category[] = [
   // =========================================================================
   {
     title: "Best STEM Education Programme (Africa Regional)",
-    description: "Recognizing excellence in Science, Technology, Engineering, and Mathematics education",
-    regions: [
-      {
-        name: "North Africa",
-        subCategories: [
-          { title: "Inclusive STEM Programme", description: "STEM programs promoting accessibility", nominees: [] },
-          { title: "Digital STEM Innovation", description: "Digital platforms for STEM learning", nominees: [] },
-          { title: "Community-Based STEM Outreach", description: "Grassroots STEM education initiatives", nominees: [] },
-          { title: "Girls in STEM Advancement", description: "Programs encouraging girls in STEM", nominees: [] },
-        ],
-      },
-      {
-        name: "West Africa",
-        subCategories: [
-          { title: "Inclusive STEM Programme", description: "STEM programs promoting accessibility", nominees: [] },
-          { title: "Digital STEM Innovation", description: "Digital platforms for STEM learning", nominees: [] },
-          { title: "Community-Based STEM Outreach", description: "Grassroots STEM education initiatives", nominees: [] },
-          { title: "Girls in STEM Advancement", description: "Programs encouraging girls in STEM", nominees: [] },
-        ],
-      },
-      {
-        name: "East Africa",
-        subCategories: [
-          { title: "Inclusive STEM Programme", description: "STEM programs promoting accessibility", nominees: [] },
-          { title: "Digital STEM Innovation", description: "Digital platforms for STEM learning", nominees: [] },
-          { title: "Community-Based STEM Outreach", description: "Grassroots STEM education initiatives", nominees: [] },
-          { title: "Girls in STEM Advancement", description: "Programs encouraging girls in STEM", nominees: [] },
-        ],
-      },
-      {
-        name: "Central Africa",
-        subCategories: [
-          { title: "Inclusive STEM Programme", description: "STEM programs promoting accessibility", nominees: [] },
-          { title: "Digital STEM Innovation", description: "Digital platforms for STEM learning", nominees: [] },
-          { title: "Community-Based STEM Outreach", description: "Grassroots STEM education initiatives", nominees: [] },
-          { title: "Girls in STEM Advancement", description: "Programs encouraging girls in STEM", nominees: [] },
-        ],
-      },
-      {
-        name: "Southern Africa",
-        subCategories: [
-          { title: "Inclusive STEM Programme", description: "STEM programs promoting accessibility", nominees: [] },
-          { title: "Digital STEM Innovation", description: "Digital platforms for STEM learning", nominees: [] },
-          { title: "Community-Based STEM Outreach", description: "Grassroots STEM education initiatives", nominees: [] },
-          { title: "Girls in STEM Advancement", description: "Programs encouraging girls in STEM", nominees: [] },
-        ],
-      },
-    ],
+    description: "Recognizing excellence in Science, Technology, Engineering, and Mathematics education across Africa",
+    includeGlobalRegions: true,
+    regions: createAfricaRegionalSubcategories([
+      { title: "Inclusive STEM Programme", description: "STEM programs promoting accessibility" },
+      { title: "Digital STEM Innovation", description: "Digital platforms for STEM learning" },
+      { title: "Community-Based STEM Outreach", description: "Grassroots STEM education initiatives" },
+      { title: "Girls in STEM Advancement", description: "Programs encouraging girls in STEM" },
+    ]),
   },
 
   // =========================================================================
@@ -412,12 +292,13 @@ export const categories: Category[] = [
   // =========================================================================
   {
     title: "Christian Education Impact (Africa Regional)",
-    description: "Recognizing faith-based Christian contributions to education across Africa",
-    subCategories: [
-      { title: "Faith-Based Schools & Institutions", description: "Christian schools making educational impact", nominees: [] },
-      { title: "Christian Education NGOs", description: "Christian NGOs supporting education", nominees: [] },
-      { title: "Christian Foundations & Philanthropy", description: "Christian philanthropic contributions to education", nominees: [] },
-    ],
+    description: "Recognizing faith-based Christian contributions to education across Africa and the Diaspora",
+    includeGlobalRegions: true,
+    regions: createAfricaRegionalSubcategories([
+      { title: "Faith-Based Schools & Institutions", description: "Christian schools making educational impact" },
+      { title: "Christian Education NGOs", description: "Christian NGOs supporting education" },
+      { title: "Christian Foundations & Philanthropy", description: "Christian philanthropic contributions to education" },
+    ]),
   },
 
   // =========================================================================
@@ -425,12 +306,13 @@ export const categories: Category[] = [
   // =========================================================================
   {
     title: "Islamic Education Impact (Africa Regional)",
-    description: "Honoring Islamic contributions to education across the African continent",
-    subCategories: [
-      { title: "Qur'anic & Islamiyya Schools", description: "Traditional Islamic educational institutions", nominees: [] },
-      { title: "Integrated Islamic-Formal Education", description: "Schools combining Islamic and formal education", nominees: [] },
-      { title: "Islamic Education NGOs & Foundations", description: "Islamic organizations supporting education", nominees: [] },
-    ],
+    description: "Honoring Islamic contributions to education across Africa and the Diaspora",
+    includeGlobalRegions: true,
+    regions: createAfricaRegionalSubcategories([
+      { title: "Qur'anic & Islamiyya Schools", description: "Traditional Islamic educational institutions" },
+      { title: "Integrated Islamic-Formal Education", description: "Schools combining Islamic and formal education" },
+      { title: "Islamic Education NGOs & Foundations", description: "Islamic organizations supporting education" },
+    ]),
   },
 
   // =========================================================================
@@ -448,10 +330,11 @@ export const categories: Category[] = [
 
   // =========================================================================
   // CATEGORY 15 — INTERNATIONAL & BILATERAL CONTRIBUTORS TO EDUCATION
+  // (Friends of Africa category)
   // =========================================================================
   {
     title: "International & Bilateral Contributors to Education",
-    description: "Celebrating international partners advancing education in Africa",
+    description: "Celebrating international partners and Friends of Africa advancing education on the continent",
     subCategories: [
       { title: "Embassies & High Commissions", description: "Diplomatic missions supporting African education", nominees: [] },
       { title: "Bilateral Aid Agencies", description: "International development agencies in education", nominees: [] },
@@ -465,7 +348,7 @@ export const categories: Category[] = [
   // =========================================================================
   {
     title: "Diaspora Association Educational Impact",
-    description: "Honoring diaspora organizations contributing to African education",
+    description: "Honoring diaspora organizations contributing to African education from around the world",
     subCategories: [
       { title: "Europe-based Associations", description: "European diaspora supporting African education", nominees: [] },
       { title: "Americas-based Associations", description: "American diaspora supporting African education", nominees: [] },
@@ -541,4 +424,19 @@ export function getSubCategories(category: Category, selectedRegion?: string): S
   }
   
   return [];
+}
+
+/**
+ * Get regions for a category (returns empty array if no regions)
+ */
+export function getCategoryRegions(category: Category): AfricanRegion[] {
+  if (!category.regions) return [];
+  return category.regions.map((r) => r.name);
+}
+
+/**
+ * Check if a category includes global regions (Diaspora + Friends of Africa)
+ */
+export function includesGlobalRegions(category: Category): boolean {
+  return category.includeGlobalRegions === true;
 }
