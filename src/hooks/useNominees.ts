@@ -1,11 +1,13 @@
 /**
  * Database-driven Nominees Hook
  * Fetches nominees from Supabase with real-time updates
+ * Uses canonical 7-region structure from regions.ts
  */
 
 import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 import type { GeographicCategory, NomineeImageType } from "@/lib/nesaData";
+import { normalizeRegion, isContinentalRegion, type AfricanRegion } from "@/lib/regions";
 
 // Keywords indicating an organization/company (vs a person)
 const ORGANIZATION_KEYWORDS = [
@@ -26,36 +28,29 @@ function getImageType(name: string): NomineeImageType {
   return isOrganization(name) ? "logo" : "photo";
 }
 
-// Region mapping from database region field
-const REGION_TO_GEOGRAPHIC: Record<string, GeographicCategory> = {
-  "north": "north-africa",
-  "north africa": "north-africa",
-  "east": "east-africa", 
-  "east africa": "east-africa",
-  "west": "west-africa",
-  "west africa": "west-africa",
-  "south": "south-africa",
-  "south africa": "south-africa",
-  "southern": "south-africa",
-  "southern africa": "south-africa",
-  "central": "central-africa",
-  "central africa": "central-africa",
-  "diaspora": "diaspora",
-  "international": "friends-of-africa",
-  "global": "friends-of-africa",
+// Map AfricanRegion to GeographicCategory for display filtering
+const AFRICAN_REGION_TO_GEOGRAPHIC: Record<AfricanRegion, GeographicCategory> = {
+  "North Africa": "north-africa",
+  "West Africa": "west-africa",
+  "Central Africa": "central-africa",
+  "East Africa": "east-africa",
+  "Southern Africa": "south-africa",
+  "Diaspora": "diaspora",
+  "Friends of Africa": "friends-of-africa",
 };
 
+/**
+ * Convert region string from database to GeographicCategory
+ * Uses canonical normalizeRegion from regions.ts
+ */
 function getGeographicCategory(region: string | null, categoryName: string | null): GeographicCategory {
+  // First try to normalize using the canonical region system
   if (region) {
-    const lowerRegion = region.toLowerCase();
-    for (const [key, category] of Object.entries(REGION_TO_GEOGRAPHIC)) {
-      if (lowerRegion.includes(key)) {
-        return category;
-      }
-    }
+    const normalizedRegion = normalizeRegion(region);
+    return AFRICAN_REGION_TO_GEOGRAPHIC[normalizedRegion];
   }
   
-  // Check category name for diaspora/international
+  // Check category name for diaspora/international keywords
   if (categoryName) {
     const lowerCategory = categoryName.toLowerCase();
     if (lowerCategory.includes("diaspora")) return "diaspora";
@@ -64,7 +59,15 @@ function getGeographicCategory(region: string | null, categoryName: string | nul
     }
   }
   
+  // Default to general Africa regions bucket
   return "africa-regions";
+}
+
+/**
+ * Check if a GeographicCategory is a continental African region
+ */
+function isAfricanRegion(category: GeographicCategory): boolean {
+  return ["north-africa", "east-africa", "west-africa", "south-africa", "central-africa"].includes(category);
 }
 
 export interface DatabaseNominee {
@@ -233,9 +236,7 @@ export function getNomineesByGeography(
   if (category === "all") return nominees;
   
   if (category === "africa-regions") {
-    return nominees.filter(n => 
-      ["north-africa", "east-africa", "west-africa", "south-africa", "central-africa"].includes(n.geographicCategory)
-    );
+    return nominees.filter(n => isAfricanRegion(n.geographicCategory));
   }
   
   return nominees.filter(n => n.geographicCategory === category);
@@ -253,7 +254,7 @@ export function getGeographicStats(nominees: EnrichedDatabaseNominee[]) {
   nominees.forEach(n => {
     stats.byRegion[n.geographicCategory] = (stats.byRegion[n.geographicCategory] || 0) + 1;
     
-    if (["north-africa", "east-africa", "west-africa", "south-africa", "central-africa"].includes(n.geographicCategory)) {
+    if (isAfricanRegion(n.geographicCategory)) {
       stats.africaRegions++;
     } else if (n.geographicCategory === "diaspora") {
       stats.diaspora++;
