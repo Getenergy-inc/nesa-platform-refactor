@@ -11,7 +11,7 @@ import { LegacyImpactSection } from "@/components/nesa/LegacyImpactSection";
 import { UpcomingEventsSection } from "@/components/nesa/UpcomingEventsSection";
 import { WatchSection } from "@/components/nesa/WatchSection";
 import { NESAMusicSection } from "@/components/nesa/NESAMusicSection";
-import { NomineesShowcaseSection } from "@/components/nesa/NomineesShowcaseSection";
+import { EducationChampionsDirectory } from "@/components/nesa/EducationChampionsDirectory";
 import { SponsorsSection } from "@/components/nesa/SponsorsSection";
 import { CategoriesSection } from "@/components/nesa/CategoriesSection";
 import { FinalCTASection } from "@/components/nesa/FinalCTASection";
@@ -85,8 +85,8 @@ export default function NESAAfrica() {
         {/* Official Music */}
         <NESAMusicSection />
         
-        {/* Featured Nominees */}
-        <NomineesShowcaseSection />
+        {/* Education Champions Directory */}
+        <EducationChampionsDirectory />
         
         {/* Partners & Sponsors */}
         <SponsorsSection />
