@@ -27,7 +27,7 @@ const UpcomingEventsSection = lazy(() => import("@/components/nesa/UpcomingEvent
 const AwardPhasesSection = lazy(() => import("@/components/nesa/AwardPhasesSection").then(m => ({ default: m.AwardPhasesSection })));
 const WatchSection = lazy(() => import("@/components/nesa/WatchSection").then(m => ({ default: m.WatchSection })));
 const NESAMusicSection = lazy(() => import("@/components/nesa/NESAMusicSection").then(m => ({ default: m.NESAMusicSection })));
-const NomineesShowcaseSection = lazy(() => import("@/components/nesa/NomineesShowcaseSection").then(m => ({ default: m.NomineesShowcaseSection })));
+const EducationChampionsDirectory = lazy(() => import("@/components/nesa/EducationChampionsDirectory").then(m => ({ default: m.EducationChampionsDirectory })));
 const SponsorsSection = lazy(() => import("@/components/nesa/SponsorsSection").then(m => ({ default: m.SponsorsSection })));
 const JudgesSection = lazy(() => import("@/components/nesa/JudgesSection").then(m => ({ default: m.JudgesSection })));
 const CategoriesSection = lazy(() => import("@/components/nesa/CategoriesSection").then(m => ({ default: m.CategoriesSection })));
@@ -116,9 +116,9 @@ export function NESALandingPage() {
           <NESAMusicSection />
         </LazySection>
         
-        {/* 14. Digital Nominees Board */}
+        {/* 14. Education Champions Directory */}
         <LazySection>
-          <NomineesShowcaseSection />
+          <EducationChampionsDirectory />
         </LazySection>
         
         {/* 15. Sponsors, Judges, Categories - Supporting sections */}
