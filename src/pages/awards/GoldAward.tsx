@@ -245,12 +245,12 @@ export default function GoldAward() {
         {/* TV Show Section */}
         {goldTVShow && <AwardTVShowSection show={goldTVShow} accentColor="gold" />}
 
-        {/* Award Categories - 9 Gold/Blue Garnet categories */}
+        {/* Award Categories - 9 Gold categories with 135 subcategories */}
         <AwardCategoriesGrid 
           tier="gold"
           accentColor="amber"
           title="Gold Certificate Categories"
-          description="9 major categories compete for Gold Certificate through 100% public voting across all African regions."
+          description="9 major categories compete for Gold Certificate with 135 subcategories across all African regions — 100% public voting."
         />
 
         {/* Certificate Gallery */}

@@ -61,8 +61,8 @@ export default function IconAward() {
         <AwardHeroSection
           variant="icon"
           title="Africa Education"
-          titleAccent="Icon"
-          description="Honouring 9 exceptional individuals who have shaped education across Africa over 10 continuous years of advocating education for all in Africa (2005–2025)."
+          titleAccent="Icon Blue Garnet"
+          description="Honouring 9 exceptional individuals who have shaped education across Africa over 10+ continuous years (2005–2025). 1 category with 3 subcategories."
           features={["3 Icons per subcategory", "Selected across Africa, Diaspora & Friends of Africa"]}
           primaryAction={{
             label: "Nominate an Icon",
@@ -129,12 +129,12 @@ export default function IconAward() {
         {/* TV Show Section */}
         {iconTVShow && <AwardTVShowSection show={iconTVShow} accentColor="gold" />}
 
-        {/* Award Categories - 1 Icon category with 3 subcategories */}
+        {/* Award Categories - 1 Africa Education Icon Blue Garnet with 3 subcategories */}
         <AwardCategoriesGrid 
           tier="icon"
           accentColor="purple"
-          title="Africa Education Icon"
-          description="1 lifetime achievement category with 3 subcategories: Philanthropy Icon, Literary Advocate Icon, and Technical Educator Icon."
+          title="Africa Education Icon Blue Garnet"
+          description="1 lifetime achievement category with 3 subcategories: Philanthropy Icon, Literary Advocate Icon, and Technical Educator Icon of the Decade."
         />
 
         {/* Certificate Gallery */}
