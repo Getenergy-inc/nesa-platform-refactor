@@ -53,10 +53,10 @@ const getIconComponent = (iconName: string) => categoryIconMap[iconName] || Awar
 
 // Award tier summary data derived from authoritative config
 const TIER_SUMMARY: { tier: AwardTier; description: string }[] = [
-  { tier: "platinum", description: "8 core categories (Library, R&D, Christian, Islamic, Political, International, Diaspora)" },
-  { tier: "gold", description: "9 categories (CSR, EduTech, Media, NGO, STEM, Creative Arts, Education State)" },
-  { tier: "blue-garnet", description: "9 categories (same as Gold, feeds from Gold winners)" },
-  { tier: "icon", description: "1 category (Africa Education Icon with 3 subcategories)" },
+  { tier: "platinum", description: "17 categories: 7 core (100 renominations) + 10 standard (200 renominations)" },
+  { tier: "gold", description: "9 categories, 135 subcategories — 100% public voting" },
+  { tier: "blue-garnet", description: "9 categories — feeds from Gold winners (40% public + 60% jury)" },
+  { tier: "icon", description: "Africa Education Icon Blue Garnet — 1 category, 3 subcategories" },
 ];
 
 // Social media links for NESA Africa TV

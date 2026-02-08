@@ -152,12 +152,12 @@ export default function BlueGarnetAward() {
         {/* TV Show Section */}
         {blueGarnetTVShow && <AwardTVShowSection show={blueGarnetTVShow} accentColor="blue" />}
 
-        {/* Award Categories - 9 Blue Garnet categories (same as Gold, feeds from Gold winners) */}
+        {/* Award Categories - 9 Blue Garnet categories + 1 Africa Icon Blue Garnet */}
         <AwardCategoriesGrid 
           tier="blue-garnet"
           accentColor="blue"
           title="Blue Garnet Award Categories"
-          description="9 major categories compete for Blue Garnet — Gold winners advance to this stage with 60% jury + 40% public scoring."
+          description="9 major categories + 1 Africa Education Icon Blue Garnet. Gold winners advance to Blue Garnet with 60% jury + 40% public scoring."
         />
 
         {/* Certificate Gallery */}
