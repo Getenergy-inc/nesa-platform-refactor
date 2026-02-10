@@ -90,6 +90,7 @@ import Chapters from "./pages/Chapters";
 import Volunteer from "./pages/Volunteer";
 import Ambassadors from "./pages/Ambassadors";
 import Contact from "./pages/Contact";
+import { EDIMatrix, ForNominators, ForNominees, ForJudges, ForVoters } from "./pages/guidelines";
 import Vote from "./pages/Vote";
 import VoteWithAGC from "./pages/VoteWithAGC";
 import { GoldVoting, BlueGarnetVoting } from "./pages/vote";
@@ -318,6 +319,13 @@ const App = () => (
                 <Route path="/ambassadors" element={<WithLayout><Ambassadors /></WithLayout>} />
                 <Route path="/contact" element={<WithLayout><Contact /></WithLayout>} />
                 <Route path="/policies" element={<WithLayout><Policies /></WithLayout>} />
+                
+                {/* Guidelines & EDI Matrix */}
+                <Route path="/guidelines/edi-matrix" element={<WithLayout><EDIMatrix /></WithLayout>} />
+                <Route path="/guidelines/nominators" element={<WithLayout><ForNominators /></WithLayout>} />
+                <Route path="/guidelines/nominees" element={<WithLayout><ForNominees /></WithLayout>} />
+                <Route path="/guidelines/judges" element={<WithLayout><ForJudges /></WithLayout>} />
+                <Route path="/guidelines/voters" element={<WithLayout><ForVoters /></WithLayout>} />
                 
                 {/* Get Involved - Endorse NESA */}
                 <Route path="/get-involved/endorse-nesa-africa" element={<WithLayout><EndorseNESA /></WithLayout>} />

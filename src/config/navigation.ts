@@ -150,6 +150,43 @@ export const MAIN_NAV: NavItem[] = [
     ],
   },
   {
+    label: "Guidelines",
+    href: "/guidelines/edi-matrix",
+    icon: Shield,
+    children: [
+      {
+        label: "EDI Matrix & Guidelines",
+        href: "/guidelines/edi-matrix",
+        description: "The integrity backbone of NESA-Africa evaluations",
+        icon: Shield,
+      },
+      {
+        label: "For Nominators",
+        href: "/guidelines/nominators",
+        description: "Step-by-step nomination guide and ethical rules",
+        icon: FileCheck,
+      },
+      {
+        label: "For Nominees",
+        href: "/guidelines/nominees",
+        description: "Acceptance journey, NRC screening & next steps",
+        icon: Users,
+      },
+      {
+        label: "For Judges",
+        href: "/guidelines/judges",
+        description: "Scoring criteria, COI protocols & rubrics",
+        icon: Gavel,
+      },
+      {
+        label: "For Voters",
+        href: "/guidelines/voters",
+        description: "AGC voting system and ethical voting rules",
+        icon: Vote,
+      },
+    ],
+  },
+  {
     label: "Get Involved",
     href: "/get-involved",
     icon: Users,
