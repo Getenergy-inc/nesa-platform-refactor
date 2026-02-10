@@ -28,7 +28,7 @@ export function VoteWithAGCSection() {
   ];
 
   return (
-    <section className="bg-gradient-to-b from-charcoal via-charcoal-light/30 to-charcoal py-16 md:py-20">
+    <section className="bg-gradient-to-b from-charcoal via-charcoal-light/30 to-charcoal py-16 md:py-20" data-event="vote-with-agc-section-view">
       <div className="container">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           {/* Left: Visual Flow */}
@@ -152,7 +152,7 @@ export function VoteWithAGCSection() {
             {/* CTA */}
             <div className="flex flex-wrap gap-3 mb-6">
               <Link to="/about-agc">
-                <Button className="bg-gold hover:bg-gold-dark text-charcoal font-semibold rounded-full gap-2">
+                <Button className="bg-gold hover:bg-gold-dark text-charcoal font-semibold rounded-full gap-2" data-event="vote-with-agc-cta">
                   <Coins className="h-4 w-4" />
                   Learn About AGC
                   <ArrowRight className="h-4 w-4" />
