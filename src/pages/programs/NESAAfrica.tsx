@@ -20,15 +20,17 @@ import { MobileBottomNav } from "@/components/navigation/MainNav";
 import { StartHereSection } from "@/components/nesa/StartHereSection";
 import { WhatsNewSection } from "@/components/nesa/WhatsNewSection";
 import { ContinueWhereYouLeftOff } from "@/components/nesa/ContinueWhereYouLeftOff";
+import { DailyEngagementBanner } from "@/components/nesa/DailyEngagementBanner";
+import { WhyPeopleReturnStrip } from "@/components/nesa/WhyPeopleReturnStrip";
 
 /**
  * NESA-Africa Landing Page
  * 
- * Streamlined for reduced bounce rate:
- * - Hero + Trust indicators above fold
- * - "Start Here" section for first-time visitors
- * - "What's New" for returning visitors
- * - Single AGC explanation (VoteWithAGCSection)
+ * Conversion & retention-optimized:
+ * - Hero + Trust logos above fold (credibility)
+ * - Daily engagement banner (return visits)
+ * - Visual story blocks (How It Works, AGC, Legacy)
+ * - "Why People Return" social proof strip
  * - Consolidated timeline (UpcomingEventsSection)
  */
 export default function NESAAfrica() {
@@ -64,6 +66,9 @@ export default function NESAAfrica() {
         {/* What's Happening Now */}
         <WhatsLiveSection />
         
+        {/* Daily Engagement Banner */}
+        <DailyEngagementBanner />
+        
         {/* Choose Your Path */}
         <NominationPathsCards />
         
@@ -72,6 +77,9 @@ export default function NESAAfrica() {
         
         {/* How It Works */}
         <HowItWorksVisual />
+        
+        {/* Why People Return - Social Proof */}
+        <WhyPeopleReturnStrip />
         
         {/* Legacy Impact */}
         <LegacyImpactSection />
