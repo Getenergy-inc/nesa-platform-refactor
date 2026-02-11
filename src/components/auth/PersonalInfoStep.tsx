@@ -1,10 +1,11 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
 import {
   Select,
   SelectContent,
@@ -12,7 +13,12 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { Mail, Lock, User, Gift, MapPin, Phone, Building2 } from "lucide-react";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
+import { Mail, Lock, User, Gift, MapPin, Phone, Building2, Globe, Info } from "lucide-react";
 import { AccountType } from "./AccountTypeStep";
 
 export interface PersonalInfoData {
@@ -58,21 +64,59 @@ export function PersonalInfoStep({ accountType, data, onChange, onNext, onBack }
     },
   });
 
-  // Group chapters by region
-  const chaptersByRegion = chapters.reduce((acc, chapter) => {
+  // Auto-assign chapter when country changes
+  useEffect(() => {
+    if (!data.country || data.country === "Other" || chapters.length === 0) return;
+    
+    // Find chapters matching the selected country
+    const matchingChapters = chapters.filter(
+      (ch) => ch.country.toLowerCase() === data.country.toLowerCase()
+    );
+    
+    if (matchingChapters.length === 1) {
+      // Auto-select the only matching chapter
+      const chapter = matchingChapters[0];
+      onChange({
+        chapterId: chapter.id,
+        referralCode: data.referralCode || chapter.referral_code || "",
+      });
+    } else if (matchingChapters.length > 1 && !data.chapterId) {
+      // Auto-select first match if none selected
+      const chapter = matchingChapters[0];
+      onChange({
+        chapterId: chapter.id,
+        referralCode: data.referralCode || chapter.referral_code || "",
+      });
+    }
+  }, [data.country, chapters]);
+
+  // Filter chapters by selected country (show all if no country or "Other")
+  const filteredChapters = data.country && data.country !== "Other"
+    ? chapters.filter((ch) => ch.country.toLowerCase() === data.country.toLowerCase())
+    : chapters;
+
+  // Group filtered chapters by region
+  const chaptersByRegion = filteredChapters.reduce((acc, chapter) => {
     const region = chapter.region || "Other";
     if (!acc[region]) acc[region] = [];
     acc[region].push(chapter);
     return acc;
   }, {} as Record<string, typeof chapters>);
 
+  // Get selected chapter details for badge display
+  const selectedChapter = chapters.find((ch) => ch.id === data.chapterId);
+
   const handleChapterChange = (chapterId: string) => {
     if (chapterId && chapterId !== "none") {
       const chapter = chapters.find((ch) => ch.id === chapterId);
       if (chapter?.referral_code) {
-        onChange({ chapterId, referralCode: chapter.referral_code });
+        onChange({ chapterId, referralCode: data.referralCode || chapter.referral_code });
         return;
       }
+    }
+    if (chapterId === "none") {
+      onChange({ chapterId: "" });
+      return;
     }
     onChange({ chapterId });
   };
@@ -192,7 +236,7 @@ export function PersonalInfoStep({ accountType, data, onChange, onNext, onBack }
 
           {/* Country */}
           <div className="space-y-2">
-            <Label>Country</Label>
+            <Label>Country <span className="text-destructive">*</span></Label>
             <Select value={data.country} onValueChange={(val) => onChange({ country: val })}>
               <SelectTrigger>
                 <SelectValue placeholder="Select your country" />
@@ -204,6 +248,36 @@ export function PersonalInfoStep({ accountType, data, onChange, onNext, onBack }
               </SelectContent>
             </Select>
           </div>
+
+          {/* Auto-assigned Chapter & Region Badges */}
+          {selectedChapter && (
+            <div className="rounded-lg border border-primary/20 bg-primary/5 p-4 space-y-2">
+              <div className="flex items-center gap-2 text-sm font-medium">
+                <MapPin className="h-4 w-4 text-primary" />
+                <span>Your Local Chapter & Region</span>
+                <Tooltip>
+                  <TooltipTrigger asChild>
+                    <Info className="h-3.5 w-3.5 text-muted-foreground cursor-help" />
+                  </TooltipTrigger>
+                  <TooltipContent className="max-w-xs">
+                    <p>Automatically assigned based on your country. You can explore other regions and categories once signed in.</p>
+                  </TooltipContent>
+                </Tooltip>
+              </div>
+              <div className="flex flex-wrap gap-2">
+                <Badge variant="secondary" className="bg-primary/10 text-primary border-primary/20">
+                  <MapPin className="h-3 w-3 mr-1" />
+                  {selectedChapter.name} Chapter
+                </Badge>
+                {selectedChapter.region && (
+                  <Badge variant="secondary" className="bg-accent/50 border-accent">
+                    <Globe className="h-3 w-3 mr-1" />
+                    {selectedChapter.region}
+                  </Badge>
+                )}
+              </div>
+            </div>
+          )}
 
           {/* Organization (for org/sponsor accounts) */}
           {showOrgField && (
@@ -222,10 +296,12 @@ export function PersonalInfoStep({ accountType, data, onChange, onNext, onBack }
             </div>
           )}
 
-          {/* Chapter Selection */}
+          {/* Chapter Selection (manual override) */}
           {showChapterField && (
             <div className="space-y-2">
-              <Label>Join a Local Chapter (Optional)</Label>
+              <Label>
+                {selectedChapter ? "Change Local Chapter" : "Join a Local Chapter (Optional)"}
+              </Label>
               <div className="relative">
                 <MapPin className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground z-10 pointer-events-none" />
                 <Select value={data.chapterId} onValueChange={handleChapterChange}>
@@ -249,9 +325,11 @@ export function PersonalInfoStep({ accountType, data, onChange, onNext, onBack }
                   </SelectContent>
                 </Select>
               </div>
-              <p className="text-xs text-muted-foreground">
-                Connect with educators in your country and earn chapter bonuses
-              </p>
+              {!selectedChapter && (
+                <p className="text-xs text-muted-foreground">
+                  Connect with educators in your country and earn chapter bonuses
+                </p>
+              )}
             </div>
           )}
 
@@ -271,6 +349,21 @@ export function PersonalInfoStep({ accountType, data, onChange, onNext, onBack }
             {data.referralCode && (
               <p className="text-xs text-primary">🎁 You'll receive bonus AGC credits!</p>
             )}
+          </div>
+        </CardContent>
+      </Card>
+
+      {/* Nomination Awareness Banner */}
+      <Card className="mt-4 border-primary/20 bg-gradient-to-r from-primary/5 to-transparent">
+        <CardContent className="p-4 flex items-start gap-3">
+          <div className="h-10 w-10 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
+            <Gift className="h-5 w-5 text-primary" />
+          </div>
+          <div>
+            <p className="text-sm font-medium">Earn AfriGold Coins (AGC)</p>
+            <p className="text-xs text-muted-foreground mt-0.5">
+              Submit verified nominations and earn voting points. Use your AGC to vote for African education changemakers advocating Education for All.
+            </p>
           </div>
         </CardContent>
       </Card>

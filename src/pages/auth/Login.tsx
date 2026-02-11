@@ -62,17 +62,39 @@ export default function Login() {
 
           if (otpError) {
             console.error("OTP send error:", otpError);
-            // If OTP fails, still proceed but log the error
             toast.warning("OTP verification may be required");
           }
 
           navigate(`/otp?email=${encodeURIComponent(email)}&redirect=${encodeURIComponent(nextUrl)}`);
           return;
         }
+
+        // Fetch profile for personalized welcome
+        const { data: profile } = await supabase
+          .from("profiles")
+          .select("full_name, referred_by_chapter_id")
+          .eq("user_id", userData.user.id)
+          .maybeSingle();
+
+        if (profile?.referred_by_chapter_id) {
+          const { data: chapter } = await supabase
+            .from("chapters")
+            .select("name, region")
+            .eq("id", profile.referred_by_chapter_id)
+            .maybeSingle();
+
+          if (chapter) {
+            const name = profile.full_name?.split(" ")[0] || "";
+            toast.success(
+              `Welcome back${name ? `, ${name}` : ""}! Viewing: ${chapter.name} Chapter${chapter.region ? ` • ${chapter.region}` : ""}`
+            );
+            navigate(nextUrl);
+            return;
+          }
+        }
       }
       
       toast.success(t("auth.login.welcomeBack"));
-      // Navigate to the next URL or dashboard
       navigate(nextUrl);
     } catch (error: any) {
       toast.error(error.message || t("auth.login.invalidCredentials"));

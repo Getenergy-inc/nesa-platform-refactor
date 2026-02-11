@@ -226,6 +226,8 @@ export default function Register() {
           <CompleteStep
             accountType={accountType!}
             fullName={personalInfo.fullName}
+            chapterId={personalInfo.chapterId}
+            country={personalInfo.country}
           />
         );
       

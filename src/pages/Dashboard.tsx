@@ -16,6 +16,8 @@ import {
   RoleSwitcher,
   type RevenueSplit,
 } from "@/components/dashboard/wallet";
+import { ChapterHighlightCard } from "@/components/dashboard/ChapterHighlightCard";
+import { CampaignTimelineCard } from "@/components/dashboard/CampaignTimelineCard";
 import type {
   WalletBalance,
   WalletLedgerEntry,
@@ -156,8 +158,14 @@ function DashboardContent() {
           </div>
         )}
 
+        {/* Chapter & Region Highlight */}
+        <ChapterHighlightCard />
+
         {/* Wallet Header */}
         <WalletHeaderCard loading={loading} />
+
+        {/* Campaign Timeline */}
+        <CampaignTimelineCard />
 
         {/* Balance + AGC Summary Row */}
         <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
