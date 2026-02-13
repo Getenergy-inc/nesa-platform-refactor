@@ -111,9 +111,9 @@ export function CustomerCareChat() {
                   <div className="h-16 w-16 rounded-full bg-primary/10 flex items-center justify-center mb-4">
                     <Bot className="h-8 w-8 text-primary" />
                   </div>
-                  <h4 className="font-semibold text-foreground mb-2">Welcome to NESA Support!</h4>
+                  <h4 className="font-semibold text-foreground mb-2">Welcome to SCEF Support!</h4>
                   <p className="text-sm text-muted-foreground mb-4">
-                    I'm here to help you with questions about nominations, voting, certificates, and more.
+                    I'm here to help you with nominations, voting, Afrigold Points, volunteering, membership, and more.
                   </p>
                   <div className="flex flex-wrap gap-2 justify-center">
                     {[

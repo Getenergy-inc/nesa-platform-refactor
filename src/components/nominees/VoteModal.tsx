@@ -102,8 +102,8 @@ export function VoteModal({
       // Cast the vote (1 AGC = 1 vote)
       await castVote(nomineeId, 1);
       
-      toast.success("Vote recorded!", {
-        description: `You voted for ${nomineeName} in ${voteCategory}`,
+      toast.success("Vote Recorded Successfully!", {
+        description: `Your vote for ${nomineeName} in ${voteCategory} has been recorded. Thank you for participating! Track your Afrigold Points on your dashboard.`,
       });
       
       onVoteSuccess?.();
@@ -111,13 +111,13 @@ export function VoteModal({
     } catch (error: any) {
       if (error.message?.includes("already voted")) {
         toast.error("Already voted", {
-          description: "You have already voted for this nominee",
+          description: "You have already cast your vote for this nominee in this category.",
         });
       } else if (error.message?.includes("Insufficient")) {
-        toast.error("Insufficient AGC", {
-          description: "You need more voting credits. Earn or purchase AGC to vote.",
+        toast.error("Insufficient Afrigold Points", {
+          description: "Earn more Afrigold Points by nominating verified changemakers, then return to vote.",
           action: {
-            label: "Earn AGC",
+            label: "Earn Points",
             onClick: () => window.location.href = "/earn-voting-credits",
           },
         });
@@ -147,7 +147,7 @@ export function VoteModal({
           </DialogHeader>
           <div className="space-y-4 pt-4">
             <p className="text-sm text-ivory/70">
-              Create a free account to vote for <span className="text-gold font-medium">{nomineeName}</span> and support education excellence in Africa.
+              Sign up to earn Afrigold Points and vote for <span className="text-gold font-medium">{nomineeName}</span>. Support African education changemakers advocating Education for All.
             </p>
             <div className="flex gap-3">
               <Button asChild className="flex-1 bg-gold hover:bg-gold-dark text-charcoal">

@@ -139,8 +139,8 @@ export function RenominateModal({
         sessionId: user ? undefined : getSessionId(),
       });
       
-      toast.success("Renomination submitted!", {
-        description: `Your endorsement for ${nomineeName} has been recorded. Thank you!`,
+      toast.success("Endorsement Submitted!", {
+        description: `Your endorsement for ${nomineeName} has been recorded. Thank you for contributing to quality education!`,
       });
       
       onRenominateSuccess?.();

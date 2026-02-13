@@ -86,7 +86,9 @@ export default function Login() {
           if (chapter) {
             const name = profile.full_name?.split(" ")[0] || "";
             toast.success(
-              `Welcome back${name ? `, ${name}` : ""}! Viewing: ${chapter.name} Chapter${chapter.region ? ` • ${chapter.region}` : ""}`
+              `Welcome back${name ? `, ${name}` : ""}!`, {
+                description: `Viewing: ${chapter.name} Chapter${chapter.region ? ` • ${chapter.region}` : ""}. Track your Afrigold Points and active campaigns on your dashboard.`,
+              }
             );
             navigate(nextUrl);
             return;

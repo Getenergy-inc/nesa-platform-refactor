@@ -204,7 +204,9 @@
  
    const handleVoteSuccess = () => {
      refetch();
-     toast.success("Vote cast successfully!");
+      toast.success("Vote Recorded Successfully!", {
+        description: "Thank you for participating! Track your Afrigold Points and remaining votes on your dashboard.",
+      });
    };
  
    return (

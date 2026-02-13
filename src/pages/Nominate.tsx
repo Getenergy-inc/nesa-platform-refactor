@@ -325,7 +325,9 @@ export default function Nominate() {
       // Clear draft on successful submission
       clearDraft();
       setShowConfirmDialog(false);
-      toast.success("Nomination submitted successfully!");
+      toast.success("Nomination Submitted Successfully!", {
+        description: "You earned 10 Afrigold Points. Share and engage to maximize your impact for quality education.",
+      });
       navigate("/dashboard/nominations");
     } catch (error) {
       console.error("Submission error:", error);

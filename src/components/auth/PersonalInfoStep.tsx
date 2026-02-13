@@ -260,7 +260,7 @@ export function PersonalInfoStep({ accountType, data, onChange, onNext, onBack }
                     <Info className="h-3.5 w-3.5 text-muted-foreground cursor-help" />
                   </TooltipTrigger>
                   <TooltipContent className="max-w-xs">
-                    <p>Automatically assigned based on your country. You can explore other regions and categories once signed in.</p>
+                    <p>Your Local Chapter and Region are automatically assigned for your convenience. You can still explore other regions, categories, and local chapters once signed in.</p>
                   </TooltipContent>
                 </Tooltip>
               </div>
@@ -360,9 +360,9 @@ export function PersonalInfoStep({ accountType, data, onChange, onNext, onBack }
             <Gift className="h-5 w-5 text-primary" />
           </div>
           <div>
-            <p className="text-sm font-medium">Earn AfriGold Coins (AGC)</p>
+            <p className="text-sm font-medium">Earn Afrigold Points by Nominating</p>
             <p className="text-xs text-muted-foreground mt-0.5">
-              Submit verified nominations and earn voting points. Use your AGC to vote for African education changemakers advocating Education for All.
+              Submit verified nominations and earn +10 Afrigold Points per nomination. Use your points to vote for African education changemakers advocating Education for All.
             </p>
           </div>
         </CardContent>
