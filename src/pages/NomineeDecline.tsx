@@ -44,6 +44,7 @@ export default function NomineeDecline() {
               <h2 className="text-xl font-semibold">Nomination Declined</h2>
               <p className="text-muted-foreground">
                 We respect your decision. Thank you for considering the NESA-Africa recognition program.
+                Your Local Chapter team wishes you well.
               </p>
             </div>
             <p className="text-sm text-muted-foreground">
