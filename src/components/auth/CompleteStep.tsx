@@ -91,11 +91,11 @@ export function CompleteStep({ accountType, fullName, chapterId, country }: Comp
       </div>
 
       <h2 className="text-2xl md:text-3xl font-display font-bold mb-2">
-        Welcome to NESA, {firstName}! 🎉
+        Welcome to Santos Creations Educational Foundation, {firstName}! 🎉
       </h2>
       <p className="text-muted-foreground mb-6">
-        Your account has been created successfully. You're now part of the NESA community
-        dedicated to celebrating excellence in African education.
+        Your account is active. Explore nominations, voting, volunteering, and membership opportunities.
+        Your default chapter content is ready, but you can access other regions anytime.
       </p>
 
       {/* Chapter & Region Assignment */}
@@ -119,7 +119,7 @@ export function CompleteStep({ accountType, fullName, chapterId, country }: Comp
               )}
             </div>
             <p className="text-xs text-muted-foreground mt-3">
-              You can explore other regions and categories from your dashboard.
+              Your default content is ready. You can access other regions, categories, and local chapters from your dashboard.
             </p>
           </CardContent>
         </Card>
@@ -132,9 +132,9 @@ export function CompleteStep({ accountType, fullName, chapterId, country }: Comp
             <Coins className="h-5 w-5 text-amber-600" />
           </div>
           <div className="text-left">
-            <p className="text-sm font-semibold">You earned your first voting points!</p>
+            <p className="text-sm font-semibold">You've earned your first Afrigold Points!</p>
             <p className="text-xs text-muted-foreground">
-              +5 AGC welcome credits added to your wallet. Nominate educators to earn more.
+              +5 AGC welcome credits added to your wallet. Submit verified nominations and earn more voting points.
             </p>
           </div>
         </CardContent>

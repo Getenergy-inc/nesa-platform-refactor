@@ -53,16 +53,22 @@ export default function EarnVotingCredits() {
     
     switch (action) {
       case "claim-welcome":
-        toast.success("Welcome credits claimed! +10 AGC added to your wallet.");
+        toast.success("Welcome Afrigold Points claimed!", {
+          description: "+10 AGC added to your wallet. Use your points to vote for African education changemakers.",
+        });
         break;
       case "check-in":
-        toast.success("Daily check-in complete! +1 AGCc credited.");
+        toast.success("Daily Engagement Recorded!", {
+          description: "+1 AGC credited. Return daily to earn more voting points.",
+        });
         break;
       case "polls":
-        toast("Opening polls...", { description: "No active polls at the moment." });
+        toast("Opening polls...", { description: "No active polls at the moment. Check back soon!" });
         break;
       case "invite":
-        toast.success("Redirecting to referral page...");
+        toast.success("Referral link ready!", {
+          description: "Share your link to earn Afrigold Points when friends join.",
+        });
         break;
       default:
         toast.info("Action completed");

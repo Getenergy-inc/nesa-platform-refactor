@@ -117,8 +117,10 @@ export default function Register() {
         personalInfo.referralCode || undefined
       );
       
-      toast.success("Account created! Please check your email for verification.");
-      
+      toast.success("Welcome to NESA-Africa 2025!", {
+        description: "Your account is active. Please check your email for verification.",
+      });
+
       // Move to verification step
       goToStep(needsOrgInfo ? 5 : 4);
     } catch (error: any) {
@@ -130,7 +132,7 @@ export default function Register() {
   };
 
   const handleResendCode = () => {
-    toast.info("Verification code resent to your email");
+    toast.info("New verification code sent to your email");
     setVerificationError(undefined);
   };
 
@@ -142,7 +144,7 @@ export default function Register() {
     setTimeout(() => {
       setIsVerifying(false);
       setIsVerified(true);
-      toast.success("Email verified successfully!");
+      toast.success("Email verified! Your dashboard is ready.");
     }, 1500);
   };
 

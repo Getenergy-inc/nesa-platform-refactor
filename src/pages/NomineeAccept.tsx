@@ -72,7 +72,9 @@ export default function NomineeAccept() {
       const response = await acceptNomination(token);
       setResult(response.data);
       setAccepted(true);
-      toast.success("Nomination accepted successfully!");
+      toast.success("Nomination Accepted!", {
+        description: "Thank you for accepting your nomination. Your profile is now active in the NESA-Africa ecosystem.",
+      });
     } catch (error: any) {
       toast.error(error.message || "Failed to accept nomination");
     } finally {
