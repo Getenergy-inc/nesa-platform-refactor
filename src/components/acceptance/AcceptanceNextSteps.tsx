@@ -23,12 +23,12 @@ export function AcceptanceNextSteps() {
     {
       icon: Heart,
       title: "Donate or Sponsor",
-      description: "Support scholarships and NESA's mission.",
+      description: "Support scholarships and SCEF's Education for All mission.",
     },
     {
       icon: Users,
       title: "Nominate Others",
-      description: "Recognize deserving individuals in other categories.",
+      description: "Recognize deserving individuals in your Local Chapter or other categories.",
     },
     {
       icon: Vote,

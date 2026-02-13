@@ -117,8 +117,10 @@ export default function Register() {
         personalInfo.referralCode || undefined
       );
       
-      toast.success("Welcome to NESA-Africa 2025!", {
-        description: "Your account is active. Please check your email for verification.",
+      // Build chapter-aware welcome message
+      const chapterLabel = personalInfo.chapterId ? "Your Local Chapter content is ready." : "";
+      toast.success("Welcome to Santos Creations Educational Foundation!", {
+        description: `Your account is active. ${chapterLabel} Please check your email for verification.`,
       });
 
       // Move to verification step

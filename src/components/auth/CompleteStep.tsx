@@ -91,11 +91,11 @@ export function CompleteStep({ accountType, fullName, chapterId, country }: Comp
       </div>
 
       <h2 className="text-2xl md:text-3xl font-display font-bold mb-2">
-        Welcome to Santos Creations Educational Foundation, {firstName}! 🎉
+        Welcome to {chapter ? `SCEF ${chapter.name} Local Chapter` : "Santos Creations Educational Foundation"}, {firstName}! 🎉
       </h2>
       <p className="text-muted-foreground mb-6">
         Your account is active. Explore nominations, voting, volunteering, and membership opportunities.
-        Your default chapter content is ready, but you can access other regions anytime.
+        {chapter ? ` Your default ${chapter.name} chapter content is ready, but you can access other regions anytime.` : " Your default chapter content is ready, but you can access other regions anytime."}
       </p>
 
       {/* Chapter & Region Assignment */}

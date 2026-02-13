@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import { acceptNomination, getAcceptanceDetails, AcceptanceDetails } from "@/api/nominations";
+import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
@@ -20,6 +21,7 @@ export default function NomineeAccept() {
   const [accepted, setAccepted] = useState(false);
   const [nominee, setNominee] = useState<AcceptanceDetails | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const [chapterInfo, setChapterInfo] = useState<{ name: string; region: string | null } | null>(null);
   const [result, setResult] = useState<{
     certificate_download_locked?: boolean;
     renominations_needed?: number;
@@ -36,6 +38,20 @@ export default function NomineeAccept() {
       try {
         const response = await getAcceptanceDetails(token);
         setNominee(response.data);
+
+        // Fetch chapter info based on nominee's country
+        if (response.data.country) {
+          const { data: chapter } = await supabase
+            .from("chapters")
+            .select("name, region")
+            .eq("country", response.data.country)
+            .eq("is_active", true)
+            .limit(1)
+            .maybeSingle();
+          if (chapter) {
+            setChapterInfo(chapter);
+          }
+        }
 
         // Check if already responded
         if (response.data.acceptance_status === "ACCEPTED") {
@@ -148,6 +164,8 @@ export default function NomineeAccept() {
           certificateDownloadLocked={result.certificate_download_locked ?? true}
           renominationsNeeded={result.renominations_needed ?? 200}
           token={token}
+          chapterName={chapterInfo?.name}
+          region={chapterInfo?.region || undefined}
         />
       </div>
     );
@@ -163,7 +181,7 @@ export default function NomineeAccept() {
       <Card className="max-w-2xl w-full shadow-xl border-0">
         <CardContent className="p-6 md:p-10 space-y-8">
           {/* Header */}
-          <AcceptanceLetterHeader nomineeName={nominee.name} />
+          <AcceptanceLetterHeader nomineeName={nominee.name} chapterName={chapterInfo?.name} region={chapterInfo?.region || undefined} />
 
           {/* Congratulations Message */}
           <div className="space-y-4">
@@ -217,6 +235,13 @@ export default function NomineeAccept() {
 
           {/* Closing */}
           <div className="text-center text-sm text-muted-foreground pt-4 border-t space-y-2">
+            <p className="font-medium text-foreground">
+              Warm regards,
+            </p>
+            <p>
+              {chapterInfo ? `SCEF ${chapterInfo.name} Local Chapter` : "Santos Creations Educational Foundation"}
+              {chapterInfo?.region && ` — ${chapterInfo.region}`}
+            </p>
             <p>
               We are honored to have you join Africa's largest educational recognition movement.
             </p>
