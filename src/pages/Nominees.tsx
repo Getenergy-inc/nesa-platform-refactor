@@ -20,6 +20,7 @@ import {
   getNomineesByGeography as getCsvNomineesByGeography,
   getGeographicGroups as getCsvGeographicGroups,
   getAfricaRegions as getCsvAfricaRegions,
+  getDiasporaSubgroups as getCsvDiasporaSubgroups,
   getAwardOptions as getCsvAwardOptions, 
   getStats as getCsvStats,
   type GeographicCategory,
@@ -50,6 +51,7 @@ interface DisplayNominee {
   region?: string;
   categoryName: string;
   categorySlug: string;
+  subcategoryName?: string;
   geographicCategory: GeographicCategory;
   isPlatinum: boolean;
   publicVotes: number;
@@ -85,6 +87,7 @@ function csvToDisplay(nominee: EnrichedNominee): DisplayNominee {
     region: nominee.regionName,
     categoryName: nominee.awardTitle,
     categorySlug: nominee.awardSlug,
+    subcategoryName: nominee.subcategoryTitle,
     geographicCategory: nominee.geographicCategory,
     isPlatinum: false,
     publicVotes: 0,
@@ -103,6 +106,9 @@ export default function Nominees() {
   const [selectedRegion, setSelectedRegion] = useState<GeographicCategory | "all">(
     (searchParams.get("region") as GeographicCategory) || "all"
   );
+  const [selectedDiasporaSubgroup, setSelectedDiasporaSubgroup] = useState<string>(
+    searchParams.get("diaspora_group") || "all"
+  );
   const [sortBy, setSortBy] = useState<SortOption>(
     (searchParams.get("sort") as SortOption) || "name-asc"
   );
@@ -118,11 +124,12 @@ export default function Nominees() {
     if (selectedCategory !== "all") params.set("category", selectedCategory);
     if (selectedAward !== "all") params.set("award", selectedAward);
     if (selectedRegion !== "all") params.set("region", selectedRegion);
+    if (selectedDiasporaSubgroup !== "all") params.set("diaspora_group", selectedDiasporaSubgroup);
     if (sortBy !== "name-asc") params.set("sort", sortBy);
     if (currentPage > 1 && !useInfiniteScroll) params.set("page", currentPage.toString());
     
     setSearchParams(params, { replace: true });
-  }, [searchQuery, selectedCategory, selectedAward, selectedRegion, sortBy, currentPage, useInfiniteScroll, setSearchParams]);
+  }, [searchQuery, selectedCategory, selectedAward, selectedRegion, selectedDiasporaSubgroup, sortBy, currentPage, useInfiniteScroll, setSearchParams]);
 
   // Fetch from database
   const { data: dbNominees, isLoading: dbLoading, error: dbError } = useNominees();
@@ -168,6 +175,27 @@ export default function Nominees() {
     return getCsvAfricaRegions();
   }, [useDatabase, dbNominees]);
 
+  // Diaspora subgroups
+  const diasporaSubgroups = useMemo(() => {
+    if (useDatabase && dbNominees) {
+      // Group diaspora nominees by subcategory from DB
+      const diasporaNominees = dbNominees.filter(n => n.geographicCategory === "diaspora");
+      const subgroupMap: Record<string, number> = {};
+      diasporaNominees.forEach(n => {
+        const key = n.categoryName || "Other";
+        subgroupMap[key] = (subgroupMap[key] || 0) + 1;
+      });
+      return Object.entries(subgroupMap)
+        .map(([name, count]) => ({
+          id: name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, ''),
+          name,
+          nomineeCount: count,
+        }))
+        .sort((a, b) => b.nomineeCount - a.nomineeCount);
+    }
+    return getCsvDiasporaSubgroups();
+  }, [useDatabase, dbNominees]);
+
   const awardOptions = useMemo(() => {
     if (useDatabase && dbNominees) {
       return getCategoryOptions(dbNominees);
@@ -201,13 +229,21 @@ export default function Nominees() {
             ["north-africa", "east-africa", "west-africa", "south-africa", "central-africa"].includes(n.geographicCategory)
           );
         }
+      } else if (selectedCategory === "diaspora") {
+        filtered = filtered.filter(n => n.geographicCategory === "diaspora");
+        if (selectedDiasporaSubgroup !== "all") {
+          const matchGroup = diasporaSubgroups.find(g => g.id === selectedDiasporaSubgroup);
+          if (matchGroup) {
+            filtered = filtered.filter(n => n.subcategoryName === matchGroup.name || n.categoryName === matchGroup.name);
+          }
+        }
       } else {
         filtered = filtered.filter(n => n.geographicCategory === selectedCategory);
       }
     }
     
     return filtered;
-  }, [allNominees, selectedCategory, selectedRegion]);
+  }, [allNominees, selectedCategory, selectedRegion, selectedDiasporaSubgroup, diasporaSubgroups]);
 
   // Apply search and award filters, then sort
   const filteredNominees = useMemo(() => {
@@ -269,6 +305,13 @@ export default function Nominees() {
   const handleCategoryChange = (value: GeographicCategory) => {
     setSelectedCategory(value);
     setSelectedRegion("all");
+    setSelectedDiasporaSubgroup("all");
+    setCurrentPage(1);
+    setVisibleCount(ITEMS_PER_PAGE);
+  };
+
+  const handleDiasporaSubgroupChange = (value: string) => {
+    setSelectedDiasporaSubgroup(value);
     setCurrentPage(1);
     setVisibleCount(ITEMS_PER_PAGE);
   };
@@ -403,6 +446,50 @@ export default function Nominees() {
                     {region.name}
                     <Badge variant="outline" className="ml-1 text-[10px] px-1.5 py-0 h-4 border-current/30">
                       {region.nomineeCount}
+                    </Badge>
+                  </Button>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {/* Diaspora Sub-tabs */}
+          {selectedCategory === "diaspora" && diasporaSubgroups.length > 0 && (
+            <div className="mt-4 overflow-x-auto scrollbar-hide">
+              <p className="text-xs text-ivory/40 mb-2 text-center">Filter by Diaspora Region</p>
+              <div className="flex gap-2 justify-center min-w-max pb-2">
+                <Button
+                  variant={selectedDiasporaSubgroup === "all" ? "default" : "outline"}
+                  size="sm"
+                  onClick={() => handleDiasporaSubgroupChange("all")}
+                  className={selectedDiasporaSubgroup === "all" 
+                    ? "bg-gold text-charcoal hover:bg-gold-dark" 
+                    : "border-gold/30 text-gold hover:bg-gold/10"
+                  }
+                >
+                  <Globe2 className="w-3.5 h-3.5 mr-1" />
+                  All Diaspora
+                </Button>
+                {diasporaSubgroups.map((subgroup) => (
+                  <Button
+                    key={subgroup.id}
+                    variant={selectedDiasporaSubgroup === subgroup.id ? "default" : "outline"}
+                    size="sm"
+                    onClick={() => handleDiasporaSubgroupChange(subgroup.id)}
+                    className={selectedDiasporaSubgroup === subgroup.id 
+                      ? "bg-gold text-charcoal hover:bg-gold-dark" 
+                      : "border-gold/30 text-gold hover:bg-gold/10"
+                    }
+                  >
+                    <MapPin className="w-3.5 h-3.5 mr-1" />
+                    {subgroup.name
+                      .replace(/^the best diaspora-led educational\s*/i, '')
+                      .replace(/-based associations?/i, '')
+                      .replace(/associations?/i, '')
+                      .replace(/\s+/g, ' ')
+                      .trim() || subgroup.name}
+                    <Badge variant="outline" className="ml-1 text-[10px] px-1.5 py-0 h-4 border-current/30">
+                      {subgroup.nomineeCount}
                     </Badge>
                   </Button>
                 ))}
