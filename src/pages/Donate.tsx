@@ -2,7 +2,6 @@ import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
@@ -11,49 +10,67 @@ import {
   CreditCard,
   Globe,
   Heart,
+  MapPin,
+  School,
   Shield,
   Users,
 } from "lucide-react";
 import { useState } from "react";
 import { MiniMusicPlayer } from "@/components/nesa/MiniMusicPlayer";
+import africaMapImg from "@/assets/africa-map-silhouette.png";
 
-// Regional education images
-import westAfricaImg from "@/assets/regions/west-africa-education.jpg";
-import eastAfricaImg from "@/assets/regions/east-africa-education.jpg";
-import southernAfricaImg from "@/assets/regions/southern-africa-education.jpg";
-import northAfricaImg from "@/assets/regions/north-africa-education.jpg";
-import centralAfricaImg from "@/assets/regions/central-africa-education.jpg";
+// African textile patterns
+import kenteImg from "@/assets/patterns/kente-west-africa.jpg";
+import ethiopianImg from "@/assets/patterns/ethiopian-east-africa.jpg";
+import ndebeleImg from "@/assets/patterns/ndebele-southern-africa.jpg";
+import kubaImg from "@/assets/patterns/kuba-central-africa.jpg";
+import zelligeImg from "@/assets/patterns/zellige-north-africa.jpg";
 
 const regions = [
-  { 
-    name: "West Africa", 
-    image: westAfricaImg, 
-    countries: "Nigeria, Ghana, Senegal...",
-    color: "from-amber-500/80"
+  {
+    name: "West Africa",
+    school: "Hope Academy",
+    country: "Nigeria",
+    pattern: kenteImg,
+    patternName: "Kente Cloth",
+    color: "from-amber-500/80",
+    accent: "border-amber-500/40",
   },
-  { 
-    name: "East Africa", 
-    image: eastAfricaImg, 
-    countries: "Kenya, Tanzania, Uganda...",
-    color: "from-blue-500/80"
+  {
+    name: "East Africa",
+    school: "Sunrise Inclusive School",
+    country: "Kenya",
+    pattern: ethiopianImg,
+    patternName: "Ethiopian Weave",
+    color: "from-blue-500/80",
+    accent: "border-blue-500/40",
   },
-  { 
-    name: "Southern Africa", 
-    image: southernAfricaImg, 
-    countries: "South Africa, Botswana, Zimbabwe...",
-    color: "from-green-500/80"
+  {
+    name: "Southern Africa",
+    school: "Rainbow Learning Centre",
+    country: "South Africa",
+    pattern: ndebeleImg,
+    patternName: "Ndebele Art",
+    color: "from-green-500/80",
+    accent: "border-green-500/40",
   },
-  { 
-    name: "North Africa", 
-    image: northAfricaImg, 
-    countries: "Egypt, Morocco, Tunisia...",
-    color: "from-red-500/80"
+  {
+    name: "North Africa",
+    school: "Al-Noor Academy",
+    country: "Morocco",
+    pattern: zelligeImg,
+    patternName: "Zellige Mosaic",
+    color: "from-purple-500/80",
+    accent: "border-purple-500/40",
   },
-  { 
-    name: "Central Africa", 
-    image: centralAfricaImg, 
-    countries: "DRC, Cameroon, Gabon...",
-    color: "from-purple-500/80"
+  {
+    name: "Central Africa",
+    school: "Unity Special Education",
+    country: "Cameroon",
+    pattern: kubaImg,
+    patternName: "Kuba Cloth",
+    color: "from-orange-500/80",
+    accent: "border-orange-500/40",
   },
 ];
 
@@ -92,43 +109,60 @@ export default function Donate() {
 
       <div className="min-h-screen bg-charcoal">
         {/* Hero Section */}
-        <section className="relative py-16 lg:py-20">
-          <div className="container mx-auto px-4">
+        <section className="relative py-16 lg:py-20 overflow-hidden">
+          {/* Africa map watermark */}
+          <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+            <img src={africaMapImg} alt="" className="w-[400px] h-auto opacity-[0.06]" aria-hidden="true" />
+          </div>
+          <div className="container mx-auto px-4 relative z-10">
             <div className="mx-auto max-w-2xl text-center">
               <div className="mb-4 inline-flex items-center gap-2 rounded-full bg-primary/10 px-4 py-2">
                 <Heart className="h-5 w-5 text-primary" />
-                <span className="text-sm font-medium text-primary">Make a Difference</span>
+                <span className="text-sm font-medium text-primary">Rebuild My School Africa</span>
               </div>
               <h1 className="mb-4 font-display text-3xl font-bold text-white md:text-4xl">
-                Support African <span className="text-primary">Education</span>
+                5 Schools. 5 Regions. <span className="text-primary">One Mission.</span>
               </h1>
               <p className="text-white/70">
-                Your donation powers educational transformation across all five regions of Africa.
+                Each donation supports a special needs school in one of Africa's five regions — upgrading inclusive education facilities.
               </p>
             </div>
           </div>
         </section>
 
-        {/* Regional Showcase */}
+        {/* Regional School Cards with African Textiles */}
         <section className="py-12">
           <div className="container mx-auto px-4">
-            <h2 className="mb-8 text-center font-display text-xl font-semibold text-white">
-              The Future of Education Across Africa
+            <h2 className="mb-2 text-center font-display text-xl font-semibold text-white">
+              Choose a School to Support
             </h2>
+            <p className="mb-8 text-center text-sm text-white/50">
+              Each card features the cultural textile heritage of its region
+            </p>
             <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
               {regions.map((region) => (
-                <div key={region.name} className="group relative overflow-hidden rounded-xl">
+                <div key={region.name} className={`group relative overflow-hidden rounded-xl border ${region.accent}`}>
+                  {/* Pattern background */}
                   <div className="aspect-[4/3] overflow-hidden">
                     <img
-                      src={region.image}
-                      alt={`Education in ${region.name}`}
+                      src={region.pattern}
+                      alt={`${region.patternName} — ${region.name}`}
                       className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
+                      loading="lazy"
                     />
                   </div>
-                  <div className={`absolute inset-0 bg-gradient-to-t ${region.color} to-transparent opacity-80`} />
+                  <div className={`absolute inset-0 bg-gradient-to-t ${region.color} to-transparent opacity-70`} />
+                  <div className="absolute inset-0 bg-gradient-to-t from-charcoal via-charcoal/60 to-transparent" />
                   <div className="absolute inset-x-0 bottom-0 p-4">
-                    <h3 className="font-semibold text-white">{region.name}</h3>
-                    <p className="text-xs text-white/80">{region.countries}</p>
+                    <div className="flex items-center gap-1.5 mb-1">
+                      <MapPin className="h-3 w-3 text-white/60" />
+                      <span className="text-[10px] text-white/60 uppercase tracking-wider">{region.name}</span>
+                    </div>
+                    <div className="flex items-center gap-1.5 mb-0.5">
+                      <School className="h-3.5 w-3.5 text-white" />
+                      <h3 className="font-semibold text-white text-sm">{region.school}</h3>
+                    </div>
+                    <p className="text-[10px] text-white/60">{region.country} • {region.patternName}</p>
                   </div>
                 </div>
               ))}
@@ -229,7 +263,7 @@ export default function Donate() {
           </div>
         </section>
 
-        {/* Music For A Cause - Mini Player */}
+        {/* Music For A Cause */}
         <section className="py-8">
           <div className="container mx-auto px-4">
             <div className="mx-auto max-w-xl">
