@@ -1,3 +1,4 @@
+import { forwardRef } from "react";
 import { Link } from "react-router-dom";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -64,7 +65,7 @@ function getEffectiveImageType(nominee: NomineeCardData): NomineeImageType {
   return resolved.kind === "organization" ? "logo" : "photo";
 }
 
-export function NomineeCard({
+export const NomineeCard = forwardRef<HTMLDivElement, NomineeCardProps>(function NomineeCard({
   nominee,
   showVotes = true,
   showRenominationCount = false,
@@ -77,7 +78,7 @@ export function NomineeCard({
   showActions = false,
   onVoteSuccess,
   onRenominateSuccess,
-}: NomineeCardProps) {
+}, ref) {
   const isCompact = variant === "compact";
   const isVotingVariant = variant === "voting";
   const imageType = getEffectiveImageType(nominee);
@@ -255,15 +256,15 @@ export function NomineeCard({
 
   // For voting variant, don't wrap in Link (vote button handles interaction)
   if (isVotingVariant) {
-    return <div className={className}>{cardContent}</div>;
+    return <div ref={ref} className={className}>{cardContent}</div>;
   }
 
   return (
-    <Link to={`/nominees/${encodeURIComponent(nominee.slug)}`} className={className}>
+    <Link to={`/nominees/${encodeURIComponent(nominee.slug)}`} className={className} ref={ref as any}>
       {cardContent}
     </Link>
   );
-}
+});
 
 // Skeleton loader for nominee cards
 export function NomineeCardSkeleton({ variant = "default" }: { variant?: "default" | "compact" }) {

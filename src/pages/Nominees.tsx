@@ -337,20 +337,13 @@ export default function Nominees() {
             <p className="text-lg text-ivory/70 mb-6">
               Discover the remarkable educators, innovators, and institutions transforming education across Africa.
             </p>
-            {/* Data source indicator */}
-            <Badge variant="outline" className="border-gold/30 text-ivory/60 text-xs">
-              {dataSource === "database" ? (
-                <>
-                  <Database className="w-3 h-3 mr-1" />
-                  Live Database
-                </>
-              ) : (
-                <>
-                  <FileText className="w-3 h-3 mr-1" />
-                  Static Data
-                </>
-              )}
-            </Badge>
+            {/* Live indicator - subtle */}
+            {dataSource === "database" && (
+              <div className="inline-flex items-center gap-1.5 text-xs text-emerald-400/70">
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                Live
+              </div>
+            )}
           </div>
         </div>
       </section>
@@ -479,28 +472,20 @@ export default function Nominees() {
 
       {/* Stats Strip */}
       <section className="border-y border-gold/10 bg-charcoal-light/50">
-        <div className="container mx-auto px-4 py-6">
-          <div className="flex flex-wrap justify-center gap-8 md:gap-16">
-            <div className="text-center">
-              <div className="text-3xl font-bold text-gold">{stats.totalNominees}</div>
-              <div className="text-sm text-ivory/60">Total Nominees</div>
-            </div>
-            <div className="text-center">
-              <div className="text-3xl font-bold text-gold">{stats.africaRegionsCount}</div>
-              <div className="text-sm text-ivory/60">Africa Regions</div>
-            </div>
-            <div className="text-center">
-              <div className="text-3xl font-bold text-gold">{stats.diasporaCount}</div>
-              <div className="text-sm text-ivory/60">Diaspora</div>
-            </div>
-            <div className="text-center">
-              <div className="text-3xl font-bold text-gold">{stats.friendsOfAfricaCount}</div>
-              <div className="text-sm text-ivory/60">Friends of Africa</div>
-            </div>
-            <div className="text-center">
-              <div className="text-3xl font-bold text-gold">{filteredNominees.length}</div>
-              <div className="text-sm text-ivory/60">Showing</div>
-            </div>
+        <div className="container mx-auto px-4 py-4">
+          <div className="flex flex-wrap justify-center gap-6 md:gap-12">
+            {[
+              { value: stats.totalNominees.toLocaleString(), label: "Total" },
+              { value: stats.africaRegionsCount.toLocaleString(), label: "Africa" },
+              { value: stats.diasporaCount.toLocaleString(), label: "Diaspora" },
+              { value: stats.friendsOfAfricaCount.toLocaleString(), label: "Friends" },
+              { value: filteredNominees.length.toLocaleString(), label: "Showing" },
+            ].map((stat) => (
+              <div key={stat.label} className="text-center min-w-[60px]">
+                <div className="text-2xl font-bold text-gold font-display">{stat.value}</div>
+                <div className="text-xs text-ivory/50 uppercase tracking-wider">{stat.label}</div>
+              </div>
+            ))}
           </div>
         </div>
       </section>
@@ -547,18 +532,18 @@ export default function Nominees() {
             </div>
           ) : filteredNominees.length === 0 ? (
             <div className="text-center py-16">
-              <div className="w-20 h-20 mx-auto mb-6 rounded-full bg-gold/10 flex items-center justify-center">
-                <Search className="w-10 h-10 text-gold/40" />
+            <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-gold/10 flex items-center justify-center">
+                <Search className="w-8 h-8 text-gold/30" />
               </div>
-              <h3 className="text-2xl font-display text-ivory mb-3">
+              <h3 className="text-xl font-display text-ivory mb-2">
                 {searchQuery || selectedAward !== "all" || selectedCategory !== "all"
                   ? "No matching nominees"
                   : "Nominees coming soon"}
               </h3>
-              <p className="text-ivory/60 mb-8 max-w-md mx-auto">
+              <p className="text-ivory/50 text-sm mb-6 max-w-sm mx-auto">
                 {searchQuery || selectedAward !== "all" || selectedCategory !== "all"
-                  ? "We couldn't find any nominees matching your current filters. Try broadening your search or exploring a different category."
-                  : "Our nomination review committee is currently evaluating submissions. Check back soon to discover inspiring education champions."}
+                  ? "Try broadening your search or exploring a different category."
+                  : "Our review committee is currently evaluating submissions. Check back soon."}
               </p>
               {(searchQuery || selectedAward !== "all" || selectedCategory !== "all") && (
                 <div className="flex flex-col sm:flex-row gap-3 justify-center">
