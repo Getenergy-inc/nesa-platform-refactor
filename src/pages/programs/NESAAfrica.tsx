@@ -1,5 +1,5 @@
 import { Helmet } from "react-helmet-async";
-import { lazy, Suspense } from "react";
+import { lazy } from "react";
 import { NESAHeader } from "@/components/nesa/NESAHeader";
 import { TrophyHeroSection } from "@/components/nesa/TrophyHeroSection";
 import { TrustLogosStrip } from "@/components/nesa/TrustLogosStrip";
@@ -9,6 +9,7 @@ import { NominationPathsCards } from "@/components/nesa/NominationPathsCards";
 import { NESAFooter } from "@/components/nesa/NESAFooter";
 import { MobileBottomNav } from "@/components/navigation/MainNav";
 import { LazySection } from "@/components/ui/lazy-section";
+import { ScrollProgressIndicator } from "@/components/nesa/ScrollProgressIndicator";
 
 // Lazy load below-fold sections
 const VoteWithAGCSection = lazy(() => import("@/components/nesa/VoteWithAGCSection").then(m => ({ default: m.VoteWithAGCSection })));
@@ -22,7 +23,6 @@ const EducationChampionsDirectory = lazy(() => import("@/components/nesa/Educati
 const SponsorsSection = lazy(() => import("@/components/nesa/SponsorsSection").then(m => ({ default: m.SponsorsSection })));
 const CategoriesSection = lazy(() => import("@/components/nesa/CategoriesSection").then(m => ({ default: m.CategoriesSection })));
 const FinalCTASection = lazy(() => import("@/components/nesa/FinalCTASection").then(m => ({ default: m.FinalCTASection })));
-const DailyEngagementBanner = lazy(() => import("@/components/nesa/DailyEngagementBanner").then(m => ({ default: m.DailyEngagementBanner })));
 
 /**
  * NESA-Africa Landing Page
@@ -31,6 +31,7 @@ const DailyEngagementBanner = lazy(() => import("@/components/nesa/DailyEngageme
  * - Fast paint: Hero + Trust above fold, no blocking modals
  * - Clear journey: What's Live → Choose Path → How It Works → Vote → Legacy
  * - Lazy loaded below-fold sections
+ * - Scroll progress indicator for engagement
  * - Sticky quick actions on mobile
  */
 export default function NESAAfrica() {
@@ -42,7 +43,13 @@ export default function NESAAfrica() {
           name="description"
           content="Honoring Africa's Education Changemakers. NESA-Africa 2025 celebrates the real changemakers shaping the future of education across Africa."
         />
+        <meta property="og:title" content="NESA-Africa 2025 | New Education Standard Award Africa" />
+        <meta property="og:description" content="Honoring Africa's Education Changemakers across 10 regions." />
+        <meta property="og:type" content="website" />
+        <link rel="canonical" href="https://nesa.africa" />
       </Helmet>
+
+      <ScrollProgressIndicator />
 
       <div className="min-h-screen bg-charcoal pb-16 lg:pb-0">
         <NESAHeader />
@@ -72,19 +79,14 @@ export default function NESAAfrica() {
           <VoteWithAGCSection />
         </LazySection>
         
-        {/* Integrity & Governance */}
-        <LazySection>
-          <IntegritySection />
-        </LazySection>
-
-        {/* Daily Engagement */}
-        <LazySection>
-          <DailyEngagementBanner />
-        </LazySection>
-        
         {/* Legacy Impact */}
         <LazySection>
           <LegacyImpactSection />
+        </LazySection>
+
+        {/* Integrity & Governance */}
+        <LazySection>
+          <IntegritySection />
         </LazySection>
         
         {/* Key Dates */}

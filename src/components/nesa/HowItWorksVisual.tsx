@@ -2,6 +2,7 @@ import { BookOpen, Award, Medal, Trophy, Star, Building, ArrowRight, Coins } fro
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
+import howItWorksBg from "@/assets/nesa-how-it-works-bg.jpg";
 
 export function HowItWorksVisual() {
   const journey = [
@@ -52,24 +53,38 @@ export function HowItWorksVisual() {
   ];
 
   return (
-    <section className="bg-charcoal-light py-16 md:py-20">
-      <div className="container">
+    <section className="relative py-16 md:py-24 overflow-hidden">
+      {/* Background Image */}
+      <div className="absolute inset-0">
+        <img src={howItWorksBg} alt="" className="w-full h-full object-cover" aria-hidden="true" />
+        <div className="absolute inset-0 bg-charcoal/88" />
+        <div className="absolute inset-0 bg-gradient-to-b from-charcoal via-transparent to-charcoal" />
+      </div>
+
+      <div className="container relative z-10">
         {/* Header */}
-        <div className="text-center mb-12">
-          <h2 className="font-display text-3xl md:text-4xl font-bold text-white mb-4">
+        <motion.div 
+          className="text-center mb-14"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+        >
+          <span className="inline-block px-4 py-1.5 rounded-full bg-gold/10 border border-gold/25 text-gold font-medium text-sm uppercase tracking-wider mb-4">
+            The Journey
+          </span>
+          <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4">
             How NESA-Africa Works
           </h2>
-          <p className="text-white/70 max-w-2xl mx-auto">
+          <p className="text-white/70 max-w-2xl mx-auto text-lg">
             From recognition to lasting impact—every step of the journey matters.
           </p>
-        </div>
+        </motion.div>
 
-        {/* Visual Journey */}
+        {/* Visual Journey — Desktop: Horizontal Flow */}
         <div className="relative max-w-5xl mx-auto">
-          {/* Desktop: Horizontal Flow */}
           <div className="hidden md:block">
             {/* Connection Line */}
-            <div className="absolute top-12 left-12 right-12 h-0.5 bg-gradient-to-r from-slate-500 via-gold to-emerald-500 opacity-30" />
+            <div className="absolute top-14 left-16 right-16 h-0.5 bg-gradient-to-r from-slate-500/40 via-gold/40 to-emerald-500/40" />
             
             <div className="grid grid-cols-6 gap-4">
               {journey.map((step, index) => (
@@ -82,25 +97,22 @@ export function HowItWorksVisual() {
                   className="relative flex flex-col items-center text-center"
                 >
                   <Link to={step.href} className="group flex flex-col items-center">
-                    {/* Icon Circle */}
-                    <div className={`relative z-10 h-24 w-24 rounded-2xl ${step.color}/10 border border-${step.color.replace('bg-', '')}/30 flex items-center justify-center mb-4 group-hover:scale-110 group-hover:border-gold/50 transition-all duration-300 cursor-pointer`}>
-                      <step.icon className={`h-10 w-10 ${step.color.replace('bg-', 'text-').replace('-500', '-400').replace('-400', '-300')} group-hover:text-gold transition-colors`} />
+                    <div className="relative z-10 h-28 w-28 rounded-2xl bg-white/5 backdrop-blur-sm border border-white/10 flex items-center justify-center mb-4 group-hover:scale-110 group-hover:border-gold/40 group-hover:bg-white/10 transition-all duration-300">
+                      <step.icon className="h-10 w-10 text-white/60 group-hover:text-gold transition-colors" />
                       
-                      {/* AGC Badge */}
                       {step.hasAGC && (
-                        <div className="absolute -top-2 -right-2 h-6 w-6 rounded-full bg-gold flex items-center justify-center">
+                        <div className="absolute -top-2 -right-2 h-6 w-6 rounded-full bg-gold flex items-center justify-center shadow-lg shadow-gold/30">
                           <Coins className="h-3 w-3 text-charcoal" />
                         </div>
                       )}
                     </div>
                     
                     <h4 className="text-white font-semibold text-sm mb-1 group-hover:text-gold transition-colors">{step.label}</h4>
-                    <p className="text-white/50 text-xs group-hover:text-white/70 transition-colors">{step.description}</p>
+                    <p className="text-white/45 text-xs">{step.description}</p>
                   </Link>
                   
-                  {/* Arrow (except last) */}
                   {index < journey.length - 1 && (
-                    <ArrowRight className="absolute top-12 -right-4 h-4 w-4 text-gold/30 hidden lg:block" />
+                    <ArrowRight className="absolute top-14 -right-4 h-4 w-4 text-gold/30 hidden lg:block" />
                   )}
                 </motion.div>
               ))}
@@ -108,7 +120,7 @@ export function HowItWorksVisual() {
           </div>
 
           {/* Mobile: Vertical Flow */}
-          <div className="md:hidden space-y-4">
+          <div className="md:hidden space-y-3">
             {journey.map((step, index) => (
               <motion.div
                 key={step.label}
@@ -119,14 +131,14 @@ export function HowItWorksVisual() {
               >
                 <Link 
                   to={step.href}
-                  className="flex items-center gap-4 bg-white/5 rounded-xl p-4 border border-white/10 hover:border-gold/30 hover:bg-white/10 transition-all duration-300 group"
+                  className="flex items-center gap-4 bg-white/5 backdrop-blur-sm rounded-xl p-4 border border-white/10 hover:border-gold/30 hover:bg-white/10 transition-all duration-300 group"
                 >
-                  <div className={`h-12 w-12 rounded-xl ${step.color}/10 flex items-center justify-center shrink-0 group-hover:bg-gold/10 transition-colors`}>
-                    <step.icon className={`h-6 w-6 ${step.color.replace('bg-', 'text-').replace('-500', '-400')} group-hover:text-gold transition-colors`} />
+                  <div className="h-12 w-12 rounded-xl bg-white/8 flex items-center justify-center shrink-0 group-hover:bg-gold/10 transition-colors">
+                    <step.icon className="h-6 w-6 text-white/60 group-hover:text-gold transition-colors" />
                   </div>
                   <div className="flex-1">
                     <h4 className="text-white font-semibold text-sm group-hover:text-gold transition-colors">{step.label}</h4>
-                    <p className="text-white/50 text-xs">{step.description}</p>
+                    <p className="text-white/45 text-xs">{step.description}</p>
                   </div>
                   {step.hasAGC && (
                     <div className="flex items-center gap-1 px-2 py-1 rounded-full bg-gold/10 border border-gold/30">
@@ -142,7 +154,7 @@ export function HowItWorksVisual() {
         </div>
 
         {/* AGC Note */}
-        <div className="flex items-center justify-center gap-2 mt-10 p-4 rounded-xl bg-gold/5 border border-gold/20 max-w-2xl mx-auto">
+        <div className="flex items-center justify-center gap-2 mt-10 p-4 rounded-xl bg-gold/5 backdrop-blur-sm border border-gold/20 max-w-2xl mx-auto">
           <Coins className="h-5 w-5 text-gold flex-shrink-0" />
           <p className="text-sm text-white/80">
             Participation unlocks voting points. Voting uses AGC (non-tradeable) during official windows.

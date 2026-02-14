@@ -1,6 +1,5 @@
 import { Award, ArrowRight, Vote, Ticket, Heart, Globe, Users, Calendar } from "lucide-react";
 import { Link } from "react-router-dom";
-import { useTranslation } from "react-i18next";
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
 
@@ -8,8 +7,6 @@ import { motion } from "framer-motion";
  * FinalCTASection — Warm, compelling closing with clear actions
  */
 export function FinalCTASection() {
-  const { t } = useTranslation("pages");
-
   return (
     <section className="relative py-20 md:py-28 overflow-hidden">
       {/* Warm gradient background */}
@@ -36,11 +33,12 @@ export function FinalCTASection() {
           </motion.div>
 
           <h2 className="font-display text-3xl md:text-5xl lg:text-6xl font-bold text-white mb-5">
-            {t("landing.finalCTA.title")} <span className="text-gold">{t("landing.finalCTA.titleAccent")}</span>
+            Nominate a Champion of{" "}
+            <span className="text-gold">Education</span>
           </h2>
           
           <p className="text-white/65 text-lg md:text-xl mb-10 max-w-2xl mx-auto leading-relaxed">
-            {t("landing.finalCTA.description")}
+            Know someone making an exceptional impact in African education? Submit your nomination today and help us celebrate excellence.
           </p>
 
           {/* Primary CTAs */}
@@ -50,7 +48,7 @@ export function FinalCTASection() {
                 size="lg" 
                 className="bg-gold hover:bg-gold-dark text-charcoal font-bold rounded-full px-10 gap-2.5 shadow-xl shadow-gold/25 hover:shadow-gold/40 transition-all min-h-[56px] text-lg"
               >
-                {t("landing.finalCTA.submitNomination")}
+                Submit Nomination
                 <ArrowRight className="h-5 w-5 group-hover:translate-x-1 transition-transform" />
               </Button>
             </Link>
@@ -96,9 +94,9 @@ export function FinalCTASection() {
             viewport={{ once: true }}
           >
             {[
-              { icon: Globe, text: t("landing.finalCTA.trustIndicators.countries") },
-              { icon: Users, text: t("landing.finalCTA.trustIndicators.nominees") },
-              { icon: Calendar, text: t("landing.finalCTA.trustIndicators.years") },
+              { icon: Globe, text: "10 Regions + Diaspora" },
+              { icon: Users, text: "2,500+ Nominees" },
+              { icon: Calendar, text: "20 Years of Vision (2005–2025)" },
             ].map((item) => (
               <div 
                 key={item.text}
