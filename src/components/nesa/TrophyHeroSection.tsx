@@ -3,8 +3,9 @@ import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { useSeason } from "@/contexts/SeasonContext";
 import { motion, AnimatePresence } from "framer-motion";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { NESALogo3D } from "@/components/nesa/NESALogo3D";
+import { useRegionNomineeCounts } from "@/hooks/useRegionNomineeCounts";
 import { FloatingParticles } from "@/components/ui/floating-particles";
 import stageBackdropVideo from "@/assets/nesa-stage-backdrop-motion.mp4";
 import stageBackdropFallback from "@/assets/nesa-stage-backdrop.jpg";
@@ -27,6 +28,11 @@ type CarouselItem = typeof CAROUSEL_ITEMS[number];
 export function TrophyHeroSection() {
   const { getBannerText } = useSeason();
   const [currentItem, setCurrentItem] = useState<CarouselItem>("trophy-icon");
+  const { data: countsData } = useRegionNomineeCounts();
+  const nomineeLabel = useMemo(() => {
+    if (!countsData) return "1,760+ Nominees";
+    return `${countsData.totalCount.toLocaleString()}+ Nominees`;
+  }, [countsData]);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -165,7 +171,7 @@ export function TrophyHeroSection() {
                 <Button
                   size="lg"
                   variant="outline"
-                  className="w-full sm:w-auto border-white/25 text-white/90 hover:bg-white/10 hover:border-gold/40 rounded-full px-8 gap-2 h-13 text-base transition-all"
+                  className="w-full sm:w-auto border-gold/40 text-gold hover:bg-gold/10 hover:border-gold rounded-full px-8 gap-2 h-13 text-base transition-all"
                 >
                   <Play className="h-4 w-4" />
                   Watch Live
@@ -182,7 +188,7 @@ export function TrophyHeroSection() {
             >
               {[
                 { icon: Globe, label: "10 Regions + Diaspora", value: "" },
-                { icon: Users, label: "1,760+ Nominees", value: "" },
+                { icon: Users, label: nomineeLabel, value: "" },
                 { icon: Calendar, label: "15 Years of Vision", value: "" },
               ].map((stat) => (
                 <div key={stat.label} className="flex items-center gap-2 text-white/60 text-sm">
