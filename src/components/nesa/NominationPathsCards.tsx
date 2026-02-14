@@ -58,43 +58,51 @@ export function NominationPathsCards() {
           border: featured ? 'border-blue-500/50' : 'border-blue-500/20',
           bg: 'bg-blue-500/10',
           text: 'text-blue-400',
-          button: 'bg-blue-500 hover:bg-blue-600 text-white',
+          button: 'bg-blue-500 hover:bg-blue-600 text-white shadow-lg shadow-blue-500/20',
+          glow: 'group-hover:shadow-blue-500/10',
         };
       case 'gold':
         return {
-          border: featured ? 'border-gold/50 ring-2 ring-gold/20' : 'border-gold/20',
+          border: featured ? 'border-gold/50 ring-2 ring-gold/15' : 'border-gold/20',
           bg: 'bg-gold/10',
           text: 'text-gold',
-          button: 'bg-gold hover:bg-gold-dark text-charcoal',
+          button: 'bg-gold hover:bg-gold-dark text-charcoal shadow-lg shadow-gold/20',
+          glow: 'group-hover:shadow-gold/15',
         };
       default:
         return {
-          border: 'border-white/20',
+          border: 'border-white/15',
           bg: 'bg-white/5',
           text: 'text-white/70',
           button: 'bg-white/10 hover:bg-white/20 text-white',
+          glow: 'group-hover:shadow-white/5',
         };
     }
   };
 
   return (
-    <section className="bg-charcoal py-16 md:py-20">
+    <section className="bg-gradient-to-b from-charcoal to-charcoal-light/20 py-16 md:py-22">
       <div className="container">
         {/* Header */}
-        <div className="text-center mb-12">
-          <span className="text-gold font-medium text-sm uppercase tracking-wider">
+        <motion.div 
+          className="text-center mb-14"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+        >
+          <span className="inline-block px-4 py-1.5 rounded-full bg-gold/10 border border-gold/25 text-gold font-medium text-sm uppercase tracking-wider mb-4">
             Choose Your Path
           </span>
-          <h2 className="font-display text-3xl md:text-4xl font-bold text-white mt-2 mb-4">
+          <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold text-white mt-2 mb-4">
             Start Your Nomination Journey
           </h2>
-          <p className="text-white/70 max-w-2xl mx-auto">
+          <p className="text-white/60 max-w-2xl mx-auto text-lg">
             Select the appropriate award category based on the nominee's achievements.
           </p>
-        </div>
+        </motion.div>
 
         {/* Cards Grid */}
-        <div className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+        <div className="grid md:grid-cols-3 gap-6 lg:gap-8 max-w-5xl mx-auto">
           {paths.map((path, index) => {
             const classes = getAccentClasses(path.accent, path.featured);
             
@@ -103,35 +111,36 @@ export function NominationPathsCards() {
                 key={path.title}
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.1 }}
+                transition={{ delay: index * 0.12 }}
                 viewport={{ once: true }}
-                className={`relative bg-white/5 backdrop-blur-sm rounded-2xl p-6 border ${classes.border} flex flex-col hover:bg-white/10 transition-all`}
+                whileHover={{ y: -6, transition: { duration: 0.2 } }}
+                className={`group relative bg-white/4 backdrop-blur-sm rounded-2xl p-7 border ${classes.border} flex flex-col hover:bg-white/8 transition-all duration-300 shadow-xl ${classes.glow}`}
               >
                 {/* Featured Badge */}
                 {path.featured && (
-                  <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-1 bg-gold rounded-full text-charcoal text-xs font-bold">
+                  <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-4 py-1 bg-gold rounded-full text-charcoal text-xs font-bold shadow-lg shadow-gold/30">
                     Most Popular
                   </div>
                 )}
 
-                {/* Icon & Badge */}
-                <div className="flex items-center gap-3 mb-4">
-                  <div className={`h-12 w-12 rounded-xl ${classes.bg} flex items-center justify-center`}>
-                    <path.icon className={`h-6 w-6 ${classes.text}`} />
+                {/* Icon */}
+                <div className="flex items-center gap-3 mb-5">
+                  <div className={`h-14 w-14 rounded-2xl ${classes.bg} flex items-center justify-center group-hover:scale-105 transition-transform`}>
+                    <path.icon className={`h-7 w-7 ${classes.text}`} />
                   </div>
                 </div>
 
-                <span className={`text-xs font-semibold ${classes.text} uppercase tracking-wider mb-2`}>
+                <span className={`text-xs font-bold ${classes.text} uppercase tracking-widest mb-2`}>
                   {path.badge}
                 </span>
 
-                <h3 className="text-xl font-bold text-white mb-1">{path.title}</h3>
-                <p className="text-white/50 text-sm mb-4">{path.subtitle}</p>
+                <h3 className="text-xl font-bold text-white mb-1.5">{path.title}</h3>
+                <p className="text-white/45 text-sm mb-5">{path.subtitle}</p>
 
                 {/* Features */}
-                <ul className="space-y-2 mb-6 flex-grow">
+                <ul className="space-y-2.5 mb-7 flex-grow">
                   {path.features.map((feature) => (
-                    <li key={feature} className="flex items-start gap-2 text-sm text-white/70">
+                    <li key={feature} className="flex items-start gap-2.5 text-sm text-white/65">
                       <Check className={`h-4 w-4 ${classes.text} flex-shrink-0 mt-0.5`} />
                       {feature}
                     </li>
@@ -139,9 +148,9 @@ export function NominationPathsCards() {
                 </ul>
 
                 {/* CTAs */}
-                <div className="space-y-2 mt-auto">
+                <div className="space-y-2.5 mt-auto">
                   <Link to={path.cta.href} className="block">
-                    <Button className={`w-full ${classes.button} font-semibold rounded-full shadow-lg gap-2`}>
+                    <Button className={`w-full ${classes.button} font-semibold rounded-full gap-2 h-11`}>
                       {path.cta.label}
                       <ArrowRight className="h-4 w-4" />
                     </Button>
