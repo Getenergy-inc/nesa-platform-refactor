@@ -1,4 +1,4 @@
- import { useState, useMemo } from "react";
+import { useState, useMemo } from "react";
  import { Helmet } from "react-helmet-async";
  import { useQuery } from "@tanstack/react-query";
  import { Link } from "react-router-dom";
@@ -25,7 +25,8 @@
  import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
  import { StageGate } from "@/components/StageGate";
  import { NomineeCard, type NomineeCardData } from "@/components/nesa/NomineeCard";
- import { VoteModal } from "@/components/nominees/VoteModal";
+import { VoteModal } from "@/components/nominees/VoteModal";
+import { VotingStatsStrip } from "@/components/voting/VotingStatsStrip";
  import { useSeason } from "@/contexts/SeasonContext";
  import { useAuth } from "@/contexts/AuthContext";
  import { supabase } from "@/integrations/supabase/client";
@@ -266,27 +267,10 @@
            </div>
          </section>
  
-         {/* Info Banner */}
-         <section className="bg-amber-50 dark:bg-amber-950/20 border-b border-amber-200 dark:border-amber-900/30 py-4">
-           <div className="container">
-             <div className="flex flex-wrap items-center justify-center gap-6 text-sm">
-               <div className="flex items-center gap-2 text-amber-800 dark:text-amber-200">
-                 <Calendar className="h-4 w-4" />
-                 <span>Apr 10 – May 16, 2026</span>
-               </div>
-               <div className="flex items-center gap-2 text-amber-800 dark:text-amber-200">
-                 <Users className="h-4 w-4" />
-                 <span>100% Public Vote</span>
-               </div>
-               <div className="flex items-center gap-2 text-amber-800 dark:text-amber-200">
-                 <Trophy className="h-4 w-4" />
-                 <span>Gold Certificate Award</span>
-               </div>
-             </div>
-           </div>
-         </section>
- 
-         {/* Voting Section */}
+        {/* Info Banner with Live Counts */}
+        <VotingStatsStrip variant="amber" />
+
+        {/* Voting Section */}
          <section className="py-12 md:py-16">
            <div className="container">
              <StageGate action="public_voting">
