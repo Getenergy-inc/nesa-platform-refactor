@@ -1,58 +1,41 @@
-import { Trophy, ArrowRight, Sparkles, Users, Globe, Calendar, ChevronDown, Play } from "lucide-react";
+import { Trophy, ArrowRight, ChevronDown, Play } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { useSeason } from "@/contexts/SeasonContext";
 import { motion, AnimatePresence } from "framer-motion";
-import { useState, useEffect, useMemo } from "react";
-import { NESALogo3D } from "@/components/nesa/NESALogo3D";
-import { useRegionNomineeCounts } from "@/hooks/useRegionNomineeCounts";
+import { useState, useEffect, useCallback } from "react";
 import { FloatingParticles } from "@/components/ui/floating-particles";
 import stageBackdropVideo from "@/assets/nesa-stage-backdrop-motion.mp4";
 import stageBackdropFallback from "@/assets/nesa-stage-backdrop.jpg";
 import blueGarnetTrophyIcon from "@/assets/blue-garnet-trophy-icon.png";
-import blueGarnetTrophyWinners from "@/assets/blue-garnet-trophy-winners.png";
-
-const CAROUSEL_ITEMS = ["trophy-icon", "trophy-winners", "logo"] as const;
-type CarouselItem = typeof CAROUSEL_ITEMS[number];
 
 /**
- * TrophyHeroSection — Immersive welcome for 90% retention
+ * TrophyHeroSection — Oscar/Grammy-tier cinematic hero
  * 
- * Warm, cinematic hero with staggered reveal:
- * 1. Background video fades in
- * 2. Headline + tagline slide up
- * 3. CTAs appear with pulse
- * 4. Trust stats fade in last
- * 5. Scroll hint pulses
+ * Design principles from Oscars.org & Grammy.com:
+ * 1. Trophy IS the visual — dominant, center-stage, full presence
+ * 2. Minimal text — headline + one tagline, nothing more above fold
+ * 3. Single primary CTA with one ghost secondary
+ * 4. Cinematic depth — layered overlays, spotlight effects
+ * 5. Scroll-triggered reveal for content below
  */
 export function TrophyHeroSection() {
   const { getBannerText } = useSeason();
-  const [currentItem, setCurrentItem] = useState<CarouselItem>("trophy-icon");
-  const { data: countsData } = useRegionNomineeCounts();
-  const nomineeLabel = useMemo(() => {
-    if (!countsData) return "1,760+ Nominees";
-    return `${countsData.totalCount.toLocaleString()}+ Nominees`;
-  }, [countsData]);
+  const bannerText = getBannerText();
+  const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentItem((prev) => {
-        const idx = CAROUSEL_ITEMS.indexOf(prev);
-        return CAROUSEL_ITEMS[(idx + 1) % CAROUSEL_ITEMS.length];
-      });
-    }, 3500);
-    return () => clearInterval(interval);
+    const timer = setTimeout(() => setLoaded(true), 100);
+    return () => clearTimeout(timer);
   }, []);
 
-  const bannerText = getBannerText();
-
-  const scrollToContent = () => {
-    window.scrollTo({ top: window.innerHeight * 0.85, behavior: 'smooth' });
-  };
+  const scrollToContent = useCallback(() => {
+    window.scrollTo({ top: window.innerHeight * 0.88, behavior: "smooth" });
+  }, []);
 
   return (
-    <section className="relative min-h-[92vh] sm:min-h-[95vh] flex items-center bg-charcoal overflow-hidden">
-      {/* Stage Backdrop — Cinematic video with warm overlay */}
+    <section className="relative min-h-[100vh] flex items-center justify-center bg-charcoal overflow-hidden">
+      {/* === LAYER 1: Video Background === */}
       <div className="absolute inset-0">
         <video
           autoPlay
@@ -60,227 +43,149 @@ export function TrophyHeroSection() {
           muted
           playsInline
           poster={stageBackdropFallback}
-          className="absolute inset-0 w-full h-full object-cover object-center"
+          className="absolute inset-0 w-full h-full object-cover"
         >
           <source src={stageBackdropVideo} type="video/mp4" />
         </video>
-        {/* Warm charcoal + gold gradient overlay for readability */}
-        <div className="absolute inset-0 bg-charcoal/55" />
-        <div className="absolute inset-0 bg-gradient-to-b from-charcoal/40 via-transparent to-charcoal" />
-        <div className="absolute inset-0 bg-gradient-to-r from-charcoal/50 via-transparent to-charcoal/50" />
-      </div>
-      
-      {/* Ambient Particles */}
-      <FloatingParticles count={20} color="gold" className="opacity-40" />
-      
-      {/* Spotlight Effects — Desktop only */}
-      <div className="pointer-events-none absolute inset-0 overflow-hidden hidden lg:block">
-        <motion.div 
-          className="absolute -left-20 top-0 h-[80vh] w-48 rotate-[18deg] bg-gradient-to-b from-gold/12 to-transparent blur-3xl"
-          animate={{ opacity: [0.2, 0.5, 0.2] }}
-          transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
-        />
-        <motion.div 
-          className="absolute -right-20 top-0 h-[80vh] w-48 rotate-[-18deg] bg-gradient-to-b from-gold/12 to-transparent blur-3xl"
-          animate={{ opacity: [0.2, 0.5, 0.2] }}
-          transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 2.5 }}
-        />
+        {/* Cinematic overlays — darker, more dramatic than before */}
+        <div className="absolute inset-0 bg-charcoal/65" />
+        <div className="absolute inset-0 bg-gradient-to-b from-charcoal/30 via-transparent to-charcoal" />
+        <div className="absolute inset-0 bg-gradient-to-r from-charcoal/40 via-transparent to-charcoal/40" />
       </div>
 
-      <div className="container relative z-10 py-8 sm:py-12 lg:py-16">
-        <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
-          {/* Left: Welcome Content */}
-          <div className="order-2 lg:order-1 text-center lg:text-left">
-            {/* Season Badge */}
-            <motion.div
-              initial={{ opacity: 0, y: 12 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.2 }}
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/8 backdrop-blur-sm border border-gold/30 mb-6"
-            >
-              <Sparkles className="h-3.5 w-3.5 text-gold" />
-              <span className="text-xs sm:text-sm font-medium text-white/90">{bannerText}</span>
-            </motion.div>
+      {/* === LAYER 2: Ambient Spotlights (Oscar-style warm gold) === */}
+      <div className="pointer-events-none absolute inset-0 overflow-hidden">
+        <motion.div
+          className="absolute left-[10%] -top-20 h-[120vh] w-[300px] rotate-[15deg] bg-gradient-to-b from-gold/8 via-gold/4 to-transparent blur-[80px]"
+          animate={{ opacity: [0.3, 0.6, 0.3], x: [-10, 10, -10] }}
+          transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+        />
+        <motion.div
+          className="absolute right-[10%] -top-20 h-[120vh] w-[300px] rotate-[-15deg] bg-gradient-to-b from-gold/8 via-gold/4 to-transparent blur-[80px]"
+          animate={{ opacity: [0.3, 0.6, 0.3], x: [10, -10, 10] }}
+          transition={{ duration: 8, repeat: Infinity, ease: "easeInOut", delay: 4 }}
+        />
+        {/* Center spotlight hitting the trophy */}
+        <div className="absolute left-1/2 -translate-x-1/2 top-0 h-[80vh] w-[500px] bg-gradient-to-b from-gold/6 to-transparent blur-[100px]" />
+      </div>
 
-            {/* H1 — Warm welcoming headline */}
-            <motion.h1
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.3 }}
-              className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-[3.5rem] xl:text-7xl font-bold text-white mb-5 leading-[1.08]"
-            >
-              Honoring Africa's{" "}
-              <span className="text-gold bg-gradient-to-r from-gold to-amber-400 bg-clip-text text-transparent">
-                Education Changemakers
-              </span>
-            </motion.h1>
+      {/* === LAYER 3: Floating Particles === */}
+      <FloatingParticles count={15} color="gold" className="opacity-30" />
 
-            {/* Tagline */}
-            <motion.p
-              initial={{ opacity: 0, y: 15 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.45 }}
-              className="text-gold/80 text-sm sm:text-base font-semibold mb-3 tracking-wide uppercase"
-            >
-              Advocating &amp; Achieving Education for All in Africa
-            </motion.p>
+      {/* === MAIN CONTENT — Centered, vertical, trophy-dominant === */}
+      <div className="relative z-10 flex flex-col items-center text-center px-4 sm:px-6 max-w-5xl mx-auto">
+        {/* Season Badge — Small, elegant, non-intrusive */}
+        <motion.div
+          initial={{ opacity: 0, y: -10 }}
+          animate={loaded ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.6, delay: 0.2 }}
+          className="mb-8 sm:mb-10"
+        >
+          <span className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-white/5 backdrop-blur-md border border-gold/25 text-xs sm:text-sm font-medium text-white/80 tracking-wider uppercase">
+            {bannerText}
+          </span>
+        </motion.div>
 
-            {/* Value proposition */}
-            <motion.p
-              initial={{ opacity: 0, y: 15 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.55 }}
-              className="text-white/75 text-base sm:text-lg mb-8 max-w-xl mx-auto lg:mx-0 leading-relaxed"
-            >
-              A standards-led continental recognition and accountability platform 
-              celebrating verified impact and enabling structured public participation.
-            </motion.p>
-
-            {/* CTAs — Primary + Secondary */}
-            <motion.div
-              initial={{ opacity: 0, y: 15 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.65 }}
-              className="flex flex-col sm:flex-row gap-3 justify-center lg:justify-start mb-10"
-            >
-              <Link to="/nominate">
-                <motion.div
-                  animate={{ scale: [1, 1.02, 1] }}
-                  transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
-                >
-                  <Button
-                    size="lg"
-                    className="w-full sm:w-auto bg-gold hover:bg-gold-dark text-charcoal font-bold rounded-full px-10 gap-2.5 shadow-lg shadow-gold/25 hover:shadow-gold/40 transition-all h-13 text-base group"
-                  >
-                    <Trophy className="h-5 w-5 group-hover:rotate-12 transition-transform" />
-                    Nominate Now
-                    <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
-                  </Button>
-                </motion.div>
-              </Link>
-              <Link to="/vote-with-agc">
-                <Button
-                  size="lg"
-                  variant="outline"
-                  className="w-full sm:w-auto border-gold/50 text-gold hover:bg-gold/10 hover:border-gold rounded-full px-8 gap-2 h-13 text-base transition-all"
-                >
-                  Vote with AGC
-                </Button>
-              </Link>
-              <Link to="/media">
-                <Button
-                  size="lg"
-                  variant="outline"
-                  className="w-full sm:w-auto border-gold/40 text-gold hover:bg-gold/10 hover:border-gold rounded-full px-8 gap-2 h-13 text-base transition-all"
-                >
-                  <Play className="h-4 w-4" />
-                  Watch Live
-                </Button>
-              </Link>
-            </motion.div>
-
-            {/* Trust Bullets */}
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.5, delay: 0.8 }}
-              className="flex flex-wrap gap-5 sm:gap-6 justify-center lg:justify-start"
-            >
-              {[
-                { icon: Globe, label: "10 Regions + Diaspora", value: "" },
-                { icon: Users, label: nomineeLabel, value: "" },
-                { icon: Calendar, label: "15 Years of Vision", value: "" },
-              ].map((stat) => (
-                <div key={stat.label} className="flex items-center gap-2 text-white/60 text-sm">
-                  <stat.icon className="h-4 w-4 text-gold/70" />
-                  <span>{stat.label}</span>
-                </div>
-              ))}
-            </motion.div>
-          </div>
-
-          {/* Right: Trophy Carousel — Glowing showcase */}
-          <motion.div 
-            className="order-1 lg:order-2 flex justify-center"
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.6, delay: 0.3 }}
+        {/* Trophy — THE visual centerpiece (Oscar-style dominance) */}
+        <motion.div
+          initial={{ opacity: 0, scale: 0.85, y: 30 }}
+          animate={loaded ? { opacity: 1, scale: 1, y: 0 } : {}}
+          transition={{ duration: 0.9, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
+          className="relative mb-8 sm:mb-10"
+        >
+          {/* Trophy glow rings */}
+          <div className="absolute -inset-8 bg-gradient-to-t from-blue-600/20 via-gold/10 to-transparent blur-[60px] rounded-full" />
+          <div className="absolute -inset-4 bg-gradient-to-b from-gold/8 to-blue-500/8 blur-[40px] rounded-full" />
+          
+          <motion.img
+            src={blueGarnetTrophyIcon}
+            alt="NESA Blue Garnet Award — Africa's Highest Education Honour"
+            className="relative w-48 sm:w-56 md:w-64 lg:w-72 h-auto drop-shadow-[0_20px_60px_rgba(196,160,82,0.3)]"
+            animate={{ y: [0, -8, 0] }}
+            transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+          />
+          
+          {/* Caption badge under trophy */}
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            animate={loaded ? { opacity: 1, y: 0 } : {}}
+            transition={{ delay: 0.8 }}
+            className="absolute -bottom-3 left-1/2 -translate-x-1/2 px-5 py-1.5 rounded-full bg-charcoal/80 backdrop-blur-sm border border-gold/30 whitespace-nowrap"
           >
-            <div className="relative h-56 sm:h-64 md:h-72 lg:h-80 xl:h-[22rem] w-48 sm:w-56 md:w-64 lg:w-72 xl:w-80 flex items-center justify-center">
-              {/* Ambient glow */}
-              <div className="absolute -inset-6 bg-gradient-to-t from-blue-600/25 via-gold/15 to-transparent blur-3xl rounded-full" />
-              <div className="absolute -inset-3 bg-gradient-to-b from-gold/10 via-transparent to-blue-500/10 blur-2xl rounded-full" />
-              
-              <AnimatePresence mode="wait">
-                {currentItem === "trophy-icon" && (
-                  <motion.div
-                    key="trophy-icon"
-                    initial={{ opacity: 0, scale: 0.92, rotateY: -50 }}
-                    animate={{ opacity: 1, scale: 1, rotateY: 0 }}
-                    exit={{ opacity: 0, scale: 0.92, rotateY: 50 }}
-                    transition={{ duration: 0.5 }}
-                    className="relative"
-                  >
-                    <img
-                      src={blueGarnetTrophyIcon}
-                      alt="NESA Blue Garnet Award — Africa's Highest Education Honour"
-                      className="w-44 sm:w-56 md:w-64 lg:w-72 h-auto rounded-2xl shadow-2xl shadow-blue-900/40"
-                    />
-                    {/* Caption */}
-                    <div className="absolute -bottom-4 left-1/2 -translate-x-1/2 px-4 py-1.5 rounded-full bg-charcoal/80 backdrop-blur-sm border border-gold/30 whitespace-nowrap">
-                      <span className="text-xs text-gold font-medium">Africa's Highest Education Honour</span>
-                    </div>
-                  </motion.div>
-                )}
-                {currentItem === "trophy-winners" && (
-                  <motion.div
-                    key="trophy-winners"
-                    initial={{ opacity: 0, scale: 0.92, rotateY: -50 }}
-                    animate={{ opacity: 1, scale: 1, rotateY: 0 }}
-                    exit={{ opacity: 0, scale: 0.92, rotateY: 50 }}
-                    transition={{ duration: 0.5 }}
-                    className="relative"
-                  >
-                    <img
-                      src={blueGarnetTrophyWinners}
-                      alt="NESA Award Winners with Trophies"
-                      className="w-44 sm:w-56 md:w-64 lg:w-72 h-auto rounded-2xl shadow-2xl shadow-blue-900/40"
-                    />
-                    <div className="absolute -bottom-4 left-1/2 -translate-x-1/2 px-4 py-1.5 rounded-full bg-charcoal/80 backdrop-blur-sm border border-gold/30 whitespace-nowrap">
-                      <span className="text-xs text-gold font-medium">Celebrating Education Champions</span>
-                    </div>
-                  </motion.div>
-                )}
-                {currentItem === "logo" && (
-                  <motion.div
-                    key="logo"
-                    initial={{ opacity: 0, scale: 0.92, rotateY: 50 }}
-                    animate={{ opacity: 1, scale: 1, rotateY: 0 }}
-                    exit={{ opacity: 0, scale: 0.92, rotateY: -50 }}
-                    transition={{ duration: 0.5 }}
-                    className="flex flex-col items-center"
-                  >
-                    <NESALogo3D size="xl" />
-                  </motion.div>
-                )}
-              </AnimatePresence>
-            </div>
+            <span className="text-xs text-gold font-medium tracking-wide">Africa's Highest Education Honour</span>
           </motion.div>
-        </div>
+        </motion.div>
+
+        {/* Headline — BIG, dramatic, Oscar-typography */}
+        <motion.h1
+          initial={{ opacity: 0, y: 30 }}
+          animate={loaded ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.7, delay: 0.5 }}
+          className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold text-white mb-4 sm:mb-5 leading-[1.05] tracking-tight"
+        >
+          Honoring Africa's{" "}
+          <span className="text-gradient-gold">
+            Education Changemakers
+          </span>
+        </motion.h1>
+
+        {/* Tagline — One line, clean */}
+        <motion.p
+          initial={{ opacity: 0, y: 20 }}
+          animate={loaded ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.6, delay: 0.65 }}
+          className="text-gold/80 text-sm sm:text-base md:text-lg font-semibold tracking-[0.15em] uppercase mb-10 sm:mb-12"
+        >
+          Advocating &amp; Achieving Education for All
+        </motion.p>
+
+        {/* CTAs — Clean duo: Primary gold + Ghost secondary */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={loaded ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.5, delay: 0.8 }}
+          className="flex flex-col sm:flex-row items-center gap-4"
+        >
+          <Link to="/nominate">
+            <motion.div
+              animate={{ scale: [1, 1.03, 1] }}
+              transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+            >
+              <Button
+                size="lg"
+                className="bg-gold hover:bg-gold-dark text-charcoal font-bold rounded-full px-10 sm:px-14 gap-3 shadow-[0_8px_32px_-4px_hsl(42_85%_52%/0.4)] hover:shadow-[0_8px_40px_-4px_hsl(42_85%_52%/0.5)] transition-all h-14 text-base sm:text-lg group"
+              >
+                <Trophy className="h-5 w-5 group-hover:rotate-12 transition-transform" />
+                Nominate Now
+                <ArrowRight className="h-5 w-5 group-hover:translate-x-1 transition-transform" />
+              </Button>
+            </motion.div>
+          </Link>
+          <Link to="/media">
+            <Button
+              size="lg"
+              variant="ghost"
+              className="text-white/70 hover:text-gold hover:bg-white/5 rounded-full px-8 gap-2 h-14 text-base transition-all"
+            >
+              <Play className="h-5 w-5" />
+              Watch Live
+            </Button>
+          </Link>
+        </motion.div>
       </div>
 
-      {/* Scroll Hint */}
+      {/* === SCROLL HINT — Bottom center === */}
       <motion.button
         onClick={scrollToContent}
-        className="absolute bottom-6 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-1 text-white/40 hover:text-gold transition-colors"
+        className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-1.5 text-white/30 hover:text-gold/80 transition-colors"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ delay: 1.2 }}
+        transition={{ delay: 1.5 }}
       >
-        <span className="text-[10px] uppercase tracking-widest">Discover</span>
+        <span className="text-[10px] uppercase tracking-[0.25em] font-medium">Discover</span>
         <motion.div
-          animate={{ y: [0, 6, 0] }}
-          transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
+          animate={{ y: [0, 8, 0] }}
+          transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
         >
           <ChevronDown className="h-5 w-5" />
         </motion.div>
