@@ -522,6 +522,7 @@ export type Database = {
           name: string
           referral_code: string | null
           region: string | null
+          region_id: string | null
           slug: string
           updated_at: string | null
         }
@@ -537,6 +538,7 @@ export type Database = {
           name: string
           referral_code?: string | null
           region?: string | null
+          region_id?: string | null
           slug: string
           updated_at?: string | null
         }
@@ -552,6 +554,7 @@ export type Database = {
           name?: string
           referral_code?: string | null
           region?: string | null
+          region_id?: string | null
           slug?: string
           updated_at?: string | null
         }
@@ -569,6 +572,13 @@ export type Database = {
             isOneToOne: false
             referencedRelation: "public_profiles"
             referencedColumns: ["user_id"]
+          },
+          {
+            foreignKeyName: "chapters_region_id_fkey"
+            columns: ["region_id"]
+            isOneToOne: false
+            referencedRelation: "regions"
+            referencedColumns: ["id"]
           },
         ]
       }
@@ -716,6 +726,89 @@ export type Database = {
             columns: ["subcategory_id"]
             isOneToOne: false
             referencedRelation: "subcategories"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      correspondence_branding: {
+        Row: {
+          chapter_id: string
+          created_at: string
+          footer_text: string | null
+          id: string
+          is_active: boolean
+          logo_url: string | null
+          region_id: string | null
+          sender_email: string | null
+          sender_name: string
+          updated_at: string
+        }
+        Insert: {
+          chapter_id: string
+          created_at?: string
+          footer_text?: string | null
+          id?: string
+          is_active?: boolean
+          logo_url?: string | null
+          region_id?: string | null
+          sender_email?: string | null
+          sender_name: string
+          updated_at?: string
+        }
+        Update: {
+          chapter_id?: string
+          created_at?: string
+          footer_text?: string | null
+          id?: string
+          is_active?: boolean
+          logo_url?: string | null
+          region_id?: string | null
+          sender_email?: string | null
+          sender_name?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "correspondence_branding_chapter_id_fkey"
+            columns: ["chapter_id"]
+            isOneToOne: false
+            referencedRelation: "chapters"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "correspondence_branding_region_id_fkey"
+            columns: ["region_id"]
+            isOneToOne: false
+            referencedRelation: "regions"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      country_region_map: {
+        Row: {
+          country: string
+          created_at: string
+          id: string
+          region_id: string
+        }
+        Insert: {
+          country: string
+          created_at?: string
+          id?: string
+          region_id: string
+        }
+        Update: {
+          country?: string
+          created_at?: string
+          id?: string
+          region_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "country_region_map_region_id_fkey"
+            columns: ["region_id"]
+            isOneToOne: false
+            referencedRelation: "regions"
             referencedColumns: ["id"]
           },
         ]
@@ -2824,46 +2917,62 @@ export type Database = {
         Row: {
           avatar_url: string | null
           bio: string | null
+          chapter_id: string | null
           country: string | null
           created_at: string | null
           email: string
           full_name: string | null
           id: string
+          membership_level: string
           phone: string | null
           referred_by_chapter_id: string | null
           referred_by_user_id: string | null
+          region_id: string | null
           updated_at: string | null
           user_id: string
         }
         Insert: {
           avatar_url?: string | null
           bio?: string | null
+          chapter_id?: string | null
           country?: string | null
           created_at?: string | null
           email: string
           full_name?: string | null
           id?: string
+          membership_level?: string
           phone?: string | null
           referred_by_chapter_id?: string | null
           referred_by_user_id?: string | null
+          region_id?: string | null
           updated_at?: string | null
           user_id: string
         }
         Update: {
           avatar_url?: string | null
           bio?: string | null
+          chapter_id?: string | null
           country?: string | null
           created_at?: string | null
           email?: string
           full_name?: string | null
           id?: string
+          membership_level?: string
           phone?: string | null
           referred_by_chapter_id?: string | null
           referred_by_user_id?: string | null
+          region_id?: string | null
           updated_at?: string | null
           user_id?: string
         }
         Relationships: [
+          {
+            foreignKeyName: "profiles_chapter_id_fkey"
+            columns: ["chapter_id"]
+            isOneToOne: false
+            referencedRelation: "chapters"
+            referencedColumns: ["id"]
+          },
           {
             foreignKeyName: "profiles_referred_by_user_id_fkey"
             columns: ["referred_by_user_id"]
@@ -2876,6 +2985,13 @@ export type Database = {
             columns: ["referred_by_user_id"]
             isOneToOne: false
             referencedRelation: "public_profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "profiles_region_id_fkey"
+            columns: ["region_id"]
+            isOneToOne: false
+            referencedRelation: "regions"
             referencedColumns: ["id"]
           },
         ]
@@ -2961,6 +3077,36 @@ export type Database = {
           referral_code?: string
           total_earnings_agc?: number | null
           total_referrals?: number | null
+        }
+        Relationships: []
+      }
+      regions: {
+        Row: {
+          created_at: string
+          display_order: number
+          id: string
+          is_active: boolean
+          name: string
+          slug: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          display_order?: number
+          id?: string
+          is_active?: boolean
+          name: string
+          slug: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          display_order?: number
+          id?: string
+          is_active?: boolean
+          name?: string
+          slug?: string
+          updated_at?: string
         }
         Relationships: []
       }
@@ -3806,6 +3952,44 @@ export type Database = {
           user_id?: string | null
         }
         Relationships: []
+      }
+      user_chapters: {
+        Row: {
+          chapter_id: string
+          created_at: string
+          id: string
+          is_primary: boolean
+          joined_at: string
+          membership_level: string
+          user_id: string
+        }
+        Insert: {
+          chapter_id: string
+          created_at?: string
+          id?: string
+          is_primary?: boolean
+          joined_at?: string
+          membership_level?: string
+          user_id: string
+        }
+        Update: {
+          chapter_id?: string
+          created_at?: string
+          id?: string
+          is_primary?: boolean
+          joined_at?: string
+          membership_level?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "user_chapters_chapter_id_fkey"
+            columns: ["chapter_id"]
+            isOneToOne: false
+            referencedRelation: "chapters"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       user_roles: {
         Row: {

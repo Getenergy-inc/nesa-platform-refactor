@@ -72,7 +72,7 @@ export function TrustLogosStrip() {
                   transition={{ duration: 0.5 }}
                 >
                   <Shield className="h-3.5 w-3.5 text-gold/60" />
-                  Endorsed &amp; Trusted By
+                  Trusted by Endorsers, Institutions &amp; Strategic Partners
                 </motion.span>
                 <div className="flex items-center gap-6">
                   {activeEndorsers.map((endorser, index) => (

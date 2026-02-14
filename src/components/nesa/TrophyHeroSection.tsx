@@ -106,12 +106,18 @@ export function TrophyHeroSection() {
               <span className="text-gold">Education Changemakers</span>
             </h1>
 
-            {/* Value Proposition: ONE sentence */}
-            <p className="text-white/85 text-lg sm:text-xl mb-6 max-w-lg mx-auto lg:mx-0 leading-relaxed">
-              Nominate outstanding educators and institutions for Africa's premier education award.
+            {/* Sub-head */}
+            <p className="text-gold/80 text-sm sm:text-base font-medium mb-2 tracking-wide">
+              Advocating &amp; Achieving Education for All in Africa
             </p>
 
-            {/* CTAs: 1 Primary + 1 Secondary with pulse effect */}
+            {/* Value Proposition */}
+            <p className="text-white/80 text-base sm:text-lg mb-6 max-w-lg mx-auto lg:mx-0 leading-relaxed">
+              A standards-led continental recognition and accountability platform celebrating 
+              verified impact and enabling structured public participation.
+            </p>
+
+            {/* CTAs: Nominate + Vote + Watch */}
             <div className="flex flex-col sm:flex-row gap-3 justify-center lg:justify-start mb-8">
               <Link to="/nominate">
                 <motion.div
@@ -127,14 +133,23 @@ export function TrophyHeroSection() {
                   </Button>
                 </motion.div>
               </Link>
-              <Link to="/categories">
+              <Link to="/vote-with-agc">
+                <Button
+                  size="lg"
+                  variant="outline"
+                  className="w-full sm:w-auto border-gold/40 text-gold hover:bg-gold/10 rounded-full px-6 gap-2 h-12 text-base transition-all"
+                >
+                  Vote with AGC
+                </Button>
+              </Link>
+              <Link to="/media">
                 <Button
                   size="lg"
                   variant="outline"
                   className="w-full sm:w-auto border-white/30 text-white hover:bg-white/10 hover:border-gold/50 rounded-full px-6 gap-2 h-12 text-base transition-all"
                 >
-                  Explore Awards
-                  <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
+                  Watch Live
+                  <ArrowRight className="h-4 w-4" />
                 </Button>
               </Link>
             </div>
@@ -143,7 +158,7 @@ export function TrophyHeroSection() {
             <div className="flex flex-wrap gap-4 sm:gap-6 justify-center lg:justify-start text-sm">
               <div className="flex items-center gap-2 text-white/70">
                 <Globe className="h-4 w-4 text-gold" />
-                <span>5 Regions + Diaspora & Friends of Africa</span>
+                <span>10 Regions + Diaspora &amp; Friends</span>
               </div>
               <div className="flex items-center gap-2 text-white/70">
                 <Users className="h-4 w-4 text-gold" />
