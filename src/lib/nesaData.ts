@@ -671,6 +671,29 @@ export function getAfricaRegions(): GeographicGroup[] {
 }
 
 /**
+ * Get Diaspora sub-groups (by subcategory title which represents diaspora region)
+ */
+export function getDiasporaSubgroups(): { id: string; name: string; nomineeCount: number }[] {
+  const allNominees = getAllNominees();
+  const diasporaNominees = allNominees.filter(n => n.geographicCategory === "diaspora");
+  
+  // Group by subcategory title
+  const subgroupMap: Record<string, number> = {};
+  diasporaNominees.forEach(n => {
+    const key = n.subcategoryTitle || "Other";
+    subgroupMap[key] = (subgroupMap[key] || 0) + 1;
+  });
+  
+  return Object.entries(subgroupMap)
+    .map(([name, count]) => ({
+      id: generateSlug(name),
+      name,
+      nomineeCount: count,
+    }))
+    .sort((a, b) => b.nomineeCount - a.nomineeCount);
+}
+
+/**
  * Get a single nominee by slug
  */
 export function getNomineeBySlug(slug: string): EnrichedNominee | undefined {
