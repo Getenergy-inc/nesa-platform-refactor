@@ -27,7 +27,8 @@
  import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
  import { StageGate } from "@/components/StageGate";
  import { NomineeCard, type NomineeCardData } from "@/components/nesa/NomineeCard";
- import { VoteModal } from "@/components/nominees/VoteModal";
+import { VoteModal } from "@/components/nominees/VoteModal";
+import { VotingStatsStrip } from "@/components/voting/VotingStatsStrip";
  import { useSeason } from "@/contexts/SeasonContext";
  import { useAuth } from "@/contexts/AuthContext";
  import { supabase } from "@/integrations/supabase/client";
@@ -272,29 +273,8 @@
            </div>
          </section>
  
-         {/* Scoring Breakdown Banner */}
-         <section className="bg-blue-50 dark:bg-blue-950/20 border-b border-blue-200 dark:border-blue-900/30 py-4">
-           <div className="container">
-             <div className="flex flex-wrap items-center justify-center gap-6 text-sm">
-               <div className="flex items-center gap-2 text-blue-800 dark:text-blue-200">
-                 <Calendar className="h-4 w-4" />
-                 <span>May 18 – Jun 17, 2026</span>
-               </div>
-               <div className="flex items-center gap-2 text-blue-800 dark:text-blue-200">
-                 <Scale className="h-4 w-4" />
-                 <span>40% Public + 60% Jury</span>
-               </div>
-               <div className="flex items-center gap-2 text-blue-800 dark:text-blue-200">
-                 <UserCheck className="h-4 w-4" />
-                 <span>Expert Panel Evaluation</span>
-               </div>
-               <div className="flex items-center gap-2 text-blue-800 dark:text-blue-200">
-                 <Gem className="h-4 w-4" />
-                 <span>Blue Garnet Award</span>
-               </div>
-             </div>
-           </div>
-         </section>
+        {/* Info Banner with Live Counts */}
+        <VotingStatsStrip variant="blue" />
  
          {/* How Blue Garnet Works */}
          <section className="py-8 border-b">

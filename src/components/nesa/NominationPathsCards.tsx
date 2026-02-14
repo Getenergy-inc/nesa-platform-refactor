@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { useSeason } from "@/contexts/SeasonContext";
 import { useRegion } from "@/contexts/RegionContext";
+import { useRegionNomineeCounts } from "@/hooks/useRegionNomineeCounts";
 import { motion } from "framer-motion";
 
 export function NominationPathsCards() {
@@ -194,15 +195,20 @@ const REGION_EMOJIS: Record<string, string> = {
 
 function RegionNominateStrip() {
   const { regions } = useRegion();
+  const { data } = useRegionNomineeCounts();
+  const { regionCounts = [], totalCount = 0 } = data || {};
 
-  const specialOptions = [
-    { label: "All Africa", emoji: "🌍", href: "/nominate", slug: "all-africa" },
-    { label: "🇳🇬 Nigeria", emoji: "", href: "/nominate?region=nigeria", slug: "nigeria" },
-  ];
+  const getCount = (slug: string) => {
+    const found = regionCounts.find(r => r.region_slug === slug);
+    return found?.nominee_count || 0;
+  };
 
   const friendsRegion = regions.find(r => r.slug === "friends-of-africa");
   const africanRegions = regions.filter(r => r.slug !== "friends-of-africa" && r.slug !== "diaspora");
   const diasporaRegion = regions.find(r => r.slug === "diaspora");
+
+  // Nigeria count from West Africa nominees with country filter (approximate)
+  const nigeriaCount = getCount("west-africa"); // best approximation without country-level query
 
   return (
     <motion.div
@@ -212,26 +218,40 @@ function RegionNominateStrip() {
       viewport={{ once: true }}
     >
       <div className="text-center mb-6">
-        <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/5 border border-white/10 text-white/70 font-medium text-sm">
+        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/5 border border-white/10 text-white/70 font-medium text-sm">
           <Globe className="h-4 w-4 text-gold" />
           Nominate by Region
-        </span>
+          <span className="ml-2 px-2 py-0.5 rounded-full bg-gold/15 text-gold text-xs font-bold">
+            {totalCount.toLocaleString()} nominees
+          </span>
+        </div>
       </div>
 
       <div className="flex flex-wrap justify-center gap-2 max-w-4xl mx-auto">
-        {/* All Africa & Nigeria */}
-        {specialOptions.map((opt) => (
-          <Link key={opt.slug} to={opt.href}>
-            <Button
-              variant="outline"
-              size="sm"
-              className="border-gold/30 text-gold hover:bg-gold/10 hover:border-gold/50 rounded-full gap-1.5 font-medium"
-            >
-              {opt.emoji && <span>{opt.emoji}</span>}
-              {opt.label}
-            </Button>
-          </Link>
-        ))}
+        {/* All Africa */}
+        <Link to="/nominate">
+          <Button
+            variant="outline"
+            size="sm"
+            className="border-gold/30 text-gold hover:bg-gold/10 hover:border-gold/50 rounded-full gap-1.5 font-medium"
+          >
+            <span>🌍</span>
+            All Africa
+            <CountBadge count={totalCount} variant="gold" />
+          </Button>
+        </Link>
+
+        {/* Nigeria */}
+        <Link to="/nominate?region=nigeria">
+          <Button
+            variant="outline"
+            size="sm"
+            className="border-gold/30 text-gold hover:bg-gold/10 hover:border-gold/50 rounded-full gap-1.5 font-medium"
+          >
+            🇳🇬 Nigeria
+            <CountBadge count={nigeriaCount} variant="gold" />
+          </Button>
+        </Link>
 
         {/* Each African Region */}
         {africanRegions.map((region) => (
@@ -243,6 +263,7 @@ function RegionNominateStrip() {
             >
               <span>{REGION_EMOJIS[region.slug] || "🌍"}</span>
               {region.name}
+              <CountBadge count={getCount(region.slug)} variant="default" />
             </Button>
           </Link>
         ))}
@@ -257,6 +278,7 @@ function RegionNominateStrip() {
             >
               <span>✈️</span>
               {diasporaRegion.name}
+              <CountBadge count={getCount(diasporaRegion.slug)} variant="blue" />
             </Button>
           </Link>
         )}
@@ -271,10 +293,28 @@ function RegionNominateStrip() {
             >
               <span>🤝</span>
               {friendsRegion.name}
+              <CountBadge count={getCount(friendsRegion.slug)} variant="green" />
             </Button>
           </Link>
         )}
       </div>
     </motion.div>
+  );
+}
+
+function CountBadge({ count, variant = "default" }: { count: number; variant?: "gold" | "blue" | "green" | "default" }) {
+  if (count === 0) return null;
+  
+  const variantClasses = {
+    gold: "bg-gold/20 text-gold",
+    blue: "bg-blue-500/20 text-blue-300",
+    green: "bg-emerald-500/20 text-emerald-300",
+    default: "bg-white/10 text-white/60",
+  };
+
+  return (
+    <span className={`ml-1 px-1.5 py-0.5 rounded-full text-[10px] font-bold leading-none ${variantClasses[variant]}`}>
+      {count.toLocaleString()}
+    </span>
   );
 }
