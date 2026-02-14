@@ -21,6 +21,7 @@ import {
   getGeographicGroups as getCsvGeographicGroups,
   getAfricaRegions as getCsvAfricaRegions,
   getDiasporaSubgroups as getCsvDiasporaSubgroups,
+  getFriendsOfAfricaSubgroups as getCsvFriendsSubgroups,
   getAwardOptions as getCsvAwardOptions, 
   getStats as getCsvStats,
   type GeographicCategory,
@@ -109,6 +110,9 @@ export default function Nominees() {
   const [selectedDiasporaSubgroup, setSelectedDiasporaSubgroup] = useState<string>(
     searchParams.get("diaspora_group") || "all"
   );
+  const [selectedFriendsSubgroup, setSelectedFriendsSubgroup] = useState<string>(
+    searchParams.get("friends_group") || "all"
+  );
   const [sortBy, setSortBy] = useState<SortOption>(
     (searchParams.get("sort") as SortOption) || "name-asc"
   );
@@ -125,11 +129,12 @@ export default function Nominees() {
     if (selectedAward !== "all") params.set("award", selectedAward);
     if (selectedRegion !== "all") params.set("region", selectedRegion);
     if (selectedDiasporaSubgroup !== "all") params.set("diaspora_group", selectedDiasporaSubgroup);
+    if (selectedFriendsSubgroup !== "all") params.set("friends_group", selectedFriendsSubgroup);
     if (sortBy !== "name-asc") params.set("sort", sortBy);
     if (currentPage > 1 && !useInfiniteScroll) params.set("page", currentPage.toString());
     
     setSearchParams(params, { replace: true });
-  }, [searchQuery, selectedCategory, selectedAward, selectedRegion, selectedDiasporaSubgroup, sortBy, currentPage, useInfiniteScroll, setSearchParams]);
+  }, [searchQuery, selectedCategory, selectedAward, selectedRegion, selectedDiasporaSubgroup, selectedFriendsSubgroup, sortBy, currentPage, useInfiniteScroll, setSearchParams]);
 
   // Fetch from database
   const { data: dbNominees, isLoading: dbLoading, error: dbError } = useNominees();
@@ -196,6 +201,26 @@ export default function Nominees() {
     return getCsvDiasporaSubgroups();
   }, [useDatabase, dbNominees]);
 
+  // Friends of Africa subgroups
+  const friendsSubgroups = useMemo(() => {
+    if (useDatabase && dbNominees) {
+      const friendsNominees = dbNominees.filter(n => n.geographicCategory === "friends-of-africa");
+      const subgroupMap: Record<string, number> = {};
+      friendsNominees.forEach(n => {
+        const key = n.categoryName || "Other";
+        subgroupMap[key] = (subgroupMap[key] || 0) + 1;
+      });
+      return Object.entries(subgroupMap)
+        .map(([name, count]) => ({
+          id: name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, ''),
+          name,
+          nomineeCount: count,
+        }))
+        .sort((a, b) => b.nomineeCount - a.nomineeCount);
+    }
+    return getCsvFriendsSubgroups();
+  }, [useDatabase, dbNominees]);
+
   const awardOptions = useMemo(() => {
     if (useDatabase && dbNominees) {
       return getCategoryOptions(dbNominees);
@@ -237,13 +262,21 @@ export default function Nominees() {
             filtered = filtered.filter(n => n.subcategoryName === matchGroup.name || n.categoryName === matchGroup.name);
           }
         }
+      } else if (selectedCategory === "friends-of-africa") {
+        filtered = filtered.filter(n => n.geographicCategory === "friends-of-africa");
+        if (selectedFriendsSubgroup !== "all") {
+          const matchGroup = friendsSubgroups.find(g => g.id === selectedFriendsSubgroup);
+          if (matchGroup) {
+            filtered = filtered.filter(n => n.subcategoryName === matchGroup.name || n.categoryName === matchGroup.name);
+          }
+        }
       } else {
         filtered = filtered.filter(n => n.geographicCategory === selectedCategory);
       }
     }
     
     return filtered;
-  }, [allNominees, selectedCategory, selectedRegion, selectedDiasporaSubgroup, diasporaSubgroups]);
+  }, [allNominees, selectedCategory, selectedRegion, selectedDiasporaSubgroup, diasporaSubgroups, selectedFriendsSubgroup, friendsSubgroups]);
 
   // Apply search and award filters, then sort
   const filteredNominees = useMemo(() => {
@@ -306,12 +339,19 @@ export default function Nominees() {
     setSelectedCategory(value);
     setSelectedRegion("all");
     setSelectedDiasporaSubgroup("all");
+    setSelectedFriendsSubgroup("all");
     setCurrentPage(1);
     setVisibleCount(ITEMS_PER_PAGE);
   };
 
   const handleDiasporaSubgroupChange = (value: string) => {
     setSelectedDiasporaSubgroup(value);
+    setCurrentPage(1);
+    setVisibleCount(ITEMS_PER_PAGE);
+  };
+
+  const handleFriendsSubgroupChange = (value: string) => {
+    setSelectedFriendsSubgroup(value);
     setCurrentPage(1);
     setVisibleCount(ITEMS_PER_PAGE);
   };
@@ -496,6 +536,48 @@ export default function Nominees() {
               </div>
             </div>
           )}
+
+          {/* Friends of Africa Sub-tabs */}
+          {selectedCategory === "friends-of-africa" && friendsSubgroups.length > 0 && (
+            <div className="mt-4 overflow-x-auto scrollbar-hide">
+              <p className="text-xs text-ivory/40 mb-2 text-center">Filter by Contribution Area</p>
+              <div className="flex gap-2 justify-center min-w-max pb-2">
+                <Button
+                  variant={selectedFriendsSubgroup === "all" ? "default" : "outline"}
+                  size="sm"
+                  onClick={() => handleFriendsSubgroupChange("all")}
+                  className={selectedFriendsSubgroup === "all" 
+                    ? "bg-gold text-charcoal hover:bg-gold-dark" 
+                    : "border-gold/30 text-gold hover:bg-gold/10"
+                  }
+                >
+                  <Heart className="w-3.5 h-3.5 mr-1" />
+                  All Friends
+                </Button>
+                {friendsSubgroups.map((subgroup) => (
+                  <Button
+                    key={subgroup.id}
+                    variant={selectedFriendsSubgroup === subgroup.id ? "default" : "outline"}
+                    size="sm"
+                    onClick={() => handleFriendsSubgroupChange(subgroup.id)}
+                    className={selectedFriendsSubgroup === subgroup.id 
+                      ? "bg-gold text-charcoal hover:bg-gold-dark" 
+                      : "border-gold/30 text-gold hover:bg-gold/10"
+                    }
+                  >
+                    <Globe2 className="w-3.5 h-3.5 mr-1" />
+                    {subgroup.name
+                      .replace(/^the best\s*/i, '')
+                      .replace(/\s+/g, ' ')
+                      .trim() || subgroup.name}
+                    <Badge variant="outline" className="ml-1 text-[10px] px-1.5 py-0 h-4 border-current/30">
+                      {subgroup.nomineeCount}
+                    </Badge>
+                  </Button>
+                ))}
+              </div>
+            </div>
+          )}
         </div>
       </section>
 
@@ -659,6 +741,7 @@ export default function Nominees() {
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
                 {displayedNominees.map((nominee) => {
                   const isDiaspora = nominee.geographicCategory === "diaspora";
+                  const isFriends = nominee.geographicCategory === "friends-of-africa";
                   const cardData: NomineeCardData = {
                     id: nominee.id,
                     name: nominee.name,
@@ -669,9 +752,10 @@ export default function Nominees() {
                     isPlatinum: nominee.isPlatinum,
                     publicVotes: nominee.publicVotes,
                     categoryName: nominee.categoryName,
-                    subcategoryName: isDiaspora ? nominee.subcategoryName : undefined,
+                    subcategoryName: (isDiaspora || isFriends) ? nominee.subcategoryName : undefined,
                     region: nominee.region,
                     country: nominee.country,
+                    geographicCategory: nominee.geographicCategory,
                   };
                   return (
                     <NomineeCard 
