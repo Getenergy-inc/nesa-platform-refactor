@@ -1,7 +1,8 @@
-import { Award, Vote, Users, Check, ArrowRight, Trophy, Star, Shield } from "lucide-react";
+import { Award, Vote, Users, Check, ArrowRight, Trophy, Star, Shield, Globe, MapPin } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { useSeason } from "@/contexts/SeasonContext";
+import { useRegion } from "@/contexts/RegionContext";
 import { motion } from "framer-motion";
 
 export function NominationPathsCards() {
@@ -170,7 +171,110 @@ export function NominationPathsCards() {
             );
           })}
         </div>
+
+        {/* Regional Nomination Options */}
+        <RegionNominateStrip />
       </div>
     </section>
+  );
+}
+
+const REGION_EMOJIS: Record<string, string> = {
+  "west-africa": "🌍",
+  "east-africa": "🌍",
+  "central-africa": "🌍",
+  "southern-africa": "🌍",
+  "north-africa": "🌍",
+  "sahel-region": "🏜️",
+  "horn-of-africa": "🦏",
+  "indian-ocean-islands": "🏝️",
+  "diaspora": "✈️",
+  "friends-of-africa": "🤝",
+};
+
+function RegionNominateStrip() {
+  const { regions } = useRegion();
+
+  const specialOptions = [
+    { label: "All Africa", emoji: "🌍", href: "/nominate", slug: "all-africa" },
+    { label: "🇳🇬 Nigeria", emoji: "", href: "/nominate?region=nigeria", slug: "nigeria" },
+  ];
+
+  const friendsRegion = regions.find(r => r.slug === "friends-of-africa");
+  const africanRegions = regions.filter(r => r.slug !== "friends-of-africa" && r.slug !== "diaspora");
+  const diasporaRegion = regions.find(r => r.slug === "diaspora");
+
+  return (
+    <motion.div
+      className="mt-14"
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+    >
+      <div className="text-center mb-6">
+        <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/5 border border-white/10 text-white/70 font-medium text-sm">
+          <Globe className="h-4 w-4 text-gold" />
+          Nominate by Region
+        </span>
+      </div>
+
+      <div className="flex flex-wrap justify-center gap-2 max-w-4xl mx-auto">
+        {/* All Africa & Nigeria */}
+        {specialOptions.map((opt) => (
+          <Link key={opt.slug} to={opt.href}>
+            <Button
+              variant="outline"
+              size="sm"
+              className="border-gold/30 text-gold hover:bg-gold/10 hover:border-gold/50 rounded-full gap-1.5 font-medium"
+            >
+              {opt.emoji && <span>{opt.emoji}</span>}
+              {opt.label}
+            </Button>
+          </Link>
+        ))}
+
+        {/* Each African Region */}
+        {africanRegions.map((region) => (
+          <Link key={region.id} to={`/nominate?region=${region.slug}`}>
+            <Button
+              variant="outline"
+              size="sm"
+              className="border-white/15 text-white/70 hover:bg-white/10 hover:text-white hover:border-white/30 rounded-full gap-1.5 text-xs"
+            >
+              <span>{REGION_EMOJIS[region.slug] || "🌍"}</span>
+              {region.name}
+            </Button>
+          </Link>
+        ))}
+
+        {/* Diaspora */}
+        {diasporaRegion && (
+          <Link to={`/nominate?region=${diasporaRegion.slug}`}>
+            <Button
+              variant="outline"
+              size="sm"
+              className="border-blue-500/25 text-blue-400 hover:bg-blue-500/10 hover:border-blue-500/40 rounded-full gap-1.5 text-xs"
+            >
+              <span>✈️</span>
+              {diasporaRegion.name}
+            </Button>
+          </Link>
+        )}
+
+        {/* Friends of Africa */}
+        {friendsRegion && (
+          <Link to={`/nominate?region=${friendsRegion.slug}`}>
+            <Button
+              variant="outline"
+              size="sm"
+              className="border-emerald-500/25 text-emerald-400 hover:bg-emerald-500/10 hover:border-emerald-500/40 rounded-full gap-1.5 text-xs"
+            >
+              <span>🤝</span>
+              {friendsRegion.name}
+            </Button>
+          </Link>
+        )}
+      </div>
+    </motion.div>
   );
 }
