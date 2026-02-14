@@ -31,7 +31,7 @@ interface DynamicCategoryPageProps {
 
 // Get icon for region type
 function getRegionIcon(region: AfricanRegion) {
-  if (region === "Diaspora") return <Plane className="h-3 w-3" />;
+  if (region === "Diaspora / Global Africa") return <Plane className="h-3 w-3" />;
   if (region === "Friends of Africa") return <Handshake className="h-3 w-3" />;
   return <Globe className="h-3 w-3" />;
 }
@@ -261,7 +261,7 @@ export function DynamicCategoryPage({ categoryTitle, nominationType }: DynamicCa
                     </span>
                     {!isContinentalRegion(selectedRegion) && (
                       <span className="text-xs text-white/50">
-                        {selectedRegion === "Diaspora" 
+                        {selectedRegion === "Diaspora / Global Africa" 
                           ? "— Africans living abroad" 
                           : "— Global allies of Africa"}
                       </span>

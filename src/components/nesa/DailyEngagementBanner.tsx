@@ -24,12 +24,11 @@ export function DailyEngagementBanner() {
             <div className="flex items-center gap-2 justify-center md:justify-start mb-2">
               <Sparkles className="h-5 w-5 text-gold" />
               <h3 className="font-display text-xl md:text-2xl font-bold text-white">
-                Return Daily. Stay Engaged. <span className="text-gold">Earn Voting Points.</span>
+                Stay Engaged. <span className="text-gold">Shape the Outcome.</span>
               </h3>
             </div>
             <p className="text-white/60 text-sm md:text-base max-w-xl">
-              Verified engagement on NESA-Africa unlocks voting access during Gold Certificate 
-              and Blue Garnet Award stages.
+              Verified participation unlocks structured voting access during Gold and Blue Garnet stages.
             </p>
           </div>
 

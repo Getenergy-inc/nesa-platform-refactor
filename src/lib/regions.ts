@@ -7,16 +7,22 @@ export type AfricanRegion =
   | "Central Africa"
   | "East Africa"
   | "Southern Africa"
-  | "Diaspora"
+  | "Sahel Region"
+  | "Horn of Africa"
+  | "Indian Ocean Islands"
+  | "Diaspora / Global Africa"
   | "Friends of Africa";
 
 export const AFRICAN_REGIONS: AfricanRegion[] = [
-  "North Africa",
   "West Africa",
-  "Central Africa",
   "East Africa",
+  "Central Africa",
   "Southern Africa",
-  "Diaspora",
+  "North Africa",
+  "Sahel Region",
+  "Horn of Africa",
+  "Indian Ocean Islands",
+  "Diaspora / Global Africa",
   "Friends of Africa",
 ];
 
@@ -207,7 +213,7 @@ const FRIENDS_OF_AFRICA_COUNTRIES = new Set([
  * - Other non-African countries → "Diaspora" (default for Africans abroad)
  */
 export function getRegionFromCountry(country: string | undefined | null): AfricanRegion {
-  if (!country) return "Diaspora";
+  if (!country) return "Diaspora / Global Africa";
   
   const normalizedCountry = country.trim();
   
@@ -221,14 +227,14 @@ export function getRegionFromCountry(country: string | undefined | null): Africa
   }
   
   // Default to Diaspora for non-African, non-Friends countries
-  return "Diaspora";
+  return "Diaspora / Global Africa";
 }
 
 /**
  * Normalizes a region name to the standard 7-group format.
  */
 export function normalizeRegion(regionName: string | undefined | null): AfricanRegion {
-  if (!regionName) return "Diaspora";
+  if (!regionName) return "Diaspora / Global Africa";
   
   const normalized = regionName.trim().toLowerCase();
   
@@ -238,7 +244,10 @@ export function normalizeRegion(regionName: string | undefined | null): AfricanR
   if (normalized.includes("central")) return "Central Africa";
   if (normalized.includes("east")) return "East Africa";
   if (normalized.includes("southern") || normalized.includes("south africa")) return "Southern Africa";
-  if (normalized.includes("diaspora")) return "Diaspora";
+  if (normalized.includes("sahel")) return "Sahel Region";
+  if (normalized.includes("horn")) return "Horn of Africa";
+  if (normalized.includes("indian") || normalized.includes("island")) return "Indian Ocean Islands";
+  if (normalized.includes("diaspora")) return "Diaspora / Global Africa";
   if (normalized.includes("friend")) return "Friends of Africa";
   
   // Check if it's a country name
@@ -248,7 +257,7 @@ export function normalizeRegion(regionName: string | undefined | null): AfricanR
     }
   }
   
-  return "Diaspora";
+  return "Diaspora / Global Africa";
 }
 
 /**
@@ -267,10 +276,10 @@ export function isContinentalRegion(region: AfricanRegion): boolean {
 
 // Brand messaging constants
 export const REGIONAL_BRAND_MESSAGING = {
-  tagline: "A regional-based award across Africa's 5 regions, the African Diaspora, and Friends of Africa",
-  shortTagline: "5 African Regions + Diaspora + Friends of Africa",
-  reachStatement: "Across 5 African regions, the African Diaspora, and Friends of Africa",
-  statsLabel: "7 Regional Groups",
+  tagline: "A regional-based award across Africa's 10 regions, the African Diaspora, and Friends of Africa",
+  shortTagline: "10 Regions + Diaspora + Friends of Africa",
+  reachStatement: "Across 10 African regions, the African Diaspora, and Friends of Africa",
+  statsLabel: "10 Regional Groups",
 };
 
 // Governance stats
@@ -279,8 +288,8 @@ export const GOVERNANCE_STATS = {
   nrcVolunteers: 30,
   categories: 17,
   subcategories: 141,
-  regions: 7,
-  continentalRegions: 5,
+  regions: 10,
+  continentalRegions: 8,
 };
 
 export const NRC_DESCRIPTION = {

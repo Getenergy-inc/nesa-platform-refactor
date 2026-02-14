@@ -35,7 +35,10 @@ const AFRICAN_REGION_TO_GEOGRAPHIC: Record<AfricanRegion, GeographicCategory> = 
   "Central Africa": "central-africa",
   "East Africa": "east-africa",
   "Southern Africa": "south-africa",
-  "Diaspora": "diaspora",
+  "Sahel Region": "sahel-region" as GeographicCategory,
+  "Horn of Africa": "horn-of-africa" as GeographicCategory,
+  "Indian Ocean Islands": "indian-ocean-islands" as GeographicCategory,
+  "Diaspora / Global Africa": "diaspora",
   "Friends of Africa": "friends-of-africa",
 };
 

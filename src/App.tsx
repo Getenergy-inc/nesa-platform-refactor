@@ -12,6 +12,9 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { HelmetProvider } from "react-helmet-async";
 import { AuthProvider } from "@/contexts/AuthContext";
 import { SeasonProvider } from "@/contexts/SeasonContext";
+import { RegionProvider } from "@/contexts/RegionContext";
+import { RegionPickerModal } from "@/components/region/RegionPickerModal";
+import { RegionConfirmationPopup } from "@/components/region/RegionConfirmationPopup";
 import { PublicLayout } from "@/components/layout/PublicLayout";
 import { CustomerCareChat } from "@/components/support/CustomerCareChat";
 
@@ -105,6 +108,8 @@ import { Shop, ProductDetail, Cart, Checkout, OrderConfirmation, BulkOrders } fr
 import { SponsorLanding } from "./pages/sponsors";
 import Wallet from "./pages/Wallet";
 import EndorseNESA from "./pages/EndorseNESA";
+import RegionDashboard from "./pages/region/RegionDashboard";
+import NigeriaChapterTrack from "./pages/region/NigeriaChapterTrack";
 
 // OLC Pages
 import { OLCDashboard, OLCMembers, OLCSettlements, OLCWallet } from "./pages/olc";
@@ -139,9 +144,12 @@ const App = () => (
       <TooltipProvider>
         <AuthProvider>
           <SeasonProvider>
+            <RegionProvider>
             <Toaster />
             <Sonner />
             <CustomerCareChat />
+            <RegionPickerModal />
+            <RegionConfirmationPopup />
             <BrowserRouter>
               <Routes>
                 {/* Landing - has its own header/footer */}
@@ -260,6 +268,10 @@ const App = () => (
                 {/* Dashboards - use their own layout */}
                 <Route path="/dashboard" element={<Dashboard />} />
                 <Route path="/dashboard/nominations" element={<Dashboard />} />
+                <Route path="/dashboard/region" element={<RegionDashboard />} />
+                
+                {/* Region Routes */}
+                <Route path="/region/nigeria" element={<WithLayout><NigeriaChapterTrack /></WithLayout>} />
                 
                 {/* NRC Portal Routes */}
                 <Route path="/nrc" element={<NRCPortal />} />
@@ -337,6 +349,7 @@ const App = () => (
                 <Route path="*" element={<WithLayout><NotFound /></WithLayout>} />
               </Routes>
             </BrowserRouter>
+            </RegionProvider>
           </SeasonProvider>
         </AuthProvider>
       </TooltipProvider>
