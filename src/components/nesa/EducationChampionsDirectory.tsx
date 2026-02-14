@@ -3,20 +3,10 @@
  * 
  * Premium, celebratory showcase of Africa's education nominees.
  * Mobile-first, 10-second comprehension, clear hierarchy.
- * 
- * Layout:
- * 1. Hero (headline + CTAs)
- * 2. Snapshot Metrics
- * 3. Search & Filters (horizontal scroll on mobile)
- * 4. Award Tracks (geographic)
- * 5. Featured Nominees
- * 6. Special Recognition (Icon, Voting, Expert)
- * 7. Badge Legend
- * 8. Trust Signals
- * 9. Final CTAs
+ * Now uses LIVE nominee counts from database.
  */
 
-import { useState, useMemo, useRef } from "react";
+import { useState, useMemo } from "react";
 import { Link } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { Badge } from "@/components/ui/badge";
@@ -24,46 +14,20 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 import { 
-  Search,
-  Users,
-  Award,
-  ChevronRight,
-  Globe,
-  Plane,
-  Heart,
-  Crown,
-  Star,
-  Shield,
-  CheckCircle,
-  Trophy,
-  Sparkles,
-  ArrowUpDown,
-  MapPin,
-  Clock,
-  Eye,
-  Vote,
-  ExternalLink
+  Search, Users, Award, ChevronRight, Globe, Plane, Heart,
+  Crown, Star, Shield, CheckCircle, Trophy, Sparkles,
+  MapPin, Clock, Vote, ExternalLink
 } from "lucide-react";
 import { 
-  getAllNominees, 
-  handleImageError,
-  type Nominee
+  getAllNominees, handleImageError, type Nominee
 } from "@/lib/nesaData";
 import { TIER_INFO, type AwardTier } from "@/config/nesaCategories";
+import { useRegionNomineeCounts } from "@/hooks/useRegionNomineeCounts";
 
 // ─────────────────────────────────────────────────────────────────────────────
 // CONSTANTS
 // ─────────────────────────────────────────────────────────────────────────────
 
-// Source of truth stats (mobile-optimized labels)
-const DIRECTORY_STATS = [
-  { value: "1,670", label: "Total", sublabel: "Education Champions", icon: Trophy, color: "text-gold" },
-  { value: "943", label: "Africa", sublabel: "5 Regions", icon: Globe, color: "text-emerald-400" },
-  { value: "30", label: "Diaspora", sublabel: "Global Advocates", icon: Plane, color: "text-blue-400" },
-  { value: "60", label: "Friends", sublabel: "International Allies", icon: Heart, color: "text-rose-400" },
-];
-
-// Filter chips (simplified labels for mobile)
 const FILTER_CHIPS = [
   { id: "all", label: "All", icon: Users },
   { id: "africa", label: "Africa", icon: Globe },
@@ -79,15 +43,6 @@ const SORT_OPTIONS = [
   { id: "recent", label: "Recent" },
 ];
 
-// Award tracks for geographic browsing
-const AWARD_TRACKS = [
-  { id: "all", title: "All Nominees", count: "1,670", icon: Users, href: "/nominees", color: "from-gold/15 border-gold/30" },
-  { id: "africa", title: "Africa Regional", count: "943", icon: Globe, href: "/nominees?region=africa", color: "from-emerald-500/15 border-emerald-500/30" },
-  { id: "diaspora", title: "Diaspora", count: "30", icon: Plane, href: "/nominees?region=diaspora", color: "from-blue-500/15 border-blue-500/30" },
-  { id: "friends", title: "Friends of Africa", count: "60", icon: Heart, href: "/nominees?region=friends", color: "from-rose-500/15 border-rose-500/30" },
-];
-
-// Special recognition with concise copy
 const SPECIAL_RECOGNITION = [
   {
     id: "icon",
@@ -125,7 +80,6 @@ const SPECIAL_RECOGNITION = [
   },
 ];
 
-// Badge hierarchy (highest to lowest)
 const BADGE_HIERARCHY = [
   { tier: "icon" as AwardTier, label: "Icon", short: "Lifetime" },
   { tier: "blue-garnet" as AwardTier, label: "Blue Garnet", short: "Jury+Public" },
@@ -133,13 +87,20 @@ const BADGE_HIERARCHY = [
   { tier: "platinum" as AwardTier, label: "Platinum", short: "Expert" },
 ];
 
-// Trust signals
 const TRUST_SIGNALS = [
   { icon: Shield, label: "Transparent", sublabel: "Open process" },
   { icon: Users, label: "Expert Review", sublabel: "27 Judges" },
   { icon: CheckCircle, label: "Fair Voting", sublabel: "Verified" },
   { icon: Clock, label: "20 Years", sublabel: "Since 2005" },
 ];
+
+// ─────────────────────────────────────────────────────────────────────────────
+// HELPERS
+// ─────────────────────────────────────────────────────────────────────────────
+
+function formatCount(n: number): string {
+  return n >= 1000 ? `${(n / 1000).toFixed(1).replace(/\.0$/, "")}k` : n.toLocaleString();
+}
 
 // ─────────────────────────────────────────────────────────────────────────────
 // MAIN COMPONENT
@@ -150,7 +111,37 @@ export function EducationChampionsDirectory() {
   const [activeFilter, setActiveFilter] = useState("all");
   const [activeSort, setActiveSort] = useState("az");
 
+  const { data: countsData } = useRegionNomineeCounts();
+
   const allNominees = useMemo(() => getAllNominees(), []);
+
+  // Derive live stats
+  const liveStats = useMemo(() => {
+    if (!countsData) return null;
+    const { regionCounts, totalCount } = countsData;
+
+    const africaCount = regionCounts
+      .filter(r => !r.region_slug.includes("diaspora") && !r.region_slug.includes("friends"))
+      .reduce((s, r) => s + r.nominee_count, 0);
+    const diasporaCount = regionCounts.find(r => r.region_slug.includes("diaspora"))?.nominee_count || 0;
+    const friendsCount = regionCounts.find(r => r.region_slug.includes("friends"))?.nominee_count || 0;
+
+    return { total: totalCount, africa: africaCount, diaspora: diasporaCount, friends: friendsCount };
+  }, [countsData]);
+
+  const stats = [
+    { value: liveStats ? formatCount(liveStats.total) : "—", label: "Total", sublabel: "Education Champions", icon: Trophy, color: "text-gold" },
+    { value: liveStats ? formatCount(liveStats.africa) : "—", label: "Africa", sublabel: "5 Regions", icon: Globe, color: "text-emerald-400" },
+    { value: liveStats ? formatCount(liveStats.diaspora) : "—", label: "Diaspora", sublabel: "Global Advocates", icon: Plane, color: "text-blue-400" },
+    { value: liveStats ? formatCount(liveStats.friends) : "—", label: "Friends", sublabel: "International Allies", icon: Heart, color: "text-rose-400" },
+  ];
+
+  const tracks = [
+    { id: "all", title: "All Nominees", count: liveStats ? formatCount(liveStats.total) : "—", icon: Users, href: "/nominees", color: "from-gold/15 border-gold/30" },
+    { id: "africa", title: "Africa Regional", count: liveStats ? formatCount(liveStats.africa) : "—", icon: Globe, href: "/nominees?region=africa", color: "from-emerald-500/15 border-emerald-500/30" },
+    { id: "diaspora", title: "Diaspora", count: liveStats ? formatCount(liveStats.diaspora) : "—", icon: Plane, href: "/nominees?region=diaspora", color: "from-blue-500/15 border-blue-500/30" },
+    { id: "friends", title: "Friends of Africa", count: liveStats ? formatCount(liveStats.friends) : "—", icon: Heart, href: "/nominees?region=friends", color: "from-rose-500/15 border-rose-500/30" },
+  ];
 
   const filteredNominees = useMemo(() => {
     let results = allNominees;
@@ -195,9 +186,7 @@ export function EducationChampionsDirectory() {
 
       <div className="container relative z-10 px-4">
         
-        {/* ═══════════════════════════════════════════════════════════════════
-            1. HERO
-        ═══════════════════════════════════════════════════════════════════ */}
+        {/* 1. HERO */}
         <motion.header 
           className="text-center mb-8 md:mb-12"
           initial={{ opacity: 0, y: 16 }}
@@ -214,7 +203,7 @@ export function EducationChampionsDirectory() {
           </h2>
           
           <p className="text-white/60 max-w-lg mx-auto text-sm md:text-base mb-5">
-            1,670+ educators, innovators & institutions transforming learning across Africa.
+            Discover the remarkable educators, innovators, and institutions transforming education across Africa.
           </p>
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-2.5">
@@ -240,9 +229,7 @@ export function EducationChampionsDirectory() {
           </div>
         </motion.header>
 
-        {/* ═══════════════════════════════════════════════════════════════════
-            2. SNAPSHOT METRICS
-        ═══════════════════════════════════════════════════════════════════ */}
+        {/* 2. LIVE SNAPSHOT METRICS */}
         <motion.div 
           className="grid grid-cols-4 gap-2 md:gap-3 mb-8 md:mb-12"
           initial={{ opacity: 0, y: 16 }}
@@ -250,7 +237,7 @@ export function EducationChampionsDirectory() {
           viewport={{ once: true }}
           transition={{ delay: 0.05 }}
         >
-          {DIRECTORY_STATS.map((stat) => (
+          {stats.map((stat) => (
             <div 
               key={stat.label}
               className="bg-white/5 border border-white/10 rounded-lg p-2.5 md:p-4 text-center hover:border-gold/20 transition-colors"
@@ -263,9 +250,7 @@ export function EducationChampionsDirectory() {
           ))}
         </motion.div>
 
-        {/* ═══════════════════════════════════════════════════════════════════
-            3. SEARCH & FILTERS
-        ═══════════════════════════════════════════════════════════════════ */}
+        {/* 3. SEARCH & FILTERS */}
         <motion.div 
           className="mb-8 md:mb-12"
           initial={{ opacity: 0, y: 16 }}
@@ -273,7 +258,6 @@ export function EducationChampionsDirectory() {
           viewport={{ once: true }}
           transition={{ delay: 0.1 }}
         >
-          {/* Search */}
           <div className="relative mb-3">
             <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 h-4 w-4 text-white/40" />
             <Input
@@ -285,7 +269,6 @@ export function EducationChampionsDirectory() {
             />
           </div>
 
-          {/* Filter Chips - Horizontal scroll on mobile */}
           <ScrollArea className="w-full mb-3">
             <div className="flex gap-1.5 pb-2">
               {FILTER_CHIPS.map((chip) => (
@@ -308,7 +291,6 @@ export function EducationChampionsDirectory() {
             <ScrollBar orientation="horizontal" className="h-1" />
           </ScrollArea>
 
-          {/* Sort */}
           <div className="flex items-center gap-2 text-[11px]">
             <span className="text-white/40">Sort:</span>
             {SORT_OPTIONS.map((option) => (
@@ -327,9 +309,7 @@ export function EducationChampionsDirectory() {
           </div>
         </motion.div>
 
-        {/* ═══════════════════════════════════════════════════════════════════
-            4. AWARD TRACKS
-        ═══════════════════════════════════════════════════════════════════ */}
+        {/* 4. AWARD TRACKS (live counts) */}
         <motion.div 
           className="mb-8 md:mb-12"
           initial={{ opacity: 0, y: 16 }}
@@ -340,12 +320,16 @@ export function EducationChampionsDirectory() {
           <div className="flex items-center gap-2 mb-4">
             <Award className="h-4 w-4 text-gold" />
             <h3 className="text-xs font-medium text-white/70">Browse by Track</h3>
+            {liveStats && (
+              <Badge variant="outline" className="ml-auto text-[9px] border-emerald-500/30 text-emerald-400 px-1.5 py-0">
+                Live
+              </Badge>
+            )}
           </div>
 
-          {/* Horizontal scroll on mobile, grid on desktop */}
           <ScrollArea className="w-full md:hidden">
             <div className="flex gap-2.5 pb-2">
-              {AWARD_TRACKS.map((track) => (
+              {tracks.map((track) => (
                 <TrackCard key={track.id} track={track} compact />
               ))}
             </div>
@@ -353,15 +337,13 @@ export function EducationChampionsDirectory() {
           </ScrollArea>
           
           <div className="hidden md:grid grid-cols-4 gap-3">
-            {AWARD_TRACKS.map((track) => (
+            {tracks.map((track) => (
               <TrackCard key={track.id} track={track} />
             ))}
           </div>
         </motion.div>
 
-        {/* ═══════════════════════════════════════════════════════════════════
-            5. FEATURED NOMINEES
-        ═══════════════════════════════════════════════════════════════════ */}
+        {/* 5. FEATURED NOMINEES */}
         <motion.div 
           className="mb-8 md:mb-12"
           initial={{ opacity: 0, y: 16 }}
@@ -402,9 +384,7 @@ export function EducationChampionsDirectory() {
           </AnimatePresence>
         </motion.div>
 
-        {/* ═══════════════════════════════════════════════════════════════════
-            6. SPECIAL RECOGNITION
-        ═══════════════════════════════════════════════════════════════════ */}
+        {/* 6. SPECIAL RECOGNITION */}
         <motion.div 
           className="mb-8 md:mb-12"
           initial={{ opacity: 0, y: 16 }}
@@ -417,7 +397,6 @@ export function EducationChampionsDirectory() {
             <h3 className="text-xs font-medium text-white/70">Recognition Tracks</h3>
           </div>
 
-          {/* Stack on mobile, 3-col on desktop */}
           <div className="grid gap-3 md:grid-cols-3">
             {SPECIAL_RECOGNITION.map((track) => (
               <RecognitionCard key={track.id} track={track} />
@@ -425,9 +404,7 @@ export function EducationChampionsDirectory() {
           </div>
         </motion.div>
 
-        {/* ═══════════════════════════════════════════════════════════════════
-            7. BADGE LEGEND
-        ═══════════════════════════════════════════════════════════════════ */}
+        {/* 7. BADGE LEGEND */}
         <motion.div 
           className="mb-8 md:mb-12"
           initial={{ opacity: 0, y: 16 }}
@@ -459,9 +436,7 @@ export function EducationChampionsDirectory() {
           </div>
         </motion.div>
 
-        {/* ═══════════════════════════════════════════════════════════════════
-            8. TRUST SIGNALS
-        ═══════════════════════════════════════════════════════════════════ */}
+        {/* 8. TRUST SIGNALS */}
         <motion.div 
           className="bg-gradient-to-br from-gold/10 to-transparent border border-gold/15 rounded-xl p-4 md:p-6 mb-8"
           initial={{ opacity: 0, y: 16 }}
@@ -495,9 +470,7 @@ export function EducationChampionsDirectory() {
           </div>
         </motion.div>
 
-        {/* ═══════════════════════════════════════════════════════════════════
-            9. FINAL CTA
-        ═══════════════════════════════════════════════════════════════════ */}
+        {/* 9. FINAL CTA */}
         <motion.div 
           className="text-center"
           initial={{ opacity: 0 }}
@@ -537,7 +510,7 @@ export function EducationChampionsDirectory() {
 // ─────────────────────────────────────────────────────────────────────────────
 
 function TrackCard({ track, compact = false }: { 
-  track: typeof AWARD_TRACKS[0]; 
+  track: { id: string; title: string; count: string; icon: any; href: string; color: string }; 
   compact?: boolean;
 }) {
   return (
