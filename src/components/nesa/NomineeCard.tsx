@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Award, Building2, MapPin, RotateCcw, ThumbsUp, Loader2 } from "lucide-react";
+import { Award, Building2, MapPin, RotateCcw, ThumbsUp, Loader2, Globe2, Plane } from "lucide-react";
 import { NESAStamp } from "@/components/nesa/NESALogo";
 import { type NomineeImageType, isOrganization, normalizeYearReferences } from "@/lib/nesaData";
 import { NomineeActions, type NomineeActionsData } from "@/components/nominees";
@@ -147,7 +147,7 @@ export const NomineeCard = forwardRef<HTMLDivElement, NomineeCardProps>(function
           )}
 
           {/* Category Badge */}
-          {nominee.categoryName && (
+          {nominee.categoryName && !nominee.subcategoryName && (
             <Badge
               variant="outline"
               className={`mt-3 border-gold/20 text-gold/80 ${isCompact ? "text-[10px]" : "text-xs"}`}
@@ -156,16 +156,37 @@ export const NomineeCard = forwardRef<HTMLDivElement, NomineeCardProps>(function
             </Badge>
           )}
 
-          {/* Region if available */}
-          {nominee.region && (
+          {/* Diaspora-specific: Residence Region + Country of Origin */}
+          {nominee.subcategoryName && (
+            <div className="mt-3 space-y-1.5 w-full">
+              <div className="flex items-center justify-center gap-1 text-xs text-ivory/60">
+                <Plane className="w-3 h-3 text-gold/60" />
+                <span className="line-clamp-1">
+                  {nominee.subcategoryName
+                    .replace(/^the best diaspora-led educational\s*/i, '')
+                    .replace(/\s+/g, ' ')
+                    .trim()}
+                </span>
+              </div>
+              {nominee.country && (
+                <div className="flex items-center justify-center gap-1 text-xs text-ivory/40">
+                  <Globe2 className="w-3 h-3 text-gold/40" />
+                  <span>Origin: {nominee.country}</span>
+                </div>
+              )}
+            </div>
+          )}
+
+          {/* Region if available (non-diaspora) */}
+          {nominee.region && !nominee.subcategoryName && (
             <div className="flex items-center gap-1 mt-2 text-xs text-ivory/40">
               <MapPin className="w-3 h-3" />
               <span>{nominee.region} Africa</span>
             </div>
           )}
 
-          {/* Country if available */}
-          {nominee.country && !nominee.region && (
+          {/* Country if available (non-diaspora, no region) */}
+          {nominee.country && !nominee.region && !nominee.subcategoryName && (
             <Badge variant="outline" className="mt-2 text-xs border-ivory/20 text-ivory/60">
               {nominee.country}
             </Badge>
