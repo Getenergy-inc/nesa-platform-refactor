@@ -117,17 +117,15 @@ export function RegionProvider({ children }: { children: ReactNode }) {
     }
   }, [userChapter, regions, activeRegion]);
 
-  // Show region picker for first-time visitors (no user)
+  // Restore saved region for visitors (no blocking modal on first visit)
   useEffect(() => {
     if (!user && !regionsLoading && regions.length > 0) {
       const stored = localStorage.getItem("nesa_selected_region");
       if (stored) {
         const match = regions.find((r) => r.slug === stored);
         if (match) setActiveRegionState(match);
-      } else {
-        // Will show the modal
-        setShowRegionPicker(true);
       }
+      // Don't auto-show picker — let user explore first, they can pick via nav switcher
     }
   }, [user, regionsLoading, regions]);
 
