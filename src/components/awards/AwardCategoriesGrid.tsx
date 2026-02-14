@@ -9,6 +9,7 @@ import {
   type CategoryDefinition,
 } from "@/config/nesaCategories";
 import { categoryIconMap } from "@/config/categoryIconMap";
+import { getCategoryImage } from "@/config/categoryImages";
 
 interface AwardCategoriesGridProps {
   /** Filter categories by tier applicability */
@@ -128,6 +129,7 @@ function CategoryCard({
   const Icon = categoryIconMap[category.iconName] || GraduationCap;
   const scopeStyle = scopeStyles[category.scope] || scopeStyles.AFRICA_REGIONAL;
   const subcategoryCount = category.subcategories.length;
+  const categoryImage = getCategoryImage(category.slug);
 
   return (
     <motion.div
@@ -138,35 +140,58 @@ function CategoryCard({
     >
       <Link
         to={`/categories/${category.slug}`}
-        className={`group flex flex-col h-full p-5 rounded-xl border border-white/10 bg-white/5 ${styles.hoverBorder} hover:bg-white/10 transition-all duration-300`}
+        className={`group flex flex-col h-full rounded-xl border border-white/10 bg-white/5 ${styles.hoverBorder} hover:bg-white/10 transition-all duration-300 overflow-hidden`}
       >
-        <div className="flex items-start gap-3 mb-3">
-          <div className={`h-10 w-10 rounded-lg ${styles.badgeBg} flex items-center justify-center shrink-0`}>
-            <Icon className={`h-5 w-5 ${styles.iconColor}`} />
+        {/* Image Header */}
+        <div className="relative h-32 w-full overflow-hidden">
+          {categoryImage ? (
+            <img 
+              src={categoryImage} 
+              alt={category.shortName}
+              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+              loading="lazy"
+            />
+          ) : (
+            <div className={`w-full h-full ${styles.badgeBg} flex items-center justify-center`}>
+              <Icon className={`h-12 w-12 ${styles.iconColor} opacity-40`} />
+            </div>
+          )}
+          {/* Gradient overlay */}
+          <div className="absolute inset-0 bg-gradient-to-t from-charcoal via-charcoal/60 to-transparent" />
+          {/* Scope badge on image */}
+          <div className="absolute top-2 right-2">
+            <Badge 
+              variant="outline" 
+              className={`text-[10px] px-1.5 py-0 backdrop-blur-sm bg-black/40 ${scopeStyle.className}`}
+            >
+              {scopeStyle.label}
+            </Badge>
           </div>
-          <div className="flex-1 min-w-0">
-            <h3 className="font-semibold text-white text-sm leading-tight group-hover:text-gold transition-colors line-clamp-2">
-              {category.shortName}
-            </h3>
-            <div className="flex items-center gap-2 mt-1">
-              <Badge 
-                variant="outline" 
-                className={`text-[10px] px-1.5 py-0 ${scopeStyle.className}`}
-              >
-                {scopeStyle.label}
-              </Badge>
-              <span className="text-white/40 text-xs">{subcategoryCount} subcategories</span>
+          {/* Icon overlay */}
+          <div className="absolute bottom-2 left-3">
+            <div className={`h-8 w-8 rounded-lg ${styles.badgeBg} backdrop-blur-sm flex items-center justify-center`}>
+              <Icon className={`h-4 w-4 ${styles.iconColor}`} />
             </div>
           </div>
         </div>
-        
-        <p className="text-white/50 text-xs line-clamp-2 flex-1 mb-3">
-          {category.description}
-        </p>
 
-        <div className="flex items-center gap-1 text-xs text-white/40 group-hover:text-gold transition-colors mt-auto">
-          <span>Explore</span>
-          <ArrowRight className="h-3 w-3 group-hover:translate-x-1 transition-transform" />
+        {/* Content */}
+        <div className="p-4 flex flex-col flex-1">
+          <h3 className="font-semibold text-white text-sm leading-tight group-hover:text-gold transition-colors line-clamp-2 mb-1.5">
+            {category.shortName}
+          </h3>
+          
+          <p className="text-white/50 text-xs line-clamp-2 flex-1 mb-3">
+            {category.description}
+          </p>
+
+          <div className="flex items-center justify-between mt-auto">
+            <span className="text-white/40 text-xs">{subcategoryCount} subcategories</span>
+            <div className="flex items-center gap-1 text-xs text-white/40 group-hover:text-gold transition-colors">
+              <span>Explore</span>
+              <ArrowRight className="h-3 w-3 group-hover:translate-x-1 transition-transform" />
+            </div>
+          </div>
         </div>
       </Link>
     </motion.div>

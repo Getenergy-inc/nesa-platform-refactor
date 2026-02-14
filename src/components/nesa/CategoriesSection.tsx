@@ -13,6 +13,7 @@ import {
   TIER_INFO,
   type CategoryScope,
 } from "@/config/nesaCategories";
+import { getCategoryImage } from "@/config/categoryImages";
 
 // Icon mapping
 const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
@@ -115,35 +116,60 @@ export function CategoriesSection() {
               >
                 <Link
                   to={`/categories/${cat.slug}`}
-                  className="group block bg-white/5 backdrop-blur-sm rounded-2xl p-6 border border-white/10 hover:border-gold/40 transition-all duration-300"
+                  className="group block bg-white/5 backdrop-blur-sm rounded-2xl border border-white/10 hover:border-gold/40 transition-all duration-300 overflow-hidden"
                 >
-                  <div className="flex items-center justify-between mb-4">
-                    <div className="flex items-center gap-3">
-                      <div className="h-12 w-12 rounded-xl bg-gold/10 flex items-center justify-center group-hover:bg-gold/20 transition-colors">
-                        <Icon className="h-6 w-6 text-gold" />
-                      </div>
-                      <Badge variant="outline" className={`text-xs ${scopeBadge.className}`}>
+                  {/* Category Image */}
+                  <div className="relative h-36 w-full overflow-hidden">
+                    {(() => {
+                      const catImage = getCategoryImage(cat.slug);
+                      return catImage ? (
+                        <img 
+                          src={catImage} 
+                          alt={cat.shortName}
+                          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                          loading="lazy"
+                        />
+                      ) : (
+                        <div className="w-full h-full bg-gold/10 flex items-center justify-center">
+                          <Icon className="h-12 w-12 text-gold opacity-40" />
+                        </div>
+                      );
+                    })()}
+                    <div className="absolute inset-0 bg-gradient-to-t from-charcoal via-charcoal/50 to-transparent" />
+                    <div className="absolute top-3 right-3">
+                      <Badge variant="outline" className={`text-xs backdrop-blur-sm bg-black/40 ${scopeBadge.className}`}>
                         {t(scopeBadge.labelKey)}
                       </Badge>
                     </div>
-                    <ChevronRight className="h-5 w-5 text-white/40 group-hover:text-gold group-hover:translate-x-1 transition-all" />
+                    <div className="absolute bottom-3 left-3">
+                      <div className="h-10 w-10 rounded-xl bg-black/40 backdrop-blur-sm flex items-center justify-center">
+                        <Icon className="h-5 w-5 text-gold" />
+                      </div>
+                    </div>
                   </div>
-                  <h3 className="font-bold text-lg text-white mb-2 group-hover:text-gold transition-colors">
-                    {cat.shortName}
-                  </h3>
-                  <p className="text-white/60 text-sm line-clamp-2 mb-4">
-                    {cat.description}
-                  </p>
-                  <div className="flex items-center gap-2">
-                    <Badge 
-                      variant="outline" 
-                      className={`text-xs ${tier.bgColor} ${tier.color} border-0`}
-                    >
-                      {tier.shortName}
-                    </Badge>
-                    <span className="text-xs text-white/50">
-                      {t("landing.categories.subcategoriesCount", { count: cat.subcategories.length })}
-                    </span>
+
+                  {/* Content */}
+                  <div className="p-5">
+                    <div className="flex items-center justify-between mb-2">
+                      <h3 className="font-bold text-lg text-white group-hover:text-gold transition-colors">
+                        {cat.shortName}
+                      </h3>
+                      <ChevronRight className="h-5 w-5 text-white/40 group-hover:text-gold group-hover:translate-x-1 transition-all" />
+                    </div>
+                    <p className="text-white/60 text-sm line-clamp-2 mb-4">
+                      {cat.description}
+                    </p>
+                    <div className="flex items-center gap-2">
+                      <Badge 
+                        variant="outline" 
+                        className={`text-xs ${tier.bgColor} ${tier.color} border-0`}
+                      >
+                        {tier.shortName}
+                      </Badge>
+                      <span className="text-xs text-white/50">
+                        {t("landing.categories.subcategoriesCount", { count: cat.subcategories.length })}
+                      </span>
+                    </div>
                   </div>
                 </Link>
               </motion.div>
