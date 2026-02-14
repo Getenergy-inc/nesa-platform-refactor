@@ -2,13 +2,14 @@ import { Coins, Vote, Shield, ArrowRight, UserPlus, Award, Check, AlertTriangle 
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
+import agcCoinImg from "@/assets/nesa-agc-coin.png";
 
 export function VoteWithAGCSection() {
   const steps = [
     {
       icon: UserPlus,
       title: "Join & Participate",
-      description: "Create your account and engage with the platform through nominations, referrals, and daily activities.",
+      description: "Create your account and engage through nominations, referrals, and daily activities.",
     },
     {
       icon: Coins,
@@ -27,18 +28,47 @@ export function VoteWithAGCSection() {
     },
   ];
 
+  const earningMethods = [
+    { amount: "+5 AGCc", label: "Verified Nomination" },
+    { amount: "+1 AGCc", label: "Daily Sign-in" },
+    { amount: "+15 AGC", label: "First Referral" },
+    { amount: "+5 AGC", label: "Second Referral" },
+    { amount: "+1 AGCc", label: "Watch NESA TV" },
+    { amount: "+2 AGCc", label: "Signup & Verify" },
+  ];
+
   return (
-    <section className="bg-gradient-to-b from-charcoal via-charcoal-light/30 to-charcoal py-16 md:py-20" data-event="vote-with-agc-section-view">
+    <section className="bg-gradient-to-b from-charcoal via-charcoal-light/20 to-charcoal py-16 md:py-24" data-event="vote-with-agc-section-view">
       <div className="container">
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
-          {/* Left: Visual Flow */}
+        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+          {/* Left: Visual Flow + Coin Image */}
           <motion.div
             initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             className="relative"
           >
-            <div className="space-y-6">
+            {/* AGC Coin Visual */}
+            <motion.div 
+              className="flex justify-center mb-10"
+              initial={{ opacity: 0, scale: 0.9 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+            >
+              <div className="relative">
+                <div className="absolute -inset-6 bg-gradient-to-t from-gold/20 via-gold/5 to-transparent blur-2xl rounded-full" />
+                <motion.img 
+                  src={agcCoinImg} 
+                  alt="Afrigold Coin — NESA participation credit" 
+                  className="relative w-32 h-32 md:w-40 md:h-40 object-contain drop-shadow-2xl"
+                  animate={{ y: [0, -6, 0] }}
+                  transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+                />
+              </div>
+            </motion.div>
+
+            {/* Steps */}
+            <div className="space-y-5">
               {steps.map((step, index) => (
                 <motion.div
                   key={step.title}
@@ -48,20 +78,18 @@ export function VoteWithAGCSection() {
                   viewport={{ once: true }}
                   className="relative flex items-start gap-4"
                 >
-                  {/* Step Number & Line */}
                   <div className="relative flex flex-col items-center">
-                    <div className="h-12 w-12 rounded-xl bg-gold/10 border border-gold/30 flex items-center justify-center">
+                    <div className="h-11 w-11 rounded-xl bg-gold/10 border border-gold/25 flex items-center justify-center">
                       <step.icon className="h-5 w-5 text-gold" />
                     </div>
                     {index < steps.length - 1 && (
-                      <div className="w-0.5 h-12 bg-gold/20 mt-2" />
+                      <div className="w-0.5 h-8 bg-gold/15 mt-2" />
                     )}
                   </div>
                   
-                  {/* Content */}
-                  <div className="pt-1.5">
-                    <h4 className="text-white font-semibold text-lg mb-1">{step.title}</h4>
-                    <p className="text-white/60 text-sm leading-relaxed">{step.description}</p>
+                  <div className="pt-1">
+                    <h4 className="text-white font-semibold mb-0.5">{step.title}</h4>
+                    <p className="text-white/55 text-sm leading-relaxed">{step.description}</p>
                   </div>
                 </motion.div>
               ))}
@@ -74,85 +102,54 @@ export function VoteWithAGCSection() {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
           >
-            {/* Badge */}
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gold/10 border border-gold/30 mb-6">
               <Coins className="h-4 w-4 text-gold" />
               <span className="text-sm font-medium text-gold">Earn. Vote. Impact.</span>
             </div>
 
             <h2 className="font-display text-3xl md:text-4xl font-bold text-white mb-4">
-              Earn Voting Points. <span className="text-gold">Vote with AGC.</span>
+              Earn Voting Points.{" "}
+              <span className="text-gold">Vote with AGC.</span>
             </h2>
 
-            <p className="text-white/70 text-lg mb-4 leading-relaxed">
+            <p className="text-white/70 text-lg mb-6 leading-relaxed">
               Your participation on NESA-Africa earns you <span className="text-gold font-semibold">Afri Gold Coins (AGC)</span>—voting 
-              points that let you support nominees for <span className="text-gold">Gold</span> and <span className="text-blue-400">Blue Garnet</span> awards.
+              points to support nominees for <span className="text-gold">Gold</span> and <span className="text-blue-400">Blue Garnet</span> awards.
             </p>
             
-            {/* Earning Methods Highlight - Expanded Grid */}
-            <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 mb-6">
-              <div className="p-3 rounded-xl bg-gold/5 border border-gold/20">
-                <p className="text-gold font-semibold text-sm">+5 AGCc</p>
-                <p className="text-white/60 text-xs">Verified Nomination</p>
-              </div>
-              <div className="p-3 rounded-xl bg-gold/5 border border-gold/20">
-                <p className="text-gold font-semibold text-sm">+1 AGCc</p>
-                <p className="text-white/60 text-xs">Daily Sign-in</p>
-              </div>
-              <div className="p-3 rounded-xl bg-gold/5 border border-gold/20">
-                <p className="text-gold font-semibold text-sm">+15 AGC</p>
-                <p className="text-white/60 text-xs">First Referral</p>
-              </div>
-              <div className="p-3 rounded-xl bg-gold/5 border border-gold/20">
-                <p className="text-gold font-semibold text-sm">+5 AGC</p>
-                <p className="text-white/60 text-xs">Second Referral</p>
-              </div>
-              <div className="p-3 rounded-xl bg-gold/5 border border-gold/20">
-                <p className="text-gold font-semibold text-sm">+1 AGCc</p>
-                <p className="text-white/60 text-xs">Watch NESA Africa TV</p>
-              </div>
-              <div className="p-3 rounded-xl bg-gold/5 border border-gold/20">
-                <p className="text-gold font-semibold text-sm">+1 AGCc</p>
-                <p className="text-white/60 text-xs">Social Sharing</p>
-              </div>
-              <div className="p-3 rounded-xl bg-gold/5 border border-gold/20">
-                <p className="text-gold font-semibold text-sm">+2 AGCc</p>
-                <p className="text-white/60 text-xs">Signup & Verify</p>
-              </div>
-              <div className="p-3 rounded-xl bg-gold/5 border border-gold/20">
-                <p className="text-gold font-semibold text-sm">Sponsor</p>
-                <p className="text-white/60 text-xs">Funded AGC</p>
-              </div>
-              <div className="p-3 rounded-xl bg-blue-500/5 border border-blue-500/20">
-                <p className="text-blue-400 font-semibold text-sm">1 Vote = 1 AGC</p>
-                <p className="text-white/60 text-xs">Simple Voting</p>
-              </div>
+            {/* Earning Methods — Clean Grid */}
+            <div className="grid grid-cols-2 sm:grid-cols-3 gap-2.5 mb-5">
+              {earningMethods.map((method) => (
+                <div key={method.label} className="p-3 rounded-xl bg-white/4 border border-white/8 hover:border-gold/25 transition-colors">
+                  <p className="text-gold font-semibold text-sm">{method.amount}</p>
+                  <p className="text-white/50 text-xs">{method.label}</p>
+                </div>
+              ))}
             </div>
             
             {/* Conversion Note */}
-            <p className="text-xs text-white/50 mb-4 p-2 rounded-lg bg-white/5 border border-white/10">
-              💡 <span className="text-gold">10 AGCc = 1 AGC</span> — AGCc auto-converts to AGC for voting.
+            <p className="text-xs text-white/50 mb-5 p-2.5 rounded-lg bg-white/4 border border-white/8">
+              💡 <span className="text-gold">10 AGCc = 1 AGC</span> — AGCc auto-converts to AGC for voting. <span className="text-blue-400">1 Vote = 1 AGC.</span>
             </p>
 
             {/* Key Points */}
-            <ul className="space-y-3 mb-8">
+            <ul className="space-y-2.5 mb-7">
               {[
                 "Gold Certificate: 100% public participation",
                 "Blue Garnet: Combined jury & public weighting",
                 "All votes recorded with full audit trail",
-                "Sponsors cannot influence outcomes",
               ].map((point) => (
-                <li key={point} className="flex items-start gap-3 text-white/80">
-                  <Check className="h-5 w-5 text-gold flex-shrink-0 mt-0.5" />
+                <li key={point} className="flex items-start gap-2.5 text-white/75 text-sm">
+                  <Check className="h-4 w-4 text-gold flex-shrink-0 mt-0.5" />
                   <span>{point}</span>
                 </li>
               ))}
             </ul>
 
             {/* CTA */}
-            <div className="flex flex-wrap gap-3 mb-6">
+            <div className="flex flex-wrap gap-3 mb-5">
               <Link to="/about-agc">
-                <Button className="bg-gold hover:bg-gold-dark text-charcoal font-semibold rounded-full gap-2" data-event="vote-with-agc-cta">
+                <Button className="bg-gold hover:bg-gold-dark text-charcoal font-semibold rounded-full gap-2">
                   <Coins className="h-4 w-4" />
                   Learn About AGC
                   <ArrowRight className="h-4 w-4" />

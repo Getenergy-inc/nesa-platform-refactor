@@ -2,11 +2,10 @@
 // Marketing-led welcome page with visual storytelling and governance integrity
 // Optimized for low bounce rate with lazy loading and engagement hooks
 
-import { lazy, Suspense } from "react";
+import { lazy } from "react";
 import { Helmet } from "react-helmet-async";
 import { TrophyHeroSection } from "@/components/nesa/TrophyHeroSection";
 import { TrustLogosStrip } from "@/components/nesa/TrustLogosStrip";
-import { CampaignBanner } from "@/components/nesa/CampaignBanner";
 import { QuickActionBar } from "@/components/nesa/QuickActionBar";
 import { WhatsLiveSection } from "@/components/nesa/WhatsLiveSection";
 import { NominationPathsCards } from "@/components/nesa/NominationPathsCards";
@@ -24,7 +23,6 @@ const HowItWorksVisual = lazy(() => import("@/components/nesa/HowItWorksVisual")
 const LegacyImpactSection = lazy(() => import("@/components/nesa/LegacyImpactSection").then(m => ({ default: m.LegacyImpactSection })));
 const IntegritySection = lazy(() => import("@/components/nesa/IntegritySection").then(m => ({ default: m.IntegritySection })));
 const UpcomingEventsSection = lazy(() => import("@/components/nesa/UpcomingEventsSection").then(m => ({ default: m.UpcomingEventsSection })));
-const AwardPhasesSection = lazy(() => import("@/components/nesa/AwardPhasesSection").then(m => ({ default: m.AwardPhasesSection })));
 const WatchSection = lazy(() => import("@/components/nesa/WatchSection").then(m => ({ default: m.WatchSection })));
 const NESAMusicSection = lazy(() => import("@/components/nesa/NESAMusicSection").then(m => ({ default: m.NESAMusicSection })));
 const EducationChampionsDirectory = lazy(() => import("@/components/nesa/EducationChampionsDirectory").then(m => ({ default: m.EducationChampionsDirectory })));
@@ -50,78 +48,60 @@ export function NESALandingPage() {
         <link rel="canonical" href="https://nesa.africa" />
       </Helmet>
 
-      {/* Scroll Progress Indicator - Reduces bounce by showing progress */}
       <ScrollProgressIndicator />
 
       <div className="min-h-screen bg-charcoal">
         <NESAHeader />
         
-        {/* 1. Trophy Hero - Conversion-first with Blue Garnet visual (Above fold - not lazy) */}
+        {/* 1. Trophy Hero — Above fold */}
         <TrophyHeroSection />
         
-        {/* 2. Trust Logos Strip - Endorsements immediately after hero (Above fold - not lazy) */}
+        {/* 2. Trust Logos Strip — Above fold */}
         <TrustLogosStrip />
         
-        {/* 3. Campaign Banner - 2025 Nominations Open (Above fold - not lazy) */}
-        <CampaignBanner />
-        
-        {/* 4. Quick Action Bar - Mobile-sticky CTAs */}
+        {/* 3. Quick Action Bar — Mobile-sticky CTAs */}
         <QuickActionBar />
         
-        {/* 5. What's Live - Dynamic blocks encouraging repeat visits (Above fold - not lazy) */}
+        {/* 4. What's Live — Dynamic blocks */}
         <WhatsLiveSection />
         
-        {/* 6. Nomination Paths - Scannable cards with clear CTAs (Above fold - not lazy) */}
+        {/* 5. Nomination Paths — Scannable cards */}
         <NominationPathsCards />
         
-        {/* === BELOW FOLD - LAZY LOADED SECTIONS === */}
+        {/* === BELOW FOLD === */}
         
-        {/* 7. Vote with AGC - Visual storytelling block */}
-        <LazySection>
-          <VoteWithAGCSection />
-        </LazySection>
-        
-        {/* 8. How It Works - Icon flow journey */}
         <LazySection>
           <HowItWorksVisual />
         </LazySection>
         
-        {/* 9. Legacy Impact - Rebuild My School Africa */}
+        <LazySection>
+          <VoteWithAGCSection />
+        </LazySection>
+        
         <LazySection>
           <LegacyImpactSection />
         </LazySection>
         
-        {/* 10. Integrity Section - Firewalls & governance */}
         <LazySection>
           <IntegritySection />
         </LazySection>
         
-        {/* 11. Upcoming Events - Countdown timers */}
         <LazySection>
           <UpcomingEventsSection />
         </LazySection>
         
-        {/* 12. Award Phases & Timeline - Programme details */}
-        <LazySection>
-          <AwardPhasesSection />
-        </LazySection>
-        
-        {/* 13. Watch Section - Media engagement */}
         <LazySection>
           <WatchSection />
         </LazySection>
         
-        {/* 13b. NESA Music Section - Official Songs */}
         <LazySection>
           <NESAMusicSection />
         </LazySection>
         
-        {/* 14. Education Champions Directory */}
         <LazySection>
           <EducationChampionsDirectory />
         </LazySection>
         
-        {/* 15. Sponsors, Judges, Categories - Supporting sections */}
         <LazySection>
           <SponsorsSection />
         </LazySection>
@@ -132,7 +112,6 @@ export function NESALandingPage() {
           <CategoriesSection />
         </LazySection>
         
-        {/* 16. Final CTA */}
         <LazySection>
           <FinalCTASection />
         </LazySection>
@@ -140,7 +119,7 @@ export function NESALandingPage() {
         <NESAFooter />
       </div>
 
-      {/* Engagement Hooks - Reduce bounce rate */}
+      {/* Engagement Hooks */}
       <ExitIntentPopup />
       <EngagementToast />
     </>
