@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Award, Building2, MapPin, RotateCcw, ThumbsUp, Loader2, Globe2, Plane } from "lucide-react";
+import { Award, Building2, MapPin, RotateCcw, ThumbsUp, Loader2, Globe2, Plane, Heart } from "lucide-react";
 import { NESAStamp } from "@/components/nesa/NESALogo";
 import { type NomineeImageType, isOrganization, normalizeYearReferences } from "@/lib/nesaData";
 import { NomineeActions, type NomineeActionsData } from "@/components/nominees";
@@ -25,6 +25,8 @@ export interface NomineeCardData {
   country?: string;
   /** Whether this is a person photo or organization logo */
   imageType?: NomineeImageType;
+  /** Geographic category for display context */
+  geographicCategory?: string;
 }
 
 interface NomineeCardProps {
@@ -156,14 +158,19 @@ export const NomineeCard = forwardRef<HTMLDivElement, NomineeCardProps>(function
             </Badge>
           )}
 
-          {/* Diaspora-specific: Residence Region + Country of Origin */}
+          {/* Diaspora / Friends of Africa: subcategory + country context */}
           {nominee.subcategoryName && (
             <div className="mt-3 space-y-1.5 w-full">
               <div className="flex items-center justify-center gap-1 text-xs text-ivory/60">
-                <Plane className="w-3 h-3 text-gold/60" />
+                {nominee.geographicCategory === "friends-of-africa" ? (
+                  <Heart className="w-3 h-3 text-rose-400/60" />
+                ) : (
+                  <Plane className="w-3 h-3 text-gold/60" />
+                )}
                 <span className="line-clamp-1">
                   {nominee.subcategoryName
                     .replace(/^the best diaspora-led educational\s*/i, '')
+                    .replace(/^the best\s*/i, '')
                     .replace(/\s+/g, ' ')
                     .trim()}
                 </span>
@@ -171,7 +178,11 @@ export const NomineeCard = forwardRef<HTMLDivElement, NomineeCardProps>(function
               {nominee.country && (
                 <div className="flex items-center justify-center gap-1 text-xs text-ivory/40">
                   <Globe2 className="w-3 h-3 text-gold/40" />
-                  <span>Origin: {nominee.country}</span>
+                  <span>
+                    {nominee.geographicCategory === "friends-of-africa" 
+                      ? `Based in: ${nominee.country}` 
+                      : `Origin: ${nominee.country}`}
+                  </span>
                 </div>
               )}
             </div>

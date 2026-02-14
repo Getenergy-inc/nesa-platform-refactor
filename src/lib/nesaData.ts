@@ -694,6 +694,29 @@ export function getDiasporaSubgroups(): { id: string; name: string; nomineeCount
 }
 
 /**
+ * Get Friends of Africa sub-groups (by subcategory title which represents contribution area)
+ */
+export function getFriendsOfAfricaSubgroups(): { id: string; name: string; nomineeCount: number }[] {
+  const allNominees = getAllNominees();
+  const friendsNominees = allNominees.filter(n => n.geographicCategory === "friends-of-africa");
+  
+  // Group by subcategory title (contribution area)
+  const subgroupMap: Record<string, number> = {};
+  friendsNominees.forEach(n => {
+    const key = n.subcategoryTitle || n.awardTitle || "Other";
+    subgroupMap[key] = (subgroupMap[key] || 0) + 1;
+  });
+  
+  return Object.entries(subgroupMap)
+    .map(([name, count]) => ({
+      id: generateSlug(name),
+      name,
+      nomineeCount: count,
+    }))
+    .sort((a, b) => b.nomineeCount - a.nomineeCount);
+}
+
+/**
  * Get a single nominee by slug
  */
 export function getNomineeBySlug(slug: string): EnrichedNominee | undefined {
