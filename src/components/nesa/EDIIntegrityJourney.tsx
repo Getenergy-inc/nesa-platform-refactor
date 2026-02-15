@@ -9,6 +9,7 @@
  */
 
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import { motion } from "framer-motion";
 import { 
   Shield, FileText, CheckCircle, Scale, Vote, 
@@ -82,6 +83,7 @@ const INTEGRITY_STEPS = [
 ];
 
 export function EDIIntegrityJourney() {
+  const { t } = useTranslation("pages");
   return (
     <section className="relative py-16 md:py-24 overflow-hidden">
       {/* Background */}
@@ -107,15 +109,14 @@ export function EDIIntegrityJourney() {
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gold/10 border border-gold/25 mb-4">
             <Shield className="h-4 w-4 text-gold" />
             <span className="text-sm font-medium text-gold uppercase tracking-wider">
-              Governance & Integrity
+              {t("ediIntegrity.badge")}
             </span>
           </div>
           <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4">
-            The EDI Integrity Wall
+            {t("ediIntegrity.title")}
           </h2>
           <p className="text-white/60 max-w-2xl mx-auto text-lg">
-            Every stage of the NESA-Africa awards process is governed by the Education Development Index — 
-            from nomination to final voting.
+            {t("ediIntegrity.description")}
           </p>
         </motion.div>
 
@@ -253,7 +254,7 @@ export function EDIIntegrityJourney() {
               className="border-gold/40 text-gold hover:bg-gold/10 rounded-full gap-2"
             >
               <BookOpen className="h-4 w-4" />
-              View Full EDI Matrix & Guidelines
+              {t("ediIntegrity.viewFullGuidelines")}
               <ArrowRight className="h-4 w-4" />
             </Button>
           </Link>

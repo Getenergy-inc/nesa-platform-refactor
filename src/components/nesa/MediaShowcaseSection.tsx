@@ -4,6 +4,7 @@
 import { useState, useRef, useEffect } from "react";
 import { Tv, PlayCircle, Radio, Music, Play, Pause, ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
 import nesaSong1Cover from "@/assets/nesa-africa-song-1.jpeg";
@@ -81,6 +82,7 @@ function MiniPlayer({ song, isPlaying, onToggle }: {
 }
 
 export function MediaShowcaseSection() {
+  const { t } = useTranslation("pages");
   const [currentlyPlaying, setCurrentlyPlaying] = useState<string | null>(null);
   const audioRef = useRef<HTMLAudioElement | null>(null);
 
@@ -120,10 +122,10 @@ export function MediaShowcaseSection() {
           className="text-center mb-12"
         >
           <h2 className="font-display text-3xl md:text-4xl font-bold text-ivory mb-2">
-            Watch, Listen <span className="text-primary">&amp; Engage</span>
+            {t("mediaShowcase.title")} <span className="text-primary">{t("mediaShowcase.titleHighlight")}</span>
           </h2>
           <p className="text-ivory/60 max-w-xl mx-auto">
-            Stay connected through official media, live broadcasts, and the NESA Africa soundtracks.
+            {t("mediaShowcase.description")}
           </p>
         </motion.div>
 
@@ -165,7 +167,7 @@ export function MediaShowcaseSection() {
               <Link to="/media">
                 <Button className="rounded-full gap-2 bg-primary hover:bg-primary/90 text-primary-foreground font-semibold">
                   <PlayCircle className="h-4 w-4" />
-                  Explore Media Hub
+                  {t("mediaShowcase.exploreMediaHub")}
                   <ArrowRight className="h-4 w-4" />
                 </Button>
               </Link>
@@ -182,7 +184,7 @@ export function MediaShowcaseSection() {
             <div className="rounded-2xl border border-ivory/8 bg-secondary/60 p-5">
               <div className="flex items-center gap-2 mb-4">
                 <Music className="h-4 w-4 text-primary" />
-                <h3 className="text-sm font-semibold text-primary uppercase tracking-wider">Official Music</h3>
+                <h3 className="text-sm font-semibold text-primary uppercase tracking-wider">{t("mediaShowcase.officialMusic")}</h3>
               </div>
 
               <div className="space-y-3">
@@ -199,7 +201,7 @@ export function MediaShowcaseSection() {
               <Link to="/music" className="block mt-4">
                 <Button variant="outline" className="w-full rounded-full gap-2 border-primary/25 text-primary hover:bg-primary/10">
                   <Music className="h-4 w-4" />
-                  Listen & Download
+                  {t("mediaShowcase.listenDownload")}
                 </Button>
               </Link>
             </div>
