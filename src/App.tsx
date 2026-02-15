@@ -84,6 +84,7 @@ import Donate from "./pages/Donate";
 import EduAid from "./pages/EduAid";
 import Rebuild from "./pages/Rebuild";
 import Judges from "./pages/Judges";
+import Install from "./pages/Install";
 
 // Judge Portal Pages
 import { JudgeApply, JudgeStatus, JudgeSignup, JudgeVerify, JudgeDashboard, JudgePortal, JuryScoring, JuryCOI, JudgeRubric, JudgeGuidelines, JudgePanel, JudgeHelp, JudgeSettings, JudgeChatRoom, JudgeIconLifetime } from "./pages/judge";
@@ -300,6 +301,7 @@ const App = () => (
                 <Route path="/eduaid" element={<WithLayout><EduAid /></WithLayout>} />
                 <Route path="/rebuild" element={<WithLayout><Rebuild /></WithLayout>} />
                 <Route path="/judges" element={<WithLayout><Judges /></WithLayout>} />
+                <Route path="/install" element={<Install />} />
                 
                 {/* Judge Application Flow (Public) */}
                 <Route path="/judge/apply" element={<WithLayout><JudgeApply /></WithLayout>} />

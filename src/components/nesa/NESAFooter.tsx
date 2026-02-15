@@ -22,7 +22,7 @@ export function NESAFooter() {
   ];
 
   return (
-    <footer className="bg-charcoal border-t border-gold/20 pt-12 pb-6">
+    <footer className="bg-charcoal border-t border-gold/20 pt-12 pb-20 lg:pb-6">
       <div className="container">
         <div className="grid md:grid-cols-3 gap-8 mb-8">
           {/* Brand */}
