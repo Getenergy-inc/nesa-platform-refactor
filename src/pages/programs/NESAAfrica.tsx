@@ -64,10 +64,15 @@ export default function NESAAfrica() {
         {/* What's Happening Now */}
         <WhatsLiveSection />
         
+        {/* === AWARDS OVERVIEW === */}
+        <LazySection>
+          <CategoriesSection />
+        </LazySection>
+        
         {/* Choose Your Path */}
         <NominationPathsCards />
         
-        {/* === BELOW FOLD — Lazy Loaded === */}
+        {/* === BELOW FOLD — Voting & Governance === */}
         
         {/* How It Works */}
         <LazySection>
@@ -79,11 +84,6 @@ export default function NESAAfrica() {
           <VoteWithAGCSection />
         </LazySection>
         
-        {/* Legacy Impact */}
-        <LazySection>
-          <LegacyImpactSection />
-        </LazySection>
-
         {/* Integrity & Governance */}
         <LazySection>
           <IntegritySection />
@@ -93,6 +93,8 @@ export default function NESAAfrica() {
         <LazySection>
           <UpcomingEventsSection />
         </LazySection>
+        
+        {/* === CHAMPIONS & MEDIA === */}
         
         {/* Media */}
         <LazySection>
@@ -109,10 +111,14 @@ export default function NESAAfrica() {
           <EducationChampionsDirectory />
         </LazySection>
         
-        {/* Categories Overview */}
+        {/* === LEGACY === */}
+        
+        {/* Legacy Impact */}
         <LazySection>
-          <CategoriesSection />
+          <LegacyImpactSection />
         </LazySection>
+        
+        {/* === CLOSING === */}
         
         {/* Partners & Sponsors */}
         <LazySection>
