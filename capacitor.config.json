@@ -1,0 +1,9 @@
+{
+  "appId": "app.lovable.0dccfe96032e496e82bdc8af7c5b9e55",
+  "appName": "nesaafrica",
+  "webDir": "dist",
+  "server": {
+    "url": "https://0dccfe96-032e-496e-82bd-c8af7c5b9e55.lovableproject.com?forceHideBadge=true",
+    "cleartext": true
+  }
+}
