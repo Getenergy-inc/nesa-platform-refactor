@@ -424,6 +424,58 @@ export type Database = {
         }
         Relationships: []
       }
+      certificate_downloads: {
+        Row: {
+          certificate_id: string
+          downloaded_at: string
+          id: string
+          ip_address: string | null
+          nominee_id: string
+          user_agent: string | null
+          user_id: string
+        }
+        Insert: {
+          certificate_id: string
+          downloaded_at?: string
+          id?: string
+          ip_address?: string | null
+          nominee_id: string
+          user_agent?: string | null
+          user_id: string
+        }
+        Update: {
+          certificate_id?: string
+          downloaded_at?: string
+          id?: string
+          ip_address?: string | null
+          nominee_id?: string
+          user_agent?: string | null
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "certificate_downloads_certificate_id_fkey"
+            columns: ["certificate_id"]
+            isOneToOne: false
+            referencedRelation: "certificates"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "certificate_downloads_nominee_id_fkey"
+            columns: ["nominee_id"]
+            isOneToOne: false
+            referencedRelation: "nominees"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "certificate_downloads_nominee_id_fkey"
+            columns: ["nominee_id"]
+            isOneToOne: false
+            referencedRelation: "public_nominees"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       certificate_verifications: {
         Row: {
           certificate_id: string

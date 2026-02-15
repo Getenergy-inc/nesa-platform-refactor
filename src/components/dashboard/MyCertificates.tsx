@@ -55,6 +55,7 @@ const tierConfig: Record<string, {
 
 interface Certificate {
   id: string;
+  nominee_id: string;
   tier: string;
   verification_code: string;
   issued_at: string;
@@ -97,6 +98,7 @@ export function MyCertificates() {
         .from("certificates")
         .select(`
           id,
+          nominee_id,
           tier,
           verification_code,
           issued_at,
@@ -120,6 +122,7 @@ export function MyCertificates() {
 
       return (data || []).map((cert) => ({
         id: cert.id,
+        nominee_id: cert.nominee_id,
         tier: cert.tier,
         verification_code: cert.verification_code,
         issued_at: cert.issued_at,
@@ -151,6 +154,17 @@ export function MyCertificates() {
 
       const filename = `NESA-${cert.tier}-certificate-${cert.verification_code}.pdf`;
       downloadCertificatePDF(blob, filename);
+
+      // Log download for audit trail
+      if (user) {
+        supabase.from("certificate_downloads").insert({
+          user_id: user.id,
+          certificate_id: cert.id,
+          nominee_id: cert.nominee_id,
+        }).then(({ error }) => {
+          if (error) console.warn("Failed to log certificate download:", error);
+        });
+      }
 
       toast({
         title: "Certificate Downloaded",
