@@ -1,7 +1,8 @@
-import { Trophy, Vote, Heart, ArrowRight, MapPin, GraduationCap, Calendar, Users, Star } from "lucide-react";
+import { Trophy, Vote, Heart, ArrowRight, MapPin, GraduationCap, Calendar, Users, Star, ChevronDown } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
+import { useState } from "react";
 import legacyRebuildImg from "@/assets/rebuild/rebuild-school-backdrop.jpg";
 import africaMapImg from "@/assets/africa-map-silhouette.png";
 
@@ -18,6 +19,52 @@ const timeline = [
   { phase: "Vote", period: "Jul – Sep 2026", description: "Public voting determines the winning school per region via AGC points", icon: Vote },
   { phase: "Intervene", period: "Oct 2026 – Jun 2027", description: "EduAid-Africa delivers facility upgrades, resources, and teacher training", icon: Heart },
 ];
+
+const ctaActions = [
+  { label: "Explore Rebuild My School Africa", icon: Heart, to: "/rebuild" },
+  { label: "Nominate a School", icon: GraduationCap, to: "/rebuild#nominate" },
+  { label: "Support EduAid-Africa", icon: ArrowRight, to: "/eduaid" },
+  { label: "Make a Donation", icon: Star, to: "/donate" },
+];
+
+function CTADropdown() {
+  const [open, setOpen] = useState(false);
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 16 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ delay: 0.2 }}
+      viewport={{ once: true }}
+      className="flex justify-center"
+    >
+      <div className="relative inline-block">
+        <Button
+          onClick={() => setOpen(!open)}
+          className="rounded-full gap-2 font-semibold bg-emerald-600 hover:bg-emerald-700 text-white px-6"
+        >
+          <Heart className="h-4 w-4" />
+          Get Involved
+          <ChevronDown className={`h-4 w-4 transition-transform ${open ? "rotate-180" : ""}`} />
+        </Button>
+        {open && (
+          <div className="absolute left-1/2 -translate-x-1/2 mt-2 w-72 rounded-xl bg-secondary border border-ivory/10 shadow-xl z-50 overflow-hidden">
+            {ctaActions.map((action) => (
+              <Link
+                key={action.label}
+                to={action.to}
+                onClick={() => setOpen(false)}
+                className="flex items-center gap-3 px-4 py-3 text-sm text-ivory/80 hover:bg-emerald-500/10 hover:text-emerald-400 transition-colors"
+              >
+                <action.icon className="h-4 w-4 text-emerald-400/70 flex-shrink-0" />
+                {action.label}
+              </Link>
+            ))}
+          </div>
+        )}
+      </div>
+    </motion.div>
+  );
+}
 
 export function LegacyImpactSection() {
   return (
@@ -41,16 +88,16 @@ export function LegacyImpactSection() {
           viewport={{ once: true }}
           className="text-center max-w-3xl mx-auto mb-12"
         >
-          <span className="inline-block px-4 py-1.5 rounded-full bg-primary/10 border border-primary/20 text-primary text-sm font-medium mb-4 tracking-wide">
+          <span className="inline-block px-4 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-sm font-medium mb-4 tracking-wide">
             Post-Award Legacy • SCEF Social Impact
           </span>
           <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold text-ivory mb-4">
             Rebuild My School{" "}
-            <span className="text-primary">Africa</span>
+            <span className="text-emerald-400">Africa</span>
           </h2>
           <p className="text-ivory/60 text-lg leading-relaxed max-w-2xl mx-auto">
             One special needs school per region — nominated by communities, selected by public vote, 
-            and upgraded through EduAid-Africa. Recognition becomes real impact.
+            and upgraded through <span className="text-emerald-400 font-medium">EduAid-Africa</span>. Recognition becomes real impact.
           </p>
         </motion.div>
 
@@ -63,18 +110,17 @@ export function LegacyImpactSection() {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ delay: index * 0.1 }}
               viewport={{ once: true }}
-              className="relative bg-secondary/50 backdrop-blur-sm rounded-2xl p-6 border border-ivory/8 hover:border-primary/20 transition-all duration-300"
+              className="relative bg-secondary/50 backdrop-blur-sm rounded-2xl p-6 border border-ivory/8 hover:border-emerald-500/20 transition-all duration-300"
             >
-              {/* Step number */}
-              <span className="absolute -top-3 left-5 px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-primary text-primary-foreground">
+              <span className="absolute -top-3 left-5 px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-emerald-500 text-white">
                 Step {index + 1}
               </span>
 
-              <div className="w-11 h-11 rounded-xl flex items-center justify-center mb-4 bg-primary/10 border border-primary/15">
-                <step.icon className="h-5 w-5 text-primary" />
+              <div className="w-11 h-11 rounded-xl flex items-center justify-center mb-4 bg-emerald-500/10 border border-emerald-500/15">
+                <step.icon className="h-5 w-5 text-emerald-400" />
               </div>
               <h3 className="text-lg font-display font-bold text-ivory mb-1">{step.phase}</h3>
-              <p className="text-primary/70 text-xs font-medium mb-2">{step.period}</p>
+              <p className="text-emerald-400/70 text-xs font-medium mb-2">{step.period}</p>
               <p className="text-ivory/50 text-sm leading-relaxed">{step.description}</p>
             </motion.div>
           ))}
@@ -100,10 +146,10 @@ export function LegacyImpactSection() {
                 whileInView={{ opacity: 1, scale: 1 }}
                 transition={{ delay: index * 0.06 }}
                 viewport={{ once: true }}
-                className="rounded-xl border border-ivory/8 bg-secondary/40 p-4 text-center hover:border-primary/20 transition-all duration-300"
+                className="rounded-xl border border-ivory/8 bg-secondary/40 p-4 text-center hover:border-emerald-500/20 transition-all duration-300"
               >
-                <div className="w-9 h-9 rounded-lg bg-primary/10 border border-primary/15 flex items-center justify-center mx-auto mb-3">
-                  <MapPin className="h-4 w-4 text-primary/70" />
+                <div className="w-9 h-9 rounded-lg bg-emerald-500/10 border border-emerald-500/15 flex items-center justify-center mx-auto mb-3">
+                  <MapPin className="h-4 w-4 text-emerald-400/70" />
                 </div>
                 <h4 className="text-sm font-display font-bold text-ivory mb-1">{region.name}</h4>
                 <p className="text-ivory/35 text-[11px] leading-snug">{region.description}</p>
@@ -124,7 +170,7 @@ export function LegacyImpactSection() {
         >
           <div className="rounded-2xl border border-ivory/8 bg-secondary/40 backdrop-blur-sm p-6">
             <div className="flex items-center gap-2 mb-4">
-              <GraduationCap className="h-5 w-5 text-primary" />
+              <GraduationCap className="h-5 w-5 text-emerald-400" />
               <h3 className="font-display text-lg font-bold text-ivory">EduAid-Africa Intervention Areas</h3>
             </div>
             <div className="grid sm:grid-cols-2 gap-3">
@@ -135,7 +181,7 @@ export function LegacyImpactSection() {
                 { icon: Calendar, label: "WASH infrastructure & accessibility upgrades" },
               ].map((item) => (
                 <div key={item.label} className="flex items-start gap-2.5 text-sm text-ivory/60">
-                  <item.icon className="h-4 w-4 text-primary/60 mt-0.5 flex-shrink-0" />
+                  <item.icon className="h-4 w-4 text-emerald-400/60 mt-0.5 flex-shrink-0" />
                   <span>{item.label}</span>
                 </div>
               ))}
@@ -143,28 +189,8 @@ export function LegacyImpactSection() {
           </div>
         </motion.div>
 
-        {/* CTA */}
-        <motion.div
-          initial={{ opacity: 0, y: 16 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.2 }}
-          viewport={{ once: true }}
-          className="flex flex-col sm:flex-row items-center justify-center gap-4"
-        >
-          <Link to="/rebuild">
-            <Button className="rounded-full gap-2 font-semibold bg-primary hover:bg-primary/90 text-primary-foreground px-6">
-              <Heart className="h-4 w-4" />
-              Explore Rebuild My School Africa
-              <ArrowRight className="h-4 w-4" />
-            </Button>
-          </Link>
-          <Link to="/rebuild#nominate">
-            <Button variant="outline" className="rounded-full gap-2 border-primary/25 text-primary hover:bg-primary/10 px-6">
-              <GraduationCap className="h-4 w-4" />
-              Nominate a School
-            </Button>
-          </Link>
-        </motion.div>
+        {/* CTA Dropdown */}
+        <CTADropdown />
 
         {/* Bottom tagline */}
         <motion.p
