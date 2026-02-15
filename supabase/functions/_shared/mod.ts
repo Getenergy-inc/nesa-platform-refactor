@@ -4,7 +4,7 @@
  * Re-exports all shared utilities for convenient imports in Edge Functions.
  * 
  * @example
- * import { corsHeaders, ok, err, createUserClient, getAuthUser, hasRole } from "../_shared/index.ts";
+ * import { corsHeaders, ok, err, createUserClient, getAuthUser, hasRole } from "../_shared/mod.ts";
  */
 
 // CORS utilities

@@ -16,7 +16,7 @@ import {
   err,
   createUserClient,
   getAuthUser,
-} from "../_shared/index.ts";
+} from "../_shared/mod.ts";
 
 // Allowed MIME types for evidence uploads
 const ALLOWED_MIME_TYPES = [

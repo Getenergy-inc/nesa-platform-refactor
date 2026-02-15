@@ -15,7 +15,7 @@ import {
   err,
   createAdminClient,
   getAuthUser,
-} from "../_shared/index.ts";
+} from "../_shared/mod.ts";
 
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
 
