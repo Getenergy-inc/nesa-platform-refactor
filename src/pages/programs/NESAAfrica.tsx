@@ -16,6 +16,7 @@ const VoteWithAGCSection = lazy(() => import("@/components/nesa/VoteWithAGCSecti
 const HowItWorksVisual = lazy(() => import("@/components/nesa/HowItWorksVisual").then(m => ({ default: m.HowItWorksVisual })));
 const LegacyImpactSection = lazy(() => import("@/components/nesa/LegacyImpactSection").then(m => ({ default: m.LegacyImpactSection })));
 const IntegritySection = lazy(() => import("@/components/nesa/IntegritySection").then(m => ({ default: m.IntegritySection })));
+const EDIIntegrityJourney = lazy(() => import("@/components/nesa/EDIIntegrityJourney").then(m => ({ default: m.EDIIntegrityJourney })));
 const UpcomingEventsSection = lazy(() => import("@/components/nesa/UpcomingEventsSection").then(m => ({ default: m.UpcomingEventsSection })));
 const WatchSection = lazy(() => import("@/components/nesa/WatchSection").then(m => ({ default: m.WatchSection })));
 const NESAMusicSection = lazy(() => import("@/components/nesa/NESAMusicSection").then(m => ({ default: m.NESAMusicSection })));
@@ -87,6 +88,11 @@ export default function NESAAfrica() {
         {/* Integrity & Governance */}
         <LazySection>
           <IntegritySection />
+        </LazySection>
+        
+        {/* EDI Integrity Wall — Full Lifecycle Journey */}
+        <LazySection>
+          <EDIIntegrityJourney />
         </LazySection>
         
         {/* Key Dates */}
