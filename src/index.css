@@ -175,6 +175,20 @@
     box-shadow: var(--shadow-card);
   }
 
+  /* ── EduAid-Africa Scoped Brand Tokens ── */
+  /* Navy + Green + Gold palette — NEVER overrides global NESA theme */
+  .eduaid-scope {
+    --eduaid-navy: 210 45% 18%;
+    --eduaid-navy-light: 210 40% 28%;
+    --eduaid-green: 160 84% 25%;
+    --eduaid-green-light: 160 70% 38%;
+    --eduaid-gold: 42 85% 52%;
+    --eduaid-muted-bg: 210 30% 96%;
+    --eduaid-border-soft: 210 20% 88%;
+    --eduaid-text: 210 20% 95%;
+    --eduaid-text-muted: 210 15% 75%;
+  }
+
   .shine {
     position: relative;
     overflow: hidden;
