@@ -21,7 +21,7 @@ import {
   getAuthUser,
   hasRole,
   hasRoleCode,
-} from "../_shared/index.ts";
+} from "../_shared/mod.ts";
 
 import { SupabaseClient } from "https://esm.sh/@supabase/supabase-js@2";
 

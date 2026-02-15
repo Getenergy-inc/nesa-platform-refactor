@@ -19,7 +19,7 @@ import {
   getAuthUser,
   hasRole,
   hasRoleCode,
-} from "../_shared/index.ts";
+} from "../_shared/mod.ts";
 
 Deno.serve(async (req) => {
   if (req.method === "OPTIONS") {
