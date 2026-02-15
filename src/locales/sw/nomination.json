@@ -51,5 +51,11 @@
     "submitted": "Uteuzi umewasilishwa kwa mafanikio!",
     "thankYou": "Asante kwa uteuzi wako. Mteuliwa atapokea barua ya kukubali.",
     "error": "Imeshindwa kuwasilisha. Tafadhali jaribu tena."
+  },
+  "renomination": {
+    "title": "Teua Tena",
+    "description": "Wasilisha idhini mpya kwa mteuliwa huyu",
+    "success": "Uteuzi mpya umewasilishwa kwa mafanikio!",
+    "error": "Imeshindwa kuwasilisha uteuzi mpya. Tafadhali jaribu tena."
   }
 }

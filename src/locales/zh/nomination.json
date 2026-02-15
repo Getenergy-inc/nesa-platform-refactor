@@ -51,5 +51,11 @@
     "submitted": "提名提交成功！",
     "thankYou": "感谢您的提名。被提名人将收到接受信函。",
     "error": "提交失败，请重试。"
+  },
+  "renomination": {
+    "title": "重新提名",
+    "description": "为此被提名人提交新的支持",
+    "success": "重新提名提交成功！",
+    "error": "重新提名提交失败。请重试。"
   }
 }

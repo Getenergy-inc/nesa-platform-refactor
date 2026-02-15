@@ -51,5 +51,11 @@
     "submitted": "Ukuqokwa kuthunyelwe ngempumelelo!",
     "thankYou": "Siyabonga ngokuqoka kwakho. Oqokiwe uzothola incwadi yokwamukela.",
     "error": "Yehlulekile ukuthumela. Sicela uzame futhi."
+  },
+  "renomination": {
+    "title": "Phinda Uqoke",
+    "description": "Thumela ukwesekela okusha komuntu oqokiwe",
+    "success": "Ukuphinda ukuqoka kuthunyelwe ngempumelelo!",
+    "error": "Ukuphinda ukuqoka kuhlulekile. Sicela uzame futhi."
   }
 }

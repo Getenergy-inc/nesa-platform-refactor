@@ -51,5 +51,11 @@
     "submitted": "Nomeação enviada com sucesso!",
     "thankYou": "Obrigado pela nomeação. O nomeado receberá uma carta de aceitação.",
     "error": "Falha ao enviar. Por favor, tente novamente."
+  },
+  "renomination": {
+    "title": "Renomear",
+    "description": "Submeter um novo apoio para este nomeado",
+    "success": "Renomeação enviada com sucesso!",
+    "error": "Falha ao enviar renomeação. Tente novamente."
   }
 }
