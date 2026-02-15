@@ -7,25 +7,25 @@ export function IntegritySection() {
       icon: Shield,
       title: "Platinum",
       description: "Non-competitive. Verification + governance checks.",
-      iconColor: "text-slate-400",
+      iconColor: "text-ivory/60",
     },
     {
       icon: Vote,
       title: "Gold",
       description: "Public participation only. Transparent audit trail.",
-      iconColor: "text-amber-400",
+      iconColor: "text-primary",
     },
     {
       icon: Scale,
       title: "Blue Garnet",
       description: "Jury + public participation balance. Anti-fraud controls.",
-      iconColor: "text-blue-400",
+      iconColor: "text-accent",
     },
     {
       icon: Users,
       title: "Sponsors",
       description: "Sponsors and endorsers cannot influence winners.",
-      iconColor: "text-emerald-400",
+      iconColor: "text-primary/70",
     },
   ];
 

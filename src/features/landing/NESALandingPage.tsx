@@ -1,6 +1,6 @@
 // NESA-Africa Landing Page Feature
 // Marketing-led welcome page with visual storytelling and governance integrity
-// Optimized for low bounce rate with lazy loading and engagement hooks
+// Consolidated 8-block editorial flow with lazy loading
 
 import { lazy } from "react";
 import { Helmet } from "react-helmet-async";
@@ -17,18 +17,17 @@ import { ExitIntentPopup } from "@/components/nesa/ExitIntentPopup";
 import { EngagementToast } from "@/components/nesa/EngagementToast";
 import { useSeason } from "@/contexts/SeasonContext";
 
-// Lazy load below-fold sections to improve initial load time
-const VoteWithAGCSection = lazy(() => import("@/components/nesa/VoteWithAGCSection").then(m => ({ default: m.VoteWithAGCSection })));
+// Lazy load below-fold sections
 const HowItWorksVisual = lazy(() => import("@/components/nesa/HowItWorksVisual").then(m => ({ default: m.HowItWorksVisual })));
+const CategoriesSection = lazy(() => import("@/components/nesa/CategoriesSection").then(m => ({ default: m.CategoriesSection })));
+const VoteWithAGCSection = lazy(() => import("@/components/nesa/VoteWithAGCSection").then(m => ({ default: m.VoteWithAGCSection })));
+const EducationChampionsDirectory = lazy(() => import("@/components/nesa/EducationChampionsDirectory").then(m => ({ default: m.EducationChampionsDirectory })));
 const LegacyImpactSection = lazy(() => import("@/components/nesa/LegacyImpactSection").then(m => ({ default: m.LegacyImpactSection })));
 const IntegritySection = lazy(() => import("@/components/nesa/IntegritySection").then(m => ({ default: m.IntegritySection })));
+const MediaShowcaseSection = lazy(() => import("@/components/nesa/MediaShowcaseSection").then(m => ({ default: m.MediaShowcaseSection })));
 const UpcomingEventsSection = lazy(() => import("@/components/nesa/UpcomingEventsSection").then(m => ({ default: m.UpcomingEventsSection })));
-const WatchSection = lazy(() => import("@/components/nesa/WatchSection").then(m => ({ default: m.WatchSection })));
-const NESAMusicSection = lazy(() => import("@/components/nesa/NESAMusicSection").then(m => ({ default: m.NESAMusicSection })));
-const EducationChampionsDirectory = lazy(() => import("@/components/nesa/EducationChampionsDirectory").then(m => ({ default: m.EducationChampionsDirectory })));
-const SponsorsSection = lazy(() => import("@/components/nesa/SponsorsSection").then(m => ({ default: m.SponsorsSection })));
 const JudgesSection = lazy(() => import("@/components/nesa/JudgesSection").then(m => ({ default: m.JudgesSection })));
-const CategoriesSection = lazy(() => import("@/components/nesa/CategoriesSection").then(m => ({ default: m.CategoriesSection })));
+const SponsorsSection = lazy(() => import("@/components/nesa/SponsorsSection").then(m => ({ default: m.SponsorsSection })));
 const FinalCTASection = lazy(() => import("@/components/nesa/FinalCTASection").then(m => ({ default: m.FinalCTASection })));
 
 export function NESALandingPage() {
@@ -53,30 +52,42 @@ export function NESALandingPage() {
       <div className="min-h-screen bg-charcoal">
         <NESAHeader />
         
-        {/* 1. Trophy Hero — Above fold */}
+        {/* ═══ ABOVE FOLD ═══ */}
+        
+        {/* 1. Hero — Trophy + Value Prop */}
         <TrophyHeroSection />
         
-        {/* 2. Trust Logos Strip — Above fold */}
+        {/* 2. Trust Strip — Grayscale partner logos */}
         <TrustLogosStrip />
         
-        {/* 3. Quick Action Bar — Mobile-sticky CTAs */}
+        {/* 3. Quick Actions — Sticky mobile CTAs */}
         <QuickActionBar />
         
-        {/* 4. What's Live — Dynamic blocks */}
+        {/* 4. What's Live — Dynamic engagement blocks */}
         <WhatsLiveSection />
         
-        {/* 5. Nomination Paths — Scannable cards */}
+        {/* 5. Nomination Paths — Scannable entry points */}
         <NominationPathsCards />
         
-        {/* === BELOW FOLD === */}
+        {/* ═══ BELOW FOLD — Conversion & Discovery ═══ */}
         
         <LazySection>
           <HowItWorksVisual />
         </LazySection>
         
         <LazySection>
+          <CategoriesSection />
+        </LazySection>
+        
+        <LazySection>
           <VoteWithAGCSection />
         </LazySection>
+        
+        <LazySection>
+          <EducationChampionsDirectory />
+        </LazySection>
+        
+        {/* ═══ BELOW FOLD — Legacy & Governance ═══ */}
         
         <LazySection>
           <LegacyImpactSection />
@@ -87,29 +98,23 @@ export function NESALandingPage() {
         </LazySection>
         
         <LazySection>
+          <JudgesSection />
+        </LazySection>
+        
+        {/* ═══ BELOW FOLD — Media & Events ═══ */}
+        
+        <LazySection>
+          <MediaShowcaseSection />
+        </LazySection>
+        
+        <LazySection>
           <UpcomingEventsSection />
         </LazySection>
         
-        <LazySection>
-          <WatchSection />
-        </LazySection>
-        
-        <LazySection>
-          <NESAMusicSection />
-        </LazySection>
-        
-        <LazySection>
-          <EducationChampionsDirectory />
-        </LazySection>
+        {/* ═══ CLOSING ═══ */}
         
         <LazySection>
           <SponsorsSection />
-        </LazySection>
-        <LazySection>
-          <JudgesSection />
-        </LazySection>
-        <LazySection>
-          <CategoriesSection />
         </LazySection>
         
         <LazySection>
