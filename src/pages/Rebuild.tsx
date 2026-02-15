@@ -1,596 +1,407 @@
-// Rebuild My School Africa Landing Page
-// Infrastructure development initiative for special needs education facilities
+// Rebuild My School Africa — EduAid-Africa Post-Award Legacy Page
+// Community-nominated, publicly-voted special needs school interventions
 
 import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
-import { 
-  Building2, 
-  Heart, 
-  MapPin, 
-  Users, 
-  Target, 
-  CheckCircle2,
+import { motion } from "framer-motion";
+import {
+  Heart,
+  MapPin,
+  Users,
   ArrowRight,
   Globe,
   School,
+  GraduationCap,
+  Trophy,
+  Vote,
+  CheckCircle2,
+  Calendar,
+  Star,
+  BookOpen,
+  Accessibility,
+  Eye,
+  Ear,
+  Brain,
+  HandHeart,
+  Building2,
+  Landmark,
+  Baby,
+  Laptop,
   Hammer,
-  ExternalLink
+  Sparkles,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 
-// Import school images
-import westAfricaSchool from "@/assets/schools/west-africa-special-needs-school.jpg";
-import eastAfricaSchool from "@/assets/schools/east-africa-special-needs-school.jpg";
-import southernAfricaSchool from "@/assets/schools/southern-africa-special-needs-school.jpg";
-import centralAfricaSchool from "@/assets/schools/central-africa-special-needs-school.jpg";
-import northAfricaSchool from "@/assets/schools/north-africa-special-needs-school.jpg";
+// Images
+import heroImg from "@/assets/rebuild/hero-special-needs-school.jpg";
+import formalSchoolImg from "@/assets/rebuild/formal-school.jpg";
+import informalSchoolImg from "@/assets/rebuild/informal-school.jpg";
+import vocationalImg from "@/assets/rebuild/vocational-center.jpg";
+import africaMapImg from "@/assets/africa-map-silhouette.png";
 
-// SCEF Color theme for RMSA
-const rmsaColors = {
-  primary: "#8b6914", // Brown
-  secondary: "#4a7c23", // Green
-  accent: "#d4a017", // Gold accent
-};
+// ─── DATA ────────────────────────────────────────────────────────────────────
 
-// Featured Special Needs Schools - One per African Region
-const featuredSchools = [
-  {
-    name: "Hope Academy for Special Needs",
-    region: "West Africa",
-    country: "Nigeria",
-    location: "Lagos State",
-    students: 245,
-    needs: ["Wheelchair ramps", "Sensory rooms", "Accessible toilets"],
-    status: "Priority Project",
-    image: westAfricaSchool,
-    description: "A pioneering special needs school serving children with physical and learning disabilities in Lagos. Currently lacking basic accessibility infrastructure.",
-  },
-  {
-    name: "Sunrise Inclusive School",
-    region: "East Africa",
-    country: "Kenya",
-    location: "Nairobi County",
-    students: 180,
-    needs: ["Assistive technology", "Teacher training", "Classroom renovation"],
-    status: "In Progress",
-    image: eastAfricaSchool,
-    description: "Serving deaf and hearing-impaired students in Kenya's capital. Needs modern assistive devices and renovated learning spaces.",
-  },
-  {
-    name: "Rainbow Learning Centre",
-    region: "Southern Africa",
-    country: "South Africa",
-    location: "Johannesburg",
-    students: 312,
-    needs: ["Therapy rooms", "Playground equipment", "Transport vehicles"],
-    status: "Fundraising",
-    image: southernAfricaSchool,
-    description: "One of the largest special needs facilities in Gauteng, supporting children with autism and developmental disabilities.",
-  },
-  {
-    name: "Unity Special Education Centre",
-    region: "Central Africa",
-    country: "Cameroon",
-    location: "Yaoundé",
-    students: 156,
-    needs: ["Building expansion", "Medical room", "Learning materials"],
-    status: "Assessment Phase",
-    image: centralAfricaSchool,
-    description: "A community-driven school providing education to children with various disabilities in Cameroon's capital city.",
-  },
-  {
-    name: "Al-Noor Inclusive Academy",
-    region: "North Africa",
-    country: "Morocco",
-    location: "Casablanca",
-    students: 198,
-    needs: ["Elevator installation", "Braille resources", "Staff training"],
-    status: "Priority Project",
-    image: northAfricaSchool,
-    description: "Serving visually impaired and physically disabled children. Requires urgent accessibility upgrades to the multi-story building.",
-  },
+const regions = [
+  { name: "West Africa", countries: "Nigeria, Ghana, Senegal, Sierra Leone, Liberia, Mali, Burkina Faso, Togo, Benin, Niger, Guinea, Côte d'Ivoire, Gambia, Guinea-Bissau, Cape Verde, Mauritania" },
+  { name: "East Africa", countries: "Kenya, Uganda, Tanzania, Ethiopia, Rwanda, Burundi, Somalia, Djibouti, Eritrea, South Sudan, Comoros, Seychelles, Mauritius, Madagascar" },
+  { name: "Southern Africa", countries: "South Africa, Zimbabwe, Mozambique, Zambia, Malawi, Botswana, Namibia, Lesotho, Eswatini, Angola" },
+  { name: "Central Africa", countries: "Cameroon, DRC, Congo-Brazzaville, Gabon, Chad, Central African Republic, Equatorial Guinea, São Tomé & Príncipe" },
+  { name: "North Africa", countries: "Egypt, Morocco, Tunisia, Algeria, Libya, Sudan" },
 ];
 
-const impactRegions = [
-  { name: "West Africa", countries: "Nigeria, Ghana, Senegal", schools: 12 },
-  { name: "East Africa", countries: "Kenya, Uganda, Tanzania", schools: 8 },
-  { name: "Southern Africa", countries: "South Africa, Zimbabwe", schools: 6 },
-  { name: "Central Africa", countries: "Cameroon, DRC", schools: 4 },
-  { name: "North Africa", countries: "Egypt, Morocco", schools: 3 },
+const timeline = [
+  { phase: "Nominate", period: "Post-Ceremony 2026", description: "Communities nominate deserving special needs schools in their region", icon: Trophy },
+  { phase: "Vote", period: "Jul – Sep 2026", description: "Public voting via AGC points determines the winning school per region", icon: Vote },
+  { phase: "Intervene", period: "Oct 2026 – Jun 2027", description: "EduAid-Africa delivers facility upgrades, resources, and teacher training", icon: Heart },
 ];
 
-const projectPhases = [
-  {
-    phase: "Phase 1",
-    title: "Assessment & Planning",
-    description: "Comprehensive facility audits and community needs assessment",
-    icon: Target,
-  },
-  {
-    phase: "Phase 2",
-    title: "Design & Funding",
-    description: "Inclusive design development and resource mobilization",
-    icon: Building2,
-  },
-  {
-    phase: "Phase 3",
-    title: "Construction",
-    description: "Building accessible, modern educational facilities",
-    icon: Hammer,
-  },
-  {
-    phase: "Phase 4",
-    title: "Handover & Support",
-    description: "Community training and ongoing maintenance support",
-    icon: CheckCircle2,
-  },
+const formalSchoolTypes = [
+  { name: "Schools for the Deaf", icon: Ear, description: "Sign language instruction, hearing aid support, speech therapy" },
+  { name: "Schools for the Blind & Visually Impaired", icon: Eye, description: "Braille curriculum, mobility training, assistive technology" },
+  { name: "Schools for Physical Disabilities", icon: Accessibility, description: "Wheelchair-accessible facilities, physiotherapy rooms, adapted sports" },
+  { name: "Schools for Intellectual Disabilities", icon: Brain, description: "Life skills training, sensory rooms, individualized education programs" },
+  { name: "Schools for Autism Spectrum", icon: Sparkles, description: "Structured environments, sensory-friendly spaces, ABA therapy support" },
+  { name: "Inclusive / Mainstream Schools", icon: School, description: "Regular schools with integrated special education units and support staff" },
+  { name: "Early Intervention Centres", icon: Baby, description: "Pre-school support for children with developmental delays (0–6 years)" },
+  { name: "Government Special Education Schools", icon: Landmark, description: "State-funded institutions for various disabilities, often boarding schools" },
+  { name: "Vocational & Skills Training Centres", icon: Hammer, description: "Trade skills, craftsmanship, and job readiness for young adults with disabilities" },
+  { name: "Resource Centres for Special Needs", icon: BookOpen, description: "Assessment, referral, and material support hubs for multiple schools" },
 ];
 
-const donationTiers = [
-  {
-    amount: 25,
-    impact: "Supplies learning materials for 5 students",
-    label: "Supporter",
-  },
-  {
-    amount: 100,
-    impact: "Furnishes a classroom with accessible desks",
-    label: "Builder",
-  },
-  {
-    amount: 500,
-    impact: "Installs accessibility ramps and facilities",
-    label: "Champion",
-  },
-  {
-    amount: 2500,
-    impact: "Renovates an entire classroom block",
-    label: "Transformer",
-  },
+const informalSchoolTypes = [
+  { name: "Community-Based Rehabilitation (CBR) Centres", icon: HandHeart, description: "Grassroots disability support, home-based learning programs" },
+  { name: "Faith-Based Special Needs Schools", icon: Star, description: "Church/mosque-run schools offering care and education for children with disabilities" },
+  { name: "NGO-Run Learning Centres", icon: Globe, description: "Non-profit operated programs for underserved disabled children" },
+  { name: "Home Schooling Networks", icon: Users, description: "Parent-led cooperatives for children too disabled to attend formal school" },
+  { name: "Mobile & Outreach Schools", icon: Building2, description: "Traveling teachers reaching remote/nomadic communities with disabled children" },
+  { name: "Digital & E-Learning Programmes", icon: Laptop, description: "Online/radio-based learning for disabled students in inaccessible areas" },
 ];
 
-function getStatusColor(status: string) {
-  switch (status) {
-    case "Priority Project":
-      return "bg-red-500/20 text-red-400 border-red-500/30";
-    case "In Progress":
-      return "bg-green-500/20 text-green-400 border-green-500/30";
-    case "Fundraising":
-      return "bg-gold/20 text-gold border-gold/30";
-    case "Assessment Phase":
-      return "bg-blue-500/20 text-blue-400 border-blue-500/30";
-    default:
-      return "bg-gray-500/20 text-gray-400 border-gray-500/30";
-  }
-}
+const interventionAreas = [
+  "Inclusive classroom facilities & assistive technology",
+  "Special needs teacher training & certification support",
+  "Learning materials & adapted curriculum development",
+  "WASH infrastructure & accessibility upgrades",
+  "Sensory rooms, therapy spaces & adaptive equipment",
+  "Transport & mobility support for students",
+];
+
+// ─── COMPONENT ───────────────────────────────────────────────────────────────
 
 export default function Rebuild() {
   return (
     <>
       <Helmet>
-        <title>Rebuild My School Africa | SCEF Initiative</title>
+        <title>Rebuild My School Africa | EduAid-Africa Post-Award Legacy</title>
         <meta
           name="description"
-          content="Transform special needs education facilities across Africa. Join the Rebuild My School Africa initiative to create inclusive learning environments."
+          content="Nominate and vote for special needs schools across Africa to receive facility upgrades through EduAid-Africa. A post-award legacy initiative of SCEF and NESA-Africa."
         />
       </Helmet>
 
-      <div className="min-h-screen bg-charcoal">
-        {/* Hero Section */}
-        <section className="relative pt-24 pb-16 overflow-hidden">
-          {/* Background gradient */}
-          <div 
-            className="absolute inset-0 opacity-20"
-            style={{
-              background: `linear-gradient(135deg, ${rmsaColors.secondary} 0%, ${rmsaColors.primary} 50%, ${rmsaColors.accent} 100%)`
-            }}
-          />
-          <div className="absolute inset-0 bg-gradient-to-b from-charcoal via-transparent to-charcoal" />
-          
-          <div className="relative container mx-auto px-4">
-            <div className="max-w-4xl mx-auto text-center">
-              {/* Badge */}
-              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#4a7c23]/20 border border-[#4a7c23]/40 mb-6">
-                <School className="h-4 w-4 text-[#4a7c23]" />
-                <span className="text-sm font-medium text-[#4a7c23]">SCEF Legacy Initiative</span>
-              </div>
+      <div className="min-h-screen bg-secondary">
+        {/* ── Hero ── */}
+        <section className="relative pt-24 pb-20 overflow-hidden">
+          <div className="absolute inset-0 z-0">
+            <img src={heroImg} alt="Inclusive classroom in Africa" className="w-full h-full object-cover" />
+            <div className="absolute inset-0 bg-gradient-to-b from-secondary/90 via-secondary/80 to-secondary" />
+          </div>
+          <div className="absolute inset-0 z-[1] flex items-center justify-center pointer-events-none">
+            <img src={africaMapImg} alt="" className="w-[500px] h-auto opacity-[0.04]" aria-hidden="true" />
+          </div>
 
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-display font-bold text-white mb-6">
-                Rebuild My School
-                <span className="block text-[#4a7c23]">Africa</span>
+          <div className="relative z-10 container mx-auto px-4">
+            <motion.div
+              initial={{ opacity: 0, y: 24 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="max-w-4xl mx-auto text-center"
+            >
+              <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-primary/10 border border-primary/20 text-primary text-sm font-medium mb-6">
+                <School className="h-4 w-4" />
+                Post-Award Legacy • SCEF / NESA-Africa Social Impact
+              </span>
+
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-display font-bold text-foreground mb-6">
+                Rebuild My School{" "}
+                <span className="text-primary">Africa</span>
               </h1>
 
-              <p className="text-lg md:text-xl text-white/80 mb-8 max-w-2xl mx-auto">
-                Transforming special needs education facilities across 5 African regions. 
-                Together, we're building inclusive learning environments that empower every child.
+              <p className="text-lg md:text-xl text-muted-foreground mb-8 max-w-2xl mx-auto leading-relaxed">
+                One special needs school per region — nominated by communities, selected by public vote,
+                and upgraded through EduAid-Africa. Recognition becomes real impact.
               </p>
 
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Button 
-                  asChild
-                  size="lg"
-                  className="bg-[#4a7c23] hover:bg-[#4a7c23]/90 text-white gap-2"
-                >
-                  <Link to="/donate?program=rebuild">
-                    <Heart className="h-5 w-5" />
-                    Donate Now
-                  </Link>
-                </Button>
-                <Button 
-                  asChild
-                  variant="outline"
-                  size="lg"
-                  className="border-[#8b6914]/50 text-[#d4a017] hover:bg-[#8b6914]/10"
-                >
-                  <Link to="/partners">
-                    Become a Partner
-                    <ArrowRight className="h-4 w-4 ml-2" />
-                  </Link>
-                </Button>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Stats Section */}
-        <section className="py-12 border-y border-gold/20 bg-charcoal-light/50">
-          <div className="container mx-auto px-4">
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
-              <div>
-                <div className="text-3xl md:text-4xl font-display font-bold text-[#4a7c23]">33+</div>
-                <div className="text-sm text-white/60 mt-1">Schools Targeted</div>
-              </div>
-              <div>
-                <div className="text-3xl md:text-4xl font-display font-bold text-[#8b6914]">5</div>
-                <div className="text-sm text-white/60 mt-1">African Regions</div>
-              </div>
-              <div>
-                <div className="text-3xl md:text-4xl font-display font-bold text-gold">10K+</div>
-                <div className="text-sm text-white/60 mt-1">Students Impacted</div>
-              </div>
-              <div>
-                <div className="text-3xl md:text-4xl font-display font-bold text-white">2035</div>
-                <div className="text-sm text-white/60 mt-1">Vision Target</div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Featured Schools Section - NEW */}
-        <section className="py-16 md:py-24">
-          <div className="container mx-auto px-4">
-            <div className="text-center mb-12">
-              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gold/10 border border-gold/30 mb-4">
-                <Heart className="h-4 w-4 text-gold" />
-                <span className="text-sm font-medium text-gold">Priority Schools</span>
-              </div>
-              <h2 className="text-3xl md:text-4xl font-display font-bold text-white mb-4">
-                Featured <span className="text-[#4a7c23]">Special Needs Schools</span>
-              </h2>
-              <p className="text-white/60 max-w-2xl mx-auto">
-                Five schools representing each African region — each serving children with disabilities 
-                and awaiting critical infrastructure support.
-              </p>
-            </div>
-
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {featuredSchools.map((school) => (
-                <Card 
-                  key={school.name}
-                  className="bg-charcoal border-gold/20 hover:border-[#4a7c23]/50 transition-all group overflow-hidden"
-                >
-                  {/* School Image */}
-                  <div className="relative h-48 overflow-hidden">
-                    <img 
-                      src={school.image} 
-                      alt={`${school.name} - ${school.region}`}
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-charcoal via-transparent to-transparent" />
-                    
-                    {/* Region Badge */}
-                    <div className="absolute top-3 left-3">
-                      <span className="px-3 py-1 rounded-full text-xs font-medium bg-[#4a7c23] text-white">
-                        {school.region}
-                      </span>
-                    </div>
-                    
-                    {/* Status Badge */}
-                    <div className="absolute top-3 right-3">
-                      <span className={`px-3 py-1 rounded-full text-xs font-medium border ${getStatusColor(school.status)}`}>
-                        {school.status}
-                      </span>
-                    </div>
-                    
-                    {/* Student Count */}
-                    <div className="absolute bottom-3 right-3 flex items-center gap-1 bg-charcoal/80 backdrop-blur-sm px-2 py-1 rounded-full">
-                      <Users className="h-3 w-3 text-gold" />
-                      <span className="text-xs text-white font-medium">{school.students} students</span>
-                    </div>
-                  </div>
-
-                  <CardHeader className="pb-2">
-                    <CardTitle className="text-lg text-white group-hover:text-[#4a7c23] transition-colors">
-                      {school.name}
-                    </CardTitle>
-                    <div className="flex items-center gap-2 text-sm text-white/60">
-                      <MapPin className="h-3.5 w-3.5" />
-                      <span>{school.location}, {school.country}</span>
-                    </div>
-                  </CardHeader>
-
-                  <CardContent className="space-y-4">
-                    <CardDescription className="text-white/70 text-sm leading-relaxed">
-                      {school.description}
-                    </CardDescription>
-
-                    {/* Needs Tags */}
-                    <div className="space-y-2">
-                      <span className="text-xs font-medium text-[#8b6914] uppercase tracking-wider">Critical Needs:</span>
-                      <div className="flex flex-wrap gap-1.5">
-                        {school.needs.map((need) => (
-                          <span 
-                            key={need}
-                            className="px-2 py-0.5 rounded text-xs bg-[#8b6914]/20 text-[#d4a017] border border-[#8b6914]/30"
-                          >
-                            {need}
-                          </span>
-                        ))}
-                      </div>
-                    </div>
-
-                    {/* Support Button */}
-                    <Button 
-                      asChild
-                      size="sm"
-                      className="w-full bg-[#4a7c23] hover:bg-[#4a7c23]/90 text-white mt-2 group-hover:scale-[1.02] transition-transform"
-                    >
-                      <Link to={`/donate?program=rebuild&school=${encodeURIComponent(school.name)}`}>
-                        <Heart className="h-4 w-4 mr-2" />
-                        Support This School
-                      </Link>
-                    </Button>
-                  </CardContent>
-                </Card>
-              ))}
-            </div>
-
-            {/* View All Schools CTA */}
-            <div className="text-center mt-10">
-              <Button 
-                asChild
-                variant="outline"
-                size="lg"
-                className="border-[#4a7c23]/50 text-[#4a7c23] hover:bg-[#4a7c23]/10"
-              >
-                <Link to="/contact?subject=schools">
-                  <School className="h-5 w-5 mr-2" />
-                  Nominate a School
-                  <ExternalLink className="h-4 w-4 ml-2" />
-                </Link>
-              </Button>
-            </div>
-          </div>
-        </section>
-
-        {/* Mission Section */}
-        <section className="py-16 md:py-24 bg-charcoal-light/30">
-          <div className="container mx-auto px-4">
-            <div className="grid lg:grid-cols-2 gap-12 items-center">
-              <div>
-                <h2 className="text-3xl md:text-4xl font-display font-bold text-white mb-6">
-                  Building Inclusive
-                  <span className="text-[#4a7c23]"> Learning Spaces</span>
-                </h2>
-                <p className="text-white/70 mb-6 leading-relaxed">
-                  Rebuild My School Africa (RMSA) is the infrastructure arm of the Santos Creations 
-                  Educational Foundation. We focus on renovating and building special needs education 
-                  facilities that provide accessible, dignified, and inspiring learning environments.
-                </p>
-                <p className="text-white/70 mb-8 leading-relaxed">
-                  Every child deserves access to quality education. Our projects ensure that physical 
-                  barriers never stand between a child and their potential.
-                </p>
-                
-                <ul className="space-y-3">
-                  {[
-                    "Wheelchair-accessible classrooms and facilities",
-                    "Sensory-friendly learning environments",
-                    "Modern assistive technology integration",
-                    "Teacher training for inclusive education",
-                  ].map((item, i) => (
-                    <li key={i} className="flex items-start gap-3 text-white/80">
-                      <CheckCircle2 className="h-5 w-5 text-[#4a7c23] mt-0.5 flex-shrink-0" />
-                      <span>{item}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-
-              {/* Decorative visual */}
-              <div className="relative">
-                <div className="aspect-square max-w-md mx-auto rounded-2xl overflow-hidden border border-[#4a7c23]/30 bg-gradient-to-br from-[#4a7c23]/20 to-[#8b6914]/20 flex items-center justify-center">
-                  <Building2 className="h-32 w-32 text-[#4a7c23]/40" />
-                </div>
-                {/* Floating stats */}
-                <div className="absolute -bottom-6 -left-6 bg-charcoal border border-gold/20 rounded-xl p-4 shadow-lg">
-                  <div className="text-2xl font-display font-bold text-gold">100%</div>
-                  <div className="text-xs text-white/60">Funds to Projects</div>
-                </div>
-                <div className="absolute -top-6 -right-6 bg-charcoal border border-[#4a7c23]/20 rounded-xl p-4 shadow-lg">
-                  <div className="text-2xl font-display font-bold text-[#4a7c23]">5 Regions</div>
-                  <div className="text-xs text-white/60">Pan-African Impact</div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Project Phases */}
-        <section className="py-16">
-          <div className="container mx-auto px-4">
-            <div className="text-center mb-12">
-              <h2 className="text-3xl md:text-4xl font-display font-bold text-white mb-4">
-                How We <span className="text-[#4a7c23]">Build</span>
-              </h2>
-              <p className="text-white/60 max-w-2xl mx-auto">
-                Our structured approach ensures sustainable, community-driven infrastructure development.
-              </p>
-            </div>
-
-            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-              {projectPhases.map((phase, index) => (
-                <Card key={phase.phase} className="bg-charcoal border-gold/20 hover:border-[#4a7c23]/50 transition-colors">
-                  <CardHeader>
-                    <div className="flex items-center gap-3 mb-2">
-                      <div className="w-10 h-10 rounded-full bg-[#4a7c23]/20 flex items-center justify-center">
-                        <phase.icon className="h-5 w-5 text-[#4a7c23]" />
-                      </div>
-                      <span className="text-sm font-medium text-gold">{phase.phase}</span>
-                    </div>
-                    <CardTitle className="text-white text-lg">{phase.title}</CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <CardDescription className="text-white/60">{phase.description}</CardDescription>
-                  </CardContent>
-                </Card>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* Regional Impact */}
-        <section className="py-16 md:py-24 bg-charcoal-light/30">
-          <div className="container mx-auto px-4">
-            <div className="text-center mb-12">
-              <h2 className="text-3xl md:text-4xl font-display font-bold text-white mb-4">
-                <span className="text-[#4a7c23]">Pan-African</span> Reach
-              </h2>
-              <p className="text-white/60 max-w-2xl mx-auto">
-                Transforming special needs education across the continent.
-              </p>
-            </div>
-
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
-              {impactRegions.map((region) => (
-                <div 
-                  key={region.name}
-                  className="p-6 rounded-xl border border-gold/20 bg-charcoal hover:border-[#4a7c23]/50 transition-colors"
-                >
-                  <div className="flex items-start gap-4">
-                    <div className="w-12 h-12 rounded-full bg-[#4a7c23]/20 flex items-center justify-center flex-shrink-0">
-                      <MapPin className="h-6 w-6 text-[#4a7c23]" />
-                    </div>
-                    <div>
-                      <h3 className="text-lg font-semibold text-white mb-1">{region.name}</h3>
-                      <p className="text-sm text-white/60 mb-2">{region.countries}</p>
-                      <div className="flex items-center gap-2 text-gold">
-                        <School className="h-4 w-4" />
-                        <span className="text-sm font-medium">{region.schools} schools targeted</span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* Donation Section */}
-        <section className="py-16 bg-gradient-to-br from-[#4a7c23]/10 to-[#8b6914]/10 border-y border-gold/20">
-          <div className="container mx-auto px-4">
-            <div className="text-center mb-12">
-              <h2 className="text-3xl md:text-4xl font-display font-bold text-white mb-4">
-                Make an <span className="text-[#4a7c23]">Impact</span>
-              </h2>
-              <p className="text-white/60 max-w-2xl mx-auto">
-                Every contribution helps build a more inclusive future for African education.
-              </p>
-            </div>
-
-            <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-5xl mx-auto">
-              {donationTiers.map((tier) => (
-                <Card 
-                  key={tier.amount}
-                  className="bg-charcoal border-gold/20 hover:border-[#4a7c23] transition-colors group"
-                >
-                  <CardHeader className="text-center pb-2">
-                    <div className="text-xs font-medium text-[#4a7c23] uppercase tracking-wider mb-1">
-                      {tier.label}
-                    </div>
-                    <CardTitle className="text-3xl font-display text-white">
-                      ${tier.amount}
-                    </CardTitle>
-                  </CardHeader>
-                  <CardContent className="text-center">
-                    <p className="text-sm text-white/60 mb-4">{tier.impact}</p>
-                    <Button 
-                      asChild
-                      size="sm"
-                      className="w-full bg-[#4a7c23] hover:bg-[#4a7c23]/90 group-hover:scale-105 transition-transform"
-                    >
-                      <Link to={`/donate?program=rebuild&amount=${tier.amount}`}>
-                        Donate ${tier.amount}
-                      </Link>
-                    </Button>
-                  </CardContent>
-                </Card>
-              ))}
-            </div>
-
-            <div className="text-center mt-8">
-              <Button 
-                asChild
-                variant="outline"
-                className="border-gold/40 text-gold hover:bg-gold/10"
-              >
                 <Link to="/donate?program=rebuild">
-                  Choose Custom Amount
-                  <ArrowRight className="h-4 w-4 ml-2" />
+                  <Button size="lg" className="gap-2 rounded-full">
+                    <Heart className="h-5 w-5" />
+                    Support This Initiative
+                  </Button>
                 </Link>
-              </Button>
+                <Link to="/eduaid">
+                  <Button variant="outline" size="lg" className="gap-2 rounded-full border-primary/30 text-primary hover:bg-primary/10">
+                    Learn About EduAid-Africa
+                    <ArrowRight className="h-4 w-4" />
+                  </Button>
+                </Link>
+              </div>
+            </motion.div>
+          </div>
+        </section>
+
+        {/* ── How It Works — 3 Phases ── */}
+        <section className="py-16 md:py-20 border-b border-border/50">
+          <div className="container mx-auto px-4">
+            <div className="text-center mb-12">
+              <h2 className="text-3xl md:text-4xl font-display font-bold text-foreground mb-3">
+                How It <span className="text-primary">Works</span>
+              </h2>
+              <p className="text-muted-foreground max-w-xl mx-auto">
+                A transparent, community-driven process from nomination to intervention.
+              </p>
+            </div>
+
+            <div className="grid md:grid-cols-3 gap-6 max-w-4xl mx-auto">
+              {timeline.map((step, index) => (
+                <motion.div
+                  key={step.phase}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ delay: index * 0.1 }}
+                  viewport={{ once: true }}
+                  className="relative rounded-2xl p-6 border border-border bg-card hover:border-primary/30 transition-all duration-300"
+                >
+                  <span className="absolute -top-3 left-5 px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-primary text-primary-foreground">
+                    Step {index + 1}
+                  </span>
+                  <div className="w-11 h-11 rounded-xl flex items-center justify-center mb-4 bg-primary/10 border border-primary/15">
+                    <step.icon className="h-5 w-5 text-primary" />
+                  </div>
+                  <h3 className="text-lg font-display font-bold text-foreground mb-1">{step.phase}</h3>
+                  <p className="text-primary/70 text-xs font-medium mb-2">{step.period}</p>
+                  <p className="text-muted-foreground text-sm leading-relaxed">{step.description}</p>
+                </motion.div>
+              ))}
             </div>
           </div>
         </section>
 
-        {/* CTA Section */}
-        <section className="py-16 md:py-24">
+        {/* ── Five Regions Awaiting Nominations ── */}
+        <section id="nominate" className="py-16 md:py-20 border-b border-border/50">
           <div className="container mx-auto px-4">
-            <div className="max-w-3xl mx-auto text-center">
-              <Globe className="h-12 w-12 text-[#4a7c23] mx-auto mb-6" />
-              <h2 className="text-3xl md:text-4xl font-display font-bold text-white mb-6">
-                Join the Movement
+            <div className="text-center mb-10">
+              <h2 className="text-3xl md:text-4xl font-display font-bold text-foreground mb-3">
+                Five Regions, <span className="text-primary">Five Schools</span>
               </h2>
-              <p className="text-lg text-white/70 mb-8">
-                Whether as a donor, partner, or volunteer, your contribution helps create 
-                lasting change in African education. Together, we can ensure every child 
-                has access to quality learning environments.
+              <p className="text-muted-foreground max-w-xl mx-auto">
+                Schools will be nominated and voted on after the NESA-Africa 2025 ceremony. One winning school per region receives a full EduAid-Africa intervention.
               </p>
-              <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Button 
-                  asChild
-                  size="lg"
-                  className="bg-[#4a7c23] hover:bg-[#4a7c23]/90 text-white gap-2"
+            </div>
+
+            <div className="grid sm:grid-cols-2 lg:grid-cols-5 gap-4 max-w-6xl mx-auto">
+              {regions.map((region, index) => (
+                <motion.div
+                  key={region.name}
+                  initial={{ opacity: 0, scale: 0.95 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  transition={{ delay: index * 0.06 }}
+                  viewport={{ once: true }}
+                  className="rounded-xl border border-border bg-card p-5 text-center hover:border-primary/25 transition-all duration-300"
                 >
-                  <Link to="/donate?program=rebuild">
-                    <Heart className="h-5 w-5" />
-                    Support RMSA
-                  </Link>
-                </Button>
-                <Button 
-                  asChild
-                  variant="outline"
-                  size="lg"
-                  className="border-gold/40 text-gold hover:bg-gold/10"
-                >
-                  <Link to="/volunteer">
-                    <Users className="h-5 w-5 mr-2" />
-                    Volunteer
-                  </Link>
-                </Button>
+                  <div className="w-10 h-10 rounded-lg bg-primary/10 border border-primary/15 flex items-center justify-center mx-auto mb-3">
+                    <MapPin className="h-5 w-5 text-primary" />
+                  </div>
+                  <h3 className="text-sm font-display font-bold text-foreground mb-1.5">{region.name}</h3>
+                  <p className="text-muted-foreground text-[11px] leading-snug mb-2">{region.countries}</p>
+                  <span className="inline-block px-2.5 py-0.5 rounded-full text-[10px] font-medium bg-primary/5 text-primary/60 border border-primary/10">
+                    Awaiting Nominations
+                  </span>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* ── Eligible School Types — Formal ── */}
+        <section className="py-16 md:py-20 border-b border-border/50">
+          <div className="container mx-auto px-4">
+            <div className="grid lg:grid-cols-2 gap-12 items-start max-w-6xl mx-auto">
+              {/* Image side */}
+              <motion.div
+                initial={{ opacity: 0, x: -20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                className="relative rounded-2xl overflow-hidden"
+              >
+                <img src={formalSchoolImg} alt="Formal special needs school in Africa" className="w-full h-auto rounded-2xl" />
+                <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-secondary/80 to-transparent">
+                  <span className="text-xs font-medium text-primary bg-secondary/70 px-3 py-1 rounded-full">
+                    Formal Special Needs Schools
+                  </span>
+                </div>
+              </motion.div>
+
+              {/* Content side */}
+              <div>
+                <h2 className="text-2xl md:text-3xl font-display font-bold text-foreground mb-2">
+                  Formal <span className="text-primary">Special Needs Schools</span>
+                </h2>
+                <p className="text-muted-foreground text-sm mb-6 leading-relaxed">
+                  Registered, accredited institutions providing structured education for children and young adults with disabilities.
+                </p>
+
+                <div className="space-y-3">
+                  {formalSchoolTypes.map((type) => (
+                    <div key={type.name} className="flex items-start gap-3 p-3 rounded-lg border border-border bg-card/50 hover:border-primary/20 transition-colors">
+                      <div className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0 mt-0.5">
+                        <type.icon className="h-4 w-4 text-primary" />
+                      </div>
+                      <div>
+                        <h4 className="text-sm font-semibold text-foreground">{type.name}</h4>
+                        <p className="text-xs text-muted-foreground leading-relaxed">{type.description}</p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
               </div>
             </div>
+          </div>
+        </section>
+
+        {/* ── Eligible School Types — Informal ── */}
+        <section className="py-16 md:py-20 border-b border-border/50">
+          <div className="container mx-auto px-4">
+            <div className="grid lg:grid-cols-2 gap-12 items-start max-w-6xl mx-auto">
+              {/* Content side */}
+              <div className="order-2 lg:order-1">
+                <h2 className="text-2xl md:text-3xl font-display font-bold text-foreground mb-2">
+                  Informal & <span className="text-primary">Community Schools</span>
+                </h2>
+                <p className="text-muted-foreground text-sm mb-6 leading-relaxed">
+                  Non-traditional learning environments filling gaps where formal systems don't reach — equally eligible for nomination and support.
+                </p>
+
+                <div className="space-y-3">
+                  {informalSchoolTypes.map((type) => (
+                    <div key={type.name} className="flex items-start gap-3 p-3 rounded-lg border border-border bg-card/50 hover:border-primary/20 transition-colors">
+                      <div className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0 mt-0.5">
+                        <type.icon className="h-4 w-4 text-primary" />
+                      </div>
+                      <div>
+                        <h4 className="text-sm font-semibold text-foreground">{type.name}</h4>
+                        <p className="text-xs text-muted-foreground leading-relaxed">{type.description}</p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Images side */}
+              <motion.div
+                initial={{ opacity: 0, x: 20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                className="order-1 lg:order-2 space-y-4"
+              >
+                <div className="relative rounded-2xl overflow-hidden">
+                  <img src={informalSchoolImg} alt="Informal community school in rural Africa" className="w-full h-auto rounded-2xl" />
+                  <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-secondary/80 to-transparent">
+                    <span className="text-xs font-medium text-primary bg-secondary/70 px-3 py-1 rounded-full">
+                      Community-Based Learning
+                    </span>
+                  </div>
+                </div>
+                <div className="relative rounded-2xl overflow-hidden">
+                  <img src={vocationalImg} alt="Vocational training centre for young people with disabilities" className="w-full h-auto rounded-2xl" />
+                  <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-secondary/80 to-transparent">
+                    <span className="text-xs font-medium text-primary bg-secondary/70 px-3 py-1 rounded-full">
+                      Vocational & Skills Training
+                    </span>
+                  </div>
+                </div>
+              </motion.div>
+            </div>
+          </div>
+        </section>
+
+        {/* ── Intervention Areas ── */}
+        <section className="py-16 md:py-20 border-b border-border/50">
+          <div className="container mx-auto px-4">
+            <div className="max-w-3xl mx-auto">
+              <div className="text-center mb-10">
+                <h2 className="text-3xl md:text-4xl font-display font-bold text-foreground mb-3">
+                  EduAid-Africa <span className="text-primary">Intervention Areas</span>
+                </h2>
+                <p className="text-muted-foreground max-w-xl mx-auto">
+                  What winning schools receive — a comprehensive upgrade package delivered over 12 months.
+                </p>
+              </div>
+
+              <div className="rounded-2xl border border-border bg-card p-6 md:p-8">
+                <div className="grid sm:grid-cols-2 gap-4">
+                  {interventionAreas.map((area) => (
+                    <div key={area} className="flex items-start gap-3">
+                      <CheckCircle2 className="h-5 w-5 text-primary flex-shrink-0 mt-0.5" />
+                      <span className="text-sm text-foreground/80">{area}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              <div className="mt-6 rounded-xl border border-primary/15 bg-primary/5 p-4 flex items-start gap-3">
+                <Calendar className="h-5 w-5 text-primary flex-shrink-0 mt-0.5" />
+                <div>
+                  <p className="text-sm font-medium text-foreground">Intervention Period</p>
+                  <p className="text-xs text-muted-foreground">October 2026 – June 2027 • Delivered by EduAid-Africa in partnership with local communities</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* ── Final CTA ── */}
+        <section className="py-16 md:py-24">
+          <div className="container mx-auto px-4">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="max-w-3xl mx-auto text-center"
+            >
+              <Globe className="h-12 w-12 text-primary mx-auto mb-6 opacity-60" />
+              <h2 className="text-3xl md:text-4xl font-display font-bold text-foreground mb-4">
+                Be Part of the <span className="text-primary">Legacy</span>
+              </h2>
+              <p className="text-muted-foreground mb-8 max-w-xl mx-auto leading-relaxed">
+                Whether as a donor, partner, or community nominator — your involvement helps transform
+                special needs education across Africa. Nominations open after the NESA-Africa 2025 ceremony.
+              </p>
+
+              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                <Link to="/donate?program=rebuild">
+                  <Button size="lg" className="gap-2 rounded-full">
+                    <Heart className="h-5 w-5" />
+                    Donate to EduAid-Africa
+                  </Button>
+                </Link>
+                <Link to="/partners">
+                  <Button variant="outline" size="lg" className="gap-2 rounded-full border-primary/30 text-primary hover:bg-primary/10">
+                    <Users className="h-5 w-5" />
+                    Become a Partner
+                  </Button>
+                </Link>
+                <Link to="/eduaid">
+                  <Button variant="outline" size="lg" className="gap-2 rounded-full border-primary/30 text-primary hover:bg-primary/10">
+                    <GraduationCap className="h-5 w-5" />
+                    About EduAid-Africa
+                  </Button>
+                </Link>
+              </div>
+
+              <p className="text-muted-foreground/50 text-xs mt-10">
+                A post-award education social impact service of Santos Creations Educational Foundation • NESA-Africa 2025
+              </p>
+            </motion.div>
           </div>
         </section>
       </div>

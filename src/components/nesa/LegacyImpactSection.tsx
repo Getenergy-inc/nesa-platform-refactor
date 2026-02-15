@@ -151,17 +151,17 @@ export function LegacyImpactSection() {
           viewport={{ once: true }}
           className="flex flex-col sm:flex-row items-center justify-center gap-4"
         >
-          <Link to="/eduaid">
+          <Link to="/rebuild">
             <Button className="rounded-full gap-2 font-semibold bg-primary hover:bg-primary/90 text-primary-foreground px-6">
               <Heart className="h-4 w-4" />
-              Learn More on EduAid-Africa
+              Explore Rebuild My School Africa
               <ArrowRight className="h-4 w-4" />
             </Button>
           </Link>
-          <Link to="/donate">
+          <Link to="/rebuild#nominate">
             <Button variant="outline" className="rounded-full gap-2 border-primary/25 text-primary hover:bg-primary/10 px-6">
               <GraduationCap className="h-4 w-4" />
-              Support EduAid
+              Nominate a School
             </Button>
           </Link>
         </motion.div>
