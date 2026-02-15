@@ -25,7 +25,7 @@ export function LegacyImpactSection() {
       {/* Background */}
       <div className="absolute inset-0 z-0">
         <img src={legacyRebuildImg} alt="Community school rebuild project in Africa" className="w-full h-full object-cover" loading="lazy" />
-        <div className="absolute inset-0 bg-gradient-to-b from-secondary/96 via-secondary/93 to-secondary/98" />
+        <div className="absolute inset-0 bg-gradient-to-b from-secondary/80 via-secondary/75 to-secondary/90" />
       </div>
 
       {/* Africa Map watermark */}
