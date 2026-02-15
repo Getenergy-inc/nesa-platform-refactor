@@ -4,27 +4,35 @@ import { NESAHeader } from "@/components/nesa/NESAHeader";
 import { TrophyHeroSection } from "@/components/nesa/TrophyHeroSection";
 import { TrustLogosStrip } from "@/components/nesa/TrustLogosStrip";
 import { QuickActionBar } from "@/components/nesa/QuickActionBar";
+import { WhatsLiveSection } from "@/components/nesa/WhatsLiveSection";
+import { NominationPathsCards } from "@/components/nesa/NominationPathsCards";
 import { NESAFooter } from "@/components/nesa/NESAFooter";
 import { MobileBottomNav } from "@/components/navigation/MainNav";
 import { LazySection } from "@/components/ui/lazy-section";
 import { ScrollProgressIndicator } from "@/components/nesa/ScrollProgressIndicator";
 
-// Lazy load below-fold sections — consolidated from 15+ to ~8
-const FeaturedNomineesSpotlight = lazy(() => import("@/components/nesa/FeaturedNomineesSpotlight").then(m => ({ default: m.FeaturedNomineesSpotlight })));
-const NominationPathsCards = lazy(() => import("@/components/nesa/NominationPathsCards").then(m => ({ default: m.NominationPathsCards })));
-const HowItWorksVisual = lazy(() => import("@/components/nesa/HowItWorksVisual").then(m => ({ default: m.HowItWorksVisual })));
+// Lazy load below-fold sections
 const VoteWithAGCSection = lazy(() => import("@/components/nesa/VoteWithAGCSection").then(m => ({ default: m.VoteWithAGCSection })));
+const HowItWorksVisual = lazy(() => import("@/components/nesa/HowItWorksVisual").then(m => ({ default: m.HowItWorksVisual })));
 const LegacyImpactSection = lazy(() => import("@/components/nesa/LegacyImpactSection").then(m => ({ default: m.LegacyImpactSection })));
-const MediaShowcaseSection = lazy(() => import("@/components/nesa/MediaShowcaseSection").then(m => ({ default: m.MediaShowcaseSection })));
+const IntegritySection = lazy(() => import("@/components/nesa/IntegritySection").then(m => ({ default: m.IntegritySection })));
+const UpcomingEventsSection = lazy(() => import("@/components/nesa/UpcomingEventsSection").then(m => ({ default: m.UpcomingEventsSection })));
+const WatchSection = lazy(() => import("@/components/nesa/WatchSection").then(m => ({ default: m.WatchSection })));
+const NESAMusicSection = lazy(() => import("@/components/nesa/NESAMusicSection").then(m => ({ default: m.NESAMusicSection })));
+const EducationChampionsDirectory = lazy(() => import("@/components/nesa/EducationChampionsDirectory").then(m => ({ default: m.EducationChampionsDirectory })));
 const SponsorsSection = lazy(() => import("@/components/nesa/SponsorsSection").then(m => ({ default: m.SponsorsSection })));
+const CategoriesSection = lazy(() => import("@/components/nesa/CategoriesSection").then(m => ({ default: m.CategoriesSection })));
 const FinalCTASection = lazy(() => import("@/components/nesa/FinalCTASection").then(m => ({ default: m.FinalCTASection })));
 
 /**
- * NESA-Africa Landing Page — Oscar/Grammy-tier
+ * NESA-Africa Landing Page
  * 
- * Consolidated from 15+ sections to 8 focused blocks:
- * Cinematic hero → Nominees spotlight → Nomination paths → 
- * How it works → AGC voting → Legacy → Media → Final CTA
+ * Optimized for 90% retention:
+ * - Fast paint: Hero + Trust above fold, no blocking modals
+ * - Clear journey: What's Live → Choose Path → How It Works → Vote → Legacy
+ * - Lazy loaded below-fold sections
+ * - Scroll progress indicator for engagement
+ * - Sticky quick actions on mobile
  */
 export default function NESAAfrica() {
   return (
@@ -46,46 +54,72 @@ export default function NESAAfrica() {
       <div className="min-h-screen bg-charcoal pb-16 lg:pb-0">
         <NESAHeader />
         
-        {/* 1. Cinematic Hero */}
+        {/* === ABOVE FOLD — Fast Paint === */}
         <TrophyHeroSection />
         <TrustLogosStrip />
+        
+        {/* Sticky Quick Actions (mobile) */}
         <QuickActionBar />
         
-        {/* 2. Featured Nominees — Grammy-style */}
-        <LazySection>
-          <FeaturedNomineesSpotlight />
-        </LazySection>
+        {/* What's Happening Now */}
+        <WhatsLiveSection />
         
-        {/* 3. Nomination Paths */}
-        <LazySection>
-          <NominationPathsCards />
-        </LazySection>
+        {/* Choose Your Path */}
+        <NominationPathsCards />
         
-        {/* 4. How It Works */}
+        {/* === BELOW FOLD — Lazy Loaded === */}
+        
+        {/* How It Works */}
         <LazySection>
           <HowItWorksVisual />
         </LazySection>
         
-        {/* 5. AGC Voting */}
+        {/* AGC Voting System */}
         <LazySection>
           <VoteWithAGCSection />
         </LazySection>
         
-        {/* 6. Legacy Impact */}
+        {/* Legacy Impact */}
         <LazySection>
           <LegacyImpactSection />
         </LazySection>
 
-        {/* 7. Media & Music */}
+        {/* Integrity & Governance */}
         <LazySection>
-          <MediaShowcaseSection />
+          <IntegritySection />
         </LazySection>
         
-        {/* 8. Partners + Final CTA */}
+        {/* Key Dates */}
+        <LazySection>
+          <UpcomingEventsSection />
+        </LazySection>
+        
+        {/* Media */}
+        <LazySection>
+          <WatchSection />
+        </LazySection>
+        
+        {/* Official Music */}
+        <LazySection>
+          <NESAMusicSection />
+        </LazySection>
+        
+        {/* Education Champions Directory */}
+        <LazySection>
+          <EducationChampionsDirectory />
+        </LazySection>
+        
+        {/* Categories Overview */}
+        <LazySection>
+          <CategoriesSection />
+        </LazySection>
+        
+        {/* Partners & Sponsors */}
         <LazySection>
           <SponsorsSection />
         </LazySection>
         
+        {/* Final Call to Action */}
         <LazySection>
           <FinalCTASection />
         </LazySection>
