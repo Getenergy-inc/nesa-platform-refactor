@@ -130,6 +130,57 @@ export type Database = {
           },
         ]
       }
+      ambassadors: {
+        Row: {
+          appointed_date: string | null
+          bio: string | null
+          chapter_id: string | null
+          created_at: string
+          id: string
+          region_id: string | null
+          status: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          appointed_date?: string | null
+          bio?: string | null
+          chapter_id?: string | null
+          created_at?: string
+          id?: string
+          region_id?: string | null
+          status?: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          appointed_date?: string | null
+          bio?: string | null
+          chapter_id?: string | null
+          created_at?: string
+          id?: string
+          region_id?: string | null
+          status?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "ambassadors_chapter_id_fkey"
+            columns: ["chapter_id"]
+            isOneToOne: false
+            referencedRelation: "chapters"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "ambassadors_region_id_fkey"
+            columns: ["region_id"]
+            isOneToOne: false
+            referencedRelation: "regions"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       audit_events: {
         Row: {
           action: string
@@ -3830,6 +3881,59 @@ export type Database = {
         }
         Relationships: []
       }
+      scef_board_members: {
+        Row: {
+          appointed_date: string | null
+          bio: string | null
+          created_at: string
+          email: string | null
+          full_name: string
+          id: string
+          is_active: boolean
+          phone: string | null
+          photo_url: string | null
+          region_id: string | null
+          role_title: string
+          updated_at: string
+        }
+        Insert: {
+          appointed_date?: string | null
+          bio?: string | null
+          created_at?: string
+          email?: string | null
+          full_name: string
+          id?: string
+          is_active?: boolean
+          phone?: string | null
+          photo_url?: string | null
+          region_id?: string | null
+          role_title?: string
+          updated_at?: string
+        }
+        Update: {
+          appointed_date?: string | null
+          bio?: string | null
+          created_at?: string
+          email?: string | null
+          full_name?: string
+          id?: string
+          is_active?: boolean
+          phone?: string | null
+          photo_url?: string | null
+          region_id?: string | null
+          role_title?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "scef_board_members_region_id_fkey"
+            columns: ["region_id"]
+            isOneToOne: false
+            referencedRelation: "regions"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       seasons: {
         Row: {
           blue_garnet_open: boolean | null
@@ -4519,6 +4623,60 @@ export type Database = {
             columns: ["scope_chapter_id"]
             isOneToOne: false
             referencedRelation: "chapters"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      volunteers: {
+        Row: {
+          chapter_id: string | null
+          created_at: string
+          id: string
+          joined_date: string | null
+          region_id: string | null
+          responsibilities: string | null
+          status: string
+          updated_at: string
+          user_id: string
+          volunteer_type: string | null
+        }
+        Insert: {
+          chapter_id?: string | null
+          created_at?: string
+          id?: string
+          joined_date?: string | null
+          region_id?: string | null
+          responsibilities?: string | null
+          status?: string
+          updated_at?: string
+          user_id: string
+          volunteer_type?: string | null
+        }
+        Update: {
+          chapter_id?: string | null
+          created_at?: string
+          id?: string
+          joined_date?: string | null
+          region_id?: string | null
+          responsibilities?: string | null
+          status?: string
+          updated_at?: string
+          user_id?: string
+          volunteer_type?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "volunteers_chapter_id_fkey"
+            columns: ["chapter_id"]
+            isOneToOne: false
+            referencedRelation: "chapters"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "volunteers_region_id_fkey"
+            columns: ["region_id"]
+            isOneToOne: false
+            referencedRelation: "regions"
             referencedColumns: ["id"]
           },
         ]
