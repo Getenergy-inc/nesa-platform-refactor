@@ -2,7 +2,7 @@ import { Trophy, Vote, Heart, ArrowRight, MapPin, GraduationCap, Calendar, Users
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
-import legacyRebuildImg from "@/assets/nesa-legacy-rebuild.jpg";
+import legacyRebuildImg from "@/assets/rebuild/rebuild-school-backdrop.jpg";
 import africaMapImg from "@/assets/africa-map-silhouette.png";
 
 const regions = [
