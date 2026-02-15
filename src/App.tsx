@@ -118,7 +118,7 @@ import { OLCDashboard, OLCMembers, OLCSettlements, OLCWallet } from "./pages/olc
 import { NRCPortal, NRCMyQueue, NRCMembers as NRCMembersPage, NRCSettings } from "./pages/nrc";
 
 // Admin Pages
-import { AdminDashboard, AdminOrders, AdminImpact, AdminNomineeImages, AdminNomineeProfiles, AdminVotingGovernance, AdminRebuild } from "./pages/admin";
+import { AdminDashboard, AdminOrders, AdminImpact, AdminNomineeImages, AdminNomineeProfiles, AdminVotingGovernance, AdminRebuild, AdminEDXAnalytics } from "./pages/admin";
 
 // Optimized QueryClient with caching strategy
 const queryClient = new QueryClient({
@@ -293,6 +293,7 @@ const App = () => (
                 <Route path="/admin/nominee-profiles" element={<AdminNomineeProfiles />} />
                 <Route path="/admin/voting" element={<AdminVotingGovernance />} />
                 <Route path="/admin/rebuild" element={<AdminRebuild />} />
+                <Route path="/admin/edx" element={<AdminEDXAnalytics />} />
                 
                 {/* Support */}
                 <Route path="/donate" element={<WithLayout><Donate /></WithLayout>} />

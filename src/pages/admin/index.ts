@@ -5,3 +5,4 @@ export { default as AdminNomineeImages } from "./NomineeImages";
 export { default as AdminNomineeProfiles } from "./NomineeProfiles";
 export { default as AdminVotingGovernance } from "./AdminVotingGovernance";
 export { default as AdminRebuild } from "./AdminRebuild";
+export { default as AdminEDXAnalytics } from "./AdminEDXAnalytics";
