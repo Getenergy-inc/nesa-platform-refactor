@@ -4905,6 +4905,8 @@ export type Database = {
         | "jury_scoring"
         | "results"
         | "certificates"
+        | "rebuild_nominations"
+        | "rebuild_voting"
       transaction_status: "pending" | "confirmed" | "failed" | "refunded"
       transaction_type: "donation" | "sponsorship" | "ticket"
       transfer_status:
@@ -5182,6 +5184,8 @@ export const Constants = {
         "jury_scoring",
         "results",
         "certificates",
+        "rebuild_nominations",
+        "rebuild_voting",
       ],
       transaction_status: ["pending", "confirmed", "failed", "refunded"],
       transaction_type: ["donation", "sponsorship", "ticket"],
