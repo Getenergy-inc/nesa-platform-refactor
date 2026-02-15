@@ -187,7 +187,7 @@ export function buildScheduledEvents(
         name: "Gold Certificate Winners Show",
         type: "show",
         date: createSeasonDate(awardYear, template.tvShows.goldCertificateWinners.monthDay, template.tvShows.goldCertificateWinners.yearOffset),
-        description: "3-hour TV Show — 135 Gold winners announced",
+        description: "3-hour TV Show — 405 Gold Certificate winners announced",
       },
     ],
     votingWindows: [
@@ -196,7 +196,7 @@ export function buildScheduledEvents(
         name: "Gold Public Voting Opens",
         type: "voting",
         date: createSeasonDate(awardYear, template.votingWindows.goldVotingOpens.monthDay, template.votingWindows.goldVotingOpens.yearOffset, "00:00:00"),
-        description: "Mass participation voting across 135 sub-categories",
+        description: "Mass participation voting across 135 sub-categories — Top 3 per subcategory",
       },
       {
         id: "blue-garnet-voting",
@@ -283,7 +283,7 @@ export function buildTimeline(
       id: "gold-voting",
       phase: "Gold Public Voting",
       dateRange: `10 Apr – 16 May ${ceremonyYear}`,
-      description: "Mass participation voting across 135 sub-categories",
+      description: "Mass participation voting across 135 sub-categories — Top 3 per subcategory (405 winners)",
       type: "voting",
       stageAction: "public_voting",
     },
@@ -291,7 +291,7 @@ export function buildTimeline(
       id: "gold-show",
       phase: "Gold Certificate Winners Show",
       dateRange: `17 May ${ceremonyYear}`,
-      description: "3-hour TV Show — 135 Gold winners announced",
+      description: "3-hour TV Show — 405 Gold Certificate winners announced",
       type: "recognition",
     },
     {
