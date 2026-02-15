@@ -1,26 +1,29 @@
 import { Tv, PlayCircle, Radio, ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
 
 export function WatchSection() {
+  const { t } = useTranslation("pages");
+
   const channels = [
     {
       icon: Tv,
-      name: "NESA Africa TV",
-      description: "Official award shows and recognition ceremonies",
+      name: t("watchSection.channels.nesaTv.name"),
+      description: t("watchSection.channels.nesaTv.description"),
       href: "/media/tv",
     },
     {
       icon: PlayCircle,
-      name: "Media Hub",
-      description: "Highlights, interviews, and behind the scenes",
+      name: t("watchSection.channels.mediaHub.name"),
+      description: t("watchSection.channels.mediaHub.description"),
       href: "/media",
     },
     {
       icon: Radio,
-      name: "Live Events",
-      description: "Stream galas and special broadcasts",
+      name: t("watchSection.channels.liveEvents.name"),
+      description: t("watchSection.channels.liveEvents.description"),
       href: "/media/gala",
     },
   ];
@@ -29,24 +32,22 @@ export function WatchSection() {
     <section className="bg-charcoal py-12 md:py-16 border-t border-white/10">
       <div className="container">
         <div className="flex flex-col lg:flex-row items-center justify-between gap-8">
-          {/* Left: Content */}
           <div className="lg:max-w-md">
             <h2 className="font-display text-2xl md:text-3xl font-bold text-white mb-2">
-              Watch & Stay Engaged
+              {t("watchSection.title")}
             </h2>
             <p className="text-white/60 mb-4">
-              Watch official shows to stay informed and engaged in the awards cycle.
+              {t("watchSection.description")}
             </p>
             <Link to="/media">
               <Button className="bg-gold hover:bg-gold-dark text-charcoal font-semibold rounded-full gap-2">
                 <PlayCircle className="h-4 w-4" />
-                Explore Media Hub
+                {t("watchSection.exploreMediaHub")}
                 <ArrowRight className="h-4 w-4" />
               </Button>
             </Link>
           </div>
 
-          {/* Right: Channel Cards */}
           <div className="flex flex-wrap justify-center gap-4">
             {channels.map((channel, index) => (
               <motion.div

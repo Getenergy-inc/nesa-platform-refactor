@@ -64,10 +64,10 @@ export function UpcomingEventsSection() {
       <div className="container">
         <div className="text-center mb-12">
           <h2 className="font-display text-3xl md:text-4xl font-bold text-white mb-4">
-            Live Countdown: Shows, Voting Windows & Gala
+            {t("landing.upcomingEvents.title")}
           </h2>
           <p className="text-white/70 max-w-2xl mx-auto">
-            Track every milestone across the NESA-Africa awards cycle—from recognition shows to voting windows and the Blue Garnet Gala.
+            {t("landing.upcomingEvents.description")}
           </p>
         </div>
 
@@ -82,7 +82,7 @@ export function UpcomingEventsSection() {
             icon={Vote} 
             title={t("landing.upcomingEvents.votingWindows")} 
             events={events.votingWindows}
-            note="Public participation happens during official windows. Vote using AGC voting points earned through platform participation."
+            note={t("landing.upcomingEvents.votingNote", { defaultValue: "Public participation happens during official windows. Vote using AGC voting points earned through platform participation." })}
             image={countdownVotingImg}
           />
           <EventGroup 

@@ -1,5 +1,6 @@
 import { Award, Vote, Users, Check, ArrowRight, Trophy, Star, Shield, Globe, MapPin } from "lucide-react";
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import { Button } from "@/components/ui/button";
 import { useSeason } from "@/contexts/SeasonContext";
 import { useRegion } from "@/contexts/RegionContext";
@@ -11,49 +12,38 @@ import nomPlatinumImg from "@/assets/cards/nom-platinum.jpg";
 
 export function NominationPathsCards() {
   const { currentEdition } = useSeason();
+  const { t } = useTranslation("pages");
 
   const paths = [
     {
       icon: Star,
-      badge: "Lifetime Achievement",
-      title: "Africa Icon",
-      subtitle: "Blue Garnet Award (2005–" + currentEdition.displayYear + ")",
-      features: [
-        "10+ years institutional achievements",
-        "Legacy recognition",
-        "Expert panel selection"
-      ],
-      cta: { label: "Nominate an Icon", href: "/nominate?tier=icon" },
+      badge: t("nominationPaths.paths.icon.badge"),
+      title: t("nominationPaths.paths.icon.title"),
+      subtitle: t("nominationPaths.paths.icon.subtitle", { year: currentEdition.displayYear }),
+      features: t("nominationPaths.paths.icon.features", { returnObjects: true }) as string[],
+      cta: { label: t("nominationPaths.paths.icon.cta"), href: "/nominate?tier=icon" },
       accent: "blue",
       image: iconImg,
     },
     {
       icon: Vote,
-      badge: "Public Voting",
-      title: "Blue Garnet & Gold",
-      subtitle: "Annual Competition",
-      features: [
-        "Earn voting points through participation",
-        "Vote with AGC during official windows",
-        "Jury + public weighting (Blue Garnet)"
-      ],
-      cta: { label: "Nominate for Voting", href: "/nominate?tier=voting" },
-      secondaryCta: { label: "How Voting Works", href: "/about-agc" },
+      badge: t("nominationPaths.paths.voting.badge"),
+      title: t("nominationPaths.paths.voting.title"),
+      subtitle: t("nominationPaths.paths.voting.subtitle"),
+      features: t("nominationPaths.paths.voting.features", { returnObjects: true }) as string[],
+      cta: { label: t("nominationPaths.paths.voting.cta"), href: "/nominate?tier=voting" },
+      secondaryCta: { label: t("nominationPaths.paths.voting.secondaryCta"), href: "/about-agc" },
       accent: "gold",
       featured: true,
       image: nomVotingImg,
     },
     {
       icon: Shield,
-      badge: "Expert Selection",
-      title: "Platinum Certificate",
-      subtitle: "Merit-Based Recognition",
-      features: [
-        "Baseline recognition",
-        "No public voting required",
-        "Governance verification"
-      ],
-      cta: { label: "Submit Platinum Nomination", href: "/nominate?tier=platinum" },
+      badge: t("nominationPaths.paths.platinum.badge"),
+      title: t("nominationPaths.paths.platinum.title"),
+      subtitle: t("nominationPaths.paths.platinum.subtitle"),
+      features: t("nominationPaths.paths.platinum.features", { returnObjects: true }) as string[],
+      cta: { label: t("nominationPaths.paths.platinum.cta"), href: "/nominate?tier=platinum" },
       accent: "slate",
       image: nomPlatinumImg,
     },
@@ -98,13 +88,13 @@ export function NominationPathsCards() {
           viewport={{ once: true }}
         >
           <span className="inline-block px-4 py-1.5 rounded-full bg-gold/10 border border-gold/25 text-gold font-medium text-sm uppercase tracking-wider mb-4">
-            Choose Your Path
+            {t("nominationPaths.badge")}
           </span>
           <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold text-white mt-2 mb-4">
-            Start Your Nomination Journey
+            {t("nominationPaths.title")}
           </h2>
           <p className="text-white/60 max-w-2xl mx-auto text-lg">
-            Select the appropriate award category based on the nominee's achievements.
+            {t("nominationPaths.description")}
           </p>
         </motion.div>
 
@@ -125,7 +115,7 @@ export function NominationPathsCards() {
                 {/* Featured Badge */}
                 {path.featured && (
                   <div className="absolute top-[calc(10rem-0.75rem)] left-1/2 -translate-x-1/2 z-10 px-4 py-1 bg-gold rounded-full text-charcoal text-xs font-bold shadow-lg shadow-gold/30">
-                    Most Popular
+                    {t("nominationPaths.mostPopular")}
                   </div>
                 )}
 
@@ -204,6 +194,7 @@ function RegionNominateStrip() {
   const { regions } = useRegion();
   const { data } = useRegionNomineeCounts();
   const { regionCounts = [], totalCount = 0 } = data || {};
+  const { t } = useTranslation("pages");
 
   const getCount = (slug: string) => {
     const found = regionCounts.find(r => r.region_slug === slug);
@@ -226,9 +217,9 @@ function RegionNominateStrip() {
       <div className="text-center mb-6">
         <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/5 border border-white/10 text-white/70 font-medium text-sm">
           <Globe className="h-4 w-4 text-gold" />
-          Nominate by Region
+          {t("nominationPaths.nominateByRegion")}
           <span className="ml-2 px-2 py-0.5 rounded-full bg-gold/15 text-gold text-xs font-bold">
-            {totalCount.toLocaleString()} nominees
+            {totalCount.toLocaleString()} {t("nominationPaths.nominees")}
           </span>
         </div>
       </div>
@@ -236,12 +227,12 @@ function RegionNominateStrip() {
       <div className="flex flex-wrap justify-center gap-2 max-w-4xl mx-auto">
         <Link to="/nominate">
           <Button variant="outline" size="sm" className="border-gold/30 text-gold hover:bg-gold/10 hover:border-gold/50 rounded-full gap-1.5 font-medium">
-            <span>🌍</span> All Africa <CountBadge count={totalCount} variant="gold" />
+            <span>🌍</span> {t("nominationPaths.allAfrica")} <CountBadge count={totalCount} variant="gold" />
           </Button>
         </Link>
         <Link to="/nominate?region=nigeria">
           <Button variant="outline" size="sm" className="border-gold/30 text-gold hover:bg-gold/10 hover:border-gold/50 rounded-full gap-1.5 font-medium">
-            🇳🇬 Nigeria <CountBadge count={nigeriaCount} variant="gold" />
+            🇳🇬 {t("nominationPaths.nigeria")} <CountBadge count={nigeriaCount} variant="gold" />
           </Button>
         </Link>
         {africanRegions.map((region) => (
