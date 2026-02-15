@@ -45,8 +45,8 @@ function MiniPlayer({ song, isPlaying, onToggle }: {
 }) {
   return (
     <div className="flex items-center gap-3 rounded-xl bg-secondary/60 border border-ivory/8 p-3 hover:border-primary/20 transition-all">
-      <div className="relative h-12 w-12 rounded-lg overflow-hidden flex-shrink-0">
-        <img src={song.cover} alt={song.title} className="h-full w-full object-cover" />
+      <div className="relative h-12 w-12 rounded-lg overflow-hidden flex-shrink-0 bg-primary/10">
+        <img src={song.cover} alt={song.title} className="h-full w-full object-cover" loading="lazy" />
         {isPlaying && (
           <div className="absolute inset-0 bg-secondary/40 flex items-center justify-center">
             <div className="flex gap-0.5">
