@@ -108,18 +108,18 @@ export default function JudgeStatus() {
     setNotFound(false);
 
     try {
-      const { data: app, error } = await supabase
-        .from("judge_applications")
-        .select("id, full_name, email, status, created_at, verified_at, approved_at, rejected_at, rejection_reason")
-        .eq("email", data.email.toLowerCase())
-        .maybeSingle();
+      // Use edge function for secure server-side lookup
+      const { data: result, error } = await supabase.functions.invoke("jury/status-lookup", {
+        method: "POST",
+        body: { email: data.email.toLowerCase() },
+      });
 
       if (error) throw error;
 
-      if (!app) {
+      if (!result?.found) {
         setNotFound(true);
       } else {
-        setApplication(app as ApplicationStatus);
+        setApplication(result.application as ApplicationStatus);
       }
     } catch (error: any) {
       console.error("Error fetching application:", error);

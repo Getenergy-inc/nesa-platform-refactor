@@ -1,4 +1,5 @@
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
+import { handleStatusLookup, handleTokenVerify } from "./public-lookup.ts";
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
@@ -15,6 +16,17 @@ Deno.serve(async (req) => {
     const url = new URL(req.url);
     const pathParts = url.pathname.split("/").filter(Boolean);
     const action = pathParts[1] || "";
+
+    // === PUBLIC ROUTES (no auth required) ===
+    if (req.method === "POST" && action === "status-lookup") {
+      const { email } = await req.json();
+      return await handleStatusLookup(email);
+    }
+
+    if (req.method === "POST" && action === "verify-token") {
+      const { token } = await req.json();
+      return await handleTokenVerify(token);
+    }
 
     // Create Supabase client with auth
     const authHeader = req.headers.get("Authorization");

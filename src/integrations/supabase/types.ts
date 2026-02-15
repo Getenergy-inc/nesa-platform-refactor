@@ -5159,6 +5159,80 @@ export type Database = {
         }
         Relationships: []
       }
+      public_rebuild_nominations: {
+        Row: {
+          created_at: string | null
+          evidence_urls: string[] | null
+          id: string | null
+          reason: string | null
+          school_country: string | null
+          school_description: string | null
+          school_id: string | null
+          school_name: string | null
+          school_region_id: string | null
+          school_type: string | null
+          season_id: string | null
+          status: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          evidence_urls?: string[] | null
+          id?: string | null
+          reason?: string | null
+          school_country?: string | null
+          school_description?: string | null
+          school_id?: string | null
+          school_name?: string | null
+          school_region_id?: string | null
+          school_type?: string | null
+          season_id?: string | null
+          status?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          evidence_urls?: string[] | null
+          id?: string | null
+          reason?: string | null
+          school_country?: string | null
+          school_description?: string | null
+          school_id?: string | null
+          school_name?: string | null
+          school_region_id?: string | null
+          school_type?: string | null
+          season_id?: string | null
+          status?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "rebuild_nominations_school_id_fkey"
+            columns: ["school_id"]
+            isOneToOne: false
+            referencedRelation: "rebuild_school_vote_counts"
+            referencedColumns: ["school_id"]
+          },
+          {
+            foreignKeyName: "rebuild_nominations_school_id_fkey"
+            columns: ["school_id"]
+            isOneToOne: false
+            referencedRelation: "rebuild_schools"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "rebuild_nominations_school_region_id_fkey"
+            columns: ["school_region_id"]
+            isOneToOne: false
+            referencedRelation: "regions"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "rebuild_nominations_season_id_fkey"
+            columns: ["season_id"]
+            isOneToOne: false
+            referencedRelation: "seasons"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       rebuild_school_vote_counts: {
         Row: {
           country: string | null
