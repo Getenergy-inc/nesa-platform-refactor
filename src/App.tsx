@@ -120,6 +120,7 @@ import { NRCPortal, NRCMyQueue, NRCMembers as NRCMembersPage, NRCSettings } from
 
 // Admin Pages
 import { AdminDashboard, AdminOrders, AdminImpact, AdminNomineeImages, AdminNomineeProfiles, AdminVotingGovernance, AdminRebuild, AdminEDXAnalytics } from "./pages/admin";
+import BulkSeedNominees from "./pages/admin/BulkSeedNominees";
 
 // Optimized QueryClient with caching strategy
 const queryClient = new QueryClient({
@@ -295,6 +296,7 @@ const App = () => (
                 <Route path="/admin/voting" element={<AdminVotingGovernance />} />
                 <Route path="/admin/rebuild" element={<AdminRebuild />} />
                 <Route path="/admin/edx" element={<AdminEDXAnalytics />} />
+                <Route path="/admin/bulk-seed" element={<BulkSeedNominees />} />
                 
                 {/* Support */}
                 <Route path="/donate" element={<WithLayout><Donate /></WithLayout>} />
