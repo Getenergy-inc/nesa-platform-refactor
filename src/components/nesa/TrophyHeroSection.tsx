@@ -1,5 +1,6 @@
 import { Trophy, ArrowRight, Sparkles, Users, Globe, Calendar, ChevronDown, Play } from "lucide-react";
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import { Button } from "@/components/ui/button";
 import { useSeason } from "@/contexts/SeasonContext";
 import { motion, AnimatePresence } from "framer-motion";
@@ -15,24 +16,15 @@ import blueGarnetTrophyWinners from "@/assets/blue-garnet-trophy-winners.png";
 const CAROUSEL_ITEMS = ["trophy-icon", "trophy-winners", "logo"] as const;
 type CarouselItem = typeof CAROUSEL_ITEMS[number];
 
-/**
- * TrophyHeroSection — Immersive welcome for 90% retention
- * 
- * Warm, cinematic hero with staggered reveal:
- * 1. Background video fades in
- * 2. Headline + tagline slide up
- * 3. CTAs appear with pulse
- * 4. Trust stats fade in last
- * 5. Scroll hint pulses
- */
 export function TrophyHeroSection() {
+  const { t } = useTranslation("pages");
   const { getBannerText } = useSeason();
   const [currentItem, setCurrentItem] = useState<CarouselItem>("trophy-icon");
   const { data: countsData } = useRegionNomineeCounts();
   const nomineeLabel = useMemo(() => {
-    if (!countsData) return "1,760+ Nominees";
-    return `${countsData.totalCount.toLocaleString()}+ Nominees`;
-  }, [countsData]);
+    const count = countsData?.totalCount ?? 1760;
+    return t("landing.trophyHero.trustNominees", { count: count.toLocaleString() } as any);
+  }, [countsData, t]);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -64,13 +56,11 @@ export function TrophyHeroSection() {
         >
           <source src={stageBackdropVideo} type="video/mp4" />
         </video>
-        {/* Warm charcoal + gold gradient overlay for readability */}
         <div className="absolute inset-0 bg-charcoal/55" />
         <div className="absolute inset-0 bg-gradient-to-b from-charcoal/40 via-transparent to-charcoal" />
         <div className="absolute inset-0 bg-gradient-to-r from-charcoal/50 via-transparent to-charcoal/50" />
       </div>
       
-      {/* Ambient Particles */}
       <FloatingParticles count={20} color="gold" className="opacity-40" />
       
       {/* Spotlight Effects — Desktop only */}
@@ -102,41 +92,36 @@ export function TrophyHeroSection() {
               <span className="text-xs sm:text-sm font-medium text-white/90">{bannerText}</span>
             </motion.div>
 
-            {/* H1 — Institutional positioning */}
             <motion.h1
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.3 }}
               className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-[3.5rem] xl:text-7xl font-bold text-white mb-5 leading-[1.08]"
             >
-              Recognizing Excellence Across{" "}
+              {t("landing.trophyHero.headline")}{" "}
               <span className="text-gold bg-gradient-to-r from-gold to-amber-400 bg-clip-text text-transparent">
-                17 Award Categories
+                {t("landing.trophyHero.headlineAccent")}
               </span>
             </motion.h1>
 
-            {/* Tagline */}
             <motion.p
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.45 }}
               className="text-gold/80 text-sm sm:text-base font-semibold mb-3 tracking-wide uppercase"
             >
-              Honoring Africa's Education Changemakers
+              {t("landing.trophyHero.tagline")}
             </motion.p>
 
-            {/* Value proposition */}
             <motion.p
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.55 }}
               className="text-white/75 text-base sm:text-lg mb-8 max-w-xl mx-auto lg:mx-0 leading-relaxed"
             >
-              A standards-led continental recognition platform celebrating verified 
-              impact and enabling structured public participation across Africa.
+              {t("landing.trophyHero.valueProposition")}
             </motion.p>
 
-            {/* CTAs — Primary + Secondary */}
             <motion.div
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
@@ -153,7 +138,7 @@ export function TrophyHeroSection() {
                     className="w-full sm:w-auto bg-gold hover:bg-gold-dark text-charcoal font-bold rounded-full px-10 gap-2.5 shadow-lg shadow-gold/25 hover:shadow-gold/40 transition-all h-13 text-base group"
                   >
                     <Trophy className="h-5 w-5 group-hover:rotate-12 transition-transform" />
-                    Nominate Now
+                    {t("landing.trophyHero.nominateNow")}
                     <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
                   </Button>
                 </motion.div>
@@ -164,7 +149,7 @@ export function TrophyHeroSection() {
                   variant="outline"
                   className="w-full sm:w-auto border-gold/50 text-gold hover:bg-gold/10 hover:border-gold rounded-full px-8 gap-2 h-13 text-base transition-all"
                 >
-                  Vote with AGC
+                  {t("landing.trophyHero.voteWithAGC")}
                 </Button>
               </Link>
               <Link to="/media">
@@ -174,12 +159,11 @@ export function TrophyHeroSection() {
                   className="w-full sm:w-auto border-gold/40 text-gold hover:bg-gold/10 hover:border-gold rounded-full px-8 gap-2 h-13 text-base transition-all"
                 >
                   <Play className="h-4 w-4" />
-                  Watch Live
+                  {t("landing.trophyHero.watchLive")}
                 </Button>
               </Link>
             </motion.div>
 
-            {/* Trust Bullets */}
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
@@ -187,9 +171,9 @@ export function TrophyHeroSection() {
               className="flex flex-wrap gap-5 sm:gap-6 justify-center lg:justify-start"
             >
               {[
-                { icon: Globe, label: "10 Regions + Diaspora", value: "" },
-                { icon: Users, label: nomineeLabel, value: "" },
-                { icon: Calendar, label: "15 Years of Vision", value: "" },
+                { icon: Globe, label: String(t("landing.trophyHero.trustRegions")) },
+                { icon: Users, label: nomineeLabel as string },
+                { icon: Calendar, label: String(t("landing.trophyHero.trustVision")) },
               ].map((stat) => (
                 <div key={stat.label} className="flex items-center gap-2 text-white/60 text-sm">
                   <stat.icon className="h-4 w-4 text-gold/70" />
@@ -199,7 +183,7 @@ export function TrophyHeroSection() {
             </motion.div>
           </div>
 
-          {/* Right: Trophy Carousel — Glowing showcase */}
+          {/* Right: Trophy Carousel */}
           <motion.div 
             className="order-1 lg:order-2 flex justify-center"
             initial={{ opacity: 0, scale: 0.95 }}
@@ -207,7 +191,6 @@ export function TrophyHeroSection() {
             transition={{ duration: 0.6, delay: 0.3 }}
           >
             <div className="relative h-56 sm:h-64 md:h-72 lg:h-80 xl:h-[22rem] w-48 sm:w-56 md:w-64 lg:w-72 xl:w-80 flex items-center justify-center">
-              {/* Ambient glow */}
               <div className="absolute -inset-6 bg-gradient-to-t from-blue-600/25 via-gold/15 to-transparent blur-3xl rounded-full" />
               <div className="absolute -inset-3 bg-gradient-to-b from-gold/10 via-transparent to-blue-500/10 blur-2xl rounded-full" />
               
@@ -226,9 +209,8 @@ export function TrophyHeroSection() {
                       alt="NESA Blue Garnet Award — Africa's Highest Education Honour"
                       className="w-44 sm:w-56 md:w-64 lg:w-72 h-auto rounded-2xl shadow-2xl shadow-blue-900/40"
                     />
-                    {/* Caption */}
                     <div className="absolute -bottom-4 left-1/2 -translate-x-1/2 px-4 py-1.5 rounded-full bg-charcoal/80 backdrop-blur-sm border border-gold/30 whitespace-nowrap">
-                      <span className="text-xs text-gold font-medium">Africa's Highest Education Honour</span>
+                      <span className="text-xs text-gold font-medium">{t("landing.trophyHero.trophyCaption")}</span>
                     </div>
                   </motion.div>
                 )}
@@ -247,7 +229,7 @@ export function TrophyHeroSection() {
                       className="w-44 sm:w-56 md:w-64 lg:w-72 h-auto rounded-2xl shadow-2xl shadow-blue-900/40"
                     />
                     <div className="absolute -bottom-4 left-1/2 -translate-x-1/2 px-4 py-1.5 rounded-full bg-charcoal/80 backdrop-blur-sm border border-gold/30 whitespace-nowrap">
-                      <span className="text-xs text-gold font-medium">Celebrating Education Champions</span>
+                      <span className="text-xs text-gold font-medium">{t("landing.trophyHero.winnersCaption")}</span>
                     </div>
                   </motion.div>
                 )}
@@ -269,7 +251,6 @@ export function TrophyHeroSection() {
         </div>
       </div>
 
-      {/* Scroll Hint */}
       <motion.button
         onClick={scrollToContent}
         className="absolute bottom-6 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-1 text-white/40 hover:text-gold transition-colors"
@@ -277,7 +258,7 @@ export function TrophyHeroSection() {
         animate={{ opacity: 1 }}
         transition={{ delay: 1.2 }}
       >
-        <span className="text-[10px] uppercase tracking-widest">Discover</span>
+        <span className="text-[10px] uppercase tracking-widest">{t("landing.trophyHero.scrollHint")}</span>
         <motion.div
           animate={{ y: [0, 6, 0] }}
           transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}

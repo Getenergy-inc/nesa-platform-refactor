@@ -1,5 +1,6 @@
 import { Play, Vote, Calendar, Tv, ArrowRight, Radio, Clock, Sparkles } from "lucide-react";
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import { Button } from "@/components/ui/button";
 import { useSeason } from "@/contexts/SeasonContext";
 import { buildScheduledEvents, DEFAULT_SCHEDULE_TEMPLATE, type ScheduledEvent } from "@/config/schedule";
@@ -22,13 +23,8 @@ function formatDate(dateStr: string | Date): string {
   });
 }
 
-/**
- * WhatsLiveSection — Dynamic event cards with warm engagement
- * 
- * Shows next TV show, voting window, and gala event.
- * Gradient accent cards with hover warmth.
- */
 export function WhatsLiveSection() {
+  const { t } = useTranslation("pages");
   const { currentEdition } = useSeason();
   const events = buildScheduledEvents(currentEdition.displayYear, DEFAULT_SCHEDULE_TEMPLATE);
 
@@ -39,7 +35,7 @@ export function WhatsLiveSection() {
   const liveCards = [
     {
       icon: Tv,
-      label: "Next TV Show",
+      label: t("landing.whatsLive.nextTVShow"),
       event: nextShow,
       href: "/media/tv",
       gradient: "from-gold/20 to-amber-600/10",
@@ -48,7 +44,7 @@ export function WhatsLiveSection() {
     },
     {
       icon: Vote,
-      label: "Next Voting Window",
+      label: t("landing.whatsLive.nextVotingWindow"),
       event: nextVoting,
       href: "/vote",
       gradient: "from-blue-500/20 to-blue-600/10",
@@ -57,7 +53,7 @@ export function WhatsLiveSection() {
     },
     {
       icon: Calendar,
-      label: "Next Gala Event",
+      label: t("landing.whatsLive.nextGalaEvent"),
       event: nextGala,
       href: "/media/gala",
       gradient: "from-purple-500/20 to-purple-600/10",
@@ -69,28 +65,26 @@ export function WhatsLiveSection() {
   return (
     <section className="bg-charcoal py-14 md:py-18">
       <div className="container">
-        {/* Header */}
         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-8">
           <div className="flex items-center gap-3">
             <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-red-500/15 border border-red-500/30">
               <Radio className="h-3 w-3 text-red-400 animate-pulse" />
               <span className="text-xs font-semibold text-red-400 uppercase tracking-wider">
-                What's Live
+                {t("landing.whatsLive.badge")}
               </span>
             </div>
             <h2 className="font-display text-xl md:text-2xl font-bold text-white">
-              Upcoming Events &amp; Voting
+              {t("landing.whatsLive.title")}
             </h2>
           </div>
           <Link to="/about/timeline">
             <Button variant="ghost" className="text-gold hover:text-gold hover:bg-gold/10 gap-2 text-sm">
-              View Full Calendar
+              {t("landing.whatsLive.viewCalendar")}
               <ArrowRight className="h-4 w-4" />
             </Button>
           </Link>
         </div>
 
-        {/* Cards Grid */}
         <div className="grid sm:grid-cols-3 gap-4">
           {liveCards.map((card, index) => (
             <motion.div
@@ -102,15 +96,12 @@ export function WhatsLiveSection() {
             >
               <Link to={card.href}>
                 <div className={`group relative bg-gradient-to-br ${card.gradient} rounded-2xl p-6 border ${card.borderColor} hover:bg-white/8 transition-all duration-300`}>
-                  {/* Icon */}
                   <div className="h-11 w-11 rounded-xl bg-white/8 flex items-center justify-center mb-4 group-hover:bg-white/12 transition-colors">
                     <card.icon className={`h-5 w-5 ${card.iconColor}`} />
                   </div>
                   
-                  {/* Label */}
                   <p className="text-white/45 text-xs uppercase tracking-wider font-medium mb-1.5">{card.label}</p>
                   
-                  {/* Event Name */}
                   {card.event ? (
                     <>
                       <h3 className="text-white font-semibold text-lg mb-2.5 group-hover:text-gold transition-colors line-clamp-1">
@@ -122,10 +113,9 @@ export function WhatsLiveSection() {
                       </div>
                     </>
                   ) : (
-                    <p className="text-white/35 text-sm italic">Coming soon...</p>
+                    <p className="text-white/35 text-sm italic">{t("landing.whatsLive.comingSoon")}</p>
                   )}
 
-                  {/* Hover Arrow */}
                   <ArrowRight className="absolute top-6 right-6 h-4 w-4 text-white/20 group-hover:text-gold group-hover:translate-x-1 transition-all" />
                 </div>
               </Link>
