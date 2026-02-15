@@ -102,16 +102,16 @@ export function TrophyHeroSection() {
               <span className="text-xs sm:text-sm font-medium text-white/90">{bannerText}</span>
             </motion.div>
 
-            {/* H1 — Warm welcoming headline */}
+            {/* H1 — Institutional positioning */}
             <motion.h1
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.3 }}
               className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-[3.5rem] xl:text-7xl font-bold text-white mb-5 leading-[1.08]"
             >
-              Honoring Africa's{" "}
+              Recognizing Excellence Across{" "}
               <span className="text-gold bg-gradient-to-r from-gold to-amber-400 bg-clip-text text-transparent">
-                Education Changemakers
+                17 Award Categories
               </span>
             </motion.h1>
 
@@ -122,7 +122,7 @@ export function TrophyHeroSection() {
               transition={{ duration: 0.5, delay: 0.45 }}
               className="text-gold/80 text-sm sm:text-base font-semibold mb-3 tracking-wide uppercase"
             >
-              Advocating &amp; Achieving Education for All in Africa
+              Honoring Africa's Education Changemakers
             </motion.p>
 
             {/* Value proposition */}
@@ -132,8 +132,8 @@ export function TrophyHeroSection() {
               transition={{ duration: 0.5, delay: 0.55 }}
               className="text-white/75 text-base sm:text-lg mb-8 max-w-xl mx-auto lg:mx-0 leading-relaxed"
             >
-              A standards-led continental recognition and accountability platform 
-              celebrating verified impact and enabling structured public participation.
+              A standards-led continental recognition platform celebrating verified 
+              impact and enabling structured public participation across Africa.
             </motion.p>
 
             {/* CTAs — Primary + Secondary */}

@@ -66,32 +66,29 @@ export function NESALandingPage() {
         {/* 4. What's Live — Dynamic engagement blocks */}
         <WhatsLiveSection />
         
-        {/* 5. Nomination Paths — Scannable entry points */}
-        <NominationPathsCards />
-        
-        {/* ═══ BELOW FOLD — Conversion & Discovery ═══ */}
-        
-        <LazySection>
-          <HowItWorksVisual />
-        </LazySection>
+        {/* ═══ AWARDS OVERVIEW ═══ */}
         
         <LazySection>
           <CategoriesSection />
         </LazySection>
         
+        {/* ═══ NOMINATION ═══ */}
+        
+        <NominationPathsCards />
+        
+        {/* ═══ HOW IT WORKS ═══ */}
+        
+        <LazySection>
+          <HowItWorksVisual />
+        </LazySection>
+        
+        {/* ═══ VOTING ═══ */}
+        
         <LazySection>
           <VoteWithAGCSection />
         </LazySection>
         
-        <LazySection>
-          <EducationChampionsDirectory />
-        </LazySection>
-        
-        {/* ═══ BELOW FOLD — Legacy & Governance ═══ */}
-        
-        <LazySection>
-          <LegacyImpactSection />
-        </LazySection>
+        {/* ═══ GOVERNANCE ═══ */}
         
         <LazySection>
           <IntegritySection />
@@ -101,7 +98,11 @@ export function NESALandingPage() {
           <JudgesSection />
         </LazySection>
         
-        {/* ═══ BELOW FOLD — Media & Events ═══ */}
+        {/* ═══ CHAMPIONS & MEDIA ═══ */}
+        
+        <LazySection>
+          <EducationChampionsDirectory />
+        </LazySection>
         
         <LazySection>
           <MediaShowcaseSection />
@@ -109,6 +110,12 @@ export function NESALandingPage() {
         
         <LazySection>
           <UpcomingEventsSection />
+        </LazySection>
+        
+        {/* ═══ LEGACY ═══ */}
+        
+        <LazySection>
+          <LegacyImpactSection />
         </LazySection>
         
         {/* ═══ CLOSING ═══ */}

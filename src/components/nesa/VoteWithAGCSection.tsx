@@ -2,7 +2,6 @@ import { Coins, Vote, Shield, ArrowRight, UserPlus, Award, Check, AlertTriangle 
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
-import agcCoinImg from "@/assets/nesa-agc-coin.png";
 
 export function VoteWithAGCSection() {
   const steps = [
@@ -48,25 +47,6 @@ export function VoteWithAGCSection() {
             viewport={{ once: true }}
             className="relative"
           >
-            {/* AGC Coin Visual */}
-            <motion.div 
-              className="flex justify-center mb-10"
-              initial={{ opacity: 0, scale: 0.9 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-            >
-              <div className="relative">
-                <div className="absolute -inset-6 bg-gradient-to-t from-gold/20 via-gold/5 to-transparent blur-2xl rounded-full" />
-                <motion.img 
-                  src={agcCoinImg} 
-                  alt="Afrigold Coin — NESA participation credit" 
-                  className="relative w-32 h-32 md:w-40 md:h-40 object-contain drop-shadow-2xl"
-                  animate={{ y: [0, -6, 0] }}
-                  transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-                />
-              </div>
-            </motion.div>
-
             {/* Steps */}
             <div className="space-y-5">
               {steps.map((step, index) => (
@@ -104,17 +84,17 @@ export function VoteWithAGCSection() {
           >
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gold/10 border border-gold/30 mb-6">
               <Coins className="h-4 w-4 text-gold" />
-              <span className="text-sm font-medium text-gold">Earn. Vote. Impact.</span>
+              <span className="text-sm font-medium text-gold">Structured Civic Participation</span>
             </div>
 
             <h2 className="font-display text-3xl md:text-4xl font-bold text-white mb-4">
-              Earn Voting Points.{" "}
-              <span className="text-gold">Vote with AGC.</span>
+              Afrigold Participation{" "}
+              <span className="text-gold">Credit (AGC)</span>
             </h2>
 
             <p className="text-white/70 text-lg mb-6 leading-relaxed">
-              Your participation on NESA-Africa earns you <span className="text-gold font-semibold">Afri Gold Coins (AGC)</span>—voting 
-              points to support nominees for <span className="text-gold">Gold</span> and <span className="text-blue-400">Blue Garnet</span> awards.
+              Your participation earns <span className="text-gold font-semibold">Afrigold Credits (AGCc)</span> — structured 
+              participation credits to support nominees for <span className="text-gold">Gold</span> and <span className="text-blue-400">Blue Garnet</span> awards.
             </p>
             
             {/* Earning Methods — Clean Grid */}
