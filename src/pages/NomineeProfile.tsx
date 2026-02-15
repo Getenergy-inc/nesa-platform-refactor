@@ -60,9 +60,9 @@ export default function NomineeProfile() {
   }, [nominee?.id]); // Only trigger when nominee ID changes
 
   // Fetch the actual nominee ID and renomination count from database
-  // Note: DB lookup uses name-based slug for compatibility
+  // If not found, lazily create the DB record from CSV data
   useEffect(() => {
-    async function fetchNomineeData() {
+    async function fetchOrCreateNomineeData() {
       if (!nominee) return;
       
       // Try to find by the full unique slug first, then fall back to name-based slug
@@ -74,8 +74,8 @@ export default function NomineeProfile() {
         .replace(/-+/g, "-")
         .replace(/^-|-$/g, "");
       
-      const { data } = await supabase
-        .from("nominees")
+      const { data } = await (supabase as any)
+        .from("public_nominees")
         .select("id, renomination_count")
         .or(`slug.eq.${slug},slug.eq.${nameSlug}`)
         .maybeSingle();
@@ -83,10 +83,23 @@ export default function NomineeProfile() {
       if (data) {
         setDbNomineeId(data.id);
         setRenominationCount(data.renomination_count ?? 0);
+        return;
+      }
+
+      // Lazy-create: import and call ensureNomineeInDb
+      try {
+        const { ensureNomineeInDb } = await import("@/lib/ensureNomineeInDb");
+        const created = await ensureNomineeInDb(nominee);
+        if (created) {
+          setDbNomineeId(created.id);
+          setRenominationCount(created.renomination_count ?? 0);
+        }
+      } catch (err) {
+        console.warn("Could not auto-create nominee in DB:", err);
       }
     }
     
-    fetchNomineeData();
+    fetchOrCreateNomineeData();
   }, [slug, nominee]);
 
   // Get related nominees
