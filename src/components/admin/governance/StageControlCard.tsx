@@ -42,6 +42,16 @@ const stageLabels: Record<string, { label: string; description: string; color: s
     description: "Enable certificate download",
     color: "bg-rose-500",
   },
+  rebuild_nominations: {
+    label: "Rebuild — Nominations",
+    description: "Allow communities to nominate schools",
+    color: "bg-teal-500",
+  },
+  rebuild_voting: {
+    label: "Rebuild — Voting",
+    description: "Enable public voting on shortlisted schools",
+    color: "bg-cyan-500",
+  },
 };
 
 export function StageControlCard({ stages, loading, onUpdateStage }: StageControlCardProps) {
