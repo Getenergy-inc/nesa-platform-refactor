@@ -24,6 +24,7 @@ const VoteWithAGCSection = lazy(() => import("@/components/nesa/VoteWithAGCSecti
 const EducationChampionsDirectory = lazy(() => import("@/components/nesa/EducationChampionsDirectory").then(m => ({ default: m.EducationChampionsDirectory })));
 const LegacyImpactSection = lazy(() => import("@/components/nesa/LegacyImpactSection").then(m => ({ default: m.LegacyImpactSection })));
 const IntegritySection = lazy(() => import("@/components/nesa/IntegritySection").then(m => ({ default: m.IntegritySection })));
+const EDIIntegrityJourney = lazy(() => import("@/components/nesa/EDIIntegrityJourney").then(m => ({ default: m.EDIIntegrityJourney })));
 const MediaShowcaseSection = lazy(() => import("@/components/nesa/MediaShowcaseSection").then(m => ({ default: m.MediaShowcaseSection })));
 const UpcomingEventsSection = lazy(() => import("@/components/nesa/UpcomingEventsSection").then(m => ({ default: m.UpcomingEventsSection })));
 const JudgesSection = lazy(() => import("@/components/nesa/JudgesSection").then(m => ({ default: m.JudgesSection })));
@@ -92,6 +93,11 @@ export function NESALandingPage() {
         
         <LazySection>
           <IntegritySection />
+        </LazySection>
+        
+        {/* EDI Integrity Wall — Full Lifecycle Journey */}
+        <LazySection>
+          <EDIIntegrityJourney />
         </LazySection>
         
         <LazySection>
