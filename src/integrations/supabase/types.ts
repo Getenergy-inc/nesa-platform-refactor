@@ -1588,6 +1588,47 @@ export type Database = {
           },
         ]
       }
+      legacy_category_mappings: {
+        Row: {
+          created_at: string | null
+          id: string
+          legacy_category: string
+          legacy_subcategory: string
+          new_subcategory_id: string | null
+          notes: string | null
+          status: string
+          updated_at: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          id?: string
+          legacy_category: string
+          legacy_subcategory: string
+          new_subcategory_id?: string | null
+          notes?: string | null
+          status?: string
+          updated_at?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          id?: string
+          legacy_category?: string
+          legacy_subcategory?: string
+          new_subcategory_id?: string | null
+          notes?: string | null
+          status?: string
+          updated_at?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "legacy_category_mappings_new_subcategory_id_fkey"
+            columns: ["new_subcategory_id"]
+            isOneToOne: false
+            referencedRelation: "subcategories"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       media: {
         Row: {
           created_at: string | null
@@ -1646,6 +1687,69 @@ export type Database = {
             columns: ["season_id"]
             isOneToOne: false
             referencedRelation: "seasons"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      migration_email_jobs: {
+        Row: {
+          batch_id: string | null
+          created_at: string | null
+          email: string
+          error_message: string | null
+          id: string
+          max_retries: number | null
+          nominee_id: string | null
+          nominee_name: string
+          retry_count: number | null
+          sent_at: string | null
+          status: string
+          template_key: string
+          updated_at: string | null
+        }
+        Insert: {
+          batch_id?: string | null
+          created_at?: string | null
+          email: string
+          error_message?: string | null
+          id?: string
+          max_retries?: number | null
+          nominee_id?: string | null
+          nominee_name: string
+          retry_count?: number | null
+          sent_at?: string | null
+          status?: string
+          template_key?: string
+          updated_at?: string | null
+        }
+        Update: {
+          batch_id?: string | null
+          created_at?: string | null
+          email?: string
+          error_message?: string | null
+          id?: string
+          max_retries?: number | null
+          nominee_id?: string | null
+          nominee_name?: string
+          retry_count?: number | null
+          sent_at?: string | null
+          status?: string
+          template_key?: string
+          updated_at?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "migration_email_jobs_nominee_id_fkey"
+            columns: ["nominee_id"]
+            isOneToOne: false
+            referencedRelation: "nominees"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "migration_email_jobs_nominee_id_fkey"
+            columns: ["nominee_id"]
+            isOneToOne: false
+            referencedRelation: "public_nominees"
             referencedColumns: ["id"]
           },
         ]
@@ -1919,6 +2023,9 @@ export type Database = {
           identity_hash: string | null
           is_platinum: boolean | null
           jury_score: number | null
+          legacy_ids: Json | null
+          legacy_source: string | null
+          linkedin_url: string | null
           logo_url: string | null
           name: string
           nominator_user_id: string | null
@@ -1939,6 +2046,8 @@ export type Database = {
           subcategory_id: string
           title: string | null
           updated_at: string | null
+          website: string | null
+          work_done: string | null
         }
         Insert: {
           acceptance_status?:
@@ -1958,6 +2067,9 @@ export type Database = {
           identity_hash?: string | null
           is_platinum?: boolean | null
           jury_score?: number | null
+          legacy_ids?: Json | null
+          legacy_source?: string | null
+          linkedin_url?: string | null
           logo_url?: string | null
           name: string
           nominator_user_id?: string | null
@@ -1978,6 +2090,8 @@ export type Database = {
           subcategory_id: string
           title?: string | null
           updated_at?: string | null
+          website?: string | null
+          work_done?: string | null
         }
         Update: {
           acceptance_status?:
@@ -1997,6 +2111,9 @@ export type Database = {
           identity_hash?: string | null
           is_platinum?: boolean | null
           jury_score?: number | null
+          legacy_ids?: Json | null
+          legacy_source?: string | null
+          linkedin_url?: string | null
           logo_url?: string | null
           name?: string
           nominator_user_id?: string | null
@@ -2017,6 +2134,8 @@ export type Database = {
           subcategory_id?: string
           title?: string | null
           updated_at?: string | null
+          website?: string | null
+          work_done?: string | null
         }
         Relationships: [
           {
@@ -3952,6 +4071,68 @@ export type Database = {
           user_id?: string | null
         }
         Relationships: []
+      }
+      unmapped_nominee_queue: {
+        Row: {
+          admin_notes: string | null
+          country: string | null
+          created_at: string | null
+          id: string
+          legacy_category: string | null
+          legacy_nominee_id: string | null
+          legacy_subcategory: string | null
+          nominee_name: string
+          organization: string | null
+          raw_data: Json
+          resolution_status: string
+          resolved_at: string | null
+          resolved_by: string | null
+          resolved_subcategory_id: string | null
+          updated_at: string | null
+        }
+        Insert: {
+          admin_notes?: string | null
+          country?: string | null
+          created_at?: string | null
+          id?: string
+          legacy_category?: string | null
+          legacy_nominee_id?: string | null
+          legacy_subcategory?: string | null
+          nominee_name: string
+          organization?: string | null
+          raw_data: Json
+          resolution_status?: string
+          resolved_at?: string | null
+          resolved_by?: string | null
+          resolved_subcategory_id?: string | null
+          updated_at?: string | null
+        }
+        Update: {
+          admin_notes?: string | null
+          country?: string | null
+          created_at?: string | null
+          id?: string
+          legacy_category?: string | null
+          legacy_nominee_id?: string | null
+          legacy_subcategory?: string | null
+          nominee_name?: string
+          organization?: string | null
+          raw_data?: Json
+          resolution_status?: string
+          resolved_at?: string | null
+          resolved_by?: string | null
+          resolved_subcategory_id?: string | null
+          updated_at?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "unmapped_nominee_queue_resolved_subcategory_id_fkey"
+            columns: ["resolved_subcategory_id"]
+            isOneToOne: false
+            referencedRelation: "subcategories"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       user_chapters: {
         Row: {
