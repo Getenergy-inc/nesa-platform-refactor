@@ -1,4 +1,4 @@
-import { ArrowRight, Trophy, Vote, Heart, Users } from "lucide-react";
+import { ArrowRight, Trophy, Vote, Heart, Users, School } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
@@ -91,12 +91,20 @@ export function LegacyImpactSection() {
             <span className="text-primary/80">Earn AGC points for voting and supporting your region!</span>
           </p>
 
-          {/* Primary CTA + secondary Ambassador CTA */}
+          {/* Primary CTA + Nominate + Ambassador */}
           <div className="flex flex-col sm:flex-row gap-3 justify-center items-center">
             <Button asChild className="rounded-full gap-2.5 font-semibold bg-primary hover:bg-primary/90 text-secondary px-8 py-3 text-base shadow-lg shadow-primary/20">
               <Link to="/rebuild">
                 Explore Rebuild My School Africa
                 <ArrowRight className="h-4 w-4" />
+              </Link>
+            </Button>
+          </div>
+          <div className="flex flex-col sm:flex-row gap-3 justify-center items-center mt-3">
+            <Button asChild variant="outline" className="rounded-full gap-2 text-sm border-white/20 text-white/80 hover:bg-white/5">
+              <Link to="/rebuild#nominate">
+                <School className="h-4 w-4" />
+                Nominate a School in Your Country
               </Link>
             </Button>
             <Button asChild variant="outline" className="rounded-full gap-2 text-sm border-primary/30 text-primary hover:bg-primary/10">

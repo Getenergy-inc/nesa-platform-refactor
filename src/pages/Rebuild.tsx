@@ -30,6 +30,9 @@ import {
   Hammer,
   Sparkles,
   Coins,
+  Shield,
+  ClipboardCheck,
+  UserCheck,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
@@ -147,12 +150,12 @@ export default function Rebuild() {
               </p>
 
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Link to="/donate?program=rebuild">
+                <Link to="/rebuild#nominate">
                   <Button size="lg" className="gap-2 rounded-full text-white font-semibold"
                     style={{ background: `hsl(160, 84%, 25%)` }}
                   >
-                    <Heart className="h-5 w-5" />
-                    Support This Initiative
+                    <School className="h-5 w-5" />
+                    Nominate a School in Your Country
                   </Button>
                 </Link>
                 <Link to="/eduaid">
@@ -474,7 +477,78 @@ export default function Rebuild() {
           </div>
         </section>
 
-        {/* ── Ambassador / Volunteer Section ── */}
+        {/* ── SCEF Board of Directors Oversight ── */}
+        <section className="py-16 md:py-20" style={{ borderBottom: `1px solid hsla(210, 20%, 90%, 0.1)` }}>
+          <div className="container mx-auto px-4">
+            <div className="max-w-4xl mx-auto">
+              <div className="text-center mb-10">
+                <Shield className="h-10 w-10 mx-auto mb-4 opacity-60" style={{ color: `hsl(42, 85%, 52%)` }} />
+                <h2 className="text-2xl md:text-3xl font-display font-bold mb-3"
+                  style={{ color: `hsl(210, 20%, 95%)` }}
+                >
+                  Governance & <span style={{ color: `hsl(42, 85%, 52%)` }}>BOD Oversight</span>
+                </h2>
+                <p className="text-sm max-w-xl mx-auto leading-relaxed"
+                  style={{ color: `hsla(210, 20%, 90%, 0.6)` }}
+                >
+                  Each African region has 3 assigned SCEF Board of Directors members responsible for monitoring Rebuild My School Africa interventions — ensuring transparency, accountability, and impact.
+                </p>
+              </div>
+
+              <div className="rounded-2xl p-6 md:p-8 mb-6"
+                style={{
+                  border: `1px solid hsla(210, 20%, 90%, 0.1)`,
+                  background: `hsla(210, 40%, 20%, 0.5)`,
+                }}
+              >
+                <h3 className="text-lg font-display font-bold mb-4" style={{ color: `hsl(210, 20%, 95%)` }}>
+                  Governance Standards
+                </h3>
+                <div className="grid sm:grid-cols-2 gap-4">
+                  {[
+                    "Schools nominated publicly by communities",
+                    "Public voting determines regional selection",
+                    "Independent needs assessment conducted",
+                    "Funds deployed transparently with audit trails",
+                    "Quarterly reporting published for all stakeholders",
+                    "3 BOD members per region for oversight",
+                  ].map((item) => (
+                    <div key={item} className="flex items-start gap-3">
+                      <ClipboardCheck className="h-5 w-5 flex-shrink-0 mt-0.5" style={{ color: `hsl(160, 70%, 50%)` }} />
+                      <span className="text-sm" style={{ color: `hsla(210, 20%, 95%, 0.8)` }}>{item}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Regions BOD grid */}
+              <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                {regions.map((region) => (
+                  <div key={region.name} className="rounded-xl p-4 text-center"
+                    style={{
+                      border: `1px solid hsla(42, 85%, 52%, 0.12)`,
+                      background: `hsla(210, 40%, 20%, 0.4)`,
+                    }}
+                  >
+                    <Shield className="h-5 w-5 mx-auto mb-2" style={{ color: `hsl(42, 85%, 52%)` }} />
+                    <h4 className="text-sm font-display font-bold mb-1" style={{ color: `hsl(210, 20%, 95%)` }}>{region.name}</h4>
+                    <span className="inline-block px-2 py-0.5 rounded-full text-[10px] font-medium"
+                      style={{
+                        background: `hsla(42, 85%, 52%, 0.06)`,
+                        color: `hsla(42, 85%, 52%, 0.6)`,
+                        border: `1px solid hsla(42, 85%, 52%, 0.1)`,
+                      }}
+                    >
+                      3 BOD Members Assigned
+                    </span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* ── Ambassador + Volunteer BOD Section ── */}
         <section className="py-16 md:py-20" style={{ borderBottom: `1px solid hsla(210, 20%, 90%, 0.1)` }}>
           <div className="container mx-auto px-4">
             <div className="max-w-3xl mx-auto text-center">
@@ -491,17 +565,30 @@ export default function Rebuild() {
                 Help drive post-award impact, community nominations, and school support.
                 Earn AGC points for active volunteering and participation.
               </p>
-              <Link to="/ambassadors">
-                <Button size="lg" className="gap-2 rounded-full text-white font-semibold"
-                  style={{
-                    background: `hsl(160, 84%, 25%)`,
-                    border: `1px solid hsla(160, 70%, 50%, 0.3)`,
-                  }}
-                >
-                  <GraduationCap className="h-5 w-5" />
-                  Become an Ambassador
-                </Button>
-              </Link>
+              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                <Link to="/ambassadors">
+                  <Button size="lg" className="gap-2 rounded-full text-white font-semibold"
+                    style={{
+                      background: `hsl(160, 84%, 25%)`,
+                      border: `1px solid hsla(160, 70%, 50%, 0.3)`,
+                    }}
+                  >
+                    <GraduationCap className="h-5 w-5" />
+                    Become an Ambassador
+                  </Button>
+                </Link>
+                <Link to="/volunteer-bod">
+                  <Button variant="outline" size="lg" className="gap-2 rounded-full font-semibold"
+                    style={{
+                      borderColor: `hsla(42, 85%, 52%, 0.3)`,
+                      color: `hsl(42, 85%, 52%)`,
+                    }}
+                  >
+                    <UserCheck className="h-5 w-5" />
+                    Apply as Volunteer BOD Member
+                  </Button>
+                </Link>
+              </div>
             </div>
           </div>
         </section>
