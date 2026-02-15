@@ -131,7 +131,7 @@ export const TIER_INFO: Record<AwardTier, {
   gold: {
     name: "Gold Certificate",
     shortName: "Gold",
-    description: "Competitive classification with 100% public voting (135 subcategories)",
+    description: "Competitive classification with 100% public voting — Top 3 per subcategory (405 Gold Certificate winners)",
     color: "text-amber-600",
     bgColor: "bg-amber-100",
     borderColor: "border-amber-300",

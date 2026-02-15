@@ -8,8 +8,8 @@ export function GoldCertificateSection() {
   const features = [
     { icon: Vote, label: "100% Public Voting", description: "No jury influence — your votes decide winners" },
     { icon: Globe, label: "5 African Regions", description: "North, West, East, Central & Southern Africa" },
-    { icon: Users, label: "135+ Subcategories", description: "Covering all major education sectors" },
-    { icon: Trophy, label: "Feeds Blue Garnet", description: "Gold winners advance to continental finals" },
+    { icon: Users, label: "Top 3 Per Subcategory", description: "405 Gold Certificate winners across 135 subcategories" },
+    { icon: Trophy, label: "Feeds Blue Garnet", description: "All 405 Gold winners compete for the 9 Blue Garnet Awards" },
   ];
 
   return (

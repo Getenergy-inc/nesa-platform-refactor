@@ -100,7 +100,7 @@ export const PROGRAMME_TIMELINE_2026 = [
     id: 'gold-voting',
     phase: 'Gold Certificate Voting',
     period: '10 Apr – 16 May 2026',
-    description: '100% public voting across 135 sub-categories using AGC',
+    description: '100% public voting across 135 sub-categories — Top 3 winners each (405 Gold Certificate winners)',
     status: 'upcoming' as const,
     votingPhase: 'GOLD_CERTIFICATE' as VotingPhase,
   },
@@ -108,7 +108,7 @@ export const PROGRAMME_TIMELINE_2026 = [
     id: 'gold-show',
     phase: 'Gold Certificate Winners Show',
     period: '17 May 2026',
-    description: '3-hour TV Show — 135 Gold winners announced',
+    description: '3-hour TV Show — 405 Gold Certificate winners announced',
     status: 'upcoming' as const,
   },
   {
