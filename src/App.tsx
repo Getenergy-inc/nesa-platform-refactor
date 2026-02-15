@@ -19,7 +19,7 @@ import { PublicLayout } from "@/components/layout/PublicLayout";
 import { CustomerCareChat } from "@/components/support/CustomerCareChat";
 
 // Pages
-import NESAAfrica from "./pages/programs/NESAAfrica";
+import NESALandingPage from "./features/landing/NESALandingPage";
 import Categories from "./pages/Categories";
 import Programs from "./pages/Programs";
 import Login from "./pages/auth/Login";
@@ -153,8 +153,8 @@ const App = () => (
             <BrowserRouter>
               <Routes>
                 {/* Landing - has its own header/footer */}
-                <Route path="/" element={<NESAAfrica />} />
-                <Route path="/programs/nesa-africa" element={<NESAAfrica />} />
+                <Route path="/" element={<NESALandingPage />} />
+                <Route path="/programs/nesa-africa" element={<NESALandingPage />} />
                 
                 {/* Programs */}
                 <Route path="/programs" element={<WithLayout><Programs /></WithLayout>} />
