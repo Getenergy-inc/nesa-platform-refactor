@@ -3115,6 +3115,322 @@ export type Database = {
           },
         ]
       }
+      rebuild_nominations: {
+        Row: {
+          created_at: string | null
+          evidence_urls: string[] | null
+          id: string
+          nominator_email: string
+          nominator_name: string
+          nominator_phone: string | null
+          nominator_user_id: string | null
+          reason: string
+          review_notes: string | null
+          reviewed_at: string | null
+          reviewed_by: string | null
+          school_contact: string | null
+          school_country: string
+          school_description: string | null
+          school_id: string | null
+          school_name: string
+          school_region_id: string | null
+          school_type: string
+          season_id: string
+          status: string
+          updated_at: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          evidence_urls?: string[] | null
+          id?: string
+          nominator_email: string
+          nominator_name: string
+          nominator_phone?: string | null
+          nominator_user_id?: string | null
+          reason: string
+          review_notes?: string | null
+          reviewed_at?: string | null
+          reviewed_by?: string | null
+          school_contact?: string | null
+          school_country: string
+          school_description?: string | null
+          school_id?: string | null
+          school_name: string
+          school_region_id?: string | null
+          school_type: string
+          season_id: string
+          status?: string
+          updated_at?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          evidence_urls?: string[] | null
+          id?: string
+          nominator_email?: string
+          nominator_name?: string
+          nominator_phone?: string | null
+          nominator_user_id?: string | null
+          reason?: string
+          review_notes?: string | null
+          reviewed_at?: string | null
+          reviewed_by?: string | null
+          school_contact?: string | null
+          school_country?: string
+          school_description?: string | null
+          school_id?: string | null
+          school_name?: string
+          school_region_id?: string | null
+          school_type?: string
+          season_id?: string
+          status?: string
+          updated_at?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "rebuild_nominations_school_id_fkey"
+            columns: ["school_id"]
+            isOneToOne: false
+            referencedRelation: "rebuild_school_vote_counts"
+            referencedColumns: ["school_id"]
+          },
+          {
+            foreignKeyName: "rebuild_nominations_school_id_fkey"
+            columns: ["school_id"]
+            isOneToOne: false
+            referencedRelation: "rebuild_schools"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "rebuild_nominations_school_region_id_fkey"
+            columns: ["school_region_id"]
+            isOneToOne: false
+            referencedRelation: "regions"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "rebuild_nominations_season_id_fkey"
+            columns: ["season_id"]
+            isOneToOne: false
+            referencedRelation: "seasons"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      rebuild_schools: {
+        Row: {
+          address: string | null
+          admin_notes: string | null
+          contact_email: string | null
+          contact_name: string | null
+          contact_phone: string | null
+          country: string
+          created_at: string | null
+          description: string | null
+          gps_coordinates: string | null
+          id: string
+          is_active: boolean | null
+          name: string
+          photo_urls: string[] | null
+          region_id: string | null
+          school_type: string
+          student_count: number | null
+          updated_at: string | null
+          verification_status: string
+          verified_at: string | null
+          verified_by: string | null
+          website: string | null
+        }
+        Insert: {
+          address?: string | null
+          admin_notes?: string | null
+          contact_email?: string | null
+          contact_name?: string | null
+          contact_phone?: string | null
+          country: string
+          created_at?: string | null
+          description?: string | null
+          gps_coordinates?: string | null
+          id?: string
+          is_active?: boolean | null
+          name: string
+          photo_urls?: string[] | null
+          region_id?: string | null
+          school_type: string
+          student_count?: number | null
+          updated_at?: string | null
+          verification_status?: string
+          verified_at?: string | null
+          verified_by?: string | null
+          website?: string | null
+        }
+        Update: {
+          address?: string | null
+          admin_notes?: string | null
+          contact_email?: string | null
+          contact_name?: string | null
+          contact_phone?: string | null
+          country?: string
+          created_at?: string | null
+          description?: string | null
+          gps_coordinates?: string | null
+          id?: string
+          is_active?: boolean | null
+          name?: string
+          photo_urls?: string[] | null
+          region_id?: string | null
+          school_type?: string
+          student_count?: number | null
+          updated_at?: string | null
+          verification_status?: string
+          verified_at?: string | null
+          verified_by?: string | null
+          website?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "rebuild_schools_region_id_fkey"
+            columns: ["region_id"]
+            isOneToOne: false
+            referencedRelation: "regions"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      rebuild_votes: {
+        Row: {
+          created_at: string | null
+          device_hash: string | null
+          id: string
+          ip_hash: string | null
+          school_id: string
+          season_id: string
+          voter_id: string
+        }
+        Insert: {
+          created_at?: string | null
+          device_hash?: string | null
+          id?: string
+          ip_hash?: string | null
+          school_id: string
+          season_id: string
+          voter_id: string
+        }
+        Update: {
+          created_at?: string | null
+          device_hash?: string | null
+          id?: string
+          ip_hash?: string | null
+          school_id?: string
+          season_id?: string
+          voter_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "rebuild_votes_school_id_fkey"
+            columns: ["school_id"]
+            isOneToOne: false
+            referencedRelation: "rebuild_school_vote_counts"
+            referencedColumns: ["school_id"]
+          },
+          {
+            foreignKeyName: "rebuild_votes_school_id_fkey"
+            columns: ["school_id"]
+            isOneToOne: false
+            referencedRelation: "rebuild_schools"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "rebuild_votes_season_id_fkey"
+            columns: ["season_id"]
+            isOneToOne: false
+            referencedRelation: "seasons"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      rebuild_winners: {
+        Row: {
+          created_at: string | null
+          id: string
+          intervention_budget_usd: number | null
+          intervention_end_date: string | null
+          intervention_notes: string | null
+          intervention_photos: string[] | null
+          intervention_start_date: string | null
+          intervention_status: string
+          published_at: string | null
+          published_by: string | null
+          region_id: string
+          school_id: string
+          season_id: string
+          updated_at: string | null
+          vote_count: number | null
+        }
+        Insert: {
+          created_at?: string | null
+          id?: string
+          intervention_budget_usd?: number | null
+          intervention_end_date?: string | null
+          intervention_notes?: string | null
+          intervention_photos?: string[] | null
+          intervention_start_date?: string | null
+          intervention_status?: string
+          published_at?: string | null
+          published_by?: string | null
+          region_id: string
+          school_id: string
+          season_id: string
+          updated_at?: string | null
+          vote_count?: number | null
+        }
+        Update: {
+          created_at?: string | null
+          id?: string
+          intervention_budget_usd?: number | null
+          intervention_end_date?: string | null
+          intervention_notes?: string | null
+          intervention_photos?: string[] | null
+          intervention_start_date?: string | null
+          intervention_status?: string
+          published_at?: string | null
+          published_by?: string | null
+          region_id?: string
+          school_id?: string
+          season_id?: string
+          updated_at?: string | null
+          vote_count?: number | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "rebuild_winners_region_id_fkey"
+            columns: ["region_id"]
+            isOneToOne: false
+            referencedRelation: "regions"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "rebuild_winners_school_id_fkey"
+            columns: ["school_id"]
+            isOneToOne: false
+            referencedRelation: "rebuild_school_vote_counts"
+            referencedColumns: ["school_id"]
+          },
+          {
+            foreignKeyName: "rebuild_winners_school_id_fkey"
+            columns: ["school_id"]
+            isOneToOne: false
+            referencedRelation: "rebuild_schools"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "rebuild_winners_season_id_fkey"
+            columns: ["season_id"]
+            isOneToOne: false
+            referencedRelation: "seasons"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       referral_events: {
         Row: {
           created_at: string | null
@@ -4632,6 +4948,33 @@ export type Database = {
           user_id?: string | null
         }
         Relationships: []
+      }
+      rebuild_school_vote_counts: {
+        Row: {
+          country: string | null
+          region_id: string | null
+          school_id: string | null
+          school_name: string | null
+          school_type: string | null
+          season_id: string | null
+          vote_count: number | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "rebuild_schools_region_id_fkey"
+            columns: ["region_id"]
+            isOneToOne: false
+            referencedRelation: "regions"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "rebuild_votes_season_id_fkey"
+            columns: ["season_id"]
+            isOneToOne: false
+            referencedRelation: "seasons"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       wallet_balances: {
         Row: {
