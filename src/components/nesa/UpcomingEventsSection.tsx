@@ -3,24 +3,35 @@ import { useTranslation } from "react-i18next";
 import { CountdownTimer } from "./CountdownTimer";
 import { useSeason } from "@/contexts/SeasonContext";
 import { buildScheduledEvents, DEFAULT_SCHEDULE_TEMPLATE, type ScheduledEvent } from "@/config/schedule";
+import countdownTvImg from "@/assets/cards/countdown-tv-show.jpg";
+import countdownVotingImg from "@/assets/cards/countdown-voting.jpg";
+import countdownGalaImg from "@/assets/cards/countdown-gala.jpg";
 
 function EventGroup({ 
   icon: Icon, 
   title, 
   events,
-  note
+  note,
+  image
 }: { 
   icon: React.ElementType; 
   title: string; 
   events: ScheduledEvent[];
   note?: string;
+  image: string;
 }) {
   return (
     <div className="space-y-4">
-      <div className="flex items-center gap-2">
-        <Icon className="h-5 w-5 text-gold" />
-        <h3 className="text-lg font-semibold text-white">{title}</h3>
+      {/* Header Image */}
+      <div className="relative h-40 w-full overflow-hidden rounded-xl">
+        <img src={image} alt={title} className="w-full h-full object-cover" loading="lazy" />
+        <div className="absolute inset-0 bg-gradient-to-t from-charcoal via-charcoal/60 to-transparent" />
+        <div className="absolute bottom-3 left-4 flex items-center gap-2">
+          <Icon className="h-5 w-5 text-gold" />
+          <h3 className="text-lg font-semibold text-white">{title}</h3>
+        </div>
       </div>
+
       <div className="space-y-4">
         {events.map((event) => (
           <div 
@@ -45,10 +56,7 @@ export function UpcomingEventsSection() {
   const { t } = useTranslation("pages");
   const { currentEdition } = useSeason();
   
-  // Build events from config for the current season
   const events = buildScheduledEvents(currentEdition.displayYear, DEFAULT_SCHEDULE_TEMPLATE);
-  
-  // Combine gala and legacy events for display
   const galaAndLegacy = [...events.galas, ...events.legacy];
 
   return (
@@ -67,18 +75,21 @@ export function UpcomingEventsSection() {
           <EventGroup 
             icon={Tv} 
             title={t("landing.upcomingEvents.tvShows")} 
-            events={events.tvShows} 
+            events={events.tvShows}
+            image={countdownTvImg}
           />
           <EventGroup 
             icon={Vote} 
             title={t("landing.upcomingEvents.votingWindows")} 
             events={events.votingWindows}
             note="Public participation happens during official windows. Vote using AGC voting points earned through platform participation."
+            image={countdownVotingImg}
           />
           <EventGroup 
             icon={Trophy} 
             title={t("landing.upcomingEvents.galaEvents")} 
-            events={galaAndLegacy} 
+            events={galaAndLegacy}
+            image={countdownGalaImg}
           />
         </div>
       </div>
