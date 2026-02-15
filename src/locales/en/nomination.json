@@ -51,5 +51,11 @@
     "submitted": "Nomination submitted successfully!",
     "thankYou": "Thank you for your nomination. The nominee will receive an acceptance letter.",
     "error": "Failed to submit nomination. Please try again."
+  },
+  "renomination": {
+    "title": "Renominate",
+    "description": "Submit a new endorsement for this nominee",
+    "success": "Renomination submitted successfully!",
+    "error": "Failed to submit renomination. Please try again."
   }
 }

@@ -51,5 +51,11 @@
     "submitted": "Nomination soumise avec succès !",
     "thankYou": "Merci pour votre nomination. Le nominé recevra une lettre d'acceptation.",
     "error": "Échec de la soumission. Veuillez réessayer."
+  },
+  "renomination": {
+    "title": "Renommer",
+    "description": "Soumettre un nouveau soutien pour ce nominé",
+    "success": "Renomination soumise avec succès !",
+    "error": "Échec de la renomination. Veuillez réessayer."
   }
 }
