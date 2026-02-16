@@ -1,6 +1,6 @@
 import { useState, useMemo, useEffect, useRef, useCallback } from "react";
 import { Link, useSearchParams } from "react-router-dom";
-import { Search, Users, Filter, ChevronLeft, ChevronRight, LayoutGrid, List, Loader2, MapPin, Globe2, Building2, Heart, Database, FileText, SortAsc } from "lucide-react";
+import { Search, Users, Filter, ChevronLeft, ChevronRight, LayoutGrid, List, Loader2, MapPin, Globe2, Building2, Heart, Database, FileText, SortAsc, Crown } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -39,6 +39,16 @@ const categoryIcons: Record<string, React.ReactNode> = {
   "africa-regions": <Globe2 className="w-4 h-4" />,
   "diaspora": <Building2 className="w-4 h-4" />,
   "friends-of-africa": <Heart className="w-4 h-4" />,
+  "icon": <Crown className="w-4 h-4" />,
+};
+
+// Subtitles for each geographic category tab
+const categorySubtitles: Record<string, string> = {
+  "all": "All education champions across every track",
+  "africa-regions": "Africans Living in Africa",
+  "diaspora": "Diaspora Africans",
+  "friends-of-africa": "Friends of Africa",
+  "icon": "3 Residents · 3 Diaspora · 3 Friends — Lifetime Achievement",
 };
 
 // Unified nominee type for display
@@ -156,11 +166,16 @@ export default function Nominees() {
   const geographicGroups = useMemo(() => {
     if (useDatabase && dbNominees) {
       const stats = getGeographicStats(dbNominees);
+      // Count icon nominees (those with categorySlug containing "icon" or award tier)
+      const iconCount = dbNominees.filter(n => 
+        n.categorySlug?.includes('icon') || n.categoryName?.toLowerCase().includes('icon')
+      ).length;
       return [
         { id: "all" as GeographicCategory, name: "All Nominees", description: "View all nominees", nomineeCount: stats.total },
-        { id: "africa-regions" as GeographicCategory, name: "Africa Regions", description: "African regional nominees", nomineeCount: stats.africaRegions },
-        { id: "diaspora" as GeographicCategory, name: "Diaspora", description: "African diaspora", nomineeCount: stats.diaspora },
-        { id: "friends-of-africa" as GeographicCategory, name: "Friends of Africa", description: "International supporters", nomineeCount: stats.friendsOfAfrica },
+        { id: "africa-regions" as GeographicCategory, name: "Africa Regions", description: "Africans Living in Africa", nomineeCount: stats.africaRegions },
+        { id: "diaspora" as GeographicCategory, name: "Diaspora", description: "Diaspora Africans", nomineeCount: stats.diaspora },
+        { id: "friends-of-africa" as GeographicCategory, name: "Friends of Africa", description: "Friends of Africa", nomineeCount: stats.friendsOfAfrica },
+        { id: "icon" as GeographicCategory, name: "Africa Education Icon", description: "Lifetime Achievement", nomineeCount: iconCount },
       ];
     }
     return getCsvGeographicGroups();
@@ -270,6 +285,10 @@ export default function Nominees() {
             filtered = filtered.filter(n => n.subcategoryName === matchGroup.name || n.categoryName === matchGroup.name);
           }
         }
+      } else if ((selectedCategory as string) === "icon") {
+        filtered = filtered.filter(n => 
+          n.categorySlug?.includes('icon') || n.categoryName?.toLowerCase().includes('icon')
+        );
       } else {
         filtered = filtered.filter(n => n.geographicCategory === selectedCategory);
       }
@@ -456,6 +475,13 @@ export default function Nominees() {
               ))}
             </TabsList>
           </Tabs>
+
+          {/* Category subtitle */}
+          {categorySubtitles[selectedCategory] && (
+            <p className="text-center text-sm text-ivory/50 mt-3">
+              {categorySubtitles[selectedCategory]}
+            </p>
+          )}
 
           {/* Africa Region Sub-tabs */}
           {selectedCategory === "africa-regions" && (
