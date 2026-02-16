@@ -35,12 +35,12 @@ export function SettlementRequestDialog({
   const [notes, setNotes] = useState("");
   const [loading, setLoading] = useState(false);
 
-  const withdrawableAgc = balance?.agc_withdrawable ?? 0;
-  const hasWithdrawable = withdrawableAgc > 0;
+  const totalAgc = balance?.agc_total ?? 0;
+  const hasBalance = totalAgc > 0;
 
   const handleSubmit = async () => {
-    if (!hasWithdrawable) {
-      toast.error("No withdrawable balance available");
+    if (!hasBalance) {
+      toast.error("No balance available for settlement");
       return;
     }
 
@@ -79,17 +79,13 @@ export function SettlementRequestDialog({
           {/* Balance Summary */}
           <div className="rounded-lg border p-4 space-y-3">
             <div className="flex items-center justify-between">
-              <span className="text-sm text-muted-foreground">Withdrawable Balance</span>
+              <span className="text-sm text-muted-foreground">Total AGC Balance</span>
               <Badge
-                variant={hasWithdrawable ? "default" : "secondary"}
-                className={hasWithdrawable ? "bg-emerald-600" : ""}
+                variant={hasBalance ? "default" : "secondary"}
+                className={hasBalance ? "bg-emerald-600" : ""}
               >
-                {formatAgc(withdrawableAgc)}
+                {formatAgc(totalAgc)}
               </Badge>
-            </div>
-            <div className="flex items-center justify-between text-sm">
-              <span className="text-muted-foreground">Non-Withdrawable</span>
-              <span>{formatAgc(balance?.agc_non_withdrawable ?? 0)}</span>
             </div>
             <div className="flex items-center justify-between text-sm">
               <span className="text-muted-foreground">Bonus (Locked)</span>
@@ -97,11 +93,11 @@ export function SettlementRequestDialog({
             </div>
           </div>
 
-          {!hasWithdrawable && (
+          {!hasBalance && (
             <Alert variant="destructive">
               <AlertCircle className="h-4 w-4" />
               <AlertDescription>
-                No withdrawable balance available. Only withdrawable AGC can be settled.
+                No AGC balance available for settlement.
               </AlertDescription>
             </Alert>
           )}
@@ -125,7 +121,7 @@ export function SettlementRequestDialog({
           </Button>
           <Button
             onClick={handleSubmit}
-            disabled={loading || !hasWithdrawable}
+            disabled={loading || !hasBalance}
             className="bg-emerald-600 hover:bg-emerald-700"
           >
             {loading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
