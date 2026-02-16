@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { motion, AnimatePresence } from "framer-motion";
 
 const STORAGE_KEY = "nesa_exit_popup_shown";
-const COOLDOWN_HOURS = 24;
+const COOLDOWN_HOURS = 4;
 
 /**
  * ExitIntentPopup - Captures leaving users with compelling CTA
@@ -48,18 +48,14 @@ export function ExitIntentPopup() {
       }
     };
 
-    // Also trigger after 45 seconds if user hasn't engaged
+    // Also trigger after 20 seconds if user hasn't engaged
     const timeoutId = setTimeout(() => {
       if (!hasTriggered && shouldShowPopup()) {
-        // Check if user has scrolled less than 30% of page
-        const scrollPercent = window.scrollY / (document.body.scrollHeight - window.innerHeight);
-        if (scrollPercent < 0.3) {
-          setHasTriggered(true);
-          setIsOpen(true);
-          markShown();
-        }
+        setHasTriggered(true);
+        setIsOpen(true);
+        markShown();
       }
-    }, 45000);
+    }, 20000);
 
     document.addEventListener("mouseleave", handleMouseLeave);
 
@@ -118,7 +114,7 @@ export function ExitIntentPopup() {
 
                 <p className="text-white/70 mb-6 max-w-sm mx-auto">
                   Nominate an education changemaker and earn{" "}
-                  <span className="text-gold font-semibold">+5 free voting points</span> when they're verified.
+                  <span className="text-gold font-semibold">+2 free voting points</span> when they're verified.
                 </p>
 
                 {/* Value props */}
