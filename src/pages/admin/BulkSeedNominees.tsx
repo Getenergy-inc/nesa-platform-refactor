@@ -34,9 +34,6 @@ function resolveSubcategorySlug(nominee: EnrichedNominee): string {
   if (s.includes("philanthropy-icon") || s.includes("africa-education-philanthropy")) return "icon-philanthropy";
   if (s.includes("technical-educator-icon")) return "icon-technical";
   if (s.includes("literary") || s.includes("curriculum-advocate")) return "icon-literary";
-  if (s.includes("pioneer-icon")) return "icon-pioneer";
-  if (s.includes("stem-innovator-icon")) return "icon-stem";
-  if (s.includes("policy-champion")) return "icon-policy";
 
   // ===== DIASPORA =====
   if (s.includes("diaspora")) {

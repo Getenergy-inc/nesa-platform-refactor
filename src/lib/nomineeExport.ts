@@ -145,11 +145,9 @@ const SUBCATEGORY_MAPPING: Record<string, string> = {
   "international-ngos": "intl-ngo",
   
   // Icon awards
-  "africa-education-pioneer-icon-of-the-decade": "icon-pioneer",
   "africa-education-philanthropy-icon-of-the-decade": "icon-philanthropy",
+  "literary-new-curriculum-advocate-icon-of-the-decade": "icon-literary",
   "africa-technical-educator-icon-of-the-decade": "icon-technical",
-  "africa-stem-innovator-icon-of-the-decade": "icon-stem",
-  "africa-education-policy-champion-of-the-decade": "icon-policy",
 };
 
 // Region mapping for generating proper subcategory slugs
