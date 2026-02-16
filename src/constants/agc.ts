@@ -109,13 +109,13 @@ export const AGC_BONUS_RATES = {
   /** AGC per $1 USD spent */
   purchaseBonus: 5,
   /** AGC for referrer on first referred purchase */
-  referralFirstPurchase: 15,
+  referralFirstPurchase: 3,
   /** AGC for referrer on second referred purchase */
-  referralSecondPurchase: 5,
+  referralSecondPurchase: 1,
   /** AGCc per daily check-in */
   dailyCheckIn: 1,
   /** AGCc per verified nomination */
-  nominationReward: 5,
+  nominationReward: 2,
   /** AGCc to AGC conversion ratio */
   agccToAgcRatio: 10,
 };
