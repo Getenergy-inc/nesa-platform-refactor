@@ -3,10 +3,10 @@ import { Link } from "react-router-dom";
 import { CertificateGallery } from "@/components/nesa/CertificateGallery";
 import { AwardTVShowSection } from "@/components/awards/AwardTVShowSection";
 import { AwardHeroSection } from "@/components/awards/AwardHeroSection";
-import { AwardCategoriesGrid } from "@/components/awards/AwardCategoriesGrid";
+
 import { getTVShowByAward } from "@/config/awardTVShows";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+
 import { Breadcrumbs } from "@/components/ui/breadcrumbs";
 import { Badge } from "@/components/ui/badge";
 import { Award, Globe, Heart, Star, Trophy, Users, Shield, Clock, BookOpen } from "lucide-react";
@@ -124,34 +124,47 @@ export default function IconAward() {
         {/* Subcategories — 3+3+3 = 9 Icons */}
         <section className="bg-charcoal py-16 lg:py-24">
           <div className="container mx-auto px-4">
-            <div className="text-center mb-4">
-              <h2 className="mb-2 font-display text-3xl font-bold text-white">
-                9 Icons — Three Categories
+            <div className="text-center mb-12">
+              <Badge variant="outline" className="border-purple-500/40 text-purple-400 mb-4 px-4 py-1.5">
+                <Star className="h-3.5 w-3.5 mr-1.5" />
+                3 + 3 + 3 = 9 Icons
+              </Badge>
+              <h2 className="mb-3 font-display text-3xl font-bold text-white">
+                Three Pathways to Icon Status
               </h2>
               <p className="text-white/60 max-w-2xl mx-auto">
-                3 Icons per subcategory, selected from across the continent, the diaspora, and friends of Africa.
+                Each pathway honours 3 Icons per season — individuals whose 20+ year legacy has reshaped African education.
               </p>
             </div>
 
-            <div className="grid gap-6 md:grid-cols-3 mt-10">
-              {subcategories.map((cat) => (
-                <Card key={cat.title} className="border-white/10 bg-gradient-to-br from-gold/10 to-transparent">
-                  <CardHeader>
-                    <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-gold/20">
-                      <cat.icon className="h-6 w-6 text-gold" />
+            <div className="grid gap-6 md:grid-cols-3">
+              {subcategories.map((cat, i) => (
+                <div
+                  key={cat.title}
+                  className="group relative rounded-2xl border border-white/10 bg-gradient-to-b from-purple-500/10 via-charcoal-light to-charcoal overflow-hidden transition-all duration-300 hover:border-purple-500/40 hover:shadow-lg hover:shadow-purple-500/10"
+                >
+                  {/* Number accent */}
+                  <div className="absolute top-4 right-4 flex h-10 w-10 items-center justify-center rounded-full bg-purple-500/15 border border-purple-500/30">
+                    <span className="text-lg font-bold text-purple-400">{cat.count}</span>
+                  </div>
+
+                  <div className="p-6 pt-8">
+                    {/* Icon */}
+                    <div className="mb-5 flex h-14 w-14 items-center justify-center rounded-xl bg-gradient-to-br from-purple-500/20 to-gold/10 border border-purple-500/20">
+                      <cat.icon className="h-7 w-7 text-purple-400 group-hover:text-gold transition-colors" />
                     </div>
-                    <CardTitle className="text-white">{cat.title}</CardTitle>
-                    <CardDescription className="text-white/60">{cat.description}</CardDescription>
-                  </CardHeader>
-                  <CardContent className="space-y-3">
-                    <Badge variant="outline" className="border-gold/30 text-gold">
-                      {cat.count} Icons per Season
-                    </Badge>
-                    <p className="text-xs text-white/50 italic">
-                      e.g. {cat.examples}
-                    </p>
-                  </CardContent>
-                </Card>
+
+                    {/* Title & description */}
+                    <h3 className="text-lg font-bold text-white mb-2 group-hover:text-gold transition-colors">{cat.title}</h3>
+                    <p className="text-white/60 text-sm leading-relaxed mb-5">{cat.description}</p>
+
+                    {/* Divider */}
+                    <div className="border-t border-white/10 pt-4">
+                      <p className="text-xs text-white/40 font-medium uppercase tracking-wider mb-2">Example profiles</p>
+                      <p className="text-xs text-white/50 leading-relaxed">{cat.examples}</p>
+                    </div>
+                  </div>
+                </div>
               ))}
             </div>
           </div>
@@ -187,13 +200,6 @@ export default function IconAward() {
         {/* TV Show Section */}
         {iconTVShow && <AwardTVShowSection show={iconTVShow} accentColor="gold" />}
 
-        {/* Award Categories */}
-        <AwardCategoriesGrid 
-          tier="icon"
-          accentColor="purple"
-          title="Africa Education Icon Blue Garnet"
-          description="1 lifetime achievement category with 3 subcategories: Africa Icon, Diaspora Icon, and Friends of Africa Icon — 3 winners each, 9 total."
-        />
 
         {/* Certificate Gallery */}
         <CertificateGallery />
