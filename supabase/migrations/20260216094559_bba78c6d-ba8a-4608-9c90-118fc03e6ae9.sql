@@ -1,0 +1,1 @@
+DELETE FROM subcategories WHERE slug IN ('icon-pioneer', 'icon-stem', 'icon-policy');
