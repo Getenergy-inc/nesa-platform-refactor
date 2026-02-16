@@ -5,6 +5,7 @@ import { ReactNode } from "react";
 import { NESAHeader } from "@/components/nesa/NESAHeader";
 import { NESAFooter } from "@/components/nesa/NESAFooter";
 import { MobileBottomNav } from "@/components/navigation/MainNav";
+import { ExitIntentPopup } from "@/components/nesa/ExitIntentPopup";
 
 interface PublicLayoutProps {
   children: ReactNode;
@@ -20,6 +21,7 @@ export function PublicLayout({ children, showFooter = true }: PublicLayoutProps)
       </main>
       {showFooter && <NESAFooter />}
       <MobileBottomNav />
+      <ExitIntentPopup />
     </div>
   );
 }
