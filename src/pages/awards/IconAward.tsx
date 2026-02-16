@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { CertificateGallery } from "@/components/nesa/CertificateGallery";
 import { AwardTVShowSection } from "@/components/awards/AwardTVShowSection";
 import { AwardHeroSection } from "@/components/awards/AwardHeroSection";
+import { AwardCategoriesGrid } from "@/components/awards/AwardCategoriesGrid";
 
 import { getTVShowByAward } from "@/config/awardTVShows";
 import { Button } from "@/components/ui/button";
@@ -200,6 +201,13 @@ export default function IconAward() {
         {/* TV Show Section */}
         {iconTVShow && <AwardTVShowSection show={iconTVShow} accentColor="gold" />}
 
+        {/* Award Subcategories */}
+        <AwardCategoriesGrid 
+          tier="icon"
+          accentColor="purple"
+          title="Icon Award Subcategories"
+          description="3 subcategories recognising distinct dimensions of lifetime contribution to African education."
+        />
 
         {/* Certificate Gallery */}
         <CertificateGallery />
