@@ -10,7 +10,7 @@ import { Loader2, ArrowUpRight, ArrowDownLeft, Gift, Vote, Ticket, Users, Shoppi
 import { useAuth } from "@/contexts/AuthContext";
 import { supabase } from "@/integrations/supabase/client";
 import { ReferralLinkCard } from "@/components/tickets";
-import { AGC_NON_TRADEABLE_DISCLAIMER, AGC_BONUS_RATES } from "@/constants/agc";
+import { AGC_NON_TRADEABLE_DISCLAIMER, AGC_BONUS_RATES, EARN_METHODS } from "@/constants/agc";
 
 interface WalletBalance {
   agc_total: number;
@@ -253,12 +253,16 @@ export default function Wallet() {
                       <AccordionTrigger>How do I earn AGC?</AccordionTrigger>
                       <AccordionContent>
                         <ul className="space-y-2 text-sm">
-                          <li>• Daily sign-in: +1 AGCc</li>
-                          <li>• Verified nominations: +5 AGCc</li>
-                          <li>• Ticket/shop purchase: ${AGC_BONUS_RATES.purchaseBonus} AGC per $1 spent</li>
+                          <li>• Verify & claim welcome credits: +{EARN_METHODS.find(m => m.id === "welcome")?.agcReward} AGC</li>
+                          <li>• Daily check-in: +{AGC_BONUS_RATES.dailyCheckIn} AGCc</li>
+                          <li>• Verified nominations: +{AGC_BONUS_RATES.nominationReward} AGCc</li>
+                          <li>• Education Impact Polls: +{EARN_METHODS.find(m => m.id === "polls")?.agcReward} AGC</li>
+                          <li>• Ticket/shop purchase: {AGC_BONUS_RATES.purchaseBonus} AGC per $1 spent</li>
                           <li>• Referral bonus: +{AGC_BONUS_RATES.referralFirstPurchase} AGC (first purchase), +{AGC_BONUS_RATES.referralSecondPurchase} AGC (second)</li>
-                          <li>• Sponsor campaigns: varies by sponsor</li>
                         </ul>
+                        <p className="text-xs text-muted-foreground mt-2">
+                          {AGC_BONUS_RATES.agccToAgcRatio} AGCc = 1 AGC (1 Vote)
+                        </p>
                         <div className="mt-3">
                           <Button asChild size="sm" variant="outline">
                             <Link to="/earn-voting-credits">
