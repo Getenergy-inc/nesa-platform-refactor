@@ -131,16 +131,17 @@ export function EducationChampionsDirectory() {
 
   const stats = [
     { value: liveStats ? formatCount(liveStats.total) : "—", label: "Total", sublabel: "Education Champions", icon: Trophy, color: "text-gold" },
-    { value: liveStats ? formatCount(liveStats.africa) : "—", label: "Africa", sublabel: "5 Regions", icon: Globe, color: "text-emerald-400" },
-    { value: liveStats ? formatCount(liveStats.diaspora) : "—", label: "Diaspora", sublabel: "Global Advocates", icon: Plane, color: "text-blue-400" },
-    { value: liveStats ? formatCount(liveStats.friends) : "—", label: "Friends", sublabel: "International Allies", icon: Heart, color: "text-rose-400" },
+    { value: liveStats ? formatCount(liveStats.africa) : "—", label: "Africa", sublabel: "Africans Living in Africa", icon: Globe, color: "text-emerald-400" },
+    { value: liveStats ? formatCount(liveStats.diaspora) : "—", label: "Diaspora", sublabel: "Diaspora Africans", icon: Plane, color: "text-blue-400" },
+    { value: liveStats ? formatCount(liveStats.friends) : "—", label: "Friends", sublabel: "Friends of Africa", icon: Heart, color: "text-rose-400" },
   ];
 
   const tracks = [
-    { id: "all", title: "All Nominees", count: liveStats ? formatCount(liveStats.total) : "—", icon: Users, href: "/nominees", color: "from-gold/15 border-gold/30" },
-    { id: "africa", title: "Africa Regional", count: liveStats ? formatCount(liveStats.africa) : "—", icon: Globe, href: "/nominees?region=africa", color: "from-emerald-500/15 border-emerald-500/30" },
-    { id: "diaspora", title: "Diaspora", count: liveStats ? formatCount(liveStats.diaspora) : "—", icon: Plane, href: "/nominees?region=diaspora", color: "from-blue-500/15 border-blue-500/30" },
-    { id: "friends", title: "Friends of Africa", count: liveStats ? formatCount(liveStats.friends) : "—", icon: Heart, href: "/nominees?region=friends", color: "from-rose-500/15 border-rose-500/30" },
+    { id: "all", title: "All Nominees", count: liveStats ? formatCount(liveStats.total) : "—", icon: Users, href: "/nominees", color: "from-gold/15 border-gold/30", subtitle: "All education champions" },
+    { id: "africa", title: "Africa Regional", count: liveStats ? formatCount(liveStats.africa) : "—", icon: Globe, href: "/nominees?region=africa", color: "from-emerald-500/15 border-emerald-500/30", subtitle: "Africans Living in Africa" },
+    { id: "diaspora", title: "Diaspora", count: liveStats ? formatCount(liveStats.diaspora) : "—", icon: Plane, href: "/nominees?region=diaspora", color: "from-blue-500/15 border-blue-500/30", subtitle: "Diaspora Africans" },
+    { id: "friends", title: "Friends of Africa", count: liveStats ? formatCount(liveStats.friends) : "—", icon: Heart, href: "/nominees?region=friends", color: "from-rose-500/15 border-rose-500/30", subtitle: "Friends of Africa" },
+    { id: "icon", title: "Africa Education Icon", count: "9", icon: Crown, href: "/nominees?category=icon", color: "from-purple-500/15 border-purple-500/30", subtitle: "3 Residents · 3 Diaspora · 3 Friends" },
   ];
 
   const filteredNominees = useMemo(() => {
@@ -336,7 +337,7 @@ export function EducationChampionsDirectory() {
             <ScrollBar orientation="horizontal" className="h-1" />
           </ScrollArea>
           
-          <div className="hidden md:grid grid-cols-4 gap-3">
+          <div className="hidden md:grid grid-cols-5 gap-3">
             {tracks.map((track) => (
               <TrackCard key={track.id} track={track} />
             ))}
@@ -510,7 +511,7 @@ export function EducationChampionsDirectory() {
 // ─────────────────────────────────────────────────────────────────────────────
 
 function TrackCard({ track, compact = false }: { 
-  track: { id: string; title: string; count: string; icon: any; href: string; color: string }; 
+  track: { id: string; title: string; count: string; icon: any; href: string; color: string; subtitle?: string }; 
   compact?: boolean;
 }) {
   return (
@@ -529,6 +530,9 @@ function TrackCard({ track, compact = false }: {
         <span className={`${compact ? "text-base" : "text-lg"} font-bold text-gold`}>{track.count}</span>
       </div>
       <h4 className={`font-medium text-white ${compact ? "text-xs" : "text-sm"} leading-tight`}>{track.title}</h4>
+      {track.subtitle && (
+        <p className={`text-white/40 mt-0.5 ${compact ? "text-[9px]" : "text-[10px]"} leading-tight`}>{track.subtitle}</p>
+      )}
       <div className="flex items-center justify-end mt-2 text-gold/60 group-hover:text-gold">
         <span className="text-[9px] font-medium">Explore</span>
         <ChevronRight className="h-2.5 w-2.5 ml-0.5 group-hover:translate-x-0.5 transition-transform" />
