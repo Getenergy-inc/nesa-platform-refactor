@@ -49,6 +49,7 @@ import PlatinumAward from "./pages/awards/PlatinumAward";
 import IconAward from "./pages/awards/IconAward";
 import GoldAward from "./pages/awards/GoldAward";
 import BlueGarnetAward from "./pages/awards/BlueGarnetAward";
+import GoldSpecialRecognition from "./pages/awards/GoldSpecialRecognition";
 import Winners from "./pages/awards/Winners";
 import GovernancePage from "./pages/GovernancePage";
 
@@ -182,6 +183,7 @@ const App = () => (
                 <Route path="/awards/icon" element={<WithLayout><IconAward /></WithLayout>} />
                 <Route path="/awards/gold" element={<WithLayout><GoldAward /></WithLayout>} />
                 <Route path="/awards/blue-garnet" element={<WithLayout><BlueGarnetAward /></WithLayout>} />
+                <Route path="/awards/gold-special-recognition" element={<GoldSpecialRecognition />} />
                 <Route path="/awards/winners" element={<WithLayout><Winners /></WithLayout>} />
                 <Route path="/certificates/verify" element={<WithLayout><CertificateVerify /></WithLayout>} />
                 <Route path="/verify/:hash" element={<WithLayout><VerifyCertificate /></WithLayout>} />
