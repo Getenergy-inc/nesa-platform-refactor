@@ -86,7 +86,7 @@ const CATEGORIES: CategoryCard[] = [
     profiles: SPORTS_PROFILES,
     ctaHeadline: "Know a stronger sports education advocate?",
     ctaSubline: "Nominate today.",
-    accentGlow: "from-amber-500/20 to-yellow-600/5",
+    accentGlow: "from-primary/20 to-primary/5",
   },
   {
     id: "music",
@@ -97,7 +97,7 @@ const CATEGORIES: CategoryCard[] = [
     profiles: MUSIC_PROFILES,
     ctaHeadline: "Influence + Education = Impact",
     ctaSubline: "Recognize artists making a difference.",
-    accentGlow: "from-gold/20 to-amber-700/5",
+    accentGlow: "from-primary/15 to-primary/5",
   },
   {
     id: "social-media",
@@ -108,7 +108,7 @@ const CATEGORIES: CategoryCard[] = [
     profiles: SOCIAL_MEDIA_PROFILES,
     ctaHeadline: "Digital Influence Must Show Education Impact.",
     ctaSubline: "Nominate an influencer championing education.",
-    accentGlow: "from-yellow-400/15 to-gold/5",
+    accentGlow: "from-primary/10 to-primary/5",
   },
 ];
 
@@ -360,7 +360,7 @@ function GoldCategoryCard({ card }: { card: CategoryCard }) {
         onTouchEnd={handleTouchEnd}
       >
         {/* Card background */}
-        <div className="absolute inset-0 bg-gradient-to-b from-[hsl(220,30%,10%)] to-secondary" />
+        <div className="absolute inset-0 bg-gradient-to-b from-charcoal to-secondary" />
         <div className={`absolute inset-0 bg-gradient-to-br ${card.accentGlow} pointer-events-none`} />
         <div className="absolute inset-0 rounded-2xl opacity-0 group-hover/card:opacity-100 transition-opacity duration-500 pointer-events-none" style={{ boxShadow: 'inset 0 0 30px hsl(var(--primary) / 0.05)' }} />
 
@@ -550,7 +550,7 @@ export function GoldSpecialRecognitionSection() {
   return (
     <section className="relative overflow-hidden" id="gold-special">
       {/* Background */}
-      <div className="absolute inset-0 bg-gradient-to-b from-[hsl(220,30%,8%)] via-secondary to-[hsl(220,30%,8%)] pointer-events-none" />
+      <div className="absolute inset-0 bg-gradient-to-b from-charcoal via-secondary to-charcoal pointer-events-none" />
 
       {/* Africa map watermark */}
       <div
