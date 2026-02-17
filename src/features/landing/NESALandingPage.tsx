@@ -37,7 +37,7 @@ export function NESALandingPage() {
   return (
     <>
       <Helmet>
-        <title>{currentEdition.name} | New Education Standard Award Africa</title>
+        <title>{`${currentEdition?.name || 'NESA-Africa 2025'} | New Education Standard Award Africa`}</title>
         <meta
           name="description"
           content={`${currentEdition.tagline}. ${currentEdition.name} celebrates the real changemakers shaping the future of education across Africa. Nominate now, earn voting points, and vote with AGC for Gold and Blue Garnet winners.`}

@@ -213,7 +213,7 @@ import { VotingStatsStrip } from "@/components/voting/VotingStatsStrip";
    return (
      <>
        <Helmet>
-         <title>Blue Garnet Award Voting | {currentEdition.name}</title>
+         <title>{`Blue Garnet Award Voting | ${currentEdition?.name || 'NESA-Africa 2025'}`}</title>
          <meta
            name="description"
            content={`Vote for Blue Garnet Award nominees in ${currentEdition.name}. 40% public + 60% jury evaluation for the highest honor in African education.`}

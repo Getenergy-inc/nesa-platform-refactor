@@ -155,7 +155,7 @@ export default function CategoryDetail() {
   return (
     <>
       <Helmet>
-        <title>{displayCat.name} | {currentEdition.name}</title>
+        <title>{`${displayCat?.name || 'Category'} | ${currentEdition?.name || 'NESA-Africa 2025'}`}</title>
         <meta name="description" content={displayCat.description} />
       </Helmet>
 

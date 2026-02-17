@@ -311,7 +311,7 @@ export default function VoteWithAGC() {
   return (
     <>
       <Helmet>
-        <title>Vote with Afri Gold Coin (AGC) | {currentEdition.name}</title>
+        <title>{`Vote with Afri Gold Coin (AGC) | ${currentEdition?.name || 'NESA-Africa 2025'}`}</title>
         <meta 
           name="description" 
           content="Vote fairly. Vote transparently. Vote with purpose. Use AGC to vote for Africa's education champions."
