@@ -17,6 +17,9 @@ import { LazySection } from "@/components/ui/lazy-section";
 import { ScrollProgressIndicator } from "@/components/nesa/ScrollProgressIndicator";
 import { ExitIntentPopup } from "@/components/nesa/ExitIntentPopup";
 import { EngagementToast } from "@/components/nesa/EngagementToast";
+import { ContinueWhereYouLeftOff } from "@/components/nesa/ContinueWhereYouLeftOff";
+import { WhyPeopleReturnStrip } from "@/components/nesa/WhyPeopleReturnStrip";
+import { BackToTopButton } from "@/components/ui/back-to-top";
 import { useSeason } from "@/contexts/SeasonContext";
 
 // Lazy load below-fold sections
@@ -57,6 +60,9 @@ export function NESALandingPage() {
         
         {/* ═══ 1. HERO — Authority ═══ */}
         <TrophyHeroSection />
+        
+        {/* ═══ 1b. Returning visitors — Continue where you left off ═══ */}
+        <ContinueWhereYouLeftOff />
         
         {/* ═══ 2. Trust Strip ═══ */}
         <TrustLogosStrip />
@@ -128,12 +134,17 @@ export function NESALandingPage() {
           <UpcomingEventsSection />
         </LazySection>
         
-        {/* ═══ 11. Legacy (short teaser) ═══ */}
+        {/* ═══ 11. Why People Return ═══ */}
+        <LazySection>
+          <WhyPeopleReturnStrip />
+        </LazySection>
+        
+        {/* ═══ 12. Legacy (short teaser) ═══ */}
         <LazySection>
           <LegacyImpactSection />
         </LazySection>
         
-        {/* ═══ 12. Sponsors + Footer ═══ */}
+        {/* ═══ 13. Sponsors + Footer ═══ */}
         <LazySection>
           <SponsorsSection />
         </LazySection>
@@ -148,6 +159,7 @@ export function NESALandingPage() {
       {/* Engagement Hooks */}
       <ExitIntentPopup />
       <EngagementToast />
+      <BackToTopButton />
     </>
   );
 }

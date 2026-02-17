@@ -135,7 +135,7 @@ export function TrophyHeroSection() {
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.65 }}
-              className="flex flex-col sm:flex-row gap-3 justify-center lg:justify-start mb-10"
+              className="flex flex-col sm:flex-row gap-3 justify-center lg:justify-start mb-6"
             >
               <Link to="/nominate">
                 <motion.div
@@ -161,15 +161,22 @@ export function TrophyHeroSection() {
                   {t("landing.trophyHero.voteWithAGC")}
                 </Button>
               </Link>
-              <Link to="/media">
-                <Button
-                  size="lg"
-                  variant="outline"
-                  className="w-full sm:w-auto border-gold/40 text-gold hover:bg-gold/10 hover:border-gold rounded-full px-8 gap-2 h-13 text-base transition-all"
-                >
-                  <Play className="h-4 w-4" />
-                  {t("landing.trophyHero.watchLive")}
-                </Button>
+            </motion.div>
+
+            {/* Secondary links — less prominent */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.5, delay: 0.75 }}
+              className="flex flex-wrap gap-4 justify-center lg:justify-start mb-10"
+            >
+              <Link to="/media" className="group inline-flex items-center gap-1.5 text-gold/60 hover:text-gold text-sm transition-colors">
+                <Play className="h-3.5 w-3.5" />
+                <span className="underline-offset-4 hover:underline">{t("landing.trophyHero.watchLive")}</span>
+              </Link>
+              <Link to="/about" className="group inline-flex items-center gap-1.5 text-white/50 hover:text-gold text-sm transition-colors">
+                <span className="underline-offset-4 hover:underline">Learn More</span>
+                <ArrowRight className="h-3 w-3 group-hover:translate-x-0.5 transition-transform" />
               </Link>
             </motion.div>
 
