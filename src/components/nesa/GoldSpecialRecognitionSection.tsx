@@ -19,6 +19,17 @@ import { Badge } from "@/components/ui/badge";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Link } from "react-router-dom";
 
+// Nominee images
+import sportsNominee1 from "@/assets/nominees/sports-nominee-1.jpg";
+import sportsNominee2 from "@/assets/nominees/sports-nominee-2.jpg";
+import sportsNominee3 from "@/assets/nominees/sports-nominee-3.jpg";
+import musicNominee1 from "@/assets/nominees/music-nominee-1.jpg";
+import musicNominee2 from "@/assets/nominees/music-nominee-2.jpg";
+import musicNominee3 from "@/assets/nominees/music-nominee-3.jpg";
+import socialNominee1 from "@/assets/nominees/social-nominee-1.jpg";
+import socialNominee2 from "@/assets/nominees/social-nominee-2.jpg";
+import socialNominee3 from "@/assets/nominees/social-nominee-3.jpg";
+
 // ─── Types ───────────────────────────────────────────────────
 interface ProfileSlide {
   name: string;
@@ -31,6 +42,7 @@ interface ProfileSlide {
   platformIcons?: string[];
   nominationCount?: number;
   profileLink?: string;
+  imageUrl?: string;
 }
 
 interface CategoryCard {
@@ -47,33 +59,21 @@ interface CategoryCard {
 
 // ─── Profile Data ────────────────────────────────────────────
 const SPORTS_PROFILES: ProfileSlide[] = [
-  { name: "Nominee Placeholder", region: "🇳🇬", regionTag: "West Africa", country: "Nigeria", impactSummary: "Built 12 school libraries across rural Nigeria through sports foundation scholarships.", fullImpact: "Established a sports education foundation impacting 5,000+ students. Funded 12 school libraries, sponsored athletic scholarship programs, and partnered with local governments on youth mentorship.", ediVerified: true, nominationCount: 47, profileLink: "/nominees" },
-  { name: "Nominee Placeholder", region: "🇰🇪", regionTag: "East Africa", country: "Kenya", impactSummary: "Funded 500+ student athletes' education via marathon charity events.", fullImpact: "Organized annual charity marathons raising $1.2M for education. Programs support student athletes in 8 East African countries with tuition, equipment, and coaching.", ediVerified: true, nominationCount: 32, profileLink: "/nominees" },
-  { name: "Nominee Placeholder", region: "🇿🇦", regionTag: "Southern Africa", country: "South Africa", impactSummary: "Established after-school sports & learning hubs in 8 underserved communities.", fullImpact: "Created a network of 8 community hubs combining sports training with academic tutoring. Over 2,000 youth enrolled annually with 85% school retention rate.", ediVerified: false, nominationCount: 18, profileLink: "/nominees" },
-  { name: "Nominee Placeholder", region: "🇪🇬", regionTag: "North Africa", country: "Egypt", impactSummary: "Partnered with ministries on youth sports education policy reform across MENA.", fullImpact: "Advisory role in Ministry of Education sports integration policy. Advocated for mandatory physical education standards and after-school programs in public schools.", ediVerified: true, nominationCount: 24, profileLink: "/nominees" },
-  { name: "Nominee Placeholder", region: "🇨🇲", regionTag: "Central Africa", country: "Cameroon", impactSummary: "Created mobile learning centers combining athletics and literacy.", fullImpact: "Deployed 6 mobile education buses reaching 15,000 students in remote areas. Programs combine literacy training with sports activities to boost engagement.", ediVerified: false, nominationCount: 15, profileLink: "/nominees" },
-  { name: "Nominee Placeholder", region: "🇬🇧", regionTag: "Diaspora", country: "United Kingdom", impactSummary: "Raised $2M for African student-athlete scholarship programs globally.", fullImpact: "Founded an international scholarship fund supporting 200+ African student athletes at universities in UK, US, and Canada.", ediVerified: true, nominationCount: 56, profileLink: "/nominees" },
-  { name: "Nominee Placeholder", region: "🇺🇸", regionTag: "Friend of Africa", country: "United States", impactSummary: "International sports education alliance impacting 15 African nations.", fullImpact: "Built a cross-continental partnership connecting 15 African nations with US collegiate sports programs. Over 300 scholarships awarded annually.", ediVerified: true, nominationCount: 41, profileLink: "/nominees" },
+  { name: "Nominee Placeholder", region: "🇳🇬", regionTag: "West Africa", country: "Nigeria", impactSummary: "Built 12 school libraries across rural Nigeria through sports foundation scholarships.", fullImpact: "Established a sports education foundation impacting 5,000+ students. Funded 12 school libraries, sponsored athletic scholarship programs, and partnered with local governments on youth mentorship.", ediVerified: true, nominationCount: 47, profileLink: "/nominees", imageUrl: sportsNominee1 },
+  { name: "Nominee Placeholder", region: "🇰🇪", regionTag: "East Africa", country: "Kenya", impactSummary: "Funded 500+ student athletes' education via marathon charity events.", fullImpact: "Organized annual charity marathons raising $1.2M for education. Programs support student athletes in 8 East African countries with tuition, equipment, and coaching.", ediVerified: true, nominationCount: 32, profileLink: "/nominees", imageUrl: sportsNominee2 },
+  { name: "Nominee Placeholder", region: "🇿🇦", regionTag: "Southern Africa", country: "South Africa", impactSummary: "Established after-school sports & learning hubs in 8 underserved communities.", fullImpact: "Created a network of 8 community hubs combining sports training with academic tutoring. Over 2,000 youth enrolled annually with 85% school retention rate.", ediVerified: false, nominationCount: 18, profileLink: "/nominees", imageUrl: sportsNominee3 },
 ];
 
 const MUSIC_PROFILES: ProfileSlide[] = [
-  { name: "Nominee Placeholder", region: "🇳🇬", regionTag: "West Africa", country: "Nigeria", impactSummary: "Scholarship foundation supporting 200+ students in music and STEM education.", fullImpact: "Created a foundation awarding full scholarships to 200+ students annually. Combines music education with STEM training. Raised $3M through concert tours.", ediVerified: true, nominationCount: 63, profileLink: "/nominees" },
-  { name: "Nominee Placeholder", region: "🇹🇿", regionTag: "East Africa", country: "Tanzania", impactSummary: "Youth mentorship program reaching 10,000+ aspiring musicians and learners.", fullImpact: "Runs a continent-wide mentorship program pairing established musicians with young talent. Academic requirements are built into the program structure.", ediVerified: true, nominationCount: 29, profileLink: "/nominees" },
-  { name: "Nominee Placeholder", region: "🇿🇦", regionTag: "Southern Africa", country: "South Africa", impactSummary: "Built 3 community learning centers through concert tour proceeds.", fullImpact: "Dedicated 15% of concert revenue to building fully equipped learning centers in Soweto, Khayelitsha, and Limpopo. Each center serves 500+ students daily.", ediVerified: false, nominationCount: 22, profileLink: "/nominees" },
-  { name: "Nominee Placeholder", region: "🇲🇦", regionTag: "North Africa", country: "Morocco", impactSummary: "Advocacy campaigns for girls' education reaching 5M+ social media impressions.", fullImpact: "Launched 'Music for Her Education' campaign driving awareness for girls' education access in North Africa. Generated policy discussions at AU level.", ediVerified: true, nominationCount: 35, profileLink: "/nominees" },
-  { name: "Nominee Placeholder", region: "🇨🇩", regionTag: "Central Africa", country: "DR Congo", impactSummary: "Music academy providing free education to displaced youth.", fullImpact: "Founded a free music and education academy for 1,200 displaced youth. Combines vocational music training with formal education certifications.", ediVerified: false, nominationCount: 12, profileLink: "/nominees" },
-  { name: "Nominee Placeholder", region: "🇫🇷", regionTag: "Diaspora", country: "France", impactSummary: "Global benefit concerts raising funds for African education infrastructure.", fullImpact: "Organized 25+ benefit concerts across Europe raising $5M for school construction in West and Central Africa. 12 schools built to date.", ediVerified: true, nominationCount: 48, profileLink: "/nominees" },
-  { name: "Nominee Placeholder", region: "🇨🇦", regionTag: "Friend of Africa", country: "Canada", impactSummary: "Cross-cultural education exchange programs connecting 12 countries.", fullImpact: "Established a music education exchange connecting Canadian and African schools. Over 3,000 students have participated in cross-cultural learning programs.", ediVerified: true, nominationCount: 37, profileLink: "/nominees" },
+  { name: "Nominee Placeholder", region: "🇳🇬", regionTag: "West Africa", country: "Nigeria", impactSummary: "Scholarship foundation supporting 200+ students in music and STEM education.", fullImpact: "Created a foundation awarding full scholarships to 200+ students annually. Combines music education with STEM training. Raised $3M through concert tours.", ediVerified: true, nominationCount: 63, profileLink: "/nominees", imageUrl: musicNominee1 },
+  { name: "Nominee Placeholder", region: "🇹🇿", regionTag: "East Africa", country: "Tanzania", impactSummary: "Youth mentorship program reaching 10,000+ aspiring musicians and learners.", fullImpact: "Runs a continent-wide mentorship program pairing established musicians with young talent. Academic requirements are built into the program structure.", ediVerified: true, nominationCount: 29, profileLink: "/nominees", imageUrl: musicNominee2 },
+  { name: "Nominee Placeholder", region: "🇿🇦", regionTag: "Southern Africa", country: "South Africa", impactSummary: "Built 3 community learning centers through concert tour proceeds.", fullImpact: "Dedicated 15% of concert revenue to building fully equipped learning centers in Soweto, Khayelitsha, and Limpopo. Each center serves 500+ students daily.", ediVerified: false, nominationCount: 22, profileLink: "/nominees", imageUrl: musicNominee3 },
 ];
 
 const SOCIAL_MEDIA_PROFILES: ProfileSlide[] = [
-  { name: "Nominee Placeholder", region: "🇬🇭", regionTag: "West Africa", country: "Ghana", impactSummary: "Educational content reaching 2M+ monthly views on scholarship opportunities.", fullImpact: "Creates viral education content helping students discover scholarship opportunities. Over 500 confirmed scholarship placements tracked from content referrals.", ediVerified: true, nominationCount: 71, platformIcons: ["YouTube", "TikTok"], profileLink: "/nominees" },
-  { name: "Nominee Placeholder", region: "🇺🇬", regionTag: "East Africa", country: "Uganda", impactSummary: "Digital learning advocacy campaigns promoting free online courses.", fullImpact: "Curates and promotes free online learning resources in local languages. Community of 300K+ active learners across 6 East African countries.", ediVerified: true, nominationCount: 44, platformIcons: ["Instagram", "X"], profileLink: "/nominees" },
-  { name: "Nominee Placeholder", region: "🇧🇼", regionTag: "Southern Africa", country: "Botswana", impactSummary: "Created viral education challenge reaching 500K+ participants across Africa.", fullImpact: "Launched #LearnAfricaChallenge generating 500K+ video submissions. Challenge drove measurable increases in online course enrollments across the continent.", ediVerified: false, nominationCount: 33, platformIcons: ["TikTok", "Instagram"], profileLink: "/nominees" },
-  { name: "Nominee Placeholder", region: "🇹🇳", regionTag: "North Africa", country: "Tunisia", impactSummary: "Bilingual scholarship database platform connecting students with opportunities.", fullImpact: "Built and maintains a bilingual (Arabic/French) scholarship database serving 100K+ monthly visitors. Partnered with 50+ institutions for verified listings.", ediVerified: true, nominationCount: 28, platformIcons: ["YouTube", "LinkedIn"], profileLink: "/nominees" },
-  { name: "Nominee Placeholder", region: "🇷🇼", regionTag: "Central Africa", country: "Rwanda", impactSummary: "CSR advocacy content driving corporate education partnerships.", fullImpact: "Creates compelling CSR content that has directly influenced 15+ corporate education sponsorship deals worth $2M+ in aggregate.", ediVerified: false, nominationCount: 19, platformIcons: ["LinkedIn", "X"], profileLink: "/nominees" },
-  { name: "Nominee Placeholder", region: "🇩🇪", regionTag: "Diaspora", country: "Germany", impactSummary: "African education storytelling reaching global audiences weekly.", fullImpact: "Documentary-style content showcasing African education innovations. 5M+ views across platforms, featured by BBC Africa and CNN.", ediVerified: true, nominationCount: 52, platformIcons: ["YouTube", "Instagram"], profileLink: "/nominees" },
-  { name: "Nominee Placeholder", region: "🇦🇺", regionTag: "Friend of Africa", country: "Australia", impactSummary: "International ed-tech collaboration spotlight series.", fullImpact: "Produces a weekly spotlight series connecting African ed-tech founders with international investors. 30+ startups funded through platform exposure.", ediVerified: true, nominationCount: 39, platformIcons: ["LinkedIn", "YouTube"], profileLink: "/nominees" },
+  { name: "Nominee Placeholder", region: "🇬🇭", regionTag: "West Africa", country: "Ghana", impactSummary: "Educational content reaching 2M+ monthly views on scholarship opportunities.", fullImpact: "Creates viral education content helping students discover scholarship opportunities. Over 500 confirmed scholarship placements tracked from content referrals.", ediVerified: true, nominationCount: 71, platformIcons: ["YouTube", "TikTok"], profileLink: "/nominees", imageUrl: socialNominee1 },
+  { name: "Nominee Placeholder", region: "🇺🇬", regionTag: "East Africa", country: "Uganda", impactSummary: "Digital learning advocacy campaigns promoting free online courses.", fullImpact: "Curates and promotes free online learning resources in local languages. Community of 300K+ active learners across 6 East African countries.", ediVerified: true, nominationCount: 44, platformIcons: ["Instagram", "X"], profileLink: "/nominees", imageUrl: socialNominee2 },
+  { name: "Nominee Placeholder", region: "🇧🇼", regionTag: "Southern Africa", country: "Botswana", impactSummary: "Created viral education challenge reaching 500K+ participants across Africa.", fullImpact: "Launched #LearnAfricaChallenge generating 500K+ video submissions. Challenge drove measurable increases in online course enrollments across the continent.", ediVerified: false, nominationCount: 33, platformIcons: ["TikTok", "Instagram"], profileLink: "/nominees", imageUrl: socialNominee3 },
 ];
 
 const CATEGORIES: CategoryCard[] = [
@@ -158,9 +158,15 @@ function ProfileSlideContent({
     >
       <div className="flex items-start gap-4 cursor-pointer group" onClick={onProfileClick}>
         {/* Avatar */}
-        <div className="relative shrink-0">
-          <div className="w-16 h-16 rounded-full bg-gradient-to-br from-primary/40 to-primary/10 border-2 border-primary/30 flex items-center justify-center shadow-lg shadow-primary/10">
-            <span className="text-2xl">{profile.region}</span>
+         <div className="relative shrink-0">
+          <div className="w-16 h-16 rounded-full border-2 border-primary/30 overflow-hidden shadow-lg shadow-primary/10">
+            {profile.imageUrl ? (
+              <img src={profile.imageUrl} alt={profile.name} className="w-full h-full object-cover" />
+            ) : (
+              <div className="w-full h-full bg-gradient-to-br from-primary/40 to-primary/10 flex items-center justify-center">
+                <span className="text-2xl">{profile.region}</span>
+              </div>
+            )}
           </div>
           {profile.ediVerified && (
             <div className="absolute -bottom-1 -right-1 w-5 h-5 bg-success rounded-full flex items-center justify-center border-2 border-secondary" title="EDI Verified">
@@ -335,7 +341,7 @@ function GoldCategoryCard({ card }: { card: CategoryCard }) {
 
   useEffect(() => {
     if (isPaused) return;
-    const timer = setInterval(advance, 2000);
+    const timer = setInterval(advance, 6000);
     return () => clearInterval(timer);
   }, [advance, isPaused]);
 
