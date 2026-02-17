@@ -15,41 +15,35 @@ interface AwardCategoriesGridProps {
   /** Filter categories by tier applicability */
   tier: AwardTier;
   /** Accent color for styling */
-  accentColor?: "slate" | "amber" | "blue" | "purple";
+  accentColor?: "slate" | "amber" | "blue" | "purple" | "yellow";
   /** Title override */
   title?: string;
   /** Description override */
   description?: string;
 }
 
-const accentStyles = {
+const accentStyles: Record<string, {
+  badgeBg: string; badgeText: string; badgeBorder: string; hoverBorder: string; iconColor: string;
+}> = {
   slate: {
-    badgeBg: "bg-slate-500/10",
-    badgeText: "text-slate-400",
-    badgeBorder: "border-slate-500/30",
-    hoverBorder: "hover:border-slate-400/50",
-    iconColor: "text-slate-400",
+    badgeBg: "bg-slate-500/10", badgeText: "text-slate-400", badgeBorder: "border-slate-500/30",
+    hoverBorder: "hover:border-slate-400/50", iconColor: "text-slate-400",
   },
   amber: {
-    badgeBg: "bg-amber-500/10",
-    badgeText: "text-amber-400",
-    badgeBorder: "border-amber-500/30",
-    hoverBorder: "hover:border-amber-400/50",
-    iconColor: "text-amber-400",
+    badgeBg: "bg-amber-500/10", badgeText: "text-amber-400", badgeBorder: "border-amber-500/30",
+    hoverBorder: "hover:border-amber-400/50", iconColor: "text-amber-400",
   },
   blue: {
-    badgeBg: "bg-blue-500/10",
-    badgeText: "text-blue-400",
-    badgeBorder: "border-blue-500/30",
-    hoverBorder: "hover:border-blue-400/50",
-    iconColor: "text-blue-400",
+    badgeBg: "bg-blue-500/10", badgeText: "text-blue-400", badgeBorder: "border-blue-500/30",
+    hoverBorder: "hover:border-blue-400/50", iconColor: "text-blue-400",
   },
   purple: {
-    badgeBg: "bg-purple-500/10",
-    badgeText: "text-purple-400",
-    badgeBorder: "border-purple-500/30",
-    hoverBorder: "hover:border-purple-400/50",
-    iconColor: "text-purple-400",
+    badgeBg: "bg-purple-500/10", badgeText: "text-purple-400", badgeBorder: "border-purple-500/30",
+    hoverBorder: "hover:border-purple-400/50", iconColor: "text-purple-400",
+  },
+  yellow: {
+    badgeBg: "bg-yellow-500/10", badgeText: "text-yellow-400", badgeBorder: "border-yellow-500/30",
+    hoverBorder: "hover:border-yellow-400/50", iconColor: "text-yellow-400",
   },
 };
 

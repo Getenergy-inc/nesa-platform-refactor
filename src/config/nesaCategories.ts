@@ -12,13 +12,14 @@
 
 export type CategoryScope = "AFRICA_REGIONAL" | "NIGERIA" | "INTERNATIONAL" | "ICON";
 
-export type AwardTier = "platinum" | "gold" | "blue-garnet" | "icon";
+export type AwardTier = "platinum" | "gold" | "blue-garnet" | "icon" | "gold-special";
 
 export type TierApplicability = {
   platinum: boolean;
   gold: boolean;
   blueGarnet: boolean;
   icon: boolean;
+  goldSpecial?: boolean;
 };
 
 export interface SubcategoryDefinition {
@@ -158,6 +159,16 @@ export const TIER_INFO: Record<AwardTier, {
     votingMethod: "Jury Selection Only",
     validity: "Lifetime",
   },
+  "gold-special": {
+    name: "Gold Special Recognition",
+    shortName: "Gold Special",
+    description: "Cultural impact recognition for Sports, Music, and Social Media education advocacy (2025 Edition)",
+    color: "text-yellow-600",
+    bgColor: "bg-yellow-100",
+    borderColor: "border-yellow-300",
+    votingMethod: "Editorial Selection",
+    validity: "Annual (2025)",
+  },
 };
 
 // ============================================================================
@@ -172,7 +183,7 @@ export const NESA_CATEGORIES: CategoryDefinition[] = [
   {
     id: "cat-01",
     slug: "best-csr-education-africa",
-    name: "Best CSR in Education (Africa Regional)",
+    name: "Best CSR for Education (Africa Regional)",
     shortName: "CSR Africa",
     description: "Recognizing corporate social responsibility initiatives advancing education across the African continent",
     scope: "AFRICA_REGIONAL",
@@ -198,7 +209,7 @@ export const NESA_CATEGORIES: CategoryDefinition[] = [
   {
     id: "cat-02",
     slug: "best-csr-education-nigeria",
-    name: "Best CSR in Education (Nigeria)",
+    name: "Best CSR for Education (Nigeria)",
     shortName: "CSR Nigeria",
     description: "Celebrating Nigerian corporations making outstanding contributions to education",
     scope: "NIGERIA",
@@ -597,6 +608,64 @@ export const NESA_CATEGORIES: CategoryDefinition[] = [
       { id: "icon-technical", name: "Africa Technical Educator Icon of the Decade" },
     ],
   },
+
+  // =========================================================================
+  // GOLD SPECIAL RECOGNITION — 2025 EDITION
+  // 3 standalone categories, not merged with Blue Garnet
+  // =========================================================================
+
+  {
+    id: "cat-gs-01",
+    slug: "africa-sports-education-impact",
+    name: "Africa Sports Education Impact Recognition",
+    shortName: "Sports for Education",
+    description: "Recognizing sportsmen and sportswomen championing education advocacy across Africa",
+    scope: "AFRICA_REGIONAL",
+    tierApplicability: { platinum: false, gold: false, blueGarnet: false, icon: false, goldSpecial: true },
+    selectionMethod: "Editorial Selection — Cultural Impact Recognition 2025",
+    displayOrder: 101,
+    iconName: "Users",
+    isActive: true,
+    subcategories: [
+      { id: "gs-sports-man", name: "Sportsman Education Advocate" },
+      { id: "gs-sports-woman", name: "Sportswoman Education Advocate" },
+    ],
+  },
+
+  {
+    id: "cat-gs-02",
+    slug: "africa-music-education-impact",
+    name: "Africa Music Education Impact Recognition",
+    shortName: "Music for Education",
+    description: "Recognizing music artists championing education advocacy across Africa",
+    scope: "AFRICA_REGIONAL",
+    tierApplicability: { platinum: false, gold: false, blueGarnet: false, icon: false, goldSpecial: true },
+    selectionMethod: "Editorial Selection — Cultural Impact Recognition 2025",
+    displayOrder: 102,
+    iconName: "Palette",
+    isActive: true,
+    subcategories: [
+      { id: "gs-music-artist", name: "Artist Education Advocate" },
+    ],
+  },
+
+  {
+    id: "cat-gs-03",
+    slug: "africa-social-media-education-impact",
+    name: "Africa Social Media Education Impact Recognition",
+    shortName: "Social Media for Education",
+    description: "Recognizing social media influencers championing education advocacy across Africa",
+    scope: "AFRICA_REGIONAL",
+    tierApplicability: { platinum: false, gold: false, blueGarnet: false, icon: false, goldSpecial: true },
+    selectionMethod: "Editorial Selection — Cultural Impact Recognition 2025",
+    displayOrder: 103,
+    iconName: "Globe",
+    isActive: true,
+    subcategories: [
+      { id: "gs-social-edu-content", name: "Educational Content Influencer" },
+      { id: "gs-social-csr", name: "CSR for Education Influencer" },
+    ],
+  },
 ];
 
 // ============================================================================
@@ -711,10 +780,36 @@ export function getCategoriesByTier(tier: AwardTier): CategoryDefinition[] {
         return cat.tierApplicability.blueGarnet;
       case "icon":
         return cat.tierApplicability.icon;
+      case "gold-special":
+        return cat.tierApplicability.goldSpecial === true;
       default:
         return false;
     }
   });
+}
+
+/**
+ * Get categories grouped by visual tier for the category grid
+ * Returns 4 groups: Blue Garnet (competitive), Platinum (institutional), Lifetime, Gold Special
+ */
+export function getCategoriesGrouped() {
+  return {
+    blueGarnet: NESA_CATEGORIES.filter(c => c.tierApplicability.blueGarnet && !c.tierApplicability.icon && !c.tierApplicability.goldSpecial),
+    platinum: NESA_CATEGORIES.filter(c => c.tierApplicability.platinum && !c.tierApplicability.blueGarnet && !c.tierApplicability.icon),
+    lifetime: NESA_CATEGORIES.filter(c => c.tierApplicability.icon),
+    goldSpecial: NESA_CATEGORIES.filter(c => c.tierApplicability.goldSpecial === true),
+  };
+}
+
+/**
+ * Get the track type for a category
+ */
+export type CategoryTrack = "competitive" | "institutional" | "special-recognition" | "lifetime";
+export function getCategoryTrack(category: CategoryDefinition): CategoryTrack {
+  if (category.tierApplicability.icon) return "lifetime";
+  if (category.tierApplicability.goldSpecial) return "special-recognition";
+  if (category.tierApplicability.blueGarnet) return "competitive";
+  return "institutional";
 }
 
 /**

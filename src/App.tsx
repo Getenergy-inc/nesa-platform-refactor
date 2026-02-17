@@ -50,6 +50,7 @@ import IconAward from "./pages/awards/IconAward";
 import GoldAward from "./pages/awards/GoldAward";
 import BlueGarnetAward from "./pages/awards/BlueGarnetAward";
 import Winners from "./pages/awards/Winners";
+import GovernancePage from "./pages/GovernancePage";
 
 // Category Pages (data-driven)
 import {
@@ -165,6 +166,7 @@ const App = () => (
                 <Route path="/about" element={<WithLayout><About /></WithLayout>} />
                 <Route path="/about/vision-2035" element={<WithLayout><Vision2035 /></WithLayout>} />
                 <Route path="/about/governance" element={<WithLayout><Governance /></WithLayout>} />
+                <Route path="/governance" element={<WithLayout><GovernancePage /></WithLayout>} />
                 <Route path="/about/timeline" element={<WithLayout><Timeline /></WithLayout>} />
                 <Route path="/about/scef" element={<WithLayout><SCEF /></WithLayout>} />
                 <Route path="/about/awards-recognition" element={<WithLayout><Awards /></WithLayout>} />
