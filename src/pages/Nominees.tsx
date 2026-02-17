@@ -1,6 +1,6 @@
 import { useState, useMemo, useEffect, useRef, useCallback } from "react";
 import { Link, useSearchParams } from "react-router-dom";
-import { Search, Users, Filter, ChevronLeft, ChevronRight, LayoutGrid, List, Loader2, MapPin, Globe2, Building2, Heart, Database, FileText, SortAsc, Crown } from "lucide-react";
+import { Search, Users, Filter, ChevronLeft, ChevronRight, LayoutGrid, List, Loader2, MapPin, Globe2, Building2, Heart, Database, FileText, SortAsc, Crown, Trophy, Award } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -27,11 +27,36 @@ import {
   type GeographicCategory,
   type EnrichedNominee
 } from "@/lib/nesaData";
+import {
+  NESA_CATEGORIES,
+  getCategoriesByTier,
+  TIER_INFO,
+  getScopeBadge,
+  type AwardTier,
+  type CategoryScope,
+} from "@/config/nesaCategories";
 
 const ITEMS_PER_PAGE = 12;
 
-// Sorting options
 type SortOption = "name-asc" | "name-desc" | "newest" | "votes";
+
+// Tier filter options
+type TierFilter = "all" | AwardTier;
+const TIER_FILTER_OPTIONS: { value: TierFilter; label: string; icon: string }[] = [
+  { value: "all", label: "All Tiers", icon: "🌍" },
+  { value: "blue-garnet", label: "Blue Garnet", icon: "🏆" },
+  { value: "platinum", label: "Platinum", icon: "💎" },
+  { value: "gold-special", label: "Gold Special (2025)", icon: "🥇" },
+  { value: "icon", label: "Lifetime", icon: "🏛" },
+];
+
+// Scope filter options
+const SCOPE_FILTER_OPTIONS: { value: string; label: string }[] = [
+  { value: "all", label: "All Scopes" },
+  { value: "AFRICA_REGIONAL", label: "Africa Regional" },
+  { value: "NIGERIA", label: "Nigeria" },
+  { value: "INTERNATIONAL", label: "International" },
+];
 
 // Icons for geographic categories
 const categoryIcons: Record<string, React.ReactNode> = {
@@ -42,7 +67,6 @@ const categoryIcons: Record<string, React.ReactNode> = {
   "icon": <Crown className="w-4 h-4" />,
 };
 
-// Subtitles for each geographic category tab
 const categorySubtitles: Record<string, string> = {
   "all": "All education champions across every track",
   "africa-regions": "Africans Living in Africa",
@@ -110,6 +134,12 @@ export default function Nominees() {
   
   // Initialize state from URL params for persistence
   const [searchQuery, setSearchQuery] = useState(searchParams.get("q") || "");
+  const [selectedTier, setSelectedTier] = useState<TierFilter>(
+    (searchParams.get("tier") as TierFilter) || "all"
+  );
+  const [selectedScope, setSelectedScope] = useState<string>(
+    searchParams.get("scope") || "all"
+  );
   const [selectedCategory, setSelectedCategory] = useState<GeographicCategory>(
     (searchParams.get("category") as GeographicCategory) || "all"
   );
@@ -135,6 +165,8 @@ export default function Nominees() {
   useEffect(() => {
     const params = new URLSearchParams();
     if (searchQuery) params.set("q", searchQuery);
+    if (selectedTier !== "all") params.set("tier", selectedTier);
+    if (selectedScope !== "all") params.set("scope", selectedScope);
     if (selectedCategory !== "all") params.set("category", selectedCategory);
     if (selectedAward !== "all") params.set("award", selectedAward);
     if (selectedRegion !== "all") params.set("region", selectedRegion);
@@ -144,7 +176,7 @@ export default function Nominees() {
     if (currentPage > 1 && !useInfiniteScroll) params.set("page", currentPage.toString());
     
     setSearchParams(params, { replace: true });
-  }, [searchQuery, selectedCategory, selectedAward, selectedRegion, selectedDiasporaSubgroup, selectedFriendsSubgroup, sortBy, currentPage, useInfiniteScroll, setSearchParams]);
+  }, [searchQuery, selectedTier, selectedScope, selectedCategory, selectedAward, selectedRegion, selectedDiasporaSubgroup, selectedFriendsSubgroup, sortBy, currentPage, useInfiniteScroll, setSearchParams]);
 
   // Fetch from database
   const { data: dbNominees, isLoading: dbLoading, error: dbError } = useNominees();
@@ -450,10 +482,38 @@ export default function Nominees() {
         </div>
       </section>
 
+      {/* Tier Filter Tabs */}
+      <section className="border-b border-gold/10 bg-charcoal-light/50">
+        <div className="container mx-auto px-4 py-3">
+          <div className="flex flex-wrap gap-2 justify-center">
+            {TIER_FILTER_OPTIONS.map((opt) => (
+              <Button
+                key={opt.value}
+                variant={selectedTier === opt.value ? "default" : "outline"}
+                size="sm"
+                onClick={() => {
+                  setSelectedTier(opt.value);
+                  setSelectedAward("all");
+                  setCurrentPage(1);
+                  setVisibleCount(ITEMS_PER_PAGE);
+                }}
+                className={selectedTier === opt.value
+                  ? "bg-gold text-charcoal hover:bg-gold-dark"
+                  : "border-gold/30 text-gold hover:bg-gold/10"
+                }
+              >
+                <span className="mr-1">{opt.icon}</span>
+                {opt.label}
+              </Button>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* Geographic Category Tabs */}
       <section className="border-b border-gold/10 bg-charcoal-light/30 sticky top-16 z-20">
         <div className="container mx-auto px-4 py-4">
-          <Tabs 
+          <Tabs
             value={selectedCategory} 
             onValueChange={(v) => handleCategoryChange(v as GeographicCategory)}
             className="w-full"
