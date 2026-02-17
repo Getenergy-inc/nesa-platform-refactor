@@ -7,7 +7,7 @@ import { Helmet } from "react-helmet-async";
 import { TrophyHeroSection } from "@/components/nesa/TrophyHeroSection";
 import { TrustLogosStrip } from "@/components/nesa/TrustLogosStrip";
 import { QuickActionBar } from "@/components/nesa/QuickActionBar";
-import { WhatsLiveSection } from "@/components/nesa/WhatsLiveSection";
+
 import { NominationPathsCards } from "@/components/nesa/NominationPathsCards";
 import { NESAFooter } from "@/components/nesa/NESAFooter";
 import { NESAHeader } from "@/components/nesa/NESAHeader";
@@ -53,49 +53,43 @@ export function NESALandingPage() {
       <div className="min-h-screen bg-charcoal">
         <NESAHeader />
         
-        {/* ═══ ABOVE FOLD ═══ */}
-        
-        {/* 1. Hero — Trophy + Value Prop */}
+        {/* ═══ 1. HERO — Authority ═══ */}
         <TrophyHeroSection />
         
-        {/* 2. Trust Strip — Grayscale partner logos */}
+        {/* ═══ 2. Trust Strip ═══ */}
         <TrustLogosStrip />
         
-        {/* 3. Quick Actions — Sticky mobile CTAs */}
+        {/* ═══ 3. Quick Actions ═══ */}
         <QuickActionBar />
         
-        {/* 4. What's Live — Dynamic engagement blocks */}
-        <WhatsLiveSection />
-        
-        {/* ═══ AWARDS OVERVIEW ═══ */}
-        
+        {/* ═══ 4. Award Tiers Overview + Category Grid ═══ */}
         <LazySection>
           <CategoriesSection />
         </LazySection>
         
-        {/* ═══ NOMINATION ═══ */}
+        {/* ═══ 5. Nominees Directory ═══ */}
+        <LazySection>
+          <EducationChampionsDirectory />
+        </LazySection>
         
+        {/* ═══ 6. Nomination Paths ═══ */}
         <NominationPathsCards />
         
-        {/* ═══ HOW IT WORKS ═══ */}
-        
+        {/* ═══ 7. How It Works ═══ */}
         <LazySection>
           <HowItWorksVisual />
         </LazySection>
         
-        {/* ═══ VOTING ═══ */}
-        
+        {/* ═══ 8. Voting Section ═══ */}
         <LazySection>
           <VoteWithAGCSection />
         </LazySection>
         
-        {/* ═══ GOVERNANCE ═══ */}
-        
+        {/* ═══ 9. Governance & Integrity ═══ */}
         <LazySection>
           <IntegritySection />
         </LazySection>
         
-        {/* EDI Integrity Wall — Full Lifecycle Journey */}
         <LazySection>
           <EDIIntegrityJourney />
         </LazySection>
@@ -104,12 +98,7 @@ export function NESALandingPage() {
           <JudgesSection />
         </LazySection>
         
-        {/* ═══ CHAMPIONS & MEDIA ═══ */}
-        
-        <LazySection>
-          <EducationChampionsDirectory />
-        </LazySection>
-        
+        {/* ═══ 10. Media ═══ */}
         <LazySection>
           <MediaShowcaseSection />
         </LazySection>
@@ -118,14 +107,12 @@ export function NESALandingPage() {
           <UpcomingEventsSection />
         </LazySection>
         
-        {/* ═══ LEGACY ═══ */}
-        
+        {/* ═══ 11. Legacy (short teaser) ═══ */}
         <LazySection>
           <LegacyImpactSection />
         </LazySection>
         
-        {/* ═══ CLOSING ═══ */}
-        
+        {/* ═══ 12. Sponsors + Footer ═══ */}
         <LazySection>
           <SponsorsSection />
         </LazySection>

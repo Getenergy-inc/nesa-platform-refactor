@@ -5455,7 +5455,12 @@ export type Database = {
         | "FLAG_FOR_RISK_REVIEW"
       app_role: "user" | "nrc" | "jury" | "chapter" | "sponsor" | "admin"
       certificate_status: "ACTIVE" | "EXPIRED" | "REVOKED" | "RENEWED"
-      certificate_tier: "gold" | "platinum" | "blue_garnet" | "icon"
+      certificate_tier:
+        | "gold"
+        | "platinum"
+        | "blue_garnet"
+        | "icon"
+        | "gold_special"
       contest_type:
         | "GOLD_PUBLIC"
         | "BLUE_PUBLIC"
@@ -5725,7 +5730,13 @@ export const Constants = {
       ],
       app_role: ["user", "nrc", "jury", "chapter", "sponsor", "admin"],
       certificate_status: ["ACTIVE", "EXPIRED", "REVOKED", "RENEWED"],
-      certificate_tier: ["gold", "platinum", "blue_garnet", "icon"],
+      certificate_tier: [
+        "gold",
+        "platinum",
+        "blue_garnet",
+        "icon",
+        "gold_special",
+      ],
       contest_type: [
         "GOLD_PUBLIC",
         "BLUE_PUBLIC",
