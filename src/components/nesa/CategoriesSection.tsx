@@ -130,7 +130,19 @@ export function CategoriesSection() {
           </p>
         </motion.div>
 
-        {/* ═══ GROUP 1: BLUE GARNET — Competitive Excellence ═══ */}
+        {/* ═══ GROUP 1: LIFETIME — Icon Award (Highest Tier) ═══ */}
+        <motion.div className="mb-16" initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }}>
+          <TierGroupHeader icon={Crown} title="Africa Education Icon — Lifetime Achievement" subtitle="Highest award · Jury selection only · 2005–2025" count={groups.lifetime.length} color="bg-purple-600" />
+          <div className="grid sm:grid-cols-1 lg:grid-cols-2 gap-5 max-w-3xl">
+            {groups.lifetime.map((cat, i) => (
+              <motion.div key={cat.id} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.04 }} viewport={{ once: true }}>
+                <CategoryCard cat={cat} />
+              </motion.div>
+            ))}
+          </div>
+        </motion.div>
+
+        {/* ═══ GROUP 2: BLUE GARNET — Competitive Excellence ═══ */}
         <motion.div className="mb-16" initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }}>
           <TierGroupHeader icon={Trophy} title="Blue Garnet — Competitive Excellence" subtitle="Public voting → Jury evaluation" count={groups.blueGarnet.length} color="bg-blue-600" />
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
@@ -142,7 +154,7 @@ export function CategoriesSection() {
           </div>
         </motion.div>
 
-        {/* ═══ GROUP 2: PLATINUM — Institutional Leadership ═══ */}
+        {/* ═══ GROUP 3: PLATINUM — Institutional Leadership ═══ */}
         <motion.div className="mb-16" initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }}>
           <TierGroupHeader icon={Shield} title="Platinum — Institutional Leadership" subtitle="NRC verification · Governance criteria" count={groups.platinum.length} color="bg-slate-500" />
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
@@ -154,9 +166,9 @@ export function CategoriesSection() {
           </div>
         </motion.div>
 
-        {/* ═══ GROUP 3: GOLD SPECIAL RECOGNITION — 2025 Edition ═══ */}
+        {/* ═══ GROUP 4: GOLD SPECIAL RECOGNITION — 2025 Edition ═══ */}
         {groups.goldSpecial.length > 0 && (
-          <motion.div className="mb-16" initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }}>
+          <motion.div className="mb-10" initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }}>
             <TierGroupHeader icon={Star} title="Gold Special Recognition — 2025 Edition" subtitle="Cultural impact recognition" count={groups.goldSpecial.length} color="bg-yellow-600" />
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
               {groups.goldSpecial.map((cat, i) => (
@@ -167,18 +179,6 @@ export function CategoriesSection() {
             </div>
           </motion.div>
         )}
-
-        {/* ═══ GROUP 4: LIFETIME — Icon Award ═══ */}
-        <motion.div className="mb-10" initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }}>
-          <TierGroupHeader icon={Crown} title="Africa Education Icon — Lifetime Achievement" subtitle="Jury selection only · 2005–2025" count={groups.lifetime.length} color="bg-purple-600" />
-          <div className="grid sm:grid-cols-1 lg:grid-cols-2 gap-5 max-w-3xl">
-            {groups.lifetime.map((cat, i) => (
-              <motion.div key={cat.id} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.04 }} viewport={{ once: true }}>
-                <CategoryCard cat={cat} />
-              </motion.div>
-            ))}
-          </div>
-        </motion.div>
 
         {/* CTA */}
         <motion.div className="flex flex-col sm:flex-row justify-center gap-4 mt-10" initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
