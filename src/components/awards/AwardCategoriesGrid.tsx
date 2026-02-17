@@ -60,7 +60,7 @@ export function AwardCategoriesGrid({
   accentColor = "amber",
   title,
   description,
-}: AwardCategoriesGridProps) {
+}: AwardCategoriesGridProps & { tier: AwardTier }) {
   const styles = accentStyles[accentColor];
   const tierInfo = TIER_INFO[tier];
   
@@ -90,7 +90,8 @@ export function AwardCategoriesGrid({
               key={category.id} 
               category={category} 
               index={index} 
-              styles={styles} 
+              styles={styles}
+              parentTier={tier}
             />
           ))}
         </div>
@@ -114,11 +115,13 @@ export function AwardCategoriesGrid({
 function CategoryCard({ 
   category, 
   index, 
-  styles 
+  styles,
+  parentTier,
 }: { 
   category: CategoryDefinition; 
   index: number; 
   styles: typeof accentStyles.amber;
+  parentTier: AwardTier;
 }) {
   const Icon = categoryIconMap[category.iconName] || GraduationCap;
   const scopeStyle = scopeStyles[category.scope] || scopeStyles.AFRICA_REGIONAL;
@@ -161,6 +164,15 @@ function CategoryCard({
               {scopeStyle.label}
             </Badge>
           </div>
+          {/* Tier badge on image */}
+          <div className="absolute top-2 left-2">
+            <Badge 
+              variant="outline" 
+              className={`text-[10px] px-1.5 py-0 backdrop-blur-sm ${styles.badgeBg} ${styles.badgeText} ${styles.badgeBorder}`}
+            >
+              {TIER_INFO[parentTier].shortName}
+            </Badge>
+          </div>
           {/* Icon overlay */}
           <div className="absolute bottom-2 left-3">
             <div className={`h-8 w-8 rounded-lg ${styles.badgeBg} backdrop-blur-sm flex items-center justify-center`}>
@@ -182,7 +194,7 @@ function CategoryCard({
           <div className="flex items-center justify-between mt-auto">
             <span className="text-white/40 text-xs">{subcategoryCount} subcategories</span>
             <div className="flex items-center gap-1 text-xs text-white/40 group-hover:text-gold transition-colors">
-              <span>Explore</span>
+              <span>View Subcategories</span>
               <ArrowRight className="h-3 w-3 group-hover:translate-x-1 transition-transform" />
             </div>
           </div>
