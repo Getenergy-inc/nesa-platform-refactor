@@ -39,10 +39,10 @@ const tierBadgeStyles: Record<string, { label: string; className: string; icon: 
 
 // Governance hints per track
 const governanceHints: Record<string, string> = {
-  competitive: "Top 3 finalists emerge from public voting. Finalists compete for Blue Garnet Winner.",
+  competitive: "Top 3 finalists emerge from public voting. Finalists compete for the Blue Garnet Award.",
   institutional: "Institutional recognition evaluated under governance and leadership criteria.",
-  "special-recognition": "Cultural impact recognition (2025 edition).",
-  lifetime: "Continental honour.",
+  "special-recognition": "Cultural & influence impact recognition (2025 edition).",
+  lifetime: "Continental lifetime honour.",
 };
 
 function getPrimaryTier(cat: CategoryDefinition): string {

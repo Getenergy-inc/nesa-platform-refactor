@@ -79,9 +79,11 @@ function CategoryCard({ cat }: { cat: CategoryDefinition }) {
         </h3>
         <p className="text-white/50 text-xs line-clamp-2 mb-3">{cat.description}</p>
         <div className="flex items-center justify-between">
-          <span className="text-white/40 text-xs">{cat.subcategories.length} subcategories</span>
+          <span className="text-white/40 text-xs">
+            {cat.subcategories.length > 0 ? `${cat.subcategories.length} subcategories` : ""}
+          </span>
           <div className="flex items-center gap-1 text-xs text-white/40 group-hover:text-gold transition-colors">
-            <span>View</span>
+            <span>{cat.subcategories.length > 0 ? "View Subcategories" : "Explore"}</span>
             <ChevronRight className="h-3 w-3 group-hover:translate-x-1 transition-transform" />
           </div>
         </div>
