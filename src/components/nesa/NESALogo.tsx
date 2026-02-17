@@ -69,6 +69,9 @@ export const NESALogo = forwardRef<HTMLDivElement, NESALogoProps>(
           <span className="text-sm font-display font-bold text-gold tracking-wide mt-0.5">
             AFRICA
           </span>
+          <span className="text-[6px] text-white/50 font-medium tracking-wider italic mt-0.5">
+            The African Academy Awards for Education
+          </span>
         </div>
       </div>
     );

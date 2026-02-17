@@ -28,6 +28,9 @@ export function AcceptanceLetterHeader({ nomineeName, chapterName, region }: Acc
         <p className="text-muted-foreground">
           New Education Standard Awards Africa
         </p>
+        <p className="text-xs text-muted-foreground/70 italic tracking-wider">
+          The African Academy Awards for Education
+        </p>
         {chapterName && (
           <div className="flex flex-wrap items-center justify-center gap-2 pt-1">
             <Badge variant="secondary" className="bg-primary/10 text-primary border-primary/20 text-xs px-3 py-1">

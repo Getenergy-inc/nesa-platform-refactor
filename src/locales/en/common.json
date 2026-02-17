@@ -10,6 +10,9 @@
     "dashboard": "Dashboard",
     "logout": "Logout"
   },
+  "brand": {
+    "slogan": "The African Academy Awards for Education"
+  },
   "hero": {
     "headline": "Honoring Africa's Education Changemakers",
     "subheadline": "Advocating & Achieving Education For All In Africa",

@@ -32,6 +32,7 @@ export function NESAFooter() {
               <div className="flex flex-col leading-tight">
                 <span className="text-xs text-gold/70 font-medium tracking-wider uppercase">New Education Standard Awards</span>
                 <span className="text-lg font-display font-bold text-gold">AFRICA</span>
+                <span className="text-[10px] text-white/50 font-medium tracking-wider italic">The African Academy Awards for Education</span>
               </div>
             </div>
             <p className="text-white/60 text-sm mb-4">
