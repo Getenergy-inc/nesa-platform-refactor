@@ -26,6 +26,7 @@ const LegacyImpactSection = lazy(() => import("@/components/nesa/LegacyImpactSec
 const IntegritySection = lazy(() => import("@/components/nesa/IntegritySection").then(m => ({ default: m.IntegritySection })));
 const EDIIntegrityJourney = lazy(() => import("@/components/nesa/EDIIntegrityJourney").then(m => ({ default: m.EDIIntegrityJourney })));
 const MediaShowcaseSection = lazy(() => import("@/components/nesa/MediaShowcaseSection").then(m => ({ default: m.MediaShowcaseSection })));
+const GoldSpecialRecognitionSection = lazy(() => import("@/components/nesa/GoldSpecialRecognitionSection").then(m => ({ default: m.GoldSpecialRecognitionSection })));
 const UpcomingEventsSection = lazy(() => import("@/components/nesa/UpcomingEventsSection").then(m => ({ default: m.UpcomingEventsSection })));
 const JudgesSection = lazy(() => import("@/components/nesa/JudgesSection").then(m => ({ default: m.JudgesSection })));
 const SponsorsSection = lazy(() => import("@/components/nesa/SponsorsSection").then(m => ({ default: m.SponsorsSection })));
@@ -65,6 +66,11 @@ export function NESALandingPage() {
         {/* ═══ 4. Award Tiers Overview + Category Grid ═══ */}
         <LazySection>
           <CategoriesSection />
+        </LazySection>
+        
+        {/* ═══ 4b. Gold Special Recognition — 2025 Edition ═══ */}
+        <LazySection>
+          <GoldSpecialRecognitionSection />
         </LazySection>
         
         {/* ═══ 5. Nominees Directory ═══ */}
