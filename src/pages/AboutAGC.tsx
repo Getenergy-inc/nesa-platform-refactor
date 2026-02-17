@@ -47,7 +47,7 @@ export default function AboutAGC() {
   return (
     <>
       <Helmet>
-        <title>About Afri Gold Coin (AGC) | {currentEdition.name}</title>
+        <title>{`About Afri Gold Coin (AGC) | ${currentEdition?.name || 'NESA-Africa 2025'}`}</title>
         <meta 
           name="description" 
           content="Learn about Afri Gold Coin (AGC), NESA-Africa's non-cash voting credit system. Earn AGCc, convert to AGC, and vote for Africa's education champions."

@@ -209,7 +209,7 @@ export default function Results() {
   return (
     <>
       <Helmet>
-        <title>Award Results | {currentEdition.name}</title>
+        <title>{`Award Results | ${currentEdition?.name || 'NESA-Africa 2025'}`}</title>
         <meta 
           name="description" 
           content={`View the official award winners and results for ${currentEdition.name}. Celebrating Africa's outstanding education changemakers.`}

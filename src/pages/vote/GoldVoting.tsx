@@ -207,7 +207,7 @@ import { VotingStatsStrip } from "@/components/voting/VotingStatsStrip";
    return (
      <>
        <Helmet>
-         <title>Gold Certificate Voting | {currentEdition.name}</title>
+         <title>{`Gold Certificate Voting | ${currentEdition?.name || 'NESA-Africa 2025'}`}</title>
          <meta
            name="description"
            content={`Vote for Gold Certificate nominees in ${currentEdition.name}. 100% public voting to recognize Africa's education champions.`}

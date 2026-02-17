@@ -159,7 +159,7 @@ export default function Categories() {
   return (
     <>
       <Helmet>
-        <title>Award Categories | {currentEdition.name}</title>
+        <title>{`Award Categories | ${currentEdition?.name || 'NESA-Africa 2025'}`}</title>
         <meta name="description" content="Explore all NESA-Africa award categories across 4 tiers: Blue Garnet, Platinum, Gold Special Recognition, and Lifetime Achievement." />
       </Helmet>
 
