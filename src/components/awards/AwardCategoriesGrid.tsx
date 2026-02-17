@@ -184,7 +184,7 @@ function CategoryCard({
         {/* Content */}
         <div className="p-4 flex flex-col flex-1">
           <h3 className="font-semibold text-white text-sm leading-tight group-hover:text-gold transition-colors line-clamp-2 mb-1.5">
-            {category.shortName}
+            {category.name}
           </h3>
           
           <p className="text-white/50 text-xs line-clamp-2 flex-1 mb-3">
@@ -192,9 +192,11 @@ function CategoryCard({
           </p>
 
           <div className="flex items-center justify-between mt-auto">
-            <span className="text-white/40 text-xs">{subcategoryCount} subcategories</span>
+            <span className="text-white/40 text-xs">
+              {subcategoryCount > 0 ? `${subcategoryCount} subcategories` : ""}
+            </span>
             <div className="flex items-center gap-1 text-xs text-white/40 group-hover:text-gold transition-colors">
-              <span>View Subcategories</span>
+              <span>{subcategoryCount > 0 ? "View Subcategories" : "Explore"}</span>
               <ArrowRight className="h-3 w-3 group-hover:translate-x-1 transition-transform" />
             </div>
           </div>
