@@ -430,7 +430,7 @@ export const NESA_CATEGORIES: CategoryDefinition[] = [
     shortName: "Library Nigeria",
     description: "Celebrating excellence in library services across Nigerian higher education",
     scope: "NIGERIA",
-    tierApplicability: { platinum: true, gold: true, blueGarnet: true, icon: false },
+    tierApplicability: { platinum: true, gold: false, blueGarnet: false, icon: false },
     selectionMethod: "Public voting → Jury evaluation",
     displayOrder: 10,
     iconName: "BookOpen",
