@@ -3,6 +3,8 @@
 // Consolidated 8-block editorial flow with lazy loading
 
 import { lazy } from "react";
+import { Link } from "react-router-dom";
+import { ChevronRight } from "lucide-react";
 import { Helmet } from "react-helmet-async";
 import { TrophyHeroSection } from "@/components/nesa/TrophyHeroSection";
 import { TrustLogosStrip } from "@/components/nesa/TrustLogosStrip";
@@ -26,7 +28,6 @@ const LegacyImpactSection = lazy(() => import("@/components/nesa/LegacyImpactSec
 const IntegritySection = lazy(() => import("@/components/nesa/IntegritySection").then(m => ({ default: m.IntegritySection })));
 const EDIIntegrityJourney = lazy(() => import("@/components/nesa/EDIIntegrityJourney").then(m => ({ default: m.EDIIntegrityJourney })));
 const MediaShowcaseSection = lazy(() => import("@/components/nesa/MediaShowcaseSection").then(m => ({ default: m.MediaShowcaseSection })));
-const GoldSpecialRecognitionSection = lazy(() => import("@/components/nesa/GoldSpecialRecognitionSection").then(m => ({ default: m.GoldSpecialRecognitionSection })));
 const UpcomingEventsSection = lazy(() => import("@/components/nesa/UpcomingEventsSection").then(m => ({ default: m.UpcomingEventsSection })));
 const JudgesSection = lazy(() => import("@/components/nesa/JudgesSection").then(m => ({ default: m.JudgesSection })));
 const SponsorsSection = lazy(() => import("@/components/nesa/SponsorsSection").then(m => ({ default: m.SponsorsSection })));
@@ -68,10 +69,24 @@ export function NESALandingPage() {
           <CategoriesSection />
         </LazySection>
         
-        {/* ═══ 4b. Gold Special Recognition — 2025 Edition ═══ */}
-        <LazySection>
-          <GoldSpecialRecognitionSection />
-        </LazySection>
+        {/* ═══ 4b. Gold Special Recognition — Link to dedicated page ═══ */}
+        <section className="py-12 md:py-16">
+          <div className="max-w-4xl mx-auto px-4 sm:px-6 text-center">
+            <div className="inline-flex items-center gap-2 mb-3">
+              <span className="text-primary text-xs font-medium tracking-wider uppercase">2025 Edition</span>
+            </div>
+            <h2 className="text-2xl sm:text-3xl font-bold text-secondary-foreground mb-3 font-serif">
+              Gold Special Recognition
+            </h2>
+            <p className="text-primary/80 font-medium mb-2">Cultural Impact Recognition · 3 Categories</p>
+            <p className="text-secondary-foreground/45 max-w-lg mx-auto text-sm leading-relaxed mb-6">
+              Celebrating sports icons, music artists, and digital voices championing education across Africa and the Diaspora.
+            </p>
+            <Link to="/awards/gold-special-recognition" className="inline-flex items-center gap-2 bg-primary hover:bg-primary/90 text-primary-foreground font-semibold px-6 py-3 rounded-md shadow-lg shadow-primary/15 hover:shadow-primary/25 transition-all">
+              Explore Gold Special Recognition <ChevronRight className="w-4 h-4" />
+            </Link>
+          </div>
+        </section>
         
         {/* ═══ 5. Nominees Directory ═══ */}
         <LazySection>
