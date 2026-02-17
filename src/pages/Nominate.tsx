@@ -1,5 +1,5 @@
 import { useState, useEffect, useMemo, useCallback } from "react";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate, Link, useSearchParams } from "react-router-dom";
 import { useAuth } from "@/contexts/AuthContext";
 import { useSeason } from "@/contexts/SeasonContext";
 import { StageGate, StageLocked } from "@/components/StageGate";
@@ -15,8 +15,9 @@ import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Separator } from "@/components/ui/separator";
 import { ScrollArea } from "@/components/ui/scroll-area";
+import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { toast } from "sonner";
-import { Award, Upload, X, ArrowLeft, CheckCircle, FileText, Image as ImageIcon, User, Building, FileCheck, Globe, MapPin, Trophy, Star, ChevronRight, Home, Save, RotateCcw, Trash2, Eye } from "lucide-react";
+import { Award, Upload, X, ArrowLeft, CheckCircle, FileText, Image as ImageIcon, User, Building, Globe, MapPin, Trophy, Star, ChevronRight, Home, Save, RotateCcw, Trash2, Eye, AlertCircle } from "lucide-react";
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from "@/components/ui/breadcrumb";
 import { 
   NESA_CATEGORIES, 
@@ -25,7 +26,12 @@ import {
   getTierPath, 
   isCompetitiveCategory,
   TIER_INFO,
-  AwardTier
+  AwardTier,
+  CategoryScope,
+  getCategoryBySlug,
+  getCategoryById,
+  getCategoriesGrouped,
+  getCategoryTrack,
 } from "@/config/nesaCategories";
 import { useNominationDraft } from "@/hooks/useNominationDraft";
 import { formatDistanceToNow } from "date-fns";
@@ -46,16 +52,77 @@ interface UploadedFile {
   type: string;
 }
 
+// Map tier tab values to display tier
+type NominateTier = "blue-garnet" | "platinum" | "gold-special" | "lifetime";
+
+const TIER_TABS: { value: NominateTier; label: string; icon: string; disabled?: boolean }[] = [
+  { value: "blue-garnet", label: "Blue Garnet", icon: "🏆" },
+  { value: "platinum", label: "Platinum", icon: "💎" },
+  { value: "gold-special", label: "Gold Special (2025)", icon: "🥇" },
+  { value: "lifetime", label: "Lifetime", icon: "🏛", disabled: true },
+];
+
+const SCOPE_OPTIONS: { value: CategoryScope; label: string }[] = [
+  { value: "AFRICA_REGIONAL", label: "Africa Regional" },
+  { value: "NIGERIA", label: "Nigeria" },
+  { value: "INTERNATIONAL", label: "International" },
+];
+
+// Social media platforms for Gold Special Social Media category
+const SOCIAL_PLATFORMS = ["Instagram", "TikTok", "YouTube", "X", "Facebook", "LinkedIn"];
+
+/**
+ * Determine the tier tab for a category
+ */
+function getTierTab(cat: CategoryDefinition): NominateTier {
+  if (cat.tierApplicability.goldSpecial) return "gold-special";
+  if (cat.tierApplicability.icon) return "lifetime";
+  if (cat.tierApplicability.blueGarnet) return "blue-garnet";
+  return "platinum";
+}
+
+/**
+ * Get scopes available for a given tier
+ */
+function getScopesForTier(tier: NominateTier): CategoryScope[] {
+  const cats = getCategoriesForTier(tier);
+  const scopes = new Set(cats.map(c => c.scope));
+  return SCOPE_OPTIONS.filter(s => scopes.has(s.value)).map(s => s.value);
+}
+
+/**
+ * Get categories for a tier
+ */
+function getCategoriesForTier(tier: NominateTier): CategoryDefinition[] {
+  return NESA_CATEGORIES.filter(cat => {
+    if (!cat.isActive) return false;
+    return getTierTab(cat) === tier;
+  });
+}
+
+/**
+ * Get categories for tier + scope combination
+ */
+function getCategoriesForTierAndScope(tier: NominateTier, scope: CategoryScope): CategoryDefinition[] {
+  return getCategoriesForTier(tier).filter(cat => cat.scope === scope);
+}
+
 export default function Nominate() {
   const { user, loading: authLoading } = useAuth();
   const { currentEdition } = useSeason();
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
   const { hasDraft, draftDate, saveDraft, loadDraft, clearDraft } = useNominationDraft();
+
+  // Tier/scope/category state
+  const [selectedTier, setSelectedTier] = useState<NominateTier>("blue-garnet");
+  const [selectedScope, setSelectedScope] = useState<CategoryScope | "">("");
+  const [selectedCategoryId, setSelectedCategoryId] = useState<string>("");
+  const [selectedSubcategoryId, setSelectedSubcategoryId] = useState<string>("");
+  const [preselectionError, setPreselectionError] = useState<string>("");
 
   // Form state
   const [dbSubcategories, setDbSubcategories] = useState<DbSubcategory[]>([]);
-  const [selectedCategoryId, setSelectedCategoryId] = useState<string>("");
-  const [selectedSubcategoryId, setSelectedSubcategoryId] = useState<string>("");
   const [nomineeName, setNomineeName] = useState("");
   const [nomineeTitle, setNomineeTitle] = useState("");
   const [nomineeOrganization, setNomineeOrganization] = useState("");
@@ -70,17 +137,84 @@ export default function Nominate() {
   const [lastSaved, setLastSaved] = useState<Date | null>(null);
   const [showConfirmDialog, setShowConfirmDialog] = useState(false);
 
-  // Get active categories from config
-  const activeCategories = useMemo(() => 
-    NESA_CATEGORIES.filter(cat => cat.isActive).sort((a, b) => a.displayOrder - b.displayOrder),
-    []
+  // Gold Special Social Media fields
+  const [socialPlatforms, setSocialPlatforms] = useState<Record<string, string>>({});
+  const [countryOfOrigin, setCountryOfOrigin] = useState("");
+  const [regionOfOrigin, setRegionOfOrigin] = useState("");
+  const [countryOfResidence, setCountryOfResidence] = useState("");
+  const [residenceType, setResidenceType] = useState<"africa" | "diaspora" | "">("");
+
+  // URL preselection on mount
+  useEffect(() => {
+    const categoryParam = searchParams.get("category");
+    const tierParam = searchParams.get("tier");
+
+    if (categoryParam) {
+      // Try slug first, then ID
+      const cat = getCategoryBySlug(categoryParam) || getCategoryById(categoryParam);
+      if (cat && cat.isActive) {
+        const tier = getTierTab(cat);
+        setSelectedTier(tier);
+        setSelectedScope(cat.scope);
+        setSelectedCategoryId(cat.id);
+        setPreselectionError("");
+      } else {
+        setPreselectionError(`Category "${categoryParam}" was not found. Please select manually.`);
+      }
+    } else if (tierParam) {
+      const validTiers: NominateTier[] = ["blue-garnet", "platinum", "gold-special"];
+      if (validTiers.includes(tierParam as NominateTier)) {
+        setSelectedTier(tierParam as NominateTier);
+      }
+    }
+  }, [searchParams]);
+
+  // Available scopes for current tier
+  const availableScopes = useMemo(() => getScopesForTier(selectedTier), [selectedTier]);
+
+  // Categories filtered by tier + scope
+  const filteredCategories = useMemo(() => {
+    if (!selectedScope) return getCategoriesForTier(selectedTier);
+    return getCategoriesForTierAndScope(selectedTier, selectedScope);
+  }, [selectedTier, selectedScope]);
+
+  // Find selected category
+  const selectedCategory = useMemo(() => 
+    NESA_CATEGORIES.find(cat => cat.id === selectedCategoryId),
+    [selectedCategoryId]
   );
 
-  // Find selected category from config
-  const selectedCategory = useMemo(() => 
-    activeCategories.find(cat => cat.id === selectedCategoryId),
-    [activeCategories, selectedCategoryId]
-  );
+  const isGoldSpecialSocialMedia = selectedCategory?.id === "cat-gs-03";
+
+  // Reset scope when tier changes (if current scope not valid)
+  useEffect(() => {
+    if (selectedScope && !availableScopes.includes(selectedScope)) {
+      setSelectedScope("");
+      setSelectedCategoryId("");
+      setSelectedSubcategoryId("");
+    }
+  }, [selectedTier, availableScopes, selectedScope]);
+
+  // Reset category when scope changes
+  const handleScopeChange = (scope: CategoryScope) => {
+    setSelectedScope(scope);
+    setSelectedCategoryId("");
+    setSelectedSubcategoryId("");
+  };
+
+  // Reset subcategory when category changes
+  const handleCategoryChange = (catId: string) => {
+    setSelectedCategoryId(catId);
+    setSelectedSubcategoryId("");
+  };
+
+  // Handle tier change
+  const handleTierChange = (tier: string) => {
+    setSelectedTier(tier as NominateTier);
+    setSelectedScope("");
+    setSelectedCategoryId("");
+    setSelectedSubcategoryId("");
+  };
 
   // Load subcategories from database when category changes
   useEffect(() => {
@@ -90,7 +224,6 @@ export default function Nominate() {
         return;
       }
 
-      // First, get the database category ID by slug
       const categorySlug = selectedCategory?.slug;
       if (!categorySlug) return;
 
@@ -128,7 +261,7 @@ export default function Nominate() {
     }
   }, [user, authLoading, navigate]);
 
-  // Handle saving draft
+  // Draft handlers
   const handleSaveDraft = useCallback(() => {
     saveDraft({
       selectedCategoryId,
@@ -144,7 +277,6 @@ export default function Nominate() {
     toast.success("Draft saved successfully");
   }, [selectedCategoryId, selectedSubcategoryId, nomineeName, nomineeTitle, nomineeOrganization, nomineeBio, justification, step, saveDraft]);
 
-  // Handle restoring draft
   const handleRestoreDraft = useCallback(() => {
     const draft = loadDraft();
     if (draft) {
@@ -156,18 +288,24 @@ export default function Nominate() {
       setNomineeBio(draft.nomineeBio);
       setJustification(draft.justification);
       setStep(draft.step);
+      // Infer tier/scope from category
+      const cat = getCategoryById(draft.selectedCategoryId);
+      if (cat) {
+        setSelectedTier(getTierTab(cat));
+        setSelectedScope(cat.scope);
+      }
       setShowDraftBanner(false);
       toast.success("Draft restored successfully");
     }
   }, [loadDraft]);
 
-  // Handle discarding draft
   const handleDiscardDraft = useCallback(() => {
     clearDraft();
     setShowDraftBanner(false);
     toast.success("Draft discarded");
   }, [clearDraft]);
 
+  // File upload handlers
   const handleFileUpload = async (e: React.ChangeEvent<HTMLInputElement>, isPhoto: boolean = false) => {
     const files = e.target.files;
     if (!files || files.length === 0 || !user) return;
@@ -177,7 +315,6 @@ export default function Nominate() {
 
     try {
       for (const file of Array.from(files)) {
-        // Validate file size (10MB max)
         if (file.size > 10 * 1024 * 1024) {
           toast.error(`${file.name} is too large. Maximum size is 10MB.`);
           continue;
@@ -250,9 +387,7 @@ export default function Nominate() {
   };
 
   const handleSubmit = async (e?: React.FormEvent) => {
-    if (e) {
-      e.preventDefault();
-    }
+    if (e) e.preventDefault();
 
     if (!user) {
       toast.error("Please log in to submit a nomination");
@@ -278,7 +413,6 @@ export default function Nominate() {
     setSubmitting(true);
 
     try {
-      // Get current season
       const { data: season, error: seasonError } = await supabase
         .from("seasons")
         .select("id")
@@ -322,7 +456,6 @@ export default function Nominate() {
         return;
       }
 
-      // Clear draft on successful submission
       clearDraft();
       setShowConfirmDialog(false);
       toast.success("Nomination Submitted Successfully!", {
@@ -340,46 +473,8 @@ export default function Nominate() {
   const canProceedToStep2 = selectedCategoryId && selectedSubcategoryId;
   const canProceedToStep3 = nomineeName.trim().length > 0;
 
-  // Get tier path for selected category
   const tierPath = selectedCategory ? getTierPath(selectedCategory) : [];
   const scopeBadge = selectedCategory ? getScopeBadge(selectedCategory.scope) : null;
-  const isCompetitive = selectedCategory ? isCompetitiveCategory(selectedCategory) : false;
-
-  // Render tier badges
-  const renderTierBadges = (category: CategoryDefinition) => {
-    const tiers = getTierPath(category);
-    return (
-      <div className="flex flex-wrap gap-1">
-        {tiers.map((tier) => (
-          <Badge 
-            key={tier} 
-            variant="outline" 
-            className="text-xs"
-            style={{ 
-              borderColor: TIER_INFO[tier].color, 
-              color: TIER_INFO[tier].color 
-            }}
-          >
-            {TIER_INFO[tier].shortName}
-          </Badge>
-        ))}
-      </div>
-    );
-  };
-
-  // Get scope icon
-  const getScopeIcon = (scope: string) => {
-    switch (scope) {
-      case "AFRICA_REGIONAL":
-        return <Globe className="h-4 w-4" />;
-      case "NIGERIA":
-        return <MapPin className="h-4 w-4" />;
-      case "ICON":
-        return <Star className="h-4 w-4" />;
-      default:
-        return <Trophy className="h-4 w-4" />;
-    }
-  };
 
   if (authLoading) {
     return (
@@ -394,7 +489,6 @@ export default function Nominate() {
       {/* Header */}
       <header className="border-b bg-card">
         <div className="container px-6">
-          {/* Breadcrumb */}
           <div className="py-2 border-b border-border/50">
             <Breadcrumb>
               <BreadcrumbList>
@@ -416,7 +510,6 @@ export default function Nominate() {
             </Breadcrumb>
           </div>
           
-          {/* Main Header */}
           <div className="flex h-16 items-center gap-4">
             <Button variant="ghost" size="icon" asChild>
               <Link to="/">
@@ -461,6 +554,14 @@ export default function Nominate() {
             </Alert>
           )}
 
+          {/* Preselection Error */}
+          {preselectionError && (
+            <Alert className="mb-6 border-destructive/50 bg-destructive/5">
+              <AlertCircle className="h-4 w-4" />
+              <AlertDescription>{preselectionError}</AlertDescription>
+            </Alert>
+          )}
+
           {/* Progress Steps */}
           <div className="mb-8">
             <div className="flex items-center justify-between">
@@ -499,122 +600,124 @@ export default function Nominate() {
                 <CardHeader>
                   <CardTitle className="font-display">Select Category</CardTitle>
                   <CardDescription>
-                    Choose from {activeCategories.length} official NESA award categories across Africa and Nigeria.{" "}
+                    Choose your award tier, scope, and category.{" "}
                     <Link to="/categories" className="text-primary hover:underline inline-flex items-center gap-1">
-                      Browse all categories <ArrowLeft className="h-3 w-3 rotate-180" />
+                      Browse all categories <ChevronRight className="h-3 w-3" />
                     </Link>
                   </CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-6">
+                  {/* 1. Choose Tier */}
                   <div className="space-y-2">
-                    <Label htmlFor="category">Award Category</Label>
-                    <Select value={selectedCategoryId} onValueChange={setSelectedCategoryId}>
-                      <SelectTrigger id="category">
-                        <SelectValue placeholder="Select a category" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        {activeCategories.map((cat) => {
-                          const badge = getScopeBadge(cat.scope);
+                    <Label className="text-sm font-semibold">Award Tier</Label>
+                    <Tabs value={selectedTier} onValueChange={handleTierChange}>
+                      <TabsList className="w-full grid grid-cols-4">
+                        {TIER_TABS.map((tab) => (
+                          <TabsTrigger 
+                            key={tab.value} 
+                            value={tab.value}
+                            disabled={tab.disabled}
+                            className="text-xs sm:text-sm"
+                          >
+                            <span className="mr-1">{tab.icon}</span>
+                            <span className="hidden sm:inline">{tab.label}</span>
+                            <span className="sm:hidden">{tab.label.split(" ")[0]}</span>
+                          </TabsTrigger>
+                        ))}
+                      </TabsList>
+                    </Tabs>
+                    {selectedTier === "lifetime" && (
+                      <p className="text-xs text-muted-foreground">Lifetime nominations are by invitation only.</p>
+                    )}
+                  </div>
+
+                  {/* 2. Choose Scope */}
+                  {availableScopes.length > 0 && selectedTier !== "lifetime" && (
+                    <div className="space-y-2">
+                      <Label className="text-sm font-semibold">Scope</Label>
+                      <div className="flex flex-wrap gap-2">
+                        {availableScopes.map((scope) => {
+                          const badge = getScopeBadge(scope);
+                          const isSelected = selectedScope === scope;
                           return (
-                            <SelectItem key={cat.id} value={cat.id}>
-                              <div className="flex items-center gap-2">
-                                <span>{cat.name}</span>
-                                <Badge 
-                                  variant="outline" 
-                                  className="ml-auto text-xs"
-                                  style={{ borderColor: badge.color, color: badge.color }}
-                                >
-                                  {badge.label}
-                                </Badge>
-                              </div>
-                            </SelectItem>
+                            <Button
+                              key={scope}
+                              type="button"
+                              variant={isSelected ? "default" : "outline"}
+                              size="sm"
+                              onClick={() => handleScopeChange(scope)}
+                              className={isSelected ? "" : ""}
+                            >
+                              {scope === "AFRICA_REGIONAL" && <Globe className="h-3.5 w-3.5 mr-1" />}
+                              {scope === "NIGERIA" && <MapPin className="h-3.5 w-3.5 mr-1" />}
+                              {scope === "INTERNATIONAL" && <Globe className="h-3.5 w-3.5 mr-1" />}
+                              {badge.label}
+                            </Button>
                           );
                         })}
-                      </SelectContent>
-                    </Select>
-                  </div>
+                      </div>
+                    </div>
+                  )}
+
+                  {/* 3. Choose Category */}
+                  {(selectedScope || selectedTier === "gold-special") && filteredCategories.length > 0 && (
+                    <div className="space-y-2">
+                      <Label className="text-sm font-semibold">Category</Label>
+                      <Select value={selectedCategoryId} onValueChange={handleCategoryChange}>
+                        <SelectTrigger>
+                          <SelectValue placeholder="Select a category" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          {filteredCategories.map((cat) => (
+                            <SelectItem key={cat.id} value={cat.id}>
+                              {cat.name}
+                            </SelectItem>
+                          ))}
+                        </SelectContent>
+                      </Select>
+                    </div>
+                  )}
 
                   {/* Category Info Card */}
                   {selectedCategory && (
-                    <div className="rounded-lg border bg-muted/30 p-4 space-y-4">
+                    <div className="rounded-lg border bg-muted/30 p-4 space-y-3">
                       <div className="flex items-start justify-between">
                         <div className="space-y-1">
                           <h4 className="font-semibold">{selectedCategory.name}</h4>
                           <p className="text-sm text-muted-foreground">{selectedCategory.description}</p>
                         </div>
                         {scopeBadge && (
-                          <Badge 
-                            variant="secondary"
-                            className="flex items-center gap-1"
-                            style={{ backgroundColor: `${scopeBadge.color}20`, color: scopeBadge.color }}
-                          >
-                            {getScopeIcon(selectedCategory.scope)}
+                          <Badge variant="secondary" className="flex items-center gap-1 shrink-0 ml-2">
                             {scopeBadge.label}
                           </Badge>
                         )}
                       </div>
-
-                      <div className="grid grid-cols-2 gap-4 text-sm">
-                        <div>
-                          <span className="text-muted-foreground">Selection Method:</span>
-                          <p className="font-medium">{selectedCategory.selectionMethod}</p>
-                        </div>
-                        <div>
-                          <span className="text-muted-foreground">Competition:</span>
-                          <p className="font-medium">
-                            {isCompetitive ? (
-                              <span className="text-amber-600">Competitive</span>
-                            ) : (
-                              <span className="text-emerald-600">Non-Competitive</span>
-                            )}
-                          </p>
-                        </div>
+                      <div className="flex flex-wrap gap-1">
+                        {tierPath.map((tier) => (
+                          <Badge 
+                            key={tier} 
+                            variant="outline" 
+                            className="text-xs"
+                            style={{ borderColor: TIER_INFO[tier].color, color: TIER_INFO[tier].color }}
+                          >
+                            {TIER_INFO[tier].shortName}
+                          </Badge>
+                        ))}
                       </div>
-
-                      <div>
-                        <span className="text-sm text-muted-foreground">Eligible Tiers:</span>
-                        <div className="mt-1">
-                          {renderTierBadges(selectedCategory)}
-                        </div>
-                      </div>
-
-                      {tierPath.length > 0 && (
-                        <div className="border-t pt-3">
-                          <p className="text-xs text-muted-foreground mb-2">Award Progression Path:</p>
-                          <div className="flex items-center gap-2 flex-wrap">
-                            {tierPath.map((tier, index) => (
-                              <div key={tier} className="flex items-center gap-2">
-                                <div 
-                                  className="px-3 py-1 rounded-full text-xs font-medium"
-                                  style={{ 
-                                    backgroundColor: TIER_INFO[tier].bgColor, 
-                                    color: TIER_INFO[tier].color,
-                                    border: `1px solid ${TIER_INFO[tier].borderColor}`
-                                  }}
-                                >
-                                  {TIER_INFO[tier].name}
-                                </div>
-                                {index < tierPath.length - 1 && (
-                                  <span className="text-muted-foreground">→</span>
-                                )}
-                              </div>
-                            ))}
-                          </div>
-                        </div>
-                      )}
                     </div>
                   )}
 
+                  {/* 4. Choose Subcategory */}
                   {selectedCategoryId && dbSubcategories.length > 0 && (
                     <div className="space-y-2">
-                      <Label htmlFor="subcategory">
+                      <Label className="text-sm font-semibold">
                         Subcategory
-                        <span className="ml-2 text-xs text-muted-foreground">
+                        <span className="ml-2 text-xs text-muted-foreground font-normal">
                           ({dbSubcategories.length} available)
                         </span>
                       </Label>
                       <Select value={selectedSubcategoryId} onValueChange={setSelectedSubcategoryId}>
-                        <SelectTrigger id="subcategory">
+                        <SelectTrigger>
                           <SelectValue placeholder="Select a subcategory" />
                         </SelectTrigger>
                         <SelectContent>
@@ -635,7 +738,7 @@ export default function Nominate() {
                     </div>
                   )}
 
-                  {/* Existing Nominees Section */}
+                  {/* Existing Nominees */}
                   {selectedSubcategoryId && (
                     <ExistingNomineesSection
                       subcategoryId={selectedSubcategoryId}
@@ -645,20 +748,11 @@ export default function Nominate() {
                   )}
 
                   <div className="flex justify-between">
-                    <Button
-                      type="button"
-                      variant="outline"
-                      onClick={handleSaveDraft}
-                      disabled={!selectedCategoryId}
-                    >
+                    <Button type="button" variant="outline" onClick={handleSaveDraft} disabled={!selectedCategoryId}>
                       <Save className="mr-2 h-4 w-4" />
                       Save Draft
                     </Button>
-                    <Button
-                      type="button"
-                      onClick={() => setStep(2)}
-                      disabled={!canProceedToStep2}
-                    >
+                    <Button type="button" onClick={() => setStep(2)} disabled={!canProceedToStep2}>
                       Continue
                     </Button>
                   </div>
@@ -685,8 +779,10 @@ export default function Nominate() {
                   {selectedCategory && (
                     <div className="flex items-center justify-between rounded-lg bg-muted/50 px-4 py-2">
                       <div className="flex items-center gap-2">
-                        {getScopeIcon(selectedCategory.scope)}
-                        <span className="font-medium">{selectedCategory.shortName}</span>
+                        <Badge variant="outline" className="text-xs" style={{ borderColor: TIER_INFO[selectedTier].color, color: TIER_INFO[selectedTier].color }}>
+                          {TIER_INFO[selectedTier]?.shortName || selectedTier}
+                        </Badge>
+                        <span className="font-medium text-sm">{selectedCategory.name}</span>
                       </div>
                       <span className="text-sm text-muted-foreground">
                         {dbSubcategories.find(s => s.id === selectedSubcategoryId)?.name}
@@ -700,28 +796,14 @@ export default function Nominate() {
                     <div className="flex items-center gap-4">
                       {nomineePhoto ? (
                         <div className="relative">
-                          <img
-                            src={nomineePhoto.url}
-                            alt="Nominee"
-                            className="h-24 w-24 rounded-full object-cover"
-                          />
-                          <button
-                            type="button"
-                            onClick={removePhoto}
-                            className="absolute -right-1 -top-1 rounded-full bg-destructive p-1 text-destructive-foreground"
-                          >
+                          <img src={nomineePhoto.url} alt="Nominee" className="h-24 w-24 rounded-full object-cover" />
+                          <button type="button" onClick={removePhoto} className="absolute -right-1 -top-1 rounded-full bg-destructive p-1 text-destructive-foreground">
                             <X className="h-3 w-3" />
                           </button>
                         </div>
                       ) : (
                         <label className="flex h-24 w-24 cursor-pointer items-center justify-center rounded-full border-2 border-dashed border-muted-foreground/30 hover:border-primary">
-                          <input
-                            type="file"
-                            accept="image/*"
-                            className="hidden"
-                            onChange={(e) => handleFileUpload(e, true)}
-                            disabled={uploading}
-                          />
+                          <input type="file" accept="image/*" className="hidden" onChange={(e) => handleFileUpload(e, true)} disabled={uploading} />
                           <User className="h-8 w-8 text-muted-foreground" />
                         </label>
                       )}
@@ -736,72 +818,100 @@ export default function Nominate() {
                       <Label htmlFor="nomineeName">
                         Full Name <span className="text-destructive">*</span>
                       </Label>
-                      <Input
-                        id="nomineeName"
-                        value={nomineeName}
-                        onChange={(e) => setNomineeName(e.target.value)}
-                        placeholder="Enter nominee's full name"
-                        required
-                      />
+                      <Input id="nomineeName" value={nomineeName} onChange={(e) => setNomineeName(e.target.value)} placeholder="Enter nominee's full name" required />
                     </div>
 
                     <div className="space-y-2">
                       <Label htmlFor="nomineeTitle">Title / Position</Label>
-                      <Input
-                        id="nomineeTitle"
-                        value={nomineeTitle}
-                        onChange={(e) => setNomineeTitle(e.target.value)}
-                        placeholder="e.g., CEO, Founder, Professor"
-                      />
+                      <Input id="nomineeTitle" value={nomineeTitle} onChange={(e) => setNomineeTitle(e.target.value)} placeholder="e.g., CEO, Founder, Professor" />
                     </div>
 
                     <div className="space-y-2">
                       <Label htmlFor="nomineeOrganization">Organization</Label>
                       <div className="relative">
                         <Building className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
-                        <Input
-                          id="nomineeOrganization"
-                          value={nomineeOrganization}
-                          onChange={(e) => setNomineeOrganization(e.target.value)}
-                          placeholder="Organization name"
-                          className="pl-10"
-                        />
+                        <Input id="nomineeOrganization" value={nomineeOrganization} onChange={(e) => setNomineeOrganization(e.target.value)} placeholder="Organization name" className="pl-10" />
                       </div>
                     </div>
                   </div>
 
+                  {/* Gold Special extra fields */}
+                  {selectedTier === "gold-special" && (
+                    <div className="space-y-4 rounded-lg border bg-muted/20 p-4">
+                      <h4 className="font-semibold text-sm">Additional Information</h4>
+                      <div className="grid gap-4 sm:grid-cols-2">
+                        <div className="space-y-2">
+                          <Label htmlFor="countryOfOrigin">Country of Origin</Label>
+                          <Input id="countryOfOrigin" value={countryOfOrigin} onChange={(e) => setCountryOfOrigin(e.target.value)} placeholder="e.g., Nigeria" />
+                        </div>
+                        <div className="space-y-2">
+                          <Label htmlFor="regionOfOrigin">Region of Origin</Label>
+                          <Select value={regionOfOrigin} onValueChange={setRegionOfOrigin}>
+                            <SelectTrigger>
+                              <SelectValue placeholder="Select region" />
+                            </SelectTrigger>
+                            <SelectContent>
+                              {["West Africa", "East Africa", "Central Africa", "Southern Africa", "North Africa"].map(r => (
+                                <SelectItem key={r} value={r}>{r}</SelectItem>
+                              ))}
+                            </SelectContent>
+                          </Select>
+                        </div>
+                        <div className="space-y-2">
+                          <Label htmlFor="countryOfResidence">Country of Residence</Label>
+                          <Input id="countryOfResidence" value={countryOfResidence} onChange={(e) => setCountryOfResidence(e.target.value)} placeholder="e.g., United Kingdom" />
+                        </div>
+                        <div className="space-y-2">
+                          <Label>Residence Type</Label>
+                          <Select value={residenceType} onValueChange={(v) => setResidenceType(v as "africa" | "diaspora")}>
+                            <SelectTrigger>
+                              <SelectValue placeholder="Select type" />
+                            </SelectTrigger>
+                            <SelectContent>
+                              <SelectItem value="africa">Africa</SelectItem>
+                              <SelectItem value="diaspora">Diaspora</SelectItem>
+                            </SelectContent>
+                          </Select>
+                        </div>
+                      </div>
+
+                      {/* Social Media Platforms for Social Media category */}
+                      {isGoldSpecialSocialMedia && (
+                        <div className="space-y-3">
+                          <Label className="text-sm font-semibold">Social Media Profiles</Label>
+                          <p className="text-xs text-muted-foreground">Add profile links for relevant platforms</p>
+                          <div className="grid gap-3 sm:grid-cols-2">
+                            {SOCIAL_PLATFORMS.map(platform => (
+                              <div key={platform} className="space-y-1">
+                                <Label className="text-xs">{platform}</Label>
+                                <Input
+                                  value={socialPlatforms[platform] || ""}
+                                  onChange={(e) => setSocialPlatforms(prev => ({ ...prev, [platform]: e.target.value }))}
+                                  placeholder={`${platform} profile URL`}
+                                  className="text-sm"
+                                />
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      )}
+                    </div>
+                  )}
+
                   <div className="space-y-2">
                     <Label htmlFor="nomineeBio">Biography (Optional)</Label>
-                    <Textarea
-                      id="nomineeBio"
-                      value={nomineeBio}
-                      onChange={(e) => setNomineeBio(e.target.value)}
-                      placeholder="Brief biography of the nominee..."
-                      rows={4}
-                    />
-                    <p className="text-xs text-muted-foreground">
-                      {nomineeBio.length}/500 characters
-                    </p>
+                    <Textarea id="nomineeBio" value={nomineeBio} onChange={(e) => setNomineeBio(e.target.value)} placeholder="Brief biography of the nominee..." rows={4} />
+                    <p className="text-xs text-muted-foreground">{nomineeBio.length}/500 characters</p>
                   </div>
 
                   <div className="flex justify-between items-center">
-                    <Button type="button" variant="outline" onClick={() => setStep(1)}>
-                      Back
-                    </Button>
+                    <Button type="button" variant="outline" onClick={() => setStep(1)}>Back</Button>
                     <div className="flex gap-2">
-                      <Button
-                        type="button"
-                        variant="ghost"
-                        onClick={handleSaveDraft}
-                      >
+                      <Button type="button" variant="ghost" onClick={handleSaveDraft}>
                         <Save className="mr-2 h-4 w-4" />
                         Save Draft
                       </Button>
-                      <Button
-                        type="button"
-                        onClick={() => setStep(3)}
-                        disabled={!canProceedToStep3}
-                      >
+                      <Button type="button" onClick={() => setStep(3)} disabled={!canProceedToStep3}>
                         Continue
                       </Button>
                     </div>
@@ -841,31 +951,17 @@ export default function Nominate() {
                     <Label>Supporting Evidence (Optional)</Label>
                     <div className="rounded-lg border-2 border-dashed border-muted-foreground/30 p-6 text-center">
                       <label className="cursor-pointer">
-                        <input
-                          type="file"
-                          multiple
-                          accept="image/*,application/pdf,video/mp4"
-                          className="hidden"
-                          onChange={(e) => handleFileUpload(e, false)}
-                          disabled={uploading}
-                        />
+                        <input type="file" multiple accept="image/*,application/pdf,video/mp4" className="hidden" onChange={(e) => handleFileUpload(e, false)} disabled={uploading} />
                         <Upload className="mx-auto mb-2 h-8 w-8 text-muted-foreground" />
-                        <p className="text-sm font-medium">
-                          {uploading ? "Uploading..." : "Click to upload files"}
-                        </p>
-                        <p className="text-xs text-muted-foreground">
-                          Images, PDFs, or videos (max 10MB each)
-                        </p>
+                        <p className="text-sm font-medium">{uploading ? "Uploading..." : "Click to upload files"}</p>
+                        <p className="text-xs text-muted-foreground">Images, PDFs, or videos (max 10MB each)</p>
                       </label>
                     </div>
 
                     {uploadedFiles.length > 0 && (
                       <div className="space-y-2">
                         {uploadedFiles.map((file) => (
-                          <div
-                            key={file.path}
-                            className="flex items-center justify-between rounded-lg bg-muted p-3"
-                          >
+                          <div key={file.path} className="flex items-center justify-between rounded-lg bg-muted p-3">
                             <div className="flex items-center gap-3">
                               {file.type.startsWith("image/") ? (
                                 <ImageIcon className="h-5 w-5 text-muted-foreground" />
@@ -874,12 +970,7 @@ export default function Nominate() {
                               )}
                               <span className="text-sm font-medium">{file.name}</span>
                             </div>
-                            <Button
-                              type="button"
-                              variant="ghost"
-                              size="icon"
-                              onClick={() => removeFile(file)}
-                            >
+                            <Button type="button" variant="ghost" size="icon" onClick={() => removeFile(file)}>
                               <X className="h-4 w-4" />
                             </Button>
                           </div>
@@ -893,33 +984,22 @@ export default function Nominate() {
                     <h4 className="mb-3 font-semibold">Nomination Summary</h4>
                     <div className="space-y-2 text-sm">
                       <div className="flex justify-between items-start">
+                        <span className="text-muted-foreground">Tier:</span>
+                        <Badge variant="outline" style={{ borderColor: TIER_INFO[selectedTier].color, color: TIER_INFO[selectedTier].color }}>
+                          {TIER_INFO[selectedTier]?.shortName}
+                        </Badge>
+                      </div>
+                      <div className="flex justify-between items-start">
                         <span className="text-muted-foreground">Category:</span>
-                        <div className="text-right">
-                          <span className="font-medium">{selectedCategory?.name}</span>
-                          {scopeBadge && (
-                            <Badge 
-                              variant="outline" 
-                              className="ml-2 text-xs"
-                              style={{ borderColor: scopeBadge.color, color: scopeBadge.color }}
-                            >
-                              {scopeBadge.label}
-                            </Badge>
-                          )}
-                        </div>
+                        <span className="font-medium text-right">{selectedCategory?.name}</span>
                       </div>
                       <div className="flex justify-between">
                         <span className="text-muted-foreground">Subcategory:</span>
-                        <span className="font-medium">
-                          {dbSubcategories.find((s) => s.id === selectedSubcategoryId)?.name}
-                        </span>
+                        <span className="font-medium">{dbSubcategories.find((s) => s.id === selectedSubcategoryId)?.name}</span>
                       </div>
                       <div className="flex justify-between">
                         <span className="text-muted-foreground">Nominee:</span>
                         <span className="font-medium">{nomineeName}</span>
-                      </div>
-                      <div className="flex justify-between">
-                        <span className="text-muted-foreground">Eligible Tiers:</span>
-                        <span className="font-medium">{tierPath.map(t => TIER_INFO[t].shortName).join(" → ")}</span>
                       </div>
                       <div className="flex justify-between">
                         <span className="text-muted-foreground">Evidence Files:</span>
@@ -929,23 +1009,13 @@ export default function Nominate() {
                   </div>
 
                   <div className="flex justify-between items-center">
-                    <Button type="button" variant="outline" onClick={() => setStep(2)}>
-                      Back
-                    </Button>
+                    <Button type="button" variant="outline" onClick={() => setStep(2)}>Back</Button>
                     <div className="flex gap-2">
-                      <Button
-                        type="button"
-                        variant="ghost"
-                        onClick={handleSaveDraft}
-                      >
+                      <Button type="button" variant="ghost" onClick={handleSaveDraft}>
                         <Save className="mr-2 h-4 w-4" />
                         Save
                       </Button>
-                      <Button
-                        type="button"
-                        disabled={justification.length < 50}
-                        onClick={() => setShowConfirmDialog(true)}
-                      >
+                      <Button type="button" disabled={justification.length < 50} onClick={() => setShowConfirmDialog(true)}>
                         <Eye className="mr-2 h-4 w-4" />
                         Review & Submit
                       </Button>
@@ -971,44 +1041,29 @@ export default function Nominate() {
               
               <ScrollArea className="max-h-[60vh] pr-4">
                 <div className="space-y-6">
-                  {/* Category Info */}
                   <div className="space-y-2">
                     <h4 className="text-sm font-semibold text-muted-foreground uppercase tracking-wide">Category</h4>
                     <div className="rounded-lg border bg-muted/30 p-4 space-y-2">
                       <div className="flex items-center justify-between">
                         <span className="font-medium">{selectedCategory?.name}</span>
-                        {scopeBadge && (
-                          <Badge 
-                            variant="outline"
-                            style={{ borderColor: scopeBadge.color, color: scopeBadge.color }}
-                          >
-                            {scopeBadge.label}
-                          </Badge>
-                        )}
+                        <Badge variant="outline" style={{ borderColor: TIER_INFO[selectedTier].color, color: TIER_INFO[selectedTier].color }}>
+                          {TIER_INFO[selectedTier]?.shortName}
+                        </Badge>
                       </div>
                       <p className="text-sm text-muted-foreground">
                         {dbSubcategories.find(s => s.id === selectedSubcategoryId)?.name}
                       </p>
-                      <div className="flex items-center gap-2 text-xs">
-                        <span className="text-muted-foreground">Tier Path:</span>
-                        <span className="font-medium">{tierPath.map(t => TIER_INFO[t].shortName).join(" → ")}</span>
-                      </div>
                     </div>
                   </div>
 
                   <Separator />
 
-                  {/* Nominee Info */}
                   <div className="space-y-2">
                     <h4 className="text-sm font-semibold text-muted-foreground uppercase tracking-wide">Nominee</h4>
                     <div className="rounded-lg border bg-muted/30 p-4">
                       <div className="flex items-start gap-4">
                         {nomineePhoto ? (
-                          <img 
-                            src={nomineePhoto.url} 
-                            alt={nomineeName}
-                            className="h-16 w-16 rounded-full object-cover"
-                          />
+                          <img src={nomineePhoto.url} alt={nomineeName} className="h-16 w-16 rounded-full object-cover" />
                         ) : (
                           <div className="h-16 w-16 rounded-full bg-muted flex items-center justify-center">
                             <User className="h-8 w-8 text-muted-foreground" />
@@ -1016,9 +1071,7 @@ export default function Nominate() {
                         )}
                         <div className="flex-1 space-y-1">
                           <p className="font-semibold text-lg">{nomineeName}</p>
-                          {nomineeTitle && (
-                            <p className="text-sm text-muted-foreground">{nomineeTitle}</p>
-                          )}
+                          {nomineeTitle && <p className="text-sm text-muted-foreground">{nomineeTitle}</p>}
                           {nomineeOrganization && (
                             <p className="text-sm flex items-center gap-1">
                               <Building className="h-3 w-3" />
@@ -1028,16 +1081,13 @@ export default function Nominate() {
                         </div>
                       </div>
                       {nomineeBio && (
-                        <p className="mt-3 text-sm text-muted-foreground border-t pt-3">
-                          {nomineeBio}
-                        </p>
+                        <p className="mt-3 text-sm text-muted-foreground border-t pt-3">{nomineeBio}</p>
                       )}
                     </div>
                   </div>
 
                   <Separator />
 
-                  {/* Justification */}
                   <div className="space-y-2">
                     <h4 className="text-sm font-semibold text-muted-foreground uppercase tracking-wide">Justification</h4>
                     <div className="rounded-lg border bg-muted/30 p-4">
@@ -1045,7 +1095,6 @@ export default function Nominate() {
                     </div>
                   </div>
 
-                  {/* Evidence Files */}
                   {uploadedFiles.length > 0 && (
                     <>
                       <Separator />
@@ -1072,26 +1121,19 @@ export default function Nominate() {
               </ScrollArea>
 
               <DialogFooter className="gap-2 sm:gap-0">
-                <Button 
-                  variant="outline" 
-                  onClick={() => setShowConfirmDialog(false)}
-                  disabled={submitting}
-                >
-                  Go Back & Edit
+                <Button variant="outline" onClick={() => setShowConfirmDialog(false)} disabled={submitting}>
+                  Go Back
                 </Button>
-                <Button 
-                  onClick={async () => {
-                    await handleSubmit();
-                    // Dialog will close on successful navigation
-                  }}
-                  disabled={submitting}
-                >
+                <Button onClick={() => handleSubmit()} disabled={submitting} className="gap-2">
                   {submitting ? (
-                    "Submitting..."
+                    <>
+                      <span className="animate-spin">⏳</span>
+                      Submitting...
+                    </>
                   ) : (
                     <>
-                      <FileCheck className="mr-2 h-4 w-4" />
-                      Confirm & Submit
+                      <Award className="h-4 w-4" />
+                      Submit Nomination
                     </>
                   )}
                 </Button>
