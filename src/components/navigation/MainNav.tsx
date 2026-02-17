@@ -471,6 +471,7 @@ export function MainNav() {
             <div className="hidden sm:flex flex-col leading-tight">
               <span className="text-[8px] text-gold/70 font-medium tracking-[0.2em] uppercase">New Education Standard Awards</span>
               <span className="text-sm font-display font-bold text-gold tracking-wide">AFRICA</span>
+              <span className="text-[7px] text-white/50 font-medium tracking-wider italic">The African Academy Awards for Education</span>
             </div>
           </Link>
 

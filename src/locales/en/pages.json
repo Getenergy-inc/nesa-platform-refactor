@@ -296,6 +296,7 @@
     "trophyHero": {
       "headline": "Recognizing Excellence Across",
       "headlineAccent": "17 Award Categories",
+      "slogan": "The African Academy Awards for Education",
       "tagline": "Honoring Africa's Education Changemakers",
       "valueProposition": "A standards-led continental recognition platform celebrating and honoring changemakers driving \"Education for All\" in Africa, recognizing verified impact, and enabling structured public participation across the continent.",
       "nominateNow": "Nominate Now",
@@ -1085,7 +1086,7 @@
     "downloadStarting": "Your support helps rebuild schools across Africa. Download starting..."
   },
   "footer": {
-    "tagline": "Celebrating Africa's Education Champions since 2010",
+    "tagline": "The African Academy Awards for Education",
     "quickLinks": "Quick Links",
     "getInTouch": "Get in Touch",
     "scefFoundation": "SCEF Foundation",

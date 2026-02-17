@@ -107,7 +107,16 @@ export function TrophyHeroSection() {
             <motion.p
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.45 }}
+              transition={{ duration: 0.5, delay: 0.4 }}
+              className="text-white/60 text-xs sm:text-sm font-medium mb-2 tracking-widest uppercase italic"
+            >
+              {t("landing.trophyHero.slogan")}
+            </motion.p>
+
+            <motion.p
+              initial={{ opacity: 0, y: 15 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.5 }}
               className="text-gold/80 text-sm sm:text-base font-semibold mb-3 tracking-wide uppercase"
             >
               {t("landing.trophyHero.tagline")}
