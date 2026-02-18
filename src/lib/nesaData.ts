@@ -198,6 +198,8 @@ export function getImageType(name: string): NomineeImageType {
 export function normalizeYearReferences(text: string): string {
   if (!text) return text;
   return text
+    // Brand rebrand: 9mobile → T2 Mobile
+    .replace(/9mobile/gi, "T2 Mobile")
     // Convert 2024 to 2025 first
     .replace(/2024/g, "2025")
     // Replace ranges to correct format
