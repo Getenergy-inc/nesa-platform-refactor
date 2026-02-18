@@ -352,10 +352,10 @@ export const MAIN_NAV: NavItem[] = [
         external: true,
       },
       {
-        label: "Rebuild My School",
-        href: "/rebuild",
-        description: "Infrastructure development initiative",
-        external: true,
+        label: "Rebuild My School Africa (Legacy)",
+        href: "/eduaid-africa/rebuild-my-school",
+        description: "Post-award legacy project — nominate special needs schools",
+        icon: Building,
       },
       {
         label: "Contact Us",
@@ -430,7 +430,7 @@ export const FOOTER_NAV: NavSection[] = [
     items: [
       { label: "Donate", href: "/donate" },
       { label: "EduAid-Africa", href: "/eduaid" },
-      { label: "Rebuild My School", href: "/rebuild" },
+      { label: "Rebuild My School Africa", href: "/eduaid-africa/rebuild-my-school" },
       { label: "Contact", href: "/contact" },
     ],
   },

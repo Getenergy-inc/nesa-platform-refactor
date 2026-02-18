@@ -85,6 +85,8 @@ import Gala from "./pages/media/Gala";
 import Donate from "./pages/Donate";
 import EduAid from "./pages/EduAid";
 import Rebuild from "./pages/Rebuild";
+import RebuildHubPage from "./pages/eduaid/RebuildHubPage";
+import RebuildRegionalPortal from "./pages/eduaid/RebuildRegionalPortal";
 import Judges from "./pages/Judges";
 import Install from "./pages/Install";
 
@@ -308,6 +310,8 @@ const App = () => (
                 <Route path="/donate" element={<WithLayout><Donate /></WithLayout>} />
                 <Route path="/eduaid" element={<WithLayout><EduAid /></WithLayout>} />
                 <Route path="/rebuild" element={<WithLayout><Rebuild /></WithLayout>} />
+                <Route path="/eduaid-africa/rebuild-my-school" element={<WithLayout><RebuildHubPage /></WithLayout>} />
+                <Route path="/eduaid-africa/rebuild-my-school/:regionSlug" element={<WithLayout><RebuildRegionalPortal /></WithLayout>} />
                 <Route path="/judges" element={<WithLayout><Judges /></WithLayout>} />
                 <Route path="/install" element={<Install />} />
                 
