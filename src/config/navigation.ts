@@ -137,6 +137,13 @@ export const MAIN_NAV: NavItem[] = [
         icon: Award,
       },
       {
+        label: "Gold Special Recognition",
+        href: "/awards/gold-special-recognition",
+        description: "Cultural impact — Sports, Music & Social Media",
+        icon: Medal,
+        badge: "2025",
+      },
+      {
         label: "Blue Garnet Award",
         href: "/awards/blue-garnet",
         description: "Highest honour — 60% Jury / 40% Public",
