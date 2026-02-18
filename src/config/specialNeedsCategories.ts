@@ -1,11 +1,12 @@
 // Rebuild My School Africa — Special Needs Category System
-// 5 Tracks + 20 Subcategories (for nomination form)
+// 5 Intervention Tracks + 20 Subcategories (for nomination form, BOD review, voting, intervention, impact reporting)
 
 import {
-  Ear, Eye, Accessibility, Brain, Sparkles,
-  School, Baby, Landmark, Hammer, BookOpen,
-  HandHeart, Star, Globe, Users, Building2, Laptop,
-  GraduationCap, Heart, Shield, type LucideIcon,
+  Brain, Sparkles, Baby, BookOpen,
+  Ear, Eye, MessageSquare, Volume2,
+  Accessibility, Heart, Shield, Stethoscope,
+  GraduationCap, School, Users, Star,
+  Hammer, Laptop, Palette, type LucideIcon,
 } from "lucide-react";
 
 export interface SpecialNeedsSubcategory {
@@ -20,68 +21,74 @@ export interface SpecialNeedsTrack {
   name: string;
   description: string;
   icon: LucideIcon;
+  interventionExamples: string[];
   subcategories: SpecialNeedsSubcategory[];
 }
 
 export const SPECIAL_NEEDS_TRACKS: SpecialNeedsTrack[] = [
   {
-    id: "sensory-disabilities",
-    name: "Sensory Disabilities",
-    description: "Schools serving students with hearing, visual, or dual-sensory impairments",
-    icon: Eye,
-    subcategories: [
-      { id: "deaf", name: "Schools for the Deaf", description: "Sign language instruction, hearing aid support, speech therapy", icon: Ear },
-      { id: "blind", name: "Schools for the Blind & Visually Impaired", description: "Braille curriculum, mobility training, assistive technology", icon: Eye },
-      { id: "deafblind", name: "Schools for Deafblind Students", description: "Specialized tactile communication and support services", icon: HandHeart },
-      { id: "low-vision", name: "Low Vision Resource Centres", description: "Optical aids, magnification tools, and adaptive learning", icon: BookOpen },
-    ],
-  },
-  {
-    id: "physical-motor",
-    name: "Physical & Motor Disabilities",
-    description: "Schools with accessible infrastructure for physical mobility challenges",
-    icon: Accessibility,
-    subcategories: [
-      { id: "physical", name: "Schools for Physical Disabilities", description: "Wheelchair-accessible facilities, physiotherapy rooms, adapted sports", icon: Accessibility },
-      { id: "cerebral-palsy", name: "Cerebral Palsy Centres", description: "Occupational therapy, adaptive seating, and communication aids", icon: Heart },
-      { id: "orthopaedic", name: "Orthopaedic & Mobility Schools", description: "Prosthetic support, mobility training, and rehabilitation", icon: Shield },
-      { id: "vocational-physical", name: "Vocational Training (Physical)", description: "Trade skills adapted for learners with physical challenges", icon: Hammer },
-    ],
-  },
-  {
-    id: "intellectual-developmental",
-    name: "Intellectual & Developmental",
-    description: "Schools supporting learners with cognitive and developmental differences",
+    id: "neurodevelopment-cognitive",
+    name: "Neurodevelopment & Cognitive Support",
+    description: "For schools serving learners with cognitive or developmental conditions",
     icon: Brain,
+    interventionExamples: ["Sensory rooms", "Therapy centers", "Behavioral intervention labs"],
     subcategories: [
-      { id: "intellectual", name: "Schools for Intellectual Disabilities", description: "Life skills training, sensory rooms, individualized education programs", icon: Brain },
-      { id: "autism", name: "Schools for Autism Spectrum", description: "Structured environments, sensory-friendly spaces, ABA therapy support", icon: Sparkles },
-      { id: "down-syndrome", name: "Down Syndrome Learning Centres", description: "Early intervention, speech therapy, and inclusive classrooms", icon: Baby },
-      { id: "early-intervention", name: "Early Intervention Centres", description: "Pre-school support for children with developmental delays (0–6 years)", icon: Baby },
+      { id: "autism-spectrum", name: "Autism Spectrum Support Schools", description: "Structured environments, sensory-friendly spaces, ABA therapy support", icon: Sparkles },
+      { id: "intellectual-disability", name: "Intellectual Disability Education Schools", description: "Life skills training, individualized education programs, sensory rooms", icon: Brain },
+      { id: "down-syndrome", name: "Down Syndrome Support Schools", description: "Early intervention, speech therapy, inclusive classrooms", icon: Baby },
+      { id: "adhd-behavioral", name: "ADHD & Behavioral Development Schools", description: "Behavioral intervention, focus training, structured learning environments", icon: Star },
+      { id: "neurodevelopmental-therapy", name: "Neurodevelopmental Therapy-Based Schools", description: "Comprehensive therapy integration, multi-disciplinary support", icon: BookOpen },
     ],
   },
   {
-    id: "community-inclusive",
-    name: "Community & Inclusive Models",
-    description: "Community-driven and grassroots special needs education initiatives",
-    icon: Users,
+    id: "sensory-communication",
+    name: "Sensory & Communication Support",
+    description: "For schools focused on sensory impairments",
+    icon: Ear,
+    interventionExamples: ["Braille labs", "Sign language training rooms", "Communication devices", "Audio enhancement systems"],
     subcategories: [
-      { id: "inclusive-mainstream", name: "Inclusive / Mainstream Schools", description: "Regular schools with integrated special education units and support staff", icon: School },
-      { id: "cbr", name: "Community-Based Rehabilitation (CBR)", description: "Grassroots disability support and home-based learning programs", icon: HandHeart },
-      { id: "faith-based", name: "Faith-Based Special Needs Schools", description: "Church/mosque-run schools offering care and education", icon: Star },
-      { id: "ngo-run", name: "NGO-Run Learning Centres", description: "Non-profit operated programs for underserved disabled children", icon: Globe },
+      { id: "hearing-impairment", name: "Hearing Impairment Schools", description: "Hearing aid support, auditory training, assistive listening devices", icon: Volume2 },
+      { id: "deaf-education", name: "Deaf Education Schools", description: "Sign language instruction, speech therapy, deaf culture programs", icon: Ear },
+      { id: "visual-impairment", name: "Visual Impairment / Blind Schools", description: "Braille curriculum, mobility training, assistive technology", icon: Eye },
+      { id: "speech-language", name: "Speech & Language Disorder Schools", description: "Speech therapy, augmentative communication, language development", icon: MessageSquare },
     ],
   },
   {
-    id: "alternative-access",
-    name: "Alternative & Access Models",
-    description: "Non-traditional delivery models reaching underserved communities",
-    icon: Laptop,
+    id: "physical-mobility",
+    name: "Physical & Mobility Support",
+    description: "For schools serving learners with physical disabilities",
+    icon: Accessibility,
+    interventionExamples: ["Accessible ramps", "Mobility equipment", "Therapy units", "Medical learning integration"],
     subcategories: [
-      { id: "mobile-outreach", name: "Mobile & Outreach Schools", description: "Traveling teachers reaching remote/nomadic communities", icon: Building2 },
-      { id: "digital-elearning", name: "Digital & E-Learning Programmes", description: "Online/radio-based learning for disabled students in inaccessible areas", icon: Laptop },
-      { id: "government-special", name: "Government Special Education Schools", description: "State-funded institutions for various disabilities", icon: Landmark },
-      { id: "resource-centres", name: "Resource Centres for Special Needs", description: "Assessment, referral, and material support hubs", icon: GraduationCap },
+      { id: "cerebral-palsy", name: "Cerebral Palsy Support Schools", description: "Occupational therapy, adaptive seating, communication aids", icon: Heart },
+      { id: "mobility-physical", name: "Mobility & Physical Disability Schools", description: "Wheelchair-accessible facilities, physiotherapy, adapted sports", icon: Accessibility },
+      { id: "severe-multiple", name: "Severe & Multiple Disabilities Schools", description: "Multi-disciplinary care, specialized nursing, holistic support", icon: Shield },
+      { id: "medical-integrated", name: "Medical-Integrated Special Needs Schools", description: "On-site medical support, health monitoring, therapeutic learning", icon: Stethoscope },
+    ],
+  },
+  {
+    id: "learning-differences-inclusive",
+    name: "Learning Differences & Inclusive Education",
+    description: "For inclusive education models and learning disorders",
+    icon: GraduationCap,
+    interventionExamples: ["Assistive technology labs", "Teacher training", "Specialized learning materials", "Inclusive classroom upgrades"],
+    subcategories: [
+      { id: "dyslexia-learning", name: "Dyslexia & Learning Difference Schools", description: "Specialized reading programs, multisensory instruction, adaptive tools", icon: BookOpen },
+      { id: "inclusive-mainstream", name: "Inclusive Mainstream Schools with Special Needs Units", description: "Integrated special education units, resource rooms, support staff", icon: School },
+      { id: "early-intervention", name: "Early Intervention Centers (0–5 Years)", description: "Pre-school developmental support, family guidance, screening programs", icon: Baby },
+      { id: "twice-exceptional", name: "Twice Exceptional (Gifted + Special Needs) Schools", description: "Dual-track programming for gifted learners with disabilities", icon: Users },
+    ],
+  },
+  {
+    id: "life-skills-vocational",
+    name: "Life Skills & Vocational Empowerment",
+    description: "For long-term independence training",
+    icon: Hammer,
+    interventionExamples: ["Skills labs", "Technology training", "Art & therapy spaces", "Entrepreneurship workshops"],
+    subcategories: [
+      { id: "vocational-special", name: "Vocational Special Needs Schools", description: "Trade skills, employment preparation, workplace readiness", icon: Hammer },
+      { id: "assistive-technology", name: "Assistive Technology Education Schools", description: "Digital literacy, assistive devices training, tech-based learning", icon: Laptop },
+      { id: "therapeutic-arts", name: "Therapeutic Arts-Based Special Education Centers", description: "Art therapy, music therapy, creative expression programs", icon: Palette },
     ],
   },
 ];
