@@ -148,8 +148,11 @@ export default function RebuildHubPage() {
             <h2 className="font-display text-2xl md:text-3xl font-bold text-white mb-2 text-center">
               Special Needs <span className="text-primary">Categories</span>
             </h2>
-            <p className="text-white/50 text-sm text-center mb-10">
-              5 Tracks · 20 Subcategories — select during nomination
+            <p className="text-white/50 text-sm text-center mb-4">
+              5 Intervention Tracks · 20 Subcategories — select during nomination
+            </p>
+            <p className="text-primary/80 text-xs text-center mb-10 max-w-2xl mx-auto italic">
+              "We prioritize inclusive education interventions across five structured impact tracks to ensure equitable regional development."
             </p>
 
             <div className="space-y-3">
@@ -172,16 +175,24 @@ export default function RebuildHubPage() {
                   </button>
 
                   <div className={cn("overflow-hidden transition-all duration-200", expandedTrack === track.id ? "max-h-[600px]" : "max-h-0")}>
-                    <div className="px-4 pb-4 grid sm:grid-cols-2 gap-2">
-                      {track.subcategories.map((sub) => (
-                        <div key={sub.id} className="flex items-start gap-2.5 p-2.5 rounded-lg bg-white/5 border border-white/5">
-                          <sub.icon className="h-4 w-4 text-primary/70 flex-shrink-0 mt-0.5" />
-                          <div>
-                            <p className="text-white text-[11px] font-medium">{sub.name}</p>
-                            <p className="text-white/40 text-[10px] leading-snug">{sub.description}</p>
+                    <div className="px-4 pb-4 space-y-3">
+                      <div className="grid sm:grid-cols-2 gap-2">
+                        {track.subcategories.map((sub) => (
+                          <div key={sub.id} className="flex items-start gap-2.5 p-2.5 rounded-lg bg-white/5 border border-white/5">
+                            <sub.icon className="h-4 w-4 text-primary/70 flex-shrink-0 mt-0.5" />
+                            <div>
+                              <p className="text-white text-[11px] font-medium">{sub.name}</p>
+                              <p className="text-white/40 text-[10px] leading-snug">{sub.description}</p>
+                            </div>
                           </div>
+                        ))}
+                      </div>
+                      {track.interventionExamples.length > 0 && (
+                        <div className="px-2">
+                          <p className="text-white/50 text-[10px] font-semibold uppercase tracking-wider mb-1">Intervention Examples</p>
+                          <p className="text-white/40 text-[10px]">{track.interventionExamples.join(" · ")}</p>
                         </div>
-                      ))}
+                      )}
                     </div>
                   </div>
                 </div>
