@@ -113,6 +113,7 @@ import Wallet from "./pages/Wallet";
 import EndorseNESA from "./pages/EndorseNESA";
 import RegionDashboard from "./pages/region/RegionDashboard";
 import NigeriaChapterTrack from "./pages/region/NigeriaChapterTrack";
+import RegionHubPage from "./pages/region/RegionHubPage";
 
 // OLC Pages
 import { OLCDashboard, OLCMembers, OLCSettlements, OLCWallet } from "./pages/olc";
@@ -278,6 +279,7 @@ const App = () => (
                 
                 {/* Region Routes */}
                 <Route path="/region/nigeria" element={<WithLayout><NigeriaChapterTrack /></WithLayout>} />
+                <Route path="/region/:slug" element={<RegionHubPage />} />
                 
                 {/* NRC Portal Routes */}
                 <Route path="/nrc" element={<NRCPortal />} />

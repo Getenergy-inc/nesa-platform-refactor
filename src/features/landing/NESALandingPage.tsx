@@ -25,6 +25,7 @@ import { useSeason } from "@/contexts/SeasonContext";
 const HowItWorksVisual = lazy(() => import("@/components/nesa/HowItWorksVisual").then(m => ({ default: m.HowItWorksVisual })));
 const CategoriesSection = lazy(() => import("@/components/nesa/CategoriesSection").then(m => ({ default: m.CategoriesSection })));
 const VoteWithAGCSection = lazy(() => import("@/components/nesa/VoteWithAGCSection").then(m => ({ default: m.VoteWithAGCSection })));
+const InteractiveAfricaMap = lazy(() => import("@/components/nesa/InteractiveAfricaMap").then(m => ({ default: m.InteractiveAfricaMap })));
 const LegacyImpactSection = lazy(() => import("@/components/nesa/LegacyImpactSection").then(m => ({ default: m.LegacyImpactSection })));
 const IntegritySection = lazy(() => import("@/components/nesa/IntegritySection").then(m => ({ default: m.IntegritySection })));
 const EDIIntegrityJourney = lazy(() => import("@/components/nesa/EDIIntegrityJourney").then(m => ({ default: m.EDIIntegrityJourney })));
@@ -76,6 +77,12 @@ export function NESALandingPage() {
         {/* ═══ 5. Nomination Paths ═══ */}
         <NominationPathsCards />
         
+        {/* ═══ 6. Interactive Africa Map — Edu-Tourism ═══ */}
+        <div id="explore-regions">
+          <LazySection>
+            <InteractiveAfricaMap />
+          </LazySection>
+        </div>
         {/* ═══ 7. How It Works ═══ */}
         <LazySection>
           <HowItWorksVisual />
