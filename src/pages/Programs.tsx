@@ -1,10 +1,11 @@
 import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
 import { useSeason } from "@/contexts/SeasonContext";
-import { ArrowRight, Award, GraduationCap, Users, Globe, Calendar, Sparkles } from "lucide-react";
+import { ArrowRight, Award, GraduationCap, Users, Globe, Calendar, Sparkles, Heart, MapPin } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { REBUILD_MILESTONES } from "@/config/rebuildConfig";
+import { motion } from "framer-motion";
 
 interface Program {
   id: string;
@@ -28,7 +29,7 @@ const programs: Program[] = [
     tagline: "Honoring Africa's Changemakers",
     description:
       "A pan-African celebration of educational transformation, social impact, and legacy. We celebrate the real changemakers shaping the future of education across Africa.",
-    href: "/programs/nesa-africa",
+    href: "/",
     icon: <Award className="h-8 w-8" />,
     status: "active",
     featured: true,
@@ -46,14 +47,37 @@ const programs: Program[] = [
   },
   {
     id: "eduaid",
-    name: "EduAid Initiative",
-    shortName: "EduAid",
+    name: "EduAid Africa",
+    shortName: "EduAid Africa",
     tagline: "Supporting Educational Access",
     description:
       "Providing scholarships, educational resources, and support to underprivileged students across Africa.",
-    href: "/programs/eduaid",
+    href: "/eduaid-africa",
     icon: <GraduationCap className="h-8 w-8" />,
-    status: "coming-soon",
+    status: "active",
+    highlights: [
+      "Scholarship Fund",
+      "Learning Materials",
+      "Digital Education",
+      "Teacher Training",
+    ],
+  },
+  {
+    id: "rebuild",
+    name: "Rebuild My School Africa",
+    shortName: "Rebuild My School",
+    tagline: "Post-Award Legacy Project",
+    description:
+      "The official post-award legacy project of NESA-Africa. Nominate special needs schools for EduAid-Africa intervention — governed by SCEF Regional BOD.",
+    href: "/eduaid-africa/rebuild-my-school",
+    icon: <Heart className="h-8 w-8" />,
+    status: "active",
+    highlights: [
+      "5 Regional Portals",
+      "Special Needs Focus",
+      "SCEF Governed",
+      `Nominations ${REBUILD_MILESTONES[0].displayDate}`,
+    ],
   },
   {
     id: "teacher-exchange",
@@ -83,7 +107,6 @@ export default function Programs() {
   const { currentEdition } = useSeason();
   const featuredProgram = programs.find((p) => p.featured);
   const otherPrograms = programs.filter((p) => !p.featured);
-  const currentYear = new Date().getFullYear();
 
   return (
     <>
@@ -95,47 +118,24 @@ export default function Programs() {
         />
       </Helmet>
 
-      <div className="min-h-screen bg-background">
-        {/* Header */}
-        <header className="sticky top-0 z-50 border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-          <div className="container flex h-16 items-center justify-between">
-            <Link to="/" className="flex items-center gap-2">
-              <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary text-primary-foreground">
-                <Sparkles className="h-5 w-5" />
-              </div>
-              <span className="font-semibold text-lg">SCEF</span>
-            </Link>
-            <nav className="flex items-center gap-4">
-              <Link to="/categories">
-                <Button variant="ghost" size="sm">
-                  Categories
-                </Button>
-              </Link>
-              <Link to="/login">
-                <Button variant="outline" size="sm">
-                  Sign In
-                </Button>
-              </Link>
-            </nav>
-          </div>
-        </header>
+      <div className="min-h-screen bg-charcoal">
 
         {/* Hero Section */}
-        <section className="relative overflow-hidden border-b border-border/40 bg-gradient-to-b from-secondary/50 to-background py-20">
+        <section className="relative overflow-hidden border-b border-primary/10 pt-24 pb-16">
           <div className="pointer-events-none absolute inset-0">
-            <div className="absolute left-1/4 top-20 h-64 w-64 rounded-full bg-primary/10 blur-[100px]" />
-            <div className="absolute right-1/4 bottom-10 h-48 w-48 rounded-full bg-primary/10 blur-[80px]" />
+            <div className="absolute left-1/4 top-20 h-64 w-64 rounded-full bg-primary/5 blur-[100px]" />
+            <div className="absolute right-1/4 bottom-10 h-48 w-48 rounded-full bg-primary/5 blur-[80px]" />
           </div>
           <div className="container relative">
             <div className="mx-auto max-w-3xl text-center">
-              <Badge variant="outline" className="mb-4 border-primary/30 text-primary">
+              <Badge variant="outline" className="mb-4 border-primary/30 text-primary bg-primary/10">
                 <Calendar className="mr-1.5 h-3 w-3" />
                 {currentEdition.displayYear} Season Active
               </Badge>
-              <h1 className="mb-4 text-4xl font-bold tracking-tight sm:text-5xl">
+              <h1 className="mb-4 font-display text-4xl font-bold tracking-tight text-white sm:text-5xl">
                 Our <span className="text-primary">Programs</span>
               </h1>
-              <p className="text-lg text-muted-foreground">
+              <p className="text-lg text-white/60">
                 Transforming education across Africa through recognition, support, and innovation.
                 Explore our initiatives designed to celebrate excellence and drive lasting change.
               </p>
@@ -154,22 +154,22 @@ export default function Programs() {
                 </h2>
               </div>
 
-              <Card className="overflow-hidden border-primary/20 bg-gradient-to-br from-secondary/80 via-secondary/60 to-background shadow-xl">
+              <div className="overflow-hidden rounded-xl border border-primary/20 bg-charcoal-light/30 shadow-xl">
                 <div className="grid gap-8 lg:grid-cols-2">
-                  <CardHeader className="flex flex-col justify-center p-8 lg:p-12">
+                  <div className="flex flex-col justify-center p-8 lg:p-12">
                     <div className="mb-4 flex h-16 w-16 items-center justify-center rounded-2xl bg-primary/10 text-primary">
                       {featuredProgram.icon}
                     </div>
-                    <Badge className="mb-2 w-fit bg-primary/20 text-primary hover:bg-primary/30">
+                    <Badge className="mb-2 w-fit bg-primary/20 text-primary hover:bg-primary/30 border-0">
                       Now Open
                     </Badge>
-                    <CardTitle className="mb-2 text-3xl font-bold lg:text-4xl">
+                    <h3 className="mb-2 font-display text-3xl font-bold text-white lg:text-4xl">
                       {featuredProgram.shortName}
-                    </CardTitle>
+                    </h3>
                     <p className="mb-2 text-xl text-primary">{featuredProgram.tagline}</p>
-                    <CardDescription className="text-base text-muted-foreground">
+                    <p className="text-base text-white/60">
                       {featuredProgram.description}
-                    </CardDescription>
+                    </p>
 
                     {featuredProgram.highlights && (
                       <div className="mt-6 flex flex-wrap gap-2">
@@ -177,7 +177,7 @@ export default function Programs() {
                           <Badge
                             key={highlight}
                             variant="outline"
-                            className="border-border/60 bg-background/50"
+                            className="border-white/10 bg-white/5 text-white/70"
                           >
                             {highlight}
                           </Badge>
@@ -187,128 +187,136 @@ export default function Programs() {
 
                     <div className="mt-8 flex flex-wrap gap-4">
                       <Link to={featuredProgram.href}>
-                        <Button size="lg" className="gap-2">
+                        <Button size="lg" className="gap-2 bg-primary hover:bg-primary/90 text-secondary">
                           Explore Program
                           <ArrowRight className="h-4 w-4" />
                         </Button>
                       </Link>
                       <Link to="/nominate">
-                        <Button size="lg" variant="outline" className="gap-2">
+                        <Button size="lg" variant="outline" className="gap-2 border-primary/30 text-primary hover:bg-primary/10">
                           <Award className="h-4 w-4" />
                           Nominate Now
                         </Button>
                       </Link>
                     </div>
-                  </CardHeader>
+                  </div>
 
-                  <CardContent className="flex items-center justify-center bg-gradient-to-br from-primary/5 to-primary/10 p-8 lg:p-12">
+                  <div className="flex items-center justify-center bg-primary/5 p-8 lg:p-12">
                     {featuredProgram.stats && (
                       <div className="grid w-full grid-cols-3 gap-4">
                         {featuredProgram.stats.map((stat) => (
                           <div
                             key={stat.label}
-                            className="flex flex-col items-center justify-center rounded-xl bg-background/80 p-6 text-center shadow-sm"
+                            className="flex flex-col items-center justify-center rounded-xl bg-charcoal/80 border border-primary/10 p-6 text-center"
                           >
                             <span className="text-3xl font-bold text-primary lg:text-4xl">
                               {stat.value}
                             </span>
-                            <span className="mt-1 text-sm text-muted-foreground">{stat.label}</span>
+                            <span className="mt-1 text-sm text-white/50">{stat.label}</span>
                           </div>
                         ))}
                       </div>
                     )}
-                  </CardContent>
+                  </div>
                 </div>
-              </Card>
+              </div>
             </div>
           </section>
         )}
 
         {/* Other Programs */}
-        <section className="border-t border-border/40 bg-muted/30 py-16">
+        <section className="border-t border-primary/10 py-16">
           <div className="container">
             <div className="mb-8">
-              <h2 className="text-2xl font-bold">More Programs</h2>
-              <p className="text-muted-foreground">
-                Discover our upcoming initiatives and expanding impact.
+              <h2 className="text-2xl font-display font-bold text-white">More Programs</h2>
+              <p className="text-white/50">
+                Discover our initiatives and expanding impact.
               </p>
             </div>
 
             <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-              {otherPrograms.map((program) => (
-                <Card
+              {otherPrograms.map((program, i) => (
+                <motion.div
                   key={program.id}
-                  className={`group relative overflow-hidden transition-all hover:shadow-lg ${
-                    program.status === "coming-soon" ? "opacity-80" : ""
+                  initial={{ opacity: 0, y: 16 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: i * 0.08 }}
+                  className={`group relative overflow-hidden rounded-xl border border-primary/15 bg-charcoal-light/30 hover:border-primary/30 transition-all ${
+                    program.status === "coming-soon" ? "opacity-70" : ""
                   }`}
                 >
-                  <CardHeader>
+                  <div className="p-6">
                     <div className="mb-3 flex h-12 w-12 items-center justify-center rounded-xl bg-primary/10 text-primary transition-colors group-hover:bg-primary/20">
                       {program.icon}
                     </div>
-                    <div className="flex items-start justify-between gap-2">
-                      <CardTitle className="text-xl">{program.shortName}</CardTitle>
+                    <div className="flex items-start justify-between gap-2 mb-1">
+                      <h3 className="text-xl font-display font-bold text-white">{program.shortName}</h3>
                       {program.status === "coming-soon" && (
-                        <Badge variant="secondary" className="shrink-0 text-xs">
+                        <Badge className="shrink-0 text-[10px] bg-white/10 text-white/50 border-0">
                           Coming Soon
                         </Badge>
                       )}
                     </div>
-                    <p className="text-sm text-primary">{program.tagline}</p>
-                  </CardHeader>
-                  <CardContent>
-                    <CardDescription className="mb-4">{program.description}</CardDescription>
+                    <p className="text-sm text-primary mb-3">{program.tagline}</p>
+                    <p className="text-white/50 text-sm mb-4">{program.description}</p>
+
+                    {program.highlights && (
+                      <div className="flex flex-wrap gap-1.5 mb-4">
+                        {program.highlights.map((h) => (
+                          <span key={h} className="text-[10px] px-2 py-0.5 rounded-full bg-primary/10 border border-primary/20 text-primary">
+                            {h}
+                          </span>
+                        ))}
+                      </div>
+                    )}
+
                     {program.status === "active" ? (
                       <Link to={program.href}>
-                        <Button variant="outline" size="sm" className="gap-2">
+                        <Button variant="outline" size="sm" className="gap-2 border-primary/30 text-primary hover:bg-primary/10">
                           Learn More
                           <ArrowRight className="h-3 w-3" />
                         </Button>
                       </Link>
                     ) : (
-                      <Button variant="outline" size="sm" disabled>
+                      <Button variant="outline" size="sm" disabled className="border-white/10 text-white/30">
                         Notify Me
                       </Button>
                     )}
-                  </CardContent>
-                </Card>
+                  </div>
+                </motion.div>
               ))}
             </div>
           </div>
         </section>
 
         {/* CTA Section */}
-        <section className="py-16">
+        <section className="py-16 border-t border-primary/10">
           <div className="container">
-            <Card className="border-primary/20 bg-gradient-to-r from-secondary to-secondary/80 p-8 text-center lg:p-12">
-              <h2 className="mb-2 text-2xl font-bold lg:text-3xl">
+            <div className="rounded-xl border border-primary/15 bg-primary/5 p-8 text-center lg:p-12">
+              <h2 className="mb-2 font-display text-2xl font-bold text-white lg:text-3xl">
                 Want to Partner With Us?
               </h2>
-              <p className="mx-auto mb-6 max-w-2xl text-muted-foreground">
+              <p className="mx-auto mb-6 max-w-2xl text-white/50">
                 Join us in transforming education across Africa. Whether as a sponsor, partner, or
                 volunteer, your contribution makes a lasting impact.
               </p>
               <div className="flex flex-wrap justify-center gap-4">
-                <Button size="lg" className="gap-2">
+                <Button size="lg" className="gap-2 bg-primary hover:bg-primary/90 text-secondary">
                   Become a Partner
                   <ArrowRight className="h-4 w-4" />
                 </Button>
                 <Link to="/">
-                  <Button size="lg" variant="outline">
+                  <Button size="lg" variant="outline" className="border-primary/30 text-primary hover:bg-primary/10">
                     Back to Home
                   </Button>
                 </Link>
               </div>
-            </Card>
+            </div>
           </div>
         </section>
 
-        {/* Footer */}
-        <footer className="border-t border-border/40 bg-secondary/30 py-8">
-          <div className="container text-center text-sm text-muted-foreground">
-            <p>© {currentYear} Santos Creations Educational Foundation. All rights reserved.</p>
-          </div>
-        </footer>
+        
       </div>
     </>
   );
