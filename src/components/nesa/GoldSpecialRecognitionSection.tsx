@@ -2,9 +2,8 @@
  * Gold Special Recognition — 2025 Edition
  * Cultural Impact Recognition · 3 Categories
  * 
- * Master refactor: recognition pathway diagram, social CTA strip,
- * enhanced card layout with subcategories, live counters, share CTAs,
- * QR codes, EDI badges, and volunteer/partner engagement.
+ * Premium gallery with immersive category cards, large nominee showcases,
+ * animated pathway diagram, and institutional closing.
  */
 import { useState, useEffect, useCallback, useRef, TouchEvent } from "react";
 import { motion, AnimatePresence } from "framer-motion";
@@ -12,7 +11,7 @@ import {
   Trophy, Music, Smartphone, ChevronRight, ChevronLeft,
   QrCode, Share2, ExternalLink, ShieldCheck,
   Award, Sparkles, Globe, Upload, Users, Eye,
-  ArrowDown, CheckCircle2, Star, Megaphone, Heart
+  ArrowRight, CheckCircle2, Star, Megaphone, Heart, Play
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -54,7 +53,8 @@ interface CategoryCard {
   profiles: ProfileSlide[];
   ctaHeadline: string;
   ctaSubline: string;
-  accentGlow: string;
+  gradient: string;
+  iconBg: string;
 }
 
 // ─── Profile Data ────────────────────────────────────────────
@@ -86,7 +86,8 @@ const CATEGORIES: CategoryCard[] = [
     profiles: SPORTS_PROFILES,
     ctaHeadline: "Know a stronger sports education advocate?",
     ctaSubline: "Nominate today.",
-    accentGlow: "from-primary/20 to-primary/5",
+    gradient: "from-amber-900/30 via-charcoal to-charcoal",
+    iconBg: "from-amber-500/25 to-primary/15",
   },
   {
     id: "music",
@@ -95,9 +96,10 @@ const CATEGORIES: CategoryCard[] = [
     icon: Music,
     subcategories: ["Music Education Advocate (Artist / Producer / Cultural Ambassador)"],
     profiles: MUSIC_PROFILES,
-    ctaHeadline: "Influence + Education = Impact",
+    ctaHeadline: "Influence + Education = Impact.",
     ctaSubline: "Recognize artists making a difference.",
-    accentGlow: "from-primary/15 to-primary/5",
+    gradient: "from-purple-900/20 via-charcoal to-charcoal",
+    iconBg: "from-purple-400/25 to-primary/15",
   },
   {
     id: "social-media",
@@ -108,7 +110,8 @@ const CATEGORIES: CategoryCard[] = [
     profiles: SOCIAL_MEDIA_PROFILES,
     ctaHeadline: "Digital Influence Must Show Education Impact.",
     ctaSubline: "Nominate an influencer championing education.",
-    accentGlow: "from-primary/10 to-primary/5",
+    gradient: "from-sky-900/20 via-charcoal to-charcoal",
+    iconBg: "from-sky-400/25 to-primary/15",
   },
 ];
 
@@ -116,31 +119,41 @@ const CATEGORIES: CategoryCard[] = [
 const PATHWAY_STEPS = [
   { label: "Nomination", icon: Award, description: "Submit or re-nominate a cultural leader" },
   { label: "EDI Review", icon: ShieldCheck, description: "Education Development Index evaluation" },
-  { label: "Gold Special Recognition", icon: Star, description: "Gold Certificate of Recognition" },
-  { label: "Platinum Stage", icon: CheckCircle2, description: "Platinum verification pathway" },
-  { label: "Gold Public Voting", icon: Users, description: "Community-validated recognition" },
-  { label: "Blue Garnet Icon", icon: Globe, description: "Africa Education Icon — Lifetime" },
+  { label: "Gold Special", icon: Star, description: "Gold Certificate of Recognition" },
+  { label: "Platinum", icon: CheckCircle2, description: "Platinum verification pathway" },
+  { label: "Public Voting", icon: Users, description: "Community-validated recognition" },
+  { label: "Blue Garnet", icon: Globe, description: "Africa Education Icon — Lifetime" },
 ];
 
-// ─── Slide Progress Dots ─────────────────────────────────────
-function SlideDots({ current, total, onDotClick }: { current: number; total: number; onDotClick: (i: number) => void }) {
+// ─── Slide Progress Bar ─────────────────────────────────────
+function SlideProgressBar({ current, total, onDotClick, isPaused }: { current: number; total: number; onDotClick: (i: number) => void; isPaused: boolean }) {
   return (
-    <div className="flex gap-1.5 justify-center mt-3">
+    <div className="flex gap-1.5 w-full mt-4 px-1">
       {Array.from({ length: total }).map((_, i) => (
         <button
           key={i}
           onClick={() => onDotClick(i)}
-          className={`h-1.5 rounded-full transition-all duration-500 ${
-            i === current ? "w-6 bg-primary" : "w-1.5 bg-secondary-foreground/15 hover:bg-secondary-foreground/25"
-          }`}
+          className="relative h-1 flex-1 rounded-full bg-white/10 overflow-hidden"
           aria-label={`Go to slide ${i + 1}`}
-        />
+        >
+          {i === current ? (
+            <motion.div
+              className="absolute inset-y-0 left-0 bg-primary rounded-full"
+              initial={{ width: "0%" }}
+              animate={{ width: isPaused ? `${((Date.now() % 6000) / 6000) * 100}%` : "100%" }}
+              transition={{ duration: isPaused ? 0 : 6, ease: "linear" }}
+              key={`progress-${current}`}
+            />
+          ) : i < current ? (
+            <div className="absolute inset-0 bg-primary/50 rounded-full" />
+          ) : null}
+        </button>
       ))}
     </div>
   );
 }
 
-// ─── Profile Slide ───────────────────────────────────────────
+// ─── Profile Slide (Large Format) ────────────────────────────
 function ProfileSlideContent({
   profile,
   onProfileClick,
@@ -150,87 +163,63 @@ function ProfileSlideContent({
 }) {
   return (
     <motion.div
-      initial={{ opacity: 0, scale: 0.97 }}
-      animate={{ opacity: 1, scale: 1 }}
-      exit={{ opacity: 0, scale: 0.97 }}
-      transition={{ duration: 0.4, ease: "easeOut" }}
-      className="px-4 py-3"
+      initial={{ opacity: 0, x: 20 }}
+      animate={{ opacity: 1, x: 0 }}
+      exit={{ opacity: 0, x: -20 }}
+      transition={{ duration: 0.35, ease: "easeOut" }}
+      className="px-5 py-4"
     >
-      <div className="flex items-start gap-4 cursor-pointer group" onClick={onProfileClick}>
-        {/* Avatar */}
-         <div className="relative shrink-0">
-          <div className="w-16 h-16 rounded-full border-2 border-primary/30 overflow-hidden shadow-lg shadow-primary/10">
+      <div className="flex gap-5 cursor-pointer group" onClick={onProfileClick}>
+        {/* Large Avatar */}
+        <div className="relative shrink-0">
+          <div className="w-24 h-24 sm:w-28 sm:h-28 rounded-2xl border-2 border-primary/20 overflow-hidden shadow-xl shadow-black/30 group-hover:border-primary/40 transition-colors">
             {profile.imageUrl ? (
-              <img src={profile.imageUrl} alt={profile.name} className="w-full h-full object-cover" />
+              <img src={profile.imageUrl} alt={profile.name} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
             ) : (
               <div className="w-full h-full bg-gradient-to-br from-primary/40 to-primary/10 flex items-center justify-center">
-                <span className="text-2xl">{profile.region}</span>
+                <span className="text-4xl">{profile.region}</span>
               </div>
             )}
           </div>
           {profile.ediVerified && (
-            <div className="absolute -bottom-1 -right-1 w-5 h-5 bg-success rounded-full flex items-center justify-center border-2 border-secondary" title="EDI Verified">
-              <ShieldCheck className="w-3 h-3 text-success-foreground" />
+            <div className="absolute -bottom-1.5 -right-1.5 w-6 h-6 bg-emerald-500 rounded-full flex items-center justify-center border-2 border-charcoal shadow-lg" title="EDI Verified">
+              <ShieldCheck className="w-3.5 h-3.5 text-white" />
             </div>
           )}
         </div>
 
         {/* Info */}
-        <div className="flex-1 min-w-0">
-          <div className="flex items-center gap-2 mb-0.5 flex-wrap">
-            <span className="font-semibold text-secondary-foreground text-sm group-hover:text-primary transition-colors">{profile.name}</span>
-            <Badge variant="outline" className="text-[10px] border-primary/25 text-primary/80 px-1.5 py-0 h-4">
+        <div className="flex-1 min-w-0 py-1">
+          <div className="flex items-center gap-2 mb-1.5 flex-wrap">
+            <h4 className="font-bold text-white text-base group-hover:text-primary transition-colors">{profile.name}</h4>
+            <Badge variant="outline" className="text-[10px] border-primary/30 text-primary/90 px-2 py-0 h-[18px] font-medium">
               {profile.regionTag}
             </Badge>
           </div>
-          <p className="text-secondary-foreground/50 text-xs leading-relaxed mb-1.5">
+          <p className="text-white/50 text-sm leading-relaxed mb-3 line-clamp-2">
             {profile.impactSummary}
           </p>
           {profile.platformIcons && (
-            <div className="flex gap-1">
+            <div className="flex gap-1.5 mb-2">
               {profile.platformIcons.map((p) => (
-                <span key={p} className="text-[9px] text-primary/60 bg-primary/[0.08] rounded px-1.5 py-0.5 border border-primary/10">{p}</span>
+                <span key={p} className="text-[10px] text-primary/70 bg-primary/[0.08] rounded-md px-2 py-0.5 border border-primary/15 font-medium">{p}</span>
               ))}
             </div>
           )}
-          <div className="flex items-center gap-3 mt-1">
+          <div className="flex items-center gap-4">
             {profile.nominationCount && profile.nominationCount > 0 && (
-              <span className="text-[10px] text-secondary-foreground/30 inline-flex items-center gap-1">
-                <Heart className="w-2.5 h-2.5" /> {profile.nominationCount} nominations
+              <span className="text-xs text-white/30 inline-flex items-center gap-1">
+                <Heart className="w-3 h-3 text-primary/50" /> {profile.nominationCount} nominations
               </span>
             )}
             <Link
               to={profile.profileLink || "/nominees"}
-              className="text-[10px] text-primary/60 hover:text-primary transition-colors inline-flex items-center gap-0.5"
+              className="text-xs text-primary/60 hover:text-primary transition-colors inline-flex items-center gap-1 font-medium"
               onClick={(e) => e.stopPropagation()}
             >
-              <Eye className="w-2.5 h-2.5" /> View Profile
+              <Eye className="w-3 h-3" /> View Profile
             </Link>
           </div>
-        </div>
-
-        {/* Actions */}
-        <div className="flex flex-col items-end gap-1.5 shrink-0">
-          <Button
-            size="sm"
-            variant="outline"
-            className="text-[10px] border-primary/25 text-primary hover:bg-primary/10 hover:border-primary/40 h-6 px-2 rounded-md"
-            asChild
-          >
-            <Link to="/nominate?tier=gold-special">Re-Nominate</Link>
-          </Button>
-          <button
-            className="text-secondary-foreground/25 hover:text-primary transition-colors p-1"
-            aria-label="Share"
-            onClick={(e) => {
-              e.stopPropagation();
-              if (navigator.share) {
-                navigator.share({ title: `Nominate ${profile.name}`, url: window.location.href });
-              }
-            }}
-          >
-            <Share2 className="w-3 h-3" />
-          </button>
         </div>
       </div>
     </motion.div>
@@ -252,28 +241,34 @@ function ProfileModal({
   if (!profile) return null;
   return (
     <Dialog open={open} onOpenChange={onClose}>
-      <DialogContent className="bg-secondary border-primary/20 text-secondary-foreground max-w-md">
+      <DialogContent className="bg-charcoal border-primary/20 text-white max-w-md">
         <DialogHeader>
-          <DialogTitle className="text-primary font-serif text-lg">{profile.name}</DialogTitle>
+          <DialogTitle className="text-primary font-serif text-xl">{profile.name}</DialogTitle>
         </DialogHeader>
         <div className="space-y-4">
-          {/* Profile header */}
+          {/* Profile header with image */}
           <div className="flex items-center gap-4">
             <div className="relative">
-              <div className="w-20 h-20 rounded-full bg-gradient-to-br from-primary/40 to-primary/10 border-2 border-primary/30 flex items-center justify-center">
-                <span className="text-3xl">{profile.region}</span>
+              <div className="w-20 h-20 rounded-2xl overflow-hidden border-2 border-primary/30">
+                {profile.imageUrl ? (
+                  <img src={profile.imageUrl} alt={profile.name} className="w-full h-full object-cover" />
+                ) : (
+                  <div className="w-full h-full bg-gradient-to-br from-primary/40 to-primary/10 flex items-center justify-center">
+                    <span className="text-3xl">{profile.region}</span>
+                  </div>
+                )}
               </div>
               {profile.ediVerified && (
-                <div className="absolute -bottom-1 -right-1 w-6 h-6 bg-success rounded-full flex items-center justify-center border-2 border-secondary">
-                  <ShieldCheck className="w-3.5 h-3.5 text-success-foreground" />
+                <div className="absolute -bottom-1 -right-1 w-6 h-6 bg-emerald-500 rounded-full flex items-center justify-center border-2 border-charcoal">
+                  <ShieldCheck className="w-3.5 h-3.5 text-white" />
                 </div>
               )}
             </div>
             <div>
-              <p className="text-sm text-secondary-foreground/70">{profile.country} · {profile.regionTag}</p>
+              <p className="text-sm text-white/60">{profile.country} · {profile.regionTag}</p>
               <p className="text-xs text-primary/60 mt-1">{category}</p>
               {profile.ediVerified && (
-                <Badge className="mt-1.5 bg-success/15 text-success border-success/30 text-[10px]">
+                <Badge className="mt-1.5 bg-emerald-500/15 text-emerald-400 border-emerald-500/30 text-[10px]">
                   <ShieldCheck className="w-3 h-3 mr-1" /> EDI Verified
                 </Badge>
               )}
@@ -281,19 +276,18 @@ function ProfileModal({
           </div>
 
           {/* Full impact */}
-          <div className="bg-secondary-foreground/5 rounded-lg p-4 border border-secondary-foreground/5">
+          <div className="bg-white/5 rounded-xl p-4 border border-white/5">
             <h4 className="text-xs font-semibold text-primary/80 uppercase tracking-wider mb-2">Education Impact</h4>
-            <p className="text-sm text-secondary-foreground/70 leading-relaxed">{profile.fullImpact}</p>
+            <p className="text-sm text-white/60 leading-relaxed">{profile.fullImpact}</p>
           </div>
 
-          {/* EDI compliance notice */}
-          <div className="bg-primary/5 rounded-lg p-3 border border-primary/10">
-            <p className="text-[11px] text-secondary-foreground/50 leading-relaxed">
+          {/* EDI compliance */}
+          <div className="bg-primary/5 rounded-xl p-3 border border-primary/10">
+            <p className="text-[11px] text-white/40 leading-relaxed">
               <span className="text-primary font-medium">EDI Compliance:</span> All Gold Special Recognition nominees are evaluated against the Education Development Index (EDI) Matrix. Verified nominees have passed measurable impact assessment.
             </p>
           </div>
 
-          {/* Platform icons */}
           {profile.platformIcons && (
             <div className="flex gap-2">
               {profile.platformIcons.map((p) => (
@@ -304,17 +298,17 @@ function ProfileModal({
 
           {/* Actions */}
           <div className="flex gap-2 pt-2">
-            <Button className="flex-1 bg-primary hover:bg-primary/90 text-primary-foreground font-semibold text-xs h-9" asChild>
+            <Button className="flex-1 bg-primary hover:bg-primary/90 text-primary-foreground font-semibold text-xs h-10" asChild>
               <Link to="/nominate?tier=gold-special">Support Nomination</Link>
             </Button>
-            <Button variant="outline" className="flex-1 border-primary/25 text-primary hover:bg-primary/10 text-xs h-9" asChild>
+            <Button variant="outline" className="flex-1 border-primary/25 text-primary hover:bg-primary/10 text-xs h-10" asChild>
               <Link to="/nominate?tier=gold-special">
                 Submit Evidence <Upload className="w-3 h-3 ml-1" />
               </Link>
             </Button>
           </div>
 
-          <p className="text-[10px] text-secondary-foreground/25 text-center">
+          <p className="text-[10px] text-white/20 text-center">
             Platinum Clearance pathway available after Gold eligibility verification.
           </p>
         </div>
@@ -323,8 +317,8 @@ function ProfileModal({
   );
 }
 
-// ─── Gold Category Card ──────────────────────────────────────
-function GoldCategoryCard({ card }: { card: CategoryCard }) {
+// ─── Gold Category Card (Redesigned) ─────────────────────────
+function GoldCategoryCard({ card, index }: { card: CategoryCard; index: number }) {
   const [activeIndex, setActiveIndex] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
   const [modalProfile, setModalProfile] = useState<ProfileSlide | null>(null);
@@ -358,105 +352,115 @@ function GoldCategoryCard({ card }: { card: CategoryCard }) {
 
   return (
     <>
-      <div
-        className="relative rounded-2xl border border-primary/15 overflow-hidden group/card transition-all duration-300 hover:border-primary/30"
-        onMouseEnter={() => setIsPaused(true)}
-        onMouseLeave={() => setIsPaused(false)}
-        onTouchStart={handleTouchStart}
-        onTouchEnd={handleTouchEnd}
+      <motion.div
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: "-50px" }}
+        transition={{ duration: 0.5, delay: index * 0.15 }}
       >
-        {/* Card background */}
-        <div className="absolute inset-0 bg-gradient-to-b from-charcoal to-secondary" />
-        <div className={`absolute inset-0 bg-gradient-to-br ${card.accentGlow} pointer-events-none`} />
-        <div className="absolute inset-0 rounded-2xl opacity-0 group-hover/card:opacity-100 transition-opacity duration-500 pointer-events-none" style={{ boxShadow: 'inset 0 0 30px hsl(var(--primary) / 0.05)' }} />
+        <div
+          className="relative rounded-2xl border border-white/[0.08] overflow-hidden group/card transition-all duration-500 hover:border-primary/30 hover:shadow-2xl hover:shadow-primary/5 bg-charcoal"
+          onMouseEnter={() => setIsPaused(true)}
+          onMouseLeave={() => setIsPaused(false)}
+          onTouchStart={handleTouchStart}
+          onTouchEnd={handleTouchEnd}
+        >
+          {/* Top gradient accent */}
+          <div className={`absolute inset-x-0 top-0 h-32 bg-gradient-to-b ${card.gradient} pointer-events-none`} />
 
-        {/* Header */}
-        <div className="relative px-5 pt-5 pb-3 border-b border-secondary-foreground/5">
-          <div className="flex items-start gap-3 mb-3">
-            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-primary/20 to-primary/5 border border-primary/20 flex items-center justify-center shadow-md shadow-primary/5">
-              <Icon className="w-5 h-5 text-primary" />
+          {/* Header */}
+          <div className="relative px-5 pt-6 pb-4">
+            <div className="flex items-start gap-4 mb-4">
+              <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${card.iconBg} border border-primary/20 flex items-center justify-center shadow-lg shadow-primary/10 shrink-0`}>
+                <Icon className="w-6 h-6 text-primary" />
+              </div>
+              <div className="flex-1 min-w-0">
+                <h3 className="text-sm font-bold text-white leading-snug mb-1">{card.title}</h3>
+                <p className="text-[11px] text-white/35 leading-snug">{card.subtitle}</p>
+              </div>
             </div>
-            <div className="flex-1 min-w-0">
-              <h3 className="text-[13px] font-bold text-secondary-foreground leading-tight mb-1">{card.title}</h3>
-              <p className="text-[10px] text-secondary-foreground/40 leading-snug">{card.subtitle}</p>
+            {/* Subcategory tags */}
+            <div className="flex flex-wrap gap-1.5">
+              {card.subcategories.map((sub) => (
+                <span key={sub} className="text-[10px] text-primary/80 bg-primary/[0.08] rounded-lg px-2.5 py-1 border border-primary/15 font-medium">
+                  {sub}
+                </span>
+              ))}
             </div>
           </div>
-          {/* Subcategories */}
-          <div className="flex flex-wrap gap-1">
-            {card.subcategories.map((sub) => (
-              <span key={sub} className="text-[9px] text-primary/70 bg-primary/[0.08] rounded-full px-2 py-0.5 border border-primary/10">
-                {sub}
-              </span>
-            ))}
-          </div>
-        </div>
 
-        {/* Slider area */}
-        <div className="relative min-h-[140px]">
-          <AnimatePresence mode="wait">
-            <ProfileSlideContent
-              key={activeIndex}
-              profile={card.profiles[activeIndex]}
-              onProfileClick={() => setModalProfile(card.profiles[activeIndex])}
-            />
-          </AnimatePresence>
+          {/* Divider */}
+          <div className="mx-5 h-px bg-gradient-to-r from-transparent via-white/[0.06] to-transparent" />
 
-          {/* Nav arrows */}
-          <button
-            onClick={goBack}
-            className="absolute left-1 top-1/2 -translate-y-1/2 w-6 h-6 rounded-full bg-secondary-foreground/5 opacity-0 group-hover/card:opacity-100 transition-opacity flex items-center justify-center hover:bg-secondary-foreground/10"
-            aria-label="Previous"
-          >
-            <ChevronLeft className="w-3.5 h-3.5 text-secondary-foreground/50" />
-          </button>
-          <button
-            onClick={advance}
-            className="absolute right-1 top-1/2 -translate-y-1/2 w-6 h-6 rounded-full bg-secondary-foreground/5 opacity-0 group-hover/card:opacity-100 transition-opacity flex items-center justify-center hover:bg-secondary-foreground/10"
-            aria-label="Next"
-          >
-            <ChevronRight className="w-3.5 h-3.5 text-secondary-foreground/50" />
-          </button>
-        </div>
+          {/* Slider area */}
+          <div className="relative min-h-[160px]">
+            <AnimatePresence mode="wait">
+              <ProfileSlideContent
+                key={activeIndex}
+                profile={card.profiles[activeIndex]}
+                onProfileClick={() => setModalProfile(card.profiles[activeIndex])}
+              />
+            </AnimatePresence>
 
-        {/* Progress dots */}
-        <div className="px-5 pb-1">
-          <SlideDots current={activeIndex} total={card.profiles.length} onDotClick={setActiveIndex} />
-        </div>
-
-        {/* CTA footer */}
-        <div className="relative px-5 py-4 mt-1 border-t border-secondary-foreground/5">
-          <p className="text-[11px] text-secondary-foreground/50 mb-3 leading-relaxed">
-            <span className="text-primary font-medium">{card.ctaHeadline}</span>{" "}
-            {card.ctaSubline}
-          </p>
-          <div className="flex items-center gap-2">
-            <Button
-              size="sm"
-              className="bg-primary hover:bg-primary/90 text-primary-foreground font-semibold text-[11px] h-8 flex-1 shadow-md shadow-primary/10 hover:shadow-primary/20 transition-shadow"
-              asChild
-            >
-              <Link to="/nominate?tier=gold-special">
-                Nominate New Person <ChevronRight className="w-3.5 h-3.5 ml-0.5" />
-              </Link>
-            </Button>
+            {/* Nav arrows */}
             <button
-              className="w-8 h-8 rounded-lg border border-primary/15 flex items-center justify-center text-primary/40 hover:text-primary hover:border-primary/30 hover:bg-primary/5 transition-all"
-              aria-label="QR Code"
+              onClick={goBack}
+              className="absolute left-1.5 top-1/2 -translate-y-1/2 w-7 h-7 rounded-full bg-white/5 backdrop-blur-sm opacity-0 group-hover/card:opacity-100 transition-all flex items-center justify-center hover:bg-white/10 border border-white/5"
+              aria-label="Previous"
             >
-              <QrCode className="w-4 h-4" />
+              <ChevronLeft className="w-4 h-4 text-white/60" />
+            </button>
+            <button
+              onClick={advance}
+              className="absolute right-1.5 top-1/2 -translate-y-1/2 w-7 h-7 rounded-full bg-white/5 backdrop-blur-sm opacity-0 group-hover/card:opacity-100 transition-all flex items-center justify-center hover:bg-white/10 border border-white/5"
+              aria-label="Next"
+            >
+              <ChevronRight className="w-4 h-4 text-white/60" />
             </button>
           </div>
-          {/* Download & Eligibility links */}
-          <div className="flex items-center gap-3 mt-3">
-            <Link to="/guidelines/edi-matrix" className="text-[10px] text-primary/50 hover:text-primary transition-colors inline-flex items-center gap-1">
-              <ShieldCheck className="w-3 h-3" /> View Eligibility (EDI)
-            </Link>
-            <Link to="/nominees?tier=gold-special" className="text-[10px] text-secondary-foreground/30 hover:text-secondary-foreground/60 transition-colors inline-flex items-center gap-1">
-              <Users className="w-3 h-3" /> View All Profiles
-            </Link>
+
+          {/* Progress bar */}
+          <div className="px-5">
+            <SlideProgressBar current={activeIndex} total={card.profiles.length} onDotClick={setActiveIndex} isPaused={isPaused} />
+          </div>
+
+          {/* CTA footer */}
+          <div className="relative px-5 py-5 mt-2">
+            <p className="text-xs text-white/40 mb-3 leading-relaxed">
+              <span className="text-primary font-semibold">{card.ctaHeadline}</span>{" "}
+              {card.ctaSubline}
+            </p>
+            <div className="flex items-center gap-2">
+              <Button
+                size="sm"
+                className="bg-primary hover:bg-primary/90 text-primary-foreground font-bold text-xs h-9 flex-1 shadow-lg shadow-primary/15 hover:shadow-primary/25 transition-all"
+                asChild
+              >
+                <Link to="/nominate?tier=gold-special">
+                  Nominate <ChevronRight className="w-3.5 h-3.5 ml-0.5" />
+                </Link>
+              </Button>
+              <Button
+                size="sm"
+                variant="outline"
+                className="border-primary/20 text-primary hover:bg-primary/10 font-medium text-xs h-9"
+                asChild
+              >
+                <Link to="/nominate?tier=gold-special">Re-Nominate</Link>
+              </Button>
+            </div>
+            {/* Secondary links */}
+            <div className="flex items-center gap-4 mt-3">
+              <Link to="/guidelines/edi-matrix" className="text-[10px] text-primary/50 hover:text-primary transition-colors inline-flex items-center gap-1 font-medium">
+                <ShieldCheck className="w-3 h-3" /> EDI Eligibility
+              </Link>
+              <Link to="/nominees?tier=gold-special" className="text-[10px] text-white/25 hover:text-white/50 transition-colors inline-flex items-center gap-1">
+                <Users className="w-3 h-3" /> All Profiles
+              </Link>
+            </div>
           </div>
         </div>
-      </div>
+      </motion.div>
 
       <ProfileModal
         profile={modalProfile}
@@ -468,86 +472,142 @@ function GoldCategoryCard({ card }: { card: CategoryCard }) {
   );
 }
 
-// ─── Recognition Pathway Diagram ─────────────────────────────
+// ─── Recognition Pathway Diagram (Horizontal) ────────────────
 function RecognitionPathway() {
   return (
-    <div className="mt-16 md:mt-20">
-      <h3 className="text-center text-lg font-serif text-secondary-foreground mb-8">
-        Recognition Pathway
-      </h3>
-      <div className="max-w-3xl mx-auto">
-        <div className="flex flex-col md:flex-row items-center gap-0">
+    <motion.div
+      initial={{ opacity: 0, y: 30 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.6 }}
+      className="mt-20 md:mt-28"
+    >
+      <div className="text-center mb-10">
+        <Badge variant="outline" className="border-primary/20 text-primary/70 text-[10px] mb-3">
+          Recognition Journey
+        </Badge>
+        <h3 className="text-xl md:text-2xl font-serif text-white font-semibold">
+          From Nomination to <span className="text-primary">Icon</span>
+        </h3>
+      </div>
+
+      <div className="max-w-4xl mx-auto bg-white/[0.02] rounded-2xl border border-white/[0.06] p-6 md:p-8">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 md:gap-2">
           {PATHWAY_STEPS.map((step, i) => {
-            const Icon = step.icon;
+            const StepIcon = step.icon;
             return (
-              <div key={step.label} className="flex items-center">
-                <div className="flex flex-col items-center text-center w-28">
-                  <div className="w-10 h-10 rounded-full bg-gradient-to-br from-primary/20 to-primary/5 border border-primary/20 flex items-center justify-center mb-2">
-                    <Icon className="w-4 h-4 text-primary" />
-                  </div>
-                  <span className="text-[11px] font-semibold text-secondary-foreground leading-tight">{step.label}</span>
-                  <span className="text-[9px] text-secondary-foreground/40 mt-0.5 leading-tight">{step.description}</span>
+              <div key={step.label} className="relative flex flex-col items-center text-center group">
+                {/* Step number */}
+                <span className="text-[9px] text-primary/40 font-bold mb-2">{String(i + 1).padStart(2, '0')}</span>
+                {/* Icon circle */}
+                <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-primary/15 to-primary/5 border border-primary/20 flex items-center justify-center mb-3 group-hover:border-primary/40 group-hover:shadow-lg group-hover:shadow-primary/10 transition-all">
+                  <StepIcon className="w-5 h-5 text-primary" />
                 </div>
+                <span className="text-xs font-semibold text-white leading-tight mb-0.5">{step.label}</span>
+                <span className="text-[9px] text-white/30 leading-tight max-w-[120px]">{step.description}</span>
+                {/* Connector arrow (hidden on last) */}
                 {i < PATHWAY_STEPS.length - 1 && (
-                  <div className="hidden md:flex items-center text-primary/30 mx-1">
-                    <ArrowDown className="w-3.5 h-3.5 rotate-[-90deg]" />
-                  </div>
-                )}
-                {i < PATHWAY_STEPS.length - 1 && (
-                  <div className="md:hidden flex items-center text-primary/30 my-1">
-                    <ArrowDown className="w-3.5 h-3.5" />
-                  </div>
+                  <ArrowRight className="hidden lg:block absolute -right-3 top-10 w-3.5 h-3.5 text-primary/20" />
                 )}
               </div>
             );
           })}
         </div>
+
         {/* Pathway CTAs */}
-        <div className="flex items-center justify-center gap-3 mt-8 flex-wrap">
-          <Button size="sm" className="bg-primary hover:bg-primary/90 text-primary-foreground font-semibold text-xs" asChild>
-            <Link to="/nominate?tier=gold-special">Start Nomination</Link>
+        <div className="flex items-center justify-center gap-3 mt-8 pt-6 border-t border-white/[0.04]">
+          <Button size="sm" className="bg-primary hover:bg-primary/90 text-primary-foreground font-semibold text-xs h-9 shadow-md shadow-primary/10" asChild>
+            <Link to="/nominate?tier=gold-special">
+              <Award className="w-3.5 h-3.5 mr-1.5" /> Start Nomination
+            </Link>
           </Button>
-          <Button size="sm" variant="outline" className="border-primary/25 text-primary hover:bg-primary/10 text-xs" asChild>
+          <Button size="sm" variant="outline" className="border-primary/20 text-primary hover:bg-primary/10 text-xs h-9" asChild>
             <Link to="/nominees?tier=gold-special">Access Nominee Dashboard</Link>
           </Button>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 }
 
-// ─── Social CTA Footer Strip ─────────────────────────────────
-function SocialCTAStrip() {
+// ─── Closing Statement ───────────────────────────────────────
+function ClosingStatement() {
   return (
-    <div className="mt-16 border-t border-secondary-foreground/5 pt-10">
-      <div className="text-center mb-6">
-        <p className="text-secondary-foreground/50 text-sm mb-1">
-          Know a <span className="text-primary font-medium">Sports Hero</span>? A{" "}
-          <span className="text-primary font-medium">Music Leader</span>? A{" "}
-          <span className="text-primary font-medium">Digital Educator</span>?
+    <motion.div
+      initial={{ opacity: 0 }}
+      whileInView={{ opacity: 1 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.8 }}
+      className="mt-20 md:mt-28"
+    >
+      {/* Impact statement */}
+      <div className="text-center max-w-2xl mx-auto mb-12">
+        <p className="text-white/15 text-[10px] uppercase tracking-[0.25em] mb-8 font-medium">Recognition · Accountability · Impact</p>
+
+        <div className="space-y-1 mb-8">
+          <h3 className="text-2xl md:text-4xl font-serif text-white/90 leading-tight">
+            Influence is powerful.
+          </h3>
+          <h3 className="text-2xl md:text-4xl font-serif text-primary leading-tight">
+            Education impact is measurable.
+          </h3>
+          <h3 className="text-2xl md:text-4xl font-serif text-white/40 leading-tight">
+            Africa deserves both.
+          </h3>
+        </div>
+
+        <p className="text-primary/80 font-semibold text-sm tracking-wide mb-8">
+          Nominate. Validate. Elevate Education.
         </p>
-        <p className="text-lg font-serif text-secondary-foreground font-semibold">
-          Nominate Them Today.
-        </p>
+
+        <div className="flex items-center justify-center gap-3 flex-wrap">
+          <Button size="lg" className="bg-primary hover:bg-primary/90 text-primary-foreground font-bold shadow-xl shadow-primary/20 hover:shadow-primary/30 transition-all h-12 px-6" asChild>
+            <Link to="/nominate?tier=gold-special">
+              <Award className="w-4 h-4 mr-2" /> Nominate a Leader
+            </Link>
+          </Button>
+          <Button size="lg" variant="outline" className="border-primary/25 text-primary hover:bg-primary/10 h-12 px-6" asChild>
+            <Link to="/nominate?tier=gold-special">Re-Nominate</Link>
+          </Button>
+          <Button size="lg" variant="ghost" className="text-white/30 hover:text-white hover:bg-white/5 h-12 px-6" asChild>
+            <Link to="/guidelines/edi-matrix">
+              <Globe className="w-4 h-4 mr-2" /> Platinum Pathway
+            </Link>
+          </Button>
+        </div>
       </div>
-      <div className="flex items-center justify-center gap-3 flex-wrap">
-        <Button className="bg-primary hover:bg-primary/90 text-primary-foreground font-semibold shadow-md shadow-primary/10" asChild>
-          <Link to="/nominate?tier=gold-special">
-            <Award className="w-4 h-4 mr-1.5" /> Submit Nomination
-          </Link>
-        </Button>
-        <Button variant="outline" className="border-primary/25 text-primary hover:bg-primary/10" asChild>
-          <Link to="/nominate?tier=gold-special">
-            <Megaphone className="w-4 h-4 mr-1.5" /> Re-Activate Nominee
-          </Link>
-        </Button>
-        <Button variant="ghost" className="text-secondary-foreground/40 hover:text-secondary-foreground hover:bg-secondary-foreground/5" asChild>
-          <Link to="/guidelines/edi-matrix">
-            <Users className="w-4 h-4 mr-1.5" /> Volunteer as Reviewer
-          </Link>
-        </Button>
+
+      {/* Final CTA strip */}
+      <div className="border-t border-white/[0.04] pt-10">
+        <div className="text-center mb-6">
+          <p className="text-white/35 text-sm mb-1">
+            Know a <span className="text-primary font-medium">Sports Hero</span>? A{" "}
+            <span className="text-primary font-medium">Music Leader</span>? A{" "}
+            <span className="text-primary font-medium">Digital Educator</span>?
+          </p>
+          <p className="text-lg font-serif text-white font-semibold">
+            Nominate Them Today.
+          </p>
+        </div>
+        <div className="flex items-center justify-center gap-3 flex-wrap">
+          <Button className="bg-primary hover:bg-primary/90 text-primary-foreground font-semibold shadow-lg shadow-primary/10" asChild>
+            <Link to="/nominate?tier=gold-special">
+              <Award className="w-4 h-4 mr-1.5" /> Submit Nomination
+            </Link>
+          </Button>
+          <Button variant="outline" className="border-primary/20 text-primary hover:bg-primary/10" asChild>
+            <Link to="/nominate?tier=gold-special">
+              <Megaphone className="w-4 h-4 mr-1.5" /> Re-Activate Nominee
+            </Link>
+          </Button>
+          <Button variant="ghost" className="text-white/30 hover:text-white hover:bg-white/5" asChild>
+            <Link to="/guidelines/edi-matrix">
+              <Users className="w-4 h-4 mr-1.5" /> Volunteer as Reviewer
+            </Link>
+          </Button>
+        </div>
       </div>
-    </div>
+    </motion.div>
   );
 }
 
@@ -556,113 +616,91 @@ export function GoldSpecialRecognitionSection() {
   return (
     <section className="relative overflow-hidden" id="gold-special">
       {/* Background */}
-      <div className="absolute inset-0 bg-gradient-to-b from-charcoal via-secondary to-charcoal pointer-events-none" />
+      <div className="absolute inset-0 bg-charcoal pointer-events-none" />
+      
+      {/* Subtle radial glow */}
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[600px] bg-primary/[0.03] rounded-full blur-3xl pointer-events-none" />
 
       {/* Africa map watermark */}
       <div
-        className="absolute inset-0 opacity-[0.025] pointer-events-none"
+        className="absolute inset-0 opacity-[0.02] pointer-events-none"
         style={{
           backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Cpath d='M100 20 C85 25,70 40,65 55 C60 70,55 85,58 100 C60 115,65 125,75 135 C85 145,90 155,95 165 C97 170,100 175,103 170 C108 160,110 150,115 140 C125 125,135 115,138 100 C140 85,135 70,125 55 C115 40,110 25,100 20Z' fill='%23D4A528'/%3E%3C/svg%3E")`,
-          backgroundSize: "700px",
-          backgroundPosition: "center 40%",
+          backgroundSize: "800px",
+          backgroundPosition: "center 30%",
           backgroundRepeat: "no-repeat",
         }}
       />
 
-      <div className="relative max-w-6xl mx-auto px-4 sm:px-6 py-16 md:py-24">
-        {/* ── Section Header ── */}
-        <div className="text-center mb-14">
-          <div className="inline-flex items-center gap-2 mb-4">
-            <Sparkles className="w-4 h-4 text-primary/60" />
-            <Badge variant="outline" className="border-primary/25 text-primary text-[11px] px-3 py-0.5">
-              2025 Edition
+      <div className="relative max-w-6xl mx-auto px-4 sm:px-6 py-20 md:py-32">
+        {/* ── Hero Header ── */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          className="text-center mb-16 md:mb-20"
+        >
+          <div className="inline-flex items-center gap-2.5 mb-6">
+            <div className="h-px w-8 bg-gradient-to-r from-transparent to-primary/40" />
+            <Badge variant="outline" className="border-primary/30 text-primary text-xs px-4 py-1 font-semibold tracking-wider">
+              <Sparkles className="w-3 h-3 mr-1.5" />
+              2025 EDITION
             </Badge>
-            <Sparkles className="w-4 h-4 text-primary/60" />
+            <div className="h-px w-8 bg-gradient-to-l from-transparent to-primary/40" />
           </div>
 
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-secondary-foreground mb-3 font-serif leading-tight">
-            Gold Special Recognition
-          </h2>
-          <p className="text-lg text-primary/80 font-medium mb-3">Cultural Impact Recognition</p>
-          <p className="text-secondary-foreground/45 max-w-xl mx-auto text-sm leading-relaxed mb-2">
+          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-4 font-serif leading-[1.1] tracking-tight">
+            Gold Special{" "}
+            <span className="text-primary">Recognition</span>
+          </h1>
+          <p className="text-lg md:text-xl text-primary/70 font-medium mb-4">
+            Cultural Impact Recognition
+          </p>
+          <p className="text-white/40 max-w-lg mx-auto text-sm md:text-base leading-relaxed mb-3">
             Celebrating cultural leaders using influence to advance education across Africa and the Diaspora.
           </p>
-          <p className="text-primary/60 text-xs font-medium tracking-wide">
+          <p className="text-primary/50 text-xs font-medium tracking-widest uppercase">
             Recognize Impact · Re-Nominate Champions · Discover New Voices
           </p>
 
           {/* Primary CTAs */}
-          <div className="flex items-center justify-center gap-3 mt-6 flex-wrap">
-            <Button className="bg-primary hover:bg-primary/90 text-primary-foreground font-semibold shadow-lg shadow-primary/15 hover:shadow-primary/25 transition-shadow" asChild>
+          <div className="flex items-center justify-center gap-3 mt-8 flex-wrap">
+            <Button size="lg" className="bg-primary hover:bg-primary/90 text-primary-foreground font-bold shadow-xl shadow-primary/20 hover:shadow-primary/30 transition-all h-12 px-6" asChild>
               <Link to="/nominate?tier=gold-special">
-                <Award className="w-4 h-4 mr-1.5" /> Nominate a Leader
+                <Award className="w-4 h-4 mr-2" /> Nominate a Leader
               </Link>
             </Button>
-            <Button variant="outline" className="border-primary/30 text-primary hover:bg-primary/10" asChild>
-              <Link to="/nominate?tier=gold-special">Re-Nominate an Existing Honoree</Link>
+            <Button size="lg" variant="outline" className="border-primary/25 text-primary hover:bg-primary/10 h-12 px-6" asChild>
+              <Link to="/nominate?tier=gold-special">Re-Nominate Honoree</Link>
             </Button>
-            <Button variant="ghost" className="text-secondary-foreground/50 hover:text-primary hover:bg-primary/5" asChild>
+            <Button size="lg" variant="ghost" className="text-white/40 hover:text-primary hover:bg-primary/5 h-12" asChild>
               <Link to="/nominees?tier=gold-special">
-                View All Impact Profiles <ExternalLink className="w-3 h-3 ml-1" />
+                View Impact Profiles <ExternalLink className="w-3.5 h-3.5 ml-1.5" />
               </Link>
             </Button>
           </div>
 
-          <div className="mt-5 flex items-center justify-center gap-2 text-[11px] text-secondary-foreground/30">
-            <span className="w-1.5 h-1.5 rounded-full bg-primary/50" />
-            Platinum Clearance → Gold Special Recognition
+          {/* Tier indicator */}
+          <div className="mt-8 flex items-center justify-center gap-2 text-xs text-white/20">
+            <div className="flex items-center gap-1.5 bg-white/[0.03] rounded-full px-4 py-1.5 border border-white/[0.05]">
+              <span className="w-1.5 h-1.5 rounded-full bg-primary/60 animate-pulse" />
+              Platinum Clearance → Gold Special Recognition
+            </div>
           </div>
-        </div>
+        </motion.div>
 
         {/* ── 3 Category Cards ── */}
         <div className="grid md:grid-cols-3 gap-5 lg:gap-6">
-          {CATEGORIES.map((card) => (
-            <GoldCategoryCard key={card.id} card={card} />
+          {CATEGORIES.map((card, i) => (
+            <GoldCategoryCard key={card.id} card={card} index={i} />
           ))}
         </div>
 
-        {/* ── Recognition Pathway Diagram ── */}
+        {/* ── Recognition Pathway ── */}
         <RecognitionPathway />
 
-        {/* ── Closing Banner ── */}
-        <div className="mt-16 md:mt-20 text-center">
-          <div className="max-w-2xl mx-auto">
-            <p className="text-secondary-foreground/20 text-xs uppercase tracking-[0.2em] mb-4">Recognition · Accountability · Impact</p>
-
-            <h3 className="text-2xl md:text-3xl font-serif text-secondary-foreground mb-2 leading-tight">
-              Influence is powerful.
-            </h3>
-            <h3 className="text-2xl md:text-3xl font-serif text-primary mb-2 leading-tight">
-              Education impact is measurable.
-            </h3>
-            <h3 className="text-2xl md:text-3xl font-serif text-secondary-foreground/60 mb-6 leading-tight">
-              Africa deserves both.
-            </h3>
-
-            <p className="text-primary font-semibold text-sm mb-6 tracking-wide">
-              Nominate. Validate. Elevate Education.
-            </p>
-
-            <div className="flex items-center justify-center gap-3 flex-wrap">
-              <Button size="lg" className="bg-primary hover:bg-primary/90 text-primary-foreground font-bold shadow-lg shadow-primary/20 hover:shadow-primary/30 transition-shadow" asChild>
-                <Link to="/nominate?tier=gold-special">
-                  <Award className="w-4 h-4 mr-1.5" /> Nominate
-                </Link>
-              </Button>
-              <Button size="lg" variant="outline" className="border-primary/30 text-primary hover:bg-primary/10" asChild>
-                <Link to="/nominate?tier=gold-special">Re-Nominate</Link>
-              </Button>
-              <Button size="lg" variant="ghost" className="text-secondary-foreground/40 hover:text-secondary-foreground hover:bg-secondary-foreground/5" asChild>
-                <Link to="/guidelines/edi-matrix">
-                  <Globe className="w-4 h-4 mr-1.5" /> View Platinum Pathway
-                </Link>
-              </Button>
-            </div>
-          </div>
-        </div>
-
-        {/* ── Social CTA Footer Strip ── */}
-        <SocialCTAStrip />
+        {/* ── Closing Statement & CTAs ── */}
+        <ClosingStatement />
       </div>
     </section>
   );
