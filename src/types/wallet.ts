@@ -1,6 +1,6 @@
 /**
  * NESA-Africa GFA Wallet Types
- * 
+ *
  * TypeScript types for the wallet, referral, and payment systems.
  */
 
@@ -8,43 +8,58 @@
 // ENUMS
 // ============================================================================
 
-export type WalletOwnerType = 'USER' | 'CHAPTER' | 'PLATFORM';
+export type WalletOwnerType = "USER" | "CHAPTER" | "PLATFORM";
 
-export type WalletEntryType = 
-  | 'TOPUP'
-  | 'NOMINATION_FEE'
-  | 'VOTE_FEE'
-  | 'DONATION'
-  | 'TICKET'
-  | 'REFERRAL_BONUS'
-  | 'AMBASSADOR_BONUS'
-  | 'CHAPTER_BONUS'
-  | 'WITHDRAW_REQUEST'
-  | 'WITHDRAW_APPROVED'
-  | 'ADJUSTMENT';
+export type WalletEntryType =
+  | "TOPUP"
+  | "NOMINATION_FEE"
+  | "VOTE_FEE"
+  | "DONATION"
+  | "TICKET"
+  | "REFERRAL_BONUS"
+  | "AMBASSADOR_BONUS"
+  | "CHAPTER_BONUS"
+  | "WITHDRAW_REQUEST"
+  | "WITHDRAW_APPROVED"
+  | "ADJUSTMENT";
 
-export type WalletDirection = 'CREDIT' | 'DEBIT';
+export type WalletDirection = "CREDIT" | "DEBIT";
+export type PaymentType = "TOPUP" | "TICKET";
 
-export type PaymentProvider = 'PAYSTACK' | 'FLUTTERWAVE' | 'LEMFI' | 'TAPTAPSEND';
+export type PaymentProvider =
+  | "PAYSTACK"
+  | "FLUTTERWAVE"
+  | "LEMFI"
+  | "TAPTAPSEND";
 
-export type PaymentStatus = 'INITIATED' | 'PENDING' | 'SUCCESS' | 'FAILED' | 'CANCELLED';
+export type PaymentStatus =
+  | "INITIATED"
+  | "PENDING"
+  | "SUCCESS"
+  | "FAILED"
+  | "CANCELLED";
 
-export type ReferralOwnerType = 'USER' | 'CHAPTER';
+export type ReferralOwnerType = "USER" | "CHAPTER";
 
-export type ReferralEventType = 'SIGNUP' | 'NOMINATION_PAID' | 'VOTE_PAID' | 'DONATION' | 'TICKET';
+export type ReferralEventType =
+  | "SIGNUP"
+  | "NOMINATION_PAID"
+  | "VOTE_PAID"
+  | "DONATION"
+  | "TICKET";
 
-export type DisbursementStatus = 'DRAFT' | 'COMPLETED' | 'FAILED';
+export type DisbursementStatus = "DRAFT" | "COMPLETED" | "FAILED";
 
-export type RoleCode = 
-  | 'USER'
-  | 'NOMINEE'
-  | 'AMBASSADOR'
-  | 'OLC_COORDINATOR'
-  | 'NRC'
-  | 'JURY'
-  | 'SPONSOR'
-  | 'ADMIN'
-  | 'SUPER_ADMIN';
+export type RoleCode =
+  | "USER"
+  | "NOMINEE"
+  | "AMBASSADOR"
+  | "OLC_COORDINATOR"
+  | "NRC"
+  | "JURY"
+  | "SPONSOR"
+  | "ADMIN"
+  | "SUPER_ADMIN";
 
 // ============================================================================
 // TABLES
@@ -70,29 +85,39 @@ export interface WalletAccount {
 
 export interface WalletLedgerEntry {
   id: string;
-  account_id: string;
-  entry_type: WalletEntryType;
-  direction: WalletDirection;
-  agc_amount: number;
-  usd_amount: number;
-  is_withdrawable: boolean;
-  reference_type: string | null;
-  reference_id: string | null;
-  description: string | null;
-  created_by: string | null;
-  created_at: string;
+  walletId: string;
+  transactionType: WalletEntryType;
+  agcAmount: number;
+  walletDirection: WalletDirection;
+  createdAt: Date;
+  updatedAt: Date;
+  // entry_type: WalletEntryType;
+  // direction: WalletDirection;
+  // agc_amount: number;
+  // usd_amount: number;
+  // is_withdrawable: boolean;
+  // reference_type: string | null;
+  // reference_id: string | null;
+  // description: string | null;
+  // created_by: string | null;
+  // created_at: string;
 }
 
 export interface WalletBalance {
-  account_id: string;
-  owner_type: WalletOwnerType;
-  owner_id: string;
-  currency: string;
-  agc_total: number;
-  agc_withdrawable: number;
-  agc_non_withdrawable: number;
-  agc_bonus: number;
-  usd_balance: number;
+  // account_id: string;
+  // owner_type: WalletOwnerType;
+  // owner_id: string;
+  // currency: string;
+  agc_total: string;
+  // agc_withdrawable: number;
+  // agc_non_withdrawable: number;
+  // agc_bonus: number;
+  // usd_balance: number;
+}
+
+enum PaymentMethod {
+  CARD,
+  TRANSFER,
 }
 
 export interface PaymentIntent {
@@ -273,3 +298,5 @@ export interface LedgerEntryRequest {
   reference_id?: string;
   description?: string;
 }
+
+export type Currency = "NGN" | "USD";

@@ -1,8 +1,14 @@
 // RBAC Role definitions
-export type AppRole = "user" | "nrc" | "jury" | "chapter" | "sponsor" | "admin";
+export type AppRole =
+  | "FREE_MEMBER"
+  | "nrc"
+  | "jury"
+  | "chapter"
+  | "sponsor"
+  | "admin";
 
 export const ROLE_LABELS: Record<AppRole, string> = {
-  user: "User",
+  FREE_MEMBER: "User",
   nrc: "NRC Member",
   jury: "Jury Member",
   chapter: "Chapter Lead",
@@ -11,7 +17,7 @@ export const ROLE_LABELS: Record<AppRole, string> = {
 };
 
 export const ROLE_DESCRIPTIONS: Record<AppRole, string> = {
-  user: "Standard platform user who can nominate and vote",
+  FREE_MEMBER: "Standard platform user who can nominate and vote",
   nrc: "National Review Committee member who reviews nominations",
   jury: "Jury member who scores Blue Garnet nominees",
   chapter: "Regional chapter leader managing local operations",
@@ -21,7 +27,7 @@ export const ROLE_DESCRIPTIONS: Record<AppRole, string> = {
 
 // Role hierarchy for permission checks
 export const ROLE_HIERARCHY: Record<AppRole, number> = {
-  user: 1,
+  FREE_MEMBER: 1,
   sponsor: 2,
   chapter: 3,
   jury: 4,
@@ -29,9 +35,12 @@ export const ROLE_HIERARCHY: Record<AppRole, number> = {
   admin: 10,
 };
 
-export const canAccess = (userRoles: AppRole[], requiredRole: AppRole): boolean => {
+export const canAccess = (
+  userRoles: AppRole[],
+  requiredRole: AppRole,
+): boolean => {
   const requiredLevel = ROLE_HIERARCHY[requiredRole];
-  return userRoles.some(role => ROLE_HIERARCHY[role] >= requiredLevel);
+  return userRoles.some((role) => ROLE_HIERARCHY[role] >= requiredLevel);
 };
 
 export const hasRole = (userRoles: AppRole[], role: AppRole): boolean => {

@@ -29,7 +29,7 @@ export function BalanceCard({ balance, loading }: BalanceCardProps) {
     );
   }
 
-  const usdBalance = balance?.usd_balance ?? 0;
+  // const usdBalance = balance?.usd_balance ?? 0;
   const agcTotal = balance?.agc_total ?? 0;
 
   return (
@@ -44,14 +44,17 @@ export function BalanceCard({ balance, loading }: BalanceCardProps) {
       <CardContent className="relative space-y-3">
         <div>
           <p className="text-3xl font-bold tracking-tight">
-            {formatUsd(usdBalance)}
+            {formatAgc(agcTotal)}
+            {/* {formatUsd(usdBalance)} */}
           </p>
-          <p className="text-xs text-muted-foreground">USD Equivalent</p>
+          {/* <p className="text-xs text-muted-foreground">USD Equivalent</p> */}
         </div>
         <div className="flex items-center gap-2">
-          <Badge variant="secondary" className="bg-primary/10 text-primary hover:bg-primary/20">
+          <Badge
+            variant="secondary"
+            className="bg-primary/10 text-primary hover:bg-primary/20"
+          >
             <Coins className="mr-1 h-3 w-3" />
-            {formatAgc(agcTotal)}
           </Badge>
         </div>
       </CardContent>

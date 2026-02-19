@@ -1,18 +1,18 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
-import { 
-  Vote, 
-  GraduationCap, 
-  Users, 
-  Calendar, 
-  Heart, 
-  Scale, 
-  MapPin, 
-  UserPlus, 
-  Search, 
+import {
+  Vote,
+  GraduationCap,
+  Users,
+  Calendar,
+  Heart,
+  Scale,
+  MapPin,
+  UserPlus,
+  Search,
   Ticket,
-  Check
+  Check,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -26,61 +26,62 @@ export interface PurposeOption {
 
 const purposeOptions: Omit<PurposeOption, "selected">[] = [
   {
-    id: "vote_nominate",
+    id: "VOTE_OR_NOMINATE",
     icon: <Vote className="h-5 w-5" />,
     title: "Vote or Nominate",
     description: "Participate in voting and nominate deserving candidates",
   },
   {
-    id: "scholarship",
+    id: "APPLY_FOR_EDUAID_SCHOLARSHIP",
     icon: <GraduationCap className="h-5 w-5" />,
     title: "Apply for EduAid Scholarship",
     description: "Access educational scholarships and funding opportunities",
   },
   {
-    id: "ambassador",
+    id: "BECOME_AMBASSADOR",
     icon: <Users className="h-5 w-5" />,
     title: "Become Ambassador",
     description: "Represent NESA in your community and earn rewards",
   },
   {
-    id: "webinar",
+    id: "JOIN_WEBINAR_EXPO",
     icon: <Calendar className="h-5 w-5" />,
     title: "Join Webinar/Expo",
     description: "Attend educational webinars and expo events",
   },
   {
-    id: "sponsor",
+    id: "SPONSOR_OR_CSR_PARTNER",
     icon: <Heart className="h-5 w-5" />,
     title: "Sponsor or CSR Partner",
     description: "Support education through sponsorship and CSR initiatives",
   },
   {
-    id: "judge",
+    id: "APPLY_AS_JUDGE",
     icon: <Scale className="h-5 w-5" />,
     title: "Apply as Judge",
     description: "Evaluate nominees and participate in judging panels",
   },
   {
-    id: "chapter",
+    id: "JOIN_LOCAL_CHAPTER",
     icon: <MapPin className="h-5 w-5" />,
     title: "Join Local Chapter",
     description: "Connect with your local NESA chapter community",
   },
   {
-    id: "team",
+    id: "JOIN_NESA_TEAM",
     icon: <UserPlus className="h-5 w-5" />,
     title: "Join NESA Team",
     description: "Volunteer or work with the NESA team",
   },
   {
-    id: "nrc",
+    id: "APPLY_AS_NRC_VOLUNTEER",
     icon: <Search className="h-5 w-5" />,
     title: "Apply as NRC Volunteer",
-    description: "Join the Nominee Research Corps to identify education leaders",
+    description:
+      "Join the Nominee Research Corps to identify education leaders",
   },
   {
-    id: "gala",
+    id: "GET_GALA_TICKET",
     icon: <Ticket className="h-5 w-5" />,
     title: "Get Gala Ticket",
     description: "Attend the prestigious NESA-Africa Awards Gala",
@@ -94,16 +95,18 @@ interface PurposeSelectionStepProps {
   onBack: () => void;
 }
 
-export function PurposeSelectionStep({ 
-  selectedPurposes, 
-  onToggle, 
-  onNext, 
-  onBack 
+export function PurposeSelectionStep({
+  selectedPurposes,
+  onToggle,
+  onNext,
+  onBack,
 }: PurposeSelectionStepProps) {
   return (
     <div className="w-full max-w-4xl mx-auto">
       <div className="text-center mb-8">
-        <h2 className="text-2xl md:text-3xl font-display font-bold">What Would You Like to Do?</h2>
+        <h2 className="text-2xl md:text-3xl font-display font-bold">
+          What Would You Like to Do?
+        </h2>
         <p className="text-muted-foreground mt-2 max-w-xl mx-auto">
           Select all that apply. This helps us personalize your NESA experience.
         </p>
@@ -112,13 +115,13 @@ export function PurposeSelectionStep({
       <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
         {purposeOptions.map((option) => {
           const isSelected = selectedPurposes.includes(option.id);
-          
+
           return (
             <Card
               key={option.id}
               className={cn(
                 "cursor-pointer transition-all hover:shadow-md hover:border-primary/50 relative",
-                isSelected && "border-2 border-primary bg-primary/5"
+                isSelected && "border-2 border-primary bg-primary/5",
               )}
               onClick={() => onToggle(option.id)}
             >
@@ -128,7 +131,7 @@ export function PurposeSelectionStep({
                     "w-10 h-10 rounded-lg flex items-center justify-center shrink-0",
                     isSelected
                       ? "bg-primary text-primary-foreground"
-                      : "bg-muted text-muted-foreground"
+                      : "bg-muted text-muted-foreground",
                   )}
                 >
                   {option.icon}
@@ -140,11 +143,11 @@ export function PurposeSelectionStep({
                   </p>
                 </div>
                 <div className="shrink-0">
-                  <Checkbox 
+                  <Checkbox
                     checked={isSelected}
                     className={cn(
                       "h-5 w-5 rounded-full",
-                      isSelected && "bg-primary border-primary"
+                      isSelected && "bg-primary border-primary",
                     )}
                   />
                 </div>

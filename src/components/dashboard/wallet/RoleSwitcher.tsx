@@ -16,7 +16,7 @@ interface RoleSwitcherProps {
 }
 
 const roleIcons: Record<AppRole, React.ReactNode> = {
-  user: <User className="h-4 w-4" />,
+  FREE_MEMBER: <User className="h-4 w-4" />,
   nrc: <Shield className="h-4 w-4" />,
   jury: <Award className="h-4 w-4" />,
   chapter: <Building className="h-4 w-4" />,
@@ -25,7 +25,7 @@ const roleIcons: Record<AppRole, React.ReactNode> = {
 };
 
 const roleLabels: Record<AppRole, string> = {
-  user: "User",
+  FREE_MEMBER: "User",
   nrc: "NRC Reviewer",
   jury: "Jury Member",
   chapter: "Chapter Coordinator",
@@ -44,7 +44,10 @@ export function RoleSwitcher({ currentRole, onRoleChange }: RoleSwitcherProps) {
   return (
     <div className="flex items-center gap-2">
       <span className="text-sm text-muted-foreground">Viewing as:</span>
-      <Select value={currentRole} onValueChange={(v) => onRoleChange(v as AppRole)}>
+      <Select
+        value={currentRole}
+        onValueChange={(v) => onRoleChange(v as AppRole)}
+      >
         <SelectTrigger className="w-[180px]">
           <SelectValue>
             <div className="flex items-center gap-2">

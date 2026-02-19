@@ -1,6 +1,6 @@
 /**
  * NESA-Africa API Client - Nominations Endpoints
- * 
+ *
  * Nomination submission, acceptance, and status APIs.
  */
 
@@ -11,7 +11,7 @@ import api from "./http";
 // ==========================================
 
 export type NominationSource = "START_MEMBER" | "NRC" | "PUBLIC";
-export type AcceptanceStatus = "PENDING" | "SENT" | "ACCEPTED" | "DECLINED";
+export type AcceptanceStatus = "PENDING" | "ACCEPTED" | "REJECTED";
 
 export interface NominationPayload {
   nominee_name: string;
@@ -106,7 +106,11 @@ export async function acceptNomination(token: string) {
  * Decline nomination (nominee response)
  */
 export async function declineNomination(token: string, reason?: string) {
-  return api.post<{ success: boolean; message: string }>("nominations", "/decline", { token, reason });
+  return api.post<{ success: boolean; message: string }>(
+    "nominations",
+    "/decline",
+    { token, reason },
+  );
 }
 
 /**

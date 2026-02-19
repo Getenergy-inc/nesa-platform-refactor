@@ -22,28 +22,42 @@ import type {
   Referral,
 } from "@/types/wallet";
 import type { AppRole } from "@/config/roles";
+import { userApi, UserDetails } from "@/api/user";
 
 function DashboardContent() {
-  const { user, roles } = useAuth();
+  const { user, roles, accessToken } = useAuth();
   const { currentEdition } = useSeason();
-  
+
   // UI State
   const [loading, setLoading] = useState(true);
   const [topUpOpen, setTopUpOpen] = useState(false);
-  const [activeRole, setActiveRole] = useState<AppRole>("user");
-  
+  const [activeRole, setActiveRole] = useState<AppRole>("FREE_MEMBER");
+
   // Wallet Data
   const [balance, setBalance] = useState<WalletBalance | null>(null);
   const [transactions, setTransactions] = useState<WalletLedgerEntry[]>([]);
   const [referral, setReferral] = useState<Referral | null>(null);
   const [revenueSplits, setRevenueSplits] = useState<RevenueSplit[]>([]);
   const [totalReferralEarnings, setTotalReferralEarnings] = useState(0);
+  const [userDetails, setUserDetails] = useState<UserDetails>();
 
   const loadDashboardData = useCallback(async () => {
     if (!user) return;
 
     try {
       setLoading(true);
+
+      const user = await userApi.fetchUserDetails(accessToken);
+      setUserDetails(user);
+      const userBalance = Number(user.wallet.balance).toFixed(2);
+      setBalance({
+        agc_total: userBalance,
+      });
+      const sortedTransactions = user.wallet.walletTransactions.sort(
+        (a, b) =>
+          new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime(),
+      );
+      setTransactions(sortedTransactions);
 
       // Get user's wallet account
       const { data: walletAccount } = await supabase
@@ -61,21 +75,21 @@ function DashboardContent() {
           .eq("account_id", walletAccount.id)
           .maybeSingle();
 
-        if (balanceData) {
-          setBalance(balanceData as WalletBalance);
-        }
+        // if (balanceData) {
+        //   setBalance(balanceData as WalletBalance);
+        // }
 
-        // Get recent transactions
-        const { data: txData } = await supabase
-          .from("wallet_ledger_entries")
-          .select("*")
-          .eq("account_id", walletAccount.id)
-          .order("created_at", { ascending: false })
-          .limit(10);
+        // // Get recent transactions
+        // const { data: txData } = await supabase
+        //   .from("wallet_ledger_entries")
+        //   .select("*")
+        //   .eq("account_id", walletAccount.id)
+        //   .order("created_at", { ascending: false })
+        //   .limit(10);
 
-        if (txData) {
-          setTransactions(txData as WalletLedgerEntry[]);
-        }
+        // if (txData) {
+        //   setTransactions(txData as WalletLedgerEntry[]);
+        // }
       }
 
       // Get user's referral info
@@ -88,7 +102,7 @@ function DashboardContent() {
 
       if (referralData) {
         setReferral(referralData as Referral);
-        
+
         // Calculate total referral earnings from events
         const { data: eventsData } = await supabase
           .from("referral_events")
@@ -97,7 +111,10 @@ function DashboardContent() {
           .eq("referrer_id", user.id);
 
         if (eventsData) {
-          const total = eventsData.reduce((sum, e) => sum + (e.reward_agc || 0), 0);
+          const total = eventsData.reduce(
+            (sum, e) => sum + (e.reward_agc || 0),
+            0,
+          );
           setTotalReferralEarnings(total);
         }
       }
@@ -144,15 +161,15 @@ function DashboardContent() {
   };
 
   return (
-    <DashboardLayout
-      title="Dashboard"
-      breadcrumbs={[{ label: "Dashboard" }]}
-    >
+    <DashboardLayout title="Dashboard" breadcrumbs={[{ label: "Dashboard" }]}>
       <div className="space-y-6">
         {/* Role Switcher (only if multiple roles) */}
         {roles.length > 1 && (
           <div className="flex justify-end">
-            <RoleSwitcher currentRole={activeRole} onRoleChange={setActiveRole} />
+            <RoleSwitcher
+              currentRole={activeRole}
+              onRoleChange={setActiveRole}
+            />
           </div>
         )}
 
@@ -171,11 +188,15 @@ function DashboardContent() {
 
         {/* Transactions + Referral Row */}
         <div className="grid gap-4 lg:grid-cols-2">
-          <TransactionsList transactions={transactions} loading={loading} limit={10} />
-          <ReferralCard 
-            referral={referral} 
+          <TransactionsList
+            transactions={transactions}
+            loading={loading}
+            limit={10}
+          />
+          <ReferralCard
+            referral={referral}
             totalEarnings={totalReferralEarnings}
-            loading={loading} 
+            loading={loading}
           />
         </div>
       </div>

@@ -2,12 +2,20 @@ import { useState } from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
 import { declineNomination } from "@/api/nominations";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { toast } from "sonner";
 import { XCircle, Loader2, Home, ArrowLeft } from "lucide-react";
 import { NESALogo } from "@/components/nesa/NESALogo";
+import { nominationApi } from "@/api/nomination";
+import { useAuth } from "@/contexts/AuthContext";
 
 export default function NomineeDecline() {
   const { token } = useParams<{ token: string }>();
@@ -15,19 +23,23 @@ export default function NomineeDecline() {
   const [loading, setLoading] = useState(false);
   const [declined, setDeclined] = useState(false);
   const [reason, setReason] = useState("");
+  const { accessToken } = useAuth();
+  const declineToken = token.split("_")[0];
+  const nominationId = token.split("_")[1];
+  console.log("nomination id", nominationId);
 
   const handleDecline = async () => {
-    if (!token) {
+    if (!token || !nominationId) {
       toast.error("Invalid decline link");
       return;
     }
 
     setLoading(true);
     try {
-      await declineNomination(token, reason || undefined);
+      await nominationApi.rejectNomination(accessToken, nominationId);
       setDeclined(true);
       toast.success("Nomination declined");
-    } catch (error: any) {
+    } catch (error) {
       toast.error(error.message || "Failed to decline nomination");
     } finally {
       setLoading(false);
@@ -43,11 +55,13 @@ export default function NomineeDecline() {
             <div className="space-y-2">
               <h2 className="text-xl font-semibold">Nomination Declined</h2>
               <p className="text-muted-foreground">
-                We respect your decision. Thank you for considering the NESA-Africa recognition program.
+                We respect your decision. Thank you for considering the
+                NESA-Africa recognition program.
               </p>
             </div>
             <p className="text-sm text-muted-foreground">
-              If you change your mind in the future, you can always be nominated again in a subsequent season.
+              If you change your mind in the future, you can always be nominated
+              again in a subsequent season.
             </p>
             <Button variant="outline" asChild>
               <Link to="/">
@@ -66,9 +80,12 @@ export default function NomineeDecline() {
       <Card className="max-w-lg w-full">
         <CardHeader className="text-center space-y-4">
           <NESALogo variant="full" className="h-16 mx-auto opacity-50" />
-          <CardTitle className="text-2xl font-display">Decline Nomination</CardTitle>
+          <CardTitle className="text-2xl font-display">
+            Decline Nomination
+          </CardTitle>
           <CardDescription>
-            We're sorry to see you go. If you'd like, please let us know why you're declining.
+            We're sorry to see you go. If you'd like, please let us know why
+            you're declining.
           </CardDescription>
         </CardHeader>
         <CardContent className="space-y-6">
@@ -84,9 +101,9 @@ export default function NomineeDecline() {
           </div>
 
           <div className="flex flex-col gap-3">
-            <Button 
+            <Button
               variant="destructive"
-              size="lg" 
+              size="lg"
               onClick={handleDecline}
               disabled={loading}
               className="w-full"
@@ -95,11 +112,10 @@ export default function NomineeDecline() {
               {!loading && <XCircle className="h-4 w-4 mr-2" />}
               Confirm Decline
             </Button>
-            <Button 
-              variant="outline" 
-              asChild
-            >
-              <Link to={`/nominee/accept/${token}`}>
+            <Button variant="outline" asChild>
+              <Link
+                to={`/nomination/accept?token=${token}&nominationId=${nominationId}`}
+              >
                 <ArrowLeft className="h-4 w-4 mr-2" />
                 Go Back - I want to accept instead
               </Link>

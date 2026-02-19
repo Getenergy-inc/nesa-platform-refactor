@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   Dialog,
   DialogContent,
@@ -12,9 +12,11 @@ import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Loader2, CreditCard } from "lucide-react";
 import { toast } from "sonner";
-import { initTopup } from "@/api/wallet";
+import { useAuth } from "@/contexts/AuthContext";
+import { paymentApi } from "@/api/payment";
+import { useFlutterwave, closePaymentModal } from "flutterwave-react-v3";
 import { GFAWalletIcon } from "@/components/ui/GFAWalletIcon";
-import type { PaymentProvider } from "@/types/wallet";
+import { PaymentProvider, Currency } from "@/types/wallet";
 
 interface TopUpDialogProps {
   open: boolean;
@@ -22,55 +24,142 @@ interface TopUpDialogProps {
   onSuccess?: () => void;
 }
 
-const providers: { value: PaymentProvider; label: string; description: string }[] = [
-  { value: "PAYSTACK", label: "Paystack", description: "Cards, Bank Transfer (Nigeria)" },
-  { value: "FLUTTERWAVE", label: "Flutterwave", description: "Cards, Mobile Money (Africa)" },
-  { value: "LEMFI", label: "LemFi", description: "Bank Transfer (UK, EU, Canada)" },
-  { value: "TAPTAPSEND", label: "TapTap Send", description: "Mobile Transfer (Diaspora)" },
+const providers: { value: PaymentProvider; label: string }[] = [
+  { value: "FLUTTERWAVE", label: "Flutterwave" },
+  { value: "PAYSTACK", label: "Paystack" },
+  { value: "LEMFI", label: "LemFi" },
+  { value: "TAPTAPSEND", label: "TapTap Send" },
 ];
 
 const presetAmounts = [5, 10, 20, 50, 100];
 
-export function TopUpDialog({ open, onOpenChange, onSuccess }: TopUpDialogProps) {
-  const [amount, setAmount] = useState<number>(10);
-  const [provider, setProvider] = useState<PaymentProvider>("PAYSTACK");
-  const [loading, setLoading] = useState(false);
+export function TopUpDialog({
+  open,
+  onOpenChange,
+  onSuccess,
+}: TopUpDialogProps) {
+  const { accessToken, user } = useAuth();
 
+  const [amount, setAmount] = useState<number>(10);
+  const [provider, setProvider] = useState<PaymentProvider>("FLUTTERWAVE");
+  const [loading, setLoading] = useState(false);
+  const [exchangeLoading, setExchangeLoading] = useState(false);
+
+  const [coins, setCoins] = useState<number | null>(null);
+  const [baseAmount, setBaseAmount] = useState<number>(0);
+  const [currency] = useState<Currency>("USD");
+
+  /*
+  ===============================================
+  FETCH EXCHANGE RATE (DEBOUNCED)
+  ===============================================
+  */
+  useEffect(() => {
+    if (!accessToken || amount < 1) return;
+
+    const timeout = setTimeout(async () => {
+      try {
+        setExchangeLoading(true);
+
+        const res = await paymentApi.fetchExchangeRate(
+          accessToken,
+          currency,
+          amount,
+        );
+
+        setCoins(res.numberOfCoins);
+        setBaseAmount(res.baseamount);
+      } catch (err) {
+        console.error(err);
+        toast.error("Failed to fetch exchange rate");
+      } finally {
+        setExchangeLoading(false);
+      }
+    }, 400);
+
+    return () => clearTimeout(timeout);
+  }, [amount, currency, accessToken]);
+
+  /*
+  ===============================================
+  HANDLE PAYMENT
+  ===============================================
+  */
   const handleSubmit = async () => {
+    if (!accessToken || !coins || !user) return;
+
     if (amount < 1) {
       toast.error("Minimum top-up amount is $1");
       return;
     }
 
-    setLoading(true);
     try {
-      const result = await initTopup({
-        amount_usd: amount,
+      setLoading(true);
+
+      // 1️⃣ Create payment in backend
+      const payment = await paymentApi.createPayment(accessToken, {
+        amount,
+        currency,
         provider,
+        agreedCoinAmount: coins,
+        baseCurrencyAmount: baseAmount,
+        paymentType: "TOPUP",
       });
 
-      if (result.error) {
-        toast.error(result.error);
-        return;
-      }
+      if (provider === "FLUTTERWAVE") {
+        // 2️⃣ Build Flutterwave config dynamically
+        const config = {
+          public_key: import.meta.env.VITE_FLW_PUBLIC_KEY,
+          tx_ref: payment.transactionRef, // ✅ DIRECT FROM BACKEND
+          amount: payment.amount,
+          currency: payment.currency,
+          payment_options: "card, banktransfer, ussd",
+          customer: {
+            email: user.email ?? "",
+            name: user.fullName ?? "",
+            phone_number: user.phone ?? "0000000000",
+          },
+          customizations: {
+            title: "NESA Africa Wallet Top-Up",
+            description: "Purchase AGC coins",
+            logo: "https://yourdomain.com/logo.png",
+          },
+        };
 
-      // In a real implementation, redirect to payment gateway
-      toast.success("Payment initiated! Redirecting to payment gateway...");
-      
-      // Redirect to payment gateway if URL provided
-      if (result.data?.payment_url) {
-        window.open(result.data.payment_url, "_blank");
-      }
+        // 3️⃣ Initialize Flutterwave with correct tx_ref
+        const handleFlutterPayment = useFlutterwave(config);
 
-      onOpenChange(false);
-      onSuccess?.();
-    } catch (error) {
+        // 4️⃣ Launch Checkout
+        handleFlutterPayment({
+          callback: (response) => {
+            closePaymentModal();
+
+            if (response.status === "successful") {
+              toast.success("Payment successful!");
+              onSuccess?.();
+              onOpenChange(false);
+            } else {
+              toast.error("Payment was not successful");
+            }
+          },
+          onClose: () => {},
+        });
+      } else {
+        toast.info("Selected provider not yet integrated.");
+      }
+    } catch (err) {
+      console.error(err);
       toast.error("Failed to initiate payment");
     } finally {
       setLoading(false);
     }
   };
 
+  /*
+  ===============================================
+  UI
+  ===============================================
+  */
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="sm:max-w-md">
@@ -80,15 +169,16 @@ export function TopUpDialog({ open, onOpenChange, onSuccess }: TopUpDialogProps)
             Top Up Wallet
           </DialogTitle>
           <DialogDescription>
-            Add funds to your GFA Wallet using your preferred payment method.
+            Add funds and receive AGC coins instantly.
           </DialogDescription>
         </DialogHeader>
 
         <div className="space-y-6 py-4">
-          {/* Amount Selection */}
+          {/* Amount Section */}
           <div className="space-y-2">
-            <Label>Amount (USD)</Label>
-            <div className="flex flex-wrap gap-2 mb-2">
+            <Label>Amount ({currency})</Label>
+
+            <div className="flex flex-wrap gap-2">
               {presetAmounts.map((preset) => (
                 <Button
                   key={preset}
@@ -101,38 +191,44 @@ export function TopUpDialog({ open, onOpenChange, onSuccess }: TopUpDialogProps)
                 </Button>
               ))}
             </div>
+
             <Input
               type="number"
               min={1}
               value={amount}
               onChange={(e) => setAmount(Number(e.target.value))}
-              placeholder="Enter custom amount"
             />
+
             <p className="text-xs text-muted-foreground">
-              You'll receive approximately {(amount * 100).toFixed(0)} AGC
+              {exchangeLoading
+                ? "Calculating AGC..."
+                : coins
+                  ? `You will receive ${coins.toLocaleString()} AGC`
+                  : "Enter amount to calculate AGC"}
             </p>
           </div>
 
-          {/* Provider Selection */}
+          {/* Provider Section */}
           <div className="space-y-2">
             <Label>Payment Method</Label>
-            <RadioGroup value={provider} onValueChange={(v) => setProvider(v as PaymentProvider)}>
+
+            <RadioGroup
+              value={provider}
+              onValueChange={(v) => setProvider(v as PaymentProvider)}
+            >
               {providers.map((p) => (
                 <div
                   key={p.value}
-                  className={`flex items-center space-x-3 rounded-lg border p-3 cursor-pointer transition-colors ${
-                    provider === p.value ? "border-primary bg-primary/5" : "hover:bg-muted/50"
+                  className={`flex items-center space-x-3 rounded-lg border p-3 cursor-pointer ${
+                    provider === p.value
+                      ? "border-primary bg-primary/5"
+                      : "hover:bg-muted/50"
                   }`}
                   onClick={() => setProvider(p.value)}
                 >
                   <RadioGroupItem value={p.value} id={p.value} />
-                  <div className="flex-1">
-                    <Label htmlFor={p.value} className="cursor-pointer font-medium">
-                      {p.label}
-                    </Label>
-                    <p className="text-xs text-muted-foreground">{p.description}</p>
-                  </div>
-                  <CreditCard className="h-5 w-5 text-muted-foreground" />
+                  <Label htmlFor={p.value}>{p.label}</Label>
+                  <CreditCard className="ml-auto h-4 w-4" />
                 </div>
               ))}
             </RadioGroup>
@@ -141,8 +237,8 @@ export function TopUpDialog({ open, onOpenChange, onSuccess }: TopUpDialogProps)
           {/* Submit */}
           <Button
             className="w-full"
+            disabled={loading || !coins}
             onClick={handleSubmit}
-            disabled={loading || amount < 1}
           >
             {loading ? (
               <>
@@ -150,9 +246,7 @@ export function TopUpDialog({ open, onOpenChange, onSuccess }: TopUpDialogProps)
                 Processing...
               </>
             ) : (
-              <>
-                Pay ${amount} USD
-              </>
+              `Pay ${amount} ${currency}`
             )}
           </Button>
         </div>

@@ -51,8 +51,12 @@ function TransactionSkeleton() {
 }
 
 function TransactionItem({ entry }: { entry: WalletLedgerEntry }) {
-  const credit = isCredit(entry.direction);
-  const icon = entryTypeIcons[entry.entry_type] || <Coins className="h-4 w-4" />;
+  const credit = isCredit(entry.walletDirection);
+  const date = new Date(entry.createdAt);
+  const formatted = `${date.toLocaleDateString()} • ${date.toLocaleTimeString()}`;
+  const icon = entryTypeIcons[entry.transactionType] || (
+    <Coins className="h-4 w-4" />
+  );
 
   return (
     <div className="flex items-center gap-3 py-3 border-b last:border-0">
@@ -61,23 +65,30 @@ function TransactionItem({ entry }: { entry: WalletLedgerEntry }) {
       </div>
       <div className="flex-1 min-w-0">
         <p className="font-medium text-sm truncate">
-          {getEntryTypeLabel(entry.entry_type)}
+          {getEntryTypeLabel(entry.transactionType)}
         </p>
-        <p className="text-xs text-muted-foreground truncate">
-          {entry.description || new Date(entry.created_at).toLocaleDateString()}
-        </p>
+        <p className="text-xs text-muted-foreground truncate">{formatted}</p>
       </div>
       <Badge
         variant="outline"
-        className={credit ? "text-green-600 border-green-200" : "text-red-500 border-red-200"}
+        className={
+          credit
+            ? "text-green-600 border-green-200"
+            : "text-red-500 border-red-200"
+        }
       >
-        {credit ? "+" : "-"}{formatAgc(entry.agc_amount)}
+        {credit ? "+" : "-"}
+        {formatAgc(entry.agcAmount.toString())}
       </Badge>
     </div>
   );
 }
 
-export function TransactionsList({ transactions, loading, limit = 10 }: TransactionsListProps) {
+export function TransactionsList({
+  transactions,
+  loading,
+  limit = 10,
+}: TransactionsListProps) {
   const displayTransactions = transactions.slice(0, limit);
 
   return (

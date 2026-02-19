@@ -5,7 +5,13 @@ import { useAuth } from "@/contexts/AuthContext";
 import { ProtectedRoute } from "@/components/ProtectedRoute";
 import { NRCLayout } from "@/components/nrc/NRCLayout";
 import { useIsNRCMember } from "@/hooks/useNRCData";
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+  CardDescription,
+} from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -36,8 +42,12 @@ function NRCSettingsContent() {
   const [isSaving, setIsSaving] = useState(false);
 
   // Form state
-  const [maxQueueSize, setMaxQueueSize] = useState(memberData?.max_queue_size || 10);
-  const [assignedRegion, setAssignedRegion] = useState(memberData?.assigned_region || "");
+  const [maxQueueSize, setMaxQueueSize] = useState(
+    memberData?.max_queue_size || 10,
+  );
+  const [assignedRegion, setAssignedRegion] = useState(
+    memberData?.assigned_region || "",
+  );
   const [emailNotifications, setEmailNotifications] = useState(true);
 
   const handleSave = async () => {
@@ -195,7 +205,7 @@ function NRCSettingsContent() {
 
 export default function NRCSettings() {
   return (
-    <ProtectedRoute requiredRoles={["nrc", "admin"]}>
+    <ProtectedRoute requiredRoles={["nrc", "admin", "FREE_MEMBER"]}>
       <NRCSettingsContent />
     </ProtectedRoute>
   );

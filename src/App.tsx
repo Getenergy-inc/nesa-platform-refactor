@@ -83,7 +83,23 @@ import Rebuild from "./pages/Rebuild";
 import Judges from "./pages/Judges";
 
 // Judge Portal Pages
-import { JudgeApply, JudgeStatus, JudgeSignup, JudgeVerify, JudgeDashboard, JudgePortal, JuryScoring, JuryCOI, JudgeRubric, JudgeGuidelines, JudgePanel, JudgeHelp, JudgeSettings, JudgeChatRoom, JudgeIconLifetime } from "./pages/judge";
+import {
+  JudgeApply,
+  JudgeStatus,
+  JudgeSignup,
+  JudgeVerify,
+  JudgeDashboard,
+  JudgePortal,
+  JuryScoring,
+  JuryCOI,
+  JudgeRubric,
+  JudgeGuidelines,
+  JudgePanel,
+  JudgeHelp,
+  JudgeSettings,
+  JudgeChatRoom,
+  JudgeIconLifetime,
+} from "./pages/judge";
 import { JudgeArenaGuard } from "./components/judge/JudgeArenaGuard";
 import Partners from "./pages/Partners";
 import Chapters from "./pages/Chapters";
@@ -100,19 +116,44 @@ import Tickets from "./pages/Tickets";
 import BuyYourTicket from "./pages/BuyYourTicket";
 import GFAWzipWallet from "./pages/GFAWzipWallet";
 import GFAWzipLinks from "./pages/GFAWzipLinks";
-import { Shop, ProductDetail, Cart, Checkout, OrderConfirmation, BulkOrders } from "./pages/shop";
+import {
+  Shop,
+  ProductDetail,
+  Cart,
+  Checkout,
+  OrderConfirmation,
+  BulkOrders,
+} from "./pages/shop";
 import { SponsorLanding } from "./pages/sponsors";
 import Wallet from "./pages/Wallet";
 import EndorseNESA from "./pages/EndorseNESA";
 
 // OLC Pages
-import { OLCDashboard, OLCMembers, OLCSettlements, OLCWallet } from "./pages/olc";
+import {
+  OLCDashboard,
+  OLCMembers,
+  OLCSettlements,
+  OLCWallet,
+} from "./pages/olc";
 
 // NRC Portal Pages
-import { NRCPortal, NRCMyQueue, NRCMembers as NRCMembersPage, NRCSettings } from "./pages/nrc";
+import { NRCPortal, NRCMyQueue, NRCSettings, NRCManageTeam } from "./pages/nrc";
 
 // Admin Pages
-import { AdminDashboard, AdminOrders, AdminImpact, AdminNomineeImages, AdminNomineeProfiles, AdminVotingGovernance } from "./pages/admin";
+import {
+  AdminDashboard,
+  AdminOrders,
+  AdminImpact,
+  AdminNomineeImages,
+  AdminNomineeProfiles,
+  AdminVotingGovernance,
+} from "./pages/admin";
+import ForgotPassword from "./pages/auth/forgotPassword";
+import ResetPassword from "./pages/auth/ResetPassword";
+import CreateTeam from "./pages/nrc/NRCTeam";
+import AcceptTeamInvitePage from "./pages/nrc/TeamInvite";
+import NomineeRegister from "./pages/auth/NomineeRegister";
+import { NomineeAcceptanceProtectedRoute } from "./components/ProtectedRoute";
 
 // Optimized QueryClient with caching strategy
 const queryClient = new QueryClient({
@@ -128,9 +169,13 @@ const queryClient = new QueryClient({
 });
 
 // Wrapper component that applies PublicLayout
-const WithLayout = ({ children, showFooter = true }: { children: React.ReactNode; showFooter?: boolean }) => (
-  <PublicLayout showFooter={showFooter}>{children}</PublicLayout>
-);
+const WithLayout = ({
+  children,
+  showFooter = true,
+}: {
+  children: React.ReactNode;
+  showFooter?: boolean;
+}) => <PublicLayout showFooter={showFooter}>{children}</PublicLayout>;
 
 const App = () => (
   <HelmetProvider>
@@ -146,187 +191,1029 @@ const App = () => (
                 {/* Landing - has its own header/footer */}
                 <Route path="/" element={<NESAAfrica />} />
                 <Route path="/programs/nesa-africa" element={<NESAAfrica />} />
-                
+
                 {/* Programs */}
-                <Route path="/programs" element={<WithLayout><Programs /></WithLayout>} />
-                
+                <Route
+                  path="/programs"
+                  element={
+                    <WithLayout>
+                      <Programs />
+                    </WithLayout>
+                  }
+                />
+
                 {/* About */}
-                <Route path="/about" element={<WithLayout><About /></WithLayout>} />
-                <Route path="/about/vision-2035" element={<WithLayout><Vision2035 /></WithLayout>} />
-                <Route path="/about/governance" element={<WithLayout><Governance /></WithLayout>} />
-                <Route path="/about/timeline" element={<WithLayout><Timeline /></WithLayout>} />
-                <Route path="/about/scef" element={<WithLayout><SCEF /></WithLayout>} />
-                <Route path="/about/awards-recognition" element={<WithLayout><Awards /></WithLayout>} />
-                <Route path="/about/social-impact" element={<WithLayout><Impact /></WithLayout>} />
-                <Route path="/awards" element={<WithLayout><Awards /></WithLayout>} />
-                <Route path="/impact" element={<WithLayout><Impact /></WithLayout>} />
-                <Route path="/videos" element={<WithLayout><Videos /></WithLayout>} />
-                
+                <Route
+                  path="/about"
+                  element={
+                    <WithLayout>
+                      <About />
+                    </WithLayout>
+                  }
+                />
+                <Route
+                  path="/about/vision-2035"
+                  element={
+                    <WithLayout>
+                      <Vision2035 />
+                    </WithLayout>
+                  }
+                />
+                <Route
+                  path="/about/governance"
+                  element={
+                    <WithLayout>
+                      <Governance />
+                    </WithLayout>
+                  }
+                />
+                <Route
+                  path="/about/timeline"
+                  element={
+                    <WithLayout>
+                      <Timeline />
+                    </WithLayout>
+                  }
+                />
+                <Route
+                  path="/about/scef"
+                  element={
+                    <WithLayout>
+                      <SCEF />
+                    </WithLayout>
+                  }
+                />
+                <Route
+                  path="/about/awards-recognition"
+                  element={
+                    <WithLayout>
+                      <Awards />
+                    </WithLayout>
+                  }
+                />
+                <Route
+                  path="/about/social-impact"
+                  element={
+                    <WithLayout>
+                      <Impact />
+                    </WithLayout>
+                  }
+                />
+                <Route
+                  path="/awards"
+                  element={
+                    <WithLayout>
+                      <Awards />
+                    </WithLayout>
+                  }
+                />
+                <Route
+                  path="/impact"
+                  element={
+                    <WithLayout>
+                      <Impact />
+                    </WithLayout>
+                  }
+                />
+                <Route
+                  path="/videos"
+                  element={
+                    <WithLayout>
+                      <Videos />
+                    </WithLayout>
+                  }
+                />
+
                 {/* Awards */}
-                <Route path="/categories" element={<WithLayout><Categories /></WithLayout>} />
-                <Route path="/categories/:slug" element={<WithLayout><CategoryDetail /></WithLayout>} />
-                <Route path="/awards/platinum" element={<WithLayout><PlatinumAward /></WithLayout>} />
-                <Route path="/awards/icon" element={<WithLayout><IconAward /></WithLayout>} />
-                <Route path="/awards/gold" element={<WithLayout><GoldAward /></WithLayout>} />
-                <Route path="/awards/blue-garnet" element={<WithLayout><BlueGarnetAward /></WithLayout>} />
-                <Route path="/awards/winners" element={<WithLayout><Winners /></WithLayout>} />
-                <Route path="/certificates/verify" element={<WithLayout><CertificateVerify /></WithLayout>} />
-                <Route path="/verify/:hash" element={<WithLayout><VerifyCertificate /></WithLayout>} />
-                
+                <Route
+                  path="/categories"
+                  element={
+                    <WithLayout>
+                      <Categories />
+                    </WithLayout>
+                  }
+                />
+                <Route
+                  path="/categories/:slug"
+                  element={
+                    <WithLayout>
+                      <CategoryDetail />
+                    </WithLayout>
+                  }
+                />
+                <Route
+                  path="/awards/platinum"
+                  element={
+                    <WithLayout>
+                      <PlatinumAward />
+                    </WithLayout>
+                  }
+                />
+                <Route
+                  path="/awards/icon"
+                  element={
+                    <WithLayout>
+                      <IconAward />
+                    </WithLayout>
+                  }
+                />
+                <Route
+                  path="/awards/gold"
+                  element={
+                    <WithLayout>
+                      <GoldAward />
+                    </WithLayout>
+                  }
+                />
+                <Route
+                  path="/awards/blue-garnet"
+                  element={
+                    <WithLayout>
+                      <BlueGarnetAward />
+                    </WithLayout>
+                  }
+                />
+                <Route
+                  path="/awards/winners"
+                  element={
+                    <WithLayout>
+                      <Winners />
+                    </WithLayout>
+                  }
+                />
+                <Route
+                  path="/certificates/verify"
+                  element={
+                    <WithLayout>
+                      <CertificateVerify />
+                    </WithLayout>
+                  }
+                />
+                <Route
+                  path="/verify/:hash"
+                  element={
+                    <WithLayout>
+                      <VerifyCertificate />
+                    </WithLayout>
+                  }
+                />
+
                 {/* Dynamic Category Pages (data-driven) */}
-                <Route path="/category/csr-education-africa" element={<WithLayout><CSREducationAfrica /></WithLayout>} />
-                <Route path="/category/csr-education-nigeria" element={<WithLayout><CSREducationNigeria /></WithLayout>} />
-                <Route path="/category/edutech-africa" element={<WithLayout><EduTechAfrica /></WithLayout>} />
-                <Route path="/category/media-advocacy-nigeria" element={<WithLayout><MediaAdvocacyNigeria /></WithLayout>} />
-                <Route path="/category/ngo-education-nigeria" element={<WithLayout><NGOEducationNigeria /></WithLayout>} />
-                <Route path="/category/ngo-education-africa" element={<WithLayout><NGOEducationAfrica /></WithLayout>} />
-                <Route path="/category/stem-education-africa" element={<WithLayout><STEMEducationAfrica /></WithLayout>} />
-                <Route path="/category/creative-arts-nigeria" element={<WithLayout><CreativeArtsNigeria /></WithLayout>} />
-                <Route path="/category/education-friendly-state-nigeria" element={<WithLayout><EducationFriendlyStateNigeria /></WithLayout>} />
-                <Route path="/category/library-nigeria" element={<WithLayout><LibraryNigeria /></WithLayout>} />
-                <Route path="/category/research-development-nigeria" element={<WithLayout><ResearchDevelopmentNigeria /></WithLayout>} />
-                <Route path="/category/christian-education-africa" element={<WithLayout><ChristianEducationAfrica /></WithLayout>} />
-                <Route path="/category/islamic-education-africa" element={<WithLayout><IslamicEducationAfrica /></WithLayout>} />
-                <Route path="/category/political-leaders-nigeria" element={<WithLayout><PoliticalLeadersNigeria /></WithLayout>} />
-                <Route path="/category/international-education" element={<WithLayout><InternationalEducation /></WithLayout>} />
-                <Route path="/category/diaspora-education" element={<WithLayout><DiasporaEducation /></WithLayout>} />
-                <Route path="/category/africa-education-icon" element={<WithLayout><AfricaEducationIcon /></WithLayout>} />
-                
+                <Route
+                  path="/category/csr-education-africa"
+                  element={
+                    <WithLayout>
+                      <CSREducationAfrica />
+                    </WithLayout>
+                  }
+                />
+                <Route
+                  path="/category/csr-education-nigeria"
+                  element={
+                    <WithLayout>
+                      <CSREducationNigeria />
+                    </WithLayout>
+                  }
+                />
+                <Route
+                  path="/category/edutech-africa"
+                  element={
+                    <WithLayout>
+                      <EduTechAfrica />
+                    </WithLayout>
+                  }
+                />
+                <Route
+                  path="/category/media-advocacy-nigeria"
+                  element={
+                    <WithLayout>
+                      <MediaAdvocacyNigeria />
+                    </WithLayout>
+                  }
+                />
+                <Route
+                  path="/category/ngo-education-nigeria"
+                  element={
+                    <WithLayout>
+                      <NGOEducationNigeria />
+                    </WithLayout>
+                  }
+                />
+                <Route
+                  path="/category/ngo-education-africa"
+                  element={
+                    <WithLayout>
+                      <NGOEducationAfrica />
+                    </WithLayout>
+                  }
+                />
+                <Route
+                  path="/category/stem-education-africa"
+                  element={
+                    <WithLayout>
+                      <STEMEducationAfrica />
+                    </WithLayout>
+                  }
+                />
+                <Route
+                  path="/category/creative-arts-nigeria"
+                  element={
+                    <WithLayout>
+                      <CreativeArtsNigeria />
+                    </WithLayout>
+                  }
+                />
+                <Route
+                  path="/category/education-friendly-state-nigeria"
+                  element={
+                    <WithLayout>
+                      <EducationFriendlyStateNigeria />
+                    </WithLayout>
+                  }
+                />
+                <Route
+                  path="/category/library-nigeria"
+                  element={
+                    <WithLayout>
+                      <LibraryNigeria />
+                    </WithLayout>
+                  }
+                />
+                <Route
+                  path="/category/research-development-nigeria"
+                  element={
+                    <WithLayout>
+                      <ResearchDevelopmentNigeria />
+                    </WithLayout>
+                  }
+                />
+                <Route
+                  path="/category/christian-education-africa"
+                  element={
+                    <WithLayout>
+                      <ChristianEducationAfrica />
+                    </WithLayout>
+                  }
+                />
+                <Route
+                  path="/category/islamic-education-africa"
+                  element={
+                    <WithLayout>
+                      <IslamicEducationAfrica />
+                    </WithLayout>
+                  }
+                />
+                <Route
+                  path="/category/political-leaders-nigeria"
+                  element={
+                    <WithLayout>
+                      <PoliticalLeadersNigeria />
+                    </WithLayout>
+                  }
+                />
+                <Route
+                  path="/category/international-education"
+                  element={
+                    <WithLayout>
+                      <InternationalEducation />
+                    </WithLayout>
+                  }
+                />
+                <Route
+                  path="/category/diaspora-education"
+                  element={
+                    <WithLayout>
+                      <DiasporaEducation />
+                    </WithLayout>
+                  }
+                />
+                <Route
+                  path="/category/africa-education-icon"
+                  element={
+                    <WithLayout>
+                      <AfricaEducationIcon />
+                    </WithLayout>
+                  }
+                />
+
                 {/* Nominee Response Routes */}
-                <Route path="/nominee/accept/:token" element={<NomineeAccept />} />
-                <Route path="/nominee/decline/:token" element={<NomineeDecline />} />
-                <Route path="/nominee/dashboard/:token" element={<NomineeDashboard />} />
-                
+                <Route
+                  path="/nomination/accept"
+                  element={
+                    <NomineeAcceptanceProtectedRoute>
+                      <NomineeAccept />
+                    </NomineeAcceptanceProtectedRoute>
+                  }
+                />
+                <Route
+                  path="/nominee/decline/:token"
+                  element={<NomineeDecline />}
+                />
+                <Route
+                  path="/nominee/dashboard/:token"
+                  element={<NomineeDashboard />}
+                />
+
                 {/* Media */}
-                <Route path="/media" element={<WithLayout><MediaHub /></WithLayout>} />
-                <Route path="/media/tv" element={<WithLayout><NESATV /></WithLayout>} />
-                <Route path="/media/shows" element={<WithLayout><Shows /></WithLayout>} />
-                <Route path="/media/webinars" element={<WithLayout><Webinars /></WithLayout>} />
-                <Route path="/media/gala" element={<WithLayout><Gala /></WithLayout>} />
-                <Route path="/tickets" element={<WithLayout><Tickets /></WithLayout>} />
-                <Route path="/buy-your-ticket" element={<WithLayout><BuyYourTicket /></WithLayout>} />
-                
+                <Route
+                  path="/media"
+                  element={
+                    <WithLayout>
+                      <MediaHub />
+                    </WithLayout>
+                  }
+                />
+                <Route
+                  path="/media/tv"
+                  element={
+                    <WithLayout>
+                      <NESATV />
+                    </WithLayout>
+                  }
+                />
+                <Route
+                  path="/media/shows"
+                  element={
+                    <WithLayout>
+                      <Shows />
+                    </WithLayout>
+                  }
+                />
+                <Route
+                  path="/media/webinars"
+                  element={
+                    <WithLayout>
+                      <Webinars />
+                    </WithLayout>
+                  }
+                />
+                <Route
+                  path="/media/gala"
+                  element={
+                    <WithLayout>
+                      <Gala />
+                    </WithLayout>
+                  }
+                />
+                <Route
+                  path="/tickets"
+                  element={
+                    <WithLayout>
+                      <Tickets />
+                    </WithLayout>
+                  }
+                />
+                <Route
+                  path="/buy-your-ticket"
+                  element={
+                    <WithLayout>
+                      <BuyYourTicket />
+                    </WithLayout>
+                  }
+                />
+
                 {/* Shop / Merchandise - specific routes before dynamic :slug */}
-                <Route path="/shop" element={<WithLayout><Shop /></WithLayout>} />
-                <Route path="/shop/cart" element={<WithLayout><Cart /></WithLayout>} />
-                <Route path="/shop/checkout" element={<WithLayout><Checkout /></WithLayout>} />
-                <Route path="/shop/bulk-orders" element={<WithLayout><BulkOrders /></WithLayout>} />
-                <Route path="/shop/orders/:id" element={<WithLayout><OrderConfirmation /></WithLayout>} />
-                <Route path="/shop/:slug" element={<WithLayout><ProductDetail /></WithLayout>} />
-                
+                <Route
+                  path="/shop"
+                  element={
+                    <WithLayout>
+                      <Shop />
+                    </WithLayout>
+                  }
+                />
+                <Route
+                  path="/shop/cart"
+                  element={
+                    <WithLayout>
+                      <Cart />
+                    </WithLayout>
+                  }
+                />
+                <Route
+                  path="/shop/checkout"
+                  element={
+                    <WithLayout>
+                      <Checkout />
+                    </WithLayout>
+                  }
+                />
+                <Route
+                  path="/shop/bulk-orders"
+                  element={
+                    <WithLayout>
+                      <BulkOrders />
+                    </WithLayout>
+                  }
+                />
+                <Route
+                  path="/shop/orders/:id"
+                  element={
+                    <WithLayout>
+                      <OrderConfirmation />
+                    </WithLayout>
+                  }
+                />
+                <Route
+                  path="/shop/:slug"
+                  element={
+                    <WithLayout>
+                      <ProductDetail />
+                    </WithLayout>
+                  }
+                />
+
                 {/* Shop route aliases - redirect old/guessed URLs to /shop */}
-                <Route path="/merchandise" element={<WithLayout><Shop /></WithLayout>} />
-                <Route path="/merch" element={<WithLayout><Shop /></WithLayout>} />
-                <Route path="/store" element={<WithLayout><Shop /></WithLayout>} />
-                <Route path="/buy-merchandise" element={<WithLayout><Shop /></WithLayout>} />
-                <Route path="/shop-now" element={<WithLayout><Shop /></WithLayout>} />
-                
+                <Route
+                  path="/merchandise"
+                  element={
+                    <WithLayout>
+                      <Shop />
+                    </WithLayout>
+                  }
+                />
+                <Route
+                  path="/merch"
+                  element={
+                    <WithLayout>
+                      <Shop />
+                    </WithLayout>
+                  }
+                />
+                <Route
+                  path="/store"
+                  element={
+                    <WithLayout>
+                      <Shop />
+                    </WithLayout>
+                  }
+                />
+                <Route
+                  path="/buy-merchandise"
+                  element={
+                    <WithLayout>
+                      <Shop />
+                    </WithLayout>
+                  }
+                />
+                <Route
+                  path="/shop-now"
+                  element={
+                    <WithLayout>
+                      <Shop />
+                    </WithLayout>
+                  }
+                />
+
                 {/* Cart, Checkout, and Orders route aliases */}
-                <Route path="/cart" element={<WithLayout><Cart /></WithLayout>} />
-                <Route path="/checkout" element={<WithLayout><Checkout /></WithLayout>} />
-                <Route path="/orders/:id" element={<WithLayout><OrderConfirmation /></WithLayout>} />
-                <Route path="/bulk-orders" element={<WithLayout><BulkOrders /></WithLayout>} />
-                
+                <Route
+                  path="/cart"
+                  element={
+                    <WithLayout>
+                      <Cart />
+                    </WithLayout>
+                  }
+                />
+                <Route
+                  path="/checkout"
+                  element={
+                    <WithLayout>
+                      <Checkout />
+                    </WithLayout>
+                  }
+                />
+                <Route
+                  path="/orders/:id"
+                  element={
+                    <WithLayout>
+                      <OrderConfirmation />
+                    </WithLayout>
+                  }
+                />
+                <Route
+                  path="/bulk-orders"
+                  element={
+                    <WithLayout>
+                      <BulkOrders />
+                    </WithLayout>
+                  }
+                />
+
                 {/* Auth - minimal layout */}
-                <Route path="/login" element={<WithLayout showFooter={false}><Login /></WithLayout>} />
-                <Route path="/register" element={<WithLayout showFooter={false}><Register /></WithLayout>} />
+                <Route
+                  path="/login"
+                  element={
+                    <WithLayout showFooter={false}>
+                      <Login />
+                    </WithLayout>
+                  }
+                />
+                <Route
+                  path="/nominee-register"
+                  element={
+                    <WithLayout>
+                      <NomineeRegister />
+                    </WithLayout>
+                  }
+                />
+                <Route
+                  path="/register"
+                  element={
+                    <WithLayout showFooter={false}>
+                      <Register />
+                    </WithLayout>
+                  }
+                />
                 <Route path="/otp" element={<OTPVerification />} />
                 <Route path="/account/otp" element={<OTPVerification />} />
-                <Route path="/account/login" element={<WithLayout showFooter={false}><Login /></WithLayout>} />
-                
+                <Route
+                  path="/account/login"
+                  element={
+                    <WithLayout showFooter={false}>
+                      <Login />
+                    </WithLayout>
+                  }
+                />
+                <Route
+                  path="/forgot-password"
+                  element={
+                    <WithLayout showFooter={false}>
+                      <ForgotPassword />
+                    </WithLayout>
+                  }
+                ></Route>
+                <Route
+                  path="/reset-password"
+                  element={
+                    <WithLayout showFooter={false}>
+                      <ResetPassword />
+                    </WithLayout>
+                  }
+                ></Route>
+
                 {/* User Actions */}
-                <Route path="/nominate" element={<WithLayout><Nominate /></WithLayout>} />
-                <Route path="/nominees" element={<WithLayout><Nominees /></WithLayout>} />
-                <Route path="/nominees/:slug" element={<WithLayout><NomineeProfile /></WithLayout>} />
-                <Route path="/vote" element={<WithLayout><Vote /></WithLayout>} />
-                <Route path="/vote-with-agc" element={<WithLayout><VoteWithAGC /></WithLayout>} />
-                <Route path="/vote/gold" element={<WithLayout><GoldVoting /></WithLayout>} />
-                <Route path="/vote/blue-garnet" element={<WithLayout><BlueGarnetVoting /></WithLayout>} />
-                <Route path="/about-agc" element={<WithLayout><AboutAGC /></WithLayout>} />
-                <Route path="/earn-voting-credits" element={<WithLayout><EarnVotingCredits /></WithLayout>} />
-                <Route path="/claim-voting-credits" element={<WithLayout><ClaimVotingCredits /></WithLayout>} />
-                <Route path="/gfawzip" element={<WithLayout><GFAWzipWallet /></WithLayout>} />
-                <Route path="/gfawzip/links" element={<WithLayout><GFAWzipLinks /></WithLayout>} />
-                <Route path="/wallet/gfawzip" element={<WithLayout><GFAWzipWallet /></WithLayout>} />
-                <Route path="/payments/gfawzip" element={<WithLayout><GFAWzipWallet /></WithLayout>} />
-                <Route path="/getfinance" element={<WithLayout><GFAWzipWallet /></WithLayout>} />
-                <Route path="/gfawzip-wallet" element={<WithLayout><GFAWzipWallet /></WithLayout>} />
-                <Route path="/links" element={<WithLayout><GFAWzipLinks /></WithLayout>} />
-                <Route path="/wallet" element={<WithLayout><Wallet /></WithLayout>} />
+                <Route
+                  path="/nominate"
+                  element={
+                    <WithLayout>
+                      <Nominate />
+                    </WithLayout>
+                  }
+                />
+                <Route
+                  path="/nominees"
+                  element={
+                    <WithLayout>
+                      <Nominees />
+                    </WithLayout>
+                  }
+                />
+                <Route
+                  path="/nominees/:slug"
+                  element={
+                    <WithLayout>
+                      <NomineeProfile />
+                    </WithLayout>
+                  }
+                />
+                <Route
+                  path="/vote"
+                  element={
+                    <WithLayout>
+                      <Vote />
+                    </WithLayout>
+                  }
+                />
+                <Route
+                  path="/vote-with-agc"
+                  element={
+                    <WithLayout>
+                      <VoteWithAGC />
+                    </WithLayout>
+                  }
+                />
+                <Route
+                  path="/vote/gold"
+                  element={
+                    <WithLayout>
+                      <GoldVoting />
+                    </WithLayout>
+                  }
+                />
+                <Route
+                  path="/vote/blue-garnet"
+                  element={
+                    <WithLayout>
+                      <BlueGarnetVoting />
+                    </WithLayout>
+                  }
+                />
+                <Route
+                  path="/about-agc"
+                  element={
+                    <WithLayout>
+                      <AboutAGC />
+                    </WithLayout>
+                  }
+                />
+                <Route
+                  path="/earn-voting-credits"
+                  element={
+                    <WithLayout>
+                      <EarnVotingCredits />
+                    </WithLayout>
+                  }
+                />
+                <Route
+                  path="/claim-voting-credits"
+                  element={
+                    <WithLayout>
+                      <ClaimVotingCredits />
+                    </WithLayout>
+                  }
+                />
+                <Route
+                  path="/gfawzip"
+                  element={
+                    <WithLayout>
+                      <GFAWzipWallet />
+                    </WithLayout>
+                  }
+                />
+                <Route
+                  path="/gfawzip/links"
+                  element={
+                    <WithLayout>
+                      <GFAWzipLinks />
+                    </WithLayout>
+                  }
+                />
+                <Route
+                  path="/wallet/gfawzip"
+                  element={
+                    <WithLayout>
+                      <GFAWzipWallet />
+                    </WithLayout>
+                  }
+                />
+                <Route
+                  path="/payments/gfawzip"
+                  element={
+                    <WithLayout>
+                      <GFAWzipWallet />
+                    </WithLayout>
+                  }
+                />
+                <Route
+                  path="/getfinance"
+                  element={
+                    <WithLayout>
+                      <GFAWzipWallet />
+                    </WithLayout>
+                  }
+                />
+                <Route
+                  path="/gfawzip-wallet"
+                  element={
+                    <WithLayout>
+                      <GFAWzipWallet />
+                    </WithLayout>
+                  }
+                />
+                <Route
+                  path="/links"
+                  element={
+                    <WithLayout>
+                      <GFAWzipLinks />
+                    </WithLayout>
+                  }
+                />
+                <Route
+                  path="/wallet"
+                  element={
+                    <WithLayout>
+                      <Wallet />
+                    </WithLayout>
+                  }
+                />
                 <Route path="/sponsors/:slug" element={<SponsorLanding />} />
-                <Route path="/results" element={<WithLayout><Results /></WithLayout>} />
-                
+                <Route
+                  path="/results"
+                  element={
+                    <WithLayout>
+                      <Results />
+                    </WithLayout>
+                  }
+                />
+
                 {/* Dashboards - use their own layout */}
                 <Route path="/dashboard" element={<Dashboard />} />
                 <Route path="/dashboard/nominations" element={<Dashboard />} />
-                
+
                 {/* NRC Portal Routes */}
                 <Route path="/nrc" element={<NRCPortal />} />
                 <Route path="/nrc/my-queue" element={<NRCMyQueue />} />
-                <Route path="/nrc/members" element={<NRCMembersPage />} />
                 <Route path="/nrc/settings" element={<NRCSettings />} />
-                
+                <Route path="/nrc/team" element={<CreateTeam />} />
+                <Route path="/nrc/manageteam" element={<NRCManageTeam />} />
+                <Route
+                  path="nrc/team/acceptinvite"
+                  element={<AcceptTeamInvitePage />}
+                />
+
                 {/* OLC Coordinator Routes - use their own layout */}
                 <Route path="/olc/dashboard" element={<OLCDashboard />} />
                 <Route path="/olc/members" element={<OLCMembers />} />
                 <Route path="/olc/wallet" element={<OLCWallet />} />
                 <Route path="/olc/settlements" element={<OLCSettlements />} />
-                
+
                 {/* Admin Routes - use their own layout */}
                 <Route path="/admin" element={<AdminDashboard />} />
                 <Route path="/admin/orders" element={<AdminOrders />} />
                 <Route path="/admin/impact" element={<AdminImpact />} />
-                <Route path="/admin/nominee-images" element={<AdminNomineeImages />} />
-                <Route path="/admin/nominee-profiles" element={<AdminNomineeProfiles />} />
-                <Route path="/admin/voting" element={<AdminVotingGovernance />} />
-                
+                <Route
+                  path="/admin/nominee-images"
+                  element={<AdminNomineeImages />}
+                />
+                <Route
+                  path="/admin/nominee-profiles"
+                  element={<AdminNomineeProfiles />}
+                />
+                <Route
+                  path="/admin/voting"
+                  element={<AdminVotingGovernance />}
+                />
+
                 {/* Support */}
-                <Route path="/donate" element={<WithLayout><Donate /></WithLayout>} />
-                <Route path="/eduaid" element={<WithLayout><EduAid /></WithLayout>} />
-                <Route path="/rebuild" element={<WithLayout><Rebuild /></WithLayout>} />
-                <Route path="/judges" element={<WithLayout><Judges /></WithLayout>} />
-                
+                <Route
+                  path="/donate"
+                  element={
+                    <WithLayout>
+                      <Donate />
+                    </WithLayout>
+                  }
+                />
+                <Route
+                  path="/eduaid"
+                  element={
+                    <WithLayout>
+                      <EduAid />
+                    </WithLayout>
+                  }
+                />
+                <Route
+                  path="/rebuild"
+                  element={
+                    <WithLayout>
+                      <Rebuild />
+                    </WithLayout>
+                  }
+                />
+                <Route
+                  path="/judges"
+                  element={
+                    <WithLayout>
+                      <Judges />
+                    </WithLayout>
+                  }
+                />
+
                 {/* Judge Application Flow (Public) */}
-                <Route path="/judge/apply" element={<WithLayout><JudgeApply /></WithLayout>} />
-                <Route path="/judge/status" element={<WithLayout><JudgeStatus /></WithLayout>} />
+                <Route
+                  path="/judge/apply"
+                  element={
+                    <WithLayout>
+                      <JudgeApply />
+                    </WithLayout>
+                  }
+                />
+                <Route
+                  path="/judge/status"
+                  element={
+                    <WithLayout>
+                      <JudgeStatus />
+                    </WithLayout>
+                  }
+                />
                 <Route path="/judge/signup" element={<JudgeSignup />} />
                 <Route path="/judge/verify" element={<JudgeVerify />} />
-                
+
                 {/* Judge route aliases (legacy/expected URLs) */}
-                <Route path="/judgeapply" element={<WithLayout><JudgeApply /></WithLayout>} />
-                <Route path="/judge-apply" element={<WithLayout><JudgeApply /></WithLayout>} />
-                <Route path="/judge-application-form" element={<WithLayout><JudgeApply /></WithLayout>} />
-                <Route path="/judge-status" element={<WithLayout><JudgeStatus /></WithLayout>} />
+                <Route
+                  path="/judgeapply"
+                  element={
+                    <WithLayout>
+                      <JudgeApply />
+                    </WithLayout>
+                  }
+                />
+                <Route
+                  path="/judge-apply"
+                  element={
+                    <WithLayout>
+                      <JudgeApply />
+                    </WithLayout>
+                  }
+                />
+                <Route
+                  path="/judge-application-form"
+                  element={
+                    <WithLayout>
+                      <JudgeApply />
+                    </WithLayout>
+                  }
+                />
+                <Route
+                  path="/judge-status"
+                  element={
+                    <WithLayout>
+                      <JudgeStatus />
+                    </WithLayout>
+                  }
+                />
                 <Route path="/judge-verify" element={<JudgeVerify />} />
                 <Route path="/judge-signup" element={<JudgeSignup />} />
-                
+
                 {/* Judge Portal Routes (Authenticated + Protected + OTP enforced) */}
-                <Route path="/judge" element={<JudgeArenaGuard><JudgeDashboard /></JudgeArenaGuard>} />
-                <Route path="/judge/dashboard" element={<JudgeArenaGuard><JudgeDashboard /></JudgeArenaGuard>} />
-                <Route path="/judge/scoring" element={<JudgeArenaGuard><JuryScoring /></JudgeArenaGuard>} />
-                <Route path="/judge/coi" element={<JudgeArenaGuard><JuryCOI /></JudgeArenaGuard>} />
-                <Route path="/judge/chat" element={<JudgeArenaGuard><JudgeChatRoom /></JudgeArenaGuard>} />
-                <Route path="/judge/rubric" element={<JudgeArenaGuard><JudgeRubric /></JudgeArenaGuard>} />
-                <Route path="/judge/guidelines" element={<JudgeArenaGuard><JudgeGuidelines /></JudgeArenaGuard>} />
-                <Route path="/judge/panel" element={<JudgeArenaGuard><JudgePanel /></JudgeArenaGuard>} />
-                <Route path="/judge/help" element={<JudgeArenaGuard><JudgeHelp /></JudgeArenaGuard>} />
-                <Route path="/judge/settings" element={<JudgeArenaGuard><JudgeSettings /></JudgeArenaGuard>} />
-                <Route path="/judge/icon-lifetime" element={<JudgeArenaGuard><JudgeIconLifetime /></JudgeArenaGuard>} />
-                <Route path="/partners" element={<WithLayout><Partners /></WithLayout>} />
-                <Route path="/chapters" element={<WithLayout><Chapters /></WithLayout>} />
-                <Route path="/volunteer" element={<WithLayout><Volunteer /></WithLayout>} />
-                <Route path="/ambassadors" element={<WithLayout><Ambassadors /></WithLayout>} />
-                <Route path="/contact" element={<WithLayout><Contact /></WithLayout>} />
-                <Route path="/policies" element={<WithLayout><Policies /></WithLayout>} />
-                
+                <Route
+                  path="/judge"
+                  element={
+                    <JudgeArenaGuard>
+                      <JudgeDashboard />
+                    </JudgeArenaGuard>
+                  }
+                />
+                <Route
+                  path="/judge/dashboard"
+                  element={
+                    <JudgeArenaGuard>
+                      <JudgeDashboard />
+                    </JudgeArenaGuard>
+                  }
+                />
+                <Route
+                  path="/judge/scoring"
+                  element={
+                    <JudgeArenaGuard>
+                      <JuryScoring />
+                    </JudgeArenaGuard>
+                  }
+                />
+                <Route
+                  path="/judge/coi"
+                  element={
+                    <JudgeArenaGuard>
+                      <JuryCOI />
+                    </JudgeArenaGuard>
+                  }
+                />
+                <Route
+                  path="/judge/chat"
+                  element={
+                    <JudgeArenaGuard>
+                      <JudgeChatRoom />
+                    </JudgeArenaGuard>
+                  }
+                />
+                <Route
+                  path="/judge/rubric"
+                  element={
+                    <JudgeArenaGuard>
+                      <JudgeRubric />
+                    </JudgeArenaGuard>
+                  }
+                />
+                <Route
+                  path="/judge/guidelines"
+                  element={
+                    <JudgeArenaGuard>
+                      <JudgeGuidelines />
+                    </JudgeArenaGuard>
+                  }
+                />
+                <Route
+                  path="/judge/panel"
+                  element={
+                    <JudgeArenaGuard>
+                      <JudgePanel />
+                    </JudgeArenaGuard>
+                  }
+                />
+                <Route
+                  path="/judge/help"
+                  element={
+                    <JudgeArenaGuard>
+                      <JudgeHelp />
+                    </JudgeArenaGuard>
+                  }
+                />
+                <Route
+                  path="/judge/settings"
+                  element={
+                    <JudgeArenaGuard>
+                      <JudgeSettings />
+                    </JudgeArenaGuard>
+                  }
+                />
+                <Route
+                  path="/judge/icon-lifetime"
+                  element={
+                    <JudgeArenaGuard>
+                      <JudgeIconLifetime />
+                    </JudgeArenaGuard>
+                  }
+                />
+                <Route
+                  path="/partners"
+                  element={
+                    <WithLayout>
+                      <Partners />
+                    </WithLayout>
+                  }
+                />
+                <Route
+                  path="/chapters"
+                  element={
+                    <WithLayout>
+                      <Chapters />
+                    </WithLayout>
+                  }
+                />
+                <Route
+                  path="/volunteer"
+                  element={
+                    <WithLayout>
+                      <Volunteer />
+                    </WithLayout>
+                  }
+                />
+                <Route
+                  path="/ambassadors"
+                  element={
+                    <WithLayout>
+                      <Ambassadors />
+                    </WithLayout>
+                  }
+                />
+                <Route
+                  path="/contact"
+                  element={
+                    <WithLayout>
+                      <Contact />
+                    </WithLayout>
+                  }
+                />
+                <Route
+                  path="/policies"
+                  element={
+                    <WithLayout>
+                      <Policies />
+                    </WithLayout>
+                  }
+                />
+
                 {/* Get Involved - Endorse NESA */}
-                <Route path="/get-involved/endorse-nesa-africa" element={<WithLayout><EndorseNESA /></WithLayout>} />
-                <Route path="/endorse" element={<WithLayout><EndorseNESA /></WithLayout>} />
-                <Route path="/endorse-nesa" element={<WithLayout><EndorseNESA /></WithLayout>} />
-                
+                <Route
+                  path="/get-involved/endorse-nesa-africa"
+                  element={
+                    <WithLayout>
+                      <EndorseNESA />
+                    </WithLayout>
+                  }
+                />
+                <Route
+                  path="/endorse"
+                  element={
+                    <WithLayout>
+                      <EndorseNESA />
+                    </WithLayout>
+                  }
+                />
+                <Route
+                  path="/endorse-nesa"
+                  element={
+                    <WithLayout>
+                      <EndorseNESA />
+                    </WithLayout>
+                  }
+                />
+
                 {/* Utility */}
-                <Route path="/unauthorized" element={<WithLayout><Unauthorized /></WithLayout>} />
-                <Route path="*" element={<WithLayout><NotFound /></WithLayout>} />
+                <Route
+                  path="/unauthorized"
+                  element={
+                    <WithLayout>
+                      <Unauthorized />
+                    </WithLayout>
+                  }
+                />
+                <Route
+                  path="*"
+                  element={
+                    <WithLayout>
+                      <NotFound />
+                    </WithLayout>
+                  }
+                />
               </Routes>
             </BrowserRouter>
           </SeasonProvider>

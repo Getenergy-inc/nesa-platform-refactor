@@ -31,7 +31,8 @@ function NRCPortalContent() {
     return myQueue.filter((item) => {
       if (!item.due_date) return false;
       const dueDate = new Date(item.due_date);
-      const hoursUntilDue = (dueDate.getTime() - now.getTime()) / (1000 * 60 * 60);
+      const hoursUntilDue =
+        (dueDate.getTime() - now.getTime()) / (1000 * 60 * 60);
       return hoursUntilDue < 48;
     });
   }, [myQueue]);
@@ -58,7 +59,8 @@ function NRCPortalContent() {
               </div>
               <div className="flex-1">
                 <p className="font-medium">
-                  {urgentItems.length} nomination{urgentItems.length > 1 ? "s" : ""} due within 48 hours
+                  {urgentItems.length} nomination
+                  {urgentItems.length > 1 ? "s" : ""} due within 48 hours
                 </p>
                 <p className="text-sm text-muted-foreground">
                   Review these nominations before the deadline
@@ -120,9 +122,7 @@ function NRCPortalContent() {
               <div className="text-2xl font-bold">
                 {stats?.total_queue_items || 0}
               </div>
-              <p className="text-xs text-muted-foreground">
-                awaiting review
-              </p>
+              <p className="text-xs text-muted-foreground">awaiting review</p>
             </CardContent>
           </Card>
 
@@ -176,7 +176,8 @@ function NRCPortalContent() {
                           {item.nomination?.nominee_name || "Unknown"}
                         </p>
                         <p className="text-xs text-muted-foreground">
-                          {item.nomination?.subcategory?.category?.name || "Unknown Category"}
+                          {item.nomination?.subcategory?.category?.name ||
+                            "Unknown Category"}
                         </p>
                       </div>
                       <Badge
@@ -254,7 +255,7 @@ function NRCPortalContent() {
 
 export default function NRCPortal() {
   return (
-    <ProtectedRoute requiredRoles={["nrc", "admin"]}>
+    <ProtectedRoute requiredRoles={["nrc", "admin", "FREE_MEMBER"]}>
       <NRCPortalContent />
     </ProtectedRoute>
   );

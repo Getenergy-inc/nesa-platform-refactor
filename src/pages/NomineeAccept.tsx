@@ -1,30 +1,51 @@
 import { useState, useEffect } from "react";
-import { useParams, Link } from "react-router-dom";
-import { acceptNomination, getAcceptanceDetails, AcceptanceDetails } from "@/api/nominations";
+import {
+  useParams,
+  Link,
+  useLocation,
+  useSearchParams,
+  useNavigate,
+} from "react-router-dom";
+import {
+  acceptNomination,
+  getAcceptanceDetails,
+  AcceptanceDetails,
+} from "@/api/nominations";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
 import { toast } from "sonner";
-import { CheckCircle, Loader2, AlertCircle, Clock, XCircle } from "lucide-react";
+import {
+  CheckCircle,
+  Loader2,
+  AlertCircle,
+  Clock,
+  XCircle,
+} from "lucide-react";
 import {
   AcceptanceLetterHeader,
   AcceptanceCategoriesList,
   AcceptanceNextSteps,
   AcceptanceSuccessCard,
 } from "@/components/acceptance";
+import { nominationApi } from "@/api/nomination";
+import { useAuth } from "@/contexts/AuthContext";
 
 export default function NomineeAccept() {
-  const { token } = useParams<{ token: string }>();
   const [loading, setLoading] = useState(true);
   const [submitting, setSubmitting] = useState(false);
   const [accepted, setAccepted] = useState(false);
   const [nominee, setNominee] = useState<AcceptanceDetails | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const { accessToken } = useAuth();
   const [result, setResult] = useState<{
     certificate_download_locked?: boolean;
     renominations_needed?: number;
   } | null>(null);
-
+  const [searchParams] = useSearchParams();
+  const token = searchParams.get("token");
+  const nominationId = searchParams.get("nominationId");
+  const navigate = useNavigate();
   useEffect(() => {
     async function loadDetails() {
       if (!token) {
@@ -34,22 +55,45 @@ export default function NomineeAccept() {
       }
 
       try {
-        const response = await getAcceptanceDetails(token);
-        setNominee(response.data);
+        //fetch nomination details
+        const data = await nominationApi.fetchNominationDetails(
+          accessToken,
+          nominationId,
+        );
+        const is_expired =
+          new Date(data.nominationLinkExpiresAt).getTime() < Date.now();
+        const acceptanceDetails: AcceptanceDetails = {
+          id: data.id,
+          name: data.fullName,
+          photo_url: data.profileImage,
+          country: data.country,
+          acceptance_status: data.accepted,
+          renomination_count: data.renominationCount,
+          is_expired,
+          categories: [
+            {
+              category: data.category.title,
+              subcategory: data.subCategory.title,
+            },
+          ],
+        };
+        setNominee(acceptanceDetails);
 
         // Check if already responded
-        if (response.data.acceptance_status === "ACCEPTED") {
+        if (data.accepted === "ACCEPTED") {
           setAccepted(true);
           setResult({
-            certificate_download_locked: response.data.renomination_count < 200,
-            renominations_needed: Math.max(0, 200 - response.data.renomination_count),
+            certificate_download_locked: data.renominationCount < 200,
+            renominations_needed: Math.max(0, 200 - data.renominationCount),
           });
-        } else if (response.data.acceptance_status === "DECLINED") {
+        } else if (data.accepted === "REJECTED") {
           setError("This nomination has already been declined.");
         }
-      } catch (err: any) {
+      } catch (err) {
         if (err.message?.includes("expired")) {
-          setError("This acceptance link has expired. Please contact support for a new link.");
+          setError(
+            "This acceptance link has expired. Please contact support for a new link.",
+          );
         } else {
           setError(err.message || "Failed to load nomination details");
         }
@@ -59,7 +103,7 @@ export default function NomineeAccept() {
     }
 
     loadDetails();
-  }, [token]);
+  }, [token, accessToken, nominationId]);
 
   const handleAccept = async () => {
     if (!token) {
@@ -69,11 +113,13 @@ export default function NomineeAccept() {
 
     setSubmitting(true);
     try {
-      const response = await acceptNomination(token);
-      setResult(response.data);
+      await nominationApi.acceptNomination(accessToken, nominationId);
       setAccepted(true);
       toast.success("Nomination accepted successfully!");
-    } catch (error: any) {
+      setTimeout(() => {
+        navigate(`/nominee/dashboard/${token}`);
+      }, 500);
+    } catch (error) {
       toast.error(error.message || "Failed to accept nomination");
     } finally {
       setSubmitting(false);
@@ -182,9 +228,12 @@ export default function NomineeAccept() {
           {nominee.primary_justification && (
             <div className="bg-muted/30 rounded-lg p-4 border-l-4 border-primary">
               <p className="text-sm text-muted-foreground mb-1">
-                This nomination recognizes your outstanding contributions to education through:
+                This nomination recognizes your outstanding contributions to
+                education through:
               </p>
-              <p className="text-foreground italic">"{nominee.primary_justification}"</p>
+              <p className="text-foreground italic">
+                "{nominee.primary_justification}"
+              </p>
             </div>
           )}
 
@@ -205,8 +254,13 @@ export default function NomineeAccept() {
             </Button>
 
             <div className="text-center">
-              <Button variant="ghost" size="sm" asChild className="text-muted-foreground">
-                <Link to={`/nominee/decline/${token}`}>
+              <Button
+                variant="ghost"
+                size="sm"
+                asChild
+                className="text-muted-foreground"
+              >
+                <Link to={`/nominee/decline/${token}_${nominationId}`}>
                   I'd like to decline this nomination
                 </Link>
               </Button>
@@ -216,11 +270,15 @@ export default function NomineeAccept() {
           {/* Closing */}
           <div className="text-center text-sm text-muted-foreground pt-4 border-t space-y-2">
             <p>
-              We are honored to have you join Africa's largest educational recognition movement.
+              We are honored to have you join Africa's largest educational
+              recognition movement.
             </p>
             <p className="text-xs">
               Questions? Contact us at{" "}
-              <a href="mailto:nominees@nesa.africa" className="text-primary hover:underline">
+              <a
+                href="mailto:nominees@nesa.africa"
+                className="text-primary hover:underline"
+              >
                 nominees@nesa.africa
               </a>
             </p>

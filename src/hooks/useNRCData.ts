@@ -2,98 +2,127 @@ import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/contexts/AuthContext";
 import type { NRCMember, NRCQueueItem, NRCStats } from "@/types/nrc";
+import { NominationQueueResponse, nrcApi } from "@/api/newnrc";
+import { check } from "zod";
 
 // Fetch NRC members with profile data
 export function useNRCMembers() {
+  const { accessToken } = useAuth();
   return useQuery({
     queryKey: ["nrc-members"],
     queryFn: async (): Promise<NRCMember[]> => {
-      // First get NRC members
-      const { data: members, error } = await supabase
-        .from("nrc_members")
-        .select("*")
-        .order("created_at", { ascending: false });
+      // const profilesMap = new Map(profiles?.map((p) => [p.user_id, p]) || []);
+      const res = await nrcApi.fetchNonTeamVolunteers(accessToken);
+      const members = res.flatMap((vol) => {
+        const status = vol.status.toLowerCase() as
+          | "pending"
+          | "active"
+          | "suspended"
+          | "removed";
+        const volunteers: NRCMember = {
+          id: vol.id,
+          user_id: vol.user.id,
+          invited_by: null,
+          assigned_region: null,
+          joined_at: vol.approvedAt,
+          max_queue_size: null,
+          status,
+          profile: {
+            full_name: `${vol.user.firstName} ${vol.user.lastName}`,
+            email: vol.user.email,
+            avatar_url: vol.user.profilePic,
+          },
+        };
+        return volunteers;
+      });
 
-      if (error) throw error;
-      if (!members || members.length === 0) return [];
-
-      // Then get profiles for these members
-      const userIds = members.map(m => m.user_id);
-      const { data: profiles } = await supabase
-        .from("profiles")
-        .select("user_id, full_name, email, avatar_url")
-        .in("user_id", userIds);
-
-      const profilesMap = new Map(
-        profiles?.map(p => [p.user_id, p]) || []
-      );
-      
-      return members.map((member) => ({
-        ...member,
-        status: member.status as NRCMember["status"],
-        profile: profilesMap.get(member.user_id) || undefined,
-      }));
+      // return members.map((member) => ({
+      //   ...member,
+      //   status: member.status as NRCMember["status"],
+      //   profile: profilesMap.get(member.user_id) || undefined,
+      // }));
+      return members;
     },
   });
 }
 
 // Fetch current user's queue
 export function useMyQueue() {
-  const { user } = useAuth();
-
+  const { user, accessToken } = useAuth();
   return useQuery({
     queryKey: ["nrc-my-queue", user?.id],
     queryFn: async (): Promise<NRCQueueItem[]> => {
       if (!user) return [];
+      try {
+        const res = await nrcApi.fetchQueue(accessToken);
+        const data: NRCQueueItem[] = res.map((q) => {
+          const queue = q.nomination.nominationQueues[0];
 
-      const { data, error } = await supabase
-        .from("nrc_queue")
-        .select(`
-          *,
-          nominations (
-            id,
-            nominee_name,
-            nominee_title,
-            nominee_organization,
-            nominee_bio,
-            nominee_photo_url,
-            evidence_urls,
-            justification,
-            status,
-            created_at,
-            subcategories (
-              id,
-              name,
-              categories (
-                id,
-                name,
-                slug
-              )
-            )
-          )
-        `)
-        .eq("assigned_to", user.id)
-        .in("status", ["assigned", "in_review"])
-        .order("priority", { ascending: false })
-        .order("due_date", { ascending: true });
+          const queueStatus = queue.status.toLocaleLowerCase() as
+            | "assigned"
+            | "in_review"
+            | "completed"
+            | "reassigned";
+          console.log("the queue status", q);
+          const queueItem: NRCQueueItem = {
+            id: queue.id,
+            assigned_by: null,
+            assigned_to: user.fullName,
+            nomination_id: q.nomination.id,
+            status: queueStatus,
+            priority: queue.priority,
+            due_date: queue.dueDate,
+            completed_at: null,
+            started_at: queue.createdAt,
+            notes: queue.notes,
+            created_at: queue.createdAt,
+            updated_at: queue.updatedAt,
+            nomination: {
+              id: q.nomination.id,
+              nominee_title: null,
+              nominee_bio: null,
+              nominee_organization: null,
+              nominee_name: q.nomination.fullName,
+              nominee_photo_url: q.nomination.profileImage,
+              created_at: q.nomination.createdAt,
+              evidence_urls: q.nomination.evidenceUrl,
+              subcategory: {
+                id: q.nomination.subCategory.id,
+                name: q.nomination.subCategory.title,
+                category: {
+                  id: q.nomination.category.id,
+                  name: q.nomination.category.title,
+                  slug: q.nomination.category.description,
+                },
+              },
+            },
+          };
+          console.log("queue item", queueItem);
+          return queueItem;
+        });
+        console.log("check", data);
 
-      if (error) throw error;
-
-      return (data || []).map((item: any) => ({
-        ...item,
-        status: item.status as NRCQueueItem["status"],
-        nomination: item.nominations
-          ? {
-              ...item.nominations,
-              subcategory: item.nominations.subcategories
-                ? {
-                    ...item.nominations.subcategories,
-                    category: item.nominations.subcategories.categories,
-                  }
-                : undefined,
-            }
-          : undefined,
-      }));
+        const check = data.map((item: NRCQueueItem) => {
+          return {
+            ...item,
+            status: item.status as NRCQueueItem["status"],
+            nomination: item.nomination
+              ? {
+                  ...item.nomination,
+                  subcategory: item.nomination.subcategory
+                    ? {
+                        ...item.nomination.subcategory,
+                        category: item.nomination.subcategory.category,
+                      }
+                    : undefined,
+                }
+              : undefined,
+          };
+        });
+        return check;
+      } catch (err) {
+        console.log("the err is this", err);
+      }
     },
     enabled: !!user,
   });
@@ -160,7 +189,7 @@ export function useIsNRCMember() {
 
       if (error) throw error;
       if (!data) return null;
-      
+
       return {
         ...data,
         status: data.status as NRCMember["status"],

@@ -5,15 +5,15 @@ export interface NRCMember {
   user_id: string;
   invited_by: string | null;
   status: "pending" | "active" | "suspended" | "removed";
-  specialization: string[];
+  // specialization: string[];
   assigned_region: string | null;
-  max_queue_size: number;
-  review_count: number;
-  approval_rate: number;
+  max_queue_size: number | null;
+  // review_count: number;
+  // approval_rate: number;
   joined_at: string | null;
-  last_active_at: string | null;
-  created_at: string;
-  updated_at: string;
+  // last_active_at: string | null;
+  // created_at: string;
+  // updated_at: string;
   // Joined profile data
   profile?: {
     full_name: string | null;
@@ -36,7 +36,7 @@ export interface NRCQueueItem {
   created_at: string;
   updated_at: string;
   // Joined nomination data
-  nomination?: {
+  nomination: {
     id: string;
     nominee_name: string;
     nominee_title: string | null;
@@ -44,8 +44,6 @@ export interface NRCQueueItem {
     nominee_bio: string | null;
     nominee_photo_url: string | null;
     evidence_urls: string[] | null;
-    justification: string | null;
-    status: string;
     created_at: string;
     subcategory?: {
       id: string;
@@ -82,7 +80,12 @@ export interface NRCStats {
 export interface NRCDecisionPayload {
   nominationId: string;
   queueItemId: string;
-  decision: "APPROVE" | "REJECT" | "NEEDS_INFO" | "PUSH_RENOMINATION" | "PUSH_VOTING";
+  decision:
+    | "APPROVE"
+    | "REJECT"
+    | "NEEDS_INFO"
+    | "PUSH_RENOMINATION"
+    | "PUSH_VOTING";
   notes?: string;
   targetTier?: "gold" | "blue_garnet" | "platinum";
 }

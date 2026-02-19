@@ -1,8 +1,13 @@
 import { ReactNode, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { 
-  Home, Menu, X, ChevronLeft, ChevronRight, LogOut,
-  type LucideIcon 
+import {
+  Home,
+  Menu,
+  X,
+  ChevronLeft,
+  ChevronRight,
+  LogOut,
+  type LucideIcon,
 } from "lucide-react";
 import { useAuth } from "@/contexts/AuthContext";
 import { Button } from "@/components/ui/button";
@@ -33,7 +38,11 @@ interface SidebarSection {
   roles?: AppRole[];
 }
 
-export function DashboardLayout({ children, title, breadcrumbs }: DashboardLayoutProps) {
+export function DashboardLayout({
+  children,
+  title,
+  breadcrumbs,
+}: DashboardLayoutProps) {
   const [collapsed, setCollapsed] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const { user, roles, signOut, hasRole } = useAuth();
@@ -45,17 +54,37 @@ export function DashboardLayout({ children, title, breadcrumbs }: DashboardLayou
   ];
 
   if (hasRole("nrc") || hasRole("admin")) {
-    sidebarSections.push({ title: "NRC Review", items: NRC_DASHBOARD_NAV, roles: ["nrc", "admin"] });
+    sidebarSections.push({
+      title: "NRC Review",
+      items: NRC_DASHBOARD_NAV,
+      roles: ["nrc", "admin"],
+    });
   }
   if (hasRole("jury") || hasRole("admin")) {
-    sidebarSections.push({ title: "Jury Panel", items: JURY_DASHBOARD_NAV, roles: ["jury", "admin"] });
+    sidebarSections.push({
+      title: "Jury Panel",
+      items: JURY_DASHBOARD_NAV,
+      roles: ["jury", "admin"],
+    });
   }
   if (hasRole("chapter") || hasRole("admin")) {
-    sidebarSections.push({ title: "Chapter", items: CHAPTER_DASHBOARD_NAV, roles: ["chapter", "admin"] });
-    sidebarSections.push({ title: "OLC Coordinator", items: OLC_DASHBOARD_NAV, roles: ["chapter", "admin"] });
+    sidebarSections.push({
+      title: "Chapter",
+      items: CHAPTER_DASHBOARD_NAV,
+      roles: ["chapter", "admin"],
+    });
+    sidebarSections.push({
+      title: "OLC Coordinator",
+      items: OLC_DASHBOARD_NAV,
+      roles: ["chapter", "admin"],
+    });
   }
   if (hasRole("admin")) {
-    sidebarSections.push({ title: "Admin", items: ADMIN_DASHBOARD_NAV, roles: ["admin"] });
+    sidebarSections.push({
+      title: "Admin",
+      items: ADMIN_DASHBOARD_NAV,
+      roles: ["admin"],
+    });
   }
 
   const handleSignOut = async () => {
@@ -66,7 +95,7 @@ export function DashboardLayout({ children, title, breadcrumbs }: DashboardLayou
     <div className="min-h-screen flex w-full bg-background">
       {/* Mobile Overlay */}
       {mobileOpen && (
-        <div 
+        <div
           className="fixed inset-0 bg-black/50 z-40 lg:hidden"
           onClick={() => setMobileOpen(false)}
         />
@@ -77,14 +106,16 @@ export function DashboardLayout({ children, title, breadcrumbs }: DashboardLayou
         className={cn(
           "fixed lg:sticky top-0 left-0 z-50 h-screen bg-card border-r transition-all duration-300 flex flex-col",
           collapsed ? "w-16" : "w-64",
-          mobileOpen ? "translate-x-0" : "-translate-x-full lg:translate-x-0"
+          mobileOpen ? "translate-x-0" : "-translate-x-full lg:translate-x-0",
         )}
       >
         {/* Sidebar Header */}
-        <div className={cn(
-          "flex items-center h-16 px-4 border-b",
-          collapsed ? "justify-center" : "justify-between"
-        )}>
+        <div
+          className={cn(
+            "flex items-center h-16 px-4 border-b",
+            collapsed ? "justify-center" : "justify-between",
+          )}
+        >
           {!collapsed && (
             <Link to="/" className="flex items-center gap-2">
               <NESALogo variant="icon" size="sm" />
@@ -102,7 +133,11 @@ export function DashboardLayout({ children, title, breadcrumbs }: DashboardLayou
             onClick={() => setCollapsed(!collapsed)}
             className={cn("hidden lg:flex", collapsed && "mx-auto")}
           >
-            {collapsed ? <ChevronRight className="h-4 w-4" /> : <ChevronLeft className="h-4 w-4" />}
+            {collapsed ? (
+              <ChevronRight className="h-4 w-4" />
+            ) : (
+              <ChevronLeft className="h-4 w-4" />
+            )}
           </Button>
           <Button
             variant="ghost"
@@ -127,7 +162,7 @@ export function DashboardLayout({ children, title, breadcrumbs }: DashboardLayou
                 {section.items.map((item) => {
                   const Icon = item.icon;
                   const isActive = location.pathname === item.href;
-                  
+
                   return (
                     <NavLink
                       key={item.href}
@@ -135,12 +170,19 @@ export function DashboardLayout({ children, title, breadcrumbs }: DashboardLayou
                       className={cn(
                         "flex items-center gap-3 px-3 py-2 rounded-lg text-sm font-medium transition-colors",
                         "hover:bg-muted/50",
-                        collapsed && "justify-center px-2"
+                        collapsed && "justify-center px-2",
                       )}
                       activeClassName="bg-primary/10 text-primary"
                       onClick={() => setMobileOpen(false)}
                     >
-                      {Icon && <Icon className={cn("h-4 w-4 shrink-0", isActive && "text-primary")} />}
+                      {Icon && (
+                        <Icon
+                          className={cn(
+                            "h-4 w-4 shrink-0",
+                            isActive && "text-primary",
+                          )}
+                        />
+                      )}
                       {!collapsed && <span>{item.label}</span>}
                     </NavLink>
                   );
@@ -157,7 +199,7 @@ export function DashboardLayout({ children, title, breadcrumbs }: DashboardLayou
             onClick={handleSignOut}
             className={cn(
               "w-full justify-start gap-3 text-muted-foreground hover:text-destructive",
-              collapsed && "justify-center px-2"
+              collapsed && "justify-center px-2",
             )}
           >
             <LogOut className="h-4 w-4" />
@@ -200,9 +242,7 @@ export function DashboardLayout({ children, title, breadcrumbs }: DashboardLayou
             </nav>
           )}
 
-          {title && !breadcrumbs && (
-            <h1 className="font-semibold">{title}</h1>
-          )}
+          {title && !breadcrumbs && <h1 className="font-semibold">{title}</h1>}
 
           <div className="ml-auto flex items-center gap-2">
             <span className="text-sm text-muted-foreground hidden sm:inline">
@@ -217,9 +257,7 @@ export function DashboardLayout({ children, title, breadcrumbs }: DashboardLayou
         </header>
 
         {/* Page Content */}
-        <main className="flex-1 p-4 md:p-6 lg:p-8">
-          {children}
-        </main>
+        <main className="flex-1 p-4 md:p-6 lg:p-8">{children}</main>
       </div>
     </div>
   );

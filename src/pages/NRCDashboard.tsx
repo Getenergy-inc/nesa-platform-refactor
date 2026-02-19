@@ -10,7 +10,10 @@ import { toast } from "sonner";
 import { Award, ArrowLeft, RefreshCw } from "lucide-react";
 import { NRCStatsCards } from "@/components/nrc/NRCStatsCards";
 import { NRCFilters } from "@/components/nrc/NRCFilters";
-import { NominationReviewCard, NominationData } from "@/components/nrc/NominationReviewCard";
+import {
+  NominationReviewCard,
+  NominationData,
+} from "@/components/nrc/NominationReviewCard";
 
 interface Category {
   id: string;
@@ -46,7 +49,8 @@ function NRCDashboardContent() {
       // Load nominations with related data
       const { data: nominationsData, error } = await supabase
         .from("nominations")
-        .select(`
+        .select(
+          `
           id,
           nominee_name,
           nominee_title,
@@ -67,7 +71,8 @@ function NRCDashboardContent() {
               name
             )
           )
-        `)
+        `,
+        )
         .order("created_at", { ascending: false });
 
       if (error) {
@@ -78,14 +83,19 @@ function NRCDashboardContent() {
 
       if (nominationsData) {
         // Fetch nominator profiles separately
-        const nominatorIds = [...new Set(nominationsData.map((n) => n.nominator_id))];
+        const nominatorIds = [
+          ...new Set(nominationsData.map((n) => n.nominator_id)),
+        ];
         const { data: profilesData } = await supabase
           .from("profiles")
           .select("user_id, email, full_name")
           .in("user_id", nominatorIds);
 
         const profilesMap = new Map(
-          profilesData?.map((p) => [p.user_id, { email: p.email, full_name: p.full_name }]) || []
+          profilesData?.map((p) => [
+            p.user_id,
+            { email: p.email, full_name: p.full_name },
+          ]) || [],
         );
 
         const mapped = nominationsData.map((n) => ({
@@ -120,7 +130,7 @@ function NRCDashboardContent() {
   const handleStatusChange = async (
     nominationId: string,
     newStatus: "approved" | "rejected" | "platinum" | "under_review",
-    notes?: string
+    notes?: string,
   ) => {
     if (!user) return;
 
@@ -158,8 +168,8 @@ function NRCDashboardContent() {
                 reviewed_at: new Date().toISOString(),
                 review_notes: notes || n.review_notes,
               }
-            : n
-        )
+            : n,
+        ),
       );
 
       const statusLabels = {
@@ -182,7 +192,8 @@ function NRCDashboardContent() {
   const stats = useMemo(() => {
     return {
       pending: nominations.filter((n) => n.status === "pending").length,
-      underReview: nominations.filter((n) => n.status === "under_review").length,
+      underReview: nominations.filter((n) => n.status === "under_review")
+        .length,
       approved: nominations.filter((n) => n.status === "approved").length,
       rejected: nominations.filter((n) => n.status === "rejected").length,
       platinum: nominations.filter((n) => n.status === "platinum").length,
@@ -222,16 +233,21 @@ function NRCDashboardContent() {
 
   // Group by status for tabs
   const pendingNominations = filteredNominations.filter(
-    (n) => n.status === "pending" || n.status === "under_review"
+    (n) => n.status === "pending" || n.status === "under_review",
   );
   const reviewedNominations = filteredNominations.filter(
-    (n) => n.status === "approved" || n.status === "rejected" || n.status === "platinum"
+    (n) =>
+      n.status === "approved" ||
+      n.status === "rejected" ||
+      n.status === "platinum",
   );
 
   if (loading) {
     return (
       <div className="flex min-h-screen items-center justify-center">
-        <div className="animate-pulse text-muted-foreground">Loading NRC Dashboard...</div>
+        <div className="animate-pulse text-muted-foreground">
+          Loading NRC Dashboard...
+        </div>
       </div>
     );
   }
@@ -298,14 +314,18 @@ function NRCDashboardContent() {
             <TabsTrigger value="reviewed">
               Reviewed ({reviewedNominations.length})
             </TabsTrigger>
-            <TabsTrigger value="all">All ({filteredNominations.length})</TabsTrigger>
+            <TabsTrigger value="all">
+              All ({filteredNominations.length})
+            </TabsTrigger>
           </TabsList>
 
           <TabsContent value="pending">
             {pendingNominations.length === 0 ? (
               <div className="rounded-lg border border-dashed p-12 text-center">
                 <Award className="mx-auto mb-4 h-12 w-12 text-muted-foreground" />
-                <h3 className="mb-2 font-display text-xl font-semibold">No Pending Nominations</h3>
+                <h3 className="mb-2 font-display text-xl font-semibold">
+                  No Pending Nominations
+                </h3>
                 <p className="text-muted-foreground">
                   All nominations have been reviewed. Great work!
                 </p>
@@ -328,7 +348,9 @@ function NRCDashboardContent() {
             {reviewedNominations.length === 0 ? (
               <div className="rounded-lg border border-dashed p-12 text-center">
                 <Award className="mx-auto mb-4 h-12 w-12 text-muted-foreground" />
-                <h3 className="mb-2 font-display text-xl font-semibold">No Reviewed Nominations</h3>
+                <h3 className="mb-2 font-display text-xl font-semibold">
+                  No Reviewed Nominations
+                </h3>
                 <p className="text-muted-foreground">
                   Reviewed nominations will appear here.
                 </p>
@@ -351,7 +373,9 @@ function NRCDashboardContent() {
             {filteredNominations.length === 0 ? (
               <div className="rounded-lg border border-dashed p-12 text-center">
                 <Award className="mx-auto mb-4 h-12 w-12 text-muted-foreground" />
-                <h3 className="mb-2 font-display text-xl font-semibold">No Nominations Found</h3>
+                <h3 className="mb-2 font-display text-xl font-semibold">
+                  No Nominations Found
+                </h3>
                 <p className="text-muted-foreground">
                   Try adjusting your search or filters.
                 </p>
@@ -377,7 +401,7 @@ function NRCDashboardContent() {
 
 export default function NRCDashboard() {
   return (
-    <ProtectedRoute requiredRoles={["nrc", "admin"]}>
+    <ProtectedRoute requiredRoles={["nrc", "admin", "FREE_MEMBER"]}>
       <NRCDashboardContent />
     </ProtectedRoute>
   );
