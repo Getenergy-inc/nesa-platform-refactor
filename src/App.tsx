@@ -25,6 +25,8 @@ import Programs from "./pages/Programs";
 import Login from "./pages/auth/Login";
 import Register from "./pages/auth/Register";
 import OTPVerification from "./pages/auth/OTPVerification";
+import ForgotPassword from "./pages/auth/ForgotPassword";
+import ResetPassword from "./pages/auth/ResetPassword";
 import Nominate from "./pages/Nominate";
 import Dashboard from "./pages/Dashboard";
 import Unauthorized from "./pages/Unauthorized";
@@ -245,12 +247,14 @@ const App = () => (
                 <Route path="/orders/:id" element={<WithLayout><OrderConfirmation /></WithLayout>} />
                 <Route path="/bulk-orders" element={<WithLayout><BulkOrders /></WithLayout>} />
                 
-                {/* Auth - minimal layout */}
-                <Route path="/login" element={<WithLayout showFooter={false}><Login /></WithLayout>} />
-                <Route path="/register" element={<WithLayout showFooter={false}><Register /></WithLayout>} />
+                {/* Auth - standalone layout (dark branded) */}
+                <Route path="/login" element={<Login />} />
+                <Route path="/register" element={<Register />} />
+                <Route path="/forgot-password" element={<ForgotPassword />} />
+                <Route path="/reset-password" element={<ResetPassword />} />
                 <Route path="/otp" element={<OTPVerification />} />
                 <Route path="/account/otp" element={<OTPVerification />} />
-                <Route path="/account/login" element={<WithLayout showFooter={false}><Login /></WithLayout>} />
+                <Route path="/account/login" element={<Login />} />
                 
                 {/* User Actions */}
                 <Route path="/nominate" element={<WithLayout><Nominate /></WithLayout>} />
