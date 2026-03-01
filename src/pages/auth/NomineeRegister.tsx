@@ -263,6 +263,7 @@ export default function NomineeRegister() {
         organizationFunctions: [],
         organizationWebsite: "",
         organizationSector: null,
+        nominationId,
       });
 
       // after that autologin

@@ -3,7 +3,20 @@
 
 import { useState, forwardRef } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { ChevronDown, Menu, Globe, User, LogOut, Home, Award, Ticket, Play, Heart, LayoutDashboard, Vote } from "lucide-react";
+import {
+  ChevronDown,
+  Menu,
+  Globe,
+  User,
+  LogOut,
+  Home,
+  Award,
+  Ticket,
+  Play,
+  Heart,
+  LayoutDashboard,
+  Vote,
+} from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   NavigationMenu,
@@ -54,19 +67,24 @@ function DesktopNav({ onOpenCVOMessage }: { onOpenCVOMessage: () => void }) {
                   {item.label}
                 </NavigationMenuTrigger>
                 <NavigationMenuContent>
-                  <ul className={cn(
-                    "grid gap-3 p-4 bg-charcoal border border-gold/20",
-                    item.label === "About" 
-                      ? "w-[420px]" 
-                      : "w-[400px] md:w-[500px] md:grid-cols-2 lg:w-[600px]"
-                  )}>
+                  <ul
+                    className={cn(
+                      "grid gap-3 p-4 bg-charcoal border border-gold/20",
+                      item.label === "About"
+                        ? "w-[420px]"
+                        : "w-[400px] md:w-[500px] md:grid-cols-2 lg:w-[600px]",
+                    )}
+                  >
                     {/* CVO Message Trigger - Only for About menu */}
                     {item.label === "About" && (
                       <li className="col-span-full border-b border-gold/10 pb-3 mb-1">
-                        <CVOMessageTrigger onClick={onOpenCVOMessage} variant="dropdown" />
+                        <CVOMessageTrigger
+                          onClick={onOpenCVOMessage}
+                          variant="dropdown"
+                        />
                       </li>
                     )}
-                    
+
                     {item.children.map((child) => (
                       <li key={child.href}>
                         <NavigationMenuLink asChild>
@@ -75,11 +93,14 @@ function DesktopNav({ onOpenCVOMessage }: { onOpenCVOMessage: () => void }) {
                             className={cn(
                               "block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors",
                               "hover:bg-gold/10 hover:text-gold focus:bg-gold/10 focus:text-gold",
-                              location.pathname === child.href && "bg-gold/10 text-gold"
+                              location.pathname === child.href &&
+                                "bg-gold/10 text-gold",
                             )}
                           >
                             <div className="flex items-center gap-2">
-                              {child.icon && <child.icon className="h-4 w-4 text-gold" />}
+                              {child.icon && (
+                                <child.icon className="h-4 w-4 text-gold" />
+                              )}
                               <span className="text-sm font-medium leading-none text-white">
                                 {child.label}
                               </span>
@@ -107,7 +128,7 @@ function DesktopNav({ onOpenCVOMessage }: { onOpenCVOMessage: () => void }) {
                   className={cn(
                     navigationMenuTriggerStyle(),
                     "bg-transparent text-white/90 hover:text-gold hover:bg-gold/10",
-                    location.pathname === item.href && "text-gold bg-gold/10"
+                    location.pathname === item.href && "text-gold bg-gold/10",
                   )}
                 >
                   {item.icon && <item.icon className="h-4 w-4 mr-2" />}
@@ -134,7 +155,7 @@ function MobileNav({ onOpenCVOMessage }: { onOpenCVOMessage: () => void }) {
 
   const toggleExpanded = (href: string) => {
     setExpandedItems((prev) =>
-      prev.includes(href) ? prev.filter((h) => h !== href) : [...prev, href]
+      prev.includes(href) ? prev.filter((h) => h !== href) : [...prev, href],
     );
   };
 
@@ -159,14 +180,21 @@ function MobileNav({ onOpenCVOMessage }: { onOpenCVOMessage: () => void }) {
           <Menu className="h-6 w-6" />
         </Button>
       </SheetTrigger>
-      <SheetContent side="right" className="w-[320px] sm:w-[350px] bg-charcoal border-l border-gold/20 p-0 overflow-hidden">
+      <SheetContent
+        side="right"
+        className="w-[320px] sm:w-[350px] bg-charcoal border-l border-gold/20 p-0 overflow-hidden"
+      >
         <SheetHeader className="p-4 border-b border-gold/20">
           <SheetTitle className="flex items-center gap-2">
-            <img src={nesaStamp} alt="NESA" className="h-6 w-6 rounded-full object-contain" />
+            <img
+              src={nesaStamp}
+              alt="NESA"
+              className="h-6 w-6 rounded-full object-contain"
+            />
             <span className="text-gold font-display">Menu</span>
           </SheetTitle>
         </SheetHeader>
-        
+
         <nav className="flex flex-col h-[calc(100%-65px)]">
           <div className="flex-1 overflow-y-auto overscroll-contain">
             {/* Quick Action Grid */}
@@ -180,11 +208,15 @@ function MobileNav({ onOpenCVOMessage }: { onOpenCVOMessage: () => void }) {
                     className={cn(
                       "flex flex-col items-center gap-2 p-3 rounded-xl text-center transition-all active:scale-95",
                       "hover:bg-gold/10 hover:text-gold min-h-[72px] touch-manipulation",
-                      location.pathname === item.href ? "bg-gold/10 text-gold" : "text-white/70"
+                      location.pathname === item.href
+                        ? "bg-gold/10 text-gold"
+                        : "text-white/70",
                     )}
                   >
                     {item.icon && <item.icon className="h-5 w-5" />}
-                    <span className="text-xs font-medium leading-tight">{item.label}</span>
+                    <span className="text-xs font-medium leading-tight">
+                      {item.label}
+                    </span>
                   </Link>
                 ))}
               </div>
@@ -193,7 +225,10 @@ function MobileNav({ onOpenCVOMessage }: { onOpenCVOMessage: () => void }) {
             {/* Full Navigation */}
             <div className="py-2">
               {MAIN_NAV.map((item) => (
-                <div key={item.href} className="border-b border-gold/5 last:border-b-0">
+                <div
+                  key={item.href}
+                  className="border-b border-gold/5 last:border-b-0"
+                >
                   {item.children ? (
                     <div>
                       <button
@@ -201,7 +236,9 @@ function MobileNav({ onOpenCVOMessage }: { onOpenCVOMessage: () => void }) {
                         className={cn(
                           "flex items-center justify-between w-full px-4 py-4 text-left transition-colors touch-manipulation",
                           "hover:bg-gold/5 active:bg-gold/10",
-                          expandedItems.includes(item.href) ? "text-gold bg-gold/5" : "text-white/90"
+                          expandedItems.includes(item.href)
+                            ? "text-gold bg-gold/5"
+                            : "text-white/90",
                         )}
                       >
                         <span className="flex items-center gap-3">
@@ -211,22 +248,29 @@ function MobileNav({ onOpenCVOMessage }: { onOpenCVOMessage: () => void }) {
                         <ChevronDown
                           className={cn(
                             "h-5 w-5 transition-transform duration-200",
-                            expandedItems.includes(item.href) && "rotate-180"
+                            expandedItems.includes(item.href) && "rotate-180",
                           )}
                         />
                       </button>
-                      <div className={cn(
-                        "overflow-hidden transition-all duration-200",
-                        expandedItems.includes(item.href) ? "max-h-[500px]" : "max-h-0"
-                      )}>
+                      <div
+                        className={cn(
+                          "overflow-hidden transition-all duration-200",
+                          expandedItems.includes(item.href)
+                            ? "max-h-[500px]"
+                            : "max-h-0",
+                        )}
+                      >
                         <div className="bg-charcoal-light/30 py-2">
                           {/* CVO Message for About menu in mobile */}
                           {item.label === "About" && (
                             <div className="px-4 py-3 border-b border-gold/10 mb-1">
-                              <CVOMessageTrigger onClick={handleCVOClick} variant="dropdown" />
+                              <CVOMessageTrigger
+                                onClick={handleCVOClick}
+                                variant="dropdown"
+                              />
                             </div>
                           )}
-                          
+
                           {item.children.map((child) => (
                             <Link
                               key={child.href}
@@ -235,10 +279,14 @@ function MobileNav({ onOpenCVOMessage }: { onOpenCVOMessage: () => void }) {
                               className={cn(
                                 "flex items-center gap-3 px-8 py-3.5 text-sm transition-colors touch-manipulation",
                                 "hover:bg-gold/5 hover:text-gold active:bg-gold/10",
-                                location.pathname === child.href ? "text-gold bg-gold/5" : "text-white/70"
+                                location.pathname === child.href
+                                  ? "text-gold bg-gold/5"
+                                  : "text-white/70",
                               )}
                             >
-                              {child.icon && <child.icon className="h-4 w-4 flex-shrink-0" />}
+                              {child.icon && (
+                                <child.icon className="h-4 w-4 flex-shrink-0" />
+                              )}
                               <span className="flex-1">{child.label}</span>
                               {child.badge && (
                                 <span className="text-xs bg-gold/20 text-gold px-2 py-0.5 rounded-full">
@@ -257,7 +305,9 @@ function MobileNav({ onOpenCVOMessage }: { onOpenCVOMessage: () => void }) {
                       className={cn(
                         "flex items-center gap-3 px-4 py-4 transition-colors touch-manipulation",
                         "hover:bg-gold/5 hover:text-gold active:bg-gold/10",
-                        location.pathname === item.href ? "text-gold bg-gold/5" : "text-white/90"
+                        location.pathname === item.href
+                          ? "text-gold bg-gold/5"
+                          : "text-white/90",
                       )}
                     >
                       {item.icon && <item.icon className="h-5 w-5" />}
@@ -296,14 +346,18 @@ function MobileNav({ onOpenCVOMessage }: { onOpenCVOMessage: () => void }) {
             ) : (
               <div className="flex gap-3">
                 <Link to="/login" onClick={handleLinkClick} className="flex-1">
-                  <Button 
-                    variant="outline" 
+                  <Button
+                    variant="outline"
                     className="w-full border-primary/30 text-primary hover:bg-primary/10 py-3 h-auto touch-manipulation"
                   >
                     Sign In
                   </Button>
                 </Link>
-                <Link to="/register" onClick={handleLinkClick} className="flex-1">
+                <Link
+                  to="/register"
+                  onClick={handleLinkClick}
+                  className="flex-1"
+                >
                   <Button className="w-full bg-primary text-primary-foreground hover:bg-primary/90 py-3 h-auto touch-manipulation">
                     Get Started
                   </Button>
@@ -321,20 +375,21 @@ function MobileNav({ onOpenCVOMessage }: { onOpenCVOMessage: () => void }) {
 // USER MENU (Desktop) - Using forwardRef to fix ref warning
 // ============================================================================
 
-const UserMenuButton = forwardRef<HTMLButtonElement, React.ComponentPropsWithoutRef<typeof Button>>(
-  (props, ref) => (
-    <Button
-      ref={ref}
-      variant="ghost"
-      size="icon"
-      className="text-white hover:text-gold hover:bg-gold/10"
-      {...props}
-    >
-      <User className="h-5 w-5" />
-      <span className="sr-only">User menu</span>
-    </Button>
-  )
-);
+const UserMenuButton = forwardRef<
+  HTMLButtonElement,
+  React.ComponentPropsWithoutRef<typeof Button>
+>((props, ref) => (
+  <Button
+    ref={ref}
+    variant="ghost"
+    size="icon"
+    className="text-white hover:text-gold hover:bg-gold/10"
+    {...props}
+  >
+    <User className="h-5 w-5" />
+    <span className="sr-only">User menu</span>
+  </Button>
+));
 UserMenuButton.displayName = "UserMenuButton";
 
 function UserMenu() {
@@ -344,7 +399,10 @@ function UserMenu() {
     return (
       <div className="hidden lg:flex items-center gap-2">
         <Link to="/login">
-          <Button variant="ghost" className="text-white/90 hover:text-gold hover:bg-gold/10">
+          <Button
+            variant="ghost"
+            className="text-white/90 hover:text-gold hover:bg-gold/10"
+          >
             Sign In
           </Button>
         </Link>
@@ -362,35 +420,59 @@ function UserMenu() {
       <DropdownMenuTrigger asChild>
         <UserMenuButton />
       </DropdownMenuTrigger>
-      <DropdownMenuContent align="end" className="w-56 bg-charcoal border-gold/20 z-50">
-        <div className="px-2 py-1.5 text-sm text-white/60">
-          {user.email}
-        </div>
+      <DropdownMenuContent
+        align="end"
+        className="w-56 bg-charcoal border-gold/20 z-50"
+      >
+        <div className="px-2 py-1.5 text-sm text-white/60">{user.email}</div>
         <DropdownMenuSeparator className="bg-gold/10" />
         <DropdownMenuItem asChild>
-          <Link to="/dashboard" className="cursor-pointer text-white hover:text-gold hover:bg-gold/10">
+          <Link
+            to="/dashboard"
+            className="cursor-pointer text-white hover:text-gold hover:bg-gold/10"
+          >
             <User className="mr-2 h-4 w-4" />
             Dashboard
           </Link>
         </DropdownMenuItem>
         {hasRole("nrc") && (
           <DropdownMenuItem asChild>
-            <Link to="/nrc" className="cursor-pointer text-white hover:text-gold hover:bg-gold/10">
+            <Link
+              to="/nrc"
+              className="cursor-pointer text-white hover:text-gold hover:bg-gold/10"
+            >
               NRC Dashboard
             </Link>
           </DropdownMenuItem>
         )}
         {hasRole("jury") && (
           <DropdownMenuItem asChild>
-            <Link to="/jury" className="cursor-pointer text-white hover:text-gold hover:bg-gold/10">
+            <Link
+              to="/jury"
+              className="cursor-pointer text-white hover:text-gold hover:bg-gold/10"
+            >
               Jury Dashboard
             </Link>
           </DropdownMenuItem>
         )}
         {hasRole("admin") && (
           <DropdownMenuItem asChild>
-            <Link to="/admin" className="cursor-pointer text-white hover:text-gold hover:bg-gold/10">
+            <Link
+              to="/admin"
+              className="cursor-pointer text-white hover:text-gold hover:bg-gold/10"
+            >
               Admin Dashboard
+            </Link>
+          </DropdownMenuItem>
+        )}
+        {hasRole("NOMINEE") && (
+          <DropdownMenuItem asChild>
+            <Link
+              to="/nominee/dashboard"
+              className="cursor-pointer text-white hover:text-gold hover:bg-gold/10"
+            >
+              <User className="mr-2 h-4 w-4" />
+              Nominee Dashboard
             </Link>
           </DropdownMenuItem>
         )}
@@ -422,9 +504,9 @@ const mobileQuickActions = [
 export const MobileBottomNav = forwardRef<HTMLElement, object>(
   function MobileBottomNav(_, ref) {
     const location = useLocation();
-    
+
     return (
-      <nav 
+      <nav
         ref={ref}
         className="fixed bottom-0 left-0 right-0 z-40 lg:hidden bg-charcoal/95 backdrop-blur-md border-t border-gold/20 safe-area-inset-bottom"
       >
@@ -435,22 +517,26 @@ export const MobileBottomNav = forwardRef<HTMLElement, object>(
               to={item.href}
               className={cn(
                 "flex flex-col items-center justify-center gap-0.5 p-2 rounded-lg transition-all min-w-[60px] min-h-[52px] touch-manipulation active:scale-95",
-                location.pathname === item.href 
-                  ? "text-gold bg-gold/10" 
-                  : "text-white/60 hover:text-gold hover:bg-gold/5"
+                location.pathname === item.href
+                  ? "text-gold bg-gold/10"
+                  : "text-white/60 hover:text-gold hover:bg-gold/5",
               )}
             >
-              <item.icon className={cn(
-                "h-5 w-5 transition-transform",
-                location.pathname === item.href && "scale-110"
-              )} />
-              <span className="text-[10px] font-medium leading-tight">{item.label}</span>
+              <item.icon
+                className={cn(
+                  "h-5 w-5 transition-transform",
+                  location.pathname === item.href && "scale-110",
+                )}
+              />
+              <span className="text-[10px] font-medium leading-tight">
+                {item.label}
+              </span>
             </Link>
           ))}
         </div>
       </nav>
     );
-  }
+  },
 );
 MobileBottomNav.displayName = "MobileBottomNav";
 
@@ -467,10 +553,18 @@ export function MainNav() {
         <div className="container flex h-14 sm:h-16 items-center justify-between px-4">
           {/* Logo */}
           <Link to="/" className="flex items-center shrink-0 gap-2">
-            <img src={nesaStamp} alt="NESA Africa" className="h-8 sm:h-10 w-8 sm:w-10 rounded-full object-contain" />
+            <img
+              src={nesaStamp}
+              alt="NESA Africa"
+              className="h-8 sm:h-10 w-8 sm:w-10 rounded-full object-contain"
+            />
             <div className="hidden sm:flex flex-col leading-tight">
-              <span className="text-[8px] text-gold/70 font-medium tracking-[0.2em] uppercase">New Education Standard Awards</span>
-              <span className="text-sm font-display font-bold text-gold tracking-wide">AFRICA</span>
+              <span className="text-[8px] text-gold/70 font-medium tracking-[0.2em] uppercase">
+                New Education Standard Awards
+              </span>
+              <span className="text-sm font-display font-bold text-gold tracking-wide">
+                AFRICA
+              </span>
             </div>
           </Link>
 
@@ -494,9 +588,9 @@ export function MainNav() {
       </header>
 
       {/* CVO Flash Message Modal */}
-      <CVOFlashMessage 
-        isOpen={cvoMessageOpen} 
-        onClose={() => setCVOMessageOpen(false)} 
+      <CVOFlashMessage
+        isOpen={cvoMessageOpen}
+        onClose={() => setCVOMessageOpen(false)}
       />
     </>
   );

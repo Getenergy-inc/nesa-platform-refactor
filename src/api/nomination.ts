@@ -4,6 +4,7 @@ import { Nomination } from "@/pages/Nominate";
 import { ApiResponse } from "./http";
 import { approveNomination, assignNomination, rejectNomination } from "./nrc";
 import { AcceptanceStatus, acceptNomination } from "./nominations";
+import { NominationDashboardItem } from "@/types/nominee_dashboard";
 
 export interface NominationDetails {
   id: string;
@@ -21,6 +22,7 @@ export interface NominationDetails {
   appproved: string;
   accepted: AcceptanceStatus;
   nominationLinkExpiresAt: Date | null;
+  accountType: "INDIVIDUAL" | "ORGANIZATION";
   token: string | null;
   createdAt: Date;
   yearOfNomination: string;
@@ -42,6 +44,21 @@ export interface NominationDetails {
     description: string;
     renominationCount: number;
   };
+}
+
+export interface updateNomination {
+  phone?: string | null | undefined;
+  linkedInProfile?: string | null | undefined;
+  website?: string | null | undefined;
+  profileImage?: string | null | undefined;
+  accountType?: "INDIVIDUAL" | "ORGANIZATION";
+  yearOfNomination?: string | undefined;
+  country?: string | undefined;
+  stateRegion?: string | undefined;
+  impactSummary?: string | undefined;
+  achievementDescription?: string | undefined;
+  evidenceUrl?: string[] | undefined;
+  id: string;
 }
 export interface pendingNominationResponse {
   id: string;
@@ -222,5 +239,32 @@ export const nominationApi = {
         method: "PUT",
       },
     );
+  },
+
+  fetchNomineeDashboardData: async (accessToken: string) => {
+    const res: ApiResponse<NominationDashboardItem[]> = await apiRequest(
+      `${API_BASE}/nomination/nominee/dashboard`,
+      {
+        credentials: "include",
+        accessToken,
+      },
+    );
+    return res.data;
+  },
+
+  updateNominationDetails: async (
+    accessToken: string,
+    nomination: updateNomination,
+  ) => {
+    const res: ApiResponse<NominationDetails> = await apiRequest(
+      `${API_BASE}/nomination`,
+      {
+        method: "PUT",
+        credentials: "include",
+        accessToken,
+        body: JSON.stringify(nomination),
+      },
+    );
+    return res.data;
   },
 };

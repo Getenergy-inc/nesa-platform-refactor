@@ -10,10 +10,17 @@ import type { AppRole } from "@/config/roles";
 import { useNavigate } from "react-router-dom";
 
 interface User {
-  id: string;
   email: string;
-  fullName?: string;
+  id: string;
+  firstName: string | null;
+  lastName: string | null;
   phone: string;
+  gender: string | null;
+  role: string;
+  country: string;
+  state: string | null;
+  city: string | null;
+  address: string | null;
 }
 // enum AccountType {
 //   INDIVIDUAL,
@@ -63,8 +70,9 @@ export interface SignUpPayload {
   organizationNumber: string | null;
   organizationFunctions: string[] | [];
   organizationSector: string | null;
+  nominationId?: string;
   // 👇 extensible
-  [key: string]: any;
+  // [key: string]: any;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -257,16 +265,50 @@ export async function authFetch(
   options: RequestInit = {},
   accessToken: string | null,
 ) {
-  const res = await fetch(url, {
-    ...options,
-    headers: {
-      ...options.headers,
-      Authorization: `Bearer ${accessToken}`,
-    },
-    credentials: "include",
-  });
+  const makeRequest = async (token: string | null) => {
+    return fetch(url, {
+      ...options,
+      headers: {
+        "Content-Type": "application/json",
+        ...options.headers,
+        Authorization: token ? `Bearer ${token}` : "",
+      },
+      credentials: "include",
+    });
+  };
 
+  // First attempt
+  let res = await makeRequest(accessToken);
+
+  // If unauthorized, try to refresh and retry once
   if (res.status === 401) {
+    console.log("AuthFetch: Got 401, attempting token refresh...");
+
+    try {
+      // Try to refresh token
+      const refreshRes = await fetch(`${API_BASE}/auth/accesstoken`, {
+        method: "GET",
+        credentials: "include",
+      });
+
+      if (refreshRes.ok) {
+        const data = await refreshRes.json();
+        const newToken = data.token;
+
+        console.log("AuthFetch: Token refreshed, retrying request");
+
+        // Retry with new token
+        res = await makeRequest(newToken);
+
+        if (res.ok) {
+          return res; // Success on retry
+        }
+      }
+    } catch (refreshError) {
+      console.error("AuthFetch: Token refresh failed", refreshError);
+    }
+
+    // If we get here, refresh failed or retry failed
     throw new Error("UNAUTHORIZED");
   }
 

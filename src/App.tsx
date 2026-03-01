@@ -153,7 +153,10 @@ import ResetPassword from "./pages/auth/ResetPassword";
 import CreateTeam from "./pages/nrc/NRCTeam";
 import AcceptTeamInvitePage from "./pages/nrc/TeamInvite";
 import NomineeRegister from "./pages/auth/NomineeRegister";
-import { NomineeAcceptanceProtectedRoute } from "./components/ProtectedRoute";
+import {
+  NomineeAcceptanceProtectedRoute,
+  ProtectedRoute,
+} from "./components/ProtectedRoute";
 
 // Optimized QueryClient with caching strategy
 const queryClient = new QueryClient({
@@ -510,8 +513,14 @@ const App = () => (
                   element={<NomineeDecline />}
                 />
                 <Route
-                  path="/nominee/dashboard/:token"
-                  element={<NomineeDashboard />}
+                  path="/nominee/dashboard/"
+                  element={
+                    <ProtectedRoute>
+                      <WithLayout>
+                        <NomineeDashboard />
+                      </WithLayout>
+                    </ProtectedRoute>
+                  }
                 />
 
                 {/* Media */}

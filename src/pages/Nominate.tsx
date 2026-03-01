@@ -90,7 +90,7 @@ interface DbSubcategory {
   description: string | null;
 }
 
-interface UploadedFile {
+export interface UploadedFile {
   name: string;
   url: string;
   path: string;

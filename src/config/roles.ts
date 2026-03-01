@@ -5,7 +5,8 @@ export type AppRole =
   | "jury"
   | "chapter"
   | "sponsor"
-  | "admin";
+  | "admin"
+  | "NOMINEE";
 
 export const ROLE_LABELS: Record<AppRole, string> = {
   FREE_MEMBER: "User",
@@ -14,6 +15,7 @@ export const ROLE_LABELS: Record<AppRole, string> = {
   chapter: "Chapter Lead",
   sponsor: "Sponsor",
   admin: "Administrator",
+  NOMINEE: "Nominee",
 };
 
 export const ROLE_DESCRIPTIONS: Record<AppRole, string> = {
@@ -23,6 +25,7 @@ export const ROLE_DESCRIPTIONS: Record<AppRole, string> = {
   chapter: "Regional chapter leader managing local operations",
   sponsor: "Sponsor with limited dashboard access",
   admin: "Full platform administrator",
+  NOMINEE: "A nomination recipient",
 };
 
 // Role hierarchy for permission checks
@@ -33,6 +36,7 @@ export const ROLE_HIERARCHY: Record<AppRole, number> = {
   jury: 4,
   nrc: 5,
   admin: 10,
+  NOMINEE: 6,
 };
 
 export const canAccess = (

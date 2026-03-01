@@ -37,7 +37,9 @@ export function NomineeDashboardHeader({
           </Link>
           <div className="hidden md:flex items-center gap-2 text-muted-foreground">
             <span>/</span>
-            <span className="font-medium text-foreground">Nominee Dashboard</span>
+            <span className="font-medium text-foreground">
+              Nominee Dashboard
+            </span>
           </div>
         </div>
 
@@ -50,18 +52,18 @@ export function NomineeDashboardHeader({
             {acceptanceStatus === "ACCEPTED" ? "Verified Nominee" : "Pending"}
           </Badge>
 
-          <Button variant="ghost" size="icon" className="relative">
+          {/* <Button variant="ghost" size="icon" className="relative">
             <Bell className="h-5 w-5" />
             <span className="absolute -top-1 -right-1 h-4 w-4 bg-primary text-primary-foreground text-xs rounded-full flex items-center justify-center">
               2
             </span>
-          </Button>
+          </Button> */}
 
-          <Button variant="ghost" size="icon" asChild>
+          {/* <Button variant="ghost" size="icon" asChild>
             <Link to="/nominee/settings">
               <Settings className="h-5 w-5" />
             </Link>
-          </Button>
+          </Button> */}
 
           <div className="flex items-center gap-2 pl-2 border-l">
             <Avatar className="h-8 w-8">
