@@ -1,4 +1,5 @@
 import { Toaster } from "@/components/ui/toaster";
+import { useEffect } from "react";
 import Nominees from "./pages/Nominees";
 import NomineeProfile from "./pages/NomineeProfile";
 import CertificateVerify from "./pages/CertificateVerify";
@@ -8,7 +9,7 @@ import Policies from "./pages/Policies";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import { HelmetProvider } from "react-helmet-async";
 import { AuthProvider } from "@/contexts/AuthContext";
 import { SeasonProvider } from "@/contexts/SeasonContext";
@@ -74,7 +75,7 @@ import {
   InternationalEducation,
   DiasporaEducation,
   AfricaEducationIcon,
-} from "./pages/categories";
+} from "./pages/categories/index";
 
 // Media Pages
 import MediaHub from "./pages/media/MediaHub";
@@ -103,7 +104,7 @@ import Contact from "./pages/Contact";
 import { EDIMatrix, ForNominators, ForNominees, ForJudges, ForVoters } from "./pages/guidelines";
 import Vote from "./pages/Vote";
 import VoteWithAGC from "./pages/VoteWithAGC";
-import { GoldVoting, BlueGarnetVoting } from "./pages/vote";
+import { GoldVoting, BlueGarnetVoting } from "./pages/vote/index";
 import AboutAGC from "./pages/AboutAGC";
 import EarnVotingCredits from "./pages/EarnVotingCredits";
 import ClaimVotingCredits from "./pages/ClaimVotingCredits";
@@ -142,6 +143,16 @@ const queryClient = new QueryClient({
   },
 });
 
+const ScrollToTop = () => {
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+
+  return null;
+};
+
 // Wrapper component that applies PublicLayout
 const WithLayout = ({ children, showFooter = true }: { children: React.ReactNode; showFooter?: boolean }) => (
   <PublicLayout showFooter={showFooter}>{children}</PublicLayout>
@@ -160,6 +171,7 @@ const App = () => (
             <RegionPickerModal />
             <RegionConfirmationPopup />
             <BrowserRouter>
+              <ScrollToTop />
               <Routes>
                 {/* Landing - has its own header/footer */}
                 <Route path="/" element={<NESALandingPage />} />
