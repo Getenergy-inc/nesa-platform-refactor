@@ -18,7 +18,7 @@ export function AuthLayout({ children }: AuthLayoutProps) {
             <NESALogo variant="icon" size="sm" />
             <div className="hidden sm:flex flex-col leading-tight">
               <span className="font-display text-lg">NESA-Africa</span>
-              <span className="text-[8px] text-white/50 italic tracking-wider">The African Academy Awards for Education</span>
+              <span className="text-[8px] text-white/50 italic tracking-wider">The African Blue-Garnet Awards for Education</span>
             </div>
           </Link>
 

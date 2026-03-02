@@ -343,7 +343,7 @@ export function AfricaRegionsMap() {
         >
           <div className="inline-block px-8 py-5 rounded-2xl bg-gradient-to-r from-gold/10 via-gold/20 to-gold/10 border border-gold/30">
             <span className="text-gold font-display text-xl md:text-2xl font-semibold">
-              "Advocating & Achieving Education For All In Africa"
+              "The African Blue-Garnet Awards for Education"
             </span>
           </div>
         </motion.div>
