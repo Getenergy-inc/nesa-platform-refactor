@@ -76,7 +76,10 @@ export const REGION_STYLES: Record<AfricanRegion, { bg: string; text: string; bo
   "Central Africa": { bg: "bg-sky-500/10", text: "text-sky-400", border: "border-sky-500/30", icon: "🌍" },
   "East Africa": { bg: "bg-violet-500/10", text: "text-violet-400", border: "border-violet-500/30", icon: "🌍" },
   "Southern Africa": { bg: "bg-rose-500/10", text: "text-rose-400", border: "border-rose-500/30", icon: "🌍" },
-  "Diaspora": { bg: "bg-gold/10", text: "text-gold", border: "border-gold/30", icon: "✈️" },
+  "Sahel Region": { bg: "bg-orange-500/10", text: "text-orange-400", border: "border-orange-500/30", icon: "🏜️" },
+  "Horn of Africa": { bg: "bg-red-500/10", text: "text-red-400", border: "border-red-500/30", icon: "🦏" },
+  "Indian Ocean Islands": { bg: "bg-teal-500/10", text: "text-teal-400", border: "border-teal-500/30", icon: "🏝️" },
+  "Diaspora / Global Africa": { bg: "bg-gold/10", text: "text-gold", border: "border-gold/30", icon: "✈️" },
   "Friends of Africa": { bg: "bg-blue-500/10", text: "text-blue-400", border: "border-blue-500/30", icon: "🤝" },
 };
 

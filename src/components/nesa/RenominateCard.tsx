@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import { useAuth } from "@/contexts/AuthContext";
 import { renominateNominee } from "@/lib/api";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -7,28 +8,34 @@ import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
 import { toast } from "sonner";
 import { Heart, Loader2, Award, Download, Trophy } from "lucide-react";
+import { getRenominationThreshold, isCorePlatinumCategory, PLATINUM_THRESHOLDS } from "@/config/nesaCategories";
 
 interface RenominateCardProps {
   nomineeId: string;
   nomineeName: string;
+  categoryId?: string;
   initialRenominationCount?: number;
 }
-
-const PLATINUM_THRESHOLD = 200;
 
 export function RenominateCard({
   nomineeId,
   nomineeName,
+  categoryId,
   initialRenominationCount = 0,
 }: RenominateCardProps) {
   const { user } = useAuth();
+  const { t } = useTranslation("dashboard");
   const [renominationCount, setRenominationCount] = useState(initialRenominationCount);
   const [isRenominating, setIsRenominating] = useState(false);
   const [hasRenominated, setHasRenominated] = useState(false);
 
-  const progressPercent = Math.min((renominationCount / PLATINUM_THRESHOLD) * 100, 100);
-  const remaining = Math.max(PLATINUM_THRESHOLD - renominationCount, 0);
-  const hasReachedThreshold = renominationCount >= PLATINUM_THRESHOLD;
+  // Dynamic threshold based on category
+  const threshold = categoryId ? getRenominationThreshold(categoryId) : PLATINUM_THRESHOLDS.STANDARD;
+  const isCorePlatinum = categoryId ? isCorePlatinumCategory(categoryId) : false;
+
+  const progressPercent = Math.min((renominationCount / threshold) * 100, 100);
+  const remaining = Math.max(threshold - renominationCount, 0);
+  const hasReachedThreshold = renominationCount >= threshold;
 
   const handleRenominate = async () => {
     if (!user) {
@@ -46,18 +53,12 @@ export function RenominateCard({
       await renominateNominee(nomineeId, `Endorsement from profile page for ${nomineeName}`);
       setRenominationCount((prev) => prev + 1);
       setHasRenominated(true);
-      toast.success(`Endorsed ${nomineeName}!`, {
-        description: "Your support has been recorded. Thank you!",
-      });
+      toast.success(t("renomination.success"));
     } catch (error: any) {
       if (error.message?.includes("maximum")) {
-        toast.info("Maximum endorsements reached", {
-          description: `${nomineeName} has unlocked their Platinum Certificate!`,
-        });
+        toast.info(t("renomination.alreadyUnlocked"));
       } else {
-        toast.error("Failed to endorse", {
-          description: error.message || "Please try again",
-        });
+        toast.error(t("renomination.error"));
       }
     } finally {
       setIsRenominating(false);
@@ -70,21 +71,27 @@ export function RenominateCard({
         <CardTitle className="text-ivory flex items-center gap-2">
           <Trophy className="w-5 h-5 text-gold" />
           Platinum Certificate Progress
+          {isCorePlatinum && (
+            <span className="text-xs px-2 py-0.5 rounded-full bg-amber-500/20 text-amber-400 ml-auto">
+              Core Category
+            </span>
+          )}
         </CardTitle>
       </CardHeader>
       <CardContent className="space-y-4">
         {/* Progress Bar */}
         <div className="space-y-2">
           <div className="flex items-center justify-between text-sm">
-            <span className="text-ivory/60">Endorsements</span>
+            <span className="text-ivory/60">{t("renomination.endorsements")}</span>
             <span className="text-gold font-semibold">
-              {renominationCount} / {PLATINUM_THRESHOLD}
+              {renominationCount} / {threshold}
             </span>
           </div>
           <Progress value={progressPercent} className="h-3 bg-charcoal" />
           {!hasReachedThreshold && (
             <p className="text-xs text-ivory/50">
               {remaining} more endorsement{remaining !== 1 ? "s" : ""} needed to unlock the Platinum Certificate
+              {isCorePlatinum && " (Core Platinum: 100 threshold)"}
             </p>
           )}
         </div>
@@ -94,7 +101,7 @@ export function RenominateCard({
           <div className="flex items-center gap-2 p-3 rounded-lg bg-gold/10 border border-gold/30">
             <Award className="w-5 h-5 text-gold" />
             <div>
-              <p className="text-sm font-medium text-gold">Platinum Certificate Unlocked!</p>
+              <p className="text-sm font-medium text-gold">{t("renomination.alreadyUnlocked")}</p>
               <p className="text-xs text-ivory/60">
                 {nomineeName.split(" ")[0]} has earned the Platinum recognition.
               </p>
@@ -102,7 +109,7 @@ export function RenominateCard({
           </div>
         ) : (
           <p className="text-sm text-ivory/60">
-            Help {nomineeName.split(" ")[0]} reach {PLATINUM_THRESHOLD} endorsements to unlock their Platinum Certificate download.
+            {t("renomination.unlockProgress", { name: nomineeName.split(" ")[0], threshold })}
           </p>
         )}
 
@@ -138,7 +145,7 @@ export function RenominateCard({
             ) : (
               <>
                 <Heart className="w-4 h-4 mr-2" />
-                Endorse This Nominee
+                {t("renomination.endorseNominee")}
               </>
             )}
           </Button>

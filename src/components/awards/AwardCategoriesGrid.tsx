@@ -9,46 +9,41 @@ import {
   type CategoryDefinition,
 } from "@/config/nesaCategories";
 import { categoryIconMap } from "@/config/categoryIconMap";
+import { getCategoryImage } from "@/config/categoryImages";
 
 interface AwardCategoriesGridProps {
   /** Filter categories by tier applicability */
   tier: AwardTier;
   /** Accent color for styling */
-  accentColor?: "slate" | "amber" | "blue" | "purple";
+  accentColor?: "slate" | "amber" | "blue" | "purple" | "yellow";
   /** Title override */
   title?: string;
   /** Description override */
   description?: string;
 }
 
-const accentStyles = {
+const accentStyles: Record<string, {
+  badgeBg: string; badgeText: string; badgeBorder: string; hoverBorder: string; iconColor: string;
+}> = {
   slate: {
-    badgeBg: "bg-slate-500/10",
-    badgeText: "text-slate-400",
-    badgeBorder: "border-slate-500/30",
-    hoverBorder: "hover:border-slate-400/50",
-    iconColor: "text-slate-400",
+    badgeBg: "bg-slate-500/10", badgeText: "text-slate-400", badgeBorder: "border-slate-500/30",
+    hoverBorder: "hover:border-slate-400/50", iconColor: "text-slate-400",
   },
   amber: {
-    badgeBg: "bg-amber-500/10",
-    badgeText: "text-amber-400",
-    badgeBorder: "border-amber-500/30",
-    hoverBorder: "hover:border-amber-400/50",
-    iconColor: "text-amber-400",
+    badgeBg: "bg-amber-500/10", badgeText: "text-amber-400", badgeBorder: "border-amber-500/30",
+    hoverBorder: "hover:border-amber-400/50", iconColor: "text-amber-400",
   },
   blue: {
-    badgeBg: "bg-blue-500/10",
-    badgeText: "text-blue-400",
-    badgeBorder: "border-blue-500/30",
-    hoverBorder: "hover:border-blue-400/50",
-    iconColor: "text-blue-400",
+    badgeBg: "bg-blue-500/10", badgeText: "text-blue-400", badgeBorder: "border-blue-500/30",
+    hoverBorder: "hover:border-blue-400/50", iconColor: "text-blue-400",
   },
   purple: {
-    badgeBg: "bg-purple-500/10",
-    badgeText: "text-purple-400",
-    badgeBorder: "border-purple-500/30",
-    hoverBorder: "hover:border-purple-400/50",
-    iconColor: "text-purple-400",
+    badgeBg: "bg-purple-500/10", badgeText: "text-purple-400", badgeBorder: "border-purple-500/30",
+    hoverBorder: "hover:border-purple-400/50", iconColor: "text-purple-400",
+  },
+  yellow: {
+    badgeBg: "bg-yellow-500/10", badgeText: "text-yellow-400", badgeBorder: "border-yellow-500/30",
+    hoverBorder: "hover:border-yellow-400/50", iconColor: "text-yellow-400",
   },
 };
 
@@ -65,7 +60,7 @@ export function AwardCategoriesGrid({
   accentColor = "amber",
   title,
   description,
-}: AwardCategoriesGridProps) {
+}: AwardCategoriesGridProps & { tier: AwardTier }) {
   const styles = accentStyles[accentColor];
   const tierInfo = TIER_INFO[tier];
   
@@ -95,7 +90,8 @@ export function AwardCategoriesGrid({
               key={category.id} 
               category={category} 
               index={index} 
-              styles={styles} 
+              styles={styles}
+              parentTier={tier}
             />
           ))}
         </div>
@@ -119,15 +115,18 @@ export function AwardCategoriesGrid({
 function CategoryCard({ 
   category, 
   index, 
-  styles 
+  styles,
+  parentTier,
 }: { 
   category: CategoryDefinition; 
   index: number; 
   styles: typeof accentStyles.amber;
+  parentTier: AwardTier;
 }) {
   const Icon = categoryIconMap[category.iconName] || GraduationCap;
   const scopeStyle = scopeStyles[category.scope] || scopeStyles.AFRICA_REGIONAL;
   const subcategoryCount = category.subcategories.length;
+  const categoryImage = getCategoryImage(category.slug);
 
   return (
     <motion.div
@@ -138,35 +137,69 @@ function CategoryCard({
     >
       <Link
         to={`/categories/${category.slug}`}
-        className={`group flex flex-col h-full p-5 rounded-xl border border-white/10 bg-white/5 ${styles.hoverBorder} hover:bg-white/10 transition-all duration-300`}
+        className={`group flex flex-col h-full rounded-xl border border-white/10 bg-white/5 ${styles.hoverBorder} hover:bg-white/10 transition-all duration-300 overflow-hidden`}
       >
-        <div className="flex items-start gap-3 mb-3">
-          <div className={`h-10 w-10 rounded-lg ${styles.badgeBg} flex items-center justify-center shrink-0`}>
-            <Icon className={`h-5 w-5 ${styles.iconColor}`} />
+        {/* Image Header */}
+        <div className="relative h-32 w-full overflow-hidden">
+          {categoryImage ? (
+            <img 
+              src={categoryImage} 
+              alt={category.shortName}
+              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+              loading="lazy"
+            />
+          ) : (
+            <div className={`w-full h-full ${styles.badgeBg} flex items-center justify-center`}>
+              <Icon className={`h-12 w-12 ${styles.iconColor} opacity-40`} />
+            </div>
+          )}
+          {/* Gradient overlay */}
+          <div className="absolute inset-0 bg-gradient-to-t from-charcoal via-charcoal/60 to-transparent" />
+          {/* Scope badge on image */}
+          <div className="absolute top-2 right-2">
+            <Badge 
+              variant="outline" 
+              className={`text-[10px] px-1.5 py-0 backdrop-blur-sm bg-black/40 ${scopeStyle.className}`}
+            >
+              {scopeStyle.label}
+            </Badge>
           </div>
-          <div className="flex-1 min-w-0">
-            <h3 className="font-semibold text-white text-sm leading-tight group-hover:text-gold transition-colors line-clamp-2">
-              {category.shortName}
-            </h3>
-            <div className="flex items-center gap-2 mt-1">
-              <Badge 
-                variant="outline" 
-                className={`text-[10px] px-1.5 py-0 ${scopeStyle.className}`}
-              >
-                {scopeStyle.label}
-              </Badge>
-              <span className="text-white/40 text-xs">{subcategoryCount} subcategories</span>
+          {/* Tier badge on image */}
+          <div className="absolute top-2 left-2">
+            <Badge 
+              variant="outline" 
+              className={`text-[10px] px-1.5 py-0 backdrop-blur-sm ${styles.badgeBg} ${styles.badgeText} ${styles.badgeBorder}`}
+            >
+              {TIER_INFO[parentTier].shortName}
+            </Badge>
+          </div>
+          {/* Icon overlay */}
+          <div className="absolute bottom-2 left-3">
+            <div className={`h-8 w-8 rounded-lg ${styles.badgeBg} backdrop-blur-sm flex items-center justify-center`}>
+              <Icon className={`h-4 w-4 ${styles.iconColor}`} />
             </div>
           </div>
         </div>
-        
-        <p className="text-white/50 text-xs line-clamp-2 flex-1 mb-3">
-          {category.description}
-        </p>
 
-        <div className="flex items-center gap-1 text-xs text-white/40 group-hover:text-gold transition-colors mt-auto">
-          <span>Explore</span>
-          <ArrowRight className="h-3 w-3 group-hover:translate-x-1 transition-transform" />
+        {/* Content */}
+        <div className="p-4 flex flex-col flex-1">
+          <h3 className="font-semibold text-white text-sm leading-tight group-hover:text-gold transition-colors line-clamp-2 mb-1.5">
+            {category.name}
+          </h3>
+          
+          <p className="text-white/50 text-xs line-clamp-2 flex-1 mb-3">
+            {category.description}
+          </p>
+
+          <div className="flex items-center justify-between mt-auto">
+            <span className="text-white/40 text-xs">
+              {subcategoryCount > 0 ? `${subcategoryCount} subcategories` : ""}
+            </span>
+            <div className="flex items-center gap-1 text-xs text-white/40 group-hover:text-gold transition-colors">
+              <span>{subcategoryCount > 0 ? "View Subcategories" : "Explore"}</span>
+              <ArrowRight className="h-3 w-3 group-hover:translate-x-1 transition-transform" />
+            </div>
+          </div>
         </div>
       </Link>
     </motion.div>

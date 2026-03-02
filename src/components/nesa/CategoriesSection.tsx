@@ -3,61 +3,122 @@ import { useTranslation } from "react-i18next";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { motion } from "framer-motion";
-import { 
-  Building2, Building, Laptop, Radio, Heart, Users, FlaskConical,
-  Palette, MapPin, BookOpen, Microscope, Church, Moon, Landmark,
-  Globe, Plane, Crown, ChevronRight
+import {
+  ChevronRight, GraduationCap, Crown, Star, Trophy, Shield,
 } from "lucide-react";
 import {
-  NESA_CATEGORIES,
-  TIER_INFO,
-  type CategoryScope,
+  getCategoriesGrouped,
+  type CategoryDefinition,
 } from "@/config/nesaCategories";
+import { categoryIconMap } from "@/config/categoryIconMap";
+import { getCategoryImage } from "@/config/categoryImages";
 
-// Icon mapping
-const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
-  Building2,
-  Building,
-  Laptop,
-  Radio,
-  Heart,
-  Users,
-  FlaskConical,
-  Palette,
-  MapPin,
-  BookOpen,
-  Microscope,
-  Church,
-  Moon,
-  Landmark,
-  Globe,
-  Plane,
-  Crown,
+const groups = getCategoriesGrouped();
+
+// Scope badge styles
+const scopeStyles: Record<string, { label: string; className: string }> = {
+  AFRICA_REGIONAL: { label: "Africa Regional", className: "border-emerald-500/30 text-emerald-400 bg-emerald-500/10" },
+  NIGERIA: { label: "Nigeria", className: "border-orange-500/30 text-orange-400 bg-orange-500/10" },
+  INTERNATIONAL: { label: "International", className: "border-blue-500/30 text-blue-400 bg-blue-500/10" },
+  ICON: { label: "Lifetime", className: "border-purple-500/30 text-purple-400 bg-purple-500/10" },
 };
 
-// Get first 6 categories for display
-const displayCategories = NESA_CATEGORIES.slice(0, 6);
+const tierBadgeStyles: Record<string, { label: string; className: string }> = {
+  "blue-garnet": { label: "Blue Garnet", className: "border-blue-500/30 text-blue-400 bg-blue-500/10" },
+  platinum: { label: "Platinum", className: "border-slate-400/30 text-slate-300 bg-slate-500/10" },
+  "gold-special": { label: "Gold Special 2025", className: "border-yellow-500/30 text-yellow-400 bg-yellow-500/10" },
+  icon: { label: "Lifetime", className: "border-purple-500/30 text-purple-400 bg-purple-500/10" },
+};
+
+function getPrimaryTier(cat: CategoryDefinition): string {
+  if (cat.tierApplicability.icon) return "icon";
+  if (cat.tierApplicability.goldSpecial) return "gold-special";
+  if (cat.tierApplicability.blueGarnet) return "blue-garnet";
+  return "platinum";
+}
+
+function CategoryCard({ cat }: { cat: CategoryDefinition }) {
+  const Icon = categoryIconMap[cat.iconName] || GraduationCap;
+  const scope = scopeStyles[cat.scope] || scopeStyles.AFRICA_REGIONAL;
+  const tier = tierBadgeStyles[getPrimaryTier(cat)];
+  const catImage = getCategoryImage(cat.slug);
+
+  return (
+    <Link
+      to={`/categories/${cat.slug}`}
+      className="group block bg-white/5 backdrop-blur-sm rounded-2xl border border-white/10 hover:border-gold/40 transition-all duration-300 overflow-hidden"
+    >
+      <div className="relative h-32 w-full overflow-hidden">
+        {catImage ? (
+          <img src={catImage} alt={cat.shortName} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" />
+        ) : (
+          <div className="w-full h-full bg-white/5 flex items-center justify-center">
+            <Icon className="h-12 w-12 text-white/20" />
+          </div>
+        )}
+        <div className="absolute inset-0 bg-gradient-to-t from-charcoal via-charcoal/50 to-transparent" />
+        <div className="absolute top-2 right-2">
+          <Badge variant="outline" className={`text-[10px] px-1.5 py-0 backdrop-blur-sm ${scope.className}`}>
+            {scope.label}
+          </Badge>
+        </div>
+        <div className="absolute top-2 left-2">
+          <Badge variant="outline" className={`text-[10px] px-1.5 py-0 backdrop-blur-sm ${tier.className}`}>
+            {tier.label}
+          </Badge>
+        </div>
+        <div className="absolute bottom-2 left-3">
+          <div className="h-8 w-8 rounded-lg bg-black/40 backdrop-blur-sm flex items-center justify-center">
+            <Icon className="h-4 w-4 text-gold" />
+          </div>
+        </div>
+      </div>
+      <div className="p-4">
+        <h3 className="font-semibold text-white text-sm leading-tight group-hover:text-gold transition-colors line-clamp-2 mb-1">
+          {cat.name}
+        </h3>
+        <p className="text-white/50 text-xs line-clamp-2 mb-3">{cat.description}</p>
+        <div className="flex items-center justify-between">
+          <span className="text-white/40 text-xs">
+            {cat.subcategories.length > 0 ? `${cat.subcategories.length} subcategories` : ""}
+          </span>
+          <div className="flex items-center gap-1 text-xs text-white/40 group-hover:text-gold transition-colors">
+            <span>{cat.subcategories.length > 0 ? "View Subcategories" : "Explore"}</span>
+            <ChevronRight className="h-3 w-3 group-hover:translate-x-1 transition-transform" />
+          </div>
+        </div>
+      </div>
+    </Link>
+  );
+}
+
+function TierGroupHeader({ icon: IconComp, title, subtitle, count, color }: {
+  icon: React.ComponentType<{ className?: string }>;
+  title: string; subtitle: string; count: number; color: string;
+}) {
+  return (
+    <div className="mb-6">
+      <div className="flex items-center gap-3 mb-2">
+        <div className={`h-10 w-10 rounded-xl ${color} flex items-center justify-center`}>
+          <IconComp className="h-5 w-5 text-white" />
+        </div>
+        <div>
+          <h3 className="font-display text-xl font-bold text-white">{title}</h3>
+          <p className="text-white/50 text-sm">{subtitle} · {count} {count === 1 ? "category" : "categories"}</p>
+        </div>
+      </div>
+    </div>
+  );
+}
 
 export function CategoriesSection() {
   const { t } = useTranslation("pages");
 
-  // Scope badge config with translations
-  const scopeBadgeConfig: Record<CategoryScope, { labelKey: string; className: string }> = {
-    AFRICA_REGIONAL: { labelKey: "landing.categories.scopes.africaRegional", className: "bg-green-500/20 text-green-400 border-green-500/30" },
-    NIGERIA: { labelKey: "landing.categories.scopes.nigeria", className: "bg-emerald-500/20 text-emerald-400 border-emerald-500/30" },
-    INTERNATIONAL: { labelKey: "landing.categories.scopes.international", className: "bg-blue-500/20 text-blue-400 border-blue-500/30" },
-    ICON: { labelKey: "landing.categories.scopes.lifetime", className: "bg-purple-500/20 text-purple-400 border-purple-500/30" },
-  };
-
   return (
-    <section className="bg-charcoal py-16 md:py-20 relative overflow-hidden">
+    <section className="bg-charcoal py-16 md:py-24 relative overflow-hidden">
       <div className="container relative z-10">
-        <motion.div 
-          className="text-center mb-12"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-        >
+        {/* Section Header */}
+        <motion.div className="text-center mb-14" initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
           <Badge className="mb-4 bg-gold/10 text-gold border-gold/30">
             {t("landing.categories.badge")}
           </Badge>
@@ -69,112 +130,62 @@ export function CategoriesSection() {
           </p>
         </motion.div>
 
-        {/* Tier Legend - Clickable CTAs */}
-        <div className="flex flex-wrap justify-center gap-3 mb-10">
-          {Object.entries(TIER_INFO).map(([key, tier], index) => (
-            <motion.div 
-              key={key} 
-              initial={{ opacity: 0, scale: 0.9 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              transition={{ delay: index * 0.1 }}
-              viewport={{ once: true }}
-            >
-              <Link
-                to={`/awards/${key}`}
-                className={`group flex items-center gap-2 rounded-full border px-4 py-2 ${tier.bgColor} ${tier.borderColor} hover:scale-105 hover:shadow-lg active:scale-95 transition-all duration-200 cursor-pointer`}
-              >
-                <span className={`text-xs font-semibold ${tier.color} group-hover:brightness-125 transition-all`}>
-                  {tier.shortName}
-                </span>
-                <ChevronRight className={`h-3 w-3 ${tier.color} opacity-0 group-hover:opacity-100 group-hover:translate-x-0.5 transition-all`} />
-              </Link>
-            </motion.div>
-          ))}
-        </div>
-
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {displayCategories.map((cat, index) => {
-            const Icon = iconMap[cat.iconName] || Building2;
-            const scopeBadge = scopeBadgeConfig[cat.scope];
-            
-            // Determine primary tier
-            let tierKey: keyof typeof TIER_INFO = "gold";
-            if (cat.tierApplicability.icon) tierKey = "icon";
-            else if (cat.tierApplicability.blueGarnet) tierKey = "blue-garnet";
-            else if (cat.tierApplicability.platinum && !cat.tierApplicability.gold) tierKey = "platinum";
-            
-            const tier = TIER_INFO[tierKey];
-
-            return (
-              <motion.div
-                key={cat.id}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.1 }}
-                viewport={{ once: true }}
-              >
-                <Link
-                  to={`/categories/${cat.slug}`}
-                  className="group block bg-white/5 backdrop-blur-sm rounded-2xl p-6 border border-white/10 hover:border-gold/40 transition-all duration-300"
-                >
-                  <div className="flex items-center justify-between mb-4">
-                    <div className="flex items-center gap-3">
-                      <div className="h-12 w-12 rounded-xl bg-gold/10 flex items-center justify-center group-hover:bg-gold/20 transition-colors">
-                        <Icon className="h-6 w-6 text-gold" />
-                      </div>
-                      <Badge variant="outline" className={`text-xs ${scopeBadge.className}`}>
-                        {t(scopeBadge.labelKey)}
-                      </Badge>
-                    </div>
-                    <ChevronRight className="h-5 w-5 text-white/40 group-hover:text-gold group-hover:translate-x-1 transition-all" />
-                  </div>
-                  <h3 className="font-bold text-lg text-white mb-2 group-hover:text-gold transition-colors">
-                    {cat.shortName}
-                  </h3>
-                  <p className="text-white/60 text-sm line-clamp-2 mb-4">
-                    {cat.description}
-                  </p>
-                  <div className="flex items-center gap-2">
-                    <Badge 
-                      variant="outline" 
-                      className={`text-xs ${tier.bgColor} ${tier.color} border-0`}
-                    >
-                      {tier.shortName}
-                    </Badge>
-                    <span className="text-xs text-white/50">
-                      {t("landing.categories.subcategoriesCount", { count: cat.subcategories.length })}
-                    </span>
-                  </div>
-                </Link>
+        {/* ═══ GROUP 1: LIFETIME — Icon Award ═══ */}
+        <motion.div className="mb-16" initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }}>
+          <TierGroupHeader icon={Crown} title="Africa Education Icon — Lifetime Achievement" subtitle="Jury selection only · 2005–2025" count={groups.lifetime.length} color="bg-purple-600" />
+          <div className="grid sm:grid-cols-1 lg:grid-cols-2 gap-5 max-w-3xl">
+            {groups.lifetime.map((cat, i) => (
+              <motion.div key={cat.id} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.04 }} viewport={{ once: true }}>
+                <CategoryCard cat={cat} />
               </motion.div>
-            );
-          })}
-        </div>
+            ))}
+          </div>
+        </motion.div>
 
-        <motion.div 
-          className="flex flex-col sm:flex-row justify-center gap-4 mt-10"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-        >
-          <Link to="/categories?view=africa">
-            <Button
-              variant="outline"
-              size="lg"
-              className="border-2 border-gold text-gold hover:bg-gold/10 rounded-full w-full sm:w-auto transition-all group"
-            >
-              <Globe className="mr-2 h-4 w-4" />
-              {t("landing.categories.africaFirst")}
-            </Button>
-          </Link>
-          <Link to="/categories?view=nigeria">
-            <Button
-              variant="outline"
-              size="lg"
-              className="border-2 border-emerald-500 text-emerald-400 hover:bg-emerald-500/10 rounded-full w-full sm:w-auto transition-all group"
-            >
-              <MapPin className="mr-2 h-4 w-4" />
-              {t("landing.categories.nigeriaCategories")}
+        {/* ═══ GROUP 2: BLUE GARNET — Competitive Excellence ═══ */}
+        <motion.div className="mb-16" initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }}>
+          <TierGroupHeader icon={Trophy} title="Blue Garnet — Competitive Excellence" subtitle="Public voting → Jury evaluation" count={groups.blueGarnet.length} color="bg-blue-600" />
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+            {groups.blueGarnet.map((cat, i) => (
+              <motion.div key={cat.id} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.04 }} viewport={{ once: true }}>
+                <CategoryCard cat={cat} />
+              </motion.div>
+            ))}
+          </div>
+        </motion.div>
+
+        {/* ═══ GROUP 3: PLATINUM — Institutional Leadership ═══ */}
+        <motion.div className="mb-16" initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }}>
+          <TierGroupHeader icon={Shield} title="Platinum — Institutional Leadership" subtitle="NRC verification · Governance criteria" count={groups.platinum.length} color="bg-slate-500" />
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+            {groups.platinum.map((cat, i) => (
+              <motion.div key={cat.id} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.04 }} viewport={{ once: true }}>
+                <CategoryCard cat={cat} />
+              </motion.div>
+            ))}
+          </div>
+        </motion.div>
+
+        {/* ═══ GROUP 4: GOLD SPECIAL RECOGNITION — 2025 Edition ═══ */}
+        {groups.goldSpecial.length > 0 && (
+          <motion.div className="mb-10" initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }}>
+            <TierGroupHeader icon={Star} title="Gold Special Recognition — 2025 Edition" subtitle="Cultural impact recognition" count={groups.goldSpecial.length} color="bg-yellow-600" />
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+              {groups.goldSpecial.map((cat, i) => (
+                <motion.div key={cat.id} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.04 }} viewport={{ once: true }}>
+                  <CategoryCard cat={cat} />
+                </motion.div>
+              ))}
+            </div>
+          </motion.div>
+        )}
+
+        {/* CTA */}
+        <motion.div className="flex flex-col sm:flex-row justify-center gap-4 mt-10" initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
+          <Link to="/categories">
+            <Button variant="outline" size="lg" className="border-2 border-gold text-gold hover:bg-gold/10 rounded-full w-full sm:w-auto">
+              View All Categories
+              <ChevronRight className="ml-2 h-4 w-4" />
             </Button>
           </Link>
         </motion.div>

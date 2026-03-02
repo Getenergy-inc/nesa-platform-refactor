@@ -2,8 +2,12 @@ import { useState, useEffect } from "react";
 import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import { SignUpPayload, useAuth } from "@/contexts/AuthContext";
 import { Card, CardContent } from "@/components/ui/card";
-import { Award } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Separator } from "@/components/ui/separator";
+import { Award, Loader2 } from "lucide-react";
 import { toast } from "sonner";
+import { motion } from "framer-motion";
+import nesaStamp from "@/assets/nesa-stamp.jpeg";
 import {
   StepIndicator,
   AccountTypeStep,
@@ -16,6 +20,7 @@ import {
   type OrganizationData,
   type PersonalInfoData,
 } from "@/components/auth";
+import { lovable } from "@/integrations/lovable";
 
 // Define the steps - dynamic based on account type
 const getSteps = (accountType: null | AccountType, needsOrgInfo: boolean) => {
@@ -73,7 +78,6 @@ export default function Register() {
     accountType === "ORGANIZATION" || accountType === "SPONSOR";
   const steps = getSteps(accountType, needsOrgInfo);
 
-  // Handle account type from URL (e.g., /register?type=judge)
   useEffect(() => {
     const typeParam = searchParams.get("type") as AccountType | null;
     if (
@@ -92,6 +96,19 @@ export default function Register() {
       setCurrentStep(2);
     }
   }, [searchParams]);
+
+  // const handleGoogleSignIn = async () => {
+  //   setGoogleLoading(true);
+  //   try {
+  //     const { error } = await lovable.auth.signInWithOAuth("google", {
+  //       redirect_uri: window.location.origin,
+  //     });
+  //     if (error) throw error;
+  //   } catch (error: any) {
+  //     toast.error(error.message || "Google sign-in failed");
+  //     setGoogleLoading(false);
+  //   }
+  // };
 
   const handlePurposeToggle = (purposeId: string) => {
     setSelectedPurposes((prev) =>
@@ -207,7 +224,6 @@ export default function Register() {
   };
 
   const handleComplete = () => {
-    // Move to complete step
     goToStep(steps.length);
   };
 
@@ -223,7 +239,6 @@ export default function Register() {
   };
 
   const renderStep = () => {
-    // Map current step to component based on flow
     const stepLabel = steps[currentStep - 1]?.label;
 
     switch (stepLabel) {
@@ -235,7 +250,6 @@ export default function Register() {
             onNext={() => goToStep(2)}
           />
         );
-
       case "Purpose":
         return (
           <PurposeSelectionStep
@@ -245,7 +259,6 @@ export default function Register() {
             onBack={() => goToStep(1)}
           />
         );
-
       case "Organization":
         return (
           <OrganizationInfoStep
@@ -255,7 +268,6 @@ export default function Register() {
             onBack={() => goToStep(2)}
           />
         );
-
       case "Details":
         return (
           <PersonalInfoStep
@@ -266,7 +278,6 @@ export default function Register() {
             onBack={() => goToStep(needsOrgInfo ? 3 : 2)}
           />
         );
-
       case "Verification":
         return (
           <EmailVerificationStep
@@ -280,15 +291,14 @@ export default function Register() {
             onBack={() => goToStep(needsOrgInfo ? 4 : 3)}
           />
         );
-
       case "Complete":
         return (
           <CompleteStep
             accountType={accountType!.toLowerCase() as AccountType}
             fullName={personalInfo.fullName}
+            country={personalInfo.country}
           />
         );
-
       default:
         return null;
     }
@@ -320,32 +330,6 @@ export default function Register() {
             </Link>
           </p>
         </div>
-
-        {/* Progress Indicator */}
-        <Card className="mb-8 border-0 shadow-xl">
-          <CardContent className="py-8">
-            <StepIndicator steps={steps} currentStep={currentStep} />
-          </CardContent>
-        </Card>
-
-        {/* Step Content */}
-        <Card className="border-0 shadow-2xl">
-          <CardContent className="py-10 px-6 md:px-10">
-            {renderStep()}
-          </CardContent>
-        </Card>
-
-        {/* Footer */}
-        <p className="text-center text-white/60 text-sm mt-6">
-          By creating an account, you agree to our{" "}
-          <Link to="/policies" className="text-primary hover:underline">
-            Terms of Service
-          </Link>{" "}
-          and{" "}
-          <Link to="/policies" className="text-primary hover:underline">
-            Privacy Policy
-          </Link>
-        </p>
       </div>
     </div>
   );

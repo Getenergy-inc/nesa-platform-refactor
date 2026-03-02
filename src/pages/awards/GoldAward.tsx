@@ -17,8 +17,8 @@ const goldTVShow = getTVShowByAward("gold");
 const features = [
   { icon: Vote, title: "100% Public Voting", description: "Winners determined entirely by public votes — no jury influence." },
   { icon: Globe, title: "Region-First", description: "Regional winners qualify for continental competition." },
-  { icon: Users, title: "135+ Subcategories", description: "Covering all major categories across 5 African regions." },
-  { icon: Trophy, title: "Feeds Blue Garnet", description: "Gold winners become Blue Garnet finalists for highest honour." },
+  { icon: Users, title: "Top 3 Per Subcategory", description: "405 Gold Certificate winners across 135 subcategories." },
+  { icon: Trophy, title: "Feeds Blue Garnet", description: "All 405 Gold winners compete for the 9 Blue Garnet Awards." },
 ];
 
 const regions = [
@@ -36,7 +36,7 @@ export default function GoldAward() {
         <title>Gold Certificate | NESA-Africa Public-Voted Recognition</title>
         <meta
           name="description"
-          content="The Gold Certificate is NESA-Africa's competitive public-voted recognition across 135 subcategories and 5 African regions. Vote with AGC."
+          content="The Gold Certificate is NESA-Africa's competitive public-voted recognition — Top 3 winners per subcategory (405 total) across 5 African regions. Vote with AGC."
         />
       </Helmet>
 
@@ -57,7 +57,7 @@ export default function GoldAward() {
           variant="gold"
           title="Gold"
           titleAccent="Certificate"
-          description="The competitive stage of NESA recognition. 135 subcategories across 17 major categories, determined entirely by public voting."
+          description="The competitive stage of NESA recognition. Top 3 highest-voted nominees per subcategory win Gold Certificates — 405 winners across 9 categories, all advancing to the Blue Garnet competition."
           features={["100% Public Voting", "No Judges", "Region-First Competition"]}
           primaryAction={{
             label: "Nominate for Gold",
@@ -245,12 +245,12 @@ export default function GoldAward() {
         {/* TV Show Section */}
         {goldTVShow && <AwardTVShowSection show={goldTVShow} accentColor="gold" />}
 
-        {/* Award Categories - 9 Gold/Blue Garnet categories */}
+        {/* Award Categories - 9 Gold categories with 135 subcategories, Top 3 winners each = 405 */}
         <AwardCategoriesGrid 
           tier="gold"
           accentColor="amber"
           title="Gold Certificate Categories"
-          description="9 major categories compete for Gold Certificate through 100% public voting across all African regions."
+          description="9 major categories with 135 subcategories — Top 3 highest-voted nominees per subcategory win Gold Certificates (405 total winners), all competing for the 9 Blue Garnet Awards."
         />
 
         {/* Certificate Gallery */}

@@ -241,7 +241,7 @@ export default function Vote() {
   return (
     <>
       <Helmet>
-        <title>Vote for Nominees | {currentEdition.name}</title>
+        <title>{`Vote for Nominees | ${currentEdition?.name || 'NESA-Africa 2025'}`}</title>
         <meta 
           name="description" 
           content={`Cast your vote for outstanding education changemakers in the ${currentEdition.name} awards. Support nominees making a difference across Africa.`}

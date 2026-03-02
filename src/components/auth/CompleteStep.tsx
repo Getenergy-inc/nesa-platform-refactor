@@ -1,11 +1,17 @@
 import { Link } from "react-router-dom";
+import { useQuery } from "@tanstack/react-query";
+import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
-import { CheckCircle2, Award, ArrowRight, Vote, Trophy } from "lucide-react";
+import { Badge } from "@/components/ui/badge";
+import { Card, CardContent } from "@/components/ui/card";
+import { CheckCircle2, Award, ArrowRight, Vote, Trophy, MapPin, Globe, Coins } from "lucide-react";
 import { AccountType } from "./AccountTypeStep";
 
 interface CompleteStepProps {
   accountType: AccountType;
   fullName: string;
+  chapterId?: string;
+  country?: string;
 }
 
 const nextStepsConfig: Record<AccountType, { title: string; steps: { icon: React.ReactNode; text: string; link: string }[] }> = {
@@ -59,9 +65,24 @@ const nextStepsConfig: Record<AccountType, { title: string; steps: { icon: React
   },
 };
 
-export function CompleteStep({ accountType, fullName }: CompleteStepProps) {
+export function CompleteStep({ accountType, fullName, chapterId, country }: CompleteStepProps) {
   const config = nextStepsConfig[accountType];
   const firstName = fullName.split(" ")[0] || "there";
+
+  // Fetch chapter details if assigned
+  const { data: chapter } = useQuery({
+    queryKey: ["chapter-detail", chapterId],
+    queryFn: async () => {
+      if (!chapterId) return null;
+      const { data } = await supabase
+        .from("chapters")
+        .select("name, country, region")
+        .eq("id", chapterId)
+        .maybeSingle();
+      return data;
+    },
+    enabled: !!chapterId,
+  });
 
   return (
     <div className="w-full max-w-lg mx-auto text-center">
@@ -70,12 +91,54 @@ export function CompleteStep({ accountType, fullName }: CompleteStepProps) {
       </div>
 
       <h2 className="text-2xl md:text-3xl font-display font-bold mb-2">
-        Welcome to NESA, {firstName}! 🎉
+        Welcome to {chapter ? `SCEF ${chapter.name} Local Chapter` : "Santos Creations Educational Foundation"}, {firstName}! 🎉
       </h2>
-      <p className="text-muted-foreground mb-8">
-        Your account has been created successfully. You're now part of the NESA community
-        dedicated to celebrating excellence in African education.
+      <p className="text-muted-foreground mb-6">
+        Your account is active. Explore nominations, voting, volunteering, and membership opportunities.
+        {chapter ? ` Your default ${chapter.name} chapter content is ready, but you can access other regions anytime.` : " Your default chapter content is ready, but you can access other regions anytime."}
       </p>
+
+      {/* Chapter & Region Assignment */}
+      {chapter && (
+        <Card className="mb-6 border-primary/20 bg-primary/5">
+          <CardContent className="p-4">
+            <div className="flex items-center justify-center gap-2 mb-3">
+              <MapPin className="h-4 w-4 text-primary" />
+              <span className="text-sm font-semibold">Your Local Chapter & Region</span>
+            </div>
+            <div className="flex flex-wrap gap-2 justify-center">
+              <Badge variant="secondary" className="bg-primary/10 text-primary border-primary/20 text-sm px-3 py-1">
+                <MapPin className="h-3 w-3 mr-1" />
+                {chapter.name} Chapter
+              </Badge>
+              {chapter.region && (
+                <Badge variant="secondary" className="bg-accent/50 border-accent text-sm px-3 py-1">
+                  <Globe className="h-3 w-3 mr-1" />
+                  {chapter.region}
+                </Badge>
+              )}
+            </div>
+            <p className="text-xs text-muted-foreground mt-3">
+              Your default content is ready. You can access other regions, categories, and local chapters from your dashboard.
+            </p>
+          </CardContent>
+        </Card>
+      )}
+
+      {/* AGC Welcome Bonus */}
+      <Card className="mb-6 border-amber-500/20 bg-amber-500/5">
+        <CardContent className="p-4 flex items-center gap-3">
+          <div className="h-10 w-10 rounded-full bg-amber-500/10 flex items-center justify-center shrink-0">
+            <Coins className="h-5 w-5 text-amber-600" />
+          </div>
+          <div className="text-left">
+            <p className="text-sm font-semibold">You've earned your first Afrigold Points!</p>
+            <p className="text-xs text-muted-foreground">
+              +5 AGC welcome credits added to your wallet. Submit verified nominations and earn more voting points.
+            </p>
+          </div>
+        </CardContent>
+      </Card>
 
       <div className="bg-muted/50 rounded-lg p-6 mb-8">
         <h3 className="font-semibold mb-4">{config.title}</h3>

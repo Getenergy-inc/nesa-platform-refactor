@@ -5,6 +5,76 @@ const corsHeaders = {
   "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type",
 };
 
+function jsonRes(data: unknown, status = 200) {
+  return new Response(JSON.stringify(data), {
+    status,
+    headers: { ...corsHeaders, "Content-Type": "application/json" },
+  });
+}
+
+function adminClient() {
+  return createClient(
+    Deno.env.get("SUPABASE_URL")!,
+    Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!
+  );
+}
+
+async function handleStatusLookup(email: string): Promise<Response> {
+  if (!email || typeof email !== "string") return jsonRes({ error: "Email is required" }, 400);
+  const normalizedEmail = email.trim().toLowerCase();
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(normalizedEmail)) return jsonRes({ error: "Invalid email format" }, 400);
+
+  const supabase = adminClient();
+  const { data: app, error } = await supabase
+    .from("judge_applications")
+    .select("id, full_name, email, status, created_at, verified_at, approved_at, rejected_at, rejection_reason")
+    .eq("email", normalizedEmail)
+    .maybeSingle();
+
+  if (error) { console.error("Status lookup error:", error); return jsonRes({ error: "Failed to look up application" }, 500); }
+  if (!app) return jsonRes({ found: false });
+
+  return jsonRes({
+    found: true,
+    application: {
+      id: app.id, full_name: app.full_name, email: app.email, status: app.status,
+      created_at: app.created_at, verified_at: app.verified_at,
+      approved_at: app.approved_at, rejected_at: app.rejected_at, rejection_reason: app.rejection_reason,
+    },
+  });
+}
+
+async function handleTokenVerify(token: string): Promise<Response> {
+  if (!token || typeof token !== "string" || token.length < 10) return jsonRes({ error: "Invalid verification token" }, 400);
+
+  const supabase = adminClient();
+  const { data: application, error: fetchError } = await supabase
+    .from("judge_applications")
+    .select("id, email, status, verification_token_expires_at")
+    .eq("verification_token", token)
+    .maybeSingle();
+
+  if (fetchError) { console.error("Token verify error:", fetchError); return jsonRes({ error: "Failed to verify token" }, 500); }
+  if (!application) return jsonRes({ error: "Invalid or expired verification link" }, 404);
+
+  if (application.status !== "submitted") {
+    return jsonRes({ success: true, already_verified: true, email: application.email });
+  }
+
+  if (application.verification_token_expires_at) {
+    const expiresAt = new Date(application.verification_token_expires_at);
+    if (expiresAt < new Date()) return jsonRes({ error: "Verification link has expired" }, 410);
+  }
+
+  const { error: updateError } = await supabase
+    .from("judge_applications")
+    .update({ status: "email_verified", verified_at: new Date().toISOString() })
+    .eq("id", application.id);
+
+  if (updateError) { console.error("Token update error:", updateError); return jsonRes({ error: "Failed to verify email" }, 500); }
+  return jsonRes({ success: true, email: application.email });
+}
+
 Deno.serve(async (req) => {
   // Handle CORS preflight
   if (req.method === "OPTIONS") {
@@ -15,6 +85,17 @@ Deno.serve(async (req) => {
     const url = new URL(req.url);
     const pathParts = url.pathname.split("/").filter(Boolean);
     const action = pathParts[1] || "";
+
+    // === PUBLIC ROUTES (no auth required) ===
+    if (req.method === "POST" && action === "status-lookup") {
+      const { email } = await req.json();
+      return await handleStatusLookup(email);
+    }
+
+    if (req.method === "POST" && action === "verify-token") {
+      const { token } = await req.json();
+      return await handleTokenVerify(token);
+    }
 
     // Create Supabase client with auth
     const authHeader = req.headers.get("Authorization");

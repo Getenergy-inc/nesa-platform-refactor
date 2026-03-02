@@ -198,6 +198,8 @@ export function getImageType(name: string): NomineeImageType {
 export function normalizeYearReferences(text: string): string {
   if (!text) return text;
   return text
+    // Brand rebrand: 9mobile → T2 Mobile
+    .replace(/9mobile/gi, "T2 Mobile")
     // Convert 2024 to 2025 first
     .replace(/2024/g, "2025")
     // Replace ranges to correct format
@@ -668,6 +670,52 @@ export function getAfricaRegions(): GeographicGroup[] {
     ...r,
     nomineeCount: allNominees.filter(n => n.geographicCategory === r.id).length,
   }));
+}
+
+/**
+ * Get Diaspora sub-groups (by subcategory title which represents diaspora region)
+ */
+export function getDiasporaSubgroups(): { id: string; name: string; nomineeCount: number }[] {
+  const allNominees = getAllNominees();
+  const diasporaNominees = allNominees.filter(n => n.geographicCategory === "diaspora");
+  
+  // Group by subcategory title
+  const subgroupMap: Record<string, number> = {};
+  diasporaNominees.forEach(n => {
+    const key = n.subcategoryTitle || "Other";
+    subgroupMap[key] = (subgroupMap[key] || 0) + 1;
+  });
+  
+  return Object.entries(subgroupMap)
+    .map(([name, count]) => ({
+      id: generateSlug(name),
+      name,
+      nomineeCount: count,
+    }))
+    .sort((a, b) => b.nomineeCount - a.nomineeCount);
+}
+
+/**
+ * Get Friends of Africa sub-groups (by subcategory title which represents contribution area)
+ */
+export function getFriendsOfAfricaSubgroups(): { id: string; name: string; nomineeCount: number }[] {
+  const allNominees = getAllNominees();
+  const friendsNominees = allNominees.filter(n => n.geographicCategory === "friends-of-africa");
+  
+  // Group by subcategory title (contribution area)
+  const subgroupMap: Record<string, number> = {};
+  friendsNominees.forEach(n => {
+    const key = n.subcategoryTitle || n.awardTitle || "Other";
+    subgroupMap[key] = (subgroupMap[key] || 0) + 1;
+  });
+  
+  return Object.entries(subgroupMap)
+    .map(([name, count]) => ({
+      id: generateSlug(name),
+      name,
+      nomineeCount: count,
+    }))
+    .sort((a, b) => b.nomineeCount - a.nomineeCount);
 }
 
 /**

@@ -60,9 +60,9 @@ export default function NomineeProfile() {
   }, [nominee?.id]); // Only trigger when nominee ID changes
 
   // Fetch the actual nominee ID and renomination count from database
-  // Note: DB lookup uses name-based slug for compatibility
+  // If not found, lazily create the DB record from CSV data
   useEffect(() => {
-    async function fetchNomineeData() {
+    async function fetchOrCreateNomineeData() {
       if (!nominee) return;
       
       // Try to find by the full unique slug first, then fall back to name-based slug
@@ -74,8 +74,8 @@ export default function NomineeProfile() {
         .replace(/-+/g, "-")
         .replace(/^-|-$/g, "");
       
-      const { data } = await supabase
-        .from("nominees")
+      const { data } = await (supabase as any)
+        .from("public_nominees")
         .select("id, renomination_count")
         .or(`slug.eq.${slug},slug.eq.${nameSlug}`)
         .maybeSingle();
@@ -83,10 +83,23 @@ export default function NomineeProfile() {
       if (data) {
         setDbNomineeId(data.id);
         setRenominationCount(data.renomination_count ?? 0);
+        return;
+      }
+
+      // Lazy-create: import and call ensureNomineeInDb
+      try {
+        const { ensureNomineeInDb } = await import("@/lib/ensureNomineeInDb");
+        const created = await ensureNomineeInDb(nominee);
+        if (created) {
+          setDbNomineeId(created.id);
+          setRenominationCount(created.renomination_count ?? 0);
+        }
+      } catch (err) {
+        console.warn("Could not auto-create nominee in DB:", err);
       }
     }
     
-    fetchNomineeData();
+    fetchOrCreateNomineeData();
   }, [slug, nominee]);
 
   // Get related nominees
@@ -152,32 +165,25 @@ export default function NomineeProfile() {
 
   if (!nominee) {
     return (
-      <div className="min-h-screen bg-charcoal">
-        <div className="container mx-auto px-4 py-24">
-          <div className="max-w-2xl mx-auto text-center">
-            <div className="w-24 h-24 mx-auto mb-6 rounded-full bg-gold/10 flex items-center justify-center">
-              <Users className="w-12 h-12 text-gold/40" />
-            </div>
-            <h1 className="text-3xl font-display text-ivory mb-4">Profile Not Available</h1>
-            <p className="text-ivory/60 mb-4 max-w-md mx-auto">
-              This nominee profile may be under review, pending approval, or the link may be incorrect.
-            </p>
-            <p className="text-ivory/40 text-sm mb-8 max-w-md mx-auto">
-              Only approved nominees appear in our public directory. If you believe this is an error, please contact our support team.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-3 justify-center">
-              <Button asChild className="bg-gold hover:bg-gold-dark text-charcoal">
-                <Link to="/nominees">
-                  <ArrowLeft className="w-4 h-4 mr-2" />
-                  Browse All Nominees
-                </Link>
-              </Button>
-              <Button asChild variant="outline" className="border-gold/30 text-gold hover:bg-gold/10">
-                <Link to="/nominate">
-                  Nominate Someone
-                </Link>
-              </Button>
-            </div>
+      <div className="min-h-screen bg-charcoal flex items-center justify-center">
+        <div className="max-w-md mx-auto text-center px-4">
+          <div className="w-20 h-20 mx-auto mb-5 rounded-full bg-gold/10 flex items-center justify-center">
+            <Users className="w-10 h-10 text-gold/30" />
+          </div>
+          <h1 className="text-2xl font-display text-ivory mb-3">Profile Not Available</h1>
+          <p className="text-ivory/50 text-sm mb-6">
+            This nominee profile may be under review or the link may be incorrect.
+          </p>
+          <div className="flex flex-col sm:flex-row gap-3 justify-center">
+            <Button asChild className="bg-gold hover:bg-gold-dark text-charcoal">
+              <Link to="/nominees">
+                <ArrowLeft className="w-4 h-4 mr-2" />
+                Browse Nominees
+              </Link>
+            </Button>
+            <Button asChild variant="outline" className="border-gold/30 text-gold hover:bg-gold/10">
+              <Link to="/nominate">Nominate Someone</Link>
+            </Button>
           </div>
         </div>
       </div>
@@ -195,8 +201,8 @@ export default function NomineeProfile() {
       
       <div className="min-h-screen bg-charcoal">
         {/* Hero Section */}
-        <section className="relative pt-24 pb-16 bg-gradient-to-b from-charcoal via-charcoal/95 to-charcoal overflow-hidden">
-          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-gold/5 via-transparent to-transparent" />
+        <section className="relative pt-20 pb-12 bg-gradient-to-b from-charcoal via-charcoal/95 to-charcoal overflow-hidden">
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-gold/8 via-transparent to-transparent" />
           
           <div className="container mx-auto px-4 relative z-10">
             {/* Breadcrumbs */}
@@ -267,7 +273,7 @@ export default function NomineeProfile() {
                         </Badge>
                       </div>
 
-                      <h1 className="font-display text-3xl md:text-4xl text-ivory mb-2">
+                      <h1 className="font-display text-2xl md:text-3xl lg:text-4xl text-ivory mb-2">
                         {normalizeYearReferences(nominee.name)}
                       </h1>
 

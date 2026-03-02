@@ -49,7 +49,7 @@ export function CustomerCareChat() {
             initial={{ scale: 0, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             exit={{ scale: 0, opacity: 0 }}
-            className="fixed bottom-6 right-6 z-50"
+            className="fixed bottom-20 lg:bottom-6 right-4 z-50"
           >
             <Button
               onClick={() => setIsOpen(true)}
@@ -70,7 +70,7 @@ export function CustomerCareChat() {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 20, scale: 0.95 }}
             transition={{ duration: 0.2 }}
-            className="fixed bottom-6 right-6 z-50 w-[380px] max-w-[calc(100vw-48px)] h-[600px] max-h-[calc(100vh-120px)] bg-background border border-border rounded-2xl shadow-2xl flex flex-col overflow-hidden"
+            className="fixed bottom-20 lg:bottom-6 right-4 lg:right-6 z-50 w-[380px] max-w-[calc(100vw-32px)] h-[500px] lg:h-[600px] max-h-[calc(100vh-120px)] bg-background border border-border rounded-2xl shadow-2xl flex flex-col overflow-hidden"
           >
             {/* Header */}
             <div className="flex items-center justify-between px-4 py-3 bg-primary text-primary-foreground">
@@ -111,9 +111,9 @@ export function CustomerCareChat() {
                   <div className="h-16 w-16 rounded-full bg-primary/10 flex items-center justify-center mb-4">
                     <Bot className="h-8 w-8 text-primary" />
                   </div>
-                  <h4 className="font-semibold text-foreground mb-2">Welcome to NESA Support!</h4>
+                  <h4 className="font-semibold text-foreground mb-2">Welcome to SCEF Support!</h4>
                   <p className="text-sm text-muted-foreground mb-4">
-                    I'm here to help you with questions about nominations, voting, certificates, and more.
+                    I'm here to help you with nominations, voting, Afrigold Points, volunteering, membership, and more.
                   </p>
                   <div className="flex flex-wrap gap-2 justify-center">
                     {[

@@ -51,5 +51,11 @@
     "submitted": "A ti fi ìyàn ránṣẹ́ dáadáa!",
     "thankYou": "A dúpẹ́ fún ìyàn rẹ. Ẹni tí a yàn yóò gba lẹ́tà ìgbàwọ́lé.",
     "error": "Kò ṣàṣeyọrí. Jọ̀wọ́ gbìyànjú lẹ́ẹ̀kan síi."
+  },
+  "renomination": {
+    "title": "Tún Yàn",
+    "description": "Fi àtúnyàn ránṣẹ́ fún ẹni yìí",
+    "success": "A ti fi àtúnyàn ránṣẹ́ dáadáa!",
+    "error": "Àtúnyàn kùnà. Jọ̀wọ́ gbìyànjú lẹ́ẹ̀kan síi."
   }
 }

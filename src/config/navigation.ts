@@ -107,6 +107,37 @@ export const MAIN_NAV: NavItem[] = [
     icon: Trophy,
     children: [
       {
+        label: "Africa Education Icon",
+        href: "/awards/icon",
+        description: "Lifetime achievement recognition",
+        icon: Star,
+      },
+      {
+        label: "Blue Garnet Award",
+        href: "/awards/blue-garnet",
+        description: "Highest honour — 60% Jury / 40% Public",
+        icon: Trophy,
+      },
+      {
+        label: "Platinum Certificate",
+        href: "/awards/platinum",
+        description: "Baseline recognition for education service",
+        icon: Medal,
+      },
+      {
+        label: "Gold Special Recognition",
+        href: "/awards/gold-special-recognition",
+        description: "Cultural impact — Sports, Music & Social Media",
+        icon: Medal,
+        badge: "2025",
+      },
+      {
+        label: "Gold Certificate",
+        href: "/awards/gold",
+        description: "Competitive public-voted recognition",
+        icon: Award,
+      },
+      {
         label: "Categories (Africa First)",
         href: "/categories?view=africa",
         description: "Africa Regional, International & Icon categories",
@@ -119,33 +150,46 @@ export const MAIN_NAV: NavItem[] = [
         badge: "8 categories",
       },
       {
-        label: "Platinum Certificate",
-        href: "/awards/platinum",
-        description: "Baseline recognition for education service",
-        icon: Medal,
-      },
-      {
-        label: "Africa Education Icon",
-        href: "/awards/icon",
-        description: "Lifetime achievement recognition",
-        icon: Star,
-      },
-      {
-        label: "Gold Certificate",
-        href: "/awards/gold",
-        description: "Competitive public-voted recognition",
-        icon: Award,
-      },
-      {
-        label: "Blue Garnet Award",
-        href: "/awards/blue-garnet",
-        description: "Highest honour — 60% Jury / 40% Public",
-        icon: Trophy,
-      },
-      {
         label: "Past Winners",
         href: "/awards/winners",
         description: "Celebrating Africa's education champions",
+      },
+    ],
+  },
+  {
+    label: "Guidelines",
+    href: "/guidelines/edi-matrix",
+    icon: Shield,
+    children: [
+      {
+        label: "EDI Matrix & Guidelines",
+        href: "/guidelines/edi-matrix",
+        description: "The integrity backbone of NESA-Africa evaluations",
+        icon: Shield,
+      },
+      {
+        label: "For Nominators",
+        href: "/guidelines/nominators",
+        description: "Step-by-step nomination guide and ethical rules",
+        icon: FileCheck,
+      },
+      {
+        label: "For Nominees",
+        href: "/guidelines/nominees",
+        description: "Acceptance journey, NRC screening & next steps",
+        icon: Users,
+      },
+      {
+        label: "For Judges",
+        href: "/guidelines/judges",
+        description: "Scoring criteria, COI protocols & rubrics",
+        icon: Gavel,
+      },
+      {
+        label: "For Voters",
+        href: "/guidelines/voters",
+        description: "AGC voting system and ethical voting rules",
+        icon: Vote,
       },
     ],
   },
@@ -308,10 +352,10 @@ export const MAIN_NAV: NavItem[] = [
         external: true,
       },
       {
-        label: "Rebuild My School",
-        href: "/rebuild",
-        description: "Infrastructure development initiative",
-        external: true,
+        label: "Rebuild My School Africa (Legacy)",
+        href: "/eduaid-africa/rebuild-my-school",
+        description: "Post-award legacy project — nominate special needs schools",
+        icon: Building,
       },
       {
         label: "Contact Us",
@@ -386,7 +430,7 @@ export const FOOTER_NAV: NavSection[] = [
     items: [
       { label: "Donate", href: "/donate" },
       { label: "EduAid-Africa", href: "/eduaid" },
-      { label: "Rebuild My School", href: "/rebuild" },
+      { label: "Rebuild My School Africa", href: "/eduaid-africa/rebuild-my-school" },
       { label: "Contact", href: "/contact" },
     ],
   },

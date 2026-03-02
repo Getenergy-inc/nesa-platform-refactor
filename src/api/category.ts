@@ -12,7 +12,7 @@ export interface Category {
   scope: CategoryScope;
 }
 
-export interface SubCategory extends Omit<Category, "awardType"> {}
+export type SubCategory = Omit<Category, "awardType">;
 
 export const categoryApi = {
   fetchAllCategories: async (accessToken: string) => {

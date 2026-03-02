@@ -5,6 +5,7 @@ import { Navigate } from "react-router-dom";
 import { DashboardLayout } from "@/components/layout/DashboardLayout";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { supabase } from "@/integrations/supabase/client";
+import { useRegionNomineeCounts } from "@/hooks/useRegionNomineeCounts";
 import { toast } from "sonner";
 import {
   FinanceOverviewCard,
@@ -529,6 +530,7 @@ export default function AdminDashboard() {
 
         {/* Monitoring Tab */}
         <TabsContent value="monitoring" className="space-y-6">
+          <RegionNomineeStatsCard />
           <NominationTrendsCard data={nominationTrends} loading={loading} />
           <TopPerformersCard
             chapters={chapters}
@@ -592,5 +594,31 @@ export default function AdminDashboard() {
         </TabsContent>
       </Tabs>
     </DashboardLayout>
+  );
+}
+
+function RegionNomineeStatsCard() {
+  const { data, isLoading } = useRegionNomineeCounts();
+  const { regionCounts = [], totalCount = 0 } = data || {};
+
+  return (
+    <div className="rounded-xl border bg-card p-6">
+      <div className="flex items-center justify-between mb-4">
+        <h3 className="font-semibold text-lg">Nominees by Region</h3>
+        <span className="text-2xl font-bold text-primary">{totalCount.toLocaleString()}</span>
+      </div>
+      {isLoading ? (
+        <div className="text-muted-foreground text-sm">Loading...</div>
+      ) : (
+        <div className="grid grid-cols-2 md:grid-cols-5 gap-3">
+          {regionCounts.map((r) => (
+            <div key={r.region_slug} className="rounded-lg bg-muted/50 p-3 text-center">
+              <div className="text-xl font-bold">{r.nominee_count}</div>
+              <div className="text-xs text-muted-foreground truncate">{r.region_name}</div>
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
   );
 }

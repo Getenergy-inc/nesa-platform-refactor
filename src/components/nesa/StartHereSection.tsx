@@ -1,6 +1,10 @@
 import { Link } from "react-router-dom";
 import { Users, Trophy, Play, Award, ArrowRight, Sparkles } from "lucide-react";
 import { motion } from "framer-motion";
+import browseImg from "@/assets/cards/browse-nominees.jpg";
+import exploreImg from "@/assets/cards/explore-awards.jpg";
+import tvImg from "@/assets/cards/nesa-tv-live.jpg";
+import nominateImg from "@/assets/cards/nominate-someone.jpg";
 
 const paths = [
   {
@@ -9,8 +13,8 @@ const paths = [
     description: "Discover 1,760+ education champions across 5 regions",
     href: "/nominees",
     color: "text-gold",
-    bgColor: "bg-gold/10",
     borderColor: "border-gold/30",
+    image: browseImg,
   },
   {
     icon: Trophy,
@@ -18,8 +22,8 @@ const paths = [
     description: "Learn about Platinum, Gold, Blue Garnet & Icon recognition tiers",
     href: "/categories",
     color: "text-blue-400",
-    bgColor: "bg-blue-500/10",
     borderColor: "border-blue-500/30",
+    image: exploreImg,
   },
   {
     icon: Play,
@@ -27,8 +31,8 @@ const paths = [
     description: "Live shows, webinars, and award ceremonies",
     href: "/media/tv",
     color: "text-purple-400",
-    bgColor: "bg-purple-500/10",
     borderColor: "border-purple-500/30",
+    image: tvImg,
   },
   {
     icon: Award,
@@ -36,22 +40,15 @@ const paths = [
     description: "Recognize an education champion making a difference",
     href: "/nominate",
     color: "text-emerald-400",
-    bgColor: "bg-emerald-500/10",
     borderColor: "border-emerald-500/30",
+    image: nominateImg,
   },
 ];
 
-/**
- * StartHereSection - First-time visitor orientation
- * 
- * Provides clear entry points for new users to understand
- * what NESA is and how to get started.
- */
 export function StartHereSection() {
   return (
     <section className="bg-charcoal py-12 md:py-16 border-y border-gold/10">
       <div className="container">
-        {/* Header */}
         <div className="text-center mb-8">
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-gold/10 border border-gold/30 mb-4">
             <Sparkles className="h-4 w-4 text-gold" />
@@ -66,7 +63,6 @@ export function StartHereSection() {
           </p>
         </div>
 
-        {/* Paths Grid */}
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
           {paths.map((path, index) => (
             <motion.div
@@ -78,32 +74,34 @@ export function StartHereSection() {
               whileHover={{ y: -4, transition: { duration: 0.2 } }}
             >
               <Link to={path.href}>
-                <div className={`group relative h-full bg-white/5 rounded-xl p-6 border ${path.borderColor} hover:bg-white/10 hover:shadow-lg hover:shadow-${path.color.replace('text-', '')}/10 transition-all duration-300`}>
-                  {/* Icon with hover animation */}
-                  <motion.div 
-                    className={`h-12 w-12 rounded-xl ${path.bgColor} flex items-center justify-center mb-4`}
-                    whileHover={{ scale: 1.1, rotate: 5 }}
-                    transition={{ duration: 0.2 }}
-                  >
-                    <path.icon className={`h-6 w-6 ${path.color}`} />
-                  </motion.div>
-                  
-                  {/* Content */}
-                  <h3 className="text-white font-semibold text-lg mb-2 group-hover:text-gold transition-colors">
-                    {path.title}
-                  </h3>
-                  <p className="text-white/60 text-sm leading-relaxed mb-4">
-                    {path.description}
-                  </p>
-
-                  {/* Arrow with slide animation */}
-                  <div className="flex items-center gap-1 text-sm text-white/40 group-hover:text-gold transition-all">
-                    <span>Explore</span>
-                    <ArrowRight className="h-4 w-4 group-hover:translate-x-2 transition-transform duration-300" />
+                <div className={`group relative h-full bg-white/5 rounded-xl border ${path.borderColor} hover:bg-white/10 hover:shadow-lg transition-all duration-300 overflow-hidden`}>
+                  {/* Card Image */}
+                  <div className="relative h-36 w-full overflow-hidden">
+                    <img src={path.image} alt={path.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-charcoal via-charcoal/50 to-transparent" />
+                    <div className="absolute bottom-3 left-4">
+                      <motion.div 
+                        className="h-10 w-10 rounded-xl bg-black/40 backdrop-blur-sm flex items-center justify-center"
+                        whileHover={{ scale: 1.1, rotate: 5 }}
+                        transition={{ duration: 0.2 }}
+                      >
+                        <path.icon className={`h-5 w-5 ${path.color}`} />
+                      </motion.div>
+                    </div>
                   </div>
                   
-                  {/* Subtle glow on hover */}
-                  <div className={`absolute inset-0 rounded-xl ${path.bgColor} opacity-0 group-hover:opacity-20 transition-opacity duration-300 blur-xl -z-10`} />
+                  <div className="p-5">
+                    <h3 className="text-white font-semibold text-lg mb-2 group-hover:text-gold transition-colors">
+                      {path.title}
+                    </h3>
+                    <p className="text-white/60 text-sm leading-relaxed mb-4">
+                      {path.description}
+                    </p>
+                    <div className="flex items-center gap-1 text-sm text-white/40 group-hover:text-gold transition-all">
+                      <span>Explore</span>
+                      <ArrowRight className="h-4 w-4 group-hover:translate-x-2 transition-transform duration-300" />
+                    </div>
+                  </div>
                 </div>
               </Link>
             </motion.div>

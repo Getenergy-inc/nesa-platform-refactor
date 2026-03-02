@@ -12,8 +12,8 @@ interface EarningMethod {
 const EARNING_METHODS: EarningMethod[] = [
   { icon: Gift, title: "Support Bonus", description: "$1 = 5 Bonus AGC (eligible transactions)" },
   { icon: Clock, title: "Daily Sign-in", description: "+1 AGCc/day (10 AGCc = 1 AGC)" },
-  { icon: Users, title: "Referral (1st Payment)", description: "+15 AGC when referred user pays" },
-  { icon: Users, title: "Referral (2nd Payment)", description: "+5 AGC on second payment" },
+  { icon: Users, title: "Referral (1st Payment)", description: "+3 AGC when referred user pays" },
+  { icon: Users, title: "Referral (2nd Payment)", description: "+1 AGC on second payment" },
 ];
 
 export function EarningMethods() {

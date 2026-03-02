@@ -40,29 +40,24 @@ import {
   handleImageError,
   type Nominee
 } from "@/lib/nesaData";
-import { NESA_CATEGORIES } from "@/config/nesaCategories";
+import { 
+  NESA_CATEGORIES, 
+  TIER_INFO, 
+  getCategoriesByTier,
+  type AwardTier 
+} from "@/config/nesaCategories";
+import { categoryIconMap } from "@/config/categoryIconMap";
 
-// Icon mapping for categories
-const CATEGORY_ICONS: Record<string, React.ComponentType<{ className?: string }>> = {
-  Building2,
-  Building,
-  Laptop,
-  Radio,
-  Heart,
-  Users,
-  FlaskConical,
-  Palette,
-  MapPin,
-  BookOpen,
-  Microscope,
-  Church,
-  Moon,
-  GraduationCap,
-  Globe,
-  Crown,
-  Star,
-  Award,
-};
+// Use centralized icon map with fallback
+const getIconComponent = (iconName: string) => categoryIconMap[iconName] || Award;
+
+// Award tier summary data derived from authoritative config
+const TIER_SUMMARY: { tier: AwardTier; description: string }[] = [
+  { tier: "platinum", description: "17 categories: 7 core (100 renominations) + 10 standard (200 renominations)" },
+  { tier: "gold", description: "9 categories, 135 subcategories — 100% public voting" },
+  { tier: "blue-garnet", description: "9 categories — feeds from Gold winners (40% public + 60% jury)" },
+  { tier: "icon", description: "Africa Education Icon Blue Garnet — 1 category, 3 subcategories" },
+];
 
 // Social media links for NESA Africa TV
 const socialLinks = [
@@ -156,6 +151,49 @@ export function NomineesShowcaseSection() {
           </div>
         </motion.div>
 
+        {/* Award Tier CTAs - Clickable tier navigation */}
+        <motion.div 
+          className="mb-10"
+          initial={{ opacity: 0, y: 10 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.05 }}
+        >
+          <h3 className="text-sm font-medium text-white/70 flex items-center gap-2 mb-4">
+            <Award className="h-4 w-4 text-gold" />
+            Award Tiers
+          </h3>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+            {TIER_SUMMARY.map(({ tier, description }) => {
+              const tierInfo = TIER_INFO[tier];
+              const categoryCount = getCategoriesByTier(tier).length;
+              return (
+                <Link
+                  key={tier}
+                  to={`/awards/${tier}`}
+                  className="group"
+                >
+                  <div className={`p-4 rounded-xl border bg-white/5 hover:bg-white/10 transition-all duration-200 ${tierInfo.borderColor} hover:scale-[1.02]`}>
+                    <div className="flex items-center justify-between mb-2">
+                      <Badge className={`${tierInfo.bgColor} ${tierInfo.color} border-transparent text-xs`}>
+                        {tierInfo.shortName}
+                      </Badge>
+                      <Badge variant="outline" className="text-[10px] text-white/50 border-white/20">
+                        {categoryCount} {categoryCount === 1 ? 'category' : 'categories'}
+                      </Badge>
+                    </div>
+                    <p className="text-[11px] text-white/50 line-clamp-2 mb-2">{description}</p>
+                    <div className="flex items-center gap-1 text-xs text-gold opacity-0 group-hover:opacity-100 transition-opacity">
+                      <span>Explore</span>
+                      <ChevronRight className="h-3 w-3 group-hover:translate-x-1 transition-transform" />
+                    </div>
+                  </div>
+                </Link>
+              );
+            })}
+          </div>
+        </motion.div>
+
         {/* Category Viewing Buttons - All 17 Award Categories */}
         <motion.div 
           className="mb-10"
@@ -181,7 +219,7 @@ export function NomineesShowcaseSection() {
           <ScrollArea className="w-full whitespace-nowrap">
             <div className="flex gap-2 pb-3">
               {NESA_CATEGORIES.filter(cat => cat.isActive).map((category) => {
-                const IconComponent = CATEGORY_ICONS[category.iconName] || Award;
+                const IconComponent = getIconComponent(category.iconName);
                 return (
                   <Link
                     key={category.id}

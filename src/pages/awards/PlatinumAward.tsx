@@ -54,7 +54,7 @@ export default function PlatinumAward() {
           variant="platinum"
           title="Platinum"
           titleAccent="Certificate"
-          description="The foundational recognition for all NESA nominees. A non-competitive, governance-verified certificate of excellence across 17 education categories."
+          description="The foundational recognition for all 17 NESA categories. 7 core categories require 100 renominations, 10 standard categories require 200 renominations to unlock certificate download."
           primaryAction={{
             label: "Submit Nomination",
             href: "/nominate",
@@ -110,12 +110,12 @@ export default function PlatinumAward() {
         {/* TV Show Section */}
         {platinumTVShow && <AwardTVShowSection show={platinumTVShow} accentColor="amber" />}
 
-        {/* Award Categories - 8 Core Platinum categories */}
+        {/* Award Categories - All 17 Platinum categories */}
         <AwardCategoriesGrid 
           tier="platinum"
           accentColor="slate"
-          title="Core Platinum Categories"
-          description="8 specialized categories eligible for Platinum Certificate recognition through NRC verification."
+          title="Platinum Certificate Categories"
+          description="All 17 categories are eligible for Platinum: 7 core categories (100 renominations) and 10 standard categories (200 renominations)."
         />
 
         {/* Certificate Gallery */}

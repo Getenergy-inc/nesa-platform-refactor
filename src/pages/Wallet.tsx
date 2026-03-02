@@ -10,7 +10,8 @@ import { Loader2, ArrowUpRight, ArrowDownLeft, Gift, Vote, Ticket, Users, Shoppi
 import { useAuth } from "@/contexts/AuthContext";
 import { supabase } from "@/integrations/supabase/client";
 import { ReferralLinkCard } from "@/components/tickets";
-import { AGC_NON_TRADEABLE_DISCLAIMER, AGC_BONUS_RATES } from "@/constants/agc";
+import { AGC_NON_TRADEABLE_DISCLAIMER } from "@/constants/agc";
+import { AGC_EARNING_METHODS, AGC_CONVERSION_RATE } from "@/config/agcConfig";
 
 interface WalletBalance {
   agc_total: number;
@@ -151,18 +152,10 @@ export default function Wallet() {
                     </div>
                   </div>
 
-                  <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                  <div className="grid grid-cols-2 gap-4">
                     <div className="text-center p-3 bg-card/50 rounded-lg">
                       <p className="text-xs text-muted-foreground">Bonus AGC</p>
                       <p className="text-lg font-semibold text-gold">{balance?.agc_bonus || 0}</p>
-                    </div>
-                    <div className="text-center p-3 bg-card/50 rounded-lg">
-                      <p className="text-xs text-muted-foreground">Non-Withdrawable</p>
-                      <p className="text-lg font-semibold">{balance?.agc_non_withdrawable || 0}</p>
-                    </div>
-                    <div className="text-center p-3 bg-card/50 rounded-lg">
-                      <p className="text-xs text-muted-foreground">Withdrawable</p>
-                      <p className="text-lg font-semibold">{balance?.agc_withdrawable || 0}</p>
                     </div>
                     <div className="text-center p-3 bg-card/50 rounded-lg">
                       <p className="text-xs text-muted-foreground">USD Balance</p>
@@ -261,12 +254,13 @@ export default function Wallet() {
                       <AccordionTrigger>How do I earn AGC?</AccordionTrigger>
                       <AccordionContent>
                         <ul className="space-y-2 text-sm">
-                          <li>• Daily sign-in: +1 AGCc</li>
-                          <li>• Verified nominations: +5 AGCc</li>
-                          <li>• Ticket/shop purchase: ${AGC_BONUS_RATES.purchaseBonus} AGC per $1 spent</li>
-                          <li>• Referral bonus: +{AGC_BONUS_RATES.referralFirstPurchase} AGC (first purchase), +{AGC_BONUS_RATES.referralSecondPurchase} AGC (second)</li>
-                          <li>• Sponsor campaigns: varies by sponsor</li>
+                          {AGC_EARNING_METHODS.filter(m => m.isActive).map(method => (
+                            <li key={method.id}>• {method.title}: {method.reward}</li>
+                          ))}
                         </ul>
+                        <p className="text-xs text-muted-foreground mt-2">
+                          {AGC_CONVERSION_RATE} AGCc = 1 AGC (1 Vote)
+                        </p>
                         <div className="mt-3">
                           <Button asChild size="sm" variant="outline">
                             <Link to="/earn-voting-credits">

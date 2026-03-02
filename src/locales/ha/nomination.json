@@ -51,5 +51,11 @@
     "submitted": "An tura zaɓen cikin nasara!",
     "thankYou": "Na gode da zaɓenka. Ɗan takara zai karɓi wasiƙar karɓa.",
     "error": "An kasa turawa. Da fatan sake gwadawa."
+  },
+  "renomination": {
+    "title": "Sake Zaɓe",
+    "description": "Tura sabon goyon baya ga wannan ɗan takara",
+    "success": "An tura sake zaɓen cikin nasara!",
+    "error": "An kasa tura sake zaɓe. Da fatan sake gwadawa."
   }
 }

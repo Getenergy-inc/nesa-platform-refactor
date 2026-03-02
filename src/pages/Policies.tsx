@@ -31,7 +31,7 @@ export default function Policies() {
   return (
     <>
       <Helmet>
-        <title>Policies & Guidelines | {currentEdition.name}</title>
+        <title>{`Policies & Guidelines | ${currentEdition?.name || 'NESA-Africa 2025'}`}</title>
         <meta 
           name="description" 
           content="Review NESA Africa's Privacy Policy, Terms of Service, and Governance Guidelines. Transparency and accountability in recognizing education excellence."

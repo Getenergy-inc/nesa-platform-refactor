@@ -130,6 +130,57 @@ export type Database = {
           },
         ]
       }
+      ambassadors: {
+        Row: {
+          appointed_date: string | null
+          bio: string | null
+          chapter_id: string | null
+          created_at: string
+          id: string
+          region_id: string | null
+          status: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          appointed_date?: string | null
+          bio?: string | null
+          chapter_id?: string | null
+          created_at?: string
+          id?: string
+          region_id?: string | null
+          status?: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          appointed_date?: string | null
+          bio?: string | null
+          chapter_id?: string | null
+          created_at?: string
+          id?: string
+          region_id?: string | null
+          status?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "ambassadors_chapter_id_fkey"
+            columns: ["chapter_id"]
+            isOneToOne: false
+            referencedRelation: "chapters"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "ambassadors_region_id_fkey"
+            columns: ["region_id"]
+            isOneToOne: false
+            referencedRelation: "regions"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       audit_events: {
         Row: {
           action: string
@@ -339,6 +390,7 @@ export type Database = {
       }
       categories: {
         Row: {
+          country: string | null
           created_at: string | null
           description: string | null
           display_order: number | null
@@ -346,10 +398,12 @@ export type Database = {
           id: string
           is_active: boolean | null
           name: string
+          scope: string
           slug: string
           updated_at: string | null
         }
         Insert: {
+          country?: string | null
           created_at?: string | null
           description?: string | null
           display_order?: number | null
@@ -357,10 +411,12 @@ export type Database = {
           id?: string
           is_active?: boolean | null
           name: string
+          scope?: string
           slug: string
           updated_at?: string | null
         }
         Update: {
+          country?: string | null
           created_at?: string | null
           description?: string | null
           display_order?: number | null
@@ -368,10 +424,63 @@ export type Database = {
           id?: string
           is_active?: boolean | null
           name?: string
+          scope?: string
           slug?: string
           updated_at?: string | null
         }
         Relationships: []
+      }
+      certificate_downloads: {
+        Row: {
+          certificate_id: string
+          downloaded_at: string
+          id: string
+          ip_address: string | null
+          nominee_id: string
+          user_agent: string | null
+          user_id: string
+        }
+        Insert: {
+          certificate_id: string
+          downloaded_at?: string
+          id?: string
+          ip_address?: string | null
+          nominee_id: string
+          user_agent?: string | null
+          user_id: string
+        }
+        Update: {
+          certificate_id?: string
+          downloaded_at?: string
+          id?: string
+          ip_address?: string | null
+          nominee_id?: string
+          user_agent?: string | null
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "certificate_downloads_certificate_id_fkey"
+            columns: ["certificate_id"]
+            isOneToOne: false
+            referencedRelation: "certificates"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "certificate_downloads_nominee_id_fkey"
+            columns: ["nominee_id"]
+            isOneToOne: false
+            referencedRelation: "nominees"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "certificate_downloads_nominee_id_fkey"
+            columns: ["nominee_id"]
+            isOneToOne: false
+            referencedRelation: "public_nominees"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       certificate_verifications: {
         Row: {
@@ -522,6 +631,7 @@ export type Database = {
           name: string
           referral_code: string | null
           region: string | null
+          region_id: string | null
           slug: string
           updated_at: string | null
         }
@@ -537,6 +647,7 @@ export type Database = {
           name: string
           referral_code?: string | null
           region?: string | null
+          region_id?: string | null
           slug: string
           updated_at?: string | null
         }
@@ -552,6 +663,7 @@ export type Database = {
           name?: string
           referral_code?: string | null
           region?: string | null
+          region_id?: string | null
           slug?: string
           updated_at?: string | null
         }
@@ -569,6 +681,13 @@ export type Database = {
             isOneToOne: false
             referencedRelation: "public_profiles"
             referencedColumns: ["user_id"]
+          },
+          {
+            foreignKeyName: "chapters_region_id_fkey"
+            columns: ["region_id"]
+            isOneToOne: false
+            referencedRelation: "regions"
+            referencedColumns: ["id"]
           },
         ]
       }
@@ -716,6 +835,89 @@ export type Database = {
             columns: ["subcategory_id"]
             isOneToOne: false
             referencedRelation: "subcategories"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      correspondence_branding: {
+        Row: {
+          chapter_id: string
+          created_at: string
+          footer_text: string | null
+          id: string
+          is_active: boolean
+          logo_url: string | null
+          region_id: string | null
+          sender_email: string | null
+          sender_name: string
+          updated_at: string
+        }
+        Insert: {
+          chapter_id: string
+          created_at?: string
+          footer_text?: string | null
+          id?: string
+          is_active?: boolean
+          logo_url?: string | null
+          region_id?: string | null
+          sender_email?: string | null
+          sender_name: string
+          updated_at?: string
+        }
+        Update: {
+          chapter_id?: string
+          created_at?: string
+          footer_text?: string | null
+          id?: string
+          is_active?: boolean
+          logo_url?: string | null
+          region_id?: string | null
+          sender_email?: string | null
+          sender_name?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "correspondence_branding_chapter_id_fkey"
+            columns: ["chapter_id"]
+            isOneToOne: false
+            referencedRelation: "chapters"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "correspondence_branding_region_id_fkey"
+            columns: ["region_id"]
+            isOneToOne: false
+            referencedRelation: "regions"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      country_region_map: {
+        Row: {
+          country: string
+          created_at: string
+          id: string
+          region_id: string
+        }
+        Insert: {
+          country: string
+          created_at?: string
+          id?: string
+          region_id: string
+        }
+        Update: {
+          country?: string
+          created_at?: string
+          id?: string
+          region_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "country_region_map_region_id_fkey"
+            columns: ["region_id"]
+            isOneToOne: false
+            referencedRelation: "regions"
             referencedColumns: ["id"]
           },
         ]
@@ -1495,6 +1697,47 @@ export type Database = {
           },
         ]
       }
+      legacy_category_mappings: {
+        Row: {
+          created_at: string | null
+          id: string
+          legacy_category: string
+          legacy_subcategory: string
+          new_subcategory_id: string | null
+          notes: string | null
+          status: string
+          updated_at: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          id?: string
+          legacy_category: string
+          legacy_subcategory: string
+          new_subcategory_id?: string | null
+          notes?: string | null
+          status?: string
+          updated_at?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          id?: string
+          legacy_category?: string
+          legacy_subcategory?: string
+          new_subcategory_id?: string | null
+          notes?: string | null
+          status?: string
+          updated_at?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "legacy_category_mappings_new_subcategory_id_fkey"
+            columns: ["new_subcategory_id"]
+            isOneToOne: false
+            referencedRelation: "subcategories"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       media: {
         Row: {
           created_at: string | null
@@ -1553,6 +1796,69 @@ export type Database = {
             columns: ["season_id"]
             isOneToOne: false
             referencedRelation: "seasons"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      migration_email_jobs: {
+        Row: {
+          batch_id: string | null
+          created_at: string | null
+          email: string
+          error_message: string | null
+          id: string
+          max_retries: number | null
+          nominee_id: string | null
+          nominee_name: string
+          retry_count: number | null
+          sent_at: string | null
+          status: string
+          template_key: string
+          updated_at: string | null
+        }
+        Insert: {
+          batch_id?: string | null
+          created_at?: string | null
+          email: string
+          error_message?: string | null
+          id?: string
+          max_retries?: number | null
+          nominee_id?: string | null
+          nominee_name: string
+          retry_count?: number | null
+          sent_at?: string | null
+          status?: string
+          template_key?: string
+          updated_at?: string | null
+        }
+        Update: {
+          batch_id?: string | null
+          created_at?: string | null
+          email?: string
+          error_message?: string | null
+          id?: string
+          max_retries?: number | null
+          nominee_id?: string | null
+          nominee_name?: string
+          retry_count?: number | null
+          sent_at?: string | null
+          status?: string
+          template_key?: string
+          updated_at?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "migration_email_jobs_nominee_id_fkey"
+            columns: ["nominee_id"]
+            isOneToOne: false
+            referencedRelation: "nominees"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "migration_email_jobs_nominee_id_fkey"
+            columns: ["nominee_id"]
+            isOneToOne: false
+            referencedRelation: "public_nominees"
             referencedColumns: ["id"]
           },
         ]
@@ -1826,6 +2132,9 @@ export type Database = {
           identity_hash: string | null
           is_platinum: boolean | null
           jury_score: number | null
+          legacy_ids: Json | null
+          legacy_source: string | null
+          linkedin_url: string | null
           logo_url: string | null
           name: string
           nominator_user_id: string | null
@@ -1846,6 +2155,8 @@ export type Database = {
           subcategory_id: string
           title: string | null
           updated_at: string | null
+          website: string | null
+          work_done: string | null
         }
         Insert: {
           acceptance_status?:
@@ -1865,6 +2176,9 @@ export type Database = {
           identity_hash?: string | null
           is_platinum?: boolean | null
           jury_score?: number | null
+          legacy_ids?: Json | null
+          legacy_source?: string | null
+          linkedin_url?: string | null
           logo_url?: string | null
           name: string
           nominator_user_id?: string | null
@@ -1885,6 +2199,8 @@ export type Database = {
           subcategory_id: string
           title?: string | null
           updated_at?: string | null
+          website?: string | null
+          work_done?: string | null
         }
         Update: {
           acceptance_status?:
@@ -1904,6 +2220,9 @@ export type Database = {
           identity_hash?: string | null
           is_platinum?: boolean | null
           jury_score?: number | null
+          legacy_ids?: Json | null
+          legacy_source?: string | null
+          linkedin_url?: string | null
           logo_url?: string | null
           name?: string
           nominator_user_id?: string | null
@@ -1924,6 +2243,8 @@ export type Database = {
           subcategory_id?: string
           title?: string | null
           updated_at?: string | null
+          website?: string | null
+          work_done?: string | null
         }
         Relationships: [
           {
@@ -2824,46 +3145,62 @@ export type Database = {
         Row: {
           avatar_url: string | null
           bio: string | null
+          chapter_id: string | null
           country: string | null
           created_at: string | null
           email: string
           full_name: string | null
           id: string
+          membership_level: string
           phone: string | null
           referred_by_chapter_id: string | null
           referred_by_user_id: string | null
+          region_id: string | null
           updated_at: string | null
           user_id: string
         }
         Insert: {
           avatar_url?: string | null
           bio?: string | null
+          chapter_id?: string | null
           country?: string | null
           created_at?: string | null
           email: string
           full_name?: string | null
           id?: string
+          membership_level?: string
           phone?: string | null
           referred_by_chapter_id?: string | null
           referred_by_user_id?: string | null
+          region_id?: string | null
           updated_at?: string | null
           user_id: string
         }
         Update: {
           avatar_url?: string | null
           bio?: string | null
+          chapter_id?: string | null
           country?: string | null
           created_at?: string | null
           email?: string
           full_name?: string | null
           id?: string
+          membership_level?: string
           phone?: string | null
           referred_by_chapter_id?: string | null
           referred_by_user_id?: string | null
+          region_id?: string | null
           updated_at?: string | null
           user_id?: string
         }
         Relationships: [
+          {
+            foreignKeyName: "profiles_chapter_id_fkey"
+            columns: ["chapter_id"]
+            isOneToOne: false
+            referencedRelation: "chapters"
+            referencedColumns: ["id"]
+          },
           {
             foreignKeyName: "profiles_referred_by_user_id_fkey"
             columns: ["referred_by_user_id"]
@@ -2876,6 +3213,329 @@ export type Database = {
             columns: ["referred_by_user_id"]
             isOneToOne: false
             referencedRelation: "public_profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "profiles_region_id_fkey"
+            columns: ["region_id"]
+            isOneToOne: false
+            referencedRelation: "regions"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      rebuild_nominations: {
+        Row: {
+          created_at: string | null
+          evidence_urls: string[] | null
+          id: string
+          nominator_email: string
+          nominator_name: string
+          nominator_phone: string | null
+          nominator_user_id: string | null
+          reason: string
+          review_notes: string | null
+          reviewed_at: string | null
+          reviewed_by: string | null
+          school_contact: string | null
+          school_country: string
+          school_description: string | null
+          school_id: string | null
+          school_name: string
+          school_region_id: string | null
+          school_type: string
+          season_id: string
+          status: string
+          updated_at: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          evidence_urls?: string[] | null
+          id?: string
+          nominator_email: string
+          nominator_name: string
+          nominator_phone?: string | null
+          nominator_user_id?: string | null
+          reason: string
+          review_notes?: string | null
+          reviewed_at?: string | null
+          reviewed_by?: string | null
+          school_contact?: string | null
+          school_country: string
+          school_description?: string | null
+          school_id?: string | null
+          school_name: string
+          school_region_id?: string | null
+          school_type: string
+          season_id: string
+          status?: string
+          updated_at?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          evidence_urls?: string[] | null
+          id?: string
+          nominator_email?: string
+          nominator_name?: string
+          nominator_phone?: string | null
+          nominator_user_id?: string | null
+          reason?: string
+          review_notes?: string | null
+          reviewed_at?: string | null
+          reviewed_by?: string | null
+          school_contact?: string | null
+          school_country?: string
+          school_description?: string | null
+          school_id?: string | null
+          school_name?: string
+          school_region_id?: string | null
+          school_type?: string
+          season_id?: string
+          status?: string
+          updated_at?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "rebuild_nominations_school_id_fkey"
+            columns: ["school_id"]
+            isOneToOne: false
+            referencedRelation: "rebuild_school_vote_counts"
+            referencedColumns: ["school_id"]
+          },
+          {
+            foreignKeyName: "rebuild_nominations_school_id_fkey"
+            columns: ["school_id"]
+            isOneToOne: false
+            referencedRelation: "rebuild_schools"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "rebuild_nominations_school_region_id_fkey"
+            columns: ["school_region_id"]
+            isOneToOne: false
+            referencedRelation: "regions"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "rebuild_nominations_season_id_fkey"
+            columns: ["season_id"]
+            isOneToOne: false
+            referencedRelation: "seasons"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      rebuild_schools: {
+        Row: {
+          address: string | null
+          admin_notes: string | null
+          contact_email: string | null
+          contact_name: string | null
+          contact_phone: string | null
+          country: string
+          created_at: string | null
+          description: string | null
+          gps_coordinates: string | null
+          id: string
+          is_active: boolean | null
+          name: string
+          photo_urls: string[] | null
+          region_id: string | null
+          school_type: string
+          student_count: number | null
+          updated_at: string | null
+          verification_status: string
+          verified_at: string | null
+          verified_by: string | null
+          website: string | null
+        }
+        Insert: {
+          address?: string | null
+          admin_notes?: string | null
+          contact_email?: string | null
+          contact_name?: string | null
+          contact_phone?: string | null
+          country: string
+          created_at?: string | null
+          description?: string | null
+          gps_coordinates?: string | null
+          id?: string
+          is_active?: boolean | null
+          name: string
+          photo_urls?: string[] | null
+          region_id?: string | null
+          school_type: string
+          student_count?: number | null
+          updated_at?: string | null
+          verification_status?: string
+          verified_at?: string | null
+          verified_by?: string | null
+          website?: string | null
+        }
+        Update: {
+          address?: string | null
+          admin_notes?: string | null
+          contact_email?: string | null
+          contact_name?: string | null
+          contact_phone?: string | null
+          country?: string
+          created_at?: string | null
+          description?: string | null
+          gps_coordinates?: string | null
+          id?: string
+          is_active?: boolean | null
+          name?: string
+          photo_urls?: string[] | null
+          region_id?: string | null
+          school_type?: string
+          student_count?: number | null
+          updated_at?: string | null
+          verification_status?: string
+          verified_at?: string | null
+          verified_by?: string | null
+          website?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "rebuild_schools_region_id_fkey"
+            columns: ["region_id"]
+            isOneToOne: false
+            referencedRelation: "regions"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      rebuild_votes: {
+        Row: {
+          created_at: string | null
+          device_hash: string | null
+          id: string
+          ip_hash: string | null
+          school_id: string
+          season_id: string
+          voter_id: string
+        }
+        Insert: {
+          created_at?: string | null
+          device_hash?: string | null
+          id?: string
+          ip_hash?: string | null
+          school_id: string
+          season_id: string
+          voter_id: string
+        }
+        Update: {
+          created_at?: string | null
+          device_hash?: string | null
+          id?: string
+          ip_hash?: string | null
+          school_id?: string
+          season_id?: string
+          voter_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "rebuild_votes_school_id_fkey"
+            columns: ["school_id"]
+            isOneToOne: false
+            referencedRelation: "rebuild_school_vote_counts"
+            referencedColumns: ["school_id"]
+          },
+          {
+            foreignKeyName: "rebuild_votes_school_id_fkey"
+            columns: ["school_id"]
+            isOneToOne: false
+            referencedRelation: "rebuild_schools"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "rebuild_votes_season_id_fkey"
+            columns: ["season_id"]
+            isOneToOne: false
+            referencedRelation: "seasons"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      rebuild_winners: {
+        Row: {
+          created_at: string | null
+          id: string
+          intervention_budget_usd: number | null
+          intervention_end_date: string | null
+          intervention_notes: string | null
+          intervention_photos: string[] | null
+          intervention_start_date: string | null
+          intervention_status: string
+          published_at: string | null
+          published_by: string | null
+          region_id: string
+          school_id: string
+          season_id: string
+          updated_at: string | null
+          vote_count: number | null
+        }
+        Insert: {
+          created_at?: string | null
+          id?: string
+          intervention_budget_usd?: number | null
+          intervention_end_date?: string | null
+          intervention_notes?: string | null
+          intervention_photos?: string[] | null
+          intervention_start_date?: string | null
+          intervention_status?: string
+          published_at?: string | null
+          published_by?: string | null
+          region_id: string
+          school_id: string
+          season_id: string
+          updated_at?: string | null
+          vote_count?: number | null
+        }
+        Update: {
+          created_at?: string | null
+          id?: string
+          intervention_budget_usd?: number | null
+          intervention_end_date?: string | null
+          intervention_notes?: string | null
+          intervention_photos?: string[] | null
+          intervention_start_date?: string | null
+          intervention_status?: string
+          published_at?: string | null
+          published_by?: string | null
+          region_id?: string
+          school_id?: string
+          season_id?: string
+          updated_at?: string | null
+          vote_count?: number | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "rebuild_winners_region_id_fkey"
+            columns: ["region_id"]
+            isOneToOne: false
+            referencedRelation: "regions"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "rebuild_winners_school_id_fkey"
+            columns: ["school_id"]
+            isOneToOne: false
+            referencedRelation: "rebuild_school_vote_counts"
+            referencedColumns: ["school_id"]
+          },
+          {
+            foreignKeyName: "rebuild_winners_school_id_fkey"
+            columns: ["school_id"]
+            isOneToOne: false
+            referencedRelation: "rebuild_schools"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "rebuild_winners_season_id_fkey"
+            columns: ["season_id"]
+            isOneToOne: false
+            referencedRelation: "seasons"
             referencedColumns: ["id"]
           },
         ]
@@ -2961,6 +3621,36 @@ export type Database = {
           referral_code?: string
           total_earnings_agc?: number | null
           total_referrals?: number | null
+        }
+        Relationships: []
+      }
+      regions: {
+        Row: {
+          created_at: string
+          display_order: number
+          id: string
+          is_active: boolean
+          name: string
+          slug: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          display_order?: number
+          id?: string
+          is_active?: boolean
+          name: string
+          slug: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          display_order?: number
+          id?: string
+          is_active?: boolean
+          name?: string
+          slug?: string
+          updated_at?: string
         }
         Relationships: []
       }
@@ -3248,6 +3938,59 @@ export type Database = {
           label?: string
         }
         Relationships: []
+      }
+      scef_board_members: {
+        Row: {
+          appointed_date: string | null
+          bio: string | null
+          created_at: string
+          email: string | null
+          full_name: string
+          id: string
+          is_active: boolean
+          phone: string | null
+          photo_url: string | null
+          region_id: string | null
+          role_title: string
+          updated_at: string
+        }
+        Insert: {
+          appointed_date?: string | null
+          bio?: string | null
+          created_at?: string
+          email?: string | null
+          full_name: string
+          id?: string
+          is_active?: boolean
+          phone?: string | null
+          photo_url?: string | null
+          region_id?: string | null
+          role_title?: string
+          updated_at?: string
+        }
+        Update: {
+          appointed_date?: string | null
+          bio?: string | null
+          created_at?: string
+          email?: string | null
+          full_name?: string
+          id?: string
+          is_active?: boolean
+          phone?: string | null
+          photo_url?: string | null
+          region_id?: string | null
+          role_title?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "scef_board_members_region_id_fkey"
+            columns: ["region_id"]
+            isOneToOne: false
+            referencedRelation: "regions"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       seasons: {
         Row: {
@@ -3807,6 +4550,106 @@ export type Database = {
         }
         Relationships: []
       }
+      unmapped_nominee_queue: {
+        Row: {
+          admin_notes: string | null
+          country: string | null
+          created_at: string | null
+          id: string
+          legacy_category: string | null
+          legacy_nominee_id: string | null
+          legacy_subcategory: string | null
+          nominee_name: string
+          organization: string | null
+          raw_data: Json
+          resolution_status: string
+          resolved_at: string | null
+          resolved_by: string | null
+          resolved_subcategory_id: string | null
+          updated_at: string | null
+        }
+        Insert: {
+          admin_notes?: string | null
+          country?: string | null
+          created_at?: string | null
+          id?: string
+          legacy_category?: string | null
+          legacy_nominee_id?: string | null
+          legacy_subcategory?: string | null
+          nominee_name: string
+          organization?: string | null
+          raw_data: Json
+          resolution_status?: string
+          resolved_at?: string | null
+          resolved_by?: string | null
+          resolved_subcategory_id?: string | null
+          updated_at?: string | null
+        }
+        Update: {
+          admin_notes?: string | null
+          country?: string | null
+          created_at?: string | null
+          id?: string
+          legacy_category?: string | null
+          legacy_nominee_id?: string | null
+          legacy_subcategory?: string | null
+          nominee_name?: string
+          organization?: string | null
+          raw_data?: Json
+          resolution_status?: string
+          resolved_at?: string | null
+          resolved_by?: string | null
+          resolved_subcategory_id?: string | null
+          updated_at?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "unmapped_nominee_queue_resolved_subcategory_id_fkey"
+            columns: ["resolved_subcategory_id"]
+            isOneToOne: false
+            referencedRelation: "subcategories"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      user_chapters: {
+        Row: {
+          chapter_id: string
+          created_at: string
+          id: string
+          is_primary: boolean
+          joined_at: string
+          membership_level: string
+          user_id: string
+        }
+        Insert: {
+          chapter_id: string
+          created_at?: string
+          id?: string
+          is_primary?: boolean
+          joined_at?: string
+          membership_level?: string
+          user_id: string
+        }
+        Update: {
+          chapter_id?: string
+          created_at?: string
+          id?: string
+          is_primary?: boolean
+          joined_at?: string
+          membership_level?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "user_chapters_chapter_id_fkey"
+            columns: ["chapter_id"]
+            isOneToOne: false
+            referencedRelation: "chapters"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       user_roles: {
         Row: {
           created_at: string | null
@@ -3838,6 +4681,60 @@ export type Database = {
             columns: ["scope_chapter_id"]
             isOneToOne: false
             referencedRelation: "chapters"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      volunteers: {
+        Row: {
+          chapter_id: string | null
+          created_at: string
+          id: string
+          joined_date: string | null
+          region_id: string | null
+          responsibilities: string | null
+          status: string
+          updated_at: string
+          user_id: string
+          volunteer_type: string | null
+        }
+        Insert: {
+          chapter_id?: string | null
+          created_at?: string
+          id?: string
+          joined_date?: string | null
+          region_id?: string | null
+          responsibilities?: string | null
+          status?: string
+          updated_at?: string
+          user_id: string
+          volunteer_type?: string | null
+        }
+        Update: {
+          chapter_id?: string | null
+          created_at?: string
+          id?: string
+          joined_date?: string | null
+          region_id?: string | null
+          responsibilities?: string | null
+          status?: string
+          updated_at?: string
+          user_id?: string
+          volunteer_type?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "volunteers_chapter_id_fkey"
+            columns: ["chapter_id"]
+            isOneToOne: false
+            referencedRelation: "chapters"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "volunteers_region_id_fkey"
+            columns: ["region_id"]
+            isOneToOne: false
+            referencedRelation: "regions"
             referencedColumns: ["id"]
           },
         ]
@@ -4268,6 +5165,107 @@ export type Database = {
         }
         Relationships: []
       }
+      public_rebuild_nominations: {
+        Row: {
+          created_at: string | null
+          evidence_urls: string[] | null
+          id: string | null
+          reason: string | null
+          school_country: string | null
+          school_description: string | null
+          school_id: string | null
+          school_name: string | null
+          school_region_id: string | null
+          school_type: string | null
+          season_id: string | null
+          status: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          evidence_urls?: string[] | null
+          id?: string | null
+          reason?: string | null
+          school_country?: string | null
+          school_description?: string | null
+          school_id?: string | null
+          school_name?: string | null
+          school_region_id?: string | null
+          school_type?: string | null
+          season_id?: string | null
+          status?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          evidence_urls?: string[] | null
+          id?: string | null
+          reason?: string | null
+          school_country?: string | null
+          school_description?: string | null
+          school_id?: string | null
+          school_name?: string | null
+          school_region_id?: string | null
+          school_type?: string | null
+          season_id?: string | null
+          status?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "rebuild_nominations_school_id_fkey"
+            columns: ["school_id"]
+            isOneToOne: false
+            referencedRelation: "rebuild_school_vote_counts"
+            referencedColumns: ["school_id"]
+          },
+          {
+            foreignKeyName: "rebuild_nominations_school_id_fkey"
+            columns: ["school_id"]
+            isOneToOne: false
+            referencedRelation: "rebuild_schools"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "rebuild_nominations_school_region_id_fkey"
+            columns: ["school_region_id"]
+            isOneToOne: false
+            referencedRelation: "regions"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "rebuild_nominations_season_id_fkey"
+            columns: ["season_id"]
+            isOneToOne: false
+            referencedRelation: "seasons"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      rebuild_school_vote_counts: {
+        Row: {
+          country: string | null
+          region_id: string | null
+          school_id: string | null
+          school_name: string | null
+          school_type: string | null
+          season_id: string | null
+          vote_count: number | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "rebuild_schools_region_id_fkey"
+            columns: ["region_id"]
+            isOneToOne: false
+            referencedRelation: "regions"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "rebuild_votes_season_id_fkey"
+            columns: ["season_id"]
+            isOneToOne: false
+            referencedRelation: "seasons"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       wallet_balances: {
         Row: {
           account_id: string | null
@@ -4463,7 +5461,12 @@ export type Database = {
         | "FLAG_FOR_RISK_REVIEW"
       app_role: "user" | "nrc" | "jury" | "chapter" | "sponsor" | "admin"
       certificate_status: "ACTIVE" | "EXPIRED" | "REVOKED" | "RENEWED"
-      certificate_tier: "gold" | "platinum" | "blue_garnet" | "icon"
+      certificate_tier:
+        | "gold"
+        | "platinum"
+        | "blue_garnet"
+        | "icon"
+        | "gold_special"
       contest_type:
         | "GOLD_PUBLIC"
         | "BLUE_PUBLIC"
@@ -4540,6 +5543,8 @@ export type Database = {
         | "jury_scoring"
         | "results"
         | "certificates"
+        | "rebuild_nominations"
+        | "rebuild_voting"
       transaction_status: "pending" | "confirmed" | "failed" | "refunded"
       transaction_type: "donation" | "sponsorship" | "ticket"
       transfer_status:
@@ -4731,7 +5736,13 @@ export const Constants = {
       ],
       app_role: ["user", "nrc", "jury", "chapter", "sponsor", "admin"],
       certificate_status: ["ACTIVE", "EXPIRED", "REVOKED", "RENEWED"],
-      certificate_tier: ["gold", "platinum", "blue_garnet", "icon"],
+      certificate_tier: [
+        "gold",
+        "platinum",
+        "blue_garnet",
+        "icon",
+        "gold_special",
+      ],
       contest_type: [
         "GOLD_PUBLIC",
         "BLUE_PUBLIC",
@@ -4817,6 +5828,8 @@ export const Constants = {
         "jury_scoring",
         "results",
         "certificates",
+        "rebuild_nominations",
+        "rebuild_voting",
       ],
       transaction_status: ["pending", "confirmed", "failed", "refunded"],
       transaction_type: ["donation", "sponsorship", "ticket"],

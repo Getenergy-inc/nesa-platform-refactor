@@ -62,3 +62,9 @@ verify_jwt = false
 
 [functions.sponsors]
 verify_jwt = false
+
+[functions.seed-nominees]
+verify_jwt = false
+
+[functions.migration-emails]
+verify_jwt = false

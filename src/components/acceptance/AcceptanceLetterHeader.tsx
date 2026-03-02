@@ -1,11 +1,14 @@
 import { NESALogo } from "@/components/nesa/NESALogo";
-import { Award } from "lucide-react";
+import { Award, MapPin } from "lucide-react";
+import { Badge } from "@/components/ui/badge";
 
 interface AcceptanceLetterHeaderProps {
   nomineeName: string;
+  chapterName?: string;
+  region?: string;
 }
 
-export function AcceptanceLetterHeader({ nomineeName }: AcceptanceLetterHeaderProps) {
+export function AcceptanceLetterHeader({ nomineeName, chapterName, region }: AcceptanceLetterHeaderProps) {
   return (
     <div className="text-center space-y-6 pb-6 border-b">
       <div className="flex justify-center">
@@ -25,6 +28,22 @@ export function AcceptanceLetterHeader({ nomineeName }: AcceptanceLetterHeaderPr
         <p className="text-muted-foreground">
           New Education Standard Awards Africa
         </p>
+        <p className="text-xs text-muted-foreground/70 italic tracking-wider">
+          The African Blue-Garnet Awards for Education
+        </p>
+        {chapterName && (
+          <div className="flex flex-wrap items-center justify-center gap-2 pt-1">
+            <Badge variant="secondary" className="bg-primary/10 text-primary border-primary/20 text-xs px-3 py-1">
+              <MapPin className="h-3 w-3 mr-1" />
+              From: SCEF {chapterName} Local Chapter
+            </Badge>
+            {region && (
+              <Badge variant="secondary" className="bg-accent/50 border-accent text-xs px-3 py-1">
+                {region}
+              </Badge>
+            )}
+          </div>
+        )}
       </div>
 
       <div className="bg-gradient-to-r from-transparent via-border to-transparent h-px" />

@@ -8,6 +8,8 @@ interface AcceptanceSuccessCardProps {
   certificateDownloadLocked: boolean;
   renominationsNeeded: number;
   token?: string;
+  chapterName?: string;
+  region?: string;
 }
 
 export function AcceptanceSuccessCard({
@@ -15,6 +17,8 @@ export function AcceptanceSuccessCard({
   certificateDownloadLocked,
   renominationsNeeded,
   token,
+  chapterName,
+  region,
 }: AcceptanceSuccessCardProps) {
   const navigate = useNavigate();
 
@@ -111,10 +115,13 @@ export function AcceptanceSuccessCard({
           </Button>
         </div>
 
-        {/* Footer Message */}
-        <p className="text-center text-sm text-muted-foreground pt-4 border-t">
-          We are honored to have you join Africa's largest educational recognition movement.
-        </p>
+        <div className="text-center text-sm text-muted-foreground pt-4 border-t space-y-1">
+          <p className="font-medium text-foreground">
+            {chapterName ? `SCEF ${chapterName} Local Chapter` : "Santos Creations Educational Foundation"}
+            {region && ` — ${region}`}
+          </p>
+          <p>We are honored to have you join Africa's largest educational recognition movement.</p>
+        </div>
       </CardContent>
     </Card>
   );

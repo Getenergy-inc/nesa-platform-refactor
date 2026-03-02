@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/contexts/AuthContext";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -17,35 +18,35 @@ import blueGarnetCertificate from "@/assets/certificates/blue-garnet-certificate
 import iconCertificate from "@/assets/certificates/icon-certificate.jpeg";
 
 const tierConfig: Record<string, { 
-  label: string; 
+  labelKey: string; 
   color: string; 
   bgColor: string;
   icon: typeof Award;
   image: string;
 }> = {
   platinum: {
-    label: "Platinum",
+    labelKey: "certificates.tierPlatinum",
     color: "text-slate-300",
     bgColor: "bg-slate-700",
     icon: Medal,
     image: platinumCertificate,
   },
   gold: {
-    label: "Gold",
+    labelKey: "certificates.tierGold",
     color: "text-amber-400",
     bgColor: "bg-amber-600",
     icon: Award,
     image: goldCertificate,
   },
   blue_garnet: {
-    label: "Blue Garnet",
+    labelKey: "certificates.tierBlueGarnet",
     color: "text-blue-400",
     bgColor: "bg-blue-700",
     icon: Trophy,
     image: blueGarnetCertificate,
   },
   icon: {
-    label: "Icon",
+    labelKey: "certificates.tierIcon",
     color: "text-indigo-400",
     bgColor: "bg-indigo-700",
     icon: Star,
@@ -55,6 +56,7 @@ const tierConfig: Record<string, {
 
 interface Certificate {
   id: string;
+  nominee_id: string;
   tier: string;
   verification_code: string;
   issued_at: string;
@@ -75,6 +77,7 @@ interface Certificate {
 export function MyCertificates() {
   const { user } = useAuth();
   const { toast } = useToast();
+  const { t } = useTranslation("dashboard");
   const [downloadingId, setDownloadingId] = useState<string | null>(null);
 
   const { data: certificates, isLoading } = useQuery({
@@ -82,7 +85,6 @@ export function MyCertificates() {
     queryFn: async () => {
       if (!user) return [];
 
-      // Get nominees linked to current user
       const { data: nominees, error: nomineeError } = await supabase
         .from("nominees")
         .select("id")
@@ -92,11 +94,11 @@ export function MyCertificates() {
 
       const nomineeIds = nominees.map((n) => n.id);
 
-      // Get certificates for those nominees
       const { data, error } = await supabase
         .from("certificates")
         .select(`
           id,
+          nominee_id,
           tier,
           verification_code,
           issued_at,
@@ -120,6 +122,7 @@ export function MyCertificates() {
 
       return (data || []).map((cert) => ({
         id: cert.id,
+        nominee_id: cert.nominee_id,
         tier: cert.tier,
         verification_code: cert.verification_code,
         issued_at: cert.issued_at,
@@ -152,15 +155,26 @@ export function MyCertificates() {
       const filename = `NESA-${cert.tier}-certificate-${cert.verification_code}.pdf`;
       downloadCertificatePDF(blob, filename);
 
+      if (user) {
+        supabase.from("certificate_downloads").insert({
+          user_id: user.id,
+          certificate_id: cert.id,
+          nominee_id: cert.nominee_id,
+        }).then(({ error }) => {
+          if (error) console.warn("Failed to log certificate download:", error);
+        });
+      }
+
+      const tierLabel = t(tierConfig[cert.tier]?.labelKey || "certificates.tierGold");
       toast({
-        title: "Certificate Downloaded",
-        description: `Your ${tierConfig[cert.tier]?.label || cert.tier} certificate has been downloaded.`,
+        title: t("certificates.downloadSuccess"),
+        description: t("certificates.downloadSuccessDesc", { tier: tierLabel }),
       });
     } catch (error) {
       console.error("Failed to generate PDF:", error);
       toast({
-        title: "Download Failed",
-        description: "Could not generate certificate PDF. Please try again.",
+        title: t("certificates.downloadFailed"),
+        description: t("certificates.downloadFailedDesc"),
         variant: "destructive",
       });
     } finally {
@@ -174,7 +188,7 @@ export function MyCertificates() {
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
             <Award className="h-5 w-5" />
-            My Certificates
+            {t("certificates.title")}
           </CardTitle>
         </CardHeader>
         <CardContent className="space-y-4">
@@ -193,16 +207,16 @@ export function MyCertificates() {
       <CardHeader>
         <CardTitle className="flex items-center gap-2">
           <Award className="h-5 w-5 text-primary" />
-          My Certificates
+          {t("certificates.title")}
         </CardTitle>
       </CardHeader>
       <CardContent>
         {!hasCertificates ? (
           <div className="py-8 text-center">
             <Award className="mx-auto mb-4 h-12 w-12 text-muted-foreground/50" />
-            <p className="mb-2 text-muted-foreground">No certificates yet</p>
+            <p className="mb-2 text-muted-foreground">{t("certificates.noCertificates")}</p>
             <p className="text-sm text-muted-foreground/70">
-              Your earned certificates will appear here once issued.
+              {t("certificates.noCertificatesDesc")}
             </p>
           </div>
         ) : (
@@ -211,44 +225,42 @@ export function MyCertificates() {
               const config = tierConfig[cert.tier] || tierConfig.gold;
               const Icon = config.icon;
               const isExpired = cert.expires_at && new Date(cert.expires_at) < new Date();
+              const tierLabel = t(config.labelKey);
 
               return (
                 <div
                   key={cert.id}
                   className="flex items-center gap-4 rounded-lg border p-4 transition-colors hover:bg-muted/50"
                 >
-                  {/* Certificate Preview */}
                   <div className="hidden sm:block h-16 w-24 flex-shrink-0 overflow-hidden rounded-md border">
                     <img
                       src={config.image}
-                      alt={`${config.label} Certificate`}
+                      alt={`${tierLabel} Certificate`}
                       className="h-full w-full object-cover"
                     />
                   </div>
 
-                  {/* Info */}
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center gap-2 mb-1">
                       <Badge className={`${config.bgColor} text-white`}>
                         <Icon className="mr-1 h-3 w-3" />
-                        {config.label}
+                        {tierLabel}
                       </Badge>
                       {cert.is_lifetime && (
-                        <Badge variant="outline" className="text-xs">Lifetime</Badge>
+                        <Badge variant="outline" className="text-xs">{t("certificates.lifetime")}</Badge>
                       )}
                       {isExpired && (
-                        <Badge variant="destructive" className="text-xs">Expired</Badge>
+                        <Badge variant="destructive" className="text-xs">{t("certificates.expired")}</Badge>
                       )}
                     </div>
                     <p className="font-medium truncate">{cert.nominee.name}</p>
                     <p className="text-sm text-muted-foreground">
-                      {cert.season.name} • Code: {cert.verification_code}
+                      {cert.season.name} • {t("certificates.verificationCode")}: {cert.verification_code}
                     </p>
                   </div>
 
-                  {/* Actions */}
                   <div className="flex items-center gap-2">
-                    <Button asChild variant="ghost" size="icon" title="Verify Certificate">
+                    <Button asChild variant="ghost" size="icon" title={t("certificates.verify")}>
                       <Link to={`/certificates/verify?code=${cert.verification_code}`}>
                         <QrCode className="h-4 w-4" />
                       </Link>
@@ -256,7 +268,7 @@ export function MyCertificates() {
                     <Button
                       variant="ghost"
                       size="icon"
-                      title="Download PDF Certificate"
+                      title={t("certificates.download")}
                       onClick={() => handleDownloadPDF(cert)}
                       disabled={downloadingId === cert.id}
                     >
@@ -273,12 +285,11 @@ export function MyCertificates() {
           </div>
         )}
 
-        {/* Verify Another */}
         <div className="mt-6 pt-4 border-t">
           <Button asChild variant="outline" className="w-full">
             <Link to="/certificates/verify">
               <ExternalLink className="mr-2 h-4 w-4" />
-              Verify a Certificate
+              {t("certificates.verifyAnother")}
             </Link>
           </Button>
         </div>

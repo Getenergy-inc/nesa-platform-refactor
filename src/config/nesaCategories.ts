@@ -12,13 +12,14 @@
 
 export type CategoryScope = "AFRICA_REGIONAL" | "NIGERIA" | "INTERNATIONAL" | "ICON";
 
-export type AwardTier = "platinum" | "gold" | "blue-garnet" | "icon";
+export type AwardTier = "platinum" | "gold" | "blue-garnet" | "icon" | "gold-special";
 
 export type TierApplicability = {
   platinum: boolean;
   gold: boolean;
   blueGarnet: boolean;
   icon: boolean;
+  goldSpecial?: boolean;
 };
 
 export interface SubcategoryDefinition {
@@ -84,6 +85,30 @@ export type NigerianZone = typeof NIGERIAN_ZONES[number];
 // TIER CONFIGURATION
 // ============================================================================
 
+/**
+ * Platinum tier categories are divided into two threshold groups:
+ * - CORE (7 categories): 100 renominations to unlock certificate
+ * - STANDARD (10 categories): 200 renominations to unlock certificate
+ */
+export const PLATINUM_THRESHOLDS = {
+  CORE: 100,      // 7 core categories
+  STANDARD: 200,  // 10 standard categories
+} as const;
+
+/**
+ * Core Platinum category IDs (100 renomination threshold)
+ * These are the specialized/institutional categories
+ */
+export const CORE_PLATINUM_CATEGORY_IDS = [
+  "cat-10", // Library
+  "cat-11", // R&D
+  "cat-12", // Christian Education
+  "cat-13", // Islamic Education
+  "cat-14", // Political Leaders
+  "cat-15", // International Contributors
+  "cat-16", // Diaspora Impact
+] as const;
+
 export const TIER_INFO: Record<AwardTier, {
   name: string;
   shortName: string;
@@ -97,7 +122,7 @@ export const TIER_INFO: Record<AwardTier, {
   platinum: {
     name: "Platinum Certificate",
     shortName: "Platinum",
-    description: "Baseline recognition through NRC screening",
+    description: "Baseline recognition for all 17 categories through NRC verification",
     color: "text-slate-600",
     bgColor: "bg-slate-100",
     borderColor: "border-slate-300",
@@ -107,7 +132,7 @@ export const TIER_INFO: Record<AwardTier, {
   gold: {
     name: "Gold Certificate",
     shortName: "Gold",
-    description: "Competitive classification with 100% public voting",
+    description: "Competitive classification with 100% public voting — Top 3 per subcategory (405 Gold Certificate winners)",
     color: "text-amber-600",
     bgColor: "bg-amber-100",
     borderColor: "border-amber-300",
@@ -117,7 +142,7 @@ export const TIER_INFO: Record<AwardTier, {
   "blue-garnet": {
     name: "Blue Garnet Award",
     shortName: "Blue Garnet",
-    description: "Elite recognition with 40% public + 60% jury evaluation",
+    description: "Elite recognition with 40% public + 60% jury evaluation (9 categories)",
     color: "text-blue-600",
     bgColor: "bg-blue-100",
     borderColor: "border-blue-300",
@@ -127,12 +152,22 @@ export const TIER_INFO: Record<AwardTier, {
   icon: {
     name: "Africa Education Icon",
     shortName: "Icon",
-    description: "Lifetime impact recognition (2005–present)",
+    description: "Lifetime achievement — 1 category with 3 subcategories (2005–2025)",
     color: "text-purple-600",
     bgColor: "bg-purple-100",
     borderColor: "border-purple-300",
     votingMethod: "Jury Selection Only",
     validity: "Lifetime",
+  },
+  "gold-special": {
+    name: "Gold Special Recognition",
+    shortName: "Gold Special",
+    description: "Cultural impact recognition for Sports, Music, and Social Media education advocacy (2025 Edition)",
+    color: "text-yellow-600",
+    bgColor: "bg-yellow-100",
+    borderColor: "border-yellow-300",
+    votingMethod: "Editorial Selection",
+    validity: "Annual (2025)",
   },
 };
 
@@ -143,11 +178,12 @@ export const TIER_INFO: Record<AwardTier, {
 export const NESA_CATEGORIES: CategoryDefinition[] = [
   // =========================================================================
   // CATEGORY 1 — BEST CSR IN EDUCATION (AFRICA REGIONAL)
+  // Standard Platinum (200 threshold) + Gold + Blue Garnet track
   // =========================================================================
   {
     id: "cat-01",
     slug: "best-csr-education-africa",
-    name: "Best CSR in Education (Africa Regional)",
+    name: "Best CSR for Education (Africa Regional)",
     shortName: "CSR Africa",
     description: "Recognizing corporate social responsibility initiatives advancing education across the African continent",
     scope: "AFRICA_REGIONAL",
@@ -168,15 +204,16 @@ export const NESA_CATEGORIES: CategoryDefinition[] = [
 
   // =========================================================================
   // CATEGORY 2 — BEST CSR IN EDUCATION (NIGERIA)
+  // Gold + Blue Garnet track
   // =========================================================================
   {
     id: "cat-02",
     slug: "best-csr-education-nigeria",
-    name: "Best CSR in Education (Nigeria)",
+    name: "Best CSR for Education (Nigeria)",
     shortName: "CSR Nigeria",
     description: "Celebrating Nigerian corporations making outstanding contributions to education",
     scope: "NIGERIA",
-    tierApplicability: { platinum: false, gold: true, blueGarnet: true, icon: false },
+    tierApplicability: { platinum: true, gold: true, blueGarnet: true, icon: false },
     selectionMethod: "Public voting → Jury evaluation",
     displayOrder: 2,
     iconName: "Building",
@@ -210,15 +247,16 @@ export const NESA_CATEGORIES: CategoryDefinition[] = [
 
   // =========================================================================
   // CATEGORY 3 — BEST EDUTECH ORGANISATION (AFRICA REGIONAL)
+  // Gold + Blue Garnet track
   // =========================================================================
   {
     id: "cat-03",
     slug: "best-edutech-organisation-africa",
-    name: "Best EduTech Organisation (Africa Regional)",
+    name: "Best EduTech Innovation for Education (Africa Regional)",
     shortName: "EduTech Africa",
     description: "Honoring technology-driven education innovations transforming learning across Africa",
     scope: "AFRICA_REGIONAL",
-    tierApplicability: { platinum: false, gold: true, blueGarnet: true, icon: false },
+    tierApplicability: { platinum: true, gold: true, blueGarnet: true, icon: false },
     selectionMethod: "Public voting → Jury evaluation",
     displayOrder: 3,
     iconName: "Laptop",
@@ -232,15 +270,16 @@ export const NESA_CATEGORIES: CategoryDefinition[] = [
 
   // =========================================================================
   // CATEGORY 4 — BEST MEDIA ORGANISATION IN EDUCATIONAL ADVOCACY (NIGERIA)
+  // Gold + Blue Garnet track
   // =========================================================================
   {
     id: "cat-04",
     slug: "best-media-educational-advocacy-nigeria",
-    name: "Best Media Organisation in Educational Advocacy (Nigeria)",
+    name: "Best Media Organisation for Education Advocacy (Nigeria)",
     shortName: "Media Advocacy Nigeria",
-    description: "Recognizing media organizations championing educational causes in Nigeria",
+    description: "Recognizing media organisations championing education advocacy in Nigeria",
     scope: "NIGERIA",
-    tierApplicability: { platinum: false, gold: true, blueGarnet: true, icon: false },
+    tierApplicability: { platinum: true, gold: true, blueGarnet: true, icon: false },
     selectionMethod: "Public voting → Jury evaluation",
     displayOrder: 4,
     iconName: "Radio",
@@ -255,15 +294,16 @@ export const NESA_CATEGORIES: CategoryDefinition[] = [
 
   // =========================================================================
   // CATEGORY 5 — BEST NGO CONTRIBUTION TO EDUCATION (NIGERIA)
+  // Gold + Blue Garnet track
   // =========================================================================
   {
     id: "cat-05",
     slug: "best-ngo-education-nigeria",
-    name: "Best NGO Contribution to Education (Nigeria)",
+    name: "Best NGO for Education Advancement (Nigeria)",
     shortName: "NGO Nigeria",
-    description: "Celebrating non-governmental organizations driving educational impact in Nigeria",
+    description: "Celebrating non-governmental organisations advancing education impact in Nigeria",
     scope: "NIGERIA",
-    tierApplicability: { platinum: false, gold: true, blueGarnet: true, icon: false },
+    tierApplicability: { platinum: true, gold: true, blueGarnet: true, icon: false },
     selectionMethod: "Public voting → Jury evaluation",
     displayOrder: 5,
     iconName: "Heart",
@@ -279,15 +319,16 @@ export const NESA_CATEGORIES: CategoryDefinition[] = [
 
   // =========================================================================
   // CATEGORY 6 — BEST NGO CONTRIBUTION TO EDUCATION FOR ALL (AFRICA REGIONAL)
+  // Gold + Blue Garnet track
   // =========================================================================
   {
     id: "cat-06",
     slug: "best-ngo-education-africa",
-    name: "Best NGO Contribution to Education for All (Africa Regional)",
+    name: "Best NGO for Education Advancement (Africa Regional)",
     shortName: "NGO Africa",
     description: "Honoring NGOs advancing inclusive education across the African continent",
     scope: "AFRICA_REGIONAL",
-    tierApplicability: { platinum: false, gold: true, blueGarnet: true, icon: false },
+    tierApplicability: { platinum: true, gold: true, blueGarnet: true, icon: false },
     selectionMethod: "Public voting → Jury evaluation",
     displayOrder: 6,
     iconName: "Users",
@@ -303,6 +344,7 @@ export const NESA_CATEGORIES: CategoryDefinition[] = [
 
   // =========================================================================
   // CATEGORY 7 — BEST STEM EDUCATION PROGRAMME (AFRICA REGIONAL)
+  // Gold + Blue Garnet track
   // =========================================================================
   {
     id: "cat-07",
@@ -311,7 +353,7 @@ export const NESA_CATEGORIES: CategoryDefinition[] = [
     shortName: "STEM Africa",
     description: "Recognizing excellence in Science, Technology, Engineering, and Mathematics education",
     scope: "AFRICA_REGIONAL",
-    tierApplicability: { platinum: false, gold: true, blueGarnet: true, icon: false },
+    tierApplicability: { platinum: true, gold: true, blueGarnet: true, icon: false },
     selectionMethod: "Public voting → Jury evaluation",
     displayOrder: 7,
     iconName: "FlaskConical",
@@ -326,15 +368,16 @@ export const NESA_CATEGORIES: CategoryDefinition[] = [
 
   // =========================================================================
   // CATEGORY 8 — CREATIVE ARTS INDUSTRY CONTRIBUTION TO EDUCATION (NIGERIA)
+  // Gold + Blue Garnet track
   // =========================================================================
   {
     id: "cat-08",
     slug: "creative-arts-education-nigeria",
-    name: "Creative Arts Industry Contribution to Education (Nigeria)",
+    name: "Best Creative Arts Contribution to Education (Nigeria)",
     shortName: "Creative Arts Nigeria",
-    description: "Celebrating creative industries contributing to educational advancement in Nigeria",
+    description: "Celebrating creative industries advancing education impact in Nigeria",
     scope: "NIGERIA",
-    tierApplicability: { platinum: false, gold: true, blueGarnet: true, icon: false },
+    tierApplicability: { platinum: true, gold: true, blueGarnet: true, icon: false },
     selectionMethod: "Public voting → Jury evaluation",
     displayOrder: 8,
     iconName: "Palette",
@@ -352,15 +395,16 @@ export const NESA_CATEGORIES: CategoryDefinition[] = [
 
   // =========================================================================
   // CATEGORY 9 — BEST EDUCATION-FRIENDLY STATE (NIGERIA)
+  // Gold + Blue Garnet track
   // =========================================================================
   {
     id: "cat-09",
     slug: "best-education-friendly-state-nigeria",
-    name: "Best Education-Friendly State (Nigeria)",
-    shortName: "Education State Nigeria",
+    name: "Best Education Policy & Implementation State (Nigeria)",
+    shortName: "Education Policy State",
     description: "Recognizing Nigerian states excelling in education policy and implementation",
     scope: "NIGERIA",
-    tierApplicability: { platinum: false, gold: true, blueGarnet: true, icon: false },
+    tierApplicability: { platinum: true, gold: true, blueGarnet: true, icon: false },
     selectionMethod: "Public voting → Jury evaluation",
     displayOrder: 9,
     iconName: "MapPin",
@@ -377,16 +421,17 @@ export const NESA_CATEGORIES: CategoryDefinition[] = [
 
   // =========================================================================
   // CATEGORY 10 — BEST LIBRARY IN NIGERIAN TERTIARY INSTITUTIONS
+  // CORE PLATINUM (100 threshold) — Platinum only, no Gold/Blue Garnet
   // =========================================================================
   {
     id: "cat-10",
     slug: "best-library-tertiary-nigeria",
-    name: "Best Library in Nigerian Tertiary Institutions",
+    name: "Best Tertiary Institution Library (Nigeria)",
     shortName: "Library Nigeria",
     description: "Celebrating excellence in library services across Nigerian higher education",
     scope: "NIGERIA",
-    tierApplicability: { platinum: true, gold: true, blueGarnet: false, icon: false },
-    selectionMethod: "NRC verification → Public voting",
+    tierApplicability: { platinum: true, gold: false, blueGarnet: false, icon: false },
+    selectionMethod: "Public voting → Jury evaluation",
     displayOrder: 10,
     iconName: "BookOpen",
     isActive: true,
@@ -404,16 +449,17 @@ export const NESA_CATEGORIES: CategoryDefinition[] = [
 
   // =========================================================================
   // CATEGORY 11 — BEST RESEARCH & DEVELOPMENT CONTRIBUTION TO EDUCATION (NIGERIA)
+  // CORE PLATINUM (100 threshold) — Platinum only, no Gold/Blue Garnet
   // =========================================================================
   {
     id: "cat-11",
     slug: "best-research-development-nigeria",
-    name: "Best Research & Development Contribution to Education (Nigeria)",
+    name: "Excellence in Research & Development for Education (Nigeria)",
     shortName: "R&D Nigeria",
-    description: "Honoring research institutions driving educational advancement in Nigeria",
+    description: "Honoring research institutions advancing education in Nigeria",
     scope: "NIGERIA",
-    tierApplicability: { platinum: true, gold: true, blueGarnet: false, icon: false },
-    selectionMethod: "NRC verification → Public voting",
+    tierApplicability: { platinum: true, gold: false, blueGarnet: false, icon: false },
+    selectionMethod: "NRC verification",
     displayOrder: 11,
     iconName: "Microscope",
     isActive: true,
@@ -426,16 +472,17 @@ export const NESA_CATEGORIES: CategoryDefinition[] = [
 
   // =========================================================================
   // CATEGORY 12 — CHRISTIAN EDUCATION IMPACT (AFRICA REGIONAL)
+  // CORE PLATINUM (100 threshold) — Platinum only, no Gold/Blue Garnet
   // =========================================================================
   {
     id: "cat-12",
     slug: "christian-education-impact-africa",
-    name: "Christian Education Impact (Africa Regional)",
+    name: "Excellence in Christian Education Impact (Africa Regional)",
     shortName: "Christian Education Africa",
-    description: "Recognizing faith-based Christian contributions to education across Africa",
+    description: "Recognizing faith-based Christian impact on education across Africa",
     scope: "AFRICA_REGIONAL",
-    tierApplicability: { platinum: true, gold: true, blueGarnet: false, icon: false },
-    selectionMethod: "NRC verification → Public voting",
+    tierApplicability: { platinum: true, gold: false, blueGarnet: false, icon: false },
+    selectionMethod: "NRC verification",
     displayOrder: 12,
     iconName: "Church",
     isActive: true,
@@ -448,16 +495,17 @@ export const NESA_CATEGORIES: CategoryDefinition[] = [
 
   // =========================================================================
   // CATEGORY 13 — ISLAMIC EDUCATION IMPACT (AFRICA REGIONAL)
+  // CORE PLATINUM (100 threshold) — Platinum only, no Gold/Blue Garnet
   // =========================================================================
   {
     id: "cat-13",
     slug: "islamic-education-impact-africa",
-    name: "Islamic Education Impact (Africa Regional)",
+    name: "Excellence in Islamic Education Impact (Africa Regional)",
     shortName: "Islamic Education Africa",
-    description: "Honoring Islamic contributions to education across the African continent",
+    description: "Honoring Islamic impact on education across the African continent",
     scope: "AFRICA_REGIONAL",
-    tierApplicability: { platinum: true, gold: true, blueGarnet: false, icon: false },
-    selectionMethod: "NRC verification → Public voting",
+    tierApplicability: { platinum: true, gold: false, blueGarnet: false, icon: false },
+    selectionMethod: "NRC verification",
     displayOrder: 13,
     iconName: "Moon",
     isActive: true,
@@ -470,16 +518,17 @@ export const NESA_CATEGORIES: CategoryDefinition[] = [
 
   // =========================================================================
   // CATEGORY 14 — POLITICAL LEADERS' EDUCATIONAL SUPPORT (NIGERIA)
+  // CORE PLATINUM (100 threshold) — Platinum only, no Gold/Blue Garnet
   // =========================================================================
   {
     id: "cat-14",
     slug: "political-leaders-education-nigeria",
-    name: "Political Leaders' Educational Support (Nigeria)",
+    name: "Excellence in Political Leadership for Education (Nigeria)",
     shortName: "Political Leaders Nigeria",
-    description: "Recognizing political leaders championing educational development in Nigeria",
+    description: "Recognizing political leaders championing education advancement in Nigeria",
     scope: "NIGERIA",
-    tierApplicability: { platinum: true, gold: true, blueGarnet: false, icon: false },
-    selectionMethod: "NRC verification → Zone-based assessment → Public voting",
+    tierApplicability: { platinum: true, gold: false, blueGarnet: false, icon: false },
+    selectionMethod: "NRC verification → Zone-based assessment",
     displayOrder: 14,
     iconName: "Landmark",
     isActive: true,
@@ -492,16 +541,17 @@ export const NESA_CATEGORIES: CategoryDefinition[] = [
 
   // =========================================================================
   // CATEGORY 15 — INTERNATIONAL & BILATERAL CONTRIBUTORS TO EDUCATION
+  // CORE PLATINUM (100 threshold) — Platinum only, no Gold/Blue Garnet
   // =========================================================================
   {
     id: "cat-15",
     slug: "international-bilateral-education",
-    name: "International & Bilateral Contributors to Education",
-    shortName: "International Contributors",
-    description: "Celebrating international partners advancing education in Africa",
+    name: "Excellence in International Partnership for Education (Africa)",
+    shortName: "International Partners",
+    description: "Celebrating international partners advancing education across Africa",
     scope: "INTERNATIONAL",
-    tierApplicability: { platinum: true, gold: true, blueGarnet: false, icon: false },
-    selectionMethod: "NRC verification → Public voting",
+    tierApplicability: { platinum: true, gold: false, blueGarnet: false, icon: false },
+    selectionMethod: "NRC verification",
     displayOrder: 15,
     iconName: "Globe",
     isActive: true,
@@ -515,16 +565,17 @@ export const NESA_CATEGORIES: CategoryDefinition[] = [
 
   // =========================================================================
   // CATEGORY 16 — DIASPORA ASSOCIATION EDUCATIONAL IMPACT
+  // CORE PLATINUM (100 threshold) — Platinum only, no Gold/Blue Garnet
   // =========================================================================
   {
     id: "cat-16",
     slug: "diaspora-education-impact",
-    name: "Diaspora Association Educational Impact",
+    name: "Excellence in Diaspora Educational Impact (International)",
     shortName: "Diaspora Impact",
-    description: "Honoring diaspora organizations contributing to African education",
+    description: "Honoring diaspora organisations advancing education in Africa",
     scope: "INTERNATIONAL",
-    tierApplicability: { platinum: true, gold: true, blueGarnet: false, icon: false },
-    selectionMethod: "NRC verification → Public voting",
+    tierApplicability: { platinum: true, gold: false, blueGarnet: false, icon: false },
+    selectionMethod: "NRC verification",
     displayOrder: 16,
     iconName: "Plane",
     isActive: true,
@@ -536,14 +587,15 @@ export const NESA_CATEGORIES: CategoryDefinition[] = [
   },
 
   // =========================================================================
-  // CATEGORY 17 — AFRICA EDUCATION ICON AWARD (2005–2025)
+  // CATEGORY 17 — AFRICA EDUCATION ICON BLUE GARNET (2005–2025)
+  // Special Icon tier — 1 category with 3 subcategories
   // =========================================================================
   {
     id: "cat-17",
     slug: "africa-education-icon-award",
-    name: "Africa Education Icon Award (2005–2025)",
+    name: "Africa Education Icon Lifetime Achievement Award (2005–2025)",
     shortName: "Africa Education Icon",
-    description: "Lifetime achievement recognition for transformational leaders in African education",
+    description: "Continental honour recognising transformational leaders in African education",
     scope: "ICON",
     tierApplicability: { platinum: false, gold: false, blueGarnet: false, icon: true },
     selectionMethod: "Jury Selection Only — 9 Icons (3 per subcategory)",
@@ -554,6 +606,64 @@ export const NESA_CATEGORIES: CategoryDefinition[] = [
       { id: "icon-philanthropy", name: "Africa Education Philanthropy Icon of the Decade" },
       { id: "icon-literary", name: "Literary & New Curriculum Advocate Icon of the Decade" },
       { id: "icon-technical", name: "Africa Technical Educator Icon of the Decade" },
+    ],
+  },
+
+  // =========================================================================
+  // GOLD SPECIAL RECOGNITION — 2025 EDITION
+  // 3 standalone categories, not merged with Blue Garnet
+  // =========================================================================
+
+  {
+    id: "cat-gs-01",
+    slug: "africa-sports-education-impact",
+    name: "Africa Sports Education Impact Recognition",
+    shortName: "Sports for Education",
+    description: "Recognizing sportsmen and sportswomen championing education advocacy across Africa",
+    scope: "AFRICA_REGIONAL",
+    tierApplicability: { platinum: false, gold: false, blueGarnet: false, icon: false, goldSpecial: true },
+    selectionMethod: "Editorial Selection — Cultural Impact Recognition 2025",
+    displayOrder: 101,
+    iconName: "Users",
+    isActive: true,
+    subcategories: [
+      { id: "gs-sports-man", name: "Sportsman Supporting Education" },
+      { id: "gs-sports-woman", name: "Sportswoman Supporting Education" },
+    ],
+  },
+
+  {
+    id: "cat-gs-02",
+    slug: "africa-music-education-impact",
+    name: "Africa Music Education Impact Recognition",
+    shortName: "Music for Education",
+    description: "Recognizing music artists championing education advocacy across Africa",
+    scope: "AFRICA_REGIONAL",
+    tierApplicability: { platinum: false, gold: false, blueGarnet: false, icon: false, goldSpecial: true },
+    selectionMethod: "Editorial Selection — Cultural Impact Recognition 2025",
+    displayOrder: 102,
+    iconName: "Palette",
+    isActive: true,
+    subcategories: [
+      { id: "gs-music-artist", name: "Music Artist Supporting Education" },
+    ],
+  },
+
+  {
+    id: "cat-gs-03",
+    slug: "africa-social-media-education-impact",
+    name: "Africa Social Media Education Impact Recognition",
+    shortName: "Social Media for Education",
+    description: "Recognizing social media influencers championing education advocacy across Africa",
+    scope: "AFRICA_REGIONAL",
+    tierApplicability: { platinum: false, gold: false, blueGarnet: false, icon: false, goldSpecial: true },
+    selectionMethod: "Editorial Selection — Cultural Impact Recognition 2025",
+    displayOrder: 103,
+    iconName: "Globe",
+    isActive: true,
+    subcategories: [
+      { id: "gs-social-edu-content", name: "Educational Content Creator" },
+      { id: "gs-social-csr", name: "Social Media CSR Advocate for Education" },
     ],
   },
 ];
@@ -670,10 +780,36 @@ export function getCategoriesByTier(tier: AwardTier): CategoryDefinition[] {
         return cat.tierApplicability.blueGarnet;
       case "icon":
         return cat.tierApplicability.icon;
+      case "gold-special":
+        return cat.tierApplicability.goldSpecial === true;
       default:
         return false;
     }
   });
+}
+
+/**
+ * Get categories grouped by visual tier for the category grid
+ * Returns 4 groups: Blue Garnet (competitive), Platinum (institutional), Lifetime, Gold Special
+ */
+export function getCategoriesGrouped() {
+  return {
+    blueGarnet: NESA_CATEGORIES.filter(c => c.tierApplicability.blueGarnet && !c.tierApplicability.icon && !c.tierApplicability.goldSpecial),
+    platinum: NESA_CATEGORIES.filter(c => c.tierApplicability.platinum && !c.tierApplicability.blueGarnet && !c.tierApplicability.icon),
+    lifetime: NESA_CATEGORIES.filter(c => c.tierApplicability.icon),
+    goldSpecial: NESA_CATEGORIES.filter(c => c.tierApplicability.goldSpecial === true),
+  };
+}
+
+/**
+ * Get the track type for a category
+ */
+export type CategoryTrack = "competitive" | "institutional" | "special-recognition" | "lifetime";
+export function getCategoryTrack(category: CategoryDefinition): CategoryTrack {
+  if (category.tierApplicability.icon) return "lifetime";
+  if (category.tierApplicability.goldSpecial) return "special-recognition";
+  if (category.tierApplicability.blueGarnet) return "competitive";
+  return "institutional";
 }
 
 /**
@@ -725,7 +861,26 @@ export const CATEGORY_STATS = {
   iconCategories: getCategoriesByScope("ICON").length,
   totalSubcategories: getTotalSubcategoryCount(),
   competitiveCategories: NESA_CATEGORIES.filter(isCompetitiveCategory).length,
-  platinumEligible: getCategoriesByTier("platinum").length,
-  goldEligible: getCategoriesByTier("gold").length,
-  blueGarnetEligible: getCategoriesByTier("blue-garnet").length,
+  platinumEligible: getCategoriesByTier("platinum").length, // Should be 17 (all categories)
+  goldEligible: getCategoriesByTier("gold").length,          // Should be 9 categories
+  blueGarnetEligible: getCategoriesByTier("blue-garnet").length, // Should be 9 + 1 Icon = 10
+  corePlatinumCategories: CORE_PLATINUM_CATEGORY_IDS.length, // 7 core (100 threshold)
+  standardPlatinumCategories: NESA_CATEGORIES.length - CORE_PLATINUM_CATEGORY_IDS.length - 1, // 10 standard (200 threshold), minus Icon
 };
+
+/**
+ * Helper to check if a category is core platinum (100 threshold)
+ */
+export function isCorePlatinumCategory(categoryId: string): boolean {
+  return (CORE_PLATINUM_CATEGORY_IDS as readonly string[]).includes(categoryId);
+}
+
+/**
+ * Get the renomination threshold for a category
+ */
+export function getRenominationThreshold(categoryId: string): number {
+  if (isCorePlatinumCategory(categoryId)) {
+    return PLATINUM_THRESHOLDS.CORE;
+  }
+  return PLATINUM_THRESHOLDS.STANDARD;
+}

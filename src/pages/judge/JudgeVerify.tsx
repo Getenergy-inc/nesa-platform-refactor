@@ -31,52 +31,26 @@ export default function JudgeVerify() {
       }
 
       try {
-        // Find the application with this token
-        const { data: application, error: fetchError } = await supabase
-          .from("judge_applications")
-          .select("id, email, status, verification_token_expires_at")
-          .eq("verification_token", token)
-          .maybeSingle();
+        // Use edge function for secure server-side verification
+        const { data: result, error: invokeError } = await supabase.functions.invoke("jury/verify-token", {
+          method: "POST",
+          body: { token },
+        });
 
-        if (fetchError) throw fetchError;
+        if (invokeError) throw invokeError;
 
-        if (!application) {
-          setError("Invalid or expired verification link. Please check your application status.");
+        if (result?.error) {
+          setError(result.error);
           setIsVerifying(false);
           return;
         }
 
-        // Check if already verified
-        if (application.status !== "submitted") {
-          setEmail(application.email);
+        if (result?.success) {
+          setEmail(result.email);
           setIsSuccess(true);
-          setIsVerifying(false);
-          return;
+        } else {
+          setError("Failed to verify your email. Please try again or contact support.");
         }
-
-        // Check if token expired
-        if (application.verification_token_expires_at) {
-          const expiresAt = new Date(application.verification_token_expires_at);
-          if (expiresAt < new Date()) {
-            setError("This verification link has expired. Please contact us to resend.");
-            setIsVerifying(false);
-            return;
-          }
-        }
-
-        // Update the application status
-        const { error: updateError } = await supabase
-          .from("judge_applications")
-          .update({
-            status: "email_verified",
-            verified_at: new Date().toISOString(),
-          })
-          .eq("id", application.id);
-
-        if (updateError) throw updateError;
-
-        setEmail(application.email);
-        setIsSuccess(true);
       } catch (err: any) {
         console.error("Verification error:", err);
         setError("Failed to verify your email. Please try again or contact support.");

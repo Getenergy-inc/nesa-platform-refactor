@@ -1,6 +1,6 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
-import { Coins, Lock, Gift, Unlock } from "lucide-react";
+import { Coins, Gift } from "lucide-react";
 import { formatAgc } from "@/api/wallet";
 import type { WalletBalance } from "@/types/wallet";
 
@@ -55,8 +55,6 @@ export function AGCSummaryCard({ balance, loading }: AGCSummaryCardProps) {
     );
   }
 
-  const withdrawable = balance?.agc_withdrawable ?? 0;
-  const nonWithdrawable = balance?.agc_non_withdrawable ?? 0;
   const bonus = balance?.agc_bonus ?? 0;
 
   return (
@@ -68,18 +66,6 @@ export function AGCSummaryCard({ balance, loading }: AGCSummaryCardProps) {
         </CardTitle>
       </CardHeader>
       <CardContent className="space-y-4">
-        <SummaryItem
-          icon={<Unlock className="h-5 w-5 text-green-600" />}
-          label="Withdrawable"
-          value={withdrawable}
-          colorClass="bg-green-100 dark:bg-green-900/30"
-        />
-        <SummaryItem
-          icon={<Lock className="h-5 w-5 text-orange-600" />}
-          label="Non-withdrawable"
-          value={nonWithdrawable}
-          colorClass="bg-orange-100 dark:bg-orange-900/30"
-        />
         <SummaryItem
           icon={<Gift className="h-5 w-5 text-purple-600" />}
           label="Bonus"
