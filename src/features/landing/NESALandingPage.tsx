@@ -17,7 +17,6 @@ import { ScrollProgressIndicator } from "@/components/nesa/ScrollProgressIndicat
 import { ExitIntentPopup } from "@/components/nesa/ExitIntentPopup";
 import { BackToTopButton } from "@/components/ui/back-to-top";
 import { useSeason } from "@/contexts/SeasonContext";
-import { useSeason } from "@/contexts/SeasonContext";
 
 // Lazy load below-fold sections
 const HowItWorksVisual = lazy(() => import("@/components/nesa/HowItWorksVisual").then(m => ({ default: m.HowItWorksVisual })));
@@ -49,9 +48,6 @@ export function NESALandingPage() {
         
         {/* ═══ 1. HERO — Authority ═══ */}
         <TrophyHeroSection />
-        
-        {/* ═══ 1b. Returning visitors — Continue where you left off ═══ */}
-        <ContinueWhereYouLeftOff />
         
         {/* ═══ 2. Trust Strip ═══ */}
         <TrustLogosStrip />
@@ -86,7 +82,6 @@ export function NESALandingPage() {
 
       {/* Engagement Hooks */}
       <ExitIntentPopup />
-      <EngagementToast />
       <BackToTopButton />
     </>
   );
