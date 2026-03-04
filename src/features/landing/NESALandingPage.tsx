@@ -1,6 +1,5 @@
 // NESA-Africa Landing Page Feature
-// Marketing-led welcome page with visual storytelling and governance integrity
-// Consolidated 8-block editorial flow with lazy loading
+// Focused 6-block conversion funnel with lazy loading
 
 import { lazy } from "react";
 
@@ -19,10 +18,8 @@ import { BackToTopButton } from "@/components/ui/back-to-top";
 import { useSeason } from "@/contexts/SeasonContext";
 
 // Lazy load below-fold sections
-const HowItWorksVisual = lazy(() => import("@/components/nesa/HowItWorksVisual").then(m => ({ default: m.HowItWorksVisual })));
 const CategoriesSection = lazy(() => import("@/components/nesa/CategoriesSection").then(m => ({ default: m.CategoriesSection })));
 const SponsorsSection = lazy(() => import("@/components/nesa/SponsorsSection").then(m => ({ default: m.SponsorsSection })));
-const FinalCTASection = lazy(() => import("@/components/nesa/FinalCTASection").then(m => ({ default: m.FinalCTASection })));
 
 export function NESALandingPage() {
   const { currentEdition } = useSeason();
@@ -58,26 +55,14 @@ export function NESALandingPage() {
         {/* ═══ 4. Countdown ═══ */}
         <CountdownSection />
         
-        {/* ═══ 4. Award Tiers Overview + Category Grid ═══ */}
+        {/* ═══ 5. Award Categories ═══ */}
         <LazySection>
           <CategoriesSection />
         </LazySection>
         
-        {/* ═══ 5. Nomination Paths ═══ */}
-        <NominationPathsCards />
-        
-        {/* ═══ 6. How It Works ═══ */}
-        <LazySection>
-          <HowItWorksVisual />
-        </LazySection>
-        
-        {/* ═══ 7. Sponsors ═══ */}
+        {/* ═══ 6. Sponsors ═══ */}
         <LazySection>
           <SponsorsSection />
-        </LazySection>
-        
-        <LazySection>
-          <FinalCTASection />
         </LazySection>
         
         <NESAFooter />
