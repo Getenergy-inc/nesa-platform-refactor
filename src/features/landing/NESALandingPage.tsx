@@ -15,10 +15,8 @@ import { NESAHeader } from "@/components/nesa/NESAHeader";
 import { LazySection } from "@/components/ui/lazy-section";
 import { ScrollProgressIndicator } from "@/components/nesa/ScrollProgressIndicator";
 import { ExitIntentPopup } from "@/components/nesa/ExitIntentPopup";
-import { EngagementToast } from "@/components/nesa/EngagementToast";
-import { ContinueWhereYouLeftOff } from "@/components/nesa/ContinueWhereYouLeftOff";
-import { WhyPeopleReturnStrip } from "@/components/nesa/WhyPeopleReturnStrip";
 import { BackToTopButton } from "@/components/ui/back-to-top";
+import { useSeason } from "@/contexts/SeasonContext";
 import { useSeason } from "@/contexts/SeasonContext";
 
 // Lazy load below-fold sections
