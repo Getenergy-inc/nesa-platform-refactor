@@ -56,6 +56,9 @@ export function NESALandingPage() {
         {/* ═══ 3. Quick Actions ═══ */}
         <QuickActionBar />
         
+        {/* ═══ 4. Countdown ═══ */}
+        <CountdownSection />
+        
         {/* ═══ 4. Award Tiers Overview + Category Grid ═══ */}
         <LazySection>
           <CategoriesSection />
