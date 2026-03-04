@@ -69,55 +69,12 @@ export function NESALandingPage() {
         {/* ═══ 5. Nomination Paths ═══ */}
         <NominationPathsCards />
         
-        {/* ═══ 6. Interactive Africa Map — Edu-Tourism ═══ */}
-        <div id="explore-regions">
-          <LazySection>
-            <InteractiveAfricaMap />
-          </LazySection>
-        </div>
-        {/* ═══ 7. How It Works ═══ */}
+        {/* ═══ 6. How It Works ═══ */}
         <LazySection>
           <HowItWorksVisual />
         </LazySection>
         
-        {/* ═══ 8. Voting Section ═══ */}
-        <LazySection>
-          <VoteWithAGCSection />
-        </LazySection>
-        
-        {/* ═══ 9. Governance & Integrity ═══ */}
-        <LazySection>
-          <IntegritySection />
-        </LazySection>
-        
-        <LazySection>
-          <EDIIntegrityJourney />
-        </LazySection>
-        
-        <LazySection>
-          <JudgesSection />
-        </LazySection>
-        
-        {/* ═══ 10. Media ═══ */}
-        <LazySection>
-          <MediaShowcaseSection />
-        </LazySection>
-        
-        <LazySection>
-          <UpcomingEventsSection />
-        </LazySection>
-        
-        {/* ═══ 11. Why People Return ═══ */}
-        <LazySection>
-          <WhyPeopleReturnStrip />
-        </LazySection>
-        
-        {/* ═══ 12. Legacy (short teaser) ═══ */}
-        <LazySection>
-          <LegacyImpactSection />
-        </LazySection>
-        
-        {/* ═══ 13. Sponsors + Footer ═══ */}
+        {/* ═══ 7. Sponsors ═══ */}
         <LazySection>
           <SponsorsSection />
         </LazySection>
