@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import { Trophy, Vote, Heart, Music } from "lucide-react";
+import { Trophy, Vote, Heart, Music, Globe } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { motion, useScroll, useMotionValueEvent } from "framer-motion";
 import { useState } from "react";
@@ -77,6 +77,17 @@ export function QuickActionBar() {
           >
             <Heart className="h-3.5 w-3.5" />
             {t("landing.quickActions.donate")}
+          </Button>
+        </Link>
+
+        <Link to="/regions" className="flex-1">
+          <Button
+            size="sm"
+            variant="outline"
+            className="w-full border-emerald-500/40 text-emerald-400 hover:bg-emerald-500/15 hover:border-emerald-400 font-semibold rounded-lg gap-1 h-10 px-2 text-xs transition-all"
+          >
+            <Globe className="h-3.5 w-3.5" />
+            Explore
           </Button>
         </Link>
       </div>
