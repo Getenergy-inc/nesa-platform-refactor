@@ -62,7 +62,17 @@ export function NESALandingPage() {
           <CategoriesSection />
         </LazySection>
         
-        {/* ═══ 6. Sponsors ═══ */}
+        {/* ═══ 6. Interactive Africa Map ═══ */}
+        <LazySection>
+          <InteractiveAfricaMap />
+        </LazySection>
+        
+        {/* ═══ 7. Upcoming Events ═══ */}
+        <LazySection>
+          <UpcomingEventsSection />
+        </LazySection>
+        
+        {/* ═══ 8. Sponsors ═══ */}
         <LazySection>
           <SponsorsSection />
         </LazySection>
