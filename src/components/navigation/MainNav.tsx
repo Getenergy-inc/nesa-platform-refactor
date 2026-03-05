@@ -415,7 +415,8 @@ const mobileQuickActions = [
   { icon: Home, label: "Home", href: "/" },
   { icon: Award, label: "Nominate", href: "/nominate" },
   { icon: Vote, label: "Vote", href: "/vote" },
-  { icon: Play, label: "Watch", href: "/media/tv" },
+  { icon: Heart, label: "Donate", href: "/donate" },
+  { icon: Globe, label: "Explore", href: "/regions" },
   { icon: LayoutDashboard, label: "Dashboard", href: "/dashboard" },
 ];
 
