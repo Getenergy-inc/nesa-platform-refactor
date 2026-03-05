@@ -73,7 +73,12 @@ export function NESALandingPage() {
           <UpcomingEventsSection />
         </LazySection>
         
-        {/* ═══ 8. Sponsors ═══ */}
+        {/* ═══ 8. Promo Videos ═══ */}
+        <LazySection>
+          <PromoVideosSection />
+        </LazySection>
+        
+        {/* ═══ 9. Sponsors ═══ */}
         <LazySection>
           <SponsorsSection />
         </LazySection>
