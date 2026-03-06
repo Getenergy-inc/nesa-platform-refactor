@@ -23,6 +23,7 @@ import {
 } from "@/components/auth/JudgeOTPNotice";
 import { motion } from "framer-motion";
 import nesaStamp from "@/assets/nesa-stamp.jpeg";
+import { AppRole } from "@/config/roles";
 
 export default function Login() {
   const { t } = useTranslation("pages");
@@ -43,10 +44,20 @@ export default function Login() {
 
   const isJudgeLogin = nextUrl?.startsWith("/judge");
 
-  const resolvePostLoginRoute = () => {
-    if (hasRole("admin")) return "/admin";
-    if (hasRole("jury")) return "/judge";
-    return "/dashboard";
+  const resolvePostLoginRoute = (role: AppRole) => {
+    console.log("role", role);
+    switch (role) {
+      case "NOMINEE":
+        return "/nominee/dashboard";
+      case "jury":
+        return "/judge";
+      case "ADMIN":
+        return "/admin";
+      case "NRC":
+        return "/nrc";
+      default:
+        return "/dashboard";
+    }
   };
 
   const handleGoogleSignIn = async () => {
@@ -57,7 +68,7 @@ export default function Login() {
       });
 
       if (error) throw error;
-    } catch (error: any) {
+    } catch (error) {
       toast.error(error.message || "Google sign-in failed");
       setGoogleLoading(false);
     }
@@ -68,8 +79,9 @@ export default function Login() {
     setLoading(true);
 
     try {
-      await signIn(email, password);
+      const role = await signIn(email, password);
       toast.success(t("auth.login.welcomeBack"));
+      console.log("the role is this", role);
 
       // Jury requires OTP if accessing judge panel
       if (hasRole("jury") && isJudgeLogin) {
@@ -80,9 +92,11 @@ export default function Login() {
         );
         return;
       }
+      const resolvedRoute = resolvePostLoginRoute(role);
+      console.log("resolved route", resolvedRoute);
 
-      navigate(resolvePostLoginRoute());
-    } catch (err: any) {
+      navigate(resolvedRoute);
+    } catch (err) {
       toast.error(err.message || t("auth.login.invalidCredentials"));
     } finally {
       setLoading(false);

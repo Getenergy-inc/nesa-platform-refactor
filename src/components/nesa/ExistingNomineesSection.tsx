@@ -7,17 +7,19 @@ import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Skeleton } from "@/components/ui/skeleton";
-import { 
-  Users, 
-  Eye, 
-  ChevronDown, 
-  ChevronUp, 
-  Award, 
+import {
+  Users,
+  Eye,
+  ChevronDown,
+  ChevronUp,
+  Award,
   ExternalLink,
   UserPlus,
   ThumbsUp,
 } from "lucide-react";
 import { NomineeActions } from "@/components/nominees";
+import { nominationApi } from "@/api/nomination";
+import { useAuth } from "@/contexts/AuthContext";
 
 interface ExistingNominee {
   id: string;
@@ -26,9 +28,6 @@ interface ExistingNominee {
   title: string | null;
   organization: string | null;
   photo_url: string | null;
-  is_platinum: boolean;
-  public_votes: number;
-  renomination_count: number;
 }
 
 interface ExistingNomineesSectionProps {
@@ -37,14 +36,15 @@ interface ExistingNomineesSectionProps {
   categoryName?: string;
 }
 
-export function ExistingNomineesSection({ 
-  subcategoryId, 
+export function ExistingNomineesSection({
+  subcategoryId,
   subcategoryName,
-  categoryName 
+  categoryName,
 }: ExistingNomineesSectionProps) {
   const [nominees, setNominees] = useState<ExistingNominee[]>([]);
   const [loading, setLoading] = useState(true);
   const [expanded, setExpanded] = useState(false);
+  const { accessToken } = useAuth();
 
   useEffect(() => {
     async function fetchNominees() {
@@ -55,28 +55,24 @@ export function ExistingNomineesSection({
       }
 
       setLoading(true);
-      
-      const { data, error } = await supabase
-        .from("nominees")
-        .select(`
-          id,
-          name,
-          slug,
-          title,
-          organization,
-          photo_url,
-          is_platinum,
-          public_votes,
-          renomination_count
-        `)
-        .eq("subcategory_id", subcategoryId)
-        .in("status", ["approved", "platinum"])
-        .order("public_votes", { ascending: false })
-        .limit(20);
 
-      if (!error && data) {
-        setNominees(data);
-      }
+      const data = await nominationApi.fetchSubCategoryNominees(
+        accessToken,
+        subcategoryId,
+      );
+      const finalData = data.map((nom) => {
+        const modifiedNominee: ExistingNominee = {
+          id: nom.id,
+          name: nom.fullName,
+          slug: nom.email,
+          title: null,
+          organization: null,
+          photo_url: nom.profileImage,
+        };
+        return modifiedNominee;
+      });
+      setNominees(finalData);
+
       setLoading(false);
     }
 
@@ -92,13 +88,13 @@ export function ExistingNomineesSection({
       .slice(0, 2);
   };
 
-  const handleRenominateSuccess = (nomineeId: string) => {
-    setNominees(prev => prev.map(n => 
-      n.id === nomineeId 
-        ? { ...n, renomination_count: n.renomination_count + 1 }
-        : n
-    ));
-  };
+  // const handleRenominateSuccess = (nomineeId: string) => {
+  //   setNominees(prev => prev.map(n =>
+  //     n.id === nomineeId
+  //       ? { ...n, renomination_count: n.renomination_count + 1 }
+  //       : n
+  //   ));
+  // };
 
   if (loading) {
     return (
@@ -163,30 +159,38 @@ export function ExistingNomineesSection({
           )}
         </div>
         <p className="text-xs text-muted-foreground">
-          View nominees already in this category. You can endorse them or nominate someone new.
+          View nominees already in this category. You can endorse them or
+          nominate someone new.
         </p>
       </CardHeader>
       <CardContent className="space-y-3">
-        <ScrollArea className={expanded && nominees.length > 5 ? "h-[300px]" : ""}>
+        <ScrollArea
+          className={expanded && nominees.length > 5 ? "h-[300px]" : ""}
+        >
           <div className="space-y-2">
             {displayedNominees.map((nominee) => (
-              <div 
+              <div
                 key={nominee.id}
                 className="flex items-center gap-3 p-2 rounded-lg bg-background/50 hover:bg-background transition-colors group"
               >
                 <Avatar className="h-10 w-10 border border-primary/20">
-                  <AvatarImage src={nominee.photo_url || undefined} alt={nominee.name} />
+                  <AvatarImage
+                    src={nominee.photo_url || undefined}
+                    alt={nominee.name}
+                  />
                   <AvatarFallback className="bg-primary/10 text-primary text-sm">
                     {getInitials(nominee.name)}
                   </AvatarFallback>
                 </Avatar>
-                
+
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center gap-2">
-                    <span className="font-medium text-sm truncate">{nominee.name}</span>
-                    {nominee.is_platinum && (
+                    <span className="font-medium text-sm truncate">
+                      {nominee.name}
+                    </span>
+                    {/* {nominee.is_platinum && (
                       <Award className="h-3.5 w-3.5 text-amber-500 shrink-0" />
-                    )}
+                    )} */}
                   </div>
                   <div className="flex items-center gap-2 text-xs text-muted-foreground">
                     {nominee.organization && (
@@ -195,16 +199,16 @@ export function ExistingNomineesSection({
                     {nominee.title && !nominee.organization && (
                       <span className="truncate">{nominee.title}</span>
                     )}
-                    <span className="shrink-0 flex items-center gap-0.5">
+                    {/* <span className="shrink-0 flex items-center gap-0.5">
                       <ThumbsUp className="h-3 w-3" />
                       {nominee.public_votes}
-                    </span>
-                    {nominee.renomination_count > 0 && (
+                    </span> */}
+                    {/* {nominee.renomination_count > 0 && (
                       <span className="shrink-0 flex items-center gap-0.5">
                         <UserPlus className="h-3 w-3" />
                         {nominee.renomination_count}
                       </span>
-                    )}
+                    )} */}
                   </div>
                 </div>
 
@@ -216,12 +220,13 @@ export function ExistingNomineesSection({
                       nomineeName: nominee.name,
                       awardTitle: categoryName,
                       subcategoryTitle: subcategoryName,
-                      renominationCount: nominee.renomination_count,
                     }}
                     variant="icon-only"
-                    onRenominateSuccess={() => handleRenominateSuccess(nominee.id)}
+                    // onRenominateSuccess={() =>
+                    //   handleRenominateSuccess(nominee.id)
+                    // }
                   />
-                  <Link 
+                  <Link
                     to={`/nominees/${encodeURIComponent(nominee.slug)}`}
                     className="opacity-0 group-hover:opacity-100 transition-opacity"
                   >
@@ -236,9 +241,9 @@ export function ExistingNomineesSection({
         </ScrollArea>
 
         {hasMore && (
-          <Button 
-            variant="ghost" 
-            size="sm" 
+          <Button
+            variant="ghost"
+            size="sm"
             className="w-full text-xs"
             onClick={() => setExpanded(!expanded)}
           >

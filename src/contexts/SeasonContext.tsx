@@ -1,5 +1,13 @@
-import { createContext, useContext, useEffect, useState, ReactNode, useCallback } from "react";
-import { supabase } from "@/integrations/supabase/client";
+import {
+  createContext,
+  useContext,
+  useEffect,
+  useState,
+  ReactNode,
+  useCallback,
+} from "react";
+import { adminApi, EditionBase, EditionResponse } from "@/api/newadmin";
+import { useAuth } from "@/contexts/AuthContext";
 import {
   DEFAULT_SEASON_CONFIG,
   type SeasonConfig,
@@ -7,9 +15,80 @@ import {
   type StageAction,
   type StageStatus,
   type TransitionRules,
+  type SeasonStageResponse,
   getEditionSafe,
   getEditionBannerText,
+  STAGE_LABELS,
 } from "@/config/season";
+
+// Convert API Edition to our internal Edition format
+const mapApiEditionToEdition = (apiEdition: EditionResponse): Edition => {
+  // Extract year from displayYear (which is a string like "2025")
+  const year = parseInt(apiEdition.displayYear);
+
+  return {
+    key: apiEdition.key,
+    name: apiEdition.name,
+    displayYear: year,
+    ceremonyYear: parseInt(apiEdition.ceremonyYear) || year + 1,
+    tagline: apiEdition.tagline,
+    theme: apiEdition.theme,
+    nominationsOpen: new Date(apiEdition.nominationsOpen)
+      .toISOString()
+      .split("T")[0],
+    nominationsClose: new Date(apiEdition.nominationsClose)
+      .toISOString()
+      .split("T")[0],
+    votingOpen: new Date(apiEdition.votingOpen).toISOString().split("T")[0],
+    votingClose: new Date(apiEdition.votingClose).toISOString().split("T")[0],
+    ceremonyDate: new Date(apiEdition.ceremonyDate).toISOString().split("T")[0],
+    isActive: apiEdition.isActive,
+  };
+};
+
+// Generate stages from edition dates
+const generateStagesFromEdition = (edition: Edition): StageStatus[] => {
+  const now = new Date();
+
+  return [
+    {
+      action: "nominations",
+      isOpen:
+        now >= new Date(edition.nominationsOpen) &&
+        now <= new Date(edition.nominationsClose),
+      opensAt: edition.nominationsOpen,
+      closesAt: edition.nominationsClose,
+    },
+    {
+      action: "public_voting",
+      isOpen:
+        now >= new Date(edition.votingOpen) &&
+        now <= new Date(edition.votingClose),
+      opensAt: edition.votingOpen,
+      closesAt: edition.votingClose,
+    },
+    {
+      action: "jury_scoring",
+      isOpen:
+        now > new Date(edition.votingClose) &&
+        now <= new Date(edition.ceremonyDate),
+      opensAt: edition.votingClose,
+      closesAt: edition.ceremonyDate,
+    },
+    {
+      action: "results",
+      isOpen: now >= new Date(edition.ceremonyDate),
+      opensAt: edition.ceremonyDate,
+      closesAt: null,
+    },
+    {
+      action: "certificates",
+      isOpen: now >= new Date(edition.ceremonyDate),
+      opensAt: edition.ceremonyDate,
+      closesAt: null,
+    },
+  ];
+};
 
 interface SeasonContextType {
   config: SeasonConfig;
@@ -24,6 +103,7 @@ interface SeasonContextType {
   // Edition helpers
   getBannerText: () => string;
   getEdition: (key?: string) => Edition;
+  getAllEditions: () => Edition[];
   // Refresh
   refresh: () => Promise<void>;
 }
@@ -31,68 +111,57 @@ interface SeasonContextType {
 const SeasonContext = createContext<SeasonContextType | undefined>(undefined);
 
 export function SeasonProvider({ children }: { children: ReactNode }) {
+  const { accessToken } = useAuth();
   const [config, setConfig] = useState<SeasonConfig>(DEFAULT_SEASON_CONFIG);
   const [stages, setStages] = useState<StageStatus[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
   const loadSeasonData = useCallback(async () => {
+    if (!accessToken) {
+      setLoading(false);
+      return;
+    }
+
     try {
       setError(null);
-      
-      // Fetch current active season from database
-      const { data: seasonData, error: seasonError } = await supabase
-        .from("seasons")
-        .select("*")
-        .eq("is_active", true)
-        .maybeSingle();
 
-      if (seasonError) throw seasonError;
+      // Fetch all editions from API
+      const editions = await adminApi.fetchEditions(accessToken);
 
-      // Fetch stage configuration
-      const { data: stageData, error: stageError } = await supabase
-        .from("stage_config")
-        .select(`
-          action,
-          is_open,
-          opens_at,
-          closes_at,
-          seasons!inner(is_active)
-        `)
-        .eq("seasons.is_active", true);
+      // Find active edition
+      const activeEdition = editions.find((e) => e.isActive);
 
-      if (stageError) throw stageError;
-
-      // Build stages array
-      const stagesArray: StageStatus[] = (stageData || []).map((s) => ({
-        action: s.action as StageAction,
-        isOpen: s.is_open,
-        opensAt: s.opens_at,
-        closesAt: s.closes_at,
-      }));
-
-      setStages(stagesArray);
-
-      // Update config with database values if available
-      if (seasonData) {
-        const editionKey = seasonData.year.toString();
-        
-        setConfig((prev) => ({
-          ...prev,
-          currentEditionKey: editionKey,
-          editions: {
-            ...prev.editions,
-            [editionKey]: {
-              ...prev.editions[editionKey],
-              key: editionKey,
-              name: seasonData.name,
-              displayYear: seasonData.year,
-              ceremonyYear: seasonData.year + 1,
-              isActive: seasonData.is_active,
-            },
-          },
-        }));
+      if (!activeEdition) {
+        throw new Error("No active edition found");
       }
+
+      // Convert API editions to internal format
+      const editionsMap: Record<string, Edition> = {};
+      editions.forEach((ed) => {
+        const mapped = mapApiEditionToEdition(ed);
+        editionsMap[ed.key] = mapped;
+      });
+
+      const currentEdition = mapApiEditionToEdition(activeEdition);
+
+      // Generate stages from active edition
+      const generatedStages = generateStagesFromEdition(currentEdition);
+
+      // Build config
+      const newConfig: SeasonConfig = {
+        currentEditionKey: activeEdition.key,
+        editions: editionsMap,
+        transitionRules: {
+          showNextEditionPreview: false,
+          votingLockoutDays: 14,
+          certificateAvailableDays: 30,
+          allowArchiveAccess: true,
+        },
+      };
+
+      setConfig(newConfig);
+      setStages(generatedStages);
     } catch (err: any) {
       console.error("Failed to load season data:", err);
       setError(err.message || "Failed to load season configuration");
@@ -100,7 +169,7 @@ export function SeasonProvider({ children }: { children: ReactNode }) {
     } finally {
       setLoading(false);
     }
-  }, []);
+  }, [accessToken]);
 
   useEffect(() => {
     loadSeasonData();
@@ -113,14 +182,14 @@ export function SeasonProvider({ children }: { children: ReactNode }) {
       const stage = stages.find((s) => s.action === action);
       return stage?.isOpen ?? false;
     },
-    [stages]
+    [stages],
   );
 
   const getStage = useCallback(
     (action: StageAction): StageStatus | undefined => {
       return stages.find((s) => s.action === action);
     },
-    [stages]
+    [stages],
   );
 
   const getOpenStage = useCallback((): StageAction | null => {
@@ -137,8 +206,12 @@ export function SeasonProvider({ children }: { children: ReactNode }) {
     (key?: string): Edition => {
       return getEditionSafe(config, key);
     },
-    [config]
+    [config],
   );
+
+  const getAllEditions = useCallback((): Edition[] => {
+    return Object.values(config.editions);
+  }, [config]);
 
   return (
     <SeasonContext.Provider
@@ -153,6 +226,7 @@ export function SeasonProvider({ children }: { children: ReactNode }) {
         getOpenStage,
         getBannerText,
         getEdition,
+        getAllEditions,
         refresh: loadSeasonData,
       }}
     >
@@ -180,5 +254,35 @@ export function useStageGate(action: StageAction) {
     loading,
     opensAt: stage?.opensAt ? new Date(stage.opensAt) : null,
     closesAt: stage?.closesAt ? new Date(stage.closesAt) : null,
+  };
+}
+
+// Optional: Hook to get server-synced stage status if your API provides it
+export function useServerStages() {
+  const { accessToken } = useAuth();
+  const [serverStages, setServerStages] = useState<SeasonStageResponse | null>(
+    null,
+  );
+  const [loading, setLoading] = useState(false);
+
+  const fetchServerStages = useCallback(async () => {
+    if (!accessToken) return;
+
+    setLoading(true);
+    try {
+      // You would need to add this endpoint to your adminApi
+      // const response = await adminApi.fetchStageStatus(accessToken);
+      // setServerStages(response);
+    } catch (error) {
+      console.error("Failed to fetch server stages:", error);
+    } finally {
+      setLoading(false);
+    }
+  }, [accessToken]);
+
+  return {
+    serverStages,
+    loading,
+    refresh: fetchServerStages,
   };
 }

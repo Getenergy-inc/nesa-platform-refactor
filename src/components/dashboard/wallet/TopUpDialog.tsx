@@ -116,7 +116,7 @@ export function TopUpDialog({
           payment_options: "card, banktransfer, ussd",
           customer: {
             email: user.email ?? "",
-            name: user.fullName ?? "",
+            name: `${user.firstName} ${user.lastName}`,
             phone_number: user.phone ?? "0000000000",
           },
           customizations: {
@@ -127,6 +127,7 @@ export function TopUpDialog({
         };
 
         // 3️⃣ Initialize Flutterwave with correct tx_ref
+        // eslint-disable-next-line react-hooks/rules-of-hooks
         const handleFlutterPayment = useFlutterwave(config);
 
         // 4️⃣ Launch Checkout

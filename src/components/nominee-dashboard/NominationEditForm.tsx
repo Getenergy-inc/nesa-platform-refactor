@@ -135,7 +135,7 @@ export function NominationEditForm({ nomination, onUpdated }: Props) {
 
       toast.success("Nomination updated successfully");
       onUpdated(updated);
-    } catch (err: any) {
+    } catch (err) {
       toast.error(err.message || "Update failed");
     } finally {
       setLoading(false);

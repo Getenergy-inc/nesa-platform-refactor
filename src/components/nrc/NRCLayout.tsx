@@ -70,7 +70,7 @@ export function NRCLayout({ children }: NRCLayoutProps) {
               <span className="absolute -right-0.5 -top-0.5 h-2 w-2 rounded-full bg-destructive" />
             </Button>
             <Button variant="ghost" size="sm" asChild>
-              <Link to="/dashboard">
+              <Link to="/">
                 <ArrowLeft className="mr-2 h-4 w-4" />
                 Exit Portal
               </Link>

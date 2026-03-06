@@ -1,6 +1,6 @@
 /**
  * Admin EDX Analytics Dashboard
- * 
+ *
  * Centralized view of Education Development Index metrics:
  * - Nomination counts by region/category
  * - Voting participation
@@ -37,12 +37,42 @@ function OverviewCards() {
   const { data, isLoading } = useEDXOverview();
 
   const stats = [
-    { label: "Total Nominations", value: data?.totalNominations ?? 0, icon: Award, color: "text-gold" },
-    { label: "Total Nominees", value: data?.totalNominees ?? 0, icon: Users, color: "text-primary" },
-    { label: "Total Votes Cast", value: data?.totalVotes ?? 0, icon: Vote, color: "text-primary" },
-    { label: "Active Regions", value: data?.totalRegionsActive ?? 0, icon: Globe, color: "text-primary" },
-    { label: "Categories Engaged", value: data?.totalCategoriesEngaged ?? 0, icon: BarChart3, color: "text-gold" },
-    { label: "Rebuild Nominations", value: data?.rebuildSchoolNominations ?? 0, icon: School, color: "text-gold" },
+    {
+      label: "Total Nominations",
+      value: data?.totalNominations ?? 0,
+      icon: Award,
+      color: "text-gold",
+    },
+    {
+      label: "Total Nominees",
+      value: data?.totalNominees ?? 0,
+      icon: Users,
+      color: "text-primary",
+    },
+    {
+      label: "Total Votes Cast",
+      value: data?.totalVotes ?? 0,
+      icon: Vote,
+      color: "text-primary",
+    },
+    {
+      label: "Active Regions",
+      value: data?.totalRegionsActive ?? 0,
+      icon: Globe,
+      color: "text-primary",
+    },
+    {
+      label: "Categories Engaged",
+      value: data?.totalCategoriesEngaged ?? 0,
+      icon: BarChart3,
+      color: "text-gold",
+    },
+    {
+      label: "Rebuild Nominations",
+      value: data?.rebuildSchoolNominations ?? 0,
+      icon: School,
+      color: "text-gold",
+    },
   ];
 
   return (
@@ -51,13 +81,17 @@ function OverviewCards() {
         <Card key={s.label}>
           <CardContent className="p-4">
             <div className="flex items-center justify-between mb-2">
-              <span className="text-xs text-muted-foreground uppercase tracking-wide">{s.label}</span>
+              <span className="text-xs text-muted-foreground uppercase tracking-wide">
+                {s.label}
+              </span>
               <s.icon className={`h-4 w-4 ${s.color}`} />
             </div>
             {isLoading ? (
               <Skeleton className="h-8 w-20" />
             ) : (
-              <p className="text-2xl font-display font-bold">{s.value.toLocaleString()}</p>
+              <p className="text-2xl font-display font-bold">
+                {s.value.toLocaleString()}
+              </p>
             )}
           </CardContent>
         </Card>
@@ -83,7 +117,9 @@ function CategoryEngagementTable() {
     );
   }
 
-  const sorted = [...(data ?? [])].sort((a, b) => b.participationScore - a.participationScore);
+  const sorted = [...(data ?? [])].sort(
+    (a, b) => b.participationScore - a.participationScore,
+  );
 
   return (
     <Card>
@@ -97,7 +133,9 @@ function CategoryEngagementTable() {
         <div className="space-y-3">
           {sorted.map((cat) => (
             <div key={cat.categoryId} className="flex items-center gap-3">
-              <div className="w-48 truncate text-sm font-medium">{cat.categoryName}</div>
+              <div className="w-48 truncate text-sm font-medium">
+                {cat.categoryName}
+              </div>
               <div className="flex-1">
                 <Progress value={cat.participationScore} className="h-2" />
               </div>
@@ -162,13 +200,18 @@ function RegionMetricsTable() {
             </thead>
             <tbody>
               {regions.map((r) => (
-                <tr key={r.regionSlug} className="border-b border-muted/30 hover:bg-muted/20">
+                <tr
+                  key={r.regionSlug}
+                  className="border-b border-muted/30 hover:bg-muted/20"
+                >
                   <td className="py-2 pr-4 font-medium">{r.regionName}</td>
                   <td className="py-2 px-2 text-right">
                     <Badge variant="secondary">{r.nomineeCount}</Badge>
                   </td>
                   <td className="py-2 px-2 text-right">{r.voteCount}</td>
-                  <td className="py-2 pl-2 text-right">{r.rebuildNominationCount}</td>
+                  <td className="py-2 pl-2 text-right">
+                    {r.rebuildNominationCount}
+                  </td>
                 </tr>
               ))}
             </tbody>
@@ -193,25 +236,34 @@ function ReferralAuditCard() {
       <CardContent>
         <div className="grid gap-4 sm:grid-cols-2">
           <div className="rounded-lg bg-muted/50 p-4">
-            <p className="text-xs text-muted-foreground mb-1">AGC in Circulation</p>
+            <p className="text-xs text-muted-foreground mb-1">
+              AGC in Circulation
+            </p>
             {isLoading ? (
               <Skeleton className="h-6 w-20" />
             ) : (
-              <p className="text-lg font-bold">{overview?.agcInCirculation?.toLocaleString() ?? 0} AGC</p>
+              <p className="text-lg font-bold">
+                {overview?.agcInCirculation?.toLocaleString() ?? 0} AGC
+              </p>
             )}
           </div>
           <div className="rounded-lg bg-muted/50 p-4">
-            <p className="text-xs text-muted-foreground mb-1">Volunteer BOD Applications</p>
+            <p className="text-xs text-muted-foreground mb-1">
+              Volunteer BOD Applications
+            </p>
             {isLoading ? (
               <Skeleton className="h-6 w-20" />
             ) : (
-              <p className="text-lg font-bold">{overview?.volunteerBodApplications ?? 0}</p>
+              <p className="text-lg font-bold">
+                {overview?.volunteerBodApplications ?? 0}
+              </p>
             )}
           </div>
         </div>
         <p className="text-xs text-muted-foreground mt-4">
-          All AGCc accruals and conversions are tracked in the append-only wallet ledger. 
-          Duplicate detection and verification checks are enforced server-side.
+          All AGCc accruals and conversions are tracked in the append-only
+          wallet ledger. Duplicate detection and verification checks are
+          enforced server-side.
         </p>
       </CardContent>
     </Card>
@@ -222,7 +274,8 @@ export default function AdminEDXAnalytics() {
   const { user, hasRole, loading: authLoading } = useAuth();
 
   if (!authLoading && !user) return <Navigate to="/login" replace />;
-  if (!authLoading && !hasRole("admin")) return <Navigate to="/unauthorized" replace />;
+  if (!authLoading && !hasRole("ADMIN"))
+    return <Navigate to="/unauthorized" replace />;
 
   return (
     <DashboardLayout

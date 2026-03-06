@@ -1,30 +1,30 @@
 // RBAC Role definitions
 export type AppRole =
   | "FREE_MEMBER"
-  | "nrc"
+  | "NRC"
   | "jury"
   | "chapter"
   | "sponsor"
-  | "admin"
+  | "ADMIN"
   | "NOMINEE";
 
 export const ROLE_LABELS: Record<AppRole, string> = {
   FREE_MEMBER: "User",
-  nrc: "NRC Member",
+  NRC: "NRC Member",
   jury: "Jury Member",
   chapter: "Chapter Lead",
   sponsor: "Sponsor",
-  admin: "Administrator",
+  ADMIN: "Administrator",
   NOMINEE: "Nominee",
 };
 
 export const ROLE_DESCRIPTIONS: Record<AppRole, string> = {
   FREE_MEMBER: "Standard platform user who can nominate and vote",
-  nrc: "National Review Committee member who reviews nominations",
+  NRC: "National Review Committee member who reviews nominations",
   jury: "Jury member who scores Blue Garnet nominees",
   chapter: "Regional chapter leader managing local operations",
   sponsor: "Sponsor with limited dashboard access",
-  admin: "Full platform administrator",
+  ADMIN: "Full platform administrator",
   NOMINEE: "A nomination recipient",
 };
 
@@ -34,8 +34,8 @@ export const ROLE_HIERARCHY: Record<AppRole, number> = {
   sponsor: 2,
   chapter: 3,
   jury: 4,
-  nrc: 5,
-  admin: 10,
+  NRC: 5,
+  ADMIN: 10,
   NOMINEE: 6,
 };
 

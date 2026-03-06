@@ -53,11 +53,11 @@ export function DashboardLayout({
     { title: "Dashboard", items: USER_DASHBOARD_NAV },
   ];
 
-  if (hasRole("nrc") || hasRole("admin")) {
+  if (hasRole("NRC") || hasRole("admin")) {
     sidebarSections.push({
       title: "NRC Review",
       items: NRC_DASHBOARD_NAV,
-      roles: ["nrc", "admin"],
+      roles: ["NRC", "admin"],
     });
   }
   if (hasRole("jury") || hasRole("admin")) {

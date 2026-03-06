@@ -105,6 +105,21 @@ export interface assignednominationsResponse {
   dueDate: string | null;
   notes: string | null;
 }
+export interface ApprovedNominees {
+  fullName: string;
+  email: string;
+  phone: string | null;
+  linkedInProfile: string | null;
+  website: string | null;
+  profileImage: string | null;
+  accountType: "INDIVIDUAL" | "ORGANIZATION";
+  country: string;
+  stateRegion: string;
+  impactSummary: string;
+  achievementDescription: string;
+  evidenceUrl: string[];
+  id: string;
+}
 
 export interface AINominationResponse {
   score: number;
@@ -263,6 +278,20 @@ export const nominationApi = {
         credentials: "include",
         accessToken,
         body: JSON.stringify(nomination),
+      },
+    );
+    return res.data;
+  },
+
+  fetchSubCategoryNominees: async (
+    accessToken: string,
+    subCategoryId: string,
+  ) => {
+    const res: ApiResponse<ApprovedNominees[]> = await apiRequest(
+      `${API_BASE}/nomination/subcategory?subCategoryId=${subCategoryId}`,
+      {
+        credentials: "include",
+        accessToken,
       },
     );
     return res.data;

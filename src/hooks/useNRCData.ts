@@ -67,7 +67,7 @@ export function useMyQueue() {
           const queueItem: NRCQueueItem = {
             id: queue.id,
             assigned_by: null,
-            assigned_to: user.fullName,
+            assigned_to: `${user.firstName} ${user.lastName}`,
             nomination_id: q.nomination.id,
             status: queueStatus,
             priority: queue.priority,
@@ -130,6 +130,7 @@ export function useMyQueue() {
 
 // Fetch NRC dashboard stats
 export function useNRCStats() {
+  const { accessToken } = useAuth();
   return useQuery({
     queryKey: ["nrc-stats"],
     queryFn: async (): Promise<NRCStats> => {
@@ -139,10 +140,7 @@ export function useNRCStats() {
         .select("*", { count: "exact", head: true })
         .in("status", ["pending", "active"]);
 
-      const { count: activeMembers } = await supabase
-        .from("nrc_members")
-        .select("*", { count: "exact", head: true })
-        .eq("status", "active");
+      const members = await nrcApi.fetchTeamMembers(accessToken);
 
       const { count: pendingInvitations } = await supabase
         .from("nrc_invitations")
@@ -161,7 +159,7 @@ export function useNRCStats() {
 
       return {
         total_members: totalMembers || 0,
-        active_members: activeMembers || 0,
+        active_members: members.length || 0,
         pending_invitations: pendingInvitations || 0,
         total_queue_items: totalQueueItems || 0,
         completed_reviews: completedReviews || 0,

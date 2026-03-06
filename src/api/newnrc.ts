@@ -2,12 +2,38 @@ import { API_BASE } from "@/contexts/AuthContext";
 import { apiRequest } from "./client";
 import { ApiResponse } from "./http";
 import { NRCReviewerRole } from "@/config/nrcConfig";
+import { TeamInfo } from "@/components/nrc/TeamSection";
 
 export type NominationQueueStatus =
   | "ASSIGNED"
   | "IN_REVIEW"
   | "COMPLETED"
   | "REASSIGNED";
+
+export interface TeamInfoRes {
+  team: {
+    id: string;
+    name: string;
+    description: string;
+  };
+}
+
+export interface PendingNrcResponse {
+  user: {
+    email: string;
+    id: string;
+    createdAt: Date;
+    firstName: string | null;
+    lastName: string | null;
+    profilePic: string | null;
+    role: string;
+  };
+}
+
+export interface ApprovedNrcReponse extends PendingNrcResponse {
+  role: string;
+  approvedAt: Date | null;
+}
 export interface NominationQueueResponse {
   nomination: {
     id: string;
@@ -93,6 +119,13 @@ export interface TeamInvite {
   inviteeEmail: string;
   inviteeId: string;
   inviteeName: string;
+}
+export interface NrcDetail {
+  id: string;
+  approvedAt: Date | null;
+  role: "NRC_REVIEWER" | "NRC_LEAD" | "NRC_AUDITOR";
+  status: string;
+  teamId: string | null;
 }
 
 export const nrcApi = {
@@ -186,5 +219,115 @@ export const nrcApi = {
       credentials: "include",
       accessToken,
     });
+  },
+  fetchNrcDetails: async (accessToken: string) => {
+    const res: ApiResponse<NrcDetail> = await apiRequest(
+      `${API_BASE}/nrc/details`,
+      {
+        accessToken,
+        credentials: "include",
+      },
+    );
+    return res.data;
+  },
+  removeTeamMember: async (accessToken: string, userId: string) => {
+    await apiRequest(`${API_BASE}/nrc/member?userId=${userId}`, {
+      credentials: "include",
+      accessToken,
+      method: "DELETE",
+    });
+  },
+  fetchTeamInfo: async (accessToken: string) => {
+    const res: ApiResponse<TeamInfoRes> = await apiRequest(
+      `${API_BASE}/nrc/yourteamdetail`,
+      {
+        credentials: "include",
+        accessToken,
+      },
+    );
+    return res.data.team;
+  },
+  updateTeamInfo: async (accessToken: string, team: TeamInfo) => {
+    await apiRequest(`${API_BASE}/nrc/team`, {
+      method: "PUT",
+      credentials: "include",
+      accessToken,
+      body: JSON.stringify({
+        id: team.id,
+        teamName: team.name,
+        teamDescription: team.description,
+      }),
+    });
+  },
+
+  fetchPendingNrc: async (accessToken: string) => {
+    const res: ApiResponse<PendingNrcResponse[]> = await apiRequest(
+      `${API_BASE}/nrc/pending`,
+      {
+        credentials: "include",
+        accessToken,
+      },
+    );
+    return res.data;
+  },
+
+  fetchApprovedNrc: async (accessToken: string) => {
+    const res: ApiResponse<ApprovedNrcReponse[]> = await apiRequest(
+      `${API_BASE}/nrc/approved`,
+      {
+        credentials: "include",
+        accessToken,
+      },
+    );
+    return res.data;
+  },
+
+  approveNrc: async (accessToken: string, userId: string) => {
+    await apiRequest(`${API_BASE}/nrc/approve?userId=${userId}`, {
+      method: "PUT",
+      credentials: "include",
+      accessToken,
+    });
+  },
+
+  removeNrc: async (accessToken: string, userId: string) => {
+    await apiRequest(`${API_BASE}/nrc/remove?userId=${userId}`, {
+      method: "PUT",
+      credentials: "include",
+      accessToken,
+    });
+  },
+  makeLead: async (accessToken: string, userId: string) => {
+    await apiRequest(`${API_BASE}/nrc/assignlead?userId=${userId}`, {
+      method: "PUT",
+      credentials: "include",
+      accessToken,
+    });
+  },
+
+  suspendNrc: async (accessToken: string, userId: string) => {
+    await apiRequest(`${API_BASE}/nrc/suspend?userId=${userId}`, {
+      credentials: "include",
+      method: "PUT",
+      accessToken,
+    });
+  },
+  unSuspendNrc: async (accessToken: string, userId: string) => {
+    await apiRequest(`${API_BASE}/nrc/unsuspend?userId=${userId}`, {
+      credentials: "include",
+      method: "PUT",
+      accessToken,
+    });
+  },
+
+  fetchSuspendedNrc: async (accessToken: string) => {
+    const res: ApiResponse<ApprovedNrcReponse[]> = await apiRequest(
+      `${API_BASE}/nrc/suspended`,
+      {
+        credentials: "include",
+        accessToken,
+      },
+    );
+    return res.data;
   },
 };

@@ -42,7 +42,7 @@ interface AuthContextType {
   roles: AppRole[];
   loading: boolean;
   signUp: (payload: SignUpPayload) => Promise<void>;
-  signIn: (email: string, password: string) => Promise<void>;
+  signIn: (email: string, password: string) => Promise<AppRole>;
   signOut: () => Promise<void>;
   hasRole: (role: AppRole) => boolean;
   verifyCode: (code: string, email: string) => Promise<void>;
@@ -213,7 +213,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     setRoles(data.roles);
     setAccessToken(data.accessToken);
     scheduleTokenRefresh();
-    console.log("context user is this", user);
+    return data.roles[0] as AppRole;
   };
 
   const signOut = async () => {

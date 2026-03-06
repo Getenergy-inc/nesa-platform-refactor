@@ -111,7 +111,7 @@ function NRCPortalContent() {
             </CardContent>
           </Card>
 
-          <Card>
+          {/* <Card>
             <CardHeader className="flex flex-row items-center justify-between pb-2">
               <CardTitle className="text-sm font-medium text-muted-foreground">
                 Total Queue
@@ -124,8 +124,8 @@ function NRCPortalContent() {
               </div>
               <p className="text-xs text-muted-foreground">awaiting review</p>
             </CardContent>
-          </Card>
-
+          </Card> */}
+          {/* 
           <Card>
             <CardHeader className="flex flex-row items-center justify-between pb-2">
               <CardTitle className="text-sm font-medium text-muted-foreground">
@@ -141,7 +141,7 @@ function NRCPortalContent() {
                 reviews this season
               </p>
             </CardContent>
-          </Card>
+          </Card> */}
         </div>
 
         {/* Quick Actions */}
@@ -201,7 +201,7 @@ function NRCPortalContent() {
           </Card>
 
           {/* Team Overview */}
-          <Card>
+          {/* <Card>
             <CardHeader className="flex flex-row items-center justify-between">
               <CardTitle className="text-base">NRC Team</CardTitle>
               <Button variant="ghost" size="sm" asChild>
@@ -246,7 +246,7 @@ function NRCPortalContent() {
                 )}
               </div>
             </CardContent>
-          </Card>
+          </Card> */}
         </div>
       </div>
     </NRCLayout>
@@ -255,7 +255,7 @@ function NRCPortalContent() {
 
 export default function NRCPortal() {
   return (
-    <ProtectedRoute requiredRoles={["nrc", "admin", "FREE_MEMBER"]}>
+    <ProtectedRoute requiredRoles={["NRC"]}>
       <NRCPortalContent />
     </ProtectedRoute>
   );

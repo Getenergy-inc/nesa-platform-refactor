@@ -21,7 +21,7 @@ export default function AdminImpact() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    if (!authLoading && user && hasRole("admin")) {
+    if (!authLoading && user && hasRole("ADMIN")) {
       loadImpactSummary();
     }
   }, [authLoading, user]);

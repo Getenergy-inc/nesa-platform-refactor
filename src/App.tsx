@@ -178,7 +178,10 @@ import {
   AdminEDXAnalytics,
 } from "./pages/admin";
 import BulkSeedNominees from "./pages/admin/BulkSeedNominees";
+import { AdminLayout } from "./pages/admin/AdminLayout";
 import ForgotPassword from "./pages/auth/forgotPassword";
+import AdminNRCGovernance from "./pages/admin/NrcGovernance";
+import ManageEditionsPage from "./pages/admin/ManageEditions";
 
 // Optimized QueryClient with caching strategy
 const queryClient = new QueryClient({
@@ -1006,27 +1009,39 @@ const App = () => (
                   <Route path="/olc/settlements" element={<OLCSettlements />} />
 
                   {/* Admin Routes - use their own layout */}
-                  <Route path="/admin" element={<AdminDashboard />} />
-                  <Route path="/admin/orders" element={<AdminOrders />} />
-                  <Route path="/admin/impact" element={<AdminImpact />} />
-                  <Route
-                    path="/admin/nominee-images"
-                    element={<AdminNomineeImages />}
-                  />
-                  <Route
-                    path="/admin/nominee-profiles"
-                    element={<AdminNomineeProfiles />}
-                  />
-                  <Route
-                    path="/admin/voting"
-                    element={<AdminVotingGovernance />}
-                  />
-                  <Route path="/admin/rebuild" element={<AdminRebuild />} />
-                  <Route path="/admin/edx" element={<AdminEDXAnalytics />} />
-                  <Route
-                    path="/admin/bulk-seed"
-                    element={<BulkSeedNominees />}
-                  />
+                  <Route path="/admin" element={<AdminLayout />}>
+                    <Route index element={<AdminDashboard />} />
+
+                    <Route path="orders" element={<AdminOrders />} />
+
+                    <Route path="impact" element={<AdminImpact />} />
+
+                    <Route
+                      path="nominee-images"
+                      element={<AdminNomineeImages />}
+                    />
+
+                    <Route
+                      path="nominee-profiles"
+                      element={<AdminNomineeProfiles />}
+                    />
+
+                    <Route path="voting" element={<AdminVotingGovernance />} />
+
+                    <Route path="rebuild" element={<AdminRebuild />} />
+
+                    <Route path="edx" element={<AdminEDXAnalytics />} />
+
+                    <Route path="bulk-seed" element={<BulkSeedNominees />} />
+                    <Route
+                      path="nrc-governance"
+                      element={<AdminNRCGovernance />}
+                    />
+                    <Route
+                      path="manage-editions"
+                      element={<ManageEditionsPage />}
+                    />
+                  </Route>
 
                   {/* Support */}
                   <Route

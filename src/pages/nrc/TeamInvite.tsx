@@ -149,7 +149,7 @@ function AcceptTeamInvite() {
 
 export default function AcceptTeamInvitePage() {
   return (
-    <ProtectedRoute requiredRoles={["nrc", "admin", "FREE_MEMBER"]}>
+    <ProtectedRoute requiredRoles={["NRC", "admin", "FREE_MEMBER"]}>
       <AcceptTeamInvite />
     </ProtectedRoute>
   );

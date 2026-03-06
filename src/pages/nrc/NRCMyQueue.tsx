@@ -345,7 +345,7 @@ function NRCMyQueueContent() {
 
 export default function NRCMyQueue() {
   return (
-    <ProtectedRoute requiredRoles={["nrc", "admin", "FREE_MEMBER"]}>
+    <ProtectedRoute requiredRoles={["NRC"]}>
       <NRCMyQueueContent />
     </ProtectedRoute>
   );

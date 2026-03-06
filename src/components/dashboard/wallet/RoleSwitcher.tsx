@@ -17,20 +17,22 @@ interface RoleSwitcherProps {
 
 const roleIcons: Record<AppRole, React.ReactNode> = {
   FREE_MEMBER: <User className="h-4 w-4" />,
-  nrc: <Shield className="h-4 w-4" />,
+  NRC: <Shield className="h-4 w-4" />,
   jury: <Award className="h-4 w-4" />,
   chapter: <Building className="h-4 w-4" />,
   sponsor: <Briefcase className="h-4 w-4" />,
   admin: <Users className="h-4 w-4" />,
+  NOMINEE: <Users className="h-4 w-4" />,
 };
 
 const roleLabels: Record<AppRole, string> = {
   FREE_MEMBER: "User",
-  nrc: "NRC Reviewer",
+  NRC: "NRC Reviewer",
   jury: "Jury Member",
   chapter: "Chapter Coordinator",
   sponsor: "Sponsor",
   admin: "Administrator",
+  NOMINEE: "Nominee",
 };
 
 export function RoleSwitcher({ currentRole, onRoleChange }: RoleSwitcherProps) {

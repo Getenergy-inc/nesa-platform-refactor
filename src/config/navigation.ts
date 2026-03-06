@@ -354,7 +354,8 @@ export const MAIN_NAV: NavItem[] = [
       {
         label: "Rebuild My School Africa (Legacy)",
         href: "/eduaid-africa/rebuild-my-school",
-        description: "Post-award legacy project — nominate special needs schools",
+        description:
+          "Post-award legacy project — nominate special needs schools",
         icon: Building,
       },
       {
@@ -379,7 +380,12 @@ export const MAIN_NAV: NavItem[] = [
 
 export const QUICK_NAV: NavItem[] = [
   { label: "Refer", href: "#refer", icon: Users },
-  { label: "Nominate", href: "/nominate", icon: FileCheck, stageGated: "nominations" },
+  {
+    label: "Nominate",
+    href: "/nominate",
+    icon: FileCheck,
+    stageGated: "nominations",
+  },
   { label: "Vision 2035", href: "/about/vision-2035", icon: Target },
   { label: "Tickets", href: "/tickets", icon: Ticket, stageGated: "tickets" },
   { label: "Watch", href: "/media/tv", icon: Play },
@@ -430,7 +436,10 @@ export const FOOTER_NAV: NavSection[] = [
     items: [
       { label: "Donate", href: "/donate" },
       { label: "EduAid-Africa", href: "/eduaid" },
-      { label: "Rebuild My School Africa", href: "/eduaid-africa/rebuild-my-school" },
+      {
+        label: "Rebuild My School Africa",
+        href: "/eduaid-africa/rebuild-my-school",
+      },
       { label: "Contact", href: "/contact" },
     ],
   },
@@ -455,10 +464,10 @@ export const USER_DASHBOARD_NAV: NavItem[] = [
   { label: "My Profile", href: "/dashboard/profile", icon: Users },
   { label: "My Nominations", href: "/dashboard/nominations", icon: FileCheck },
   { label: "My Votes", href: "/dashboard/votes", icon: Vote },
-  { label: "Certificates", href: "/dashboard/certificates", icon: Award },
+  // { label: "Certificates", href: "/dashboard/certificates", icon: Award },
   { label: "Wallet", href: "/dashboard/wallet", icon: Wallet },
-  { label: "Notifications", href: "/dashboard/notifications", icon: MessageSquare },
-  { label: "Settings", href: "/dashboard/settings", icon: Settings },
+  // { label: "Notifications", href: "/dashboard/notifications", icon: MessageSquare },
+  // { label: "Settings", href: "/dashboard/settings", icon: Settings },
 ];
 
 // ============================================================================
@@ -535,122 +544,651 @@ export interface PageDefinition {
 
 export const PAGE_REGISTRY: PageDefinition[] = [
   // ==================== PUBLIC PAGES ====================
-  { path: "/", title: "Home", description: "NESA-Africa Landing Page", component: "NESAAfrica", category: "public" },
-  { path: "/about", title: "About NESA-Africa", description: "Our mission and vision", component: "About", category: "public" },
-  { path: "/about/vision-2035", title: "Vision 2035", description: "Strategic roadmap", component: "Vision2035", category: "public" },
-  { path: "/about/governance", title: "Governance & Firewalls", description: "Integrity frameworks", component: "Governance", category: "public" },
-  { path: "/about/timeline", title: "Programme Timeline", description: "Key dates and milestones", component: "Timeline", category: "public" },
-  { path: "/about/scef", title: "SCEF Foundation", description: "Parent organisation", component: "SCEF", category: "public" },
-  
+  {
+    path: "/",
+    title: "Home",
+    description: "NESA-Africa Landing Page",
+    component: "NESAAfrica",
+    category: "public",
+  },
+  {
+    path: "/about",
+    title: "About NESA-Africa",
+    description: "Our mission and vision",
+    component: "About",
+    category: "public",
+  },
+  {
+    path: "/about/vision-2035",
+    title: "Vision 2035",
+    description: "Strategic roadmap",
+    component: "Vision2035",
+    category: "public",
+  },
+  {
+    path: "/about/governance",
+    title: "Governance & Firewalls",
+    description: "Integrity frameworks",
+    component: "Governance",
+    category: "public",
+  },
+  {
+    path: "/about/timeline",
+    title: "Programme Timeline",
+    description: "Key dates and milestones",
+    component: "Timeline",
+    category: "public",
+  },
+  {
+    path: "/about/scef",
+    title: "SCEF Foundation",
+    description: "Parent organisation",
+    component: "SCEF",
+    category: "public",
+  },
+
   // Awards
-  { path: "/categories", title: "Award Categories", description: "All 17 categories", component: "Categories", category: "public" },
-  { path: "/categories/:slug", title: "Category Detail", description: "Category subcategories", component: "CategoryDetail", category: "public" },
-  { path: "/awards/platinum", title: "Platinum Certificate", description: "Baseline recognition", component: "PlatinumAward", category: "public" },
-  { path: "/awards/icon", title: "Africa Education Icon", description: "Lifetime achievement", component: "IconAward", category: "public" },
-  { path: "/awards/gold", title: "Gold Certificate", description: "Public-voted recognition", component: "GoldAward", category: "public" },
-  { path: "/awards/blue-garnet", title: "Blue Garnet Award", description: "Highest honour", component: "BlueGarnetAward", category: "public" },
-  { path: "/awards/winners", title: "Past Winners", description: "Previous honourees", component: "Winners", category: "public" },
-  { path: "/nominees", title: "Nominees", description: "Current nominees", component: "Nominees", category: "public" },
-  { path: "/nominees/:slug", title: "Nominee Profile", description: "Nominee details", component: "NomineeProfile", category: "public" },
-  
+  {
+    path: "/categories",
+    title: "Award Categories",
+    description: "All 17 categories",
+    component: "Categories",
+    category: "public",
+  },
+  {
+    path: "/categories/:slug",
+    title: "Category Detail",
+    description: "Category subcategories",
+    component: "CategoryDetail",
+    category: "public",
+  },
+  {
+    path: "/awards/platinum",
+    title: "Platinum Certificate",
+    description: "Baseline recognition",
+    component: "PlatinumAward",
+    category: "public",
+  },
+  {
+    path: "/awards/icon",
+    title: "Africa Education Icon",
+    description: "Lifetime achievement",
+    component: "IconAward",
+    category: "public",
+  },
+  {
+    path: "/awards/gold",
+    title: "Gold Certificate",
+    description: "Public-voted recognition",
+    component: "GoldAward",
+    category: "public",
+  },
+  {
+    path: "/awards/blue-garnet",
+    title: "Blue Garnet Award",
+    description: "Highest honour",
+    component: "BlueGarnetAward",
+    category: "public",
+  },
+  {
+    path: "/awards/winners",
+    title: "Past Winners",
+    description: "Previous honourees",
+    component: "Winners",
+    category: "public",
+  },
+  {
+    path: "/nominees",
+    title: "Nominees",
+    description: "Current nominees",
+    component: "Nominees",
+    category: "public",
+  },
+  {
+    path: "/nominees/:slug",
+    title: "Nominee Profile",
+    description: "Nominee details",
+    component: "NomineeProfile",
+    category: "public",
+  },
+
   // Participate
-  { path: "/nominate", title: "Nominate", description: "Submit nomination", component: "Nominate", category: "public", stageGated: "nominations" },
-  { path: "/vote", title: "Vote", description: "Cast your vote", component: "Vote", category: "public", stageGated: "public_voting" },
-  { path: "/partners", title: "Partners & Sponsors", description: "Partnership opportunities", component: "Partners", category: "public" },
-  { path: "/chapters", title: "Local Chapters", description: "Regional chapters", component: "Chapters", category: "public" },
-  { path: "/volunteer", title: "Volunteer", description: "Join our team", component: "Volunteer", category: "public" },
-  
+  {
+    path: "/nominate",
+    title: "Nominate",
+    description: "Submit nomination",
+    component: "Nominate",
+    category: "public",
+    stageGated: "nominations",
+  },
+  {
+    path: "/vote",
+    title: "Vote",
+    description: "Cast your vote",
+    component: "Vote",
+    category: "public",
+    stageGated: "public_voting",
+  },
+  {
+    path: "/partners",
+    title: "Partners & Sponsors",
+    description: "Partnership opportunities",
+    component: "Partners",
+    category: "public",
+  },
+  {
+    path: "/chapters",
+    title: "Local Chapters",
+    description: "Regional chapters",
+    component: "Chapters",
+    category: "public",
+  },
+  {
+    path: "/volunteer",
+    title: "Volunteer",
+    description: "Join our team",
+    component: "Volunteer",
+    category: "public",
+  },
+
   // Media
-  { path: "/media", title: "Media Hub", description: "All media content", component: "MediaHub", category: "public" },
-  { path: "/media/tv", title: "NESA Africa TV", description: "Live and on-demand", component: "NESATV", category: "public" },
-  { path: "/media/shows", title: "Online Shows", description: "Award shows archive", component: "Shows", category: "public" },
-  { path: "/media/webinars", title: "Webinar Hub", description: "Educational webinars", component: "Webinars", category: "public" },
-  { path: "/media/gala", title: "Awards Gala", description: "Annual ceremony", component: "Gala", category: "public" },
-  { path: "/press", title: "Press & News", description: "Media resources", component: "Press", category: "public" },
-  
+  {
+    path: "/media",
+    title: "Media Hub",
+    description: "All media content",
+    component: "MediaHub",
+    category: "public",
+  },
+  {
+    path: "/media/tv",
+    title: "NESA Africa TV",
+    description: "Live and on-demand",
+    component: "NESATV",
+    category: "public",
+  },
+  {
+    path: "/media/shows",
+    title: "Online Shows",
+    description: "Award shows archive",
+    component: "Shows",
+    category: "public",
+  },
+  {
+    path: "/media/webinars",
+    title: "Webinar Hub",
+    description: "Educational webinars",
+    component: "Webinars",
+    category: "public",
+  },
+  {
+    path: "/media/gala",
+    title: "Awards Gala",
+    description: "Annual ceremony",
+    component: "Gala",
+    category: "public",
+  },
+  {
+    path: "/press",
+    title: "Press & News",
+    description: "Media resources",
+    component: "Press",
+    category: "public",
+  },
+
   // Events
-  { path: "/events", title: "Events", description: "Upcoming events", component: "Events", category: "public" },
-  { path: "/tickets", title: "Tickets", description: "Event tickets", component: "Tickets", category: "public", stageGated: "tickets" },
-  { path: "/buy-your-ticket", title: "Buy Your Ticket", description: "Gala tickets", component: "BuyYourTicket", category: "public" },
-  { path: "/gfawzip", title: "GFAWzip Wallet", description: "Multi-currency payments", component: "GFAWzipWallet", category: "public" },
-  { path: "/events/tourism", title: "Education Tourism", description: "Educational experiences", component: "Tourism", category: "public" },
-  
+  {
+    path: "/events",
+    title: "Events",
+    description: "Upcoming events",
+    component: "Events",
+    category: "public",
+  },
+  {
+    path: "/tickets",
+    title: "Tickets",
+    description: "Event tickets",
+    component: "Tickets",
+    category: "public",
+    stageGated: "tickets",
+  },
+  {
+    path: "/buy-your-ticket",
+    title: "Buy Your Ticket",
+    description: "Gala tickets",
+    component: "BuyYourTicket",
+    category: "public",
+  },
+  {
+    path: "/gfawzip",
+    title: "GFAWzip Wallet",
+    description: "Multi-currency payments",
+    component: "GFAWzipWallet",
+    category: "public",
+  },
+  {
+    path: "/events/tourism",
+    title: "Education Tourism",
+    description: "Educational experiences",
+    component: "Tourism",
+    category: "public",
+  },
+
   // Support
-  { path: "/donate", title: "Donate", description: "Support our mission", component: "Donate", category: "public" },
-  { path: "/eduaid", title: "EduAid-Africa", description: "Student support", component: "EduAid", category: "public" },
-  { path: "/rebuild", title: "Rebuild My School", description: "Infrastructure support", component: "Rebuild", category: "public" },
-  { path: "/contact", title: "Contact", description: "Get in touch", component: "Contact", category: "public" },
-  { path: "/faq", title: "FAQs", description: "Frequently asked questions", component: "FAQ", category: "public" },
-  
+  {
+    path: "/donate",
+    title: "Donate",
+    description: "Support our mission",
+    component: "Donate",
+    category: "public",
+  },
+  {
+    path: "/eduaid",
+    title: "EduAid-Africa",
+    description: "Student support",
+    component: "EduAid",
+    category: "public",
+  },
+  {
+    path: "/rebuild",
+    title: "Rebuild My School",
+    description: "Infrastructure support",
+    component: "Rebuild",
+    category: "public",
+  },
+  {
+    path: "/contact",
+    title: "Contact",
+    description: "Get in touch",
+    component: "Contact",
+    category: "public",
+  },
+  {
+    path: "/faq",
+    title: "FAQs",
+    description: "Frequently asked questions",
+    component: "FAQ",
+    category: "public",
+  },
+
   // ==================== AUTH PAGES ====================
-  { path: "/login", title: "Sign In", description: "Log in to your account", component: "Login", category: "auth" },
-  { path: "/register", title: "Sign Up", description: "Create an account", component: "Register", category: "auth" },
-  { path: "/forgot-password", title: "Forgot Password", description: "Reset your password", component: "ForgotPassword", category: "auth" },
-  { path: "/reset-password", title: "Reset Password", description: "Set new password", component: "ResetPassword", category: "auth" },
-  { path: "/verify-email", title: "Verify Email", description: "Email verification", component: "VerifyEmail", category: "auth" },
-  
+  {
+    path: "/login",
+    title: "Sign In",
+    description: "Log in to your account",
+    component: "Login",
+    category: "auth",
+  },
+  {
+    path: "/register",
+    title: "Sign Up",
+    description: "Create an account",
+    component: "Register",
+    category: "auth",
+  },
+  {
+    path: "/forgot-password",
+    title: "Forgot Password",
+    description: "Reset your password",
+    component: "ForgotPassword",
+    category: "auth",
+  },
+  {
+    path: "/reset-password",
+    title: "Reset Password",
+    description: "Set new password",
+    component: "ResetPassword",
+    category: "auth",
+  },
+  {
+    path: "/verify-email",
+    title: "Verify Email",
+    description: "Email verification",
+    component: "VerifyEmail",
+    category: "auth",
+  },
+
   // ==================== USER DASHBOARD ====================
-  { path: "/dashboard", title: "Dashboard", description: "User dashboard", component: "Dashboard", category: "dashboard", requiredRoles: ["user"] },
-  { path: "/dashboard/profile", title: "My Profile", description: "Edit profile", component: "Profile", category: "dashboard", requiredRoles: ["user"] },
-  { path: "/dashboard/nominations", title: "My Nominations", description: "Nomination history", component: "MyNominations", category: "dashboard", requiredRoles: ["user"] },
-  { path: "/dashboard/votes", title: "My Votes", description: "Voting history", component: "MyVotes", category: "dashboard", requiredRoles: ["user"] },
-  { path: "/dashboard/certificates", title: "Certificates", description: "Download certificates", component: "Certificates", category: "dashboard", requiredRoles: ["user"], stageGated: "certificates" },
-  { path: "/dashboard/wallet", title: "Wallet", description: "Donation history", component: "Wallet", category: "dashboard", requiredRoles: ["user"] },
-  { path: "/dashboard/notifications", title: "Notifications", description: "Updates and alerts", component: "Notifications", category: "dashboard", requiredRoles: ["user"] },
-  { path: "/dashboard/settings", title: "Settings", description: "Account settings", component: "Settings", category: "dashboard", requiredRoles: ["user"] },
-  
+  {
+    path: "/dashboard",
+    title: "Dashboard",
+    description: "User dashboard",
+    component: "Dashboard",
+    category: "dashboard",
+    requiredRoles: ["user"],
+  },
+  {
+    path: "/dashboard/profile",
+    title: "My Profile",
+    description: "Edit profile",
+    component: "Profile",
+    category: "dashboard",
+    requiredRoles: ["user"],
+  },
+  {
+    path: "/dashboard/nominations",
+    title: "My Nominations",
+    description: "Nomination history",
+    component: "MyNominations",
+    category: "dashboard",
+    requiredRoles: ["user"],
+  },
+  {
+    path: "/dashboard/votes",
+    title: "My Votes",
+    description: "Voting history",
+    component: "MyVotes",
+    category: "dashboard",
+    requiredRoles: ["user"],
+  },
+  {
+    path: "/dashboard/certificates",
+    title: "Certificates",
+    description: "Download certificates",
+    component: "Certificates",
+    category: "dashboard",
+    requiredRoles: ["user"],
+    stageGated: "certificates",
+  },
+  {
+    path: "/dashboard/wallet",
+    title: "Wallet",
+    description: "Donation history",
+    component: "Wallet",
+    category: "dashboard",
+    requiredRoles: ["user"],
+  },
+  {
+    path: "/dashboard/notifications",
+    title: "Notifications",
+    description: "Updates and alerts",
+    component: "Notifications",
+    category: "dashboard",
+    requiredRoles: ["user"],
+  },
+  {
+    path: "/dashboard/settings",
+    title: "Settings",
+    description: "Account settings",
+    component: "Settings",
+    category: "dashboard",
+    requiredRoles: ["user"],
+  },
+
   // ==================== NRC DASHBOARD ====================
-  { path: "/nrc", title: "NRC Dashboard", description: "Review nominations", component: "NRCDashboard", category: "dashboard", requiredRoles: ["nrc", "admin"] },
-  { path: "/nrc/assigned", title: "Assigned Reviews", description: "Your assignments", component: "NRCAssigned", category: "dashboard", requiredRoles: ["nrc", "admin"] },
-  { path: "/nrc/evidence", title: "Evidence Validation", description: "Verify evidence", component: "NRCEvidence", category: "dashboard", requiredRoles: ["nrc", "admin"] },
-  { path: "/nrc/logs", title: "Approval Logs", description: "Decision history", component: "NRCLogs", category: "dashboard", requiredRoles: ["nrc", "admin"] },
-  { path: "/nrc/audit", title: "Audit Trail", description: "System audit logs", component: "NRCAudit", category: "dashboard", requiredRoles: ["nrc", "admin"] },
-  
+  {
+    path: "/nrc",
+    title: "NRC Dashboard",
+    description: "Review nominations",
+    component: "NRCDashboard",
+    category: "dashboard",
+    requiredRoles: ["nrc", "admin"],
+  },
+  {
+    path: "/nrc/assigned",
+    title: "Assigned Reviews",
+    description: "Your assignments",
+    component: "NRCAssigned",
+    category: "dashboard",
+    requiredRoles: ["nrc", "admin"],
+  },
+  {
+    path: "/nrc/evidence",
+    title: "Evidence Validation",
+    description: "Verify evidence",
+    component: "NRCEvidence",
+    category: "dashboard",
+    requiredRoles: ["nrc", "admin"],
+  },
+  {
+    path: "/nrc/logs",
+    title: "Approval Logs",
+    description: "Decision history",
+    component: "NRCLogs",
+    category: "dashboard",
+    requiredRoles: ["nrc", "admin"],
+  },
+  {
+    path: "/nrc/audit",
+    title: "Audit Trail",
+    description: "System audit logs",
+    component: "NRCAudit",
+    category: "dashboard",
+    requiredRoles: ["nrc", "admin"],
+  },
+
   // ==================== JURY DASHBOARD ====================
-  { path: "/jury", title: "Jury Dashboard", description: "Score finalists", component: "JuryDashboard", category: "dashboard", requiredRoles: ["jury", "admin"], stageGated: "jury_scoring" },
-  { path: "/jury/scoring", title: "Scoring", description: "Submit scores", component: "JuryScoring", category: "dashboard", requiredRoles: ["jury", "admin"], stageGated: "jury_scoring" },
-  { path: "/jury/chat", title: "Jury Discussion", description: "Deliberation chat", component: "JuryChat", category: "dashboard", requiredRoles: ["jury", "admin"], stageGated: "jury_scoring" },
-  { path: "/jury/results", title: "Locked Results", description: "Final results", component: "JuryResults", category: "dashboard", requiredRoles: ["jury", "admin"], stageGated: "results" },
-  
+  {
+    path: "/jury",
+    title: "Jury Dashboard",
+    description: "Score finalists",
+    component: "JuryDashboard",
+    category: "dashboard",
+    requiredRoles: ["jury", "admin"],
+    stageGated: "jury_scoring",
+  },
+  {
+    path: "/jury/scoring",
+    title: "Scoring",
+    description: "Submit scores",
+    component: "JuryScoring",
+    category: "dashboard",
+    requiredRoles: ["jury", "admin"],
+    stageGated: "jury_scoring",
+  },
+  {
+    path: "/jury/chat",
+    title: "Jury Discussion",
+    description: "Deliberation chat",
+    component: "JuryChat",
+    category: "dashboard",
+    requiredRoles: ["jury", "admin"],
+    stageGated: "jury_scoring",
+  },
+  {
+    path: "/jury/results",
+    title: "Locked Results",
+    description: "Final results",
+    component: "JuryResults",
+    category: "dashboard",
+    requiredRoles: ["jury", "admin"],
+    stageGated: "results",
+  },
+
   // ==================== CHAPTER DASHBOARD ====================
-  { path: "/chapter", title: "Chapter Dashboard", description: "Local chapter management", component: "ChapterDashboard", category: "dashboard", requiredRoles: ["chapter", "admin"] },
-  { path: "/chapter/events", title: "Local Events", description: "Chapter events", component: "ChapterEvents", category: "dashboard", requiredRoles: ["chapter", "admin"] },
-  { path: "/chapter/nominations", title: "Local Nominations", description: "Chapter nominations", component: "ChapterNominations", category: "dashboard", requiredRoles: ["chapter", "admin"] },
-  { path: "/chapter/reports", title: "Reports", description: "Chapter reports", component: "ChapterReports", category: "dashboard", requiredRoles: ["chapter", "admin"] },
-  
+  {
+    path: "/chapter",
+    title: "Chapter Dashboard",
+    description: "Local chapter management",
+    component: "ChapterDashboard",
+    category: "dashboard",
+    requiredRoles: ["chapter", "admin"],
+  },
+  {
+    path: "/chapter/events",
+    title: "Local Events",
+    description: "Chapter events",
+    component: "ChapterEvents",
+    category: "dashboard",
+    requiredRoles: ["chapter", "admin"],
+  },
+  {
+    path: "/chapter/nominations",
+    title: "Local Nominations",
+    description: "Chapter nominations",
+    component: "ChapterNominations",
+    category: "dashboard",
+    requiredRoles: ["chapter", "admin"],
+  },
+  {
+    path: "/chapter/reports",
+    title: "Reports",
+    description: "Chapter reports",
+    component: "ChapterReports",
+    category: "dashboard",
+    requiredRoles: ["chapter", "admin"],
+  },
+
   // ==================== OLC COORDINATOR DASHBOARD ====================
-  { path: "/olc/dashboard", title: "OLC Dashboard", description: "Chapter coordinator dashboard", component: "OLCDashboard", category: "dashboard", requiredRoles: ["chapter", "admin"] },
-  { path: "/olc/members", title: "Chapter Members", description: "Manage chapter members", component: "OLCMembers", category: "dashboard", requiredRoles: ["chapter", "admin"] },
-  { path: "/olc/wallet", title: "Chapter Wallet", description: "Chapter wallet transactions", component: "OLCWallet", category: "dashboard", requiredRoles: ["chapter", "admin"] },
-  { path: "/olc/settlements", title: "Settlements", description: "Settlement request history", component: "OLCSettlements", category: "dashboard", requiredRoles: ["chapter", "admin"] },
-  
+  {
+    path: "/olc/dashboard",
+    title: "OLC Dashboard",
+    description: "Chapter coordinator dashboard",
+    component: "OLCDashboard",
+    category: "dashboard",
+    requiredRoles: ["chapter", "admin"],
+  },
+  {
+    path: "/olc/members",
+    title: "Chapter Members",
+    description: "Manage chapter members",
+    component: "OLCMembers",
+    category: "dashboard",
+    requiredRoles: ["chapter", "admin"],
+  },
+  {
+    path: "/olc/wallet",
+    title: "Chapter Wallet",
+    description: "Chapter wallet transactions",
+    component: "OLCWallet",
+    category: "dashboard",
+    requiredRoles: ["chapter", "admin"],
+  },
+  {
+    path: "/olc/settlements",
+    title: "Settlements",
+    description: "Settlement request history",
+    component: "OLCSettlements",
+    category: "dashboard",
+    requiredRoles: ["chapter", "admin"],
+  },
+
   // ==================== ADMIN DASHBOARD ====================
-  { path: "/admin", title: "Admin Dashboard", description: "Platform administration", component: "AdminDashboard", category: "admin", requiredRoles: ["admin"] },
-  { path: "/admin/stages", title: "Stage Control", description: "Manage stages", component: "AdminStages", category: "admin", requiredRoles: ["admin"] },
-  { path: "/admin/categories", title: "Category Control", description: "Manage categories", component: "AdminCategories", category: "admin", requiredRoles: ["admin"] },
-  { path: "/admin/users", title: "User Roles", description: "Manage users", component: "AdminUsers", category: "admin", requiredRoles: ["admin"] },
-  { path: "/admin/cms", title: "CMS", description: "Content management", component: "AdminCMS", category: "admin", requiredRoles: ["admin"] },
-  { path: "/admin/media", title: "Media Scheduling", description: "Schedule broadcasts", component: "AdminMedia", category: "admin", requiredRoles: ["admin"] },
-  { path: "/admin/logs", title: "Audit Logs", description: "System logs", component: "AdminLogs", category: "admin", requiredRoles: ["admin"] },
-  { path: "/admin/compliance", title: "Compliance", description: "Governance oversight", component: "AdminCompliance", category: "admin", requiredRoles: ["admin"] },
-  
+  {
+    path: "/admin",
+    title: "Admin Dashboard",
+    description: "Platform administration",
+    component: "AdminDashboard",
+    category: "admin",
+    requiredRoles: ["admin"],
+  },
+  {
+    path: "/admin/stages",
+    title: "Stage Control",
+    description: "Manage stages",
+    component: "AdminStages",
+    category: "admin",
+    requiredRoles: ["admin"],
+  },
+  {
+    path: "/admin/categories",
+    title: "Category Control",
+    description: "Manage categories",
+    component: "AdminCategories",
+    category: "admin",
+    requiredRoles: ["admin"],
+  },
+  {
+    path: "/admin/users",
+    title: "User Roles",
+    description: "Manage users",
+    component: "AdminUsers",
+    category: "admin",
+    requiredRoles: ["admin"],
+  },
+  {
+    path: "/admin/cms",
+    title: "CMS",
+    description: "Content management",
+    component: "AdminCMS",
+    category: "admin",
+    requiredRoles: ["admin"],
+  },
+  {
+    path: "/admin/media",
+    title: "Media Scheduling",
+    description: "Schedule broadcasts",
+    component: "AdminMedia",
+    category: "admin",
+    requiredRoles: ["admin"],
+  },
+  {
+    path: "/admin/logs",
+    title: "Audit Logs",
+    description: "System logs",
+    component: "AdminLogs",
+    category: "admin",
+    requiredRoles: ["admin"],
+  },
+  {
+    path: "/admin/compliance",
+    title: "Compliance",
+    description: "Governance oversight",
+    component: "AdminCompliance",
+    category: "admin",
+    requiredRoles: ["admin"],
+  },
+
   // ==================== LEGAL PAGES ====================
-  { path: "/policies/privacy", title: "Privacy Policy", description: "Data protection", component: "PrivacyPolicy", category: "legal" },
-  { path: "/policies/terms", title: "Terms of Service", description: "Usage terms", component: "Terms", category: "legal" },
-  { path: "/policies/coi", title: "Conflict of Interest", description: "COI policy", component: "COIPolicy", category: "legal" },
-  { path: "/policies/voting-integrity", title: "Voting Integrity", description: "Voting rules", component: "VotingIntegrity", category: "legal" },
-  
+  {
+    path: "/policies/privacy",
+    title: "Privacy Policy",
+    description: "Data protection",
+    component: "PrivacyPolicy",
+    category: "legal",
+  },
+  {
+    path: "/policies/terms",
+    title: "Terms of Service",
+    description: "Usage terms",
+    component: "Terms",
+    category: "legal",
+  },
+  {
+    path: "/policies/coi",
+    title: "Conflict of Interest",
+    description: "COI policy",
+    component: "COIPolicy",
+    category: "legal",
+  },
+  {
+    path: "/policies/voting-integrity",
+    title: "Voting Integrity",
+    description: "Voting rules",
+    component: "VotingIntegrity",
+    category: "legal",
+  },
+
   // ==================== UTILITY PAGES ====================
-  { path: "/certificates/verify/:code", title: "Verify Certificate", description: "Certificate verification", component: "VerifyCertificate", category: "public" },
-  { path: "/unauthorized", title: "Unauthorized", description: "Access denied", component: "Unauthorized", category: "public" },
-  { path: "*", title: "Not Found", description: "Page not found", component: "NotFound", category: "public" },
+  {
+    path: "/certificates/verify/:code",
+    title: "Verify Certificate",
+    description: "Certificate verification",
+    component: "VerifyCertificate",
+    category: "public",
+  },
+  {
+    path: "/unauthorized",
+    title: "Unauthorized",
+    description: "Access denied",
+    component: "Unauthorized",
+    category: "public",
+  },
+  {
+    path: "*",
+    title: "Not Found",
+    description: "Page not found",
+    component: "NotFound",
+    category: "public",
+  },
 ];
 
 // ============================================================================
 // HELPER FUNCTIONS
 // ============================================================================
 
-export function getPagesByCategory(category: PageDefinition["category"]): PageDefinition[] {
+export function getPagesByCategory(
+  category: PageDefinition["category"],
+): PageDefinition[] {
   return PAGE_REGISTRY.filter((page) => page.category === category);
 }
 
@@ -659,7 +1197,9 @@ export function getStageGatedPages(): PageDefinition[] {
 }
 
 export function getRoleProtectedPages(): PageDefinition[] {
-  return PAGE_REGISTRY.filter((page) => page.requiredRoles && page.requiredRoles.length > 0);
+  return PAGE_REGISTRY.filter(
+    (page) => page.requiredRoles && page.requiredRoles.length > 0,
+  );
 }
 
 export function findPageByPath(path: string): PageDefinition | undefined {

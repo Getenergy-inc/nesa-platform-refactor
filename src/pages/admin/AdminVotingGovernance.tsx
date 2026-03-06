@@ -377,10 +377,11 @@ export default function AdminVotingGovernance() {
         <title>Voting Governance | Admin Dashboard</title>
       </Helmet>
 
-      <DashboardLayout
+      <>
+        {/* <DashboardLayout
         title="Voting Governance"
         breadcrumbs={[{ label: "Admin" }, { label: "Voting Governance" }]}
-      >
+      > */}
         <Tabs
           value={activeTab}
           onValueChange={setActiveTab}
@@ -672,7 +673,8 @@ export default function AdminVotingGovernance() {
             </Card>
           </TabsContent>
         </Tabs>
-      </DashboardLayout>
+        {/* </DashboardLayout> */}
+      </>
     </>
   );
 }
