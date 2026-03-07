@@ -137,7 +137,7 @@ function CreateNrcTeam() {
   }
 
   return (
-    <NRCLayout>
+    <>
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -305,7 +305,7 @@ function CreateNrcTeam() {
           )}
         </AnimatePresence>
       </motion.div>
-    </NRCLayout>
+    </>
   );
 }
 
