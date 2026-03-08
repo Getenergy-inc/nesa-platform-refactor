@@ -5,3 +5,6 @@ export { default as NRCReports } from "./NRCReports";
 export { default as NRCFlaggedCases } from "./NRCFlaggedCases";
 export { default as NRCMyReviews } from "./NRCMyReviews";
 export { default as EDIAnalyticsDashboard } from "./EDIAnalyticsDashboard";
+export { default as NRCIntakeQueue } from "./NRCIntakeQueue";
+export { default as NRCIntakeReview } from "./NRCIntakeReview";
+export { default as NRCMergeTool } from "./NRCMergeTool";
