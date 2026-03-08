@@ -485,16 +485,16 @@ export default function Nominate() {
   }
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-charcoal text-white">
       {/* Header */}
-      <header className="border-b bg-card">
+      <header className="border-b border-gold/10 bg-[hsl(30_8%_8%)]">
         <div className="container px-6">
-          <div className="py-2 border-b border-border/50">
+          <div className="py-2 border-b border-gold/10">
             <Breadcrumb>
               <BreadcrumbList>
                 <BreadcrumbItem>
                   <BreadcrumbLink asChild>
-                    <Link to="/" className="flex items-center gap-1 text-muted-foreground hover:text-foreground">
+                    <Link to="/" className="flex items-center gap-1 text-white/50 hover:text-gold">
                       <Home className="h-3.5 w-3.5" />
                       Home
                     </Link>
@@ -517,12 +517,12 @@ export default function Nominate() {
               </Link>
             </Button>
             <div className="flex items-center gap-3">
-              <div className="flex h-10 w-10 items-center justify-center rounded-full bg-primary/10">
-                <Award className="h-5 w-5 text-primary" />
+              <div className="flex h-10 w-10 items-center justify-center rounded-full bg-gold/10">
+                <Award className="h-5 w-5 text-gold" />
               </div>
               <div>
-                <h1 className="font-display text-lg font-bold">Submit Nomination</h1>
-                <p className="text-xs text-muted-foreground">{currentEdition.name}</p>
+                <h1 className="font-display text-lg font-bold text-white">Submit Nomination</h1>
+                <p className="text-xs text-white/50">{currentEdition.name}</p>
               </div>
             </div>
           </div>
@@ -570,8 +570,8 @@ export default function Nominate() {
                   <div
                     className={`flex h-10 w-10 items-center justify-center rounded-full font-semibold transition-colors ${
                       step >= s
-                        ? "bg-primary text-primary-foreground"
-                        : "bg-muted text-muted-foreground"
+                        ? "bg-gold text-charcoal"
+                        : "bg-charcoal-light text-white/40 border border-gold/20"
                     }`}
                   >
                     {step > s ? <CheckCircle className="h-5 w-5" /> : s}
@@ -579,14 +579,14 @@ export default function Nominate() {
                   {s < 3 && (
                     <div
                       className={`mx-2 h-1 w-16 rounded-full transition-colors sm:w-24 md:w-32 ${
-                        step > s ? "bg-primary" : "bg-muted"
+                        step > s ? "bg-gold" : "bg-charcoal-light"
                       }`}
                     />
                   )}
                 </div>
               ))}
             </div>
-            <div className="mt-2 flex justify-between text-xs text-muted-foreground">
+            <div className="mt-2 flex justify-between text-xs text-white/50">
               <span>Category</span>
               <span>Nominee Details</span>
               <span>Evidence</span>

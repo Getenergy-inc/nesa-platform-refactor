@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Helmet } from "react-helmet-async";
 import { Link, Navigate } from "react-router-dom";
-import { DashboardLayout } from "@/components/layout/DashboardLayout";
+import { InstitutionalDashboardLayout } from "@/components/layout/InstitutionalDashboardLayout";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
@@ -110,11 +110,11 @@ export default function Wallet() {
 
   if (authLoading) {
     return (
-      <DashboardLayout>
+      <InstitutionalDashboardLayout title="Wallet" breadcrumbs={[{ label: "Wallet" }]}>
         <div className="flex items-center justify-center min-h-[60vh]">
           <Loader2 className="h-8 w-8 animate-spin text-primary" />
         </div>
-      </DashboardLayout>
+      </InstitutionalDashboardLayout>
     );
   }
 
@@ -123,7 +123,7 @@ export default function Wallet() {
   }
 
   return (
-    <DashboardLayout>
+    <InstitutionalDashboardLayout title="My Wallet" breadcrumbs={[{ label: "Wallet" }]}>
       <Helmet>
         <title>My Wallet | NESA-Africa</title>
         <meta name="description" content="View your AGC balance and transaction history." />
@@ -296,6 +296,6 @@ export default function Wallet() {
           )}
         </div>
       </div>
-    </DashboardLayout>
+    </InstitutionalDashboardLayout>
   );
 }
