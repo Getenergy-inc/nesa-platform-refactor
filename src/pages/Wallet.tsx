@@ -296,6 +296,6 @@ export default function Wallet() {
           )}
         </div>
       </div>
-    </DashboardLayout>
+    </InstitutionalDashboardLayout>
   );
 }
