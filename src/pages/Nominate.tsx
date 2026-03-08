@@ -487,9 +487,9 @@ export default function Nominate() {
   return (
     <div className="min-h-screen bg-charcoal text-white">
       {/* Header */}
-      <header className="border-b bg-card">
+      <header className="border-b border-gold/10 bg-[hsl(30_8%_8%)]">
         <div className="container px-6">
-          <div className="py-2 border-b border-border/50">
+          <div className="py-2 border-b border-gold/10">
             <Breadcrumb>
               <BreadcrumbList>
                 <BreadcrumbItem>
