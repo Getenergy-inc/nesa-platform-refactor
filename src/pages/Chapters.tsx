@@ -204,16 +204,16 @@ export default function Chapters() {
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto">
             <div className="text-center mb-12">
-              <h2 className="text-3xl font-bold mb-4">Chapter Benefits</h2>
-              <p className="text-muted-foreground">
+              <h2 className="text-3xl font-display font-bold mb-4 text-white">Chapter Benefits</h2>
+              <p className="text-white/60">
                 As a chapter leader, you'll have the opportunity to shape education recognition in your country
               </p>
             </div>
             <div className="grid md:grid-cols-2 gap-4">
               {chapterBenefits.map((benefit, index) => (
-                <div key={index} className="flex items-center gap-3 p-4 bg-muted/50 rounded-lg">
-                  <CheckCircle className="w-5 h-5 text-nesa-gold flex-shrink-0" />
-                  <span>{benefit}</span>
+                <div key={index} className="flex items-center gap-3 p-4 bg-charcoal-light border border-gold/10 rounded-lg">
+                  <CheckCircle className="w-5 h-5 text-gold flex-shrink-0" />
+                  <span className="text-white/80">{benefit}</span>
                 </div>
               ))}
             </div>
@@ -222,21 +222,21 @@ export default function Chapters() {
       </section>
 
       {/* CTA */}
-      <section className="py-16 bg-gradient-to-r from-nesa-gold/20 to-amber-500/20">
+      <section className="py-16 border-t border-gold/10 bg-gradient-to-r from-gold/5 to-gold/10">
         <div className="container mx-auto px-4 text-center">
-          <Globe2 className="w-12 h-12 text-nesa-gold mx-auto mb-4" />
-          <h2 className="text-3xl font-bold mb-4">Ready to Lead in Your Country?</h2>
-          <p className="text-muted-foreground max-w-2xl mx-auto mb-8">
+          <Globe2 className="w-12 h-12 text-gold mx-auto mb-4" />
+          <h2 className="text-3xl font-display font-bold mb-4 text-white">Ready to Lead in Your Country?</h2>
+          <p className="text-white/60 max-w-2xl mx-auto mb-8">
             Whether you want to start a new chapter or join an existing one, we'd love to hear from you.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link to="/contact">
-              <Button size="lg" className="bg-nesa-gold hover:bg-nesa-gold/90 text-black">
+              <Button size="lg" className="bg-gold hover:bg-gold/90 text-charcoal font-semibold">
                 Apply to Lead a Chapter
                 <ArrowRight className="w-5 h-5 ml-2" />
               </Button>
             </Link>
-            <Button size="lg" variant="outline">
+            <Button size="lg" variant="outline" className="border-gold/50 text-gold hover:bg-gold/10">
               <Mail className="w-5 h-5 mr-2" />
               Contact Regional Lead
             </Button>
