@@ -329,6 +329,7 @@ const App = () => (
                 <Route path="/nrc/dashboard/queue" element={<NRCNomineeTable />} />
                 <Route path="/nrc/dashboard/duplicates" element={<NRCFlaggedCases />} />
                 <Route path="/nrc/dashboard/guidelines" element={<NRCSettings />} />
+                <Route path="/nrc/dashboard/edi-analytics" element={<EDIAnalyticsDashboard />} />
                 <Route path="/nrc/dashboard/profile" element={<NRCSettings />} />
                 <Route path="/nrc/dashboard/settings" element={<NRCSettings />} />
                 
