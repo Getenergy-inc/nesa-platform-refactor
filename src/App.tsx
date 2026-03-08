@@ -316,6 +316,7 @@ const App = () => (
                 <Route path="/nrc/my-queue" element={<NRCMyQueue />} />
                 <Route path="/nrc/members" element={<NRCMembersPage />} />
                 <Route path="/nrc/settings" element={<NRCSettings />} />
+                <Route path="/nrc/scoring" element={<NRCScoringDashboard />} />
                 
                 {/* OLC Coordinator Routes - use their own layout */}
                 <Route path="/olc/dashboard" element={<OLCDashboard />} />
