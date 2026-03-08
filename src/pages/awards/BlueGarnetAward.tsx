@@ -4,6 +4,7 @@ import { CertificateGallery } from "@/components/nesa/CertificateGallery";
 import { AwardTVShowSection } from "@/components/awards/AwardTVShowSection";
 import { AwardHeroSection } from "@/components/awards/AwardHeroSection";
 import { AwardCategoriesGrid } from "@/components/awards/AwardCategoriesGrid";
+import { TierNomineeShowcase } from "@/components/awards/TierNomineeShowcase";
 import { getTVShowByAward } from "@/config/awardTVShows";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -158,6 +159,14 @@ export default function BlueGarnetAward() {
           accentColor="blue"
           title="Blue Garnet Award Categories"
           description="9 major categories + 1 Africa Education Icon Blue Garnet. Gold winners advance to Blue Garnet with 60% jury + 40% public scoring."
+        />
+
+        {/* Nominees Showcase */}
+        <TierNomineeShowcase
+          tier="blue-garnet"
+          accentColor="blue"
+          title="Blue Garnet Nominees"
+          description="Browse nominees competing for Africa's highest education honour. Vote, nominate, or re-nominate."
         />
 
         {/* Certificate Gallery */}
