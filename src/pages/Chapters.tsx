@@ -81,25 +81,27 @@ export default function Chapters() {
   return (
     <div className="min-h-screen bg-charcoal text-white">
       {/* Hero Section */}
-      <section className="relative bg-gradient-to-br from-nesa-gold/20 via-background to-nesa-gold/10 py-20">
-        <div className="container mx-auto px-4">
+      <section className="relative py-20 overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-br from-charcoal via-charcoal/95 to-charcoal" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_50%,rgba(196,160,82,0.1),transparent_50%)]" />
+        <div className="container mx-auto px-4 relative z-10">
           <div className="max-w-4xl mx-auto text-center">
-            <Badge className="mb-4 bg-nesa-gold/20 text-nesa-gold border-nesa-gold/30">
+            <Badge className="mb-4 bg-gold/20 text-gold border-gold/30">
               Pan-African Network
             </Badge>
-            <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-6">
-              NESA-Africa <span className="text-nesa-gold">Country Chapters</span>
+            <h1 className="text-4xl md:text-5xl font-display font-bold text-white mb-6">
+              NESA-Africa <span className="text-gold">Country Chapters</span>
             </h1>
-            <p className="text-xl text-muted-foreground mb-8">
+            <p className="text-xl text-white/70 mb-8">
               30 country chapters across 5 regions, working together to celebrate 
               education excellence in every corner of Africa.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button size="lg" className="bg-nesa-gold hover:bg-nesa-gold/90 text-black">
+              <Button size="lg" className="bg-gold hover:bg-gold/90 text-charcoal font-semibold">
                 <Flag className="w-5 h-5 mr-2" />
                 Start a Chapter
               </Button>
-              <Button size="lg" variant="outline">
+              <Button size="lg" variant="outline" className="border-gold/50 text-gold hover:bg-gold/10">
                 Find Your Chapter
               </Button>
             </div>
