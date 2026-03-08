@@ -14,7 +14,7 @@ import {
   Award, LayoutDashboard, Users, ClipboardList, FileCheck, Flag,
   BarChart3, Shield, BookOpen, Settings, LogOut, Bell, Search,
   ChevronLeft, ChevronRight, Menu, X, CheckCircle, XCircle,
-  Clock, AlertTriangle, Copy, User, TrendingUp,
+  Clock, AlertTriangle, Copy, User, TrendingUp, Inbox,
 } from "lucide-react";
 
 interface NRCDashboardLayoutProps {
@@ -26,6 +26,7 @@ const SIDEBAR_SECTIONS = [
     label: "Dashboard",
     items: [
       { href: "/nrc/dashboard", label: "Overview", icon: LayoutDashboard },
+      { href: "/nrc/dashboard/intake", label: "Intake Queue", icon: Inbox },
     ],
   },
   {
@@ -44,7 +45,7 @@ const SIDEBAR_SECTIONS = [
       { href: "/nrc/dashboard/my-reviews", label: "My Assigned Reviews", icon: ClipboardList },
       { href: "/nrc/dashboard/queue", label: "Scoring Queue", icon: BarChart3 },
       { href: "/nrc/dashboard/flagged", label: "Flagged Cases", icon: Flag },
-      { href: "/nrc/dashboard/duplicates", label: "Duplicate Checks", icon: Copy },
+      { href: "/nrc/dashboard/merge", label: "Merge & Dedup Tool", icon: Copy },
     ],
   },
   {
