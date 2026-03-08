@@ -517,12 +517,12 @@ export default function Nominate() {
               </Link>
             </Button>
             <div className="flex items-center gap-3">
-              <div className="flex h-10 w-10 items-center justify-center rounded-full bg-primary/10">
-                <Award className="h-5 w-5 text-primary" />
+              <div className="flex h-10 w-10 items-center justify-center rounded-full bg-gold/10">
+                <Award className="h-5 w-5 text-gold" />
               </div>
               <div>
-                <h1 className="font-display text-lg font-bold">Submit Nomination</h1>
-                <p className="text-xs text-muted-foreground">{currentEdition.name}</p>
+                <h1 className="font-display text-lg font-bold text-white">Submit Nomination</h1>
+                <p className="text-xs text-white/50">{currentEdition.name}</p>
               </div>
             </div>
           </div>
