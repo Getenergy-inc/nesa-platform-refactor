@@ -131,7 +131,7 @@ import { OLCDashboard, OLCMembers, OLCSettlements, OLCWallet } from "./pages/olc
 
 // NRC Portal Pages
 import { NRCPortal, NRCMyQueue, NRCMembers as NRCMembersPage, NRCSettings, NRCScoringDashboard } from "./pages/nrc";
-import { NRCDashboardHome, NRCNomineeTable, NRCNomineeReview, NRCReports, NRCFlaggedCases, NRCMyReviews, EDIAnalyticsDashboard } from "./pages/nrc/dashboard";
+import { NRCDashboardHome, NRCNomineeTable, NRCNomineeReview, NRCReports, NRCFlaggedCases, NRCMyReviews, EDIAnalyticsDashboard, NRCIntakeQueue, NRCIntakeReview, NRCMergeTool } from "./pages/nrc/dashboard";
 
 // Admin Pages
 import { AdminDashboard, AdminOrders, AdminImpact, AdminNomineeImages, AdminNomineeProfiles, AdminVotingGovernance, AdminRebuild, AdminEDXAnalytics } from "./pages/admin";
