@@ -130,7 +130,7 @@ import RegionsIndexPage from "./pages/region/RegionsIndexPage";
 import { OLCDashboard, OLCMembers, OLCSettlements, OLCWallet } from "./pages/olc";
 
 // NRC Portal Pages
-import { NRCPortal, NRCMyQueue, NRCMembers as NRCMembersPage, NRCSettings } from "./pages/nrc";
+import { NRCPortal, NRCMyQueue, NRCMembers as NRCMembersPage, NRCSettings, NRCScoringDashboard } from "./pages/nrc";
 
 // Admin Pages
 import { AdminDashboard, AdminOrders, AdminImpact, AdminNomineeImages, AdminNomineeProfiles, AdminVotingGovernance, AdminRebuild, AdminEDXAnalytics } from "./pages/admin";
