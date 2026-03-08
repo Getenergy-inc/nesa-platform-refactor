@@ -485,7 +485,7 @@ export default function Nominate() {
   }
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-charcoal text-white">
       {/* Header */}
       <header className="border-b bg-card">
         <div className="container px-6">
