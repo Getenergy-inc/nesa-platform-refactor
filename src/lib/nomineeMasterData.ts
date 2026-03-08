@@ -4,7 +4,7 @@
  * Archived: 2024 nominees removed from active listings
  */
 
-import { NOMINEES_2025, DATASET_META, type NomineeRow } from "@/data/nominees-2025";
+import { NOMINEES_2025, DATASET_META, getNomineeMergeInfo, type NomineeRow, type NomineeMergeInfo } from "@/data/nominees-2025";
 
 export interface MasterNominee {
   id: number;
@@ -23,6 +23,8 @@ export interface MasterNominee {
   workflowStatus: NomineeWorkflowStatus;
   nominationYear: number;
   status: "existing_nominee";
+  /** Migration tracking */
+  mergeInfo: NomineeMergeInfo;
 }
 
 export type NomineeWorkflowStatus = 
