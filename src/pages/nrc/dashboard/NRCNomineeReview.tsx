@@ -84,7 +84,7 @@ function ReviewContent() {
     );
   }
 
-  const story = generateNomineeStory(nominee);
+  const story = generateEnhancedBiography(nominee);
   const edi = calculateEDIScorecard(nominee.id, nominee.achievement, nominee.category);
   const totalScore = Object.values(scores).reduce((a, b) => a + b, 0);
   const maxScore = SCORING_CRITERIA.length * 10;
