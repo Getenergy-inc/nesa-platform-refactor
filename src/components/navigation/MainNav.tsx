@@ -295,17 +295,17 @@ function MobileNav({ onOpenCVOMessage }: { onOpenCVOMessage: () => void }) {
               </div>
             ) : (
               <div className="flex gap-3">
-                <Link to="/login" onClick={handleLinkClick} className="flex-1">
+                <Link to="/auth" onClick={handleLinkClick} className="flex-1">
                   <Button 
                     variant="outline" 
-                    className="w-full border-primary/30 text-primary hover:bg-primary/10 py-3 h-auto touch-manipulation"
+                    className="w-full border-primary/30 text-primary hover:bg-primary/10 py-3 h-auto touch-manipulation rounded-xl"
                   >
                     Sign In
                   </Button>
                 </Link>
-                <Link to="/register" onClick={handleLinkClick} className="flex-1">
-                  <Button className="w-full bg-primary text-primary-foreground hover:bg-primary/90 py-3 h-auto touch-manipulation">
-                    Get Started
+                <Link to="/auth?tab=register" onClick={handleLinkClick} className="flex-1">
+                  <Button className="w-full bg-primary text-primary-foreground hover:bg-primary/90 py-3 h-auto touch-manipulation rounded-xl">
+                    Sign Up
                   </Button>
                 </Link>
               </div>
