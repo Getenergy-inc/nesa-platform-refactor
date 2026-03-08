@@ -1,7 +1,7 @@
 import { useState, useMemo } from "react";
 import { useSearchParams } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
-import { Search, Filter, Users, Globe2, MapPin, Building2, ChevronDown, LayoutGrid, List, Trophy } from "lucide-react";
+import { Search, Filter, Users, Globe2, MapPin, Building2, ChevronDown, LayoutGrid, List, Trophy, Award, Sparkles } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -9,12 +9,10 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
 import { NomineeStoryCard } from "@/components/nominees/NomineeStoryCard";
 import {
-  getAllMasterNominees,
   filterMasterNominees,
   getMasterCategories,
   getMasterRegions,
   getMasterStats,
-  type MasterNominee,
 } from "@/lib/nomineeMasterData";
 
 const ITEMS_PER_PAGE = 24;
@@ -43,61 +41,65 @@ export default function NomineeDirectory() {
 
   const updateFilter = (key: string, value: string) => {
     const params = new URLSearchParams(searchParams);
-    if (value === "all" || !value) {
-      params.delete(key);
-    } else {
-      params.set(key, value);
-    }
+    if (value === "all" || !value) params.delete(key);
+    else params.set(key, value);
     params.set("page", "1");
     setSearchParams(params);
   };
 
-  const clearFilters = () => {
-    setSearchParams({});
-  };
-
+  const clearFilters = () => setSearchParams({});
   const hasActiveFilters = category !== "all" || region !== "all" || pathway !== "all" || search;
 
   return (
     <>
       <Helmet>
-        <title>Nominee Directory | NESA Africa Awards</title>
-        <meta name="description" content="Explore all NESA Africa Award nominees across categories, regions, and pathways. Vote and support education champions." />
+        <title>2025 Nominee Directory | NESA Africa Awards</title>
+        <meta name="description" content="Explore NESA Africa 2025 Award nominees across 14 categories, 5 regions, and 3 pathways. Vote and support education champions across Africa." />
       </Helmet>
 
       <div className="min-h-screen bg-charcoal">
         {/* Hero */}
-        <div className="relative py-12 md:py-16 border-b border-gold/10">
-          <div className="absolute inset-0 bg-gradient-to-b from-gold/3 to-transparent" />
+        <div className="relative py-16 md:py-20 border-b border-gold/10 overflow-hidden">
+          <div className="absolute inset-0 bg-gradient-to-b from-gold/5 via-transparent to-transparent" />
+          <div className="absolute top-10 right-10 w-64 h-64 bg-gold/3 rounded-full blur-3xl" />
           <div className="container mx-auto px-4 relative">
             <div className="max-w-3xl mx-auto text-center">
-              <div className="flex items-center justify-center gap-2 mb-4">
-                <Trophy className="w-6 h-6 text-gold" />
-                <Badge variant="outline" className="border-gold/30 text-gold text-xs">
-                  {stats.totalNominees.toLocaleString()} Nominees
-                </Badge>
+              <div className="flex items-center justify-center gap-3 mb-5">
+                <div className="p-2.5 rounded-xl bg-gold/10 border border-gold/20">
+                  <Trophy className="w-6 h-6 text-gold" />
+                </div>
+                <div className="flex gap-2">
+                  <Badge className="bg-gold/10 text-gold border-gold/20 text-xs font-medium">
+                    2025 Season
+                  </Badge>
+                  <Badge variant="outline" className="border-emerald-500/30 text-emerald-400 text-xs">
+                    <Sparkles className="w-3 h-3 mr-1" />
+                    {stats.totalNominees.toLocaleString()} Nominees
+                  </Badge>
+                </div>
               </div>
-              <h1 className="text-3xl md:text-4xl font-display text-ivory font-bold mb-3">
+              <h1 className="text-3xl md:text-5xl font-display text-ivory font-bold mb-4 tracking-tight">
                 NESA Africa Nominee Directory
               </h1>
-              <p className="text-ivory/50 text-sm md:text-base max-w-xl mx-auto">
-                Explore education champions across Africa. Browse by category, region, or pathway to discover nominees making an impact.
+              <p className="text-ivory/50 text-sm md:text-base max-w-2xl mx-auto leading-relaxed">
+                Recognizing education champions transforming learning outcomes across the African continent. 
+                Browse nominees by category, region, or pathway to discover the leaders shaping Africa's educational future.
               </p>
             </div>
 
             {/* Stats Bar */}
-            <div className="flex flex-wrap justify-center gap-6 mt-8">
+            <div className="flex flex-wrap justify-center gap-8 mt-10">
               {[
-                { label: "Categories", value: stats.totalCategories, icon: LayoutGrid },
+                { label: "Categories", value: stats.totalCategories, icon: Award },
                 { label: "Regions", value: stats.totalRegions, icon: Globe2 },
-                { label: "Africa", value: stats.byPathway.Africa, icon: MapPin },
-                { label: "Nigeria", value: stats.byPathway.Nigeria, icon: Building2 },
-                { label: "Diaspora", value: stats.byPathway.Diaspora, icon: Users },
+                { label: "Africans in Africa", value: stats.byPathway["Africans in Africa"], icon: MapPin },
+                { label: "Nigeria Focus", value: stats.byPathway.Nigeria, icon: Building2 },
+                { label: "Diaspora", value: stats.byPathway["Africans in Diaspora"], icon: Users },
               ].map(s => (
-                <div key={s.label} className="text-center">
-                  <div className="flex items-center justify-center gap-1 text-gold mb-1">
-                    <s.icon className="w-3.5 h-3.5" />
-                    <span className="text-lg font-display font-bold">{s.value}</span>
+                <div key={s.label} className="text-center group">
+                  <div className="flex items-center justify-center gap-1.5 text-gold mb-1.5 group-hover:scale-105 transition-transform">
+                    <s.icon className="w-4 h-4 opacity-60" />
+                    <span className="text-xl font-display font-bold">{s.value}</span>
                   </div>
                   <span className="text-ivory/40 text-xs">{s.label}</span>
                 </div>
@@ -109,29 +111,27 @@ export default function NomineeDirectory() {
         {/* Filters & Search */}
         <div className="container mx-auto px-4 py-6">
           <div className="flex flex-col md:flex-row gap-3 items-stretch md:items-center">
-            {/* Search */}
             <div className="relative flex-1 max-w-md">
               <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-ivory/30" />
               <Input
-                placeholder="Search nominees..."
+                placeholder="Search nominees, categories, countries..."
                 value={search}
                 onChange={(e) => updateFilter("search", e.target.value)}
                 className="pl-9 bg-charcoal-light border-gold/10 text-ivory placeholder:text-ivory/30 h-10"
               />
             </div>
 
-            {/* Quick filters */}
             <div className="flex items-center gap-2 flex-wrap">
               <Select value={pathway} onValueChange={(v) => updateFilter("pathway", v)}>
-                <SelectTrigger className="w-[140px] h-10 bg-charcoal-light border-gold/10 text-ivory text-sm">
+                <SelectTrigger className="w-[170px] h-10 bg-charcoal-light border-gold/10 text-ivory text-sm">
                   <SelectValue placeholder="Pathway" />
                 </SelectTrigger>
                 <SelectContent className="bg-charcoal border-gold/10">
                   <SelectItem value="all" className="text-ivory">All Pathways</SelectItem>
-                  <SelectItem value="Africa" className="text-ivory">Africa</SelectItem>
+                  <SelectItem value="Africans in Africa" className="text-ivory">Africans in Africa</SelectItem>
                   <SelectItem value="Nigeria" className="text-ivory">Nigeria</SelectItem>
-                  <SelectItem value="Diaspora" className="text-ivory">Diaspora</SelectItem>
-                  <SelectItem value="International" className="text-ivory">International</SelectItem>
+                  <SelectItem value="Africans in Diaspora" className="text-ivory">Africans in Diaspora</SelectItem>
+                  <SelectItem value="Friends of Africa" className="text-ivory">Friends of Africa</SelectItem>
                 </SelectContent>
               </Select>
 
@@ -158,31 +158,16 @@ export default function NomineeDirectory() {
               </Collapsible>
 
               {hasActiveFilters && (
-                <Button
-                  variant="ghost"
-                  size="sm"
-                  onClick={clearFilters}
-                  className="h-10 text-gold/60 hover:text-gold text-xs"
-                >
+                <Button variant="ghost" size="sm" onClick={clearFilters} className="h-10 text-gold/60 hover:text-gold text-xs">
                   Clear All
                 </Button>
               )}
 
               <div className="ml-auto flex items-center gap-1">
-                <Button
-                  variant="ghost"
-                  size="icon"
-                  className={`h-8 w-8 ${viewMode === "grid" ? "text-gold" : "text-ivory/30"}`}
-                  onClick={() => setViewMode("grid")}
-                >
+                <Button variant="ghost" size="icon" className={`h-8 w-8 ${viewMode === "grid" ? "text-gold" : "text-ivory/30"}`} onClick={() => setViewMode("grid")}>
                   <LayoutGrid className="w-4 h-4" />
                 </Button>
-                <Button
-                  variant="ghost"
-                  size="icon"
-                  className={`h-8 w-8 ${viewMode === "list" ? "text-gold" : "text-ivory/30"}`}
-                  onClick={() => setViewMode("list")}
-                >
+                <Button variant="ghost" size="icon" className={`h-8 w-8 ${viewMode === "list" ? "text-gold" : "text-ivory/30"}`} onClick={() => setViewMode("list")}>
                   <List className="w-4 h-4" />
                 </Button>
               </div>
@@ -193,21 +178,18 @@ export default function NomineeDirectory() {
           <Collapsible open={filtersOpen} onOpenChange={setFiltersOpen}>
             <CollapsibleContent>
               <div className="mt-3 p-4 bg-charcoal-light/50 rounded-lg border border-gold/10">
-                <h4 className="text-ivory/60 text-xs font-medium mb-3 uppercase tracking-wider">Categories</h4>
+                <h4 className="text-ivory/60 text-xs font-medium mb-3 uppercase tracking-wider">Award Categories</h4>
                 <div className="flex flex-wrap gap-2">
                   <Button
-                    variant="ghost"
-                    size="sm"
+                    variant="ghost" size="sm"
                     className={`h-7 text-xs ${category === "all" ? "bg-gold/20 text-gold" : "text-ivory/40 hover:text-ivory"}`}
                     onClick={() => updateFilter("category", "all")}
                   >
-                    All ({stats.totalNominees})
+                    All ({stats.loadedNominees})
                   </Button>
                   {categories.map(c => (
                     <Button
-                      key={c.slug}
-                      variant="ghost"
-                      size="sm"
+                      key={c.slug} variant="ghost" size="sm"
                       className={`h-7 text-xs ${category === c.slug ? "bg-gold/20 text-gold" : "text-ivory/40 hover:text-ivory"}`}
                       onClick={() => updateFilter("category", c.slug)}
                     >
@@ -224,6 +206,7 @@ export default function NomineeDirectory() {
             <p className="text-ivory/40 text-sm">
               Showing <span className="text-gold font-medium">{paginated.length}</span> of{" "}
               <span className="text-ivory/60">{filtered.length.toLocaleString()}</span> nominees
+              <span className="text-ivory/30 ml-2">• 2025 Season</span>
             </p>
           </div>
 
@@ -253,45 +236,11 @@ export default function NomineeDirectory() {
           {/* Pagination */}
           {totalPages > 1 && (
             <div className="mt-8 flex items-center justify-center gap-2">
-              <Button
-                variant="outline"
-                size="sm"
-                disabled={page <= 1}
-                onClick={() => updateFilter("page", "1")}
-                className="border-gold/10 text-ivory/40 hover:text-gold disabled:opacity-30"
-              >
-                First
-              </Button>
-              <Button
-                variant="outline"
-                size="sm"
-                disabled={page <= 1}
-                onClick={() => updateFilter("page", String(page - 1))}
-                className="border-gold/10 text-ivory/40 hover:text-gold disabled:opacity-30"
-              >
-                Previous
-              </Button>
-              <span className="text-ivory/50 text-sm px-3">
-                Page {page} of {totalPages}
-              </span>
-              <Button
-                variant="outline"
-                size="sm"
-                disabled={page >= totalPages}
-                onClick={() => updateFilter("page", String(page + 1))}
-                className="border-gold/10 text-ivory/40 hover:text-gold disabled:opacity-30"
-              >
-                Next
-              </Button>
-              <Button
-                variant="outline"
-                size="sm"
-                disabled={page >= totalPages}
-                onClick={() => updateFilter("page", String(totalPages))}
-                className="border-gold/10 text-ivory/40 hover:text-gold disabled:opacity-30"
-              >
-                Last
-              </Button>
+              <Button variant="outline" size="sm" disabled={page <= 1} onClick={() => updateFilter("page", "1")} className="border-gold/10 text-ivory/40 hover:text-gold disabled:opacity-30">First</Button>
+              <Button variant="outline" size="sm" disabled={page <= 1} onClick={() => updateFilter("page", String(page - 1))} className="border-gold/10 text-ivory/40 hover:text-gold disabled:opacity-30">Previous</Button>
+              <span className="text-ivory/50 text-sm px-3">Page {page} of {totalPages}</span>
+              <Button variant="outline" size="sm" disabled={page >= totalPages} onClick={() => updateFilter("page", String(page + 1))} className="border-gold/10 text-ivory/40 hover:text-gold disabled:opacity-30">Next</Button>
+              <Button variant="outline" size="sm" disabled={page >= totalPages} onClick={() => updateFilter("page", String(totalPages))} className="border-gold/10 text-ivory/40 hover:text-gold disabled:opacity-30">Last</Button>
             </div>
           )}
         </div>

@@ -1,18 +1,18 @@
 import { useMemo } from "react";
 import { useParams, Link } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
-import { ArrowLeft, MapPin, Globe2, Award, Share2, BookOpen, Target, Building2, User, ExternalLink } from "lucide-react";
+import { ArrowLeft, MapPin, Globe2, Award, Share2, BookOpen, Target, Building2, User, ThumbsUp, RotateCcw, Calendar, Shield, FileCheck } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import { toast } from "sonner";
-import { getMasterNomineeBySlug, getAllMasterNominees, type MasterNominee } from "@/lib/nomineeMasterData";
+import { getMasterNomineeBySlug, getAllMasterNominees, type MasterNominee, WORKFLOW_STATUS_CONFIG } from "@/lib/nomineeMasterData";
 import { NomineeWorkflowStatusBadge } from "@/components/nominees/NomineeWorkflowStatus";
 import { NomineeStoryCard } from "@/components/nominees/NomineeStoryCard";
 
 function isOrg(name: string): boolean {
-  const orgKeywords = ["bank", "group", "foundation", "university", "church", "association", "network", "company", "ltd", "plc", "state", "institute", "academy", "school", "college", "polytechnic", "library", "fund", "trust", "society", "ministry", "agency", "board"];
+  const orgKeywords = ["bank", "group", "foundation", "university", "church", "association", "network", "company", "ltd", "plc", "state", "institute", "academy", "school", "college", "polytechnic", "library", "fund", "trust", "society", "ministry", "agency", "board", "hospital", "council", "ngo"];
   return orgKeywords.some(kw => name.toLowerCase().includes(kw));
 }
 
@@ -20,26 +20,37 @@ function getInitials(name: string): string {
   return name.split(/[\s-]+/).filter(Boolean).map(w => w[0]).join("").toUpperCase().slice(0, 2);
 }
 
-function generateStory(nominee: MasterNominee): string {
+function generateNarrative(nominee: MasterNominee): { title: string; sections: Array<{ heading: string; content: string }> } {
   const base = nominee.achievement || "Contributing to the advancement of education across Africa.";
-  const parts = [
-    `${nominee.name} stands as a testament to the transformative power of education in Africa.`,
-    base,
-    nominee.region !== "N/A" ? `Operating within the ${nominee.region} region, their work has created lasting impact on educational outcomes.` : "",
-    nominee.country ? `Based in ${nominee.country}, they have demonstrated exceptional commitment to education for all.` : "",
-    `Their contributions align with the NESA Africa mission of recognizing and elevating education standards across the continent.`,
-  ].filter(Boolean);
-  return parts.join(" ");
+  const org = isOrg(nominee.name);
+  const entityType = org ? "organization" : "individual";
+  
+  return {
+    title: `Contribution to African Education`,
+    sections: [
+      {
+        heading: "Impact & Legacy",
+        content: `${nominee.name} stands as a powerful example of ${org ? "institutional" : "personal"} commitment to transforming education across the African continent. ${base} This ${entityType}'s dedication to educational excellence has created ripple effects that extend far beyond immediate beneficiaries, establishing a model for sustainable impact in the education sector.`,
+      },
+      {
+        heading: "Regional Significance",
+        content: nominee.region !== "N/A"
+          ? `Operating within the ${nominee.region} region${nominee.country ? ` and based in ${nominee.country}` : ""}, ${nominee.name} has demonstrated that education transformation requires both deep local understanding and a continental vision. Their work addresses region-specific challenges while contributing to pan-African educational goals aligned with the AU Agenda 2063 and UN SDG 4.`
+          : `${nominee.country ? `Based in ${nominee.country}, ` : ""}${nominee.name} has shown remarkable commitment to education as a vehicle for national development. Their efforts contribute to building a more educated, skilled, and empowered citizenry.`,
+      },
+      {
+        heading: "Category Recognition",
+        content: `Nominated under "${nominee.subcategory}" within the broader category of "${nominee.category}", ${nominee.name} represents the caliber of ${entityType}s that NESA Africa seeks to celebrate — those whose contributions create measurable, sustainable improvements in educational access, quality, and outcomes.`,
+      },
+    ],
+  };
 }
 
 export default function MasterNomineeProfile() {
   const { slug: rawSlug } = useParams<{ slug: string }>();
   const slug = rawSlug ? decodeURIComponent(rawSlug) : undefined;
 
-  const nominee = useMemo(() => {
-    if (!slug) return undefined;
-    return getMasterNomineeBySlug(slug);
-  }, [slug]);
+  const nominee = useMemo(() => slug ? getMasterNomineeBySlug(slug) : undefined, [slug]);
 
   const relatedNominees = useMemo(() => {
     if (!nominee) return [];
@@ -51,7 +62,7 @@ export default function MasterNomineeProfile() {
   const handleShare = async () => {
     try {
       await navigator.clipboard.writeText(window.location.href);
-      toast.success("Link copied to clipboard!");
+      toast.success("Profile link copied to clipboard!");
     } catch {
       toast.error("Failed to copy link");
     }
@@ -75,13 +86,14 @@ export default function MasterNomineeProfile() {
   }
 
   const org = isOrg(nominee.name);
-  const story = generateStory(nominee);
+  const narrative = generateNarrative(nominee);
+  const workflowConfig = WORKFLOW_STATUS_CONFIG[nominee.workflowStatus];
 
   return (
     <>
       <Helmet>
-        <title>{nominee.name} | NESA Africa Nominee</title>
-        <meta name="description" content={`${nominee.name} — Nominated for ${nominee.category}. ${nominee.achievement?.slice(0, 120)}`} />
+        <title>{nominee.name} — 2025 NESA Africa Nominee</title>
+        <meta name="description" content={`${nominee.name} — Nominated for ${nominee.subcategory}. ${nominee.achievement?.slice(0, 120)}`} />
       </Helmet>
 
       <div className="min-h-screen bg-charcoal">
@@ -89,34 +101,35 @@ export default function MasterNomineeProfile() {
         <div className="relative border-b border-gold/10">
           <div className="absolute inset-0 bg-gradient-to-b from-gold/5 to-transparent" />
           <div className="container mx-auto px-4 py-8 md:py-12 relative">
-            {/* Breadcrumb */}
             <div className="flex items-center gap-2 text-ivory/40 text-xs mb-6">
-              <Link to="/directory" className="hover:text-gold transition-colors">Directory</Link>
+              <Link to="/directory" className="hover:text-gold transition-colors flex items-center gap-1">
+                <ArrowLeft className="w-3 h-3" /> Directory
+              </Link>
               <span>/</span>
-              <span className="text-ivory/60">{nominee.name}</span>
+              <span className="text-ivory/60 truncate max-w-[200px]">{nominee.name}</span>
             </div>
 
             <div className="flex flex-col md:flex-row gap-8 items-start">
               {/* Avatar */}
-              <div className="w-32 h-32 md:w-40 md:h-40 rounded-2xl bg-charcoal-light border border-gold/10 flex items-center justify-center overflow-hidden flex-shrink-0">
-                {nominee.imageUrl && nominee.imageUrl !== "/images/placeholder.svg" ? (
-                  <img src={nominee.imageUrl} alt={nominee.name} className={`w-full h-full ${org ? "object-contain p-4" : "object-cover"}`} />
+              <div className="w-36 h-36 md:w-44 md:h-44 rounded-2xl bg-charcoal-light border-2 border-gold/15 flex items-center justify-center overflow-hidden flex-shrink-0 shadow-xl shadow-black/20">
+                {nominee.imageUrl && !nominee.imageUrl.includes("placeholder") ? (
+                  <img src={nominee.imageUrl} alt={nominee.name} className={`w-full h-full ${org ? "object-contain p-4" : "object-cover"}`} loading="lazy" />
                 ) : (
                   <div className="flex flex-col items-center gap-2">
                     {org ? (
-                      <Building2 className="w-12 h-12 text-gold/30" />
+                      <Building2 className="w-14 h-14 text-gold/25" />
                     ) : (
-                      <span className="text-gold/50 font-display text-3xl">{getInitials(nominee.name)}</span>
+                      <span className="text-gold/40 font-display text-4xl">{getInitials(nominee.name)}</span>
                     )}
                   </div>
                 )}
               </div>
 
               {/* Info */}
-              <div className="flex-1 space-y-3">
-                <div className="flex items-start justify-between gap-4">
+              <div className="flex-1 space-y-4">
+                <div className="flex items-start justify-between gap-4 flex-wrap">
                   <div>
-                    <h1 className="text-2xl md:text-3xl font-display text-ivory font-bold">{nominee.name}</h1>
+                    <h1 className="text-2xl md:text-4xl font-display text-ivory font-bold tracking-tight">{nominee.name}</h1>
                     <div className="flex flex-wrap items-center gap-3 mt-2">
                       {nominee.country && (
                         <div className="flex items-center gap-1 text-ivory/50 text-sm">
@@ -130,6 +143,10 @@ export default function MasterNomineeProfile() {
                           {nominee.region}
                         </div>
                       )}
+                      <div className="flex items-center gap-1 text-ivory/50 text-sm">
+                        <Calendar className="w-3.5 h-3.5" />
+                        2025 Season
+                      </div>
                     </div>
                   </div>
                   <Button variant="outline" size="sm" onClick={handleShare} className="border-gold/20 text-gold hover:bg-gold/10">
@@ -139,8 +156,11 @@ export default function MasterNomineeProfile() {
 
                 <div className="flex flex-wrap gap-2">
                   <Badge className="bg-gold/10 text-gold border-0">{nominee.pathway}</Badge>
+                  <Badge variant="outline" className="border-emerald-500/20 text-emerald-400 text-xs">
+                    Existing Nominee
+                  </Badge>
                   <Badge variant="outline" className="border-gold/15 text-ivory/50 text-xs">
-                    {nominee.category.length > 60 ? nominee.category.slice(0, 60) + "…" : nominee.category}
+                    {nominee.category.length > 55 ? nominee.category.slice(0, 55) + "…" : nominee.category}
                   </Badge>
                 </div>
 
@@ -154,15 +174,22 @@ export default function MasterNomineeProfile() {
         <div className="container mx-auto px-4 py-8">
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
             {/* Main Content */}
-            <div className="lg:col-span-2 space-y-8">
-              {/* Story Section */}
+            <div className="lg:col-span-2 space-y-6">
+              {/* Narrative Storytelling */}
               <Card className="bg-charcoal-light/50 border-gold/10">
-                <CardContent className="p-6">
-                  <div className="flex items-center gap-2 mb-4">
+                <CardContent className="p-6 md:p-8">
+                  <div className="flex items-center gap-2 mb-6">
                     <BookOpen className="w-5 h-5 text-gold" />
-                    <h2 className="text-lg font-display text-ivory font-semibold">Contribution to African Education</h2>
+                    <h2 className="text-lg font-display text-ivory font-semibold">{narrative.title}</h2>
                   </div>
-                  <p className="text-ivory/60 leading-relaxed text-sm">{story}</p>
+                  <div className="space-y-6">
+                    {narrative.sections.map((section, i) => (
+                      <div key={i}>
+                        <h3 className="text-sm font-medium text-gold/80 uppercase tracking-wider mb-2">{section.heading}</h3>
+                        <p className="text-ivory/60 leading-relaxed text-sm">{section.content}</p>
+                      </div>
+                    ))}
+                  </div>
                 </CardContent>
               </Card>
 
@@ -187,8 +214,12 @@ export default function MasterNomineeProfile() {
                 </CardContent>
               </Card>
 
-              {/* Actions */}
-              <div className="flex flex-wrap gap-3">
+              {/* Action Buttons */}
+              <div className="flex flex-wrap gap-3 p-6 bg-charcoal-light/30 rounded-xl border border-gold/10">
+                <div className="w-full mb-2">
+                  <h3 className="text-sm font-display text-ivory/70 font-medium">Nominee Actions</h3>
+                  <p className="text-ivory/30 text-xs mt-0.5">Support this nominee through voting or re-nomination</p>
+                </div>
                 <Button asChild className="bg-gold hover:bg-gold-dark text-charcoal font-medium">
                   <Link to={`/nominate?nominee=${encodeURIComponent(nominee.name)}`}>
                     <Award className="w-4 h-4 mr-2" /> Nominate
@@ -196,12 +227,12 @@ export default function MasterNomineeProfile() {
                 </Button>
                 <Button asChild variant="outline" className="border-gold/30 text-gold hover:bg-gold/10">
                   <Link to={`/nominate?nominee=${encodeURIComponent(nominee.name)}&renominate=true`}>
-                    Re-Nominate
+                    <RotateCcw className="w-4 h-4 mr-2" /> Re-Nominate
                   </Link>
                 </Button>
                 <Button asChild variant="outline" className="border-gold/30 text-gold hover:bg-gold/10">
                   <Link to={`/vote?nominee=${encodeURIComponent(nominee.name)}`}>
-                    Vote
+                    <ThumbsUp className="w-4 h-4 mr-2" /> Vote
                   </Link>
                 </Button>
               </div>
@@ -209,16 +240,17 @@ export default function MasterNomineeProfile() {
 
             {/* Sidebar */}
             <div className="space-y-6">
-              {/* Quick Info Card */}
+              {/* Quick Info */}
               <Card className="bg-charcoal-light/50 border-gold/10">
                 <CardContent className="p-5 space-y-4">
-                  <h3 className="text-sm font-display text-ivory/70 font-medium">Quick Info</h3>
+                  <h3 className="text-sm font-display text-ivory/70 font-medium">Nominee Details</h3>
                   {[
-                    { label: "Nominee ID", value: `#${nominee.id}` },
+                    { label: "Nominee ID", value: `NESA-2025-${String(nominee.id).padStart(4, "0")}` },
                     { label: "Pathway", value: nominee.pathway },
                     { label: "Region", value: nominee.region },
                     { label: "Country", value: nominee.country || "N/A" },
-                    { label: "Year", value: String(nominee.nominationYear) },
+                    { label: "Season", value: "2025" },
+                    { label: "Status", value: "Existing Nominee" },
                   ].map(item => (
                     <div key={item.label} className="flex justify-between items-center">
                       <span className="text-ivory/40 text-xs">{item.label}</span>
@@ -231,11 +263,44 @@ export default function MasterNomineeProfile() {
               {/* NRC Workflow */}
               <Card className="bg-charcoal-light/50 border-gold/10">
                 <CardContent className="p-5">
-                  <h3 className="text-sm font-display text-ivory/70 font-medium mb-3">NRC Verification Status</h3>
+                  <div className="flex items-center gap-2 mb-3">
+                    <Shield className="w-4 h-4 text-gold" />
+                    <h3 className="text-sm font-display text-ivory/70 font-medium">NRC Verification Pipeline</h3>
+                  </div>
                   <NomineeWorkflowStatusBadge status={nominee.workflowStatus} showSteps />
-                  <p className="text-ivory/30 text-xs mt-3">
-                    All nominees undergo automated eligibility screening, documentation verification, and NRC committee review.
+                  <div className="mt-4 p-3 bg-charcoal/50 rounded-lg border border-gold/5">
+                    <p className="text-ivory/40 text-xs leading-relaxed">
+                      <strong className="text-ivory/60">Current Stage:</strong> {workflowConfig.description}
+                    </p>
+                  </div>
+                  <div className="mt-3 space-y-2">
+                    {Object.entries(WORKFLOW_STATUS_CONFIG)
+                      .filter(([key]) => key !== "rejected")
+                      .map(([key, config]) => (
+                        <div key={key} className="flex items-center gap-2">
+                          <FileCheck className={`w-3 h-3 ${config.step <= workflowConfig.step ? "text-emerald-400" : "text-ivory/20"}`} />
+                          <span className={`text-xs ${config.step <= workflowConfig.step ? "text-ivory/60" : "text-ivory/25"}`}>
+                            {config.label}
+                          </span>
+                        </div>
+                      ))}
+                  </div>
+                </CardContent>
+              </Card>
+
+              {/* Re-nomination CTA */}
+              <Card className="bg-gradient-to-br from-gold/5 to-transparent border-gold/15">
+                <CardContent className="p-5 text-center">
+                  <RotateCcw className="w-8 h-8 text-gold/40 mx-auto mb-3" />
+                  <h3 className="text-sm font-display text-ivory/80 font-medium mb-1">Support This Nominee</h3>
+                  <p className="text-ivory/40 text-xs mb-4">
+                    Re-nomination adds updated evidence and triggers a new NRC review cycle.
                   </p>
+                  <Button asChild size="sm" className="bg-gold hover:bg-gold-dark text-charcoal w-full">
+                    <Link to={`/nominate?nominee=${encodeURIComponent(nominee.name)}&renominate=true`}>
+                      Re-Nominate with Evidence
+                    </Link>
+                  </Button>
                 </CardContent>
               </Card>
             </div>
@@ -245,7 +310,7 @@ export default function MasterNomineeProfile() {
           {relatedNominees.length > 0 && (
             <div className="mt-12">
               <h2 className="text-lg font-display text-ivory font-semibold mb-4">
-                Related Nominees in {nominee.category.length > 50 ? nominee.category.slice(0, 50) + "…" : nominee.category}
+                Related Nominees
               </h2>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 {relatedNominees.map(rn => (
