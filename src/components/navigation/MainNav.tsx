@@ -295,17 +295,17 @@ function MobileNav({ onOpenCVOMessage }: { onOpenCVOMessage: () => void }) {
               </div>
             ) : (
               <div className="flex gap-3">
-                <Link to="/auth" onClick={handleLinkClick} className="flex-1">
+                <Link to="/login" onClick={handleLinkClick} className="flex-1">
                   <Button 
                     variant="outline" 
-                    className="w-full border-primary/30 text-primary hover:bg-primary/10 py-3 h-auto touch-manipulation rounded-xl"
+                    className="w-full border-primary/30 text-primary hover:bg-primary/10 py-3 h-auto touch-manipulation"
                   >
                     Sign In
                   </Button>
                 </Link>
-                <Link to="/auth?tab=register" onClick={handleLinkClick} className="flex-1">
-                  <Button className="w-full bg-primary text-primary-foreground hover:bg-primary/90 py-3 h-auto touch-manipulation rounded-xl">
-                    Sign Up
+                <Link to="/register" onClick={handleLinkClick} className="flex-1">
+                  <Button className="w-full bg-primary text-primary-foreground hover:bg-primary/90 py-3 h-auto touch-manipulation">
+                    Get Started
                   </Button>
                 </Link>
               </div>
@@ -343,14 +343,14 @@ function UserMenu() {
   if (!user) {
     return (
       <div className="hidden lg:flex items-center gap-2">
-        <Link to="/auth">
-          <Button variant="ghost" className="text-secondary-foreground/80 hover:text-primary hover:bg-primary/10 font-medium">
+        <Link to="/login">
+          <Button variant="ghost" className="text-white/90 hover:text-gold hover:bg-gold/10">
             Sign In
           </Button>
         </Link>
-        <Link to="/auth?tab=register">
-          <Button className="bg-primary text-primary-foreground hover:bg-primary/90 font-medium rounded-full px-6">
-            Sign Up
+        <Link to="/register">
+          <Button className="bg-primary text-primary-foreground hover:bg-primary/90">
+            Get Started
           </Button>
         </Link>
       </div>

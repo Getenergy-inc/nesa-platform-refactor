@@ -25,7 +25,6 @@ import Categories from "./pages/Categories";
 import Programs from "./pages/Programs";
 import Login from "./pages/auth/Login";
 import Register from "./pages/auth/Register";
-import AuthPage from "./pages/auth/AuthPage";
 import OTPVerification from "./pages/auth/OTPVerification";
 import ForgotPassword from "./pages/auth/ForgotPassword";
 import ResetPassword from "./pages/auth/ResetPassword";
@@ -261,8 +260,7 @@ const App = () => (
                 <Route path="/orders/:id" element={<WithLayout><OrderConfirmation /></WithLayout>} />
                 <Route path="/bulk-orders" element={<WithLayout><BulkOrders /></WithLayout>} />
                 
-                {/* Auth - unified auth page */}
-                <Route path="/auth" element={<AuthPage />} />
+                {/* Auth - standalone layout (dark branded) */}
                 <Route path="/login" element={<Login />} />
                 <Route path="/register" element={<Register />} />
                 <Route path="/forgot-password" element={<ForgotPassword />} />
