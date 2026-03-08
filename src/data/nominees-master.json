@@ -1,0 +1,82 @@
+{
+  "meta": {
+    "source": "NESA_Award_Nominees_Master_List.xlsx",
+    "importedAt": "2026-03-08",
+    "totalNominees": 1703,
+    "season": "2024"
+  },
+  "categories": [
+    {
+      "slug": "diaspora-educational-impact",
+      "name": "Diaspora Association Educational Impact in Africa",
+      "pathway": "Diaspora",
+      "region": "N/A"
+    },
+    {
+      "slug": "education-friendly-state-nigeria",
+      "name": "Overall best educational friendly state in Nigeria 2024",
+      "pathway": "Nigeria",
+      "region": "N/A"
+    },
+    {
+      "slug": "csr-education-nigeria",
+      "name": "The Overall Best CSR for Education in Nigeria Award 2024",
+      "pathway": "Nigeria",
+      "region": "N/A"
+    },
+    {
+      "slug": "csr-education-africa-regional",
+      "name": "Best Africa Regional Companies CSR for Education Special Recognition Award in Africa 2024",
+      "pathway": "Africa",
+      "region": "Multiple"
+    },
+    {
+      "slug": "ngo-education-nigeria",
+      "name": "The Overall Best NGO Contribution to education in Nigeria Award 2024",
+      "pathway": "Nigeria",
+      "region": "N/A"
+    },
+    {
+      "slug": "library-tertiary-nigeria",
+      "name": "The best library in Nigerian tertiary institutions award 2024",
+      "pathway": "Nigeria",
+      "region": "N/A"
+    },
+    {
+      "slug": "research-development-nigeria",
+      "name": "The Overall Best Research and Development Contribution by Research Institutes in Achieving Education for all.",
+      "pathway": "Nigeria",
+      "region": "N/A"
+    },
+    {
+      "slug": "media-advocacy-nigeria",
+      "name": "Best Media and advocacy for education in Nigeria 2024",
+      "pathway": "Nigeria",
+      "region": "N/A"
+    },
+    {
+      "slug": "christian-education-nigeria",
+      "name": "Christian faith organization Educational Champion of the Decade Award",
+      "pathway": "Nigeria",
+      "region": "N/A"
+    },
+    {
+      "slug": "islamic-education-nigeria",
+      "name": "Islamic faith organization Educational Champion of the Decade Award",
+      "pathway": "Nigeria",
+      "region": "N/A"
+    },
+    {
+      "slug": "creative-arts-nigeria",
+      "name": "Creative Arts Industry Contribution to Education in Nigeria 2024",
+      "pathway": "Nigeria",
+      "region": "N/A"
+    },
+    {
+      "slug": "stem-education-africa",
+      "name": "Best STEM Education Program or Project (Africa-Regional)",
+      "pathway": "Africa",
+      "region": "Multiple"
+    }
+  ]
+}
