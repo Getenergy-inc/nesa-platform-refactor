@@ -274,12 +274,12 @@ export default function EndorseNESA() {
         <title>Submit Endorsement | NESA-Africa</title>
       </Helmet>
 
-      <div className="min-h-screen bg-background py-8 md:py-12">
+      <div className="min-h-screen bg-charcoal py-8 md:py-12">
         <div className="container max-w-3xl">
           {/* Back to Landing */}
           <Button
             variant="ghost"
-            className="mb-6 text-muted-foreground hover:text-foreground"
+            className="mb-6 text-white/50 hover:text-gold hover:bg-gold/5"
             onClick={() => {
               setShowForm(false);
               setCurrentStep(1);
@@ -292,7 +292,7 @@ export default function EndorseNESA() {
           <EndorsementStepIndicator steps={steps} currentStep={currentStep} />
 
           {/* Form Card */}
-          <Card className="border-border/50 shadow-lg">
+          <Card className="border-gold/10 bg-charcoal-light shadow-lg">
             <CardContent className="p-6 md:p-8">
               {currentStep === 1 && (
                 <OrganizationInfoStep
