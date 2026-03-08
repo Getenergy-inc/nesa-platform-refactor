@@ -110,24 +110,24 @@ export default function Chapters() {
       </section>
 
       {/* Stats */}
-      <section className="py-12 bg-muted/30">
+      <section className="py-12 border-y border-gold/10">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
             <div>
-              <p className="text-4xl font-bold text-nesa-gold">30</p>
-              <p className="text-muted-foreground">Active Chapters</p>
+              <p className="text-4xl font-bold text-gold">30</p>
+              <p className="text-white/60">Active Chapters</p>
             </div>
             <div>
-              <p className="text-4xl font-bold text-nesa-gold">5</p>
-              <p className="text-muted-foreground">Regions Covered</p>
+              <p className="text-4xl font-bold text-gold">5</p>
+              <p className="text-white/60">Regions Covered</p>
             </div>
             <div>
-              <p className="text-4xl font-bold text-nesa-gold">500+</p>
-              <p className="text-muted-foreground">Chapter Volunteers</p>
+              <p className="text-4xl font-bold text-gold">500+</p>
+              <p className="text-white/60">Chapter Volunteers</p>
             </div>
             <div>
-              <p className="text-4xl font-bold text-nesa-gold">54</p>
-              <p className="text-muted-foreground">Countries Targeted</p>
+              <p className="text-4xl font-bold text-gold">54</p>
+              <p className="text-white/60">Countries Targeted</p>
             </div>
           </div>
         </div>
