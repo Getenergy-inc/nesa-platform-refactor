@@ -22,7 +22,7 @@ import {
   Globe, Save, Send,
 } from "lucide-react";
 import { getMasterNomineeById, type MasterNominee } from "@/lib/nomineeMasterData";
-import { generateNomineeStory } from "@/lib/nomineeStoryGenerator";
+import { generateEnhancedBiography } from "@/lib/nomineeStoryGenerator";
 import { calculateEDIScorecard } from "@/lib/ediScoring";
 import { toast } from "sonner";
 
