@@ -11,3 +11,4 @@ export { RenominateModal, type RenominateModalProps } from "./RenominateModal";
 export { EnrichedProfileCard } from "./EnrichedProfileCard";
 export { NomineeStoryCard } from "./NomineeStoryCard";
 export { NomineeWorkflowStatusBadge } from "./NomineeWorkflowStatus";
+export { NomineeEDIScores } from "./NomineeEDIScores";
