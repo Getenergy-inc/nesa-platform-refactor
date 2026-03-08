@@ -4,10 +4,13 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Upload, X, Image, Video } from "lucide-react";
+import { Upload, X, Image, Video, Loader2 } from "lucide-react";
 import { uploadMediaSchema, type UploadMediaData } from "@/lib/endorsement-validate";
 import endorsementData from "@/data/endorsements.json";
 import { cn } from "@/lib/utils";
+import { useUpload } from "@/hooks/useUpload";
+import { UPLOAD_PRESETS } from "@/lib/uploadEngine";
+import { toast } from "sonner";
 
 interface UploadMediaStepProps {
   data: Partial<UploadMediaData>;
@@ -23,6 +26,32 @@ export function UploadMediaStep({ data, onNext, onBack }: UploadMediaStepProps) 
   
   const logoInputRef = useRef<HTMLInputElement>(null);
   const videoInputRef = useRef<HTMLInputElement>(null);
+
+  const logoUploader = useUpload({
+    ...UPLOAD_PRESETS.nomineePhoto,
+    pathPrefix: "endorsements",
+    onComplete: (results) => {
+      if (results[0]) {
+        setLogoPreview(results[0].url);
+        setValue("logoUrl", results[0].url);
+        toast.success("Logo uploaded");
+      }
+    },
+    onError: (errors) => errors.forEach((e) => toast.error(e.error)),
+  });
+
+  const videoUploader = useUpload({
+    ...UPLOAD_PRESETS.endorsementMedia,
+    pathPrefix: "endorsements",
+    onComplete: (results) => {
+      if (results[0]) {
+        setVideoPreview(results[0].url);
+        setValue("videoUrl", results[0].url);
+        toast.success("Video uploaded");
+      }
+    },
+    onError: (errors) => errors.forEach((e) => toast.error(e.error)),
+  });
 
   const {
     register,
@@ -40,25 +69,11 @@ export function UploadMediaStep({ data, onNext, onBack }: UploadMediaStepProps) 
   });
 
   const handleLogoUpload = (file: File) => {
-    const maxSize = endorsementData.fileUploadLimits.logoMaxSizeMb * 1024 * 1024;
-    if (file.size > maxSize) {
-      alert(`Logo must be under ${endorsementData.fileUploadLimits.logoMaxSizeMb}MB`);
-      return;
-    }
-    const url = URL.createObjectURL(file);
-    setLogoPreview(url);
-    setValue("logoUrl", url);
+    logoUploader.uploadOne(file).catch(() => {});
   };
 
   const handleVideoUpload = (file: File) => {
-    const maxSize = endorsementData.fileUploadLimits.videoMaxSizeMb * 1024 * 1024;
-    if (file.size > maxSize) {
-      alert(`Video must be under ${endorsementData.fileUploadLimits.videoMaxSizeMb}MB`);
-      return;
-    }
-    const url = URL.createObjectURL(file);
-    setVideoPreview(url);
-    setValue("videoUrl", url);
+    videoUploader.uploadOne(file).catch(() => {});
   };
 
   const handleDrop = (e: React.DragEvent, type: "logo" | "video") => {
