@@ -570,8 +570,8 @@ export default function Nominate() {
                   <div
                     className={`flex h-10 w-10 items-center justify-center rounded-full font-semibold transition-colors ${
                       step >= s
-                        ? "bg-primary text-primary-foreground"
-                        : "bg-muted text-muted-foreground"
+                        ? "bg-gold text-charcoal"
+                        : "bg-charcoal-light text-white/40 border border-gold/20"
                     }`}
                   >
                     {step > s ? <CheckCircle className="h-5 w-5" /> : s}
@@ -579,14 +579,14 @@ export default function Nominate() {
                   {s < 3 && (
                     <div
                       className={`mx-2 h-1 w-16 rounded-full transition-colors sm:w-24 md:w-32 ${
-                        step > s ? "bg-primary" : "bg-muted"
+                        step > s ? "bg-gold" : "bg-charcoal-light"
                       }`}
                     />
                   )}
                 </div>
               ))}
             </div>
-            <div className="mt-2 flex justify-between text-xs text-muted-foreground">
+            <div className="mt-2 flex justify-between text-xs text-white/50">
               <span>Category</span>
               <span>Nominee Details</span>
               <span>Evidence</span>
