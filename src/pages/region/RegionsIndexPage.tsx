@@ -24,9 +24,9 @@ export default function RegionsIndexPage() {
         <title>Explore Africa's Regions | NESA-Africa</title>
         <meta name="description" content="Explore all 10 NESA-Africa award regions across the African continent, the Diaspora, and Friends of Africa." />
       </Helmet>
-      <div className="min-h-screen bg-background">
+      <div className="min-h-screen bg-charcoal">
         {/* Hero */}
-        <section className="relative py-20 px-4 bg-gradient-to-b from-primary/10 to-background">
+        <section className="relative py-20 px-4 bg-gradient-to-b from-gold/5 to-charcoal">
           <div className="container mx-auto text-center max-w-3xl">
             <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
               <Globe className="w-12 h-12 text-primary mx-auto mb-4" />

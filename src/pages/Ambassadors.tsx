@@ -121,7 +121,7 @@ export default function Ambassadors() {
         />
       </Helmet>
 
-      <div className="min-h-screen bg-background">
+      <div className="min-h-screen bg-charcoal">
         {/* Hero Section */}
         <section className="relative py-20 md:py-28 bg-gradient-to-br from-charcoal via-charcoal-light to-charcoal overflow-hidden">
           {/* Background decorations */}

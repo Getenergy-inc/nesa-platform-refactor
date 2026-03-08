@@ -36,6 +36,9 @@ import CategoryDetail from "./pages/CategoryDetail";
 import NomineeAccept from "./pages/NomineeAccept";
 import NomineeDecline from "./pages/NomineeDecline";
 import NomineeDashboard from "./pages/nominee/NomineeDashboard";
+import NotificationsPage from "./pages/dashboard/Notifications";
+import ProfilePage from "./pages/dashboard/Profile";
+import SettingsPage from "./pages/dashboard/Settings";
 
 // About Pages
 import About from "./pages/about/About";
@@ -294,6 +297,9 @@ const App = () => (
                 {/* Dashboards - use their own layout */}
                 <Route path="/dashboard" element={<Dashboard />} />
                 <Route path="/dashboard/nominations" element={<Dashboard />} />
+                <Route path="/dashboard/notifications" element={<NotificationsPage />} />
+                <Route path="/dashboard/profile" element={<ProfilePage />} />
+                <Route path="/dashboard/settings" element={<SettingsPage />} />
                 <Route path="/dashboard/region" element={<RegionDashboard />} />
                 
                 {/* Region Routes */}

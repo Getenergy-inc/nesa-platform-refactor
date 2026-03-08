@@ -181,7 +181,7 @@ export default function NomineeDashboard() {
   // Loading state
   if (loading) {
     return (
-      <div className="min-h-screen bg-background">
+      <div className="min-h-screen bg-charcoal">
         <div className="border-b">
           <div className="container flex h-16 items-center justify-between px-4">
             <Skeleton className="h-8 w-48" />
@@ -236,7 +236,7 @@ export default function NomineeDashboard() {
   const endorsementGoal = 200;
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-charcoal">
       <NomineeDashboardHeader
         nomineeName={nominee.name}
         photoUrl={nominee.photo_url}
