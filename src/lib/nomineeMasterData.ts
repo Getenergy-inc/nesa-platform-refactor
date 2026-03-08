@@ -94,6 +94,7 @@ function buildNominees(): MasterNominee[] {
     workflowStatus: assignWorkflowStatus(id),
     nominationYear: 2025,
     status: "existing_nominee" as const,
+    mergeInfo: getNomineeMergeInfo(id),
   }));
   
   return _cache;
