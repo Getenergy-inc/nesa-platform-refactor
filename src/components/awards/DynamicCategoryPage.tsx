@@ -472,6 +472,9 @@ export function DynamicCategoryPage({ categoryTitle, nominationType }: DynamicCa
           </div>
         </section>
 
+        {/* ═══ LIVE NOMINEES DIRECTORY ═══ */}
+        <CategoryNomineesDirectory categoryTitle={categoryTitle} />
+
         {/* CTA Section */}
         <section className="py-16 bg-gradient-to-b from-charcoal to-gold/10">
           <div className="container mx-auto px-4 text-center">
