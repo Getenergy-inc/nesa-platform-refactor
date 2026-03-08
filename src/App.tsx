@@ -2,6 +2,8 @@ import { Toaster } from "@/components/ui/toaster";
 import { useEffect } from "react";
 import Nominees from "./pages/Nominees";
 import NomineeProfile from "./pages/NomineeProfile";
+import NomineeDirectory from "./pages/NomineeDirectory";
+import MasterNomineeProfile from "./pages/MasterNomineeProfile";
 import CertificateVerify from "./pages/CertificateVerify";
 import VerifyCertificate from "./pages/VerifyCertificate";
 import Results from "./pages/Results";
@@ -276,6 +278,8 @@ const App = () => (
                 <Route path="/nominate" element={<WithLayout><Nominate /></WithLayout>} />
                 <Route path="/nominees" element={<WithLayout><Nominees /></WithLayout>} />
                 <Route path="/nominees/:slug" element={<WithLayout><NomineeProfile /></WithLayout>} />
+                <Route path="/directory" element={<WithLayout><NomineeDirectory /></WithLayout>} />
+                <Route path="/directory/:slug" element={<WithLayout><MasterNomineeProfile /></WithLayout>} />
                 <Route path="/vote" element={<WithLayout><Vote /></WithLayout>} />
                 <Route path="/vote-with-agc" element={<WithLayout><VoteWithAGC /></WithLayout>} />
                 <Route path="/vote/gold" element={<WithLayout><GoldVoting /></WithLayout>} />
