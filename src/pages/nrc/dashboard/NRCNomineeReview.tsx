@@ -186,7 +186,7 @@ function ReviewContent() {
                 <Separator />
                 <div>
                   <h4 className="text-xs font-semibold mb-2">Institutional Significance</h4>
-                  <p className="text-xs text-muted-foreground leading-relaxed">{story.institutionalSignificance}</p>
+                  <p className="text-xs text-muted-foreground leading-relaxed">{story.institutionalSignificance.join(" ")}</p>
                 </div>
               </CardContent>
             </Card>
