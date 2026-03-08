@@ -4,6 +4,7 @@ import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { useAuth } from "@/contexts/AuthContext";
 import { supabase } from "@/integrations/supabase/client";
+import { lovable } from "@/integrations/lovable";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -67,23 +68,23 @@ export function LoginForm({ onSwitchToRegister }: LoginFormProps) {
   };
 
   return (
-    <div className="space-y-4">
+    <div className="space-y-5">
       <GoogleButton label="Continue with Google" />
 
-      <div className="relative my-5">
-        <Separator className="bg-primary/8" />
-        <span className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 bg-[hsl(30_8%_9%)] px-3 text-[11px] text-secondary-foreground/25 uppercase tracking-wider">
-          or
+      <div className="relative">
+        <Separator className="bg-primary/10" />
+        <span className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 bg-secondary px-3 text-xs text-secondary-foreground/30">
+          or sign in with email
         </span>
       </div>
 
       {isJudgeLogin && <JudgeOTPNotice />}
 
-      <form onSubmit={handleSubmit} className="space-y-3.5">
-        <div className="space-y-1.5">
-          <Label htmlFor="login-email" className="text-secondary-foreground/60 text-xs font-medium">{t("auth.login.email")}</Label>
+      <form onSubmit={handleSubmit} className="space-y-4">
+        <div className="space-y-2">
+          <Label htmlFor="login-email" className="text-secondary-foreground/70 text-sm">{t("auth.login.email")}</Label>
           <div className="relative">
-            <Mail className="absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-secondary-foreground/25" />
+            <Mail className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-secondary-foreground/30" />
             <Input
               id="login-email"
               type="email"
@@ -91,37 +92,37 @@ export function LoginForm({ onSwitchToRegister }: LoginFormProps) {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
-              className="pl-10 bg-secondary-foreground/[0.03] border-primary/10 text-secondary-foreground placeholder:text-secondary-foreground/20 focus:border-primary/30 focus:ring-1 focus:ring-primary/15 h-11 rounded-xl transition-colors"
+              className="pl-10 bg-secondary-foreground/5 border-primary/15 text-secondary-foreground placeholder:text-secondary-foreground/25 focus:border-primary/40 focus:ring-primary/20 h-12 rounded-xl"
             />
           </div>
         </div>
-        <div className="space-y-1.5">
+        <div className="space-y-2">
           <div className="flex items-center justify-between">
-            <Label htmlFor="login-password" className="text-secondary-foreground/60 text-xs font-medium">{t("auth.login.password")}</Label>
-            <Link to="/forgot-password" className="text-[11px] text-primary/60 hover:text-primary transition-colors">
-              Forgot password?
+            <Label htmlFor="login-password" className="text-secondary-foreground/70 text-sm">{t("auth.login.password")}</Label>
+            <Link to="/forgot-password" className="text-xs text-primary/80 hover:text-primary hover:underline">
+              {t("auth.login.forgotPassword")}
             </Link>
           </div>
           <div className="relative">
-            <Lock className="absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-secondary-foreground/25" />
+            <Lock className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-secondary-foreground/30" />
             <Input
               id="login-password"
               type="password"
-              placeholder="••••••••"
+              placeholder={t("auth.login.passwordPlaceholder")}
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required
-              className="pl-10 bg-secondary-foreground/[0.03] border-primary/10 text-secondary-foreground placeholder:text-secondary-foreground/20 focus:border-primary/30 focus:ring-1 focus:ring-primary/15 h-11 rounded-xl transition-colors"
+              className="pl-10 bg-secondary-foreground/5 border-primary/15 text-secondary-foreground placeholder:text-secondary-foreground/25 focus:border-primary/40 focus:ring-primary/20 h-12 rounded-xl"
             />
           </div>
         </div>
 
         <Button
           type="submit"
-          className="w-full bg-primary hover:bg-primary/90 text-primary-foreground font-bold h-11 rounded-xl shadow-md shadow-primary/15 hover:shadow-primary/25 transition-all mt-1"
+          className="w-full bg-primary hover:bg-primary/90 text-primary-foreground font-semibold h-12 rounded-xl"
           disabled={loading}
         >
-          {loading ? <><Loader2 className="mr-2 h-4 w-4 animate-spin" /> Signing in...</> : "Sign In"}
+          {loading ? <><Loader2 className="mr-2 h-4 w-4 animate-spin" /> Signing in...</> : t("auth.login.signIn")}
         </Button>
       </form>
 
