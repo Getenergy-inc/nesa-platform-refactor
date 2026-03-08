@@ -1,5 +1,5 @@
 // NESA-Africa Landing Page Feature
-// Focused 6-block conversion funnel with lazy loading
+// Full conversion funnel with lazy loading
 
 import { lazy } from "react";
 
@@ -25,6 +25,29 @@ const InteractiveAfricaMap = lazy(() => import("@/components/nesa/InteractiveAfr
 const UpcomingEventsSection = lazy(() => import("@/components/nesa/UpcomingEventsSection").then(m => ({ default: m.UpcomingEventsSection })));
 const PromoVideosSection = lazy(() => import("@/components/nesa/PromoVideosSection").then(m => ({ default: m.PromoVideosSection })));
 const MediaShowcaseSection = lazy(() => import("@/components/nesa/MediaShowcaseSection").then(m => ({ default: m.MediaShowcaseSection })));
+
+// Key CTAs
+const HowItWorksSection = lazy(() => import("@/components/nesa/HowItWorksSection").then(m => ({ default: m.HowItWorksSection })));
+const NominationPathSection = lazy(() => import("@/components/nesa/NominationPathSection").then(m => ({ default: m.NominationPathSection })));
+const VoteWithAGCSection = lazy(() => import("@/components/nesa/VoteWithAGCSection").then(m => ({ default: m.VoteWithAGCSection })));
+const WhatsNewSection = lazy(() => import("@/components/nesa/WhatsNewSection").then(m => ({ default: m.WhatsNewSection })));
+const GetInvolvedSection = lazy(() => import("@/components/nesa/GetInvolvedSection").then(m => ({ default: m.GetInvolvedSection })));
+const FinalCTASection = lazy(() => import("@/components/nesa/FinalCTASection").then(m => ({ default: m.FinalCTASection })));
+
+// Storytelling
+const CVOMessageSection = lazy(() => import("@/components/nesa/CVOMessageSection").then(m => ({ default: m.CVOMessageSection })));
+const Vision2035Section = lazy(() => import("@/components/nesa/Vision2035Section").then(m => ({ default: m.Vision2035Section })));
+const VisionDocumentSection = lazy(() => import("@/components/nesa/VisionDocumentSection").then(m => ({ default: m.VisionDocumentSection })));
+const TimelineSection = lazy(() => import("@/components/nesa/TimelineSection").then(m => ({ default: m.TimelineSection })));
+const ProgrammeOverviewSection = lazy(() => import("@/components/nesa/ProgrammeOverviewSection").then(m => ({ default: m.ProgrammeOverviewSection })));
+
+// Awards detail
+const AwardPhasesSection = lazy(() => import("@/components/nesa/AwardPhasesSection").then(m => ({ default: m.AwardPhasesSection })));
+const Phase1Section = lazy(() => import("@/components/nesa/Phase1Section").then(m => ({ default: m.Phase1Section })));
+const GoldCertificateSection = lazy(() => import("@/components/nesa/GoldCertificateSection").then(m => ({ default: m.GoldCertificateSection })));
+const GoldSpecialRecognitionSection = lazy(() => import("@/components/nesa/GoldSpecialRecognitionSection").then(m => ({ default: m.GoldSpecialRecognitionSection })));
+const FirewallsSection = lazy(() => import("@/components/nesa/FirewallsSection").then(m => ({ default: m.FirewallsSection })));
+const IntegritySection = lazy(() => import("@/components/nesa/IntegritySection").then(m => ({ default: m.IntegritySection })));
 
 export function NESALandingPage() {
   const { currentEdition } = useSeason();
@@ -60,35 +83,120 @@ export function NESALandingPage() {
         
         {/* ═══ 4. Countdown ═══ */}
         <CountdownSection />
-        
-        {/* ═══ 5. Award Categories ═══ */}
+
+        {/* ═══ 5. What's New ═══ */}
+        <LazySection>
+          <WhatsNewSection />
+        </LazySection>
+
+        {/* ═══ 6. How It Works ═══ */}
+        <LazySection>
+          <HowItWorksSection />
+        </LazySection>
+
+        {/* ═══ 7. Award Categories ═══ */}
         <LazySection>
           <CategoriesSection />
         </LazySection>
-        
-        {/* ═══ 6. Interactive Africa Map ═══ */}
+
+        {/* ═══ 8. Award Phases ═══ */}
+        <LazySection>
+          <AwardPhasesSection />
+        </LazySection>
+
+        {/* ═══ 9. Phase 1 — Nominations ═══ */}
+        <LazySection>
+          <Phase1Section />
+        </LazySection>
+
+        {/* ═══ 10. Nomination Path ═══ */}
+        <LazySection>
+          <NominationPathSection />
+        </LazySection>
+
+        {/* ═══ 11. Gold Special Recognition ═══ */}
+        <LazySection>
+          <GoldSpecialRecognitionSection />
+        </LazySection>
+
+        {/* ═══ 12. Gold Certificate ═══ */}
+        <LazySection>
+          <GoldCertificateSection />
+        </LazySection>
+
+        {/* ═══ 13. Vote with AGC ═══ */}
+        <LazySection>
+          <VoteWithAGCSection />
+        </LazySection>
+
+        {/* ═══ 14. Firewalls ═══ */}
+        <LazySection>
+          <FirewallsSection />
+        </LazySection>
+
+        {/* ═══ 15. Integrity ═══ */}
+        <LazySection>
+          <IntegritySection />
+        </LazySection>
+
+        {/* ═══ 16. Interactive Africa Map ═══ */}
         <LazySection>
           <InteractiveAfricaMap />
         </LazySection>
-        
-        {/* ═══ 7. Upcoming Events ═══ */}
+
+        {/* ═══ 17. Timeline ═══ */}
+        <LazySection>
+          <TimelineSection />
+        </LazySection>
+
+        {/* ═══ 18. Programme Overview ═══ */}
+        <LazySection>
+          <ProgrammeOverviewSection />
+        </LazySection>
+
+        {/* ═══ 19. Upcoming Events ═══ */}
         <LazySection>
           <UpcomingEventsSection />
         </LazySection>
-        
-        {/* ═══ 8. Promo Videos ═══ */}
+
+        {/* ═══ 20. CVO Message ═══ */}
+        <LazySection>
+          <CVOMessageSection />
+        </LazySection>
+
+        {/* ═══ 21. Vision 2035 ═══ */}
+        <LazySection>
+          <Vision2035Section />
+        </LazySection>
+
+        {/* ═══ 22. Vision Document ═══ */}
+        <LazySection>
+          <VisionDocumentSection />
+        </LazySection>
+
+        {/* ═══ 23. Promo Videos ═══ */}
         <LazySection>
           <PromoVideosSection />
         </LazySection>
-        
-        {/* ═══ 8b. Watch, Listen & Engage ═══ */}
+
+        {/* ═══ 24. Watch, Listen & Engage ═══ */}
         <LazySection>
           <MediaShowcaseSection />
         </LazySection>
-        
-        {/* ═══ 9. Sponsors ═══ */}
+
+        {/* ═══ 25. Get Involved ═══ */}
+        <LazySection>
+          <GetInvolvedSection />
+        </LazySection>
+
+        {/* ═══ 26. Sponsors ═══ */}
         <LazySection>
           <SponsorsSection />
+        </LazySection>
+
+        {/* ═══ 27. Final CTA ═══ */}
+        <LazySection>
+          <FinalCTASection />
         </LazySection>
         
         <NESAFooter />
