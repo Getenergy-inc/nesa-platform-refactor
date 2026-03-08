@@ -494,7 +494,7 @@ export default function Nominate() {
               <BreadcrumbList>
                 <BreadcrumbItem>
                   <BreadcrumbLink asChild>
-                    <Link to="/" className="flex items-center gap-1 text-muted-foreground hover:text-foreground">
+                    <Link to="/" className="flex items-center gap-1 text-white/50 hover:text-gold">
                       <Home className="h-3.5 w-3.5" />
                       Home
                     </Link>
