@@ -261,7 +261,8 @@ const App = () => (
                 <Route path="/orders/:id" element={<WithLayout><OrderConfirmation /></WithLayout>} />
                 <Route path="/bulk-orders" element={<WithLayout><BulkOrders /></WithLayout>} />
                 
-                {/* Auth - standalone layout (dark branded) */}
+                {/* Auth - unified auth page */}
+                <Route path="/auth" element={<AuthPage />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/register" element={<Register />} />
                 <Route path="/forgot-password" element={<ForgotPassword />} />
