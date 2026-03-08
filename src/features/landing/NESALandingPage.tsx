@@ -57,11 +57,14 @@ export function NESALandingPage() {
         
         {/* ═══ 3. Quick Actions ═══ */}
         <QuickActionBar />
+
+        {/* ═══ 4. NOMINEE SHOWCASE — Primary Discovery ═══ */}
+        <LandingNomineeShowcase />
         
-        {/* ═══ 4. Countdown ═══ */}
+        {/* ═══ 5. Countdown ═══ */}
         <CountdownSection />
         
-        {/* ═══ 5. Award Categories ═══ */}
+        {/* ═══ 6. Award Categories ═══ */}
         <LazySection>
           <CategoriesSection />
         </LazySection>
