@@ -135,7 +135,7 @@ export function TrophyHeroSection() {
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.65 }}
-              className="flex flex-col sm:flex-row gap-3 justify-center lg:justify-start mb-6"
+              className="flex flex-col sm:flex-row gap-3 justify-center lg:justify-start mb-4"
             >
               <Link to="/nominate">
                 <motion.div
@@ -152,11 +152,40 @@ export function TrophyHeroSection() {
                   </Button>
                 </motion.div>
               </Link>
-              <Link to="/vote-with-agc">
+              <a href="#nominees">
                 <Button
                   size="lg"
                   variant="outline"
                   className="w-full sm:w-auto border-gold/50 text-gold hover:bg-gold/10 hover:border-gold rounded-full px-8 gap-2 h-13 text-base transition-all"
+                >
+                  <Users className="h-5 w-5" />
+                  Explore Nominees
+                </Button>
+              </a>
+            </motion.div>
+
+            {/* Secondary CTAs */}
+            <motion.div
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.72 }}
+              className="flex flex-wrap gap-3 justify-center lg:justify-start mb-6"
+            >
+              <Link to="/nominees">
+                <Button
+                  size="sm"
+                  variant="ghost"
+                  className="text-gold/70 hover:text-gold hover:bg-gold/10 rounded-full px-5 gap-1.5 text-sm"
+                >
+                  <RotateCcw className="h-4 w-4" />
+                  Re-Nominate
+                </Button>
+              </Link>
+              <Link to="/vote-with-agc">
+                <Button
+                  size="sm"
+                  variant="ghost"
+                  className="text-gold/70 hover:text-gold hover:bg-gold/10 rounded-full px-5 gap-1.5 text-sm"
                 >
                   {t("landing.trophyHero.voteWithAGC")}
                 </Button>
