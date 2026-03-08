@@ -123,7 +123,7 @@ export default function Wallet() {
   }
 
   return (
-    <DashboardLayout>
+    <InstitutionalDashboardLayout title="My Wallet" breadcrumbs={[{ label: "Wallet" }]}>
       <Helmet>
         <title>My Wallet | NESA-Africa</title>
         <meta name="description" content="View your AGC balance and transaction history." />
