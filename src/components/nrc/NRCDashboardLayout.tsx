@@ -50,6 +50,7 @@ const SIDEBAR_SECTIONS = [
   {
     label: "Standards",
     items: [
+      { href: "/nrc/dashboard/edi-analytics", label: "EDI Analytics", icon: TrendingUp },
       { href: "/guidelines/edi-matrix", label: "EDI Matrix", icon: Shield },
       { href: "/nrc/dashboard/guidelines", label: "NRC Guidelines", icon: BookOpen },
     ],
