@@ -36,6 +36,9 @@ import CategoryDetail from "./pages/CategoryDetail";
 import NomineeAccept from "./pages/NomineeAccept";
 import NomineeDecline from "./pages/NomineeDecline";
 import NomineeDashboard from "./pages/nominee/NomineeDashboard";
+import NotificationsPage from "./pages/dashboard/Notifications";
+import ProfilePage from "./pages/dashboard/Profile";
+import SettingsPage from "./pages/dashboard/Settings";
 
 // About Pages
 import About from "./pages/about/About";
