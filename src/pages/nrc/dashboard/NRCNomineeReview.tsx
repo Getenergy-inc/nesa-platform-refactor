@@ -170,7 +170,7 @@ function ReviewContent() {
                 </CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
-                <p className="text-sm text-muted-foreground leading-relaxed">{story.narrative}</p>
+                <p className="text-sm text-muted-foreground leading-relaxed">{story.contributionNarrative.paragraphs.join(" ")}</p>
                 <Separator />
                 <div>
                   <h4 className="text-xs font-semibold mb-2">Key Impact Highlights</h4>
