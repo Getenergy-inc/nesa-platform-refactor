@@ -131,6 +131,7 @@ import { OLCDashboard, OLCMembers, OLCSettlements, OLCWallet } from "./pages/olc
 
 // NRC Portal Pages
 import { NRCPortal, NRCMyQueue, NRCMembers as NRCMembersPage, NRCSettings, NRCScoringDashboard } from "./pages/nrc";
+import { NRCDashboardHome, NRCNomineeTable, NRCNomineeReview, NRCReports, NRCFlaggedCases, NRCMyReviews } from "./pages/nrc/dashboard";
 
 // Admin Pages
 import { AdminDashboard, AdminOrders, AdminImpact, AdminNomineeImages, AdminNomineeProfiles, AdminVotingGovernance, AdminRebuild, AdminEDXAnalytics } from "./pages/admin";
@@ -311,12 +312,25 @@ const App = () => (
                 <Route path="/region/nigeria" element={<WithLayout><NigeriaChapterTrack /></WithLayout>} />
                 <Route path="/region/:slug" element={<RegionHubPage />} />
                 
-                {/* NRC Portal Routes */}
+                {/* NRC Portal Routes (Legacy) */}
                 <Route path="/nrc" element={<NRCPortal />} />
                 <Route path="/nrc/my-queue" element={<NRCMyQueue />} />
                 <Route path="/nrc/members" element={<NRCMembersPage />} />
                 <Route path="/nrc/settings" element={<NRCSettings />} />
                 <Route path="/nrc/scoring" element={<NRCScoringDashboard />} />
+                
+                {/* NRC Dashboard Routes (New Professional Dashboard) */}
+                <Route path="/nrc/dashboard" element={<NRCDashboardHome />} />
+                <Route path="/nrc/dashboard/nominees" element={<NRCNomineeTable />} />
+                <Route path="/nrc/dashboard/review/:id" element={<NRCNomineeReview />} />
+                <Route path="/nrc/dashboard/reports" element={<NRCReports />} />
+                <Route path="/nrc/dashboard/flagged" element={<NRCFlaggedCases />} />
+                <Route path="/nrc/dashboard/my-reviews" element={<NRCMyReviews />} />
+                <Route path="/nrc/dashboard/queue" element={<NRCNomineeTable />} />
+                <Route path="/nrc/dashboard/duplicates" element={<NRCFlaggedCases />} />
+                <Route path="/nrc/dashboard/guidelines" element={<NRCSettings />} />
+                <Route path="/nrc/dashboard/profile" element={<NRCSettings />} />
+                <Route path="/nrc/dashboard/settings" element={<NRCSettings />} />
                 
                 {/* OLC Coordinator Routes - use their own layout */}
                 <Route path="/olc/dashboard" element={<OLCDashboard />} />
