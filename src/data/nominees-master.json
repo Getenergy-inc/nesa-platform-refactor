@@ -3,80 +3,298 @@
     "source": "NESA_Award_Nominees_Master_List.xlsx",
     "importedAt": "2026-03-08",
     "totalNominees": 1703,
-    "season": "2024"
+    "totalCategories": 14,
+    "totalSubcategories": 132,
+    "season": "2025",
+    "archived2024": true
   },
   "categories": [
     {
       "slug": "diaspora-educational-impact",
       "name": "Diaspora Association Educational Impact in Africa",
       "pathway": "Diaspora",
-      "region": "N/A"
+      "region": "N/A",
+      "nominees": 30,
+      "subcategories": 3,
+      "subcategoryList": [
+        "The Best Diaspora-Led Educational Infrastructure",
+        "The Best Diaspora-Led Educational Program Innovation",
+        "The Best Diaspora-Led Teacher Training And Support Initiative"
+      ]
     },
     {
       "slug": "education-friendly-state-nigeria",
       "name": "Overall best educational friendly state in Nigeria 2024",
       "pathway": "Nigeria",
-      "region": "N/A"
+      "region": "N/A",
+      "nominees": 52,
+      "subcategories": 6,
+      "subcategoryList": [
+        "Best Education Initiative in North Central Zone",
+        "Best Education Initiative in North East Zone",
+        "Best Education Initiative in North West Zone",
+        "Best Education Initiative in South East Zone",
+        "Best Education Initiative in South West Zone",
+        "Best Education Initiative in South South Zone"
+      ]
     },
     {
       "slug": "csr-education-nigeria",
       "name": "The Overall Best CSR for Education in Nigeria Award 2024",
       "pathway": "Nigeria",
-      "region": "N/A"
+      "region": "N/A",
+      "nominees": 302,
+      "subcategories": 25,
+      "subcategoryList": [
+        "Oil And Gas CSR in Education Award",
+        "Banking And Finance CSR in Education Award",
+        "Telecommunications CSR in Education Award",
+        "Technology And ICT CSR in Education Award",
+        "Food And Beverages CSR in Education Award",
+        "Manufacturing CSR in Education Award",
+        "Insurance CSR in Education Award",
+        "Social Media Influencer CSR For Education",
+        "Fintech CSR in Education Award",
+        "Agriculture And Agribusiness CSR In Education Award",
+        "Health Care And Hospitals CSR In Education Award",
+        "Professional Services CSR In Education Award",
+        "Hotels CSR in Education Award",
+        "Pharmaceuticals CSR in Education Award",
+        "Aviation CSR in Education Award",
+        "Real Estate And Construction CSR in Education Award",
+        "Retail And E-Commerce CSR in Education Award",
+        "Microfinance Banks CSR in Education Award",
+        "Emerging Telecommunications CSR in Education Award",
+        "Conglomerates And Diversified Businesses CSR in Education Award",
+        "Technology and Software CSR in Education Award",
+        "Real Estate Development CSR in Education Award",
+        "Commercial Retail CSR in Education Award",
+        "Hotels CSR in Education Award 2022-2024 in Nigeria",
+        "Logistics And Transportation CSR in Education Award"
+      ]
     },
     {
       "slug": "csr-education-africa-regional",
       "name": "Best Africa Regional Companies CSR for Education Special Recognition Award in Africa 2024",
       "pathway": "Africa",
-      "region": "Multiple"
+      "region": "Multiple",
+      "nominees": 453,
+      "subcategories": 35,
+      "subcategoryList": [
+        "Best Banking and Finance CSR in Education in North Africa",
+        "Best Banking and Finance CSR in Education in East Africa",
+        "Best Banking and Finance CSR in Education in West Africa",
+        "Best Banking and Finance CSR in Education in Southern Africa",
+        "Best Banking and Finance CSR in Education in Central Africa",
+        "Best Telecommunications CSR in Education in West Africa",
+        "Best Telecommunications CSR in Education in East Africa",
+        "Best Technology and ICT CSR in Education in North Africa",
+        "Best Technology and ICT CSR in Education in West Africa",
+        "Best Technology and ICT CSR in Education in East Africa",
+        "Best Technology and ICT CSR in Education in Southern Africa",
+        "Best Technology and ICT CSR in Education in Central Africa",
+        "Agriculture And Agribusiness CSR in Education in East Africa",
+        "Agriculture And Agribusiness CSR in Education in Central Africa",
+        "Manufacturing And Industrial CSR in Education",
+        "Manufacturing And Industrial CSR in Education in Central Africa",
+        "Social Media Influencer CSR For Education in West Africa",
+        "Social Media Influencer CSR For Education in Central Africa",
+        "Social Media Influencer CSR For Education in East Africa",
+        "African International Sports Stars CSR For Education in East Africa",
+        "African International Sports Stars CSR For Education in West Africa",
+        "African International Sports Stars CSR For Education in North Africa"
+      ]
     },
     {
-      "slug": "ngo-education-nigeria",
-      "name": "The Overall Best NGO Contribution to education in Nigeria Award 2024",
-      "pathway": "Nigeria",
-      "region": "N/A"
+      "slug": "ngo-education-africa",
+      "name": "Best NGO Education Support Recognition Award (Africa-Regional)",
+      "pathway": "Africa",
+      "region": "Multiple",
+      "nominees": 70,
+      "subcategories": 5,
+      "subcategoryList": [
+        "Best Educational Infrastructure Initiative By An NGO",
+        "Exceptional Donation Of Educational Materials By An NGO",
+        "Outstanding Donation Of Education Aid By NGO",
+        "Youth Empowerment Through Educational Services By An NGO In Nigeria",
+        "Women And Girls' Empowerment In Education By An NGO In Nigeria"
+      ]
+    },
+    {
+      "slug": "edutech-organization",
+      "name": "Best EduTech Organization in Nigeria and Africa 2024",
+      "pathway": "Africa",
+      "region": "Multiple",
+      "nominees": 150,
+      "subcategories": 15,
+      "subcategoryList": [
+        "Best EduTech Startup in North Africa",
+        "Best EduTech Startup in West Africa",
+        "Best EduTech Startup in East Africa",
+        "Best EduTech Startup in South Africa",
+        "Best EduTech Startup in Central Africa",
+        "Best EduTech Established Company in North Africa",
+        "Best EduTech Established Company in West Africa",
+        "Best EduTech Established Company in East Africa",
+        "Best EduTech Established Company in South Africa",
+        "Best EduTech Established Company in Central Africa",
+        "Best EduTech Social Impact Initiative in North Africa",
+        "Best EduTech Social Impact Initiative in West Africa",
+        "Best EduTech Social Impact Initiative in East Africa",
+        "Best EduTech Social Impact Initiative in South Africa",
+        "Best EduTech Social Impact Initiative in Central Africa"
+      ]
     },
     {
       "slug": "library-tertiary-nigeria",
       "name": "The best library in Nigerian tertiary institutions award 2024",
       "pathway": "Nigeria",
-      "region": "N/A"
+      "region": "N/A",
+      "nominees": 28,
+      "subcategories": 4,
+      "subcategoryList": [
+        "Best University Library in Nigeria (Public)",
+        "Best University Library in Nigeria (Private)",
+        "Best Polytechnic Library in Nigeria",
+        "Best College of Nursing Library in Nigeria (Public)"
+      ]
     },
     {
       "slug": "research-development-nigeria",
-      "name": "The Overall Best Research and Development Contribution by Research Institutes in Achieving Education for all.",
+      "name": "The Overall Best Research and Development Contribution by Research Institutes",
       "pathway": "Nigeria",
-      "region": "N/A"
+      "region": "N/A",
+      "nominees": 20,
+      "subcategories": 5,
+      "subcategoryList": [
+        "Best Agricultural Research Institute in Nigeria",
+        "Best Health Research Institute in Nigeria",
+        "Best Technology Research Institute in Nigeria",
+        "Best Social Science Research Institute in Nigeria",
+        "Best Environmental Research Institute in Nigeria"
+      ]
     },
     {
       "slug": "media-advocacy-nigeria",
       "name": "Best Media and advocacy for education in Nigeria 2024",
       "pathway": "Nigeria",
-      "region": "N/A"
+      "region": "N/A",
+      "nominees": 30,
+      "subcategories": 6,
+      "subcategoryList": [
+        "Best Education-Focused TV Program",
+        "Best Education-Focused Radio Program",
+        "Best Education-Focused Print Media",
+        "Best Education-Focused Online Media",
+        "Best Education-Focused Documentary",
+        "Best Education Advocacy Campaign"
+      ]
     },
     {
       "slug": "christian-education-nigeria",
       "name": "Christian faith organization Educational Champion of the Decade Award",
       "pathway": "Nigeria",
-      "region": "N/A"
+      "region": "N/A",
+      "nominees": 42,
+      "subcategories": 4,
+      "subcategoryList": [
+        "Best Scholarship Program by a Christian Organization",
+        "Best Educational Infrastructure Development By A Christian Organization",
+        "Best Advocacy for Educational Reforms",
+        "Best Holistic Educational Support By A Christian Organization"
+      ]
     },
     {
       "slug": "islamic-education-nigeria",
       "name": "Islamic faith organization Educational Champion of the Decade Award",
       "pathway": "Nigeria",
-      "region": "N/A"
+      "region": "N/A",
+      "nominees": 40,
+      "subcategories": 4,
+      "subcategoryList": [
+        "Best Educational Infrastructure Development by an Islamic Organization",
+        "Best Scholarship Program by an Islamic Organization",
+        "Best Holistic Educational Support by an Islamic Organization",
+        "Best Advocacy for Educational Reforms by an Islamic Organization"
+      ]
+    },
+    {
+      "slug": "political-leaders-nigeria",
+      "name": "Political Leaders in Nigeria 2024 Recognition Award for the Best Educational Support Services",
+      "pathway": "Nigeria",
+      "region": "N/A",
+      "nominees": 71,
+      "subcategories": 3,
+      "subcategoryList": [
+        "Outstanding Scholarship Program for Both Vocational and Formal Education by a Politician",
+        "Exemplary Infrastructure Development and Donations for Education by a Politician",
+        "Advocacy and Policy Development for Education by a Politician"
+      ]
     },
     {
       "slug": "creative-arts-nigeria",
       "name": "Creative Arts Industry Contribution to Education in Nigeria 2024",
       "pathway": "Nigeria",
-      "region": "N/A"
+      "region": "N/A",
+      "nominees": 82,
+      "subcategories": 7,
+      "subcategoryList": [
+        "Best Music for Educational Impact Award",
+        "Best Film and Media for Educational Advancement Award",
+        "Best Nollywood Production and Artiste for Educational Content Award",
+        "Best Literature and Art Works for Education Award",
+        "Best Visual Arts and Educational Impact Award",
+        "Best Creative Advocacy and Educational Campaigns Award",
+        "Best Dance and Performing Arts for Education Award"
+      ]
     },
     {
       "slug": "stem-education-africa",
       "name": "Best STEM Education Program or Project (Africa-Regional)",
       "pathway": "Africa",
-      "region": "Multiple"
+      "region": "Multiple",
+      "nominees": 283,
+      "subcategories": 15,
+      "subcategoryList": [
+        "The Best Innovative STEM Curriculum Development (North Africa)",
+        "The Best Innovative STEM Curriculum Development (West Africa)",
+        "The Best Innovative STEM Curriculum Development (East Africa)",
+        "The Best Innovative STEM Curriculum Development (South Africa)",
+        "The Best Innovative STEM Curriculum Development (Central Africa)",
+        "The Best STEM Outreach and Community Engagement (North Africa)",
+        "The Best STEM Outreach and Community Engagement (West Africa)",
+        "The Best STEM Outreach and Community Engagement (East Africa)",
+        "The Best STEM Outreach and Community Engagement (South Africa)",
+        "The Best STEM Outreach and Community Engagement (Central Africa)",
+        "The Best Technology Integration in STEM Education (North Africa)",
+        "The Best Technology Integration in STEM Education (West Africa)",
+        "The Best Technology Integration in STEM Education (East Africa)",
+        "The Best Technology Integration in STEM Education (South Africa)",
+        "The Best Technology Integration in STEM Education (Central Africa)"
+      ]
+    }
+  ],
+  "goldSpecialRecognition": [
+    {
+      "slug": "social-media-influencer-csr",
+      "name": "Social Media Influencer CSR For Education",
+      "nominees": 40,
+      "description": "Social media personalities advocating for education across Africa",
+      "parentCategories": ["csr-education-nigeria", "csr-education-africa-regional"]
+    },
+    {
+      "slug": "african-sports-stars-csr",
+      "name": "African International Sports Stars CSR For Education",
+      "nominees": 20,
+      "description": "African sports icons contributing to education through foundations",
+      "parentCategories": ["csr-education-africa-regional"]
+    },
+    {
+      "slug": "music-industry-education",
+      "name": "Music Industry Contribution to Education",
+      "nominees": 15,
+      "description": "Musicians and music industry professionals promoting education",
+      "parentCategories": ["creative-arts-nigeria", "csr-education-africa-regional"]
     }
   ]
 }
