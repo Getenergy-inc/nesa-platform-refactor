@@ -58,8 +58,8 @@ export function NESALandingPage() {
         {/* ═══ 3. Quick Actions ═══ */}
         <QuickActionBar />
 
-        {/* ═══ 4. NOMINEE SHOWCASE — Primary Discovery ═══ */}
-        <LandingNomineeShowcase />
+        {/* ═══ 4. CATEGORY EXPLORER — Lightweight Discovery ═══ */}
+        <LandingCategoryExplorer />
         
         {/* ═══ 5. Countdown ═══ */}
         <CountdownSection />
