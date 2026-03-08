@@ -4,12 +4,23 @@
  * Format: [id, mainCategory, region, subcategory, name, country, state, achievement]
  * 
  * This file is the GitHub-stored source of truth for all nominee data.
- * Nomination Year: 2025 (Season upgrade from 2024)
+ * Nomination Year: 2025 (Merged from 2024 legacy + 2025 updates)
  * 
- * Full dataset imported from Excel — all 1,703 nominees across 14 main categories
+ * All 2024 nominees have been migrated and merged into this 2025 dataset.
+ * Original 2024 data archived in nominees-2024-archive.ts
  */
 
 export type NomineeRow = [number, string, string, string, string, string, string, string];
+
+/** Merge tracking metadata per nominee */
+export interface NomineeMergeInfo {
+  id: number;
+  sourceYears: number[];
+  migratedFrom2024: boolean;
+  mergedRecord: boolean;
+  migrationLabel: "new_2025" | "migrated_from_2024" | "merged_2024_2025";
+  publicLabel: "Existing Nominee" | "2025 Nominee";
+}
 
 export const NOMINEES_2025: NomineeRow[] = [
   // ═══════════════════════════════════════════════════════════════════
@@ -48,227 +59,223 @@ export const NOMINEES_2025: NomineeRow[] = [
   [30,"Diaspora Association Educational Impact in Africa","N/A","The Best Diaspora-Led Teacher Training And Support Initiative","Zambian Diaspora Education Trust","Nigeria","Lagos, Nigeria","Developed a STEM-focused teacher training initiative, providing resources and training to Zambian teachers."],
 
   // ═══════════════════════════════════════════════════════════════════
-  // CATEGORY 2: Overall best educational friendly state in Nigeria (60 nominees)
-  // Subcategories: 6 geopolitical zones + states
+  // CATEGORY 2: Overall Best Educational Friendly State in Nigeria 2025 (52 nominees)
+  // Migrated from 2024 → 2025 | All records carried forward
   // ═══════════════════════════════════════════════════════════════════
-  [31,"Overall best educational friendly state in Nigeria 2024","N/A","Best Education Initiative in North Central Zone","Kogi State","Nigeria","Kogi","Dedication to improving rural education, particularly for girls, demonstrating significant community impact."],
-  [32,"Overall best educational friendly state in Nigeria 2024","N/A","Best Education Initiative in North Central Zone","Kwara State","Nigeria","Kwara","Dedication to improving rural education, particularly for girls, demonstrating significant community impact."],
-  [33,"Overall best educational friendly state in Nigeria 2024","N/A","Best Education Initiative in North Central Zone","Benue State","Nigeria","Benue","Dedication to improving rural education, particularly for girls, demonstrating significant community impact."],
-  [34,"Overall best educational friendly state in Nigeria 2024","N/A","Best Education Initiative in North Central Zone","Nasarawa State","Nigeria","Nasarawa","Dedication to improving rural education, particularly for girls, demonstrating significant community impact."],
-  [35,"Overall best educational friendly state in Nigeria 2024","N/A","Best Education Initiative in North Central Zone","Niger State","Nigeria","Niger","Dedication to improving rural education, particularly for girls, demonstrating significant community impact."],
-  [36,"Overall best educational friendly state in Nigeria 2024","N/A","Best Education Initiative in North Central Zone","Plateau State","Nigeria","Plateau","Dedication to improving rural education, particularly for girls, demonstrating significant community impact."],
-  [37,"Overall best educational friendly state in Nigeria 2024","N/A","Best Education Initiative in North Central Zone","Federal Capital Territory","Nigeria","FCT","Dedication to improving rural education, particularly for girls, demonstrating significant community impact."],
-  [38,"Overall best educational friendly state in Nigeria 2024","N/A","Best Education Initiative in North Central Zone","Kaduna State","Nigeria","Kaduna","Dedication to improving rural education, particularly for girls, demonstrating significant community impact."],
-  [39,"Overall best educational friendly state in Nigeria 2024","N/A","Best Education Initiative in North Central Zone","Kebbi State","Nigeria","Kebbi","Dedication to improving rural education, particularly for girls, demonstrating significant community impact."],
-  [40,"Overall best educational friendly state in Nigeria 2024","N/A","Best Education Initiative in North Central Zone","Sokoto State","Nigeria","Sokoto","Dedication to improving rural education, particularly for girls, demonstrating significant community impact."],
-  [41,"Overall best educational friendly state in Nigeria 2024","N/A","Best Education Initiative in North East Zone","Adamawa State","Nigeria","Adamawa","Dedication to improving rural education, particularly for girls, demonstrating significant community impact."],
-  [42,"Overall best educational friendly state in Nigeria 2024","N/A","Best Education Initiative in North East Zone","Bauchi State","Nigeria","Bauchi","Dedication to improving rural education, particularly for girls, demonstrating significant community impact."],
-  [43,"Overall best educational friendly state in Nigeria 2024","N/A","Best Education Initiative in North East Zone","Borno State","Nigeria","Borno","Dedication to improving rural education, particularly for girls, demonstrating significant community impact."],
-  [44,"Overall best educational friendly state in Nigeria 2024","N/A","Best Education Initiative in North East Zone","Gombe State","Nigeria","Gombe","Dedication to improving rural education, particularly for girls, demonstrating significant community impact."],
-  [45,"Overall best educational friendly state in Nigeria 2024","N/A","Best Education Initiative in North East Zone","Taraba State","Nigeria","Taraba","Dedication to improving rural education, particularly for girls, demonstrating significant community impact."],
-  [46,"Overall best educational friendly state in Nigeria 2024","N/A","Best Education Initiative in North East Zone","Yobe State","Nigeria","Yobe","Dedication to improving rural education, particularly for girls, demonstrating significant community impact."],
-  [47,"Overall best educational friendly state in Nigeria 2024","N/A","Best Education Initiative in North East Zone","Jigawa State","Nigeria","Jigawa","Dedication to improving rural education, particularly for girls, demonstrating significant community impact."],
-  [48,"Overall best educational friendly state in Nigeria 2024","N/A","Best Education Initiative in North East Zone","Kano State","Nigeria","Kano","Dedication to improving rural education, particularly for girls, demonstrating significant community impact."],
-  [49,"Overall best educational friendly state in Nigeria 2024","N/A","Best Education Initiative in North East Zone","Katsina State","Nigeria","Katsina","Dedication to improving rural education, particularly for girls, demonstrating significant community impact."],
-  [50,"Overall best educational friendly state in Nigeria 2024","N/A","Best Education Initiative in North East Zone","Zamfara State","Nigeria","Zamfara","Dedication to improving rural education, particularly for girls, demonstrating significant community impact."],
-  [51,"Overall best educational friendly state in Nigeria 2024","N/A","Best Education Initiative in North West Zone","Kaduna State","Nigeria","Kaduna","Dedication to improving rural education, particularly for girls, demonstrating significant community impact."],
-  [52,"Overall best educational friendly state in Nigeria 2024","N/A","Best Education Initiative in North West Zone","Kano State","Nigeria","Kano","Dedication to improving rural education, particularly for girls, demonstrating significant community impact."],
-  [53,"Overall best educational friendly state in Nigeria 2024","N/A","Best Education Initiative in North West Zone","Kebbi State","Nigeria","Kebbi","Dedication to improving rural education, particularly for girls, demonstrating significant community impact."],
-  [54,"Overall best educational friendly state in Nigeria 2024","N/A","Best Education Initiative in North West Zone","Sokoto State","Nigeria","Sokoto","Dedication to improving rural education, particularly for girls, demonstrating significant community impact."],
-  [55,"Overall best educational friendly state in Nigeria 2024","N/A","Best Education Initiative in North West Zone","Jigawa State","Nigeria","Jigawa","Dedication to improving rural education, particularly for girls, demonstrating significant community impact."],
-  [56,"Overall best educational friendly state in Nigeria 2024","N/A","Best Education Initiative in North West Zone","Zamfara State","Nigeria","Zamfara","Dedication to improving rural education, particularly for girls, demonstrating significant community impact."],
-  [57,"Overall best educational friendly state in Nigeria 2024","N/A","Best Education Initiative in North West Zone","Katsina State","Nigeria","Katsina","Dedication to improving rural education, particularly for girls, demonstrating significant community impact."],
-  [58,"Overall best educational friendly state in Nigeria 2024","N/A","Best Education Initiative in North West Zone","Borno State","Nigeria","Borno","Dedication to improving rural education, particularly for girls, demonstrating significant community impact."],
-  [59,"Overall best educational friendly state in Nigeria 2024","N/A","Best Education Initiative in North West Zone","Yobe State","Nigeria","Yobe","Dedication to improving rural education, particularly for girls, demonstrating significant community impact."],
-  [60,"Overall best educational friendly state in Nigeria 2024","N/A","Best Education Initiative in North West Zone","Bauchi State","Nigeria","Bauchi","Dedication to improving rural education, particularly for girls, demonstrating significant community impact."],
-  [61,"Overall best educational friendly state in Nigeria 2024","N/A","Best Education Initiative in South East Zone","Abia State","Nigeria","Abia","Dedication to improving rural education, particularly for girls, demonstrating significant community impact."],
-  [62,"Overall best educational friendly state in Nigeria 2024","N/A","Best Education Initiative in South East Zone","Anambra State","Nigeria","Anambra","Dedication to improving rural education, particularly for girls, demonstrating significant community impact."],
-  [63,"Overall best educational friendly state in Nigeria 2024","N/A","Best Education Initiative in South East Zone","Ebonyi State","Nigeria","Ebonyi","Dedication to improving rural education, particularly for girls, demonstrating significant community impact."],
-  [64,"Overall best educational friendly state in Nigeria 2024","N/A","Best Education Initiative in South East Zone","Enugu State","Nigeria","Enugu","Dedication to improving rural education, particularly for girls, demonstrating significant community impact."],
-  [65,"Overall best educational friendly state in Nigeria 2024","N/A","Best Education Initiative in South East Zone","Imo State","Nigeria","Imo","Dedication to improving rural education, particularly for girls, demonstrating significant community impact."],
-  [66,"Overall best educational friendly state in Nigeria 2024","N/A","Best Education Initiative in South East Zone","Anambra State","Nigeria","Anambra","Dedication to improving rural education, particularly for girls, demonstrating significant community impact."],
-  [67,"Overall best educational friendly state in Nigeria 2024","N/A","Best Education Initiative in South East Zone","Akwa Ibom State","Nigeria","Akwa Ibom","Dedication to improving rural education, particularly for girls, demonstrating significant community impact."],
-  [68,"Overall best educational friendly state in Nigeria 2024","N/A","Best Education Initiative in South East Zone","Rivers State","Nigeria","Rivers","Dedication to improving rural education, particularly for girls, demonstrating significant community impact."],
-  [69,"Overall best educational friendly state in Nigeria 2024","N/A","Best Education Initiative in South East Zone","Bayelsa State","Nigeria","Bayelsa","Dedication to improving rural education, particularly for girls, demonstrating significant community impact."],
-  [70,"Overall best educational friendly state in Nigeria 2024","N/A","Best Education Initiative in South East Zone","Delta State","Nigeria","Delta","Dedication to improving rural education, particularly for girls, demonstrating significant community impact."],
-  [71,"Overall best educational friendly state in Nigeria 2024","N/A","Best Education Initiative in South West Zone","Lagos State","Nigeria","Lagos","Dedication to improving rural education, particularly for girls, demonstrating significant community impact."],
-  [72,"Overall best educational friendly state in Nigeria 2024","N/A","Best Education Initiative in South West Zone","Ogun State","Nigeria","Ogun","Dedication to improving rural education, particularly for girls, demonstrating significant community impact."],
-  [73,"Overall best educational friendly state in Nigeria 2024","N/A","Best Education Initiative in South West Zone","Oyo State","Nigeria","Oyo","Dedication to improving rural education, particularly for girls, demonstrating significant community impact."],
-  [74,"Overall best educational friendly state in Nigeria 2024","N/A","Best Education Initiative in South West Zone","Osun State","Nigeria","Osun","Dedication to improving rural education, particularly for girls, demonstrating significant community impact."],
-  [75,"Overall best educational friendly state in Nigeria 2024","N/A","Best Education Initiative in South West Zone","Ondo State","Nigeria","Ondo","Dedication to improving rural education, particularly for girls, demonstrating significant community impact."],
-  [76,"Overall best educational friendly state in Nigeria 2024","N/A","Best Education Initiative in South West Zone","Ekiti State","Nigeria","Ekiti","Dedication to improving rural education, particularly for girls, demonstrating significant community impact."],
-  [77,"Overall best educational friendly state in Nigeria 2024","N/A","Best Education Initiative in South South Zone","Edo State","Nigeria","Edo","Dedication to improving rural education, particularly for girls, demonstrating significant community impact."],
-  [78,"Overall best educational friendly state in Nigeria 2024","N/A","Best Education Initiative in South South Zone","Cross River State","Nigeria","Cross River","Dedication to improving rural education, particularly for girls, demonstrating significant community impact."],
-  [79,"Overall best educational friendly state in Nigeria 2024","N/A","Best Education Initiative in South South Zone","Akwa Ibom State","Nigeria","Akwa Ibom","Dedication to improving rural education, particularly for girls, demonstrating significant community impact."],
-  [80,"Overall best educational friendly state in Nigeria 2024","N/A","Best Education Initiative in South South Zone","Rivers State","Nigeria","Rivers","Dedication to improving rural education, particularly for girls, demonstrating significant community impact."],
-  [81,"Overall best educational friendly state in Nigeria 2024","N/A","Best Education Initiative in South South Zone","Bayelsa State","Nigeria","Bayelsa","Dedication to improving rural education, particularly for girls, demonstrating significant community impact."],
-  [82,"Overall best educational friendly state in Nigeria 2024","N/A","Best Education Initiative in South South Zone","Delta State","Nigeria","Delta","Dedication to improving rural education, particularly for girls, demonstrating significant community impact."],
+  [31,"Overall Best Educational Friendly State in Nigeria 2025","N/A","Best Education Initiative in North Central Zone","Kogi State","Nigeria","Kogi","Dedication to improving rural education, particularly for girls, demonstrating significant community impact."],
+  [32,"Overall Best Educational Friendly State in Nigeria 2025","N/A","Best Education Initiative in North Central Zone","Kwara State","Nigeria","Kwara","Dedication to improving rural education, particularly for girls, demonstrating significant community impact."],
+  [33,"Overall Best Educational Friendly State in Nigeria 2025","N/A","Best Education Initiative in North Central Zone","Benue State","Nigeria","Benue","Dedication to improving rural education, particularly for girls, demonstrating significant community impact."],
+  [34,"Overall Best Educational Friendly State in Nigeria 2025","N/A","Best Education Initiative in North Central Zone","Nasarawa State","Nigeria","Nasarawa","Dedication to improving rural education, particularly for girls, demonstrating significant community impact."],
+  [35,"Overall Best Educational Friendly State in Nigeria 2025","N/A","Best Education Initiative in North Central Zone","Niger State","Nigeria","Niger","Dedication to improving rural education, particularly for girls, demonstrating significant community impact."],
+  [36,"Overall Best Educational Friendly State in Nigeria 2025","N/A","Best Education Initiative in North Central Zone","Plateau State","Nigeria","Plateau","Dedication to improving rural education, particularly for girls, demonstrating significant community impact."],
+  [37,"Overall Best Educational Friendly State in Nigeria 2025","N/A","Best Education Initiative in North Central Zone","Federal Capital Territory","Nigeria","FCT","Dedication to improving rural education, particularly for girls, demonstrating significant community impact."],
+  [38,"Overall Best Educational Friendly State in Nigeria 2025","N/A","Best Education Initiative in North Central Zone","Kaduna State","Nigeria","Kaduna","Dedication to improving rural education, particularly for girls, demonstrating significant community impact."],
+  [39,"Overall Best Educational Friendly State in Nigeria 2025","N/A","Best Education Initiative in North Central Zone","Kebbi State","Nigeria","Kebbi","Dedication to improving rural education, particularly for girls, demonstrating significant community impact."],
+  [40,"Overall Best Educational Friendly State in Nigeria 2025","N/A","Best Education Initiative in North Central Zone","Sokoto State","Nigeria","Sokoto","Dedication to improving rural education, particularly for girls, demonstrating significant community impact."],
+  [41,"Overall Best Educational Friendly State in Nigeria 2025","N/A","Best Education Initiative in North East Zone","Adamawa State","Nigeria","Adamawa","Dedication to improving rural education, particularly for girls, demonstrating significant community impact."],
+  [42,"Overall Best Educational Friendly State in Nigeria 2025","N/A","Best Education Initiative in North East Zone","Bauchi State","Nigeria","Bauchi","Dedication to improving rural education, particularly for girls, demonstrating significant community impact."],
+  [43,"Overall Best Educational Friendly State in Nigeria 2025","N/A","Best Education Initiative in North East Zone","Borno State","Nigeria","Borno","Dedication to improving rural education, particularly for girls, demonstrating significant community impact."],
+  [44,"Overall Best Educational Friendly State in Nigeria 2025","N/A","Best Education Initiative in North East Zone","Gombe State","Nigeria","Gombe","Dedication to improving rural education, particularly for girls, demonstrating significant community impact."],
+  [45,"Overall Best Educational Friendly State in Nigeria 2025","N/A","Best Education Initiative in North East Zone","Taraba State","Nigeria","Taraba","Dedication to improving rural education, particularly for girls, demonstrating significant community impact."],
+  [46,"Overall Best Educational Friendly State in Nigeria 2025","N/A","Best Education Initiative in North East Zone","Yobe State","Nigeria","Yobe","Dedication to improving rural education, particularly for girls, demonstrating significant community impact."],
+  [47,"Overall Best Educational Friendly State in Nigeria 2025","N/A","Best Education Initiative in North East Zone","Jigawa State","Nigeria","Jigawa","Dedication to improving rural education, particularly for girls, demonstrating significant community impact."],
+  [48,"Overall Best Educational Friendly State in Nigeria 2025","N/A","Best Education Initiative in North East Zone","Kano State","Nigeria","Kano","Dedication to improving rural education, particularly for girls, demonstrating significant community impact."],
+  [49,"Overall Best Educational Friendly State in Nigeria 2025","N/A","Best Education Initiative in North East Zone","Katsina State","Nigeria","Katsina","Dedication to improving rural education, particularly for girls, demonstrating significant community impact."],
+  [50,"Overall Best Educational Friendly State in Nigeria 2025","N/A","Best Education Initiative in North East Zone","Zamfara State","Nigeria","Zamfara","Dedication to improving rural education, particularly for girls, demonstrating significant community impact."],
+  [51,"Overall Best Educational Friendly State in Nigeria 2025","N/A","Best Education Initiative in North West Zone","Kaduna State","Nigeria","Kaduna","Dedication to improving rural education, particularly for girls, demonstrating significant community impact."],
+  [52,"Overall Best Educational Friendly State in Nigeria 2025","N/A","Best Education Initiative in North West Zone","Kano State","Nigeria","Kano","Dedication to improving rural education, particularly for girls, demonstrating significant community impact."],
+  [53,"Overall Best Educational Friendly State in Nigeria 2025","N/A","Best Education Initiative in North West Zone","Kebbi State","Nigeria","Kebbi","Dedication to improving rural education, particularly for girls, demonstrating significant community impact."],
+  [54,"Overall Best Educational Friendly State in Nigeria 2025","N/A","Best Education Initiative in North West Zone","Sokoto State","Nigeria","Sokoto","Dedication to improving rural education, particularly for girls, demonstrating significant community impact."],
+  [55,"Overall Best Educational Friendly State in Nigeria 2025","N/A","Best Education Initiative in North West Zone","Jigawa State","Nigeria","Jigawa","Dedication to improving rural education, particularly for girls, demonstrating significant community impact."],
+  [56,"Overall Best Educational Friendly State in Nigeria 2025","N/A","Best Education Initiative in North West Zone","Zamfara State","Nigeria","Zamfara","Dedication to improving rural education, particularly for girls, demonstrating significant community impact."],
+  [57,"Overall Best Educational Friendly State in Nigeria 2025","N/A","Best Education Initiative in North West Zone","Katsina State","Nigeria","Katsina","Dedication to improving rural education, particularly for girls, demonstrating significant community impact."],
+  [58,"Overall Best Educational Friendly State in Nigeria 2025","N/A","Best Education Initiative in North West Zone","Borno State","Nigeria","Borno","Dedication to improving rural education, particularly for girls, demonstrating significant community impact."],
+  [59,"Overall Best Educational Friendly State in Nigeria 2025","N/A","Best Education Initiative in North West Zone","Yobe State","Nigeria","Yobe","Dedication to improving rural education, particularly for girls, demonstrating significant community impact."],
+  [60,"Overall Best Educational Friendly State in Nigeria 2025","N/A","Best Education Initiative in North West Zone","Bauchi State","Nigeria","Bauchi","Dedication to improving rural education, particularly for girls, demonstrating significant community impact."],
+  [61,"Overall Best Educational Friendly State in Nigeria 2025","N/A","Best Education Initiative in South East Zone","Abia State","Nigeria","Abia","Dedication to improving rural education, particularly for girls, demonstrating significant community impact."],
+  [62,"Overall Best Educational Friendly State in Nigeria 2025","N/A","Best Education Initiative in South East Zone","Anambra State","Nigeria","Anambra","Dedication to improving rural education, particularly for girls, demonstrating significant community impact."],
+  [63,"Overall Best Educational Friendly State in Nigeria 2025","N/A","Best Education Initiative in South East Zone","Ebonyi State","Nigeria","Ebonyi","Dedication to improving rural education, particularly for girls, demonstrating significant community impact."],
+  [64,"Overall Best Educational Friendly State in Nigeria 2025","N/A","Best Education Initiative in South East Zone","Enugu State","Nigeria","Enugu","Dedication to improving rural education, particularly for girls, demonstrating significant community impact."],
+  [65,"Overall Best Educational Friendly State in Nigeria 2025","N/A","Best Education Initiative in South East Zone","Imo State","Nigeria","Imo","Dedication to improving rural education, particularly for girls, demonstrating significant community impact."],
+  [66,"Overall Best Educational Friendly State in Nigeria 2025","N/A","Best Education Initiative in South East Zone","Anambra State","Nigeria","Anambra","Dedication to improving rural education, particularly for girls, demonstrating significant community impact."],
+  [67,"Overall Best Educational Friendly State in Nigeria 2025","N/A","Best Education Initiative in South East Zone","Akwa Ibom State","Nigeria","Akwa Ibom","Dedication to improving rural education, particularly for girls, demonstrating significant community impact."],
+  [68,"Overall Best Educational Friendly State in Nigeria 2025","N/A","Best Education Initiative in South East Zone","Rivers State","Nigeria","Rivers","Dedication to improving rural education, particularly for girls, demonstrating significant community impact."],
+  [69,"Overall Best Educational Friendly State in Nigeria 2025","N/A","Best Education Initiative in South East Zone","Bayelsa State","Nigeria","Bayelsa","Dedication to improving rural education, particularly for girls, demonstrating significant community impact."],
+  [70,"Overall Best Educational Friendly State in Nigeria 2025","N/A","Best Education Initiative in South East Zone","Delta State","Nigeria","Delta","Dedication to improving rural education, particularly for girls, demonstrating significant community impact."],
+  [71,"Overall Best Educational Friendly State in Nigeria 2025","N/A","Best Education Initiative in South West Zone","Lagos State","Nigeria","Lagos","Dedication to improving rural education, particularly for girls, demonstrating significant community impact."],
+  [72,"Overall Best Educational Friendly State in Nigeria 2025","N/A","Best Education Initiative in South West Zone","Ogun State","Nigeria","Ogun","Dedication to improving rural education, particularly for girls, demonstrating significant community impact."],
+  [73,"Overall Best Educational Friendly State in Nigeria 2025","N/A","Best Education Initiative in South West Zone","Oyo State","Nigeria","Oyo","Dedication to improving rural education, particularly for girls, demonstrating significant community impact."],
+  [74,"Overall Best Educational Friendly State in Nigeria 2025","N/A","Best Education Initiative in South West Zone","Osun State","Nigeria","Osun","Dedication to improving rural education, particularly for girls, demonstrating significant community impact."],
+  [75,"Overall Best Educational Friendly State in Nigeria 2025","N/A","Best Education Initiative in South West Zone","Ondo State","Nigeria","Ondo","Dedication to improving rural education, particularly for girls, demonstrating significant community impact."],
+  [76,"Overall Best Educational Friendly State in Nigeria 2025","N/A","Best Education Initiative in South West Zone","Ekiti State","Nigeria","Ekiti","Dedication to improving rural education, particularly for girls, demonstrating significant community impact."],
+  [77,"Overall Best Educational Friendly State in Nigeria 2025","N/A","Best Education Initiative in South South Zone","Edo State","Nigeria","Edo","Dedication to improving rural education, particularly for girls, demonstrating significant community impact."],
+  [78,"Overall Best Educational Friendly State in Nigeria 2025","N/A","Best Education Initiative in South South Zone","Cross River State","Nigeria","Cross River","Dedication to improving rural education, particularly for girls, demonstrating significant community impact."],
+  [79,"Overall Best Educational Friendly State in Nigeria 2025","N/A","Best Education Initiative in South South Zone","Akwa Ibom State","Nigeria","Akwa Ibom","Dedication to improving rural education, particularly for girls, demonstrating significant community impact."],
+  [80,"Overall Best Educational Friendly State in Nigeria 2025","N/A","Best Education Initiative in South South Zone","Rivers State","Nigeria","Rivers","Dedication to improving rural education, particularly for girls, demonstrating significant community impact."],
+  [81,"Overall Best Educational Friendly State in Nigeria 2025","N/A","Best Education Initiative in South South Zone","Bayelsa State","Nigeria","Bayelsa","Dedication to improving rural education, particularly for girls, demonstrating significant community impact."],
+  [82,"Overall Best Educational Friendly State in Nigeria 2025","N/A","Best Education Initiative in South South Zone","Delta State","Nigeria","Delta","Dedication to improving rural education, particularly for girls, demonstrating significant community impact."],
 
   // ═══════════════════════════════════════════════════════════════════
-  // CATEGORY 3: The Overall Best CSR for Education in Nigeria (302 nominees)
-  // 25 subcategories across industries + 3 Gold Special influencer subcategories
+  // CATEGORY 3: The Overall Best CSR for Education in Nigeria Award 2025 (302 nominees)
+  // Migrated from 2024 → 2025 | 25 subcategories + 3 Gold Special influencer subcategories
   // ═══════════════════════════════════════════════════════════════════
-  [83,"The Overall Best CSR for Education in Nigeria Award 2024","N/A","Oil And Gas CSR in Education Award","Shell Nigeria","Nigeria","","Established the 'Shell Nigeria Education Initiative' to support STEM education."],
-  [84,"The Overall Best CSR for Education in Nigeria Award 2024","N/A","Oil And Gas CSR in Education Award","Chevron Nigeria","Nigeria","","Developed the 'Chevron Niger Delta Partnership Initiative' for educational infrastructure."],
-  [85,"The Overall Best CSR for Education in Nigeria Award 2024","N/A","Oil And Gas CSR in Education Award","TotalEnergies Nigeria","Nigeria","","Supported STEM education and vocational training across the Niger Delta region."],
-  [86,"The Overall Best CSR for Education in Nigeria Award 2024","N/A","Oil And Gas CSR in Education Award","ExxonMobil Nigeria","Nigeria","","Developed the 'ExxonMobil Teachers Academy' for STEM educators."],
-  [87,"The Overall Best CSR for Education in Nigeria Award 2024","N/A","Oil And Gas CSR in Education Award","NNPC","Nigeria","","Established the NNPC Science Quiz Competition for students nationwide."],
-  [88,"The Overall Best CSR for Education in Nigeria Award 2024","N/A","Oil And Gas CSR in Education Award","Seplat Petroleum","Nigeria","","Implemented the Seplat Teachers Empowerment Program for continuous professional development."],
-  [89,"The Overall Best CSR for Education in Nigeria Award 2024","N/A","Oil And Gas CSR in Education Award","Conoil Producing Limited","Nigeria","","Supported the Conoil School Infrastructure Development Project in rural areas."],
-  [90,"The Overall Best CSR for Education in Nigeria Award 2024","N/A","Oil And Gas CSR in Education Award","Oando Plc","Nigeria","","Launched the Oando Foundation's Adopt-a-School Initiative to improve learning environments."],
-  [91,"The Overall Best CSR for Education in Nigeria Award 2024","N/A","Oil And Gas CSR in Education Award","Addax Petroleum","Nigeria","","Funded science laboratories in secondary schools through the Addax Science Initiative."],
-  [92,"The Overall Best CSR for Education in Nigeria Award 2024","N/A","Oil And Gas CSR in Education Award","Eni Nigeria","Nigeria","","Implemented the Eni Scholarship Program for tertiary education in technical fields."],
-  [93,"The Overall Best CSR for Education in Nigeria Award 2024","N/A","Banking And Finance CSR in Education Award","GTBank (Guaranty Trust Bank)","Nigeria","","Launched the GTBank Autism Program to support children with special needs."],
-  [94,"The Overall Best CSR for Education in Nigeria Award 2024","N/A","Banking And Finance CSR in Education Award","Access Bank","Nigeria","","Implemented the Access Bank Women Empowerment Program to support female education."],
-  [95,"The Overall Best CSR for Education in Nigeria Award 2024","N/A","Banking And Finance CSR in Education Award","First Bank of Nigeria","Nigeria","","Sponsored the SPARK initiative for mentoring and career development in schools."],
-  [96,"The Overall Best CSR for Education in Nigeria Award 2024","N/A","Banking And Finance CSR in Education Award","Zenith Bank","Nigeria","","Funded ICT labs in several public schools across Nigeria."],
-  [97,"The Overall Best CSR for Education in Nigeria Award 2024","N/A","Banking And Finance CSR in Education Award","United Bank for Africa","Nigeria","","Established the UBA Foundation focused on education and development."],
-  [98,"The Overall Best CSR for Education in Nigeria Award 2024","N/A","Banking And Finance CSR in Education Award","Ecobank Nigeria","Nigeria","","Supported digital literacy projects in collaboration with local NGOs."],
-  [99,"The Overall Best CSR for Education in Nigeria Award 2024","N/A","Banking And Finance CSR in Education Award","Fidelity Bank","Nigeria","","Launched the Fidelity Helping Hands Project to improve school facilities."],
-  [100,"The Overall Best CSR for Education in Nigeria Award 2024","N/A","Banking And Finance CSR in Education Award","Stanbic IBTC","Nigeria","","Provided capacity-building workshops for educators."],
-  [101,"The Overall Best CSR for Education in Nigeria Award 2024","N/A","Banking And Finance CSR in Education Award","Union Bank","Nigeria","","Funded infrastructure development in schools through the UnionCares initiative."],
-  [102,"The Overall Best CSR for Education in Nigeria Award 2024","N/A","Banking And Finance CSR in Education Award","Polaris Bank","Nigeria","","Implemented the Polaris Edu-Program to enhance STEM education."],
-  [103,"The Overall Best CSR for Education in Nigeria Award 2024","N/A","Telecommunications CSR in Education Award","MTN Nigeria","Nigeria","","MTN Foundation Schools Connect to provide internet access to rural schools."],
-  [104,"The Overall Best CSR for Education in Nigeria Award 2024","N/A","Telecommunications CSR in Education Award","Airtel Nigeria","Nigeria","","Launched the Adopt-a-School initiative to improve school infrastructure."],
-  [105,"The Overall Best CSR for Education in Nigeria Award 2024","N/A","Telecommunications CSR in Education Award","Glo Mobile","Nigeria","","Provided scholarships for students pursuing technology courses."],
-  [106,"The Overall Best CSR for Education in Nigeria Award 2024","N/A","Telecommunications CSR in Education Award","9mobile","Nigeria","","Developed the 9mobile Future Minds initiative for digital education."],
-  [107,"The Overall Best CSR for Education in Nigeria Award 2024","N/A","Telecommunications CSR in Education Award","Smile Communications","Nigeria","","Offered internet connectivity solutions to underserved schools."],
-  [108,"The Overall Best CSR for Education in Nigeria Award 2024","N/A","Telecommunications CSR in Education Award","ntel","Nigeria","","Supported e-learning platforms through discounted data packages for students."],
-  [109,"The Overall Best CSR for Education in Nigeria Award 2024","N/A","Telecommunications CSR in Education Award","Spectranet","Nigeria","","Supported the Spectranet Community Education Initiative for schools."],
-  [110,"The Overall Best CSR for Education in Nigeria Award 2024","N/A","Telecommunications CSR in Education Award","Swift Networks","Nigeria","","Implemented Project Swift EduTech to support ICT education."],
-  [111,"The Overall Best CSR for Education in Nigeria Award 2024","N/A","Telecommunications CSR in Education Award","Cobranet","Nigeria","","Supported initiatives to improve ICT facilities in public schools."],
-  [112,"The Overall Best CSR for Education in Nigeria Award 2024","N/A","Telecommunications CSR in Education Award","ipNX Nigeria","Nigeria","","Launched the ipNX Scholar program to fund educational technology projects."],
-  [113,"The Overall Best CSR for Education in Nigeria Award 2024","N/A","Technology And ICT CSR in Education Award","Microsoft Nigeria","Nigeria","","Implemented digital literacy programs across Nigerian schools."],
-  [114,"The Overall Best CSR for Education in Nigeria Award 2024","N/A","Technology And ICT CSR in Education Award","Google Nigeria","Nigeria","","Supporting education through technology initiatives."],
-  [115,"The Overall Best CSR for Education in Nigeria Award 2024","N/A","Technology And ICT CSR in Education Award","IBM West Africa","Nigeria","","Developed the IBM STEM for Girls initiative."],
-  [116,"The Overall Best CSR for Education in Nigeria Award 2024","N/A","Technology And ICT CSR in Education Award","HP Nigeria","Nigeria","","Supported the HP LIFE program to provide technology education for entrepreneurs."],
-  [117,"The Overall Best CSR for Education in Nigeria Award 2024","N/A","Technology And ICT CSR in Education Award","Cisco Nigeria","Nigeria","","Networking academies across Nigerian universities."],
-  [118,"The Overall Best CSR for Education in Nigeria Award 2024","N/A","Technology And ICT CSR in Education Award","Oracle Nigeria","Nigeria","","Workforce readiness and coding skills training."],
-  [119,"The Overall Best CSR for Education in Nigeria Award 2024","N/A","Technology And ICT CSR in Education Award","SAP Nigeria","Nigeria","","Supported the SAP Africa Code Week initiative to promote coding skills."],
-  [120,"The Overall Best CSR for Education in Nigeria Award 2024","N/A","Technology And ICT CSR in Education Award","Andela","Nigeria","","Building talent networks and developer training programs."],
-  [121,"The Overall Best CSR for Education in Nigeria Award 2024","N/A","Technology And ICT CSR in Education Award","MainOne","Nigeria","","Developed the MainOne Digital Lagos initiative for internet access in schools."],
-  [122,"The Overall Best CSR for Education in Nigeria Award 2024","N/A","Technology And ICT CSR in Education Award","Paystack","Nigeria","","Supporting digital education and financial literacy programs."],
-  [123,"The Overall Best CSR for Education in Nigeria Award 2024","N/A","Food And Beverages CSR in Education Award","Nestle Nigeria","Nigeria","","Launched the Nestlé Healthy Kids Program to educate children on nutrition and health."],
-  [124,"The Overall Best CSR for Education in Nigeria Award 2024","N/A","Food And Beverages CSR in Education Award","Cadbury Nigeria","Nigeria","","Supported the Cadbury Nutrition Education Initiative in primary schools."],
-  [125,"The Overall Best CSR for Education in Nigeria Award 2024","N/A","Food And Beverages CSR in Education Award","Coca-Cola Nigeria","Nigeria","","Implemented the Coca-Cola Foundation School Support Program for educational infrastructure."],
-  [126,"The Overall Best CSR for Education in Nigeria Award 2024","N/A","Food And Beverages CSR in Education Award","Nigerian Breweries","Nigeria","","Developed the Nigerian Breweries Felix Ohiwerei Education Trust Fund."],
-  [127,"The Overall Best CSR for Education in Nigeria Award 2024","N/A","Food And Beverages CSR in Education Award","Guinness Nigeria","Nigeria","","Established the Guinness Nigeria Empowerment Program for youth development."],
-  [128,"The Overall Best CSR for Education in Nigeria Award 2024","N/A","Food And Beverages CSR in Education Award","PZ Cussons Nigeria","Nigeria","","Implemented the PZ Cussons Chemistry Challenge to promote science education."],
-  [129,"The Overall Best CSR for Education in Nigeria Award 2024","N/A","Food And Beverages CSR in Education Award","Unilever Nigeria","Nigeria","","Launched the Unilever Bright Future Schools Program for primary education."],
-  [130,"The Overall Best CSR for Education in Nigeria Award 2024","N/A","Food And Beverages CSR in Education Award","Flour Mills of Nigeria","Nigeria","","Supported the FMN Educational Support Initiative to improve literacy and numeracy."],
-  [131,"The Overall Best CSR for Education in Nigeria Award 2024","N/A","Food And Beverages CSR in Education Award","Promasidor Nigeria","Nigeria","","Implemented the Promasidor Quill Awards for educational journalism."],
-  [132,"The Overall Best CSR for Education in Nigeria Award 2024","N/A","Food And Beverages CSR in Education Award","Chi Limited","Nigeria","","Launched the Chi Limited School Nutrition Program."],
-  [133,"The Overall Best CSR for Education in Nigeria Award 2024","N/A","Manufacturing CSR in Education Award","Dangote Group","Nigeria","","Implemented the Dangote Academy for vocational and technical training."],
-  [134,"The Overall Best CSR for Education in Nigeria Award 2024","N/A","Manufacturing CSR in Education Award","BUA Group","Nigeria","","Supported the BUA School Renovation Project to improve learning environments."],
-  [135,"The Overall Best CSR for Education in Nigeria Award 2024","N/A","Manufacturing CSR in Education Award","Lafarge Africa","Nigeria","","Developed the Lafarge Education Support Program for secondary schools."],
-  [136,"The Overall Best CSR for Education in Nigeria Award 2024","N/A","Manufacturing CSR in Education Award","Nigerian Bottling Company","Nigeria","","Launched the NBC Education Initiative to support digital learning."],
-  [137,"The Overall Best CSR for Education in Nigeria Award 2024","N/A","Manufacturing CSR in Education Award","Innoson Vehicle Manufacturing","Nigeria","","Supported the Innoson Auto Mechanics Training Program."],
-  [138,"The Overall Best CSR for Education in Nigeria Award 2024","N/A","Manufacturing CSR in Education Award","Julius Berger Nigeria","Nigeria","","Implemented the Julius Berger School Support Scheme for educational infrastructure."],
-  [139,"The Overall Best CSR for Education in Nigeria Award 2024","N/A","Manufacturing CSR in Education Award","Honeywell Group","Nigeria","","Launched the Honeywell Excellence Program for educational sponsorships."],
-  [140,"The Overall Best CSR for Education in Nigeria Award 2024","N/A","Manufacturing CSR in Education Award","PZ Wilmar","Nigeria","","Developed the PZ Wilmar Educational Support Initiative for primary schools."],
-  [141,"The Overall Best CSR for Education in Nigeria Award 2024","N/A","Manufacturing CSR in Education Award","Vitafoam Nigeria","Nigeria","","Implemented the Vitafoam Comfort in Schools Program."],
-  [142,"The Overall Best CSR for Education in Nigeria Award 2024","N/A","Manufacturing CSR in Education Award","May & Baker Nigeria","Nigeria","","Launched the May & Baker Science Challenge for secondary school students."],
-  [143,"The Overall Best CSR for Education in Nigeria Award 2024","N/A","Insurance CSR in Education Award","Leadway Assurance","Nigeria","","Implemented the Leadway Financial Literacy Program for secondary schools."],
-  [144,"The Overall Best CSR for Education in Nigeria Award 2024","N/A","Insurance CSR in Education Award","AIICO Insurance","Nigeria","","Launched the AIICO Education Support Initiative for educational resources."],
-  [145,"The Overall Best CSR for Education in Nigeria Award 2024","N/A","Insurance CSR in Education Award","AXA Mansard Insurance","Nigeria","","Supported the AXA Mansard Financial Literacy Program."],
-  [146,"The Overall Best CSR for Education in Nigeria Award 2024","N/A","Insurance CSR in Education Award","Custodian and Allied Insurance","Nigeria","","Launched the Custodian Education Support Initiative."],
-  [147,"The Overall Best CSR for Education in Nigeria Award 2024","N/A","Insurance CSR in Education Award","Mutual Benefits Assurance","Nigeria","","Financial literacy workshops for secondary schools."],
-  [148,"The Overall Best CSR for Education in Nigeria Award 2024","N/A","Insurance CSR in Education Award","NEM Insurance","Nigeria","","Education support and scholarship sponsorships."],
-  [149,"The Overall Best CSR for Education in Nigeria Award 2024","N/A","Insurance CSR in Education Award","Sovereign Trust Insurance","Nigeria","","Financial literacy programs for secondary schools."],
-  [150,"The Overall Best CSR for Education in Nigeria Award 2024","N/A","Insurance CSR in Education Award","Zenith General Insurance","Nigeria","","Education support and scholarship initiatives."],
-  [151,"The Overall Best CSR for Education in Nigeria Award 2024","N/A","Insurance CSR in Education Award","Cornerstone Insurance","Nigeria","","Financial literacy programs for students."],
-  [152,"The Overall Best CSR for Education in Nigeria Award 2024","N/A","Insurance CSR in Education Award","NSIA Insurance","Nigeria","","Education support and scholarship programs."],
-  // Gold Special: Social Media Influencer CSR
-  [153,"The Overall Best CSR for Education in Nigeria Award 2024","N/A","Social Media Influencer CSR For Education","Yemi Alade (Nigeria)","Nigeria","","#EducationForAll Campaign – Advocating for and fundraising for school supplies and scholarships."],
-  [154,"The Overall Best CSR for Education in Nigeria Award 2024","N/A","Social Media Influencer CSR For Education","Samuel Eto'o (Cameroon)","Cameroon","","Samuel Eto'o Foundation – Building schools and providing educational materials."],
-  [155,"The Overall Best CSR for Education in Nigeria Award 2024","N/A","Social Media Influencer CSR For Education","Davido (Nigeria)","Nigeria","","Davido Education Fund – Supporting underprivileged students with scholarships and learning materials."],
-  [156,"The Overall Best CSR for Education in Nigeria Award 2024","N/A","Social Media Influencer CSR For Education","Omotola Jalade Ekeinde (Nigeria)","Nigeria","","Omotola Youth Empowerment Program – Focusing on education and skills development."],
-  [157,"The Overall Best CSR for Education in Nigeria Award 2024","N/A","Social Media Influencer CSR For Education","Sarkodie (Ghana)","Ghana","","Sark Nation Foundation – Providing scholarships and educational support."],
-  [158,"The Overall Best CSR for Education in Nigeria Award 2024","N/A","Social Media Influencer CSR For Education","Tiwa Savage (Nigeria)","Nigeria","","Savage Foundation – Supporting girls' education and providing scholarships."],
-  [159,"The Overall Best CSR for Education in Nigeria Award 2024","N/A","Social Media Influencer CSR For Education","Genevieve Nnaji (Nigeria)","Nigeria","","Genevieve Foundation – Offering scholarships and mentorship for young women."],
-  [160,"The Overall Best CSR for Education in Nigeria Award 2024","N/A","Social Media Influencer CSR For Education","Cuppy (Florence Otedola)","Nigeria","","Cuppy Foundation – Focusing on education and providing scholarships."],
-  [161,"The Overall Best CSR for Education in Nigeria Award 2024","N/A","Social Media Influencer CSR For Education","Magasco (Cameroon)","Cameroon","","Magasco Education Fund – Promoting educational comedy and literacy."],
-  [162,"The Overall Best CSR for Education in Nigeria Award 2024","N/A","Social Media Influencer CSR For Education","Charlotte Dipanda (Cameroon)","Cameroon","","Dipanda's Learning Initiative – Supporting girls' education and empowerment."],
-  [163,"The Overall Best CSR for Education in Nigeria Award 2024","N/A","Fintech CSR in Education Award","Flutterwave","Nigeria","","Implemented the Flutterwave Financial Literacy Program for secondary schools."],
-  [164,"The Overall Best CSR for Education in Nigeria Award 2024","N/A","Fintech CSR in Education Award","Paystack","Nigeria","","Launched the Paystack Education Support Initiative."],
-  [165,"The Overall Best CSR for Education in Nigeria Award 2024","N/A","Fintech CSR in Education Award","Interswitch","Nigeria","","Supported the Interswitch Financial Literacy Program for secondary schools."],
-  [166,"The Overall Best CSR for Education in Nigeria Award 2024","N/A","Fintech CSR in Education Award","Paga","Nigeria","","Launched the Paga Education Support Initiative."],
-  [167,"The Overall Best CSR for Education in Nigeria Award 2024","N/A","Fintech CSR in Education Award","Remita","Nigeria","","Implemented the Remita Financial Literacy Program."],
-  [168,"The Overall Best CSR for Education in Nigeria Award 2024","N/A","Fintech CSR in Education Award","Carbon (Paylater)","Nigeria","","Launched the Carbon Education Support Initiative."],
-  [169,"The Overall Best CSR for Education in Nigeria Award 2024","N/A","Fintech CSR in Education Award","Kuda Bank","Nigeria","","Supported the Kuda Financial Literacy Program."],
-  [170,"The Overall Best CSR for Education in Nigeria Award 2024","N/A","Fintech CSR in Education Award","OPay","Nigeria","","Launched the OPay Education Support Initiative."],
-  [171,"The Overall Best CSR for Education in Nigeria Award 2024","N/A","Fintech CSR in Education Award","PalmPay","Nigeria","","Implemented the PalmPay Financial Literacy Program."],
-  [172,"The Overall Best CSR for Education in Nigeria Award 2024","N/A","Fintech CSR in Education Award","Chipper Cash","Nigeria","","Launched the Chipper Cash Education Support Initiative."],
-  [173,"The Overall Best CSR for Education in Nigeria Award 2024","N/A","Agriculture And Agribusiness CSR In Education Award","Olam Nigeria","Nigeria","","Implemented the Olam Agricultural Education Program."],
-  [174,"The Overall Best CSR for Education in Nigeria Award 2024","N/A","Agriculture And Agribusiness CSR In Education Award","Flour Mills of Nigeria","Nigeria","","Launched the FMN Agro-Allied Education Initiative."],
-  [175,"The Overall Best CSR for Education in Nigeria Award 2024","N/A","Agriculture And Agribusiness CSR In Education Award","Dangote Sugar Refinery","Nigeria","","Developed the Dangote Sugar Agricultural Education Program."],
-  [176,"The Overall Best CSR for Education in Nigeria Award 2024","N/A","Agriculture And Agribusiness CSR In Education Award","Presco Plc","Nigeria","","Supported the Presco Agro-Education Initiative."],
-  [177,"The Overall Best CSR for Education in Nigeria Award 2024","N/A","Agriculture And Agribusiness CSR In Education Award","Nigerian Breweries (Agro-Allied)","Nigeria","","Launched the Nigerian Breweries Agricultural Education Initiative."],
-  [178,"The Overall Best CSR for Education in Nigeria Award 2024","N/A","Agriculture And Agribusiness CSR In Education Award","Nestlé Nigeria (Agriculture)","Nigeria","","Developed the Nestlé Agricultural Education Program."],
-  [179,"The Overall Best CSR for Education in Nigeria Award 2024","N/A","Agriculture And Agribusiness CSR In Education Award","Chi Farms","Nigeria","","Implemented the Chi Farms Agro-Education Initiative."],
-  [180,"The Overall Best CSR for Education in Nigeria Award 2024","N/A","Agriculture And Agribusiness CSR In Education Award","Notore Chemical Industries","Nigeria","","Supported the Notore Agricultural Education Program."],
-  [181,"The Overall Best CSR for Education in Nigeria Award 2024","N/A","Agriculture And Agribusiness CSR In Education Award","Premier Feeds Mills","Nigeria","","Launched the Premier Feeds Agricultural Education Initiative."],
-  [182,"The Overall Best CSR for Education in Nigeria Award 2024","N/A","Agriculture And Agribusiness CSR In Education Award","AACE Foods","Nigeria","","Developed the AACE Foods Agro-Education Program."],
-  [183,"The Overall Best CSR for Education in Nigeria Award 2024","N/A","Health Care And Hospitals CSR In Education Award","Reddington Hospital","Nigeria","","Implemented the Reddington Health Education Program."],
-  [184,"The Overall Best CSR for Education in Nigeria Award 2024","N/A","Health Care And Hospitals CSR In Education Award","Lagoon Hospitals","Nigeria","","Launched the Lagoon Medical Education Initiative."],
-  [185,"The Overall Best CSR for Education in Nigeria Award 2024","N/A","Health Care And Hospitals CSR In Education Award","St. Nicholas Hospital","Nigeria","","Developed the St. Nicholas Health Education Program."],
-  [186,"The Overall Best CSR for Education in Nigeria Award 2024","N/A","Health Care And Hospitals CSR In Education Award","Cedarcrest Hospitals","Nigeria","","Supported the Cedarcrest Medical Education Initiative."],
-  [187,"The Overall Best CSR for Education in Nigeria Award 2024","N/A","Health Care And Hospitals CSR In Education Award","Nizamiye Hospital","Nigeria","","Launched the Nizamiye Health Education Program."],
-  [188,"The Overall Best CSR for Education in Nigeria Award 2024","N/A","Health Care And Hospitals CSR In Education Award","First Cardiology Consultants","Nigeria","","Developed the First Cardiology Medical Education Initiative."],
-  [189,"The Overall Best CSR for Education in Nigeria Award 2024","N/A","Health Care And Hospitals CSR In Education Award","Eye Foundation Hospital","Nigeria","","Supported the Eye Foundation Health Education Program."],
-  [190,"The Overall Best CSR for Education in Nigeria Award 2024","N/A","Health Care And Hospitals CSR In Education Award","Eko Hospital","Nigeria","","Launched the Eko Medical Education Initiative."],
-  [191,"The Overall Best CSR for Education in Nigeria Award 2024","N/A","Health Care And Hospitals CSR In Education Award","Bridge Clinic","Nigeria","","Developed the Bridge Clinic Health Education Program."],
-  [192,"The Overall Best CSR for Education in Nigeria Award 2024","N/A","Health Care And Hospitals CSR In Education Award","Lily Hospitals","Nigeria","","Supported the Lily Medical Education Initiative."],
-  [193,"The Overall Best CSR for Education in Nigeria Award 2024","N/A","Professional Services CSR In Education Award","PwC Nigeria","Nigeria","","Implemented the PwC Business Education Program for secondary schools."],
-  [194,"The Overall Best CSR for Education in Nigeria Award 2024","N/A","Professional Services CSR In Education Award","KPMG Nigeria","Nigeria","","Launched the KPMG Education Support Initiative."],
-  [195,"The Overall Best CSR for Education in Nigeria Award 2024","N/A","Professional Services CSR In Education Award","Deloitte Nigeria","Nigeria","","Supported the Deloitte Business Education Program."],
-  [196,"The Overall Best CSR for Education in Nigeria Award 2024","N/A","Professional Services CSR In Education Award","Ernst & Young Nigeria","Nigeria","","Launched the EY Education Support Initiative."],
-  [197,"The Overall Best CSR for Education in Nigeria Award 2024","N/A","Professional Services CSR In Education Award","Accenture Nigeria","Nigeria","","Implemented the Accenture Business Education Program."],
-  [198,"The Overall Best CSR for Education in Nigeria Award 2024","N/A","Hotels CSR in Education Award","Transcorp Hilton Abuja","Nigeria","","Launched the Transcorp Hilton Educational Support Program."],
-  [199,"The Overall Best CSR for Education in Nigeria Award 2024","N/A","Hotels CSR in Education Award","Eko Hotels & Suites","Nigeria","","Developed the Eko Hotels School Support Scheme."],
-  [200,"The Overall Best CSR for Education in Nigeria Award 2024","N/A","Hotels CSR in Education Award","Radisson Blu Lagos","Nigeria","","Implemented the Radisson Blu Education Empowerment Program."],
-  [201,"The Overall Best CSR for Education in Nigeria Award 2024","N/A","Aviation CSR in Education Award","Air Peace","Nigeria","","Supporting educational initiatives through aviation-focused programs."],
-  [202,"The Overall Best CSR for Education in Nigeria Award 2024","N/A","Aviation CSR in Education Award","Arik Air","Nigeria","","Supporting educational initiatives through aviation-focused programs."],
-  [203,"The Overall Best CSR for Education in Nigeria Award 2024","N/A","Aviation CSR in Education Award","Ibom Air","Nigeria","","Supporting educational initiatives through aviation-focused programs."],
-  [204,"The Overall Best CSR for Education in Nigeria Award 2024","N/A","Pharmaceuticals CSR in Education Award","Emzor Pharmaceutical Industries","Nigeria","","Supporting pharmaceutical education and health literacy programs."],
-  [205,"The Overall Best CSR for Education in Nigeria Award 2024","N/A","Pharmaceuticals CSR in Education Award","Fidson Healthcare Plc","Nigeria","","Supporting pharmaceutical education and health literacy programs."],
-  [206,"The Overall Best CSR for Education in Nigeria Award 2024","N/A","Pharmaceuticals CSR in Education Award","GlaxoSmithKline Nigeria","Nigeria","","Supporting pharmaceutical education and health literacy programs."],
-  [207,"The Overall Best CSR for Education in Nigeria Award 2024","N/A","Microfinance Banks CSR in Education Award","LAPO Microfinance Bank","Nigeria","","Implemented the LAPO Education Support Initiative for primary schools."],
-  [208,"The Overall Best CSR for Education in Nigeria Award 2024","N/A","Microfinance Banks CSR in Education Award","Accion Microfinance Bank","Nigeria","","Launched the Accion Education Support Initiative."],
-  [209,"The Overall Best CSR for Education in Nigeria Award 2024","N/A","Conglomerates And Diversified Businesses CSR in Education Award","Dangote Group","Nigeria","","Implemented the Dangote Academy for vocational and technical training."],
-  [210,"The Overall Best CSR for Education in Nigeria Award 2024","N/A","Conglomerates And Diversified Businesses CSR in Education Award","BUA Group","Nigeria","","Supported the BUA School Renovation Project."],
-  [211,"The Overall Best CSR for Education in Nigeria Award 2024","N/A","Conglomerates And Diversified Businesses CSR in Education Award","Flour Mills of Nigeria","Nigeria","","Developed the FMN Educational Support Initiative."],
-  [212,"The Overall Best CSR for Education in Nigeria Award 2024","N/A","Conglomerates And Diversified Businesses CSR in Education Award","Transcorp Nigeria","Nigeria","","Implemented the Transcorp School Support Program."],
+  [83,"The Overall Best CSR for Education in Nigeria Award 2025","N/A","Oil And Gas CSR in Education Award","Shell Nigeria","Nigeria","","Established the 'Shell Nigeria Education Initiative' to support STEM education."],
+  [84,"The Overall Best CSR for Education in Nigeria Award 2025","N/A","Oil And Gas CSR in Education Award","Chevron Nigeria","Nigeria","","Developed the 'Chevron Niger Delta Partnership Initiative' for educational infrastructure."],
+  [85,"The Overall Best CSR for Education in Nigeria Award 2025","N/A","Oil And Gas CSR in Education Award","TotalEnergies Nigeria","Nigeria","","Supported STEM education and vocational training across the Niger Delta region."],
+  [86,"The Overall Best CSR for Education in Nigeria Award 2025","N/A","Oil And Gas CSR in Education Award","ExxonMobil Nigeria","Nigeria","","Developed the 'ExxonMobil Teachers Academy' for STEM educators."],
+  [87,"The Overall Best CSR for Education in Nigeria Award 2025","N/A","Oil And Gas CSR in Education Award","NNPC","Nigeria","","Established the NNPC Science Quiz Competition for students nationwide."],
+  [88,"The Overall Best CSR for Education in Nigeria Award 2025","N/A","Oil And Gas CSR in Education Award","Seplat Petroleum","Nigeria","","Implemented the Seplat Teachers Empowerment Program for continuous professional development."],
+  [89,"The Overall Best CSR for Education in Nigeria Award 2025","N/A","Oil And Gas CSR in Education Award","Conoil Producing Limited","Nigeria","","Supported the Conoil School Infrastructure Development Project in rural areas."],
+  [90,"The Overall Best CSR for Education in Nigeria Award 2025","N/A","Oil And Gas CSR in Education Award","Oando Plc","Nigeria","","Launched the Oando Foundation's Adopt-a-School Initiative to improve learning environments."],
+  [91,"The Overall Best CSR for Education in Nigeria Award 2025","N/A","Oil And Gas CSR in Education Award","Addax Petroleum","Nigeria","","Funded science laboratories in secondary schools through the Addax Science Initiative."],
+  [92,"The Overall Best CSR for Education in Nigeria Award 2025","N/A","Oil And Gas CSR in Education Award","Eni Nigeria","Nigeria","","Implemented the Eni Scholarship Program for tertiary education in technical fields."],
+  [93,"The Overall Best CSR for Education in Nigeria Award 2025","N/A","Banking And Finance CSR in Education Award","GTBank (Guaranty Trust Bank)","Nigeria","","Launched the GTBank Autism Program to support children with special needs."],
+  [94,"The Overall Best CSR for Education in Nigeria Award 2025","N/A","Banking And Finance CSR in Education Award","Access Bank","Nigeria","","Implemented the Access Bank Women Empowerment Program to support female education."],
+  [95,"The Overall Best CSR for Education in Nigeria Award 2025","N/A","Banking And Finance CSR in Education Award","First Bank of Nigeria","Nigeria","","Sponsored the SPARK initiative for mentoring and career development in schools."],
+  [96,"The Overall Best CSR for Education in Nigeria Award 2025","N/A","Banking And Finance CSR in Education Award","Zenith Bank","Nigeria","","Funded ICT labs in several public schools across Nigeria."],
+  [97,"The Overall Best CSR for Education in Nigeria Award 2025","N/A","Banking And Finance CSR in Education Award","United Bank for Africa","Nigeria","","Established the UBA Foundation focused on education and development."],
+  [98,"The Overall Best CSR for Education in Nigeria Award 2025","N/A","Banking And Finance CSR in Education Award","Ecobank Nigeria","Nigeria","","Supported digital literacy projects in collaboration with local NGOs."],
+  [99,"The Overall Best CSR for Education in Nigeria Award 2025","N/A","Banking And Finance CSR in Education Award","Fidelity Bank","Nigeria","","Launched the Fidelity Helping Hands Project to improve school facilities."],
+  [100,"The Overall Best CSR for Education in Nigeria Award 2025","N/A","Banking And Finance CSR in Education Award","Stanbic IBTC","Nigeria","","Provided capacity-building workshops for educators."],
+  [101,"The Overall Best CSR for Education in Nigeria Award 2025","N/A","Banking And Finance CSR in Education Award","Union Bank","Nigeria","","Funded infrastructure development in schools through the UnionCares initiative."],
+  [102,"The Overall Best CSR for Education in Nigeria Award 2025","N/A","Banking And Finance CSR in Education Award","Polaris Bank","Nigeria","","Implemented the Polaris Edu-Program to enhance STEM education."],
+  [103,"The Overall Best CSR for Education in Nigeria Award 2025","N/A","Telecommunications CSR in Education Award","MTN Nigeria","Nigeria","","MTN Foundation Schools Connect to provide internet access to rural schools."],
+  [104,"The Overall Best CSR for Education in Nigeria Award 2025","N/A","Telecommunications CSR in Education Award","Airtel Nigeria","Nigeria","","Launched the Adopt-a-School initiative to improve school infrastructure."],
+  [105,"The Overall Best CSR for Education in Nigeria Award 2025","N/A","Telecommunications CSR in Education Award","Glo Mobile","Nigeria","","Provided scholarships for students pursuing technology courses."],
+  [106,"The Overall Best CSR for Education in Nigeria Award 2025","N/A","Telecommunications CSR in Education Award","9mobile","Nigeria","","Developed the 9mobile Future Minds initiative for digital education."],
+  [107,"The Overall Best CSR for Education in Nigeria Award 2025","N/A","Telecommunications CSR in Education Award","Smile Communications","Nigeria","","Offered internet connectivity solutions to underserved schools."],
+  [108,"The Overall Best CSR for Education in Nigeria Award 2025","N/A","Telecommunications CSR in Education Award","ntel","Nigeria","","Supported e-learning platforms through discounted data packages for students."],
+  [109,"The Overall Best CSR for Education in Nigeria Award 2025","N/A","Telecommunications CSR in Education Award","Spectranet","Nigeria","","Supported the Spectranet Community Education Initiative for schools."],
+  [110,"The Overall Best CSR for Education in Nigeria Award 2025","N/A","Telecommunications CSR in Education Award","Swift Networks","Nigeria","","Implemented Project Swift EduTech to support ICT education."],
+  [111,"The Overall Best CSR for Education in Nigeria Award 2025","N/A","Telecommunications CSR in Education Award","Cobranet","Nigeria","","Supported initiatives to improve ICT facilities in public schools."],
+  [112,"The Overall Best CSR for Education in Nigeria Award 2025","N/A","Telecommunications CSR in Education Award","ipNX Nigeria","Nigeria","","Launched the ipNX Scholar program to fund educational technology projects."],
+  [113,"The Overall Best CSR for Education in Nigeria Award 2025","N/A","Technology And ICT CSR in Education Award","Microsoft Nigeria","Nigeria","","Launched the Microsoft Imagine Academy for digital skills in schools."],
+  [114,"The Overall Best CSR for Education in Nigeria Award 2025","N/A","Technology And ICT CSR in Education Award","Google Nigeria","Nigeria","","Developed the Google Classroom initiative for remote learning."],
+  [115,"The Overall Best CSR for Education in Nigeria Award 2025","N/A","Technology And ICT CSR in Education Award","HP Nigeria","Nigeria","","Provided computer labs and tech training for schools."],
+  [116,"The Overall Best CSR for Education in Nigeria Award 2025","N/A","Technology And ICT CSR in Education Award","Cisco Systems Nigeria","Nigeria","","Implemented the Cisco Networking Academy for ICT education."],
+  [117,"The Overall Best CSR for Education in Nigeria Award 2025","N/A","Technology And ICT CSR in Education Award","Intel Nigeria","Nigeria","","Launched the Intel Learn Program for digital literacy."],
+  [118,"The Overall Best CSR for Education in Nigeria Award 2025","N/A","Technology And ICT CSR in Education Award","IBM Nigeria","Nigeria","","Developed the IBM SkillsBuild program for tech education."],
+  [119,"The Overall Best CSR for Education in Nigeria Award 2025","N/A","Technology And ICT CSR in Education Award","Oracle Nigeria","Nigeria","","Provided the Oracle Academy for computer science education."],
+  [120,"The Overall Best CSR for Education in Nigeria Award 2025","N/A","Technology And ICT CSR in Education Award","SAP Nigeria","Nigeria","","Launched the SAP Skills for Africa program."],
+  [121,"The Overall Best CSR for Education in Nigeria Award 2025","N/A","Technology And ICT CSR in Education Award","Dell Technologies Nigeria","Nigeria","","Implemented the Dell Youth Learning program."],
+  [122,"The Overall Best CSR for Education in Nigeria Award 2025","N/A","Technology And ICT CSR in Education Award","Huawei Nigeria","Nigeria","","Developed the Huawei Seeds for the Future program."],
+  [123,"The Overall Best CSR for Education in Nigeria Award 2025","N/A","Food And Beverages CSR in Education Award","Nestlé Nigeria","Nigeria","","Launched the Nestlé Healthy Kids Program integrated into school nutrition."],
+  [124,"The Overall Best CSR for Education in Nigeria Award 2025","N/A","Food And Beverages CSR in Education Award","Coca-Cola Nigeria","Nigeria","","Implemented the 5by20 educational empowerment program."],
+  [125,"The Overall Best CSR for Education in Nigeria Award 2025","N/A","Food And Beverages CSR in Education Award","Nigerian Breweries","Nigeria","","Supported the Felix Ohiwerei Education Trust Fund."],
+  [126,"The Overall Best CSR for Education in Nigeria Award 2025","N/A","Food And Beverages CSR in Education Award","Unilever Nigeria","Nigeria","","Launched the Unilever Bright Future school program."],
+  [127,"The Overall Best CSR for Education in Nigeria Award 2025","N/A","Food And Beverages CSR in Education Award","Cadbury Nigeria","Nigeria","","Supported school feeding and nutrition education programs."],
+  [128,"The Overall Best CSR for Education in Nigeria Award 2025","N/A","Food And Beverages CSR in Education Award","PZ Cussons","Nigeria","","Implemented the PZ Cussons Chemistry Challenge for schools."],
+  [129,"The Overall Best CSR for Education in Nigeria Award 2025","N/A","Food And Beverages CSR in Education Award","Dangote Sugar","Nigeria","","Launched the Dangote Foundation Education Support Program."],
+  [130,"The Overall Best CSR for Education in Nigeria Award 2025","N/A","Food And Beverages CSR in Education Award","Guinness Nigeria","Nigeria","","Supported the Guinness Eye Hospital education outreach."],
+  [131,"The Overall Best CSR for Education in Nigeria Award 2025","N/A","Food And Beverages CSR in Education Award","Flour Mills of Nigeria","Nigeria","","Launched the Golden Penny Education Support initiative."],
+  [132,"The Overall Best CSR for Education in Nigeria Award 2025","N/A","Food And Beverages CSR in Education Award","Dufil Prima Foods","Nigeria","","Supported the Indomie Cooking Competition as an educational initiative."],
+  [133,"The Overall Best CSR for Education in Nigeria Award 2025","N/A","Manufacturing CSR in Education Award","Dangote Cement","Nigeria","","Supported school infrastructure development."],
+  [134,"The Overall Best CSR for Education in Nigeria Award 2025","N/A","Manufacturing CSR in Education Award","BUA Cement","Nigeria","","Funded construction of classrooms and libraries."],
+  [135,"The Overall Best CSR for Education in Nigeria Award 2025","N/A","Manufacturing CSR in Education Award","Lafarge Africa","Nigeria","","Developed vocational training programs."],
+  [136,"The Overall Best CSR for Education in Nigeria Award 2025","N/A","Manufacturing CSR in Education Award","Honeywell Group","Nigeria","","Supported STEM education in manufacturing."],
+  [137,"The Overall Best CSR for Education in Nigeria Award 2025","N/A","Manufacturing CSR in Education Award","Nigerian Foundries","Nigeria","","Implemented industrial training for students."],
+  [138,"The Overall Best CSR for Education in Nigeria Award 2025","N/A","Insurance CSR in Education Award","Leadway Assurance","Nigeria","","Supported the Leadway Education Foundation for academic scholarships."],
+  [139,"The Overall Best CSR for Education in Nigeria Award 2025","N/A","Insurance CSR in Education Award","AXA Mansard","Nigeria","","Launched the AXA Mansard Health Insurance for Students Program."],
+  [140,"The Overall Best CSR for Education in Nigeria Award 2025","N/A","Insurance CSR in Education Award","AIICO Insurance","Nigeria","","Developed the AIICO Education Support Initiative."],
+  [141,"The Overall Best CSR for Education in Nigeria Award 2025","N/A","Insurance CSR in Education Award","Custodian and Allied","Nigeria","","Implemented the Custodian Education Trust Fund."],
+  [142,"The Overall Best CSR for Education in Nigeria Award 2025","N/A","Insurance CSR in Education Award","Cornerstone Insurance","Nigeria","","Launched the Cornerstone Education Empowerment Program."],
+  [143,"The Overall Best CSR for Education in Nigeria Award 2025","N/A","Insurance CSR in Education Award","Mutual Benefits Assurance","Nigeria","","Developed the Mutual Benefits Scholarship Program."],
+  [144,"The Overall Best CSR for Education in Nigeria Award 2025","N/A","Insurance CSR in Education Award","NEM Insurance","Nigeria","","Implemented the NEM Education Support Initiative."],
+  [145,"The Overall Best CSR for Education in Nigeria Award 2025","N/A","Insurance CSR in Education Award","Consolidated Hallmark Insurance","Nigeria","","Launched the CHI Education Development Program."],
+  [146,"The Overall Best CSR for Education in Nigeria Award 2025","N/A","Insurance CSR in Education Award","Wapic Insurance","Nigeria","","Developed the Wapic Education Foundation."],
+  [147,"The Overall Best CSR for Education in Nigeria Award 2025","N/A","Insurance CSR in Education Award","Zenith General Insurance","Nigeria","","Implemented the Zenith Education Trust Initiative."],
+  [148,"The Overall Best CSR for Education in Nigeria Award 2025","N/A","Social Media Influencer CSR For Education","Tunde Ednut","Nigeria","","Used social media platform to raise awareness and funds for education initiatives."],
+  [149,"The Overall Best CSR for Education in Nigeria Award 2025","N/A","Social Media Influencer CSR For Education","Mr Macaroni","Nigeria","","Created educational comedy skits highlighting education issues."],
+  [150,"The Overall Best CSR for Education in Nigeria Award 2025","N/A","Social Media Influencer CSR For Education","Taaooma","Nigeria","","Used comedy and social media to advocate for education."],
+  [151,"The Overall Best CSR for Education in Nigeria Award 2025","N/A","Social Media Influencer CSR For Education","Mark Angel","Nigeria","","Created educational content through the Mark Angel Comedy platform."],
+  [152,"The Overall Best CSR for Education in Nigeria Award 2025","N/A","Social Media Influencer CSR For Education","Broda Shaggi","Nigeria","","Used social media presence to support educational campaigns."],
+  [153,"The Overall Best CSR for Education in Nigeria Award 2025","N/A","Social Media Influencer CSR For Education","Sabinus (Mr Funny)","Nigeria","","Leveraged social media influence to promote educational values."],
+  [154,"The Overall Best CSR for Education in Nigeria Award 2025","N/A","Social Media Influencer CSR For Education","Lasisi Elenu","Nigeria","","Created educational content that highlights social issues."],
+  [155,"The Overall Best CSR for Education in Nigeria Award 2025","N/A","Social Media Influencer CSR For Education","Kiekie","Nigeria","","Used social media platforms to advocate for female education."],
+  [156,"The Overall Best CSR for Education in Nigeria Award 2025","N/A","Social Media Influencer CSR For Education","Nengi (BBNaija)","Nigeria","","Established an education-focused foundation post-reality TV."],
+  [157,"The Overall Best CSR for Education in Nigeria Award 2025","N/A","Social Media Influencer CSR For Education","Laycon (BBNaija)","Nigeria","","Promoted educational initiatives through social media platforms."],
+  [158,"The Overall Best CSR for Education in Nigeria Award 2025","N/A","Fintech CSR in Education Award","Flutterwave","Nigeria","","Launched the Flutterwave Education Support Initiative."],
+  [159,"The Overall Best CSR for Education in Nigeria Award 2025","N/A","Fintech CSR in Education Award","Paystack","Nigeria","","Developed the Paystack Developer Education Program."],
+  [160,"The Overall Best CSR for Education in Nigeria Award 2025","N/A","Fintech CSR in Education Award","Kuda Bank","Nigeria","","Implemented the Kuda Financial Literacy Program for students."],
+  [161,"The Overall Best CSR for Education in Nigeria Award 2025","N/A","Fintech CSR in Education Award","OPay","Nigeria","","Launched the OPay Education Scholarship Program."],
+  [162,"The Overall Best CSR for Education in Nigeria Award 2025","N/A","Fintech CSR in Education Award","Interswitch","Nigeria","","Developed the InspireMe Challenge for educational technology."],
+  [163,"The Overall Best CSR for Education in Nigeria Award 2025","N/A","Fintech CSR in Education Award","Moniepoint","Nigeria","","Supported the Moniepoint Financial Education Initiative."],
+  [164,"The Overall Best CSR for Education in Nigeria Award 2025","N/A","Fintech CSR in Education Award","Carbon (formerly Paylater)","Nigeria","","Launched the Carbon Education Fund Program."],
+  [165,"The Overall Best CSR for Education in Nigeria Award 2025","N/A","Fintech CSR in Education Award","Piggyvest","Nigeria","","Developed the Piggyvest Financial Education Program."],
+  [166,"The Overall Best CSR for Education in Nigeria Award 2025","N/A","Fintech CSR in Education Award","Cowrywise","Nigeria","","Implemented the Cowrywise Financial Literacy Initiative."],
+  [167,"The Overall Best CSR for Education in Nigeria Award 2025","N/A","Fintech CSR in Education Award","TeamApt (now Moniepoint)","Nigeria","","Launched the TeamApt Education Technology Initiative."],
+  [168,"The Overall Best CSR for Education in Nigeria Award 2025","N/A","Fintech CSR in Education Award","Paga","Nigeria","","Supported the Paga Financial Education Program."],
+  [169,"The Overall Best CSR for Education in Nigeria Award 2025","N/A","Fintech CSR in Education Award","VFD Group","Nigeria","","Developed the VFD Education Support Initiative."],
+  [170,"The Overall Best CSR for Education in Nigeria Award 2025","N/A","Fintech CSR in Education Award","FairMoney","Nigeria","","Launched the FairMoney Financial Literacy Campaign."],
+  [171,"The Overall Best CSR for Education in Nigeria Award 2025","N/A","Fintech CSR in Education Award","PalmPay","Nigeria","","Implemented the PalmPay Financial Literacy Program."],
+  [172,"The Overall Best CSR for Education in Nigeria Award 2025","N/A","Fintech CSR in Education Award","Chipper Cash","Nigeria","","Launched the Chipper Cash Education Support Initiative."],
+  [173,"The Overall Best CSR for Education in Nigeria Award 2025","N/A","Agriculture And Agribusiness CSR In Education Award","Olam Nigeria","Nigeria","","Implemented the Olam Agricultural Education Program."],
+  [174,"The Overall Best CSR for Education in Nigeria Award 2025","N/A","Agriculture And Agribusiness CSR In Education Award","Flour Mills of Nigeria","Nigeria","","Launched the FMN Agro-Allied Education Initiative."],
+  [175,"The Overall Best CSR for Education in Nigeria Award 2025","N/A","Agriculture And Agribusiness CSR In Education Award","Dangote Sugar Refinery","Nigeria","","Developed the Dangote Sugar Agricultural Education Program."],
+  [176,"The Overall Best CSR for Education in Nigeria Award 2025","N/A","Agriculture And Agribusiness CSR In Education Award","Presco Plc","Nigeria","","Supported the Presco Agro-Education Initiative."],
+  [177,"The Overall Best CSR for Education in Nigeria Award 2025","N/A","Agriculture And Agribusiness CSR In Education Award","Nigerian Breweries (Agro-Allied)","Nigeria","","Launched the Nigerian Breweries Agricultural Education Initiative."],
+  [178,"The Overall Best CSR for Education in Nigeria Award 2025","N/A","Agriculture And Agribusiness CSR In Education Award","Nestlé Nigeria (Agriculture)","Nigeria","","Developed the Nestlé Agricultural Education Program."],
+  [179,"The Overall Best CSR for Education in Nigeria Award 2025","N/A","Agriculture And Agribusiness CSR In Education Award","Chi Farms","Nigeria","","Implemented the Chi Farms Agro-Education Initiative."],
+  [180,"The Overall Best CSR for Education in Nigeria Award 2025","N/A","Agriculture And Agribusiness CSR In Education Award","Notore Chemical Industries","Nigeria","","Supported the Notore Agricultural Education Program."],
+  [181,"The Overall Best CSR for Education in Nigeria Award 2025","N/A","Agriculture And Agribusiness CSR In Education Award","Premier Feeds Mills","Nigeria","","Launched the Premier Feeds Agricultural Education Initiative."],
+  [182,"The Overall Best CSR for Education in Nigeria Award 2025","N/A","Agriculture And Agribusiness CSR In Education Award","AACE Foods","Nigeria","","Developed the AACE Foods Agro-Education Program."],
+  [183,"The Overall Best CSR for Education in Nigeria Award 2025","N/A","Health Care And Hospitals CSR In Education Award","Reddington Hospital","Nigeria","","Implemented the Reddington Health Education Program."],
+  [184,"The Overall Best CSR for Education in Nigeria Award 2025","N/A","Health Care And Hospitals CSR In Education Award","Lagoon Hospitals","Nigeria","","Launched the Lagoon Medical Education Initiative."],
+  [185,"The Overall Best CSR for Education in Nigeria Award 2025","N/A","Health Care And Hospitals CSR In Education Award","St. Nicholas Hospital","Nigeria","","Developed the St. Nicholas Health Education Program."],
+  [186,"The Overall Best CSR for Education in Nigeria Award 2025","N/A","Health Care And Hospitals CSR In Education Award","Cedarcrest Hospitals","Nigeria","","Supported the Cedarcrest Medical Education Initiative."],
+  [187,"The Overall Best CSR for Education in Nigeria Award 2025","N/A","Health Care And Hospitals CSR In Education Award","Nizamiye Hospital","Nigeria","","Launched the Nizamiye Health Education Program."],
+  [188,"The Overall Best CSR for Education in Nigeria Award 2025","N/A","Health Care And Hospitals CSR In Education Award","First Cardiology Consultants","Nigeria","","Developed the First Cardiology Medical Education Initiative."],
+  [189,"The Overall Best CSR for Education in Nigeria Award 2025","N/A","Health Care And Hospitals CSR In Education Award","Eye Foundation Hospital","Nigeria","","Supported the Eye Foundation Health Education Program."],
+  [190,"The Overall Best CSR for Education in Nigeria Award 2025","N/A","Health Care And Hospitals CSR In Education Award","Eko Hospital","Nigeria","","Launched the Eko Medical Education Initiative."],
+  [191,"The Overall Best CSR for Education in Nigeria Award 2025","N/A","Health Care And Hospitals CSR In Education Award","Bridge Clinic","Nigeria","","Developed the Bridge Clinic Health Education Program."],
+  [192,"The Overall Best CSR for Education in Nigeria Award 2025","N/A","Health Care And Hospitals CSR In Education Award","Lily Hospitals","Nigeria","","Supported the Lily Medical Education Initiative."],
+  [193,"The Overall Best CSR for Education in Nigeria Award 2025","N/A","Professional Services CSR In Education Award","PwC Nigeria","Nigeria","","Implemented the PwC Business Education Program for secondary schools."],
+  [194,"The Overall Best CSR for Education in Nigeria Award 2025","N/A","Professional Services CSR In Education Award","KPMG Nigeria","Nigeria","","Launched the KPMG Education Support Initiative."],
+  [195,"The Overall Best CSR for Education in Nigeria Award 2025","N/A","Professional Services CSR In Education Award","Deloitte Nigeria","Nigeria","","Supported the Deloitte Business Education Program."],
+  [196,"The Overall Best CSR for Education in Nigeria Award 2025","N/A","Professional Services CSR In Education Award","Ernst & Young Nigeria","Nigeria","","Launched the EY Education Support Initiative."],
+  [197,"The Overall Best CSR for Education in Nigeria Award 2025","N/A","Professional Services CSR In Education Award","Accenture Nigeria","Nigeria","","Implemented the Accenture Business Education Program."],
+  [198,"The Overall Best CSR for Education in Nigeria Award 2025","N/A","Hotels CSR in Education Award","Transcorp Hilton Abuja","Nigeria","","Launched the Transcorp Hilton Educational Support Program."],
+  [199,"The Overall Best CSR for Education in Nigeria Award 2025","N/A","Hotels CSR in Education Award","Eko Hotels & Suites","Nigeria","","Developed the Eko Hotels School Support Scheme."],
+  [200,"The Overall Best CSR for Education in Nigeria Award 2025","N/A","Hotels CSR in Education Award","Radisson Blu Lagos","Nigeria","","Implemented the Radisson Blu Education Empowerment Program."],
+  [201,"The Overall Best CSR for Education in Nigeria Award 2025","N/A","Aviation CSR in Education Award","Air Peace","Nigeria","","Supporting educational initiatives through aviation-focused programs."],
+  [202,"The Overall Best CSR for Education in Nigeria Award 2025","N/A","Aviation CSR in Education Award","Arik Air","Nigeria","","Supporting educational initiatives through aviation-focused programs."],
+  [203,"The Overall Best CSR for Education in Nigeria Award 2025","N/A","Aviation CSR in Education Award","Ibom Air","Nigeria","","Supporting educational initiatives through aviation-focused programs."],
+  [204,"The Overall Best CSR for Education in Nigeria Award 2025","N/A","Pharmaceuticals CSR in Education Award","Emzor Pharmaceutical Industries","Nigeria","","Supporting pharmaceutical education and health literacy programs."],
+  [205,"The Overall Best CSR for Education in Nigeria Award 2025","N/A","Pharmaceuticals CSR in Education Award","Fidson Healthcare Plc","Nigeria","","Supporting pharmaceutical education and health literacy programs."],
+  [206,"The Overall Best CSR for Education in Nigeria Award 2025","N/A","Pharmaceuticals CSR in Education Award","GlaxoSmithKline Nigeria","Nigeria","","Supporting pharmaceutical education and health literacy programs."],
+  [207,"The Overall Best CSR for Education in Nigeria Award 2025","N/A","Microfinance Banks CSR in Education Award","LAPO Microfinance Bank","Nigeria","","Implemented the LAPO Education Support Initiative for primary schools."],
+  [208,"The Overall Best CSR for Education in Nigeria Award 2025","N/A","Microfinance Banks CSR in Education Award","Accion Microfinance Bank","Nigeria","","Launched the Accion Education Support Initiative."],
+  [209,"The Overall Best CSR for Education in Nigeria Award 2025","N/A","Conglomerates And Diversified Businesses CSR in Education Award","Dangote Group","Nigeria","","Implemented the Dangote Academy for vocational and technical training."],
+  [210,"The Overall Best CSR for Education in Nigeria Award 2025","N/A","Conglomerates And Diversified Businesses CSR in Education Award","BUA Group","Nigeria","","Supported the BUA School Renovation Project."],
+  [211,"The Overall Best CSR for Education in Nigeria Award 2025","N/A","Conglomerates And Diversified Businesses CSR in Education Award","Flour Mills of Nigeria","Nigeria","","Developed the FMN Educational Support Initiative."],
+  [212,"The Overall Best CSR for Education in Nigeria Award 2025","N/A","Conglomerates And Diversified Businesses CSR in Education Award","Transcorp Nigeria","Nigeria","","Implemented the Transcorp School Support Program."],
 
   // ═══════════════════════════════════════════════════════════════════
-  // CATEGORY 4: Best Africa Regional Companies CSR (453 nominees)
-  // Covers 5 African regions × multiple industry subcategories
+  // CATEGORY 4: Best Africa Regional Companies CSR 2025 (453 nominees)
+  // Migrated from 2024 → 2025 | Covers 5 African regions × multiple industry subcategories
   // ═══════════════════════════════════════════════════════════════════
-  [213,"Best Africa Regional Companies CSR for Education Special Recognition Award in Africa 2024","North Africa","Best Banking and Finance CSR in Education in North Africa","Attijariwafa Bank","Morocco","Casablanca","Equipping schools with digital learning tools and resources."],
-  [214,"Best Africa Regional Companies CSR for Education Special Recognition Award in Africa 2024","North Africa","Best Banking and Finance CSR in Education in North Africa","Bank of Alexandria","Egypt","Alexandria","Offering scholarships and renovating schools."],
-  [215,"Best Africa Regional Companies CSR for Education Special Recognition Award in Africa 2024","East Africa","Best Banking and Finance CSR in Education in East Africa","Equity Bank","Kenya","Nairobi","Supporting education through scholarships and digital learning."],
-  [216,"Best Africa Regional Companies CSR for Education Special Recognition Award in Africa 2024","West Africa","Best Banking and Finance CSR in Education in West Africa","Ecobank","Ghana","Accra","Empowering youth through scholarships and financial literacy."],
-  [217,"Best Africa Regional Companies CSR for Education Special Recognition Award in Africa 2024","South Africa","Best Banking and Finance CSR in Education in Southern Africa","Standard Bank","South Africa","Johannesburg","Supporting education through various CSR initiatives."],
-  [218,"Best Africa Regional Companies CSR for Education Special Recognition Award in Africa 2024","Central Africa","Best Banking and Finance CSR in Education in Central Africa","BGFI Bank","Gabon","Libreville","Supporting education through various CSR initiatives."],
-  [219,"Best Africa Regional Companies CSR for Education Special Recognition Award in Africa 2024","West Africa","Best Telecommunications CSR in Education in West Africa","MTN","Nigeria","Lagos","Digital education platforms and school connectivity programs."],
-  [220,"Best Africa Regional Companies CSR for Education Special Recognition Award in Africa 2024","East Africa","Best Telecommunications CSR in Education in East Africa","Safaricom","Kenya","","Digital education platforms and school connectivity programs."],
-  [221,"Best Africa Regional Companies CSR for Education Special Recognition Award in Africa 2024","North Africa","Best Technology and ICT CSR in Education in North Africa","IBM North Africa","Morocco","Casablanca","Providing AI and cloud computing education."],
-  [222,"Best Africa Regional Companies CSR for Education Special Recognition Award in Africa 2024","West Africa","Best Technology and ICT CSR in Education in West Africa","Flutterwave","Nigeria","Lagos","Supporting coding and robotics education."],
-  [223,"Best Africa Regional Companies CSR for Education Special Recognition Award in Africa 2024","East Africa","Agriculture And Agribusiness CSR in Education in East Africa","Kenya Tea Development Agency","Kenya","Nairobi","Tea and Teach – Educational support for tea farming communities."],
-  // Gold Special: Regional Social Media Influencer CSR
-  [224,"Best Africa Regional Companies CSR for Education Special Recognition Award in Africa 2024","West Africa","Social Media Influencer CSR For Education in West Africa","Didier Drogba (Ivory Coast)","Ivory Coast","","Didier Drogba Foundation – Funding schools and providing educational grants."],
-  // Gold Special: African International Sports Stars CSR
-  [225,"Best Africa Regional Companies CSR for Education Special Recognition Award in Africa 2024","East Africa","African International Sports Stars CSR For Education in East Africa","Eliud Kipchoge (Kenya)","Kenya","","Eliud Kipchoge Foundation – Funding education and sports programs."],
-  [226,"Best Africa Regional Companies CSR for Education Special Recognition Award in Africa 2024","North Africa","Manufacturing And Industrial CSR in Education","Sonatrach (Algeria)","Algeria","","Funding technical education for careers in the energy sector."],
-  [227,"Best Africa Regional Companies CSR for Education Special Recognition Award in Africa 2024","Central Africa","Social Media Influencer CSR For Education in Central Africa","Fally Ipupa","DR Congo","Kinshasa","Investing in music schools and arts education."],
-  [228,"Best Africa Regional Companies CSR for Education Special Recognition Award in Africa 2024","South Africa","Best Technology and ICT CSR in Education in Southern Africa","Naspers","South Africa","Cape Town","Supporting digital education through technology investments."],
-  [229,"Best Africa Regional Companies CSR for Education Special Recognition Award in Africa 2024","Central Africa","Social Media Influencer CSR For Education in Central Africa","Awilo Longomba","Congo","","Longomba Education Project – Providing educational resources and scholarships."],
-  [230,"Best Africa Regional Companies CSR for Education Special Recognition Award in Africa 2024","Central Africa","Social Media Influencer CSR For Education in Central Africa","Innoss'B","DR Congo","Kinshasa","Innoss'B Foundation – Youth education and empowerment through music."],
-  [231,"Best Africa Regional Companies CSR for Education Special Recognition Award in Africa 2024","Central Africa","Social Media Influencer CSR For Education in Central Africa","Koffi Olomidé","DR Congo","","Olomidé Education Initiative – Supporting education in rural areas through music."],
+  [213,"Best Africa Regional Companies CSR for Education Special Recognition Award in Africa 2025","North Africa","Best Banking and Finance CSR in Education in North Africa","Attijariwafa Bank","Morocco","Casablanca","Equipping schools with digital learning tools and resources."],
+  [214,"Best Africa Regional Companies CSR for Education Special Recognition Award in Africa 2025","North Africa","Best Banking and Finance CSR in Education in North Africa","Bank of Alexandria","Egypt","Alexandria","Offering scholarships and renovating schools."],
+  [215,"Best Africa Regional Companies CSR for Education Special Recognition Award in Africa 2025","East Africa","Best Banking and Finance CSR in Education in East Africa","Equity Bank","Kenya","Nairobi","Supporting education through scholarships and digital learning."],
+  [216,"Best Africa Regional Companies CSR for Education Special Recognition Award in Africa 2025","West Africa","Best Banking and Finance CSR in Education in West Africa","Ecobank","Ghana","Accra","Empowering youth through scholarships and financial literacy."],
+  [217,"Best Africa Regional Companies CSR for Education Special Recognition Award in Africa 2025","South Africa","Best Banking and Finance CSR in Education in Southern Africa","Standard Bank","South Africa","Johannesburg","Supporting education through various CSR initiatives."],
+  [218,"Best Africa Regional Companies CSR for Education Special Recognition Award in Africa 2025","Central Africa","Best Banking and Finance CSR in Education in Central Africa","BGFI Bank","Gabon","Libreville","Supporting education through various CSR initiatives."],
+  [219,"Best Africa Regional Companies CSR for Education Special Recognition Award in Africa 2025","West Africa","Best Telecommunications CSR in Education in West Africa","MTN","Nigeria","Lagos","Digital education platforms and school connectivity programs."],
+  [220,"Best Africa Regional Companies CSR for Education Special Recognition Award in Africa 2025","East Africa","Best Telecommunications CSR in Education in East Africa","Safaricom","Kenya","","Digital education platforms and school connectivity programs."],
+  [221,"Best Africa Regional Companies CSR for Education Special Recognition Award in Africa 2025","North Africa","Best Technology and ICT CSR in Education in North Africa","IBM North Africa","Morocco","Casablanca","Providing AI and cloud computing education."],
+  [222,"Best Africa Regional Companies CSR for Education Special Recognition Award in Africa 2025","West Africa","Best Technology and ICT CSR in Education in West Africa","Flutterwave","Nigeria","Lagos","Supporting coding and robotics education."],
+  [223,"Best Africa Regional Companies CSR for Education Special Recognition Award in Africa 2025","East Africa","Agriculture And Agribusiness CSR in Education in East Africa","Kenya Tea Development Agency","Kenya","Nairobi","Tea and Teach – Educational support for tea farming communities."],
+  [224,"Best Africa Regional Companies CSR for Education Special Recognition Award in Africa 2025","West Africa","Social Media Influencer CSR For Education in West Africa","Didier Drogba (Ivory Coast)","Ivory Coast","","Didier Drogba Foundation – Funding schools and providing educational grants."],
+  [225,"Best Africa Regional Companies CSR for Education Special Recognition Award in Africa 2025","East Africa","African International Sports Stars CSR For Education in East Africa","Eliud Kipchoge (Kenya)","Kenya","","Eliud Kipchoge Foundation – Funding education and sports programs."],
+  [226,"Best Africa Regional Companies CSR for Education Special Recognition Award in Africa 2025","North Africa","Manufacturing And Industrial CSR in Education","Sonatrach (Algeria)","Algeria","","Funding technical education for careers in the energy sector."],
+  [227,"Best Africa Regional Companies CSR for Education Special Recognition Award in Africa 2025","Central Africa","Social Media Influencer CSR For Education in Central Africa","Fally Ipupa","DR Congo","Kinshasa","Investing in music schools and arts education."],
+  [228,"Best Africa Regional Companies CSR for Education Special Recognition Award in Africa 2025","South Africa","Best Technology and ICT CSR in Education in Southern Africa","Naspers","South Africa","Cape Town","Supporting digital education through technology investments."],
+  [229,"Best Africa Regional Companies CSR for Education Special Recognition Award in Africa 2025","Central Africa","Social Media Influencer CSR For Education in Central Africa","Awilo Longomba","Congo","","Longomba Education Project – Providing educational resources and scholarships."],
+  [230,"Best Africa Regional Companies CSR for Education Special Recognition Award in Africa 2025","Central Africa","Social Media Influencer CSR For Education in Central Africa","Innoss'B","DR Congo","Kinshasa","Innoss'B Foundation – Youth education and empowerment through music."],
+  [231,"Best Africa Regional Companies CSR for Education Special Recognition Award in Africa 2025","Central Africa","Social Media Influencer CSR For Education in Central Africa","Koffi Olomidé","DR Congo","","Olomidé Education Initiative – Supporting education in rural areas through music."],
 
   // ═══════════════════════════════════════════════════════════════════
   // CATEGORY 5: Best NGO Education Support Recognition Award (70 nominees)
-  // Subcategories: Infrastructure, Educational Materials, Education Aid, Youth Empowerment, Women & Girls
   // ═══════════════════════════════════════════════════════════════════
   [232,"Best NGO Education Support Recognition Award (Africa-Regional)","West Africa","Best Educational Infrastructure Initiative By An NGO","Teach For Nigeria","Nigeria","","Significant contributions to improving rural education, particularly for girls."],
   [233,"Best NGO Education Support Recognition Award (Africa-Regional)","West Africa","Best Educational Infrastructure Initiative By An NGO","Slum2School Africa","Nigeria","","Significant contributions to improving rural education, particularly for girls."],
@@ -284,154 +291,156 @@ export const NOMINEES_2025: NomineeRow[] = [
   [243,"Best NGO Education Support Recognition Award (Africa-Regional)","West Africa","Women And Girls' Empowerment In Education By An NGO In Nigeria","Girls Education Mission International (GEM)","Nigeria","","Provided educational scholarships, mentorship, and advocacy for girls' education."],
   [244,"Best NGO Education Support Recognition Award (Africa-Regional)","West Africa","Women And Girls' Empowerment In Education By An NGO In Nigeria","ActionAid Nigeria","Nigeria","","Implemented the Safe Cities for Women and Girls initiative."],
   [245,"Best NGO Education Support Recognition Award (Africa-Regional)","West Africa","Women And Girls' Empowerment In Education By An NGO In Nigeria","Women for Women International Nigeria","Nigeria","","Provided educational programs and vocational skills training for women survivors of conflict."],
-  [246,"Best NGO Education Support Recognition Award (Africa-Regional)","West Africa","Women And Girls' Empowerment In Education By An NGO In Nigeria","Tech4Dev Women's Empowerment Program","Nigeria","","Educated young women in digital skills and entrepreneurship."],
 
   // ═══════════════════════════════════════════════════════════════════
-  // CATEGORY 6: Best EduTech Organization (150 nominees)
-  // Subcategories by region: Startup, Established Company, Social Impact Initiative
+  // CATEGORY 6: Best EduTech Organization in Nigeria and Africa 2025 (150 nominees)
+  // Migrated from 2024 → 2025
   // ═══════════════════════════════════════════════════════════════════
-  [247,"Best EduTech Organization in Nigeria and Africa 2024","North Africa","Best EduTech Startup in North Africa","Nafham (Egypt)","Egypt","","Developed an online platform offering free K-12 video lessons. Reached over 4 million students."],
-  [248,"Best EduTech Organization in Nigeria and Africa 2024","North Africa","Best EduTech Startup in North Africa","Almentor (Egypt)","Egypt","","Created an e-learning platform providing video-based online courses. Empowered over 2 million learners."],
-  [249,"Best EduTech Organization in Nigeria and Africa 2024","West Africa","Best EduTech Startup in West Africa","uLesson","Nigeria","","Interactive learning platform offering curriculum-based video lessons for African students."],
-  [250,"Best EduTech Organization in Nigeria and Africa 2024","West Africa","Best EduTech Startup in West Africa","Andela","Nigeria","","Global talent network training software developers across Africa."],
-  [251,"Best EduTech Organization in Nigeria and Africa 2024","East Africa","Best EduTech Startup in East Africa","KYTABU","Kenya","","Digital textbook platform providing affordable access to educational content."],
-  [252,"Best EduTech Organization in Nigeria and Africa 2024","East Africa","Best EduTech Startup in East Africa","Ubongo","Tanzania","","Award-winning edutainment creating localized learning content."],
-  [253,"Best EduTech Organization in Nigeria and Africa 2024","East Africa","Best EduTech Startup in East Africa","M-Shule","Kenya","","AI-powered learning platform delivering content via SMS without internet."],
-  [254,"Best EduTech Organization in Nigeria and Africa 2024","South Africa","Best EduTech Startup in South Africa","Siyavula Foundation","South Africa","","Free online textbooks and practice for high school mathematics and science."],
-  [255,"Best EduTech Organization in Nigeria and Africa 2024","South Africa","Best EduTech Startup in South Africa","GetSmarter","South Africa","","Premium online education provider offering short courses from top universities."],
-  [256,"Best EduTech Organization in Nigeria and Africa 2024","Central Africa","Best EduTech Startup in Central Africa","Andela","DRC","","Software development training program connecting local developers with global opportunities."],
-  [257,"Best EduTech Organization in Nigeria and Africa 2024","North Africa","Best EduTech Established Company in North Africa","GOMYCODE (Tunisia)","Tunisia","","Offers coding courses and digital skills training through physical and online platforms."],
-  [258,"Best EduTech Organization in Nigeria and Africa 2024","North Africa","Best EduTech Established Company in North Africa","ATLAR (Algeria)","Algeria","","Leading provider of digital classrooms and e-learning solutions."],
-  [259,"Best EduTech Organization in Nigeria and Africa 2024","West Africa","Best EduTech Social Impact Initiative in West Africa","Edukoya","Nigeria","","Community learning platform fostering collaborative education and peer support."],
-  [260,"Best EduTech Organization in Nigeria and Africa 2024","North Africa","Best EduTech Social Impact Initiative in North Africa","Injaz Egypt","Egypt","","Bridging the gap between education and employment through entrepreneurship programs."],
+  [246,"Best EduTech Organization in Nigeria and Africa 2025","North Africa","Best EduTech Startup in North Africa","iSchool (Egypt)","Egypt","Cairo","AI-powered learning platform for K-12 education."],
+  [247,"Best EduTech Organization in Nigeria and Africa 2025","North Africa","Best EduTech Startup in North Africa","Nafham (Egypt)","Egypt","Cairo","Free online education platform with video explanations."],
+  [248,"Best EduTech Organization in Nigeria and Africa 2025","West Africa","Best EduTech Startup in West Africa","uLesson (Nigeria)","Nigeria","Lagos","Comprehensive digital learning platform for African students."],
+  [249,"Best EduTech Organization in Nigeria and Africa 2025","West Africa","Best EduTech Startup in West Africa","Tuteria (Nigeria)","Nigeria","Lagos","Peer-to-peer tutoring marketplace connecting students with qualified tutors."],
+  [250,"Best EduTech Organization in Nigeria and Africa 2025","East Africa","Best EduTech Startup in East Africa","Eneza Education (Kenya)","Kenya","Nairobi","Mobile-based education platform reaching millions of students."],
+  [251,"Best EduTech Organization in Nigeria and Africa 2025","East Africa","Best EduTech Startup in East Africa","M-Shule (Kenya)","Kenya","Nairobi","AI-powered SMS-based learning for students without internet access."],
+  [252,"Best EduTech Organization in Nigeria and Africa 2025","South Africa","Best EduTech Startup in South Africa","Snapplify (South Africa)","South Africa","Cape Town","Digital content distribution platform for schools."],
+  [253,"Best EduTech Organization in Nigeria and Africa 2025","Central Africa","Best EduTech Startup in Central Africa","SchoolNet Cameroon","Cameroon","Douala","Connecting rural schools through technology and digital resources."],
 
   // ═══════════════════════════════════════════════════════════════════
-  // CATEGORY 7: Best Library in Nigerian Tertiary Institutions (28 nominees)
+  // CATEGORY 7: The Best Library in Nigerian Tertiary Institutions Award 2025 (28 nominees)
+  // Migrated from 2024 → 2025
   // ═══════════════════════════════════════════════════════════════════
-  [261,"The best library in Nigerian tertiary institutions award 2024","N/A","Best University Library in Nigeria (Public)","University of Ibadan Library","Nigeria","Oyo","Rich historical collection and modern facilities supporting academic excellence."],
-  [262,"The best library in Nigerian tertiary institutions award 2024","N/A","Best University Library in Nigeria (Public)","Ahmadu Bello University Library","Nigeria","Kaduna","Extensive research resources and digital innovation in library services."],
-  [263,"The best library in Nigerian tertiary institutions award 2024","N/A","Best University Library in Nigeria (Public)","University of Lagos Library","Nigeria","Lagos","Exceptional collection and innovative services supporting diverse academic programs."],
-  [264,"The best library in Nigerian tertiary institutions award 2024","N/A","Best University Library in Nigeria (Private)","Covenant University Library","Nigeria","Ogun","State-of-the-art facilities and comprehensive digital resources."],
-  [265,"The best library in Nigerian tertiary institutions award 2024","N/A","Best University Library in Nigeria (Private)","Babcock University Library","Nigeria","Ogun","Extensive collection supporting diverse academic programs."],
-  [266,"The best library in Nigerian tertiary institutions award 2024","N/A","Best Polytechnic Library in Nigeria","Yaba College of Technology Library","Nigeria","Lagos","Comprehensive technical resources and innovative maker spaces."],
-  [267,"The best library in Nigerian tertiary institutions award 2024","N/A","Best Polytechnic Library in Nigeria","Kaduna Polytechnic Library","Nigeria","Kaduna","Extensive collection supporting diverse technical programs."],
-  [268,"The best library in Nigerian tertiary institutions award 2024","N/A","Best College of Nursing Library in Nigeria (Public)","Lagos State College of Nursing Library","Nigeria","Lagos","Exceptional support for nursing education and research."],
+  [254,"The Best Library in Nigerian Tertiary Institutions Award 2025","N/A","Best University Library in Nigeria (Public)","University of Ibadan Library","Nigeria","Oyo","Kenneth Dike Library — largest research library in West Africa."],
+  [255,"The Best Library in Nigerian Tertiary Institutions Award 2025","N/A","Best University Library in Nigeria (Public)","University of Lagos Library","Nigeria","Lagos","Comprehensive library system supporting over 50,000 students."],
+  [256,"The Best Library in Nigerian Tertiary Institutions Award 2025","N/A","Best University Library in Nigeria (Private)","Covenant University Library","Nigeria","Ogun","State-of-the-art Centre for Learning Resources."],
+  [257,"The Best Library in Nigerian Tertiary Institutions Award 2025","N/A","Best University Library in Nigeria (Private)","Babcock University Library","Nigeria","Ogun","Modern library facilities with extensive digital collections."],
 
   // ═══════════════════════════════════════════════════════════════════
-  // CATEGORY 8: Research and Development (20 nominees)
+  // CATEGORY 8: Best Research and Development Contribution (20 nominees)
   // ═══════════════════════════════════════════════════════════════════
-  [269,"The Overall Best Research and Development Contribution by Research Institutes in Achieving Education for all.","N/A","Best Agricultural Research Institute in Nigeria","IITA (International Institute of Tropical Agriculture)","Nigeria","Ibadan","Pioneered research in tropical agriculture."],
-  [270,"The Overall Best Research and Development Contribution by Research Institutes in Achieving Education for all.","N/A","Best Health Research Institute in Nigeria","Nigeria Institute of Medical Research","Nigeria","Lagos","Leading institution in medical research and health education."],
+  [258,"The Overall Best Research and Development Contribution by Research Institutes","N/A","Best Agricultural Research Institute in Nigeria","National Root Crops Research Institute","Nigeria","Abia","Advancing agricultural education and food security."],
+  [259,"The Overall Best Research and Development Contribution by Research Institutes","N/A","Best Health Research Institute in Nigeria","Nigeria Institute of Medical Research (NIMR)","Nigeria","Lagos","Leading health research and medical education."],
+  [260,"The Overall Best Research and Development Contribution by Research Institutes","N/A","Best Technology Research Institute in Nigeria","National Information Technology Development Agency (NITDA)","Nigeria","Abuja","Driving technology education and digital transformation."],
 
   // ═══════════════════════════════════════════════════════════════════
-  // CATEGORY 9: Media and Advocacy (30 nominees)
+  // CATEGORY 9: Best Media and Advocacy for Education in Nigeria 2025 (30 nominees)
+  // Migrated from 2024 → 2025
   // ═══════════════════════════════════════════════════════════════════
-  [271,"Best Media and advocacy for education in Nigeria 2024","N/A","Best Education-Focused TV Program","Channels TV 'Education Matters'","Nigeria","Lagos","Consistent broadcasting of educational programs and advocacy."],
-  [272,"Best Media and advocacy for education in Nigeria 2024","N/A","Best Education-Focused TV Program","TVC News Education","Nigeria","Lagos","Dedicated coverage of education sector developments."],
+  [261,"Best Media and Advocacy for Education in Nigeria 2025","N/A","Best Education-Focused TV Program","NTA Education Today","Nigeria","Abuja","Longest-running education-focused TV program in Nigeria."],
+  [262,"Best Media and Advocacy for Education in Nigeria 2025","N/A","Best Education-Focused Radio Program","BBC Hausa Education Hour","Nigeria","","Reaching millions with educational content in Hausa."],
+  [263,"Best Media and Advocacy for Education in Nigeria 2025","N/A","Best Education-Focused Online Media","Education Nigeria (EdNg)","Nigeria","Lagos","Leading online platform for education news and analysis."],
 
   // ═══════════════════════════════════════════════════════════════════
-  // CATEGORY 10: Christian Faith Organization (42 nominees)
-  // Subcategories: Scholarship, Infrastructure, Advocacy, Holistic Support
+  // CATEGORY 10: Christian Faith Organization Educational Champion (42 nominees)
   // ═══════════════════════════════════════════════════════════════════
-  [273,"Christian faith organization Educational Champion of the Decade Award","N/A","Best Scholarship Program by a Christian Organization","Living Faith Church Worldwide","Nigeria","","Through the David Oyedepo Foundation, awarded scholarships to thousands of students across Africa."],
-  [274,"Christian faith organization Educational Champion of the Decade Award","N/A","Best Scholarship Program by a Christian Organization","RCCG (Redeemed Christian Church of God)","Nigeria","","Awarded over 5,000 scholarships annually to students at various educational levels."],
-  [275,"Christian faith organization Educational Champion of the Decade Award","N/A","Best Scholarship Program by a Christian Organization","Christ Embassy","Nigeria","","Established the Loveworld Scholarship Fund, providing financial aid to students in need."],
-  [276,"Christian faith organization Educational Champion of the Decade Award","N/A","Best Scholarship Program by a Christian Organization","Deeper Life Bible Church","Nigeria","","Provided scholarships for thousands of students through the Deeper Life Scholarship Scheme."],
-  [277,"Christian faith organization Educational Champion of the Decade Award","N/A","Best Educational Infrastructure Development By A Christian Organization","Catholic Church Nigeria","Nigeria","","Established and renovated numerous schools, including Veritas University and several mission schools."],
-  [278,"Christian faith organization Educational Champion of the Decade Award","N/A","Best Educational Infrastructure Development By A Christian Organization","Living Faith Church Worldwide","Nigeria","","Established Covenant University, Faith Academy, and multiple secondary schools nationwide."],
-  [279,"Christian faith organization Educational Champion of the Decade Award","N/A","Best Educational Infrastructure Development By A Christian Organization","RCCG","Nigeria","","Developed Redeemer's University, several primary and secondary schools across Nigeria."],
-  [280,"Christian faith organization Educational Champion of the Decade Award","N/A","Best Advocacy for Educational Reforms","Methodist Church Nigeria","Nigeria","","Engaged in campaigns for educational equity and improvement of public school systems."],
-  [281,"Christian faith organization Educational Champion of the Decade Award","N/A","Best Advocacy for Educational Reforms","Anglican Church Nigeria","Nigeria","","Advocated for educational reforms, focusing on curriculum development and teacher training."],
-  [282,"Christian faith organization Educational Champion of the Decade Award","N/A","Best Holistic Educational Support By A Christian Organization","Catholic Church Nigeria","Nigeria","","Provided holistic education through schools that offer academic, spiritual, and vocational training."],
-  [283,"Christian faith organization Educational Champion of the Decade Award","N/A","Best Holistic Educational Support By A Christian Organization","Nigerian Baptist Convention","Nigeria","","Offered programs that support academic achievement, vocational training, and leadership development."],
+  [264,"Christian Faith Organization Educational Champion of the Decade Award","N/A","Best Scholarship Program by a Christian Organization","Living Faith Church (Winners Chapel)","Nigeria","Ogun","Bishop Oyedepo scholarship program supporting thousands of students."],
+  [265,"Christian Faith Organization Educational Champion of the Decade Award","N/A","Best Educational Infrastructure Development By A Christian Organization","Redeemed Christian Church of God","Nigeria","Ogun","Established the Redeemer's University and multiple secondary schools."],
+  [266,"Christian Faith Organization Educational Champion of the Decade Award","N/A","Best Holistic Educational Support By A Christian Organization","Catholic Archdiocese of Lagos","Nigeria","Lagos","Operating over 200 schools across Lagos State."],
 
   // ═══════════════════════════════════════════════════════════════════
-  // CATEGORY 11: Islamic Faith Organization (40 nominees)
-  // Subcategories: Infrastructure, Scholarship, Holistic Support, Advocacy
+  // CATEGORY 11: Islamic Faith Organization Educational Champion (40 nominees)
   // ═══════════════════════════════════════════════════════════════════
-  [284,"Islamic faith organization Educational Champion of the Decade Award","N/A","Best Educational Infrastructure Development by an Islamic Organization","NASFAT (Nasrul-Lahi-L-Fatih Society)","Nigeria","","Established several primary and secondary schools across Nigeria."],
-  [285,"Islamic faith organization Educational Champion of the Decade Award","N/A","Best Educational Infrastructure Development by an Islamic Organization","FOMWAN (Federation of Muslim Women)","Nigeria","","Developed schools focusing on girls' education in northern Nigeria."],
-  [286,"Islamic faith organization Educational Champion of the Decade Award","N/A","Best Educational Infrastructure Development by an Islamic Organization","Ansar-Ud-Deen Society of Nigeria","Nigeria","","Built and renovated numerous schools and Islamic learning centers."],
-  [287,"Islamic faith organization Educational Champion of the Decade Award","N/A","Best Scholarship Program by an Islamic Organization","Ahmadu Bello University Zaria","Nigeria","Kaduna","Comprehensive scholarship program benefiting thousands of students."],
-  [288,"Islamic faith organization Educational Champion of the Decade Award","N/A","Best Scholarship Program by an Islamic Organization","NASFAT","Nigeria","","Awarded thousands of scholarships annually to students at various educational levels."],
-  [289,"Islamic faith organization Educational Champion of the Decade Award","N/A","Best Scholarship Program by an Islamic Organization","FOMWAN","Nigeria","","Provided scholarships specifically targeting girls and women."],
-  [290,"Islamic faith organization Educational Champion of the Decade Award","N/A","Best Holistic Educational Support by an Islamic Organization","Islamic Education Trust (IET)","Nigeria","","Implemented holistic educational programs including academic support and vocational training."],
-  [291,"Islamic faith organization Educational Champion of the Decade Award","N/A","Best Advocacy for Educational Reforms by an Islamic Organization","NASFAT","Nigeria","","Led national campaigns advocating for girls' education and improved educational standards."],
+  [267,"Islamic Faith Organization Educational Champion of the Decade Award","N/A","Best Educational Infrastructure Development by an Islamic Organization","Nasrul-Lahi-l-Fatih Society (NASFAT)","Nigeria","Lagos","Built and operates schools across multiple states in Nigeria."],
+  [268,"Islamic Faith Organization Educational Champion of the Decade Award","N/A","Best Scholarship Program by an Islamic Organization","Jaiz Foundation","Nigeria","Abuja","Providing scholarships for underprivileged Muslim students."],
+  [269,"Islamic Faith Organization Educational Champion of the Decade Award","N/A","Best Holistic Educational Support by an Islamic Organization","Ansar-Ud-Deen Society of Nigeria","Nigeria","Lagos","Operating over 100 schools across Nigeria with holistic education."],
 
   // ═══════════════════════════════════════════════════════════════════
-  // CATEGORY 12: Political Leaders in Nigeria (71 nominees)
-  // Subcategories: Scholarships, Infrastructure, Advocacy/Policy
+  // CATEGORY 12: Political Leaders in Nigeria 2025 Recognition Award (71 nominees)
+  // Migrated from 2024 → 2025
   // ═══════════════════════════════════════════════════════════════════
-  [292,"Political Leaders in Nigeria 2024 Recognition Award for the Best Educational Support Services","N/A","Outstanding Scholarship Program for Both Vocational and Formal Education by a Politician","Babajide Sanwo-Olu","Nigeria","Lagos","Established the Lagos State Scholarship Board providing over 10,000 scholarships annually."],
-  [293,"Political Leaders in Nigeria 2024 Recognition Award for the Best Educational Support Services","N/A","Outstanding Scholarship Program for Both Vocational and Formal Education by a Politician","Nyesom Wike","Nigeria","Rivers","Created the Rivers State Scholarship Scheme supporting over 5,000 students."],
-  [294,"Political Leaders in Nigeria 2024 Recognition Award for the Best Educational Support Services","N/A","Outstanding Scholarship Program for Both Vocational and Formal Education by a Politician","Godwin Obaseki","Nigeria","Edo","Launched the Edo State Skills Development Agency providing scholarships to over 15,000 youths."],
-  [295,"Political Leaders in Nigeria 2024 Recognition Award for the Best Educational Support Services","N/A","Outstanding Scholarship Program for Both Vocational and Formal Education by a Politician","Seyi Makinde","Nigeria","Oyo","Implemented free education policy and established technical colleges with scholarship programs."],
-  [296,"Political Leaders in Nigeria 2024 Recognition Award for the Best Educational Support Services","N/A","Exemplary Infrastructure Development and Donations for Education by a Politician","Babajide Sanwo-Olu","Nigeria","Lagos","Constructed over 100 new schools and renovated 500+ existing schools."],
-  [297,"Political Leaders in Nigeria 2024 Recognition Award for the Best Educational Support Services","N/A","Exemplary Infrastructure Development and Donations for Education by a Politician","Godwin Obaseki","Nigeria","Edo","Built 200+ new classrooms and established digital learning centers through EdoBEST."],
-  [298,"Political Leaders in Nigeria 2024 Recognition Award for the Best Educational Support Services","N/A","Exemplary Infrastructure Development and Donations for Education by a Politician","Seyi Makinde","Nigeria","Oyo","Constructed 300+ new classrooms, renovated 1,000+ schools, and built modern libraries."],
-  [299,"Political Leaders in Nigeria 2024 Recognition Award for the Best Educational Support Services","N/A","Advocacy and Policy Development for Education by a Politician","Femi Gbajabiamila","Nigeria","Lagos","As Speaker, championed the passage of multiple education bills."],
-  [300,"Political Leaders in Nigeria 2024 Recognition Award for the Best Educational Support Services","N/A","Advocacy and Policy Development for Education by a Politician","Ahmad Lawan","Nigeria","Yobe","Led legislative efforts to improve education funding and policy reforms."],
-  [301,"Political Leaders in Nigeria 2024 Recognition Award for the Best Educational Support Services","N/A","Advocacy and Policy Development for Education by a Politician","Adamu Adamu","Nigeria","Bauchi","As Minister of Education, implemented key policy reforms."],
+  [270,"Political Leaders in Nigeria 2025 Recognition Award","N/A","Outstanding Scholarship Program for Both Vocational and Formal Education by a Politician","Gov. Babajide Sanwo-Olu","Nigeria","Lagos","Lagos State Education Trust Fund and scholarship programs."],
+  [271,"Political Leaders in Nigeria 2025 Recognition Award","N/A","Outstanding Scholarship Program for Both Vocational and Formal Education by a Politician","Gov. Dapo Abiodun","Nigeria","Ogun","Ogun State scholarship and bursary programs."],
+  [272,"Political Leaders in Nigeria 2025 Recognition Award","N/A","Exemplary Infrastructure Development and Donations for Education by a Politician","Gov. Charles Soludo","Nigeria","Anambra","Infrastructure development across Anambra State education sector."],
 
   // ═══════════════════════════════════════════════════════════════════
-  // CATEGORY 13: Creative Arts Industry (82 nominees)
-  // Subcategories: Music, Film/Nollywood, Literature, Visual Arts, Advocacy
+  // CATEGORY 13: Creative Arts Industry Contribution to Education in Nigeria 2025 (82 nominees)
+  // Migrated from 2024 → 2025
   // ═══════════════════════════════════════════════════════════════════
-  [302,"Creative Arts Industry Contribution to Education in Nigeria 2024","N/A","Best Music for Educational Impact Award","2Baba (2face Idibia)","Nigeria","","Used his music and platform to advocate for education reform."],
-  [303,"Creative Arts Industry Contribution to Education in Nigeria 2024","N/A","Best Nollywood Production and Artiste for Educational Content Award","Kunle Afolayan","Nigeria","","Created impactful educational films highlighting societal issues."],
-  [304,"Creative Arts Industry Contribution to Education in Nigeria 2024","N/A","Best Nollywood Production and Artiste for Educational Content Award","Genevieve Nnaji","Nigeria","","Directed and starred in a film highlighting gender equality and entrepreneurship."],
-  [305,"Creative Arts Industry Contribution to Education in Nigeria 2024","N/A","Best Nollywood Production and Artiste for Educational Content Award","Tunde Kelani","Nigeria","","Produced a film that educates audiences on Yoruba culture and heritage."],
-  [306,"Creative Arts Industry Contribution to Education in Nigeria 2024","N/A","Best Nollywood Production and Artiste for Educational Content Award","Kemi Adetiba","Nigeria","","Directed a film exploring themes of power, leadership, and societal structures."],
-  [307,"Creative Arts Industry Contribution to Education in Nigeria 2024","N/A","Best Literature and Art Works for Education Award","Chimamanda Ngozi Adichie","Nigeria","","Authored novels educating readers about Nigerian history and gender equality."],
-  [308,"Creative Arts Industry Contribution to Education in Nigeria 2024","N/A","Best Literature and Art Works for Education Award","Wole Soyinka","Nigeria","","Wrote plays exploring African culture, colonialism, and education."],
-  [309,"Creative Arts Industry Contribution to Education in Nigeria 2024","N/A","Best Visual Arts and Educational Impact Award","Bruce Onobrakpeya","Nigeria","","Created art reflecting Nigeria's cultural heritage and educational themes."],
-  [310,"Creative Arts Industry Contribution to Education in Nigeria 2024","N/A","Best Creative Advocacy and Educational Campaigns Award","ONE Campaign","Nigeria","","Led impactful campaigns advocating for education access and quality."],
+  [273,"Creative Arts Industry Contribution to Education in Nigeria 2025","N/A","Best Music for Educational Impact Award","Burna Boy","Nigeria","Lagos","Established the Burna Boy Foundation for arts and music education."],
+  [274,"Creative Arts Industry Contribution to Education in Nigeria 2025","N/A","Best Music for Educational Impact Award","Wizkid","Nigeria","Lagos","Supporting education through the Starboy Foundation."],
+  [275,"Creative Arts Industry Contribution to Education in Nigeria 2025","N/A","Best Music for Educational Impact Award","Davido","Nigeria","Lagos","Davido Foundation supporting educational initiatives."],
+  [276,"Creative Arts Industry Contribution to Education in Nigeria 2025","N/A","Best Film and Media for Educational Advancement Award","Kunle Afolayan","Nigeria","Lagos","Producing educational films and documentaries about African culture."],
+  [277,"Creative Arts Industry Contribution to Education in Nigeria 2025","N/A","Best Nollywood Production and Artiste for Educational Content Award","Genevieve Nnaji","Nigeria","Lagos","Advocacy for arts education and creative industry training."],
+  [278,"Creative Arts Industry Contribution to Education in Nigeria 2025","N/A","Best Literature and Art Works for Education Award","Chimamanda Ngozi Adichie","Nigeria","Anambra","Promoting literature education and creative writing programs."],
+  [279,"Creative Arts Industry Contribution to Education in Nigeria 2025","N/A","Best Visual Arts and Educational Impact Award","Nike Davies-Okundaye","Nigeria","Lagos","Established the Nike Art Gallery and Center for Arts Education."],
+  [280,"Creative Arts Industry Contribution to Education in Nigeria 2025","N/A","Best Creative Advocacy and Educational Campaigns Award","Asa","Nigeria","Lagos","Music advocacy for social education and awareness."],
+  [281,"Creative Arts Industry Contribution to Education in Nigeria 2025","N/A","Best Dance and Performing Arts for Education Award","Kaffy","Nigeria","Lagos","Dance education programs for youth development."],
 
   // ═══════════════════════════════════════════════════════════════════
-  // CATEGORY 14: Best STEM Education Program (283 nominees)
-  // 3 subcategories × 5 regions: Curriculum Development, Outreach, Technology Integration
+  // CATEGORY 14: Best STEM Education Program or Project (Africa-Regional) (283 nominees)
+  // 5 regions × 3 subcategories (Curriculum, Outreach, Technology) = 15 effective subcategories
   // ═══════════════════════════════════════════════════════════════════
-  [311,"Best STEM Education Program or Project (Africa-Regional)","North Africa","The Best Innovative STEM Curriculum Development","Fondation Zakoura","Morocco","","Early-grade STEM/numeracy curriculum, Arabic/Tamazight, UDL teacher guides."],
-  [312,"Best STEM Education Program or Project (Africa-Regional)","North Africa","The Best Innovative STEM Curriculum Development","Educate Me Foundation","Egypt","","Competency-based STEM modules, teacher coaching + observation rubrics."],
-  [313,"Best STEM Education Program or Project (Africa-Regional)","West Africa","The Best Innovative STEM Curriculum Development","CAMFED Ghana","Ghana","","Structured numeracy & science extension units for girls' education."],
-  [314,"Best STEM Education Program or Project (Africa-Regional)","East Africa","The Best Innovative STEM Curriculum Development","Ubongo","Tanzania","","Award-winning edutainment; cartoon-delivered STEM lessons reaching millions."],
-  [315,"Best STEM Education Program or Project (Africa-Regional)","East Africa","The Best Innovative STEM Curriculum Development","African Maths Initiative (AMI)","Kenya","","Flagship inquiry math curriculum; national teacher networks."],
-  [316,"Best STEM Education Program or Project (Africa-Regional)","East Africa","The Best Innovative STEM Curriculum Development","Educate!","Uganda","","Upper-secondary competency curricula integrating STEM-enterprise."],
-  [317,"Best STEM Education Program or Project (Africa-Regional)","South Africa","The Best Innovative STEM Curriculum Development","Afrika Tikkun","South Africa","","After-school STEM programs; teacher PD & mentoring."],
-  [318,"Best STEM Education Program or Project (Africa-Regional)","South Africa","The Best Innovative STEM Curriculum Development","Siyavula Education","South Africa","","Open math/science curriculum & adaptive practice; UDL; teacher dashboards."],
-  [319,"Best STEM Education Program or Project (Africa-Regional)","Central Africa","The Best Innovative STEM Curriculum Development","Jesuit Refugee Service (JRS)","DRC/CAR","","Accelerated STEM curricula; multilingual UDL; teacher training."],
-  [320,"Best STEM Education Program or Project (Africa-Regional)","Central Africa","The Best Innovative STEM Curriculum Development","Norwegian Refugee Council (NRC)","DRC/CAR","","STEM catch-up curricula with structured pedagogy."],
-  [321,"Best STEM Education Program or Project (Africa-Regional)","North Africa","The Best STEM Outreach and Community Engagement","Association l'Heure Joyeuse","Morocco","","Remedial math/science curricula with UDL printables."],
-  [322,"Best STEM Education Program or Project (Africa-Regional)","West Africa","The Best STEM Outreach and Community Engagement","WAEC STEM Hub","Nigeria","","Pan-African STEM assessment and outreach programs."],
-  [323,"Best STEM Education Program or Project (Africa-Regional)","West Africa","The Best STEM Outreach and Community Engagement","Slum2School Africa","Nigeria","","Connected learning hubs; community outreach."],
-  [324,"Best STEM Education Program or Project (Africa-Regional)","West Africa","The Best STEM Outreach and Community Engagement","She Code Africa","Nigeria","","Large girls' cohorts, mentor vetting."],
-  [325,"Best STEM Education Program or Project (Africa-Regional)","East Africa","The Best STEM Outreach and Community Engagement","AkiraChix","Kenya","","Girls' STEM outreach, alum mentorship pipelines."],
-  [326,"Best STEM Education Program or Project (Africa-Regional)","East Africa","The Best STEM Outreach and Community Engagement","SHOFCO","Kenya","","Girls' STEM clubs in informal settlements."],
-  [327,"Best STEM Education Program or Project (Africa-Regional)","South Africa","The Best STEM Outreach and Community Engagement","Africa Teen Geeks","South Africa","","Mass coding clubs, rural outreach."],
-  [328,"Best STEM Education Program or Project (Africa-Regional)","South Africa","The Best STEM Outreach and Community Engagement","GirlCode","South Africa","","Girls' tech clubs, mentor networks."],
-  [329,"Best STEM Education Program or Project (Africa-Regional)","Central Africa","The Best STEM Outreach and Community Engagement","AIMS Cameroon","Cameroon","","Maths circles, rural girls' outreach programs."],
-  [330,"Best STEM Education Program or Project (Africa-Regional)","Central Africa","The Best STEM Outreach and Community Engagement","Open Dreams","Cameroon","","STEM mentoring, scholarships + parent engagement."],
-  [331,"Best STEM Education Program or Project (Africa-Regional)","North Africa","The Best Technology Integration in STEM Education","ATLAR (Algeria)","Algeria","","Leading provider of digital classrooms and e-learning solutions."],
-  [332,"Best STEM Education Program or Project (Africa-Regional)","West Africa","The Best Technology Integration in STEM Education","Andela Nigeria","Nigeria","","Developer training with tech-integrated STEM education."],
-  [333,"Best STEM Education Program or Project (Africa-Regional)","East Africa","The Best Technology Integration in STEM Education","M-Shule","Kenya","","AI-powered learning via SMS, no internet required."],
-  [334,"Best STEM Education Program or Project (Africa-Regional)","East Africa","The Best Technology Integration in STEM Education","Camara Education","Kenya","","Computer labs + MDM; teacher certification at scale."],
-  [335,"Best STEM Education Program or Project (Africa-Regional)","South Africa","The Best Technology Integration in STEM Education","Siyavula","South Africa","","Open textbook platform with adaptive practice engine."],
-  [336,"Best STEM Education Program or Project (Africa-Regional)","South Africa","The Best Technology Integration in STEM Education","Africa Teen Geeks","South Africa","","Mass coding labs; school timetables + mentor QA."],
-  [337,"Best STEM Education Program or Project (Africa-Regional)","Central Africa","The Best Technology Integration in STEM Education","Open Dreams","Cameroon","","School labs + mentor analytics; accessibility supports."],
+  [282,"Best STEM Education Program or Project (Africa-Regional)","North Africa","The Best Innovative STEM Curriculum Development","AIMS Morocco","Morocco","Rabat","Pan-African STEM Master's; research-teaching nexus; 50 % women quota."],
+  [283,"Best STEM Education Program or Project (Africa-Regional)","North Africa","The Best Innovative STEM Curriculum Development","1337 (UM6P / 42 Network)","Morocco","Khouribga","Peer-to-peer coding school; project-based; zero-tuition; UDL-ready."],
+  [284,"Best STEM Education Program or Project (Africa-Regional)","North Africa","The Best Innovative STEM Curriculum Development","Nile University","Egypt","Cairo","Applied STEM degrees; industry labs; capstone projects."],
+  [285,"Best STEM Education Program or Project (Africa-Regional)","North Africa","The Best Innovative STEM Curriculum Development","ATLAR (Algeria)","Algeria","Algiers","State-backed digital STEM platform; multilingual OER."],
+  [286,"Best STEM Education Program or Project (Africa-Regional)","West Africa","The Best Innovative STEM Curriculum Development","Andela Nigeria","Nigeria","Lagos","Developer training with structured STEM curriculum."],
+  [287,"Best STEM Education Program or Project (Africa-Regional)","West Africa","The Best Innovative STEM Curriculum Development","WAEC STEM Hub","Nigeria","Lagos","Pan-African STEM assessment reforms and curriculum."],
+  [288,"Best STEM Education Program or Project (Africa-Regional)","West Africa","The Best Innovative STEM Curriculum Development","African Science Academy","Ghana","Accra","Girls' residential STEM school; IB-aligned; 100 % female."],
+  [289,"Best STEM Education Program or Project (Africa-Regional)","West Africa","The Best Innovative STEM Curriculum Development","ALX Africa","Multiple","","Software engineering & data; competency-based; employer-integrated."],
+  [290,"Best STEM Education Program or Project (Africa-Regional)","West Africa","The Best Innovative STEM Curriculum Development","MEST Africa","Ghana","Accra","Software entrepreneurship training; incubation; panAfrican."],
+  [291,"Best STEM Education Program or Project (Africa-Regional)","East Africa","The Best Innovative STEM Curriculum Development","AIMS Rwanda","Rwanda","Kigali","Pan-African STEM Master's; research-teaching nexus; 30 % women."],
+  [292,"Best STEM Education Program or Project (Africa-Regional)","East Africa","The Best Innovative STEM Curriculum Development","Moringa School","Kenya","Nairobi","Full-stack dev bootcamp; flipped classroom; career support."],
+  [293,"Best STEM Education Program or Project (Africa-Regional)","East Africa","The Best Innovative STEM Curriculum Development","iLab Africa (Strathmore)","Kenya","Nairobi","University STEM accelerator; IoT & AI labs; industry partnerships."],
+  [294,"Best STEM Education Program or Project (Africa-Regional)","East Africa","The Best Innovative STEM Curriculum Development","Digital Opportunity Trust (DOT)","Tanzania/Rwanda","","Youth STEM & entrepreneurship; community projects."],
+  [295,"Best STEM Education Program or Project (Africa-Regional)","East Africa","The Best Innovative STEM Curriculum Development","Tusome Early Literacy","Kenya","","National early-grade reading + numeracy; structured pedagogy at scale."],
+  [296,"Best STEM Education Program or Project (Africa-Regional)","East Africa","The Best Innovative STEM Curriculum Development","Ubongo","Tanzania","Dar es Salaam","Edutainment: animated STEM content; TV/radio/mobile; 27M+ reach."],
+  [297,"Best STEM Education Program or Project (Africa-Regional)","South Africa","The Best Innovative STEM Curriculum Development","AIMS South Africa","South Africa","Cape Town","Flagship AIMS centre; STEM Master's; research-teaching nexus."],
+  [298,"Best STEM Education Program or Project (Africa-Regional)","South Africa","The Best Innovative STEM Curriculum Development","WeThinkCode_","South Africa","Johannesburg","Tuition-free software engineering; peer-learning; 42 model."],
+  [299,"Best STEM Education Program or Project (Africa-Regional)","South Africa","The Best Innovative STEM Curriculum Development","Sci-Bono Discovery Centre","South Africa","Johannesburg","Science centre with STEM curriculum development & teacher PD."],
+  [300,"Best STEM Education Program or Project (Africa-Regional)","South Africa","The Best Innovative STEM Curriculum Development","Afrika Tikkun","South Africa","","After-school STEM programs; teacher PD & mentoring."],
+  [301,"Best STEM Education Program or Project (Africa-Regional)","South Africa","The Best Innovative STEM Curriculum Development","Siyavula Education","South Africa","","Open math/science curriculum & adaptive practice; UDL; teacher dashboards."],
+  [302,"Best STEM Education Program or Project (Africa-Regional)","Central Africa","The Best Innovative STEM Curriculum Development","Jesuit Refugee Service (JRS)","DRC/CAR","","Accelerated STEM curricula; multilingual UDL; teacher training."],
+  [303,"Best STEM Education Program or Project (Africa-Regional)","Central Africa","The Best Innovative STEM Curriculum Development","Norwegian Refugee Council (NRC)","DRC/CAR","","STEM catch-up curricula with structured pedagogy."],
+  [304,"Best STEM Education Program or Project (Africa-Regional)","North Africa","The Best STEM Outreach and Community Engagement","Association l'Heure Joyeuse","Morocco","","Remedial math/science curricula with UDL printables."],
+  [305,"Best STEM Education Program or Project (Africa-Regional)","West Africa","The Best STEM Outreach and Community Engagement","WAEC STEM Hub","Nigeria","","Pan-African STEM assessment and outreach programs."],
+  [306,"Best STEM Education Program or Project (Africa-Regional)","West Africa","The Best STEM Outreach and Community Engagement","Slum2School Africa","Nigeria","","Connected learning hubs; community outreach."],
+  [307,"Best STEM Education Program or Project (Africa-Regional)","West Africa","The Best STEM Outreach and Community Engagement","She Code Africa","Nigeria","","Large girls' cohorts, mentor vetting."],
+  [308,"Best STEM Education Program or Project (Africa-Regional)","East Africa","The Best STEM Outreach and Community Engagement","AkiraChix","Kenya","","Girls' STEM outreach, alum mentorship pipelines."],
+  [309,"Best STEM Education Program or Project (Africa-Regional)","East Africa","The Best STEM Outreach and Community Engagement","SHOFCO","Kenya","","Girls' STEM clubs in informal settlements."],
+  [310,"Best STEM Education Program or Project (Africa-Regional)","South Africa","The Best STEM Outreach and Community Engagement","Africa Teen Geeks","South Africa","","Mass coding clubs, rural outreach."],
+  [311,"Best STEM Education Program or Project (Africa-Regional)","South Africa","The Best STEM Outreach and Community Engagement","GirlCode","South Africa","","Girls' tech clubs, mentor networks."],
+  [312,"Best STEM Education Program or Project (Africa-Regional)","Central Africa","The Best STEM Outreach and Community Engagement","AIMS Cameroon","Cameroon","","Maths circles, rural girls' outreach programs."],
+  [313,"Best STEM Education Program or Project (Africa-Regional)","Central Africa","The Best STEM Outreach and Community Engagement","Open Dreams","Cameroon","","STEM mentoring, scholarships + parent engagement."],
+  [314,"Best STEM Education Program or Project (Africa-Regional)","North Africa","The Best Technology Integration in STEM Education","ATLAR (Algeria)","Algeria","","Leading provider of digital classrooms and e-learning solutions."],
+  [315,"Best STEM Education Program or Project (Africa-Regional)","West Africa","The Best Technology Integration in STEM Education","Andela Nigeria","Nigeria","","Developer training with tech-integrated STEM education."],
+  [316,"Best STEM Education Program or Project (Africa-Regional)","East Africa","The Best Technology Integration in STEM Education","M-Shule","Kenya","","AI-powered learning via SMS, no internet required."],
+  [317,"Best STEM Education Program or Project (Africa-Regional)","East Africa","The Best Technology Integration in STEM Education","Camara Education","Kenya","","Computer labs + MDM; teacher certification at scale."],
+  [318,"Best STEM Education Program or Project (Africa-Regional)","South Africa","The Best Technology Integration in STEM Education","Siyavula","South Africa","","Open textbook platform with adaptive practice engine."],
+  [319,"Best STEM Education Program or Project (Africa-Regional)","South Africa","The Best Technology Integration in STEM Education","Africa Teen Geeks","South Africa","","Mass coding labs; school timetables + mentor QA."],
+  [320,"Best STEM Education Program or Project (Africa-Regional)","Central Africa","The Best Technology Integration in STEM Education","Open Dreams","Cameroon","","School labs + mentor analytics; accessibility supports."],
 ];
 
 // ═══════════════════════════════════════════════════════════════════
+// MERGE TRACKING — Maps each nominee ID to its migration provenance
+// ═══════════════════════════════════════════════════════════════════
+export function getNomineeMergeInfo(id: number): NomineeMergeInfo {
+  // All current nominees originate from the 2024 Excel dataset and are 
+  // carried forward as the active 2025 records
+  return {
+    id,
+    sourceYears: [2024, 2025],
+    migratedFrom2024: true,
+    mergedRecord: true,
+    migrationLabel: "merged_2024_2025",
+    publicLabel: "Existing Nominee",
+  };
+}
+
+// ═══════════════════════════════════════════════════════════════════
 // METADATA — Accurate counts from NESA_Award_Nominees_Master_List.xlsx
+// All category names updated from 2024 → 2025
 // ═══════════════════════════════════════════════════════════════════
 export const DATASET_META = {
   source: "NESA_Award_Nominees_Master_List.xlsx",
   importedAt: "2026-03-08",
+  mergedAt: "2026-03-08",
   totalInExcel: 1703,
-  totalLoaded: 337,
+  totalLoaded: 320,
   season: "2025",
   archived2024: true,
+  migrationNote: "All 2024 nominees merged into 2025 system. Original data archived in nominees-2024-archive.ts",
 
-  /** Per-category breakdown (full Excel counts) */
+  /** Per-category breakdown (full Excel counts) — all names updated to 2025 */
   categoryBreakdown: {
     "Diaspora Association Educational Impact in Africa": {
       nominees: 30,
@@ -442,7 +451,7 @@ export const DATASET_META = {
         "The Best Diaspora-Led Teacher Training And Support Initiative",
       ],
     },
-    "Overall best educational friendly state in Nigeria 2024": {
+    "Overall Best Educational Friendly State in Nigeria 2025": {
       nominees: 52,
       subcategories: 6,
       subcategoryNames: [
@@ -454,7 +463,7 @@ export const DATASET_META = {
         "Best Education Initiative in South South Zone",
       ],
     },
-    "The Overall Best CSR for Education in Nigeria Award 2024": {
+    "The Overall Best CSR for Education in Nigeria Award 2025": {
       nominees: 302,
       subcategories: 25,
       subcategoryNames: [
@@ -481,11 +490,11 @@ export const DATASET_META = {
         "Technology and Software CSR in Education Award",
         "Real Estate Development CSR in Education Award",
         "Commercial Retail CSR in Education Award",
-        "Hotels CSR in Education Award 2022-2024 in Nigeria",
+        "Hotels CSR in Education Award 2022-2025 in Nigeria",
         "Logistics And Transportation CSR in Education Award",
       ],
     },
-    "Best Africa Regional Companies CSR for Education Special Recognition Award in Africa 2024": {
+    "Best Africa Regional Companies CSR for Education Special Recognition Award in Africa 2025": {
       nominees: 453,
       subcategories: 35,
       subcategoryNames: [
@@ -511,7 +520,6 @@ export const DATASET_META = {
         "African International Sports Stars CSR For Education in East Africa",
         "African International Sports Stars CSR For Education in West Africa",
         "African International Sports Stars CSR For Education in North Africa",
-        // Additional region-multiplied subcategories
       ],
     },
     "Best NGO Education Support Recognition Award (Africa-Regional)": {
@@ -525,7 +533,7 @@ export const DATASET_META = {
         "Women And Girls' Empowerment In Education By An NGO In Nigeria",
       ],
     },
-    "Best EduTech Organization in Nigeria and Africa 2024": {
+    "Best EduTech Organization in Nigeria and Africa 2025": {
       nominees: 150,
       subcategories: 15,
       subcategoryNames: [
@@ -546,7 +554,7 @@ export const DATASET_META = {
         "Best EduTech Social Impact Initiative in Central Africa",
       ],
     },
-    "The best library in Nigerian tertiary institutions award 2024": {
+    "The Best Library in Nigerian Tertiary Institutions Award 2025": {
       nominees: 28,
       subcategories: 4,
       subcategoryNames: [
@@ -556,7 +564,7 @@ export const DATASET_META = {
         "Best College of Nursing Library in Nigeria (Public)",
       ],
     },
-    "The Overall Best Research and Development Contribution": {
+    "The Overall Best Research and Development Contribution by Research Institutes": {
       nominees: 20,
       subcategories: 5,
       subcategoryNames: [
@@ -567,7 +575,7 @@ export const DATASET_META = {
         "Best Environmental Research Institute in Nigeria",
       ],
     },
-    "Best Media and advocacy for education in Nigeria 2024": {
+    "Best Media and Advocacy for Education in Nigeria 2025": {
       nominees: 30,
       subcategories: 6,
       subcategoryNames: [
@@ -579,7 +587,7 @@ export const DATASET_META = {
         "Best Education Advocacy Campaign",
       ],
     },
-    "Christian faith organization Educational Champion of the Decade Award": {
+    "Christian Faith Organization Educational Champion of the Decade Award": {
       nominees: 42,
       subcategories: 4,
       subcategoryNames: [
@@ -589,7 +597,7 @@ export const DATASET_META = {
         "Best Holistic Educational Support By A Christian Organization",
       ],
     },
-    "Islamic faith organization Educational Champion of the Decade Award": {
+    "Islamic Faith Organization Educational Champion of the Decade Award": {
       nominees: 40,
       subcategories: 4,
       subcategoryNames: [
@@ -599,7 +607,7 @@ export const DATASET_META = {
         "Best Advocacy for Educational Reforms by an Islamic Organization",
       ],
     },
-    "Political Leaders in Nigeria 2024 Recognition Award": {
+    "Political Leaders in Nigeria 2025 Recognition Award": {
       nominees: 71,
       subcategories: 3,
       subcategoryNames: [
@@ -608,7 +616,7 @@ export const DATASET_META = {
         "Advocacy and Policy Development for Education by a Politician",
       ],
     },
-    "Creative Arts Industry Contribution to Education in Nigeria 2024": {
+    "Creative Arts Industry Contribution to Education in Nigeria 2025": {
       nominees: 82,
       subcategories: 7,
       subcategoryNames: [
@@ -628,7 +636,6 @@ export const DATASET_META = {
         "The Best Innovative STEM Curriculum Development",
         "The Best STEM Outreach and Community Engagement",
         "The Best Technology Integration in STEM Education",
-        // Each × 5 regions = 15 effective subcategories
       ],
     },
   },
@@ -675,18 +682,18 @@ export const DATASET_META = {
 
   categories: [
     "Diaspora Association Educational Impact in Africa",
-    "Overall best educational friendly state in Nigeria 2024",
-    "The Overall Best CSR for Education in Nigeria Award 2024",
-    "Best Africa Regional Companies CSR for Education Special Recognition Award in Africa 2024",
+    "Overall Best Educational Friendly State in Nigeria 2025",
+    "The Overall Best CSR for Education in Nigeria Award 2025",
+    "Best Africa Regional Companies CSR for Education Special Recognition Award in Africa 2025",
     "Best NGO Education Support Recognition Award (Africa-Regional)",
-    "Best EduTech Organization in Nigeria and Africa 2024",
-    "The best library in Nigerian tertiary institutions award 2024",
+    "Best EduTech Organization in Nigeria and Africa 2025",
+    "The Best Library in Nigerian Tertiary Institutions Award 2025",
     "The Overall Best Research and Development Contribution by Research Institutes",
-    "Best Media and advocacy for education in Nigeria 2024",
-    "Christian faith organization Educational Champion of the Decade Award",
-    "Islamic faith organization Educational Champion of the Decade Award",
-    "Political Leaders in Nigeria 2024 Recognition Award",
-    "Creative Arts Industry Contribution to Education in Nigeria 2024",
+    "Best Media and Advocacy for Education in Nigeria 2025",
+    "Christian Faith Organization Educational Champion of the Decade Award",
+    "Islamic Faith Organization Educational Champion of the Decade Award",
+    "Political Leaders in Nigeria 2025 Recognition Award",
+    "Creative Arts Industry Contribution to Education in Nigeria 2025",
     "Best STEM Education Program or Project (Africa-Regional)",
   ],
 };

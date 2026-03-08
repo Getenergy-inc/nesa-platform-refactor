@@ -2,11 +2,13 @@
   "meta": {
     "source": "NESA_Award_Nominees_Master_List.xlsx",
     "importedAt": "2026-03-08",
+    "mergedAt": "2026-03-08",
     "totalNominees": 1703,
     "totalCategories": 14,
     "totalSubcategories": 132,
     "season": "2025",
-    "archived2024": true
+    "archived2024": true,
+    "migrationNote": "All 2024 nominees merged into 2025. Original data archived in nominees-2024-archive.ts"
   },
   "categories": [
     {
@@ -24,7 +26,7 @@
     },
     {
       "slug": "education-friendly-state-nigeria",
-      "name": "Overall best educational friendly state in Nigeria 2024",
+      "name": "Overall Best Educational Friendly State in Nigeria 2025",
       "pathway": "Nigeria",
       "region": "N/A",
       "nominees": 52,
@@ -40,7 +42,7 @@
     },
     {
       "slug": "csr-education-nigeria",
-      "name": "The Overall Best CSR for Education in Nigeria Award 2024",
+      "name": "The Overall Best CSR for Education in Nigeria Award 2025",
       "pathway": "Nigeria",
       "region": "N/A",
       "nominees": 302,
@@ -69,13 +71,13 @@
         "Technology and Software CSR in Education Award",
         "Real Estate Development CSR in Education Award",
         "Commercial Retail CSR in Education Award",
-        "Hotels CSR in Education Award 2022-2024 in Nigeria",
+        "Hotels CSR in Education Award 2022-2025 in Nigeria",
         "Logistics And Transportation CSR in Education Award"
       ]
     },
     {
       "slug": "csr-education-africa-regional",
-      "name": "Best Africa Regional Companies CSR for Education Special Recognition Award in Africa 2024",
+      "name": "Best Africa Regional Companies CSR for Education Special Recognition Award in Africa 2025",
       "pathway": "Africa",
       "region": "Multiple",
       "nominees": 453,
@@ -122,7 +124,7 @@
     },
     {
       "slug": "edutech-organization",
-      "name": "Best EduTech Organization in Nigeria and Africa 2024",
+      "name": "Best EduTech Organization in Nigeria and Africa 2025",
       "pathway": "Africa",
       "region": "Multiple",
       "nominees": 150,
@@ -147,7 +149,7 @@
     },
     {
       "slug": "library-tertiary-nigeria",
-      "name": "The best library in Nigerian tertiary institutions award 2024",
+      "name": "The Best Library in Nigerian Tertiary Institutions Award 2025",
       "pathway": "Nigeria",
       "region": "N/A",
       "nominees": 28,
@@ -176,7 +178,7 @@
     },
     {
       "slug": "media-advocacy-nigeria",
-      "name": "Best Media and advocacy for education in Nigeria 2024",
+      "name": "Best Media and Advocacy for Education in Nigeria 2025",
       "pathway": "Nigeria",
       "region": "N/A",
       "nominees": 30,
@@ -192,7 +194,7 @@
     },
     {
       "slug": "christian-education-nigeria",
-      "name": "Christian faith organization Educational Champion of the Decade Award",
+      "name": "Christian Faith Organization Educational Champion of the Decade Award",
       "pathway": "Nigeria",
       "region": "N/A",
       "nominees": 42,
@@ -206,7 +208,7 @@
     },
     {
       "slug": "islamic-education-nigeria",
-      "name": "Islamic faith organization Educational Champion of the Decade Award",
+      "name": "Islamic Faith Organization Educational Champion of the Decade Award",
       "pathway": "Nigeria",
       "region": "N/A",
       "nominees": 40,
@@ -220,7 +222,7 @@
     },
     {
       "slug": "political-leaders-nigeria",
-      "name": "Political Leaders in Nigeria 2024 Recognition Award for the Best Educational Support Services",
+      "name": "Political Leaders in Nigeria 2025 Recognition Award",
       "pathway": "Nigeria",
       "region": "N/A",
       "nominees": 71,
@@ -233,7 +235,7 @@
     },
     {
       "slug": "creative-arts-nigeria",
-      "name": "Creative Arts Industry Contribution to Education in Nigeria 2024",
+      "name": "Creative Arts Industry Contribution to Education in Nigeria 2025",
       "pathway": "Nigeria",
       "region": "N/A",
       "nominees": 82,
