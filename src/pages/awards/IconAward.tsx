@@ -210,7 +210,7 @@ export default function IconAward() {
         />
 
         {/* Certificate Gallery */}
-        <CertificateGallery />
+        <CertificateGallery tier="icon" />
 
         {/* CTA */}
         <section className="bg-charcoal py-16 lg:py-24">
