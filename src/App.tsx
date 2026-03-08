@@ -25,6 +25,7 @@ import Categories from "./pages/Categories";
 import Programs from "./pages/Programs";
 import Login from "./pages/auth/Login";
 import Register from "./pages/auth/Register";
+import AuthPage from "./pages/auth/AuthPage";
 import OTPVerification from "./pages/auth/OTPVerification";
 import ForgotPassword from "./pages/auth/ForgotPassword";
 import ResetPassword from "./pages/auth/ResetPassword";
