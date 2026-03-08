@@ -343,14 +343,14 @@ function UserMenu() {
   if (!user) {
     return (
       <div className="hidden lg:flex items-center gap-2">
-        <Link to="/login">
-          <Button variant="ghost" className="text-white/90 hover:text-gold hover:bg-gold/10">
+        <Link to="/auth">
+          <Button variant="ghost" className="text-secondary-foreground/80 hover:text-primary hover:bg-primary/10 font-medium">
             Sign In
           </Button>
         </Link>
-        <Link to="/register">
-          <Button className="bg-primary text-primary-foreground hover:bg-primary/90">
-            Get Started
+        <Link to="/auth?tab=register">
+          <Button className="bg-primary text-primary-foreground hover:bg-primary/90 font-medium rounded-full px-6">
+            Sign Up
           </Button>
         </Link>
       </div>
