@@ -119,6 +119,14 @@ export default function PlatinumAward() {
           description="All 17 categories are eligible for Platinum: 7 core categories (100 renominations) and 10 standard categories (200 renominations)."
         />
 
+        {/* Nominees Showcase */}
+        <TierNomineeShowcase
+          tier="platinum"
+          accentColor="slate"
+          title="Platinum Certificate Nominees"
+          description="Browse nominees progressing toward Platinum recognition. Endorse, nominate, or re-nominate."
+        />
+
         {/* Certificate Gallery */}
         <CertificateGallery />
 

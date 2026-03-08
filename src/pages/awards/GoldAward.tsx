@@ -254,6 +254,14 @@ export default function GoldAward() {
           description="9 major categories with 135 subcategories — Top 3 highest-voted nominees per subcategory win Gold Certificates (405 total winners), all competing for the 9 Blue Garnet Awards."
         />
 
+        {/* Nominees Showcase */}
+        <TierNomineeShowcase
+          tier="gold"
+          accentColor="amber"
+          title="Gold Certificate Nominees"
+          description="Browse nominees competing for Gold Certificates via 100% public voting. Vote with AGC, nominate, or re-nominate."
+        />
+
         {/* Certificate Gallery */}
         <CertificateGallery />
 

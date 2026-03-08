@@ -161,6 +161,14 @@ export default function BlueGarnetAward() {
           description="9 major categories + 1 Africa Education Icon Blue Garnet. Gold winners advance to Blue Garnet with 60% jury + 40% public scoring."
         />
 
+        {/* Nominees Showcase */}
+        <TierNomineeShowcase
+          tier="blue-garnet"
+          accentColor="blue"
+          title="Blue Garnet Nominees"
+          description="Browse nominees competing for Africa's highest education honour. Vote, nominate, or re-nominate."
+        />
+
         {/* Certificate Gallery */}
         <CertificateGallery />
       </div>
