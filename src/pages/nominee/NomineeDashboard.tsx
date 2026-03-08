@@ -236,7 +236,7 @@ export default function NomineeDashboard() {
   const endorsementGoal = 200;
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-charcoal">
       <NomineeDashboardHeader
         nomineeName={nominee.name}
         photoUrl={nominee.photo_url}
