@@ -91,24 +91,24 @@ export default function EndorseNESA() {
         <Helmet>
           <title>Endorsement Submitted | NESA-Africa</title>
         </Helmet>
-        <div className="min-h-screen bg-background flex items-center justify-center p-4">
-          <Card className="max-w-lg w-full text-center">
+        <div className="min-h-screen bg-charcoal flex items-center justify-center p-4">
+          <Card className="max-w-lg w-full text-center border-gold/10 bg-charcoal-light">
             <CardContent className="pt-8 pb-6 space-y-4">
-              <div className="w-16 h-16 mx-auto rounded-full bg-primary/10 flex items-center justify-center">
-                <Users className="h-8 w-8 text-primary" />
+              <div className="w-16 h-16 mx-auto rounded-full bg-gold/10 flex items-center justify-center">
+                <Users className="h-8 w-8 text-gold" />
               </div>
-              <h1 className="font-display text-2xl font-bold text-foreground">
+              <h1 className="font-display text-2xl font-bold text-white">
                 Thank You for Your Endorsement!
               </h1>
-              <p className="text-muted-foreground">
+              <p className="text-white/60">
                 Your endorsement of NESA-Africa has been received. We will review your submission
                 and get back to you shortly.
               </p>
               <div className="flex flex-col sm:flex-row gap-3 justify-center pt-4">
-                <Button asChild variant="outline">
+                <Button asChild variant="outline" className="border-gold/50 text-gold hover:bg-gold/10">
                   <Link to="/">Return Home</Link>
                 </Button>
-                <Button asChild>
+                <Button asChild className="bg-gold hover:bg-gold/90 text-charcoal">
                   <Link to="/partners">View All Endorsers</Link>
                 </Button>
               </div>
