@@ -103,9 +103,9 @@ const volunteerStats = [
 
 export default function Volunteer() {
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-charcoal">
       {/* Hero Section */}
-      <section className="relative bg-gradient-to-br from-nesa-gold/20 via-background to-nesa-gold/10 py-20">
+      <section className="relative bg-gradient-to-br from-gold/5 via-charcoal to-gold/5 py-20">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center">
             <Badge className="mb-4 bg-nesa-gold/20 text-nesa-gold border-nesa-gold/30">

@@ -131,7 +131,7 @@ export default function BuyYourTicket() {
         />
       </Helmet>
 
-      <div className="min-h-screen bg-background">
+      <div className="min-h-screen bg-charcoal">
         {/* Hero Section */}
         <section className="relative min-h-[70vh] overflow-hidden">
           <img

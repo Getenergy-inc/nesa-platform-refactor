@@ -138,7 +138,7 @@ export default function VerifyCertificate() {
   }
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-charcoal">
       {/* Header */}
       <header className="border-b bg-card">
         <div className="container px-6">

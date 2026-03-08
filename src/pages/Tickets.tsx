@@ -167,7 +167,7 @@ export default function Tickets() {
         />
       </Helmet>
 
-      <div className="min-h-screen bg-background">
+      <div className="min-h-screen bg-charcoal">
         {/* Hero */}
         <section className="relative h-64 overflow-hidden">
           <img

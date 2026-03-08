@@ -45,7 +45,7 @@ export default function GFAWzipWallet() {
         />
       </Helmet>
 
-      <div className="min-h-screen bg-background">
+      <div className="min-h-screen bg-charcoal">
         {/* Hero Section */}
         <section className="relative py-16 lg:py-24 overflow-hidden">
           <div className="container mx-auto px-4">

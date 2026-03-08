@@ -220,7 +220,7 @@ import { VotingStatsStrip } from "@/components/voting/VotingStatsStrip";
          />
        </Helmet>
  
-       <main className="min-h-screen bg-background">
+       <main className="min-h-screen bg-charcoal">
          {/* Hero */}
          <section className="relative bg-gradient-to-br from-blue-900 via-blue-800 to-indigo-900 py-16 md:py-24">
            <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_50%,rgba(59,130,246,0.2),transparent_50%)]" />
