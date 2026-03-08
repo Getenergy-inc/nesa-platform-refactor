@@ -2,7 +2,7 @@
 // Fixed top bar + fixed bottom bar + pages drawer
 // Consistent on every page, mobile-first, accessible
 
-import { useState, useCallback } from "react";
+import { useState, useCallback, useEffect, useRef } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AnimatePresence, motion } from "framer-motion";
 import {
@@ -10,12 +10,49 @@ import {
   ChevronRight,
   ChevronsLeft,
   ChevronsRight,
-  BookOpen,
+  List,
   X,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { PAGE_SEQUENCE, getPageNavigation } from "@/config/page-sequence";
-import nesaStamp from "@/assets/nesa-stamp.jpeg";
+
+// ─── Shared Nav Button ───────────────────────────────────────────────────────
+
+function NavButton({
+  to,
+  disabled,
+  children,
+  className,
+  ...props
+}: {
+  to?: string;
+  disabled: boolean;
+  children: React.ReactNode;
+  className?: string;
+  "aria-label"?: string;
+}) {
+  const base = cn(
+    "inline-flex items-center justify-center gap-1 rounded-lg font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring",
+    disabled
+      ? "opacity-25 cursor-not-allowed pointer-events-none text-secondary-foreground/40"
+      : "text-secondary-foreground/80 hover:text-primary hover:bg-primary/10 active:bg-primary/20",
+    className
+  );
+
+  if (disabled || !to) {
+    return (
+      <span className={base} aria-disabled="true" {...props}>
+        {children}
+      </span>
+    );
+  }
+
+  return (
+    <Link to={to} className={base} {...props}>
+      {children}
+    </Link>
+  );
+}
 
 // ─── Top Navigation Bar ──────────────────────────────────────────────────────
 
@@ -30,51 +67,45 @@ export function TopPageNav() {
     <>
       <nav
         aria-label="Page navigation"
-        className="sticky top-0 z-50 bg-secondary/95 backdrop-blur-md border-b border-primary/20 print:hidden"
+        className="sticky top-0 z-50 border-b border-primary/15 bg-secondary/95 backdrop-blur-md print:hidden"
       >
-        <div className="flex items-center justify-between h-12 px-3 sm:px-4 max-w-6xl mx-auto">
-          {/* Left: Logo / Title */}
-          <Link
-            to="/"
-            className="flex items-center gap-2 shrink-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring rounded-md"
-          >
-            <img
-              src={nesaStamp}
-              alt="NESA"
-              className="h-7 w-7 rounded-full object-cover"
-            />
-            <span className="text-sm font-semibold text-secondary-foreground hidden sm:inline">
-              NESA Africa
-            </span>
-          </Link>
+        <div className="mx-auto flex h-12 max-w-6xl items-center justify-between px-3 sm:px-4">
+          {/* Left: Page indicator */}
+          <span className="text-xs font-semibold tabular-nums text-secondary-foreground/60">
+            <span className="text-primary">{nav.pageNumber}</span>
+            <span className="mx-0.5">/</span>
+            <span>{nav.totalPages}</span>
+          </span>
 
-          {/* Right: Back, Next, Pages */}
-          <div className="flex items-center gap-1">
-            <TopNavLink
+          {/* Right: Back + Next + Pages */}
+          <div className="flex items-center gap-0.5">
+            <NavButton
               to={nav.previousPage?.path}
               disabled={nav.isFirst}
-              aria-label="Go to previous page"
+              aria-label="Previous page"
+              className="h-9 min-w-[40px] px-2 text-xs"
             >
               <ChevronLeft className="h-4 w-4" />
-              <span className="text-xs hidden sm:inline">Back</span>
-            </TopNavLink>
+              <span className="hidden sm:inline">Back</span>
+            </NavButton>
 
-            <TopNavLink
+            <NavButton
               to={nav.nextPage?.path}
               disabled={nav.isLast}
-              aria-label="Go to next page"
+              aria-label="Next page"
+              className="h-9 min-w-[40px] px-2 text-xs"
             >
-              <span className="text-xs hidden sm:inline">Next</span>
+              <span className="hidden sm:inline">Next</span>
               <ChevronRight className="h-4 w-4" />
-            </TopNavLink>
+            </NavButton>
 
             <button
               onClick={() => setDrawerOpen(true)}
               aria-label="Open page list"
-              className="flex items-center gap-1.5 h-9 px-3 rounded-lg text-xs font-medium text-secondary-foreground/80 hover:text-primary hover:bg-primary/10 active:bg-primary/15 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+              className="ml-1 flex h-9 items-center gap-1.5 rounded-lg px-3 text-xs font-medium text-secondary-foreground/80 transition-colors hover:bg-primary/10 hover:text-primary active:bg-primary/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
             >
-              <BookOpen className="h-4 w-4" />
-              <span>Pages</span>
+              <List className="h-4 w-4" />
+              <span className="hidden xs:inline">Pages</span>
             </button>
           </div>
         </div>
@@ -89,41 +120,6 @@ export function TopPageNav() {
   );
 }
 
-// ─── Top Nav Link ────────────────────────────────────────────────────────────
-
-function TopNavLink({
-  to,
-  disabled,
-  children,
-  ...props
-}: {
-  to?: string;
-  disabled: boolean;
-  children: React.ReactNode;
-  "aria-label"?: string;
-}) {
-  const classes = cn(
-    "inline-flex items-center gap-0.5 h-9 px-2 sm:px-3 rounded-lg text-xs font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring",
-    disabled
-      ? "opacity-30 cursor-not-allowed text-secondary-foreground/50"
-      : "text-secondary-foreground/80 hover:text-primary hover:bg-primary/10 active:bg-primary/15"
-  );
-
-  if (disabled || !to) {
-    return (
-      <span className={classes} aria-disabled="true" {...props}>
-        {children}
-      </span>
-    );
-  }
-
-  return (
-    <Link to={to} className={classes} {...props}>
-      {children}
-    </Link>
-  );
-}
-
 // ─── Bottom Navigation Bar ───────────────────────────────────────────────────
 
 export function BottomPageNav() {
@@ -133,42 +129,46 @@ export function BottomPageNav() {
 
   if (!nav.isKnown) return null;
 
+  const showEdge = nav.totalPages > 10;
+
   return (
     <>
       <nav
         aria-label="Page pagination"
-        className="fixed bottom-0 inset-x-0 z-50 bg-secondary/95 backdrop-blur-md border-t border-primary/20 print:hidden"
+        className="fixed inset-x-0 bottom-0 z-50 border-t border-primary/15 bg-secondary/95 backdrop-blur-md print:hidden"
         style={{ paddingBottom: "env(safe-area-inset-bottom, 0px)" }}
       >
-        <div className="flex items-center justify-between h-14 px-2 sm:px-4 max-w-6xl mx-auto">
+        <div className="mx-auto flex h-14 max-w-6xl items-center justify-between px-2 sm:px-4">
           {/* Left: First + Previous */}
           <div className="flex items-center gap-0.5">
-            {nav.totalPages > 10 && (
-              <BottomNavLink
+            {showEdge && (
+              <NavButton
                 to={PAGE_SEQUENCE[0].path}
                 disabled={nav.isFirst}
-                aria-label="Go to first page"
+                aria-label="First page"
+                className="h-11 min-w-[44px] px-2 text-sm"
               >
                 <ChevronsLeft className="h-4 w-4" />
-              </BottomNavLink>
+              </NavButton>
             )}
-            <BottomNavLink
+            <NavButton
               to={nav.previousPage?.path}
               disabled={nav.isFirst}
-              aria-label="Go to previous page"
+              aria-label="Previous page"
+              className="h-11 min-w-[44px] px-3 text-sm"
             >
               <ChevronLeft className="h-4 w-4" />
-              <span className="hidden sm:inline">Previous</span>
-            </BottomNavLink>
+              <span className="hidden sm:inline">Prev</span>
+            </NavButton>
           </div>
 
-          {/* Center: Page indicator + selector */}
+          {/* Center: Page selector */}
           <button
             onClick={() => setSelectorOpen(true)}
-            aria-label={`Page ${nav.pageNumber} of ${nav.totalPages}. Tap to jump to a page.`}
-            className="flex items-center gap-2 h-10 px-4 rounded-lg bg-primary/10 hover:bg-primary/20 active:bg-primary/25 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+            aria-label={`Page ${nav.pageNumber} of ${nav.totalPages}. Tap to jump.`}
+            className="flex h-10 items-center gap-2 rounded-full bg-primary/10 px-5 transition-colors hover:bg-primary/20 active:bg-primary/25 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
           >
-            <span className="text-sm font-semibold text-primary">
+            <span className="text-sm font-bold tabular-nums text-primary">
               Page {nav.pageNumber}
             </span>
             <span className="text-xs text-secondary-foreground/50">
@@ -178,22 +178,24 @@ export function BottomPageNav() {
 
           {/* Right: Next + Last */}
           <div className="flex items-center gap-0.5">
-            <BottomNavLink
+            <NavButton
               to={nav.nextPage?.path}
               disabled={nav.isLast}
-              aria-label="Go to next page"
+              aria-label="Next page"
+              className="h-11 min-w-[44px] px-3 text-sm"
             >
               <span className="hidden sm:inline">Next</span>
               <ChevronRight className="h-4 w-4" />
-            </BottomNavLink>
-            {nav.totalPages > 10 && (
-              <BottomNavLink
+            </NavButton>
+            {showEdge && (
+              <NavButton
                 to={PAGE_SEQUENCE[nav.totalPages - 1].path}
                 disabled={nav.isLast}
-                aria-label="Go to last page"
+                aria-label="Last page"
+                className="h-11 min-w-[44px] px-2 text-sm"
               >
                 <ChevronsRight className="h-4 w-4" />
-              </BottomNavLink>
+              </NavButton>
             )}
           </div>
         </div>
@@ -205,41 +207,6 @@ export function BottomPageNav() {
         currentPath={location.pathname}
       />
     </>
-  );
-}
-
-// ─── Bottom Nav Link ─────────────────────────────────────────────────────────
-
-function BottomNavLink({
-  to,
-  disabled,
-  children,
-  ...props
-}: {
-  to?: string;
-  disabled: boolean;
-  children: React.ReactNode;
-  "aria-label"?: string;
-}) {
-  const classes = cn(
-    "inline-flex items-center gap-1 h-10 min-w-[44px] justify-center px-3 rounded-lg text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring",
-    disabled
-      ? "opacity-30 cursor-not-allowed text-secondary-foreground/40"
-      : "text-secondary-foreground/80 hover:text-primary hover:bg-primary/10 active:bg-primary/15"
-  );
-
-  if (disabled || !to) {
-    return (
-      <span className={classes} aria-disabled="true" {...props}>
-        {children}
-      </span>
-    );
-  }
-
-  return (
-    <Link to={to} className={classes} {...props}>
-      {children}
-    </Link>
   );
 }
 
@@ -255,6 +222,16 @@ function PagesDrawer({
   currentPath: string;
 }) {
   const navigate = useNavigate();
+  const activeRef = useRef<HTMLButtonElement>(null);
+
+  // Auto-scroll active page into view
+  useEffect(() => {
+    if (open && activeRef.current) {
+      requestAnimationFrame(() => {
+        activeRef.current?.scrollIntoView({ block: "center", behavior: "smooth" });
+      });
+    }
+  }, [open]);
 
   const handlePageClick = useCallback(
     (path: string) => {
@@ -278,18 +255,16 @@ function PagesDrawer({
     <AnimatePresence>
       {open && (
         <>
-          {/* Overlay */}
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 0.2 }}
+            transition={{ duration: 0.15 }}
             className="fixed inset-0 z-[60] bg-black/50 backdrop-blur-sm"
             onClick={onClose}
             aria-hidden="true"
           />
 
-          {/* Drawer panel */}
           <motion.aside
             role="dialog"
             aria-modal="true"
@@ -297,26 +272,26 @@ function PagesDrawer({
             initial={{ x: "100%" }}
             animate={{ x: 0 }}
             exit={{ x: "100%" }}
-            transition={{ type: "spring", damping: 28, stiffness: 320 }}
-            className="fixed top-0 right-0 bottom-0 z-[61] w-[300px] sm:w-[340px] bg-secondary border-l border-primary/20 flex flex-col shadow-2xl"
+            transition={{ type: "spring", damping: 30, stiffness: 350 }}
+            className="fixed bottom-0 right-0 top-0 z-[61] flex w-[300px] flex-col border-l border-primary/20 bg-secondary shadow-2xl sm:w-[340px]"
           >
-            {/* Drawer header */}
-            <div className="flex items-center justify-between px-4 py-3 border-b border-primary/15">
+            {/* Header */}
+            <div className="flex items-center justify-between border-b border-primary/15 px-4 py-3">
               <h2 className="text-base font-bold text-primary">All Pages</h2>
               <button
                 onClick={onClose}
-                aria-label="Close page list"
-                className="flex items-center justify-center w-9 h-9 rounded-lg text-secondary-foreground/60 hover:text-primary hover:bg-primary/10 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                aria-label="Close"
+                className="flex h-9 w-9 items-center justify-center rounded-lg text-secondary-foreground/60 transition-colors hover:bg-primary/10 hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
               >
                 <X className="h-5 w-5" />
               </button>
             </div>
 
             {/* Page list */}
-            <div className="flex-1 overflow-y-auto overscroll-contain py-3 px-3 space-y-5">
+            <div className="flex-1 space-y-4 overflow-y-auto overscroll-contain px-3 py-3">
               {Object.entries(sections).map(([section, pages]) => (
                 <div key={section}>
-                  <h3 className="text-[11px] font-bold uppercase tracking-widest text-primary/50 mb-1.5 px-2">
+                  <h3 className="mb-1 px-2 text-[11px] font-bold uppercase tracking-widest text-primary/50">
                     {section}
                   </h3>
                   <ul className="space-y-0.5">
@@ -326,17 +301,18 @@ function PagesDrawer({
                       return (
                         <li key={page.path}>
                           <button
+                            ref={isActive ? activeRef : undefined}
                             onClick={() => handlePageClick(page.path)}
                             className={cn(
-                              "flex items-center gap-3 w-full rounded-lg px-3 py-2.5 text-sm text-left transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring",
+                              "flex w-full items-center gap-3 rounded-lg px-3 py-2.5 text-left text-sm transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring",
                               isActive
-                                ? "bg-primary text-primary-foreground font-semibold"
+                                ? "bg-primary font-semibold text-primary-foreground"
                                 : "text-secondary-foreground/70 hover:bg-primary/10 hover:text-primary active:bg-primary/15"
                             )}
                           >
                             <span
                               className={cn(
-                                "flex items-center justify-center w-6 h-6 rounded-full text-[10px] font-bold shrink-0 tabular-nums",
+                                "flex h-6 w-6 shrink-0 items-center justify-center rounded-full text-[10px] font-bold tabular-nums",
                                 isActive
                                   ? "bg-primary-foreground/20 text-primary-foreground"
                                   : "bg-primary/10 text-primary/50"
@@ -354,10 +330,10 @@ function PagesDrawer({
               ))}
             </div>
 
-            {/* Drawer footer */}
-            <div className="px-4 py-3 border-t border-primary/15 text-center">
+            {/* Footer */}
+            <div className="border-t border-primary/15 px-4 py-3 text-center">
               <span className="text-xs text-secondary-foreground/40">
-                {PAGE_SEQUENCE.length} pages total
+                {PAGE_SEQUENCE.length} pages
               </span>
             </div>
           </motion.aside>
