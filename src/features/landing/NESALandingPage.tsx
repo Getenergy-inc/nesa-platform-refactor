@@ -81,6 +81,11 @@ export function NESALandingPage() {
           <PromoVideosSection />
         </LazySection>
         
+        {/* ═══ 8b. Watch, Listen & Engage ═══ */}
+        <LazySection>
+          <MediaShowcaseSection />
+        </LazySection>
+        
         {/* ═══ 9. Sponsors ═══ */}
         <LazySection>
           <SponsorsSection />
