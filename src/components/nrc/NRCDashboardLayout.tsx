@@ -14,7 +14,7 @@ import {
   Award, LayoutDashboard, Users, ClipboardList, FileCheck, Flag,
   BarChart3, Shield, BookOpen, Settings, LogOut, Bell, Search,
   ChevronLeft, ChevronRight, Menu, X, CheckCircle, XCircle,
-  Clock, AlertTriangle, Copy, User,
+  Clock, AlertTriangle, Copy, User, TrendingUp,
 } from "lucide-react";
 
 interface NRCDashboardLayoutProps {
@@ -50,6 +50,7 @@ const SIDEBAR_SECTIONS = [
   {
     label: "Standards",
     items: [
+      { href: "/nrc/dashboard/edi-analytics", label: "EDI Analytics", icon: TrendingUp },
       { href: "/guidelines/edi-matrix", label: "EDI Matrix", icon: Shield },
       { href: "/nrc/dashboard/guidelines", label: "NRC Guidelines", icon: BookOpen },
     ],

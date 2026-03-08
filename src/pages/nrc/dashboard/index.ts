@@ -4,3 +4,4 @@ export { default as NRCNomineeReview } from "./NRCNomineeReview";
 export { default as NRCReports } from "./NRCReports";
 export { default as NRCFlaggedCases } from "./NRCFlaggedCases";
 export { default as NRCMyReviews } from "./NRCMyReviews";
+export { default as EDIAnalyticsDashboard } from "./EDIAnalyticsDashboard";

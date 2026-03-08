@@ -1,25 +1,23 @@
 /**
  * NESA Africa — Education Development Index (EDI) Scoring Engine
- * 5-Pillar evaluation system for nominee impact assessment
- * 
- * Pillars & Weights:
- *   Access to Education        — 20%
- *   Learning Quality           — 25%
- *   Institutional Strength     — 20%
- *   Innovation & Technology    — 20%
- *   Sustainability & Inclusion — 15%
+ * 5-Pillar evaluation with pillar-specific max scores totaling 100:
+ *   Access to Education        — max 20
+ *   Learning Quality           — max 25
+ *   Institutional Strength     — max 20
+ *   Innovation & Technology    — max 20
+ *   Sustainability & Inclusion — max 15
  */
 
 export interface EDIPillarScore {
   pillar: string;
   key: EDIPillarKey;
-  weight: number;
-  score: number;        // 0–100
-  weightedScore: number; // score * weight
+  maxScore: number;
+  score: number;        // 0 – maxScore
+  percentage: number;   // score / maxScore * 100
   description: string;
 }
 
-export type EDIPillarKey = 
+export type EDIPillarKey =
   | "access"
   | "quality"
   | "institutional"
@@ -28,43 +26,49 @@ export type EDIPillarKey =
 
 export interface EDIScorecard {
   nomineeId: number;
-  overallScore: number;     // 0–100 weighted composite
+  overallScore: number;     // 0–100 (sum of all pillars)
   grade: EDIGrade;
   pillars: EDIPillarScore[];
+  impactSummary: string;
   generatedAt: string;
 }
 
 export type EDIGrade = "A+" | "A" | "B+" | "B" | "C+" | "C" | "D";
 
-const PILLAR_CONFIG: Record<EDIPillarKey, { label: string; weight: number; description: string }> = {
+export const PILLAR_CONFIG: Record<EDIPillarKey, { label: string; maxScore: number; description: string; keywords: string[] }> = {
   access: {
     label: "Access to Education",
-    weight: 0.20,
-    description: "Reach, enrollment growth, scholarships, infrastructure expansion, and geographic coverage.",
+    maxScore: 20,
+    description: "Scholarships funded, schools built, underserved communities reached, gender & disability inclusion.",
+    keywords: ["infrastructure", "school", "built", "constructed", "scholarship", "enrollment", "access", "rural", "underserved", "girls"],
   },
   quality: {
     label: "Learning Quality",
-    weight: 0.25,
-    description: "Curriculum development, teacher training, learning outcomes, assessment standards, and pedagogical innovation.",
+    maxScore: 25,
+    description: "Curriculum reform, teacher training, academic standards, literacy improvement, learning outcomes.",
+    keywords: ["training", "teacher", "curriculum", "learning", "pedagogy", "mentorship", "literacy", "exam", "quality", "standards"],
   },
   institutional: {
     label: "Institutional Strength",
-    weight: 0.20,
-    description: "Governance, accreditation, organizational capacity, policy influence, and system-level impact.",
+    maxScore: 20,
+    description: "Universities founded, national reforms, institutional leadership, governance improvements.",
+    keywords: ["policy", "government", "state", "ministry", "governance", "accreditation", "university", "reform", "leadership", "institution"],
   },
   innovation: {
     label: "Innovation & Technology",
-    weight: 0.20,
-    description: "EdTech adoption, digital literacy, creative methodologies, research output, and scalable solutions.",
+    maxScore: 20,
+    description: "EdTech platforms, digital learning, AI in education, STEM programs, technical education.",
+    keywords: ["technology", "digital", "ict", "stem", "innovation", "e-learning", "platform", "coding", "ai", "data"],
   },
   sustainability: {
     label: "Sustainability & Inclusion",
-    weight: 0.15,
-    description: "Gender equity, disability inclusion, environmental consciousness, long-term viability, and community ownership.",
+    maxScore: 15,
+    description: "Scalable programs, community ownership, funding sustainability, marginalized learner inclusion.",
+    keywords: ["inclusion", "gender", "disability", "community", "sustainable", "environment", "scalable", "equity", "women", "peace"],
   },
 };
 
-const PILLAR_KEYS: EDIPillarKey[] = ["access", "quality", "institutional", "innovation", "sustainability"];
+export const PILLAR_KEYS: EDIPillarKey[] = ["access", "quality", "institutional", "innovation", "sustainability"];
 
 function gradeFromScore(score: number): EDIGrade {
   if (score >= 90) return "A+";
@@ -76,61 +80,118 @@ function gradeFromScore(score: number): EDIGrade {
   return "D";
 }
 
-/**
- * Deterministic EDI score generation based on nominee attributes.
- * Uses a seeded hash so the same nominee always gets the same scores.
- */
 function seededRandom(seed: number, offset: number): number {
   const x = Math.sin(seed * 9301 + offset * 49297 + 233280) * 49297;
   return x - Math.floor(x);
 }
 
-function generatePillarScore(nomineeId: number, pillarIndex: number, achievement: string, category: string): number {
-  // Base score from seeded random (55–95 range for realistic distribution)
-  const base = 55 + seededRandom(nomineeId, pillarIndex) * 40;
-  
-  // Category-based bonuses
-  const cat = category.toLowerCase();
-  const bonuses: Record<EDIPillarKey, string[]> = {
-    access: ["infrastructure", "school", "built", "constructed", "scholarship", "enrollment"],
-    quality: ["training", "teacher", "curriculum", "learning", "pedagogy", "mentorship"],
-    institutional: ["policy", "government", "state", "ministry", "governance", "accreditation"],
-    innovation: ["technology", "digital", "ict", "stem", "innovation", "e-learning", "platform"],
-    sustainability: ["inclusion", "gender", "disability", "community", "sustainable", "environment"],
-  };
-  
-  const key = PILLAR_KEYS[pillarIndex];
-  const relevantKeywords = bonuses[key];
-  const achievementLower = (achievement + " " + cat).toLowerCase();
-  const keywordHits = relevantKeywords.filter(kw => achievementLower.includes(kw)).length;
-  const bonus = Math.min(keywordHits * 3, 10);
-  
-  return Math.min(Math.round(base + bonus), 100);
+function generatePillarScore(nomineeId: number, key: EDIPillarKey, achievement: string, category: string): number {
+  const config = PILLAR_CONFIG[key];
+  const pillarIndex = PILLAR_KEYS.indexOf(key);
+  // Base percentage 55–92%
+  const basePct = 55 + seededRandom(nomineeId, pillarIndex) * 37;
+  // Keyword bonus
+  const text = (achievement + " " + category).toLowerCase();
+  const hits = config.keywords.filter(kw => text.includes(kw)).length;
+  const bonus = Math.min(hits * 2.5, 8);
+  const pct = Math.min(basePct + bonus, 98);
+  return Math.round((pct / 100) * config.maxScore * 10) / 10; // one decimal
+}
+
+function generateImpactSummary(pillars: EDIPillarScore[], grade: EDIGrade, overallScore: number): string {
+  const strongest = [...pillars].sort((a, b) => b.percentage - a.percentage)[0];
+  const weakest = [...pillars].sort((a, b) => a.percentage - b.percentage)[0];
+  const gradeDesc = grade.startsWith("A") ? "exceptional" : grade.startsWith("B") ? "strong" : "moderate";
+  return `This nominee demonstrates ${gradeDesc} impact across African education development (EDI ${overallScore}/100). ` +
+    `Their strongest contribution is in ${strongest.pillar} (${strongest.score}/${strongest.maxScore}), ` +
+    `while ${weakest.pillar} (${weakest.score}/${weakest.maxScore}) presents an opportunity for further development. ` +
+    `The overall evaluation reflects documented contributions to continental education between 2005 and 2025.`;
 }
 
 export function calculateEDIScorecard(nomineeId: number, achievement: string, category: string): EDIScorecard {
-  const pillars: EDIPillarScore[] = PILLAR_KEYS.map((key, index) => {
+  const pillars: EDIPillarScore[] = PILLAR_KEYS.map(key => {
     const config = PILLAR_CONFIG[key];
-    const score = generatePillarScore(nomineeId, index, achievement, category);
+    const score = generatePillarScore(nomineeId, key, achievement, category);
     return {
       pillar: config.label,
       key,
-      weight: config.weight,
+      maxScore: config.maxScore,
       score,
-      weightedScore: Math.round(score * config.weight * 100) / 100,
+      percentage: Math.round((score / config.maxScore) * 100),
       description: config.description,
     };
   });
 
-  const overallScore = Math.round(pillars.reduce((sum, p) => sum + p.weightedScore, 0));
-  
+  const overallScore = Math.round(pillars.reduce((sum, p) => sum + p.score, 0));
+  const grade = gradeFromScore(overallScore);
+
   return {
     nomineeId,
     overallScore,
-    grade: gradeFromScore(overallScore),
+    grade,
     pillars,
+    impactSummary: generateImpactSummary(pillars, grade, overallScore),
     generatedAt: new Date().toISOString(),
   };
+}
+
+// --- Benchmarking utilities ---
+
+export interface CategoryBenchmark {
+  category: string;
+  avgScore: number;
+  count: number;
+  topNominees: { name: string; score: number }[];
+}
+
+export interface RegionalBenchmark {
+  region: string;
+  avgScore: number;
+  count: number;
+  topNominees: { name: string; score: number }[];
+}
+
+export function computeCategoryBenchmarks(
+  nominees: { id: number; name: string; category: string; achievement: string }[]
+): CategoryBenchmark[] {
+  const groups: Record<string, { scores: number[]; nominees: { name: string; score: number }[] }> = {};
+  for (const n of nominees) {
+    const sc = calculateEDIScorecard(n.id, n.achievement, n.category);
+    if (!groups[n.category]) groups[n.category] = { scores: [], nominees: [] };
+    groups[n.category].scores.push(sc.overallScore);
+    groups[n.category].nominees.push({ name: n.name, score: sc.overallScore });
+  }
+  return Object.entries(groups).map(([category, data]) => ({
+    category,
+    avgScore: Math.round(data.scores.reduce((a, b) => a + b, 0) / data.scores.length),
+    count: data.scores.length,
+    topNominees: data.nominees.sort((a, b) => b.score - a.score).slice(0, 5),
+  })).sort((a, b) => b.avgScore - a.avgScore);
+}
+
+export function computeRegionalBenchmarks(
+  nominees: { id: number; name: string; category: string; achievement: string; region: string }[]
+): RegionalBenchmark[] {
+  const regionMap: Record<string, string> = {
+    "West Africa": "West Africa", "East Africa": "East Africa",
+    "North Africa": "North Africa", "Central Africa": "Central Africa",
+    "Southern Africa": "Southern Africa", "Diaspora": "Diaspora",
+    "N/A": "Nigeria", "": "Nigeria",
+  };
+  const groups: Record<string, { scores: number[]; nominees: { name: string; score: number }[] }> = {};
+  for (const n of nominees) {
+    const sc = calculateEDIScorecard(n.id, n.achievement, n.category);
+    const reg = regionMap[n.region] || n.region || "Other";
+    if (!groups[reg]) groups[reg] = { scores: [], nominees: [] };
+    groups[reg].scores.push(sc.overallScore);
+    groups[reg].nominees.push({ name: n.name, score: sc.overallScore });
+  }
+  return Object.entries(groups).map(([region, data]) => ({
+    region,
+    avgScore: Math.round(data.scores.reduce((a, b) => a + b, 0) / data.scores.length),
+    count: data.scores.length,
+    topNominees: data.nominees.sort((a, b) => b.score - a.score).slice(0, 5),
+  })).sort((a, b) => b.avgScore - a.avgScore);
 }
 
 export function getGradeColor(grade: EDIGrade): string {
@@ -159,12 +220,10 @@ export function getGradeBg(grade: EDIGrade): string {
 
 export function getPillarColor(key: EDIPillarKey): string {
   switch (key) {
-    case "access": return "#10b981";      // emerald
-    case "quality": return "#3b82f6";     // blue
-    case "institutional": return "#f59e0b"; // amber
-    case "innovation": return "#8b5cf6";  // violet
-    case "sustainability": return "#06b6d4"; // cyan
+    case "access": return "#10b981";
+    case "quality": return "#3b82f6";
+    case "institutional": return "#f59e0b";
+    case "innovation": return "#8b5cf6";
+    case "sustainability": return "#06b6d4";
   }
 }
-
-export { PILLAR_CONFIG, PILLAR_KEYS };
