@@ -213,26 +213,44 @@ function CertificateCard({ cert }: { cert: CertificateInfo }) {
   );
 }
 
-export function CertificateGallery() {
+interface CertificateGalleryProps {
+  /** If provided, show only the certificate for this tier */
+  tier?: "platinum" | "gold" | "blue-garnet" | "icon";
+}
+
+export function CertificateGallery({ tier }: CertificateGalleryProps = {}) {
+  const displayCerts = tier
+    ? certificates.filter(c => c.tier === tier)
+    : certificates;
+
+  const isSingle = displayCerts.length === 1;
+
   return (
     <section className="bg-charcoal py-16 md:py-24">
       <div className="container">
         <div className="text-center mb-12">
           <Badge variant="outline" className="border-gold/30 text-gold mb-4">
             <Award className="h-3.5 w-3.5 mr-1.5" />
-            Official Certificates
+            {isSingle ? "Official Certificate" : "Official Certificates"}
           </Badge>
           <h2 className="font-display text-3xl md:text-4xl font-bold text-white mb-4">
-            Award Certificate Designs
+            {isSingle
+              ? `${displayCerts[0].name} Design`
+              : "Award Certificate Designs"}
           </h2>
           <p className="text-white/70 max-w-2xl mx-auto">
-            Each certificate tier represents a distinct level of recognition in African education excellence, 
-            featuring QR-code verification and official authentication.
+            {isSingle
+              ? displayCerts[0].description + ". Featuring QR-code verification and official authentication."
+              : "Each certificate tier represents a distinct level of recognition in African education excellence, featuring QR-code verification and official authentication."}
           </p>
         </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
-          {certificates.map((cert) => (
+        <div className={
+          isSingle
+            ? "max-w-lg mx-auto"
+            : "grid md:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8"
+        }>
+          {displayCerts.map((cert) => (
             <CertificateCard key={cert.id} cert={cert} />
           ))}
         </div>

@@ -128,7 +128,7 @@ export default function PlatinumAward() {
         />
 
         {/* Certificate Gallery */}
-        <CertificateGallery />
+        <CertificateGallery tier="platinum" />
 
         {/* CTA */}
         <section className="bg-charcoal py-16 lg:py-24">
