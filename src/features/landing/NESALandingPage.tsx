@@ -7,7 +7,7 @@ import { Helmet } from "react-helmet-async";
 import { TrophyHeroSection } from "@/components/nesa/TrophyHeroSection";
 import { TrustLogosStrip } from "@/components/nesa/TrustLogosStrip";
 import { QuickActionBar } from "@/components/nesa/QuickActionBar";
-import { LandingNomineeShowcase } from "@/components/nesa/LandingNomineeShowcase";
+import { LandingCategoryExplorer } from "@/components/nesa/LandingCategoryExplorer";
 
 import { CountdownSection } from "@/components/nesa/CountdownSection";
 import { NESAFooter } from "@/components/nesa/NESAFooter";
