@@ -199,12 +199,12 @@ export default function EndorseNESA() {
                 <h2 className="font-display text-3xl md:text-4xl font-bold text-foreground">
                   What Does It Mean to Endorse NESA-Africa?
                 </h2>
-                <p className="text-lg text-muted-foreground">
+                <p className="text-lg text-white/70">
                   Endorsing NESA-Africa means supporting a continental movement for education
                   transformation. It means standing behind 6,000+ nominees, 5,000 change-makers,
                   and a roadmap for scholarship access, education equity, and EdTech innovation.
                 </p>
-                <p className="text-lg font-semibold text-primary">
+                <p className="text-lg font-semibold text-gold">
                   You're not just endorsing an award — you're backing a blueprint for Africa's
                   education future.
                 </p>
@@ -212,37 +212,37 @@ export default function EndorseNESA() {
 
               {/* Features Grid */}
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-12 max-w-4xl mx-auto">
-                <Card className="border-border/50 hover:border-primary/30 transition-colors">
+                <Card className="border-gold/10 bg-charcoal-light hover:border-gold/30 transition-colors">
                   <CardContent className="p-6 text-center">
-                    <div className="w-12 h-12 mx-auto rounded-full bg-primary/10 flex items-center justify-center mb-4">
-                      <Users className="h-6 w-6 text-primary" />
+                    <div className="w-12 h-12 mx-auto rounded-full bg-gold/10 flex items-center justify-center mb-4">
+                      <Users className="h-6 w-6 text-gold" />
                     </div>
-                    <h3 className="font-semibold text-foreground mb-2">6,000+ Nominees</h3>
-                    <p className="text-sm text-muted-foreground">
+                    <h3 className="font-semibold text-white mb-2">6,000+ Nominees</h3>
+                    <p className="text-sm text-white/60">
                       Support thousands of education champions across Africa
                     </p>
                   </CardContent>
                 </Card>
 
-                <Card className="border-border/50 hover:border-primary/30 transition-colors">
+                <Card className="border-gold/10 bg-charcoal-light hover:border-gold/30 transition-colors">
                   <CardContent className="p-6 text-center">
-                    <div className="w-12 h-12 mx-auto rounded-full bg-primary/10 flex items-center justify-center mb-4">
-                      <Building2 className="h-6 w-6 text-primary" />
+                    <div className="w-12 h-12 mx-auto rounded-full bg-gold/10 flex items-center justify-center mb-4">
+                      <Building2 className="h-6 w-6 text-gold" />
                     </div>
-                    <h3 className="font-semibold text-foreground mb-2">54 Countries</h3>
-                    <p className="text-sm text-muted-foreground">
+                    <h3 className="font-semibold text-white mb-2">54 Countries</h3>
+                    <p className="text-sm text-white/60">
                       Pan-African reach across the entire continent
                     </p>
                   </CardContent>
                 </Card>
 
-                <Card className="border-border/50 hover:border-primary/30 transition-colors">
+                <Card className="border-gold/10 bg-charcoal-light hover:border-gold/30 transition-colors">
                   <CardContent className="p-6 text-center">
-                    <div className="w-12 h-12 mx-auto rounded-full bg-primary/10 flex items-center justify-center mb-4">
-                      <Calendar className="h-6 w-6 text-primary" />
+                    <div className="w-12 h-12 mx-auto rounded-full bg-gold/10 flex items-center justify-center mb-4">
+                      <Calendar className="h-6 w-6 text-gold" />
                     </div>
-                    <h3 className="font-semibold text-foreground mb-2">Annual Gala</h3>
-                    <p className="text-sm text-muted-foreground">
+                    <h3 className="font-semibold text-white mb-2">Annual Gala</h3>
+                    <p className="text-sm text-white/60">
                       Premier education awards ceremony
                     </p>
                   </CardContent>
@@ -253,7 +253,7 @@ export default function EndorseNESA() {
               <div className="text-center mt-12">
                 <Button
                   size="lg"
-                  className="bg-primary hover:bg-primary/90 text-primary-foreground gap-2"
+                  className="bg-gold hover:bg-gold/90 text-charcoal font-semibold gap-2"
                   onClick={() => setShowForm(true)}
                 >
                   <ArrowRight className="h-5 w-5" />
