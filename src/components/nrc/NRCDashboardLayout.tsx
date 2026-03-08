@@ -14,7 +14,7 @@ import {
   Award, LayoutDashboard, Users, ClipboardList, FileCheck, Flag,
   BarChart3, Shield, BookOpen, Settings, LogOut, Bell, Search,
   ChevronLeft, ChevronRight, Menu, X, CheckCircle, XCircle,
-  Clock, AlertTriangle, Copy, User, TrendingUp,
+  Clock, AlertTriangle, Copy, User, TrendingUp, Inbox,
 } from "lucide-react";
 
 interface NRCDashboardLayoutProps {
