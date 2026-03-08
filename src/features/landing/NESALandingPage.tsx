@@ -7,7 +7,7 @@ import { Helmet } from "react-helmet-async";
 import { TrophyHeroSection } from "@/components/nesa/TrophyHeroSection";
 import { TrustLogosStrip } from "@/components/nesa/TrustLogosStrip";
 import { QuickActionBar } from "@/components/nesa/QuickActionBar";
-import { LandingCategoryExplorer } from "@/components/nesa/LandingCategoryExplorer";
+import { LandingNomineeShowcase } from "@/components/nesa/LandingNomineeShowcase";
 
 import { CountdownSection } from "@/components/nesa/CountdownSection";
 import { NESAFooter } from "@/components/nesa/NESAFooter";
@@ -58,8 +58,8 @@ export function NESALandingPage() {
         {/* ═══ 3. Quick Actions ═══ */}
         <QuickActionBar />
 
-        {/* ═══ 4. CATEGORY EXPLORER — Lightweight Discovery ═══ */}
-        <LandingCategoryExplorer />
+        {/* ═══ 4. NOMINEE SHOWCASE — Primary Discovery ═══ */}
+        <LandingNomineeShowcase />
         
         {/* ═══ 5. Countdown ═══ */}
         <CountdownSection />
