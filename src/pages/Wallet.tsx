@@ -110,11 +110,11 @@ export default function Wallet() {
 
   if (authLoading) {
     return (
-      <DashboardLayout>
+      <InstitutionalDashboardLayout title="Wallet" breadcrumbs={[{ label: "Wallet" }]}>
         <div className="flex items-center justify-center min-h-[60vh]">
           <Loader2 className="h-8 w-8 animate-spin text-primary" />
         </div>
-      </DashboardLayout>
+      </InstitutionalDashboardLayout>
     );
   }
 
