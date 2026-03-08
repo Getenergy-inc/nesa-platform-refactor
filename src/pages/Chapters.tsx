@@ -79,7 +79,7 @@ const chapterRoles = [
 
 export default function Chapters() {
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-charcoal text-white">
       {/* Hero Section */}
       <section className="relative bg-gradient-to-br from-nesa-gold/20 via-background to-nesa-gold/10 py-20">
         <div className="container mx-auto px-4">
