@@ -165,29 +165,29 @@ export default function Chapters() {
       </section>
 
       {/* Chapter Roles */}
-      <section className="py-16 bg-muted/30">
+      <section className="py-16 border-y border-gold/10">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold mb-4">Chapter Leadership Roles</h2>
-            <p className="text-muted-foreground max-w-2xl mx-auto">
+            <h2 className="text-3xl font-display font-bold mb-4 text-white">Chapter Leadership Roles</h2>
+            <p className="text-white/60 max-w-2xl mx-auto">
               Join the leadership team driving education excellence in your country
             </p>
           </div>
           <div className="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto">
             {chapterRoles.map((role, index) => (
-              <Card key={index}>
+              <Card key={index} className="bg-charcoal-light border-gold/10">
                 <CardHeader>
-                  <CardTitle className="text-lg flex items-center gap-2">
-                    <Users className="w-5 h-5 text-nesa-gold" />
+                  <CardTitle className="text-lg flex items-center gap-2 text-white">
+                    <Users className="w-5 h-5 text-gold" />
                     {role.title}
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <p className="text-muted-foreground mb-4">{role.description}</p>
+                  <p className="text-white/60 mb-4">{role.description}</p>
                   <div className="space-y-2">
                     {role.requirements.map((req, reqIndex) => (
-                      <div key={reqIndex} className="flex items-center gap-2 text-sm">
-                        <CheckCircle className="w-4 h-4 text-green-500" />
+                      <div key={reqIndex} className="flex items-center gap-2 text-sm text-white/80">
+                        <CheckCircle className="w-4 h-4 text-gold" />
                         <span>{req}</span>
                       </div>
                     ))}
