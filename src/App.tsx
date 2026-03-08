@@ -2,6 +2,8 @@ import { Toaster } from "@/components/ui/toaster";
 import { useEffect } from "react";
 import Nominees from "./pages/Nominees";
 import NomineeProfile from "./pages/NomineeProfile";
+import NomineeDirectory from "./pages/NomineeDirectory";
+import MasterNomineeProfile from "./pages/MasterNomineeProfile";
 import CertificateVerify from "./pages/CertificateVerify";
 import VerifyCertificate from "./pages/VerifyCertificate";
 import Results from "./pages/Results";
