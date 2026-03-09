@@ -19,6 +19,7 @@ import { BackToTopButton } from "@/components/ui/back-to-top";
 import { useSeason } from "@/contexts/SeasonContext";
 
 // Lazy load below-fold sections
+const EDIMatrixIntroSection = lazy(() => import("@/components/nesa/EDIMatrixIntroSection").then(m => ({ default: m.EDIMatrixIntroSection })));
 const CategoriesSection = lazy(() => import("@/components/nesa/CategoriesSection").then(m => ({ default: m.CategoriesSection })));
 const SponsorsSection = lazy(() => import("@/components/nesa/SponsorsSection").then(m => ({ default: m.SponsorsSection })));
 const InteractiveAfricaMap = lazy(() => import("@/components/nesa/InteractiveAfricaMap").then(m => ({ default: m.InteractiveAfricaMap })));
@@ -60,7 +61,12 @@ export function NESALandingPage() {
         {/* ═══ 4. Countdown ═══ */}
         <CountdownSection />
         
-        {/* ═══ 5. Award Categories ═══ */}
+        {/* ═══ 5. EDI Matrix Introduction ═══ */}
+        <LazySection>
+          <EDIMatrixIntroSection />
+        </LazySection>
+        
+        {/* ═══ 6. Award Categories ═══ */}
         <LazySection>
           <CategoriesSection />
         </LazySection>
