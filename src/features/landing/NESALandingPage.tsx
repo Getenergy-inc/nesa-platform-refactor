@@ -61,7 +61,12 @@ export function NESALandingPage() {
         {/* ═══ 4. Countdown ═══ */}
         <CountdownSection />
         
-        {/* ═══ 5. Award Categories ═══ */}
+        {/* ═══ 5. EDI Matrix Introduction ═══ */}
+        <LazySection>
+          <EDIMatrixIntroSection />
+        </LazySection>
+        
+        {/* ═══ 6. Award Categories ═══ */}
         <LazySection>
           <CategoriesSection />
         </LazySection>
