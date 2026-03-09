@@ -263,7 +263,7 @@ export default function GoldAward() {
         />
 
         {/* Certificate Gallery */}
-        <CertificateGallery tier="gold" />
+        <CertificateGallery />
 
         {/* CTA */}
         <section className="bg-gradient-to-b from-charcoal to-amber-900/20 py-16 lg:py-24">

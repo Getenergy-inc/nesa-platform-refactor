@@ -170,7 +170,7 @@ export default function BlueGarnetAward() {
         />
 
         {/* Certificate Gallery */}
-        <CertificateGallery tier="blue-garnet" />
+        <CertificateGallery />
       </div>
     </>
   );
