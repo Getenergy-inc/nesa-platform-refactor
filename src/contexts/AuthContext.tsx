@@ -8,6 +8,7 @@ import {
 } from "react";
 import type { AppRole } from "@/config/roles";
 import { useNavigate } from "react-router-dom";
+import { API_BASE } from "@/lib/apiBase";
 
 interface User {
   email: string;
@@ -76,8 +77,6 @@ export interface SignUpPayload {
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
-
-export const API_BASE = import.meta.env.VITE_BASE_API_URL;
 
 export function AuthProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<User | null>(null);

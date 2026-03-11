@@ -1,8 +1,8 @@
-import { API_BASE } from "@/contexts/AuthContext";
 import { apiRequest } from "./client";
 import { ApiResponse } from "./http";
 import { NRCReviewerRole } from "@/config/nrcConfig";
 import { TeamInfo } from "@/components/nrc/TeamSection";
+import { API_BASE } from "@/lib/apiBase";
 
 export type NominationQueueStatus =
   | "ASSIGNED"

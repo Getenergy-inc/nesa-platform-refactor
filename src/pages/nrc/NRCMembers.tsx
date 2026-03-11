@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useQueryClient } from "@tanstack/react-query";
+import { useQueryClient, useMutation } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/contexts/AuthContext";
 import { ProtectedRoute } from "@/components/ProtectedRoute";
@@ -51,7 +51,27 @@ export function NRCMembersContent() {
 
   const [searchQuery, setSearchQuery] = useState("");
   const [invitingMemberId, setInvitingMemberId] = useState<string | null>(null);
-  const [isInviting, setIsInviting] = useState(false);
+
+  const inviteMutation = useMutation({
+    mutationFn: async (member: NRCMember) => {
+      if (!user) throw new Error("User not authenticated");
+
+      const invite = {
+        inviteeEmail: member.profile.email,
+        inviteeId: member.user_id,
+        inviteeName: member.profile.full_name,
+      };
+      return nrcApi.inviteToTeam(accessToken, invite);
+    },
+    onSuccess: () => {
+      toast.success("Member invited to team");
+      setInvitingMemberId(null);
+    },
+    onError: (error: Error) => {
+      console.error(error);
+      toast.error(`Failed to invite member Error: ${error.message}`);
+    },
+  });
 
   const filteredMembers = members?.filter((member) => {
     if (!searchQuery) return true;
@@ -61,41 +81,9 @@ export function NRCMembersContent() {
       member.profile?.email?.toLowerCase().includes(query)
     );
   });
+
   const handleInviteToTeam = async (member: NRCMember) => {
-    if (!user) return;
-
-    setIsInviting(true);
-
-    try {
-      const invite = {
-        inviteeEmail: member.profile.email,
-        inviteeId: member.user_id,
-        inviteeName: member.profile.full_name,
-      };
-      await nrcApi.inviteToTeam(accessToken, invite);
-      // const { error } = await supabase.from("team_members").insert({
-      //   team_id: teamId,
-      //   user_id: member.user_id,
-      // });
-      // if (error) {
-      //   if (error.code === "23505") {
-      //     toast.error("Member already in team");
-      //   } else {
-      //     throw error;
-      //   }
-      //   return;
-      // }
-      toast.success("Member invited to team");
-      // queryClient.invalidateQueries({
-      //   queryKey: ["team-members", teamId],
-      // });
-      // setInvitingMemberId(null);
-    } catch (error) {
-      console.error(error);
-      toast.error(`Failed to invite member Error: ${error.message}`);
-    } finally {
-      setIsInviting(false);
-    }
+    inviteMutation.mutate(member);
   };
 
   return (
@@ -188,9 +176,9 @@ export function NRCMembersContent() {
                       </Button>
                       <Button
                         onClick={() => handleInviteToTeam(member)}
-                        disabled={isInviting}
+                        disabled={inviteMutation.isPending}
                       >
-                        {isInviting && (
+                        {inviteMutation.isPending && (
                           <Loader2 className="mr-2 h-4 w-4 animate-spin" />
                         )}
                         Confirm Invite

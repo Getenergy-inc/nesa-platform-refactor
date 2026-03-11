@@ -1,10 +1,10 @@
-import { API_BASE } from "@/contexts/AuthContext";
 import { apiRequest } from "./client";
 import { Nomination } from "@/pages/Nominate";
 import { ApiResponse } from "./http";
 import { approveNomination, assignNomination, rejectNomination } from "./nrc";
 import { AcceptanceStatus, acceptNomination } from "./nominations";
 import { NominationDashboardItem } from "@/types/nominee_dashboard";
+import { API_BASE } from "@/lib/apiBase";
 
 export interface NominationDetails {
   id: string;

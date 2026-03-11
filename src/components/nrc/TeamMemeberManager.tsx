@@ -11,7 +11,7 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
-import { Loader2, Trash2 } from "lucide-react";
+import { Loader2, Trash2, Users } from "lucide-react";
 import { toast } from "sonner";
 import { nrcApi, NrcTeamMembersResponse } from "@/api/newnrc";
 
@@ -72,43 +72,54 @@ export function TeamMembersManager() {
 
   return (
     <>
-      <Card className="bg-charcoal-light border-white/10 shadow-xl">
-        <CardHeader>
-          <CardTitle className="text-white text-lg">Team Members</CardTitle>
+      <Card className="bg-charcoal-light border-white/10 shadow-xl w-full">
+        <CardHeader className="px-4 sm:px-6">
+          <CardTitle className="text-white text-lg sm:text-xl flex items-center gap-2">
+            <Users className="h-5 w-5 text-gold" />
+            Team Members
+          </CardTitle>
         </CardHeader>
 
-        <CardContent className="space-y-4">
+        <CardContent className="space-y-4 px-4 sm:px-6">
           {isLoading && (
-            <div className="flex justify-center py-6">
-              <Loader2 className="h-5 w-5 animate-spin text-gold" />
+            <div className="flex justify-center py-8">
+              <Loader2 className="h-6 w-6 animate-spin text-gold" />
             </div>
           )}
 
           {!isLoading && otherMembers?.length === 0 && (
-            <p className="text-sm text-white/50 text-center">
-              No other team members found.
-            </p>
+            <div className="text-center py-8">
+              <Users className="h-12 w-12 mx-auto text-white/20 mb-3" />
+              <p className="text-sm text-white/50">
+                No other team members found.
+              </p>
+            </div>
           )}
 
           {!isLoading &&
             otherMembers?.map((member: NrcTeamMembersResponse) => (
               <div
                 key={member.user.id}
-                className="flex items-center justify-between bg-white/5 border border-white/10 rounded-xl p-3 hover:bg-white/10 transition"
+                className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 bg-white/5 border border-white/10 rounded-xl p-4 hover:bg-white/10 transition"
               >
-                <div>
-                  <p className="text-white font-medium">{`${member.user.firstName} ${member.user.lastName}`}</p>
-                  <p className="text-xs text-white/50">{member.user.email}</p>
+                <div className="min-w-0 flex-1">
+                  <p className="text-white font-medium truncate">
+                    {`${member.user.firstName} ${member.user.lastName}`}
+                  </p>
+                  <p className="text-xs text-white/50 truncate">
+                    {member.user.email}
+                  </p>
                 </div>
 
                 <Button
                   size="sm"
                   variant="destructive"
                   onClick={() => handleRemoveClick(member)}
-                  className="flex items-center gap-2"
+                  className="flex items-center gap-2 w-full sm:w-auto justify-center"
                 >
-                  <Trash2 className="h-4 w-4" />
-                  Remove
+                  <Trash2 className="h-4 w-4 shrink-0" />
+                  <span className="sm:hidden">Remove Member</span>
+                  <span className="hidden sm:inline">Remove</span>
                 </Button>
               </div>
             ))}
@@ -120,23 +131,25 @@ export function TeamMembersManager() {
         open={!!memberToRemove}
         onOpenChange={(open) => !open && handleCancelRemove()}
       >
-        <DialogContent className="bg-charcoal-light border-white/10 text-white">
-          <DialogHeader>
-            <DialogTitle>Confirm Removal</DialogTitle>
-            <DialogDescription className="text-white/70">
+        <DialogContent className="bg-charcoal-light border-white/10 text-white w-[95vw] max-w-md mx-auto p-4 sm:p-6">
+          <DialogHeader className="space-y-2">
+            <DialogTitle className="text-lg sm:text-xl">
+              Confirm Removal
+            </DialogTitle>
+            <DialogDescription className="text-white/70 text-sm sm:text-base">
               Are you sure you want to remove{" "}
-              <span className="font-semibold text-white">
+              <span className="font-semibold text-white block sm:inline mt-1 sm:mt-0">
                 {memberToRemove?.user.firstName} {memberToRemove?.user.lastName}
               </span>{" "}
               from the team? This action cannot be undone.
             </DialogDescription>
           </DialogHeader>
 
-          <DialogFooter className="gap-2 sm:gap-0">
+          <DialogFooter className="flex-col sm:flex-row gap-2 mt-4 sm:mt-6">
             <Button
               variant="outline"
               onClick={handleCancelRemove}
-              className="border-white/10 bg-transparent text-white hover:bg-white/10"
+              className="border-white/10 bg-transparent text-white hover:bg-white/10 w-full sm:w-auto order-2 sm:order-1"
               disabled={isRemoving}
             >
               Cancel
@@ -145,10 +158,14 @@ export function TeamMembersManager() {
               variant="destructive"
               onClick={handleConfirmRemove}
               disabled={isRemoving}
-              className="flex items-center gap-2"
+              className="flex items-center justify-center gap-2 w-full sm:w-auto order-1 sm:order-2"
             >
-              {isRemoving && <Loader2 className="h-4 w-4 animate-spin" />}
-              {isRemoving ? "Removing..." : "Remove Member"}
+              {isRemoving && (
+                <Loader2 className="h-4 w-4 animate-spin shrink-0" />
+              )}
+              <span className="truncate">
+                {isRemoving ? "Removing..." : "Remove Member"}
+              </span>
             </Button>
           </DialogFooter>
         </DialogContent>

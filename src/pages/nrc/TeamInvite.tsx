@@ -48,7 +48,7 @@ function AcceptTeamInvite() {
     };
 
     validateInvite();
-  }, [teamId, token]);
+  }, [teamId, token, accessToken]);
 
   const handleAccept = async () => {
     if (!teamId || !token) return;
@@ -99,7 +99,7 @@ function AcceptTeamInvite() {
                 <p className="text-base font-medium">
                   You are now a member of this team.
                 </p>
-                <Button onClick={() => navigate("/dashboard")} className="mt-4">
+                <Button onClick={() => navigate("/nrc")} className="mt-4">
                   Go to Dashboard
                 </Button>
               </div>
@@ -149,7 +149,7 @@ function AcceptTeamInvite() {
 
 export default function AcceptTeamInvitePage() {
   return (
-    <ProtectedRoute requiredRoles={["NRC", "admin", "FREE_MEMBER"]}>
+    <ProtectedRoute requiredRoles={["NRC"]}>
       <AcceptTeamInvite />
     </ProtectedRoute>
   );

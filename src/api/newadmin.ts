@@ -1,4 +1,4 @@
-import { API_BASE } from "@/contexts/AuthContext";
+import { API_BASE } from "@/lib/apiBase";
 import { apiRequest } from "./client";
 import { ApiResponse } from "./http";
 

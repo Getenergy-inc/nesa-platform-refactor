@@ -5,9 +5,9 @@ import {
   PaymentType,
 } from "@/types/wallet";
 import { apiRequest } from "./client";
-import { API_BASE } from "@/contexts/AuthContext";
 import { ApiResponse } from "./http";
 import { PaymentMethod } from "@/config/galaConfig";
+import { API_BASE } from "@/lib/apiBase";
 
 export interface ExchangeRates {
   userCurrency: Currency;

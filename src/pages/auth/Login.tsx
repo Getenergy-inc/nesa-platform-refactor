@@ -60,19 +60,19 @@ export default function Login() {
     }
   };
 
-  const handleGoogleSignIn = async () => {
-    setGoogleLoading(true);
-    try {
-      const { error } = await lovable.auth.signInWithOAuth("google", {
-        redirect_uri: window.location.origin,
-      });
+  // const handleGoogleSignIn = async () => {
+  //   setGoogleLoading(true);
+  //   try {
+  //     const { error } = await lovable.auth.signInWithOAuth("google", {
+  //       redirect_uri: window.location.origin,
+  //     });
 
-      if (error) throw error;
-    } catch (error) {
-      toast.error(error.message || "Google sign-in failed");
-      setGoogleLoading(false);
-    }
-  };
+  //     if (error) throw error;
+  //   } catch (error) {
+  //     toast.error(error.message || "Google sign-in failed");
+  //     setGoogleLoading(false);
+  //   }
+  // };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -148,7 +148,7 @@ export default function Login() {
               {isJudgeLogin && <JudgeOTPNotice />}
 
               {/* Google */}
-              <Button
+              {/* <Button
                 type="button"
                 variant="outline"
                 className="w-full border-white/20 bg-white/5 text-white hover:bg-white/10 gap-3 h-11"
@@ -160,7 +160,7 @@ export default function Login() {
                 ) : (
                   "Continue with Google"
                 )}
-              </Button>
+              </Button> */}
 
               {/* Divider */}
               <div className="text-center text-xs text-white/40">

@@ -5,6 +5,7 @@ import { NRCLayout } from "@/components/nrc/NRCLayout";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
 import { Badge } from "@/components/ui/badge";
 import {
   Dialog,
@@ -23,6 +24,14 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
 } from "@/components/ui/alert-dialog";
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form";
 
 import {
   Loader2,
@@ -43,19 +52,47 @@ import { nrcApi } from "@/api/newnrc";
 import ProtectedView from "@/components/ProtectedView";
 import { TeamInfo } from "@/components/nrc/TeamSection";
 import { useNavigate } from "react-router-dom";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import * as z from "zod";
+
+// Form validation schema
+const teamFormSchema = z.object({
+  teamName: z
+    .string()
+    .min(3, "Team name must be at least 3 characters")
+    .max(50, "Team name must be less than 50 characters")
+    .regex(
+      /^[a-zA-Z0-9\s-]+$/,
+      "Team name can only contain letters, numbers, spaces, and hyphens",
+    ),
+  description: z
+    .string()
+    .max(200, "Description must be less than 200 characters")
+    .optional(),
+});
+
+type TeamFormValues = z.infer<typeof teamFormSchema>;
 
 function CreateNrcTeam() {
   const { user, accessToken } = useAuth();
   const navigate = useNavigate();
 
-  const [teamName, setTeamName] = useState("");
-  const [description, setDescription] = useState("");
   const [isCreating, setIsCreating] = useState(false);
   const [showDialog, setShowDialog] = useState(false);
   const [showLimitDialog, setShowLimitDialog] = useState(false);
   const [hasTeam, setHasTeam] = useState<boolean | null>(null);
   const [existingTeam, setExistingTeam] = useState<TeamInfo>(null);
   const [checkingTeam, setCheckingTeam] = useState(true);
+
+  // Initialize form
+  const form = useForm<TeamFormValues>({
+    resolver: zodResolver(teamFormSchema),
+    defaultValues: {
+      teamName: "",
+      description: "",
+    },
+  });
 
   useEffect(() => {
     const checkExistingTeam = async () => {
@@ -80,16 +117,24 @@ function CreateNrcTeam() {
 
   const handleCreateClick = () => {
     if (hasTeam) setShowLimitDialog(true);
-    else setShowDialog(true);
+    else {
+      setShowDialog(true);
+      // Reset form when opening dialog
+      form.reset();
+    }
   };
 
-  const handleCreateTeam = async () => {
-    if (!teamName.trim() || !user) return;
+  const handleCreateTeam = async (values: TeamFormValues) => {
+    if (!user) return;
 
     setIsCreating(true);
 
     try {
-      await nrcApi.createTeam(accessToken, teamName, description);
+      await nrcApi.createTeam(
+        accessToken,
+        values.teamName,
+        values.description || "",
+      );
 
       toast.success("Team created successfully", {
         icon: <Trophy className="h-4 w-4" />,
@@ -97,12 +142,13 @@ function CreateNrcTeam() {
       });
 
       setShowDialog(false);
-      setTeamName("");
-      setDescription("");
       setHasTeam(true);
 
       const newTeamInfo = await nrcApi.fetchTeamInfo(accessToken);
       setExistingTeam(newTeamInfo);
+
+      // Reset form
+      form.reset();
     } catch (error) {
       toast.error(error.message || "Failed to create team");
     } finally {
@@ -116,23 +162,21 @@ function CreateNrcTeam() {
 
   if (checkingTeam) {
     return (
-      <NRCLayout>
-        <div className="flex items-center justify-center min-h-[60vh]">
-          <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            className="text-center"
-          >
-            <div className="relative">
-              <div className="pointer-events-none absolute inset-0 rounded-full bg-gradient-to-r from-gold/20 to-gold/5 blur-xl" />
-              <Loader2 className="h-16 w-16 animate-spin text-gold mx-auto relative" />
-            </div>
-            <p className="mt-4 text-muted-foreground animate-pulse">
-              Checking your team status...
-            </p>
-          </motion.div>
-        </div>
-      </NRCLayout>
+      <div className="flex items-center justify-center min-h-[60vh]">
+        <motion.div
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={{ opacity: 1, scale: 1 }}
+          className="text-center"
+        >
+          <div className="relative">
+            <div className="pointer-events-none absolute inset-0 rounded-full bg-gradient-to-r from-gold/20 to-gold/5 blur-xl" />
+            <Loader2 className="h-16 w-16 animate-spin text-gold mx-auto relative" />
+          </div>
+          <p className="mt-4 text-muted-foreground animate-pulse">
+            Checking your team status...
+          </p>
+        </motion.div>
+      </div>
     );
   }
 
@@ -173,8 +217,8 @@ function CreateNrcTeam() {
 
               <p className="text-muted-foreground max-w-xl">
                 {hasTeam
-                  ? "You're already part of a team."
-                  : "Start your journey by creating a team."}
+                  ? "You're already part of a team. Manage your team or invite members."
+                  : "Start your journey by creating a team. Add a name and description to get started."}
               </p>
             </div>
 
@@ -221,7 +265,8 @@ function CreateNrcTeam() {
                   </h3>
 
                   <p className="mt-2 text-muted-foreground max-w-md mx-auto">
-                    Create a team to collaborate with members.
+                    Create a team to collaborate with other NRC members. Add a
+                    name and description to define your team's purpose.
                   </p>
 
                   <div className="mt-8 flex flex-wrap gap-4 justify-center">
@@ -258,7 +303,8 @@ function CreateNrcTeam() {
                       </CardTitle>
 
                       <p className="text-sm text-muted-foreground mt-1">
-                        You're already part of a team.
+                        You're already part of a team. Manage your team settings
+                        below.
                       </p>
                     </div>
                   </div>
@@ -295,7 +341,7 @@ function CreateNrcTeam() {
                   <Button
                     variant="outline"
                     onClick={handleNavigateToTeam}
-                    className="flex-1 border-white/10 hover:bg-white/5 cursor-pointer"
+                    className="w-full border-white/10 hover:bg-white/5 cursor-pointer"
                   >
                     Manage Team
                   </Button>
@@ -305,6 +351,121 @@ function CreateNrcTeam() {
           )}
         </AnimatePresence>
       </motion.div>
+
+      {/* Create Team Dialog with Form */}
+      <Dialog open={showDialog} onOpenChange={setShowDialog}>
+        <DialogContent className="sm:max-w-[425px] bg-charcoal border-white/10">
+          <DialogHeader>
+            <DialogTitle className="flex items-center gap-2 text-xl">
+              <Building2 className="h-5 w-5 text-gold" />
+              Create New Team
+            </DialogTitle>
+            <DialogDescription>
+              Fill in the details below to create your team. You can always
+              update these later.
+            </DialogDescription>
+          </DialogHeader>
+
+          <Form {...form}>
+            <form
+              onSubmit={form.handleSubmit(handleCreateTeam)}
+              className="space-y-4"
+            >
+              <FormField
+                control={form.control}
+                name="teamName"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Team Name</FormLabel>
+                    <FormControl>
+                      <Input
+                        placeholder="e.g., NRC Review Team Alpha"
+                        className="bg-charcoal-light border-white/10 focus:border-gold"
+                        disabled={isCreating}
+                        {...field}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+
+              <FormField
+                control={form.control}
+                name="description"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Description (Optional)</FormLabel>
+                    <FormControl>
+                      <Textarea
+                        placeholder="Describe your team's purpose and goals..."
+                        className="bg-charcoal-light border-white/10 focus:border-gold min-h-[100px]"
+                        disabled={isCreating}
+                        {...field}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+
+              <DialogFooter className="mt-6">
+                <Button
+                  type="button"
+                  variant="outline"
+                  onClick={() => setShowDialog(false)}
+                  className="border-white/10 hover:bg-white/5"
+                  disabled={isCreating}
+                >
+                  Cancel
+                </Button>
+                <Button
+                  type="submit"
+                  disabled={isCreating}
+                  className="bg-gold hover:bg-gold-dark text-charcoal font-semibold"
+                >
+                  {isCreating ? (
+                    <>
+                      <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                      Creating...
+                    </>
+                  ) : (
+                    <>
+                      <Rocket className="mr-2 h-4 w-4" />
+                      Create Team
+                    </>
+                  )}
+                </Button>
+              </DialogFooter>
+            </form>
+          </Form>
+        </DialogContent>
+      </Dialog>
+
+      {/* Limit Warning Dialog */}
+      <AlertDialog open={showLimitDialog} onOpenChange={setShowLimitDialog}>
+        <AlertDialogContent className="bg-charcoal border-white/10">
+          <AlertDialogHeader>
+            <AlertDialogTitle className="flex items-center gap-2">
+              <AlertCircle className="h-5 w-5 text-gold" />
+              Team Limit Reached
+            </AlertDialogTitle>
+            <AlertDialogDescription className="text-muted-foreground">
+              You can only create one team at this time. Please manage your
+              existing team or contact support if you need to create another
+              team.
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogAction
+              onClick={() => setShowLimitDialog(false)}
+              className="bg-gold hover:bg-gold-dark text-charcoal"
+            >
+              Understood
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
     </>
   );
 }

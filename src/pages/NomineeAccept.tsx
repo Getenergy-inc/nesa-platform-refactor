@@ -117,7 +117,7 @@ export default function NomineeAccept() {
       setAccepted(true);
       toast.success("Nomination accepted successfully!");
       setTimeout(() => {
-        navigate(`/nominee/dashboard/${token}`);
+        navigate(`/nominee/dashboard`);
       }, 500);
     } catch (error) {
       toast.error(error.message || "Failed to accept nomination");
