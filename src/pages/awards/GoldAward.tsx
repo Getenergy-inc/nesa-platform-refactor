@@ -4,6 +4,7 @@ import { CertificateGallery } from "@/components/nesa/CertificateGallery";
 import { AwardTVShowSection } from "@/components/awards/AwardTVShowSection";
 import { AwardHeroSection } from "@/components/awards/AwardHeroSection";
 import { AwardCategoriesGrid } from "@/components/awards/AwardCategoriesGrid";
+import { TierNomineeShowcase } from "@/components/awards/TierNomineeShowcase";
 import { getTVShowByAward } from "@/config/awardTVShows";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -251,6 +252,14 @@ export default function GoldAward() {
           accentColor="amber"
           title="Gold Certificate Categories"
           description="9 major categories with 135 subcategories — Top 3 highest-voted nominees per subcategory win Gold Certificates (405 total winners), all competing for the 9 Blue Garnet Awards."
+        />
+
+        {/* Nominees Showcase */}
+        <TierNomineeShowcase
+          tier="gold"
+          accentColor="amber"
+          title="Gold Certificate Nominees"
+          description="Browse nominees competing for Gold Certificates via 100% public voting. Vote with AGC, nominate, or re-nominate."
         />
 
         {/* Certificate Gallery */}

@@ -1,39 +1,29 @@
 // NESA-Africa Landing Page Feature
-// Marketing-led welcome page with visual storytelling and governance integrity
-// Consolidated 8-block editorial flow with lazy loading
+// Focused 6-block conversion funnel with lazy loading
 
 import { lazy } from "react";
-import { Link } from "react-router-dom";
+
 import { Helmet } from "react-helmet-async";
 import { TrophyHeroSection } from "@/components/nesa/TrophyHeroSection";
 import { TrustLogosStrip } from "@/components/nesa/TrustLogosStrip";
 import { QuickActionBar } from "@/components/nesa/QuickActionBar";
 
-import { NominationPathsCards } from "@/components/nesa/NominationPathsCards";
+import { CountdownSection } from "@/components/nesa/CountdownSection";
 import { NESAFooter } from "@/components/nesa/NESAFooter";
 import { NESAHeader } from "@/components/nesa/NESAHeader";
 import { LazySection } from "@/components/ui/lazy-section";
+import { TopPageNav, BottomPageNav } from "@/components/navigation/PageNavigation";
 import { ScrollProgressIndicator } from "@/components/nesa/ScrollProgressIndicator";
 import { ExitIntentPopup } from "@/components/nesa/ExitIntentPopup";
-import { EngagementToast } from "@/components/nesa/EngagementToast";
-import { ContinueWhereYouLeftOff } from "@/components/nesa/ContinueWhereYouLeftOff";
-import { WhyPeopleReturnStrip } from "@/components/nesa/WhyPeopleReturnStrip";
 import { BackToTopButton } from "@/components/ui/back-to-top";
 import { useSeason } from "@/contexts/SeasonContext";
 
 // Lazy load below-fold sections
-const HowItWorksVisual = lazy(() => import("@/components/nesa/HowItWorksVisual").then(m => ({ default: m.HowItWorksVisual })));
 const CategoriesSection = lazy(() => import("@/components/nesa/CategoriesSection").then(m => ({ default: m.CategoriesSection })));
-const VoteWithAGCSection = lazy(() => import("@/components/nesa/VoteWithAGCSection").then(m => ({ default: m.VoteWithAGCSection })));
-const InteractiveAfricaMap = lazy(() => import("@/components/nesa/InteractiveAfricaMap").then(m => ({ default: m.InteractiveAfricaMap })));
-const LegacyImpactSection = lazy(() => import("@/components/nesa/LegacyImpactSection").then(m => ({ default: m.LegacyImpactSection })));
-const IntegritySection = lazy(() => import("@/components/nesa/IntegritySection").then(m => ({ default: m.IntegritySection })));
-const EDIIntegrityJourney = lazy(() => import("@/components/nesa/EDIIntegrityJourney").then(m => ({ default: m.EDIIntegrityJourney })));
-const MediaShowcaseSection = lazy(() => import("@/components/nesa/MediaShowcaseSection").then(m => ({ default: m.MediaShowcaseSection })));
-const UpcomingEventsSection = lazy(() => import("@/components/nesa/UpcomingEventsSection").then(m => ({ default: m.UpcomingEventsSection })));
-const JudgesSection = lazy(() => import("@/components/nesa/JudgesSection").then(m => ({ default: m.JudgesSection })));
 const SponsorsSection = lazy(() => import("@/components/nesa/SponsorsSection").then(m => ({ default: m.SponsorsSection })));
-const FinalCTASection = lazy(() => import("@/components/nesa/FinalCTASection").then(m => ({ default: m.FinalCTASection })));
+const InteractiveAfricaMap = lazy(() => import("@/components/nesa/InteractiveAfricaMap").then(m => ({ default: m.InteractiveAfricaMap })));
+const UpcomingEventsSection = lazy(() => import("@/components/nesa/UpcomingEventsSection").then(m => ({ default: m.UpcomingEventsSection })));
+const PromoVideosSection = lazy(() => import("@/components/nesa/PromoVideosSection").then(m => ({ default: m.PromoVideosSection })));
 
 export function NESALandingPage() {
   const { currentEdition } = useSeason();
@@ -54,14 +44,12 @@ export function NESALandingPage() {
 
       <ScrollProgressIndicator />
 
-      <div className="min-h-screen bg-charcoal">
+      <div className="min-h-screen bg-charcoal pb-16">
         <NESAHeader />
+        <TopPageNav />
         
         {/* ═══ 1. HERO — Authority ═══ */}
         <TrophyHeroSection />
-        
-        {/* ═══ 1b. Returning visitors — Continue where you left off ═══ */}
-        <ContinueWhereYouLeftOff />
         
         {/* ═══ 2. Trust Strip ═══ */}
         <TrustLogosStrip />
@@ -69,77 +57,40 @@ export function NESALandingPage() {
         {/* ═══ 3. Quick Actions ═══ */}
         <QuickActionBar />
         
-        {/* ═══ 4. Award Tiers Overview + Category Grid ═══ */}
+        {/* ═══ 4. Countdown ═══ */}
+        <CountdownSection />
+        
+        {/* ═══ 5. Award Categories ═══ */}
         <LazySection>
           <CategoriesSection />
         </LazySection>
         
-        {/* ═══ 5. Nomination Paths ═══ */}
-        <NominationPathsCards />
-        
-        {/* ═══ 6. Interactive Africa Map — Edu-Tourism ═══ */}
-        <div id="explore-regions">
-          <LazySection>
-            <InteractiveAfricaMap />
-          </LazySection>
-        </div>
-        {/* ═══ 7. How It Works ═══ */}
+        {/* ═══ 6. Interactive Africa Map ═══ */}
         <LazySection>
-          <HowItWorksVisual />
+          <InteractiveAfricaMap />
         </LazySection>
         
-        {/* ═══ 8. Voting Section ═══ */}
-        <LazySection>
-          <VoteWithAGCSection />
-        </LazySection>
-        
-        {/* ═══ 9. Governance & Integrity ═══ */}
-        <LazySection>
-          <IntegritySection />
-        </LazySection>
-        
-        <LazySection>
-          <EDIIntegrityJourney />
-        </LazySection>
-        
-        <LazySection>
-          <JudgesSection />
-        </LazySection>
-        
-        {/* ═══ 10. Media ═══ */}
-        <LazySection>
-          <MediaShowcaseSection />
-        </LazySection>
-        
+        {/* ═══ 7. Upcoming Events ═══ */}
         <LazySection>
           <UpcomingEventsSection />
         </LazySection>
         
-        {/* ═══ 11. Why People Return ═══ */}
+        {/* ═══ 8. Promo Videos ═══ */}
         <LazySection>
-          <WhyPeopleReturnStrip />
+          <PromoVideosSection />
         </LazySection>
         
-        {/* ═══ 12. Legacy (short teaser) ═══ */}
-        <LazySection>
-          <LegacyImpactSection />
-        </LazySection>
-        
-        {/* ═══ 13. Sponsors + Footer ═══ */}
+        {/* ═══ 9. Sponsors ═══ */}
         <LazySection>
           <SponsorsSection />
         </LazySection>
         
-        <LazySection>
-          <FinalCTASection />
-        </LazySection>
-        
         <NESAFooter />
+        <BottomPageNav />
       </div>
 
       {/* Engagement Hooks */}
       <ExitIntentPopup />
-      <EngagementToast />
       <BackToTopButton />
     </>
   );

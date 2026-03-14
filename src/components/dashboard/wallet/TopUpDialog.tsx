@@ -26,9 +26,9 @@ interface TopUpDialogProps {
 
 const providers: { value: PaymentProvider; label: string }[] = [
   { value: "FLUTTERWAVE", label: "Flutterwave" },
-  { value: "PAYSTACK", label: "Paystack" },
-  { value: "LEMFI", label: "LemFi" },
-  { value: "TAPTAPSEND", label: "TapTap Send" },
+  // { value: "PAYSTACK", label: "Paystack" },
+  // { value: "LEMFI", label: "LemFi" },
+  // { value: "TAPTAPSEND", label: "TapTap Send" },
 ];
 
 const presetAmounts = [5, 10, 20, 50, 100];

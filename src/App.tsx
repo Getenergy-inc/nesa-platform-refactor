@@ -2,6 +2,8 @@ import { Toaster } from "@/components/ui/toaster";
 import { useEffect } from "react";
 import Nominees from "./pages/Nominees";
 import NomineeProfile from "./pages/NomineeProfile";
+import NomineeDirectory from "./pages/NomineeDirectory";
+import MasterNomineeProfile from "./pages/MasterNomineeProfile";
 import CertificateVerify from "./pages/CertificateVerify";
 import VerifyCertificate from "./pages/VerifyCertificate";
 import Results from "./pages/Results";
@@ -35,6 +37,9 @@ import CategoryDetail from "./pages/CategoryDetail";
 import NomineeAccept from "./pages/NomineeAccept";
 import NomineeDecline from "./pages/NomineeDecline";
 import NomineeDashboard from "./pages/nominee/NomineeDashboard";
+import NotificationsPage from "./pages/dashboard/Notifications";
+import ProfilePage from "./pages/dashboard/Profile";
+import SettingsPage from "./pages/dashboard/Settings";
 
 // About Pages
 import About from "./pages/about/About";
@@ -147,6 +152,7 @@ import EndorseNESA from "./pages/EndorseNESA";
 import RegionDashboard from "./pages/region/RegionDashboard";
 import NigeriaChapterTrack from "./pages/region/NigeriaChapterTrack";
 import RegionHubPage from "./pages/region/RegionHubPage";
+import RegionsIndexPage from "./pages/region/RegionsIndexPage";
 
 // OLC Pages
 import {
@@ -157,7 +163,19 @@ import {
 } from "./pages/olc";
 
 // NRC Portal Pages
-import { NRCPortal, NRCMyQueue, NRCSettings, NRCManageTeam } from "./pages/nrc";
+import { NRCPortal, NRCManageTeam, NRCMyQueue, NRCSettings } from "./pages/nrc";
+import {
+  NRCDashboardHome,
+  NRCNomineeTable,
+  NRCNomineeReview,
+  NRCReports,
+  NRCFlaggedCases,
+  NRCMyReviews,
+  EDIAnalyticsDashboard,
+  NRCIntakeQueue,
+  NRCIntakeReview,
+  NRCMergeTool,
+} from "./pages/nrc/dashboard";
 
 // Admin Pages
 import CreateTeam from "./pages/nrc/NRCTeam";
@@ -182,6 +200,7 @@ import { AdminLayout } from "./pages/admin/AdminLayout";
 import ForgotPassword from "./pages/auth/forgotPassword";
 import AdminNRCGovernance from "./pages/admin/NrcGovernance";
 import ManageEditionsPage from "./pages/admin/ManageEditions";
+import CategoryPage from "./pages/categories/CategoryPage";
 
 // Optimized QueryClient with caching strategy
 const queryClient = new QueryClient({
@@ -417,6 +436,14 @@ const App = () => (
 
                   {/* Dynamic Category Pages (data-driven) */}
                   <Route
+                    path="/category/:categoryId"
+                    element={
+                      <WithLayout>
+                        <CategoryPage />
+                      </WithLayout>
+                    }
+                  />
+                  {/* <Route
                     path="/category/csr-education-africa"
                     element={
                       <WithLayout>
@@ -551,8 +578,7 @@ const App = () => (
                         <AfricaEducationIcon />
                       </WithLayout>
                     }
-                  />
-
+                  /> */}
                   {/* Nominee Response Routes */}
                   <Route
                     path="/nomination/accept"
@@ -839,6 +865,22 @@ const App = () => (
                     }
                   />
                   <Route
+                    path="/directory"
+                    element={
+                      <WithLayout>
+                        <NomineeDirectory />
+                      </WithLayout>
+                    }
+                  />
+                  <Route
+                    path="/directory/:slug"
+                    element={
+                      <WithLayout>
+                        <MasterNomineeProfile />
+                      </WithLayout>
+                    }
+                  />
+                  <Route
                     path="/vote"
                     element={
                       <WithLayout>
@@ -974,13 +1016,29 @@ const App = () => (
                     path="/dashboard/nominations"
                     element={<Dashboard />}
                   />
-
+                  <Route
+                    path="/dashboard/notifications"
+                    element={<NotificationsPage />}
+                  />
+                  <Route path="/dashboard/profile" element={<ProfilePage />} />
+                  <Route
+                    path="/dashboard/settings"
+                    element={<SettingsPage />}
+                  />
                   <Route
                     path="/dashboard/region"
                     element={<RegionDashboard />}
                   />
 
                   {/* Region Routes */}
+                  <Route
+                    path="/regions"
+                    element={
+                      <WithLayout>
+                        <RegionsIndexPage />
+                      </WithLayout>
+                    }
+                  />
                   <Route
                     path="/region/nigeria"
                     element={
@@ -1002,12 +1060,70 @@ const App = () => (
                     element={<AcceptTeamInvitePage />}
                   />
 
+                  {/* NRC Dashboard Routes (New Professional Dashboard) */}
+                  <Route path="/nrc/dashboard" element={<NRCDashboardHome />} />
+                  <Route
+                    path="/nrc/dashboard/nominees"
+                    element={<NRCNomineeTable />}
+                  />
+                  <Route
+                    path="/nrc/dashboard/review/:id"
+                    element={<NRCNomineeReview />}
+                  />
+                  <Route
+                    path="/nrc/dashboard/reports"
+                    element={<NRCReports />}
+                  />
+                  <Route
+                    path="/nrc/dashboard/flagged"
+                    element={<NRCFlaggedCases />}
+                  />
+                  <Route
+                    path="/nrc/dashboard/my-reviews"
+                    element={<NRCMyReviews />}
+                  />
+                  <Route
+                    path="/nrc/dashboard/queue"
+                    element={<NRCNomineeTable />}
+                  />
+                  <Route
+                    path="/nrc/dashboard/intake"
+                    element={<NRCIntakeQueue />}
+                  />
+                  <Route
+                    path="/nrc/dashboard/intake/:id"
+                    element={<NRCIntakeReview />}
+                  />
+                  <Route
+                    path="/nrc/dashboard/merge"
+                    element={<NRCMergeTool />}
+                  />
+                  <Route
+                    path="/nrc/dashboard/duplicates"
+                    element={<NRCMergeTool />}
+                  />
+                  <Route
+                    path="/nrc/dashboard/guidelines"
+                    element={<NRCSettings />}
+                  />
+                  <Route
+                    path="/nrc/dashboard/edi-analytics"
+                    element={<EDIAnalyticsDashboard />}
+                  />
+                  <Route
+                    path="/nrc/dashboard/profile"
+                    element={<NRCSettings />}
+                  />
+                  <Route
+                    path="/nrc/dashboard/settings"
+                    element={<NRCSettings />}
+                  />
+
                   {/* OLC Coordinator Routes - use their own layout */}
                   <Route path="/olc/dashboard" element={<OLCDashboard />} />
                   <Route path="/olc/members" element={<OLCMembers />} />
                   <Route path="/olc/wallet" element={<OLCWallet />} />
                   <Route path="/olc/settlements" element={<OLCSettlements />} />
-
                   {/* Admin Routes - use their own layout */}
                   <Route path="/admin" element={<AdminLayout />}>
                     <Route index element={<AdminDashboard />} />

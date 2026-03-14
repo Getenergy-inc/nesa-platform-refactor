@@ -135,7 +135,7 @@ export default function ClaimVotingCredits() {
         />
       </Helmet>
 
-      <main className="min-h-screen bg-background">
+      <main className="min-h-screen bg-charcoal">
         <ClaimHero />
 
         <div className="container py-12">

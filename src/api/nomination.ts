@@ -5,6 +5,7 @@ import { approveNomination, assignNomination, rejectNomination } from "./nrc";
 import { AcceptanceStatus, acceptNomination } from "./nominations";
 import { NominationDashboardItem } from "@/types/nominee_dashboard";
 import { API_BASE } from "@/lib/apiBase";
+import { AwardType } from "./category";
 
 export interface NominationDetails {
   id: string;
@@ -119,6 +120,10 @@ export interface ApprovedNominees {
   achievementDescription: string;
   evidenceUrl: string[];
   id: string;
+  categoryId: string; // The ID of the category this nominee belongs to
+  categoryName: string; // The title of that category (for display)
+  subCategoryId: string; // The ID of the subcategory this nominee belongs to
+  subCategoryName: string;
 }
 
 export interface AINominationResponse {
@@ -292,6 +297,17 @@ export const nominationApi = {
       {
         credentials: "include",
         accessToken,
+      },
+    );
+    return res.data;
+  },
+
+  fetchNomineesByTier: async (accessToken: string, tier: AwardType) => {
+    const res: ApiResponse<ApprovedNominees[]> = await apiRequest(
+      `${API_BASE}/nomination/tier?tier=${tier}`,
+      {
+        accessToken,
+        credentials: "include",
       },
     );
     return res.data;

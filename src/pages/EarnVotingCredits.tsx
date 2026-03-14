@@ -88,7 +88,7 @@ export default function EarnVotingCredits() {
         />
       </Helmet>
 
-      <main className="min-h-screen bg-background">
+      <main className="min-h-screen bg-charcoal">
         {/* Hero */}
         <section className="relative bg-gradient-to-br from-charcoal via-charcoal/95 to-charcoal py-16">
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_50%,rgba(196,160,82,0.15),transparent_50%)]" />

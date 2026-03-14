@@ -7,21 +7,59 @@
 import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 import type { GeographicCategory, NomineeImageType } from "@/lib/nesaData";
-import { normalizeRegion, isContinentalRegion, type AfricanRegion } from "@/lib/regions";
+import {
+  normalizeRegion,
+  isContinentalRegion,
+  type AfricanRegion,
+} from "@/lib/regions";
 
 // Keywords indicating an organization/company (vs a person)
 const ORGANIZATION_KEYWORDS = [
-  "ltd", "limited", "inc", "llc", "company", "corporation", "corp", "group",
-  "foundation", "ministry", "university", "college", "school", "institute",
-  "bank", "plc", "ngo", "association", "society", "council", "commission",
-  "agency", "authority", "department", "organization", "organisation",
-  "trust", "charity", "network", "alliance", "centre", "center", "hospital",
-  "clinic", "media", "broadcast", "television", "radio", "press", "publishing"
+  "ltd",
+  "limited",
+  "inc",
+  "llc",
+  "company",
+  "corporation",
+  "corp",
+  "group",
+  "foundation",
+  "ministry",
+  "university",
+  "college",
+  "school",
+  "institute",
+  "bank",
+  "plc",
+  "ngo",
+  "association",
+  "society",
+  "council",
+  "commission",
+  "agency",
+  "authority",
+  "department",
+  "organization",
+  "organisation",
+  "trust",
+  "charity",
+  "network",
+  "alliance",
+  "centre",
+  "center",
+  "hospital",
+  "clinic",
+  "media",
+  "broadcast",
+  "television",
+  "radio",
+  "press",
+  "publishing",
 ];
 
 function isOrganization(name: string): boolean {
   const lowerName = name.toLowerCase();
-  return ORGANIZATION_KEYWORDS.some(keyword => lowerName.includes(keyword));
+  return ORGANIZATION_KEYWORDS.some((keyword) => lowerName.includes(keyword));
 }
 
 function getImageType(name: string): NomineeImageType {
@@ -29,39 +67,47 @@ function getImageType(name: string): NomineeImageType {
 }
 
 // Map AfricanRegion to GeographicCategory for display filtering
-const AFRICAN_REGION_TO_GEOGRAPHIC: Record<AfricanRegion, GeographicCategory> = {
-  "North Africa": "north-africa",
-  "West Africa": "west-africa",
-  "Central Africa": "central-africa",
-  "East Africa": "east-africa",
-  "Southern Africa": "south-africa",
-  "Sahel Region": "sahel-region" as GeographicCategory,
-  "Horn of Africa": "horn-of-africa" as GeographicCategory,
-  "Indian Ocean Islands": "indian-ocean-islands" as GeographicCategory,
-  "Diaspora / Global Africa": "diaspora",
-  "Friends of Africa": "friends-of-africa",
-};
+const AFRICAN_REGION_TO_GEOGRAPHIC: Record<AfricanRegion, GeographicCategory> =
+  {
+    "North Africa": "north-africa",
+    "West Africa": "west-africa",
+    "Central Africa": "central-africa",
+    "East Africa": "east-africa",
+    "Southern Africa": "south-africa",
+    "Sahel Region": "sahel-region" as GeographicCategory,
+    "Horn of Africa": "horn-of-africa" as GeographicCategory,
+    "Indian Ocean Islands": "indian-ocean-islands" as GeographicCategory,
+    "Diaspora / Global Africa": "diaspora",
+    "Friends of Africa": "friends-of-africa",
+  };
 
 /**
  * Convert region string from database to GeographicCategory
  * Uses canonical normalizeRegion from regions.ts
  */
-function getGeographicCategory(region: string | null, categoryName: string | null): GeographicCategory {
+function getGeographicCategory(
+  region: string | null,
+  categoryName: string | null,
+): GeographicCategory {
   // First try to normalize using the canonical region system
   if (region) {
     const normalizedRegion = normalizeRegion(region);
     return AFRICAN_REGION_TO_GEOGRAPHIC[normalizedRegion];
   }
-  
+
   // Check category name for diaspora/international keywords
   if (categoryName) {
     const lowerCategory = categoryName.toLowerCase();
     if (lowerCategory.includes("diaspora")) return "diaspora";
-    if (lowerCategory.includes("international") || lowerCategory.includes("bilateral") || lowerCategory.includes("global")) {
+    if (
+      lowerCategory.includes("international") ||
+      lowerCategory.includes("bilateral") ||
+      lowerCategory.includes("global")
+    ) {
       return "friends-of-africa";
     }
   }
-  
+
   // Default to general Africa regions bucket
   return "africa-regions";
 }
@@ -70,7 +116,13 @@ function getGeographicCategory(region: string | null, categoryName: string | nul
  * Check if a GeographicCategory is a continental African region
  */
 function isAfricanRegion(category: GeographicCategory): boolean {
-  return ["north-africa", "east-africa", "west-africa", "south-africa", "central-africa"].includes(category);
+  return [
+    "north-africa",
+    "east-africa",
+    "west-africa",
+    "south-africa",
+    "central-africa",
+  ].includes(category);
 }
 
 export interface DatabaseNominee {
@@ -99,7 +151,7 @@ export interface DatabaseNominee {
 export interface EnrichedDatabaseNominee {
   id: string;
   name: string;
-  slug: string;
+  slug?: string;
   title: string | null;
   bio: string | null;
   organization: string | null;
@@ -122,8 +174,10 @@ const PLACEHOLDER_IMAGE = "/images/placeholder.svg";
 
 function enrichNominee(nominee: DatabaseNominee): EnrichedDatabaseNominee {
   const imageType = getImageType(nominee.name);
-  const photoUrl = (imageType === "logo" ? nominee.logo_url : nominee.photo_url) || PLACEHOLDER_IMAGE;
-  
+  const photoUrl =
+    (imageType === "logo" ? nominee.logo_url : nominee.photo_url) ||
+    PLACEHOLDER_IMAGE;
+
   return {
     id: nominee.id,
     name: nominee.name,
@@ -133,7 +187,11 @@ function enrichNominee(nominee: DatabaseNominee): EnrichedDatabaseNominee {
     organization: nominee.organization,
     country: nominee.country,
     region: nominee.region,
-    photoUrl: photoUrl.startsWith("http") ? photoUrl : (photoUrl.startsWith("/") ? photoUrl : `/${photoUrl}`),
+    photoUrl: photoUrl.startsWith("http")
+      ? photoUrl
+      : photoUrl.startsWith("/")
+        ? photoUrl
+        : `/${photoUrl}`,
     imageType,
     status: nominee.status || "pending",
     isPlatinum: nominee.is_platinum || false,
@@ -142,7 +200,10 @@ function enrichNominee(nominee: DatabaseNominee): EnrichedDatabaseNominee {
     subcategorySlug: nominee.subcategory_slug || "uncategorized",
     categoryName: nominee.category_name || "General",
     categorySlug: nominee.category_slug || "general",
-    geographicCategory: getGeographicCategory(nominee.region, nominee.category_name || null),
+    geographicCategory: getGeographicCategory(
+      nominee.region,
+      nominee.category_name || null,
+    ),
     achievement: nominee.bio || nominee.title || "",
   };
 }
@@ -162,11 +223,12 @@ async function fetchNominees(): Promise<EnrichedDatabaseNominee[]> {
   if (!nominees || nominees.length === 0) return [];
 
   // Get subcategory IDs to fetch category info
-  const subcategoryIds = [...new Set(nominees.map(n => n.subcategory_id))];
-  
+  const subcategoryIds = [...new Set(nominees.map((n) => n.subcategory_id))];
+
   const { data: subcategories, error: subcatError } = await supabase
     .from("subcategories")
-    .select(`
+    .select(
+      `
       id,
       name,
       slug,
@@ -176,7 +238,8 @@ async function fetchNominees(): Promise<EnrichedDatabaseNominee[]> {
         name,
         slug
       )
-    `)
+    `,
+    )
     .in("id", subcategoryIds);
 
   if (subcatError) {
@@ -184,7 +247,10 @@ async function fetchNominees(): Promise<EnrichedDatabaseNominee[]> {
   }
 
   // Build subcategory lookup map
-  const subcatMap = new Map<string, { name: string; slug: string; categoryName: string; categorySlug: string }>();
+  const subcatMap = new Map<
+    string,
+    { name: string; slug: string; categoryName: string; categorySlug: string }
+  >();
   subcategories?.forEach((sc: any) => {
     subcatMap.set(sc.id, {
       name: sc.name,
@@ -197,7 +263,7 @@ async function fetchNominees(): Promise<EnrichedDatabaseNominee[]> {
   // Transform nominees with category info
   return nominees.map((row: any) => {
     const subcatInfo = subcatMap.get(row.subcategory_id);
-    
+
     const nominee: DatabaseNominee = {
       id: row.id,
       name: row.name,
@@ -234,15 +300,15 @@ export function useNominees() {
 // Geographic grouping utilities
 export function getNomineesByGeography(
   nominees: EnrichedDatabaseNominee[],
-  category: GeographicCategory
+  category: GeographicCategory,
 ): EnrichedDatabaseNominee[] {
   if (category === "all") return nominees;
-  
+
   if (category === "africa-regions") {
-    return nominees.filter(n => isAfricanRegion(n.geographicCategory));
+    return nominees.filter((n) => isAfricanRegion(n.geographicCategory));
   }
-  
-  return nominees.filter(n => n.geographicCategory === category);
+
+  return nominees.filter((n) => n.geographicCategory === category);
 }
 
 export function getGeographicStats(nominees: EnrichedDatabaseNominee[]) {
@@ -254,9 +320,10 @@ export function getGeographicStats(nominees: EnrichedDatabaseNominee[]) {
     byRegion: {} as Record<GeographicCategory, number>,
   };
 
-  nominees.forEach(n => {
-    stats.byRegion[n.geographicCategory] = (stats.byRegion[n.geographicCategory] || 0) + 1;
-    
+  nominees.forEach((n) => {
+    stats.byRegion[n.geographicCategory] =
+      (stats.byRegion[n.geographicCategory] || 0) + 1;
+
     if (isAfricanRegion(n.geographicCategory)) {
       stats.africaRegions++;
     } else if (n.geographicCategory === "diaspora") {
@@ -271,10 +338,13 @@ export function getGeographicStats(nominees: EnrichedDatabaseNominee[]) {
 
 export function getCategoryOptions(nominees: EnrichedDatabaseNominee[]) {
   const categories = new Map<string, string>();
-  nominees.forEach(n => {
+  nominees.forEach((n) => {
     if (n.categorySlug && n.categoryName) {
       categories.set(n.categorySlug, n.categoryName);
     }
   });
-  return Array.from(categories.entries()).map(([value, label]) => ({ value, label }));
+  return Array.from(categories.entries()).map(([value, label]) => ({
+    value,
+    label,
+  }));
 }

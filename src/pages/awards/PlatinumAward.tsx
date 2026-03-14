@@ -4,6 +4,7 @@ import { CertificateGallery } from "@/components/nesa/CertificateGallery";
 import { AwardTVShowSection } from "@/components/awards/AwardTVShowSection";
 import { AwardHeroSection } from "@/components/awards/AwardHeroSection";
 import { AwardCategoriesGrid } from "@/components/awards/AwardCategoriesGrid";
+import { TierNomineeShowcase } from "@/components/awards/TierNomineeShowcase";
 import { getTVShowByAward } from "@/config/awardTVShows";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -116,6 +117,14 @@ export default function PlatinumAward() {
           accentColor="slate"
           title="Platinum Certificate Categories"
           description="All 17 categories are eligible for Platinum: 7 core categories (100 renominations) and 10 standard categories (200 renominations)."
+        />
+
+        {/* Nominees Showcase */}
+        <TierNomineeShowcase
+          tier="platinum"
+          accentColor="slate"
+          title="Platinum Certificate Nominees"
+          description="Browse nominees progressing toward Platinum recognition. Endorse, nominate, or re-nominate."
         />
 
         {/* Certificate Gallery */}
