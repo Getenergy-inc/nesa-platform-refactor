@@ -70,16 +70,16 @@ function DashboardContent() {
       /**
        * Referral
        */
-      if (userDetails.referral) {
-        setReferral(userDetails.referral);
+      // if (userDetails.referral) {
+      //   setReferral(userDetails.referral);
 
-        const total = userDetails.referral.events.reduce(
-          (sum: number, e: any) => sum + (e.reward_agc || 0),
-          0,
-        );
+      //   const total = userDetails.referral.events.reduce(
+      //     (sum: number, e: any) => sum + (e.reward_agc || 0),
+      //     0,
+      //   );
 
-        setTotalReferralEarnings(total);
-      }
+      //   setTotalReferralEarnings(total);
+      // }
     } catch (err) {
       console.error("Dashboard load error:", err);
     } finally {
@@ -111,17 +111,17 @@ function DashboardContent() {
 
         {/* Wallet + Referral */}
         <div className="grid gap-4 lg:grid-cols-2">
-          <TransactionsList
+          {/* <TransactionsList
             transactions={transactions}
             loading={loading}
             limit={10}
-          />
+          /> */}
 
-          <ReferralCard
+          {/* <ReferralCard
             referral={referral}
             totalEarnings={totalReferralEarnings}
             loading={loading}
-          />
+          /> */}
         </div>
       </div>
       <TopUpDialog

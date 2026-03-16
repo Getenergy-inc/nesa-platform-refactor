@@ -30,6 +30,8 @@ export interface DisplayNominee {
   status: "approved" | "platinum" | "pending" | string;
   accountType: "INDIVIDUAL" | "ORGANIZATION";
   geographicCategory: GeographicCategory;
+  nominationCount: number;
+  categoryAwardType: string;
 }
 
 // Helper function to determine geographic category based on country
@@ -195,6 +197,8 @@ export function useNomineesByTier(tier: AwardTier) {
               profileImage: nominee.profileImage || null,
               accountType: nominee.accountType || "INDIVIDUAL",
               geographicCategory: geographicCategory,
+              nominationCount: nominee.nominationCount,
+              categoryAwardType: nominee.categoryAwardType,
             };
           });
 

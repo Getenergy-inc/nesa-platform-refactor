@@ -1,6 +1,12 @@
 import { API_BASE } from "@/lib/apiBase";
 import { apiRequest } from "./client";
 import { ApiResponse } from "./http";
+import {
+  CreateCategoryPayload,
+  CreateSubcategoryPayload,
+  UpdateCategoryPayload,
+  UpdateSubcategoryPayload,
+} from "@/pages/admin/ManageCategories";
 
 export interface EditionBase {
   key: string;
@@ -57,6 +63,69 @@ export const adminApi = {
       accessToken,
       credentials: "include",
       method: "PUT",
+    });
+  },
+
+  createCategory: async (
+    accessToken: string,
+    payload: CreateCategoryPayload,
+  ) => {
+    await apiRequest(`${API_BASE}/category`, {
+      method: "POST",
+      credentials: "include",
+      accessToken,
+      body: JSON.stringify(payload),
+    });
+  },
+
+  updateCategory: async (
+    accessToken: string,
+    payload: UpdateCategoryPayload,
+  ) => {
+    await apiRequest(`${API_BASE}/category`, {
+      method: "PUT",
+      credentials: "include",
+      accessToken,
+      body: JSON.stringify(payload),
+    });
+  },
+
+  createSubCategory: async (
+    accessToken: string,
+    payload: CreateSubcategoryPayload,
+  ) => {
+    await apiRequest(`${API_BASE}/category/sub`, {
+      method: "POST",
+      credentials: "include",
+      accessToken,
+      body: JSON.stringify(payload),
+    });
+  },
+  updateSubCategory: async (
+    accessToken: string,
+    payload: UpdateSubcategoryPayload,
+  ) => {
+    await apiRequest(`${API_BASE}/category`, {
+      method: "PUT",
+      credentials: "include",
+      accessToken,
+      body: JSON.stringify(payload),
+    });
+  },
+
+  deleteCategory: async (accessToken: string, id: string) => {
+    await apiRequest(`${API_BASE}/category?categoryId=${id}`, {
+      method: "DELETE",
+      credentials: "include",
+      accessToken,
+    });
+  },
+
+  deleteSubCategory: async (accessToken: string, id: string) => {
+    await apiRequest(`${API_BASE}/category/sub`, {
+      method: "DELETE",
+      credentials: "include",
+      accessToken,
     });
   },
 };

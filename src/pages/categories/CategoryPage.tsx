@@ -134,6 +134,7 @@ export function CategoryPage() {
       subCategoryId: sub.id,
       title: sub.title,
       description: sub.description || "",
+      tier: data.category.awardType,
     });
     if (selectedRegion) {
       params.append("region", selectedRegion);

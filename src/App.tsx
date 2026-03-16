@@ -201,6 +201,8 @@ import ForgotPassword from "./pages/auth/forgotPassword";
 import AdminNRCGovernance from "./pages/admin/NrcGovernance";
 import ManageEditionsPage from "./pages/admin/ManageEditions";
 import CategoryPage from "./pages/categories/CategoryPage";
+import WalletPage from "./pages/Wallet";
+import ManageCategoriesPage from "./pages/admin/ManageCategories";
 
 // Optimized QueryClient with caching strategy
 const queryClient = new QueryClient({
@@ -857,7 +859,7 @@ const App = () => (
                     }
                   />
                   <Route
-                    path="/nominees/:slug"
+                    path="/nominees/:id"
                     element={
                       <WithLayout>
                         <NomineeProfile />
@@ -1029,6 +1031,7 @@ const App = () => (
                     path="/dashboard/region"
                     element={<RegionDashboard />}
                   />
+                  <Route path="/dashboard/wallet" element={<WalletPage />} />
 
                   {/* Region Routes */}
                   <Route
@@ -1156,6 +1159,10 @@ const App = () => (
                     <Route
                       path="manage-editions"
                       element={<ManageEditionsPage />}
+                    />
+                    <Route
+                      path="manage-categories"
+                      element={<ManageCategoriesPage />}
                     />
                   </Route>
 

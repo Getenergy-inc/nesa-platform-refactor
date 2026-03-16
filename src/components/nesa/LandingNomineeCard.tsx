@@ -7,7 +7,14 @@ import { Link, useNavigate } from "react-router-dom";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { MapPin, Building2, Trophy, RotateCcw, ThumbsUp, ArrowRight } from "lucide-react";
+import {
+  MapPin,
+  Building2,
+  Trophy,
+  RotateCcw,
+  ThumbsUp,
+  ArrowRight,
+} from "lucide-react";
 import { useState } from "react";
 import { VoteModal } from "@/components/nominees/VoteModal";
 import { RenominateModal } from "@/components/nominees/RenominateModal";
@@ -19,10 +26,19 @@ interface LandingNomineeCardProps {
 }
 
 function getInitials(name: string): string {
-  return name.split(/[\s-]+/).filter(Boolean).map(w => w[0]).join("").toUpperCase().slice(0, 2);
+  return name
+    .split(/[\s-]+/)
+    .filter(Boolean)
+    .map((w) => w[0])
+    .join("")
+    .toUpperCase()
+    .slice(0, 2);
 }
 
-export function LandingNomineeCard({ nominee, isBlueGarnet = false }: LandingNomineeCardProps) {
+export function LandingNomineeCard({
+  nominee,
+  isBlueGarnet = false,
+}: LandingNomineeCardProps) {
   const navigate = useNavigate();
   const [voteOpen, setVoteOpen] = useState(false);
   const [renomOpen, setRenomOpen] = useState(false);
@@ -34,7 +50,8 @@ export function LandingNomineeCard({ nominee, isBlueGarnet = false }: LandingNom
         <CardContent className="p-0 flex flex-col flex-1">
           {/* Image */}
           <div className="relative h-40 sm:h-44 bg-secondary/30 overflow-hidden flex items-center justify-center">
-            {nominee.photoUrl && nominee.photoUrl !== "/images/placeholder.svg" ? (
+            {nominee.photoUrl &&
+            nominee.photoUrl !== "/images/placeholder.svg" ? (
               <img
                 src={nominee.photoUrl}
                 alt={nominee.name}
@@ -46,16 +63,21 @@ export function LandingNomineeCard({ nominee, isBlueGarnet = false }: LandingNom
                 {isOrg ? (
                   <Building2 className="w-8 h-8 text-primary/40" />
                 ) : (
-                  <span className="text-primary/60 font-display text-xl">{getInitials(nominee.name)}</span>
+                  <span className="text-primary/60 font-display text-xl">
+                    {getInitials(nominee.name)}
+                  </span>
                 )}
               </div>
             )}
             <div className="absolute inset-0 bg-gradient-to-t from-secondary via-secondary/40 to-transparent" />
-            
+
             {/* Country badge */}
             {nominee.country && (
               <div className="absolute top-2 right-2">
-                <Badge variant="outline" className="bg-secondary/80 backdrop-blur-sm border-primary/20 text-primary text-[10px]">
+                <Badge
+                  variant="outline"
+                  className="bg-secondary/80 backdrop-blur-sm border-primary/20 text-primary text-[10px]"
+                >
                   <MapPin className="w-2.5 h-2.5 mr-0.5" />
                   {nominee.country}
                 </Badge>
@@ -74,23 +96,30 @@ export function LandingNomineeCard({ nominee, isBlueGarnet = false }: LandingNom
 
           {/* Content */}
           <div className="p-4 flex flex-col flex-1 gap-2">
-            <Link to={`/nominees/${encodeURIComponent(nominee.slug)}`} className="group/link">
+            <Link
+              to={`/nominees/${encodeURIComponent(nominee.slug)}`}
+              className="group/link"
+            >
               <h3 className="font-display text-foreground text-sm font-semibold leading-tight group-hover/link:text-primary transition-colors line-clamp-2">
                 {nominee.name}
               </h3>
             </Link>
 
-            <Badge variant="outline" className="w-fit border-primary/15 text-muted-foreground text-[10px] px-1.5 py-0">
+            <Badge
+              variant="outline"
+              className="w-fit border-primary/15 text-muted-foreground text-[10px] px-1.5 py-0"
+            >
               {nominee.categoryName}
             </Badge>
 
             <p className="text-muted-foreground text-xs leading-relaxed line-clamp-3 flex-1">
-              {nominee.achievement || "Contributing to the advancement of education across Africa."}
+              {nominee.achievement ||
+                "Contributing to the advancement of education across Africa."}
             </p>
 
             {/* Action Buttons */}
             <div className="flex flex-wrap gap-1.5 pt-2 mt-auto border-t border-border/30">
-              <Button
+              {/* <Button
                 size="sm"
                 className="h-8 px-3 text-xs bg-primary hover:bg-primary/90 text-primary-foreground font-medium gap-1.5 flex-1"
                 onClick={(e) => {
@@ -100,7 +129,7 @@ export function LandingNomineeCard({ nominee, isBlueGarnet = false }: LandingNom
               >
                 <Trophy className="w-3 h-3" />
                 Nominate
-              </Button>
+              </Button> */}
 
               <Button
                 size="sm"
@@ -151,6 +180,7 @@ export function LandingNomineeCard({ nominee, isBlueGarnet = false }: LandingNom
         nomineeSlug={nominee.slug}
         awardTitle={nominee.categoryName}
         subcategoryTitle={nominee.subcategoryName}
+        currentCount={nominee.nominationCount}
       />
     </>
   );

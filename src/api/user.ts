@@ -15,6 +15,8 @@ export interface UserDetails {
   country: string;
   state: string | null;
   city: string | null;
+  profilePic: string | null;
+  dateOfBirth: string | null;
   address: string | null;
   wallet: {
     id: string;
@@ -39,6 +41,18 @@ export interface UserDetails {
       }[]
     | null;
 }
+export interface UpdateUserDetails {
+  firstName: string;
+  lastName: string;
+  phone: string;
+  gender: string | null;
+  dateOfBirth: string | null;
+  profilePic: string | null;
+  country: string;
+  state: string | null;
+  city: string | null;
+  address: string | null;
+}
 
 export const userApi = {
   fetchUserDetails: async (accessToken: string) => {
@@ -51,5 +65,17 @@ export const userApi = {
       },
     );
     return res.data;
+  },
+
+  updateUserProfile: async (
+    accessToken: string,
+    userDetails: UpdateUserDetails,
+  ) => {
+    await apiRequest(`${API_BASE}/user`, {
+      method: "POST",
+      accessToken,
+      credentials: "include",
+      body: JSON.stringify(userDetails),
+    });
   },
 };

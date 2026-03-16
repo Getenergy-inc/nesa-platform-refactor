@@ -81,7 +81,6 @@ export default function Login() {
     try {
       const role = await signIn(email, password);
       toast.success(t("auth.login.welcomeBack"));
-      console.log("the role is this", role);
 
       // Jury requires OTP if accessing judge panel
       if (hasRole("jury") && isJudgeLogin) {

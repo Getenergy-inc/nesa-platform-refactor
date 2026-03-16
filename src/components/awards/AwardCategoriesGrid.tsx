@@ -200,7 +200,6 @@ function CategoryCard({
 }) {
   // Map icon based on category title or use default
   const Icon = categoryIconMap[category.title] || GraduationCap;
-  console.log("category scope", category);
 
   // Determine scope style
   const scopeStyle =

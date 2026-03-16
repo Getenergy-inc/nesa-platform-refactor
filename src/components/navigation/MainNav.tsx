@@ -426,15 +426,18 @@ function UserMenu() {
       >
         <div className="px-2 py-1.5 text-sm text-white/60">{user.email}</div>
         <DropdownMenuSeparator className="bg-gold/10" />
-        <DropdownMenuItem asChild>
-          <Link
-            to="/dashboard"
-            className="cursor-pointer text-white hover:text-gold hover:bg-gold/10"
-          >
-            <User className="mr-2 h-4 w-4" />
-            Dashboard
-          </Link>
-        </DropdownMenuItem>
+        {hasRole("FREE_MEMBER") && (
+          <DropdownMenuItem asChild>
+            <Link
+              to="/dashboard"
+              className="cursor-pointer text-white hover:text-gold hover:bg-gold/10"
+            >
+              <User className="mr-2 h-4 w-4" />
+              Dashboard
+            </Link>
+          </DropdownMenuItem>
+        )}
+
         {hasRole("NRC") && (
           <DropdownMenuItem asChild>
             <Link
@@ -455,7 +458,7 @@ function UserMenu() {
             </Link>
           </DropdownMenuItem>
         )}
-        {hasRole("admin") && (
+        {hasRole("ADMIN") && (
           <DropdownMenuItem asChild>
             <Link
               to="/admin"

@@ -122,6 +122,46 @@ export interface Nomination {
 
 // Map tier tab values to display tier
 type NominateTier = "blue-garnet" | "platinum" | "gold-special" | "lifetime";
+type BackendTier =
+  | "AFRICA_ICON_BLUE_GARNET"
+  | "BLUE_GARNET_AND_GOLD_CERTIFICATE"
+  | "PLATINUM_CERTIFICATE"
+  | "GOLD_CERTIFICATE"
+  | "GOLD_SPECIAL";
+
+// Mapping object
+const tierMapping: Record<BackendTier, NominateTier> = {
+  AFRICA_ICON_BLUE_GARNET: "lifetime",
+  BLUE_GARNET_AND_GOLD_CERTIFICATE: "blue-garnet",
+  PLATINUM_CERTIFICATE: "platinum",
+  GOLD_CERTIFICATE: "blue-garnet", // or map to appropriate tier
+  GOLD_SPECIAL: "gold-special",
+};
+// Reverse mapping if needed (for sending back to backend)
+const reverseTierMapping: Record<NominateTier, BackendTier> = {
+  lifetime: "AFRICA_ICON_BLUE_GARNET",
+  "blue-garnet": "BLUE_GARNET_AND_GOLD_CERTIFICATE",
+  platinum: "PLATINUM_CERTIFICATE",
+  "gold-special": "GOLD_SPECIAL",
+};
+// Helper function to map backend tier to frontend tier
+// const mapBackendTierToNominateTier = (
+//   backendTier: BackendTier,
+// ): NominateTier => {
+//   switch (backendTier) {
+//     case "AFRICA_ICON_BLUE_GARNET":
+//       return "lifetime";
+//     case "BLUE_GARNET_AND_GOLD_CERTIFICATE":
+//     case "GOLD_CERTIFICATE": // If both map to blue-garnet
+//       return "blue-garnet";
+//     case "PLATINUM_CERTIFICATE":
+//       return "platinum";
+//     case "GOLD_SPECIAL":
+//       return "gold-special";
+//     default:
+//       return "blue-garnet"; // Default fallback
+//   }
+// };
 
 const TIER_TABS: {
   value: NominateTier;
@@ -191,7 +231,7 @@ function groupCategoriesByTier(
   };
 
   categories.forEach((cat) => {
-    const tier = getCategoryTier(cat.id, categories);
+    const tier = tierMapping[cat.awardType];
     if (tier && grouped[tier]) {
       grouped[tier].push(cat);
     } else {
@@ -210,15 +250,15 @@ export default function Nominate() {
   const [searchParams] = useSearchParams();
   const categoryId = searchParams.get("categoryId");
   const subCategoryId = searchParams.get("subCategoryId");
-  console.log("the params", categoryId, subCategoryId);
   const title = searchParams.get("title");
   const description = searchParams.get("description");
-  const region = searchParams.get("region");
+  const tier = searchParams.get("tier");
+  const actualTier = tierMapping[tier];
   const { hasDraft, draftDate, saveDraft, loadDraft, clearDraft } =
     useNominationDraft();
 
   // Tier/scope/category state
-  const [selectedTier, setSelectedTier] = useState<NominateTier>("blue-garnet");
+  const [selectedTier, setSelectedTier] = useState<NominateTier>(actualTier);
   const [selectedScope, setSelectedScope] = useState<CategoryScope | "">("");
   const [selectedCategoryId, setSelectedCategoryId] =
     useState<string>(categoryId);

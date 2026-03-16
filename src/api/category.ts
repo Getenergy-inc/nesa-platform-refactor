@@ -56,4 +56,15 @@ export const categoryApi = {
     );
     return res.data;
   },
+
+  fetchCategory: async (accessToken: string, categoryId: string) => {
+    const res: ApiResponse<Category> = await apiRequest(
+      `${API_BASE}/category?categoryId=${categoryId}`,
+      {
+        accessToken,
+        credentials: "include",
+      },
+    );
+    return res.data;
+  },
 };

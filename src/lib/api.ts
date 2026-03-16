@@ -2,6 +2,8 @@
 import { supabase } from "@/integrations/supabase/client";
 import type { StageAction } from "@/config/season";
 import type { AppRole } from "@/config/roles";
+import { nominationApi } from "@/api/nomination";
+import { useAuth } from "@/contexts/AuthContext";
 
 // Local type for API responses (different from config types)
 export interface ApiStageStatus {
@@ -17,18 +19,20 @@ export interface ApiStageStatus {
 export async function fetchCurrentStage(): Promise<ApiStageStatus[]> {
   const { data, error } = await supabase
     .from("stage_config")
-    .select(`
+    .select(
+      `
       action,
       is_open,
       opens_at,
       closes_at,
       seasons!inner(is_active)
-    `)
+    `,
+    )
     .eq("seasons.is_active", true);
 
   if (error) throw error;
-  
-  return (data || []).map(item => ({
+
+  return (data || []).map((item) => ({
     action: item.action as StageAction,
     isOpen: item.is_open,
     opensAt: item.opens_at ? new Date(item.opens_at) : undefined,
@@ -37,7 +41,9 @@ export async function fetchCurrentStage(): Promise<ApiStageStatus[]> {
 }
 
 export async function isStageOpen(action: StageAction): Promise<boolean> {
-  const { data, error } = await supabase.rpc("is_stage_open", { _action: action });
+  const { data, error } = await supabase.rpc("is_stage_open", {
+    _action: action,
+  });
   if (error) return false;
   return data ?? false;
 }
@@ -64,7 +70,7 @@ export async function fetchCategories(): Promise<Category[]> {
 
   if (error) throw error;
 
-  return (data || []).map(cat => ({
+  return (data || []).map((cat) => ({
     id: cat.id,
     name: cat.name,
     slug: cat.slug,
@@ -75,7 +81,9 @@ export async function fetchCategories(): Promise<Category[]> {
   }));
 }
 
-export async function fetchCategoryBySlug(slug: string): Promise<Category | null> {
+export async function fetchCategoryBySlug(
+  slug: string,
+): Promise<Category | null> {
   const { data, error } = await supabase
     .from("categories")
     .select("*")
@@ -109,13 +117,17 @@ export interface Subcategory {
   displayOrder: number;
 }
 
-export async function fetchSubcategories(categorySlug?: string): Promise<Subcategory[]> {
+export async function fetchSubcategories(
+  categorySlug?: string,
+): Promise<Subcategory[]> {
   let query = supabase
     .from("subcategories")
-    .select(`
+    .select(
+      `
       *,
       categories!inner(slug)
-    `)
+    `,
+    )
     .eq("is_active", true)
     .order("display_order");
 
@@ -126,7 +138,7 @@ export async function fetchSubcategories(categorySlug?: string): Promise<Subcate
   const { data, error } = await query;
   if (error) throw error;
 
-  return (data || []).map(sub => ({
+  return (data || []).map((sub) => ({
     id: sub.id,
     categoryId: sub.category_id,
     chapterId: sub.chapter_id,
@@ -165,14 +177,16 @@ export async function fetchNominees(filters?: {
 }): Promise<Nominee[]> {
   let query = supabase
     .from("nominees")
-    .select(`
+    .select(
+      `
       *,
       subcategories!inner(
         slug,
         categories!inner(slug)
       ),
       seasons!inner(is_active)
-    `)
+    `,
+    )
     .eq("seasons.is_active", true)
     .in("status", ["approved", "platinum"]);
 
@@ -189,7 +203,7 @@ export async function fetchNominees(filters?: {
   const { data, error } = await query;
   if (error) throw error;
 
-  return (data || []).map(nom => ({
+  return (data || []).map((nom) => ({
     id: nom.id,
     subcategoryId: nom.subcategory_id,
     seasonId: nom.season_id,
@@ -207,7 +221,9 @@ export async function fetchNominees(filters?: {
   }));
 }
 
-export async function fetchNomineeBySlug(slug: string): Promise<Nominee | null> {
+export async function fetchNomineeBySlug(
+  slug: string,
+): Promise<Nominee | null> {
   const { data, error } = await supabase
     .from("nominees")
     .select("*")
@@ -250,7 +266,9 @@ export interface NominationInput {
   justification?: string;
 }
 
-export async function submitNomination(input: NominationInput): Promise<{ id: string }> {
+export async function submitNomination(
+  input: NominationInput,
+): Promise<{ id: string }> {
   // Get current season
   const { data: season, error: seasonError } = await supabase
     .from("seasons")
@@ -285,7 +303,10 @@ export async function submitNomination(input: NominationInput): Promise<{ id: st
 }
 
 // Renominate an existing nominee - increments counter + logs audit event
-export async function renominateNominee(nomineeId: string, justification?: string): Promise<void> {
+export async function renominateNominee(
+  nomineeId: string,
+  justification?: string,
+): Promise<void> {
   const { data: user } = await supabase.auth.getUser();
   if (!user.user) throw new Error("Must be logged in to renominate");
 
@@ -306,8 +327,8 @@ export async function renominateNominee(nomineeId: string, justification?: strin
   // Increment the renomination count (trigger will handle audit log)
   const { error: updateError } = await supabase
     .from("nominees")
-    .update({ 
-      renomination_count: (nominee.renomination_count ?? 0) + 1 
+    .update({
+      renomination_count: (nominee.renomination_count ?? 0) + 1,
     })
     .eq("id", nomineeId);
 
@@ -349,22 +370,8 @@ export async function renominateNominee(nomineeId: string, justification?: strin
 // RENOMINATION API (Detailed Submissions)
 // ==========================================
 export interface RenominationInput {
-  nomineeId?: string;
-  nomineeSlug: string;
-  nomineeName: string;
-  awardSlug?: string;
-  awardTitle?: string;
-  subcategorySlug?: string;
-  subcategoryTitle?: string;
-  groupSlug?: string;
-  groupName?: string;
-  updatedName?: string;
-  updatedAchievement?: string;
-  updatedCountry?: string;
-  updatedState?: string;
-  contactEmail?: string;
-  note?: string;
-  sessionId?: string;
+  nominationId: string;
+  accessToken: string;
 }
 
 // Rate limiting state (client-side basic check)
@@ -375,97 +382,35 @@ const RATE_LIMIT_MAX = 3; // max 3 submissions per minute
 function checkRateLimit(sessionId: string): boolean {
   const now = Date.now();
   const timestamps = renominationRateLimit[sessionId] || [];
-  
+
   // Filter out old timestamps
-  const recentTimestamps = timestamps.filter(t => now - t < RATE_LIMIT_WINDOW_MS);
+  const recentTimestamps = timestamps.filter(
+    (t) => now - t < RATE_LIMIT_WINDOW_MS,
+  );
   renominationRateLimit[sessionId] = recentTimestamps;
-  
+
   if (recentTimestamps.length >= RATE_LIMIT_MAX) {
     return false;
   }
-  
+
   renominationRateLimit[sessionId].push(now);
   return true;
 }
 
-export async function submitRenomination(input: RenominationInput): Promise<{ id: string }> {
-  const { data: userData } = await supabase.auth.getUser();
-  const submitterId = userData.user?.id || null;
-  const sessionId = input.sessionId || submitterId || "anonymous";
-  
-  // Basic rate limiting
-  if (!checkRateLimit(sessionId)) {
-    throw new Error("Too many submissions. Please wait a moment before trying again.");
-  }
-  
-  // Validate email if provided
-  if (input.contactEmail) {
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(input.contactEmail)) {
-      throw new Error("Invalid email address format");
-    }
-  }
-  
-  // Validate note length
-  if (input.note && input.note.length > 500) {
-    throw new Error("Note must be 500 characters or less");
-  }
-
-  // Insert into renominations table
-  const { data, error } = await supabase
-    .from("renominations")
-    .insert({
-      nominee_id: input.nomineeId || null,
-      nominee_slug: input.nomineeSlug,
-      nominee_name: input.nomineeName,
-      award_slug: input.awardSlug || null,
-      award_title: input.awardTitle || null,
-      subcategory_slug: input.subcategorySlug || null,
-      subcategory_title: input.subcategoryTitle || null,
-      group_slug: input.groupSlug || null,
-      group_name: input.groupName || null,
-      updated_name: input.updatedName || null,
-      updated_achievement: input.updatedAchievement || null,
-      updated_country: input.updatedCountry || null,
-      updated_state: input.updatedState || null,
-      contact_email: input.contactEmail || null,
-      note: input.note || null,
-      submitter_id: submitterId,
-      submitter_session_id: input.sessionId || null,
-      status: "pending",
-    })
-    .select("id")
-    .single();
-
-  if (error) throw error;
-
-  // Also increment the nominee's renomination count if we have a nominee_id
-  if (input.nomineeId) {
-    // Get current count
-    const { data: nominee } = await supabase
-      .from("nominees")
-      .select("renomination_count")
-      .eq("id", input.nomineeId)
-      .maybeSingle();
-
-    if (nominee && (nominee.renomination_count ?? 0) < 200) {
-      await supabase
-        .from("nominees")
-        .update({ 
-          renomination_count: (nominee.renomination_count ?? 0) + 1 
-        })
-        .eq("id", input.nomineeId);
-    }
-  }
-
-  return { id: data.id };
+export async function submitRenomination(input: RenominationInput) {
+  const { nominationId, accessToken } = input;
+  await nominationApi.renominate(accessToken, nominationId);
 }
 
 // Search for existing nominees by name
-export async function searchExistingNominees(query: string, subcategoryId?: string): Promise<Nominee[]> {
+export async function searchExistingNominees(
+  query: string,
+  subcategoryId?: string,
+): Promise<Nominee[]> {
   let queryBuilder = supabase
     .from("nominees")
-    .select(`
+    .select(
+      `
       id,
       name,
       slug,
@@ -481,7 +426,8 @@ export async function searchExistingNominees(query: string, subcategoryId?: stri
       renomination_count,
       subcategory_id,
       season_id
-    `)
+    `,
+    )
     .ilike("name", `%${query}%`)
     .limit(10);
 
@@ -492,7 +438,7 @@ export async function searchExistingNominees(query: string, subcategoryId?: stri
   const { data, error } = await queryBuilder;
   if (error) throw error;
 
-  return (data || []).map(nom => ({
+  return (data || []).map((nom) => ({
     id: nom.id,
     subcategoryId: nom.subcategory_id,
     seasonId: nom.season_id,
@@ -547,7 +493,11 @@ export async function submitPublicVote(nomineeId: string): Promise<void> {
     .eq("id", nomineeId);
 }
 
-export async function submitJuryScore(nomineeId: string, score: number, comment?: string): Promise<void> {
+export async function submitJuryScore(
+  nomineeId: string,
+  score: number,
+  comment?: string,
+): Promise<void> {
   const { data: user } = await supabase.auth.getUser();
   if (!user.user) throw new Error("Must be logged in");
 
@@ -585,13 +535,17 @@ export interface Certificate {
   downloadUrl: string | null;
 }
 
-export async function verifyCertificate(code: string): Promise<Certificate | null> {
+export async function verifyCertificate(
+  code: string,
+): Promise<Certificate | null> {
   const { data, error } = await supabase
     .from("certificates")
-    .select(`
+    .select(
+      `
       *,
       nominees(name, title, organization)
-    `)
+    `,
+    )
     .eq("verification_code", code)
     .maybeSingle();
 
@@ -652,7 +606,7 @@ export async function fetchUserProfile(): Promise<UserProfile | null> {
     phone: profile.phone,
     country: profile.country,
     bio: profile.bio,
-    roles: (roles || []).map(r => r.role as AppRole),
+    roles: (roles || []).map((r) => r.role as AppRole),
   };
 }
 
@@ -679,7 +633,7 @@ export async function fetchChapters(): Promise<Chapter[]> {
 
   if (error) throw error;
 
-  return (data || []).map(ch => ({
+  return (data || []).map((ch) => ({
     id: ch.id,
     name: ch.name,
     slug: ch.slug,
@@ -733,7 +687,7 @@ export async function fetchMedia(filters?: {
   const { data, error } = await query;
   if (error) throw error;
 
-  return (data || []).map(m => ({
+  return (data || []).map((m) => ({
     id: m.id,
     title: m.title,
     slug: m.slug,
