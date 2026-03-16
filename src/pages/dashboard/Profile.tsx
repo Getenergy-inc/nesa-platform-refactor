@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Helmet } from "react-helmet-async";
 import { ProtectedRoute } from "@/components/ProtectedRoute";
 import { InstitutionalDashboardLayout } from "@/components/layout/InstitutionalDashboardLayout";
@@ -6,301 +6,33 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { Textarea } from "@/components/ui/textarea";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
-
-import {
-  User,
-  Mail,
-  Save,
-  Loader2,
-  Phone,
-  X,
-  Calendar,
-  MapPin,
-  Home,
-  MapPinned,
-  HomeIcon,
-} from "lucide-react";
-
+import { User, Mail, MapPin, Building, Globe, Save, Loader2 } from "lucide-react";
 import { useAuth } from "@/contexts/AuthContext";
-import { userApi } from "@/api/user";
-import { uploadApi, type fileType } from "@/api/storage";
+import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
-import { cn } from "@/lib/utils";
-
-interface UploadedFile {
-  name: string;
-  url: string;
-  type: string;
-  path: string;
-}
-
-// All African countries
-const countries = [
-  // Africa
-  "Algeria",
-  "Angola",
-  "Benin",
-  "Botswana",
-  "Burkina Faso",
-  "Burundi",
-  "Cabo Verde",
-  "Cameroon",
-  "Central African Republic",
-  "Chad",
-  "Comoros",
-  "Congo",
-  "Côte d'Ivoire",
-  "Djibouti",
-  "DRC",
-  "Egypt",
-  "Equatorial Guinea",
-  "Eritrea",
-  "Eswatini",
-  "Ethiopia",
-  "Gabon",
-  "Gambia",
-  "Ghana",
-  "Guinea",
-  "Guinea-Bissau",
-  "Kenya",
-  "Lesotho",
-  "Liberia",
-  "Libya",
-  "Madagascar",
-  "Malawi",
-  "Mali",
-  "Mauritania",
-  "Mauritius",
-  "Morocco",
-  "Mozambique",
-  "Namibia",
-  "Niger",
-  "Nigeria",
-  "Rwanda",
-  "Sao Tome and Principe",
-  "Senegal",
-  "Seychelles",
-  "Sierra Leone",
-  "Somalia",
-  "South Africa",
-  "South Sudan",
-  "Sudan",
-  "Tanzania",
-  "Togo",
-  "Tunisia",
-  "Uganda",
-  "Zambia",
-  "Zimbabwe",
-  // Rest of the world
-  "United States",
-  "United Kingdom",
-  "Canada",
-  "Germany",
-  "France",
-  "India",
-  "UAE",
-  "Australia",
-  "New Zealand",
-  "Italy",
-  "Spain",
-  "Netherlands",
-  "Sweden",
-  "Norway",
-  "Denmark",
-  "Finland",
-  "Switzerland",
-  "Belgium",
-  "Portugal",
-  "Austria",
-  "Ireland",
-  "Poland",
-  "Czech Republic",
-  "Hungary",
-  "Greece",
-  "Turkey",
-  "Israel",
-  "Saudi Arabia",
-  "Qatar",
-  "Kuwait",
-  "Jordan",
-  "Lebanon",
-  "China",
-  "Japan",
-  "South Korea",
-  "Singapore",
-  "Malaysia",
-  "Indonesia",
-  "Thailand",
-  "Vietnam",
-  "Philippines",
-  "Pakistan",
-  "Bangladesh",
-  "Sri Lanka",
-  "Brazil",
-  "Mexico",
-  "Argentina",
-  "Chile",
-  "Colombia",
-  "Peru",
-  "Venezuela",
-];
-
-const genders = ["Male", "Female", "Other", "Prefer not to say"];
-
-const months = [
-  "January",
-  "February",
-  "March",
-  "April",
-  "May",
-  "June",
-  "July",
-  "August",
-  "September",
-  "October",
-  "November",
-  "December",
-];
-
-// Generate years from 1900 to current year
-const currentYear = new Date().getFullYear();
-const years = Array.from({ length: currentYear - 1900 + 1 }, (_, i) =>
-  (currentYear - i).toString(),
-);
-
-const formInput =
-  "mt-1 bg-black/60 border-amber-500/30 text-white placeholder:text-amber-400/40 focus:border-amber-400 focus:ring-amber-400/30";
 
 function ProfileContent() {
-  const { user, roles, accessToken } = useAuth();
-
-  const [loading, setLoading] = useState(true);
+  const { user, roles } = useAuth();
   const [saving, setSaving] = useState(false);
-  const [profileUploading, setProfileUploading] = useState(false);
-
-  // Personal Information
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [phone, setPhone] = useState("");
-  const [gender, setGender] = useState("");
-
-  // Date of Birth - split into day, month, year
-  const [dobDay, setDobDay] = useState("");
-  const [dobMonth, setDobMonth] = useState("");
-  const [dobYear, setDobYear] = useState("");
-
-  const [profileImage, setProfileImage] = useState<UploadedFile | null>(null);
-
-  // Location Information
+  const [fullName, setFullName] = useState(user?.user_metadata?.full_name || "");
+  const [bio, setBio] = useState("");
   const [country, setCountry] = useState("");
-  const [state, setState] = useState("");
-  const [city, setCity] = useState("");
-  const [address, setAddress] = useState("");
-
-  // Generate days based on selected month and year
-  const getDaysInMonth = () => {
-    if (!dobMonth || !dobYear) return 31;
-    return new Date(parseInt(dobYear), parseInt(dobMonth) + 1, 0).getDate();
-  };
-
-  const days = Array.from({ length: getDaysInMonth() }, (_, i) =>
-    (i + 1).toString().padStart(2, "0"),
-  );
-
-  useEffect(() => {
-    loadUserProfile();
-  }, []);
-
-  const loadUserProfile = async () => {
-    if (!accessToken) return;
-
-    try {
-      setLoading(true);
-
-      const userDetails = await userApi.fetchUserDetails(accessToken);
-
-      // Personal Information
-      setFirstName(userDetails.firstName || "");
-      setLastName(userDetails.lastName || "");
-      setPhone(userDetails.phone || "");
-      setGender(userDetails.gender || "");
-
-      // Parse date of birth if it exists
-      if (userDetails.dateOfBirth) {
-        const date = new Date(userDetails.dateOfBirth);
-        if (!isNaN(date.getTime())) {
-          setDobYear(date.getFullYear().toString());
-          setDobMonth(date.getMonth().toString());
-          setDobDay(date.getDate().toString().padStart(2, "0"));
-        }
-      }
-
-      // Location Information
-      setCountry(userDetails.country || "");
-      setState(userDetails.state || "");
-      setCity(userDetails.city || "");
-      setAddress(userDetails.address || "");
-
-      if (userDetails.profilePic) {
-        setProfileImage({
-          name: "",
-          url: userDetails.profilePic,
-          type: "image/jpeg",
-          path: "",
-        });
-      }
-    } catch (error) {
-      console.error("Failed to load profile:", error);
-      toast.error("Failed to load profile");
-    } finally {
-      setLoading(false);
-    }
-  };
+  const [organization, setOrganization] = useState("");
 
   const handleSave = async () => {
-    if (!accessToken) return;
-
-    if (!firstName.trim()) return toast.error("First name required");
-    if (!phone.trim()) return toast.error("Phone required");
-    if (!country) return toast.error("Country required");
-
-    // Construct date of birth from day, month, year
-    let dateOfBirth = null;
-    if (dobDay && dobMonth && dobYear) {
-      // Create date in UTC to avoid timezone issues
-      const date = new Date(
-        Date.UTC(parseInt(dobYear), parseInt(dobMonth), parseInt(dobDay)),
-      );
-      dateOfBirth = date.toISOString();
-    }
-
+    if (!user) return;
+    setSaving(true);
     try {
-      setSaving(true);
+      const { error } = await supabase
+        .from("profiles")
+        .update({ full_name: fullName })
+        .eq("user_id", user.id);
 
-      await userApi.updateUserProfile(accessToken, {
-        firstName: firstName.trim(),
-        lastName: lastName.trim() || null,
-        phone: phone.trim(),
-        gender: gender || null,
-        dateOfBirth: dateOfBirth,
-        profilePic: profileImage?.url || null,
-        country,
-        state: state.trim() || null,
-        city: city.trim() || null,
-        address: address.trim() || null,
-      });
-
-      toast.success("Profile updated");
-      loadUserProfile();
+      if (error) throw error;
+      toast.success("Profile updated successfully");
     } catch (err: any) {
       toast.error(err.message || "Failed to update profile");
     } finally {
@@ -308,362 +40,118 @@ function ProfileContent() {
     }
   };
 
-  const handleProfileImageUpload = async (
-    e: React.ChangeEvent<HTMLInputElement>,
-  ) => {
-    const files = e.target.files;
-    if (!files || !files.length || !accessToken) return;
-
-    const file = files[0];
-
-    try {
-      setProfileUploading(true);
-
-      const file_type: fileType = file.type.startsWith("image/")
-        ? "IMAGE"
-        : "DOCUMENT";
-
-      const uploadUrl = await uploadApi.getPresignedUrl(
-        accessToken,
-        file.name,
-        file.type,
-        file.size.toString(),
-        file_type,
-      );
-
-      await uploadApi.uploadFile(file, uploadUrl.signedUrl);
-
-      const url = await uploadApi.getPublicUrl(accessToken, uploadUrl.path);
-
-      setProfileImage({
-        name: file.name,
-        url,
-        type: file.type,
-        path: uploadUrl.path,
-      });
-
-      toast.success("Photo uploaded");
-    } catch (error) {
-      console.error("Upload error:", error);
-      toast.error("Upload failed");
-    } finally {
-      setProfileUploading(false);
-      e.target.value = "";
-    }
-  };
-
-  const removePhoto = () => {
-    setProfileImage(null);
-    toast.success("Photo removed");
-  };
-
-  // Reset day when month/year changes to avoid invalid dates
-  useEffect(() => {
-    if (dobDay && dobMonth && dobYear) {
-      const maxDays = getDaysInMonth();
-      if (parseInt(dobDay) > maxDays) {
-        setDobDay(maxDays.toString().padStart(2, "0"));
-      }
-    }
-  }, [dobMonth, dobYear]);
-
-  if (loading) {
-    return (
-      <InstitutionalDashboardLayout
-        title="Profile"
-        breadcrumbs={[{ label: "Profile" }]}
-      >
-        <div className="flex justify-center py-20">
-          <Loader2 className="h-8 w-8 animate-spin text-amber-400" />
-        </div>
-      </InstitutionalDashboardLayout>
-    );
-  }
-
   return (
-    <InstitutionalDashboardLayout
-      title="Profile"
-      breadcrumbs={[{ label: "Profile" }]}
-    >
+    <InstitutionalDashboardLayout title="Profile" breadcrumbs={[{ label: "Profile" }]}>
       <Helmet>
-        <title>My Profile | NESA Africa</title>
+        <title>My Profile | NESA-Africa</title>
       </Helmet>
 
-      <div className="max-w-4xl mx-auto space-y-6">
+      <div className="max-w-3xl mx-auto space-y-6">
         {/* Profile Header */}
-        <Card className="border border-amber-500/20 bg-neutral-950/80 backdrop-blur-md shadow-lg">
-          <CardContent className="p-8 flex items-center gap-6">
-            <div className="relative">
-              <label
-                className={cn(
-                  "cursor-pointer block group",
-                  profileUploading && "opacity-50 pointer-events-none",
-                )}
-              >
-                {profileImage ? (
-                  <img
-                    src={profileImage.url}
-                    alt="Profile"
-                    className="h-24 w-24 rounded-full object-cover border-2 border-amber-500/40 hover:border-amber-400 transition"
-                  />
-                ) : (
-                  <div className="h-24 w-24 rounded-full border-2 border-dashed border-amber-500/40 flex items-center justify-center">
-                    <User className="text-amber-400" />
-                  </div>
-                )}
-
-                <input
-                  type="file"
-                  className="hidden"
-                  accept="image/*"
-                  onChange={handleProfileImageUpload}
-                />
-              </label>
-
-              {profileImage && (
-                <button
-                  onClick={removePhoto}
-                  className="absolute -top-1 -right-1 rounded-full bg-rose-500 p-1.5 text-white hover:bg-rose-600"
-                >
-                  <X className="h-3 w-3" />
-                </button>
-              )}
-            </div>
-
-            <div>
-              <h2 className="text-xl font-semibold text-white">
-                {firstName} {lastName}
-              </h2>
-
-              <p className="text-sm text-amber-300 flex items-center gap-2 mt-1">
-                <Mail className="h-4 w-4" /> {user?.email}
-              </p>
-
-              <div className="flex gap-2 mt-3 flex-wrap">
-                {roles.map((role) => (
-                  <Badge
-                    key={role}
-                    className="bg-amber-500/20 text-amber-300 border border-amber-500/30"
-                  >
-                    {role.replace(/_/g, " ")}
-                  </Badge>
-                ))}
+        <Card className="border-gold/10 bg-[hsl(30_8%_8%)]">
+          <CardContent className="p-6">
+            <div className="flex items-center gap-4">
+              <div className="h-16 w-16 rounded-full bg-gold/20 flex items-center justify-center">
+                <User className="h-8 w-8 text-gold" />
+              </div>
+              <div>
+                <h2 className="text-xl font-display font-bold text-white">
+                  {fullName || user?.email?.split("@")[0] || "User"}
+                </h2>
+                <p className="text-white/50 text-sm">{user?.email}</p>
+                <div className="flex gap-2 mt-2">
+                  {roles.map((role) => (
+                    <Badge key={role} className="bg-gold/20 text-gold border-gold/30 capitalize text-xs">
+                      {role}
+                    </Badge>
+                  ))}
+                </div>
               </div>
             </div>
           </CardContent>
         </Card>
 
         {/* Personal Information */}
-        <Card className="border border-amber-500/20 bg-neutral-950/80 backdrop-blur-md shadow-lg">
+        <Card className="border-gold/10 bg-[hsl(30_8%_8%)]">
           <CardHeader>
-            <CardTitle className="text-white flex items-center gap-2">
-              <User className="h-5 w-5 text-amber-400" />
+            <CardTitle className="text-white text-lg flex items-center gap-2">
+              <User className="h-5 w-5 text-gold" />
               Personal Information
             </CardTitle>
           </CardHeader>
-
-          <CardContent className="space-y-6">
+          <CardContent className="space-y-4">
             <div className="grid md:grid-cols-2 gap-4">
-              <div>
-                <Label className="text-amber-200 font-medium">
-                  First Name *
-                </Label>
+              <div className="space-y-2">
+                <Label className="text-white/70">Full Name</Label>
                 <Input
-                  value={firstName}
-                  onChange={(e) => setFirstName(e.target.value)}
-                  className={formInput}
+                  value={fullName}
+                  onChange={(e) => setFullName(e.target.value)}
+                  className="bg-white/5 border-white/10 text-white placeholder:text-white/30 focus:border-gold/50"
+                  placeholder="Your full name"
                 />
               </div>
-
-              <div>
-                <Label className="text-amber-200 font-medium">Last Name</Label>
-                <Input
-                  value={lastName}
-                  onChange={(e) => setLastName(e.target.value)}
-                  className={formInput}
-                />
-              </div>
-            </div>
-
-            <div className="grid md:grid-cols-2 gap-4">
-              <div>
-                <Label className="text-amber-200 font-medium">Phone *</Label>
-                <Input
-                  value={phone}
-                  onChange={(e) => setPhone(e.target.value)}
-                  className={formInput}
-                />
-              </div>
-
-              <div>
-                <Label className="text-amber-200 font-medium">Gender</Label>
-                <Select value={gender} onValueChange={setGender}>
-                  <SelectTrigger className="mt-1 bg-black/60 border-amber-500/30 text-white focus:border-amber-400">
-                    <SelectValue placeholder="Select gender" />
-                  </SelectTrigger>
-                  <SelectContent className="bg-neutral-900 border border-amber-500/30 text-white">
-                    {genders.map((g) => (
-                      <SelectItem
-                        key={g}
-                        value={g}
-                        className="hover:bg-amber-500/20"
-                      >
-                        {g}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-              </div>
-            </div>
-
-            <div>
-              <Label className="text-amber-200 font-medium mb-2 block">
-                Date of Birth
-              </Label>
-              <div className="grid grid-cols-3 gap-2">
-                {/* Month Select */}
-                <Select value={dobMonth} onValueChange={setDobMonth}>
-                  <SelectTrigger className="bg-black/60 border-amber-500/30 text-white focus:border-amber-400">
-                    <SelectValue placeholder="Month" />
-                  </SelectTrigger>
-                  <SelectContent className="bg-neutral-900 border border-amber-500/30 text-white max-h-[300px]">
-                    {months.map((month, index) => (
-                      <SelectItem
-                        key={month}
-                        value={index.toString()}
-                        className="hover:bg-amber-500/20"
-                      >
-                        {month}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-
-                {/* Day Select */}
-                <Select value={dobDay} onValueChange={setDobDay}>
-                  <SelectTrigger className="bg-black/60 border-amber-500/30 text-white focus:border-amber-400">
-                    <SelectValue placeholder="Day" />
-                  </SelectTrigger>
-                  <SelectContent className="bg-neutral-900 border border-amber-500/30 text-white max-h-[300px]">
-                    {days.map((day) => (
-                      <SelectItem
-                        key={day}
-                        value={day}
-                        className="hover:bg-amber-500/20"
-                      >
-                        {day}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-
-                {/* Year Select */}
-                <Select value={dobYear} onValueChange={setDobYear}>
-                  <SelectTrigger className="bg-black/60 border-amber-500/30 text-white focus:border-amber-400">
-                    <SelectValue placeholder="Year" />
-                  </SelectTrigger>
-                  <SelectContent className="bg-neutral-900 border border-amber-500/30 text-white max-h-[300px]">
-                    {years.map((year) => (
-                      <SelectItem
-                        key={year}
-                        value={year}
-                        className="hover:bg-amber-500/20"
-                      >
-                        {year}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-              </div>
-            </div>
-
-            <div>
-              <Label className="text-amber-200 font-medium">Country *</Label>
-              <Select value={country} onValueChange={setCountry}>
-                <SelectTrigger className="mt-1 bg-black/60 border-amber-500/30 text-white focus:border-amber-400">
-                  <SelectValue placeholder="Select country" />
-                </SelectTrigger>
-                <SelectContent className="bg-neutral-900 border border-amber-500/30 text-white max-h-[300px]">
-                  {countries.map((c) => (
-                    <SelectItem
-                      key={c}
-                      value={c}
-                      className="hover:bg-amber-500/20"
-                    >
-                      {c}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-            </div>
-
-            <Separator className="bg-amber-500/20" />
-
-            {/* Location Information */}
-            <div>
-              <h3 className="text-amber-200 font-medium mb-4 flex items-center gap-2">
-                <MapPin className="h-4 w-4 text-amber-400" />
-                Location Information
-              </h3>
-
-              <div className="grid md:grid-cols-2 gap-4 mb-4">
-                <div>
-                  <Label className="text-amber-200 font-medium">State</Label>
-                  <div className="relative">
-                    <MapPinned className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-amber-400/40" />
-                    <Input
-                      value={state}
-                      onChange={(e) => setState(e.target.value)}
-                      className={`${formInput} pl-10`}
-                      placeholder="Lagos"
-                    />
-                  </div>
-                </div>
-
-                <div>
-                  <Label className="text-amber-200 font-medium">City</Label>
-                  <div className="relative">
-                    <HomeIcon className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-amber-400/40" />
-                    <Input
-                      value={city}
-                      onChange={(e) => setCity(e.target.value)}
-                      className={`${formInput} pl-10`}
-                      placeholder="Ikeja"
-                    />
-                  </div>
-                </div>
-              </div>
-
-              <div>
-                <Label className="text-amber-200 font-medium">Address</Label>
+              <div className="space-y-2">
+                <Label className="text-white/70">Email</Label>
                 <div className="relative">
-                  <Home className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-amber-400/40" />
+                  <Mail className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-white/30" />
                   <Input
-                    value={address}
-                    onChange={(e) => setAddress(e.target.value)}
-                    className={`${formInput} pl-10`}
-                    placeholder="123 Main Street"
+                    value={user?.email || ""}
+                    disabled
+                    className="bg-white/5 border-white/10 text-white/50 pl-10"
                   />
                 </div>
               </div>
             </div>
 
-            <div className="flex justify-end pt-4">
+            <div className="grid md:grid-cols-2 gap-4">
+              <div className="space-y-2">
+                <Label className="text-white/70">Country</Label>
+                <div className="relative">
+                  <MapPin className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-white/30" />
+                  <Input
+                    value={country}
+                    onChange={(e) => setCountry(e.target.value)}
+                    className="bg-white/5 border-white/10 text-white placeholder:text-white/30 focus:border-gold/50 pl-10"
+                    placeholder="Your country"
+                  />
+                </div>
+              </div>
+              <div className="space-y-2">
+                <Label className="text-white/70">Organization</Label>
+                <div className="relative">
+                  <Building className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-white/30" />
+                  <Input
+                    value={organization}
+                    onChange={(e) => setOrganization(e.target.value)}
+                    className="bg-white/5 border-white/10 text-white placeholder:text-white/30 focus:border-gold/50 pl-10"
+                    placeholder="Your organization"
+                  />
+                </div>
+              </div>
+            </div>
+
+            <div className="space-y-2">
+              <Label className="text-white/70">Bio</Label>
+              <Textarea
+                value={bio}
+                onChange={(e) => setBio(e.target.value)}
+                className="bg-white/5 border-white/10 text-white placeholder:text-white/30 focus:border-gold/50 min-h-[100px]"
+                placeholder="Tell us about yourself and your work in education..."
+              />
+            </div>
+
+            <Separator className="bg-gold/10" />
+
+            <div className="flex justify-end">
               <Button
                 onClick={handleSave}
-                disabled={saving || profileUploading}
-                className="bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-amber-950 font-semibold shadow-lg px-6"
+                disabled={saving}
+                className="bg-gold hover:bg-gold/90 text-charcoal font-semibold"
               >
                 {saving ? (
-                  <>
-                    <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                    Saving...
-                  </>
+                  <><Loader2 className="h-4 w-4 mr-2 animate-spin" /> Saving...</>
                 ) : (
-                  <>
-                    <Save className="mr-2 h-4 w-4" />
-                    Save Changes
-                  </>
+                  <><Save className="h-4 w-4 mr-2" /> Save Changes</>
                 )}
               </Button>
             </div>

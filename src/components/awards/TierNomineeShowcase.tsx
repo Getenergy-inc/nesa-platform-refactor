@@ -130,7 +130,6 @@ export interface DisplayNominee {
   profileImage: string | null;
   accountType: "INDIVIDUAL" | "ORGANIZATION";
   geographicCategory: GeographicCategory;
-  nominationCount: number;
 }
 
 export function TierNomineeShowcase({
@@ -608,7 +607,6 @@ function CategoryBlock({
                 achievement: nominee.achievement,
                 status: nominee.status,
                 isPlatinum: nominee.isPlatinum || false,
-                nominationCount: nominee.nominationCount,
                 publicVotes: nominee.publicVotes || 0,
                 photoUrl: nominee.profileImage || "/placeholder.svg",
                 imageType:

@@ -7,15 +7,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
-import {
-  MapPin,
-  Globe,
-  Trophy,
-  Vote,
-  Coins,
-  ArrowRight,
-  Users,
-} from "lucide-react";
+import { MapPin, Globe, Trophy, Vote, Coins, ArrowRight, Users } from "lucide-react";
 import { ChapterHighlightCard } from "@/components/dashboard/ChapterHighlightCard";
 import { CampaignTimelineCard } from "@/components/dashboard/CampaignTimelineCard";
 
@@ -23,8 +15,7 @@ function RegionDashboardContent() {
   const { user } = useAuth();
   const { activeRegion, userChapter } = useRegion();
 
-  const regionName =
-    activeRegion?.name || userChapter?.region_name || "All Africa";
+  const regionName = activeRegion?.name || userChapter?.region_name || "All Africa";
   const chapterName = userChapter?.chapter_name || "Online Chapter";
   const membershipLevel = userChapter?.membership_level || "basic";
 
@@ -47,16 +38,10 @@ function RegionDashboardContent() {
                   Welcome{user?.email ? `, ${user.email.split("@")[0]}` : ""}
                 </h2>
                 <p className="text-sm text-muted-foreground mb-3">
-                  You are viewing:{" "}
-                  <span className="text-primary font-semibold">
-                    {regionName} Region
-                  </span>
+                  You are viewing: <span className="text-primary font-semibold">{regionName} Region</span>
                 </p>
                 <div className="flex flex-wrap gap-2">
-                  <Badge
-                    variant="secondary"
-                    className="bg-primary/10 text-primary border-primary/20"
-                  >
+                  <Badge variant="secondary" className="bg-primary/10 text-primary border-primary/20">
                     <MapPin className="h-3 w-3 mr-1" />
                     {chapterName}
                   </Badge>
@@ -68,9 +53,7 @@ function RegionDashboardContent() {
               <div className="flex items-center gap-2 px-4 py-2 rounded-xl bg-gold/10 border border-gold/30">
                 <Coins className="h-5 w-5 text-gold" />
                 <div>
-                  <p className="text-xs text-muted-foreground">
-                    Afrigold Points
-                  </p>
+                  <p className="text-xs text-muted-foreground">Afrigold Points</p>
                   <p className="font-bold text-gold">--</p>
                 </div>
               </div>
@@ -91,9 +74,7 @@ function RegionDashboardContent() {
                   <Trophy className="h-6 w-6 text-gold" />
                 </div>
                 <h3 className="font-semibold text-sm">Nominate</h3>
-                <p className="text-xs text-muted-foreground">
-                  Region auto-filled
-                </p>
+                <p className="text-xs text-muted-foreground">Region auto-filled</p>
               </CardContent>
             </Card>
           </Link>
@@ -104,9 +85,7 @@ function RegionDashboardContent() {
                   <Vote className="h-6 w-6 text-blue-400" />
                 </div>
                 <h3 className="font-semibold text-sm">Vote with AGC</h3>
-                <p className="text-xs text-muted-foreground">
-                  Support nominees
-                </p>
+                <p className="text-xs text-muted-foreground">Support nominees</p>
               </CardContent>
             </Card>
           </Link>
@@ -128,9 +107,7 @@ function RegionDashboardContent() {
                   <Globe className="h-6 w-6 text-purple-400" />
                 </div>
                 <h3 className="font-semibold text-sm">Categories</h3>
-                <p className="text-xs text-muted-foreground">
-                  17 Official Categories
-                </p>
+                <p className="text-xs text-muted-foreground">17 Official Categories</p>
               </CardContent>
             </Card>
           </Link>
@@ -141,18 +118,12 @@ function RegionDashboardContent() {
           <Card className="border-gold/20 bg-gold/5">
             <CardContent className="p-4 flex items-center justify-between">
               <div>
-                <h3 className="font-semibold text-sm">
-                  Upgrade Your Membership
-                </h3>
+                <h3 className="font-semibold text-sm">Upgrade Your Membership</h3>
                 <p className="text-xs text-muted-foreground">
-                  Unlock premium features, priority support, and exclusive
-                  events.
+                  Unlock premium features, priority support, and exclusive events.
                 </p>
               </div>
-              <Button
-                size="sm"
-                className="bg-gold hover:bg-gold-dark text-charcoal gap-1"
-              >
+              <Button size="sm" className="bg-gold hover:bg-gold-dark text-charcoal gap-1">
                 Upgrade
                 <ArrowRight className="h-3 w-3" />
               </Button>

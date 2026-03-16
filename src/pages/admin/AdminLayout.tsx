@@ -17,7 +17,6 @@ import {
   Bell,
   ShieldCheck,
   Trophy,
-  Folders,
 } from "lucide-react";
 import { ProtectedRoute } from "@/components/ProtectedRoute";
 
@@ -80,11 +79,6 @@ const navItems = [
     href: "/admin/manage-editions",
     label: "Manage Editions",
     icon: Trophy,
-  },
-  {
-    href: "/admin/manage-categories",
-    label: "Manage Categories",
-    icon: Folders,
   },
 ];
 

@@ -1,75 +1,48 @@
 import { useState, useMemo, useEffect, useRef, useCallback } from "react";
 import { Link, useSearchParams } from "react-router-dom";
-import {
-  Search,
-  Users,
-  Filter,
-  ChevronLeft,
-  ChevronRight,
-  LayoutGrid,
-  List,
-  Loader2,
-  MapPin,
-  Globe2,
-  Building2,
-  Heart,
-  SortAsc,
-  Award,
-} from "lucide-react";
+import { Search, Users, Filter, ChevronLeft, ChevronRight, LayoutGrid, List, Loader2, MapPin, Globe2, Building2, Heart, Database, FileText, SortAsc, Crown, Trophy, Award } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Toggle } from "@/components/ui/toggle";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { NomineeCard, NomineeCardSkeleton, type NomineeCardData } from "@/components/nesa/NomineeCard";
+import { 
+  useNominees, 
+  getNomineesByGeography as getDbNomineesByGeography,
+  getGeographicStats,
+  getCategoryOptions,
+  type EnrichedDatabaseNominee 
+} from "@/hooks/useNominees";
+import { 
+  getAllNominees as getCsvNominees, 
+  getNomineesByGeography as getCsvNomineesByGeography,
+  getGeographicGroups as getCsvGeographicGroups,
+  getAfricaRegions as getCsvAfricaRegions,
+  getDiasporaSubgroups as getCsvDiasporaSubgroups,
+  getFriendsOfAfricaSubgroups as getCsvFriendsSubgroups,
+  getAwardOptions as getCsvAwardOptions, 
+  getStats as getCsvStats,
+  type GeographicCategory,
+  type EnrichedNominee
+} from "@/lib/nesaData";
 import {
-  NomineeCard,
-  NomineeCardSkeleton,
-} from "@/components/nesa/NomineeCard";
-import { useNomineesByTier } from "@/hooks/useBackendNominees";
-import { useAllCategories } from "@/hooks/useCategories";
-import type { DisplayNominee } from "@/hooks/useBackendNominees";
+  NESA_CATEGORIES,
+  getCategoriesByTier,
+  TIER_INFO,
+  getScopeBadge,
+  type AwardTier,
+  type CategoryScope,
+} from "@/config/nesaCategories";
 
 const ITEMS_PER_PAGE = 12;
 
 type SortOption = "name-asc" | "name-desc" | "newest" | "votes";
 
-// Geographic categories for filtering
-type GeographicCategory =
-  | "all"
-  | "africa-regions"
-  | "north-africa"
-  | "west-africa"
-  | "central-africa"
-  | "east-africa"
-  | "south-africa"
-  | "diaspora"
-  | "friends-of-africa"
-  | "icon";
-
 // Tier filter options
-type TierFilter = "all" | "platinum" | "blue-garnet" | "gold-special" | "icon";
-
-// Map backend award types to tier filter values
-const awardTypeToTierMap: Record<string, TierFilter> = {
-  PLATINUM_CERTIFICATE: "platinum",
-  BLUE_GARNET_AND_GOLD_CERTIFICATE: "blue-garnet",
-  GOLD_CERTIFICATE: "blue-garnet",
-  GOLD_SPECIAL: "gold-special",
-  AFRICA_ICON_BLUE_GARNET: "icon",
-};
-
-const TIER_FILTER_OPTIONS: {
-  value: TierFilter;
-  label: string;
-  icon: string;
-}[] = [
+type TierFilter = "all" | AwardTier;
+const TIER_FILTER_OPTIONS: { value: TierFilter; label: string; icon: string }[] = [
   { value: "all", label: "All Tiers", icon: "🌍" },
   { value: "blue-garnet", label: "Blue Garnet", icon: "🏆" },
   { value: "platinum", label: "Platinum", icon: "💎" },
@@ -77,313 +50,297 @@ const TIER_FILTER_OPTIONS: {
   { value: "icon", label: "Lifetime", icon: "🏛" },
 ];
 
+// Scope filter options
+const SCOPE_FILTER_OPTIONS: { value: string; label: string }[] = [
+  { value: "all", label: "All Scopes" },
+  { value: "AFRICA_REGIONAL", label: "Africa Regional" },
+  { value: "NIGERIA", label: "Nigeria" },
+  { value: "INTERNATIONAL", label: "International" },
+];
+
 // Icons for geographic categories
 const categoryIcons: Record<string, React.ReactNode> = {
-  all: <Users className="w-4 h-4" />,
+  "all": <Users className="w-4 h-4" />,
   "africa-regions": <Globe2 className="w-4 h-4" />,
-  "north-africa": <Globe2 className="w-4 h-4" />,
-  "west-africa": <Globe2 className="w-4 h-4" />,
-  "central-africa": <Globe2 className="w-4 h-4" />,
-  "east-africa": <Globe2 className="w-4 h-4" />,
-  "south-africa": <Globe2 className="w-4 h-4" />,
-  diaspora: <Building2 className="w-4 h-4" />,
+  "diaspora": <Building2 className="w-4 h-4" />,
   "friends-of-africa": <Heart className="w-4 h-4" />,
-  icon: <Award className="w-4 h-4" />,
+  "icon": <Crown className="w-4 h-4" />,
 };
 
 const categorySubtitles: Record<string, string> = {
-  all: "All education champions across every track",
+  "all": "All education champions across every track",
   "africa-regions": "Africans Living in Africa",
-  "north-africa": "North Africa Region",
-  "west-africa": "West Africa Region",
-  "central-africa": "Central Africa Region",
-  "east-africa": "East Africa Region",
-  "south-africa": "Southern Africa Region",
-  diaspora: "Diaspora Africans",
+  "diaspora": "Diaspora Africans",
   "friends-of-africa": "Friends of Africa",
-  icon: "Lifetime Achievement",
+  "icon": "3 Residents · 3 Diaspora · 3 Friends — Lifetime Achievement",
 };
 
-// Define region groups
-const africaRegions: { id: GeographicCategory; name: string }[] = [
-  { id: "north-africa", name: "North Africa" },
-  { id: "west-africa", name: "West Africa" },
-  { id: "central-africa", name: "Central Africa" },
-  { id: "east-africa", name: "East Africa" },
-  { id: "south-africa", name: "Southern Africa" },
-];
+// Unified nominee type for display
+interface DisplayNominee {
+  id: string;
+  name: string;
+  slug: string;
+  achievement: string;
+  photoUrl: string;
+  country?: string;
+  region?: string;
+  categoryName: string;
+  categorySlug: string;
+  subcategoryName?: string;
+  geographicCategory: GeographicCategory;
+  isPlatinum: boolean;
+  publicVotes: number;
+}
+
+// Convert database nominee to display format
+function dbToDisplay(nominee: EnrichedDatabaseNominee): DisplayNominee {
+  return {
+    id: nominee.id,
+    name: nominee.name,
+    slug: nominee.slug,
+    achievement: nominee.achievement,
+    photoUrl: nominee.photoUrl,
+    country: nominee.country || undefined,
+    region: nominee.region || undefined,
+    categoryName: nominee.categoryName,
+    categorySlug: nominee.categorySlug,
+    geographicCategory: nominee.geographicCategory,
+    isPlatinum: nominee.isPlatinum,
+    publicVotes: nominee.publicVotes,
+  };
+}
+
+// Convert CSV nominee to display format
+function csvToDisplay(nominee: EnrichedNominee): DisplayNominee {
+  return {
+    id: nominee.id,
+    name: nominee.name,
+    slug: nominee.slug,
+    achievement: nominee.achievement || "",
+    photoUrl: nominee.imageUrl,
+    country: nominee.country,
+    region: nominee.regionName,
+    categoryName: nominee.awardTitle,
+    categorySlug: nominee.awardSlug,
+    subcategoryName: nominee.subcategoryTitle,
+    geographicCategory: nominee.geographicCategory,
+    isPlatinum: false,
+    publicVotes: 0,
+  };
+}
 
 export default function Nominees() {
   const [searchParams, setSearchParams] = useSearchParams();
-
-  // Fetch all nominees from different tiers
-  const { data: platinumNominees, isLoading: platinumLoading } =
-    useNomineesByTier("platinum");
-  const { data: blueGarnetNominees, isLoading: blueGarnetLoading } =
-    useNomineesByTier("blue-garnet");
-  const { data: goldSpecialNominees, isLoading: goldSpecialLoading } =
-    useNomineesByTier("gold-special");
-  const { data: iconNominees, isLoading: iconLoading } =
-    useNomineesByTier("icon");
-
-  // Fetch categories for award options
-  const { data: categories } = useAllCategories();
-
-  const isLoading =
-    platinumLoading || blueGarnetLoading || goldSpecialLoading || iconLoading;
-
-  // Combine all nominees
-  const allNominees = useMemo(() => {
-    const combined: DisplayNominee[] = [
-      ...(platinumNominees || []),
-      ...(blueGarnetNominees || []),
-      ...(goldSpecialNominees || []),
-      ...(iconNominees || []),
-    ];
-    return combined;
-  }, [platinumNominees, blueGarnetNominees, goldSpecialNominees, iconNominees]);
-
-  // Initialize state from URL params
+  
+  // Initialize state from URL params for persistence
   const [searchQuery, setSearchQuery] = useState(searchParams.get("q") || "");
   const [selectedTier, setSelectedTier] = useState<TierFilter>(
-    (searchParams.get("tier") as TierFilter) || "all",
+    (searchParams.get("tier") as TierFilter) || "all"
+  );
+  const [selectedScope, setSelectedScope] = useState<string>(
+    searchParams.get("scope") || "all"
   );
   const [selectedCategory, setSelectedCategory] = useState<GeographicCategory>(
-    (searchParams.get("category") as GeographicCategory) || "all",
+    (searchParams.get("category") as GeographicCategory) || "all"
   );
-  const [selectedRegion, setSelectedRegion] = useState<
-    GeographicCategory | "all"
-  >((searchParams.get("region") as GeographicCategory) || "all");
-  const [selectedAward, setSelectedAward] = useState<string>(
-    searchParams.get("award") || "all",
+  const [selectedAward, setSelectedAward] = useState<string>(searchParams.get("award") || "all");
+  const [selectedRegion, setSelectedRegion] = useState<GeographicCategory | "all">(
+    (searchParams.get("region") as GeographicCategory) || "all"
+  );
+  const [selectedDiasporaSubgroup, setSelectedDiasporaSubgroup] = useState<string>(
+    searchParams.get("diaspora_group") || "all"
+  );
+  const [selectedFriendsSubgroup, setSelectedFriendsSubgroup] = useState<string>(
+    searchParams.get("friends_group") || "all"
   );
   const [sortBy, setSortBy] = useState<SortOption>(
-    (searchParams.get("sort") as SortOption) || "name-asc",
+    (searchParams.get("sort") as SortOption) || "name-asc"
   );
-  const [currentPage, setCurrentPage] = useState(
-    parseInt(searchParams.get("page") || "1", 10),
-  );
+  const [currentPage, setCurrentPage] = useState(parseInt(searchParams.get("page") || "1", 10));
   const [useInfiniteScroll, setUseInfiniteScroll] = useState(false);
   const [visibleCount, setVisibleCount] = useState(ITEMS_PER_PAGE);
   const loadMoreRef = useRef<HTMLDivElement>(null);
 
-  // Sync URL params
+  // Sync state changes to URL for shareable links
   useEffect(() => {
     const params = new URLSearchParams();
     if (searchQuery) params.set("q", searchQuery);
     if (selectedTier !== "all") params.set("tier", selectedTier);
+    if (selectedScope !== "all") params.set("scope", selectedScope);
     if (selectedCategory !== "all") params.set("category", selectedCategory);
-    if (selectedRegion !== "all") params.set("region", selectedRegion);
     if (selectedAward !== "all") params.set("award", selectedAward);
+    if (selectedRegion !== "all") params.set("region", selectedRegion);
+    if (selectedDiasporaSubgroup !== "all") params.set("diaspora_group", selectedDiasporaSubgroup);
+    if (selectedFriendsSubgroup !== "all") params.set("friends_group", selectedFriendsSubgroup);
     if (sortBy !== "name-asc") params.set("sort", sortBy);
-    if (currentPage > 1 && !useInfiniteScroll)
-      params.set("page", currentPage.toString());
-
+    if (currentPage > 1 && !useInfiniteScroll) params.set("page", currentPage.toString());
+    
     setSearchParams(params, { replace: true });
-  }, [
-    searchQuery,
-    selectedTier,
-    selectedCategory,
-    selectedRegion,
-    selectedAward,
-    sortBy,
-    currentPage,
-    useInfiniteScroll,
-    setSearchParams,
-  ]);
+  }, [searchQuery, selectedTier, selectedScope, selectedCategory, selectedAward, selectedRegion, selectedDiasporaSubgroup, selectedFriendsSubgroup, sortBy, currentPage, useInfiniteScroll, setSearchParams]);
+
+  // Fetch from database
+  const { data: dbNominees, isLoading: dbLoading, error: dbError } = useNominees();
+
+  // Determine data source: prefer database if it has data, fallback to CSV
+  const useDatabase = dbNominees && dbNominees.length > 0;
+  const dataSource = useDatabase ? "database" : "csv";
+
+  // Get all nominees based on data source
+  const allNominees = useMemo((): DisplayNominee[] => {
+    if (useDatabase && dbNominees) {
+      return dbNominees.map(dbToDisplay);
+    }
+    // Fallback to CSV
+    return getCsvNominees().map(csvToDisplay);
+  }, [useDatabase, dbNominees]);
 
   // Geographic groups and stats
   const geographicGroups = useMemo(() => {
-    if (!allNominees.length) return [];
+    if (useDatabase && dbNominees) {
+      const stats = getGeographicStats(dbNominees);
+      // Count icon nominees (those with categorySlug containing "icon" or award tier)
+      const iconCount = dbNominees.filter(n => 
+        n.categorySlug?.includes('icon') || n.categoryName?.toLowerCase().includes('icon')
+      ).length;
+      return [
+        { id: "all" as GeographicCategory, name: "All Nominees", description: "View all nominees", nomineeCount: stats.total },
+        { id: "africa-regions" as GeographicCategory, name: "Africa Regions", description: "Africans Living in Africa", nomineeCount: stats.africaRegions },
+        { id: "diaspora" as GeographicCategory, name: "Diaspora", description: "Diaspora Africans", nomineeCount: stats.diaspora },
+        { id: "friends-of-africa" as GeographicCategory, name: "Friends of Africa", description: "Friends of Africa", nomineeCount: stats.friendsOfAfrica },
+        { id: "icon" as GeographicCategory, name: "Africa Education Icon", description: "Lifetime Achievement", nomineeCount: iconCount },
+      ];
+    }
+    return getCsvGeographicGroups();
+  }, [useDatabase, dbNominees]);
 
-    const stats = {
-      total: allNominees.length,
-      africaRegions: allNominees.filter((n) =>
-        [
-          "north-africa",
-          "west-africa",
-          "central-africa",
-          "east-africa",
-          "south-africa",
-        ].includes(n.geographicCategory),
-      ).length,
-      northAfrica: allNominees.filter(
-        (n) => n.geographicCategory === "north-africa",
-      ).length,
-      westAfrica: allNominees.filter(
-        (n) => n.geographicCategory === "west-africa",
-      ).length,
-      centralAfrica: allNominees.filter(
-        (n) => n.geographicCategory === "central-africa",
-      ).length,
-      eastAfrica: allNominees.filter(
-        (n) => n.geographicCategory === "east-africa",
-      ).length,
-      southAfrica: allNominees.filter(
-        (n) => n.geographicCategory === "south-africa",
-      ).length,
-      diaspora: allNominees.filter((n) => n.geographicCategory === "diaspora")
-        .length,
-      friendsOfAfrica: allNominees.filter(
-        (n) => n.geographicCategory === "friends-of-africa",
-      ).length,
-      icon: allNominees.filter((n) =>
-        n.categoryName?.toLowerCase().includes("icon"),
-      ).length,
-    };
+  const africaRegions = useMemo(() => {
+    if (useDatabase && dbNominees) {
+      const stats = getGeographicStats(dbNominees);
+      return [
+        { id: "north-africa" as GeographicCategory, name: "North Africa", nomineeCount: stats.byRegion["north-africa"] || 0 },
+        { id: "east-africa" as GeographicCategory, name: "East Africa", nomineeCount: stats.byRegion["east-africa"] || 0 },
+        { id: "west-africa" as GeographicCategory, name: "West Africa", nomineeCount: stats.byRegion["west-africa"] || 0 },
+        { id: "south-africa" as GeographicCategory, name: "South Africa", nomineeCount: stats.byRegion["south-africa"] || 0 },
+        { id: "central-africa" as GeographicCategory, name: "Central Africa", nomineeCount: stats.byRegion["central-africa"] || 0 },
+      ];
+    }
+    return getCsvAfricaRegions();
+  }, [useDatabase, dbNominees]);
 
-    return [
-      {
-        id: "all" as GeographicCategory,
-        name: "All Nominees",
-        nomineeCount: stats.total,
-      },
-      {
-        id: "africa-regions" as GeographicCategory,
-        name: "Africa Regions",
-        nomineeCount: stats.africaRegions,
-      },
-      {
-        id: "north-africa" as GeographicCategory,
-        name: "North Africa",
-        nomineeCount: stats.northAfrica,
-      },
-      {
-        id: "west-africa" as GeographicCategory,
-        name: "West Africa",
-        nomineeCount: stats.westAfrica,
-      },
-      {
-        id: "central-africa" as GeographicCategory,
-        name: "Central Africa",
-        nomineeCount: stats.centralAfrica,
-      },
-      {
-        id: "east-africa" as GeographicCategory,
-        name: "East Africa",
-        nomineeCount: stats.eastAfrica,
-      },
-      {
-        id: "south-africa" as GeographicCategory,
-        name: "Southern Africa",
-        nomineeCount: stats.southAfrica,
-      },
-      {
-        id: "diaspora" as GeographicCategory,
-        name: "Diaspora",
-        nomineeCount: stats.diaspora,
-      },
-      {
-        id: "friends-of-africa" as GeographicCategory,
-        name: "Friends of Africa",
-        nomineeCount: stats.friendsOfAfrica,
-      },
-      {
-        id: "icon" as GeographicCategory,
-        name: "Africa Education Icon",
-        nomineeCount: stats.icon,
-      },
-    ];
-  }, [allNominees]);
+  // Diaspora subgroups
+  const diasporaSubgroups = useMemo(() => {
+    if (useDatabase && dbNominees) {
+      // Group diaspora nominees by subcategory from DB
+      const diasporaNominees = dbNominees.filter(n => n.geographicCategory === "diaspora");
+      const subgroupMap: Record<string, number> = {};
+      diasporaNominees.forEach(n => {
+        const key = n.categoryName || "Other";
+        subgroupMap[key] = (subgroupMap[key] || 0) + 1;
+      });
+      return Object.entries(subgroupMap)
+        .map(([name, count]) => ({
+          id: name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, ''),
+          name,
+          nomineeCount: count,
+        }))
+        .sort((a, b) => b.nomineeCount - a.nomineeCount);
+    }
+    return getCsvDiasporaSubgroups();
+  }, [useDatabase, dbNominees]);
 
-  // Award options from categories
+  // Friends of Africa subgroups
+  const friendsSubgroups = useMemo(() => {
+    if (useDatabase && dbNominees) {
+      const friendsNominees = dbNominees.filter(n => n.geographicCategory === "friends-of-africa");
+      const subgroupMap: Record<string, number> = {};
+      friendsNominees.forEach(n => {
+        const key = n.categoryName || "Other";
+        subgroupMap[key] = (subgroupMap[key] || 0) + 1;
+      });
+      return Object.entries(subgroupMap)
+        .map(([name, count]) => ({
+          id: name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, ''),
+          name,
+          nomineeCount: count,
+        }))
+        .sort((a, b) => b.nomineeCount - a.nomineeCount);
+    }
+    return getCsvFriendsSubgroups();
+  }, [useDatabase, dbNominees]);
+
   const awardOptions = useMemo(() => {
-    if (!categories) return [];
-    return categories.map((cat) => ({
-      value: cat.id,
-      label: cat.title,
-    }));
-  }, [categories]);
+    if (useDatabase && dbNominees) {
+      return getCategoryOptions(dbNominees);
+    }
+    return getCsvAwardOptions();
+  }, [useDatabase, dbNominees]);
 
-  // Stats
   const stats = useMemo(() => {
-    const africaRegionsCount = allNominees.filter((n) =>
-      [
-        "north-africa",
-        "west-africa",
-        "central-africa",
-        "east-africa",
-        "south-africa",
-      ].includes(n.geographicCategory),
-    ).length;
+    if (useDatabase && dbNominees) {
+      const s = getGeographicStats(dbNominees);
+      return {
+        totalNominees: s.total,
+        africaRegionsCount: s.africaRegions,
+        diasporaCount: s.diaspora,
+        friendsOfAfricaCount: s.friendsOfAfrica,
+      };
+    }
+    return getCsvStats();
+  }, [useDatabase, dbNominees]);
 
-    return {
-      totalNominees: allNominees.length,
-      africaRegionsCount,
-      diasporaCount: allNominees.filter(
-        (n) => n.geographicCategory === "diaspora",
-      ).length,
-      friendsOfAfricaCount: allNominees.filter(
-        (n) => n.geographicCategory === "friends-of-africa",
-      ).length,
-    };
-  }, [allNominees]);
-
-  // Filter nominees by geographic category and tier
+  // Filter nominees by geographic category
   const baseNominees = useMemo(() => {
     let filtered = allNominees;
-
-    // Apply tier filter using the category award type
-    if (selectedTier !== "all") {
-      filtered = filtered.filter((nominee: DisplayNominee) => {
-        // Use the category award type to determine tier
-        // You need to add categoryAwardType to your DisplayNominee type
-        const nomineeWithTier = nominee as DisplayNominee & {
-          categoryAwardType?: string;
-        };
-
-        if (nomineeWithTier.categoryAwardType) {
-          const mappedTier =
-            awardTypeToTierMap[nomineeWithTier.categoryAwardType];
-          return mappedTier === selectedTier;
-        }
-
-        // Fallback if categoryAwardType is not available
-        return false;
-      });
-    }
-
-    // Apply geographic category filter
+    
     if (selectedCategory !== "all") {
       if (selectedCategory === "africa-regions") {
         if (selectedRegion !== "all") {
-          filtered = filtered.filter(
-            (n) => n.geographicCategory === selectedRegion,
-          );
+          filtered = filtered.filter(n => n.geographicCategory === selectedRegion);
         } else {
-          filtered = filtered.filter((n) =>
-            [
-              "north-africa",
-              "west-africa",
-              "central-africa",
-              "east-africa",
-              "south-africa",
-            ].includes(n.geographicCategory),
+          filtered = filtered.filter(n => 
+            ["north-africa", "east-africa", "west-africa", "south-africa", "central-africa"].includes(n.geographicCategory)
           );
         }
-      } else {
-        filtered = filtered.filter(
-          (n) => n.geographicCategory === selectedCategory,
+      } else if (selectedCategory === "diaspora") {
+        filtered = filtered.filter(n => n.geographicCategory === "diaspora");
+        if (selectedDiasporaSubgroup !== "all") {
+          const matchGroup = diasporaSubgroups.find(g => g.id === selectedDiasporaSubgroup);
+          if (matchGroup) {
+            filtered = filtered.filter(n => n.subcategoryName === matchGroup.name || n.categoryName === matchGroup.name);
+          }
+        }
+      } else if (selectedCategory === "friends-of-africa") {
+        filtered = filtered.filter(n => n.geographicCategory === "friends-of-africa");
+        if (selectedFriendsSubgroup !== "all") {
+          const matchGroup = friendsSubgroups.find(g => g.id === selectedFriendsSubgroup);
+          if (matchGroup) {
+            filtered = filtered.filter(n => n.subcategoryName === matchGroup.name || n.categoryName === matchGroup.name);
+          }
+        }
+      } else if ((selectedCategory as string) === "icon") {
+        filtered = filtered.filter(n => 
+          n.categorySlug?.includes('icon') || n.categoryName?.toLowerCase().includes('icon')
         );
+      } else {
+        filtered = filtered.filter(n => n.geographicCategory === selectedCategory);
       }
     }
-
+    
     return filtered;
-  }, [allNominees, selectedTier, selectedCategory, selectedRegion]);
+  }, [allNominees, selectedCategory, selectedRegion, selectedDiasporaSubgroup, diasporaSubgroups, selectedFriendsSubgroup, friendsSubgroups]);
 
   // Apply search and award filters, then sort
   const filteredNominees = useMemo(() => {
-    const result = baseNominees.filter((nominee) => {
+    let result = baseNominees.filter((nominee) => {
       const matchesSearch =
         searchQuery === "" ||
         nominee.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        nominee.achievement
-          ?.toLowerCase()
-          .includes(searchQuery.toLowerCase()) ||
-        nominee.country?.toLowerCase().includes(searchQuery.toLowerCase());
+        nominee.achievement?.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        nominee.country?.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        nominee.region?.toLowerCase().includes(searchQuery.toLowerCase());
 
       const matchesAward =
-        selectedAward === "all" || nominee.categoryId === selectedAward;
+        selectedAward === "all" || nominee.categorySlug === selectedAward;
 
       return matchesSearch && matchesAward;
     });
@@ -397,13 +354,10 @@ export default function Nominees() {
         result.sort((a, b) => b.name.localeCompare(a.name));
         break;
       case "votes":
-        // Since nominationCount is the closest to votes
-        result.sort(
-          (a, b) => (b.nominationCount || 0) - (a.nominationCount || 0),
-        );
+        result.sort((a, b) => b.publicVotes - a.publicVotes);
         break;
       case "newest":
-        // For now, just reverse as a proxy for "newest"
+        // For now, just reverse the default order as a proxy for "newest"
         result.reverse();
         break;
     }
@@ -418,7 +372,7 @@ export default function Nominees() {
     return filteredNominees.slice(startIndex, startIndex + ITEMS_PER_PAGE);
   }, [filteredNominees, currentPage]);
 
-  // Infinite scroll
+  // Infinite scroll nominees
   const infiniteScrollNominees = useMemo(() => {
     return filteredNominees.slice(0, visibleCount);
   }, [filteredNominees, visibleCount]);
@@ -435,6 +389,20 @@ export default function Nominees() {
   const handleCategoryChange = (value: GeographicCategory) => {
     setSelectedCategory(value);
     setSelectedRegion("all");
+    setSelectedDiasporaSubgroup("all");
+    setSelectedFriendsSubgroup("all");
+    setCurrentPage(1);
+    setVisibleCount(ITEMS_PER_PAGE);
+  };
+
+  const handleDiasporaSubgroupChange = (value: string) => {
+    setSelectedDiasporaSubgroup(value);
+    setCurrentPage(1);
+    setVisibleCount(ITEMS_PER_PAGE);
+  };
+
+  const handleFriendsSubgroupChange = (value: string) => {
+    setSelectedFriendsSubgroup(value);
     setCurrentPage(1);
     setVisibleCount(ITEMS_PER_PAGE);
   };
@@ -445,29 +413,21 @@ export default function Nominees() {
     setVisibleCount(ITEMS_PER_PAGE);
   };
 
-  const handleTierChange = (value: TierFilter) => {
-    setSelectedTier(value);
-    setCurrentPage(1);
-    setVisibleCount(ITEMS_PER_PAGE);
-  };
-
   const handleAwardChange = (value: string) => {
     setSelectedAward(value);
     setCurrentPage(1);
     setVisibleCount(ITEMS_PER_PAGE);
   };
 
-  // Infinite scroll observer
+  // Infinite scroll intersection observer
   const handleObserver = useCallback(
     (entries: IntersectionObserverEntry[]) => {
       const [entry] = entries;
       if (entry.isIntersecting && hasMore && useInfiniteScroll) {
-        setVisibleCount((prev) =>
-          Math.min(prev + ITEMS_PER_PAGE, filteredNominees.length),
-        );
+        setVisibleCount((prev) => Math.min(prev + ITEMS_PER_PAGE, filteredNominees.length));
       }
     },
-    [hasMore, useInfiniteScroll, filteredNominees.length],
+    [hasMore, useInfiniteScroll, filteredNominees.length]
   );
 
   useEffect(() => {
@@ -491,9 +451,8 @@ export default function Nominees() {
     }
   }, [useInfiniteScroll]);
 
-  const displayedNominees = useInfiniteScroll
-    ? infiniteScrollNominees
-    : paginatedNominees;
+  const displayedNominees = useInfiniteScroll ? infiniteScrollNominees : paginatedNominees;
+  const isLoading = dbLoading;
 
   return (
     <div className="min-h-screen bg-charcoal">
@@ -506,14 +465,14 @@ export default function Nominees() {
               <Users className="w-3 h-3 mr-1" />
               Education Champions Directory
             </Badge>
-            <h1 className="font-display text-4xl md:text-5xl lg:text-6xl text-white mb-4">
+            <h1 className="font-display text-4xl md:text-5xl lg:text-6xl text-ivory mb-4">
               Meet Our <span className="text-gold">Nominees</span>
             </h1>
-            <p className="text-lg text-white/70 mb-6">
-              Discover the remarkable educators, innovators, and institutions
-              transforming education across Africa.
+            <p className="text-lg text-ivory/70 mb-6">
+              Discover the remarkable educators, innovators, and institutions transforming education across Africa.
             </p>
-            {allNominees.length > 0 && (
+            {/* Live indicator - subtle */}
+            {dataSource === "database" && (
               <div className="inline-flex items-center gap-1.5 text-xs text-emerald-400/70">
                 <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
                 Live
@@ -532,11 +491,15 @@ export default function Nominees() {
                 key={opt.value}
                 variant={selectedTier === opt.value ? "default" : "outline"}
                 size="sm"
-                onClick={() => handleTierChange(opt.value)}
-                className={
-                  selectedTier === opt.value
-                    ? "bg-gold text-charcoal hover:bg-gold-dark"
-                    : "border-gold/30 text-gold hover:bg-gold/10"
+                onClick={() => {
+                  setSelectedTier(opt.value);
+                  setSelectedAward("all");
+                  setCurrentPage(1);
+                  setVisibleCount(ITEMS_PER_PAGE);
+                }}
+                className={selectedTier === opt.value
+                  ? "bg-gold text-charcoal hover:bg-gold-dark"
+                  : "border-gold/30 text-gold hover:bg-gold/10"
                 }
               >
                 <span className="mr-1">{opt.icon}</span>
@@ -551,7 +514,7 @@ export default function Nominees() {
       <section className="border-b border-gold/10 bg-charcoal-light/30 sticky top-16 z-20">
         <div className="container mx-auto px-4 py-4">
           <Tabs
-            value={selectedCategory}
+            value={selectedCategory} 
             onValueChange={(v) => handleCategoryChange(v as GeographicCategory)}
             className="w-full"
           >
@@ -565,10 +528,7 @@ export default function Nominees() {
                   {categoryIcons[group.id] || <Globe2 className="w-4 h-4" />}
                   <span className="hidden sm:inline">{group.name}</span>
                   <span className="sm:hidden">{group.name.split(" ")[0]}</span>
-                  <Badge
-                    variant="outline"
-                    className="ml-1 text-[10px] px-1.5 py-0 h-4 border-current/30"
-                  >
+                  <Badge variant="outline" className="ml-1 text-[10px] px-1.5 py-0 h-4 border-current/30">
                     {group.nomineeCount}
                   </Badge>
                 </TabsTrigger>
@@ -578,7 +538,7 @@ export default function Nominees() {
 
           {/* Category subtitle */}
           {categorySubtitles[selectedCategory] && (
-            <p className="text-center text-sm text-white/50 mt-3">
+            <p className="text-center text-sm text-ivory/50 mt-3">
               {categorySubtitles[selectedCategory]}
             </p>
           )}
@@ -591,42 +551,116 @@ export default function Nominees() {
                   variant={selectedRegion === "all" ? "default" : "outline"}
                   size="sm"
                   onClick={() => handleRegionChange("all")}
-                  className={
-                    selectedRegion === "all"
-                      ? "bg-gold text-charcoal hover:bg-gold-dark"
-                      : "border-gold/30 text-gold hover:bg-gold/10"
+                  className={selectedRegion === "all" 
+                    ? "bg-gold text-charcoal hover:bg-gold-dark" 
+                    : "border-gold/30 text-gold hover:bg-gold/10"
                   }
                 >
                   All Regions
                 </Button>
-                {africaRegions.map((region) => {
-                  const count = allNominees.filter(
-                    (n) => n.geographicCategory === region.id,
-                  ).length;
-                  return (
-                    <Button
-                      key={region.id}
-                      variant={
-                        selectedRegion === region.id ? "default" : "outline"
-                      }
-                      size="sm"
-                      onClick={() => handleRegionChange(region.id)}
-                      className={
-                        selectedRegion === region.id
-                          ? "bg-gold text-charcoal hover:bg-gold-dark"
-                          : "border-gold/30 text-gold hover:bg-gold/10"
-                      }
-                    >
-                      {region.name}
-                      <Badge
-                        variant="outline"
-                        className="ml-1 text-[10px] px-1.5 py-0 h-4 border-current/30"
-                      >
-                        {count}
-                      </Badge>
-                    </Button>
-                  );
-                })}
+                {africaRegions.map((region) => (
+                  <Button
+                    key={region.id}
+                    variant={selectedRegion === region.id ? "default" : "outline"}
+                    size="sm"
+                    onClick={() => handleRegionChange(region.id)}
+                    className={selectedRegion === region.id 
+                      ? "bg-gold text-charcoal hover:bg-gold-dark" 
+                      : "border-gold/30 text-gold hover:bg-gold/10"
+                    }
+                  >
+                    {region.name}
+                    <Badge variant="outline" className="ml-1 text-[10px] px-1.5 py-0 h-4 border-current/30">
+                      {region.nomineeCount}
+                    </Badge>
+                  </Button>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {/* Diaspora Sub-tabs */}
+          {selectedCategory === "diaspora" && diasporaSubgroups.length > 0 && (
+            <div className="mt-4 overflow-x-auto scrollbar-hide">
+              <p className="text-xs text-ivory/40 mb-2 text-center">Filter by Diaspora Region</p>
+              <div className="flex gap-2 justify-center min-w-max pb-2">
+                <Button
+                  variant={selectedDiasporaSubgroup === "all" ? "default" : "outline"}
+                  size="sm"
+                  onClick={() => handleDiasporaSubgroupChange("all")}
+                  className={selectedDiasporaSubgroup === "all" 
+                    ? "bg-gold text-charcoal hover:bg-gold-dark" 
+                    : "border-gold/30 text-gold hover:bg-gold/10"
+                  }
+                >
+                  <Globe2 className="w-3.5 h-3.5 mr-1" />
+                  All Diaspora
+                </Button>
+                {diasporaSubgroups.map((subgroup) => (
+                  <Button
+                    key={subgroup.id}
+                    variant={selectedDiasporaSubgroup === subgroup.id ? "default" : "outline"}
+                    size="sm"
+                    onClick={() => handleDiasporaSubgroupChange(subgroup.id)}
+                    className={selectedDiasporaSubgroup === subgroup.id 
+                      ? "bg-gold text-charcoal hover:bg-gold-dark" 
+                      : "border-gold/30 text-gold hover:bg-gold/10"
+                    }
+                  >
+                    <MapPin className="w-3.5 h-3.5 mr-1" />
+                    {subgroup.name
+                      .replace(/^the best diaspora-led educational\s*/i, '')
+                      .replace(/-based associations?/i, '')
+                      .replace(/associations?/i, '')
+                      .replace(/\s+/g, ' ')
+                      .trim() || subgroup.name}
+                    <Badge variant="outline" className="ml-1 text-[10px] px-1.5 py-0 h-4 border-current/30">
+                      {subgroup.nomineeCount}
+                    </Badge>
+                  </Button>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {/* Friends of Africa Sub-tabs */}
+          {selectedCategory === "friends-of-africa" && friendsSubgroups.length > 0 && (
+            <div className="mt-4 overflow-x-auto scrollbar-hide">
+              <p className="text-xs text-ivory/40 mb-2 text-center">Filter by Contribution Area</p>
+              <div className="flex gap-2 justify-center min-w-max pb-2">
+                <Button
+                  variant={selectedFriendsSubgroup === "all" ? "default" : "outline"}
+                  size="sm"
+                  onClick={() => handleFriendsSubgroupChange("all")}
+                  className={selectedFriendsSubgroup === "all" 
+                    ? "bg-gold text-charcoal hover:bg-gold-dark" 
+                    : "border-gold/30 text-gold hover:bg-gold/10"
+                  }
+                >
+                  <Heart className="w-3.5 h-3.5 mr-1" />
+                  All Friends
+                </Button>
+                {friendsSubgroups.map((subgroup) => (
+                  <Button
+                    key={subgroup.id}
+                    variant={selectedFriendsSubgroup === subgroup.id ? "default" : "outline"}
+                    size="sm"
+                    onClick={() => handleFriendsSubgroupChange(subgroup.id)}
+                    className={selectedFriendsSubgroup === subgroup.id 
+                      ? "bg-gold text-charcoal hover:bg-gold-dark" 
+                      : "border-gold/30 text-gold hover:bg-gold/10"
+                    }
+                  >
+                    <Globe2 className="w-3.5 h-3.5 mr-1" />
+                    {subgroup.name
+                      .replace(/^the best\s*/i, '')
+                      .replace(/\s+/g, ' ')
+                      .trim() || subgroup.name}
+                    <Badge variant="outline" className="ml-1 text-[10px] px-1.5 py-0 h-4 border-current/30">
+                      {subgroup.nomineeCount}
+                    </Badge>
+                  </Button>
+                ))}
               </div>
             </div>
           )}
@@ -638,68 +672,51 @@ export default function Nominees() {
         <div className="container mx-auto px-4">
           <div className="flex flex-col md:flex-row gap-4 max-w-5xl mx-auto">
             <div className="relative flex-1">
-              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-white/40" />
+              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-ivory/40" />
               <Input
                 placeholder="Search nominees by name, achievement, country..."
                 value={searchQuery}
                 onChange={(e) => handleSearchChange(e.target.value)}
-                className="pl-10 bg-charcoal-light border-gold/20 text-white placeholder:text-white/40 focus:border-gold"
+                className="pl-10 bg-charcoal-light border-gold/20 text-ivory placeholder:text-ivory/40 focus:border-gold"
               />
             </div>
             <Select value={selectedAward} onValueChange={handleAwardChange}>
-              <SelectTrigger className="w-full md:w-[220px] bg-charcoal-light border-gold/20 text-white">
+              <SelectTrigger className="w-full md:w-[220px] bg-charcoal-light border-gold/20 text-ivory">
                 <Filter className="w-4 h-4 mr-2 text-gold" />
                 <SelectValue placeholder="All Awards" />
               </SelectTrigger>
               <SelectContent className="bg-charcoal-light border-gold/20 max-h-[300px]">
-                <SelectItem value="all" className="text-white hover:bg-gold/10">
+                <SelectItem value="all" className="text-ivory hover:bg-gold/10">
                   All Awards
                 </SelectItem>
                 {awardOptions.map((opt) => (
                   <SelectItem
                     key={opt.value}
                     value={opt.value}
-                    className="text-white hover:bg-gold/10"
+                    className="text-ivory hover:bg-gold/10"
                   >
-                    {opt.label.length > 50
-                      ? opt.label.substring(0, 50) + "..."
-                      : opt.label}
+                    {opt.label.length > 50 ? opt.label.substring(0, 50) + "..." : opt.label}
                   </SelectItem>
                 ))}
               </SelectContent>
             </Select>
             {/* Sort Dropdown */}
-            <Select
-              value={sortBy}
-              onValueChange={(v) => setSortBy(v as SortOption)}
-            >
-              <SelectTrigger className="w-full md:w-[160px] bg-charcoal-light border-gold/20 text-white">
+            <Select value={sortBy} onValueChange={(v) => setSortBy(v as SortOption)}>
+              <SelectTrigger className="w-full md:w-[160px] bg-charcoal-light border-gold/20 text-ivory">
                 <SortAsc className="w-4 h-4 mr-2 text-gold" />
                 <SelectValue placeholder="Sort by" />
               </SelectTrigger>
               <SelectContent className="bg-charcoal-light border-gold/20">
-                <SelectItem
-                  value="name-asc"
-                  className="text-white hover:bg-gold/10"
-                >
+                <SelectItem value="name-asc" className="text-ivory hover:bg-gold/10">
                   Name (A–Z)
                 </SelectItem>
-                <SelectItem
-                  value="name-desc"
-                  className="text-white hover:bg-gold/10"
-                >
+                <SelectItem value="name-desc" className="text-ivory hover:bg-gold/10">
                   Name (Z–A)
                 </SelectItem>
-                <SelectItem
-                  value="votes"
-                  className="text-white hover:bg-gold/10"
-                >
-                  Most Nominations
+                <SelectItem value="votes" className="text-ivory hover:bg-gold/10">
+                  Most Votes
                 </SelectItem>
-                <SelectItem
-                  value="newest"
-                  className="text-white hover:bg-gold/10"
-                >
+                <SelectItem value="newest" className="text-ivory hover:bg-gold/10">
                   Newest First
                 </SelectItem>
               </SelectContent>
@@ -714,30 +731,14 @@ export default function Nominees() {
           <div className="flex flex-wrap justify-center gap-6 md:gap-12">
             {[
               { value: stats.totalNominees.toLocaleString(), label: "Total" },
-              {
-                value: stats.africaRegionsCount.toLocaleString(),
-                label: "Africa",
-              },
-              {
-                value: stats.diasporaCount.toLocaleString(),
-                label: "Diaspora",
-              },
-              {
-                value: stats.friendsOfAfricaCount.toLocaleString(),
-                label: "Friends",
-              },
-              {
-                value: filteredNominees.length.toLocaleString(),
-                label: "Showing",
-              },
+              { value: stats.africaRegionsCount.toLocaleString(), label: "Africa" },
+              { value: stats.diasporaCount.toLocaleString(), label: "Diaspora" },
+              { value: stats.friendsOfAfricaCount.toLocaleString(), label: "Friends" },
+              { value: filteredNominees.length.toLocaleString(), label: "Showing" },
             ].map((stat) => (
               <div key={stat.label} className="text-center min-w-[60px]">
-                <div className="text-2xl font-bold text-gold font-display">
-                  {stat.value}
-                </div>
-                <div className="text-xs text-white/50 uppercase tracking-wider">
-                  {stat.label}
-                </div>
+                <div className="text-2xl font-bold text-gold font-display">{stat.value}</div>
+                <div className="text-xs text-ivory/50 uppercase tracking-wider">{stat.label}</div>
               </div>
             ))}
           </div>
@@ -750,13 +751,14 @@ export default function Nominees() {
           {/* View Mode Toggle */}
           {!isLoading && filteredNominees.length > 0 && (
             <div className="flex items-center justify-between mb-6">
-              <p className="text-sm text-white/60">
-                {useInfiniteScroll
+              <p className="text-sm text-ivory/60">
+                {useInfiniteScroll 
                   ? `Showing ${infiniteScrollNominees.length} of ${filteredNominees.length}`
-                  : `Page ${currentPage} of ${totalPages}`}
+                  : `Page ${currentPage} of ${totalPages}`
+                }
               </p>
               <div className="flex items-center gap-2">
-                <span className="text-sm text-white/60">View:</span>
+                <span className="text-sm text-ivory/60">View:</span>
                 <Toggle
                   pressed={!useInfiniteScroll}
                   onPressedChange={() => setUseInfiniteScroll(false)}
@@ -785,26 +787,20 @@ export default function Nominees() {
             </div>
           ) : filteredNominees.length === 0 ? (
             <div className="text-center py-16">
-              <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-gold/10 flex items-center justify-center">
+            <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-gold/10 flex items-center justify-center">
                 <Search className="w-8 h-8 text-gold/30" />
               </div>
-              <h3 className="text-xl font-display text-white mb-2">
-                {searchQuery ||
-                selectedAward !== "all" ||
-                selectedCategory !== "all"
+              <h3 className="text-xl font-display text-ivory mb-2">
+                {searchQuery || selectedAward !== "all" || selectedCategory !== "all"
                   ? "No matching nominees"
                   : "Nominees coming soon"}
               </h3>
-              <p className="text-white/50 text-sm mb-6 max-w-sm mx-auto">
-                {searchQuery ||
-                selectedAward !== "all" ||
-                selectedCategory !== "all"
+              <p className="text-ivory/50 text-sm mb-6 max-w-sm mx-auto">
+                {searchQuery || selectedAward !== "all" || selectedCategory !== "all"
                   ? "Try broadening your search or exploring a different category."
                   : "Our review committee is currently evaluating submissions. Check back soon."}
               </p>
-              {(searchQuery ||
-                selectedAward !== "all" ||
-                selectedCategory !== "all") && (
+              {(searchQuery || selectedAward !== "all" || selectedCategory !== "all") && (
                 <div className="flex flex-col sm:flex-row gap-3 justify-center">
                   <Button
                     variant="outline"
@@ -813,7 +809,6 @@ export default function Nominees() {
                       setSelectedAward("all");
                       setSelectedCategory("all");
                       setSelectedRegion("all");
-                      setSelectedTier("all");
                       setCurrentPage(1);
                       setVisibleCount(ITEMS_PER_PAGE);
                     }}
@@ -821,10 +816,7 @@ export default function Nominees() {
                   >
                     Clear All Filters
                   </Button>
-                  <Button
-                    asChild
-                    className="bg-gold hover:bg-gold-dark text-charcoal"
-                  >
+                  <Button asChild className="bg-gold hover:bg-gold-dark text-charcoal">
                     <Link to="/nominate">Nominate Someone</Link>
                   </Button>
                 </div>
@@ -833,45 +825,45 @@ export default function Nominees() {
           ) : (
             <>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-                {displayedNominees.map((nominee) => (
-                  <NomineeCard
-                    key={nominee.id}
-                    nominee={{
-                      id: nominee.id,
-                      name: nominee.name,
-                      slug: nominee.id,
-                      title:
-                        nominee.achievement?.substring(0, 100) || undefined,
-                      organization:
-                        nominee.accountType === "ORGANIZATION"
-                          ? nominee.name
-                          : undefined,
-                      photoUrl: nominee.profileImage || "/placeholder.svg",
-                      isPlatinum: false, // You might want to determine this based on nominationCount
-                      publicVotes: nominee.voteCount || 0,
-                      categoryName: nominee.categoryName,
-                      subcategoryName: nominee.subCategoryName,
-                      region: nominee.stateRegion,
-                      country: nominee.country,
-                      geographicCategory: nominee.geographicCategory,
-                    }}
-                    showVotes={true}
-                  />
-                ))}
+                {displayedNominees.map((nominee) => {
+                  const isDiaspora = nominee.geographicCategory === "diaspora";
+                  const isFriends = nominee.geographicCategory === "friends-of-africa";
+                  const cardData: NomineeCardData = {
+                    id: nominee.id,
+                    name: nominee.name,
+                    slug: nominee.slug,
+                    title: nominee.achievement || undefined,
+                    organization: undefined,
+                    photoUrl: nominee.photoUrl,
+                    isPlatinum: nominee.isPlatinum,
+                    publicVotes: nominee.publicVotes,
+                    categoryName: nominee.categoryName,
+                    subcategoryName: (isDiaspora || isFriends) ? nominee.subcategoryName : undefined,
+                    region: nominee.region,
+                    country: nominee.country,
+                    geographicCategory: nominee.geographicCategory,
+                  };
+                  return (
+                    <NomineeCard 
+                      key={nominee.id} 
+                      nominee={cardData}
+                      showVotes={dataSource === "database"}
+                    />
+                  );
+                })}
               </div>
 
               {/* Infinite Scroll Loader */}
               {useInfiniteScroll && (
                 <div ref={loadMoreRef} className="mt-8 flex justify-center">
                   {hasMore ? (
-                    <div className="flex items-center gap-2 text-white/60">
+                    <div className="flex items-center gap-2 text-ivory/60">
                       <Loader2 className="h-5 w-5 animate-spin" />
                       <span>Loading more...</span>
                     </div>
                   ) : (
-                    <p className="text-white/40 text-sm">
-                      You've reached the end — {filteredNominees.length}{" "}
-                      nominees shown
+                    <p className="text-ivory/40 text-sm">
+                      You've reached the end — {filteredNominees.length} nominees shown
                     </p>
                   )}
                 </div>
@@ -901,18 +893,15 @@ export default function Nominees() {
                       })
                       .map((page, index, arr) => {
                         const prevPage = arr[index - 1];
-                        const showEllipsisBefore =
-                          prevPage && page - prevPage > 1;
+                        const showEllipsisBefore = prevPage && page - prevPage > 1;
 
                         return (
                           <div key={page} className="flex items-center gap-1">
                             {showEllipsisBefore && (
-                              <span className="px-2 text-white/40">...</span>
+                              <span className="px-2 text-ivory/40">...</span>
                             )}
                             <Button
-                              variant={
-                                currentPage === page ? "default" : "outline"
-                              }
+                              variant={currentPage === page ? "default" : "outline"}
                               size="sm"
                               onClick={() => setCurrentPage(page)}
                               className={
@@ -931,16 +920,14 @@ export default function Nominees() {
                   <Button
                     variant="outline"
                     size="icon"
-                    onClick={() =>
-                      setCurrentPage((p) => Math.min(totalPages, p + 1))
-                    }
+                    onClick={() => setCurrentPage((p) => Math.min(totalPages, p + 1))}
                     disabled={currentPage === totalPages}
                     className="border-gold/30 text-gold hover:bg-gold/10 disabled:opacity-50"
                   >
                     <ChevronRight className="h-4 w-4" />
                   </Button>
 
-                  <span className="ml-4 text-sm text-white/60">
+                  <span className="ml-4 text-sm text-ivory/60">
                     Page {currentPage} of {totalPages}
                   </span>
                 </div>

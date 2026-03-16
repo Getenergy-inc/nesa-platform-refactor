@@ -52,39 +52,38 @@ export function DashboardLayout({
   const sidebarSections: SidebarSection[] = [
     { title: "Dashboard", items: USER_DASHBOARD_NAV },
   ];
-  console.log("the layout role", roles);
 
-  if (hasRole("NRC")) {
+  if (hasRole("NRC") || hasRole("admin")) {
     sidebarSections.push({
       title: "NRC Review",
       items: NRC_DASHBOARD_NAV,
-      roles: ["NRC"],
+      roles: ["NRC", "admin"],
     });
   }
-  if (hasRole("jury")) {
+  if (hasRole("jury") || hasRole("admin")) {
     sidebarSections.push({
       title: "Jury Panel",
       items: JURY_DASHBOARD_NAV,
-      roles: ["jury", "ADMIN"],
+      roles: ["jury", "admin"],
     });
   }
-  if (hasRole("chapter")) {
+  if (hasRole("chapter") || hasRole("admin")) {
     sidebarSections.push({
       title: "Chapter",
       items: CHAPTER_DASHBOARD_NAV,
-      roles: ["chapter", "ADMIN"],
+      roles: ["chapter", "admin"],
     });
     sidebarSections.push({
       title: "OLC Coordinator",
       items: OLC_DASHBOARD_NAV,
-      roles: ["chapter", "ADMIN"],
+      roles: ["chapter", "admin"],
     });
   }
-  if (hasRole("ADMIN")) {
+  if (hasRole("admin")) {
     sidebarSections.push({
       title: "Admin",
       items: ADMIN_DASHBOARD_NAV,
-      roles: ["ADMIN"],
+      roles: ["admin"],
     });
   }
 

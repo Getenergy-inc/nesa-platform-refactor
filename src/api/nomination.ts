@@ -6,7 +6,6 @@ import { AcceptanceStatus, acceptNomination } from "./nominations";
 import { NominationDashboardItem } from "@/types/nominee_dashboard";
 import { API_BASE } from "@/lib/apiBase";
 import { AwardType } from "./category";
-import { NomineeProfileData } from "@/pages/NomineeProfile";
 
 export interface NominationDetails {
   id: string;
@@ -125,8 +124,6 @@ export interface ApprovedNominees {
   categoryName: string; // The title of that category (for display)
   subCategoryId: string; // The ID of the subcategory this nominee belongs to
   subCategoryName: string;
-  nominationCount: number;
-  categoryAwardType: string;
 }
 
 export interface AINominationResponse {
@@ -311,27 +308,6 @@ export const nominationApi = {
       {
         accessToken,
         credentials: "include",
-      },
-    );
-    return res.data;
-  },
-
-  renominate: async (accessToken: string, nominationId: string) => {
-    await apiRequest(
-      `${API_BASE}/nomination/renominate?nominationId=${nominationId}`,
-      {
-        accessToken,
-        credentials: "include",
-        method: "POST",
-      },
-    );
-  },
-  fetchNomineeProfile: async (accessToken: string, nomineeId: string) => {
-    const res: ApiResponse<NomineeProfileData> = await apiRequest(
-      `${API_BASE}/nomination/profile?nomineeId=${nomineeId}`,
-      {
-        credentials: "include",
-        accessToken,
       },
     );
     return res.data;

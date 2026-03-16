@@ -146,7 +146,6 @@ export interface DatabaseNominee {
   subcategory_slug?: string;
   category_name?: string;
   category_slug?: string;
-  nominationCount: number;
 }
 
 export interface EnrichedDatabaseNominee {
@@ -169,7 +168,6 @@ export interface EnrichedDatabaseNominee {
   categorySlug: string;
   geographicCategory: GeographicCategory;
   achievement: string;
-  nominationCount: number;
 }
 
 const PLACEHOLDER_IMAGE = "/images/placeholder.svg";
@@ -206,7 +204,6 @@ function enrichNominee(nominee: DatabaseNominee): EnrichedDatabaseNominee {
       nominee.region,
       nominee.category_name || null,
     ),
-    nominationCount: nominee.nominationCount,
     achievement: nominee.bio || nominee.title || "",
   };
 }

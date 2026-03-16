@@ -41,9 +41,6 @@ export function useCategoriesByTier(
   options: UseCategoriesOptions = {},
 ) {
   const { accessToken } = useAuth();
-  if (tier == "gold") {
-    tier = "blue-garnet";
-  }
   const awardType = tierToAwardTypeMap[tier];
 
   return useQuery({
@@ -164,35 +161,30 @@ export function useCategoriesGrouped() {
     if (!allCategories) return null;
 
     const grouped = {
-      blueGarnet: [] as Category[],
-      platinum: [] as Category[],
-      lifetime: [] as Category[],
-      goldSpecial: [] as Category[],
+      platinum: [] as CategoryWithMetadata[],
+      gold: [] as CategoryWithMetadata[],
+      "blue-garnet": [] as CategoryWithMetadata[],
+      icon: [] as CategoryWithMetadata[],
+      "gold-special": [] as CategoryWithMetadata[],
     };
 
     allCategories.forEach((category) => {
-      // Map backend awardType to visual tiers
       switch (category.awardType) {
-        case "BLUE_GARNET_AND_GOLD_CERTIFICATE":
-          grouped.blueGarnet.push(category);
-          break;
         case "PLATINUM_CERTIFICATE":
           grouped.platinum.push(category);
           break;
+        case "GOLD_CERTIFICATE":
+          grouped.gold.push(category);
+          break;
+        case "BLUE_GARNET_AND_GOLD_CERTIFICATE":
+          grouped["blue-garnet"].push(category);
+          break;
         case "AFRICA_ICON_BLUE_GARNET":
-          grouped.lifetime.push(category);
+          grouped.icon.push(category);
           break;
         case "GOLD_SPECIAL":
-          grouped.goldSpecial.push(category);
+          grouped["gold-special"].push(category);
           break;
-        case "GOLD_CERTIFICATE":
-          // Gold certificate might go to blue garnet or have its own group
-          // Adjust based on your business logic
-          grouped.blueGarnet.push(category);
-          break;
-        default:
-          // Default to platinum if no match
-          grouped.platinum.push(category);
       }
     });
 
@@ -218,7 +210,8 @@ export function useCategoryPage(categoryId: string | undefined) {
 
       // 1. Fetch all categories and find the one we need
       // Alternatively, you could create a dedicated endpoint: /category/:id
-      const category = await categoryApi.fetchCategory(accessToken, categoryId);
+      const allCategories = await categoryApi.fetchAllCategories(accessToken);
+      const category = allCategories.find((c) => c.id === categoryId);
 
       if (!category) {
         throw new Error("Category not found");
