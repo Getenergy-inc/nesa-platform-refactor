@@ -2,6 +2,7 @@ import { useState, useEffect, useMemo } from "react";
 import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import { motion, AnimatePresence } from "framer-motion";
+import { CategoryNomineesDirectory } from "./CategoryNomineesDirectory";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -471,6 +472,9 @@ export function DynamicCategoryPage({ categoryTitle, nominationType }: DynamicCa
             )}
           </div>
         </section>
+
+        {/* ═══ LIVE NOMINEES DIRECTORY ═══ */}
+        <CategoryNomineesDirectory categoryTitle={categoryTitle} />
 
         {/* CTA Section */}
         <section className="py-16 bg-gradient-to-b from-charcoal to-gold/10">
