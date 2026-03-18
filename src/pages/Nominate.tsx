@@ -305,57 +305,47 @@ export default function Nominate() {
     toast.success("Draft discarded");
   }, [clearDraft]);
 
-  // File upload handlers
+  // File upload handlers — using resilient upload engine
   const handleFileUpload = async (e: React.ChangeEvent<HTMLInputElement>, isPhoto: boolean = false) => {
     const files = e.target.files;
     if (!files || files.length === 0 || !user) return;
 
     setUploading(true);
-    const newFiles: UploadedFile[] = [];
 
     try {
-      for (const file of Array.from(files)) {
-        if (file.size > 10 * 1024 * 1024) {
-          toast.error(`${file.name} is too large. Maximum size is 10MB.`);
-          continue;
-        }
+      const { uploadFiles, UPLOAD_PRESETS } = await import("@/lib/uploadEngine");
+      const config = isPhoto
+        ? { ...UPLOAD_PRESETS.nomineePhoto, pathPrefix: user.id }
+        : { ...UPLOAD_PRESETS.nominationEvidence, pathPrefix: user.id };
 
-        const fileExt = file.name.split(".").pop();
-        const fileName = `${user.id}/${Date.now()}-${Math.random().toString(36).substr(2, 9)}.${fileExt}`;
+      const { successful, failed } = await uploadFiles(
+        Array.from(files),
+        config
+      );
 
-        const { data, error } = await supabase.storage
-          .from("nomination-evidence")
-          .upload(fileName, file);
-
-        if (error) {
-          console.error("Upload error:", error);
-          toast.error(`Failed to upload ${file.name}`);
-          continue;
-        }
-
-        const { data: urlData } = supabase.storage
-          .from("nomination-evidence")
-          .getPublicUrl(data.path);
-
-        const uploadedFile: UploadedFile = {
-          name: file.name,
-          url: urlData.publicUrl,
-          path: data.path,
-          type: file.type,
-        };
-
-        if (isPhoto) {
-          setNomineePhoto(uploadedFile);
-        } else {
-          newFiles.push(uploadedFile);
-        }
+      if (failed.length > 0) {
+        failed.forEach((f) => toast.error(f.error));
       }
 
-      if (!isPhoto && newFiles.length > 0) {
-        setUploadedFiles((prev) => [...prev, ...newFiles]);
-        toast.success(`${newFiles.length} file(s) uploaded successfully`);
-      } else if (isPhoto) {
+      if (isPhoto && successful.length > 0) {
+        setNomineePhoto({
+          name: successful[0].name,
+          url: successful[0].url,
+          path: successful[0].path,
+          type: successful[0].type,
+        });
         toast.success("Photo uploaded successfully");
+      } else if (!isPhoto && successful.length > 0) {
+        setUploadedFiles((prev) => [
+          ...prev,
+          ...successful.map((f) => ({
+            name: f.name,
+            url: f.url,
+            path: f.path,
+            type: f.type,
+          })),
+        ]);
+        toast.success(`${successful.length} file(s) uploaded successfully`);
       }
     } catch (error) {
       console.error("Upload error:", error);
