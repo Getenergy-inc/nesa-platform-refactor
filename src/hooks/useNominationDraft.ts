@@ -1,4 +1,3 @@
-import { NominationType } from "@/pages/Nominate";
 import { useState, useEffect, useCallback } from "react";
 
 const DRAFT_KEY = "nesa-nomination-draft";
@@ -10,17 +9,9 @@ export interface NominationDraft {
   nomineeTitle: string;
   nomineeOrganization: string;
   nomineeBio: string;
+  justification: string;
   step: number;
   savedAt: string;
-  accountType: NominationType;
-  phone: string | "";
-  country: string;
-  stateRegion: string;
-  linkedinProfile: string | "";
-  website: string | "";
-  impactSummary: string;
-  achievementDescription: string;
-  email: string;
 }
 
 export function useNominationDraft() {
@@ -54,7 +45,7 @@ export function useNominationDraft() {
   const loadDraft = useCallback((): NominationDraft | null => {
     const saved = localStorage.getItem(DRAFT_KEY);
     if (!saved) return null;
-
+    
     try {
       return JSON.parse(saved) as NominationDraft;
     } catch {

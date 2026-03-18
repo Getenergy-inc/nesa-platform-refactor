@@ -1,51 +1,32 @@
 import { useState, useEffect } from "react";
-import {
-  useParams,
-  Link,
-  useLocation,
-  useSearchParams,
-  useNavigate,
-} from "react-router-dom";
-import {
-  acceptNomination,
-  getAcceptanceDetails,
-  AcceptanceDetails,
-} from "@/api/nominations";
+import { useParams, Link } from "react-router-dom";
+import { acceptNomination, getAcceptanceDetails, AcceptanceDetails } from "@/api/nominations";
+import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
 import { toast } from "sonner";
-import {
-  CheckCircle,
-  Loader2,
-  AlertCircle,
-  Clock,
-  XCircle,
-} from "lucide-react";
+import { CheckCircle, Loader2, AlertCircle, Clock, XCircle } from "lucide-react";
 import {
   AcceptanceLetterHeader,
   AcceptanceCategoriesList,
   AcceptanceNextSteps,
   AcceptanceSuccessCard,
 } from "@/components/acceptance";
-import { nominationApi } from "@/api/nomination";
-import { useAuth } from "@/contexts/AuthContext";
 
 export default function NomineeAccept() {
+  const { token } = useParams<{ token: string }>();
   const [loading, setLoading] = useState(true);
   const [submitting, setSubmitting] = useState(false);
   const [accepted, setAccepted] = useState(false);
   const [nominee, setNominee] = useState<AcceptanceDetails | null>(null);
   const [error, setError] = useState<string | null>(null);
-  const { accessToken } = useAuth();
+  const [chapterInfo, setChapterInfo] = useState<{ name: string; region: string | null } | null>(null);
   const [result, setResult] = useState<{
     certificate_download_locked?: boolean;
     renominations_needed?: number;
   } | null>(null);
-  const [searchParams] = useSearchParams();
-  const token = searchParams.get("token");
-  const nominationId = searchParams.get("nominationId");
-  const navigate = useNavigate();
+
   useEffect(() => {
     async function loadDetails() {
       if (!token) {
@@ -55,45 +36,36 @@ export default function NomineeAccept() {
       }
 
       try {
-        //fetch nomination details
-        const data = await nominationApi.fetchNominationDetails(
-          accessToken,
-          nominationId,
-        );
-        const is_expired =
-          new Date(data.nominationLinkExpiresAt).getTime() < Date.now();
-        const acceptanceDetails: AcceptanceDetails = {
-          id: data.id,
-          name: data.fullName,
-          photo_url: data.profileImage,
-          country: data.country,
-          acceptance_status: data.accepted,
-          renomination_count: data.renominationCount,
-          is_expired,
-          categories: [
-            {
-              category: data.category.title,
-              subcategory: data.subCategory.title,
-            },
-          ],
-        };
-        setNominee(acceptanceDetails);
+        const response = await getAcceptanceDetails(token);
+        setNominee(response.data);
+
+        // Fetch chapter info based on nominee's country
+        if (response.data.country) {
+          const { data: chapter } = await supabase
+            .from("chapters")
+            .select("name, region")
+            .eq("country", response.data.country)
+            .eq("is_active", true)
+            .limit(1)
+            .maybeSingle();
+          if (chapter) {
+            setChapterInfo(chapter);
+          }
+        }
 
         // Check if already responded
-        if (data.accepted === "ACCEPTED") {
+        if (response.data.acceptance_status === "ACCEPTED") {
           setAccepted(true);
           setResult({
-            certificate_download_locked: data.renominationCount < 200,
-            renominations_needed: Math.max(0, 200 - data.renominationCount),
+            certificate_download_locked: response.data.renomination_count < 200,
+            renominations_needed: Math.max(0, 200 - response.data.renomination_count),
           });
-        } else if (data.accepted === "REJECTED") {
+        } else if (response.data.acceptance_status === "DECLINED") {
           setError("This nomination has already been declined.");
         }
-      } catch (err) {
+      } catch (err: any) {
         if (err.message?.includes("expired")) {
-          setError(
-            "This acceptance link has expired. Please contact support for a new link.",
-          );
+          setError("This acceptance link has expired. Please contact support for a new link.");
         } else {
           setError(err.message || "Failed to load nomination details");
         }
@@ -103,7 +75,7 @@ export default function NomineeAccept() {
     }
 
     loadDetails();
-  }, [token, accessToken, nominationId]);
+  }, [token]);
 
   const handleAccept = async () => {
     if (!token) {
@@ -113,13 +85,13 @@ export default function NomineeAccept() {
 
     setSubmitting(true);
     try {
-      await nominationApi.acceptNomination(accessToken, nominationId);
+      const response = await acceptNomination(token);
+      setResult(response.data);
       setAccepted(true);
-      toast.success("Nomination accepted successfully!");
-      setTimeout(() => {
-        navigate(`/nominee/dashboard`);
-      }, 500);
-    } catch (error) {
+      toast.success("Nomination Accepted!", {
+        description: "Thank you for accepting your nomination. Your profile is now active in the NESA-Africa ecosystem.",
+      });
+    } catch (error: any) {
       toast.error(error.message || "Failed to accept nomination");
     } finally {
       setSubmitting(false);
@@ -192,6 +164,8 @@ export default function NomineeAccept() {
           certificateDownloadLocked={result.certificate_download_locked ?? true}
           renominationsNeeded={result.renominations_needed ?? 200}
           token={token}
+          chapterName={chapterInfo?.name}
+          region={chapterInfo?.region || undefined}
         />
       </div>
     );
@@ -207,7 +181,7 @@ export default function NomineeAccept() {
       <Card className="max-w-2xl w-full shadow-xl border-0">
         <CardContent className="p-6 md:p-10 space-y-8">
           {/* Header */}
-          <AcceptanceLetterHeader nomineeName={nominee.name} />
+          <AcceptanceLetterHeader nomineeName={nominee.name} chapterName={chapterInfo?.name} region={chapterInfo?.region || undefined} />
 
           {/* Congratulations Message */}
           <div className="space-y-4">
@@ -228,12 +202,9 @@ export default function NomineeAccept() {
           {nominee.primary_justification && (
             <div className="bg-muted/30 rounded-lg p-4 border-l-4 border-primary">
               <p className="text-sm text-muted-foreground mb-1">
-                This nomination recognizes your outstanding contributions to
-                education through:
+                This nomination recognizes your outstanding contributions to education through:
               </p>
-              <p className="text-foreground italic">
-                "{nominee.primary_justification}"
-              </p>
+              <p className="text-foreground italic">"{nominee.primary_justification}"</p>
             </div>
           )}
 
@@ -254,13 +225,8 @@ export default function NomineeAccept() {
             </Button>
 
             <div className="text-center">
-              <Button
-                variant="ghost"
-                size="sm"
-                asChild
-                className="text-muted-foreground"
-              >
-                <Link to={`/nominee/decline/${token}_${nominationId}`}>
+              <Button variant="ghost" size="sm" asChild className="text-muted-foreground">
+                <Link to={`/nominee/decline/${token}`}>
                   I'd like to decline this nomination
                 </Link>
               </Button>
@@ -269,16 +235,19 @@ export default function NomineeAccept() {
 
           {/* Closing */}
           <div className="text-center text-sm text-muted-foreground pt-4 border-t space-y-2">
+            <p className="font-medium text-foreground">
+              Warm regards,
+            </p>
             <p>
-              We are honored to have you join Africa's largest educational
-              recognition movement.
+              {chapterInfo ? `SCEF ${chapterInfo.name} Local Chapter` : "Santos Creations Educational Foundation"}
+              {chapterInfo?.region && ` — ${chapterInfo.region}`}
+            </p>
+            <p>
+              We are honored to have you join Africa's largest educational recognition movement.
             </p>
             <p className="text-xs">
               Questions? Contact us at{" "}
-              <a
-                href="mailto:nominees@nesa.africa"
-                className="text-primary hover:underline"
-              >
+              <a href="mailto:nominees@nesa.africa" className="text-primary hover:underline">
                 nominees@nesa.africa
               </a>
             </p>

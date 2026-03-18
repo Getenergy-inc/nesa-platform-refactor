@@ -1,6 +1,6 @@
 /**
  * NESA-Africa API Client - Configuration Endpoints
- *
+ * 
  * Endpoints for system health, season, and stage configuration.
  */
 
@@ -105,9 +105,7 @@ export const configAdmin = {
    * Switch active season (admin only)
    */
   async switchSeason(seasonYear: number) {
-    return api.post<{ success: boolean; season: any }>("stage", "/switch", {
-      seasonYear,
-    });
+    return api.post<{ success: boolean; season: any }>("stage", "/switch", { seasonYear });
   },
 
   /**
@@ -119,11 +117,7 @@ export const configAdmin = {
     opensAt?: string | null;
     closesAt?: string | null;
   }) {
-    return api.post<{ success: boolean; stage: StageInfo }>(
-      "stage",
-      "/update",
-      payload,
-    );
+    return api.post<{ success: boolean; stage: StageInfo }>("stage", "/update", payload);
   },
 
   /**
@@ -141,5 +135,3 @@ export default {
   isStageOpen,
   admin: configAdmin,
 };
-
-export const APPLICATION_YEAR = "2026";

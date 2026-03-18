@@ -14,14 +14,11 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import {
-  Mail,
-  Lock,
-  User,
-  Phone,
-  Building2,
-  Loader2,
-  Gift,
-} from "lucide-react";
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
+import { Mail, Lock, User, Gift, MapPin, Phone, Building2, Globe, Info } from "lucide-react";
 import { AccountType } from "./AccountTypeStep";
 
 export interface PersonalInfoData {
@@ -31,50 +28,29 @@ export interface PersonalInfoData {
   phone: string;
   country: string;
   organization: string;
+  chapterId: string;
+  referralCode: string;
 }
 
 interface PersonalInfoStepProps {
   accountType: AccountType;
   data: PersonalInfoData;
   onChange: (data: Partial<PersonalInfoData>) => void;
-  onNext: () => Promise<void> | void;
+  onNext: () => void;
   onBack: () => void;
 }
 
 const countries = [
-  "Nigeria",
-  "Kenya",
-  "Ghana",
-  "South Africa",
-  "Ethiopia",
-  "Tanzania",
-  "Uganda",
-  "Rwanda",
-  "Senegal",
-  "Cameroon",
-  "Côte d'Ivoire",
-  "Morocco",
-  "Egypt",
-  "Algeria",
-  "Tunisia",
-  "Zimbabwe",
-  "Zambia",
-  "Botswana",
-  "Mozambique",
-  "Angola",
-  "Other",
+  "Nigeria", "Kenya", "Ghana", "South Africa", "Ethiopia", "Tanzania",
+  "Uganda", "Rwanda", "Senegal", "Cameroon", "Côte d'Ivoire", "Morocco",
+  "Egypt", "Algeria", "Tunisia", "Zimbabwe", "Zambia", "Botswana",
+  "Mozambique", "Angola", "Other"
 ];
 
-export function PersonalInfoStep({
-  accountType,
-  data,
-  onChange,
-  onNext,
-  onBack,
-}: PersonalInfoStepProps) {
+export function PersonalInfoStep({ accountType, data, onChange, onNext, onBack }: PersonalInfoStepProps) {
   const [errors, setErrors] = useState<Record<string, string>>({});
-  const [isSubmitting, setIsSubmitting] = useState(false);
 
+  // Fetch active chapters for dropdown
   const { data: chapters = [] } = useQuery({
     queryKey: ["chapters-active"],
     queryFn: async () => {
@@ -83,57 +59,102 @@ export function PersonalInfoStep({
         .select("id, name, country, region, referral_code")
         .eq("is_active", true)
         .order("name");
-
       if (error) throw error;
       return data || [];
     },
   });
 
+  // Auto-assign chapter when country changes
+  useEffect(() => {
+    if (!data.country || data.country === "Other" || chapters.length === 0) return;
+    
+    // Find chapters matching the selected country
+    const matchingChapters = chapters.filter(
+      (ch) => ch.country.toLowerCase() === data.country.toLowerCase()
+    );
+    
+    if (matchingChapters.length === 1) {
+      // Auto-select the only matching chapter
+      const chapter = matchingChapters[0];
+      onChange({
+        chapterId: chapter.id,
+        referralCode: data.referralCode || chapter.referral_code || "",
+      });
+    } else if (matchingChapters.length > 1 && !data.chapterId) {
+      // Auto-select first match if none selected
+      const chapter = matchingChapters[0];
+      onChange({
+        chapterId: chapter.id,
+        referralCode: data.referralCode || chapter.referral_code || "",
+      });
+    }
+  }, [data.country, chapters]);
+
+  // Filter chapters by selected country (show all if no country or "Other")
+  const filteredChapters = data.country && data.country !== "Other"
+    ? chapters.filter((ch) => ch.country.toLowerCase() === data.country.toLowerCase())
+    : chapters;
+
+  // Group filtered chapters by region
+  const chaptersByRegion = filteredChapters.reduce((acc, chapter) => {
+    const region = chapter.region || "Other";
+    if (!acc[region]) acc[region] = [];
+    acc[region].push(chapter);
+    return acc;
+  }, {} as Record<string, typeof chapters>);
+
+  // Get selected chapter details for badge display
+  const selectedChapter = chapters.find((ch) => ch.id === data.chapterId);
+
+  const handleChapterChange = (chapterId: string) => {
+    if (chapterId && chapterId !== "none") {
+      const chapter = chapters.find((ch) => ch.id === chapterId);
+      if (chapter?.referral_code) {
+        onChange({ chapterId, referralCode: data.referralCode || chapter.referral_code });
+        return;
+      }
+    }
+    if (chapterId === "none") {
+      onChange({ chapterId: "" });
+      return;
+    }
+    onChange({ chapterId });
+  };
+
   const validate = () => {
     const newErrors: Record<string, string> = {};
-
+    
     if (!data.fullName?.trim()) {
       newErrors.fullName = "Full name is required";
     }
-
     if (!data.email?.trim()) {
       newErrors.email = "Email is required";
     } else if (!/\S+@\S+\.\S+/.test(data.email)) {
       newErrors.email = "Invalid email format";
     }
-
     if (!data.password) {
       newErrors.password = "Password is required";
     } else if (data.password.length < 6) {
       newErrors.password = "Password must be at least 6 characters";
     }
-
+    
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleContinue = async () => {
-    if (!validate()) return;
-
-    try {
-      setIsSubmitting(true);
-      await onNext(); // supports async backend call
-    } catch (error) {
-      console.error("Account creation failed:", error);
-    } finally {
-      setIsSubmitting(false);
+  const handleContinue = () => {
+    if (validate()) {
+      onNext();
     }
   };
 
-  const showOrgField =
-    accountType === "ORGANIZATION" || accountType === "SPONSOR";
+  const showOrgField = accountType === "organization" || accountType === "sponsor";
+  const showChapterField = accountType !== "judge";
 
   return (
     <div className="w-full max-w-xl mx-auto">
       <div className="text-center mb-8">
-        <h2 className="text-2xl md:text-3xl font-display font-bold">
-          Personal Information
-        </h2>
+        <h2 className="text-2xl md:text-3xl font-display font-bold">Personal Information</h2>
         <p className="text-muted-foreground mt-2">
           Enter your details to create your account.
         </p>
@@ -146,13 +167,10 @@ export function PersonalInfoStep({
             Account Details
           </CardTitle>
         </CardHeader>
-
         <CardContent className="space-y-4">
           {/* Full Name */}
           <div className="space-y-2">
-            <Label htmlFor="fullName">
-              Full Name <span className="text-destructive">*</span>
-            </Label>
+            <Label htmlFor="fullName">Full Name <span className="text-destructive">*</span></Label>
             <div className="relative">
               <User className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
               <Input
@@ -161,19 +179,14 @@ export function PersonalInfoStep({
                 value={data.fullName}
                 onChange={(e) => onChange({ fullName: e.target.value })}
                 className="pl-10"
-                disabled={isSubmitting}
               />
             </div>
-            {errors.fullName && (
-              <p className="text-xs text-destructive">{errors.fullName}</p>
-            )}
+            {errors.fullName && <p className="text-xs text-destructive">{errors.fullName}</p>}
           </div>
 
           {/* Email */}
           <div className="space-y-2">
-            <Label htmlFor="email">
-              Email Address <span className="text-destructive">*</span>
-            </Label>
+            <Label htmlFor="email">Email Address <span className="text-destructive">*</span></Label>
             <div className="relative">
               <Mail className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
               <Input
@@ -183,19 +196,14 @@ export function PersonalInfoStep({
                 value={data.email}
                 onChange={(e) => onChange({ email: e.target.value })}
                 className="pl-10"
-                disabled={isSubmitting}
               />
             </div>
-            {errors.email && (
-              <p className="text-xs text-destructive">{errors.email}</p>
-            )}
+            {errors.email && <p className="text-xs text-destructive">{errors.email}</p>}
           </div>
 
           {/* Password */}
           <div className="space-y-2">
-            <Label htmlFor="password">
-              Password <span className="text-destructive">*</span>
-            </Label>
+            <Label htmlFor="password">Password <span className="text-destructive">*</span></Label>
             <div className="relative">
               <Lock className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
               <Input
@@ -205,15 +213,12 @@ export function PersonalInfoStep({
                 value={data.password}
                 onChange={(e) => onChange({ password: e.target.value })}
                 className="pl-10"
-                disabled={isSubmitting}
               />
             </div>
-            {errors.password && (
-              <p className="text-xs text-destructive">{errors.password}</p>
-            )}
+            {errors.password && <p className="text-xs text-destructive">{errors.password}</p>}
           </div>
 
-          {/* Phone */}
+          {/* Phone (optional) */}
           <div className="space-y-2">
             <Label htmlFor="phone">Phone Number (Optional)</Label>
             <div className="relative">
@@ -225,33 +230,56 @@ export function PersonalInfoStep({
                 value={data.phone}
                 onChange={(e) => onChange({ phone: e.target.value })}
                 className="pl-10"
-                disabled={isSubmitting}
               />
             </div>
           </div>
 
           {/* Country */}
           <div className="space-y-2">
-            <Label>Country</Label>
-            <Select
-              value={data.country}
-              onValueChange={(val) => onChange({ country: val })}
-              disabled={isSubmitting}
-            >
+            <Label>Country <span className="text-destructive">*</span></Label>
+            <Select value={data.country} onValueChange={(val) => onChange({ country: val })}>
               <SelectTrigger>
                 <SelectValue placeholder="Select your country" />
               </SelectTrigger>
               <SelectContent>
                 {countries.map((country) => (
-                  <SelectItem key={country} value={country}>
-                    {country}
-                  </SelectItem>
+                  <SelectItem key={country} value={country}>{country}</SelectItem>
                 ))}
               </SelectContent>
             </Select>
           </div>
 
-          {/* Organization */}
+          {/* Auto-assigned Chapter & Region Badges */}
+          {selectedChapter && (
+            <div className="rounded-lg border border-primary/20 bg-primary/5 p-4 space-y-2">
+              <div className="flex items-center gap-2 text-sm font-medium">
+                <MapPin className="h-4 w-4 text-primary" />
+                <span>Your Local Chapter & Region</span>
+                <Tooltip>
+                  <TooltipTrigger asChild>
+                    <Info className="h-3.5 w-3.5 text-muted-foreground cursor-help" />
+                  </TooltipTrigger>
+                  <TooltipContent className="max-w-xs">
+                    <p>Your Local Chapter and Region are automatically assigned for your convenience. You can still explore other regions, categories, and local chapters once signed in.</p>
+                  </TooltipContent>
+                </Tooltip>
+              </div>
+              <div className="flex flex-wrap gap-2">
+                <Badge variant="secondary" className="bg-primary/10 text-primary border-primary/20">
+                  <MapPin className="h-3 w-3 mr-1" />
+                  {selectedChapter.name} Chapter
+                </Badge>
+                {selectedChapter.region && (
+                  <Badge variant="secondary" className="bg-accent/50 border-accent">
+                    <Globe className="h-3 w-3 mr-1" />
+                    {selectedChapter.region}
+                  </Badge>
+                )}
+              </div>
+            </div>
+          )}
+
+          {/* Organization (for org/sponsor accounts) */}
           {showOrgField && (
             <div className="space-y-2">
               <Label htmlFor="organization">Organization Name</Label>
@@ -263,11 +291,65 @@ export function PersonalInfoStep({
                   value={data.organization}
                   onChange={(e) => onChange({ organization: e.target.value })}
                   className="pl-10"
-                  disabled={isSubmitting}
                 />
               </div>
             </div>
           )}
+
+          {/* Chapter Selection (manual override) */}
+          {showChapterField && (
+            <div className="space-y-2">
+              <Label>
+                {selectedChapter ? "Change Local Chapter" : "Join a Local Chapter (Optional)"}
+              </Label>
+              <div className="relative">
+                <MapPin className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground z-10 pointer-events-none" />
+                <Select value={data.chapterId} onValueChange={handleChapterChange}>
+                  <SelectTrigger className="pl-10">
+                    <SelectValue placeholder="Select your country chapter" />
+                  </SelectTrigger>
+                  <SelectContent className="max-h-60">
+                    <SelectItem value="none">No chapter selected</SelectItem>
+                    {Object.entries(chaptersByRegion).map(([region, regionChapters]) => (
+                      <div key={region}>
+                        <div className="px-2 py-1.5 text-xs font-semibold text-muted-foreground bg-muted/50">
+                          {region}
+                        </div>
+                        {regionChapters.map((chapter) => (
+                          <SelectItem key={chapter.id} value={chapter.id}>
+                            {chapter.name} ({chapter.country})
+                          </SelectItem>
+                        ))}
+                      </div>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </div>
+              {!selectedChapter && (
+                <p className="text-xs text-muted-foreground">
+                  Connect with educators in your country and earn chapter bonuses
+                </p>
+              )}
+            </div>
+          )}
+
+          {/* Referral Code */}
+          <div className="space-y-2">
+            <Label htmlFor="referralCode">Referral Code (Optional)</Label>
+            <div className="relative">
+              <Gift className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
+              <Input
+                id="referralCode"
+                placeholder="Enter referral code"
+                value={data.referralCode}
+                onChange={(e) => onChange({ referralCode: e.target.value })}
+                className="pl-10"
+              />
+            </div>
+            {data.referralCode && (
+              <p className="text-xs text-primary">🎁 You'll receive bonus AGC credits!</p>
+            )}
+          </div>
         </CardContent>
       </Card>
 
@@ -278,42 +360,24 @@ export function PersonalInfoStep({
             <Gift className="h-5 w-5 text-primary" />
           </div>
           <div>
-            <p className="text-sm font-medium">
-              Earn Afrigold Points by Nominating
-            </p>
+            <p className="text-sm font-medium">Earn Afrigold Points by Nominating</p>
             <p className="text-xs text-muted-foreground mt-0.5">
-              Submit verified nominations and earn +10 Afrigold Points per
-              nomination. Use your points to vote for African education
-              changemakers advocating Education for All.
+              Submit verified nominations and earn +10 Afrigold Points per nomination. Use your points to vote for African education changemakers advocating Education for All.
             </p>
           </div>
         </CardContent>
       </Card>
 
       <div className="mt-8 flex gap-4 justify-center">
-        <Button
-          variant="outline"
-          size="lg"
-          onClick={onBack}
-          disabled={isSubmitting}
-        >
+        <Button variant="outline" size="lg" onClick={onBack}>
           Back
         </Button>
-
         <Button
           size="lg"
           onClick={handleContinue}
-          disabled={isSubmitting}
           className="min-w-[200px] bg-gradient-gold text-secondary font-semibold hover:opacity-90"
         >
-          {isSubmitting ? (
-            <span className="flex items-center gap-2">
-              <Loader2 className="h-4 w-4 animate-spin" />
-              Creating Account...
-            </span>
-          ) : (
-            "Create Account"
-          )}
+          Create Account
         </Button>
       </div>
     </div>

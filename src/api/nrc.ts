@@ -1,6 +1,6 @@
 /**
  * NESA-Africa API Client - NRC Workflow Endpoints
- *
+ * 
  * National Review Committee endpoints for nomination review workflow.
  */
 
@@ -76,11 +76,7 @@ export async function getQueue(params?: {
   page?: number;
   limit?: number;
 }) {
-  return api.get<PaginatedResponse<NominationQueueItem>>(
-    "nrc",
-    "/queue",
-    params,
-  );
+  return api.get<PaginatedResponse<NominationQueueItem>>("nrc", "/queue", params);
 }
 
 /**
@@ -93,10 +89,7 @@ export async function getStats() {
 /**
  * Assign nomination to reviewer
  */
-export async function assignNomination(
-  nominationId: string,
-  reviewerId?: string,
-) {
+export async function assignNomination(nominationId: string, reviewerId?: string) {
   return api.post<{ success: boolean; nomination: any }>("nrc", "/assign", {
     nominationId,
     reviewerId,

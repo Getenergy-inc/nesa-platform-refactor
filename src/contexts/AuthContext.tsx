@@ -1,315 +1,170 @@
-import {
-  createContext,
-  useContext,
-  useEffect,
-  useRef,
-  useState,
-  ReactNode,
-} from "react";
+import { createContext, useContext, useEffect, useState, ReactNode } from "react";
+import { User, Session } from "@supabase/supabase-js";
+import { supabase } from "@/integrations/supabase/client";
 import type { AppRole } from "@/config/roles";
-import { useNavigate } from "react-router-dom";
-import { API_BASE } from "@/lib/apiBase";
-
-interface User {
-  email: string;
-  id: string;
-  firstName: string | null;
-  lastName: string | null;
-  phone: string;
-  gender: string | null;
-  role: string;
-  country: string;
-  state: string | null;
-  city: string | null;
-  address: string | null;
-}
-// enum AccountType {
-//   INDIVIDUAL,
-//   ORGANIZATION,
-//   JUDGE,
-//   CHAPTER_LEADER,
-//   SPONSOR,
-//   VOLUNTEER,
-// }
-// enum UserRole {
-//   FREE_MEMBER,
-//   ADMIN,
-//   SUPER_ADMIN,
-// }
 
 interface AuthContextType {
   user: User | null;
-  accessToken: string | null;
+  session: Session | null;
   roles: AppRole[];
   loading: boolean;
-  signUp: (payload: SignUpPayload) => Promise<void>;
-  signIn: (email: string, password: string) => Promise<AppRole>;
+  signUp: (email: string, password: string, fullName?: string, referralCode?: string) => Promise<void>;
+  signIn: (email: string, password: string) => Promise<void>;
   signOut: () => Promise<void>;
   hasRole: (role: AppRole) => boolean;
-  verifyCode: (code: string, email: string) => Promise<void>;
-  resendCode: (email: string) => Promise<void>;
-}
-
-export interface SignUpPayload {
-  email: string;
-  password: string;
-  firstName: string;
-  lastName: string;
-  phone: string;
-  gender: string | null;
-  dateOfBirth: string | null;
-  accountType: string;
-  role: string;
-  country: string;
-  state: string | null;
-  city: string | null;
-  address: string | null;
-  intents: string[];
-  organizationName: string | null;
-  organizationType: string | null;
-  organizationWebsite: string | null;
-  organizationNumber: string | null;
-  organizationFunctions: string[] | [];
-  organizationSector: string | null;
-  nominationId?: string;
-  // 👇 extensible
-  // [key: string]: any;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export function AuthProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<User | null>(null);
-  const [accessToken, setAccessToken] = useState<string | null>(null);
+  const [session, setSession] = useState<Session | null>(null);
   const [roles, setRoles] = useState<AppRole[]>([]);
   const [loading, setLoading] = useState(true);
 
-  const refreshTimeoutRef = useRef<number | null>(null);
-
-  /* ---------------------- TOKEN REFRESH ---------------------- */
-
-  const scheduleTokenRefresh = () => {
-    // refresh 1 minute before expiry (7 min token)
-    refreshTimeoutRef.current = window.setTimeout(
-      refreshAccessToken,
-      6 * 60 * 1000,
-    );
-  };
-
-  const refreshAccessToken = async () => {
-    try {
-      const res = await fetch(`${API_BASE}/auth/accesstoken`, {
-        method: "GET",
-        credentials: "include",
-      });
-
-      if (!res.ok) throw new Error("Refresh failed");
-
-      const data = await res.json();
-      setAccessToken(data.token);
-      scheduleTokenRefresh();
-    } catch {
-      clearAuth();
-    }
-  };
-
-  const clearAuth = () => {
-    setUser(null);
-    setAccessToken(null);
-    setRoles([]);
-    if (refreshTimeoutRef.current) {
-      clearTimeout(refreshTimeoutRef.current);
-    }
-  };
-
-  /* ---------------------- BOOTSTRAP ---------------------- */
-
   useEffect(() => {
-    // On app load, attempt refresh
-    (async () => {
-      try {
-        const res = await fetch(`${API_BASE}/auth/accesstoken`, {
-          credentials: "include",
-        });
-
-        if (!res.ok) throw new Error();
-
-        const data = await res.json();
-        setUser(data.user);
-        setRoles(data.roles);
-        setAccessToken(data.token);
-        scheduleTokenRefresh();
-      } catch {
-        clearAuth();
-      } finally {
+    // Set up auth state listener BEFORE getting initial session
+    const { data: { subscription } } = supabase.auth.onAuthStateChange(
+      async (event, session) => {
+        setSession(session);
+        setUser(session?.user ?? null);
+        
+        if (session?.user) {
+          // Fetch roles - use setTimeout to avoid potential deadlock
+          setTimeout(async () => {
+            const { data } = await supabase
+              .from("user_roles")
+              .select("role")
+              .eq("user_id", session.user.id);
+            setRoles((data || []).map(r => r.role as AppRole));
+          }, 0);
+        } else {
+          setRoles([]);
+        }
+        
         setLoading(false);
       }
-    })();
+    );
 
-    return () => {
-      if (refreshTimeoutRef.current) {
-        clearTimeout(refreshTimeoutRef.current);
+    // Get initial session
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      setSession(session);
+      setUser(session?.user ?? null);
+      
+      if (session?.user) {
+        supabase
+          .from("user_roles")
+          .select("role")
+          .eq("user_id", session.user.id)
+          .then(({ data }) => {
+            setRoles((data || []).map(r => r.role as AppRole));
+            setLoading(false);
+          });
+      } else {
+        setLoading(false);
       }
-    };
+    });
+
+    return () => subscription.unsubscribe();
   }, []);
 
-  /* ---------------------- AUTH ACTIONS ---------------------- */
-
-  const signUp = async (payload: SignUpPayload) => {
-    const res = await fetch(`${API_BASE}/auth/register`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      credentials: "include",
-      body: JSON.stringify(payload),
+  const signUp = async (email: string, password: string, fullName?: string, referralCode?: string) => {
+    const { error, data } = await supabase.auth.signUp({
+      email,
+      password,
+      options: {
+        emailRedirectTo: window.location.origin,
+        data: { full_name: fullName },
+      },
     });
-
-    if (!res.ok) {
-      const err = await res.json();
-      throw new Error(err.message);
-    }
-
-    // optional: auto-login after signup
-    // await signIn(payload.email, payload.password);
-  };
-
-  const resendCode = async (email: string) => {
-    const res = await fetch(`${API_BASE}/auth/otp?email=${email}`, {
-      method: "GET",
-      headers: { "Content-Type": "application/json" },
-      credentials: "include",
-    });
-    if (!res.ok) {
-      const err = await res.json();
-      throw new Error(err.message);
-    }
-  };
-
-  const verifyCode = async (code: string, email: string) => {
-    const res = await fetch(
-      `${API_BASE}/auth/verifyotp?email=${email}&otp=${code}`,
-    );
-    if (!res.ok) {
-      const err = await res.json();
-      throw new Error(err.message);
+    if (error) throw error;
+    
+    // If signup successful and referral code provided, link referrer
+    if (data.user && referralCode) {
+      // First check the referrals table (for user and chapter referrals)
+      const { data: referral } = await supabase
+        .from("referrals")
+        .select("owner_id, owner_type")
+        .eq("referral_code", referralCode)
+        .eq("is_active", true)
+        .maybeSingle();
+      
+      if (referral) {
+        // Update profile with referrer info
+        if (referral.owner_type === "USER") {
+          await supabase.from("profiles").update({
+            referred_by_user_id: referral.owner_id
+          }).eq("user_id", data.user.id);
+        } else if (referral.owner_type === "CHAPTER") {
+          await supabase.from("profiles").update({
+            referred_by_chapter_id: referral.owner_id
+          }).eq("user_id", data.user.id);
+        }
+        
+        // Create referral event for signup
+        await supabase.from("referral_events").insert({
+          referrer_type: referral.owner_type,
+          referrer_id: referral.owner_id,
+          referred_user_id: data.user.id,
+          event_type: "SIGNUP",
+          reward_agc: 10, // Default signup bonus
+        });
+      } else {
+        // Fallback: Check chapters.referral_code directly (for chapter codes like CH-NIG-xxx)
+        const { data: chapter } = await supabase
+          .from("chapters")
+          .select("id")
+          .eq("referral_code", referralCode)
+          .eq("is_active", true)
+          .maybeSingle();
+        
+        if (chapter) {
+          // Update profile with chapter referrer
+          await supabase.from("profiles").update({
+            referred_by_chapter_id: chapter.id
+          }).eq("user_id", data.user.id);
+          
+          // Create referral event for chapter signup
+          await supabase.from("referral_events").insert({
+            referrer_type: "CHAPTER",
+            referrer_id: chapter.id,
+            referred_user_id: data.user.id,
+            event_type: "SIGNUP",
+            reward_agc: 10, // Default signup bonus
+          });
+        }
+      }
     }
   };
 
   const signIn = async (email: string, password: string) => {
-    const res = await fetch(`${API_BASE}/auth/login`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      credentials: "include",
-      body: JSON.stringify({ email, password }),
+    const { error } = await supabase.auth.signInWithPassword({
+      email,
+      password,
     });
-
-    if (!res.ok) {
-      const err = await res.json();
-      throw new Error(err.message);
-    }
-
-    const data = await res.json();
-    setUser(data.userInfo);
-    setRoles(data.roles);
-    setAccessToken(data.accessToken);
-    scheduleTokenRefresh();
-    return data.roles[0] as AppRole;
+    if (error) throw error;
   };
 
   const signOut = async () => {
-    await authFetch(
-      `${API_BASE}/auth/logout`,
-      {
-        method: "POST",
-        credentials: "include",
-      },
-      accessToken,
-    );
-    clearAuth();
+    const { error } = await supabase.auth.signOut();
+    if (error) throw error;
   };
 
-  const hasRole = (role: AppRole) => roles.includes(role);
+  const hasRole = (role: AppRole): boolean => {
+    return roles.includes(role);
+  };
 
   return (
-    <AuthContext.Provider
-      value={{
-        user,
-        accessToken,
-        roles,
-        loading,
-        signUp,
-        signIn,
-        signOut,
-        hasRole,
-        verifyCode,
-        resendCode,
-      }}
-    >
+    <AuthContext.Provider value={{ user, session, roles, loading, signUp, signIn, signOut, hasRole }}>
       {children}
     </AuthContext.Provider>
   );
 }
 
-/* ---------------------- HOOK ---------------------- */
-
 export function useAuth() {
-  const ctx = useContext(AuthContext);
-  if (!ctx) {
-    throw new Error("useAuth must be used within AuthProvider");
+  const context = useContext(AuthContext);
+  if (context === undefined) {
+    throw new Error("useAuth must be used within an AuthProvider");
   }
-  return ctx;
-}
-
-export async function authFetch(
-  url: string,
-  options: RequestInit = {},
-  accessToken: string | null,
-) {
-  const makeRequest = async (token: string | null) => {
-    return fetch(url, {
-      ...options,
-      headers: {
-        "Content-Type": "application/json",
-        ...options.headers,
-        Authorization: token ? `Bearer ${token}` : "",
-      },
-      credentials: "include",
-    });
-  };
-
-  // First attempt
-  let res = await makeRequest(accessToken);
-
-  // If unauthorized, try to refresh and retry once
-  if (res.status === 401) {
-    console.log("AuthFetch: Got 401, attempting token refresh...");
-
-    try {
-      // Try to refresh token
-      const refreshRes = await fetch(`${API_BASE}/auth/accesstoken`, {
-        method: "GET",
-        credentials: "include",
-      });
-
-      if (refreshRes.ok) {
-        const data = await refreshRes.json();
-        const newToken = data.token;
-
-        console.log("AuthFetch: Token refreshed, retrying request");
-
-        // Retry with new token
-        res = await makeRequest(newToken);
-
-        if (res.ok) {
-          return res; // Success on retry
-        }
-      }
-    } catch (refreshError) {
-      console.error("AuthFetch: Token refresh failed", refreshError);
-    }
-
-    // If we get here, refresh failed or retry failed
-    throw new Error("UNAUTHORIZED");
-  }
-
-  return res;
+  return context;
 }

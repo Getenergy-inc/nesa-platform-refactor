@@ -11,7 +11,6 @@ import {
   Settings,
   ArrowLeft,
   Bell,
-  UsersRound,
 } from "lucide-react";
 
 interface NRCLayoutProps {
@@ -21,16 +20,8 @@ interface NRCLayoutProps {
 const navItems = [
   { href: "/nrc", label: "Dashboard", icon: LayoutDashboard },
   { href: "/nrc/my-queue", label: "My Queue", icon: ClipboardList },
-  {
-    href: "/nrc/team",
-    label: "Create Team",
-    icon: Users,
-  },
-  {
-    href: "/nrc/manageteam",
-    label: "Manage Team",
-    icon: UsersRound,
-  },
+  { href: "/nrc/members", label: "Members", icon: Users },
+  { href: "/nrc/settings", label: "Settings", icon: Settings },
 ];
 
 export function NRCLayout({ children }: NRCLayoutProps) {
@@ -50,9 +41,7 @@ export function NRCLayout({ children }: NRCLayoutProps) {
               <Award className="h-5 w-5 text-primary" />
             </Link>
             <div>
-              <h1 className="font-display text-lg font-bold">
-                Hybrid NRC Portal
-              </h1>
+              <h1 className="font-display text-lg font-bold">Hybrid NRC Portal</h1>
               <div className="flex items-center gap-2">
                 <p className="text-xs text-muted-foreground">
                   30 Volunteers • Blended Verification Model
@@ -70,7 +59,7 @@ export function NRCLayout({ children }: NRCLayoutProps) {
               <span className="absolute -right-0.5 -top-0.5 h-2 w-2 rounded-full bg-destructive" />
             </Button>
             <Button variant="ghost" size="sm" asChild>
-              <Link to="/">
+              <Link to="/dashboard">
                 <ArrowLeft className="mr-2 h-4 w-4" />
                 Exit Portal
               </Link>
@@ -97,7 +86,7 @@ export function NRCLayout({ children }: NRCLayoutProps) {
                     "flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition-colors",
                     isActive
                       ? "bg-primary text-primary-foreground"
-                      : "text-muted-foreground hover:bg-muted hover:text-foreground",
+                      : "text-muted-foreground hover:bg-muted hover:text-foreground"
                   )}
                 >
                   <item.icon className="h-4 w-4" />
@@ -125,7 +114,7 @@ export function NRCLayout({ children }: NRCLayoutProps) {
                     "flex flex-col items-center gap-1 p-2 text-xs transition-colors",
                     isActive
                       ? "text-primary"
-                      : "text-muted-foreground hover:text-foreground",
+                      : "text-muted-foreground hover:text-foreground"
                   )}
                 >
                   <item.icon className="h-5 w-5" />

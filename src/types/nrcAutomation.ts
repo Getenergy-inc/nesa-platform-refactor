@@ -3,12 +3,7 @@
  * NESA-Africa 2025 - Enhanced Type Definitions
  */
 
-import type {
-  NRCWorkflowStatus,
-  AIRecommendation,
-  NRCReviewDecision,
-  NRCReviewerRole,
-} from "@/config/nrcConfig";
+import type { NRCWorkflowStatus, AIRecommendation, NRCReviewDecision, NRCReviewerRole } from "@/config/nrcConfig";
 
 // =====================================================
 // AI NRC ASSESSMENT TYPES
@@ -47,11 +42,7 @@ export interface NRCReview {
   evidence_sufficiency: number | null; // 0-5
   evidence_authenticity: "none" | "medium" | "high" | null;
   timeframe_fit: boolean | null;
-  duplication_status:
-    | "unique"
-    | "possible_duplicate"
-    | "confirmed_duplicate"
-    | null;
+  duplication_status: "unique" | "possible_duplicate" | "confirmed_duplicate" | null;
   // Notes
   reviewer_notes: string | null;
   suggested_category_id: string | null;
@@ -257,12 +248,12 @@ export interface NRCDashboardStats {
   available_members: number;
   member_capacity: number;
   pending_invitations: number;
-
+  
   // Queue stats
   total_queue_items: number;
   overdue_items: number;
   completed_reviews: number;
-
+  
   // Nomination pipeline stats
   pending_acceptance: number;
   accepted_pending_nrc: number;
@@ -270,7 +261,7 @@ export interface NRCDashboardStats {
   query_sent: number;
   verified: number;
   rejected: number;
-
+  
   // Performance stats
   avg_review_time_hours: number;
   avg_evidence_score: number;

@@ -1,91 +1,79 @@
 import { useState, useEffect, useCallback } from "react";
 import { useAuth } from "@/contexts/AuthContext";
-
+import { supabase } from "@/integrations/supabase/client";
 import { ProtectedRoute } from "@/components/ProtectedRoute";
 import { InstitutionalDashboardLayout } from "@/components/layout/InstitutionalDashboardLayout";
-
 import { DashboardHero } from "@/components/dashboard/DashboardHero";
 import { InstitutionalCards } from "@/components/dashboard/InstitutionalCards";
 import { AnnouncementsPanel } from "@/components/dashboard/AnnouncementsPanel";
 import { CampaignTimelineCard } from "@/components/dashboard/CampaignTimelineCard";
-
 import {
+  BalanceCard,
   TransactionsList,
   ReferralCard,
-  TopUpDialog,
+  type RevenueSplit,
 } from "@/components/dashboard/wallet";
-
-import type {
-  WalletBalance,
-  WalletLedgerEntry,
-  Referral,
-} from "@/types/wallet";
-
-import { userApi, type UserDetails } from "@/api/user";
+import type { WalletBalance, WalletLedgerEntry, Referral } from "@/types/wallet";
 
 function DashboardContent() {
-  const { user, accessToken } = useAuth();
-
+  const { user } = useAuth();
   const [loading, setLoading] = useState(true);
-
   const [balance, setBalance] = useState<WalletBalance | null>(null);
   const [transactions, setTransactions] = useState<WalletLedgerEntry[]>([]);
   const [referral, setReferral] = useState<Referral | null>(null);
   const [totalReferralEarnings, setTotalReferralEarnings] = useState(0);
 
-  const [userDetails, setUserDetails] = useState<UserDetails>();
-
-  const [topUpOpen, setTopUpOpen] = useState(false);
-
   const loadDashboardData = useCallback(async () => {
-    if (!user || !accessToken) return;
-
+    if (!user) return;
     try {
       setLoading(true);
+      const { data: walletAccount } = await supabase
+        .from("wallet_accounts")
+        .select("id")
+        .eq("owner_type", "USER")
+        .eq("owner_id", user.id)
+        .maybeSingle();
 
-      const userDetails = await userApi.fetchUserDetails(accessToken);
-      setUserDetails(userDetails);
+      if (walletAccount) {
+        const { data: balanceData } = await supabase
+          .from("wallet_balances")
+          .select("*")
+          .eq("account_id", walletAccount.id)
+          .maybeSingle();
+        if (balanceData) setBalance(balanceData as WalletBalance);
 
-      /**
-       * Wallet Balance
-       */
-      const userBalance = Number(userDetails.wallet.balance).toFixed(2);
+        const { data: txData } = await supabase
+          .from("wallet_ledger_entries")
+          .select("*")
+          .eq("account_id", walletAccount.id)
+          .order("created_at", { ascending: false })
+          .limit(5);
+        if (txData) setTransactions(txData as WalletLedgerEntry[]);
+      }
 
-      setBalance({
-        agc_total: userBalance,
-      } as WalletBalance);
-
-      /**
-       * Transactions
-       */
-      const sortedTransactions = userDetails.wallet.walletTransactions
-        .sort(
-          (a, b) =>
-            new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime(),
-        )
-        .slice(0, 10);
-
-      setTransactions(sortedTransactions as WalletLedgerEntry[]);
-
-      /**
-       * Referral
-       */
-      if (userDetails.referral) {
-        setReferral(userDetails.referral);
-
-        const total = userDetails.referral.events.reduce(
-          (sum: number, e: any) => sum + (e.reward_agc || 0),
-          0,
-        );
-
-        setTotalReferralEarnings(total);
+      const { data: referralData } = await supabase
+        .from("referrals")
+        .select("*")
+        .eq("owner_type", "USER")
+        .eq("owner_id", user.id)
+        .maybeSingle();
+      if (referralData) {
+        setReferral(referralData as Referral);
+        const { data: eventsData } = await supabase
+          .from("referral_events")
+          .select("reward_agc")
+          .eq("referrer_type", "USER")
+          .eq("referrer_id", user.id);
+        if (eventsData) {
+          setTotalReferralEarnings(eventsData.reduce((s, e) => s + (e.reward_agc || 0), 0));
+        }
       }
     } catch (err) {
       console.error("Dashboard load error:", err);
     } finally {
       setLoading(false);
     }
-  }, [user, accessToken]);
+  }, [user]);
 
   useEffect(() => {
     loadDashboardData();
@@ -97,38 +85,24 @@ function DashboardContent() {
       breadcrumbs={[{ label: "Overview" }]}
     >
       <div className="space-y-6 max-w-7xl mx-auto">
-        {/* Hero */}
+        {/* Hero Welcome */}
         <DashboardHero />
 
         {/* Campaign Timeline */}
         <CampaignTimelineCard />
 
-        {/* Institutional Cards */}
+        {/* Institutional Content Cards */}
         <InstitutionalCards />
 
         {/* Announcements + Quick Links */}
-        <AnnouncementsPanel onTopUp={() => setTopUpOpen(true)} />
+        <AnnouncementsPanel />
 
-        {/* Wallet + Referral */}
+        {/* Wallet + Referral row */}
         <div className="grid gap-4 lg:grid-cols-2">
-          <TransactionsList
-            transactions={transactions}
-            loading={loading}
-            limit={10}
-          />
-
-          <ReferralCard
-            referral={referral}
-            totalEarnings={totalReferralEarnings}
-            loading={loading}
-          />
+          <TransactionsList transactions={transactions} loading={loading} limit={5} />
+          <ReferralCard referral={referral} totalEarnings={totalReferralEarnings} loading={loading} />
         </div>
       </div>
-      <TopUpDialog
-        open={topUpOpen}
-        onOpenChange={setTopUpOpen}
-        onSuccess={loadDashboardData}
-      />
     </InstitutionalDashboardLayout>
   );
 }

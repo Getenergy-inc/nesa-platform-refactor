@@ -5,15 +5,8 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import {
-  Award,
-  ChevronLeft,
-  ChevronRight,
-  Users,
-  ArrowRight,
-  Globe,
-  Plane,
-  Handshake,
+import { 
+  Award, ChevronLeft, ChevronRight, Users, ArrowRight, Globe, Plane, Handshake
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import {
@@ -38,26 +31,17 @@ interface DynamicCategoryPageProps {
 
 // Get icon for region type
 function getRegionIcon(region: AfricanRegion) {
-  if (region === "Diaspora / Global Africa")
-    return <Plane className="h-3 w-3" />;
+  if (region === "Diaspora / Global Africa") return <Plane className="h-3 w-3" />;
   if (region === "Friends of Africa") return <Handshake className="h-3 w-3" />;
   return <Globe className="h-3 w-3" />;
 }
 
-export function DynamicCategoryPage({
-  categoryTitle,
-  nominationType,
-}: DynamicCategoryPageProps) {
-  const [selectedRegion, setSelectedRegion] = useState<
-    AfricanRegion | undefined
-  >();
+export function DynamicCategoryPage({ categoryTitle, nominationType }: DynamicCategoryPageProps) {
+  const [selectedRegion, setSelectedRegion] = useState<AfricanRegion | undefined>();
   const [currentSlide, setCurrentSlide] = useState(0);
 
   // Find category by exact title
-  const category = useMemo(
-    () => getCategoryByTitle(categoryTitle),
-    [categoryTitle],
-  );
+  const category = useMemo(() => getCategoryByTitle(categoryTitle), [categoryTitle]);
 
   // Get regions if available
   const regions = useMemo(() => {
@@ -93,9 +77,7 @@ export function DynamicCategoryPage({
   };
 
   const prevSlide = () => {
-    setCurrentSlide(
-      (prev) => (prev - 1 + subCategories.length) % subCategories.length,
-    );
+    setCurrentSlide((prev) => (prev - 1 + subCategories.length) % subCategories.length);
   };
 
   // Build nomination URL
@@ -104,10 +86,8 @@ export function DynamicCategoryPage({
     const title = encodeURIComponent(sub.title);
     const description = encodeURIComponent(sub.description);
     const image = encodeURIComponent(getSubCategoryImage(sub));
-    const region = selectedRegion
-      ? `&region=${encodeURIComponent(selectedRegion)}`
-      : "";
-    return `/nominate?type=${type}&title=${title}&description=${description}&image=${image}${region}`;
+    const region = selectedRegion ? `&region=${encodeURIComponent(selectedRegion)}` : "";
+    return `/nominateform?type=${type}&title=${title}&description=${description}&image=${image}${region}`;
   };
 
   // Build nominees URL
@@ -118,9 +98,7 @@ export function DynamicCategoryPage({
   };
 
   // Get current region style
-  const currentRegionStyle = selectedRegion
-    ? REGION_STYLES[selectedRegion]
-    : null;
+  const currentRegionStyle = selectedRegion ? REGION_STYLES[selectedRegion] : null;
 
   // Not found state
   if (!category) {
@@ -155,7 +133,7 @@ export function DynamicCategoryPage({
         <section className="relative min-h-[60vh] flex items-center overflow-hidden">
           {/* Background with gradient */}
           <div className="absolute inset-0 bg-gradient-to-b from-charcoal via-charcoal/95 to-charcoal" />
-
+          
           {/* Animated background elements */}
           <div className="absolute inset-0 overflow-hidden">
             <div className="absolute -top-1/2 -left-1/4 w-[600px] h-[600px] rounded-full bg-gold/5 blur-3xl" />
@@ -175,7 +153,7 @@ export function DynamicCategoryPage({
                 <p className="text-white/70 text-lg mb-6 max-w-xl">
                   {category.description}
                 </p>
-
+                
                 {/* Region Selector with Visual Distinction */}
                 {regions.length > 0 && (
                   <div className="mb-8">
@@ -183,70 +161,32 @@ export function DynamicCategoryPage({
                       <Globe className="h-4 w-4" />
                       Select Region
                     </p>
-
+                    
                     {/* Continental Regions */}
-                    <motion.div
+                    <motion.div 
                       className="flex flex-wrap gap-2 mb-3"
                       initial="hidden"
                       animate="visible"
                       variants={{
                         hidden: { opacity: 0 },
-                        visible: {
+                        visible: { 
                           opacity: 1,
-                          transition: { staggerChildren: 0.05 },
-                        },
+                          transition: { staggerChildren: 0.05 }
+                        }
                       }}
                     >
-                      {regions
-                        .filter((r) => isContinentalRegion(r))
-                        .map((region) => {
-                          const style = REGION_STYLES[region];
-                          const isSelected = selectedRegion === region;
-                          return (
-                            <motion.div
-                              key={region}
-                              variants={{
-                                hidden: { opacity: 0, scale: 0.9 },
-                                visible: { opacity: 1, scale: 1 },
-                              }}
-                            >
-                              <Button
-                                variant="outline"
-                                size="sm"
-                                onClick={() => {
-                                  setSelectedRegion(region);
-                                  setCurrentSlide(0);
-                                }}
-                                className={cn(
-                                  "rounded-full transition-all duration-300 gap-1.5 hover:scale-105",
-                                  isSelected
-                                    ? `${style.bg} ${style.text} ${style.border} border-2 shadow-lg`
-                                    : "border-white/20 text-white/70 hover:bg-white/10 hover:border-white/40",
-                                )}
-                              >
-                                {getRegionIcon(region)}
-                                {region}
-                              </Button>
-                            </motion.div>
-                          );
-                        })}
-                    </motion.div>
-
-                    {/* Diaspora & Friends of Africa - Separate Row with Distinction */}
-                    <motion.div
-                      className="flex flex-wrap gap-2"
-                      initial={{ opacity: 0, y: 10 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ delay: 0.3 }}
-                    >
-                      {regions
-                        .filter((r) => !isContinentalRegion(r))
-                        .map((region) => {
-                          const style = REGION_STYLES[region];
-                          const isSelected = selectedRegion === region;
-                          return (
+                      {regions.filter(r => isContinentalRegion(r)).map((region) => {
+                        const style = REGION_STYLES[region];
+                        const isSelected = selectedRegion === region;
+                        return (
+                          <motion.div
+                            key={region}
+                            variants={{
+                              hidden: { opacity: 0, scale: 0.9 },
+                              visible: { opacity: 1, scale: 1 }
+                            }}
+                          >
                             <Button
-                              key={region}
                               variant="outline"
                               size="sm"
                               onClick={() => {
@@ -257,14 +197,48 @@ export function DynamicCategoryPage({
                                 "rounded-full transition-all duration-300 gap-1.5 hover:scale-105",
                                 isSelected
                                   ? `${style.bg} ${style.text} ${style.border} border-2 shadow-lg`
-                                  : `border-dashed ${style.border} ${style.text}/70 hover:bg-white/5`,
+                                  : "border-white/20 text-white/70 hover:bg-white/10 hover:border-white/40"
                               )}
                             >
                               {getRegionIcon(region)}
                               {region}
                             </Button>
-                          );
-                        })}
+                          </motion.div>
+                        );
+                      })}
+                    </motion.div>
+                    
+                    {/* Diaspora & Friends of Africa - Separate Row with Distinction */}
+                    <motion.div 
+                      className="flex flex-wrap gap-2"
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: 0.3 }}
+                    >
+                      {regions.filter(r => !isContinentalRegion(r)).map((region) => {
+                        const style = REGION_STYLES[region];
+                        const isSelected = selectedRegion === region;
+                        return (
+                          <Button
+                            key={region}
+                            variant="outline"
+                            size="sm"
+                            onClick={() => {
+                              setSelectedRegion(region);
+                              setCurrentSlide(0);
+                            }}
+                            className={cn(
+                              "rounded-full transition-all duration-300 gap-1.5 hover:scale-105",
+                              isSelected
+                                ? `${style.bg} ${style.text} ${style.border} border-2 shadow-lg`
+                                : `border-dashed ${style.border} ${style.text}/70 hover:bg-white/5`
+                            )}
+                          >
+                            {getRegionIcon(region)}
+                            {region}
+                          </Button>
+                        );
+                      })}
                     </motion.div>
                   </div>
                 )}
@@ -278,19 +252,17 @@ export function DynamicCategoryPage({
                       "inline-flex items-center gap-2 px-4 py-2 rounded-full mb-6",
                       currentRegionStyle.bg,
                       currentRegionStyle.border,
-                      "border",
+                      "border"
                     )}
                   >
                     {getRegionIcon(selectedRegion)}
-                    <span
-                      className={cn("font-medium", currentRegionStyle.text)}
-                    >
+                    <span className={cn("font-medium", currentRegionStyle.text)}>
                       {selectedRegion}
                     </span>
                     {!isContinentalRegion(selectedRegion) && (
                       <span className="text-xs text-white/50">
-                        {selectedRegion === "Diaspora / Global Africa"
-                          ? "— Africans living abroad"
+                        {selectedRegion === "Diaspora / Global Africa" 
+                          ? "— Africans living abroad" 
                           : "— Global allies of Africa"}
                       </span>
                     )}
@@ -298,22 +270,13 @@ export function DynamicCategoryPage({
                 )}
 
                 <div className="flex flex-wrap gap-4">
-                  <Button
-                    asChild
-                    size="lg"
-                    className="bg-gold hover:bg-gold-dark text-charcoal font-semibold rounded-full gap-2"
-                  >
+                  <Button asChild size="lg" className="bg-gold hover:bg-gold-dark text-charcoal font-semibold rounded-full gap-2">
                     <Link to="/nominate">
                       <Award className="h-4 w-4" />
                       Nominate Now
                     </Link>
                   </Button>
-                  <Button
-                    asChild
-                    size="lg"
-                    variant="outline"
-                    className="border-white/20 text-white hover:bg-white/10 rounded-full gap-2"
-                  >
+                  <Button asChild size="lg" variant="outline" className="border-white/20 text-white hover:bg-white/10 rounded-full gap-2">
                     <Link to="/nominees">
                       <Users className="h-4 w-4" />
                       View Nominees
@@ -381,9 +344,9 @@ export function DynamicCategoryPage({
                               onClick={() => setCurrentSlide(idx)}
                               className={cn(
                                 "w-2 h-2 rounded-full transition-all",
-                                idx === currentSlide
-                                  ? "bg-gold w-6"
-                                  : "bg-white/30 hover:bg-white/50",
+                                idx === currentSlide 
+                                  ? "bg-gold w-6" 
+                                  : "bg-white/30 hover:bg-white/50"
                               )}
                               aria-label={`Go to slide ${idx + 1}`}
                             />
@@ -406,12 +369,7 @@ export function DynamicCategoryPage({
                 <h2 className="font-display text-2xl md:text-3xl font-bold text-white mb-2">
                   Subcategories
                   {selectedRegion && (
-                    <span
-                      className={cn(
-                        "ml-2",
-                        currentRegionStyle?.text || "text-gold",
-                      )}
-                    >
+                    <span className={cn("ml-2", currentRegionStyle?.text || "text-gold")}>
                       — {selectedRegion}
                     </span>
                   )}
@@ -449,30 +407,28 @@ export function DynamicCategoryPage({
                           }}
                         />
                         <div className="absolute inset-0 bg-gradient-to-t from-charcoal via-charcoal/40 to-transparent" />
-
+                        
                         {/* Nominee count badge */}
                         {sub.nominees.length > 0 && (
                           <Badge className="absolute top-3 right-3 bg-gold/90 text-charcoal">
-                            {sub.nominees.length} Nominee
-                            {sub.nominees.length !== 1 ? "s" : ""}
+                            {sub.nominees.length} Nominee{sub.nominees.length !== 1 ? "s" : ""}
                           </Badge>
                         )}
 
                         {/* Region indicator for global regions */}
-                        {selectedRegion &&
-                          !isContinentalRegion(selectedRegion) && (
-                            <Badge
-                              className={cn(
-                                "absolute top-3 left-3",
-                                currentRegionStyle?.bg,
-                                currentRegionStyle?.text,
-                                currentRegionStyle?.border,
-                              )}
-                            >
-                              {getRegionIcon(selectedRegion)}
-                              <span className="ml-1">{selectedRegion}</span>
-                            </Badge>
-                          )}
+                        {selectedRegion && !isContinentalRegion(selectedRegion) && (
+                          <Badge 
+                            className={cn(
+                              "absolute top-3 left-3",
+                              currentRegionStyle?.bg,
+                              currentRegionStyle?.text,
+                              currentRegionStyle?.border
+                            )}
+                          >
+                            {getRegionIcon(selectedRegion)}
+                            <span className="ml-1">{selectedRegion}</span>
+                          </Badge>
+                        )}
                       </div>
 
                       <CardContent className="p-5">
@@ -485,9 +441,9 @@ export function DynamicCategoryPage({
 
                         {/* Action Buttons */}
                         <div className="flex gap-2">
-                          <Button
-                            asChild
-                            variant="outline"
+                          <Button 
+                            asChild 
+                            variant="outline" 
                             size="sm"
                             className="flex-1 border-white/20 text-white hover:bg-white/10"
                           >
@@ -496,8 +452,8 @@ export function DynamicCategoryPage({
                               See Nominees
                             </Link>
                           </Button>
-                          <Button
-                            asChild
+                          <Button 
+                            asChild 
                             size="sm"
                             className="flex-1 bg-gold hover:bg-gold-dark text-charcoal font-semibold"
                           >
@@ -523,28 +479,20 @@ export function DynamicCategoryPage({
               Know Someone Making a Difference?
             </h2>
             <p className="text-white/70 mb-8 max-w-xl mx-auto">
-              Nominate outstanding individuals and organizations contributing to
-              education across Africa, the Diaspora, and Friends of Africa.
+              Nominate outstanding individuals and organizations contributing to education across Africa, the Diaspora, and Friends of Africa.
             </p>
             <div className="flex flex-wrap justify-center gap-4">
-              <Button
-                asChild
-                size="lg"
-                className="bg-gold hover:bg-gold-dark text-charcoal font-semibold rounded-full gap-2"
-              >
+              <Button asChild size="lg" className="bg-gold hover:bg-gold-dark text-charcoal font-semibold rounded-full gap-2">
                 <Link to="/nominate">
                   <Award className="h-4 w-4" />
                   Submit Nomination
                   <ArrowRight className="h-4 w-4" />
                 </Link>
               </Button>
-              <Button
-                asChild
-                size="lg"
-                variant="outline"
-                className="border-white/20 text-white hover:bg-white/10 rounded-full gap-2"
-              >
-                <Link to="/categories">View All Categories</Link>
+              <Button asChild size="lg" variant="outline" className="border-white/20 text-white hover:bg-white/10 rounded-full gap-2">
+                <Link to="/categories">
+                  View All Categories
+                </Link>
               </Button>
             </div>
           </div>

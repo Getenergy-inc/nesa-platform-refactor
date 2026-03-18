@@ -39,14 +39,12 @@ import type {
 export default function AdminDashboard() {
   const { user, hasRole, loading: authLoading } = useAuth();
   const { currentEdition } = useSeason();
-
+  
   // State for all data
   const [loading, setLoading] = useState(true);
   const [seasonId, setSeasonId] = useState<string | null>(null);
   const [financeData, setFinanceData] = useState<FinanceOverview | null>(null);
-  const [nominationTrends, setNominationTrends] = useState<NominationTrend[]>(
-    [],
-  );
+  const [nominationTrends, setNominationTrends] = useState<NominationTrend[]>([]);
   const [chapters, setChapters] = useState<ChapterPerformance[]>([]);
   const [ambassadors, setAmbassadors] = useState<AmbassadorPerformance[]>([]);
   const [voteLogs, setVoteLogs] = useState<VoteLog[]>([]);
@@ -54,16 +52,12 @@ export default function AdminDashboard() {
   const [voteLogsPage, setVoteLogsPage] = useState(1);
   const [voteLogsTotalPages, setVoteLogsTotalPages] = useState(1);
   const [revenueSplits, setRevenueSplits] = useState<RevenueSplit[]>([]);
-  const [disbursementRuns, setDisbursementRuns] = useState<DisbursementRun[]>(
-    [],
-  );
+  const [disbursementRuns, setDisbursementRuns] = useState<DisbursementRun[]>([]);
   const [stages, setStages] = useState<StageConfig[]>([]);
   const [auditLogs, setAuditLogs] = useState<AuditLogEntry[]>([]);
   const [auditPage, setAuditPage] = useState(1);
   const [auditTotalPages, setAuditTotalPages] = useState(1);
-  const [providerStatus, setProviderStatus] = useState<PaymentProviderStatus[]>(
-    [],
-  );
+  const [providerStatus, setProviderStatus] = useState<PaymentProviderStatus[]>([]);
   const [apiLogs, setApiLogs] = useState<APILogSummary[]>([]);
 
   // Fetch current season ID - must be before early returns
@@ -90,9 +84,9 @@ export default function AdminDashboard() {
     return <Navigate to="/login" replace />;
   }
 
-  // if (!authLoading) {
-  //   return <Navigate to="/unauthorized" replace />;
-  // }
+  if (!authLoading && !hasRole("admin")) {
+    return <Navigate to="/unauthorized" replace />;
+  }
 
   const loadDashboardData = async () => {
     setLoading(true);
@@ -123,31 +117,15 @@ export default function AdminDashboard() {
       .from("wallet_ledger_entries")
       .select("agc_amount, usd_amount, entry_type, direction");
 
-    const totalAgc =
-      ledgerData?.reduce((sum, entry) => {
-        return (
-          sum +
-          (entry.direction === "CREDIT" ? entry.agc_amount : -entry.agc_amount)
-        );
-      }, 0) ?? 0;
+    const totalAgc = ledgerData?.reduce((sum, entry) => {
+      return sum + (entry.direction === 'CREDIT' ? entry.agc_amount : -entry.agc_amount);
+    }, 0) ?? 0;
 
     const revenueByCategory = {
-      nomination:
-        ledgerData
-          ?.filter((e) => e.entry_type === "NOMINATION_FEE")
-          .reduce((s, e) => s + e.usd_amount, 0) ?? 0,
-      vote:
-        ledgerData
-          ?.filter((e) => e.entry_type === "VOTE_FEE")
-          .reduce((s, e) => s + e.usd_amount, 0) ?? 0,
-      donation:
-        ledgerData
-          ?.filter((e) => e.entry_type === "DONATION")
-          .reduce((s, e) => s + e.usd_amount, 0) ?? 0,
-      ticket:
-        ledgerData
-          ?.filter((e) => e.entry_type === "TICKET")
-          .reduce((s, e) => s + e.usd_amount, 0) ?? 0,
+      nomination: ledgerData?.filter(e => e.entry_type === 'NOMINATION_FEE').reduce((s, e) => s + e.usd_amount, 0) ?? 0,
+      vote: ledgerData?.filter(e => e.entry_type === 'VOTE_FEE').reduce((s, e) => s + e.usd_amount, 0) ?? 0,
+      donation: ledgerData?.filter(e => e.entry_type === 'DONATION').reduce((s, e) => s + e.usd_amount, 0) ?? 0,
+      ticket: ledgerData?.filter(e => e.entry_type === 'TICKET').reduce((s, e) => s + e.usd_amount, 0) ?? 0,
     };
 
     // Get transaction counts
@@ -196,17 +174,15 @@ export default function AdminDashboard() {
 
     // Group by date
     const grouped = new Map<string, number>();
-    data?.forEach((n) => {
-      const date = new Date(n.created_at!).toISOString().split("T")[0];
+    data?.forEach(n => {
+      const date = new Date(n.created_at!).toISOString().split('T')[0];
       grouped.set(date, (grouped.get(date) ?? 0) + 1);
     });
 
-    const trends: NominationTrend[] = Array.from(grouped.entries()).map(
-      ([date, count]) => ({
-        date,
-        count,
-      }),
-    );
+    const trends: NominationTrend[] = Array.from(grouped.entries()).map(([date, count]) => ({
+      date,
+      count,
+    }));
 
     setNominationTrends(trends);
   };
@@ -222,31 +198,19 @@ export default function AdminDashboard() {
       .select("referrer_id, referrer_type, event_type, reward_agc")
       .eq("referrer_type", "CHAPTER");
 
-    const performance: ChapterPerformance[] = (chaptersData ?? []).map(
-      (chapter) => {
-        const chapterReferrals =
-          referralData?.filter((r) => r.referrer_id === chapter.id) ?? [];
-        return {
-          id: chapter.id,
-          name: chapter.name,
-          country: chapter.country,
-          total_signups: chapterReferrals.filter(
-            (r) => r.event_type === "SIGNUP",
-          ).length,
-          paid_conversions: chapterReferrals.filter((r) =>
-            ["NOMINATION_PAID", "VOTE_PAID"].includes(r.event_type),
-          ).length,
-          total_agc_earned: chapterReferrals.reduce(
-            (sum, r) => sum + (r.reward_agc ?? 0),
-            0,
-          ),
-        };
-      },
-    );
+    const performance: ChapterPerformance[] = (chaptersData ?? []).map(chapter => {
+      const chapterReferrals = referralData?.filter(r => r.referrer_id === chapter.id) ?? [];
+      return {
+        id: chapter.id,
+        name: chapter.name,
+        country: chapter.country,
+        total_signups: chapterReferrals.filter(r => r.event_type === 'SIGNUP').length,
+        paid_conversions: chapterReferrals.filter(r => ['NOMINATION_PAID', 'VOTE_PAID'].includes(r.event_type)).length,
+        total_agc_earned: chapterReferrals.reduce((sum, r) => sum + (r.reward_agc ?? 0), 0),
+      };
+    });
 
-    setChapters(
-      performance.sort((a, b) => b.total_agc_earned - a.total_agc_earned),
-    );
+    setChapters(performance.sort((a, b) => b.total_agc_earned - a.total_agc_earned));
   };
 
   const loadAmbassadorPerformance = async () => {
@@ -257,25 +221,23 @@ export default function AdminDashboard() {
       .order("total_earnings_agc", { ascending: false })
       .limit(10);
 
-    const userIds = referralData?.map((r) => r.owner_id) ?? [];
-
+    const userIds = referralData?.map(r => r.owner_id) ?? [];
+    
     const { data: profiles } = await supabase
       .from("profiles")
       .select("user_id, full_name, email")
       .in("user_id", userIds);
 
-    const ambassadors: AmbassadorPerformance[] = (referralData ?? []).map(
-      (r) => {
-        const profile = profiles?.find((p) => p.user_id === r.owner_id);
-        return {
-          user_id: r.owner_id,
-          full_name: profile?.full_name ?? null,
-          email: profile?.email ?? "",
-          total_referrals: r.total_referrals ?? 0,
-          total_agc_earned: r.total_earnings_agc ?? 0,
-        };
-      },
-    );
+    const ambassadors: AmbassadorPerformance[] = (referralData ?? []).map(r => {
+      const profile = profiles?.find(p => p.user_id === r.owner_id);
+      return {
+        user_id: r.owner_id,
+        full_name: profile?.full_name ?? null,
+        email: profile?.email ?? '',
+        total_referrals: r.total_referrals ?? 0,
+        total_agc_earned: r.total_earnings_agc ?? 0,
+      };
+    });
 
     setAmbassadors(ambassadors);
   };
@@ -286,25 +248,22 @@ export default function AdminDashboard() {
 
     const { data, count } = await supabase
       .from("votes")
-      .select(
-        `
+      .select(`
         id,
         voter_id,
         nominee_id,
         vote_type,
         created_at,
         nominees!inner(name)
-      `,
-        { count: "exact" },
-      )
+      `, { count: "exact" })
       .order("created_at", { ascending: false })
       .range(offset, offset + limit - 1);
 
-    const logs: VoteLog[] = (data ?? []).map((v) => ({
+    const logs: VoteLog[] = (data ?? []).map(v => ({
       id: v.id,
       voter_id: v.voter_id,
       nominee_id: v.nominee_id,
-      nominee_name: (v.nominees as any)?.name ?? "Unknown",
+      nominee_name: (v.nominees as any)?.name ?? 'Unknown',
       vote_type: v.vote_type,
       created_at: v.created_at!,
     }));
@@ -316,7 +275,7 @@ export default function AdminDashboard() {
 
   const loadRevenueSplits = async () => {
     if (!seasonId) return;
-
+    
     const { data } = await supabase
       .from("revenue_splits")
       .select("*")
@@ -350,10 +309,7 @@ export default function AdminDashboard() {
     setStages((data ?? []) as StageConfig[]);
   };
 
-  const loadAuditLogs = async (
-    page: number,
-    filters?: { action?: string; entity_type?: string },
-  ) => {
+  const loadAuditLogs = async (page: number, filters?: { action?: string; entity_type?: string }) => {
     const limit = 20;
     const offset = (page - 1) * limit;
 
@@ -364,8 +320,7 @@ export default function AdminDashboard() {
       .range(offset, offset + limit - 1);
 
     if (filters?.action) query = query.eq("action", filters.action);
-    if (filters?.entity_type)
-      query = query.eq("entity_type", filters.entity_type);
+    if (filters?.entity_type) query = query.eq("entity_type", filters.entity_type);
 
     const { data, count } = await query;
 
@@ -377,34 +332,10 @@ export default function AdminDashboard() {
   const loadProviderStatus = async () => {
     // Mock provider status - in production, this would ping actual endpoints
     const providers: PaymentProviderStatus[] = [
-      {
-        provider: "PAYSTACK",
-        status: "online",
-        last_ping_at: new Date().toISOString(),
-        response_time_ms: 120,
-        success_rate_24h: 99.8,
-      },
-      {
-        provider: "FLUTTERWAVE",
-        status: "online",
-        last_ping_at: new Date().toISOString(),
-        response_time_ms: 150,
-        success_rate_24h: 99.5,
-      },
-      {
-        provider: "LEMFI",
-        status: "online",
-        last_ping_at: new Date().toISOString(),
-        response_time_ms: 200,
-        success_rate_24h: 98.9,
-      },
-      {
-        provider: "TAPTAPSEND",
-        status: "degraded",
-        last_ping_at: new Date().toISOString(),
-        response_time_ms: 450,
-        success_rate_24h: 95.2,
-      },
+      { provider: 'PAYSTACK', status: 'online', last_ping_at: new Date().toISOString(), response_time_ms: 120, success_rate_24h: 99.8 },
+      { provider: 'FLUTTERWAVE', status: 'online', last_ping_at: new Date().toISOString(), response_time_ms: 150, success_rate_24h: 99.5 },
+      { provider: 'LEMFI', status: 'online', last_ping_at: new Date().toISOString(), response_time_ms: 200, success_rate_24h: 98.9 },
+      { provider: 'TAPTAPSEND', status: 'degraded', last_ping_at: new Date().toISOString(), response_time_ms: 450, success_rate_24h: 95.2 },
     ];
     setProviderStatus(providers);
   };
@@ -412,21 +343,10 @@ export default function AdminDashboard() {
   // Action handlers
   const handleUpdateFXRate = async (newRate: number) => {
     // In production, save to a config table
-    setFinanceData((prev) =>
-      prev
-        ? {
-            ...prev,
-            fx_rate: newRate,
-            fx_rate_updated_at: new Date().toISOString(),
-          }
-        : null,
-    );
+    setFinanceData(prev => prev ? { ...prev, fx_rate: newRate, fx_rate_updated_at: new Date().toISOString() } : null);
   };
 
-  const handleUpdateSplit = async (
-    id: string,
-    updates: Partial<RevenueSplit>,
-  ) => {
+  const handleUpdateSplit = async (id: string, updates: Partial<RevenueSplit>) => {
     const { error } = await supabase
       .from("revenue_splits")
       .update(updates)
@@ -436,10 +356,10 @@ export default function AdminDashboard() {
     await loadRevenueSplits();
   };
 
-  const handleAddSplit = async (
-    split: Omit<RevenueSplit, "id" | "created_at" | "updated_at">,
-  ) => {
-    const { error } = await supabase.from("revenue_splits").insert(split);
+  const handleAddSplit = async (split: Omit<RevenueSplit, 'id' | 'created_at' | 'updated_at'>) => {
+    const { error } = await supabase
+      .from("revenue_splits")
+      .insert(split);
 
     if (error) throw error;
     await loadRevenueSplits();
@@ -448,22 +368,21 @@ export default function AdminDashboard() {
   const handleRunDisbursement = async (notes: string) => {
     if (!seasonId) return;
 
-    const { error } = await supabase.from("disbursement_runs").insert({
-      season_id: seasonId,
-      run_date: new Date().toISOString().split("T")[0],
-      status: "DRAFT",
-      notes,
-      total_amount_usd: 0,
-    });
+    const { error } = await supabase
+      .from("disbursement_runs")
+      .insert({
+        season_id: seasonId,
+        run_date: new Date().toISOString().split('T')[0],
+        status: 'DRAFT',
+        notes,
+        total_amount_usd: 0,
+      });
 
     if (error) throw error;
     await loadDisbursementRuns();
   };
 
-  const handleUpdateStage = async (
-    id: string,
-    updates: Partial<StageConfig>,
-  ) => {
+  const handleUpdateStage = async (id: string, updates: Partial<StageConfig>) => {
     const { error } = await supabase
       .from("stage_config")
       .update(updates)
@@ -479,13 +398,11 @@ export default function AdminDashboard() {
       .select("*")
       .order("created_at", { ascending: false });
 
-    const blob = new Blob([JSON.stringify(data, null, 2)], {
-      type: "application/json",
-    });
+    const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
     const url = URL.createObjectURL(blob);
-    const a = document.createElement("a");
+    const a = document.createElement('a');
     a.href = url;
-    a.download = `audit-logs-${new Date().toISOString().split("T")[0]}.json`;
+    a.download = `audit-logs-${new Date().toISOString().split('T')[0]}.json`;
     a.click();
     URL.revokeObjectURL(url);
     toast.success("Audit logs exported");
@@ -502,7 +419,10 @@ export default function AdminDashboard() {
   }
 
   return (
-    <>
+    <DashboardLayout
+      title="Super Admin Dashboard"
+      breadcrumbs={[{ label: "Admin" }]}
+    >
       <Tabs defaultValue="finance" className="space-y-6">
         <TabsList className="grid w-full grid-cols-2 sm:grid-cols-5 lg:w-auto lg:inline-flex">
           <TabsTrigger value="finance">Finance</TabsTrigger>
@@ -529,11 +449,7 @@ export default function AdminDashboard() {
         <TabsContent value="monitoring" className="space-y-6">
           <RegionNomineeStatsCard />
           <NominationTrendsCard data={nominationTrends} loading={loading} />
-          <TopPerformersCard
-            chapters={chapters}
-            ambassadors={ambassadors}
-            loading={loading}
-          />
+          <TopPerformersCard chapters={chapters} ambassadors={ambassadors} loading={loading} />
           <VoteLogsCard
             logs={voteLogs}
             riskFlags={riskFlags}
@@ -590,7 +506,7 @@ export default function AdminDashboard() {
           />
         </TabsContent>
       </Tabs>
-    </>
+    </DashboardLayout>
   );
 }
 
@@ -602,23 +518,16 @@ function RegionNomineeStatsCard() {
     <div className="rounded-xl border bg-card p-6">
       <div className="flex items-center justify-between mb-4">
         <h3 className="font-semibold text-lg">Nominees by Region</h3>
-        <span className="text-2xl font-bold text-primary">
-          {totalCount.toLocaleString()}
-        </span>
+        <span className="text-2xl font-bold text-primary">{totalCount.toLocaleString()}</span>
       </div>
       {isLoading ? (
         <div className="text-muted-foreground text-sm">Loading...</div>
       ) : (
         <div className="grid grid-cols-2 md:grid-cols-5 gap-3">
           {regionCounts.map((r) => (
-            <div
-              key={r.region_slug}
-              className="rounded-lg bg-muted/50 p-3 text-center"
-            >
+            <div key={r.region_slug} className="rounded-lg bg-muted/50 p-3 text-center">
               <div className="text-xl font-bold">{r.nominee_count}</div>
-              <div className="text-xs text-muted-foreground truncate">
-                {r.region_name}
-              </div>
+              <div className="text-xs text-muted-foreground truncate">{r.region_name}</div>
             </div>
           ))}
         </div>

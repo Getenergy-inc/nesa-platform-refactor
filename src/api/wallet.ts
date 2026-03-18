@@ -1,6 +1,6 @@
 /**
  * NESA-Africa GFA Wallet API Client
- *
+ * 
  * API methods for wallet operations, payments, and withdrawals.
  */
 
@@ -23,22 +23,15 @@ import type {
  * Get the current user's wallet account
  * GET /wallet/me
  */
-export async function getMyWallet(): Promise<
-  ApiResponse<{ account: WalletAccount; balance: WalletBalance }>
-> {
-  return api.get<{ account: WalletAccount; balance: WalletBalance }>(
-    "wallet",
-    "/me",
-  );
+export async function getMyWallet(): Promise<ApiResponse<{ account: WalletAccount; balance: WalletBalance }>> {
+  return api.get<{ account: WalletAccount; balance: WalletBalance }>("wallet", "/me");
 }
 
 /**
  * Get wallet balances (admin only)
  * GET /wallet/balances
  */
-export async function getWalletBalances(): Promise<
-  ApiResponse<WalletBalance[]>
-> {
+export async function getWalletBalances(): Promise<ApiResponse<WalletBalance[]>> {
   return api.get<WalletBalance[]>("wallet", "/balances");
 }
 
@@ -63,7 +56,7 @@ interface TransactionsResponse {
 export async function getWalletTransactions(
   page = 1,
   limit = 20,
-  type?: string,
+  type?: string
 ): Promise<ApiResponse<WalletLedgerEntry[]>> {
   const params: Record<string, string | number> = { page, limit };
   if (type) params.type = type;
@@ -78,20 +71,15 @@ export async function getWalletTransactions(
  * Initialize a top-up payment
  * POST /wallet/topup/init
  */
-export async function initTopup(request: TopupRequest) {
-  // return api.post<TopupResponse>("wallet", "/topup/init", request);
+export async function initTopup(request: TopupRequest): Promise<ApiResponse<TopupResponse>> {
+  return api.post<TopupResponse>("wallet", "/topup/init", request);
 }
 
 /**
  * Get payment intent by ID
  */
-export async function getPaymentIntent(
-  paymentId: string,
-): Promise<ApiResponse<{ payment: PaymentIntent }>> {
-  return api.get<{ payment: PaymentIntent }>(
-    "wallet",
-    `/payments/${paymentId}`,
-  );
+export async function getPaymentIntent(paymentId: string): Promise<ApiResponse<{ payment: PaymentIntent }>> {
+  return api.get<{ payment: PaymentIntent }>("wallet", `/payments/${paymentId}`);
 }
 
 // ============================================================================
@@ -114,7 +102,7 @@ interface WithdrawResponse {
  * POST /wallet/withdraw/request
  */
 export async function requestWithdrawal(
-  payload: WithdrawRequestPayload,
+  payload: WithdrawRequestPayload
 ): Promise<ApiResponse<WithdrawResponse>> {
   return api.post<WithdrawResponse>("wallet", "/withdraw/request", payload);
 }
@@ -124,13 +112,9 @@ export async function requestWithdrawal(
  * POST /wallet/withdraw/approve
  */
 export async function approveWithdrawal(
-  requestId: string,
+  requestId: string
 ): Promise<ApiResponse<{ approved: boolean; request_id: string }>> {
-  return api.post<{ approved: boolean; request_id: string }>(
-    "wallet",
-    "/withdraw/approve",
-    { request_id: requestId },
-  );
+  return api.post<{ approved: boolean; request_id: string }>("wallet", "/withdraw/approve", { request_id: requestId });
 }
 
 /**
@@ -139,15 +123,13 @@ export async function approveWithdrawal(
  */
 export async function rejectWithdrawal(
   requestId: string,
-  reason?: string,
-): Promise<
-  ApiResponse<{ rejected: boolean; request_id: string; refunded_agc: number }>
-> {
-  return api.post<{
-    rejected: boolean;
-    request_id: string;
-    refunded_agc: number;
-  }>("wallet", "/withdraw/reject", { request_id: requestId, reason });
+  reason?: string
+): Promise<ApiResponse<{ rejected: boolean; request_id: string; refunded_agc: number }>> {
+  return api.post<{ rejected: boolean; request_id: string; refunded_agc: number }>(
+    "wallet",
+    "/withdraw/reject",
+    { request_id: requestId, reason }
+  );
 }
 
 // ============================================================================
@@ -162,12 +144,12 @@ export const walletAdmin = {
   async listWallets(
     ownerType?: string,
     limit = 50,
-    offset = 0,
+    offset = 0
   ): Promise<ApiResponse<{ accounts: WalletAccount[]; total: number }>> {
     return api.get<{ accounts: WalletAccount[]; total: number }>(
       "wallet",
       "/admin/accounts",
-      { owner_type: ownerType, limit, offset },
+      { owner_type: ownerType, limit, offset }
     );
   },
 
@@ -183,7 +165,7 @@ export const walletAdmin = {
     options?: {
       usdAmount?: number;
       isWithdrawable?: boolean;
-    },
+    }
   ): Promise<ApiResponse<WalletLedgerEntry>> {
     return api.post<WalletLedgerEntry>("wallet", "/admin/credit", {
       account_id: accountId,
@@ -206,7 +188,7 @@ export const walletAdmin = {
     description: string,
     options?: {
       usdAmount?: number;
-    },
+    }
   ): Promise<ApiResponse<WalletLedgerEntry>> {
     return api.post<WalletLedgerEntry>("wallet", "/admin/debit", {
       account_id: accountId,
@@ -221,13 +203,8 @@ export const walletAdmin = {
    * Get platform wallet
    * GET /wallet/admin/platform
    */
-  async getPlatformWallet(): Promise<
-    ApiResponse<{ account: WalletAccount; balance: WalletBalance }>
-  > {
-    return api.get<{ account: WalletAccount; balance: WalletBalance }>(
-      "wallet",
-      "/admin/platform",
-    );
+  async getPlatformWallet(): Promise<ApiResponse<{ account: WalletAccount; balance: WalletBalance }>> {
+    return api.get<{ account: WalletAccount; balance: WalletBalance }>("wallet", "/admin/platform");
   },
 };
 
@@ -238,8 +215,8 @@ export const walletAdmin = {
 /**
  * Format AGC amount with currency symbol
  */
-export function formatAgc(amount: string | 0): string {
-  return `${amount.toLocaleString()} AGC`;
+export function formatAgc(amount: number): string {
+  return `${amount.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })} AGC`;
 }
 
 /**

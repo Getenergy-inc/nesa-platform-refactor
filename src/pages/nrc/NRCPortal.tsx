@@ -31,8 +31,7 @@ function NRCPortalContent() {
     return myQueue.filter((item) => {
       if (!item.due_date) return false;
       const dueDate = new Date(item.due_date);
-      const hoursUntilDue =
-        (dueDate.getTime() - now.getTime()) / (1000 * 60 * 60);
+      const hoursUntilDue = (dueDate.getTime() - now.getTime()) / (1000 * 60 * 60);
       return hoursUntilDue < 48;
     });
   }, [myQueue]);
@@ -59,8 +58,7 @@ function NRCPortalContent() {
               </div>
               <div className="flex-1">
                 <p className="font-medium">
-                  {urgentItems.length} nomination
-                  {urgentItems.length > 1 ? "s" : ""} due within 48 hours
+                  {urgentItems.length} nomination{urgentItems.length > 1 ? "s" : ""} due within 48 hours
                 </p>
                 <p className="text-sm text-muted-foreground">
                   Review these nominations before the deadline
@@ -111,7 +109,7 @@ function NRCPortalContent() {
             </CardContent>
           </Card>
 
-          {/* <Card>
+          <Card>
             <CardHeader className="flex flex-row items-center justify-between pb-2">
               <CardTitle className="text-sm font-medium text-muted-foreground">
                 Total Queue
@@ -122,10 +120,12 @@ function NRCPortalContent() {
               <div className="text-2xl font-bold">
                 {stats?.total_queue_items || 0}
               </div>
-              <p className="text-xs text-muted-foreground">awaiting review</p>
+              <p className="text-xs text-muted-foreground">
+                awaiting review
+              </p>
             </CardContent>
-          </Card> */}
-          {/* 
+          </Card>
+
           <Card>
             <CardHeader className="flex flex-row items-center justify-between pb-2">
               <CardTitle className="text-sm font-medium text-muted-foreground">
@@ -141,7 +141,7 @@ function NRCPortalContent() {
                 reviews this season
               </p>
             </CardContent>
-          </Card> */}
+          </Card>
         </div>
 
         {/* Quick Actions */}
@@ -176,8 +176,7 @@ function NRCPortalContent() {
                           {item.nomination?.nominee_name || "Unknown"}
                         </p>
                         <p className="text-xs text-muted-foreground">
-                          {item.nomination?.subcategory?.category?.name ||
-                            "Unknown Category"}
+                          {item.nomination?.subcategory?.category?.name || "Unknown Category"}
                         </p>
                       </div>
                       <Badge
@@ -201,7 +200,7 @@ function NRCPortalContent() {
           </Card>
 
           {/* Team Overview */}
-          {/* <Card>
+          <Card>
             <CardHeader className="flex flex-row items-center justify-between">
               <CardTitle className="text-base">NRC Team</CardTitle>
               <Button variant="ghost" size="sm" asChild>
@@ -246,7 +245,7 @@ function NRCPortalContent() {
                 )}
               </div>
             </CardContent>
-          </Card> */}
+          </Card>
         </div>
       </div>
     </NRCLayout>
@@ -255,7 +254,7 @@ function NRCPortalContent() {
 
 export default function NRCPortal() {
   return (
-    <ProtectedRoute requiredRoles={["NRC"]}>
+    <ProtectedRoute requiredRoles={["nrc", "admin"]}>
       <NRCPortalContent />
     </ProtectedRoute>
   );
