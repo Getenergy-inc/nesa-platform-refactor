@@ -28,7 +28,7 @@ import Programs from "./pages/Programs";
 import Login from "./pages/auth/Login";
 import Register from "./pages/auth/Register";
 import OTPVerification from "./pages/auth/OTPVerification";
-import ForgotPassword from "./pages/auth/ForgotPassword";
+import ForgotPassword from "./pages/auth/forgotPassword";
 import ResetPassword from "./pages/auth/ResetPassword";
 import Nominate from "./pages/Nominate";
 import Dashboard from "./pages/Dashboard";
