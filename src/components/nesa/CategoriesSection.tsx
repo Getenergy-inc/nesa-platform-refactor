@@ -134,11 +134,19 @@ export function CategoriesSection() {
         <motion.div className="mb-16" initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }}>
           <TierGroupHeader icon={Crown} title="Africa Education Icon — Lifetime Achievement" subtitle="Jury selection only · 2005–2025" count={groups.lifetime.length} color="bg-purple-600" />
           <div className="grid sm:grid-cols-1 lg:grid-cols-2 gap-5 max-w-3xl">
-            {groups.lifetime.map((cat, i) => (
+            {groups.lifetime.slice(0, 3).map((cat, i) => (
               <motion.div key={cat.id} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.04 }} viewport={{ once: true }}>
                 <CategoryCard cat={cat} />
               </motion.div>
             ))}
+          </div>
+          <div className="mt-4">
+            <Link to="/categories">
+              <Button variant="outline" size="sm" className="border-gold/40 text-gold hover:bg-gold/10 rounded-full">
+                See All Subcategories
+                <ChevronRight className="ml-2 h-3.5 w-3.5" />
+              </Button>
+            </Link>
           </div>
         </motion.div>
 
@@ -146,11 +154,19 @@ export function CategoriesSection() {
         <motion.div className="mb-16" initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }}>
           <TierGroupHeader icon={Trophy} title="Blue Garnet — Competitive Excellence" subtitle="Public voting → Jury evaluation" count={groups.blueGarnet.length} color="bg-blue-600" />
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
-            {groups.blueGarnet.map((cat, i) => (
+            {groups.blueGarnet.slice(0, 3).map((cat, i) => (
               <motion.div key={cat.id} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.04 }} viewport={{ once: true }}>
                 <CategoryCard cat={cat} />
               </motion.div>
             ))}
+          </div>
+          <div className="mt-4">
+            <Link to="/categories">
+              <Button variant="outline" size="sm" className="border-gold/40 text-gold hover:bg-gold/10 rounded-full">
+                See All Subcategories
+                <ChevronRight className="ml-2 h-3.5 w-3.5" />
+              </Button>
+            </Link>
           </div>
         </motion.div>
 
@@ -158,11 +174,19 @@ export function CategoriesSection() {
         <motion.div className="mb-16" initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }}>
           <TierGroupHeader icon={Shield} title="Platinum — Institutional Leadership" subtitle="NRC verification · Governance criteria" count={groups.platinum.length} color="bg-slate-500" />
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
-            {groups.platinum.map((cat, i) => (
+            {groups.platinum.slice(0, 3).map((cat, i) => (
               <motion.div key={cat.id} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.04 }} viewport={{ once: true }}>
                 <CategoryCard cat={cat} />
               </motion.div>
             ))}
+          </div>
+          <div className="mt-4">
+            <Link to="/categories">
+              <Button variant="outline" size="sm" className="border-gold/40 text-gold hover:bg-gold/10 rounded-full">
+                See All Subcategories
+                <ChevronRight className="ml-2 h-3.5 w-3.5" />
+              </Button>
+            </Link>
           </div>
         </motion.div>
 
