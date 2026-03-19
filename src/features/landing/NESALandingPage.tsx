@@ -7,7 +7,6 @@ import { Helmet } from "react-helmet-async";
 import { TrophyHeroSection } from "@/components/nesa/TrophyHeroSection";
 import { TrustLogosStrip } from "@/components/nesa/TrustLogosStrip";
 import { QuickActionBar } from "@/components/nesa/QuickActionBar";
-import { LandingNomineeShowcase } from "@/components/nesa/LandingNomineeShowcase";
 
 import { CountdownSection } from "@/components/nesa/CountdownSection";
 import { NESAFooter } from "@/components/nesa/NESAFooter";
@@ -46,7 +45,7 @@ export function NESALandingPage() {
 
       <ScrollProgressIndicator />
 
-      <div className="min-h-screen bg-charcoal pt-14 sm:pt-16 pb-16">
+      <div className="min-h-screen bg-charcoal pt-14 sm:pt-16 pb-16 text-center md:text-left">
         <NESAHeader />
         {/* ═══ 1. HERO — Authority ═══ */}
         <TrophyHeroSection />
@@ -57,10 +56,7 @@ export function NESALandingPage() {
         {/* ═══ 3. Quick Actions ═══ */}
         <QuickActionBar />
 
-        {/* ═══ 4. NOMINEE SHOWCASE — Primary Discovery ═══ */}
-        <LandingNomineeShowcase />
-        
-        {/* ═══ 5. Countdown ═══ */}
+        {/* ═══ 4. Countdown ═══ */}
         <CountdownSection />
         
         {/* ═══ 6. Award Categories ═══ */}

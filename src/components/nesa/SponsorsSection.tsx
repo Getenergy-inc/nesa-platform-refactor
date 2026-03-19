@@ -46,9 +46,6 @@ export function SponsorsSection() {
               </span>
             </div>
             <div className="hidden md:block h-6 w-px bg-gold/20" />
-            <span className="hidden md:block text-white/50 text-sm">
-              {t("landing.sponsors.organizationsCount", { count: activeSponsors.length })}
-            </span>
           </div>
 
           {/* Center: Logo Display */}
