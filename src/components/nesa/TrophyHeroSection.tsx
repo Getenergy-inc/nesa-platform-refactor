@@ -1,4 +1,4 @@
-import { Trophy, ArrowRight, Sparkles, Users, Globe, Calendar, ChevronDown, Play, RotateCcw } from "lucide-react";
+import { Trophy, ArrowRight, Sparkles, Users, Globe, Calendar, Play, RotateCcw } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { Button } from "@/components/ui/button";
@@ -37,10 +37,6 @@ export function TrophyHeroSection() {
   }, []);
 
   const bannerText = getBannerText();
-
-  const scrollToContent = () => {
-    window.scrollTo({ top: window.innerHeight * 0.85, behavior: 'smooth' });
-  };
 
   return (
     <section className="relative min-h-[92vh] sm:min-h-[95vh] flex items-center bg-charcoal overflow-hidden">
@@ -96,7 +92,7 @@ export function TrophyHeroSection() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.3 }}
-              className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-[3.5rem] xl:text-7xl font-bold text-white mb-5 leading-[1.08]"
+              className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-5xl xl:text-6xl font-bold text-white mb-4 leading-[1.12]"
             >
               {t("landing.trophyHero.headline")}{" "}
               <span className="text-gold bg-gradient-to-r from-gold to-amber-400 bg-clip-text text-transparent">
@@ -108,7 +104,7 @@ export function TrophyHeroSection() {
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.4 }}
-              className="text-white/60 text-xs sm:text-sm font-medium mb-2 tracking-widest uppercase italic"
+              className="text-white/70 text-[11px] sm:text-xs font-medium mb-2 tracking-widest uppercase italic"
             >
               {t("landing.trophyHero.slogan")}
             </motion.p>
@@ -117,7 +113,7 @@ export function TrophyHeroSection() {
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.5 }}
-              className="text-gold/80 text-sm sm:text-base font-semibold mb-3 tracking-wide uppercase"
+              className="text-gold/90 text-sm font-semibold mb-3 tracking-wide uppercase"
             >
               {t("landing.trophyHero.tagline")}
             </motion.p>
@@ -126,7 +122,7 @@ export function TrophyHeroSection() {
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.55 }}
-              className="text-white/75 text-base sm:text-lg mb-8 max-w-xl mx-auto lg:mx-0 leading-relaxed"
+              className="text-white/85 text-sm sm:text-base mb-6 max-w-xl mx-auto lg:mx-0 leading-relaxed"
             >
               {t("landing.trophyHero.valueProposition")}
             </motion.p>
@@ -143,8 +139,8 @@ export function TrophyHeroSection() {
                   transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
                 >
                   <Button
-                    size="lg"
-                    className="w-full sm:w-auto bg-gold hover:bg-gold-dark text-charcoal font-bold rounded-full px-10 gap-2.5 shadow-lg shadow-gold/25 hover:shadow-gold/40 transition-all h-13 text-base group"
+                    size="default"
+                    className="w-full sm:w-auto bg-gold hover:bg-gold-dark text-charcoal font-semibold rounded-full px-6 gap-2 shadow-lg shadow-gold/25 hover:shadow-gold/40 transition-colors h-10 text-sm group"
                   >
                     <Trophy className="h-5 w-5 group-hover:rotate-12 transition-transform" />
                     {t("landing.trophyHero.nominateNow")}
@@ -154,9 +150,9 @@ export function TrophyHeroSection() {
               </Link>
               <a href="#nominees">
                 <Button
-                  size="lg"
+                  size="default"
                   variant="outline"
-                  className="w-full sm:w-auto border-gold/50 text-gold hover:bg-gold/10 hover:border-gold rounded-full px-8 gap-2 h-13 text-base transition-all"
+                  className="w-full sm:w-auto border-gold/50 text-gold hover:bg-gold/10 hover:border-gold rounded-full px-5 gap-2 h-10 text-sm transition-colors"
                 >
                   <Users className="h-5 w-5" />
                   Explore Nominees
@@ -296,21 +292,6 @@ export function TrophyHeroSection() {
         </div>
       </div>
 
-      <motion.button
-        onClick={scrollToContent}
-        className="absolute bottom-6 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-1 text-white/40 hover:text-gold transition-colors"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 1.2 }}
-      >
-        <span className="text-[10px] uppercase tracking-widest">{t("landing.trophyHero.scrollHint")}</span>
-        <motion.div
-          animate={{ y: [0, 6, 0] }}
-          transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
-        >
-          <ChevronDown className="h-5 w-5" />
-        </motion.div>
-      </motion.button>
     </section>
   );
 }

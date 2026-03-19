@@ -494,9 +494,8 @@ const mobileQuickActions = [
 export const MobileBottomNav = forwardRef<HTMLElement, object>(
   function MobileBottomNav(_, ref) {
     const location = useLocation();
-
     return (
-      <nav
+      <nav 
         ref={ref}
         className="fixed bottom-0 left-0 right-0 z-40 lg:hidden bg-charcoal/95 backdrop-blur-md border-t border-gold/20 safe-area-inset-bottom"
       >

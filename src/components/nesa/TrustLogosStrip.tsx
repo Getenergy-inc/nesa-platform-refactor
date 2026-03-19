@@ -71,13 +71,13 @@ export function TrustLogosStrip() {
         <div className="container">
           {/* Header Label */}
           <motion.div
-            className="flex items-center justify-center gap-2 mb-5"
+            className="flex flex-col sm:flex-row items-center justify-center gap-2 mb-5 text-center"
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.4 }}
           >
             <Shield className="h-3.5 w-3.5 text-gold/60" />
-            <span className="text-xs text-white/40 uppercase tracking-[0.2em] font-medium">
+            <span className="text-xs text-white/40 uppercase tracking-[0.2em] font-medium text-center">
               Trusted by Endorsers, Institutions &amp; Strategic Partners
             </span>
           </motion.div>
