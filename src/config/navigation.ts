@@ -64,11 +64,6 @@ export interface NavSection {
 
 export const MAIN_NAV: NavItem[] = [
   {
-    label: "Home",
-    href: "/",
-    icon: Home,
-  },
-  {
     label: "About",
     href: "/about",
     icon: Info,

@@ -13,7 +13,8 @@ import { CountdownSection } from "@/components/nesa/CountdownSection";
 import { NESAFooter } from "@/components/nesa/NESAFooter";
 import { NESAHeader } from "@/components/nesa/NESAHeader";
 import { LazySection } from "@/components/ui/lazy-section";
-import { TopPageNav, BottomPageNav } from "@/components/navigation/PageNavigation";
+import { BottomPageNav } from "@/components/navigation/PageNavigation";
+import { MobileBottomNav } from "@/components/navigation/MainNav";
 import { ScrollProgressIndicator } from "@/components/nesa/ScrollProgressIndicator";
 import { ExitIntentPopup } from "@/components/nesa/ExitIntentPopup";
 import { BackToTopButton } from "@/components/ui/back-to-top";
@@ -45,10 +46,8 @@ export function NESALandingPage() {
 
       <ScrollProgressIndicator />
 
-      <div className="min-h-screen bg-charcoal pb-16">
+      <div className="min-h-screen bg-charcoal pt-14 sm:pt-16 pb-16">
         <NESAHeader />
-        <TopPageNav />
-        
         {/* ═══ 1. HERO — Authority ═══ */}
         <TrophyHeroSection />
         
@@ -96,6 +95,7 @@ export function NESALandingPage() {
       {/* Engagement Hooks */}
       <ExitIntentPopup />
       <BackToTopButton />
+      <MobileBottomNav />
     </>
   );
 }
