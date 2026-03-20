@@ -118,9 +118,9 @@ export function WalletBalanceCard({
         </div>
 
         {/* Exchange rate */}
-        <div className="mt-5 text-[11px] text-amber-400/40 text-right tracking-wide">
+        {/* <div className="mt-5 text-[11px] text-amber-400/40 text-right tracking-wide">
           1 AGC ≈ $0.10 USD
-        </div>
+        </div> */}
       </CardContent>
     </Card>
   );

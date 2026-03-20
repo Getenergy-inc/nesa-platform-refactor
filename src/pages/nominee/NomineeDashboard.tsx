@@ -4,7 +4,16 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Card, CardContent } from "@/components/ui/card";
-import { AlertCircle, Home, Menu, X, ChevronDown } from "lucide-react";
+import {
+  AlertCircle,
+  Home,
+  Menu,
+  X,
+  ChevronDown,
+  Link as LinkIcon,
+  Check,
+  Copy,
+} from "lucide-react";
 import {
   NominationDashboardItem,
   NomineeDashboardData,
@@ -42,6 +51,13 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
+import { toast } from "sonner";
 
 export default function NomineeDashboard() {
   const navigate = useNavigate();
@@ -55,6 +71,7 @@ export default function NomineeDashboard() {
   >(null);
   const [selectNominationDetails, setSelectedNominationDetails] =
     useState<updateNomination | null>(null);
+  const [copiedId, setCopiedId] = useState<string | null>(null);
 
   // Mobile sidebar state
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -129,6 +146,26 @@ export default function NomineeDashboard() {
     navigate("/");
   };
 
+  const handleCopyLink = async (nominationId: string, category: string) => {
+    const link = `${window.location.origin}/nominees/${nominationId}`;
+
+    try {
+      await navigator.clipboard.writeText(link);
+      setCopiedId(nominationId);
+      toast.success(`Link to ${category} nomination copied to clipboard!`, {
+        duration: 3000,
+        icon: <LinkIcon className="h-4 w-4" />,
+      });
+
+      // Reset copied state after 2 seconds
+      setTimeout(() => {
+        setCopiedId(null);
+      }, 2000);
+    } catch (err) {
+      toast.error("Failed to copy link. Please try again.");
+    }
+  };
+
   if (loading) {
     return (
       <div className="min-h-screen px-4 sm:px-6 py-8 max-w-6xl mx-auto space-y-5">
@@ -176,309 +213,323 @@ export default function NomineeDashboard() {
   };
 
   return (
-    <div className="min-h-screen bg-background flex flex-col">
-      {/* Header with mobile menu button */}
-      <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-        <div className="container flex h-14 sm:h-16 items-center justify-between px-4">
-          <div className="flex items-center gap-2">
-            {/* Mobile menu trigger */}
-            <Sheet open={sidebarOpen} onOpenChange={setSidebarOpen}>
-              <SheetTrigger asChild>
-                <Button
-                  variant="ghost"
-                  size="icon"
-                  className="lg:hidden"
-                  aria-label="Open menu"
+    <TooltipProvider>
+      <div className="min-h-screen bg-background flex flex-col">
+        {/* Header with mobile menu button */}
+        <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+          <div className="container flex h-14 sm:h-16 items-center justify-between px-4">
+            <div className="flex items-center gap-2">
+              {/* Mobile menu trigger */}
+              <Sheet open={sidebarOpen} onOpenChange={setSidebarOpen}>
+                <SheetTrigger asChild>
+                  <Button
+                    variant="ghost"
+                    size="icon"
+                    className="lg:hidden"
+                    aria-label="Open menu"
+                  >
+                    <Menu className="h-5 w-5" />
+                  </Button>
+                </SheetTrigger>
+                <SheetContent
+                  side="left"
+                  className="w-[280px] sm:w-[320px] p-0"
                 >
-                  <Menu className="h-5 w-5" />
-                </Button>
-              </SheetTrigger>
-              <SheetContent side="left" className="w-[280px] sm:w-[320px] p-0">
-                <SheetHeader className="p-4 border-b">
-                  <SheetTitle className="flex items-center gap-2">
-                    <Avatar className="h-8 w-8">
-                      <AvatarImage src={user?.profilePic} />
-                      <AvatarFallback>{userInitials}</AvatarFallback>
-                    </Avatar>
-                    <div className="flex flex-col">
-                      <span className="text-sm font-medium">
-                        {user?.firstName} {user?.lastName}
-                      </span>
-                      <span className="text-xs text-muted-foreground truncate">
-                        {user?.email}
-                      </span>
-                    </div>
-                  </SheetTitle>
-                </SheetHeader>
-                <ScrollArea className="h-[calc(100vh-5rem)]">
-                  <div className="p-4 space-y-4">
-                    <div className="space-y-1">
-                      <Badge variant="outline" className="mb-2">
-                        Nominee
-                      </Badge>
-                      <nav className="space-y-1">
+                  <SheetHeader className="p-4 border-b">
+                    <SheetTitle className="flex items-center gap-2">
+                      <Avatar className="h-8 w-8">
+                        <AvatarImage src={user?.profilePic} />
+                        <AvatarFallback>{userInitials}</AvatarFallback>
+                      </Avatar>
+                      <div className="flex flex-col">
+                        <span className="text-sm font-medium">
+                          {user?.firstName} {user?.lastName}
+                        </span>
+                        <span className="text-xs text-muted-foreground truncate">
+                          {user?.email}
+                        </span>
+                      </div>
+                    </SheetTitle>
+                  </SheetHeader>
+                  <ScrollArea className="h-[calc(100vh-5rem)]">
+                    <div className="p-4 space-y-4">
+                      <div className="space-y-1">
+                        <Badge variant="outline" className="mb-2">
+                          Nominee
+                        </Badge>
+                        <nav className="space-y-1">
+                          <Button
+                            variant="ghost"
+                            className="w-full justify-start"
+                            asChild
+                          >
+                            <Link to="/" onClick={() => setSidebarOpen(false)}>
+                              <HomeIcon className="mr-2 h-4 w-4" />
+                              Home
+                            </Link>
+                          </Button>
+                          <Button
+                            variant="ghost"
+                            className="w-full justify-start"
+                            asChild
+                          >
+                            <Link
+                              to="/nominee/dashboard"
+                              onClick={() => setSidebarOpen(false)}
+                            >
+                              <HomeIcon className="mr-2 h-4 w-4" />
+                              Dashboard
+                            </Link>
+                          </Button>
+                        </nav>
+                      </div>
+                      <div className="pt-4 border-t">
                         <Button
                           variant="ghost"
-                          className="w-full justify-start"
-                          asChild
+                          className="w-full justify-start text-red-500 hover:text-red-600 hover:bg-red-50"
+                          onClick={() => {
+                            handleSignOut();
+                            setSidebarOpen(false);
+                          }}
                         >
-                          <Link to="/" onClick={() => setSidebarOpen(false)}>
-                            <HomeIcon className="mr-2 h-4 w-4" />
-                            Home
-                          </Link>
+                          <LogOut className="mr-2 h-4 w-4" />
+                          Sign Out
                         </Button>
+                      </div>
+                    </div>
+                  </ScrollArea>
+                </SheetContent>
+              </Sheet>
+
+              {/* Logo/Title */}
+              <Link to="/" className="flex items-center gap-2">
+                <span className="font-bold text-lg sm:text-xl">
+                  NESA Africa
+                </span>
+              </Link>
+            </div>
+
+            {/* Desktop navigation */}
+            <div className="hidden lg:flex items-center gap-4">
+              <span className="text-sm text-muted-foreground">
+                Welcome, {user?.firstName}
+              </span>
+              <Button variant="outline" size="sm" onClick={handleSignOut}>
+                Sign Out
+              </Button>
+            </div>
+
+            {/* Mobile user indicator */}
+            <div className="flex lg:hidden items-center gap-2">
+              <Avatar className="h-8 w-8">
+                <AvatarFallback>{userInitials}</AvatarFallback>
+              </Avatar>
+            </div>
+          </div>
+        </header>
+
+        {/* MAIN CONTENT */}
+        <main className="flex-1 w-full px-4 sm:px-6 lg:px-8 py-6 sm:py-8 max-w-7xl mx-auto space-y-6 sm:space-y-8">
+          {/* Welcome */}
+          <div>
+            <h1 className="text-xl sm:text-2xl lg:text-3xl font-bold">
+              Welcome back, {user?.firstName}
+            </h1>
+            <p className="text-xs sm:text-sm text-muted-foreground">
+              Manage your nominations and certificates.
+            </p>
+          </div>
+
+          {/* Nominations Section - Improved for mobile */}
+          <div className="space-y-4">
+            <div className="flex items-center justify-between">
+              <h2 className="text-sm sm:text-base font-semibold">
+                Your Nominations
+              </h2>
+              <Badge variant="outline" className="text-xs">
+                {nominee.nominations.length} total
+              </Badge>
+            </div>
+
+            {/* Mobile: Dropdown selector for nominations */}
+            <div className="sm:hidden">
+              <Select
+                value={selectedNominationId || undefined}
+                onValueChange={setSelectedNominationId}
+              >
+                <SelectTrigger className="w-full">
+                  <SelectValue placeholder="Select a nomination" />
+                </SelectTrigger>
+                <SelectContent>
+                  {nominee.nominations.map((nom) => (
+                    <SelectItem key={nom.id} value={nom.id} className="pr-8">
+                      <div className="flex flex-col items-start py-1">
+                        <span className="font-medium text-sm">
+                          {truncateCategory(nom.category, 25)}
+                        </span>
+                        <span className="text-xs text-muted-foreground">
+                          {nom.subcategory}
+                        </span>
+                      </div>
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </div>
+
+            {/* Desktop: Original selector */}
+            <div className="hidden sm:block">
+              <NominationSelector
+                nominations={nominee.nominations}
+                selectedId={selectedNominationId}
+                onSelect={setSelectedNominationId}
+              />
+            </div>
+          </div>
+
+          {/* Content */}
+          {selectedNomination && (
+            <Card className="overflow-hidden">
+              <CardContent className="p-4 sm:p-6 lg:p-8 space-y-6">
+                {/* Title and Copy Link Button */}
+                <div className="space-y-3">
+                  <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3">
+                    <div className="space-y-1 flex-1 min-w-0">
+                      <h2 className="text-base sm:text-lg font-semibold leading-tight break-words">
+                        {selectedNomination.category}
+                      </h2>
+                      <p className="text-xs sm:text-sm text-muted-foreground break-words">
+                        {selectedNomination.subcategory}
+                      </p>
+                    </div>
+
+                    {/* Copy Link Button */}
+                    <Tooltip>
+                      <TooltipTrigger asChild>
                         <Button
-                          variant="ghost"
-                          className="w-full justify-start"
-                          asChild
+                          variant="outline"
+                          size="sm"
+                          onClick={() =>
+                            handleCopyLink(
+                              selectedNomination.id,
+                              selectedNomination.category,
+                            )
+                          }
+                          className="flex-shrink-0 gap-2"
                         >
-                          <Link
-                            to="/nominee/dashboard"
-                            onClick={() => setSidebarOpen(false)}
-                          >
-                            <HomeIcon className="mr-2 h-4 w-4" />
-                            Dashboard
-                          </Link>
+                          {copiedId === selectedNomination.id ? (
+                            <>
+                              <Check className="h-4 w-4 text-green-500" />
+                              <span className="text-sm">Copied!</span>
+                            </>
+                          ) : (
+                            <>
+                              <LinkIcon className="h-4 w-4" />
+                              <span className="hidden sm:inline">
+                                Copy Link
+                              </span>
+                              <span className="sm:hidden">Share</span>
+                            </>
+                          )}
                         </Button>
-                        {/* <Button
-                          variant="ghost"
-                          className="w-full justify-start"
-                          asChild
-                        >
-                          <Link
-                            to="/nominee/profile"
-                            onClick={() => setSidebarOpen(false)}
-                          >
-                            <FileText className="mr-2 h-4 w-4" />
-                            My Profile
-                          </Link>
-                        </Button> */}
-                        {/* <Button
-                          variant="ghost"
-                          className="w-full justify-start"
-                          asChild
-                        >
-                          <Link
-                            to="/nominee/nominations"
-                            onClick={() => setSidebarOpen(false)}
-                          >
-                            <Award className="mr-2 h-4 w-4" />
-                            My Nominations
-                          </Link>
-                        </Button> */}
-                        {/* <Button
-                          variant="ghost"
-                          className="w-full justify-start"
-                          asChild
-                        >
-                          <Link
-                            to="/nominee/settings"
-                            onClick={() => setSidebarOpen(false)}
-                          >
-                            <Settings className="mr-2 h-4 w-4" />
-                            Settings
-                          </Link>
-                        </Button> */}
-                      </nav>
-                    </div>
-                    <div className="pt-4 border-t">
-                      <Button
-                        variant="ghost"
-                        className="w-full justify-start text-red-500 hover:text-red-600 hover:bg-red-50"
-                        onClick={() => {
-                          handleSignOut();
-                          setSidebarOpen(false);
-                        }}
-                      >
-                        <LogOut className="mr-2 h-4 w-4" />
-                        Sign Out
-                      </Button>
-                    </div>
+                      </TooltipTrigger>
+                      <TooltipContent>
+                        <p>Copy link to share this nomination profile</p>
+                      </TooltipContent>
+                    </Tooltip>
                   </div>
-                </ScrollArea>
-              </SheetContent>
-            </Sheet>
 
-            {/* Logo/Title */}
-            <Link to="/" className="flex items-center gap-2">
-              <span className="font-bold text-lg sm:text-xl">NESA Africa</span>
-            </Link>
-          </div>
-
-          {/* Desktop navigation */}
-          <div className="hidden lg:flex items-center gap-4">
-            <span className="text-sm text-muted-foreground">
-              Welcome, {user?.firstName}
-            </span>
-            <Button variant="outline" size="sm" onClick={handleSignOut}>
-              Sign Out
-            </Button>
-          </div>
-
-          {/* Mobile user indicator */}
-          <div className="flex lg:hidden items-center gap-2">
-            <Avatar className="h-8 w-8">
-              <AvatarFallback>{userInitials}</AvatarFallback>
-            </Avatar>
-          </div>
-        </div>
-      </header>
-
-      {/* MAIN CONTENT */}
-      <main className="flex-1 w-full px-4 sm:px-6 lg:px-8 py-6 sm:py-8 max-w-7xl mx-auto space-y-6 sm:space-y-8">
-        {/* Welcome */}
-        <div>
-          <h1 className="text-xl sm:text-2xl lg:text-3xl font-bold">
-            Welcome back, {user?.firstName}
-          </h1>
-          <p className="text-xs sm:text-sm text-muted-foreground">
-            Manage your nominations and certificates.
-          </p>
-        </div>
-
-        {/* Nominations Section - Improved for mobile */}
-        <div className="space-y-4">
-          <div className="flex items-center justify-between">
-            <h2 className="text-sm sm:text-base font-semibold">
-              Your Nominations
-            </h2>
-            <Badge variant="outline" className="text-xs">
-              {nominee.nominations.length} total
-            </Badge>
-          </div>
-
-          {/* Mobile: Dropdown selector for nominations */}
-          <div className="sm:hidden">
-            <Select
-              value={selectedNominationId || undefined}
-              onValueChange={setSelectedNominationId}
-            >
-              <SelectTrigger className="w-full">
-                <SelectValue placeholder="Select a nomination" />
-              </SelectTrigger>
-              <SelectContent>
-                {nominee.nominations.map((nom) => (
-                  <SelectItem key={nom.id} value={nom.id} className="pr-8">
-                    <div className="flex flex-col items-start py-1">
-                      <span className="font-medium text-sm">
-                        {truncateCategory(nom.category, 25)}
-                      </span>
-                      <span className="text-xs text-muted-foreground">
-                        {nom.subcategory}
-                      </span>
+                  {/* Optional: Display the link preview on mobile? */}
+                  {copiedId === selectedNomination.id && (
+                    <div className="text-xs text-green-600 bg-green-50 dark:bg-green-950/20 p-2 rounded-md sm:hidden">
+                      ✓ Link copied to clipboard!
                     </div>
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
-          </div>
-
-          {/* Desktop: Original selector */}
-          <div className="hidden sm:block">
-            <NominationSelector
-              nominations={nominee.nominations}
-              selectedId={selectedNominationId}
-              onSelect={setSelectedNominationId}
-            />
-          </div>
-        </div>
-
-        {/* Content */}
-        {selectedNomination && (
-          <Card className="overflow-hidden">
-            <CardContent className="p-4 sm:p-6 lg:p-8 space-y-6">
-              {/* Title - Improved for mobile */}
-              <div className="space-y-1">
-                <h2 className="text-base sm:text-lg font-semibold leading-tight">
-                  {selectedNomination.category}
-                </h2>
-                <p className="text-xs sm:text-sm text-muted-foreground break-words">
-                  {selectedNomination.subcategory}
-                </p>
-              </div>
-
-              {/* Stats - Responsive grid */}
-              <Card className="overflow-hidden">
-                <CardContent className="p-3 sm:p-5">
-                  <NomineeStatsGrid
-                    endorsementCount={selectedNomination.endorsement_count}
-                    endorsementGoal={200}
-                    publicVotes={selectedNomination.public_votes}
-                  />
-                </CardContent>
-              </Card>
-
-              {/* Tabs - Improved mobile scrolling */}
-              <Tabs defaultValue="overview" className="space-y-4">
-                {/* Scrollable tabs on mobile with better UX */}
-                <div className="relative">
-                  <div className="absolute right-0 top-0 bottom-0 w-8 bg-gradient-to-l from-background to-transparent pointer-events-none sm:hidden" />
-                  <div className="overflow-x-auto pb-1 scrollbar-hide">
-                    <TabsList className="flex w-max min-w-full sm:w-auto gap-1">
-                      <TabsTrigger value="overview" className="px-3 sm:px-4">
-                        Overview
-                      </TabsTrigger>
-                      <TabsTrigger
-                        value="certificates"
-                        className="px-3 sm:px-4"
-                      >
-                        Certificates
-                        {selectedNomination.certificates?.length > 0 && (
-                          <Badge
-                            variant="secondary"
-                            className="ml-2 text-[10px] px-1.5"
-                          >
-                            {selectedNomination.certificates.length}
-                          </Badge>
-                        )}
-                      </TabsTrigger>
-                      <TabsTrigger value="edit" className="px-3 sm:px-4">
-                        Edit
-                      </TabsTrigger>
-                    </TabsList>
-                  </div>
+                  )}
                 </div>
 
-                <TabsContent value="overview" className="mt-4">
-                  <NominationOverviewCard nomination={selectedNomination} />
-                </TabsContent>
+                {/* Stats - Responsive grid */}
+                <Card className="overflow-hidden">
+                  <CardContent className="p-3 sm:p-5">
+                    <NomineeStatsGrid
+                      endorsementCount={selectedNomination.endorsement_count}
+                      endorsementGoal={200}
+                      publicVotes={selectedNomination.public_votes}
+                    />
+                  </CardContent>
+                </Card>
 
-                <TabsContent value="certificates" className="mt-4">
-                  <NominationCertificateGrid
-                    certificates={selectedNomination.certificates}
-                    onCertificateUpdated={(updatedCert) => {
-                      setNominee((prev) => {
-                        if (!prev) return prev;
+                {/* Tabs - Improved mobile scrolling */}
+                <Tabs defaultValue="overview" className="space-y-4">
+                  {/* Scrollable tabs on mobile with better UX */}
+                  <div className="relative">
+                    <div className="absolute right-0 top-0 bottom-0 w-8 bg-gradient-to-l from-background to-transparent pointer-events-none sm:hidden" />
+                    <div className="overflow-x-auto pb-1 scrollbar-hide">
+                      <TabsList className="flex w-max min-w-full sm:w-auto gap-1">
+                        <TabsTrigger value="overview" className="px-3 sm:px-4">
+                          Overview
+                        </TabsTrigger>
+                        <TabsTrigger
+                          value="certificates"
+                          className="px-3 sm:px-4"
+                        >
+                          Certificates
+                          {selectedNomination.certificates?.length > 0 && (
+                            <Badge
+                              variant="secondary"
+                              className="ml-2 text-[10px] px-1.5"
+                            >
+                              {selectedNomination.certificates.length}
+                            </Badge>
+                          )}
+                        </TabsTrigger>
+                        <TabsTrigger value="edit" className="px-3 sm:px-4">
+                          Edit
+                        </TabsTrigger>
+                      </TabsList>
+                    </div>
+                  </div>
 
-                        return {
-                          ...prev,
-                          nominations: prev.nominations.map((nom) =>
-                            nom.id === selectedNomination.id
-                              ? {
-                                  ...nom,
-                                  certificates: nom.certificates.map((c) =>
-                                    c.id === updatedCert.id ? updatedCert : c,
-                                  ),
-                                }
-                              : nom,
-                          ),
-                        };
-                      });
-                    }}
-                  />
-                </TabsContent>
+                  <TabsContent value="overview" className="mt-4">
+                    <NominationOverviewCard nomination={selectedNomination} />
+                  </TabsContent>
 
-                <TabsContent value="edit" className="mt-4">
-                  <NominationEditForm
-                    nomination={selectNominationDetails}
-                    onUpdated={handleNominationUpdated}
-                  />
-                </TabsContent>
-              </Tabs>
-            </CardContent>
-          </Card>
-        )}
-      </main>
-    </div>
+                  <TabsContent value="certificates" className="mt-4">
+                    <NominationCertificateGrid
+                      certificates={selectedNomination.certificates}
+                      onCertificateUpdated={(updatedCert) => {
+                        setNominee((prev) => {
+                          if (!prev) return prev;
+
+                          return {
+                            ...prev,
+                            nominations: prev.nominations.map((nom) =>
+                              nom.id === selectedNomination.id
+                                ? {
+                                    ...nom,
+                                    certificates: nom.certificates.map((c) =>
+                                      c.id === updatedCert.id ? updatedCert : c,
+                                    ),
+                                  }
+                                : nom,
+                            ),
+                          };
+                        });
+                      }}
+                    />
+                  </TabsContent>
+
+                  <TabsContent value="edit" className="mt-4">
+                    <NominationEditForm
+                      nomination={selectNominationDetails}
+                      onUpdated={handleNominationUpdated}
+                    />
+                  </TabsContent>
+                </Tabs>
+              </CardContent>
+            </Card>
+          )}
+        </main>
+      </div>
+    </TooltipProvider>
   );
 }

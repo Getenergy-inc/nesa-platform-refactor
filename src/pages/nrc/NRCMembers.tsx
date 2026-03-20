@@ -87,13 +87,13 @@ export function NRCMembersContent() {
   };
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-4">
       {/* Header */}
       <div>
-        <h2 className="font-display text-2xl font-bold">
+        <h2 className="font-display text-xl font-bold break-words">
           Invite NRC Members to Team
         </h2>
-        <p className="text-muted-foreground">
+        <p className="text-sm text-muted-foreground mt-1">
           Select NRC members and add them to your team.
         </p>
       </div>
@@ -105,7 +105,7 @@ export function NRCMembersContent() {
           placeholder="Search members..."
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
-          className="pl-10"
+          className="pl-10 w-full"
         />
       </div>
 
@@ -117,88 +117,114 @@ export function NRCMembersContent() {
       ) : filteredMembers && filteredMembers.length > 0 ? (
         <div className="space-y-3">
           {filteredMembers.map((member) => (
-            <Card key={member.id}>
-              <CardContent className="flex items-center justify-between gap-4 py-4">
-                <div className="flex items-center gap-4">
-                  <Avatar className="h-12 w-12">
-                    <AvatarImage
-                      src={member.profile?.avatar_url || undefined}
-                    />
-                    <AvatarFallback>
-                      {member.profile?.full_name
-                        ?.split(" ")
-                        .map((n) => n[0])
-                        .join("")
-                        .toUpperCase() || "?"}
-                    </AvatarFallback>
-                  </Avatar>
+            <Card key={member.id} className="overflow-hidden">
+              <CardContent className="p-4">
+                <div className="flex items-start justify-between gap-3">
+                  {/* Member Info */}
+                  <div className="flex items-center gap-3 min-w-0 flex-1">
+                    <Avatar className="h-10 w-10 flex-shrink-0">
+                      <AvatarImage
+                        src={member.profile?.avatar_url || undefined}
+                      />
+                      <AvatarFallback className="text-xs">
+                        {member.profile?.full_name
+                          ?.split(" ")
+                          .map((n) => n[0])
+                          .join("")
+                          .toUpperCase()
+                          .slice(0, 2) || "?"}
+                      </AvatarFallback>
+                    </Avatar>
 
-                  <div>
-                    <p className="font-medium">
-                      {member.profile?.full_name || "Unknown"}
-                    </p>
-                    <p className="text-sm text-muted-foreground">
-                      {member.profile?.email}
-                    </p>
+                    <div className="min-w-0 flex-1">
+                      <p className="font-medium text-sm truncate">
+                        {member.profile?.full_name || "Unknown"}
+                      </p>
+                      <p className="text-xs text-muted-foreground truncate">
+                        {member.profile?.email}
+                      </p>
+                    </div>
                   </div>
+
+                  {/* Action Button */}
+                  <Dialog
+                    open={invitingMemberId === member.id}
+                    onOpenChange={(open) =>
+                      setInvitingMemberId(open ? member.id : null)
+                    }
+                  >
+                    <DialogTrigger asChild>
+                      <Button
+                        size="sm"
+                        variant="default"
+                        className="flex-shrink-0 h-8 px-3 text-xs"
+                      >
+                        <UserPlus className="h-3.5 w-3.5 mr-1.5" />
+                        Invite
+                      </Button>
+                    </DialogTrigger>
+
+                    <DialogContent className="w-[calc(100%-32px)] max-w-[400px] mx-auto rounded-lg p-5">
+                      <DialogHeader className="space-y-2">
+                        <DialogTitle className="text-base">
+                          Invite {member.profile?.full_name?.split(" ")[0]}?
+                        </DialogTitle>
+                        <DialogDescription className="text-xs leading-relaxed">
+                          This will send an email invite to{" "}
+                          <span className="font-medium text-foreground break-all">
+                            {member.profile?.email}
+                          </span>
+                          . They can choose to accept or decline joining your
+                          team.
+                        </DialogDescription>
+                      </DialogHeader>
+
+                      <DialogFooter className="flex flex-col gap-2 mt-4">
+                        <Button
+                          onClick={() => handleInviteToTeam(member)}
+                          disabled={inviteMutation.isPending}
+                          className="w-full"
+                          size="sm"
+                        >
+                          {inviteMutation.isPending ? (
+                            <>
+                              <Loader2 className="mr-2 h-3.5 w-3.5 animate-spin" />
+                              Sending Invite...
+                            </>
+                          ) : (
+                            <>
+                              <Mail className="mr-2 h-3.5 w-3.5" />
+                              Send Invite
+                            </>
+                          )}
+                        </Button>
+                        <Button
+                          variant="outline"
+                          onClick={() => setInvitingMemberId(null)}
+                          className="w-full"
+                          size="sm"
+                        >
+                          Cancel
+                        </Button>
+                      </DialogFooter>
+                    </DialogContent>
+                  </Dialog>
                 </div>
-
-                <Dialog
-                  open={invitingMemberId === member.id}
-                  onOpenChange={(open) =>
-                    setInvitingMemberId(open ? member.id : null)
-                  }
-                >
-                  <DialogTrigger asChild>
-                    <Button size="sm">
-                      <UserPlus className="mr-2 h-4 w-4" />
-                      Invite to Team
-                    </Button>
-                  </DialogTrigger>
-
-                  <DialogContent>
-                    <DialogHeader>
-                      <DialogTitle>
-                        Invite {member.profile?.full_name}?
-                      </DialogTitle>
-                      <DialogDescription>
-                        This will send the member an email invite to your team.
-                        They have the option to accept the invitation or not
-                      </DialogDescription>
-                    </DialogHeader>
-
-                    <DialogFooter>
-                      <Button
-                        variant="outline"
-                        onClick={() => setInvitingMemberId(null)}
-                      >
-                        Cancel
-                      </Button>
-                      <Button
-                        onClick={() => handleInviteToTeam(member)}
-                        disabled={inviteMutation.isPending}
-                      >
-                        {inviteMutation.isPending && (
-                          <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                        )}
-                        Confirm Invite
-                      </Button>
-                    </DialogFooter>
-                  </DialogContent>
-                </Dialog>
               </CardContent>
             </Card>
           ))}
         </div>
       ) : (
         <Card>
-          <CardContent className="py-12 text-center">
-            <Award className="mx-auto mb-4 h-12 w-12 text-muted-foreground" />
-            <h3 className="mb-2 font-display text-xl font-semibold">
-              No NRC Members Found
+          <CardContent className="py-12 px-4 text-center">
+            <Award className="mx-auto mb-3 h-10 w-10 text-muted-foreground opacity-50" />
+            <h3 className="mb-1 font-display text-base font-semibold">
+              No Members Found
             </h3>
-            <p className="text-muted-foreground">
-              There are currently no NRC members available.
+            <p className="text-xs text-muted-foreground">
+              {searchQuery
+                ? "No members match your search criteria."
+                : "There are currently no NRC members available."}
             </p>
           </CardContent>
         </Card>
