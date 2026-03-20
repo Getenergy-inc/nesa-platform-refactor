@@ -148,7 +148,7 @@ export function TrophyHeroSection() {
                   </Button>
                 </motion.div>
               </Link>
-              <a href="#nominees">
+              <Link to="/nominees">
                 <Button
                   size="default"
                   variant="outline"
@@ -157,7 +157,7 @@ export function TrophyHeroSection() {
                   <Users className="h-5 w-5" />
                   Explore Nominees
                 </Button>
-              </a>
+              </Link>
             </motion.div>
 
             {/* Secondary CTAs */}
