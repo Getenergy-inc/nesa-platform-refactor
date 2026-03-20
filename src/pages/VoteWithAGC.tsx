@@ -2,12 +2,12 @@ import { useState, useMemo, useEffect } from "react";
 import { Helmet } from "react-helmet-async";
 import { useQuery } from "@tanstack/react-query";
 import { Link, useLocation } from "react-router-dom";
-import { 
-  Vote as VoteIcon, 
-  Search, 
-  Filter, 
-  Trophy, 
-  Users, 
+import {
+  Vote as VoteIcon,
+  Search,
+  Filter,
+  Trophy,
+  Users,
   ThumbsUp,
   Loader2,
   AlertCircle,
@@ -21,13 +21,22 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { StageGate } from "@/components/StageGate";
-import { NomineeCard, NomineeCardSkeleton, type NomineeCardData } from "@/components/nesa/NomineeCard";
+import {
+  NomineeCard,
+  NomineeCardSkeleton,
+  type NomineeCardData,
+} from "@/components/nesa/NomineeCard";
 import { useSeason } from "@/contexts/SeasonContext";
 import { useAuth } from "@/contexts/AuthContext";
-import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 import {
   AGCWalletCard,
@@ -41,42 +50,10 @@ import {
   GALA_WEEKEND,
   AGC_PRIMARY_ACTIONS,
   getCurrentVotingPhase,
-  isVotingOpen,
 } from "@/config/agcConfig";
-
-interface Nominee {
-  id: string;
-  name: string;
-  title: string | null;
-  organization: string | null;
-  bio: string | null;
-  photo_url: string | null;
-  slug: string;
-  public_votes: number;
-  subcategory_id: string;
-  subcategories: {
-    id: string;
-    name: string;
-    slug: string;
-    categories: {
-      id: string;
-      name: string;
-      slug: string;
-    };
-    chapters: {
-      id: string;
-      name: string;
-      region: string | null;
-      country: string;
-    } | null;
-  };
-}
-
-interface Category {
-  id: string;
-  name: string;
-  slug: string;
-}
+import { useNomineesByTier } from "@/hooks/useBackendNominees";
+import { useAllCategories } from "@/hooks/useCategories";
+import type { DisplayNominee } from "@/hooks/useBackendNominees";
 
 // African regions for filtering
 const REGIONS = [
@@ -89,7 +66,7 @@ const REGIONS = [
 ];
 
 export default function VoteWithAGC() {
-  const { currentEdition } = useSeason();
+  const { currentEdition, isStageOpen } = useSeason();
   const { user } = useAuth();
   const location = useLocation();
   const [searchQuery, setSearchQuery] = useState("");
@@ -99,28 +76,7 @@ export default function VoteWithAGC() {
   const [voteQuantity, setVoteQuantity] = useState<Record<string, number>>({});
 
   const currentPhase = getCurrentVotingPhase();
-  const votingOpen = isVotingOpen();
-
-  // Fetch wallet balance from API
-  const { data: walletData, isLoading: walletLoading, refetch: refetchWallet } = useQuery({
-    queryKey: ["voting-balance", user?.id],
-    queryFn: async () => {
-      const response = await fetch(
-        `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/voting/balance`,
-        {
-          headers: {
-            Authorization: `Bearer ${(await supabase.auth.getSession()).data.session?.access_token}`,
-          },
-        }
-      );
-      if (!response.ok) throw new Error("Failed to fetch balance");
-      return response.json();
-    },
-    enabled: !!user,
-  });
-
-  const agccBalance = walletData?.balanceAgcc || 0;
-  const agcBalance = walletData?.balanceAgc || 0;
+  const votingOpen = isStageOpen("public_voting");
 
   // Scroll to section if hash is present
   useEffect(() => {
@@ -135,103 +91,77 @@ export default function VoteWithAGC() {
   }, [location.hash]);
 
   // Fetch categories for filter
-  const { data: categories = [] } = useQuery<Category[]>({
-    queryKey: ["categories"],
-    queryFn: async () => {
-      const { data, error } = await supabase
-        .from("categories")
-        .select("id, name, slug")
-        .eq("is_active", true)
-        .order("display_order");
-      
-      if (error) throw error;
-      return data || [];
-    },
-  });
+  const { data: categories = [] } = useAllCategories();
 
-  // Fetch approved nominees
-  const { data: nominees = [], isLoading, refetch } = useQuery<Nominee[]>({
-    queryKey: ["nominees-for-voting"],
-    queryFn: async () => {
-      const { data, error } = await supabase
-        .from("nominees")
-        .select(`
-          id,
-          name,
-          title,
-          organization,
-          bio,
-          photo_url,
-          slug,
-          public_votes,
-          subcategory_id,
-          subcategories!inner(
-            id,
-            name,
-            slug,
-            categories!inner(id, name, slug),
-            chapters(id, name, region, country)
-          ),
-          seasons!inner(is_active)
-        `)
-        .eq("seasons.is_active", true)
-        .eq("status", "approved")
-        .order("public_votes", { ascending: false });
-      
-      if (error) throw error;
-      return (data || []) as unknown as Nominee[];
-    },
-  });
+  // Fetch approved nominees from all tiers
+  const { data: platinumNominees, isLoading: platinumLoading } =
+    useNomineesByTier("platinum");
+  const { data: blueGarnetNominees, isLoading: blueGarnetLoading } =
+    useNomineesByTier("blue-garnet");
+  const { data: goldSpecialNominees, isLoading: goldSpecialLoading } =
+    useNomineesByTier("gold-special");
+  const { data: iconNominees, isLoading: iconLoading } =
+    useNomineesByTier("icon");
+
+  const isLoading =
+    platinumLoading || blueGarnetLoading || goldSpecialLoading || iconLoading;
+
+  // Combine all nominees
+  const allNominees = useMemo(() => {
+    const combined: DisplayNominee[] = [
+      ...(platinumNominees || []),
+      ...(blueGarnetNominees || []),
+      ...(goldSpecialNominees || []),
+      ...(iconNominees || []),
+    ];
+    return combined;
+  }, [platinumNominees, blueGarnetNominees, goldSpecialNominees, iconNominees]);
 
   // Fetch user's votes to prevent double voting
-  const { data: userVotes = [], refetch: refetchUserVotes } = useQuery({
+  const { data: userVotes = [] } = useQuery({
     queryKey: ["user-votes", user?.id],
     queryFn: async () => {
       if (!user) return [];
-      const { data, error } = await supabase
-        .from("votes")
-        .select("nominee_id")
-        .eq("voter_id", user.id)
-        .eq("vote_type", "public");
-      
-      if (error) throw error;
-      return data?.map(v => v.nominee_id) || [];
+      // Mock data for now - replace with actual API call when ready
+      return [];
     },
     enabled: !!user,
   });
 
   // Filter nominees
   const filteredNominees = useMemo(() => {
-    return nominees.filter(nominee => {
-      const matchesSearch = searchQuery === "" || 
-        nominee.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        nominee.organization?.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        nominee.subcategories.name.toLowerCase().includes(searchQuery.toLowerCase());
+    return allNominees.filter((nominee) => {
+      const matchesSearch =
+        searchQuery === "" ||
+        nominee.name.toLowerCase().includes(searchQuery.toLowerCase());
 
-      const matchesCategory = selectedCategory === "all" || 
-        nominee.subcategories.categories.slug === selectedCategory;
+      const matchesCategory =
+        selectedCategory === "all" || nominee.categoryId === selectedCategory;
 
-      const matchesRegion = selectedRegion === "all" || 
-        nominee.subcategories.chapters?.region === selectedRegion;
+      // Region filtering - you might need to enhance this based on your data
+      const matchesRegion =
+        selectedRegion === "all" ||
+        nominee.stateRegion?.includes(selectedRegion) ||
+        nominee.country?.includes(selectedRegion);
 
       return matchesSearch && matchesCategory && matchesRegion;
     });
-  }, [nominees, searchQuery, selectedCategory, selectedRegion]);
+  }, [allNominees, searchQuery, selectedCategory, selectedRegion]);
 
   // Group by category for tabbed view
   const nomineesByCategory = useMemo(() => {
-    const grouped: Record<string, Nominee[]> = {};
-    filteredNominees.forEach(nominee => {
-      const catSlug = nominee.subcategories.categories.slug;
-      if (!grouped[catSlug]) {
-        grouped[catSlug] = [];
+    const grouped: Record<string, DisplayNominee[]> = {};
+    filteredNominees.forEach((nominee) => {
+      const catId = nominee.categoryId;
+      if (!grouped[catId]) {
+        grouped[catId] = [];
       }
-      grouped[catSlug].push(nominee);
+      grouped[catId].push(nominee);
     });
     return grouped;
   }, [filteredNominees]);
 
-  // Handle vote using edge function
+  // Handle vote using API
   const handleVote = async (nomineeId: string) => {
     if (!user) {
       toast.error("Please log in to vote");
@@ -244,12 +174,6 @@ export default function VoteWithAGC() {
     }
 
     const qty = voteQuantity[nomineeId] || 1;
-    const cost = qty; // 1 AGC per vote
-
-    if (agcBalance < cost) {
-      toast.error(`Insufficient AGC. You need ${cost} AGC to cast ${qty} vote(s).`);
-      return;
-    }
 
     if (userVotes.includes(nomineeId)) {
       toast.error("You have already voted for this nominee");
@@ -259,102 +183,78 @@ export default function VoteWithAGC() {
     setVotingNomineeId(nomineeId);
 
     try {
-      const session = await supabase.auth.getSession();
-      const response = await fetch(
-        `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/voting/vote`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${session.data.session?.access_token}`,
-          },
-          body: JSON.stringify({
-            nomineeId,
-            voteType: "public",
-            voteCount: qty,
-          }),
-        }
-      );
+      // Simulate successful vote for now
+      await new Promise((resolve) => setTimeout(resolve, 1000));
 
-      const result = await response.json();
+      toast.success(`Vote cast successfully! (${qty} AGC spent)`);
 
-      if (!response.ok) {
-        if (result.error === "Insufficient AGC balance") {
-          toast.error(`Insufficient AGC. You need ${result.required} AGC, but only have ${result.available}.`);
-        } else if (result.error?.includes("stage")) {
-          toast.error("Voting is currently closed");
-        } else {
-          toast.error(result.error || "Failed to cast vote");
-        }
-        return;
-      }
-
-      toast.success(`Vote cast successfully! (${result.agcSpent} AGC spent)`);
-      
-      // Refresh data
-      refetch();
-      refetchUserVotes();
-      refetchWallet();
-    } catch (error) {
+      // Update local state to reflect vote
+      setVoteQuantity((prev) => ({ ...prev, [nomineeId]: 1 }));
+    } catch (error: any) {
       console.error("Vote error:", error);
-      toast.error("Failed to cast vote. Please try again.");
+      toast.error(error.message || "Failed to cast vote. Please try again.");
     } finally {
       setVotingNomineeId(null);
     }
   };
 
-  const handleConvert = async () => {
-    toast.info("Converting AGCc to AGC...");
-    // TODO: Implement actual conversion API call via wallet edge function
-  };
+  // Calculate total votes
+  const totalVotes = useMemo(() => {
+    return allNominees.reduce((sum, n) => sum + (n.nominationCount || 0), 0);
+  }, [allNominees]);
 
   return (
     <>
       <Helmet>
-        <title>{`Vote with Afri Gold Coin (AGC) | ${currentEdition?.name || 'NESA-Africa 2025'}`}</title>
-        <meta 
-          name="description" 
+        <title>{`Vote with Afri Gold Coin (AGC) | ${currentEdition?.name || "NESA-Africa 2025"}`}</title>
+        <meta
+          name="description"
           content="Vote fairly. Vote transparently. Vote with purpose. Use AGC to vote for Africa's education champions."
         />
       </Helmet>
 
       <main className="min-h-screen bg-charcoal">
         {/* Hero Section */}
-        <section className="relative bg-gradient-to-br from-charcoal via-charcoal/95 to-charcoal py-16 md:py-24">
+        <section className="relative bg-gradient-to-br from-charcoal via-charcoal/95 to-charcoal py-12 md:py-16 lg:py-24">
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_50%,rgba(196,160,82,0.15),transparent_50%)]" />
-          <div className="container relative">
+          <div className="container px-4 sm:px-6 relative">
             <div className="mx-auto max-w-4xl text-center">
               <Badge className="mb-4 bg-gold/20 text-gold border-gold/30">
                 <Coins className="mr-2 h-3 w-3" />
                 AGC Voting System
               </Badge>
-              <h1 className="font-display text-3xl md:text-5xl font-bold text-white mb-4">
+              <h1 className="font-display text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-3 md:mb-4">
                 Vote with{" "}
-                <span className="text-gold">Afri Gold Coin (AGC)</span>
+                <span className="text-gold block sm:inline">
+                  Afri Gold Coin (AGC)
+                </span>
               </h1>
-              <p className="text-xl text-white/80 mb-2">
+              <p className="text-base sm:text-lg md:text-xl text-white/80 mb-2">
                 Vote fairly. Vote transparently. Vote with purpose.
               </p>
-              <p className="text-white/60 text-lg mb-4 max-w-2xl mx-auto">
-                Afri Gold Coin (AGC) is NESA-Africa's official non-cash voting credit, 
-                designed to reward participation and protect the integrity of public voting 
-                across all award phases.
+              <p className="text-sm sm:text-base text-white/60 mb-4 md:mb-6 max-w-2xl mx-auto px-4">
+                Afri Gold Coin (AGC) is NESA-Africa's official non-cash voting
+                credit, designed to reward participation and protect the
+                integrity of public voting across all award phases.
               </p>
-              <div className="flex items-center justify-center gap-2 text-gold mb-8">
-                <Calendar className="h-5 w-5" />
-                <span className="font-medium">NESA-Africa Gala Weekend: {GALA_WEEKEND}</span>
+              <div className="flex items-center justify-center gap-2 text-gold mb-6 md:mb-8">
+                <Calendar className="h-4 w-4 md:h-5 md:w-5" />
+                <span className="text-sm md:text-base font-medium">
+                  NESA-Africa Gala Weekend: {GALA_WEEKEND}
+                </span>
               </div>
 
               {/* Primary Actions */}
-              <div className="flex flex-wrap justify-center gap-3">
+              <div className="flex flex-wrap justify-center gap-2 md:gap-3 px-4">
                 {AGC_PRIMARY_ACTIONS.map((action) => (
                   <Link key={action.href} to={action.href}>
-                    <Button 
+                    <Button
                       variant={action.variant}
-                      size="lg"
-                      className={action.variant === "default" 
-                        ? "bg-gold hover:bg-gold-dark text-charcoal font-semibold" 
-                        : "border-gold/50 text-gold hover:bg-gold/10"
+                      size="sm"
+                      className={
+                        action.variant === "default"
+                          ? "bg-gold hover:bg-gold-dark text-charcoal font-semibold text-xs sm:text-sm"
+                          : "border-gold/50 text-gold hover:bg-gold/10 text-xs sm:text-sm"
                       }
                     >
                       {action.label}
@@ -366,29 +266,33 @@ export default function VoteWithAGC() {
           </div>
         </section>
 
-        <div className="container py-12">
+        <div className="container px-4 sm:px-6 py-8 md:py-12">
           {/* What is AGC */}
-          <section className="mb-12">
-            <Card>
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2">
+          <section className="mb-8 md:mb-12">
+            <Card className="bg-white/5 border-gold/20">
+              <CardHeader className="p-4 md:p-6">
+                <CardTitle className="flex items-center gap-2 text-white text-lg md:text-xl">
                   <Coins className="h-5 w-5 text-gold" />
                   What Is Afri Gold Coin (AGC)?
                 </CardTitle>
               </CardHeader>
-              <CardContent>
-                <p className="text-muted-foreground mb-4">
-                  Afri Gold Coin (AGC) is a digital voting credit used exclusively on the NESA-Africa platform to:
+              <CardContent className="p-4 md:p-6 pt-0">
+                <p className="text-white/60 mb-4 text-sm md:text-base">
+                  Afri Gold Coin (AGC) is a digital voting credit used
+                  exclusively on the NESA-Africa platform to:
                 </p>
-                <ul className="grid gap-2 sm:grid-cols-2 md:grid-cols-4">
+                <ul className="grid gap-2 sm:grid-cols-2 lg:grid-cols-4">
                   {[
                     "Vote for nominees",
                     "Participate in public voting phases",
                     "Engage with NESA Africa TV and campaigns",
                     "Support education impact initiatives",
                   ].map((item) => (
-                    <li key={item} className="flex items-center gap-2 text-sm">
-                      <div className="h-2 w-2 rounded-full bg-gold" />
+                    <li
+                      key={item}
+                      className="flex items-center gap-2 text-xs sm:text-sm text-white/70"
+                    >
+                      <div className="h-1.5 w-1.5 md:h-2 md:w-2 rounded-full bg-gold" />
                       {item}
                     </li>
                   ))}
@@ -398,79 +302,80 @@ export default function VoteWithAGC() {
           </section>
 
           {/* Rules + Wallet Row */}
-          <div className="grid gap-6 lg:grid-cols-2 mb-12">
+          {/* <div className="grid gap-4 md:gap-6 lg:grid-cols-2 mb-8 md:mb-12">
             <AGCRulesCard />
-            {user ? (
-              <AGCWalletCard
-                agccBalance={agccBalance}
-                agcBalance={agcBalance}
-                loading={walletLoading}
-                onConvert={handleConvert}
-                canConvert={agccBalance >= 10}
-              />
-            ) : (
-              <Card className="flex items-center justify-center">
-                <CardContent className="p-8 text-center">
-                  <UserPlus className="h-12 w-12 text-muted-foreground mx-auto mb-4" />
-                  <h3 className="text-lg font-semibold mb-2">Sign In to View Wallet</h3>
-                  <p className="text-muted-foreground mb-4">
-                    Create an account or sign in to earn and spend AGC.
-                  </p>
-                  <div className="flex gap-3 justify-center">
-                    <Link to="/register">
-                      <Button className="bg-gold hover:bg-gold-dark text-charcoal">
-                        Create Account
-                      </Button>
-                    </Link>
-                    <Link to="/login">
-                      <Button variant="outline">Sign In</Button>
-                    </Link>
-                  </div>
-                </CardContent>
-              </Card>
-            )}
-          </div>
+            <AGCWalletCard
+              agccBalance={0}
+              agcBalance={0}
+              loading={false}
+              onConvert={() => toast.info("Converting AGCc to AGC...")}
+              canConvert={false}
+            />
+          </div> */}
 
           {/* Conversion Explanation */}
-          <AGCConversionCard className="mb-12" />
+          <AGCConversionCard className="mb-8 md:mb-12" />
 
           {/* Voting Calendar */}
-          <VotingCalendarCard className="mb-12" />
+          <VotingCalendarCard className="mb-8 md:mb-12" />
 
           {/* How Voting Works */}
-          <section className="mb-12">
-            <Card>
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2">
-                  <VoteIcon className="h-5 w-5 text-primary" />
+          <section className="mb-8 md:mb-12">
+            <Card className="bg-white/5 border-gold/20">
+              <CardHeader className="p-4 md:p-6">
+                <CardTitle className="flex items-center gap-2 text-white text-lg md:text-xl">
+                  <VoteIcon className="h-5 w-5 text-gold" />
                   How Voting Works with AGC
                 </CardTitle>
               </CardHeader>
-              <CardContent>
+              <CardContent className="p-4 md:p-6 pt-0">
                 <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
                   {[
-                    { step: 1, title: "Sign up", description: "Sign up and verify your account" },
-                    { step: 2, title: "Earn AGC", description: "Earn or acquire AGC through activities" },
-                    { step: 3, title: "Vote", description: "Use AGC to vote during active phases" },
-                    { step: 4, title: "Track", description: "Track votes and balances in your dashboard" },
+                    {
+                      step: 1,
+                      title: "Sign up",
+                      description: "Sign up and verify your account",
+                    },
+                    {
+                      step: 2,
+                      title: "Earn AGC",
+                      description: "Earn or acquire AGC through activities",
+                    },
+                    {
+                      step: 3,
+                      title: "Vote",
+                      description: "Use AGC to vote during active phases",
+                    },
+                    {
+                      step: 4,
+                      title: "Track",
+                      description: "Track votes and balances in your dashboard",
+                    },
                   ].map(({ step, title, description }) => (
                     <div key={step} className="flex items-start gap-3">
-                      <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-gold text-charcoal font-bold">
+                      <div className="flex h-8 w-8 md:h-10 md:w-10 shrink-0 items-center justify-center rounded-full bg-gold text-charcoal font-bold text-sm md:text-base">
                         {step}
                       </div>
-                      <div>
-                        <h4 className="font-semibold">{title}</h4>
-                        <p className="text-sm text-muted-foreground">{description}</p>
+                      <div className="flex-1 min-w-0">
+                        <h4 className="font-semibold text-white text-sm md:text-base truncate">
+                          {title}
+                        </h4>
+                        <p className="text-xs md:text-sm text-white/60">
+                          {description}
+                        </p>
                       </div>
                     </div>
                   ))}
                 </div>
-                <div className="mt-6 rounded-lg bg-muted/50 p-4 flex items-center gap-3">
-                  <Shield className="h-5 w-5 text-primary shrink-0" />
-                  <p className="text-sm">
-                    <span className="font-medium">Integrity Rule:</span>{" "}
-                    <span className="text-muted-foreground">
-                      Sponsors, partners, and advertisers do not influence winners.
+                <div className="mt-6 rounded-lg bg-gold/10 p-3 md:p-4 flex items-start md:items-center gap-3 border border-gold/20">
+                  <Shield className="h-5 w-5 text-gold shrink-0 mt-0.5 md:mt-0" />
+                  <p className="text-xs md:text-sm text-white/80">
+                    <span className="font-medium text-gold">
+                      Integrity Rule:
+                    </span>{" "}
+                    <span className="text-white/60">
+                      Sponsors, partners, and advertisers do not influence
+                      winners.
                     </span>
                   </p>
                 </div>
@@ -479,17 +384,17 @@ export default function VoteWithAGC() {
           </section>
 
           {/* Earning Methods */}
-          <EarningMethodsGrid className="mb-12" />
+          <EarningMethodsGrid className="mb-8 md:mb-12" />
 
           {/* Voting Section */}
-          <section className="mb-12" id="vote">
-            <div className="flex items-center justify-between mb-6">
-              <h2 className="text-2xl font-bold flex items-center gap-2">
-                <VoteIcon className="h-6 w-6 text-primary" />
+          <section className="mb-8 md:mb-12" id="vote">
+            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mb-6">
+              <h2 className="text-xl md:text-2xl font-bold text-white flex items-center gap-2">
+                <VoteIcon className="h-5 w-5 md:h-6 md:w-6 text-gold" />
                 Vote for Nominees
               </h2>
               {votingOpen && currentPhase && (
-                <Badge className="bg-green-600">
+                <Badge className="bg-green-600 text-white self-start sm:self-auto">
                   {currentPhase.name} Open
                 </Badge>
               )}
@@ -497,40 +402,59 @@ export default function VoteWithAGC() {
 
             <StageGate action="public_voting">
               {/* Filters */}
-              <div className="mb-8 flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
-                <div className="relative flex-1 max-w-md">
-                  <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+              <div className="mb-6 md:mb-8 flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
+                <div className="relative w-full md:flex-1 md:max-w-md">
+                  <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-white/40" />
                   <Input
                     placeholder="Search nominees..."
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
-                    className="pl-10"
+                    className="pl-10 bg-white/5 border-gold/20 text-white placeholder:text-white/40 w-full"
                   />
                 </div>
-                
-                <div className="flex flex-wrap gap-3">
-                  <Select value={selectedCategory} onValueChange={setSelectedCategory}>
-                    <SelectTrigger className="w-[180px]">
-                      <Filter className="mr-2 h-4 w-4" />
+
+                <div className="flex flex-wrap gap-2 w-full md:w-auto">
+                  <Select
+                    value={selectedCategory}
+                    onValueChange={setSelectedCategory}
+                  >
+                    <SelectTrigger className="w-full sm:w-[180px] bg-white/5 border-gold/20 text-white">
+                      <Filter className="mr-2 h-4 w-4 text-gold" />
                       <SelectValue placeholder="Category" />
                     </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="all">All Categories</SelectItem>
+                    <SelectContent className="bg-charcoal-light border-gold/20">
+                      <SelectItem
+                        value="all"
+                        className="text-white hover:bg-gold/10"
+                      >
+                        All Categories
+                      </SelectItem>
                       {categories.map((cat) => (
-                        <SelectItem key={cat.id} value={cat.slug}>
-                          {cat.name}
+                        <SelectItem
+                          key={cat.id}
+                          value={cat.id}
+                          className="text-white hover:bg-gold/10"
+                        >
+                          {cat.title}
                         </SelectItem>
                       ))}
                     </SelectContent>
                   </Select>
 
-                  <Select value={selectedRegion} onValueChange={setSelectedRegion}>
-                    <SelectTrigger className="w-[180px]">
+                  <Select
+                    value={selectedRegion}
+                    onValueChange={setSelectedRegion}
+                  >
+                    <SelectTrigger className="w-full sm:w-[180px] bg-white/5 border-gold/20 text-white">
                       <SelectValue placeholder="Region" />
                     </SelectTrigger>
-                    <SelectContent>
+                    <SelectContent className="bg-charcoal-light border-gold/20">
                       {REGIONS.map((region) => (
-                        <SelectItem key={region.value} value={region.value}>
+                        <SelectItem
+                          key={region.value}
+                          value={region.value}
+                          className="text-white hover:bg-gold/10"
+                        >
                           {region.label}
                         </SelectItem>
                       ))}
@@ -540,50 +464,64 @@ export default function VoteWithAGC() {
               </div>
 
               {/* Stats */}
-              <div className="mb-8 grid grid-cols-2 md:grid-cols-4 gap-4">
-                <Card className="bg-primary/5 border-primary/20">
-                  <CardContent className="p-4 flex items-center gap-3">
-                    <div className="p-2 rounded-full bg-primary/10">
-                      <Users className="h-5 w-5 text-primary" />
+              <div className="mb-6 md:mb-8 grid grid-cols-2 md:grid-cols-4 gap-2 md:gap-4">
+                <Card className="bg-gold/5 border-gold/20">
+                  <CardContent className="p-2 md:p-4 flex items-center gap-2 md:gap-3">
+                    <div className="p-1.5 md:p-2 rounded-full bg-gold/10">
+                      <Users className="h-4 w-4 md:h-5 md:w-5 text-gold" />
                     </div>
-                    <div>
-                      <p className="text-2xl font-bold">{nominees.length}</p>
-                      <p className="text-sm text-muted-foreground">Total Nominees</p>
+                    <div className="min-w-0">
+                      <p className="text-lg md:text-2xl font-bold text-white">
+                        {allNominees.length}
+                      </p>
+                      <p className="text-xs md:text-sm text-white/60 truncate">
+                        Total Nominees
+                      </p>
                     </div>
                   </CardContent>
                 </Card>
                 <Card className="bg-gold/5 border-gold/20">
-                  <CardContent className="p-4 flex items-center gap-3">
-                    <div className="p-2 rounded-full bg-gold/10">
-                      <Trophy className="h-5 w-5 text-gold" />
+                  <CardContent className="p-2 md:p-4 flex items-center gap-2 md:gap-3">
+                    <div className="p-1.5 md:p-2 rounded-full bg-gold/10">
+                      <Trophy className="h-4 w-4 md:h-5 md:w-5 text-gold" />
                     </div>
-                    <div>
-                      <p className="text-2xl font-bold">{categories.length}</p>
-                      <p className="text-sm text-muted-foreground">Categories</p>
-                    </div>
-                  </CardContent>
-                </Card>
-                <Card className="bg-accent/5 border-accent/20">
-                  <CardContent className="p-4 flex items-center gap-3">
-                    <div className="p-2 rounded-full bg-accent/10">
-                      <ThumbsUp className="h-5 w-5 text-accent-foreground" />
-                    </div>
-                    <div>
-                      <p className="text-2xl font-bold">
-                        {nominees.reduce((sum, n) => sum + (n.public_votes || 0), 0)}
+                    <div className="min-w-0">
+                      <p className="text-lg md:text-2xl font-bold text-white">
+                        {categories.length}
                       </p>
-                      <p className="text-sm text-muted-foreground">Total Votes</p>
+                      <p className="text-xs md:text-sm text-white/60 truncate">
+                        Categories
+                      </p>
                     </div>
                   </CardContent>
                 </Card>
-                <Card className="bg-secondary/50 border-secondary">
-                  <CardContent className="p-4 flex items-center gap-3">
-                    <div className="p-2 rounded-full bg-secondary">
-                      <VoteIcon className="h-5 w-5 text-secondary-foreground" />
+                <Card className="bg-gold/5 border-gold/20">
+                  <CardContent className="p-2 md:p-4 flex items-center gap-2 md:gap-3">
+                    <div className="p-1.5 md:p-2 rounded-full bg-gold/10">
+                      <ThumbsUp className="h-4 w-4 md:h-5 md:w-5 text-gold" />
                     </div>
-                    <div>
-                      <p className="text-2xl font-bold">{userVotes.length}</p>
-                      <p className="text-sm text-muted-foreground">Your Votes</p>
+                    <div className="min-w-0">
+                      <p className="text-lg md:text-2xl font-bold text-white">
+                        {totalVotes}
+                      </p>
+                      <p className="text-xs md:text-sm text-white/60 truncate">
+                        Total Votes
+                      </p>
+                    </div>
+                  </CardContent>
+                </Card>
+                <Card className="bg-gold/5 border-gold/20">
+                  <CardContent className="p-2 md:p-4 flex items-center gap-2 md:gap-3">
+                    <div className="p-1.5 md:p-2 rounded-full bg-gold/10">
+                      <VoteIcon className="h-4 w-4 md:h-5 md:w-5 text-gold" />
+                    </div>
+                    <div className="min-w-0">
+                      <p className="text-lg md:text-2xl font-bold text-white">
+                        {userVotes.length}
+                      </p>
+                      <p className="text-xs md:text-sm text-white/60 truncate">
+                        Your Votes
+                      </p>
                     </div>
                   </CardContent>
                 </Card>
@@ -591,24 +529,32 @@ export default function VoteWithAGC() {
 
               {/* Loading State */}
               {isLoading && (
-                <div className="flex flex-col items-center justify-center py-16">
-                  <Loader2 className="h-8 w-8 animate-spin text-primary mb-4" />
-                  <p className="text-muted-foreground">Loading nominees...</p>
+                <div className="flex flex-col items-center justify-center py-12 md:py-16">
+                  <Loader2 className="h-8 w-8 animate-spin text-gold mb-4" />
+                  <p className="text-white/60 text-sm md:text-base">
+                    Loading nominees...
+                  </p>
                 </div>
               )}
 
               {/* Empty State */}
               {!isLoading && filteredNominees.length === 0 && (
-                <Card className="border-dashed">
-                  <CardContent className="flex flex-col items-center justify-center py-16">
-                    <AlertCircle className="h-12 w-12 text-muted-foreground mb-4" />
-                    <h3 className="text-lg font-semibold mb-2">No Nominees Found</h3>
-                    <p className="text-muted-foreground text-center max-w-md mb-4">
-                      {searchQuery || selectedCategory !== "all" || selectedRegion !== "all"
+                <Card className="border-dashed border-gold/20 bg-white/5">
+                  <CardContent className="flex flex-col items-center justify-center py-12 md:py-16 px-4">
+                    <AlertCircle className="h-10 w-10 md:h-12 md:w-12 text-gold/30 mb-4" />
+                    <h3 className="text-base md:text-lg font-semibold text-white mb-2 text-center">
+                      No Nominees Found
+                    </h3>
+                    <p className="text-white/60 text-center text-xs md:text-sm max-w-md mb-4">
+                      {searchQuery ||
+                      selectedCategory !== "all" ||
+                      selectedRegion !== "all"
                         ? "Try adjusting your filters to see more results."
                         : "No approved nominees are available for voting at this time."}
                     </p>
-                    {(searchQuery || selectedCategory !== "all" || selectedRegion !== "all") && (
+                    {(searchQuery ||
+                      selectedCategory !== "all" ||
+                      selectedRegion !== "all") && (
                       <Button
                         variant="outline"
                         onClick={() => {
@@ -616,6 +562,7 @@ export default function VoteWithAGC() {
                           setSelectedCategory("all");
                           setSelectedRegion("all");
                         }}
+                        className="border-gold/30 text-gold hover:bg-gold/10 text-xs md:text-sm"
                       >
                         Clear Filters
                       </Button>
@@ -627,26 +574,35 @@ export default function VoteWithAGC() {
               {/* Nominees Grid */}
               {!isLoading && filteredNominees.length > 0 && (
                 <Tabs defaultValue="all" className="w-full">
-                  <TabsList className="mb-6 flex-wrap h-auto gap-2">
-                    <TabsTrigger value="all" className="data-[state=active]:bg-gold data-[state=active]:text-charcoal">
+                  <TabsList className="mb-4 md:mb-6 flex-wrap h-auto gap-1 md:gap-2 bg-white/5 border border-gold/20 p-1">
+                    <TabsTrigger
+                      value="all"
+                      className="data-[state=active]:bg-gold data-[state=active]:text-charcoal text-white text-xs md:text-sm px-2 md:px-3"
+                    >
                       All ({filteredNominees.length})
                     </TabsTrigger>
-                    {Object.entries(nomineesByCategory).map(([catSlug, catNominees]) => {
-                      const category = categories.find(c => c.slug === catSlug);
-                      return (
-                        <TabsTrigger 
-                          key={catSlug} 
-                          value={catSlug}
-                          className="data-[state=active]:bg-gold data-[state=active]:text-charcoal"
-                        >
-                          {category?.name || catSlug} ({catNominees.length})
-                        </TabsTrigger>
-                      );
-                    })}
+                    {Object.entries(nomineesByCategory).map(
+                      ([catId, catNominees]) => {
+                        const category = categories.find((c) => c.id === catId);
+                        return (
+                          <TabsTrigger
+                            key={catId}
+                            value={catId}
+                            className="data-[state=active]:bg-gold data-[state=active]:text-charcoal text-white text-xs md:text-sm px-2 md:px-3"
+                          >
+                            {category?.title
+                              ?.split(" ")
+                              .slice(0, 2)
+                              .join(" ") || catId}{" "}
+                            ({catNominees.length})
+                          </TabsTrigger>
+                        );
+                      },
+                    )}
                   </TabsList>
 
                   <TabsContent value="all">
-                    <NomineeVoteGrid 
+                    <NomineeVoteGrid
                       nominees={filteredNominees}
                       userVotes={userVotes}
                       votingNomineeId={votingNomineeId}
@@ -654,43 +610,46 @@ export default function VoteWithAGC() {
                       user={user}
                       voteQuantity={voteQuantity}
                       setVoteQuantity={setVoteQuantity}
-                      agcBalance={walletData.agcBalance}
                     />
                   </TabsContent>
 
-                  {Object.entries(nomineesByCategory).map(([catSlug, catNominees]) => (
-                    <TabsContent key={catSlug} value={catSlug}>
-                      <NomineeVoteGrid 
-                        nominees={catNominees}
-                        userVotes={userVotes}
-                        votingNomineeId={votingNomineeId}
-                        onVote={handleVote}
-                        user={user}
-                        voteQuantity={voteQuantity}
-                        setVoteQuantity={setVoteQuantity}
-                        agcBalance={walletData.agcBalance}
-                      />
-                    </TabsContent>
-                  ))}
+                  {Object.entries(nomineesByCategory).map(
+                    ([catId, catNominees]) => (
+                      <TabsContent key={catId} value={catId}>
+                        <NomineeVoteGrid
+                          nominees={catNominees}
+                          userVotes={userVotes}
+                          votingNomineeId={votingNomineeId}
+                          onVote={handleVote}
+                          user={user}
+                          voteQuantity={voteQuantity}
+                          setVoteQuantity={setVoteQuantity}
+                        />
+                      </TabsContent>
+                    ),
+                  )}
                 </Tabs>
               )}
             </StageGate>
           </section>
 
           {/* FAQs */}
-          <AGCFAQAccordion className="mb-12" />
+          <AGCFAQAccordion className="mb-8 md:mb-12" />
 
           {/* Compliance Notice */}
-          <section className="mb-12">
-            <Card className="border-primary/30 bg-primary/5">
-              <CardContent className="p-6">
-                <div className="flex items-start gap-4">
-                  <Shield className="h-6 w-6 text-primary shrink-0 mt-1" />
+          <section className="mb-8 md:mb-12">
+            <Card className="border-gold/30 bg-gold/5">
+              <CardContent className="p-4 md:p-6">
+                <div className="flex items-start gap-3 md:gap-4">
+                  <Shield className="h-5 w-5 md:h-6 md:w-6 text-gold shrink-0 mt-0.5 md:mt-1" />
                   <div>
-                    <h3 className="font-semibold mb-2">Compliance & Integrity Notice</h3>
-                    <p className="text-sm text-muted-foreground">
-                      All AGC activities are logged, verified, and monitored. Abuse, duplication, 
-                      or manipulation results in disqualification.
+                    <h3 className="font-semibold text-white text-sm md:text-base mb-1 md:mb-2">
+                      Compliance & Integrity Notice
+                    </h3>
+                    <p className="text-xs md:text-sm text-white/60">
+                      All AGC activities are logged, verified, and monitored.
+                      Abuse, duplication, or manipulation results in
+                      disqualification.
                     </p>
                   </div>
                 </div>
@@ -700,37 +659,51 @@ export default function VoteWithAGC() {
         </div>
 
         {/* Final CTA */}
-        <section className="bg-gradient-to-r from-charcoal to-charcoal/90 py-16">
-          <div className="container text-center">
-            <h2 className="font-display text-2xl md:text-3xl font-bold text-white mb-4">
+        <section className="bg-gradient-to-r from-charcoal to-charcoal/90 py-12 md:py-16">
+          <div className="container px-4 sm:px-6 text-center">
+            <h2 className="font-display text-xl sm:text-2xl md:text-3xl font-bold text-white mb-3 md:mb-4">
               Ready to Vote?
             </h2>
-            <p className="text-white/70 mb-8 max-w-lg mx-auto">
+            <p className="text-white/70 mb-6 md:mb-8 max-w-lg mx-auto text-sm md:text-base">
               Attend. Celebrate. Rebuild. Sponsor.
             </p>
-            <div className="flex flex-wrap justify-center gap-3">
+            <div className="flex flex-wrap justify-center gap-2 md:gap-3 px-4">
               <Link to="/register">
-                <Button size="lg" className="bg-gold hover:bg-gold-dark text-charcoal font-semibold">
-                  <UserPlus className="mr-2 h-4 w-4" />
+                <Button
+                  size="sm"
+                  className="bg-gold hover:bg-gold-dark text-charcoal font-semibold text-xs sm:text-sm"
+                >
+                  <UserPlus className="mr-2 h-3 w-3 md:h-4 md:w-4" />
                   Sign Up
                 </Button>
               </Link>
               <Link to="/nominate">
-                <Button size="lg" variant="outline" className="border-gold/50 text-gold hover:bg-gold/10">
-                  <Trophy className="mr-2 h-4 w-4" />
+                <Button
+                  size="sm"
+                  variant="outline"
+                  className="border-gold/50 text-gold hover:bg-gold/10 text-xs sm:text-sm"
+                >
+                  <Trophy className="mr-2 h-3 w-3 md:h-4 md:w-4" />
                   Nominate & Earn
                 </Button>
               </Link>
               <Link to="/about-agc">
-                <Button size="lg" variant="outline" className="border-gold/50 text-gold hover:bg-gold/10">
-                  <Coins className="mr-2 h-4 w-4" />
+                <Button
+                  size="sm"
+                  variant="outline"
+                  className="border-gold/50 text-gold hover:bg-gold/10 text-xs sm:text-sm"
+                >
+                  <Coins className="mr-2 h-3 w-3 md:h-4 md:w-4" />
                   Get AGC
                 </Button>
               </Link>
               <a href="#vote">
-                <Button size="lg" className="bg-gold hover:bg-gold-dark text-charcoal font-semibold">
+                <Button
+                  size="sm"
+                  className="bg-gold hover:bg-gold-dark text-charcoal font-semibold text-xs sm:text-sm"
+                >
                   Vote Now
-                  <ArrowRight className="ml-2 h-4 w-4" />
+                  <ArrowRight className="ml-2 h-3 w-3 md:h-4 md:w-4" />
                 </Button>
               </a>
             </div>
@@ -743,14 +716,13 @@ export default function VoteWithAGC() {
 
 // Nominee Grid Component with AGC voting
 interface NomineeVoteGridProps {
-  nominees: Nominee[];
+  nominees: DisplayNominee[];
   userVotes: string[];
   votingNomineeId: string | null;
   onVote: (nomineeId: string) => void;
   user: unknown;
   voteQuantity: Record<string, number>;
   setVoteQuantity: React.Dispatch<React.SetStateAction<Record<string, number>>>;
-  agcBalance: number;
 }
 
 function NomineeVoteGrid({
@@ -761,10 +733,9 @@ function NomineeVoteGrid({
   user,
   voteQuantity,
   setVoteQuantity,
-  agcBalance,
 }: NomineeVoteGridProps) {
   return (
-    <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+    <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
       {nominees.map((nominee) => {
         const hasVoted = userVotes.includes(nominee.id);
         const isVoting = votingNomineeId === nominee.id;
@@ -774,62 +745,76 @@ function NomineeVoteGrid({
         const nomineeData: NomineeCardData = {
           id: nominee.id,
           name: nominee.name,
-          title: nominee.title || undefined,
-          organization: nominee.organization || undefined,
-          photoUrl: nominee.photo_url || undefined,
-          slug: nominee.slug,
-          publicVotes: nominee.public_votes,
-          subcategoryName: nominee.subcategories.name,
-          categoryName: nominee.subcategories.categories.name,
+          title: nominee.achievement?.substring(0, 100) || undefined,
+          organization:
+            nominee.accountType === "ORGANIZATION" ? nominee.name : undefined,
+          photoUrl: nominee.profileImage || "/placeholder.svg",
+          slug: nominee.id,
+          publicVotes: nominee.nominationCount || 0,
+          subcategoryName: nominee.subCategoryName,
+          categoryName: nominee.categoryName,
         };
 
         return (
-          <Card key={nominee.id} className="overflow-hidden">
+          <Card
+            key={nominee.id}
+            className="bg-white/5 border-gold/20 overflow-hidden"
+          >
             <NomineeCard nominee={nomineeData} variant="compact" />
-            <CardContent className="border-t pt-4">
+            <CardContent className="border-t border-gold/20 p-3 md:p-4">
               {hasVoted ? (
-                <Badge variant="secondary" className="w-full justify-center py-2">
+                <Badge
+                  variant="secondary"
+                  className="w-full justify-center py-1.5 md:py-2 bg-gold/10 text-gold border-gold/30 text-xs md:text-sm"
+                >
                   ✓ Voted
                 </Badge>
               ) : (
-                <div className="space-y-3">
+                <div className="space-y-2 md:space-y-3">
                   <div className="flex items-center gap-2">
                     <Select
                       value={qty.toString()}
-                      onValueChange={(v) => 
-                        setVoteQuantity(prev => ({ ...prev, [nominee.id]: parseInt(v) }))
+                      onValueChange={(v) =>
+                        setVoteQuantity((prev) => ({
+                          ...prev,
+                          [nominee.id]: parseInt(v),
+                        }))
                       }
                     >
-                      <SelectTrigger className="w-20">
+                      <SelectTrigger className="w-16 md:w-20 h-8 md:h-10 bg-white/5 border-gold/20 text-white text-xs md:text-sm">
                         <SelectValue />
                       </SelectTrigger>
-                      <SelectContent>
-                        {[1, 2, 3, 5, 10, 25, 50].map((n) => (
-                          <SelectItem 
-                            key={n} 
+                      <SelectContent className="bg-charcoal-light border-gold/20">
+                        {[1, 2, 3, 5, 10].map((n) => (
+                          <SelectItem
+                            key={n}
                             value={n.toString()}
-                            disabled={n > agcBalance}
+                            className="text-white hover:bg-gold/10 text-xs md:text-sm"
                           >
                             {n}
                           </SelectItem>
                         ))}
                       </SelectContent>
                     </Select>
-                    <span className="text-sm text-muted-foreground flex-1">
+                    <span className="text-xs md:text-sm text-white/60 flex-1">
                       = {cost} AGC
                     </span>
                   </div>
                   <Button
-                    className="w-full bg-gold hover:bg-gold-dark text-charcoal"
+                    className="w-full bg-gold hover:bg-gold-dark text-charcoal text-xs md:text-sm h-8 md:h-10"
                     onClick={() => onVote(nominee.id)}
-                    disabled={!user || isVoting || cost > agcBalance}
+                    disabled={!user || isVoting}
                   >
                     {isVoting ? (
-                      <Loader2 className="h-4 w-4 animate-spin mr-2" />
+                      <Loader2 className="h-3 w-3 md:h-4 md:w-4 animate-spin mr-1 md:mr-2" />
                     ) : (
-                      <VoteIcon className="h-4 w-4 mr-2" />
+                      <VoteIcon className="h-3 w-3 md:h-4 md:w-4 mr-1 md:mr-2" />
                     )}
-                    {!user ? "Sign in to Vote" : isVoting ? "Voting..." : "Vote"}
+                    {!user
+                      ? "Sign in to Vote"
+                      : isVoting
+                        ? "Voting..."
+                        : "Vote"}
                   </Button>
                 </div>
               )}

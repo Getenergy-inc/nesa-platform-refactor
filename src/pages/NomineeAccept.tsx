@@ -126,22 +126,21 @@ export default function NomineeAccept() {
     }
   };
 
-  // Loading state
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-primary/5 via-background to-primary/10 p-4">
-        <Card className="max-w-2xl w-full">
-          <CardContent className="p-8 space-y-6">
+      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-primary/5 via-background to-primary/10 px-4 py-8">
+        <Card className="w-full max-w-xl sm:max-w-2xl">
+          <CardContent className="p-4 sm:p-6 md:p-8 space-y-5 sm:space-y-6">
             <div className="flex justify-center">
-              <Skeleton className="h-20 w-48" />
+              <Skeleton className="h-16 sm:h-20 w-40 sm:w-48" />
             </div>
-            <Skeleton className="h-8 w-3/4 mx-auto" />
+            <Skeleton className="h-6 sm:h-8 w-3/4 mx-auto" />
             <Skeleton className="h-4 w-1/2 mx-auto" />
             <div className="space-y-3">
-              <Skeleton className="h-20 w-full" />
-              <Skeleton className="h-20 w-full" />
+              <Skeleton className="h-16 sm:h-20 w-full" />
+              <Skeleton className="h-16 sm:h-20 w-full" />
             </div>
-            <Skeleton className="h-12 w-full" />
+            <Skeleton className="h-10 sm:h-12 w-full" />
           </CardContent>
         </Card>
       </div>
@@ -151,29 +150,35 @@ export default function NomineeAccept() {
   // Error state
   if (error) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-background p-4">
-        <Card className="max-w-lg w-full text-center">
-          <CardContent className="p-8 space-y-6">
+      <div className="min-h-screen flex items-center justify-center bg-background px-4 py-8">
+        <Card className="w-full max-w-md sm:max-w-lg text-center">
+          <CardContent className="p-6 sm:p-8 space-y-5 sm:space-y-6">
             <div className="flex justify-center">
-              <div className="bg-destructive/10 p-4 rounded-full">
+              <div className="bg-destructive/10 p-3 sm:p-4 rounded-full">
                 {error.includes("expired") ? (
-                  <Clock className="h-12 w-12 text-destructive" />
+                  <Clock className="h-10 w-10 sm:h-12 sm:w-12 text-destructive" />
                 ) : error.includes("declined") ? (
-                  <XCircle className="h-12 w-12 text-muted-foreground" />
+                  <XCircle className="h-10 w-10 sm:h-12 sm:w-12 text-muted-foreground" />
                 ) : (
-                  <AlertCircle className="h-12 w-12 text-destructive" />
+                  <AlertCircle className="h-10 w-10 sm:h-12 sm:w-12 text-destructive" />
                 )}
               </div>
             </div>
+
             <div className="space-y-2">
-              <h2 className="text-xl font-semibold">Unable to Process</h2>
-              <p className="text-muted-foreground">{error}</p>
+              <h2 className="text-lg sm:text-xl font-semibold">
+                Unable to Process
+              </h2>
+              <p className="text-sm sm:text-base text-muted-foreground">
+                {error}
+              </p>
             </div>
-            <div className="flex flex-col gap-2">
-              <Button asChild>
+
+            <div className="flex flex-col sm:flex-row gap-2">
+              <Button asChild className="w-full">
                 <Link to="/contact">Contact Support</Link>
               </Button>
-              <Button variant="ghost" asChild>
+              <Button variant="ghost" asChild className="w-full">
                 <Link to="/">Return Home</Link>
               </Button>
             </div>
@@ -183,16 +188,19 @@ export default function NomineeAccept() {
     );
   }
 
-  // Success state
   if (accepted && result && nominee) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-primary/5 via-background to-primary/10 p-4 py-12">
-        <AcceptanceSuccessCard
-          nomineeName={nominee.name}
-          certificateDownloadLocked={result.certificate_download_locked ?? true}
-          renominationsNeeded={result.renominations_needed ?? 200}
-          token={token}
-        />
+      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-primary/5 via-background to-primary/10 px-4 py-10">
+        <div className="w-full max-w-xl sm:max-w-2xl">
+          <AcceptanceSuccessCard
+            nomineeName={nominee.name}
+            certificateDownloadLocked={
+              result.certificate_download_locked ?? true
+            }
+            renominationsNeeded={result.renominations_needed ?? 200}
+            token={token}
+          />
+        </div>
       </div>
     );
   }
@@ -203,16 +211,18 @@ export default function NomineeAccept() {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-primary/5 via-background to-primary/10 p-4 py-12">
-      <Card className="max-w-2xl w-full shadow-xl border-0">
-        <CardContent className="p-6 md:p-10 space-y-8">
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-primary/5 via-background to-primary/10 px-4 py-10">
+      <Card className="w-full max-w-xl sm:max-w-2xl lg:max-w-3xl shadow-xl border-0">
+        <CardContent className="p-5 sm:p-6 md:p-8 lg:p-10 space-y-6 sm:space-y-8">
           {/* Header */}
           <AcceptanceLetterHeader nomineeName={nominee.name} />
 
-          {/* Congratulations Message */}
-          <div className="space-y-4">
-            <p className="text-lg font-medium text-primary">Congratulations!</p>
-            <p className="text-muted-foreground leading-relaxed">
+          {/* Message */}
+          <div className="space-y-3 sm:space-y-4">
+            <p className="text-base sm:text-lg font-medium text-primary">
+              Congratulations!
+            </p>
+            <p className="text-sm sm:text-base text-muted-foreground leading-relaxed">
               You have been nominated for the{" "}
               <strong className="text-foreground">
                 New Education Standard Awards Africa (NESA-Africa) 2025
@@ -221,35 +231,37 @@ export default function NomineeAccept() {
             </p>
           </div>
 
-          {/* Categories List */}
+          {/* Categories */}
           <AcceptanceCategoriesList categories={nominee.categories} />
 
-          {/* Recognition Reason */}
+          {/* Reason */}
           {nominee.primary_justification && (
             <div className="bg-muted/30 rounded-lg p-4 border-l-4 border-primary">
-              <p className="text-sm text-muted-foreground mb-1">
-                This nomination recognizes your outstanding contributions to
-                education through:
+              <p className="text-xs sm:text-sm text-muted-foreground mb-1">
+                This nomination recognizes your outstanding contributions:
               </p>
-              <p className="text-foreground italic">
+              <p className="text-sm sm:text-base text-foreground italic">
                 "{nominee.primary_justification}"
               </p>
             </div>
           )}
 
-          {/* Next Steps */}
+          {/* Steps */}
           <AcceptanceNextSteps />
 
-          {/* CTA Buttons */}
-          <div className="space-y-4 pt-4">
+          {/* CTA */}
+          <div className="space-y-3 sm:space-y-4 pt-2 sm:pt-4">
             <Button
               size="lg"
               onClick={handleAccept}
               disabled={submitting}
-              className="w-full text-lg py-6"
+              className="w-full text-sm sm:text-base py-5 sm:py-6"
             >
-              {submitting && <Loader2 className="h-5 w-5 mr-2 animate-spin" />}
-              {!submitting && <CheckCircle className="h-5 w-5 mr-2" />}
+              {submitting ? (
+                <Loader2 className="h-4 w-4 sm:h-5 sm:w-5 mr-2 animate-spin" />
+              ) : (
+                <CheckCircle className="h-4 w-4 sm:h-5 sm:w-5 mr-2" />
+              )}
               Accept My Nomination & Activate Dashboard
             </Button>
 
@@ -258,7 +270,7 @@ export default function NomineeAccept() {
                 variant="ghost"
                 size="sm"
                 asChild
-                className="text-muted-foreground"
+                className="text-xs sm:text-sm text-muted-foreground"
               >
                 <Link to={`/nominee/decline/${token}_${nominationId}`}>
                   I'd like to decline this nomination
@@ -267,17 +279,17 @@ export default function NomineeAccept() {
             </div>
           </div>
 
-          {/* Closing */}
-          <div className="text-center text-sm text-muted-foreground pt-4 border-t space-y-2">
+          {/* Footer */}
+          <div className="text-center text-xs sm:text-sm text-muted-foreground pt-4 border-t space-y-2">
             <p>
               We are honored to have you join Africa's largest educational
               recognition movement.
             </p>
-            <p className="text-xs">
+            <p className="text-[11px] sm:text-xs">
               Questions? Contact us at{" "}
               <a
                 href="mailto:nominees@nesa.africa"
-                className="text-primary hover:underline"
+                className="text-primary hover:underline break-all"
               >
                 nominees@nesa.africa
               </a>

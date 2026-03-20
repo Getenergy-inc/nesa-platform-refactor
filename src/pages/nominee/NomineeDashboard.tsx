@@ -4,7 +4,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Card, CardContent } from "@/components/ui/card";
-import { AlertCircle, Home } from "lucide-react";
+import { AlertCircle, Home, Menu, X, ChevronDown } from "lucide-react";
 import {
   NominationDashboardItem,
   NomineeDashboardData,
@@ -13,14 +13,39 @@ import { NominationSelector } from "@/components/nominees/NominationSelector";
 import { NominationCertificateGrid } from "@/components/nominee-dashboard/NominationCertificateGrid";
 import { NomineeDashboardHeader } from "@/components/nominee-dashboard/NomineeDashboardHeader";
 import { NominationOverviewCard } from "@/components/nominee-dashboard/NominationOverview";
-import { NominationEditForm } from "@/components/nominee-dashboard/NominationEditForm"; // Import the edit form
+import { NominationEditForm } from "@/components/nominee-dashboard/NominationEditForm";
 import { nominationApi, updateNomination } from "@/api/nomination";
 import { useAuth } from "@/contexts/AuthContext";
 import { NomineeStatsGrid } from "@/components/nominee-dashboard";
+import {
+  Sheet,
+  SheetContent,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+  SheetClose,
+} from "@/components/ui/sheet";
+import { ScrollArea } from "@/components/ui/scroll-area";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Badge } from "@/components/ui/badge";
+import {
+  Home as HomeIcon,
+  Award,
+  FileText,
+  Settings,
+  LogOut,
+} from "lucide-react";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 export default function NomineeDashboard() {
   const navigate = useNavigate();
-  const { accessToken, user } = useAuth();
+  const { accessToken, user, signOut } = useAuth();
 
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -30,6 +55,9 @@ export default function NomineeDashboard() {
   >(null);
   const [selectNominationDetails, setSelectedNominationDetails] =
     useState<updateNomination | null>(null);
+
+  // Mobile sidebar state
+  const [sidebarOpen, setSidebarOpen] = useState(false);
 
   useEffect(() => {
     async function loadData() {
@@ -48,30 +76,32 @@ export default function NomineeDashboard() {
         if (nominationItems.length > 0) {
           setSelectedNominationId(nominationItems[0].id);
         }
-      } catch (err) {
+      } catch {
         setError("Failed to load dashboard");
       } finally {
         setLoading(false);
       }
     }
 
-    loadData();
+    if (user && accessToken) {
+      loadData();
+    }
   }, [user, accessToken]);
 
   useEffect(() => {
     async function fetchNominationDetails() {
       if (!selectedNominationId || !accessToken) return;
 
-      setLoading(true);
       try {
         const details = await nominationApi.fetchNominationDetails(
           accessToken,
           selectedNominationId,
         );
-        // convert to updateNomination interface
-        const nominationDetail: updateNomination = {
+
+        setSelectedNominationDetails({
           id: details.id,
           phone: details.phone,
+          fullName: details.fullName,
           country: details.country,
           stateRegion: details.stateRegion,
           impactSummary: details.impactSummary,
@@ -81,41 +111,44 @@ export default function NomineeDashboard() {
           profileImage: details.profileImage,
           evidenceUrl: details.evidenceUrl,
           accountType: details.accountType,
-        };
-        setSelectedNominationDetails(nominationDetail);
-      } catch (err) {
+        });
+      } catch {
         setError("Failed to load nomination details");
-      } finally {
-        setLoading(false);
       }
     }
 
     fetchNominationDetails();
   }, [selectedNominationId, accessToken]);
 
-  // Handler for updating a nomination after edit
   const handleNominationUpdated = (updatedNomination: updateNomination) => {
     setSelectedNominationDetails(updatedNomination);
   };
 
+  const handleSignOut = () => {
+    signOut();
+    navigate("/");
+  };
+
   if (loading) {
     return (
-      <div className="container py-12 space-y-6">
-        <Skeleton className="h-12 w-64" />
-        <Skeleton className="h-40 w-full rounded-2xl" />
-        <Skeleton className="h-64 w-full rounded-2xl" />
+      <div className="min-h-screen px-4 sm:px-6 py-8 max-w-6xl mx-auto space-y-5">
+        <Skeleton className="h-8 w-40" />
+        <Skeleton className="h-32 w-full rounded-xl" />
+        <Skeleton className="h-56 w-full rounded-xl" />
       </div>
     );
   }
 
   if (error || !nominee) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-background">
-        <Card className="max-w-md w-full text-center shadow-xl border-0">
-          <CardContent className="p-10 space-y-6">
-            <AlertCircle className="h-12 w-12 mx-auto text-destructive" />
-            <p className="text-muted-foreground">{error}</p>
-            <Button asChild>
+      <div className="min-h-screen flex items-center justify-center px-4">
+        <Card className="w-full max-w-md text-center">
+          <CardContent className="p-6 sm:p-8 space-y-4">
+            <AlertCircle className="h-10 w-10 mx-auto text-destructive" />
+            <p className="text-muted-foreground">
+              {error || "Failed to load dashboard"}
+            </p>
+            <Button asChild className="w-full">
               <Link to="/">
                 <Home className="mr-2 h-4 w-4" />
                 Return Home
@@ -131,60 +164,242 @@ export default function NomineeDashboard() {
     (n) => n.id === selectedNominationId,
   );
 
-  return (
-    <div className="min-h-screen bg-background">
-      {/* Header */}
-      <NomineeDashboardHeader
-        nomineeName={nominee.name}
-        acceptanceStatus="ACCEPTED"
-      />
+  // Get user initials for avatar
+  const userInitials = user
+    ? `${user.firstName?.[0] || ""}${user.lastName?.[0] || ""}`.toUpperCase()
+    : "NN";
 
-      <main className="container py-10 space-y-10">
-        {/* Welcome Block */}
-        <div className="space-y-2">
-          <h1 className="text-3xl font-display font-bold tracking-tight">
-            Welcome back, {user.firstName}
+  // Truncate long category names
+  const truncateCategory = (text: string, maxLength: number = 30) => {
+    if (text.length <= maxLength) return text;
+    return text.substring(0, maxLength) + "...";
+  };
+
+  return (
+    <div className="min-h-screen bg-background flex flex-col">
+      {/* Header with mobile menu button */}
+      <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+        <div className="container flex h-14 sm:h-16 items-center justify-between px-4">
+          <div className="flex items-center gap-2">
+            {/* Mobile menu trigger */}
+            <Sheet open={sidebarOpen} onOpenChange={setSidebarOpen}>
+              <SheetTrigger asChild>
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  className="lg:hidden"
+                  aria-label="Open menu"
+                >
+                  <Menu className="h-5 w-5" />
+                </Button>
+              </SheetTrigger>
+              <SheetContent side="left" className="w-[280px] sm:w-[320px] p-0">
+                <SheetHeader className="p-4 border-b">
+                  <SheetTitle className="flex items-center gap-2">
+                    <Avatar className="h-8 w-8">
+                      <AvatarImage src={user?.profilePic} />
+                      <AvatarFallback>{userInitials}</AvatarFallback>
+                    </Avatar>
+                    <div className="flex flex-col">
+                      <span className="text-sm font-medium">
+                        {user?.firstName} {user?.lastName}
+                      </span>
+                      <span className="text-xs text-muted-foreground truncate">
+                        {user?.email}
+                      </span>
+                    </div>
+                  </SheetTitle>
+                </SheetHeader>
+                <ScrollArea className="h-[calc(100vh-5rem)]">
+                  <div className="p-4 space-y-4">
+                    <div className="space-y-1">
+                      <Badge variant="outline" className="mb-2">
+                        Nominee
+                      </Badge>
+                      <nav className="space-y-1">
+                        <Button
+                          variant="ghost"
+                          className="w-full justify-start"
+                          asChild
+                        >
+                          <Link to="/" onClick={() => setSidebarOpen(false)}>
+                            <HomeIcon className="mr-2 h-4 w-4" />
+                            Home
+                          </Link>
+                        </Button>
+                        <Button
+                          variant="ghost"
+                          className="w-full justify-start"
+                          asChild
+                        >
+                          <Link
+                            to="/nominee/dashboard"
+                            onClick={() => setSidebarOpen(false)}
+                          >
+                            <HomeIcon className="mr-2 h-4 w-4" />
+                            Dashboard
+                          </Link>
+                        </Button>
+                        {/* <Button
+                          variant="ghost"
+                          className="w-full justify-start"
+                          asChild
+                        >
+                          <Link
+                            to="/nominee/profile"
+                            onClick={() => setSidebarOpen(false)}
+                          >
+                            <FileText className="mr-2 h-4 w-4" />
+                            My Profile
+                          </Link>
+                        </Button> */}
+                        {/* <Button
+                          variant="ghost"
+                          className="w-full justify-start"
+                          asChild
+                        >
+                          <Link
+                            to="/nominee/nominations"
+                            onClick={() => setSidebarOpen(false)}
+                          >
+                            <Award className="mr-2 h-4 w-4" />
+                            My Nominations
+                          </Link>
+                        </Button> */}
+                        {/* <Button
+                          variant="ghost"
+                          className="w-full justify-start"
+                          asChild
+                        >
+                          <Link
+                            to="/nominee/settings"
+                            onClick={() => setSidebarOpen(false)}
+                          >
+                            <Settings className="mr-2 h-4 w-4" />
+                            Settings
+                          </Link>
+                        </Button> */}
+                      </nav>
+                    </div>
+                    <div className="pt-4 border-t">
+                      <Button
+                        variant="ghost"
+                        className="w-full justify-start text-red-500 hover:text-red-600 hover:bg-red-50"
+                        onClick={() => {
+                          handleSignOut();
+                          setSidebarOpen(false);
+                        }}
+                      >
+                        <LogOut className="mr-2 h-4 w-4" />
+                        Sign Out
+                      </Button>
+                    </div>
+                  </div>
+                </ScrollArea>
+              </SheetContent>
+            </Sheet>
+
+            {/* Logo/Title */}
+            <Link to="/" className="flex items-center gap-2">
+              <span className="font-bold text-lg sm:text-xl">NESA Africa</span>
+            </Link>
+          </div>
+
+          {/* Desktop navigation */}
+          <div className="hidden lg:flex items-center gap-4">
+            <span className="text-sm text-muted-foreground">
+              Welcome, {user?.firstName}
+            </span>
+            <Button variant="outline" size="sm" onClick={handleSignOut}>
+              Sign Out
+            </Button>
+          </div>
+
+          {/* Mobile user indicator */}
+          <div className="flex lg:hidden items-center gap-2">
+            <Avatar className="h-8 w-8">
+              <AvatarFallback>{userInitials}</AvatarFallback>
+            </Avatar>
+          </div>
+        </div>
+      </header>
+
+      {/* MAIN CONTENT */}
+      <main className="flex-1 w-full px-4 sm:px-6 lg:px-8 py-6 sm:py-8 max-w-7xl mx-auto space-y-6 sm:space-y-8">
+        {/* Welcome */}
+        <div>
+          <h1 className="text-xl sm:text-2xl lg:text-3xl font-bold">
+            Welcome back, {user?.firstName}
           </h1>
-          <p className="text-muted-foreground text-base">
-            Manage your nominations, track progress, and access your
-            certificates.
+          <p className="text-xs sm:text-sm text-muted-foreground">
+            Manage your nominations and certificates.
           </p>
         </div>
 
-        {/* Nomination Selector */}
-        <Card className="rounded-2xl border shadow-sm">
-          <CardContent className="p-6 space-y-4">
-            <div>
-              <h2 className="text-lg font-semibold">Your Nominations</h2>
-              <p className="text-sm text-muted-foreground">
-                Select a nomination to view its details and certificates.
-              </p>
-            </div>
+        {/* Nominations Section - Improved for mobile */}
+        <div className="space-y-4">
+          <div className="flex items-center justify-between">
+            <h2 className="text-sm sm:text-base font-semibold">
+              Your Nominations
+            </h2>
+            <Badge variant="outline" className="text-xs">
+              {nominee.nominations.length} total
+            </Badge>
+          </div>
 
+          {/* Mobile: Dropdown selector for nominations */}
+          <div className="sm:hidden">
+            <Select
+              value={selectedNominationId || undefined}
+              onValueChange={setSelectedNominationId}
+            >
+              <SelectTrigger className="w-full">
+                <SelectValue placeholder="Select a nomination" />
+              </SelectTrigger>
+              <SelectContent>
+                {nominee.nominations.map((nom) => (
+                  <SelectItem key={nom.id} value={nom.id} className="pr-8">
+                    <div className="flex flex-col items-start py-1">
+                      <span className="font-medium text-sm">
+                        {truncateCategory(nom.category, 25)}
+                      </span>
+                      <span className="text-xs text-muted-foreground">
+                        {nom.subcategory}
+                      </span>
+                    </div>
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+          </div>
+
+          {/* Desktop: Original selector */}
+          <div className="hidden sm:block">
             <NominationSelector
               nominations={nominee.nominations}
               selectedId={selectedNominationId}
               onSelect={setSelectedNominationId}
             />
-          </CardContent>
-        </Card>
+          </div>
+        </div>
 
-        {/* Nomination Content */}
+        {/* Content */}
         {selectedNomination && (
-          <Card className="rounded-2xl border shadow-sm">
-            <CardContent className="p-8 space-y-8">
+          <Card className="overflow-hidden">
+            <CardContent className="p-4 sm:p-6 lg:p-8 space-y-6">
+              {/* Title - Improved for mobile */}
               <div className="space-y-1">
-                <h2 className="text-xl font-semibold">
+                <h2 className="text-base sm:text-lg font-semibold leading-tight">
                   {selectedNomination.category}
                 </h2>
-                <p className="text-sm text-muted-foreground">
+                <p className="text-xs sm:text-sm text-muted-foreground break-words">
                   {selectedNomination.subcategory}
                 </p>
               </div>
 
-              {/* Stats Section */}
-              <Card className="rounded-2xl border bg-card shadow-sm">
-                <CardContent className="p-6">
+              {/* Stats - Responsive grid */}
+              <Card className="overflow-hidden">
+                <CardContent className="p-3 sm:p-5">
                   <NomineeStatsGrid
                     endorsementCount={selectedNomination.endorsement_count}
                     endorsementGoal={200}
@@ -193,18 +408,42 @@ export default function NomineeDashboard() {
                 </CardContent>
               </Card>
 
-              <Tabs defaultValue="overview" className="space-y-6">
-                <TabsList className="bg-muted/40 p-1 rounded-xl">
-                  <TabsTrigger value="overview">Overview</TabsTrigger>
-                  <TabsTrigger value="certificates">Certificates</TabsTrigger>
-                  <TabsTrigger value="edit">Edit Nomination</TabsTrigger>
-                </TabsList>
+              {/* Tabs - Improved mobile scrolling */}
+              <Tabs defaultValue="overview" className="space-y-4">
+                {/* Scrollable tabs on mobile with better UX */}
+                <div className="relative">
+                  <div className="absolute right-0 top-0 bottom-0 w-8 bg-gradient-to-l from-background to-transparent pointer-events-none sm:hidden" />
+                  <div className="overflow-x-auto pb-1 scrollbar-hide">
+                    <TabsList className="flex w-max min-w-full sm:w-auto gap-1">
+                      <TabsTrigger value="overview" className="px-3 sm:px-4">
+                        Overview
+                      </TabsTrigger>
+                      <TabsTrigger
+                        value="certificates"
+                        className="px-3 sm:px-4"
+                      >
+                        Certificates
+                        {selectedNomination.certificates?.length > 0 && (
+                          <Badge
+                            variant="secondary"
+                            className="ml-2 text-[10px] px-1.5"
+                          >
+                            {selectedNomination.certificates.length}
+                          </Badge>
+                        )}
+                      </TabsTrigger>
+                      <TabsTrigger value="edit" className="px-3 sm:px-4">
+                        Edit
+                      </TabsTrigger>
+                    </TabsList>
+                  </div>
+                </div>
 
-                <TabsContent value="overview">
+                <TabsContent value="overview" className="mt-4">
                   <NominationOverviewCard nomination={selectedNomination} />
                 </TabsContent>
 
-                <TabsContent value="certificates">
+                <TabsContent value="certificates" className="mt-4">
                   <NominationCertificateGrid
                     certificates={selectedNomination.certificates}
                     onCertificateUpdated={(updatedCert) => {
@@ -229,7 +468,7 @@ export default function NomineeDashboard() {
                   />
                 </TabsContent>
 
-                <TabsContent value="edit">
+                <TabsContent value="edit" className="mt-4">
                   <NominationEditForm
                     nomination={selectNominationDetails}
                     onUpdated={handleNominationUpdated}

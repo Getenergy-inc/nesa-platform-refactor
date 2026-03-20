@@ -1,31 +1,46 @@
-// Public Layout Component
-// Wraps all public-facing pages with NESAHeader and MobileBottomNav
+import { useLocation } from "react-router-dom";
+import { cn } from "@/lib/utils";
+import { MobileBottomNav } from "../navigation/MainNav";
+import { TopPageNav, BottomPageNav } from "../navigation/PageNavigation";
+import { NESAFooter } from "../nesa/NESAFooter";
+import { NESAHeader } from "../nesa/NESAHeader";
 
-import { ReactNode } from "react";
-import { NESAHeader } from "@/components/nesa/NESAHeader";
-import { NESAFooter } from "@/components/nesa/NESAFooter";
-import { MobileBottomNav } from "@/components/navigation/MainNav";
-import { TopPageNav, BottomPageNav } from "@/components/navigation/PageNavigation";
-import { ExitIntentPopup } from "@/components/nesa/ExitIntentPopup";
-
-interface PublicLayoutProps {
-  children: ReactNode;
+export const PublicLayout = ({
+  children,
+  showFooter = true,
+}: {
+  children: React.ReactNode;
   showFooter?: boolean;
-}
+}) => {
+  const location = useLocation();
 
-export function PublicLayout({ children, showFooter = true }: PublicLayoutProps) {
+  // ✅ Detect dashboard pages
+  const isDashboard =
+    location.pathname.startsWith("/nominee") ||
+    location.pathname.startsWith("/admin") ||
+    location.pathname.startsWith("/nrc");
+
   return (
     <div className="min-h-screen bg-charcoal flex flex-col">
-      <NESAHeader />
-      <TopPageNav />
-      <main className="flex-1 pb-20 lg:pb-16">
+      {/* ✅ ONLY show public headers on non-dashboard */}
+      {!isDashboard && <NESAHeader />}
+      {!isDashboard && <TopPageNav />}
+
+      {/* MAIN */}
+      <main
+        className={cn(
+          "flex-1",
+          !isDashboard && "pb-20 lg:pb-16", // public pages need bottom spacing
+          isDashboard && "overflow-x-hidden", // dashboards need clean layout
+        )}
+      >
         {children}
       </main>
-      {showFooter && <NESAFooter />}
-      <BottomPageNav />
-      <ExitIntentPopup />
+
+      {/* FOOTER + NAVS */}
+      {!isDashboard && showFooter && <NESAFooter />}
+      {!isDashboard && <BottomPageNav />}
+      {!isDashboard && <MobileBottomNav />}
     </div>
   );
-}
-
-export default PublicLayout;
+};

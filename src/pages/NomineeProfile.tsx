@@ -17,6 +17,7 @@ import {
   RotateCcw,
   Calendar,
   AlertCircle,
+  ChevronRight,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -27,6 +28,7 @@ import { FollowButton } from "@/components/ui/FollowButton";
 import { toast } from "sonner";
 import { useAuth } from "@/contexts/AuthContext";
 import { useSeason } from "@/contexts/SeasonContext";
+import { cn } from "@/lib/utils";
 
 import {
   NomineeCard,
@@ -102,26 +104,26 @@ function getGeographicBadge(scope: string): {
     case "INTERNATIONAL":
       return {
         label: "International",
-        icon: <Globe2 className="w-3 h-3 mr-1" />,
+        icon: <Globe2 className="w-3 h-3 mr-1 flex-shrink-0" />,
         color: "border-blue-500/30 text-blue-400 bg-blue-500/10",
       };
     case "NIGERIA":
       return {
         label: "Nigeria",
-        icon: <MapPin className="w-3 h-3 mr-1" />,
+        icon: <MapPin className="w-3 h-3 mr-1 flex-shrink-0" />,
         color: "border-orange-500/30 text-orange-400 bg-orange-500/10",
       };
     case "ICON":
       return {
         label: "Lifetime",
-        icon: <Trophy className="w-3 h-3 mr-1" />,
+        icon: <Trophy className="w-3 h-3 mr-1 flex-shrink-0" />,
         color: "border-purple-500/30 text-purple-400 bg-purple-500/10",
       };
     case "AFRICA_REGIONAL":
     default:
       return {
         label: "Africa Regional",
-        icon: <Globe2 className="w-3 h-3 mr-1" />,
+        icon: <Globe2 className="w-3 h-3 mr-1 flex-shrink-0" />,
         color: "border-emerald-500/30 text-emerald-400 bg-emerald-500/10",
       };
   }
@@ -130,25 +132,25 @@ function getGeographicBadge(scope: string): {
 function ProfileSkeleton() {
   return (
     <div className="min-h-screen bg-charcoal">
-      <div className="container mx-auto px-4 py-20">
-        <div className="grid lg:grid-cols-3 gap-8">
+      <div className="container mx-auto px-4 py-12 sm:py-20">
+        <div className="space-y-6 lg:space-y-0 lg:grid lg:grid-cols-3 lg:gap-8">
           <div className="lg:col-span-2">
             <Card className="bg-charcoal-light border-gold/20">
-              <CardContent className="p-8">
-                <div className="flex flex-col md:flex-row gap-6">
-                  <Skeleton className="w-32 h-32 rounded-full bg-white/10" />
-                  <div className="flex-1 space-y-4">
-                    <Skeleton className="h-8 w-64 bg-white/10" />
-                    <Skeleton className="h-4 w-48 bg-white/10" />
-                    <Skeleton className="h-4 w-32 bg-white/10" />
+              <CardContent className="p-4 sm:p-6 md:p-8">
+                <div className="flex flex-col sm:flex-row gap-4 sm:gap-6">
+                  <Skeleton className="w-20 h-20 sm:w-24 sm:h-24 md:w-32 md:h-32 rounded-full bg-white/10 mx-auto sm:mx-0" />
+                  <div className="flex-1 space-y-3 sm:space-y-4 text-center sm:text-left">
+                    <Skeleton className="h-6 sm:h-8 w-48 sm:w-64 mx-auto sm:mx-0 bg-white/10" />
+                    <Skeleton className="h-4 w-40 sm:w-48 mx-auto sm:mx-0 bg-white/10" />
+                    <Skeleton className="h-4 w-32 sm:w-36 mx-auto sm:mx-0 bg-white/10" />
                   </div>
                 </div>
               </CardContent>
             </Card>
           </div>
-          <div className="space-y-6">
-            <Skeleton className="h-48 w-full bg-white/10" />
-            <Skeleton className="h-32 w-full bg-white/10" />
+          <div className="space-y-4 sm:space-y-6 mt-6 lg:mt-0">
+            <Skeleton className="h-40 sm:h-48 w-full bg-white/10" />
+            <Skeleton className="h-28 sm:h-32 w-full bg-white/10" />
           </div>
         </div>
       </div>
@@ -158,7 +160,6 @@ function ProfileSkeleton() {
 
 export default function NomineeProfile() {
   const { id } = useParams<{ id: string }>();
-  const { accessToken } = useAuth();
   const {
     isStageOpen,
     currentEdition,
@@ -176,18 +177,17 @@ export default function NomineeProfile() {
   // Fetch nominee data
   useEffect(() => {
     async function fetchNominee() {
-      if (!id || !accessToken) return;
+      if (!id) return;
 
       try {
         setLoading(true);
         // You'll need to create this endpoint
-        const data = await nominationApi.fetchNomineeProfile(accessToken, id);
+        const data = await nominationApi.fetchNomineeProfile(id);
         setNominee(data);
 
         // Fetch related nominees (same subcategory)
         if (data.subCategoryId) {
           const related = await nominationApi.fetchSubCategoryNominees(
-            accessToken,
             data.subCategoryId,
           );
           // Filter out current nominee and limit to 4
@@ -205,7 +205,7 @@ export default function NomineeProfile() {
     }
 
     fetchNominee();
-  }, [id, accessToken]);
+  }, [id]);
 
   const handleShare = async (platform: string) => {
     const shareUrl = window.location.href;
@@ -247,22 +247,22 @@ export default function NomineeProfile() {
 
   if (error || !nominee) {
     return (
-      <div className="min-h-screen bg-charcoal flex items-center justify-center">
-        <div className="max-w-md mx-auto text-center px-4">
-          <div className="w-20 h-20 mx-auto mb-5 rounded-full bg-gold/10 flex items-center justify-center">
-            <Users className="w-10 h-10 text-gold/30" />
+      <div className="min-h-screen bg-charcoal flex items-center justify-center p-4">
+        <div className="max-w-md mx-auto text-center">
+          <div className="w-16 h-16 sm:w-20 sm:h-20 mx-auto mb-4 sm:mb-5 rounded-full bg-gold/10 flex items-center justify-center">
+            <Users className="w-8 h-8 sm:w-10 sm:h-10 text-gold/30" />
           </div>
-          <h1 className="text-2xl font-display text-white mb-3">
+          <h1 className="text-xl sm:text-2xl font-display text-white mb-2 sm:mb-3">
             Profile Not Available
           </h1>
-          <p className="text-white/50 text-sm mb-6">
+          <p className="text-white/50 text-xs sm:text-sm mb-4 sm:mb-6">
             {error ||
               "This nominee profile may be under review or the link may be incorrect."}
           </p>
-          <div className="flex flex-col sm:flex-row gap-3 justify-center">
+          <div className="flex flex-col sm:flex-row gap-2 sm:gap-3 justify-center">
             <Button
               asChild
-              className="bg-gold hover:bg-gold-dark text-charcoal"
+              className="bg-gold hover:bg-gold-dark text-charcoal w-full sm:w-auto"
             >
               <Link to="/nominees">
                 <ArrowLeft className="w-4 h-4 mr-2" />
@@ -272,7 +272,7 @@ export default function NomineeProfile() {
             <Button
               asChild
               variant="outline"
-              className="border-gold/30 text-gold hover:bg-gold/10"
+              className="border-gold/30 text-gold hover:bg-gold/10 w-full sm:w-auto"
             >
               <Link to="/nominate">Nominate Someone</Link>
             </Button>
@@ -302,6 +302,12 @@ export default function NomineeProfile() {
   const votingStage = getStage("public_voting");
   const nominationsStage = getStage("nominations");
 
+  // Truncate long text for mobile
+  const truncateText = (text: string, maxLength: number = 120) => {
+    if (text.length <= maxLength) return text;
+    return text.substring(0, maxLength) + "...";
+  };
+
   return (
     <>
       <Helmet>
@@ -314,44 +320,46 @@ export default function NomineeProfile() {
 
       <div className="min-h-screen bg-charcoal">
         {/* Hero Section */}
-        <section className="relative pt-20 pb-12 bg-gradient-to-b from-charcoal via-charcoal/95 to-charcoal overflow-hidden">
+        <section className="relative pt-16 sm:pt-20 pb-8 sm:pb-12 bg-gradient-to-b from-charcoal via-charcoal/95 to-charcoal overflow-hidden">
           <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-gold/8 via-transparent to-transparent" />
 
-          <div className="container mx-auto px-4 relative z-10">
-            {/* Breadcrumbs */}
-            <Breadcrumbs
-              items={[
-                { label: "Nominees", href: "/nominees" },
-                {
-                  label: nominee.categoryName,
-                  href: `/categories/${nominee.categoryId}`,
-                },
-                { label: nominee.fullName },
-              ]}
-              className="mb-6 text-white/60"
-            />
+          <div className="container mx-auto px-3 sm:px-4 relative z-10">
+            {/* Breadcrumbs - Hidden on mobile, visible on tablet/desktop */}
+            <div className="hidden sm:block">
+              <Breadcrumbs
+                items={[
+                  { label: "Nominees", href: "/nominees" },
+                  {
+                    label: nominee.categoryName,
+                    href: `/categories/${nominee.categoryId}`,
+                  },
+                  { label: nominee.fullName },
+                ]}
+                className="mb-6 text-white/60"
+              />
+            </div>
 
-            {/* Back Link */}
+            {/* Back Link - Mobile friendly */}
             <Link
               to="/nominees"
-              className="inline-flex items-center gap-2 text-white/60 hover:text-gold transition-colors mb-8"
+              className="inline-flex items-center gap-1 sm:gap-2 text-white/60 hover:text-gold transition-colors mb-4 sm:mb-8 text-sm sm:text-base"
             >
-              <ArrowLeft className="w-4 h-4" />
+              <ArrowLeft className="w-3 h-3 sm:w-4 sm:h-4" />
               Back to Nominees
             </Link>
 
-            <div className="grid lg:grid-cols-3 gap-8">
+            <div className="space-y-6 lg:space-y-0 lg:grid lg:grid-cols-3 lg:gap-8">
               {/* Main Profile Card */}
               <div className="lg:col-span-2">
-                <Card className="bg-charcoal-light border-gold/20">
-                  <CardContent className="p-8">
-                    <div className="flex flex-col md:flex-row gap-6">
-                      {/* Avatar / Logo */}
-                      <div className="flex-shrink-0">
+                <Card className="bg-charcoal-light border-gold/20 overflow-hidden">
+                  <CardContent className="p-4 sm:p-6 md:p-8">
+                    <div className="flex flex-col sm:flex-row gap-4 sm:gap-6">
+                      {/* Avatar / Logo - Centered on mobile */}
+                      <div className="flex-shrink-0 flex justify-center sm:justify-start">
                         <div
-                          className={`relative w-32 h-32 rounded-full border-4 border-gold/30 overflow-hidden flex items-center justify-center ${
+                          className={`relative w-20 h-20 sm:w-24 sm:h-24 md:w-32 md:h-32 rounded-full border-3 sm:border-4 border-gold/30 overflow-hidden flex items-center justify-center ${
                             nominee.accountType === "ORGANIZATION"
-                              ? "bg-white/90 p-3"
+                              ? "bg-white/90 p-2 sm:p-3"
                               : "bg-gold/20"
                           }`}
                         >
@@ -370,7 +378,7 @@ export default function NomineeProfile() {
                               }}
                             />
                           ) : (
-                            <span className="text-gold text-3xl font-semibold">
+                            <span className="text-gold text-xl sm:text-2xl md:text-3xl font-semibold">
                               {getInitials(nominee.fullName)}
                             </span>
                           )}
@@ -378,15 +386,22 @@ export default function NomineeProfile() {
                       </div>
 
                       {/* Info */}
-                      <div className="flex-1">
-                        <div className="flex flex-wrap items-center gap-2 mb-2">
-                          <Badge className={geoBadge.color}>
+                      <div className="flex-1 text-center sm:text-left">
+                        <div className="flex flex-wrap items-center justify-center sm:justify-start gap-1.5 sm:gap-2 mb-2">
+                          <Badge
+                            className={cn(
+                              geoBadge.color,
+                              "text-[10px] sm:text-xs py-0.5",
+                            )}
+                          >
                             {geoBadge.icon}
-                            {geoBadge.label}
+                            <span className="truncate max-w-[100px] sm:max-w-none">
+                              {geoBadge.label}
+                            </span>
                           </Badge>
                           <Badge
                             variant="outline"
-                            className="border-gold/20 text-gold/80"
+                            className="border-gold/20 text-gold/80 text-[10px] sm:text-xs py-0.5"
                           >
                             {tier === "platinum"
                               ? "Platinum"
@@ -400,20 +415,20 @@ export default function NomineeProfile() {
                           </Badge>
                         </div>
 
-                        <h1 className="font-display text-2xl md:text-3xl lg:text-4xl text-white mb-2">
+                        <h1 className="font-display text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl text-white mb-1 sm:mb-2 break-words">
                           {nominee.fullName}
                         </h1>
 
                         {nominee.impactSummary && (
-                          <p className="text-lg text-white/70 mb-3">
+                          <p className="text-sm sm:text-base text-white/70 mb-2 sm:mb-3 line-clamp-2 sm:line-clamp-none">
                             {nominee.impactSummary}
                           </p>
                         )}
 
-                        <div className="flex flex-wrap items-center gap-4 text-sm text-white/60">
+                        <div className="flex flex-wrap items-center justify-center sm:justify-start gap-2 sm:gap-4 text-xs sm:text-sm text-white/60">
                           <div className="flex items-center gap-1">
-                            <MapPin className="w-4 h-4 text-gold/60" />
-                            <span>
+                            <MapPin className="w-3 h-3 sm:w-4 sm:h-4 text-gold/60 flex-shrink-0" />
+                            <span className="truncate max-w-[120px] sm:max-w-none">
                               {nominee.country}
                               {nominee.stateRegion
                                 ? `, ${nominee.stateRegion}`
@@ -430,66 +445,83 @@ export default function NomineeProfile() {
                               subtitle: nominee.categoryName,
                             }}
                             size="sm"
+                            className="text-xs sm:text-sm"
                           />
                         </div>
                       </div>
                     </div>
 
-                    <Separator className="my-6 bg-gold/10" />
+                    <Separator className="my-4 sm:my-6 bg-gold/10" />
 
-                    {/* Category */}
-                    <div className="mb-6">
-                      <h3 className="text-sm font-medium text-white/50 uppercase tracking-wider mb-2">
+                    {/* Category - IMPROVED MOBILE DISPLAY */}
+                    <div className="mb-4 sm:mb-6">
+                      <h3 className="text-[10px] sm:text-xs font-medium text-white/50 uppercase tracking-wider mb-2 sm:mb-3">
                         Award Category
                       </h3>
-                      <div className="inline-flex items-center gap-2 text-gold">
-                        <Trophy className="w-5 h-5" />
-                        <span className="text-lg font-medium">
-                          {nominee.categoryName}
-                        </span>
-                        {nominee.subCategoryName && (
-                          <>
-                            <span className="text-white/50">—</span>
-                            <span className="text-white/70">
-                              {nominee.subCategoryName}
+                      <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-3">
+                        <div className="flex items-center gap-2 text-gold bg-gold/5 p-2 sm:p-3 rounded-lg border border-gold/10">
+                          <Trophy className="w-4 h-4 sm:w-5 sm:h-5 flex-shrink-0" />
+                          <div className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-2 min-w-0">
+                            <span className="text-sm sm:text-base font-medium break-words">
+                              {nominee.categoryName}
                             </span>
-                          </>
-                        )}
+                            {nominee.subCategoryName && (
+                              <>
+                                <ChevronRight className="hidden sm:block w-4 h-4 text-white/30" />
+                                <span className="text-xs sm:text-sm text-white/70 break-words pl-6 sm:pl-0">
+                                  {nominee.subCategoryName}
+                                </span>
+                              </>
+                            )}
+                          </div>
+                        </div>
                       </div>
+
+                      {/* Mobile subcategory display (alternative layout) */}
+                      {nominee.subCategoryName && (
+                        <div className="mt-2 sm:hidden">
+                          <Badge
+                            variant="outline"
+                            className="border-gold/20 text-gold/80 text-xs"
+                          >
+                            Subcategory: {nominee.subCategoryName}
+                          </Badge>
+                        </div>
+                      )}
                     </div>
 
                     {/* Achievement */}
                     {nominee.achievementDescription && (
-                      <div className="mb-6">
-                        <h3 className="text-sm font-medium text-white/50 uppercase tracking-wider mb-3">
+                      <div className="mb-4 sm:mb-6">
+                        <h3 className="text-[10px] sm:text-xs font-medium text-white/50 uppercase tracking-wider mb-2 sm:mb-3">
                           Achievement
                         </h3>
-                        <p className="text-white/80 leading-relaxed whitespace-pre-line">
+                        <p className="text-sm sm:text-base text-white/80 leading-relaxed whitespace-pre-line break-words">
                           {nominee.achievementDescription}
                         </p>
                       </div>
                     )}
 
-                    {/* Voting/Renomination Info */}
-                    <div className="mt-6 p-4 bg-black/40 rounded-lg border border-gold/20">
-                      <div className="flex items-center gap-3 mb-3">
+                    {/* Voting/Renomination Info - Mobile optimized */}
+                    <div className="mt-4 sm:mt-6 p-3 sm:p-4 bg-black/40 rounded-lg border border-gold/20">
+                      <div className="flex items-center gap-2 sm:gap-3 mb-2 sm:mb-3">
                         {isPlatinum ? (
-                          <RotateCcw className="w-5 h-5 text-gold" />
+                          <RotateCcw className="w-4 h-4 sm:w-5 sm:h-5 text-gold flex-shrink-0" />
                         ) : (
-                          <Vote className="w-5 h-5 text-gold" />
+                          <Vote className="w-4 h-4 sm:w-5 sm:h-5 text-gold flex-shrink-0" />
                         )}
-                        <h3 className="font-medium text-white">
+                        <h3 className="font-medium text-white text-sm sm:text-base">
                           {isPlatinum ? "Renomination Status" : "Voting Status"}
                         </h3>
                       </div>
-                      <p className="text-sm text-white/60 mb-2">
+                      <p className="text-xs sm:text-sm text-white/60 mb-2">
                         {isPlatinum ? (
                           <>
                             This nominee has received{" "}
                             <span className="text-gold font-semibold">
                               {nominee.nominationCount}
                             </span>{" "}
-                            nominations
+                            nomination{nominee.nominationCount !== 1 ? "s" : ""}
                           </>
                         ) : canVote ? (
                           <>
@@ -509,31 +541,31 @@ export default function NomineeProfile() {
                         )}
                       </p>
                       {!isPlatinum && !canVote && votingStage && (
-                        <div className="flex items-center gap-2 text-xs text-white/40">
-                          <Calendar className="w-3 h-3" />
-                          <span>
+                        <div className="flex items-center gap-1.5 sm:gap-2 text-[10px] sm:text-xs text-white/40">
+                          <Calendar className="w-3 h-3 flex-shrink-0" />
+                          <span className="truncate">
                             Voting{" "}
                             {votingStage.opensAt
-                              ? `opens ${new Date(votingStage.opensAt).toLocaleDateString()}`
+                              ? `opens ${new Date(votingStage.opensAt).toLocaleDateString(undefined, { month: "short", day: "numeric" })}`
                               : "season TBA"}
                           </span>
                         </div>
                       )}
                       {isPlatinum && !canRenominate && nominationsStage && (
-                        <div className="flex items-center gap-2 text-xs text-white/40">
-                          <Calendar className="w-3 h-3" />
-                          <span>
+                        <div className="flex items-center gap-1.5 sm:gap-2 text-[10px] sm:text-xs text-white/40">
+                          <Calendar className="w-3 h-3 flex-shrink-0" />
+                          <span className="truncate">
                             Nominations{" "}
                             {nominationsStage.opensAt
-                              ? `open until ${new Date(nominationsStage.closesAt!).toLocaleDateString()}`
+                              ? `open until ${new Date(nominationsStage.closesAt!).toLocaleDateString(undefined, { month: "short", day: "numeric" })}`
                               : "season closed"}
                           </span>
                         </div>
                       )}
                     </div>
 
-                    {/* Primary Actions */}
-                    <div className="mt-6 flex flex-wrap gap-3">
+                    {/* Primary Actions - Stack on mobile */}
+                    <div className="mt-4 sm:mt-6 flex flex-col sm:flex-row gap-2 sm:gap-3">
                       <NomineeActions
                         nominee={{
                           nomineeId: nominee.id,
@@ -560,16 +592,17 @@ export default function NomineeProfile() {
                               : null,
                           );
                         }}
+                        className="w-full sm:w-auto"
                       />
                     </div>
 
                     {/* Links */}
                     {(nominee.linkedInProfile || nominee.website) && (
-                      <div className="mt-6">
-                        <h3 className="text-sm font-medium text-white/50 uppercase tracking-wider mb-3">
+                      <div className="mt-4 sm:mt-6">
+                        <h3 className="text-[10px] sm:text-xs font-medium text-white/50 uppercase tracking-wider mb-2 sm:mb-3">
                           Links
                         </h3>
-                        <div className="flex gap-3">
+                        <div className="flex flex-wrap gap-2">
                           {nominee.linkedInProfile && (
                             <Button
                               variant="outline"
@@ -577,7 +610,7 @@ export default function NomineeProfile() {
                               onClick={() =>
                                 window.open(nominee.linkedInProfile, "_blank")
                               }
-                              className="border-gold/30 text-gold hover:bg-gold/10"
+                              className="border-gold/30 text-gold hover:bg-gold/10 text-xs sm:text-sm h-8 sm:h-9"
                             >
                               LinkedIn
                             </Button>
@@ -589,7 +622,7 @@ export default function NomineeProfile() {
                               onClick={() =>
                                 window.open(nominee.website, "_blank")
                               }
-                              className="border-gold/30 text-gold hover:bg-gold/10"
+                              className="border-gold/30 text-gold hover:bg-gold/10 text-xs sm:text-sm h-8 sm:h-9"
                             >
                               Website
                             </Button>
@@ -601,8 +634,8 @@ export default function NomineeProfile() {
                 </Card>
               </div>
 
-              {/* Sidebar */}
-              <div className="space-y-6">
+              {/* Sidebar - Reorders on mobile */}
+              <div className="space-y-4 sm:space-y-6 mt-6 lg:mt-0">
                 {/* Referral Card */}
                 <NomineeReferralCard
                   nomineeName={nominee.fullName}
@@ -620,49 +653,49 @@ export default function NomineeProfile() {
 
                 {/* Share Card */}
                 <Card className="bg-charcoal-light border-gold/20">
-                  <CardHeader>
-                    <CardTitle className="text-white flex items-center gap-2">
-                      <Share2 className="w-5 h-5 text-gold" />
+                  <CardHeader className="p-4 sm:p-6">
+                    <CardTitle className="text-white flex items-center gap-2 text-sm sm:text-base">
+                      <Share2 className="w-4 h-4 sm:w-5 sm:h-5 text-gold flex-shrink-0" />
                       Share This Profile
                     </CardTitle>
                   </CardHeader>
-                  <CardContent>
-                    <p className="text-sm text-white/60 mb-4">
+                  <CardContent className="p-4 sm:p-6 pt-0 sm:pt-0">
+                    <p className="text-xs sm:text-sm text-white/60 mb-3 sm:mb-4">
                       Help spread the word about{" "}
                       {nominee.fullName.split(" ")[0]}'s nomination!
                     </p>
-                    <div className="flex gap-2">
+                    <div className="flex gap-2 flex-wrap">
                       <Button
                         variant="outline"
                         size="icon"
                         onClick={() => handleShare("twitter")}
-                        className="border-gold/30 text-gold hover:bg-gold/10"
+                        className="border-gold/30 text-gold hover:bg-gold/10 h-8 w-8 sm:h-9 sm:w-9"
                       >
-                        <Twitter className="w-4 h-4" />
+                        <Twitter className="w-3 h-3 sm:w-4 sm:h-4" />
                       </Button>
                       <Button
                         variant="outline"
                         size="icon"
                         onClick={() => handleShare("facebook")}
-                        className="border-gold/30 text-gold hover:bg-gold/10"
+                        className="border-gold/30 text-gold hover:bg-gold/10 h-8 w-8 sm:h-9 sm:w-9"
                       >
-                        <Facebook className="w-4 h-4" />
+                        <Facebook className="w-3 h-3 sm:w-4 sm:h-4" />
                       </Button>
                       <Button
                         variant="outline"
                         size="icon"
                         onClick={() => handleShare("linkedin")}
-                        className="border-gold/30 text-gold hover:bg-gold/10"
+                        className="border-gold/30 text-gold hover:bg-gold/10 h-8 w-8 sm:h-9 sm:w-9"
                       >
-                        <Linkedin className="w-4 h-4" />
+                        <Linkedin className="w-3 h-3 sm:w-4 sm:h-4" />
                       </Button>
                       <Button
                         variant="outline"
                         size="icon"
                         onClick={() => handleShare("copy")}
-                        className="border-gold/30 text-gold hover:bg-gold/10"
+                        className="border-gold/30 text-gold hover:bg-gold/10 h-8 w-8 sm:h-9 sm:w-9"
                       >
-                        <Link2 className="w-4 h-4" />
+                        <Link2 className="w-3 h-3 sm:w-4 sm:h-4" />
                       </Button>
                     </div>
                   </CardContent>
@@ -670,23 +703,23 @@ export default function NomineeProfile() {
 
                 {/* Nominate CTA Card */}
                 <Card className="bg-charcoal-light border-gold/20">
-                  <CardHeader>
-                    <CardTitle className="text-white flex items-center gap-2">
-                      <Award className="w-5 h-5 text-gold" />
+                  <CardHeader className="p-4 sm:p-6">
+                    <CardTitle className="text-white flex items-center gap-2 text-sm sm:text-base">
+                      <Award className="w-4 h-4 sm:w-5 sm:h-5 text-gold flex-shrink-0" />
                       Know Someone Deserving?
                     </CardTitle>
                   </CardHeader>
-                  <CardContent className="space-y-4">
-                    <p className="text-sm text-white/60">
+                  <CardContent className="p-4 sm:p-6 pt-0 sm:pt-0 space-y-3 sm:space-y-4">
+                    <p className="text-xs sm:text-sm text-white/60">
                       Recognize an education champion who's making a difference
                       in Africa.
                     </p>
                     <Button
                       asChild
-                      className="w-full bg-gold hover:bg-gold-dark text-charcoal font-semibold"
+                      className="w-full bg-gold hover:bg-gold-dark text-charcoal font-semibold text-xs sm:text-sm h-9 sm:h-10"
                     >
                       <Link to="/nominate">
-                        <Award className="w-4 h-4 mr-2" />
+                        <Award className="w-3 h-3 sm:w-4 sm:h-4 mr-1.5 sm:mr-2" />
                         Nominate Now
                       </Link>
                     </Button>
@@ -699,12 +732,12 @@ export default function NomineeProfile() {
 
         {/* Related Nominees Section */}
         {relatedNominees.length > 0 && (
-          <section className="py-12 bg-charcoal">
-            <div className="container mx-auto px-4">
-              <h2 className="text-2xl font-display text-white mb-6">
+          <section className="py-8 sm:py-12 bg-charcoal">
+            <div className="container mx-auto px-3 sm:px-4">
+              <h2 className="text-lg sm:text-xl md:text-2xl font-display text-white mb-4 sm:mb-6">
                 More in {nominee.subCategoryName || nominee.categoryName}
               </h2>
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
                 {relatedNominees.map((related) => {
                   const cardData: NomineeCardData = {
                     id: related.id,

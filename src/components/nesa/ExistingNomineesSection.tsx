@@ -44,7 +44,6 @@ export function ExistingNomineesSection({
   const [nominees, setNominees] = useState<ExistingNominee[]>([]);
   const [loading, setLoading] = useState(true);
   const [expanded, setExpanded] = useState(false);
-  const { accessToken } = useAuth();
 
   useEffect(() => {
     async function fetchNominees() {
@@ -56,10 +55,7 @@ export function ExistingNomineesSection({
 
       setLoading(true);
 
-      const data = await nominationApi.fetchSubCategoryNominees(
-        accessToken,
-        subcategoryId,
-      );
+      const data = await nominationApi.fetchSubCategoryNominees(subcategoryId);
       const finalData = data.map((nom) => {
         const modifiedNominee: ExistingNominee = {
           id: nom.id,

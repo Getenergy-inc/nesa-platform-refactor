@@ -389,11 +389,12 @@ function ProfileContent() {
         <title>My Profile | NESA Africa</title>
       </Helmet>
 
-      <div className="max-w-4xl mx-auto space-y-6">
+      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
         {/* Profile Header */}
         <Card className="border border-amber-500/20 bg-neutral-950/80 backdrop-blur-md shadow-lg">
-          <CardContent className="p-8 flex items-center gap-6">
-            <div className="relative">
+          <CardContent className="p-4 sm:p-6 lg:p-8 flex flex-col sm:flex-row items-center sm:items-start gap-4 sm:gap-6">
+            {/* Avatar */}
+            <div className="relative shrink-0">
               <label
                 className={cn(
                   "cursor-pointer block group",
@@ -404,10 +405,10 @@ function ProfileContent() {
                   <img
                     src={profileImage.url}
                     alt="Profile"
-                    className="h-24 w-24 rounded-full object-cover border-2 border-amber-500/40 hover:border-amber-400 transition"
+                    className="h-20 w-20 sm:h-24 sm:w-24 rounded-full object-cover border-2 border-amber-500/40 hover:border-amber-400 transition"
                   />
                 ) : (
-                  <div className="h-24 w-24 rounded-full border-2 border-dashed border-amber-500/40 flex items-center justify-center">
+                  <div className="h-20 w-20 sm:h-24 sm:w-24 rounded-full border-2 border-dashed border-amber-500/40 flex items-center justify-center">
                     <User className="text-amber-400" />
                   </div>
                 )}
@@ -430,20 +431,21 @@ function ProfileContent() {
               )}
             </div>
 
-            <div>
-              <h2 className="text-xl font-semibold text-white">
+            {/* Info */}
+            <div className="text-center sm:text-left w-full">
+              <h2 className="text-lg sm:text-xl font-semibold text-white">
                 {firstName} {lastName}
               </h2>
 
-              <p className="text-sm text-amber-300 flex items-center gap-2 mt-1">
+              <p className="text-xs sm:text-sm text-amber-300 flex items-center justify-center sm:justify-start gap-2 mt-1 break-all">
                 <Mail className="h-4 w-4" /> {user?.email}
               </p>
 
-              <div className="flex gap-2 mt-3 flex-wrap">
+              <div className="flex flex-wrap justify-center sm:justify-start gap-2 mt-3">
                 {roles.map((role) => (
                   <Badge
                     key={role}
-                    className="bg-amber-500/20 text-amber-300 border border-amber-500/30"
+                    className="bg-amber-500/20 text-amber-300 border border-amber-500/30 text-xs"
                   >
                     {role.replace(/_/g, " ")}
                   </Badge>
@@ -456,14 +458,15 @@ function ProfileContent() {
         {/* Personal Information */}
         <Card className="border border-amber-500/20 bg-neutral-950/80 backdrop-blur-md shadow-lg">
           <CardHeader>
-            <CardTitle className="text-white flex items-center gap-2">
+            <CardTitle className="text-white flex items-center gap-2 text-base sm:text-lg">
               <User className="h-5 w-5 text-amber-400" />
               Personal Information
             </CardTitle>
           </CardHeader>
 
           <CardContent className="space-y-6">
-            <div className="grid md:grid-cols-2 gap-4">
+            {/* Names */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
                 <Label className="text-amber-200 font-medium">
                   First Name *
@@ -471,7 +474,7 @@ function ProfileContent() {
                 <Input
                   value={firstName}
                   onChange={(e) => setFirstName(e.target.value)}
-                  className={formInput}
+                  className={`${formInput} w-full`}
                 />
               </div>
 
@@ -480,34 +483,31 @@ function ProfileContent() {
                 <Input
                   value={lastName}
                   onChange={(e) => setLastName(e.target.value)}
-                  className={formInput}
+                  className={`${formInput} w-full`}
                 />
               </div>
             </div>
 
-            <div className="grid md:grid-cols-2 gap-4">
+            {/* Phone + Gender */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
                 <Label className="text-amber-200 font-medium">Phone *</Label>
                 <Input
                   value={phone}
                   onChange={(e) => setPhone(e.target.value)}
-                  className={formInput}
+                  className={`${formInput} w-full`}
                 />
               </div>
 
               <div>
                 <Label className="text-amber-200 font-medium">Gender</Label>
                 <Select value={gender} onValueChange={setGender}>
-                  <SelectTrigger className="mt-1 bg-black/60 border-amber-500/30 text-white focus:border-amber-400">
+                  <SelectTrigger className="mt-1 w-full bg-black/60 border-amber-500/30 text-white">
                     <SelectValue placeholder="Select gender" />
                   </SelectTrigger>
                   <SelectContent className="bg-neutral-900 border border-amber-500/30 text-white">
                     {genders.map((g) => (
-                      <SelectItem
-                        key={g}
-                        value={g}
-                        className="hover:bg-amber-500/20"
-                      >
+                      <SelectItem key={g} value={g}>
                         {g}
                       </SelectItem>
                     ))}
@@ -516,59 +516,46 @@ function ProfileContent() {
               </div>
             </div>
 
+            {/* DOB */}
             <div>
               <Label className="text-amber-200 font-medium mb-2 block">
                 Date of Birth
               </Label>
-              <div className="grid grid-cols-3 gap-2">
-                {/* Month Select */}
+
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                 <Select value={dobMonth} onValueChange={setDobMonth}>
-                  <SelectTrigger className="bg-black/60 border-amber-500/30 text-white focus:border-amber-400">
+                  <SelectTrigger className="w-full bg-black/60 border-amber-500/30 text-white">
                     <SelectValue placeholder="Month" />
                   </SelectTrigger>
-                  <SelectContent className="bg-neutral-900 border border-amber-500/30 text-white max-h-[300px]">
+                  <SelectContent className="max-h-[300px]">
                     {months.map((month, index) => (
-                      <SelectItem
-                        key={month}
-                        value={index.toString()}
-                        className="hover:bg-amber-500/20"
-                      >
+                      <SelectItem key={month} value={index.toString()}>
                         {month}
                       </SelectItem>
                     ))}
                   </SelectContent>
                 </Select>
 
-                {/* Day Select */}
                 <Select value={dobDay} onValueChange={setDobDay}>
-                  <SelectTrigger className="bg-black/60 border-amber-500/30 text-white focus:border-amber-400">
+                  <SelectTrigger className="w-full bg-black/60 border-amber-500/30 text-white">
                     <SelectValue placeholder="Day" />
                   </SelectTrigger>
-                  <SelectContent className="bg-neutral-900 border border-amber-500/30 text-white max-h-[300px]">
+                  <SelectContent className="max-h-[300px]">
                     {days.map((day) => (
-                      <SelectItem
-                        key={day}
-                        value={day}
-                        className="hover:bg-amber-500/20"
-                      >
+                      <SelectItem key={day} value={day}>
                         {day}
                       </SelectItem>
                     ))}
                   </SelectContent>
                 </Select>
 
-                {/* Year Select */}
                 <Select value={dobYear} onValueChange={setDobYear}>
-                  <SelectTrigger className="bg-black/60 border-amber-500/30 text-white focus:border-amber-400">
+                  <SelectTrigger className="w-full bg-black/60 border-amber-500/30 text-white">
                     <SelectValue placeholder="Year" />
                   </SelectTrigger>
-                  <SelectContent className="bg-neutral-900 border border-amber-500/30 text-white max-h-[300px]">
+                  <SelectContent className="max-h-[300px]">
                     {years.map((year) => (
-                      <SelectItem
-                        key={year}
-                        value={year}
-                        className="hover:bg-amber-500/20"
-                      >
+                      <SelectItem key={year} value={year}>
                         {year}
                       </SelectItem>
                     ))}
@@ -577,19 +564,16 @@ function ProfileContent() {
               </div>
             </div>
 
+            {/* Country */}
             <div>
               <Label className="text-amber-200 font-medium">Country *</Label>
               <Select value={country} onValueChange={setCountry}>
-                <SelectTrigger className="mt-1 bg-black/60 border-amber-500/30 text-white focus:border-amber-400">
+                <SelectTrigger className="mt-1 w-full bg-black/60 border-amber-500/30 text-white">
                   <SelectValue placeholder="Select country" />
                 </SelectTrigger>
-                <SelectContent className="bg-neutral-900 border border-amber-500/30 text-white max-h-[300px]">
+                <SelectContent className="max-h-[300px]">
                   {countries.map((c) => (
-                    <SelectItem
-                      key={c}
-                      value={c}
-                      className="hover:bg-amber-500/20"
-                    >
+                    <SelectItem key={c} value={c}>
                       {c}
                     </SelectItem>
                   ))}
@@ -599,60 +583,43 @@ function ProfileContent() {
 
             <Separator className="bg-amber-500/20" />
 
-            {/* Location Information */}
+            {/* Location */}
             <div>
               <h3 className="text-amber-200 font-medium mb-4 flex items-center gap-2">
                 <MapPin className="h-4 w-4 text-amber-400" />
                 Location Information
               </h3>
 
-              <div className="grid md:grid-cols-2 gap-4 mb-4">
-                <div>
-                  <Label className="text-amber-200 font-medium">State</Label>
-                  <div className="relative">
-                    <MapPinned className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-amber-400/40" />
-                    <Input
-                      value={state}
-                      onChange={(e) => setState(e.target.value)}
-                      className={`${formInput} pl-10`}
-                      placeholder="Lagos"
-                    />
-                  </div>
-                </div>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
+                <Input
+                  value={state}
+                  onChange={(e) => setState(e.target.value)}
+                  className={`${formInput} w-full`}
+                  placeholder="State"
+                />
 
-                <div>
-                  <Label className="text-amber-200 font-medium">City</Label>
-                  <div className="relative">
-                    <HomeIcon className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-amber-400/40" />
-                    <Input
-                      value={city}
-                      onChange={(e) => setCity(e.target.value)}
-                      className={`${formInput} pl-10`}
-                      placeholder="Ikeja"
-                    />
-                  </div>
-                </div>
+                <Input
+                  value={city}
+                  onChange={(e) => setCity(e.target.value)}
+                  className={`${formInput} w-full`}
+                  placeholder="City"
+                />
               </div>
 
-              <div>
-                <Label className="text-amber-200 font-medium">Address</Label>
-                <div className="relative">
-                  <Home className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-amber-400/40" />
-                  <Input
-                    value={address}
-                    onChange={(e) => setAddress(e.target.value)}
-                    className={`${formInput} pl-10`}
-                    placeholder="123 Main Street"
-                  />
-                </div>
-              </div>
+              <Input
+                value={address}
+                onChange={(e) => setAddress(e.target.value)}
+                className={`${formInput} w-full`}
+                placeholder="Address"
+              />
             </div>
 
-            <div className="flex justify-end pt-4">
+            {/* Button */}
+            <div className="flex flex-col sm:flex-row justify-end gap-3 pt-4">
               <Button
                 onClick={handleSave}
                 disabled={saving || profileUploading}
-                className="bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-amber-950 font-semibold shadow-lg px-6"
+                className="w-full sm:w-auto bg-gradient-to-r from-amber-500 to-amber-600 text-amber-950 font-semibold px-6"
               >
                 {saving ? (
                   <>

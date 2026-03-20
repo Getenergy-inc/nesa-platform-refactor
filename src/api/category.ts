@@ -1,5 +1,5 @@
 import { API_BASE } from "@/lib/apiBase";
-import { apiRequest } from "./client";
+import { apiNoAuthRequest, apiRequest } from "./client";
 import { ApiResponse } from "./http";
 import { CategoryScope } from "@/config/nesaCategories";
 import { Subcategory } from "@/lib/nesaData";
@@ -22,46 +22,42 @@ export type AwardType =
 export type SubCategory = Omit<Category, "awardType">;
 
 export const categoryApi = {
-  fetchAllCategories: async (accessToken: string) => {
-    const res: ApiResponse<Category[]> = await apiRequest(
+  fetchAllCategories: async () => {
+    const res: ApiResponse<Category[]> = await apiNoAuthRequest(
       `${API_BASE}/category/all`,
       {
         credentials: "include",
-        accessToken,
         method: "GET",
       },
     );
     return res.data;
   },
 
-  fetchSubcategories: async (accessToken: string, categoryId: string) => {
-    const res: ApiResponse<SubCategory[]> = await apiRequest(
+  fetchSubcategories: async (categoryId: string) => {
+    const res: ApiResponse<SubCategory[]> = await apiNoAuthRequest(
       `${API_BASE}/category/sub/all?categoryId=${categoryId}`,
       {
         credentials: "include",
-        accessToken,
         method: "GET",
       },
     );
     return res.data;
   },
 
-  fetchCategoriesByTier: async (accessToken: string, tier: AwardType) => {
-    const res: ApiResponse<Category[]> = await apiRequest(
+  fetchCategoriesByTier: async (tier: AwardType) => {
+    const res: ApiResponse<Category[]> = await apiNoAuthRequest(
       `${API_BASE}/category/tier?tier=${tier}`,
       {
         credentials: "include",
-        accessToken,
       },
     );
     return res.data;
   },
 
-  fetchCategory: async (accessToken: string, categoryId: string) => {
-    const res: ApiResponse<Category> = await apiRequest(
+  fetchCategory: async (categoryId: string) => {
+    const res: ApiResponse<Category> = await apiNoAuthRequest(
       `${API_BASE}/category?categoryId=${categoryId}`,
       {
-        accessToken,
         credentials: "include",
       },
     );

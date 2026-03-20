@@ -1,4 +1,4 @@
-import { apiRequest } from "./client";
+import { apiNoAuthRequest, apiRequest } from "./client";
 import { Nomination } from "@/pages/Nominate";
 import { ApiResponse } from "./http";
 import { approveNomination, assignNomination, rejectNomination } from "./nrc";
@@ -47,6 +47,30 @@ export interface NominationDetails {
     renominationCount: number;
   };
 }
+export interface NominatorNomination {
+  id: string;
+  fullName: string;
+  email: string;
+  phone: string | null;
+  linkedInProfile: string | null;
+  website: string | null;
+  profileImage: string | null;
+  accountType: "INDIVIDUAL" | "ORGANIZATION";
+  country: string;
+  stateRegion: string;
+  impactSummary: string;
+  achievementDescription: string;
+  evidenceUrl: string[];
+  categoryId: string;
+  categoryName: string;
+  subCategoryId: string;
+  subCategoryName: string;
+  nominationCount: number;
+  categoryAwardType: string;
+  approved: ApprovalState;
+  createdAt: string;
+  updatedAt: string;
+}
 
 export interface updateNomination {
   phone?: string | null | undefined;
@@ -61,6 +85,7 @@ export interface updateNomination {
   achievementDescription?: string | undefined;
   evidenceUrl?: string[] | undefined;
   id: string;
+  fullName: string;
 }
 export interface pendingNominationResponse {
   id: string;
@@ -107,6 +132,7 @@ export interface assignednominationsResponse {
   dueDate: string | null;
   notes: string | null;
 }
+export type ApprovalState = "PENDING" | "APPROVED" | "REJECTED";
 export interface ApprovedNominees {
   fullName: string;
   email: string;
@@ -291,25 +317,20 @@ export const nominationApi = {
     return res.data;
   },
 
-  fetchSubCategoryNominees: async (
-    accessToken: string,
-    subCategoryId: string,
-  ) => {
-    const res: ApiResponse<ApprovedNominees[]> = await apiRequest(
+  fetchSubCategoryNominees: async (subCategoryId: string) => {
+    const res: ApiResponse<ApprovedNominees[]> = await apiNoAuthRequest(
       `${API_BASE}/nomination/subcategory?subCategoryId=${subCategoryId}`,
       {
         credentials: "include",
-        accessToken,
       },
     );
     return res.data;
   },
 
-  fetchNomineesByTier: async (accessToken: string, tier: AwardType) => {
-    const res: ApiResponse<ApprovedNominees[]> = await apiRequest(
+  fetchNomineesByTier: async (tier: AwardType) => {
+    const res: ApiResponse<ApprovedNominees[]> = await apiNoAuthRequest(
       `${API_BASE}/nomination/tier?tier=${tier}`,
       {
-        accessToken,
         credentials: "include",
       },
     );
@@ -326,12 +347,22 @@ export const nominationApi = {
       },
     );
   },
-  fetchNomineeProfile: async (accessToken: string, nomineeId: string) => {
-    const res: ApiResponse<NomineeProfileData> = await apiRequest(
+  fetchNomineeProfile: async (nomineeId: string) => {
+    const res: ApiResponse<NomineeProfileData> = await apiNoAuthRequest(
       `${API_BASE}/nomination/profile?nomineeId=${nomineeId}`,
       {
         credentials: "include",
+      },
+    );
+    return res.data;
+  },
+
+  fetchNominatorNominations: async (accessToken: string) => {
+    const res: ApiResponse<NominatorNomination[]> = await apiRequest(
+      `${API_BASE}/nomination/nominator`,
+      {
         accessToken,
+        credentials: "include",
       },
     );
     return res.data;

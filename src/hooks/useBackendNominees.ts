@@ -121,13 +121,9 @@ function getNomineeStatus(
   return "approved";
 }
 export function useNomineesByTier(tier: AwardTier) {
-  const { accessToken } = useAuth();
-
   return useQuery({
     queryKey: ["nominees", "tier", tier],
     queryFn: async () => {
-      if (!accessToken) throw new Error("No access token");
-
       // Map your AwardTier to the backend AwardType
       const tierMap: Record<AwardTier, string> = {
         platinum: "PLATINUM_CERTIFICATE",
@@ -141,7 +137,6 @@ export function useNomineesByTier(tier: AwardTier) {
 
       // 1. Fetch all categories for this tier
       const categories = await categoryApi.fetchCategoriesByTier(
-        accessToken,
         backendTier as AwardType,
       );
 
@@ -155,15 +150,11 @@ export function useNomineesByTier(tier: AwardTier) {
 
       for (const category of categories) {
         // Fetch subcategories for this category
-        const subcategories = await categoryApi.fetchSubcategories(
-          accessToken,
-          category.id,
-        );
+        const subcategories = await categoryApi.fetchSubcategories(category.id);
 
         for (const subcategory of subcategories) {
           // Fetch nominees for this subcategory
           const nominees = await nominationApi.fetchSubCategoryNominees(
-            accessToken,
             subcategory.id,
           );
 
@@ -208,18 +199,15 @@ export function useNomineesByTier(tier: AwardTier) {
 
       return allNominees;
     },
-    enabled: !!accessToken,
     staleTime: 1000 * 60 * 5,
   });
 }
 
 // Alternative version if you need to fetch nominees for all subcategories of a tier
 export function useNomineesByTierAlternative(tier: AwardTier) {
-  const { accessToken } = useAuth();
   const { data: categories } = useQuery({
     queryKey: ["categories", "tier", tier],
     queryFn: async () => {
-      if (!accessToken) throw new Error("No access token");
       // You need to create this endpoint
       const tierMap: Record<AwardTier, AwardType> = {
         platinum: "PLATINUM_CERTIFICATE",
@@ -229,35 +217,26 @@ export function useNomineesByTierAlternative(tier: AwardTier) {
         "gold-special": "GOLD_SPECIAL",
       };
       const backendTier = tierMap[tier];
-      const response = await categoryApi.fetchCategoriesByTier(
-        accessToken,
-        backendTier,
-      );
+      const response = await categoryApi.fetchCategoriesByTier(backendTier);
       return response;
     },
-    enabled: !!accessToken,
   });
 
   return useQuery({
     queryKey: ["nominees", "tier", tier, "alternative"],
     queryFn: async () => {
-      if (!accessToken || !categories)
-        throw new Error("No access token or categories");
+      if (!categories) throw new Error("No categories");
 
       // Fetch nominees for all subcategories of all categories in this tier
       const allNominees: DisplayNominee[] = [];
 
       for (const category of categories) {
         // Fetch subcategories for this category
-        const subcategories = await categoryApi.fetchSubcategories(
-          accessToken,
-          category.id,
-        );
+        const subcategories = await categoryApi.fetchSubcategories(category.id);
 
         for (const subcategory of subcategories) {
           // Fetch nominees for this subcategory
           const nominees = await nominationApi.fetchSubCategoryNominees(
-            accessToken,
             subcategory.id,
           );
 
@@ -300,7 +279,7 @@ export function useNomineesByTierAlternative(tier: AwardTier) {
 
       return allNominees;
     },
-    enabled: !!accessToken && !!categories,
+    enabled: !!categories,
     staleTime: 1000 * 60 * 5,
   });
 }

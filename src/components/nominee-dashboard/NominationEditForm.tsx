@@ -38,6 +38,7 @@ export function NominationEditForm({ nomination, onUpdated }: Props) {
   const { accessToken } = useAuth();
 
   // Personal Information
+  const [fullName, setFullName] = useState(nomination.fullName || "");
   const [phone, setPhone] = useState(nomination.phone || "");
   const [country, setCountry] = useState(nomination.country || "");
   const [stateRegion, setStateRegion] = useState(nomination.stateRegion || "");
@@ -125,6 +126,7 @@ export function NominationEditForm({ nomination, onUpdated }: Props) {
         stateRegion,
         id,
         accountType,
+        fullName,
         impactSummary,
         achievementDescription,
         linkedInProfile,
@@ -286,6 +288,16 @@ export function NominationEditForm({ nomination, onUpdated }: Props) {
       {/* Personal Information Section */}
       <div className="space-y-4">
         <h3 className="text-lg font-semibold">Personal Information</h3>
+        <div className="space-y-2">
+          <label className="text-sm font-medium">Full Name</label>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <Input
+              value={fullName}
+              onChange={(e) => setFullName(e.target.value)}
+              placeholder="Last name"
+            />
+          </div>
+        </div>
 
         <div className="space-y-2">
           <label className="text-sm font-medium">Phone Number</label>

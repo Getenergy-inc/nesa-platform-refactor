@@ -99,23 +99,24 @@ function WalletContent() {
         />
       </Helmet>
 
-      <div className="space-y-6 max-w-7xl mx-auto">
-        {/* Header with Refresh */}
-        <div className="flex items-center justify-between">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
+        {/* Header */}
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
           <div>
-            <h1 className="text-2xl md:text-3xl font-display font-bold text-white mb-2">
+            <h1 className="text-xl sm:text-2xl md:text-3xl font-display font-bold text-white">
               Wallet
             </h1>
-            <p className="text-ivory/60">
+            <p className="text-ivory/60 text-sm sm:text-base">
               Manage your AGC coins and view transaction history
             </p>
           </div>
+
           <Button
             variant="outline"
             size="sm"
             onClick={() => loadWalletData(true)}
             disabled={refreshing}
-            className="border-gold/30 text-gold hover:bg-gold/10"
+            className="w-full sm:w-auto border-gold/30 text-gold hover:bg-gold/10"
           >
             <RefreshCw
               className={cn("h-4 w-4 mr-2", refreshing && "animate-spin")}
@@ -124,45 +125,51 @@ function WalletContent() {
           </Button>
         </div>
 
-        {/* Main Balance Card */}
+        {/* Balance */}
         <WalletBalanceCard balance={balance} loading={loading} />
 
-        {/* Stats Cards */}
+        {/* Stats */}
         <WalletStatsCards transactions={transactions} loading={loading} />
 
-        {/* Tabs Section */}
+        {/* Tabs */}
         <Tabs
           value={activeTab}
           onValueChange={setActiveTab}
           className="space-y-4"
         >
-          <TabsList className="bg-white/5 border border-white/10">
-            <TabsTrigger
-              value="overview"
-              className="data-[state=active]:bg-gold/20 data-[state=active]:text-gold"
-            >
-              Overview
-            </TabsTrigger>
-            <TabsTrigger
-              value="transactions"
-              className="data-[state=active]:bg-gold/20 data-[state=active]:text-gold"
-            >
-              Transactions
-            </TabsTrigger>
-            <TabsTrigger
-              value="settings"
-              className="data-[state=active]:bg-gold/20 data-[state=active]:text-gold"
-            >
-              Settings
-            </TabsTrigger>
-          </TabsList>
+          {/* Tabs List */}
+          <div className="overflow-x-auto">
+            <TabsList className="w-full sm:w-auto flex-nowrap bg-white/5 border border-white/10">
+              <TabsTrigger
+                value="overview"
+                className="flex-1 sm:flex-none data-[state=active]:bg-gold/20 data-[state=active]:text-gold"
+              >
+                Overview
+              </TabsTrigger>
+              <TabsTrigger
+                value="transactions"
+                className="flex-1 sm:flex-none data-[state=active]:bg-gold/20 data-[state=active]:text-gold"
+              >
+                Transactions
+              </TabsTrigger>
+              <TabsTrigger
+                value="settings"
+                className="flex-1 sm:flex-none data-[state=active]:bg-gold/20 data-[state=active]:text-gold"
+              >
+                Settings
+              </TabsTrigger>
+            </TabsList>
+          </div>
 
-          <TabsContent value="overview" className="space-y-4">
-            <div className="grid gap-4 lg:grid-cols-2">
+          {/* Overview */}
+          <TabsContent value="overview" className="space-y-6">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+              {/* Top Up */}
               <TopUpSection onTopUp={() => setTopUpOpen(true)} />
+
               {/* Recent Transactions */}
-              <div className="mt-6">
-                <h2 className="text-lg font-semibold text-white mb-4">
+              <div>
+                <h2 className="text-base sm:text-lg font-semibold text-white mb-4">
                   Recent Transactions
                 </h2>
                 <TransactionsTable
@@ -172,15 +179,18 @@ function WalletContent() {
                   onViewAll={() => setActiveTab("transactions")}
                 />
               </div>
+
+              {/* Optional Referral Section (if re-enabled later) */}
               {/* <ReferralSection
-                referral={referral}
-                totalEarnings={totalReferralEarnings}
-                loading={loading}
-              /> */}
+              referral={referral}
+              totalEarnings={totalReferralEarnings}
+              loading={loading}
+            /> */}
             </div>
           </TabsContent>
 
-          <TabsContent value="transactions">
+          {/* Transactions */}
+          <TabsContent value="transactions" className="space-y-4">
             <TransactionsTable
               transactions={transactions}
               loading={loading}
@@ -188,7 +198,8 @@ function WalletContent() {
             />
           </TabsContent>
 
-          <TabsContent value="settings">
+          {/* Settings */}
+          <TabsContent value="settings" className="space-y-4">
             <WalletSettings />
           </TabsContent>
         </Tabs>

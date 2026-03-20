@@ -40,7 +40,6 @@ export function useCategoriesByTier(
   tier: AwardTier,
   options: UseCategoriesOptions = {},
 ) {
-  const { accessToken } = useAuth();
   if (tier == "gold") {
     tier = "blue-garnet";
   }
@@ -49,14 +48,7 @@ export function useCategoriesByTier(
   return useQuery({
     queryKey: ["categories", "tier", tier],
     queryFn: async () => {
-      if (!accessToken) {
-        throw new Error("No access token available");
-      }
-
-      const categories = await categoryApi.fetchCategoriesByTier(
-        accessToken,
-        awardType,
-      );
+      const categories = await categoryApi.fetchCategoriesByTier(awardType);
 
       // Add metadata to each category
       const categoriesWithMetadata: CategoryWithMetadata[] = (
@@ -68,22 +60,16 @@ export function useCategoriesByTier(
 
       return categoriesWithMetadata;
     },
-    enabled: !!accessToken && options.enabled !== false,
+    enabled: options.enabled !== false,
     staleTime: 1000 * 60 * 5, // 5 minutes
   });
 }
 
 export function useAllCategories(options: UseCategoriesOptions = {}) {
-  const { accessToken } = useAuth();
-
   return useQuery({
     queryKey: ["categories", "all"],
     queryFn: async () => {
-      if (!accessToken) {
-        throw new Error("No access token available");
-      }
-
-      const categories = await categoryApi.fetchAllCategories(accessToken);
+      const categories = await categoryApi.fetchAllCategories();
 
       // Add metadata to each category
       const categoriesWithMetadata: CategoryWithMetadata[] = (
@@ -95,7 +81,7 @@ export function useAllCategories(options: UseCategoriesOptions = {}) {
 
       return categoriesWithMetadata;
     },
-    enabled: !!accessToken && options.enabled !== false,
+    enabled: options.enabled !== false,
     staleTime: 1000 * 60 * 5,
   });
 }
@@ -104,15 +90,12 @@ export function useCategory(
   categoryId: string | null,
   options: UseCategoriesOptions = {},
 ) {
-  const { accessToken } = useAuth();
-
   return useQuery({
     queryKey: ["category", categoryId],
     queryFn: async () => {
       if (!categoryId) return null;
-      if (!accessToken) throw new Error("No access token");
 
-      const allCategories = await categoryApi.fetchAllCategories(accessToken);
+      const allCategories = await categoryApi.fetchAllCategories();
       const category = allCategories.find((c) => c.id === categoryId);
 
       if (!category) return null;
@@ -123,7 +106,7 @@ export function useCategory(
         subcategoryCount: category.subCategories?.length || 0,
       } as CategoryWithMetadata;
     },
-    enabled: !!categoryId && !!accessToken && options.enabled !== false,
+    enabled: !!categoryId && options.enabled !== false,
     staleTime: 1000 * 60 * 5,
   });
 }
@@ -132,26 +115,18 @@ export function useSubcategories(
   categoryId: string | null,
   options: UseCategoriesOptions = {},
 ) {
-  const { accessToken } = useAuth();
-
   return useQuery({
     queryKey: ["subcategories", categoryId],
     queryFn: async () => {
-      if (!accessToken) {
-        throw new Error("No access token available");
-      }
       if (!categoryId) {
         throw new Error("Category ID is required");
       }
 
-      const subcategories = await categoryApi.fetchSubcategories(
-        accessToken,
-        categoryId,
-      );
+      const subcategories = await categoryApi.fetchSubcategories(categoryId);
 
       return subcategories || [];
     },
-    enabled: !!accessToken && !!categoryId && options.enabled !== false,
+    enabled: !!categoryId && options.enabled !== false,
     staleTime: 1000 * 60 * 5,
   });
 }
@@ -208,35 +183,26 @@ export function useCategoriesGrouped() {
 }
 
 export function useCategoryPage(categoryId: string | undefined) {
-  const { accessToken } = useAuth();
-
   return useQuery({
     queryKey: ["category-page", categoryId],
     queryFn: async () => {
-      if (!accessToken) throw new Error("No access token");
       if (!categoryId) throw new Error("Category ID is required");
 
       // 1. Fetch all categories and find the one we need
       // Alternatively, you could create a dedicated endpoint: /category/:id
-      const category = await categoryApi.fetchCategory(accessToken, categoryId);
+      const category = await categoryApi.fetchCategory(categoryId);
 
       if (!category) {
         throw new Error("Category not found");
       }
 
       // 2. Fetch subcategories for this category
-      const subcategories = await categoryApi.fetchSubcategories(
-        accessToken,
-        categoryId,
-      );
+      const subcategories = await categoryApi.fetchSubcategories(categoryId);
 
       // 3. Fetch nominees for each subcategory
       const subcategoriesWithNominees = await Promise.all(
         subcategories.map(async (sub) => {
-          const nominees = await nominationApi.fetchSubCategoryNominees(
-            accessToken,
-            sub.id,
-          );
+          const nominees = await nominationApi.fetchSubCategoryNominees(sub.id);
           return {
             ...sub,
             nominees: nominees || [],
@@ -250,7 +216,7 @@ export function useCategoryPage(categoryId: string | undefined) {
         subcategories: subcategoriesWithNominees,
       };
     },
-    enabled: !!accessToken && !!categoryId,
+    enabled: !!categoryId,
     staleTime: 1000 * 60 * 5, // 5 minutes
   });
 }

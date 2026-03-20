@@ -22,6 +22,7 @@ interface User {
   state: string | null;
   city: string | null;
   address: string | null;
+  profilePic: string | null;
 }
 // enum AccountType {
 //   INDIVIDUAL,

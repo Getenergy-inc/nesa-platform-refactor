@@ -27,7 +27,7 @@ export function AGCFAQAccordion({ className, maxItems }: AGCFAQAccordionProps) {
       <Accordion type="single" collapsible className="w-full">
         {faqs.map((faq, index) => (
           <AccordionItem key={index} value={`item-${index}`}>
-            <AccordionTrigger className="text-left hover:text-primary">
+            <AccordionTrigger className="text-left hover:text-primary text-white">
               {faq.question}
             </AccordionTrigger>
             <AccordionContent className="text-muted-foreground">

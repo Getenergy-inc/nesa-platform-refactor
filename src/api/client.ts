@@ -67,3 +67,44 @@ export async function apiRequest<T>(
 
   return res.json() as Promise<T>;
 }
+
+export async function apiNoAuthRequest<T>(
+  url: string,
+  { headers, ...options }: RequestInit,
+): Promise<T> {
+  const res = await fetch(url, {
+    ...options,
+    headers: {
+      "Content-Type": "application/json",
+      ...headers,
+    },
+  });
+
+  // Handle non-OK responses
+  if (!res.ok) {
+    let errorBody: ApiError = {
+      message: "Something went wrong",
+      statusCode: res.status,
+    };
+
+    try {
+      const json = await res.json();
+      errorBody = {
+        ...errorBody,
+        ...json,
+      };
+    } catch {
+      // response was not JSON
+      console.warn("response was not json");
+    }
+
+    throw errorBody;
+  }
+
+  // No content (204)
+  if (res.status === 204) {
+    return null as T;
+  }
+
+  return res.json() as Promise<T>;
+}

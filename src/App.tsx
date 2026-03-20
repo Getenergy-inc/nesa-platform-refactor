@@ -203,6 +203,7 @@ import ManageEditionsPage from "./pages/admin/ManageEditions";
 import CategoryPage from "./pages/categories/CategoryPage";
 import WalletPage from "./pages/Wallet";
 import ManageCategoriesPage from "./pages/admin/ManageCategories";
+import MyNominations from "./pages/dashboard/NominatorNominations";
 
 // Optimized QueryClient with caching strategy
 const queryClient = new QueryClient({
@@ -1016,7 +1017,7 @@ const App = () => (
                   <Route path="/dashboard" element={<Dashboard />} />
                   <Route
                     path="/dashboard/nominations"
-                    element={<Dashboard />}
+                    element={<MyNominations />}
                   />
                   <Route
                     path="/dashboard/notifications"
