@@ -113,6 +113,38 @@ function TierGroupHeader({ icon: IconComp, title, subtitle, count, color }: {
 
 export function CategoriesSection() {
   const { t } = useTranslation("pages");
+  const blueGarnetDefault = groups.blueGarnet.slice(0, 3);
+  const blueGarnetReplacement = groups.blueGarnet.find(
+    (cat) => cat.slug === "best-ngo-education-africa",
+  );
+  const blueGarnetToShow = (() => {
+    const idx = blueGarnetDefault.findIndex(
+      (cat) => cat.slug === "best-csr-education-nigeria",
+    );
+    if (idx === -1 || !blueGarnetReplacement) return blueGarnetDefault;
+    const replaced = [...blueGarnetDefault];
+    replaced[idx] = blueGarnetReplacement;
+    const dedup: CategoryDefinition[] = [];
+    for (const cat of replaced) {
+      if (!dedup.find((c) => c.slug === cat.slug)) dedup.push(cat);
+    }
+    if (dedup.length >= 3) return dedup.slice(0, 3);
+    for (const cat of groups.blueGarnet) {
+      if (!dedup.find((c) => c.slug === cat.slug)) dedup.push(cat);
+      if (dedup.length === 3) break;
+    }
+    return dedup;
+  })();
+  const platinumFeaturedSlugs = [
+    "international-bilateral-education",
+    "diaspora-education-impact",
+    "political-leaders-education-nigeria",
+  ];
+  const platinumFeatured = platinumFeaturedSlugs
+    .map((slug) => groups.platinum.find((cat) => cat.slug === slug))
+    .filter((cat): cat is CategoryDefinition => Boolean(cat));
+  const platinumToShow =
+    platinumFeatured.length === 3 ? platinumFeatured : groups.platinum.slice(0, 3);
 
   return (
     <section className="bg-charcoal py-16 md:py-24 relative overflow-hidden">
@@ -154,7 +186,7 @@ export function CategoriesSection() {
         <motion.div className="mb-16" initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }}>
           <TierGroupHeader icon={Trophy} title="Blue Garnet — Competitive Excellence" subtitle="Public voting → Jury evaluation" count={groups.blueGarnet.length} color="bg-blue-600" />
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
-            {groups.blueGarnet.slice(0, 3).map((cat, i) => (
+            {blueGarnetToShow.map((cat, i) => (
               <motion.div key={cat.id} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.04 }} viewport={{ once: true }}>
                 <CategoryCard cat={cat} />
               </motion.div>
@@ -174,7 +206,7 @@ export function CategoriesSection() {
         <motion.div className="mb-16" initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }}>
           <TierGroupHeader icon={Shield} title="Platinum — Institutional Leadership" subtitle="NRC verification · Governance criteria" count={groups.platinum.length} color="bg-slate-500" />
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
-            {groups.platinum.slice(0, 3).map((cat, i) => (
+            {platinumToShow.map((cat, i) => (
               <motion.div key={cat.id} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.04 }} viewport={{ once: true }}>
                 <CategoryCard cat={cat} />
               </motion.div>
