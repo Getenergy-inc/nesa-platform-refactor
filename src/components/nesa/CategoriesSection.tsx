@@ -173,7 +173,7 @@ export function CategoriesSection() {
             ))}
           </div>
           <div className="mt-4">
-            <Link to="/categories">
+            <Link to="/categories?view=lifetime">
               <Button variant="outline" size="sm" className="border-gold/40 text-gold hover:bg-gold/10 rounded-full">
                 See All Subcategories
                 <ChevronRight className="ml-2 h-3.5 w-3.5" />
@@ -193,7 +193,7 @@ export function CategoriesSection() {
             ))}
           </div>
           <div className="mt-4">
-            <Link to="/categories">
+            <Link to="/categories?view=blue-garnet">
               <Button variant="outline" size="sm" className="border-gold/40 text-gold hover:bg-gold/10 rounded-full">
                 See All Subcategories
                 <ChevronRight className="ml-2 h-3.5 w-3.5" />
@@ -213,7 +213,7 @@ export function CategoriesSection() {
             ))}
           </div>
           <div className="mt-4">
-            <Link to="/categories">
+            <Link to="/categories?view=platinum">
               <Button variant="outline" size="sm" className="border-gold/40 text-gold hover:bg-gold/10 rounded-full">
                 See All Subcategories
                 <ChevronRight className="ml-2 h-3.5 w-3.5" />
@@ -232,6 +232,14 @@ export function CategoriesSection() {
                   <CategoryCard cat={cat} />
                 </motion.div>
               ))}
+            </div>
+            <div className="mt-4">
+              <Link to="/categories?view=gold-special">
+                <Button variant="outline" size="sm" className="border-gold/40 text-gold hover:bg-gold/10 rounded-full">
+                  See All Subcategories
+                  <ChevronRight className="ml-2 h-3.5 w-3.5" />
+                </Button>
+              </Link>
             </div>
           </motion.div>
         )}
