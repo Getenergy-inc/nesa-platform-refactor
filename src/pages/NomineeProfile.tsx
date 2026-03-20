@@ -167,7 +167,7 @@ export default function NomineeProfile() {
             <Users className="w-10 h-10 text-gold/30" />
           </div>
           <h1 className="text-2xl font-display text-ivory mb-3">Profile Not Available</h1>
-          <p className="text-ivory/50 text-sm mb-6">This nominee profile may be under review or the link may be incorrect.</p>
+          <p className="text-ivory/70 text-sm mb-6">This nominee profile may be under review or the link may be incorrect.</p>
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
             <Button asChild className="bg-gold hover:bg-gold-dark text-charcoal">
               <Link to="/nominees"><ArrowLeft className="w-4 h-4 mr-2" />Browse Nominees</Link>
@@ -203,7 +203,7 @@ export default function NomineeProfile() {
 
           <div className="container mx-auto px-4 pt-8 pb-10 md:pt-12 md:pb-14 relative z-10">
             {/* Breadcrumbs */}
-            <nav className="flex items-center gap-2 text-xs text-ivory/40 mb-8 flex-wrap">
+            <nav className="flex items-center gap-2 text-xs text-ivory/70 mb-8 flex-wrap">
               <Link to="/" className="hover:text-gold transition-colors">Home</Link>
               <ChevronRight className="w-3 h-3" />
               <Link to="/nominees" className="hover:text-gold transition-colors">Nominees</Link>
@@ -212,7 +212,7 @@ export default function NomineeProfile() {
                 {normalizeYearReferences(nominee.awardTitle)}
               </Link>
               <ChevronRight className="w-3 h-3" />
-              <span className="text-ivory/60 truncate max-w-[180px]">{nominee.name}</span>
+              <span className="text-ivory/80 truncate max-w-[180px]">{nominee.name}</span>
             </nav>
 
             <div className="flex flex-col md:flex-row gap-8 items-start">
@@ -238,7 +238,7 @@ export default function NomineeProfile() {
                     <h1 className="text-3xl md:text-4xl lg:text-5xl font-display text-ivory font-bold tracking-tight leading-tight">
                       {normalizeYearReferences(nominee.name)}
                     </h1>
-                    <div className="flex flex-wrap items-center gap-4 mt-3 text-sm text-ivory/50">
+                    <div className="flex flex-wrap items-center gap-4 mt-3 text-sm text-ivory/80">
                       <div className="flex items-center gap-1.5">
                         <MapPin className="w-4 h-4 text-gold/50" />
                         <span>{getLocationDisplay(nominee)}</span>
@@ -278,7 +278,7 @@ export default function NomineeProfile() {
 
                 {/* Quick Achievement */}
                 {nominee.achievement && (
-                  <p className="text-ivory/60 text-sm md:text-base leading-relaxed max-w-2xl">
+                  <p className="text-ivory/80 text-sm md:text-base leading-relaxed max-w-2xl">
                     {normalizeYearReferences(nominee.achievement)}
                   </p>
                 )}
@@ -325,7 +325,7 @@ export default function NomineeProfile() {
                 <CardContent className="p-6 md:p-8">
                   <div className="flex items-start gap-4">
                     <Quote className="w-10 h-10 text-gold/25 flex-shrink-0 mt-1" />
-                    <p className="text-ivory/70 text-sm md:text-base leading-relaxed italic">
+                    <p className="text-ivory/80 text-sm md:text-base leading-relaxed italic">
                       {story.citation}
                     </p>
                   </div>
@@ -343,7 +343,7 @@ export default function NomineeProfile() {
                   </div>
                   <div className="space-y-4">
                     {story.paragraphs.map((p, i) => (
-                      <p key={i} className="text-ivory/60 leading-relaxed text-sm md:text-base">{p}</p>
+                      <p key={i} className="text-ivory/80 leading-relaxed text-sm md:text-base">{p}</p>
                     ))}
                   </div>
                 </CardContent>
@@ -367,7 +367,7 @@ export default function NomineeProfile() {
                     {story.highlights.map((h, i) => (
                       <li key={i} className="flex items-start gap-3">
                         <CheckCircle2 className="w-4 h-4 text-emerald-400 flex-shrink-0 mt-0.5" />
-                        <span className="text-ivory/60 text-sm leading-relaxed">{h}</span>
+                        <span className="text-ivory/80 text-sm leading-relaxed">{h}</span>
                       </li>
                     ))}
                   </ul>
@@ -385,7 +385,7 @@ export default function NomineeProfile() {
                   </div>
                   <div className="space-y-4">
                     {story.significance.map((s, i) => (
-                      <p key={i} className="text-ivory/60 text-sm leading-relaxed">{s}</p>
+                      <p key={i} className="text-ivory/80 text-sm leading-relaxed">{s}</p>
                     ))}
                   </div>
                 </CardContent>
@@ -402,15 +402,15 @@ export default function NomineeProfile() {
                   </div>
                   <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                     <div className="p-4 rounded-xl bg-charcoal/50 border border-gold/5">
-                      <span className="text-ivory/40 text-xs uppercase tracking-wider">Main Category</span>
-                      <p className="text-ivory/80 text-sm mt-1 font-medium">{normalizeYearReferences(nominee.awardTitle)}</p>
+                      <span className="text-ivory/70 text-xs uppercase tracking-wider">Main Category</span>
+                      <p className="text-ivory/90 text-sm mt-1 font-medium">{normalizeYearReferences(nominee.awardTitle)}</p>
                     </div>
                     <div className="p-4 rounded-xl bg-charcoal/50 border border-gold/5">
-                      <span className="text-ivory/40 text-xs uppercase tracking-wider">Subcategory</span>
-                      <p className="text-ivory/80 text-sm mt-1 font-medium">{normalizeYearReferences(nominee.subcategoryTitle)}</p>
+                      <span className="text-ivory/70 text-xs uppercase tracking-wider">Subcategory</span>
+                      <p className="text-ivory/90 text-sm mt-1 font-medium">{normalizeYearReferences(nominee.subcategoryTitle)}</p>
                     </div>
                     <div className="p-4 rounded-xl bg-charcoal/50 border border-gold/5">
-                      <span className="text-ivory/40 text-xs uppercase tracking-wider">Pathway</span>
+                      <span className="text-ivory/70 text-xs uppercase tracking-wider">Pathway</span>
                       <p className="text-gold text-sm mt-1 font-medium">{pathway}</p>
                     </div>
                   </div>
@@ -434,7 +434,7 @@ export default function NomineeProfile() {
               {/* Nominee Details Card */}
               <Card className="bg-charcoal-light/50 border-gold/10">
                 <CardContent className="p-5 space-y-4">
-                  <h3 className="text-sm font-display text-ivory/70 font-medium flex items-center gap-2">
+                  <h3 className="text-sm font-display text-ivory/80 font-medium flex items-center gap-2">
                     <Shield className="w-4 h-4 text-gold" />Nominee Details
                   </h3>
                   {[
@@ -446,8 +446,8 @@ export default function NomineeProfile() {
                     { label: "Re-nominations", value: String(renominationCount) },
                   ].map(item => (
                     <div key={item.label} className="flex justify-between items-center">
-                      <span className="text-ivory/40 text-xs">{item.label}</span>
-                      <span className="text-ivory/70 text-xs font-medium">{item.value}</span>
+                      <span className="text-ivory/70 text-xs">{item.label}</span>
+                      <span className="text-ivory/90 text-xs font-medium">{item.value}</span>
                     </div>
                   ))}
                 </CardContent>
@@ -467,10 +467,10 @@ export default function NomineeProfile() {
               {/* Share Card */}
               <Card className="bg-charcoal-light/50 border-gold/10">
                 <CardContent className="p-5">
-                  <h3 className="text-sm font-display text-ivory/70 font-medium mb-3 flex items-center gap-2">
+                  <h3 className="text-sm font-display text-ivory/80 font-medium mb-3 flex items-center gap-2">
                     <Share2 className="w-4 h-4 text-gold" />Share This Profile
                   </h3>
-                  <p className="text-xs text-ivory/40 mb-4">Help spread the word about {nominee.name.split(" ")[0]}'s nomination!</p>
+                  <p className="text-xs text-ivory/70 mb-4">Help spread the word about {nominee.name.split(" ")[0]}'s nomination!</p>
                   <div className="flex gap-2">
                     {[
                       { icon: Twitter, platform: "twitter" },
@@ -491,7 +491,7 @@ export default function NomineeProfile() {
                 <CardContent className="p-5 text-center">
                   <Award className="w-10 h-10 text-gold/30 mx-auto mb-3" />
                   <h3 className="text-sm font-display text-ivory/80 font-medium mb-1">Know Someone Deserving?</h3>
-                  <p className="text-ivory/40 text-xs mb-4">Recognize an education champion making a difference in Africa.</p>
+                  <p className="text-ivory/70 text-xs mb-4">Recognize an education champion making a difference in Africa.</p>
                   <Button asChild className="w-full bg-gold hover:bg-gold-dark text-charcoal font-semibold">
                     <Link to="/nominate"><Award className="w-4 h-4 mr-2" />Nominate Now</Link>
                   </Button>
@@ -535,11 +535,11 @@ export default function NomineeProfile() {
                               {normalizeYearReferences(related.name)}
                             </h3>
                             {related.country && (
-                              <div className="flex items-center gap-1 text-ivory/40 text-xs">
+                              <div className="flex items-center gap-1 text-ivory/70 text-xs">
                                 <MapPin className="w-3 h-3" />{related.country}
                               </div>
                             )}
-                            <p className="text-ivory/50 text-xs leading-relaxed line-clamp-2">
+                            <p className="text-ivory/80 text-xs leading-relaxed line-clamp-2">
                               {normalizeYearReferences(related.achievement) || "Contributing to education across Africa."}
                             </p>
                             <span className="inline-flex items-center text-gold text-xs font-medium group-hover:translate-x-1 transition-transform">
@@ -560,7 +560,7 @@ export default function NomineeProfile() {
         <section className="border-t border-gold/10 py-12 bg-gradient-to-b from-charcoal to-charcoal-light/20">
           <div className="container mx-auto px-4 text-center">
             <h2 className="text-xl md:text-2xl font-display text-ivory mb-3">Support African Education Leaders</h2>
-            <p className="text-ivory/50 text-sm max-w-lg mx-auto mb-6">
+            <p className="text-ivory/70 text-sm max-w-lg mx-auto mb-6">
               You can begin a nomination now. Final confirmation requires sign-up or sign-in.
             </p>
             <div className="flex flex-wrap justify-center gap-3">
@@ -600,8 +600,8 @@ function ActionCTABar({
   return (
     <Card className="bg-gradient-to-br from-gold/5 to-transparent border-gold/15">
       <CardContent className="p-5 space-y-4">
-        <h3 className="text-sm font-display text-ivory/70 font-medium">Nominee Actions</h3>
-        <p className="text-ivory/30 text-xs">
+        <h3 className="text-sm font-display text-ivory/80 font-medium">Nominee Actions</h3>
+        <p className="text-ivory/60 text-xs">
           Support this nominee through nomination, re-nomination{blueGarnet ? ", or voting" : ""}.
           {" "}Final confirmation requires sign-in.
         </p>

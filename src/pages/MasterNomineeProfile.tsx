@@ -53,7 +53,7 @@ export default function MasterNomineeProfile() {
             <Award className="w-8 h-8 text-gold/30" />
           </div>
           <h1 className="text-xl font-display text-ivory mb-2">Nominee Not Found</h1>
-          <p className="text-ivory/40 text-sm mb-4">This profile may be under review or the link is incorrect.</p>
+          <p className="text-ivory/70 text-sm mb-4">This profile may be under review or the link is incorrect.</p>
           <Button asChild className="bg-gold hover:bg-gold-dark text-charcoal">
             <Link to="/directory"><ArrowLeft className="w-4 h-4 mr-2" /> Browse Directory</Link>
           </Button>
@@ -81,12 +81,12 @@ export default function MasterNomineeProfile() {
 
           <div className="container mx-auto px-4 pt-8 pb-10 md:pt-12 md:pb-14 relative z-10">
             {/* Breadcrumbs */}
-            <nav className="flex items-center gap-2 text-xs text-ivory/40 mb-8 flex-wrap">
+            <nav className="flex items-center gap-2 text-xs text-ivory/70 mb-8 flex-wrap">
               <Link to="/" className="hover:text-gold transition-colors">Home</Link>
               <ChevronRight className="w-3 h-3" />
               <Link to="/directory" className="hover:text-gold transition-colors">Directory</Link>
               <ChevronRight className="w-3 h-3" />
-              <span className="text-ivory/60 truncate max-w-[200px]">{nominee.name}</span>
+              <span className="text-ivory/80 truncate max-w-[200px]">{nominee.name}</span>
             </nav>
 
             <div className="flex flex-col md:flex-row gap-8 items-start">
@@ -108,7 +108,7 @@ export default function MasterNomineeProfile() {
                     <h1 className="text-3xl md:text-4xl lg:text-5xl font-display text-ivory font-bold tracking-tight leading-tight">
                       {nominee.name}
                     </h1>
-                    <div className="flex flex-wrap items-center gap-4 mt-3 text-sm text-ivory/50">
+                    <div className="flex flex-wrap items-center gap-4 mt-3 text-sm text-ivory/80">
                       {nominee.country && (
                         <div className="flex items-center gap-1.5">
                           <MapPin className="w-4 h-4 text-gold/50" />{nominee.country}{nominee.state ? `, ${nominee.state}` : ""}
@@ -178,7 +178,7 @@ export default function MasterNomineeProfile() {
                 <CardContent className="p-6 md:p-8">
                   <div className="flex items-start gap-4">
                     <Quote className="w-10 h-10 text-gold/25 flex-shrink-0 mt-1" />
-                    <p className="text-ivory/70 text-sm md:text-base leading-relaxed italic">{bio.recognitionCitation}</p>
+                    <p className="text-ivory/80 text-sm md:text-base leading-relaxed italic">{bio.recognitionCitation}</p>
                   </div>
                 </CardContent>
               </Card>
@@ -194,7 +194,7 @@ export default function MasterNomineeProfile() {
                   </div>
                   <div className="space-y-4">
                     {bio.contributionNarrative.paragraphs.map((p, i) => (
-                      <p key={i} className="text-ivory/60 leading-relaxed text-sm md:text-base">{p}</p>
+                      <p key={i} className="text-ivory/80 leading-relaxed text-sm md:text-base">{p}</p>
                     ))}
                   </div>
                 </CardContent>
@@ -213,7 +213,7 @@ export default function MasterNomineeProfile() {
                     {bio.impactHighlights.map((h, i) => (
                       <li key={i} className="flex items-start gap-3">
                         <CheckCircle2 className="w-4 h-4 text-emerald-400 flex-shrink-0 mt-0.5" />
-                        <span className="text-ivory/60 text-sm leading-relaxed">{h}</span>
+                        <span className="text-ivory/80 text-sm leading-relaxed">{h}</span>
                       </li>
                     ))}
                   </ul>
@@ -231,7 +231,7 @@ export default function MasterNomineeProfile() {
                   </div>
                   <div className="space-y-4">
                     {bio.institutionalSignificance.map((s, i) => (
-                      <p key={i} className="text-ivory/60 text-sm leading-relaxed">{s}</p>
+                      <p key={i} className="text-ivory/80 text-sm leading-relaxed">{s}</p>
                     ))}
                   </div>
                 </CardContent>
@@ -248,15 +248,15 @@ export default function MasterNomineeProfile() {
                   </div>
                   <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                     <div className="p-4 rounded-xl bg-charcoal/50 border border-gold/5">
-                      <span className="text-ivory/40 text-xs uppercase tracking-wider">Main Category</span>
-                      <p className="text-ivory/80 text-sm mt-1 font-medium">{nominee.category}</p>
+                      <span className="text-ivory/70 text-xs uppercase tracking-wider">Main Category</span>
+                      <p className="text-ivory/90 text-sm mt-1 font-medium">{nominee.category}</p>
                     </div>
                     <div className="p-4 rounded-xl bg-charcoal/50 border border-gold/5">
-                      <span className="text-ivory/40 text-xs uppercase tracking-wider">Subcategory</span>
-                      <p className="text-ivory/80 text-sm mt-1 font-medium">{nominee.subcategory}</p>
+                      <span className="text-ivory/70 text-xs uppercase tracking-wider">Subcategory</span>
+                      <p className="text-ivory/90 text-sm mt-1 font-medium">{nominee.subcategory}</p>
                     </div>
                     <div className="p-4 rounded-xl bg-charcoal/50 border border-gold/5">
-                      <span className="text-ivory/40 text-xs uppercase tracking-wider">Pathway</span>
+                      <span className="text-ivory/70 text-xs uppercase tracking-wider">Pathway</span>
                       <p className="text-gold text-sm mt-1 font-medium">{nominee.pathway}</p>
                     </div>
                   </div>
@@ -274,7 +274,7 @@ export default function MasterNomineeProfile() {
               {/* Quick Info */}
               <Card className="bg-charcoal-light/50 border-gold/10">
                 <CardContent className="p-5 space-y-4">
-                  <h3 className="text-sm font-display text-ivory/70 font-medium flex items-center gap-2">
+                  <h3 className="text-sm font-display text-ivory/80 font-medium flex items-center gap-2">
                     <Shield className="w-4 h-4 text-gold" />Nominee Details
                   </h3>
                   {[
@@ -286,8 +286,8 @@ export default function MasterNomineeProfile() {
                     { label: "Status", value: "Existing Nominee" },
                   ].map(item => (
                     <div key={item.label} className="flex justify-between items-center">
-                      <span className="text-ivory/40 text-xs">{item.label}</span>
-                      <span className="text-ivory/70 text-xs font-medium">{item.value}</span>
+                      <span className="text-ivory/70 text-xs">{item.label}</span>
+                      <span className="text-ivory/90 text-xs font-medium">{item.value}</span>
                     </div>
                   ))}
                 </CardContent>
@@ -301,12 +301,12 @@ export default function MasterNomineeProfile() {
                 <CardContent className="p-5">
                   <div className="flex items-center gap-2 mb-3">
                     <Shield className="w-4 h-4 text-gold" />
-                    <h3 className="text-sm font-display text-ivory/70 font-medium">NRC Verification Pipeline</h3>
+                    <h3 className="text-sm font-display text-ivory/80 font-medium">NRC Verification Pipeline</h3>
                   </div>
                   <NomineeWorkflowStatusBadge status={nominee.workflowStatus} showSteps />
                   <div className="mt-4 p-3 bg-charcoal/50 rounded-lg border border-gold/5">
-                    <p className="text-ivory/40 text-xs leading-relaxed">
-                      <strong className="text-ivory/60">Current Stage:</strong> {workflowConfig.description}
+                    <p className="text-ivory/70 text-xs leading-relaxed">
+                      <strong className="text-ivory/80">Current Stage:</strong> {workflowConfig.description}
                     </p>
                   </div>
                   <div className="mt-3 space-y-2">
@@ -315,7 +315,7 @@ export default function MasterNomineeProfile() {
                       .map(([key, config]) => (
                         <div key={key} className="flex items-center gap-2">
                           <FileCheck className={`w-3 h-3 ${config.step <= workflowConfig.step ? "text-emerald-400" : "text-ivory/20"}`} />
-                          <span className={`text-xs ${config.step <= workflowConfig.step ? "text-ivory/60" : "text-ivory/25"}`}>{config.label}</span>
+                          <span className={`text-xs ${config.step <= workflowConfig.step ? "text-ivory/80" : "text-ivory/50"}`}>{config.label}</span>
                         </div>
                       ))}
                   </div>
@@ -357,11 +357,11 @@ export default function MasterNomineeProfile() {
                           <div className="p-4 space-y-2">
                             <h3 className="font-display text-ivory text-sm font-semibold leading-tight group-hover:text-gold transition-colors line-clamp-1">{rn.name}</h3>
                             {rn.country && (
-                              <div className="flex items-center gap-1 text-ivory/40 text-xs">
+                              <div className="flex items-center gap-1 text-ivory/70 text-xs">
                                 <MapPin className="w-3 h-3" />{rn.country}
                               </div>
                             )}
-                            <p className="text-ivory/50 text-xs leading-relaxed line-clamp-2">{rn.achievement || "Contributing to education across Africa."}</p>
+                            <p className="text-ivory/80 text-xs leading-relaxed line-clamp-2">{rn.achievement || "Contributing to education across Africa."}</p>
                             <span className="inline-flex items-center text-gold text-xs font-medium group-hover:translate-x-1 transition-transform">
                               View Profile <ChevronRight className="w-3 h-3 ml-0.5" />
                             </span>
@@ -380,7 +380,7 @@ export default function MasterNomineeProfile() {
         <section className="border-t border-gold/10 py-12 bg-gradient-to-b from-charcoal to-charcoal-light/20">
           <div className="container mx-auto px-4 text-center">
             <h2 className="text-xl md:text-2xl font-display text-ivory mb-3">Support African Education Leaders</h2>
-            <p className="text-ivory/50 text-sm max-w-lg mx-auto mb-6">
+            <p className="text-ivory/70 text-sm max-w-lg mx-auto mb-6">
               You can begin a nomination now. Final confirmation requires sign-up or sign-in.
             </p>
             <div className="flex flex-wrap justify-center gap-3">
@@ -403,8 +403,8 @@ function MasterActionCTA({ nominee, blueGarnet }: { nominee: MasterNominee; blue
   return (
     <Card className="bg-gradient-to-br from-gold/8 to-transparent border-gold/15">
       <CardContent className="p-5 space-y-4">
-        <h3 className="text-sm font-display text-ivory/70 font-medium">Nominee Actions</h3>
-        <p className="text-ivory/30 text-xs">
+        <h3 className="text-sm font-display text-ivory/80 font-medium">Nominee Actions</h3>
+        <p className="text-ivory/60 text-xs">
           Support this nominee through nomination, re-nomination{blueGarnet ? ", or voting" : ""}.
           {" "}Final confirmation requires sign-in.
         </p>

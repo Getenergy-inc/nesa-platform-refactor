@@ -88,7 +88,7 @@ export function ExitIntentPopup() {
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.9, y: 20 }}
             transition={{ type: "spring", damping: 25, stiffness: 300 }}
-            className="fixed inset-x-4 top-1/2 -translate-y-1/2 md:inset-auto md:left-1/2 md:top-1/2 md:-translate-x-1/2 md:-translate-y-1/2 md:w-full md:max-w-lg z-[201]"
+            className="fixed bottom-4 left-4 right-4 md:left-auto md:right-6 md:bottom-6 md:w-full md:max-w-lg z-[201]"
           >
             <div className="relative bg-charcoal rounded-2xl border border-gold/30 p-6 md:p-8 shadow-2xl shadow-gold/10">
               {/* Close button */}
