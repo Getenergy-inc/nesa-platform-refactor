@@ -1,4 +1,4 @@
-import { Trophy, ArrowRight, Sparkles, Users, Globe, Calendar, Play, RotateCcw } from "lucide-react";
+import { Trophy, ArrowRight, Sparkles, Users, Globe, Calendar } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { Button } from "@/components/ui/button";
@@ -159,51 +159,7 @@ export function TrophyHeroSection() {
                 </Button>
               </Link>
             </motion.div>
-
-            {/* Secondary CTAs */}
-            <motion.div
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.72 }}
-              className="flex flex-wrap gap-3 justify-center lg:justify-start mb-6"
-            >
-              <Link to="/nominees">
-                <Button
-                  size="sm"
-                  variant="ghost"
-                  className="text-gold/70 hover:text-gold hover:bg-gold/10 rounded-full px-5 gap-1.5 text-sm"
-                >
-                  <RotateCcw className="h-4 w-4" />
-                  Re-Nominate
-                </Button>
-              </Link>
-              <Link to="/vote-with-agc">
-                <Button
-                  size="sm"
-                  variant="ghost"
-                  className="text-gold/70 hover:text-gold hover:bg-gold/10 rounded-full px-5 gap-1.5 text-sm"
-                >
-                  {t("landing.trophyHero.voteWithAGC")}
-                </Button>
-              </Link>
-            </motion.div>
-
-            {/* Secondary links — less prominent */}
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.5, delay: 0.75 }}
-              className="flex flex-wrap gap-4 justify-center lg:justify-start mb-10"
-            >
-              <Link to="/media" className="group inline-flex items-center gap-1.5 text-gold/60 hover:text-gold text-sm transition-colors">
-                <Play className="h-3.5 w-3.5" />
-                <span className="underline-offset-4 hover:underline">{t("landing.trophyHero.watchLive")}</span>
-              </Link>
-              <Link to="/about" className="group inline-flex items-center gap-1.5 text-white/50 hover:text-gold text-sm transition-colors">
-                <span className="underline-offset-4 hover:underline">Learn More</span>
-                <ArrowRight className="h-3 w-3 group-hover:translate-x-0.5 transition-transform" />
-              </Link>
-            </motion.div>
+            <div className="mb-10" />
 
             <motion.div
               initial={{ opacity: 0 }}
@@ -295,3 +251,4 @@ export function TrophyHeroSection() {
     </section>
   );
 }
+
