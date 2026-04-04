@@ -24,16 +24,16 @@ export default function RegionsIndexPage() {
         <title>Explore Africa's Regions | NESA-Africa</title>
         <meta name="description" content="Explore all 10 NESA-Africa award regions across the African continent, the Diaspora, and Friends of Africa." />
       </Helmet>
-      <div className="min-h-screen bg-charcoal">
+      <div className="min-h-screen bg-charcoal text-ivory">
         {/* Hero */}
         <section className="relative py-20 px-4 bg-gradient-to-b from-gold/5 to-charcoal">
           <div className="container mx-auto text-center max-w-3xl">
             <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
-              <Globe className="w-12 h-12 text-primary mx-auto mb-4" />
-              <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-4">
+              <Globe className="w-12 h-12 text-gold mx-auto mb-4" />
+              <h1 className="text-4xl md:text-5xl font-bold text-ivory mb-4">
                 Explore Africa's Regions
               </h1>
-              <p className="text-lg text-muted-foreground">
+              <p className="text-lg text-ivory/70">
                 NESA-Africa recognizes excellence across {GOVERNANCE_STATS.regions} regional groups spanning the entire African continent and beyond.
               </p>
             </motion.div>
@@ -56,17 +56,17 @@ export default function RegionsIndexPage() {
                   >
                     <Link
                       to={`/region/${slug}`}
-                      className="group block rounded-xl border border-border bg-card p-6 hover:border-primary/50 hover:shadow-lg transition-all duration-300"
+                      className="group block rounded-xl border border-gold/10 bg-charcoal-light/60 p-6 hover:border-gold/40 hover:shadow-lg transition-all duration-300"
                     >
                       <div className="flex items-start justify-between mb-3">
-                        <MapPin className="w-5 h-5 text-primary" />
-                        <ArrowRight className="w-4 h-4 text-muted-foreground group-hover:text-primary transition-colors" />
+                        <MapPin className="w-5 h-5 text-gold" />
+                        <ArrowRight className="w-4 h-4 text-ivory/60 group-hover:text-gold transition-colors" />
                       </div>
-                      <h2 className="text-xl font-semibold text-foreground mb-2 group-hover:text-primary transition-colors">
+                      <h2 className="text-xl font-semibold text-ivory mb-2 group-hover:text-gold transition-colors">
                         {region}
                       </h2>
                       {description && (
-                        <p className="text-sm text-muted-foreground">{description}</p>
+                        <p className="text-sm text-ivory/70">{description}</p>
                       )}
                     </Link>
                   </motion.div>

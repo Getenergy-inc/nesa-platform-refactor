@@ -53,7 +53,7 @@ export function EnrichedProfileCard({ profile, nomineeName }: EnrichedProfileCar
               {summary_2025}
             </p>
             {profile.asOfDate && (
-              <p className="text-xs text-ivory/40 mt-4">
+              <p className="text-xs text-ivory/70 mt-4">
                 Information as of {new Date(profile.asOfDate).toLocaleDateString("en-US", { 
                   year: "numeric", 
                   month: "long" 
@@ -203,13 +203,13 @@ export function EnrichedProfileCard({ profile, nomineeName }: EnrichedProfileCar
       {/* Sources Section - Collapsible */}
       {sources.length > 0 && (
         <details className="group">
-          <summary className="text-sm text-ivory/40 cursor-pointer hover:text-ivory/60 flex items-center gap-2">
+          <summary className="text-sm text-ivory/70 cursor-pointer hover:text-ivory/90 flex items-center gap-2">
             <Quote className="w-4 h-4" />
             View {sources.length} source{sources.length > 1 ? "s" : ""} for this profile
           </summary>
           <div className="mt-3 space-y-2 pl-6">
             {sources.map((source, idx) => (
-              <div key={idx} className="text-xs text-ivory/50">
+              <div key={idx} className="text-xs text-ivory/70">
                 <a 
                   href={source.url} 
                   target="_blank" 

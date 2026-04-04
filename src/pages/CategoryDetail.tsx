@@ -7,7 +7,6 @@ import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Skeleton } from "@/components/ui/skeleton";
-import { Breadcrumbs } from "@/components/ui/breadcrumbs";
 import {
   Award, ArrowLeft, ChevronRight, Users, GraduationCap,
   Trophy, Shield, Star, Crown,
@@ -103,7 +102,7 @@ export default function CategoryDetail() {
 
   if (isLoading) {
     return (
-      <div className="min-h-screen bg-charcoal">
+      <div className="min-h-screen bg-charcoal text-ivory">
         <div className="container px-6 py-16">
           <Skeleton className="h-8 w-48 mb-4 bg-white/10" />
           <Skeleton className="h-12 w-3/4 mb-4 bg-white/10" />
@@ -169,14 +168,6 @@ export default function CategoryDetail() {
             </>
           )}
           <div className="container relative z-10 px-6 py-12 md:py-20">
-            <Breadcrumbs
-              items={[
-                { label: "Categories", href: "/categories" },
-                { label: displayCat.name },
-              ]}
-              className="mb-6 text-white/50"
-            />
-
             <div className="flex flex-wrap gap-2 mb-4">
               <Badge variant="outline" className={`${tier.className} gap-1`}>
                 {tier.icon}
@@ -187,21 +178,21 @@ export default function CategoryDetail() {
               </Badge>
             </div>
 
-            <h1 className="font-display text-3xl md:text-4xl font-bold text-white mb-4">
+            <h1 className="font-display text-3xl md:text-4xl font-bold text-ivory mb-4">
               {displayCat.name}
             </h1>
-            <p className="text-white/70 max-w-3xl text-lg mb-6">
+            <p className="text-ivory/80 max-w-3xl text-lg mb-6">
               {displayCat.description}
             </p>
 
             {/* Governance hint */}
-            <p className="text-white/50 text-sm italic mb-8 max-w-2xl">
+            <p className="text-ivory/70 text-sm italic mb-8 max-w-2xl">
               {hint}
             </p>
 
             <div className="flex flex-wrap gap-3">
               <StageGate action="nominations" fallback={
-                <Button disabled variant="outline" className="border-white/20 text-white/50 rounded-full">
+                <Button disabled variant="outline" className="border-gold/20 text-gold/50 rounded-full">
                   Nominations Closed
                 </Button>
               }>
@@ -212,8 +203,8 @@ export default function CategoryDetail() {
                   </Link>
                 </Button>
               </StageGate>
-              <Button variant="outline" className="border-white/20 text-white hover:bg-white/10 rounded-full" asChild>
-                <Link to={`/nominees?category=${encodeURIComponent(displayCat.name)}`}>
+              <Button variant="outline" className="border-gold/30 text-gold hover:bg-gold/10 rounded-full" asChild>
+                <Link to={`/nominees?category=${encodeURIComponent(displayCat.slug)}`}>
                   <Users className="mr-2 h-4 w-4" />
                   Explore Nominees
                 </Link>
@@ -224,14 +215,14 @@ export default function CategoryDetail() {
 
         {/* Subcategories */}
         <section className="container px-6 py-12">
-          <h2 className="font-display text-xl font-bold text-white mb-6">
+          <h2 className="font-display text-xl font-bold text-ivory mb-6">
             Subcategories ({displaySubcategories.length})
           </h2>
 
           {displaySubcategories.length === 0 ? (
-            <div className="rounded-2xl bg-white/5 border border-white/10 p-8 text-center">
-              <Award className="mx-auto mb-4 h-12 w-12 text-white/20" />
-              <p className="text-white/50">No subcategories available for this category yet.</p>
+            <div className="rounded-2xl bg-charcoal-light/60 border border-gold/15 p-8 text-center">
+              <Award className="mx-auto mb-4 h-12 w-12 text-gold/30" />
+              <p className="text-ivory/70">No subcategories available for this category yet.</p>
             </div>
           ) : (
             <div className="grid gap-3 md:grid-cols-2 lg:grid-cols-3">
@@ -239,17 +230,17 @@ export default function CategoryDetail() {
                 <Link
                   key={sub.id}
                   to={`/nominate?subcategory=${sub.id}`}
-                  className="group flex items-center justify-between rounded-xl bg-white/5 border border-white/10 hover:border-gold/40 p-4 transition-all"
+                  className="group flex items-center justify-between rounded-xl bg-charcoal-light/60 border border-gold/10 hover:border-gold/40 p-4 transition-all"
                 >
                   <div className="flex-1 min-w-0">
-                    <p className="font-medium text-sm text-white group-hover:text-gold transition-colors">
+                    <p className="font-medium text-sm text-ivory group-hover:text-gold transition-colors">
                       {sub.name}
                     </p>
                     {sub.description && (
-                      <p className="text-xs text-white/40 mt-1 line-clamp-1">{sub.description}</p>
+                      <p className="text-xs text-ivory/60 mt-1 line-clamp-1">{sub.description}</p>
                     )}
                   </div>
-                  <ChevronRight className="h-4 w-4 text-white/30 group-hover:text-gold flex-shrink-0 ml-2 transition-colors" />
+                  <ChevronRight className="h-4 w-4 text-ivory/50 group-hover:text-gold flex-shrink-0 ml-2 transition-colors" />
                 </Link>
               ))}
             </div>
@@ -258,16 +249,16 @@ export default function CategoryDetail() {
 
         {/* CTA */}
         <section className="container px-6 pb-16">
-          <div className="rounded-2xl bg-white/5 border border-white/10 p-8 text-center">
-            <h3 className="mb-2 font-display text-2xl font-bold text-white">
+          <div className="rounded-2xl bg-charcoal-light/60 border border-gold/15 p-8 text-center">
+            <h3 className="mb-2 font-display text-2xl font-bold text-ivory">
               Nominate in This Category
             </h3>
-            <p className="mb-6 text-white/60">
+            <p className="mb-6 text-ivory/70">
               Know someone making a difference? Submit a nomination today.
             </p>
             <div className="flex flex-col justify-center gap-4 sm:flex-row">
               <StageGate action="nominations" fallback={
-                <Button size="lg" disabled variant="outline" className="border-white/20 text-white/50 rounded-full">
+                <Button size="lg" disabled variant="outline" className="border-gold/20 text-gold/50 rounded-full">
                   Nominations Currently Closed
                 </Button>
               }>
@@ -278,7 +269,7 @@ export default function CategoryDetail() {
                   </Link>
                 </Button>
               </StageGate>
-              <Button size="lg" variant="outline" className="border-white/20 text-white hover:bg-white/10 rounded-full" asChild>
+              <Button size="lg" variant="outline" className="border-gold/30 text-gold hover:bg-gold/10 rounded-full" asChild>
                 <Link to="/categories">View All Categories</Link>
               </Button>
             </div>

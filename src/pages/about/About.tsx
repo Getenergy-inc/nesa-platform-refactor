@@ -157,16 +157,16 @@ export default function About() {
                 <span className="text-sm font-medium text-gold">Since 2005 • Vision 2035</span>
               </div>
               
-              <h1 className="mb-6 font-display text-4xl font-bold text-white md:text-5xl lg:text-6xl leading-tight">
+              <h1 className="mb-6 font-display text-4xl font-bold text-ivory md:text-5xl lg:text-6xl leading-tight">
                 New Education Standard Award <span className="text-gold">Africa</span>
               </h1>
               
-              <p className="mb-4 text-xl text-white/90 font-medium">
+              <p className="mb-4 text-xl text-ivory/90 font-medium">
                 More than awards. A movement for education excellence.
               </p>
               
-              <p className="mb-8 text-lg text-white/70 leading-relaxed max-w-xl">
-                NESA-Africa is a <strong className="text-white">governance-grade education accountability platform</strong> —
+              <p className="mb-8 text-lg text-ivory/80 leading-relaxed max-w-xl">
+                NESA-Africa is a <strong className="text-ivory">governance-grade education accountability platform</strong> —
                 celebrating, validating, and amplifying Africa's education champions while funding 
                 measurable legacy impact through <span className="text-gold">Rebuild My School Africa</span>.
               </p>
@@ -178,7 +178,7 @@ export default function About() {
                     Explore Categories
                   </Link>
                 </Button>
-                <Button asChild size="lg" variant="outline" className="border-white/30 text-white hover:bg-white/10 rounded-full px-8">
+                <Button asChild size="lg" variant="outline" className="border-gold/30 text-gold hover:bg-gold/10 rounded-full px-8">
                   <Link to="/nominate">
                     <GraduationCap className="mr-2 h-5 w-5" />
                     Nominate Now
@@ -194,14 +194,14 @@ export default function About() {
               transition={{ duration: 0.6, delay: 0.2 }}
               className="hidden lg:block"
             >
-              <div className="bg-charcoal/80 backdrop-blur-xl rounded-3xl border border-white/10 p-8 shadow-2xl">
+              <div className="bg-charcoal/80 backdrop-blur-xl rounded-3xl border border-gold/10 p-8 shadow-2xl">
                 <h3 className="text-gold font-display text-xl font-semibold mb-6 text-center">Our Reach</h3>
                 <div className="grid grid-cols-2 gap-6">
                   {impactStats.map((stat) => (
                     <div key={stat.label} className="text-center p-4 rounded-xl bg-white/5">
                       <stat.icon className="h-6 w-6 text-gold mx-auto mb-2" />
-                      <p className="text-3xl font-bold text-white">{stat.value}</p>
-                      <p className="text-sm text-white/60">{stat.label}</p>
+                      <p className="text-3xl font-bold text-ivory">{stat.value}</p>
+                      <p className="text-sm text-ivory/70">{stat.label}</p>
                     </div>
                   ))}
                 </div>
@@ -212,13 +212,13 @@ export default function About() {
       </section>
 
       {/* Mobile Stats Strip */}
-      <section className="lg:hidden bg-charcoal border-y border-white/10 py-6">
+      <section className="lg:hidden bg-charcoal border-y border-gold/10 py-6">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-4 gap-4">
             {impactStats.map((stat) => (
               <div key={stat.label} className="text-center">
                 <p className="text-xl font-bold text-gold">{stat.value}</p>
-                <p className="text-xs text-white/60">{stat.label}</p>
+                <p className="text-xs text-ivory/70">{stat.label}</p>
               </div>
             ))}
           </div>
@@ -238,11 +238,11 @@ export default function About() {
             className="mx-auto max-w-4xl text-center"
           >
             <span className="inline-block mb-4 text-gold text-sm font-semibold uppercase tracking-wider">Our Mission</span>
-            <h2 className="mb-8 font-display text-3xl lg:text-4xl font-bold text-white leading-tight">
+            <h2 className="mb-8 font-display text-3xl lg:text-4xl font-bold text-ivory leading-tight">
               "Advocating & Achieving{" "}
               <span className="text-gold">Education For All</span> In Africa"
             </h2>
-            <p className="text-lg lg:text-xl leading-relaxed text-white/70">
+            <p className="text-lg lg:text-xl leading-relaxed text-ivory/80">
               To recognize, validate, and celebrate individuals, organizations, and institutions
               driving transformative change in African education — through transparent, merit-based awards 
               that inspire action, ensure accountability, and fund lasting legacy impact.
@@ -256,7 +256,7 @@ export default function About() {
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
             <span className="inline-block mb-4 text-gold text-sm font-semibold uppercase tracking-wider">Foundation</span>
-            <h2 className="font-display text-3xl lg:text-4xl font-bold text-white">
+            <h2 className="font-display text-3xl lg:text-4xl font-bold text-ivory">
               Our Four Pillars
             </h2>
           </div>
@@ -270,7 +270,7 @@ export default function About() {
           >
             {pillars.map((pillar) => (
               <motion.div key={pillar.title} variants={itemVariants}>
-                <Card className="h-full border-white/10 bg-charcoal/50 backdrop-blur-sm hover:border-gold/30 transition-all duration-300 group overflow-hidden">
+                <Card className="h-full border-gold/10 bg-charcoal/50 backdrop-blur-sm hover:border-gold/30 transition-all duration-300 group overflow-hidden">
                   {/* Image */}
                   <div className="relative h-48 overflow-hidden">
                     <img 
@@ -284,10 +284,10 @@ export default function About() {
                     </div>
                   </div>
                   <CardHeader className="pb-2">
-                    <CardTitle className="text-white text-xl">{pillar.title}</CardTitle>
+                    <CardTitle className="text-ivory text-xl">{pillar.title}</CardTitle>
                   </CardHeader>
                   <CardContent>
-                    <CardDescription className="text-white/60 text-base leading-relaxed">
+                    <CardDescription className="text-ivory/70 text-base leading-relaxed">
                       {pillar.description}
                     </CardDescription>
                   </CardContent>
@@ -303,10 +303,10 @@ export default function About() {
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
             <span className="inline-block mb-4 text-gold text-sm font-semibold uppercase tracking-wider">Recognition Levels</span>
-            <h2 className="font-display text-3xl lg:text-4xl font-bold text-white mb-4">
+            <h2 className="font-display text-3xl lg:text-4xl font-bold text-ivory mb-4">
               Award Tiers
             </h2>
-            <p className="mx-auto max-w-2xl text-white/60 text-lg">
+            <p className="mx-auto max-w-2xl text-ivory/70 text-lg">
               Four distinct recognition platforms, each with unique criteria and selection processes.
             </p>
           </div>
@@ -329,12 +329,12 @@ export default function About() {
                           <Trophy className="h-5 w-5" />
                           {tier.title}
                         </CardTitle>
-                        <p className="text-white/50 text-sm mt-1">{tier.subtitle}</p>
+                        <p className="text-ivory/60 text-sm mt-1">{tier.subtitle}</p>
                       </div>
                     </div>
                   </CardHeader>
                   <CardContent>
-                    <p className="text-white/70 leading-relaxed">{tier.description}</p>
+                    <p className="text-ivory/80 leading-relaxed">{tier.description}</p>
                   </CardContent>
                 </Card>
               </motion.div>
@@ -353,11 +353,11 @@ export default function About() {
       </section>
 
       {/* Quick Links */}
-      <section className="bg-charcoal py-20 lg:py-28 border-t border-white/10">
+      <section className="bg-charcoal py-20 lg:py-28 border-t border-gold/10">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
             <span className="inline-block mb-4 text-gold text-sm font-semibold uppercase tracking-wider">Explore</span>
-            <h2 className="font-display text-3xl lg:text-4xl font-bold text-white">
+            <h2 className="font-display text-3xl lg:text-4xl font-bold text-ivory">
               Learn More
             </h2>
           </div>
@@ -373,18 +373,18 @@ export default function About() {
               <motion.div key={link.href} variants={itemVariants}>
                 <Link
                   to={link.href}
-                  className="group flex items-center justify-between rounded-2xl border border-white/10 bg-white/5 p-6 transition-all duration-300 hover:border-gold/50 hover:bg-white/10 hover:shadow-lg hover:shadow-gold/5"
+                  className="group flex items-center justify-between rounded-2xl border border-gold/10 bg-white/5 p-6 transition-all duration-300 hover:border-gold/50 hover:bg-white/10 hover:shadow-lg hover:shadow-gold/5"
                 >
                   <div className="flex items-center gap-4">
                     <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-gold/10 group-hover:bg-gold/20 transition-colors">
                       <link.icon className="h-6 w-6 text-gold" />
                     </div>
                     <div>
-                      <span className="font-semibold text-white block">{link.label}</span>
-                      <span className="text-sm text-white/50">{link.description}</span>
+                      <span className="font-semibold text-ivory block">{link.label}</span>
+                      <span className="text-sm text-ivory/60">{link.description}</span>
                     </div>
                   </div>
-                  <ChevronRight className="h-5 w-5 text-white/40 transition-transform group-hover:translate-x-1 group-hover:text-gold" />
+                  <ChevronRight className="h-5 w-5 text-ivory/50 transition-transform group-hover:translate-x-1 group-hover:text-gold" />
                 </Link>
               </motion.div>
             ))}
@@ -393,7 +393,7 @@ export default function About() {
       </section>
 
       {/* Final CTA */}
-      <section className="bg-gradient-to-b from-charcoal to-charcoal/95 py-20 lg:py-28 border-t border-white/10">
+      <section className="bg-gradient-to-b from-charcoal to-charcoal/95 py-20 lg:py-28 border-t border-gold/10">
         <div className="container mx-auto px-4">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -401,10 +401,10 @@ export default function About() {
             viewport={{ once: true }}
             className="mx-auto max-w-3xl text-center"
           >
-            <h2 className="mb-6 font-display text-3xl lg:text-4xl font-bold text-white">
+            <h2 className="mb-6 font-display text-3xl lg:text-4xl font-bold text-ivory">
               Join the Movement
             </h2>
-            <p className="mb-8 text-lg text-white/70">
+            <p className="mb-8 text-lg text-ivory/80">
               Be part of Africa's most trusted education recognition platform. Nominate a changemaker, 
               vote with AGC, or partner with us to amplify impact.
             </p>
@@ -420,7 +420,7 @@ export default function About() {
                   Vote with AGC
                 </Link>
               </Button>
-              <Button asChild size="lg" variant="ghost" className="text-white/70 hover:text-white hover:bg-white/10 rounded-full px-8">
+              <Button asChild size="lg" variant="ghost" className="text-ivory/80 hover:text-ivory hover:bg-gold/10 rounded-full px-8">
                 <Link to="/partners">
                   Become a Partner
                 </Link>

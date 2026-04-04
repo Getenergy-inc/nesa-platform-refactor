@@ -195,26 +195,13 @@ export default function NomineeProfile() {
         <meta name="description" content={`${nominee.name} – Nominated for ${nominee.awardTitle} in ${nominee.subcategoryTitle}. Explore their impact on African education.`} />
       </Helmet>
 
-      <div className="min-h-screen bg-charcoal">
+      <div className="min-h-screen bg-charcoal text-ivory">
         {/* ========== HERO ========== */}
         <section className="relative border-b border-gold/10 overflow-hidden">
           <div className="absolute inset-0 bg-gradient-to-b from-gold/5 via-transparent to-transparent" />
           <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-gold/8 via-transparent to-transparent" />
 
           <div className="container mx-auto px-4 pt-8 pb-10 md:pt-12 md:pb-14 relative z-10">
-            {/* Breadcrumbs */}
-            <nav className="flex items-center gap-2 text-xs text-ivory/70 mb-8 flex-wrap">
-              <Link to="/" className="hover:text-gold transition-colors">Home</Link>
-              <ChevronRight className="w-3 h-3" />
-              <Link to="/nominees" className="hover:text-gold transition-colors">Nominees</Link>
-              <ChevronRight className="w-3 h-3" />
-              <Link to={`/categories/${nominee.awardSlug}`} className="hover:text-gold transition-colors truncate max-w-[180px]">
-                {normalizeYearReferences(nominee.awardTitle)}
-              </Link>
-              <ChevronRight className="w-3 h-3" />
-              <span className="text-ivory/80 truncate max-w-[180px]">{nominee.name}</span>
-            </nav>
-
             <div className="flex flex-col md:flex-row gap-8 items-start">
               {/* Profile Image */}
               <div className={`flex-shrink-0 w-40 h-40 md:w-48 md:h-48 rounded-2xl border-2 border-gold/20 overflow-hidden flex items-center justify-center shadow-2xl shadow-black/30 ${isLogo ? "bg-white/90 p-4" : "bg-gold/10"}`}>
@@ -321,11 +308,11 @@ export default function NomineeProfile() {
             {/* Main Column */}
             <div className="lg:col-span-2 space-y-8">
               {/* Recognition Citation */}
-              <Card className="bg-gradient-to-br from-gold/5 to-transparent border-gold/15">
+              <Card className="bg-charcoal-light/60 border-gold/15 text-ivory">
                 <CardContent className="p-6 md:p-8">
                   <div className="flex items-start gap-4">
                     <Quote className="w-10 h-10 text-gold/25 flex-shrink-0 mt-1" />
-                    <p className="text-ivory/80 text-sm md:text-base leading-relaxed italic">
+                    <p className="text-ivory/90 text-sm md:text-base leading-relaxed italic">
                       {story.citation}
                     </p>
                   </div>
@@ -487,11 +474,11 @@ export default function NomineeProfile() {
               </Card>
 
               {/* Nominate CTA */}
-              <Card className="bg-gradient-to-br from-gold/8 to-transparent border-gold/15">
+              <Card className="bg-charcoal-light/60 border-gold/15 text-ivory">
                 <CardContent className="p-5 text-center">
                   <Award className="w-10 h-10 text-gold/30 mx-auto mb-3" />
-                  <h3 className="text-sm font-display text-ivory/80 font-medium mb-1">Know Someone Deserving?</h3>
-                  <p className="text-ivory/70 text-xs mb-4">Recognize an education champion making a difference in Africa.</p>
+                  <h3 className="text-sm font-display text-ivory/90 font-medium mb-1">Know Someone Deserving?</h3>
+                  <p className="text-ivory/80 text-xs mb-4">Recognize an education champion making a difference in Africa.</p>
                   <Button asChild className="w-full bg-gold hover:bg-gold-dark text-charcoal font-semibold">
                     <Link to="/nominate"><Award className="w-4 h-4 mr-2" />Nominate Now</Link>
                   </Button>
@@ -557,10 +544,10 @@ export default function NomineeProfile() {
         )}
 
         {/* ========== BOTTOM CTA ========== */}
-        <section className="border-t border-gold/10 py-12 bg-gradient-to-b from-charcoal to-charcoal-light/20">
+        <section className="border-t border-gold/10 py-12 bg-gradient-to-b from-charcoal to-charcoal-light/20 text-ivory">
           <div className="container mx-auto px-4 text-center">
             <h2 className="text-xl md:text-2xl font-display text-ivory mb-3">Support African Education Leaders</h2>
-            <p className="text-ivory/70 text-sm max-w-lg mx-auto mb-6">
+            <p className="text-ivory/80 text-sm max-w-lg mx-auto mb-6">
               You can begin a nomination now. Final confirmation requires sign-up or sign-in.
             </p>
             <div className="flex flex-wrap justify-center gap-3">
@@ -598,10 +585,10 @@ function ActionCTABar({
   onRenominateSuccess: () => void;
 }) {
   return (
-    <Card className="bg-gradient-to-br from-gold/5 to-transparent border-gold/15">
+    <Card className="bg-charcoal-light/60 border-gold/15 text-ivory">
       <CardContent className="p-5 space-y-4">
-        <h3 className="text-sm font-display text-ivory/80 font-medium">Nominee Actions</h3>
-        <p className="text-ivory/60 text-xs">
+        <h3 className="text-sm font-display text-ivory/90 font-medium">Nominee Actions</h3>
+        <p className="text-ivory/80 text-xs">
           Support this nominee through nomination, re-nomination{blueGarnet ? ", or voting" : ""}.
           {" "}Final confirmation requires sign-in.
         </p>
