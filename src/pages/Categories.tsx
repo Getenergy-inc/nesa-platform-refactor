@@ -56,15 +56,15 @@ function CategoryCard({ cat, index }: { cat: CategoryDefinition; index: number }
     >
       <Link
         to={`/categories/${cat.slug}`}
-        className="group block bg-white/5 backdrop-blur-sm rounded-2xl border border-white/10 hover:border-gold/40 transition-all duration-300 overflow-hidden h-full"
+        className="group block bg-charcoal-light/60 backdrop-blur-sm rounded-2xl border border-gold/10 hover:border-gold/40 transition-all duration-300 overflow-hidden h-full"
       >
         {/* Image */}
         <div className="relative h-36 w-full overflow-hidden">
           {catImage ? (
             <img src={catImage} alt={cat.shortName} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" />
           ) : (
-            <div className="w-full h-full bg-white/5 flex items-center justify-center">
-              <Icon className="h-12 w-12 text-white/20" />
+            <div className="w-full h-full bg-charcoal/50 flex items-center justify-center">
+              <Icon className="h-12 w-12 text-gold/20" />
             </div>
           )}
           <div className="absolute inset-0 bg-gradient-to-t from-charcoal via-charcoal/50 to-transparent" />
@@ -87,15 +87,15 @@ function CategoryCard({ cat, index }: { cat: CategoryDefinition; index: number }
         </div>
         {/* Content */}
         <div className="p-4">
-          <h3 className="font-semibold text-white text-sm leading-tight group-hover:text-gold transition-colors line-clamp-2 mb-1">
+          <h3 className="font-semibold text-ivory text-sm leading-tight group-hover:text-gold transition-colors line-clamp-2 mb-1">
             {cat.name}
           </h3>
-          <p className="text-white/50 text-xs line-clamp-2 mb-3">{cat.description}</p>
+          <p className="text-ivory/70 text-xs line-clamp-2 mb-3">{cat.description}</p>
           <div className="flex items-center justify-between">
-            <span className="text-white/40 text-xs">
+            <span className="text-ivory/60 text-xs">
               {cat.subcategories.length > 0 ? `${cat.subcategories.length} subcategories` : ""}
             </span>
-            <div className="flex items-center gap-1 text-xs text-white/40 group-hover:text-gold transition-colors">
+            <div className="flex items-center gap-1 text-xs text-ivory/60 group-hover:text-gold transition-colors">
               <span>{cat.subcategories.length > 0 ? "View Subcategories" : "Explore"}</span>
               <ChevronRight className="h-3 w-3 group-hover:translate-x-1 transition-transform" />
             </div>
@@ -164,23 +164,23 @@ export default function Categories() {
       </Helmet>
 
       <div className="min-h-screen bg-charcoal">
-        <main className="container px-6 py-8">
+        <main className="container px-6 py-8 text-ivory">
           {/* Hero */}
           <div className="mb-10 text-center">
             <Badge className="mb-4 bg-gold/10 text-gold border-gold/30">{currentEdition.name}</Badge>
-            <h1 className="mb-3 font-display text-3xl font-bold md:text-4xl text-white">
+            <h1 className="mb-3 font-display text-3xl font-bold md:text-4xl text-ivory">
               Award Categories
             </h1>
-            <p className="mx-auto max-w-2xl text-white/60">
+            <p className="mx-auto max-w-2xl text-ivory/70">
               Celebrating excellence across education, leadership, and social impact in Africa.
             </p>
           </div>
 
           {/* Tabs */}
           <Tabs value={activeTab} onValueChange={(v) => { setActiveTab(v); setSearchQuery(""); }}>
-            <TabsList className="grid w-full max-w-2xl mx-auto grid-cols-4 mb-2 bg-white/5">
+            <TabsList className="grid w-full max-w-2xl mx-auto grid-cols-4 mb-2 bg-charcoal-light/60 border border-gold/10">
               {tabData.map((tab) => (
-                <TabsTrigger key={tab.key} value={tab.key} className="flex items-center gap-1.5 text-xs sm:text-sm data-[state=active]:bg-gold/20 data-[state=active]:text-gold">
+                <TabsTrigger key={tab.key} value={tab.key} className="flex items-center gap-1.5 text-xs sm:text-sm text-ivory/70 data-[state=active]:bg-gold data-[state=active]:text-charcoal">
                   {tab.icon}
                   <span className="hidden sm:inline">{tab.label}</span>
                 </TabsTrigger>
@@ -188,16 +188,16 @@ export default function Categories() {
             </TabsList>
 
             {/* Subtitle */}
-            <p className="text-center text-white/50 text-sm mb-6">{currentTab.subtitle}</p>
+            <p className="text-center text-ivory/70 text-sm mb-6">{currentTab.subtitle}</p>
 
             {/* Search */}
             <div className="relative max-w-md mx-auto mb-8">
-              <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-white/40" />
+              <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-gold/80" />
               <Input
                 placeholder="Search categories..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="pl-10 bg-white/5 border-white/10 text-white placeholder:text-white/40"
+                className="pl-10 bg-charcoal-light border-gold/20 text-ivory placeholder:text-ivory/50 focus:border-gold"
               />
             </div>
 
@@ -206,8 +206,8 @@ export default function Categories() {
               <TabsContent key={tab.key} value={tab.key}>
                 {filteredCategories.length === 0 ? (
                   <div className="py-16 text-center">
-                    <Award className="mx-auto mb-4 h-12 w-12 text-white/20" />
-                    <p className="text-white/50">No categories match your search.</p>
+                    <Award className="mx-auto mb-4 h-12 w-12 text-gold/30" />
+                    <p className="text-ivory/70">No categories match your search.</p>
                   </div>
                 ) : (
                   <div className={`grid gap-5 ${tab.key === "lifetime" ? "sm:grid-cols-1 lg:grid-cols-2 max-w-3xl mx-auto" : "sm:grid-cols-2 lg:grid-cols-3"}`}>
@@ -221,11 +221,11 @@ export default function Categories() {
           </Tabs>
 
           {/* CTA */}
-          <div className="mt-16 rounded-2xl bg-white/5 border border-white/10 p-8 text-center">
-            <h3 className="mb-2 font-display text-2xl font-bold text-white">
+          <div className="mt-16 rounded-2xl bg-charcoal-light/60 border border-gold/15 p-8 text-center">
+            <h3 className="mb-2 font-display text-2xl font-bold text-ivory">
               Ready to Nominate?
             </h3>
-            <p className="mb-6 text-white/60">
+            <p className="mb-6 text-ivory/70">
               Recognise excellence in African education by submitting a nomination today.
             </p>
             <div className="flex flex-col justify-center gap-4 sm:flex-row">
@@ -235,7 +235,7 @@ export default function Categories() {
                   Submit Nomination
                 </Link>
               </Button>
-              <Button size="lg" variant="outline" className="border-white/20 text-white hover:bg-white/10 rounded-full" asChild>
+              <Button size="lg" variant="outline" className="border-gold/30 text-gold hover:bg-gold/10 rounded-full" asChild>
                 <Link to="/nominees">View Nominees</Link>
               </Button>
             </div>

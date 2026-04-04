@@ -1,6 +1,6 @@
 ﻿
-import { useState, useMemo, useRef } from "react";
-import { Link } from "react-router-dom";
+import { useState, useMemo, useRef, useEffect } from "react";
+import { Link, useSearchParams } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -28,6 +28,7 @@ const PATHWAY_OPTIONS = [
 ];
 
 export default function Nominees() {
+  const [searchParams] = useSearchParams();
   const { data: nominees, isLoading } = useNominees();
   const [search, setSearch] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("all");
@@ -97,6 +98,13 @@ export default function Nominees() {
     filteredGrouped.forEach(noms => count += noms.length);
     return count;
   }, [filteredGrouped]);
+
+  useEffect(() => {
+    const categoryParam = searchParams.get("category");
+    if (categoryParam) {
+      setSelectedCategory(categoryParam);
+    }
+  }, [searchParams]);
 
   const handleViewAllCategory = (catSlug: string) => {
     setSelectedCategory(catSlug);

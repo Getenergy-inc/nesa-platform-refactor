@@ -21,7 +21,7 @@ export function RegionHubPage() {
 
   if (!hub) {
     return (
-      <div className="min-h-screen bg-charcoal">
+      <div className="min-h-screen bg-charcoal text-ivory">
         <NESAHeader />
         <div className="container py-32 text-center">
           <h1 className="text-3xl font-bold text-white mb-4">Region Not Found</h1>
@@ -56,33 +56,29 @@ export function RegionHubPage() {
 
           <div className="container relative z-10 pb-16 pt-32 max-w-5xl mx-auto px-4">
             <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7 }}>
-              <Link to="/#explore-regions" className="inline-flex items-center gap-2 text-white/50 hover:text-white text-sm mb-6 transition-colors">
-                <ArrowLeft className="w-4 h-4" /> All Regions
-              </Link>
-
-              <span className="inline-block px-4 py-1.5 rounded-full bg-primary/20 border border-primary/30 text-primary text-xs font-semibold mb-4 tracking-widest uppercase">
+              <span className="inline-block px-4 py-1.5 rounded-full bg-gold/20 border border-gold/30 text-gold text-xs font-semibold mb-4 tracking-widest uppercase">
                 {hub.shortName} Region
               </span>
 
-              <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 leading-tight">
+              <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold text-ivory mb-4 leading-tight">
                 {hub.name}
               </h1>
 
-              <p className="text-xl md:text-2xl text-primary font-medium mb-4">{hub.tagline}</p>
+              <p className="text-xl md:text-2xl text-gold font-medium mb-4">{hub.tagline}</p>
 
-              <p className="text-white/70 text-lg max-w-3xl leading-relaxed">{hub.description}</p>
+              <p className="text-ivory/80 text-lg max-w-3xl leading-relaxed">{hub.description}</p>
             </motion.div>
           </div>
         </section>
 
         {/* Countries Strip */}
-        <section className="py-10 border-y border-white/10">
+        <section className="py-10 border-y border-gold/10">
           <div className="container max-w-5xl mx-auto px-4">
-            <h2 className="text-sm font-semibold text-white/40 uppercase tracking-widest mb-4">Countries in this Region</h2>
+            <h2 className="text-sm font-semibold text-ivory/70 uppercase tracking-widest mb-4">Countries in this Region</h2>
             <div className="flex flex-wrap gap-2">
               {hub.countries.map(country => (
-                <span key={country} className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-white/5 border border-white/10 rounded-full text-white/80 text-sm">
-                  <MapPin className="w-3 h-3 text-primary" />
+                <span key={country} className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-charcoal-light/60 border border-gold/15 rounded-full text-ivory/80 text-sm">
+                  <MapPin className="w-3 h-3 text-gold" />
                   {country}
                 </span>
               ))}
@@ -95,8 +91,8 @@ export function RegionHubPage() {
           <div className="container max-w-5xl mx-auto px-4">
             <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
               <div className="flex items-center gap-3 mb-8">
-                <Compass className="w-6 h-6 text-primary" />
-                <h2 className="text-2xl md:text-3xl font-bold text-white">Cultural Highlights & Traditions</h2>
+                <Compass className="w-6 h-6 text-gold" />
+                <h2 className="text-2xl md:text-3xl font-bold text-ivory">Cultural Highlights & Traditions</h2>
               </div>
               <div className="grid sm:grid-cols-2 gap-4">
                 {hub.culturalHighlights.map((highlight, i) => (
@@ -106,9 +102,9 @@ export function RegionHubPage() {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ delay: i * 0.1 }}
-                    className="bg-white/5 border border-white/10 rounded-xl p-5 hover:bg-primary/5 hover:border-primary/20 transition-all"
+                    className="bg-charcoal-light/60 border border-gold/10 rounded-xl p-5 hover:bg-gold/5 hover:border-gold/30 transition-all"
                   >
-                    <p className="text-white font-medium">{highlight}</p>
+                    <p className="text-ivory font-medium">{highlight}</p>
                   </motion.div>
                 ))}
               </div>
@@ -117,12 +113,12 @@ export function RegionHubPage() {
         </section>
 
         {/* Edu-Tourism Facts */}
-        <section className="py-16 md:py-24 bg-white/[0.02]">
+        <section className="py-16 md:py-24 bg-charcoal-light/30">
           <div className="container max-w-5xl mx-auto px-4">
             <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
               <div className="flex items-center gap-3 mb-8">
-                <GraduationCap className="w-6 h-6 text-primary" />
-                <h2 className="text-2xl md:text-3xl font-bold text-white">Edu-Tourism Facts</h2>
+                <GraduationCap className="w-6 h-6 text-gold" />
+                <h2 className="text-2xl md:text-3xl font-bold text-ivory">Edu-Tourism Facts</h2>
               </div>
               <div className="space-y-4">
                 {hub.eduTourismFacts.map((fact, i) => (
@@ -132,10 +128,10 @@ export function RegionHubPage() {
                     whileInView={{ opacity: 1, x: 0 }}
                     viewport={{ once: true }}
                     transition={{ delay: i * 0.15 }}
-                    className="flex gap-4 bg-white/5 border border-white/10 rounded-xl p-5"
+                    className="flex gap-4 bg-charcoal-light/60 border border-gold/10 rounded-xl p-5"
                   >
-                    <BookOpen className="w-5 h-5 text-primary shrink-0 mt-0.5" />
-                    <p className="text-white/80">{fact}</p>
+                    <BookOpen className="w-5 h-5 text-gold shrink-0 mt-0.5" />
+                    <p className="text-ivory/80">{fact}</p>
                   </motion.div>
                 ))}
               </div>
@@ -147,20 +143,20 @@ export function RegionHubPage() {
         <section className="py-16 md:py-24">
           <div className="container max-w-3xl mx-auto px-4 text-center">
             <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
-              <Users className="w-10 h-10 text-primary mx-auto mb-4" />
-              <h2 className="text-2xl md:text-3xl font-bold text-white mb-4">
+              <Users className="w-10 h-10 text-gold mx-auto mb-4" />
+              <h2 className="text-2xl md:text-3xl font-bold text-ivory mb-4">
                 Know an Education Champion in {hub.shortName === "Friends" ? "Friends of Africa" : hub.name}?
               </h2>
-              <p className="text-white/60 mb-8 max-w-xl mx-auto">
+              <p className="text-ivory/70 mb-8 max-w-xl mx-auto">
                 Nominate exceptional educators, institutions, and innovators from this region for the NESA-Africa awards.
               </p>
               <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-                <Button asChild className="rounded-full gap-2 bg-primary hover:bg-primary/90 text-secondary px-8 py-3 font-semibold">
+                <Button asChild className="rounded-full gap-2 bg-gold hover:bg-gold-dark text-charcoal px-8 py-3 font-semibold">
                   <Link to="/nominate">
                     Nominate Now <ArrowRight className="w-4 h-4" />
                   </Link>
                 </Button>
-                <Button asChild variant="outline" className="rounded-full gap-2 border-white/20 text-white hover:bg-white/10 px-8 py-3">
+                <Button asChild variant="outline" className="rounded-full gap-2 border-gold/30 text-gold hover:bg-gold/10 px-8 py-3">
                   <Link to="/nominees">
                     Browse Nominees <ArrowRight className="w-4 h-4" />
                   </Link>
@@ -171,17 +167,17 @@ export function RegionHubPage() {
         </section>
 
         {/* Other Regions */}
-        <section className="py-16 border-t border-white/10">
+        <section className="py-16 border-t border-gold/10">
           <div className="container max-w-5xl mx-auto px-4">
-            <h2 className="text-lg font-semibold text-white/40 uppercase tracking-widest mb-6 text-center">Explore Other Regions</h2>
+            <h2 className="text-lg font-semibold text-ivory/70 uppercase tracking-widest mb-6 text-center">Explore Other Regions</h2>
             <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3">
               {REGION_HUBS.filter(r => r.slug !== hub.slug).map(region => (
                 <Link
                   key={region.slug}
                   to={`/region/${region.slug}`}
-                  className="group bg-white/5 border border-white/10 rounded-lg p-3 text-center hover:bg-primary/10 hover:border-primary/30 transition-all"
+                  className="group bg-charcoal-light/60 border border-gold/10 rounded-lg p-3 text-center hover:bg-gold/10 hover:border-gold/30 transition-all"
                 >
-                  <p className="text-white/70 group-hover:text-white text-sm font-medium transition-colors">{region.shortName}</p>
+                  <p className="text-ivory/80 group-hover:text-ivory text-sm font-medium transition-colors">{region.shortName}</p>
                 </Link>
               ))}
             </div>
