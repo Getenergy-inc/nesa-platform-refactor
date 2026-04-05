@@ -6,7 +6,8 @@
 import { Link, useNavigate } from "react-router-dom";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { MapPin, Building2 } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { MapPin, Building2, RotateCcw } from "lucide-react";
 import type { EnrichedDatabaseNominee } from "@/hooks/useNominees";
 
 interface LandingNomineeCardProps {
@@ -77,13 +78,29 @@ export function LandingNomineeCard({ nominee, isBlueGarnet = false }: LandingNom
               </h3>
             </Link>
 
-            <Badge variant="outline" className="w-fit border-gold/20 text-ivory/70 text-[10px] px-1.5 py-0">
+            <Badge
+              variant="outline"
+              className="w-fit border-gold/30 text-ivory/80 text-[11px] px-2.5 py-0.5 rounded-full bg-charcoal/40"
+            >
               {nominee.categoryName}
             </Badge>
 
             <p className="text-ivory/70 text-xs leading-relaxed line-clamp-3 flex-1">
               {nominee.achievement || "Contributing to the advancement of education across Africa."}
             </p>
+
+            <div className="pt-3 mt-auto border-t border-gold/10">
+              <Button
+                asChild
+                size="sm"
+                className="w-full bg-white hover:bg-white/95 text-gold border border-gold/50 font-semibold"
+              >
+                <Link to={`/nominees/${encodeURIComponent(nominee.slug)}`}>
+                  <RotateCcw className="w-4 h-4 mr-2" />
+                  Re-nominate
+                </Link>
+              </Button>
+            </div>
           </div>
         </CardContent>
       </Card>
