@@ -5,14 +5,15 @@ import { AwardTVShowSection } from "@/components/awards/AwardTVShowSection";
 import { AwardHeroSection } from "@/components/awards/AwardHeroSection";
 import { AwardCategoriesGrid } from "@/components/awards/AwardCategoriesGrid";
 import { getTVShowByAward } from "@/config/awardTVShows";
+import { getCategoriesByTier } from "@/config/nesaCategories";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Breadcrumbs } from "@/components/ui/breadcrumbs";
 import { Award, Globe, Trophy, Users, Vote, Coins, ArrowRight, Check, Sparkles } from "lucide-react";
 import { motion } from "framer-motion";
 import goldCertificateImage from "@/assets/certificates/gold-certificate-showcase.jpg";
 
 const goldTVShow = getTVShowByAward("gold");
+const goldCertificateCategories = getCategoriesByTier("gold-special");
 
 const features = [
   { icon: Vote, title: "100% Public Voting", description: "Winners determined entirely by public votes — no jury influence." },
@@ -41,17 +42,6 @@ export default function GoldAward() {
       </Helmet>
 
       <div className="min-h-screen bg-charcoal">
-        {/* Breadcrumbs */}
-        <div className="container mx-auto px-4 pt-20">
-          <Breadcrumbs 
-            items={[
-              { label: "Awards", href: "/categories" },
-              { label: "Gold Certificate" },
-            ]}
-            className="text-ivory/60"
-          />
-        </div>
-
         {/* Hero */}
         <AwardHeroSection
           variant="gold"
@@ -245,12 +235,13 @@ export default function GoldAward() {
         {/* TV Show Section */}
         {goldTVShow && <AwardTVShowSection show={goldTVShow} accentColor="gold" />}
 
-        {/* Award Categories - 9 Gold categories with 135 subcategories, Top 3 winners each = 405 */}
-        <AwardCategoriesGrid 
-          tier="gold"
+        {/* Award Categories - Gold Special Recognition (3 categories) */}
+        <AwardCategoriesGrid
+          categories={goldCertificateCategories}
+          tier="gold-special"
           accentColor="amber"
-          title="Gold Certificate Categories"
-          description="9 major categories with 135 subcategories — Top 3 highest-voted nominees per subcategory win Gold Certificates (405 total winners), all competing for the 9 Blue Garnet Awards."
+          title="Gold Special Recognition Categories"
+          description="3 categories honoring Africa\x27s education impact through Sports, Music, and Social Media."
         />
 
         {/* Certificate Gallery */}

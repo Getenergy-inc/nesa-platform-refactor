@@ -20,6 +20,8 @@ interface AwardCategoriesGridProps {
   title?: string;
   /** Description override */
   description?: string;
+  /** Optional override list of categories to render */
+  categories?: CategoryDefinition[];
 }
 
 const accentStyles: Record<string, {
@@ -60,12 +62,13 @@ export function AwardCategoriesGrid({
   accentColor = "amber",
   title,
   description,
+  categories,
 }: AwardCategoriesGridProps & { tier: AwardTier }) {
   const styles = accentStyles[accentColor];
   const tierInfo = TIER_INFO[tier];
   
   // Get categories for this tier using the authoritative config
-  const filteredCategories = getCategoriesByTier(tier);
+  const filteredCategories = categories ?? getCategoriesByTier(tier);
 
   // Generate dynamic title and description if not provided
   const displayTitle = title || `${tierInfo.shortName} Award Categories`;

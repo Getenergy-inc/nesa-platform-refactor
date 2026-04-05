@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { ArrowLeft, Award, Calendar, Search, Trophy, Users } from "lucide-react";
+import { Award, Calendar, Search, Trophy, Users } from "lucide-react";
 import { Input } from "@/components/ui/input";
 
 // Placeholder data - will be replaced with CMS/DB data
@@ -27,13 +27,6 @@ export default function Winners() {
         {/* Hero */}
         <section className="relative bg-gradient-to-b from-charcoal to-charcoal/95 py-20 lg:py-28">
           <div className="container mx-auto px-4">
-            <Link
-              to="/categories"
-              className="mb-6 inline-flex items-center gap-2 text-sm text-white/60 hover:text-primary"
-            >
-              <ArrowLeft className="h-4 w-4" />
-              Back to Categories
-            </Link>
             <div className="max-w-3xl">
               <div className="mb-4 flex items-center gap-2">
                 <Trophy className="h-6 w-6 text-primary" />

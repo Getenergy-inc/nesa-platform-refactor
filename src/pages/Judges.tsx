@@ -68,10 +68,10 @@ export default function Judges() {
                   Join the Jury
                 </span>
               </div>
-              <h1 className="mb-6 font-display text-4xl font-bold text-white md:text-5xl">
+              <h1 className="mb-6 font-display text-4xl font-bold text-ivory md:text-5xl">
                 Become a <span className="text-primary">Judge</span>
               </h1>
-              <p className="mb-8 text-lg text-white/70">
+              <p className="mb-8 text-lg text-ivory/80">
                 Shape the future of African education recognition. Join our distinguished
                 panel of experts who evaluate and select Blue Garnet Award winners.
               </p>
@@ -82,7 +82,7 @@ export default function Judges() {
                     Apply Now
                   </Link>
                 </Button>
-                <Button asChild size="lg" variant="outline" className="border-white/20 text-white hover:bg-white/10">
+                <Button asChild size="lg" variant="outline" className="border-gold/30 text-gold hover:bg-gold/10">
                   <Link to="/judge-status">
                     Check Application Status
                   </Link>
@@ -93,18 +93,18 @@ export default function Judges() {
         </section>
 
         {/* Quick Links Bar */}
-        <section className="bg-charcoal border-b border-white/10">
+        <section className="bg-charcoal border-b border-gold/10">
           <div className="container mx-auto px-4 py-4">
             <div className="flex flex-wrap justify-center gap-4 text-sm">
               <Link to="/judgeapply" className="text-gold hover:underline flex items-center gap-1">
                 <FileText className="h-4 w-4" /> Apply to be a Judge
               </Link>
-              <span className="text-white/30">|</span>
-              <Link to="/judge-status" className="text-white/70 hover:text-gold flex items-center gap-1">
+              <span className="text-ivory/30">|</span>
+              <Link to="/judge-status" className="text-ivory/70 hover:text-gold flex items-center gap-1">
                 <Clock className="h-4 w-4" /> Check Status
               </Link>
-              <span className="text-white/30">|</span>
-              <Link to="/login?next=/judge/dashboard" className="text-white/70 hover:text-gold flex items-center gap-1">
+              <span className="text-ivory/30">|</span>
+              <Link to="/login?next=/judge/dashboard" className="text-ivory/70 hover:text-gold flex items-center gap-1">
                 <Gavel className="h-4 w-4" /> Judge Login
               </Link>
             </div>
@@ -117,19 +117,19 @@ export default function Judges() {
             <div className="mx-auto grid max-w-3xl gap-8 text-center md:grid-cols-4">
               <div>
                 <div className="mb-2 text-3xl font-bold text-primary">27</div>
-                <div className="text-sm text-white/60">Jury Members</div>
+                <div className="text-sm text-ivory/70">Jury Members</div>
               </div>
               <div>
                 <div className="mb-2 text-3xl font-bold text-primary">9</div>
-                <div className="text-sm text-white/60">Categories Scored</div>
+                <div className="text-sm text-ivory/70">Categories Scored</div>
               </div>
               <div>
                 <div className="mb-2 text-3xl font-bold text-primary">60%</div>
-                <div className="text-sm text-white/60">Weight in Final Score</div>
+                <div className="text-sm text-ivory/70">Weight in Final Score</div>
               </div>
               <div>
                 <div className="mb-2 text-3xl font-bold text-primary">7</div>
-                <div className="text-sm text-white/60">Regional Groups</div>
+                <div className="text-sm text-ivory/70">Regional Groups</div>
               </div>
             </div>
           </div>
@@ -141,22 +141,22 @@ export default function Judges() {
         {/* Requirements */}
         <section className="bg-charcoal/95 py-16 lg:py-24">
           <div className="container mx-auto px-4">
-            <h2 className="mb-12 text-center font-display text-3xl font-bold text-white">
-              Eligibility Requirements
-            </h2>
-            <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
-              {requirements.map((req) => (
-                <Card key={req.title} className="border-white/10 bg-white/5 text-center">
+              <h2 className="mb-12 text-center font-display text-3xl font-bold text-ivory">
+                Eligibility Requirements
+              </h2>
+              <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+                {requirements.map((req) => (
+                <Card key={req.title} className="border-gold/10 bg-charcoal-light/60 text-center">
                   <CardHeader>
                     <req.icon className="mx-auto mb-2 h-10 w-10 text-primary" />
-                    <CardTitle className="text-lg text-white">{req.title}</CardTitle>
+                    <CardTitle className="text-lg text-ivory">{req.title}</CardTitle>
                   </CardHeader>
                   <CardContent>
-                    <p className="text-sm text-white/60">{req.description}</p>
+                    <p className="text-sm text-ivory/70">{req.description}</p>
                   </CardContent>
                 </Card>
-              ))}
-            </div>
+                ))}
+              </div>
           </div>
         </section>
 
@@ -164,17 +164,17 @@ export default function Judges() {
         <section className="bg-charcoal/95 py-16 lg:py-24">
           <div className="container mx-auto px-4">
             <div className="mx-auto max-w-3xl">
-              <h2 className="mb-8 text-center font-display text-3xl font-bold text-white">
+              <h2 className="mb-8 text-center font-display text-3xl font-bold text-ivory">
                 Jury Responsibilities
               </h2>
               <div className="grid gap-3 md:grid-cols-2">
                 {responsibilities.map((resp, i) => (
                   <div
                     key={i}
-                    className="flex items-start gap-3 rounded-lg border border-white/10 bg-white/5 p-4"
+                    className="flex items-start gap-3 rounded-lg border border-gold/10 bg-charcoal-light/60 p-4"
                   >
                     <CheckCircle className="mt-0.5 h-5 w-5 flex-shrink-0 text-primary" />
-                    <span className="text-white/80">{resp}</span>
+                    <span className="text-ivory/80">{resp}</span>
                   </div>
                 ))}
               </div>
@@ -185,7 +185,7 @@ export default function Judges() {
         {/* Timeline */}
         <section className="bg-charcoal py-16 lg:py-24">
           <div className="container mx-auto px-4">
-            <h2 className="mb-12 text-center font-display text-2xl font-bold text-white">
+            <h2 className="mb-12 text-center font-display text-2xl font-bold text-ivory">
               Jury Selection Timeline
             </h2>
             <div className="mx-auto flex max-w-3xl flex-wrap justify-center gap-4">
@@ -195,13 +195,13 @@ export default function Judges() {
                   className={`rounded-lg border p-4 text-center ${
                     item.status === "open"
                       ? "border-primary bg-primary/10"
-                      : "border-white/10 bg-white/5"
+                      : "border-gold/10 bg-charcoal-light/60"
                   }`}
                 >
-                  <div className={`text-lg font-semibold ${item.status === "open" ? "text-primary" : "text-white"}`}>
+                  <div className={`text-lg font-semibold ${item.status === "open" ? "text-primary" : "text-ivory"}`}>
                     {item.phase}
                   </div>
-                  <div className="text-sm text-white/60">{item.date}</div>
+                  <div className="text-sm text-ivory/70">{item.date}</div>
                   {item.status === "open" && (
                     <Badge className="mt-2 bg-primary/20 text-primary">Now Open</Badge>
                   )}
@@ -214,16 +214,16 @@ export default function Judges() {
         {/* Governance */}
         <section className="bg-charcoal/95 py-16 lg:py-24">
           <div className="container mx-auto px-4">
-            <Card className="mx-auto max-w-3xl border-white/10 bg-white/5">
+            <Card className="mx-auto max-w-3xl border-gold/10 bg-charcoal-light/60">
               <CardHeader className="text-center">
                 <Scale className="mx-auto mb-4 h-12 w-12 text-primary" />
-                <CardTitle className="text-2xl text-white">Governance & Integrity</CardTitle>
-                <CardDescription className="text-white/60">
+                <CardTitle className="text-2xl text-ivory">Governance & Integrity</CardTitle>
+                <CardDescription className="text-ivory/70">
                   Our jury process is protected by multiple governance firewalls
                 </CardDescription>
               </CardHeader>
               <CardContent className="space-y-4">
-                <p className="text-white/70">
+                <p className="text-ivory/80">
                   NESA-Africa maintains the highest standards of integrity in our jury selection
                   and scoring processes. All jury members must:
                 </p>
@@ -234,14 +234,14 @@ export default function Judges() {
                     "Participate in standardized scoring calibration",
                     "Submit to audit review of all scoring decisions",
                   ].map((item, i) => (
-                    <li key={i} className="flex items-center gap-2 text-white/70">
+                    <li key={i} className="flex items-center gap-2 text-ivory/80">
                       <Shield className="h-4 w-4 text-primary" />
                       {item}
                     </li>
                   ))}
                 </ul>
                 <div className="pt-4 text-center">
-                  <Button asChild variant="outline" className="border-white/20 text-white hover:bg-white/10">
+                  <Button asChild variant="outline" className="border-gold/30 text-gold hover:bg-gold/10">
                     <Link to="/about/governance">View Governance Framework</Link>
                   </Button>
                 </div>
@@ -253,10 +253,10 @@ export default function Judges() {
         {/* CTA */}
         <section className="bg-charcoal py-16 lg:py-24">
           <div className="container mx-auto px-4 text-center">
-            <h2 className="mb-4 font-display text-2xl font-bold text-white">
+            <h2 className="mb-4 font-display text-2xl font-bold text-ivory">
               Ready to Shape African Education Recognition?
             </h2>
-            <p className="mx-auto mb-8 max-w-xl text-white/60">
+            <p className="mx-auto mb-8 max-w-xl text-ivory/70">
               Join our distinguished panel of education experts and help identify
               Africa's most impactful education champions.
             </p>
@@ -267,7 +267,7 @@ export default function Judges() {
                   Submit Application
                 </Link>
               </Button>
-              <Button asChild size="lg" variant="outline" className="border-white/20 text-white hover:bg-white/10">
+              <Button asChild size="lg" variant="outline" className="border-gold/30 text-gold hover:bg-gold/10">
                 <Link to="/contact">Contact Us</Link>
               </Button>
             </div>
