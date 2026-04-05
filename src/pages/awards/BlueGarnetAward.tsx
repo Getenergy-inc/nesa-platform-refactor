@@ -7,7 +7,6 @@ import { AwardCategoriesGrid } from "@/components/awards/AwardCategoriesGrid";
 import { getTVShowByAward } from "@/config/awardTVShows";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Breadcrumbs } from "@/components/ui/breadcrumbs";
 import { Award, Calendar, Scale, Ticket, Trophy, Tv, Users, Vote } from "lucide-react";
 
 const blueGarnetTVShow = getTVShowByAward("blue-garnet");
@@ -29,17 +28,6 @@ export default function BlueGarnetAward() {
       </Helmet>
 
       <div className="min-h-screen bg-charcoal">
-        {/* Breadcrumbs */}
-        <div className="container mx-auto px-4 pt-20">
-          <Breadcrumbs 
-            items={[
-              { label: "Awards", href: "/categories" },
-              { label: "Blue Garnet Award" },
-            ]}
-            className="text-ivory/60"
-          />
-        </div>
-
         {/* Hero */}
         <AwardHeroSection
           variant="blue-garnet"

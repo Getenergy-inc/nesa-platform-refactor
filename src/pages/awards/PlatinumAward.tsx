@@ -5,9 +5,9 @@ import { AwardTVShowSection } from "@/components/awards/AwardTVShowSection";
 import { AwardHeroSection } from "@/components/awards/AwardHeroSection";
 import { AwardCategoriesGrid } from "@/components/awards/AwardCategoriesGrid";
 import { getTVShowByAward } from "@/config/awardTVShows";
+import { getCategoriesByTier, getCategoriesGrouped } from "@/config/nesaCategories";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Breadcrumbs } from "@/components/ui/breadcrumbs";
 import { Award, FileCheck, Medal, RefreshCw, Shield } from "lucide-react";
 
 const benefits = [
@@ -38,17 +38,6 @@ export default function PlatinumAward() {
       </Helmet>
 
       <div className="min-h-screen bg-charcoal">
-        {/* Breadcrumbs */}
-        <div className="container mx-auto px-4 pt-20">
-          <Breadcrumbs 
-            items={[
-              { label: "Awards", href: "/categories" },
-              { label: "Platinum Certificate" },
-            ]}
-            className="text-ivory/60"
-          />
-        </div>
-
         {/* Hero */}
         <AwardHeroSection
           variant="platinum"
@@ -110,12 +99,13 @@ export default function PlatinumAward() {
         {/* TV Show Section */}
         {platinumTVShow && <AwardTVShowSection show={platinumTVShow} accentColor="amber" />}
 
-        {/* Award Categories - All 17 Platinum categories */}
-        <AwardCategoriesGrid 
+        {/* Award Categories - Platinum Certificate (Institutional) */}
+        <AwardCategoriesGrid
+          categories={getCategoriesGrouped().platinum}
           tier="platinum"
           accentColor="slate"
           title="Platinum Certificate Categories"
-          description="All 17 categories are eligible for Platinum: 7 core categories (100 renominations) and 10 standard categories (200 renominations)."
+          description="Institutional recognition categories under Platinum certification."
         />
 
         {/* Certificate Gallery */}

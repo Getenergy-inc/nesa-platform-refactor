@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import {
-  ArrowLeft,
   Award,
   BookOpen,
   Building,
@@ -57,13 +56,6 @@ export default function SCEF() {
         {/* Hero */}
         <section className="relative bg-gradient-to-b from-charcoal to-charcoal/95 py-20 lg:py-28">
           <div className="container mx-auto px-4">
-            <Link
-              to="/about"
-              className="mb-6 inline-flex items-center gap-2 text-sm text-white/60 hover:text-primary"
-            >
-              <ArrowLeft className="h-4 w-4" />
-              Back to About
-            </Link>
             <div className="max-w-3xl">
               <div className="mb-4 flex items-center gap-2">
                 <Building className="h-6 w-6 text-primary" />

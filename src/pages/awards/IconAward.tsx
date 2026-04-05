@@ -6,9 +6,9 @@ import { AwardHeroSection } from "@/components/awards/AwardHeroSection";
 import { AwardCategoriesGrid } from "@/components/awards/AwardCategoriesGrid";
 
 import { getTVShowByAward } from "@/config/awardTVShows";
+import { getCategoriesGrouped } from "@/config/nesaCategories";
 import { Button } from "@/components/ui/button";
 
-import { Breadcrumbs } from "@/components/ui/breadcrumbs";
 import { Badge } from "@/components/ui/badge";
 import { Award, Globe, Heart, Star, Trophy, Users, Shield, Clock, BookOpen } from "lucide-react";
 
@@ -50,17 +50,6 @@ export default function IconAward() {
       </Helmet>
 
       <div className="min-h-screen bg-charcoal">
-        {/* Breadcrumbs */}
-        <div className="container mx-auto px-4 pt-20">
-          <Breadcrumbs 
-            items={[
-              { label: "Awards", href: "/categories" },
-              { label: "Icon Award" },
-            ]}
-            className="text-ivory/60"
-          />
-        </div>
-
         {/* Hero */}
         <AwardHeroSection
           variant="icon"
@@ -202,7 +191,8 @@ export default function IconAward() {
         {iconTVShow && <AwardTVShowSection show={iconTVShow} accentColor="gold" />}
 
         {/* Award Subcategories */}
-        <AwardCategoriesGrid 
+        <AwardCategoriesGrid
+          categories={getCategoriesGrouped().lifetime}
           tier="icon"
           accentColor="purple"
           title="Icon Award Subcategories"

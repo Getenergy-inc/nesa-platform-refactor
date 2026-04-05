@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import {
-  ArrowLeft,
   Calendar,
   Download,
   Globe,
@@ -43,13 +42,6 @@ export default function Vision2035() {
         {/* Hero */}
         <section className="relative bg-gradient-to-b from-charcoal to-charcoal/95 py-20 lg:py-28">
           <div className="container mx-auto px-4">
-            <Link
-              to="/about"
-              className="mb-6 inline-flex items-center gap-2 text-sm text-white/60 hover:text-primary"
-            >
-              <ArrowLeft className="h-4 w-4" />
-              Back to About
-            </Link>
             <div className="max-w-3xl">
               <div className="mb-4 flex items-center gap-2">
                 <Target className="h-6 w-6 text-primary" />
@@ -144,7 +136,7 @@ export default function Vision2035() {
               <Button asChild className="bg-primary text-primary-foreground">
                 <Link to="/nominate">Nominate a Champion</Link>
               </Button>
-              <Button asChild variant="outline" className="border-white/20 text-white hover:bg-white/10">
+              <Button asChild variant="outline" className="border-gold/30 text-gold hover:bg-gold/10">
                 <Link to="/partners">Become a Partner</Link>
               </Button>
             </div>

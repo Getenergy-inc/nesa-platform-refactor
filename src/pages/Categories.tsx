@@ -8,9 +8,10 @@ import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import {
-  Award, Search, ChevronRight, GraduationCap, Trophy, Crown, Star, Shield,
+  Award, Search, ChevronRight, GraduationCap, Trophy, Crown, Star, Shield, Globe,
 } from "lucide-react";
 import {
+  NESA_CATEGORIES,
   getCategoriesGrouped,
   TIER_INFO,
   type CategoryDefinition,
@@ -114,6 +115,14 @@ export default function Categories() {
   const [activeTab, setActiveTab] = useState(defaultTab);
 
   const groups = useMemo(() => getCategoriesGrouped(), []);
+  const nigeriaCategories = useMemo(
+    () => NESA_CATEGORIES.filter((cat) => cat.scope === "NIGERIA"),
+    []
+  );
+  const africaRegionalCategories = useMemo(
+    () => NESA_CATEGORIES.filter((cat) => cat.scope === "AFRICA_REGIONAL"),
+    []
+  );
 
   const tabData: { key: string; label: string; icon: React.ReactNode; categories: CategoryDefinition[]; subtitle: string }[] = [
     {
@@ -144,6 +153,20 @@ export default function Categories() {
       categories: groups.lifetime,
       subtitle: "Africa Education Icon — Continental honour (2005–2025)",
     },
+    {
+      key: "nigeria",
+      label: "Nigeria",
+      icon: <Award className="h-4 w-4" />,
+      categories: nigeriaCategories,
+      subtitle: "Nigeria-focused award categories",
+    },
+    {
+      key: "africa",
+      label: "Africa Regional",
+      icon: <Globe className="h-4 w-4" />,
+      categories: africaRegionalCategories,
+      subtitle: "Africa regional award categories",
+    },
   ];
 
   const currentTab = tabData.find((t) => t.key === activeTab) || tabData[0];
@@ -160,7 +183,7 @@ export default function Categories() {
     <>
       <Helmet>
         <title>{`Award Categories | ${currentEdition?.name || 'NESA-Africa 2025'}`}</title>
-        <meta name="description" content="Explore all NESA-Africa award categories across 4 tiers: Blue Garnet, Platinum, Gold Special Recognition, and Lifetime Achievement." />
+        <meta name="description" content="Explore all NESA-Africa award categories across Blue Garnet, Platinum, Gold Special Recognition, Lifetime Achievement, and Nigeria-focused categories." />
       </Helmet>
 
       <div className="min-h-screen bg-charcoal">
@@ -178,7 +201,7 @@ export default function Categories() {
 
           {/* Tabs */}
           <Tabs value={activeTab} onValueChange={(v) => { setActiveTab(v); setSearchQuery(""); }}>
-            <TabsList className="grid w-full max-w-2xl mx-auto grid-cols-4 mb-2 bg-charcoal-light/60 border border-gold/10">
+            <TabsList className="grid w-full max-w-2xl mx-auto grid-cols-6 mb-2 bg-charcoal-light/60 border border-gold/10">
               {tabData.map((tab) => (
                 <TabsTrigger key={tab.key} value={tab.key} className="flex items-center gap-1.5 text-xs sm:text-sm text-ivory/70 data-[state=active]:bg-gold data-[state=active]:text-charcoal">
                   {tab.icon}
