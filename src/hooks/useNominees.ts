@@ -122,7 +122,11 @@ const PLACEHOLDER_IMAGE = "/images/placeholder.svg";
 
 function enrichNominee(nominee: DatabaseNominee): EnrichedDatabaseNominee {
   const imageType = getImageType(nominee.name);
-  const photoUrl = (imageType === "logo" ? nominee.logo_url : nominee.photo_url) || PLACEHOLDER_IMAGE;
+  const rawImage =
+    imageType === "logo"
+      ? (nominee.logo_url || nominee.photo_url)
+      : (nominee.photo_url || nominee.logo_url);
+  const photoUrl = rawImage || PLACEHOLDER_IMAGE;
   
   return {
     id: nominee.id,
