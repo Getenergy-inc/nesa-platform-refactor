@@ -45,7 +45,7 @@ export function InstitutionalDashboardLayout({ children, title, breadcrumbs }: P
       {/* ── Sidebar ─────────────────────────────────────── */}
       <aside
         className={cn(
-          "fixed lg:sticky top-0 left-0 z-50 h-screen flex flex-col transition-all duration-300",
+          "fixed top-0 left-0 z-50 h-screen flex flex-col transition-all duration-300",
           "bg-[hsl(30_8%_4%)] border-r border-gold/10",
           collapsed ? "w-[68px]" : "w-64",
           mobileOpen ? "translate-x-0" : "-translate-x-full lg:translate-x-0"
@@ -109,10 +109,10 @@ export function InstitutionalDashboardLayout({ children, title, breadcrumbs }: P
                         collapsed && "justify-center px-2",
                         isActive
                           ? "bg-gold/10 text-gold border-l-2 border-gold"
-                          : "text-white/60 border-l-2 border-transparent"
+                          : "text-white/80 border-l-2 border-transparent"
                       )}
                     >
-                      <Icon className={cn("h-4 w-4 shrink-0", isActive ? "text-gold" : "text-white/40")} />
+                      <Icon className={cn("h-4 w-4 shrink-0", isActive ? "text-gold" : "text-white/60")} />
                       {!collapsed && (
                         <span className="flex-1">{item.label}</span>
                       )}
@@ -146,7 +146,12 @@ export function InstitutionalDashboardLayout({ children, title, breadcrumbs }: P
       </aside>
 
       {/* ── Main Content Area ───────────────────────────── */}
-      <div className="flex-1 flex flex-col min-h-screen">
+      <div
+        className={cn(
+          "flex-1 flex flex-col min-h-screen text-ivory",
+          collapsed ? "lg:pl-[68px]" : "lg:pl-64"
+        )}
+      >
         {/* Top Navigation Bar */}
         <header className="sticky top-0 z-30 h-16 bg-[hsl(30_8%_6%)]/95 backdrop-blur-md border-b border-gold/10 flex items-center px-4 md:px-6 gap-4">
           {/* Mobile hamburger */}
@@ -162,18 +167,18 @@ export function InstitutionalDashboardLayout({ children, title, breadcrumbs }: P
           {/* Breadcrumbs */}
           {breadcrumbs && breadcrumbs.length > 0 && (
             <nav className="hidden sm:flex items-center gap-2 text-sm">
-              <Link to="/dashboard" className="text-white/40 hover:text-gold transition-colors">
+              <Link to="/dashboard" className="text-white/60 hover:text-gold transition-colors">
                 Dashboard
               </Link>
               {breadcrumbs.map((crumb, idx) => (
                 <span key={idx} className="flex items-center gap-2">
                   <span className="text-white/20">/</span>
                   {crumb.href ? (
-                    <Link to={crumb.href} className="text-white/40 hover:text-gold transition-colors">
+                    <Link to={crumb.href} className="text-white/60 hover:text-gold transition-colors">
                       {crumb.label}
                     </Link>
                   ) : (
-                    <span className="text-white/80">{crumb.label}</span>
+                    <span className="text-white/90">{crumb.label}</span>
                   )}
                 </span>
               ))}
@@ -181,7 +186,7 @@ export function InstitutionalDashboardLayout({ children, title, breadcrumbs }: P
           )}
 
           {title && !breadcrumbs && (
-            <h1 className="text-white/80 font-medium hidden sm:block">{title}</h1>
+            <h1 className="text-white/90 font-medium hidden sm:block">{title}</h1>
           )}
 
           {/* Center nav links (desktop) */}
@@ -207,7 +212,7 @@ export function InstitutionalDashboardLayout({ children, title, breadcrumbs }: P
 
           {/* Right side utilities */}
           <div className="ml-auto flex items-center gap-2">
-            <Button variant="ghost" size="icon" className="text-white/40 hover:text-gold hover:bg-gold/5" asChild>
+            <Button variant="ghost" size="icon" className="text-white/60 hover:text-gold hover:bg-gold/5" asChild>
               <Link to="/dashboard/notifications">
                 <Bell className="h-4 w-4" />
               </Link>
@@ -215,7 +220,7 @@ export function InstitutionalDashboardLayout({ children, title, breadcrumbs }: P
 
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
-                <Button variant="ghost" size="sm" className="gap-2 text-white/60 hover:text-gold hover:bg-gold/5">
+                <Button variant="ghost" size="sm" className="gap-2 text-white/80 hover:text-gold hover:bg-gold/5">
                   <div className="h-7 w-7 rounded-full bg-gold/20 flex items-center justify-center">
                     <User className="h-3.5 w-3.5 text-gold" />
                   </div>
