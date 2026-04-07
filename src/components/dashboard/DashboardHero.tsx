@@ -39,13 +39,13 @@ export function DashboardHero() {
               Submit Nomination
             </Link>
           </Button>
-          <Button asChild variant="outline" className="border-white/10 text-white/70 hover:bg-white/5 hover:text-white h-11 px-6 text-sm">
+          <Button asChild variant="outline" className="border-gold/30 text-gold hover:bg-gold/10 hover:text-gold h-11 px-6 text-sm">
             <Link to="/guidelines/edi-matrix">
               <Shield className="h-4 w-4 mr-2" />
               View Standards
             </Link>
           </Button>
-          <Button asChild variant="outline" className="border-white/10 text-white/70 hover:bg-white/5 hover:text-white h-11 px-6 text-sm">
+          <Button asChild variant="outline" className="border-gold/30 text-gold hover:bg-gold/10 hover:text-gold h-11 px-6 text-sm">
             <Link to="/chapters">
               <Map className="h-4 w-4 mr-2" />
               Join Local Chapter

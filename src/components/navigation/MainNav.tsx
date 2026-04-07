@@ -123,8 +123,9 @@ function DesktopNav({ onOpenCVOMessage }: { onOpenCVOMessage: () => void }) {
                 </NavigationMenuContent>
               </>
             ) : (
-              <Link to={item.href}>
-                <NavigationMenuLink
+              <NavigationMenuLink asChild>
+                <Link
+                  to={item.href}
                   className={cn(
                     navigationMenuTriggerStyle(),
                     "bg-transparent text-white/90 hover:text-gold hover:bg-gold/10 h-8 xl:h-9 px-2 xl:px-3 text-[11px] xl:text-sm leading-none",
@@ -133,8 +134,8 @@ function DesktopNav({ onOpenCVOMessage }: { onOpenCVOMessage: () => void }) {
                 >
                   {item.icon && <item.icon className="h-3.5 w-3.5 mr-1.5" />}
                   {item.label}
-                </NavigationMenuLink>
-              </Link>
+                </Link>
+              </NavigationMenuLink>
             )}
           </NavigationMenuItem>
         ))}
