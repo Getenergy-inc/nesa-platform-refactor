@@ -464,16 +464,38 @@ export default function Timeline() {
                     id={`tier-${cat.title.toLowerCase().replace(/\s+/g, "-")}`}
                     className={`group relative flex flex-col overflow-hidden border bg-gradient-to-br ${cat.accent} transition-all hover:scale-[1.01] hover:shadow-2xl`}
                   >
-                    {/* Decorative corner glow */}
-                    <div className={`absolute -right-12 -top-12 h-40 w-40 rounded-full bg-gradient-to-br ${cat.accent} opacity-40 blur-2xl`} />
-
-                    <CardHeader className="relative">
-                      <div className="mb-3 flex items-center justify-between">
-                        <div className={`flex h-14 w-14 items-center justify-center rounded-2xl bg-white/10 ring-1 ${cat.ringColor}`}>
+                    {/* Hero image banner */}
+                    <div className="relative h-48 w-full overflow-hidden md:h-56">
+                      <img
+                        src={cat.image}
+                        alt={`${cat.title} — ${cat.subtitle}`}
+                        className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110"
+                        loading="lazy"
+                      />
+                      {/* Gradient overlay for legibility */}
+                      <div className={`absolute inset-0 bg-gradient-to-b ${cat.imageOverlay}`} />
+                      {/* Top-left tier badge over image */}
+                      <div className="absolute left-4 top-4">
+                        <Badge className={`${cat.badgeClass} backdrop-blur-md`}>{cat.subtitle}</Badge>
+                      </div>
+                      {/* Bottom-overlapping icon medallion */}
+                      <div className="absolute -bottom-7 left-5">
+                        <div className={`flex h-14 w-14 items-center justify-center rounded-2xl bg-charcoal/90 ring-2 ${cat.ringColor} shadow-xl backdrop-blur-md`}>
                           <Icon className={`h-7 w-7 ${cat.iconColor}`} />
                         </div>
-                        <Badge className={cat.badgeClass}>{cat.subtitle}</Badge>
                       </div>
+                      {/* Title overlay on image bottom-right */}
+                      <div className="absolute bottom-3 right-4 text-right">
+                        <p className={`text-[10px] font-semibold uppercase tracking-widest ${cat.iconColor}`}>
+                          {cat.scope.split("·")[0].trim()}
+                        </p>
+                      </div>
+                    </div>
+
+                    {/* Decorative corner glow */}
+                    <div className={`pointer-events-none absolute -right-12 top-40 h-40 w-40 rounded-full bg-gradient-to-br ${cat.accent} opacity-40 blur-2xl`} />
+
+                    <CardHeader className="relative pt-10">
                       <CardTitle className="font-display text-2xl text-white">{cat.title}</CardTitle>
                       <p className={`text-sm italic ${cat.iconColor}`}>{cat.tagline}</p>
                     </CardHeader>
