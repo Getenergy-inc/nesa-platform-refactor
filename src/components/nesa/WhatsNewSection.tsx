@@ -3,43 +3,63 @@ import { Calendar, ArrowRight, Bell, Sparkles, Users, Trophy, Tv } from "lucide-
 import { motion } from "framer-motion";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { useSeason } from "@/contexts/SeasonContext";
+import { buildScheduledEvents, DEFAULT_SCHEDULE_TEMPLATE } from "@/config/schedule";
 
-// Static updates - structured for future dynamic content from CMS
-const updates = [
-  {
-    id: "1",
-    type: "nominees",
-    icon: Users,
-    title: "50+ New Nominees Added",
-    description: "West Africa leads with new education champions in EdTech and Policy.",
-    date: "2026-02-01",
-    href: "/nominees?category=west-africa",
-    badge: "New",
-    badgeColor: "bg-emerald-500/20 text-emerald-400 border-emerald-500/30",
-  },
-  {
-    id: "2",
-    type: "voting",
-    icon: Trophy,
-    title: "Gold Voting Opens Feb 15",
-    description: "Public voting for Gold Certificate nominees begins next week.",
-    date: "2026-02-03",
-    href: "/vote?tier=gold",
-    badge: "Upcoming",
-    badgeColor: "bg-gold/20 text-gold border-gold/30",
-  },
-  {
-    id: "3",
-    type: "media",
-    icon: Tv,
-    title: "Platinum Show Season 2",
-    description: "New episodes featuring education innovators every Thursday.",
-    date: "2026-01-30",
-    href: "/media/shows",
-    badge: "Live",
-    badgeColor: "bg-red-500/20 text-red-400 border-red-500/30",
-  },
-];
+interface UpdateItem {
+  id: string;
+  type: string;
+  icon: typeof Users;
+  title: string;
+  description: string;
+  date: string;
+  href: string;
+  badge: string;
+  badgeColor: string;
+}
+
+function buildUpdates(awardYear: number): UpdateItem[] {
+  const events = buildScheduledEvents(awardYear, DEFAULT_SCHEDULE_TEMPLATE);
+  const platinumShow = events.tvShows.find(e => e.id === "platinum-show");
+  const goldVoting = events.votingWindows.find(e => e.id === "gold-voting");
+  const ceremonyYear = awardYear + 1;
+
+  return [
+    {
+      id: "1",
+      type: "nominees",
+      icon: Users,
+      title: "New Nominees Across Africa",
+      description: `EduAid-Africa Webinars are live — discover ${ceremonyYear} education champions across all 5 regions.`,
+      date: new Date().toISOString().split("T")[0],
+      href: "/nominees",
+      badge: "Live",
+      badgeColor: "bg-emerald-500/20 text-emerald-400 border-emerald-500/30",
+    },
+    {
+      id: "2",
+      type: "voting",
+      icon: Trophy,
+      title: `Gold Voting Opens ${goldVoting?.date.toLocaleDateString("en-US", { month: "short", day: "numeric" }) ?? "Apr 10"}`,
+      description: `Public voting for Gold Certificate nominees begins ${goldVoting?.date.toLocaleDateString("en-US", { month: "long", year: "numeric" }) ?? `April ${ceremonyYear}`}.`,
+      date: goldVoting?.date.toISOString().split("T")[0] ?? `${ceremonyYear}-04-10`,
+      href: "/vote?tier=gold",
+      badge: "Upcoming",
+      badgeColor: "bg-gold/20 text-gold border-gold/30",
+    },
+    {
+      id: "3",
+      type: "media",
+      icon: Tv,
+      title: "Platinum Recognition Show",
+      description: `Premieres ${platinumShow?.date.toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" }) ?? `28 February ${ceremonyYear}`} — featuring NRC-verified champions.`,
+      date: platinumShow?.date.toISOString().split("T")[0] ?? `${ceremonyYear}-02-28`,
+      href: "/media/shows",
+      badge: "Upcoming",
+      badgeColor: "bg-amber-500/20 text-amber-400 border-amber-500/30",
+    },
+  ];
+}
 
 function formatRelativeDate(dateStr: string): string {
   const date = new Date(dateStr);
@@ -59,7 +79,9 @@ function formatRelativeDate(dateStr: string): string {
  * Structured for future CMS integration.
  */
 export function WhatsNewSection() {
-  return (
+  const { currentEdition } = useSeason();
+  const updates = buildUpdates(currentEdition.displayYear);
+
     <section className="bg-charcoal py-12 md:py-16">
       <div className="container">
         {/* Header */}
