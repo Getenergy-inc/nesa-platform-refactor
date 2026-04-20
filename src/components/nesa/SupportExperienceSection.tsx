@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { Ticket, ShoppingBag, Music, ArrowRight } from "lucide-react";
+import { Ticket, ShoppingBag, Music, ArrowRight, Users } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 interface CardItem {
@@ -44,6 +44,16 @@ const items: CardItem[] = [
     href: "/media/hub#music",
     accent: "from-fuchsia-500/15 to-fuchsia-500/5",
   },
+  {
+    icon: Users,
+    eyebrow: "Join the Network",
+    title: "Become an Ambassador or SCEF Member",
+    description:
+      "Join a local chapter and sign up as a NESA-Africa Ambassador or SCEF Active Member today — lead change in your region and earn AGC rewards.",
+    cta: "Join the Movement",
+    href: "/ambassadors",
+    accent: "from-sky-500/15 to-sky-500/5",
+  },
 ];
 
 export function SupportExperienceSection() {
@@ -66,12 +76,12 @@ export function SupportExperienceSection() {
             Be Part of the <span className="text-gold">Movement</span>
           </h2>
           <p className="text-white/65 text-base md:text-lg leading-relaxed">
-            Attend the gala, wear the brand, or play the anthem — three ways to celebrate and
-            support Africa's education changemakers.
+            Attend the gala, wear the brand, play the anthem, or join a local chapter — four
+            ways to celebrate and lead Africa's education movement.
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {items.map((item, i) => (
             <motion.div
               key={item.title}
