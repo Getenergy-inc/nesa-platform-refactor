@@ -22,19 +22,13 @@ export function CountdownSection() {
   const { currentEdition, getOpenStage } = useSeason();
   const openStage = getOpenStage();
 
-  // Determine the next key date to count down to
-  const now = new Date();
-  const dates = [
-    { date: currentEdition.nominationsClose, label: "Nominations Close", icon: Trophy, stage: "nominations" },
-    { date: currentEdition.votingOpen, label: "Voting Opens", icon: Vote, stage: "public_voting" },
-    { date: currentEdition.votingClose, label: "Voting Closes", icon: Vote, stage: "public_voting" },
-    { date: currentEdition.ceremonyDate, label: "Grand Gala", icon: Trophy, stage: "ceremony" },
-  ];
-
-  // Pick first future date
-  const target = dates.find((d) => new Date(d.date) > now) ?? dates[dates.length - 1];
+  // Always count down to the Grand Gala (Blue Garnet Awards) — 22 October 2026
+  const target = {
+    date: currentEdition.ceremonyDate,
+    label: "Grand Gala — Blue Garnet Awards",
+    icon: Trophy,
+  };
   const { days, hours, minutes, seconds, isExpired } = useCountdown(target.date);
-  const Icon = target.icon;
 
   if (isExpired) return null;
 
