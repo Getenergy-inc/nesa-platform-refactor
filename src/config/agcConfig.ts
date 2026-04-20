@@ -62,75 +62,85 @@ export interface AGCFAQ {
 
 export const PROGRAMME_TIMELINE_2026 = [
   {
-    id: 'nrc-review',
-    phase: 'NRC Nominee Review',
-    period: '1 Feb – 31 Mar 2026',
-    description: 'Nominee Research Corps verifies all nominations for eligibility and governance compliance',
-    status: 'upcoming' as const,
-  },
-  {
-    id: 'jury-selection',
-    phase: 'Jury Selection',
-    period: 'Feb – Mar 2026',
-    description: 'Applications reviewed and independent jury members selected',
-    status: 'upcoming' as const,
-  },
-  {
     id: 'platinum-show',
     phase: 'Platinum Recognition Show',
-    period: '28 February 2026',
-    description: '3-hour TV Show — Non-competitive baseline recognition of service',
+    period: '11 June 2026',
+    description: 'Launches the public season with baseline recognition of institutional and leadership impact.',
+    focus: 'Credibility · Visibility · Campaign Opening',
+    status: 'upcoming' as const,
+  },
+  {
+    id: 'icon-nominations-close',
+    phase: 'Africa Education Icon Nominations Close',
+    period: '20 June 2026',
+    description: 'Final deadline for lifetime achievement nominations. Scope: Africa Education Icon (2006–2026).',
+    focus: 'Lifetime Achievement Pipeline',
     status: 'upcoming' as const,
   },
   {
     id: 'icon-show',
     phase: 'Africa Education Icon Show',
-    period: '28 March 2026',
-    description: '3-hour TV Show — Lifetime impact recognition (9 Icons)',
+    period: '25 June 2026',
+    description: 'Honours transformational leaders whose work has shaped African education over the past two decades.',
+    focus: 'Authority · Continental Positioning',
     status: 'upcoming' as const,
   },
   {
     id: 'jury-onboarding',
     phase: 'Jury Onboarding',
-    period: 'April 2026',
-    description: 'Selected jury members complete orientation and training',
+    period: '29 June – 10 July 2026',
+    description: 'Selected jury members complete orientation, governance review, and scoring calibration.',
+    focus: 'Integrity · Governance',
+    status: 'upcoming' as const,
+  },
+  {
+    id: 'gold-nominations-close',
+    phase: 'Gold Certificate Nominations Close',
+    period: '10 July 2026',
+    description: 'Final deadline for Gold Special Recognition entries.',
+    focus: 'Pipeline Lock-In',
     status: 'upcoming' as const,
   },
   {
     id: 'gold-voting',
     phase: 'Gold Certificate Voting',
-    period: '10 Apr – 16 May 2026',
-    description: '100% public voting across 135 sub-categories — Top 3 winners each (405 Gold Certificate winners)',
+    period: '13 July – 25 September 2026',
+    description: 'Mass public voting phase across the eligible categories using AGC participation credits.',
+    focus: 'Participation · Audience Growth · Regional Activation',
     status: 'upcoming' as const,
     votingPhase: 'GOLD_CERTIFICATE' as VotingPhase,
   },
   {
     id: 'gold-show',
     phase: 'Gold Certificate Winners Show',
-    period: '17 May 2026',
-    description: '3-hour TV Show — 405 Gold Certificate winners announced',
+    period: '1 October 2026',
+    description: 'Official announcement of Gold Special Recognition — 2026 Edition winners.',
+    focus: 'Amplification · Media Assets · Winner Visibility',
     status: 'upcoming' as const,
   },
   {
     id: 'blue-garnet-voting',
-    phase: 'Blue Garnet Award Voting',
-    period: '18 May – 17 Jun 2026',
-    description: '40% public vote + 60% independent jury review',
+    phase: 'Blue Garnet Voting',
+    period: '2 – 22 October 2026',
+    description: 'Final 3-week competitive voting window leading directly into the gala. Voting closes on gala day for transparency and suspense.',
+    focus: 'Prestige · Suspense · Public + Jury',
     status: 'upcoming' as const,
     votingPhase: 'BLUE_GARNET' as VotingPhase,
   },
   {
     id: 'blue-garnet-gala',
     phase: 'Blue Garnet Awards Gala',
-    period: '27 June 2026',
-    description: 'Grand ceremony in Lagos + live broadcast — 9 Blue Garnet Award winners',
+    period: '22 October 2026',
+    description: 'The peak event of the season — a live continental recognition ceremony and media moment.',
+    focus: 'Continental Spotlight · Live Broadcast',
     status: 'upcoming' as const,
   },
   {
     id: 'rmsa-launch',
-    phase: 'Rebuild My School Africa',
-    period: 'Jun 2026 – Jun 2027',
-    description: 'Legacy phase: 5 Special Needs facilities across African regions',
+    phase: 'Rebuild My School Africa Launch',
+    period: '23 October 2026 onward',
+    description: 'Transition from awards visibility into school-focused intervention and social impact across African regions.',
+    focus: 'Legacy · Social Impact · Regional Schools',
     status: 'upcoming' as const,
   },
 ];
@@ -145,9 +155,9 @@ export const VOTING_PHASES: VotingPhaseConfig[] = [
       jury: 0,
     },
     dates: {
-      votingOpens: '2026-04-10',
-      votingCloses: '2026-05-16',
-      resultsDate: '2026-05-17',
+      votingOpens: '2026-07-13',
+      votingCloses: '2026-09-25',
+      resultsDate: '2026-10-01',
     },
   },
   {
@@ -159,15 +169,15 @@ export const VOTING_PHASES: VotingPhaseConfig[] = [
       jury: 60,
     },
     dates: {
-      votingOpens: '2026-05-18',
-      votingCloses: '2026-06-17',
-      resultsDate: '2026-06-27',
+      votingOpens: '2026-10-02',
+      votingCloses: '2026-10-22',
+      resultsDate: '2026-10-22',
     },
   },
 ];
 
-export const GALA_DATE = '2026-06-27';
-export const GALA_WEEKEND = 'June 27–28, 2026';
+export const GALA_DATE = '2026-10-22';
+export const GALA_WEEKEND = 'October 22, 2026';
 
 // ============================================================================
 // CONVERSION RULES

@@ -291,7 +291,7 @@ serve(async (req) => {
         const existingSlugs = new Set(existing?.map(e => e.slug) || []);
         const existingHashes = new Map(existing?.map(e => [e.identity_hash, e.id]) || []);
 
-        const newNominees = [];
+        const newNominees: Array<Record<string, any>> = [];
         for (let j = 0; j < batch.length; j++) {
           const n = batch[j];
           // Check by identity hash first, then slug
