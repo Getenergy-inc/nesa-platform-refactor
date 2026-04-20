@@ -205,7 +205,7 @@ export function Vision2035Section({ variant = "full" }: Vision2035SectionProps) 
                   <h4 className="mt-6 font-display text-xl font-bold text-foreground">Milestones</h4>
                   <div className="grid gap-4 md:grid-cols-3">
                     <div className="rounded-lg bg-muted p-4 text-center">
-                      <p className="font-display text-3xl font-bold text-primary">2025</p>
+                      <p className="font-display text-3xl font-bold text-primary">2026</p>
                       <p className="text-sm">Pan-African Expansion</p>
                     </div>
                     <div className="rounded-lg bg-muted p-4 text-center">
