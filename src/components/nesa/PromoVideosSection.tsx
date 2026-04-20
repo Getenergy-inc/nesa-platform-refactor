@@ -5,13 +5,13 @@ import { getYouTubeEmbedUrl, getThumbnailUrl } from "@/lib/youtube";
 const PROMO_VIDEOS = [
   {
     id: "nQCXDX_X3rs",
-    title: "NESA Africa Awards – Gala Highlights",
-    description: "Relive the magic of the NESA-Africa Awards ceremony.",
+    title: "How to Use the NESA Website",
+    description: "A step-by-step walkthrough of nominating, voting, and engaging on the NESA-Africa platform.",
   },
   {
     id: "aP0SskrfioI",
-    title: "Meet the Judges – Season 2026",
-    description: "Get to know the distinguished panel behind the awards.",
+    title: "The Vision by the CVO",
+    description: "Hear directly from the Chief Visionary Officer on the mission shaping NESA-Africa 2026.",
   },
 ];
 
