@@ -26,6 +26,7 @@ const InteractiveAfricaMap = lazy(() => import("@/components/nesa/InteractiveAfr
 const PromoVideosSection = lazy(() => import("@/components/nesa/PromoVideosSection").then(m => ({ default: m.PromoVideosSection })));
 const SupportExperienceSection = lazy(() => import("@/components/nesa/SupportExperienceSection").then(m => ({ default: m.SupportExperienceSection })));
 const BrandNarrativeSection = lazy(() => import("@/components/nesa/BrandNarrativeSection").then(m => ({ default: m.BrandNarrativeSection })));
+const AwardSpotlightSection = lazy(() => import("@/components/nesa/AwardSpotlightSection").then(m => ({ default: m.AwardSpotlightSection })));
 
 export function NESALandingPage() {
   const { currentEdition } = useSeason();
@@ -64,6 +65,11 @@ export function NESALandingPage() {
         {/* ═══ 4. Countdown ═══ */}
         <CountdownSection />
         
+        {/* ═══ 5b. Award Spotlight — 2026 Prestige Pillars ═══ */}
+        <LazySection>
+          <AwardSpotlightSection />
+        </LazySection>
+
         {/* ═══ 6. Award Categories ═══ */}
         <LazySection>
           <CategoriesSection />
