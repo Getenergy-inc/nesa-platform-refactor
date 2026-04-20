@@ -2,6 +2,10 @@ import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import { PROGRAMME_TIMELINE_2026 } from "@/config/agcConfig";
+import iconLifetimeImg from "@/assets/cards/icon-lifetime.jpg";
+import platinumImg from "@/assets/cards/platinum-recognition.jpg";
+import goldVotingImg from "@/assets/cards/gold-public-voting.jpg";
+import blueGarnetImg from "@/assets/cards/blue-garnet-gala.jpg";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -72,6 +76,8 @@ const CATEGORY_PATHWAYS = [
     badgeClass: "bg-amber-500/20 text-amber-300 border-amber-500/40",
     iconColor: "text-amber-300",
     ringColor: "ring-amber-500/30",
+    image: iconLifetimeImg,
+    imageOverlay: "from-amber-900/80 via-charcoal/60 to-charcoal",
   },
   {
     icon: Star,
@@ -97,6 +103,8 @@ const CATEGORY_PATHWAYS = [
     badgeClass: "bg-slate-400/20 text-slate-200 border-slate-400/40",
     iconColor: "text-slate-200",
     ringColor: "ring-slate-400/30",
+    image: platinumImg,
+    imageOverlay: "from-slate-900/80 via-charcoal/60 to-charcoal",
   },
   {
     icon: Sparkles,
@@ -121,6 +129,8 @@ const CATEGORY_PATHWAYS = [
     badgeClass: "bg-yellow-500/20 text-yellow-300 border-yellow-500/40",
     iconColor: "text-yellow-300",
     ringColor: "ring-yellow-500/30",
+    image: goldVotingImg,
+    imageOverlay: "from-yellow-900/80 via-charcoal/60 to-charcoal",
   },
   {
     icon: Gem,
@@ -146,6 +156,8 @@ const CATEGORY_PATHWAYS = [
     badgeClass: "bg-blue-500/20 text-blue-300 border-blue-500/40",
     iconColor: "text-blue-300",
     ringColor: "ring-blue-500/30",
+    image: blueGarnetImg,
+    imageOverlay: "from-blue-900/80 via-charcoal/60 to-charcoal",
   },
 ];
 
@@ -452,16 +464,38 @@ export default function Timeline() {
                     id={`tier-${cat.title.toLowerCase().replace(/\s+/g, "-")}`}
                     className={`group relative flex flex-col overflow-hidden border bg-gradient-to-br ${cat.accent} transition-all hover:scale-[1.01] hover:shadow-2xl`}
                   >
-                    {/* Decorative corner glow */}
-                    <div className={`absolute -right-12 -top-12 h-40 w-40 rounded-full bg-gradient-to-br ${cat.accent} opacity-40 blur-2xl`} />
-
-                    <CardHeader className="relative">
-                      <div className="mb-3 flex items-center justify-between">
-                        <div className={`flex h-14 w-14 items-center justify-center rounded-2xl bg-white/10 ring-1 ${cat.ringColor}`}>
+                    {/* Hero image banner */}
+                    <div className="relative h-48 w-full overflow-hidden md:h-56">
+                      <img
+                        src={cat.image}
+                        alt={`${cat.title} — ${cat.subtitle}`}
+                        className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110"
+                        loading="lazy"
+                      />
+                      {/* Gradient overlay for legibility */}
+                      <div className={`absolute inset-0 bg-gradient-to-b ${cat.imageOverlay}`} />
+                      {/* Top-left tier badge over image */}
+                      <div className="absolute left-4 top-4">
+                        <Badge className={`${cat.badgeClass} backdrop-blur-md`}>{cat.subtitle}</Badge>
+                      </div>
+                      {/* Bottom-overlapping icon medallion */}
+                      <div className="absolute -bottom-7 left-5">
+                        <div className={`flex h-14 w-14 items-center justify-center rounded-2xl bg-charcoal/90 ring-2 ${cat.ringColor} shadow-xl backdrop-blur-md`}>
                           <Icon className={`h-7 w-7 ${cat.iconColor}`} />
                         </div>
-                        <Badge className={cat.badgeClass}>{cat.subtitle}</Badge>
                       </div>
+                      {/* Title overlay on image bottom-right */}
+                      <div className="absolute bottom-3 right-4 text-right">
+                        <p className={`text-[10px] font-semibold uppercase tracking-widest ${cat.iconColor}`}>
+                          {cat.scope.split("·")[0].trim()}
+                        </p>
+                      </div>
+                    </div>
+
+                    {/* Decorative corner glow */}
+                    <div className={`pointer-events-none absolute -right-12 top-40 h-40 w-40 rounded-full bg-gradient-to-br ${cat.accent} opacity-40 blur-2xl`} />
+
+                    <CardHeader className="relative pt-10">
                       <CardTitle className="font-display text-2xl text-white">{cat.title}</CardTitle>
                       <p className={`text-sm italic ${cat.iconColor}`}>{cat.tagline}</p>
                     </CardHeader>
