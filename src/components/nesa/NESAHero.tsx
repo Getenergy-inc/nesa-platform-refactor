@@ -26,7 +26,7 @@ export function NESAHero() {
       <div className="absolute inset-0">
         <img
           src={stageBackdrop}
-          alt="NESA-Africa 2025 Award Stage"
+          alt="NESA Africa 2026 Award Stage"
           className="absolute inset-0 w-full h-full object-cover object-center animate-ken-burns"
         />
         
@@ -77,21 +77,21 @@ export function NESAHero() {
 
         {/* Headline - Elegant with gold accent */}
         <h1 className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-white mb-3 sm:mb-4 max-w-4xl leading-tight px-2 animate-fade-in" style={{ animationDelay: '0.2s' }}>
-          {t("landing.hero.title")}{" "}
-          <span className="text-gold">{t("landing.hero.titleHighlight")}</span>
+          NESA Africa{" "}
+          <span className="text-gold">2026</span>
         </h1>
 
         {/* Subheadline - Clean and impactful */}
         <p className="text-lg sm:text-xl md:text-2xl font-medium text-gold/90 mb-4 sm:mb-6 max-w-2xl px-4 animate-fade-in" style={{ animationDelay: '0.3s' }}>
-          {t("landing.hero.tagline")}
+          From Recognition to Real Impact Across Africa
         </p>
 
-        {/* NEW: Compelling description paragraph */}
+        {/* Compelling description paragraph */}
         <p className="text-white/75 text-sm sm:text-base md:text-lg max-w-3xl mb-6 leading-relaxed px-4 sm:px-6 animate-fade-in" style={{ animationDelay: '0.4s' }}>
-          The New Education Standard Award Africa (NESA-Africa) celebrates visionary leaders, institutions, and innovators building the future of education across Africa—while funding measurable legacy impact through Rebuild My School Africa.
+          A continental platform recognizing excellence in education while driving real impact through partnerships, media, and school transformation across Africa — connecting recognition, visibility, partnerships, and funding into one ecosystem.
         </p>
 
-        {/* NEW: AGC Voting Strip */}
+        {/* AGC Voting Strip */}
         <div className="flex items-center gap-2 px-4 sm:px-6 py-2.5 rounded-full bg-gold/10 border border-gold/30 mb-6 sm:mb-8 animate-fade-in" style={{ animationDelay: '0.45s' }}>
           <Coins className="h-4 w-4 text-gold" />
           <span className="text-sm text-white/90">

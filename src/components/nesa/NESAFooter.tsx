@@ -36,7 +36,7 @@ export function NESAFooter() {
               </div>
             </div>
             <p className="text-white/60 text-sm mb-4">
-              {t("footer.tagline")}
+              NESA Africa connects recognition, visibility, partnerships, and funding to deliver real educational impact across Africa.
             </p>
             {/* Social Links */}
             <div className="flex gap-3 justify-center md:justify-start">
