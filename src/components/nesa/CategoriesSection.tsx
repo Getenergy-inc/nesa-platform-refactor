@@ -1,10 +1,11 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { motion } from "framer-motion";
 import {
-  ChevronRight, GraduationCap, Crown, Star, Trophy, Shield,
+  ChevronRight, GraduationCap, Crown, Star, Trophy, Shield, PlayCircle,
 } from "lucide-react";
 import {
   getCategoriesGrouped,
@@ -12,6 +13,8 @@ import {
 } from "@/config/nesaCategories";
 import { categoryIconMap } from "@/config/categoryIconMap";
 import { getCategoryImage } from "@/config/categoryImages";
+import { getCategoryVideo } from "@/config/categoryVideos";
+import { CategoryVideoModal } from "@/components/nesa/CategoryVideoModal";
 
 const groups = getCategoriesGrouped();
 
@@ -42,53 +45,72 @@ function CategoryCard({ cat }: { cat: CategoryDefinition }) {
   const scope = scopeStyles[cat.scope] || scopeStyles.AFRICA_REGIONAL;
   const tier = tierBadgeStyles[getPrimaryTier(cat)];
   const catImage = getCategoryImage(cat.slug);
+  const video = getCategoryVideo(cat);
+  const [open, setOpen] = useState(false);
 
   return (
-    <Link
-      to={`/categories/${cat.slug}`}
-      className="group block bg-white/5 backdrop-blur-sm rounded-2xl border border-white/10 hover:border-gold/40 transition-all duration-300 overflow-hidden"
-    >
-      <div className="relative h-32 w-full overflow-hidden">
-        {catImage ? (
-          <img src={catImage} alt={cat.shortName} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" />
-        ) : (
-          <div className="w-full h-full bg-white/5 flex items-center justify-center">
-            <Icon className="h-12 w-12 text-white/20" />
+    <>
+      <button
+        type="button"
+        onClick={() => setOpen(true)}
+        aria-label={`Play video about ${cat.name}`}
+        className="group block w-full text-left bg-white/5 backdrop-blur-sm rounded-2xl border border-white/10 hover:border-gold/40 transition-all duration-300 overflow-hidden focus:outline-none focus:ring-2 focus:ring-gold/50"
+      >
+        <div className="relative h-32 w-full overflow-hidden">
+          {catImage ? (
+            <img src={catImage} alt={cat.shortName} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" />
+          ) : (
+            <div className="w-full h-full bg-white/5 flex items-center justify-center">
+              <Icon className="h-12 w-12 text-white/20" />
+            </div>
+          )}
+          <div className="absolute inset-0 bg-gradient-to-t from-charcoal via-charcoal/50 to-transparent" />
+          {/* Play overlay */}
+          <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-black/30">
+            <PlayCircle className="h-12 w-12 text-gold drop-shadow-lg" strokeWidth={1.5} />
           </div>
-        )}
-        <div className="absolute inset-0 bg-gradient-to-t from-charcoal via-charcoal/50 to-transparent" />
-        <div className="absolute top-2 right-2">
-          <Badge variant="outline" className={`text-[10px] px-1.5 py-0 backdrop-blur-sm ${scope.className}`}>
-            {scope.label}
-          </Badge>
-        </div>
-        <div className="absolute top-2 left-2">
-          <Badge variant="outline" className={`text-[10px] px-1.5 py-0 backdrop-blur-sm ${tier.className}`}>
-            {tier.label}
-          </Badge>
-        </div>
-        <div className="absolute bottom-2 left-3">
-          <div className="h-8 w-8 rounded-lg bg-black/40 backdrop-blur-sm flex items-center justify-center">
-            <Icon className="h-4 w-4 text-gold" />
+          <div className="absolute top-2 right-2">
+            <Badge variant="outline" className={`text-[10px] px-1.5 py-0 backdrop-blur-sm ${scope.className}`}>
+              {scope.label}
+            </Badge>
           </div>
-        </div>
-      </div>
-      <div className="p-4">
-        <h3 className="font-semibold text-white text-sm leading-tight group-hover:text-gold transition-colors line-clamp-2 mb-1">
-          {cat.name}
-        </h3>
-        <p className="text-white/50 text-xs line-clamp-2 mb-3">{cat.description}</p>
-        <div className="flex items-center justify-between">
-          <span className="text-white/40 text-xs">
-            {cat.subcategories.length > 0 ? `${cat.subcategories.length} subcategories` : ""}
-          </span>
-          <div className="flex items-center gap-1 text-xs text-white/40 group-hover:text-gold transition-colors">
-            <span>{cat.subcategories.length > 0 ? "View Subcategories" : "Explore"}</span>
-            <ChevronRight className="h-3 w-3 group-hover:translate-x-1 transition-transform" />
+          <div className="absolute top-2 left-2">
+            <Badge variant="outline" className={`text-[10px] px-1.5 py-0 backdrop-blur-sm ${tier.className}`}>
+              {tier.label}
+            </Badge>
+          </div>
+          <div className="absolute bottom-2 left-3">
+            <div className="h-8 w-8 rounded-lg bg-black/40 backdrop-blur-sm flex items-center justify-center">
+              <Icon className="h-4 w-4 text-gold" />
+            </div>
           </div>
         </div>
-      </div>
-    </Link>
+        <div className="p-4">
+          <h3 className="font-semibold text-white text-sm leading-tight group-hover:text-gold transition-colors line-clamp-2 mb-1">
+            {cat.name}
+          </h3>
+          <p className="text-white/50 text-xs line-clamp-2 mb-3">{cat.description}</p>
+          <div className="flex items-center justify-between">
+            <span className="text-white/40 text-xs">
+              {cat.subcategories.length > 0 ? `${cat.subcategories.length} subcategories` : ""}
+            </span>
+            <div className="flex items-center gap-1 text-xs text-white/40 group-hover:text-gold transition-colors">
+              <PlayCircle className="h-3.5 w-3.5" />
+              <span>Watch Video</span>
+            </div>
+          </div>
+        </div>
+      </button>
+      <CategoryVideoModal
+        open={open}
+        onOpenChange={setOpen}
+        videoId={video.videoId}
+        videoTitle={video.title}
+        categoryName={cat.name}
+        categoryDescription={cat.description}
+        categorySlug={cat.slug}
+      />
+    </>
   );
 }
 
