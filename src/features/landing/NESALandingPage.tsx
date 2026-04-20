@@ -23,7 +23,6 @@ import { useSeason } from "@/contexts/SeasonContext";
 const CategoriesSection = lazy(() => import("@/components/nesa/CategoriesSection").then(m => ({ default: m.CategoriesSection })));
 const SponsorsSection = lazy(() => import("@/components/nesa/SponsorsSection").then(m => ({ default: m.SponsorsSection })));
 const InteractiveAfricaMap = lazy(() => import("@/components/nesa/InteractiveAfricaMap").then(m => ({ default: m.InteractiveAfricaMap })));
-const UpcomingEventsSection = lazy(() => import("@/components/nesa/UpcomingEventsSection").then(m => ({ default: m.UpcomingEventsSection })));
 const PromoVideosSection = lazy(() => import("@/components/nesa/PromoVideosSection").then(m => ({ default: m.PromoVideosSection })));
 
 export function NESALandingPage() {
@@ -67,11 +66,6 @@ export function NESALandingPage() {
         {/* ═══ 6. Interactive Africa Map ═══ */}
         <LazySection>
           <InteractiveAfricaMap />
-        </LazySection>
-        
-        {/* ═══ 7. Upcoming Events ═══ */}
-        <LazySection>
-          <UpcomingEventsSection />
         </LazySection>
         
         {/* ═══ 8. Promo Videos ═══ */}
