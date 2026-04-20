@@ -9,7 +9,7 @@ import { Input } from "@/components/ui/input";
 
 // Placeholder data - will be replaced with CMS/DB data
 const placeholderWinners = [
-  { name: "Coming Soon", category: "Blue Garnet winners will be announced at the Gala", year: 2025, tier: "blue_garnet" },
+  { name: "Coming Soon", category: "Blue Garnet winners will be announced at the Gala", year: 2026, tier: "blue_garnet" },
 ];
 
 export default function Winners() {
@@ -118,7 +118,7 @@ export default function Winners() {
                   <Users className="mx-auto mb-4 h-12 w-12 text-blue-400" />
                   <h3 className="mb-2 text-xl font-semibold text-white">Icon Selection in Progress</h3>
                   <p className="mb-6 text-white/60">
-                    Africa Education Icon recipients are being selected for the 2025 season.
+                    Africa Education Icon recipients are being selected for the 2026 season.
                   </p>
                   <Button asChild className="bg-primary text-primary-foreground">
                     <Link to="/awards/icon">Learn About Icon Awards</Link>

@@ -40,7 +40,7 @@ const cards: DashboardCard[] = [
   },
   {
     title: "Rebuild My School Africa",
-    description: "Our 2025 post-award legacy project — nominate special needs schools for intervention.",
+    description: "Our 2026 post-award legacy project — nominate special needs schools for intervention.",
     href: "/eduaid-africa/rebuild-my-school",
     cta: "Learn More",
     icon: Building,

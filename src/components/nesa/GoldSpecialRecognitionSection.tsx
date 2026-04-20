@@ -644,7 +644,7 @@ export function GoldSpecialRecognitionSection() {
             <div className="h-px w-8 bg-gradient-to-r from-transparent to-primary/40" />
             <Badge variant="outline" className="border-primary/30 text-primary text-xs px-4 py-1 font-semibold tracking-wider">
               <Sparkles className="w-3 h-3 mr-1.5" />
-              2025 EDITION
+              2026 EDITION
             </Badge>
             <div className="h-px w-8 bg-gradient-to-l from-transparent to-primary/40" />
           </div>

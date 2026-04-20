@@ -21,7 +21,7 @@ const MOCK_NOTIFICATIONS: Notification[] = [
     id: "1",
     type: "award",
     title: "Awards Season Update",
-    message: "The 2025 NESA-Africa awards nomination period is now open. Submit your nominations before the deadline.",
+    message: "The 2026 NESA-Africa awards nomination period is now open. Submit your nominations before the deadline.",
     time: "2 hours ago",
     read: false,
   },

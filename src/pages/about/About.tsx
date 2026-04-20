@@ -83,7 +83,7 @@ const awardTiers = [
   },
   {
     title: "Gold Special Recognition",
-    subtitle: "2025 Cultural Impact Edition",
+    subtitle: "2026 Cultural Impact Edition",
     description: "Cultural and influence impact recognition for Sports, Music, and Social Media education advocacy. Editorially selected.",
     color: "from-yellow-400 to-amber-500",
     textColor: "text-yellow-400",

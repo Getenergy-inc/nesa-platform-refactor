@@ -124,7 +124,7 @@ export const MAIN_NAV: NavItem[] = [
         href: "/awards/gold-special-recognition",
         description: "Cultural impact — Sports, Music & Social Media",
         icon: Medal,
-        badge: "2025",
+        badge: "2026",
       },
       {
         label: "Gold Certificate",

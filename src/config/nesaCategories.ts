@@ -167,7 +167,7 @@ export const TIER_INFO: Record<AwardTier, {
     bgColor: "bg-yellow-100",
     borderColor: "border-yellow-300",
     votingMethod: "Editorial Selection",
-    validity: "Annual (2025)",
+    validity: "Annual (2026)",
   },
 };
 
@@ -610,7 +610,7 @@ export const NESA_CATEGORIES: CategoryDefinition[] = [
   },
 
   // =========================================================================
-  // GOLD SPECIAL RECOGNITION — 2025 EDITION
+  // GOLD SPECIAL RECOGNITION — 2026 EDITION
   // 3 standalone categories, not merged with Blue Garnet
   // =========================================================================
 
@@ -622,7 +622,7 @@ export const NESA_CATEGORIES: CategoryDefinition[] = [
     description: "Recognizing sportsmen and sportswomen championing education advocacy across Africa",
     scope: "AFRICA_REGIONAL",
     tierApplicability: { platinum: false, gold: false, blueGarnet: false, icon: false, goldSpecial: true },
-    selectionMethod: "Editorial Selection — Cultural Impact Recognition 2025",
+    selectionMethod: "Editorial Selection — Cultural Impact Recognition 2026",
     displayOrder: 101,
     iconName: "Users",
     isActive: true,
@@ -640,7 +640,7 @@ export const NESA_CATEGORIES: CategoryDefinition[] = [
     description: "Recognizing music artists championing education advocacy across Africa",
     scope: "AFRICA_REGIONAL",
     tierApplicability: { platinum: false, gold: false, blueGarnet: false, icon: false, goldSpecial: true },
-    selectionMethod: "Editorial Selection — Cultural Impact Recognition 2025",
+    selectionMethod: "Editorial Selection — Cultural Impact Recognition 2026",
     displayOrder: 102,
     iconName: "Palette",
     isActive: true,
@@ -657,7 +657,7 @@ export const NESA_CATEGORIES: CategoryDefinition[] = [
     description: "Recognizing social media influencers championing education advocacy across Africa",
     scope: "AFRICA_REGIONAL",
     tierApplicability: { platinum: false, gold: false, blueGarnet: false, icon: false, goldSpecial: true },
-    selectionMethod: "Editorial Selection — Cultural Impact Recognition 2025",
+    selectionMethod: "Editorial Selection — Cultural Impact Recognition 2026",
     displayOrder: 103,
     iconName: "Globe",
     isActive: true,
