@@ -58,7 +58,7 @@ type NominateTier = "blue-garnet" | "platinum" | "gold-special" | "lifetime";
 const TIER_TABS: { value: NominateTier; label: string; icon: string; disabled?: boolean }[] = [
   { value: "blue-garnet", label: "Blue Garnet", icon: "🏆" },
   { value: "platinum", label: "Platinum", icon: "💎" },
-  { value: "gold-special", label: "Gold Special (2025)", icon: "🥇" },
+  { value: "gold-special", label: "Gold Special (2026)", icon: "🥇" },
   { value: "lifetime", label: "Lifetime", icon: "🏛", disabled: true },
 ];
 
