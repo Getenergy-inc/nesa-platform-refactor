@@ -57,14 +57,14 @@ export default function Winners() {
                 />
               </div>
               <div className="flex gap-2">
-                <Badge variant="outline" className="cursor-pointer border-white/20 text-white hover:bg-white/10">
+                <Badge variant="outline" className="cursor-pointer border-primary/40 bg-primary/10 text-primary hover:bg-primary/20">
                   2026
                 </Badge>
-                <Badge variant="outline" className="cursor-pointer border-white/20 text-white hover:bg-white/10">
-                  2025
+                <Badge variant="outline" className="cursor-pointer border-white/20 text-white/60 hover:bg-white/10">
+                  2025 (Archive)
                 </Badge>
-                <Badge variant="outline" className="cursor-pointer border-white/20 text-white hover:bg-white/10">
-                  2023
+                <Badge variant="outline" className="cursor-pointer border-white/20 text-white/60 hover:bg-white/10">
+                  2024 (Archive)
                 </Badge>
               </div>
             </div>

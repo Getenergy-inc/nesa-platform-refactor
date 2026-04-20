@@ -424,7 +424,7 @@ export default function EDIMatrix() {
                       Data Period
                     </h4>
                     <p className="text-sm text-white/70">
-                      All evidence must cover activities from <strong>January 2023 – September 2025</strong>.
+                      All evidence must cover activities from <strong>January 2024 – September 2026</strong>.
                       Lifetime Icon Award may include earlier contributions (2006–2026).
                     </p>
                   </div>
