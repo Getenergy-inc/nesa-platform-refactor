@@ -160,6 +160,8 @@ export function UpcomingEventsSection() {
     {
       ...events.galas.find((e) => e.id === "blue-garnet-gala")!,
       displayLabel: "Blue Garnet Awards Gala",
+      // Show "Now Live" on the gala day itself (until end of day)
+      endDate: new Date(`${currentEdition.displayYear}-10-22T23:59:59`),
     },
     {
       ...events.legacy.find((e) => e.id === "rmsa-launch")!,
