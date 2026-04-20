@@ -11,6 +11,7 @@ import {
 } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
+import { RecognitionFlashCard } from "@/components/nesa/RecognitionFlashCard";
 
 const recognitionPathway = [
   "Contribution to education access",
@@ -25,24 +26,32 @@ const extendedFramework = [
     title: "CSR for Education",
     description:
       "Recognizing corporations driving education funding, infrastructure support, and inclusive education initiatives across Africa.",
+    categorySlugPatterns: ["%csr%"],
+    exploreHref: "/nominees?category=csr",
   },
   {
     icon: Megaphone,
     title: "Africa Education Influencers",
     description:
       "Celebrating public figures — social media advocates, music industry contributors, and sports personalities — using their influence for education.",
+    categorySlugPatterns: ["%influencer%", "%media%", "%creative%"],
+    exploreHref: "/nominees?category=influencer",
   },
   {
     icon: Globe2,
     title: "Global & Institutional Support",
     description:
       "Honoring bilateral and multilateral organizations, development partners, embassies, and international agencies supporting African education.",
+    categorySlugPatterns: ["%diaspora%", "%bilateral%", "%multilateral%", "%global%", "%ngo%"],
+    exploreHref: "/nominees?category=global-support",
   },
   {
     icon: School,
     title: "Special School Impact (2026–2027)",
     description:
       "Through EduAid Africa and Rebuild My School Africa — delivering special needs school support, infrastructure, and regional interventions.",
+    categorySlugPatterns: ["%school%", "%special%", "%education-friendly%"],
+    exploreHref: "/programs/rebuild-my-school-africa",
   },
 ];
 
@@ -192,27 +201,15 @@ export function BrandNarrativeSection() {
 
           <div className="grid sm:grid-cols-2 gap-5">
             {extendedFramework.map((item, i) => (
-              <motion.div
+              <RecognitionFlashCard
                 key={item.title}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.08 }}
-                whileHover={{ y: -4 }}
-                className="group rounded-2xl border border-gold/15 bg-charcoal-light/40 backdrop-blur-sm p-6 hover:border-gold/40 transition-colors"
-              >
-                <div className="flex items-start gap-4">
-                  <div className="h-12 w-12 shrink-0 rounded-xl bg-gold/10 border border-gold/25 flex items-center justify-center group-hover:bg-gold/20 transition-colors">
-                    <item.icon className="h-6 w-6 text-gold" />
-                  </div>
-                  <div>
-                    <h4 className="font-display text-lg md:text-xl font-bold text-white mb-2">
-                      {item.title}
-                    </h4>
-                    <p className="text-white/65 text-sm leading-relaxed">{item.description}</p>
-                  </div>
-                </div>
-              </motion.div>
+                icon={item.icon}
+                title={item.title}
+                description={item.description}
+                categorySlugPatterns={item.categorySlugPatterns}
+                exploreHref={item.exploreHref}
+                toneIndex={i}
+              />
             ))}
           </div>
         </div>
