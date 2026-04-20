@@ -53,7 +53,7 @@ export const DEFAULT_SEASON_CONFIG: SeasonConfig = {
     },
     "2026": {
       key: "2026",
-      name: "NESA-Africa 2026",
+      name: "NESA Africa 2026",
       displayYear: 2026,
       ceremonyYear: 2026,
       tagline: "From Recognition to Real Impact Across Africa",
