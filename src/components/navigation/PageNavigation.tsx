@@ -137,7 +137,7 @@ export function BottomPageNav() {
     <>
       <nav
         aria-label="Page pagination"
-        className="fixed bottom-0 inset-x-0 z-50 hidden lg:block bg-secondary/95 backdrop-blur-md border-t border-primary/20 print:hidden"
+        className="fixed bottom-0 inset-x-0 z-50 block bg-secondary/95 backdrop-blur-md border-t border-primary/20 print:hidden"
         style={{ paddingBottom: "env(safe-area-inset-bottom, 0px)" }}
       >
         <div className="flex items-center justify-between h-14 px-2 sm:px-4 max-w-6xl mx-auto">
