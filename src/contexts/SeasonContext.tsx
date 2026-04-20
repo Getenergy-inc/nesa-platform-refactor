@@ -164,7 +164,22 @@ export function SeasonProvider({ children }: { children: ReactNode }) {
 export function useSeason() {
   const context = useContext(SeasonContext);
   if (context === undefined) {
-    throw new Error("useSeason must be used within a SeasonProvider");
+    // Defensive fallback (e.g., during HMR or if a route renders outside the provider).
+    // Returns DEFAULT_SEASON_CONFIG-derived values so the UI keeps rendering.
+    const currentEdition = getEditionSafe(DEFAULT_SEASON_CONFIG);
+    return {
+      config: DEFAULT_SEASON_CONFIG,
+      currentEdition,
+      stages: [],
+      loading: false,
+      error: null,
+      isStageOpen: () => false,
+      getStage: () => undefined,
+      getOpenStage: () => null,
+      getBannerText: () => getEditionBannerText(currentEdition, null),
+      getEdition: (key?: string) => getEditionSafe(DEFAULT_SEASON_CONFIG, key),
+      refresh: async () => {},
+    } as SeasonContextType;
   }
   return context;
 }
