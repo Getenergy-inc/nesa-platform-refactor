@@ -10,7 +10,7 @@ export function KeyDatesBanner() {
   // Build events from config for the current season
   const events = buildScheduledEvents(currentEdition.displayYear, DEFAULT_SCHEDULE_TEMPLATE);
   const galaDate = events.galas[0]?.date;
-  const webinarStart = new Date(`${currentEdition.displayYear}-10-14`);
+  const webinarStart = new Date(`${currentEdition.displayYear}-06-01`);
   
   const formatDate = (date: Date) => {
     return date.toLocaleDateString("en-US", {
