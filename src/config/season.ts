@@ -35,7 +35,7 @@ export interface TransitionRules {
 
 // Default configuration - will be overridden by API
 export const DEFAULT_SEASON_CONFIG: SeasonConfig = {
-  currentEditionKey: "2025",
+  currentEditionKey: "2026",
   editions: {
     "2025": {
       key: "2025",
@@ -49,21 +49,21 @@ export const DEFAULT_SEASON_CONFIG: SeasonConfig = {
       votingOpen: "2025-07-15",
       votingClose: "2025-11-30",
       ceremonyDate: "2026-06-15",
-      isActive: true,
+      isActive: false,
     },
     "2026": {
       key: "2026",
       name: "NESA-Africa 2026",
       displayYear: 2026,
-      ceremonyYear: 2027,
-      tagline: "Elevating African Excellence",
-      theme: "Innovation in Education",
-      nominationsOpen: "2026-01-15",
-      nominationsClose: "2026-06-30",
-      votingOpen: "2026-07-15",
-      votingClose: "2026-11-30",
-      ceremonyDate: "2027-06-15",
-      isActive: false,
+      ceremonyYear: 2026,
+      tagline: "From Recognition to Real Impact Across Africa",
+      theme: "A Continental Platform for Education Transformation",
+      nominationsOpen: "2026-06-01",
+      nominationsClose: "2026-07-10",
+      votingOpen: "2026-07-13",
+      votingClose: "2026-10-22",
+      ceremonyDate: "2026-10-22",
+      isActive: true,
     },
   },
   transitionRules: {

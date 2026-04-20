@@ -55,11 +55,11 @@ export interface SeasonEdition {
 
 // Current Season Configuration
 export const CURRENT_SEASON: SeasonEdition = {
-  year: 2025,
-  name: "NESA-Africa 2025",
-  theme: "Building the Future of Education",
-  tagline: "Honoring Africa's Changemakers",
-  ceremonyDate: new Date("2026-06-15T18:00:00"),
+  year: 2026,
+  name: "NESA-Africa 2026",
+  theme: "From Recognition to Real Impact Across Africa",
+  tagline: "A Continental Platform for Education Transformation",
+  ceremonyDate: new Date("2026-10-22T18:00:00"),
   ceremonyLocation: "Lagos, Nigeria",
   ceremonyVenue: "Eko Convention Centre",
 };
