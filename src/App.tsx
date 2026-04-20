@@ -23,6 +23,7 @@ import { CustomerCareChat } from "@/components/support/CustomerCareChat";
 
 // Pages
 import NESALandingPage from "./features/landing/NESALandingPage";
+import UpcomingEventsPage from "./pages/UpcomingEvents";
 import Categories from "./pages/Categories";
 import Programs from "./pages/Programs";
 import Login from "./pages/auth/Login";
@@ -249,6 +250,14 @@ const App = () => (
                   <Route
                     path="/programs/nesa-africa"
                     element={<NESALandingPage />}
+                  />
+                  <Route
+                    path="/upcoming-events"
+                    element={
+                      <WithLayout>
+                        <UpcomingEventsPage />
+                      </WithLayout>
+                    }
                   />
 
                   {/* Programs */}
