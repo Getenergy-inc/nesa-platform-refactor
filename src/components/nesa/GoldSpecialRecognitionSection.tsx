@@ -1,5 +1,5 @@
 /**
- * Gold Special Recognition — 2025 Edition
+ * Gold Special Recognition — 2026 Edition
  * Cultural Impact Recognition · 3 Categories
  * 
  * Premium gallery with immersive category cards, large nominee showcases,

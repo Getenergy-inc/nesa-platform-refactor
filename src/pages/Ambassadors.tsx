@@ -62,7 +62,7 @@ const ambassadorTiers = [
 ];
 
 const duties = [
-  "Represent NESA-Africa 2025 and SCEF in your locality or diaspora network",
+  "Represent NESA-Africa 2026 and SCEF in your locality or diaspora network",
   "Promote nominations, scholarships, fundraising, and EduAid projects",
   "Host or support local chapter activities, online campaigns, and awareness sessions",
   "Engage communities, institutions, and media to amplify our message",
@@ -72,7 +72,7 @@ const duties = [
 
 const benefits = [
   "Digital Recognition Certificate",
-  "NESA Africa 2025 Ambassador ID Card",
+  "NESA Africa 2026 Ambassador ID Card",
   "Access to training, international mentorship, and webinars",
   "Up to 10–20% referral/commission on funds raised or partners you introduce",
   "Media features on NESA Africa TV & \"It's In Me\" Radio",
@@ -107,17 +107,17 @@ const registrationSteps = [
   "Pay a one-time administrative fee via the GFA Wallet: Amb-1: $10 | Amb-2: $20 | Amb-3: $50",
   "Complete your ambassador profile and select your chapter of affiliation",
   "Pay annual dues ($50, $80, or $200 respectively)",
-  "Begin your ambassador journey with NESA-Africa 2025!",
+  "Begin your ambassador journey with NESA-Africa 2026!",
 ];
 
 export default function Ambassadors() {
   return (
     <>
       <Helmet>
-        <title>Join as an Ambassador | NESA-Africa 2025</title>
+        <title>Join as an Ambassador | NESA-Africa 2026</title>
         <meta
           name="description"
-          content="Become a NESA-Africa 2025 Ambassador. Contribute your skills to achieving Education for All across Africa."
+          content="Become a NESA-Africa 2026 Ambassador. Contribute your skills to achieving Education for All across Africa."
         />
       </Helmet>
 
@@ -138,7 +138,7 @@ export default function Ambassadors() {
             >
               <Badge className="mb-4 bg-gold/20 text-gold border-gold/30 px-4 py-1.5">
                 <Globe className="h-4 w-4 mr-2" />
-                NESA-Africa 2025
+                NESA-Africa 2026
               </Badge>
               
               <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6">
@@ -150,7 +150,7 @@ export default function Ambassadors() {
               </p>
               
               <p className="text-lg text-white/70 max-w-3xl mx-auto mb-10 leading-relaxed">
-                Become part of a powerful movement transforming education in Africa. As a NESA-Africa 2025 Ambassador, 
+                Become part of a powerful movement transforming education in Africa. As a NESA-Africa 2026 Ambassador, 
                 you are not just a representative — you are a <span className="text-gold font-semibold">changemaker</span>. 
                 Whether you're in Africa or the diaspora, your voice and effort can help drive continental impact through 
                 community engagement, advocacy, project promotion, and digital campaigns.

@@ -1,5 +1,5 @@
 /**
- * NESA-Africa 2025 — Red Flags & Enhanced Review Triggers
+ * NESA-Africa 2026 — Red Flags & Enhanced Review Triggers
  */
 
 export type RedFlagSeverity = "warning" | "critical" | "block";

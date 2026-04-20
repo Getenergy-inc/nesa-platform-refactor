@@ -1,5 +1,5 @@
 /**
- * NESA-Africa 2025 - Voting Governance Hooks
+ * NESA-Africa 2026 - Voting Governance Hooks
  * React Query hooks for voting, results, fraud detection, and admin functions
  */
 

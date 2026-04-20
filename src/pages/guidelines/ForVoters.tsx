@@ -159,8 +159,8 @@ export default function ForVoters() {
   return (
     <>
       <Helmet>
-        <title>For Voters - Decisions Guideline | NESA-Africa 2025</title>
-        <meta name="description" content="Learn how to vote for NESA-Africa 2025 nominees. Understand the voting process, earn AGC credits, and make informed decisions." />
+        <title>For Voters - Decisions Guideline | NESA-Africa 2026</title>
+        <meta name="description" content="Learn how to vote for NESA-Africa 2026 nominees. Understand the voting process, earn AGC credits, and make informed decisions." />
       </Helmet>
 
       <div className="min-h-screen bg-charcoal">
@@ -185,7 +185,7 @@ export default function ForVoters() {
               
               <p className="text-white/70 text-base md:text-lg mb-6">
                 Your vote shapes the future of African education. Learn how to participate
-                in the NESA-Africa 2025 public voting process.
+                in the NESA-Africa 2026 public voting process.
               </p>
 
               <Button asChild size="lg" className="bg-gold hover:bg-gold-dark text-charcoal font-semibold rounded-full px-8">

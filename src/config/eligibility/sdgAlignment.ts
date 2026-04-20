@@ -1,5 +1,5 @@
 /**
- * NESA-Africa 2025 — SDG 4 & AU Agenda 2063 Alignment
+ * NESA-Africa 2026 — SDG 4 & AU Agenda 2063 Alignment
  * Strategic mapping for all Super Categories
  */
 

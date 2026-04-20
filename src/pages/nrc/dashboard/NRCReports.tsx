@@ -87,7 +87,7 @@ function ReportsContent() {
       <div className="space-y-6">
         <div>
           <h1 className="text-xl font-bold font-display">Review Reports</h1>
-          <p className="text-xs text-muted-foreground">NESA Africa 2025 — Aggregated review metrics</p>
+          <p className="text-xs text-muted-foreground">NESA Africa 2026 — Aggregated review metrics</p>
         </div>
 
         {/* Summary Cards */}

@@ -16,7 +16,7 @@ export function CVOMessage() {
         <blockquote className="text-sm md:text-base text-white/90 leading-relaxed px-2">
           <span>
             Welcome to{" "}
-            <span className="text-gold font-semibold">NESA-Africa 2025</span>
+            <span className="text-gold font-semibold">NESA-Africa 2026</span>
             —a pan-African celebration of educational transformation, social impact, and legacy.
           </span>
           <span className="block mt-2">

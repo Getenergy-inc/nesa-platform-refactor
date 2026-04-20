@@ -27,7 +27,7 @@ export default function RebuildHubPage() {
         <title>Rebuild My School Africa | EduAid-Africa Post-Award Legacy</title>
         <meta
           name="description"
-          content="The official post-award legacy project of NESA-Africa 2025. Nominate special needs schools for EduAid-Africa intervention — governed by SCEF Regional BOD."
+          content="The official post-award legacy project of NESA-Africa 2026. Nominate special needs schools for EduAid-Africa intervention — governed by SCEF Regional BOD."
         />
       </Helmet>
 

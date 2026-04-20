@@ -232,7 +232,7 @@ export default function NomineeProfile() {
                       </div>
                       <div className="flex items-center gap-1.5">
                         <Calendar className="w-4 h-4 text-gold/50" />
-                        <span>2025 Season</span>
+                        <span>2026 Season</span>
                       </div>
                     </div>
                   </div>

@@ -144,14 +144,14 @@ export default function Categories() {
       label: "Gold Special 2025",
       icon: <Star className="h-4 w-4" />,
       categories: groups.goldSpecial,
-      subtitle: "Gold Special Recognition — 2025 Edition — Cultural impact recognition",
+      subtitle: "Gold Special Recognition — 2026 Edition — Cultural impact recognition",
     },
     {
       key: "lifetime",
       label: "Lifetime",
       icon: <Crown className="h-4 w-4" />,
       categories: groups.lifetime,
-      subtitle: "Africa Education Icon — Continental honour (2005–2025)",
+      subtitle: "Africa Education Icon — Continental honour (2006–2026)",
     },
     {
       key: "nigeria",
@@ -182,7 +182,7 @@ export default function Categories() {
   return (
     <>
       <Helmet>
-        <title>{`Award Categories | ${currentEdition?.name || 'NESA-Africa 2025'}`}</title>
+        <title>{`Award Categories | ${currentEdition?.name || 'NESA-Africa 2026'}`}</title>
         <meta name="description" content="Explore all NESA-Africa award categories across Blue Garnet, Platinum, Gold Special Recognition, Lifetime Achievement, and Nigeria-focused categories." />
       </Helmet>
 

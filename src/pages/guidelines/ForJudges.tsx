@@ -203,8 +203,8 @@ export default function ForJudges() {
   return (
     <>
       <Helmet>
-        <title>For Judges - Decisions Guideline | NESA-Africa 2025</title>
-        <meta name="description" content="Complete judging criteria and guidelines for NESA-Africa 2025 jury members. 20-point scoring rubrics, weighted calculations, and integrity protocols." />
+        <title>For Judges - Decisions Guideline | NESA-Africa 2026</title>
+        <meta name="description" content="Complete judging criteria and guidelines for NESA-Africa 2026 jury members. 20-point scoring rubrics, weighted calculations, and integrity protocols." />
       </Helmet>
 
       <div className="min-h-screen bg-charcoal">

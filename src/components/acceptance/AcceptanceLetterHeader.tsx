@@ -23,7 +23,7 @@ export function AcceptanceLetterHeader({ nomineeName, chapterName, region }: Acc
           <span>Official Nomination Letter</span>
         </div>
         <h1 className="text-2xl md:text-3xl font-display font-bold">
-          NESA-Africa 2025
+          NESA-Africa 2026
         </h1>
         <p className="text-muted-foreground">
           New Education Standard Awards Africa

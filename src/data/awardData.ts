@@ -360,10 +360,10 @@ export const categories: Category[] = [
   },
 
   // =========================================================================
-  // CATEGORY 17 — AFRICA EDUCATION ICON AWARD (2005–2025)
+  // CATEGORY 17 — AFRICA EDUCATION ICON AWARD (2006–2026)
   // =========================================================================
   {
-    title: "Africa Education Icon Award (2005–2025)",
+    title: "Africa Education Icon Award (2006–2026)",
     description: "Lifetime achievement recognition for transformational leaders in African education",
     subCategories: [
       { title: "Africa Education Philanthropy Icon of the Decade", description: "Philanthropists with lifetime educational impact", nominees: [] },

@@ -10,7 +10,7 @@ const PROMO_VIDEOS = [
   },
   {
     id: "aP0SskrfioI",
-    title: "Meet the Judges – Season 2025",
+    title: "Meet the Judges – Season 2026",
     description: "Get to know the distinguished panel behind the awards.",
   },
 ];

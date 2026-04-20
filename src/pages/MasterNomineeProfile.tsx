@@ -120,7 +120,7 @@ export default function MasterNomineeProfile() {
                         </div>
                       )}
                       <div className="flex items-center gap-1.5">
-                        <Calendar className="w-4 h-4 text-gold/50" />2025 Season
+                        <Calendar className="w-4 h-4 text-gold/50" />2026 Season
                       </div>
                     </div>
                   </div>

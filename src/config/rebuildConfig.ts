@@ -107,7 +107,7 @@ export const REBUILD_FUND_FLOW = [
 
 export const REBUILD_BADGES = [
   "EduAid Africa • Service",
-  "NESA-Africa 2025 • Post-Award Legacy Project",
+  "NESA-Africa 2026 • Post-Award Legacy Project",
   "Governed by SCEF Regional BOD",
 ] as const;
 

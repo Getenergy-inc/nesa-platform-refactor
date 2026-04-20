@@ -1,5 +1,5 @@
 /**
- * NESA-Africa 2025 - Voting Governance Types
+ * NESA-Africa 2026 - Voting Governance Types
  * Types for contests, results, fraud detection, and admin dashboard
  */
 

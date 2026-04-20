@@ -1,5 +1,5 @@
 /**
- * NESA-Africa 2025 — Super Category–Specific Checklists
+ * NESA-Africa 2026 — Super Category–Specific Checklists
  */
 
 export type SuperCategory = "blue_garnet_icon" | "blue_garnet_gold" | "platinum";

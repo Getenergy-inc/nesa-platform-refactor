@@ -1,6 +1,6 @@
 /**
  * NRC Automation Hooks
- * NESA-Africa 2025 - Enhanced Data Fetching
+ * NESA-Africa 2026 - Enhanced Data Fetching
  */
 
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";

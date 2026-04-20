@@ -1,5 +1,5 @@
 /**
- * NESA-Africa 2025 — Judging Configuration
+ * NESA-Africa 2026 — Judging Configuration
  * Central export for all judging-related configs
  */
 

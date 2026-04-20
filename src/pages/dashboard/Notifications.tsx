@@ -53,7 +53,7 @@ const MOCK_NOTIFICATIONS: Notification[] = [
     id: "5",
     type: "event",
     title: "Upcoming Gala",
-    message: "The NESA-Africa 2025 Awards Gala is scheduled for September. Early bird tickets are now available.",
+    message: "The NESA-Africa 2026 Awards Gala is scheduled for September. Early bird tickets are now available.",
     time: "1 week ago",
     read: true,
   },

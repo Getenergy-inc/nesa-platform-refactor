@@ -155,8 +155,8 @@ export default function ForNominators() {
   return (
     <>
       <Helmet>
-        <title>For Nominators - Guidelines | NESA-Africa 2025</title>
-        <meta name="description" content="Learn how to nominate education champions for NESA-Africa 2025 awards. Step-by-step guide, ethical guidelines, and FAQs." />
+        <title>For Nominators - Guidelines | NESA-Africa 2026</title>
+        <meta name="description" content="Learn how to nominate education champions for NESA-Africa 2026 awards. Step-by-step guide, ethical guidelines, and FAQs." />
       </Helmet>
 
       <div className="min-h-screen bg-charcoal">

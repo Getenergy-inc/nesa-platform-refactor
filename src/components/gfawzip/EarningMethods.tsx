@@ -23,7 +23,7 @@ export function EarningMethods() {
         <div className="max-w-4xl mx-auto">
           <div className="text-center mb-8">
             <Badge className="mb-4 bg-gold/20 text-gold border-gold/30 font-semibold">
-              GFAWzip for NESA-Africa 2025
+              GFAWzip for NESA-Africa 2026
             </Badge>
             <h2 className="text-3xl font-display font-bold text-foreground mb-2 flex items-center justify-center gap-3">
               <Coins className="h-8 w-8 text-gold" />

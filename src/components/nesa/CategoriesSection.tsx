@@ -164,7 +164,7 @@ export function CategoriesSection() {
 
         {/* ═══ GROUP 1: LIFETIME — Icon Award ═══ */}
         <motion.div className="mb-16" initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }}>
-          <TierGroupHeader icon={Crown} title="Africa Education Icon — Lifetime Achievement" subtitle="Jury selection only · 2005–2025" count={groups.lifetime.length} color="bg-purple-600" />
+          <TierGroupHeader icon={Crown} title="Africa Education Icon — Lifetime Achievement" subtitle="Jury selection only · 2006–2026" count={groups.lifetime.length} color="bg-purple-600" />
           <div className="grid sm:grid-cols-1 lg:grid-cols-2 gap-5 max-w-3xl">
             {groups.lifetime.slice(0, 3).map((cat, i) => (
               <motion.div key={cat.id} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.04 }} viewport={{ once: true }}>
@@ -222,10 +222,10 @@ export function CategoriesSection() {
           </div>
         </motion.div>
 
-        {/* ═══ GROUP 4: GOLD SPECIAL RECOGNITION — 2025 Edition ═══ */}
+        {/* ═══ GROUP 4: GOLD SPECIAL RECOGNITION — 2026 Edition ═══ */}
         {groups.goldSpecial.length > 0 && (
           <motion.div className="mb-10" initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }}>
-            <TierGroupHeader icon={Star} title="Gold Special Recognition — 2025 Edition" subtitle="Cultural impact recognition" count={groups.goldSpecial.length} color="bg-yellow-600" />
+            <TierGroupHeader icon={Star} title="Gold Special Recognition — 2026 Edition" subtitle="Cultural impact recognition" count={groups.goldSpecial.length} color="bg-yellow-600" />
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
               {groups.goldSpecial.map((cat, i) => (
                 <motion.div key={cat.id} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.04 }} viewport={{ once: true }}>

@@ -97,7 +97,7 @@ export function CVOMessageSection() {
                 
                 <blockquote className="relative z-10 text-xl md:text-2xl lg:text-3xl text-white/95 leading-relaxed font-light">
                   <span className="text-gold font-display font-semibold">"</span>
-                  Welcome to NESA-Africa 2025—a pan-African celebration of{" "}
+                  Welcome to NESA-Africa 2026—a pan-African celebration of{" "}
                   <span className="text-gold font-medium">educational transformation</span>,{" "}
                   <span className="text-gold font-medium">social impact</span>, and{" "}
                   <span className="text-gold font-medium">legacy</span>. Together, aligned with{" "}

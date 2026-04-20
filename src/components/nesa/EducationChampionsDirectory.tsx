@@ -47,7 +47,7 @@ const SPECIAL_RECOGNITION = [
   {
     id: "icon",
     title: "Lifetime Achievement",
-    subtitle: "Africa Education Icon (2005–2025)",
+    subtitle: "Africa Education Icon (2006–2026)",
     description: "10+ years of sustained impact. Expert-selected.",
     tier: "icon" as AwardTier,
     icon: Crown,

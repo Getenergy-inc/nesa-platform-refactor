@@ -16,7 +16,7 @@ export default function NigeriaChapterTrack() {
         <title>Nigeria Host Chapter | NESA-Africa — West Africa Region</title>
         <meta
           name="description"
-          content="Nigeria Host Chapter for NESA-Africa 2025. Lagos 2026 Gala, national participation, ticketing, and livestream."
+          content="Nigeria Host Chapter for NESA-Africa 2026. Lagos 2026 Gala, national participation, ticketing, and livestream."
         />
       </Helmet>
 

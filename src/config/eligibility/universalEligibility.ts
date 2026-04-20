@@ -1,5 +1,5 @@
 /**
- * NESA-Africa 2025 — Universal Eligibility Criteria
+ * NESA-Africa 2026 — Universal Eligibility Criteria
  * Gate = 100% PASS required (fail any = ineligible; incomplete = cure window 48–72h)
  */
 

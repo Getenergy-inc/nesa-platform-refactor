@@ -163,7 +163,7 @@ export function FintechLinksGrid() {
         <div className="max-w-5xl mx-auto">
           <div className="text-center mb-10">
             <Badge className="mb-4 bg-gold/20 text-gold border-gold/30 font-semibold">
-              GFAWzip for NESA-Africa 2025 — Earn AfriGold Coins
+              GFAWzip for NESA-Africa 2026 — Earn AfriGold Coins
             </Badge>
             <h2 className="text-3xl font-display font-bold text-foreground mb-4">
               Available Payment Methods

@@ -180,7 +180,7 @@ export function NRCDashboardLayout({ children }: NRCDashboardLayoutProps) {
               <Award className="h-5 w-5 text-primary" />
               <div>
                 <h1 className="text-sm font-bold">NRC Scoring Dashboard</h1>
-                <p className="text-[10px] text-muted-foreground">NESA Africa 2025</p>
+                <p className="text-[10px] text-muted-foreground">NESA Africa 2026</p>
               </div>
             </div>
 
