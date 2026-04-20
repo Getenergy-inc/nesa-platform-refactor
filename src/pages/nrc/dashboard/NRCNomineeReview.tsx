@@ -24,7 +24,6 @@ import {
 import { getMasterNomineeById, type MasterNominee } from "@/lib/nomineeMasterData";
 import { generateEnhancedBiography } from "@/lib/nomineeStoryGenerator";
 import { calculateEDIScorecard } from "@/lib/ediScoring";
-import { useSeason } from "@/contexts/SeasonContext";
 import { toast } from "sonner";
 
 type CheckStatus = "yes" | "no" | "clarification" | "pending";
@@ -50,24 +49,17 @@ const SCORING_CRITERIA = [
   { id: "integrity", label: "Reputational Integrity", max: 10 },
 ];
 
-// Build mock document dates relative to the active season's NRC review window
-// (NRC review runs ~May 15 – Jun 10 of the award year per the official timeline)
-function buildMockDocs(awardYear: number) {
-  return [
-    { name: "nomination_form.pdf",      date: `${awardYear}-05-15`, status: "verified" as const },
-    { name: "evidence_portfolio.pdf",   date: `${awardYear}-05-22`, status: "pending"  as const },
-    { name: "recommendation_letter.pdf",date: `${awardYear}-05-28`, status: "verified" as const },
-    { name: `impact_report_${awardYear - 1}.pdf`, date: `${awardYear}-06-05`, status: "flagged" as const },
-  ];
-}
+const MOCK_DOCS = [
+  { name: "nomination_form.pdf", date: "2025-02-15", status: "verified" as const },
+  { name: "evidence_portfolio.pdf", date: "2025-02-18", status: "pending" as const },
+  { name: "recommendation_letter.pdf", date: "2025-02-20", status: "verified" as const },
+  { name: "impact_report_2024.pdf", date: "2025-03-01", status: "flagged" as const },
+];
 
 function ReviewContent() {
   const { id } = useParams<{ id: string }>();
-  const { currentEdition } = useSeason();
-  const awardYear = currentEdition.displayYear;
   const nominee = useMemo(() => getMasterNomineeById(Number(id)), [id]);
-  const mockDocs = useMemo(() => buildMockDocs(awardYear), [awardYear]);
-
+  
   const [checklist, setChecklist] = useState<Record<string, CheckStatus>>(
     Object.fromEntries(CHECKLIST_ITEMS.map(item => [item.id, "pending"]))
   );
@@ -209,7 +201,7 @@ function ReviewContent() {
               </CardHeader>
               <CardContent>
                 <div className="space-y-2">
-                  {mockDocs.map((doc, i) => (
+                  {MOCK_DOCS.map((doc, i) => (
                     <div key={i} className="flex items-center gap-3 rounded-lg border border-[hsl(var(--gold)/0.06)] p-3">
                       <FileText className="h-4 w-4 text-muted-foreground shrink-0" />
                       <div className="flex-1 min-w-0">
@@ -326,8 +318,8 @@ function ReviewContent() {
                     <span className="font-medium text-amber-400">72 hrs</span>
                   </div>
                   <div className="flex justify-between">
-                    <span className="text-muted-foreground">Season</span>
-                    <span className="font-medium">{awardYear}</span>
+                    <span className="text-muted-foreground">Year</span>
+                    <span className="font-medium">2025</span>
                   </div>
                 </div>
               </CardContent>

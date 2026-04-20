@@ -122,7 +122,7 @@ export default function CertificateVerify() {
               <div className="relative flex-1">
                 <QrCode className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-ivory/40" />
                 <Input
-                  placeholder="Enter verification code (e.g., NESA-2026-XXXX)"
+                  placeholder="Enter verification code (e.g., NESA-2025-XXXX)"
                   value={inputCode}
                   onChange={(e) => setInputCode(e.target.value.toUpperCase())}
                   className="pl-10 bg-charcoal-light border-gold/20 text-ivory placeholder:text-ivory/40 focus:border-gold font-mono tracking-wider"

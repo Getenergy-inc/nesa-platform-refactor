@@ -428,7 +428,7 @@ export default function NomineeProfile() {
                     { label: "Pathway", value: pathway },
                     { label: "Region", value: nominee.regionName || "—" },
                     { label: "Country", value: nominee.country || "—" },
-                    { label: "Season", value: "2026" },
+                    { label: "Season", value: "2025" },
                     { label: "Status", value: "Existing Nominee" },
                     { label: "Re-nominations", value: String(renominationCount) },
                   ].map(item => (

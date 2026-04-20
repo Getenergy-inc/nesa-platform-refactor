@@ -69,7 +69,7 @@ export default function MasterNomineeProfile() {
   return (
     <>
       <Helmet>
-        <title>{nominee.name} — 2026 NESA Africa Nominee</title>
+        <title>{nominee.name} — 2025 NESA Africa Nominee</title>
         <meta name="description" content={`${nominee.name} — Nominated for ${nominee.subcategory}. ${nominee.achievement?.slice(0, 120)}`} />
       </Helmet>
 
@@ -282,7 +282,7 @@ export default function MasterNomineeProfile() {
                     { label: "Pathway", value: nominee.pathway },
                     { label: "Region", value: nominee.region },
                     { label: "Country", value: nominee.country || "N/A" },
-                    { label: "Season", value: "2026" },
+                    { label: "Season", value: "2025" },
                     { label: "Status", value: "Existing Nominee" },
                   ].map(item => (
                     <div key={item.label} className="flex justify-between items-center">

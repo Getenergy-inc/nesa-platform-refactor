@@ -14,7 +14,7 @@ export function NominationPathSection() {
       icon: Award,
       badge: "Lifetime Achievement",
       title: "Africa Icon Blue Garnet Award",
-      period: `2006–${currentEdition.displayYear}`,
+      period: `2005–${currentEdition.displayYear}`,
       description: "Reserved for lifetime achievement. Nominees must have 10+ years of institutional achievements.",
       bullets: [
         "Institutional Achievements",

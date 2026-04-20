@@ -189,7 +189,7 @@ export default function NomineeAccept() {
             <p className="text-muted-foreground leading-relaxed">
               You have been nominated for the{" "}
               <strong className="text-foreground">
-                New Education Standard Awards Africa (NESA-Africa) 2026
+                New Education Standard Awards Africa (NESA-Africa) 2025
               </strong>
               , under the following category(ies):
             </p>
