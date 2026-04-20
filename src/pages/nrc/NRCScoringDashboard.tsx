@@ -81,7 +81,7 @@ function NRCScoringContent() {
       <div className="space-y-6">
         <div>
           <h2 className="font-display text-2xl font-bold">Nominee Evaluation Dashboard</h2>
-          <p className="text-muted-foreground text-sm">Review, score, and process 2025 nominee evaluations</p>
+          <p className="text-muted-foreground text-sm">Review, score, and process 2026 nominee evaluations</p>
         </div>
 
         {/* Pipeline Stats */}
