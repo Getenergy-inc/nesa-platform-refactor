@@ -22,13 +22,17 @@ export function CountdownSection() {
   const { currentEdition, getOpenStage } = useSeason();
   const openStage = getOpenStage();
 
-  // Determine the next key date to count down to
+  // Determine the next key date to count down to (NESA 2026 milestones)
   const now = new Date();
+  const y = currentEdition.displayYear;
   const dates = [
-    { date: currentEdition.nominationsClose, label: "Nominations Close", icon: Trophy, stage: "nominations" },
-    { date: currentEdition.votingOpen, label: "Voting Opens", icon: Vote, stage: "public_voting" },
-    { date: currentEdition.votingClose, label: "Voting Closes", icon: Vote, stage: "public_voting" },
-    { date: currentEdition.ceremonyDate, label: "Grand Gala", icon: Trophy, stage: "ceremony" },
+    { date: `${y}-06-11T18:00:00`, label: "Platinum Recognition Show", icon: Trophy, stage: "recognition" },
+    { date: `${y}-06-25T18:00:00`, label: "Africa Education Icon Show", icon: Trophy, stage: "recognition" },
+    { date: `${y}-07-13T00:00:00`, label: "Gold Voting Opens", icon: Vote, stage: "public_voting" },
+    { date: `${y}-09-25T23:59:59`, label: "Gold Voting Closes", icon: Vote, stage: "public_voting" },
+    { date: `${y}-10-01T18:00:00`, label: "Gold Winners Show", icon: Trophy, stage: "results" },
+    { date: `${y}-10-02T00:00:00`, label: "Blue Garnet Voting Opens", icon: Vote, stage: "jury_scoring" },
+    { date: `${y}-10-22T18:00:00`, label: "Blue Garnet Awards Gala", icon: Trophy, stage: "ceremony" },
   ];
 
   // Pick first future date
