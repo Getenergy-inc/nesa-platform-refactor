@@ -1,5 +1,5 @@
 /**
- * NESA-Africa 2025 - Voting Governance API Client
+ * NESA-Africa 2026 - Voting Governance API Client
  * Public voting, admin controls, fraud detection, results computation
  */
 

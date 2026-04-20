@@ -1,5 +1,5 @@
 /**
- * NESA-Africa 2025 — Eligibility & Screening Configuration
+ * NESA-Africa 2026 — Eligibility & Screening Configuration
  * Central export for all eligibility-related configs
  * 
  * Aligned with:

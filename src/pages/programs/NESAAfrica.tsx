@@ -39,12 +39,12 @@ export default function NESAAfrica() {
   return (
     <>
       <Helmet>
-        <title>NESA-Africa 2025 | New Education Standard Award Africa</title>
+        <title>NESA-Africa 2026 | New Education Standard Award Africa</title>
         <meta
           name="description"
-          content="Honoring Africa's Education Changemakers. NESA-Africa 2025 celebrates the real changemakers shaping the future of education across Africa."
+          content="Honoring Africa's Education Changemakers. NESA-Africa 2026 celebrates the real changemakers shaping the future of education across Africa."
         />
-        <meta property="og:title" content="NESA-Africa 2025 | New Education Standard Award Africa" />
+        <meta property="og:title" content="NESA-Africa 2026 | New Education Standard Award Africa" />
         <meta property="og:description" content="Honoring Africa's Education Changemakers across 10 regions." />
         <meta property="og:type" content="website" />
         <link rel="canonical" href="https://nesa.africa" />

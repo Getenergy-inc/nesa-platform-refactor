@@ -101,7 +101,7 @@ export function generateEnhancedBiography(nominee: MasterNominee): EnhancedBiogr
       nomineeId: `NESA-2025-${String(nominee.id).padStart(4, "0")}`,
     },
     contributionNarrative: {
-      title: `Contribution to African Education (2005–2025)`,
+      title: `Contribution to African Education (2006–2026)`,
       paragraphs,
     },
     impactHighlights: highlights,

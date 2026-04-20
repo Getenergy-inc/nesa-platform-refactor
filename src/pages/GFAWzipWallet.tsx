@@ -53,7 +53,7 @@ export default function GFAWzipWallet() {
               {/* Left Content */}
               <div className="text-center lg:text-left">
                 <Badge className="mb-4 bg-gold/20 text-gold border-gold/30 font-semibold">
-                  GFAWzip for NESA-Africa 2025
+                  GFAWzip for NESA-Africa 2026
                 </Badge>
                 
                 {/* GFA Logo Prominent Display */}
@@ -78,7 +78,7 @@ export default function GFAWzipWallet() {
                     Earn AfriGold Coins (AGC)
                   </p>
                   <p className="text-sm text-muted-foreground mt-1">
-                    Every $1 spent = 5 AGC voting credits for NESA-Africa 2025
+                    Every $1 spent = 5 AGC voting credits for NESA-Africa 2026
                   </p>
                 </div>
                 
@@ -338,7 +338,7 @@ export default function GFAWzipWallet() {
           <div className="container mx-auto px-4">
             <div className="max-w-2xl mx-auto text-center">
               <Badge className="mb-4 bg-gold/20 text-gold border-gold/30 font-semibold">
-                GFAWzip for NESA-Africa 2025
+                GFAWzip for NESA-Africa 2026
               </Badge>
               <h2 className="text-2xl font-display font-bold text-foreground mb-2">
                 Ready to Get Started?

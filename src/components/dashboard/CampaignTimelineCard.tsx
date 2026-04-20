@@ -78,7 +78,7 @@ export function CampaignTimelineCard() {
     <div className="rounded-xl border border-white/5 bg-[hsl(30_8%_8%)] p-5 md:p-6">
       <h3 className="text-sm font-semibold text-white/80 flex items-center gap-2 mb-4">
         <Calendar className="h-4 w-4 text-gold" />
-        Campaign Timeline — NESA 2025
+        Campaign Timeline — NESA 2026
       </h3>
       <div className="space-y-3">
         {campaigns.map((campaign) => {

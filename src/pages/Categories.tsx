@@ -31,7 +31,7 @@ const scopeStyles: Record<string, { label: string; className: string }> = {
 const tierBadgeStyles: Record<string, { label: string; className: string }> = {
   "blue-garnet": { label: "Blue Garnet", className: "border-blue-500/30 text-blue-400 bg-blue-500/10" },
   platinum: { label: "Platinum", className: "border-slate-400/30 text-slate-300 bg-slate-500/10" },
-  "gold-special": { label: "Gold Special 2025", className: "border-yellow-500/30 text-yellow-400 bg-yellow-500/10" },
+  "gold-special": { label: "Gold Special 2026", className: "border-yellow-500/30 text-yellow-400 bg-yellow-500/10" },
   icon: { label: "Lifetime", className: "border-purple-500/30 text-purple-400 bg-purple-500/10" },
 };
 
@@ -141,17 +141,17 @@ export default function Categories() {
     },
     {
       key: "gold-special",
-      label: "Gold Special 2025",
+      label: "Gold Special 2026",
       icon: <Star className="h-4 w-4" />,
       categories: groups.goldSpecial,
-      subtitle: "Gold Special Recognition — 2025 Edition — Cultural impact recognition",
+      subtitle: "Gold Special Recognition — 2026 Edition — Cultural impact recognition",
     },
     {
       key: "lifetime",
       label: "Lifetime",
       icon: <Crown className="h-4 w-4" />,
       categories: groups.lifetime,
-      subtitle: "Africa Education Icon — Continental honour (2005–2025)",
+      subtitle: "Africa Education Icon — Continental honour (2006–2026)",
     },
     {
       key: "nigeria",
@@ -182,7 +182,7 @@ export default function Categories() {
   return (
     <>
       <Helmet>
-        <title>{`Award Categories | ${currentEdition?.name || 'NESA-Africa 2025'}`}</title>
+        <title>{`Award Categories | ${currentEdition?.name || 'NESA-Africa 2026'}`}</title>
         <meta name="description" content="Explore all NESA-Africa award categories across Blue Garnet, Platinum, Gold Special Recognition, Lifetime Achievement, and Nigeria-focused categories." />
       </Helmet>
 

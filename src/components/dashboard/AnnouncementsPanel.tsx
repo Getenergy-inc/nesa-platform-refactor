@@ -20,7 +20,7 @@ const announcements = [
   },
   {
     id: 3,
-    title: "New: Gold Special Recognition 2025",
+    title: "New: Gold Special Recognition 2026",
     date: "Sports, Music & Social Media",
     highlight: false,
   },

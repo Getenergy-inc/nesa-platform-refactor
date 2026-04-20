@@ -1,11 +1,11 @@
 /**
  * EDI Matrix & Guidelines Page
  * 
- * The central integrity feature of NESA-Africa 2025.
+ * The central integrity feature of NESA-Africa 2026.
  * Aligned with the 4-tier award system:
  * - Blue Garnet (Competitive Excellence)
  * - Platinum (Institutional Leadership)
- * - Gold Special (2025 Cultural Impact)
+ * - Gold Special (2026 Cultural Impact)
  * - Lifetime (Africa Education Icon)
  */
 
@@ -143,7 +143,7 @@ const PLATINUM_EDI = {
 
 const LIFETIME_EDI = {
   title: "Africa Education Icon — Lifetime Achievement",
-  subtitle: "1 category · 3 subcategories · Jury selection only (2005–2025)",
+  subtitle: "1 category · 3 subcategories · Jury selection only (2006–2026)",
   description: "Continental honour recognising transformational leaders with 10+ years of sustained educational impact. Expert-selected by independent jury panel. 9 Icons total: 3 Residents, 3 Diaspora, 3 Friends of Africa.",
   criteria: [
     {
@@ -175,7 +175,7 @@ const LIFETIME_EDI = {
 };
 
 const GOLD_SPECIAL_EDI = {
-  title: "Gold Special Recognition — 2025 Edition",
+  title: "Gold Special Recognition — 2026 Edition",
   subtitle: "3 categories · Editorial selection · Cultural impact",
   description: "Cultural and influence impact recognition for Sports, Music, and Social Media education advocacy. Selected editorially based on public visibility and advocacy contribution.",
   evaluationPillars: [
@@ -320,8 +320,8 @@ export default function EDIMatrix() {
   return (
     <>
       <Helmet>
-        <title>EDI Matrix & Guidelines | NESA-Africa 2025</title>
-        <meta name="description" content="The Education Development Index (EDI) Matrix is the integrity backbone of NESA-Africa 2025, ensuring transparent and fair evaluation across all award tiers." />
+        <title>EDI Matrix & Guidelines | NESA-Africa 2026</title>
+        <meta name="description" content="The Education Development Index (EDI) Matrix is the integrity backbone of NESA-Africa 2026, ensuring transparent and fair evaluation across all award tiers." />
       </Helmet>
 
       <div className="min-h-screen bg-charcoal">
@@ -342,7 +342,7 @@ export default function EDIMatrix() {
               </Badge>
               
               <h1 className="font-display text-3xl md:text-5xl font-bold text-white mb-4">
-                NESA-Africa 2025 Education Development Index
+                NESA-Africa 2026 Education Development Index
                 <span className="block text-gold mt-2">(EDI) Matrix</span>
               </h1>
               
@@ -356,7 +356,7 @@ export default function EDIMatrix() {
                 {[
                   { label: "Blue Garnet", desc: "Competitive Excellence", icon: "🏆", color: "border-blue-500/40 bg-blue-500/10" },
                   { label: "Platinum", desc: "Institutional Leadership", icon: "💎", color: "border-slate-400/40 bg-slate-400/10" },
-                  { label: "Gold Special", desc: "2025 Cultural Impact", icon: "🥇", color: "border-yellow-500/40 bg-yellow-500/10" },
+                  { label: "Gold Special", desc: "2026 Cultural Impact", icon: "🥇", color: "border-yellow-500/40 bg-yellow-500/10" },
                   { label: "Lifetime", desc: "Icon Achievement", icon: "🏛", color: "border-purple-500/40 bg-purple-500/10" },
                 ].map((t) => (
                   <div key={t.label} className={`rounded-lg border ${t.color} p-3 text-center`}>
@@ -425,7 +425,7 @@ export default function EDIMatrix() {
                     </h4>
                     <p className="text-sm text-white/70">
                       All evidence must cover activities from <strong>January 2023 – September 2025</strong>.
-                      Lifetime Icon Award may include earlier contributions (2005–2025).
+                      Lifetime Icon Award may include earlier contributions (2006–2026).
                     </p>
                   </div>
                 </div>
@@ -526,7 +526,7 @@ export default function EDIMatrix() {
                   <CategoryList tierKey="platinum" />
                 </TierSection>
 
-                {/* ── GOLD SPECIAL (2025) ── */}
+                {/* ── GOLD SPECIAL (2026) ── */}
                 <TierSection
                   value="gold-special"
                   icon={Star}

@@ -34,7 +34,7 @@ export function NomineeEngagementHub({
     ? `${profileUrl}?ref=${referralCode}`
     : profileUrl;
 
-  const shareText = `I've been nominated for the NESA-Africa 2025 Excellence Awards! Support my journey by endorsing me: ${referralUrl}`;
+  const shareText = `I've been nominated for the NESA-Africa 2026 Excellence Awards! Support my journey by endorsing me: ${referralUrl}`;
 
   const handleCopy = async () => {
     try {

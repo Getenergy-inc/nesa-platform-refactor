@@ -103,7 +103,7 @@ function DashboardContent() {
           <div>
             <h1 className="text-2xl font-bold font-display">Dashboard Overview</h1>
             <p className="text-sm text-muted-foreground">
-              NESA Africa 2025 — Nomination Review Committee
+              NESA Africa 2026 — Nomination Review Committee
             </p>
           </div>
           <div className="flex gap-2">

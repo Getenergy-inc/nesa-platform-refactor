@@ -61,7 +61,7 @@ const impactStats = [
   { value: "5+2", label: "Regions + Diaspora + Friends", icon: Globe },
   { value: "27", label: "Expert Judges", icon: Building2 },
   { value: "17", label: "Award Categories", icon: Award },
-  { value: "20", label: "Years of Vision (2005–2025)", icon: Lightbulb },
+  { value: "20", label: "Years of Vision (2006–2026)", icon: Lightbulb },
 ];
 
 const awardTiers = [
@@ -83,7 +83,7 @@ const awardTiers = [
   },
   {
     title: "Gold Special Recognition",
-    subtitle: "2025 Cultural Impact Edition",
+    subtitle: "2026 Cultural Impact Edition",
     description: "Cultural and influence impact recognition for Sports, Music, and Social Media education advocacy. Editorially selected.",
     color: "from-yellow-400 to-amber-500",
     textColor: "text-yellow-400",
@@ -91,7 +91,7 @@ const awardTiers = [
   },
   {
     title: "Africa Education Icon",
-    subtitle: "Lifetime Achievement (2005–2025)",
+    subtitle: "Lifetime Achievement (2006–2026)",
     description: "Continental honour recognising transformational leaders with 10+ years of sustained educational impact. Jury selection only.",
     color: "from-purple-500 to-purple-700",
     textColor: "text-purple-400",

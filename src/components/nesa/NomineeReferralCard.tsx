@@ -36,12 +36,12 @@ export function NomineeReferralCard({
   };
 
   const handleShare = async () => {
-    const shareText = `Support ${nomineeName} in the NESA Africa Awards 2025! 🏆 Vote and help them win recognition for their contribution to education in Africa.`;
+    const shareText = `Support ${nomineeName} in the NESA Africa Awards 2026! 🏆 Vote and help them win recognition for their contribution to education in Africa.`;
     
     if (navigator.share) {
       try {
         await navigator.share({
-          title: `${nomineeName} - NESA Africa Awards 2025`,
+          title: `${nomineeName} - NESA Africa Awards 2026`,
           text: shareText,
           url: referralLink,
         });
@@ -54,12 +54,12 @@ export function NomineeReferralCard({
   };
 
   const handleShareToTwitter = () => {
-    const text = encodeURIComponent(`Support ${nomineeName} in the NESA Africa Awards 2025! 🏆 Vote now:`);
+    const text = encodeURIComponent(`Support ${nomineeName} in the NESA Africa Awards 2026! 🏆 Vote now:`);
     window.open(`https://twitter.com/intent/tweet?text=${text}&url=${encodeURIComponent(referralLink)}`, "_blank");
   };
 
   const handleShareToWhatsApp = () => {
-    const text = encodeURIComponent(`Support ${nomineeName} in the NESA Africa Awards 2025! 🏆 Vote and help them win: ${referralLink}`);
+    const text = encodeURIComponent(`Support ${nomineeName} in the NESA Africa Awards 2026! 🏆 Vote and help them win: ${referralLink}`);
     window.open(`https://wa.me/?text=${text}`, "_blank");
   };
 

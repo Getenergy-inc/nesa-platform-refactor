@@ -166,7 +166,7 @@ function ReviewContent() {
               <CardHeader className="pb-2">
                 <CardTitle className="text-sm font-display flex items-center gap-2">
                   <FileText className="h-4 w-4 text-primary" />
-                  Contribution to African Education (2005–2025)
+                  Contribution to African Education (2006–2026)
                 </CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">

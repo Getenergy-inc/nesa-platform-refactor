@@ -58,12 +58,12 @@ export function CampaignBanner() {
             {/* Badge */}
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gold/10 border border-gold/30 mb-6">
               <Award className="h-4 w-4 text-gold" />
-              <span className="text-sm font-medium text-gold">2025 Season Open</span>
+              <span className="text-sm font-medium text-gold">2026 Season Open</span>
             </div>
             
             {/* Headline */}
             <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4">
-              New Education Standard Award Africa 2025 —{" "}
+              New Education Standard Award Africa 2026 —{" "}
               <span className="text-gold">Nominations Open Now</span>
             </h2>
             

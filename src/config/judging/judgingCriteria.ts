@@ -1,5 +1,5 @@
 /**
- * NESA-Africa 2025 — Judging Criteria Configuration
+ * NESA-Africa 2026 — Judging Criteria Configuration
  * 20-point structured criteria for competitive award categories
  * Used by judges for 1-10 scoring
  */

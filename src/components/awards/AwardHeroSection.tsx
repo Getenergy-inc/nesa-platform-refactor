@@ -75,7 +75,7 @@ const variantStyles = {
 };
 
 export function AwardHeroSection({
-  seasonLabel = "NESA-Africa 2025 Awards",
+  seasonLabel = "NESA-Africa 2026 Awards",
   title,
   titleAccent,
   description,

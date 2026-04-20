@@ -73,10 +73,10 @@ export const CATEGORY_IMAGES: Record<string, string> = {
   // Category 16 - Diaspora Association Educational Impact
   "diaspora-education-impact": diasporaImg,
   
-  // Category 17 - Africa Education Icon Award (2005–2025)
+  // Category 17 - Africa Education Icon Award (2006–2026)
   "africa-education-icon-award": iconAwardImg,
 
-  // Gold Special Recognition — 2025 Edition
+  // Gold Special Recognition — 2026 Edition
   "africa-sports-education-impact": sportsNomineeImg,
   "africa-music-education-impact": musicNomineeImg,
   "africa-social-media-education-impact": socialNomineeImg,

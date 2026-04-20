@@ -171,7 +171,7 @@ export default function ForNominees() {
   return (
     <>
       <Helmet>
-        <title>For Nominees - Acceptance Guidelines | NESA-Africa 2025</title>
+        <title>For Nominees - Acceptance Guidelines | NESA-Africa 2026</title>
         <meta name="description" content="Understand your journey as a NESA-Africa nominee. Learn about NRC screening, acceptance process, and next steps for each award tier." />
       </Helmet>
 
@@ -197,7 +197,7 @@ export default function ForNominees() {
               
               <p className="text-white/70 text-base md:text-lg mb-6">
                 Congratulations on being nominated! Here's everything you need to know
-                about your journey as a NESA-Africa 2025 nominee.
+                about your journey as a NESA-Africa 2026 nominee.
               </p>
             </motion.div>
           </div>

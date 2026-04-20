@@ -259,7 +259,7 @@ export default function Rebuild() {
                 Five Regions, <span style={{ color: `hsl(42, 85%, 52%)` }}>Five Schools</span>
               </h2>
               <p className="max-w-xl mx-auto" style={{ color: `hsla(210, 20%, 90%, 0.6)` }}>
-                Schools will be nominated and voted on after the NESA-Africa 2025 ceremony. One winning school per region receives a full EduAid-Africa intervention.
+                Schools will be nominated and voted on after the NESA-Africa 2026 ceremony. One winning school per region receives a full EduAid-Africa intervention.
               </p>
             </div>
 
@@ -612,7 +612,7 @@ export default function Rebuild() {
                 style={{ color: `hsla(210, 20%, 90%, 0.6)` }}
               >
                 Whether as a donor, partner, or community nominator — your involvement helps transform
-                special needs education across Africa. Nominations open after the NESA-Africa 2025 ceremony.
+                special needs education across Africa. Nominations open after the NESA-Africa 2026 ceremony.
               </p>
 
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -638,7 +638,7 @@ export default function Rebuild() {
               </div>
 
               <p className="text-xs mt-10" style={{ color: `hsla(210, 20%, 90%, 0.3)` }}>
-                A post-award education social impact service of Santos Creations Educational Foundation • NESA-Africa 2025
+                A post-award education social impact service of Santos Creations Educational Foundation • NESA-Africa 2026
               </p>
             </motion.div>
           </div>

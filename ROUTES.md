@@ -6,11 +6,25 @@ This document describes all public routes in the NESA-Africa platform.
 
 | Route | Page | Description |
 |-------|------|-------------|
-| `/` | NESA Landing Page | Main landing page for NESA-Africa (flagship program) |
+| `/` | NESA Landing Page | Main landing page for NESA-Africa 2026 (flagship program) |
 | `/programs` | Programs Index | Overview of all SCEF programs |
-| `/programs/nesa-africa` | NESA-Africa Landing | Full NESA-Africa landing page with all sections |
+| `/programs/nesa-africa` | NESA-Africa Landing | Full NESA-Africa 2026 landing page |
+| `/about` | About | About NESA-Africa |
+| `/about/timeline` | Timeline | 2026 Season Programme Timeline |
+| `/about/vision-2035` | Vision 2035 | Strategic roadmap |
 | `/categories` | Award Categories | Browse all award categories and subcategories |
+| `/regions` | Regions | 10 regional zones across Africa + diaspora |
+| `/awards/icon` | Africa Education Icon | Lifetime achievement (2006–2026) |
+| `/awards/platinum` | Platinum | Institutional leadership |
+| `/awards/gold-special-recognition` | Gold Special Recognition | 2026 Edition cultural impact |
+| `/awards/blue-garnet` | Blue Garnet | Competitive excellence |
+| `/media/tv` | NESA Africa TV | Media engine |
+| `/eduaid` | EduAid Africa | Webinars, scholarships, school nominations |
+| `/rebuild` | Rebuild My School Africa | Post-award legacy project (Oct 2026 → Oct 2027) |
+| `/partners` | Partners / CSR | Sponsorship & CSR opportunities |
 | `/nominate` | Nomination Form | Submit a nomination (stage-gated) |
+| `/vote` | Vote | Public voting hub |
+| `/contact` | Contact | Contact form |
 | `/login` | Login | User authentication |
 | `/register` | Register | New user registration |
 

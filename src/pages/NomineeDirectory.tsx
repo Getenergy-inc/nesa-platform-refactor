@@ -54,7 +54,7 @@ export default function NomineeDirectory() {
     <>
       <Helmet>
         <title>2025 Nominee Directory | NESA Africa Awards</title>
-        <meta name="description" content="Explore NESA Africa 2025 Award nominees across 14 categories, 5 regions, and 3 pathways. Vote and support education champions across Africa." />
+        <meta name="description" content="Explore NESA Africa 2026 Award nominees across 14 categories, 5 regions, and 3 pathways. Vote and support education champions across Africa." />
       </Helmet>
 
       <div className="min-h-screen bg-charcoal">
@@ -70,7 +70,7 @@ export default function NomineeDirectory() {
                 </div>
                 <div className="flex gap-2">
                   <Badge className="bg-gold/10 text-gold border-gold/20 text-xs font-medium">
-                    2025 Season
+                    2026 Season
                   </Badge>
                   <Badge variant="outline" className="border-emerald-500/30 text-emerald-400 text-xs">
                     <Sparkles className="w-3 h-3 mr-1" />
@@ -206,7 +206,7 @@ export default function NomineeDirectory() {
             <p className="text-ivory/40 text-sm">
               Showing <span className="text-gold font-medium">{paginated.length}</span> of{" "}
               <span className="text-ivory/60">{filtered.length.toLocaleString()}</span> nominees
-              <span className="text-ivory/30 ml-2">• 2025 Season</span>
+              <span className="text-ivory/30 ml-2">• 2026 Season</span>
             </p>
           </div>
 

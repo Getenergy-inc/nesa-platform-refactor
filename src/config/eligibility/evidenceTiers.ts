@@ -1,5 +1,5 @@
 /**
- * NESA-Africa 2025 — Evidence Tiers
+ * NESA-Africa 2026 — Evidence Tiers
  * Used across all Super Categories for validation
  */
 

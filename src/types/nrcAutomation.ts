@@ -1,6 +1,6 @@
 /**
  * NRC Automation Types
- * NESA-Africa 2025 - Enhanced Type Definitions
+ * NESA-Africa 2026 - Enhanced Type Definitions
  */
 
 import type { NRCWorkflowStatus, AIRecommendation, NRCReviewDecision, NRCReviewerRole } from "@/config/nrcConfig";

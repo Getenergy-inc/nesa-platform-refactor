@@ -24,7 +24,7 @@ const REGION_STORIES: RegionStory[] = [
   {
     region: "Northern Africa",
     flag: "🇪🇬",
-    title: "Supporting NESA-Africa 2025",
+    title: "Supporting NESA-Africa 2026",
     description: "From the Sahara to the Mediterranean, connecting Africa through digital finance.",
     image: northernAfricanImage,
   },
@@ -43,7 +43,7 @@ export function RegionalShowcase() {
       <div className="container mx-auto px-4">
         <div className="text-center mb-12">
           <Badge className="mb-4 bg-gold/20 text-gold border-gold/30 font-semibold">
-            GFAWzip for NESA-Africa 2025
+            GFAWzip for NESA-Africa 2026
           </Badge>
           <h2 className="text-3xl font-display font-bold text-foreground mb-4">
             GFAWzip Connects All of Africa

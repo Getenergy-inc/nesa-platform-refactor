@@ -1,6 +1,6 @@
 /**
  * NRC (Nominee Research Corps) Configuration
- * NESA-Africa 2025 - Automated Verification System
+ * NESA-Africa 2026 - Automated Verification System
  */
 
 // =====================================================

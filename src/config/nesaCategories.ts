@@ -152,7 +152,7 @@ export const TIER_INFO: Record<AwardTier, {
   icon: {
     name: "Africa Education Icon",
     shortName: "Icon",
-    description: "Lifetime achievement — 1 category with 3 subcategories (2005–2025)",
+    description: "Lifetime achievement — 1 category with 3 subcategories (2006–2026)",
     color: "text-purple-600",
     bgColor: "bg-purple-100",
     borderColor: "border-purple-300",
@@ -162,12 +162,12 @@ export const TIER_INFO: Record<AwardTier, {
   "gold-special": {
     name: "Gold Special Recognition",
     shortName: "Gold Special",
-    description: "Cultural impact recognition for Sports, Music, and Social Media education advocacy (2025 Edition)",
+    description: "Cultural impact recognition for Sports, Music, and Social Media education advocacy (2026 Edition)",
     color: "text-yellow-600",
     bgColor: "bg-yellow-100",
     borderColor: "border-yellow-300",
     votingMethod: "Editorial Selection",
-    validity: "Annual (2025)",
+    validity: "Annual (2026)",
   },
 };
 
@@ -587,13 +587,13 @@ export const NESA_CATEGORIES: CategoryDefinition[] = [
   },
 
   // =========================================================================
-  // CATEGORY 17 — AFRICA EDUCATION ICON BLUE GARNET (2005–2025)
+  // CATEGORY 17 — AFRICA EDUCATION ICON BLUE GARNET (2006–2026)
   // Special Icon tier — 1 category with 3 subcategories
   // =========================================================================
   {
     id: "cat-17",
     slug: "africa-education-icon-award",
-    name: "Africa Education Icon Lifetime Achievement Award (2005–2025)",
+    name: "Africa Education Icon Lifetime Achievement Award (2006–2026)",
     shortName: "Africa Education Icon",
     description: "Continental honour recognising transformational leaders in African education",
     scope: "ICON",
@@ -610,7 +610,7 @@ export const NESA_CATEGORIES: CategoryDefinition[] = [
   },
 
   // =========================================================================
-  // GOLD SPECIAL RECOGNITION — 2025 EDITION
+  // GOLD SPECIAL RECOGNITION — 2026 EDITION
   // 3 standalone categories, not merged with Blue Garnet
   // =========================================================================
 
@@ -622,7 +622,7 @@ export const NESA_CATEGORIES: CategoryDefinition[] = [
     description: "Recognizing sportsmen and sportswomen championing education advocacy across Africa",
     scope: "AFRICA_REGIONAL",
     tierApplicability: { platinum: false, gold: false, blueGarnet: false, icon: false, goldSpecial: true },
-    selectionMethod: "Editorial Selection — Cultural Impact Recognition 2025",
+    selectionMethod: "Editorial Selection — Cultural Impact Recognition 2026",
     displayOrder: 101,
     iconName: "Users",
     isActive: true,
@@ -640,7 +640,7 @@ export const NESA_CATEGORIES: CategoryDefinition[] = [
     description: "Recognizing music artists championing education advocacy across Africa",
     scope: "AFRICA_REGIONAL",
     tierApplicability: { platinum: false, gold: false, blueGarnet: false, icon: false, goldSpecial: true },
-    selectionMethod: "Editorial Selection — Cultural Impact Recognition 2025",
+    selectionMethod: "Editorial Selection — Cultural Impact Recognition 2026",
     displayOrder: 102,
     iconName: "Palette",
     isActive: true,
@@ -657,7 +657,7 @@ export const NESA_CATEGORIES: CategoryDefinition[] = [
     description: "Recognizing social media influencers championing education advocacy across Africa",
     scope: "AFRICA_REGIONAL",
     tierApplicability: { platinum: false, gold: false, blueGarnet: false, icon: false, goldSpecial: true },
-    selectionMethod: "Editorial Selection — Cultural Impact Recognition 2025",
+    selectionMethod: "Editorial Selection — Cultural Impact Recognition 2026",
     displayOrder: 103,
     iconName: "Globe",
     isActive: true,
