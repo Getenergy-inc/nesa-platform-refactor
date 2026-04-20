@@ -63,6 +63,9 @@ export interface NavSection {
 // ============================================================================
 
 export const MAIN_NAV: NavItem[] = [
+  // ─────────────────────────────────────────────────────────
+  // ABOUT — Identity, mission, governance, timeline
+  // ─────────────────────────────────────────────────────────
   {
     label: "About",
     href: "/about",
@@ -71,125 +74,109 @@ export const MAIN_NAV: NavItem[] = [
       {
         label: "About NESA-Africa",
         href: "/about",
-        description: "Our mission and vision for education excellence",
+        description: "Continental recognition + impact platform",
+        icon: Info,
       },
       {
         label: "Vision 2035",
         href: "/about/vision-2035",
         description: "Strategic roadmap for Africa's education future",
-      },
-      {
-        label: "Governance & Firewalls",
-        href: "/about/governance",
-        description: "Integrity measures and accountability frameworks",
+        icon: Target,
       },
       {
         label: "Programme Timeline",
         href: "/about/timeline",
-        description: "Key dates and milestones for the current season",
+        description: "2026 Season — June to October journey",
+        icon: Calendar,
+        badge: "2026",
+      },
+      {
+        label: "Governance & Firewalls",
+        href: "/about/governance",
+        description: "Integrity measures and accountability",
+        icon: Shield,
+      },
+      {
+        label: "EDI Matrix & Guidelines",
+        href: "/guidelines/edi-matrix",
+        description: "The integrity backbone of evaluations",
+        icon: Shield,
       },
       {
         label: "SCEF Foundation",
         href: "/about/scef",
         description: "Santos Creations Educational Foundation",
+        icon: Building,
         external: true,
       },
     ],
   },
+
+  // ─────────────────────────────────────────────────────────
+  // PROGRAMS — Awards, Categories, Regions, EduAid, Rebuild
+  // ─────────────────────────────────────────────────────────
   {
-    label: "Awards",
-    href: "/awards",
+    label: "Programs",
+    href: "/programs",
     icon: Trophy,
     children: [
       {
+        label: "Award Categories",
+        href: "/categories",
+        description: "Browse all 17 award categories",
+        icon: Award,
+      },
+      {
         label: "Africa Education Icon",
         href: "/awards/icon",
-        description: "Lifetime achievement recognition",
+        description: "Lifetime achievement (2006–2026)",
         icon: Star,
       },
       {
-        label: "Blue Garnet Award",
-        href: "/awards/blue-garnet",
-        description: "Highest honour — 60% Jury / 40% Public",
-        icon: Trophy,
-      },
-      {
-        label: "Platinum Certificate",
+        label: "Platinum",
         href: "/awards/platinum",
-        description: "Baseline recognition for education service",
+        description: "Institutional leadership recognition",
         icon: Medal,
       },
       {
         label: "Gold Special Recognition",
         href: "/awards/gold-special-recognition",
         description: "Cultural impact — Sports, Music & Social Media",
-        icon: Medal,
+        icon: Star,
         badge: "2026",
       },
       {
-        label: "Gold Certificate",
-        href: "/awards/gold",
-        description: "Competitive public-voted recognition",
-        icon: Award,
+        label: "Blue Garnet",
+        href: "/awards/blue-garnet",
+        description: "Competitive excellence — 60% Jury / 40% Public",
+        icon: Trophy,
       },
       {
-        label: "Categories (Africa First)",
-        href: "/categories?view=africa",
-        description: "Africa Regional, International & Icon categories",
-        badge: "9 categories",
+        label: "Regions",
+        href: "/regions",
+        description: "10 regional zones across Africa + diaspora",
+        icon: Globe,
       },
       {
-        label: "Nigeria Categories",
-        href: "/categories?view=nigeria",
-        description: "Nigeria-specific award categories",
-        badge: "8 categories",
+        label: "EduAid Africa",
+        href: "/eduaid",
+        description: "Webinars, scholarships, school nominations",
+        icon: BookOpen,
       },
       {
-        label: "See Existing Nominees",
-        href: "/nominees",
-        description: "Browse currently listed nominees",
+        label: "Rebuild My School Africa",
+        href: "/rebuild",
+        description: "Post-award legacy project (Oct 2026 → Oct 2027)",
+        icon: Building,
       },
     ],
   },
+
+  // ─────────────────────────────────────────────────────────
+  // ENGAGE — Nominate, Vote, Partners, Tickets, Volunteer
+  // ─────────────────────────────────────────────────────────
   {
-    label: "Guidelines",
-    href: "/guidelines/edi-matrix",
-    icon: Shield,
-    children: [
-      {
-        label: "EDI Matrix & Guidelines",
-        href: "/guidelines/edi-matrix",
-        description: "The integrity backbone of NESA-Africa evaluations",
-        icon: Shield,
-      },
-      {
-        label: "For Nominators",
-        href: "/guidelines/nominators",
-        description: "Step-by-step nomination guide and ethical rules",
-        icon: FileCheck,
-      },
-      {
-        label: "For Nominees",
-        href: "/guidelines/nominees",
-        description: "Acceptance journey, NRC screening & next steps",
-        icon: Users,
-      },
-      {
-        label: "For Judges",
-        href: "/guidelines/judges",
-        description: "Scoring criteria, COI protocols & rubrics",
-        icon: Gavel,
-      },
-      {
-        label: "For Voters",
-        href: "/guidelines/voters",
-        description: "AGC voting system and ethical voting rules",
-        icon: Vote,
-      },
-    ],
-  },
-  {
-    label: "Get Involved",
+    label: "Engage",
     href: "/get-involved",
     icon: Users,
     children: [
@@ -201,61 +188,41 @@ export const MAIN_NAV: NavItem[] = [
         stageGated: "nominations",
       },
       {
-        label: "Judges",
-        href: "/judges",
-        description: "NESA-Africa Jury Panel",
-        icon: Gavel,
-        children: [
-          {
-            label: "Apply to be a Judge",
-            href: "/judgeapply",
-            description: "Submit your application to join the jury",
-            icon: FileCheck,
-          },
-          {
-            label: "Check Application Status",
-            href: "/judge-status",
-            description: "Track your judge application",
-            icon: Clock,
-          },
-          {
-            label: "Judge Login",
-            href: "/login?next=/judge",
-            description: "Sign in to the Judges Arena",
-            icon: Gavel,
-          },
-          {
-            label: "About Judges",
-            href: "/judges",
-            description: "Learn about the jury panel",
-          },
-        ],
-      },
-      {
-        label: "Sponsors",
-        href: "/partners",
-        description: "Sponsorship and partnership opportunities",
-        icon: Building,
+        label: "Vote",
+        href: "/vote",
+        description: "Cast your vote during voting windows",
+        icon: Vote,
+        stageGated: "public_voting",
       },
       {
         label: "Vote with AGC",
         href: "/vote-with-agc",
         description: "Vote using Afri Gold Coin credits",
         icon: Coins,
-        badge: "New",
       },
       {
-        label: "About AGC",
-        href: "/about-agc",
-        description: "Learn about Afri Gold Coin voting credits",
-        icon: Coins,
+        label: "Partners / CSR",
+        href: "/partners",
+        description: "Sponsorship & CSR for education",
+        icon: Building,
       },
       {
-        label: "Public Voting",
-        href: "/vote",
-        description: "Cast your vote for nominees",
-        icon: Vote,
-        stageGated: "public_voting",
+        label: "Buy Your Ticket",
+        href: "/tickets",
+        description: "Blue Garnet Awards Gala — Oct 22, 2026",
+        icon: Ticket,
+      },
+      {
+        label: "Apply as Ambassador",
+        href: "/ambassadors",
+        description: "Represent NESA-Africa in your region",
+        icon: UserPlus,
+      },
+      {
+        label: "Apply to be a Judge",
+        href: "/judgeapply",
+        description: "Join the 2026 NESA-Africa jury panel",
+        icon: Gavel,
       },
       {
         label: "Become a Volunteer",
@@ -264,38 +231,23 @@ export const MAIN_NAV: NavItem[] = [
         icon: Heart,
       },
       {
-        label: "Join the Local Chapters",
+        label: "Local Chapters",
         href: "/chapters",
         description: "Connect with your regional chapter",
         icon: Map,
       },
       {
-        label: "Shop Merchandise",
-        href: "/shop",
-        description: "Official NESA-Africa merchandise",
-        icon: ShoppingBag,
-      },
-      {
-        label: "Apply as an Ambassador",
-        href: "/ambassadors",
-        description: "Represent NESA-Africa in your region",
-        icon: UserPlus,
-      },
-      {
-        label: "Buy Your Ticket",
-        href: "/buy-your-ticket",
-        description: "Get tickets for the NESA-Africa Gala 2026",
-        icon: Ticket,
-      },
-      {
-        label: "GFAWzip Wallet",
-        href: "/gfawzip",
-        description: "Multi-currency payments via GetFinance.africa",
+        label: "Donate",
+        href: "/donate",
+        description: "Fund Africa's education transformation",
         icon: Wallet,
-        badge: "New",
       },
     ],
   },
+
+  // ─────────────────────────────────────────────────────────
+  // MEDIA — NESA Africa TV, Shows, Webinars, Gala, Press
+  // ─────────────────────────────────────────────────────────
   {
     label: "Media",
     href: "/media",
@@ -304,7 +256,7 @@ export const MAIN_NAV: NavItem[] = [
       {
         label: "NESA Africa TV",
         href: "/media/tv",
-        description: "Live and on-demand education content",
+        description: "Weekly media engine — interviews, stories, partner features",
         icon: Play,
         badge: "Live",
       },
@@ -312,57 +264,37 @@ export const MAIN_NAV: NavItem[] = [
         label: "Online Shows",
         href: "/media/shows",
         description: "Platinum, Icon, Gold & Blue Garnet shows",
-      },
-      {
-        label: "Webinar Hub",
-        href: "/media/webinars",
-        description: "Educational webinars and workshops",
+        icon: Tv,
       },
       {
         label: "Awards Gala",
         href: "/media/gala",
-        description: "Live broadcast of the annual ceremony",
+        description: "Live broadcast of the Blue Garnet Gala",
+        icon: Trophy,
+      },
+      {
+        label: "Webinar Hub",
+        href: "/media/webinars",
+        description: "Educational webinars and training sessions",
+        icon: BookOpen,
       },
       {
         label: "Press & News",
         href: "/press",
         description: "Latest news and media resources",
-      },
-    ],
-  },
-  {
-    label: "Donate",
-    href: "/donate",
-    icon: Wallet,
-  },
-  {
-    label: "Support",
-    href: "/support",
-    icon: Heart,
-    children: [
-      {
-        label: "EduAid-Africa",
-        href: "/eduaid",
-        description: "Direct student support programme",
-        external: true,
+        icon: MessageSquare,
       },
       {
-        label: "Rebuild My School Africa (Legacy)",
-        href: "/eduaid-africa/rebuild-my-school",
-        description: "Post-award legacy project — nominate special needs schools",
-        icon: Building,
+        label: "Nominees Directory",
+        href: "/nominees",
+        description: "Browse currently listed nominees",
+        icon: Users,
       },
       {
         label: "Contact Us",
         href: "/contact",
         description: "Get in touch with our team",
         icon: Mail,
-      },
-      {
-        label: "FAQs",
-        href: "/faq",
-        description: "Frequently asked questions",
-        icon: MessageSquare,
       },
     ],
   },

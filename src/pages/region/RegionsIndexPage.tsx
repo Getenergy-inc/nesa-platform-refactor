@@ -21,20 +21,26 @@ export default function RegionsIndexPage() {
   return (
     <>
       <Helmet>
-        <title>Explore Africa's Regions | NESA-Africa</title>
-        <meta name="description" content="Explore all 10 NESA-Africa award regions across the African continent, the Diaspora, and Friends of Africa." />
+        <title>Explore Africa's Regions | NESA-Africa 2026</title>
+        <meta name="description" content="NESA-Africa operates across 10 regional zones — driving nominations, voting, partnerships, and storytelling across the continent and the diaspora." />
       </Helmet>
       <div className="min-h-screen bg-charcoal text-ivory">
         {/* Hero */}
         <section className="relative py-20 px-4 bg-gradient-to-b from-gold/5 to-charcoal">
           <div className="container mx-auto text-center max-w-3xl">
             <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
+              <span className="inline-block mb-3 px-3 py-1 rounded-full border border-gold/30 bg-gold/10 text-gold text-xs font-semibold tracking-wider uppercase">
+                Continental Reach
+              </span>
               <Globe className="w-12 h-12 text-gold mx-auto mb-4" />
               <h1 className="text-4xl md:text-5xl font-bold text-ivory mb-4">
                 Explore Africa's Regions
               </h1>
-              <p className="text-lg text-ivory/70">
-                NESA-Africa recognizes excellence across {GOVERNANCE_STATS.regions} regional groups spanning the entire African continent and beyond.
+              <p className="text-lg text-ivory/70 mb-3">
+                NESA-Africa operates across <span className="text-gold font-semibold">{GOVERNANCE_STATS.regions} regional zones</span> — including Africa's core regions and global diaspora communities.
+              </p>
+              <p className="text-sm text-ivory/60 max-w-2xl mx-auto">
+                Regions drive nominations, voting participation, partner engagement, school visibility, and NESA TV storytelling.
               </p>
             </motion.div>
           </div>
