@@ -120,39 +120,39 @@ export interface ScheduleTemplate {
   };
 }
 
-// Default schedule template - NESA 2026 pattern (all events in 2026, impact phase 2026-2027)
+// Default schedule template - NESA 2025 pattern (ceremony in 2026)
 export const DEFAULT_SCHEDULE_TEMPLATE: ScheduleTemplate = {
   nominationReview: {
-    nrcReviewStart: { monthDay: "05-15", yearOffset: 0 },
-    nrcReviewEnd: { monthDay: "06-10", yearOffset: 0 },
-    jurySelectionStart: { monthDay: "05-15", yearOffset: 0 },
-    jurySelectionEnd: { monthDay: "06-30", yearOffset: 0 },
-    juryOnboarding: { monthDay: "07-01", yearOffset: 0 },
+    nrcReviewStart: { monthDay: "02-01", yearOffset: 1 },
+    nrcReviewEnd: { monthDay: "03-31", yearOffset: 1 },
+    jurySelectionStart: { monthDay: "02-01", yearOffset: 1 },
+    jurySelectionEnd: { monthDay: "03-31", yearOffset: 1 },
+    juryOnboarding: { monthDay: "04-01", yearOffset: 1 },
   },
   tvShows: {
-    platinumRecognition: { monthDay: "06-11", yearOffset: 0 },
-    africaIconRecognition: { monthDay: "06-25", yearOffset: 0 },
-    goldCertificateWinners: { monthDay: "10-01", yearOffset: 0 },
+    platinumRecognition: { monthDay: "02-28", yearOffset: 1 },
+    africaIconRecognition: { monthDay: "03-28", yearOffset: 1 },
+    goldCertificateWinners: { monthDay: "05-17", yearOffset: 1 },
   },
   votingWindows: {
-    goldVotingOpens: { monthDay: "07-13", yearOffset: 0 },
-    goldVotingCloses: { monthDay: "09-25", yearOffset: 0 },
-    blueGarnetVotingOpens: { monthDay: "10-02", yearOffset: 0 },
-    blueGarnetVotingCloses: { monthDay: "10-22", yearOffset: 0 },
+    goldVotingOpens: { monthDay: "04-10", yearOffset: 1 },
+    goldVotingCloses: { monthDay: "05-16", yearOffset: 1 },
+    blueGarnetVotingOpens: { monthDay: "05-18", yearOffset: 1 },
+    blueGarnetVotingCloses: { monthDay: "06-17", yearOffset: 1 },
   },
   galas: {
-    blueGarnetGala: { monthDay: "10-22", yearOffset: 0 },
+    blueGarnetGala: { monthDay: "06-27", yearOffset: 1 },
   },
   legacy: {
-    rebuildMySchoolLaunch: { monthDay: "10-23", yearOffset: 0 },
-    rebuildMySchoolEnd: { monthDay: "10-22", yearOffset: 1 }, // +1 year from launch
+    rebuildMySchoolLaunch: { monthDay: "06-28", yearOffset: 1 },
+    rebuildMySchoolEnd: { monthDay: "06-28", yearOffset: 1 }, // +1 year from launch
   },
   webinars: {
     seriesStart: { monthDay: "10-14", yearOffset: 0 },
-    seriesEnd: { monthDay: "10-22", yearOffset: 0 },
+    seriesEnd: { monthDay: "06-30", yearOffset: 1 },
   },
   deadlines: {
-    iconNominationsClose: { monthDay: "06-20", yearOffset: 0 },
+    iconNominationsClose: { monthDay: "04-30", yearOffset: 1 },
   },
 };
 
@@ -233,13 +233,13 @@ export function buildTimeline(
   awardYear: number,
   template: ScheduleTemplate = DEFAULT_SCHEDULE_TEMPLATE
 ): TimelineItem[] {
-  const impactYear = awardYear + 1;
-
+  const ceremonyYear = awardYear + 1;
+  
   return [
     {
       id: "webinars",
       phase: "EduAid-Africa Webinars",
-      dateRange: `14 Oct ${awardYear - 1} – Oct ${awardYear}`,
+      dateRange: `14 Oct ${awardYear} – Jun ${ceremonyYear}`,
       description: "Public education series on SDG 4, CSR, STEM, inclusion, and NESA standards",
       type: "awareness",
       isActive: true,
@@ -247,42 +247,42 @@ export function buildTimeline(
     {
       id: "nrc-review",
       phase: "NRC Nominee Review",
-      dateRange: `15 May – 10 Jun ${awardYear}`,
+      dateRange: `1 Feb – 31 Mar ${ceremonyYear}`,
       description: "Nominee Research Corps verifies all nominations for eligibility and governance compliance",
       type: "recognition",
     },
     {
       id: "jury-selection",
       phase: "Jury Selection & Onboarding",
-      dateRange: `May – Jul ${awardYear}`,
+      dateRange: `Feb – Apr ${ceremonyYear}`,
       description: "Applications reviewed, jury members selected and onboarded for scoring duties",
       type: "recognition",
     },
     {
       id: "platinum-show",
       phase: "Platinum Recognition Show",
-      dateRange: `11 June ${awardYear}`,
+      dateRange: `28 February ${ceremonyYear}`,
       description: "3-hour TV Show — Non-competitive baseline recognition of service",
       type: "recognition",
     },
     {
       id: "icon-show",
       phase: "Africa Education Icon Show",
-      dateRange: `25 June ${awardYear}`,
+      dateRange: `28 March ${ceremonyYear}`,
       description: "3-hour TV Show — Lifetime impact recognition (9 Icons)",
       type: "recognition",
     },
     {
       id: "icon-deadline",
       phase: "Icon Nominations Close",
-      dateRange: `20 June ${awardYear}`,
+      dateRange: `30 April ${ceremonyYear}`,
       description: "Final deadline for Africa Education Icon nominations",
       type: "deadline",
     },
     {
       id: "gold-voting",
       phase: "Gold Public Voting",
-      dateRange: `13 Jul – 25 Sep ${awardYear}`,
+      dateRange: `10 Apr – 16 May ${ceremonyYear}`,
       description: "Mass participation voting across 135 sub-categories — Top 3 per subcategory (405 winners)",
       type: "voting",
       stageAction: "public_voting",
@@ -290,14 +290,14 @@ export function buildTimeline(
     {
       id: "gold-show",
       phase: "Gold Certificate Winners Show",
-      dateRange: `1 October ${awardYear}`,
+      dateRange: `17 May ${ceremonyYear}`,
       description: "3-hour TV Show — 405 Gold Certificate winners announced",
       type: "recognition",
     },
     {
       id: "blue-garnet-voting",
       phase: "Blue Garnet Voting",
-      dateRange: `2 – 22 October ${awardYear}`,
+      dateRange: `18 May – 17 Jun ${ceremonyYear}`,
       description: "40% public vote + 60% independent jury review",
       type: "voting",
       stageAction: "jury_scoring",
@@ -305,15 +305,15 @@ export function buildTimeline(
     {
       id: "blue-garnet-gala",
       phase: "Blue Garnet Awards Gala",
-      dateRange: `22 October ${awardYear}`,
+      dateRange: `27 June ${ceremonyYear}`,
       description: "Grand ceremony in Lagos + live broadcast — 9 Blue Garnet winners",
       type: "gala",
     },
     {
       id: "rmsa-legacy",
       phase: "Rebuild My School Africa",
-      dateRange: `Oct ${awardYear} – Oct ${impactYear}`,
-      description: "Impact phase: real school transformation across Africa's regions",
+      dateRange: `Jun ${ceremonyYear} – Jun ${ceremonyYear + 1}`,
+      description: "Legacy phase: 5 Special Needs facilities across African regions",
       type: "legacy",
     },
   ];
@@ -321,13 +321,15 @@ export function buildTimeline(
 
 // Award phases configuration
 export function buildAwardPhases(awardYear: number): AwardPhaseConfig[] {
+  const ceremonyYear = awardYear + 1;
+  
   return [
     {
       id: "platinum",
       title: "Platinum Certificate",
       subtitle: "Baseline Recognition of Service",
-      period: `May – June ${awardYear}`,
-      showDate: `11 June ${awardYear}`,
+      period: `February – June ${ceremonyYear}`,
+      showDate: `28 February ${ceremonyYear}`,
       iconName: "Medal",
       features: [
         "Non-competitive entry layer",
@@ -342,8 +344,8 @@ export function buildAwardPhases(awardYear: number): AwardPhaseConfig[] {
       id: "icon",
       title: "Africa Education Icon",
       subtitle: "Lifetime Impact Recognition",
-      period: `May – June ${awardYear}`,
-      showDate: `25 June ${awardYear}`,
+      period: `March – April ${ceremonyYear}`,
+      showDate: `28 March ${ceremonyYear}`,
       iconName: "Crown",
       features: [
         "Honours 9 Icons only",
@@ -358,8 +360,8 @@ export function buildAwardPhases(awardYear: number): AwardPhaseConfig[] {
       id: "gold",
       title: "Gold Certificate",
       subtitle: "Competitive Classification Stage",
-      period: `13 July – 25 September ${awardYear}`,
-      showDate: `1 October ${awardYear}`,
+      period: `10 April – 16 May ${ceremonyYear}`,
+      showDate: `17 May ${ceremonyYear}`,
       iconName: "Trophy",
       features: [
         "9 Award Categories",
@@ -374,8 +376,8 @@ export function buildAwardPhases(awardYear: number): AwardPhaseConfig[] {
       id: "blue-garnet",
       title: "Blue Garnet Award",
       subtitle: "Highest Competitive Honour",
-      period: `2 – 22 October ${awardYear}`,
-      showDate: `22 October ${awardYear} (Gala)`,
+      period: `18 May – 17 June ${ceremonyYear}`,
+      showDate: `27 June ${ceremonyYear} (Gala)`,
       iconName: "Gem",
       features: [
         "From 135 Gold Certificate winners",
