@@ -120,39 +120,39 @@ export interface ScheduleTemplate {
   };
 }
 
-// Default schedule template - NESA 2025 pattern (ceremony in 2026)
+// Default schedule template - NESA 2026 single-year cycle (Jun → Oct 2026, Legacy through Oct 2027)
 export const DEFAULT_SCHEDULE_TEMPLATE: ScheduleTemplate = {
   nominationReview: {
-    nrcReviewStart: { monthDay: "02-01", yearOffset: 1 },
-    nrcReviewEnd: { monthDay: "03-31", yearOffset: 1 },
-    jurySelectionStart: { monthDay: "02-01", yearOffset: 1 },
-    jurySelectionEnd: { monthDay: "03-31", yearOffset: 1 },
-    juryOnboarding: { monthDay: "04-01", yearOffset: 1 },
+    nrcReviewStart: { monthDay: "05-01", yearOffset: 0 },
+    nrcReviewEnd: { monthDay: "06-10", yearOffset: 0 },
+    jurySelectionStart: { monthDay: "05-01", yearOffset: 0 },
+    jurySelectionEnd: { monthDay: "06-10", yearOffset: 0 },
+    juryOnboarding: { monthDay: "06-15", yearOffset: 0 },
   },
   tvShows: {
-    platinumRecognition: { monthDay: "02-28", yearOffset: 1 },
-    africaIconRecognition: { monthDay: "03-28", yearOffset: 1 },
-    goldCertificateWinners: { monthDay: "05-17", yearOffset: 1 },
+    platinumRecognition: { monthDay: "06-11", yearOffset: 0 },
+    africaIconRecognition: { monthDay: "06-25", yearOffset: 0 },
+    goldCertificateWinners: { monthDay: "10-01", yearOffset: 0 },
   },
   votingWindows: {
-    goldVotingOpens: { monthDay: "04-10", yearOffset: 1 },
-    goldVotingCloses: { monthDay: "05-16", yearOffset: 1 },
-    blueGarnetVotingOpens: { monthDay: "05-18", yearOffset: 1 },
-    blueGarnetVotingCloses: { monthDay: "06-17", yearOffset: 1 },
+    goldVotingOpens: { monthDay: "07-13", yearOffset: 0 },
+    goldVotingCloses: { monthDay: "09-25", yearOffset: 0 },
+    blueGarnetVotingOpens: { monthDay: "10-02", yearOffset: 0 },
+    blueGarnetVotingCloses: { monthDay: "10-22", yearOffset: 0 },
   },
   galas: {
-    blueGarnetGala: { monthDay: "06-27", yearOffset: 1 },
+    blueGarnetGala: { monthDay: "10-22", yearOffset: 0 },
   },
   legacy: {
-    rebuildMySchoolLaunch: { monthDay: "06-28", yearOffset: 1 },
-    rebuildMySchoolEnd: { monthDay: "06-28", yearOffset: 1 }, // +1 year from launch
+    rebuildMySchoolLaunch: { monthDay: "10-23", yearOffset: 0 },
+    rebuildMySchoolEnd: { monthDay: "10-22", yearOffset: 1 }, // +1 year from launch (Oct 2027)
   },
   webinars: {
-    seriesStart: { monthDay: "10-14", yearOffset: 0 },
-    seriesEnd: { monthDay: "06-30", yearOffset: 1 },
+    seriesStart: { monthDay: "06-01", yearOffset: 0 },
+    seriesEnd: { monthDay: "10-22", yearOffset: 0 },
   },
   deadlines: {
-    iconNominationsClose: { monthDay: "04-30", yearOffset: 1 },
+    iconNominationsClose: { monthDay: "06-20", yearOffset: 0 },
   },
 };
 
