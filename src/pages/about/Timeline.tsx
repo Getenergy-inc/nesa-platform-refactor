@@ -1,7 +1,6 @@
 import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
 import { useState } from "react";
-import { useSeason } from "@/contexts/SeasonContext";
 import { PROGRAMME_TIMELINE_2026 } from "@/config/agcConfig";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -16,16 +15,13 @@ import {
   Users,
   Vote,
   Star,
-  Award,
   Tv,
   Heart,
   Coins,
   Sparkles,
-  Globe,
   Play,
   ArrowRight,
   Handshake,
-  GraduationCap,
   Target,
   Megaphone,
   School,
@@ -177,7 +173,6 @@ const IMPACT_PHASES = [
 ];
 
 export default function Timeline() {
-  const { currentEdition } = useSeason();
   const [activeTab, setActiveTab] = useState("tv");
 
   return (
