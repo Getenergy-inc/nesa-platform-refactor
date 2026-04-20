@@ -323,15 +323,16 @@ export function buildTimeline(
 
 // Award phases configuration
 export function buildAwardPhases(awardYear: number): AwardPhaseConfig[] {
-  const ceremonyYear = awardYear + 1;
+  // 2026 single-year cycle
+  const ceremonyYear = awardYear;
   
   return [
     {
       id: "platinum",
       title: "Platinum Certificate",
       subtitle: "Baseline Recognition of Service",
-      period: `February – June ${ceremonyYear}`,
-      showDate: `28 February ${ceremonyYear}`,
+      period: `May – June ${ceremonyYear}`,
+      showDate: `11 June ${ceremonyYear}`,
       iconName: "Medal",
       features: [
         "Non-competitive entry layer",
@@ -346,8 +347,8 @@ export function buildAwardPhases(awardYear: number): AwardPhaseConfig[] {
       id: "icon",
       title: "Africa Education Icon",
       subtitle: "Lifetime Impact Recognition",
-      period: `March – April ${ceremonyYear}`,
-      showDate: `28 March ${ceremonyYear}`,
+      period: `May – June ${ceremonyYear}`,
+      showDate: `25 June ${ceremonyYear}`,
       iconName: "Crown",
       features: [
         "Honours 9 Icons only",
@@ -362,8 +363,8 @@ export function buildAwardPhases(awardYear: number): AwardPhaseConfig[] {
       id: "gold",
       title: "Gold Certificate",
       subtitle: "Competitive Classification Stage",
-      period: `10 April – 16 May ${ceremonyYear}`,
-      showDate: `17 May ${ceremonyYear}`,
+      period: `13 July – 25 September ${ceremonyYear}`,
+      showDate: `1 October ${ceremonyYear}`,
       iconName: "Trophy",
       features: [
         "9 Award Categories",
@@ -378,8 +379,8 @@ export function buildAwardPhases(awardYear: number): AwardPhaseConfig[] {
       id: "blue-garnet",
       title: "Blue Garnet Award",
       subtitle: "Highest Competitive Honour",
-      period: `18 May – 17 June ${ceremonyYear}`,
-      showDate: `27 June ${ceremonyYear} (Gala)`,
+      period: `2 – 22 October ${ceremonyYear}`,
+      showDate: `22 October ${ceremonyYear} (Gala)`,
       iconName: "Gem",
       features: [
         "From 135 Gold Certificate winners",
