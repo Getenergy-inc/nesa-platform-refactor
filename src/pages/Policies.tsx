@@ -23,7 +23,7 @@ import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
 import { useSeason } from "@/contexts/SeasonContext";
 
-const LAST_UPDATED = "January 2025";
+const LAST_UPDATED = "January 2026";
 
 export default function Policies() {
   const { currentEdition } = useSeason();

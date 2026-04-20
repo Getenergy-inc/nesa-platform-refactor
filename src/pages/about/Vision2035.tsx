@@ -14,7 +14,7 @@ import {
 import { AfricaRegionsMap } from "@/components/nesa/AfricaRegionsMap";
 
 const milestones = [
-  { year: "2025", title: "Foundation Year", description: "Launch of continental awards with 17 categories and region-first approach." },
+  { year: "2026", title: "Foundation Year", description: "Launch of continental awards with 17 categories and region-first approach." },
   { year: "2027", title: "Expansion", description: "12 competitive categories, local chapters host up to 4 categories each." },
   { year: "2030", title: "Consolidation", description: "Full continental coverage with sustainable funding model." },
   { year: "2035", title: "Vision Realized", description: "Education for All achieved across participating regions." },
