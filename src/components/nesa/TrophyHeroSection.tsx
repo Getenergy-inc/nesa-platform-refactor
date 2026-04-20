@@ -160,24 +160,6 @@ export function TrophyHeroSection() {
               </Link>
             </motion.div>
             <div className="mb-10" />
-
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.5, delay: 0.8 }}
-              className="flex flex-wrap gap-5 sm:gap-6 justify-center lg:justify-start"
-            >
-              {[
-                { icon: Globe, label: String(t("landing.trophyHero.trustRegions")) },
-                { icon: Users, label: nomineeLabel as string },
-                { icon: Calendar, label: String(t("landing.trophyHero.trustVision")) },
-              ].map((stat) => (
-                <div key={stat.label} className="flex items-center gap-2 text-white/60 text-sm">
-                  <stat.icon className="h-4 w-4 text-gold/70" />
-                  <span>{stat.label}</span>
-                </div>
-              ))}
-            </motion.div>
           </div>
 
           {/* Right: Trophy Carousel */}
