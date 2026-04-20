@@ -22,7 +22,7 @@ function buildUpdates(awardYear: number): UpdateItem[] {
   const events = buildScheduledEvents(awardYear, DEFAULT_SCHEDULE_TEMPLATE);
   const platinumShow = events.tvShows.find(e => e.id === "platinum-show");
   const goldVoting = events.votingWindows.find(e => e.id === "gold-voting");
-  const ceremonyYear = awardYear + 1;
+  const ceremonyYear = awardYear; // 2026 single-year cycle
 
   return [
     {
