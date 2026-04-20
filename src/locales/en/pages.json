@@ -412,7 +412,7 @@
       "nigeria": "Nigeria",
       "iconBadge": "Lifetime Achievement",
       "iconTitle": "Africa Icon",
-      "iconSubtitle": "Blue Garnet Award (2005–{{year}})",
+      "iconSubtitle": "Africa Education Icon (2006–{{year}})",
       "iconFeature1": "10+ years institutional achievements",
       "iconFeature2": "Legacy recognition",
       "iconFeature3": "Expert panel selection",
@@ -903,7 +903,7 @@
       "icon": {
         "badge": "Lifetime Achievement",
         "title": "Africa Icon",
-        "subtitle": "Blue Garnet Award (2005–{{year}})",
+        "subtitle": "Africa Education Icon (2006–{{year}})",
         "features": ["10+ years institutional achievements", "Legacy recognition", "Expert panel selection"],
         "cta": "Nominate an Icon"
       },
