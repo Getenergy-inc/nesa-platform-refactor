@@ -53,7 +53,11 @@ export function NESALandingPage() {
         
         {/* ═══ 2. Trust Strip ═══ */}
         <TrustLogosStrip />
-        
+
+        {/* ═══ 2b. Brand Narrative — What NESA Africa Represents ═══ */}
+        <LazySection>
+          <BrandNarrativeSection />
+        </LazySection>
         {/* ═══ 3. Quick Actions ═══ */}
         <QuickActionBar />
 
