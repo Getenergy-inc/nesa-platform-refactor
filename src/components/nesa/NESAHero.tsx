@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { useSeason } from "@/contexts/SeasonContext";
 import { NESALogo3D } from "@/components/nesa/NESALogo3D";
+import { HeroNextMilestone } from "@/components/nesa/HeroNextMilestone";
 import stageBackdrop from "@/assets/nesa-stage-backdrop.jpg";
 
 export function NESAHero() {
@@ -90,6 +91,11 @@ export function NESAHero() {
         <p className="text-white/75 text-sm sm:text-base md:text-lg max-w-3xl mb-6 leading-relaxed px-4 sm:px-6 animate-fade-in" style={{ animationDelay: '0.4s' }}>
           A continental platform recognizing excellence in education while driving real impact through partnerships, media, and school transformation across Africa — connecting recognition, visibility, partnerships, and funding into one ecosystem.
         </p>
+
+        {/* Live Countdown to Next Milestone */}
+        <div className="mb-5 sm:mb-6 animate-fade-in" style={{ animationDelay: '0.42s' }}>
+          <HeroNextMilestone />
+        </div>
 
         {/* AGC Voting Strip */}
         <div className="flex items-center gap-2 px-4 sm:px-6 py-2.5 rounded-full bg-gold/10 border border-gold/30 mb-6 sm:mb-8 animate-fade-in" style={{ animationDelay: '0.45s' }}>
