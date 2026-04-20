@@ -21,11 +21,11 @@ import {
   Sparkles,
   Play,
   ArrowRight,
+  ChevronRight,
   Handshake,
   Target,
   Megaphone,
   School,
-  MapPin,
   Crown,
   Gem,
 } from "lucide-react";
@@ -45,18 +45,8 @@ const phaseIcons: Record<string, React.ComponentType<{ className?: string }>> = 
 
 const isVotingPhase = (phase: string) => /gold|blue garnet|voting/i.test(phase);
 
-const REGIONS = [
-  "North Africa",
-  "West Africa",
-  "Central Africa",
-  "East Africa",
-  "Southern Africa",
-  "Sahel Region",
-  "Horn of Africa",
-  "Indian Ocean",
-  "Diaspora / Global Africa",
-  "Friends of Africa",
-];
+
+
 
 const CATEGORY_PATHWAYS = [
   {
