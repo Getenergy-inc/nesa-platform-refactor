@@ -24,6 +24,7 @@ const CategoriesSection = lazy(() => import("@/components/nesa/CategoriesSection
 const SponsorsSection = lazy(() => import("@/components/nesa/SponsorsSection").then(m => ({ default: m.SponsorsSection })));
 const InteractiveAfricaMap = lazy(() => import("@/components/nesa/InteractiveAfricaMap").then(m => ({ default: m.InteractiveAfricaMap })));
 const PromoVideosSection = lazy(() => import("@/components/nesa/PromoVideosSection").then(m => ({ default: m.PromoVideosSection })));
+const SupportExperienceSection = lazy(() => import("@/components/nesa/SupportExperienceSection").then(m => ({ default: m.SupportExperienceSection })));
 
 export function NESALandingPage() {
   const { currentEdition } = useSeason();
@@ -71,6 +72,11 @@ export function NESALandingPage() {
         {/* ═══ 8. Promo Videos ═══ */}
         <LazySection>
           <PromoVideosSection />
+        </LazySection>
+
+        {/* ═══ 8b. Tickets • Merch • Anthem ═══ */}
+        <LazySection>
+          <SupportExperienceSection />
         </LazySection>
         
         {/* ═══ 9. Sponsors ═══ */}
