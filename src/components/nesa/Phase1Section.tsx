@@ -6,8 +6,7 @@ import { WEBINAR_THEMES } from "@/config/schedule";
 export function Phase1Section() {
   const { t } = useTranslation("pages");
   const { currentEdition } = useSeason();
-  const ceremonyYear = currentEdition.displayYear + 1;
-  const dateRange = `14 October ${currentEdition.displayYear} – June ${ceremonyYear}`;
+  const dateRange = `1 June – 22 October ${currentEdition.displayYear}`;
 
   return (
     <section className="bg-charcoal py-16 md:py-20">
