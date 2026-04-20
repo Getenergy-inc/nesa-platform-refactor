@@ -352,7 +352,7 @@ export function buildAwardPhases(awardYear: number): AwardPhaseConfig[] {
       iconName: "Crown",
       features: [
         "Honours 9 Icons only",
-        `Documented impact ${awardYear - 20}–${awardYear}`,
+        `Documented impact 2006–${awardYear}`,
         "African regions + diaspora + Friends of Africa",
         "Non-competitive lifetime recognition",
         "Independent verification",
