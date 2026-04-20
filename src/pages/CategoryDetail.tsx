@@ -40,7 +40,7 @@ const tierBadgeStyles: Record<string, { label: string; className: string; icon: 
 const governanceHints: Record<string, string> = {
   competitive: "Top 3 finalists emerge from public voting. Finalists compete for the Blue Garnet Award.",
   institutional: "Institutional recognition evaluated under governance and leadership criteria.",
-  "special-recognition": "Cultural & influence impact recognition (2025 edition).",
+  "special-recognition": "Cultural & influence impact recognition (2026 edition).",
   lifetime: "Continental lifetime honour.",
 };
 
