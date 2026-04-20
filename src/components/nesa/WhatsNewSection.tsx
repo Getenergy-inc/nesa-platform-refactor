@@ -82,6 +82,7 @@ export function WhatsNewSection() {
   const { currentEdition } = useSeason();
   const updates = buildUpdates(currentEdition.displayYear);
 
+  return (
     <section className="bg-charcoal py-12 md:py-16">
       <div className="container">
         {/* Header */}
