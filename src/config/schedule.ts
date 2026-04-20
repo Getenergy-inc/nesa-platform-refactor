@@ -233,13 +233,15 @@ export function buildTimeline(
   awardYear: number,
   template: ScheduleTemplate = DEFAULT_SCHEDULE_TEMPLATE
 ): TimelineItem[] {
-  const ceremonyYear = awardYear + 1;
+  // 2026 single-year cycle: all events happen within awardYear; legacy extends to awardYear + 1
+  const ceremonyYear = awardYear;
+  const legacyEndYear = awardYear + 1;
   
   return [
     {
       id: "webinars",
       phase: "EduAid-Africa Webinars",
-      dateRange: `14 Oct ${awardYear} – Jun ${ceremonyYear}`,
+      dateRange: `Jun – Oct ${awardYear}`,
       description: "Public education series on SDG 4, CSR, STEM, inclusion, and NESA standards",
       type: "awareness",
       isActive: true,
@@ -247,42 +249,42 @@ export function buildTimeline(
     {
       id: "nrc-review",
       phase: "NRC Nominee Review",
-      dateRange: `1 Feb – 31 Mar ${ceremonyYear}`,
+      dateRange: `1 May – 10 Jun ${ceremonyYear}`,
       description: "Nominee Research Corps verifies all nominations for eligibility and governance compliance",
       type: "recognition",
     },
     {
       id: "jury-selection",
       phase: "Jury Selection & Onboarding",
-      dateRange: `Feb – Apr ${ceremonyYear}`,
+      dateRange: `May – Jun ${ceremonyYear}`,
       description: "Applications reviewed, jury members selected and onboarded for scoring duties",
       type: "recognition",
     },
     {
       id: "platinum-show",
       phase: "Platinum Recognition Show",
-      dateRange: `28 February ${ceremonyYear}`,
+      dateRange: `11 June ${ceremonyYear}`,
       description: "3-hour TV Show — Non-competitive baseline recognition of service",
       type: "recognition",
     },
     {
       id: "icon-show",
       phase: "Africa Education Icon Show",
-      dateRange: `28 March ${ceremonyYear}`,
+      dateRange: `25 June ${ceremonyYear}`,
       description: "3-hour TV Show — Lifetime impact recognition (9 Icons)",
       type: "recognition",
     },
     {
       id: "icon-deadline",
       phase: "Icon Nominations Close",
-      dateRange: `30 April ${ceremonyYear}`,
+      dateRange: `20 June ${ceremonyYear}`,
       description: "Final deadline for Africa Education Icon nominations",
       type: "deadline",
     },
     {
       id: "gold-voting",
       phase: "Gold Public Voting",
-      dateRange: `10 Apr – 16 May ${ceremonyYear}`,
+      dateRange: `13 Jul – 25 Sep ${ceremonyYear}`,
       description: "Mass participation voting across 135 sub-categories — Top 3 per subcategory (405 winners)",
       type: "voting",
       stageAction: "public_voting",
@@ -290,14 +292,14 @@ export function buildTimeline(
     {
       id: "gold-show",
       phase: "Gold Certificate Winners Show",
-      dateRange: `17 May ${ceremonyYear}`,
+      dateRange: `1 October ${ceremonyYear}`,
       description: "3-hour TV Show — 405 Gold Certificate winners announced",
       type: "recognition",
     },
     {
       id: "blue-garnet-voting",
       phase: "Blue Garnet Voting",
-      dateRange: `18 May – 17 Jun ${ceremonyYear}`,
+      dateRange: `2 – 22 October ${ceremonyYear}`,
       description: "40% public vote + 60% independent jury review",
       type: "voting",
       stageAction: "jury_scoring",
@@ -305,15 +307,15 @@ export function buildTimeline(
     {
       id: "blue-garnet-gala",
       phase: "Blue Garnet Awards Gala",
-      dateRange: `27 June ${ceremonyYear}`,
+      dateRange: `22 October ${ceremonyYear}`,
       description: "Grand ceremony in Lagos + live broadcast — 9 Blue Garnet winners",
       type: "gala",
     },
     {
       id: "rmsa-legacy",
       phase: "Rebuild My School Africa",
-      dateRange: `Jun ${ceremonyYear} – Jun ${ceremonyYear + 1}`,
-      description: "Legacy phase: 5 Special Needs facilities across African regions",
+      dateRange: `Oct ${ceremonyYear} – Oct ${legacyEndYear}`,
+      description: "Legacy phase: real school transformation across Africa's regions",
       type: "legacy",
     },
   ];
