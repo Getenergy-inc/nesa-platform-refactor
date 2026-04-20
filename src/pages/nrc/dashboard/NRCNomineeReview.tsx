@@ -209,7 +209,7 @@ function ReviewContent() {
               </CardHeader>
               <CardContent>
                 <div className="space-y-2">
-                  {MOCK_DOCS.map((doc, i) => (
+                  {mockDocs.map((doc, i) => (
                     <div key={i} className="flex items-center gap-3 rounded-lg border border-[hsl(var(--gold)/0.06)] p-3">
                       <FileText className="h-4 w-4 text-muted-foreground shrink-0" />
                       <div className="flex-1 min-w-0">
