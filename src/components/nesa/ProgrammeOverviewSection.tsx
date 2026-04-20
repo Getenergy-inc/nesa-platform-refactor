@@ -5,9 +5,9 @@ import { useSeason } from "@/contexts/SeasonContext";
 export function ProgrammeOverviewSection() {
   const { t } = useTranslation("pages");
   const { currentEdition } = useSeason();
-  const ceremonyYear = currentEdition.displayYear + 1;
-  const programmeEndYear = ceremonyYear + 1;
-  const dateRange = `October ${currentEdition.displayYear} – June ${programmeEndYear}`;
+  // 2026 single-year cycle: programme runs Jun – Oct 2026, legacy through Oct 2027
+  const programmeEndYear = currentEdition.displayYear + 1;
+  const dateRange = `June ${currentEdition.displayYear} – October ${programmeEndYear}`;
 
   const pillars = [
     {
