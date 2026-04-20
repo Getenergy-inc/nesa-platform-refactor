@@ -2,6 +2,10 @@ import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import { PROGRAMME_TIMELINE_2026 } from "@/config/agcConfig";
+import iconLifetimeImg from "@/assets/cards/icon-lifetime.jpg";
+import platinumImg from "@/assets/cards/platinum-recognition.jpg";
+import goldVotingImg from "@/assets/cards/gold-public-voting.jpg";
+import blueGarnetImg from "@/assets/cards/blue-garnet-gala.jpg";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -72,6 +76,8 @@ const CATEGORY_PATHWAYS = [
     badgeClass: "bg-amber-500/20 text-amber-300 border-amber-500/40",
     iconColor: "text-amber-300",
     ringColor: "ring-amber-500/30",
+    image: iconLifetimeImg,
+    imageOverlay: "from-amber-900/80 via-charcoal/60 to-charcoal",
   },
   {
     icon: Star,
@@ -97,6 +103,8 @@ const CATEGORY_PATHWAYS = [
     badgeClass: "bg-slate-400/20 text-slate-200 border-slate-400/40",
     iconColor: "text-slate-200",
     ringColor: "ring-slate-400/30",
+    image: platinumImg,
+    imageOverlay: "from-slate-900/80 via-charcoal/60 to-charcoal",
   },
   {
     icon: Sparkles,
@@ -121,6 +129,8 @@ const CATEGORY_PATHWAYS = [
     badgeClass: "bg-yellow-500/20 text-yellow-300 border-yellow-500/40",
     iconColor: "text-yellow-300",
     ringColor: "ring-yellow-500/30",
+    image: goldVotingImg,
+    imageOverlay: "from-yellow-900/80 via-charcoal/60 to-charcoal",
   },
   {
     icon: Gem,
@@ -146,6 +156,8 @@ const CATEGORY_PATHWAYS = [
     badgeClass: "bg-blue-500/20 text-blue-300 border-blue-500/40",
     iconColor: "text-blue-300",
     ringColor: "ring-blue-500/30",
+    image: blueGarnetImg,
+    imageOverlay: "from-blue-900/80 via-charcoal/60 to-charcoal",
   },
 ];
 
