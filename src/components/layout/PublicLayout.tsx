@@ -7,23 +7,28 @@ import { NESAFooter } from "@/components/nesa/NESAFooter";
 import { MobileBottomNav } from "@/components/navigation/MainNav";
 import { BottomPageNav } from "@/components/navigation/PageNavigation";
 import { ExitIntentPopup } from "@/components/nesa/ExitIntentPopup";
+import { PageFAQSection, FloatingFAQButton } from "@/components/nesa/PageFAQ";
 
 interface PublicLayoutProps {
   children: ReactNode;
   showFooter?: boolean;
+  /** Set false to suppress the auto-injected page FAQ section above the footer */
+  showFAQ?: boolean;
 }
 
-export function PublicLayout({ children, showFooter = true }: PublicLayoutProps) {
+export function PublicLayout({ children, showFooter = true, showFAQ = true }: PublicLayoutProps) {
   return (
     <div className="min-h-screen bg-charcoal flex flex-col">
       <NESAHeader />
       <main className="flex-1 pt-14 sm:pt-16 pb-20 lg:pb-16">
         {children}
       </main>
+      {showFAQ && <PageFAQSection />}
       {showFooter && <NESAFooter />}
       <MobileBottomNav />
       <BottomPageNav />
       <ExitIntentPopup />
+      <FloatingFAQButton />
     </div>
   );
 }

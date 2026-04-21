@@ -17,6 +17,7 @@ import { MobileBottomNav } from "@/components/navigation/MainNav";
 import { ScrollProgressIndicator } from "@/components/nesa/ScrollProgressIndicator";
 import { ExitIntentPopup } from "@/components/nesa/ExitIntentPopup";
 import { BackToTopButton } from "@/components/ui/back-to-top";
+import { PageFAQSection, FloatingFAQButton } from "@/components/nesa/PageFAQ";
 import { useSeason } from "@/contexts/SeasonContext";
 
 // Lazy load below-fold sections
@@ -94,7 +95,12 @@ export function NESALandingPage() {
         <LazySection>
           <SponsorsSection />
         </LazySection>
-        
+
+        {/* ═══ 10. Page-aware FAQ ═══ */}
+        <LazySection>
+          <PageFAQSection />
+        </LazySection>
+
         <NESAFooter />
         <BottomPageNav />
       </div>
@@ -103,6 +109,7 @@ export function NESALandingPage() {
       <ExitIntentPopup />
       <BackToTopButton />
       <MobileBottomNav />
+      <FloatingFAQButton />
     </>
   );
 }
