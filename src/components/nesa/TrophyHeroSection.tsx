@@ -7,6 +7,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useState, useEffect, useMemo } from "react";
 import { NESALogo3D } from "@/components/nesa/NESALogo3D";
 import { useRegionNomineeCounts } from "@/hooks/useRegionNomineeCounts";
+import { useLiveStats } from "@/hooks/useLiveStats";
 import { FloatingParticles } from "@/components/ui/floating-particles";
 import stageBackdropVideo from "@/assets/nesa-stage-backdrop-motion.mp4";
 import stageBackdropFallback from "@/assets/nesa-stage-backdrop.jpg";
@@ -21,10 +22,11 @@ export function TrophyHeroSection() {
   const { getBannerText } = useSeason();
   const [currentItem, setCurrentItem] = useState<CarouselItem>("trophy-icon");
   const { data: countsData } = useRegionNomineeCounts();
+  const { data: liveStats } = useLiveStats();
   const nomineeLabel = useMemo(() => {
-    const count = countsData?.totalCount ?? 1760;
+    const count = liveStats?.nomineeCount || countsData?.totalCount || 1760;
     return t("landing.trophyHero.trustNominees", { count: count.toLocaleString() } as any);
-  }, [countsData, t]);
+  }, [liveStats, countsData, t]);
 
   useEffect(() => {
     const interval = setInterval(() => {
