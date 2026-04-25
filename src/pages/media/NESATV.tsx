@@ -19,6 +19,7 @@ import {
 import rawVideos from "@/data/videos.json";
 import { validateVideos } from "@/lib/validate";
 import { YOUTUBE_CHANNEL, getYouTubeEmbedUrl } from "@/lib/youtube";
+import nesaTVBackdrop from "@/assets/nesa-tv-backdrop.jpg";
 
 // Validate and get videos from JSON
 const videos = validateVideos(rawVideos);
@@ -54,9 +55,19 @@ export default function NESATV() {
       </Helmet>
 
       <div className="min-h-screen bg-charcoal">
-        {/* Hero */}
-        <section className="relative bg-gradient-to-b from-charcoal to-charcoal/95 py-16 lg:py-24">
-          <div className="container mx-auto px-4">
+        {/* Hero with cinematic stage backdrop */}
+        <section className="relative overflow-hidden py-16 lg:py-24">
+          {/* Backdrop image */}
+          <div
+            className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+            style={{ backgroundImage: `url(${nesaTVBackdrop})` }}
+            aria-hidden="true"
+          />
+          {/* Gradient overlays for legibility */}
+          <div className="absolute inset-0 bg-gradient-to-r from-charcoal via-charcoal/85 to-charcoal/40" aria-hidden="true" />
+          <div className="absolute inset-0 bg-gradient-to-t from-charcoal via-transparent to-charcoal/30" aria-hidden="true" />
+
+          <div className="container relative mx-auto px-4">
             <Link
               to="/media"
               className="mb-6 inline-flex items-center gap-2 text-sm text-white/60 hover:text-primary"
