@@ -1,7 +1,7 @@
-import { useState } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { Link } from "react-router-dom";
-import { motion } from "framer-motion";
-import { MapPin, ArrowRight } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
+import { MapPin, ArrowRight, Globe2, Users, Sparkles } from "lucide-react";
 import { REGION_HUBS } from "@/config/regionHubs";
 
 // Simplified Africa map regions as SVG paths (approximate positions)
@@ -40,135 +40,227 @@ const REGION_PATHS: Record<string, { path: string; labelX: number; labelY: numbe
   },
 };
 
+const MAP_SLUGS = Object.keys(REGION_PATHS);
+
 export function InteractiveAfricaMap() {
-  const [hoveredRegion, setHoveredRegion] = useState<string | null>(null);
-  const hoveredHub = hoveredRegion ? REGION_HUBS.find(r => r.slug === hoveredRegion) : null;
+  const [activeSlug, setActiveSlug] = useState<string>("west-africa");
+  const [isHovering, setIsHovering] = useState(false);
+
+  const mapHubs = useMemo(
+    () => REGION_HUBS.filter((h) => MAP_SLUGS.includes(h.slug)),
+    []
+  );
+
+  // Auto-rotate through regions every 4s when not hovering
+  useEffect(() => {
+    if (isHovering) return;
+    const id = setInterval(() => {
+      setActiveSlug((prev) => {
+        const idx = MAP_SLUGS.indexOf(prev);
+        return MAP_SLUGS[(idx + 1) % MAP_SLUGS.length];
+      });
+    }, 4000);
+    return () => clearInterval(id);
+  }, [isHovering]);
+
+  const activeHub = REGION_HUBS.find((r) => r.slug === activeSlug);
+  const diasporaHub = REGION_HUBS.find((r) => r.slug === "diaspora");
+  const friendsHub = REGION_HUBS.find((r) => r.slug === "friends-of-africa");
 
   return (
-    <section className="py-20 md:py-28 relative overflow-hidden">
-      <div className="absolute inset-0 bg-gradient-to-b from-charcoal via-charcoal/95 to-charcoal" />
+    <section className="relative py-20 md:py-28 overflow-hidden">
+      {/* Layered background */}
+      <div className="absolute inset-0 bg-gradient-to-b from-charcoal via-charcoal/98 to-charcoal" />
+      <div className="absolute inset-0 opacity-[0.04] bg-[radial-gradient(circle_at_30%_20%,hsl(var(--primary))_0%,transparent_50%),radial-gradient(circle_at_70%_80%,hsl(var(--primary))_0%,transparent_50%)]" />
 
-      <div className="container relative z-10 max-w-6xl mx-auto px-4">
+      <div className="container relative z-10 max-w-7xl mx-auto px-4">
+        {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-center mb-12"
+          className="text-center mb-14"
         >
-          <span className="inline-block px-4 py-1.5 rounded-full bg-primary/20 border border-primary/30 text-primary text-xs font-semibold mb-4 tracking-widest uppercase">
-            Explore Africa's Regions
+          <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-primary/15 border border-primary/30 text-primary text-xs font-semibold mb-5 tracking-widest uppercase">
+            <Globe2 className="w-3.5 h-3.5" /> Explore Africa's Regions
           </span>
-          <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4">
-            One Continent, <span className="text-primary">Ten Regions</span>
+          <h2 className="font-display text-3xl md:text-5xl lg:text-6xl font-bold text-white mb-4 leading-tight">
+            One Continent, <span className="bg-gradient-to-r from-primary via-amber-400 to-primary bg-clip-text text-transparent">Ten Regions</span>
           </h2>
-          <p className="text-white/60 max-w-2xl mx-auto text-lg">
-            Discover the education champions, cultural heritage, and edu-tourism opportunities across Africa's diverse regions.
+          <p className="text-white/60 max-w-2xl mx-auto text-base md:text-lg">
+            Discover education champions, cultural heritage, and edu-tourism opportunities across Africa's diverse regions.
           </p>
         </motion.div>
 
-        <div className="grid lg:grid-cols-2 gap-8 items-center">
-          {/* SVG Map */}
+        {/* Main grid */}
+        <div className="grid lg:grid-cols-12 gap-8 lg:gap-10 items-start">
+          {/* SVG Map — left */}
           <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
+            initial={{ opacity: 0, scale: 0.95 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
-            className="relative"
+            className="lg:col-span-6 relative"
+            onMouseEnter={() => setIsHovering(true)}
+            onMouseLeave={() => setIsHovering(false)}
           >
-            <svg viewBox="40 0 380 420" className="w-full max-w-md mx-auto" aria-label="Interactive map of Africa's regions">
-              {/* Background glow */}
-              <defs>
-                <filter id="glow">
-                  <feGaussianBlur stdDeviation="3" result="coloredBlur" />
-                  <feMerge>
-                    <feMergeNode in="coloredBlur" />
-                    <feMergeNode in="SourceGraphic" />
-                  </feMerge>
-                </filter>
-              </defs>
+            <div className="relative bg-gradient-to-br from-white/[0.03] to-white/[0.01] border border-white/10 rounded-2xl p-6 md:p-8 backdrop-blur-sm">
+              <svg viewBox="40 0 380 420" className="w-full max-w-lg mx-auto" aria-label="Interactive map of Africa's regions">
+                <defs>
+                  <filter id="map-glow">
+                    <feGaussianBlur stdDeviation="4" result="coloredBlur" />
+                    <feMerge>
+                      <feMergeNode in="coloredBlur" />
+                      <feMergeNode in="SourceGraphic" />
+                    </feMerge>
+                  </filter>
+                  <radialGradient id="active-fill" cx="50%" cy="50%">
+                    <stop offset="0%" stopColor="hsl(var(--primary))" stopOpacity="0.9" />
+                    <stop offset="100%" stopColor="hsl(var(--primary))" stopOpacity="0.5" />
+                  </radialGradient>
+                </defs>
 
-              {Object.entries(REGION_PATHS).map(([slug, { path, labelX, labelY }]) => {
-                const hub = REGION_HUBS.find(r => r.slug === slug);
-                if (!hub) return null;
-                const isHovered = hoveredRegion === slug;
+                {Object.entries(REGION_PATHS).map(([slug, { path, labelX, labelY }]) => {
+                  const hub = REGION_HUBS.find((r) => r.slug === slug);
+                  if (!hub) return null;
+                  const isActive = activeSlug === slug;
 
-                return (
-                  <Link key={slug} to={`/region/${slug}`}>
+                  return (
                     <g
-                      onMouseEnter={() => setHoveredRegion(slug)}
-                      onMouseLeave={() => setHoveredRegion(null)}
+                      key={slug}
+                      onMouseEnter={() => setActiveSlug(slug)}
+                      onClick={() => setActiveSlug(slug)}
                       className="cursor-pointer"
                     >
                       <path
                         d={path}
-                        fill={isHovered ? hub.mapColor : "hsl(var(--primary) / 0.15)"}
-                        stroke={isHovered ? hub.mapColor : "hsl(var(--primary) / 0.4)"}
-                        strokeWidth={isHovered ? 2.5 : 1.5}
-                        filter={isHovered ? "url(#glow)" : undefined}
-                        className="transition-all duration-300"
+                        fill={isActive ? "url(#active-fill)" : "hsl(var(--primary) / 0.12)"}
+                        stroke={isActive ? "hsl(var(--primary))" : "hsl(var(--primary) / 0.35)"}
+                        strokeWidth={isActive ? 2.5 : 1.25}
+                        filter={isActive ? "url(#map-glow)" : undefined}
+                        className="transition-all duration-500"
                       />
                       <text
                         x={labelX}
                         y={labelY}
                         textAnchor="middle"
-                        fill={isHovered ? "white" : "hsl(var(--primary) / 0.7)"}
-                        fontSize={isHovered ? "10" : "8"}
-                        fontWeight={isHovered ? "bold" : "normal"}
+                        fill={isActive ? "white" : "hsl(var(--primary) / 0.7)"}
+                        fontSize={isActive ? "11" : "8.5"}
+                        fontWeight={isActive ? "700" : "500"}
                         className="transition-all duration-300 pointer-events-none select-none"
+                        style={{ fontFamily: "system-ui, sans-serif" }}
                       >
                         {hub.shortName}
                       </text>
                     </g>
-                  </Link>
-                );
-              })}
-            </svg>
+                  );
+                })}
+              </svg>
+
+              {/* Auto-rotate indicator */}
+              <div className="flex items-center justify-center gap-2 mt-4 text-xs text-white/40">
+                <Sparkles className="w-3 h-3 text-primary/60" />
+                <span>{isHovering ? "Hover to explore" : "Auto-rotating regions"}</span>
+              </div>
+            </div>
           </motion.div>
 
-          {/* Region Info Panel / Grid */}
-          <div className="space-y-3">
-            {hoveredHub ? (
-              <motion.div
-                key={hoveredHub.slug}
-                initial={{ opacity: 0, x: 20 }}
-                animate={{ opacity: 1, x: 0 }}
-                className="bg-white/5 border border-white/10 rounded-xl p-6"
-              >
-                <h3 className="text-2xl font-bold text-white mb-2">{hoveredHub.name}</h3>
-                <p className="text-primary text-sm font-medium mb-3">{hoveredHub.tagline}</p>
-                <p className="text-white/60 text-sm leading-relaxed mb-4">{hoveredHub.description.slice(0, 150)}...</p>
-                <div className="flex flex-wrap gap-2 mb-4">
-                  {hoveredHub.countries.slice(0, 5).map(c => (
-                    <span key={c} className="px-2 py-1 bg-primary/10 border border-primary/20 rounded-full text-primary text-xs">{c}</span>
-                  ))}
-                  {hoveredHub.countries.length > 5 && (
-                    <span className="px-2 py-1 text-white/40 text-xs">+{hoveredHub.countries.length - 5} more</span>
-                  )}
-                </div>
-                <Link
-                  to={`/region/${hoveredHub.slug}`}
-                  className="inline-flex items-center gap-2 text-primary hover:text-primary/80 font-semibold text-sm transition-colors"
+          {/* Info panel — right */}
+          <div className="lg:col-span-6 space-y-4">
+            <AnimatePresence mode="wait">
+              {activeHub && (
+                <motion.div
+                  key={activeHub.slug}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -20 }}
+                  transition={{ duration: 0.4 }}
+                  className="relative bg-gradient-to-br from-white/[0.06] to-white/[0.02] border border-primary/20 rounded-2xl p-6 md:p-8 overflow-hidden"
                 >
-                  Explore {hoveredHub.shortName} <ArrowRight className="w-4 h-4" />
-                </Link>
-              </motion.div>
-            ) : (
-              <div className="grid grid-cols-2 gap-2">
-                {REGION_HUBS.map(hub => (
+                  {/* Accent bar */}
+                  <div
+                    className="absolute top-0 left-0 right-0 h-1"
+                    style={{ background: `linear-gradient(90deg, ${activeHub.mapColor}, hsl(var(--primary)))` }}
+                  />
+
+                  <div className="flex items-start justify-between gap-4 mb-3">
+                    <div>
+                      <h3 className="font-display text-2xl md:text-3xl font-bold text-white mb-1">{activeHub.name}</h3>
+                      <p className="text-primary text-sm font-medium">{activeHub.tagline}</p>
+                    </div>
+                    <div className="shrink-0 w-12 h-12 rounded-full bg-primary/10 border border-primary/30 flex items-center justify-center">
+                      <MapPin className="w-5 h-5 text-primary" />
+                    </div>
+                  </div>
+
+                  <p className="text-white/70 text-sm md:text-base leading-relaxed mb-5 line-clamp-3">
+                    {activeHub.description}
+                  </p>
+
+                  <div className="flex flex-wrap gap-2 mb-5">
+                    {activeHub.countries.slice(0, 5).map((c) => (
+                      <span
+                        key={c}
+                        className="px-2.5 py-1 bg-primary/10 border border-primary/20 rounded-full text-primary text-xs font-medium"
+                      >
+                        {c}
+                      </span>
+                    ))}
+                    {activeHub.countries.length > 5 && (
+                      <span className="px-2.5 py-1 text-white/40 text-xs">+{activeHub.countries.length - 5} more</span>
+                    )}
+                  </div>
+
                   <Link
-                    key={hub.slug}
-                    to={`/region/${hub.slug}`}
-                    onMouseEnter={() => setHoveredRegion(hub.slug)}
-                    onMouseLeave={() => setHoveredRegion(null)}
-                    className="group flex items-center gap-2 bg-white/5 border border-white/10 rounded-lg px-3 py-2.5 hover:bg-primary/10 hover:border-primary/30 transition-all"
+                    to={`/region/${activeHub.slug}`}
+                    className="inline-flex items-center gap-2 px-5 py-2.5 bg-primary text-charcoal hover:bg-primary/90 font-semibold text-sm rounded-lg transition-all shadow-lg shadow-primary/20 hover:shadow-primary/40 hover:scale-105"
                   >
-                    <MapPin className="w-3.5 h-3.5 text-primary/60 group-hover:text-primary transition-colors shrink-0" />
-                    <span className="text-white/70 group-hover:text-white text-sm font-medium transition-colors truncate">
-                      {hub.shortName === "Islands" ? "Indian Ocean" : hub.shortName === "Friends" ? "Friends of Africa" : hub.name}
-                    </span>
+                    Explore {activeHub.shortName} <ArrowRight className="w-4 h-4" />
                   </Link>
-                ))}
+                </motion.div>
+              )}
+            </AnimatePresence>
+
+            {/* Beyond-the-map: Diaspora + Friends */}
+            <div className="grid sm:grid-cols-2 gap-3">
+              {[diasporaHub, friendsHub].filter(Boolean).map((hub) => (
+                <Link
+                  key={hub!.slug}
+                  to={`/region/${hub!.slug}`}
+                  className="group relative bg-white/[0.03] border border-white/10 rounded-xl p-4 hover:bg-primary/5 hover:border-primary/30 transition-all overflow-hidden"
+                >
+                  <div className="flex items-center gap-3 mb-2">
+                    <div className="w-9 h-9 rounded-lg bg-primary/10 border border-primary/20 flex items-center justify-center shrink-0">
+                      {hub!.slug === "diaspora" ? (
+                        <Globe2 className="w-4 h-4 text-primary" />
+                      ) : (
+                        <Users className="w-4 h-4 text-primary" />
+                      )}
+                    </div>
+                    <h4 className="text-white font-semibold text-sm group-hover:text-primary transition-colors">
+                      {hub!.name}
+                    </h4>
+                  </div>
+                  <p className="text-white/50 text-xs leading-relaxed line-clamp-2">{hub!.tagline}</p>
+                  <ArrowRight className="absolute top-4 right-4 w-3.5 h-3.5 text-primary/40 group-hover:text-primary group-hover:translate-x-1 transition-all" />
+                </Link>
+              ))}
+            </div>
+
+            {/* Stats footer */}
+            <div className="grid grid-cols-3 gap-2 pt-2">
+              <div className="text-center bg-white/[0.02] border border-white/5 rounded-lg py-3">
+                <div className="text-primary font-display text-xl font-bold">10</div>
+                <div className="text-white/50 text-[10px] uppercase tracking-wider">Regions</div>
               </div>
-            )}
+              <div className="text-center bg-white/[0.02] border border-white/5 rounded-lg py-3">
+                <div className="text-primary font-display text-xl font-bold">54</div>
+                <div className="text-white/50 text-[10px] uppercase tracking-wider">Countries</div>
+              </div>
+              <div className="text-center bg-white/[0.02] border border-white/5 rounded-lg py-3">
+                <div className="text-primary font-display text-xl font-bold">1B+</div>
+                <div className="text-white/50 text-[10px] uppercase tracking-wider">Reached</div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
