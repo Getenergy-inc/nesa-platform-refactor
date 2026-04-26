@@ -91,6 +91,11 @@ export function NESALandingPage() {
         <LazySection>
           <SupportExperienceSection />
         </LazySection>
+
+        {/* ═══ 8c. Featured Merch + Buy Your Ticket ═══ */}
+        <LazySection>
+          <MerchAndTicketsSection />
+        </LazySection>
         
         {/* ═══ 9. Sponsors ═══ */}
         <LazySection>
