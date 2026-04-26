@@ -71,13 +71,12 @@ export default function NESATV() {
               <img
                 src={nesaTVBackdrop}
                 alt="NESA Africa TV stage with host and sponsor backdrop"
-                className="h-[260px] w-full object-cover object-center md:h-[340px] lg:h-[400px]"
+                className="h-[320px] w-full object-cover object-[center_top] md:h-[420px] lg:h-[500px]"
                 loading="eager"
                 decoding="async"
               />
-              {/* Subtle right-side gradient only, keep image crisp */}
-              <div className="pointer-events-none absolute inset-y-0 left-0 w-1/3 bg-gradient-to-r from-charcoal/80 to-transparent" aria-hidden="true" />
-              <div className="pointer-events-none absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-charcoal/70 to-transparent" aria-hidden="true" />
+              {/* Soft bottom gradient only, keep host's face fully visible */}
+              <div className="pointer-events-none absolute inset-x-0 bottom-0 h-2/5 bg-gradient-to-t from-charcoal via-charcoal/60 to-transparent" aria-hidden="true" />
 
               {/* LIVE badge overlay */}
               <div className="absolute right-4 top-4 flex items-center gap-2 rounded-md bg-red-600 px-3 py-1.5 text-xs font-bold uppercase tracking-wider text-white shadow-lg">
