@@ -12,7 +12,6 @@ import {
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { RecognitionFlashCard } from "@/components/nesa/RecognitionFlashCard";
-import { AfricaEducationIconHero } from "@/components/nesa/AfricaEducationIconHero";
 
 const recognitionPathway = [
   "Contribution to education access",
@@ -148,8 +147,41 @@ export function BrandNarrativeSection() {
           </div>
         </motion.div>
 
-        {/* Core Brand Pillar — Africa Education Icon (split hero with dynamic nominee showcase) */}
-        <AfricaEducationIconHero />
+        {/* Core Brand Pillar — Africa Education Icon */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="relative rounded-3xl overflow-hidden mb-16 border border-gold/40"
+        >
+          <div className="absolute inset-0 bg-gradient-to-br from-blue-900/40 via-charcoal to-charcoal" />
+          <div className="absolute -top-24 -right-24 h-72 w-72 rounded-full bg-gold/15 blur-3xl" />
+          <div className="relative p-8 md:p-12 text-center">
+            <div className="inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-gold/15 border border-gold/40 mb-5">
+              <Crown className="h-8 w-8 text-gold" />
+            </div>
+            <p className="text-[11px] tracking-widest uppercase text-gold/80 font-semibold mb-3">
+              Core Brand Pillar
+            </p>
+            <h3 className="font-display text-3xl md:text-4xl font-bold text-white mb-4">
+              Africa Education Icon
+            </h3>
+            <p className="text-gold text-base md:text-lg font-medium mb-4">
+              Lifetime Achievement (2006–2026)
+            </p>
+            <p className="text-white/75 text-sm md:text-base max-w-2xl mx-auto leading-relaxed mb-6">
+              The highest honour and central brand identity of NESA Africa — recognizing
+              transformational leaders who have shaped education across the continent over
+              the past two decades. This category anchors the entire award system.
+            </p>
+            <Link to="/awards/icon">
+              <Button className="bg-gold hover:bg-gold-dark text-charcoal font-bold rounded-full gap-2">
+                Explore the Icon Award
+                <ArrowRight className="h-4 w-4" />
+              </Button>
+            </Link>
+          </div>
+        </motion.div>
 
         {/* Extended Recognition Framework */}
         <div className="mb-16">

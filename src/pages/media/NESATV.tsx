@@ -19,7 +19,6 @@ import {
 import rawVideos from "@/data/videos.json";
 import { validateVideos } from "@/lib/validate";
 import { YOUTUBE_CHANNEL, getYouTubeEmbedUrl } from "@/lib/youtube";
-import nesaTVBackdrop from "@/assets/nesa-tv-backdrop.jpg";
 
 // Validate and get videos from JSON
 const videos = validateVideos(rawVideos);
@@ -55,9 +54,9 @@ export default function NESATV() {
       </Helmet>
 
       <div className="min-h-screen bg-charcoal">
-        {/* Hero with cinematic stage backdrop */}
-        <section className="relative overflow-hidden bg-gradient-to-b from-charcoal to-charcoal/95 py-12 lg:py-16">
-          <div className="container relative mx-auto px-4">
+        {/* Hero */}
+        <section className="relative bg-gradient-to-b from-charcoal to-charcoal/95 py-16 lg:py-24">
+          <div className="container mx-auto px-4">
             <Link
               to="/media"
               className="mb-6 inline-flex items-center gap-2 text-sm text-white/60 hover:text-primary"
@@ -65,41 +64,18 @@ export default function NESATV() {
               <ArrowLeft className="h-4 w-4" />
               Back to Media Hub
             </Link>
-
-            {/* Framed backdrop banner */}
-            <div className="relative mb-10 overflow-hidden rounded-2xl border border-primary/20 shadow-[0_20px_60px_-20px_rgba(0,0,0,0.8)]">
-              <img
-                src={nesaTVBackdrop}
-                alt="NESA Africa TV stage with host and sponsor backdrop"
-                className="h-[320px] w-full object-cover object-[center_top] md:h-[420px] lg:h-[500px]"
-                loading="eager"
-                decoding="async"
-              />
-              {/* Soft bottom gradient only, keep host's face fully visible */}
-              <div className="pointer-events-none absolute inset-x-0 bottom-0 h-2/5 bg-gradient-to-t from-charcoal via-charcoal/60 to-transparent" aria-hidden="true" />
-
-              {/* LIVE badge overlay */}
-              <div className="absolute right-4 top-4 flex items-center gap-2 rounded-md bg-red-600 px-3 py-1.5 text-xs font-bold uppercase tracking-wider text-white shadow-lg">
-                <Radio className="h-3 w-3 animate-pulse" />
-                Live
-              </div>
-
-              {/* Title overlay on left */}
-              <div className="absolute inset-y-0 left-0 flex max-w-md flex-col justify-end p-6 md:p-8">
-                <div className="mb-3 flex items-center gap-2">
-                  <Tv className="h-5 w-5 text-primary" />
-                  <span className="text-xs font-semibold uppercase tracking-widest text-primary">
-                    Now Broadcasting
-                  </span>
-                </div>
-                <h1 className="font-display text-3xl font-bold leading-tight text-white drop-shadow-lg md:text-4xl">
-                  NESA Africa <span className="text-primary">TV</span>
-                </h1>
-              </div>
-            </div>
-
             <div className="flex flex-col gap-8 lg:flex-row lg:items-start lg:justify-between">
               <div className="max-w-2xl">
+                <div className="mb-4 flex items-center gap-3">
+                  <Tv className="h-6 w-6 text-primary" />
+                  <Badge className="bg-red-500 text-white">
+                    <Radio className="mr-1 h-3 w-3 animate-pulse" />
+                    Live Now
+                  </Badge>
+                </div>
+                <h1 className="mb-4 font-display text-4xl font-bold text-white md:text-5xl">
+                  NESA Africa <span className="text-primary">TV</span>
+                </h1>
                 <p className="mb-6 text-lg text-white/70">
                   24/7 multilingual education broadcasting. Watch live streams, on-demand content,
                   and exclusive NESA-Africa programming.
