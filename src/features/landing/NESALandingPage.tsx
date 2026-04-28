@@ -77,11 +77,8 @@ export function NESALandingPage() {
           <CategoriesSection />
         </LazySection>
 
-        {/* ═══ 6b. Explore Nominees — Search, Filter, Discover ═══ */}
-        <LazySection>
-          <LandingNomineeShowcase />
-        </LazySection>
-        
+
+
         {/* ═══ 6. Interactive Africa Map ═══ */}
         <LazySection>
           <InteractiveAfricaMap />
