@@ -28,6 +28,7 @@ const PromoVideosSection = lazy(() => import("@/components/nesa/PromoVideosSecti
 const SupportExperienceSection = lazy(() => import("@/components/nesa/SupportExperienceSection").then(m => ({ default: m.SupportExperienceSection })));
 const BrandNarrativeSection = lazy(() => import("@/components/nesa/BrandNarrativeSection").then(m => ({ default: m.BrandNarrativeSection })));
 const AwardSpotlightSection = lazy(() => import("@/components/nesa/AwardSpotlightSection").then(m => ({ default: m.AwardSpotlightSection })));
+const LandingNomineeShowcase = lazy(() => import("@/components/nesa/LandingNomineeShowcase").then(m => ({ default: m.LandingNomineeShowcase })));
 
 export function NESALandingPage() {
   const { currentEdition } = useSeason();
@@ -76,6 +77,11 @@ export function NESALandingPage() {
           <CategoriesSection />
         </LazySection>
 
+        {/* ═══ 6b. Explore Nominees — Search, Filter, Discover ═══ */}
+        <LazySection>
+          <LandingNomineeShowcase />
+        </LazySection>
+        
         {/* ═══ 6. Interactive Africa Map ═══ */}
         <LazySection>
           <InteractiveAfricaMap />
