@@ -29,6 +29,7 @@ const SupportExperienceSection = lazy(() => import("@/components/nesa/SupportExp
 const BrandNarrativeSection = lazy(() => import("@/components/nesa/BrandNarrativeSection").then(m => ({ default: m.BrandNarrativeSection })));
 const AwardSpotlightSection = lazy(() => import("@/components/nesa/AwardSpotlightSection").then(m => ({ default: m.AwardSpotlightSection })));
 const MerchandiseShowcase = lazy(() => import("@/components/nesa/MerchandiseShowcase").then(m => ({ default: m.MerchandiseShowcase })));
+const SpecialSchoolImpactSection = lazy(() => import("@/components/nesa/SpecialSchoolImpactSection").then(m => ({ default: m.SpecialSchoolImpactSection })));
 
 export function NESALandingPage() {
   const { currentEdition } = useSeason();
