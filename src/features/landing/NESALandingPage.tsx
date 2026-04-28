@@ -29,6 +29,7 @@ const SupportExperienceSection = lazy(() => import("@/components/nesa/SupportExp
 const BrandNarrativeSection = lazy(() => import("@/components/nesa/BrandNarrativeSection").then(m => ({ default: m.BrandNarrativeSection })));
 const AwardSpotlightSection = lazy(() => import("@/components/nesa/AwardSpotlightSection").then(m => ({ default: m.AwardSpotlightSection })));
 const LandingNomineeShowcase = lazy(() => import("@/components/nesa/LandingNomineeShowcase").then(m => ({ default: m.LandingNomineeShowcase })));
+const MerchandiseShowcase = lazy(() => import("@/components/nesa/MerchandiseShowcase").then(m => ({ default: m.MerchandiseShowcase })));
 
 export function NESALandingPage() {
   const { currentEdition } = useSeason();
@@ -95,6 +96,11 @@ export function NESALandingPage() {
         {/* ═══ 8b. Tickets • Merch • Anthem ═══ */}
         <LazySection>
           <SupportExperienceSection />
+        </LazySection>
+
+        {/* ═══ 8c. Merchandise Showcase ═══ */}
+        <LazySection>
+          <MerchandiseShowcase />
         </LazySection>
         
         {/* ═══ 9. Sponsors ═══ */}
