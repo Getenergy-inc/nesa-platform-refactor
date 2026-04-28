@@ -28,7 +28,6 @@ const PromoVideosSection = lazy(() => import("@/components/nesa/PromoVideosSecti
 const SupportExperienceSection = lazy(() => import("@/components/nesa/SupportExperienceSection").then(m => ({ default: m.SupportExperienceSection })));
 const BrandNarrativeSection = lazy(() => import("@/components/nesa/BrandNarrativeSection").then(m => ({ default: m.BrandNarrativeSection })));
 const AwardSpotlightSection = lazy(() => import("@/components/nesa/AwardSpotlightSection").then(m => ({ default: m.AwardSpotlightSection })));
-const LandingNomineeShowcase = lazy(() => import("@/components/nesa/LandingNomineeShowcase").then(m => ({ default: m.LandingNomineeShowcase })));
 const MerchandiseShowcase = lazy(() => import("@/components/nesa/MerchandiseShowcase").then(m => ({ default: m.MerchandiseShowcase })));
 
 export function NESALandingPage() {
