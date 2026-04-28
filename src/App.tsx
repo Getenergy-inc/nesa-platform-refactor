@@ -96,6 +96,7 @@ import EduAid from "./pages/EduAid";
 import Rebuild from "./pages/Rebuild";
 import RebuildHubPage from "./pages/eduaid/RebuildHubPage";
 import RebuildRegionalPortal from "./pages/eduaid/RebuildRegionalPortal";
+import SpecialSchoolImpact from "./pages/SpecialSchoolImpact";
 import Judges from "./pages/Judges";
 import Install from "./pages/Install";
 
@@ -1129,6 +1130,14 @@ const App = () => (
                     element={
                       <WithLayout>
                         <RebuildRegionalPortal />
+                      </WithLayout>
+                    }
+                  />
+                  <Route
+                    path="/special-school-impact"
+                    element={
+                      <WithLayout>
+                        <SpecialSchoolImpact />
                       </WithLayout>
                     }
                   />
