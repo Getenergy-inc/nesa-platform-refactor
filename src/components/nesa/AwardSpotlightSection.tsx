@@ -1,5 +1,6 @@
 // Pathways to Recognition — NESA Africa 2026
-// 2x2 premium feature grid + Impact wrap-up + Regional context
+// Premium 4-card grid + Impact Wrap-Up + Regional Reach
+// African-inspired, gold + deep green accents on charcoal
 
 import { motion } from "framer-motion";
 import {
@@ -13,109 +14,117 @@ import {
   Heart,
   HandCoins,
   MapPin,
+  Trophy,
+  Users,
+  Radio,
+  Handshake,
 } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 
-type Spotlight = {
+type Pathway = {
   id: string;
   icon: typeof Crown;
-  eyebrow: string;
+  visualIcon: typeof Trophy;
+  category: string;
   headline: string;
-  subheadline: string;
+  awardLine: string;
   description: string;
   href: string;
   cta: string;
-  tone: "icon" | "csr" | "influencer" | "grants";
+  visualGradient: string;
+  accentLabel: string;
 };
 
-const cards: Spotlight[] = [
+const pathways: Pathway[] = [
   {
     id: "icon",
     icon: Crown,
-    eyebrow: "Lifetime Achievement",
+    visualIcon: Trophy,
+    category: "Lifetime Achievement",
     headline: "Who Will Be Crowned Africa Education Icon?",
-    subheadline: "Africa Education Icon — Lifetime Achievement (2006–2026)",
+    awardLine: "Africa Education Icon — Lifetime Achievement (2006–2026)",
     description:
       "Recognizing transformational leaders shaping education across Africa for over two decades.",
     href: "/awards/africa-education-icon",
     cta: "Discover the Icon Award",
-    tone: "icon",
+    visualGradient:
+      "from-gold/40 via-emerald-900/40 to-charcoal",
+    accentLabel: "Legacy • 2006–2026",
   },
   {
     id: "csr",
     icon: Building2,
-    eyebrow: "Corporate Recognition",
+    visualIcon: Users,
+    category: "Corporate Recognition",
     headline: "Who Will Emerge as Africa's Leading CSR for Education Company?",
-    subheadline: "Top CSR for Education company across African regions — 2026",
+    awardLine: "Top CSR for Education Company Across African Regions — 2026",
     description:
       "Celebrating organizations funding, supporting, and transforming education systems.",
     href: "/awards/csr-education",
     cta: "Explore CSR Recognition",
-    tone: "csr",
+    visualGradient:
+      "from-emerald-800/50 via-emerald-900/30 to-charcoal",
+    accentLabel: "Corporate • Continental",
   },
   {
     id: "influencer",
     icon: Megaphone,
-    eyebrow: "Digital Voices",
+    visualIcon: Radio,
+    category: "Digital Voices",
     headline: "Who Are Africa's Top Education Influencers?",
-    subheadline: "Social media, music, and sports voices shaping education — 2026",
+    awardLine: "Social Media, Music, and Sports Voices Shaping Education — 2026",
     description:
       "Recognizing influential voices driving education awareness across the continent.",
     href: "/awards/influencer-education",
     cta: "See Influencer Categories",
-    tone: "influencer",
+    visualGradient:
+      "from-gold/35 via-orange-900/30 to-charcoal",
+    accentLabel: "Creators • Music • Sports",
   },
   {
     id: "grants",
     icon: Globe2,
-    eyebrow: "Global Partnerships",
+    visualIcon: Handshake,
+    category: "Global Partnerships",
     headline: "Which Global Grants Are Powering Education in Africa?",
-    subheadline: "Bilateral, multilateral, and international education support — 2026",
+    awardLine: "Bilateral, Multilateral, and International Education Support — 2026",
     description: "Honoring global partners investing in education across Africa.",
     href: "/awards/grants-global-support",
     cta: "View Global Support Awards",
-    tone: "grants",
+    visualGradient:
+      "from-emerald-900/50 via-gold/15 to-charcoal",
+    accentLabel: "Global • Bilateral • Multilateral",
   },
 ];
 
-const toneStyles: Record<Spotlight["tone"], { gradient: string; ring: string; glow: string; iconBg: string }> = {
-  icon: {
-    gradient: "from-gold/40 via-gold/15 to-charcoal",
-    ring: "ring-2 ring-gold/60 hover:ring-gold",
-    glow: "shadow-[0_0_70px_-10px_hsl(var(--gold)/0.55)]",
-    iconBg: "bg-gradient-to-br from-gold via-gold-dark to-gold/70",
-  },
-  csr: {
-    gradient: "from-gold/20 via-charcoal to-charcoal",
-    ring: "ring-1 ring-gold/25 hover:ring-gold/60",
-    glow: "shadow-[0_0_45px_-15px_hsl(var(--gold)/0.35)]",
-    iconBg: "bg-gradient-to-br from-gold to-gold-dark",
-  },
-  influencer: {
-    gradient: "from-gold/25 via-gold/5 to-charcoal",
-    ring: "ring-1 ring-gold/30 hover:ring-gold/70",
-    glow: "shadow-[0_0_50px_-15px_hsl(var(--gold)/0.4)]",
-    iconBg: "bg-gradient-to-br from-gold to-gold-dark",
-  },
-  grants: {
-    gradient: "from-gold/15 via-charcoal to-charcoal",
-    ring: "ring-1 ring-gold/25 hover:ring-gold/60",
-    glow: "shadow-[0_0_45px_-15px_hsl(var(--gold)/0.3)]",
-    iconBg: "bg-gradient-to-br from-gold to-gold-dark",
-  },
-};
+// African Kente-inspired pattern overlay (SVG)
+const PatternOverlay = () => (
+  <svg
+    className="absolute inset-0 w-full h-full opacity-[0.07] pointer-events-none"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <defs>
+      <pattern id="kente" x="0" y="0" width="40" height="40" patternUnits="userSpaceOnUse">
+        <path d="M0 20 L20 0 L40 20 L20 40 Z" fill="none" stroke="currentColor" strokeWidth="0.5" />
+        <circle cx="20" cy="20" r="2" fill="currentColor" />
+      </pattern>
+    </defs>
+    <rect width="100%" height="100%" fill="url(#kente)" />
+  </svg>
+);
 
 export function AwardSpotlightSection() {
   return (
     <section className="relative bg-charcoal py-16 sm:py-24 overflow-hidden">
+      {/* Ambient glow */}
       <div className="pointer-events-none absolute inset-0">
         <div className="absolute top-0 left-1/4 h-96 w-96 rounded-full bg-gold/5 blur-3xl" />
-        <div className="absolute bottom-0 right-1/4 h-96 w-96 rounded-full bg-gold/5 blur-3xl" />
+        <div className="absolute bottom-0 right-1/4 h-96 w-96 rounded-full bg-emerald-700/10 blur-3xl" />
       </div>
 
       <div className="container relative px-4 sm:px-6">
-        {/* Header */}
+        {/* ════ 1. SECTION HEADER ════ */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -123,27 +132,50 @@ export function AwardSpotlightSection() {
           transition={{ duration: 0.6 }}
           className="text-center max-w-3xl mx-auto mb-10 sm:mb-14"
         >
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gold/10 border border-gold/30 mb-4">
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gold/10 border border-gold/30 mb-5">
             <Sparkles className="h-4 w-4 text-gold" />
-            <span className="text-xs sm:text-sm font-semibold text-gold uppercase tracking-wider">
-              NESA Africa 2026
+            <span className="text-xs sm:text-sm font-semibold text-gold uppercase tracking-[0.2em]">
+              Recognition Pathways
             </span>
           </div>
-          <h2 className="font-display text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-4">
+          <h2 className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-5 leading-tight">
             Pathways to <span className="text-gold">Recognition</span>
           </h2>
-          <p className="text-white/70 text-base sm:text-lg leading-relaxed">
-            From lifetime icons to corporate champions, digital voices, and global partners — celebrating those
-            advancing <span className="text-gold font-medium">Education for All</span> across Africa and the diaspora.
+          <p className="text-white/75 text-base sm:text-lg leading-relaxed mb-7">
+            From lifetime icons to corporate champions, digital voices, and global partners —
+            celebrating those advancing{" "}
+            <span className="text-gold font-medium">Education for All</span> across Africa and the
+            diaspora.
           </p>
+
+          {/* Header CTAs */}
+          <div className="flex flex-col sm:flex-row gap-3 justify-center">
+            <Link to="/nominate">
+              <Button
+                size="lg"
+                className="w-full sm:w-auto bg-gold hover:bg-gold-dark text-charcoal font-semibold rounded-full gap-2 px-7 shadow-[0_0_30px_-8px_hsl(var(--gold)/0.6)]"
+              >
+                Start a Nomination
+                <ArrowRight className="h-4 w-4" />
+              </Button>
+            </Link>
+            <Link to="/categories">
+              <Button
+                size="lg"
+                variant="outline"
+                className="w-full sm:w-auto border-gold/40 text-gold hover:bg-gold/10 rounded-full gap-2 px-7"
+              >
+                Explore Categories
+              </Button>
+            </Link>
+          </div>
         </motion.div>
 
-        {/* 2x2 GRID */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-5 sm:gap-6 mb-12">
-          {cards.map((card, idx) => {
+        {/* ════ 2. PATHWAY CARDS — 2x2 GRID ════ */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-5 sm:gap-6 mb-14">
+          {pathways.map((card, idx) => {
             const Icon = card.icon;
-            const styles = toneStyles[card.tone];
-            const isIcon = card.tone === "icon";
+            const VisualIcon = card.visualIcon;
 
             return (
               <motion.div
@@ -154,70 +186,58 @@ export function AwardSpotlightSection() {
                 transition={{ duration: 0.6, delay: idx * 0.08 }}
               >
                 <Link to={card.href} className="group block h-full">
-                  <article
-                    className={`relative h-full overflow-hidden rounded-3xl ${styles.ring} ${styles.glow} transition-all duration-500 hover:-translate-y-1.5 hover:scale-[1.01]`}
-                  >
-                    <div className={`absolute inset-0 bg-gradient-to-br ${styles.gradient}`} />
-                    <div className="absolute inset-0 bg-charcoal/65" />
+                  <article className="relative h-full overflow-hidden rounded-3xl ring-1 ring-gold/25 hover:ring-gold/70 shadow-[0_10px_50px_-15px_hsl(var(--gold)/0.25)] hover:shadow-[0_20px_60px_-15px_hsl(var(--gold)/0.5)] transition-all duration-500 hover:-translate-y-2 bg-charcoal">
+                    {/* ───── Visual / Image area (top half) ───── */}
+                    <div className="relative h-44 sm:h-52 overflow-hidden">
+                      <div className={`absolute inset-0 bg-gradient-to-br ${card.visualGradient}`} />
+                      <div className="absolute inset-0 bg-charcoal/30" />
+                      <div className="text-gold absolute inset-0">
+                        <PatternOverlay />
+                      </div>
 
-                    <div className="pointer-events-none absolute -right-8 -top-8 opacity-[0.08] group-hover:opacity-[0.14] transition-opacity duration-500">
-                      <Icon className={isIcon ? "h-72 w-72 text-gold" : "h-56 w-56 text-gold"} strokeWidth={1} />
+                      {/* Big visual icon */}
+                      <div className="absolute inset-0 flex items-center justify-center">
+                        <VisualIcon
+                          className="h-28 w-28 sm:h-32 sm:w-32 text-gold/80 group-hover:scale-110 group-hover:text-gold transition-all duration-700"
+                          strokeWidth={1.2}
+                        />
+                      </div>
+
+                      {/* Accent label */}
+                      <div className="absolute top-4 left-4">
+                        <span className="px-2.5 py-1 rounded-full bg-charcoal/70 backdrop-blur-md border border-gold/30 text-[10px] font-semibold text-gold uppercase tracking-wider">
+                          {card.accentLabel}
+                        </span>
+                      </div>
+
+                      {/* Bottom fade into content */}
+                      <div className="absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-charcoal to-transparent" />
                     </div>
-                    {isIcon && (
-                      <div className="pointer-events-none absolute -left-10 -bottom-10 opacity-[0.05]">
-                        <Crown className="h-56 w-56 text-gold" strokeWidth={1} />
-                      </div>
-                    )}
 
-                    <div className={`relative flex flex-col h-full ${isIcon ? "p-7 sm:p-10 min-h-[420px]" : "p-6 sm:p-8 min-h-[360px]"}`}>
-                      <div className="mb-5">
-                        <div
-                          className={`inline-flex items-center justify-center rounded-2xl shadow-2xl ${styles.iconBg} ${
-                            isIcon ? "h-20 w-20 sm:h-24 sm:w-24" : "h-14 w-14"
-                          }`}
-                        >
-                          <Icon
-                            className={`text-charcoal ${isIcon ? "h-11 w-11 sm:h-12 sm:w-12" : "h-7 w-7"}`}
-                            strokeWidth={1.5}
-                          />
+                    {/* ───── Content (bottom half) ───── */}
+                    <div className="relative p-6 sm:p-7">
+                      <div className="flex items-start gap-3 mb-4">
+                        <div className="inline-flex items-center justify-center h-11 w-11 rounded-xl bg-gradient-to-br from-gold to-gold-dark shadow-lg shrink-0">
+                          <Icon className="h-5 w-5 text-charcoal" strokeWidth={2} />
                         </div>
+                        <span className="inline-block self-center px-2.5 py-1 rounded-full bg-emerald-900/40 border border-emerald-500/30 text-emerald-200 text-[10px] font-bold uppercase tracking-widest">
+                          {card.category}
+                        </span>
                       </div>
 
-                      <span
-                        className={`inline-block self-start px-2.5 py-1 rounded-full font-bold uppercase tracking-widest mb-3 ${
-                          isIcon
-                            ? "bg-gold text-charcoal text-[11px] sm:text-xs"
-                            : "bg-gold/15 text-gold border border-gold/40 text-[10px]"
-                        }`}
-                      >
-                        {card.eyebrow}
-                      </span>
-
-                      <h3
-                        className={`font-display font-bold text-white mb-2 group-hover:text-gold transition-colors leading-tight ${
-                          isIcon ? "text-2xl sm:text-3xl md:text-4xl" : "text-xl sm:text-2xl"
-                        }`}
-                      >
+                      <h3 className="font-display text-xl sm:text-2xl font-bold text-white mb-2 group-hover:text-gold transition-colors leading-tight">
                         {card.headline}
                       </h3>
 
-                      <p
-                        className={`text-gold font-semibold mb-3 leading-snug ${
-                          isIcon ? "text-sm sm:text-base" : "text-xs sm:text-sm"
-                        }`}
-                      >
-                        {card.subheadline}
+                      <p className="text-gold font-semibold text-xs sm:text-sm mb-3 leading-snug">
+                        {card.awardLine}
                       </p>
 
-                      <p className={`text-white/70 leading-relaxed mb-6 flex-1 ${isIcon ? "text-sm sm:text-base" : "text-sm"}`}>
+                      <p className="text-white/70 text-sm leading-relaxed mb-5">
                         {card.description}
                       </p>
 
-                      <div
-                        className={`inline-flex items-center gap-2 font-semibold group-hover:gap-3 transition-all ${
-                          isIcon ? "text-gold text-base" : "text-gold text-sm"
-                        }`}
-                      >
+                      <div className="inline-flex items-center gap-2 text-gold text-sm font-semibold group-hover:gap-3 transition-all">
                         {card.cta}
                         <ArrowRight className="h-4 w-4" />
                       </div>
@@ -229,17 +249,20 @@ export function AwardSpotlightSection() {
           })}
         </div>
 
-        {/* From Recognition to Real Impact */}
+        {/* ════ 3. IMPACT WRAP-UP ════ */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.7 }}
-          className="mb-10"
+          className="mb-14"
         >
-          <div className="relative overflow-hidden rounded-3xl ring-1 ring-gold/30 shadow-[0_0_50px_-15px_hsl(var(--gold)/0.4)]">
-            <div className="absolute inset-0 bg-gradient-to-br from-gold/20 via-charcoal to-charcoal" />
-            <div className="absolute inset-0 bg-charcoal/50" />
+          <div className="relative overflow-hidden rounded-3xl ring-1 ring-gold/30 shadow-[0_0_60px_-15px_hsl(var(--gold)/0.4)]">
+            <div className="absolute inset-0 bg-gradient-to-br from-emerald-900/60 via-charcoal to-charcoal" />
+            <div className="absolute inset-0 bg-charcoal/40" />
+            <div className="text-gold">
+              <PatternOverlay />
+            </div>
 
             <div className="pointer-events-none absolute right-0 top-0 opacity-10">
               <School className="h-72 w-72 text-gold" strokeWidth={1} />
@@ -249,19 +272,20 @@ export function AwardSpotlightSection() {
               <div className="max-w-3xl">
                 <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-gold/15 border border-gold/40 mb-4">
                   <Heart className="h-3.5 w-3.5 text-gold" />
-                  <span className="text-[10px] sm:text-xs font-bold uppercase tracking-widest text-gold">
+                  <span className="text-[10px] sm:text-xs font-bold uppercase tracking-[0.2em] text-gold">
                     Impact Wrap-Up
                   </span>
                 </div>
-                <h3 className="font-display text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-4">
+                <h3 className="font-display text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-4 leading-tight">
                   From Recognition to <span className="text-gold">Real Impact</span>
                 </h3>
-                <p className="text-white/75 text-sm sm:text-base md:text-lg leading-relaxed mb-6">
+                <p className="text-white/80 text-sm sm:text-base md:text-lg leading-relaxed mb-7">
                   Through <span className="text-gold font-semibold">EduAid Africa</span> and{" "}
-                  <span className="text-gold font-semibold">Rebuild My School Africa</span>, the 2026 season delivers:
+                  <span className="text-gold font-semibold">Rebuild My School Africa</span>, the
+                  2026 season connects recognition to practical education intervention.
                 </p>
 
-                <div className="grid sm:grid-cols-2 gap-3 mb-7">
+                <div className="grid sm:grid-cols-2 gap-3 mb-8">
                   {[
                     { icon: School, label: "Special school grants support (2026–2027)" },
                     { icon: HandCoins, label: "Education infrastructure crowdfunding" },
@@ -270,10 +294,14 @@ export function AwardSpotlightSection() {
                   ].map((item) => (
                     <div
                       key={item.label}
-                      className="flex items-center gap-3 p-3 rounded-xl bg-white/5 border border-gold/20 backdrop-blur-sm"
+                      className="flex items-center gap-3 p-3 rounded-xl bg-white/5 border border-gold/20 backdrop-blur-sm hover:bg-white/10 hover:border-gold/40 transition-all"
                     >
-                      <item.icon className="h-5 w-5 text-gold shrink-0" />
-                      <span className="text-white/85 text-xs sm:text-sm font-medium">{item.label}</span>
+                      <div className="h-9 w-9 rounded-lg bg-gold/15 border border-gold/30 flex items-center justify-center shrink-0">
+                        <item.icon className="h-4 w-4 text-gold" />
+                      </div>
+                      <span className="text-white/85 text-xs sm:text-sm font-medium">
+                        {item.label}
+                      </span>
                     </div>
                   ))}
                 </div>
@@ -282,7 +310,7 @@ export function AwardSpotlightSection() {
                   <Link to="/nominate?type=school">
                     <Button
                       size="lg"
-                      className="w-full sm:w-auto bg-gold hover:bg-gold-dark text-charcoal font-semibold rounded-full gap-2"
+                      className="w-full sm:w-auto bg-gold hover:bg-gold-dark text-charcoal font-semibold rounded-full gap-2 px-7 shadow-[0_0_30px_-8px_hsl(var(--gold)/0.6)]"
                     >
                       Nominate a School
                       <ArrowRight className="h-4 w-4" />
@@ -292,7 +320,7 @@ export function AwardSpotlightSection() {
                     <Button
                       size="lg"
                       variant="outline"
-                      className="w-full sm:w-auto border-gold/40 text-gold hover:bg-gold/10 rounded-full gap-2"
+                      className="w-full sm:w-auto border-gold/40 text-gold hover:bg-gold/10 rounded-full gap-2 px-7"
                     >
                       Partner for Impact
                       <ArrowRight className="h-4 w-4" />
@@ -304,42 +332,59 @@ export function AwardSpotlightSection() {
           </div>
         </motion.div>
 
-        {/* Regional Context */}
+        {/* ════ 4. REGIONAL REACH ════ */}
         <motion.div
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="rounded-2xl border border-gold/20 bg-white/[0.03] backdrop-blur-sm p-5 sm:p-7"
+          className="relative rounded-3xl border border-gold/25 bg-gradient-to-br from-emerald-900/20 via-white/[0.02] to-charcoal backdrop-blur-sm p-6 sm:p-8 overflow-hidden"
         >
-          <div className="flex flex-col md:flex-row items-start md:items-center gap-4 md:gap-6">
-            <div className="flex items-center gap-3 shrink-0">
-              <div className="h-10 w-10 rounded-xl bg-gold/15 border border-gold/40 flex items-center justify-center">
-                <Globe2 className="h-5 w-5 text-gold" />
-              </div>
-              <span className="font-display text-lg font-bold text-white">Regional Reach</span>
-            </div>
-            <p className="text-white/70 text-sm sm:text-base leading-relaxed flex-1">
-              Nominations and voting are regionally driven across Africa, ensuring fair representation across:
-            </p>
+          <div className="text-gold">
+            <PatternOverlay />
           </div>
 
-          <div className="flex flex-wrap gap-2 mt-4">
-            {[
-              "West Africa",
-              "East Africa",
-              "North Africa",
-              "Central Africa",
-              "Southern Africa",
-              "Diaspora & Global Africa",
-            ].map((region) => (
-              <span
-                key={region}
-                className="px-3 py-1.5 rounded-full bg-gold/10 border border-gold/30 text-gold text-xs sm:text-sm font-medium hover:bg-gold/20 transition-colors"
-              >
-                {region}
-              </span>
-            ))}
+          <div className="relative">
+            <div className="flex flex-col md:flex-row items-start md:items-center gap-4 md:gap-6 mb-6">
+              <div className="flex items-center gap-3 shrink-0">
+                <div className="h-12 w-12 rounded-2xl bg-gradient-to-br from-gold to-gold-dark border border-gold/40 flex items-center justify-center shadow-lg">
+                  <Globe2 className="h-6 w-6 text-charcoal" />
+                </div>
+                <div>
+                  <div className="text-[10px] font-bold uppercase tracking-[0.2em] text-gold mb-0.5">
+                    Continental Coverage
+                  </div>
+                  <span className="font-display text-xl font-bold text-white">Regional Reach</span>
+                </div>
+              </div>
+              <p className="text-white/70 text-sm sm:text-base leading-relaxed flex-1">
+                Nominations and voting are regionally driven across Africa, ensuring fair
+                representation across regions and the diaspora.
+              </p>
+            </div>
+
+            <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
+              {[
+                { name: "West Africa", color: "from-gold/30 to-gold/10" },
+                { name: "East Africa", color: "from-emerald-700/40 to-emerald-900/20" },
+                { name: "North Africa", color: "from-gold/25 to-orange-900/20" },
+                { name: "Central Africa", color: "from-emerald-800/40 to-emerald-900/20" },
+                { name: "Southern Africa", color: "from-gold/20 to-emerald-900/20" },
+                { name: "Diaspora & Global Africa", color: "from-emerald-700/30 to-gold/15" },
+              ].map((region) => (
+                <div
+                  key={region.name}
+                  className={`group relative overflow-hidden rounded-2xl border border-gold/25 hover:border-gold/60 bg-gradient-to-br ${region.color} p-4 transition-all hover:-translate-y-0.5 cursor-default`}
+                >
+                  <div className="flex items-center gap-2.5">
+                    <MapPin className="h-4 w-4 text-gold shrink-0" />
+                    <span className="text-white text-xs sm:text-sm font-semibold leading-tight">
+                      {region.name}
+                    </span>
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
         </motion.div>
       </div>
