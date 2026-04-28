@@ -73,6 +73,11 @@ export function NESALandingPage() {
           <AwardSpotlightSection />
         </LazySection>
 
+        {/* ═══ 5c. Special School Impact (2026–2027) ═══ */}
+        <LazySection>
+          <SpecialSchoolImpactSection />
+        </LazySection>
+
         {/* ═══ 6. Award Categories ═══ */}
         <LazySection>
           <CategoriesSection />
