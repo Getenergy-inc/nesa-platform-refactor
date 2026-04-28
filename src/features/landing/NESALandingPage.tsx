@@ -29,7 +29,6 @@ const SupportExperienceSection = lazy(() => import("@/components/nesa/SupportExp
 const BrandNarrativeSection = lazy(() => import("@/components/nesa/BrandNarrativeSection").then(m => ({ default: m.BrandNarrativeSection })));
 const AwardSpotlightSection = lazy(() => import("@/components/nesa/AwardSpotlightSection").then(m => ({ default: m.AwardSpotlightSection })));
 const MerchandiseShowcase = lazy(() => import("@/components/nesa/MerchandiseShowcase").then(m => ({ default: m.MerchandiseShowcase })));
-const SpecialSchoolImpactSection = lazy(() => import("@/components/nesa/SpecialSchoolImpactSection").then(m => ({ default: m.SpecialSchoolImpactSection })));
 
 export function NESALandingPage() {
   const { currentEdition } = useSeason();
@@ -71,11 +70,6 @@ export function NESALandingPage() {
         {/* ═══ 5b. Award Spotlight — 2026 Prestige Pillars ═══ */}
         <LazySection>
           <AwardSpotlightSection />
-        </LazySection>
-
-        {/* ═══ 5c. Special School Impact (2026–2027) ═══ */}
-        <LazySection>
-          <SpecialSchoolImpactSection />
         </LazySection>
 
         {/* ═══ 6. Award Categories ═══ */}
