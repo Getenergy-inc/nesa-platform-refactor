@@ -419,6 +419,76 @@ const IMPACT_PHASES = [
   },
 ];
 
+function PhaseTimeline({ items, accent = "gold" }: { items: PhaseItem[]; accent?: "gold" | "emerald" }) {
+  const isEmerald = accent === "emerald";
+  const lineColor = isEmerald
+    ? "from-emerald-500/60 via-emerald-500/30 to-transparent"
+    : "from-primary/60 via-primary/30 to-transparent";
+  const dotBorder = isEmerald ? "border-emerald-500/50" : "border-primary/40";
+  const iconColor = isEmerald ? "text-emerald-300" : "text-primary";
+  const dateColor = isEmerald ? "text-emerald-300" : "text-primary";
+  const tagClass = isEmerald
+    ? "border-emerald-500/30 bg-emerald-500/10 text-emerald-200"
+    : "border-primary/30 bg-primary/10 text-primary";
+
+  return (
+    <div className="relative mx-auto max-w-4xl">
+      <div className={`absolute left-6 top-2 hidden h-[calc(100%-1rem)] w-0.5 bg-gradient-to-b md:block ${lineColor}`} />
+      <ol className="space-y-8 md:space-y-10">
+        {items.map((item, i) => {
+          const Icon = item.icon;
+          return (
+            <li key={item.id} className="relative md:pl-20">
+              <div className={`absolute left-0 top-1 hidden h-12 w-12 items-center justify-center rounded-full border-2 bg-charcoal md:flex ${dotBorder}`}>
+                <Icon className={`h-5 w-5 ${iconColor}`} />
+                <span className="absolute -bottom-2 -right-2 flex h-6 w-6 items-center justify-center rounded-full bg-charcoal-light text-[10px] font-bold text-white ring-1 ring-white/20">
+                  {i + 1}
+                </span>
+              </div>
+
+              <Card className="border-white/10 bg-white/5 transition-all hover:border-primary/30">
+                <CardHeader className="pb-3">
+                  <div className="flex flex-wrap items-start justify-between gap-3">
+                    <CardTitle className="flex flex-wrap items-center gap-2 text-white">
+                      <Icon className={`h-5 w-5 md:hidden ${iconColor}`} />
+                      <span className="text-base md:text-lg">{item.phase}</span>
+                      {item.agc && (
+                        <span className="inline-flex items-center gap-1 rounded-full bg-primary/15 px-2 py-0.5 text-[10px] font-semibold text-primary">
+                          <Coins className="h-3 w-3" /> AGC
+                        </span>
+                      )}
+                    </CardTitle>
+                    <Badge variant="outline" className="shrink-0 border-white/20 text-white/70">
+                      Upcoming
+                    </Badge>
+                  </div>
+                  <div className={`mt-1 flex items-center gap-2 text-sm font-semibold ${dateColor}`}>
+                    <Calendar className="h-4 w-4" />
+                    {item.period}
+                  </div>
+                </CardHeader>
+                <CardContent className="space-y-3">
+                  <p className="text-sm leading-relaxed text-white/75">{item.description}</p>
+                  <div className="flex flex-wrap gap-1.5">
+                    {item.tags.map((t) => (
+                      <span
+                        key={t}
+                        className={`rounded-full border px-2.5 py-0.5 text-[11px] font-medium ${tagClass}`}
+                      >
+                        {t}
+                      </span>
+                    ))}
+                  </div>
+                </CardContent>
+              </Card>
+            </li>
+          );
+        })}
+      </ol>
+    </div>
+  );
+}
+
 export default function Timeline() {
   const [activeTab, setActiveTab] = useState("tv");
 
