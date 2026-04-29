@@ -447,21 +447,24 @@ export default function Timeline() {
                   Programme Timeline
                 </span>
               </h1>
-              <p className="mx-auto mb-10 max-w-2xl text-lg text-white/70 md:text-xl">
-                A 6-month journey from nominations to the live Blue Garnet Awards Gala,
-                followed by a 12-month social impact phase through Rebuild My School Africa.
+              <p className="mx-auto mb-10 max-w-3xl text-lg text-white/80 md:text-xl">
+                A continental journey from public pre-nomination activation on{" "}
+                <span className="font-semibold text-primary">20 May 2026</span> to the live Blue Garnet
+                Awards Gala on <span className="font-semibold text-primary">22 October 2026</span>, followed
+                by a 12-month social impact phase through Rebuild My School Africa and EduAid Africa
+                services from <span className="font-semibold text-primary">23 October 2026 to October 2027</span>.
               </p>
               <div className="flex flex-wrap justify-center gap-3">
-                <Button size="lg" asChild className="bg-primary text-charcoal hover:bg-primary/90">
+                <Button size="lg" asChild className="bg-primary font-semibold text-charcoal shadow-lg shadow-primary/20 hover:bg-primary/90">
                   <Link to="/nominate">Nominate Now</Link>
                 </Button>
-                <Button size="lg" variant="outline" asChild className="border-white/20 text-white hover:bg-white/10">
+                <Button size="lg" asChild className="border border-primary/50 bg-white/10 font-semibold text-white backdrop-blur-sm hover:bg-white/20 hover:text-white">
                   <Link to="/categories">View Categories</Link>
                 </Button>
-                <Button size="lg" variant="outline" asChild className="border-white/20 text-white hover:bg-white/10">
+                <Button size="lg" asChild className="border border-primary/50 bg-white/10 font-semibold text-white backdrop-blur-sm hover:bg-white/20 hover:text-white">
                   <Link to="/partners">Partner With Us</Link>
                 </Button>
-                <Button size="lg" variant="outline" asChild className="border-white/20 text-white hover:bg-white/10">
+                <Button size="lg" asChild className="border border-primary/50 bg-white/10 font-semibold text-white backdrop-blur-sm hover:bg-white/20 hover:text-white">
                   <Link to="/media/nesa-tv">
                     <Play className="mr-2 h-4 w-4" /> Watch NESA TV
                   </Link>
