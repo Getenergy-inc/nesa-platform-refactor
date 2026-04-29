@@ -1,7 +1,6 @@
 import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
 import { useState } from "react";
-import { PROGRAMME_TIMELINE_2026 } from "@/config/agcConfig";
 import iconLifetimeImg from "@/assets/cards/icon-lifetime.jpg";
 import platinumImg from "@/assets/cards/platinum-recognition.jpg";
 import goldVotingImg from "@/assets/cards/gold-public-voting.jpg";
