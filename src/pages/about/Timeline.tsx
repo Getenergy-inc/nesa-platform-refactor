@@ -1,7 +1,6 @@
 import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
 import { useState } from "react";
-import { PROGRAMME_TIMELINE_2026 } from "@/config/agcConfig";
 import iconLifetimeImg from "@/assets/cards/icon-lifetime.jpg";
 import platinumImg from "@/assets/cards/platinum-recognition.jpg";
 import goldVotingImg from "@/assets/cards/gold-public-voting.jpg";
@@ -177,9 +176,9 @@ const REGION_DATA = [
 const SUMMARY_CARDS = [
   {
     icon: Calendar,
-    label: "Campaign Window",
-    value: "June → 22 Oct 2026",
-    detail: "6-month continental campaign",
+    label: "Award Campaign Period",
+    value: "20 May → 22 Oct 2026",
+    detail: "Public pre-nomination, voting, recognition shows, momentum phase, and Blue Garnet Awards Gala",
   },
   {
     icon: Trophy,
@@ -190,14 +189,197 @@ const SUMMARY_CARDS = [
   {
     icon: Heart,
     label: "Impact Phase",
-    value: "Oct 2026 → Oct 2027",
-    detail: "Rebuild My School Africa",
+    value: "23 Oct 2026 → Oct 2027",
+    detail: "Rebuild My School Africa + EduAid Africa services",
   },
   {
     icon: Handshake,
     label: "Continuous Engine",
     value: "Always-On",
-    detail: "Partnerships · CSR · Media",
+    detail: "Partnerships · CSR · Media · Fundraising",
+  },
+];
+
+type PhaseItem = {
+  id: string;
+  phase: string;
+  period: string;
+  description: string;
+  tags: string[];
+  agc?: boolean;
+  icon: React.ComponentType<{ className?: string }>;
+};
+
+const PHASE_1_TIMELINE: PhaseItem[] = [
+  {
+    id: "pre-nomination",
+    phase: "Public Pre-Nomination Activation",
+    period: "20 May 2026",
+    description:
+      "Launches the early public engagement phase through pre-nomination forms, graphics, and a weekly storytelling calendar. This phase invites the general public, especially Gen Z audiences across Africa, the African diaspora, and friends of Africa, to identify public figures and changemakers supporting education before the official nomination and voting portal opens.",
+    tags: ["Pre-Nomination", "Gen Z Engagement", "Public Database", "Social Media Activation"],
+    icon: Megaphone,
+  },
+  {
+    id: "icon-nominations-close",
+    phase: "Africa Education Icon Nominations Close",
+    period: "20 June 2026",
+    description:
+      "Final deadline for lifetime achievement nominations. Scope: Africa Education Icon — Lifetime Achievement (2006–2026).",
+    tags: ["Lifetime Achievement", "Nomination Deadline", "Legacy Pipeline"],
+    icon: FileCheck,
+  },
+  {
+    id: "jury-onboarding",
+    phase: "Jury Onboarding",
+    period: "29 June – 10 July 2026",
+    description:
+      "Selected jury members complete orientation, governance review, conflict-of-interest guidance, and scoring calibration.",
+    tags: ["Integrity", "Governance", "Scoring Calibration"],
+    icon: Users,
+  },
+  {
+    id: "platinum-show",
+    phase: "Platinum Recognition Show",
+    period: "5 July 2026",
+    description:
+      "Launches the public season with baseline recognition of institutional and leadership impact across education.",
+    tags: ["Credibility", "Visibility", "Campaign Opening"],
+    icon: Star,
+  },
+  {
+    id: "gold-nominations-close",
+    phase: "Gold Certificate Nominations Close",
+    period: "10 July 2026",
+    description:
+      "Final deadline for Gold Special Recognition entries before voting and category review.",
+    tags: ["Pipeline Lock-In", "Category Review", "Voting Readiness"],
+    agc: true,
+    icon: FileCheck,
+  },
+  {
+    id: "icon-show",
+    phase: "Africa Education Icon Show",
+    period: "12 July 2026",
+    description:
+      "Honours transformational leaders whose work has shaped African education over the past two decades.",
+    tags: ["Authority", "Continental Positioning", "Lifetime Recognition"],
+    icon: Crown,
+  },
+  {
+    id: "gold-voting",
+    phase: "Gold Certificate Voting",
+    period: "20 July – 15 August 2026",
+    description:
+      "Mass public voting phase across eligible categories using AGC participation credits, with regional activation and audience growth.",
+    tags: ["Participation", "Audience Growth", "Regional Activation"],
+    agc: true,
+    icon: Vote,
+  },
+  {
+    id: "gold-show",
+    phase: "Gold Certificate Winners Show",
+    period: "22 August 2026",
+    description:
+      "Official announcement of Gold Special Recognition — 2026 Edition winners.",
+    tags: ["Amplification", "Media Assets", "Winner Visibility"],
+    agc: true,
+    icon: Tv,
+  },
+  {
+    id: "momentum-phase",
+    phase: "Momentum Phase",
+    period: "23 August – 15 September 2026",
+    description:
+      "A focused storytelling, media, partnership, and audience-building phase designed to carry the visibility from the Gold Certificate Winners Show into the final Blue Garnet voting window.",
+    tags: ["Momentum", "Storytelling", "Media Build-Up", "Partnership Visibility"],
+    icon: Sparkles,
+  },
+  {
+    id: "blue-garnet-voting",
+    phase: "Blue Garnet Voting",
+    period: "16 September – 22 October 2026",
+    description:
+      "Final competitive voting window leading directly into the gala. Voting closes on gala day for transparency and suspense.",
+    tags: ["Prestige", "Suspense", "Public + Jury"],
+    agc: true,
+    icon: Vote,
+  },
+  {
+    id: "blue-garnet-gala",
+    phase: "Blue Garnet Awards Gala",
+    period: "22 October 2026",
+    description:
+      "The peak event of the season — a live continental recognition ceremony and media moment celebrating Africa's education changemakers.",
+    tags: ["Continental Spotlight", "Live Broadcast", "Main Gala"],
+    agc: true,
+    icon: Trophy,
+  },
+];
+
+const PHASE_2_TIMELINE: PhaseItem[] = [
+  {
+    id: "rmsa-launch",
+    phase: "Rebuild My School Africa Launch",
+    period: "23 October 2026",
+    description:
+      "Official transition from awards visibility into school-focused intervention and social impact across African regions.",
+    tags: ["Legacy", "Social Impact", "Regional Schools"],
+    icon: Heart,
+  },
+  {
+    id: "school-nomination",
+    phase: "Regional School Nomination & Verification",
+    period: "November – December 2026",
+    description:
+      "Communities, chapters, partners, and the public nominate formal, informal, and special needs schools for possible intervention. Schools are reviewed based on need, evidence, location, and impact potential.",
+    tags: ["School Nomination", "Verification", "Regional Mapping"],
+    icon: School,
+  },
+  {
+    id: "eduaid-planning",
+    phase: "EduAid Africa Scholarship & Learning Access Planning",
+    period: "December 2026 – January 2027",
+    description:
+      "EduAid Africa structures scholarship support, learning access services, student support pathways, and education aid planning for selected communities and school categories.",
+    tags: ["Scholarships", "Learning Access", "Education Aid"],
+    icon: Sparkles,
+  },
+  {
+    id: "infrastructure-planning",
+    phase: "Infrastructure & Special Needs School Support Planning",
+    period: "January – March 2027",
+    description:
+      "Rebuild My School Africa prepares intervention plans for infrastructure improvement, special needs school support, classroom needs, learning materials, accessibility, and regional project costing.",
+    tags: ["Infrastructure", "Special Needs Schools", "Accessibility"],
+    icon: Target,
+  },
+  {
+    id: "csr-fundraising",
+    phase: "CSR, Donations & Fundraising Activation",
+    period: "March – June 2027",
+    description:
+      "SCEF activates CSR for Education, donor engagement, public fundraising, and partner support to fund approved school interventions and EduAid Africa services.",
+    tags: ["CSR", "Donations", "Fundraising", "Partnerships"],
+    icon: Coins,
+  },
+  {
+    id: "regional-interventions",
+    phase: "Regional School Interventions",
+    period: "June – September 2027",
+    description:
+      "Implementation phase for selected school support projects across African regions, including formal, informal, and special needs education environments.",
+    tags: ["Implementation", "Regional Impact", "School Support"],
+    icon: Handshake,
+  },
+  {
+    id: "impact-reporting",
+    phase: "Impact Reporting & Legacy Review",
+    period: "October 2027",
+    description:
+      "SCEF publishes impact updates, partner reports, school intervention outcomes, scholarship summaries, and lessons for the next NESA-Africa cycle.",
+    tags: ["Impact Report", "Transparency", "Legacy Review"],
+    icon: Megaphone,
   },
 ];
 
@@ -237,6 +419,76 @@ const IMPACT_PHASES = [
   },
 ];
 
+function PhaseTimeline({ items, accent = "gold" }: { items: PhaseItem[]; accent?: "gold" | "emerald" }) {
+  const isEmerald = accent === "emerald";
+  const lineColor = isEmerald
+    ? "from-emerald-500/60 via-emerald-500/30 to-transparent"
+    : "from-primary/60 via-primary/30 to-transparent";
+  const dotBorder = isEmerald ? "border-emerald-500/50" : "border-primary/40";
+  const iconColor = isEmerald ? "text-emerald-300" : "text-primary";
+  const dateColor = isEmerald ? "text-emerald-300" : "text-primary";
+  const tagClass = isEmerald
+    ? "border-emerald-500/30 bg-emerald-500/10 text-emerald-200"
+    : "border-primary/30 bg-primary/10 text-primary";
+
+  return (
+    <div className="relative mx-auto max-w-4xl">
+      <div className={`absolute left-6 top-2 hidden h-[calc(100%-1rem)] w-0.5 bg-gradient-to-b md:block ${lineColor}`} />
+      <ol className="space-y-8 md:space-y-10">
+        {items.map((item, i) => {
+          const Icon = item.icon;
+          return (
+            <li key={item.id} className="relative md:pl-20">
+              <div className={`absolute left-0 top-1 hidden h-12 w-12 items-center justify-center rounded-full border-2 bg-charcoal md:flex ${dotBorder}`}>
+                <Icon className={`h-5 w-5 ${iconColor}`} />
+                <span className="absolute -bottom-2 -right-2 flex h-6 w-6 items-center justify-center rounded-full bg-charcoal-light text-[10px] font-bold text-white ring-1 ring-white/20">
+                  {i + 1}
+                </span>
+              </div>
+
+              <Card className="border-white/10 bg-white/5 transition-all hover:border-primary/30">
+                <CardHeader className="pb-3">
+                  <div className="flex flex-wrap items-start justify-between gap-3">
+                    <CardTitle className="flex flex-wrap items-center gap-2 text-white">
+                      <Icon className={`h-5 w-5 md:hidden ${iconColor}`} />
+                      <span className="text-base md:text-lg">{item.phase}</span>
+                      {item.agc && (
+                        <span className="inline-flex items-center gap-1 rounded-full bg-primary/15 px-2 py-0.5 text-[10px] font-semibold text-primary">
+                          <Coins className="h-3 w-3" /> AGC
+                        </span>
+                      )}
+                    </CardTitle>
+                    <Badge variant="outline" className="shrink-0 border-white/20 text-white/70">
+                      Upcoming
+                    </Badge>
+                  </div>
+                  <div className={`mt-1 flex items-center gap-2 text-sm font-semibold ${dateColor}`}>
+                    <Calendar className="h-4 w-4" />
+                    {item.period}
+                  </div>
+                </CardHeader>
+                <CardContent className="space-y-3">
+                  <p className="text-sm leading-relaxed text-white/75">{item.description}</p>
+                  <div className="flex flex-wrap gap-1.5">
+                    {item.tags.map((t) => (
+                      <span
+                        key={t}
+                        className={`rounded-full border px-2.5 py-0.5 text-[11px] font-medium ${tagClass}`}
+                      >
+                        {t}
+                      </span>
+                    ))}
+                  </div>
+                </CardContent>
+              </Card>
+            </li>
+          );
+        })}
+      </ol>
+    </div>
+  );
+}
+
 export default function Timeline() {
   const [activeTab, setActiveTab] = useState("tv");
 
@@ -246,7 +498,7 @@ export default function Timeline() {
         <title>2026 Season Programme Timeline | NESA-Africa</title>
         <meta
           name="description"
-          content="Follow the 2026 NESA Africa journey: a 6-month campaign from nominations to the Blue Garnet Awards Gala on 22 October 2026, plus a 12-month Rebuild My School Africa impact phase."
+          content="Follow the 2026 NESA-Africa journey: a continental campaign from public pre-nomination on 20 May 2026 to the Blue Garnet Awards Gala on 22 October 2026, followed by a 12-month Rebuild My School Africa and EduAid Africa impact phase through October 2027."
         />
       </Helmet>
 
@@ -265,21 +517,24 @@ export default function Timeline() {
                   Programme Timeline
                 </span>
               </h1>
-              <p className="mx-auto mb-10 max-w-2xl text-lg text-white/70 md:text-xl">
-                A 6-month journey from nominations to the live Blue Garnet Awards Gala,
-                followed by a 12-month social impact phase through Rebuild My School Africa.
+              <p className="mx-auto mb-10 max-w-3xl text-lg text-white/80 md:text-xl">
+                A continental journey from public pre-nomination activation on{" "}
+                <span className="font-semibold text-primary">20 May 2026</span> to the live Blue Garnet
+                Awards Gala on <span className="font-semibold text-primary">22 October 2026</span>, followed
+                by a 12-month social impact phase through Rebuild My School Africa and EduAid Africa
+                services from <span className="font-semibold text-primary">23 October 2026 to October 2027</span>.
               </p>
               <div className="flex flex-wrap justify-center gap-3">
-                <Button size="lg" asChild className="bg-primary text-charcoal hover:bg-primary/90">
+                <Button size="lg" asChild className="bg-primary font-semibold text-charcoal shadow-lg shadow-primary/20 hover:bg-primary/90">
                   <Link to="/nominate">Nominate Now</Link>
                 </Button>
-                <Button size="lg" variant="outline" asChild className="border-white/20 text-white hover:bg-white/10">
+                <Button size="lg" asChild className="border border-primary/50 bg-white/10 font-semibold text-white backdrop-blur-sm hover:bg-white/20 hover:text-white">
                   <Link to="/categories">View Categories</Link>
                 </Button>
-                <Button size="lg" variant="outline" asChild className="border-white/20 text-white hover:bg-white/10">
+                <Button size="lg" asChild className="border border-primary/50 bg-white/10 font-semibold text-white backdrop-blur-sm hover:bg-white/20 hover:text-white">
                   <Link to="/partners">Partner With Us</Link>
                 </Button>
-                <Button size="lg" variant="outline" asChild className="border-white/20 text-white hover:bg-white/10">
+                <Button size="lg" asChild className="border border-primary/50 bg-white/10 font-semibold text-white backdrop-blur-sm hover:bg-white/20 hover:text-white">
                   <Link to="/media/nesa-tv">
                     <Play className="mr-2 h-4 w-4" /> Watch NESA TV
                   </Link>
@@ -307,116 +562,91 @@ export default function Timeline() {
                 );
               })}
             </div>
+
+            <div className="mx-auto mt-8 max-w-4xl rounded-2xl border border-primary/30 bg-gradient-to-r from-primary/10 via-emerald-500/5 to-primary/10 p-5 text-center">
+              <p className="text-sm leading-relaxed text-white/85 md:text-base">
+                <span className="font-semibold text-primary">Recognition leads to action.</span>{" "}
+                After the awards, the spotlight shifts into measurable education impact through
+                scholarships, school infrastructure support, regional interventions, and services for
+                formal, informal, and special needs schools.
+              </p>
+            </div>
           </div>
         </section>
 
-        {/* 3. CAMPAIGN & AWARDS JOURNEY */}
+        {/* 3. PHASE 1 — AWARD CAMPAIGN, VOTING & GALA JOURNEY */}
         <section id="journey" className="py-16 lg:py-24">
           <div className="container mx-auto px-4">
             <div className="mx-auto mb-12 max-w-3xl text-center">
               <Badge variant="outline" className="mb-4 border-primary/40 text-primary">
-                Season 1
+                Phase 1 · Season 1
               </Badge>
-              <h2 className="mb-4 font-display text-3xl font-bold text-white md:text-4xl">
-                Campaign, Voting & Awards Journey
+              <h2 className="mb-3 font-display text-3xl font-bold text-white md:text-4xl">
+                Award Campaign, Voting & Gala Journey
               </h2>
+              <p className="mb-3 text-sm font-semibold text-primary">
+                20 May 2026 → 22 October 2026
+              </p>
               <p className="text-white/70">
-                The 2026 season runs as a phased campaign designed to build credibility, engagement,
-                visibility, partnerships, and suspense toward the final Blue Garnet Awards Gala.
+                The 2026 award season runs as a phased continental campaign designed to build credibility,
+                public participation, Gen Z engagement, visibility, partnerships, voting suspense, momentum,
+                and final recognition at the Blue Garnet Awards Gala.
               </p>
             </div>
 
-            <div className="relative mx-auto max-w-5xl">
-              <div className="absolute left-6 top-0 hidden h-full w-0.5 bg-gradient-to-b from-primary/60 via-primary/30 to-transparent md:left-1/2 md:block md:-translate-x-1/2" />
+            <PhaseTimeline items={PHASE_1_TIMELINE} />
+          </div>
+        </section>
 
-              <div className="space-y-6">
-                {PROGRAMME_TIMELINE_2026.map((phase, i) => {
-                  const Icon = phaseIcons[phase.id] || FileCheck;
-                  const isActive = phase.status === ("active" as string);
-                  const isCompleted = phase.status === ("completed" as string);
-
-                  return (
-                    <div
-                      key={phase.id}
-                      className={`relative flex gap-6 md:gap-12 ${
-                        i % 2 === 0 ? "md:flex-row" : "md:flex-row-reverse"
-                      }`}
-                    >
-                      <div className="absolute left-6 top-2 z-10 hidden -translate-x-1/2 md:left-1/2 md:flex">
-                        <div
-                          className={`flex h-12 w-12 items-center justify-center rounded-full border-2 ${
-                            isActive
-                              ? "border-primary bg-primary/20"
-                              : isCompleted
-                              ? "border-green-500 bg-green-500/20"
-                              : "border-primary/40 bg-charcoal"
-                          }`}
-                        >
-                          {isCompleted ? (
-                            <CheckCircle className="h-5 w-5 text-green-500" />
-                          ) : (
-                            <Icon className={`h-5 w-5 ${isActive ? "text-primary" : "text-primary/70"}`} />
-                          )}
-                        </div>
-                      </div>
-
-                      <Card
-                        className={`flex-1 border-white/10 transition-all hover:border-primary/30 ${
-                          isActive ? "bg-primary/5 ring-1 ring-primary/30" : "bg-white/5"
-                        }`}
-                      >
-                        <CardHeader>
-                          <div className="flex items-start justify-between gap-3">
-                            <CardTitle className="flex items-center gap-2 text-white">
-                              <Icon className={`h-5 w-5 md:hidden ${isActive ? "text-primary" : "text-primary/70"}`} />
-                              <span>{phase.phase}</span>
-                              {isVotingPhase(phase.phase) && (
-                                <span className="inline-flex items-center gap-1 rounded-full bg-primary/10 px-2 py-0.5 text-[10px] font-medium text-primary">
-                                  <Coins className="h-3 w-3" /> AGC
-                                </span>
-                              )}
-                            </CardTitle>
-                            <Badge
-                              variant="outline"
-                              className={
-                                isActive
-                                  ? "shrink-0 border-primary/50 bg-primary/10 text-primary"
-                                  : isCompleted
-                                  ? "shrink-0 border-green-500/50 text-green-400"
-                                  : "shrink-0 border-white/20 text-white/60"
-                              }
-                            >
-                              {isActive ? "Active" : isCompleted ? "Done" : "Upcoming"}
-                            </Badge>
-                          </div>
-                          <div className="flex items-center gap-2 text-sm text-primary/80">
-                            <Clock className="h-4 w-4" />
-                            {phase.period}
-                          </div>
-                        </CardHeader>
-                        <CardContent className="space-y-3">
-                          <p className="text-white/70">{phase.description}</p>
-                          {(phase as any).focus && (
-                            <div className="flex flex-wrap gap-2">
-                              {(phase as any).focus.split("·").map((f: string) => (
-                                <span
-                                  key={f}
-                                  className="rounded-full border border-primary/20 bg-primary/5 px-2 py-0.5 text-[11px] text-primary/90"
-                                >
-                                  {f.trim()}
-                                </span>
-                              ))}
-                            </div>
-                          )}
-                        </CardContent>
-                      </Card>
-
-                      <div className="hidden flex-1 md:block" />
-                    </div>
-                  );
-                })}
+        {/* RECOGNITION → IMPACT BRIDGE */}
+        <section className="relative py-12">
+          <div className="container mx-auto px-4">
+            <div className="mx-auto max-w-4xl">
+              <div className="relative overflow-hidden rounded-2xl border border-primary/30 bg-gradient-to-r from-primary/15 via-emerald-600/10 to-emerald-500/15 p-6 md:p-8">
+                <div className="flex flex-col items-center gap-4 text-center md:flex-row md:text-left">
+                  <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-primary/20 ring-2 ring-primary/40">
+                    <Trophy className="h-7 w-7 text-primary" />
+                  </div>
+                  <div className="flex flex-1 items-center justify-center gap-3 text-primary">
+                    <span className="font-display text-lg font-semibold text-white">Recognition</span>
+                    <ArrowRight className="h-6 w-6" />
+                    <span className="font-display text-lg font-semibold text-emerald-300">Impact</span>
+                  </div>
+                  <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-emerald-500/20 ring-2 ring-emerald-500/40">
+                    <School className="h-7 w-7 text-emerald-300" />
+                  </div>
+                </div>
+                <p className="mt-5 text-center text-sm text-white/80 md:text-base">
+                  The Blue Garnet Gala closes Phase 1. From <span className="font-semibold text-emerald-300">23 October 2026</span>,
+                  the campaign transitions into the Rebuild My School Africa and EduAid Africa social impact phase.
+                </p>
               </div>
             </div>
+          </div>
+        </section>
+
+        {/* PHASE 2 — POST-AWARD SOCIAL IMPACT JOURNEY */}
+        <section id="impact-journey" className="border-t border-white/5 bg-charcoal-light/20 py-16 lg:py-24">
+          <div className="container mx-auto px-4">
+            <div className="mx-auto mb-12 max-w-3xl text-center">
+              <Badge variant="outline" className="mb-4 border-emerald-500/40 text-emerald-300">
+                Phase 2 · Social Impact
+              </Badge>
+              <h2 className="mb-3 font-display text-3xl font-bold text-white md:text-4xl">
+                Post-Award Social Impact Journey
+              </h2>
+              <p className="mb-3 text-sm font-semibold text-emerald-300">
+                23 October 2026 → October 2027
+              </p>
+              <p className="text-white/70">
+                After the Blue Garnet Awards Gala, the campaign transitions from recognition into
+                measurable education impact. Through Rebuild My School Africa and EduAid Africa, SCEF
+                will support school-focused interventions, scholarships, education infrastructure, learning
+                access, and regional education services across formal, informal, and special needs schools.
+              </p>
+            </div>
+
+            <PhaseTimeline items={PHASE_2_TIMELINE} accent="emerald" />
           </div>
         </section>
 
