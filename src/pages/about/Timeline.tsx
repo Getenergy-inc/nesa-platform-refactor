@@ -176,9 +176,9 @@ const REGION_DATA = [
 const SUMMARY_CARDS = [
   {
     icon: Calendar,
-    label: "Campaign Window",
-    value: "June → 22 Oct 2026",
-    detail: "6-month continental campaign",
+    label: "Award Campaign Period",
+    value: "20 May → 22 Oct 2026",
+    detail: "Public pre-nomination, voting, recognition shows, momentum phase, and Blue Garnet Awards Gala",
   },
   {
     icon: Trophy,
@@ -189,14 +189,197 @@ const SUMMARY_CARDS = [
   {
     icon: Heart,
     label: "Impact Phase",
-    value: "Oct 2026 → Oct 2027",
-    detail: "Rebuild My School Africa",
+    value: "23 Oct 2026 → Oct 2027",
+    detail: "Rebuild My School Africa + EduAid Africa services",
   },
   {
     icon: Handshake,
     label: "Continuous Engine",
     value: "Always-On",
-    detail: "Partnerships · CSR · Media",
+    detail: "Partnerships · CSR · Media · Fundraising",
+  },
+];
+
+type PhaseItem = {
+  id: string;
+  phase: string;
+  period: string;
+  description: string;
+  tags: string[];
+  agc?: boolean;
+  icon: React.ComponentType<{ className?: string }>;
+};
+
+const PHASE_1_TIMELINE: PhaseItem[] = [
+  {
+    id: "pre-nomination",
+    phase: "Public Pre-Nomination Activation",
+    period: "20 May 2026",
+    description:
+      "Launches the early public engagement phase through pre-nomination forms, graphics, and a weekly storytelling calendar. This phase invites the general public, especially Gen Z audiences across Africa, the African diaspora, and friends of Africa, to identify public figures and changemakers supporting education before the official nomination and voting portal opens.",
+    tags: ["Pre-Nomination", "Gen Z Engagement", "Public Database", "Social Media Activation"],
+    icon: Megaphone,
+  },
+  {
+    id: "icon-nominations-close",
+    phase: "Africa Education Icon Nominations Close",
+    period: "20 June 2026",
+    description:
+      "Final deadline for lifetime achievement nominations. Scope: Africa Education Icon — Lifetime Achievement (2006–2026).",
+    tags: ["Lifetime Achievement", "Nomination Deadline", "Legacy Pipeline"],
+    icon: FileCheck,
+  },
+  {
+    id: "jury-onboarding",
+    phase: "Jury Onboarding",
+    period: "29 June – 10 July 2026",
+    description:
+      "Selected jury members complete orientation, governance review, conflict-of-interest guidance, and scoring calibration.",
+    tags: ["Integrity", "Governance", "Scoring Calibration"],
+    icon: Users,
+  },
+  {
+    id: "platinum-show",
+    phase: "Platinum Recognition Show",
+    period: "5 July 2026",
+    description:
+      "Launches the public season with baseline recognition of institutional and leadership impact across education.",
+    tags: ["Credibility", "Visibility", "Campaign Opening"],
+    icon: Star,
+  },
+  {
+    id: "gold-nominations-close",
+    phase: "Gold Certificate Nominations Close",
+    period: "10 July 2026",
+    description:
+      "Final deadline for Gold Special Recognition entries before voting and category review.",
+    tags: ["Pipeline Lock-In", "Category Review", "Voting Readiness"],
+    agc: true,
+    icon: FileCheck,
+  },
+  {
+    id: "icon-show",
+    phase: "Africa Education Icon Show",
+    period: "12 July 2026",
+    description:
+      "Honours transformational leaders whose work has shaped African education over the past two decades.",
+    tags: ["Authority", "Continental Positioning", "Lifetime Recognition"],
+    icon: Crown,
+  },
+  {
+    id: "gold-voting",
+    phase: "Gold Certificate Voting",
+    period: "20 July – 15 August 2026",
+    description:
+      "Mass public voting phase across eligible categories using AGC participation credits, with regional activation and audience growth.",
+    tags: ["Participation", "Audience Growth", "Regional Activation"],
+    agc: true,
+    icon: Vote,
+  },
+  {
+    id: "gold-show",
+    phase: "Gold Certificate Winners Show",
+    period: "22 August 2026",
+    description:
+      "Official announcement of Gold Special Recognition — 2026 Edition winners.",
+    tags: ["Amplification", "Media Assets", "Winner Visibility"],
+    agc: true,
+    icon: Tv,
+  },
+  {
+    id: "momentum-phase",
+    phase: "Momentum Phase",
+    period: "23 August – 15 September 2026",
+    description:
+      "A focused storytelling, media, partnership, and audience-building phase designed to carry the visibility from the Gold Certificate Winners Show into the final Blue Garnet voting window.",
+    tags: ["Momentum", "Storytelling", "Media Build-Up", "Partnership Visibility"],
+    icon: Sparkles,
+  },
+  {
+    id: "blue-garnet-voting",
+    phase: "Blue Garnet Voting",
+    period: "16 September – 22 October 2026",
+    description:
+      "Final competitive voting window leading directly into the gala. Voting closes on gala day for transparency and suspense.",
+    tags: ["Prestige", "Suspense", "Public + Jury"],
+    agc: true,
+    icon: Vote,
+  },
+  {
+    id: "blue-garnet-gala",
+    phase: "Blue Garnet Awards Gala",
+    period: "22 October 2026",
+    description:
+      "The peak event of the season — a live continental recognition ceremony and media moment celebrating Africa's education changemakers.",
+    tags: ["Continental Spotlight", "Live Broadcast", "Main Gala"],
+    agc: true,
+    icon: Trophy,
+  },
+];
+
+const PHASE_2_TIMELINE: PhaseItem[] = [
+  {
+    id: "rmsa-launch",
+    phase: "Rebuild My School Africa Launch",
+    period: "23 October 2026",
+    description:
+      "Official transition from awards visibility into school-focused intervention and social impact across African regions.",
+    tags: ["Legacy", "Social Impact", "Regional Schools"],
+    icon: Heart,
+  },
+  {
+    id: "school-nomination",
+    phase: "Regional School Nomination & Verification",
+    period: "November – December 2026",
+    description:
+      "Communities, chapters, partners, and the public nominate formal, informal, and special needs schools for possible intervention. Schools are reviewed based on need, evidence, location, and impact potential.",
+    tags: ["School Nomination", "Verification", "Regional Mapping"],
+    icon: School,
+  },
+  {
+    id: "eduaid-planning",
+    phase: "EduAid Africa Scholarship & Learning Access Planning",
+    period: "December 2026 – January 2027",
+    description:
+      "EduAid Africa structures scholarship support, learning access services, student support pathways, and education aid planning for selected communities and school categories.",
+    tags: ["Scholarships", "Learning Access", "Education Aid"],
+    icon: Sparkles,
+  },
+  {
+    id: "infrastructure-planning",
+    phase: "Infrastructure & Special Needs School Support Planning",
+    period: "January – March 2027",
+    description:
+      "Rebuild My School Africa prepares intervention plans for infrastructure improvement, special needs school support, classroom needs, learning materials, accessibility, and regional project costing.",
+    tags: ["Infrastructure", "Special Needs Schools", "Accessibility"],
+    icon: Target,
+  },
+  {
+    id: "csr-fundraising",
+    phase: "CSR, Donations & Fundraising Activation",
+    period: "March – June 2027",
+    description:
+      "SCEF activates CSR for Education, donor engagement, public fundraising, and partner support to fund approved school interventions and EduAid Africa services.",
+    tags: ["CSR", "Donations", "Fundraising", "Partnerships"],
+    icon: Coins,
+  },
+  {
+    id: "regional-interventions",
+    phase: "Regional School Interventions",
+    period: "June – September 2027",
+    description:
+      "Implementation phase for selected school support projects across African regions, including formal, informal, and special needs education environments.",
+    tags: ["Implementation", "Regional Impact", "School Support"],
+    icon: Handshake,
+  },
+  {
+    id: "impact-reporting",
+    phase: "Impact Reporting & Legacy Review",
+    period: "October 2027",
+    description:
+      "SCEF publishes impact updates, partner reports, school intervention outcomes, scholarship summaries, and lessons for the next NESA-Africa cycle.",
+    tags: ["Impact Report", "Transparency", "Legacy Review"],
+    icon: Megaphone,
   },
 ];
 
