@@ -41,7 +41,7 @@ const items: CardItem[] = [
     description:
       "Stream and download the official NESA-Africa anthem — a tribute to teachers, learners, and changemakers across the continent.",
     cta: "Play & Download",
-    href: "/media/hub#music",
+    href: "/media",
     accent: "from-fuchsia-500/15 to-fuchsia-500/5",
   },
   {
