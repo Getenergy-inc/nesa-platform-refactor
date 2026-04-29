@@ -428,7 +428,7 @@ export default function Timeline() {
         <title>2026 Season Programme Timeline | NESA-Africa</title>
         <meta
           name="description"
-          content="Follow the 2026 NESA Africa journey: a 6-month campaign from nominations to the Blue Garnet Awards Gala on 22 October 2026, plus a 12-month Rebuild My School Africa impact phase."
+          content="Follow the 2026 NESA-Africa journey: a continental campaign from public pre-nomination on 20 May 2026 to the Blue Garnet Awards Gala on 22 October 2026, followed by a 12-month Rebuild My School Africa and EduAid Africa impact phase through October 2027."
         />
       </Helmet>
 
