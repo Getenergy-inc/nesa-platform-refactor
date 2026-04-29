@@ -492,11 +492,93 @@ export default function Timeline() {
                 );
               })}
             </div>
+
+            <div className="mx-auto mt-8 max-w-4xl rounded-2xl border border-primary/30 bg-gradient-to-r from-primary/10 via-emerald-500/5 to-primary/10 p-5 text-center">
+              <p className="text-sm leading-relaxed text-white/85 md:text-base">
+                <span className="font-semibold text-primary">Recognition leads to action.</span>{" "}
+                After the awards, the spotlight shifts into measurable education impact through
+                scholarships, school infrastructure support, regional interventions, and services for
+                formal, informal, and special needs schools.
+              </p>
+            </div>
           </div>
         </section>
 
-        {/* 3. CAMPAIGN & AWARDS JOURNEY */}
+        {/* 3. PHASE 1 — AWARD CAMPAIGN, VOTING & GALA JOURNEY */}
         <section id="journey" className="py-16 lg:py-24">
+          <div className="container mx-auto px-4">
+            <div className="mx-auto mb-12 max-w-3xl text-center">
+              <Badge variant="outline" className="mb-4 border-primary/40 text-primary">
+                Phase 1 · Season 1
+              </Badge>
+              <h2 className="mb-3 font-display text-3xl font-bold text-white md:text-4xl">
+                Award Campaign, Voting & Gala Journey
+              </h2>
+              <p className="mb-3 text-sm font-semibold text-primary">
+                20 May 2026 → 22 October 2026
+              </p>
+              <p className="text-white/70">
+                The 2026 award season runs as a phased continental campaign designed to build credibility,
+                public participation, Gen Z engagement, visibility, partnerships, voting suspense, momentum,
+                and final recognition at the Blue Garnet Awards Gala.
+              </p>
+            </div>
+
+            <PhaseTimeline items={PHASE_1_TIMELINE} />
+          </div>
+        </section>
+
+        {/* RECOGNITION → IMPACT BRIDGE */}
+        <section className="relative py-12">
+          <div className="container mx-auto px-4">
+            <div className="mx-auto max-w-4xl">
+              <div className="relative overflow-hidden rounded-2xl border border-primary/30 bg-gradient-to-r from-primary/15 via-emerald-600/10 to-emerald-500/15 p-6 md:p-8">
+                <div className="flex flex-col items-center gap-4 text-center md:flex-row md:text-left">
+                  <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-primary/20 ring-2 ring-primary/40">
+                    <Trophy className="h-7 w-7 text-primary" />
+                  </div>
+                  <div className="flex flex-1 items-center justify-center gap-3 text-primary">
+                    <span className="font-display text-lg font-semibold text-white">Recognition</span>
+                    <ArrowRight className="h-6 w-6" />
+                    <span className="font-display text-lg font-semibold text-emerald-300">Impact</span>
+                  </div>
+                  <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-emerald-500/20 ring-2 ring-emerald-500/40">
+                    <School className="h-7 w-7 text-emerald-300" />
+                  </div>
+                </div>
+                <p className="mt-5 text-center text-sm text-white/80 md:text-base">
+                  The Blue Garnet Gala closes Phase 1. From <span className="font-semibold text-emerald-300">23 October 2026</span>,
+                  the campaign transitions into the Rebuild My School Africa and EduAid Africa social impact phase.
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* PHASE 2 — POST-AWARD SOCIAL IMPACT JOURNEY */}
+        <section id="impact-journey" className="border-t border-white/5 bg-charcoal-light/20 py-16 lg:py-24">
+          <div className="container mx-auto px-4">
+            <div className="mx-auto mb-12 max-w-3xl text-center">
+              <Badge variant="outline" className="mb-4 border-emerald-500/40 text-emerald-300">
+                Phase 2 · Social Impact
+              </Badge>
+              <h2 className="mb-3 font-display text-3xl font-bold text-white md:text-4xl">
+                Post-Award Social Impact Journey
+              </h2>
+              <p className="mb-3 text-sm font-semibold text-emerald-300">
+                23 October 2026 → October 2027
+              </p>
+              <p className="text-white/70">
+                After the Blue Garnet Awards Gala, the campaign transitions from recognition into
+                measurable education impact. Through Rebuild My School Africa and EduAid Africa, SCEF
+                will support school-focused interventions, scholarships, education infrastructure, learning
+                access, and regional education services across formal, informal, and special needs schools.
+              </p>
+            </div>
+
+            <PhaseTimeline items={PHASE_2_TIMELINE} accent="emerald" />
+          </div>
+        </section>
           <div className="container mx-auto px-4">
             <div className="mx-auto mb-12 max-w-3xl text-center">
               <Badge variant="outline" className="mb-4 border-primary/40 text-primary">
