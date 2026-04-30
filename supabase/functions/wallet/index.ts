@@ -382,16 +382,23 @@ Deno.serve(async (req) => {
         reference_id: payment_intent_id,
       });
 
-      // Trigger referral reward (BUG-001 fix)
-      await triggerReferralReward(adminSupabase, userId, "TOPUP", payment.amount_usd);
+      // Trigger referral reward for the wallet owner (not the admin caller)
+      if (ownerUserId) {
+        await triggerReferralReward(adminSupabase, ownerUserId, "TOPUP", payment.amount_usd);
+      }
 
-      // Audit log
+      // Audit log — record both the admin actor and the affected wallet owner
       await adminSupabase.from("audit_logs").insert({
         action: "topup_confirmed",
         entity_type: "payment_intent",
         entity_id: payment_intent_id,
         user_id: userId,
-        new_values: { agc_amount: payment.agc_amount, amount_usd: payment.amount_usd },
+        new_values: {
+          agc_amount: payment.agc_amount,
+          amount_usd: payment.amount_usd,
+          wallet_owner_id: ownerUserId,
+          provider_reference,
+        },
       });
 
       return respond({ 
