@@ -54,8 +54,12 @@ export function NESALandingPage() {
         <NESAHeader />
         {/* ═══ 1. HERO — Authority ═══ */}
         <TrophyHeroSection />
-        
+
+        {/* ═══ 1b. Why It Matters — value pillars ═══ */}
+        <HeroValueStrip />
+
         {/* ═══ 2. Trust Strip ═══ */}
+        <div id="explore" />
         <TrustLogosStrip />
 
         {/* ═══ 2b. Brand Narrative — What NESA Africa Represents ═══ */}
