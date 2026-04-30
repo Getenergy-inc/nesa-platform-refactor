@@ -212,8 +212,12 @@ export function TrophyHeroSection() {
             transition={{ duration: 0.6, delay: 0.3 }}
           >
             <div className="relative h-56 sm:h-64 md:h-72 lg:h-80 xl:h-[22rem] w-48 sm:w-56 md:w-64 lg:w-72 xl:w-80 flex items-center justify-center">
-              <div className="absolute -inset-6 bg-gradient-to-t from-blue-600/25 via-gold/15 to-transparent blur-3xl rounded-full" />
-              <div className="absolute -inset-3 bg-gradient-to-b from-gold/10 via-transparent to-blue-500/10 blur-2xl rounded-full" />
+              <motion.div
+                className="absolute -inset-10 bg-gradient-to-t from-blue-600/30 via-gold/25 to-transparent blur-3xl rounded-full"
+                animate={{ opacity: [0.55, 0.95, 0.55], scale: [0.95, 1.05, 0.95] }}
+                transition={{ duration: 4.5, repeat: Infinity, ease: "easeInOut" }}
+              />
+              <div className="absolute -inset-3 bg-gradient-to-b from-gold/15 via-transparent to-blue-500/15 blur-2xl rounded-full" />
               
               <AnimatePresence mode="wait">
                 {currentItem === "trophy-icon" && (
