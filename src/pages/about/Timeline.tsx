@@ -232,7 +232,7 @@ const PHASE_1_TIMELINE: PhaseItem[] = [
   {
     id: "jury-onboarding",
     phase: "Jury Onboarding",
-    period: "29 June – 30 August 2026",
+    period: "29 June – 10 July 2026",
     description:
       "Selected jury members complete orientation, governance review, conflict-of-interest guidance, and scoring calibration.",
     tags: ["Integrity", "Governance", "Scoring Calibration"],
