@@ -5,6 +5,7 @@ import { lazy } from "react";
 
 import { Helmet } from "react-helmet-async";
 import { TrophyHeroSection } from "@/components/nesa/TrophyHeroSection";
+import { HeroValueStrip } from "@/components/nesa/HeroValueStrip";
 import { TrustLogosStrip } from "@/components/nesa/TrustLogosStrip";
 import { QuickActionBar } from "@/components/nesa/QuickActionBar";
 
