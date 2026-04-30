@@ -310,16 +310,36 @@ Deno.serve(async (req) => {
     }
 
     // ============================================================
-    // ROUTE: POST /wallet/topup/confirm - Confirm payment and trigger referral (BUG-001 fix)
+    // ROUTE: POST /wallet/topup/confirm - Confirm payment and credit wallet
+    // SECURITY: Only callable by admins or via server-to-server webhooks
+    // (using the service role key). End users CANNOT self-confirm payments —
+    // confirmations must originate from the payment provider's webhook so we
+    // never credit a wallet without verified payment receipt.
     // ============================================================
     if (action === "topup" && subAction === "confirm" && req.method === "POST") {
       const userId = await requireAuth();
       if (!userId) return errorResponse("Unauthorized", 401);
 
+      // Hard gate: only admins may invoke this endpoint directly.
+      // Server-side webhook handlers should use the service role key and
+      // bypass this function entirely (call adminSupabase directly).
+      if (!(await requireRole(userId, "admin"))) {
+        return errorResponse(
+          "Forbidden: payment confirmations must come from the payment provider webhook",
+          403
+        );
+      }
+
       const body = await req.json();
-      const { payment_intent_id, provider_reference } = body;
+      const { payment_intent_id, provider_reference, provider_verified } = body;
 
       if (!payment_intent_id) return errorResponse("payment_intent_id required");
+      if (provider_verified !== true) {
+        return errorResponse(
+          "provider_verified=true required — confirm payment with provider API before calling this endpoint",
+          400
+        );
+      }
 
       // Get the payment intent
       const { data: payment, error: fetchError } = await adminSupabase
@@ -329,15 +349,14 @@ Deno.serve(async (req) => {
         .maybeSingle();
 
       if (fetchError || !payment) return errorResponse("Payment intent not found", 404);
-      
-      // Verify ownership
-      if (payment.wallet_accounts.owner_type !== "USER" || payment.wallet_accounts.owner_id !== userId) {
-        return errorResponse("Forbidden", 403);
-      }
 
       if (payment.status === "COMPLETED") {
         return errorResponse("Payment already confirmed");
       }
+
+      const ownerUserId = payment.wallet_accounts.owner_type === "USER"
+        ? payment.wallet_accounts.owner_id
+        : null;
 
       // Update payment status
       const { error: updateError } = await adminSupabase
