@@ -23,7 +23,7 @@ export function TrophyHeroSection() {
   const { data: countsData } = useRegionNomineeCounts();
   const nomineeLabel = useMemo(() => {
     const count = countsData?.totalCount ?? 1760;
-    return t("landing.trophyHero.trustNominees", { count: count.toLocaleString() } as any);
+    return String(t("landing.trophyHero.trustNominees", { count: count.toLocaleString() } as any));
   }, [countsData, t]);
 
   useEffect(() => {
