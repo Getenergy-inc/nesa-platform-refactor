@@ -5,6 +5,7 @@ import { lazy } from "react";
 
 import { Helmet } from "react-helmet-async";
 import { TrophyHeroSection } from "@/components/nesa/TrophyHeroSection";
+import { HeroValueStrip } from "@/components/nesa/HeroValueStrip";
 import { TrustLogosStrip } from "@/components/nesa/TrustLogosStrip";
 import { QuickActionBar } from "@/components/nesa/QuickActionBar";
 
@@ -53,8 +54,12 @@ export function NESALandingPage() {
         <NESAHeader />
         {/* ═══ 1. HERO — Authority ═══ */}
         <TrophyHeroSection />
-        
+
+        {/* ═══ 1b. Why It Matters — value pillars ═══ */}
+        <HeroValueStrip />
+
         {/* ═══ 2. Trust Strip ═══ */}
+        <div id="explore" />
         <TrustLogosStrip />
 
         {/* ═══ 2b. Brand Narrative — What NESA Africa Represents ═══ */}
