@@ -232,7 +232,7 @@ const PHASE_1_TIMELINE: PhaseItem[] = [
   {
     id: "jury-onboarding",
     phase: "Jury Onboarding",
-    period: "29 June – 10 July 2026",
+    period: "29 June – 30 August 2026",
     description:
       "Selected jury members complete orientation, governance review, conflict-of-interest guidance, and scoring calibration.",
     tags: ["Integrity", "Governance", "Scoring Calibration"],
@@ -535,7 +535,7 @@ export default function Timeline() {
                   <Link to="/partners">Partner With Us</Link>
                 </Button>
                 <Button size="lg" asChild className="border border-primary/50 bg-white/10 font-semibold text-white backdrop-blur-sm hover:bg-white/20 hover:text-white">
-                  <Link to="/media/tv">
+                  <Link to="/media/nesa-tv">
                     <Play className="mr-2 h-4 w-4" /> Watch NESA TV
                   </Link>
                 </Button>
@@ -1033,7 +1033,7 @@ export default function Timeline() {
 
             <div className="mt-8 text-center">
               <Button asChild variant="outline" className="border-primary/40 text-primary hover:bg-primary/10">
-                <Link to="/media/tv">
+                <Link to="/media/nesa-tv">
                   Open NESA TV <ArrowRight className="ml-2 h-4 w-4" />
                 </Link>
               </Button>
@@ -1080,7 +1080,7 @@ export default function Timeline() {
 
             <div className="mt-10 flex flex-wrap justify-center gap-3">
               <Button asChild className="bg-primary text-charcoal hover:bg-primary/90">
-                <Link to="/rebuild">
+                <Link to="/eduaid-africa/rebuild-my-school">
                   <School className="mr-2 h-4 w-4" /> Nominate a School
                 </Link>
               </Button>
@@ -1090,7 +1090,7 @@ export default function Timeline() {
                 </Link>
               </Button>
               <Button asChild variant="outline" className="border-white/20 text-white hover:bg-white/10">
-                <Link to="/rebuild">
+                <Link to="/eduaid-africa/rebuild-my-school">
                   Explore Impact Stories
                 </Link>
               </Button>
@@ -1120,7 +1120,7 @@ export default function Timeline() {
                 <Link to="/partners">Become a Partner</Link>
               </Button>
               <Button size="lg" asChild variant="outline" className="border-white/20 text-white hover:bg-white/10">
-                <Link to="/media/tv">
+                <Link to="/media/nesa-tv">
                   <Play className="mr-2 h-4 w-4" /> Watch NESA TV
                 </Link>
               </Button>
