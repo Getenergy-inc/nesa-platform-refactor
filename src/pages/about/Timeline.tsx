@@ -61,7 +61,7 @@ const CATEGORY_PATHWAYS = [
     scope: "2006–2026",
     description:
       "A continental honour recognising transformational leaders who have shaped education across Africa over the past two decades.",
-    placement: "Nominations close 20 June · Show 25 June 2026",
+    placement: "Nominations 12 July – 12 September 2026",
     journey: ["Nomination", "10-Year Profile", "Jury Review", "Live Show"],
     highlights: ["3 Residents", "3 Diaspora", "3 Friends of Africa"],
     subcategories: [
@@ -221,18 +221,18 @@ const PHASE_1_TIMELINE: PhaseItem[] = [
     icon: Megaphone,
   },
   {
-    id: "icon-nominations-close",
-    phase: "Africa Education Icon Nominations Close",
-    period: "20 June 2026",
+    id: "icon-nominations",
+    phase: "Africa Education Icon Nominations Open & Close",
+    period: "12 July – 12 September 2026",
     description:
-      "Final deadline for lifetime achievement nominations. Scope: Africa Education Icon — Lifetime Achievement (2006–2026).",
-    tags: ["Lifetime Achievement", "Nomination Deadline", "Legacy Pipeline"],
+      "Two-month nomination window for lifetime achievement entries. Opens on 12 July and closes on 12 September 2026. Scope: Africa Education Icon — Lifetime Achievement (2006–2026).",
+    tags: ["Lifetime Achievement", "Nomination Window", "Legacy Pipeline"],
     icon: FileCheck,
   },
   {
     id: "jury-onboarding",
     phase: "Jury Onboarding",
-    period: "29 June – 30 August 2026",
+    period: "29 June – 10 July 2026",
     description:
       "Selected jury members complete orientation, governance review, conflict-of-interest guidance, and scoring calibration.",
     tags: ["Integrity", "Governance", "Scoring Calibration"],
