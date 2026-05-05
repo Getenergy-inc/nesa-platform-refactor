@@ -189,18 +189,6 @@ export function TrophyHeroSection() {
                   Watch NESA TV
                 </Button>
               </Link>
-
-              {/* Secondary — Explore Existing Nominees */}
-              <Link to="/nominees" className="w-full sm:w-auto">
-                <Button
-                  size="lg"
-                  variant="outline"
-                  className="w-full sm:w-auto border-white/25 bg-white/5 backdrop-blur-sm text-white hover:text-gold hover:bg-gold/10 hover:border-gold/60 rounded-full px-6 gap-2 min-h-[48px] text-sm sm:text-base transition-all group"
-                >
-                  <Users className="h-5 w-5 group-hover:scale-110 transition-transform" />
-                  Explore Nominees
-                </Button>
-              </Link>
             </motion.div>
 
             {/* Inline trust line */}
