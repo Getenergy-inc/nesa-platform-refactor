@@ -313,8 +313,12 @@ Deno.serve(async (req) => {
     // ROUTE: POST /wallet/topup/confirm - Confirm payment and trigger referral (BUG-001 fix)
     // ============================================================
     if (action === "topup" && subAction === "confirm" && req.method === "POST") {
+      // SECURITY: Top-up confirmation must come from a trusted server context
+      // (payment provider webhook with service role). End users cannot self-confirm.
       const userId = await requireAuth();
       if (!userId) return errorResponse("Unauthorized", 401);
+      const isAdmin = await hasRole(userId, "admin");
+      if (!isAdmin) return errorResponse("Forbidden: webhook/admin only", 403);
 
       const body = await req.json();
       const { payment_intent_id, provider_reference } = body;
