@@ -84,12 +84,49 @@ serve(async (req) => {
   }
 
   try {
+    // AUTH: require Bearer token + admin role
+    const authHeader = req.headers.get("Authorization") || "";
+    const token = authHeader.replace(/^Bearer\s+/i, "");
+    if (!token) {
+      return new Response(JSON.stringify({ error: "Unauthorized" }), {
+        status: 401,
+        headers: { ...corsHeaders, "Content-Type": "application/json" },
+      });
+    }
+
     const supabase = createAdminClient();
+    const { data: userData, error: userError } = await supabase.auth.getUser(token);
+    if (userError || !userData?.user) {
+      return new Response(JSON.stringify({ error: "Unauthorized" }), {
+        status: 401,
+        headers: { ...corsHeaders, "Content-Type": "application/json" },
+      });
+    }
+
+    const { data: hasAdmin } = await supabase.rpc("has_role", {
+      _user_id: userData.user.id,
+      _role: "admin",
+    });
+    if (!hasAdmin) {
+      return new Response(JSON.stringify({ error: "Admin role required" }), {
+        status: 403,
+        headers: { ...corsHeaders, "Content-Type": "application/json" },
+      });
+    }
 
     const { nominees, dry_run = true } = await req.json() as {
       nominees: NomineeInput[];
       dry_run?: boolean;
     };
+
+    // Strip caller-controlled trust fields - server controls these
+    for (const n of nominees) {
+      delete (n as any).nrc_verified;
+      delete (n as any).acceptance_status;
+      if (n.status && !["pending", "approved", "rejected"].includes(n.status)) {
+        n.status = "pending";
+      }
+    }
 
     if (!nominees || !Array.isArray(nominees)) {
       return new Response(
