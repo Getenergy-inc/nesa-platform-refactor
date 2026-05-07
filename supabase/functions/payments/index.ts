@@ -273,31 +273,42 @@ Deno.serve(async (req) => {
         // POST /payments/webhook/paystack - Handle Paystack webhook
         if (req.method === "POST" && pathParts[2] === "paystack") {
           const paystackSecret = Deno.env.get("PAYSTACK_SECRET_KEY");
-          
-          // Verify webhook signature
           const signature = req.headers.get("x-paystack-signature");
           const body = await req.text();
-          
-          if (paystackSecret && signature) {
-            const encoder = new TextEncoder();
-            const key = await crypto.subtle.importKey(
-              "raw",
-              encoder.encode(paystackSecret),
-              { name: "HMAC", hash: "SHA-512" },
-              false,
-              ["sign"]
-            );
-            const mac = await crypto.subtle.sign("HMAC", key, encoder.encode(body));
-            const expectedSignature = Array.from(new Uint8Array(mac))
-              .map(b => b.toString(16).padStart(2, "0"))
-              .join("");
 
-            if (signature !== expectedSignature) {
-              return new Response(
-                JSON.stringify({ error: "Invalid signature" }),
-                { status: 401, headers: { ...corsHeaders, "Content-Type": "application/json" } }
-              );
-            }
+          // Hard-fail if secret not configured or signature missing
+          if (!paystackSecret) {
+            console.error("PAYSTACK_SECRET_KEY not configured; rejecting webhook");
+            return new Response(
+              JSON.stringify({ error: "Webhook not configured" }),
+              { status: 401, headers: { ...corsHeaders, "Content-Type": "application/json" } }
+            );
+          }
+          if (!signature) {
+            return new Response(
+              JSON.stringify({ error: "Missing signature" }),
+              { status: 401, headers: { ...corsHeaders, "Content-Type": "application/json" } }
+            );
+          }
+
+          const encoder = new TextEncoder();
+          const key = await crypto.subtle.importKey(
+            "raw",
+            encoder.encode(paystackSecret),
+            { name: "HMAC", hash: "SHA-512" },
+            false,
+            ["sign"]
+          );
+          const mac = await crypto.subtle.sign("HMAC", key, encoder.encode(body));
+          const expectedSignature = Array.from(new Uint8Array(mac))
+            .map(b => b.toString(16).padStart(2, "0"))
+            .join("");
+
+          if (signature !== expectedSignature) {
+            return new Response(
+              JSON.stringify({ error: "Invalid signature" }),
+              { status: 401, headers: { ...corsHeaders, "Content-Type": "application/json" } }
+            );
           }
 
           const payload = JSON.parse(body);
