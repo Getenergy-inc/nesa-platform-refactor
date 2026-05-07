@@ -78,7 +78,15 @@ export default function OTPVerification() {
       }
 
       if (data?.session) {
-        // Mark OTP as verified in session storage
+        // Persist OTP verification server-side (RLS: user can only insert own row)
+        try {
+          await supabase.from("judge_otp_sessions").insert({
+            user_id: data.session.user.id,
+          });
+        } catch (e) {
+          console.warn("Could not persist OTP session:", e);
+        }
+        // Also mark in session storage for quick UI checks
         markOTPVerified(data.session.user.id);
         toast.success("Verification successful!");
         navigate(redirectUrl);
