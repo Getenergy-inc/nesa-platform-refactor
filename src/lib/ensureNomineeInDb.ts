@@ -38,3 +38,5 @@ export async function ensureNomineeInDb(
   // 3. Not found — auto-creation requires admin (seed-nominees endpoint).
   // Regular users cannot self-create nominees from CSV browse anymore.
   return null;
+}
+
