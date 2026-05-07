@@ -75,7 +75,7 @@ serve(async (req) => {
     }
   } catch (error: unknown) {
     console.error("Migration email error:", error);
-    return respond({ error: error instanceof Error ? error.message : "Unknown error" }, 500);
+    return respond({ error: "Internal server error" }, 500);
   }
 });
 
@@ -90,7 +90,7 @@ async function handlePrepare(supabase: any, body: any) {
     .eq("legacy_source", "legacy_db")
     .not("email", "eq", "");
 
-  if (error) return respond({ error: error.message }, 500);
+  if (error) return respond({ error: "Internal server error" }, 500);
 
   // Filter: don't re-create jobs for nominees already in queue
   const { data: existingJobs } = await supabase
@@ -145,7 +145,7 @@ async function handleSend(supabase: any, body: any) {
     .order("created_at", { ascending: true })
     .limit(maxSend);
 
-  if (error) return respond({ error: error.message }, 500);
+  if (error) return respond({ error: "Internal server error" }, 500);
   if (!jobs || jobs.length === 0) return respond({ success: true, sent: 0, message: "No pending jobs" });
 
   let sent = 0;
@@ -228,7 +228,7 @@ async function handleRetry(supabase: any, body: any) {
     .lt("retry_count", 3)
     .select("id");
 
-  if (error) return respond({ error: error.message }, 500);
+  if (error) return respond({ error: "Internal server error" }, 500);
   return respond({ success: true, retried: data?.length || 0 });
 }
 

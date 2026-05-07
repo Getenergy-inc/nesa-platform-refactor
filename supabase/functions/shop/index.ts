@@ -616,6 +616,6 @@ Deno.serve(async (req) => {
     return errorResponse("Not found", 404);
   } catch (error) {
     console.error("Shop function error:", error);
-    return errorResponse(error instanceof Error ? error.message : "Internal error", 500);
+    return errorResponse("Internal server error", 500);
   }
 });

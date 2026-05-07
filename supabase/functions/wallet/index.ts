@@ -658,7 +658,7 @@ Deno.serve(async (req) => {
 
   } catch (error: unknown) {
     console.error("Wallet function error:", error);
-    const message = error instanceof Error ? error.message : "Internal server error";
+    const message = "Internal server error";
     return new Response(
       JSON.stringify({ ok: false, error: message }),
       { status: 500, headers: { ...corsHeaders, "Content-Type": "application/json" } }
