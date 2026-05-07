@@ -35,40 +35,8 @@ export async function ensureNomineeInDb(
 
   if (byName) return byName;
 
-  // 3. Create via seed-nominees edge function (uses service role key)
-  try {
-    const { data, error } = await supabase.functions.invoke("seed-nominees", {
-      body: {
-        nominees: [{
-          name: nominee.name.trim(),
-          slug: nominee.slug,
-          bio: nominee.achievement || undefined,
-          photo_url: nominee.imageUrl || undefined,
-          country: nominee.country || undefined,
-          region: nominee.regionName || undefined,
-          subcategory_slug: nominee.subcategorySlug,
-          legacy_source: "csv_auto",
-          status: "approved",
-        }],
-        dry_run: false,
-      },
-    });
-
-    if (error) {
-      console.warn("Seed nominee failed:", error);
-      return null;
-    }
-
-    // Re-fetch the newly created record
-    const { data: created } = await (supabase as any)
-      .from("public_nominees")
-      .select("id, renomination_count")
-      .or(`slug.eq.${nominee.slug},slug.eq.${nameSlug}`)
-      .maybeSingle();
-
-    return created;
-  } catch (err) {
-    console.warn("Could not auto-create nominee:", err);
-    return null;
-  }
+  // 3. Not found — auto-creation requires admin (seed-nominees endpoint).
+  // Regular users cannot self-create nominees from CSV browse anymore.
+  return null;
 }
+

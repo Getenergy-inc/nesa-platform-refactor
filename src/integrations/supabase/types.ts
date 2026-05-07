@@ -1566,6 +1566,36 @@ export type Database = {
           },
         ]
       }
+      judge_otp_sessions: {
+        Row: {
+          created_at: string
+          expires_at: string
+          id: string
+          ip_address: string | null
+          user_agent: string | null
+          user_id: string
+          verified_at: string
+        }
+        Insert: {
+          created_at?: string
+          expires_at?: string
+          id?: string
+          ip_address?: string | null
+          user_agent?: string | null
+          user_id: string
+          verified_at?: string
+        }
+        Update: {
+          created_at?: string
+          expires_at?: string
+          id?: string
+          ip_address?: string | null
+          user_agent?: string | null
+          user_id?: string
+          verified_at?: string
+        }
+        Relationships: []
+      }
       jury_assignments: {
         Row: {
           assigned_at: string | null
@@ -5042,6 +5072,51 @@ export type Database = {
       }
     }
     Views: {
+      correspondence_branding_public: {
+        Row: {
+          chapter_id: string | null
+          footer_text: string | null
+          id: string | null
+          is_active: boolean | null
+          logo_url: string | null
+          region_id: string | null
+          sender_name: string | null
+        }
+        Insert: {
+          chapter_id?: string | null
+          footer_text?: string | null
+          id?: string | null
+          is_active?: boolean | null
+          logo_url?: string | null
+          region_id?: string | null
+          sender_name?: string | null
+        }
+        Update: {
+          chapter_id?: string | null
+          footer_text?: string | null
+          id?: string | null
+          is_active?: boolean | null
+          logo_url?: string | null
+          region_id?: string | null
+          sender_name?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "correspondence_branding_chapter_id_fkey"
+            columns: ["chapter_id"]
+            isOneToOne: false
+            referencedRelation: "chapters"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "correspondence_branding_region_id_fkey"
+            columns: ["region_id"]
+            isOneToOne: false
+            referencedRelation: "regions"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       public_nominees: {
         Row: {
           acceptance_status:
@@ -5262,6 +5337,47 @@ export type Database = {
             columns: ["season_id"]
             isOneToOne: false
             referencedRelation: "seasons"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      scef_board_members_public: {
+        Row: {
+          appointed_date: string | null
+          bio: string | null
+          full_name: string | null
+          id: string | null
+          is_active: boolean | null
+          photo_url: string | null
+          region_id: string | null
+          role_title: string | null
+        }
+        Insert: {
+          appointed_date?: string | null
+          bio?: string | null
+          full_name?: string | null
+          id?: string | null
+          is_active?: boolean | null
+          photo_url?: string | null
+          region_id?: string | null
+          role_title?: string | null
+        }
+        Update: {
+          appointed_date?: string | null
+          bio?: string | null
+          full_name?: string | null
+          id?: string | null
+          is_active?: boolean | null
+          photo_url?: string | null
+          region_id?: string | null
+          role_title?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "scef_board_members_region_id_fkey"
+            columns: ["region_id"]
+            isOneToOne: false
+            referencedRelation: "regions"
             referencedColumns: ["id"]
           },
         ]

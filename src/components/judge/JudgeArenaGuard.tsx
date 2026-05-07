@@ -43,9 +43,17 @@ export function JudgeArenaGuard({ children }: JudgeArenaGuardProps) {
         return;
       }
 
-      // Check OTP verification status (session-based)
-      const otpVerified = sessionStorage.getItem(`otp_verified_${user.id}`) === "true";
-      if (!otpVerified) {
+      // Check OTP verification status server-side (DB-backed, not bypassable via DevTools)
+      const { data: otpRow } = await supabase
+        .from("judge_otp_sessions")
+        .select("id, expires_at")
+        .eq("user_id", user.id)
+        .gt("expires_at", new Date().toISOString())
+        .order("verified_at", { ascending: false })
+        .limit(1)
+        .maybeSingle();
+
+      if (!otpRow) {
         setJudgeEmail(user.email || "");
         setStatus("otp_required");
         return;

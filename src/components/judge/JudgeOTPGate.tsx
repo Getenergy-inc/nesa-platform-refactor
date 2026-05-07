@@ -31,26 +31,18 @@ export function JudgeOTPGate({ children }: JudgeOTPGateProps) {
         setCheckingOTP(false);
         return;
       }
-
       try {
-        // Check if the user has verified OTP in this session
-        // We use the session's AMR (Authentication Methods Reference) to check
-        const { data: { session } } = await supabase.auth.getSession();
-        
-        if (session?.user?.aud === "authenticated") {
-          // For now, we consider password login sufficient
-          // In production, you'd check session metadata for OTP verification
-          const amr = (session as any)?.amr;
-          
-          // Check if OTP was verified in current session
-          // Note: This is a simplified check. In production, you'd track this in the database
-          const hasOTPVerification = amr?.some((m: any) => m.method === "otp") || 
-            sessionStorage.getItem(`otp_verified_${user.id}`) === "true";
-          
-          setOtpVerified(hasOTPVerification);
-        } else {
-          setOtpVerified(false);
-        }
+        // Server-side check via judge_otp_sessions table (RLS-scoped to user)
+        const { data: otpRow } = await supabase
+          .from("judge_otp_sessions")
+          .select("id, expires_at")
+          .eq("user_id", user.id)
+          .gt("expires_at", new Date().toISOString())
+          .order("verified_at", { ascending: false })
+          .limit(1)
+          .maybeSingle();
+
+        setOtpVerified(!!otpRow);
       } catch (error) {
         console.error("Error checking OTP status:", error);
         setOtpVerified(false);
