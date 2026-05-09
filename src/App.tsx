@@ -122,6 +122,7 @@ import Partners from "./pages/Partners";
 import Chapters from "./pages/Chapters";
 import Volunteer from "./pages/Volunteer";
 import Ambassadors from "./pages/Ambassadors";
+import Contributors from "./pages/Contributors";
 import Contact from "./pages/Contact";
 import {
   EDIMatrix,
@@ -1316,6 +1317,14 @@ const App = () => (
                     element={
                       <WithLayout>
                         <Ambassadors />
+                      </WithLayout>
+                    }
+                  />
+                  <Route
+                    path="/contributors"
+                    element={
+                      <WithLayout>
+                        <Contributors />
                       </WithLayout>
                     }
                   />
