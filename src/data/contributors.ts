@@ -162,6 +162,12 @@ export const CONTRIBUTORS: Contributor[] = [
     yearStart: 2021,
     contributions: ["Logo & Brand Identity", "Graphic Design", "UI/UX Design"],
     highlight: "Designed the official NESA-Africa logo and founding brand identity.",
+    bio: "A pioneer brand designer who joined the NESA-Africa founding team in 2021 to translate the vision of an African education honour into a living visual identity. Their craft set the tone for every certificate, trophy, and digital touchpoint that followed.",
+    contributionDescription:
+      "Designed the official NESA-Africa wordmark, monogram, gold-and-charcoal palette, certificate template, and the first edition of the trophy concept. Authored the inaugural brand guidelines document used by all chapters and partners.",
+    appreciation:
+      "NESA-Africa is forever grateful — your gold-and-charcoal mark has become a continental symbol of educational excellence.",
+    socials: { twitter: "", linkedin: "", website: "" },
   },
   {
     id: "v-2021-web",
