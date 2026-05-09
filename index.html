@@ -2,6 +2,16 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
+    
+    <!-- Redirect apex domain to www -->
+    <script>
+      (function() {
+        var host = window.location.hostname;
+        if (host === 'nesa.africa') {
+          window.location.replace('https://www.nesa.africa' + window.location.pathname + window.location.search + window.location.hash);
+        }
+      })();
+    </script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover" />
     
     <!-- Preconnect to critical domains for faster loading -->
