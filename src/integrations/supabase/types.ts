@@ -839,6 +839,33 @@ export type Database = {
           },
         ]
       }
+      contributor_photos: {
+        Row: {
+          contributor_id: string
+          created_at: string
+          image_url: string
+          storage_path: string | null
+          updated_at: string
+          updated_by: string | null
+        }
+        Insert: {
+          contributor_id: string
+          created_at?: string
+          image_url: string
+          storage_path?: string | null
+          updated_at?: string
+          updated_by?: string | null
+        }
+        Update: {
+          contributor_id?: string
+          created_at?: string
+          image_url?: string
+          storage_path?: string | null
+          updated_at?: string
+          updated_by?: string | null
+        }
+        Relationships: []
+      }
       correspondence_branding: {
         Row: {
           chapter_id: string
