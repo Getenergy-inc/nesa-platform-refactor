@@ -15,7 +15,7 @@ import {
   type ContributorRole,
   type ContributionArea,
 } from "@/data/contributors";
-import { useContributorPhotos, resolveContributorImage } from "@/hooks/useContributorPhotos";
+import { useContributors } from "@/hooks/useContributors";
 import { cn } from "@/lib/utils";
 
 interface ContributorsHallSectionProps {
@@ -31,10 +31,10 @@ export function ContributorsHallSection({ compact = false, limit = 12 }: Contrib
   const [activeRole, setActiveRole] = useState<ContributorRole | "All">("All");
   const [activeYear, setActiveYear] = useState<number | "All">("All");
   const [activeArea, setActiveArea] = useState<ContributionArea | "All">("All");
-  const { photos } = useContributorPhotos();
+  const { contributors } = useContributors();
 
   const filtered = useMemo(() => {
-    let list: Contributor[] = CONTRIBUTORS;
+    let list: Contributor[] = contributors.length ? contributors : CONTRIBUTORS;
     if (activeRole !== "All") list = list.filter((c) => c.role === activeRole);
     if (activeYear !== "All") {
       list = list.filter(
@@ -45,12 +45,14 @@ export function ContributorsHallSection({ compact = false, limit = 12 }: Contrib
       list = list.filter((c) => c.contributions?.includes(activeArea));
     }
     return compact ? list.slice(0, limit) : list;
-  }, [activeRole, activeYear, activeArea, compact, limit]);
+  }, [contributors, activeRole, activeYear, activeArea, compact, limit]);
 
   // Surface the logo/brand designer at the top in compact mode
   const featured = !compact
     ? null
-    : CONTRIBUTORS.find((c) => c.contributions?.includes("Logo & Brand Identity"));
+    : (contributors.length ? contributors : CONTRIBUTORS).find((c) =>
+        c.contributions?.includes("Logo & Brand Identity"),
+      );
 
   return (
     <section className="relative py-16 md:py-24 bg-charcoal overflow-hidden">
@@ -84,7 +86,7 @@ export function ContributorsHallSection({ compact = false, limit = 12 }: Contrib
             className="mb-10 rounded-2xl border border-gold/30 bg-gradient-to-br from-gold/10 to-transparent p-5 md:p-6 flex flex-col md:flex-row gap-5 items-center md:items-start"
           >
             <NomineeImage
-              src={resolveContributorImage(featured.id, featured.imageUrl, photos)}
+              src={featured.imageUrl}
               alt={featured.name}
               name={featured.name}
               size="xl"
@@ -217,7 +219,7 @@ export function ContributorsHallSection({ compact = false, limit = 12 }: Contrib
                 aria-label={`View ${c.name}'s contributor profile`}
               >
                 <NomineeImage
-                  src={resolveContributorImage(c.id, c.imageUrl, photos)}
+                  src={c.imageUrl}
                   alt={c.name}
                   name={c.name}
                   type={c.role === "BOA" ? "logo" : "photo"}

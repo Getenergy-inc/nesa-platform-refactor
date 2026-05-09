@@ -7,21 +7,23 @@ import { Button } from "@/components/ui/button";
 import { NomineeImage } from "@/components/shared/NomineeImage";
 import { SocialShareBar } from "@/components/shared/SocialShareBar";
 import {
-  CONTRIBUTORS,
   buildDefaultRecommendation,
   getContributorRefCode,
 } from "@/data/contributors";
-import { useContributorPhotos, resolveContributorImage } from "@/hooks/useContributorPhotos";
+import { useContributors } from "@/hooks/useContributors";
 
 export default function ContributorProfile() {
   const { id } = useParams<{ id: string }>();
-  const contributor = useMemo(() => CONTRIBUTORS.find((c) => c.id === id), [id]);
-  const { photos } = useContributorPhotos();
+  const { contributors } = useContributors();
+  const contributor = useMemo(
+    () => contributors.find((c) => c.id === id),
+    [contributors, id],
+  );
   const printRef = useRef<HTMLDivElement>(null);
 
   if (!contributor) return <Navigate to="/contributors" replace />;
 
-  const resolvedImage = resolveContributorImage(contributor.id, contributor.imageUrl, photos);
+  const resolvedImage = contributor.imageUrl;
   const refCode = getContributorRefCode(contributor);
   const tenure =
     contributor.yearEnd && contributor.yearEnd !== contributor.yearStart
