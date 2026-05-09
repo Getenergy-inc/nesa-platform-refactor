@@ -21,6 +21,10 @@ import {
 } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
+import iconImg from "@/assets/pathways/icon.jpg";
+import csrImg from "@/assets/pathways/csr.jpg";
+import influencerImg from "@/assets/pathways/influencer.jpg";
+import grantsImg from "@/assets/pathways/grants.jpg";
 
 type Pathway = {
   id: string;
@@ -34,6 +38,8 @@ type Pathway = {
   cta: string;
   visualGradient: string;
   accentLabel: string;
+  image: string;
+  imageAlt: string;
 };
 
 const pathways: Pathway[] = [
