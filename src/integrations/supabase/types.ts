@@ -3088,6 +3088,60 @@ export type Database = {
         }
         Relationships: []
       }
+      pathway_cards: {
+        Row: {
+          accent_label: string
+          award_line: string
+          category: string
+          created_at: string
+          cta: string
+          description: string
+          display_order: number
+          headline: string
+          href: string
+          id: string
+          image_url: string | null
+          is_active: boolean
+          updated_at: string
+          updated_by: string | null
+          visual_gradient: string
+        }
+        Insert: {
+          accent_label?: string
+          award_line: string
+          category: string
+          created_at?: string
+          cta: string
+          description: string
+          display_order?: number
+          headline: string
+          href: string
+          id: string
+          image_url?: string | null
+          is_active?: boolean
+          updated_at?: string
+          updated_by?: string | null
+          visual_gradient?: string
+        }
+        Update: {
+          accent_label?: string
+          award_line?: string
+          category?: string
+          created_at?: string
+          cta?: string
+          description?: string
+          display_order?: number
+          headline?: string
+          href?: string
+          id?: string
+          image_url?: string | null
+          is_active?: boolean
+          updated_at?: string
+          updated_by?: string | null
+          visual_gradient?: string
+        }
+        Relationships: []
+      }
       payment_intents: {
         Row: {
           account_id: string
