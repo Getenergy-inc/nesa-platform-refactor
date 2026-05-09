@@ -15,6 +15,7 @@ import {
   type ContributorRole,
   type ContributionArea,
 } from "@/data/contributors";
+import { useContributorPhotos, resolveContributorImage } from "@/hooks/useContributorPhotos";
 import { cn } from "@/lib/utils";
 
 interface ContributorsHallSectionProps {
@@ -30,6 +31,7 @@ export function ContributorsHallSection({ compact = false, limit = 12 }: Contrib
   const [activeRole, setActiveRole] = useState<ContributorRole | "All">("All");
   const [activeYear, setActiveYear] = useState<number | "All">("All");
   const [activeArea, setActiveArea] = useState<ContributionArea | "All">("All");
+  const { photos } = useContributorPhotos();
 
   const filtered = useMemo(() => {
     let list: Contributor[] = CONTRIBUTORS;
@@ -82,7 +84,7 @@ export function ContributorsHallSection({ compact = false, limit = 12 }: Contrib
             className="mb-10 rounded-2xl border border-gold/30 bg-gradient-to-br from-gold/10 to-transparent p-5 md:p-6 flex flex-col md:flex-row gap-5 items-center md:items-start"
           >
             <NomineeImage
-              src={featured.imageUrl}
+              src={resolveContributorImage(featured.id, featured.imageUrl, photos)}
               alt={featured.name}
               name={featured.name}
               size="xl"
@@ -215,7 +217,7 @@ export function ContributorsHallSection({ compact = false, limit = 12 }: Contrib
                 aria-label={`View ${c.name}'s contributor profile`}
               >
                 <NomineeImage
-                  src={c.imageUrl}
+                  src={resolveContributorImage(c.id, c.imageUrl, photos)}
                   alt={c.name}
                   name={c.name}
                   type={c.role === "BOA" ? "logo" : "photo"}
