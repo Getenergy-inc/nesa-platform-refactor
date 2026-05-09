@@ -21,6 +21,10 @@ import {
 } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
+import iconImg from "@/assets/pathways/icon.jpg";
+import csrImg from "@/assets/pathways/csr.jpg";
+import influencerImg from "@/assets/pathways/influencer.jpg";
+import grantsImg from "@/assets/pathways/grants.jpg";
 
 type Pathway = {
   id: string;
@@ -34,6 +38,8 @@ type Pathway = {
   cta: string;
   visualGradient: string;
   accentLabel: string;
+  image: string;
+  imageAlt: string;
 };
 
 const pathways: Pathway[] = [
@@ -51,6 +57,8 @@ const pathways: Pathway[] = [
     visualGradient:
       "from-gold/40 via-emerald-900/40 to-charcoal",
     accentLabel: "Legacy • 2006–2026",
+    image: iconImg,
+    imageAlt: "Africa Education Icon — distinguished laureate holding the gold Africa trophy",
   },
   {
     id: "csr",
@@ -66,6 +74,8 @@ const pathways: Pathway[] = [
     visualGradient:
       "from-emerald-800/50 via-emerald-900/30 to-charcoal",
     accentLabel: "Corporate • Continental",
+    image: csrImg,
+    imageAlt: "CSR for Education — corporate leader mentoring an African student with a tablet",
   },
   {
     id: "influencer",
@@ -81,6 +91,8 @@ const pathways: Pathway[] = [
     visualGradient:
       "from-gold/35 via-orange-900/30 to-charcoal",
     accentLabel: "Creators • Music • Sports",
+    image: influencerImg,
+    imageAlt: "Digital Voices — African creators, musicians and athletes shaping education",
   },
   {
     id: "grants",
@@ -95,6 +107,8 @@ const pathways: Pathway[] = [
     visualGradient:
       "from-emerald-900/50 via-gold/15 to-charcoal",
     accentLabel: "Global • Bilateral • Multilateral",
+    image: grantsImg,
+    imageAlt: "Global Partnerships — bilateral and multilateral leaders shaking hands before flags",
   },
 ];
 
@@ -188,19 +202,23 @@ export function AwardSpotlightSection() {
                 <Link to={card.href} className="group block h-full">
                   <article className="relative h-full overflow-hidden rounded-3xl ring-1 ring-gold/25 hover:ring-gold/70 shadow-[0_10px_50px_-15px_hsl(var(--gold)/0.25)] hover:shadow-[0_20px_60px_-15px_hsl(var(--gold)/0.5)] transition-all duration-500 hover:-translate-y-2 bg-charcoal">
                     {/* ───── Visual / Image area (top half) ───── */}
-                    <div className="relative h-44 sm:h-52 overflow-hidden">
-                      <div className={`absolute inset-0 bg-gradient-to-br ${card.visualGradient}`} />
-                      <div className="absolute inset-0 bg-charcoal/30" />
+                    <div className="relative h-52 sm:h-64 overflow-hidden">
+                      <img
+                        src={card.image}
+                        alt={card.imageAlt}
+                        loading="lazy"
+                        className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+                      />
+                      {/* Brand tint overlays — keeps NESA charcoal/gold identity */}
+                      <div className={`absolute inset-0 bg-gradient-to-br ${card.visualGradient} mix-blend-multiply opacity-70`} />
+                      <div className="absolute inset-0 bg-charcoal/25" />
                       <div className="text-gold absolute inset-0">
                         <PatternOverlay />
                       </div>
 
-                      {/* Big visual icon */}
-                      <div className="absolute inset-0 flex items-center justify-center">
-                        <VisualIcon
-                          className="h-28 w-28 sm:h-32 sm:w-32 text-gold/80 group-hover:scale-110 group-hover:text-gold transition-all duration-700"
-                          strokeWidth={1.2}
-                        />
+                      {/* Floating brand icon badge */}
+                      <div className="absolute bottom-4 right-4 h-12 w-12 rounded-2xl bg-charcoal/70 backdrop-blur-md border border-gold/40 flex items-center justify-center shadow-lg">
+                        <VisualIcon className="h-6 w-6 text-gold" strokeWidth={1.6} />
                       </div>
 
                       {/* Accent label */}
@@ -211,7 +229,7 @@ export function AwardSpotlightSection() {
                       </div>
 
                       {/* Bottom fade into content */}
-                      <div className="absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-charcoal to-transparent" />
+                      <div className="absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-charcoal to-transparent" />
                     </div>
 
                     {/* ───── Content (bottom half) ───── */}
