@@ -123,6 +123,7 @@ import Chapters from "./pages/Chapters";
 import Volunteer from "./pages/Volunteer";
 import Ambassadors from "./pages/Ambassadors";
 import Contributors from "./pages/Contributors";
+import ContributorProfile from "./pages/ContributorProfile";
 import Contact from "./pages/Contact";
 import {
   EDIMatrix,
