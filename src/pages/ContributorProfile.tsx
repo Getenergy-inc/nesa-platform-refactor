@@ -11,14 +11,17 @@ import {
   buildDefaultRecommendation,
   getContributorRefCode,
 } from "@/data/contributors";
+import { useContributorPhotos, resolveContributorImage } from "@/hooks/useContributorPhotos";
 
 export default function ContributorProfile() {
   const { id } = useParams<{ id: string }>();
   const contributor = useMemo(() => CONTRIBUTORS.find((c) => c.id === id), [id]);
+  const { photos } = useContributorPhotos();
   const printRef = useRef<HTMLDivElement>(null);
 
   if (!contributor) return <Navigate to="/contributors" replace />;
 
+  const resolvedImage = resolveContributorImage(contributor.id, contributor.imageUrl, photos);
   const refCode = getContributorRefCode(contributor);
   const tenure =
     contributor.yearEnd && contributor.yearEnd !== contributor.yearStart
@@ -47,7 +50,7 @@ export default function ContributorProfile() {
         <meta property="og:title" content={shareTitle} />
         <meta property="og:description" content={shareText} />
         <meta property="og:url" content={shareUrl} />
-        {contributor.imageUrl && <meta property="og:image" content={contributor.imageUrl} />}
+        {resolvedImage && <meta property="og:image" content={resolvedImage} />}
         <meta name="twitter:card" content="summary_large_image" />
       </Helmet>
 
@@ -77,7 +80,7 @@ export default function ContributorProfile() {
             className="rounded-2xl border border-gold/30 bg-gradient-to-br from-gold/10 via-charcoal-light/40 to-transparent p-6 md:p-8 flex flex-col md:flex-row gap-6"
           >
             <NomineeImage
-              src={contributor.imageUrl}
+              src={resolvedImage}
               alt={contributor.name}
               name={contributor.name}
               size="xl"
