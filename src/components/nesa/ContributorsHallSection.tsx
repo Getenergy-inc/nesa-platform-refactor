@@ -208,54 +208,59 @@ export function ContributorsHallSection({ compact = false, limit = 12 }: Contrib
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.4, delay: Math.min(i * 0.03, 0.4) }}
-              className="group relative rounded-xl border border-gold/15 bg-charcoal-light/40 hover:border-gold/60 hover:bg-charcoal-light/70 transition-all p-4 flex flex-col items-center text-center"
             >
-              <NomineeImage
-                src={c.imageUrl}
-                alt={c.name}
-                name={c.name}
-                type={c.role === "BOA" ? "logo" : "photo"}
-                size="lg"
-                showBorder
-              />
-              <div className="mt-3 w-full flex-1 flex flex-col">
-                <p className="text-white text-sm font-semibold leading-tight">
-                  {c.name}
-                </p>
-                <p className="text-gold/80 text-[10px] mt-1 uppercase tracking-wider">
-                  {c.role}
-                  {c.title ? ` · ${c.title}` : ""}
-                </p>
-                {c.country && (
-                  <p className="text-white/50 text-[10px] mt-0.5">
-                    {c.country} · {c.yearStart}
-                    {c.yearEnd ? `–${c.yearEnd}` : "–Present"}
+              <Link
+                to={`/contributors/${c.id}`}
+                className="group relative rounded-xl border border-gold/15 bg-charcoal-light/40 hover:border-gold/60 hover:bg-charcoal-light/70 transition-all p-4 flex flex-col items-center text-center h-full"
+                aria-label={`View ${c.name}'s contributor profile`}
+              >
+                <NomineeImage
+                  src={c.imageUrl}
+                  alt={c.name}
+                  name={c.name}
+                  type={c.role === "BOA" ? "logo" : "photo"}
+                  size="lg"
+                  showBorder
+                />
+                <div className="mt-3 w-full flex-1 flex flex-col">
+                  <p className="text-white text-sm font-semibold leading-tight group-hover:text-gold transition-colors">
+                    {c.name}
                   </p>
-                )}
-                {c.highlight && (
-                  <p className="text-white/70 text-[11px] mt-2 line-clamp-3 italic">
-                    "{c.highlight}"
+                  <p className="text-gold/80 text-[10px] mt-1 uppercase tracking-wider">
+                    {c.role}
+                    {c.title ? ` · ${c.title}` : ""}
                   </p>
-                )}
-                {c.contributions && c.contributions.length > 0 && (
-                  <div className="mt-2.5 flex flex-wrap gap-1 justify-center">
-                    {c.contributions.slice(0, 3).map((a) => (
-                      <span
-                        key={a}
-                        className="px-1.5 py-0.5 rounded text-[9px] bg-gold/10 text-gold/90 border border-gold/20"
-                      >
-                        {a}
-                      </span>
-                    ))}
-                    {c.contributions.length > 3 && (
-                      <span className="text-[9px] text-white/40">
-                        +{c.contributions.length - 3}
-                      </span>
-                    )}
-                  </div>
-                )}
-              </div>
-              <Award className="absolute top-2 right-2 h-3.5 w-3.5 text-gold/40 group-hover:text-gold transition-colors" />
+                  {c.country && (
+                    <p className="text-white/50 text-[10px] mt-0.5">
+                      {c.country} · {c.yearStart}
+                      {c.yearEnd ? `–${c.yearEnd}` : "–Present"}
+                    </p>
+                  )}
+                  {c.highlight && (
+                    <p className="text-white/70 text-[11px] mt-2 line-clamp-3 italic">
+                      "{c.highlight}"
+                    </p>
+                  )}
+                  {c.contributions && c.contributions.length > 0 && (
+                    <div className="mt-2.5 flex flex-wrap gap-1 justify-center">
+                      {c.contributions.slice(0, 3).map((a) => (
+                        <span
+                          key={a}
+                          className="px-1.5 py-0.5 rounded text-[9px] bg-gold/10 text-gold/90 border border-gold/20"
+                        >
+                          {a}
+                        </span>
+                      ))}
+                      {c.contributions.length > 3 && (
+                        <span className="text-[9px] text-white/40">
+                          +{c.contributions.length - 3}
+                        </span>
+                      )}
+                    </div>
+                  )}
+                </div>
+                <Award className="absolute top-2 right-2 h-3.5 w-3.5 text-gold/40 group-hover:text-gold transition-colors" />
+              </Link>
             </motion.div>
           ))}
 
