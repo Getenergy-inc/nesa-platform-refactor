@@ -1330,6 +1330,14 @@ const App = () => (
                     }
                   />
                   <Route
+                    path="/contributors/:id"
+                    element={
+                      <WithLayout>
+                        <ContributorProfile />
+                      </WithLayout>
+                    }
+                  />
+                  <Route
                     path="/contact"
                     element={
                       <WithLayout>
