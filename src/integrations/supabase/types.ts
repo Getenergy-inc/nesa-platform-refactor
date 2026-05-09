@@ -839,6 +839,75 @@ export type Database = {
           },
         ]
       }
+      contributor_entries: {
+        Row: {
+          appreciation: string | null
+          bio: string | null
+          contribution_description: string | null
+          contributions: string[]
+          country: string | null
+          created_at: string
+          highlight: string | null
+          id: string
+          image_url: string | null
+          is_custom: boolean
+          name: string
+          recommendation: string | null
+          region: string | null
+          role: string
+          socials: Json
+          title: string | null
+          updated_at: string
+          updated_by: string | null
+          year_end: number | null
+          year_start: number
+        }
+        Insert: {
+          appreciation?: string | null
+          bio?: string | null
+          contribution_description?: string | null
+          contributions?: string[]
+          country?: string | null
+          created_at?: string
+          highlight?: string | null
+          id: string
+          image_url?: string | null
+          is_custom?: boolean
+          name: string
+          recommendation?: string | null
+          region?: string | null
+          role: string
+          socials?: Json
+          title?: string | null
+          updated_at?: string
+          updated_by?: string | null
+          year_end?: number | null
+          year_start: number
+        }
+        Update: {
+          appreciation?: string | null
+          bio?: string | null
+          contribution_description?: string | null
+          contributions?: string[]
+          country?: string | null
+          created_at?: string
+          highlight?: string | null
+          id?: string
+          image_url?: string | null
+          is_custom?: boolean
+          name?: string
+          recommendation?: string | null
+          region?: string | null
+          role?: string
+          socials?: Json
+          title?: string | null
+          updated_at?: string
+          updated_by?: string | null
+          year_end?: number | null
+          year_start?: number
+        }
+        Relationships: []
+      }
       contributor_photos: {
         Row: {
           contributor_id: string
