@@ -80,6 +80,16 @@ export const CONTRIBUTION_AREAS: ContributionArea[] = [
   "Technology & DevOps",
 ];
 
+export interface ContributorSocials {
+  twitter?: string;     // handle without @ or full URL
+  linkedin?: string;
+  facebook?: string;
+  instagram?: string;
+  youtube?: string;
+  website?: string;
+  email?: string;
+}
+
 export interface Contributor {
   id: string;
   name: string;
@@ -90,9 +100,54 @@ export interface Contributor {
   yearStart: number;
   yearEnd?: number; // undefined = present
   imageUrl?: string;
-  bio?: string;
-  contributions?: ContributionArea[];
+  /** Short tagline shown on cards */
   highlight?: string;
+  /** Full biography (plain paragraphs) */
+  bio?: string;
+  /** Detailed description of what this person did for NESA-Africa */
+  contributionDescription?: string;
+  contributions?: ContributionArea[];
+  /** Personalized appreciation note from NESA-Africa */
+  appreciation?: string;
+  /** Recommendation letter body (long form). If omitted, a default is generated. */
+  recommendation?: string;
+  /** Social handles for cross-platform amplification */
+  socials?: ContributorSocials;
+}
+
+/**
+ * Deterministic NESA reference code, e.g. NESA-CTRB-2021-AB12CD
+ * Used on appreciation + recommendation letters and shareable URLs.
+ */
+export function getContributorRefCode(c: Pick<Contributor, "id" | "yearStart">): string {
+  let h = 0;
+  for (let i = 0; i < c.id.length; i++) h = (h * 31 + c.id.charCodeAt(i)) >>> 0;
+  const alphabet = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
+  let code = "";
+  let n = h;
+  for (let i = 0; i < 6; i++) {
+    code += alphabet[n % alphabet.length];
+    n = Math.floor(n / alphabet.length) + (h >>> (i * 3));
+  }
+  return `NESA-CTRB-${c.yearStart}-${code}`;
+}
+
+/** Build a default recommendation letter when an explicit one isn't provided. */
+export function buildDefaultRecommendation(c: Contributor): string {
+  const tenure =
+    c.yearEnd && c.yearEnd !== c.yearStart
+      ? `from ${c.yearStart} to ${c.yearEnd}`
+      : `from ${c.yearStart} to date`;
+  const areas = c.contributions?.length
+    ? c.contributions.join(", ")
+    : "multiple programme areas";
+  return [
+    `To Whom It May Concern,`,
+    `It is with great pleasure that the New Education Standard Award Africa (NESA-Africa), an initiative of the Santos Creations Educational Foundation (SCEF), recommends ${c.name} — who has served as a ${c.role}${c.title ? ` (${c.title})` : ""} ${tenure}.`,
+    `Throughout this period, ${c.name} contributed meaningfully to ${areas}, demonstrating excellence, integrity, and a deep commitment to advancing education across Africa.${c.highlight ? ` Notably, ${c.highlight.toLowerCase()}` : ""}`,
+    `${c.name} embodies the values of NESA-Africa — service, scholarship, and African excellence — and we recommend ${c.name} without reservation for any future role, opportunity, or institutional engagement.`,
+    `Sincerely,\nThe Convener & Board\nNESA-Africa · SCEF`,
+  ].join("\n\n");
 }
 
 // Seed list — extend as records are confirmed.
@@ -107,6 +162,12 @@ export const CONTRIBUTORS: Contributor[] = [
     yearStart: 2021,
     contributions: ["Logo & Brand Identity", "Graphic Design", "UI/UX Design"],
     highlight: "Designed the official NESA-Africa logo and founding brand identity.",
+    bio: "A pioneer brand designer who joined the NESA-Africa founding team in 2021 to translate the vision of an African education honour into a living visual identity. Their craft set the tone for every certificate, trophy, and digital touchpoint that followed.",
+    contributionDescription:
+      "Designed the official NESA-Africa wordmark, monogram, gold-and-charcoal palette, certificate template, and the first edition of the trophy concept. Authored the inaugural brand guidelines document used by all chapters and partners.",
+    appreciation:
+      "NESA-Africa is forever grateful — your gold-and-charcoal mark has become a continental symbol of educational excellence.",
+    socials: { twitter: "", linkedin: "", website: "" },
   },
   {
     id: "v-2021-web",
