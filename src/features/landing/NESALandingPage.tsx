@@ -29,6 +29,7 @@ const SupportExperienceSection = lazy(() => import("@/components/nesa/SupportExp
 const BrandNarrativeSection = lazy(() => import("@/components/nesa/BrandNarrativeSection").then(m => ({ default: m.BrandNarrativeSection })));
 const AwardSpotlightSection = lazy(() => import("@/components/nesa/AwardSpotlightSection").then(m => ({ default: m.AwardSpotlightSection })));
 const MerchandiseShowcase = lazy(() => import("@/components/nesa/MerchandiseShowcase").then(m => ({ default: m.MerchandiseShowcase })));
+const ContributorsHallSection = lazy(() => import("@/components/nesa/ContributorsHallSection").then(m => ({ default: m.ContributorsHallSection })));
 
 export function NESALandingPage() {
   const { currentEdition } = useSeason();
@@ -99,6 +100,11 @@ export function NESALandingPage() {
           <MerchandiseShowcase />
         </LazySection>
         
+        {/* ═══ 8d. Contributors Hall of Fame ═══ */}
+        <LazySection>
+          <ContributorsHallSection compact limit={12} />
+        </LazySection>
+
         {/* ═══ 9. Sponsors ═══ */}
         <LazySection>
           <SponsorsSection />
