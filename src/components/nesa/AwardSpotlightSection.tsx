@@ -57,6 +57,8 @@ const pathways: Pathway[] = [
     visualGradient:
       "from-gold/40 via-emerald-900/40 to-charcoal",
     accentLabel: "Legacy • 2006–2026",
+    image: iconImg,
+    imageAlt: "Africa Education Icon — distinguished laureate holding the gold Africa trophy",
   },
   {
     id: "csr",
@@ -72,6 +74,8 @@ const pathways: Pathway[] = [
     visualGradient:
       "from-emerald-800/50 via-emerald-900/30 to-charcoal",
     accentLabel: "Corporate • Continental",
+    image: csrImg,
+    imageAlt: "CSR for Education — corporate leader mentoring an African student with a tablet",
   },
   {
     id: "influencer",
@@ -87,6 +91,8 @@ const pathways: Pathway[] = [
     visualGradient:
       "from-gold/35 via-orange-900/30 to-charcoal",
     accentLabel: "Creators • Music • Sports",
+    image: influencerImg,
+    imageAlt: "Digital Voices — African creators, musicians and athletes shaping education",
   },
   {
     id: "grants",
@@ -101,6 +107,8 @@ const pathways: Pathway[] = [
     visualGradient:
       "from-emerald-900/50 via-gold/15 to-charcoal",
     accentLabel: "Global • Bilateral • Multilateral",
+    image: grantsImg,
+    imageAlt: "Global Partnerships — bilateral and multilateral leaders shaking hands before flags",
   },
 ];
 
