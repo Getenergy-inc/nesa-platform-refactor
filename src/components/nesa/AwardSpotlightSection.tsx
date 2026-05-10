@@ -234,7 +234,7 @@ export function AwardSpotlightSection() {
 
         {/* ════ 2. PATHWAY CARDS — 2x2 GRID ════ */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-5 sm:gap-6 mb-14">
-          {pathways.map((card, idx) => {
+          {merged.map((card, idx) => {
             const Icon = card.icon;
             const VisualIcon = card.visualIcon;
 
