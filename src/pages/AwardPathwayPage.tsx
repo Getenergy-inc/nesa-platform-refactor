@@ -4,9 +4,39 @@
 import { Link, useParams } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import { motion } from "framer-motion";
-import { ArrowLeft, ArrowRight, Sparkles, Trophy } from "lucide-react";
+import { ArrowLeft, ArrowRight, Sparkles, Trophy, Layers } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { usePathwayCards } from "@/hooks/usePathwayCards";
+import { useEffect, useState } from "react";
+import { supabase } from "@/integrations/supabase/client";
+
+type CategoryRow = {
+  id: string;
+  slug: string;
+  name: string;
+  description: string | null;
+  scope: string | null;
+  subcat_count?: number;
+};
+
+// Map each pathway slug to category slugs (and/or scopes) used to surface real award categories.
+const PATHWAY_CATEGORY_MATCH: Record<
+  string,
+  { slugs?: string[]; nameLike?: string[]; scopes?: string[] }
+> = {
+  "africa-education-icon": {
+    slugs: ["africa-education-icon-award"],
+  },
+  "csr-education": {
+    nameLike: ["CSR for Education"],
+  },
+  "influencer-education": {
+    nameLike: ["Influencer Education"],
+  },
+  "grants-global-support": {
+    scopes: ["INTERNATIONAL", "DIASPORA"],
+  },
+};
 
 type Defaults = Record<
   string,
