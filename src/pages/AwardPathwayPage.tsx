@@ -121,12 +121,53 @@ export default function AwardPathwayPage() {
       ? { ...fallback, image: null as string | null }
       : null;
 
+  const [categories, setCategories] = useState<CategoryRow[]>([]);
+  const [loadingCats, setLoadingCats] = useState(true);
+
+  useEffect(() => {
+    let cancelled = false;
+    const match = PATHWAY_CATEGORY_MATCH[slug];
+    if (!match) {
+      setLoadingCats(false);
+      return;
+    }
+    (async () => {
+      let q = supabase
+        .from("categories")
+        .select("id, slug, name, description, scope, subcategories(count)")
+        .eq("is_active", true)
+        .order("display_order", { ascending: true });
+
+      const orParts: string[] = [];
+      if (match.slugs?.length) orParts.push(`slug.in.(${match.slugs.join(",")})`);
+      if (match.scopes?.length) orParts.push(`scope.in.(${match.scopes.join(",")})`);
+      if (match.nameLike?.length)
+        match.nameLike.forEach((n) => orParts.push(`name.ilike.%${n}%`));
+      if (orParts.length) q = q.or(orParts.join(","));
+
+      const { data: rows } = await q;
+      if (cancelled) return;
+      const mapped: CategoryRow[] = (rows || []).map((r: any) => ({
+        id: r.id,
+        slug: r.slug,
+        name: r.name,
+        description: r.description,
+        scope: r.scope,
+        subcat_count: Array.isArray(r.subcategories) ? r.subcategories[0]?.count ?? 0 : 0,
+      }));
+      setCategories(mapped);
+      setLoadingCats(false);
+    })();
+    return () => {
+      cancelled = true;
+    };
+  }, [slug]);
+
   if (!data) {
     return (
       <div className="bg-charcoal min-h-[60vh] flex items-center justify-center px-4">
         <div className="text-center">
-          <h1 className="font-display text-3xl text-white mb-3">Award category coming soon</h1>
-          <p className="text-white/70 mb-6">This recognition pathway is being prepared.</p>
+          <h1 className="font-display text-3xl text-white mb-3">Pathway not found</h1>
           <Link to="/pathways">
             <Button className="bg-gold hover:bg-gold-dark text-charcoal rounded-full">
               Back to Pathways to Recognition
@@ -145,7 +186,6 @@ export default function AwardPathwayPage() {
       </Helmet>
 
       <section className="relative bg-charcoal overflow-hidden">
-        {/* Hero */}
         <div className={`absolute inset-0 bg-gradient-to-br ${data.visualGradient} opacity-80`} />
         {data.image && (
           <img
@@ -205,42 +245,92 @@ export default function AwardPathwayPage() {
         </div>
       </section>
 
-      {/* Coming-soon body — branded, professional placeholder */}
+      {/* Award categories from database */}
       <section className="bg-charcoal py-14 sm:py-20">
-        <div className="container px-4 sm:px-6 max-w-4xl">
-          <div className="rounded-3xl border border-gold/25 bg-gradient-to-br from-emerald-900/20 to-charcoal p-6 sm:p-10">
-            <div className="flex items-start gap-4 mb-6">
-              <div className="h-12 w-12 rounded-2xl bg-gradient-to-br from-gold to-gold-dark flex items-center justify-center shrink-0">
-                <Trophy className="h-6 w-6 text-charcoal" />
-              </div>
-              <div>
-                <h2 className="font-display text-2xl sm:text-3xl font-bold text-white mb-2">
-                  Full criteria & nominees publishing soon
-                </h2>
-                <p className="text-white/70 leading-relaxed">
-                  We are finalising the full nominee directory, judging rubric, and partner
-                  citations for <span className="text-gold font-semibold">{data.category}</span>.
-                  Submit your nomination now to be considered for the {data.awardLine.split("—")[1]?.trim() || "2026"} cycle.
-                </p>
-              </div>
+        <div className="container px-4 sm:px-6 max-w-6xl">
+          <div className="flex items-center gap-3 mb-8">
+            <div className="h-10 w-10 rounded-2xl bg-gradient-to-br from-gold to-gold-dark flex items-center justify-center">
+              <Trophy className="h-5 w-5 text-charcoal" />
             </div>
+            <div>
+              <h2 className="font-display text-2xl sm:text-3xl font-bold text-white">
+                Award Categories in this Pathway
+              </h2>
+              <p className="text-white/60 text-sm">
+                Explore official {data.category.toLowerCase()} categories open for the 2026 cycle.
+              </p>
+            </div>
+          </div>
 
-            <div className="grid sm:grid-cols-2 gap-3">
-              <Link
-                to={`/nominate?category=${slug}`}
-                className="group flex items-center justify-between gap-3 rounded-2xl border border-gold/30 bg-white/[0.03] p-4 hover:bg-white/[0.06] transition"
-              >
-                <span className="text-white font-semibold">{data.cta}</span>
-                <ArrowRight className="h-4 w-4 text-gold group-hover:translate-x-1 transition-transform" />
-              </Link>
-              <Link
-                to="/categories"
-                className="group flex items-center justify-between gap-3 rounded-2xl border border-gold/30 bg-white/[0.03] p-4 hover:bg-white/[0.06] transition"
-              >
-                <span className="text-white font-semibold">Explore all categories</span>
-                <ArrowRight className="h-4 w-4 text-gold group-hover:translate-x-1 transition-transform" />
-              </Link>
+          {loadingCats ? (
+            <div className="grid sm:grid-cols-2 gap-4">
+              {[0, 1, 2, 3].map((i) => (
+                <div
+                  key={i}
+                  className="h-32 rounded-2xl border border-gold/15 bg-white/[0.03] animate-pulse"
+                />
+              ))}
             </div>
+          ) : categories.length === 0 ? (
+            <div className="rounded-2xl border border-gold/25 bg-white/[0.03] p-6 text-white/70">
+              No live categories yet — check back soon or{" "}
+              <Link to="/categories" className="text-gold underline">
+                browse all categories
+              </Link>
+              .
+            </div>
+          ) : (
+            <div className="grid sm:grid-cols-2 gap-4">
+              {categories.map((c) => (
+                <Link
+                  key={c.id}
+                  to={`/categories/${c.slug}`}
+                  className="group rounded-2xl border border-gold/25 bg-gradient-to-br from-emerald-900/15 to-charcoal p-5 hover:border-gold/60 hover:bg-white/[0.05] transition"
+                >
+                  <div className="flex items-start justify-between gap-3 mb-2">
+                    <h3 className="font-display text-lg font-semibold text-white group-hover:text-gold transition">
+                      {c.name}
+                    </h3>
+                    <ArrowRight className="h-4 w-4 text-gold mt-1 group-hover:translate-x-1 transition-transform shrink-0" />
+                  </div>
+                  {c.description && (
+                    <p className="text-white/65 text-sm leading-relaxed mb-3 line-clamp-2">
+                      {c.description}
+                    </p>
+                  )}
+                  <div className="flex items-center gap-3 text-[11px] uppercase tracking-wider text-gold/80">
+                    {c.scope && (
+                      <span className="px-2 py-0.5 rounded-full border border-gold/30">
+                        {c.scope.replace(/_/g, " ")}
+                      </span>
+                    )}
+                    {!!c.subcat_count && (
+                      <span className="inline-flex items-center gap-1">
+                        <Layers className="h-3 w-3" />
+                        {c.subcat_count} subcategor{c.subcat_count === 1 ? "y" : "ies"}
+                      </span>
+                    )}
+                  </div>
+                </Link>
+              ))}
+            </div>
+          )}
+
+          <div className="mt-8 flex flex-wrap gap-3">
+            <Link to={`/nominate?category=${slug}`}>
+              <Button className="bg-gold hover:bg-gold-dark text-charcoal font-semibold rounded-full gap-2 px-6">
+                {data.cta}
+                <ArrowRight className="h-4 w-4" />
+              </Button>
+            </Link>
+            <Link to="/categories">
+              <Button
+                variant="outline"
+                className="border-gold/40 text-gold hover:bg-gold/10 rounded-full gap-2 px-6"
+              >
+                Explore all categories
+              </Button>
+            </Link>
           </div>
         </div>
       </section>
