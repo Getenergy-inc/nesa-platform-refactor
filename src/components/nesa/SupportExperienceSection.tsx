@@ -2,6 +2,10 @@ import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Ticket, ShoppingBag, Music, ArrowRight, Users } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import galaImg from "@/assets/movement/gala-ticket.jpg";
+import merchImg from "@/assets/movement/merchandise.jpg";
+import anthemImg from "@/assets/movement/anthem.jpg";
+import ambassadorsImg from "@/assets/movement/ambassadors.jpg";
 
 interface CardItem {
   icon: typeof Ticket;
@@ -11,6 +15,8 @@ interface CardItem {
   cta: string;
   href: string;
   accent: string;
+  image: string;
+  imageAlt: string;
 }
 
 const items: CardItem[] = [
@@ -23,6 +29,8 @@ const items: CardItem[] = [
     cta: "Buy Tickets",
     href: "/buy-your-ticket",
     accent: "from-gold/20 to-gold/5",
+    image: galaImg,
+    imageAlt: "NESA-Africa Blue Garnet Awards Gala ballroom with golden trophy",
   },
   {
     icon: ShoppingBag,
@@ -33,6 +41,8 @@ const items: CardItem[] = [
     cta: "Visit Shop",
     href: "/shop",
     accent: "from-emerald-500/15 to-emerald-500/5",
+    image: merchImg,
+    imageAlt: "Young African ambassadors wearing NESA-Africa branded apparel",
   },
   {
     icon: Music,
@@ -43,6 +53,8 @@ const items: CardItem[] = [
     cta: "Play & Download",
     href: "/media",
     accent: "from-fuchsia-500/15 to-fuchsia-500/5",
+    image: anthemImg,
+    imageAlt: "African vocalist and chorus recording the NESA-Africa anthem",
   },
   {
     icon: Users,
@@ -53,6 +65,8 @@ const items: CardItem[] = [
     cta: "Join the Movement",
     href: "/ambassadors",
     accent: "from-sky-500/15 to-sky-500/5",
+    image: ambassadorsImg,
+    imageAlt: "NESA-Africa local chapter meeting with ambassadors around a table",
   },
 ];
 
@@ -90,36 +104,50 @@ export function SupportExperienceSection() {
               viewport={{ once: true }}
               transition={{ delay: i * 0.1 }}
               whileHover={{ y: -6 }}
-              className="group relative rounded-3xl border border-gold/15 bg-charcoal-light/40 backdrop-blur-sm p-7 overflow-hidden hover:border-gold/40 transition-colors"
+              className="group relative rounded-3xl border border-gold/15 bg-charcoal-light/40 backdrop-blur-sm overflow-hidden hover:border-gold/40 transition-colors flex flex-col"
             >
-              <div
-                className={`absolute -top-16 -right-16 h-44 w-44 rounded-full bg-gradient-to-br ${item.accent} blur-2xl opacity-70 group-hover:opacity-100 transition-opacity`}
-              />
-
-              <div className="relative">
-                <div className="h-14 w-14 rounded-2xl bg-gold/10 border border-gold/25 flex items-center justify-center mb-5">
-                  <item.icon className="h-7 w-7 text-gold" />
+              {/* Hero image */}
+              <div className="relative aspect-[16/10] overflow-hidden">
+                <img
+                  src={item.image}
+                  alt={item.imageAlt}
+                  loading="lazy"
+                  width={1280}
+                  height={800}
+                  className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-charcoal-light via-charcoal-light/30 to-transparent" />
+                <div className="absolute top-3 left-3 inline-flex items-center gap-1.5 rounded-full bg-charcoal/70 backdrop-blur-sm border border-gold/30 px-3 py-1">
+                  <item.icon className="h-3.5 w-3.5 text-gold" />
+                  <span className="text-[10px] tracking-widest uppercase text-gold font-semibold">
+                    {item.eyebrow}
+                  </span>
                 </div>
+              </div>
 
-                <p className="text-[11px] tracking-widest uppercase text-gold/70 font-semibold mb-2">
-                  {item.eyebrow}
-                </p>
-                <h3 className="font-display text-xl md:text-2xl font-bold text-white mb-3">
-                  {item.title}
-                </h3>
-                <p className="text-white/60 text-sm leading-relaxed mb-6 min-h-[72px]">
-                  {item.description}
-                </p>
+              {/* Body */}
+              <div className="relative p-6 flex flex-col flex-1">
+                <div
+                  className={`absolute -top-16 -right-16 h-44 w-44 rounded-full bg-gradient-to-br ${item.accent} blur-2xl opacity-70 group-hover:opacity-100 transition-opacity pointer-events-none`}
+                />
+                <div className="relative flex flex-col flex-1">
+                  <h3 className="font-display text-xl md:text-2xl font-bold text-white mb-3">
+                    {item.title}
+                  </h3>
+                  <p className="text-white/60 text-sm leading-relaxed mb-6 flex-1">
+                    {item.description}
+                  </p>
 
-                <Link to={item.href} className="block">
-                  <Button
-                    className="w-full bg-gold hover:bg-gold-dark text-charcoal font-bold rounded-full gap-2 group/btn"
-                    size="lg"
-                  >
-                    {item.cta}
-                    <ArrowRight className="h-4 w-4 group-hover/btn:translate-x-1 transition-transform" />
-                  </Button>
-                </Link>
+                  <Link to={item.href} className="block mt-auto">
+                    <Button
+                      className="w-full bg-gold hover:bg-gold-dark text-charcoal font-bold rounded-full gap-2 group/btn"
+                      size="lg"
+                    >
+                      {item.cta}
+                      <ArrowRight className="h-4 w-4 group-hover/btn:translate-x-1 transition-transform" />
+                    </Button>
+                  </Link>
+                </div>
               </div>
             </motion.div>
           ))}
