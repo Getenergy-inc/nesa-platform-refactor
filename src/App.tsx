@@ -199,6 +199,7 @@ import {
   AdminEDXAnalytics,
   AdminContributorPhotos,
   AdminContributorsCMS,
+  AdminPathwaysCMS,
 } from "./pages/admin";
 import BulkSeedNominees from "./pages/admin/BulkSeedNominees";
 
@@ -1092,6 +1093,7 @@ const App = () => (
                   <Route path="/admin/edx" element={<AdminEDXAnalytics />} />
                   <Route path="/admin/contributor-photos" element={<AdminContributorPhotos />} />
                   <Route path="/admin/contributors" element={<AdminContributorsCMS />} />
+                  <Route path="/admin/pathways" element={<AdminPathwaysCMS />} />
                   <Route
                     path="/admin/bulk-seed"
                     element={<BulkSeedNominees />}

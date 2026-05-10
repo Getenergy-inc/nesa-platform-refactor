@@ -26,7 +26,7 @@ const GRADIENT_PRESETS = [
 type Editable = PathwayCardRow;
 
 export default function AdminPathwaysCMS() {
-  const { user, isAdmin, loading: authLoading } = useAuth();
+  const { user, hasRole, loading: authLoading } = useAuth();
   const { cards, loading, refresh } = usePathwayCards();
   const [drafts, setDrafts] = useState<Record<string, Editable>>({});
   const [saving, setSaving] = useState<string | null>(null);
@@ -48,7 +48,7 @@ export default function AdminPathwaysCMS() {
     );
   }
   if (!user) return <Navigate to="/auth" replace />;
-  if (!isAdmin) return <Navigate to="/dashboard" replace />;
+  if (!hasRole("admin")) return <Navigate to="/unauthorized" replace />;
 
   const update = (id: string, patch: Partial<Editable>) =>
     setDrafts((d) => ({ ...d, [id]: { ...d[id], ...patch } }));
