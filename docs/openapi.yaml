@@ -1,0 +1,217 @@
+openapi: 3.0.3
+info:
+  title: NESA Africa API
+  version: 1.0.0
+  description: |
+    Public REST contract for NESA Africa (New Education Standard Award Africa).
+    Covers public website, auth, nominations, voting, judging, partners, events,
+    payments, certificates, media, analytics, and admin operations.
+
+    Base URL: `/api/v1`. All responses use the envelope:
+    `{ success, message, data, meta? }` for success and
+    `{ success: false, message, error: { code, details } }` for errors.
+servers:
+  - url: https://api.nesa.africa/api/v1
+  - url: http://localhost:4000/api/v1
+security:
+  - bearerAuth: []
+components:
+  securitySchemes:
+    bearerAuth: { type: http, scheme: bearer, bearerFormat: JWT }
+  schemas:
+    ApiMeta:
+      type: object
+      properties:
+        page: { type: integer }
+        limit: { type: integer }
+        total: { type: integer }
+        totalPages: { type: integer }
+    Envelope:
+      type: object
+      required: [success, message, data]
+      properties:
+        success: { type: boolean }
+        message: { type: string }
+        data: {}
+        meta: { $ref: '#/components/schemas/ApiMeta' }
+    Error:
+      type: object
+      required: [success, message]
+      properties:
+        success: { type: boolean, enum: [false] }
+        message: { type: string }
+        error:
+          type: object
+          properties:
+            code: { type: string }
+            details:
+              type: array
+              items:
+                type: object
+                properties:
+                  field: { type: string }
+                  message: { type: string }
+    UserRole:
+      type: string
+      enum: [SUPER_ADMIN, ADMIN, OPERATIONS_MANAGER, PROGRAM_MANAGER, NOMINEE,
+             NOMINATOR, JUDGE, HEAD_JUDGE, VOTER, CHAPTER_LEAD, NRC_RESEARCHER,
+             PARTNER, SPONSOR, CSR_APPLICANT, GLOBAL_PARTNER, DIGITAL_VOICE,
+             MEDIA_EDITOR, FINANCE_MANAGER]
+    AuthUser:
+      type: object
+      properties:
+        id: { type: string }
+        firstName: { type: string }
+        lastName: { type: string }
+        email: { type: string, format: email }
+        role: { $ref: '#/components/schemas/UserRole' }
+    Tokens:
+      type: object
+      properties:
+        accessToken: { type: string }
+        refreshToken: { type: string }
+paths:
+  /health: { get: { summary: Health check, security: [], responses: { '200': { description: OK } } } }
+
+  /auth/register: { post: { summary: Register, security: [], responses: { '201': { description: Created } } } }
+  /auth/login:    { post: { summary: Login,    security: [], responses: { '200': { description: OK } } } }
+  /auth/refresh:  { post: { summary: Refresh access token, security: [], responses: { '200': { description: OK } } } }
+  /auth/logout:   { post: { summary: Logout, responses: { '200': { description: OK } } } }
+  /auth/me:       { get:  { summary: Current user, responses: { '200': { description: OK } } } }
+  /auth/forgot-password: { post: { summary: Forgot password, security: [], responses: { '200': { description: OK } } } }
+  /auth/reset-password:  { post: { summary: Reset password,  security: [], responses: { '200': { description: OK } } } }
+  /auth/verify-email:    { post: { summary: Verify email,    security: [], responses: { '200': { description: OK } } } }
+
+  /public/home:           { get: { summary: Homepage content, security: [], responses: { '200': { description: OK } } } }
+  /public/pages/{slug}:   { get: { summary: Public CMS page, security: [], parameters: [{ name: slug, in: path, required: true, schema: { type: string } }], responses: { '200': { description: OK } } } }
+  /public/contact:        { post: { summary: Contact form, security: [], responses: { '200': { description: OK } } } }
+
+  /users:           { get: { summary: List users (admin) }, post: { summary: Create user (admin) } }
+  /users/{id}:      { get: { summary: Get user }, patch: { summary: Update user }, delete: { summary: Suspend user } }
+  /users/{id}/role: { patch: { summary: Assign role (admin) } }
+
+  /profiles/me:         { get: { summary: My profile }, patch: { summary: Update profile } }
+  /profiles/me/avatar:  { post: { summary: Upload avatar (multipart) } }
+
+  /award-seasons:                 { get: { summary: List seasons }, post: { summary: Create season (admin) } }
+  /award-seasons/{id}:            { patch: { summary: Update season } }
+  /award-seasons/{id}/publish:    { patch: { summary: Publish season } }
+
+  /categories:         { get: { summary: List categories }, post: { summary: Create category (admin) } }
+  /categories/{slug}:  { get: { summary: Get category by slug } }
+  /categories/{id}:    { patch: { summary: Update }, delete: { summary: Delete } }
+
+  /nominations:                       { get: { summary: List nominations }, post: { summary: Create nomination } }
+  /nominations/{id}:                  { get: { summary: Get nomination }, patch: { summary: Update draft } }
+  /nominations/{id}/submit:           { patch: { summary: Submit nomination } }
+  /nominations/{id}/approve:          { patch: { summary: Approve (admin) } }
+  /nominations/{id}/reject:           { patch: { summary: Reject (admin) } }
+  /nominations/{id}/request-info:     { patch: { summary: Request more info } }
+
+  /nominees/public:           { get: { summary: List public nominees, security: [] } }
+  /nominees/public/{slug}:    { get: { summary: Public nominee profile, security: [] } }
+  /nominees/me:               { get: { summary: My nominee profile }, patch: { summary: Update mine } }
+  /nominees:                  { get: { summary: Admin list nominees } }
+
+  /evidence/upload:                       { post: { summary: Upload evidence (multipart) } }
+  /evidence/nomination/{nominationId}:    { get: { summary: List evidence for a nomination } }
+  /evidence/{id}:                         { delete: { summary: Delete evidence } }
+  /evidence/{id}/verify:                  { patch: { summary: Verify evidence (admin/NRC) } }
+
+  /judging/assignments:           { get: { summary: My assignments (judge) }, post: { summary: Assign judge (head judge/admin) } }
+  /judging/assignments/{id}:      { get: { summary: Assignment detail } }
+  /judging/scores:                { post: { summary: Submit score } }
+  /judging/scores/{id}/draft:     { patch: { summary: Save draft score } }
+  /judging/conflicts:             { post: { summary: Declare conflict of interest } }
+  /judging/head-judge/overview:   { get: { summary: Head judge overview } }
+
+  /voting/categories:                          { get: { summary: Active voting categories, security: [] } }
+  /voting/categories/{categoryId}/nominees:    { get: { summary: Nominees for voting, security: [] } }
+  /voting/votes:                               { post: { summary: Cast vote, security: [] } }
+  /voting/verify:                              { post: { summary: Verify vote receipt, security: [] } }
+  /voting/my-receipts:                         { get: { summary: My voting receipts } }
+  /voting/results:                             { get: { summary: Admin vote results } }
+
+  /vote-integrity/overview:                   { get: { summary: Integrity overview (admin) } }
+  /vote-integrity/suspicious:                 { get: { summary: Suspicious votes (admin) } }
+  /vote-integrity/votes/{id}/quarantine:      { patch: { summary: Quarantine vote } }
+  /vote-integrity/votes/{id}/restore:         { patch: { summary: Restore vote } }
+  /vote-integrity/votes/{id}/invalidate:      { patch: { summary: Invalidate vote } }
+
+  /regions:               { get: { summary: List regions, security: [] } }
+  /countries:             { get: { summary: List countries (filter by region), security: [] } }
+  /chapters/dashboard:    { get: { summary: Chapter dashboard } }
+  /chapters/nominees:     { get: { summary: Chapter nominees } }
+  /chapters/reports:      { get: { summary: Chapter reports } }
+
+  /nrc/tasks:                       { get: { summary: NRC task board }, post: { summary: Create task } }
+  /nrc/tasks/{id}:                  { patch: { summary: Update task } }
+  /nrc/nominees:                    { post: { summary: Submit researched nominee } }
+  /nrc/nominees/{id}/duplicate:     { patch: { summary: Mark duplicate } }
+
+  /partners/me:           { get: { summary: My partner profile }, patch: { summary: Update } }
+  /partners/me/logo:      { post: { summary: Upload partner logo (multipart) } }
+  /partners/public:       { get: { summary: Public partners, security: [] } }
+  /partners:              { get: { summary: Admin list partners } }
+  /partners/{id}/approve: { patch: { summary: Approve partner (admin) } }
+
+  /csr/applications:      { get: { summary: List CSR applications }, post: { summary: Submit CSR application } }
+  /csr/applications/{id}: { get: { summary: Get CSR application }, patch: { summary: Update CSR application } }
+
+  /global-grants:         { get: { summary: List global grants }, post: { summary: Submit global grant } }
+  /global-grants/{id}:    { get: { summary: Get grant }, patch: { summary: Update grant } }
+
+  /digital-voices:        { get: { summary: List digital voices }, post: { summary: Create profile } }
+  /digital-voices/{id}:   { get: { summary: Get profile }, patch: { summary: Update profile } }
+
+  /media:                              { get: { summary: List media assets } }
+  /media/upload:                       { post: { summary: Upload media (multipart) } }
+  /media/articles:                     { post: { summary: Create article } }
+  /media/articles/{id}/publish:        { patch: { summary: Publish article } }
+  /media/public/articles:              { get: { summary: Public articles, security: [] } }
+
+  /events:            { get: { summary: List events, security: [] }, post: { summary: Create event (admin) } }
+  /events/{slug}:     { get: { summary: Event detail, security: [] } }
+
+  /tickets/orders:    { post: { summary: Create ticket order } }
+  /tickets/me:        { get: { summary: My tickets } }
+  /tickets/verify:    { post: { summary: Verify QR ticket } }
+  /tickets/check-in:  { post: { summary: Check in ticket } }
+
+  /payments/initialize: { post: { summary: Initialize payment } }
+  /payments/verify:     { post: { summary: Verify payment } }
+  /payments/webhook:    { post: { summary: Provider webhook (server-to-server), security: [] } }
+  /payments:            { get: { summary: List payments (admin/finance) } }
+
+  /wallet/me:                          { get: { summary: My wallet balance } }
+  /ledger/transactions:                { get: { summary: List ledger transactions } }
+  /ledger/adjustments:                 { post: { summary: Create manual adjustment (finance) } }
+  /ledger/adjustments/{id}/approve:    { patch: { summary: Approve adjustment } }
+
+  /certificates/me:               { get: { summary: My certificates } }
+  /certificates/generate:         { post: { summary: Generate certificate (admin) } }
+  /certificates/{id}/download:    { get: { summary: Download certificate PDF } }
+  /certificates/verify/{code}:    { get: { summary: Public verification, security: [] } }
+
+  /grievances:                  { get: { summary: List grievances (admin) }, post: { summary: Submit grievance } }
+  /grievances/me:               { get: { summary: My grievances } }
+  /grievances/{id}/assign:      { patch: { summary: Assign reviewer } }
+  /grievances/{id}/resolve:     { patch: { summary: Resolve grievance } }
+
+  /notifications/me:            { get: { summary: My notifications } }
+  /notifications/{id}/read:     { patch: { summary: Mark as read } }
+  /notifications/read-all:      { patch: { summary: Mark all as read } }
+  /notifications/send:          { post: { summary: Send admin notification } }
+
+  /analytics/overview:    { get: { summary: Platform overview (admin) } }
+  /analytics/nominations: { get: { summary: Nominations analytics } }
+  /analytics/voting:      { get: { summary: Voting analytics } }
+  /analytics/finance:     { get: { summary: Finance analytics } }
+  /analytics/export:      { get: { summary: Export report (csv/json/pdf) } }
+
+  /settings:                  { get: { summary: Get platform settings }, patch: { summary: Update settings (super admin) } }
+  /settings/voting:           { get: { summary: Voting settings }, patch: { summary: Update voting settings } }
+  /settings/judging-rubrics:  { get: { summary: Judging rubrics }, patch: { summary: Update rubrics } }
+
+  /audit-logs:        { get: { summary: List audit logs (admin) } }
+  /audit-logs/{id}:   { get: { summary: Audit log detail } }
