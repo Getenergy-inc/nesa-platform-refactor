@@ -49,8 +49,11 @@ const NotFound = () => {
           <h2 className="text-2xl md:text-3xl font-bold text-white mb-3 font-display">
             Page Not Found
           </h2>
-          <p className="text-white/60 max-w-md mx-auto">
-            The page <code className="text-gold/70 bg-white/5 px-2 py-0.5 rounded text-sm">{location.pathname}</code> doesn't exist. Here are some pages that might help:
+          <p className="text-white/70 max-w-md mx-auto">
+            We couldn’t find the page you were looking for.
+          </p>
+          <p className="text-white/40 text-xs mt-2">
+            <code className="text-gold/70 bg-white/5 px-2 py-0.5 rounded">{location.pathname}</code>
           </p>
         </motion.div>
 
@@ -61,7 +64,7 @@ const NotFound = () => {
           transition={{ delay: 0.2 }}
           className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 max-w-2xl w-full mb-10"
         >
-          {suggestedPages.map((page, index) => (
+          {suggestedPages.map((page) => (
             <Link
               key={page.href}
               to={page.href}
@@ -79,16 +82,34 @@ const NotFound = () => {
           ))}
         </motion.div>
 
-        {/* Primary CTA */}
+        {/* Primary CTAs */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.3 }}
+          className="flex flex-col sm:flex-row gap-3"
         >
           <Link to="/">
-            <Button className="bg-gold hover:bg-gold-dark text-charcoal font-semibold rounded-full px-8 gap-2">
+            <Button className="w-full sm:w-auto bg-gold hover:bg-gold-dark text-charcoal font-semibold rounded-full px-7 gap-2">
               <Home className="h-4 w-4" />
-              Back to Home
+              Go Home
+            </Button>
+          </Link>
+          <Link to="/pathways">
+            <Button
+              variant="outline"
+              className="w-full sm:w-auto border-gold/40 text-gold hover:bg-gold/10 rounded-full px-7"
+            >
+              Explore Recognition Categories
+            </Button>
+          </Link>
+          <Link to="/nominate">
+            <Button
+              variant="outline"
+              className="w-full sm:w-auto border-gold/40 text-gold hover:bg-gold/10 rounded-full px-7 gap-2"
+            >
+              Start a Nomination
+              <ArrowRight className="h-4 w-4" />
             </Button>
           </Link>
         </motion.div>
