@@ -35,6 +35,8 @@ import Nominate from "./pages/Nominate";
 import Dashboard from "./pages/Dashboard";
 import Unauthorized from "./pages/Unauthorized";
 import NotFound from "./pages/NotFound";
+import PathwaysPage from "./pages/PathwaysPage";
+import AwardPathwayPage from "./pages/AwardPathwayPage";
 import CategoryDetail from "./pages/CategoryDetail";
 import NomineeAccept from "./pages/NomineeAccept";
 import NomineeDecline from "./pages/NomineeDecline";
@@ -439,6 +441,56 @@ const App = () => (
                     element={
                       <WithLayout>
                         <VerifyCertificate />
+                      </WithLayout>
+                    }
+                  />
+
+                  {/* Pathways to Recognition — dedicated page + 4 award category pages */}
+                  <Route
+                    path="/pathways"
+                    element={
+                      <WithLayout>
+                        <PathwaysPage />
+                      </WithLayout>
+                    }
+                  />
+                  <Route
+                    path="/pathways-to-recognition"
+                    element={
+                      <WithLayout>
+                        <PathwaysPage />
+                      </WithLayout>
+                    }
+                  />
+                  <Route
+                    path="/awards/africa-education-icon"
+                    element={
+                      <WithLayout>
+                        <AwardPathwayPage />
+                      </WithLayout>
+                    }
+                  />
+                  <Route
+                    path="/awards/csr-education"
+                    element={
+                      <WithLayout>
+                        <AwardPathwayPage />
+                      </WithLayout>
+                    }
+                  />
+                  <Route
+                    path="/awards/influencer-education"
+                    element={
+                      <WithLayout>
+                        <AwardPathwayPage />
+                      </WithLayout>
+                    }
+                  />
+                  <Route
+                    path="/awards/grants-global-support"
+                    element={
+                      <WithLayout>
+                        <AwardPathwayPage />
                       </WithLayout>
                     }
                   />
