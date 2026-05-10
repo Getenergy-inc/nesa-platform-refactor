@@ -128,7 +128,54 @@ const PatternOverlay = () => (
   </svg>
 );
 
+import { usePathwayCards } from "@/hooks/usePathwayCards";
+
+const pathwayDefaults = Object.fromEntries(pathways.map((p) => [p.id, p]));
+
 export function AwardSpotlightSection() {
+  const { cards: dbCards } = usePathwayCards();
+
+  // Merge: DB rows (when active) override defaults; preserve static defaults for icons/fallbacks.
+  const merged: Pathway[] = (() => {
+    const byId: Record<string, Pathway> = { ...pathwayDefaults };
+    for (const row of dbCards) {
+      if (!row.is_active) {
+        delete byId[row.id];
+        continue;
+      }
+      const base = pathwayDefaults[row.id] ?? pathways[0];
+      byId[row.id] = {
+        ...base,
+        id: row.id,
+        category: row.category,
+        headline: row.headline,
+        awardLine: row.award_line,
+        description: row.description,
+        cta: row.cta,
+        href: row.href,
+        accentLabel: row.accent_label || base.accentLabel,
+        visualGradient: row.visual_gradient || base.visualGradient,
+        image: row.image_url || base.image,
+        imageAlt: base.imageAlt,
+      };
+    }
+    // Preserve order: prefer DB display_order, fallback to static order
+    const order = dbCards.length
+      ? dbCards.filter((r) => r.is_active && byId[r.id]).map((r) => r.id)
+      : pathways.map((p) => p.id);
+    const seen = new Set<string>();
+    const ordered: Pathway[] = [];
+    for (const id of order) {
+      if (byId[id] && !seen.has(id)) {
+        ordered.push(byId[id]);
+        seen.add(id);
+      }
+    }
+    // Append any remaining defaults not yet included
+    for (const p of pathways) if (!seen.has(p.id) && byId[p.id]) ordered.push(byId[p.id]);
+    return ordered;
+  })();
+
   return (
     <section className="relative bg-charcoal py-16 sm:py-24 overflow-hidden">
       {/* Ambient glow */}
@@ -187,7 +234,7 @@ export function AwardSpotlightSection() {
 
         {/* ════ 2. PATHWAY CARDS — 2x2 GRID ════ */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-5 sm:gap-6 mb-14">
-          {pathways.map((card, idx) => {
+          {merged.map((card, idx) => {
             const Icon = card.icon;
             const VisualIcon = card.visualIcon;
 
