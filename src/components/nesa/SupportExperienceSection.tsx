@@ -73,6 +73,21 @@ const items: CardItem[] = [
   },
 ];
 
+function CardImage({ src, alt }: { src: string; alt: string }) {
+  const [currentSrc, setCurrentSrc] = useState(src);
+  return (
+    <img
+      src={currentSrc}
+      alt={alt}
+      loading="lazy"
+      width={1280}
+      height={800}
+      className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-105 bg-charcoal"
+      onError={() => setCurrentSrc(FALLBACK_IMAGE)}
+    />
+  );
+}
+
 export function SupportExperienceSection() {
   return (
     <section className="relative py-20 md:py-24 overflow-hidden">
