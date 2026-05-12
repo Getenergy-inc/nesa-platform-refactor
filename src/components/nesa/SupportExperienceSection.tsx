@@ -7,6 +7,8 @@ import merchImg from "@/assets/movement/merchandise.jpg";
 import anthemImg from "@/assets/movement/anthem.jpg";
 import ambassadorsImg from "@/assets/movement/ambassadors.jpg";
 
+const FALLBACK_IMAGE = "/images/placeholder.svg";
+
 interface CardItem {
   icon: typeof Ticket;
   eyebrow: string;
