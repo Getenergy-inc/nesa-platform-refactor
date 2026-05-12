@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Ticket, ShoppingBag, Music, ArrowRight, Users } from "lucide-react";
