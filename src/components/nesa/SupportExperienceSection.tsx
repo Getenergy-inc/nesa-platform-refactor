@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Ticket, ShoppingBag, Music, ArrowRight, Users } from "lucide-react";
@@ -6,6 +7,8 @@ import galaImg from "@/assets/movement/gala-ticket.jpg";
 import merchImg from "@/assets/movement/merchandise.jpg";
 import anthemImg from "@/assets/movement/anthem.jpg";
 import ambassadorsImg from "@/assets/movement/ambassadors.jpg";
+
+const FALLBACK_IMAGE = "/images/placeholder.svg";
 
 interface CardItem {
   icon: typeof Ticket;
@@ -70,6 +73,21 @@ const items: CardItem[] = [
   },
 ];
 
+function CardImage({ src, alt }: { src: string; alt: string }) {
+  const [currentSrc, setCurrentSrc] = useState(src);
+  return (
+    <img
+      src={currentSrc}
+      alt={alt}
+      loading="lazy"
+      width={1280}
+      height={800}
+      className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-105 bg-charcoal"
+      onError={() => setCurrentSrc(FALLBACK_IMAGE)}
+    />
+  );
+}
+
 export function SupportExperienceSection() {
   return (
     <section className="relative py-20 md:py-24 overflow-hidden">
@@ -107,15 +125,8 @@ export function SupportExperienceSection() {
               className="group relative rounded-3xl border border-gold/15 bg-charcoal-light/40 backdrop-blur-sm overflow-hidden hover:border-gold/40 transition-colors flex flex-col"
             >
               {/* Hero image */}
-              <div className="relative aspect-[16/10] overflow-hidden">
-                <img
-                  src={item.image}
-                  alt={item.imageAlt}
-                  loading="lazy"
-                  width={1280}
-                  height={800}
-                  className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
-                />
+              <div className="relative aspect-[16/10] overflow-hidden bg-charcoal">
+                <CardImage src={item.image} alt={item.imageAlt} />
                 <div className="absolute inset-0 bg-gradient-to-t from-charcoal-light via-charcoal-light/30 to-transparent" />
                 <div className="absolute top-3 left-3 inline-flex items-center gap-1.5 rounded-full bg-charcoal/70 backdrop-blur-sm border border-gold/30 px-3 py-1">
                   <item.icon className="h-3.5 w-3.5 text-gold" />
