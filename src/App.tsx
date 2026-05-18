@@ -197,7 +197,7 @@ import {
 } from "./pages/admin";
 import BulkSeedNominees from "./pages/admin/BulkSeedNominees";
 import { AdminLayout } from "./pages/admin/AdminLayout";
-import ForgotPassword from "./pages/auth/forgotPassword";
+import ForgotPassword from "./pages/auth/ForgotPassword";
 import AdminNRCGovernance from "./pages/admin/NrcGovernance";
 import ManageEditionsPage from "./pages/admin/ManageEditions";
 import CategoryPage from "./pages/categories/CategoryPage";
