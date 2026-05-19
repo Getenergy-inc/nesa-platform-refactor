@@ -13,9 +13,7 @@ import {
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { NESAHeader } from "@/components/nesa/NESAHeader";
-import { NESAFooter } from "@/components/nesa/NESAFooter";
-import { MobileBottomNav } from "@/components/navigation/MainNav";
+import { PublicLayout } from "@/components/layout/PublicLayout";
 
 const trustStats = [
   { label: "Pan-African Reach", value: "54", detail: "African countries targeted" },
@@ -67,10 +65,10 @@ export default function LandingV2() {
         />
       </Helmet>
 
-      <div className="min-h-screen bg-charcoal text-white flex flex-col">
-        <NESAHeader />
+      <PublicLayout>
+        <div className="text-white">
 
-        <main className="flex-1 pt-14 sm:pt-16 pb-20 lg:pb-0">
+        <main className="pb-20 lg:pb-0">
           {/* HERO */}
           <section className="relative overflow-hidden border-b border-gold/10">
             <div className="absolute inset-0 bg-gradient-to-br from-charcoal via-charcoal-light/40 to-charcoal" />
@@ -278,9 +276,6 @@ export default function LandingV2() {
           </section>
         </main>
 
-        <NESAFooter />
-        <MobileBottomNav />
-
         {/* Mobile sticky CTA */}
         <div className="fixed bottom-16 left-0 right-0 z-40 px-4 pb-2 lg:hidden">
           <Link to="/nominate" className="block">
@@ -289,7 +284,8 @@ export default function LandingV2() {
             </Button>
           </Link>
         </div>
-      </div>
+        </div>
+      </PublicLayout>
     </>
   );
 }
