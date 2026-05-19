@@ -7,16 +7,13 @@ import { Link, useNavigate } from "react-router-dom";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { MapPin, Building2, RotateCcw } from "lucide-react";
+import { MapPin, RotateCcw } from "lucide-react";
+import { NomineeAvatar } from "@/components/nominees/NomineeAvatar";
 import type { EnrichedDatabaseNominee } from "@/hooks/useNominees";
 
 interface LandingNomineeCardProps {
   nominee: EnrichedDatabaseNominee;
   isBlueGarnet?: boolean;
-}
-
-function getInitials(name: string): string {
-  return name.split(/[\s-]+/).filter(Boolean).map(w => w[0]).join("").toUpperCase().slice(0, 2);
 }
 
 export function LandingNomineeCard({ nominee, isBlueGarnet = false }: LandingNomineeCardProps) {
