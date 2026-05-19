@@ -28,6 +28,8 @@ export type PathwayVideoCardData = {
   videoId?: string;
   videoTitle: string;
   posterAlt: string;
+  /** Optional poster artwork for the top half (overrides pure-gradient look). */
+  posterImage?: string;
   visualGradient: string;
   /** Floating motion-graphic keywords (6–12 recommended). */
   actionWords?: string[];
