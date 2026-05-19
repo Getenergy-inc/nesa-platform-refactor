@@ -137,7 +137,7 @@ export function getEditionBannerText(edition: Edition, stageOpen: StageAction | 
     return `${name} — Certificates Available`;
   }
   
-  return `${name} — Coming Soon`;
+  return `${name}`;
 }
 
 export function getCeremonyDateDisplay(edition: Edition): string {

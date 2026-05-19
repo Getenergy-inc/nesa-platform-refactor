@@ -176,7 +176,7 @@ export default function OrderConfirmation() {
                 {/* Download Receipt */}
                 <Button variant="outline" className="w-full" disabled>
                   <Download className="h-4 w-4 mr-2" />
-                  Download Receipt (Coming Soon)
+                  Download Receipt
                 </Button>
               </CardContent>
             </Card>

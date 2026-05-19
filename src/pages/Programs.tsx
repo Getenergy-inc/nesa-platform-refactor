@@ -252,11 +252,6 @@ export default function Programs() {
                     </div>
                     <div className="flex items-start justify-between gap-2 mb-1">
                       <h3 className="text-xl font-display font-bold text-white">{program.shortName}</h3>
-                      {program.status === "coming-soon" && (
-                        <Badge className="shrink-0 text-[10px] bg-white/10 text-white/50 border-0">
-                          Coming Soon
-                        </Badge>
-                      )}
                     </div>
                     <p className="text-sm text-primary mb-3">{program.tagline}</p>
                     <p className="text-white/50 text-sm mb-4">{program.description}</p>
