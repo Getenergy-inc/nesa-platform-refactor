@@ -8,6 +8,7 @@ import { MobileBottomNav } from "@/components/navigation/MainNav";
 import { BottomPageNav } from "@/components/navigation/PageNavigation";
 import { ExitIntentPopup } from "@/components/nesa/ExitIntentPopup";
 import { PageFAQSection, FloatingFAQButton } from "@/components/nesa/PageFAQ";
+import { MobileAGCWallet } from "@/components/rewards/MobileAGCWallet";
 
 interface PublicLayoutProps {
   children: ReactNode;
@@ -29,6 +30,7 @@ export function PublicLayout({ children, showFooter = true, showFAQ = true }: Pu
       <BottomPageNav />
       <ExitIntentPopup />
       <FloatingFAQButton />
+      <MobileAGCWallet />
     </div>
   );
 }
