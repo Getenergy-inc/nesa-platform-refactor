@@ -148,7 +148,7 @@ export default function NomineesHubPage() {
             </Link>
 
             <Link
-              to="/nominees/category/ngo-education-africa"
+              to="/nominees/best-ngo-contribution-to-education"
               className="group relative block overflow-hidden rounded-3xl border-2 border-gold/40 bg-gradient-to-br from-emerald-500/15 via-charcoal-light to-charcoal p-6 transition-all hover:border-gold hover:shadow-2xl hover:shadow-gold/20"
             >
               <div className="flex items-start gap-4">
