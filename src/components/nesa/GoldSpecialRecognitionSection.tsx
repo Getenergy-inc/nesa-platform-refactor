@@ -660,8 +660,8 @@ export function GoldSpecialRecognitionSection() {
           ))}
         </div>
 
-        {/* ── Recognition Pathway ── */}
-        <RecognitionPathway />
+
+
 
         {/* ── Closing Statement & CTAs ── */}
         <ClosingStatement />
