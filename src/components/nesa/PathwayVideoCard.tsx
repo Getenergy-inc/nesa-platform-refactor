@@ -117,8 +117,20 @@ export function PathwayVideoCard({ card, index }: Props) {
 
           {/* ═══════════ TOP HALF — Cinematic motion-graphic storytelling ═══════════ */}
           <div className="relative aspect-[16/10] overflow-hidden bg-charcoal">
-            {/* Layered animated gradient */}
-            <div className={`absolute inset-0 bg-gradient-to-br ${card.visualGradient}`} />
+            {/* Poster artwork (if provided) */}
+            {card.posterImage && (
+              <img
+                src={card.posterImage}
+                alt={card.posterAlt}
+                loading="lazy"
+                decoding="async"
+                className="absolute inset-0 h-full w-full object-cover"
+              />
+            )}
+            {/* Layered animated gradient — softened when a poster image is present */}
+            <div
+              className={`absolute inset-0 bg-gradient-to-br ${card.visualGradient} ${card.posterImage ? "opacity-40 mix-blend-multiply" : ""}`}
+            />
             <motion.div
               aria-hidden
               className="absolute inset-0 opacity-70 mix-blend-screen"
