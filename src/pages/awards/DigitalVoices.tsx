@@ -5,6 +5,7 @@ import { AnimatedActionWords } from "@/components/awards/AnimatedActionWords";
 import { BrandedNomineeDirectory } from "@/components/awards/BrandedNomineeDirectory";
 import { GoldSpecialRecognitionSection } from "@/components/nesa/GoldSpecialRecognitionSection";
 import { GoldTrackNavGrid } from "@/components/awards/GoldTrackNavGrid";
+import { BreadcrumbJsonLd } from "@/components/seo/BreadcrumbJsonLd";
 
 export default function DigitalVoices() {
   return (
@@ -17,6 +18,7 @@ export default function DigitalVoices() {
         />
         <link rel="canonical" href="https://nesaafrica.lovable.app/awards/digital-voices" />
       </Helmet>
+      <BreadcrumbJsonLd crumbs={[{ name: "Home", path: "/" }, { name: "Awards", path: "/awards" }, { name: "Digital Voices", path: "/awards/digital-voices" }]} />
 
       <BrandedCategoryHero
         theme="influencer"

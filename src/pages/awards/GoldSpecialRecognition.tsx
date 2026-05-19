@@ -5,6 +5,7 @@ import { NESAFooter } from "@/components/nesa/NESAFooter";
 import { BrandedCategoryHero } from "@/components/awards/BrandedCategoryHero";
 import { BrandedDocumentaryPreview } from "@/components/awards/BrandedDocumentaryPreview";
 import { GoldTrackNavGrid } from "@/components/awards/GoldTrackNavGrid";
+import { BreadcrumbJsonLd } from "@/components/seo/BreadcrumbJsonLd";
 
 export default function GoldSpecialRecognition() {
   return (
@@ -20,6 +21,7 @@ export default function GoldSpecialRecognition() {
         <meta property="og:type" content="website" />
         <link rel="canonical" href="https://nesa.africa/awards/gold-special-recognition" />
       </Helmet>
+      <BreadcrumbJsonLd crumbs={[{ name: "Home", path: "/" }, { name: "Awards", path: "/awards" }, { name: "Gold Special Recognition", path: "/awards/gold-special-recognition" }]} />
 
       <div className="min-h-screen bg-charcoal">
         <NESAHeader />

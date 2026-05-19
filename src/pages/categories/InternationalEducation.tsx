@@ -5,6 +5,7 @@ import { BrandedDocumentaryPreview } from "@/components/awards/BrandedDocumentar
 import { AnimatedActionWords } from "@/components/awards/AnimatedActionWords";
 import { BrandedNomineeDirectory } from "@/components/awards/BrandedNomineeDirectory";
 import { RelatedIconHonoureesRibbon } from "@/components/awards/RelatedIconHonoureesRibbon";
+import { BreadcrumbJsonLd } from "@/components/seo/BreadcrumbJsonLd";
 
 export default function InternationalEducationPage() {
   return (
@@ -17,6 +18,7 @@ export default function InternationalEducationPage() {
         />
         <link rel="canonical" href="https://nesaafrica.lovable.app/awards/global-partnerships" />
       </Helmet>
+      <BreadcrumbJsonLd crumbs={[{ name: "Home", path: "/" }, { name: "Awards", path: "/awards" }, { name: "Global Partnerships", path: "/awards/global-partnerships" }]} />
 
       <BrandedCategoryHero
         theme="global"

@@ -5,6 +5,7 @@ import { BrandedDocumentaryPreview } from "@/components/awards/BrandedDocumentar
 import { AnimatedActionWords } from "@/components/awards/AnimatedActionWords";
 import { BrandedNomineeDirectory } from "@/components/awards/BrandedNomineeDirectory";
 import { RelatedIconHonoureesRibbon } from "@/components/awards/RelatedIconHonoureesRibbon";
+import { BreadcrumbJsonLd } from "@/components/seo/BreadcrumbJsonLd";
 
 export default function CSREducationAfricaPage() {
   return (
@@ -17,6 +18,7 @@ export default function CSREducationAfricaPage() {
         />
         <link rel="canonical" href="https://nesaafrica.lovable.app/awards/csr-for-education" />
       </Helmet>
+      <BreadcrumbJsonLd crumbs={[{ name: "Home", path: "/" }, { name: "Awards", path: "/awards" }, { name: "CSR for Education", path: "/awards/csr-education" }]} />
 
       <BrandedCategoryHero
         theme="corporate"
