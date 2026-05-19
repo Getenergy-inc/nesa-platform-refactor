@@ -1,0 +1,11 @@
+{
+  "generated_at": "2026-05-19T23:22:06.765Z",
+  "dataset": "ngoEducationAfrica.NGO_NOMINEES",
+  "total": 38,
+  "verified": 0,
+  "coverage_percent": 0,
+  "average_quality_score": 0,
+  "by_status": {
+    "missing": 38
+  }
+}
