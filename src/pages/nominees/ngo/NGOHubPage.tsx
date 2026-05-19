@@ -154,13 +154,31 @@ export default function NGOHubPage() {
 function NGOCardMini({ nominee }: { nominee: typeof NGO_NOMINEES[number] }) {
   return (
     <Link to={`/nominees/best-ngo-contribution-to-education/profile/${nominee.slug}`}>
-      <Card className="h-full border-gold/10 bg-white/5 p-5 hover:border-gold/40 transition">
-        <Badge className="mb-2 bg-emerald-500/15 text-emerald-300 border-emerald-500/30">
-          <ShieldCheck className="mr-1 h-3 w-3" /> Verified
-        </Badge>
-        <h3 className="font-serif text-lg font-bold text-white mb-1">{nominee.name}</h3>
-        <p className="text-xs text-white/50 mb-3">{nominee.country} · {nominee.region.replace("-", " ")}</p>
-        <p className="text-sm text-white/70 line-clamp-3">{nominee.impactSummary}</p>
+      <Card className="group h-full overflow-hidden border-gold/10 bg-white/5 hover:border-gold/40 transition flex flex-col">
+        <div className="relative h-36">
+          <NomineeAvatar
+            name={nominee.name}
+            src={nominee.logoUrl || nominee.imageUrl}
+            kind="organization"
+            shape="square"
+            interactive
+            context={nominee.country}
+          />
+          <div className="absolute top-2 left-2">
+            <Badge className="bg-emerald-500/20 text-emerald-200 border-emerald-500/40 backdrop-blur-sm">
+              <ShieldCheck className="mr-1 h-3 w-3" /> Verified
+            </Badge>
+          </div>
+        </div>
+        <div className="p-5 flex-1 flex flex-col">
+          <h3 className="font-serif text-lg font-bold text-white mb-1 group-hover:text-gold transition">
+            {nominee.name}
+          </h3>
+          <p className="text-xs text-white/50 mb-3">
+            {nominee.country} · {nominee.region.replace("-", " ")}
+          </p>
+          <p className="text-sm text-white/70 line-clamp-3">{nominee.impactSummary}</p>
+        </div>
       </Card>
     </Link>
   );
