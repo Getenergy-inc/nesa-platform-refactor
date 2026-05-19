@@ -974,13 +974,11 @@ const App = () => (
                     "north-africa",
                     "central-africa",
                     "southern-africa",
-                  ].map((region) => (
-                    <Route key={region}>
-                      <Route path={`/nominees/${region}`} element={<WithLayout><RegionNomineesHubPage /></WithLayout>} />
-                      <Route path={`/nominees/${region}/:categorySlug`} element={<WithLayout><RegionCategoryPage /></WithLayout>} />
-                      <Route path={`/nominees/${region}/:categorySlug/:subcategorySlug`} element={<WithLayout><RegionCategoryPage /></WithLayout>} />
-                    </Route>
-                  ))}
+                  ].flatMap((region) => [
+                    <Route key={`${region}-hub`} path={`/nominees/${region}`} element={<WithLayout><RegionNomineesHubPage /></WithLayout>} />,
+                    <Route key={`${region}-cat`} path={`/nominees/${region}/:categorySlug`} element={<WithLayout><RegionCategoryPage /></WithLayout>} />,
+                    <Route key={`${region}-sub`} path={`/nominees/${region}/:categorySlug/:subcategorySlug`} element={<WithLayout><RegionCategoryPage /></WithLayout>} />,
+                  ])}
                   {/* Influencers Education Impact Award — dedicated nominee ecosystem */}
                   <Route
                     path="/nominees/gold-special-recognition"
