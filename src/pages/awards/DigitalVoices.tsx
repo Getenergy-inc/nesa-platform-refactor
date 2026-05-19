@@ -58,6 +58,7 @@ export default function DigitalVoices() {
         description="Creators, musicians, athletes and advocates verified live from the NESA Influencers directory."
       />
 
+      <GoldTrackNavGrid />
       <GoldSpecialRecognitionSection />
     </>
   );
