@@ -8,6 +8,9 @@ import GoldHubPage from "./pages/nominees/gold/GoldHubPage";
 import GoldCategoryPage from "./pages/nominees/gold/GoldCategoryPage";
 import GoldNomineeProfilePage from "./pages/nominees/gold/GoldNomineeProfilePage";
 import NomineeSlugRedirect from "./pages/nominees/gold/NomineeSlugRedirect";
+import NGOHubPage from "./pages/nominees/ngo/NGOHubPage";
+import NGORegionalPage from "./pages/nominees/ngo/NGORegionalPage";
+import NGONomineeProfile from "./pages/nominees/ngo/NGONomineeProfile";
 import IconAwardMain from "./pages/nominees/icon/IconAwardMain";
 import IconSubcategoryPage from "./pages/nominees/icon/IconSubcategoryPage";
 import IconClassificationPage from "./pages/nominees/icon/IconClassificationPage";
@@ -605,6 +608,31 @@ const App = () => (
                     element={
                       <WithLayout>
                         <NGOEducationAfrica />
+                      </WithLayout>
+                    }
+                  />
+                  {/* NGO 5-Africa Regional ecosystem */}
+                  <Route
+                    path="/nominees/best-ngo-contribution-to-education"
+                    element={
+                      <WithLayout>
+                        <NGOHubPage />
+                      </WithLayout>
+                    }
+                  />
+                  <Route
+                    path="/nominees/best-ngo-contribution-to-education/profile/:slug"
+                    element={
+                      <WithLayout>
+                        <NGONomineeProfile />
+                      </WithLayout>
+                    }
+                  />
+                  <Route
+                    path="/nominees/best-ngo-contribution-to-education/:region"
+                    element={
+                      <WithLayout>
+                        <NGORegionalPage />
                       </WithLayout>
                     }
                   />
