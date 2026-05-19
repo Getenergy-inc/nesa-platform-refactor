@@ -1,17 +1,17 @@
 import { useMemo, useState } from "react";
-import { Link, useParams, Navigate } from "react-router-dom";
+import { useParams, Navigate } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import { motion } from "framer-motion";
-import { Trophy, Users, ChevronRight } from "lucide-react";
-import { Badge } from "@/components/ui/badge";
+import { Users } from "lucide-react";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Button } from "@/components/ui/button";
-import { useNominees, type EnrichedDatabaseNominee } from "@/hooks/useNominees";
+import { useNominees } from "@/hooks/useNominees";
 import { LandingNomineeCard } from "@/components/nesa/LandingNomineeCard";
 import { NomineeBreadcrumbs } from "@/components/nominees/NomineeBreadcrumbs";
 import { CategoryHero } from "@/components/nominees/CategoryHero";
 import { NomineeFilterBar, type NomineeSort } from "@/components/nominees/NomineeFilterBar";
 import { FeaturedNomineeSpotlight } from "@/components/nominees/FeaturedNomineeSpotlight";
+import { SubcategoryTabs, type SubcategoryTab } from "@/components/nominees/SubcategoryTabs";
 
 const PAGE_SIZE = 12;
 
@@ -19,6 +19,7 @@ export default function CategoryLandingPage() {
   const { categorySlug } = useParams<{ categorySlug: string }>();
   const { data: nominees, isLoading } = useNominees();
 
+  const [activeSub, setActiveSub] = useState<string>("");
   const [search, setSearch] = useState("");
   const [country, setCountry] = useState("all");
   const [sort, setSort] = useState<NomineeSort>("votes");
@@ -34,24 +35,30 @@ export default function CategoryLandingPage() {
     if (inCat.length === 0) return null;
 
     const countries = Array.from(new Set(inCat.map((n) => n.country).filter(Boolean) as string[])).sort();
-    const subcatMap = new Map<string, { slug: string; name: string; count: number }>();
+    const subcatMap = new Map<string, SubcategoryTab>();
     inCat.forEach((n) => {
       const e = subcatMap.get(n.subcategorySlug) ?? { slug: n.subcategorySlug, name: n.subcategoryName, count: 0 };
       e.count++;
       subcatMap.set(n.subcategorySlug, e);
     });
 
+    const subcategories = Array.from(subcatMap.values()).sort((a, b) => b.count - a.count);
+
     return {
       name: inCat[0].categoryName,
       nominees: inCat,
       countries,
-      subcategories: Array.from(subcatMap.values()).sort((a, b) => b.count - a.count),
+      subcategories,
+      tabs: [{ slug: "", name: "All", count: inCat.length }, ...subcategories] as SubcategoryTab[],
     };
   }, [nominees, categorySlug]);
+
+  const resetPagination = () => setPage(1);
 
   const filtered = useMemo(() => {
     if (!categoryData) return [];
     let r = [...categoryData.nominees];
+    if (activeSub) r = r.filter((n) => n.subcategorySlug === activeSub);
     if (search) {
       const q = search.toLowerCase();
       r = r.filter(
@@ -65,19 +72,18 @@ export default function CategoryLandingPage() {
 
     if (sort === "votes") r.sort((a, b) => b.publicVotes - a.publicVotes);
     else if (sort === "name") r.sort((a, b) => a.name.localeCompare(b.name));
-    // "newest" — no created_at available, fall back to votes-then-name
     else r.sort((a, b) => a.name.localeCompare(b.name));
 
     return r;
-  }, [categoryData, search, country, sort]);
+  }, [categoryData, activeSub, search, country, sort]);
 
   if (isLoading) {
     return (
       <section className="bg-charcoal py-12 min-h-screen">
         <div className="container">
           <Skeleton className="h-64 rounded-3xl mb-8" />
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
-            {Array.from({ length: 8 }).map((_, i) => (
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            {Array.from({ length: 6 }).map((_, i) => (
               <Skeleton key={i} className="h-72 rounded-xl" />
             ))}
           </div>
@@ -95,6 +101,8 @@ export default function CategoryLandingPage() {
   const hasFilters = !!search || country !== "all" || sort !== "votes";
 
   const canonical = `https://nesaafrica.lovable.app/nominees/category/${categorySlug}`;
+  const activeSubName =
+    activeSub && categoryData.subcategories.find((s) => s.slug === activeSub)?.name;
 
   return (
     <>
@@ -125,7 +133,11 @@ export default function CategoryLandingPage() {
       <section className="bg-charcoal py-10 md:py-14 min-h-screen">
         <div className="container">
           <NomineeBreadcrumbs
-            items={[{ label: "Nominees", href: "/nominees" }, { label: categoryData.name }]}
+            items={[
+              { label: "Nominees", href: "/nominees" },
+              { label: categoryData.name },
+              ...(activeSubName ? [{ label: activeSubName }] : []),
+            ]}
           />
 
           <CategoryHero
@@ -136,44 +148,33 @@ export default function CategoryLandingPage() {
             subcategoryCount={categoryData.subcategories.length}
           />
 
-          <FeaturedNomineeSpotlight
-            nominees={[...categoryData.nominees].sort((a, b) => b.publicVotes - a.publicVotes)}
+          {/* Horizontal Netflix-style subcategory tabs */}
+          <SubcategoryTabs
+            tabs={categoryData.tabs}
+            activeSlug={activeSub}
+            onChange={(slug) => {
+              setActiveSub(slug);
+              resetPagination();
+            }}
           />
 
-          {/* Subcategory chips */}
-          {categoryData.subcategories.length > 0 && (
-            <section className="mb-8">
-              <h2 className="font-display text-lg md:text-xl font-bold text-ivory mb-3 flex items-center gap-2">
-                <Trophy className="w-4 h-4 text-gold" /> Subcategories
-              </h2>
-              <div className="flex flex-wrap gap-2">
-                {categoryData.subcategories.map((sub) => (
-                  <Link
-                    key={sub.slug}
-                    to={`/nominees/category/${categorySlug}/${sub.slug}`}
-                    className="group inline-flex items-center gap-2 rounded-full border border-gold/20 hover:border-gold/50 bg-charcoal-light hover:bg-gold/5 px-4 py-2 text-sm text-ivory/80 hover:text-gold transition-all"
-                  >
-                    <span className="line-clamp-1 max-w-[280px]">{sub.name}</span>
-                    <Badge className="bg-gold/15 text-gold border-0 text-[10px] px-1.5">
-                      {sub.count}
-                    </Badge>
-                    <ChevronRight className="w-3 h-3 opacity-60 group-hover:translate-x-0.5 transition-transform" />
-                  </Link>
-                ))}
-              </div>
-            </section>
+          {/* Featured spotlight (top 3 by votes within current filter scope) */}
+          {!activeSub && (
+            <FeaturedNomineeSpotlight
+              nominees={[...categoryData.nominees].sort((a, b) => b.publicVotes - a.publicVotes)}
+            />
           )}
 
           {/* Filters */}
           <NomineeFilterBar
             search={search}
-            onSearchChange={(v) => { setSearch(v); setPage(1); }}
+            onSearchChange={(v) => { setSearch(v); resetPagination(); }}
             country={country}
-            onCountryChange={(v) => { setCountry(v); setPage(1); }}
+            onCountryChange={(v) => { setCountry(v); resetPagination(); }}
             countries={categoryData.countries}
             sort={sort}
-            onSortChange={(v) => { setSort(v); setPage(1); }}
-            onClear={() => { setSearch(""); setCountry("all"); setSort("votes"); setPage(1); }}
+            onSortChange={(v) => { setSort(v); resetPagination(); }}
+            onClear={() => { setSearch(""); setCountry("all"); setSort("votes"); resetPagination(); }}
             hasFilters={hasFilters}
             totalCount={filtered.length}
           />
@@ -185,7 +186,7 @@ export default function CategoryLandingPage() {
               No nominees match your filters.
             </div>
           ) : (
-            <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
               {pageItems.map((n, i) => (
                 <motion.div
                   key={n.id}
