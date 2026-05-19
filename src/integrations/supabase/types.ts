@@ -1926,6 +1926,78 @@ export type Database = {
           },
         ]
       }
+      media_assets: {
+        Row: {
+          alt_text: string | null
+          aspect_ratio: number | null
+          bucket: string
+          created_at: string
+          file_hash: string
+          file_path: string
+          file_size_bytes: number
+          height: number | null
+          id: string
+          kind: string
+          media_status: string
+          media_verified: boolean
+          metadata: Json
+          mime_type: string
+          nominee_id: string | null
+          owner_user_id: string | null
+          public_url: string
+          quality_score: number
+          rejection_reason: string | null
+          updated_at: string
+          width: number | null
+        }
+        Insert: {
+          alt_text?: string | null
+          aspect_ratio?: number | null
+          bucket?: string
+          created_at?: string
+          file_hash: string
+          file_path: string
+          file_size_bytes: number
+          height?: number | null
+          id?: string
+          kind: string
+          media_status?: string
+          media_verified?: boolean
+          metadata?: Json
+          mime_type: string
+          nominee_id?: string | null
+          owner_user_id?: string | null
+          public_url: string
+          quality_score?: number
+          rejection_reason?: string | null
+          updated_at?: string
+          width?: number | null
+        }
+        Update: {
+          alt_text?: string | null
+          aspect_ratio?: number | null
+          bucket?: string
+          created_at?: string
+          file_hash?: string
+          file_path?: string
+          file_size_bytes?: number
+          height?: number | null
+          id?: string
+          kind?: string
+          media_status?: string
+          media_verified?: boolean
+          metadata?: Json
+          mime_type?: string
+          nominee_id?: string | null
+          owner_user_id?: string | null
+          public_url?: string
+          quality_score?: number
+          rejection_reason?: string | null
+          updated_at?: string
+          width?: number | null
+        }
+        Relationships: []
+      }
       migration_email_jobs: {
         Row: {
           batch_id: string | null
