@@ -16,6 +16,8 @@ export default {
       fontFamily: {
         sans: ['Inter', 'system-ui', 'sans-serif'],
         display: ['Playfair Display', 'Georgia', 'serif'],
+        serif: ['Instrument Serif', 'Georgia', 'serif'],
+        body: ['Work Sans', 'Inter', 'system-ui', 'sans-serif'],
         cursive: ['Great Vibes', 'cursive'],
       },
       colors: {
