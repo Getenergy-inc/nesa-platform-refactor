@@ -65,7 +65,17 @@ export function NESALandingPage() {
           <AwardSpotlightSection />
         </LazySection>
 
-        {/* ═══ 2c. Brand Narrative — What NESA Africa Represents ═══ */}
+        {/* ═══ 2c. Gold Special Recognition — 2026 Edition ═══ */}
+        <LazySection>
+          <GoldSpecialRecognitionSection />
+        </LazySection>
+
+        {/* ═══ 2d. Impact Wrap-Up — From Recognition to Real Impact ═══ */}
+        <LazySection>
+          <ImpactWrapUpSection />
+        </LazySection>
+
+        {/* ═══ 2e. Brand Narrative — What NESA Africa Represents ═══ */}
         <LazySection>
           <BrandNarrativeSection />
         </LazySection>
