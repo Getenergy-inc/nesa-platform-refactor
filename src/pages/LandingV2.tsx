@@ -238,7 +238,7 @@ export default function LandingV2() {
                 <Card className="bg-charcoal-light/40 border-gold/20">
                   <CardContent className="p-6">
                     <Globe2 className="h-6 w-6 text-gold mb-3" />
-                    <h3 className="font-display text-lg font-bold mb-2">Pan-African Positioning</h3>
+                    <h3 className="font-display text-lg font-bold mb-2 text-white">Pan-African Positioning</h3>
                     <p className="text-white/65 text-sm">Frame NESA as a continental education recognition movement.</p>
                   </CardContent>
                 </Card>
