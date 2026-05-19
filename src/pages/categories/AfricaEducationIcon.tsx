@@ -2,6 +2,7 @@ import { DynamicCategoryPage } from "@/components/awards/DynamicCategoryPage";
 import { BrandedCategoryHero } from "@/components/awards/BrandedCategoryHero";
 import { BrandedDocumentaryPreview } from "@/components/awards/BrandedDocumentaryPreview";
 import { AnimatedActionWords } from "@/components/awards/AnimatedActionWords";
+import { BrandedNomineeDirectory } from "@/components/awards/BrandedNomineeDirectory";
 
 export default function AfricaEducationIconPage() {
   return (
@@ -33,6 +34,12 @@ export default function AfricaEducationIconPage() {
         description="Watch how Africa's most influential education leaders shaped generations and built the foundations of our future learning systems."
         watchCtaHref="/media"
         imageAlt="Legacy stories documentary preview"
+      />
+      <BrandedNomineeDirectory
+        theme="legacy"
+        categoryName="Africa Education Icon Award (2006–2026)"
+        title="Live Icon Nominees"
+        description="Verified nominees pulled live from the NESA database — refreshed as the Nominee Research Corps validates each entry."
       />
       <DynamicCategoryPage
         categoryTitle="Africa Education Icon Award (2006–2026)"
