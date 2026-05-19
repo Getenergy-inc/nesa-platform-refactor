@@ -245,7 +245,7 @@ export default function LandingV2() {
                 <Card className="bg-charcoal-light/40 border-gold/20">
                   <CardContent className="p-6">
                     <Handshake className="h-6 w-6 text-gold mb-3" />
-                    <h3 className="font-display text-lg font-bold mb-2">Partner Confidence</h3>
+                    <h3 className="font-display text-lg font-bold mb-2 text-white">Partner Confidence</h3>
                     <p className="text-white/65 text-sm">Surface institutional affiliations, sponsors, and media proof.</p>
                   </CardContent>
                 </Card>
