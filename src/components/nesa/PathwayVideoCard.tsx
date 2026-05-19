@@ -401,6 +401,16 @@ export function PathwayVideoCard({ card, index }: Props) {
                 <X className="h-4 w-4" />
               </button>
               <div className="relative aspect-video">
+                {ytEmbedsEnabled && card.videoId ? (
+                  <iframe
+                    src={`https://www.youtube-nocookie.com/embed/${card.videoId}?autoplay=1&rel=0&modestbranding=1`}
+                    title={card.videoTitle}
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                    className="absolute inset-0 h-full w-full border-0"
+                  />
+                ) : (
+                  <>
                 <div className={`absolute inset-0 bg-gradient-to-br ${card.visualGradient}`} />
                 {!reduce && (
                   <motion.div
