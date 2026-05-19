@@ -24,6 +24,7 @@ import { CustomerCareChat } from "@/components/support/CustomerCareChat";
 // Pages
 import NESALandingPage from "./features/landing/NESALandingPage";
 import LandingV2 from "./pages/LandingV2";
+import LandingV3 from "./pages/LandingV3";
 import UpcomingEventsPage from "./pages/UpcomingEvents";
 import Categories from "./pages/Categories";
 import Programs from "./pages/Programs";
