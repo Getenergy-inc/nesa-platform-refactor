@@ -41,6 +41,12 @@ const staticEntries: SitemapEntry[] = [
   { path: "/nominees", changefreq: "daily", priority: "0.9" },
   { path: "/nominees/africa-education-icon-award", changefreq: "weekly", priority: "0.8" },
   { path: "/nominees/gold-special-recognition", changefreq: "weekly", priority: "0.8" },
+  // Region-first nominee ecosystem (Phase 5)
+  { path: "/nominees/west-africa", changefreq: "weekly", priority: "0.85" },
+  { path: "/nominees/east-africa", changefreq: "weekly", priority: "0.85" },
+  { path: "/nominees/north-africa", changefreq: "weekly", priority: "0.85" },
+  { path: "/nominees/central-africa", changefreq: "weekly", priority: "0.85" },
+  { path: "/nominees/southern-africa", changefreq: "weekly", priority: "0.85" },
   // Participation
   { path: "/nominate", changefreq: "weekly", priority: "0.9" },
   { path: "/vote", changefreq: "daily", priority: "0.9" },
