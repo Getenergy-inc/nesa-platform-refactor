@@ -128,7 +128,7 @@ export default function About() {
         <title>About | New Education Standard Award Africa (NESA-Africa)</title>
         <meta
           name="description"
-          content="Learn about NESA-Africa — a governance-grade education accountability platform honoring Africa's changemakers since 2005. Vision 2035: Advocating & Achieving Education For All In Africa."
+          content="Learn about NESA-Africa — a governance-grade education accountability platform honoring Africa's changemakers since 2006. Vision 2035: Advocating & Achieving Education For All In Africa."
         />
       </Helmet>
 
@@ -154,7 +154,7 @@ export default function About() {
             >
               <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gold/10 border border-gold/30 mb-6">
                 <GraduationCap className="h-4 w-4 text-gold" />
-                <span className="text-sm font-medium text-gold">Since 2005 • Vision 2035</span>
+                <span className="text-sm font-medium text-gold">Since 2006 • Vision 2035</span>
               </div>
               
               <h1 className="mb-6 font-display text-4xl font-bold text-ivory md:text-5xl lg:text-6xl leading-tight">

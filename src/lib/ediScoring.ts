@@ -105,7 +105,7 @@ function generateImpactSummary(pillars: EDIPillarScore[], grade: EDIGrade, overa
   return `This nominee demonstrates ${gradeDesc} impact across African education development (EDI ${overallScore}/100). ` +
     `Their strongest contribution is in ${strongest.pillar} (${strongest.score}/${strongest.maxScore}), ` +
     `while ${weakest.pillar} (${weakest.score}/${weakest.maxScore}) presents an opportunity for further development. ` +
-    `The overall evaluation reflects documented contributions to continental education between 2005 and 2025.`;
+    `The overall evaluation reflects documented contributions to continental education between 2006 and 2026.`;
 }
 
 export function calculateEDIScorecard(nomineeId: number, achievement: string, category: string): EDIScorecard {

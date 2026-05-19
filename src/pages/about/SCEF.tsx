@@ -144,7 +144,7 @@ export default function SCEF() {
                 { value: "4", label: "Active Programmes" },
                 { value: "5+2", label: "Regional Groups" },
                 { value: "1M+", label: "Lives Impacted" },
-                { value: "2005", label: "Vision Conceived" },
+                { value: "2006", label: "Vision Conceived" },
               ].map((stat) => (
                 <div key={stat.label}>
                   <div className="mb-2 text-4xl font-bold text-primary">{stat.value}</div>

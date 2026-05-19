@@ -41,7 +41,7 @@ export function CVOMessage() {
           Founder & CVO, Santos Creations Educational Foundation
         </p>
         <p className="text-gold/50 text-[10px] mt-1 italic">
-          "Building Africa's Education Legacy Since 2005"
+          "Building Africa's Education Legacy Since 2006"
         </p>
       </motion.div>
     </motion.div>
