@@ -2,7 +2,7 @@ import { useMemo, useState } from "react";
 import { Link, Navigate, useParams } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import { motion } from "framer-motion";
-import { ArrowRight, BadgeCheck, ChevronRight, Search, Trophy, Users, Vote } from "lucide-react";
+import { ArrowRight, BadgeCheck, ChevronRight, Search, Sparkles, Trophy, Users, Vote } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -350,6 +350,3 @@ export default function GoldCategoryPage() {
     </>
   );
 }
-
-// Missing import shim
-import { Sparkles } from "lucide-react";
