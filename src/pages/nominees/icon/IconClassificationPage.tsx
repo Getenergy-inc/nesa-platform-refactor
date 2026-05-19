@@ -1,6 +1,5 @@
 import { Helmet } from "react-helmet-async";
-import { Navigate, useParams, useSearchParams } from "react-router-dom";
-import { useMemo } from "react";
+import { Navigate, useParams } from "react-router-dom";
 import {
   IconClassificationSlug,
   IconSubcategorySlug,
@@ -15,14 +14,10 @@ import {
   NomineeCard,
   RelatedClassifications,
 } from "@/components/iconAward/shared";
-import { Input } from "@/components/ui/input";
 import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
+  NomineeFilterBar,
+  useNomineeFilters,
+} from "@/components/iconAward/NomineeFilterBar";
 
 export default function IconClassificationPage() {
   const { sub, cls } = useParams<{ sub: string; cls: string }>();
