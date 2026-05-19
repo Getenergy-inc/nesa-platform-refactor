@@ -235,6 +235,19 @@ export const GOLD_CATEGORIES: GoldCategory[] = [
   },
 ];
 
+// Merge in auto-classified migrated nominees from the 2025 master dataset.
+// See REPORT at /mnt/documents/nesa-gold-migration/REPORT.md
+import { MUSIC_MIGRATED, SPORTS_MIGRATED, SOCIAL_MIGRATED } from "./goldSpecialRecognitionMigrated";
+const mergeBySlug = (existing: GoldNominee[], incoming: GoldNominee[]) => {
+  const have = new Set(existing.map((n) => n.slug));
+  return [...existing, ...incoming.filter((n) => !have.has(n.slug))];
+};
+for (const cat of GOLD_CATEGORIES) {
+  if (cat.slug === "music-for-education") cat.nominees = mergeBySlug(cat.nominees, MUSIC_MIGRATED);
+  if (cat.slug === "sports-for-education") cat.nominees = mergeBySlug(cat.nominees, SPORTS_MIGRATED);
+  if (cat.slug === "social-media-for-education") cat.nominees = mergeBySlug(cat.nominees, SOCIAL_MIGRATED);
+}
+
 export function getGoldCategory(slug: string): GoldCategory | undefined {
   return GOLD_CATEGORIES.find((c) => c.slug === slug);
 }
