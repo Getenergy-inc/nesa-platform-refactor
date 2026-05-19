@@ -90,10 +90,8 @@ export function NESALandingPage() {
           <PromoVideosSection />
         </LazySection>
 
-        {/* ═══ 8b. Tickets • Merch • Anthem ═══ */}
-        <LazySection>
-          <SupportExperienceSection />
-        </LazySection>
+
+
 
         {/* ═══ 8c. Merchandise Showcase ═══ */}
         <LazySection>
