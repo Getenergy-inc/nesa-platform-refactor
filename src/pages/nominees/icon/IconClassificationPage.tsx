@@ -1,6 +1,5 @@
 import { Helmet } from "react-helmet-async";
-import { Navigate, useParams, useSearchParams } from "react-router-dom";
-import { useMemo } from "react";
+import { Navigate, useParams } from "react-router-dom";
 import {
   IconClassificationSlug,
   IconSubcategorySlug,
@@ -15,14 +14,10 @@ import {
   NomineeCard,
   RelatedClassifications,
 } from "@/components/iconAward/shared";
-import { Input } from "@/components/ui/input";
 import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
+  NomineeFilterBar,
+  useNomineeFilters,
+} from "@/components/iconAward/NomineeFilterBar";
 
 export default function IconClassificationPage() {
   const { sub, cls } = useParams<{ sub: string; cls: string }>();
@@ -42,34 +37,8 @@ export default function IconClassificationPage() {
   const clsSlug = classification.slug as IconClassificationSlug;
   const all = byClassification(subSlug, clsSlug);
 
-  const [params, setParams] = useSearchParams();
-  const country = params.get("country") || "all";
-  const verification = params.get("verification") || "all";
-  const jury = params.get("jury") || "all";
-  const q = params.get("q") || "";
-
-  const countries = useMemo(
-    () => Array.from(new Set(all.map((n) => n.country))).sort(),
-    [all]
-  );
-
-  const filtered = useMemo(() => {
-    return all.filter((n) => {
-      if (country !== "all" && n.country !== country) return false;
-      if (verification !== "all" && n.verification_status !== verification) return false;
-      if (jury !== "all" && n.jury_status !== jury) return false;
-      if (q && !`${n.name} ${n.impact_summary}`.toLowerCase().includes(q.toLowerCase()))
-        return false;
-      return true;
-    });
-  }, [all, country, verification, jury, q]);
-
-  const setParam = (k: string, v: string) => {
-    const next = new URLSearchParams(params);
-    if (!v || v === "all") next.delete(k);
-    else next.set(k, v);
-    setParams(next, { replace: true });
-  };
+  const { state, filtered, countries, regions, setParam, clear, activeCount } =
+    useNomineeFilters(all);
 
   const url = `https://nesaafrica.lovable.app/nominees/africa-education-icon-award/${subSlug}/${clsSlug}`;
   const title = `${classification.title} — ${subcategory.title} Nominees | NESA Africa`;
@@ -116,52 +85,17 @@ export default function IconClassificationPage() {
         />
 
         {/* Filters */}
-        <section className="border-y border-gold/15 bg-charcoal-light/40 py-6 sticky top-0 z-10 backdrop-blur">
-          <div className="container mx-auto px-4 grid gap-3 md:grid-cols-4">
-            <Input
-              placeholder="Search nominees…"
-              value={q}
-              onChange={(e) => setParam("q", e.target.value)}
-              className="bg-charcoal border-gold/20 text-white placeholder:text-white/40"
-            />
-            <Select value={country} onValueChange={(v) => setParam("country", v)}>
-              <SelectTrigger className="bg-charcoal border-gold/20 text-white">
-                <SelectValue placeholder="Country" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="all">All countries</SelectItem>
-                {countries.map((c) => (
-                  <SelectItem key={c} value={c}>
-                    {c}
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
-            <Select value={verification} onValueChange={(v) => setParam("verification", v)}>
-              <SelectTrigger className="bg-charcoal border-gold/20 text-white">
-                <SelectValue placeholder="Verification" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="all">Any verification</SelectItem>
-                <SelectItem value="verified">Verified</SelectItem>
-                <SelectItem value="pending">Pending</SelectItem>
-              </SelectContent>
-            </Select>
-            <Select value={jury} onValueChange={(v) => setParam("jury", v)}>
-              <SelectTrigger className="bg-charcoal border-gold/20 text-white">
-                <SelectValue placeholder="Jury status" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="all">Any jury status</SelectItem>
-                <SelectItem value="nominated">Nominated</SelectItem>
-                <SelectItem value="verified">Verified</SelectItem>
-                <SelectItem value="shortlisted">Shortlisted</SelectItem>
-                <SelectItem value="jury_reviewed">Jury reviewed</SelectItem>
-                <SelectItem value="laureate">Laureate</SelectItem>
-              </SelectContent>
-            </Select>
-          </div>
-        </section>
+        <NomineeFilterBar
+          state={state}
+          countries={countries}
+          regions={regions}
+          setParam={setParam}
+          clear={clear}
+          activeCount={activeCount}
+          total={all.length}
+          filteredCount={filtered.length}
+        />
+
 
         <section id="grid" className="bg-charcoal py-12">
           <div className="container mx-auto px-4">

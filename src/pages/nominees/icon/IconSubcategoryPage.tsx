@@ -16,6 +16,10 @@ import {
   IconHero,
   NomineeCard,
 } from "@/components/iconAward/shared";
+import {
+  NomineeFilterBar,
+  useNomineeFilters,
+} from "@/components/iconAward/NomineeFilterBar";
 import { Button } from "@/components/ui/button";
 
 export default function IconSubcategoryPage() {
@@ -97,41 +101,71 @@ export default function IconSubcategoryPage() {
           </section>
         )}
 
-        <section id="all" className="bg-charcoal py-14">
-          <div className="container mx-auto px-4">
-            <div className="flex items-end justify-between mb-6">
-              <h2 className="font-display text-2xl font-bold text-white">
-                All Nominees · {all.length}
-              </h2>
-            </div>
-            {all.length === 0 ? (
-              <p className="text-white/60">No nominees yet — be the first to nominate.</p>
-            ) : (
-              <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-                {all.map((n) => (
-                  <NomineeCard key={n.id} nominee={n} />
-                ))}
-              </div>
-            )}
-            <div className="mt-8 flex flex-wrap gap-3">
-              {ICON_CLASSIFICATIONS.map((c) => (
-                <Button
-                  key={c.slug}
-                  asChild
-                  variant="outline"
-                  className="border-gold/30 text-white hover:bg-gold/10"
-                >
-                  <Link to={classificationUrl(subSlug, c.slug)}>
-                    View {c.title} →
-                  </Link>
-                </Button>
-              ))}
-            </div>
-          </div>
-        </section>
+        <SubcategoryNomineeBrowser subSlug={subSlug} all={all} />
 
         <FinalCTA />
       </div>
     </>
   );
 }
+
+function SubcategoryNomineeBrowser({
+  subSlug,
+  all,
+}: {
+  subSlug: IconSubcategorySlug;
+  all: ReturnType<typeof bySubcategory>;
+}) {
+  const { state, filtered, countries, regions, setParam, clear, activeCount } =
+    useNomineeFilters(all, { showClassification: true });
+
+  return (
+    <>
+      <NomineeFilterBar
+        state={state}
+        countries={countries}
+        regions={regions}
+        setParam={setParam}
+        clear={clear}
+        activeCount={activeCount}
+        showClassification
+        total={all.length}
+        filteredCount={filtered.length}
+      />
+
+      <section id="all" className="bg-charcoal py-14">
+        <div className="container mx-auto px-4">
+          <div className="flex items-end justify-between mb-6">
+            <h2 className="font-display text-2xl font-bold text-white">
+              Nominees
+            </h2>
+          </div>
+          {filtered.length === 0 ? (
+            <p className="text-white/60">No nominees match the current filters.</p>
+          ) : (
+            <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+              {filtered.map((n) => (
+                <NomineeCard key={n.id} nominee={n} showSubBadge={false} />
+              ))}
+            </div>
+          )}
+          <div className="mt-8 flex flex-wrap gap-3">
+            {ICON_CLASSIFICATIONS.map((c) => (
+              <Button
+                key={c.slug}
+                asChild
+                variant="outline"
+                className="border-gold/30 text-white hover:bg-gold/10"
+              >
+                <Link to={classificationUrl(subSlug, c.slug)}>
+                  View {c.title} →
+                </Link>
+              </Button>
+            ))}
+          </div>
+        </div>
+      </section>
+    </>
+  );
+}
+
