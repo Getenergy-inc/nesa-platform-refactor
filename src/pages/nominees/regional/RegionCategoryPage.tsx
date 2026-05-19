@@ -17,10 +17,10 @@ const PAGE_SIZE = 12;
 const BASE_URL = "https://nesaafrica.lovable.app";
 
 export default function RegionCategoryPage() {
-  const { region, categorySlug } = useParams<{ region: string; categorySlug: string }>();
+  const { region, categorySlug, subcategorySlug } = useParams<{ region: string; categorySlug: string; subcategorySlug?: string }>();
   const { data: nominees, isLoading } = useNominees();
 
-  const [activeSub, setActiveSub] = useState("");
+  const [activeSub, setActiveSub] = useState(subcategorySlug ?? "");
   const [search, setSearch] = useState("");
   const [country, setCountry] = useState("all");
   const [sort, setSort] = useState<NomineeSort>("votes");
