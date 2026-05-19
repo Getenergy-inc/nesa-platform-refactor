@@ -23,8 +23,6 @@ import { CustomerCareChat } from "@/components/support/CustomerCareChat";
 
 // Pages
 import NESALandingPage from "./features/landing/NESALandingPage";
-import LandingV2 from "./pages/LandingV2";
-import LandingV3 from "./pages/LandingV3";
 import UpcomingEventsPage from "./pages/UpcomingEvents";
 import Categories from "./pages/Categories";
 import Programs from "./pages/Programs";
@@ -254,11 +252,8 @@ const App = () => (
               <BrowserRouter>
                 <ScrollToTop />
                 <Routes>
-                  {/* Landing - Award Almanac (refactored homepage). Legacy preserved at /landing-legacy */}
-                  <Route path="/" element={<LandingV3 />} />
-                  <Route path="/landing-legacy" element={<NESALandingPage />} />
-                  <Route path="/landing-v2" element={<LandingV2 />} />
-                  <Route path="/landing-v3" element={<LandingV3 />} />
+                  {/* Landing - has its own header/footer */}
+                  <Route path="/" element={<NESALandingPage />} />
                   <Route
                     path="/programs/nesa-africa"
                     element={<NESALandingPage />}
