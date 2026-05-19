@@ -298,6 +298,25 @@ export const MAIN_NAV: NavItem[] = [
       },
     ],
   },
+
+  // ─────────────────────────────────────────────────────────
+  // EARN AGC — Afri-Gold Coin rewards economy (5th primary)
+  // ─────────────────────────────────────────────────────────
+  {
+    label: "Earn AGC",
+    href: "/earn-agc",
+    icon: Coins,
+    children: [
+      { label: "Earn AGC Dashboard", href: "/earn-agc", description: "All ways to earn Afri-Gold Coins", icon: Coins },
+      { label: "Daily Missions", href: "/earn-agc#missions", description: "Rotating rewards that reset daily", icon: Target },
+      { label: "Leaderboard", href: "/earn-agc#leaderboard", description: "Top AGC earners across the movement", icon: Trophy },
+      { label: "Reward History", href: "/earn-agc#history", description: "Your earning timeline", icon: Clock },
+      { label: "AGC Wallet", href: "/dashboard/wallet", description: "Balance, settlements & transactions", icon: Wallet },
+      { label: "Voting Center", href: "/vote", description: "Vote for nominees & earn bonus AGC", icon: Vote },
+      { label: "Refer Friends", href: "/dashboard?tab=referrals", description: "Earn 2.5 AGC per referral signup", icon: UserPlus },
+      { label: "Become Ambassador", href: "/ambassadors", description: "Unlock +10 AGC + premium perks", icon: Star },
+    ],
+  },
 ];
 
 // ============================================================================

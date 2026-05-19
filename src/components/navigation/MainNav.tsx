@@ -48,6 +48,7 @@ import nesaStamp from "@/assets/nesa-stamp.jpeg";
 import { CVOFlashMessage, CVOMessageTrigger } from "@/components/nesa/cvo";
 import { LanguageSwitcher } from "@/components/i18n";
 import { EarnCoinsBadge } from "@/components/rewards/EarnCoinsBadge";
+import { EarnAGCNavItem } from "@/components/navigation/EarnAGCNavItem";
 
 // ============================================================================
 // DESKTOP NAVIGATION
@@ -60,6 +61,9 @@ function DesktopNav({ onOpenCVOMessage }: { onOpenCVOMessage: () => void }) {
     <NavigationMenu className="hidden lg:flex w-full min-w-0">
       <NavigationMenuList className="px-1 gap-0.5">
         {MAIN_NAV.map((item) => (
+          item.label === "Earn AGC" ? (
+            <EarnAGCNavItem key={item.href} />
+          ) : (
           <NavigationMenuItem key={item.href} className="shrink-0">
             {item.children ? (
               <>
@@ -141,6 +145,7 @@ function DesktopNav({ onOpenCVOMessage }: { onOpenCVOMessage: () => void }) {
               </NavigationMenuLink>
             )}
           </NavigationMenuItem>
+          )
         ))}
       </NavigationMenuList>
     </NavigationMenu>
