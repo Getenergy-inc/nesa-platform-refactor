@@ -85,10 +85,8 @@ export function NESALandingPage() {
         {/* ═══ 4. Countdown ═══ */}
         <CountdownSection />
 
-        {/* ═══ 6. Award Categories ═══ */}
-        <LazySection>
-          <CategoriesSection />
-        </LazySection>
+
+
 
 
 
