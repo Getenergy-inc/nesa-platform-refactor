@@ -975,9 +975,9 @@ const App = () => (
                     "central-africa",
                     "southern-africa",
                   ].flatMap((region) => [
-                    <Route key={`${region}-hub`} path={`/nominees/${region}`} element={<WithLayout><RegionNomineesHubPage /></WithLayout>} />,
-                    <Route key={`${region}-cat`} path={`/nominees/${region}/:categorySlug`} element={<WithLayout><RegionCategoryPage /></WithLayout>} />,
-                    <Route key={`${region}-sub`} path={`/nominees/${region}/:categorySlug/:subcategorySlug`} element={<WithLayout><RegionCategoryPage /></WithLayout>} />,
+                    <Route key={`${region}-hub`} path={`/nominees/${region}`} element={<WithLayout><RegionNomineesHubPage region={region} /></WithLayout>} />,
+                    <Route key={`${region}-cat`} path={`/nominees/${region}/:categorySlug`} element={<WithLayout><RegionCategoryPage region={region} /></WithLayout>} />,
+                    <Route key={`${region}-sub`} path={`/nominees/${region}/:categorySlug/:subcategorySlug`} element={<WithLayout><RegionCategoryPage region={region} /></WithLayout>} />,
                   ])}
                   {/* Influencers Education Impact Award — dedicated nominee ecosystem */}
                   <Route

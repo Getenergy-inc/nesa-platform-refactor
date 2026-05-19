@@ -16,8 +16,10 @@ import { classifyRegion, getRegionMeta, isValidRegionSlug } from "@/lib/regionCl
 const PAGE_SIZE = 12;
 const BASE_URL = "https://nesaafrica.lovable.app";
 
-export default function RegionCategoryPage() {
-  const { region, categorySlug, subcategorySlug } = useParams<{ region: string; categorySlug: string; subcategorySlug?: string }>();
+export default function RegionCategoryPage({ region: regionProp }: { region?: string } = {}) {
+  const params = useParams<{ region?: string; categorySlug: string; subcategorySlug?: string }>();
+  const region = regionProp ?? params.region;
+  const { categorySlug, subcategorySlug } = params;
   const { data: nominees, isLoading } = useNominees();
 
   const [activeSub, setActiveSub] = useState(subcategorySlug ?? "");

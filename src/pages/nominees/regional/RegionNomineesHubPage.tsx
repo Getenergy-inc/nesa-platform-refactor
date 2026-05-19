@@ -13,8 +13,9 @@ import { AFRICA_REGIONS, classifyRegion, getRegionMeta, isValidRegionSlug } from
 
 const BASE_URL = "https://nesaafrica.lovable.app";
 
-export default function RegionNomineesHubPage() {
-  const { region } = useParams<{ region: string }>();
+export default function RegionNomineesHubPage({ region: regionProp }: { region?: string } = {}) {
+  const params = useParams<{ region?: string }>();
+  const region = regionProp ?? params.region;
   const { data: nominees, isLoading } = useNominees();
 
   if (!region || !isValidRegionSlug(region)) {
