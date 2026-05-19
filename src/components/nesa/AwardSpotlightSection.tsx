@@ -1,6 +1,5 @@
 // Pathways to Recognition — NESA Africa 2026
-// Premium 4-card grid + Impact Wrap-Up + Regional Reach
-// African-inspired, gold + deep green accents on charcoal
+// Cinematic 4-card grid with embedded YouTube storytelling experiences.
 
 import { motion } from "framer-motion";
 import {
@@ -10,130 +9,91 @@ import {
   Globe2,
   ArrowRight,
   Sparkles,
-  Trophy,
-  Users,
-  Radio,
-  Handshake,
 } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import iconImg from "@/assets/pathways/icon.jpg";
-import csrImg from "@/assets/pathways/csr.jpg";
-import influencerImg from "@/assets/pathways/influencer.jpg";
-import grantsImg from "@/assets/pathways/grants.jpg";
+import { PathwayVideoCard, type PathwayVideoCardData } from "./PathwayVideoCard";
+import { usePathwayCards } from "@/hooks/usePathwayCards";
 
-type Pathway = {
-  id: string;
-  icon: typeof Crown;
-  visualIcon: typeof Trophy;
-  category: string;
-  headline: string;
-  awardLine: string;
-  description: string;
-  href: string;
-  cta: string;
-  visualGradient: string;
-  accentLabel: string;
-  image: string;
-  imageAlt: string;
-};
-
-const pathways: Pathway[] = [
+const pathways: PathwayVideoCardData[] = [
   {
     id: "icon",
     icon: Crown,
-    visualIcon: Trophy,
+    accentLabel: "Legacy • 2006–2026",
     category: "Lifetime Achievement",
     headline: "Who Will Be Crowned Africa Education Icon?",
-    awardLine: "Africa Education Icon — Lifetime Achievement (2006–2026)",
-    description:
-      "Recognizing transformational leaders shaping education across Africa for over two decades.",
-    href: "/awards/africa-education-icon",
-    cta: "Discover the Icon Award",
-    visualGradient:
-      "from-gold/40 via-emerald-900/40 to-charcoal",
-    accentLabel: "Legacy • 2006–2026",
-    image: iconImg,
-    imageAlt: "Africa Education Icon — distinguished laureate holding the gold Africa trophy",
+    story:
+      "For two decades, Africa's most transformative education leaders have shaped learning, expanded access, and redefined opportunity across the continent. The Africa Education Icon Award honours those whose legacy inspires generations to come.",
+    videoId: "Hdu_qlFLfrQ",
+    videoTitle: "The Icon Show — Africa Education Legends",
+    posterAlt:
+      "Africa Education Icon — distinguished laureate holding the gold Africa trophy",
+    visualGradient: "from-gold/45 via-emerald-900/40 to-charcoal",
+    primaryCta: { label: "Explore Icon Nominees", href: "/nominees/icon" },
+    secondaryCta: { label: "Nominate an Education Legend", href: "/nominate?category=icon" },
+    engagementCtaLabel: "Watch Legacy Stories",
   },
   {
     id: "csr",
     icon: Building2,
-    visualIcon: Users,
+    accentLabel: "Corporate • Continental",
     category: "Corporate Recognition",
     headline: "Who Will Emerge as Africa's Leading CSR for Education Company?",
-    awardLine: "Top CSR for Education Company Across African Regions — 2026",
-    description:
-      "Celebrating organizations funding, supporting, and transforming education systems.",
-    href: "/awards/csr-education",
-    cta: "Explore CSR Recognition",
-    visualGradient:
-      "from-emerald-800/50 via-emerald-900/30 to-charcoal",
-    accentLabel: "Corporate • Continental",
-    image: csrImg,
-    imageAlt: "CSR for Education — corporate leader mentoring an African student with a tablet",
+    story:
+      "Across Africa, visionary organisations are funding innovation, building schools, empowering teachers, and investing in the next generation of learners. Corporate Recognition celebrates companies creating measurable, lasting education impact.",
+    videoId: "DDREAU_bmRk",
+    videoTitle: "Corporate Impact — Rebuilding Africa's Classrooms",
+    posterAlt:
+      "Corporate Recognition — leaders supporting African students with technology and scholarships",
+    visualGradient: "from-emerald-800/55 via-emerald-900/30 to-charcoal",
+    primaryCta: { label: "Explore Corporate Nominees", href: "/awards/csr-education" },
+    secondaryCta: { label: "Partner With NESA Africa", href: "/partners" },
+    engagementCtaLabel: "See Corporate Impact Stories",
   },
   {
     id: "influencer",
     icon: Megaphone,
-    visualIcon: Radio,
+    accentLabel: "Creators • Music • Sports",
     category: "Digital Voices",
     headline: "Who Are Africa's Top Education Influencers?",
-    awardLine: "Social Media, Music, and Sports Voices Shaping Education — 2026",
-    description:
-      "Recognizing influential voices driving education awareness across the continent.",
-    href: "/awards/influencer-education",
-    cta: "See Influencer Categories",
-    visualGradient:
-      "from-gold/35 via-orange-900/30 to-charcoal",
-    accentLabel: "Creators • Music • Sports",
-    image: influencerImg,
-    imageAlt: "Digital Voices — African creators, musicians and athletes shaping education",
+    story:
+      "From music and sports to digital storytelling and online advocacy, influential African voices are using culture, creativity, and community to inspire learning. Digital Voices recognises creators turning influence into impact.",
+    videoId: "aP0SskrfioI",
+    videoTitle: "Digital Voices — Creators Inspiring Africa's Classrooms",
+    posterAlt:
+      "Digital Voices — African creators, musicians and athletes shaping education",
+    visualGradient: "from-gold/35 via-orange-900/35 to-charcoal",
+    primaryCta: { label: "Explore Gold Nominees", href: "/nominees/gold" },
+    secondaryCta: { label: "Vote for Influencers", href: "/vote" },
+    engagementCtaLabel: "Watch Impact Stories",
   },
   {
     id: "grants",
     icon: Globe2,
-    visualIcon: Handshake,
+    accentLabel: "Global • Bilateral • Multilateral",
     category: "Global Partnerships",
     headline: "Which Global Grants Are Powering Education in Africa?",
-    awardLine: "Bilateral, Multilateral, and International Education Support — 2026",
-    description: "Honoring global partners investing in education across Africa.",
-    href: "/awards/grants-global-support",
-    cta: "View Global Support Awards",
-    visualGradient:
-      "from-emerald-900/50 via-gold/15 to-charcoal",
-    accentLabel: "Global • Bilateral • Multilateral",
-    image: grantsImg,
-    imageAlt: "Global Partnerships — bilateral and multilateral leaders shaking hands before flags",
+    story:
+      "Global partnerships are expanding educational opportunity across Africa through funding, innovation, and long-term investment. This recognition honours the institutions and allies helping shape the future of African education.",
+    videoId: "nQCXDX_X3rs",
+    videoTitle: "Global Partnerships — Powering Africa's Education Future",
+    posterAlt:
+      "Global Partnerships — bilateral and multilateral leaders backing African education",
+    visualGradient: "from-emerald-900/55 via-gold/15 to-charcoal",
+    primaryCta: { label: "Explore Global Partners", href: "/awards/grants-global-support" },
+    secondaryCta: { label: "Become a Strategic Partner", href: "/partners" },
+    engagementCtaLabel: "View Partnership Impact",
   },
 ];
-
-// African Kente-inspired pattern overlay (SVG)
-const PatternOverlay = () => (
-  <svg
-    className="absolute inset-0 w-full h-full opacity-[0.07] pointer-events-none"
-    xmlns="http://www.w3.org/2000/svg"
-  >
-    <defs>
-      <pattern id="kente" x="0" y="0" width="40" height="40" patternUnits="userSpaceOnUse">
-        <path d="M0 20 L20 0 L40 20 L20 40 Z" fill="none" stroke="currentColor" strokeWidth="0.5" />
-        <circle cx="20" cy="20" r="2" fill="currentColor" />
-      </pattern>
-    </defs>
-    <rect width="100%" height="100%" fill="url(#kente)" />
-  </svg>
-);
-
-import { usePathwayCards } from "@/hooks/usePathwayCards";
 
 const pathwayDefaults = Object.fromEntries(pathways.map((p) => [p.id, p]));
 
 export function AwardSpotlightSection() {
   const { cards: dbCards } = usePathwayCards();
 
-  // Merge: DB rows (when active) override defaults; preserve static defaults for icons/fallbacks.
-  const merged: Pathway[] = (() => {
-    const byId: Record<string, Pathway> = { ...pathwayDefaults };
+  // Merge DB overrides (text/links) on top of cinematic defaults; keep videos + icons.
+  const merged: PathwayVideoCardData[] = (() => {
+    const byId: Record<string, PathwayVideoCardData> = { ...pathwayDefaults };
     for (const row of dbCards) {
       if (!row.is_active) {
         delete byId[row.id];
@@ -143,37 +103,36 @@ export function AwardSpotlightSection() {
       byId[row.id] = {
         ...base,
         id: row.id,
-        category: row.category,
-        headline: row.headline,
-        awardLine: row.award_line,
-        description: row.description,
-        cta: row.cta,
-        href: row.href,
+        category: row.category || base.category,
+        headline: row.headline || base.headline,
+        story: row.description || base.story,
         accentLabel: row.accent_label || base.accentLabel,
         visualGradient: row.visual_gradient || base.visualGradient,
-        image: row.image_url || base.image,
-        imageAlt: base.imageAlt,
+        primaryCta: row.href
+          ? { label: row.cta || base.primaryCta.label, href: row.href }
+          : base.primaryCta,
       };
     }
-    // Preserve order: prefer DB display_order, fallback to static order
     const order = dbCards.length
       ? dbCards.filter((r) => r.is_active && byId[r.id]).map((r) => r.id)
       : pathways.map((p) => p.id);
     const seen = new Set<string>();
-    const ordered: Pathway[] = [];
+    const ordered: PathwayVideoCardData[] = [];
     for (const id of order) {
       if (byId[id] && !seen.has(id)) {
         ordered.push(byId[id]);
         seen.add(id);
       }
     }
-    // Append any remaining defaults not yet included
     for (const p of pathways) if (!seen.has(p.id) && byId[p.id]) ordered.push(byId[p.id]);
     return ordered;
   })();
 
   return (
-    <section className="relative bg-charcoal py-16 sm:py-24 overflow-hidden">
+    <section
+      className="relative bg-charcoal py-16 sm:py-24 overflow-hidden"
+      aria-labelledby="pathways-heading"
+    >
       {/* Ambient glow */}
       <div className="pointer-events-none absolute inset-0">
         <div className="absolute top-0 left-1/4 h-96 w-96 rounded-full bg-gold/5 blur-3xl" />
@@ -181,7 +140,7 @@ export function AwardSpotlightSection() {
       </div>
 
       <div className="container relative px-4 sm:px-6">
-        {/* ════ 1. SECTION HEADER ════ */}
+        {/* Section header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -195,7 +154,10 @@ export function AwardSpotlightSection() {
               Nominate & Vote
             </span>
           </div>
-          <h2 className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-5 leading-tight">
+          <h2
+            id="pathways-heading"
+            className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-5 leading-tight"
+          >
             Nominate and <span className="text-gold">Vote</span>
           </h2>
           <p className="text-white/75 text-base sm:text-lg leading-relaxed mb-7">
@@ -205,7 +167,6 @@ export function AwardSpotlightSection() {
             diaspora.
           </p>
 
-          {/* Header CTAs */}
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
             <Link to="/nominate">
               <Button
@@ -237,86 +198,11 @@ export function AwardSpotlightSection() {
           </div>
         </motion.div>
 
-        {/* ════ 2. PATHWAY CARDS — 2x2 GRID ════ */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-5 sm:gap-6 mb-14">
-          {merged.map((card, idx) => {
-            const Icon = card.icon;
-            const VisualIcon = card.visualIcon;
-
-            return (
-              <motion.div
-                key={card.id}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: idx * 0.08 }}
-              >
-                <Link to={card.href} className="group block h-full">
-                  <article className="relative h-full overflow-hidden rounded-3xl ring-1 ring-gold/25 hover:ring-gold/70 shadow-[0_10px_50px_-15px_hsl(var(--gold)/0.25)] hover:shadow-[0_20px_60px_-15px_hsl(var(--gold)/0.5)] transition-all duration-500 hover:-translate-y-2 bg-charcoal">
-                    {/* ───── Visual / Image area (top half) ───── */}
-                    <div className="relative h-52 sm:h-64 overflow-hidden">
-                      <img
-                        src={card.image}
-                        alt={card.imageAlt}
-                        loading="lazy"
-                        className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
-                      />
-                      {/* Brand tint overlays — keeps NESA charcoal/gold identity */}
-                      <div className={`absolute inset-0 bg-gradient-to-br ${card.visualGradient} mix-blend-multiply opacity-70`} />
-                      <div className="absolute inset-0 bg-charcoal/25" />
-                      <div className="text-gold absolute inset-0">
-                        <PatternOverlay />
-                      </div>
-
-                      {/* Floating brand icon badge */}
-                      <div className="absolute bottom-4 right-4 h-12 w-12 rounded-2xl bg-charcoal/70 backdrop-blur-md border border-gold/40 flex items-center justify-center shadow-lg">
-                        <VisualIcon className="h-6 w-6 text-gold" strokeWidth={1.6} />
-                      </div>
-
-                      {/* Accent label */}
-                      <div className="absolute top-4 left-4">
-                        <span className="px-2.5 py-1 rounded-full bg-charcoal/70 backdrop-blur-md border border-gold/30 text-[10px] font-semibold text-gold uppercase tracking-wider">
-                          {card.accentLabel}
-                        </span>
-                      </div>
-
-                      {/* Bottom fade into content */}
-                      <div className="absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-charcoal to-transparent" />
-                    </div>
-
-                    {/* ───── Content (bottom half) ───── */}
-                    <div className="relative p-6 sm:p-7">
-                      <div className="flex items-start gap-3 mb-4">
-                        <div className="inline-flex items-center justify-center h-11 w-11 rounded-xl bg-gradient-to-br from-gold to-gold-dark shadow-lg shrink-0">
-                          <Icon className="h-5 w-5 text-charcoal" strokeWidth={2} />
-                        </div>
-                        <span className="inline-block self-center px-2.5 py-1 rounded-full bg-emerald-900/40 border border-emerald-500/30 text-emerald-200 text-[10px] font-bold uppercase tracking-widest">
-                          {card.category}
-                        </span>
-                      </div>
-
-                      <h3 className="font-display text-xl sm:text-2xl font-bold text-white mb-2 group-hover:text-gold transition-colors leading-tight">
-                        {card.headline}
-                      </h3>
-
-                      <p className="text-gold font-semibold text-xs sm:text-sm mb-3 leading-snug">
-                        {card.awardLine}
-                      </p>
-
-                      <p className="text-white/70 text-sm leading-relaxed mb-5">
-                        {card.description}
-                      </p>
-
-                      <div className="inline-flex items-center gap-2 text-gold text-sm font-semibold group-hover:gap-3 transition-all">
-                        {card.cta}
-                        <ArrowRight className="h-4 w-4" />
-                      </div>
-                    </div>
-                  </article>
-                </Link>
-              </motion.div>
-            );
-          })}
+        {/* Cinematic 2×2 video card grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-5 sm:gap-6 mb-4">
+          {merged.map((card, idx) => (
+            <PathwayVideoCard key={card.id} card={card} index={idx} />
+          ))}
         </div>
       </div>
     </section>
