@@ -159,7 +159,7 @@ export function BrandedDocumentaryPreview({
             </div>
 
             {/* Right: cinematic poster / video placeholder */}
-            <div className={cn("relative min-h-[260px] md:min-h-[340px] border-l", t.border)}>
+            <div className={cn("relative min-h-[280px] md:min-h-[360px] border-l overflow-hidden", t.border)}>
               {ytEmbedsEnabled && videoId ? (
                 <iframe
                   src={`https://www.youtube-nocookie.com/embed/${videoId}?rel=0&modestbranding=1`}
@@ -170,16 +170,52 @@ export function BrandedDocumentaryPreview({
                 />
               ) : (
                 <>
-                  <img
+                  {/* Poster image with cinematic zoom */}
+                  <motion.img
                     src={t.image}
                     alt={imageAlt}
-                    className="absolute inset-0 h-full w-full object-cover"
                     loading="lazy"
+                    initial={{ scale: 1.08 }}
+                    whileInView={{ scale: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 6, ease: "linear" }}
+                    className="absolute inset-0 h-full w-full object-cover"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-r from-charcoal/80 via-charcoal/20 to-charcoal/60" />
-                  <div className="absolute inset-0 bg-gradient-to-t from-charcoal/70 to-transparent" />
 
-                  {/* Play button */}
+                  {/* Gradient + scanline overlays */}
+                  <div className="absolute inset-0 bg-gradient-to-r from-charcoal/80 via-charcoal/20 to-charcoal/60" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-charcoal/85 via-charcoal/10 to-transparent" />
+                  <div
+                    aria-hidden
+                    className="absolute inset-0 opacity-[0.07] mix-blend-overlay pointer-events-none"
+                    style={{
+                      backgroundImage:
+                        "repeating-linear-gradient(0deg, rgba(255,255,255,0.6) 0 1px, transparent 1px 3px)",
+                    }}
+                  />
+
+                  {/* Top-left status chip */}
+                  <div className="absolute top-3 left-3 z-10 flex items-center gap-2">
+                    <span className={cn(
+                      "inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full border bg-black/55 backdrop-blur text-[10px] tracking-[0.18em] uppercase font-semibold",
+                      t.border, t.title,
+                    )}>
+                      <span className="relative flex h-1.5 w-1.5">
+                        <span className={cn("absolute inline-flex h-full w-full rounded-full opacity-75 animate-ping", t.ctaBg.split(" ")[0])} />
+                        <span className={cn("relative inline-flex rounded-full h-1.5 w-1.5", t.ctaBg.split(" ")[0])} />
+                      </span>
+                      {status}
+                    </span>
+                  </div>
+
+                  {/* Top-right HD pill */}
+                  <div className="absolute top-3 right-3 z-10">
+                    <span className="px-2 py-0.5 rounded-md border border-white/20 bg-black/55 backdrop-blur text-[10px] font-semibold tracking-wider text-white/85">
+                      HD · 16:9
+                    </span>
+                  </div>
+
+                  {/* Play button — double ring, pulsing */}
                   <button
                     type="button"
                     aria-label={`Play preview: ${title}`}
@@ -188,25 +224,52 @@ export function BrandedDocumentaryPreview({
                       a.href = watchCtaHref;
                       a.click();
                     }}
-                    className="absolute inset-0 flex items-center justify-center group"
+                    className="absolute inset-0 flex items-center justify-center group focus:outline-none"
                   >
-                    <span
-                      className={cn(
-                        "relative flex items-center justify-center w-20 h-20 md:w-24 md:h-24 rounded-full bg-black/40 backdrop-blur ring-2 transition-transform duration-300 group-hover:scale-110",
+                    <span className="relative flex items-center justify-center">
+                      <span className={cn(
+                        "absolute inline-flex h-28 w-28 md:h-32 md:w-32 rounded-full opacity-40 animate-ping",
+                        t.glow,
+                      )} />
+                      <span className={cn(
+                        "absolute inline-flex h-24 w-24 md:h-28 md:w-28 rounded-full ring-1",
                         t.playRing,
-                      )}
-                    >
-                      <span className={cn("absolute inset-0 rounded-full animate-ping opacity-30", t.glow)} />
-                      <Play className={cn("h-9 w-9 md:h-10 md:w-10 fill-current relative z-10", t.playFill)} />
+                      )} />
+                      <span
+                        className={cn(
+                          "relative flex items-center justify-center w-20 h-20 md:w-24 md:h-24 rounded-full bg-black/55 backdrop-blur ring-2 transition-all duration-300 group-hover:scale-110 group-hover:bg-black/70",
+                          t.playRing,
+                        )}
+                      >
+                        <Play className={cn("h-9 w-9 md:h-10 md:w-10 fill-current relative z-10 translate-x-[2px]", t.playFill)} />
+                      </span>
                     </span>
                   </button>
 
-                  {/* Fake player chrome bottom bar */}
-                  <div className="absolute left-0 right-0 bottom-0 px-4 py-3 flex items-center gap-3 bg-gradient-to-t from-black/80 to-transparent">
-                    <div className={cn("h-1 flex-1 rounded-full bg-white/15 overflow-hidden")}>
-                      <div className={cn("h-full w-1/4", t.ctaBg.split(" ")[0])} />
+                  {/* Bottom: title + fake player chrome */}
+                  <div className="absolute left-0 right-0 bottom-0 px-4 pt-8 pb-3 bg-gradient-to-t from-black/90 via-black/50 to-transparent">
+                    <p className="text-[11px] tracking-[0.22em] uppercase text-white/60 mb-1">
+                      NESA Africa Originals
+                    </p>
+                    <p className={cn("font-display text-base md:text-lg font-semibold leading-tight mb-2.5", t.title)}>
+                      {title}
+                    </p>
+
+                    {/* Progress bar with chapter ticks */}
+                    <div className="flex items-center gap-3">
+                      <div className="relative h-1 flex-1 rounded-full bg-white/15 overflow-hidden">
+                        <div className={cn("h-full w-[22%]", t.ctaBg.split(" ")[0])} />
+                        {/* chapter ticks */}
+                        <div className="absolute inset-0 flex items-center justify-between px-[10%] pointer-events-none">
+                          {[0, 1, 2, 3].map((i) => (
+                            <span key={i} className="h-1 w-px bg-white/40" />
+                          ))}
+                        </div>
+                      </div>
+                      <span className="text-[11px] text-white/75 tabular-nums font-medium">
+                        0:00 / {duration}
+                      </span>
                     </div>
-                    <span className="text-[11px] text-white/70 tabular-nums">0:00 / {duration}</span>
                   </div>
                 </>
               )}
