@@ -203,7 +203,7 @@ export function normalizeYearReferences(text: string): string {
     // Convert 2024 to 2025 first
     .replace(/2024/g, "2025")
     // Replace ranges to correct format
-    .replace(/2014[-–—]2025/g, "2006–2025")
+    .replace(/2014[-–—]2025/g, "2006–2026")
     .replace(/2014 to 2025/gi, "2006 to 2026")
     .replace(/2020[-–—]2025/g, "2020–2025")
     .replace(/2013[-–—]2025/g, "2013–2025")
