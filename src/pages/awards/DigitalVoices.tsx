@@ -33,6 +33,12 @@ export default function DigitalVoices() {
         imageAlt="Africa's top education influencers — creators, musicians, athletes"
       />
 
+      <AnimatedActionWords
+        theme="influencer"
+        lead="Digital Voices Are"
+        words={["Influence", "Advocacy", "Creativity", "Inspiration", "Youth Power", "Culture", "Music", "Sports", "Awareness", "Social Impact"]}
+      />
+
       <BrandedDocumentaryPreview
         theme="influencer"
         title="Digital Voices Stories"
