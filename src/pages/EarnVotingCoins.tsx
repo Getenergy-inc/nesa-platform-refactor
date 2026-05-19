@@ -3,7 +3,7 @@ import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import {
-  Coins, Sparkles, Trophy, Flame, Users, Share2, Heart, Vote, Calendar,
+  Sparkles, Trophy, Flame, Users, Share2, Heart, Vote, Calendar,
   CheckCircle2, ArrowRight, Award, Crown, Star, Gift, Target, Rocket,
   PartyPopper, Medal, MessageCircle,
 } from "lucide-react";
@@ -13,70 +13,104 @@ import { Progress } from "@/components/ui/progress";
 import { cn } from "@/lib/utils";
 import { useAuth } from "@/contexts/AuthContext";
 
-// ============= Earn Actions =============
-type EarnAction = { label: string; coins: number; icon: any };
+/* ==========================================================================
+   AGC — Afri-Gold Coin Rewards Page
+   AGC  = Primary unit (whole/fractional)
+   AGCc = Micro unit (1 AGC = 100 AGCc)
+   ========================================================================== */
 
+type Unit = "AGC" | "AGCc";
+type EarnAction = { label: string; amount: number; unit: Unit; icon: any };
+
+const fmtReward = (a: number, u: Unit) =>
+  u === "AGC" ? `${a % 1 === 0 ? a : a.toFixed(1)} AGC` : `${a} AGCc`;
+
+// ============= Earn Actions (per spec) =============
 const ACCOUNT_ACTIONS: EarnAction[] = [
-  { label: "Create Account", coins: 100, icon: Sparkles },
-  { label: "Complete Profile", coins: 150, icon: CheckCircle2 },
-  { label: "Verify Email", coins: 50, icon: CheckCircle2 },
-  { label: "Upload Profile Photo", coins: 25, icon: Heart },
+  { label: "Create Account",       amount: 1,   unit: "AGC",  icon: Sparkles },
+  { label: "Complete Profile",     amount: 1.5, unit: "AGC",  icon: CheckCircle2 },
+  { label: "Verify Email",         amount: 50,  unit: "AGCc", icon: CheckCircle2 },
+  { label: "Upload Profile Photo", amount: 25,  unit: "AGCc", icon: Heart },
 ];
 const ENGAGEMENT_ACTIONS: EarnAction[] = [
-  { label: "Daily Login", coins: 10, icon: Calendar },
-  { label: "Share Nominee Profile", coins: 20, icon: Share2 },
-  { label: "Share Voting Campaign", coins: 30, icon: Share2 },
-  { label: "Watch Impact Stories", coins: 15, icon: Vote },
-  { label: "Comment on Stories", coins: 10, icon: MessageCircle },
-  { label: "Save Nominee", coins: 10, icon: Heart },
+  { label: "Daily Login",            amount: 10, unit: "AGCc", icon: Calendar },
+  { label: "Share Nominee Profile",  amount: 20, unit: "AGCc", icon: Share2 },
+  { label: "Share Voting Campaign",  amount: 30, unit: "AGCc", icon: Share2 },
+  { label: "Watch Impact Stories",   amount: 15, unit: "AGCc", icon: Vote },
+  { label: "Comment on Stories",     amount: 10, unit: "AGCc", icon: MessageCircle },
+  { label: "Save Nominee",           amount: 10, unit: "AGCc", icon: Heart },
 ];
 const SOCIAL_ACTIONS: EarnAction[] = [
-  { label: "Invite Friends", coins: 100, icon: Users },
-  { label: "Referral Signup", coins: 250, icon: Users },
-  { label: "Share on Social Media", coins: 40, icon: Share2 },
-  { label: "Use Official Hashtag", coins: 20, icon: Sparkles },
+  { label: "Invite Friends",         amount: 1,   unit: "AGC",  icon: Users },
+  { label: "Referral Signup",        amount: 2.5, unit: "AGC",  icon: Users },
+  { label: "Share on Social Media",  amount: 40,  unit: "AGCc", icon: Share2 },
+  { label: "Use Official Hashtag",   amount: 20,  unit: "AGCc", icon: Sparkles },
 ];
 const MOVEMENT_ACTIONS: EarnAction[] = [
-  { label: "Nominate Someone", coins: 300, icon: Star },
-  { label: "Attend Virtual Event", coins: 100, icon: Calendar },
-  { label: "Attend Gala / Event", coins: 500, icon: Crown },
-  { label: "Become Ambassador", coins: 1000, icon: Medal },
-  { label: "Join Local Chapter", coins: 500, icon: Users },
+  { label: "Nominate Someone",     amount: 3,  unit: "AGC", icon: Star },
+  { label: "Attend Virtual Event", amount: 1,  unit: "AGC", icon: Calendar },
+  { label: "Attend Gala / Event",  amount: 5,  unit: "AGC", icon: Crown },
+  { label: "Become Ambassador",    amount: 10, unit: "AGC", icon: Medal },
+  { label: "Join Local Chapter",   amount: 5,  unit: "AGC", icon: Users },
 ];
 
-// ============= Tiers =============
+// ============= Reward Tiers (in AGC) =============
 const TIERS = [
-  { name: "Bronze Supporter", min: 0, max: 999, color: "from-amber-700 to-amber-500", icon: Award },
-  { name: "Silver Advocate", min: 1000, max: 4999, color: "from-zinc-400 to-zinc-200", icon: Medal },
-  { name: "Gold Ambassador", min: 5000, max: 14999, color: "from-amber-300 to-gold", icon: Trophy },
-  { name: "Platinum Education Champion", min: 15000, max: Infinity, color: "from-sky-200 via-fuchsia-300 to-amber-200", icon: Crown },
+  { name: "Bronze Supporter",            min: 0,   max: 9,        color: "from-amber-700 to-amber-500",                  icon: Award },
+  { name: "Silver Advocate",             min: 10,  max: 49,       color: "from-zinc-400 to-zinc-200",                    icon: Medal },
+  { name: "Gold Ambassador",             min: 50,  max: 149,      color: "from-amber-300 to-gold",                       icon: Trophy },
+  { name: "Platinum Education Champion", min: 150, max: Infinity, color: "from-sky-200 via-fuchsia-300 to-amber-200",    icon: Crown },
 ];
 
 const LEADERBOARD = [
-  { name: "Adaeze O.", country: "Nigeria", coins: 28450, badge: "Platinum" },
-  { name: "Thabo M.", country: "South Africa", coins: 19320, badge: "Platinum" },
-  { name: "Amara K.", country: "Ghana", coins: 12780, badge: "Gold" },
-  { name: "Kwame A.", country: "Kenya", coins: 9540, badge: "Gold" },
-  { name: "Fatou D.", country: "Senegal", coins: 7210, badge: "Gold" },
-  { name: "Lerato S.", country: "Botswana", coins: 4880, badge: "Silver" },
-  { name: "Chinedu O.", country: "Nigeria", coins: 3220, badge: "Silver" },
+  { name: "Adaeze O.",  country: "Nigeria",      agc: 284.5, badge: "Platinum" },
+  { name: "Thabo M.",   country: "South Africa", agc: 193.2, badge: "Platinum" },
+  { name: "Amara K.",   country: "Ghana",        agc: 127.8, badge: "Gold" },
+  { name: "Kwame A.",   country: "Kenya",        agc: 95.4,  badge: "Gold" },
+  { name: "Fatou D.",   country: "Senegal",      agc: 72.1,  badge: "Gold" },
+  { name: "Lerato S.",  country: "Botswana",     agc: 48.8,  badge: "Silver" },
+  { name: "Chinedu O.", country: "Nigeria",      agc: 32.2,  badge: "Silver" },
 ];
 
-const DAILY_MISSIONS = [
-  { label: "Cast 1 vote today", coins: 15, progress: 0, target: 1, icon: Vote },
-  { label: "Share 1 nominee profile", coins: 20, progress: 0, target: 1, icon: Share2 },
-  { label: "Invite a friend", coins: 100, progress: 0, target: 1, icon: Users },
-  { label: "Watch 1 impact story", coins: 15, progress: 0, target: 1, icon: PartyPopper },
+const DAILY_MISSIONS: EarnAction[] = [
+  { label: "Cast 1 vote today",        amount: 15, unit: "AGCc", icon: Vote },
+  { label: "Share 1 nominee profile",  amount: 20, unit: "AGCc", icon: Share2 },
+  { label: "Invite a friend",          amount: 1,  unit: "AGC",  icon: Users },
+  { label: "Watch 1 impact story",     amount: 15, unit: "AGCc", icon: PartyPopper },
 ];
+
+/* ============= AGC Token Visual ============= */
+function AGCToken({ size = 56, spin = true }: { size?: number; spin?: boolean }) {
+  return (
+    <motion.div
+      aria-hidden
+      animate={spin ? { rotateY: [0, 360] } : {}}
+      transition={{ duration: 5, ease: "linear", repeat: Infinity }}
+      className="relative flex items-center justify-center rounded-full bg-gradient-to-br from-amber-100 via-gold to-amber-700 shadow-[0_0_40px_rgba(212,170,76,0.55)] ring-2 ring-amber-200/50"
+      style={{ width: size, height: size, transformStyle: "preserve-3d" }}
+    >
+      <span
+        className="font-black tracking-tighter text-charcoal leading-none"
+        style={{ fontSize: size * 0.32 }}
+      >
+        AGC
+      </span>
+      <span
+        aria-hidden
+        className="absolute inset-1 rounded-full ring-1 ring-amber-900/20"
+      />
+    </motion.div>
+  );
+}
 
 function ActionGroup({ title, eyebrow, actions, accent = "gold" }: {
   title: string; eyebrow: string; actions: EarnAction[]; accent?: "gold" | "emerald" | "sky" | "purple";
 }) {
   const accentClass = {
-    gold: "text-gold border-gold/40 from-gold/10",
+    gold:    "text-gold border-gold/40 from-gold/10",
     emerald: "text-emerald-300 border-emerald-500/40 from-emerald-500/10",
-    sky: "text-sky-300 border-sky-500/40 from-sky-500/10",
-    purple: "text-purple-300 border-purple-500/40 from-purple-500/10",
+    sky:     "text-sky-300 border-sky-500/40 from-sky-500/10",
+    purple:  "text-purple-300 border-purple-500/40 from-purple-500/10",
   }[accent];
 
   return (
@@ -104,9 +138,8 @@ function ActionGroup({ title, eyebrow, actions, accent = "gold" }: {
                   </span>
                   <span className="text-sm font-medium text-white/90 leading-tight">{a.label}</span>
                 </div>
-                <span className={cn("inline-flex items-center gap-1 rounded-full border bg-black/40 px-2 py-0.5 text-xs font-bold tabular-nums", accentClass)}>
-                  <Coins className="h-3 w-3" />
-                  +{a.coins}
+                <span className={cn("inline-flex items-center gap-1 rounded-full border bg-black/40 px-2 py-0.5 text-[11px] font-bold tabular-nums whitespace-nowrap", accentClass)}>
+                  +{fmtReward(a.amount, a.unit)}
                 </span>
               </div>
             </motion.div>
@@ -119,46 +152,48 @@ function ActionGroup({ title, eyebrow, actions, accent = "gold" }: {
 
 export default function EarnVotingCoins() {
   const { user } = useAuth();
-  const [demoCoins] = useState(1250);
+  const [demoAGC] = useState(12.45); // 12 AGC 45 AGCc
+  const demoAGCInt = Math.floor(demoAGC);
+  const demoAGCc = Math.round((demoAGC - demoAGCInt) * 100);
 
   const currentTier = useMemo(() => {
-    return TIERS.find((t) => demoCoins >= t.min && demoCoins <= t.max) ?? TIERS[0];
-  }, [demoCoins]);
+    return TIERS.find((t) => demoAGC >= t.min && demoAGC <= t.max) ?? TIERS[0];
+  }, [demoAGC]);
   const nextTier = TIERS[TIERS.indexOf(currentTier) + 1];
   const tierProgress = nextTier
-    ? Math.min(100, ((demoCoins - currentTier.min) / (nextTier.min - currentTier.min)) * 100)
+    ? Math.min(100, ((demoAGC - currentTier.min) / (nextTier.min - currentTier.min)) * 100)
     : 100;
 
   return (
     <>
       <Helmet>
-        <title>Earn Voting Coins | NESA-Africa</title>
+        <title>Earn AGC — Afri-Gold Coin Rewards | NESA Africa</title>
         <meta
           name="description"
-          content="Earn NESA Africa Voting Coins by joining, sharing, nominating and supporting Africa's education movement. Unlock tiers, badges and leaderboards."
+          content="Earn AGC (Afri-Gold Coin) and AGCc by joining, sharing, nominating and supporting Africa's education movement. Africa's premium digital engagement currency."
         />
-        <link rel="canonical" href="https://nesaafrica.lovable.app/earn-voting-coins" />
+        <link rel="canonical" href="https://nesaafrica.lovable.app/earn-agc" />
       </Helmet>
 
-      {/* HERO */}
+      {/* ============= HERO ============= */}
       <section className="relative overflow-hidden border-b border-gold/10 bg-gradient-to-b from-black via-charcoal to-charcoal">
         <div aria-hidden className="absolute inset-0 pointer-events-none">
           <div className="absolute -top-32 left-1/4 h-[36rem] w-[36rem] rounded-full bg-gold/20 blur-3xl opacity-50" />
           <div className="absolute -bottom-32 right-1/4 h-[28rem] w-[28rem] rounded-full bg-amber-500/15 blur-3xl opacity-50" />
         </div>
 
-        {/* Floating coins */}
+        {/* Floating AGC tokens */}
         <div aria-hidden className="absolute inset-0 pointer-events-none overflow-hidden">
-          {[...Array(8)].map((_, i) => (
+          {[...Array(10)].map((_, i) => (
             <motion.div
               key={i}
               className="absolute"
-              style={{ left: `${10 + i * 11}%`, top: `${20 + (i % 3) * 22}%` }}
-              animate={{ y: [0, -18, 0], rotate: [0, 360] }}
-              transition={{ duration: 6 + i, ease: "easeInOut", repeat: Infinity, delay: i * 0.4 }}
+              style={{ left: `${6 + i * 9}%`, top: `${15 + (i % 4) * 20}%` }}
+              animate={{ y: [0, -22, 0], rotate: [0, 360] }}
+              transition={{ duration: 6 + i, ease: "easeInOut", repeat: Infinity, delay: i * 0.35 }}
             >
-              <span className="flex h-7 w-7 items-center justify-center rounded-full bg-gradient-to-br from-amber-200 via-gold to-amber-600 shadow-lg opacity-40">
-                <Coins className="h-3.5 w-3.5 text-charcoal" />
+              <span className="flex h-7 w-7 items-center justify-center rounded-full bg-gradient-to-br from-amber-100 via-gold to-amber-700 shadow-lg opacity-40 ring-1 ring-amber-200/40">
+                <span className="text-[7px] font-black text-charcoal">AGC</span>
               </span>
             </motion.div>
           ))}
@@ -174,23 +209,26 @@ export default function EarnVotingCoins() {
             >
               <Badge variant="outline" className="mb-5 border-gold/40 bg-gold/10 px-3 py-1 text-[10px] tracking-[0.2em] uppercase text-gold">
                 <Sparkles className="mr-1.5 h-3 w-3" />
-                NESA Africa Rewards
+                Afri-Gold Coin · NESA Africa Rewards
               </Badge>
               <h1 className="font-display text-3xl md:text-5xl lg:text-6xl font-bold leading-[1.05] text-white">
-                Earn Voting Coins &{" "}
+                Earn AGC &{" "}
                 <span className="bg-gradient-to-r from-amber-200 via-gold to-amber-300 bg-clip-text text-transparent">
                   Power Education Impact
                 </span>{" "}
                 Across Africa
               </h1>
               <p className="mt-5 max-w-xl text-base md:text-lg text-white/70">
-                Support nominees, participate in the movement, complete engagement actions, and earn voting power across the NESA Africa ecosystem.
+                Participate in Africa's largest education recognition movement, complete impact actions, support nominees, and earn <span className="text-gold font-semibold">Afri-Gold rewards</span> across the NESA ecosystem.
+              </p>
+              <p className="mt-3 text-sm text-white/50">
+                <span className="text-gold/90 font-semibold">1 AGC = 100 AGCc</span> · The official digital engagement currency of NESA Africa.
               </p>
 
               <div className="mt-7 flex flex-wrap gap-3">
                 <Button asChild size="lg" className="rounded-full bg-gold px-6 font-semibold text-charcoal hover:bg-gold/90">
                   <Link to={user ? "/dashboard" : "/auth/register"}>
-                    Start Earning Coins <ArrowRight className="ml-1.5 h-4 w-4" />
+                    Start Earning AGC <ArrowRight className="ml-1.5 h-4 w-4" />
                   </Link>
                 </Button>
                 <Button asChild size="lg" variant="outline" className="rounded-full border-gold/40 px-6 text-gold hover:bg-gold/10">
@@ -209,19 +247,16 @@ export default function EarnVotingCoins() {
               <div className="relative rounded-3xl border border-gold/30 bg-gradient-to-br from-charcoal via-black to-charcoal p-6 backdrop-blur shadow-[0_0_60px_rgba(212,170,76,0.15)]">
                 <div className="flex items-center justify-between mb-4">
                   <div>
-                    <p className="text-[10px] tracking-[0.28em] uppercase text-gold/70">Your Balance</p>
+                    <p className="text-[10px] tracking-[0.28em] uppercase text-gold/70">Your AGC Wallet</p>
                     <p className="font-display text-4xl font-bold text-gold mt-1 tabular-nums">
-                      {(user ? demoCoins : 0).toLocaleString()}
+                      {user ? demoAGCInt : 0}
+                      <span className="text-lg ml-1.5 text-gold/70">AGC</span>
                     </p>
-                    <p className="text-xs text-white/60 mt-0.5">Voting Coins</p>
+                    <p className="text-xs text-white/60 mt-0.5 tabular-nums">
+                      + <span className="text-gold/90 font-semibold">{user ? demoAGCc : 0} AGCc</span> · Afri-Gold Cents
+                    </p>
                   </div>
-                  <motion.div
-                    animate={{ rotateY: [0, 360] }}
-                    transition={{ duration: 4, ease: "linear", repeat: Infinity }}
-                    className="flex h-14 w-14 items-center justify-center rounded-full bg-gradient-to-br from-amber-200 via-gold to-amber-600 shadow-[0_0_30px_rgba(212,170,76,0.5)]"
-                  >
-                    <Coins className="h-7 w-7 text-charcoal" />
-                  </motion.div>
+                  <AGCToken size={56} />
                 </div>
 
                 <div className="mt-3">
@@ -231,8 +266,8 @@ export default function EarnVotingCoins() {
                       {currentTier.name}
                     </span>
                     {nextTier && (
-                      <span className="text-white/50">
-                        {(nextTier.min - demoCoins).toLocaleString()} → {nextTier.name}
+                      <span className="text-white/50 tabular-nums">
+                        {(nextTier.min - demoAGC).toFixed(1)} AGC → {nextTier.name}
                       </span>
                     )}
                   </div>
@@ -241,9 +276,9 @@ export default function EarnVotingCoins() {
 
                 <div className="mt-5 grid grid-cols-3 gap-2 text-center">
                   {[
-                    { label: "Streak", value: "5d", icon: Flame },
-                    { label: "Missions", value: "2/4", icon: Target },
-                    { label: "Rank", value: "#247", icon: Trophy },
+                    { label: "Streak",   value: "5d",   icon: Flame },
+                    { label: "Missions", value: "2/4",  icon: Target },
+                    { label: "Rank",     value: "#247", icon: Trophy },
                   ].map((s) => (
                     <div key={s.label} className="rounded-xl border border-gold/20 bg-white/[0.03] p-2.5">
                       <s.icon className="h-4 w-4 text-gold mx-auto" />
@@ -258,26 +293,32 @@ export default function EarnVotingCoins() {
         </div>
       </section>
 
-      {/* WHAT ARE COINS */}
+      {/* ============= WHAT IS AGC ============= */}
       <section className="border-b border-gold/10 bg-charcoal py-14">
         <div className="container mx-auto px-4 grid lg:grid-cols-2 gap-10 items-start">
           <div>
-            <p className="text-[10px] tracking-[0.32em] uppercase font-semibold text-gold/80">01 · The Basics</p>
-            <h2 className="mt-2 font-display text-3xl md:text-4xl font-bold text-white">What Are Voting Coins?</h2>
+            <p className="text-[10px] tracking-[0.32em] uppercase font-semibold text-gold/80">01 · The Currency</p>
+            <h2 className="mt-2 font-display text-3xl md:text-4xl font-bold text-white">
+              What is <span className="text-gold">AGC</span>?
+            </h2>
             <p className="mt-4 text-white/70 max-w-prose">
-              Voting Coins are digital engagement rewards you earn for participating in the NESA Africa ecosystem.
-              They turn every action — a share, a vote, an invite, an event — into real voting power for the
-              education leaders and institutions shaping Africa's future.
+              <span className="text-gold font-semibold">AGC — Afri-Gold Coin</span> is Africa's premium digital
+              engagement currency: a branded reward token that turns every share, vote, invite and event into
+              real voting power for the education leaders shaping the continent's future.
+            </p>
+            <p className="mt-3 text-white/60 text-sm max-w-prose">
+              <span className="text-gold font-semibold">AGCc — Afri-Gold Cent</span> is the micro unit for
+              everyday engagement. <span className="text-white/80 font-semibold">1 AGC = 100 AGCc.</span>
             </p>
           </div>
           <div className="grid sm:grid-cols-2 gap-3">
             {[
-              { icon: Vote, label: "Vote for nominees" },
-              { icon: Sparkles, label: "Unlock premium engagement" },
-              { icon: Heart, label: "Support categories" },
-              { icon: Rocket, label: "Boost campaigns" },
-              { icon: Crown, label: "Earn ambassador status" },
-              { icon: Gift, label: "Redeem exclusive perks" },
+              { icon: Vote,      label: "Vote for nominees" },
+              { icon: Sparkles,  label: "Boost nominee visibility" },
+              { icon: Heart,     label: "Unlock supporter badges" },
+              { icon: Rocket,    label: "Power voting campaigns" },
+              { icon: Crown,     label: "Earn ambassador status" },
+              { icon: Gift,      label: "Redeem exclusive perks" },
             ].map((u) => (
               <div key={u.label} className="flex items-center gap-3 rounded-2xl border border-gold/20 bg-white/[0.03] p-3.5">
                 <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-gold/15 text-gold">
@@ -290,32 +331,31 @@ export default function EarnVotingCoins() {
         </div>
       </section>
 
-      {/* WAYS TO EARN */}
+      {/* ============= WAYS TO EARN ============= */}
       <section className="border-b border-gold/10 bg-gradient-to-b from-charcoal via-black to-charcoal py-14">
         <div className="container mx-auto px-4 space-y-10">
           <div className="max-w-2xl">
             <p className="text-[10px] tracking-[0.32em] uppercase font-semibold text-gold/80">02 · Earn</p>
-            <h2 className="mt-2 font-display text-3xl md:text-4xl font-bold text-white">Ways to Earn Voting Coins</h2>
+            <h2 className="mt-2 font-display text-3xl md:text-4xl font-bold text-white">Ways to Earn AGC</h2>
             <p className="mt-3 text-white/70">
-              Every meaningful action across the platform rewards you. Stack actions, build streaks, and climb the
-              leaderboard.
+              Every meaningful action across the platform rewards you in <span className="text-gold font-semibold">AGC</span> or <span className="text-gold font-semibold">AGCc</span>. Stack actions, build streaks, climb the leaderboard.
             </p>
           </div>
-          <ActionGroup title="Account & Platform" eyebrow="Onboarding" actions={ACCOUNT_ACTIONS} accent="gold" />
-          <ActionGroup title="Engagement" eyebrow="Daily Activity" actions={ENGAGEMENT_ACTIONS} accent="emerald" />
-          <ActionGroup title="Social" eyebrow="Amplify the Movement" actions={SOCIAL_ACTIONS} accent="purple" />
-          <ActionGroup title="Education Movement" eyebrow="High Impact" actions={MOVEMENT_ACTIONS} accent="sky" />
+          <ActionGroup title="Account & Platform"  eyebrow="Onboarding"           actions={ACCOUNT_ACTIONS}    accent="gold" />
+          <ActionGroup title="Engagement"          eyebrow="Daily Activity"       actions={ENGAGEMENT_ACTIONS} accent="emerald" />
+          <ActionGroup title="Social"              eyebrow="Amplify the Movement" actions={SOCIAL_ACTIONS}     accent="purple" />
+          <ActionGroup title="Education Movement"  eyebrow="High Impact"          actions={MOVEMENT_ACTIONS}   accent="sky" />
         </div>
       </section>
 
-      {/* TIERS */}
+      {/* ============= TIERS ============= */}
       <section id="tiers" className="border-b border-gold/10 bg-charcoal py-14">
         <div className="container mx-auto px-4">
           <div className="max-w-2xl">
             <p className="text-[10px] tracking-[0.32em] uppercase font-semibold text-gold/80">03 · Levels</p>
-            <h2 className="mt-2 font-display text-3xl md:text-4xl font-bold text-white">Reward Tiers</h2>
+            <h2 className="mt-2 font-display text-3xl md:text-4xl font-bold text-white">AGC Reward Tiers</h2>
             <p className="mt-3 text-white/70">
-              Climb four tiers. Each level unlocks badges, voting boosts, exclusive experiences and leaderboard prestige.
+              Climb four prestige levels. Each unlocks badges, voting boosts, exclusive experiences and leaderboard glory.
             </p>
           </div>
           <div className="mt-8 grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
@@ -341,7 +381,7 @@ export default function EarnVotingCoins() {
                   </div>
                   <h3 className="mt-4 font-display text-lg font-bold text-white">{t.name}</h3>
                   <p className="mt-1 text-xs text-white/60 tabular-nums">
-                    {t.min.toLocaleString()}{t.max === Infinity ? "+" : `–${t.max.toLocaleString()}`} coins
+                    {t.min}{t.max === Infinity ? "+" : `–${t.max}`} AGC
                   </p>
                   <ul className="mt-4 space-y-1.5 text-xs text-white/70">
                     <li className="flex items-center gap-1.5"><CheckCircle2 className="h-3 w-3 text-gold" /> Profile badge</li>
@@ -355,13 +395,13 @@ export default function EarnVotingCoins() {
         </div>
       </section>
 
-      {/* LEADERBOARD + DAILY MISSIONS */}
+      {/* ============= LEADERBOARD + DAILY MISSIONS ============= */}
       <section className="border-b border-gold/10 bg-gradient-to-b from-charcoal via-black to-charcoal py-14">
         <div className="container mx-auto px-4 grid lg:grid-cols-5 gap-8">
           {/* Leaderboard */}
           <div className="lg:col-span-3">
             <p className="text-[10px] tracking-[0.32em] uppercase font-semibold text-gold/80">04 · Glory</p>
-            <h2 className="mt-2 font-display text-3xl md:text-4xl font-bold text-white">Top Education Supporters</h2>
+            <h2 className="mt-2 font-display text-3xl md:text-4xl font-bold text-white">Top AGC Earners</h2>
             <p className="mt-3 text-white/70 max-w-prose">
               The most active voices, voters and ambassadors powering the movement this season.
             </p>
@@ -386,9 +426,9 @@ export default function EarnVotingCoins() {
                       <p className="text-[11px] text-white/50">{row.country}</p>
                     </div>
                     <span className="text-[10px] tracking-wider uppercase text-gold/80 hidden sm:inline">{row.badge}</span>
-                    <span className="flex items-center gap-1 text-sm font-bold text-gold tabular-nums">
-                      <Coins className="h-3.5 w-3.5" />
-                      {row.coins.toLocaleString()}
+                    <span className="flex items-baseline gap-1 text-sm font-bold text-gold tabular-nums">
+                      {row.agc.toFixed(1)}
+                      <span className="text-[9px] tracking-[0.15em] uppercase text-gold/70">AGC</span>
                     </span>
                   </li>
                 ))}
@@ -406,12 +446,11 @@ export default function EarnVotingCoins() {
               <div className="flex items-center gap-2 mb-4 px-1">
                 <Flame className="h-5 w-5 text-amber-400" />
                 <span className="text-sm font-semibold text-white">5-Day Streak</span>
-                <span className="ml-auto text-[10px] tracking-wider uppercase text-amber-300/80">+25 bonus</span>
+                <span className="ml-auto text-[10px] tracking-wider uppercase text-amber-300/80">+25 AGCc bonus</span>
               </div>
               <ul className="space-y-2.5">
                 {DAILY_MISSIONS.map((m) => {
                   const Icon = m.icon;
-                  const pct = (m.progress / m.target) * 100;
                   return (
                     <li key={m.label} className="rounded-2xl border border-white/10 bg-white/[0.03] p-3">
                       <div className="flex items-center gap-3">
@@ -420,11 +459,10 @@ export default function EarnVotingCoins() {
                         </span>
                         <div className="flex-1 min-w-0">
                           <p className="text-sm font-medium text-white/90 truncate">{m.label}</p>
-                          <Progress value={pct} className="mt-1.5 h-1 bg-white/10" />
+                          <Progress value={0} className="mt-1.5 h-1 bg-white/10" />
                         </div>
-                        <span className="flex items-center gap-1 rounded-full border border-gold/40 bg-black/40 px-2 py-0.5 text-[11px] font-bold text-gold tabular-nums">
-                          <Coins className="h-3 w-3" />
-                          +{m.coins}
+                        <span className="flex items-center gap-1 rounded-full border border-gold/40 bg-black/40 px-2 py-0.5 text-[11px] font-bold text-gold tabular-nums whitespace-nowrap">
+                          +{fmtReward(m.amount, m.unit)}
                         </span>
                       </div>
                     </li>
@@ -436,24 +474,26 @@ export default function EarnVotingCoins() {
         </div>
       </section>
 
-      {/* FINAL CTA */}
+      {/* ============= FINAL CTA ============= */}
       <section className="bg-charcoal py-14">
         <div className="container mx-auto px-4">
           <div className="relative overflow-hidden rounded-3xl border border-gold/30 bg-gradient-to-br from-black via-charcoal to-black p-8 md:p-12 text-center">
             <div aria-hidden className="absolute inset-0 pointer-events-none">
               <div className="absolute -top-24 left-1/2 -translate-x-1/2 h-[24rem] w-[24rem] rounded-full bg-gold/15 blur-3xl" />
             </div>
-            <PartyPopper className="relative mx-auto h-10 w-10 text-gold" />
-            <h2 className="relative mt-4 font-display text-3xl md:text-5xl font-bold text-white">
-              Your Coins. <span className="bg-gradient-to-r from-amber-200 via-gold to-amber-300 bg-clip-text text-transparent">Africa's Future.</span>
+            <div className="relative mx-auto w-fit">
+              <AGCToken size={72} />
+            </div>
+            <h2 className="relative mt-5 font-display text-3xl md:text-5xl font-bold text-white">
+              Your AGC. <span className="bg-gradient-to-r from-amber-200 via-gold to-amber-300 bg-clip-text text-transparent">Africa's Future.</span>
             </h2>
             <p className="relative mt-3 max-w-xl mx-auto text-white/70">
-              Every coin becomes a vote, every vote becomes a voice, every voice helps shape education across the continent.
+              Every Afri-Gold Coin becomes a vote, every vote becomes a voice, every voice helps shape education across the continent.
             </p>
             <div className="relative mt-7 flex flex-wrap justify-center gap-3">
               <Button asChild size="lg" className="rounded-full bg-gold px-6 font-semibold text-charcoal hover:bg-gold/90">
                 <Link to={user ? "/dashboard" : "/auth/register"}>
-                  Start Earning Now <ArrowRight className="ml-1.5 h-4 w-4" />
+                  Start Earning AGC <ArrowRight className="ml-1.5 h-4 w-4" />
                 </Link>
               </Button>
               <Button asChild size="lg" variant="outline" className="rounded-full border-gold/40 px-6 text-gold hover:bg-gold/10">

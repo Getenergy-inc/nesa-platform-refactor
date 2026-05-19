@@ -291,15 +291,18 @@ const App = () => (
                     }
                   />
 
-                  {/* Earn Voting Coins */}
+                  {/* AGC — Afri-Gold Coin Rewards */}
                   <Route
-                    path="/earn-voting-coins"
+                    path="/earn-agc"
                     element={
                       <WithLayout>
                         <EarnVotingCoins />
                       </WithLayout>
                     }
                   />
+                  <Route path="/agc-rewards" element={<Navigate to="/earn-agc" replace />} />
+                  <Route path="/earn-voting-coins" element={<Navigate to="/earn-agc" replace />} />
+
 
                   {/* About */}
                   <Route
