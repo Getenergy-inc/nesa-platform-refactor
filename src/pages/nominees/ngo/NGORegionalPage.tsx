@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
+import { NomineeAvatar } from "@/components/nominees/NomineeAvatar";
 import {
   NGO_SUBCATEGORIES,
   NGORegion,
