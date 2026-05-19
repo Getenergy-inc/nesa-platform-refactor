@@ -26,6 +26,8 @@ export interface IconNominee {
   classification_slug: IconClassificationSlug;
   country: string;
   region: string;
+  nationality?: string;
+  manual_review_required?: boolean;
   residency_status?: string;
   heritage_identity?: string;
   sector?: string;
