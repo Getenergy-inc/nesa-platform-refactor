@@ -46,6 +46,13 @@ export interface IconNominee {
   seo_title?: string;
   seo_description?: string;
   nomination_year?: number;
+  // ── Migration audit fields (Phase 2 plan) ──────────────────
+  previous_category?: string;
+  previous_subcategory?: string;
+  migration_source?: "awards-nominees.csv" | "nominees-master.json" | "manual" | "legacy-archive";
+  migration_reason?: string;
+  migration_status?: "auto" | "manual" | "verified" | "pending-review";
+  migration_confidence_score?: number; // 0..1
 }
 
 export interface IconSubcategory {
