@@ -633,59 +633,23 @@ export function GoldSpecialRecognitionSection() {
       />
 
       <div className="relative max-w-6xl mx-auto px-4 sm:px-6 py-20 md:py-32">
-        {/* ── Hero Header ── */}
+        {/* ── Compact Header ── */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-16 md:mb-20"
+          transition={{ duration: 0.5 }}
+          className="flex items-center gap-4 mb-12 md:mb-16"
         >
-          <div className="inline-flex items-center gap-2.5 mb-6">
-            <div className="h-px w-8 bg-gradient-to-r from-transparent to-primary/40" />
-            <Badge variant="outline" className="border-primary/30 text-primary text-xs px-4 py-1 font-semibold tracking-wider">
-              <Sparkles className="w-3 h-3 mr-1.5" />
-              2026 EDITION
-            </Badge>
-            <div className="h-px w-8 bg-gradient-to-l from-transparent to-primary/40" />
+          <div className="shrink-0 w-14 h-14 md:w-16 md:h-16 rounded-2xl bg-primary flex items-center justify-center shadow-lg shadow-primary/20">
+            <Star className="w-7 h-7 md:w-8 md:h-8 text-charcoal" strokeWidth={2.5} />
           </div>
-
-          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-4 font-serif leading-[1.1] tracking-tight">
-            Gold Special{" "}
-            <span className="text-primary">Recognition</span>
-          </h1>
-          <p className="text-lg md:text-xl text-primary/70 font-medium mb-4">
-            Cultural Impact Recognition
-          </p>
-          <p className="text-white/40 max-w-lg mx-auto text-sm md:text-base leading-relaxed mb-3">
-            Celebrating cultural leaders using influence to advance education across Africa and the Diaspora.
-          </p>
-          <p className="text-primary/50 text-xs font-medium tracking-widest uppercase">
-            Recognize Impact · Re-Nominate Champions · Discover New Voices
-          </p>
-
-          {/* Primary CTAs */}
-          <div className="flex items-center justify-center gap-3 mt-8 flex-wrap">
-            <Button size="lg" className="bg-primary hover:bg-primary/90 text-primary-foreground font-bold shadow-xl shadow-primary/20 hover:shadow-primary/30 transition-all h-12 px-6" asChild>
-              <Link to="/nominate?tier=gold-special">
-                <Award className="w-4 h-4 mr-2" /> Nominate a Leader
-              </Link>
-            </Button>
-            <Button size="lg" variant="outline" className="border-primary/25 text-primary hover:bg-primary/10 h-12 px-6" asChild>
-              <Link to="/nominate?tier=gold-special">Re-Nominate Honoree</Link>
-            </Button>
-            <Button size="lg" variant="ghost" className="text-white/40 hover:text-primary hover:bg-primary/5 h-12" asChild>
-              <Link to="/nominees?tier=gold-special">
-                View Impact Profiles <ExternalLink className="w-3.5 h-3.5 ml-1.5" />
-              </Link>
-            </Button>
-          </div>
-
-          {/* Tier indicator */}
-          <div className="mt-8 flex items-center justify-center gap-2 text-xs text-white/20">
-            <div className="flex items-center gap-1.5 bg-white/[0.03] rounded-full px-4 py-1.5 border border-white/[0.05]">
-              <span className="w-1.5 h-1.5 rounded-full bg-primary/60 animate-pulse" />
-              Platinum Clearance → Gold Special Recognition
-            </div>
+          <div className="min-w-0">
+            <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white font-serif leading-tight tracking-tight">
+              Gold Special Recognition — 2026 Edition
+            </h1>
+            <p className="text-white/50 text-sm md:text-base mt-1">
+              Cultural impact recognition · 3 categories
+            </p>
           </div>
         </motion.div>
 
