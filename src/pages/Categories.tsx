@@ -201,11 +201,11 @@ export default function Categories() {
 
           {/* Tabs */}
           <Tabs value={activeTab} onValueChange={(v) => { setActiveTab(v); setSearchQuery(""); }}>
-            <TabsList className="grid w-full max-w-2xl mx-auto grid-cols-6 mb-2 bg-charcoal-light/60 border border-gold/10">
+            <TabsList className="flex flex-wrap w-full max-w-3xl mx-auto mb-2 bg-charcoal-light/60 border border-gold/10 h-auto gap-1 p-1">
               {tabData.map((tab) => (
-                <TabsTrigger key={tab.key} value={tab.key} className="flex items-center gap-1.5 text-xs sm:text-sm text-ivory/70 data-[state=active]:bg-gold data-[state=active]:text-charcoal">
+                <TabsTrigger key={tab.key} value={tab.key} className="flex-1 min-w-[90px] flex items-center justify-center gap-1.5 text-xs sm:text-sm text-ivory/70 data-[state=active]:bg-gold data-[state=active]:text-charcoal whitespace-nowrap">
                   {tab.icon}
-                  <span className="hidden sm:inline">{tab.label}</span>
+                  <span>{tab.label}</span>
                 </TabsTrigger>
               ))}
             </TabsList>
