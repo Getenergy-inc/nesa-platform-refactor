@@ -28,6 +28,7 @@ const PromoVideosSection = lazy(() => import("@/components/nesa/PromoVideosSecti
 
 const BrandNarrativeSection = lazy(() => import("@/components/nesa/BrandNarrativeSection").then(m => ({ default: m.BrandNarrativeSection })));
 const AwardSpotlightSection = lazy(() => import("@/components/nesa/AwardSpotlightSection").then(m => ({ default: m.AwardSpotlightSection })));
+const GoldSpecialRecognitionSection = lazy(() => import("@/components/nesa/GoldSpecialRecognitionSection").then(m => ({ default: m.GoldSpecialRecognitionSection })));
 const MerchandiseShowcase = lazy(() => import("@/components/nesa/MerchandiseShowcase").then(m => ({ default: m.MerchandiseShowcase })));
 const ContributorsHallSection = lazy(() => import("@/components/nesa/ContributorsHallSection").then(m => ({ default: m.ContributorsHallSection })));
 
