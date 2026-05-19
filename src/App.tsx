@@ -7,6 +7,7 @@ import SubcategoryPage from "./pages/nominees/SubcategoryPage";
 import GoldHubPage from "./pages/nominees/gold/GoldHubPage";
 import GoldCategoryPage from "./pages/nominees/gold/GoldCategoryPage";
 import GoldNomineeProfilePage from "./pages/nominees/gold/GoldNomineeProfilePage";
+import NomineeSlugRedirect from "./pages/nominees/gold/NomineeSlugRedirect";
 import NomineeDirectory from "./pages/NomineeDirectory";
 import MasterNomineeProfile from "./pages/MasterNomineeProfile";
 import CertificateVerify from "./pages/CertificateVerify";
