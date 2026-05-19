@@ -1,6 +1,7 @@
 import { DynamicCategoryPage } from "@/components/awards/DynamicCategoryPage";
 import { BrandedCategoryHero } from "@/components/awards/BrandedCategoryHero";
 import { BrandedDocumentaryPreview } from "@/components/awards/BrandedDocumentaryPreview";
+import { AnimatedActionWords } from "@/components/awards/AnimatedActionWords";
 
 export default function InternationalEducationPage() {
   return (
@@ -20,6 +21,11 @@ export default function InternationalEducationPage() {
         secondaryCta={{ label: "Become a Partner", href: "/partners" }}
         watchCta={{ label: "View Partnership Impact", href: "/media" }}
         imageAlt="International & bilateral contributors powering education in Africa"
+      />
+      <AnimatedActionWords
+        theme="global"
+        lead="Global Partners Bring"
+        words={["Collaboration", "Grants", "Diplomacy", "SDGs", "Development", "Global Impact", "Partnership", "Innovation", "Opportunity", "International Support"]}
       />
       <BrandedDocumentaryPreview
         theme="global"

@@ -1,6 +1,7 @@
 import { Helmet } from "react-helmet-async";
 import { BrandedCategoryHero } from "@/components/awards/BrandedCategoryHero";
 import { BrandedDocumentaryPreview } from "@/components/awards/BrandedDocumentaryPreview";
+import { AnimatedActionWords } from "@/components/awards/AnimatedActionWords";
 import { GoldSpecialRecognitionSection } from "@/components/nesa/GoldSpecialRecognitionSection";
 
 export default function DigitalVoices() {
@@ -30,6 +31,12 @@ export default function DigitalVoices() {
         secondaryCta={{ label: "Vote for Influencers", href: "/vote" }}
         watchCta={{ label: "Watch Impact Stories", href: "/media" }}
         imageAlt="Africa's top education influencers — creators, musicians, athletes"
+      />
+
+      <AnimatedActionWords
+        theme="influencer"
+        lead="Digital Voices Are"
+        words={["Influence", "Advocacy", "Creativity", "Inspiration", "Youth Power", "Culture", "Music", "Sports", "Awareness", "Social Impact"]}
       />
 
       <BrandedDocumentaryPreview

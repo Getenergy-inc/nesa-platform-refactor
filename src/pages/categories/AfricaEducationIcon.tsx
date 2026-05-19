@@ -1,6 +1,7 @@
 import { DynamicCategoryPage } from "@/components/awards/DynamicCategoryPage";
 import { BrandedCategoryHero } from "@/components/awards/BrandedCategoryHero";
 import { BrandedDocumentaryPreview } from "@/components/awards/BrandedDocumentaryPreview";
+import { AnimatedActionWords } from "@/components/awards/AnimatedActionWords";
 
 export default function AfricaEducationIconPage() {
   return (
@@ -20,6 +21,11 @@ export default function AfricaEducationIconPage() {
         secondaryCta={{ label: "Nominate a Legend", href: "/nominate?category=africa-education-icon-award" }}
         watchCta={{ label: "Watch Legacy Stories", href: "/media" }}
         imageAlt="Africa Education Icon Award — two decades of legacy"
+      />
+      <AnimatedActionWords
+        theme="legacy"
+        lead="This Award Stands For"
+        words={["Legacy", "Transformation", "Impact", "Leadership", "Opportunity", "Vision", "Empowerment", "Excellence", "Education for All", "Future Builders"]}
       />
       <BrandedDocumentaryPreview
         theme="legacy"

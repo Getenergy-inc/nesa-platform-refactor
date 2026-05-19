@@ -1,6 +1,7 @@
 import { DynamicCategoryPage } from "@/components/awards/DynamicCategoryPage";
 import { BrandedCategoryHero } from "@/components/awards/BrandedCategoryHero";
 import { BrandedDocumentaryPreview } from "@/components/awards/BrandedDocumentaryPreview";
+import { AnimatedActionWords } from "@/components/awards/AnimatedActionWords";
 
 export default function CSREducationAfricaPage() {
   return (
@@ -20,6 +21,11 @@ export default function CSREducationAfricaPage() {
         secondaryCta={{ label: "Partner With NESA", href: "/partners" }}
         watchCta={{ label: "See Corporate Impact Stories", href: "/media" }}
         imageAlt="Best CSR for Education — corporate impact across Africa"
+      />
+      <AnimatedActionWords
+        theme="corporate"
+        lead="Corporate Africa Is"
+        words={["Innovation", "Scholarships", "Infrastructure", "Technology", "Inclusion", "Sustainability", "Access", "CSR Impact", "Partnership", "Opportunity"]}
       />
       <BrandedDocumentaryPreview
         theme="corporate"
