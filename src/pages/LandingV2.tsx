@@ -172,7 +172,7 @@ export default function LandingV2() {
                             {i + 1}
                           </span>
                         </div>
-                        <h3 className="font-display text-xl font-bold mb-2">{step.title}</h3>
+                        <h3 className="font-display text-xl font-bold mb-2 text-white">{step.title}</h3>
                         <p className="text-white/65 text-sm leading-relaxed">{step.text}</p>
                       </CardContent>
                     </Card>
