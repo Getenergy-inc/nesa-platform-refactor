@@ -13,9 +13,7 @@ import {
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { NESAHeader } from "@/components/nesa/NESAHeader";
-import { NESAFooter } from "@/components/nesa/NESAFooter";
-import { MobileBottomNav } from "@/components/navigation/MainNav";
+import { PublicLayout } from "@/components/layout/PublicLayout";
 
 const trustStats = [
   { label: "Pan-African Reach", value: "54", detail: "African countries targeted" },
