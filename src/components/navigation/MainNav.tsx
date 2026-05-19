@@ -570,6 +570,9 @@ export function MainNav() {
 
           {/* Right Side */}
           <div className="flex items-center gap-1 sm:gap-2 shrink-0">
+            {/* Earn Voting Coins */}
+            <EarnCoinsBadge />
+
             {/* Language Selector */}
             <LanguageSwitcher className="hidden sm:flex" />
 
