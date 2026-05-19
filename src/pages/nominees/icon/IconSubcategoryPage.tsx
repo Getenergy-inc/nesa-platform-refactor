@@ -102,6 +102,8 @@ export default function IconSubcategoryPage() {
         )}
 
         <SubcategoryNomineeBrowser subSlug={subSlug} all={all} />
+
+        <FinalCTA />
       </div>
     </>
   );
@@ -167,17 +169,3 @@ function SubcategoryNomineeBrowser({
   );
 }
 
-function _Tail() {
-  return null;
-}
-
-function _RemovedTrailingDiv() {
-  return (
-    <>
-      <div>
-
-        <FinalCTA />
-      </div>
-    </>
-  );
-}
