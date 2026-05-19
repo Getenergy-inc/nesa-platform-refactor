@@ -1,108 +1,129 @@
-# Nominee Ecosystem Refactor — 3-Level IA
+# Africa Education Icon Award — Nested Nominee Architecture
 
-Transform the single long `/nominees` page into a scalable Discovery → Exploration → Trust → Vote ecosystem with dedicated pages at every level.
+Refactor the single Icon Award nominees page into a three-tier, premium, SEO-friendly experience: **Main → Subcategory → Classification → Profile**.
 
-## Current State (audit)
-
-- `/nominees` renders all categories, filters, and cards in one page → scroll fatigue, weak SEO.
-- Individual nominee profile pages already exist at `/nominees/:slug` (used by `NomineeCard` links).
-- Category pages exist as static files under `src/pages/categories/*` driven by `DynamicCategoryPage`, but they are NOT connected to the `/nominees/...` URL tree and don't share a consistent shell.
-- No subcategory-level pages exist.
-
-## Target Information Architecture
+## 1. Routing Tree
 
 ```text
-/nominees                              → Hub: category index (lightweight)
-/nominees/:categorySlug                → Category landing (hero, featured, grid, filters)
-/nominees/:categorySlug/:subSlug       → Subcategory browse (filtered grid + sort/search)
-/nominees/profile/:nomineeSlug         → Nominee profile (new richer template)
+/nominees/africa-education-icon-award                          (Main)
+  /literary-new-curriculum-advocate                            (Sub 1)
+    /africans-in-africa
+    /diaspora-africans
+    /friends-of-africa
+  /technical-educator-icon                                     (Sub 2)
+    /africans-in-africa
+    /diaspora-africans
+    /friends-of-africa
+  /education-philanthropy-icon                                 (Sub 3)
+    /africans-in-africa
+    /diaspora-africans
+    /friends-of-africa
+
+/nominee/:slug                                                 (Profile — reuses universal resolver)
 ```
 
-The existing `/nominees/:slug` profile route is preserved as a redirect to `/nominees/profile/:slug` to avoid breaking inbound links.
+All routes registered in `src/App.tsx`; existing `/nominees/category/africa-education-icon-award` redirected to the new main page.
 
-## Scope (this plan)
+## 2. Data Layer
 
-### 1. Nominees Hub (`/nominees`) — lightweight redesign
-- Replace the long mega-list with a **Category Index Grid**: one premium card per major category showing icon, name, nominee count, top-3 avatars, and "Explore →" CTA.
-- Keep a compact global search + "Trending nominees" rail + "Most voted this week" rail (data-driven, 8 items each, carousel on mobile).
-- Remove the in-page subcategory accordions and infinite grid.
+**New file:** `src/data/iconAward/index.ts`
 
-### 2. Category Landing (`/nominees/:categorySlug`)
-- Hero: category title, mission statement, nominee count, primary CTA `Vote Now`, secondary `Nominate`.
-- Filter bar: Region, Country, Sort (Most Voted / Newest / Trending), Search.
-- **Featured Nominees** spotlight (top 3 by votes, large cards).
-- **Subcategory chips** linking to subcategory pages.
-- Paginated nominee grid (12/page) using existing `NomineeCard`.
-- Community engagement strip (total votes, endorsements, regions represented).
-- Final CTA band.
-- SEO: `<Helmet>` with title, description, canonical, OG, JSON-LD `CollectionPage`.
+Single source of truth — typed constants plus an array of nominee records using the requested schema:
 
-### 3. Subcategory Page (`/nominees/:categorySlug/:subSlug`)
-- Breadcrumb (Nominees › Category › Subcategory).
-- Subcategory header with description + count + Vote/Nominate CTAs.
-- Sort + Search + Region filter.
-- Paginated grid (12/page).
-- Sidebar/aside: "Other subcategories in {category}".
-- SEO Helmet + JSON-LD `ItemList`.
+```ts
+export type IconSubcategorySlug =
+  | "literary-new-curriculum-advocate"
+  | "technical-educator-icon"
+  | "education-philanthropy-icon";
 
-### 4. Nominee Profile (`/nominees/profile/:slug`)
-Build a new richer profile template with sections:
-1. **Hero** — image/logo (respects person vs org sizing), name, category badge, country/region, nomination year, status badge (Approved / Platinum / Blue Garnet).
-2. **Impact Story** — narrative, measurable impact bullets, timeline.
-3. **Why This Nominee Matters** — social proof block (community outcomes, advocacy).
-4. **Media & Gallery** — photos/videos grid (lazy-loaded), respects YouTube nocookie rule.
-5. **Voting & Engagement** — sticky-on-mobile Vote CTA, share bar, endorse, testimonial preview (reuses existing voting components).
-6. **Related Nominees** — same subcategory + same region (6 cards).
-7. **Trust Indicators** — verification badge, NRC/jury verified, vote count, endorsement count, citation links.
-- SEO: Helmet + JSON-LD `Person` or `Organization` depending on `imageType`.
-- Keep `/nominees/:slug` route → `<Navigate>` to `/nominees/profile/:slug`.
+export type IconClassificationSlug =
+  | "africans-in-africa"
+  | "diaspora-africans"
+  | "friends-of-africa";
 
-### 5. Shared building blocks (new components)
-- `NomineeBreadcrumbs`
-- `CategoryHero`
-- `NomineeFilterBar` (region, country, sort, search — bottom-sheet on mobile)
-- `FeaturedNomineeSpotlight`
-- `NomineePagination` (reuses universal pagination)
-- `RelatedNomineesRail`
-- `TrustIndicators`
-- `NomineeProfileHero`, `ImpactStorySection`, `MediaGallerySection`
+export interface IconNominee {
+  id: string; name: string; slug: string;
+  award_subcategory_slug: IconSubcategorySlug;
+  classification_slug: IconClassificationSlug;
+  country: string; region: string;
+  sector?: string; impact_area: string[];
+  years_of_contribution: string;
+  impact_summary: string; full_impact_story?: string;
+  impact_metrics?: Record<string, string | number>;
+  jury_status: "nominated" | "verified" | "shortlisted" | "jury_reviewed" | "laureate";
+  verification_status: "pending" | "verified";
+  image_url: string; banner_url?: string;
+  media_gallery?: { type: "image"|"video"|"link"; url: string; title?: string }[];
+  previous_categories?: string[]; tags?: string[];
+  seo_title?: string; seo_description?: string;
+}
+```
 
-### 6. Routing
-- Add the 3 new routes in `src/App.tsx` (or wherever the nominees routes live).
-- Add legacy redirect `/nominees/:slug` → `/nominees/profile/:slug` only when `:slug` is not a known category slug. Implementation: a small resolver component that checks the slug against the category list; if it matches a category, render `CategoryLandingPage`, else `<Navigate>` to profile.
+Helper selectors: `getNominee(slug)`, `bySubcategory(sub)`, `byClassification(sub, cls)`, `featured(sub, cls, n=3)`.
 
-### 7. Performance
-- Lazy-load all new pages via `React.lazy`.
-- Paginate (12/page) instead of infinite scroll.
-- Image lazy-loading via existing `useResolvedNomineeImages`.
-- Skeleton loaders using existing `NomineeCardSkeleton`.
+## 3. Page Components
 
-### 8. SEO
-- `react-helmet-async` per page (provider already wired).
-- JSON-LD: `CollectionPage` (hub), `CollectionPage` + `ItemList` (category/subcategory), `Person`/`Organization` (profile).
-- Update `scripts/generate-sitemap.ts` if it exists to enumerate categories + nominees from `nominees-master.json`.
+**New folder:** `src/pages/nominees/icon/`
 
-## Out of scope (this pass)
-- Backend schema changes — uses existing `nominees` table + master JSON.
-- Comment/testimonial submission system (only display existing data; full posting flow is a separate feature).
-- Admin moderation UI changes.
+| File | Route | Purpose |
+|---|---|---|
+| `IconAwardMain.tsx` | `/nominees/africa-education-icon-award` | Hero, 3 subcategory cards, total counts, CTAs |
+| `IconSubcategoryPage.tsx` | `…/:sub` | Hero, 3 classification cards, featured nominees, View All CTA |
+| `IconClassificationPage.tsx` | `…/:sub/:cls` | Hero, FilterBar, NomineeGrid, Featured Spotlight, Related Classifications, Final CTA |
+| `IconNomineeProfile.tsx` | `/nominee/:slug` (resolver dispatches here for Icon Award slugs) | Full profile with hero, timeline, metrics, evidence, recognition, related |
 
-## Files to add
-- `src/pages/nominees/NomineesHubPage.tsx`
-- `src/pages/nominees/CategoryLandingPage.tsx`
-- `src/pages/nominees/SubcategoryPage.tsx`
-- `src/pages/nominees/NomineeProfilePage.tsx` (new richer template; may wrap/replace existing profile)
-- `src/components/nominees/CategoryHero.tsx`
-- `src/components/nominees/NomineeFilterBar.tsx`
-- `src/components/nominees/FeaturedNomineeSpotlight.tsx`
-- `src/components/nominees/RelatedNomineesRail.tsx`
-- `src/components/nominees/TrustIndicators.tsx`
-- `src/components/nominees/NomineeBreadcrumbs.tsx`
+**Shared components** in `src/components/iconAward/`:
+`IconHero`, `SubcategoryCard`, `ClassificationCard`, `NomineeCard`, `NomineeFilterBar`, `FeaturedSpotlight`, `LifetimeTimeline`, `ImpactMetricsGrid`, `EvidenceGallery`, `RecognitionStatusBadge`, `RelatedNominees`.
 
-## Files to edit
-- `src/App.tsx` (routes)
-- Existing `/nominees` page component (slim down to hub)
-- `scripts/generate-sitemap.ts` (if present)
+## 4. Filtering
 
-## Style
-Maintain Charcoal/Gold palette, Playfair Display headers, framer-motion entrance animations, bottom-20 mobile offsets for sticky CTAs.
+`NomineeFilterBar` supports: country, region, impact area, sector, nomination year, verification status, jury status. URL-synced query params for shareability; client-side filter using selectors.
+
+## 5. Visual System
+
+Reuse the existing Charcoal/Gold tokens (`bg-charcoal`, gold `42 85% 52%`, Playfair display). Editorial card style with serif headings, fine gold rules, subtle motion on hover (framer-motion). Mobile-first; sticky filter bar collapses to a sheet on small screens.
+
+## 6. SEO
+
+`react-helmet-async` `<Helmet>` blocks per page (single-string `<title>`):
+
+- Main: `Africa Education Icon Award Nominees | NESA Africa 2006–2026`
+- Subcategory: `{Sub} Nominees | Africa Education Icon Award | NESA Africa`
+- Classification: `{Classification} — {Sub} Nominees | NESA Africa`
+- Profile: `{Name} | {Sub} | Africa Education Icon Nominee`
+
+Each page emits canonical, og:title/description/url, and JSON-LD (`BreadcrumbList` everywhere; `Person` schema on profiles).
+
+## 7. Migration
+
+Script `scripts/migrate-icon-nominees.ts` (offline, run once):
+
+1. Load existing Icon Award nominees from current data sources (`src/data/awardData.ts`, `goldSpecialRecognition.ts`, CSV).
+2. Classify each into one of the 3 subcategories using keyword rules on existing category/sector/impact text:
+   - **Literary/Curriculum**: keywords *curriculum, literacy, author, publisher, policy writer, content*
+   - **Technical Educator**: *TVET, STEM, vocational, technical, skills, innovation training*
+   - **Philanthropy**: *foundation, donor, scholarship, CSR, philanthropist, funder*
+3. Classify into Africans-in-Africa / Diaspora / Friends-of-Africa using `country`, heritage tags, and existing residency flags.
+4. Generate slug, profile URL, classification URL; preserve `previous_categories`.
+5. Low-confidence rows → `manual-review.json` (not auto-published).
+6. Emit `src/data/iconAward/nominees.generated.ts` and a `REPORT.md` in `/mnt/documents/icon-architecture/`.
+
+Original data files are left untouched.
+
+## 8. Backward Compatibility
+
+- Old `/nominees/category/africa-education-icon-award` → 301-style client redirect to the new main page.
+- Old profile links continue to work via the universal `/nominee/:slug` resolver, which now dispatches Icon slugs to `IconNomineeProfile`.
+
+## 9. Files Created / Edited
+
+**Created** (~14): data module, 4 page components, ~10 shared components, migration script, redirect stub.
+**Edited** (~3): `src/App.tsx` (routes + redirect), nav links pointing at the old Icon Award page, `NomineeSlugRedirect` dispatch table.
+
+## 10. Out of Scope
+
+- No DB schema change — data lives in TS modules (matches existing GitHub-first nominee storage pattern).
+- No new nominee write/admin UI; this is read/discovery only.
+- Real nominee photos still depend on the existing NRC image pipeline; placeholders used where missing.
+
+Approve to implement.

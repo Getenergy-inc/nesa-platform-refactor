@@ -8,6 +8,10 @@ import GoldHubPage from "./pages/nominees/gold/GoldHubPage";
 import GoldCategoryPage from "./pages/nominees/gold/GoldCategoryPage";
 import GoldNomineeProfilePage from "./pages/nominees/gold/GoldNomineeProfilePage";
 import NomineeSlugRedirect from "./pages/nominees/gold/NomineeSlugRedirect";
+import IconAwardMain from "./pages/nominees/icon/IconAwardMain";
+import IconSubcategoryPage from "./pages/nominees/icon/IconSubcategoryPage";
+import IconClassificationPage from "./pages/nominees/icon/IconClassificationPage";
+import { Navigate } from "react-router-dom";
 import NomineeDirectory from "./pages/NomineeDirectory";
 import MasterNomineeProfile from "./pages/MasterNomineeProfile";
 import CertificateVerify from "./pages/CertificateVerify";
@@ -650,11 +654,11 @@ const App = () => (
                   />
                   <Route
                     path="/category/africa-education-icon"
-                    element={
-                      <WithLayout>
-                        <AfricaEducationIcon />
-                      </WithLayout>
-                    }
+                    element={<Navigate to="/nominees/africa-education-icon-award" replace />}
+                  />
+                  <Route
+                    path="/nominees/category/africa-education-icon-award"
+                    element={<Navigate to="/nominees/africa-education-icon-award" replace />}
                   />
 
                   {/* Nominee Response Routes */}
@@ -919,6 +923,31 @@ const App = () => (
                     element={
                       <WithLayout>
                         <GoldNomineeProfilePage />
+                      </WithLayout>
+                    }
+                  />
+                  {/* Africa Education Icon Award — nested nominee ecosystem */}
+                  <Route
+                    path="/nominees/africa-education-icon-award"
+                    element={
+                      <WithLayout>
+                        <IconAwardMain />
+                      </WithLayout>
+                    }
+                  />
+                  <Route
+                    path="/nominees/africa-education-icon-award/:sub"
+                    element={
+                      <WithLayout>
+                        <IconSubcategoryPage />
+                      </WithLayout>
+                    }
+                  />
+                  <Route
+                    path="/nominees/africa-education-icon-award/:sub/:cls"
+                    element={
+                      <WithLayout>
+                        <IconClassificationPage />
                       </WithLayout>
                     }
                   />
