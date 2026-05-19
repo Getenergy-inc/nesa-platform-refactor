@@ -1,3 +1,4 @@
+import { Helmet } from "react-helmet-async";
 import { DynamicCategoryPage } from "@/components/awards/DynamicCategoryPage";
 import { BrandedCategoryHero } from "@/components/awards/BrandedCategoryHero";
 import { BrandedDocumentaryPreview } from "@/components/awards/BrandedDocumentaryPreview";
@@ -7,11 +8,20 @@ import { BrandedNomineeDirectory } from "@/components/awards/BrandedNomineeDirec
 export default function InternationalEducationPage() {
   return (
     <>
+      <Helmet>
+        <title>Platinum Global Grants & Partnerships | NESA-Africa</title>
+        <meta
+          name="description"
+          content="Bilateral, multilateral and international institutions powering African education through grants, collaboration and long-term investment."
+        />
+        <link rel="canonical" href="https://nesaafrica.lovable.app/awards/global-partnerships" />
+      </Helmet>
+
       <BrandedCategoryHero
         theme="global"
         headlineLead="Which Global Grants Are"
         headlineAccent="Powering Education in Africa?"
-        description="Global partnerships are expanding educational opportunity across Africa through funding, collaboration, innovation, and long-term investment in future generations."
+        description="Global partnerships are expanding educational opportunity across Africa through grants, institutional collaboration, innovation, infrastructure, and long-term investment in future generations. This recognition celebrates the organizations and allies supporting Africa's educational transformation."
         tags={["Collaboration", "Grants", "Diplomacy", "Global Impact", "SDGs", "Partnership", "Development", "Innovation"]}
         stats={[
           { value: "Global", label: "Collaboration" },
@@ -19,7 +29,7 @@ export default function InternationalEducationPage() {
           { value: "International", label: "Impact" },
         ]}
         primaryCta={{ label: "Explore Global Partners", href: "/nominees?category=International%20%26%20Bilateral%20Contributors%20to%20Education" }}
-        secondaryCta={{ label: "Become a Partner", href: "/partners" }}
+        secondaryCta={{ label: "Become a Strategic Partner", href: "/partners" }}
         watchCta={{ label: "View Partnership Impact", href: "/media" }}
         imageAlt="International & bilateral contributors powering education in Africa"
       />
@@ -31,7 +41,9 @@ export default function InternationalEducationPage() {
       <BrandedDocumentaryPreview
         theme="global"
         title="Partnership Stories"
-        description="See how global institutions and bilateral partners are building stronger, more equitable education systems across Africa."
+        status="Documentary Coming Soon"
+        description="Explore how global partnerships and international collaboration are helping shape the future of African education."
+        watchCtaLabel="View Partnership Impact"
         watchCtaHref="/media"
         imageAlt="Global partnership stories documentary preview"
       />

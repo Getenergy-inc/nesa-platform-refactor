@@ -21,7 +21,7 @@ export default function DigitalVoices() {
         theme="influencer"
         headlineLead="Who Are Africa's Top"
         headlineAccent="Education Influencers?"
-        description="From music and sports to digital storytelling and youth advocacy, influential African voices are transforming culture into a force for educational awareness, inspiration, and empowerment."
+        description="From sports and music to digital storytelling and youth advocacy, influential African voices are transforming culture into a force for educational awareness, inspiration, and empowerment. Digital Voices recognizes creators turning influence into educational impact."
         tags={["Influence", "Advocacy", "Creativity", "Inspiration", "Youth Power", "Culture", "Music", "Sports", "Awareness", "Social Impact"]}
         stats={[
           { value: "Music", label: "Inspires Learning" },
@@ -43,7 +43,9 @@ export default function DigitalVoices() {
       <BrandedDocumentaryPreview
         theme="influencer"
         title="Digital Voices Stories"
-        description="See how creators, musicians, athletes and influencers are using their platforms to transform education awareness across Africa."
+        status="Documentary Coming Soon"
+        description="See how creators, musicians, athletes, and influencers are using their platforms to transform education awareness across Africa."
+        watchCtaLabel="Watch Impact Stories"
         watchCtaHref="/media"
         imageAlt="Digital voices documentary preview"
       />
