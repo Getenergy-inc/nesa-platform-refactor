@@ -4,6 +4,7 @@ import { BrandedDocumentaryPreview } from "@/components/awards/BrandedDocumentar
 import { AnimatedActionWords } from "@/components/awards/AnimatedActionWords";
 import { BrandedNomineeDirectory } from "@/components/awards/BrandedNomineeDirectory";
 import { GoldSpecialRecognitionSection } from "@/components/nesa/GoldSpecialRecognitionSection";
+import { GoldTrackNavGrid } from "@/components/awards/GoldTrackNavGrid";
 
 export default function DigitalVoices() {
   return (

@@ -4,6 +4,7 @@ import { BrandedCategoryHero } from "@/components/awards/BrandedCategoryHero";
 import { BrandedDocumentaryPreview } from "@/components/awards/BrandedDocumentaryPreview";
 import { AnimatedActionWords } from "@/components/awards/AnimatedActionWords";
 import { BrandedNomineeDirectory } from "@/components/awards/BrandedNomineeDirectory";
+import { IconSubcategoryNavGrid } from "@/components/awards/IconSubcategoryNavGrid";
 
 export default function AfricaEducationIconPage() {
   return (
@@ -47,6 +48,7 @@ export default function AfricaEducationIconPage() {
         watchCtaHref="/media"
         imageAlt="Legacy stories documentary preview"
       />
+      <IconSubcategoryNavGrid />
       <BrandedNomineeDirectory
         theme="legacy"
         categoryName="Africa Education Icon Award (2006–2026)"
