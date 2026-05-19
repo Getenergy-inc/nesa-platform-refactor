@@ -25,6 +25,7 @@ import iconImg from "@/assets/pathways/icon.jpg";
 import csrImg from "@/assets/pathways/csr.jpg";
 import influencerImg from "@/assets/pathways/influencer.jpg";
 import grantsImg from "@/assets/pathways/grants.jpg";
+import impactBgImg from "@/assets/rebuild-school-impact.jpg";
 
 type Pathway = {
   id: string;
@@ -332,8 +333,14 @@ export function AwardSpotlightSection() {
           className="mb-14"
         >
           <div className="relative overflow-hidden rounded-3xl ring-1 ring-gold/30 shadow-[0_0_60px_-15px_hsl(var(--gold)/0.4)]">
-            <div className="absolute inset-0 bg-gradient-to-br from-emerald-900/60 via-charcoal to-charcoal" />
-            <div className="absolute inset-0 bg-charcoal/40" />
+            <img
+              src={impactBgImg}
+              alt="Children with wheelchairs at an African school courtyard at sunset"
+              loading="lazy"
+              className="absolute inset-0 h-full w-full object-cover"
+            />
+            <div className="absolute inset-0 bg-gradient-to-r from-charcoal/95 via-charcoal/80 to-charcoal/50" />
+            <div className="absolute inset-0 bg-charcoal/30" />
             <div className="text-gold">
               <PatternOverlay />
             </div>
