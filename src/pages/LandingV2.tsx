@@ -172,7 +172,7 @@ export default function LandingV2() {
                             {i + 1}
                           </span>
                         </div>
-                        <h3 className="font-display text-xl font-bold mb-2">{step.title}</h3>
+                        <h3 className="font-display text-xl font-bold mb-2 text-white">{step.title}</h3>
                         <p className="text-white/65 text-sm leading-relaxed">{step.text}</p>
                       </CardContent>
                     </Card>
@@ -238,14 +238,14 @@ export default function LandingV2() {
                 <Card className="bg-charcoal-light/40 border-gold/20">
                   <CardContent className="p-6">
                     <Globe2 className="h-6 w-6 text-gold mb-3" />
-                    <h3 className="font-display text-lg font-bold mb-2">Pan-African Positioning</h3>
+                    <h3 className="font-display text-lg font-bold mb-2 text-white">Pan-African Positioning</h3>
                     <p className="text-white/65 text-sm">Frame NESA as a continental education recognition movement.</p>
                   </CardContent>
                 </Card>
                 <Card className="bg-charcoal-light/40 border-gold/20">
                   <CardContent className="p-6">
                     <Handshake className="h-6 w-6 text-gold mb-3" />
-                    <h3 className="font-display text-lg font-bold mb-2">Partner Confidence</h3>
+                    <h3 className="font-display text-lg font-bold mb-2 text-white">Partner Confidence</h3>
                     <p className="text-white/65 text-sm">Surface institutional affiliations, sponsors, and media proof.</p>
                   </CardContent>
                 </Card>
