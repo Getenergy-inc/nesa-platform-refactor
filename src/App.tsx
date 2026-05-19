@@ -255,6 +255,7 @@ const App = () => (
                 <Routes>
                   {/* Landing - has its own header/footer */}
                   <Route path="/" element={<NESALandingPage />} />
+                  <Route path="/landing-v2" element={<LandingV2 />} />
                   <Route
                     path="/programs/nesa-africa"
                     element={<NESALandingPage />}
