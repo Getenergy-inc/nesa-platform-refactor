@@ -465,6 +465,8 @@ export function PathwayVideoCard({ card, index }: Props) {
                     </Button>
                   </div>
                 </div>
+                  </>
+                )}
               </div>
             </motion.div>
           </motion.div>
