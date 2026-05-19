@@ -355,7 +355,7 @@
       "nigeria": "Nigeria",
       "iconBadge": "Réalisation à Vie",
       "iconTitle": "Icône de l'Afrique",
-      "iconSubtitle": "Prix Blue Garnet (2005–{{year}})",
+      "iconSubtitle": "Prix Blue Garnet (2006–{{year}})",
       "iconFeature1": "10+ ans de réalisations institutionnelles",
       "iconFeature2": "Reconnaissance de l'héritage",
       "iconFeature3": "Sélection par panel d'experts",
@@ -843,7 +843,7 @@
     "allAfrica": "Toute l'Afrique",
     "nigeria": "Nigeria",
     "paths": {
-      "icon": { "badge": "Réussite à Vie", "title": "Icône Africaine", "subtitle": "Prix Blue Garnet (2005–{{year}})", "features": ["10+ ans de réalisations institutionnelles", "Reconnaissance patrimoniale", "Sélection par panel d'experts"], "cta": "Nominer une Icône" },
+      "icon": { "badge": "Réussite à Vie", "title": "Icône Africaine", "subtitle": "Prix Blue Garnet (2006–{{year}})", "features": ["10+ ans de réalisations institutionnelles", "Reconnaissance patrimoniale", "Sélection par panel d'experts"], "cta": "Nominer une Icône" },
       "voting": { "badge": "Vote Public", "title": "Blue Garnet & Or", "subtitle": "Compétition Annuelle", "features": ["Gagnez des points de vote par la participation", "Votez avec AGC pendant les fenêtres officielles", "Pondération jury + public (Blue Garnet)"], "cta": "Nominer pour le Vote", "secondaryCta": "Comment ça Marche" },
       "platinum": { "badge": "Sélection d'Experts", "title": "Certificat Platine", "subtitle": "Reconnaissance au Mérite", "features": ["Reconnaissance de base", "Pas de vote public requis", "Vérification de gouvernance"], "cta": "Soumettre une Nomination Platine" }
     }

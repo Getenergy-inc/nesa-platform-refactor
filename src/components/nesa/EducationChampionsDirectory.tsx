@@ -91,7 +91,7 @@ const TRUST_SIGNALS = [
   { icon: Shield, label: "Transparent", sublabel: "Open process" },
   { icon: Users, label: "Expert Review", sublabel: "27 Judges" },
   { icon: CheckCircle, label: "Fair Voting", sublabel: "Verified" },
-  { icon: Clock, label: "20 Years", sublabel: "Since 2005" },
+  { icon: Clock, label: "20 Years", sublabel: "Since 2006" },
 ];
 
 // ─────────────────────────────────────────────────────────────────────────────
