@@ -3091,53 +3091,83 @@ export type Database = {
       pathway_cards: {
         Row: {
           accent_label: string
+          action_words: string[]
+          animated_phrases: string[]
           award_line: string
           category: string
           created_at: string
           cta: string
           description: string
           display_order: number
+          engagement_cta_label: string | null
           headline: string
           href: string
           id: string
           image_url: string | null
           is_active: boolean
+          poster_alt: string | null
+          preview_summary: string | null
+          secondary_cta_href: string | null
+          secondary_cta_label: string | null
+          story: string | null
           updated_at: string
           updated_by: string | null
+          video_id: string | null
+          video_title: string | null
           visual_gradient: string
         }
         Insert: {
           accent_label?: string
+          action_words?: string[]
+          animated_phrases?: string[]
           award_line: string
           category: string
           created_at?: string
           cta: string
           description: string
           display_order?: number
+          engagement_cta_label?: string | null
           headline: string
           href: string
           id: string
           image_url?: string | null
           is_active?: boolean
+          poster_alt?: string | null
+          preview_summary?: string | null
+          secondary_cta_href?: string | null
+          secondary_cta_label?: string | null
+          story?: string | null
           updated_at?: string
           updated_by?: string | null
+          video_id?: string | null
+          video_title?: string | null
           visual_gradient?: string
         }
         Update: {
           accent_label?: string
+          action_words?: string[]
+          animated_phrases?: string[]
           award_line?: string
           category?: string
           created_at?: string
           cta?: string
           description?: string
           display_order?: number
+          engagement_cta_label?: string | null
           headline?: string
           href?: string
           id?: string
           image_url?: string | null
           is_active?: boolean
+          poster_alt?: string | null
+          preview_summary?: string | null
+          secondary_cta_href?: string | null
+          secondary_cta_label?: string | null
+          story?: string | null
           updated_at?: string
           updated_by?: string | null
+          video_id?: string | null
+          video_title?: string | null
           visual_gradient?: string
         }
         Relationships: []
