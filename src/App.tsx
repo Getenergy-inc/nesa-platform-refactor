@@ -73,6 +73,7 @@ import IconAward from "./pages/awards/IconAward";
 import GoldAward from "./pages/awards/GoldAward";
 import BlueGarnetAward from "./pages/awards/BlueGarnetAward";
 import GoldSpecialRecognition from "./pages/awards/GoldSpecialRecognition";
+import DigitalVoices from "./pages/awards/DigitalVoices";
 import Winners from "./pages/awards/Winners";
 import GovernancePage from "./pages/GovernancePage";
 
@@ -494,7 +495,7 @@ const App = () => (
                     path="/awards/africa-education-icon"
                     element={
                       <WithLayout>
-                        <AwardPathwayPage />
+                        <AfricaEducationIcon />
                       </WithLayout>
                     }
                   />
@@ -502,15 +503,27 @@ const App = () => (
                     path="/awards/csr-education"
                     element={
                       <WithLayout>
-                        <AwardPathwayPage />
+                        <CSREducationAfrica />
                       </WithLayout>
                     }
+                  />
+                  <Route
+                    path="/awards/csr-for-education"
+                    element={<Navigate to="/awards/csr-education" replace />}
                   />
                   <Route
                     path="/awards/influencer-education"
                     element={
                       <WithLayout>
-                        <AwardPathwayPage />
+                        <DigitalVoices />
+                      </WithLayout>
+                    }
+                  />
+                  <Route
+                    path="/awards/digital-voices"
+                    element={
+                      <WithLayout>
+                        <DigitalVoices />
                       </WithLayout>
                     }
                   />
@@ -518,10 +531,19 @@ const App = () => (
                     path="/awards/grants-global-support"
                     element={
                       <WithLayout>
-                        <AwardPathwayPage />
+                        <InternationalEducation />
                       </WithLayout>
                     }
                   />
+                  <Route
+                    path="/awards/global-partnerships"
+                    element={
+                      <WithLayout>
+                        <InternationalEducation />
+                      </WithLayout>
+                    }
+                  />
+
 
                   {/* Dynamic Category Pages (data-driven) */}
                   <Route
