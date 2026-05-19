@@ -2,6 +2,8 @@ import { Toaster } from "@/components/ui/toaster";
 import { useEffect } from "react";
 import Nominees from "./pages/Nominees";
 import NomineeProfile from "./pages/NomineeProfile";
+import CategoryLandingPage from "./pages/nominees/CategoryLandingPage";
+import SubcategoryPage from "./pages/nominees/SubcategoryPage";
 import NomineeDirectory from "./pages/NomineeDirectory";
 import MasterNomineeProfile from "./pages/MasterNomineeProfile";
 import CertificateVerify from "./pages/CertificateVerify";
@@ -872,6 +874,22 @@ const App = () => (
                     element={
                       <WithLayout>
                         <Nominees />
+                      </WithLayout>
+                    }
+                  />
+                  <Route
+                    path="/nominees/category/:categorySlug"
+                    element={
+                      <WithLayout>
+                        <CategoryLandingPage />
+                      </WithLayout>
+                    }
+                  />
+                  <Route
+                    path="/nominees/category/:categorySlug/:subSlug"
+                    element={
+                      <WithLayout>
+                        <SubcategoryPage />
                       </WithLayout>
                     }
                   />
