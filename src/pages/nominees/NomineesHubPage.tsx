@@ -169,6 +169,40 @@ export default function NomineesHubPage() {
             </Link>
           </motion.div>
 
+          {/* Explore by Region — region-first nominee architecture */}
+          <motion.section
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="mb-10"
+          >
+            <div className="flex items-end justify-between mb-4">
+              <h2 className="font-display text-xl md:text-2xl font-bold text-ivory">Explore by Region</h2>
+              <span className="text-xs text-ivory/50">5 African regions</span>
+            </div>
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3">
+              {[
+                { slug: "west-africa", name: "West Africa", tagline: "Coastal innovation" },
+                { slug: "east-africa", name: "East Africa", tagline: "Rift Valley vision" },
+                { slug: "north-africa", name: "North Africa", tagline: "Mediterranean heritage" },
+                { slug: "central-africa", name: "Central Africa", tagline: "Equatorial heart" },
+                { slug: "southern-africa", name: "Southern Africa", tagline: "Cape to Kilimanjaro" },
+              ].map((r) => (
+                <Link
+                  key={r.slug}
+                  to={`/nominees/${r.slug}`}
+                  className="group block p-4 rounded-2xl border border-gold/20 bg-charcoal-light/40 hover:border-gold/50 hover:bg-charcoal-light/70 transition-all"
+                >
+                  <div className="flex items-center justify-between mb-2">
+                    <h3 className="font-display text-base text-ivory group-hover:text-gold transition-colors">{r.name}</h3>
+                    <ArrowRight className="w-4 h-4 text-gold/60 group-hover:translate-x-0.5 transition-transform" />
+                  </div>
+                  <p className="text-[11px] text-ivory/55 italic">{r.tagline}</p>
+                </Link>
+              ))}
+            </div>
+          </motion.section>
+
+
 
 
           {/* Trending rail */}
