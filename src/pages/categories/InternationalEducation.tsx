@@ -2,6 +2,7 @@ import { DynamicCategoryPage } from "@/components/awards/DynamicCategoryPage";
 import { BrandedCategoryHero } from "@/components/awards/BrandedCategoryHero";
 import { BrandedDocumentaryPreview } from "@/components/awards/BrandedDocumentaryPreview";
 import { AnimatedActionWords } from "@/components/awards/AnimatedActionWords";
+import { BrandedNomineeDirectory } from "@/components/awards/BrandedNomineeDirectory";
 
 export default function InternationalEducationPage() {
   return (
@@ -33,6 +34,12 @@ export default function InternationalEducationPage() {
         description="See how global institutions and bilateral partners are building stronger, more equitable education systems across Africa."
         watchCtaHref="/media"
         imageAlt="Global partnership stories documentary preview"
+      />
+      <BrandedNomineeDirectory
+        theme="global"
+        categoryName="International & Bilateral Contributors to Education"
+        title="Live Global Partners"
+        description="Bilateral, multilateral and institutional partners verified by the NESA Nominee Research Corps."
       />
       <DynamicCategoryPage
         categoryTitle="International & Bilateral Contributors to Education"
