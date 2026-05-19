@@ -5,7 +5,7 @@
  * Aligned with the 4-tier award system:
  * - Blue Garnet (Competitive Excellence)
  * - Platinum (Institutional Leadership)
- * - Gold Special (2026 Cultural Impact)
+ * - Influencers Education Impact Award (2026)
  * - Lifetime (Africa Education Icon)
  */
 
@@ -356,7 +356,7 @@ export default function EDIMatrix() {
                 {[
                   { label: "Blue Garnet", desc: "Competitive Excellence", icon: "🏆", color: "border-blue-500/40 bg-blue-500/10" },
                   { label: "Platinum", desc: "Institutional Leadership", icon: "💎", color: "border-slate-400/40 bg-slate-400/10" },
-                  { label: "Gold Special", desc: "2026 Cultural Impact", icon: "🥇", color: "border-yellow-500/40 bg-yellow-500/10" },
+                  { label: "Influencers Award", desc: "2026 Cultural Impact", icon: "🥇", color: "border-yellow-500/40 bg-yellow-500/10" },
                   { label: "Lifetime", desc: "Icon Achievement", icon: "🏛", color: "border-purple-500/40 bg-purple-500/10" },
                 ].map((t) => (
                   <div key={t.label} className={`rounded-lg border ${t.color} p-3 text-center`}>

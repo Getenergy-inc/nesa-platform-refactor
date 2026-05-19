@@ -117,7 +117,7 @@ export const NOMINEES_2025: NomineeRow[] = [
 
   // ═══════════════════════════════════════════════════════════════════
   // CATEGORY 3: The Overall Best CSR for Education in Nigeria Award 2025 (302 nominees)
-  // Migrated from 2024 → 2025 | 25 subcategories + 3 Gold Special influencer subcategories
+  // Migrated from 2024 → 2025 | 25 subcategories + 3 Influencers Education Impact influencer subcategories
   // ═══════════════════════════════════════════════════════════════════
   [83,"The Overall Best CSR for Education in Nigeria Award 2025","N/A","Oil And Gas CSR in Education Award","Shell Nigeria","Nigeria","","Established the 'Shell Nigeria Education Initiative' to support STEM education."],
   [84,"The Overall Best CSR for Education in Nigeria Award 2025","N/A","Oil And Gas CSR in Education Award","Chevron Nigeria","Nigeria","","Developed the 'Chevron Niger Delta Partnership Initiative' for educational infrastructure."],

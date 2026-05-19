@@ -119,7 +119,7 @@ const CATEGORIES: CategoryCard[] = [
 const PATHWAY_STEPS = [
   { label: "Nomination", icon: Award, description: "Submit or re-nominate a cultural leader" },
   { label: "EDI Review", icon: ShieldCheck, description: "Education Development Index evaluation" },
-  { label: "Gold Special", icon: Star, description: "Gold Certificate of Recognition" },
+  { label: "Influencers Award", icon: Star, description: "Gold Certificate of Recognition" },
   { label: "Platinum", icon: CheckCircle2, description: "Platinum verification pathway" },
   { label: "Public Voting", icon: Users, description: "Community-validated recognition" },
   { label: "Blue Garnet", icon: Globe, description: "Africa Education Icon — Lifetime" },
