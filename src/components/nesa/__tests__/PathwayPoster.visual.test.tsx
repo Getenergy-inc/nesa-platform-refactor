@@ -15,7 +15,24 @@
  *    (320 → 1920px) without dropping the poster or its overlays.
  */
 
-import { describe, it, expect, beforeEach, afterEach } from "vitest";
+import { describe, it, expect, beforeAll, beforeEach, afterEach } from "vitest";
+
+// framer-motion's whileInView uses IntersectionObserver; jsdom doesn't ship one.
+beforeAll(() => {
+  if (typeof (globalThis as any).IntersectionObserver === "undefined") {
+    class IO {
+      observe() {}
+      unobserve() {}
+      disconnect() {}
+      takeRecords() { return []; }
+      root = null;
+      rootMargin = "";
+      thresholds = [];
+    }
+    (globalThis as any).IntersectionObserver = IO as unknown as typeof IntersectionObserver;
+    (window as any).IntersectionObserver = (globalThis as any).IntersectionObserver;
+  }
+});
 import { render, cleanup } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
 import { readFileSync, statSync } from "node:fs";
