@@ -923,6 +923,10 @@ const App = () => (
                     }
                   />
                   <Route
+                    path="/nominee/:slug"
+                    element={<NomineeSlugRedirect />}
+                  />
+                  <Route
                     path="/nominees/:slug"
                     element={
                       <WithLayout>
