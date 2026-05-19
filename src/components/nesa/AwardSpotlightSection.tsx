@@ -23,68 +23,113 @@ const pathways: PathwayVideoCardData[] = [
     category: "Lifetime Achievement",
     headline: "Who Will Be Crowned Africa Education Icon?",
     story:
-      "For two decades, Africa's most transformative education leaders have shaped learning, expanded access, and redefined opportunity across the continent. The Africa Education Icon Award honours those whose legacy inspires generations to come.",
-    videoId: "Hdu_qlFLfrQ",
-    videoTitle: "The Icon Show — Africa Education Legends",
-    posterAlt:
-      "Africa Education Icon — distinguished laureate holding the gold Africa trophy",
+      "Two decades of visionary leaders who reshaped learning, expanded access, and rewrote what is possible for African education. This is the lifetime stage.",
+    videoTitle: "Legacy Stories — The Africa Education Icon",
+    posterAlt: "Africa Education Icon — cinematic legacy storytelling",
     visualGradient: "from-gold/45 via-emerald-900/40 to-charcoal",
+    actionWords: [
+      "Legacy", "Impact", "Transformation", "Education for All",
+      "Leadership", "Generational Change", "Vision", "Empowerment",
+      "Excellence", "Opportunity", "Future Builders", "Lifelong Contribution",
+    ],
+    animatedPhrases: [
+      "Transforming Education Across Africa",
+      "Celebrating Lifelong Impact",
+      "Honouring Visionary Leaders",
+      "Building Africa's Learning Future",
+    ],
+    previewSummary:
+      "Watch how Africa's education leaders transformed generations across two decades.",
     primaryCta: { label: "Explore Icon Nominees", href: "/nominees/icon" },
-    secondaryCta: { label: "Nominate an Education Legend", href: "/nominate?category=icon" },
-    engagementCtaLabel: "Watch Legacy Stories",
+    secondaryCta: { label: "Nominate a Legend", href: "/nominate?category=icon" },
+    engagementCtaLabel: "Watch Story Preview",
   },
   {
     id: "csr",
     icon: Building2,
     accentLabel: "Corporate • Continental",
     category: "Corporate Recognition",
-    headline: "Who Will Emerge as Africa's Leading CSR for Education Company?",
+    headline: "Which Companies Are Rebuilding Africa's Classrooms?",
     story:
-      "Across Africa, visionary organisations are funding innovation, building schools, empowering teachers, and investing in the next generation of learners. Corporate Recognition celebrates companies creating measurable, lasting education impact.",
-    videoId: "DDREAU_bmRk",
-    videoTitle: "Corporate Impact — Rebuilding Africa's Classrooms",
-    posterAlt:
-      "Corporate Recognition — leaders supporting African students with technology and scholarships",
+      "From scholarships and infrastructure to technology and teacher empowerment — meet the corporations turning capital into measurable, lasting learning impact.",
+    videoTitle: "Corporate Impact — Funding the Future",
+    posterAlt: "Corporate Recognition — cinematic CSR storytelling",
     visualGradient: "from-emerald-800/55 via-emerald-900/30 to-charcoal",
+    actionWords: [
+      "Innovation", "Infrastructure", "Scholarships", "Inclusion",
+      "CSR Impact", "Technology", "Access", "Partnership",
+      "Opportunity", "Sustainability",
+    ],
+    animatedPhrases: [
+      "Funding Educational Transformation",
+      "Investing in Future Generations",
+      "Empowering African Learners",
+      "Corporate Impact Across Africa",
+    ],
+    previewSummary:
+      "Discover the corporate champions powering Africa's next learning revolution.",
     primaryCta: { label: "Explore Corporate Nominees", href: "/awards/csr-education" },
-    secondaryCta: { label: "Partner With NESA Africa", href: "/partners" },
-    engagementCtaLabel: "See Corporate Impact Stories",
+    secondaryCta: { label: "Become a Partner", href: "/partners" },
+    engagementCtaLabel: "View Impact Story",
   },
   {
     id: "influencer",
     icon: Megaphone,
     accentLabel: "Creators • Music • Sports",
     category: "Digital Voices",
-    headline: "Who Are Africa's Top Education Influencers?",
+    headline: "Whose Voice Is Moving Africa's Classrooms?",
     story:
-      "From music and sports to digital storytelling and online advocacy, influential African voices are using culture, creativity, and community to inspire learning. Digital Voices recognises creators turning influence into impact.",
-    videoId: "aP0SskrfioI",
-    videoTitle: "Digital Voices — Creators Inspiring Africa's Classrooms",
-    posterAlt:
-      "Digital Voices — African creators, musicians and athletes shaping education",
+      "Musicians, athletes, creators, and digital storytellers turning cultural influence into measurable advocacy for learning and youth empowerment.",
+    videoTitle: "Digital Voices — Influence Into Impact",
+    posterAlt: "Digital Voices — cinematic creator storytelling",
     visualGradient: "from-gold/35 via-orange-900/35 to-charcoal",
+    actionWords: [
+      "Influence", "Advocacy", "Creativity", "Awareness",
+      "Youth Power", "Social Impact", "Music", "Sports",
+      "Culture", "Inspiration",
+    ],
+    animatedPhrases: [
+      "Turning Influence Into Impact",
+      "Voices Shaping Education",
+      "Culture Driving Change",
+      "Creators Empowering Africa",
+    ],
+    previewSummary:
+      "Meet the cultural voices using reach to rewrite Africa's learning narrative.",
     primaryCta: { label: "Explore Gold Nominees", href: "/nominees/gold" },
-    secondaryCta: { label: "Vote for Influencers", href: "/vote" },
-    engagementCtaLabel: "Watch Impact Stories",
+    secondaryCta: { label: "Vote Now", href: "/vote" },
+    engagementCtaLabel: "Explore the Journey",
   },
   {
     id: "grants",
     icon: Globe2,
     accentLabel: "Global • Bilateral • Multilateral",
     category: "Global Partnerships",
-    headline: "Which Global Grants Are Powering Education in Africa?",
+    headline: "Which Global Allies Power Africa's Education Future?",
     story:
-      "Global partnerships are expanding educational opportunity across Africa through funding, innovation, and long-term investment. This recognition honours the institutions and allies helping shape the future of African education.",
-    videoId: "nQCXDX_X3rs",
-    videoTitle: "Global Partnerships — Powering Africa's Education Future",
-    posterAlt:
-      "Global Partnerships — bilateral and multilateral leaders backing African education",
+      "Bilateral grants, multilateral institutions, and global foundations expanding opportunity, innovation, and long-term investment across the continent.",
+    videoTitle: "Global Partnerships — Powering Africa's Future",
+    posterAlt: "Global Partnerships — cinematic alliance storytelling",
     visualGradient: "from-emerald-900/55 via-gold/15 to-charcoal",
+    actionWords: [
+      "Collaboration", "Grants", "Diplomacy", "Development",
+      "Global Impact", "SDGs", "Partnership", "International Support",
+      "Opportunity", "Innovation",
+    ],
+    animatedPhrases: [
+      "Global Support for African Education",
+      "Partnerships Creating Opportunity",
+      "Investing in Africa's Future",
+      "International Collaboration for Learning",
+    ],
+    previewSummary:
+      "Inside the global alliances expanding African education at continental scale.",
     primaryCta: { label: "Explore Global Partners", href: "/awards/grants-global-support" },
     secondaryCta: { label: "Become a Strategic Partner", href: "/partners" },
-    engagementCtaLabel: "View Partnership Impact",
+    engagementCtaLabel: "Watch Partnership Story",
   },
 ];
+
 
 const pathwayDefaults = Object.fromEntries(pathways.map((p) => [p.id, p]));
 
