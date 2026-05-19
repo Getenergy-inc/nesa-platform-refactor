@@ -18,6 +18,8 @@ export default function AfricaEducationIconPage() {
         />
         <link rel="canonical" href="https://nesaafrica.lovable.app/awards/africa-education-icon" />
       </Helmet>
+      <BreadcrumbJsonLd crumbs={[{ name: "Home", path: "/" }, { name: "Awards", path: "/awards" }, { name: "Africa Education Icon", path: "/awards/africa-education-icon" }]} />
+
 
       <BrandedCategoryHero
         theme="legacy"
