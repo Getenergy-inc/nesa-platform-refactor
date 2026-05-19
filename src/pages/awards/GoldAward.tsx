@@ -235,12 +235,12 @@ export default function GoldAward() {
         {/* TV Show Section */}
         {goldTVShow && <AwardTVShowSection show={goldTVShow} accentColor="gold" />}
 
-        {/* Award Categories - Gold Special Recognition (3 categories) */}
+        {/* Award Categories - Influencers Education Impact Award (3 categories) */}
         <AwardCategoriesGrid
           categories={goldCertificateCategories}
           tier="gold-special"
           accentColor="amber"
-          title="Gold Special Recognition Categories"
+          title="Influencers Education Impact Award Categories"
           description="3 categories honoring Africa\x27s education impact through Sports, Music, and Social Media."
         />
 

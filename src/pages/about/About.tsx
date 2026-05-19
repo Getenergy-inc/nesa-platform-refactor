@@ -82,7 +82,7 @@ const awardTiers = [
     borderColor: "border-slate-400/30",
   },
   {
-    title: "Gold Special Recognition",
+    title: "Influencers Education Impact Award",
     subtitle: "2026 Cultural Impact Edition",
     description: "Cultural and influence impact recognition for Sports, Music, and Social Media education advocacy. Editorially selected.",
     color: "from-yellow-400 to-amber-500",

@@ -20,7 +20,7 @@ const announcements = [
   },
   {
     id: 3,
-    title: "New: Gold Special Recognition 2026",
+    title: "New: Influencers Education Impact Award 2026",
     date: "Sports, Music & Social Media",
     highlight: false,
   },

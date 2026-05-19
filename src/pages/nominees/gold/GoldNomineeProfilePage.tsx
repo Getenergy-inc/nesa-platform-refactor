@@ -32,7 +32,7 @@ export default function GoldNomineeProfilePage() {
 
   const handleShare = async () => {
     const shareData = {
-      title: `${nominee.name} — NESA Africa Gold Special Recognition Nominee`,
+      title: `${nominee.name} — NESA Africa Influencers Education Impact Award Nominee`,
       text: nominee.summary,
       url: canonical,
     };
@@ -47,13 +47,13 @@ export default function GoldNomineeProfilePage() {
   return (
     <>
       <Helmet>
-        <title>{`${nominee.name} | NESA Africa Gold Special Recognition Nominee`}</title>
+        <title>{`${nominee.name} | NESA Africa Influencers Education Impact Award Nominee`}</title>
         <meta
           name="description"
           content={`Learn about ${nominee.name}, their education advocacy impact, nomination category, and contribution to Education for All across Africa.`}
         />
         <link rel="canonical" href={canonical} />
-        <meta property="og:title" content={`${nominee.name} — Gold Special Recognition`} />
+        <meta property="og:title" content={`${nominee.name} — Influencers Education Impact Award`} />
         <meta property="og:description" content={nominee.summary} />
         <meta property="og:url" content={canonical} />
         <meta property="og:type" content="profile" />
@@ -77,7 +77,7 @@ export default function GoldNomineeProfilePage() {
           <NomineeBreadcrumbs
             items={[
               { label: "Nominees", href: "/nominees" },
-              { label: "Gold Special Recognition", href: "/nominees/gold-special-recognition" },
+              { label: "Influencers Education Impact Award", href: "/nominees/gold-special-recognition" },
               { label: category.shortName, href: `/nominees/gold-special-recognition/${category.slug}` },
               { label: nominee.name },
             ]}
@@ -98,7 +98,7 @@ export default function GoldNomineeProfilePage() {
                   <img src={nominee.image} alt={nominee.name} className="w-full h-full object-cover" />
                   <div className="absolute inset-0 bg-gradient-to-t md:bg-gradient-to-r from-charcoal-light via-charcoal-light/30 to-transparent" />
                   <Badge className="absolute top-4 left-4 bg-charcoal/80 backdrop-blur text-gold border-gold/40">
-                    <Sparkles className="w-3 h-3 mr-1" /> Gold Special Recognition
+                    <Sparkles className="w-3 h-3 mr-1" /> Influencers Education Impact Award
                   </Badge>
                 </div>
                 {/* Content */}

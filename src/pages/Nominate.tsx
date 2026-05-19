@@ -58,7 +58,7 @@ type NominateTier = "blue-garnet" | "platinum" | "gold-special" | "lifetime";
 const TIER_TABS: { value: NominateTier; label: string; icon: string; disabled?: boolean }[] = [
   { value: "blue-garnet", label: "Blue Garnet", icon: "🏆" },
   { value: "platinum", label: "Platinum", icon: "💎" },
-  { value: "gold-special", label: "Gold Special (2026)", icon: "🥇" },
+  { value: "gold-special", label: "Influencers Education Impact Award (2026)", icon: "🥇" },
   { value: "lifetime", label: "Lifetime", icon: "🏛", disabled: true },
 ];
 
@@ -68,7 +68,7 @@ const SCOPE_OPTIONS: { value: CategoryScope; label: string }[] = [
   { value: "INTERNATIONAL", label: "International" },
 ];
 
-// Social media platforms for Gold Special Social Media category
+// Social media platforms for Influencers Award Social Media category
 const SOCIAL_PLATFORMS = ["Instagram", "TikTok", "YouTube", "X", "Facebook", "LinkedIn"];
 
 /**
@@ -137,7 +137,7 @@ export default function Nominate() {
   const [lastSaved, setLastSaved] = useState<Date | null>(null);
   const [showConfirmDialog, setShowConfirmDialog] = useState(false);
 
-  // Gold Special Social Media fields
+  // Influencers Award Social Media fields
   const [socialPlatforms, setSocialPlatforms] = useState<Record<string, string>>({});
   const [countryOfOrigin, setCountryOfOrigin] = useState("");
   const [regionOfOrigin, setRegionOfOrigin] = useState("");
@@ -825,7 +825,7 @@ export default function Nominate() {
                     </div>
                   </div>
 
-                  {/* Gold Special extra fields */}
+                  {/* Influencers Award extra fields */}
                   {selectedTier === "gold-special" && (
                     <div className="space-y-4 rounded-lg border bg-muted/20 p-4">
                       <h4 className="font-semibold text-sm">Additional Information</h4>

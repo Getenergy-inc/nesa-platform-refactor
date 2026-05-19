@@ -19,7 +19,7 @@ import internationalImg from "@/assets/categories/international.jpg";
 import diasporaImg from "@/assets/categories/diaspora.jpg";
 import iconAwardImg from "@/assets/categories/icon-award.jpg";
 
-// Gold Special Recognition nominee images
+// Influencers Education Impact Award nominee images
 import sportsNomineeImg from "@/assets/nominees/sports-nominee-1.jpg";
 import musicNomineeImg from "@/assets/nominees/music-nominee-1.jpg";
 import socialNomineeImg from "@/assets/nominees/social-nominee-1.jpg";
@@ -76,7 +76,7 @@ export const CATEGORY_IMAGES: Record<string, string> = {
   // Category 17 - Africa Education Icon Award (2006–2026)
   "africa-education-icon-award": iconAwardImg,
 
-  // Gold Special Recognition — 2026 Edition
+  // Influencers Education Impact Award 2026 Edition
   "africa-sports-education-impact": sportsNomineeImg,
   "africa-music-education-impact": musicNomineeImg,
   "africa-social-media-education-impact": socialNomineeImg,

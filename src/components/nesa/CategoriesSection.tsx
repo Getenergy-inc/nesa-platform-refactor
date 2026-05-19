@@ -29,7 +29,7 @@ const scopeStyles: Record<string, { label: string; className: string }> = {
 const tierBadgeStyles: Record<string, { label: string; className: string }> = {
   "blue-garnet": { label: "Blue Garnet", className: "border-blue-500/30 text-blue-400 bg-blue-500/10" },
   platinum: { label: "Platinum", className: "border-slate-400/30 text-slate-300 bg-slate-500/10" },
-  "gold-special": { label: "Gold Special 2026", className: "border-yellow-500/30 text-yellow-400 bg-yellow-500/10" },
+  "gold-special": { label: "Influencers Education Impact Award 2026", className: "border-yellow-500/30 text-yellow-400 bg-yellow-500/10" },
   icon: { label: "Lifetime", className: "border-purple-500/30 text-purple-400 bg-purple-500/10" },
 };
 
@@ -247,7 +247,7 @@ export function CategoriesSection() {
         {/* ═══ GROUP 4: GOLD SPECIAL RECOGNITION — 2026 Edition ═══ */}
         {groups.goldSpecial.length > 0 && (
           <motion.div className="mb-10" initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }}>
-            <TierGroupHeader icon={Star} title="Gold Special Recognition — 2026 Edition" subtitle="Cultural impact recognition" count={groups.goldSpecial.length} color="bg-yellow-600" />
+            <TierGroupHeader icon={Star} title="Influencers Education Impact Award 2026 Edition" subtitle="Cultural impact recognition" count={groups.goldSpecial.length} color="bg-yellow-600" />
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
               {groups.goldSpecial.map((cat, i) => (
                 <motion.div key={cat.id} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.04 }} viewport={{ once: true }}>

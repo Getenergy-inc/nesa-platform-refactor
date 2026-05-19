@@ -65,7 +65,7 @@ export function NESALandingPage() {
           <AwardSpotlightSection />
         </LazySection>
 
-        {/* ═══ 2c. Gold Special Recognition — 2026 Edition ═══ */}
+        {/* ═══ 2c. Influencers Education Impact Award 2026 Edition ═══ */}
         <LazySection>
           <GoldSpecialRecognitionSection />
         </LazySection>

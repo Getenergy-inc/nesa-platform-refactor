@@ -107,7 +107,7 @@ const CATEGORY_PATHWAYS = [
   },
   {
     icon: Sparkles,
-    title: "Gold Special Recognition",
+    title: "Influencers Education Impact Award",
     subtitle: "2026 Edition",
     tagline: "Where culture meets education.",
     selection: "Public participation / visibility-led",
@@ -252,7 +252,7 @@ const PHASE_1_TIMELINE: PhaseItem[] = [
     phase: "Gold Certificate Nominations Close",
     period: "10 July 2026",
     description:
-      "Final deadline for Gold Special Recognition entries before voting and category review.",
+      "Final deadline for Influencers Education Impact Award entries before voting and category review.",
     tags: ["Pipeline Lock-In", "Category Review", "Voting Readiness"],
     agc: true,
     icon: FileCheck,
@@ -281,7 +281,7 @@ const PHASE_1_TIMELINE: PhaseItem[] = [
     phase: "Gold Certificate Winners Show",
     period: "22 August 2026",
     description:
-      "Official announcement of Gold Special Recognition — 2026 Edition winners.",
+      "Official announcement of Influencers Education Impact Award 2026 Edition winners.",
     tags: ["Amplification", "Media Assets", "Winner Visibility"],
     agc: true,
     icon: Tv,

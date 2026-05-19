@@ -120,7 +120,7 @@ export default function NomineesHubPage() {
             </form>
           </motion.div>
 
-          {/* Gold Special Recognition feature banner */}
+          {/* Influencers Education Impact Award feature banner */}
           <motion.div
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
@@ -137,7 +137,7 @@ export default function NomineesHubPage() {
                 <div className="flex-1">
                   <Badge className="mb-2 bg-gold text-charcoal font-bold">2026 EDITION</Badge>
                   <h3 className="font-display text-xl md:text-2xl font-bold text-ivory group-hover:text-gold transition-colors mb-1">
-                    Gold Special Recognition — Cultural Impact
+                    Influencers Education Impact Award — Cultural Impact
                   </h3>
                   <p className="text-ivory/70 text-sm md:text-base">
                     Sports, Music & Social Media leaders advancing Education across Africa & the Diaspora.

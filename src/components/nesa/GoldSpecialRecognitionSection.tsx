@@ -1,5 +1,5 @@
 /**
- * Gold Special Recognition — 2026 Edition
+ * Influencers Education Impact Award 2026 Edition
  * Cultural Impact Recognition · 3 Categories
  * 
  * Premium gallery with immersive category cards, large nominee showcases,
@@ -119,7 +119,7 @@ const CATEGORIES: CategoryCard[] = [
 const PATHWAY_STEPS = [
   { label: "Nomination", icon: Award, description: "Submit or re-nominate a cultural leader" },
   { label: "EDI Review", icon: ShieldCheck, description: "Education Development Index evaluation" },
-  { label: "Gold Special", icon: Star, description: "Gold Certificate of Recognition" },
+  { label: "Influencers Award", icon: Star, description: "Gold Certificate of Recognition" },
   { label: "Platinum", icon: CheckCircle2, description: "Platinum verification pathway" },
   { label: "Public Voting", icon: Users, description: "Community-validated recognition" },
   { label: "Blue Garnet", icon: Globe, description: "Africa Education Icon — Lifetime" },
@@ -284,7 +284,7 @@ function ProfileModal({
           {/* EDI compliance */}
           <div className="bg-primary/5 rounded-xl p-3 border border-primary/10">
             <p className="text-[11px] text-white/40 leading-relaxed">
-              <span className="text-primary font-medium">EDI Compliance:</span> All Gold Special Recognition nominees are evaluated against the Education Development Index (EDI) Matrix. Verified nominees have passed measurable impact assessment.
+              <span className="text-primary font-medium">EDI Compliance:</span> All Influencers Education Impact Award nominees are evaluated against the Education Development Index (EDI) Matrix. Verified nominees have passed measurable impact assessment.
             </p>
           </div>
 
@@ -645,7 +645,7 @@ export function GoldSpecialRecognitionSection() {
           </div>
           <div className="min-w-0">
             <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white font-serif leading-tight tracking-tight">
-              Gold Special Recognition — 2026 Edition
+              Influencers Education Impact Award 2026 Edition
             </h1>
             <p className="text-white/50 text-sm md:text-base mt-1">
               Cultural impact recognition · 3 categories
