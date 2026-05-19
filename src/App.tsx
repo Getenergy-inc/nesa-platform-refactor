@@ -654,11 +654,11 @@ const App = () => (
                   />
                   <Route
                     path="/category/africa-education-icon"
-                    element={
-                      <WithLayout>
-                        <AfricaEducationIcon />
-                      </WithLayout>
-                    }
+                    element={<Navigate to="/nominees/africa-education-icon-award" replace />}
+                  />
+                  <Route
+                    path="/nominees/category/africa-education-icon-award"
+                    element={<Navigate to="/nominees/africa-education-icon-award" replace />}
                   />
 
                   {/* Nominee Response Routes */}
