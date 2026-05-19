@@ -133,35 +133,51 @@ function NomineeGrid({ items, region }: { items: ReturnType<typeof getNGOsByRegi
     <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
       {items.map((n) => (
         <Link key={n.id} to={`/nominees/best-ngo-contribution-to-education/profile/${n.slug}`}>
-          <Card className="group h-full border-gold/10 bg-white/5 p-5 hover:border-gold/40 hover:bg-white/[0.08] transition">
-            <div className="flex items-start justify-between mb-3">
-              {n.verificationStatus === "verified" ? (
-                <Badge className="bg-emerald-500/15 text-emerald-300 border-emerald-500/30">
-                  <ShieldCheck className="mr-1 h-3 w-3" /> Verified
+          <Card className="group h-full overflow-hidden border-gold/10 bg-white/5 hover:border-gold/40 hover:bg-white/[0.08] transition flex flex-col">
+            {/* Visual identity */}
+            <div className="relative h-40">
+              <NomineeAvatar
+                name={n.name}
+                src={n.logoUrl || n.imageUrl}
+                kind="organization"
+                shape="square"
+                interactive
+                context={n.country}
+              />
+              <div className="absolute top-2 left-2">
+                {n.verificationStatus === "verified" ? (
+                  <Badge className="bg-emerald-500/20 text-emerald-200 border-emerald-500/40 backdrop-blur-sm">
+                    <ShieldCheck className="mr-1 h-3 w-3" /> Verified
+                  </Badge>
+                ) : (
+                  <Badge variant="outline" className="border-amber-400/50 text-amber-200 bg-black/40 backdrop-blur-sm">
+                    Under review
+                  </Badge>
+                )}
+              </div>
+              <div className="absolute top-2 right-2">
+                <Badge variant="outline" className="border-gold/40 text-gold text-xs bg-black/40 backdrop-blur-sm">
+                  {n.country}
                 </Badge>
-              ) : (
-                <Badge variant="outline" className="border-amber-500/30 text-amber-300">
-                  Under review
-                </Badge>
-              )}
-              <Badge variant="outline" className="border-gold/30 text-gold text-xs">
-                {n.country}
-              </Badge>
+              </div>
             </div>
-            <h3 className="font-serif text-lg font-bold text-white mb-1 group-hover:text-gold transition">
-              {n.name}
-            </h3>
-            <p className="text-xs text-white/50 mb-3 uppercase tracking-wide">
-              {NGO_SUBCATEGORIES.find((s) => s.slug === n.subcategory)?.name}
-            </p>
-            <p className="text-sm text-white/70 line-clamp-3 mb-4">{n.impactSummary}</p>
-            <div className="flex gap-2">
-              <Button size="sm" className="bg-gold text-black hover:bg-gold/90 flex-1">
-                Vote
-              </Button>
-              <Button size="sm" variant="outline" className="border-gold/30 text-gold hover:bg-gold/10 flex-1">
-                Profile
-              </Button>
+
+            <div className="p-5 flex flex-col flex-1">
+              <h3 className="font-serif text-lg font-bold text-white mb-1 group-hover:text-gold transition">
+                {n.name}
+              </h3>
+              <p className="text-xs text-white/50 mb-3 uppercase tracking-wide">
+                {NGO_SUBCATEGORIES.find((s) => s.slug === n.subcategory)?.name}
+              </p>
+              <p className="text-sm text-white/70 line-clamp-3 mb-4 flex-1">{n.impactSummary}</p>
+              <div className="flex gap-2">
+                <Button size="sm" className="bg-gold text-black hover:bg-gold/90 flex-1">
+                  Vote
+                </Button>
+                <Button size="sm" variant="outline" className="border-gold/30 text-gold hover:bg-gold/10 flex-1">
+                  Profile
+                </Button>
+              </div>
             </div>
           </Card>
         </Link>
