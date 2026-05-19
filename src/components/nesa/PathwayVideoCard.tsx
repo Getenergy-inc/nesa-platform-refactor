@@ -15,6 +15,13 @@ import type { LucideIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useIsMobile } from "@/hooks/use-mobile";
 
+
+// Feature flag: enable real YouTube embeds. Disabled by default so cards keep
+// their cinematic placeholder. Set VITE_ENABLE_YT_EMBEDS=true to opt in.
+// A card only embeds when the flag is on AND it has a videoId.
+const ytEmbedsEnabled =
+  String(import.meta.env.VITE_ENABLE_YT_EMBEDS ?? "").toLowerCase() === "true";
+
 export type PathwayCardCTA = { label: string; href: string };
 
 export type PathwayVideoCardData = {
