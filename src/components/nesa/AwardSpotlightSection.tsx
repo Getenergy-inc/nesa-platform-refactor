@@ -25,6 +25,7 @@ import iconImg from "@/assets/pathways/icon.jpg";
 import csrImg from "@/assets/pathways/csr.jpg";
 import influencerImg from "@/assets/pathways/influencer.jpg";
 import grantsImg from "@/assets/pathways/grants.jpg";
+import impactBgImg from "@/assets/rebuild-school-impact.jpg";
 
 type Pathway = {
   id: string;
