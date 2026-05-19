@@ -58,7 +58,12 @@ export function NESALandingPage() {
         {/* ═══ 2. Trust Strip ═══ */}
         <TrustLogosStrip />
 
-        {/* ═══ 2b. Brand Narrative — What NESA Africa Represents ═══ */}
+        {/* ═══ 2b. Award Spotlight — Nominate and Vote ═══ */}
+        <LazySection>
+          <AwardSpotlightSection />
+        </LazySection>
+
+        {/* ═══ 2c. Brand Narrative — What NESA Africa Represents ═══ */}
         <LazySection>
           <BrandNarrativeSection />
         </LazySection>
@@ -67,11 +72,6 @@ export function NESALandingPage() {
 
         {/* ═══ 4. Countdown ═══ */}
         <CountdownSection />
-        
-        {/* ═══ 5b. Award Spotlight — 2026 Prestige Pillars ═══ */}
-        <LazySection>
-          <AwardSpotlightSection />
-        </LazySection>
 
         {/* ═══ 6. Award Categories ═══ */}
         <LazySection>
