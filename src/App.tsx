@@ -66,6 +66,7 @@ import SCEF from "./pages/about/SCEF";
 import Awards from "./pages/Awards";
 import Impact from "./pages/Impact";
 import Videos from "./pages/Videos";
+import EarnVotingCoins from "./pages/EarnVotingCoins";
 
 // Award Pages
 import PlatinumAward from "./pages/awards/PlatinumAward";
@@ -286,6 +287,16 @@ const App = () => (
                     element={
                       <WithLayout>
                         <Programs />
+                      </WithLayout>
+                    }
+                  />
+
+                  {/* Earn Voting Coins */}
+                  <Route
+                    path="/earn-voting-coins"
+                    element={
+                      <WithLayout>
+                        <EarnVotingCoins />
                       </WithLayout>
                     }
                   />

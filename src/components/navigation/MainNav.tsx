@@ -47,6 +47,7 @@ import { MAIN_NAV, MOBILE_NAV, type NavItem } from "@/config/navigation";
 import nesaStamp from "@/assets/nesa-stamp.jpeg";
 import { CVOFlashMessage, CVOMessageTrigger } from "@/components/nesa/cvo";
 import { LanguageSwitcher } from "@/components/i18n";
+import { EarnCoinsBadge } from "@/components/rewards/EarnCoinsBadge";
 
 // ============================================================================
 // DESKTOP NAVIGATION
@@ -570,6 +571,9 @@ export function MainNav() {
 
           {/* Right Side */}
           <div className="flex items-center gap-1 sm:gap-2 shrink-0">
+            {/* Earn Voting Coins */}
+            <EarnCoinsBadge />
+
             {/* Language Selector */}
             <LanguageSwitcher className="hidden sm:flex" />
 
