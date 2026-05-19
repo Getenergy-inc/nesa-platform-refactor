@@ -171,7 +171,7 @@ import {
   OrderConfirmation,
   BulkOrders,
 } from "./pages/shop";
-import { SponsorLanding } from "./pages/sponsors";
+import { SponsorLanding, SponsorsHub } from "./pages/sponsors";
 import Wallet from "./pages/Wallet";
 import EndorseNESA from "./pages/EndorseNESA";
 import RegionDashboard from "./pages/region/RegionDashboard";
@@ -1177,6 +1177,7 @@ const App = () => (
                       </WithLayout>
                     }
                   />
+                  <Route path="/sponsors" element={<SponsorsHub />} />
                   <Route path="/sponsors/:slug" element={<SponsorLanding />} />
                   <Route
                     path="/results"
