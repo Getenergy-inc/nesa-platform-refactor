@@ -237,42 +237,80 @@ export function AwardSpotlightSection() {
           </div>
         </motion.div>
 
-        {/* ════ 2. PATHWAY CARDS — Compact GSR-style template ════ */}
+        {/* ════ 2. PATHWAY CARDS — 2x2 GRID ════ */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-5 sm:gap-6 mb-14">
           {merged.map((card, idx) => {
             const Icon = card.icon;
+            const VisualIcon = card.visualIcon;
+
             return (
               <motion.div
                 key={card.id}
-                initial={{ opacity: 0, y: 20 }}
+                initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: idx * 0.06 }}
+                transition={{ duration: 0.6, delay: idx * 0.08 }}
               >
                 <Link to={card.href} className="group block h-full">
-                  <article className="relative h-full rounded-2xl bg-charcoal-light/30 ring-1 ring-gold/20 hover:ring-gold/60 hover:bg-charcoal-light/50 transition-all duration-300 p-5 sm:p-6">
-                    {/* Compact header: icon + title + subtitle (GSR template) */}
-                    <div className="flex items-start gap-4">
-                      <div className="shrink-0 w-14 h-14 rounded-2xl bg-gold flex items-center justify-center shadow-lg shadow-gold/20">
-                        <Icon className="w-7 h-7 text-charcoal" strokeWidth={2.5} />
+                  <article className="relative h-full overflow-hidden rounded-3xl ring-1 ring-gold/25 hover:ring-gold/70 shadow-[0_10px_50px_-15px_hsl(var(--gold)/0.25)] hover:shadow-[0_20px_60px_-15px_hsl(var(--gold)/0.5)] transition-all duration-500 hover:-translate-y-2 bg-charcoal">
+                    {/* ───── Visual / Image area (top half) ───── */}
+                    <div className="relative h-52 sm:h-64 overflow-hidden">
+                      <img
+                        src={card.image}
+                        alt={card.imageAlt}
+                        loading="lazy"
+                        className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+                      />
+                      {/* Brand tint overlays — keeps NESA charcoal/gold identity */}
+                      <div className={`absolute inset-0 bg-gradient-to-br ${card.visualGradient} mix-blend-multiply opacity-70`} />
+                      <div className="absolute inset-0 bg-charcoal/25" />
+                      <div className="text-gold absolute inset-0">
+                        <PatternOverlay />
                       </div>
-                      <div className="min-w-0 flex-1">
-                        <h3 className="font-display text-lg sm:text-xl font-bold text-white leading-tight tracking-tight group-hover:text-gold transition-colors">
-                          {card.headline}
-                        </h3>
-                        <p className="text-white/50 text-xs sm:text-sm mt-1">
-                          {card.awardLine}
-                        </p>
+
+                      {/* Floating brand icon badge */}
+                      <div className="absolute bottom-4 right-4 h-12 w-12 rounded-2xl bg-charcoal/70 backdrop-blur-md border border-gold/40 flex items-center justify-center shadow-lg">
+                        <VisualIcon className="h-6 w-6 text-gold" strokeWidth={1.6} />
                       </div>
+
+                      {/* Accent label */}
+                      <div className="absolute top-4 left-4">
+                        <span className="px-2.5 py-1 rounded-full bg-charcoal/70 backdrop-blur-md border border-gold/30 text-[10px] font-semibold text-gold uppercase tracking-wider">
+                          {card.accentLabel}
+                        </span>
+                      </div>
+
+                      {/* Bottom fade into content */}
+                      <div className="absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-charcoal to-transparent" />
                     </div>
 
-                    {/* Description + CTA */}
-                    <p className="text-white/70 text-sm leading-relaxed mt-4">
-                      {card.description}
-                    </p>
-                    <div className="inline-flex items-center gap-2 text-gold text-sm font-semibold mt-4 group-hover:gap-3 transition-all">
-                      {card.cta}
-                      <ArrowRight className="h-4 w-4" />
+                    {/* ───── Content (bottom half) ───── */}
+                    <div className="relative p-6 sm:p-7">
+                      <div className="flex items-start gap-3 mb-4">
+                        <div className="inline-flex items-center justify-center h-11 w-11 rounded-xl bg-gradient-to-br from-gold to-gold-dark shadow-lg shrink-0">
+                          <Icon className="h-5 w-5 text-charcoal" strokeWidth={2} />
+                        </div>
+                        <span className="inline-block self-center px-2.5 py-1 rounded-full bg-emerald-900/40 border border-emerald-500/30 text-emerald-200 text-[10px] font-bold uppercase tracking-widest">
+                          {card.category}
+                        </span>
+                      </div>
+
+                      <h3 className="font-display text-xl sm:text-2xl font-bold text-white mb-2 group-hover:text-gold transition-colors leading-tight">
+                        {card.headline}
+                      </h3>
+
+                      <p className="text-gold font-semibold text-xs sm:text-sm mb-3 leading-snug">
+                        {card.awardLine}
+                      </p>
+
+                      <p className="text-white/70 text-sm leading-relaxed mb-5">
+                        {card.description}
+                      </p>
+
+                      <div className="inline-flex items-center gap-2 text-gold text-sm font-semibold group-hover:gap-3 transition-all">
+                        {card.cta}
+                        <ArrowRight className="h-4 w-4" />
+                      </div>
                     </div>
                   </article>
                 </Link>
