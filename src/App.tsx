@@ -611,6 +611,31 @@ const App = () => (
                       </WithLayout>
                     }
                   />
+                  {/* NGO 5-Africa Regional ecosystem */}
+                  <Route
+                    path="/nominees/best-ngo-contribution-to-education"
+                    element={
+                      <WithLayout>
+                        <NGOHubPage />
+                      </WithLayout>
+                    }
+                  />
+                  <Route
+                    path="/nominees/best-ngo-contribution-to-education/profile/:slug"
+                    element={
+                      <WithLayout>
+                        <NGONomineeProfile />
+                      </WithLayout>
+                    }
+                  />
+                  <Route
+                    path="/nominees/best-ngo-contribution-to-education/:region"
+                    element={
+                      <WithLayout>
+                        <NGORegionalPage />
+                      </WithLayout>
+                    }
+                  />
                   <Route
                     path="/category/stem-education-africa"
                     element={
