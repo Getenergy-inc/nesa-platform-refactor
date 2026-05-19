@@ -48,6 +48,7 @@ import nesaStamp from "@/assets/nesa-stamp.jpeg";
 import { CVOFlashMessage, CVOMessageTrigger } from "@/components/nesa/cvo";
 import { LanguageSwitcher } from "@/components/i18n";
 import { EarnCoinsBadge } from "@/components/rewards/EarnCoinsBadge";
+import { EarnAGCNavItem } from "@/components/navigation/EarnAGCNavItem";
 
 // ============================================================================
 // DESKTOP NAVIGATION
