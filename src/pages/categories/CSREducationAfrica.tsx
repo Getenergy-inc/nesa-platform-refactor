@@ -1,10 +1,29 @@
 import { DynamicCategoryPage } from "@/components/awards/DynamicCategoryPage";
+import { BrandedCategoryHero } from "@/components/awards/BrandedCategoryHero";
 
 export default function CSREducationAfricaPage() {
   return (
-    <DynamicCategoryPage 
-      categoryTitle="Best CSR in Education (Africa Regional)" 
-      nominationType="CSR Africa"
-    />
+    <>
+      <BrandedCategoryHero
+        theme="corporate"
+        headlineLead="Who Will Emerge as Africa's"
+        headlineAccent="Leading CSR for Education Company?"
+        description="Across Africa, visionary corporations are funding innovation, supporting schools, empowering educators, and investing in future generations through education impact initiatives."
+        tags={["Innovation", "Infrastructure", "Scholarships", "Inclusion", "CSR Impact", "Technology", "Access", "Partnership"]}
+        stats={[
+          { value: "Sustainable", label: "Education Impact" },
+          { value: "Future", label: "Investing in Generations" },
+          { value: "Continental", label: "Corporate Impact Across Africa" },
+        ]}
+        primaryCta={{ label: "Explore Corporate Nominees", href: "/nominees?category=Best%20CSR%20in%20Education%20(Africa%20Regional)" }}
+        secondaryCta={{ label: "Partner With NESA", href: "/partners" }}
+        watchCta={{ label: "See Corporate Impact Stories", href: "/media" }}
+        imageAlt="Best CSR for Education — corporate impact across Africa"
+      />
+      <DynamicCategoryPage
+        categoryTitle="Best CSR in Education (Africa Regional)"
+        nominationType="CSR Africa"
+      />
+    </>
   );
 }
