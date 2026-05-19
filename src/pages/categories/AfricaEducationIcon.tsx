@@ -5,6 +5,7 @@ import { BrandedDocumentaryPreview } from "@/components/awards/BrandedDocumentar
 import { AnimatedActionWords } from "@/components/awards/AnimatedActionWords";
 import { BrandedNomineeDirectory } from "@/components/awards/BrandedNomineeDirectory";
 import { IconSubcategoryNavGrid } from "@/components/awards/IconSubcategoryNavGrid";
+import { BreadcrumbJsonLd } from "@/components/seo/BreadcrumbJsonLd";
 
 export default function AfricaEducationIconPage() {
   return (
