@@ -276,9 +276,6 @@ export default function LandingV2() {
           </section>
         </main>
 
-        <NESAFooter />
-        <MobileBottomNav />
-
         {/* Mobile sticky CTA */}
         <div className="fixed bottom-16 left-0 right-0 z-40 px-4 pb-2 lg:hidden">
           <Link to="/nominate" className="block">
@@ -287,7 +284,8 @@ export default function LandingV2() {
             </Button>
           </Link>
         </div>
-      </div>
+        </div>
+      </PublicLayout>
     </>
   );
 }
