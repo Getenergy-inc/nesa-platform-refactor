@@ -225,6 +225,119 @@ Deno.serve(async (req) => {
       return ok({ uploadUrl: data.signedUrl, token: data.token, filePath });
     }
 
+    // ============================================================
+    // POST /uploads/media/validate - Server-side validated image upload
+    // multipart/form-data: file, kind (logo|photo|cover|evidence), nomineeId?
+    // ============================================================
+    if (action === "media" && subAction === "validate" && req.method === "POST") {
+      const form = await req.formData();
+      const file = form.get("file");
+      const kind = String(form.get("kind") || "photo");
+      const nomineeId = (form.get("nomineeId") as string) || null;
+      const altText = (form.get("altText") as string) || null;
+
+      if (!(file instanceof File)) return err("file is required (multipart)");
+      if (!["logo", "photo", "cover", "evidence"].includes(kind)) {
+        return err("kind must be logo|photo|cover|evidence");
+      }
+
+      // Size limit (declared)
+      if (file.size > MAX_IMAGE_BYTES) {
+        return err(`File too large. Max ${MAX_IMAGE_BYTES / 1024 / 1024}MB`, 413);
+      }
+
+      const bytes = new Uint8Array(await file.arrayBuffer());
+
+      // Format via magic bytes (don't trust client mimeType)
+      const probed = probeImage(bytes);
+      if (!probed || !IMAGE_MIME.has(probed.mime)) {
+        return err("Unsupported or corrupt image. Allowed: JPEG, PNG, WebP, GIF", 415);
+      }
+
+      // Dimensions
+      const { width, height, mime } = probed;
+      if (!width || !height) {
+        return err("Could not determine image dimensions", 422);
+      }
+      if (width < MIN_DIM || height < MIN_DIM) {
+        return err(`Image too small. Minimum ${MIN_DIM}px per side`, 422);
+      }
+      if (width > MAX_DIM || height > MAX_DIM) {
+        return err(`Image too large. Max ${MAX_DIM}px per side`, 422);
+      }
+      const aspect = width / height;
+      if (aspect < MIN_ASPECT || aspect > MAX_ASPECT) {
+        return err(`Aspect ratio ${aspect.toFixed(2)} out of range (${MIN_ASPECT}–${MAX_ASPECT})`, 422);
+      }
+
+      // Duplicate detection via SHA-256
+      const fileHash = await sha256Hex(bytes);
+
+      // Service-role client for DB + Storage writes
+      const admin = createClient(
+        Deno.env.get("SUPABASE_URL")!,
+        Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!,
+      );
+
+      const { data: existing } = await admin
+        .from("media_assets")
+        .select("id, public_url, file_path, media_status, media_verified")
+        .eq("file_hash", fileHash)
+        .maybeSingle();
+
+      if (existing) {
+        return ok({
+          duplicate: true,
+          asset: existing,
+          message: "Identical image already exists",
+        }, 200);
+      }
+
+      // Upload to bucket
+      const ext = mime.split("/")[1].replace("jpeg", "jpg");
+      const filePath = `${nomineeId || "anon"}/${kind}/${fileHash.slice(0, 16)}.${ext}`;
+      const { error: upErr } = await admin.storage
+        .from("nominee-media")
+        .upload(filePath, bytes, { contentType: mime, upsert: false });
+      if (upErr && !String(upErr.message).includes("already exists")) {
+        return err(`Storage upload failed: ${upErr.message}`, 500);
+      }
+
+      const publicUrl = `${Deno.env.get("SUPABASE_URL")}/storage/v1/object/public/nominee-media/${filePath}`;
+      const score = qualityScore(width, height, mime, bytes.length);
+
+      const { data: inserted, error: insErr } = await admin
+        .from("media_assets")
+        .insert({
+          owner_user_id: userId,
+          nominee_id: nomineeId,
+          kind,
+          bucket: "nominee-media",
+          file_path: filePath,
+          public_url: publicUrl,
+          mime_type: mime,
+          file_size_bytes: bytes.length,
+          width,
+          height,
+          aspect_ratio: Number(aspect.toFixed(3)),
+          file_hash: fileHash,
+          quality_score: score,
+          media_status: "verified",
+          media_verified: true,
+          alt_text: altText,
+        })
+        .select()
+        .single();
+
+      if (insErr) return err(`Registry insert failed: ${insErr.message}`, 500);
+
+      return ok({
+        duplicate: false,
+        asset: inserted,
+        validation: { width, height, aspect: Number(aspect.toFixed(3)), mime, qualityScore: score },
+      }, 201);
+    }
+
     return err("Not found", 404);
   } catch (error: unknown) {
     console.error("Uploads function error:", error);
