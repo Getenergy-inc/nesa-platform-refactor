@@ -77,16 +77,7 @@ export function TrophyHeroSection() {
         <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
           {/* Left: Welcome Content */}
           <div className="order-2 lg:order-1 text-center lg:text-left">
-            {/* Season Badge */}
-            <motion.div
-              initial={{ opacity: 0, y: 12 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.2 }}
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/8 backdrop-blur-sm border border-gold/30 mb-6"
-            >
-              <Sparkles className="h-3.5 w-3.5 text-gold" />
-              <span className="text-xs sm:text-sm font-medium text-white/90">{bannerText}</span>
-            </motion.div>
+            {/* Season Badge removed */}
 
             <motion.h1
               initial={{ opacity: 0, y: 20 }}
