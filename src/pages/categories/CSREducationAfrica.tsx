@@ -4,6 +4,7 @@ import { BrandedCategoryHero } from "@/components/awards/BrandedCategoryHero";
 import { BrandedDocumentaryPreview } from "@/components/awards/BrandedDocumentaryPreview";
 import { AnimatedActionWords } from "@/components/awards/AnimatedActionWords";
 import { BrandedNomineeDirectory } from "@/components/awards/BrandedNomineeDirectory";
+import { RelatedIconHonoureesRibbon } from "@/components/awards/RelatedIconHonoureesRibbon";
 
 export default function CSREducationAfricaPage() {
   return (
@@ -52,6 +53,11 @@ export default function CSREducationAfricaPage() {
         categoryName="Best CSR in Education (Africa Regional)"
         title="Live Corporate Nominees"
         description="Verified CSR-for-Education nominees streaming live from the NESA database."
+      />
+      <RelatedIconHonoureesRibbon
+        title="Education Philanthropy Lifetime Honourees"
+        description="Foundation leaders, scholarship sponsors and CSR funders recognised in the Africa Education Icon Award."
+        filterSubcategory="education-philanthropy-icon"
       />
       <DynamicCategoryPage
         categoryTitle="Best CSR in Education (Africa Regional)"
