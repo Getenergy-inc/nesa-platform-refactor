@@ -5,6 +5,7 @@ import { ArrowRight, Award, MapPin, Users, ShieldCheck, Sparkles } from "lucide-
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import { NomineeAvatar } from "@/components/nominees/NomineeAvatar";
 import {
   NGO_NOMINEES,
   NGO_REGIONS,
