@@ -85,7 +85,7 @@ export default function NigeriaChapterTrack() {
                   </p>
                   <div className="text-center py-4 rounded-xl bg-emerald-500/10 border border-emerald-500/20">
                     <p className="text-xs text-white/40 uppercase tracking-wider mb-1">Countdown</p>
-                    <p className="text-2xl font-display font-bold text-emerald-400">Coming Soon</p>
+                    <p className="text-2xl font-display font-bold text-emerald-400">To Be Announced</p>
                   </div>
                 </CardContent>
               </Card>

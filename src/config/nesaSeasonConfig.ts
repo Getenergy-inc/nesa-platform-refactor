@@ -69,7 +69,7 @@ export const PHASES: PhaseConfig[] = [
   {
     id: "pre-launch",
     name: "Pre-Launch",
-    shortName: "Coming Soon",
+    shortName: "Pre-Launch",
     description: "Season announcement and preparation",
     startDate: new Date("2025-12-01"),
     endDate: new Date("2026-03-31"),

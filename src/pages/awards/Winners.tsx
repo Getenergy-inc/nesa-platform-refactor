@@ -9,7 +9,7 @@ import { Input } from "@/components/ui/input";
 
 // Placeholder data - will be replaced with CMS/DB data
 const placeholderWinners = [
-  { name: "Coming Soon", category: "Blue Garnet winners will be announced at the Gala", year: 2026, tier: "blue_garnet" },
+  { name: "To Be Announced", category: "Blue Garnet winners will be announced at the Gala", year: 2026, tier: "blue_garnet" },
 ];
 
 export default function Winners() {
@@ -93,7 +93,7 @@ export default function Winners() {
               <TabsContent value="blue_garnet">
                 <div className="rounded-xl border border-white/10 bg-white/5 p-12 text-center">
                   <Trophy className="mx-auto mb-4 h-12 w-12 text-purple-400" />
-                  <h3 className="mb-2 text-xl font-semibold text-white">Coming Soon</h3>
+                  <h3 className="mb-2 text-xl font-semibold text-white">To Be Announced</h3>
                   <p className="mb-6 text-white/60">
                     Blue Garnet Award winners will be announced at the NESA-Africa 2026 Gala in June 2026.
                   </p>

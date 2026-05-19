@@ -308,9 +308,6 @@ export function PathwayVideoCard({ card, index }: Props) {
                 <Clapperboard className="h-3 w-3" />
                 Documentary
               </div>
-              <div className="absolute top-3 right-3 z-10 px-2 py-1 rounded-md bg-gold/90 text-charcoal text-[10px] font-bold uppercase tracking-wider">
-                Coming Soon
-              </div>
 
               {/* Center play button */}
               <div className="absolute inset-0 z-10 flex flex-col items-center justify-center text-center px-4">
@@ -438,7 +435,7 @@ export function PathwayVideoCard({ card, index }: Props) {
                   <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-charcoal/70 border border-gold/40 mb-5">
                     <Clapperboard className="h-3.5 w-3.5 text-gold" />
                     <span className="text-[11px] font-bold uppercase tracking-widest text-gold">
-                      Documentary Story Coming Soon
+                      Documentary Story
                     </span>
                   </div>
                   <h4 className="font-display text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-3">

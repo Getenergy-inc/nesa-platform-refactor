@@ -75,7 +75,7 @@ export default function ClaimVotingCredits() {
     setIsClaimingQR(true);
     await new Promise((resolve) => setTimeout(resolve, 1000));
     
-    toast.info("QR scanning coming soon!", {
+    toast.info("QR scanning available at events", {
       description: "Visit our event booth to scan sponsor QR codes."
     });
     
