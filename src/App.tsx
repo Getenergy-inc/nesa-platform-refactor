@@ -4,6 +4,9 @@ import Nominees from "./pages/Nominees";
 import NomineeProfile from "./pages/NomineeProfile";
 import CategoryLandingPage from "./pages/nominees/CategoryLandingPage";
 import SubcategoryPage from "./pages/nominees/SubcategoryPage";
+import GoldHubPage from "./pages/nominees/gold/GoldHubPage";
+import GoldCategoryPage from "./pages/nominees/gold/GoldCategoryPage";
+import GoldNomineeProfilePage from "./pages/nominees/gold/GoldNomineeProfilePage";
 import NomineeDirectory from "./pages/NomineeDirectory";
 import MasterNomineeProfile from "./pages/MasterNomineeProfile";
 import CertificateVerify from "./pages/CertificateVerify";
@@ -890,6 +893,31 @@ const App = () => (
                     element={
                       <WithLayout>
                         <SubcategoryPage />
+                      </WithLayout>
+                    }
+                  />
+                  {/* Gold Special Recognition — dedicated nominee ecosystem */}
+                  <Route
+                    path="/nominees/gold-special-recognition"
+                    element={
+                      <WithLayout>
+                        <GoldHubPage />
+                      </WithLayout>
+                    }
+                  />
+                  <Route
+                    path="/nominees/gold-special-recognition/:categorySlug"
+                    element={
+                      <WithLayout>
+                        <GoldCategoryPage />
+                      </WithLayout>
+                    }
+                  />
+                  <Route
+                    path="/nominees/gold-special-recognition/:categorySlug/:nomineeSlug"
+                    element={
+                      <WithLayout>
+                        <GoldNomineeProfilePage />
                       </WithLayout>
                     }
                   />
