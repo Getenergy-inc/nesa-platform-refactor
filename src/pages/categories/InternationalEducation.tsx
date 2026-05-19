@@ -4,6 +4,7 @@ import { BrandedCategoryHero } from "@/components/awards/BrandedCategoryHero";
 import { BrandedDocumentaryPreview } from "@/components/awards/BrandedDocumentaryPreview";
 import { AnimatedActionWords } from "@/components/awards/AnimatedActionWords";
 import { BrandedNomineeDirectory } from "@/components/awards/BrandedNomineeDirectory";
+import { RelatedIconHonoureesRibbon } from "@/components/awards/RelatedIconHonoureesRibbon";
 
 export default function InternationalEducationPage() {
   return (
@@ -52,6 +53,11 @@ export default function InternationalEducationPage() {
         categoryName="International & Bilateral Contributors to Education"
         title="Live Global Partners"
         description="Bilateral, multilateral and institutional partners verified by the NESA Nominee Research Corps."
+      />
+      <RelatedIconHonoureesRibbon
+        title="Friends of Africa — Lifetime Honourees"
+        description="Non-African individuals and institutions with sustained contributions to African education across the Africa Education Icon Award."
+        filterClassification="friends-of-africa"
       />
       <DynamicCategoryPage
         categoryTitle="International & Bilateral Contributors to Education"

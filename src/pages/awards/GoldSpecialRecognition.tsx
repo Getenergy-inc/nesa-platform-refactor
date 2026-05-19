@@ -4,6 +4,7 @@ import { NESAHeader } from "@/components/nesa/NESAHeader";
 import { NESAFooter } from "@/components/nesa/NESAFooter";
 import { BrandedCategoryHero } from "@/components/awards/BrandedCategoryHero";
 import { BrandedDocumentaryPreview } from "@/components/awards/BrandedDocumentaryPreview";
+import { GoldTrackNavGrid } from "@/components/awards/GoldTrackNavGrid";
 
 export default function GoldSpecialRecognition() {
   return (
@@ -45,6 +46,7 @@ export default function GoldSpecialRecognition() {
           watchCtaHref="/media"
           imageAlt="Digital voices stories documentary preview"
         />
+        <GoldTrackNavGrid />
         <GoldSpecialRecognitionSection />
         <NESAFooter />
       </div>
