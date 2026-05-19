@@ -59,19 +59,19 @@ export function NESALandingPage() {
         {/* 2. TRUST STRIP */}
         <TrustLogosStrip />
 
-        {/* 3. WHAT NESA REPRESENTS */}
+        {/* 3. ECOSYSTEM CAROUSEL — featured nominees (moved up directly under trust strip) */}
+        <LazySection>
+          <EcosystemCarousel />
+        </LazySection>
+
+        {/* 4. WHAT NESA REPRESENTS */}
         <LazySection>
           <BrandNarrativeSection />
         </LazySection>
 
-        {/* 4. AWARD PILLARS — 4 cinematic cards */}
+        {/* 5. AWARD PILLARS — 4 cinematic cards */}
         <LazySection>
           <AwardPillarsGrid />
-        </LazySection>
-
-        {/* 5. ECOSYSTEM CAROUSEL — featured nominees */}
-        <LazySection>
-          <EcosystemCarousel />
         </LazySection>
 
         {/* 6. NOMINATE · VOTE · EARN */}
