@@ -5,6 +5,7 @@ import { ArrowLeft, ShieldCheck, MapPin, Award, Share2, Heart } from "lucide-rea
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import { NomineeAvatar } from "@/components/nominees/NomineeAvatar";
 import {
   NGO_SUBCATEGORIES,
   getNGOBySlug,
