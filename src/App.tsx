@@ -1178,7 +1178,6 @@ const App = () => (
                     }
                   />
                   <Route path="/sponsors" element={<SponsorsHub />} />
-                  <Route path="/partners" element={<Navigate to="/sponsors" replace />} />
                   <Route path="/sponsors/:slug" element={<SponsorLanding />} />
                   <Route
                     path="/results"
