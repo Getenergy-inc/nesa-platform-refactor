@@ -120,35 +120,55 @@ export default function NomineesHubPage() {
             </form>
           </motion.div>
 
-          {/* Influencers Education Impact Award feature banner */}
+          {/* Featured category banners */}
           <motion.div
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
-            className="mb-12"
+            className="mb-6 grid md:grid-cols-2 gap-4"
           >
             <Link
               to="/nominees/gold-special-recognition"
-              className="group relative block overflow-hidden rounded-3xl border-2 border-gold/40 bg-gradient-to-br from-gold/20 via-charcoal-light to-charcoal p-6 md:p-8 transition-all hover:border-gold hover:shadow-2xl hover:shadow-gold/20"
+              className="group relative block overflow-hidden rounded-3xl border-2 border-gold/40 bg-gradient-to-br from-gold/20 via-charcoal-light to-charcoal p-6 transition-all hover:border-gold hover:shadow-2xl hover:shadow-gold/20"
             >
-              <div className="flex flex-col md:flex-row items-start md:items-center gap-6">
-                <div className="h-16 w-16 md:h-20 md:w-20 rounded-2xl bg-gold/20 flex items-center justify-center flex-shrink-0">
-                  <Trophy className="w-8 h-8 md:w-10 md:h-10 text-gold" />
+              <div className="flex items-start gap-4">
+                <div className="h-14 w-14 rounded-2xl bg-gold/20 flex items-center justify-center flex-shrink-0">
+                  <Trophy className="w-7 h-7 text-gold" />
                 </div>
                 <div className="flex-1">
                   <Badge className="mb-2 bg-gold text-charcoal font-bold">2026 EDITION</Badge>
-                  <h3 className="font-display text-xl md:text-2xl font-bold text-ivory group-hover:text-gold transition-colors mb-1">
+                  <h3 className="font-display text-lg md:text-xl font-bold text-ivory group-hover:text-gold transition-colors mb-1">
                     Influencers Education Impact Award — Cultural Impact
                   </h3>
-                  <p className="text-ivory/70 text-sm md:text-base">
+                  <p className="text-ivory/70 text-sm">
                     Sports, Music & Social Media leaders advancing Education across Africa & the Diaspora.
                   </p>
                 </div>
-                <span className="text-gold flex items-center gap-2 font-semibold group-hover:translate-x-1 transition-transform whitespace-nowrap">
-                  Explore <ArrowRight className="w-4 h-4" />
-                </span>
+                <ArrowRight className="w-5 h-5 text-gold flex-shrink-0 group-hover:translate-x-1 transition-transform" />
+              </div>
+            </Link>
+
+            <Link
+              to="/nominees/category/ngo-education-africa"
+              className="group relative block overflow-hidden rounded-3xl border-2 border-gold/40 bg-gradient-to-br from-emerald-500/15 via-charcoal-light to-charcoal p-6 transition-all hover:border-gold hover:shadow-2xl hover:shadow-gold/20"
+            >
+              <div className="flex items-start gap-4">
+                <div className="h-14 w-14 rounded-2xl bg-emerald-500/20 flex items-center justify-center flex-shrink-0">
+                  <Users className="w-7 h-7 text-emerald-400" />
+                </div>
+                <div className="flex-1">
+                  <Badge className="mb-2 bg-emerald-500 text-charcoal font-bold">AFRICA REGIONAL</Badge>
+                  <h3 className="font-display text-lg md:text-xl font-bold text-ivory group-hover:text-gold transition-colors mb-1">
+                    Best NGO Contribution to Education (Africa Regional)
+                  </h3>
+                  <p className="text-ivory/70 text-sm">
+                    Honouring NGOs driving infrastructure, materials, aid, youth & girls' empowerment across Africa.
+                  </p>
+                </div>
+                <ArrowRight className="w-5 h-5 text-gold flex-shrink-0 group-hover:translate-x-1 transition-transform" />
               </div>
             </Link>
           </motion.div>
+
 
 
           {/* Trending rail */}
