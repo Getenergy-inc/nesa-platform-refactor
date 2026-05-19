@@ -27,25 +27,17 @@ export function LandingNomineeCard({ nominee, isBlueGarnet = false }: LandingNom
         onClick={() => navigate(`/nominees/${encodeURIComponent(nominee.slug)}`)}
       >
         <CardContent className="p-0 flex flex-col flex-1">
-          {/* Image */}
-          <div className="relative h-40 sm:h-44 bg-secondary/30 overflow-hidden flex items-center justify-center">
-            {nominee.photoUrl && nominee.photoUrl !== "/images/placeholder.svg" ? (
-              <img
-                src={nominee.photoUrl}
-                alt={nominee.name}
-                className={`w-full h-full ${isOrg ? "object-contain p-4" : "object-cover"} group-hover:scale-105 transition-transform duration-500`}
-                loading="lazy"
-              />
-            ) : (
-              <div className="w-20 h-20 rounded-full bg-primary/10 flex items-center justify-center">
-                {isOrg ? (
-                  <Building2 className="w-8 h-8 text-gold/40" />
-                ) : (
-                  <span className="text-gold/70 font-display text-xl">{getInitials(nominee.name)}</span>
-                )}
-              </div>
-            )}
-            <div className="absolute inset-0 bg-gradient-to-t from-secondary via-secondary/40 to-transparent" />
+          {/* Visual identity */}
+          <div className="relative h-40 sm:h-44 overflow-hidden">
+            <NomineeAvatar
+              name={nominee.name}
+              src={nominee.photoUrl}
+              kind={isOrg ? "organization" : "individual"}
+              shape="square"
+              interactive
+              context={nominee.country}
+            />
+            <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-secondary via-secondary/30 to-transparent" />
             
             {/* Country badge */}
             {nominee.country && (
