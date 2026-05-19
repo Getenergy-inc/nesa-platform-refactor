@@ -14,6 +14,10 @@ import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { PathwayVideoCard, type PathwayVideoCardData } from "./PathwayVideoCard";
 import { usePathwayCards } from "@/hooks/usePathwayCards";
+import posterIcon from "@/assets/pathway-cards/icon.jpg";
+import posterCsr from "@/assets/pathway-cards/csr.jpg";
+import posterInfluencer from "@/assets/pathway-cards/influencer.jpg";
+import posterGrants from "@/assets/pathway-cards/grants.jpg";
 
 const pathways: PathwayVideoCardData[] = [
   {
@@ -26,6 +30,7 @@ const pathways: PathwayVideoCardData[] = [
       "Across three pillars — Literary & New Curriculum Advocates, Africa Technical Educators, and Lifetime Education Champions — meet the Africans in Africa, Diaspora Africans, and Friends of Africa whose decades of work rewrote what learning means on this continent.",
     videoTitle: "Africa Education Icon — Two Decades, One Legacy",
     posterAlt: "Africa Education Icon — cinematic legacy storytelling",
+    posterImage: posterIcon,
     visualGradient: "from-gold/45 via-emerald-900/40 to-charcoal",
     actionWords: [
       "Lifetime Legacy", "Curriculum Reform", "Technical Education",
@@ -55,6 +60,7 @@ const pathways: PathwayVideoCardData[] = [
       "Banks, telcos, energy majors, EdTech innovators and multinationals turning CSR budgets into scholarships, school infrastructure, teacher training, digital access and STEM pipelines — measured, audited, and ranked through the Blue Garnet competitive vote.",
     videoTitle: "Corporate Recognition — CSR That Builds Schools",
     posterAlt: "Corporate Recognition — cinematic CSR storytelling",
+    posterImage: posterCsr,
     visualGradient: "from-emerald-800/55 via-emerald-900/30 to-charcoal",
     actionWords: [
       "CSR in Education", "School Infrastructure", "Scholarships",
@@ -84,6 +90,7 @@ const pathways: PathwayVideoCardData[] = [
       "Musicians, athletes, actors, faith leaders, content creators and youth influencers turning followers into learners — championing literacy, girl-child education, mental health, scholarships, and back-to-school movements across Africa and the diaspora.",
     videoTitle: "Digital Voices — Influence Into Education Impact",
     posterAlt: "Digital Voices — cinematic creator storytelling",
+    posterImage: posterInfluencer,
     visualGradient: "from-gold/35 via-orange-900/35 to-charcoal",
     actionWords: [
       "Music for Education", "Sports for Schools", "Creator Advocacy",
@@ -113,6 +120,7 @@ const pathways: PathwayVideoCardData[] = [
       "Bilateral donors, multilateral institutions, UN agencies, embassies and global foundations funding scholarships, research, infrastructure and SDG 4 delivery — the Platinum-tier partners standing with Africa from policy to classroom.",
     videoTitle: "Global Partnerships — Allies of African Education",
     posterAlt: "Global Partnerships — cinematic alliance storytelling",
+    posterImage: posterGrants,
     visualGradient: "from-emerald-900/55 via-gold/15 to-charcoal",
     actionWords: [
       "Bilateral Grants", "Multilateral Funding", "UN Agencies",
