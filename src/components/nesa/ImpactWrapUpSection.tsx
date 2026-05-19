@@ -123,61 +123,6 @@ export function ImpactWrapUpSection() {
           </div>
         </motion.div>
 
-        {/* ════ REGIONAL REACH ════ */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="relative rounded-3xl border border-gold/25 bg-gradient-to-br from-emerald-900/20 via-white/[0.02] to-charcoal backdrop-blur-sm p-6 sm:p-8 overflow-hidden"
-        >
-          <div className="text-gold">
-            <PatternOverlay />
-          </div>
-
-          <div className="relative">
-            <div className="flex flex-col md:flex-row items-start md:items-center gap-4 md:gap-6 mb-6">
-              <div className="flex items-center gap-3 shrink-0">
-                <div className="h-12 w-12 rounded-2xl bg-gradient-to-br from-gold to-gold-dark border border-gold/40 flex items-center justify-center shadow-lg">
-                  <Globe2 className="h-6 w-6 text-charcoal" />
-                </div>
-                <div>
-                  <div className="text-[10px] font-bold uppercase tracking-[0.2em] text-gold mb-0.5">
-                    Continental Coverage
-                  </div>
-                  <span className="font-display text-xl font-bold text-white">Regional Reach</span>
-                </div>
-              </div>
-              <p className="text-white/70 text-sm sm:text-base leading-relaxed flex-1">
-                Nominations and voting are regionally driven across Africa, ensuring fair
-                representation across regions and the diaspora.
-              </p>
-            </div>
-
-            <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
-              {[
-                { name: "West Africa", color: "from-gold/30 to-gold/10" },
-                { name: "East Africa", color: "from-emerald-700/40 to-emerald-900/20" },
-                { name: "North Africa", color: "from-gold/25 to-orange-900/20" },
-                { name: "Central Africa", color: "from-emerald-800/40 to-emerald-900/20" },
-                { name: "Southern Africa", color: "from-gold/20 to-emerald-900/20" },
-                { name: "Diaspora & Global Africa", color: "from-emerald-700/30 to-gold/15" },
-              ].map((region) => (
-                <div
-                  key={region.name}
-                  className={`group relative overflow-hidden rounded-2xl border border-gold/25 hover:border-gold/60 bg-gradient-to-br ${region.color} p-4 transition-all hover:-translate-y-0.5 cursor-default`}
-                >
-                  <div className="flex items-center gap-2.5">
-                    <MapPin className="h-4 w-4 text-gold shrink-0" />
-                    <span className="text-white text-xs sm:text-sm font-semibold leading-tight">
-                      {region.name}
-                    </span>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </motion.div>
       </div>
     </section>
   );
