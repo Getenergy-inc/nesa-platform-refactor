@@ -23,6 +23,7 @@ import { CustomerCareChat } from "@/components/support/CustomerCareChat";
 
 // Pages
 import NESALandingPage from "./features/landing/NESALandingPage";
+import LandingV2 from "./pages/LandingV2";
 import UpcomingEventsPage from "./pages/UpcomingEvents";
 import Categories from "./pages/Categories";
 import Programs from "./pages/Programs";
@@ -254,6 +255,7 @@ const App = () => (
                 <Routes>
                   {/* Landing - has its own header/footer */}
                   <Route path="/" element={<NESALandingPage />} />
+                  <Route path="/landing-v2" element={<LandingV2 />} />
                   <Route
                     path="/programs/nesa-africa"
                     element={<NESALandingPage />}
