@@ -37,6 +37,8 @@ import Unauthorized from "./pages/Unauthorized";
 import NotFound from "./pages/NotFound";
 import PathwaysPage from "./pages/PathwaysPage";
 import AwardPathwayPage from "./pages/AwardPathwayPage";
+import EcosystemPage from "./pages/EcosystemPage";
+import MovementPage from "./pages/MovementPage";
 import CategoryDetail from "./pages/CategoryDetail";
 import NomineeAccept from "./pages/NomineeAccept";
 import NomineeDecline from "./pages/NomineeDecline";
@@ -451,6 +453,22 @@ const App = () => (
                     element={
                       <WithLayout>
                         <PathwaysPage />
+                      </WithLayout>
+                    }
+                  />
+                  <Route
+                    path="/ecosystem"
+                    element={
+                      <WithLayout>
+                        <EcosystemPage />
+                      </WithLayout>
+                    }
+                  />
+                  <Route
+                    path="/movement"
+                    element={
+                      <WithLayout>
+                        <MovementPage />
                       </WithLayout>
                     }
                   />

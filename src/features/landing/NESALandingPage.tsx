@@ -25,7 +25,7 @@ const CategoriesSection = lazy(() => import("@/components/nesa/CategoriesSection
 const SponsorsSection = lazy(() => import("@/components/nesa/SponsorsSection").then(m => ({ default: m.SponsorsSection })));
 const InteractiveAfricaMap = lazy(() => import("@/components/nesa/InteractiveAfricaMap").then(m => ({ default: m.InteractiveAfricaMap })));
 const PromoVideosSection = lazy(() => import("@/components/nesa/PromoVideosSection").then(m => ({ default: m.PromoVideosSection })));
-const SupportExperienceSection = lazy(() => import("@/components/nesa/SupportExperienceSection").then(m => ({ default: m.SupportExperienceSection })));
+
 const BrandNarrativeSection = lazy(() => import("@/components/nesa/BrandNarrativeSection").then(m => ({ default: m.BrandNarrativeSection })));
 const AwardSpotlightSection = lazy(() => import("@/components/nesa/AwardSpotlightSection").then(m => ({ default: m.AwardSpotlightSection })));
 const MerchandiseShowcase = lazy(() => import("@/components/nesa/MerchandiseShowcase").then(m => ({ default: m.MerchandiseShowcase })));
@@ -90,10 +90,8 @@ export function NESALandingPage() {
           <PromoVideosSection />
         </LazySection>
 
-        {/* ═══ 8b. Tickets • Merch • Anthem ═══ */}
-        <LazySection>
-          <SupportExperienceSection />
-        </LazySection>
+
+
 
         {/* ═══ 8c. Merchandise Showcase ═══ */}
         <LazySection>
