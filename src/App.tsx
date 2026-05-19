@@ -926,6 +926,31 @@ const App = () => (
                       </WithLayout>
                     }
                   />
+                  {/* Africa Education Icon Award — nested nominee ecosystem */}
+                  <Route
+                    path="/nominees/africa-education-icon-award"
+                    element={
+                      <WithLayout>
+                        <IconAwardMain />
+                      </WithLayout>
+                    }
+                  />
+                  <Route
+                    path="/nominees/africa-education-icon-award/:sub"
+                    element={
+                      <WithLayout>
+                        <IconSubcategoryPage />
+                      </WithLayout>
+                    }
+                  />
+                  <Route
+                    path="/nominees/africa-education-icon-award/:sub/:cls"
+                    element={
+                      <WithLayout>
+                        <IconClassificationPage />
+                      </WithLayout>
+                    }
+                  />
                   <Route
                     path="/nominee/:slug"
                     element={<NomineeSlugRedirect />}
