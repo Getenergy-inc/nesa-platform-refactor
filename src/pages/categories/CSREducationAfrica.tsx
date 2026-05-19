@@ -2,6 +2,7 @@ import { DynamicCategoryPage } from "@/components/awards/DynamicCategoryPage";
 import { BrandedCategoryHero } from "@/components/awards/BrandedCategoryHero";
 import { BrandedDocumentaryPreview } from "@/components/awards/BrandedDocumentaryPreview";
 import { AnimatedActionWords } from "@/components/awards/AnimatedActionWords";
+import { BrandedNomineeDirectory } from "@/components/awards/BrandedNomineeDirectory";
 
 export default function CSREducationAfricaPage() {
   return (
@@ -33,6 +34,12 @@ export default function CSREducationAfricaPage() {
         description="See how leading organizations are funding innovation, expanding access, and creating real, measurable change across African education systems."
         watchCtaHref="/media"
         imageAlt="Corporate impact stories documentary preview"
+      />
+      <BrandedNomineeDirectory
+        theme="corporate"
+        categoryName="Best CSR in Education (Africa Regional)"
+        title="Live Corporate Nominees"
+        description="Verified CSR-for-Education nominees streaming live from the NESA database."
       />
       <DynamicCategoryPage
         categoryTitle="Best CSR in Education (Africa Regional)"
