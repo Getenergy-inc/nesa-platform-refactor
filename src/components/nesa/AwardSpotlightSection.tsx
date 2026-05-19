@@ -196,15 +196,15 @@ export function AwardSpotlightSection() {
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gold/10 border border-gold/30 mb-5">
             <Sparkles className="h-4 w-4 text-gold" />
             <span className="text-xs sm:text-sm font-semibold text-gold uppercase tracking-[0.2em]">
-              Recognition Pathways
+              Nominate & Vote
             </span>
           </div>
           <h2 className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-5 leading-tight">
-            Pathways to <span className="text-gold">Recognition</span>
+            Nominate and <span className="text-gold">Vote</span>
           </h2>
           <p className="text-white/75 text-base sm:text-lg leading-relaxed mb-7">
-            From lifetime icons to corporate champions, digital voices, and global partners —
-            celebrating those advancing{" "}
+            Celebrate Africa's education changemakers — from lifetime icons and corporate champions
+            to digital voices and global partners advancing{" "}
             <span className="text-gold font-medium">Education for All</span> across Africa and the
             diaspora.
           </p>
@@ -220,11 +220,20 @@ export function AwardSpotlightSection() {
                 <ArrowRight className="h-4 w-4" />
               </Button>
             </Link>
-            <Link to="/categories">
+            <Link to="/vote">
               <Button
                 size="lg"
                 variant="outline"
-                className="w-full sm:w-auto border-gold/40 text-gold hover:bg-gold/10 rounded-full gap-2 px-7"
+                className="w-full sm:w-auto border-gold/60 text-gold hover:bg-gold/10 rounded-full gap-2 px-7"
+              >
+                Vote for Nominees
+              </Button>
+            </Link>
+            <Link to="/categories">
+              <Button
+                size="lg"
+                variant="ghost"
+                className="w-full sm:w-auto text-white/80 hover:text-gold hover:bg-white/5 rounded-full gap-2 px-7"
               >
                 Explore Categories
               </Button>
