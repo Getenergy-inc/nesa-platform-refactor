@@ -11,6 +11,8 @@ import NomineeSlugRedirect from "./pages/nominees/gold/NomineeSlugRedirect";
 import NGOHubPage from "./pages/nominees/ngo/NGOHubPage";
 import NGORegionalPage from "./pages/nominees/ngo/NGORegionalPage";
 import NGONomineeProfile from "./pages/nominees/ngo/NGONomineeProfile";
+import RegionNomineesHubPage from "./pages/nominees/regional/RegionNomineesHubPage";
+import RegionCategoryPage from "./pages/nominees/regional/RegionCategoryPage";
 import IconAwardMain from "./pages/nominees/icon/IconAwardMain";
 import IconSubcategoryPage from "./pages/nominees/icon/IconSubcategoryPage";
 import IconClassificationPage from "./pages/nominees/icon/IconClassificationPage";
@@ -965,6 +967,20 @@ const App = () => (
                       </WithLayout>
                     }
                   />
+                  {/* Region-first nominee ecosystem (West / East / North / Central / Southern Africa) */}
+                  {[
+                    "west-africa",
+                    "east-africa",
+                    "north-africa",
+                    "central-africa",
+                    "southern-africa",
+                  ].map((region) => (
+                    <Route key={region}>
+                      <Route path={`/nominees/${region}`} element={<WithLayout><RegionNomineesHubPage /></WithLayout>} />
+                      <Route path={`/nominees/${region}/:categorySlug`} element={<WithLayout><RegionCategoryPage /></WithLayout>} />
+                      <Route path={`/nominees/${region}/:categorySlug/:subcategorySlug`} element={<WithLayout><RegionCategoryPage /></WithLayout>} />
+                    </Route>
+                  ))}
                   {/* Influencers Education Impact Award — dedicated nominee ecosystem */}
                   <Route
                     path="/nominees/gold-special-recognition"
