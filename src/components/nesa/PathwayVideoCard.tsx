@@ -15,6 +15,13 @@ import type { LucideIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useIsMobile } from "@/hooks/use-mobile";
 
+
+// Feature flag: enable real YouTube embeds. Disabled by default so cards keep
+// their cinematic placeholder. Set VITE_ENABLE_YT_EMBEDS=true to opt in.
+// A card only embeds when the flag is on AND it has a videoId.
+const ytEmbedsEnabled =
+  String(import.meta.env.VITE_ENABLE_YT_EMBEDS ?? "").toLowerCase() === "true";
+
 export type PathwayCardCTA = { label: string; href: string };
 
 export type PathwayVideoCardData = {
@@ -401,6 +408,16 @@ export function PathwayVideoCard({ card, index }: Props) {
                 <X className="h-4 w-4" />
               </button>
               <div className="relative aspect-video">
+                {ytEmbedsEnabled && card.videoId ? (
+                  <iframe
+                    src={`https://www.youtube-nocookie.com/embed/${card.videoId}?autoplay=1&rel=0&modestbranding=1`}
+                    title={card.videoTitle}
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                    className="absolute inset-0 h-full w-full border-0"
+                  />
+                ) : (
+                  <>
                 <div className={`absolute inset-0 bg-gradient-to-br ${card.visualGradient}`} />
                 {!reduce && (
                   <motion.div
@@ -455,6 +472,8 @@ export function PathwayVideoCard({ card, index }: Props) {
                     </Button>
                   </div>
                 </div>
+                  </>
+                )}
               </div>
             </motion.div>
           </motion.div>
