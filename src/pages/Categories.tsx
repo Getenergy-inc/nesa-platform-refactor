@@ -141,7 +141,7 @@ export default function Categories() {
     },
     {
       key: "gold-special",
-      label: "Influencers Education Impact Award 2026",
+      label: "Influencers",
       icon: <Star className="h-4 w-4" />,
       categories: groups.goldSpecial,
       subtitle: "Influencers Education Impact Award 2026 Edition — Cultural impact recognition",
