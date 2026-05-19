@@ -5,6 +5,7 @@ import { ArrowLeft, ShieldCheck, MapPin, Award, Share2, Heart } from "lucide-rea
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import { NomineeAvatar } from "@/components/nominees/NomineeAvatar";
 import {
   NGO_SUBCATEGORIES,
   getNGOBySlug,
@@ -91,19 +92,30 @@ export default function NGONomineeProfile() {
               </div>
             </div>
 
-            <Card className="border-gold/10 bg-white/5 p-6 h-fit">
-              <h3 className="font-serif text-sm uppercase tracking-wide text-gold mb-4">
-                At a Glance
-              </h3>
-              <dl className="space-y-3 text-sm">
-                <Row k="Organisation" v={ngo.organizationType} />
-                <Row k="Country" v={ngo.country} />
-                <Row k="Region" v={region.name} />
-                <Row k="Impact Pillar" v={sub.name} />
-                <Row k="Nomination Year" v={String(ngo.nominationYear)} />
-                <Row k="Status" v={ngo.verificationStatus} />
-              </dl>
-            </Card>
+            <div className="space-y-4">
+              <div className="relative h-56 w-full overflow-hidden rounded-2xl ring-1 ring-gold/20 shadow-[0_10px_40px_-12px_hsl(42_85%_52%/0.35)]">
+                <NomineeAvatar
+                  name={ngo.name}
+                  src={ngo.logoUrl || ngo.imageUrl}
+                  kind="organization"
+                  shape="square"
+                  context={`${region.name} · ${ngo.country}`}
+                />
+              </div>
+              <Card className="border-gold/10 bg-white/5 p-6 h-fit">
+                <h3 className="font-serif text-sm uppercase tracking-wide text-gold mb-4">
+                  At a Glance
+                </h3>
+                <dl className="space-y-3 text-sm">
+                  <Row k="Organisation" v={ngo.organizationType} />
+                  <Row k="Country" v={ngo.country} />
+                  <Row k="Region" v={region.name} />
+                  <Row k="Impact Pillar" v={sub.name} />
+                  <Row k="Nomination Year" v={String(ngo.nominationYear)} />
+                  <Row k="Status" v={ngo.verificationStatus} />
+                </dl>
+              </Card>
+            </div>
           </motion.div>
 
           {/* Impact story */}
@@ -156,13 +168,24 @@ export default function NGONomineeProfile() {
                     key={n.id}
                     to={`/nominees/best-ngo-contribution-to-education/profile/${n.slug}`}
                   >
-                    <Card className="h-full border-gold/10 bg-white/5 p-5 hover:border-gold/40 transition">
-                      <Badge variant="outline" className="mb-2 border-gold/30 text-gold text-xs">
-                        {NGO_SUBCATEGORIES.find((s) => s.slug === n.subcategory)?.name}
-                      </Badge>
-                      <h3 className="font-serif text-lg font-bold text-white mb-1">{n.name}</h3>
-                      <p className="text-xs text-white/50 mb-2">{n.country}</p>
-                      <p className="text-sm text-white/70 line-clamp-2">{n.impactSummary}</p>
+                    <Card className="group h-full overflow-hidden border-gold/10 bg-white/5 hover:border-gold/40 transition">
+                      <div className="relative h-32">
+                        <NomineeAvatar
+                          name={n.name}
+                          src={n.logoUrl || n.imageUrl}
+                          kind="organization"
+                          shape="square"
+                          interactive
+                        />
+                      </div>
+                      <div className="p-5">
+                        <Badge variant="outline" className="mb-2 border-gold/30 text-gold text-xs">
+                          {NGO_SUBCATEGORIES.find((s) => s.slug === n.subcategory)?.name}
+                        </Badge>
+                        <h3 className="font-serif text-lg font-bold text-white mb-1">{n.name}</h3>
+                        <p className="text-xs text-white/50 mb-2">{n.country}</p>
+                        <p className="text-sm text-white/70 line-clamp-2">{n.impactSummary}</p>
+                      </div>
                     </Card>
                   </Link>
                 ))}
