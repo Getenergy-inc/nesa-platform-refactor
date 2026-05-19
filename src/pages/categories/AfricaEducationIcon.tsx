@@ -1,5 +1,6 @@
 import { DynamicCategoryPage } from "@/components/awards/DynamicCategoryPage";
 import { BrandedCategoryHero } from "@/components/awards/BrandedCategoryHero";
+import { BrandedDocumentaryPreview } from "@/components/awards/BrandedDocumentaryPreview";
 
 export default function AfricaEducationIconPage() {
   return (
@@ -19,6 +20,13 @@ export default function AfricaEducationIconPage() {
         secondaryCta={{ label: "Nominate a Legend", href: "/nominate?category=africa-education-icon-award" }}
         watchCta={{ label: "Watch Legacy Stories", href: "/media" }}
         imageAlt="Africa Education Icon Award — two decades of legacy"
+      />
+      <BrandedDocumentaryPreview
+        theme="legacy"
+        title="Legacy Stories"
+        description="Watch how Africa's most influential education leaders shaped generations and built the foundations of our future learning systems."
+        watchCtaHref="/media"
+        imageAlt="Legacy stories documentary preview"
       />
       <DynamicCategoryPage
         categoryTitle="Africa Education Icon Award (2006–2026)"

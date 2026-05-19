@@ -1,5 +1,6 @@
 import { DynamicCategoryPage } from "@/components/awards/DynamicCategoryPage";
 import { BrandedCategoryHero } from "@/components/awards/BrandedCategoryHero";
+import { BrandedDocumentaryPreview } from "@/components/awards/BrandedDocumentaryPreview";
 
 export default function InternationalEducationPage() {
   return (
@@ -19,6 +20,13 @@ export default function InternationalEducationPage() {
         secondaryCta={{ label: "Become a Partner", href: "/partners" }}
         watchCta={{ label: "View Partnership Impact", href: "/media" }}
         imageAlt="International & bilateral contributors powering education in Africa"
+      />
+      <BrandedDocumentaryPreview
+        theme="global"
+        title="Partnership Stories"
+        description="See how global institutions and bilateral partners are building stronger, more equitable education systems across Africa."
+        watchCtaHref="/media"
+        imageAlt="Global partnership stories documentary preview"
       />
       <DynamicCategoryPage
         categoryTitle="International & Bilateral Contributors to Education"

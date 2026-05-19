@@ -3,6 +3,7 @@ import { GoldSpecialRecognitionSection } from "@/components/nesa/GoldSpecialReco
 import { NESAHeader } from "@/components/nesa/NESAHeader";
 import { NESAFooter } from "@/components/nesa/NESAFooter";
 import { BrandedCategoryHero } from "@/components/awards/BrandedCategoryHero";
+import { BrandedDocumentaryPreview } from "@/components/awards/BrandedDocumentaryPreview";
 
 export default function GoldSpecialRecognition() {
   return (
@@ -36,6 +37,13 @@ export default function GoldSpecialRecognition() {
           secondaryCta={{ label: "Vote for Influencers", href: "/vote" }}
           watchCta={{ label: "Watch Impact Stories", href: "/media" }}
           imageAlt="Africa's top education influencers — creators, musicians, athletes"
+        />
+        <BrandedDocumentaryPreview
+          theme="influencer"
+          title="Digital Voices Stories"
+          description="Watch how creators, musicians, athletes, and influencers are using their platforms to change lives and amplify education across the continent."
+          watchCtaHref="/media"
+          imageAlt="Digital voices stories documentary preview"
         />
         <GoldSpecialRecognitionSection />
         <NESAFooter />
