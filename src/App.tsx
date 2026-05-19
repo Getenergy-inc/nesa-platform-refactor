@@ -254,9 +254,11 @@ const App = () => (
               <BrowserRouter>
                 <ScrollToTop />
                 <Routes>
-                  {/* Landing - has its own header/footer */}
-                  <Route path="/" element={<NESALandingPage />} />
+                  {/* Landing - Award Almanac (refactored homepage). Legacy preserved at /landing-legacy */}
+                  <Route path="/" element={<LandingV3 />} />
+                  <Route path="/landing-legacy" element={<NESALandingPage />} />
                   <Route path="/landing-v2" element={<LandingV2 />} />
+                  <Route path="/landing-v3" element={<LandingV3 />} />
                   <Route
                     path="/programs/nesa-africa"
                     element={<NESALandingPage />}
