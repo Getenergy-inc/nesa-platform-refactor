@@ -28,6 +28,8 @@ const PromoVideosSection = lazy(() => import("@/components/nesa/PromoVideosSecti
 
 const BrandNarrativeSection = lazy(() => import("@/components/nesa/BrandNarrativeSection").then(m => ({ default: m.BrandNarrativeSection })));
 const AwardSpotlightSection = lazy(() => import("@/components/nesa/AwardSpotlightSection").then(m => ({ default: m.AwardSpotlightSection })));
+const GoldSpecialRecognitionSection = lazy(() => import("@/components/nesa/GoldSpecialRecognitionSection").then(m => ({ default: m.GoldSpecialRecognitionSection })));
+const ImpactWrapUpSection = lazy(() => import("@/components/nesa/ImpactWrapUpSection").then(m => ({ default: m.ImpactWrapUpSection })));
 const MerchandiseShowcase = lazy(() => import("@/components/nesa/MerchandiseShowcase").then(m => ({ default: m.MerchandiseShowcase })));
 const ContributorsHallSection = lazy(() => import("@/components/nesa/ContributorsHallSection").then(m => ({ default: m.ContributorsHallSection })));
 
@@ -63,7 +65,17 @@ export function NESALandingPage() {
           <AwardSpotlightSection />
         </LazySection>
 
-        {/* ═══ 2c. Brand Narrative — What NESA Africa Represents ═══ */}
+        {/* ═══ 2c. Gold Special Recognition — 2026 Edition ═══ */}
+        <LazySection>
+          <GoldSpecialRecognitionSection />
+        </LazySection>
+
+        {/* ═══ 2d. Impact Wrap-Up — From Recognition to Real Impact ═══ */}
+        <LazySection>
+          <ImpactWrapUpSection />
+        </LazySection>
+
+        {/* ═══ 2e. Brand Narrative — What NESA Africa Represents ═══ */}
         <LazySection>
           <BrandNarrativeSection />
         </LazySection>
