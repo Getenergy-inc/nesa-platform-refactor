@@ -640,7 +640,7 @@ export const DATASET_META = {
     },
   },
 
-  /** 3 Gold Special Recognition Influencer Categories */
+  /** 3 Influencers Education Impact Award Categories */
   goldSpecialRecognition: {
     totalInfluencerNominees: 75,
     categories: [

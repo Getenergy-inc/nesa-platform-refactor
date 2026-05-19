@@ -21,20 +21,20 @@ export default function GoldHubPage() {
   return (
     <>
       <Helmet>
-        <title>Gold Special Recognition Nominees | NESA Africa 2026</title>
+        <title>Influencers Education Impact Award Nominees | NESA Africa 2026</title>
         <meta
           name="description"
-          content="Explore Gold Special Recognition nominees in sports, music, and social media who are advancing education advocacy and impact across Africa."
+          content="Explore Influencers Education Impact Award nominees in sports, music, and social media who are advancing education advocacy and impact across Africa."
         />
         <link rel="canonical" href={canonical} />
-        <meta property="og:title" content="Gold Special Recognition — NESA Africa 2026" />
+        <meta property="og:title" content="Influencers Education Impact Award — NESA Africa 2026" />
         <meta property="og:url" content={canonical} />
         <meta property="og:type" content="website" />
         <script type="application/ld+json">
           {JSON.stringify({
             "@context": "https://schema.org",
             "@type": "CollectionPage",
-            name: "Gold Special Recognition Nominees",
+            name: "Influencers Education Impact Award Nominees",
             url: canonical,
             mainEntity: { "@type": "ItemList", numberOfItems: totalNominees },
           })}
@@ -46,7 +46,7 @@ export default function GoldHubPage() {
           <NomineeBreadcrumbs
             items={[
               { label: "Nominees", href: "/nominees" },
-              { label: "Gold Special Recognition" },
+              { label: "Influencers Education Impact Award" },
             ]}
           />
 
@@ -71,7 +71,7 @@ export default function GoldHubPage() {
                 <Trophy className="w-3 h-3 mr-1.5" /> 2026 Edition
               </Badge>
               <h1 className="font-display text-3xl md:text-5xl lg:text-6xl font-bold text-ivory mb-4 leading-[1.1] max-w-4xl">
-                Gold Special Recognition
+                Influencers Education Impact Award
               </h1>
               <p className="text-ivory/70 max-w-2xl text-base md:text-lg mb-7">
                 Celebrating influential public figures, creatives, athletes, musicians, digital voices, and cultural leaders using their platforms to advance education awareness, advocacy, and impact across Africa.

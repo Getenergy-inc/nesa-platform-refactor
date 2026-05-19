@@ -91,7 +91,7 @@ export default function GoldCategoryPage() {
           <NomineeBreadcrumbs
             items={[
               { label: "Nominees", href: "/nominees" },
-              { label: "Gold Special Recognition", href: "/nominees/gold-special-recognition" },
+              { label: "Influencers Education Impact Award", href: "/nominees/gold-special-recognition" },
               { label: category.shortName },
             ]}
           />
@@ -110,7 +110,7 @@ export default function GoldCategoryPage() {
                 <category.icon className="w-8 h-8 md:w-10 md:h-10 text-gold" />
               </div>
               <Badge className="mb-4 bg-gold/15 text-gold border-gold/30 uppercase tracking-[0.2em] text-[10px] px-3 py-1">
-                Gold Special Recognition · 2026
+                Influencers Education Impact Award · 2026
               </Badge>
               <h1 className="font-display text-3xl md:text-5xl font-bold text-ivory mb-4 leading-[1.1] max-w-3xl">
                 {category.pageTitle}

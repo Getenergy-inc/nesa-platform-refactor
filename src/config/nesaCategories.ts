@@ -160,7 +160,7 @@ export const TIER_INFO: Record<AwardTier, {
     validity: "Lifetime",
   },
   "gold-special": {
-    name: "Gold Special Recognition",
+    name: "Influencers Education Impact Award",
     shortName: "Gold Special",
     description: "Cultural impact recognition for Sports, Music, and Social Media education advocacy (2026 Edition)",
     color: "text-yellow-600",

@@ -896,7 +896,7 @@ const App = () => (
                       </WithLayout>
                     }
                   />
-                  {/* Gold Special Recognition — dedicated nominee ecosystem */}
+                  {/* Influencers Education Impact Award — dedicated nominee ecosystem */}
                   <Route
                     path="/nominees/gold-special-recognition"
                     element={

@@ -175,7 +175,7 @@ const LIFETIME_EDI = {
 };
 
 const GOLD_SPECIAL_EDI = {
-  title: "Gold Special Recognition — 2026 Edition",
+  title: "Influencers Education Impact Award 2026 Edition",
   subtitle: "3 categories · Editorial selection · Cultural impact",
   description: "Cultural and influence impact recognition for Sports, Music, and Social Media education advocacy. Selected editorially based on public visibility and advocacy contribution.",
   evaluationPillars: [

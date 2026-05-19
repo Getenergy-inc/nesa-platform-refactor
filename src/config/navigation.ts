@@ -139,7 +139,7 @@ export const MAIN_NAV: NavItem[] = [
         icon: Medal,
       },
       {
-        label: "Gold Special Recognition",
+        label: "Influencers Education Impact Award",
         href: "/awards/gold-special-recognition",
         description: "Cultural impact — Sports, Music & Social Media",
         icon: Star,

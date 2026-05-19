@@ -1,5 +1,5 @@
 /**
- * Gold Special Recognition — 2026 Edition
+ * Influencers Education Impact Award 2026 Edition
  * Dedicated nominee ecosystem (3 cultural impact categories).
  * Source of truth for all `/nominees/gold-special-recognition/*` routes.
  */
