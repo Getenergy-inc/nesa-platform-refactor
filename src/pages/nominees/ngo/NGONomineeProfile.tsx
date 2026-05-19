@@ -92,19 +92,30 @@ export default function NGONomineeProfile() {
               </div>
             </div>
 
-            <Card className="border-gold/10 bg-white/5 p-6 h-fit">
-              <h3 className="font-serif text-sm uppercase tracking-wide text-gold mb-4">
-                At a Glance
-              </h3>
-              <dl className="space-y-3 text-sm">
-                <Row k="Organisation" v={ngo.organizationType} />
-                <Row k="Country" v={ngo.country} />
-                <Row k="Region" v={region.name} />
-                <Row k="Impact Pillar" v={sub.name} />
-                <Row k="Nomination Year" v={String(ngo.nominationYear)} />
-                <Row k="Status" v={ngo.verificationStatus} />
-              </dl>
-            </Card>
+            <div className="space-y-4">
+              <div className="relative h-56 w-full overflow-hidden rounded-2xl ring-1 ring-gold/20 shadow-[0_10px_40px_-12px_hsl(42_85%_52%/0.35)]">
+                <NomineeAvatar
+                  name={ngo.name}
+                  src={ngo.logoUrl || ngo.imageUrl}
+                  kind="organization"
+                  shape="square"
+                  context={`${region.name} · ${ngo.country}`}
+                />
+              </div>
+              <Card className="border-gold/10 bg-white/5 p-6 h-fit">
+                <h3 className="font-serif text-sm uppercase tracking-wide text-gold mb-4">
+                  At a Glance
+                </h3>
+                <dl className="space-y-3 text-sm">
+                  <Row k="Organisation" v={ngo.organizationType} />
+                  <Row k="Country" v={ngo.country} />
+                  <Row k="Region" v={region.name} />
+                  <Row k="Impact Pillar" v={sub.name} />
+                  <Row k="Nomination Year" v={String(ngo.nominationYear)} />
+                  <Row k="Status" v={ngo.verificationStatus} />
+                </dl>
+              </Card>
+            </div>
           </motion.div>
 
           {/* Impact story */}
