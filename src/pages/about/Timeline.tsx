@@ -527,6 +527,15 @@ export default function Timeline() {
           <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_hsl(var(--primary)/0.15),_transparent_60%)]" />
           <div className="container relative mx-auto px-4">
             <div className="mx-auto max-w-4xl text-center">
+              <Badge className="mb-6 border-primary/40 bg-primary/10 text-primary">
+                2026 Season
+              </Badge>
+              <h1 className="mb-6 font-display text-4xl font-bold leading-tight text-white md:text-6xl">
+                2026 Season<br />
+                <span className="bg-gradient-to-r from-primary to-amber-400 bg-clip-text text-transparent">
+                  Programme Timeline
+                </span>
+              </h1>
               <p className="mx-auto mb-10 max-w-3xl text-lg text-white/80 md:text-xl">
                 A continental journey from public pre-nomination activation on{" "}
                 <span className="font-semibold text-primary">20 May 2026</span> to the live Blue Garnet
