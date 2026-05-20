@@ -21,7 +21,7 @@ import { Link } from "react-router-dom";
 // Nominee images
 import sportsNominee1 from "@/assets/nominees/sports-nominee-1.jpg";
 import sportsNominee2 from "@/assets/nominees/tegla-loroupe.jpg";
-import sportsNominee3 from "@/assets/nominees/sports-nominee-3.jpg";
+import sportsNominee3 from "@/assets/nominees/siya-kolisi.jpg";
 import musicNominee1 from "@/assets/nominees/music-nominee-1.jpg";
 import musicNominee2 from "@/assets/nominees/music-nominee-2.jpg";
 import musicNominee3 from "@/assets/nominees/music-nominee-3.jpg";
