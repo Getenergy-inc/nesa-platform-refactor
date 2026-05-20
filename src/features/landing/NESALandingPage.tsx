@@ -30,6 +30,7 @@ const BePartOfMovementSection = lazy(() => import("@/components/landing/BePartOf
 const ContributorsHallSection = lazy(() => import("@/components/nesa/ContributorsHallSection").then(m => ({ default: m.ContributorsHallSection })));
 const SponsorsSection = lazy(() => import("@/components/nesa/SponsorsSection").then(m => ({ default: m.SponsorsSection })));
 const FinalCTASection = lazy(() => import("@/components/nesa/FinalCTASection").then(m => ({ default: m.FinalCTASection })));
+const HomepageGalleryTeaser = lazy(() => import("@/components/gallery/HomepageGalleryTeaser").then(m => ({ default: m.HomepageGalleryTeaser })));
 
 export function NESALandingPage() {
   const { currentEdition } = useSeason();
@@ -95,6 +96,11 @@ export function NESALandingPage() {
         {/* 10. FEATURED VIDEOS */}
         <LazySection>
           <PromoVideosSection />
+        </LazySection>
+
+        {/* 10b. GALLERY TEASER */}
+        <LazySection>
+          <HomepageGalleryTeaser />
         </LazySection>
 
         {/* 11. BE PART OF THE MOVEMENT */}
