@@ -34,7 +34,7 @@ export const MUSIC_MIGRATED: GoldNominee[] = [
     badge: "Music for Education",
     summary: "Supporting education through the Starboy Foundation.",
     impactStory: "Supporting education through the Starboy Foundation.",
-    verified: false, votes: 0, image: "/placeholder.svg",
+    verified: false, votes: 0, image: wizkidImg,
   },
   {
     slug: "davido",
