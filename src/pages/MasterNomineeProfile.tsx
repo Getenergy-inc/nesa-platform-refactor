@@ -15,6 +15,7 @@ import { getMasterNomineeBySlug, getAllMasterNominees, WORKFLOW_STATUS_CONFIG, t
 import { NomineeWorkflowStatusBadge } from "@/components/nominees/NomineeWorkflowStatus";
 import { NomineeEDIScores } from "@/components/nominees/NomineeEDIScores";
 import { generateEnhancedBiography } from "@/lib/nomineeStoryGenerator";
+import { useResolveNomineeMedia } from "@/hooks/useNomineeMedia";
 
 function isOrg(name: string): boolean {
   const kw = ["bank","group","foundation","university","church","association","network","company","ltd","plc","state","institute","academy","school","college","polytechnic","library","fund","trust","society","ministry","agency","board","hospital","council","ngo"];
@@ -34,6 +35,7 @@ export default function MasterNomineeProfile() {
   const slug = rawSlug ? decodeURIComponent(rawSlug) : undefined;
   const nominee = useMemo(() => slug ? getMasterNomineeBySlug(slug) : undefined, [slug]);
   const bio = useMemo(() => nominee ? generateEnhancedBiography(nominee) : null, [nominee]);
+  const resolveMedia = useResolveNomineeMedia();
 
   const relatedNominees = useMemo(() => {
     if (!nominee) return [];
@@ -65,6 +67,9 @@ export default function MasterNomineeProfile() {
   const org = isOrg(nominee.name);
   const blueGarnet = isBlueGarnet(nominee.category);
   const workflowConfig = WORKFLOW_STATUS_CONFIG[nominee.workflowStatus];
+  // Resolve verified image from nominee_media (ignore broken master default).
+  const heroMedia = resolveMedia(nominee.slug, null, nominee.name);
+  const heroImage = heroMedia.image;
 
   return (
     <>
@@ -92,8 +97,8 @@ export default function MasterNomineeProfile() {
             <div className="flex flex-col md:flex-row gap-8 items-start">
               {/* Profile Image */}
               <div className={`flex-shrink-0 w-40 h-40 md:w-48 md:h-48 rounded-2xl border-2 border-gold/20 overflow-hidden flex items-center justify-center shadow-2xl shadow-black/30 ${org ? "bg-white/90 p-4" : "bg-gold/10"}`}>
-                {nominee.imageUrl && !nominee.imageUrl.includes("placeholder") ? (
-                  <img src={nominee.imageUrl} alt={nominee.name} className={`w-full h-full ${org ? "object-contain" : "object-cover"}`} loading="eager" />
+                {heroImage ? (
+                  <img src={heroImage} alt={heroMedia.alt ?? nominee.name} className={`w-full h-full ${org ? "object-contain" : "object-cover"}`} loading="eager" />
                 ) : (
                   <div className="flex flex-col items-center gap-2">
                     {org ? <Building2 className="w-14 h-14 text-gold/25" /> : <span className="text-gold/40 font-display text-4xl">{getInitials(nominee.name)}</span>}
@@ -343,13 +348,15 @@ export default function MasterNomineeProfile() {
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
                 {relatedNominees.map(rn => {
                   const rnOrg = isOrg(rn.name);
+                  const rnMedia = resolveMedia(rn.slug, null, rn.name);
+                  const rnImage = rnMedia.thumbnail ?? rnMedia.image;
                   return (
                     <Link key={rn.id} to={`/directory/${encodeURIComponent(rn.slug)}`} className="group">
                       <Card className="bg-charcoal-light/50 border-gold/10 hover:border-gold/30 transition-all overflow-hidden h-full">
                         <CardContent className="p-0">
                           <div className={`w-full h-40 flex items-center justify-center overflow-hidden ${rnOrg ? "bg-white/90 p-4" : "bg-gold/5"}`}>
-                            {rn.imageUrl && !rn.imageUrl.includes("placeholder") ? (
-                              <img src={rn.imageUrl} alt={rn.name} className={`w-full h-full ${rnOrg ? "object-contain" : "object-cover"}`} loading="lazy" />
+                            {rnImage ? (
+                              <img src={rnImage} alt={rnMedia.alt ?? rn.name} className={`w-full h-full ${rnOrg ? "object-contain" : "object-cover"}`} loading="lazy" />
                             ) : (
                               <span className="text-gold/40 font-display text-2xl">{getInitials(rn.name)}</span>
                             )}

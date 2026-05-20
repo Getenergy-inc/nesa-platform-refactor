@@ -587,8 +587,95 @@ export function getAllNominees(): EnrichedNominee[] {
     });
   });
 
+  // ────────────────────────────────────────────────────────────────────────
+  // Bridge: master 2025 entries that are NOT in the CSV (IDs 321+).
+  // Keeps cards/carousels/search and /nominees/:slug working for late adds.
+  // Slugs MUST match nominee_media rows in Supabase.
+  // ────────────────────────────────────────────────────────────────────────
+  MASTER_BRIDGE_NOMINEES.forEach((extra) => {
+    if (!allNominees.find((n) => n.slug === extra.slug)) {
+      allNominees.push(extra);
+    }
+  });
+
   return allNominees;
 }
+
+// Manually bridged master nominees (added after CSV freeze).
+// Image files live in /public/nominees/ AND nominee_media DB rows.
+const MASTER_BRIDGE_NOMINEES: EnrichedNominee[] = [
+  {
+    id: "master-321",
+    name: "Siya Kolisi (South Africa)",
+    slug: "siya-kolisi-south-africa-321",
+    image: "kolisi.jpg",
+    imageUrl: "/nominees/kolisi.jpg",
+    achievement:
+      "Kolisi Foundation – funding schools, gender-based violence response, and educational nutrition programs across South Africa.",
+    country: "South Africa",
+    imageType: "photo",
+    awardTitle:
+      "Best Africa Regional Companies CSR for Education Special Recognition Award in Africa 2025",
+    awardSlug: generateSlug(
+      "Best Africa Regional Companies CSR for Education Special Recognition Award in Africa 2025",
+    ),
+    subcategoryTitle:
+      "African International Sports Stars CSR For Education in Southern Africa",
+    subcategorySlug: generateSlug(
+      "African International Sports Stars CSR For Education in Southern Africa",
+    ),
+    regionName: "Southern Africa",
+    regionSlug: "southern-africa",
+    geographicCategory: "south-africa",
+    status: "approved",
+  },
+  {
+    id: "master-322",
+    name: "Tegla Loroupe (Kenya)",
+    slug: "tegla-loroupe-kenya-322",
+    image: "loroupe.jpg",
+    imageUrl: "/nominees/loroupe.jpg",
+    achievement:
+      "Tegla Loroupe Peace Foundation – sponsoring schools, scholarships, and peace-through-sport education for refugee and pastoralist youth.",
+    country: "Kenya",
+    imageType: "photo",
+    awardTitle:
+      "Best Africa Regional Companies CSR for Education Special Recognition Award in Africa 2025",
+    awardSlug: generateSlug(
+      "Best Africa Regional Companies CSR for Education Special Recognition Award in Africa 2025",
+    ),
+    subcategoryTitle:
+      "African International Sports Stars CSR For Education in East Africa",
+    subcategorySlug: generateSlug(
+      "African International Sports Stars CSR For Education in East Africa",
+    ),
+    regionName: "East Africa",
+    regionSlug: "east-africa",
+    geographicCategory: "east-africa",
+    status: "approved",
+  },
+  {
+    id: "master-323",
+    name: "Angelique Kidjo (Benin)",
+    slug: "angelique-kidjo-benin-323",
+    image: "kidjo.jpg",
+    imageUrl: "/nominees/kidjo.jpg",
+    achievement:
+      "Batonga Foundation – advancing secondary and higher education for adolescent girls across Africa through scholarships and mentorship.",
+    country: "Benin",
+    imageType: "photo",
+    awardTitle: "Creative Arts Industry Contribution to Education in Nigeria 2025",
+    awardSlug: generateSlug(
+      "Creative Arts Industry Contribution to Education in Nigeria 2025",
+    ),
+    subcategoryTitle: "Best Music for Educational Impact Award",
+    subcategorySlug: generateSlug("Best Music for Educational Impact Award"),
+    regionName: "West Africa",
+    regionSlug: "west-africa",
+    geographicCategory: "west-africa",
+    status: "approved",
+  },
+];
 
 /**
  * Get nominees filtered by geographic category
