@@ -255,7 +255,7 @@ export default function GoldCategoryPage() {
                   className="group relative overflow-hidden rounded-2xl border border-gold/15 bg-charcoal-light hover:border-gold/50 hover:shadow-[0_0_40px_-10px_rgba(212,175,55,0.35)] transition-all flex flex-col"
                 >
                   <Link to={`/nominees/gold-special-recognition/${category.slug}/${n.slug}`} className="relative h-56 overflow-hidden block">
-                    <img src={resolveMedia(n.slug, n.image, n.name).image ?? n.image} alt={resolveMedia(n.slug, n.image, n.name).alt ?? n.name} loading="lazy" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
+                    <HonoureeImage slug={n.slug} name={n.name} fallbackImage={n.image} flag={n.flag} imgClassName="transition-transform duration-700 group-hover:scale-110" />
                     <div className="absolute inset-0 bg-gradient-to-t from-charcoal-light via-transparent to-transparent" />
                     <Badge className="absolute top-3 left-3 bg-charcoal/80 backdrop-blur text-gold border-gold/40 text-[10px]">
                       {n.badge}
