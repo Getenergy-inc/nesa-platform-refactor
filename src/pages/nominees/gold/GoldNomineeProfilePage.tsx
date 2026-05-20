@@ -9,6 +9,7 @@ import { Button } from "@/components/ui/button";
 import { NomineeBreadcrumbs } from "@/components/nominees/NomineeBreadcrumbs";
 import { getGoldNominee, getGoldCategory } from "@/data/goldSpecialRecognition";
 import { useResolveNomineeMedia } from "@/hooks/useNomineeMedia";
+import { HonoureeImage } from "@/components/honourees/HonoureeImage";
 
 export default function GoldNomineeProfilePage() {
   const { categorySlug, nomineeSlug } = useParams<{ categorySlug: string; nomineeSlug: string }>();
