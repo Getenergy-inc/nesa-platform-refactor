@@ -67,6 +67,9 @@ export default function MasterNomineeProfile() {
   const org = isOrg(nominee.name);
   const blueGarnet = isBlueGarnet(nominee.category);
   const workflowConfig = WORKFLOW_STATUS_CONFIG[nominee.workflowStatus];
+  // Resolve verified image from nominee_media (ignore broken master default).
+  const heroMedia = resolveMedia(nominee.slug, null, nominee.name);
+  const heroImage = heroMedia.image;
 
   return (
     <>
