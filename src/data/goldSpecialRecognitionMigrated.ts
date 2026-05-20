@@ -5,6 +5,7 @@
  * Do not hand-edit — re-run /tmp/migrate-gold.ts to regenerate.
  */
 import type { GoldNominee } from "./goldSpecialRecognition";
+import didierDrogbaImg from "@/assets/nominees/didier-drogba.jpg";
 
 export const MUSIC_MIGRATED: GoldNominee[] = [
   {
@@ -219,7 +220,7 @@ export const SOCIAL_MIGRATED: GoldNominee[] = [
     badge: "Social Media for Education",
     summary: "Didier Drogba Foundation – Funding schools and providing educational grants.",
     impactStory: "Didier Drogba Foundation – Funding schools and providing educational grants.",
-    verified: false, votes: 0, image: "/placeholder.svg",
+    verified: true, votes: 0, image: didierDrogbaImg,
   },
   {
     slug: "fally-ipupa",
