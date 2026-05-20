@@ -35,6 +35,7 @@ export default function MasterNomineeProfile() {
   const slug = rawSlug ? decodeURIComponent(rawSlug) : undefined;
   const nominee = useMemo(() => slug ? getMasterNomineeBySlug(slug) : undefined, [slug]);
   const bio = useMemo(() => nominee ? generateEnhancedBiography(nominee) : null, [nominee]);
+  const resolveMedia = useResolveNomineeMedia();
 
   const relatedNominees = useMemo(() => {
     if (!nominee) return [];
