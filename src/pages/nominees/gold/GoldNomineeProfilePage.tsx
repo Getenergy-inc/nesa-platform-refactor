@@ -9,6 +9,7 @@ import { Button } from "@/components/ui/button";
 import { NomineeBreadcrumbs } from "@/components/nominees/NomineeBreadcrumbs";
 import { getGoldNominee, getGoldCategory } from "@/data/goldSpecialRecognition";
 import { useResolveNomineeMedia } from "@/hooks/useNomineeMedia";
+import { HonoureeImage } from "@/components/honourees/HonoureeImage";
 
 export default function GoldNomineeProfilePage() {
   const { categorySlug, nomineeSlug } = useParams<{ categorySlug: string; nomineeSlug: string }>();
@@ -101,7 +102,7 @@ export default function GoldNomineeProfilePage() {
               <div className="grid md:grid-cols-[1fr,1.2fr]">
                 {/* Image */}
                 <div className="relative h-72 md:h-[28rem]">
-                  <img src={heroImage} alt={imageAlt} className="w-full h-full object-cover" />
+                  <HonoureeImage slug={nominee.slug} name={nominee.name} fallbackImage={nominee.image} flag={nominee.flag} />
                   <div className="absolute inset-0 bg-gradient-to-t md:bg-gradient-to-r from-charcoal-light via-charcoal-light/30 to-transparent" />
                   <Badge className="absolute top-4 left-4 bg-charcoal/80 backdrop-blur text-gold border-gold/40">
                     <Sparkles className="w-3 h-3 mr-1" /> Influencers Education Impact Award
@@ -243,7 +244,9 @@ export default function GoldNomineeProfilePage() {
                       to={`/nominees/gold-special-recognition/${category.slug}/${r.slug}`}
                       className="flex items-center gap-3 px-2 py-2 rounded-lg hover:bg-gold/5 transition-colors group"
                     >
-                      <img src={r.image} alt={r.name} className="w-10 h-10 rounded-lg object-cover shrink-0" />
+                      <div className="w-10 h-10 rounded-lg overflow-hidden shrink-0">
+                        <HonoureeImage slug={r.slug} name={r.name} fallbackImage={r.image} />
+                      </div>
                       <div className="flex-1 min-w-0">
                         <div className="text-sm text-ivory group-hover:text-gold transition-colors line-clamp-1">{r.name}</div>
                         <div className="text-[11px] text-ivory/50 line-clamp-1">{r.flag} {r.country}</div>
