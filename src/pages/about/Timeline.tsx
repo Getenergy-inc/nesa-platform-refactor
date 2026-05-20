@@ -669,41 +669,59 @@ export default function Timeline() {
           </div>
         </section>
 
-        {/* 4. CATEGORY PATHWAYS */}
+        {/* 4. CATEGORY PATHWAYS — How NESA-Africa Awards Are Organized */}
         <section id="pathways" className="border-t border-white/5 bg-charcoal-light/20 py-16 lg:py-24">
           <div className="container mx-auto px-4">
-            <div className="mx-auto mb-12 max-w-3xl text-center">
+            {/* Section heading */}
+            <div className="mx-auto mb-8 max-w-3xl text-center">
               <Badge variant="outline" className="mb-4 border-primary/40 text-primary">
-                Category Pathways
+                Award Pathways
               </Badge>
               <h2 className="mb-4 font-display text-3xl font-bold text-white md:text-4xl">
-                How Awards Move Through the Season
+                How NESA-Africa Awards Are Organized
               </h2>
-              <p className="text-white/70">
-                Four distinct pathways — each with its own purpose, process, and recognition model.
+              <p className="mx-auto max-w-2xl text-white/70">
+                Understand the four recognition pathways, how nominees are grouped, and how each
+                award category moves through the season.
               </p>
             </div>
 
-            {/* Tier comparison strip */}
-            <div className="mx-auto mb-10 grid max-w-5xl grid-cols-2 gap-2 rounded-2xl border border-white/10 bg-white/5 p-2 md:grid-cols-4">
+            {/* Short explanatory intro above selector */}
+            <div className="mx-auto mb-8 max-w-3xl rounded-2xl border border-primary/20 bg-gradient-to-r from-primary/5 via-transparent to-primary/5 px-5 py-4 text-center">
+              <p className="text-sm leading-relaxed text-white/80 md:text-base">
+                NESA-Africa uses different recognition pathways to celebrate lifetime education
+                icons, institutions, social-impact influencers, and competitive excellence across
+                Africa and the diaspora.
+              </p>
+            </div>
+
+            {/* Pathway selector — full labels, no truncation, responsive */}
+            <div className="mx-auto mb-12 grid max-w-6xl grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-4">
               {CATEGORY_PATHWAYS.map((cat) => {
                 const Icon = cat.icon;
                 return (
                   <a
                     key={cat.title}
                     href={`#tier-${cat.title.toLowerCase().replace(/\s+/g, "-")}`}
-                    className="group flex items-center gap-2 rounded-xl px-3 py-2 transition-all hover:bg-white/5"
+                    className={`group flex items-start gap-3 rounded-2xl border bg-white/5 p-4 transition-all hover:-translate-y-0.5 hover:border-primary/50 hover:bg-white/10 ${cat.accent}`}
                   >
-                    <Icon className={`h-4 w-4 ${cat.iconColor}`} />
-                    <div className="min-w-0">
-                      <p className="truncate text-xs font-semibold text-white">{cat.title}</p>
-                      <p className="truncate text-[10px] text-white/50">{cat.subtitle}</p>
+                    <div className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-charcoal/60 ring-1 ${cat.ringColor}`}>
+                      <Icon className={`h-5 w-5 ${cat.iconColor}`} />
+                    </div>
+                    <div className="min-w-0 flex-1">
+                      <p className="text-sm font-semibold leading-snug text-white">
+                        {cat.title}
+                      </p>
+                      <p className={`mt-0.5 text-xs leading-snug ${cat.iconColor}`}>
+                        {cat.subtitle}
+                      </p>
                     </div>
                   </a>
                 );
               })}
             </div>
 
+            {/* Pathway cards */}
             <div className="grid gap-6 md:grid-cols-2">
               {CATEGORY_PATHWAYS.map((cat) => {
                 const Icon = cat.icon;
@@ -721,36 +739,49 @@ export default function Timeline() {
                         className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110"
                         loading="lazy"
                       />
-                      {/* Gradient overlay for legibility */}
                       <div className={`absolute inset-0 bg-gradient-to-b ${cat.imageOverlay}`} />
-                      {/* Top-left tier badge over image */}
                       <div className="absolute left-4 top-4">
                         <Badge className={`${cat.badgeClass} backdrop-blur-md`}>{cat.subtitle}</Badge>
                       </div>
-                      {/* Bottom-overlapping icon medallion */}
                       <div className="absolute -bottom-7 left-5">
                         <div className={`flex h-14 w-14 items-center justify-center rounded-2xl bg-charcoal/90 ring-2 ${cat.ringColor} shadow-xl backdrop-blur-md`}>
                           <Icon className={`h-7 w-7 ${cat.iconColor}`} />
                         </div>
                       </div>
-                      {/* Title overlay on image bottom-right */}
-                      <div className="absolute bottom-3 right-4 text-right">
-                        <p className={`text-[10px] font-semibold uppercase tracking-widest ${cat.iconColor}`}>
-                          {cat.scope.split("·")[0].trim()}
-                        </p>
-                      </div>
                     </div>
 
-                    {/* Decorative corner glow */}
                     <div className={`pointer-events-none absolute -right-12 top-40 h-40 w-40 rounded-full bg-gradient-to-br ${cat.accent} opacity-40 blur-2xl`} />
 
                     <CardHeader className="relative pt-10">
-                      <CardTitle className="font-display text-2xl text-white">{cat.title}</CardTitle>
-                      <p className={`text-sm italic ${cat.iconColor}`}>{cat.tagline}</p>
+                      <CardTitle className="font-display text-2xl leading-tight text-white">
+                        {cat.title}
+                      </CardTitle>
+                      <p className={`text-sm font-semibold ${cat.iconColor}`}>{cat.subtitle}</p>
+                      <p className="text-xs italic text-white/60">{cat.tagline}</p>
                     </CardHeader>
 
                     <CardContent className="relative flex flex-1 flex-col space-y-5">
                       <p className="text-sm leading-relaxed text-white/80">{cat.description}</p>
+
+                      {/* Recognition Model + Best For labels */}
+                      <div className="grid gap-2 sm:grid-cols-2">
+                        <div className="rounded-xl border border-white/10 bg-charcoal/40 p-3">
+                          <p className="text-[10px] font-semibold uppercase tracking-wider text-white/50">
+                            Recognition Model
+                          </p>
+                          <p className={`mt-1 text-xs font-medium ${cat.iconColor}`}>
+                            {cat.recognitionModel}
+                          </p>
+                        </div>
+                        <div className="rounded-xl border border-white/10 bg-charcoal/40 p-3">
+                          <p className="text-[10px] font-semibold uppercase tracking-wider text-white/50">
+                            Best For
+                          </p>
+                          <p className="mt-1 text-xs font-medium text-white/90">
+                            {cat.bestFor}
+                          </p>
+                        </div>
+                      </div>
 
                       {/* Highlight chips */}
                       <div className="flex flex-wrap gap-1.5">
@@ -831,6 +862,71 @@ export default function Timeline() {
               })}
             </div>
 
+            {/* Award Season Process — vertical timeline showing the flow */}
+            <div className="mx-auto mt-16 max-w-5xl">
+              <div className="mb-8 text-center">
+                <Badge variant="outline" className="mb-3 border-primary/40 text-primary">
+                  Award Season Flow
+                </Badge>
+                <h3 className="font-display text-2xl font-bold text-white md:text-3xl">
+                  How Each Award Pathway Moves Through the Season
+                </h3>
+                <p className="mt-2 text-sm text-white/65">
+                  Every nominee — across all four pathways — flows through these seven stages.
+                </p>
+              </div>
+
+              <ol className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+                {SEASON_PROCESS_STEPS.map((step, i) => (
+                  <li
+                    key={step.label}
+                    className="relative rounded-2xl border border-white/10 bg-white/5 p-4 transition-all hover:border-primary/40 hover:bg-white/10"
+                  >
+                    <div className="mb-2 flex items-center gap-2">
+                      <span className="flex h-7 w-7 items-center justify-center rounded-full bg-primary/15 text-xs font-bold text-primary ring-1 ring-primary/30">
+                        {i + 1}
+                      </span>
+                      <p className="text-sm font-semibold text-white">{step.label}</p>
+                    </div>
+                    <p className="text-xs leading-relaxed text-white/65">{step.desc}</p>
+                  </li>
+                ))}
+              </ol>
+            </div>
+
+            {/* Conversion CTA block */}
+            <div className="mx-auto mt-16 max-w-5xl overflow-hidden rounded-3xl border border-primary/30 bg-gradient-to-br from-primary/15 via-charcoal-light/50 to-primary/10 p-6 md:p-10">
+              <div className="flex flex-col items-center gap-6 text-center">
+                <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-primary/20 ring-2 ring-primary/40">
+                  <Trophy className="h-7 w-7 text-primary" />
+                </div>
+                <div>
+                  <h3 className="font-display text-2xl font-bold text-white md:text-3xl">
+                    Know an education champion who fits one of these award pathways?
+                  </h3>
+                  <p className="mx-auto mt-3 max-w-2xl text-sm text-white/75 md:text-base">
+                    Nominate an African Education Social Impact Champion today and earn free
+                    voting points to support your favorite nominees when voting opens.
+                  </p>
+                </div>
+                <div className="flex w-full flex-col items-stretch justify-center gap-3 sm:w-auto sm:flex-row">
+                  {/* TODO: confirm final route for nominate flow */}
+                  <Button asChild size="lg" className="bg-primary font-semibold text-charcoal hover:bg-primary/90">
+                    <Link to="/nominate">
+                      Nominate a Champion Now <ArrowRight className="ml-1 h-4 w-4" />
+                    </Link>
+                  </Button>
+                  <Button asChild size="lg" variant="outline" className="border-primary/40 text-primary hover:bg-primary/10">
+                    <Link to="/categories">View Award Categories</Link>
+                  </Button>
+                  {/* TODO: replace with final voting-points route if changed */}
+                  <Button asChild size="lg" variant="outline" className="border-white/20 text-white hover:bg-white/10">
+                    <Link to="/earn-agc">How Voting Points Work</Link>
+                  </Button>
+                </div>
+              </div>
+            </div>
+
             <div className="mt-10 flex flex-wrap justify-center gap-3">
               <Button asChild variant="outline" className="border-primary/40 text-primary hover:bg-primary/10">
                 <Link to="/categories">View All Categories</Link>
@@ -844,6 +940,7 @@ export default function Timeline() {
             </div>
           </div>
         </section>
+
 
         {/* 5. REGIONAL PARTICIPATION */}
         <section id="regions" className="py-16 lg:py-24">
