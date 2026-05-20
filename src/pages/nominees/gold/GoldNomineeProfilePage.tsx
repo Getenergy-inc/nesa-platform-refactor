@@ -244,7 +244,9 @@ export default function GoldNomineeProfilePage() {
                       to={`/nominees/gold-special-recognition/${category.slug}/${r.slug}`}
                       className="flex items-center gap-3 px-2 py-2 rounded-lg hover:bg-gold/5 transition-colors group"
                     >
-                      <img src={r.image} alt={r.name} className="w-10 h-10 rounded-lg object-cover shrink-0" />
+                      <div className="w-10 h-10 rounded-lg overflow-hidden shrink-0">
+                        <HonoureeImage slug={r.slug} name={r.name} fallbackImage={r.image} />
+                      </div>
                       <div className="flex-1 min-w-0">
                         <div className="text-sm text-ivory group-hover:text-gold transition-colors line-clamp-1">{r.name}</div>
                         <div className="text-[11px] text-ivory/50 line-clamp-1">{r.flag} {r.country}</div>
