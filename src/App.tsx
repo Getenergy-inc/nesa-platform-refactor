@@ -16,7 +16,14 @@ import RegionCategoryPage from "./pages/nominees/regional/RegionCategoryPage";
 import IconAwardMain from "./pages/nominees/icon/IconAwardMain";
 import IconSubcategoryPage from "./pages/nominees/icon/IconSubcategoryPage";
 import IconClassificationPage from "./pages/nominees/icon/IconClassificationPage";
-import { Navigate } from "react-router-dom";
+import { Navigate, useParams, useLocation } from "react-router-dom";
+
+/** 301-style redirect that preserves the :slug param and query string. */
+const SlugRedirect = ({ to }: { to: (slug: string) => string }) => {
+  const { slug = "" } = useParams();
+  const { search } = useLocation();
+  return <Navigate to={`${to(slug)}${search}`} replace />;
+};
 import NomineeDirectory from "./pages/NomineeDirectory";
 import MasterNomineeProfile from "./pages/MasterNomineeProfile";
 import CertificateVerify from "./pages/CertificateVerify";
