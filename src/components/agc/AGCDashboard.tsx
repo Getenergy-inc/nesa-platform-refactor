@@ -110,7 +110,7 @@ export function AGCDashboard() {
             Create an account to start earning AGCc and voting for Africa's education champions.
           </p>
           <Button asChild className="bg-gold hover:bg-gold-dark text-charcoal font-semibold">
-            <Link to="/auth/register">
+            <Link to="/register">
               Create Account <ArrowRight className="ml-2 h-4 w-4" />
             </Link>
           </Button>

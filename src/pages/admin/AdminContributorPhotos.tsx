@@ -21,7 +21,7 @@ export default function AdminContributorPhotos() {
   const [drafts, setDrafts] = useState<Record<string, string>>({});
 
   if (authLoading) return null;
-  if (!user) return <Navigate to="/auth/login" replace />;
+  if (!user) return <Navigate to="/login" replace />;
   if (!hasRole("admin")) return <Navigate to="/unauthorized" replace />;
 
   const filtered = useMemo(() => {

@@ -494,7 +494,7 @@ export default function JudgeApply() {
                           </FormControl>
                           <div className="space-y-1">
                             <FormLabel className="text-white/80 font-normal">
-                              I agree to the <Link to="/policies/terms" className="text-gold hover:underline">Terms of Service</Link> and <Link to="/policies/privacy" className="text-gold hover:underline">Privacy Policy</Link> *
+                              I agree to the <Link to="/policies" className="text-gold hover:underline">Terms of Service</Link> and <Link to="/policies" className="text-gold hover:underline">Privacy Policy</Link> *
                             </FormLabel>
                             <FormMessage />
                           </div>
@@ -516,7 +516,7 @@ export default function JudgeApply() {
                           </FormControl>
                           <div className="space-y-1">
                             <FormLabel className="text-white/80 font-normal">
-                              I agree to disclose any Conflicts of Interest and abide by the <Link to="/policies/coi" className="text-gold hover:underline">COI Policy</Link> *
+                              I agree to disclose any Conflicts of Interest and abide by the <Link to="/policies" className="text-gold hover:underline">COI Policy</Link> *
                             </FormLabel>
                             <FormMessage />
                           </div>

@@ -381,7 +381,7 @@ export default function Nominate() {
 
     if (!user) {
       toast.error("Please log in to submit a nomination");
-      navigate("/auth/login", { state: { from: "/nominate" } });
+      navigate("/login", { state: { from: "/nominate" } });
       return;
     }
 

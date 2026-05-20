@@ -393,7 +393,7 @@ export function RenominateModal({
           {/* Login prompt for non-authenticated users */}
           {!user && (
             <p className="text-xs text-center text-ivory/50">
-              <Link to="/auth/login" className="text-gold hover:underline">Log in</Link>
+              <Link to="/login" className="text-gold hover:underline">Log in</Link>
               {" "}to track your submissions and get updates.
             </p>
           )}

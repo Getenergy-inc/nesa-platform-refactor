@@ -457,7 +457,7 @@ function UserMenu() {
         {hasRole("jury") && (
           <DropdownMenuItem asChild>
             <Link
-              to="/jury"
+              to="/judges"
               className="cursor-pointer text-white hover:text-gold hover:bg-gold/10"
             >
               Jury Dashboard

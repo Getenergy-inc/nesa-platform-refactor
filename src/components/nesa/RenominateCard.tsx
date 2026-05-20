@@ -154,7 +154,7 @@ export function RenominateCard({
         {/* Login prompt for non-authenticated users */}
         {!user && (
           <p className="text-xs text-center text-ivory/50">
-            <Link to="/auth/login" className="text-gold hover:underline">
+            <Link to="/login" className="text-gold hover:underline">
               Log in
             </Link>{" "}
             to endorse this nominee

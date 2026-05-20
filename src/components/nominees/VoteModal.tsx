@@ -151,10 +151,10 @@ export function VoteModal({
             </p>
             <div className="flex gap-3">
               <Button asChild className="flex-1 bg-gold hover:bg-gold-dark text-charcoal">
-                <Link to="/auth/login">Log In</Link>
+                <Link to="/login">Log In</Link>
               </Button>
               <Button asChild variant="outline" className="flex-1 border-gold/30 text-gold hover:bg-gold/10">
-                <Link to="/auth/register">Sign Up</Link>
+                <Link to="/register">Sign Up</Link>
               </Button>
             </div>
           </div>

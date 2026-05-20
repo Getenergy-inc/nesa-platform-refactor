@@ -358,7 +358,7 @@ export default function ForVoters() {
                   <p className="text-white/60 mb-4">Earn or purchase AGC to participate in voting.</p>
                   <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
                     <Button asChild className="bg-gold hover:bg-gold-dark text-charcoal font-semibold rounded-full px-6">
-                      <Link to="/earn-credits">
+                      <Link to="/earn-agc">
                         Earn Free Credits
                       </Link>
                     </Button>
