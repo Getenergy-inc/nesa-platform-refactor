@@ -8,11 +8,13 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { NomineeBreadcrumbs } from "@/components/nominees/NomineeBreadcrumbs";
 import { getGoldNominee, getGoldCategory } from "@/data/goldSpecialRecognition";
+import { useResolveNomineeMedia } from "@/hooks/useNomineeMedia";
 
 export default function GoldNomineeProfilePage() {
   const { categorySlug, nomineeSlug } = useParams<{ categorySlug: string; nomineeSlug: string }>();
   const data = categorySlug && nomineeSlug ? getGoldNominee(categorySlug, nomineeSlug) : null;
   const [voted, setVoted] = useState(false);
+  const resolveMedia = useResolveNomineeMedia();
 
   if (!data) return <Navigate to={`/nominees/gold-special-recognition/${categorySlug ?? ""}`} replace />;
 
