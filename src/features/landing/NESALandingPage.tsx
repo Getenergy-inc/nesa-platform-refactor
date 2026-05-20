@@ -64,6 +64,11 @@ export function NESALandingPage() {
           <NominationCampaignSection />
         </LazySection>
 
+        {/* 1c. CALL FOR NOMINATIONS — complementary campaign block */}
+        <LazySection>
+          <CallForNominationsCampaign />
+        </LazySection>
+
         {/* 2. TRUST STRIP */}
         <TrustLogosStrip />
 
