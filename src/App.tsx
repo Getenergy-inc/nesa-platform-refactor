@@ -16,7 +16,14 @@ import RegionCategoryPage from "./pages/nominees/regional/RegionCategoryPage";
 import IconAwardMain from "./pages/nominees/icon/IconAwardMain";
 import IconSubcategoryPage from "./pages/nominees/icon/IconSubcategoryPage";
 import IconClassificationPage from "./pages/nominees/icon/IconClassificationPage";
-import { Navigate } from "react-router-dom";
+import { Navigate, useParams } from "react-router-dom";
+
+/** 301-style redirect that preserves the :slug param and query string. */
+const SlugRedirect = ({ to }: { to: (slug: string) => string }) => {
+  const { slug = "" } = useParams();
+  const search = typeof window !== "undefined" ? window.location.search : "";
+  return <Navigate to={`${to(slug)}${search}`} replace />;
+};
 import NomineeDirectory from "./pages/NomineeDirectory";
 import MasterNomineeProfile from "./pages/MasterNomineeProfile";
 import CertificateVerify from "./pages/CertificateVerify";
@@ -307,6 +314,60 @@ const App = () => (
                   />
                   <Route path="/agc-rewards" element={<Navigate to="/earn-agc" replace />} />
                   <Route path="/earn-voting-coins" element={<Navigate to="/earn-agc" replace />} />
+
+                  {/* === 301 LEGACY REDIRECTS === */}
+                  {/* Auth legacy */}
+                  <Route path="/auth" element={<Navigate to="/login" replace />} />
+                  <Route path="/auth/login" element={<Navigate to="/login" replace />} />
+                  <Route path="/auth/register" element={<Navigate to="/register" replace />} />
+                  <Route path="/auth/forgot-password" element={<Navigate to="/forgot-password" replace />} />
+                  <Route path="/auth/reset-password" element={<Navigate to="/reset-password" replace />} />
+                  <Route path="/signin" element={<Navigate to="/login" replace />} />
+                  <Route path="/signup" element={<Navigate to="/register" replace />} />
+
+                  {/* Sponsor legacy */}
+                  <Route path="/sponsor" element={<Navigate to="/sponsors" replace />} />
+                  <Route path="/our-sponsors" element={<Navigate to="/sponsors" replace />} />
+                  <Route path="/our-partners" element={<Navigate to="/sponsors" replace />} />
+                  <Route path="/partner" element={<Navigate to="/sponsors" replace />} />
+                  {/* /partners has its own dedicated page — do not redirect */}
+                  <Route path="/partnerships" element={<Navigate to="/sponsors" replace />} />
+                  <Route path="/become-a-sponsor" element={<Navigate to="/contact?topic=sponsorship" replace />} />
+                  <Route path="/become-sponsor" element={<Navigate to="/contact?topic=sponsorship" replace />} />
+
+                  {/* Nominee legacy */}
+                  <Route path="/nominee" element={<Navigate to="/nominees" replace />} />
+                  <Route path="/nominee-directory" element={<Navigate to="/nominees" replace />} />
+                  <Route path="/nominees-directory" element={<Navigate to="/nominees" replace />} />
+                  <Route path="/profile/:slug" element={<SlugRedirect to={(s) => `/nominee/${s}`} />} />
+                  <Route path="/nominees/profile/:slug" element={<SlugRedirect to={(s) => `/nominee/${s}`} />} />
+
+                  {/* Category / award legacy */}
+                  <Route path="/award" element={<Navigate to="/awards" replace />} />
+                  <Route path="/award-categories" element={<Navigate to="/categories" replace />} />
+                  <Route path="/category" element={<Navigate to="/categories" replace />} />
+                  <Route path="/category/:slug" element={<SlugRedirect to={(s) => `/categories/${s}`} />} />
+                  <Route path="/awards/category/:slug" element={<SlugRedirect to={(s) => `/awards/${s}`} />} />
+                  <Route path="/nominees/category/:slug" element={<SlugRedirect to={(s) => `/nominees/${s}`} />} />
+
+                  {/* Region legacy */}
+                  <Route path="/regions" element={<Navigate to="/region" replace />} />
+                  <Route path="/regions/:slug" element={<SlugRedirect to={(s) => `/region/${s}`} />} />
+                  <Route path="/nominees/region/:slug" element={<SlugRedirect to={(s) => `/nominees/${s}`} />} />
+
+
+                  {/* Misc legacy paths flagged in audit */}
+                  <Route path="/jury" element={<Navigate to="/judges" replace />} />
+                  <Route path="/music" element={<Navigate to="/media" replace />} />
+                  <Route path="/media/nesa-tv" element={<Navigate to="/media/tv" replace />} />
+                  <Route path="/dashboard/wallet" element={<Navigate to="/wallet" replace />} />
+                  <Route path="/earn-credits" element={<Navigate to="/earn-agc" replace />} />
+                  <Route path="/volunteer-bod" element={<Navigate to="/volunteer" replace />} />
+                  <Route path="/policies/coi" element={<Navigate to="/policies" replace />} />
+                  <Route path="/policies/privacy" element={<Navigate to="/policies" replace />} />
+                  <Route path="/policies/terms" element={<Navigate to="/policies" replace />} />
+
+
 
 
                   {/* About */}
