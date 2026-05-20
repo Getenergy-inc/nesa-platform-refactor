@@ -126,12 +126,15 @@ export default function GoldHubPage() {
                 >
                   {/* Banner image — first nominee */}
                   <div className="relative h-44 overflow-hidden">
-                    <img
-                      src={cat.nominees[0]?.image}
-                      alt={cat.title}
-                      loading="lazy"
-                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                    />
+                    {cat.nominees[0] ? (
+                      <HonoureeImage
+                        slug={cat.nominees[0].slug}
+                        name={cat.nominees[0].name}
+                        fallbackImage={cat.nominees[0].image}
+                        flag={cat.nominees[0].flag}
+                        imgClassName="transition-transform duration-700 group-hover:scale-110"
+                      />
+                    ) : null}
                     <div className="absolute inset-0 bg-gradient-to-t from-charcoal-light via-charcoal-light/30 to-transparent" />
                     <div className={`absolute inset-0 bg-gradient-to-br ${cat.accent} mix-blend-overlay opacity-50`} />
                     <div className="absolute top-3 left-3 inline-flex items-center justify-center w-11 h-11 rounded-xl bg-charcoal/80 backdrop-blur border border-gold/40">
