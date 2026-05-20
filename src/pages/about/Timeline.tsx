@@ -54,13 +54,15 @@ const isVotingPhase = (phase: string) => /gold|blue garnet|voting/i.test(phase);
 const CATEGORY_PATHWAYS = [
   {
     icon: Crown,
-    title: "Africa Education Icon",
+    title: "Africa Education Icon Award",
     subtitle: "Lifetime Achievement",
     tagline: "The continent's highest education honour.",
     selection: "Jury selection only",
     scope: "2006–2026",
     description:
-      "A continental honour recognising transformational leaders who have shaped education across Africa over the past two decades.",
+      "Honouring education leaders, builders, reformers, founders, philanthropists, and changemakers whose long-term contribution has shaped education impact across Africa and the diaspora.",
+    recognitionModel: "Honorary / Legacy Recognition",
+    bestFor: "Lifetime education impact",
     placement: "Nominations 12 July – 12 September 2026",
     journey: ["Nomination", "10-Year Profile", "Jury Review", "Live Show"],
     highlights: ["3 Residents", "3 Diaspora", "3 Friends of Africa"],
@@ -69,8 +71,8 @@ const CATEGORY_PATHWAYS = [
       "Literary & New Curriculum Advocate Icon of the Decade",
       "Africa Technical Educator Icon of the Decade",
     ],
-    primaryCta: { label: "Nominate an Icon", to: "/nominate?tier=icon" },
-    secondaryCta: { label: "Icon Criteria", to: "/categories/africa-education-icon" },
+    primaryCta: { label: "View Icon Categories", to: "/categories/africa-education-icon" },
+    secondaryCta: { label: "Nominate a Champion", to: "/nominate?tier=icon" },
     accent: "from-amber-500/20 to-yellow-600/10 border-amber-500/40",
     badgeClass: "bg-amber-500/20 text-amber-300 border-amber-500/40",
     iconColor: "text-amber-300",
@@ -80,13 +82,15 @@ const CATEGORY_PATHWAYS = [
   },
   {
     icon: Star,
-    title: "Platinum",
+    title: "Platinum Award",
     subtitle: "Institutional Leadership",
     tagline: "Recognising the systems behind the impact.",
     selection: "NRC verification + governance criteria",
     scope: "Institutions · Diaspora · Partnerships",
     description:
-      "Recognises institutional leadership, diaspora impact, political leadership, and international partnerships that strengthen education systems.",
+      "Recognising institutions, organizations, partners, schools, NGOs, and platforms making strong structural contributions to education development, access, funding, innovation, and support.",
+    recognitionModel: "Institutional Recognition",
+    bestFor: "Organizations and education platforms",
     placement: "Platinum Recognition Show · 11 June 2026",
     journey: ["Nomination", "NRC Verification", "Governance Review", "Recognition Show"],
     highlights: ["Non-competitive", "NRC verified", "Baseline Recognition"],
@@ -96,8 +100,8 @@ const CATEGORY_PATHWAYS = [
       "Political Leadership for Education",
       "International Partnerships",
     ],
-    primaryCta: { label: "Submit Platinum Nomination", to: "/nominate?tier=platinum" },
-    secondaryCta: { label: "Platinum Criteria", to: "/categories/platinum" },
+    primaryCta: { label: "View Platinum Categories", to: "/categories/platinum" },
+    secondaryCta: { label: "View Nominees", to: "/nominees" },
     accent: "from-slate-400/20 to-slate-500/10 border-slate-400/40",
     badgeClass: "bg-slate-400/20 text-slate-200 border-slate-400/40",
     iconColor: "text-slate-200",
@@ -113,7 +117,9 @@ const CATEGORY_PATHWAYS = [
     selection: "Public participation / visibility-led",
     scope: "Sports · Music · Social Influence",
     description:
-      "Celebrates cultural and public figures advancing education through sports, music, and social media influence.",
+      "Celebrating public voices, creators, cultural leaders, media personalities, sports figures, music leaders, advocates, and digital voices using influence to advance education awareness and social impact.",
+    recognitionModel: "Public Influence / Social Impact",
+    bestFor: "Cultural and digital education advocates",
     placement: "Voting 13 Jul – 25 Sep · Winners Show 1 Oct 2026",
     journey: ["Nomination", "Public Voting", "AGC Tally", "Winners Show"],
     highlights: ["100% Public Vote", "AGC Powered", "Mass Participation"],
@@ -122,8 +128,8 @@ const CATEGORY_PATHWAYS = [
       "Music for Education",
       "Social Media Advocacy for Education",
     ],
-    primaryCta: { label: "Nominate for Gold", to: "/nominate?tier=gold" },
-    secondaryCta: { label: "How Voting Works", to: "/vote/how-it-works" },
+    primaryCta: { label: "View Influencer Categories", to: "/categories/influencer-education" },
+    secondaryCta: { label: "Nominate an Influencer", to: "/nominate?tier=gold" },
     accent: "from-yellow-500/20 to-amber-500/10 border-yellow-500/40",
     badgeClass: "bg-yellow-500/20 text-yellow-300 border-yellow-500/40",
     iconColor: "text-yellow-300",
@@ -133,13 +139,15 @@ const CATEGORY_PATHWAYS = [
   },
   {
     icon: Gem,
-    title: "Blue Garnet",
+    title: "Blue Garnet Award",
     subtitle: "Competitive Excellence",
     tagline: "The final prestige stage of the season.",
     selection: "Public voting + jury evaluation",
     scope: "Final Prestige Stage",
     description:
-      "Represents the final prestige stage of the season across the leading competitive categories.",
+      "Recognising outstanding nominees through competitive categories supported by public participation, review, judging, scoring, and transparent award-season processes.",
+    recognitionModel: "Competitive Award Pathway",
+    bestFor: "Public nomination and voting categories",
     placement: "Voting 2 – 22 Oct · Gala 22 Oct 2026",
     journey: ["Nomination", "Jury Scoring (60%)", "Public Vote (40%)", "Gala Reveal"],
     highlights: ["40% Public", "60% Jury", "Live Gala Reveal"],
@@ -149,8 +157,8 @@ const CATEGORY_PATHWAYS = [
       "Education Innovation of the Year",
       "Outstanding African Educator",
     ],
-    primaryCta: { label: "Nominate for Blue Garnet", to: "/nominate?tier=blue-garnet" },
-    secondaryCta: { label: "Vote with AGC", to: "/vote" },
+    primaryCta: { label: "View Blue Garnet Categories", to: "/categories/blue-garnet" },
+    secondaryCta: { label: "How Voting Works", to: "/vote/how-it-works" },
     accent: "from-blue-500/20 to-indigo-600/10 border-blue-500/40",
     badgeClass: "bg-blue-500/20 text-blue-300 border-blue-500/40",
     iconColor: "text-blue-300",
@@ -158,6 +166,17 @@ const CATEGORY_PATHWAYS = [
     image: blueGarnetImg,
     imageOverlay: "from-blue-900/80 via-charcoal/60 to-charcoal",
   },
+];
+
+// Season process steps shown above the pathway cards
+const SEASON_PROCESS_STEPS = [
+  { label: "Pre-Nomination", desc: "Public activation and early discovery of education champions." },
+  { label: "Nomination", desc: "Open nomination forms across all four award pathways." },
+  { label: "Review", desc: "NRC integrity, eligibility, and evidence checks." },
+  { label: "Shortlisting", desc: "Qualified nominees move forward by category." },
+  { label: "Voting / Public Participation", desc: "AGC-powered public voting opens for eligible categories." },
+  { label: "Judging / Matrix Review", desc: "Jury panels score using the NESA evaluation matrix." },
+  { label: "Final Recognition", desc: "Winners revealed at recognition shows and the Blue Garnet Gala." },
 ];
 
 const REGION_DATA = [
@@ -650,41 +669,59 @@ export default function Timeline() {
           </div>
         </section>
 
-        {/* 4. CATEGORY PATHWAYS */}
+        {/* 4. CATEGORY PATHWAYS — How NESA-Africa Awards Are Organized */}
         <section id="pathways" className="border-t border-white/5 bg-charcoal-light/20 py-16 lg:py-24">
           <div className="container mx-auto px-4">
-            <div className="mx-auto mb-12 max-w-3xl text-center">
+            {/* Section heading */}
+            <div className="mx-auto mb-8 max-w-3xl text-center">
               <Badge variant="outline" className="mb-4 border-primary/40 text-primary">
-                Category Pathways
+                Award Pathways
               </Badge>
               <h2 className="mb-4 font-display text-3xl font-bold text-white md:text-4xl">
-                How Awards Move Through the Season
+                How NESA-Africa Awards Are Organized
               </h2>
-              <p className="text-white/70">
-                Four distinct pathways — each with its own purpose, process, and recognition model.
+              <p className="mx-auto max-w-2xl text-white/70">
+                Understand the four recognition pathways, how nominees are grouped, and how each
+                award category moves through the season.
               </p>
             </div>
 
-            {/* Tier comparison strip */}
-            <div className="mx-auto mb-10 grid max-w-5xl grid-cols-2 gap-2 rounded-2xl border border-white/10 bg-white/5 p-2 md:grid-cols-4">
+            {/* Short explanatory intro above selector */}
+            <div className="mx-auto mb-8 max-w-3xl rounded-2xl border border-primary/20 bg-gradient-to-r from-primary/5 via-transparent to-primary/5 px-5 py-4 text-center">
+              <p className="text-sm leading-relaxed text-white/80 md:text-base">
+                NESA-Africa uses different recognition pathways to celebrate lifetime education
+                icons, institutions, social-impact influencers, and competitive excellence across
+                Africa and the diaspora.
+              </p>
+            </div>
+
+            {/* Pathway selector — full labels, no truncation, responsive */}
+            <div className="mx-auto mb-12 grid max-w-6xl grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-4">
               {CATEGORY_PATHWAYS.map((cat) => {
                 const Icon = cat.icon;
                 return (
                   <a
                     key={cat.title}
                     href={`#tier-${cat.title.toLowerCase().replace(/\s+/g, "-")}`}
-                    className="group flex items-center gap-2 rounded-xl px-3 py-2 transition-all hover:bg-white/5"
+                    className={`group flex items-start gap-3 rounded-2xl border bg-white/5 p-4 transition-all hover:-translate-y-0.5 hover:border-primary/50 hover:bg-white/10 ${cat.accent}`}
                   >
-                    <Icon className={`h-4 w-4 ${cat.iconColor}`} />
-                    <div className="min-w-0">
-                      <p className="truncate text-xs font-semibold text-white">{cat.title}</p>
-                      <p className="truncate text-[10px] text-white/50">{cat.subtitle}</p>
+                    <div className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-charcoal/60 ring-1 ${cat.ringColor}`}>
+                      <Icon className={`h-5 w-5 ${cat.iconColor}`} />
+                    </div>
+                    <div className="min-w-0 flex-1">
+                      <p className="text-sm font-semibold leading-snug text-white">
+                        {cat.title}
+                      </p>
+                      <p className={`mt-0.5 text-xs leading-snug ${cat.iconColor}`}>
+                        {cat.subtitle}
+                      </p>
                     </div>
                   </a>
                 );
               })}
             </div>
 
+            {/* Pathway cards */}
             <div className="grid gap-6 md:grid-cols-2">
               {CATEGORY_PATHWAYS.map((cat) => {
                 const Icon = cat.icon;
@@ -702,36 +739,49 @@ export default function Timeline() {
                         className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110"
                         loading="lazy"
                       />
-                      {/* Gradient overlay for legibility */}
                       <div className={`absolute inset-0 bg-gradient-to-b ${cat.imageOverlay}`} />
-                      {/* Top-left tier badge over image */}
                       <div className="absolute left-4 top-4">
                         <Badge className={`${cat.badgeClass} backdrop-blur-md`}>{cat.subtitle}</Badge>
                       </div>
-                      {/* Bottom-overlapping icon medallion */}
                       <div className="absolute -bottom-7 left-5">
                         <div className={`flex h-14 w-14 items-center justify-center rounded-2xl bg-charcoal/90 ring-2 ${cat.ringColor} shadow-xl backdrop-blur-md`}>
                           <Icon className={`h-7 w-7 ${cat.iconColor}`} />
                         </div>
                       </div>
-                      {/* Title overlay on image bottom-right */}
-                      <div className="absolute bottom-3 right-4 text-right">
-                        <p className={`text-[10px] font-semibold uppercase tracking-widest ${cat.iconColor}`}>
-                          {cat.scope.split("·")[0].trim()}
-                        </p>
-                      </div>
                     </div>
 
-                    {/* Decorative corner glow */}
                     <div className={`pointer-events-none absolute -right-12 top-40 h-40 w-40 rounded-full bg-gradient-to-br ${cat.accent} opacity-40 blur-2xl`} />
 
                     <CardHeader className="relative pt-10">
-                      <CardTitle className="font-display text-2xl text-white">{cat.title}</CardTitle>
-                      <p className={`text-sm italic ${cat.iconColor}`}>{cat.tagline}</p>
+                      <CardTitle className="font-display text-2xl leading-tight text-white">
+                        {cat.title}
+                      </CardTitle>
+                      <p className={`text-sm font-semibold ${cat.iconColor}`}>{cat.subtitle}</p>
+                      <p className="text-xs italic text-white/60">{cat.tagline}</p>
                     </CardHeader>
 
                     <CardContent className="relative flex flex-1 flex-col space-y-5">
                       <p className="text-sm leading-relaxed text-white/80">{cat.description}</p>
+
+                      {/* Recognition Model + Best For labels */}
+                      <div className="grid gap-2 sm:grid-cols-2">
+                        <div className="rounded-xl border border-white/10 bg-charcoal/40 p-3">
+                          <p className="text-[10px] font-semibold uppercase tracking-wider text-white/50">
+                            Recognition Model
+                          </p>
+                          <p className={`mt-1 text-xs font-medium ${cat.iconColor}`}>
+                            {cat.recognitionModel}
+                          </p>
+                        </div>
+                        <div className="rounded-xl border border-white/10 bg-charcoal/40 p-3">
+                          <p className="text-[10px] font-semibold uppercase tracking-wider text-white/50">
+                            Best For
+                          </p>
+                          <p className="mt-1 text-xs font-medium text-white/90">
+                            {cat.bestFor}
+                          </p>
+                        </div>
+                      </div>
 
                       {/* Highlight chips */}
                       <div className="flex flex-wrap gap-1.5">
@@ -812,6 +862,71 @@ export default function Timeline() {
               })}
             </div>
 
+            {/* Award Season Process — vertical timeline showing the flow */}
+            <div className="mx-auto mt-16 max-w-5xl">
+              <div className="mb-8 text-center">
+                <Badge variant="outline" className="mb-3 border-primary/40 text-primary">
+                  Award Season Flow
+                </Badge>
+                <h3 className="font-display text-2xl font-bold text-white md:text-3xl">
+                  How Each Award Pathway Moves Through the Season
+                </h3>
+                <p className="mt-2 text-sm text-white/65">
+                  Every nominee — across all four pathways — flows through these seven stages.
+                </p>
+              </div>
+
+              <ol className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+                {SEASON_PROCESS_STEPS.map((step, i) => (
+                  <li
+                    key={step.label}
+                    className="relative rounded-2xl border border-white/10 bg-white/5 p-4 transition-all hover:border-primary/40 hover:bg-white/10"
+                  >
+                    <div className="mb-2 flex items-center gap-2">
+                      <span className="flex h-7 w-7 items-center justify-center rounded-full bg-primary/15 text-xs font-bold text-primary ring-1 ring-primary/30">
+                        {i + 1}
+                      </span>
+                      <p className="text-sm font-semibold text-white">{step.label}</p>
+                    </div>
+                    <p className="text-xs leading-relaxed text-white/65">{step.desc}</p>
+                  </li>
+                ))}
+              </ol>
+            </div>
+
+            {/* Conversion CTA block */}
+            <div className="mx-auto mt-16 max-w-5xl overflow-hidden rounded-3xl border border-primary/30 bg-gradient-to-br from-primary/15 via-charcoal-light/50 to-primary/10 p-6 md:p-10">
+              <div className="flex flex-col items-center gap-6 text-center">
+                <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-primary/20 ring-2 ring-primary/40">
+                  <Trophy className="h-7 w-7 text-primary" />
+                </div>
+                <div>
+                  <h3 className="font-display text-2xl font-bold text-white md:text-3xl">
+                    Know an education champion who fits one of these award pathways?
+                  </h3>
+                  <p className="mx-auto mt-3 max-w-2xl text-sm text-white/75 md:text-base">
+                    Nominate an African Education Social Impact Champion today and earn free
+                    voting points to support your favorite nominees when voting opens.
+                  </p>
+                </div>
+                <div className="flex w-full flex-col items-stretch justify-center gap-3 sm:w-auto sm:flex-row">
+                  {/* TODO: confirm final route for nominate flow */}
+                  <Button asChild size="lg" className="bg-primary font-semibold text-charcoal hover:bg-primary/90">
+                    <Link to="/nominate">
+                      Nominate a Champion Now <ArrowRight className="ml-1 h-4 w-4" />
+                    </Link>
+                  </Button>
+                  <Button asChild size="lg" variant="outline" className="border-primary/40 text-primary hover:bg-primary/10">
+                    <Link to="/categories">View Award Categories</Link>
+                  </Button>
+                  {/* TODO: replace with final voting-points route if changed */}
+                  <Button asChild size="lg" variant="outline" className="border-white/20 text-white hover:bg-white/10">
+                    <Link to="/earn-agc">How Voting Points Work</Link>
+                  </Button>
+                </div>
+              </div>
+            </div>
+
             <div className="mt-10 flex flex-wrap justify-center gap-3">
               <Button asChild variant="outline" className="border-primary/40 text-primary hover:bg-primary/10">
                 <Link to="/categories">View All Categories</Link>
@@ -825,6 +940,7 @@ export default function Timeline() {
             </div>
           </div>
         </section>
+
 
         {/* 5. REGIONAL PARTICIPATION */}
         <section id="regions" className="py-16 lg:py-24">
