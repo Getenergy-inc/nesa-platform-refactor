@@ -104,4 +104,8 @@ describe("nominee image regression — verified photos", () => {
       for (const i of imgs) {
         expect(i.getAttribute("src")).not.toMatch(/placeholder\.svg/);
       }
+    }
+  });
+});
+
 
