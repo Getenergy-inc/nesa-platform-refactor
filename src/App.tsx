@@ -339,21 +339,22 @@ const App = () => (
                   <Route path="/nominee" element={<Navigate to="/nominees" replace />} />
                   <Route path="/nominee-directory" element={<Navigate to="/nominees" replace />} />
                   <Route path="/nominees-directory" element={<Navigate to="/nominees" replace />} />
-                  <Route path="/profile/:slug" element={<Navigate to="/nominee/:slug" replace />} />
-                  <Route path="/nominees/profile/:slug" element={<Navigate to="/nominee/:slug" replace />} />
+                  <Route path="/profile/:slug" element={<SlugRedirect to={(s) => `/nominee/${s}`} />} />
+                  <Route path="/nominees/profile/:slug" element={<SlugRedirect to={(s) => `/nominee/${s}`} />} />
 
                   {/* Category / award legacy */}
                   <Route path="/award" element={<Navigate to="/awards" replace />} />
                   <Route path="/award-categories" element={<Navigate to="/categories" replace />} />
                   <Route path="/category" element={<Navigate to="/categories" replace />} />
-                  <Route path="/category/:slug" element={<Navigate to="/categories/:slug" replace />} />
-                  <Route path="/awards/category/:slug" element={<Navigate to="/awards/:slug" replace />} />
-                  <Route path="/nominees/category/:slug" element={<Navigate to="/nominees/:slug" replace />} />
+                  <Route path="/category/:slug" element={<SlugRedirect to={(s) => `/categories/${s}`} />} />
+                  <Route path="/awards/category/:slug" element={<SlugRedirect to={(s) => `/awards/${s}`} />} />
+                  <Route path="/nominees/category/:slug" element={<SlugRedirect to={(s) => `/nominees/${s}`} />} />
 
                   {/* Region legacy */}
                   <Route path="/regions" element={<Navigate to="/region" replace />} />
-                  <Route path="/regions/:slug" element={<Navigate to="/region/:slug" replace />} />
-                  <Route path="/nominees/region/:slug" element={<Navigate to="/nominees/:slug" replace />} />
+                  <Route path="/regions/:slug" element={<SlugRedirect to={(s) => `/region/${s}`} />} />
+                  <Route path="/nominees/region/:slug" element={<SlugRedirect to={(s) => `/nominees/${s}`} />} />
+
 
                   {/* Misc legacy paths flagged in audit */}
                   <Route path="/jury" element={<Navigate to="/judges" replace />} />
