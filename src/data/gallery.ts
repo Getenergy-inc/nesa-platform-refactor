@@ -4,6 +4,14 @@ import honoureesWithHost from "@/assets/gallery/nesa-2025/honourees-with-host.jp
 import redCarpet from "@/assets/gallery/nesa-2025/red-carpet-moment.jpg";
 import winnersTrio from "@/assets/gallery/nesa-2025/winners-trio.jpg";
 import awardPresentation from "@/assets/gallery/nesa-2025/award-presentation.jpg";
+import couplePurpleCarpet from "@/assets/gallery/nesa-2025/couple-purple-carpet.jpg";
+import productionTeamGroup from "@/assets/gallery/nesa-2025/production-team-group.jpg";
+import hostWithGuests from "@/assets/gallery/nesa-2025/host-with-guests.jpg";
+import guestsCandidMoment from "@/assets/gallery/nesa-2025/guests-candid-moment.jpg";
+import hostHandshake from "@/assets/gallery/nesa-2025/host-handshake.jpg";
+import hostWithHonoureePink from "@/assets/gallery/nesa-2025/host-with-honouree-pink.jpg";
+import guestsTrioSelfie from "@/assets/gallery/nesa-2025/guests-trio-selfie.jpg";
+import hostWithHostPortrait from "@/assets/gallery/nesa-2025/host-with-host-portrait.jpg";
 
 export type GalleryCategory =
   | "ceremony"
@@ -128,6 +136,88 @@ export const galleryImages: GalleryImage[] = [
     year: 2025,
     featured: true,
   },
+  {
+    id: "nesa25-couple-purple-carpet",
+    src: couplePurpleCarpet,
+    alt: "Host and honouree on NESA Africa 2025 purple carpet in formal attire",
+    title: "An Evening of Elegance",
+    caption: "Guests arrive on the NESA Africa 2025 purple carpet in continental finery.",
+    category: "gala",
+    collection: "nesa-africa-2025-awards",
+    year: 2025,
+    featured: true,
+  },
+  {
+    id: "nesa25-production-team-group",
+    src: productionTeamGroup,
+    alt: "NESA Africa 2025 production and crew team group photo on stage",
+    title: "The Team Behind the Stage",
+    caption: "Production crew, cast and hosts who powered the NESA Africa 2025 night.",
+    category: "behind-the-scenes",
+    collection: "nesa-africa-2025-awards",
+    year: 2025,
+  },
+  {
+    id: "nesa25-host-with-guests",
+    src: hostWithGuests,
+    alt: "NESA Africa 2025 host flanked by two honourees in front of the official backdrop",
+    title: "Honoured Together",
+    caption: "The host with two honourees of the New Education Standard Award Africa 2025.",
+    category: "honourees",
+    collection: "nesa-africa-2025-awards",
+    year: 2025,
+  },
+  {
+    id: "nesa25-guests-candid",
+    src: guestsCandidMoment,
+    alt: "Guests sharing a candid celebratory moment at NESA Africa 2025",
+    title: "Off-Script Celebration",
+    caption: "A candid moment of joy among guests after the formal ceremony.",
+    category: "gala",
+    collection: "nesa-africa-2025-awards",
+    year: 2025,
+  },
+  {
+    id: "nesa25-host-handshake",
+    src: hostHandshake,
+    alt: "NESA Africa 2025 host shaking hands with a member of the production team",
+    title: "Respect in the Spotlight",
+    caption: "A handshake exchanged with one of the crew members keeping the night alive.",
+    category: "behind-the-scenes",
+    collection: "nesa-africa-2025-awards",
+    year: 2025,
+  },
+  {
+    id: "nesa25-host-with-honouree-pink",
+    src: hostWithHonoureePink,
+    alt: "Host with female honouree in red and pink attire on the NESA Africa 2025 stage",
+    title: "Standing With the Honourees",
+    caption: "The host stands with an honouree on the NESA Africa 2025 stage.",
+    category: "honourees",
+    collection: "nesa-africa-2025-awards",
+    year: 2025,
+    featured: true,
+  },
+  {
+    id: "nesa25-guests-trio-selfie",
+    src: guestsTrioSelfie,
+    alt: "Three NESA Africa 2025 guests posing close together for a selfie-style portrait",
+    title: "Friends of the Movement",
+    caption: "Guests of the night share a close-up frame after the ceremony.",
+    category: "gala",
+    collection: "nesa-africa-2025-awards",
+    year: 2025,
+  },
+  {
+    id: "nesa25-host-host-portrait",
+    src: hostWithHostPortrait,
+    alt: "NESA Africa 2025 host and co-host portrait in front of the official backdrop",
+    title: "Voices of the Night",
+    caption: "Hosting duo of the NESA Africa 2025 recognition ceremony.",
+    category: "speakers",
+    collection: "nesa-africa-2025-awards",
+    year: 2025,
+  },
 ];
 
 export const galleryCollections: GalleryCollection[] = [
@@ -145,9 +235,17 @@ export const galleryCollections: GalleryCollection[] = [
       "nesa25-hosts-on-stage",
       "nesa25-award-presentation",
       "nesa25-winners-trio",
+      "nesa25-couple-purple-carpet",
+      "nesa25-host-with-honouree-pink",
+      "nesa25-host-with-guests",
+      "nesa25-host-host-portrait",
       "nesa25-host-portrait",
       "nesa25-honourees-with-host",
       "nesa25-red-carpet",
+      "nesa25-guests-trio-selfie",
+      "nesa25-guests-candid",
+      "nesa25-host-handshake",
+      "nesa25-production-team-group",
     ],
   },
 ];
