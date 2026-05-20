@@ -438,7 +438,7 @@ export const DATASET_META = {
   importedAt: "2026-03-08",
   mergedAt: "2026-03-08",
   totalInExcel: 1703,
-  totalLoaded: 320,
+  totalLoaded: 323,
   season: "2025",
   archived2024: true,
   migrationNote: "All 2024 nominees merged into 2025 system. Original data archived in nominees-2024-archive.ts",
