@@ -8,7 +8,7 @@ import sportsNominee2 from "@/assets/nominees/tegla-loroupe.jpg";
 import sportsNominee3 from "@/assets/nominees/siya-kolisi.jpg";
 import musicNominee1 from "@/assets/nominees/burna-boy.jpg";
 import musicNominee2 from "@/assets/nominees/angelique-kidjo.jpg";
-import musicNominee3 from "@/assets/nominees/music-nominee-3.jpg";
+import musicNominee3 from "@/assets/nominees/tems.jpg";
 import socialNominee1 from "@/assets/nominees/social-nominee-1.jpg";
 import socialNominee2 from "@/assets/nominees/social-nominee-2.jpg";
 import socialNominee3 from "@/assets/nominees/social-nominee-3.jpg";
