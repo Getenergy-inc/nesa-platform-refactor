@@ -31,6 +31,7 @@ const ContributorsHallSection = lazy(() => import("@/components/nesa/Contributor
 const SponsorsSection = lazy(() => import("@/components/nesa/SponsorsSection").then(m => ({ default: m.SponsorsSection })));
 const FinalCTASection = lazy(() => import("@/components/nesa/FinalCTASection").then(m => ({ default: m.FinalCTASection })));
 const HomepageGalleryTeaser = lazy(() => import("@/components/gallery/HomepageGalleryTeaser").then(m => ({ default: m.HomepageGalleryTeaser })));
+const NominationCampaignSection = lazy(() => import("@/components/landing/NominationCampaignSection").then(m => ({ default: m.NominationCampaignSection })));
 
 export function NESALandingPage() {
   const { currentEdition } = useSeason();
@@ -57,8 +58,14 @@ export function NESALandingPage() {
         {/* 1. HERO */}
         <TrophyHeroSection />
 
+        {/* 1b. NOMINATION CAMPAIGN — conversion-focused, directly under hero */}
+        <LazySection>
+          <NominationCampaignSection />
+        </LazySection>
+
         {/* 2. TRUST STRIP */}
         <TrustLogosStrip />
+
 
         {/* 3. ECOSYSTEM CAROUSEL — featured nominees (moved up directly under trust strip) */}
         <LazySection>
