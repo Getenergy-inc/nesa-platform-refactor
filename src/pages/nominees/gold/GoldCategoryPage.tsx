@@ -185,7 +185,7 @@ export default function GoldCategoryPage() {
                     className="group relative overflow-hidden rounded-2xl border border-gold/30 bg-charcoal-light hover:border-gold transition-all"
                   >
                     <div className="relative h-48 overflow-hidden">
-                      <img src={resolveMedia(n.slug, n.image, n.name).image ?? n.image} alt={resolveMedia(n.slug, n.image, n.name).alt ?? n.name} loading="lazy" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
+                      <HonoureeImage slug={n.slug} name={n.name} fallbackImage={n.image} flag={n.flag} imgClassName="transition-transform duration-700 group-hover:scale-110" />
                       <div className="absolute inset-0 bg-gradient-to-t from-charcoal-light via-transparent to-transparent" />
                       <Badge className="absolute top-3 right-3 bg-gold text-charcoal border-0 font-bold text-[10px]">
                         ★ Top Voted
