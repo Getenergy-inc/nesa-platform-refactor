@@ -62,7 +62,7 @@ export const MUSIC_MIGRATED: GoldNominee[] = [
     badge: "Music for Education",
     summary: "Music advocacy for social education and awareness.",
     impactStory: "Music advocacy for social education and awareness.",
-    verified: false, votes: 0, image: "/placeholder.svg",
+    verified: false, votes: 0, image: asaImg,
   },
 ];
 
