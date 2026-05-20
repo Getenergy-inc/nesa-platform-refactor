@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { GOLD_CATEGORIES } from "@/data/goldSpecialRecognition";
 import { NomineeBreadcrumbs } from "@/components/nominees/NomineeBreadcrumbs";
+import { HonoureeImage } from "@/components/honourees/HonoureeImage";
 
 const HERO_STATS = [
   { icon: Trophy, label: "3 Recognition Categories" },
