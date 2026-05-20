@@ -280,6 +280,9 @@ export const galleryCollections: GalleryCollection[] = [
       "nesa25-guests-candid",
       "nesa25-host-handshake",
       "nesa25-production-team-group",
+      "nesa25-bts-team-group-wide",
+      "nesa25-bts-team-group-stage",
+      "nesa25-bts-honouree-red-portrait",
     ],
   },
 ];
