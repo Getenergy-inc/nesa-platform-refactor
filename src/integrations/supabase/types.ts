@@ -2311,6 +2311,87 @@ export type Database = {
         }
         Relationships: []
       }
+      nominee_media: {
+        Row: {
+          alt_text: string | null
+          approved_at: string | null
+          approved_by: string | null
+          attribution: string | null
+          banner_url: string | null
+          caption: string | null
+          created_at: string
+          id: string
+          image_url: string | null
+          kind: string
+          license_status: string
+          license_type: string | null
+          logo_url: string | null
+          nominee_name: string
+          nominee_slug: string
+          notes: string | null
+          og_image_url: string | null
+          quality_score: number | null
+          source_type: string | null
+          source_url: string | null
+          thumbnail_url: string | null
+          updated_at: string
+          uploaded_by: string | null
+          verified: boolean
+        }
+        Insert: {
+          alt_text?: string | null
+          approved_at?: string | null
+          approved_by?: string | null
+          attribution?: string | null
+          banner_url?: string | null
+          caption?: string | null
+          created_at?: string
+          id?: string
+          image_url?: string | null
+          kind: string
+          license_status?: string
+          license_type?: string | null
+          logo_url?: string | null
+          nominee_name: string
+          nominee_slug: string
+          notes?: string | null
+          og_image_url?: string | null
+          quality_score?: number | null
+          source_type?: string | null
+          source_url?: string | null
+          thumbnail_url?: string | null
+          updated_at?: string
+          uploaded_by?: string | null
+          verified?: boolean
+        }
+        Update: {
+          alt_text?: string | null
+          approved_at?: string | null
+          approved_by?: string | null
+          attribution?: string | null
+          banner_url?: string | null
+          caption?: string | null
+          created_at?: string
+          id?: string
+          image_url?: string | null
+          kind?: string
+          license_status?: string
+          license_type?: string | null
+          logo_url?: string | null
+          nominee_name?: string
+          nominee_slug?: string
+          notes?: string | null
+          og_image_url?: string | null
+          quality_score?: number | null
+          source_type?: string | null
+          source_url?: string | null
+          thumbnail_url?: string | null
+          updated_at?: string
+          uploaded_by?: string | null
+          verified?: boolean
+        }
+        Relationships: []
+      }
       nominees: {
         Row: {
           acceptance_status:
