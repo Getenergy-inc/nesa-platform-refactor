@@ -1543,6 +1543,131 @@ export type Database = {
         }
         Relationships: []
       }
+      gallery_collections: {
+        Row: {
+          cover_image_url: string | null
+          created_at: string
+          created_by: string | null
+          description: string | null
+          id: string
+          is_published: boolean
+          location: string | null
+          slug: string
+          sort_order: number
+          story: string | null
+          title: string
+          updated_at: string
+          year: number | null
+        }
+        Insert: {
+          cover_image_url?: string | null
+          created_at?: string
+          created_by?: string | null
+          description?: string | null
+          id?: string
+          is_published?: boolean
+          location?: string | null
+          slug: string
+          sort_order?: number
+          story?: string | null
+          title: string
+          updated_at?: string
+          year?: number | null
+        }
+        Update: {
+          cover_image_url?: string | null
+          created_at?: string
+          created_by?: string | null
+          description?: string | null
+          id?: string
+          is_published?: boolean
+          location?: string | null
+          slug?: string
+          sort_order?: number
+          story?: string | null
+          title?: string
+          updated_at?: string
+          year?: number | null
+        }
+        Relationships: []
+      }
+      gallery_media: {
+        Row: {
+          alt_text: string
+          caption: string | null
+          category: string
+          collection_slug: string | null
+          country: string | null
+          created_at: string
+          id: string
+          image_url: string
+          is_featured: boolean
+          is_published: boolean
+          photographer: string | null
+          photographer_credit_url: string | null
+          region: string | null
+          sort_order: number
+          tags: string[]
+          thumbnail_url: string | null
+          title: string
+          updated_at: string
+          uploaded_by: string | null
+          year: number | null
+        }
+        Insert: {
+          alt_text: string
+          caption?: string | null
+          category: string
+          collection_slug?: string | null
+          country?: string | null
+          created_at?: string
+          id?: string
+          image_url: string
+          is_featured?: boolean
+          is_published?: boolean
+          photographer?: string | null
+          photographer_credit_url?: string | null
+          region?: string | null
+          sort_order?: number
+          tags?: string[]
+          thumbnail_url?: string | null
+          title: string
+          updated_at?: string
+          uploaded_by?: string | null
+          year?: number | null
+        }
+        Update: {
+          alt_text?: string
+          caption?: string | null
+          category?: string
+          collection_slug?: string | null
+          country?: string | null
+          created_at?: string
+          id?: string
+          image_url?: string
+          is_featured?: boolean
+          is_published?: boolean
+          photographer?: string | null
+          photographer_credit_url?: string | null
+          region?: string | null
+          sort_order?: number
+          tags?: string[]
+          thumbnail_url?: string | null
+          title?: string
+          updated_at?: string
+          uploaded_by?: string | null
+          year?: number | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "gallery_media_collection_slug_fkey"
+            columns: ["collection_slug"]
+            isOneToOne: false
+            referencedRelation: "gallery_collections"
+            referencedColumns: ["slug"]
+          },
+        ]
+      }
       judge_applications: {
         Row: {
           approved_at: string | null
