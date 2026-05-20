@@ -10,3 +10,4 @@ export { default as AdminEDXAnalytics } from "./AdminEDXAnalytics";
 export { default as AdminContributorPhotos } from "./AdminContributorPhotos";
 export { default as AdminContributorsCMS } from "./AdminContributorsCMS";
 export { default as AdminPathwaysCMS } from "./AdminPathwaysCMS";
+export { default as AdminGalleryCMS } from "./GalleryAdmin";
