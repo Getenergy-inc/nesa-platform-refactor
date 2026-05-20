@@ -101,17 +101,22 @@ export const NomineeCard = forwardRef<HTMLDivElement, NomineeCardProps>(function
           {/* Avatar / Logo */}
           <div className="relative mb-4 mt-2">
             <div 
+              data-testid="nominee-card-image"
+              data-state={nominee.photoUrl ? "resolved" : "fallback"}
+              data-slug={nominee.slug}
               className={`${isCompact ? "w-16 h-16" : "w-20 h-20"} rounded-full border-2 border-gold/20 group-hover:border-gold/40 transition-colors overflow-hidden flex items-center justify-center ${isLogo ? "bg-white/90 p-2" : "bg-gold/20"}`}
             >
               {nominee.photoUrl ? (
                 <img 
                   src={nominee.photoUrl} 
                   alt={altText}
+                  data-testid="nominee-card-img"
                   className={`${isLogo ? "object-contain max-h-full max-w-full" : "object-cover w-full h-full"}`}
                   onError={(e) => {
                     const target = e.currentTarget;
                     target.style.display = 'none';
-                    // Show fallback
+                    const parent = target.parentElement;
+                    if (parent) parent.setAttribute('data-state', 'fallback');
                     const fallback = target.nextElementSibling as HTMLElement;
                     if (fallback) fallback.style.display = 'flex';
                   }}
