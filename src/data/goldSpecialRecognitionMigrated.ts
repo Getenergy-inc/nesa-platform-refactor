@@ -6,6 +6,7 @@
  */
 import type { GoldNominee } from "./goldSpecialRecognition";
 import didierDrogbaImg from "@/assets/nominees/didier-drogba.jpg";
+import eliudKipchogeImg from "@/assets/nominees/eliud-kipchoge.jpg";
 
 export const MUSIC_MIGRATED: GoldNominee[] = [
   {
@@ -74,7 +75,7 @@ export const SPORTS_MIGRATED: GoldNominee[] = [
     badge: "Sports for Education",
     summary: "Eliud Kipchoge Foundation – Funding education and sports programs.",
     impactStory: "Eliud Kipchoge Foundation – Funding education and sports programs.",
-    verified: false, votes: 0, image: "/placeholder.svg",
+    verified: true, votes: 0, image: eliudKipchogeImg,
   },
 ];
 
