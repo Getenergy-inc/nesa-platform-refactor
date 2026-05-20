@@ -1,5 +1,6 @@
 // Complementary campaign block supporting the call for nominations.
 // Sits directly after NominationCampaignSection. Does not replace any existing content.
+// Refactored: two-column desktop / stacked mobile, premium gold/black NESA-Africa styling.
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import {
@@ -14,6 +15,9 @@ import {
   Trophy,
   Coins,
   Vote,
+  Share2,
+  Star,
+  Megaphone,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
@@ -26,11 +30,11 @@ const personas = [
   { icon: Globe2, label: "Friend of Africa" },
 ];
 
-const steps = [
-  { n: "01", title: "Know an education champion?", desc: "Spot the changemakers shaping African education innovation." },
-  { n: "02", title: "Nominate them on NESA-Africa", desc: "Submit a nomination for education impact champions in minutes." },
-  { n: "03", title: "Earn free voting points", desc: "Every nomination rewards you with AGC voting points." },
-  { n: "04", title: "Support your favorites", desc: "Use your points when voting opens to back education social impact." },
+const journey = [
+  { n: "1", title: "Nominate a Champion", desc: "Submit an African education impact hero in minutes.", icon: Trophy },
+  { n: "2", title: "Earn Free Voting Points", desc: "Every nomination rewards you with AGC voting points.", icon: Coins },
+  { n: "3", title: "Share the Movement", desc: "Spread the call across your community and diaspora.", icon: Share2 },
+  { n: "4", title: "Support Your Favorites", desc: "Use your points to back nominees when voting opens.", icon: Star },
 ];
 
 export function CallForNominationsCampaign() {
@@ -44,142 +48,155 @@ export function CallForNominationsCampaign() {
       <div className="pointer-events-none absolute -bottom-32 -right-32 h-96 w-96 rounded-full bg-primary/5 blur-3xl" />
 
       <div className="container relative px-4 md:px-6">
-        {/* Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 24 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.3 }}
-          transition={{ duration: 0.6 }}
-          className="mx-auto max-w-3xl text-center"
-        >
-          <span className="inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-wider text-primary">
-            <Trophy className="h-3.5 w-3.5" /> African Education Awards
-          </span>
-          <h2 className="mt-4 font-display text-3xl font-bold leading-tight text-white md:text-5xl">
-            Nominate. Earn Voting Points.{" "}
-            <span className="bg-gradient-to-r from-primary to-yellow-300 bg-clip-text text-transparent">
-              Celebrate Education Impact.
-            </span>
-          </h2>
-          <p className="mx-auto mt-5 max-w-2xl text-base leading-relaxed text-white/75 md:text-lg">
-            Do you know a teacher, school founder, NGO leader, youth mentor, innovator, diaspora
-            supporter, or friend of Africa changing education? Nominate them today on NESA-Africa
-            and earn free voting points to support your favorite nominees when voting opens.
-          </p>
-        </motion.div>
-
-        {/* Visual block — video placeholder + graphic flow */}
-        <div className="mt-12 grid gap-6 md:gap-8 lg:grid-cols-5">
-          {/* Video placeholder card */}
-          {/* TODO: Replace placeholder with final NESA-Africa call-for-nominations video. */}
+        {/* Two-column layout: copy left, visual card right */}
+        <div className="grid items-start gap-10 lg:grid-cols-2 lg:gap-14">
+          {/* LEFT — Conversion copy */}
           <motion.div
             initial={{ opacity: 0, y: 24 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.2 }}
             transition={{ duration: 0.6 }}
-            className="lg:col-span-2"
+            className="text-center lg:text-left"
           >
-            <div className="group relative aspect-video w-full overflow-hidden rounded-2xl border border-primary/30 bg-gradient-to-br from-primary/20 via-charcoal to-black shadow-[0_20px_60px_-20px_rgba(201,162,39,0.4)]">
-              <div className="absolute inset-0 flex items-center justify-center">
-                <div className="flex h-20 w-20 items-center justify-center rounded-full bg-primary text-charcoal shadow-2xl transition-transform group-hover:scale-110">
-                  <Play className="h-9 w-9 fill-current" />
-                </div>
-              </div>
-              <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-4">
-                <p className="text-sm font-medium text-white">
-                  Watch how to nominate an education champion and earn voting points.
-                </p>
+            <span className="inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-wider text-primary">
+              <Megaphone className="h-3.5 w-3.5" /> NESA-Africa Call for Nominations
+            </span>
+            <h2 className="mt-4 font-display text-3xl font-bold leading-tight text-white md:text-4xl lg:text-5xl">
+              Nominate an African Education{" "}
+              <span className="bg-gradient-to-r from-primary to-yellow-300 bg-clip-text text-transparent">
+                Social Impact Champion
+              </span>{" "}
+              Today.
+            </h2>
+            <p className="mt-4 text-lg font-medium text-primary/90 md:text-xl">
+              Earn Free Voting Points and Help Celebrate the People Transforming Education Across Africa.
+            </p>
+            <p className="mt-5 text-base leading-relaxed text-white/75 md:text-lg">
+              Do you know a teacher, school founder, NGO leader, youth mentor, innovator, diaspora
+              supporter, or friend of Africa changing education? Nominate them today on NESA-Africa
+              and earn free voting points to support your favorite nominees when voting opens.
+            </p>
+
+            {/* Persona badges */}
+            <div className="mt-7">
+              <p className="mb-3 text-xs font-semibold uppercase tracking-[0.2em] text-white/50">
+                Who can you nominate?
+              </p>
+              <div className="grid grid-cols-3 gap-2 sm:grid-cols-6 lg:grid-cols-3 xl:grid-cols-6">
+                {personas.map(({ icon: Icon, label }) => (
+                  <div
+                    key={label}
+                    className="flex flex-col items-center gap-1.5 rounded-xl border border-white/10 bg-white/[0.03] px-2 py-3 text-center transition-colors hover:border-primary/40 hover:bg-primary/5"
+                  >
+                    <Icon className="h-5 w-5 text-primary" />
+                    <span className="text-[10px] font-medium leading-tight text-white/80 sm:text-xs">
+                      {label}
+                    </span>
+                  </div>
+                ))}
               </div>
             </div>
-            <div className="mt-5 flex justify-center lg:justify-start">
+
+            {/* Trust / crowd-reaction line */}
+            <p className="mt-6 border-l-2 border-primary/60 pl-4 text-left text-sm italic text-white/70 md:text-base">
+              Africa, who is your education champion? Don't just clap for education heroes —
+              <span className="font-semibold text-primary"> nominate them.</span>
+            </p>
+
+            {/* CTAs */}
+            <div className="mt-7 flex flex-col items-stretch gap-3 sm:flex-row sm:flex-wrap sm:items-center lg:justify-start">
+              {/* TODO: replace #nominate with final route if /nominate changes */}
               <Button asChild size="lg" variant="glow" className="font-bold">
-                {/* TODO: confirm route — currently using existing /nominate */}
                 <Link to="/nominate">
-                  Nominate a Champion Now <ArrowRight className="ml-1 h-4 w-4" />
+                  <Trophy className="h-4 w-4" /> Nominate a Champion Now
+                </Link>
+              </Button>
+              {/* TODO: replace #voting-points with final route if /earn-voting-credits changes */}
+              <Button asChild size="lg" variant="outline" className="border-primary/40 bg-transparent text-primary hover:bg-primary/10 hover:text-primary">
+                <Link to="/earn-voting-credits">
+                  <Coins className="h-4 w-4" /> How Voting Points Work
+                </Link>
+              </Button>
+              {/* TODO: replace #award-categories with final route if /categories changes */}
+              <Button asChild size="lg" variant="outline" className="border-white/20 bg-transparent text-white hover:bg-white/10 hover:text-white">
+                <Link to="/categories">
+                  <Vote className="h-4 w-4" /> View Award Categories
                 </Link>
               </Button>
             </div>
           </motion.div>
 
-          {/* Graphic flow card */}
+          {/* RIGHT — Premium visual card: journey + video placeholder */}
           <motion.div
             initial={{ opacity: 0, y: 24 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.2 }}
             transition={{ duration: 0.6, delay: 0.1 }}
-            className="lg:col-span-3"
+            className="relative"
           >
-            <div className="grid h-full grid-cols-1 gap-3 rounded-2xl border border-white/10 bg-white/[0.03] p-5 sm:grid-cols-2 md:p-6">
-              {steps.map((s, i) => (
-                <div
-                  key={s.n}
-                  className="rounded-xl border border-primary/15 bg-charcoal/60 p-4 transition-colors hover:border-primary/40"
-                >
-                  <div className="flex items-center gap-3">
-                    <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-primary/15 font-display text-sm font-bold text-primary">
-                      {s.n}
+            <div className="relative rounded-3xl border border-primary/30 bg-gradient-to-br from-primary/10 via-charcoal/80 to-black p-5 shadow-[0_25px_70px_-25px_rgba(201,162,39,0.45)] md:p-7">
+              <div className="pointer-events-none absolute -inset-px rounded-3xl ring-1 ring-inset ring-primary/20" />
+
+              <p className="text-xs font-semibold uppercase tracking-[0.25em] text-primary/90">
+                Your Campaign Journey
+              </p>
+              <h3 className="mt-1 font-display text-2xl font-bold text-white md:text-3xl">
+                4 Simple Steps to Celebrate Impact
+              </h3>
+
+              {/* Journey steps */}
+              <ol className="mt-6 space-y-3">
+                {journey.map(({ n, title, desc, icon: Icon }) => (
+                  <li
+                    key={n}
+                    className="group flex items-start gap-4 rounded-xl border border-white/10 bg-white/[0.03] p-4 transition-all hover:border-primary/40 hover:bg-primary/[0.06]"
+                  >
+                    <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-gradient-to-br from-primary to-yellow-500 font-display text-base font-bold text-charcoal shadow-md">
+                      {n}
                     </span>
-                    <h3 className="text-sm font-semibold text-white md:text-base">{s.title}</h3>
+                    <div className="min-w-0 flex-1">
+                      <div className="flex items-center gap-2">
+                        <Icon className="h-4 w-4 text-primary" />
+                        <h4 className="text-sm font-semibold text-white md:text-base">{title}</h4>
+                      </div>
+                      <p className="mt-1 text-xs leading-relaxed text-white/65 md:text-sm">{desc}</p>
+                    </div>
+                  </li>
+                ))}
+              </ol>
+
+              {/* Video placeholder */}
+              {/* TODO: Replace placeholder with final NESA-Africa nomination campaign video. */}
+              <div className="group relative mt-6 aspect-video w-full overflow-hidden rounded-2xl border border-primary/30 bg-gradient-to-br from-primary/20 via-charcoal to-black">
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <div className="flex h-16 w-16 items-center justify-center rounded-full bg-primary text-charcoal shadow-2xl transition-transform group-hover:scale-110">
+                    <Play className="h-7 w-7 fill-current" />
                   </div>
-                  <p className="mt-2 text-xs leading-relaxed text-white/65 md:text-sm">{s.desc}</p>
                 </div>
-              ))}
+                <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/85 to-transparent p-3">
+                  <p className="text-xs font-medium text-white md:text-sm">
+                    Watch how to nominate an education champion and earn voting points.
+                  </p>
+                </div>
+              </div>
             </div>
           </motion.div>
         </div>
 
-        {/* Personas */}
+        {/* Campaign-ready closing message */}
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.3 }}
+          viewport={{ once: true, amount: 0.4 }}
           transition={{ duration: 0.5 }}
-          className="mt-10"
+          className="mt-12 flex justify-center"
         >
-          <p className="mb-4 text-center text-xs font-semibold uppercase tracking-[0.2em] text-white/50">
-            Who can you nominate?
-          </p>
-          <div className="grid grid-cols-3 gap-3 sm:grid-cols-6">
-            {personas.map(({ icon: Icon, label }) => (
-              <div
-                key={label}
-                className="flex flex-col items-center gap-2 rounded-xl border border-white/10 bg-white/[0.03] px-2 py-4 text-center transition-colors hover:border-primary/40 hover:bg-primary/5"
-              >
-                <Icon className="h-6 w-6 text-primary" />
-                <span className="text-[11px] font-medium leading-tight text-white/80 sm:text-xs">
-                  {label}
-                </span>
-              </div>
-            ))}
+          <div className="inline-flex flex-wrap items-center justify-center gap-2 rounded-full border border-primary/30 bg-primary/10 px-5 py-2.5 text-center">
+            <ArrowRight className="h-4 w-4 text-primary" />
+            <span className="text-sm font-semibold text-white md:text-base">
+              Nominate now. <span className="text-primary">Earn voting points.</span> Celebrate education impact.
+            </span>
           </div>
-        </motion.div>
-
-        {/* CTAs */}
-        <motion.div
-          initial={{ opacity: 0, y: 16 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.3 }}
-          transition={{ duration: 0.5, delay: 0.1 }}
-          className="mt-10 flex flex-col items-center justify-center gap-3 sm:flex-row sm:flex-wrap"
-        >
-          {/* Primary CTA → existing /nominate route */}
-          <Button asChild size="lg" variant="glow" className="w-full font-bold sm:w-auto">
-            <Link to="/nominate">
-              <Trophy className="h-4 w-4" /> Nominate a Champion Now
-            </Link>
-          </Button>
-          {/* Voting points → existing /earn-voting-credits route */}
-          <Button asChild size="lg" variant="outline" className="w-full border-primary/40 bg-transparent text-primary hover:bg-primary/10 hover:text-primary sm:w-auto">
-            <Link to="/earn-voting-credits">
-              <Coins className="h-4 w-4" /> How Voting Points Work
-            </Link>
-          </Button>
-          {/* Categories → existing /categories route */}
-          <Button asChild size="lg" variant="outline" className="w-full border-white/20 bg-transparent text-white hover:bg-white/10 hover:text-white sm:w-auto">
-            <Link to="/categories">
-              <Vote className="h-4 w-4" /> View Award Categories
-            </Link>
-          </Button>
         </motion.div>
       </div>
     </section>
