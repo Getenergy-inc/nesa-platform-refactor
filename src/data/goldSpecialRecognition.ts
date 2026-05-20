@@ -3,7 +3,7 @@
  * Dedicated nominee ecosystem (3 cultural impact categories).
  * Source of truth for all `/nominees/gold-special-recognition/*` routes.
  */
-import sportsNominee1 from "@/assets/nominees/sports-nominee-1.jpg";
+import sportsNominee1 from "@/assets/nominees/didier-drogba.jpg";
 import sportsNominee2 from "@/assets/nominees/sports-nominee-2.jpg";
 import sportsNominee3 from "@/assets/nominees/sports-nominee-3.jpg";
 import musicNominee1 from "@/assets/nominees/music-nominee-1.jpg";
