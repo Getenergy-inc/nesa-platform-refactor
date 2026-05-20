@@ -2,18 +2,49 @@ import { useMemo, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import { motion } from "framer-motion";
-import { Search, Trophy, Users, ArrowRight, ChevronRight, Flame, TrendingUp, Sparkles } from "lucide-react";
+import {
+  Search, Trophy, Users, ArrowRight, ChevronRight, Flame, TrendingUp, Sparkles,
+  Globe2, Plane, HeartHandshake, MapPin, Crown, Building2, Rocket, Filter,
+} from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Skeleton } from "@/components/ui/skeleton";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { useNominees, type EnrichedDatabaseNominee } from "@/hooks/useNominees";
 import { LandingNomineeCard } from "@/components/nesa/LandingNomineeCard";
+
+// NOTE: Nominee-group chips are UI-ready. Wire filtering logic to `useNominees`
+// data (e.g. by category/region/diaspora flag) when backend fields are confirmed.
+const NOMINEE_GROUPS = [
+  { id: "all", label: "All Nominees", icon: Users },
+  { id: "africans-in-africa", label: "Africans in Africa", icon: Globe2 },
+  { id: "africans-in-diaspora", label: "Africans in Diaspora", icon: Plane },
+  { id: "friends-of-africa", label: "Friends of Africa", icon: HeartHandshake },
+  { id: "africa-regional", label: "Africa Regional Awards", icon: MapPin },
+  { id: "lifetime-icons", label: "Lifetime Icons", icon: Crown },
+  { id: "ngos-institutions", label: "NGOs & Institutions", icon: Building2 },
+  { id: "youth-innovation", label: "Youth & Innovation", icon: Rocket },
+] as const;
+
+const NOMINEE_GROUP_CARDS = [
+  { icon: Globe2, title: "Africans in Africa", desc: "Education impact leaders based within Africa." },
+  { icon: Plane, title: "Africans in Diaspora", desc: "Africans contributing to education from outside Africa." },
+  { icon: HeartHandshake, title: "Friends of Africa", desc: "Non-African supporters advancing African education." },
+  { icon: MapPin, title: "Africa Regional Awards", desc: "Nominees grouped by West, East, Central, Southern & North Africa." },
+];
 
 export default function NomineesHubPage() {
   const navigate = useNavigate();
   const { data: nominees, isLoading } = useNominees();
   const [search, setSearch] = useState("");
+  // UI-ready filters — connect to nominee query/data when backend fields land
+  const [activeGroup, setActiveGroup] = useState<string>("all");
+  const [filterCategory, setFilterCategory] = useState<string>("all");
+  const [filterType, setFilterType] = useState<string>("all");
+  const [filterCountry, setFilterCountry] = useState<string>("all");
+  const [filterRegion, setFilterRegion] = useState<string>("all");
+  const [filterEdition, setFilterEdition] = useState<string>("2026");
 
   const { categories, trending, mostVoted, totalCount } = useMemo(() => {
     if (!nominees) return { categories: [], trending: [], mostVoted: [], totalCount: 0 };
@@ -47,6 +78,13 @@ export default function NomineesHubPage() {
       mostVoted: sortedByVotes.slice(0, 8),
       totalCount: valid.length,
     };
+  }, [nominees]);
+
+  // Country list for the country dropdown (derived from live nominees)
+  const countries = useMemo(() => {
+    const set = new Set<string>();
+    (nominees ?? []).forEach((n) => n.country && set.add(n.country));
+    return Array.from(set).sort();
   }, [nominees]);
 
   const filteredCategories = useMemo(() => {
@@ -99,14 +137,14 @@ export default function NomineesHubPage() {
             animate={{ opacity: 1, y: 0 }}
           >
             <Badge className="mb-4 bg-gold/15 text-gold border-gold/30">
-              <Sparkles className="w-3 h-3 mr-1" /> Nominees Directory
+              <Sparkles className="w-3 h-3 mr-1" /> Nominees Directory — 2026 Edition
             </Badge>
             <h1 className="font-display text-3xl md:text-5xl font-bold text-ivory mb-3">
               Discover Africa's Education Changemakers
             </h1>
             <p className="text-ivory/70 max-w-2xl mx-auto mb-6">
-              Explore {totalCount.toLocaleString()}+ nominees across every award category — from lifetime icons
-              to digital voices advancing Education for All.
+              Explore nominees, education impact leaders, institutions, innovators and supporters
+              across Africa, the diaspora and friends of Africa.
             </p>
 
             <form onSubmit={onSearchSubmit} className="max-w-xl mx-auto relative">
@@ -114,11 +152,127 @@ export default function NomineesHubPage() {
               <Input
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
-                placeholder="Search by name, category, or country..."
+                placeholder="Search nominees by name, category, country or African region..."
                 className="pl-12 h-12 bg-charcoal-light border-gold/30 text-ivory placeholder:text-ivory/40 focus:border-gold rounded-full"
               />
             </form>
+
+            {/* Nominee-group chips — UI-ready. Wire `activeGroup` to data filter later. */}
+            <div className="mt-6 flex flex-wrap justify-center gap-2">
+              {NOMINEE_GROUPS.map((g) => {
+                const Icon = g.icon;
+                const active = activeGroup === g.id;
+                return (
+                  <button
+                    key={g.id}
+                    type="button"
+                    onClick={() => setActiveGroup(g.id)}
+                    aria-pressed={active}
+                    className={`inline-flex items-center gap-1.5 rounded-full border px-3 py-1.5 text-xs font-medium transition-all ${
+                      active
+                        ? "bg-gold text-charcoal border-gold shadow-md shadow-gold/20"
+                        : "bg-charcoal-light/60 text-ivory/80 border-gold/25 hover:border-gold/60 hover:text-gold"
+                    }`}
+                  >
+                    <Icon className="w-3.5 h-3.5" />
+                    {g.label}
+                  </button>
+                );
+              })}
+            </div>
           </motion.div>
+
+          {/* Structured Filters — UI-ready; wire to nominee query when fields confirmed */}
+          <motion.div
+            initial={{ opacity: 0, y: 8 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="mb-10 rounded-2xl border border-gold/15 bg-charcoal-light/40 p-3 md:p-4"
+          >
+            <div className="flex items-center gap-2 mb-3 text-ivory/70 text-xs uppercase tracking-wider">
+              <Filter className="w-3.5 h-3.5 text-gold" /> Refine your search
+            </div>
+            <div className="grid grid-cols-2 md:grid-cols-5 gap-2">
+              <Select value={filterCategory} onValueChange={setFilterCategory}>
+                <SelectTrigger className="bg-charcoal border-gold/20 text-ivory text-xs h-9"><SelectValue placeholder="Award Category" /></SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="all">All Award Categories</SelectItem>
+                  {categories.slice(0, 30).map((c) => (
+                    <SelectItem key={c.slug} value={c.slug}>{c.name}</SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+              <Select value={filterType} onValueChange={setFilterType}>
+                <SelectTrigger className="bg-charcoal border-gold/20 text-ivory text-xs h-9"><SelectValue placeholder="Nominee Type" /></SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="all">All Nominee Types</SelectItem>
+                  <SelectItem value="individual">Individual</SelectItem>
+                  <SelectItem value="institution">Institution / NGO</SelectItem>
+                  <SelectItem value="youth">Youth & Innovation</SelectItem>
+                  <SelectItem value="icon">Lifetime Icon</SelectItem>
+                </SelectContent>
+              </Select>
+              <Select value={filterCountry} onValueChange={setFilterCountry}>
+                <SelectTrigger className="bg-charcoal border-gold/20 text-ivory text-xs h-9"><SelectValue placeholder="Country" /></SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="all">All Countries</SelectItem>
+                  {countries.map((c) => <SelectItem key={c} value={c}>{c}</SelectItem>)}
+                </SelectContent>
+              </Select>
+              <Select value={filterRegion} onValueChange={setFilterRegion}>
+                <SelectTrigger className="bg-charcoal border-gold/20 text-ivory text-xs h-9"><SelectValue placeholder="African Region" /></SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="all">All African Regions</SelectItem>
+                  <SelectItem value="west-africa">West Africa</SelectItem>
+                  <SelectItem value="east-africa">East Africa</SelectItem>
+                  <SelectItem value="central-africa">Central Africa</SelectItem>
+                  <SelectItem value="southern-africa">Southern Africa</SelectItem>
+                  <SelectItem value="north-africa">North Africa</SelectItem>
+                  <SelectItem value="diaspora">Diaspora</SelectItem>
+                </SelectContent>
+              </Select>
+              <Select value={filterEdition} onValueChange={setFilterEdition}>
+                <SelectTrigger className="bg-charcoal border-gold/20 text-ivory text-xs h-9"><SelectValue placeholder="Edition" /></SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="2026">2026 Edition</SelectItem>
+                  <SelectItem value="2024">2024 Archive</SelectItem>
+                  <SelectItem value="all">All Editions</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+            <p className="mt-2 text-[10px] text-ivory/40">
+              {/* Filters are UI-ready; connect to nominee dataset in a follow-up. */}
+              Showing {totalCount.toLocaleString()}+ nominees across African education awards.
+            </p>
+          </motion.div>
+
+          {/* How Nominees Are Organized — explainer */}
+          <motion.section
+            initial={{ opacity: 0, y: 12 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="mb-10"
+          >
+            <h2 className="font-display text-xl md:text-2xl font-bold text-ivory mb-4 flex items-center gap-2">
+              <Sparkles className="w-5 h-5 text-gold" /> How Nominees Are Organized
+            </h2>
+            <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
+              {NOMINEE_GROUP_CARDS.map((c) => {
+                const Icon = c.icon;
+                return (
+                  <div
+                    key={c.title}
+                    className="rounded-2xl border border-gold/15 bg-charcoal-light/40 p-4 hover:border-gold/40 transition-colors"
+                  >
+                    <div className="h-10 w-10 rounded-xl bg-gold/15 flex items-center justify-center mb-3">
+                      <Icon className="w-5 h-5 text-gold" />
+                    </div>
+                    <h3 className="font-display text-sm font-bold text-ivory mb-1">{c.title}</h3>
+                    <p className="text-xs text-ivory/60 leading-relaxed">{c.desc}</p>
+                  </div>
+                );
+              })}
+            </div>
+          </motion.section>
 
           {/* Featured category banners */}
           <motion.div
@@ -221,7 +375,40 @@ export default function NomineesHubPage() {
             </section>
           )}
 
+          {/* Mid-page conversion block — connects to /nominate and /earn-agc */}
+          <motion.div
+            initial={{ opacity: 0, y: 12 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="mb-12 rounded-2xl border border-gold/30 bg-gradient-to-br from-gold/10 via-charcoal-light to-charcoal p-6 md:p-8 flex flex-col md:flex-row md:items-center gap-5"
+          >
+            <div className="flex-1">
+              <Badge className="mb-2 bg-gold text-charcoal font-bold">Join the Movement</Badge>
+              <h3 className="font-display text-xl md:text-2xl font-bold text-ivory mb-2">
+                Know an education champion who should be here?
+              </h3>
+              <p className="text-ivory/70 text-sm md:text-base max-w-2xl">
+                Nominate an African Education Social Impact Champion today and earn free voting
+                points to support your favorite nominees when voting opens.
+              </p>
+            </div>
+            <div className="flex flex-col sm:flex-row gap-2 md:flex-shrink-0">
+              {/* TODO: confirm final routes — using /nominate and /earn-agc */}
+              <Link to="/nominate">
+                <Button size="lg" className="bg-gold hover:bg-gold/90 text-charcoal font-bold rounded-full gap-2 w-full">
+                  <Trophy className="w-4 h-4" /> Nominate a Champion Now
+                </Button>
+              </Link>
+              <Link to="/earn-agc">
+                <Button size="lg" variant="outline" className="border-gold/40 text-gold hover:bg-gold/10 rounded-full gap-2 w-full">
+                  How Voting Points Work <ArrowRight className="w-4 h-4" />
+                </Button>
+              </Link>
+            </div>
+          </motion.div>
+
           {/* Category Index */}
+
           <div className="mb-6 flex items-center justify-between">
             <h2 className="font-display text-2xl md:text-3xl font-bold text-ivory flex items-center gap-2">
               <Trophy className="w-6 h-6 text-gold" /> Browse by Category
