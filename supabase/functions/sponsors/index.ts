@@ -266,7 +266,8 @@ serve(async (req) => {
         });
       }
 
-      // Insert claim record
+      // Insert claim record — relies on UNIQUE(campaign_id, user_id) constraint
+      // to atomically reject duplicate claims under concurrent requests.
       const { error: claimError } = await supabase.from("sponsor_claims").insert({
         campaign_id: campaign.id,
         user_id: user.id,
@@ -275,7 +276,7 @@ serve(async (req) => {
       });
 
       if (claimError) {
-        // Rollback pool update
+        // Always roll back the pool decrement so a failed insert does not strand credits.
         await supabase
           .from("sponsor_campaigns")
           .update({
@@ -283,6 +284,16 @@ serve(async (req) => {
           })
           .eq("id", campaign.id);
 
+        // 23505 = unique_violation → another concurrent request won the race.
+        const code = (claimError as { code?: string }).code;
+        if (code === "23505") {
+          return new Response(JSON.stringify({ ok: false, error: "Already claimed" }), {
+            headers: { ...corsHeaders, "Content-Type": "application/json" },
+            status: 400,
+          });
+        }
+
+        console.error("Sponsor claim insert failed:", claimError);
         return new Response(JSON.stringify({ ok: false, error: "Failed to record claim" }), {
           headers: { ...corsHeaders, "Content-Type": "application/json" },
           status: 500,

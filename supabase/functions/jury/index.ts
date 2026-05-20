@@ -27,21 +27,21 @@ async function handleStatusLookup(email: string): Promise<Response> {
   const supabase = adminClient();
   const { data: app, error } = await supabase
     .from("judge_applications")
-    .select("id, full_name, email, status, created_at, verified_at, approved_at, rejected_at, rejection_reason")
+    .select("id, status")
     .eq("email", normalizedEmail)
     .maybeSingle();
 
   if (error) { console.error("Status lookup error:", error); return jsonRes({ error: "Failed to look up application" }, 500); }
-  if (!app) return jsonRes({ found: false });
 
-  return jsonRes({
-    found: true,
-    application: {
-      id: app.id, full_name: app.full_name, email: app.email, status: app.status,
-      created_at: app.created_at, verified_at: app.verified_at,
-      approved_at: app.approved_at, rejected_at: app.rejected_at, rejection_reason: app.rejection_reason,
-    },
-  });
+  // Do not leak whether an email is on file. Always return a coarse status only.
+  // For unknown applicants, return "not_found" so callers cannot enumerate emails by toggling responses.
+  const coarseStatus = !app
+    ? "not_found"
+    : ["approved", "rejected", "email_verified", "submitted"].includes(app.status)
+      ? (app.status === "email_verified" || app.status === "submitted" ? "pending" : app.status)
+      : "pending";
+
+  return jsonRes({ status: coarseStatus });
 }
 
 async function handleTokenVerify(token: string): Promise<Response> {
@@ -423,9 +423,8 @@ Deno.serve(async (req) => {
 
   } catch (error: unknown) {
     console.error("Jury function error:", error);
-    const message = error instanceof Error ? error.message : "Internal server error";
     return new Response(
-      JSON.stringify({ error: message }),
+      JSON.stringify({ error: "Internal server error" }),
       { status: 500, headers: { ...corsHeaders, "Content-Type": "application/json" } }
     );
   }
