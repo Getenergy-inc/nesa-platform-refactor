@@ -812,6 +812,28 @@ const App = () => (
                       </WithLayout>
                     }
                   />
+                  {/* Gallery */}
+                  <Route
+                    path="/gallery"
+                    element={
+                      <WithLayout>
+                        <GalleryLanding />
+                      </WithLayout>
+                    }
+                  />
+                  <Route
+                    path="/gallery/:slug"
+                    element={
+                      <WithLayout>
+                        <GalleryCollection />
+                      </WithLayout>
+                    }
+                  />
+                  <Route path="/media/gallery" element={<Navigate to="/gallery" replace />} />
+                  <Route path="/media/photos" element={<Navigate to="/gallery" replace />} />
+                  <Route path="/media/events" element={<Navigate to="/gallery" replace />} />
+                  <Route path="/media/highlights" element={<Navigate to="/gallery" replace />} />
+                  <Route path="/media/behind-the-scenes" element={<Navigate to="/gallery" replace />} />
                   <Route
                     path="/media/tv"
                     element={
