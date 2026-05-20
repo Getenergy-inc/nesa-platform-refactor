@@ -19,6 +19,10 @@ export default function GoldNomineeProfilePage() {
   if (!data) return <Navigate to={`/nominees/gold-special-recognition/${categorySlug ?? ""}`} replace />;
 
   const { category, nominee } = data;
+  const media = resolveMedia(nominee.slug, nominee.image, nominee.name);
+  const heroImage = media.image ?? nominee.image;
+  const ogImage = media.og ?? heroImage;
+  const imageAlt = media.alt ?? nominee.name;
   const totalVotes = nominee.votes + (voted ? 1 : 0);
   const canonical = `https://nesaafrica.lovable.app/nominees/gold-special-recognition/${category.slug}/${nominee.slug}`;
   const related = category.nominees.filter((n) => n.slug !== nominee.slug).slice(0, 3);
@@ -59,7 +63,7 @@ export default function GoldNomineeProfilePage() {
         <meta property="og:description" content={nominee.summary} />
         <meta property="og:url" content={canonical} />
         <meta property="og:type" content="profile" />
-        <meta property="og:image" content={nominee.image} />
+        <meta property="og:image" content={ogImage} />
         <script type="application/ld+json">
           {JSON.stringify({
             "@context": "https://schema.org",
@@ -67,7 +71,7 @@ export default function GoldNomineeProfilePage() {
             name: nominee.name,
             nationality: nominee.country,
             url: canonical,
-            image: nominee.image,
+            image: ogImage,
             description: nominee.summary,
             award: `NESA Africa 2026 — ${category.title}`,
           })}
@@ -97,7 +101,7 @@ export default function GoldNomineeProfilePage() {
               <div className="grid md:grid-cols-[1fr,1.2fr]">
                 {/* Image */}
                 <div className="relative h-72 md:h-[28rem]">
-                  <img src={nominee.image} alt={nominee.name} className="w-full h-full object-cover" />
+                  <img src={heroImage} alt={imageAlt} className="w-full h-full object-cover" />
                   <div className="absolute inset-0 bg-gradient-to-t md:bg-gradient-to-r from-charcoal-light via-charcoal-light/30 to-transparent" />
                   <Badge className="absolute top-4 left-4 bg-charcoal/80 backdrop-blur text-gold border-gold/40">
                     <Sparkles className="w-3 h-3 mr-1" /> Influencers Education Impact Award
