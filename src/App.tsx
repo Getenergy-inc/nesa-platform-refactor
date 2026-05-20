@@ -330,7 +330,7 @@ const App = () => (
                   <Route path="/our-sponsors" element={<Navigate to="/sponsors" replace />} />
                   <Route path="/our-partners" element={<Navigate to="/sponsors" replace />} />
                   <Route path="/partner" element={<Navigate to="/sponsors" replace />} />
-                  <Route path="/partners" element={<Navigate to="/sponsors" replace />} />
+                  {/* /partners has its own dedicated page — do not redirect */}
                   <Route path="/partnerships" element={<Navigate to="/sponsors" replace />} />
                   <Route path="/become-a-sponsor" element={<Navigate to="/contact?topic=sponsorship" replace />} />
                   <Route path="/become-sponsor" element={<Navigate to="/contact?topic=sponsorship" replace />} />
