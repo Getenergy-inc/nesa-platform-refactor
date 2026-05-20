@@ -221,6 +221,7 @@ import {
   AdminOrders,
   AdminImpact,
   AdminNomineeImages,
+  AdminNomineeMediaLibrary,
   AdminNomineeProfiles,
   AdminVotingGovernance,
   AdminRebuild,
@@ -1370,6 +1371,10 @@ const App = () => (
                   <Route
                     path="/admin/nominee-images"
                     element={<AdminNomineeImages />}
+                  />
+                  <Route
+                    path="/admin/nominee-media"
+                    element={<AdminNomineeMediaLibrary />}
                   />
                   <Route
                     path="/admin/nominee-profiles"
