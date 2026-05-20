@@ -577,7 +577,7 @@ export default function Rebuild() {
                     Become an Ambassador
                   </Button>
                 </Link>
-                <Link to="/volunteer-bod">
+                <Link to="/volunteer">
                   <Button variant="outline" size="lg" className="gap-2 rounded-full font-semibold"
                     style={{
                       borderColor: `hsla(42, 85%, 52%, 0.3)`,

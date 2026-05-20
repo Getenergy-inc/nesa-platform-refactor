@@ -47,7 +47,7 @@ export default function AdminPathwaysCMS() {
       </DashboardLayout>
     );
   }
-  if (!user) return <Navigate to="/auth" replace />;
+  if (!user) return <Navigate to="/login" replace />;
   if (!hasRole("admin")) return <Navigate to="/unauthorized" replace />;
 
   const update = (id: string, patch: Partial<Editable>) =>

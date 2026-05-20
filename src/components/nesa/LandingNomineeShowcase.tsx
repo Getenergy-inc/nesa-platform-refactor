@@ -288,7 +288,7 @@ export function LandingNomineeShowcase() {
                 Re-Nominate
               </Button>
             </Link>
-            <Link to="/auth/register">
+            <Link to="/register">
               <Button size="lg" variant="outline" className="border-white/20 text-foreground hover:bg-white/5 rounded-full px-8 gap-2">
                 Sign Up / Sign In
                 <ArrowRight className="w-4 h-4" />

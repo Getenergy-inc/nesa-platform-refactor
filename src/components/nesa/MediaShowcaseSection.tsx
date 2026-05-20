@@ -198,7 +198,7 @@ export function MediaShowcaseSection() {
                 ))}
               </div>
 
-              <Link to="/music" className="block mt-4">
+              <Link to="/media" className="block mt-4">
                 <Button variant="outline" className="w-full rounded-full gap-2 border-primary/25 text-primary hover:bg-primary/10">
                   <Music className="h-4 w-4" />
                   {t("mediaShowcase.listenDownload")}
