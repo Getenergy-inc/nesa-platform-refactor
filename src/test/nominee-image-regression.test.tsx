@@ -98,10 +98,10 @@ describe("nominee image regression — verified photos", () => {
           />
         </MemoryRouter>,
       );
-      const img = container.querySelector("img");
-      expect(img, `NomineeCard missing <img> for ${v.slug}`).toBeTruthy();
-      expect(img!.getAttribute("src")).toBe(`/nominees/${v.file}`);
-      expect(img!.getAttribute("src")).not.toMatch(/placeholder\.svg/);
-    }
-  });
-});
+      const imgs = Array.from(container.querySelectorAll("img"));
+      const photo = imgs.find((i) => i.getAttribute("src") === `/nominees/${v.file}`);
+      expect(photo, `NomineeCard missing nominee photo for ${v.slug}`).toBeTruthy();
+      for (const i of imgs) {
+        expect(i.getAttribute("src")).not.toMatch(/placeholder\.svg/);
+      }
+
