@@ -111,6 +111,65 @@ test.describe("certificate verification", () => {
     });
   });
 
+  test("/verify/:hash renders valid certificate state", async ({ page }) => {
+    const hash = "NESA-VERIFY-REGRESSION-2025";
+
+    const fixture = {
+      valid: true,
+      status: "VALID",
+      certificate: {
+        id: "cert-regression-001",
+        tier: "gold",
+        serialNumber: "NESA-GOLD-2025-REG-001",
+        verificationCode: hash,
+        issuedAt: "2025-10-15T10:00:00.000Z",
+        expiresAt: null,
+        isLifetime: true,
+        isExpired: false,
+        isRevoked: false,
+        downloadLocked: false,
+      },
+      nominee: {
+        id: "nom-regression-001",
+        name: "Regression Test Honouree",
+        slug: "regression-test-honouree",
+        title: "Founder & CEO",
+        organization: "Education for All Foundation",
+        photoUrl: null,
+      },
+      season: {
+        id: "season-regression-001",
+        name: "NESA-Africa 2025",
+        year: 2025,
+      },
+      issuer: "NESA-Africa Awards Committee",
+    };
+
+    await page.route(`**/functions/v1/verify/${hash}`, async (route) => {
+      await route.fulfill({
+        status: 200,
+        contentType: "application/json",
+        body: JSON.stringify(fixture),
+      });
+    });
+
+    await page.goto(`/verify/${hash}`);
+    await page.waitForLoadState("networkidle");
+
+    const main = page.locator("main").first();
+    await expect(main).toBeVisible();
+
+    // Assert the success UI renders the fixture data.
+    await expect(main).toContainText("Valid Certificate");
+    await expect(main).toContainText(fixture.nominee.name);
+    await expect(main).toContainText(fixture.certificate.serialNumber);
+    await expect(main).toContainText(fixture.certificate.verificationCode);
+
+    await expect(main).toHaveScreenshot("verify-valid-certificate.png", {
+      mask: await maskVolatile(page),
+    });
+  });
+
   test("/verify/:hash renders certificate not-found state for unknown hash", async ({ page }) => {
     // Use a deterministic invalid hash so we screenshot the not-found UI.
     await page.goto("/verify/regression-test-invalid-hash");
