@@ -1,0 +1,390 @@
+# NESA-Africa — Broken Link & Route Audit
+
+Generated: 2026-05-20T06:37:12.511Z
+
+## Summary
+
+- **Defined routes**: 215
+- **Unique internal links**: 122
+- **External links**: 22
+- **Broken internal links (no matching route)**: 12
+- **Orphan routes (defined but never linked)**: 137
+
+## 🔴 Broken Internal Links (12)
+
+These `to=` / `href=` targets do not match any `<Route path>`.
+
+| URL | Referenced in |
+|---|---|
+| `/auth` | `src/pages/admin/AdminPathwaysCMS.tsx` |
+| `/auth/login` | `src/components/nesa/RenominateCard.tsx`, `src/components/nominees/RenominateModal.tsx`, `src/components/nominees/VoteModal.tsx`, `src/pages/admin/AdminContributorPhotos.tsx` _+1 more_ |
+| `/auth/register` | `src/components/agc/AGCDashboard.tsx`, `src/components/nesa/LandingNomineeShowcase.tsx`, `src/components/nominees/VoteModal.tsx` |
+| `/dashboard/wallet` | `src/components/navigation/EarnAGCNavItem.tsx` |
+| `/earn-credits` | `src/pages/guidelines/ForVoters.tsx` |
+| `/jury` | `src/components/navigation/MainNav.tsx` |
+| `/media/nesa-tv` | `src/pages/about/Timeline.tsx` |
+| `/music` | `src/components/nesa/MediaShowcaseSection.tsx` |
+| `/policies/coi` | `src/pages/judge/JudgeApply.tsx` |
+| `/policies/privacy` | `src/pages/judge/JudgeApply.tsx` |
+| `/policies/terms` | `src/pages/judge/JudgeApply.tsx` |
+| `/volunteer-bod` | `src/pages/Rebuild.tsx` |
+
+## 🟡 Orphan Routes (137)
+
+Defined in router but no internal link points to them.
+
+- `/about/awards-recognition` — _defined in `src/App.tsx`_
+- `/about/social-impact` — _defined in `src/App.tsx`_
+- `/account/login` — _defined in `src/App.tsx`_
+- `/account/otp` — _defined in `src/App.tsx`_
+- `/admin/bulk-seed` — _defined in `src/App.tsx`_
+- `/admin/contributor-photos` — _defined in `src/App.tsx`_
+- `/admin/contributors` — _defined in `src/App.tsx`_
+- `/admin/edx` — _defined in `src/App.tsx`_
+- `/admin/impact` — _defined in `src/App.tsx`_
+- `/admin/nominee-images` — _defined in `src/App.tsx`_
+- `/admin/nominee-profiles` — _defined in `src/App.tsx`_
+- `/admin/orders` — _defined in `src/App.tsx`_
+- `/admin/pathways` — _defined in `src/App.tsx`_
+- `/admin/rebuild` — _defined in `src/App.tsx`_
+- `/admin/voting` — _defined in `src/App.tsx`_
+- `/agc-rewards` — _defined in `src/App.tsx`_
+- `/awards/blue-garnet` — _defined in `src/App.tsx`_
+- `/awards/csr-for-education` — _defined in `src/App.tsx`_
+- `/awards/digital-voices` — _defined in `src/App.tsx`_
+- `/awards/global-partnerships` — _defined in `src/App.tsx`_
+- `/awards/gold-special-recognition` — _defined in `src/App.tsx`_
+- `/awards/grants-global-support` — _defined in `src/App.tsx`_
+- `/awards/influencer-education` — _defined in `src/App.tsx`_
+- `/awards/platinum` — _defined in `src/App.tsx`_
+- `/awards/winners` — _defined in `src/App.tsx`_
+- `/bulk-orders` — _defined in `src/App.tsx`_
+- `/buy-merchandise` — _defined in `src/App.tsx`_
+- `/cart` — _defined in `src/App.tsx`_
+- `/categories/:slug` — _defined in `src/App.tsx`_
+- `/category/africa-education-icon` — _defined in `src/App.tsx`_
+- `/category/christian-education-africa` — _defined in `src/App.tsx`_
+- `/category/creative-arts-nigeria` — _defined in `src/App.tsx`_
+- `/category/csr-education-africa` — _defined in `src/App.tsx`_
+- `/category/csr-education-nigeria` — _defined in `src/App.tsx`_
+- `/category/diaspora-education` — _defined in `src/App.tsx`_
+- `/category/education-friendly-state-nigeria` — _defined in `src/App.tsx`_
+- `/category/edutech-africa` — _defined in `src/App.tsx`_
+- `/category/international-education` — _defined in `src/App.tsx`_
+- `/category/islamic-education-africa` — _defined in `src/App.tsx`_
+- `/category/library-nigeria` — _defined in `src/App.tsx`_
+- `/category/media-advocacy-nigeria` — _defined in `src/App.tsx`_
+- `/category/ngo-education-africa` — _defined in `src/App.tsx`_
+- `/category/ngo-education-nigeria` — _defined in `src/App.tsx`_
+- `/category/political-leaders-nigeria` — _defined in `src/App.tsx`_
+- `/category/research-development-nigeria` — _defined in `src/App.tsx`_
+- `/category/stem-education-africa` — _defined in `src/App.tsx`_
+- `/checkout` — _defined in `src/App.tsx`_
+- `/contributors/:id` — _defined in `src/App.tsx`_
+- `/dashboard/nominations` — _defined in `src/App.tsx`_
+- `/dashboard/region` — _defined in `src/App.tsx`_
+- `/directory/:slug` — _defined in `src/App.tsx`_
+- `/earn-voting-coins` — _defined in `src/App.tsx`_
+- `/eduaid-africa/rebuild-my-school/:regionSlug` — _defined in `src/App.tsx`_
+- `/endorse` — _defined in `src/App.tsx`_
+- `/endorse-nesa` — _defined in `src/App.tsx`_
+- `/getfinance` — _defined in `src/App.tsx`_
+- `/gfawzip-wallet` — _defined in `src/App.tsx`_
+- `/gfawzip/links` — _defined in `src/App.tsx`_
+- `/governance` — _defined in `src/App.tsx`_
+- `/guidelines/judges` — _defined in `src/App.tsx`_
+- `/guidelines/nominees` — _defined in `src/App.tsx`_
+- `/guidelines/voters` — _defined in `src/App.tsx`_
+- `/impact` — _defined in `src/App.tsx`_
+- `/install` — _defined in `src/App.tsx`_
+- `/judge-application-form` — _defined in `src/App.tsx`_
+- `/judge-apply` — _defined in `src/App.tsx`_
+- `/judge-signup` — _defined in `src/App.tsx`_
+- `/judge-verify` — _defined in `src/App.tsx`_
+- `/judge/apply` — _defined in `src/App.tsx`_
+- `/judge/chat` — _defined in `src/App.tsx`_
+- `/judge/coi` — _defined in `src/App.tsx`_
+- `/judge/guidelines` — _defined in `src/App.tsx`_
+- `/judge/help` — _defined in `src/App.tsx`_
+- `/judge/icon-lifetime` — _defined in `src/App.tsx`_
+- `/judge/panel` — _defined in `src/App.tsx`_
+- `/judge/rubric` — _defined in `src/App.tsx`_
+- `/judge/scoring` — _defined in `src/App.tsx`_
+- `/judge/settings` — _defined in `src/App.tsx`_
+- `/judge/signup` — _defined in `src/App.tsx`_
+- `/judge/status` — _defined in `src/App.tsx`_
+- `/judge/verify` — _defined in `src/App.tsx`_
+- `/links` — _defined in `src/App.tsx`_
+- `/media/shows` — _defined in `src/App.tsx`_
+- `/merch` — _defined in `src/App.tsx`_
+- `/merchandise` — _defined in `src/App.tsx`_
+- `/nominee/accept/:token` — _defined in `src/App.tsx`_
+- `/nominee/dashboard/:token` — _defined in `src/App.tsx`_
+- `/nominee/decline/:token` — _defined in `src/App.tsx`_
+- `/nominees/:slug` — _defined in `src/App.tsx`_
+- `/nominees/africa-education-icon-award/:sub` — _defined in `src/App.tsx`_
+- `/nominees/africa-education-icon-award/:sub/:cls` — _defined in `src/App.tsx`_
+- `/nominees/best-ngo-contribution-to-education/:region` — _defined in `src/App.tsx`_
+- `/nominees/best-ngo-contribution-to-education/profile/:slug` — _defined in `src/App.tsx`_
+- `/nominees/category/:categorySlug` — _defined in `src/App.tsx`_
+- `/nominees/category/:categorySlug/:subSlug` — _defined in `src/App.tsx`_
+- `/nominees/category/africa-education-icon-award` — _defined in `src/App.tsx`_
+- `/nominees/gold-special-recognition/:categorySlug` — _defined in `src/App.tsx`_
+- `/nominees/gold-special-recognition/:categorySlug/:nomineeSlug` — _defined in `src/App.tsx`_
+- `/nrc/dashboard` — _defined in `src/App.tsx`_
+- `/nrc/dashboard/duplicates` — _defined in `src/App.tsx`_
+- `/nrc/dashboard/edi-analytics` — _defined in `src/App.tsx`_
+- `/nrc/dashboard/flagged` — _defined in `src/App.tsx`_
+- `/nrc/dashboard/guidelines` — _defined in `src/App.tsx`_
+- `/nrc/dashboard/intake/:id` — _defined in `src/App.tsx`_
+- `/nrc/dashboard/merge` — _defined in `src/App.tsx`_
+- `/nrc/dashboard/my-reviews` — _defined in `src/App.tsx`_
+- `/nrc/dashboard/profile` — _defined in `src/App.tsx`_
+- `/nrc/dashboard/queue` — _defined in `src/App.tsx`_
+- `/nrc/dashboard/review/:id` — _defined in `src/App.tsx`_
+- `/nrc/dashboard/settings` — _defined in `src/App.tsx`_
+- `/nrc/scoring` — _defined in `src/App.tsx`_
+- `/nrc/settings` — _defined in `src/App.tsx`_
+- `/olc/dashboard` — _defined in `src/App.tsx`_
+- `/olc/members` — _defined in `src/App.tsx`_
+- `/olc/settlements` — _defined in `src/App.tsx`_
+- `/olc/wallet` — _defined in `src/App.tsx`_
+- `/orders/:id` — _defined in `src/App.tsx`_
+- `/otp` — _defined in `src/App.tsx`_
+- `/pathways-to-recognition` — _defined in `src/App.tsx`_
+- `/payments/gfawzip` — _defined in `src/App.tsx`_
+- `/programs` — _defined in `src/App.tsx`_
+- `/programs/nesa-africa` — _defined in `src/App.tsx`_
+- `/region/:slug` — _defined in `src/App.tsx`_
+- `/region/nigeria` — _defined in `src/App.tsx`_
+- `/reset-password` — _defined in `src/App.tsx`_
+- `/results` — _defined in `src/App.tsx`_
+- `/shop-now` — _defined in `src/App.tsx`_
+- `/shop/:slug` — _defined in `src/App.tsx`_
+- `/shop/checkout` — _defined in `src/App.tsx`_
+- `/shop/orders/:id` — _defined in `src/App.tsx`_
+- `/sponsors` — _defined in `src/App.tsx`_
+- `/sponsors/:slug` — _defined in `src/App.tsx`_
+- `/store` — _defined in `src/App.tsx`_
+- `/upcoming-events` — _defined in `src/App.tsx`_
+- `/verify/:hash` — _defined in `src/App.tsx`_
+- `/videos` — _defined in `src/App.tsx`_
+- `/wallet/gfawzip` — _defined in `src/App.tsx`_
+
+## ✅ All Defined Routes (215)
+
+- `*`
+- `/`
+- `/about`
+- `/about-agc`
+- `/about/awards-recognition`
+- `/about/governance`
+- `/about/scef`
+- `/about/social-impact`
+- `/about/timeline`
+- `/about/vision-2035`
+- `/account/login`
+- `/account/otp`
+- `/admin`
+- `/admin/bulk-seed`
+- `/admin/contributor-photos`
+- `/admin/contributors`
+- `/admin/edx`
+- `/admin/impact`
+- `/admin/nominee-images`
+- `/admin/nominee-profiles`
+- `/admin/orders`
+- `/admin/pathways`
+- `/admin/rebuild`
+- `/admin/voting`
+- `/agc-rewards`
+- `/ambassadors`
+- `/awards`
+- `/awards/africa-education-icon`
+- `/awards/blue-garnet`
+- `/awards/csr-education`
+- `/awards/csr-for-education`
+- `/awards/digital-voices`
+- `/awards/global-partnerships`
+- `/awards/gold`
+- `/awards/gold-special-recognition`
+- `/awards/grants-global-support`
+- `/awards/icon`
+- `/awards/influencer-education`
+- `/awards/platinum`
+- `/awards/winners`
+- `/bulk-orders`
+- `/buy-merchandise`
+- `/buy-your-ticket`
+- `/cart`
+- `/categories`
+- `/categories/:slug`
+- `/category/africa-education-icon`
+- `/category/christian-education-africa`
+- `/category/creative-arts-nigeria`
+- `/category/csr-education-africa`
+- `/category/csr-education-nigeria`
+- `/category/diaspora-education`
+- `/category/education-friendly-state-nigeria`
+- `/category/edutech-africa`
+- `/category/international-education`
+- `/category/islamic-education-africa`
+- `/category/library-nigeria`
+- `/category/media-advocacy-nigeria`
+- `/category/ngo-education-africa`
+- `/category/ngo-education-nigeria`
+- `/category/political-leaders-nigeria`
+- `/category/research-development-nigeria`
+- `/category/stem-education-africa`
+- `/certificates/verify`
+- `/chapters`
+- `/checkout`
+- `/claim-voting-credits`
+- `/contact`
+- `/contributors`
+- `/contributors/:id`
+- `/dashboard`
+- `/dashboard/nominations`
+- `/dashboard/notifications`
+- `/dashboard/profile`
+- `/dashboard/region`
+- `/dashboard/settings`
+- `/directory`
+- `/directory/:slug`
+- `/donate`
+- `/earn-agc`
+- `/earn-voting-coins`
+- `/earn-voting-credits`
+- `/ecosystem`
+- `/eduaid`
+- `/eduaid-africa/rebuild-my-school`
+- `/eduaid-africa/rebuild-my-school/:regionSlug`
+- `/endorse`
+- `/endorse-nesa`
+- `/forgot-password`
+- `/get-involved/endorse-nesa-africa`
+- `/getfinance`
+- `/gfawzip`
+- `/gfawzip-wallet`
+- `/gfawzip/links`
+- `/governance`
+- `/guidelines/edi-matrix`
+- `/guidelines/judges`
+- `/guidelines/nominators`
+- `/guidelines/nominees`
+- `/guidelines/voters`
+- `/impact`
+- `/install`
+- `/judge`
+- `/judge-application-form`
+- `/judge-apply`
+- `/judge-signup`
+- `/judge-status`
+- `/judge-verify`
+- `/judge/apply`
+- `/judge/chat`
+- `/judge/coi`
+- `/judge/dashboard`
+- `/judge/guidelines`
+- `/judge/help`
+- `/judge/icon-lifetime`
+- `/judge/panel`
+- `/judge/rubric`
+- `/judge/scoring`
+- `/judge/settings`
+- `/judge/signup`
+- `/judge/status`
+- `/judge/verify`
+- `/judgeapply`
+- `/judges`
+- `/links`
+- `/login`
+- `/media`
+- `/media/gala`
+- `/media/shows`
+- `/media/tv`
+- `/media/webinars`
+- `/merch`
+- `/merchandise`
+- `/movement`
+- `/nominate`
+- `/nominee/:slug`
+- `/nominee/accept/:token`
+- `/nominee/dashboard/:token`
+- `/nominee/decline/:token`
+- `/nominees`
+- `/nominees/:slug`
+- `/nominees/africa-education-icon-award`
+- `/nominees/africa-education-icon-award/:sub`
+- `/nominees/africa-education-icon-award/:sub/:cls`
+- `/nominees/best-ngo-contribution-to-education`
+- `/nominees/best-ngo-contribution-to-education/:region`
+- `/nominees/best-ngo-contribution-to-education/profile/:slug`
+- `/nominees/category/:categorySlug`
+- `/nominees/category/:categorySlug/:subSlug`
+- `/nominees/category/africa-education-icon-award`
+- `/nominees/gold-special-recognition`
+- `/nominees/gold-special-recognition/:categorySlug`
+- `/nominees/gold-special-recognition/:categorySlug/:nomineeSlug`
+- `/nrc`
+- `/nrc/dashboard`
+- `/nrc/dashboard/duplicates`
+- `/nrc/dashboard/edi-analytics`
+- `/nrc/dashboard/flagged`
+- `/nrc/dashboard/guidelines`
+- `/nrc/dashboard/intake`
+- `/nrc/dashboard/intake/:id`
+- `/nrc/dashboard/merge`
+- `/nrc/dashboard/my-reviews`
+- `/nrc/dashboard/nominees`
+- `/nrc/dashboard/profile`
+- `/nrc/dashboard/queue`
+- `/nrc/dashboard/reports`
+- `/nrc/dashboard/review/:id`
+- `/nrc/dashboard/settings`
+- `/nrc/members`
+- `/nrc/my-queue`
+- `/nrc/scoring`
+- `/nrc/settings`
+- `/olc/dashboard`
+- `/olc/members`
+- `/olc/settlements`
+- `/olc/wallet`
+- `/orders/:id`
+- `/otp`
+- `/partners`
+- `/pathways`
+- `/pathways-to-recognition`
+- `/payments/gfawzip`
+- `/policies`
+- `/programs`
+- `/programs/nesa-africa`
+- `/rebuild`
+- `/region/:slug`
+- `/region/nigeria`
+- `/regions`
+- `/register`
+- `/reset-password`
+- `/results`
+- `/shop`
+- `/shop-now`
+- `/shop/:slug`
+- `/shop/bulk-orders`
+- `/shop/cart`
+- `/shop/checkout`
+- `/shop/orders/:id`
+- `/sponsors`
+- `/sponsors/:slug`
+- `/store`
+- `/tickets`
+- `/unauthorized`
+- `/upcoming-events`
+- `/verify/:hash`
+- `/videos`
+- `/volunteer`
+- `/vote`
+- `/vote-with-agc`
+- `/vote/blue-garnet`
+- `/vote/gold`
+- `/wallet`
+- `/wallet/gfawzip`
