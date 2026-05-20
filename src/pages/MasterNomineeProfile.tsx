@@ -15,6 +15,7 @@ import { getMasterNomineeBySlug, getAllMasterNominees, WORKFLOW_STATUS_CONFIG, t
 import { NomineeWorkflowStatusBadge } from "@/components/nominees/NomineeWorkflowStatus";
 import { NomineeEDIScores } from "@/components/nominees/NomineeEDIScores";
 import { generateEnhancedBiography } from "@/lib/nomineeStoryGenerator";
+import { useResolveNomineeMedia } from "@/hooks/useNomineeMedia";
 
 function isOrg(name: string): boolean {
   const kw = ["bank","group","foundation","university","church","association","network","company","ltd","plc","state","institute","academy","school","college","polytechnic","library","fund","trust","society","ministry","agency","board","hospital","council","ngo"];
