@@ -38,6 +38,13 @@ export default function NomineesHubPage() {
   const navigate = useNavigate();
   const { data: nominees, isLoading } = useNominees();
   const [search, setSearch] = useState("");
+  // UI-ready filters — connect to nominee query/data when backend fields land
+  const [activeGroup, setActiveGroup] = useState<string>("all");
+  const [filterCategory, setFilterCategory] = useState<string>("all");
+  const [filterType, setFilterType] = useState<string>("all");
+  const [filterCountry, setFilterCountry] = useState<string>("all");
+  const [filterRegion, setFilterRegion] = useState<string>("all");
+  const [filterEdition, setFilterEdition] = useState<string>("2026");
 
   const { categories, trending, mostVoted, totalCount } = useMemo(() => {
     if (!nominees) return { categories: [], trending: [], mostVoted: [], totalCount: 0 };
