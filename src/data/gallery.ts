@@ -221,6 +221,37 @@ export const galleryImages: GalleryImage[] = [
     collection: "nesa-africa-2025-awards",
     year: 2025,
   },
+  {
+    id: "nesa25-bts-team-group-wide",
+    src: btsTeamGroupWide,
+    alt: "NESA Africa 2025 production crew, hosts and honourees together on the purple carpet",
+    title: "The Family Behind the Night",
+    caption: "Crew, hosts and honourees gather on the purple carpet after the NESA Africa 2025 ceremony.",
+    category: "behind-the-scenes",
+    collection: "nesa-africa-2025-awards",
+    year: 2025,
+    featured: true,
+  },
+  {
+    id: "nesa25-bts-team-group-stage",
+    src: btsTeamGroupStage,
+    alt: "NESA Africa 2025 team posing in front of the main stage backdrop",
+    title: "Stagelight Family Portrait",
+    caption: "The full NESA Africa 2025 night team in front of the official stage backdrop.",
+    category: "behind-the-scenes",
+    collection: "nesa-africa-2025-awards",
+    year: 2025,
+  },
+  {
+    id: "nesa25-bts-honouree-red-portrait",
+    src: btsHonoureeRedPortrait,
+    alt: "NESA Africa 2025 honouree in red and pink Ankara dress on stage",
+    title: "A Quiet Moment in the Spotlight",
+    caption: "A behind-the-scenes portrait of an honouree mid-presentation on the NESA Africa 2025 stage.",
+    category: "behind-the-scenes",
+    collection: "nesa-africa-2025-awards",
+    year: 2025,
+  },
 ];
 
 export const galleryCollections: GalleryCollection[] = [
