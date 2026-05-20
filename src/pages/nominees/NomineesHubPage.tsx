@@ -80,6 +80,13 @@ export default function NomineesHubPage() {
     };
   }, [nominees]);
 
+  // Country list for the country dropdown (derived from live nominees)
+  const countries = useMemo(() => {
+    const set = new Set<string>();
+    (nominees ?? []).forEach((n) => n.country && set.add(n.country));
+    return Array.from(set).sort();
+  }, [nominees]);
+
   const filteredCategories = useMemo(() => {
     if (!search.trim()) return categories;
     const q = search.toLowerCase();
