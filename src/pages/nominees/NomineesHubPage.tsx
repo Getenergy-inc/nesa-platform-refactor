@@ -375,7 +375,40 @@ export default function NomineesHubPage() {
             </section>
           )}
 
+          {/* Mid-page conversion block — connects to /nominate and /earn-agc */}
+          <motion.div
+            initial={{ opacity: 0, y: 12 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="mb-12 rounded-2xl border border-gold/30 bg-gradient-to-br from-gold/10 via-charcoal-light to-charcoal p-6 md:p-8 flex flex-col md:flex-row md:items-center gap-5"
+          >
+            <div className="flex-1">
+              <Badge className="mb-2 bg-gold text-charcoal font-bold">Join the Movement</Badge>
+              <h3 className="font-display text-xl md:text-2xl font-bold text-ivory mb-2">
+                Know an education champion who should be here?
+              </h3>
+              <p className="text-ivory/70 text-sm md:text-base max-w-2xl">
+                Nominate an African Education Social Impact Champion today and earn free voting
+                points to support your favorite nominees when voting opens.
+              </p>
+            </div>
+            <div className="flex flex-col sm:flex-row gap-2 md:flex-shrink-0">
+              {/* TODO: confirm final routes — using /nominate and /earn-agc */}
+              <Link to="/nominate">
+                <Button size="lg" className="bg-gold hover:bg-gold/90 text-charcoal font-bold rounded-full gap-2 w-full">
+                  <Trophy className="w-4 h-4" /> Nominate a Champion Now
+                </Button>
+              </Link>
+              <Link to="/earn-agc">
+                <Button size="lg" variant="outline" className="border-gold/40 text-gold hover:bg-gold/10 rounded-full gap-2 w-full">
+                  How Voting Points Work <ArrowRight className="w-4 h-4" />
+                </Button>
+              </Link>
+            </div>
+          </motion.div>
+
           {/* Category Index */}
+
           <div className="mb-6 flex items-center justify-between">
             <h2 className="font-display text-2xl md:text-3xl font-bold text-ivory flex items-center gap-2">
               <Trophy className="w-6 h-6 text-gold" /> Browse by Category
