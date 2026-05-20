@@ -7,6 +7,7 @@
 import type { GoldNominee } from "./goldSpecialRecognition";
 import didierDrogbaImg from "@/assets/nominees/didier-drogba.jpg";
 import eliudKipchogeImg from "@/assets/nominees/eliud-kipchoge.jpg";
+import wizkidImg from "@/assets/nominees/wizkid.jpg";
 
 export const MUSIC_MIGRATED: GoldNominee[] = [
   {
@@ -33,7 +34,7 @@ export const MUSIC_MIGRATED: GoldNominee[] = [
     badge: "Music for Education",
     summary: "Supporting education through the Starboy Foundation.",
     impactStory: "Supporting education through the Starboy Foundation.",
-    verified: false, votes: 0, image: "/placeholder.svg",
+    verified: false, votes: 0, image: wizkidImg,
   },
   {
     slug: "davido",
