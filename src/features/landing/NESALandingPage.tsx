@@ -58,8 +58,14 @@ export function NESALandingPage() {
         {/* 1. HERO */}
         <TrophyHeroSection />
 
+        {/* 1b. NOMINATION CAMPAIGN — conversion-focused, directly under hero */}
+        <LazySection>
+          <NominationCampaignSection />
+        </LazySection>
+
         {/* 2. TRUST STRIP */}
         <TrustLogosStrip />
+
 
         {/* 3. ECOSYSTEM CAROUSEL — featured nominees (moved up directly under trust strip) */}
         <LazySection>
