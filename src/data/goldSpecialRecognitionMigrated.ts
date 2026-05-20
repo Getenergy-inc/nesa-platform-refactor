@@ -9,6 +9,7 @@ import didierDrogbaImg from "@/assets/nominees/didier-drogba.jpg";
 import eliudKipchogeImg from "@/assets/nominees/eliud-kipchoge.jpg";
 import wizkidImg from "@/assets/nominees/wizkid.jpg";
 import davidoImg from "@/assets/nominees/davido.jpg";
+import asaImg from "@/assets/nominees/asa.jpg";
 
 export const MUSIC_MIGRATED: GoldNominee[] = [
   {
@@ -61,7 +62,7 @@ export const MUSIC_MIGRATED: GoldNominee[] = [
     badge: "Music for Education",
     summary: "Music advocacy for social education and awareness.",
     impactStory: "Music advocacy for social education and awareness.",
-    verified: false, votes: 0, image: "/placeholder.svg",
+    verified: false, votes: 0, image: asaImg,
   },
 ];
 
