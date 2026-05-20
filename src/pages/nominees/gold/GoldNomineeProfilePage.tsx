@@ -102,7 +102,7 @@ export default function GoldNomineeProfilePage() {
               <div className="grid md:grid-cols-[1fr,1.2fr]">
                 {/* Image */}
                 <div className="relative h-72 md:h-[28rem]">
-                  <img src={heroImage} alt={imageAlt} className="w-full h-full object-cover" />
+                  <HonoureeImage slug={nominee.slug} name={nominee.name} fallbackImage={nominee.image} flag={nominee.flag} />
                   <div className="absolute inset-0 bg-gradient-to-t md:bg-gradient-to-r from-charcoal-light via-charcoal-light/30 to-transparent" />
                   <Badge className="absolute top-4 left-4 bg-charcoal/80 backdrop-blur text-gold border-gold/40">
                     <Sparkles className="w-3 h-3 mr-1" /> Influencers Education Impact Award
