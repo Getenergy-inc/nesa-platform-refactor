@@ -14,13 +14,47 @@ import { test, expect, type Page, type Locator } from "@playwright/test";
 
 async function maskVolatile(page: Page): Promise<Locator[]> {
   const selectors = [
+    // Countdowns / timers
     "[data-testid='countdown']",
+    "[data-testid='countdown-timer']",
+    "[data-testid*='countdown' i]",
+    "time",
+    // Live vote totals / tallies
     "[data-testid='live-vote-count']",
-    "[data-testid='customer-care-chat']",
-    "[aria-label*='chat' i]",
-    "iframe",
-    // Live vote totals on cards
+    "[data-testid*='vote-count' i]",
+    "[data-testid*='vote-total' i]",
+    "[data-testid*='leaderboard' i]",
     "text=/\\d+\\s+votes?/i",
+    "text=/\\d+\\s+points?/i",
+    // Chat / support widgets
+    "[data-testid='customer-care-chat']",
+    "[data-testid*='chat' i]",
+    "[aria-label*='chat' i]",
+    "[class*='intercom' i]",
+    "[class*='crisp' i]",
+    // Embeds & ambient motion
+    "iframe",
+    "video",
+    "canvas",
+    "[data-testid='floating-particles']",
+    "[data-testid='sparkle-effect']",
+    "[class*='animate-pulse']",
+    "[class*='animate-spin']",
+    "[class*='animate-bounce']",
+    "[class*='animate-ping']",
+    // Toasts / notifications
+    "[role='status']",
+    "[role='alert']",
+    "[data-sonner-toaster]",
+    "[data-testid*='toast' i]",
+    // Carousels / marquees / tickers
+    "[data-testid*='carousel' i]",
+    "[data-testid*='marquee' i]",
+    "[data-testid*='ticker' i]",
+    "[class*='marquee' i]",
+    // Dates rendered live
+    "text=/Verified on/i",
+    "text=/Last updated/i",
   ];
   return selectors.map((s) => page.locator(s));
 }

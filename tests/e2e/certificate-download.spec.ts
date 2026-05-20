@@ -33,13 +33,35 @@ const FIXTURE = {
 
 async function maskVolatile(page: Page): Promise<Locator[]> {
   const selectors = [
+    // Countdowns / timers
     "[data-testid='countdown']",
+    "[data-testid='countdown-timer']",
+    "[data-testid*='countdown' i]",
+    "time",
+    // Chat / support widgets
     "[data-testid='customer-care-chat']",
+    "[data-testid*='chat' i]",
     "[aria-label*='chat' i]",
+    "[class*='intercom' i]",
+    "[class*='crisp' i]",
+    // Embeds & ambient motion
     "iframe",
-    // Issued date is rendered from a fixed fixture, but mask any
-    // "Verified on …" / live timestamps the page may add.
+    "video",
+    "[data-testid='floating-particles']",
+    "[data-testid='sparkle-effect']",
+    "[class*='animate-pulse']",
+    "[class*='animate-spin']",
+    "[class*='animate-bounce']",
+    "[class*='animate-ping']",
+    // Toasts / notifications
+    "[role='status']",
+    "[role='alert']",
+    "[data-sonner-toaster]",
+    "[data-testid*='toast' i]",
+    // Live timestamps (issued date comes from fixture; mask anything else)
     "text=/Verified on/i",
+    "text=/Last updated/i",
+    "text=/Issued on/i",
   ];
   return selectors.map((s) => page.locator(s));
 }
