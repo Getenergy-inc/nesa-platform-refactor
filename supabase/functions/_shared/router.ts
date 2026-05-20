@@ -92,9 +92,11 @@ export function createRouter(basePath: string, routes: Route[]) {
       return err("Not found", 404);
     } catch (error: unknown) {
       console.error(`${basePath} error:`, error);
-      const message = error instanceof Error ? error.message : "Internal server error";
       const status = (error as { status?: number }).status || 500;
-      return err(message, status);
+      // Do not leak raw error details to clients; map to generic message.
+      // For non-500s (4xx) the handler is expected to have constructed a safe message
+      // via the `err()` helper; we only reach here on uncaught exceptions.
+      return err("Internal server error", status);
     }
   };
 }

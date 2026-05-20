@@ -365,7 +365,8 @@ serve(async (req) => {
             .select("id");
 
           if (insertError) {
-            results.errors.push(`Batch ${Math.floor(i / batchSize) + 1}: ${insertError.message}`);
+            console.error(`Seed-nominees batch ${Math.floor(i / batchSize) + 1} error:`, insertError);
+            results.errors.push(`Batch ${Math.floor(i / batchSize) + 1}: insert failed`);
           } else {
             inserted?.forEach((row, idx) => {
               insertedNomineeIds.set(newNominees[idx]._batch_idx, row.id);
@@ -381,7 +382,8 @@ serve(async (req) => {
           .from("unmapped_nominee_queue")
           .insert(unmappedQueue);
         if (unmappedError) {
-          results.errors.push(`Unmapped queue: ${unmappedError.message}`);
+          console.error("Seed-nominees unmapped queue error:", unmappedError);
+          results.errors.push("Unmapped queue: insert failed");
         }
       }
 
@@ -414,7 +416,8 @@ serve(async (req) => {
               .insert(batch)
               .select("id");
             if (nomError) {
-              results.errors.push(`Nominations batch: ${nomError.message}`);
+              console.error("Seed-nominees nominations batch error:", nomError);
+              results.errors.push("Nominations batch: insert failed");
             } else {
               results.nominations_created += nomInserted?.length || 0;
             }
