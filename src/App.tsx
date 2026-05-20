@@ -308,6 +308,59 @@ const App = () => (
                   <Route path="/agc-rewards" element={<Navigate to="/earn-agc" replace />} />
                   <Route path="/earn-voting-coins" element={<Navigate to="/earn-agc" replace />} />
 
+                  {/* === 301 LEGACY REDIRECTS === */}
+                  {/* Auth legacy */}
+                  <Route path="/auth" element={<Navigate to="/login" replace />} />
+                  <Route path="/auth/login" element={<Navigate to="/login" replace />} />
+                  <Route path="/auth/register" element={<Navigate to="/register" replace />} />
+                  <Route path="/auth/forgot-password" element={<Navigate to="/forgot-password" replace />} />
+                  <Route path="/auth/reset-password" element={<Navigate to="/reset-password" replace />} />
+                  <Route path="/signin" element={<Navigate to="/login" replace />} />
+                  <Route path="/signup" element={<Navigate to="/register" replace />} />
+
+                  {/* Sponsor legacy */}
+                  <Route path="/sponsor" element={<Navigate to="/sponsors" replace />} />
+                  <Route path="/our-sponsors" element={<Navigate to="/sponsors" replace />} />
+                  <Route path="/our-partners" element={<Navigate to="/sponsors" replace />} />
+                  <Route path="/partner" element={<Navigate to="/sponsors" replace />} />
+                  <Route path="/partners" element={<Navigate to="/sponsors" replace />} />
+                  <Route path="/partnerships" element={<Navigate to="/sponsors" replace />} />
+                  <Route path="/become-a-sponsor" element={<Navigate to="/contact?topic=sponsorship" replace />} />
+                  <Route path="/become-sponsor" element={<Navigate to="/contact?topic=sponsorship" replace />} />
+
+                  {/* Nominee legacy */}
+                  <Route path="/nominee" element={<Navigate to="/nominees" replace />} />
+                  <Route path="/nominee-directory" element={<Navigate to="/nominees" replace />} />
+                  <Route path="/nominees-directory" element={<Navigate to="/nominees" replace />} />
+                  <Route path="/profile/:slug" element={<Navigate to="/nominee/:slug" replace />} />
+                  <Route path="/nominees/profile/:slug" element={<Navigate to="/nominee/:slug" replace />} />
+
+                  {/* Category / award legacy */}
+                  <Route path="/award" element={<Navigate to="/awards" replace />} />
+                  <Route path="/award-categories" element={<Navigate to="/categories" replace />} />
+                  <Route path="/category" element={<Navigate to="/categories" replace />} />
+                  <Route path="/category/:slug" element={<Navigate to="/categories/:slug" replace />} />
+                  <Route path="/awards/category/:slug" element={<Navigate to="/awards/:slug" replace />} />
+                  <Route path="/nominees/category/:slug" element={<Navigate to="/nominees/:slug" replace />} />
+
+                  {/* Region legacy */}
+                  <Route path="/regions" element={<Navigate to="/region" replace />} />
+                  <Route path="/regions/:slug" element={<Navigate to="/region/:slug" replace />} />
+                  <Route path="/nominees/region/:slug" element={<Navigate to="/nominees/:slug" replace />} />
+
+                  {/* Misc legacy paths flagged in audit */}
+                  <Route path="/jury" element={<Navigate to="/judges" replace />} />
+                  <Route path="/music" element={<Navigate to="/media" replace />} />
+                  <Route path="/media/nesa-tv" element={<Navigate to="/media/tv" replace />} />
+                  <Route path="/dashboard/wallet" element={<Navigate to="/wallet" replace />} />
+                  <Route path="/earn-credits" element={<Navigate to="/earn-agc" replace />} />
+                  <Route path="/volunteer-bod" element={<Navigate to="/volunteer" replace />} />
+                  <Route path="/policies/coi" element={<Navigate to="/policies" replace />} />
+                  <Route path="/policies/privacy" element={<Navigate to="/policies" replace />} />
+                  <Route path="/policies/terms" element={<Navigate to="/policies" replace />} />
+
+
+
 
                   {/* About */}
                   <Route
