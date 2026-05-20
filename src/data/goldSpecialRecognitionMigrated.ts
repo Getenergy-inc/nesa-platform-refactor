@@ -8,6 +8,7 @@ import type { GoldNominee } from "./goldSpecialRecognition";
 import didierDrogbaImg from "@/assets/nominees/didier-drogba.jpg";
 import eliudKipchogeImg from "@/assets/nominees/eliud-kipchoge.jpg";
 import wizkidImg from "@/assets/nominees/wizkid.jpg";
+import davidoImg from "@/assets/nominees/davido.jpg";
 
 export const MUSIC_MIGRATED: GoldNominee[] = [
   {
@@ -47,7 +48,7 @@ export const MUSIC_MIGRATED: GoldNominee[] = [
     badge: "Music for Education",
     summary: "Davido Foundation supporting educational initiatives.",
     impactStory: "Davido Foundation supporting educational initiatives.",
-    verified: false, votes: 0, image: "/placeholder.svg",
+    verified: false, votes: 0, image: davidoImg,
   },
   {
     slug: "asa",
