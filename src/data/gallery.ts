@@ -12,6 +12,9 @@ import hostHandshake from "@/assets/gallery/nesa-2025/host-handshake.jpg";
 import hostWithHonoureePink from "@/assets/gallery/nesa-2025/host-with-honouree-pink.jpg";
 import guestsTrioSelfie from "@/assets/gallery/nesa-2025/guests-trio-selfie.jpg";
 import hostWithHostPortrait from "@/assets/gallery/nesa-2025/host-with-host-portrait.jpg";
+import btsTeamGroupWide from "@/assets/gallery/nesa-2025/bts-team-group-wide.jpg";
+import btsTeamGroupStage from "@/assets/gallery/nesa-2025/bts-team-group-stage.jpg";
+import btsHonoureeRedPortrait from "@/assets/gallery/nesa-2025/bts-honouree-red-portrait.jpg";
 
 export type GalleryCategory =
   | "ceremony"
