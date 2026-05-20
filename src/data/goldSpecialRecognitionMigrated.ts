@@ -9,6 +9,7 @@ import didierDrogbaImg from "@/assets/nominees/didier-drogba.jpg";
 import eliudKipchogeImg from "@/assets/nominees/eliud-kipchoge.jpg";
 import wizkidImg from "@/assets/nominees/wizkid.jpg";
 import davidoImg from "@/assets/nominees/davido.jpg";
+import asaImg from "@/assets/nominees/asa.jpg";
 
 export const MUSIC_MIGRATED: GoldNominee[] = [
   {
