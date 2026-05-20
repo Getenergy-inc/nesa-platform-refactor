@@ -408,6 +408,9 @@ export const NOMINEES_2025: NomineeRow[] = [
   [318,"Best STEM Education Program or Project (Africa-Regional)","South Africa","The Best Technology Integration in STEM Education","Siyavula","South Africa","","Open textbook platform with adaptive practice engine."],
   [319,"Best STEM Education Program or Project (Africa-Regional)","South Africa","The Best Technology Integration in STEM Education","Africa Teen Geeks","South Africa","","Mass coding labs; school timetables + mentor QA."],
   [320,"Best STEM Education Program or Project (Africa-Regional)","Central Africa","The Best Technology Integration in STEM Education","Open Dreams","Cameroon","","School labs + mentor analytics; accessibility supports."],
+  [321,"Best Africa Regional Companies CSR for Education Special Recognition Award in Africa 2025","Southern Africa","African International Sports Stars CSR For Education in Southern Africa","Siya Kolisi (South Africa)","South Africa","","Kolisi Foundation – funding schools, gender-based violence response, and educational nutrition programs across South Africa."],
+  [322,"Best Africa Regional Companies CSR for Education Special Recognition Award in Africa 2025","East Africa","African International Sports Stars CSR For Education in East Africa","Tegla Loroupe (Kenya)","Kenya","","Tegla Loroupe Peace Foundation – sponsoring schools, scholarships, and peace-through-sport education for refugee and pastoralist youth."],
+  [323,"Creative Arts Industry Contribution to Education in Nigeria 2025","N/A","Best Music for Educational Impact Award","Angelique Kidjo (Benin)","Benin","","Batonga Foundation – advancing secondary and higher education for adolescent girls across Africa through scholarships and mentorship."],
 ];
 
 // ═══════════════════════════════════════════════════════════════════
@@ -435,7 +438,7 @@ export const DATASET_META = {
   importedAt: "2026-03-08",
   mergedAt: "2026-03-08",
   totalInExcel: 1703,
-  totalLoaded: 320,
+  totalLoaded: 323,
   season: "2025",
   archived2024: true,
   migrationNote: "All 2024 nominees merged into 2025 system. Original data archived in nominees-2024-archive.ts",
