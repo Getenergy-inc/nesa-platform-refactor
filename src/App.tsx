@@ -113,6 +113,8 @@ import {
 
 // Media Pages
 import MediaHub from "./pages/media/MediaHub";
+import GalleryLanding from "./pages/gallery/GalleryLanding";
+import GalleryCollection from "./pages/gallery/GalleryCollection";
 import NESATV from "./pages/media/NESATV";
 import Shows from "./pages/media/Shows";
 import Webinars from "./pages/media/Webinars";
