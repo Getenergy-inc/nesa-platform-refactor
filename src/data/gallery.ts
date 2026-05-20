@@ -12,6 +12,9 @@ import hostHandshake from "@/assets/gallery/nesa-2025/host-handshake.jpg";
 import hostWithHonoureePink from "@/assets/gallery/nesa-2025/host-with-honouree-pink.jpg";
 import guestsTrioSelfie from "@/assets/gallery/nesa-2025/guests-trio-selfie.jpg";
 import hostWithHostPortrait from "@/assets/gallery/nesa-2025/host-with-host-portrait.jpg";
+import btsTeamGroupWide from "@/assets/gallery/nesa-2025/bts-team-group-wide.jpg";
+import btsTeamGroupStage from "@/assets/gallery/nesa-2025/bts-team-group-stage.jpg";
+import btsHonoureeRedPortrait from "@/assets/gallery/nesa-2025/bts-honouree-red-portrait.jpg";
 
 export type GalleryCategory =
   | "ceremony"
@@ -218,6 +221,37 @@ export const galleryImages: GalleryImage[] = [
     collection: "nesa-africa-2025-awards",
     year: 2025,
   },
+  {
+    id: "nesa25-bts-team-group-wide",
+    src: btsTeamGroupWide,
+    alt: "NESA Africa 2025 production crew, hosts and honourees together on the purple carpet",
+    title: "The Family Behind the Night",
+    caption: "Crew, hosts and honourees gather on the purple carpet after the NESA Africa 2025 ceremony.",
+    category: "behind-the-scenes",
+    collection: "nesa-africa-2025-awards",
+    year: 2025,
+    featured: true,
+  },
+  {
+    id: "nesa25-bts-team-group-stage",
+    src: btsTeamGroupStage,
+    alt: "NESA Africa 2025 team posing in front of the main stage backdrop",
+    title: "Stagelight Family Portrait",
+    caption: "The full NESA Africa 2025 night team in front of the official stage backdrop.",
+    category: "behind-the-scenes",
+    collection: "nesa-africa-2025-awards",
+    year: 2025,
+  },
+  {
+    id: "nesa25-bts-honouree-red-portrait",
+    src: btsHonoureeRedPortrait,
+    alt: "NESA Africa 2025 honouree in red and pink Ankara dress on stage",
+    title: "A Quiet Moment in the Spotlight",
+    caption: "A behind-the-scenes portrait of an honouree mid-presentation on the NESA Africa 2025 stage.",
+    category: "behind-the-scenes",
+    collection: "nesa-africa-2025-awards",
+    year: 2025,
+  },
 ];
 
 export const galleryCollections: GalleryCollection[] = [
@@ -246,6 +280,9 @@ export const galleryCollections: GalleryCollection[] = [
       "nesa25-guests-candid",
       "nesa25-host-handshake",
       "nesa25-production-team-group",
+      "nesa25-bts-team-group-wide",
+      "nesa25-bts-team-group-stage",
+      "nesa25-bts-honouree-red-portrait",
     ],
   },
 ];
