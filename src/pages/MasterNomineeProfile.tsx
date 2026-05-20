@@ -97,8 +97,8 @@ export default function MasterNomineeProfile() {
             <div className="flex flex-col md:flex-row gap-8 items-start">
               {/* Profile Image */}
               <div className={`flex-shrink-0 w-40 h-40 md:w-48 md:h-48 rounded-2xl border-2 border-gold/20 overflow-hidden flex items-center justify-center shadow-2xl shadow-black/30 ${org ? "bg-white/90 p-4" : "bg-gold/10"}`}>
-                {nominee.imageUrl && !nominee.imageUrl.includes("placeholder") ? (
-                  <img src={nominee.imageUrl} alt={nominee.name} className={`w-full h-full ${org ? "object-contain" : "object-cover"}`} loading="eager" />
+                {heroImage ? (
+                  <img src={heroImage} alt={heroMedia.alt ?? nominee.name} className={`w-full h-full ${org ? "object-contain" : "object-cover"}`} loading="eager" />
                 ) : (
                   <div className="flex flex-col items-center gap-2">
                     {org ? <Building2 className="w-14 h-14 text-gold/25" /> : <span className="text-gold/40 font-display text-4xl">{getInitials(nominee.name)}</span>}
