@@ -11,6 +11,7 @@ import { NomineeBreadcrumbs } from "@/components/nominees/NomineeBreadcrumbs";
 import { GOLD_CATEGORIES, getGoldCategory } from "@/data/goldSpecialRecognition";
 import { useResolveNomineeMedia } from "@/hooks/useNomineeMedia";
 import { cn } from "@/lib/utils";
+import { HonoureeImage } from "@/components/honourees/HonoureeImage";
 
 type Sort = "votes" | "newest" | "trending" | "az";
 
