@@ -85,6 +85,9 @@ export function HonoureeImage({
         src={src}
         alt={media.alt ?? name}
         loading="lazy"
+        data-testid="honouree-image"
+        data-state="resolved"
+        data-slug={slug}
         className={cn("w-full h-full object-cover", imgClassName, className)}
       />
     );
@@ -94,6 +97,9 @@ export function HonoureeImage({
     <div
       aria-label={name}
       role="img"
+      data-testid="honouree-image"
+      data-state="fallback"
+      data-slug={slug}
       className={cn(
         "relative w-full h-full overflow-hidden bg-gradient-to-br",
         tint,
