@@ -348,13 +348,15 @@ export default function MasterNomineeProfile() {
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
                 {relatedNominees.map(rn => {
                   const rnOrg = isOrg(rn.name);
+                  const rnMedia = resolveMedia(rn.slug, null, rn.name);
+                  const rnImage = rnMedia.thumbnail ?? rnMedia.image;
                   return (
                     <Link key={rn.id} to={`/directory/${encodeURIComponent(rn.slug)}`} className="group">
                       <Card className="bg-charcoal-light/50 border-gold/10 hover:border-gold/30 transition-all overflow-hidden h-full">
                         <CardContent className="p-0">
                           <div className={`w-full h-40 flex items-center justify-center overflow-hidden ${rnOrg ? "bg-white/90 p-4" : "bg-gold/5"}`}>
-                            {rn.imageUrl && !rn.imageUrl.includes("placeholder") ? (
-                              <img src={rn.imageUrl} alt={rn.name} className={`w-full h-full ${rnOrg ? "object-contain" : "object-cover"}`} loading="lazy" />
+                            {rnImage ? (
+                              <img src={rnImage} alt={rnMedia.alt ?? rn.name} className={`w-full h-full ${rnOrg ? "object-contain" : "object-cover"}`} loading="lazy" />
                             ) : (
                               <span className="text-gold/40 font-display text-2xl">{getInitials(rn.name)}</span>
                             )}
