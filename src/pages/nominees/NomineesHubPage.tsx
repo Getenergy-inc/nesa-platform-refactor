@@ -2,13 +2,37 @@ import { useMemo, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import { motion } from "framer-motion";
-import { Search, Trophy, Users, ArrowRight, ChevronRight, Flame, TrendingUp, Sparkles } from "lucide-react";
+import {
+  Search, Trophy, Users, ArrowRight, ChevronRight, Flame, TrendingUp, Sparkles,
+  Globe2, Plane, HeartHandshake, MapPin, Crown, Building2, Rocket, Filter,
+} from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Skeleton } from "@/components/ui/skeleton";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { useNominees, type EnrichedDatabaseNominee } from "@/hooks/useNominees";
 import { LandingNomineeCard } from "@/components/nesa/LandingNomineeCard";
+
+// NOTE: Nominee-group chips are UI-ready. Wire filtering logic to `useNominees`
+// data (e.g. by category/region/diaspora flag) when backend fields are confirmed.
+const NOMINEE_GROUPS = [
+  { id: "all", label: "All Nominees", icon: Users },
+  { id: "africans-in-africa", label: "Africans in Africa", icon: Globe2 },
+  { id: "africans-in-diaspora", label: "Africans in Diaspora", icon: Plane },
+  { id: "friends-of-africa", label: "Friends of Africa", icon: HeartHandshake },
+  { id: "africa-regional", label: "Africa Regional Awards", icon: MapPin },
+  { id: "lifetime-icons", label: "Lifetime Icons", icon: Crown },
+  { id: "ngos-institutions", label: "NGOs & Institutions", icon: Building2 },
+  { id: "youth-innovation", label: "Youth & Innovation", icon: Rocket },
+] as const;
+
+const NOMINEE_GROUP_CARDS = [
+  { icon: Globe2, title: "Africans in Africa", desc: "Education impact leaders based within Africa." },
+  { icon: Plane, title: "Africans in Diaspora", desc: "Africans contributing to education from outside Africa." },
+  { icon: HeartHandshake, title: "Friends of Africa", desc: "Non-African supporters advancing African education." },
+  { icon: MapPin, title: "Africa Regional Awards", desc: "Nominees grouped by West, East, Central, Southern & North Africa." },
+];
 
 export default function NomineesHubPage() {
   const navigate = useNavigate();
