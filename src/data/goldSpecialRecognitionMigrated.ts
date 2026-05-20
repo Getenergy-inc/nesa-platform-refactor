@@ -48,7 +48,7 @@ export const MUSIC_MIGRATED: GoldNominee[] = [
     badge: "Music for Education",
     summary: "Davido Foundation supporting educational initiatives.",
     impactStory: "Davido Foundation supporting educational initiatives.",
-    verified: false, votes: 0, image: "/placeholder.svg",
+    verified: false, votes: 0, image: davidoImg,
   },
   {
     slug: "asa",
