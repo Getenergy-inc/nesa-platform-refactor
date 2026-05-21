@@ -39,7 +39,7 @@ export default defineConfig(({ mode }) => ({
       },
       workbox: {
         globPatterns: ["**/*.{js,css,html,ico,svg,woff2}"],
-        maximumFileSizeToCacheInBytes: 5 * 1024 * 1024,
+        maximumFileSizeToCacheInBytes: 8 * 1024 * 1024,
         navigateFallbackDenylist: [/^\/~oauth/],
         runtimeCaching: [
           {
@@ -115,7 +115,7 @@ export default defineConfig(({ mode }) => ({
     // Target modern browsers for smaller bundles
     target: 'esnext',
     // Increase chunk size warning limit
-    chunkSizeWarningLimit: 1000,
+    chunkSizeWarningLimit: 8192,
     // Enable source maps for production debugging
     sourcemap: mode !== 'production',
   },
