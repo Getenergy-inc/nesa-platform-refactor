@@ -18,6 +18,7 @@ export default defineConfig(({ mode }) => ({
     mode === "development" && componentTagger(),
     VitePWA({
       registerType: "autoUpdate",
+      injectRegister: "auto",
       includeAssets: ["favicon.ico", "apple-touch-icon.png", "pwa-192x192.png", "pwa-512x512.png"],
       manifest: {
         name: "NESA-Africa — New Education Standard Award",
@@ -40,6 +41,9 @@ export default defineConfig(({ mode }) => ({
       workbox: {
         globPatterns: ["**/*.{js,css,html,ico,svg,woff2}"],
         maximumFileSizeToCacheInBytes: 8 * 1024 * 1024,
+        cleanupOutdatedCaches: true,
+        clientsClaim: true,
+        skipWaiting: true,
         navigateFallbackDenylist: [/^\/~oauth/],
         runtimeCaching: [
           {
