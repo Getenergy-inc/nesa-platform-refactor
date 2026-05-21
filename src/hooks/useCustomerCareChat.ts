@@ -1,4 +1,5 @@
 import { useState, useCallback, useRef } from "react";
+import { createUuid } from "@/lib/uuid";
 
 export interface ChatMessage {
   id: string;
@@ -20,14 +21,14 @@ export function useCustomerCareChat() {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [metadata, setMetadata] = useState<ChatMetadata>({});
-  const conversationIdRef = useRef<string>(crypto.randomUUID());
+  const conversationIdRef = useRef<string>(createUuid());
 
   const sendMessage = useCallback(async (content: string) => {
     if (!content.trim() || isLoading) return;
 
     setError(null);
     const userMessage: ChatMessage = {
-      id: crypto.randomUUID(),
+      id: createUuid(),
       role: "user",
       content: content.trim(),
       timestamp: new Date(),
@@ -50,7 +51,7 @@ export function useCustomerCareChat() {
         return [
           ...prev,
           {
-            id: crypto.randomUUID(),
+            id: createUuid(),
             role: "assistant",
             content: assistantContent,
             timestamp: new Date(),
@@ -166,7 +167,7 @@ export function useCustomerCareChat() {
     setMessages([]);
     setError(null);
     setMetadata({});
-    conversationIdRef.current = crypto.randomUUID();
+    conversationIdRef.current = createUuid();
   }, []);
 
   return {

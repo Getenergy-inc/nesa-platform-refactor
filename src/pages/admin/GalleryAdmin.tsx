@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Helmet } from "react-helmet-async";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "@/hooks/use-toast";
+import { createUuid } from "@/lib/uuid";
 import { Loader2, Upload, Trash2, Star, StarOff, Pencil, X, Plus, Image as ImageIcon } from "lucide-react";
 import { GALLERY_CATEGORIES } from "@/data/gallery";
 
@@ -137,7 +138,7 @@ const GalleryAdmin = () => {
 
       if (file) {
         const ext = file.name.split(".").pop() || "jpg";
-        const path = `${new Date().getFullYear()}/${crypto.randomUUID()}.${ext}`;
+        const path = `${new Date().getFullYear()}/${createUuid()}.${ext}`;
         const up = await supabase.storage.from("gallery-media").upload(path, file, {
           cacheControl: "31536000",
           upsert: false,

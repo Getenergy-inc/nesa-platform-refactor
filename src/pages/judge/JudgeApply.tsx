@@ -13,6 +13,7 @@ import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, For
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Checkbox } from "@/components/ui/checkbox";
 import { toast } from "sonner";
+import { createUuid } from "@/lib/uuid";
 import { 
   Gavel, 
   CheckCircle, 
@@ -92,7 +93,7 @@ export default function JudgeApply() {
     
     try {
       // Generate verification token
-      const verificationToken = crypto.randomUUID();
+      const verificationToken = createUuid();
       const expiresAt = new Date();
       expiresAt.setHours(expiresAt.getHours() + 48); // 48 hour expiry
 

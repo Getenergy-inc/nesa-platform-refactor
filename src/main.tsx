@@ -1,5 +1,6 @@
 import { createRoot } from "react-dom/client";
 import App from "./App.tsx";
+import { AppErrorBoundary } from "./components/AppErrorBoundary";
 import "./index.css";
 
 // Initialize i18n
@@ -18,4 +19,8 @@ if (import.meta.env.DEV && "serviceWorker" in navigator) {
     });
 }
 
-createRoot(document.getElementById("root")!).render(<App />);
+createRoot(document.getElementById("root")!).render(
+  <AppErrorBoundary>
+    <App />
+  </AppErrorBoundary>
+);

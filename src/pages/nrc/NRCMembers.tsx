@@ -28,6 +28,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { toast } from "sonner";
+import { createUuid } from "@/lib/uuid";
 import {
   UserPlus,
   MoreVertical,
@@ -74,7 +75,7 @@ function NRCMembersContent() {
     setIsInviting(true);
     try {
       // Generate invitation token
-      const token = crypto.randomUUID();
+      const token = createUuid();
       const expiresAt = new Date();
       expiresAt.setDate(expiresAt.getDate() + 7);
 
