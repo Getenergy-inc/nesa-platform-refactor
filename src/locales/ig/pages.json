@@ -1,0 +1,1157 @@
+{
+  "landing": {
+    "hero": {
+      "badge": "Public Voting Now Open",
+      "title": "Honoring Africa's",
+      "titleHighlight": "Education Changemakers",
+      "tagline": "Advocating & Achieving Education For All In Africa",
+      "description": "The New Education Standard Award Africa ({{edition}}) celebrates visionary leaders, institutions, and innovators building the future of education across Africa.",
+      "discoverMore": "Discover More",
+      "nominateNow": "Nominate Now",
+      "stats": {
+        "nominees": "Nominees",
+        "countries": "Countries",
+        "categories": "Categories"
+      },
+      "quickNav": {
+        "refer": "Refer",
+        "nominate": "Nominate",
+        "vision": "Vision 2035",
+        "tickets": "Tickets",
+        "watch": "Watch"
+      }
+    },
+    "stats": {
+      "regions": "African Regions",
+      "categories": "Award Categories",
+      "subcategories": "Sub-Categories",
+      "diaspora": "+ Diaspora + Friends of Africa"
+    },
+    "upcomingEvents": {
+      "title": "Upcoming TV Shows, Voting & Events",
+      "description": "Live countdown to NESA-Africa's major milestones, public voting windows, and broadcast events",
+      "tvShows": "📺 Live TV Shows",
+      "votingWindows": "🗳️ Public Voting Windows",
+      "galaEvents": "🏆 Gala & Legacy Events"
+    },
+    "phase1": {
+      "badge": "Phase 1 — Public Education & Awareness",
+      "title": "EduAid-Africa Webinar Series",
+      "description": "The official public education and engagement framework for NESA-Africa — educating stakeholders on education challenges, NESA standards, and preparing the public for nominations and voting.",
+      "frequency": "Frequency",
+      "frequencyValue": "2–4 webinars monthly",
+      "speakers": "Pan-African speakers & practitioners",
+      "archived": "Recorded and archived for public access"
+    },
+    "watchLive": {
+      "title": "Watch Live",
+      "description": "NESA Africa TV broadcasts on social media, partner stations, and the CAST TV box/app.",
+      "youtube": "YouTube",
+      "facebook": "Facebook",
+      "castTV": "CAST TV App"
+    },
+    "quote": {
+      "text": "{{editionName}} is not an event. It is a standards-led education accountability cycle that connects:",
+      "keywords": {
+        "education": "Education",
+        "recognition": "Recognition",
+        "publicParticipation": "Public Participation",
+        "legacyImpact": "Legacy Impact"
+      },
+      "footer": "Delivered with governance, transparency, and continental relevance."
+    },
+    "howItWorks": {
+      "title": "How NESA Works",
+      "description": "A structured lifecycle from public education to lasting legacy impact.",
+      "steps": {
+        "webinar": "Webinar",
+        "platinum": "Platinum",
+        "icon": "Icon",
+        "gold": "Gold",
+        "blueGarnet": "Blue Garnet",
+        "rmsaLegacy": "RMSA Legacy"
+      }
+    },
+    "programmeOverview": {
+      "title": "Programme Overview",
+      "description": "{{edition}} is a standards-based continental education recognition and accountability programme designed to document verified education service, engage the public through structured participation, and leave a post-award legacy through inclusive education infrastructure.",
+      "pillars": {
+        "publicEducation": {
+          "category": "Public Education & Awareness",
+          "title": "EduAid-Africa Webinar Series",
+          "description": "Stakeholder education on challenges, standards, and informed participation"
+        },
+        "recognition": {
+          "category": "Recognition & Standards",
+          "title": "NESA-Africa Awards Cycle",
+          "description": "Standards-based continental education recognition and accountability"
+        },
+        "legacy": {
+          "category": "Legacy Impact",
+          "title": "Rebuild My School Africa",
+          "description": "Post-award infrastructure projects for inclusive education"
+        }
+      }
+    },
+    "timeline": {
+      "title": "Programme Timeline",
+      "description": "Complete schedule from public education phase through legacy implementation."
+    },
+    "awardPhases": {
+      "title": "Award Phases",
+      "description": "Four structured phases from baseline recognition to the highest continental honour.",
+      "period": "Period",
+      "show": "Show",
+      "phase": "Phase"
+    },
+    "keyDates": {
+      "blueGarnetGala": "Blue Garnet Awards Gala",
+      "comingSoon": "To Be Announced",
+      "location": "Lagos, Nigeria",
+      "eduAidWebinars": "EduAid Webinars"
+    },
+    "nominationPath": {
+      "sectionBadge": "Start Your Journey",
+      "title": "Choose Your Nomination Path",
+      "description": "Select the appropriate award category based on the nominee's achievements and recognition type.",
+      "nominateNow": "Nominate Now",
+      "annualCompetition": "Annual Competition",
+      "meritBased": "Merit-Based",
+      "paths": {
+        "icon": {
+          "badge": "Lifetime Achievement",
+          "title": "Africa Icon Blue Garnet Award",
+          "description": "Reserved for lifetime achievement. Nominees must have 10+ years institutional achievements.",
+          "bullets": [
+            "Institutional Achievements",
+            "Long-term Impact",
+            "Legacy Recognition"
+          ]
+        },
+        "blueGarnetGold": {
+          "badge": "Public Voting",
+          "title": "Blue Garnet & Gold Certificate Awards",
+          "description": "Open competition with public participation through AGC voting and expert judging.",
+          "bullets": [
+            "Public Voting",
+            "Expert Judging",
+            "138+ Subcategories"
+          ]
+        },
+        "platinum": {
+          "badge": "Expert Selection",
+          "title": "Platinum Certificate of Recognition",
+          "description": "Merit-based recognition through expert panel evaluation and institutional review.",
+          "bullets": [
+            "No Voting",
+            "Internal Judging",
+            "Global Nomination"
+          ]
+        }
+      }
+    },
+    "legacy": {
+      "badge": "Post-Award Legacy Phase",
+      "title": "Rebuild My School Africa",
+      "implementedVia": "Implemented via EduAid-Africa",
+      "description": "Translate recognition into direct, measurable education impact by rebuilding or renovating one Special Needs Education facility in each African region.",
+      "focusAreas": {
+        "title": "Focus Areas",
+        "items": [
+          "Inclusive classrooms",
+          "Accessibility & assistive facilities",
+          "Learning resources for children with disabilities"
+        ]
+      },
+      "fundingChannels": {
+        "title": "Funding Channels",
+        "items": [
+          "Ticket contributions",
+          "EduAid-Africa donations",
+          "CSR & partner contributions",
+          "Post-award campaigns"
+        ]
+      }
+    },
+    "firewalls": {
+      "title": "Firewalls & Integrity",
+      "items": {
+        "platinum": {
+          "title": "Platinum",
+          "description": "Non-competitive. NRC verification + governance checks."
+        },
+        "gold": {
+          "title": "Gold Stage",
+          "description": "100% public voting only — no judges."
+        },
+        "blueGarnet": {
+          "title": "Blue Garnet",
+          "description": "60% jury + 40% public. Audit logs & anti-fraud controls."
+        },
+        "sponsors": {
+          "title": "Sponsors",
+          "description": "Sponsors and endorsers cannot influence or select winners."
+        }
+      }
+    },
+    "getInvolved": {
+      "title": "Get Involved",
+      "actions": {
+        "nominate": "Nominate",
+        "vote": "Vote",
+        "getTickets": "Get Tickets",
+        "donate": "Donate",
+        "partner": "Partner"
+      }
+    },
+    "vision": {
+      "badge": "Strategic Vision Document",
+      "title": "NESA-AFRICA VISION {{year}}",
+      "tagline": "Setting Africa's Education Standards. Recognising Impact. Delivering Legacy.",
+      "description": "Vision {{year}} defines NESA-Africa's 10-year strategic direction — moving from an awards-led initiative into a continent-wide education standards and impact institution that connects recognition with lasting social transformation.",
+      "expandAll": "Expand All Sections",
+      "collapseAll": "Collapse All Sections",
+      "sections": {
+        "intro": {
+          "title": "1. Introduction",
+          "content": "The New Education Standards Awards Africa (NESA-Africa) is a continental education standards, recognition, and accountability platform established to elevate education impact, public trust, and measurable outcomes across Africa."
+        },
+        "problem": {
+          "title": "2. The Problem NESA-Africa Addresses",
+          "content": "Details about the educational challenges NESA-Africa aims to solve across the continent."
+        },
+        "vision": {
+          "title": "3. Vision Statement",
+          "content": "The long-term vision for education standards and recognition in Africa."
+        },
+        "mission": {
+          "title": "4. Mission Statement",
+          "content": "The mission guiding NESA-Africa's operations and initiatives."
+        },
+        "pillars": {
+          "title": "5. Core Pillars of Vision",
+          "content": "The foundational pillars supporting NESA-Africa's strategic direction."
+        },
+        "milestones": {
+          "title": "6. Strategic Milestones",
+          "content": "Key milestones and targets for the next decade."
+        },
+        "platinum": {
+          "title": "7. Role of Platinum Certification",
+          "content": "How Platinum certification serves as the baseline recognition layer."
+        },
+        "governance": {
+          "title": "8. Governance & Integrity",
+          "content": "The governance framework ensuring transparency and integrity."
+        },
+        "success": {
+          "title": "9. What Success Looks Like",
+          "content": "Measurable outcomes and indicators of success."
+        },
+        "conclusion": {
+          "title": "10. Conclusion",
+          "content": "Vision aligns with continental and global frameworks: SDG 4, AU Agenda 2063, ECOWAS, SADC, EAC, ECCAS."
+        }
+      }
+    },
+    "finalCTA": {
+      "title": "Ready to Celebrate Africa's",
+      "titleAccent": "Education Changemakers?",
+      "description": "Don't just applaud impact — help the world discover it. Nominate an African education changemaker today and become part of a continental movement recognising the people and institutions transforming education across Africa and the diaspora. Nominate. Earn AGC. Celebrate Education Impact.",
+      "submitNomination": "Nominate a Changemaker Now",
+      "visitNESA": "Visit NESA Africa",
+      "trustIndicators": {
+        "regions": "5+2 Regions",
+        "nominees": "2,500+ Nominees",
+        "years": "20 Years of Vision (2006–2026)"
+      }
+    },
+    "sponsors": {
+      "title": "Our Partners & Sponsors",
+      "description": "Partnering with industry leaders to drive education excellence across Africa.",
+      "organizationsCount": "{{count}} organizations supporting education excellence",
+      "viewAll": "View All"
+    },
+    "endorsedBy": {
+      "title": "Endorsed By",
+      "description": "Leading educational organizations and institutions across Africa trust and endorse NESA's mission to celebrate excellence in education.",
+      "trustedBy": "Trusted By Leaders",
+      "stats": {
+        "organizations": "Organizations",
+        "countries": "Countries",
+        "reach": "Reach"
+      },
+      "viewAllPartners": "View All Partners & Sponsors",
+      "becomeEndorser": "Become an Endorser"
+    },
+    "categories": {
+      "badge": "17 Official Categories",
+      "title": "Award Categories",
+      "description": "Recognizing excellence across education, corporate responsibility, technology, and social impact throughout the African continent.",
+      "subcategoriesCount": "{{count}} subcategories",
+      "africaFirst": "Africa First Categories",
+      "nigeriaCategories": "Nigeria Categories",
+      "scopes": {
+        "africaRegional": "Africa Regional",
+        "nigeria": "Nigeria",
+        "international": "International",
+        "lifetime": "Lifetime"
+      }
+    },
+    "watchMedia": {
+      "badge": "Media Hub",
+      "title": "Watch: NESA-Africa",
+      "description": "Watch the vision behind NESA Africa, past award highlights, and exclusive interviews with African educators shaping the future of education.",
+      "showLess": "Show Less",
+      "viewAll": "View All {{count}} Videos"
+    },
+    "trophyHero": {
+      "headline": "Don't Just Clap for Education Changemakers.",
+      "headlineAccent": "Nominate Them.",
+      "slogan": "Nominations Open · NESA-Africa 2025/26",
+      "tagline": "Your mentor. Your school founder. Your NGO leader. Your innovator.",
+      "valueProposition": "Across Africa and the diaspora, changemakers are transforming education through advocacy, innovation, funding, infrastructure, mentorship, technology, policy, community action, and social impact. NESA-Africa gives the public a platform to recognise, celebrate, and amplify the people and institutions advancing education across Africa. Nominate a changemaker today and earn AGC voting points to support your favourite nominees when voting opens.",
+      "nominateNow": "Nominate a Changemaker",
+      "voteWithAGC": "Earn AGC Voting Points",
+      "watchLive": "Watch Live",
+      "trophyCaption": "Africa's Highest Education Honour",
+      "winnersCaption": "Celebrating Education Changemakers",
+      "scrollHint": "Discover",
+      "trustRegions": "10 Regions + Diaspora",
+      "trustNominees": "{{count}}+ Nominees",
+      "trustVision": "15 Years of Vision"
+    },
+    "whatsLive": {
+      "badge": "What's Live",
+      "title": "Upcoming Events & Voting",
+      "viewCalendar": "View Full Calendar",
+      "nextTVShow": "Next TV Show",
+      "nextVotingWindow": "Next Voting Window",
+      "nextGalaEvent": "Next Gala Event",
+      "comingSoon": "To be announced"
+    },
+    "howItWorksVisual": {
+      "badge": "The Journey",
+      "title": "How NESA-Africa Works",
+      "description": "From recognition to lasting impact—every step of the journey matters.",
+      "webinar": "Webinar",
+      "webinarDesc": "Public Education",
+      "platinum": "Platinum",
+      "platinumDesc": "Baseline Recognition",
+      "icon": "Icon",
+      "iconDesc": "Lifetime Achievement",
+      "gold": "Gold",
+      "goldDesc": "Public Voting",
+      "blueGarnet": "Blue Garnet",
+      "blueGarnetDesc": "Jury + Public",
+      "legacy": "Legacy",
+      "legacyDesc": "Rebuild Schools",
+      "agcNote": "Participation unlocks voting points. Voting uses AGC (non-tradeable) during official windows.",
+      "learnMore": "Learn More About the Process"
+    },
+    "voteWithAGC": {
+      "badge": "Structured Civic Participation",
+      "title": "Afrigold Participation",
+      "titleAccent": "Credit (AGC)",
+      "description": "Your participation earns Afrigold Credits (AGCc) — structured participation credits to support nominees for Gold and Blue Garnet awards.",
+      "joinTitle": "Join & Participate",
+      "joinDesc": "Create your account and engage through nominations, referrals, and daily activities.",
+      "earnTitle": "Earn Voting Points",
+      "earnDesc": "Your participation unlocks AGC voting points—structured credits for public participation.",
+      "voteTitle": "Vote During Windows",
+      "voteDesc": "Use your AGC during official voting windows to support Gold and Blue Garnet nominees.",
+      "impactTitle": "Impact Education",
+      "impactDesc": "Winners are announced and legacy funding flows to Rebuild My School Africa projects.",
+      "nominationAmount": "+2 AGCc",
+      "nominationLabel": "Verified Nomination",
+      "signInAmount": "+1 AGCc",
+      "signInLabel": "Daily Sign-in",
+      "firstReferralAmount": "+3 AGC",
+      "firstReferralLabel": "First Referral",
+      "secondReferralAmount": "+1 AGC",
+      "secondReferralLabel": "Second Referral",
+      "watchTVAmount": "+1 AGCc",
+      "watchTVLabel": "Watch NESA TV",
+      "signupAmount": "+2 AGCc",
+      "signupLabel": "Signup & Verify",
+      "conversionNote": "10 AGCc = 1 AGC — AGCc auto-converts to AGC for voting. 1 Vote = 1 AGC.",
+      "goldPoint": "Gold Certificate: 100% public participation",
+      "blueGarnetPoint": "Blue Garnet: Combined jury & public weighting",
+      "auditPoint": "All votes recorded with full audit trail",
+      "learnAboutAGC": "Learn About AGC",
+      "goToVoting": "Go to Voting",
+      "disclaimer": "AGC is non-tradeable—no withdrawals, no cash-out, no payouts. AGC is not a cryptocurrency."
+    },
+    "integrity": {
+      "badge": "Governance & Integrity",
+      "title": "Firewalls & Transparency",
+      "description": "Merit-based integrity controls protect every stage of the awards process.",
+      "platinumTitle": "Platinum",
+      "platinumDesc": "Non-competitive. Verification + governance checks.",
+      "goldTitle": "Gold",
+      "goldDesc": "Public participation only. Transparent audit trail.",
+      "blueGarnetTitle": "Blue Garnet",
+      "blueGarnetDesc": "Jury + public participation balance. Anti-fraud controls.",
+      "sponsorsTitle": "Sponsors",
+      "sponsorsDesc": "Sponsors and endorsers cannot influence winners.",
+      "auditTrail": "Full Audit Trail",
+      "verifiedCredentials": "Verified Credentials",
+      "secureVoting": "Secure Voting",
+      "agcDisclaimer": "AGC is non-tradeable—no withdrawals, no cash-out, no payouts."
+    },
+    "quickActions": {
+      "nominate": "Nominate",
+      "vote": "Vote",
+      "music": "Music",
+      "donate": "Donate"
+    },
+    "legacyImpact": {
+      "badge": "Post-Award Legacy • SCEF Social Impact",
+      "title": "Rebuild My School",
+      "titleAccent": "Africa",
+      "description": "One special needs school per African region — nominated by communities, selected through public voting, and transformed through EduAid-Africa. Recognition becomes real impact.",
+      "cta": "Explore Rebuild My School Africa",
+      "attribution": "A post-award legacy initiative of Santos Creations Educational Foundation"
+    },
+    "nominationPaths": {
+      "badge": "Choose Your Path",
+      "title": "Start Your Nomination Journey",
+      "description": "Select the appropriate award category based on the nominee's achievements.",
+      "mostPopular": "Most Popular",
+      "nominateByRegion": "Nominate by Region",
+      "nominees": "nominees",
+      "allAfrica": "All Africa",
+      "nigeria": "Nigeria",
+      "iconBadge": "Lifetime Achievement",
+      "iconTitle": "Africa Icon",
+      "iconSubtitle": "Africa Education Icon (2006–{{year}})",
+      "iconFeature1": "10+ years institutional achievements",
+      "iconFeature2": "Legacy recognition",
+      "iconFeature3": "Expert panel selection",
+      "iconCta": "Nominate an Icon",
+      "votingBadge": "Public Voting",
+      "votingTitle": "Blue Garnet & Gold",
+      "votingSubtitle": "Annual Competition",
+      "votingFeature1": "Earn voting points through participation",
+      "votingFeature2": "Vote with AGC during official windows",
+      "votingFeature3": "Jury + public weighting (Blue Garnet)",
+      "votingCta": "Nominate for Voting",
+      "votingSecondaryCta": "How Voting Works",
+      "platinumBadge": "Expert Selection",
+      "platinumTitle": "Platinum Certificate",
+      "platinumSubtitle": "Merit-Based Recognition",
+      "platinumFeature1": "Baseline recognition",
+      "platinumFeature2": "No public voting required",
+      "platinumFeature3": "Governance verification",
+      "platinumCta": "Submit Platinum Nomination"
+    }
+  },
+  "about": {
+    "title": "About NESA-Africa",
+    "mission": "Our Mission",
+    "vision": "Our Vision",
+    "governance": "Governance",
+    "timeline": "Timeline",
+    "meta": {
+      "title": "About NESA-Africa | New Education Standard Award Africa",
+      "description": "NESA-Africa is a governance-grade education accountability platform recognizing Africa's changemakers shaping the future of education."
+    },
+    "hero": {
+      "badge": "{{year}} Edition",
+      "title": "About",
+      "titleAccent": "NESA-Africa",
+      "description": "The New Education Standard Award Africa is not an awards website. It is a governance-grade education accountability platform — celebrating, validating, and amplifying Africa's education champions.",
+      "exploreCategories": "Explore Categories",
+      "nominateNow": "Nominate Now"
+    },
+    "missionSection": {
+      "title": "Our Mission",
+      "description": "To recognize, validate, and celebrate individuals, organizations, and institutions driving Education for All across Africa — through transparent, merit-based awards that inspire action and accountability."
+    },
+    "pillars": {
+      "title": "Our Four Pillars",
+      "recognition": {
+        "title": "Recognition",
+        "description": "Celebrating Africa's education champions through merit-based awards across 17 categories."
+      },
+      "accountability": {
+        "title": "Accountability",
+        "description": "Governance-grade firewalls ensure sponsor independence and voting integrity."
+      },
+      "continentalReach": {
+        "title": "Continental Reach",
+        "description": "Region-first approach covering all 5 African regions plus Diaspora and Friends of Africa."
+      },
+      "impact": {
+        "title": "Impact",
+        "description": "Driving Education for All through visibility, validation, and volunteer engagement."
+      }
+    },
+    "awardTiers": {
+      "title": "Award Tiers",
+      "description": "Four distinct recognition platforms, each with unique criteria and selection processes.",
+      "platinum": {
+        "title": "Platinum Certificate",
+        "description": "Baseline recognition for service contribution to Education for All. Non-competitive, NRC verified, valid for 1 year."
+      },
+      "icon": {
+        "title": "Africa Education Icon",
+        "description": "Lifetime achievement recognition. 3 subcategories across Africa, Diaspora, and Friends of Africa."
+      },
+      "gold": {
+        "title": "Gold Certificate",
+        "description": "Competitive recognition through 100% public voting. Region-first approach feeds into Blue Garnet."
+      },
+      "blueGarnet": {
+        "title": "Blue Garnet Award",
+        "description": "Highest honour — 60% Jury scoring, 40% Public voting. 9 winners announced at the live Gala."
+      }
+    },
+    "learnMore": "Learn More",
+    "quickLinks": {
+      "vision2035": "Vision 2035",
+      "governance": "Governance & Firewalls",
+      "timeline": "Programme Timeline",
+      "scef": "SCEF Foundation"
+    }
+  },
+  "categories": {
+    "title": "Award Categories",
+    "description": "Explore our 17 award categories recognizing excellence across Africa's education sector",
+    "viewNominees": "View Nominees",
+    "subcategories": "Subcategories",
+    "meta": {
+      "title": "Award Categories | {{editionName}}",
+      "description": "Explore all 17 NESA-Africa award categories and 138+ subcategories. Recognizing excellence across education, CSR, technology, and social impact across Africa."
+    },
+    "hero": {
+      "title": "17 Official Award Categories",
+      "description": "Celebrating excellence in education, corporate responsibility, technology, and social impact across the African continent."
+    },
+    "tabs": {
+      "africaFirst": "Africa First",
+      "nigeria": "Nigeria"
+    },
+    "search": {
+      "placeholder": "Search categories or subcategories..."
+    },
+    "controls": {
+      "expandAll": "Expand All",
+      "collapseAll": "Collapse All"
+    },
+    "card": {
+      "subcategories": "subcategories",
+      "viewSubcategories": "View Subcategories",
+      "hideSubcategories": "Hide Subcategories",
+      "noSubcategories": "No subcategories available yet."
+    },
+    "empty": {
+      "title": "No categories found",
+      "description": "Try adjusting your search query."
+    },
+    "stats": {
+      "officialCategories": "Official Categories",
+      "totalSubcategories": "Total Subcategories",
+      "africanRegions": "African Regions",
+      "awardTiers": "Award Tiers"
+    },
+    "cta": {
+      "title": "Ready to Nominate?",
+      "description": "Recognize excellence in African education by submitting a nomination today.",
+      "submitNomination": "Submit Nomination",
+      "viewNominees": "View Nominees"
+    }
+  },
+  "nominees": {
+    "title": "Nominees",
+    "searchPlaceholder": "Search nominees...",
+    "filterByCategory": "Filter by Category",
+    "noNominees": "No Nominees Yet",
+    "beFirst": "Be the first to nominate someone in this category",
+    "meta": {
+      "title": "Education Champions Directory | NESA-Africa"
+    },
+    "hero": {
+      "badge": "Education Champions Directory",
+      "title": "Meet Our",
+      "titleAccent": "Nominees",
+      "description": "Discover the remarkable educators, innovators, and institutions transforming education across Africa."
+    },
+    "search": {
+      "placeholder": "Search nominees by name, organization..."
+    },
+    "filter": {
+      "allCategories": "All Categories"
+    },
+    "stats": {
+      "totalNominees": "Total Nominees",
+      "platinumVerified": "Platinum Verified",
+      "awardCategories": "Award Categories",
+      "showing": "Showing"
+    },
+    "view": {
+      "showing": "Showing {{current}} of {{total}}",
+      "page": "Page {{current}} of {{total}}",
+      "viewLabel": "View:"
+    },
+    "empty": {
+      "title": "No Nominees Found",
+      "description": "Try adjusting your search or filter criteria.",
+      "noNominees": "Check back soon as nominations are being reviewed.",
+      "clearFilters": "Clear Filters"
+    },
+    "pagination": {
+      "reachedEnd": "You've reached the end — {{count}} nominees shown",
+      "loadingMore": "Loading more...",
+      "page": "Page {{current}} of {{total}}"
+    }
+  },
+  "vote": {
+    "title": "Vote for Excellence",
+    "description": "Cast your vote for Africa's education champions",
+    "votingOpen": "Voting is Open",
+    "votingClosed": "Voting is Closed",
+    "voteNow": "Vote Now",
+    "yourVote": "Your Vote Matters",
+    "meta": {
+      "title": "Vote for Nominees | {{editionName}}",
+      "description": "Cast your vote for outstanding education changemakers in the {{editionName}} awards. Support nominees making a difference across Africa."
+    },
+    "hero": {
+      "badge": "Public Voting",
+      "title": "Vote for Africa's",
+      "titleAccent": "Education Champions",
+      "description": "Your vote helps recognize and celebrate the outstanding individuals and organizations transforming education across the continent."
+    },
+    "filters": {
+      "searchPlaceholder": "Search nominees...",
+      "allCategories": "All Categories",
+      "allRegions": "All Regions"
+    },
+    "regions": {
+      "westAfrica": "West Africa",
+      "eastAfrica": "East Africa",
+      "southernAfrica": "Southern Africa",
+      "northAfrica": "North Africa",
+      "centralAfrica": "Central Africa"
+    },
+    "stats": {
+      "totalNominees": "Total Nominees",
+      "categories": "Categories",
+      "totalVotes": "Total Votes",
+      "yourVotes": "Your Votes"
+    },
+    "loading": "Loading nominees...",
+    "empty": {
+      "title": "No Nominees Found",
+      "description": "Try adjusting your filters to see more results.",
+      "noApproved": "No approved nominees are available for voting at this time.",
+      "clearFilters": "Clear Filters"
+    },
+    "tabs": {
+      "all": "All"
+    },
+    "cta": {
+      "title": "Know Someone Making a Difference?",
+      "description": "Nominations are the first step in recognizing Africa's education changemakers. Submit a nomination to help honor their contributions.",
+      "nominateButton": "Nominate a Changemaker"
+    },
+    "actions": {
+      "vote": "Vote",
+      "voted": "Voted",
+      "voting": "Voting...",
+      "loginToVote": "Please log in to vote",
+      "alreadyVoted": "You have already voted for this nominee",
+      "voteClosed": "Voting is currently closed",
+      "voteSuccess": "Vote cast successfully!",
+      "voteFailed": "Failed to cast vote. Please try again."
+    }
+  },
+  "results": {
+    "title": "Results",
+    "winners": "Winners",
+    "finalists": "Finalists",
+    "allResults": "All Results",
+    "meta": {
+      "title": "Award Results | NESA-Africa",
+      "description": "View the winners and finalists of the NESA-Africa education awards."
+    }
+  },
+  "media": {
+    "title": "Media Hub",
+    "nesaTV": "NESA Africa TV",
+    "webinars": "Webinars",
+    "gala": "Award Gala",
+    "shows": "Shows",
+    "meta": {
+      "title": "Media Hub | NESA-Africa",
+      "description": "Watch NESA Africa TV, webinars, award shows, and gala coverage."
+    }
+  },
+  "contact": {
+    "title": "Contact Us",
+    "name": "Your Name",
+    "email": "Email Address",
+    "message": "Your Message",
+    "send": "Send Message",
+    "meta": {
+      "title": "Contact NESA-Africa",
+      "description": "Have questions about nominations, partnerships, or want to get involved? We're here to help."
+    },
+    "hero": {
+      "badge": "Get in Touch",
+      "title": "Contact",
+      "titleAccent": "NESA-Africa",
+      "description": "Have questions about nominations, partnerships, or want to get involved? We're here to help."
+    },
+    "info": {
+      "email": {
+        "title": "Email Us",
+        "description": "For general inquiries and nomination support"
+      },
+      "phone": {
+        "title": "Call Us",
+        "description": "Monday to Friday, 9am - 5pm WAT"
+      },
+      "address": {
+        "title": "Visit Us",
+        "description": "Pan-African Secretariat"
+      },
+      "hours": {
+        "title": "Office Hours",
+        "description": "Closed on Sundays and public holidays"
+      }
+    },
+    "form": {
+      "tabs": {
+        "general": "General Inquiry",
+        "presenter": "Presenter Application"
+      },
+      "fields": {
+        "fullName": "Full Name",
+        "email": "Email Address",
+        "phone": "Phone Number",
+        "country": "Country",
+        "department": "Department",
+        "subject": "Subject",
+        "message": "Message"
+      },
+      "submit": {
+        "sending": "Sending...",
+        "send": "Send Message"
+      }
+    }
+  },
+  "auth": {
+    "login": {
+      "title": "Welcome Back",
+      "subtitle": "Sign in to continue celebrating African excellence",
+      "email": "Email",
+      "emailPlaceholder": "Enter your email",
+      "password": "Password",
+      "passwordPlaceholder": "Enter your password",
+      "forgotPassword": "Forgot password?",
+      "signIn": "Sign In",
+      "signingIn": "Signing in...",
+      "noAccount": "Don't have an account?",
+      "createOne": "Create one",
+      "welcomeBack": "Welcome back to NESA Africa!",
+      "invalidCredentials": "Invalid credentials"
+    },
+    "register": {
+      "title": "Join NESA Africa",
+      "subtitle": "Create your account to nominate, vote, and celebrate African excellence",
+      "fullName": "Full Name",
+      "fullNamePlaceholder": "Enter your full name",
+      "email": "Email",
+      "emailPlaceholder": "Enter your email",
+      "password": "Password",
+      "passwordPlaceholder": "Create a password",
+      "passwordHint": "Minimum 6 characters",
+      "referralCode": "Referral Code (Optional)",
+      "referralCodePlaceholder": "Enter referral code",
+      "referralBonus": "🎁 You'll both earn bonus AGC!",
+      "createAccount": "Create Account",
+      "creatingAccount": "Creating account...",
+      "haveAccount": "Already have an account?",
+      "signIn": "Sign in",
+      "successMessage": "Account created successfully! Welcome to NESA Africa.",
+      "failedMessage": "Failed to create account"
+    }
+  },
+  "nominate": {
+    "meta": {
+      "title": "Submit Nomination | {{editionName}}"
+    },
+    "header": {
+      "title": "Submit Nomination",
+      "breadcrumb": "Nominate"
+    },
+    "steps": {
+      "category": "Category",
+      "nomineeDetails": "Nominee Details",
+      "evidence": "Evidence"
+    },
+    "form": {
+      "selectCategory": "Select Category",
+      "selectSubcategory": "Select Subcategory",
+      "nomineeName": "Nominee Name",
+      "nomineeTitle": "Title/Position",
+      "nomineeOrganization": "Organization",
+      "nomineeBio": "Biography",
+      "justification": "Justification",
+      "uploadEvidence": "Upload Evidence",
+      "uploadPhoto": "Upload Photo",
+      "saveDraft": "Save Draft",
+      "restoreDraft": "Restore Draft",
+      "discardDraft": "Discard",
+      "draftSaved": "Draft saved successfully",
+      "draftRestored": "Draft restored successfully",
+      "draftDiscarded": "Draft discarded",
+      "submit": "Submit Nomination",
+      "submitting": "Submitting...",
+      "successMessage": "Nomination submitted successfully!",
+      "errorMessage": "Failed to submit nomination. Please try again."
+    },
+    "validation": {
+      "categoryRequired": "Please select a category",
+      "subcategoryRequired": "Please select a subcategory",
+      "nameRequired": "Please enter the nominee's name",
+      "justificationRequired": "Please provide a justification"
+    }
+  },
+  "dashboard": {
+    "title": "Dashboard",
+    "wallet": {
+      "title": "Wallet",
+      "balance": "Balance",
+      "topUp": "Top Up",
+      "withdraw": "Withdraw",
+      "transactions": "Recent Transactions"
+    },
+    "nominations": {
+      "title": "My Nominations",
+      "pending": "Pending",
+      "approved": "Approved",
+      "rejected": "Rejected"
+    },
+    "certificates": {
+      "title": "My Certificates",
+      "download": "Download",
+      "verify": "Verify"
+    }
+  },
+  "tickets": {
+    "title": "Get Your Tickets",
+    "description": "Secure your seat at Africa's premier education awards ceremony",
+    "meta": {
+      "title": "Tickets | NESA-Africa Gala",
+      "description": "Purchase tickets for the NESA-Africa Awards Gala ceremony."
+    },
+    "tiers": {
+      "standard": {
+        "title": "Standard",
+        "description": "General admission seating"
+      },
+      "vip": {
+        "title": "VIP",
+        "description": "Premium seating with exclusive benefits"
+      },
+      "platinum": {
+        "title": "Platinum",
+        "description": "Front-row seating with VIP lounge access"
+      }
+    },
+    "cta": {
+      "buyNow": "Buy Now",
+      "notifyMe": "Notify Me",
+      "soldOut": "Sold Out"
+    }
+  },
+  "donate": {
+    "title": "Support Education",
+    "description": "Your donation helps rebuild schools and support education across Africa",
+    "meta": {
+      "title": "Donate | NESA-Africa",
+      "description": "Support African education by donating to NESA-Africa programs."
+    },
+    "amounts": {
+      "custom": "Custom Amount"
+    },
+    "cta": {
+      "donateNow": "Donate Now",
+      "monthlyGiving": "Monthly Giving"
+    }
+  },
+  "shop": {
+    "title": "NESA Shop",
+    "description": "Official NESA-Africa merchandise",
+    "meta": {
+      "title": "Shop | NESA-Africa",
+      "description": "Shop official NESA-Africa merchandise and support education in Africa."
+    },
+    "cart": {
+      "title": "Shopping Cart",
+      "empty": "Your cart is empty",
+      "checkout": "Checkout",
+      "continueShopping": "Continue Shopping"
+    },
+    "product": {
+      "addToCart": "Add to Cart",
+      "outOfStock": "Out of Stock",
+      "quantity": "Quantity"
+    }
+  },
+  "nominationPaths": {
+    "badge": "Choose Your Path",
+    "title": "Start Your Nomination Journey",
+    "description": "Select the appropriate award category based on the nominee's achievements.",
+    "mostPopular": "Most Popular",
+    "nominateByRegion": "Nominate by Region",
+    "nominees": "nominees",
+    "allAfrica": "All Africa",
+    "nigeria": "Nigeria",
+    "paths": {
+      "icon": {
+        "badge": "Lifetime Achievement",
+        "title": "Africa Icon",
+        "subtitle": "Africa Education Icon (2006–{{year}})",
+        "features": [
+          "10+ years institutional achievements",
+          "Legacy recognition",
+          "Expert panel selection"
+        ],
+        "cta": "Nominate an Icon"
+      },
+      "voting": {
+        "badge": "Public Voting",
+        "title": "Blue Garnet & Gold",
+        "subtitle": "Annual Competition",
+        "features": [
+          "Earn voting points through participation",
+          "Vote with AGC during official windows",
+          "Jury + public weighting (Blue Garnet)"
+        ],
+        "cta": "Nominate for Voting",
+        "secondaryCta": "How Voting Works"
+      },
+      "platinum": {
+        "badge": "Expert Selection",
+        "title": "Platinum Certificate",
+        "subtitle": "Merit-Based Recognition",
+        "features": [
+          "Baseline recognition",
+          "No public voting required",
+          "Governance verification"
+        ],
+        "cta": "Submit Platinum Nomination"
+      }
+    }
+  },
+  "ediIntegrity": {
+    "badge": "Governance & Integrity",
+    "title": "The EDI Integrity Wall",
+    "description": "Every stage of the NESA-Africa awards process is governed by the Education Development Index — from nomination to final voting.",
+    "viewFullGuidelines": "View Full EDI Matrix & Guidelines",
+    "steps": {
+      "ediMatrix": {
+        "title": "EDI Matrix",
+        "subtitle": "Integrity Backbone",
+        "description": "The Education Development Index defines evaluation standards across 3 levels and 17 categories.",
+        "badge": "Foundation"
+      },
+      "nomination": {
+        "title": "Nomination",
+        "subtitle": "For Nominators",
+        "description": "Ethical nomination guidelines, category selection, and evidence submission requirements.",
+        "badge": "Step 1"
+      },
+      "acceptance": {
+        "title": "Acceptance",
+        "subtitle": "For Nominees",
+        "description": "NRC screening process, acceptance journey, and nominee dashboard status tracking.",
+        "badge": "Step 2"
+      },
+      "judges": {
+        "title": "Judges Panel",
+        "subtitle": "For Judges",
+        "description": "20-point weighted criteria, COI protocols, and independent jury evaluation process.",
+        "badge": "Step 3"
+      },
+      "voting": {
+        "title": "Public Voting",
+        "subtitle": "For Voters",
+        "description": "AGC participation credits, Gold & Blue Garnet voting windows, and ethical voting rules.",
+        "badge": "Step 4"
+      }
+    }
+  },
+  "watchSection": {
+    "title": "Watch & Stay Engaged",
+    "description": "Watch official shows to stay informed and engaged in the awards cycle.",
+    "exploreMediaHub": "Explore Media Hub",
+    "channels": {
+      "nesaTv": {
+        "name": "NESA Africa TV",
+        "description": "Official award shows and recognition ceremonies"
+      },
+      "mediaHub": {
+        "name": "Media Hub",
+        "description": "Highlights, interviews, and behind the scenes"
+      },
+      "liveEvents": {
+        "name": "Live Events",
+        "description": "Stream galas and special broadcasts"
+      }
+    }
+  },
+  "judgesSection": {
+    "badge": "Our Esteemed Panel",
+    "title": "Meet Our Distinguished",
+    "titleHighlight": "Judges",
+    "description": "At the New Education Standard Award Africa (NESA-Africa), our esteemed panel of judges brings together education leaders, innovators, philanthropists, policymakers, and experts across Africa and the diaspora.",
+    "stats": {
+      "expertJudges": "Expert Judges",
+      "categories": "Categories",
+      "subCategories": "Sub-Categories",
+      "transparency": "Transparency"
+    },
+    "applyJudge": "Apply to be a Judge",
+    "checkStatus": "Check Application Status",
+    "learnMore": "Learn More"
+  },
+  "mediaShowcase": {
+    "title": "Watch, Listen",
+    "titleHighlight": "& Engage",
+    "description": "Stay connected through official media, live broadcasts, and the NESA Africa soundtracks.",
+    "officialMusic": "Official Music",
+    "listenDownload": "Listen & Download",
+    "exploreMediaHub": "Explore Media Hub"
+  },
+  "championsDirectory": {
+    "badge": "Education Champions Directory",
+    "title": "Celebrating Africa's",
+    "titleHighlight": "Education Heroes",
+    "description": "Discover the remarkable educators, innovators, and institutions transforming education across Africa.",
+    "exploreDirectory": "Explore Directory",
+    "nominate": "Nominate",
+    "searchPlaceholder": "Search by name, country, or achievement...",
+    "sort": "Sort",
+    "browseByTrack": "Browse by Track",
+    "live": "Live",
+    "featuredChampions": "Featured Champions",
+    "viewAll": "View All",
+    "recognitionTracks": "Recognition Tracks",
+    "badgeHierarchy": "Badge Hierarchy",
+    "highestToLowest": "Highest → Lowest",
+    "trustSignals": {
+      "transparent": "Transparent",
+      "openProcess": "Open process",
+      "expertReview": "Expert Review",
+      "judges": "27 Judges",
+      "fairVoting": "Fair Voting",
+      "verified": "Verified",
+      "years": "20 Years",
+      "since": "Since 2006"
+    },
+    "filters": {
+      "all": "All",
+      "africa": "Africa",
+      "diaspora": "Diaspora",
+      "icon": "Icon",
+      "voting": "Voting",
+      "expert": "Expert"
+    },
+    "sortOptions": {
+      "az": "A–Z",
+      "popular": "Popular",
+      "recent": "Recent"
+    },
+    "tracks": {
+      "allNominees": "All Nominees",
+      "africaRegional": "Africa Regional",
+      "diaspora": "Diaspora",
+      "friendsOfAfrica": "Friends of Africa"
+    },
+    "specialRecognition": {
+      "icon": {
+        "title": "Lifetime Achievement",
+        "subtitle": "Africa Education Icon (2006–2026)",
+        "description": "10+ years of sustained impact. Expert-selected.",
+        "cta": "Nominate Icon",
+        "ctaSecondary": "Past Icons"
+      },
+      "voting": {
+        "title": "Public Voting",
+        "subtitle": "Blue Garnet & Gold Awards",
+        "description": "9 categories. 135 subcategories. Public + Jury weighted.",
+        "cta": "Nominate",
+        "ctaSecondary": "How It Works"
+      },
+      "expert": {
+        "title": "Expert Selection",
+        "subtitle": "Platinum Certificate of Merit",
+        "description": "17 categories. No voting. Expert evaluation only.",
+        "cta": "Learn More"
+      }
+    },
+    "noResults": "No nominees found matching",
+    "clearSearch": "Clear search"
+  },
+  "musicSection": {
+    "badge": "Official Music",
+    "title": "NESA Africa Songs",
+    "description": "Listen to our official anthems celebrating education across Africa.",
+    "agcOrUsd": "Download with 25+ AGC or $5+ — all proceeds support NESA Africa & EduAid Africa initiatives.",
+    "nowPlaying": "Now Playing",
+    "purchased": "Purchased",
+    "playPreview": "Play Preview",
+    "pause": "Pause",
+    "watchMusicVideo": "Watch Music Video",
+    "officialMusicVideo": "Official Music Video",
+    "supportNesa": "Support NESA Africa & EduAid Africa",
+    "downloadNow": "Download Now",
+    "supportMakesDifference": "Your Support Makes a Difference",
+    "everyDownloadHelps": "Every download helps rebuild schools and provide educational resources across Africa through our EduAid initiative.",
+    "confirmPurchaseAGC": "Download \"{{title}}\" for {{price}} AGC. All proceeds support NESA Africa & EduAid Africa initiatives.",
+    "confirmPurchaseUSD": "Download \"{{title}}\" for ${{price}}. All proceeds support NESA Africa & EduAid Africa initiatives.",
+    "thankYou": "Thank You!",
+    "downloadStarting": "Your support helps rebuild schools across Africa. Download starting..."
+  },
+  "footer": {
+    "tagline": "The African Blue-Garnet Awards for Education",
+    "quickLinks": "Quick Links",
+    "getInTouch": "Get in Touch",
+    "scefFoundation": "SCEF Foundation",
+    "madeWith": "Made with",
+    "forEducation": "for African Education",
+    "copyright": "© {{year}} Santos Creations Educational Foundation",
+    "links": {
+      "home": "Home",
+      "programs": "Programs",
+      "categories": "Categories",
+      "nominate": "Nominate",
+      "about": "About",
+      "contact": "Contact",
+      "privacy": "Privacy Policy",
+      "terms": "Terms of Service"
+    }
+  },
+  "errors": {
+    "notFound": {
+      "title": "Page Not Found",
+      "description": "The page you're looking for doesn't exist or has been moved.",
+      "backHome": "Back to Home"
+    },
+    "unauthorized": {
+      "title": "Access Denied",
+      "description": "You don't have permission to access this page.",
+      "backHome": "Return Home"
+    },
+    "serverError": {
+      "title": "Something Went Wrong",
+      "description": "We're experiencing technical difficulties. Please try again later.",
+      "retry": "Try Again"
+    }
+  }
+}
