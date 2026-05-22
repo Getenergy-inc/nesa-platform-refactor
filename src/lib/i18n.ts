@@ -118,6 +118,12 @@ const resources = {
     nomination: yoNomination,
     dashboard: yoDashboard,
   },
+  ig: {
+    common: igCommon,
+    pages: igPages,
+    nomination: igNomination,
+    dashboard: igDashboard,
+  },
   am: {
     common: amCommon,
     pages: amPages,
