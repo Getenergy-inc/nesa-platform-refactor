@@ -1,4 +1,5 @@
 import { Helmet } from "react-helmet-async";
+import { useTranslation } from "react-i18next";
 import { lazy } from "react";
 import { NESAHeader } from "@/components/nesa/NESAHeader";
 import { TrophyHeroSection } from "@/components/nesa/TrophyHeroSection";
