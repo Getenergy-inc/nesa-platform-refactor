@@ -77,7 +77,15 @@ export function TrophyHeroSection() {
         <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
           {/* Left: Welcome Content */}
           <div className="order-2 lg:order-1 text-center lg:text-left">
-            {/* Season Badge removed */}
+            <motion.p
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.2 }}
+              className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-gold/10 border border-gold/30 text-gold text-[10px] sm:text-xs font-semibold tracking-[0.18em] uppercase mb-4"
+            >
+              <Sparkles className="h-3 w-3" />
+              {t("landing.trophyHero.slogan")}
+            </motion.p>
 
             <motion.h1
               initial={{ opacity: 0, y: 20 }}
@@ -94,17 +102,8 @@ export function TrophyHeroSection() {
             <motion.p
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.4 }}
-              className="text-white/70 text-[11px] sm:text-xs font-medium mb-2 tracking-widest uppercase italic"
-            >
-              {t("landing.trophyHero.slogan")}
-            </motion.p>
-
-            <motion.p
-              initial={{ opacity: 0, y: 15 }}
-              animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.5 }}
-              className="text-gold/90 text-sm font-semibold mb-3 tracking-wide uppercase"
+              className="text-gold/90 text-sm font-semibold mb-3 tracking-wide"
             >
               {t("landing.trophyHero.tagline")}
             </motion.p>
@@ -122,7 +121,7 @@ export function TrophyHeroSection() {
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.65 }}
-              className="flex flex-col sm:flex-row gap-3 justify-center lg:justify-start mb-4"
+              className="flex flex-col sm:flex-row flex-wrap gap-3 justify-center lg:justify-start mb-4"
             >
               <Link to="/nominate">
                 <motion.div
@@ -139,18 +138,36 @@ export function TrophyHeroSection() {
                   </Button>
                 </motion.div>
               </Link>
-              <Link to="/nominees">
+              <Link to="/earn-agc">
                 <Button
                   size="default"
                   variant="outline"
                   className="w-full sm:w-auto border-gold/50 text-gold hover:bg-gold/10 hover:border-gold rounded-full px-5 gap-2 h-10 text-sm transition-colors"
                 >
-                  <Users className="h-5 w-5" />
-                  Explore Nominees
+                  <Coins className="h-5 w-5" />
+                  {t("landing.trophyHero.voteWithAGC")}
+                </Button>
+              </Link>
+              <Link to="/categories">
+                <Button
+                  size="default"
+                  variant="ghost"
+                  className="w-full sm:w-auto text-white/85 hover:text-gold hover:bg-gold/10 rounded-full px-5 gap-2 h-10 text-sm transition-colors"
+                >
+                  <LayoutGrid className="h-5 w-5" />
+                  View Award Categories
                 </Button>
               </Link>
             </motion.div>
-            <div className="mb-10" />
+
+            <motion.p
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.5, delay: 0.8 }}
+              className="text-gold/80 text-xs sm:text-sm font-semibold tracking-wide mb-10"
+            >
+              Nominate. Earn AGC. Celebrate Education Impact.
+            </motion.p>
           </div>
 
           {/* Right: Trophy Carousel */}
