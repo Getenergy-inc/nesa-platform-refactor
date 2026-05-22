@@ -1143,5 +1143,24 @@
       "description": "We're experiencing technical difficulties. Please try again later.",
       "retry": "Try Again"
     }
+  },
+  "seo": {
+    "nesaAfrica": {
+      "title": "NESA-Africa 2025/26 | Ịsọpụrụ Ndị Na-eme Mgbanwe Agụmakwụkwọ Afrịka",
+      "description": "Sonye na NESA-Africa 2025/26 — kpọọ aha ndị na-eme mgbanwe agụmakwụkwọ, nweta AGC voting points, chọpụta ndị a họpụtara, ma lelee ụdị onyinye na-akwado mmetụta agụmakwụkwọ Pan-African.",
+      "ogTitle": "NESA-Africa 2025/26 — Ịsọpụrụ Ndị Na-eme Mgbanwe Agụmakwụkwọ Afrịka",
+      "ogDescription": "Mkpọkụ nzọpụta agụmakwụkwọ Pan-African — kpọọ aha, mee ntuli aka site na AGC, ma chọpụta ndị na-eme mgbanwe na mpaghara 10 nke Afrịka.",
+      "keywords": "NESA-Africa 2025/26, ihe nrite agụmakwụkwọ Afrịka, ndị na-eme mgbanwe agụmakwụkwọ, AGC voting, mmetụta agụmakwụkwọ Pan-African, akpọpụta aha, ụdị onyinye"
+    },
+    "nav": {
+      "home": "Ụlọ",
+      "about": "Banyere",
+      "awards": "Ihe Nrite",
+      "nominees": "Ndị A Họpụtara",
+      "categories": "Ụdị Onyinye",
+      "vote": "Mee Ntuli Aka",
+      "nominate": "Kpọọ Aha",
+      "earnAgc": "Nweta AGC"
+    }
   }
 }

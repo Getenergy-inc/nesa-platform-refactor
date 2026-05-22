@@ -1,4 +1,5 @@
 import { Helmet } from "react-helmet-async";
+import { useTranslation } from "react-i18next";
 import { lazy } from "react";
 import { NESAHeader } from "@/components/nesa/NESAHeader";
 import { TrophyHeroSection } from "@/components/nesa/TrophyHeroSection";
@@ -36,19 +37,30 @@ const FinalCTASection = lazy(() => import("@/components/nesa/FinalCTASection").t
  * - Sticky quick actions on mobile
  */
 export default function NESAAfrica() {
+  const { t, i18n } = useTranslation("pages");
+  const lang = i18n.language || "en";
+  const title = t("seo.nesaAfrica.title");
+  const description = t("seo.nesaAfrica.description");
+  const ogTitle = t("seo.nesaAfrica.ogTitle");
+  const ogDescription = t("seo.nesaAfrica.ogDescription");
+  const keywords = t("seo.nesaAfrica.keywords");
+
   return (
     <>
       <Helmet>
-        <title>NESA-Africa 2026 | New Education Standard Award Africa</title>
-        <meta
-          name="description"
-          content="Honoring Africa's Education Changemakers. NESA-Africa 2026 celebrates the real changemakers shaping the future of education across Africa."
-        />
-        <meta property="og:title" content="NESA-Africa 2026 | New Education Standard Award Africa" />
-        <meta property="og:description" content="Honoring Africa's Education Changemakers across 10 regions." />
+        <html lang={lang} />
+        <title>{title}</title>
+        <meta name="description" content={description} />
+        <meta name="keywords" content={keywords} />
+        <meta property="og:title" content={ogTitle} />
+        <meta property="og:description" content={ogDescription} />
         <meta property="og:type" content="website" />
-        <link rel="canonical" href="https://nesa.africa" />
+        <meta property="og:locale" content={lang} />
+        <meta name="twitter:title" content={ogTitle} />
+        <meta name="twitter:description" content={ogDescription} />
+        <link rel="canonical" href="https://nesaafrica.lovable.app/programs/nesa-africa" />
       </Helmet>
+
 
       <ScrollProgressIndicator />
 
