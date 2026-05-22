@@ -8,22 +8,22 @@ import { Link } from "react-router-dom";
  */
 const slides = [
   {
-    eyebrow: "What NESA Africa Represents",
-    title: "More Than an Award — A Continental Ecosystem",
+    eyebrow: "What NESA-Africa Represents",
+    title: "More Than an Award — A Continental Changemaker Movement",
     body:
-      "NESA Africa recognizes and celebrates individuals and institutions actively contributing to achieving Education for All across Africa — Africans living in Africa, Africans in the diaspora, and friends of Africa globally.",
+      "NESA-Africa is not just an award platform. It is a continental movement recognising changemakers, institutions, and organisations advancing education across Africa and the diaspora.",
   },
   {
-    eyebrow: "Recognition Beyond Formal Education",
-    title: "Influence • Advocacy • Innovation • Support",
+    eyebrow: "Public Recognition • Continental Visibility",
+    title: "Celebrating Every Form of Education Impact",
     body:
-      "From classrooms to boardrooms, from grassroots advocates to global partners — every meaningful contribution to African education has a place on this stage.",
+      "Advocacy, innovation, funding, infrastructure, mentorship, technology, policy, community action, and social impact — every meaningful contribution to African education deserves visibility and public recognition.",
   },
   {
     eyebrow: "Africans • Diaspora • Friends of Africa",
-    title: "One Continent. One Movement.",
+    title: "One Continent. One Changemaker Movement.",
     body:
-      "Structured across all African regions plus the diaspora — fair representation, local engagement, and continental inclusiveness for the entire education community.",
+      "Whether they are Africans in Africa, Africans in the diaspora, or Friends of Africa supporting education development, their contributions deserve celebration, AGC voting participation, and pan-African storytelling.",
   },
 ];
 

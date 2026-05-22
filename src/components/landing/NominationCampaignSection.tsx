@@ -25,28 +25,28 @@ import { Badge } from "@/components/ui/badge";
 export function NominationCampaignSection() {
   // NOTE: All CTAs route to existing pages. Do not replace with `#` placeholders.
   const ctas = [
-    { label: "Nominate a Champion Now", to: "/nominate", primary: true, icon: Trophy },
-    { label: "Earn Free Voting Points", to: "/earn-agc", primary: true, icon: Coins },
+    { label: "Nominate a Changemaker", to: "/nominate", primary: true, icon: Trophy },
+    { label: "Earn AGC Voting Points", to: "/earn-agc", primary: true, icon: Coins },
     { label: "View Award Categories", to: "/categories", icon: LayoutGrid },
     { label: "Meet the Nominees", to: "/nominees", icon: Users },
-    { label: "How Voting Works", to: "/guidelines/voters", icon: HelpCircle },
+    { label: "How AGC Voting Works", to: "/guidelines/voters", icon: HelpCircle },
   ];
 
   const heroVoices = [
-    { icon: GraduationCap, label: "A teacher" },
+    { icon: GraduationCap, label: "A mentor" },
     { icon: School, label: "A school founder" },
-    { icon: Heart, label: "A volunteer" },
-    { icon: Users, label: "A youth mentor" },
     { icon: Megaphone, label: "An NGO leader" },
-    { icon: Globe2, label: "A diaspora supporter" },
+    { icon: Users, label: "A youth advocate" },
+    { icon: Heart, label: "A philanthropist / CSR leader" },
+    { icon: Globe2, label: "A diaspora supporter / Friend of Africa" },
   ];
 
   const hooks = [
-    "Don't just clap for education heroes. Nominate them.",
-    "Your teacher. Your mentor. Your school founder. Your education hero.",
-    "Africa's education heroes deserve to be seen.",
-    "Know someone changing education in Africa?",
-    "From classrooms to communities, education champions are everywhere.",
+    "Don't just clap for education changemakers. Nominate them.",
+    "Your mentor. Your school founder. Your NGO leader. Your innovator.",
+    "Africa's education impact heroes deserve to be seen.",
+    "Do you know someone changing education in Africa?",
+    "From classrooms to communities, changemakers are everywhere.",
   ];
 
   return (
@@ -91,11 +91,11 @@ export function NominationCampaignSection() {
           transition={{ duration: 0.6, delay: 0.05 }}
           className="mt-5 text-center font-display text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight text-ivory"
         >
-          Nominate an African Education{" "}
+          Don't Just Clap for{" "}
           <span className="bg-gradient-to-r from-gold via-amber-300 to-gold bg-clip-text text-transparent">
-            Social Impact Champion
-          </span>{" "}
-          Today
+            Education Changemakers
+          </span>
+          . Nominate Them.
         </motion.h2>
 
         {/* ── Subheadline */}
@@ -106,8 +106,8 @@ export function NominationCampaignSection() {
           transition={{ duration: 0.6, delay: 0.1 }}
           className="mt-4 text-center text-base sm:text-lg text-gold/90 max-w-3xl mx-auto"
         >
-          Earn free voting points and help celebrate the people transforming
-          education across Africa.
+          Your mentor. Your school founder. Your NGO leader. Your innovator.
+          Your education impact hero.
         </motion.p>
 
         {/* ── Body */}
@@ -120,28 +120,27 @@ export function NominationCampaignSection() {
             className="space-y-4 text-ivory/80 text-[15px] sm:text-base leading-relaxed"
           >
             <p>
-              Across Africa and the diaspora, thousands of educators, innovators,
-              school leaders, NGOs, volunteers, advocates, and education supporters
-              are changing lives every day. <span className="text-ivory">Now is the time to recognize them.</span>
+              Across Africa and the diaspora, changemakers are transforming
+              education through advocacy, innovation, funding, infrastructure,
+              mentorship, technology, policy, community action, and social
+              impact. <span className="text-ivory">Now is the time to recognise them.</span>
             </p>
             <p>
-              Nominate a deserving education champion today and earn free voting
-              points to support your favourite nominees when voting opens. Whether
-              they are Africans in Africa, Africans in the diaspora, or Friends of
-              Africa contributing to education development —{" "}
               <span className="text-gold">NESA-Africa</span> gives the public a
-              platform to celebrate real impact.
+              platform to recognise, celebrate, and amplify the people and
+              institutions advancing education across Africa — whether they are
+              Africans in Africa, Africans in the diaspora, or Friends of Africa
+              supporting education development.
             </p>
 
             {/* Banner line */}
             <div className="mt-2 rounded-xl border border-gold/30 bg-gold/5 px-4 py-3 sm:px-5 sm:py-4">
               <p className="font-display text-lg sm:text-xl font-semibold text-gold">
-                Nominate. Earn Voting Points. Celebrate Education Impact.
+                Nominate. Earn AGC. Celebrate Education Impact.
               </p>
               <p className="mt-1 text-sm text-ivory/70">
-                Nominate an African education social impact champion today and
-                earn free voting points to support outstanding changemakers when
-                voting begins.
+                Nominate a changemaker today and earn AGC voting points to
+                support your favourite nominees when voting opens.
               </p>
             </div>
           </motion.div>
@@ -153,12 +152,12 @@ export function NominationCampaignSection() {
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.2 }}
             className="rounded-2xl border border-gold/20 bg-charcoal/70 p-5 sm:p-6 backdrop-blur"
-            aria-label="Africa, who is your education champion?"
+            aria-label="Africa, who is your education changemaker?"
           >
             <div className="flex items-center gap-2 text-gold">
               <Megaphone className="h-5 w-5" />
               <span className="font-display text-lg sm:text-xl font-semibold">
-                Africa, who is your education champion?
+                Africa, Who Is Your Education Changemaker?
               </span>
             </div>
             <p className="mt-2 text-sm text-ivory/70">
@@ -178,10 +177,11 @@ export function NominationCampaignSection() {
             </ul>
 
             <p className="mt-4 text-sm text-ivory/70">
-              Put their name forward.{" "}
-              <span className="text-gold">Nominate them today</span> and earn
-              free voting points. Your nomination helps spotlight real education
-              impact across Africa and the diaspora.
+              From classrooms to communities, education changemakers are
+              everywhere.{" "}
+              <span className="text-gold">Nominate a Changemaker Now</span> and
+              earn AGC voting points to support real education impact across
+              Africa and the diaspora.
             </p>
           </motion.aside>
         </div>
@@ -241,20 +241,22 @@ export function NominationCampaignSection() {
           className="mt-12 rounded-2xl border border-gold/20 bg-gradient-to-br from-charcoal-light/80 to-charcoal/80 p-6 sm:p-8 text-center"
         >
           <p className="font-display text-lg sm:text-xl text-ivory">
-            NESA-Africa is not just an award.
+            More Than an Award — A Continental Changemaker Movement.
           </p>
           <p className="mt-2 text-sm sm:text-base text-ivory/70 max-w-3xl mx-auto">
-            It is a public movement to recognize, celebrate and amplify the
-            people building the future of education in Africa.
+            NESA-Africa is a continental movement recognising changemakers,
+            institutions, and organisations advancing education across Africa
+            and the diaspora. Public recognition. Continental visibility.
+            Community engagement. Education impact storytelling.
           </p>
           <p className="mt-4 font-display text-base sm:text-lg text-gold">
-            Start today: nominate a champion and earn your free voting points.
+            Nominate a changemaker today and earn your AGC voting points.
           </p>
           <div className="mt-5 flex flex-wrap justify-center gap-3">
             <Button asChild size="lg" className="bg-gold text-charcoal hover:bg-gold/90">
               <Link to="/nominate">
                 <Trophy className="mr-2 h-4 w-4" />
-                Nominate a Champion
+                Nominate a Changemaker
               </Link>
             </Button>
             <Button
@@ -265,7 +267,7 @@ export function NominationCampaignSection() {
             >
               <Link to="/earn-agc">
                 <Coins className="mr-2 h-4 w-4" />
-                Earn Voting Points
+                Earn AGC Voting Points
               </Link>
             </Button>
           </div>

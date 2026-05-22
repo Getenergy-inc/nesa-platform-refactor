@@ -122,19 +122,31 @@
           "badge": "Lifetime Achievement",
           "title": "Africa Icon Blue Garnet Award",
           "description": "Reserved for lifetime achievement. Nominees must have 10+ years institutional achievements.",
-          "bullets": ["Institutional Achievements", "Long-term Impact", "Legacy Recognition"]
+          "bullets": [
+            "Institutional Achievements",
+            "Long-term Impact",
+            "Legacy Recognition"
+          ]
         },
         "blueGarnetGold": {
           "badge": "Public Voting",
           "title": "Blue Garnet & Gold Certificate Awards",
           "description": "Open competition with public participation through AGC voting and expert judging.",
-          "bullets": ["Public Voting", "Expert Judging", "138+ Subcategories"]
+          "bullets": [
+            "Public Voting",
+            "Expert Judging",
+            "138+ Subcategories"
+          ]
         },
         "platinum": {
           "badge": "Expert Selection",
           "title": "Platinum Certificate of Recognition",
           "description": "Merit-based recognition through expert panel evaluation and institutional review.",
-          "bullets": ["No Voting", "Internal Judging", "Global Nomination"]
+          "bullets": [
+            "No Voting",
+            "Internal Judging",
+            "Global Nomination"
+          ]
         }
       }
     },
@@ -243,10 +255,10 @@
       }
     },
     "finalCTA": {
-      "title": "Nominate a Champion of",
-      "titleAccent": "Education",
-      "description": "Know someone making an exceptional impact in African education? Submit your nomination today and help us celebrate excellence.",
-      "submitNomination": "Submit Nomination",
+      "title": "Ready to Celebrate Africa's",
+      "titleAccent": "Education Changemakers?",
+      "description": "Don't just applaud impact — help the world discover it. Nominate an African education changemaker today and become part of a continental movement recognising the people and institutions transforming education across Africa and the diaspora. Nominate. Earn AGC. Celebrate Education Impact.",
+      "submitNomination": "Nominate a Changemaker Now",
       "visitNESA": "Visit NESA Africa",
       "trustIndicators": {
         "regions": "5+2 Regions",
@@ -294,16 +306,16 @@
       "viewAll": "View All {{count}} Videos"
     },
     "trophyHero": {
-      "headline": "The New Education Standard Award Africa",
-      "headlineAccent": "2026",
-      "slogan": "Recognizing excellence. Driving impact. Advancing education across Africa.",
-      "tagline": "From Recognition to Real Impact",
-      "valueProposition": "A continental platform redefining how Africa recognizes, supports, and delivers Education for All — a recognition, engagement, funding, and impact ecosystem hosted by the Nigeria Local Chapter of Santos Creations Educational Foundation (SCEF).",
-      "nominateNow": "Nominate Now",
-      "voteWithAGC": "Vote with AGC",
+      "headline": "Don't Just Clap for Education Changemakers.",
+      "headlineAccent": "Nominate Them.",
+      "slogan": "Nominations Open · NESA-Africa 2025/26",
+      "tagline": "Your mentor. Your school founder. Your NGO leader. Your innovator.",
+      "valueProposition": "Across Africa and the diaspora, changemakers are transforming education through advocacy, innovation, funding, infrastructure, mentorship, technology, policy, community action, and social impact. NESA-Africa gives the public a platform to recognise, celebrate, and amplify the people and institutions advancing education across Africa. Nominate a changemaker today and earn AGC voting points to support your favourite nominees when voting opens.",
+      "nominateNow": "Nominate a Changemaker",
+      "voteWithAGC": "Earn AGC Voting Points",
       "watchLive": "Watch Live",
       "trophyCaption": "Africa's Highest Education Honour",
-      "winnersCaption": "Celebrating Education Champions",
+      "winnersCaption": "Celebrating Education Changemakers",
       "scrollHint": "Discover",
       "trustRegions": "10 Regions + Diaspora",
       "trustNominees": "{{count}}+ Nominees",
@@ -904,14 +916,22 @@
         "badge": "Lifetime Achievement",
         "title": "Africa Icon",
         "subtitle": "Africa Education Icon (2006–{{year}})",
-        "features": ["10+ years institutional achievements", "Legacy recognition", "Expert panel selection"],
+        "features": [
+          "10+ years institutional achievements",
+          "Legacy recognition",
+          "Expert panel selection"
+        ],
         "cta": "Nominate an Icon"
       },
       "voting": {
         "badge": "Public Voting",
         "title": "Blue Garnet & Gold",
         "subtitle": "Annual Competition",
-        "features": ["Earn voting points through participation", "Vote with AGC during official windows", "Jury + public weighting (Blue Garnet)"],
+        "features": [
+          "Earn voting points through participation",
+          "Vote with AGC during official windows",
+          "Jury + public weighting (Blue Garnet)"
+        ],
         "cta": "Nominate for Voting",
         "secondaryCta": "How Voting Works"
       },
@@ -919,7 +939,11 @@
         "badge": "Expert Selection",
         "title": "Platinum Certificate",
         "subtitle": "Merit-Based Recognition",
-        "features": ["Baseline recognition", "No public voting required", "Governance verification"],
+        "features": [
+          "Baseline recognition",
+          "No public voting required",
+          "Governance verification"
+        ],
         "cta": "Submit Platinum Nomination"
       }
     }
@@ -967,9 +991,18 @@
     "description": "Watch official shows to stay informed and engaged in the awards cycle.",
     "exploreMediaHub": "Explore Media Hub",
     "channels": {
-      "nesaTv": { "name": "NESA Africa TV", "description": "Official award shows and recognition ceremonies" },
-      "mediaHub": { "name": "Media Hub", "description": "Highlights, interviews, and behind the scenes" },
-      "liveEvents": { "name": "Live Events", "description": "Stream galas and special broadcasts" }
+      "nesaTv": {
+        "name": "NESA Africa TV",
+        "description": "Official award shows and recognition ceremonies"
+      },
+      "mediaHub": {
+        "name": "Media Hub",
+        "description": "Highlights, interviews, and behind the scenes"
+      },
+      "liveEvents": {
+        "name": "Live Events",
+        "description": "Stream galas and special broadcasts"
+      }
     }
   },
   "judgesSection": {
