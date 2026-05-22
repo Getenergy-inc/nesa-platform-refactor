@@ -35,20 +35,19 @@ const WearTheMovementSection = lazy(() => import("@/components/landing/WearTheMo
 
 export function NESALandingPage() {
   const { currentEdition } = useSeason();
+  const { t } = useTranslation("pages");
 
   return (
     <>
-      <Helmet>
-        <title>{`${currentEdition?.name || 'NESA-Africa 2026'} | New Education Standard Award Africa`}</title>
-        <meta
-          name="description"
-          content={`${currentEdition.tagline}. ${currentEdition.name} honours Africa's education changemakers — Lifetime Icons, CSR leaders, cultural influencers, and global partners. Nominate, vote with AGC, earn rewards.`}
-        />
-        <meta property="og:title" content={`${currentEdition.name} | NESA-Africa`} />
-        <meta property="og:description" content={currentEdition.tagline} />
-        <meta property="og:type" content="website" />
-        <link rel="canonical" href="https://nesaafrica.lovable.app" />
-      </Helmet>
+      <LocalizedSEO
+        pathname="/"
+        title={t("seo.landing.title", `${currentEdition?.name || "NESA-Africa 2026"} | New Education Standard Award Africa`)}
+        description={t("seo.landing.description", `${currentEdition.tagline}. ${currentEdition.name} honours Africa's education changemakers.`)}
+        ogTitle={t("seo.landing.ogTitle", `${currentEdition.name} | NESA-Africa`)}
+        ogDescription={t("seo.landing.ogDescription", currentEdition.tagline)}
+        keywords={t("seo.landing.keywords", "")}
+      />
+
 
       <ScrollProgressIndicator />
 
