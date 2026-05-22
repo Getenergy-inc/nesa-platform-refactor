@@ -1,71 +1,71 @@
 {
   "nav": {
-    "home": "Home",
-    "about": "About",
-    "awards": "Awards",
-    "media": "Media",
-    "getInvolved": "Get Involved",
-    "login": "Login",
-    "register": "Register",
+    "home": "Ụlọ",
+    "about": "Banyere Anyị",
+    "awards": "Ihe Nrite",
+    "media": "Mgbasa Ozi",
+    "getInvolved": "Sonye",
+    "login": "Banye",
+    "register": "Debanye Aha",
     "dashboard": "Dashboard",
-    "logout": "Logout"
+    "logout": "Pụọ"
   },
   "brand": {
-    "slogan": "The African Blue-Garnet Awards for Education"
+    "slogan": "Ihe Nrite Blue-Garnet nke Afrịka maka Agụmakwụkwọ"
   },
   "hero": {
-    "headline": "Honoring Africa's Education Changemakers",
-    "subheadline": "Advocating & Achieving Education For All In Africa",
-    "nominateNow": "Nominate Now",
-    "watchLive": "Watch Live"
+    "headline": "Ịsọpụrụ Ndị Na-eme Mgbanwe Agụmakwụkwọ Afrịka",
+    "subheadline": "Ịkwado na Inweta Agụmakwụkwọ Maka Mmadụ Niile na Afrịka",
+    "nominateNow": "Kpọọ Aha Ugbu A",
+    "watchLive": "Kiri Ngosi Ndụ"
   },
   "stats": {
-    "africanRegions": "African Regions",
-    "awardCategories": "Award Categories",
-    "subCategories": "Sub-Categories"
+    "africanRegions": "Mpaghara Afrịka",
+    "awardCategories": "Ụdị Ihe Nrite",
+    "subCategories": "Ụdị Nta"
   },
   "awards": {
-    "platinum": "Platinum Award",
-    "gold": "Gold Award",
-    "blueGarnet": "Blue Garnet Award",
-    "icon": "Icon Award",
-    "viewAll": "View All Awards"
+    "platinum": "Ihe Nrite Platinum",
+    "gold": "Ihe Nrite Gold",
+    "blueGarnet": "Ihe Nrite Blue Garnet",
+    "icon": "Ihe Nrite Icon",
+    "viewAll": "Lelee Ihe Nrite Niile"
   },
   "actions": {
-    "nominate": "Nominate",
-    "vote": "Vote",
-    "donate": "Donate",
-    "watchNow": "Watch Now",
-    "learnMore": "Learn More",
-    "getTickets": "Get Tickets",
-    "viewDetails": "View Details",
-    "submit": "Submit",
-    "cancel": "Cancel",
-    "save": "Save",
-    "close": "Close"
+    "nominate": "Kpọọ Aha",
+    "vote": "Mee Ntuli Aka",
+    "donate": "Nye Onyinye",
+    "watchNow": "Kiri Ugbu A",
+    "learnMore": "Mụta Karịa",
+    "getTickets": "Nweta Tiketi",
+    "viewDetails": "Lelee Nkọwa",
+    "submit": "Nyefee",
+    "cancel": "Kagbuo",
+    "save": "Chekwaa",
+    "close": "Mechie"
   },
   "footer": {
-    "quickLinks": "Quick Links",
-    "resources": "Resources",
-    "connect": "Connect",
-    "subscribe": "Subscribe",
-    "emailPlaceholder": "Enter your email",
-    "copyright": "© {{year}} NESA-Africa. All rights reserved.",
-    "privacy": "Privacy Policy",
-    "terms": "Terms of Service",
-    "governance": "Governance"
+    "quickLinks": "Njikọ Ngwa Ngwa",
+    "resources": "Akụrụngwa",
+    "connect": "Jikọọ",
+    "subscribe": "Debanye Aha",
+    "emailPlaceholder": "Tinye email gị",
+    "copyright": "© {{year}} NESA-Africa. Ikike niile echekwabara.",
+    "privacy": "Iwu Nzuzo",
+    "terms": "Usoro Ọrụ",
+    "governance": "Ọchịchị"
   },
   "language": {
-    "selectLanguage": "Select Language",
-    "currentLanguage": "Current Language"
+    "selectLanguage": "Họrọ Asụsụ",
+    "currentLanguage": "Asụsụ Ugbu A"
   },
   "errors": {
-    "notFound": "Page Not Found",
-    "unauthorized": "Unauthorized",
-    "serverError": "Something went wrong"
+    "notFound": "Achọtaghị Ibe",
+    "unauthorized": "Enweghị Ikike",
+    "serverError": "Ihe adịghị mma mere"
   },
   "loading": {
-    "pleaseWait": "Please wait...",
-    "loading": "Loading..."
+    "pleaseWait": "Biko chere...",
+    "loading": "Na-ebudata..."
   }
 }
