@@ -2,7 +2,6 @@
 // Data-driven via Icon + Gold nominee layers.
 
 import { lazy } from "react";
-import { Helmet } from "react-helmet-async";
 import { useTranslation } from "react-i18next";
 import { LocalizedSEO } from "@/components/seo/LocalizedSEO";
 
