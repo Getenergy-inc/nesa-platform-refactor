@@ -25,28 +25,28 @@ import { Badge } from "@/components/ui/badge";
 export function NominationCampaignSection() {
   // NOTE: All CTAs route to existing pages. Do not replace with `#` placeholders.
   const ctas = [
-    { label: "Nominate a Champion Now", to: "/nominate", primary: true, icon: Trophy },
-    { label: "Earn Free Voting Points", to: "/earn-agc", primary: true, icon: Coins },
+    { label: "Nominate a Changemaker", to: "/nominate", primary: true, icon: Trophy },
+    { label: "Earn AGC Voting Points", to: "/earn-agc", primary: true, icon: Coins },
     { label: "View Award Categories", to: "/categories", icon: LayoutGrid },
     { label: "Meet the Nominees", to: "/nominees", icon: Users },
-    { label: "How Voting Works", to: "/guidelines/voters", icon: HelpCircle },
+    { label: "How AGC Voting Works", to: "/guidelines/voters", icon: HelpCircle },
   ];
 
   const heroVoices = [
-    { icon: GraduationCap, label: "A teacher" },
+    { icon: GraduationCap, label: "A mentor" },
     { icon: School, label: "A school founder" },
-    { icon: Heart, label: "A volunteer" },
-    { icon: Users, label: "A youth mentor" },
     { icon: Megaphone, label: "An NGO leader" },
-    { icon: Globe2, label: "A diaspora supporter" },
+    { icon: Users, label: "A youth advocate" },
+    { icon: Heart, label: "A philanthropist / CSR leader" },
+    { icon: Globe2, label: "A diaspora supporter / Friend of Africa" },
   ];
 
   const hooks = [
-    "Don't just clap for education heroes. Nominate them.",
-    "Your teacher. Your mentor. Your school founder. Your education hero.",
-    "Africa's education heroes deserve to be seen.",
-    "Know someone changing education in Africa?",
-    "From classrooms to communities, education champions are everywhere.",
+    "Don't just clap for education changemakers. Nominate them.",
+    "Your mentor. Your school founder. Your NGO leader. Your innovator.",
+    "Africa's education impact heroes deserve to be seen.",
+    "Do you know someone changing education in Africa?",
+    "From classrooms to communities, changemakers are everywhere.",
   ];
 
   return (
