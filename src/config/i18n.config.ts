@@ -5,7 +5,7 @@
 
 export type SupportedLocale = 
   | 'en' | 'fr' | 'ar' | 'pt' | 'sw' 
-  | 'ha' | 'yo' | 'am' | 'zu' | 'zh' | 'hi';
+  | 'ha' | 'yo' | 'ig' | 'am' | 'zu' | 'zh' | 'hi';
 
 export interface LocaleConfig {
   code: SupportedLocale;
