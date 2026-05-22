@@ -121,53 +121,9 @@ export function TrophyHeroSection() {
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.65 }}
-              className="flex flex-col sm:flex-row flex-wrap gap-3 justify-center lg:justify-start mb-4"
+              className="mb-4"
             >
-              <Link to="/nominate">
-                <motion.div
-                  animate={{ scale: [1, 1.02, 1] }}
-                  transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
-                >
-                  <Button
-                    size="default"
-                    className="w-full sm:w-auto bg-gold hover:bg-gold-dark text-charcoal font-semibold rounded-full px-6 gap-2 shadow-lg shadow-gold/25 hover:shadow-gold/40 transition-colors h-10 text-sm group"
-                  >
-                    <Trophy className="h-5 w-5 group-hover:rotate-12 transition-transform" />
-                    {t("landing.trophyHero.nominateNow")}
-                    <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
-                  </Button>
-                </motion.div>
-              </Link>
-              <Link to="/earn-agc">
-                <Button
-                  size="default"
-                  variant="outline"
-                  className="w-full sm:w-auto border-gold/50 text-gold hover:bg-gold/10 hover:border-gold rounded-full px-5 gap-2 h-10 text-sm transition-colors"
-                >
-                  <Coins className="h-5 w-5" />
-                  {t("landing.trophyHero.voteWithAGC")}
-                </Button>
-              </Link>
-              <Link to="/nominees">
-                <Button
-                  size="default"
-                  variant="outline"
-                  className="w-full sm:w-auto border-gold/30 text-white/90 hover:text-gold hover:bg-gold/10 hover:border-gold/60 rounded-full px-5 gap-2 h-10 text-sm transition-colors focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2 focus-visible:ring-offset-charcoal group"
-                >
-                  <Search className="h-5 w-5 group-hover:scale-110 transition-transform" />
-                  Explore Existing Nominees
-                </Button>
-              </Link>
-              <Link to="/categories">
-                <Button
-                  size="default"
-                  variant="ghost"
-                  className="w-full sm:w-auto text-white/85 hover:text-gold hover:bg-gold/10 rounded-full px-5 gap-2 h-10 text-sm transition-colors"
-                >
-                  <LayoutGrid className="h-5 w-5" />
-                  View Award Categories
-                </Button>
-              </Link>
+              <HeroCTAStack />
             </motion.div>
 
             <motion.p
