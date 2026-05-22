@@ -49,6 +49,11 @@ import yoPages from '@/locales/yo/pages.json';
 import yoNomination from '@/locales/yo/nomination.json';
 import yoDashboard from '@/locales/yo/dashboard.json';
 
+import igCommon from '@/locales/ig/common.json';
+import igPages from '@/locales/ig/pages.json';
+import igNomination from '@/locales/ig/nomination.json';
+import igDashboard from '@/locales/ig/dashboard.json';
+
 import amCommon from '@/locales/am/common.json';
 import amPages from '@/locales/am/pages.json';
 import amNomination from '@/locales/am/nomination.json';
@@ -112,6 +117,12 @@ const resources = {
     pages: yoPages,
     nomination: yoNomination,
     dashboard: yoDashboard,
+  },
+  ig: {
+    common: igCommon,
+    pages: igPages,
+    nomination: igNomination,
+    dashboard: igDashboard,
   },
   am: {
     common: amCommon,

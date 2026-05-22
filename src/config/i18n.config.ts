@@ -5,7 +5,7 @@
 
 export type SupportedLocale = 
   | 'en' | 'fr' | 'ar' | 'pt' | 'sw' 
-  | 'ha' | 'yo' | 'am' | 'zu' | 'zh' | 'hi';
+  | 'ha' | 'yo' | 'ig' | 'am' | 'zu' | 'zh' | 'hi';
 
 export interface LocaleConfig {
   code: SupportedLocale;
@@ -23,6 +23,7 @@ export const SUPPORTED_LOCALES: LocaleConfig[] = [
   { code: 'sw', label: 'Swahili', nativeLabel: 'Kiswahili', dir: 'ltr', flag: '🇰🇪' },
   { code: 'ha', label: 'Hausa', nativeLabel: 'Hausa', dir: 'ltr', flag: '🇳🇬' },
   { code: 'yo', label: 'Yoruba', nativeLabel: 'Yorùbá', dir: 'ltr', flag: '🇳🇬' },
+  { code: 'ig', label: 'Igbo', nativeLabel: 'Igbo', dir: 'ltr', flag: '🇳🇬' },
   { code: 'am', label: 'Amharic', nativeLabel: 'አማርኛ', dir: 'ltr', flag: '🇪🇹' },
   { code: 'zu', label: 'Zulu', nativeLabel: 'isiZulu', dir: 'ltr', flag: '🇿🇦' },
   { code: 'zh', label: 'Chinese', nativeLabel: '中文', dir: 'ltr', flag: '🇨🇳' },
@@ -47,7 +48,7 @@ export const GEO_LOCALE_MAP: Record<string, SupportedLocale[]> = {
   TW: ['zh', 'en'],
   
   // Nigeria (English + local languages)
-  NG: ['en', 'yo', 'ha'],
+  NG: ['en', 'yo', 'ig', 'ha'],
   
   // East Africa (Swahili belt)
   KE: ['sw', 'en'],
