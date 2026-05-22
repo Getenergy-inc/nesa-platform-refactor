@@ -97,19 +97,31 @@
           "badge": "Réalisation à Vie",
           "title": "Prix Africa Icon Blue Garnet",
           "description": "Réservé aux réalisations à vie. Les nominés doivent avoir 10+ ans de réalisations institutionnelles.",
-          "bullets": ["Réalisations Institutionnelles", "Impact à Long Terme", "Reconnaissance de l'Héritage"]
+          "bullets": [
+            "Réalisations Institutionnelles",
+            "Impact à Long Terme",
+            "Reconnaissance de l'Héritage"
+          ]
         },
         "blueGarnetGold": {
           "badge": "Vote Public",
           "title": "Prix Blue Garnet et Certificat Or",
           "description": "Compétition ouverte avec participation publique via le vote AGC et le jugement d'experts.",
-          "bullets": ["Vote Public", "Jugement d'Experts", "138+ Sous-catégories"]
+          "bullets": [
+            "Vote Public",
+            "Jugement d'Experts",
+            "138+ Sous-catégories"
+          ]
         },
         "platinum": {
           "badge": "Sélection d'Experts",
           "title": "Certificat de Reconnaissance Platine",
           "description": "Reconnaissance basée sur le mérite par évaluation d'un panel d'experts.",
-          "bullets": ["Pas de Vote", "Jugement Interne", "Nomination Mondiale"]
+          "bullets": [
+            "Pas de Vote",
+            "Jugement Interne",
+            "Nomination Mondiale"
+          ]
         }
       }
     },
@@ -218,10 +230,10 @@
       }
     },
     "finalCTA": {
-      "title": "Nominez un Champion de",
-      "titleAccent": "l'Éducation",
-      "description": "Connaissez-vous quelqu'un ayant un impact exceptionnel sur l'éducation africaine? Soumettez votre nomination aujourd'hui.",
-      "submitNomination": "Soumettre une Nomination",
+      "title": "Prêt à Célébrer les",
+      "titleAccent": "Acteurs du Changement Éducatif d'Afrique ?",
+      "description": "Ne vous contentez pas d'applaudir l'impact — aidez le monde à le découvrir. Nommez un acteur du changement éducatif africain aujourd'hui et rejoignez un mouvement continental qui reconnaît les personnes et institutions transformant l'éducation à travers l'Afrique et la diaspora. Nommez. Gagnez de l'AGC. Célébrez l'Impact Éducatif.",
+      "submitNomination": "Nommer un Acteur du Changement",
       "visitNESA": "Visiter NESA Africa",
       "trustIndicators": {
         "countries": "54 Pays",
@@ -238,19 +250,20 @@
       "description": "Approuvé par les principales organisations éducatives du continent."
     },
     "trophyHero": {
-      "headline": "Reconnaître l'Excellence à Travers",
-      "headlineAccent": "17 Catégories de Prix",
-      "tagline": "Honorer les Acteurs du Changement Éducatif en Afrique",
-      "valueProposition": "Une plateforme de reconnaissance continentale basée sur des normes, célébrant et honorant les acteurs du changement qui promeuvent l'« Éducation pour Tous » en Afrique, reconnaissant l'impact vérifié et permettant une participation publique structurée à travers le continent.",
-      "nominateNow": "Nominer Maintenant",
-      "voteWithAGC": "Voter avec AGC",
+      "headline": "Ne Vous Contentez Pas d'Applaudir les Acteurs du Changement Éducatif.",
+      "headlineAccent": "Nommez-les.",
+      "tagline": "Votre mentor. Votre fondateur d'école. Votre leader d'ONG. Votre innovateur.",
+      "valueProposition": "À travers l'Afrique et la diaspora, les acteurs du changement transforment l'éducation par le plaidoyer, l'innovation, le financement, les infrastructures, le mentorat, la technologie, les politiques, l'action communautaire et l'impact social. NESA-Africa offre au public une plateforme pour reconnaître, célébrer et amplifier les personnes et les institutions qui font avancer l'éducation à travers l'Afrique. Nommez un acteur du changement aujourd'hui et gagnez des points de vote AGC pour soutenir vos nominés favoris dès l'ouverture du vote.",
+      "nominateNow": "Nommer un Acteur du Changement",
+      "voteWithAGC": "Gagner des Points de Vote AGC",
       "watchLive": "Regarder en Direct",
       "trophyCaption": "La Plus Haute Distinction Éducative d'Afrique",
-      "winnersCaption": "Célébrer les Champions de l'Éducation",
+      "winnersCaption": "Célébrer les Acteurs du Changement Éducatif",
       "scrollHint": "Découvrir",
       "trustRegions": "10 Régions + Diaspora",
       "trustNominees": "{{count}}+ Nominés",
-      "trustVision": "15 Ans de Vision"
+      "trustVision": "15 Ans de Vision",
+      "slogan": "Nominations Ouvertes · NESA-Africa 2025/26"
     },
     "whatsLive": {
       "badge": "En Direct",
@@ -843,9 +856,40 @@
     "allAfrica": "Toute l'Afrique",
     "nigeria": "Nigeria",
     "paths": {
-      "icon": { "badge": "Réussite à Vie", "title": "Icône Africaine", "subtitle": "Prix Blue Garnet (2006–{{year}})", "features": ["10+ ans de réalisations institutionnelles", "Reconnaissance patrimoniale", "Sélection par panel d'experts"], "cta": "Nominer une Icône" },
-      "voting": { "badge": "Vote Public", "title": "Blue Garnet & Or", "subtitle": "Compétition Annuelle", "features": ["Gagnez des points de vote par la participation", "Votez avec AGC pendant les fenêtres officielles", "Pondération jury + public (Blue Garnet)"], "cta": "Nominer pour le Vote", "secondaryCta": "Comment ça Marche" },
-      "platinum": { "badge": "Sélection d'Experts", "title": "Certificat Platine", "subtitle": "Reconnaissance au Mérite", "features": ["Reconnaissance de base", "Pas de vote public requis", "Vérification de gouvernance"], "cta": "Soumettre une Nomination Platine" }
+      "icon": {
+        "badge": "Réussite à Vie",
+        "title": "Icône Africaine",
+        "subtitle": "Prix Blue Garnet (2006–{{year}})",
+        "features": [
+          "10+ ans de réalisations institutionnelles",
+          "Reconnaissance patrimoniale",
+          "Sélection par panel d'experts"
+        ],
+        "cta": "Nominer une Icône"
+      },
+      "voting": {
+        "badge": "Vote Public",
+        "title": "Blue Garnet & Or",
+        "subtitle": "Compétition Annuelle",
+        "features": [
+          "Gagnez des points de vote par la participation",
+          "Votez avec AGC pendant les fenêtres officielles",
+          "Pondération jury + public (Blue Garnet)"
+        ],
+        "cta": "Nominer pour le Vote",
+        "secondaryCta": "Comment ça Marche"
+      },
+      "platinum": {
+        "badge": "Sélection d'Experts",
+        "title": "Certificat Platine",
+        "subtitle": "Reconnaissance au Mérite",
+        "features": [
+          "Reconnaissance de base",
+          "Pas de vote public requis",
+          "Vérification de gouvernance"
+        ],
+        "cta": "Soumettre une Nomination Platine"
+      }
     }
   },
   "ediIntegrity": {
@@ -854,11 +898,36 @@
     "description": "Chaque étape du processus des prix NESA-Africa est régie par l'Indice de Développement de l'Éducation — de la nomination au vote final.",
     "viewFullGuidelines": "Voir la Matrice EDI Complète & Directives",
     "steps": {
-      "ediMatrix": { "title": "Matrice EDI", "subtitle": "Socle d'Intégrité", "description": "L'Indice de Développement de l'Éducation définit les standards d'évaluation sur 3 niveaux et 17 catégories.", "badge": "Fondation" },
-      "nomination": { "title": "Nomination", "subtitle": "Pour les Nominateurs", "description": "Directives éthiques de nomination, sélection de catégorie et exigences de soumission de preuves.", "badge": "Étape 1" },
-      "acceptance": { "title": "Acceptation", "subtitle": "Pour les Nominés", "description": "Processus de filtrage NRC, parcours d'acceptation et suivi du statut.", "badge": "Étape 2" },
-      "judges": { "title": "Panel de Juges", "subtitle": "Pour les Juges", "description": "Critères pondérés sur 20 points, protocoles COI et processus d'évaluation indépendant.", "badge": "Étape 3" },
-      "voting": { "title": "Vote Public", "subtitle": "Pour les Votants", "description": "Crédits de participation AGC, fenêtres de vote Or & Blue Garnet et règles de vote éthique.", "badge": "Étape 4" }
+      "ediMatrix": {
+        "title": "Matrice EDI",
+        "subtitle": "Socle d'Intégrité",
+        "description": "L'Indice de Développement de l'Éducation définit les standards d'évaluation sur 3 niveaux et 17 catégories.",
+        "badge": "Fondation"
+      },
+      "nomination": {
+        "title": "Nomination",
+        "subtitle": "Pour les Nominateurs",
+        "description": "Directives éthiques de nomination, sélection de catégorie et exigences de soumission de preuves.",
+        "badge": "Étape 1"
+      },
+      "acceptance": {
+        "title": "Acceptation",
+        "subtitle": "Pour les Nominés",
+        "description": "Processus de filtrage NRC, parcours d'acceptation et suivi du statut.",
+        "badge": "Étape 2"
+      },
+      "judges": {
+        "title": "Panel de Juges",
+        "subtitle": "Pour les Juges",
+        "description": "Critères pondérés sur 20 points, protocoles COI et processus d'évaluation indépendant.",
+        "badge": "Étape 3"
+      },
+      "voting": {
+        "title": "Vote Public",
+        "subtitle": "Pour les Votants",
+        "description": "Crédits de participation AGC, fenêtres de vote Or & Blue Garnet et règles de vote éthique.",
+        "badge": "Étape 4"
+      }
     }
   },
   "watchSection": {
@@ -866,9 +935,18 @@
     "description": "Regardez les émissions officielles pour rester informé et engagé dans le cycle des prix.",
     "exploreMediaHub": "Explorer le Hub Média",
     "channels": {
-      "nesaTv": { "name": "NESA Africa TV", "description": "Émissions officielles de remise de prix" },
-      "mediaHub": { "name": "Hub Média", "description": "Temps forts, interviews et coulisses" },
-      "liveEvents": { "name": "Événements en Direct", "description": "Diffusion de galas et événements spéciaux" }
+      "nesaTv": {
+        "name": "NESA Africa TV",
+        "description": "Émissions officielles de remise de prix"
+      },
+      "mediaHub": {
+        "name": "Hub Média",
+        "description": "Temps forts, interviews et coulisses"
+      },
+      "liveEvents": {
+        "name": "Événements en Direct",
+        "description": "Diffusion de galas et événements spéciaux"
+      }
     }
   },
   "judgesSection": {
@@ -876,7 +954,12 @@
     "title": "Rencontrez Nos Distingués",
     "titleHighlight": "Juges",
     "description": "Au NESA-Africa, notre panel estimé de juges réunit des leaders, innovateurs, philanthropes et experts de l'éducation à travers l'Afrique et la diaspora.",
-    "stats": { "expertJudges": "Juges Experts", "categories": "Catégories", "subCategories": "Sous-Catégories", "transparency": "Transparence" },
+    "stats": {
+      "expertJudges": "Juges Experts",
+      "categories": "Catégories",
+      "subCategories": "Sous-Catégories",
+      "transparency": "Transparence"
+    },
     "applyJudge": "Postuler comme Juge",
     "checkStatus": "Vérifier le Statut",
     "learnMore": "En Savoir Plus"
@@ -905,9 +988,25 @@
     "recognitionTracks": "Parcours de Reconnaissance",
     "badgeHierarchy": "Hiérarchie des Badges",
     "highestToLowest": "Du plus élevé → au plus bas",
-    "filters": { "all": "Tous", "africa": "Afrique", "diaspora": "Diaspora", "icon": "Icône", "voting": "Vote", "expert": "Expert" },
-    "sortOptions": { "az": "A–Z", "popular": "Populaire", "recent": "Récent" },
-    "tracks": { "allNominees": "Tous les Nominés", "africaRegional": "Afrique Régionale", "diaspora": "Diaspora", "friendsOfAfrica": "Amis de l'Afrique" },
+    "filters": {
+      "all": "Tous",
+      "africa": "Afrique",
+      "diaspora": "Diaspora",
+      "icon": "Icône",
+      "voting": "Vote",
+      "expert": "Expert"
+    },
+    "sortOptions": {
+      "az": "A–Z",
+      "popular": "Populaire",
+      "recent": "Récent"
+    },
+    "tracks": {
+      "allNominees": "Tous les Nominés",
+      "africaRegional": "Afrique Régionale",
+      "diaspora": "Diaspora",
+      "friendsOfAfrica": "Amis de l'Afrique"
+    },
     "noResults": "Aucun nominé trouvé correspondant à",
     "clearSearch": "Effacer la recherche"
   },
