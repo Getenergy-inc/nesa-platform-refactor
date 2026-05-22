@@ -137,10 +137,10 @@ export function CallForNominationsCampaign() {
               <div className="pointer-events-none absolute -inset-px rounded-3xl ring-1 ring-inset ring-primary/20" />
 
               <p className="text-xs font-semibold uppercase tracking-[0.25em] text-primary/90">
-                Your Campaign Journey
+                Education Impact Lives Everywhere
               </p>
               <h3 className="mt-1 font-display text-2xl font-bold text-white md:text-3xl">
-                4 Simple Steps to Celebrate Impact
+                From Classrooms to Continental Movements
               </h3>
 
               {/* Journey steps */}
@@ -165,7 +165,6 @@ export function CallForNominationsCampaign() {
               </ol>
 
               {/* Video placeholder */}
-              {/* TODO: Replace placeholder with final NESA-Africa nomination campaign video. */}
               <div className="group relative mt-6 aspect-video w-full overflow-hidden rounded-2xl border border-primary/30 bg-gradient-to-br from-primary/20 via-charcoal to-black">
                 <div className="absolute inset-0 flex items-center justify-center">
                   <div className="flex h-16 w-16 items-center justify-center rounded-full bg-primary text-charcoal shadow-2xl transition-transform group-hover:scale-110">
@@ -174,7 +173,7 @@ export function CallForNominationsCampaign() {
                 </div>
                 <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/85 to-transparent p-3">
                   <p className="text-xs font-medium text-white md:text-sm">
-                    Watch how to nominate an education champion and earn voting points.
+                    Watch how to nominate a changemaker and earn AGC voting points.
                   </p>
                 </div>
               </div>
