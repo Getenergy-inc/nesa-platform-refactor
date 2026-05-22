@@ -23,6 +23,7 @@ export const SUPPORTED_LOCALES: LocaleConfig[] = [
   { code: 'sw', label: 'Swahili', nativeLabel: 'Kiswahili', dir: 'ltr', flag: '🇰🇪' },
   { code: 'ha', label: 'Hausa', nativeLabel: 'Hausa', dir: 'ltr', flag: '🇳🇬' },
   { code: 'yo', label: 'Yoruba', nativeLabel: 'Yorùbá', dir: 'ltr', flag: '🇳🇬' },
+  { code: 'ig', label: 'Igbo', nativeLabel: 'Igbo', dir: 'ltr', flag: '🇳🇬' },
   { code: 'am', label: 'Amharic', nativeLabel: 'አማርኛ', dir: 'ltr', flag: '🇪🇹' },
   { code: 'zu', label: 'Zulu', nativeLabel: 'isiZulu', dir: 'ltr', flag: '🇿🇦' },
   { code: 'zh', label: 'Chinese', nativeLabel: '中文', dir: 'ltr', flag: '🇨🇳' },
