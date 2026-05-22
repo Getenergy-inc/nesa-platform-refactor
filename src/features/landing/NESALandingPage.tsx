@@ -116,10 +116,6 @@ export function NESALandingPage() {
           <PromoVideosSection />
         </LazySection>
 
-        {/* 10b. GALLERY TEASER */}
-        <LazySection>
-          <HomepageGalleryTeaser />
-        </LazySection>
 
         {/* 11. BE PART OF THE MOVEMENT */}
         <LazySection>
