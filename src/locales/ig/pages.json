@@ -255,16 +255,11 @@
       }
     },
     "finalCTA": {
-      "title": "Ready to Celebrate Africa's",
-      "titleAccent": "Education Changemakers?",
-      "description": "Don't just applaud impact — help the world discover it. Nominate an African education changemaker today and become part of a continental movement recognising the people and institutions transforming education across Africa and the diaspora. Nominate. Earn AGC. Celebrate Education Impact.",
-      "submitNomination": "Nominate a Changemaker Now",
-      "visitNESA": "Visit NESA Africa",
-      "trustIndicators": {
-        "regions": "5+2 Regions",
-        "nominees": "2,500+ Nominees",
-        "years": "20 Years of Vision (2006–2026)"
-      }
+      "title": "Sonye na Ngagharị Ndị Na-eme Mgbanwe Agụmakwụkwọ Afrịka",
+      "subtitle": "NESA-Africa 2025/26 — kpọọ aha, mee ntuli aka, ma kwado ndị na-emepụta agụmakwụkwọ na Pan-Africa.",
+      "primaryCta": "Kpọọ Aha Onye Na-eme Mgbanwe Ugbu a",
+      "secondaryCta": "Nweta AGC Voting Points",
+      "tertiaryCta": "Hụ Ụdị Onyinye"
     },
     "sponsors": {
       "title": "Our Partners & Sponsors",
@@ -306,20 +301,15 @@
       "viewAll": "View All {{count}} Videos"
     },
     "trophyHero": {
-      "headline": "Don't Just Clap for Education Changemakers.",
-      "headlineAccent": "Nominate Them.",
-      "slogan": "Nominations Open · NESA-Africa 2025/26",
-      "tagline": "Your mentor. Your school founder. Your NGO leader. Your innovator.",
-      "valueProposition": "Across Africa and the diaspora, changemakers are transforming education through advocacy, innovation, funding, infrastructure, mentorship, technology, policy, community action, and social impact. NESA-Africa gives the public a platform to recognise, celebrate, and amplify the people and institutions advancing education across Africa. Nominate a changemaker today and earn AGC voting points to support your favourite nominees when voting opens.",
-      "nominateNow": "Nominate a Changemaker",
-      "voteWithAGC": "Earn AGC Voting Points",
-      "watchLive": "Watch Live",
-      "trophyCaption": "Africa's Highest Education Honour",
-      "winnersCaption": "Celebrating Education Changemakers",
-      "scrollHint": "Discover",
-      "trustRegions": "10 Regions + Diaspora",
-      "trustNominees": "{{count}}+ Nominees",
-      "trustVision": "15 Years of Vision"
+      "badge": "NESA-Africa 2025/26 · Mkpọkụ Nzọpụta Agụmakwụkwọ",
+      "title": "Akụkọ Ọma Agụmakwụkwọ Afrịka Ga-amalite Site n'Aha Ndị Na-eme Mgbanwe",
+      "subtitle": "Achọpụtala Ndị Na-eme Mgbanwe Agụmakwụkwọ — kpọọ aha ndị nkuzi, ndị nduzi, ndị nchọpụta, NGO, ndị ndu CSR na ndị diaspora na-akwado mgbanwe agụmakwụkwọ na Afrịka.",
+      "cta": {
+        "nominate": "Kpọọ Aha Onye Na-eme Mgbanwe",
+        "earnAgc": "Nweta AGC Voting Points",
+        "viewCategories": "Lelee Ụdị Onyinye"
+      },
+      "tagline": "Don't Just Clap for Education Changemakers. Nominate Them."
     },
     "whatsLive": {
       "badge": "What's Live",
@@ -1127,10 +1117,10 @@
     "forEducation": "for African Education",
     "copyright": "© {{year}} Santos Creations Educational Foundation",
     "links": {
-      "home": "Home",
-      "programs": "Programs",
-      "categories": "Categories",
-      "nominate": "Nominate",
+      "home": "Ụlọ",
+      "programs": "Mmemme",
+      "categories": "Ụdị",
+      "nominate": "Kpọọ Aha",
       "about": "About",
       "contact": "Contact",
       "privacy": "Privacy Policy",
