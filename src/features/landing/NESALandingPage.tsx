@@ -19,20 +19,17 @@ import { PageFAQSection, FloatingFAQButton } from "@/components/nesa/PageFAQ";
 import { useSeason } from "@/contexts/SeasonContext";
 
 // Lazy below-fold
-const BrandNarrativeSection = lazy(() => import("@/components/nesa/BrandNarrativeSection").then(m => ({ default: m.BrandNarrativeSection })));
 const AwardPillarsGrid = lazy(() => import("@/components/landing/AwardPillarsGrid").then(m => ({ default: m.AwardPillarsGrid })));
 const EcosystemCarousel = lazy(() => import("@/components/landing/EcosystemCarousel").then(m => ({ default: m.EcosystemCarousel })));
-const NominateAndVoteSection = lazy(() => import("@/components/landing/NominateAndVoteSection").then(m => ({ default: m.NominateAndVoteSection })));
 const ImpactWrapUpSection = lazy(() => import("@/components/nesa/ImpactWrapUpSection").then(m => ({ default: m.ImpactWrapUpSection })));
 const InteractiveAfricaMap = lazy(() => import("@/components/nesa/InteractiveAfricaMap").then(m => ({ default: m.InteractiveAfricaMap })));
 const PromoVideosSection = lazy(() => import("@/components/nesa/PromoVideosSection").then(m => ({ default: m.PromoVideosSection })));
 const BePartOfMovementSection = lazy(() => import("@/components/landing/BePartOfMovementSection").then(m => ({ default: m.BePartOfMovementSection })));
-const ContributorsHallSection = lazy(() => import("@/components/nesa/ContributorsHallSection").then(m => ({ default: m.ContributorsHallSection })));
 const SponsorsSection = lazy(() => import("@/components/nesa/SponsorsSection").then(m => ({ default: m.SponsorsSection })));
 const FinalCTASection = lazy(() => import("@/components/nesa/FinalCTASection").then(m => ({ default: m.FinalCTASection })));
 const HomepageGalleryTeaser = lazy(() => import("@/components/gallery/HomepageGalleryTeaser").then(m => ({ default: m.HomepageGalleryTeaser })));
-const NominationCampaignSection = lazy(() => import("@/components/landing/NominationCampaignSection").then(m => ({ default: m.NominationCampaignSection })));
-const CallForNominationsCampaign = lazy(() => import("@/components/landing/CallForNominationsCampaign").then(m => ({ default: m.CallForNominationsCampaign })));
+const CampaignParticipationSlider = lazy(() => import("@/components/landing/CampaignParticipationSlider").then(m => ({ default: m.CampaignParticipationSlider })));
+const WearTheMovementSection = lazy(() => import("@/components/landing/WearTheMovementSection").then(m => ({ default: m.WearTheMovementSection })));
 
 export function NESALandingPage() {
   const { currentEdition } = useSeason();
@@ -59,83 +56,66 @@ export function NESALandingPage() {
         {/* 1. HERO */}
         <TrophyHeroSection />
 
-        {/* 1b. MOMENTS FROM NESA AFRICA — emotional proof immediately after hero (CRO-optimized) */}
+        {/* 2. GALA COUNTDOWN — urgency immediately after hero */}
+        <CountdownSection />
+
+        {/* 3. MOMENTS — 2025 pre-opening emotional proof */}
         <LazySection>
           <HomepageGalleryTeaser />
         </LazySection>
 
-        {/* 1c. NOMINATION CAMPAIGN — conversion-focused */}
+        {/* 4. CAMPAIGN + PARTICIPATION SLIDER */}
         <LazySection>
-          <NominationCampaignSection />
+          <CampaignParticipationSlider />
         </LazySection>
 
-        {/* 1c. CALL FOR NOMINATIONS — complementary campaign block */}
-        <LazySection>
-          <CallForNominationsCampaign />
-        </LazySection>
-
-        {/* 2. TRUST STRIP */}
+        {/* 5. EXPLORE EXISTING NOMINEES / HONOUREES */}
         <TrustLogosStrip />
-
-
-        {/* 3. ECOSYSTEM CAROUSEL — featured nominees (moved up directly under trust strip) */}
         <LazySection>
           <EcosystemCarousel />
         </LazySection>
 
-        {/* 4. WHAT NESA REPRESENTS */}
-        <LazySection>
-          <BrandNarrativeSection />
-        </LazySection>
-
-        {/* 5. AWARD PILLARS — 4 cinematic cards */}
+        {/* 6. FEATURED AWARD CATEGORIES */}
         <LazySection>
           <AwardPillarsGrid />
         </LazySection>
 
-        {/* 6. NOMINATE · VOTE · EARN */}
+        {/* 7. EXPLORE AFRICA'S REGIONS (before Impact wrap-up) */}
         <LazySection>
-          <NominateAndVoteSection />
+          <InteractiveAfricaMap />
         </LazySection>
-
-        {/* 7. COUNTDOWN */}
-        <CountdownSection />
 
         {/* 8. IMPACT WRAP-UP */}
         <LazySection>
           <ImpactWrapUpSection />
         </LazySection>
 
-        {/* 9. REGIONAL REACH */}
-        <LazySection>
-          <InteractiveAfricaMap />
-        </LazySection>
-
-        {/* 10. FEATURED VIDEOS */}
-        <LazySection>
-          <PromoVideosSection />
-        </LazySection>
-
-
-        {/* 11. BE PART OF THE MOVEMENT */}
+        {/* 9. BE PART OF THE MOVEMENT */}
         <LazySection>
           <BePartOfMovementSection />
         </LazySection>
 
-        {/* 12. CONTRIBUTORS HALL */}
+        {/* 10. WEAR THE MOVEMENT — merchandise */}
         <LazySection>
-          <ContributorsHallSection compact limit={12} />
+          <WearTheMovementSection />
         </LazySection>
 
-        {/* 13. SPONSORS */}
+        {/* 11. FEATURED VIDEOS */}
+        <LazySection>
+          <PromoVideosSection />
+        </LazySection>
+
+        {/* 12. PARTNERS & SPONSORS */}
         <LazySection>
           <SponsorsSection />
         </LazySection>
 
-        {/* 14. FAQ + FINAL CTA */}
+        {/* 13. FAQ */}
         <LazySection>
           <PageFAQSection />
         </LazySection>
+
+        {/* 14. FINAL CTA */}
         <LazySection>
           <FinalCTASection />
         </LazySection>

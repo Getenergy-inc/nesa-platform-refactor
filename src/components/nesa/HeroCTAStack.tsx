@@ -45,11 +45,11 @@ export function HeroCTAStack() {
         <motion.div variants={item}>
           <Link
             to="/nominate"
-            aria-label="Nominate a Changemaker"
+            aria-label="Nominate for 2026"
             className={`${baseBtn} bg-gold text-charcoal font-semibold shadow-[0_6px_18px_-8px_hsl(var(--gold)/0.7)] hover:bg-gold-dark hover:-translate-y-0.5 hover:shadow-[0_10px_22px_-8px_hsl(var(--gold)/0.85)]`}
           >
             <Trophy className="h-4 w-4" />
-            <span className="truncate">Nominate</span>
+            <span className="truncate">Nominate for 2026</span>
             <ArrowRight className="h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-0.5" />
           </Link>
         </motion.div>
