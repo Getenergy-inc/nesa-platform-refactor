@@ -48,7 +48,7 @@ export const GEO_LOCALE_MAP: Record<string, SupportedLocale[]> = {
   TW: ['zh', 'en'],
   
   // Nigeria (English + local languages)
-  NG: ['en', 'yo', 'ha'],
+  NG: ['en', 'yo', 'ig', 'ha'],
   
   // East Africa (Swahili belt)
   KE: ['sw', 'en'],
