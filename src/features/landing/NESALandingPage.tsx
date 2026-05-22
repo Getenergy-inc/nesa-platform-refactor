@@ -59,7 +59,12 @@ export function NESALandingPage() {
         {/* 1. HERO */}
         <TrophyHeroSection />
 
-        {/* 1b. NOMINATION CAMPAIGN — conversion-focused, directly under hero */}
+        {/* 1b. MOMENTS FROM NESA AFRICA — emotional proof immediately after hero (CRO-optimized) */}
+        <LazySection>
+          <HomepageGalleryTeaser />
+        </LazySection>
+
+        {/* 1c. NOMINATION CAMPAIGN — conversion-focused */}
         <LazySection>
           <NominationCampaignSection />
         </LazySection>
