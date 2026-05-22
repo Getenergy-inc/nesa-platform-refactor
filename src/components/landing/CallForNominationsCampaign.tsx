@@ -22,19 +22,19 @@ import {
 import { Button } from "@/components/ui/button";
 
 const personas = [
-  { icon: GraduationCap, label: "Teacher" },
+  { icon: GraduationCap, label: "Mentor" },
   { icon: School, label: "School Founder" },
   { icon: HeartHandshake, label: "NGO Leader" },
-  { icon: Sparkles, label: "Youth Mentor" },
+  { icon: Sparkles, label: "Innovator" },
   { icon: Users, label: "Diaspora Supporter" },
   { icon: Globe2, label: "Friend of Africa" },
 ];
 
 const journey = [
-  { n: "1", title: "Nominate a Champion", desc: "Submit an African education impact hero in minutes.", icon: Trophy },
-  { n: "2", title: "Earn Free Voting Points", desc: "Every nomination rewards you with AGC voting points.", icon: Coins },
-  { n: "3", title: "Share the Movement", desc: "Spread the call across your community and diaspora.", icon: Share2 },
-  { n: "4", title: "Support Your Favorites", desc: "Use your points to back nominees when voting opens.", icon: Star },
+  { n: "1", title: "Nominate a Changemaker", desc: "Submit an education impact leader, organisation, or initiative in minutes.", icon: Trophy },
+  { n: "2", title: "Earn AGC Voting Points", desc: "Every successful nomination rewards you with AGC voting points.", icon: Coins },
+  { n: "3", title: "Share the Movement", desc: "Invite your community, school network, organisation, or diaspora network to participate.", icon: Share2 },
+  { n: "4", title: "Support Your Favourite Nominees", desc: "Use your AGC voting points to support education changemakers when voting opens.", icon: Star },
 ];
 
 export function CallForNominationsCampaign() {
