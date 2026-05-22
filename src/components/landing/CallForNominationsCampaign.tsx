@@ -59,22 +59,23 @@ export function CallForNominationsCampaign() {
             className="text-center lg:text-left"
           >
             <span className="inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-wider text-primary">
-              <Megaphone className="h-3.5 w-3.5" /> NESA-Africa Call for Nominations
+              <Megaphone className="h-3.5 w-3.5" /> Your Campaign Journey
             </span>
             <h2 className="mt-4 font-display text-3xl font-bold leading-tight text-white md:text-4xl lg:text-5xl">
-              Nominate an African Education{" "}
+              4 Simple Steps to{" "}
               <span className="bg-gradient-to-r from-primary to-yellow-300 bg-clip-text text-transparent">
-                Social Impact Champion
-              </span>{" "}
-              Today.
+                Celebrate Impact
+              </span>
             </h2>
             <p className="mt-4 text-lg font-medium text-primary/90 md:text-xl">
-              Earn Free Voting Points and Help Celebrate the People Transforming Education Across Africa.
+              Nominate. Earn AGC. Share. Support your favourite nominees.
             </p>
             <p className="mt-5 text-base leading-relaxed text-white/75 md:text-lg">
-              Do you know a teacher, school founder, NGO leader, youth mentor, innovator, diaspora
-              supporter, or friend of Africa changing education? Nominate them today on NESA-Africa
-              and earn free voting points to support your favorite nominees when voting opens.
+              Education impact lives everywhere — in NGOs and foundations,
+              school leadership, youth empowerment, education technology, CSR
+              initiatives, diaspora education support, faith-based impact, media
+              advocacy, research and innovation, and the arts, sports, music,
+              and culture advancing education across Africa and the diaspora.
             </p>
 
             {/* Persona badges */}
@@ -99,25 +100,23 @@ export function CallForNominationsCampaign() {
 
             {/* Trust / crowd-reaction line */}
             <p className="mt-6 border-l-2 border-primary/60 pl-4 text-left text-sm italic text-white/70 md:text-base">
-              Africa, who is your education champion? Don't just clap for education heroes —
+              Africa, who is your education changemaker? Don't just clap for
+              education impact heroes —
               <span className="font-semibold text-primary"> nominate them.</span>
             </p>
 
             {/* CTAs */}
             <div className="mt-7 flex flex-col items-stretch gap-3 sm:flex-row sm:flex-wrap sm:items-center lg:justify-start">
-              {/* TODO: replace #nominate with final route if /nominate changes */}
               <Button asChild size="lg" variant="glow" className="font-bold">
                 <Link to="/nominate">
-                  <Trophy className="h-4 w-4" /> Nominate a Champion Now
+                  <Trophy className="h-4 w-4" /> Start a Nomination
                 </Link>
               </Button>
-              {/* TODO: replace #voting-points with final route if /earn-voting-credits changes */}
               <Button asChild size="lg" variant="outline" className="border-primary/40 bg-transparent text-primary hover:bg-primary/10 hover:text-primary">
                 <Link to="/earn-voting-credits">
-                  <Coins className="h-4 w-4" /> How Voting Points Work
+                  <Coins className="h-4 w-4" /> How AGC Voting Works
                 </Link>
               </Button>
-              {/* TODO: replace #award-categories with final route if /categories changes */}
               <Button asChild size="lg" variant="outline" className="border-white/20 bg-transparent text-white hover:bg-white/10 hover:text-white">
                 <Link to="/categories">
                   <Vote className="h-4 w-4" /> View Award Categories
