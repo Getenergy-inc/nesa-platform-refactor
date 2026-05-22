@@ -44,19 +44,20 @@
       "footer": "تُقدم بالحوكمة والشفافية والأهمية القارية."
     },
     "trophyHero": {
-      "headline": "الاعتراف بالتميز عبر",
-      "headlineAccent": "17 فئة جائزة",
-      "tagline": "تكريم صناع التغيير في التعليم الأفريقي",
-      "valueProposition": "منصة تقدير قارية قائمة على المعايير، تحتفي وتكرم صناع التغيير الذين يدفعون \"التعليم للجميع\" في أفريقيا، وتعترف بالتأثير الموثق، وتمكن المشاركة العامة المنظمة عبر القارة.",
-      "nominateNow": "رشح الآن",
-      "voteWithAGC": "صوت بـ AGC",
+      "headline": "لا تكتفِ بالتصفيق لصُنّاع التغيير في التعليم.",
+      "headlineAccent": "رشّحهم.",
+      "tagline": "معلمك. مؤسس مدرستك. قائد منظمتك غير الربحية. مبتكرك.",
+      "valueProposition": "في جميع أنحاء أفريقيا والشتات، يُحدث صُنّاع التغيير تحولًا في التعليم من خلال المناصرة والابتكار والتمويل والبنية التحتية والإرشاد والتكنولوجيا والسياسات والعمل المجتمعي والأثر الاجتماعي. تُتيح نيسا-أفريقيا للجمهور منصةً للاعتراف بالأشخاص والمؤسسات الذين يُطوّرون التعليم في أفريقيا والاحتفاء بهم وتعزيز صوتهم. رشّح صانع تغيير اليوم واكسب نقاط تصويت AGC لدعم مرشحيك المفضلين عند فتح باب التصويت.",
+      "nominateNow": "رشّح صانع تغيير",
+      "voteWithAGC": "اكسب نقاط تصويت AGC",
       "watchLive": "شاهد مباشرة",
       "trophyCaption": "أعلى تكريم تعليمي في أفريقيا",
-      "winnersCaption": "الاحتفاء بأبطال التعليم",
+      "winnersCaption": "الاحتفاء بصُنّاع التغيير في التعليم",
       "scrollHint": "اكتشف",
       "trustRegions": "10 مناطق + الشتات",
       "trustNominees": "{{count}}+ مرشحون",
-      "trustVision": "15 عامًا من الرؤية"
+      "trustVision": "15 عامًا من الرؤية",
+      "slogan": "الترشيحات مفتوحة · نيسا-أفريقيا 2025/26"
     },
     "whatsLive": {
       "badge": "ما هو مباشر",
@@ -181,6 +182,12 @@
       "platinumFeature2": "لا يتطلب تصويتًا عامًا",
       "platinumFeature3": "تحقق الحوكمة",
       "platinumCta": "تقديم ترشيح بلاتين"
+    },
+    "finalCTA": {
+      "title": "هل أنت مستعد للاحتفاء بـ",
+      "titleAccent": "صُنّاع التغيير في تعليم أفريقيا؟",
+      "description": "لا تكتفِ بالتصفيق للأثر — ساعد العالم على اكتشافه. رشّح اليوم صانع تغيير أفريقيًا في التعليم وكن جزءًا من حركة قارية تُكرّم الأشخاص والمؤسسات الذين يُحدثون تحولًا في التعليم في أفريقيا والشتات. رشّح. اكسب AGC. احتفِ بالأثر التعليمي.",
+      "submitNomination": "رشّح صانع تغيير الآن"
     }
   },
   "about": {
@@ -532,13 +539,183 @@
       "transactions": "المعاملات الأخيرة"
     }
   },
-  "nominationPaths": { "badge": "اختر مسارك", "title": "ابدأ رحلة الترشيح", "description": "اختر فئة الجائزة المناسبة بناءً على إنجازات المرشح.", "mostPopular": "الأكثر شعبية", "nominateByRegion": "رشح حسب المنطقة", "nominees": "مرشحين", "allAfrica": "كل أفريقيا", "nigeria": "نيجيريا", "paths": { "icon": { "badge": "إنجاز العمر", "title": "أيقونة أفريقيا", "subtitle": "جائزة بلو غارنيت (2006–{{year}})", "features": ["10+ سنوات إنجازات مؤسسية", "تقدير الإرث", "اختيار لجنة الخبراء"], "cta": "رشح أيقونة" }, "voting": { "badge": "تصويت عام", "title": "بلو غارنيت والذهبية", "subtitle": "مسابقة سنوية", "features": ["اكسب نقاط تصويت من خلال المشاركة", "صوت باستخدام AGC خلال النوافذ الرسمية", "ترجيح لجنة التحكيم + العام"], "cta": "رشح للتصويت", "secondaryCta": "كيف يعمل التصويت" }, "platinum": { "badge": "اختيار الخبراء", "title": "شهادة البلاتين", "subtitle": "تقدير قائم على الجدارة", "features": ["تقدير أساسي", "لا يتطلب تصويتاً عاماً", "التحقق من الحوكمة"], "cta": "تقديم ترشيح بلاتيني" } } },
-  "ediIntegrity": { "badge": "الحوكمة والنزاهة", "title": "جدار نزاهة EDI", "description": "كل مرحلة من عملية جوائز NESA-Africa تخضع لمؤشر تطوير التعليم — من الترشيح إلى التصويت النهائي.", "viewFullGuidelines": "عرض مصفوفة EDI الكاملة والإرشادات", "steps": { "ediMatrix": { "title": "مصفوفة EDI", "subtitle": "ركيزة النزاهة", "description": "يحدد مؤشر تطوير التعليم معايير التقييم عبر 3 مستويات و17 فئة.", "badge": "الأساس" }, "nomination": { "title": "الترشيح", "subtitle": "للمرشحين", "description": "إرشادات الترشيح الأخلاقية واختيار الفئة ومتطلبات تقديم الأدلة.", "badge": "الخطوة 1" }, "acceptance": { "title": "القبول", "subtitle": "للمرشحين", "description": "عملية فحص NRC ورحلة القبول وتتبع الحالة.", "badge": "الخطوة 2" }, "judges": { "title": "لجنة التحكيم", "subtitle": "للحكام", "description": "معايير مرجحة من 20 نقطة وبروتوكولات تضارب المصالح.", "badge": "الخطوة 3" }, "voting": { "title": "التصويت العام", "subtitle": "للناخبين", "description": "نقاط مشاركة AGC ونوافذ تصويت الذهبية والبلو غارنيت.", "badge": "الخطوة 4" } } },
-  "watchSection": { "title": "شاهد وابقَ مشاركاً", "description": "شاهد العروض الرسمية لتبقى مطلعاً ومشاركاً في دورة الجوائز.", "exploreMediaHub": "استكشاف مركز الوسائط", "channels": { "nesaTv": { "name": "NESA Africa TV", "description": "عروض الجوائز الرسمية" }, "mediaHub": { "name": "مركز الوسائط", "description": "أبرز الأحداث والمقابلات" }, "liveEvents": { "name": "أحداث مباشرة", "description": "بث الحفلات والعروض الخاصة" } } },
-  "judgesSection": { "badge": "لجنتنا الموقرة", "title": "تعرف على", "titleHighlight": "حكامنا المتميزين", "description": "في NESA-Africa، تجمع لجنة التحكيم لدينا قادة التعليم والمبتكرين والمحسنين وصناع السياسات والخبراء.", "stats": { "expertJudges": "حكام خبراء", "categories": "فئات", "subCategories": "فئات فرعية", "transparency": "شفافية" }, "applyJudge": "تقدم كحكم", "checkStatus": "تحقق من الحالة", "learnMore": "اعرف المزيد" },
-  "mediaShowcase": { "title": "شاهد، استمع", "titleHighlight": "وشارك", "description": "ابقَ متصلاً عبر الوسائط الرسمية والبث المباشر وموسيقى NESA Africa.", "officialMusic": "موسيقى رسمية", "listenDownload": "استمع وحمّل", "exploreMediaHub": "استكشاف مركز الوسائط" },
-  "championsDirectory": { "badge": "دليل أبطال التعليم", "title": "الاحتفاء بـ", "titleHighlight": "أبطال التعليم في أفريقيا", "description": "اكتشف المعلمين والمبتكرين والمؤسسات الرائعة التي تحول التعليم في أفريقيا.", "exploreDirectory": "استكشاف الدليل", "nominate": "رشح", "searchPlaceholder": "ابحث بالاسم أو البلد أو الإنجاز...", "sort": "ترتيب", "browseByTrack": "تصفح حسب المسار", "live": "مباشر", "featuredChampions": "أبطال مميزون", "viewAll": "عرض الكل", "recognitionTracks": "مسارات التقدير", "badgeHierarchy": "تسلسل الشارات", "highestToLowest": "الأعلى → الأدنى", "filters": { "all": "الكل", "africa": "أفريقيا", "diaspora": "الشتات", "icon": "أيقونة", "voting": "تصويت", "expert": "خبير" }, "sortOptions": { "az": "أ–ي", "popular": "شائع", "recent": "حديث" }, "tracks": { "allNominees": "جميع المرشحين", "africaRegional": "أفريقيا الإقليمية", "diaspora": "الشتات", "friendsOfAfrica": "أصدقاء أفريقيا" }, "noResults": "لم يتم العثور على مرشحين مطابقين لـ", "clearSearch": "مسح البحث" },
-  "musicSection": { "badge": "موسيقى رسمية", "title": "أغاني NESA Africa", "description": "استمع إلى أناشيدنا الرسمية التي تحتفي بالتعليم في أفريقيا.", "nowPlaying": "قيد التشغيل", "playPreview": "معاينة", "pause": "إيقاف", "watchMusicVideo": "مشاهدة الفيديو", "supportNesa": "دعم NESA Africa و EduAid Africa", "downloadNow": "تحميل", "supportMakesDifference": "دعمكم يصنع الفرق", "everyDownloadHelps": "كل تحميل يساعد في إعادة بناء المدارس وتوفير الموارد التعليمية في أفريقيا." },
+  "nominationPaths": {
+    "badge": "اختر مسارك",
+    "title": "ابدأ رحلة الترشيح",
+    "description": "اختر فئة الجائزة المناسبة بناءً على إنجازات المرشح.",
+    "mostPopular": "الأكثر شعبية",
+    "nominateByRegion": "رشح حسب المنطقة",
+    "nominees": "مرشحين",
+    "allAfrica": "كل أفريقيا",
+    "nigeria": "نيجيريا",
+    "paths": {
+      "icon": {
+        "badge": "إنجاز العمر",
+        "title": "أيقونة أفريقيا",
+        "subtitle": "جائزة بلو غارنيت (2006–{{year}})",
+        "features": [
+          "10+ سنوات إنجازات مؤسسية",
+          "تقدير الإرث",
+          "اختيار لجنة الخبراء"
+        ],
+        "cta": "رشح أيقونة"
+      },
+      "voting": {
+        "badge": "تصويت عام",
+        "title": "بلو غارنيت والذهبية",
+        "subtitle": "مسابقة سنوية",
+        "features": [
+          "اكسب نقاط تصويت من خلال المشاركة",
+          "صوت باستخدام AGC خلال النوافذ الرسمية",
+          "ترجيح لجنة التحكيم + العام"
+        ],
+        "cta": "رشح للتصويت",
+        "secondaryCta": "كيف يعمل التصويت"
+      },
+      "platinum": {
+        "badge": "اختيار الخبراء",
+        "title": "شهادة البلاتين",
+        "subtitle": "تقدير قائم على الجدارة",
+        "features": [
+          "تقدير أساسي",
+          "لا يتطلب تصويتاً عاماً",
+          "التحقق من الحوكمة"
+        ],
+        "cta": "تقديم ترشيح بلاتيني"
+      }
+    }
+  },
+  "ediIntegrity": {
+    "badge": "الحوكمة والنزاهة",
+    "title": "جدار نزاهة EDI",
+    "description": "كل مرحلة من عملية جوائز NESA-Africa تخضع لمؤشر تطوير التعليم — من الترشيح إلى التصويت النهائي.",
+    "viewFullGuidelines": "عرض مصفوفة EDI الكاملة والإرشادات",
+    "steps": {
+      "ediMatrix": {
+        "title": "مصفوفة EDI",
+        "subtitle": "ركيزة النزاهة",
+        "description": "يحدد مؤشر تطوير التعليم معايير التقييم عبر 3 مستويات و17 فئة.",
+        "badge": "الأساس"
+      },
+      "nomination": {
+        "title": "الترشيح",
+        "subtitle": "للمرشحين",
+        "description": "إرشادات الترشيح الأخلاقية واختيار الفئة ومتطلبات تقديم الأدلة.",
+        "badge": "الخطوة 1"
+      },
+      "acceptance": {
+        "title": "القبول",
+        "subtitle": "للمرشحين",
+        "description": "عملية فحص NRC ورحلة القبول وتتبع الحالة.",
+        "badge": "الخطوة 2"
+      },
+      "judges": {
+        "title": "لجنة التحكيم",
+        "subtitle": "للحكام",
+        "description": "معايير مرجحة من 20 نقطة وبروتوكولات تضارب المصالح.",
+        "badge": "الخطوة 3"
+      },
+      "voting": {
+        "title": "التصويت العام",
+        "subtitle": "للناخبين",
+        "description": "نقاط مشاركة AGC ونوافذ تصويت الذهبية والبلو غارنيت.",
+        "badge": "الخطوة 4"
+      }
+    }
+  },
+  "watchSection": {
+    "title": "شاهد وابقَ مشاركاً",
+    "description": "شاهد العروض الرسمية لتبقى مطلعاً ومشاركاً في دورة الجوائز.",
+    "exploreMediaHub": "استكشاف مركز الوسائط",
+    "channels": {
+      "nesaTv": {
+        "name": "NESA Africa TV",
+        "description": "عروض الجوائز الرسمية"
+      },
+      "mediaHub": {
+        "name": "مركز الوسائط",
+        "description": "أبرز الأحداث والمقابلات"
+      },
+      "liveEvents": {
+        "name": "أحداث مباشرة",
+        "description": "بث الحفلات والعروض الخاصة"
+      }
+    }
+  },
+  "judgesSection": {
+    "badge": "لجنتنا الموقرة",
+    "title": "تعرف على",
+    "titleHighlight": "حكامنا المتميزين",
+    "description": "في NESA-Africa، تجمع لجنة التحكيم لدينا قادة التعليم والمبتكرين والمحسنين وصناع السياسات والخبراء.",
+    "stats": {
+      "expertJudges": "حكام خبراء",
+      "categories": "فئات",
+      "subCategories": "فئات فرعية",
+      "transparency": "شفافية"
+    },
+    "applyJudge": "تقدم كحكم",
+    "checkStatus": "تحقق من الحالة",
+    "learnMore": "اعرف المزيد"
+  },
+  "mediaShowcase": {
+    "title": "شاهد، استمع",
+    "titleHighlight": "وشارك",
+    "description": "ابقَ متصلاً عبر الوسائط الرسمية والبث المباشر وموسيقى NESA Africa.",
+    "officialMusic": "موسيقى رسمية",
+    "listenDownload": "استمع وحمّل",
+    "exploreMediaHub": "استكشاف مركز الوسائط"
+  },
+  "championsDirectory": {
+    "badge": "دليل أبطال التعليم",
+    "title": "الاحتفاء بـ",
+    "titleHighlight": "أبطال التعليم في أفريقيا",
+    "description": "اكتشف المعلمين والمبتكرين والمؤسسات الرائعة التي تحول التعليم في أفريقيا.",
+    "exploreDirectory": "استكشاف الدليل",
+    "nominate": "رشح",
+    "searchPlaceholder": "ابحث بالاسم أو البلد أو الإنجاز...",
+    "sort": "ترتيب",
+    "browseByTrack": "تصفح حسب المسار",
+    "live": "مباشر",
+    "featuredChampions": "أبطال مميزون",
+    "viewAll": "عرض الكل",
+    "recognitionTracks": "مسارات التقدير",
+    "badgeHierarchy": "تسلسل الشارات",
+    "highestToLowest": "الأعلى → الأدنى",
+    "filters": {
+      "all": "الكل",
+      "africa": "أفريقيا",
+      "diaspora": "الشتات",
+      "icon": "أيقونة",
+      "voting": "تصويت",
+      "expert": "خبير"
+    },
+    "sortOptions": {
+      "az": "أ–ي",
+      "popular": "شائع",
+      "recent": "حديث"
+    },
+    "tracks": {
+      "allNominees": "جميع المرشحين",
+      "africaRegional": "أفريقيا الإقليمية",
+      "diaspora": "الشتات",
+      "friendsOfAfrica": "أصدقاء أفريقيا"
+    },
+    "noResults": "لم يتم العثور على مرشحين مطابقين لـ",
+    "clearSearch": "مسح البحث"
+  },
+  "musicSection": {
+    "badge": "موسيقى رسمية",
+    "title": "أغاني NESA Africa",
+    "description": "استمع إلى أناشيدنا الرسمية التي تحتفي بالتعليم في أفريقيا.",
+    "nowPlaying": "قيد التشغيل",
+    "playPreview": "معاينة",
+    "pause": "إيقاف",
+    "watchMusicVideo": "مشاهدة الفيديو",
+    "supportNesa": "دعم NESA Africa و EduAid Africa",
+    "downloadNow": "تحميل",
+    "supportMakesDifference": "دعمكم يصنع الفرق",
+    "everyDownloadHelps": "كل تحميل يساعد في إعادة بناء المدارس وتوفير الموارد التعليمية في أفريقيا."
+  },
   "footer": {
     "tagline": "الاحتفاء بأبطال التعليم في أفريقيا منذ 2010",
     "quickLinks": "روابط سريعة",
