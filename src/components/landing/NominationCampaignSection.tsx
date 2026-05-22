@@ -152,12 +152,12 @@ export function NominationCampaignSection() {
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.2 }}
             className="rounded-2xl border border-gold/20 bg-charcoal/70 p-5 sm:p-6 backdrop-blur"
-            aria-label="Africa, who is your education champion?"
+            aria-label="Africa, who is your education changemaker?"
           >
             <div className="flex items-center gap-2 text-gold">
               <Megaphone className="h-5 w-5" />
               <span className="font-display text-lg sm:text-xl font-semibold">
-                Africa, who is your education champion?
+                Africa, Who Is Your Education Changemaker?
               </span>
             </div>
             <p className="mt-2 text-sm text-ivory/70">
@@ -177,10 +177,11 @@ export function NominationCampaignSection() {
             </ul>
 
             <p className="mt-4 text-sm text-ivory/70">
-              Put their name forward.{" "}
-              <span className="text-gold">Nominate them today</span> and earn
-              free voting points. Your nomination helps spotlight real education
-              impact across Africa and the diaspora.
+              From classrooms to communities, education changemakers are
+              everywhere.{" "}
+              <span className="text-gold">Nominate a Changemaker Now</span> and
+              earn AGC voting points to support real education impact across
+              Africa and the diaspora.
             </p>
           </motion.aside>
         </div>
