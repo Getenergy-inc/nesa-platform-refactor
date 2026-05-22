@@ -91,11 +91,11 @@ export function NominationCampaignSection() {
           transition={{ duration: 0.6, delay: 0.05 }}
           className="mt-5 text-center font-display text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight text-ivory"
         >
-          Nominate an African Education{" "}
+          Don't Just Clap for{" "}
           <span className="bg-gradient-to-r from-gold via-amber-300 to-gold bg-clip-text text-transparent">
-            Social Impact Champion
-          </span>{" "}
-          Today
+            Education Changemakers
+          </span>
+          . Nominate Them.
         </motion.h2>
 
         {/* ── Subheadline */}
@@ -106,8 +106,8 @@ export function NominationCampaignSection() {
           transition={{ duration: 0.6, delay: 0.1 }}
           className="mt-4 text-center text-base sm:text-lg text-gold/90 max-w-3xl mx-auto"
         >
-          Earn free voting points and help celebrate the people transforming
-          education across Africa.
+          Your mentor. Your school founder. Your NGO leader. Your innovator.
+          Your education impact hero.
         </motion.p>
 
         {/* ── Body */}
@@ -120,28 +120,27 @@ export function NominationCampaignSection() {
             className="space-y-4 text-ivory/80 text-[15px] sm:text-base leading-relaxed"
           >
             <p>
-              Across Africa and the diaspora, thousands of educators, innovators,
-              school leaders, NGOs, volunteers, advocates, and education supporters
-              are changing lives every day. <span className="text-ivory">Now is the time to recognize them.</span>
+              Across Africa and the diaspora, changemakers are transforming
+              education through advocacy, innovation, funding, infrastructure,
+              mentorship, technology, policy, community action, and social
+              impact. <span className="text-ivory">Now is the time to recognise them.</span>
             </p>
             <p>
-              Nominate a deserving education champion today and earn free voting
-              points to support your favourite nominees when voting opens. Whether
-              they are Africans in Africa, Africans in the diaspora, or Friends of
-              Africa contributing to education development —{" "}
               <span className="text-gold">NESA-Africa</span> gives the public a
-              platform to celebrate real impact.
+              platform to recognise, celebrate, and amplify the people and
+              institutions advancing education across Africa — whether they are
+              Africans in Africa, Africans in the diaspora, or Friends of Africa
+              supporting education development.
             </p>
 
             {/* Banner line */}
             <div className="mt-2 rounded-xl border border-gold/30 bg-gold/5 px-4 py-3 sm:px-5 sm:py-4">
               <p className="font-display text-lg sm:text-xl font-semibold text-gold">
-                Nominate. Earn Voting Points. Celebrate Education Impact.
+                Nominate. Earn AGC. Celebrate Education Impact.
               </p>
               <p className="mt-1 text-sm text-ivory/70">
-                Nominate an African education social impact champion today and
-                earn free voting points to support outstanding changemakers when
-                voting begins.
+                Nominate a changemaker today and earn AGC voting points to
+                support your favourite nominees when voting opens.
               </p>
             </div>
           </motion.div>
