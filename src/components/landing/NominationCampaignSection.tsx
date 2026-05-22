@@ -241,20 +241,22 @@ export function NominationCampaignSection() {
           className="mt-12 rounded-2xl border border-gold/20 bg-gradient-to-br from-charcoal-light/80 to-charcoal/80 p-6 sm:p-8 text-center"
         >
           <p className="font-display text-lg sm:text-xl text-ivory">
-            NESA-Africa is not just an award.
+            More Than an Award — A Continental Changemaker Movement.
           </p>
           <p className="mt-2 text-sm sm:text-base text-ivory/70 max-w-3xl mx-auto">
-            It is a public movement to recognize, celebrate and amplify the
-            people building the future of education in Africa.
+            NESA-Africa is a continental movement recognising changemakers,
+            institutions, and organisations advancing education across Africa
+            and the diaspora. Public recognition. Continental visibility.
+            Community engagement. Education impact storytelling.
           </p>
           <p className="mt-4 font-display text-base sm:text-lg text-gold">
-            Start today: nominate a champion and earn your free voting points.
+            Nominate a changemaker today and earn your AGC voting points.
           </p>
           <div className="mt-5 flex flex-wrap justify-center gap-3">
             <Button asChild size="lg" className="bg-gold text-charcoal hover:bg-gold/90">
               <Link to="/nominate">
                 <Trophy className="mr-2 h-4 w-4" />
-                Nominate a Champion
+                Nominate a Changemaker
               </Link>
             </Button>
             <Button
@@ -265,7 +267,7 @@ export function NominationCampaignSection() {
             >
               <Link to="/earn-agc">
                 <Coins className="mr-2 h-4 w-4" />
-                Earn Voting Points
+                Earn AGC Voting Points
               </Link>
             </Button>
           </div>
