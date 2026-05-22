@@ -3,6 +3,8 @@
 
 import { lazy } from "react";
 import { Helmet } from "react-helmet-async";
+import { useTranslation } from "react-i18next";
+import { LocalizedSEO } from "@/components/seo/LocalizedSEO";
 
 import { TrophyHeroSection } from "@/components/nesa/TrophyHeroSection";
 import { TrustLogosStrip } from "@/components/nesa/TrustLogosStrip";
