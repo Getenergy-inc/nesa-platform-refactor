@@ -104,16 +104,32 @@ export function TrophyHeroSection() {
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.5 }}
-              className="text-gold/90 text-sm font-semibold mb-3 tracking-wide"
+              className="text-gold/90 text-sm font-semibold mb-4 tracking-wide"
             >
               {t("landing.trophyHero.tagline")}
             </motion.p>
 
+            {/* Ecosystem block — premium honourees framing */}
+            <motion.div
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.55 }}
+              className="mb-5 flex flex-col items-center lg:items-start"
+            >
+              <span className="text-[10px] sm:text-xs font-semibold uppercase tracking-[0.22em] text-gold/80">
+                {t("landing.trophyHero.ecosystemKicker")}
+              </span>
+              <span className="mt-1 font-display text-base sm:text-lg text-white/90">
+                {t("landing.trophyHero.ecosystemTitle")}
+              </span>
+              <span className="mt-2 h-px w-16 bg-gradient-to-r from-gold/60 to-transparent" />
+            </motion.div>
+
             <motion.p
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.55 }}
-              className="text-white/85 text-sm sm:text-base mb-6 max-w-xl mx-auto lg:mx-0 leading-relaxed"
+              transition={{ duration: 0.5, delay: 0.6 }}
+              className="text-white/80 text-sm sm:text-[15px] mb-6 max-w-xl mx-auto lg:mx-0 leading-relaxed"
             >
               {t("landing.trophyHero.valueProposition")}
             </motion.p>
