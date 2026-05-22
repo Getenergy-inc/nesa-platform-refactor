@@ -45,6 +45,12 @@ import yoPages from './yo/pages.json';
 import yoNomination from './yo/nomination.json';
 import yoDashboard from './yo/dashboard.json';
 
+// Igbo
+import igCommon from './ig/common.json';
+import igPages from './ig/pages.json';
+import igNomination from './ig/nomination.json';
+import igDashboard from './ig/dashboard.json';
+
 // Amharic
 import amCommon from './am/common.json';
 import amPages from './am/pages.json';
