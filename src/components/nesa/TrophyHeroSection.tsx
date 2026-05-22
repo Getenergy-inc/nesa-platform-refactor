@@ -1,4 +1,4 @@
-import { Trophy, ArrowRight, Sparkles, Users, Globe, Calendar, Coins, LayoutGrid } from "lucide-react";
+import { Trophy, ArrowRight, Sparkles, Users, Globe, Calendar, Coins, LayoutGrid, Search } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { Button } from "@/components/ui/button";
@@ -146,6 +146,16 @@ export function TrophyHeroSection() {
                 >
                   <Coins className="h-5 w-5" />
                   {t("landing.trophyHero.voteWithAGC")}
+                </Button>
+              </Link>
+              <Link to="/nominees">
+                <Button
+                  size="default"
+                  variant="outline"
+                  className="w-full sm:w-auto border-gold/30 text-white/90 hover:text-gold hover:bg-gold/10 hover:border-gold/60 rounded-full px-5 gap-2 h-10 text-sm transition-colors focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2 focus-visible:ring-offset-charcoal group"
+                >
+                  <Search className="h-5 w-5 group-hover:scale-110 transition-transform" />
+                  Explore Existing Nominees
                 </Button>
               </Link>
               <Link to="/categories">
