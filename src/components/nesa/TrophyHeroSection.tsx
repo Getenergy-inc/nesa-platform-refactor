@@ -12,6 +12,7 @@ import stageBackdropVideo from "@/assets/nesa-stage-backdrop-motion.mp4";
 import stageBackdropFallback from "@/assets/nesa-stage-backdrop.jpg";
 import blueGarnetTrophyIcon from "@/assets/blue-garnet-trophy-icon.png";
 import blueGarnetTrophyWinners from "@/assets/blue-garnet-trophy-winners.png";
+import { HeroCTAStack } from "@/components/nesa/HeroCTAStack";
 
 const CAROUSEL_ITEMS = ["trophy-icon", "trophy-winners", "logo"] as const;
 type CarouselItem = typeof CAROUSEL_ITEMS[number];
