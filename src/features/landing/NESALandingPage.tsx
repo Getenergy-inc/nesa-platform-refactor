@@ -95,9 +95,9 @@ export function NESALandingPage() {
           <BePartOfMovementSection />
         </LazySection>
 
-        {/* 10. WEAR THE MOVEMENT — merchandise */}
+        {/* 10. BUY MERCHANDISE — official NESA-Africa shop */}
         <LazySection>
-          <WearTheMovementSection />
+          <MerchandiseShowcase />
         </LazySection>
 
         {/* 11. FEATURED VIDEOS */}
