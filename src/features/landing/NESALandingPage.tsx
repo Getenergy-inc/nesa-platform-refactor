@@ -30,7 +30,7 @@ const SponsorsSection = lazy(() => import("@/components/nesa/SponsorsSection").t
 const FinalCTASection = lazy(() => import("@/components/nesa/FinalCTASection").then(m => ({ default: m.FinalCTASection })));
 const HomepageGalleryTeaser = lazy(() => import("@/components/gallery/HomepageGalleryTeaser").then(m => ({ default: m.HomepageGalleryTeaser })));
 const CampaignParticipationSlider = lazy(() => import("@/components/landing/CampaignParticipationSlider").then(m => ({ default: m.CampaignParticipationSlider })));
-const WearTheMovementSection = lazy(() => import("@/components/landing/WearTheMovementSection").then(m => ({ default: m.WearTheMovementSection })));
+const MerchandiseShowcase = lazy(() => import("@/components/nesa/MerchandiseShowcase").then(m => ({ default: m.MerchandiseShowcase })));
 
 export function NESALandingPage() {
   const { currentEdition } = useSeason();
@@ -95,9 +95,9 @@ export function NESALandingPage() {
           <BePartOfMovementSection />
         </LazySection>
 
-        {/* 10. WEAR THE MOVEMENT — merchandise */}
+        {/* 10. BUY MERCHANDISE — official NESA-Africa shop */}
         <LazySection>
-          <WearTheMovementSection />
+          <MerchandiseShowcase />
         </LazySection>
 
         {/* 11. FEATURED VIDEOS */}
