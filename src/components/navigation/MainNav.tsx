@@ -160,6 +160,13 @@ function MobileNav({ onOpenCVOMessage }: { onOpenCVOMessage: () => void }) {
   const location = useLocation();
   const { user, signOut } = useAuth();
 
+  const mobileOrdered = [...MAIN_NAV].sort(
+    (a, b) =>
+      MAIN_NAV_MOBILE_ORDER.indexOf(a.label) - MAIN_NAV_MOBILE_ORDER.indexOf(b.label),
+  );
+
+
+
   const toggleExpanded = (href: string) => {
     setExpandedItems((prev) =>
       prev.includes(href) ? prev.filter((h) => h !== href) : [...prev, href],
