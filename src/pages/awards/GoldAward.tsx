@@ -256,8 +256,6 @@ export default function GoldAward() {
           description="3 categories honoring Africa\x27s education impact through Sports, Music, and Social Media."
         />
 
-        {/* Certificate Gallery */}
-        <CertificateGallery />
 
         {/* CTA */}
         <section className="bg-gradient-to-b from-charcoal to-amber-900/20 py-16 lg:py-24">

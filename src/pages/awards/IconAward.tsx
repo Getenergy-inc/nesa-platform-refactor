@@ -211,8 +211,6 @@ export default function IconAward() {
           description="3 subcategories recognising distinct dimensions of lifetime contribution to African education."
         />
 
-        {/* Certificate Gallery */}
-        <CertificateGallery />
 
         {/* CTA */}
         <section className="bg-charcoal py-16 lg:py-24">
