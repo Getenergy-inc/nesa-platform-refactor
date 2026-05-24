@@ -61,10 +61,8 @@ function DesktopNav({ onOpenCVOMessage }: { onOpenCVOMessage: () => void }) {
     <NavigationMenu className="hidden lg:flex w-full min-w-0">
       <NavigationMenuList className="px-1 gap-0.5">
         {MAIN_NAV.map((item) => (
-          item.label === "Earn AGC" ? (
-            <EarnAGCNavItem key={item.href} />
-          ) : (
           <NavigationMenuItem key={item.href} className="shrink-0">
+
             {item.children ? (
               <>
                 <NavigationMenuTrigger className="bg-transparent text-white/90 hover:text-gold hover:bg-gold/10 data-[state=open]:bg-gold/10 data-[state=open]:text-gold h-8 xl:h-9 px-2 xl:px-3 text-[11px] xl:text-sm leading-none">
