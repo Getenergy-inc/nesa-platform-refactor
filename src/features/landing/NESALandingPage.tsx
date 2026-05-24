@@ -31,6 +31,7 @@ const FinalCTASection = lazy(() => import("@/components/nesa/FinalCTASection").t
 const HomepageGalleryTeaser = lazy(() => import("@/components/gallery/HomepageGalleryTeaser").then(m => ({ default: m.HomepageGalleryTeaser })));
 const NomineeDiscoverySwitcher = lazy(() => import("@/components/nominees/NomineeDiscoverySwitcher").then(m => ({ default: m.NomineeDiscoverySwitcher })));
 const AboutNESASection = lazy(() => import("@/components/nesa/AboutNESASection").then(m => ({ default: m.AboutNESASection })));
+const PoweredByVolunteersSection = lazy(() => import("@/components/nesa/PoweredByVolunteersSection").then(m => ({ default: m.PoweredByVolunteersSection })));
 
 
 export function NESALandingPage() {
@@ -89,6 +90,11 @@ export function NESALandingPage() {
         {/* About NESA-Africa 2026 — EDI Matrix, SDG 4 & AU Agenda 2063 */}
         <LazySection>
           <AboutNESASection />
+        </LazySection>
+
+        {/* Powered by Volunteers — community conversion funnel */}
+        <LazySection>
+          <PoweredByVolunteersSection />
         </LazySection>
 
         {/* Trust supporting Final CTA */}

@@ -24,7 +24,7 @@ export function NESAFooter() {
   return (
     <footer className="bg-charcoal border-t border-gold/20 pt-12 pb-20 lg:pb-6">
       <div className="container">
-        <div className="grid md:grid-cols-3 gap-8 mb-8">
+        <div className="grid md:grid-cols-4 gap-8 mb-8">
           {/* Brand */}
           <div className="text-center md:text-left">
             <div className="flex items-center gap-3 justify-center md:justify-start mb-4">
@@ -68,6 +68,17 @@ export function NESAFooter() {
                   {link.label}
                 </Link>
               ))}
+            </nav>
+          </div>
+
+          {/* Community */}
+          <div className="text-center">
+            <h4 className="text-white font-semibold mb-4">Community</h4>
+            <nav className="flex flex-col gap-2 text-sm">
+              <Link to="/volunteer" className="text-white/60 hover:text-gold transition-colors">Become a Volunteer</Link>
+              <Link to="/volunteers" className="text-white/60 hover:text-gold transition-colors">Meet Our Volunteers</Link>
+              <Link to="/join-local-chapter" className="text-white/60 hover:text-gold transition-colors">Join a Local Chapter</Link>
+              <Link to="/ambassadors" className="text-white/60 hover:text-gold transition-colors">Apply as Ambassador</Link>
             </nav>
           </div>
 
