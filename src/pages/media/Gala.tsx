@@ -7,6 +7,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { CountdownTimer } from "@/components/nesa/CountdownTimer";
 import { BreadcrumbJsonLd } from "@/components/seo/BreadcrumbJsonLd";
+import { VolunteerCTABanner } from "@/components/volunteers/VolunteerCTABanner";
 import {
   ArrowLeft,
   ArrowRight,
