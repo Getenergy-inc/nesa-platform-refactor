@@ -249,6 +249,7 @@ function CategoryCard({ cat, index }: { cat: CategoryEntry; index: number }) {
           <Link to={secondaryHref}>{secondaryLabel}</Link>
         </Button>
       </div>
+      </div>
     </motion.article>
   );
 }
