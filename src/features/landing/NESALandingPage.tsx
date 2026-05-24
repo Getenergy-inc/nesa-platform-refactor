@@ -77,6 +77,22 @@ export function NESALandingPage() {
           <EcosystemCarousel />
         </LazySection>
 
+        {/* 5b. BROWSE BY AWARD CATEGORY — reusable carousel from /nominees */}
+        <LazySection>
+          <section className="bg-charcoal py-10 md:py-14">
+            <div className="container">
+              <CategoryDiscoveryGrid
+                layout="carousel"
+                limit={10}
+                seeAllHref="/nominees"
+                heading="Browse Nominees by Award Category"
+                subheading="Pick an award track to explore its nominees, vote in Blue Garnet, or re-nominate a champion."
+              />
+            </div>
+          </section>
+        </LazySection>
+
+
         {/* 6. FEATURED AWARD CATEGORIES */}
         <LazySection>
           <AwardPillarsGrid />
