@@ -7,18 +7,26 @@ import { Link, useNavigate } from "react-router-dom";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { MapPin, RotateCcw } from "lucide-react";
+import { MapPin, RotateCcw, Vote, ArrowRight } from "lucide-react";
 import { NomineeAvatar } from "@/components/nominees/NomineeAvatar";
 import type { EnrichedDatabaseNominee } from "@/hooks/useNominees";
+import { getCategoryTier, getSecondaryCtaHref } from "@/config/nomineeCategories";
 
 interface LandingNomineeCardProps {
   nominee: EnrichedDatabaseNominee;
   isBlueGarnet?: boolean;
 }
 
-export function LandingNomineeCard({ nominee, isBlueGarnet = false }: LandingNomineeCardProps) {
+export function LandingNomineeCard({ nominee, isBlueGarnet: isBlueGarnetProp }: LandingNomineeCardProps) {
   const navigate = useNavigate();
   const isOrg = nominee.imageType === "logo";
+  // Derive Blue Garnet from category registry, allow prop override.
+  const isBlueGarnet = isBlueGarnetProp ?? getCategoryTier(nominee.categorySlug) === "blue_garnet";
+  const profileHref = `/nominees/${encodeURIComponent(nominee.slug)}`;
+  const secondaryHref = isBlueGarnet
+    ? `/vote?nominee=${encodeURIComponent(nominee.slug)}`
+    : getSecondaryCtaHref(nominee.categorySlug);
+
 
   return (
     <>
@@ -78,15 +86,35 @@ export function LandingNomineeCard({ nominee, isBlueGarnet = false }: LandingNom
               {nominee.achievement || "Contributing to the advancement of education across Africa."}
             </p>
 
-            <div className="pt-3 mt-auto border-t border-gold/10">
+            <div className="pt-3 mt-auto border-t border-gold/10 flex flex-col gap-2">
+              {/* Primary: View Profile */}
               <Button
                 asChild
                 size="sm"
-                className="w-full bg-white hover:bg-white/95 text-gold border border-gold/50 font-semibold"
+                className="w-full bg-gold hover:bg-gold/90 text-charcoal font-bold rounded-full"
               >
-                <Link to={`/nominees/${encodeURIComponent(nominee.slug)}`}>
-                  <RotateCcw className="w-4 h-4 mr-2" />
-                  Re-nominate
+                <Link to={profileHref}>
+                  View Profile <ArrowRight className="w-3.5 h-3.5 ml-1.5" />
+                </Link>
+              </Button>
+              {/* Secondary: Vote (Blue Garnet) or Re-nominate (all others) */}
+              <Button
+                asChild
+                size="sm"
+                variant="outline"
+                onClick={(e) => e.stopPropagation()}
+                className={`w-full rounded-full font-semibold ${
+                  isBlueGarnet
+                    ? "border-blue-300/50 text-blue-100 hover:bg-blue-400/10"
+                    : "border-gold/40 text-gold hover:bg-gold/10"
+                }`}
+              >
+                <Link to={secondaryHref}>
+                  {isBlueGarnet ? (
+                    <><Vote className="w-4 h-4 mr-2" /> Vote</>
+                  ) : (
+                    <><RotateCcw className="w-4 h-4 mr-2" /> Re-nominate</>
+                  )}
                 </Link>
               </Button>
             </div>
@@ -97,3 +125,4 @@ export function LandingNomineeCard({ nominee, isBlueGarnet = false }: LandingNom
     </>
   );
 }
+
