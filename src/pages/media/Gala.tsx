@@ -7,6 +7,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { CountdownTimer } from "@/components/nesa/CountdownTimer";
 import { BreadcrumbJsonLd } from "@/components/seo/BreadcrumbJsonLd";
+import { VolunteerCTABanner } from "@/components/volunteers/VolunteerCTABanner";
 import {
   ArrowLeft,
   ArrowRight,
@@ -705,6 +706,7 @@ export default function Gala() {
             </motion.div>
           </div>
         </section>
+        <VolunteerCTABanner headline="Help us deliver the 2026 Gala" subline="Join the Gala volunteer team — production, hospitality, media, logistics." />
       </div>
     </>
   );

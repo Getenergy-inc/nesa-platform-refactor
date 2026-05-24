@@ -10,6 +10,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import {
   Award, Search, ChevronRight, GraduationCap, Trophy, Crown, Star, Shield, Globe,
 } from "lucide-react";
+import { VolunteerCTABanner } from "@/components/volunteers/VolunteerCTABanner";
 import {
   NESA_CATEGORIES,
   getCategoriesGrouped,
@@ -263,6 +264,7 @@ export default function Categories() {
               </Button>
             </div>
           </div>
+          <VolunteerCTABanner />
         </main>
       </div>
     </>
