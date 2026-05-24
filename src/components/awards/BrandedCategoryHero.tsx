@@ -10,7 +10,18 @@ import csrImg from "@/assets/pathway-cards/csr.jpg";
 import influencerImg from "@/assets/pathway-cards/influencer.jpg";
 import grantsImg from "@/assets/pathway-cards/grants.jpg";
 
-export type BrandedCategoryTheme = "legacy" | "corporate" | "influencer" | "global";
+export type BrandedCategoryTheme =
+  | "legacy"
+  | "corporate"
+  | "influencer"
+  | "global"
+  | "stem"
+  | "ngo"
+  | "media"
+  | "regional"
+  | "platinum"
+  | "bluegarnet"
+  | "diaspora";
 
 type ThemeTokens = {
   eyebrow: string;
