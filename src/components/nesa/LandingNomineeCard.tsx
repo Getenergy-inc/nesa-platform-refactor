@@ -7,18 +7,26 @@ import { Link, useNavigate } from "react-router-dom";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { MapPin, RotateCcw } from "lucide-react";
+import { MapPin, RotateCcw, Vote, ArrowRight } from "lucide-react";
 import { NomineeAvatar } from "@/components/nominees/NomineeAvatar";
 import type { EnrichedDatabaseNominee } from "@/hooks/useNominees";
+import { getCategoryTier, getSecondaryCtaHref } from "@/config/nomineeCategories";
 
 interface LandingNomineeCardProps {
   nominee: EnrichedDatabaseNominee;
   isBlueGarnet?: boolean;
 }
 
-export function LandingNomineeCard({ nominee, isBlueGarnet = false }: LandingNomineeCardProps) {
+export function LandingNomineeCard({ nominee, isBlueGarnet: isBlueGarnetProp }: LandingNomineeCardProps) {
   const navigate = useNavigate();
   const isOrg = nominee.imageType === "logo";
+  // Derive Blue Garnet from category registry, allow prop override.
+  const isBlueGarnet = isBlueGarnetProp ?? getCategoryTier(nominee.categorySlug) === "blue_garnet";
+  const profileHref = `/nominees/${encodeURIComponent(nominee.slug)}`;
+  const secondaryHref = isBlueGarnet
+    ? `/vote?nominee=${encodeURIComponent(nominee.slug)}`
+    : getSecondaryCtaHref(nominee.categorySlug);
+
 
   return (
     <>
