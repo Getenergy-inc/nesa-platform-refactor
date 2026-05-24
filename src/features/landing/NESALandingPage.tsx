@@ -31,6 +31,8 @@ const FinalCTASection = lazy(() => import("@/components/nesa/FinalCTASection").t
 const HomepageGalleryTeaser = lazy(() => import("@/components/gallery/HomepageGalleryTeaser").then(m => ({ default: m.HomepageGalleryTeaser })));
 const CampaignParticipationSlider = lazy(() => import("@/components/landing/CampaignParticipationSlider").then(m => ({ default: m.CampaignParticipationSlider })));
 const MerchandiseShowcase = lazy(() => import("@/components/nesa/MerchandiseShowcase").then(m => ({ default: m.MerchandiseShowcase })));
+const CategoryDiscoveryGrid = lazy(() => import("@/components/nominees/CategoryDiscoveryGrid").then(m => ({ default: m.CategoryDiscoveryGrid })));
+
 
 export function NESALandingPage() {
   const { currentEdition } = useSeason();
@@ -74,6 +76,22 @@ export function NESALandingPage() {
         <LazySection>
           <EcosystemCarousel />
         </LazySection>
+
+        {/* 5b. BROWSE BY AWARD CATEGORY — reusable carousel from /nominees */}
+        <LazySection>
+          <section className="bg-charcoal py-10 md:py-14">
+            <div className="container">
+              <CategoryDiscoveryGrid
+                layout="carousel"
+                limit={10}
+                seeAllHref="/nominees"
+                heading="Browse Nominees by Award Category"
+                subheading="Pick an award track to explore its nominees, vote in Blue Garnet, or re-nominate a champion."
+              />
+            </div>
+          </section>
+        </LazySection>
+
 
         {/* 6. FEATURED AWARD CATEGORIES */}
         <LazySection>
