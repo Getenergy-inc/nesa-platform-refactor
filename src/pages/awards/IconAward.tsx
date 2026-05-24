@@ -231,6 +231,7 @@ export default function IconAward() {
             </Button>
           </div>
         </section>
+        <NESAFooter />
       </div>
     </>
   );
