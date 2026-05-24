@@ -1,600 +1,286 @@
+import { useMemo, useState } from "react";
 import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
-import { useMemo, useState } from "react";
 import { motion } from "framer-motion";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
 import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import {
-  Heart,
-  MapPin,
-  Users,
-  Globe,
-  ArrowRight,
-  Award,
-  Sparkles,
-  Search,
-  Filter,
-  Linkedin,
-  Twitter,
-  Globe2,
-  Quote,
-  Star,
-  ShieldCheck,
+  Users, Search, MapPin, Trophy, Sparkles, ArrowRight, Heart,
+  Globe2, BadgeCheck, Share2, Crown,
 } from "lucide-react";
-import { CONTRIBUTORS, type Contributor } from "@/data/contributors";
+import { Card } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Badge } from "@/components/ui/badge";
+import {
+  Select, SelectContent, SelectItem, SelectTrigger, SelectValue,
+} from "@/components/ui/select";
+import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { useVolunteers } from "@/hooks/useVolunteers";
+import { TEAM_LABELS, type TeamSlug, tierFor, TIER_LABEL } from "@/lib/volunteersData";
 
-// CMS-ready volunteer model — derived from approved Contributors with displayPermission ON.
-type VolunteerStatus = "active" | "alumni";
-interface Volunteer extends Contributor {
-  team: string;
-  status: VolunteerStatus;
-  featured: boolean;
-  displayPermission: true;
-}
-
-// Team mapping derived from contribution areas — single source of truth
-const TEAMS = [
-  "Technology Team",
-  "Social Media Team",
-  "Data & Research Team",
-  "Media / TV Team",
-  "Design & Creative Team",
-  "Partnership Team",
-  "Local Chapter Team",
-  "Ambassador Team",
-  "Event / Gala Team",
-  "Admin & Coordination Team",
-] as const;
-
-function deriveTeam(c: Contributor): string {
-  const a = c.contributions?.[0] ?? "";
-  const r = c.role;
-  if (r === "Ambassador" || r === "Regional Ambassador") return "Ambassador Team";
-  if (r === "LCP") return "Local Chapter Team";
-  if (["Data Engineer", "Data Scientist", "Data Analyst"].includes(r)) return "Data & Research Team";
-  if (["TV Presenter", "Webinar Host"].includes(r)) return "Media / TV Team";
-  if (["Web Development", "Mobile / PWA", "Technology & DevOps"].includes(a)) return "Technology Team";
-  if (["UI/UX Design", "Graphic Design", "Logo & Brand Identity", "Photography"].includes(a)) return "Design & Creative Team";
-  if (["Social Media", "Content Writing", "Public Relations"].includes(a)) return "Social Media Team";
-  if (["Videography & Editing", "TV Production & Hosting", "Webinar Production"].includes(a)) return "Media / TV Team";
-  if (["Partnerships", "Fundraising"].includes(a)) return "Partnership Team";
-  if (["Chapter Coordination", "Regional Leadership", "Community Outreach"].includes(a)) return "Local Chapter Team";
-  if (["Event Production"].includes(a)) return "Event / Gala Team";
-  if (["Legal & Compliance", "Finance & Operations", "Mentorship"].includes(a)) return "Admin & Coordination Team";
-  if (["Research & Nominee Vetting", "Data Analysis & Reporting"].includes(a)) return "Data & Research Team";
-  return "Admin & Coordination Team";
-}
-
-// Build CMS-ready volunteer dataset
-const VOLUNTEERS: Volunteer[] = CONTRIBUTORS.filter(
-  (c) =>
-    !["Judge", "BOA", "BOT", "BOD", "Partner"].includes(c.role)
-).map((c, i) => ({
-  ...c,
-  team: deriveTeam(c),
-  status: c.yearEnd && c.yearEnd < 2025 ? "alumni" : "active",
-  featured: i < 8 || (c.role === "Regional Ambassador" || c.role === "LCP"),
-  displayPermission: true as const,
-}));
-
-const STORIES = [
-  {
-    name: "Adaeze N.",
-    country: "Nigeria",
-    role: "Content Volunteer",
-    quote:
-      "NESA-Africa gave me a stage to use storytelling for education impact. I found purpose here.",
-  },
-  {
-    name: "Kwame O.",
-    country: "Ghana",
-    role: "Local Chapter Lead",
-    quote:
-      "Coordinating my chapter taught me that recognition is one of the most powerful tools for change.",
-  },
-  {
-    name: "Amina S.",
-    country: "Kenya",
-    role: "Data & Research",
-    quote:
-      "Every dataset we clean becomes a fairer chance for an African educator to be seen.",
-  },
-];
-
-const FADE = {
-  initial: { opacity: 0, y: 18 },
+const fadeUp = {
+  initial: { opacity: 0, y: 24 },
   whileInView: { opacity: 1, y: 0 },
-  viewport: { once: true, amount: 0.2 },
-  transition: { duration: 0.55, ease: [0.22, 1, 0.36, 1] as const },
+  viewport: { once: true, margin: "-60px" },
+  transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] as const },
 };
 
+function CounterCard({ label, value, icon: Icon }: { label: string; value: number | string; icon: typeof Users }) {
+  return (
+    <motion.div {...fadeUp}>
+      <Card className="border-gold/20 bg-gradient-to-br from-charcoal to-black p-5 text-center hover:border-gold/50 transition">
+        <Icon className="h-6 w-6 text-gold mx-auto mb-2" />
+        <div className="font-playfair text-3xl text-gold font-bold">{value}</div>
+        <div className="text-xs text-white/60 mt-1 uppercase tracking-wider">{label}</div>
+      </Card>
+    </motion.div>
+  );
+}
+
 export default function Volunteers() {
-  const [search, setSearch] = useState("");
-  const [team, setTeam] = useState<string>("all");
+  const { volunteers, loading } = useVolunteers();
+  const [q, setQ] = useState("");
   const [country, setCountry] = useState<string>("all");
-  const [region, setRegion] = useState<string>("all");
-  const [status, setStatus] = useState<string>("all");
+  const [team, setTeam] = useState<string>("all");
+  const [status, setStatus] = useState<"all" | "public" | "alumni">("all");
 
   const countries = useMemo(
-    () => Array.from(new Set(VOLUNTEERS.map((v) => v.country).filter(Boolean))).sort() as string[],
-    []
-  );
-  const regions = useMemo(
-    () => Array.from(new Set(VOLUNTEERS.map((v) => v.region).filter(Boolean))).sort() as string[],
-    []
+    () => Array.from(new Set(volunteers.map((v) => v.country).filter(Boolean))).sort() as string[],
+    [volunteers]
   );
 
   const filtered = useMemo(() => {
-    const q = search.trim().toLowerCase();
-    return VOLUNTEERS.filter((v) => {
-      if (team !== "all" && v.team !== team) return false;
+    return volunteers.filter((v) => {
+      if (status !== "all" && v.visibility !== status) return false;
       if (country !== "all" && v.country !== country) return false;
-      if (region !== "all" && v.region !== region) return false;
-      if (status !== "all" && v.status !== status) return false;
-      if (!q) return true;
-      const hay = [
-        v.name,
-        v.country,
-        v.region,
-        v.role,
-        v.team,
-        v.highlight,
-        ...(v.contributions ?? []),
-      ]
-        .join(" ")
-        .toLowerCase();
-      return hay.includes(q);
+      if (team !== "all" && v.teamSlug !== team) return false;
+      if (q) {
+        const needle = q.toLowerCase();
+        if (!`${v.fullName} ${v.role ?? ""} ${v.country ?? ""} ${v.headline ?? ""}`.toLowerCase().includes(needle))
+          return false;
+      }
+      return true;
     });
-  }, [search, team, country, region, status]);
+  }, [volunteers, q, country, team, status]);
 
-  const featured = useMemo(() => VOLUNTEERS.filter((v) => v.featured).slice(0, 8), []);
+  const stats = useMemo(() => ({
+    total: volunteers.length,
+    countries: countries.length,
+    chapters: 10, // hub regions
+    tasks: volunteers.reduce((s, v) => s + v.tasksCompleted, 0),
+    referrals: volunteers.reduce((s, v) => s + v.referralCount, 0),
+    hours: volunteers.length * 12,
+  }), [volunteers, countries.length]);
 
-  const stats = useMemo(() => {
-    const teamsActive = new Set(VOLUNTEERS.map((v) => v.team)).size;
-    const countriesCount = new Set(VOLUNTEERS.map((v) => v.country).filter(Boolean)).size;
-    return [
-      { value: `${VOLUNTEERS.length}+`, label: "Volunteers Onboarded" },
-      { value: `${countriesCount}+`, label: "Countries Represented" },
-      { value: `${teamsActive}`, label: "Teams Active" },
-      { value: "50,000+", label: "Hours Contributed" },
-      { value: "120+", label: "Projects Supported" },
-    ];
-  }, []);
-
-  const byTeam = useMemo(() => {
-    const map = new Map<string, Volunteer[]>();
-    for (const t of TEAMS) map.set(t, []);
-    for (const v of VOLUNTEERS) {
-      if (!map.has(v.team)) map.set(v.team, []);
-      map.get(v.team)!.push(v);
-    }
-    return map;
-  }, []);
+  const featured = useMemo(
+    () => volunteers.filter((v) => v.isFeatured || v.contributionScore > 800).slice(0, 6),
+    [volunteers]
+  );
 
   return (
-    <>
+    <div className="min-h-screen bg-charcoal pb-24">
       <Helmet>
-        <title>Meet Our Volunteers | NESA-Africa 2026</title>
-        <meta
-          name="description"
-          content="Celebrating the people powering NESA-Africa — volunteers, ambassadors, chapter leads, designers, data and media teams across Africa and the diaspora."
-        />
-        <link rel="canonical" href="https://www.nesa.africa/volunteers" />
+        <title>Meet Our Volunteers — NESA-Africa</title>
+        <meta name="description" content="Celebrating the volunteers, ambassadors, technologists, designers, and storytellers powering NESA-Africa across the continent and the diaspora." />
       </Helmet>
 
-      <div className="min-h-screen bg-charcoal">
-        {/* HERO */}
-        <section className="relative overflow-hidden border-b border-gold/10 bg-gradient-to-b from-charcoal via-charcoal to-charcoal/95 py-20 lg:py-28">
-          <div
-            aria-hidden
-            className="pointer-events-none absolute inset-0 opacity-[0.07]"
-            style={{
-              backgroundImage:
-                "radial-gradient(circle at 20% 20%, hsl(var(--gold)) 0, transparent 40%), radial-gradient(circle at 80% 60%, hsl(var(--gold)) 0, transparent 35%)",
-            }}
-          />
-          <div className="container relative mx-auto px-4">
-            <div className="mx-auto max-w-3xl text-center">
-              <motion.div {...FADE} className="mb-4 flex items-center justify-center gap-2">
-                <Heart className="h-5 w-5 text-gold" />
-                <span className="text-xs font-semibold uppercase tracking-[0.2em] text-gold">
-                  The People Behind the Movement
-                </span>
-              </motion.div>
-              <motion.h1
-                {...FADE}
-                transition={{ ...FADE.transition, delay: 0.05 }}
-                className="mb-5 font-display text-4xl font-bold leading-tight text-ivory md:text-6xl"
-              >
-                Meet Our <span className="text-gold">Volunteers</span>
-              </motion.h1>
-              <motion.p
-                {...FADE}
-                transition={{ ...FADE.transition, delay: 0.1 }}
-                className="mb-8 text-base text-ivory/80 md:text-lg"
-              >
-                Celebrating the people contributing their time, skills, creativity and passion
-                to build the <span className="text-gold/90">NESA-Africa 2026</span> movement —
-                across Africa and the diaspora.
-              </motion.p>
-              <motion.div
-                {...FADE}
-                transition={{ ...FADE.transition, delay: 0.15 }}
-                className="flex flex-wrap justify-center gap-3"
-              >
-                <Button asChild size="lg" className="bg-gold text-charcoal hover:bg-gold/90">
-                  <Link to="/volunteer">
-                    <Heart className="mr-2 h-5 w-5" /> Become a Volunteer
-                  </Link>
-                </Button>
-                <Button asChild size="lg" variant="outline" className="border-gold/30 text-gold hover:bg-gold/10">
-                  <Link to="/ambassadors">Apply as Ambassador</Link>
-                </Button>
-                <Button asChild size="lg" variant="outline" className="border-gold/30 text-gold hover:bg-gold/10">
-                  <Link to="/chapters">Join a Local Chapter</Link>
-                </Button>
-              </motion.div>
+      {/* HERO */}
+      <section className="relative overflow-hidden border-b border-gold/20">
+        <div className="absolute inset-0 bg-gradient-to-br from-black via-charcoal to-black" />
+        <div className="absolute inset-0 opacity-30"
+             style={{ backgroundImage: "radial-gradient(circle at 20% 30%, hsl(42 85% 52% / 0.25), transparent 50%), radial-gradient(circle at 80% 70%, hsl(42 85% 52% / 0.15), transparent 50%)" }} />
+        <div className="relative container mx-auto px-4 py-20 md:py-28 text-center">
+          <motion.div {...fadeUp}>
+            <Badge className="bg-gold/20 text-gold border-gold/40 mb-6">
+              <Heart className="h-3 w-3 mr-1" /> Volunteer Ecosystem
+            </Badge>
+            <h1 className="font-playfair text-4xl md:text-6xl text-gold font-bold mb-5 leading-tight">
+              Meet Our Volunteers
+            </h1>
+            <p className="text-base md:text-lg text-white/80 max-w-3xl mx-auto leading-relaxed">
+              Celebrating the contributors building Africa's education movement through technology,
+              storytelling, data, media, partnerships, design, and community action.
+            </p>
+            <div className="flex flex-wrap justify-center gap-3 mt-8">
+              <Button asChild size="lg" className="bg-gold text-black hover:bg-gold/90">
+                <Link to="/volunteer">Become a Volunteer <ArrowRight className="ml-1 h-4 w-4" /></Link>
+              </Button>
+              <Button asChild size="lg" variant="outline" className="border-gold/50 text-gold hover:bg-gold/10">
+                <Link to="/chapters">Join a Local Chapter</Link>
+              </Button>
+              <Button asChild size="lg" variant="ghost" className="text-white/80 hover:text-gold">
+                <Link to="/volunteer-leaderboard"><Trophy className="mr-1 h-4 w-4" /> Leaderboard</Link>
+              </Button>
             </div>
-          </div>
-        </section>
+          </motion.div>
+        </div>
+      </section>
 
-        {/* STATS */}
-        <section className="border-b border-gold/10 bg-charcoal/95 py-10">
-          <div className="container mx-auto px-4">
-            <div className="mx-auto grid max-w-5xl grid-cols-2 gap-6 text-center md:grid-cols-5">
-              {stats.map((s) => (
-                <div key={s.label}>
-                  <div className="font-display text-2xl font-bold text-gold md:text-3xl">{s.value}</div>
-                  <div className="mt-1 text-xs text-ivory/65 md:text-sm">{s.label}</div>
+      {/* STATS */}
+      <section className="container mx-auto px-4 -mt-10 relative z-10">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3 md:gap-4">
+          <CounterCard label="Volunteers" value={stats.total} icon={Users} />
+          <CounterCard label="Countries" value={stats.countries} icon={Globe2} />
+          <CounterCard label="Chapters" value={stats.chapters} icon={MapPin} />
+          <CounterCard label="Tasks Done" value={stats.tasks} icon={BadgeCheck} />
+          <CounterCard label="Referrals" value={stats.referrals} icon={Share2} />
+          <CounterCard label="Hours" value={`${stats.hours}+`} icon={Sparkles} />
+        </div>
+      </section>
+
+      {/* FEATURED */}
+      {featured.length > 0 && (
+        <section className="container mx-auto px-4 mt-16">
+          <motion.div {...fadeUp} className="flex items-center gap-2 mb-5">
+            <Crown className="h-5 w-5 text-gold" />
+            <h2 className="font-playfair text-2xl md:text-3xl text-gold">Featured Contributors</h2>
+          </motion.div>
+          <div className="flex gap-3 overflow-x-auto pb-3 -mx-4 px-4 snap-x">
+            {featured.map((v) => (
+              <Link
+                key={v.id}
+                to={`/volunteers/${v.slug}`}
+                className="snap-start shrink-0 w-44 md:w-52 rounded-xl border border-gold/30 bg-gradient-to-br from-charcoal to-black p-3 hover:border-gold transition"
+              >
+                <div className="aspect-square rounded-lg bg-gold/10 overflow-hidden mb-2">
+                  {v.photoUrl ? (
+                    <img src={v.photoUrl} alt={v.fullName} className="h-full w-full object-cover" loading="lazy" />
+                  ) : (
+                    <div className="h-full w-full flex items-center justify-center text-gold/40">
+                      <Users className="h-12 w-12" />
+                    </div>
+                  )}
                 </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* FEATURED — swipeable on mobile */}
-        <section className="bg-charcoal py-14">
-          <div className="container mx-auto px-4">
-            <div className="mb-6 flex items-end justify-between gap-3">
-              <div>
-                <Badge className="mb-2 border-gold/40 bg-gold/15 text-gold">Featured</Badge>
-                <h2 className="font-display text-2xl font-bold text-ivory md:text-3xl">
-                  Featured Volunteer Contributors
-                </h2>
-              </div>
-              <Star className="hidden h-6 w-6 text-gold/70 md:block" />
-            </div>
-            <div className="-mx-4 flex snap-x snap-mandatory gap-4 overflow-x-auto px-4 pb-3 md:mx-0 md:grid md:grid-cols-3 md:gap-5 md:overflow-visible md:px-0 lg:grid-cols-4">
-              {featured.map((v) => (
-                <VolunteerCard key={v.id} v={v} compact />
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* FILTERS + DIRECTORY */}
-        <section id="directory" className="border-t border-gold/10 bg-charcoal/95 py-14">
-          <div className="container mx-auto px-4">
-            <div className="mb-6">
-              <Badge className="mb-2 border-gold/40 bg-gold/15 text-gold">Directory</Badge>
-              <h2 className="font-display text-2xl font-bold text-ivory md:text-3xl">
-                Volunteer Directory
-              </h2>
-              <p className="mt-2 text-sm text-ivory/65">
-                Search and filter volunteers across teams, countries and regions. Only volunteers
-                with display permission appear publicly.
-              </p>
-            </div>
-
-            {/* Filter bar */}
-            <div className="sticky top-16 z-10 mb-6 rounded-xl border border-gold/15 bg-charcoal-light/80 p-3 backdrop-blur supports-[backdrop-filter]:bg-charcoal-light/60">
-              <div className="grid gap-3 md:grid-cols-12">
-                <div className="relative md:col-span-4">
-                  <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-ivory/50" />
-                  <Input
-                    placeholder="Search name, country, role…"
-                    value={search}
-                    onChange={(e) => setSearch(e.target.value)}
-                    className="border-gold/20 bg-charcoal pl-9 text-ivory placeholder:text-ivory/40"
-                  />
+                <div className="text-sm font-medium text-white truncate">{v.fullName}</div>
+                <div className="text-[10px] text-gold/80 uppercase tracking-wider truncate">
+                  {v.teamSlug ? TEAM_LABELS[v.teamSlug] : v.role}
                 </div>
-                <FilterSelect label="Team" value={team} onChange={setTeam} options={["all", ...TEAMS]} className="md:col-span-2" />
-                <FilterSelect label="Country" value={country} onChange={setCountry} options={["all", ...countries]} className="md:col-span-2" />
-                <FilterSelect label="Region" value={region} onChange={setRegion} options={["all", ...regions]} className="md:col-span-2" />
-                <FilterSelect label="Status" value={status} onChange={setStatus} options={["all", "active", "alumni"]} className="md:col-span-2" />
-              </div>
-              <div className="mt-3 flex items-center justify-between text-xs text-ivory/55">
-                <span className="flex items-center gap-1"><Filter className="h-3.5 w-3.5" /> {filtered.length} of {VOLUNTEERS.length} volunteers</span>
-                {(search || team !== "all" || country !== "all" || region !== "all" || status !== "all") && (
-                  <button
-                    onClick={() => { setSearch(""); setTeam("all"); setCountry("all"); setRegion("all"); setStatus("all"); }}
-                    className="text-gold hover:underline"
-                  >
-                    Clear filters
-                  </button>
-                )}
-              </div>
-            </div>
+                <div className="mt-1.5 text-[10px] text-white/50">{TIER_LABEL[tierFor(v.contributionScore)]}</div>
+              </Link>
+            ))}
+          </div>
+        </section>
+      )}
 
-            {/* Grid */}
-            {filtered.length === 0 ? (
-              <Card className="border-gold/10 bg-charcoal-light/50 p-10 text-center">
-                <p className="text-ivory/70">No volunteers match your filters yet.</p>
-              </Card>
-            ) : (
-              <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-                {filtered.map((v) => (
-                  <VolunteerCard key={v.id} v={v} />
+      {/* FILTERS + DIRECTORY */}
+      <section className="container mx-auto px-4 mt-16">
+        <motion.div {...fadeUp}>
+          <h2 className="font-playfair text-2xl md:text-3xl text-gold mb-4">Volunteer Directory</h2>
+
+          <div className="grid grid-cols-1 md:grid-cols-[1fr_auto_auto_auto] gap-3 mb-4">
+            <div className="relative">
+              <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gold/60" />
+              <Input
+                placeholder="Search name, role, country…"
+                value={q}
+                onChange={(e) => setQ(e.target.value)}
+                className="pl-9 bg-black/40 border-gold/30 text-white placeholder:text-white/40"
+              />
+            </div>
+            <Select value={country} onValueChange={setCountry}>
+              <SelectTrigger className="w-full md:w-44 bg-black/40 border-gold/30 text-white">
+                <SelectValue placeholder="Country" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="all">All countries</SelectItem>
+                {countries.map((c) => <SelectItem key={c} value={c}>{c}</SelectItem>)}
+              </SelectContent>
+            </Select>
+            <Select value={team} onValueChange={setTeam}>
+              <SelectTrigger className="w-full md:w-44 bg-black/40 border-gold/30 text-white">
+                <SelectValue placeholder="Team" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="all">All teams</SelectItem>
+                {(Object.keys(TEAM_LABELS) as TeamSlug[]).map((t) => (
+                  <SelectItem key={t} value={t}>{TEAM_LABELS[t]}</SelectItem>
                 ))}
-              </div>
-            )}
+              </SelectContent>
+            </Select>
+            <Tabs value={status} onValueChange={(v) => setStatus(v as typeof status)}>
+              <TabsList className="bg-black/40 border border-gold/30">
+                <TabsTrigger value="all" className="text-xs data-[state=active]:bg-gold data-[state=active]:text-black">All</TabsTrigger>
+                <TabsTrigger value="public" className="text-xs data-[state=active]:bg-gold data-[state=active]:text-black">Active</TabsTrigger>
+                <TabsTrigger value="alumni" className="text-xs data-[state=active]:bg-gold data-[state=active]:text-black">Alumni</TabsTrigger>
+              </TabsList>
+            </Tabs>
           </div>
-        </section>
 
-        {/* STORIES */}
-        <section className="bg-charcoal py-14">
-          <div className="container mx-auto px-4">
-            <div className="mx-auto mb-8 max-w-2xl text-center">
-              <Badge className="mb-2 border-gold/40 bg-gold/15 text-gold">Stories</Badge>
-              <h2 className="font-display text-2xl font-bold text-ivory md:text-3xl">
-                Why We Volunteer
-              </h2>
-              <p className="mt-2 text-sm text-ivory/65">
-                In their own words — the heart behind NESA-Africa.
-              </p>
-            </div>
-            <div className="grid gap-5 md:grid-cols-3">
-              {STORIES.map((s, i) => (
-                <motion.div key={s.name} {...FADE} transition={{ ...FADE.transition, delay: i * 0.05 }}>
-                  <Card className="h-full border-gold/15 bg-charcoal-light/60">
-                    <CardContent className="p-6">
-                      <Quote className="mb-3 h-6 w-6 text-gold/70" />
-                      <p className="mb-4 text-sm leading-relaxed text-ivory/85">"{s.quote}"</p>
-                      <div className="border-t border-gold/10 pt-3 text-sm">
-                        <div className="font-semibold text-ivory">{s.name}</div>
-                        <div className="text-ivory/60">{s.role} · {s.country}</div>
-                      </div>
-                    </CardContent>
-                  </Card>
-                </motion.div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* TEAM GROUPING */}
-        <section className="border-t border-gold/10 bg-charcoal/95 py-14">
-          <div className="container mx-auto px-4">
-            <div className="mb-8 text-center">
-              <Badge className="mb-2 border-gold/40 bg-gold/15 text-gold">Teams</Badge>
-              <h2 className="font-display text-2xl font-bold text-ivory md:text-3xl">
-                Powered By Contribution Teams
-              </h2>
-            </div>
-            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-              {TEAMS.map((t) => {
-                const list = byTeam.get(t) ?? [];
+          {loading ? (
+            <div className="text-white/60 text-sm py-12 text-center">Loading volunteers…</div>
+          ) : filtered.length === 0 ? (
+            <div className="text-white/60 text-sm py-12 text-center">No volunteers match these filters.</div>
+          ) : (
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+              {filtered.map((v) => {
+                const tier = tierFor(v.contributionScore);
                 return (
-                  <Card key={t} className="border-gold/10 bg-charcoal-light/50 transition-colors hover:border-gold/30">
-                    <CardContent className="p-5">
-                      <div className="mb-3 flex items-center justify-between">
-                        <h3 className="font-display text-lg text-ivory">{t}</h3>
-                        <Badge className="border-gold/30 bg-gold/10 text-gold">{list.length}</Badge>
-                      </div>
-                      <div className="flex -space-x-2">
-                        {list.slice(0, 6).map((v) => (
-                          <Avatar key={v.id} className="h-9 w-9 border-2 border-charcoal-light">
-                            {v.imageUrl && <AvatarImage src={v.imageUrl} alt={v.name} />}
-                            <AvatarFallback className="bg-gold/15 text-xs text-gold">
-                              {initials(v.name)}
-                            </AvatarFallback>
-                          </Avatar>
-                        ))}
-                        {list.length > 6 && (
-                          <div className="flex h-9 w-9 items-center justify-center rounded-full border-2 border-charcoal-light bg-gold/10 text-xs text-gold">
-                            +{list.length - 6}
+                  <motion.div key={v.id} {...fadeUp}>
+                    <Link to={`/volunteers/${v.slug}`}>
+                      <Card className="group h-full border-gold/20 bg-gradient-to-br from-charcoal to-black overflow-hidden hover:border-gold/60 hover:shadow-[0_8px_30px_rgb(212,175,55,0.15)] transition">
+                        <div className="aspect-[4/3] bg-gold/10 overflow-hidden">
+                          {v.photoUrl ? (
+                            <img src={v.photoUrl} alt={v.fullName}
+                                 className="h-full w-full object-cover group-hover:scale-105 transition duration-700" loading="lazy" />
+                          ) : (
+                            <div className="h-full w-full flex items-center justify-center text-gold/30">
+                              <Users className="h-16 w-16" />
+                            </div>
+                          )}
+                        </div>
+                        <div className="p-4">
+                          <div className="flex items-start justify-between gap-2">
+                            <div className="min-w-0">
+                              <div className="font-medium text-white truncate">{v.fullName}</div>
+                              <div className="text-[11px] text-gold/80 uppercase tracking-wider truncate">
+                                {v.teamSlug ? TEAM_LABELS[v.teamSlug] : v.role}
+                              </div>
+                            </div>
+                            {v.badges.includes("verified") && (
+                              <BadgeCheck className="h-4 w-4 text-gold shrink-0" />
+                            )}
                           </div>
-                        )}
-                        {list.length === 0 && (
-                          <span className="text-xs text-ivory/40">Recruiting now</span>
-                        )}
-                      </div>
-                      <button
-                        onClick={() => { setTeam(t); document.getElementById("directory")?.scrollIntoView({ behavior: "smooth" }); }}
-                        className="mt-4 inline-flex items-center gap-1 text-xs text-gold hover:underline"
-                      >
-                        View team <ArrowRight className="h-3 w-3" />
-                      </button>
-                    </CardContent>
-                  </Card>
+                          {v.country && (
+                            <div className="flex items-center gap-1 text-xs text-white/50 mt-1.5">
+                              <MapPin className="h-3 w-3" /> {v.country}
+                            </div>
+                          )}
+                          <div className="mt-3 flex items-center justify-between border-t border-gold/10 pt-2.5">
+                            <span className="text-[10px] text-white/60">{TIER_LABEL[tier]}</span>
+                            <span className="text-xs font-mono text-gold">{v.contributionScore}</span>
+                          </div>
+                        </div>
+                      </Card>
+                    </Link>
+                  </motion.div>
                 );
               })}
             </div>
-          </div>
-        </section>
+          )}
+        </motion.div>
+      </section>
 
-        {/* GOVERNANCE NOTE */}
-        <section className="bg-charcoal py-10">
-          <div className="container mx-auto px-4">
-            <Card className="mx-auto max-w-3xl border-gold/15 bg-charcoal-light/60">
-              <CardContent className="flex flex-col gap-3 p-6 md:flex-row md:items-center md:gap-5">
-                <ShieldCheck className="h-9 w-9 flex-shrink-0 text-gold" />
-                <div className="flex-1">
-                  <h3 className="mb-1 font-display text-lg text-ivory">
-                    Privacy, Consent & Code of Conduct
-                  </h3>
-                  <p className="text-sm text-ivory/70">
-                    Only volunteers who have approved public display appear on this page.
-                    Private contact details are never shown. All volunteers sign a Code of Conduct
-                    and disclose conflicts of interest before nomination or jury-adjacent work.
-                  </p>
-                </div>
-                <Button asChild variant="outline" className="border-gold/30 text-gold hover:bg-gold/10">
-                  <Link to="/about/governance">Governance</Link>
-                </Button>
-              </CardContent>
-            </Card>
-          </div>
-        </section>
-
-        {/* CTA FOOTER */}
-        <section className="bg-gradient-to-b from-charcoal to-charcoal/90 py-16 lg:py-24">
-          <div className="container mx-auto px-4 text-center">
-            <Sparkles className="mx-auto mb-3 h-10 w-10 text-gold" />
-            <h2 className="mb-3 font-display text-2xl font-bold text-ivory md:text-3xl">
-              Want to contribute to NESA-Africa 2026?
-            </h2>
-            <p className="mx-auto mb-7 max-w-xl text-ivory/70">
-              Join thousands powering Africa's largest education recognition movement.
-              Choose the path that fits your skills and schedule.
+      {/* CTA */}
+      <section className="container mx-auto px-4 mt-20">
+        <motion.div {...fadeUp}>
+          <Card className="border-gold/30 bg-gradient-to-br from-gold/10 via-charcoal to-black p-8 md:p-12 text-center">
+            <h2 className="font-playfair text-3xl md:text-4xl text-gold mb-3">Want to contribute to NESA-Africa 2026?</h2>
+            <p className="text-white/70 max-w-2xl mx-auto mb-6">
+              Become part of a continent-wide movement. Join a team, lead a chapter, or amplify the cause.
             </p>
             <div className="flex flex-wrap justify-center gap-3">
-              <Button asChild size="lg" className="bg-gold text-charcoal hover:bg-gold/90">
-                <Link to="/volunteer">
-                  Become a Volunteer <ArrowRight className="ml-2 h-5 w-5" />
-                </Link>
+              <Button asChild size="lg" className="bg-gold text-black hover:bg-gold/90">
+                <Link to="/volunteer">Become a Volunteer</Link>
               </Button>
-              <Button asChild size="lg" variant="outline" className="border-gold/30 text-gold hover:bg-gold/10">
+              <Button asChild size="lg" variant="outline" className="border-gold/50 text-gold hover:bg-gold/10">
                 <Link to="/ambassadors">Apply as Ambassador</Link>
               </Button>
-              <Button asChild size="lg" variant="outline" className="border-gold/30 text-gold hover:bg-gold/10">
+              <Button asChild size="lg" variant="ghost" className="text-white/80 hover:text-gold">
                 <Link to="/chapters">Join a Local Chapter</Link>
               </Button>
             </div>
-            <div className="mt-6 flex items-center justify-center gap-2 text-xs text-ivory/50">
-              <Award className="h-4 w-4 text-gold/70" />
-              Every contributor receives an appreciation certificate from NESA-Africa & SCEF.
-            </div>
-          </div>
-        </section>
-      </div>
-    </>
-  );
-}
-
-/* ──────────────────────────────── Subcomponents ──────────────────────────────── */
-
-function FilterSelect({
-  label,
-  value,
-  onChange,
-  options,
-  className,
-}: {
-  label: string;
-  value: string;
-  onChange: (v: string) => void;
-  options: string[];
-  className?: string;
-}) {
-  return (
-    <div className={className}>
-      <Select value={value} onValueChange={onChange}>
-        <SelectTrigger className="border-gold/20 bg-charcoal text-ivory">
-          <SelectValue placeholder={label} />
-        </SelectTrigger>
-        <SelectContent className="max-h-72 border-gold/20 bg-charcoal-light text-ivory">
-          {options.map((o) => (
-            <SelectItem key={o} value={o}>
-              {o === "all" ? `All ${label}` : o}
-            </SelectItem>
-          ))}
-        </SelectContent>
-      </Select>
+          </Card>
+        </motion.div>
+      </section>
     </div>
   );
-}
-
-function VolunteerCard({ v, compact = false }: { v: Volunteer; compact?: boolean }) {
-  return (
-    <Card
-      className={`group border-gold/10 bg-charcoal-light/55 transition-all hover:-translate-y-0.5 hover:border-gold/40 hover:shadow-[0_8px_30px_-12px_hsl(var(--gold)/0.35)] ${
-        compact ? "min-w-[78%] flex-shrink-0 snap-start md:min-w-0" : ""
-      }`}
-    >
-      <CardContent className="p-5">
-        <div className="flex items-start gap-3">
-          <Avatar className="h-14 w-14 border border-gold/30">
-            {v.imageUrl && <AvatarImage src={v.imageUrl} alt={v.name} />}
-            <AvatarFallback className="bg-gold/15 text-gold">{initials(v.name)}</AvatarFallback>
-          </Avatar>
-          <div className="min-w-0 flex-1">
-            <h3 className="truncate font-display text-base font-semibold text-ivory">{v.name}</h3>
-            <p className="truncate text-xs text-gold/80">{v.title ?? v.role}</p>
-            <div className="mt-1 flex flex-wrap items-center gap-x-2 gap-y-0.5 text-[11px] text-ivory/55">
-              {v.country && (
-                <span className="inline-flex items-center gap-1"><MapPin className="h-3 w-3" />{v.country}</span>
-              )}
-              {v.region && (
-                <span className="inline-flex items-center gap-1"><Globe className="h-3 w-3" />{v.region}</span>
-              )}
-            </div>
-          </div>
-        </div>
-
-        {v.highlight && (
-          <p className="mt-3 line-clamp-2 text-sm text-ivory/75">{v.highlight}</p>
-        )}
-
-        <div className="mt-3 flex flex-wrap gap-1.5">
-          <Badge className="border-gold/30 bg-gold/10 text-[10px] text-gold">{v.team}</Badge>
-          {v.status === "alumni" && (
-            <Badge className="border-ivory/20 bg-ivory/10 text-[10px] text-ivory/75">Alumni</Badge>
-          )}
-          {v.contributions?.slice(0, 2).map((c) => (
-            <Badge key={c} variant="outline" className="border-gold/15 text-[10px] text-ivory/70">
-              {c}
-            </Badge>
-          ))}
-        </div>
-
-        {v.socials && (
-          <div className="mt-4 flex items-center gap-2 border-t border-gold/10 pt-3">
-            {v.socials.linkedin && (
-              <SocialIcon href={v.socials.linkedin} icon={<Linkedin className="h-3.5 w-3.5" />} />
-            )}
-            {v.socials.twitter && (
-              <SocialIcon href={`https://twitter.com/${v.socials.twitter.replace(/^@/, "")}`} icon={<Twitter className="h-3.5 w-3.5" />} />
-            )}
-            {v.socials.website && (
-              <SocialIcon href={v.socials.website} icon={<Globe2 className="h-3.5 w-3.5" />} />
-            )}
-          </div>
-        )}
-      </CardContent>
-    </Card>
-  );
-}
-
-function SocialIcon({ href, icon }: { href: string; icon: React.ReactNode }) {
-  return (
-    <a
-      href={href}
-      target="_blank"
-      rel="noopener noreferrer"
-      className="flex h-7 w-7 items-center justify-center rounded-full bg-gold/10 text-gold transition-colors hover:bg-gold hover:text-charcoal"
-    >
-      {icon}
-    </a>
-  );
-}
-
-function initials(name: string) {
-  return name
-    .split(/\s+/)
-    .map((p) => p[0])
-    .filter(Boolean)
-    .slice(0, 2)
-    .join("")
-    .toUpperCase();
 }
