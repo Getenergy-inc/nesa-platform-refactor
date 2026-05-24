@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
+import { trackEvent } from "@/lib/analytics";
 
 export function FinalCTASection() {
   const { t } = useTranslation("pages");
