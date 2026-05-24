@@ -104,7 +104,7 @@ export const PROGRAMME_TIMELINE_2026 = [
   {
     id: 'gold-voting',
     phase: 'Gold Certificate Voting',
-    period: '13 July – 25 September 2026',
+    period: '15 August – 15 September 2026',
     description: 'Mass public voting phase across the eligible categories using AGC participation credits.',
     focus: 'Participation · Audience Growth · Regional Activation',
     status: 'upcoming' as const,
@@ -113,7 +113,7 @@ export const PROGRAMME_TIMELINE_2026 = [
   {
     id: 'gold-show',
     phase: 'Gold Certificate Winners Show',
-    period: '1 October 2026',
+    period: '16 September 2026',
     description: 'Official announcement of Influencers Education Impact Award 2026 Edition winners.',
     focus: 'Amplification · Media Assets · Winner Visibility',
     status: 'upcoming' as const,
@@ -121,8 +121,8 @@ export const PROGRAMME_TIMELINE_2026 = [
   {
     id: 'blue-garnet-voting',
     phase: 'Blue Garnet Voting',
-    period: '2 – 22 October 2026',
-    description: 'Final 3-week competitive voting window leading directly into the gala. Voting closes on gala day for transparency and suspense.',
+    period: '16 September – 22 October 2026',
+    description: 'Final competitive voting window leading directly into the gala. Voting closes on gala day for transparency and suspense.',
     focus: 'Prestige · Suspense · Public + Jury',
     status: 'upcoming' as const,
     votingPhase: 'BLUE_GARNET' as VotingPhase,

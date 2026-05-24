@@ -135,9 +135,9 @@ export const DEFAULT_SCHEDULE_TEMPLATE: ScheduleTemplate = {
     goldCertificateWinners: { monthDay: "10-01", yearOffset: 0 },
   },
   votingWindows: {
-    goldVotingOpens: { monthDay: "07-13", yearOffset: 0 },
-    goldVotingCloses: { monthDay: "09-25", yearOffset: 0 },
-    blueGarnetVotingOpens: { monthDay: "10-02", yearOffset: 0 },
+    goldVotingOpens: { monthDay: "08-15", yearOffset: 0 },
+    goldVotingCloses: { monthDay: "09-15", yearOffset: 0 },
+    blueGarnetVotingOpens: { monthDay: "09-16", yearOffset: 0 },
     blueGarnetVotingCloses: { monthDay: "10-22", yearOffset: 0 },
   },
   galas: {
@@ -363,7 +363,7 @@ export function buildAwardPhases(awardYear: number): AwardPhaseConfig[] {
       id: "gold",
       title: "Gold Certificate",
       subtitle: "Competitive Classification Stage",
-      period: `13 July – 25 September ${ceremonyYear}`,
+      period: `15 August – 15 September ${ceremonyYear}`,
       showDate: `1 October ${ceremonyYear}`,
       iconName: "Trophy",
       features: [
@@ -379,7 +379,7 @@ export function buildAwardPhases(awardYear: number): AwardPhaseConfig[] {
       id: "blue-garnet",
       title: "Blue Garnet Award",
       subtitle: "Highest Competitive Honour",
-      period: `2 – 22 October ${ceremonyYear}`,
+      period: `16 September – 22 October ${ceremonyYear}`,
       showDate: `22 October ${ceremonyYear} (Gala)`,
       iconName: "Gem",
       features: [

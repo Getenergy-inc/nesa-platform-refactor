@@ -92,7 +92,7 @@ export const PAGE_FAQS: PageFAQ[] = [
       },
       {
         q: "What is the Blue Garnet Awards Gala?",
-        a: "The Blue Garnet Awards Gala is the continental finale on June 27, 2026, where Blue Garnet winners (jury + public AGC voting), Gold Certificate winners (100% public vote), Platinum Recognition honourees and the Africa Education Icon are celebrated live, broadcast on NESA TV across Africa and the diaspora.",
+        a: "The Blue Garnet Awards Gala is the continental finale on 22 October 2026, where Blue Garnet winners (jury + public AGC voting), Gold Certificate winners (100% public vote), Platinum Recognition honourees and the Africa Education Icon are celebrated live, broadcast on NESA TV across Africa and the diaspora.",
         ctas: [{ label: "View Tickets & Gala", href: "/buy-your-ticket" }],
       },
       {
@@ -188,7 +188,7 @@ export const PAGE_FAQS: PageFAQ[] = [
       },
       {
         q: "When are the voting windows?",
-        a: "Official voting windows run between April and June. Outside these windows, the platform accepts nominations and participation activities only.",
+        a: "Gold Certificate Voting runs 15 August – 15 September 2026 (100% public AGC voting). Blue Garnet Voting runs 16 September – 22 October 2026 (jury + public, closing on Gala day). Outside these windows the platform accepts nominations and participation activities only.",
       },
     ],
   },
@@ -573,7 +573,7 @@ export const FULL_FAQ_GROUPS: FAQGroup[] = [
       },
       {
         q: "What is the Blue Garnet Awards Gala?",
-        a: "The continental finale on June 27, 2026, where Blue Garnet, Gold Certificate, Platinum and Africa Education Icon honourees are celebrated live and broadcast across Africa on NESA TV.",
+        a: "The continental finale on 22 October 2026, where Blue Garnet, Gold Certificate, Platinum and Africa Education Icon honourees are celebrated live and broadcast across Africa on NESA TV.",
         ctas: [{ label: "View Tickets & Gala", href: "/buy-your-ticket" }],
       },
       {
@@ -647,7 +647,7 @@ export const FULL_FAQ_GROUPS: FAQGroup[] = [
       },
       {
         q: "When does voting begin?",
-        a: "Official Gold and Blue Garnet voting windows open between April and June 2026 after NRC verification and jury onboarding. Outside these windows the platform accepts nominations and participation activities only.",
+        a: "Official Gold and Blue Garnet voting windows open from 15 August to 22 October 2026 (Gold: 15 Aug – 15 Sep; Blue Garnet: 16 Sep – 22 Oct) after NRC verification and jury onboarding. Outside these windows the platform accepts nominations and participation activities only.",
       },
       {
         q: "How does Blue Garnet voting work?",
@@ -665,7 +665,7 @@ export const FULL_FAQ_GROUPS: FAQGroup[] = [
       },
       {
         q: "When and where is the 2026 ceremony?",
-        a: "June 27, 2026 — the continental Blue Garnet Awards Gala, with regional ceremonies and NESA TV broadcasts throughout the year.",
+        a: "22 October 2026 — the continental Blue Garnet Awards Gala, with regional ceremonies and NESA TV broadcasts throughout the year.",
       },
       {
         q: "Are certificates verifiable?",

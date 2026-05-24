@@ -288,7 +288,7 @@ const PHASE_1_TIMELINE: PhaseItem[] = [
   {
     id: "gold-voting",
     phase: "Gold Certificate Voting",
-    period: "20 July – 15 August 2026",
+    period: "15 August – 15 September 2026",
     description:
       "Mass public voting phase across eligible categories using AGC participation credits, with regional activation and audience growth.",
     tags: ["Participation", "Audience Growth", "Regional Activation"],
@@ -298,9 +298,9 @@ const PHASE_1_TIMELINE: PhaseItem[] = [
   {
     id: "gold-show",
     phase: "Gold Certificate Winners Show",
-    period: "22 August 2026",
+    period: "16 September 2026",
     description:
-      "Official announcement of Influencers Education Impact Award 2026 Edition winners.",
+      "Official announcement of Influencers Education Impact Award 2026 Edition winners — broadcast live as the kick-off of the Blue Garnet voting window.",
     tags: ["Amplification", "Media Assets", "Winner Visibility"],
     agc: true,
     icon: Tv,
@@ -308,9 +308,9 @@ const PHASE_1_TIMELINE: PhaseItem[] = [
   {
     id: "momentum-phase",
     phase: "Momentum Phase",
-    period: "23 August – 15 September 2026",
+    period: "16 September – 15 October 2026",
     description:
-      "A focused storytelling, media, partnership, and audience-building phase designed to carry the visibility from the Gold Certificate Winners Show into the final Blue Garnet voting window.",
+      "A focused storytelling, media, partnership, and audience-building phase that runs alongside Blue Garnet voting — carrying visibility from the Gold Winners Show into the final stretch before the Gala.",
     tags: ["Momentum", "Storytelling", "Media Build-Up", "Partnership Visibility"],
     icon: Sparkles,
   },
@@ -1076,7 +1076,7 @@ export default function Timeline() {
 
               <TabsContent value="voting" className="mt-6 space-y-3">
                 {[
-                  { title: "Gold Certificate Voting", date: "13 July – 25 September 2026" },
+                  { title: "Gold Certificate Voting", date: "15 August – 15 September 2026" },
                   { title: "Blue Garnet Voting", date: "2 – 22 October 2026" },
                 ].map((s) => (
                   <Card key={s.title} className="border-white/10 bg-white/5">

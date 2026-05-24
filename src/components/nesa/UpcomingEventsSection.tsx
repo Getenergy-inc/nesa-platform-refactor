@@ -146,7 +146,7 @@ export function UpcomingEventsSection() {
     {
       ...goldOpen,
       displayLabel: "Gold Certificate Voting Opens",
-      endDate: new Date(`${currentEdition.displayYear}-09-25T23:59:59`),
+      endDate: new Date(`${currentEdition.displayYear}-09-15T23:59:59`),
     },
     {
       ...blueOpen,

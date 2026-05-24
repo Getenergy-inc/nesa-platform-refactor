@@ -43,12 +43,12 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { cn } from "@/lib/utils";
 import { useAuth } from "@/contexts/AuthContext";
-import { MAIN_NAV, MOBILE_NAV, type NavItem } from "@/config/navigation";
+import { MAIN_NAV, MAIN_NAV_MOBILE_ORDER, MOBILE_NAV, type NavItem } from "@/config/navigation";
 import nesaStamp from "@/assets/nesa-stamp.jpeg";
 import { CVOFlashMessage, CVOMessageTrigger } from "@/components/nesa/cvo";
 import { LanguageSwitcher } from "@/components/i18n";
 import { EarnCoinsBadge } from "@/components/rewards/EarnCoinsBadge";
-import { EarnAGCNavItem } from "@/components/navigation/EarnAGCNavItem";
+
 
 // ============================================================================
 // DESKTOP NAVIGATION
@@ -61,10 +61,8 @@ function DesktopNav({ onOpenCVOMessage }: { onOpenCVOMessage: () => void }) {
     <NavigationMenu className="hidden lg:flex w-full min-w-0">
       <NavigationMenuList className="px-1 gap-0.5">
         {MAIN_NAV.map((item) => (
-          item.label === "Earn AGC" ? (
-            <EarnAGCNavItem key={item.href} />
-          ) : (
           <NavigationMenuItem key={item.href} className="shrink-0">
+
             {item.children ? (
               <>
                 <NavigationMenuTrigger className="bg-transparent text-white/90 hover:text-gold hover:bg-gold/10 data-[state=open]:bg-gold/10 data-[state=open]:text-gold h-8 xl:h-9 px-2 xl:px-3 text-[11px] xl:text-sm leading-none">
@@ -145,8 +143,8 @@ function DesktopNav({ onOpenCVOMessage }: { onOpenCVOMessage: () => void }) {
               </NavigationMenuLink>
             )}
           </NavigationMenuItem>
-          )
         ))}
+
       </NavigationMenuList>
     </NavigationMenu>
   );
@@ -161,6 +159,13 @@ function MobileNav({ onOpenCVOMessage }: { onOpenCVOMessage: () => void }) {
   const [expandedItems, setExpandedItems] = useState<string[]>([]);
   const location = useLocation();
   const { user, signOut } = useAuth();
+
+  const mobileOrdered = [...MAIN_NAV].sort(
+    (a, b) =>
+      MAIN_NAV_MOBILE_ORDER.indexOf(a.label) - MAIN_NAV_MOBILE_ORDER.indexOf(b.label),
+  );
+
+
 
   const toggleExpanded = (href: string) => {
     setExpandedItems((prev) =>
@@ -233,7 +238,7 @@ function MobileNav({ onOpenCVOMessage }: { onOpenCVOMessage: () => void }) {
 
             {/* Full Navigation */}
             <div className="py-2">
-              {MAIN_NAV.map((item) => (
+              {mobileOrdered.map((item) => (
                 <div
                   key={item.href}
                   className="border-b border-gold/5 last:border-b-0"
