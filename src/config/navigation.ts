@@ -77,7 +77,6 @@ export const MAIN_NAV: NavItem[] = [
       { label: "Education Development Index (EDI)", href: "/guidelines/edi-matrix", description: "Our integrity-backed evaluation matrix", icon: Shield },
       { label: "SDG & AU Agenda 2063 Alignment", href: "/about#alignment", description: "Aligned with SDG 4 and AU Agenda 2063", icon: Target },
       { label: "Meet the Judges", href: "/judges", description: "Our distinguished jury panel & expertise", icon: Gavel },
-      { label: "Meet Our Volunteers", href: "/volunteers", description: "The people powering NESA-Africa", icon: Heart },
       { label: "Governance & Jury Process", href: "/about/governance", description: "Firewalls, jury panels, accountability", icon: Shield },
       { label: "FAQ", href: "/faq", description: "Answers to the most common questions", icon: MessageSquare },
       { label: "Contact", href: "/contact", description: "Reach the NESA-Africa team", icon: Mail },
