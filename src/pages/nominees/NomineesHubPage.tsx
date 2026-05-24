@@ -13,6 +13,13 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { useNominees, type EnrichedDatabaseNominee } from "@/hooks/useNominees";
 import { LandingNomineeCard } from "@/components/nesa/LandingNomineeCard";
+import {
+  getCategoryTier,
+  getSecondaryCtaLabel,
+  getSecondaryCtaHref,
+  TIER_BADGE_STYLES,
+} from "@/config/nomineeCategories";
+
 
 // NOTE: Nominee-group chips are UI-ready. Wire filtering logic to `useNominees`
 // data (e.g. by category/region/diaspora flag) when backend fields are confirmed.
