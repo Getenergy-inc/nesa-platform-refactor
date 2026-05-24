@@ -1,6 +1,6 @@
 import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
-import { CertificateGallery } from "@/components/nesa/CertificateGallery";
+
 import { AwardTVShowSection } from "@/components/awards/AwardTVShowSection";
 import { AwardCategoriesGrid } from "@/components/awards/AwardCategoriesGrid";
 import { BrandedCategoryHero } from "@/components/awards/BrandedCategoryHero";
