@@ -13,7 +13,7 @@
 import { useMemo } from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { Trophy, Users, ArrowRight, ChevronRight } from "lucide-react";
+import { Trophy, Users, ArrowRight, ChevronRight, Sparkles, UserPlus } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
@@ -24,6 +24,7 @@ import {
   getTierStyle,
 } from "@/config/nomineeCategories";
 import { getCategoryImage } from "@/config/categoryImages";
+
 
 export interface CategoryEntry {
   slug: string;
