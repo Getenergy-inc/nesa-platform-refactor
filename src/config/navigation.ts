@@ -97,6 +97,7 @@ export const MAIN_NAV: NavItem[] = [
       { label: "Blue Garnet Awards", href: "/awards/blue-garnet", description: "Competitive excellence — Jury + Public", icon: Trophy },
       { label: "Platinum Recognition", href: "/awards/platinum", description: "Institutional leadership recognition", icon: Medal },
       { label: "Influencer Education Impact Awards", href: "/awards/influencers-education-impact-2026-recognition", description: "Sports, Music & Social Media impact", icon: Award, badge: "2026" },
+      { label: "Award Gala", href: "/media/gala", description: "Blue Garnet Awards Gala — 22 Oct 2026 · Lagos", icon: Ticket, badge: "Gala" },
       // B. Social Impact
       { label: "Rebuild My School Africa", href: "/rebuild", description: "Post-award legacy project (Oct 2026 → Oct 2027)", icon: Building },
     ],

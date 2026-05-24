@@ -1,6 +1,6 @@
 import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
-import { CertificateGallery } from "@/components/nesa/CertificateGallery";
+
 import { AwardTVShowSection } from "@/components/awards/AwardTVShowSection";
 import { AwardCategoriesGrid } from "@/components/awards/AwardCategoriesGrid";
 import { BrandedCategoryHero } from "@/components/awards/BrandedCategoryHero";
@@ -121,8 +121,6 @@ export default function PlatinumAward() {
           description="Institutional recognition categories under Platinum certification."
         />
 
-        {/* Certificate Gallery */}
-        <CertificateGallery />
 
         {/* CTA */}
         <section className="bg-charcoal py-16 lg:py-24">

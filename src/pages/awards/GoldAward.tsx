@@ -1,6 +1,6 @@
 import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
-import { CertificateGallery } from "@/components/nesa/CertificateGallery";
+
 import { AwardTVShowSection } from "@/components/awards/AwardTVShowSection";
 import { AwardCategoriesGrid } from "@/components/awards/AwardCategoriesGrid";
 import { BrandedCategoryHero } from "@/components/awards/BrandedCategoryHero";
@@ -256,8 +256,6 @@ export default function GoldAward() {
           description="3 categories honoring Africa\x27s education impact through Sports, Music, and Social Media."
         />
 
-        {/* Certificate Gallery */}
-        <CertificateGallery />
 
         {/* CTA */}
         <section className="bg-gradient-to-b from-charcoal to-amber-900/20 py-16 lg:py-24">

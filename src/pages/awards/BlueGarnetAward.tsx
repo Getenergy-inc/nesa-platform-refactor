@@ -1,6 +1,6 @@
 import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
-import { CertificateGallery } from "@/components/nesa/CertificateGallery";
+
 import { AwardTVShowSection } from "@/components/awards/AwardTVShowSection";
 import { AwardCategoriesGrid } from "@/components/awards/AwardCategoriesGrid";
 import { BrandedCategoryHero } from "@/components/awards/BrandedCategoryHero";
@@ -156,8 +156,6 @@ export default function BlueGarnetAward() {
           description="9 major categories + 1 Africa Education Icon Blue Garnet. Gold winners advance to Blue Garnet with 60% jury + 40% public scoring."
         />
 
-        {/* Certificate Gallery */}
-        <CertificateGallery />
       </div>
     </>
   );
