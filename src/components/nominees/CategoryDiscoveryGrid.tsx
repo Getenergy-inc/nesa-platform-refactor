@@ -22,6 +22,7 @@ import {
   getCategoryTier,
   getSecondaryCtaLabel,
   getSecondaryCtaHref,
+  getTierStyle,
   TIER_BADGE_STYLES,
 } from "@/config/nomineeCategories";
 
