@@ -4,6 +4,16 @@
 export interface FAQ {
   q: string;
   a: string;
+  /** Optional CTAs rendered beneath the answer */
+  ctas?: { label: string; href: string }[];
+}
+
+export interface FAQGroup {
+  /** Group heading e.g. "Voting & AGC" */
+  title: string;
+  /** Short helper line under the group title */
+  description?: string;
+  faqs: FAQ[];
 }
 
 export interface PageFAQ {
@@ -14,6 +24,9 @@ export interface PageFAQ {
   /** Short subtitle */
   subtitle?: string;
   faqs: FAQ[];
+  /** Optional link to the fuller FAQ / help-center page */
+  viewAllHref?: string;
+  viewAllLabel?: string;
 }
 
 // Universal fallback — shown if no route-specific match
