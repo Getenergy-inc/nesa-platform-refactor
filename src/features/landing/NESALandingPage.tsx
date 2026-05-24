@@ -31,6 +31,8 @@ const FinalCTASection = lazy(() => import("@/components/nesa/FinalCTASection").t
 const HomepageGalleryTeaser = lazy(() => import("@/components/gallery/HomepageGalleryTeaser").then(m => ({ default: m.HomepageGalleryTeaser })));
 const CampaignParticipationSlider = lazy(() => import("@/components/landing/CampaignParticipationSlider").then(m => ({ default: m.CampaignParticipationSlider })));
 const MerchandiseShowcase = lazy(() => import("@/components/nesa/MerchandiseShowcase").then(m => ({ default: m.MerchandiseShowcase })));
+const CategoryDiscoveryGrid = lazy(() => import("@/components/nominees/CategoryDiscoveryGrid").then(m => ({ default: m.CategoryDiscoveryGrid })));
+
 
 export function NESALandingPage() {
   const { currentEdition } = useSeason();
