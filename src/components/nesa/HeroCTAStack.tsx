@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { Trophy, Coins, Users, LayoutGrid, ArrowRight } from "lucide-react";
+import { Trophy, Coins, Users, LayoutGrid, ArrowRight, Heart } from "lucide-react";
 import { trackEvent } from "@/lib/analytics";
 
 const onCta = (cta: string, to: string) => () =>
