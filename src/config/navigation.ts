@@ -119,6 +119,8 @@ export const MAIN_NAV: NavItem[] = [
       { label: "Volunteer Teams", href: "/volunteer-teams", description: "Tech, Media, Data, Design & more", icon: Users },
       { label: "Volunteer Leaderboard", href: "/volunteer-leaderboard", description: "Top contributors and ambassadors", icon: Trophy },
       { label: "Volunteer Stories", href: "/volunteer-stories", description: "Why we volunteer — voices of the movement", icon: BookOpen },
+      { label: "Join a Local Chapter", href: "/join-local-chapter", description: "Apply to join or lead a chapter near you", icon: MapPin },
+      { label: "Chapters Hub", href: "/volunteer-chapters", description: "Explore all 10 regional chapters", icon: Globe },
       { label: "Join a Local Chapter", href: "/chapters", description: "Find your community — Africa & Diaspora", icon: Map },
       { label: "How to Join a Local Chapter", href: "/chapters#how-to-join", description: "Find, start, and grow a chapter", icon: BookOpen },
       { label: "Donate", href: "/donate", description: "Fund Africa's education transformation", icon: Wallet },
