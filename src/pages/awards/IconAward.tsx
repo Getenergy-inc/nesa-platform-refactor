@@ -54,7 +54,6 @@ export default function IconAward() {
       <BreadcrumbJsonLd crumbs={[{ name: "Home", path: "/" }, { name: "Awards", path: "/awards" }, { name: "Africa Education Icon", path: "/awards/icon" }]} />
 
       <div className="min-h-screen bg-charcoal">
-        <NESAHeader />
         <BrandedCategoryHero
           theme="legacy"
           headlineLead="Who Are Africa's"
@@ -229,7 +228,6 @@ export default function IconAward() {
             </Button>
           </div>
         </section>
-        <NESAFooter />
       </div>
     </>
   );
