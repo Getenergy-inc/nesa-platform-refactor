@@ -2,8 +2,10 @@ import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
 import { CertificateGallery } from "@/components/nesa/CertificateGallery";
 import { AwardTVShowSection } from "@/components/awards/AwardTVShowSection";
-import { AwardHeroSection } from "@/components/awards/AwardHeroSection";
 import { AwardCategoriesGrid } from "@/components/awards/AwardCategoriesGrid";
+import { BrandedCategoryHero } from "@/components/awards/BrandedCategoryHero";
+import { BrandedDocumentaryPreview } from "@/components/awards/BrandedDocumentaryPreview";
+import { BreadcrumbJsonLd } from "@/components/seo/BreadcrumbJsonLd";
 import { getTVShowByAward } from "@/config/awardTVShows";
 import { getCategoriesByTier, getCategoriesGrouped } from "@/config/nesaCategories";
 import { Button } from "@/components/ui/button";
@@ -35,24 +37,35 @@ export default function PlatinumAward() {
           name="description"
           content="The Platinum Certificate is NESA-Africa's baseline recognition for individuals and organizations contributing to Education for All in Africa."
         />
+        <link rel="canonical" href="https://nesa.africa/awards/platinum" />
       </Helmet>
+      <BreadcrumbJsonLd crumbs={[{ name: "Home", path: "/" }, { name: "Awards", path: "/awards" }, { name: "Platinum Certificate", path: "/awards/platinum" }]} />
 
       <div className="min-h-screen bg-charcoal">
-        {/* Hero */}
-        <AwardHeroSection
-          variant="platinum"
-          title="Platinum"
-          titleAccent="Certificate"
+        <BrandedCategoryHero
+          theme="platinum"
+          headlineLead="Earn the Foundational"
+          headlineAccent="Platinum Certificate"
           description="The foundational recognition for all 17 NESA categories. 7 core categories require 100 renominations, 10 standard categories require 200 renominations to unlock certificate download."
-          primaryAction={{
-            label: "Submit Nomination",
-            href: "/nominate",
-            icon: Award,
-          }}
-          secondaryAction={{
-            label: "28 Feb 2026",
-          }}
+          tags={["Foundational", "17 Categories", "NRC Validated", "QR-Verifiable", "Annual Renewal"]}
+          stats={[
+            { value: "17", label: "Categories Covered" },
+            { value: "100–200", label: "Renominations to Unlock" },
+            { value: "QR", label: "Verifiable Certificate" },
+          ]}
+          primaryCta={{ label: "Submit Nomination", href: "/nominate" }}
+          secondaryCta={{ label: "Reveal Show: 28 Feb 2026", href: "/awards/platinum" }}
+          watchCta={{ label: "Watch Recipient Stories", href: "/media" }}
+          imageAlt="Platinum Certificate — NESA-Africa baseline recognition"
         />
+        <BrandedDocumentaryPreview
+          theme="platinum"
+          title="Foundations of Recognition"
+          description="See how thousands of educators, institutions, and changemakers earn their Platinum Certificate — the first step on the NESA recognition pathway."
+          watchCtaHref="/media"
+          imageAlt="Platinum Certificate documentary preview"
+        />
+
 
         {/* Benefits */}
         <section className="bg-charcoal py-16 lg:py-24">
