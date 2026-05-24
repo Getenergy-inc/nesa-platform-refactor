@@ -215,7 +215,7 @@ function SettingsInner() {
 
   const setVis = async (v: string) => {
     if (!row) return;
-    await supabase.from("volunteers").update({ visibility_status: v }).eq("id", row.id);
+    await supabase.from("volunteers").update({ visibility_status: v as "public" | "hidden" | "alumni" }).eq("id", row.id);
     setRow({ ...row, visibility_status: v });
     toast({ title: "Visibility updated" });
   };
