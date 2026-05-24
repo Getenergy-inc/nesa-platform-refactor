@@ -24,7 +24,7 @@ export function NESAFooter() {
   return (
     <footer className="bg-charcoal border-t border-gold/20 pt-12 pb-20 lg:pb-6">
       <div className="container">
-        <div className="grid md:grid-cols-3 gap-8 mb-8">
+        <div className="grid md:grid-cols-4 gap-8 mb-8">
           {/* Brand */}
           <div className="text-center md:text-left">
             <div className="flex items-center gap-3 justify-center md:justify-start mb-4">
