@@ -143,8 +143,8 @@ function DesktopNav({ onOpenCVOMessage }: { onOpenCVOMessage: () => void }) {
               </NavigationMenuLink>
             )}
           </NavigationMenuItem>
-          )
         ))}
+
       </NavigationMenuList>
     </NavigationMenu>
   );
