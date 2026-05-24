@@ -44,8 +44,10 @@ const REGIONS = [
 
 const IMPACT_TIERS: { tier: RecognitionTier; description: string }[] = [
   { tier: "blue_garnet", description: "Africa's most prestigious recognition — public voting open." },
+  { tier: "platinum", description: "Elite institutional recognition across education." },
+  { tier: "legacy_icon", description: "Lifetime contribution to African education." },
+  { tier: "influencer_impact", description: "Creators and influencers driving social impact." },
   { tier: "gold", description: "Category excellence across education sectors." },
-  { tier: "icon", description: "Lifetime contribution to African education." },
   { tier: "regional", description: "State and regional education leadership." },
 ];
 

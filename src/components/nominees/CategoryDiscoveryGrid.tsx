@@ -19,10 +19,9 @@ import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useNominees, type EnrichedDatabaseNominee } from "@/hooks/useNominees";
 import {
-  getCategoryTier,
   getSecondaryCtaLabel,
   getSecondaryCtaHref,
-  TIER_BADGE_STYLES,
+  getTierStyle,
 } from "@/config/nomineeCategories";
 
 export interface CategoryEntry {
@@ -153,11 +152,9 @@ export function CategoryDiscoveryGrid({
 
 // ─────────────────────────────────────────────────────────────────────
 function CategoryCard({ cat, index }: { cat: CategoryEntry; index: number }) {
-  const tier = getCategoryTier(cat.slug);
-  const tierStyle = TIER_BADGE_STYLES[tier];
+  const tierStyle = getTierStyle(cat.slug);
   const secondaryLabel = getSecondaryCtaLabel(cat.slug);
   const secondaryHref = getSecondaryCtaHref(cat.slug);
-  const isBlueGarnet = tier === "blue_garnet";
 
   return (
     <motion.article
@@ -165,21 +162,15 @@ function CategoryCard({ cat, index }: { cat: CategoryEntry; index: number }) {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ delay: Math.min(index * 0.03, 0.3) }}
-      className={`group relative h-full flex flex-col overflow-hidden rounded-2xl border p-4 md:p-5 transition-all hover:shadow-lg ${
-        isBlueGarnet
-          ? "border-blue-400/40 bg-gradient-to-br from-blue-950/60 via-charcoal-light to-charcoal hover:shadow-blue-400/10"
-          : "border-gold/15 bg-gradient-to-br from-charcoal-light to-charcoal hover:border-gold/40 hover:shadow-gold/10"
-      }`}
+      className={`group relative h-full flex flex-col overflow-hidden rounded-2xl border p-4 md:p-5 transition-all hover:shadow-lg ${tierStyle.cardBorderClass} ${tierStyle.cardBgClass}`}
     >
       <div className="flex items-start justify-between mb-3">
         <div
-          className={`h-10 w-10 md:h-11 md:w-11 rounded-xl flex items-center justify-center ${
-            isBlueGarnet ? "bg-blue-400/20" : "bg-gold/15"
-          }`}
+          className={`h-10 w-10 md:h-11 md:w-11 rounded-xl flex items-center justify-center ${tierStyle.accentSoftClass}`}
         >
-          <Trophy className={`w-5 h-5 ${isBlueGarnet ? "text-blue-200" : "text-gold"}`} />
+          <Trophy className={`w-5 h-5 ${tierStyle.accentTextClass}`} />
         </div>
-        <Badge className={`text-[10px] ${tierStyle.className}`}>{tierStyle.label}</Badge>
+        <Badge className={`text-[10px] border ${tierStyle.className}`}>{tierStyle.label}</Badge>
       </div>
 
       <Link
@@ -235,11 +226,7 @@ function CategoryCard({ cat, index }: { cat: CategoryEntry; index: number }) {
           asChild
           size="sm"
           variant="outline"
-          className={`w-full rounded-full font-semibold min-h-[40px] ${
-            isBlueGarnet
-              ? "border-blue-300/50 text-blue-100 hover:bg-blue-400/10"
-              : "border-gold/40 text-gold hover:bg-gold/10"
-          }`}
+          className={`w-full rounded-full font-semibold min-h-[40px] ${tierStyle.secondaryCtaClass}`}
         >
           <Link to={secondaryHref}>{secondaryLabel}</Link>
         </Button>
