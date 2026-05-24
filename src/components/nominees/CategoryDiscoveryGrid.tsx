@@ -23,6 +23,7 @@ import {
   getSecondaryCtaHref,
   getTierStyle,
 } from "@/config/nomineeCategories";
+import { getCategoryImage } from "@/config/categoryImages";
 
 export interface CategoryEntry {
   slug: string;
@@ -155,6 +156,7 @@ function CategoryCard({ cat, index }: { cat: CategoryEntry; index: number }) {
   const tierStyle = getTierStyle(cat.slug);
   const secondaryLabel = getSecondaryCtaLabel(cat.slug);
   const secondaryHref = getSecondaryCtaHref(cat.slug);
+  const heroImg = getCategoryImage(cat.slug);
 
   return (
     <motion.article
@@ -162,16 +164,32 @@ function CategoryCard({ cat, index }: { cat: CategoryEntry; index: number }) {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ delay: Math.min(index * 0.03, 0.3) }}
-      className={`group relative h-full flex flex-col overflow-hidden rounded-2xl border p-4 md:p-5 transition-all hover:shadow-lg ${tierStyle.cardBorderClass} ${tierStyle.cardBgClass}`}
+      className={`group relative h-full flex flex-col overflow-hidden rounded-2xl border transition-all hover:shadow-lg ${tierStyle.cardBorderClass} ${tierStyle.cardBgClass}`}
     >
-      <div className="flex items-start justify-between mb-3">
-        <div
-          className={`h-10 w-10 md:h-11 md:w-11 rounded-xl flex items-center justify-center ${tierStyle.accentSoftClass}`}
-        >
-          <Trophy className={`w-5 h-5 ${tierStyle.accentTextClass}`} />
-        </div>
-        <Badge className={`text-[10px] border ${tierStyle.className}`}>{tierStyle.label}</Badge>
-      </div>
+      {/* Category hero image — restores visual identity per card */}
+      <Link
+        to={`/nominees/category/${cat.slug}`}
+        className="relative block aspect-[16/9] overflow-hidden bg-charcoal-light"
+        aria-label={`Explore ${cat.name}`}
+      >
+        {heroImg ? (
+          <img
+            src={heroImg}
+            alt={cat.name}
+            loading="lazy"
+            className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+          />
+        ) : (
+          <div className={`absolute inset-0 flex items-center justify-center ${tierStyle.accentSoftClass}`}>
+            <Trophy className={`w-10 h-10 ${tierStyle.accentTextClass}`} />
+          </div>
+        )}
+        <div className="absolute inset-0 bg-gradient-to-t from-charcoal via-charcoal/30 to-transparent" />
+        <Badge className={`absolute top-2 right-2 text-[10px] border ${tierStyle.className}`}>{tierStyle.label}</Badge>
+      </Link>
+
+      <div className="flex flex-col flex-1 p-4 md:p-5">
+
 
       <Link
         to={`/nominees/category/${cat.slug}`}
@@ -230,6 +248,7 @@ function CategoryCard({ cat, index }: { cat: CategoryEntry; index: number }) {
         >
           <Link to={secondaryHref}>{secondaryLabel}</Link>
         </Button>
+      </div>
       </div>
     </motion.article>
   );
