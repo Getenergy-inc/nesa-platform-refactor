@@ -264,6 +264,7 @@ export default function Categories() {
               </Button>
             </div>
           </div>
+          <VolunteerCTABanner />
         </main>
       </div>
     </>
