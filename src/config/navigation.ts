@@ -64,260 +64,138 @@ export interface NavSection {
 
 export const MAIN_NAV: NavItem[] = [
   // ─────────────────────────────────────────────────────────
-  // ABOUT — Identity, mission, governance, timeline
+  // 1. ABOUT — Trust, ecosystem, policy alignment, credibility
   // ─────────────────────────────────────────────────────────
   {
     label: "About",
     href: "/about",
     icon: Info,
     children: [
-      {
-        label: "About NESA-Africa",
-        href: "/about",
-        description: "Continental recognition + impact platform",
-        icon: Info,
-      },
-      {
-        label: "Vision 2035",
-        href: "/about/vision-2035",
-        description: "Strategic roadmap for Africa's education future",
-        icon: Target,
-      },
-      {
-        label: "Programme Timeline",
-        href: "/about/timeline",
-        description: "2026 Season — June to October journey",
-        icon: Calendar,
-        badge: "2026",
-      },
-      {
-        label: "Governance & Firewalls",
-        href: "/about/governance",
-        description: "Integrity measures and accountability",
-        icon: Shield,
-      },
-      {
-        label: "EDI Matrix & Guidelines",
-        href: "/guidelines/edi-matrix",
-        description: "The integrity backbone of evaluations",
-        icon: Shield,
-      },
-      {
-        label: "SCEF Foundation",
-        href: "/about/scef",
-        description: "Santos Creations Educational Foundation",
-        icon: Building,
-        external: true,
-      },
+      { label: "About NESA-Africa", href: "/about", description: "Continental recognition + impact platform", icon: Info },
+      { label: "About NESA-Africa 2026", href: "/about#nesa-2026", description: "The 2026 season at a glance", icon: Star },
+      { label: "The 2026 Journey", href: "/about/timeline", description: "Phase-by-phase campaign roadmap", icon: Calendar, badge: "2026" },
+      { label: "Education Development Index (EDI)", href: "/guidelines/edi-matrix", description: "Our integrity-backed evaluation matrix", icon: Shield },
+      { label: "SDG & AU Agenda 2063 Alignment", href: "/about#alignment", description: "Aligned with SDG 4 and AU Agenda 2063", icon: Target },
+      { label: "Governance & Jury Process", href: "/about/governance", description: "Firewalls, jury panels, accountability", icon: Gavel },
+      { label: "FAQ", href: "/faq", description: "Answers to the most common questions", icon: MessageSquare },
+      { label: "Contact", href: "/contact", description: "Reach the NESA-Africa team", icon: Mail },
     ],
   },
 
   // ─────────────────────────────────────────────────────────
-  // PROGRAMS — Awards, Categories, Regions, EduAid, Rebuild
+  // 2. PROGRAMS — Award ecosystems + social impact
   // ─────────────────────────────────────────────────────────
   {
     label: "Programs",
     href: "/programs",
     icon: Trophy,
     children: [
-      {
-        label: "Award Categories",
-        href: "/categories",
-        description: "Browse all 17 award categories",
-        icon: Award,
-      },
-      {
-        label: "Africa Education Icon",
-        href: "/awards/icon",
-        description: "Lifetime achievement (2006–2026)",
-        icon: Star,
-      },
-      {
-        label: "Platinum",
-        href: "/awards/platinum",
-        description: "Institutional leadership recognition",
-        icon: Medal,
-      },
-      {
-        label: "Influencers Education Impact Award",
-        href: "/awards/gold-special-recognition",
-        description: "Cultural impact — Sports, Music & Social Media",
-        icon: Star,
-        badge: "2026",
-      },
-      {
-        label: "Blue Garnet",
-        href: "/awards/blue-garnet",
-        description: "Competitive excellence — 60% Jury / 40% Public",
-        icon: Trophy,
-      },
-      {
-        label: "Regions",
-        href: "/regions",
-        description: "10 regional zones across Africa + diaspora",
-        icon: Globe,
-      },
-      {
-        label: "EduAid Africa",
-        href: "/eduaid",
-        description: "Webinars, scholarships, school nominations",
-        icon: BookOpen,
-      },
-      {
-        label: "Rebuild My School Africa",
-        href: "/rebuild",
-        description: "Post-award legacy project (Oct 2026 → Oct 2027)",
-        icon: Building,
-      },
+      // A. Award Ecosystems
+      { label: "Africa Education Icon Awards", href: "/awards/icon", description: "Lifetime achievement (2006–2026)", icon: Star },
+      { label: "Blue Garnet Awards", href: "/awards/blue-garnet", description: "Competitive excellence — Jury + Public", icon: Trophy },
+      { label: "Platinum Recognition", href: "/awards/platinum", description: "Institutional leadership recognition", icon: Medal },
+      { label: "Influencer Education Impact Awards", href: "/awards/gold-special-recognition", description: "Sports, Music & Social Media impact", icon: Award, badge: "2026" },
+      // B. Social Impact
+      { label: "Rebuild My School Africa", href: "/rebuild", description: "Post-award legacy project (Oct 2026 → Oct 2027)", icon: Building },
     ],
   },
 
   // ─────────────────────────────────────────────────────────
-  // ENGAGE — Nominate, Vote, Partners, Tickets, Volunteer
+  // 3. ENGAGE — The participation ecosystem
   // ─────────────────────────────────────────────────────────
   {
     label: "Engage",
     href: "/get-involved",
     icon: Users,
     children: [
-      {
-        label: "Nominate",
-        href: "/nominate",
-        description: "Submit a nomination for recognition",
-        icon: FileCheck,
-        stageGated: "nominations",
-      },
-      {
-        label: "Vote",
-        href: "/vote",
-        description: "Cast your vote during voting windows",
-        icon: Vote,
-        stageGated: "public_voting",
-      },
-      {
-        label: "Vote with AGC",
-        href: "/vote-with-agc",
-        description: "Vote using Afri Gold Coin credits",
-        icon: Coins,
-      },
-      {
-        label: "Partners / CSR",
-        href: "/partners",
-        description: "Sponsorship & CSR for education",
-        icon: Building,
-      },
-      {
-        label: "Buy Your Ticket",
-        href: "/tickets",
-        description: "Blue Garnet Awards Gala — Oct 22, 2026",
-        icon: Ticket,
-      },
-      {
-        label: "Apply as Ambassador",
-        href: "/ambassadors",
-        description: "Represent NESA-Africa in your region",
-        icon: UserPlus,
-      },
-      {
-        label: "Apply to be a Judge",
-        href: "/judgeapply",
-        description: "Join the 2026 NESA-Africa jury panel",
-        icon: Gavel,
-      },
-      {
-        label: "Become a Volunteer",
-        href: "/volunteer",
-        description: "Join the NRC or event volunteer team",
-        icon: Heart,
-      },
-      {
-        label: "Local Chapters",
-        href: "/chapters",
-        description: "Connect with your regional chapter",
-        icon: Map,
-      },
-      {
-        label: "Donate",
-        href: "/donate",
-        description: "Fund Africa's education transformation",
-        icon: Wallet,
-      },
+      { label: "Partners / CSR", href: "/partners", description: "Sponsorship & CSR for education", icon: Building },
+      { label: "Buy Your Ticket", href: "/tickets", description: "Blue Garnet Awards Gala — 22 Oct 2026", icon: Ticket },
+      { label: "Apply as Ambassador", href: "/ambassadors", description: "Represent NESA-Africa in your region", icon: UserPlus },
+      { label: "Apply to be a Judge", href: "/judgeapply", description: "Join the 2026 jury panel", icon: Gavel },
+      { label: "Become a Volunteer", href: "/volunteer", description: "Join the NRC or event volunteer team", icon: Heart },
+      { label: "Join a Local Chapter", href: "/chapters", description: "Find your community — Africa & Diaspora", icon: Map },
+      { label: "How to Join a Local Chapter", href: "/chapters#how-to-join", description: "Find, start, and grow a chapter", icon: BookOpen },
+      { label: "Donate", href: "/donate", description: "Fund Africa's education transformation", icon: Wallet },
+      { label: "Buy Merchandise", href: "/shop", description: "Support the movement — caps, tees & more", icon: ShoppingBag },
+      { label: "How to Earn AGC for Voting", href: "/earn-agc", description: "Earn AGC · Vote with AGC · Leaderboard · Missions", icon: Coins, badge: "AGC" },
     ],
   },
 
   // ─────────────────────────────────────────────────────────
-  // MEDIA — NESA Africa TV, Shows, Webinars, Gala, Press
+  // 4. MEDIA — Storytelling, visibility, amplification
   // ─────────────────────────────────────────────────────────
   {
     label: "Media",
     href: "/media",
     icon: Tv,
     children: [
-      {
-        label: "NESA Africa TV",
-        href: "/media/tv",
-        description: "Weekly media engine — interviews, stories, partner features",
-        icon: Play,
-        badge: "Live",
-      },
-      {
-        label: "Online Shows",
-        href: "/media/shows",
-        description: "Platinum, Icon, Gold & Blue Garnet shows",
-        icon: Tv,
-      },
-      {
-        label: "Awards Gala",
-        href: "/media/gala",
-        description: "Live broadcast of the Blue Garnet Gala",
-        icon: Trophy,
-      },
-      {
-        label: "Webinar Hub",
-        href: "/media/webinars",
-        description: "Educational webinars and training sessions",
-        icon: BookOpen,
-      },
-      {
-        label: "Press & News",
-        href: "/press",
-        description: "Latest news and media resources",
-        icon: MessageSquare,
-      },
-      {
-        label: "Nominees Directory",
-        href: "/nominees",
-        description: "Browse currently listed nominees",
-        icon: Users,
-      },
-      {
-        label: "Contact Us",
-        href: "/contact",
-        description: "Get in touch with our team",
-        icon: Mail,
-      },
+      { label: "Gallery", href: "/gallery", description: "Photo archives across NESA seasons", icon: Play },
+      { label: "Videos", href: "/media/tv", description: "NESA Africa TV — interviews & features", icon: Play, badge: "Live" },
+      { label: "Press Releases", href: "/press", description: "Official news & announcements", icon: MessageSquare },
+      { label: "Winner Stories", href: "/awards/winners", description: "Honourees from every season", icon: Trophy },
+      { label: "Impact Stories", href: "/media/shows", description: "Documented impact across Africa", icon: BookOpen },
+      { label: "Trending Nominees", href: "/nominees?sort=trending", description: "Most-voted nominees right now", icon: Star },
+      { label: "Media Kit", href: "/press#media-kit", description: "Logos, brand assets & guidelines", icon: FileCheck },
     ],
   },
 
   // ─────────────────────────────────────────────────────────
-  // EARN AGC — Afri-Gold Coin rewards economy (5th primary)
+  // 5. NOMINATE — Nomination ecosystem
   // ─────────────────────────────────────────────────────────
   {
-    label: "Earn AGC",
-    href: "/earn-agc",
-    icon: Coins,
+    label: "Nominate",
+    href: "/nominate",
+    icon: FileCheck,
     children: [
-      { label: "Earn AGC Dashboard", href: "/earn-agc", description: "All ways to earn Afri-Gold Coins", icon: Coins },
-      { label: "Daily Missions", href: "/earn-agc#missions", description: "Rotating rewards that reset daily", icon: Target },
-      { label: "Leaderboard", href: "/earn-agc#leaderboard", description: "Top AGC earners across the movement", icon: Trophy },
-      { label: "Reward History", href: "/earn-agc#history", description: "Your earning timeline", icon: Clock },
+      { label: "Nominate for 2026", href: "/nominate", description: "Submit a nomination for the 2026 season", icon: FileCheck, stageGated: "nominations" },
+      { label: "Public Pre-Nomination", href: "/nominate?mode=public", description: "Quick public-facing nomination flow", icon: UserPlus },
+      { label: "How to Nominate", href: "/guidelines/how-to-nominate", description: "Step-by-step nomination guide", icon: BookOpen },
+      { label: "Nomination Guidelines", href: "/guidelines/nominees", description: "Eligibility, evidence & criteria", icon: Shield },
+      { label: "Re-Nominate a Changemaker", href: "/nominate?mode=renominate", description: "Bring a past nominee back for 2026", icon: Award },
+      { label: "Why Re-Nomination Matters", href: "/guidelines/renomination", description: "How re-nomination strengthens impact", icon: Info },
+      { label: "Existing Nominee Updates", href: "/dashboard/nominations", description: "Manage and update your nominee profile", icon: Settings },
+      { label: "Explore Existing Nominees", href: "/nominees", description: "Browse the live nominee directory", icon: Users },
+    ],
+  },
+
+  // ─────────────────────────────────────────────────────────
+  // 6. VOTE — Voting ecosystem (Gold + Blue Garnet + AGC)
+  // ─────────────────────────────────────────────────────────
+  {
+    label: "Vote",
+    href: "/vote",
+    icon: Vote,
+    children: [
+      // A. About Voting
+      { label: "How Voting Works", href: "/how-voting-works", description: "Public + jury voting explained", icon: Info },
+      { label: "Public + Jury Voting", href: "/about/governance#voting", description: "Two voting tracks with full firewalls", icon: Shield },
+      { label: "Vote with AGC", href: "/vote-with-agc", description: "Use Afri-Gold Coin credits to vote", icon: Coins },
+      // B. Gold Certificate Voting — 15 Aug – 15 Sep 2026
+      { label: "Vote in Gold Categories", href: "/vote/gold", description: "Gold Certificate · 15 Aug – 15 Sep 2026", icon: Award, badge: "AGC Voting" },
+      { label: "Gold Voting FAQ", href: "/faq#gold-voting", description: "Common questions about Gold voting", icon: MessageSquare },
+      { label: "Gold Voting Timeline", href: "/about/timeline#gold-voting", description: "When Gold voting opens and closes", icon: Calendar },
+      // C. Blue Garnet Voting — 16 Sep – 22 Oct 2026
+      { label: "Vote in Blue Garnet Categories", href: "/vote/blue-garnet", description: "Blue Garnet · 16 Sep – 22 Oct 2026", icon: Trophy, badge: "Final Voting Phase" },
+      { label: "Blue Garnet Gala Voting", href: "/vote/blue-garnet#gala", description: "Final voting window closes on gala day", icon: Trophy },
+      { label: "Final Voting Window", href: "/about/timeline#blue-garnet-voting", description: "Closes 22 October 2026", icon: Clock },
+      // D. Voting Participation
+      { label: "Earn AGC", href: "/earn-agc", description: "All ways to earn Afri-Gold Coins", icon: Coins },
       { label: "AGC Wallet", href: "/dashboard/wallet", description: "Balance, settlements & transactions", icon: Wallet },
-      { label: "Voting Center", href: "/vote", description: "Vote for nominees & earn bonus AGC", icon: Vote },
-      { label: "Refer Friends", href: "/dashboard?tab=referrals", description: "Earn 2.5 AGC per referral signup", icon: UserPlus },
-      { label: "Become Ambassador", href: "/ambassadors", description: "Unlock +10 AGC + premium perks", icon: Star },
+      { label: "Voting Leaderboard", href: "/earn-agc#leaderboard", description: "Top AGC voters across the movement", icon: Trophy },
     ],
   },
 ];
+
+// Mobile-first menu order — Nominate & Vote surfaced first for 95% mobile traffic
+export const MAIN_NAV_MOBILE_ORDER: readonly string[] = [
+  "Nominate",
+  "Vote",
+  "Engage",
+  "Programs",
+  "About",
+  "Media",
+];
+
 
 // ============================================================================
 // QUICK ACTIONS (Hero Section)
