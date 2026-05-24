@@ -104,7 +104,7 @@ export const PROGRAMME_TIMELINE_2026 = [
   {
     id: 'gold-voting',
     phase: 'Gold Certificate Voting',
-    period: '13 July – 25 September 2026',
+    period: '15 August – 15 September 2026',
     description: 'Mass public voting phase across the eligible categories using AGC participation credits.',
     focus: 'Participation · Audience Growth · Regional Activation',
     status: 'upcoming' as const,
