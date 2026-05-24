@@ -59,7 +59,7 @@ export function CategoryDiscoveryGrid({
   seeAllHref,
   className = "",
 }: CategoryDiscoveryGridProps) {
-  const { data: nominees, isLoading } = useNominees(undefined, { enabled: !categoriesProp });
+  const { data: nominees, isLoading } = useNominees();
 
   const categories = useMemo<CategoryEntry[]>(() => {
     if (categoriesProp) return categoriesProp;
