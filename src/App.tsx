@@ -30,6 +30,7 @@ import CertificateVerify from "./pages/CertificateVerify";
 import VerifyCertificate from "./pages/VerifyCertificate";
 import Results from "./pages/Results";
 import Policies from "./pages/Policies";
+import FAQPage from "./pages/FAQ";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
