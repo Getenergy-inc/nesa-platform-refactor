@@ -154,11 +154,9 @@ export function CategoryDiscoveryGrid({
 
 // ─────────────────────────────────────────────────────────────────────
 function CategoryCard({ cat, index }: { cat: CategoryEntry; index: number }) {
-  const tier = getCategoryTier(cat.slug);
   const tierStyle = getTierStyle(cat.slug);
   const secondaryLabel = getSecondaryCtaLabel(cat.slug);
   const secondaryHref = getSecondaryCtaHref(cat.slug);
-  const isBlueGarnet = tier === "blue_garnet";
 
   return (
     <motion.article
