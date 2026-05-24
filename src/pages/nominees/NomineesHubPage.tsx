@@ -368,131 +368,16 @@ export default function NomineesHubPage() {
 
           {/* ════════════════════════════════════════════════════════════ */}
           {/* PRIMARY DISCOVERY SURFACE — Browse by Award Category         */}
-          {/* Moved up: this is the structural promise of the platform.   */}
+          {/* Now driven by the reusable CategoryDiscoveryGrid component.  */}
           {/* ════════════════════════════════════════════════════════════ */}
-          <div className="mb-6 flex items-center justify-between">
-            <h2 className="font-display text-2xl md:text-3xl font-bold text-ivory flex items-center gap-2">
-              <Trophy className="w-6 h-6 text-gold" /> Browse by Award Category
-            </h2>
-            <span className="text-sm text-ivory/60">{filteredCategories.length} categories</span>
-          </div>
-          <p className="text-ivory/60 text-sm md:text-base mb-5 max-w-2xl">
-            Every nominee belongs to an award track. Pick a category to explore its nominees, vote
-            in Blue Garnet tracks, or re-nominate a champion.
-          </p>
+          <CategoryDiscoveryGrid
+            layout="grid"
+            categories={filteredCategories}
+            heading="Browse by Award Category"
+            subheading="Every nominee belongs to an award track. Pick a category to explore its nominees, vote in Blue Garnet tracks, or re-nominate a champion."
+            className="mb-14"
+          />
 
-          {isLoading ? (
-            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-14">
-              {Array.from({ length: 6 }).map((_, i) => (
-                <Skeleton key={i} className="h-72 rounded-2xl" />
-              ))}
-            </div>
-          ) : filteredCategories.length === 0 ? (
-            <div className="text-center py-16 text-ivory/60 mb-14">
-              <Users className="w-12 h-12 mx-auto text-gold/30 mb-3" />
-              No categories match your search.
-            </div>
-          ) : (
-            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-14">
-              {filteredCategories.map((cat, i) => {
-                const tier = getCategoryTier(cat.slug);
-                const tierStyle = TIER_BADGE_STYLES[tier];
-                const secondaryLabel = getSecondaryCtaLabel(cat.slug);
-                const secondaryHref = getSecondaryCtaHref(cat.slug);
-                const isBlueGarnet = tier === "blue_garnet";
-                return (
-                  <motion.div
-                    key={cat.slug}
-                    initial={{ opacity: 0, y: 12 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: Math.min(i * 0.03, 0.4) }}
-                    className={`group relative overflow-hidden rounded-2xl border ${
-                      isBlueGarnet
-                        ? "border-blue-400/40 bg-gradient-to-br from-blue-950/60 via-charcoal-light to-charcoal"
-                        : "border-gold/15 hover:border-gold/40 bg-gradient-to-br from-charcoal-light to-charcoal"
-                    } p-5 h-full flex flex-col transition-all hover:shadow-lg hover:shadow-gold/10`}
-                  >
-                    <div className="flex items-start justify-between mb-3">
-                      <div
-                        className={`h-11 w-11 rounded-xl flex items-center justify-center ${
-                          isBlueGarnet ? "bg-blue-400/20" : "bg-gold/15"
-                        }`}
-                      >
-                        <Trophy className={`w-5 h-5 ${isBlueGarnet ? "text-blue-200" : "text-gold"}`} />
-                      </div>
-                      <Badge className={`text-[10px] ${tierStyle.className}`}>
-                        {tierStyle.label}
-                      </Badge>
-                    </div>
-
-                    <Link
-                      to={`/nominees/category/${cat.slug}`}
-                      className="block"
-                      aria-label={`Explore nominees in ${cat.name}`}
-                    >
-                      <h3 className="font-display text-lg font-bold text-ivory group-hover:text-gold transition-colors line-clamp-2 mb-2">
-                        {cat.name}
-                      </h3>
-                    </Link>
-
-                    <div className="flex items-center gap-2 text-[11px] text-ivory/60 mb-4">
-                      <Users className="w-3.5 h-3.5 text-gold/70" />
-                      <span>{cat.count.toLocaleString()} nominees</span>
-                    </div>
-
-                    {/* Avatar stack */}
-                    {cat.topNominees.length > 0 && (
-                      <div className="flex -space-x-2 mb-4">
-                        {cat.topNominees.slice(0, 3).map((n) => (
-                          <div
-                            key={n.id}
-                            className="w-8 h-8 rounded-full border-2 border-charcoal overflow-hidden bg-charcoal-light"
-                            title={n.name}
-                          >
-                            <img
-                              src={n.photoUrl}
-                              alt=""
-                              className={
-                                n.imageType === "logo"
-                                  ? "object-contain w-full h-full p-1 bg-white/90"
-                                  : "object-cover w-full h-full"
-                              }
-                              loading="lazy"
-                            />
-                          </div>
-                        ))}
-                      </div>
-                    )}
-
-                    {/* CTA stack — Primary then Secondary, vertical on mobile */}
-                    <div className="mt-auto flex flex-col gap-2">
-                      <Link to={`/nominees/category/${cat.slug}`} className="block">
-                        <Button
-                          size="sm"
-                          className="w-full bg-gold hover:bg-gold/90 text-charcoal font-bold rounded-full gap-2"
-                        >
-                          Explore Nominees <ArrowRight className="w-3.5 h-3.5" />
-                        </Button>
-                      </Link>
-                      <Link to={secondaryHref} className="block">
-                        <Button
-                          size="sm"
-                          variant="outline"
-                          className={`w-full rounded-full gap-2 ${
-                            isBlueGarnet
-                              ? "border-blue-300/50 text-blue-100 hover:bg-blue-400/10"
-                              : "border-gold/40 text-gold hover:bg-gold/10"
-                          }`}
-                        >
-                          {secondaryLabel}
-                        </Button>
-                      </Link>
-                    </div>
-                  </motion.div>
-                );
-              })}
-            </div>
-          )}
 
           {/* ════════════════════════════════════════════════════════════ */}
           {/* Trending Now — intentionally DEMOTED to below category grid */}
