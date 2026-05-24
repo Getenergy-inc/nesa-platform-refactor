@@ -335,13 +335,14 @@ export const ADMIN_DASHBOARD_NAV: NavItem[] = [
 // ============================================================================
 
 export const MOBILE_NAV: NavItem[] = [
-  { label: "Home", href: "/", icon: Home },
-  { label: "Categories", href: "/categories", icon: Trophy },
   { label: "Nominate", href: "/nominate", icon: FileCheck },
   { label: "Vote", href: "/vote", icon: Vote },
-  { label: "NESA Africa TV", href: "/media/tv", icon: Tv },
-  { label: "Donate", href: "/donate", icon: Heart },
+  { label: "Engage", href: "/get-involved", icon: Users },
+  { label: "Earn AGC", href: "/earn-agc", icon: Coins },
+  { label: "Tickets", href: "/tickets", icon: Ticket },
+  { label: "Watch", href: "/media/tv", icon: Tv },
 ];
+
 
 // ============================================================================
 // PAGE REGISTRY (All Frontend Pages)
