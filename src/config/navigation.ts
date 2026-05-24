@@ -115,6 +115,7 @@ export const MAIN_NAV: NavItem[] = [
       { label: "Apply as Ambassador", href: "/ambassadors", description: "Represent NESA-Africa in your region", icon: UserPlus },
       { label: "Apply to be a Judge", href: "/judgeapply", description: "Join the 2026 jury panel", icon: Gavel },
       { label: "Become a Volunteer", href: "/volunteer", description: "Join the NRC or event volunteer team", icon: Heart },
+      { label: "Meet Our Volunteers", href: "/volunteers", description: "The people powering NESA-Africa", icon: Users, badge: "New" },
       { label: "Join a Local Chapter", href: "/chapters", description: "Find your community — Africa & Diaspora", icon: Map },
       { label: "How to Join a Local Chapter", href: "/chapters#how-to-join", description: "Find, start, and grow a chapter", icon: BookOpen },
       { label: "Donate", href: "/donate", description: "Fund Africa's education transformation", icon: Wallet },
