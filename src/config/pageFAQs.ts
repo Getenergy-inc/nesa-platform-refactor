@@ -105,6 +105,14 @@ export const PAGE_FAQS: PageFAQ[] = [
         ctas: [{ label: "Explore Regions", href: "/region" }],
       },
       {
+        q: "How does NESA-Africa promote Education for All in Africa?",
+        a: "NESA-Africa promotes Education for All by using its 2026 Education Development Index (EDI) Matrix to recognise, classify, and amplify changemakers improving education access, quality learning, equity, innovation, infrastructure, governance, and partnerships across Africa. Through public nominations, AGC voting, jury review, regional participation, EduAid Africa, and Rebuild My School Africa, the platform connects recognition to measurable post-award education impact. It aligns with SDG 4 — Quality Education — and supports the African Union Agenda 2063 vision for education, youth empowerment, innovation, and inclusive continental development.",
+        ctas: [
+          { label: "Explore the EDI Matrix", href: "/#about-nesa-2026" },
+          { label: "Support EduAid Africa", href: "/donate" },
+        ],
+      },
+      {
         q: "What happens after the awards ceremony?",
         a: "Phase 2 begins: recognition transitions into real impact through EduAid Africa and Rebuild My School Africa. Each region selects a special-needs school for transformation, supported by community votes, sponsor funding and verified delivery — turning every award into measurable education outcomes.",
         ctas: [
