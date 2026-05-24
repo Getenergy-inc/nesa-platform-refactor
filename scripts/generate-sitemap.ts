@@ -50,6 +50,8 @@ const staticEntries: SitemapEntry[] = [
   // Participation
   { path: "/nominate", changefreq: "weekly", priority: "0.9" },
   { path: "/vote", changefreq: "daily", priority: "0.9" },
+  { path: "/trending", changefreq: "daily", priority: "0.85" },
+  { path: "/how-voting-works", changefreq: "monthly", priority: "0.6" },
   { path: "/earn-agc", changefreq: "weekly", priority: "0.8" },
   { path: "/about-agc", changefreq: "monthly", priority: "0.6" },
   // Ecosystem
