@@ -166,7 +166,7 @@ import {
   VolunteerSettingsPage,
 } from "./pages/volunteer/VolunteerSubPages";
 import VolunteerShareAssets from "./pages/volunteer/VolunteerShareAssets";
-import Chapters from "./pages/volunteers/Chapters";
+import VolunteerChapters from "./pages/volunteers/Chapters";
 import JoinLocalChapter from "./pages/volunteers/JoinLocalChapter";
 import Ambassadors from "./pages/Ambassadors";
 import Contributors from "./pages/Contributors";
