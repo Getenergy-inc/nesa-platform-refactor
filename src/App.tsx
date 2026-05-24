@@ -250,6 +250,7 @@ import {
   AdminGalleryCMS,
 } from "./pages/admin";
 import BulkSeedNominees from "./pages/admin/BulkSeedNominees";
+import AdminVolunteersCMS from "./pages/admin/AdminVolunteersCMS";
 
 // Optimized QueryClient with caching strategy
 const queryClient = new QueryClient({
