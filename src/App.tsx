@@ -1688,6 +1688,16 @@ const App = () => (
                       </WithLayout>
                     }
                   />
+                  <Route path="/volunteers/:slug" element={<WithLayout><VolunteerProfile /></WithLayout>} />
+                  <Route path="/volunteer-teams" element={<WithLayout><VolunteerTeams /></WithLayout>} />
+                  <Route path="/volunteer-leaderboard" element={<WithLayout><VolunteerLeaderboard /></WithLayout>} />
+                  <Route path="/volunteer-stories" element={<WithLayout><VolunteerStories /></WithLayout>} />
+                  <Route path="/volunteer/dashboard" element={<WithLayout><VolunteerDashboard /></WithLayout>} />
+                  <Route path="/volunteer/profile" element={<WithLayout><VolunteerProfileEdit /></WithLayout>} />
+                  <Route path="/volunteer/referrals" element={<WithLayout><VolunteerReferralsPage /></WithLayout>} />
+                  <Route path="/volunteer/tasks" element={<WithLayout><VolunteerTasksPage /></WithLayout>} />
+                  <Route path="/volunteer/analytics" element={<WithLayout><VolunteerAnalyticsPage /></WithLayout>} />
+                  <Route path="/volunteer/settings" element={<WithLayout><VolunteerSettingsPage /></WithLayout>} />
                   <Route
                     path="/ambassadors"
                     element={
