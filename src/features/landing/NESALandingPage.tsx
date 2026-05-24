@@ -29,7 +29,7 @@ const InteractiveAfricaMap = lazy(() => import("@/components/nesa/InteractiveAfr
 const SponsorsSection = lazy(() => import("@/components/nesa/SponsorsSection").then(m => ({ default: m.SponsorsSection })));
 const FinalCTASection = lazy(() => import("@/components/nesa/FinalCTASection").then(m => ({ default: m.FinalCTASection })));
 const HomepageGalleryTeaser = lazy(() => import("@/components/gallery/HomepageGalleryTeaser").then(m => ({ default: m.HomepageGalleryTeaser })));
-const CategoryDiscoveryGrid = lazy(() => import("@/components/nominees/CategoryDiscoveryGrid").then(m => ({ default: m.CategoryDiscoveryGrid })));
+const NomineeDiscoverySwitcher = lazy(() => import("@/components/nominees/NomineeDiscoverySwitcher").then(m => ({ default: m.NomineeDiscoverySwitcher })));
 
 
 export function NESALandingPage() {
