@@ -12,6 +12,7 @@ import {
 } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { usePageView } from "@/hooks/usePageView";
 
 const STEPS = [
   {
@@ -44,6 +45,7 @@ const RULES = [
 ];
 
 export default function HowVotingWorksPage() {
+  usePageView("/how-voting-works", "How Voting Works — NESA-Africa 2026");
   return (
     <>
       <Helmet>

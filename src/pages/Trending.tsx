@@ -13,8 +13,10 @@ import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useNominees } from "@/hooks/useNominees";
 import { LandingNomineeCard } from "@/components/nesa/LandingNomineeCard";
+import { usePageView } from "@/hooks/usePageView";
 
 export default function TrendingPage() {
+  usePageView("/trending", "Trending Nominees — NESA-Africa 2026");
   const { data: nominees, isLoading } = useNominees();
 
   const { trending, mostVoted } = useMemo(() => {
