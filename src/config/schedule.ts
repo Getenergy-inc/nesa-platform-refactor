@@ -379,7 +379,7 @@ export function buildAwardPhases(awardYear: number): AwardPhaseConfig[] {
       id: "blue-garnet",
       title: "Blue Garnet Award",
       subtitle: "Highest Competitive Honour",
-      period: `2 – 22 October ${ceremonyYear}`,
+      period: `16 September – 22 October ${ceremonyYear}`,
       showDate: `22 October ${ceremonyYear} (Gala)`,
       iconName: "Gem",
       features: [
