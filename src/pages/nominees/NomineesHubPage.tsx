@@ -19,6 +19,8 @@ import {
   getSecondaryCtaHref,
   TIER_BADGE_STYLES,
 } from "@/config/nomineeCategories";
+import { CategoryDiscoveryGrid } from "@/components/nominees/CategoryDiscoveryGrid";
+
 
 
 // NOTE: Nominee-group chips are UI-ready. Wire filtering logic to `useNominees`
