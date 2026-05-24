@@ -152,6 +152,7 @@ import { JudgeArenaGuard } from "./components/judge/JudgeArenaGuard";
 import Partners from "./pages/Partners";
 import Chapters from "./pages/Chapters";
 import Volunteer from "./pages/Volunteer";
+import Volunteers from "./pages/Volunteers";
 import Ambassadors from "./pages/Ambassadors";
 import Contributors from "./pages/Contributors";
 import ContributorProfile from "./pages/ContributorProfile";
@@ -1659,6 +1660,14 @@ const App = () => (
                     element={
                       <WithLayout>
                         <Volunteer />
+                      </WithLayout>
+                    }
+                  />
+                  <Route
+                    path="/volunteers"
+                    element={
+                      <WithLayout>
+                        <Volunteers />
                       </WithLayout>
                     }
                   />
