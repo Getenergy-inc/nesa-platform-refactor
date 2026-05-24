@@ -56,36 +56,61 @@ export const PAGE_FAQS: PageFAQ[] = [
   // ---------- HOMEPAGE ----------
   {
     match: "/",
-    title: "About NESA Africa 2026",
-    subtitle: "Everything you need to know about the continental award",
+    title: "NESA-Africa 2026 — Frequently Asked Questions",
+    subtitle:
+      "Everything you need to know about nominations, AGC voting, the Blue Garnet Awards Gala, regional participation, and post-award education impact.",
+    viewAllHref: "/faq",
+    viewAllLabel: "View Full FAQ & Participation Guide",
     faqs: [
       {
-        q: "What is NESA Africa 2026?",
-        a: "The New Education Standard Award Africa 2026 is a continental platform recognizing excellence in education and driving real impact through partnerships, media, and school transformation across Africa.",
+        q: "What is NESA-Africa 2026?",
+        a: "NESA-Africa 2026 — The New Education Standard Award Africa — is a continental recognition-to-impact platform honouring the people, schools, corporations and partners advancing Education for All across Africa and the diaspora. The 2026 journey runs in phases: public pre-nomination, NRC verification, jury onboarding, Gold Certificate public voting, Blue Garnet final voting, the June Awards Gala, and the post-award EduAid Africa impact phase.",
+        ctas: [
+          { label: "View Full 2026 Journey", href: "/about" },
+          { label: "Explore Nominees", href: "/nominees" },
+        ],
       },
       {
-        q: "What is the difference between NESA Africa and other education awards?",
-        a: "NESA Africa is a recognition-to-impact system. We move beyond ceremonies — every award category is tied to follow-through programs like EduAid Africa, Rebuild My School Africa, and Special School Grants 2026/2027.",
+        q: "How is NESA-Africa different from traditional education awards?",
+        a: "Most education awards end at the ceremony. NESA-Africa is a recognition-to-impact ecosystem — every category is tied to follow-through programs like EduAid Africa, Rebuild My School Africa and Special School Grants. Recognition is decided by a transparent EDI scoring matrix, an independent jury, and verified public AGC voting — not by sponsors.",
       },
       {
-        q: "When and where is the 2026 ceremony?",
-        a: "The 2026 Grand Gala is scheduled for June 27, 2026. Regional ceremonies and TV broadcasts run throughout the year. Visit the Tickets page for the latest event details.",
+        q: "Who can be nominated and who runs the review?",
+        a: "Anyone advancing education in Africa can be nominated: individuals, schools, NGOs, corporations, influencers, embassies and global partners. Submissions are screened by the Nomination Review Committee (NRC), verified against the 5-pillar Education Development Index (EDI), then published in the public directory.",
+        ctas: [
+          { label: "Nominate for 2026", href: "/nominate" },
+          { label: "Nominate a School", href: "/nominate?category=special-school-impact" },
+        ],
       },
       {
-        q: "How are nominees selected?",
-        a: "Nominations are submitted by the public, screened by the Nomination Review Committee (NRC), and evaluated against the Education Development Index (EDI) — a 5-pillar scoring framework covering Access, Quality, Equity, Innovation, and Impact.",
+        q: "What are AGC voting points and how do I earn them?",
+        a: "Afri-Gold Coins (AGC) are non-tradeable participation credits used during official voting windows. Earn them by signing up (+2 AGCc), nominating (+2 AGCc), daily sign-in (+1), referrals (+3 then +1), watching NESA TV (+1) and other actions. 10 AGCc = 1 AGC. 1 vote = 1 AGC. AGC is not cryptocurrency and cannot be cashed out.",
+        ctas: [
+          { label: "Earn AGC", href: "/earn-agc" },
+          { label: "Learn About Voting", href: "/how-voting-works" },
+        ],
       },
       {
-        q: "What is the Africa Education Icon?",
-        a: "The Africa Education Icon is our highest honor — a Lifetime Achievement award (2006–2026) recognizing leaders who have shaped education across Africa over two decades.",
+        q: "What is the Blue Garnet Awards Gala?",
+        a: "The Blue Garnet Awards Gala is the continental finale on June 27, 2026, where Blue Garnet winners (jury + public AGC voting), Gold Certificate winners (100% public vote), Platinum Recognition honourees and the Africa Education Icon are celebrated live, broadcast on NESA TV across Africa and the diaspora.",
+        ctas: [{ label: "View Tickets & Gala", href: "/buy-your-ticket" }],
       },
       {
-        q: "What are AGC voting points?",
-        a: "Afrigold Credits (AGC) are non-tradeable voting points earned through participation. They are used during official voting windows to support Gold and Blue Garnet nominees. AGC is not cryptocurrency and cannot be cashed out.",
+        q: "What is the Africa Education Icon Award?",
+        a: "The highest honour of NESA-Africa — a Lifetime Achievement recognition (2006–2026) for leaders who have shaped education across the continent over two decades. Icon awards are selected by an expert panel, not public voting, under a strict 3-3-3 structure.",
       },
       {
         q: "Which African regions participate?",
-        a: "All 5 African regions plus the Diaspora and Friends of Africa: West, East, North, Central, Southern Africa, and global African communities.",
+        a: "All five African regions — West, East, North, Central and Southern Africa — plus the Diaspora & Global Africa and Friends of Africa zones. Many categories run regional shortlists before continental finals to keep representation fair.",
+        ctas: [{ label: "Explore Regions", href: "/region" }],
+      },
+      {
+        q: "What happens after the awards ceremony?",
+        a: "Phase 2 begins: recognition transitions into real impact through EduAid Africa and Rebuild My School Africa. Each region selects a special-needs school for transformation, supported by community votes, sponsor funding and verified delivery — turning every award into measurable education outcomes.",
+        ctas: [
+          { label: "Partner With NESA-Africa", href: "/sponsors" },
+          { label: "Support EduAid Africa", href: "/donate" },
+        ],
       },
     ],
   },
