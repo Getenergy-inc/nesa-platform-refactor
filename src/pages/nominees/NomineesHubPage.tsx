@@ -90,6 +90,11 @@ export default function NomineesHubPage() {
       string,
       { slug: string; name: string; count: number; topNominees: EnrichedDatabaseNominee[] }
     >();
+    // Seed canonical 18 categories so every official award renders a card
+    // even when no nominee data exists yet for that slug.
+    CANONICAL_CATEGORIES.forEach((c) => {
+      catMap.set(c.slug, { slug: c.slug, name: c.name, count: 0, topNominees: [] });
+    });
     valid.forEach((n) => {
       const e = catMap.get(n.categorySlug) ?? {
         slug: n.categorySlug,
