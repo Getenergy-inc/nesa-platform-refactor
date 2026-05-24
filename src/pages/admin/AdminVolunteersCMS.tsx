@@ -81,7 +81,7 @@ export default function AdminVolunteersCMS() {
     });
   }, [rows, q, statusFilter]);
 
-  const updateVolunteer = async (id: string, patch: Partial<VolunteerRow>) => {
+  const updateVolunteer = async (id: string, patch: Record<string, any>) => {
     const { error } = await supabase.from("volunteers").update(patch).eq("id", id);
     if (error) return toast.error(error.message);
     toast.success("Updated");
