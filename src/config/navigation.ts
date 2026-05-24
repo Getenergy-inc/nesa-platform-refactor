@@ -17,6 +17,7 @@ import {
   Info,
   Mail,
   Map,
+  MapPin,
   Medal,
   MessageSquare,
   Play,
