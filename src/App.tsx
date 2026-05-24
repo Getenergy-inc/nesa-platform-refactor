@@ -466,6 +466,25 @@ const App = () => (
                     }
                   />
 
+                  {/* Trending nominees */}
+                  <Route
+                    path="/trending"
+                    element={
+                      <WithLayout>
+                        <Trending />
+                      </WithLayout>
+                    }
+                  />
+                  {/* Voting explainer */}
+                  <Route
+                    path="/how-voting-works"
+                    element={
+                      <WithLayout>
+                        <HowVotingWorks />
+                      </WithLayout>
+                    }
+                  />
+
                   {/* Awards */}
                   <Route
                     path="/categories"
