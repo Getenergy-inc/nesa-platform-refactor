@@ -99,9 +99,22 @@ export function HeroCTAStack() {
         </motion.div>
       </div>
 
+      {/* Volunteer conversion pill */}
+      <motion.div variants={item} className="mt-3 flex justify-center lg:justify-start">
+        <Link
+          to="/volunteer"
+          onClick={onCta("become_volunteer", "/volunteer")}
+          className="group inline-flex items-center gap-2 rounded-full border border-gold/30 bg-gold/5 px-4 py-1.5 text-xs font-medium text-gold/90 hover:border-gold hover:bg-gold/10 hover:text-gold transition"
+        >
+          <Heart className="h-3.5 w-3.5" />
+          Become a Volunteer
+          <ArrowRight className="h-3 w-3 transition-transform group-hover:translate-x-0.5" />
+        </Link>
+      </motion.div>
+
       {/* Subtle helper line */}
       <p className="mt-3 text-center lg:text-left text-[11px] text-white/45">
-        Nominate · Earn AGC · Discover changemakers · Browse categories
+        Nominate · Earn AGC · Discover changemakers · Volunteer
       </p>
     </motion.div>
   );
