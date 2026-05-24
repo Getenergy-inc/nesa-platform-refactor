@@ -2,8 +2,10 @@ import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
 import { CertificateGallery } from "@/components/nesa/CertificateGallery";
 import { AwardTVShowSection } from "@/components/awards/AwardTVShowSection";
-import { AwardHeroSection } from "@/components/awards/AwardHeroSection";
 import { AwardCategoriesGrid } from "@/components/awards/AwardCategoriesGrid";
+import { BrandedCategoryHero } from "@/components/awards/BrandedCategoryHero";
+import { BrandedDocumentaryPreview } from "@/components/awards/BrandedDocumentaryPreview";
+import { BreadcrumbJsonLd } from "@/components/seo/BreadcrumbJsonLd";
 import { getTVShowByAward } from "@/config/awardTVShows";
 import { getCategoriesByTier } from "@/config/nesaCategories";
 import { Button } from "@/components/ui/button";
@@ -39,25 +41,35 @@ export default function GoldAward() {
           name="description"
           content="The Gold Certificate is NESA-Africa's competitive public-voted recognition — Top 3 winners per subcategory (405 total) across 5 African regions. Vote with AGC."
         />
+        <link rel="canonical" href="https://nesa.africa/awards/gold" />
       </Helmet>
+      <BreadcrumbJsonLd crumbs={[{ name: "Home", path: "/" }, { name: "Awards", path: "/awards" }, { name: "Gold Certificate", path: "/awards/gold" }]} />
 
       <div className="min-h-screen bg-charcoal">
-        {/* Hero */}
-        <AwardHeroSection
-          variant="gold"
-          title="Gold"
-          titleAccent="Certificate"
+        <BrandedCategoryHero
+          theme="legacy"
+          headlineLead="Who Will Win"
+          headlineAccent="Africa's Gold Certificate?"
           description="The competitive stage of NESA recognition. Top 3 highest-voted nominees per subcategory win Gold Certificates — 405 winners across 9 categories, all advancing to the Blue Garnet competition."
-          features={["100% Public Voting", "No Judges", "Region-First Competition"]}
-          primaryAction={{
-            label: "Nominate for Gold",
-            href: "/nominate",
-            icon: Award,
-          }}
-          secondaryAction={{
-            label: "Vote Now — Apr 10, 2026",
-          }}
+          tags={["100% Public Vote", "No Judges", "Region-First", "Top 3", "405 Winners", "AGC Voting"]}
+          stats={[
+            { value: "405", label: "Gold Winners" },
+            { value: "135", label: "Subcategories" },
+            { value: "5", label: "African Regions" },
+          ]}
+          primaryCta={{ label: "Nominate for Gold", href: "/nominate" }}
+          secondaryCta={{ label: "Vote Now", href: "/vote" }}
+          watchCta={{ label: "Watch Gold Stories", href: "/media" }}
+          imageAlt="Gold Certificate finalists — Africa's public-voted education champions"
         />
+        <BrandedDocumentaryPreview
+          theme="legacy"
+          title="Road to Gold"
+          description="Inside the most competitive public-voted stage of NESA-Africa — region-first qualifiers, AGC-powered campaigns, and the 405 nominees who will advance to Blue Garnet."
+          watchCtaHref="/media"
+          imageAlt="Gold Certificate documentary preview"
+        />
+
 
         {/* AGC Voting Integration */}
         <section className="border-t border-amber-500/20 bg-gradient-to-b from-amber-500/5 to-charcoal py-12">

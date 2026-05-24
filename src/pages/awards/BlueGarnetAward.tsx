@@ -2,8 +2,10 @@ import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
 import { CertificateGallery } from "@/components/nesa/CertificateGallery";
 import { AwardTVShowSection } from "@/components/awards/AwardTVShowSection";
-import { AwardHeroSection } from "@/components/awards/AwardHeroSection";
 import { AwardCategoriesGrid } from "@/components/awards/AwardCategoriesGrid";
+import { BrandedCategoryHero } from "@/components/awards/BrandedCategoryHero";
+import { BrandedDocumentaryPreview } from "@/components/awards/BrandedDocumentaryPreview";
+import { BreadcrumbJsonLd } from "@/components/seo/BreadcrumbJsonLd";
 import { getTVShowByAward } from "@/config/awardTVShows";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -25,29 +27,35 @@ export default function BlueGarnetAward() {
           name="description"
           content="The Africa Education Blue Garnet Award is NESA-Africa's highest honour — 60% Jury scoring, 40% Public voting, 9 winners announced at the live Gala."
         />
+        <link rel="canonical" href="https://nesa.africa/awards/blue-garnet" />
       </Helmet>
+      <BreadcrumbJsonLd crumbs={[{ name: "Home", path: "/" }, { name: "Awards", path: "/awards" }, { name: "Blue Garnet", path: "/awards/blue-garnet" }]} />
 
       <div className="min-h-screen bg-charcoal">
-        {/* Hero */}
-        <AwardHeroSection
-          variant="blue-garnet"
-          title="Blue"
-          titleAccent="Garnet"
-          description="The pinnacle of NESA recognition. The most prestigious education awards ceremony in Africa."
-          featureBadges={[
-            { label: "40% Public Vote", icon: Vote },
-            { label: "60% Jury Selection", icon: Users },
-            { label: "Live Global Broadcast", icon: Tv },
+        <BrandedCategoryHero
+          theme="bluegarnet"
+          headlineLead="Who Will Claim"
+          headlineAccent="The Blue Garnet?"
+          description="The pinnacle of NESA recognition — Africa's most prestigious education honour. 60% expert jury scoring, 40% public voting, 9 continental winners revealed on a live global broadcast."
+          tags={["Prestige", "Gala", "60% Jury", "40% Public", "Global Broadcast", "9 Winners"]}
+          stats={[
+            { value: "9", label: "Continental Winners" },
+            { value: "60/40", label: "Jury / Public Split" },
+            { value: "Lagos", label: "27 June 2026" },
           ]}
-          primaryAction={{
-            label: "Get Gala Tickets",
-            href: "/tickets",
-            icon: Ticket,
-          }}
-          secondaryAction={{
-            label: "June 27, 2026 • Lagos",
-          }}
+          primaryCta={{ label: "Get Gala Tickets", href: "/tickets" }}
+          secondaryCta={{ label: "How Jury Scoring Works", href: "/governance" }}
+          watchCta={{ label: "Watch Past Galas", href: "/media/gala" }}
+          imageAlt="Blue Garnet Award — Africa's highest education honour"
         />
+        <BrandedDocumentaryPreview
+          theme="bluegarnet"
+          title="Inside the Blue Garnet"
+          description="The road from Gold Certificate to continental glory — jury deliberations, public momentum, and the gala night that crowns Africa's nine education leaders."
+          watchCtaHref="/media/gala"
+          imageAlt="Blue Garnet documentary preview"
+        />
+
 
         {/* Scoring Breakdown */}
         <section className="bg-charcoal py-16 lg:py-24">

@@ -2,8 +2,10 @@ import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
 import { CertificateGallery } from "@/components/nesa/CertificateGallery";
 import { AwardTVShowSection } from "@/components/awards/AwardTVShowSection";
-import { AwardHeroSection } from "@/components/awards/AwardHeroSection";
 import { AwardCategoriesGrid } from "@/components/awards/AwardCategoriesGrid";
+import { BrandedCategoryHero } from "@/components/awards/BrandedCategoryHero";
+import { BrandedDocumentaryPreview } from "@/components/awards/BrandedDocumentaryPreview";
+import { BreadcrumbJsonLd } from "@/components/seo/BreadcrumbJsonLd";
 
 import { getTVShowByAward } from "@/config/awardTVShows";
 import { getCategoriesGrouped } from "@/config/nesaCategories";
@@ -47,25 +49,35 @@ export default function IconAward() {
           name="description"
           content="The Africa Education Icon Award honors 9 individuals with lifetime contributions to education transformation across Africa — 3 Africa, 3 Diaspora, 3 Friends of Africa."
         />
+        <link rel="canonical" href="https://nesa.africa/awards/icon" />
       </Helmet>
+      <BreadcrumbJsonLd crumbs={[{ name: "Home", path: "/" }, { name: "Awards", path: "/awards" }, { name: "Africa Education Icon", path: "/awards/icon" }]} />
 
       <div className="min-h-screen bg-charcoal">
-        {/* Hero */}
-        <AwardHeroSection
-          variant="icon"
-          title="Africa Education"
-          titleAccent="Icon Blue Garnet"
+        <BrandedCategoryHero
+          theme="legacy"
+          headlineLead="Who Are Africa's"
+          headlineAccent="Education Icons?"
           description="Honouring 9 exceptional individuals who have shaped education across Africa over 20+ continuous years. A once-in-a-lifetime award — 3 Africa Icons, 3 Diaspora Icons, 3 Friends of Africa Icons."
-          features={["9 Icons total", "Once-in-a-lifetime honour", "20+ years documented impact"]}
-          primaryAction={{
-            label: "Nominate an Icon",
-            href: "/nominate",
-            icon: Award,
-          }}
-          secondaryAction={{
-            label: "Icon Show: 28 Mar 2026",
-          }}
+          tags={["Lifetime", "Legacy", "20+ Years", "Africa", "Diaspora", "Friends of Africa", "Once-in-a-Lifetime"]}
+          stats={[
+            { value: "9", label: "Icons per Season" },
+            { value: "20+", label: "Years of Impact" },
+            { value: "3+3+3", label: "Pathways to Icon Status" },
+          ]}
+          primaryCta={{ label: "Nominate an Icon", href: "/nominate" }}
+          secondaryCta={{ label: "Icon Show: 28 Mar 2026", href: "/awards/icon" }}
+          watchCta={{ label: "Watch Icon Stories", href: "/media" }}
+          imageAlt="Africa Education Icons — lifetime achievement laureates"
         />
+        <BrandedDocumentaryPreview
+          theme="legacy"
+          title="Icon Legacy Stories"
+          description="Step inside the 20-year journeys of Africa's most enduring education champions — pioneers, mentors, founders, and global allies who built today's classrooms."
+          watchCtaHref="/media"
+          imageAlt="Africa Education Icon documentary preview"
+        />
+
 
         {/* Once-in-a-Lifetime Explainer */}
         <section className="bg-charcoal/95 py-16 lg:py-24">
