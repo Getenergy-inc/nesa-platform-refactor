@@ -18,6 +18,7 @@ import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useNominees } from "@/hooks/useNominees";
 import { CategoryDiscoveryGrid } from "@/components/nominees/CategoryDiscoveryGrid";
+import { trackEvent } from "@/lib/analytics";
 import {
   getCategoryTier,
   TIER_BADGE_STYLES,
@@ -109,7 +110,10 @@ export function NomineeDiscoverySwitcher() {
                 type="button"
                 role="tab"
                 aria-selected={active}
-                onClick={() => setTab(key)}
+                onClick={() => {
+                  setTab(key);
+                  trackEvent("nominee_discovery_tab", { tab: key });
+                }}
                 className={`inline-flex items-center gap-1.5 rounded-full border px-3.5 py-1.5 text-xs md:text-sm font-medium whitespace-nowrap transition-all min-h-[36px] ${
                   active
                     ? "bg-gold text-charcoal border-gold shadow-md shadow-gold/20"
