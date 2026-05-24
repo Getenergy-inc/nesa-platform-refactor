@@ -64,6 +64,41 @@ const THEMES: Record<BrandedCategoryTheme, ThemeTokens> = {
     chipBorder: "border-sky-500/30",
     chipText: "text-sky-300",
   },
+  stem: {
+    accent: "text-cyan-300", border: "border-cyan-500/30", glow: "bg-cyan-500/15", ring: "ring-cyan-400/20",
+    ctaBg: "bg-cyan-500 hover:bg-cyan-500/90", ctaText: "text-charcoal",
+    chipBorder: "border-cyan-500/30", chipText: "text-cyan-300",
+  },
+  ngo: {
+    accent: "text-orange-300", border: "border-orange-500/30", glow: "bg-orange-500/15", ring: "ring-orange-400/20",
+    ctaBg: "bg-orange-500 hover:bg-orange-500/90", ctaText: "text-charcoal",
+    chipBorder: "border-orange-500/30", chipText: "text-orange-300",
+  },
+  media: {
+    accent: "text-rose-300", border: "border-rose-500/30", glow: "bg-rose-500/15", ring: "ring-rose-400/20",
+    ctaBg: "bg-rose-500 hover:bg-rose-500/90", ctaText: "text-white",
+    chipBorder: "border-rose-500/30", chipText: "text-rose-300",
+  },
+  regional: {
+    accent: "text-teal-300", border: "border-teal-500/30", glow: "bg-teal-500/15", ring: "ring-teal-400/20",
+    ctaBg: "bg-teal-500 hover:bg-teal-500/90", ctaText: "text-charcoal",
+    chipBorder: "border-teal-500/30", chipText: "text-teal-300",
+  },
+  platinum: {
+    accent: "text-zinc-200", border: "border-zinc-300/30", glow: "bg-zinc-300/15", ring: "ring-zinc-200/20",
+    ctaBg: "bg-zinc-200 hover:bg-zinc-100", ctaText: "text-charcoal",
+    chipBorder: "border-zinc-300/30", chipText: "text-zinc-200",
+  },
+  bluegarnet: {
+    accent: "text-indigo-300", border: "border-indigo-500/30", glow: "bg-indigo-500/15", ring: "ring-indigo-400/20",
+    ctaBg: "bg-indigo-500 hover:bg-indigo-500/90", ctaText: "text-white",
+    chipBorder: "border-indigo-500/30", chipText: "text-indigo-300",
+  },
+  diaspora: {
+    accent: "text-violet-300", border: "border-violet-500/30", glow: "bg-violet-500/15", ring: "ring-violet-400/20",
+    ctaBg: "bg-violet-500 hover:bg-violet-500/90", ctaText: "text-white",
+    chipBorder: "border-violet-500/30", chipText: "text-violet-300",
+  },
 };
 
 type CategoryRow = {
