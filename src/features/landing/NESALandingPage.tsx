@@ -1,5 +1,8 @@
-// NESA-Africa Landing Page — 14-block conversion funnel (Phase 3)
-// Data-driven via Icon + Gold nominee layers.
+// NESA-Africa Landing Page — high-conversion gateway (Phase 1 restructure)
+// Target 8-section flow: Hero → Ecosystem → Countdown → Nominee Discovery →
+// Regional Preview → Moments Preview → Impact → Final CTA.
+// Deep systems (merch, AGC, voting guide, ecosystem programs, full trending,
+// full gallery, full categories, full regions) live on dedicated routes.
 
 import { lazy } from "react";
 import { useTranslation } from "react-i18next";
@@ -20,17 +23,12 @@ import { PageFAQSection, FloatingFAQButton } from "@/components/nesa/PageFAQ";
 import { useSeason } from "@/contexts/SeasonContext";
 
 // Lazy below-fold
-const AwardPillarsGrid = lazy(() => import("@/components/landing/AwardPillarsGrid").then(m => ({ default: m.AwardPillarsGrid })));
 const EcosystemCarousel = lazy(() => import("@/components/landing/EcosystemCarousel").then(m => ({ default: m.EcosystemCarousel })));
 const ImpactWrapUpSection = lazy(() => import("@/components/nesa/ImpactWrapUpSection").then(m => ({ default: m.ImpactWrapUpSection })));
 const InteractiveAfricaMap = lazy(() => import("@/components/nesa/InteractiveAfricaMap").then(m => ({ default: m.InteractiveAfricaMap })));
-const PromoVideosSection = lazy(() => import("@/components/nesa/PromoVideosSection").then(m => ({ default: m.PromoVideosSection })));
-const BePartOfMovementSection = lazy(() => import("@/components/landing/BePartOfMovementSection").then(m => ({ default: m.BePartOfMovementSection })));
 const SponsorsSection = lazy(() => import("@/components/nesa/SponsorsSection").then(m => ({ default: m.SponsorsSection })));
 const FinalCTASection = lazy(() => import("@/components/nesa/FinalCTASection").then(m => ({ default: m.FinalCTASection })));
 const HomepageGalleryTeaser = lazy(() => import("@/components/gallery/HomepageGalleryTeaser").then(m => ({ default: m.HomepageGalleryTeaser })));
-const CampaignParticipationSlider = lazy(() => import("@/components/landing/CampaignParticipationSlider").then(m => ({ default: m.CampaignParticipationSlider })));
-const MerchandiseShowcase = lazy(() => import("@/components/nesa/MerchandiseShowcase").then(m => ({ default: m.MerchandiseShowcase })));
 const CategoryDiscoveryGrid = lazy(() => import("@/components/nominees/CategoryDiscoveryGrid").then(m => ({ default: m.CategoryDiscoveryGrid })));
 
 
@@ -49,35 +47,24 @@ export function NESALandingPage() {
         keywords={t("seo.landing.keywords", "")}
       />
 
-
       <ScrollProgressIndicator />
 
       <div className="min-h-screen bg-charcoal pt-14 sm:pt-16 pb-16 text-center md:text-left">
         <NESAHeader />
 
-        {/* 1. HERO */}
+        {/* 1. HERO — primary CTAs */}
         <TrophyHeroSection />
 
-        {/* 2. GALA COUNTDOWN — urgency immediately after hero */}
-        <CountdownSection />
-
-        {/* 3. MOMENTS — 2025 pre-opening emotional proof */}
-        <LazySection>
-          <HomepageGalleryTeaser />
-        </LazySection>
-
-        {/* 4. CAMPAIGN + PARTICIPATION SLIDER */}
-        <LazySection>
-          <CampaignParticipationSlider />
-        </LazySection>
-
-        {/* 5. EXPLORE EXISTING NOMINEES / HONOUREES */}
+        {/* 2. ECOSYSTEM TRUST — honourees/ecosystem strip moved up for fast credibility */}
         <TrustLogosStrip />
         <LazySection>
           <EcosystemCarousel />
         </LazySection>
 
-        {/* 5b. BROWSE BY AWARD CATEGORY — reusable carousel from /nominees */}
+        {/* 3. COUNTDOWN — Blue Garnet 2026 Gala urgency */}
+        <CountdownSection />
+
+        {/* 4. NOMINEE DISCOVERY — single primary discovery surface */}
         <LazySection>
           <section className="bg-charcoal py-10 md:py-14">
             <div className="container">
@@ -85,55 +72,38 @@ export function NESALandingPage() {
                 layout="carousel"
                 limit={10}
                 seeAllHref="/nominees"
-                heading="Browse Nominees by Award Category"
-                subheading="Pick an award track to explore its nominees, vote in Blue Garnet, or re-nominate a champion."
+                heading="Explore Existing Nominees by Award Category"
+                subheading="Pick an award track to explore nominees, vote in Blue Garnet, or re-nominate a champion."
               />
             </div>
           </section>
         </LazySection>
 
-
-        {/* 6. FEATURED AWARD CATEGORIES */}
-        <LazySection>
-          <AwardPillarsGrid />
-        </LazySection>
-
-        {/* 7. EXPLORE AFRICA'S REGIONS (before Impact wrap-up) */}
+        {/* 5. REGIONAL PREVIEW — links to full /regions */}
         <LazySection>
           <InteractiveAfricaMap />
         </LazySection>
 
-        {/* 8. IMPACT WRAP-UP */}
+        {/* 6. MOMENTS PREVIEW — 4 tiles, full experience on /gallery */}
+        <LazySection>
+          <HomepageGalleryTeaser />
+        </LazySection>
+
+        {/* 7. IMPACT WRAP-UP — EduAid storytelling */}
         <LazySection>
           <ImpactWrapUpSection />
         </LazySection>
 
-        {/* 9. BE PART OF THE MOVEMENT */}
-        <LazySection>
-          <BePartOfMovementSection />
-        </LazySection>
-
-        {/* 10. BUY MERCHANDISE — official NESA-Africa shop */}
-        <LazySection>
-          <MerchandiseShowcase />
-        </LazySection>
-
-        {/* 11. FEATURED VIDEOS */}
-        <LazySection>
-          <PromoVideosSection />
-        </LazySection>
-
-        {/* 12. PARTNERS & SPONSORS */}
+        {/* Trust supporting Final CTA */}
         <LazySection>
           <SponsorsSection />
         </LazySection>
 
-        {/* 13. FAQ */}
         <LazySection>
           <PageFAQSection />
         </LazySection>
 
-        {/* 14. FINAL CTA */}
+        {/* 8. FINAL CTA */}
         <LazySection>
           <FinalCTASection />
         </LazySection>
