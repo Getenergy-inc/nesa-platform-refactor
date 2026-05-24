@@ -50,6 +50,41 @@ const THEMES: Record<BrandedCategoryTheme, ThemeTokens> = {
     chipBorder: "border-sky-500/40",
     chipText: "text-sky-300",
   },
+  stem: {
+    eyebrow: "text-cyan-300/80", accent: "text-cyan-300", border: "border-cyan-500/30", glow: "bg-cyan-500/15",
+    gradient: "bg-gradient-to-r from-cyan-200 via-cyan-300 to-sky-400 bg-clip-text text-transparent",
+    chipBorder: "border-cyan-500/40", chipText: "text-cyan-300",
+  },
+  ngo: {
+    eyebrow: "text-orange-300/80", accent: "text-orange-300", border: "border-orange-500/30", glow: "bg-orange-500/15",
+    gradient: "bg-gradient-to-r from-orange-200 via-amber-300 to-orange-400 bg-clip-text text-transparent",
+    chipBorder: "border-orange-500/40", chipText: "text-orange-300",
+  },
+  media: {
+    eyebrow: "text-rose-300/80", accent: "text-rose-300", border: "border-rose-500/30", glow: "bg-rose-500/15",
+    gradient: "bg-gradient-to-r from-rose-200 via-pink-300 to-rose-400 bg-clip-text text-transparent",
+    chipBorder: "border-rose-500/40", chipText: "text-rose-300",
+  },
+  regional: {
+    eyebrow: "text-teal-300/80", accent: "text-teal-300", border: "border-teal-500/30", glow: "bg-teal-500/15",
+    gradient: "bg-gradient-to-r from-teal-200 via-emerald-300 to-teal-400 bg-clip-text text-transparent",
+    chipBorder: "border-teal-500/40", chipText: "text-teal-300",
+  },
+  platinum: {
+    eyebrow: "text-zinc-200/80", accent: "text-zinc-200", border: "border-zinc-300/30", glow: "bg-zinc-300/15",
+    gradient: "bg-gradient-to-r from-white via-zinc-300 to-white bg-clip-text text-transparent",
+    chipBorder: "border-zinc-300/40", chipText: "text-zinc-200",
+  },
+  bluegarnet: {
+    eyebrow: "text-indigo-300/80", accent: "text-indigo-300", border: "border-indigo-500/30", glow: "bg-indigo-500/15",
+    gradient: "bg-gradient-to-r from-indigo-200 via-gold to-indigo-300 bg-clip-text text-transparent",
+    chipBorder: "border-indigo-500/40", chipText: "text-indigo-300",
+  },
+  diaspora: {
+    eyebrow: "text-violet-300/80", accent: "text-violet-300", border: "border-violet-500/30", glow: "bg-violet-500/15",
+    gradient: "bg-gradient-to-r from-violet-200 via-fuchsia-300 to-violet-400 bg-clip-text text-transparent",
+    chipBorder: "border-violet-500/40", chipText: "text-violet-300",
+  },
 };
 
 export interface AnimatedActionWordsProps {

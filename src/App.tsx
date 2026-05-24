@@ -537,8 +537,13 @@ const App = () => (
                     }
                   />
                   <Route
-                    path="/awards/gold-special-recognition"
+                    path="/awards/influencers-education-impact-2026-recognition"
                     element={<GoldSpecialRecognition />}
+                  />
+                  {/* Legacy alias — 301-style redirect preserving query string */}
+                  <Route
+                    path="/awards/gold-special-recognition"
+                    element={<Navigate to="/awards/influencers-education-impact-2026-recognition" replace />}
                   />
                   <Route
                     path="/awards/winners"

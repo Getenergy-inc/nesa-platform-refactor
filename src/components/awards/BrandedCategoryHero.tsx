@@ -10,7 +10,18 @@ import csrImg from "@/assets/pathway-cards/csr.jpg";
 import influencerImg from "@/assets/pathway-cards/influencer.jpg";
 import grantsImg from "@/assets/pathway-cards/grants.jpg";
 
-export type BrandedCategoryTheme = "legacy" | "corporate" | "influencer" | "global";
+export type BrandedCategoryTheme =
+  | "legacy"
+  | "corporate"
+  | "influencer"
+  | "global"
+  | "stem"
+  | "ngo"
+  | "media"
+  | "regional"
+  | "platinum"
+  | "bluegarnet"
+  | "diaspora";
 
 type ThemeTokens = {
   eyebrow: string;
@@ -82,6 +93,104 @@ const THEMES: Record<BrandedCategoryTheme, ThemeTokens> = {
     ctaText: "text-white",
     tagBorder: "border-sky-500/40",
     tagText: "text-sky-300",
+    image: grantsImg,
+  },
+  stem: {
+    eyebrow: "STEM · INNOVATION · FUTURE",
+    accent: "text-cyan-300",
+    accentSoft: "bg-cyan-500/10",
+    border: "border-cyan-500/40",
+    ring: "ring-cyan-400/30",
+    glow: "bg-cyan-500/20",
+    headlineAccent: "bg-gradient-to-r from-cyan-300 via-sky-400 to-cyan-300 bg-clip-text text-transparent",
+    ctaBg: "bg-cyan-500 hover:bg-cyan-500/90",
+    ctaText: "text-charcoal",
+    tagBorder: "border-cyan-500/40",
+    tagText: "text-cyan-300",
+    image: grantsImg,
+  },
+  ngo: {
+    eyebrow: "GRASSROOTS · HUMANITARIAN",
+    accent: "text-orange-300",
+    accentSoft: "bg-orange-500/10",
+    border: "border-orange-500/40",
+    ring: "ring-orange-400/30",
+    glow: "bg-orange-500/20",
+    headlineAccent: "bg-gradient-to-r from-orange-300 via-amber-400 to-orange-300 bg-clip-text text-transparent",
+    ctaBg: "bg-orange-500 hover:bg-orange-500/90",
+    ctaText: "text-charcoal",
+    tagBorder: "border-orange-500/40",
+    tagText: "text-orange-300",
+    image: influencerImg,
+  },
+  media: {
+    eyebrow: "VOICE · STORYTELLING · ADVOCACY",
+    accent: "text-rose-300",
+    accentSoft: "bg-rose-500/10",
+    border: "border-rose-500/40",
+    ring: "ring-rose-400/30",
+    glow: "bg-rose-500/20",
+    headlineAccent: "bg-gradient-to-r from-rose-300 via-pink-400 to-rose-300 bg-clip-text text-transparent",
+    ctaBg: "bg-rose-500 hover:bg-rose-500/90",
+    ctaText: "text-white",
+    tagBorder: "border-rose-500/40",
+    tagText: "text-rose-300",
+    image: influencerImg,
+  },
+  regional: {
+    eyebrow: "AFRICA · UNITY · IDENTITY",
+    accent: "text-teal-300",
+    accentSoft: "bg-teal-500/10",
+    border: "border-teal-500/40",
+    ring: "ring-teal-400/30",
+    glow: "bg-teal-500/20",
+    headlineAccent: "bg-gradient-to-r from-teal-300 via-emerald-300 to-teal-300 bg-clip-text text-transparent",
+    ctaBg: "bg-teal-500 hover:bg-teal-500/90",
+    ctaText: "text-charcoal",
+    tagBorder: "border-teal-500/40",
+    tagText: "text-teal-300",
+    image: iconImg,
+  },
+  platinum: {
+    eyebrow: "PLATINUM · HONOR · DISTINCTION",
+    accent: "text-zinc-200",
+    accentSoft: "bg-zinc-300/10",
+    border: "border-zinc-300/40",
+    ring: "ring-zinc-200/30",
+    glow: "bg-zinc-300/20",
+    headlineAccent: "bg-gradient-to-r from-white via-zinc-300 to-white bg-clip-text text-transparent",
+    ctaBg: "bg-zinc-200 hover:bg-zinc-100",
+    ctaText: "text-charcoal",
+    tagBorder: "border-zinc-300/40",
+    tagText: "text-zinc-200",
+    image: iconImg,
+  },
+  bluegarnet: {
+    eyebrow: "BLUE GARNET · PRESTIGE · GALA",
+    accent: "text-indigo-300",
+    accentSoft: "bg-indigo-500/10",
+    border: "border-indigo-500/40",
+    ring: "ring-indigo-400/30",
+    glow: "bg-indigo-500/20",
+    headlineAccent: "bg-gradient-to-r from-indigo-300 via-gold to-indigo-300 bg-clip-text text-transparent",
+    ctaBg: "bg-indigo-500 hover:bg-indigo-500/90",
+    ctaText: "text-white",
+    tagBorder: "border-indigo-500/40",
+    tagText: "text-indigo-300",
+    image: grantsImg,
+  },
+  diaspora: {
+    eyebrow: "DIASPORA · GLOBAL AFRICA",
+    accent: "text-violet-300",
+    accentSoft: "bg-violet-500/10",
+    border: "border-violet-500/40",
+    ring: "ring-violet-400/30",
+    glow: "bg-violet-500/20",
+    headlineAccent: "bg-gradient-to-r from-violet-300 via-fuchsia-300 to-violet-300 bg-clip-text text-transparent",
+    ctaBg: "bg-violet-500 hover:bg-violet-500/90",
+    ctaText: "text-white",
+    tagBorder: "border-violet-500/40",
+    tagText: "text-violet-300",
     image: grantsImg,
   },
 };

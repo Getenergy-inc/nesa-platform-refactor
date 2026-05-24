@@ -188,7 +188,7 @@ export function AwardPillarsGrid() {
         { icon: Medal, top: "Sports", bottom: "Mentor Future Leaders" },
         { icon: Megaphone, top: "Voices", bottom: "Driving Change" },
       ],
-      primary: { href: "/awards/gold-special-recognition", label: "Explore Gold Nominees" },
+      primary: { href: "/awards/influencers-education-impact-2026-recognition", label: "Explore Gold Nominees" },
       secondary: { href: "/vote", label: "Vote for Influencers" },
       watchHref: "/media",
       watchLabel: "Watch Impact Stories",

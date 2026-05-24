@@ -74,6 +74,41 @@ const THEMES: Record<BrandedCategoryTheme, ThemeTokens> = {
     playFill: "text-sky-300",
     image: grantsImg,
   },
+  stem: {
+    title: "text-cyan-300", subtitle: "text-cyan-200/70", border: "border-cyan-500/30", glow: "bg-cyan-500/15",
+    ring: "ring-cyan-400/30", ctaBg: "bg-cyan-500 hover:bg-cyan-500/90", ctaText: "text-charcoal",
+    playRing: "ring-cyan-400/60", playFill: "text-cyan-300", image: grantsImg,
+  },
+  ngo: {
+    title: "text-orange-300", subtitle: "text-orange-200/70", border: "border-orange-500/30", glow: "bg-orange-500/15",
+    ring: "ring-orange-400/30", ctaBg: "bg-orange-500 hover:bg-orange-500/90", ctaText: "text-charcoal",
+    playRing: "ring-orange-400/60", playFill: "text-orange-300", image: influencerImg,
+  },
+  media: {
+    title: "text-rose-300", subtitle: "text-rose-200/70", border: "border-rose-500/30", glow: "bg-rose-500/15",
+    ring: "ring-rose-400/30", ctaBg: "bg-rose-500 hover:bg-rose-500/90", ctaText: "text-white",
+    playRing: "ring-rose-400/60", playFill: "text-rose-300", image: influencerImg,
+  },
+  regional: {
+    title: "text-teal-300", subtitle: "text-teal-200/70", border: "border-teal-500/30", glow: "bg-teal-500/15",
+    ring: "ring-teal-400/30", ctaBg: "bg-teal-500 hover:bg-teal-500/90", ctaText: "text-charcoal",
+    playRing: "ring-teal-400/60", playFill: "text-teal-300", image: iconImg,
+  },
+  platinum: {
+    title: "text-zinc-200", subtitle: "text-zinc-300/70", border: "border-zinc-300/30", glow: "bg-zinc-300/15",
+    ring: "ring-zinc-200/30", ctaBg: "bg-zinc-200 hover:bg-zinc-100", ctaText: "text-charcoal",
+    playRing: "ring-zinc-200/60", playFill: "text-zinc-200", image: iconImg,
+  },
+  bluegarnet: {
+    title: "text-indigo-300", subtitle: "text-indigo-200/70", border: "border-indigo-500/30", glow: "bg-indigo-500/15",
+    ring: "ring-indigo-400/30", ctaBg: "bg-indigo-500 hover:bg-indigo-500/90", ctaText: "text-white",
+    playRing: "ring-indigo-400/60", playFill: "text-indigo-300", image: grantsImg,
+  },
+  diaspora: {
+    title: "text-violet-300", subtitle: "text-violet-200/70", border: "border-violet-500/30", glow: "bg-violet-500/15",
+    ring: "ring-violet-400/30", ctaBg: "bg-violet-500 hover:bg-violet-500/90", ctaText: "text-white",
+    playRing: "ring-violet-400/60", playFill: "text-violet-300", image: grantsImg,
+  },
 };
 
 export interface BrandedDocumentaryPreviewProps {

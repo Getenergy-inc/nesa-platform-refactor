@@ -19,9 +19,9 @@ export default function GoldSpecialRecognition() {
         <meta property="og:title" content="Influencers Education Impact Award 2026 Edition | NESA-Africa" />
         <meta property="og:description" content="Celebrating cultural leaders championing education advocacy across Africa." />
         <meta property="og:type" content="website" />
-        <link rel="canonical" href="https://nesa.africa/awards/gold-special-recognition" />
+        <link rel="canonical" href="https://nesa.africa/awards/influencers-education-impact-2026-recognition" />
       </Helmet>
-      <BreadcrumbJsonLd crumbs={[{ name: "Home", path: "/" }, { name: "Awards", path: "/awards" }, { name: "Gold Special Recognition", path: "/awards/gold-special-recognition" }]} />
+      <BreadcrumbJsonLd crumbs={[{ name: "Home", path: "/" }, { name: "Awards", path: "/awards" }, { name: "Influencers Education Impact 2026 Recognition", path: "/awards/influencers-education-impact-2026-recognition" }]} />
 
       <div className="min-h-screen bg-charcoal">
         <NESAHeader />
