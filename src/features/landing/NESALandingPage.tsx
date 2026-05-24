@@ -86,6 +86,11 @@ export function NESALandingPage() {
           <ImpactWrapUpSection />
         </LazySection>
 
+        {/* About NESA-Africa 2026 — EDI Matrix, SDG 4 & AU Agenda 2063 */}
+        <LazySection>
+          <AboutNESASection />
+        </LazySection>
+
         {/* Trust supporting Final CTA */}
         <LazySection>
           <SponsorsSection />
