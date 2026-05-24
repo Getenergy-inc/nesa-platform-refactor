@@ -153,6 +153,18 @@ import Partners from "./pages/Partners";
 import Chapters from "./pages/Chapters";
 import Volunteer from "./pages/Volunteer";
 import Volunteers from "./pages/Volunteers";
+import VolunteerProfile from "./pages/volunteers/VolunteerProfile";
+import VolunteerTeams from "./pages/volunteers/VolunteerTeams";
+import VolunteerLeaderboard from "./pages/volunteers/VolunteerLeaderboard";
+import VolunteerStories from "./pages/volunteers/VolunteerStories";
+import VolunteerDashboard from "./pages/volunteer/VolunteerDashboard";
+import {
+  VolunteerProfileEdit,
+  VolunteerReferralsPage,
+  VolunteerTasksPage,
+  VolunteerAnalyticsPage,
+  VolunteerSettingsPage,
+} from "./pages/volunteer/VolunteerSubPages";
 import Ambassadors from "./pages/Ambassadors";
 import Contributors from "./pages/Contributors";
 import ContributorProfile from "./pages/ContributorProfile";
@@ -238,6 +250,7 @@ import {
   AdminGalleryCMS,
 } from "./pages/admin";
 import BulkSeedNominees from "./pages/admin/BulkSeedNominees";
+import AdminVolunteersCMS from "./pages/admin/AdminVolunteersCMS";
 
 // Optimized QueryClient with caching strategy
 const queryClient = new QueryClient({
@@ -1441,6 +1454,7 @@ const App = () => (
                   <Route path="/admin/edx" element={<AdminEDXAnalytics />} />
                   <Route path="/admin/contributor-photos" element={<AdminContributorPhotos />} />
                   <Route path="/admin/contributors" element={<AdminContributorsCMS />} />
+                  <Route path="/admin/volunteers" element={<AdminVolunteersCMS />} />
                   <Route path="/admin/pathways" element={<AdminPathwaysCMS />} />
                   <Route path="/admin/gallery" element={<AdminGalleryCMS />} />
                   <Route
@@ -1676,6 +1690,16 @@ const App = () => (
                       </WithLayout>
                     }
                   />
+                  <Route path="/volunteers/:slug" element={<WithLayout><VolunteerProfile /></WithLayout>} />
+                  <Route path="/volunteer-teams" element={<WithLayout><VolunteerTeams /></WithLayout>} />
+                  <Route path="/volunteer-leaderboard" element={<WithLayout><VolunteerLeaderboard /></WithLayout>} />
+                  <Route path="/volunteer-stories" element={<WithLayout><VolunteerStories /></WithLayout>} />
+                  <Route path="/volunteer/dashboard" element={<WithLayout><VolunteerDashboard /></WithLayout>} />
+                  <Route path="/volunteer/profile" element={<WithLayout><VolunteerProfileEdit /></WithLayout>} />
+                  <Route path="/volunteer/referrals" element={<WithLayout><VolunteerReferralsPage /></WithLayout>} />
+                  <Route path="/volunteer/tasks" element={<WithLayout><VolunteerTasksPage /></WithLayout>} />
+                  <Route path="/volunteer/analytics" element={<WithLayout><VolunteerAnalyticsPage /></WithLayout>} />
+                  <Route path="/volunteer/settings" element={<WithLayout><VolunteerSettingsPage /></WithLayout>} />
                   <Route
                     path="/ambassadors"
                     element={
