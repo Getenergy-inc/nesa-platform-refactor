@@ -2,8 +2,12 @@ import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
 import { CertificateGallery } from "@/components/nesa/CertificateGallery";
 import { AwardTVShowSection } from "@/components/awards/AwardTVShowSection";
-import { AwardHeroSection } from "@/components/awards/AwardHeroSection";
 import { AwardCategoriesGrid } from "@/components/awards/AwardCategoriesGrid";
+import { BrandedCategoryHero } from "@/components/awards/BrandedCategoryHero";
+import { BrandedDocumentaryPreview } from "@/components/awards/BrandedDocumentaryPreview";
+import { NESAHeader } from "@/components/nesa/NESAHeader";
+import { NESAFooter } from "@/components/nesa/NESAFooter";
+import { BreadcrumbJsonLd } from "@/components/seo/BreadcrumbJsonLd";
 
 import { getTVShowByAward } from "@/config/awardTVShows";
 import { getCategoriesGrouped } from "@/config/nesaCategories";
