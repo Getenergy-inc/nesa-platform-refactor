@@ -2,9 +2,9 @@
 // Pulls route-specific FAQs from src/config/pageFAQs.ts
 
 import { useEffect, useMemo, useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, Link } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
-import { HelpCircle, X, MessageCircleQuestion, Sparkles } from "lucide-react";
+import { HelpCircle, X, MessageCircleQuestion, Sparkles, ArrowRight } from "lucide-react";
 import {
   Accordion,
   AccordionContent,
