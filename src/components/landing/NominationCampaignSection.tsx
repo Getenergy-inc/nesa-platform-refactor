@@ -89,13 +89,17 @@ export function NominationCampaignSection() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.05 }}
-          className="mt-5 text-center font-display text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight text-ivory"
+          className="mt-5 text-center font-display text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold leading-tight text-ivory text-balance"
         >
           Don't Just Clap for{" "}
           <span className="bg-gradient-to-r from-gold via-amber-300 to-gold bg-clip-text text-transparent">
             Education Changemakers
           </span>
-          . Nominate Them.
+          . Nominate Them for{" "}
+          <span className="bg-gradient-to-r from-gold via-amber-300 to-gold bg-clip-text text-transparent whitespace-nowrap">
+            NESA-AFRICA 2026 Award
+          </span>
+          .
         </motion.h2>
 
         {/* ── Subheadline */}
