@@ -22,6 +22,11 @@ export interface NomineeCategoryConfig {
 /**
  * Slugs (or slug fragments) that identify Blue Garnet categories.
  * Match is substring-insensitive against the runtime categorySlug.
+ *
+ * The 9 official NESA-Africa Blue Garnet competitive categories are listed
+ * explicitly so their nominees + subcategories flip the secondary CTA from
+ * "Re-nominate" to "Vote". Keep in sync with src/config/nesaCategories.ts
+ * (entries where tierApplicability.blueGarnet === true).
  */
 const BLUE_GARNET_SLUG_FRAGMENTS = [
   "blue-garnet",
@@ -29,6 +34,16 @@ const BLUE_GARNET_SLUG_FRAGMENTS = [
   "africa-education-icon",
   "continental-leader",
   "diaspora-excellence",
+  // 9 official Blue Garnet categories (parent slugs match all their subcategories too)
+  "best-csr-education-africa",
+  "best-csr-education-nigeria",
+  "best-edutech-organisation-africa",
+  "best-media-educational-advocacy-nigeria",
+  "best-ngo-education-nigeria",
+  "best-ngo-education-africa",
+  "best-stem-education-africa",
+  "creative-arts-education-nigeria",
+  "best-education-friendly-state-nigeria",
 ];
 
 const ICON_SLUG_FRAGMENTS = ["africa-education-icon", "icon-award"];
