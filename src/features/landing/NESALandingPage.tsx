@@ -29,7 +29,7 @@ const InteractiveAfricaMap = lazy(() => import("@/components/nesa/InteractiveAfr
 const SponsorsSection = lazy(() => import("@/components/nesa/SponsorsSection").then(m => ({ default: m.SponsorsSection })));
 const FinalCTASection = lazy(() => import("@/components/nesa/FinalCTASection").then(m => ({ default: m.FinalCTASection })));
 const HomepageGalleryTeaser = lazy(() => import("@/components/gallery/HomepageGalleryTeaser").then(m => ({ default: m.HomepageGalleryTeaser })));
-const CategoryDiscoveryGrid = lazy(() => import("@/components/nominees/CategoryDiscoveryGrid").then(m => ({ default: m.CategoryDiscoveryGrid })));
+const NomineeDiscoverySwitcher = lazy(() => import("@/components/nominees/NomineeDiscoverySwitcher").then(m => ({ default: m.NomineeDiscoverySwitcher })));
 
 
 export function NESALandingPage() {
@@ -64,20 +64,11 @@ export function NESALandingPage() {
         {/* 3. COUNTDOWN — Blue Garnet 2026 Gala urgency */}
         <CountdownSection />
 
-        {/* 4. NOMINEE DISCOVERY — single primary discovery surface */}
+        {/* 4. NOMINEE DISCOVERY — tabbed switcher (Category · Region · Impact · Country) */}
         <LazySection>
-          <section className="bg-charcoal py-10 md:py-14">
-            <div className="container">
-              <CategoryDiscoveryGrid
-                layout="carousel"
-                limit={10}
-                seeAllHref="/nominees"
-                heading="Explore Existing Nominees by Award Category"
-                subheading="Pick an award track to explore nominees, vote in Blue Garnet, or re-nominate a champion."
-              />
-            </div>
-          </section>
+          <NomineeDiscoverySwitcher />
         </LazySection>
+
 
         {/* 5. REGIONAL PREVIEW — links to full /regions */}
         <LazySection>
