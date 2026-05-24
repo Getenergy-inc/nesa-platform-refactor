@@ -153,6 +153,18 @@ import Partners from "./pages/Partners";
 import Chapters from "./pages/Chapters";
 import Volunteer from "./pages/Volunteer";
 import Volunteers from "./pages/Volunteers";
+import VolunteerProfile from "./pages/volunteers/VolunteerProfile";
+import VolunteerTeams from "./pages/volunteers/VolunteerTeams";
+import VolunteerLeaderboard from "./pages/volunteers/VolunteerLeaderboard";
+import VolunteerStories from "./pages/volunteers/VolunteerStories";
+import VolunteerDashboard from "./pages/volunteer/VolunteerDashboard";
+import {
+  VolunteerProfileEdit,
+  VolunteerReferralsPage,
+  VolunteerTasksPage,
+  VolunteerAnalyticsPage,
+  VolunteerSettingsPage,
+} from "./pages/volunteer/VolunteerSubPages";
 import Ambassadors from "./pages/Ambassadors";
 import Contributors from "./pages/Contributors";
 import ContributorProfile from "./pages/ContributorProfile";
