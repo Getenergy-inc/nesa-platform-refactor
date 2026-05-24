@@ -68,11 +68,39 @@ export function PageFAQSection({ className }: { className?: string }) {
                 {faq.q}
               </AccordionTrigger>
               <AccordionContent className="text-white/70 text-sm sm:text-base leading-relaxed pb-4">
-                {faq.a}
+                <p>{faq.a}</p>
+                {faq.ctas && faq.ctas.length > 0 && (
+                  <div className="mt-3 flex flex-wrap gap-2">
+                    {faq.ctas.map((cta, j) => (
+                      <Link
+                        key={j}
+                        to={cta.href}
+                        className="inline-flex items-center gap-1.5 rounded-full bg-gold/10 border border-gold/30 px-3 py-1.5 text-xs font-semibold text-gold hover:bg-gold/20 transition-colors"
+                      >
+                        {cta.label}
+                        <ArrowRight className="h-3 w-3" />
+                      </Link>
+                    ))}
+                  </div>
+                )}
               </AccordionContent>
             </AccordionItem>
           ))}
         </Accordion>
+
+        {data.viewAllHref && (
+          <div className="mt-8 flex justify-center">
+            <Button
+              asChild
+              className="bg-gold hover:bg-gold-dark text-charcoal font-semibold rounded-full px-6 py-2.5 shadow-[0_8px_30px_-8px_hsl(var(--gold)/0.5)]"
+            >
+              <Link to={data.viewAllHref}>
+                {data.viewAllLabel || "View Full FAQ"}
+                <ArrowRight className="ml-2 h-4 w-4" />
+              </Link>
+            </Button>
+          </div>
+        )}
 
         <p className="text-center text-white/50 text-xs sm:text-sm mt-8">
           Have more questions?{" "}
