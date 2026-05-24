@@ -19,11 +19,9 @@ import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useNominees, type EnrichedDatabaseNominee } from "@/hooks/useNominees";
 import {
-  getCategoryTier,
   getSecondaryCtaLabel,
   getSecondaryCtaHref,
   getTierStyle,
-  TIER_BADGE_STYLES,
 } from "@/config/nomineeCategories";
 
 export interface CategoryEntry {
