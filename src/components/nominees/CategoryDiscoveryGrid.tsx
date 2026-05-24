@@ -230,11 +230,7 @@ function CategoryCard({ cat, index }: { cat: CategoryEntry; index: number }) {
           asChild
           size="sm"
           variant="outline"
-          className={`w-full rounded-full font-semibold min-h-[40px] ${
-            isBlueGarnet
-              ? "border-blue-300/50 text-blue-100 hover:bg-blue-400/10"
-              : "border-gold/40 text-gold hover:bg-gold/10"
-          }`}
+          className={`w-full rounded-full font-semibold min-h-[40px] ${tierStyle.secondaryCtaClass}`}
         >
           <Link to={secondaryHref}>{secondaryLabel}</Link>
         </Button>
