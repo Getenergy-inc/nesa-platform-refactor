@@ -168,6 +168,8 @@ import { GoldVoting, BlueGarnetVoting } from "./pages/vote/index";
 import AboutAGC from "./pages/AboutAGC";
 import EarnVotingCredits from "./pages/EarnVotingCredits";
 import ClaimVotingCredits from "./pages/ClaimVotingCredits";
+import Trending from "./pages/Trending";
+import HowVotingWorks from "./pages/HowVotingWorks";
 import Tickets from "./pages/Tickets";
 import BuyYourTicket from "./pages/BuyYourTicket";
 import GFAWzipWallet from "./pages/GFAWzipWallet";
@@ -460,6 +462,25 @@ const App = () => (
                     element={
                       <WithLayout>
                         <Videos />
+                      </WithLayout>
+                    }
+                  />
+
+                  {/* Trending nominees */}
+                  <Route
+                    path="/trending"
+                    element={
+                      <WithLayout>
+                        <Trending />
+                      </WithLayout>
+                    }
+                  />
+                  {/* Voting explainer */}
+                  <Route
+                    path="/how-voting-works"
+                    element={
+                      <WithLayout>
+                        <HowVotingWorks />
                       </WithLayout>
                     }
                   />
