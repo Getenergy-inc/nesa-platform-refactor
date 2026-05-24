@@ -23,6 +23,7 @@ import {
   getSecondaryCtaHref,
   getTierStyle,
 } from "@/config/nomineeCategories";
+import { getCategoryImage } from "@/config/categoryImages";
 
 export interface CategoryEntry {
   slug: string;
