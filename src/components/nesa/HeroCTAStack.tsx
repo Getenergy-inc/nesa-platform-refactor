@@ -1,6 +1,10 @@
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Trophy, Coins, Users, LayoutGrid, ArrowRight } from "lucide-react";
+import { trackEvent } from "@/lib/analytics";
+
+const onCta = (cta: string, to: string) => () =>
+  trackEvent("hero_cta_click", { cta, to, location: "hero" });
 
 /**
  * HeroCTAStack — Compact premium CTA system
@@ -46,6 +50,7 @@ export function HeroCTAStack() {
           <Link
             to="/nominate"
             aria-label="Nominate for 2026"
+            onClick={onCta("nominate", "/nominate")}
             className={`${baseBtn} bg-gold text-charcoal font-semibold shadow-[0_6px_18px_-8px_hsl(var(--gold)/0.7)] hover:bg-gold-dark hover:-translate-y-0.5 hover:shadow-[0_10px_22px_-8px_hsl(var(--gold)/0.85)]`}
           >
             <Trophy className="h-4 w-4" />
@@ -59,6 +64,7 @@ export function HeroCTAStack() {
           <Link
             to="/earn-agc"
             aria-label="Earn AGC Voting Points"
+            onClick={onCta("earn_agc", "/earn-agc")}
             className={`${baseBtn} border border-gold/50 bg-charcoal/40 text-white hover:border-gold hover:bg-gold/10 hover:-translate-y-0.5`}
           >
             <Coins className="h-4 w-4 text-gold" />
@@ -71,6 +77,7 @@ export function HeroCTAStack() {
           <Link
             to="/nominees"
             aria-label="Explore Existing Nominees"
+            onClick={onCta("explore_nominees", "/nominees")}
             className={`${baseBtn} border border-gold/40 bg-charcoal/40 text-white hover:border-gold hover:bg-gold/10 hover:text-gold hover:-translate-y-0.5`}
           >
             <Users className="h-4 w-4 text-gold/90 group-hover:text-gold" />
@@ -83,6 +90,7 @@ export function HeroCTAStack() {
           <Link
             to="/categories"
             aria-label="View Award Categories"
+            onClick={onCta("categories", "/categories")}
             className={`${baseBtn} border border-white/15 bg-transparent text-white/85 hover:border-gold/50 hover:text-gold hover:-translate-y-0.5`}
           >
             <LayoutGrid className="h-4 w-4 text-white/70 group-hover:text-gold" />

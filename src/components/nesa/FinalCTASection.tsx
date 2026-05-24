@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
+import { trackEvent } from "@/lib/analytics";
 
 export function FinalCTASection() {
   const { t } = useTranslation("pages");
@@ -29,13 +30,13 @@ export function FinalCTASection() {
           </p>
 
           <div className="flex flex-col sm:flex-row justify-center gap-4 mb-8">
-            <Link to="/nominate" className="group">
+            <Link to="/nominate" className="group" onClick={() => trackEvent("final_cta_click", { cta: "nominate", to: "/nominate", location: "final_cta" })}>
               <Button size="lg" className="bg-gold hover:bg-gold-dark text-charcoal font-bold rounded-full px-10 gap-2.5 shadow-xl shadow-gold/25 hover:shadow-gold/40 transition-all min-h-[56px] text-lg">
                 {t("landing.finalCTA.submitNomination")}
                 <ArrowRight className="h-5 w-5 group-hover:translate-x-1 transition-transform" />
               </Button>
             </Link>
-            <Link to="/vote" className="group">
+            <Link to="/vote" className="group" onClick={() => trackEvent("final_cta_click", { cta: "vote", to: "/vote", location: "final_cta" })}>
               <Button size="lg" variant="outline" className="border-2 border-gold/50 text-gold hover:bg-gold/10 hover:border-gold rounded-full px-10 gap-2.5 transition-all min-h-[56px] text-lg">
                 <Vote className="h-5 w-5" />
                 {t("common:actions.vote")}
@@ -44,19 +45,19 @@ export function FinalCTASection() {
           </div>
 
           <div className="flex flex-wrap justify-center gap-3 mb-10">
-            <Link to="/buy-your-ticket">
+            <Link to="/buy-your-ticket" onClick={() => trackEvent("final_cta_click", { cta: "tickets", to: "/buy-your-ticket", location: "final_cta" })}>
               <Button variant="ghost" className="text-gold/60 hover:text-gold hover:bg-gold/8 rounded-full gap-2">
                 <Ticket className="h-4 w-4" />
                 {t("common:actions.getTickets")}
               </Button>
             </Link>
-            <Link to="/donate">
+            <Link to="/donate" onClick={() => trackEvent("final_cta_click", { cta: "donate", to: "/donate", location: "final_cta" })}>
               <Button variant="ghost" className="text-gold/60 hover:text-gold hover:bg-gold/8 rounded-full gap-2">
                 <Heart className="h-4 w-4" />
                 {t("common:actions.donate")}
               </Button>
             </Link>
-            <Link to="/partners">
+            <Link to="/partners" onClick={() => trackEvent("final_cta_click", { cta: "partners", to: "/partners", location: "final_cta" })}>
               <Button variant="ghost" className="text-gold/60 hover:text-gold hover:bg-gold/8 rounded-full">
                 {t("landing.sponsors.title")}
               </Button>
