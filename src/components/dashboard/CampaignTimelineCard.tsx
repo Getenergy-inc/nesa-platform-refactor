@@ -39,8 +39,8 @@ const campaigns: Campaign[] = [
   },
   {
     name: "Grand Gala",
-    startDate: new Date("2026-06-27"),
-    endDate: new Date("2026-06-27"),
+    startDate: new Date("2026-10-22"),
+    endDate: new Date("2026-10-22"),
     color: "bg-gold",
     badge: "Gala",
   },
