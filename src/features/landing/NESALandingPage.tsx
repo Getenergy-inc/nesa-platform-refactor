@@ -92,6 +92,11 @@ export function NESALandingPage() {
           <AboutNESASection />
         </LazySection>
 
+        {/* Powered by Volunteers — community conversion funnel */}
+        <LazySection>
+          <PoweredByVolunteersSection />
+        </LazySection>
+
         {/* Trust supporting Final CTA */}
         <LazySection>
           <SponsorsSection />
