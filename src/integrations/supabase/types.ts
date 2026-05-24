@@ -5173,7 +5173,336 @@ export type Database = {
           },
         ]
       }
+      volunteer_activity_logs: {
+        Row: {
+          action: string
+          created_at: string
+          id: string
+          metadata: Json
+          volunteer_id: string
+        }
+        Insert: {
+          action: string
+          created_at?: string
+          id?: string
+          metadata?: Json
+          volunteer_id: string
+        }
+        Update: {
+          action?: string
+          created_at?: string
+          id?: string
+          metadata?: Json
+          volunteer_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "volunteer_activity_logs_volunteer_id_fkey"
+            columns: ["volunteer_id"]
+            isOneToOne: false
+            referencedRelation: "volunteer_leaderboard"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "volunteer_activity_logs_volunteer_id_fkey"
+            columns: ["volunteer_id"]
+            isOneToOne: false
+            referencedRelation: "volunteers"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      volunteer_badges: {
+        Row: {
+          code: string
+          created_at: string
+          description: string | null
+          icon: string | null
+          id: string
+          label: string
+          tier: string
+        }
+        Insert: {
+          code: string
+          created_at?: string
+          description?: string | null
+          icon?: string | null
+          id?: string
+          label: string
+          tier?: string
+        }
+        Update: {
+          code?: string
+          created_at?: string
+          description?: string | null
+          icon?: string | null
+          id?: string
+          label?: string
+          tier?: string
+        }
+        Relationships: []
+      }
+      volunteer_referrals: {
+        Row: {
+          channel: string | null
+          converted_at: string | null
+          created_at: string
+          id: string
+          referred_email: string | null
+          referred_name: string | null
+          referred_user_id: string | null
+          status: Database["public"]["Enums"]["volunteer_referral_status"]
+          volunteer_id: string
+        }
+        Insert: {
+          channel?: string | null
+          converted_at?: string | null
+          created_at?: string
+          id?: string
+          referred_email?: string | null
+          referred_name?: string | null
+          referred_user_id?: string | null
+          status?: Database["public"]["Enums"]["volunteer_referral_status"]
+          volunteer_id: string
+        }
+        Update: {
+          channel?: string | null
+          converted_at?: string | null
+          created_at?: string
+          id?: string
+          referred_email?: string | null
+          referred_name?: string | null
+          referred_user_id?: string | null
+          status?: Database["public"]["Enums"]["volunteer_referral_status"]
+          volunteer_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "volunteer_referrals_volunteer_id_fkey"
+            columns: ["volunteer_id"]
+            isOneToOne: false
+            referencedRelation: "volunteer_leaderboard"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "volunteer_referrals_volunteer_id_fkey"
+            columns: ["volunteer_id"]
+            isOneToOne: false
+            referencedRelation: "volunteers"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      volunteer_tasks: {
+        Row: {
+          approved_at: string | null
+          approved_by: string | null
+          assigned_by: string | null
+          created_at: string
+          description: string | null
+          due_date: string | null
+          id: string
+          points: number
+          proof_notes: string | null
+          proof_url: string | null
+          status: Database["public"]["Enums"]["volunteer_task_status"]
+          submitted_at: string | null
+          title: string
+          updated_at: string
+          volunteer_id: string
+        }
+        Insert: {
+          approved_at?: string | null
+          approved_by?: string | null
+          assigned_by?: string | null
+          created_at?: string
+          description?: string | null
+          due_date?: string | null
+          id?: string
+          points?: number
+          proof_notes?: string | null
+          proof_url?: string | null
+          status?: Database["public"]["Enums"]["volunteer_task_status"]
+          submitted_at?: string | null
+          title: string
+          updated_at?: string
+          volunteer_id: string
+        }
+        Update: {
+          approved_at?: string | null
+          approved_by?: string | null
+          assigned_by?: string | null
+          created_at?: string
+          description?: string | null
+          due_date?: string | null
+          id?: string
+          points?: number
+          proof_notes?: string | null
+          proof_url?: string | null
+          status?: Database["public"]["Enums"]["volunteer_task_status"]
+          submitted_at?: string | null
+          title?: string
+          updated_at?: string
+          volunteer_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "volunteer_tasks_volunteer_id_fkey"
+            columns: ["volunteer_id"]
+            isOneToOne: false
+            referencedRelation: "volunteer_leaderboard"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "volunteer_tasks_volunteer_id_fkey"
+            columns: ["volunteer_id"]
+            isOneToOne: false
+            referencedRelation: "volunteers"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      volunteer_teams: {
+        Row: {
+          color: string | null
+          created_at: string
+          description: string | null
+          icon: string | null
+          id: string
+          lead_user_id: string | null
+          member_count: number
+          name: string
+          slug: string
+          updated_at: string
+        }
+        Insert: {
+          color?: string | null
+          created_at?: string
+          description?: string | null
+          icon?: string | null
+          id?: string
+          lead_user_id?: string | null
+          member_count?: number
+          name: string
+          slug: string
+          updated_at?: string
+        }
+        Update: {
+          color?: string | null
+          created_at?: string
+          description?: string | null
+          icon?: string | null
+          id?: string
+          lead_user_id?: string | null
+          member_count?: number
+          name?: string
+          slug?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
       volunteers: {
+        Row: {
+          badges: string[]
+          bio: string | null
+          chapter_id: string | null
+          city: string | null
+          contribution_score: number
+          country: string | null
+          created_at: string
+          events_count: number
+          full_name: string
+          headline: string | null
+          id: string
+          is_featured: boolean
+          joined_at: string
+          photo_url: string | null
+          profile_views: number
+          referral_code: string
+          referral_count: number
+          region: string | null
+          role: string | null
+          shares_count: number
+          slug: string
+          social_links: Json
+          tasks_completed: number
+          team_slug: string | null
+          updated_at: string
+          user_id: string | null
+          verification_status: Database["public"]["Enums"]["volunteer_verification"]
+          visibility_status: Database["public"]["Enums"]["volunteer_visibility"]
+        }
+        Insert: {
+          badges?: string[]
+          bio?: string | null
+          chapter_id?: string | null
+          city?: string | null
+          contribution_score?: number
+          country?: string | null
+          created_at?: string
+          events_count?: number
+          full_name: string
+          headline?: string | null
+          id?: string
+          is_featured?: boolean
+          joined_at?: string
+          photo_url?: string | null
+          profile_views?: number
+          referral_code: string
+          referral_count?: number
+          region?: string | null
+          role?: string | null
+          shares_count?: number
+          slug: string
+          social_links?: Json
+          tasks_completed?: number
+          team_slug?: string | null
+          updated_at?: string
+          user_id?: string | null
+          verification_status?: Database["public"]["Enums"]["volunteer_verification"]
+          visibility_status?: Database["public"]["Enums"]["volunteer_visibility"]
+        }
+        Update: {
+          badges?: string[]
+          bio?: string | null
+          chapter_id?: string | null
+          city?: string | null
+          contribution_score?: number
+          country?: string | null
+          created_at?: string
+          events_count?: number
+          full_name?: string
+          headline?: string | null
+          id?: string
+          is_featured?: boolean
+          joined_at?: string
+          photo_url?: string | null
+          profile_views?: number
+          referral_code?: string
+          referral_count?: number
+          region?: string | null
+          role?: string | null
+          shares_count?: number
+          slug?: string
+          social_links?: Json
+          tasks_completed?: number
+          team_slug?: string | null
+          updated_at?: string
+          user_id?: string | null
+          verification_status?: Database["public"]["Enums"]["volunteer_verification"]
+          visibility_status?: Database["public"]["Enums"]["volunteer_visibility"]
+        }
+        Relationships: [
+          {
+            foreignKeyName: "volunteers_team_slug_fkey"
+            columns: ["team_slug"]
+            isOneToOne: false
+            referencedRelation: "volunteer_teams"
+            referencedColumns: ["slug"]
+          },
+        ]
+      }
+      volunteers_legacy: {
         Row: {
           chapter_id: string | null
           created_at: string
@@ -5840,6 +6169,56 @@ export type Database = {
           },
         ]
       }
+      volunteer_leaderboard: {
+        Row: {
+          badges: string[] | null
+          contribution_score: number | null
+          country: string | null
+          full_name: string | null
+          id: string | null
+          joined_at: string | null
+          photo_url: string | null
+          referral_count: number | null
+          slug: string | null
+          tasks_completed: number | null
+          team_slug: string | null
+        }
+        Insert: {
+          badges?: string[] | null
+          contribution_score?: number | null
+          country?: string | null
+          full_name?: string | null
+          id?: string | null
+          joined_at?: string | null
+          photo_url?: string | null
+          referral_count?: number | null
+          slug?: string | null
+          tasks_completed?: number | null
+          team_slug?: string | null
+        }
+        Update: {
+          badges?: string[] | null
+          contribution_score?: number | null
+          country?: string | null
+          full_name?: string | null
+          id?: string | null
+          joined_at?: string | null
+          photo_url?: string | null
+          referral_count?: number | null
+          slug?: string | null
+          tasks_completed?: number | null
+          team_slug?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "volunteers_team_slug_fkey"
+            columns: ["team_slug"]
+            isOneToOne: false
+            referencedRelation: "volunteer_teams"
+            referencedColumns: ["slug"]
+          },
+        ]
+      }
       wallet_balances: {
         Row: {
           account_id: string | null
@@ -5925,6 +6304,7 @@ export type Database = {
       }
       generate_receipt_number: { Args: never; Returns: string }
       generate_referral_code: { Args: { p_prefix?: string }; Returns: string }
+      generate_volunteer_referral_code: { Args: never; Returns: string }
       get_current_season: { Args: never; Returns: string }
       get_user_roles: {
         Args: { _user_id: string }
@@ -6011,6 +6391,7 @@ export type Database = {
           isSetofReturn: false
         }
       }
+      slugify: { Args: { p: string }; Returns: string }
     }
     Enums: {
       acceptance_status: "PENDING" | "SENT" | "ACCEPTED" | "DECLINED"
@@ -6128,6 +6509,15 @@ export type Database = {
         | "SENT"
         | "CONFIRMED"
         | "FAILED"
+      volunteer_referral_status: "invited" | "signed_up" | "converted"
+      volunteer_task_status:
+        | "assigned"
+        | "in_progress"
+        | "submitted"
+        | "approved"
+        | "rejected"
+      volunteer_verification: "pending" | "approved" | "rejected"
+      volunteer_visibility: "public" | "hidden" | "alumni"
       vote_rejection_reason:
         | "DUPLICATE_VOTE"
         | "STAGE_CLOSED"
@@ -6415,6 +6805,16 @@ export const Constants = {
         "CONFIRMED",
         "FAILED",
       ],
+      volunteer_referral_status: ["invited", "signed_up", "converted"],
+      volunteer_task_status: [
+        "assigned",
+        "in_progress",
+        "submitted",
+        "approved",
+        "rejected",
+      ],
+      volunteer_verification: ["pending", "approved", "rejected"],
+      volunteer_visibility: ["public", "hidden", "alumni"],
       vote_rejection_reason: [
         "DUPLICATE_VOTE",
         "STAGE_CLOSED",
