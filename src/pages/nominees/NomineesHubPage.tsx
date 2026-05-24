@@ -43,6 +43,30 @@ const NOMINEE_GROUP_CARDS = [
   { icon: MapPin, title: "Africa Regional Awards", desc: "Nominees grouped by West, East, Central, Southern & North Africa." },
 ];
 
+// Canonical 18 NESA-Africa 2026 award categories. Cards always render even
+// when nominee data has not yet populated a given slug — guarantees a complete
+// 18-card discovery grid instead of being limited to slugs present in DB.
+const CANONICAL_CATEGORIES: { slug: string; name: string }[] = [
+  { slug: "best-csr-education-africa", name: "Best CSR in Education (Africa)" },
+  { slug: "best-csr-education-nigeria", name: "Best CSR in Education (Nigeria)" },
+  { slug: "best-edutech-organisation-africa", name: "Best EduTech Organisation (Africa)" },
+  { slug: "best-media-educational-advocacy-nigeria", name: "Best Media in Educational Advocacy (Nigeria)" },
+  { slug: "best-ngo-education-nigeria", name: "Best NGO Contribution to Education (Nigeria)" },
+  { slug: "best-ngo-education-africa", name: "Best NGO Contribution to Education (Africa Regional)" },
+  { slug: "best-stem-education-africa", name: "Best STEM Education Initiative (Africa)" },
+  { slug: "creative-arts-education-nigeria", name: "Creative Arts Education (Nigeria)" },
+  { slug: "best-education-friendly-state-nigeria", name: "Best Education-Friendly State (Nigeria)" },
+  { slug: "best-library-tertiary-nigeria", name: "Best Library in Tertiary Institutions (Nigeria)" },
+  { slug: "best-research-development-nigeria", name: "Best Research & Development (Nigeria)" },
+  { slug: "christian-education-impact-africa", name: "Christian Education Impact (Africa)" },
+  { slug: "islamic-education-impact-africa", name: "Islamic Education Impact (Africa)" },
+  { slug: "political-leaders-education-nigeria", name: "Political Leaders in Education (Nigeria)" },
+  { slug: "international-bilateral-education", name: "International & Bilateral Education" },
+  { slug: "diaspora-education-impact", name: "Diaspora Education Impact" },
+  { slug: "africa-education-icon-award", name: "Africa Education Icon Award" },
+  { slug: "africa-social-media-education-impact", name: "Influencers Education Impact Award" },
+];
+
 export default function NomineesHubPage() {
   const navigate = useNavigate();
   const { data: nominees, isLoading } = useNominees();
