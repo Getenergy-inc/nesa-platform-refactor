@@ -706,6 +706,7 @@ export default function Gala() {
             </motion.div>
           </div>
         </section>
+        <VolunteerCTABanner headline="Help us deliver the 2026 Gala" subline="Join the Gala volunteer team — production, hospitality, media, logistics." />
       </div>
     </>
   );
