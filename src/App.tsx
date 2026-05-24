@@ -1454,6 +1454,7 @@ const App = () => (
                   <Route path="/admin/edx" element={<AdminEDXAnalytics />} />
                   <Route path="/admin/contributor-photos" element={<AdminContributorPhotos />} />
                   <Route path="/admin/contributors" element={<AdminContributorsCMS />} />
+                  <Route path="/admin/volunteers" element={<AdminVolunteersCMS />} />
                   <Route path="/admin/pathways" element={<AdminPathwaysCMS />} />
                   <Route path="/admin/gallery" element={<AdminGalleryCMS />} />
                   <Route
