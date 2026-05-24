@@ -188,7 +188,7 @@ export const PAGE_FAQS: PageFAQ[] = [
       },
       {
         q: "When are the voting windows?",
-        a: "Official voting windows run between April and June. Outside these windows, the platform accepts nominations and participation activities only.",
+        a: "Gold Certificate Voting runs 15 August – 15 September 2026 (100% public AGC voting). Blue Garnet Voting runs 16 September – 22 October 2026 (jury + public, closing on Gala day). Outside these windows the platform accepts nominations and participation activities only.",
       },
     ],
   },
