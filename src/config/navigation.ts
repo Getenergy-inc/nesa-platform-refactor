@@ -232,9 +232,10 @@ export const FOOTER_NAV: NavSection[] = [
       { label: "Vote", href: "/vote" },
       { label: "Apply to be a Judge", href: "/judgeapply" },
       { label: "Partners", href: "/partners" },
-      { label: "Chapters", href: "/chapters" },
+      { label: "Join a Local Chapter", href: "/chapters" },
       { label: "Volunteer", href: "/volunteer" },
-      { label: "Shop Merchandise", href: "/shop" },
+      { label: "Buy Merchandise", href: "/shop" },
+
     ],
   },
   {
