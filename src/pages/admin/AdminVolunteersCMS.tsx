@@ -23,7 +23,7 @@ type VolunteerRow = {
   full_name: string;
   country: string | null;
   region: string | null;
-  team: string | null;
+  team_slug: string | null;
   role: string | null;
   verification_status: string | null;
   visibility_status: string | null;
@@ -46,7 +46,7 @@ export default function AdminVolunteersCMS() {
     const { data, error } = await supabase
       .from("volunteers")
       .select(
-        "id, slug, full_name, country, region, team, role, verification_status, visibility_status, contribution_score, referral_count, joined_at",
+        "id, slug, full_name, country, region, team_slug, role, verification_status, visibility_status, contribution_score, referral_count, joined_at",
       )
       .order("joined_at", { ascending: false })
       .limit(500);
@@ -75,7 +75,7 @@ export default function AdminVolunteersCMS() {
     return rows.filter((r) => {
       if (statusFilter !== "all" && r.verification_status !== statusFilter) return false;
       if (!needle) return true;
-      return [r.full_name, r.country, r.region, r.team, r.role]
+      return [r.full_name, r.country, r.region, r.team_slug, r.role]
         .filter(Boolean)
         .some((v) => String(v).toLowerCase().includes(needle));
     });
@@ -177,7 +177,7 @@ export default function AdminVolunteersCMS() {
                     {filtered.map((r) => (
                       <tr key={r.id} className="border-t border-border">
                         <td className="p-3 font-medium">{r.full_name}</td>
-                        <td className="p-3 text-muted-foreground">{r.team || "—"}</td>
+                        <td className="p-3 text-muted-foreground">{r.team_slug || "—"}</td>
                         <td className="p-3 text-muted-foreground">{r.country || "—"}</td>
                         <td className="p-3">{r.contribution_score ?? 0}</td>
                         <td className="p-3">{r.referral_count ?? 0}</td>
