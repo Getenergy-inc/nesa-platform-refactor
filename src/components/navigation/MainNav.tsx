@@ -238,7 +238,7 @@ function MobileNav({ onOpenCVOMessage }: { onOpenCVOMessage: () => void }) {
 
             {/* Full Navigation */}
             <div className="py-2">
-              {MAIN_NAV.map((item) => (
+              {mobileOrdered.map((item) => (
                 <div
                   key={item.href}
                   className="border-b border-gold/5 last:border-b-0"
