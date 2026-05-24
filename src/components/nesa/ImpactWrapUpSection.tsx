@@ -14,6 +14,7 @@ import {
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import impactBgImg from "@/assets/rebuild-school-impact.jpg";
+import eduaidLogo from "@/assets/partners/eduaid-africa-logo.jpeg";
 
 const PatternOverlay = () => (
   <svg
@@ -61,11 +62,19 @@ export function ImpactWrapUpSection() {
 
             <div className="relative p-6 sm:p-10 md:p-12">
               <div className="max-w-3xl">
-                <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-gold/15 border border-gold/40 mb-4">
-                  <Heart className="h-3.5 w-3.5 text-gold" />
-                  <span className="text-[10px] sm:text-xs font-bold uppercase tracking-[0.2em] text-gold">
-                    Impact Wrap-Up
-                  </span>
+                <div className="flex items-center gap-3 mb-4">
+                  <img
+                    src={eduaidLogo}
+                    alt="EduAid Africa logo"
+                    loading="lazy"
+                    className="h-12 w-12 sm:h-14 sm:w-14 rounded-xl object-cover ring-1 ring-gold/40 bg-white/5 shadow-md shadow-black/40"
+                  />
+                  <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-gold/15 border border-gold/40">
+                    <Heart className="h-3.5 w-3.5 text-gold" />
+                    <span className="text-[10px] sm:text-xs font-bold uppercase tracking-[0.2em] text-gold">
+                      Impact Wrap-Up
+                    </span>
+                  </div>
                 </div>
                 <h3 className="font-display text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-4 leading-tight">
                   From Recognition to <span className="text-gold">Real Impact</span>
