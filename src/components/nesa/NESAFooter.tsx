@@ -71,6 +71,17 @@ export function NESAFooter() {
             </nav>
           </div>
 
+          {/* Community */}
+          <div className="text-center">
+            <h4 className="text-white font-semibold mb-4">Community</h4>
+            <nav className="flex flex-col gap-2 text-sm">
+              <Link to="/volunteer" className="text-white/60 hover:text-gold transition-colors">Become a Volunteer</Link>
+              <Link to="/volunteers" className="text-white/60 hover:text-gold transition-colors">Meet Our Volunteers</Link>
+              <Link to="/join-local-chapter" className="text-white/60 hover:text-gold transition-colors">Join a Local Chapter</Link>
+              <Link to="/ambassadors" className="text-white/60 hover:text-gold transition-colors">Apply as Ambassador</Link>
+            </nav>
+          </div>
+
           {/* Contact */}
           <div className="text-center md:text-right">
             <h4 className="text-white font-semibold mb-4">{t("footer.getInTouch")}</h4>
