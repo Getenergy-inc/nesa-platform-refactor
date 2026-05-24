@@ -13,7 +13,7 @@
 import { useMemo } from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { Trophy, Users, ArrowRight, ChevronRight } from "lucide-react";
+import { Trophy, Users, ArrowRight, ChevronRight, Sparkles, UserPlus } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
@@ -24,6 +24,7 @@ import {
   getTierStyle,
 } from "@/config/nomineeCategories";
 import { getCategoryImage } from "@/config/categoryImages";
+
 
 export interface CategoryEntry {
   slug: string;
@@ -157,6 +158,8 @@ function CategoryCard({ cat, index }: { cat: CategoryEntry; index: number }) {
   const secondaryLabel = getSecondaryCtaLabel(cat.slug);
   const secondaryHref = getSecondaryCtaHref(cat.slug);
   const heroImg = getCategoryImage(cat.slug);
+  const isEmpty = cat.count === 0;
+  const nominateHref = `/nominate?category=${cat.slug}`;
 
   return (
     <motion.article
@@ -166,7 +169,6 @@ function CategoryCard({ cat, index }: { cat: CategoryEntry; index: number }) {
       transition={{ delay: Math.min(index * 0.03, 0.3) }}
       className={`group relative h-full flex flex-col overflow-hidden rounded-2xl border transition-all hover:shadow-lg ${tierStyle.cardBorderClass} ${tierStyle.cardBgClass}`}
     >
-      {/* Category hero image — restores visual identity per card */}
       <Link
         to={`/nominees/category/${cat.slug}`}
         className="relative block aspect-[16/9] overflow-hidden bg-charcoal-light"
@@ -177,7 +179,7 @@ function CategoryCard({ cat, index }: { cat: CategoryEntry; index: number }) {
             src={heroImg}
             alt={cat.name}
             loading="lazy"
-            className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+            className={`absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105 ${isEmpty ? "opacity-60" : ""}`}
           />
         ) : (
           <div className={`absolute inset-0 flex items-center justify-center ${tierStyle.accentSoftClass}`}>
@@ -186,6 +188,11 @@ function CategoryCard({ cat, index }: { cat: CategoryEntry; index: number }) {
         )}
         <div className="absolute inset-0 bg-gradient-to-t from-charcoal via-charcoal/30 to-transparent" />
         <Badge className={`absolute top-2 right-2 text-[10px] border ${tierStyle.className}`}>{tierStyle.label}</Badge>
+        {isEmpty && (
+          <Badge className="absolute top-2 left-2 text-[10px] border border-gold/40 bg-charcoal/80 text-gold backdrop-blur-sm gap-1">
+            <Sparkles className="w-3 h-3" /> New
+          </Badge>
+        )}
       </Link>
 
       <div className="flex flex-col flex-1 p-4 md:p-5">
@@ -203,10 +210,14 @@ function CategoryCard({ cat, index }: { cat: CategoryEntry; index: number }) {
 
       <div className="flex items-center gap-2 text-[11px] text-ivory/60 mb-4">
         <Users className="w-3.5 h-3.5 text-gold/70" />
-        <span>{cat.count.toLocaleString()} nominees</span>
+        <span>
+          {isEmpty
+            ? "Accepting nominations"
+            : `${cat.count.toLocaleString()} ${cat.count === 1 ? "nominee" : "nominees"}`}
+        </span>
       </div>
 
-      {cat.topNominees.length > 0 && (
+      {cat.topNominees.length > 0 ? (
         <div className="flex -space-x-2 mb-4">
           {cat.topNominees.slice(0, 3).map((n) => (
             <div
@@ -227,18 +238,37 @@ function CategoryCard({ cat, index }: { cat: CategoryEntry; index: number }) {
             </div>
           ))}
         </div>
+      ) : (
+        <div className="flex items-center gap-2 mb-4" aria-label="No nominees yet — be the first">
+          <div className="flex -space-x-2">
+            {[0, 1, 2].map((i) => (
+              <div
+                key={i}
+                className="w-8 h-8 rounded-full border-2 border-charcoal bg-charcoal-light/80 flex items-center justify-center"
+              >
+                <UserPlus className="w-3.5 h-3.5 text-gold/50" />
+              </div>
+            ))}
+          </div>
+          <span className="text-[11px] text-ivory/50 italic">Be the first to nominate</span>
+        </div>
       )}
 
-      {/* CTA stack — vertical on mobile to respect 44pt tap target */}
       <div className="mt-auto flex flex-col gap-2">
         <Button
           asChild
           size="sm"
           className="w-full bg-gold hover:bg-gold/90 text-charcoal font-bold rounded-full gap-2 min-h-[40px]"
         >
-          <Link to={`/nominees/category/${cat.slug}`}>
-            Explore Nominees <ArrowRight className="w-3.5 h-3.5" />
-          </Link>
+          {isEmpty ? (
+            <Link to={nominateHref}>
+              Nominate Now <ArrowRight className="w-3.5 h-3.5" />
+            </Link>
+          ) : (
+            <Link to={`/nominees/category/${cat.slug}`}>
+              Explore Nominees <ArrowRight className="w-3.5 h-3.5" />
+            </Link>
+          )}
         </Button>
         <Button
           asChild
@@ -246,7 +276,9 @@ function CategoryCard({ cat, index }: { cat: CategoryEntry; index: number }) {
           variant="outline"
           className={`w-full rounded-full font-semibold min-h-[40px] ${tierStyle.secondaryCtaClass}`}
         >
-          <Link to={secondaryHref}>{secondaryLabel}</Link>
+          <Link to={isEmpty ? `/nominees/category/${cat.slug}` : secondaryHref}>
+            {isEmpty ? "Learn More" : secondaryLabel}
+          </Link>
         </Button>
       </div>
       </div>
