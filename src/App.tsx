@@ -178,6 +178,7 @@ import {
   ForNominees,
   ForJudges,
   ForVoters,
+  ContinueRecognition,
 } from "./pages/guidelines";
 import Vote from "./pages/Vote";
 import VoteWithAGC from "./pages/VoteWithAGC";
