@@ -178,6 +178,7 @@ import {
   ForNominees,
   ForJudges,
   ForVoters,
+  ContinueRecognition,
 } from "./pages/guidelines";
 import Vote from "./pages/Vote";
 import VoteWithAGC from "./pages/VoteWithAGC";
@@ -1797,6 +1798,18 @@ const App = () => (
                         <ForVoters />
                       </WithLayout>
                     }
+                  />
+                  <Route
+                    path="/guidelines/renomination"
+                    element={
+                      <WithLayout>
+                        <ContinueRecognition />
+                      </WithLayout>
+                    }
+                  />
+                  <Route
+                    path="/guidelines/update-impact"
+                    element={<Navigate to="/guidelines/renomination" replace />}
                   />
 
                   {/* Get Involved - Endorse NESA */}
