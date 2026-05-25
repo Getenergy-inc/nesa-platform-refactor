@@ -79,6 +79,7 @@ const pathways: PathwayVideoCardData[] = [
       "Meet the corporations whose CSR programmes are funding scholarships, schools, and digital learning — competing on the Blue Garnet stage for Africa's top corporate education honour.",
     primaryCta: { label: "Explore Corporate Nominees", href: "/awards/csr-education" },
     secondaryCta: { label: "Submit Your CSR Story", href: "/nominate?category=csr-education" },
+    tertiaryCta: { label: "Explore Nominees", href: "/nominees?category=csr-education" },
     engagementCtaLabel: "View Impact Story",
   },
   {
