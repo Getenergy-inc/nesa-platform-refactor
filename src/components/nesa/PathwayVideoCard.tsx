@@ -46,7 +46,9 @@ export type PathwayVideoCardData = {
   previewSummary?: string;
   primaryCta: PathwayCardCTA;
   secondaryCta: PathwayCardCTA;
-  /** Tertiary CTA = watch story preview (opens lightbox). */
+  /** Optional tertiary CTA (e.g. "Explore Nominees"). */
+  tertiaryCta?: PathwayCardCTA;
+  /** Watch story preview (opens lightbox). */
   engagementCtaLabel: string;
 };
 
