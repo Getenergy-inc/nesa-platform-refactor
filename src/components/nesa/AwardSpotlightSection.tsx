@@ -110,6 +110,7 @@ const pathways: PathwayVideoCardData[] = [
       "Discover the artists, athletes and creators using their platforms to drive literacy, scholarships and school access — honoured under NESA-Africa's Gold Recognition tier.",
     primaryCta: { label: "Explore Gold Nominees", href: "/nominees/gold" },
     secondaryCta: { label: "Vote With AGC", href: "/vote" },
+    tertiaryCta: { label: "Explore Nominees", href: "/nominees?category=influencers" },
     engagementCtaLabel: "Explore the Journey",
   },
   {
