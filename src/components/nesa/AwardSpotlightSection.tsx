@@ -48,6 +48,7 @@ const pathways: PathwayVideoCardData[] = [
       "Inside the Africa Education Icon of the Decade — the lifetime tier honouring literary advocates, technical educators, and education champions reshaping the continent.",
     primaryCta: { label: "Explore Icon Nominees", href: "/nominees/icon" },
     secondaryCta: { label: "Nominate a Legend", href: "/nominate?category=icon" },
+    tertiaryCta: { label: "Explore Nominees", href: "/nominees?category=icon" },
     engagementCtaLabel: "Watch Legacy Preview",
   },
   {
