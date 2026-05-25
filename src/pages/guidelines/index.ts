@@ -4,3 +4,4 @@ export { default as ForNominators } from "./ForNominators";
 export { default as ForNominees } from "./ForNominees";
 export { default as ForJudges } from "./ForJudges";
 export { default as ForVoters } from "./ForVoters";
+export { default as ContinueRecognition } from "./ContinueRecognition";
