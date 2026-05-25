@@ -369,6 +369,18 @@ export function PathwayVideoCard({ card, index }: Props) {
             >
               <Link to={card.secondaryCta.href}>{card.secondaryCta.label}</Link>
             </Button>
+            {card.tertiaryCta && (
+              <Button
+                asChild
+                variant="outline"
+                className="border-white/25 text-white hover:bg-white/10 hover:text-gold rounded-full px-5 bg-transparent gap-2"
+              >
+                <Link to={card.tertiaryCta.href}>
+                  {card.tertiaryCta.label}
+                  <ArrowRight className="h-4 w-4" />
+                </Link>
+              </Button>
+            )}
             <button
               type="button"
               onClick={openLightbox}
