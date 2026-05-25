@@ -1799,6 +1799,18 @@ const App = () => (
                       </WithLayout>
                     }
                   />
+                  <Route
+                    path="/guidelines/renomination"
+                    element={
+                      <WithLayout>
+                        <ContinueRecognition />
+                      </WithLayout>
+                    }
+                  />
+                  <Route
+                    path="/guidelines/update-impact"
+                    element={<Navigate to="/guidelines/renomination" replace />}
+                  />
 
                   {/* Get Involved - Endorse NESA */}
                   <Route
