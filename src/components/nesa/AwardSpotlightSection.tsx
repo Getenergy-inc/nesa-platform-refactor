@@ -48,6 +48,7 @@ const pathways: PathwayVideoCardData[] = [
       "Inside the Africa Education Icon of the Decade — the lifetime tier honouring literary advocates, technical educators, and education champions reshaping the continent.",
     primaryCta: { label: "Explore Icon Nominees", href: "/nominees/icon" },
     secondaryCta: { label: "Nominate a Legend", href: "/nominate?category=icon" },
+    tertiaryCta: { label: "Explore Nominees", href: "/nominees?category=icon" },
     engagementCtaLabel: "Watch Legacy Preview",
   },
   {
@@ -78,6 +79,7 @@ const pathways: PathwayVideoCardData[] = [
       "Meet the corporations whose CSR programmes are funding scholarships, schools, and digital learning — competing on the Blue Garnet stage for Africa's top corporate education honour.",
     primaryCta: { label: "Explore Corporate Nominees", href: "/awards/csr-education" },
     secondaryCta: { label: "Submit Your CSR Story", href: "/nominate?category=csr-education" },
+    tertiaryCta: { label: "Explore Nominees", href: "/nominees?category=csr-education" },
     engagementCtaLabel: "View Impact Story",
   },
   {
@@ -108,6 +110,7 @@ const pathways: PathwayVideoCardData[] = [
       "Discover the artists, athletes and creators using their platforms to drive literacy, scholarships and school access — honoured under NESA-Africa's Gold Recognition tier.",
     primaryCta: { label: "Explore Gold Nominees", href: "/nominees/gold" },
     secondaryCta: { label: "Vote With AGC", href: "/vote" },
+    tertiaryCta: { label: "Explore Nominees", href: "/nominees?category=influencers" },
     engagementCtaLabel: "Explore the Journey",
   },
   {
@@ -138,6 +141,7 @@ const pathways: PathwayVideoCardData[] = [
       "Inside the bilateral grants, multilateral programmes and global foundations driving Africa's education agenda — recognised at the Platinum tier for continental-scale partnership.",
     primaryCta: { label: "Explore Global Partners", href: "/awards/grants-global-support" },
     secondaryCta: { label: "Become a Strategic Partner", href: "/partners" },
+    tertiaryCta: { label: "Explore Nominees", href: "/nominees?category=grants-global-support" },
     engagementCtaLabel: "Watch Partnership Story",
   },
 ];
