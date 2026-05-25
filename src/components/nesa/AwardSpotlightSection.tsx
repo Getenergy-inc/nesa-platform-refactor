@@ -141,6 +141,7 @@ const pathways: PathwayVideoCardData[] = [
       "Inside the bilateral grants, multilateral programmes and global foundations driving Africa's education agenda — recognised at the Platinum tier for continental-scale partnership.",
     primaryCta: { label: "Explore Global Partners", href: "/awards/grants-global-support" },
     secondaryCta: { label: "Become a Strategic Partner", href: "/partners" },
+    tertiaryCta: { label: "Explore Nominees", href: "/nominees?category=grants-global-support" },
     engagementCtaLabel: "Watch Partnership Story",
   },
 ];
