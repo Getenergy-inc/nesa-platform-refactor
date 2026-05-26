@@ -232,10 +232,12 @@ export const MAIN_NAV_MOBILE_ORDER: readonly string[] = [
   "Nominate",
   "Vote",
   "Engage",
+  "Sponsor NESA-Africa 2026",
   "Programs",
   "About",
   "Media",
 ];
+
 
 
 // ============================================================================
