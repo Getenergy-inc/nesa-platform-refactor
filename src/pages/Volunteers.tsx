@@ -4,8 +4,9 @@ import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import {
   Users, Search, MapPin, Trophy, Sparkles, ArrowRight, Heart,
-  Globe2, BadgeCheck, Share2, Crown,
+  Globe2, BadgeCheck, Share2, Crown, Quote, ShieldCheck,
 } from "lucide-react";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -256,6 +257,111 @@ export default function Volunteers() {
               })}
             </div>
           )}
+        </motion.div>
+      </section>
+
+      {/* TEAM GROUPING — Powered By Contribution Teams */}
+      <section className="container mx-auto px-4 mt-20">
+        <motion.div {...fadeUp} className="text-center mb-8">
+          <Badge className="bg-gold/15 text-gold border-gold/40 mb-3">Teams</Badge>
+          <h2 className="font-playfair text-2xl md:text-3xl text-gold">Powered By Contribution Teams</h2>
+          <p className="text-white/65 text-sm mt-2 max-w-2xl mx-auto">
+            Ten cross-functional teams power NESA-Africa across technology, media, data, design,
+            partnerships, chapters and beyond.
+          </p>
+        </motion.div>
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {(Object.keys(TEAM_LABELS) as TeamSlug[]).map((t) => {
+            const list = volunteers.filter((v) => v.teamSlug === t);
+            return (
+              <Card key={t} className="border-gold/15 bg-gradient-to-br from-charcoal to-black hover:border-gold/40 transition">
+                <div className="p-5">
+                  <div className="mb-3 flex items-center justify-between">
+                    <h3 className="font-playfair text-lg text-ivory">{TEAM_LABELS[t]}</h3>
+                    <Badge className="border-gold/30 bg-gold/10 text-gold">{list.length}</Badge>
+                  </div>
+                  <div className="flex -space-x-2">
+                    {list.slice(0, 6).map((v) => (
+                      <Avatar key={v.id} className="h-9 w-9 border-2 border-charcoal">
+                        {v.photoUrl && <AvatarImage src={v.photoUrl} alt={v.fullName} />}
+                        <AvatarFallback className="bg-gold/15 text-xs text-gold">
+                          {v.fullName.split(" ").map((n) => n[0]).slice(0, 2).join("")}
+                        </AvatarFallback>
+                      </Avatar>
+                    ))}
+                    {list.length > 6 && (
+                      <div className="flex h-9 w-9 items-center justify-center rounded-full border-2 border-charcoal bg-gold/10 text-xs text-gold">
+                        +{list.length - 6}
+                      </div>
+                    )}
+                    {list.length === 0 && (
+                      <span className="text-xs text-white/40">Recruiting now</span>
+                    )}
+                  </div>
+                  <button
+                    onClick={() => { setTeam(t); window.scrollTo({ top: 0, behavior: "smooth" }); }}
+                    className="mt-4 inline-flex items-center gap-1 text-xs text-gold hover:underline"
+                  >
+                    View team <ArrowRight className="h-3 w-3" />
+                  </button>
+                </div>
+              </Card>
+            );
+          })}
+        </div>
+      </section>
+
+      {/* STORIES — Why We Volunteer */}
+      <section className="container mx-auto px-4 mt-20">
+        <motion.div {...fadeUp} className="text-center mb-8">
+          <Badge className="bg-gold/15 text-gold border-gold/40 mb-3">Stories</Badge>
+          <h2 className="font-playfair text-2xl md:text-3xl text-gold">Why We Volunteer</h2>
+          <p className="text-white/65 text-sm mt-2">In their own words — the heart behind NESA-Africa.</p>
+        </motion.div>
+        <div className="grid gap-5 md:grid-cols-3">
+          {[
+            { name: "Adaeze N.", country: "Nigeria", role: "Content Volunteer",
+              quote: "NESA-Africa gave me a stage to use storytelling for education impact. I found purpose here." },
+            { name: "Kwame O.", country: "Ghana", role: "Local Chapter Lead",
+              quote: "Coordinating my chapter taught me that recognition is one of the most powerful tools for change." },
+            { name: "Amina S.", country: "Kenya", role: "Data & Research",
+              quote: "Every dataset we clean becomes a fairer chance for an African educator to be seen." },
+          ].map((s, i) => (
+            <motion.div key={s.name} {...fadeUp} transition={{ ...fadeUp.transition, delay: i * 0.05 }}>
+              <Card className="h-full border-gold/15 bg-gradient-to-br from-charcoal to-black p-6">
+                <Quote className="mb-3 h-6 w-6 text-gold/70" />
+                <p className="mb-4 text-sm leading-relaxed text-white/85">"{s.quote}"</p>
+                <div className="border-t border-gold/10 pt-3 text-sm">
+                  <div className="font-semibold text-ivory">{s.name}</div>
+                  <div className="text-white/60">{s.role} · {s.country}</div>
+                </div>
+              </Card>
+            </motion.div>
+          ))}
+        </div>
+      </section>
+
+      {/* GOVERNANCE NOTE */}
+      <section className="container mx-auto px-4 mt-16">
+        <motion.div {...fadeUp}>
+          <Card className="mx-auto max-w-3xl border-gold/15 bg-gradient-to-br from-charcoal to-black p-6">
+            <div className="flex flex-col gap-3 md:flex-row md:items-center md:gap-5">
+              <ShieldCheck className="h-9 w-9 flex-shrink-0 text-gold" />
+              <div className="flex-1">
+                <h3 className="mb-1 font-playfair text-lg text-ivory">
+                  Privacy, Consent & Code of Conduct
+                </h3>
+                <p className="text-sm text-white/70">
+                  Only volunteers who have approved public display appear on this page.
+                  Private contact details are never shown. All volunteers sign a Code of Conduct
+                  and disclose conflicts of interest before nomination or jury-adjacent work.
+                </p>
+              </div>
+              <Button asChild variant="outline" className="border-gold/30 text-gold hover:bg-gold/10">
+                <Link to="/about/governance">Governance</Link>
+              </Button>
+            </div>
+          </Card>
         </motion.div>
       </section>
 
