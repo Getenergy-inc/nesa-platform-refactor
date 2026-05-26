@@ -51,11 +51,6 @@ export function PageFAQSection({ className }: { className?: string }) {
       <Helmet>
         <script type="application/ld+json">{JSON.stringify(jsonLd)}</script>
       </Helmet>
-      className={cn(
-        "relative bg-charcoal border-t border-gold/10 py-14 sm:py-20",
-        className,
-      )}
-    >
       <div className="container px-4 sm:px-6 max-w-4xl">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
