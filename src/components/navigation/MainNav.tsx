@@ -74,7 +74,7 @@ function DesktopNav({ onOpenCVOMessage }: { onOpenCVOMessage: () => void }) {
                   <ul
                     className={cn(
                       "grid gap-3 p-4 bg-charcoal border border-gold/20",
-                      item.label === "About" || item.label === "Contact" || item.label === "FAQs"
+                      item.label === "About" || item.label === "Support"
                         ? "w-[420px]"
                         : item.label === "Engage" || item.label === "Impact Programs" || item.label === "Awards" || item.label === "Media"
                         ? "w-[560px] md:w-[640px] md:grid-cols-2"
