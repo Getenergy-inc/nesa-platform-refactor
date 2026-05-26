@@ -3,6 +3,7 @@
 
 import { useEffect, useMemo, useState } from "react";
 import { useLocation, Link } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
 import { motion, AnimatePresence } from "framer-motion";
 import { HelpCircle, X, MessageCircleQuestion, Sparkles, ArrowRight } from "lucide-react";
 import {
