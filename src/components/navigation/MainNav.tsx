@@ -552,49 +552,68 @@ export function MainNav() {
     <>
       <header className="fixed top-0 left-0 right-0 z-50 w-full bg-charcoal/95 backdrop-blur-md border-b border-gold/20">
         <div className="container flex h-14 sm:h-16 items-center gap-2 px-4">
-          {/* Logo */}
-          <Link to="/" className="flex items-center shrink-0 gap-2">
+          {/* Brand Area: Logo + NESA-Africa 2026 + motto */}
+          <Link
+            to="/"
+            className="flex items-center shrink-0 gap-2"
+            aria-label="New Education Standard Award Africa — NESA-Africa 2026"
+          >
             <img
               src={nesaStamp}
-              alt="NESA Africa"
+              alt="NESA-Africa"
               className="h-8 sm:h-10 w-8 sm:w-10 rounded-full object-contain"
             />
             <div className="hidden sm:flex flex-col leading-tight">
-              <span className="text-[8px] text-gold/70 font-medium tracking-[0.2em] uppercase">
-                The African Blue-Garnet Awards for Education
-              </span>
               <span className="text-sm font-display font-bold text-gold tracking-wide">
-                AFRICA
+                NESA-Africa <span className="text-white/70 font-medium">2026</span>
               </span>
-              <span className="text-[7px] text-white/50 font-medium tracking-wider italic">
+              <span className="text-[9px] xl:text-[10px] text-gold/70 font-medium tracking-wider italic">
                 The African Blue-Garnet Awards for Education
               </span>
             </div>
           </Link>
 
-          {/* Desktop Navigation */}
+          {/* Desktop Navigation (6 main items) */}
           <div className="flex-1 min-w-0">
             <DesktopNav onOpenCVOMessage={() => setCVOMessageOpen(true)} />
           </div>
 
-          {/* Right Side */}
+          {/* Right Side: CTAs + Utility */}
           <div className="flex items-center gap-1 sm:gap-2 shrink-0">
-            {/* Become a Sponsor CTA */}
+            {/* Secondary CTAs: Nominate + Vote (outline) */}
+            <Button
+              asChild
+              variant="outline"
+              size="sm"
+              className="hidden xl:inline-flex border-gold/40 text-gold hover:bg-gold/10 hover:text-gold h-8 xl:h-9 px-3 text-[11px] xl:text-sm bg-transparent"
+            >
+              <Link to="/nominate" aria-label="Nominate for NESA-Africa 2026">Nominate</Link>
+            </Button>
+            <Button
+              asChild
+              variant="outline"
+              size="sm"
+              className="hidden xl:inline-flex border-gold/40 text-gold hover:bg-gold/10 hover:text-gold h-8 xl:h-9 px-3 text-[11px] xl:text-sm bg-transparent"
+            >
+              <Link to="/vote" aria-label="Vote in NESA-Africa 2026">Vote</Link>
+            </Button>
+
+            {/* Primary CTA: Become a Sponsor */}
             <Button
               asChild
               size="sm"
-              className="hidden md:inline-flex bg-gold text-charcoal hover:bg-gold/90 font-semibold h-8 xl:h-9 px-3 xl:px-4 text-[11px] xl:text-sm"
+              className="hidden md:inline-flex bg-gold text-charcoal hover:bg-gold/90 font-semibold h-8 xl:h-9 px-3 xl:px-4 text-[11px] xl:text-sm shadow-md shadow-gold/20"
             >
-              <Link to={MAIN_NAV_CTA.href}>
+              <Link to={MAIN_NAV_CTA.href} aria-label="Become a Sponsor of NESA-Africa 2026">
                 <Sparkles className="h-3.5 w-3.5 mr-1.5" />
                 {MAIN_NAV_CTA.label}
               </Link>
             </Button>
 
-            {/* Language Selector */}
+            {/* Utility: Language Selector */}
             <LanguageSwitcher className="hidden sm:flex" />
 
-            {/* User Menu (Desktop) */}
+            {/* Utility: User Menu / Sign In (Desktop) */}
             <div className="hidden lg:block">
               <UserMenu />
             </div>
