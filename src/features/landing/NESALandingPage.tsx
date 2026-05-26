@@ -42,10 +42,10 @@ export function NESALandingPage() {
     <>
       <LocalizedSEO
         pathname="/"
-        title={t("seo.landing.title", `${currentEdition?.name || "NESA-Africa 2026"} | NESA-Africa — The African Blue-Garnet Awards for Education`)}
-        description={t("seo.landing.description", `${currentEdition.tagline}. ${currentEdition.name} honours Africa's education changemakers.`)}
-        ogTitle={t("seo.landing.ogTitle", `${currentEdition.name} | NESA-Africa`)}
-        ogDescription={t("seo.landing.ogDescription", currentEdition.tagline)}
+        title={t("seo.landing.title", `New Education Standard Award Africa (NESA-Africa) 2026 | The African Blue-Garnet Awards for Education`)}
+        description={t("seo.landing.description", `New Education Standard Award Africa (NESA-Africa) 2026 celebrates Africa's education changemakers through recognition, visibility, partnerships, and measurable social impact. Motto: "The African Blue-Garnet Awards for Education."`)}
+        ogTitle={t("seo.landing.ogTitle", `New Education Standard Award Africa (NESA-Africa) 2026`)}
+        ogDescription={t("seo.landing.ogDescription", `"The African Blue-Garnet Awards for Education" — a continental education recognition and impact platform powered by SCEF.`)}
         keywords={t("seo.landing.keywords", "")}
       />
 

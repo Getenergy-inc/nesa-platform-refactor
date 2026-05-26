@@ -75,15 +75,17 @@ export function NESAHero() {
           </span>
         </div>
 
-        {/* Headline - Elegant with gold accent */}
-        <h1 className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-white mb-3 sm:mb-4 max-w-4xl leading-tight px-2 animate-fade-in" style={{ animationDelay: '0.2s' }}>
-          NESA Africa{" "}
-          <span className="text-gold">2026</span>
+        {/* Headline - Official name + abbreviation + edition */}
+        <h1 className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-white mb-2 sm:mb-3 max-w-4xl leading-tight px-2 animate-fade-in" style={{ animationDelay: '0.2s' }}>
+          New Education Standard Award Africa
         </h1>
+        <p className="font-display text-xl sm:text-2xl md:text-3xl font-semibold text-white/90 mb-3 sm:mb-4 animate-fade-in" style={{ animationDelay: '0.25s' }}>
+          (NESA-Africa) <span className="text-gold">2026</span>
+        </p>
 
-        {/* Subheadline - Official brand descriptor */}
-        <p className="text-lg sm:text-xl md:text-2xl font-medium text-gold/90 mb-4 sm:mb-6 max-w-2xl px-4 animate-fade-in" style={{ animationDelay: '0.3s' }}>
-          The African Blue-Garnet Awards for Education
+        {/* Motto - Premium brand line */}
+        <p className="text-lg sm:text-xl md:text-2xl font-medium italic text-gold/90 mb-4 sm:mb-6 max-w-2xl px-4 animate-fade-in" style={{ animationDelay: '0.3s' }}>
+          “The African Blue-Garnet Awards for Education”
         </p>
 
         {/* Compelling description paragraph */}
