@@ -583,7 +583,17 @@ export function MainNav() {
 
           {/* Right Side */}
           <div className="flex items-center gap-1 sm:gap-2 shrink-0">
-            {/* AGC moved into the Vote dropdown (Vote with AGC · Earn AGC · AGC Wallet) */}
+            {/* Become a Sponsor CTA */}
+            <Button
+              asChild
+              size="sm"
+              className="hidden md:inline-flex bg-gold text-charcoal hover:bg-gold/90 font-semibold h-8 xl:h-9 px-3 xl:px-4 text-[11px] xl:text-sm"
+            >
+              <Link to={MAIN_NAV_CTA.href}>
+                <Sparkles className="h-3.5 w-3.5 mr-1.5" />
+                {MAIN_NAV_CTA.label}
+              </Link>
+            </Button>
 
             {/* Language Selector */}
             <LanguageSwitcher className="hidden sm:flex" />
