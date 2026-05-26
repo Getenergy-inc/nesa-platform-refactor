@@ -43,11 +43,12 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { cn } from "@/lib/utils";
 import { useAuth } from "@/contexts/AuthContext";
-import { MAIN_NAV, MAIN_NAV_MOBILE_ORDER, MOBILE_NAV, type NavItem } from "@/config/navigation";
+import { MAIN_NAV, MAIN_NAV_CTA, MAIN_NAV_MOBILE_ORDER, MOBILE_NAV, type NavItem } from "@/config/navigation";
+import { Sparkles } from "lucide-react";
 import nesaStamp from "@/assets/nesa-stamp.jpeg";
 import { CVOFlashMessage, CVOMessageTrigger } from "@/components/nesa/cvo";
 import { LanguageSwitcher } from "@/components/i18n";
-import { EarnCoinsBadge } from "@/components/rewards/EarnCoinsBadge";
+
 
 
 // ============================================================================
@@ -73,9 +74,9 @@ function DesktopNav({ onOpenCVOMessage }: { onOpenCVOMessage: () => void }) {
                   <ul
                     className={cn(
                       "grid gap-3 p-4 bg-charcoal border border-gold/20",
-                      item.label === "About"
+                      item.label === "About" || item.label === "Contact" || item.label === "FAQs"
                         ? "w-[420px]"
-                        : item.label === "Engage" || item.label === "Programs" || item.label === "Sponsor NESA-Africa 2026"
+                        : item.label === "Engage" || item.label === "Impact Programs" || item.label === "Awards" || item.label === "Media"
                         ? "w-[560px] md:w-[640px] md:grid-cols-2"
                         : "w-[400px] md:w-[500px] md:grid-cols-2 lg:w-[600px]",
 
@@ -582,7 +583,17 @@ export function MainNav() {
 
           {/* Right Side */}
           <div className="flex items-center gap-1 sm:gap-2 shrink-0">
-            {/* AGC moved into the Vote dropdown (Vote with AGC · Earn AGC · AGC Wallet) */}
+            {/* Become a Sponsor CTA */}
+            <Button
+              asChild
+              size="sm"
+              className="hidden md:inline-flex bg-gold text-charcoal hover:bg-gold/90 font-semibold h-8 xl:h-9 px-3 xl:px-4 text-[11px] xl:text-sm"
+            >
+              <Link to={MAIN_NAV_CTA.href}>
+                <Sparkles className="h-3.5 w-3.5 mr-1.5" />
+                {MAIN_NAV_CTA.label}
+              </Link>
+            </Button>
 
             {/* Language Selector */}
             <LanguageSwitcher className="hidden sm:flex" />
