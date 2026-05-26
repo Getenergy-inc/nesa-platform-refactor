@@ -5,13 +5,18 @@ import {
   Award,
   BookOpen,
   Building,
+  Building2,
   Calendar,
   ChevronDown,
   Clock,
   Coins,
   FileCheck,
+  FileDown,
   Gavel,
   Globe,
+  Globe2,
+  GraduationCap,
+  Handshake,
   Heart,
   Home,
   Info,
@@ -19,11 +24,14 @@ import {
   Map,
   MapPin,
   Medal,
+  Megaphone,
   MessageSquare,
+  Mic,
   Play,
   Settings,
   Shield,
   ShoppingBag,
+  Sparkles,
   Star,
   Target,
   Ticket,
@@ -35,6 +43,7 @@ import {
   Wallet,
   type LucideIcon,
 } from "lucide-react";
+
 
 // ============================================================================
 // TYPES
