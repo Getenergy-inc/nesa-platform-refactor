@@ -381,6 +381,15 @@ function MobileNav({ onOpenCVOMessage }: { onOpenCVOMessage: () => void }) {
                     </Button>
                   </Link>
                 </div>
+                {/* Tertiary: Get Started (guided landing — does not compete with primary CTAs) */}
+                <Link to="/get-involved" onClick={handleLinkClick} className="block">
+                  <Button
+                    variant="ghost"
+                    className="w-full text-white/80 hover:text-gold hover:bg-gold/10 py-3 h-auto touch-manipulation border border-gold/20"
+                  >
+                    Get Started
+                  </Button>
+                </Link>
                 {/* Utility: Sign In */}
                 <Link to="/login" onClick={handleLinkClick} className="block">
                   <Button

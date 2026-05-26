@@ -81,10 +81,16 @@ export const MAIN_NAV: NavItem[] = [
     children: [
       { label: "About NESA-Africa", href: "/about", description: "New Education Standard Award Africa", icon: Info },
       { label: "Mission & Vision", href: "/about/vision-2035", description: "Vision 2035 and our continental mission", icon: Target },
+      { label: "Our Story", href: "/about#story", description: "The journey from 2006 to NESA-Africa 2026", icon: BookOpen },
       { label: "Santos Creations Educational Foundation (SCEF)", href: "/about/scef", description: "The founding foundation behind NESA-Africa", icon: Building },
       { label: "Our Model", href: "/about#model", description: "Recognition → Visibility → Partnerships → Legacy Impact", icon: Sparkles },
       { label: "Governance & Award Integrity", href: "/about/governance", description: "Firewalls, jury panels, accountability", icon: Shield },
       { label: "2026 Timeline", href: "/about/timeline", description: "Phase-by-phase NESA-Africa 2026 roadmap", icon: Calendar, badge: "2026" },
+      { label: "Meet Our Team", href: "/contributors", description: "The people powering NESA-Africa", icon: Users },
+      { label: "Meet Our Judges", href: "/judges", description: "Independent jury panel", icon: Gavel },
+      { label: "Meet Our Volunteers", href: "/volunteers", description: "Continental volunteer force", icon: Heart },
+      { label: "Advisory Board / Council", href: "/about/governance#advisory", description: "Strategic advisory leadership", icon: Shield },
+      { label: "Ambassadors", href: "/volunteers#ambassadors", description: "Continental & diaspora ambassadors", icon: Star },
     ],
   },
 
