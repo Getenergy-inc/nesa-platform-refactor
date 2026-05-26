@@ -564,7 +564,7 @@ export function MainNav() {
             />
             <div className="hidden sm:flex flex-col leading-tight">
               <span className="text-[8px] text-gold/70 font-medium tracking-[0.2em] uppercase">
-                New Education Standard Awards
+                The African Blue-Garnet Awards for Education
               </span>
               <span className="text-sm font-display font-bold text-gold tracking-wide">
                 AFRICA

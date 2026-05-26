@@ -81,14 +81,14 @@ export function NESAHero() {
           <span className="text-gold">2026</span>
         </h1>
 
-        {/* Subheadline - Clean and impactful */}
+        {/* Subheadline - Official brand descriptor */}
         <p className="text-lg sm:text-xl md:text-2xl font-medium text-gold/90 mb-4 sm:mb-6 max-w-2xl px-4 animate-fade-in" style={{ animationDelay: '0.3s' }}>
-          From Recognition to Real Impact Across Africa
+          The African Blue-Garnet Awards for Education
         </p>
 
         {/* Compelling description paragraph */}
         <p className="text-white/75 text-sm sm:text-base md:text-lg max-w-3xl mb-6 leading-relaxed px-4 sm:px-6 animate-fade-in" style={{ animationDelay: '0.4s' }}>
-          A continental platform recognizing excellence in education while driving real impact through partnerships, media, and school transformation across Africa — connecting recognition, visibility, partnerships, and funding into one ecosystem.
+          Celebrating Africa's education changemakers through recognition, visibility, partnerships, and measurable social impact — a continental education recognition and impact platform powered by Santos Creations Educational Foundation (SCEF).
         </p>
 
         {/* AGC Voting Strip */}

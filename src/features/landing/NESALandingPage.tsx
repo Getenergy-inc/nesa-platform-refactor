@@ -42,7 +42,7 @@ export function NESALandingPage() {
     <>
       <LocalizedSEO
         pathname="/"
-        title={t("seo.landing.title", `${currentEdition?.name || "NESA-Africa 2026"} | New Education Standard Award Africa`)}
+        title={t("seo.landing.title", `${currentEdition?.name || "NESA-Africa 2026"} | NESA-Africa — The African Blue-Garnet Awards for Education`)}
         description={t("seo.landing.description", `${currentEdition.tagline}. ${currentEdition.name} honours Africa's education changemakers.`)}
         ogTitle={t("seo.landing.ogTitle", `${currentEdition.name} | NESA-Africa`)}
         ogDescription={t("seo.landing.ogDescription", currentEdition.tagline)}
