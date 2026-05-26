@@ -417,14 +417,10 @@ function UserMenu() {
         <Link to="/login">
           <Button
             variant="ghost"
-            className="text-white/90 hover:text-gold hover:bg-gold/10"
+            size="sm"
+            className="text-white/90 hover:text-gold hover:bg-gold/10 h-8 xl:h-9 px-3 text-[11px] xl:text-sm"
           >
             Sign In
-          </Button>
-        </Link>
-        <Link to="/register">
-          <Button className="bg-primary text-primary-foreground hover:bg-primary/90">
-            Get Started
           </Button>
         </Link>
       </div>
