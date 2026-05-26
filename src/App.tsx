@@ -518,15 +518,73 @@ const App = () => (
                     }
                   />
 
-                  {/* Awards */}
+                  {/* Awards — Refactored category architecture (Phase 18B) */}
                   <Route
-                    path="/categories"
+                    path="/awards/categories"
                     element={
                       <WithLayout>
-                        <Categories />
+                        <CategoryMasterIndex />
                       </WithLayout>
                     }
                   />
+                  <Route
+                    path="/awards/blue-garnet-categories"
+                    element={
+                      <WithLayout>
+                        <BlueGarnetCategoriesIndex />
+                      </WithLayout>
+                    }
+                  />
+                  <Route
+                    path="/awards/blue-garnet-categories/:slug"
+                    element={
+                      <WithLayout>
+                        <AwardCategoryRoute />
+                      </WithLayout>
+                    }
+                  />
+                  <Route
+                    path="/awards/platinum-certificate-categories"
+                    element={
+                      <WithLayout>
+                        <PlatinumCategoriesIndex />
+                      </WithLayout>
+                    }
+                  />
+                  <Route
+                    path="/awards/platinum-certificate-categories/:slug"
+                    element={
+                      <WithLayout>
+                        <AwardCategoryRoute />
+                      </WithLayout>
+                    }
+                  />
+                  <Route
+                    path="/awards/influencers-education-impact"
+                    element={
+                      <WithLayout>
+                        <InfluencersCategoriesIndex />
+                      </WithLayout>
+                    }
+                  />
+                  <Route
+                    path="/awards/influencers-education-impact/:slug"
+                    element={
+                      <WithLayout>
+                        <AwardCategoryRoute />
+                      </WithLayout>
+                    }
+                  />
+
+                  {/* Programmatic legacy → canonical redirects for category URLs */}
+                  {buildCategoryRedirects().map(({ from, to }) => (
+                    <Route key={`catredir-${from}`} path={from} element={<Navigate to={to} replace />} />
+                  ))}
+
+                  {/* Legacy /categories index → master index */}
+                  <Route path="/categories" element={<Navigate to="/awards/categories" replace />} />
+
+                  {/* Legacy /categories/:slug — preserved for any deep links not covered by redirect map */}
                   <Route
                     path="/categories/:slug"
                     element={
