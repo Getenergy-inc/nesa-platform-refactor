@@ -75,9 +75,10 @@ function DesktopNav({ onOpenCVOMessage }: { onOpenCVOMessage: () => void }) {
                       "grid gap-3 p-4 bg-charcoal border border-gold/20",
                       item.label === "About"
                         ? "w-[420px]"
-                        : item.label === "Engage" || item.label === "Programs"
+                        : item.label === "Engage" || item.label === "Programs" || item.label === "Sponsor NESA-Africa 2026"
                         ? "w-[560px] md:w-[640px] md:grid-cols-2"
                         : "w-[400px] md:w-[500px] md:grid-cols-2 lg:w-[600px]",
+
                     )}
                   >
                     {/* CVO Message Trigger - Only for About menu */}
