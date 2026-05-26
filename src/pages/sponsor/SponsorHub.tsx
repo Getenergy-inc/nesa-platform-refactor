@@ -11,10 +11,10 @@ export default function SponsorHub() {
   return (
     <PublicLayout>
       <Helmet>
-        <title>Sponsor NESA-Africa 2026 — Premium Partnership Ecosystem</title>
+        <title>Sponsor New Education Standard Award Africa (NESA-Africa) 2026 — Premium Partnership Ecosystem</title>
         <meta
           name="description"
-          content="Sponsorship, CSR, advertising and partnership opportunities across the NESA-Africa 2026 ecosystem — Blue Garnet Gala, award categories, EduAid, Rebuild My School, NESA TV and more."
+          content="Sponsor New Education Standard Award Africa (NESA-Africa) 2026 — motto: &quot;The African Blue-Garnet Awards for Education.&quot; Align your brand with Africa's continental education recognition and impact platform."
         />
         <link rel="canonical" href="https://nesa.africa/sponsor" />
       </Helmet>
@@ -32,12 +32,17 @@ export default function SponsorHub() {
             <span className="inline-flex items-center gap-2 text-[11px] uppercase tracking-[0.22em] text-gold font-semibold mb-4">
               <Sparkles className="h-3.5 w-3.5" /> Sponsor NESA-Africa 2026
             </span>
-            <h1 className="font-display text-4xl md:text-6xl font-bold text-ivory leading-tight mb-5">
-              A continental partnership ecosystem for Africa's education future.
+            <h1 className="font-display text-4xl md:text-6xl font-bold text-ivory leading-tight mb-3">
+              Sponsor New Education Standard Award Africa (NESA-Africa) 2026
             </h1>
-            <p className="text-ivory/70 text-base md:text-lg max-w-2xl mb-8">
-              Headline the Blue Garnet Gala, own an award category, fund EduAid scholarships, rebuild schools,
-              power NESA-Africa TV, advertise to engaged audiences, or co-create a multi-year CSR partnership.
+            <p className="text-gold/90 italic text-lg md:text-xl mb-5">
+              “The African Blue-Garnet Awards for Education”
+            </p>
+            <p className="text-ivory/70 text-base md:text-lg max-w-2xl mb-4">
+              Align your brand with Africa's continental education recognition and impact platform. Headline the Blue Garnet Awards Gala, own an award category, fund EduAid-Africa scholarships, rebuild schools, power NESA-Africa TV, or co-create a multi-year CSR partnership.
+            </p>
+            <p className="text-ivory/55 text-xs md:text-sm max-w-2xl mb-8 border-l-2 border-gold/40 pl-3">
+              Integrity policy: Sponsors and partners cannot nominate, shortlist, vote, judge, lobby or influence award outcomes. Sponsorship benefits are limited to approved visibility, reporting, engagement, CSR alignment, media exposure and impact documentation.
             </p>
             <div className="flex flex-wrap gap-3">
               <Button asChild className="bg-gold text-charcoal hover:bg-gold-dark font-semibold">

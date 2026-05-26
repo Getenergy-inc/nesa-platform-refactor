@@ -63,7 +63,7 @@ export function CampaignBanner() {
             
             {/* Headline */}
             <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4">
-              NESA-Africa — The African Blue-Garnet Awards for Education 2026 —{" "}
+              New Education Standard Award Africa (NESA-Africa) 2026 —{" "}
               <span className="text-gold">Nominations Open Now</span>
             </h2>
             

@@ -17,7 +17,7 @@ const programs = [
   {
     icon: Award,
     title: "NESA-Africa",
-    description: "NESA-Africa — The African Blue-Garnet Awards for Education — the flagship recognition platform.",
+    description: "New Education Standard Award Africa (NESA-Africa) — the flagship recognition platform.",
     href: "/",
   },
   {

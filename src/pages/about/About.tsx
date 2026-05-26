@@ -125,10 +125,10 @@ export default function About() {
   return (
     <>
       <Helmet>
-        <title>About | NESA-Africa — The African Blue-Garnet Awards for Education</title>
+        <title>About | New Education Standard Award Africa (NESA-Africa) 2026 — The African Blue-Garnet Awards for Education</title>
         <meta
           name="description"
-          content="Learn about NESA-Africa — a governance-grade education accountability platform honoring Africa's changemakers since 2006. Vision 2035: Advocating & Achieving Education For All In Africa."
+          content="New Education Standard Award Africa (NESA-Africa) is a continental education recognition and impact platform honouring Africa's changemakers since 2006. Motto: &quot;The African Blue-Garnet Awards for Education.&quot;"
         />
       </Helmet>
 
@@ -156,19 +156,26 @@ export default function About() {
                 <GraduationCap className="h-4 w-4 text-gold" />
                 <span className="text-sm font-medium text-gold">Since 2006 • Vision 2035</span>
               </div>
-              
-              <h1 className="mb-6 font-display text-4xl font-bold text-ivory md:text-5xl lg:text-6xl leading-tight">
-                The African Blue-Garnet Awards for Education <span className="text-gold">Africa</span>
+
+              <h1 className="mb-3 font-display text-4xl font-bold text-ivory md:text-5xl lg:text-6xl leading-tight">
+                New Education Standard Award <span className="text-gold">Africa</span>
               </h1>
-              
-              <p className="mb-4 text-xl text-ivory/90 font-medium">
-                More than awards. A movement for education excellence.
+              <p className="mb-3 font-display text-2xl md:text-3xl font-semibold text-ivory/90">
+                (NESA-Africa)
               </p>
-              
+              <p className="mb-6 text-lg md:text-xl italic text-gold/90">
+                “The African Blue-Garnet Awards for Education”
+              </p>
+
+              <p className="mb-4 text-xl text-ivory/90 font-medium">
+                More than awards. A continental education recognition and impact platform.
+              </p>
+
               <p className="mb-8 text-lg text-ivory/80 leading-relaxed max-w-xl">
-                NESA-Africa is a <strong className="text-ivory">governance-grade education accountability platform</strong> —
-                celebrating, validating, and amplifying Africa's education champions while funding 
-                measurable legacy impact through <span className="text-gold">Rebuild My School Africa</span>.
+                New Education Standard Award Africa (NESA-Africa) celebrates, documents, amplifies and supports
+                education changemakers across Africa and the diaspora — connecting recognition, storytelling,
+                partnerships and measurable social impact through <span className="text-gold">EduAid-Africa</span>,
+                NESA-Africa TV, and Rebuild My School Africa.
               </p>
               
               <div className="flex flex-wrap gap-4">

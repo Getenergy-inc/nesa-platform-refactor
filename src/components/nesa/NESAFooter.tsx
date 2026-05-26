@@ -28,11 +28,11 @@ export function NESAFooter() {
           {/* Brand */}
           <div className="text-center md:text-left">
             <div className="flex items-center gap-3 justify-center md:justify-start mb-4">
-              <img src={nesaStamp} alt="NESA Africa" className="h-10 w-10 rounded-full object-contain" />
+              <img src={nesaStamp} alt="New Education Standard Award Africa (NESA-Africa)" className="h-10 w-10 rounded-full object-contain" />
               <div className="flex flex-col leading-tight">
-                <span className="text-xs text-gold/70 font-medium tracking-wider uppercase">NESA-Africa 2026</span>
-                <span className="text-lg font-display font-bold text-gold">AFRICA</span>
-                <span className="text-[10px] text-white/60 font-medium tracking-wider italic">The African Blue-Garnet Awards for Education</span>
+                <span className="text-[10px] text-gold/70 font-medium tracking-wider uppercase">New Education Standard Award Africa</span>
+                <span className="text-base font-display font-bold text-gold">(NESA-Africa) 2026</span>
+                <span className="text-[10px] text-white/60 font-medium tracking-wider italic">“The African Blue-Garnet Awards for Education”</span>
               </div>
             </div>
             <p className="text-white/60 text-sm mb-4">
