@@ -201,6 +201,9 @@ import {
   BulkOrders,
 } from "./pages/shop";
 import { SponsorLanding, SponsorsHub } from "./pages/sponsors";
+import SponsorHub from "./pages/sponsor/SponsorHub";
+import SponsorCategoryPage from "./pages/sponsor/SponsorCategoryPage";
+
 import Wallet from "./pages/Wallet";
 import EndorseNESA from "./pages/EndorseNESA";
 import RegionDashboard from "./pages/region/RegionDashboard";
@@ -350,15 +353,18 @@ const App = () => (
                   <Route path="/signin" element={<Navigate to="/login" replace />} />
                   <Route path="/signup" element={<Navigate to="/register" replace />} />
 
+                  {/* Sponsor NESA-Africa 2026 — premium partnership ecosystem */}
+                  <Route path="/sponsor" element={<SponsorHub />} />
+                  <Route path="/sponsor/:slug" element={<SponsorCategoryPage />} />
                   {/* Sponsor legacy */}
-                  <Route path="/sponsor" element={<Navigate to="/sponsors" replace />} />
                   <Route path="/our-sponsors" element={<Navigate to="/sponsors" replace />} />
                   <Route path="/our-partners" element={<Navigate to="/sponsors" replace />} />
                   <Route path="/partner" element={<Navigate to="/sponsors" replace />} />
                   {/* /partners has its own dedicated page — do not redirect */}
                   <Route path="/partnerships" element={<Navigate to="/sponsors" replace />} />
-                  <Route path="/become-a-sponsor" element={<Navigate to="/contact?topic=sponsorship" replace />} />
-                  <Route path="/become-sponsor" element={<Navigate to="/contact?topic=sponsorship" replace />} />
+                  <Route path="/become-a-sponsor" element={<Navigate to="/sponsor" replace />} />
+                  <Route path="/become-sponsor" element={<Navigate to="/sponsor" replace />} />
+
 
                   {/* Nominee legacy */}
                   <Route path="/nominee" element={<Navigate to="/nominees" replace />} />

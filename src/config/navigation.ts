@@ -5,13 +5,18 @@ import {
   Award,
   BookOpen,
   Building,
+  Building2,
   Calendar,
   ChevronDown,
   Clock,
   Coins,
   FileCheck,
+  FileDown,
   Gavel,
   Globe,
+  Globe2,
+  GraduationCap,
+  Handshake,
   Heart,
   Home,
   Info,
@@ -19,11 +24,14 @@ import {
   Map,
   MapPin,
   Medal,
+  Megaphone,
   MessageSquare,
+  Mic,
   Play,
   Settings,
   Shield,
   ShoppingBag,
+  Sparkles,
   Star,
   Target,
   Ticket,
@@ -35,6 +43,7 @@ import {
   Wallet,
   type LucideIcon,
 } from "lucide-react";
+
 
 // ============================================================================
 // TYPES
@@ -131,9 +140,32 @@ export const MAIN_NAV: NavItem[] = [
   },
 
   // ─────────────────────────────────────────────────────────
-  // 4. MEDIA — Storytelling, visibility, amplification
+  // 4. SPONSOR NESA-AFRICA 2026 — Premium partnership ecosystem
   // ─────────────────────────────────────────────────────────
   {
+    label: "Sponsor NESA-Africa 2026",
+    href: "/sponsor",
+    icon: Sparkles,
+    badge: "2026",
+    children: [
+      { label: "Sponsor the Blue Garnet Awards Gala", href: "/sponsor/gala", description: "Headline, VIP table, red-carpet & broadcast partnerships", icon: Sparkles, badge: "Gala" },
+      { label: "Sponsor Award Categories", href: "/sponsor/categories", description: "Own a Blue Garnet, Platinum, Icon or sector category", icon: Trophy },
+      { label: "Sponsor EduAid Africa", href: "/sponsor/eduaid-africa", description: "Scholarships, learning access & inclusion", icon: GraduationCap },
+      { label: "Sponsor Rebuild My School Africa", href: "/sponsor/rebuild-my-school-africa", description: "Classrooms, infrastructure & accessibility", icon: Building2 },
+      { label: "Sponsor NESA-Africa TV", href: "/sponsor/nesa-tv", description: "Documentaries, livestreams & broadcasts", icon: Tv },
+      { label: "Sponsor Webinars & Education Events", href: "/sponsor/webinars", description: "Conferences, youth & educator sessions", icon: Mic },
+      { label: "Advertise on NESA Platforms", href: "/sponsor/advertise", description: "Web, newsletter, social & broadcast ads", icon: Megaphone },
+      { label: "CSR & Institutional Partnerships", href: "/sponsor/csr", description: "Foundations, NGOs & bilateral partners", icon: Handshake },
+      { label: "Become an Official Partner", href: "/sponsor/partners", description: "Strategic continental partnership tier", icon: Globe2 },
+      { label: "Download Sponsorship Deck", href: "/sponsor/deck", description: "Full 2026 partnership prospectus (PDF)", icon: FileDown, badge: "PDF" },
+    ],
+  },
+
+  // ─────────────────────────────────────────────────────────
+  // 5. MEDIA — Storytelling, visibility, amplification
+  // ─────────────────────────────────────────────────────────
+  {
+
     label: "Media",
     href: "/media",
     icon: Tv,
@@ -200,10 +232,12 @@ export const MAIN_NAV_MOBILE_ORDER: readonly string[] = [
   "Nominate",
   "Vote",
   "Engage",
+  "Sponsor NESA-Africa 2026",
   "Programs",
   "About",
   "Media",
 ];
+
 
 
 // ============================================================================
