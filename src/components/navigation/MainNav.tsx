@@ -74,9 +74,9 @@ function DesktopNav({ onOpenCVOMessage }: { onOpenCVOMessage: () => void }) {
                   <ul
                     className={cn(
                       "grid gap-3 p-4 bg-charcoal border border-gold/20",
-                      item.label === "About"
+                      item.label === "About" || item.label === "Contact" || item.label === "FAQs"
                         ? "w-[420px]"
-                        : item.label === "Engage" || item.label === "Programs" || item.label === "Sponsor NESA-Africa 2026"
+                        : item.label === "Engage" || item.label === "Impact Programs" || item.label === "Awards" || item.label === "Media"
                         ? "w-[560px] md:w-[640px] md:grid-cols-2"
                         : "w-[400px] md:w-[500px] md:grid-cols-2 lg:w-[600px]",
 
