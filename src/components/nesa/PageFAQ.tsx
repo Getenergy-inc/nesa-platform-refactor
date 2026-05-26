@@ -24,6 +24,20 @@ export function PageFAQSection({ className }: { className?: string }) {
   const { pathname } = useLocation();
   const data = useMemo(() => getFAQsForPath(pathname), [pathname]);
 
+  // FAQPage JSON-LD for SEO (visible Qs/As only)
+  const jsonLd = useMemo(
+    () => ({
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      mainEntity: data.faqs.map((f) => ({
+        "@type": "Question",
+        name: f.q,
+        acceptedAnswer: { "@type": "Answer", text: f.a },
+      })),
+    }),
+    [data],
+  );
+
   // Hide on auth/dashboard routes where FAQs would feel intrusive
   if (pathname.startsWith("/auth") || pathname.startsWith("/admin")) return null;
 
