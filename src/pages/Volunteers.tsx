@@ -4,8 +4,9 @@ import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import {
   Users, Search, MapPin, Trophy, Sparkles, ArrowRight, Heart,
-  Globe2, BadgeCheck, Share2, Crown,
+  Globe2, BadgeCheck, Share2, Crown, Quote, ShieldCheck,
 } from "lucide-react";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
