@@ -30,7 +30,7 @@ export function NESAFooter() {
             <div className="flex items-center gap-3 justify-center md:justify-start mb-4">
               <img src={nesaStamp} alt="NESA Africa" className="h-10 w-10 rounded-full object-contain" />
               <div className="flex flex-col leading-tight">
-                <span className="text-xs text-gold/70 font-medium tracking-wider uppercase">New Education Standard Awards</span>
+                <span className="text-xs text-gold/70 font-medium tracking-wider uppercase">The African Blue-Garnet Awards for Education</span>
                 <span className="text-lg font-display font-bold text-gold">AFRICA</span>
                 <span className="text-[10px] text-white/50 font-medium tracking-wider italic">The African Blue-Garnet Awards for Education</span>
               </div>

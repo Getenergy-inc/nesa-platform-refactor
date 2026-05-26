@@ -199,7 +199,7 @@ export default function ContributorProfile() {
             <div className="flex items-start justify-between gap-4 border-b border-charcoal/10 pb-6 mb-6">
               <div>
                 <p className="text-[10px] uppercase tracking-[0.3em] text-charcoal/60">
-                  New Education Standard Award Africa
+                  NESA-Africa — The African Blue-Garnet Awards for Education
                 </p>
                 <h2 className="font-serif text-2xl md:text-3xl text-charcoal mt-1">
                   Letter of Recommendation

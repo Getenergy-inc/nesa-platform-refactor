@@ -24,7 +24,7 @@ interface Program {
 const programs: Program[] = [
   {
     id: "nesa-africa",
-    name: "New Education Standard Award Africa",
+    name: "NESA-Africa — The African Blue-Garnet Awards for Education",
     shortName: "NESA-Africa",
     tagline: "Honoring Africa's Changemakers",
     description:

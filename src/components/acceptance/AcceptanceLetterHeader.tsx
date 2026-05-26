@@ -26,7 +26,7 @@ export function AcceptanceLetterHeader({ nomineeName, chapterName, region }: Acc
           NESA-Africa 2026
         </h1>
         <p className="text-muted-foreground">
-          New Education Standard Awards Africa
+          NESA-Africa — The African Blue-Garnet Awards for Education
         </p>
         <p className="text-xs text-muted-foreground/70 italic tracking-wider">
           The African Blue-Garnet Awards for Education

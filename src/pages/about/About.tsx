@@ -125,7 +125,7 @@ export default function About() {
   return (
     <>
       <Helmet>
-        <title>About | New Education Standard Award Africa (NESA-Africa)</title>
+        <title>About | NESA-Africa — The African Blue-Garnet Awards for Education</title>
         <meta
           name="description"
           content="Learn about NESA-Africa — a governance-grade education accountability platform honoring Africa's changemakers since 2006. Vision 2035: Advocating & Achieving Education For All In Africa."
@@ -158,7 +158,7 @@ export default function About() {
               </div>
               
               <h1 className="mb-6 font-display text-4xl font-bold text-ivory md:text-5xl lg:text-6xl leading-tight">
-                New Education Standard Award <span className="text-gold">Africa</span>
+                The African Blue-Garnet Awards for Education <span className="text-gold">Africa</span>
               </h1>
               
               <p className="mb-4 text-xl text-ivory/90 font-medium">
