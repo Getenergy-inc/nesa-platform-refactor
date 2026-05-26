@@ -152,70 +152,32 @@ export const MAIN_NAV: NavItem[] = [
     ],
   },
 
-  // 6. NOMINATE
+  // 6. SUPPORT (consolidates FAQs + Contact + Help)
   {
-    label: "Nominate",
-    href: "/nominate",
-    icon: FileCheck,
-    children: [
-      { label: "Submit Nomination", href: "/nominate", description: "Nominate for NESA-Africa 2026", icon: FileCheck, stageGated: "nominations" },
-      { label: "Nomination Guidelines", href: "/guidelines/nominees", description: "How nominations are reviewed", icon: BookOpen },
-      { label: "Category Finder", href: "/categories", description: "Find the right award category", icon: Target },
-      { label: "Eligibility Requirements", href: "/guidelines/edi-matrix", description: "Who can be nominated and why", icon: Shield },
-      { label: "Nominee Dashboard", href: "/dashboard/nominations", description: "Manage your nominee profile", icon: Settings },
-      { label: "Nomination FAQs", href: "/faq#nominations", description: "Common nomination questions", icon: MessageSquare },
-    ],
-  },
-
-  // 7. VOTE
-  {
-    label: "Vote",
-    href: "/vote",
-    icon: Vote,
-    children: [
-      { label: "Vote Now", href: "/vote", description: "Cast your vote for NESA-Africa 2026", icon: Vote },
-      { label: "Voting Guidelines", href: "/guidelines/voters", description: "How to vote and what counts", icon: BookOpen },
-      { label: "Public Voting Rules", href: "/how-voting-works", description: "Public + jury voting explained", icon: Info },
-      { label: "Voting Integrity", href: "/policies/voting-integrity", description: "Firewalls & anti-fraud safeguards", icon: Shield },
-      { label: "Results / Announcements", href: "/results", description: "Official voting outcomes", icon: Trophy },
-      { label: "Vote with AGC", href: "/vote-with-agc", description: "Use Afri-Gold Coin credits to vote", icon: Coins },
-      { label: "Earn AGC", href: "/earn-agc", description: "All ways to earn Afri-Gold Coins", icon: Coins, badge: "AGC" },
-      { label: "AGC Wallet", href: "/dashboard/wallet", description: "Balance, settlements & transactions", icon: Wallet },
-    ],
-  },
-
-  // 8. FAQs
-  {
-    label: "FAQs",
+    label: "Support",
     href: "/faq",
     icon: MessageSquare,
     children: [
-      { label: "General FAQs", href: "/faq#general", description: "About NESA-Africa", icon: Info },
-      { label: "Awards FAQs", href: "/faq#awards", description: "Tiers, categories & criteria", icon: Trophy },
-      { label: "Nomination FAQs", href: "/faq#nominations", description: "Submitting & managing nominations", icon: FileCheck },
-      { label: "Voting FAQs", href: "/faq#voting", description: "Public & AGC voting", icon: Vote },
-      { label: "Sponsorship FAQs", href: "/faq#sponsorship", description: "Sponsoring NESA-Africa 2026", icon: Sparkles },
-      { label: "Partnership FAQs", href: "/faq#partnerships", description: "Strategic & institutional partners", icon: Handshake },
-      { label: "Media FAQs", href: "/faq#media", description: "Press, accreditation & content", icon: Tv },
-    ],
-  },
-
-  // 9. CONTACT
-  {
-    label: "Contact",
-    href: "/contact",
-    icon: Mail,
-    children: [
-      { label: "General Enquiries", href: "/contact#general", description: "Reach the NESA-Africa team", icon: Mail },
-      { label: "Sponsorship & Partnerships", href: "/contact#partnerships", description: "Speak to our partnerships team", icon: Handshake },
-      { label: "Media Contact", href: "/contact#media", description: "Press & media enquiries", icon: Tv },
+      { label: "FAQs", href: "/faq", description: "All frequently asked questions", icon: MessageSquare },
+      { label: "Contact", href: "/contact", description: "Reach the NESA-Africa team", icon: Mail },
+      { label: "Help Desk", href: "/contact#general", description: "General enquiries and assistance", icon: Info },
       { label: "Technical Support", href: "/contact#support", description: "Platform & account help", icon: Settings },
-      { label: "Office / Location", href: "/contact#office", description: "Where to find us", icon: MapPin },
+      { label: "Nomination Support", href: "/faq#nominations", description: "Help submitting & managing nominations", icon: FileCheck },
+      { label: "Voting Support", href: "/faq#voting", description: "Help with public & AGC voting", icon: Vote },
+      { label: "Sponsorship Support", href: "/faq#sponsorship", description: "Sponsor & partnership assistance", icon: Handshake },
     ],
   },
 ];
 
-// CTA button shown to the right of the main navbar
+// Right-side action CTAs (primary navigation actions)
+// Hierarchy: Sponsor = primary filled; Nominate & Vote = secondary outline
+export const MAIN_NAV_CTAS: NavItem[] = [
+  { label: "Nominate", href: "/nominate", icon: FileCheck },
+  { label: "Vote", href: "/vote", icon: Vote },
+  { label: "Become a Sponsor", href: "/sponsor", icon: Sparkles, badge: "2026" },
+];
+
+// Legacy single-CTA export (kept for backward compatibility — primary sponsor CTA)
 export const MAIN_NAV_CTA: NavItem = {
   label: "Become a Sponsor",
   href: "/sponsor",
@@ -223,17 +185,14 @@ export const MAIN_NAV_CTA: NavItem = {
   badge: "2026",
 };
 
-// Mobile-first menu order
+// Mobile-first menu order (information architecture only — CTAs are rendered separately)
 export const MAIN_NAV_MOBILE_ORDER: readonly string[] = [
-  "Nominate",
-  "Vote",
   "Engage",
   "Awards",
   "Impact Programs",
   "Media",
   "About",
-  "FAQs",
-  "Contact",
+  "Support",
 ];
 
 
