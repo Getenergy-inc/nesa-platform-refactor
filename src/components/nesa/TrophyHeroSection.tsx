@@ -88,11 +88,29 @@ export function TrophyHeroSection() {
               {t("landing.trophyHero.slogan")}
             </motion.p>
 
+            {/* Official brand block */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.25 }}
+              className="mb-5"
+            >
+              <p className="font-display text-2xl sm:text-3xl md:text-4xl font-bold text-white leading-tight">
+                New Education Standard Award Africa
+              </p>
+              <p className="font-display text-lg sm:text-xl md:text-2xl font-semibold text-white/90 mt-1">
+                (NESA-Africa) <span className="text-gold">2026</span>
+              </p>
+              <p className="text-sm sm:text-base md:text-lg italic text-gold/90 mt-2">
+                “The African Blue-Garnet Awards for Education”
+              </p>
+            </motion.div>
+
             <motion.h1
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.3 }}
-              className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-5xl xl:text-6xl font-bold text-white mb-4 leading-[1.12]"
+              className="font-display text-2xl sm:text-3xl md:text-4xl lg:text-4xl xl:text-5xl font-bold text-white mb-4 leading-[1.15]"
             >
               {t("landing.trophyHero.headline")}{" "}
               <span className="text-gold bg-gradient-to-r from-gold to-amber-400 bg-clip-text text-transparent">
