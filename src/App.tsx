@@ -112,6 +112,14 @@ import {
   AfricaEducationIcon,
 } from "./pages/categories/index";
 
+// Refactored Award Category architecture (Phase 18B)
+import CategoryMasterIndex from "./pages/awards/CategoryMasterIndex";
+import BlueGarnetCategoriesIndex from "./pages/awards/BlueGarnetCategoriesIndex";
+import PlatinumCategoriesIndex from "./pages/awards/PlatinumCategoriesIndex";
+import InfluencersCategoriesIndex from "./pages/awards/InfluencersCategoriesIndex";
+import AwardCategoryRoute from "./pages/awards/AwardCategoryRoute";
+import { ICON_CATEGORY, buildRedirectMap as buildCategoryRedirects } from "./config/awardCategories";
+
 // Media Pages
 import MediaHub from "./pages/media/MediaHub";
 import GalleryLanding from "./pages/gallery/GalleryLanding";
