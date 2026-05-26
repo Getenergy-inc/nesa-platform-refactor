@@ -67,7 +67,7 @@ export default function GovernancePage() {
   return (
     <>
       <Helmet>
-        <title>Governance | NESA-Africa — The African Blue-Garnet Awards for Education</title>
+        <title>Governance | New Education Standard Award Africa (NESA-Africa)</title>
         <meta name="description" content="NESA-Africa governance framework: public vote integrity, jury evaluation, NRC verification, certificate security, and misuse reporting." />
       </Helmet>
 
