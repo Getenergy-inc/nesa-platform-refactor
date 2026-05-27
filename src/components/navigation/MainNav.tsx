@@ -138,7 +138,7 @@ function DesktopNav({ onOpenCVOMessage }: { onOpenCVOMessage: () => void }) {
                   to={item.href}
                   className={cn(
                     navigationMenuTriggerStyle(),
-                    "bg-transparent text-white/90 hover:text-gold hover:bg-gold/10 h-8 xl:h-9 px-2 xl:px-3 text-[11px] xl:text-sm leading-none",
+                    "bg-transparent text-white/90 hover:text-gold hover:bg-gold/10 h-8 xl:h-9 px-1.5 xl:px-2 text-[11px] xl:text-[13px] leading-none whitespace-nowrap",
                     location.pathname === item.href && "text-gold bg-gold/10",
                   )}
                 >
