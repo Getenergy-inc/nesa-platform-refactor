@@ -35,12 +35,12 @@ export function LandingNomineeCard({ nominee, isBlueGarnet: isBlueGarnetProp }: 
 
   return (
     <Card
-      className={`backdrop-blur-sm transition-all duration-300 group overflow-hidden h-full flex flex-col cursor-pointer ${tierStyle.cardBgClass} ${tierStyle.cardBorderClass} border`}
+      className={`backdrop-blur-sm transition-all duration-300 group overflow-hidden h-full flex flex-col cursor-pointer active:scale-[0.99] ${tierStyle.cardBgClass} ${tierStyle.cardBorderClass} border`}
       onClick={() => navigate(profileHref)}
     >
       <CardContent className="p-0 flex flex-col flex-1">
-        {/* Visual identity */}
-        <div className="relative h-40 sm:h-44 overflow-hidden">
+        {/* Visual identity — compact on mobile, larger on desktop */}
+        <div className="relative h-32 sm:h-44 overflow-hidden">
           <NomineeAvatar
             name={nominee.name}
             src={nominee.photoUrl}
@@ -53,65 +53,66 @@ export function LandingNomineeCard({ nominee, isBlueGarnet: isBlueGarnetProp }: 
 
           {/* Country badge */}
           {nominee.country && (
-            <div className="absolute top-2 right-2">
-              <Badge variant="outline" className="bg-secondary/80 backdrop-blur-sm border-gold/30 text-gold text-[10px]">
+            <div className="absolute top-1.5 right-1.5 sm:top-2 sm:right-2">
+              <Badge variant="outline" className="bg-secondary/80 backdrop-blur-sm border-gold/30 text-gold text-[9px] sm:text-[10px] px-1.5 py-0">
                 <MapPin className="w-2.5 h-2.5 mr-0.5" />
                 {nominee.country}
               </Badge>
             </div>
           )}
 
-          {/* Tier badge — dynamic per recognition ecosystem */}
-          <div className="absolute top-2 left-2">
-            <Badge className={`text-[10px] border ${tierStyle.className}`}>
+          {/* Tier badge */}
+          <div className="absolute top-1.5 left-1.5 sm:top-2 sm:left-2">
+            <Badge className={`text-[9px] sm:text-[10px] px-1.5 py-0 border ${tierStyle.className}`}>
               {tierStyle.label}
             </Badge>
           </div>
         </div>
 
-        {/* Content */}
-        <div className="p-4 flex flex-col flex-1 gap-2">
-          <Link to={profileHref} className="group/link">
-            <h3 className="font-display text-ivory text-base md:text-lg font-bold leading-tight group-hover/link:text-gold transition-colors line-clamp-2">
+        {/* Content — tighter on mobile */}
+        <div className="p-3 sm:p-4 flex flex-col flex-1 gap-1.5 sm:gap-2">
+          <Link to={profileHref} className="group/link" onClick={(e) => e.stopPropagation()}>
+            <h3 className="font-display text-ivory text-sm sm:text-base md:text-lg font-bold leading-tight group-hover/link:text-gold transition-colors line-clamp-2">
               {nominee.name}
             </h3>
           </Link>
 
           <Badge
             variant="outline"
-            className="w-fit border-gold/30 text-ivory/80 text-[11px] px-2.5 py-0.5 rounded-full bg-charcoal/40"
+            className="w-fit border-gold/30 text-ivory/80 text-[10px] sm:text-[11px] px-2 py-0 rounded-full bg-charcoal/40 line-clamp-1"
           >
             {nominee.categoryName}
           </Badge>
 
-          <p className="text-ivory/70 text-xs leading-relaxed line-clamp-3 flex-1">
+          {/* Achievement: hidden on smallest screens to keep card compact */}
+          <p className="hidden sm:block text-ivory/70 text-xs leading-relaxed line-clamp-3 flex-1">
             {nominee.achievement || "Contributing to the advancement of education across Africa."}
           </p>
 
-          <div className="pt-3 mt-auto border-t border-gold/10 flex flex-col gap-2">
+          <div className="pt-2 sm:pt-3 mt-auto border-t border-gold/10 flex flex-row sm:flex-col gap-2">
             {/* Primary: View Profile */}
             <Button
               asChild
               size="sm"
-              className="w-full bg-gold hover:bg-gold/90 text-charcoal font-bold rounded-full"
+              className="flex-1 h-9 bg-gold hover:bg-gold/90 text-charcoal font-bold rounded-full text-xs sm:text-sm"
             >
               <Link to={profileHref}>
-                View Profile <ArrowRight className="w-3.5 h-3.5 ml-1.5" />
+                View <ArrowRight className="w-3.5 h-3.5 ml-1" />
               </Link>
             </Button>
-            {/* Secondary: Vote (Blue Garnet) or Re-nominate (all others) */}
+            {/* Secondary quick action */}
             <Button
               asChild
               size="sm"
               variant="outline"
               onClick={(e) => e.stopPropagation()}
-              className={`w-full rounded-full font-semibold ${tierStyle.secondaryCtaClass}`}
+              className={`flex-1 h-9 rounded-full font-semibold text-xs sm:text-sm ${tierStyle.secondaryCtaClass}`}
             >
               <Link to={secondaryHref}>
                 {isBlueGarnet ? (
-                  <><Vote className="w-4 h-4 mr-2" /> Vote</>
+                  <><Vote className="w-3.5 h-3.5 sm:mr-1.5" /> <span className="hidden sm:inline">Vote</span><span className="sm:hidden">Vote</span></>
                 ) : (
-                  <><RotateCcw className="w-4 h-4 mr-2" /> Re-nominate</>
+                  <><RotateCcw className="w-3.5 h-3.5 sm:mr-1.5" /> <span>Re-nom</span></>
                 )}
               </Link>
             </Button>
@@ -121,5 +122,6 @@ export function LandingNomineeCard({ nominee, isBlueGarnet: isBlueGarnetProp }: 
     </Card>
   );
 }
+
 
 
