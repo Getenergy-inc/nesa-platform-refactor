@@ -313,7 +313,24 @@ export default function CategoryMasterIndex() {
             );
           })}
           {filtered.length === 0 && (
-            <p className="text-foreground/60">No categories match your filters.</p>
+            <div className="md:col-span-2 lg:col-span-3">
+              <Card className="border-dashed border-gold/30 bg-charcoal-light/40">
+                <CardContent className="p-10 text-center flex flex-col items-center gap-3">
+                  <Search className="h-8 w-8 text-gold/60" />
+                  <h3 className="font-playfair text-xl text-foreground">No categories match</h3>
+                  <p className="text-sm text-foreground/60 max-w-md">
+                    Try a different keyword or remove a filter. You can also browse every group
+                    individually.
+                  </p>
+                  <Button
+                    onClick={clearFilters}
+                    className="mt-2 bg-gold text-charcoal hover:bg-gold/90"
+                  >
+                    Reset filters
+                  </Button>
+                </CardContent>
+              </Card>
+            </div>
           )}
         </div>
       </section>
