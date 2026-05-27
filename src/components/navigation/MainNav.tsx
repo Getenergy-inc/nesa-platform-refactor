@@ -69,7 +69,7 @@ function DesktopNav({ onOpenCVOMessage }: { onOpenCVOMessage: () => void }) {
 
             {item.children ? (
               <>
-                <NavigationMenuTrigger className="bg-transparent text-white/90 hover:text-gold hover:bg-gold/10 data-[state=open]:bg-gold/10 data-[state=open]:text-gold h-8 xl:h-9 px-2 xl:px-3 text-[11px] xl:text-sm leading-none">
+                <NavigationMenuTrigger className="bg-transparent text-white/90 hover:text-gold hover:bg-gold/10 data-[state=open]:bg-gold/10 data-[state=open]:text-gold h-8 xl:h-9 px-1.5 xl:px-2 text-[11px] xl:text-[13px] leading-none whitespace-nowrap">
                   {/* {item.icon && <item.icon className="h-3.5 w-3.5 mr-1.5" />} */}
                   {item.label}
                 </NavigationMenuTrigger>
