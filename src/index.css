@@ -446,3 +446,40 @@
     touch-action: manipulation;
   }
 }
+
+/* ============= Phase 3 mobile performance pass ============= */
+
+/* Respect reduced-motion: kill non-essential animations & transitions */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Skip rendering of offscreen lazy sections — huge mobile scroll perf win */
+@supports (content-visibility: auto) {
+  .cv-auto {
+    content-visibility: auto;
+    contain-intrinsic-size: 600px;
+  }
+}
+
+/* Prevent iOS auto-zoom on focused inputs (font-size ≥16px) */
+@media (max-width: 767px) {
+  input,
+  select,
+  textarea {
+    font-size: 16px;
+  }
+}
+
+/* Smooth, momentum scrolling for horizontal mobile rails */
+.snap-x {
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior-x: contain;
+}

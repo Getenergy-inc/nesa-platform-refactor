@@ -21,11 +21,11 @@ const buttonVariants = cva(
         pulse: "bg-primary text-primary-foreground animate-pulse-gold hover:scale-105 active:scale-95",
       },
       size: {
-        default: "h-10 px-4 py-2",
+        default: "h-11 md:h-10 px-4 py-2",
         sm: "h-9 rounded-md px-3",
-        lg: "h-11 rounded-md px-8",
+        lg: "h-12 md:h-11 rounded-md px-8",
         xl: "h-14 rounded-xl px-10 text-lg font-bold",
-        icon: "h-10 w-10",
+        icon: "h-11 w-11 md:h-10 md:w-10",
       },
     },
     defaultVariants: {
