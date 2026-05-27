@@ -277,6 +277,7 @@ export default function CategoryDetail() {
           </div>
         </section>
       </div>
+      <MobileStickyNominateCTA source="category_detail" categorySlug={displayCat.slug} />
     </>
   );
 }
