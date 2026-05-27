@@ -202,10 +202,13 @@ export const MAIN_NAV_CTA: NavItem = {
 // Top-level mobile menu per UX brief: About, Programs, Engage, Sponsor, Media, Nominate, Vote.
 // Sponsor / Nominate / Vote are rendered as primary CTAs in the drawer footer.
 // Awards & Support are demoted to a "More" group inside the mobile drawer.
+// Mobile menu order per UX brief: Engage and Programs first (high-intent),
+// then About, Media, Awards, Support. Nominate / Vote / Sponsor are rendered
+// as primary CTAs in the drawer header/footer and the sticky bottom bar.
 export const MAIN_NAV_MOBILE_ORDER: readonly string[] = [
-  "About",
-  "Impact Programs",
   "Engage",
+  "Impact Programs",
+  "About",
   "Media",
   "Awards",
   "Support",
