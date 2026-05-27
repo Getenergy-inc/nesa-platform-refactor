@@ -120,10 +120,6 @@ export function NESALandingPage() {
           </LazySection>
         </div>
 
-        {/* Meet Our Judges */}
-        <LazySection>
-          <MeetOurJudgesSection />
-        </LazySection>
 
 
         <LazySection>
