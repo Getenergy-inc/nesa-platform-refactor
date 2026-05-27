@@ -264,10 +264,11 @@ function MobileNav({ onOpenCVOMessage }: { onOpenCVOMessage: () => void }) {
 
                       </button>
                       <div
+                        id={`mnav-sub-${item.href}`}
                         className={cn(
                           "overflow-hidden transition-all duration-200",
                           expandedItems.includes(item.href)
-                            ? "max-h-[500px]"
+                            ? "max-h-[800px]"
                             : "max-h-0",
                         )}
                       >
