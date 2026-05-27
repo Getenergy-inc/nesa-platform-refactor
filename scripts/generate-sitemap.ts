@@ -98,7 +98,42 @@ const goldNested: SitemapEntry[] = GOLD_TRACKS.map((slug) => ({
   priority: "0.7",
 }));
 
-const entries = [...staticEntries, ...iconNested, ...goldNested];
+// Award category group index pages (driven from GROUP_META)
+const groupIndexEntries: SitemapEntry[] = Array.from(
+  new Set(
+    Object.values(GROUP_META)
+      .map((g) => g.indexUrl.split("#")[0])
+      .filter(Boolean),
+  ),
+).map((path) => ({ path, changefreq: "weekly" as const, priority: "0.85" }));
+
+// One sitemap entry per canonical award category URL
+const categoryEntries: SitemapEntry[] = ALL_CATEGORIES.map((c) => ({
+  path: c.url,
+  changefreq: "weekly" as const,
+  priority: "0.8",
+}));
+
+// Master /awards/categories index
+const categoriesIndex: SitemapEntry = {
+  path: "/awards/categories",
+  changefreq: "weekly",
+  priority: "0.9",
+};
+
+const allEntries = [
+  ...staticEntries,
+  ...iconNested,
+  ...goldNested,
+  categoriesIndex,
+  ...groupIndexEntries,
+  ...categoryEntries,
+];
+
+// Dedupe by path (last one wins)
+const dedupedMap = new Map<string, SitemapEntry>();
+for (const e of allEntries) dedupedMap.set(e.path, e);
+const entries = Array.from(dedupedMap.values());
 
 function generateSitemap(entries: SitemapEntry[]) {
   const urls = entries.map((e) =>
