@@ -66,10 +66,12 @@ export function NESALandingPage() {
         {/* 3. COUNTDOWN — Blue Garnet 2026 Gala urgency */}
         <CountdownSection />
 
-        {/* 4. NOMINEE DISCOVERY — tabbed switcher (Category · Region · Impact · Country) */}
-        <LazySection>
-          <NomineeDiscoverySwitcher />
-        </LazySection>
+        {/* 4. NOMINEE DISCOVERY — desktop/tablet only; mobile gets dedicated /nominees */}
+        <div className="hidden md:block">
+          <LazySection>
+            <NomineeDiscoverySwitcher />
+          </LazySection>
+        </div>
 
 
         {/* 5. REGIONAL PREVIEW — links to full /regions */}
@@ -77,30 +79,39 @@ export function NESALandingPage() {
           <InteractiveAfricaMap />
         </LazySection>
 
-        {/* 6. MOMENTS PREVIEW — 4 tiles, full experience on /gallery */}
-        <LazySection>
-          <HomepageGalleryTeaser />
-        </LazySection>
+        {/* 6. MOMENTS PREVIEW — desktop/tablet only; mobile gets dedicated /gallery */}
+        <div className="hidden md:block">
+          <LazySection>
+            <HomepageGalleryTeaser />
+          </LazySection>
+        </div>
 
         {/* 7. IMPACT WRAP-UP — EduAid storytelling */}
         <LazySection>
           <ImpactWrapUpSection />
         </LazySection>
 
-        {/* About NESA-Africa 2026 — EDI Matrix, SDG 4 & AU Agenda 2063 */}
-        <LazySection>
-          <AboutNESASection />
-        </LazySection>
+        {/* About NESA-Africa 2026 — desktop/tablet only; mobile gets dedicated /about */}
+        <div className="hidden md:block">
+          <LazySection>
+            <AboutNESASection />
+          </LazySection>
+        </div>
 
-        {/* Powered by Volunteers — community conversion funnel */}
-        <LazySection>
-          <PoweredByVolunteersSection />
-        </LazySection>
+        {/* Powered by Volunteers — desktop/tablet only; mobile gets dedicated /volunteer */}
+        <div className="hidden md:block">
+          <LazySection>
+            <PoweredByVolunteersSection />
+          </LazySection>
+        </div>
 
-        {/* Trust supporting Final CTA */}
-        <LazySection>
-          <SponsorsSection />
-        </LazySection>
+        {/* Trust supporting Final CTA — desktop/tablet only; mobile gets dedicated /sponsors */}
+        <div className="hidden md:block">
+          <LazySection>
+            <SponsorsSection />
+          </LazySection>
+        </div>
+
 
         <LazySection>
           <PageFAQSection />
