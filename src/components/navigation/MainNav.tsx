@@ -602,7 +602,7 @@ export function MainNav() {
               asChild
               variant="outline"
               size="sm"
-              className="hidden xl:inline-flex border-gold/40 text-gold hover:bg-gold/10 hover:text-gold h-8 xl:h-9 px-3 text-[11px] xl:text-sm bg-transparent"
+              className="hidden 2xl:inline-flex border-gold/40 text-gold hover:bg-gold/10 hover:text-gold h-8 xl:h-9 px-3 text-[11px] xl:text-sm bg-transparent"
             >
               <Link to="/nominate" aria-label="Nominate for NESA-Africa 2026">Nominate</Link>
             </Button>
@@ -610,7 +610,7 @@ export function MainNav() {
               asChild
               variant="outline"
               size="sm"
-              className="hidden xl:inline-flex border-gold/40 text-gold hover:bg-gold/10 hover:text-gold h-8 xl:h-9 px-3 text-[11px] xl:text-sm bg-transparent"
+              className="hidden 2xl:inline-flex border-gold/40 text-gold hover:bg-gold/10 hover:text-gold h-8 xl:h-9 px-3 text-[11px] xl:text-sm bg-transparent"
             >
               <Link to="/vote" aria-label="Vote in NESA-Africa 2026">Vote</Link>
             </Button>
