@@ -737,17 +737,18 @@ export default function Nominate() {
                     />
                   )}
 
-                  <div className="flex justify-between">
-                    <Button type="button" variant="outline" onClick={handleSaveDraft} disabled={!selectedCategoryId}>
+                  <div className="flex flex-col-reverse sm:flex-row sm:justify-between gap-2">
+                    <Button type="button" variant="outline" onClick={handleSaveDraft} disabled={!selectedCategoryId} className="w-full sm:w-auto">
                       <Save className="mr-2 h-4 w-4" />
                       Save Draft
                     </Button>
-                    <Button type="button" onClick={() => setStep(2)} disabled={!canProceedToStep2}>
+                    <Button type="button" onClick={() => setStep(2)} disabled={!canProceedToStep2} className="w-full sm:w-auto">
                       Continue
+                      <ChevronRight className="ml-1 h-4 w-4" />
                     </Button>
                   </div>
                   {lastSaved && (
-                    <p className="text-xs text-muted-foreground text-right">
+                    <p className="text-xs text-muted-foreground text-center sm:text-right">
                       Last saved {formatDistanceToNow(lastSaved, { addSuffix: true })}
                     </p>
                   )}
@@ -894,15 +895,16 @@ export default function Nominate() {
                     <p className="text-xs text-muted-foreground">{nomineeBio.length}/500 characters</p>
                   </div>
 
-                  <div className="flex justify-between items-center">
-                    <Button type="button" variant="outline" onClick={() => setStep(1)}>Back</Button>
-                    <div className="flex gap-2">
-                      <Button type="button" variant="ghost" onClick={handleSaveDraft}>
+                  <div className="flex flex-col-reverse sm:flex-row sm:justify-between sm:items-center gap-2">
+                    <Button type="button" variant="outline" onClick={() => setStep(1)} className="w-full sm:w-auto">Back</Button>
+                    <div className="flex gap-2 w-full sm:w-auto">
+                      <Button type="button" variant="ghost" onClick={handleSaveDraft} className="flex-1 sm:flex-none">
                         <Save className="mr-2 h-4 w-4" />
-                        Save Draft
+                        Save
                       </Button>
-                      <Button type="button" onClick={() => setStep(3)} disabled={!canProceedToStep3}>
+                      <Button type="button" onClick={() => setStep(3)} disabled={!canProceedToStep3} className="flex-1 sm:flex-none">
                         Continue
+                        <ChevronRight className="ml-1 h-4 w-4" />
                       </Button>
                     </div>
                   </div>
@@ -998,14 +1000,14 @@ export default function Nominate() {
                     </div>
                   </div>
 
-                  <div className="flex justify-between items-center">
-                    <Button type="button" variant="outline" onClick={() => setStep(2)}>Back</Button>
-                    <div className="flex gap-2">
-                      <Button type="button" variant="ghost" onClick={handleSaveDraft}>
+                  <div className="flex flex-col-reverse sm:flex-row sm:justify-between sm:items-center gap-2">
+                    <Button type="button" variant="outline" onClick={() => setStep(2)} className="w-full sm:w-auto">Back</Button>
+                    <div className="flex gap-2 w-full sm:w-auto">
+                      <Button type="button" variant="ghost" onClick={handleSaveDraft} className="flex-1 sm:flex-none">
                         <Save className="mr-2 h-4 w-4" />
                         Save
                       </Button>
-                      <Button type="button" disabled={justification.length < 50} onClick={() => setShowConfirmDialog(true)}>
+                      <Button type="button" disabled={justification.length < 50} onClick={() => setShowConfirmDialog(true)} className="flex-1 sm:flex-none">
                         <Eye className="mr-2 h-4 w-4" />
                         Review & Submit
                       </Button>
