@@ -178,7 +178,10 @@ function MobileNav({ onOpenCVOMessage }: { onOpenCVOMessage: () => void }) {
     );
   };
 
-  const handleLinkClick = () => {
+  const handleLinkClick = (label?: string, href?: string) => {
+    if (label && href) {
+      trackEvent("mobile_nav_item_click", { label, href });
+    }
     setOpen(false);
   };
 
@@ -187,8 +190,13 @@ function MobileNav({ onOpenCVOMessage }: { onOpenCVOMessage: () => void }) {
     onOpenCVOMessage();
   };
 
+  const handleOpenChange = (next: boolean) => {
+    if (next) trackEvent("mobile_nav_open", {});
+    setOpen(next);
+  };
+
   return (
-    <Sheet open={open} onOpenChange={setOpen}>
+    <Sheet open={open} onOpenChange={handleOpenChange}>
       <SheetTrigger asChild>
         <Button
           variant="ghost"
