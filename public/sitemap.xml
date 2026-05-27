@@ -8,7 +8,7 @@
   <url>
     <loc>https://nesaafrica.lovable.app/awards/africa-education-icon</loc>
     <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
+    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://nesaafrica.lovable.app/awards/gold-special-recognition</loc>
@@ -279,5 +279,120 @@
     <loc>https://nesaafrica.lovable.app/nominees/gold-special-recognition/social-media-for-education</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://nesaafrica.lovable.app/awards/categories</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <url>
+    <loc>https://nesaafrica.lovable.app/awards/blue-garnet-categories</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <url>
+    <loc>https://nesaafrica.lovable.app/awards/platinum-certificate-categories</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <url>
+    <loc>https://nesaafrica.lovable.app/awards/influencers-education-impact</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <url>
+    <loc>https://nesaafrica.lovable.app/awards/blue-garnet-categories/ngo-education-africa</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://nesaafrica.lovable.app/awards/blue-garnet-categories/ngo-education-nigeria</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://nesaafrica.lovable.app/awards/blue-garnet-categories/csr-education-africa</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://nesaafrica.lovable.app/awards/blue-garnet-categories/csr-education-nigeria</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://nesaafrica.lovable.app/awards/blue-garnet-categories/edutech-africa</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://nesaafrica.lovable.app/awards/blue-garnet-categories/stem-education-africa</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://nesaafrica.lovable.app/awards/blue-garnet-categories/media-advocacy-nigeria</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://nesaafrica.lovable.app/awards/blue-garnet-categories/creative-arts-nigeria</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://nesaafrica.lovable.app/awards/blue-garnet-categories/education-state-nigeria</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://nesaafrica.lovable.app/awards/platinum-certificate-categories/library-nigeria</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://nesaafrica.lovable.app/awards/platinum-certificate-categories/rd-nigeria</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://nesaafrica.lovable.app/awards/platinum-certificate-categories/christian-education-africa</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://nesaafrica.lovable.app/awards/platinum-certificate-categories/islamic-education-africa</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://nesaafrica.lovable.app/awards/platinum-certificate-categories/political-leaders-nigeria</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://nesaafrica.lovable.app/awards/platinum-certificate-categories/international-education</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://nesaafrica.lovable.app/awards/platinum-certificate-categories/diaspora-impact</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://nesaafrica.lovable.app/awards/influencers-education-impact/sports</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://nesaafrica.lovable.app/awards/influencers-education-impact/music</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://nesaafrica.lovable.app/awards/influencers-education-impact/social-media</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
   </url>
 </urlset>
