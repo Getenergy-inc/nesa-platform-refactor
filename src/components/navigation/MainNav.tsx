@@ -178,10 +178,12 @@ function MobileNav({ onOpenCVOMessage }: { onOpenCVOMessage: () => void }) {
     );
   };
 
-  const handleLinkClick = (label?: string, href?: string) => {
-    if (label && href) {
-      trackEvent("mobile_nav_item_click", { label, href });
-    }
+  const handleLinkClick = () => {
+    setOpen(false);
+  };
+
+  const handleTrackedClick = (label: string, href: string) => () => {
+    trackEvent("mobile_nav_item_click", { label, href });
     setOpen(false);
   };
 
