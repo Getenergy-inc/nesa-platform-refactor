@@ -430,7 +430,7 @@ function UserMenu() {
 
   if (!user) {
     return (
-      <div className="hidden lg:flex items-center gap-2">
+      <div className="hidden xl:flex items-center gap-2">
         <Link to="/login">
           <Button
             variant="ghost"
