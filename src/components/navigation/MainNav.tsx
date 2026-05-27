@@ -607,18 +607,18 @@ export function MainNav() {
             <DesktopNav onOpenCVOMessage={() => setCVOMessageOpen(true)} />
           </div>
 
-          {/* Right Side: CTAs + Utility */}
+          {/* Right Side: CTAs + Utility — order: Become a Sponsor → Nominate 2026 */}
           <div className="flex items-center gap-1 xl:gap-1.5 shrink-0">
-            {/* Vote (outline) — desktop only, kept compact so it never overlaps Nominate */}
+            {/* Become a Sponsor (outline) — desktop only */}
             <Button
               asChild
-              variant="outline"
               size="sm"
-              className="hidden xl:inline-flex border-gold/40 text-gold hover:bg-gold/10 hover:text-gold h-9 px-2.5 text-[12px] bg-transparent whitespace-nowrap shrink-0"
+              variant="outline"
+              className="hidden xl:inline-flex border-gold/40 text-gold hover:bg-gold/10 hover:text-gold h-9 px-3 text-[12px] bg-transparent whitespace-nowrap shrink-0"
             >
-              <Link to="/vote" aria-label="Vote in NESA-Africa 2026">
-                <Vote className="h-3.5 w-3.5 mr-1" />
-                Vote
+              <Link to={MAIN_NAV_CTA.href} aria-label="Become a Sponsor of NESA-Africa 2026">
+                <Sparkles className="h-3.5 w-3.5 mr-1" />
+                {MAIN_NAV_CTA.label}
               </Link>
             </Button>
 
@@ -634,31 +634,17 @@ export function MainNav() {
               </Link>
             </Button>
 
-            {/* Sponsor — only on very wide screens to avoid crowding */}
-            <Button
-              asChild
-              size="sm"
-              variant="outline"
-              className="hidden 2xl:inline-flex border-gold/40 text-gold hover:bg-gold/10 hover:text-gold h-9 px-3 text-[12px] bg-transparent whitespace-nowrap shrink-0"
-            >
-              <Link to={MAIN_NAV_CTA.href} aria-label="Become a Sponsor of NESA-Africa 2026">
-                <Sparkles className="h-3.5 w-3.5 mr-1" />
-                {MAIN_NAV_CTA.label}
-              </Link>
-            </Button>
-
-
             {/* Utility: Search */}
             <NavSearch />
 
-            {/* Utility: Language Selector */}
-            <LanguageSwitcher className="hidden sm:flex" />
-
+            {/* Utility: Language Selector — wide screens only to keep navbar uncluttered */}
+            <LanguageSwitcher className="hidden 2xl:flex" />
 
             {/* Utility: User Menu / Sign In (Desktop) */}
             <div className="hidden xl:block">
               <UserMenu />
             </div>
+
 
             {/* Mobile Menu */}
             <MobileNav onOpenCVOMessage={() => setCVOMessageOpen(true)} />
