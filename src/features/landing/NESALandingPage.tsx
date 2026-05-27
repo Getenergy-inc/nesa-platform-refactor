@@ -68,6 +68,12 @@ export function NESALandingPage() {
         {/* 3. COUNTDOWN — Blue Garnet 2026 Gala urgency */}
         <CountdownSection />
 
+        {/* 3b. MOBILE CATEGORY DISCOVERY — horizontal swipe rail (mobile only) */}
+        <LazySection>
+          <MobileCategoryRail />
+        </LazySection>
+
+
         {/* 4. NOMINEE DISCOVERY — desktop/tablet only; mobile gets dedicated /nominees */}
         <div className="hidden md:block">
           <LazySection>
