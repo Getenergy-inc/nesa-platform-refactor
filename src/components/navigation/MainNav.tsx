@@ -60,7 +60,7 @@ function DesktopNav({ onOpenCVOMessage }: { onOpenCVOMessage: () => void }) {
   const location = useLocation();
 
   return (
-    <NavigationMenu className="hidden lg:flex w-full min-w-0">
+    <NavigationMenu className="hidden xl:flex w-full min-w-0">
       <NavigationMenuList className="px-1 gap-0.5">
         {MAIN_NAV.map((item) => (
           <NavigationMenuItem key={item.href} className="shrink-0">
@@ -191,15 +191,18 @@ function MobileNav({ onOpenCVOMessage }: { onOpenCVOMessage: () => void }) {
         <Button
           variant="ghost"
           size="icon"
-          className="lg:hidden text-white hover:text-gold hover:bg-gold/10 min-h-[44px] min-w-[44px]"
+          className="xl:hidden text-white hover:text-gold hover:bg-gold/10 min-h-[44px] min-w-[44px]"
           aria-label="Open navigation menu"
+          aria-expanded={open}
+          aria-controls="mobile-nav-drawer"
         >
           <Menu className="h-6 w-6" />
         </Button>
       </SheetTrigger>
       <SheetContent
+        id="mobile-nav-drawer"
         side="right"
-        className="w-full sm:w-full max-w-full bg-charcoal border-l border-gold/20 p-0 overflow-hidden"
+        className="w-[min(100vw,420px)] sm:max-w-sm bg-charcoal border-l border-gold/20 p-0 overflow-hidden z-[70]"
       >
         <SheetHeader className="p-4 border-b border-gold/20">
           <SheetTitle className="flex items-center gap-2">
@@ -236,8 +239,10 @@ function MobileNav({ onOpenCVOMessage }: { onOpenCVOMessage: () => void }) {
                     <div>
                       <button
                         onClick={() => toggleExpanded(item.href)}
+                        aria-expanded={expandedItems.includes(item.href)}
+                        aria-controls={`mnav-sub-${item.href}`}
                         className={cn(
-                          "flex items-center justify-between w-full px-4 py-4 text-left transition-colors touch-manipulation",
+                          "flex items-center justify-between w-full px-4 py-4 text-left transition-colors touch-manipulation min-h-[44px]",
                           "hover:bg-gold/5 active:bg-gold/10",
                           expandedItems.includes(item.href)
                             ? "text-gold bg-gold/5"
@@ -259,10 +264,11 @@ function MobileNav({ onOpenCVOMessage }: { onOpenCVOMessage: () => void }) {
 
                       </button>
                       <div
+                        id={`mnav-sub-${item.href}`}
                         className={cn(
                           "overflow-hidden transition-all duration-200",
                           expandedItems.includes(item.href)
-                            ? "max-h-[500px]"
+                            ? "max-h-[800px]"
                             : "max-h-0",
                         )}
                       >
@@ -424,7 +430,7 @@ function UserMenu() {
 
   if (!user) {
     return (
-      <div className="hidden lg:flex items-center gap-2">
+      <div className="hidden xl:flex items-center gap-2">
         <Link to="/login">
           <Button
             variant="ghost"
@@ -561,8 +567,8 @@ export function MainNav() {
 
   return (
     <>
-      <header className="fixed top-0 left-0 right-0 z-50 w-full bg-charcoal/95 backdrop-blur-md border-b border-gold/20">
-        <div className="container flex h-14 sm:h-16 items-center gap-2 px-4">
+      <header className="fixed top-0 left-0 right-0 z-50 w-full bg-charcoal/95 backdrop-blur-md border-b border-gold/20 overflow-x-clip">
+        <div className="container flex h-14 sm:h-16 items-center gap-2 px-3 sm:px-4 max-w-screen-2xl">
           {/* Brand Area: Logo + NESA-Africa 2026 + motto */}
           <Link
             to="/"
@@ -596,7 +602,7 @@ export function MainNav() {
               asChild
               variant="outline"
               size="sm"
-              className="hidden xl:inline-flex border-gold/40 text-gold hover:bg-gold/10 hover:text-gold h-8 xl:h-9 px-3 text-[11px] xl:text-sm bg-transparent"
+              className="hidden 2xl:inline-flex border-gold/40 text-gold hover:bg-gold/10 hover:text-gold h-8 xl:h-9 px-3 text-[11px] xl:text-sm bg-transparent"
             >
               <Link to="/nominate" aria-label="Nominate for NESA-Africa 2026">Nominate</Link>
             </Button>
@@ -604,7 +610,7 @@ export function MainNav() {
               asChild
               variant="outline"
               size="sm"
-              className="hidden xl:inline-flex border-gold/40 text-gold hover:bg-gold/10 hover:text-gold h-8 xl:h-9 px-3 text-[11px] xl:text-sm bg-transparent"
+              className="hidden 2xl:inline-flex border-gold/40 text-gold hover:bg-gold/10 hover:text-gold h-8 xl:h-9 px-3 text-[11px] xl:text-sm bg-transparent"
             >
               <Link to="/vote" aria-label="Vote in NESA-Africa 2026">Vote</Link>
             </Button>
@@ -629,7 +635,7 @@ export function MainNav() {
 
 
             {/* Utility: User Menu / Sign In (Desktop) */}
-            <div className="hidden lg:block">
+            <div className="hidden xl:block">
               <UserMenu />
             </div>
 
