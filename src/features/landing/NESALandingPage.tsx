@@ -139,6 +139,7 @@ export function NESALandingPage() {
       <ExitIntentPopup />
       <BackToTopButton />
       <MobileBottomNav />
+      <MobileStickyNominateCTA source="homepage" />
       <FloatingFAQButton />
     </>
   );
