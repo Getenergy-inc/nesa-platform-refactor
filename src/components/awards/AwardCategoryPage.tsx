@@ -234,10 +234,10 @@ function MetaCard({
 }) {
   return (
     <Card className="border-gold/20 bg-charcoal-light/60">
-      <CardContent className="p-6">
+      <CardContent className="p-4 md:p-6">
         <div className="flex items-center gap-2 text-gold mb-2">
           <Icon className="h-5 w-5" />
-          <h3 className="font-semibold">{title}</h3>
+          <h3 className="font-semibold text-sm sm:text-base">{title}</h3>
         </div>
         <p className="text-sm text-foreground/80 leading-relaxed">{children}</p>
       </CardContent>
