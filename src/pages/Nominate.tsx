@@ -478,8 +478,8 @@ export default function Nominate() {
     <div className="min-h-screen bg-charcoal text-white">
       {/* Header */}
       <header className="border-b border-gold/10 bg-[hsl(30_8%_8%)]">
-        <div className="container px-6">
-          <div className="py-2 border-b border-gold/10">
+        <div className="container px-4 sm:px-6">
+          <div className="hidden sm:block py-2 border-b border-gold/10">
             <Breadcrumb>
               <BreadcrumbList>
                 <BreadcrumbItem>
@@ -500,44 +500,44 @@ export default function Nominate() {
             </Breadcrumb>
           </div>
           
-          <div className="flex h-16 items-center gap-4">
-            <Button variant="ghost" size="icon" asChild>
+          <div className="flex h-14 sm:h-16 items-center gap-3 sm:gap-4">
+            <Button variant="ghost" size="icon" asChild className="h-9 w-9">
               <Link to="/">
                 <ArrowLeft className="h-5 w-5" />
               </Link>
             </Button>
-            <div className="flex items-center gap-3">
-              <div className="flex h-10 w-10 items-center justify-center rounded-full bg-gold/10">
-                <Award className="h-5 w-5 text-gold" />
+            <div className="flex items-center gap-2 sm:gap-3 min-w-0">
+              <div className="flex h-9 w-9 sm:h-10 sm:w-10 items-center justify-center rounded-full bg-gold/10 shrink-0">
+                <Award className="h-4 w-4 sm:h-5 sm:w-5 text-gold" />
               </div>
-              <div>
-                <h1 className="font-display text-lg font-bold text-white">Submit Nomination</h1>
-                <p className="text-xs text-white/50">{currentEdition.name}</p>
+              <div className="min-w-0">
+                <h1 className="font-display text-base sm:text-lg font-bold text-white truncate">Submit Nomination</h1>
+                <p className="text-[11px] sm:text-xs text-white/50 truncate">{currentEdition.name}</p>
               </div>
             </div>
           </div>
         </div>
       </header>
 
-      <main className="container max-w-3xl px-6 py-8">
+      <main className="container max-w-3xl px-4 sm:px-6 py-5 sm:py-8 pb-28 sm:pb-8">
         <StageGate action="nominations" fallback={<StageLocked action="nominations" />}>
           {/* Draft Recovery Banner */}
           {hasDraft && showDraftBanner && (
-            <Alert className="mb-6 border-primary/50 bg-primary/5">
+            <Alert className="mb-5 border-primary/50 bg-primary/5">
               <RotateCcw className="h-4 w-4" />
               <AlertDescription className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-                <span>
-                  You have an unsaved draft from{" "}
+                <span className="text-sm">
+                  Unsaved draft from{" "}
                   <strong>{draftDate ? formatDistanceToNow(draftDate, { addSuffix: true }) : "earlier"}</strong>
                 </span>
                 <div className="flex gap-2">
-                  <Button size="sm" variant="outline" onClick={handleDiscardDraft}>
+                  <Button size="sm" variant="outline" onClick={handleDiscardDraft} className="flex-1 sm:flex-none">
                     <Trash2 className="mr-1 h-3 w-3" />
                     Discard
                   </Button>
-                  <Button size="sm" onClick={handleRestoreDraft}>
+                  <Button size="sm" onClick={handleRestoreDraft} className="flex-1 sm:flex-none">
                     <RotateCcw className="mr-1 h-3 w-3" />
-                    Restore Draft
+                    Restore
                   </Button>
                 </div>
               </AlertDescription>
@@ -546,29 +546,29 @@ export default function Nominate() {
 
           {/* Preselection Error */}
           {preselectionError && (
-            <Alert className="mb-6 border-destructive/50 bg-destructive/5">
+            <Alert className="mb-5 border-destructive/50 bg-destructive/5">
               <AlertCircle className="h-4 w-4" />
-              <AlertDescription>{preselectionError}</AlertDescription>
+              <AlertDescription className="text-sm">{preselectionError}</AlertDescription>
             </Alert>
           )}
 
           {/* Progress Steps */}
-          <div className="mb-8">
+          <div className="mb-6 sm:mb-8">
             <div className="flex items-center justify-between">
               {[1, 2, 3].map((s) => (
-                <div key={s} className="flex items-center">
+                <div key={s} className="flex items-center flex-1 last:flex-none">
                   <div
-                    className={`flex h-10 w-10 items-center justify-center rounded-full font-semibold transition-colors ${
+                    className={`flex h-9 w-9 sm:h-10 sm:w-10 items-center justify-center rounded-full text-sm font-semibold transition-colors shrink-0 ${
                       step >= s
                         ? "bg-gold text-charcoal"
                         : "bg-charcoal-light text-white/40 border border-gold/20"
                     }`}
                   >
-                    {step > s ? <CheckCircle className="h-5 w-5" /> : s}
+                    {step > s ? <CheckCircle className="h-4 w-4 sm:h-5 sm:w-5" /> : s}
                   </div>
                   {s < 3 && (
                     <div
-                      className={`mx-2 h-1 w-16 rounded-full transition-colors sm:w-24 md:w-32 ${
+                      className={`mx-1.5 sm:mx-2 h-1 flex-1 sm:w-24 md:w-32 sm:flex-none rounded-full transition-colors ${
                         step > s ? "bg-gold" : "bg-charcoal-light"
                       }`}
                     />
@@ -576,9 +576,9 @@ export default function Nominate() {
                 </div>
               ))}
             </div>
-            <div className="mt-2 flex justify-between text-xs text-white/50">
+            <div className="mt-2 flex justify-between text-[11px] sm:text-xs text-white/50">
               <span>Category</span>
-              <span>Nominee Details</span>
+              <span>Details</span>
               <span>Evidence</span>
             </div>
           </div>
