@@ -198,12 +198,15 @@ export const MAIN_NAV_CTA: NavItem = {
 };
 
 // Mobile-first menu order (information architecture only — CTAs are rendered separately)
+// Top-level mobile menu per UX brief: About, Programs, Engage, Sponsor, Media, Nominate, Vote.
+// Sponsor / Nominate / Vote are rendered as primary CTAs in the drawer footer.
+// Awards & Support are demoted to a "More" group inside the mobile drawer.
 export const MAIN_NAV_MOBILE_ORDER: readonly string[] = [
-  "Engage",
-  "Awards",
-  "Impact Programs",
-  "Media",
   "About",
+  "Impact Programs",
+  "Engage",
+  "Media",
+  "Awards",
   "Support",
 ];
 

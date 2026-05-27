@@ -198,45 +198,31 @@ function MobileNav({ onOpenCVOMessage }: { onOpenCVOMessage: () => void }) {
       </SheetTrigger>
       <SheetContent
         side="right"
-        className="w-[320px] sm:w-[350px] bg-charcoal border-l border-gold/20 p-0 overflow-hidden"
+        className="w-full sm:w-full max-w-full bg-charcoal border-l border-gold/20 p-0 overflow-hidden"
       >
         <SheetHeader className="p-4 border-b border-gold/20">
           <SheetTitle className="flex items-center gap-2">
             <img
               src={nesaStamp}
               alt="NESA"
-              className="h-6 w-6 rounded-full object-contain"
+              className="h-7 w-7 rounded-full object-contain"
             />
-            <span className="text-gold font-display">Menu</span>
+            <span className="text-gold font-display text-base">NESA-Africa</span>
           </SheetTitle>
         </SheetHeader>
 
         <nav className="flex flex-col h-[calc(100%-65px)]">
           <div className="flex-1 overflow-y-auto overscroll-contain">
-            {/* Quick Action Grid */}
-            <div className="px-4 py-4 border-b border-gold/10">
-              <div className="grid grid-cols-3 gap-3">
-                {MOBILE_NAV.slice(0, 6).map((item) => (
-                  <Link
-                    key={item.href}
-                    to={item.href}
-                    onClick={handleLinkClick}
-                    className={cn(
-                      "flex flex-col items-center gap-2 p-3 rounded-xl text-center transition-all active:scale-95",
-                      "hover:bg-gold/10 hover:text-gold min-h-[72px] touch-manipulation",
-                      location.pathname === item.href
-                        ? "bg-gold/10 text-gold"
-                        : "text-white/70",
-                    )}
-                  >
-                    {item.icon && <item.icon className="h-5 w-5" />}
-                    <span className="text-xs font-medium leading-tight">
-                      {item.label}
-                    </span>
-                  </Link>
-                ))}
-              </div>
+            {/* Sticky Sponsor CTA — top-level per IA brief */}
+            <div className="px-4 pt-4 pb-2">
+              <Link to="/sponsor" onClick={handleLinkClick} className="block">
+                <Button className="w-full bg-gold text-charcoal hover:bg-gold/90 font-semibold h-12 touch-manipulation shadow-md shadow-gold/20">
+                  <Sparkles className="h-4 w-4 mr-2" />
+                  Sponsor NESA-Africa 2026
+                </Button>
+              </Link>
             </div>
+
 
             {/* Full Navigation */}
             <div className="py-2">
@@ -259,7 +245,9 @@ function MobileNav({ onOpenCVOMessage }: { onOpenCVOMessage: () => void }) {
                       >
                         <span className="flex items-center gap-3">
                           {item.icon && <item.icon className="h-5 w-5" />}
-                          <span className="font-medium">{item.label}</span>
+                          <span className="font-medium text-base">
+                            {item.label === "Impact Programs" ? "Programs" : item.label}
+                          </span>
                         </span>
                         <ChevronDown
                           className={cn(
@@ -267,6 +255,7 @@ function MobileNav({ onOpenCVOMessage }: { onOpenCVOMessage: () => void }) {
                             expandedItems.includes(item.href) && "rotate-180",
                           )}
                         />
+
                       </button>
                       <div
                         className={cn(

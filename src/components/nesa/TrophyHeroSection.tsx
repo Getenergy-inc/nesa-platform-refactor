@@ -40,7 +40,7 @@ export function TrophyHeroSection() {
   const bannerText = getBannerText();
 
   return (
-    <section className="relative min-h-[92vh] sm:min-h-[95vh] flex items-center bg-charcoal overflow-hidden">
+    <section className="relative min-h-[78vh] sm:min-h-[88vh] lg:min-h-[95vh] flex items-center bg-charcoal overflow-hidden">
       {/* Stage Backdrop — Cinematic video with warm overlay */}
       <div className="absolute inset-0">
         <video
@@ -88,21 +88,18 @@ export function TrophyHeroSection() {
               {t("landing.trophyHero.slogan")}
             </motion.p>
 
-            {/* Official brand block */}
+            {/* Official brand block — compact on mobile */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.25 }}
-              className="mb-5"
+              className="mb-3 sm:mb-5"
             >
-              <p className="font-display text-2xl sm:text-3xl md:text-4xl font-bold text-white leading-tight">
-                New Education Standard Award Africa
+              <p className="font-display text-lg sm:text-2xl md:text-3xl lg:text-4xl font-bold text-white leading-tight">
+                NESA-Africa <span className="text-gold">2026</span>
               </p>
-              <p className="font-display text-lg sm:text-xl md:text-2xl font-semibold text-white/90 mt-1">
-                (NESA-Africa) <span className="text-gold">2026</span>
-              </p>
-              <p className="text-sm sm:text-base md:text-lg italic text-gold/90 mt-2">
-                “The African Blue-Garnet Awards for Education”
+              <p className="text-xs sm:text-sm md:text-base italic text-gold/90 mt-1">
+                "The African Blue-Garnet Awards for Education"
               </p>
             </motion.div>
 
@@ -110,47 +107,23 @@ export function TrophyHeroSection() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.3 }}
-              className="font-display text-2xl sm:text-3xl md:text-4xl lg:text-4xl xl:text-5xl font-bold text-white mb-4 leading-[1.15]"
+              className="font-display text-[22px] leading-[1.18] sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4"
             >
-              {t("landing.trophyHero.headline")}{" "}
+              Don't Just Clap for Education Changemakers.{" "}
               <span className="text-gold bg-gradient-to-r from-gold to-amber-400 bg-clip-text text-transparent">
-                {t("landing.trophyHero.headlineAccent")}
+                Nominate Them for NESA-Africa 2026.
               </span>
             </motion.h1>
 
             <motion.p
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.5 }}
-              className="text-gold/90 text-sm font-semibold mb-4 tracking-wide"
-            >
-              {t("landing.trophyHero.tagline")}
-            </motion.p>
-
-            {/* Ecosystem block — premium honourees framing */}
-            <motion.div
-              initial={{ opacity: 0, y: 12 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.55 }}
-              className="mb-5 flex flex-col items-center lg:items-start"
-            >
-              <span className="text-[10px] sm:text-xs font-semibold uppercase tracking-[0.22em] text-gold/80">
-                {t("landing.trophyHero.ecosystemKicker")}
-              </span>
-              <span className="mt-1 font-display text-base sm:text-lg text-white/90">
-                {t("landing.trophyHero.ecosystemTitle")}
-              </span>
-              <span className="mt-2 h-px w-16 bg-gradient-to-r from-gold/60 to-transparent" />
-            </motion.div>
-
-            <motion.p
-              initial={{ opacity: 0, y: 15 }}
-              animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.6 }}
-              className="text-white/80 text-sm sm:text-[15px] mb-6 max-w-xl mx-auto lg:mx-0 leading-relaxed"
+              className="hidden sm:block text-white/80 text-sm sm:text-[15px] mb-6 max-w-xl mx-auto lg:mx-0 leading-relaxed"
             >
               {t("landing.trophyHero.valueProposition")}
             </motion.p>
+
 
             <motion.div
               initial={{ opacity: 0, y: 15 }}
@@ -178,7 +151,7 @@ export function TrophyHeroSection() {
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.6, delay: 0.3 }}
           >
-            <div className="relative h-56 sm:h-64 md:h-72 lg:h-80 xl:h-[22rem] w-48 sm:w-56 md:w-64 lg:w-72 xl:w-80 flex items-center justify-center">
+            <div className="relative h-40 sm:h-56 md:h-72 lg:h-80 xl:h-[22rem] w-36 sm:w-52 md:w-64 lg:w-72 xl:w-80 flex items-center justify-center">
               <div className="absolute -inset-6 bg-gradient-to-t from-blue-600/25 via-gold/15 to-transparent blur-3xl rounded-full" />
               <div className="absolute -inset-3 bg-gradient-to-b from-gold/10 via-transparent to-blue-500/10 blur-2xl rounded-full" />
               
