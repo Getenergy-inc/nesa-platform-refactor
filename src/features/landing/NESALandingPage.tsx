@@ -20,6 +20,7 @@ import { ScrollProgressIndicator } from "@/components/nesa/ScrollProgressIndicat
 import { ExitIntentPopup } from "@/components/nesa/ExitIntentPopup";
 import { BackToTopButton } from "@/components/ui/back-to-top";
 import { PageFAQSection, FloatingFAQButton } from "@/components/nesa/PageFAQ";
+import { MobileStickyNominateCTA } from "@/components/nesa/MobileStickyNominateCTA";
 import { useSeason } from "@/contexts/SeasonContext";
 
 // Lazy below-fold
