@@ -18,6 +18,7 @@ import {
   type CategoryDefinition,
 } from "@/config/nesaCategories";
 import { categoryIconMap } from "@/config/categoryIconMap";
+import { MobileStickyNominateCTA } from "@/components/nesa/MobileStickyNominateCTA";
 import { getCategoryImage } from "@/config/categoryImages";
 import { StageGate } from "@/components/governance/StageGate";
 
@@ -276,6 +277,7 @@ export default function CategoryDetail() {
           </div>
         </section>
       </div>
+      <MobileStickyNominateCTA source="category_detail" categorySlug={displayCat.slug} />
     </>
   );
 }

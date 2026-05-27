@@ -16,6 +16,7 @@ import {
   Heart,
   LayoutDashboard,
   Vote,
+  Trophy,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
@@ -49,6 +50,7 @@ import nesaStamp from "@/assets/nesa-stamp.jpeg";
 import { CVOFlashMessage, CVOMessageTrigger } from "@/components/nesa/cvo";
 import { LanguageSwitcher } from "@/components/i18n";
 import { NavSearch } from "@/components/navigation/NavSearch";
+import { trackEvent } from "@/lib/analytics";
 
 
 
@@ -180,13 +182,23 @@ function MobileNav({ onOpenCVOMessage }: { onOpenCVOMessage: () => void }) {
     setOpen(false);
   };
 
+  const handleTrackedClick = (label: string, href: string) => () => {
+    trackEvent("mobile_nav_item_click", { label, href });
+    setOpen(false);
+  };
+
   const handleCVOClick = () => {
     setOpen(false);
     onOpenCVOMessage();
   };
 
+  const handleOpenChange = (next: boolean) => {
+    if (next) trackEvent("mobile_nav_open", {});
+    setOpen(next);
+  };
+
   return (
-    <Sheet open={open} onOpenChange={setOpen}>
+    <Sheet open={open} onOpenChange={handleOpenChange}>
       <SheetTrigger asChild>
         <Button
           variant="ghost"
@@ -287,7 +299,7 @@ function MobileNav({ onOpenCVOMessage }: { onOpenCVOMessage: () => void }) {
                             <Link
                               key={child.href}
                               to={child.href}
-                              onClick={handleLinkClick}
+                              onClick={handleTrackedClick(child.label, child.href)}
                               className={cn(
                                 "flex items-center gap-3 px-8 py-3.5 text-sm transition-colors touch-manipulation",
                                 "hover:bg-gold/5 hover:text-gold active:bg-gold/10",
@@ -313,7 +325,7 @@ function MobileNav({ onOpenCVOMessage }: { onOpenCVOMessage: () => void }) {
                   ) : (
                     <Link
                       to={item.href}
-                      onClick={handleLinkClick}
+                      onClick={handleTrackedClick(item.label, item.href)}
                       className={cn(
                         "flex items-center gap-3 px-4 py-4 transition-colors touch-manipulation",
                         "hover:bg-gold/5 hover:text-gold active:bg-gold/10",
@@ -615,11 +627,24 @@ export function MainNav() {
               <Link to="/vote" aria-label="Vote in NESA-Africa 2026">Vote</Link>
             </Button>
 
-            {/* Primary CTA: Become a Sponsor */}
+            {/* Primary CTA: Nominate 2026 (compact pill — visible on mobile) */}
             <Button
               asChild
               size="sm"
-              className="hidden md:inline-flex bg-gold text-charcoal hover:bg-gold/90 font-semibold h-8 xl:h-9 px-3 xl:px-4 text-[11px] xl:text-sm shadow-md shadow-gold/20"
+              className="inline-flex bg-gold text-charcoal hover:bg-gold/90 font-semibold h-9 px-2.5 sm:px-3 xl:px-4 text-[11px] sm:text-xs xl:text-sm shadow-md shadow-gold/20 shrink-0"
+            >
+              <Link to="/nominate" aria-label="Nominate for NESA-Africa 2026">
+                <Trophy className="h-3.5 w-3.5 sm:mr-1.5" />
+                <span className="hidden sm:inline">Nominate 2026</span>
+              </Link>
+            </Button>
+
+            {/* Secondary CTA: Become a Sponsor — desktop only */}
+            <Button
+              asChild
+              size="sm"
+              variant="outline"
+              className="hidden xl:inline-flex border-gold/40 text-gold hover:bg-gold/10 hover:text-gold h-8 xl:h-9 px-3 xl:px-4 text-[11px] xl:text-sm bg-transparent"
             >
               <Link to={MAIN_NAV_CTA.href} aria-label="Become a Sponsor of NESA-Africa 2026">
                 <Sparkles className="h-3.5 w-3.5 mr-1.5" />

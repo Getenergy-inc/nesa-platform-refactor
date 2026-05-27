@@ -40,7 +40,7 @@ export function TrophyHeroSection() {
   const bannerText = getBannerText();
 
   return (
-    <section className="relative min-h-[78vh] sm:min-h-[88vh] lg:min-h-[95vh] flex items-center bg-charcoal overflow-hidden">
+    <section className="relative min-h-[60vh] sm:min-h-[78vh] lg:min-h-[95vh] flex items-center bg-charcoal overflow-hidden">
       {/* Stage Backdrop — Cinematic video with warm overlay */}
       <div className="absolute inset-0">
         <video
@@ -74,7 +74,7 @@ export function TrophyHeroSection() {
         />
       </div>
 
-      <div className="container relative z-10 py-8 sm:py-12 lg:py-16">
+      <div className="container relative z-10 py-6 sm:py-12 lg:py-16">
         <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
           {/* Left: Welcome Content */}
           <div className="order-2 lg:order-1 text-center lg:text-left">
