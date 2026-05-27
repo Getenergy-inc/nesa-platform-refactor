@@ -21,7 +21,7 @@ export function PublicLayout({ children, showFooter = true, showFAQ = true }: Pu
   return (
     <div className="min-h-screen bg-charcoal flex flex-col">
       <NESAHeader />
-      <main className="flex-1 pt-14 sm:pt-16 pb-20 lg:pb-16">
+      <main className="flex-1 pt-[calc(env(safe-area-inset-top)+3.5rem)] sm:pt-[calc(env(safe-area-inset-top)+4rem)] pb-20 lg:pb-16">
         {children}
       </main>
       {showFAQ && <PageFAQSection />}
