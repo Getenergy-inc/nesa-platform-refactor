@@ -32,6 +32,8 @@ const HomepageGalleryTeaser = lazy(() => import("@/components/gallery/HomepageGa
 const NomineeDiscoverySwitcher = lazy(() => import("@/components/nominees/NomineeDiscoverySwitcher").then(m => ({ default: m.NomineeDiscoverySwitcher })));
 const AboutNESASection = lazy(() => import("@/components/nesa/AboutNESASection").then(m => ({ default: m.AboutNESASection })));
 const PoweredByVolunteersSection = lazy(() => import("@/components/nesa/PoweredByVolunteersSection").then(m => ({ default: m.PoweredByVolunteersSection })));
+const MobileCategoryRail = lazy(() => import("@/components/landing/MobileCategoryRail").then(m => ({ default: m.MobileCategoryRail })));
+
 
 
 export function NESALandingPage() {
@@ -65,6 +67,12 @@ export function NESALandingPage() {
 
         {/* 3. COUNTDOWN — Blue Garnet 2026 Gala urgency */}
         <CountdownSection />
+
+        {/* 3b. MOBILE CATEGORY DISCOVERY — horizontal swipe rail (mobile only) */}
+        <LazySection>
+          <MobileCategoryRail />
+        </LazySection>
+
 
         {/* 4. NOMINEE DISCOVERY — desktop/tablet only; mobile gets dedicated /nominees */}
         <div className="hidden md:block">

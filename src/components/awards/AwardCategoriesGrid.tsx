@@ -87,17 +87,33 @@ export function AwardCategoriesGrid({
           <p className="text-white/60 max-w-2xl mx-auto">{displayDescription}</p>
         </div>
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+        {/* Mobile: horizontal swipe carousel — thumb-friendly */}
+        <div className="md:hidden -mx-4 px-4 flex gap-3 overflow-x-auto snap-x snap-mandatory pb-4 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
           {filteredCategories.map((category, index) => (
-            <CategoryCard 
-              key={category.id} 
-              category={category} 
-              index={index} 
+            <div key={category.id} className="snap-start shrink-0 w-[78vw] max-w-[300px]">
+              <CategoryCard
+                category={category}
+                index={index}
+                styles={styles}
+                parentTier={tier}
+              />
+            </div>
+          ))}
+        </div>
+
+        {/* Tablet/desktop: grid */}
+        <div className="hidden md:grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+          {filteredCategories.map((category, index) => (
+            <CategoryCard
+              key={category.id}
+              category={category}
+              index={index}
               styles={styles}
               parentTier={tier}
             />
           ))}
         </div>
+
 
         <div className="mt-8 text-center">
           <Link
