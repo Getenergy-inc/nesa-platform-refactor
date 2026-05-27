@@ -151,7 +151,7 @@ export function TrophyHeroSection() {
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.6, delay: 0.3 }}
           >
-            <div className="relative h-56 sm:h-64 md:h-72 lg:h-80 xl:h-[22rem] w-48 sm:w-56 md:w-64 lg:w-72 xl:w-80 flex items-center justify-center">
+            <div className="relative h-40 sm:h-56 md:h-72 lg:h-80 xl:h-[22rem] w-36 sm:w-52 md:w-64 lg:w-72 xl:w-80 flex items-center justify-center">
               <div className="absolute -inset-6 bg-gradient-to-t from-blue-600/25 via-gold/15 to-transparent blur-3xl rounded-full" />
               <div className="absolute -inset-3 bg-gradient-to-b from-gold/10 via-transparent to-blue-500/10 blur-2xl rounded-full" />
               
