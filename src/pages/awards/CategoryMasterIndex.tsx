@@ -5,12 +5,12 @@ import { motion } from "framer-motion";
 import {
   Award,
   Crown,
-  Filter,
   Search,
   ShieldCheck,
   Sparkles,
   TrendingUp,
   Trophy,
+  X,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -25,12 +25,15 @@ import {
 } from "@/components/ui/select";
 import { CategoryFaqSection } from "@/components/awards/CategoryFaqSection";
 import { BreadcrumbJsonLd } from "@/components/seo/BreadcrumbJsonLd";
+import { cn } from "@/lib/utils";
 import {
   ALL_CATEGORIES,
   GROUP_META,
   INTEGRITY_DISCLAIMER,
   type CategoryGroup,
 } from "@/config/awardCategories";
+
+type SortKey = "default" | "az" | "za";
 
 const SITE = "https://nesaafrica.lovable.app";
 
