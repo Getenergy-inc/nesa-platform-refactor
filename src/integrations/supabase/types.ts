@@ -259,6 +259,36 @@ export type Database = {
         }
         Relationships: []
       }
+      award_categories: {
+        Row: {
+          created_at: string
+          group_key: string
+          is_published: boolean
+          payload: Json
+          slug: string
+          sort_order: number
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          group_key: string
+          is_published?: boolean
+          payload: Json
+          slug: string
+          sort_order?: number
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          group_key?: string
+          is_published?: boolean
+          payload?: Json
+          slug?: string
+          sort_order?: number
+          updated_at?: string
+        }
+        Relationships: []
+      }
       bulk_order_leads: {
         Row: {
           branding_request: string | null
