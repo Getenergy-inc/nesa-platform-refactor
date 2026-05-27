@@ -608,49 +608,45 @@ export function MainNav() {
           </div>
 
           {/* Right Side: CTAs + Utility */}
-          <div className="flex items-center gap-1 sm:gap-2 shrink-0">
-            {/* Secondary CTAs: Nominate + Vote (outline) */}
+          <div className="flex items-center gap-1 xl:gap-1.5 shrink-0">
+            {/* Vote (outline) — desktop only, kept compact so it never overlaps Nominate */}
             <Button
               asChild
               variant="outline"
               size="sm"
-              className="hidden 2xl:inline-flex border-gold/40 text-gold hover:bg-gold/10 hover:text-gold h-8 xl:h-9 px-3 text-[11px] xl:text-sm bg-transparent"
+              className="hidden xl:inline-flex border-gold/40 text-gold hover:bg-gold/10 hover:text-gold h-9 px-2.5 text-[12px] bg-transparent whitespace-nowrap shrink-0"
             >
-              <Link to="/nominate" aria-label="Nominate for NESA-Africa 2026">Nominate</Link>
-            </Button>
-            <Button
-              asChild
-              variant="outline"
-              size="sm"
-              className="hidden 2xl:inline-flex border-gold/40 text-gold hover:bg-gold/10 hover:text-gold h-8 xl:h-9 px-3 text-[11px] xl:text-sm bg-transparent"
-            >
-              <Link to="/vote" aria-label="Vote in NESA-Africa 2026">Vote</Link>
+              <Link to="/vote" aria-label="Vote in NESA-Africa 2026">
+                <Vote className="h-3.5 w-3.5 mr-1" />
+                Vote
+              </Link>
             </Button>
 
-            {/* Primary CTA: Nominate 2026 (compact pill — visible on mobile) */}
+            {/* Primary CTA: Nominate 2026 (gold pill — visible on mobile & desktop) */}
             <Button
               asChild
               size="sm"
-              className="inline-flex bg-gold text-charcoal hover:bg-gold/90 font-semibold h-9 px-2.5 sm:px-3 xl:px-4 text-[11px] sm:text-xs xl:text-sm shadow-md shadow-gold/20 shrink-0"
+              className="inline-flex bg-gold text-charcoal hover:bg-gold/90 font-semibold h-9 px-2.5 xl:px-3 text-[11px] xl:text-[12px] shadow-md shadow-gold/20 shrink-0 whitespace-nowrap"
             >
               <Link to="/nominate" aria-label="Nominate for NESA-Africa 2026">
-                <Trophy className="h-3.5 w-3.5 sm:mr-1.5" />
+                <Trophy className="h-3.5 w-3.5 sm:mr-1" />
                 <span className="hidden sm:inline">Nominate 2026</span>
               </Link>
             </Button>
 
-            {/* Secondary CTA: Become a Sponsor — desktop only */}
+            {/* Sponsor — only on very wide screens to avoid crowding */}
             <Button
               asChild
               size="sm"
               variant="outline"
-              className="hidden xl:inline-flex border-gold/40 text-gold hover:bg-gold/10 hover:text-gold h-8 xl:h-9 px-3 xl:px-4 text-[11px] xl:text-sm bg-transparent"
+              className="hidden 2xl:inline-flex border-gold/40 text-gold hover:bg-gold/10 hover:text-gold h-9 px-3 text-[12px] bg-transparent whitespace-nowrap shrink-0"
             >
               <Link to={MAIN_NAV_CTA.href} aria-label="Become a Sponsor of NESA-Africa 2026">
-                <Sparkles className="h-3.5 w-3.5 mr-1.5" />
+                <Sparkles className="h-3.5 w-3.5 mr-1" />
                 {MAIN_NAV_CTA.label}
               </Link>
             </Button>
+
 
             {/* Utility: Search */}
             <NavSearch />
