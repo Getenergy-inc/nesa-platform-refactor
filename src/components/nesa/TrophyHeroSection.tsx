@@ -74,7 +74,7 @@ export function TrophyHeroSection() {
         />
       </div>
 
-      <div className="container relative z-10 py-8 sm:py-12 lg:py-16">
+      <div className="container relative z-10 py-6 sm:py-12 lg:py-16">
         <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
           {/* Left: Welcome Content */}
           <div className="order-2 lg:order-1 text-center lg:text-left">
