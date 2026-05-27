@@ -42,7 +42,8 @@ export function LazySection({
   }, [threshold, rootMargin]);
 
   return (
-    <div ref={ref} className={className}>
+    <div ref={ref} className={`cv-auto ${className}`}>
+
       {isVisible ? (
         <Suspense fallback={fallback || <SectionSkeleton />}>
           {children}
