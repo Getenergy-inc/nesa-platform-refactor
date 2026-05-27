@@ -142,6 +142,7 @@ export const MAIN_NAV: NavItem[] = [
       { label: "Exhibit / Showcase", href: "/sponsor/advertise", description: "Showcase your work at NESA-Africa 2026", icon: Megaphone },
       { label: "Become a Volunteer", href: "/volunteer", description: "Apply to join the volunteer force", icon: UserPlus },
       { label: "Meet Our Volunteers", href: "/volunteers", description: "The people behind the movement", icon: Heart },
+      { label: "Meet Our Judges", href: "/judges", description: "Distinguished jury of education leaders", icon: Gavel },
       { label: "Volunteer / Join Community Chapter", href: "/chapters", description: "Join the NRC, chapters & event teams", icon: MapPin },
       { label: "Merchandise / NESA-Africa Store", href: "/shop", description: "Official NESA-Africa merchandise & store", icon: ShoppingBag },
       { label: "Contact Partnerships Team", href: "/contact#partnerships", description: "Speak to our partnerships team", icon: Mail },
