@@ -11,6 +11,7 @@ import {
   Award, Search, ChevronRight, GraduationCap, Trophy, Crown, Star, Shield, Globe,
 } from "lucide-react";
 import { VolunteerCTABanner } from "@/components/volunteers/VolunteerCTABanner";
+import { MobileStickyNominateCTA } from "@/components/nesa/MobileStickyNominateCTA";
 import {
   NESA_CATEGORIES,
   getCategoriesGrouped,
