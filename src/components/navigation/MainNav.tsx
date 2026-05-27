@@ -635,7 +635,7 @@ export function MainNav() {
 
 
             {/* Utility: User Menu / Sign In (Desktop) */}
-            <div className="hidden lg:block">
+            <div className="hidden xl:block">
               <UserMenu />
             </div>
 
