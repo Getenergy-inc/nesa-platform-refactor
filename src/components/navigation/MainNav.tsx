@@ -621,8 +621,12 @@ export function MainNav() {
               </Link>
             </Button>
 
+            {/* Utility: Search */}
+            <NavSearch />
+
             {/* Utility: Language Selector */}
             <LanguageSwitcher className="hidden sm:flex" />
+
 
             {/* Utility: User Menu / Sign In (Desktop) */}
             <div className="hidden lg:block">
