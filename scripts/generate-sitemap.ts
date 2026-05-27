@@ -3,6 +3,7 @@
 
 import { writeFileSync } from "fs";
 import { resolve } from "path";
+import { ALL_CATEGORIES, GROUP_META } from "../src/config/awardCategories/index.ts";
 
 const BASE_URL = "https://nesaafrica.lovable.app";
 
