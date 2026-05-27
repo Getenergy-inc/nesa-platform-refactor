@@ -88,23 +88,23 @@ export function AwardCategoryPage({ config, legacyHero }: Props) {
       {legacyHero}
 
       {/* Structured metadata panel */}
-      <section className="border-y border-gold/20 bg-charcoal-light/40 py-16">
+      <section className="border-y border-gold/20 bg-charcoal-light/40 py-10 md:py-16 pb-24 md:pb-16">
         <div className="container mx-auto max-w-6xl px-4">
-          <div className="mb-10 flex flex-wrap items-center gap-3">
-            <Badge variant="outline" className="border-gold/40 text-gold">
+          <div className="mb-6 md:mb-10 flex flex-wrap items-center gap-2">
+            <Badge variant="outline" className="border-gold/40 text-gold text-xs">
               {group.label}
             </Badge>
-            <Badge variant="outline" className="border-foreground/20 text-foreground/70">
+            <Badge variant="outline" className="border-foreground/20 text-foreground/70 text-xs">
               {group.tone}
             </Badge>
           </div>
 
-          <h2 className="font-playfair text-3xl md:text-4xl text-gold mb-3">
+          <h2 className="font-playfair text-2xl sm:text-3xl md:text-4xl text-gold mb-3 leading-tight">
             {config.finalName}
           </h2>
-          <p className="text-foreground/80 text-lg max-w-3xl mb-10">{config.shortDescription}</p>
+          <p className="text-foreground/80 text-base sm:text-lg max-w-3xl mb-8 md:mb-10 leading-relaxed">{config.shortDescription}</p>
 
-          <div className="grid gap-6 md:grid-cols-2">
+          <div className="grid gap-4 md:gap-6 sm:grid-cols-2">
             <MetaCard icon={CheckCircle2} title="Eligibility">
               {config.eligibilitySummary}
             </MetaCard>
@@ -127,12 +127,12 @@ export function AwardCategoryPage({ config, legacyHero }: Props) {
 
           <div className="mt-6">
             <Card className="border-gold/20 bg-charcoal-light/60">
-              <CardContent className="p-6">
+              <CardContent className="p-4 md:p-6">
                 <div className="flex items-center gap-2 text-gold mb-3">
                   <FileText className="h-5 w-5" />
                   <h3 className="font-semibold">Required evidence</h3>
                 </div>
-                <ul className="grid gap-2 md:grid-cols-2">
+                <ul className="grid gap-2 sm:grid-cols-2">
                   {config.requiredEvidence.map((ev) => (
                     <li key={ev} className="flex items-start gap-2 text-sm text-foreground/80">
                       <ChevronRight className="mt-0.5 h-4 w-4 flex-none text-gold" />
@@ -144,12 +144,12 @@ export function AwardCategoryPage({ config, legacyHero }: Props) {
             </Card>
           </div>
 
-          {/* CTAs */}
+          {/* Desktop CTAs (mobile uses sticky bar below) */}
           <motion.div
             initial={{ opacity: 0, y: 8 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="mt-10 flex flex-wrap gap-3"
+            className="mt-10 hidden md:flex flex-wrap gap-3"
           >
             <Button asChild size="lg" className="bg-gold text-charcoal hover:bg-gold/90">
               <Link to={nominateHref}>
@@ -164,8 +164,8 @@ export function AwardCategoryPage({ config, legacyHero }: Props) {
 
           {/* Related categories */}
           {config.relatedCategories.length > 0 && (
-            <div className="mt-12">
-              <h3 className="text-gold font-playfair text-xl mb-4">Related categories</h3>
+            <div className="mt-10 md:mt-12">
+              <h3 className="text-gold font-playfair text-lg sm:text-xl mb-3 sm:mb-4">Related categories</h3>
               <div className="flex flex-wrap gap-2">
                 {config.relatedCategories.map((slug) => {
                   const rel = getCategoryBySlug(slug);
@@ -190,10 +190,10 @@ export function AwardCategoryPage({ config, legacyHero }: Props) {
       <CategoryFaqSection faqs={config.faqs} />
 
       {/* Integrity + Sponsor disclaimers */}
-      <section className="py-12 bg-charcoal">
-        <div className="container mx-auto max-w-4xl px-4 space-y-6">
+      <section className="py-8 md:py-12 bg-charcoal pb-24 md:pb-12">
+        <div className="container mx-auto max-w-4xl px-4 space-y-4 md:space-y-6">
           <Card className="border-gold/30 bg-charcoal-light/60">
-            <CardContent className="p-6">
+            <CardContent className="p-4 md:p-6">
               <div className="flex items-center gap-2 text-gold mb-2">
                 <ShieldCheck className="h-5 w-5" />
                 <h3 className="font-semibold">Integrity Statement</h3>
@@ -202,13 +202,23 @@ export function AwardCategoryPage({ config, legacyHero }: Props) {
             </CardContent>
           </Card>
           <Card className="border-foreground/15 bg-charcoal-light/40">
-            <CardContent className="p-6">
+            <CardContent className="p-4 md:p-6">
               <h3 className="font-semibold text-foreground mb-2">Sponsor Disclaimer</h3>
               <p className="text-sm text-foreground/70 leading-relaxed">{SPONSOR_DISCLAIMER}</p>
             </CardContent>
           </Card>
         </div>
       </section>
+
+      {/* Mobile sticky nominate CTA */}
+      <div className="md:hidden fixed bottom-0 inset-x-0 z-40 border-t border-gold/20 bg-charcoal/95 backdrop-blur px-4 py-3 pb-[calc(0.75rem+env(safe-area-inset-bottom))]">
+        <Button asChild size="lg" className="w-full h-12 bg-gold text-charcoal hover:bg-gold/90 font-semibold">
+          <Link to={nominateHref}>
+            <Sparkles className="mr-2 h-4 w-4" />
+            Nominate in this Category
+          </Link>
+        </Button>
+      </div>
     </div>
   );
 }
