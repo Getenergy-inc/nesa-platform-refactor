@@ -40,7 +40,7 @@ export function TrophyHeroSection() {
   const bannerText = getBannerText();
 
   return (
-    <section className="relative min-h-[78vh] sm:min-h-[88vh] lg:min-h-[95vh] flex items-center bg-charcoal overflow-hidden">
+    <section className="relative min-h-[60vh] sm:min-h-[78vh] lg:min-h-[95vh] flex items-center bg-charcoal overflow-hidden">
       {/* Stage Backdrop — Cinematic video with warm overlay */}
       <div className="absolute inset-0">
         <video
