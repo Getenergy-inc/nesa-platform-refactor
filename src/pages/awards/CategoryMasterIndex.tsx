@@ -66,11 +66,22 @@ const MASTER_FAQS = [
 
 export default function CategoryMasterIndex() {
   const [search, setSearch] = useState("");
-  const [groupFilter, setGroupFilter] = useState<string>("all");
+  const [groupFilter, setGroupFilter] = useState<CategoryGroup | "all">("all");
+  const [sort, setSort] = useState<SortKey>("default");
+
+  const groupsList = (Object.keys(GROUP_META) as CategoryGroup[]).filter(
+    (g) => g !== "special_recognition"
+  );
+
+  const groupCounts = useMemo(() => {
+    const counts: Record<string, number> = { all: ALL_CATEGORIES.length };
+    for (const g of groupsList) counts[g] = ALL_CATEGORIES.filter((c) => c.group === g).length;
+    return counts;
+  }, [groupsList]);
 
   const filtered = useMemo(() => {
     const q = search.trim().toLowerCase();
-    return ALL_CATEGORIES.filter((c) => {
+    const list = ALL_CATEGORIES.filter((c) => {
       if (groupFilter !== "all" && c.group !== groupFilter) return false;
       if (!q) return true;
       return (
@@ -80,11 +91,17 @@ export default function CategoryMasterIndex() {
         c.whoCanBeNominated.toLowerCase().includes(q)
       );
     });
-  }, [search, groupFilter]);
+    if (sort === "az") return [...list].sort((a, b) => a.finalName.localeCompare(b.finalName));
+    if (sort === "za") return [...list].sort((a, b) => b.finalName.localeCompare(a.finalName));
+    return list;
+  }, [search, groupFilter, sort]);
 
-  const groupsList = (Object.keys(GROUP_META) as CategoryGroup[]).filter(
-    (g) => g !== "special_recognition"
-  );
+  const hasActiveFilters = search.trim() !== "" || groupFilter !== "all" || sort !== "default";
+  const clearFilters = () => {
+    setSearch("");
+    setGroupFilter("all");
+    setSort("default");
+  };
 
   return (
     <div className="min-h-screen bg-charcoal text-foreground">
