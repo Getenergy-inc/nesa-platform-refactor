@@ -1,10 +1,11 @@
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { Trophy, Coins, Users, LayoutGrid, ArrowRight, Heart } from "lucide-react";
+import { Trophy, Coins, Users, Vote as VoteIcon, ArrowRight, Heart } from "lucide-react";
 import { trackEvent } from "@/lib/analytics";
 
 const onCta = (cta: string, to: string) => () =>
   trackEvent("hero_cta_click", { cta, to, location: "hero" });
+
 
 /**
  * HeroCTAStack — Compact premium CTA system
