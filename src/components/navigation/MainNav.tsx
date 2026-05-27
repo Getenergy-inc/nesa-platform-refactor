@@ -615,11 +615,24 @@ export function MainNav() {
               <Link to="/vote" aria-label="Vote in NESA-Africa 2026">Vote</Link>
             </Button>
 
-            {/* Primary CTA: Become a Sponsor */}
+            {/* Primary CTA: Nominate 2026 (compact pill — visible on mobile) */}
             <Button
               asChild
               size="sm"
-              className="hidden md:inline-flex bg-gold text-charcoal hover:bg-gold/90 font-semibold h-8 xl:h-9 px-3 xl:px-4 text-[11px] xl:text-sm shadow-md shadow-gold/20"
+              className="inline-flex bg-gold text-charcoal hover:bg-gold/90 font-semibold h-9 px-2.5 sm:px-3 xl:px-4 text-[11px] sm:text-xs xl:text-sm shadow-md shadow-gold/20 shrink-0"
+            >
+              <Link to="/nominate" aria-label="Nominate for NESA-Africa 2026">
+                <Trophy className="h-3.5 w-3.5 sm:mr-1.5" />
+                <span className="hidden sm:inline">Nominate 2026</span>
+              </Link>
+            </Button>
+
+            {/* Secondary CTA: Become a Sponsor — desktop only */}
+            <Button
+              asChild
+              size="sm"
+              variant="outline"
+              className="hidden xl:inline-flex border-gold/40 text-gold hover:bg-gold/10 hover:text-gold h-8 xl:h-9 px-3 xl:px-4 text-[11px] xl:text-sm bg-transparent"
             >
               <Link to={MAIN_NAV_CTA.href} aria-label="Become a Sponsor of NESA-Africa 2026">
                 <Sparkles className="h-3.5 w-3.5 mr-1.5" />
