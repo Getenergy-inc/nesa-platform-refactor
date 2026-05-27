@@ -1,166 +1,148 @@
-# Award Category Page Refactor (Phase 18B)
+# NESA-Africa Judge Ecosystem — Build Plan
 
-Consolidate 17 standalone category pages + scattered award landings into 4 canonical groups under a single master index, with a shared template, integrity/sponsor disclaimers, FAQs, redirects, and SEO.
+Mirrors the existing Volunteer profile/dashboard pattern. Charcoal/Gold branding, mobile-first, RLS-secured.
 
-## 1. Canonical group structure
+## Phase 1 — Database Foundation (one migration)
 
-| # | Group | Index URL | Page count |
-|---|-------|-----------|-----------|
-| 1 | Blue Garnet Award Categories | `/awards/blue-garnet-categories` | 9 |
-| 2 | Platinum Certificate Categories | `/awards/platinum-certificate-categories` | 7 |
-| 3 | Africa Education Icon Lifetime Achievement (2006–2026) | `/awards/africa-education-icon` | 1 hub + honour roll |
-| 4 | Influencers Education Impact 2026 | `/awards/influencers-education-impact` | 3 sub |
-| — | Master Index | `/awards/categories` | 1 |
+New tables in `public`. All follow the project's GRANT + RLS pattern.
 
-## 2. Category architecture table (Keep / Merge / Rename / Redirect)
+- **`judges`** — public-facing profile data
+  - `id`, `user_id` (FK `auth.users`, nullable until linked), `slug` (unique), `full_name`, `email` (private), `phone` (private), `photo_url`
+  - `country_residence`, `country_origin`, `region`
+  - `professional_title`, `organization`, `bio`
+  - `expertise_areas text[]`, `languages text[]`, `social_links jsonb`
+  - `verification_status` (`unverified` / `verified` / `featured`)
+  - `judge_status` enum (`applied`, `under_review`, `approved`, `rejected`, `active`, `inactive`, `suspended`, `alumni`)
+  - `profile_visibility` (`public` / `unlisted` / `private`)
+  - `public_contribution_statement`, `contribution_score int`
+  - `created_at`, `updated_at`
 
-### Blue Garnet (competitive, voting-enabled)
-| # | Final Title | New URL | Merged From | Status |
-|---|---|---|---|---|
-| 1 | Best NGO Contribution to Education (Africa) | `/awards/blue-garnet-categories/ngo-education-africa` | `/categories/ngo-africa` | Rename + redirect |
-| 2 | Best NGO Contribution to Education (Nigeria) | `/awards/blue-garnet-categories/ngo-education-nigeria` | `/categories/ngo-nigeria` | Rename + redirect |
-| 3 | Best CSR in Education (Africa) | `/awards/blue-garnet-categories/csr-education-africa` | `/categories/csr-africa`, `/categories/csr` | Merge |
-| 4 | Best CSR in Education (Nigeria) | `/awards/blue-garnet-categories/csr-education-nigeria` | `/categories/csr-nigeria` | Rename + redirect |
-| 5 | Best EduTech Organisation (Africa) | `/awards/blue-garnet-categories/edutech-africa` | `/categories/edutech-africa` | Rename + redirect |
-| 6 | Best STEM Education Champion (Africa) | `/awards/blue-garnet-categories/stem-education-africa` | `/categories/stem-africa` | Rename + redirect |
-| 7 | Best Media in Educational Advocacy (Nigeria) | `/awards/blue-garnet-categories/media-advocacy-nigeria` | `/categories/media-nigeria` | Rename + redirect |
-| 8 | Creative Arts Education Impact (Nigeria) | `/awards/blue-garnet-categories/creative-arts-nigeria` | `/categories/creative-arts-nigeria` | Rename + redirect |
-| 9 | Best Education-Friendly State (Nigeria) | `/awards/blue-garnet-categories/education-state-nigeria` | `/categories/education-state-nigeria` | Rename + redirect |
+- **`judge_applications`** — application submissions
+  - `judge_id` (FK), `application_status`, `reason_for_applying`, `preferred_categories text[]`, `documents jsonb`
+  - `confidentiality_accepted bool`, `conflict_policy_accepted bool`, `profile_display_consent bool`
+  - `submitted_at`, `reviewed_at`, `reviewed_by`
 
-### Platinum Certificate (institutional, jury-only)
-| # | Final Title | New URL | Merged From | Status |
-|---|---|---|---|---|
-| 10 | Best Library in Nigerian Tertiary Institutions | `/awards/platinum-certificate-categories/library-nigeria` | `/categories/library-nigeria` | Rename |
-| 11 | Best R&D Contribution to Education (Nigeria) | `/awards/platinum-certificate-categories/rd-nigeria` | `/categories/rd-nigeria` | Rename |
-| 12 | Christian Education Impact (Africa) | `/awards/platinum-certificate-categories/christian-education-africa` | `/categories/christian-africa` | Rename |
-| 13 | Islamic Education Impact (Africa) | `/awards/platinum-certificate-categories/islamic-education-africa` | `/categories/islamic-africa` | Rename |
-| 14 | Political Leaders' Contribution to Education (Nigeria) | `/awards/platinum-certificate-categories/political-leaders-nigeria` | `/categories/political-nigeria` | Rename |
-| 15 | International / Bilateral Education Partnerships | `/awards/platinum-certificate-categories/international-education` | `/categories/international` | Rename |
-| 16 | Diaspora Association Educational Impact | `/awards/platinum-certificate-categories/diaspora-impact` | `/categories/diaspora-impact` | Rename |
+- **`judge_assignments`** — categories/nominees assigned to a judge
+  - `judge_id`, `category_id`, `subcategory_id`, `nominee_id`, `assigned_by`, `due_date`, `status` enum (`not_started`, `in_progress`, `submitted`, `returned_for_revision`, `finalized`)
 
-### Africa Education Icon (lifetime, by-invitation)
-| # | Final Title | New URL | Merged From | Status |
-|---|---|---|---|---|
-| 17 | Africa Education Icon Lifetime Achievement 2006–2026 | `/awards/africa-education-icon` | `/categories/africa-icon`, `/awards/icon-award` | **Merge** (two pages → one canonical) |
+- **`judge_reviews`** — scoring + comments (PRIVATE)
+  - `judge_id`, `nominee_id`, `category_id`, `score numeric`, `comments text`, `evidence_review jsonb`, `recommendation`, `status`, `submitted_at`
 
-### Influencers Education Impact 2026 (new group, 3 sub)
-| # | Final Title | New URL | Status |
-|---|---|---|---|
-| 18 | Influencers Hub | `/awards/influencers-education-impact` | **New** |
-| 18a | Africa Sports — Education Impact | `/awards/influencers-education-impact/sports` | New sub |
-| 18b | Africa Music — Education Impact | `/awards/influencers-education-impact/music` | New sub |
-| 18c | Africa Social Media — Education Impact | `/awards/influencers-education-impact/social-media` | New sub (merges "Digital Voices", "Education Advocate", "Creator" overlaps) |
+- **`judge_conflicts`** — COI declarations (PRIVATE)
+  - `judge_id`, `nominee_id`, `conflict_type`, `description`, `status`, `declared_at`
 
-### Archived/folded
-- `/awards/gold` & `/awards/gold-special-recognition` → kept as Special Recognition track, linked from master index (not a competitive category group).
-- `DigitalVoices` page → 301 to `/awards/influencers-education-impact/social-media`.
+- **`judge_activity_logs`** — audit trail
+  - `judge_id`, `action`, `metadata jsonb`, `created_at`
 
-## 3. Shared page template
+**RBAC** — extend `app_role` enum with `'judge'` if not present (reuse existing `has_role()`). Add admin-only check via existing `has_role(uid, 'admin')`.
 
-Every category page renders via one component `<AwardCategoryPage>` that takes a config object with these fields (this is the answer to the "produce for every category" requirement):
+**RLS summary:**
+- `judges`: anon + auth can `SELECT` where `profile_visibility='public' AND judge_status IN ('approved','active','alumni')`; judges can `UPDATE` their own row; admins full access. `email`/`phone` exposed only via auth + ownership/admin (handled by a `judges_public` view with `security_invoker=true` that masks PII).
+- `judge_applications`, `judge_reviews`, `judge_conflicts`, `judge_assignments`, `judge_activity_logs`: judges read only their own rows; admins full; `anon` no access.
 
-```
-finalName, group, url, parentPage, shortDescription,
-eligibilitySummary, whoCanBeNominated, whoCanNominate,
-requiredEvidence, reviewMethod, votingRole, judgingRole,
-integrityDisclaimer (shared constant), sponsorDisclaimer (shared constant),
-ctaNominateHref, relatedCategories[], seoTitle, metaDescription,
-faqs[], schema (JSON-LD: Event + FAQPage + BreadcrumbList)
-```
+**Storage:** reuse `contributor-photos` bucket for judge photos (already public).
 
-Configs live in `src/config/awardCategories/` (one file per group, exporting arrays). The template renders the existing branded hero/words/directory blocks for visual continuity, then appends the new structured sections.
+**Triggers:**
+- `judge_before_insert` → auto-generate slug from `full_name` (reuse `slugify()` pattern from volunteers).
+- `handle_updated_at` on all tables.
 
-## 4. Shared integrity + sponsor disclaimers
+## Phase 2 — Navigation Changes
 
-Single constants in `src/config/awardCategories/disclaimers.ts`:
+`src/config/navigation.ts`:
+- **About dropdown**: replace existing single "Meet Our Judges" with two items:
+  - `Meet the Judges` → `/judges`
+  - `Governance & Jury Process` → `/about/governance`
+- **Engage dropdown**: rename existing "Meet Our Judges" entry → `Apply to be a Judge` → `/apply/judge`. Keep all other Engage items.
 
-- **Integrity**: the exact NESA-Africa paragraph specified in the brief.
-- **Sponsor**: "Category sponsorship supports visibility and programme delivery only. Sponsors, partners, endorsers and donors cannot nominate, shortlist, vote, judge, or determine winners."
+## Phase 3 — Public Pages
 
-Rendered at the bottom of every category page + index.
+- **`/judges`** (`src/pages/judges/JudgesDirectory.tsx`)
+  - Hero with the three CTAs (Apply, Governance, Categories) — black/gold
+  - Filter bar (country, region, expertise, category, status, language) — mobile collapses to bottom-sheet
+  - Grid of `JudgeCard` (photo, name, country flag, title, org, expertise chips, verification badge, social icons, View Profile)
+  - Governance note panel at bottom
+  - Welcome / hashtags block
+  - SEO: `LocalizedSEO`, JSON-LD `Person` list
 
-## 5. Master index `/awards/categories`
+- **`/judges/:slug`** (`src/pages/judges/JudgeProfile.tsx`)
+  - Hero: photo, name, title, org, country residence/origin, verification badge
+  - Tabs / stacked sections: Biography, Expertise, Assigned Categories, Public Contribution Statement, COI Transparency Note, Social Links, Share
+  - Replaces existing single `Judges.tsx` page (which becomes a redirect)
 
-New `CategoryMasterIndex.tsx` with:
-- Hero + intro to 2026 structure
-- 4 group explainer cards (Blue Garnet, Platinum, Icon, Influencers)
-- Filter bar: sector, role (individual/institution), country, institution type, impact area
-- Search input (client-side over the config array)
-- Grouped list of all category links
-- Nominate CTA + Category FAQ accordion + Integrity statement
+- **`/apply/judge`** (`src/pages/judges/JudgeApply.tsx`)
+  - Multi-step form (4 steps) using existing nomination form patterns
+  - Zod validation, draft autosave via `localStorage`, file upload via `nomination-evidence` bucket
+  - On submit: insert into `judges` (status=`applied`, visibility=`private`) + `judge_applications`. Sign-in gated.
 
-Old `/categories` and `/awards` index → 301 to `/awards/categories`.
+## Phase 4 — Private Judge Dashboard
 
-## 6. Redirect map (implemented as `<Navigate replace>` in `App.tsx`)
+Under `src/pages/judge/` with `RequireAuth` + `RequireRole('judge')`.
 
-```
-/categories                            → /awards/categories
-/categories/:slug                      → /awards/<group>/<slug>   (per table above)
-/awards/icon-award                     → /awards/africa-education-icon
-/awards/digital-voices                 → /awards/influencers-education-impact/social-media
-/awards/gold                           → /awards/categories#special-recognition
-```
+- **`/judge/dashboard`** — overview cards (assigned count, reviews pending/done, COI status, calendar snippet, notifications)
+- **`/judge/profile`** — edit name, bio, photo, expertise, social links, visibility toggle
+- **`/judge/assigned-categories`** — list of categories/subcategories assigned with progress
+- **`/judge/reviews`** — table of nominees to review + per-nominee scoring drawer (score 0-20 per rubric pillar, comments, evidence checklist, recommendation, submit)
+- **`/judge/conflict-declaration`** — declare COI against a nominee/category with type + description
+- **`/judge/settings`** — notification prefs, language, account
 
-All 301-equivalent (SPA replace navigation; SEO canonical updated on destination page).
+Use existing `dashboard-navigation.ts` pattern. Add `JUDGE_DASHBOARD_NAV` to `src/config/navigation.ts`.
 
-## 7. Per-page FAQs (template — 8 questions each)
+## Phase 5 — Data Layer
 
-1. Who is eligible for this category?
-2. Who can nominate?
-3. What evidence is required?
-4. Is there public voting?
-5. How is the category reviewed?
-6. Can sponsors influence this category?
-7. When will finalists or winners be announced?
-8. How do I nominate someone for this category?
+- **`src/lib/api/judges.api.ts`** — typed wrappers around `supabase` calls:
+  - `listPublicJudges(filters)`, `getJudgeBySlug(slug)`, `submitApplication(payload)`
+  - `getMyJudgeProfile()`, `updateMyJudgeProfile(payload)`
+  - `listMyAssignments()`, `getReviewForNominee(id)`, `submitReview(payload)`
+  - `declareConflict(payload)`, `listMyConflicts()`
+- **`src/hooks/useJudges.ts`** — TanStack Query hooks
+- Reuse existing `useAuth()` for role gating
 
-Answers are config-driven per category.
+## Phase 6 — Admin Tooling
 
-## 8. SEO
+Add to existing admin area (`src/pages/admin/`):
+- `JudgeApplicationsReview` — list pending applications, approve/reject with reason → sets `judge_status` + `verification_status`, sends notification
+- `JudgeAssignments` — bulk assign categories/nominees to approved judges
+- `JudgeDirectory` admin view — toggle visibility, suspend, verify, mark featured
 
-- Per-page `<title>` ≤ 60 chars, `<meta description>` ≤ 160 chars.
-- JSON-LD: `Event` (the award), `FAQPage`, `BreadcrumbList`.
-- Canonical = new URL.
-- `sitemap.xml` regenerated via `scripts/generate-sitemap.ts` after route changes.
+## Phase 7 — Analytics
 
-## 9. File changes (technical)
+`trackEvent()` calls:
+- `judge_application_start`, `judge_application_step_complete`, `judge_application_submit`
+- `judge_profile_view` (slug), `judge_social_link_click` (slug, platform)
+- `judge_dashboard_login`, `judge_review_submit`, `judge_conflict_declared`
+- `judge_assignment_progress`
 
-**New**
-- `src/config/awardCategories/disclaimers.ts`
-- `src/config/awardCategories/blueGarnet.ts`
-- `src/config/awardCategories/platinum.ts`
-- `src/config/awardCategories/icon.ts`
-- `src/config/awardCategories/influencers.ts`
-- `src/config/awardCategories/index.ts` (aggregator + types)
-- `src/components/awards/AwardCategoryPage.tsx` (shared template)
-- `src/components/awards/CategoryFaqSection.tsx`
-- `src/pages/awards/CategoryMasterIndex.tsx`
-- `src/pages/awards/groups/BlueGarnetIndex.tsx`
-- `src/pages/awards/groups/PlatinumIndex.tsx`
-- `src/pages/awards/groups/InfluencersIndex.tsx`
-- `src/pages/awards/categories/[slug].tsx` (route-level wrapper resolving config)
+## Privacy / Security Guarantees
 
-**Edited**
-- `src/App.tsx` — new routes + 30+ `<Navigate>` redirects
-- `src/config/navigation.ts` — Awards menu points at new URLs
-- `src/config/page-sequence.ts` — updated for new pagination
-- `ROUTES.md` — documents new map
-- Existing `src/pages/categories/*.tsx` → thin redirect shims (delete after migration verified)
+- Public view never returns `email`, `phone`, raw scores, COI details
+- A `judges_public` SQL view (security_invoker, masked PII) feeds the directory
+- All review/conflict tables: anon=no access, authenticated=own rows only, admin=all
+- Audit log writes via SECURITY DEFINER trigger on review submit + conflict declare
 
-**Deleted (after redirects confirmed)**
-- 17 standalone category page files folded into config
+## Mobile-First Notes
 
-## 10. Out of scope (deferred)
+- Directory: 2-column grid <sm becomes 1-column with horizontal swipe rail option
+- Filters open as `Sheet` bottom-sheet on mobile
+- Scoring screen: one nominee per screen, sticky submit bar, autosave
+- All tap targets ≥44px, follows existing charcoal/gold tokens
 
-- Actual content rewrites for influencer sub-categories beyond skeleton config (requires editorial input).
-- Backend `categories` table changes — current `slug` field already accepts the new slugs; only the routing layer changes.
-- Sponsor/judge dashboards remain on existing routes.
+---
 
-## Rollout
+## Execution Order in this turn
 
-1. Land config + template + master index + 4 group indexes.
-2. Land per-category dynamic route `[slug]` driven by config.
-3. Land redirects.
-4. Update navbar + sitemap.
-5. Remove orphaned old page files.
-6. Run `scripts/generate-sitemap.ts` and ship.
+If you approve, I will execute in this order across separate turns (one DB migration is destructive-blocking, so phases gate each other):
+
+1. **Phase 1 migration** (your approval required by Lovable Cloud before it runs)
+2. **Phase 2 navbar + Phase 3 public pages** (after migration succeeds)
+3. **Phase 4 private dashboard + Phase 5 data layer**
+4. **Phase 6 admin + Phase 7 analytics**
+
+Each phase is one assistant turn so you can review/test before the next ships.
+
+## Open questions before I start
+
+1. **Role enum**: should I add `'judge'` to the existing `app_role` enum (alongside the existing `role_code` system), or piggyback on the existing jury/NRC role you may already use? I'll grep to confirm before the migration.
+2. **Existing data**: there's an existing `src/pages/Judges.tsx` and `src/hooks/useJuryData.ts` plus `jury_assignments` table referenced in `compute_blue_garnet_results`. Should the new `judges` system **replace** the existing jury system, **coexist** alongside it (jury = internal scoring panel; judges = broader public-facing reviewer pool), or **merge** (rename `jury_*` → `judge_*`)?
+3. **Application gating**: Sign-in required to apply, or allow anonymous submission with email-only contact?
+
+Once you answer #2 in particular, I'll write the migration in the next turn. #2 determines whether this is additive or a rename, which materially changes the SQL.
