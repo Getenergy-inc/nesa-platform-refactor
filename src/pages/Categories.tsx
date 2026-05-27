@@ -267,6 +267,7 @@ export default function Categories() {
           <VolunteerCTABanner />
         </main>
       </div>
+      <MobileStickyNominateCTA source="categories_index" />
     </>
   );
 }
