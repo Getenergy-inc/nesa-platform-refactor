@@ -1698,6 +1698,45 @@ export type Database = {
           },
         ]
       }
+      judge_activity_logs: {
+        Row: {
+          action: string
+          created_at: string
+          id: string
+          judge_id: string
+          metadata: Json
+        }
+        Insert: {
+          action: string
+          created_at?: string
+          id?: string
+          judge_id: string
+          metadata?: Json
+        }
+        Update: {
+          action?: string
+          created_at?: string
+          id?: string
+          judge_id?: string
+          metadata?: Json
+        }
+        Relationships: [
+          {
+            foreignKeyName: "judge_activity_logs_judge_id_fkey"
+            columns: ["judge_id"]
+            isOneToOne: false
+            referencedRelation: "judges"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "judge_activity_logs_judge_id_fkey"
+            columns: ["judge_id"]
+            isOneToOne: false
+            referencedRelation: "judges_public"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       judge_applications: {
         Row: {
           approved_at: string | null
@@ -1779,6 +1818,63 @@ export type Database = {
         }
         Relationships: []
       }
+      judge_assignments: {
+        Row: {
+          assigned_by: string | null
+          category_id: string | null
+          created_at: string
+          due_date: string | null
+          id: string
+          judge_id: string
+          nominee_id: string | null
+          notes: string | null
+          status: Database["public"]["Enums"]["judge_assignment_status"]
+          subcategory_id: string | null
+          updated_at: string
+        }
+        Insert: {
+          assigned_by?: string | null
+          category_id?: string | null
+          created_at?: string
+          due_date?: string | null
+          id?: string
+          judge_id: string
+          nominee_id?: string | null
+          notes?: string | null
+          status?: Database["public"]["Enums"]["judge_assignment_status"]
+          subcategory_id?: string | null
+          updated_at?: string
+        }
+        Update: {
+          assigned_by?: string | null
+          category_id?: string | null
+          created_at?: string
+          due_date?: string | null
+          id?: string
+          judge_id?: string
+          nominee_id?: string | null
+          notes?: string | null
+          status?: Database["public"]["Enums"]["judge_assignment_status"]
+          subcategory_id?: string | null
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "judge_assignments_judge_id_fkey"
+            columns: ["judge_id"]
+            isOneToOne: false
+            referencedRelation: "judges"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "judge_assignments_judge_id_fkey"
+            columns: ["judge_id"]
+            isOneToOne: false
+            referencedRelation: "judges_public"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       judge_chat_messages: {
         Row: {
           created_at: string
@@ -1817,6 +1913,66 @@ export type Database = {
           },
         ]
       }
+      judge_conflicts: {
+        Row: {
+          category_id: string | null
+          conflict_type: string
+          created_at: string
+          declared_at: string
+          description: string | null
+          id: string
+          judge_id: string
+          nominee_id: string | null
+          resolved_at: string | null
+          resolved_by: string | null
+          status: string
+          updated_at: string
+        }
+        Insert: {
+          category_id?: string | null
+          conflict_type: string
+          created_at?: string
+          declared_at?: string
+          description?: string | null
+          id?: string
+          judge_id: string
+          nominee_id?: string | null
+          resolved_at?: string | null
+          resolved_by?: string | null
+          status?: string
+          updated_at?: string
+        }
+        Update: {
+          category_id?: string | null
+          conflict_type?: string
+          created_at?: string
+          declared_at?: string
+          description?: string | null
+          id?: string
+          judge_id?: string
+          nominee_id?: string | null
+          resolved_at?: string | null
+          resolved_by?: string | null
+          status?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "judge_conflicts_judge_id_fkey"
+            columns: ["judge_id"]
+            isOneToOne: false
+            referencedRelation: "judges"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "judge_conflicts_judge_id_fkey"
+            columns: ["judge_id"]
+            isOneToOne: false
+            referencedRelation: "judges_public"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       judge_otp_sessions: {
         Row: {
           created_at: string
@@ -1846,6 +2002,171 @@ export type Database = {
           verified_at?: string
         }
         Relationships: []
+      }
+      judge_reviews: {
+        Row: {
+          assignment_id: string | null
+          category_id: string | null
+          comments: string | null
+          created_at: string
+          evidence_review: Json
+          id: string
+          judge_id: string
+          nominee_id: string
+          recommendation: string | null
+          rubric_scores: Json
+          score: number | null
+          status: Database["public"]["Enums"]["judge_review_status"]
+          submitted_at: string | null
+          updated_at: string
+        }
+        Insert: {
+          assignment_id?: string | null
+          category_id?: string | null
+          comments?: string | null
+          created_at?: string
+          evidence_review?: Json
+          id?: string
+          judge_id: string
+          nominee_id: string
+          recommendation?: string | null
+          rubric_scores?: Json
+          score?: number | null
+          status?: Database["public"]["Enums"]["judge_review_status"]
+          submitted_at?: string | null
+          updated_at?: string
+        }
+        Update: {
+          assignment_id?: string | null
+          category_id?: string | null
+          comments?: string | null
+          created_at?: string
+          evidence_review?: Json
+          id?: string
+          judge_id?: string
+          nominee_id?: string
+          recommendation?: string | null
+          rubric_scores?: Json
+          score?: number | null
+          status?: Database["public"]["Enums"]["judge_review_status"]
+          submitted_at?: string | null
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "judge_reviews_assignment_id_fkey"
+            columns: ["assignment_id"]
+            isOneToOne: false
+            referencedRelation: "judge_assignments"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "judge_reviews_judge_id_fkey"
+            columns: ["judge_id"]
+            isOneToOne: false
+            referencedRelation: "judges"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "judge_reviews_judge_id_fkey"
+            columns: ["judge_id"]
+            isOneToOne: false
+            referencedRelation: "judges_public"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      judges: {
+        Row: {
+          application_id: string | null
+          bio: string | null
+          contribution_score: number
+          country_origin: string | null
+          country_residence: string | null
+          created_at: string
+          email: string | null
+          expertise_areas: string[]
+          featured: boolean
+          full_name: string
+          id: string
+          judge_status: Database["public"]["Enums"]["judge_status"]
+          languages: string[]
+          organization: string | null
+          phone: string | null
+          photo_url: string | null
+          professional_title: string | null
+          profile_visibility: Database["public"]["Enums"]["judge_profile_visibility"]
+          public_contribution_statement: string | null
+          region: string | null
+          slug: string
+          social_links: Json
+          updated_at: string
+          user_id: string | null
+          verification_status: Database["public"]["Enums"]["judge_verification_status"]
+        }
+        Insert: {
+          application_id?: string | null
+          bio?: string | null
+          contribution_score?: number
+          country_origin?: string | null
+          country_residence?: string | null
+          created_at?: string
+          email?: string | null
+          expertise_areas?: string[]
+          featured?: boolean
+          full_name: string
+          id?: string
+          judge_status?: Database["public"]["Enums"]["judge_status"]
+          languages?: string[]
+          organization?: string | null
+          phone?: string | null
+          photo_url?: string | null
+          professional_title?: string | null
+          profile_visibility?: Database["public"]["Enums"]["judge_profile_visibility"]
+          public_contribution_statement?: string | null
+          region?: string | null
+          slug: string
+          social_links?: Json
+          updated_at?: string
+          user_id?: string | null
+          verification_status?: Database["public"]["Enums"]["judge_verification_status"]
+        }
+        Update: {
+          application_id?: string | null
+          bio?: string | null
+          contribution_score?: number
+          country_origin?: string | null
+          country_residence?: string | null
+          created_at?: string
+          email?: string | null
+          expertise_areas?: string[]
+          featured?: boolean
+          full_name?: string
+          id?: string
+          judge_status?: Database["public"]["Enums"]["judge_status"]
+          languages?: string[]
+          organization?: string | null
+          phone?: string | null
+          photo_url?: string | null
+          professional_title?: string | null
+          profile_visibility?: Database["public"]["Enums"]["judge_profile_visibility"]
+          public_contribution_statement?: string | null
+          region?: string | null
+          slug?: string
+          social_links?: Json
+          updated_at?: string
+          user_id?: string | null
+          verification_status?: Database["public"]["Enums"]["judge_verification_status"]
+        }
+        Relationships: [
+          {
+            foreignKeyName: "judges_application_id_fkey"
+            columns: ["application_id"]
+            isOneToOne: false
+            referencedRelation: "judge_applications"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       jury_assignments: {
         Row: {
@@ -5934,6 +6255,78 @@ export type Database = {
           },
         ]
       }
+      judges_public: {
+        Row: {
+          bio: string | null
+          contribution_score: number | null
+          country_origin: string | null
+          country_residence: string | null
+          created_at: string | null
+          expertise_areas: string[] | null
+          featured: boolean | null
+          full_name: string | null
+          id: string | null
+          judge_status: Database["public"]["Enums"]["judge_status"] | null
+          languages: string[] | null
+          organization: string | null
+          photo_url: string | null
+          professional_title: string | null
+          public_contribution_statement: string | null
+          region: string | null
+          slug: string | null
+          social_links: Json | null
+          verification_status:
+            | Database["public"]["Enums"]["judge_verification_status"]
+            | null
+        }
+        Insert: {
+          bio?: string | null
+          contribution_score?: number | null
+          country_origin?: string | null
+          country_residence?: string | null
+          created_at?: string | null
+          expertise_areas?: string[] | null
+          featured?: boolean | null
+          full_name?: string | null
+          id?: string | null
+          judge_status?: Database["public"]["Enums"]["judge_status"] | null
+          languages?: string[] | null
+          organization?: string | null
+          photo_url?: string | null
+          professional_title?: string | null
+          public_contribution_statement?: string | null
+          region?: string | null
+          slug?: string | null
+          social_links?: Json | null
+          verification_status?:
+            | Database["public"]["Enums"]["judge_verification_status"]
+            | null
+        }
+        Update: {
+          bio?: string | null
+          contribution_score?: number | null
+          country_origin?: string | null
+          country_residence?: string | null
+          created_at?: string | null
+          expertise_areas?: string[] | null
+          featured?: boolean | null
+          full_name?: string | null
+          id?: string | null
+          judge_status?: Database["public"]["Enums"]["judge_status"] | null
+          languages?: string[] | null
+          organization?: string | null
+          photo_url?: string | null
+          professional_title?: string | null
+          public_contribution_statement?: string | null
+          region?: string | null
+          slug?: string | null
+          social_links?: Json | null
+          verification_status?:
+            | Database["public"]["Enums"]["judge_verification_status"]
+            | null
+        }
+        Relationships: []
+      }
       public_nominees: {
         Row: {
           acceptance_status:
@@ -6463,6 +6856,29 @@ export type Database = {
         | "EDUAID_AFRICA"
         | "SPONSOR_STUDENT"
         | "TVET_GRANT"
+      judge_assignment_status:
+        | "not_started"
+        | "in_progress"
+        | "submitted"
+        | "returned_for_revision"
+        | "finalized"
+      judge_profile_visibility: "public" | "unlisted" | "private"
+      judge_review_status:
+        | "not_started"
+        | "in_progress"
+        | "submitted"
+        | "returned_for_revision"
+        | "finalized"
+      judge_status:
+        | "applied"
+        | "under_review"
+        | "approved"
+        | "rejected"
+        | "active"
+        | "inactive"
+        | "suspended"
+        | "alumni"
+      judge_verification_status: "unverified" | "verified" | "featured"
       misuse_report_status:
         | "PENDING"
         | "REVIEWING"
@@ -6750,6 +7166,32 @@ export const Constants = {
         "SPONSOR_STUDENT",
         "TVET_GRANT",
       ],
+      judge_assignment_status: [
+        "not_started",
+        "in_progress",
+        "submitted",
+        "returned_for_revision",
+        "finalized",
+      ],
+      judge_profile_visibility: ["public", "unlisted", "private"],
+      judge_review_status: [
+        "not_started",
+        "in_progress",
+        "submitted",
+        "returned_for_revision",
+        "finalized",
+      ],
+      judge_status: [
+        "applied",
+        "under_review",
+        "approved",
+        "rejected",
+        "active",
+        "inactive",
+        "suspended",
+        "alumni",
+      ],
+      judge_verification_status: ["unverified", "verified", "featured"],
       misuse_report_status: [
         "PENDING",
         "REVIEWING",
