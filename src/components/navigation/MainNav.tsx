@@ -239,8 +239,10 @@ function MobileNav({ onOpenCVOMessage }: { onOpenCVOMessage: () => void }) {
                     <div>
                       <button
                         onClick={() => toggleExpanded(item.href)}
+                        aria-expanded={expandedItems.includes(item.href)}
+                        aria-controls={`mnav-sub-${item.href}`}
                         className={cn(
-                          "flex items-center justify-between w-full px-4 py-4 text-left transition-colors touch-manipulation",
+                          "flex items-center justify-between w-full px-4 py-4 text-left transition-colors touch-manipulation min-h-[44px]",
                           "hover:bg-gold/5 active:bg-gold/10",
                           expandedItems.includes(item.href)
                             ? "text-gold bg-gold/5"
