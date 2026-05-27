@@ -567,8 +567,8 @@ export function MainNav() {
 
   return (
     <>
-      <header className="fixed top-0 left-0 right-0 z-50 w-full bg-charcoal/95 backdrop-blur-md border-b border-gold/20">
-        <div className="container flex h-14 sm:h-16 items-center gap-2 px-4">
+      <header className="fixed top-0 left-0 right-0 z-50 w-full bg-charcoal/95 backdrop-blur-md border-b border-gold/20 overflow-x-clip">
+        <div className="container flex h-14 sm:h-16 items-center gap-2 px-3 sm:px-4 max-w-screen-2xl">
           {/* Brand Area: Logo + NESA-Africa 2026 + motto */}
           <Link
             to="/"
