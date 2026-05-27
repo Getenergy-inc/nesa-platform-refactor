@@ -177,32 +177,104 @@ export default function CategoryMasterIndex() {
       </section>
 
       {/* Filter + search */}
-      <section className="py-8 border-y border-gold/20 bg-charcoal-light/30">
-        <div className="container mx-auto max-w-6xl px-4 flex flex-wrap gap-3 items-center">
-          <div className="relative flex-1 min-w-[240px]">
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-foreground/50" />
-            <Input
-              placeholder="Search by sector, role, country, institution or impact area"
-              className="pl-9 bg-charcoal border-gold/20"
-              value={search}
-              onChange={(e) => setSearch(e.target.value)}
-            />
-          </div>
-          <div className="flex items-center gap-2">
-            <Filter className="h-4 w-4 text-gold" />
-            <Select value={groupFilter} onValueChange={setGroupFilter}>
-              <SelectTrigger className="w-[240px] bg-charcoal border-gold/20">
-                <SelectValue placeholder="All groups" />
+      <section
+        id="filters"
+        className="sticky top-16 z-30 py-5 border-y border-gold/20 bg-charcoal/95 backdrop-blur supports-[backdrop-filter]:bg-charcoal/80"
+      >
+        <div className="container mx-auto max-w-6xl px-4 flex flex-col gap-3">
+          {/* Row 1: search + sort + clear */}
+          <div className="flex flex-wrap gap-3 items-center">
+            <div className="relative flex-1 min-w-[220px]">
+              <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-foreground/50" />
+              <Input
+                aria-label="Search award categories"
+                placeholder="Search by sector, role, country or impact"
+                className="pl-9 pr-9 bg-charcoal border-gold/20 h-11"
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
+              />
+              {search && (
+                <button
+                  type="button"
+                  aria-label="Clear search"
+                  onClick={() => setSearch("")}
+                  className="absolute right-2 top-1/2 -translate-y-1/2 p-1 text-foreground/60 hover:text-gold"
+                >
+                  <X className="h-4 w-4" />
+                </button>
+              )}
+            </div>
+            <Select value={sort} onValueChange={(v) => setSort(v as SortKey)}>
+              <SelectTrigger className="w-[160px] h-11 bg-charcoal border-gold/20" aria-label="Sort categories">
+                <SelectValue placeholder="Sort" />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="all">All groups</SelectItem>
-                {groupsList.map((g) => (
-                  <SelectItem key={g} value={g}>
-                    {GROUP_META[g].label}
-                  </SelectItem>
-                ))}
+                <SelectItem value="default">Curated order</SelectItem>
+                <SelectItem value="az">Name A → Z</SelectItem>
+                <SelectItem value="za">Name Z → A</SelectItem>
               </SelectContent>
             </Select>
+            {hasActiveFilters && (
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={clearFilters}
+                className="h-11 border-gold/40 text-gold hover:bg-gold/10"
+              >
+                <X className="mr-1 h-4 w-4" /> Clear
+              </Button>
+            )}
+          </div>
+
+          {/* Row 2: group chips */}
+          <div className="-mx-4 px-4 overflow-x-auto scrollbar-none">
+            <div className="flex gap-2 min-w-max">
+              {(["all", ...groupsList] as Array<CategoryGroup | "all">).map((g) => {
+                const active = groupFilter === g;
+                const label = g === "all" ? "All groups" : GROUP_META[g].label.replace(/ Categories?$/i, "");
+                return (
+                  <button
+                    key={g}
+                    type="button"
+                    onClick={() => setGroupFilter(g)}
+                    aria-pressed={active}
+                    className={cn(
+                      "shrink-0 inline-flex items-center gap-2 rounded-full border px-3.5 py-1.5 text-xs font-medium transition",
+                      active
+                        ? "bg-gold text-charcoal border-gold shadow-sm"
+                        : "bg-charcoal-light/60 text-foreground/80 border-gold/25 hover:border-gold/60 hover:text-gold"
+                    )}
+                  >
+                    <span>{label}</span>
+                    <span
+                      className={cn(
+                        "rounded-full px-1.5 text-[10px] leading-4",
+                        active ? "bg-charcoal/20 text-charcoal" : "bg-gold/15 text-gold"
+                      )}
+                    >
+                      {groupCounts[g] ?? 0}
+                    </span>
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+
+          {/* Result count */}
+          <div className="flex items-center justify-between text-xs text-foreground/60">
+            <span>
+              Showing <span className="text-gold font-semibold">{filtered.length}</span> of{" "}
+              {ALL_CATEGORIES.length} categories
+            </span>
+            {hasActiveFilters && (
+              <button
+                type="button"
+                onClick={clearFilters}
+                className="text-gold hover:underline"
+              >
+                Reset filters
+              </button>
+            )}
           </div>
         </div>
       </section>
