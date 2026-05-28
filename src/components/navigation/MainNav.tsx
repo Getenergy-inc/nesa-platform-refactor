@@ -62,8 +62,8 @@ function DesktopNav({ onOpenCVOMessage }: { onOpenCVOMessage: () => void }) {
   const location = useLocation();
 
   return (
-    <NavigationMenu className="hidden xl:flex w-full min-w-0">
-      <NavigationMenuList className="px-0 gap-0 flex-nowrap">
+    <NavigationMenu className="flex w-full min-w-0">
+      <NavigationMenuList className="px-0 gap-0 flex-nowrap overflow-x-auto scrollbar-hide max-w-full">
         {MAIN_NAV.map((item) => (
           <NavigationMenuItem key={item.href} className="shrink-0">
 
@@ -203,7 +203,7 @@ function MobileNav({ onOpenCVOMessage }: { onOpenCVOMessage: () => void }) {
         <Button
           variant="ghost"
           size="icon"
-          className="xl:hidden text-white hover:text-gold hover:bg-gold/10 min-h-[44px] min-w-[44px]"
+          className="lg:hidden text-white hover:text-gold hover:bg-gold/10 min-h-[44px] min-w-[44px]"
           aria-label="Open navigation menu"
           aria-expanded={open}
           aria-controls="mobile-nav-drawer"
