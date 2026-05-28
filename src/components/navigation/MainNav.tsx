@@ -62,8 +62,8 @@ function DesktopNav({ onOpenCVOMessage }: { onOpenCVOMessage: () => void }) {
   const location = useLocation();
 
   return (
-    <NavigationMenu className="hidden xl:flex w-full min-w-0">
-      <NavigationMenuList className="px-0 gap-0 flex-nowrap">
+    <NavigationMenu className="flex w-full min-w-0">
+      <NavigationMenuList className="px-0 gap-0 flex-nowrap overflow-x-auto scrollbar-hide max-w-full">
         {MAIN_NAV.map((item) => (
           <NavigationMenuItem key={item.href} className="shrink-0">
 
