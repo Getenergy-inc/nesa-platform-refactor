@@ -622,30 +622,69 @@ export function MainNav() {
               </Link>
             </Button>
 
-            {/* Vote CTA */}
+            {/* Vote CTA — desktop only (mobile uses Get Involved dropdown) */}
             <Button
               asChild
               size="sm"
               variant="outline"
-              className="inline-flex border-gold/40 text-gold hover:bg-gold/10 hover:text-gold bg-transparent h-9 px-2.5 xl:px-3 text-[11px] xl:text-[12px] whitespace-nowrap shrink-0"
+              className="hidden xl:inline-flex border-gold/40 text-gold hover:bg-gold/10 hover:text-gold bg-transparent h-9 px-2.5 xl:px-3 text-[11px] xl:text-[12px] whitespace-nowrap shrink-0"
             >
               <Link to="/vote" aria-label="Vote for NESA-Africa 2026">
                 <Vote className="h-3.5 w-3.5 sm:mr-1" />
-                <span className="hidden sm:inline">Vote</span>
+                <span>Vote</span>
               </Link>
             </Button>
 
-            {/* Primary CTA: Nominate 2026 (gold pill — visible on mobile & desktop) */}
+            {/* Primary CTA: Nominate 2026 — desktop only */}
             <Button
               asChild
               size="sm"
-              className="inline-flex bg-gold text-charcoal hover:bg-gold/90 font-semibold h-9 px-2.5 xl:px-3 text-[11px] xl:text-[12px] shadow-md shadow-gold/20 shrink-0 whitespace-nowrap"
+              className="hidden xl:inline-flex bg-gold text-charcoal hover:bg-gold/90 font-semibold h-9 px-2.5 xl:px-3 text-[11px] xl:text-[12px] shadow-md shadow-gold/20 shrink-0 whitespace-nowrap"
             >
               <Link to="/nominate" aria-label="Nominate for NESA-Africa 2026">
                 <Trophy className="h-3.5 w-3.5 sm:mr-1" />
-                <span className="hidden sm:inline">Nominate 2026</span>
+                <span>Nominate 2026</span>
               </Link>
             </Button>
+
+            {/* Mobile-only: Get Involved dropdown (replaces overlapping CTAs below xl) */}
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button
+                  size="sm"
+                  className="xl:hidden inline-flex bg-gold text-charcoal hover:bg-gold/90 font-semibold h-9 px-3 text-[12px] shadow-md shadow-gold/20 shrink-0 whitespace-nowrap gap-1"
+                  aria-label="Get Involved with NESA-Africa 2026"
+                >
+                  <Trophy className="h-3.5 w-3.5" />
+                  <span>Get Involved</span>
+                  <ChevronDown className="h-3.5 w-3.5" />
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent
+                align="end"
+                sideOffset={8}
+                className="w-56 bg-charcoal border-gold/30 text-white"
+              >
+                <DropdownMenuItem asChild className="focus:bg-gold/10 focus:text-gold cursor-pointer py-3">
+                  <Link to="/nominate" className="flex items-center gap-2">
+                    <Trophy className="h-4 w-4 text-gold" />
+                    <span className="font-semibold">Nominate 2026</span>
+                  </Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem asChild className="focus:bg-gold/10 focus:text-gold cursor-pointer py-3">
+                  <Link to="/vote" className="flex items-center gap-2">
+                    <Vote className="h-4 w-4 text-gold" />
+                    <span>Vote</span>
+                  </Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem asChild className="focus:bg-gold/10 focus:text-gold cursor-pointer py-3">
+                  <Link to={MAIN_NAV_CTA.href} className="flex items-center gap-2">
+                    <Sparkles className="h-4 w-4 text-gold" />
+                    <span>Become a Sponsor</span>
+                  </Link>
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
 
             {/* Utility: Search */}
             <NavSearch />
