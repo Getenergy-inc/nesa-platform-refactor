@@ -45,7 +45,7 @@ import {
 import { cn } from "@/lib/utils";
 import { useAuth } from "@/contexts/AuthContext";
 import { MAIN_NAV, MAIN_NAV_CTA, MAIN_NAV_MOBILE_ORDER, MOBILE_NAV, type NavItem } from "@/config/navigation";
-import { Sparkles } from "lucide-react";
+import { Sparkles, MessageSquare } from "lucide-react";
 import nesaStamp from "@/assets/nesa-stamp.jpeg";
 import { CVOFlashMessage, CVOMessageTrigger } from "@/components/nesa/cvo";
 import { LanguageSwitcher } from "@/components/i18n";
@@ -681,6 +681,12 @@ export function MainNav() {
                   <Link to={MAIN_NAV_CTA.href} className="flex items-center gap-2">
                     <Sparkles className="h-4 w-4 text-gold" />
                     <span>Become a Sponsor</span>
+                  </Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem asChild className="focus:bg-gold/10 focus:text-gold cursor-pointer py-3">
+                  <Link to="/faq" className="flex items-center gap-2">
+                    <MessageSquare className="h-4 w-4 text-gold" />
+                    <span>Support</span>
                   </Link>
                 </DropdownMenuItem>
               </DropdownMenuContent>
