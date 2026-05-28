@@ -622,6 +622,19 @@ export function MainNav() {
               </Link>
             </Button>
 
+            {/* Vote CTA */}
+            <Button
+              asChild
+              size="sm"
+              variant="outline"
+              className="inline-flex border-gold/40 text-gold hover:bg-gold/10 hover:text-gold bg-transparent h-9 px-2.5 xl:px-3 text-[11px] xl:text-[12px] whitespace-nowrap shrink-0"
+            >
+              <Link to="/vote" aria-label="Vote for NESA-Africa 2026">
+                <Vote className="h-3.5 w-3.5 sm:mr-1" />
+                <span className="hidden sm:inline">Vote</span>
+              </Link>
+            </Button>
+
             {/* Primary CTA: Nominate 2026 (gold pill — visible on mobile & desktop) */}
             <Button
               asChild
