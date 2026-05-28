@@ -683,6 +683,12 @@ export function MainNav() {
                     <span>Become a Sponsor</span>
                   </Link>
                 </DropdownMenuItem>
+                <DropdownMenuItem asChild className="focus:bg-gold/10 focus:text-gold cursor-pointer py-3">
+                  <Link to="/faq" className="flex items-center gap-2">
+                    <MessageSquare className="h-4 w-4 text-gold" />
+                    <span>Support</span>
+                  </Link>
+                </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
 
