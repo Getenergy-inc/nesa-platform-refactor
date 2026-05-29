@@ -12,14 +12,16 @@ export const HomepageGalleryTeaser = () => {
         <div className="flex items-end justify-between flex-wrap gap-4 mb-8">
           <div>
             <p className="inline-flex items-center gap-2 text-xs tracking-widest uppercase text-[hsl(42_85%_52%)]">
-              <Camera className="h-3.5 w-3.5" /> Moments from NESA Africa 2025 Pre-Opening of the 2026 Award
+              <Camera className="h-3.5 w-3.5" />
+              <span>Moments from NESA Africa 2025 Pre-Opening of the 2026 Award</span>
             </p>
             <h2 className="mt-2 font-serif text-3xl sm:text-4xl text-white">
               A continent in recognition
             </h2>
             <p className="mt-2 text-white/70 max-w-xl">
-              Step inside the stages, stories, and standing ovations from NESA Africa 2025
-              as the movement builds toward the 2026 Blue Garnet Awards.
+              Relive the stages, stories and standing ovations from the NESA-Africa
+              2025 pre-opening — the moments that set the stage for the Blue Garnet
+              Awards Gala on 22 October 2026 in Lagos.
             </p>
           </div>
           <Link

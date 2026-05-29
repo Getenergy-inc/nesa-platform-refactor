@@ -26,6 +26,7 @@ import { useSeason } from "@/contexts/SeasonContext";
 // Lazy below-fold
 const EcosystemCarousel = lazy(() => import("@/components/landing/EcosystemCarousel").then(m => ({ default: m.EcosystemCarousel })));
 const ImpactWrapUpSection = lazy(() => import("@/components/nesa/ImpactWrapUpSection").then(m => ({ default: m.ImpactWrapUpSection })));
+
 const InteractiveAfricaMap = lazy(() => import("@/components/nesa/InteractiveAfricaMap").then(m => ({ default: m.InteractiveAfricaMap })));
 const SponsorsSection = lazy(() => import("@/components/nesa/SponsorsSection").then(m => ({ default: m.SponsorsSection })));
 const FinalCTASection = lazy(() => import("@/components/nesa/FinalCTASection").then(m => ({ default: m.FinalCTASection })));
@@ -57,10 +58,10 @@ export function NESALandingPage() {
       <div className="min-h-screen bg-charcoal pt-14 sm:pt-16 pb-16 text-center md:text-left">
         <NESAHeader />
 
-        {/* 1. HERO — primary CTAs */}
+        {/* 1. HERO — primary CTAs (Nominate, Explore Nominees, Vote, Earn AGC) */}
         <TrophyHeroSection />
 
-        {/* 2. ECOSYSTEM TRUST — honourees/ecosystem strip moved up for fast credibility */}
+        {/* 2. ECOSYSTEM TRUST — credibility strip */}
         <TrustLogosStrip />
         <LazySection>
           <EcosystemCarousel />
@@ -69,68 +70,77 @@ export function NESALandingPage() {
         {/* 3. COUNTDOWN — Blue Garnet 2026 Gala urgency */}
         <CountdownSection />
 
-        {/* 3b. MOBILE CATEGORY DISCOVERY — horizontal swipe rail (mobile only) */}
+        {/* 4. AWARD CATEGORIES — mobile horizontal rail; desktop sees full categories on /categories */}
         <LazySection>
           <MobileCategoryRail />
         </LazySection>
 
+        {/* 5. EXISTING NOMINEES — visible on all devices per mobile-first spec */}
+        <LazySection>
+          <NomineeDiscoverySwitcher />
+        </LazySection>
 
-        {/* 4. NOMINEE DISCOVERY — desktop/tablet only; mobile gets dedicated /nominees */}
-        <div className="hidden md:block">
-          <LazySection>
-            <NomineeDiscoverySwitcher />
-          </LazySection>
-        </div>
-
-
-        {/* 5. REGIONAL PREVIEW — links to full /regions */}
+        {/* 6. REGIONAL DISCOVERY MAP — public gateway to /region/:slug */}
         <LazySection>
           <InteractiveAfricaMap />
         </LazySection>
 
-        {/* 6. MOMENTS PREVIEW — desktop/tablet only; mobile gets dedicated /gallery */}
-        <div className="hidden md:block">
-          <LazySection>
-            <HomepageGalleryTeaser />
-          </LazySection>
+        {/* 6b. Bridge note → 2026–2027 Legacy Impact pathway */}
+        <div className="container mx-auto max-w-4xl px-4 -mt-6 mb-8">
+          <div className="rounded-2xl border border-gold/25 bg-gold/5 px-5 py-4 text-center">
+            <p className="text-ivory/80 text-xs md:text-sm leading-relaxed mb-3">
+              Each region now connects to the{" "}
+              <span className="text-gold font-semibold">2026–2027 NESA-Africa Legacy Impact pathway</span>
+              {" "}— EduAid-Africa Edu-Tourism Conferences, Special Needs School
+              nominations, regional voting, GFA Wzip regional wallets, and Rebuild My
+              School Africa interventions.
+            </p>
+            <a
+              href="/eduaid-africa/rebuild-my-school"
+              className="inline-flex items-center gap-1.5 text-gold text-xs md:text-sm font-semibold hover:underline"
+            >
+              Explore the full Continental Impact Ecosystem →
+            </a>
+          </div>
         </div>
 
-        {/* 7. IMPACT WRAP-UP — EduAid storytelling */}
+        {/* 7. IMPACT PROGRAMS — EduAid storytelling */}
         <LazySection>
           <ImpactWrapUpSection />
         </LazySection>
 
-        {/* About NESA-Africa 2026 — desktop/tablet only; mobile gets dedicated /about */}
-        <div className="hidden md:block">
+        {/* 8. SPONSOR OPPORTUNITIES — visible on all devices */}
+        <LazySection>
+          <SponsorsSection />
+        </LazySection>
+
+        {/* 9. VOLUNTEER OPPORTUNITIES — visible on all devices */}
+        <LazySection>
+          <PoweredByVolunteersSection />
+        </LazySection>
+
+        {/* 10. GALLERY PREVIEW — Moments from NESA Africa 2025 Pre-Opening */}
+        <LazySection>
+          <HomepageGalleryTeaser />
+        </LazySection>
+
+        {/* 11. IMPACT HIGHLIGHTS / About — desktop/tablet only; mobile gets dedicated /about */}
+        <div className="hidden lg:block">
           <LazySection>
             <AboutNESASection />
           </LazySection>
         </div>
 
-        {/* Powered by Volunteers — desktop/tablet only; mobile gets dedicated /volunteer */}
-        <div className="hidden md:block">
-          <LazySection>
-            <PoweredByVolunteersSection />
-          </LazySection>
-        </div>
-
-        {/* Trust supporting Final CTA — desktop/tablet only; mobile gets dedicated /sponsors */}
-        <div className="hidden md:block">
-          <LazySection>
-            <SponsorsSection />
-          </LazySection>
-        </div>
-
-
-
+        {/* 12. FAQ */}
         <LazySection>
           <PageFAQSection />
         </LazySection>
 
-        {/* 8. FINAL CTA */}
+        {/* 13. FINAL CTA */}
         <LazySection>
           <FinalCTASection />
         </LazySection>
+
 
         <NESAFooter />
         <BottomPageNav />
