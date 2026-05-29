@@ -1,7 +1,7 @@
 import { ReactNode } from "react";
 import { useSeason, useStageGate } from "@/contexts/SeasonContext";
 import { STAGE_LABELS, STAGE_DESCRIPTIONS, type StageAction } from "@/config/season";
-import { Lock, Clock, Calendar } from "lucide-react";
+import { Lock, Calendar } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 
