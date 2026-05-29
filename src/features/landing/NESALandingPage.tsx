@@ -26,7 +26,7 @@ import { useSeason } from "@/contexts/SeasonContext";
 // Lazy below-fold
 const EcosystemCarousel = lazy(() => import("@/components/landing/EcosystemCarousel").then(m => ({ default: m.EcosystemCarousel })));
 const ImpactWrapUpSection = lazy(() => import("@/components/nesa/ImpactWrapUpSection").then(m => ({ default: m.ImpactWrapUpSection })));
-const InteractiveAfricaMap = lazy(() => import("@/components/nesa/InteractiveAfricaMap").then(m => ({ default: m.InteractiveAfricaMap })));
+const RegionalLegacyEcosystem = lazy(() => import("@/components/nesa/RegionalLegacyEcosystem").then(m => ({ default: m.RegionalLegacyEcosystem })));
 const SponsorsSection = lazy(() => import("@/components/nesa/SponsorsSection").then(m => ({ default: m.SponsorsSection })));
 const FinalCTASection = lazy(() => import("@/components/nesa/FinalCTASection").then(m => ({ default: m.FinalCTASection })));
 const HomepageGalleryTeaser = lazy(() => import("@/components/gallery/HomepageGalleryTeaser").then(m => ({ default: m.HomepageGalleryTeaser })));
@@ -85,7 +85,7 @@ export function NESALandingPage() {
 
         {/* 5. REGIONAL PREVIEW — links to full /regions */}
         <LazySection>
-          <InteractiveAfricaMap />
+          <RegionalLegacyEcosystem />
         </LazySection>
 
         {/* 6. MOMENTS PREVIEW — desktop/tablet only; mobile gets dedicated /gallery */}
