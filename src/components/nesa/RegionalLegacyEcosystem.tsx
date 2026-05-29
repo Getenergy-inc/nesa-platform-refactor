@@ -182,6 +182,9 @@ const REGIONS: LegacyRegion[] = [
     shortName: "North Africa",
     leadCountry: "Morocco",
     conferenceDestination: "Rabat, Morocco",
+    conferenceCountries: [
+      "Morocco","Algeria","Tunisia","Libya","Egypt","Sudan","Western Sahara",
+    ],
     theme: "Research, Innovation & Education Partnerships",
     legacyProject: "Research Libraries & Inclusive Innovation Labs",
     legacyTracks: ["Libraries", "Research Centers", "Learning Innovation"],
