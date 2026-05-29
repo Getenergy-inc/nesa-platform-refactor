@@ -31,7 +31,7 @@ import {
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 
-type Phase =
+export type Phase =
   | "Nomination Opens Soon"
   | "Verification Ongoing"
   | "Voting Opens Soon"
