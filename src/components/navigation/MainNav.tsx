@@ -62,8 +62,8 @@ function DesktopNav({ onOpenCVOMessage }: { onOpenCVOMessage: () => void }) {
   const location = useLocation();
 
   return (
-    <NavigationMenu className="flex w-full min-w-0">
-      <NavigationMenuList className="px-0 gap-0 flex-nowrap overflow-x-auto scrollbar-hide max-w-full">
+    <NavigationMenu className="hidden xl:flex w-full min-w-0">
+      <NavigationMenuList className="px-0 gap-0 flex-nowrap">
         {MAIN_NAV.map((item) => (
           <NavigationMenuItem key={item.href} className="shrink-0">
 
@@ -203,7 +203,7 @@ function MobileNav({ onOpenCVOMessage }: { onOpenCVOMessage: () => void }) {
         <Button
           variant="ghost"
           size="icon"
-          className="lg:hidden text-white hover:text-gold hover:bg-gold/10 min-h-[44px] min-w-[44px]"
+          className="xl:hidden text-white hover:text-gold hover:bg-gold/10 min-h-[44px] min-w-[44px]"
           aria-label="Open navigation menu"
           aria-expanded={open}
           aria-controls="mobile-nav-drawer"
@@ -607,18 +607,18 @@ export function MainNav() {
             <DesktopNav onOpenCVOMessage={() => setCVOMessageOpen(true)} />
           </div>
 
-          {/* Right Side: CTAs + Utility — order: Become a Sponsor → Nominate 2026 */}
+          {/* Right Side: CTAs + Utility */}
           <div className="flex items-center gap-1 xl:gap-1.5 shrink-0">
-            {/* Become a Sponsor (outline) — desktop only */}
+            {/* Vote (outline) — desktop only, kept compact so it never overlaps Nominate */}
             <Button
               asChild
-              size="sm"
               variant="outline"
-              className="hidden xl:inline-flex border-gold/40 text-gold hover:bg-gold/10 hover:text-gold h-9 px-3 text-[12px] bg-transparent whitespace-nowrap shrink-0"
+              size="sm"
+              className="hidden xl:inline-flex border-gold/40 text-gold hover:bg-gold/10 hover:text-gold h-9 px-2.5 text-[12px] bg-transparent whitespace-nowrap shrink-0"
             >
-              <Link to={MAIN_NAV_CTA.href} aria-label="Become a Sponsor of NESA-Africa 2026">
-                <Sparkles className="h-3.5 w-3.5 mr-1" />
-                {MAIN_NAV_CTA.label}
+              <Link to="/vote" aria-label="Vote in NESA-Africa 2026">
+                <Vote className="h-3.5 w-3.5 mr-1" />
+                Vote
               </Link>
             </Button>
 
@@ -634,17 +634,31 @@ export function MainNav() {
               </Link>
             </Button>
 
+            {/* Sponsor — only on very wide screens to avoid crowding */}
+            <Button
+              asChild
+              size="sm"
+              variant="outline"
+              className="hidden 2xl:inline-flex border-gold/40 text-gold hover:bg-gold/10 hover:text-gold h-9 px-3 text-[12px] bg-transparent whitespace-nowrap shrink-0"
+            >
+              <Link to={MAIN_NAV_CTA.href} aria-label="Become a Sponsor of NESA-Africa 2026">
+                <Sparkles className="h-3.5 w-3.5 mr-1" />
+                {MAIN_NAV_CTA.label}
+              </Link>
+            </Button>
+
+
             {/* Utility: Search */}
             <NavSearch />
 
-            {/* Utility: Language Selector — wide screens only to keep navbar uncluttered */}
-            <LanguageSwitcher className="hidden 2xl:flex" />
+            {/* Utility: Language Selector */}
+            <LanguageSwitcher className="hidden sm:flex" />
+
 
             {/* Utility: User Menu / Sign In (Desktop) */}
             <div className="hidden xl:block">
               <UserMenu />
             </div>
-
 
             {/* Mobile Menu */}
             <MobileNav onOpenCVOMessage={() => setCVOMessageOpen(true)} />
