@@ -652,7 +652,8 @@ export function MainNav() {
               <DropdownMenuTrigger asChild>
                 <Button
                   size="sm"
-                  className="xl:hidden inline-flex bg-gold text-charcoal hover:bg-gold/90 font-semibold h-9 px-3 text-[12px] shadow-md shadow-gold/20 shrink-0 whitespace-nowrap gap-1"
+                  variant="outline"
+                  className="xl:hidden inline-flex border-gold/40 text-gold hover:bg-gold/10 hover:text-gold bg-transparent h-9 px-2.5 text-[11px] whitespace-nowrap shrink-0 gap-1"
                   aria-label="Get Involved with NESA-Africa 2026"
                 >
                   <Trophy className="h-3.5 w-3.5" />
@@ -683,14 +684,9 @@ export function MainNav() {
                     <span>Become a Sponsor</span>
                   </Link>
                 </DropdownMenuItem>
-                <DropdownMenuItem asChild className="focus:bg-gold/10 focus:text-gold cursor-pointer py-3">
-                  <Link to="/faq" className="flex items-center gap-2">
-                    <MessageSquare className="h-4 w-4 text-gold" />
-                    <span>Support</span>
-                  </Link>
-                </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
+
 
             {/* Utility: Search */}
             <NavSearch />
