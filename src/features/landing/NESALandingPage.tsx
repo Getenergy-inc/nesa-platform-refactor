@@ -84,7 +84,25 @@ export function NESALandingPage() {
         </div>
 
 
-        {/* 5. REGIONAL PREVIEW — links to full /regions */}
+        {/* 5. REGIONAL PREVIEW — public map + region cards (gateway to /region/:slug) */}
+        <LazySection>
+          <InteractiveAfricaMap />
+        </LazySection>
+
+        {/* 5b. Bridge note → 2026–2027 Legacy Impact pathway */}
+        <div className="container mx-auto max-w-4xl px-4 -mt-6 mb-2">
+          <div className="rounded-2xl border border-gold/25 bg-gold/5 px-5 py-4 text-center">
+            <p className="text-ivory/80 text-xs md:text-sm leading-relaxed">
+              Each region now connects to the{" "}
+              <span className="text-gold font-semibold">2026–2027 NESA-Africa Legacy Impact pathway</span>
+              {" "}— including EduAid-Africa Edu-Tourism Conferences, Special Needs School
+              nominations, regional voting, GFA Wzip regional wallets, and Rebuild My
+              School Africa interventions.
+            </p>
+          </div>
+        </div>
+
+        {/* 5c. Continental Impact Ecosystem — 8 legacy hubs */}
         <LazySection>
           <RegionalLegacyEcosystem />
         </LazySection>
