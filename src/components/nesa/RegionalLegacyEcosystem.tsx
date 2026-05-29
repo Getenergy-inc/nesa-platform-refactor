@@ -40,7 +40,7 @@ export type Phase =
   | "Intervention Pending"
   | "Impact Reporting";
 
-type LegacyRegion = {
+export type LegacyRegion = {
   slug: string;
   index: number;
   name: string;
@@ -68,7 +68,7 @@ type LegacyRegion = {
   };
 };
 
-const REGIONS: LegacyRegion[] = [
+export const REGIONS: LegacyRegion[] = [
   {
     slug: "west-africa",
     index: 1,
@@ -438,7 +438,7 @@ function RegionCard({ region }: { region: LegacyRegion }) {
   );
 }
 
-const FLOW_STEPS: { icon: React.ComponentType<{ className?: string }>; title: string; copy: string }[] = [
+export const FLOW_STEPS: { icon: React.ComponentType<{ className?: string }>; title: string; copy: string }[] = [
   { icon: School, title: "Nominate a Special Needs School", copy: "Nominations open on EduAid.Africa for a defined campaign window." },
   { icon: ClipboardCheck, title: "Verify School Information", copy: "EduAid-Africa & RMSA review need level, evidence, location and relevance." },
   { icon: MapIcon, title: "Map School to Region", copy: "Each approved school is assigned to one of the eight legacy hubs." },
