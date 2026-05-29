@@ -76,6 +76,11 @@ const REGIONS: LegacyRegion[] = [
     shortName: "West Africa",
     leadCountry: "Ghana",
     conferenceDestination: "Accra, Ghana",
+    conferenceCountries: [
+      "Nigeria","Ghana","Senegal","Côte d'Ivoire","Benin","Togo","Burkina Faso",
+      "Mali","Niger","Guinea","Guinea-Bissau","Sierra Leone","Liberia","Gambia",
+      "Cape Verde","Mauritania",
+    ],
     theme: "Education Access, Teacher Development & Youth Leadership",
     legacyProject: "Rural & Special Needs School Support",
     legacyTracks: [
