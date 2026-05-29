@@ -227,6 +227,9 @@ export default function RebuildHubPage() {
             </div>
           </div>
         </section>
+        {/* ── Continental Impact Ecosystem — 8 Legacy Hubs (moved from landing page) ── */}
+        <RegionalLegacyEcosystem />
+
 
         {/* ── Compliance Notice ── */}
         <section className="py-12 border-t border-primary/10">
