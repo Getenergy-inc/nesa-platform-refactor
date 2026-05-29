@@ -157,6 +157,9 @@ const REGIONS: LegacyRegion[] = [
     shortName: "Southern Africa",
     leadCountry: "South Africa",
     conferenceDestination: "Johannesburg, South Africa",
+    conferenceCountries: [
+      "South Africa","Botswana","Namibia","Lesotho","Eswatini","Angola",
+    ],
     theme: "Skills Development & Inclusive Learning",
     legacyProject: "Accessibility & Inclusive Learning Projects",
     legacyTracks: [
