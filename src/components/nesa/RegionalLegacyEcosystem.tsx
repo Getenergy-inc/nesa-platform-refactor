@@ -131,6 +131,10 @@ const REGIONS: LegacyRegion[] = [
     shortName: "Central Africa",
     leadCountry: "Rwanda",
     conferenceDestination: "Kigali, Rwanda",
+    conferenceCountries: [
+      "Cameroon","Democratic Republic of Congo","Republic of the Congo","Gabon",
+      "Central African Republic","Chad","Equatorial Guinea","São Tomé and Príncipe",
+    ],
     theme: "Community Learning & Education Recovery",
     legacyProject: "Inclusive Education Recovery Centers",
     legacyTracks: [
