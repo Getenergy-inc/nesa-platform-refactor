@@ -230,6 +230,10 @@ const REGIONS: LegacyRegion[] = [
     shortName: "African Diaspora",
     leadCountry: "United Kingdom",
     conferenceDestination: "London, United Kingdom",
+    conferenceCountries: [
+      "United Kingdom","United States","Canada","France","Germany","Netherlands",
+      "Brazil","Caribbean","UAE","Australia",
+    ],
     theme: "Diaspora Education Investment & Knowledge Transfer",
     legacyProject: "Diaspora-Sponsored Special Needs Scholarships",
     legacyTracks: ["Scholarships", "Exchange Programs", "Education Technology"],
