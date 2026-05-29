@@ -66,10 +66,6 @@ export function StageLocked({ action }: StageLockedProps) {
             })}</span>
           </div>
         )}
-        <Button variant="outline" className="mt-2">
-          <Clock className="mr-2 h-4 w-4" />
-          Notify Me When Open
-        </Button>
       </CardContent>
     </Card>
   );
