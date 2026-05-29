@@ -182,6 +182,9 @@ export function RegionHubPage() {
           </div>
         </section>
 
+        {/* 2026–2027 Legacy Impact Section */}
+        <RegionLegacySection slug={LEGACY_SLUG_MAP[hub.slug] ?? hub.slug} />
+
         {/* Other Regions */}
         <section className="py-16 border-t border-gold/10">
           <div className="container max-w-5xl mx-auto px-4">
