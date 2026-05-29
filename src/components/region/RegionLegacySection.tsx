@@ -310,6 +310,3 @@ function Stat({ icon: Icon, value, label }: { icon: React.ComponentType<{ classN
     </div>
   );
 }
-
-// Silence unused-import warnings for icons that are referenced inline above.
-void [Award, ClipboardCheck, Coins, FileBarChart, MapIcon, Wrench];
