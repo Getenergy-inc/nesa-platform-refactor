@@ -76,6 +76,11 @@ const REGIONS: LegacyRegion[] = [
     shortName: "West Africa",
     leadCountry: "Ghana",
     conferenceDestination: "Accra, Ghana",
+    conferenceCountries: [
+      "Nigeria","Ghana","Senegal","Côte d'Ivoire","Benin","Togo","Burkina Faso",
+      "Mali","Niger","Guinea","Guinea-Bissau","Sierra Leone","Liberia","Gambia",
+      "Cape Verde","Mauritania",
+    ],
     theme: "Education Access, Teacher Development & Youth Leadership",
     legacyProject: "Rural & Special Needs School Support",
     legacyTracks: [
@@ -99,6 +104,10 @@ const REGIONS: LegacyRegion[] = [
     shortName: "East Africa",
     leadCountry: "Kenya",
     conferenceDestination: "Nairobi, Kenya",
+    conferenceCountries: [
+      "Kenya","Ethiopia","Tanzania","Uganda","Rwanda","Burundi","South Sudan",
+      "Somalia","Djibouti","Eritrea","Malawi","Mozambique","Zambia","Zimbabwe",
+    ],
     theme: "Digital Learning & STEM Education",
     legacyProject: "STEM & Assistive Tech for Special Needs Schools",
     legacyTracks: [
@@ -122,6 +131,10 @@ const REGIONS: LegacyRegion[] = [
     shortName: "Central Africa",
     leadCountry: "Rwanda",
     conferenceDestination: "Kigali, Rwanda",
+    conferenceCountries: [
+      "Cameroon","Democratic Republic of Congo","Republic of the Congo","Gabon",
+      "Central African Republic","Chad","Equatorial Guinea","São Tomé and Príncipe",
+    ],
     theme: "Community Learning & Education Recovery",
     legacyProject: "Inclusive Education Recovery Centers",
     legacyTracks: [
@@ -144,6 +157,9 @@ const REGIONS: LegacyRegion[] = [
     shortName: "Southern Africa",
     leadCountry: "South Africa",
     conferenceDestination: "Johannesburg, South Africa",
+    conferenceCountries: [
+      "South Africa","Botswana","Namibia","Lesotho","Eswatini","Angola",
+    ],
     theme: "Skills Development & Inclusive Learning",
     legacyProject: "Accessibility & Inclusive Learning Projects",
     legacyTracks: [
@@ -166,6 +182,9 @@ const REGIONS: LegacyRegion[] = [
     shortName: "North Africa",
     leadCountry: "Morocco",
     conferenceDestination: "Rabat, Morocco",
+    conferenceCountries: [
+      "Morocco","Algeria","Tunisia","Libya","Egypt","Sudan","Western Sahara",
+    ],
     theme: "Research, Innovation & Education Partnerships",
     legacyProject: "Research Libraries & Inclusive Innovation Labs",
     legacyTracks: ["Libraries", "Research Centers", "Learning Innovation"],
@@ -211,6 +230,10 @@ const REGIONS: LegacyRegion[] = [
     shortName: "African Diaspora",
     leadCountry: "United Kingdom",
     conferenceDestination: "London, United Kingdom",
+    conferenceCountries: [
+      "United Kingdom","United States","Canada","France","Germany","Netherlands",
+      "Brazil","Caribbean","UAE","Australia",
+    ],
     theme: "Diaspora Education Investment & Knowledge Transfer",
     legacyProject: "Diaspora-Sponsored Special Needs Scholarships",
     legacyTracks: ["Scholarships", "Exchange Programs", "Education Technology"],
@@ -229,6 +252,10 @@ const REGIONS: LegacyRegion[] = [
     shortName: "Friends of Africa",
     leadCountry: "United States",
     conferenceDestination: "New York, United States",
+    conferenceCountries: [
+      "United States","United Kingdom","Germany","France","Japan","China","India",
+      "Sweden","Norway","Switzerland","Qatar","Saudi Arabia",
+    ],
     theme: "Global Partnerships for African Education",
     legacyProject: "Global CSR for Special Needs School Infrastructure",
     legacyTracks: ["CSR Education Funds", "School Support", "Scholarship Programs"],
