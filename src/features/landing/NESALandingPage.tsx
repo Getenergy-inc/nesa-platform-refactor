@@ -84,12 +84,10 @@ export function NESALandingPage() {
         </div>
 
 
-        {/* 5. MOMENTS PREVIEW — desktop/tablet only; mobile gets dedicated /gallery */}
-        <div className="hidden md:block">
-          <LazySection>
-            <HomepageGalleryTeaser />
-          </LazySection>
-        </div>
+        {/* 5. MOMENTS PREVIEW — visible on all devices */}
+        <LazySection>
+          <HomepageGalleryTeaser />
+        </LazySection>
 
         {/* 6. REGIONAL PREVIEW — public map + region cards (gateway to /region/:slug) */}
         <LazySection>
