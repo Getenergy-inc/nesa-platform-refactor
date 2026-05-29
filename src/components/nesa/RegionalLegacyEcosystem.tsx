@@ -252,6 +252,10 @@ const REGIONS: LegacyRegion[] = [
     shortName: "Friends of Africa",
     leadCountry: "United States",
     conferenceDestination: "New York, United States",
+    conferenceCountries: [
+      "United States","United Kingdom","Germany","France","Japan","China","India",
+      "Sweden","Norway","Switzerland","Qatar","Saudi Arabia",
+    ],
     theme: "Global Partnerships for African Education",
     legacyProject: "Global CSR for Special Needs School Infrastructure",
     legacyTracks: ["CSR Education Funds", "School Support", "Scholarship Programs"],
