@@ -602,32 +602,36 @@ export function MainNav() {
             </div>
           </Link>
 
-          {/* Desktop Navigation (6 main items) */}
-          <div className="flex-1 min-w-0">
+          {/* Desktop Navigation — only at lg+ (tablets get hamburger) */}
+          <div className="hidden lg:flex flex-1 min-w-0">
             <DesktopNav onOpenCVOMessage={() => setCVOMessageOpen(true)} />
           </div>
 
-          {/* Right Side: CTAs + Utility — order: Become a Sponsor → Nominate 2026 */}
+          {/* Mobile spacer pushes CTAs right when desktop nav is hidden */}
+          <div className="flex-1 lg:hidden" />
+
+          {/* Right Side: CTAs + Utility — order: Become a Sponsor → Vote → Nominate 2026 */}
           <div className="flex items-center gap-1 xl:gap-1.5 shrink-0">
-            {/* Become a Sponsor (outline) — desktop only */}
+            {/* Become a Sponsor (outline) — desktop/large-tablet */}
             <Button
               asChild
               size="sm"
               variant="outline"
-              className="hidden xl:inline-flex border-gold/40 text-gold hover:bg-gold/10 hover:text-gold h-9 px-3 text-[12px] bg-transparent whitespace-nowrap shrink-0"
+              className="hidden lg:inline-flex border-gold/40 text-gold hover:bg-gold/10 hover:text-gold h-9 px-3 text-[12px] bg-transparent whitespace-nowrap shrink-0"
             >
               <Link to={MAIN_NAV_CTA.href} aria-label="Become a Sponsor of NESA-Africa 2026">
                 <Sparkles className="h-3.5 w-3.5 mr-1" />
-                {MAIN_NAV_CTA.label}
+                <span className="hidden xl:inline">{MAIN_NAV_CTA.label}</span>
+                <span className="xl:hidden">Sponsor</span>
               </Link>
             </Button>
 
-            {/* Vote CTA — desktop only (mobile uses Get Involved dropdown) */}
+            {/* Vote CTA — desktop/large-tablet */}
             <Button
               asChild
               size="sm"
               variant="outline"
-              className="hidden xl:inline-flex border-gold/40 text-gold hover:bg-gold/10 hover:text-gold bg-transparent h-9 px-2.5 xl:px-3 text-[11px] xl:text-[12px] whitespace-nowrap shrink-0"
+              className="hidden lg:inline-flex border-gold/40 text-gold hover:bg-gold/10 hover:text-gold bg-transparent h-9 px-2.5 xl:px-3 text-[11px] xl:text-[12px] whitespace-nowrap shrink-0"
             >
               <Link to="/vote" aria-label="Vote for NESA-Africa 2026">
                 <Vote className="h-3.5 w-3.5 sm:mr-1" />
@@ -635,69 +639,42 @@ export function MainNav() {
               </Link>
             </Button>
 
-            {/* Primary CTA: Nominate 2026 — desktop only */}
+            {/* Primary CTA: Nominate 2026 — desktop/large-tablet */}
             <Button
               asChild
               size="sm"
-              className="hidden xl:inline-flex bg-gold text-charcoal hover:bg-gold/90 font-semibold h-9 px-2.5 xl:px-3 text-[11px] xl:text-[12px] shadow-md shadow-gold/20 shrink-0 whitespace-nowrap"
+              className="hidden lg:inline-flex bg-gold text-charcoal hover:bg-gold/90 font-semibold h-9 px-2.5 xl:px-3 text-[11px] xl:text-[12px] shadow-md shadow-gold/20 shrink-0 whitespace-nowrap"
             >
               <Link to="/nominate" aria-label="Nominate for NESA-Africa 2026">
                 <Trophy className="h-3.5 w-3.5 sm:mr-1" />
-                <span>Nominate 2026</span>
+                <span className="hidden xl:inline">Nominate 2026</span>
+                <span className="xl:hidden">Nominate</span>
               </Link>
             </Button>
 
-            {/* Mobile-only: Get Involved dropdown (replaces overlapping CTAs below xl) */}
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <Button
-                  size="sm"
-                  variant="outline"
-                  className="xl:hidden inline-flex border-gold/40 text-gold hover:bg-gold/10 hover:text-gold bg-transparent h-9 px-2.5 text-[11px] whitespace-nowrap shrink-0 gap-1"
-                  aria-label="Get Involved with NESA-Africa 2026"
-                >
-                  <Trophy className="h-3.5 w-3.5" />
-                  <span>Get Involved</span>
-                  <ChevronDown className="h-3.5 w-3.5" />
-                </Button>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent
-                align="end"
-                sideOffset={8}
-                className="w-56 bg-charcoal border-gold/30 text-white"
-              >
-                <DropdownMenuItem asChild className="focus:bg-gold/10 focus:text-gold cursor-pointer py-3">
-                  <Link to="/nominate" className="flex items-center gap-2">
-                    <Trophy className="h-4 w-4 text-gold" />
-                    <span className="font-semibold">Nominate 2026</span>
-                  </Link>
-                </DropdownMenuItem>
-                <DropdownMenuItem asChild className="focus:bg-gold/10 focus:text-gold cursor-pointer py-3">
-                  <Link to="/vote" className="flex items-center gap-2">
-                    <Vote className="h-4 w-4 text-gold" />
-                    <span>Vote</span>
-                  </Link>
-                </DropdownMenuItem>
-                <DropdownMenuItem asChild className="focus:bg-gold/10 focus:text-gold cursor-pointer py-3">
-                  <Link to={MAIN_NAV_CTA.href} className="flex items-center gap-2">
-                    <Sparkles className="h-4 w-4 text-gold" />
-                    <span>Become a Sponsor</span>
-                  </Link>
-                </DropdownMenuItem>
-              </DropdownMenuContent>
-            </DropdownMenu>
-
+            {/* Mobile/tablet (<lg): single Nominate CTA — drawer handles the rest */}
+            <Button
+              asChild
+              size="sm"
+              className="lg:hidden inline-flex bg-gold text-charcoal hover:bg-gold/90 font-semibold h-9 px-3 text-[11px] shadow-md shadow-gold/20 shrink-0 whitespace-nowrap"
+            >
+              <Link to="/nominate" aria-label="Nominate for NESA-Africa 2026">
+                <Trophy className="h-3.5 w-3.5 mr-1" />
+                <span>Nominate</span>
+              </Link>
+            </Button>
 
             {/* Utility: Search */}
             <NavSearch />
 
-            {/* Utility: Language Selector — wide screens only to keep navbar uncluttered */}
+            {/* Utility: Language Selector — wide screens only */}
             <LanguageSwitcher className="hidden 2xl:flex" />
 
             {/* Utility: User Menu / Sign In (Desktop) */}
-            <div className="hidden xl:block">
+            <div className="hidden lg:block">
               <UserMenu />
             </div>
+
 
 
             {/* Mobile Menu */}
