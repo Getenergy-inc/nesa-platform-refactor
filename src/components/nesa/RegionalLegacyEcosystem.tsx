@@ -104,6 +104,10 @@ const REGIONS: LegacyRegion[] = [
     shortName: "East Africa",
     leadCountry: "Kenya",
     conferenceDestination: "Nairobi, Kenya",
+    conferenceCountries: [
+      "Kenya","Ethiopia","Tanzania","Uganda","Rwanda","Burundi","South Sudan",
+      "Somalia","Djibouti","Eritrea","Malawi","Mozambique","Zambia","Zimbabwe",
+    ],
     theme: "Digital Learning & STEM Education",
     legacyProject: "STEM & Assistive Tech for Special Needs Schools",
     legacyTracks: [
