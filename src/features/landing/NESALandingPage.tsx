@@ -26,7 +26,7 @@ import { useSeason } from "@/contexts/SeasonContext";
 // Lazy below-fold
 const EcosystemCarousel = lazy(() => import("@/components/landing/EcosystemCarousel").then(m => ({ default: m.EcosystemCarousel })));
 const ImpactWrapUpSection = lazy(() => import("@/components/nesa/ImpactWrapUpSection").then(m => ({ default: m.ImpactWrapUpSection })));
-const RegionalLegacyEcosystem = lazy(() => import("@/components/nesa/RegionalLegacyEcosystem").then(m => ({ default: m.RegionalLegacyEcosystem })));
+
 const InteractiveAfricaMap = lazy(() => import("@/components/nesa/InteractiveAfricaMap").then(m => ({ default: m.InteractiveAfricaMap })));
 const SponsorsSection = lazy(() => import("@/components/nesa/SponsorsSection").then(m => ({ default: m.SponsorsSection })));
 const FinalCTASection = lazy(() => import("@/components/nesa/FinalCTASection").then(m => ({ default: m.FinalCTASection })));
@@ -89,23 +89,25 @@ export function NESALandingPage() {
           <InteractiveAfricaMap />
         </LazySection>
 
-        {/* 5b. Bridge note → 2026–2027 Legacy Impact pathway */}
-        <div className="container mx-auto max-w-4xl px-4 -mt-6 mb-2">
+        {/* 5b. Bridge note → 2026–2027 Legacy Impact pathway (full ecosystem lives on /eduaid-africa/rebuild-my-school and /region/:slug) */}
+        <div className="container mx-auto max-w-4xl px-4 -mt-6 mb-8">
           <div className="rounded-2xl border border-gold/25 bg-gold/5 px-5 py-4 text-center">
-            <p className="text-ivory/80 text-xs md:text-sm leading-relaxed">
+            <p className="text-ivory/80 text-xs md:text-sm leading-relaxed mb-3">
               Each region now connects to the{" "}
               <span className="text-gold font-semibold">2026–2027 NESA-Africa Legacy Impact pathway</span>
-              {" "}— including EduAid-Africa Edu-Tourism Conferences, Special Needs School
+              {" "}— EduAid-Africa Edu-Tourism Conferences, Special Needs School
               nominations, regional voting, GFA Wzip regional wallets, and Rebuild My
               School Africa interventions.
             </p>
+            <a
+              href="/eduaid-africa/rebuild-my-school"
+              className="inline-flex items-center gap-1.5 text-gold text-xs md:text-sm font-semibold hover:underline"
+            >
+              Explore the full Continental Impact Ecosystem →
+            </a>
           </div>
         </div>
 
-        {/* 5c. Continental Impact Ecosystem — 8 legacy hubs */}
-        <LazySection>
-          <RegionalLegacyEcosystem />
-        </LazySection>
 
         {/* 6. MOMENTS PREVIEW — desktop/tablet only; mobile gets dedicated /gallery */}
         <div className="hidden md:block">
