@@ -16,7 +16,9 @@ import {
   REBUILD_STATUS_FLOW,
 } from "@/config/rebuildConfig";
 import { SPECIAL_NEEDS_TRACKS } from "@/config/specialNeedsCategories";
+import { RegionalLegacyEcosystem } from "@/components/nesa/RegionalLegacyEcosystem";
 import africaMapImg from "@/assets/africa-map-silhouette.png";
+
 
 export default function RebuildHubPage() {
   const [expandedTrack, setExpandedTrack] = useState<string | null>(null);
