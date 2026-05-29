@@ -85,7 +85,7 @@ export function NESALandingPage() {
 
         {/* 5. REGIONAL PREVIEW — links to full /regions */}
         <LazySection>
-          <InteractiveAfricaMap />
+          <RegionalLegacyEcosystem />
         </LazySection>
 
         {/* 6. MOMENTS PREVIEW — desktop/tablet only; mobile gets dedicated /gallery */}
