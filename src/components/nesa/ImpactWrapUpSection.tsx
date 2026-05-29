@@ -77,26 +77,29 @@ export function ImpactWrapUpSection() {
                   </div>
                 </div>
                 <h3 className="font-display text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-4 leading-tight">
-                  From Recognition to <span className="text-gold">Regional Transformation</span>
+                  From Recognition to <span className="text-gold">Regional School Intervention</span>
                 </h3>
                 <p className="text-white/80 text-sm sm:text-base md:text-lg leading-relaxed mb-7">
-                  Through <span className="text-gold font-semibold">EduAid Africa</span> and{" "}
+                  Through <span className="text-gold font-semibold">EduAid-Africa</span> and{" "}
                   <span className="text-gold font-semibold">Rebuild My School Africa</span>, the
-                  NESA-Africa 2026 Awards transition into measurable education impact across
-                  Africa and the diaspora between <span className="text-gold font-semibold">October 2026 and October 2027</span>.
+                  NESA-Africa 2026 season connects award recognition to practical school
+                  intervention between <span className="text-gold font-semibold">October 2026 and October 2027</span>.
+                  Special needs school nominations open on EduAid.Africa, verified schools are
+                  organized by region, regional voting opens, GFA Wzip regional funding portals
+                  activate, and selected schools receive infrastructure, accessibility, learning
+                  materials, teacher support and inclusive education projects.
                 </p>
 
                 <div className="grid sm:grid-cols-2 gap-3 mb-8">
                   {[
-                    { icon: Building2, label: "School Infrastructure Support" },
-                    { icon: School, label: "Special Needs Education Support" },
-                    { icon: Heart, label: "Girls Education" },
-                    { icon: HandCoins, label: "Scholarships & Learning Access" },
-                    { icon: MapPin, label: "Teacher Development" },
-                    { icon: Globe2, label: "Education Technology" },
-                    { icon: School, label: "Community Libraries" },
-                    { icon: Heart, label: "Inclusive Education" },
-                    { icon: MapPin, label: "Educational Tourism & Cultural Exchange" },
+                    { icon: School, label: "Special Needs School Grants" },
+                    { icon: Heart, label: "Inclusive Education Intervention" },
+                    { icon: MapPin, label: "Regional School Voting" },
+                    { icon: Building2, label: "Education Infrastructure Crowdfunding" },
+                    { icon: HandCoins, label: "CSR for Education Contributions" },
+                    { icon: Globe2, label: "GFA Wzip Regional Wallets" },
+                    { icon: MapPin, label: "EduAid-Africa Edu-Tourism Conferences" },
+                    { icon: School, label: "Rebuild My School Africa 2027 Projects" },
                   ].map((item) => (
                     <div
                       key={item.label}
