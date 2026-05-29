@@ -84,12 +84,19 @@ export function NESALandingPage() {
         </div>
 
 
-        {/* 5. REGIONAL PREVIEW — public map + region cards (gateway to /region/:slug) */}
+        {/* 5. MOMENTS PREVIEW — desktop/tablet only; mobile gets dedicated /gallery */}
+        <div className="hidden md:block">
+          <LazySection>
+            <HomepageGalleryTeaser />
+          </LazySection>
+        </div>
+
+        {/* 6. REGIONAL PREVIEW — public map + region cards (gateway to /region/:slug) */}
         <LazySection>
           <InteractiveAfricaMap />
         </LazySection>
 
-        {/* 5b. Bridge note → 2026–2027 Legacy Impact pathway (full ecosystem lives on /eduaid-africa/rebuild-my-school and /region/:slug) */}
+        {/* 6b. Bridge note → 2026–2027 Legacy Impact pathway */}
         <div className="container mx-auto max-w-4xl px-4 -mt-6 mb-8">
           <div className="rounded-2xl border border-gold/25 bg-gold/5 px-5 py-4 text-center">
             <p className="text-ivory/80 text-xs md:text-sm leading-relaxed mb-3">
@@ -106,14 +113,6 @@ export function NESALandingPage() {
               Explore the full Continental Impact Ecosystem →
             </a>
           </div>
-        </div>
-
-
-        {/* 6. MOMENTS PREVIEW — desktop/tablet only; mobile gets dedicated /gallery */}
-        <div className="hidden md:block">
-          <LazySection>
-            <HomepageGalleryTeaser />
-          </LazySection>
         </div>
 
         {/* 7. IMPACT WRAP-UP — EduAid storytelling */}
