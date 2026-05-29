@@ -77,20 +77,26 @@ export function ImpactWrapUpSection() {
                   </div>
                 </div>
                 <h3 className="font-display text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-4 leading-tight">
-                  From Recognition to <span className="text-gold">Real Impact</span>
+                  From Recognition to <span className="text-gold">Regional Transformation</span>
                 </h3>
                 <p className="text-white/80 text-sm sm:text-base md:text-lg leading-relaxed mb-7">
                   Through <span className="text-gold font-semibold">EduAid Africa</span> and{" "}
                   <span className="text-gold font-semibold">Rebuild My School Africa</span>, the
-                  2026 season connects recognition to practical education intervention.
+                  NESA-Africa 2026 Awards transition into measurable education impact across
+                  Africa and the diaspora between <span className="text-gold font-semibold">October 2026 and October 2027</span>.
                 </p>
 
                 <div className="grid sm:grid-cols-2 gap-3 mb-8">
                   {[
-                    { icon: School, label: "Special school grants support (2026–2027)" },
-                    { icon: HandCoins, label: "Education infrastructure crowdfunding" },
-                    { icon: Building2, label: "CSR for Education contributions" },
-                    { icon: MapPin, label: "Regional school interventions across Africa" },
+                    { icon: Building2, label: "School Infrastructure Support" },
+                    { icon: School, label: "Special Needs Education Support" },
+                    { icon: Heart, label: "Girls Education" },
+                    { icon: HandCoins, label: "Scholarships & Learning Access" },
+                    { icon: MapPin, label: "Teacher Development" },
+                    { icon: Globe2, label: "Education Technology" },
+                    { icon: School, label: "Community Libraries" },
+                    { icon: Heart, label: "Inclusive Education" },
+                    { icon: MapPin, label: "Educational Tourism & Cultural Exchange" },
                   ].map((item) => (
                     <div
                       key={item.label}
