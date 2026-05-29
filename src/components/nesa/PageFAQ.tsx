@@ -157,7 +157,7 @@ export function FloatingFAQButton() {
         initial={{ opacity: 0, scale: 0.8 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ delay: 1.2, duration: 0.3 }}
-        className="fixed right-3 sm:right-5 bottom-24 lg:bottom-20 z-[60]"
+        className="fixed right-3 sm:right-5 bottom-56 lg:bottom-20 z-[60]"
       >
         <div className="relative group">
           <Button
