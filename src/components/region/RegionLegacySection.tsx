@@ -7,17 +7,11 @@ import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import {
   Accessibility,
-  ArrowRight,
-  Award,
   BookOpen,
-  ClipboardCheck,
-  Coins,
-  FileBarChart,
   Globe2,
   GraduationCap,
   HandCoins,
   Heart,
-  Map as MapIcon,
   Plane,
   School,
   ShieldCheck,
@@ -25,7 +19,6 @@ import {
   Users,
   Vote,
   Wallet,
-  Wrench,
   MapPin,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
