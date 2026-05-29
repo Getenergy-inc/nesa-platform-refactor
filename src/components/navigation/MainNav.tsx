@@ -45,7 +45,7 @@ import {
 import { cn } from "@/lib/utils";
 import { useAuth } from "@/contexts/AuthContext";
 import { MAIN_NAV, MAIN_NAV_CTA, MAIN_NAV_MOBILE_ORDER, MOBILE_NAV, type NavItem } from "@/config/navigation";
-import { Sparkles } from "lucide-react";
+import { Sparkles, MessageSquare } from "lucide-react";
 import nesaStamp from "@/assets/nesa-stamp.jpeg";
 import { CVOFlashMessage, CVOMessageTrigger } from "@/components/nesa/cvo";
 import { LanguageSwitcher } from "@/components/i18n";
@@ -62,14 +62,14 @@ function DesktopNav({ onOpenCVOMessage }: { onOpenCVOMessage: () => void }) {
   const location = useLocation();
 
   return (
-    <NavigationMenu className="hidden xl:flex w-full min-w-0">
-      <NavigationMenuList className="px-1 gap-0.5">
+    <NavigationMenu className="flex w-full min-w-0">
+      <NavigationMenuList className="px-0 gap-0 flex-nowrap overflow-x-auto scrollbar-hide max-w-full">
         {MAIN_NAV.map((item) => (
           <NavigationMenuItem key={item.href} className="shrink-0">
 
             {item.children ? (
               <>
-                <NavigationMenuTrigger className="bg-transparent text-white/90 hover:text-gold hover:bg-gold/10 data-[state=open]:bg-gold/10 data-[state=open]:text-gold h-8 xl:h-9 px-2 xl:px-3 text-[11px] xl:text-sm leading-none">
+                <NavigationMenuTrigger className="bg-transparent text-white/90 hover:text-gold hover:bg-gold/10 data-[state=open]:bg-gold/10 data-[state=open]:text-gold h-8 xl:h-9 px-1.5 xl:px-2 text-[11px] xl:text-[13px] leading-none whitespace-nowrap">
                   {/* {item.icon && <item.icon className="h-3.5 w-3.5 mr-1.5" />} */}
                   {item.label}
                 </NavigationMenuTrigger>
@@ -138,7 +138,7 @@ function DesktopNav({ onOpenCVOMessage }: { onOpenCVOMessage: () => void }) {
                   to={item.href}
                   className={cn(
                     navigationMenuTriggerStyle(),
-                    "bg-transparent text-white/90 hover:text-gold hover:bg-gold/10 h-8 xl:h-9 px-2 xl:px-3 text-[11px] xl:text-sm leading-none",
+                    "bg-transparent text-white/90 hover:text-gold hover:bg-gold/10 h-8 xl:h-9 px-1.5 xl:px-2 text-[11px] xl:text-[13px] leading-none whitespace-nowrap",
                     location.pathname === item.href && "text-gold bg-gold/10",
                   )}
                 >
@@ -203,7 +203,7 @@ function MobileNav({ onOpenCVOMessage }: { onOpenCVOMessage: () => void }) {
         <Button
           variant="ghost"
           size="icon"
-          className="xl:hidden text-white hover:text-gold hover:bg-gold/10 min-h-[44px] min-w-[44px]"
+          className="lg:hidden text-white hover:text-gold hover:bg-gold/10 min-h-[44px] min-w-[44px]"
           aria-label="Open navigation menu"
           aria-expanded={open}
           aria-controls="mobile-nav-drawer"
@@ -602,67 +602,80 @@ export function MainNav() {
             </div>
           </Link>
 
-          {/* Desktop Navigation (6 main items) */}
-          <div className="flex-1 min-w-0">
+          {/* Desktop Navigation — only at lg+ (tablets get hamburger) */}
+          <div className="hidden lg:flex flex-1 min-w-0">
             <DesktopNav onOpenCVOMessage={() => setCVOMessageOpen(true)} />
           </div>
 
-          {/* Right Side: CTAs + Utility */}
-          <div className="flex items-center gap-1 sm:gap-2 shrink-0">
-            {/* Secondary CTAs: Nominate + Vote (outline) */}
-            <Button
-              asChild
-              variant="outline"
-              size="sm"
-              className="hidden 2xl:inline-flex border-gold/40 text-gold hover:bg-gold/10 hover:text-gold h-8 xl:h-9 px-3 text-[11px] xl:text-sm bg-transparent"
-            >
-              <Link to="/nominate" aria-label="Nominate for NESA-Africa 2026">Nominate</Link>
-            </Button>
-            <Button
-              asChild
-              variant="outline"
-              size="sm"
-              className="hidden 2xl:inline-flex border-gold/40 text-gold hover:bg-gold/10 hover:text-gold h-8 xl:h-9 px-3 text-[11px] xl:text-sm bg-transparent"
-            >
-              <Link to="/vote" aria-label="Vote in NESA-Africa 2026">Vote</Link>
-            </Button>
+          {/* Mobile spacer pushes CTAs right when desktop nav is hidden */}
+          <div className="flex-1 lg:hidden" />
 
-            {/* Primary CTA: Nominate 2026 (compact pill — visible on mobile) */}
+          {/* Right Side: CTAs + Utility — order: Become a Sponsor → Vote → Nominate 2026 */}
+          <div className="flex items-center gap-1 xl:gap-1.5 shrink-0">
+            {/* Become a Sponsor (outline) — desktop/large-tablet */}
             <Button
               asChild
               size="sm"
-              className="inline-flex bg-gold text-charcoal hover:bg-gold/90 font-semibold h-9 px-2.5 sm:px-3 xl:px-4 text-[11px] sm:text-xs xl:text-sm shadow-md shadow-gold/20 shrink-0"
+              variant="outline"
+              className="hidden lg:inline-flex border-gold/40 text-gold hover:bg-gold/10 hover:text-gold h-9 px-3 text-[12px] bg-transparent whitespace-nowrap shrink-0"
             >
-              <Link to="/nominate" aria-label="Nominate for NESA-Africa 2026">
-                <Trophy className="h-3.5 w-3.5 sm:mr-1.5" />
-                <span className="hidden sm:inline">Nominate 2026</span>
+              <Link to={MAIN_NAV_CTA.href} aria-label="Become a Sponsor of NESA-Africa 2026">
+                <Sparkles className="h-3.5 w-3.5 mr-1" />
+                <span className="hidden xl:inline">{MAIN_NAV_CTA.label}</span>
+                <span className="xl:hidden">Sponsor</span>
               </Link>
             </Button>
 
-            {/* Secondary CTA: Become a Sponsor — desktop only */}
+            {/* Vote CTA — desktop/large-tablet */}
             <Button
               asChild
               size="sm"
               variant="outline"
-              className="hidden xl:inline-flex border-gold/40 text-gold hover:bg-gold/10 hover:text-gold h-8 xl:h-9 px-3 xl:px-4 text-[11px] xl:text-sm bg-transparent"
+              className="hidden lg:inline-flex border-gold/40 text-gold hover:bg-gold/10 hover:text-gold bg-transparent h-9 px-2.5 xl:px-3 text-[11px] xl:text-[12px] whitespace-nowrap shrink-0"
             >
-              <Link to={MAIN_NAV_CTA.href} aria-label="Become a Sponsor of NESA-Africa 2026">
-                <Sparkles className="h-3.5 w-3.5 mr-1.5" />
-                {MAIN_NAV_CTA.label}
+              <Link to="/vote" aria-label="Vote for NESA-Africa 2026">
+                <Vote className="h-3.5 w-3.5 sm:mr-1" />
+                <span>Vote</span>
+              </Link>
+            </Button>
+
+            {/* Primary CTA: Nominate 2026 — desktop/large-tablet */}
+            <Button
+              asChild
+              size="sm"
+              className="hidden lg:inline-flex bg-gold text-charcoal hover:bg-gold/90 font-semibold h-9 px-2.5 xl:px-3 text-[11px] xl:text-[12px] shadow-md shadow-gold/20 shrink-0 whitespace-nowrap"
+            >
+              <Link to="/nominate" aria-label="Nominate for NESA-Africa 2026">
+                <Trophy className="h-3.5 w-3.5 sm:mr-1" />
+                <span className="hidden xl:inline">Nominate 2026</span>
+                <span className="xl:hidden">Nominate</span>
+              </Link>
+            </Button>
+
+            {/* Mobile/tablet (<lg): single Nominate CTA — drawer handles the rest */}
+            <Button
+              asChild
+              size="sm"
+              className="lg:hidden inline-flex bg-gold text-charcoal hover:bg-gold/90 font-semibold h-9 px-3 text-[11px] shadow-md shadow-gold/20 shrink-0 whitespace-nowrap"
+            >
+              <Link to="/nominate" aria-label="Nominate for NESA-Africa 2026">
+                <Trophy className="h-3.5 w-3.5 mr-1" />
+                <span>Nominate</span>
               </Link>
             </Button>
 
             {/* Utility: Search */}
             <NavSearch />
 
-            {/* Utility: Language Selector */}
-            <LanguageSwitcher className="hidden sm:flex" />
-
+            {/* Utility: Language Selector — wide screens only */}
+            <LanguageSwitcher className="hidden 2xl:flex" />
 
             {/* Utility: User Menu / Sign In (Desktop) */}
-            <div className="hidden xl:block">
+            <div className="hidden lg:block">
               <UserMenu />
             </div>
+
+
 
             {/* Mobile Menu */}
             <MobileNav onOpenCVOMessage={() => setCVOMessageOpen(true)} />

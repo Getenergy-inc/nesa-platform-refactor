@@ -6,6 +6,22 @@ import { Button } from "@/components/ui/button";
 import { NESAHeader } from "@/components/nesa/NESAHeader";
 import { NESAFooter } from "@/components/nesa/NESAFooter";
 import { getRegionHubBySlug, REGION_HUBS } from "@/config/regionHubs";
+import { RegionLegacySection } from "@/components/region/RegionLegacySection";
+
+// Map public region-hub slugs to the 8 legacy hub slugs used in RegionalLegacyEcosystem.
+const LEGACY_SLUG_MAP: Record<string, string> = {
+  "west-africa": "west-africa",
+  "east-africa": "east-africa",
+  "central-africa": "central-africa",
+  "southern-africa": "southern-africa",
+  "north-africa": "north-africa",
+  "indian-ocean-islands": "indian-ocean-islands",
+  "diaspora": "diaspora",
+  "friends-of-africa": "friends-of-africa",
+  // Sub-regions roll up into the closest legacy hub
+  "sahel": "west-africa",
+  "horn-of-africa": "east-africa",
+};
 
 // Dynamic image imports
 const regionImages: Record<string, string> = {};
@@ -165,6 +181,9 @@ export function RegionHubPage() {
             </motion.div>
           </div>
         </section>
+
+        {/* 2026–2027 Legacy Impact Section */}
+        <RegionLegacySection slug={LEGACY_SLUG_MAP[hub.slug] ?? hub.slug} />
 
         {/* Other Regions */}
         <section className="py-16 border-t border-gold/10">

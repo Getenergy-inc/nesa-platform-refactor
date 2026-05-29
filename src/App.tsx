@@ -136,6 +136,8 @@ import Rebuild from "./pages/Rebuild";
 import RebuildHubPage from "./pages/eduaid/RebuildHubPage";
 import RebuildRegionalPortal from "./pages/eduaid/RebuildRegionalPortal";
 import Judges from "./pages/Judges";
+import JudgesDirectory from "./pages/judges/JudgesDirectory";
+import JudgeProfile from "./pages/judges/JudgeProfile";
 import Install from "./pages/Install";
 
 // Judge Portal Pages
@@ -1584,6 +1586,22 @@ const App = () => (
                     element={
                       <WithLayout>
                         <Judges />
+                      </WithLayout>
+                    }
+                  />
+                  <Route
+                    path="/judges/directory"
+                    element={
+                      <WithLayout>
+                        <JudgesDirectory />
+                      </WithLayout>
+                    }
+                  />
+                  <Route
+                    path="/judges/:slug"
+                    element={
+                      <WithLayout>
+                        <JudgeProfile />
                       </WithLayout>
                     }
                   />
