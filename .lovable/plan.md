@@ -1,76 +1,148 @@
-# NESA-Africa Mobile-First Refactor — Delivery Plan
+# NESA-Africa Judge Ecosystem — Build Plan
 
-You picked the maximum scope (Phases 1+2, profile pages + Sophia voice, mobile up to 1024px). That's realistically **4 sequential PRs**, not one. Shipping it as a single mega-change would break the live site. Here's the plan — approve and I start on Pass 1 immediately.
+Mirrors the existing Volunteer profile/dashboard pattern. Charcoal/Gold branding, mobile-first, RLS-secured.
 
-## Global breakpoint change (applies to all passes)
+## Phase 1 — Database Foundation (one migration)
 
-Switch the "mobile" cutoff from `md` (768px) to `lg` (1024px) everywhere:
-- `NESALandingPage.tsx`: all `hidden md:block` wrappers → `hidden lg:block`
-- `PublicLayout.tsx`: `pb-20 lg:pb-16` (already correct)
-- `MobileBottomNav`, `MobileStickyNominateCTA`, `MobileAGCWallet`: render up to `lg`
-- `Header`: hamburger up to `lg`, desktop nav from `lg` up
+New tables in `public`. All follow the project's GRANT + RLS pattern.
 
-## Pass 1 — Navigation + Hero + Homepage hierarchy
+- **`judges`** — public-facing profile data
+  - `id`, `user_id` (FK `auth.users`, nullable until linked), `slug` (unique), `full_name`, `email` (private), `phone` (private), `photo_url`
+  - `country_residence`, `country_origin`, `region`
+  - `professional_title`, `organization`, `bio`
+  - `expertise_areas text[]`, `languages text[]`, `social_links jsonb`
+  - `verification_status` (`unverified` / `verified` / `featured`)
+  - `judge_status` enum (`applied`, `under_review`, `approved`, `rejected`, `active`, `inactive`, `suspended`, `alumni`)
+  - `profile_visibility` (`public` / `unlisted` / `private`)
+  - `public_contribution_statement`, `contribution_score int`
+  - `created_at`, `updated_at`
 
-**Navigation (`MainNav.tsx`)**
-- Visible hamburger ≤1024px, full-screen drawer (not slide-in popover)
-- Accordion sections for: About · Awards · Impact Programs · Engage · Media · Support
-- Pinned bottom CTAs in drawer: "Become a Sponsor" (gold outline) + "Nominate 2026" (gold filled)
-- 44px min touch targets; z-index audit (drawer z-50, Sophia z-40, sticky CTA z-30)
-- Fix dropdown clipping with `Portal` + `collisionPadding`
+- **`judge_applications`** — application submissions
+  - `judge_id` (FK), `application_status`, `reason_for_applying`, `preferred_categories text[]`, `documents jsonb`
+  - `confidentiality_accepted bool`, `conflict_policy_accepted bool`, `profile_display_consent bool`
+  - `submitted_at`, `reviewed_at`, `reviewed_by`
 
-**Hero (`TrophyHeroSection` / `NESAHero`)**
-- Mobile: cut hero height ~30%, shorter headline, single descriptive line
-- Stacked CTA order: Nominate 2026 (primary) → Explore Nominees → Vote → Earn AGC
-- Remove triple "Vote — Gold / Vote — Blue Garnet" buttons on mobile (consolidate to one "Vote" → /vote with tier picker)
-- Lazy-load backdrop image, add `fetchpriority="high"` preload
+- **`judge_assignments`** — categories/nominees assigned to a judge
+  - `judge_id`, `category_id`, `subcategory_id`, `nominee_id`, `assigned_by`, `due_date`, `status` enum (`not_started`, `in_progress`, `submitted`, `returned_for_revision`, `finalized`)
 
-**Homepage order (`NESALandingPage.tsx`)** — match your spec exactly:
-1. Hero → 2. CTAs (in hero) → 3. Trust strip + Ecosystem → 4. Countdown → 5. **Award Categories** (new mobile rail position) → 6. Existing Nominees → 7. Regional Map → 8. Impact Programs (ImpactWrapUp) → 9. Sponsors → 10. Volunteers → 11. Gallery (Moments) → 12. Impact highlights → 13. FAQ → 14. Final CTA
+- **`judge_reviews`** — scoring + comments (PRIVATE)
+  - `judge_id`, `nominee_id`, `category_id`, `score numeric`, `comments text`, `evidence_review jsonb`, `recommendation`, `status`, `submitted_at`
 
-**Overlay audit**: Sophia floating button moves to `bottom-24` on mobile to clear MobileBottomNav and sticky Nominate CTA. Document final z-index stack.
+- **`judge_conflicts`** — COI declarations (PRIVATE)
+  - `judge_id`, `nominee_id`, `conflict_type`, `description`, `status`, `declared_at`
 
-## Pass 2 — Mobile card system + category/nominee browsing
+- **`judge_activity_logs`** — audit trail
+  - `judge_id`, `action`, `metadata jsonb`, `created_at`
 
-- Unify card primitives: `MobileSwipeCard` wrapper with snap-x scroll, consistent h-[280px], CTA always visible at bottom
-- Refactor: award cards, nominee cards, region cards, volunteer cards, sponsor cards through this primitive
-- Category cards show: image · title · description · nominee count · Explore + (Vote OR Update Impact) CTAs
-- **Bottom-sheet filters** for `/nominees`: Sheet from shadcn, filter chips, applied count badge on filter button
-- Lazy-load nominee images with native `loading="lazy"` + blur placeholder
+**RBAC** — extend `app_role` enum with `'judge'` if not present (reuse existing `has_role()`). Add admin-only check via existing `has_role(uid, 'admin')`.
 
-## Pass 3 — Volunteer + Judge public profile pages
+**RLS summary:**
+- `judges`: anon + auth can `SELECT` where `profile_visibility='public' AND judge_status IN ('approved','active','alumni')`; judges can `UPDATE` their own row; admins full access. `email`/`phone` exposed only via auth + ownership/admin (handled by a `judges_public` view with `security_invoker=true` that masks PII).
+- `judge_applications`, `judge_reviews`, `judge_conflicts`, `judge_assignments`, `judge_activity_logs`: judges read only their own rows; admins full; `anon` no access.
 
-- New routes: `/volunteers/:slug` and `/judges/:slug` (public-facing profiles)
-- Profile shell: hero photo, name, role, country, expertise tags, bio, social links, contribution badges, referral link, "Get in touch" CTA
-- Directory pages (`/volunteers`, `/judges`) get mobile card grid with search + region filter
-- Dashboards (private) stay as follow-up — out of scope for this pass
+**Storage:** reuse `contributor-photos` bucket for judge photos (already public).
 
-## Pass 4 — Sophia AI mobile bottom sheet + voice
+**Triggers:**
+- `judge_before_insert` → auto-generate slug from `full_name` (reuse `slugify()` pattern from volunteers).
+- `handle_updated_at` on all tables.
 
-**Requires ELEVENLABS_API_KEY** — I'll request it before starting this pass.
+## Phase 2 — Navigation Changes
 
-- Convert Sophia from floating chat panel to mobile bottom sheet (Sheet with `side="bottom"`, `h-[85dvh]`)
-- Quick-action chips at top: How do I nominate? · How do I vote? · Earn AGC · Volunteer · Sponsor · Tickets · Nominate a School
-- Voice: ElevenLabs Conversational Agent via `@elevenlabs/react` `useConversation`, WebRTC token from edge function `elevenlabs-conversation-token`
-- Language picker: en/fr/sw/ha/yo (uses i18n)
-- Hidden when keyboard open; never overlaps CTAs
+`src/config/navigation.ts`:
+- **About dropdown**: replace existing single "Meet Our Judges" with two items:
+  - `Meet the Judges` → `/judges`
+  - `Governance & Jury Process` → `/about/governance`
+- **Engage dropdown**: rename existing "Meet Our Judges" entry → `Apply to be a Judge` → `/apply/judge`. Keep all other Engage items.
 
-## Technical details
+## Phase 3 — Public Pages
 
-- **Files touched (estimated 30–40)**: `src/components/navigation/MainNav.tsx`, `src/components/nesa/TrophyHeroSection.tsx`, `src/components/nesa/NESAHero.tsx`, `src/components/nesa/HeroCTAStack.tsx`, `src/features/landing/NESALandingPage.tsx`, `src/components/landing/MobileCategoryRail.tsx`, `src/components/nominees/*`, `src/components/cards/MobileSwipeCard.tsx` (new), `src/pages/volunteers/[slug].tsx` (new), `src/pages/judges/[slug].tsx` (new), `src/components/sophia/*` (refactor), `supabase/functions/elevenlabs-conversation-token/index.ts` (new), routes registration.
-- **No DB migrations** in Passes 1–3. Pass 4 may add an `agent_conversations` log table if you want voice transcripts persisted (otherwise ephemeral).
-- **No breaking API changes**; all changes are presentation-layer.
-- **Tests**: existing Playwright suites (`navbar-overlap.spec.ts`, `voting-responsive.spec.ts`) should keep passing; I'll update breakpoint assertions.
+- **`/judges`** (`src/pages/judges/JudgesDirectory.tsx`)
+  - Hero with the three CTAs (Apply, Governance, Categories) — black/gold
+  - Filter bar (country, region, expertise, category, status, language) — mobile collapses to bottom-sheet
+  - Grid of `JudgeCard` (photo, name, country flag, title, org, expertise chips, verification badge, social icons, View Profile)
+  - Governance note panel at bottom
+  - Welcome / hashtags block
+  - SEO: `LocalizedSEO`, JSON-LD `Person` list
 
-## What I will NOT do without explicit follow-up
+- **`/judges/:slug`** (`src/pages/judges/JudgeProfile.tsx`)
+  - Hero: photo, name, title, org, country residence/origin, verification badge
+  - Tabs / stacked sections: Biography, Expertise, Assigned Categories, Public Contribution Statement, COI Transparency Note, Social Links, Share
+  - Replaces existing single `Judges.tsx` page (which becomes a redirect)
 
-- Rewrite forms (nomination/volunteer/judge/sponsor/school) — you listed these but Pass 1–4 is already huge. Forms come in Pass 5.
-- Build private dashboards for volunteers/judges with contribution history & referral analytics.
-- Performance audit + Lighthouse 90+ tuning (image compression, route-level code splits beyond what exists, font subsetting) — Pass 6.
-- Full accessibility sweep with screen-reader testing — incremental during each pass, dedicated pass last.
-- Analytics event additions beyond what `trackEvent` already covers.
+- **`/apply/judge`** (`src/pages/judges/JudgeApply.tsx`)
+  - Multi-step form (4 steps) using existing nomination form patterns
+  - Zod validation, draft autosave via `localStorage`, file upload via `nomination-evidence` bucket
+  - On submit: insert into `judges` (status=`applied`, visibility=`private`) + `judge_applications`. Sign-in gated.
 
-## What I need from you to start
+## Phase 4 — Private Judge Dashboard
 
-1. **Approve this plan** → I start Pass 1 immediately (no further questions).
-2. For Pass 4: confirm you want voice (needs ElevenLabs key + ~$5–20/mo usage) or text-only Sophia.
+Under `src/pages/judge/` with `RequireAuth` + `RequireRole('judge')`.
+
+- **`/judge/dashboard`** — overview cards (assigned count, reviews pending/done, COI status, calendar snippet, notifications)
+- **`/judge/profile`** — edit name, bio, photo, expertise, social links, visibility toggle
+- **`/judge/assigned-categories`** — list of categories/subcategories assigned with progress
+- **`/judge/reviews`** — table of nominees to review + per-nominee scoring drawer (score 0-20 per rubric pillar, comments, evidence checklist, recommendation, submit)
+- **`/judge/conflict-declaration`** — declare COI against a nominee/category with type + description
+- **`/judge/settings`** — notification prefs, language, account
+
+Use existing `dashboard-navigation.ts` pattern. Add `JUDGE_DASHBOARD_NAV` to `src/config/navigation.ts`.
+
+## Phase 5 — Data Layer
+
+- **`src/lib/api/judges.api.ts`** — typed wrappers around `supabase` calls:
+  - `listPublicJudges(filters)`, `getJudgeBySlug(slug)`, `submitApplication(payload)`
+  - `getMyJudgeProfile()`, `updateMyJudgeProfile(payload)`
+  - `listMyAssignments()`, `getReviewForNominee(id)`, `submitReview(payload)`
+  - `declareConflict(payload)`, `listMyConflicts()`
+- **`src/hooks/useJudges.ts`** — TanStack Query hooks
+- Reuse existing `useAuth()` for role gating
+
+## Phase 6 — Admin Tooling
+
+Add to existing admin area (`src/pages/admin/`):
+- `JudgeApplicationsReview` — list pending applications, approve/reject with reason → sets `judge_status` + `verification_status`, sends notification
+- `JudgeAssignments` — bulk assign categories/nominees to approved judges
+- `JudgeDirectory` admin view — toggle visibility, suspend, verify, mark featured
+
+## Phase 7 — Analytics
+
+`trackEvent()` calls:
+- `judge_application_start`, `judge_application_step_complete`, `judge_application_submit`
+- `judge_profile_view` (slug), `judge_social_link_click` (slug, platform)
+- `judge_dashboard_login`, `judge_review_submit`, `judge_conflict_declared`
+- `judge_assignment_progress`
+
+## Privacy / Security Guarantees
+
+- Public view never returns `email`, `phone`, raw scores, COI details
+- A `judges_public` SQL view (security_invoker, masked PII) feeds the directory
+- All review/conflict tables: anon=no access, authenticated=own rows only, admin=all
+- Audit log writes via SECURITY DEFINER trigger on review submit + conflict declare
+
+## Mobile-First Notes
+
+- Directory: 2-column grid <sm becomes 1-column with horizontal swipe rail option
+- Filters open as `Sheet` bottom-sheet on mobile
+- Scoring screen: one nominee per screen, sticky submit bar, autosave
+- All tap targets ≥44px, follows existing charcoal/gold tokens
+
+---
+
+## Execution Order in this turn
+
+If you approve, I will execute in this order across separate turns (one DB migration is destructive-blocking, so phases gate each other):
+
+1. **Phase 1 migration** (your approval required by Lovable Cloud before it runs)
+2. **Phase 2 navbar + Phase 3 public pages** (after migration succeeds)
+3. **Phase 4 private dashboard + Phase 5 data layer**
+4. **Phase 6 admin + Phase 7 analytics**
+
+Each phase is one assistant turn so you can review/test before the next ships.
+
+## Open questions before I start
+
+1. **Role enum**: should I add `'judge'` to the existing `app_role` enum (alongside the existing `role_code` system), or piggyback on the existing jury/NRC role you may already use? I'll grep to confirm before the migration.
+2. **Existing data**: there's an existing `src/pages/Judges.tsx` and `src/hooks/useJuryData.ts` plus `jury_assignments` table referenced in `compute_blue_garnet_results`. Should the new `judges` system **replace** the existing jury system, **coexist** alongside it (jury = internal scoring panel; judges = broader public-facing reviewer pool), or **merge** (rename `jury_*` → `judge_*`)?
+3. **Application gating**: Sign-in required to apply, or allow anonymous submission with email-only contact?
+
+Once you answer #2 in particular, I'll write the migration in the next turn. #2 determines whether this is additive or a rename, which materially changes the SQL.
