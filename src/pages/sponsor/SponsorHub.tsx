@@ -65,6 +65,19 @@ export default function SponsorHub() {
         </div>
       </section>
 
+      {/* Sponsor firewall — governance prominence */}
+      <section className="bg-charcoal pt-10 md:pt-12">
+        <div className="container mx-auto px-4">
+          <SponsorFirewallBanner />
+        </div>
+      </section>
+
+      {/* 4 Governance Pillars */}
+      <SponsorPillarsSection />
+
+      {/* 5% RMSA Legacy Fund */}
+      <LegacyFundCallout />
+
       {/* Categories grid */}
       <section className="bg-charcoal py-14 md:py-20">
         <div className="container mx-auto px-4">
