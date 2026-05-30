@@ -173,11 +173,58 @@ function MobileNav({ onOpenCVOMessage }: { onOpenCVOMessage: () => void }) {
 
 
 
+  // Refs to panels + triggers for keyboard focus management
+  const panelRefs = useRef<Record<string, HTMLDivElement | null>>({});
+  const triggerRefs = useRef<Record<string, HTMLButtonElement | null>>({});
+  const [pendingFocus, setPendingFocus] = useState<string | null>(null);
+
   const toggleExpanded = (href: string) => {
-    setExpandedItems((prev) =>
-      prev.includes(href) ? prev.filter((h) => h !== href) : [...prev, href],
-    );
+    setExpandedItems((prev) => {
+      const isOpen = prev.includes(href);
+      if (isOpen) return prev.filter((h) => h !== href);
+      setPendingFocus(href);
+      return [...prev, href];
+    });
   };
+
+  // After a panel expands, move focus to its first link
+  useEffect(() => {
+    if (!pendingFocus) return;
+    if (!expandedItems.includes(pendingFocus)) return;
+    const panel = panelRefs.current[pendingFocus];
+    const firstLink = panel?.querySelector<HTMLElement>(
+      'a, button, [tabindex]:not([tabindex="-1"])',
+    );
+    firstLink?.focus();
+    setPendingFocus(null);
+  }, [pendingFocus, expandedItems]);
+
+  const handleTriggerKeyDown = (
+    href: string,
+  ) => (e: ReactKeyboardEvent<HTMLButtonElement>) => {
+    // ArrowDown opens (if collapsed) and focuses first item; if already open, jump in
+    if (e.key === "ArrowDown" && !e.altKey) {
+      e.preventDefault();
+      if (!expandedItems.includes(href)) {
+        setPendingFocus(href);
+        setExpandedItems((prev) => [...prev, href]);
+      } else {
+        const panel = panelRefs.current[href];
+        panel?.querySelector<HTMLElement>('a, button')?.focus();
+      }
+    }
+  };
+
+  const handlePanelKeyDown = (
+    href: string,
+  ) => (e: ReactKeyboardEvent<HTMLDivElement>) => {
+    if (e.key === "Escape") {
+      e.preventDefault();
+      setExpandedItems((prev) => prev.filter((h) => h !== href));
+      triggerRefs.current[href]?.focus();
+    }
+  };
+
 
   const handleLinkClick = () => {
     setOpen(false);
