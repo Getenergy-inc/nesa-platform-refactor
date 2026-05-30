@@ -8,6 +8,9 @@ import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
 import { SPONSOR_CATEGORIES, getSponsorCategory } from "@/config/sponsorCategories";
 import { trackEvent } from "@/lib/analytics";
+import { SponsorFirewallBanner } from "@/components/governance/SponsorFirewallBanner";
+import { LegacyFundCallout } from "@/components/sponsor/LegacyFundCallout";
+import { DonorTrustPanel } from "@/components/governance/DonorTrustPanel";
 
 export default function SponsorCategoryPage() {
   const { slug } = useParams<{ slug: string }>();
@@ -86,6 +89,13 @@ export default function SponsorCategoryPage() {
               </Button>
             </div>
           </motion.div>
+        </div>
+      </section>
+
+      {/* Sponsor firewall — governance disclosure */}
+      <section className="bg-charcoal pt-8 md:pt-10">
+        <div className="container mx-auto px-4">
+          <SponsorFirewallBanner variant="compact" />
         </div>
       </section>
 
