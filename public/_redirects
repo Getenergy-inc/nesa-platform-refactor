@@ -1,0 +1,109 @@
+# NESA-Africa — Netlify redirects
+# Legacy → canonical 301 redirects (must come BEFORE the SPA fallback)
+
+# Sponsorship / Partner / Endorsement aliases
+/become-a-sponsor          /sponsor                       301
+/sponsorship               /sponsor                       301
+/sponsorships              /sponsor                       301
+/engage/sponsor            /sponsor                       301
+/engage/partner            /partners                      301
+/engage/endorse            /endorse-nesa                  301
+/engage/media-partner      /partners                      301
+/engage/exhibit            /partners                      301
+/engage/volunteer          /volunteer                     301
+/engage/volunteers         /volunteers                    301
+/engage/community-chapter  /chapters                      301
+/engage/store              /shop                          301
+/engage/contact-partnerships /partners                    301
+/endorsement               /endorse-nesa                  301
+/endorse                   /endorse-nesa                  301
+
+# Support aliases
+/faqs                      /support/faqs                  301
+/support/faqs              /faq                           301
+/support/contact           /contact                       301
+/support/help-desk         /contact                       301
+/support/technical-support /contact                       301
+/support/nomination-support /contact                      301
+/support/voting-support    /contact                       301
+/support/sponsorship-support /contact                     301
+/support                   /faq                           301
+
+# About aliases
+/about/people              /about                         301
+/about/team                /about                         301
+/about/judges              /judges                        301
+/about/volunteers          /volunteers                    301
+/about/advisory-board      /about/governance              301
+/about/ambassadors         /ambassadors                   301
+/meet-our-judges           /judges                        301
+/meet-our-volunteers       /volunteers                    301
+/judges                    /judges                        200
+
+# Awards aliases
+/award-categories                       /categories                          301
+/awards/categories                      /categories                          301
+/awards/blue-garnet-categories          /awards/blue-garnet                  301
+/awards/platinum-certificate-categories /awards/platinum                     301
+/awards/influencers-education-impact    /awards/influencer-education         301
+/awards/eligibility-criteria            /guidelines/nominees                 301
+/awards/nomination-process              /nominate                            301
+/awards/voting-judging-integrity        /guidelines/voters                   301
+
+# Impact Programs
+/impact-programs                              /impact                                       301
+/impact-programs/eduaid-africa                /eduaid                                       301
+/impact-programs/rebuild-my-school-africa     /rebuild                                      301
+/impact-programs/post-award-legacy            /rebuild                                      301
+/impact-programs/webinars                     /media/webinars                               301
+/impact-programs/community-chapters           /chapters                                     301
+/impact-programs/digital-learning-inclusion   /impact                                       301
+/eduaid-africa                                /eduaid                                       301
+/rebuild-my-school-africa                     /rebuild                                      301
+
+# Media aliases
+/media/nesa-africa-tv     /media/tv          301
+/nesa-tv                  /media/tv          301
+/nesa-africa-tv           /media/tv          301
+/media/nesa-tv            /media/tv          301
+/media/news               /media             301
+/media/press-releases     /media             301
+/media/media-kit          /media             301
+/media/gallery            /media             301
+/media/interviews-features /media            301
+/media/accreditation      /media             301
+
+# Engage / Store / Misc
+/merchandise              /shop              301
+/store                    /shop              301
+/buy-merchandise          /shop              301
+
+# Auth aliases
+/auth                     /login             301
+/auth/login               /login             301
+/auth/register            /register          301
+/sign-in                  /login             301
+/signin                   /login             301
+/sign-up                  /register          301
+/signup                   /register          301
+/get-started              /register          301
+
+# Legal aliases
+/privacy-policy           /policies          301
+/terms                    /policies          301
+/cookie-policy            /policies          301
+/policies/privacy         /policies          301
+/policies/terms           /policies          301
+/policies/coi             /policies          301
+
+# Other legacy
+/jury                     /judges            301
+/music                    /media             301
+/dashboard/wallet         /wallet            301
+/earn-credits             /earn-agc          301
+/volunteer-bod            /volunteer         301
+/language                 /                  301
+
+# SPA fallback — MUST be last. Sends every unmatched URL to index.html
+# so React Router can render the route (including a branded 404).
+/*                        /index.html        200

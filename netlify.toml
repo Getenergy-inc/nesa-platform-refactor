@@ -1,0 +1,16 @@
+# NESA-Africa — Netlify build & SPA routing config
+# The `public/_redirects` file is the source of truth for redirects;
+# this block is a safety net so SPA routing still works if that file
+# is ever missing from the publish directory.
+
+[build]
+  publish = "dist"
+  command = "npm run build"
+
+# SPA fallback for client-side routing (React Router).
+# Any unmatched URL is served index.html with a 200 so the app can
+# render the correct route (including the custom 404 page).
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
