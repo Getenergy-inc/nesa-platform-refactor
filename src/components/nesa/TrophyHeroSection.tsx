@@ -46,7 +46,6 @@ export function TrophyHeroSection() {
             alt="NESA-Africa award stage backdrop"
             className="h-full w-full object-cover object-[50%_35%] sm:object-center"
             decoding="async"
-            fetchPriority="high"
           />
         </picture>
         <div className="absolute inset-0 bg-charcoal/55" />
