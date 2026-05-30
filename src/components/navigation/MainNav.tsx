@@ -204,13 +204,14 @@ function MobileNav({ onOpenCVOMessage }: { onOpenCVOMessage: () => void }) {
         <Button
           variant="ghost"
           size="icon"
-          className="lg:hidden text-white hover:text-gold hover:bg-gold/10 min-h-[44px] min-w-[44px]"
+          className="lg:hidden text-white hover:text-gold hover:bg-gold/10 min-h-[48px] min-w-[48px]"
           aria-label="Open navigation menu"
           aria-expanded={open}
           aria-controls="mobile-nav-drawer"
         >
           <Menu className="h-6 w-6" />
         </Button>
+
       </SheetTrigger>
       <SheetContent
         id="mobile-nav-drawer"
