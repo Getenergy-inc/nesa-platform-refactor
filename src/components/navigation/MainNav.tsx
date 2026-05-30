@@ -318,12 +318,14 @@ function MobileNav({ onOpenCVOMessage }: { onOpenCVOMessage: () => void }) {
                   {item.children ? (
                     <div>
                       <button
+                        ref={(el) => { triggerRefs.current[item.href] = el; }}
                         onClick={() => toggleExpanded(item.href)}
+                        onKeyDown={handleTriggerKeyDown(item.href)}
                         aria-expanded={expandedItems.includes(item.href)}
                         aria-controls={`mnav-sub-${item.href}`}
                         className={cn(
                           "flex items-center justify-between w-full px-4 py-4 text-left transition-colors touch-manipulation min-h-[48px]",
-                          "hover:bg-gold/5 active:bg-gold/10",
+                          "hover:bg-gold/5 active:bg-gold/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold/60 focus-visible:ring-inset",
                           expandedItems.includes(item.href)
                             ? "text-gold bg-gold/5"
                             : "text-white/90",
@@ -346,6 +348,11 @@ function MobileNav({ onOpenCVOMessage }: { onOpenCVOMessage: () => void }) {
                       </button>
                       <div
                         id={`mnav-sub-${item.href}`}
+                        ref={(el) => { panelRefs.current[item.href] = el; }}
+                        role="region"
+                        aria-label={`${item.label} submenu`}
+                        hidden={!expandedItems.includes(item.href)}
+                        onKeyDown={handlePanelKeyDown(item.href)}
                         className={cn(
                           "overflow-hidden transition-all duration-200",
                           expandedItems.includes(item.href)
@@ -353,6 +360,7 @@ function MobileNav({ onOpenCVOMessage }: { onOpenCVOMessage: () => void }) {
                             : "max-h-0",
                         )}
                       >
+
                         <div className="bg-charcoal-light/30 py-2">
                           {/* CVO Message for About menu in mobile */}
                           {item.label === "About" && (
