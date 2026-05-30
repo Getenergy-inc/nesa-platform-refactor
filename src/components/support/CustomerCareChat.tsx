@@ -79,8 +79,10 @@ export function CustomerCareChat() {
                   <Bot className="h-5 w-5" />
                 </div>
                 <div>
-                  <h3 className="font-semibold">NESA Support</h3>
-                  <p className="text-xs text-primary-foreground/80">Ask me anything</p>
+                  <h3 className="font-semibold leading-tight">Sophia</h3>
+                  <p className="text-[11px] text-primary-foreground/80 leading-tight">
+                    Official NESA-Africa Support Assistant
+                  </p>
                 </div>
               </div>
               <div className="flex items-center gap-1">
