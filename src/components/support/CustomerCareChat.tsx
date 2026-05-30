@@ -79,8 +79,10 @@ export function CustomerCareChat() {
                   <Bot className="h-5 w-5" />
                 </div>
                 <div>
-                  <h3 className="font-semibold">NESA Support</h3>
-                  <p className="text-xs text-primary-foreground/80">Ask me anything</p>
+                  <h3 className="font-semibold leading-tight">Sophia</h3>
+                  <p className="text-[11px] text-primary-foreground/80 leading-tight">
+                    Official NESA-Africa Support Assistant
+                  </p>
                 </div>
               </div>
               <div className="flex items-center gap-1">
@@ -111,11 +113,34 @@ export function CustomerCareChat() {
                   <div className="h-16 w-16 rounded-full bg-primary/10 flex items-center justify-center mb-4">
                     <Bot className="h-8 w-8 text-primary" />
                   </div>
-                  <h4 className="font-semibold text-foreground mb-2">Welcome to SCEF Support!</h4>
-                  <p className="text-sm text-muted-foreground mb-4">
-                    I'm here to help you with nominations, voting, Afrigold Points, volunteering, membership, and more.
+                  <h4 className="font-semibold text-foreground mb-1">Hi, I'm Sophia</h4>
+                  <p className="text-xs text-muted-foreground mb-3">
+                    Official NESA-Africa Support Assistant
                   </p>
-                  <div className="flex flex-wrap gap-2 justify-center">
+                  <p className="text-sm text-muted-foreground mb-4">
+                    I can help with nominations, voting, sponsorship, volunteering,
+                    judging, local chapters, RMSA and EduAid-Africa.
+                  </p>
+                  <div className="flex flex-wrap gap-1.5 justify-center mb-4">
+                    {[
+                      "Nominations",
+                      "Voting",
+                      "Sponsorship",
+                      "Volunteering",
+                      "Judging",
+                      "Local Chapters",
+                      "RMSA",
+                      "EduAid",
+                    ].map((cap) => (
+                      <span
+                        key={cap}
+                        className="text-[10px] px-2 py-0.5 rounded-full border border-primary/20 bg-primary/5 text-primary"
+                      >
+                        {cap}
+                      </span>
+                    ))}
+                  </div>
+                  <div className="flex flex-wrap gap-2 justify-center mb-4">
                     {[
                       "How do I nominate someone?",
                       "How does voting work?",
@@ -133,6 +158,14 @@ export function CustomerCareChat() {
                       </button>
                     ))}
                   </div>
+                  <a
+                    href="https://wa.me/2348109765897"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-[11px] text-muted-foreground hover:text-primary underline-offset-2 hover:underline"
+                  >
+                    Need a human? Escalate on WhatsApp: +234 810 976 5897
+                  </a>
                 </div>
               ) : (
                 <div className="space-y-4">
