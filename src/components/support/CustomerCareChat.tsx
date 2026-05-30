@@ -54,9 +54,10 @@ export function CustomerCareChat() {
             <Button
               onClick={() => setIsOpen(true)}
               size="lg"
+              aria-label="Chat with Sophia Support"
               className="h-14 w-14 rounded-full bg-primary hover:bg-primary/90 shadow-lg hover:shadow-xl transition-all"
             >
-              <MessageCircle className="h-6 w-6" />
+              <MessageCircle className="h-6 w-6" aria-hidden="true" />
             </Button>
           </motion.div>
         )}
