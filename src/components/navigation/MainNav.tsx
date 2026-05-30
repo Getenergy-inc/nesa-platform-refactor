@@ -571,7 +571,45 @@ export const MobileBottomNav = forwardRef<HTMLElement, object>(
 MobileBottomNav.displayName = "MobileBottomNav";
 
 // ============================================================================
-// MAIN NAVIGATION HEADER
+// LEVEL 1 — GOVERNANCE / QUICK-ACCESS BAR (desktop only, SCEF-style)
+// ============================================================================
+
+function GovernanceBar() {
+  const { user } = useAuth();
+  return (
+    <div className="hidden lg:block w-full bg-charcoal-light/60 border-b border-gold/10">
+      <div className="container max-w-screen-2xl flex h-9 items-center justify-between gap-4 px-4 text-[11px] xl:text-[12px]">
+        {/* Left: stakeholder links */}
+        <nav aria-label="Governance and stakeholder navigation" className="flex items-center gap-3 xl:gap-4 overflow-x-auto scrollbar-hide">
+          {GOVERNANCE_NAV.map((item) => (
+            <Link
+              key={item.href}
+              to={item.href}
+              className="text-white/70 hover:text-gold whitespace-nowrap transition-colors"
+            >
+              {item.label}
+            </Link>
+          ))}
+        </nav>
+        {/* Right: utility */}
+        <div className="flex items-center gap-3 xl:gap-4 shrink-0">
+          <Link to="/wallet" className="text-white/70 hover:text-gold whitespace-nowrap transition-colors flex items-center gap-1">
+            <Wallet className="h-3.5 w-3.5" /> Wallet
+          </Link>
+          {!user && (
+            <Link to="/login" className="text-white/70 hover:text-gold whitespace-nowrap transition-colors">
+              Login
+            </Link>
+          )}
+          <LanguageSwitcher className="flex" />
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// ============================================================================
+// MAIN NAVIGATION HEADER (Level 1 + Level 2)
 // ============================================================================
 
 export function MainNav() {
@@ -580,8 +618,12 @@ export function MainNav() {
   return (
     <>
       <header className="fixed top-0 left-0 right-0 z-50 w-full bg-charcoal/95 backdrop-blur-md border-b border-gold/20 overflow-x-clip">
+        {/* LEVEL 1 — Governance / Quick Access Bar */}
+        <GovernanceBar />
+
+        {/* LEVEL 2 — Primary Navigation */}
         <div className="container flex h-14 sm:h-16 items-center gap-2 px-3 sm:px-4 max-w-screen-2xl">
-          {/* Brand Area: Logo + NESA-Africa 2026 + motto */}
+          {/* Brand */}
           <Link
             to="/"
             className="flex items-center shrink-0 gap-2"
@@ -602,103 +644,57 @@ export function MainNav() {
             </div>
           </Link>
 
-          {/* Desktop Navigation (6 main items) */}
+          {/* Desktop Navigation */}
           <div className="flex-1 min-w-0">
             <DesktopNav onOpenCVOMessage={() => setCVOMessageOpen(true)} />
           </div>
 
-          {/* Right Side: CTAs + Utility — order: Become a Sponsor → Nominate 2026 */}
-          <div className="flex items-center gap-1 xl:gap-1.5 shrink-0">
-            {/* Become a Sponsor (outline) — desktop only */}
+          {/* Right Side: only 2 primary CTAs (Nominate 2026, Become a Sponsor) + utility */}
+          <div className="flex items-center gap-1.5 xl:gap-2 shrink-0">
+            {/* CTA 1 — Become a Sponsor (outline) */}
             <Button
               asChild
               size="sm"
               variant="outline"
               className="hidden xl:inline-flex border-gold/40 text-gold hover:bg-gold/10 hover:text-gold h-9 px-3 text-[12px] bg-transparent whitespace-nowrap shrink-0"
             >
-              <Link to={MAIN_NAV_CTA.href} aria-label="Become a Sponsor of NESA-Africa 2026">
+              <Link to="/sponsor" aria-label="Become a Sponsor of NESA-Africa 2026">
                 <Sparkles className="h-3.5 w-3.5 mr-1" />
-                {MAIN_NAV_CTA.label}
+                Become a Sponsor
               </Link>
             </Button>
 
-            {/* Vote CTA — desktop only (mobile uses Get Involved dropdown) */}
+            {/* CTA 2 — Nominate 2026 (filled, primary) */}
             <Button
               asChild
               size="sm"
-              variant="outline"
-              className="hidden xl:inline-flex border-gold/40 text-gold hover:bg-gold/10 hover:text-gold bg-transparent h-9 px-2.5 xl:px-3 text-[11px] xl:text-[12px] whitespace-nowrap shrink-0"
-            >
-              <Link to="/vote" aria-label="Vote for NESA-Africa 2026">
-                <Vote className="h-3.5 w-3.5 sm:mr-1" />
-                <span>Vote</span>
-              </Link>
-            </Button>
-
-            {/* Primary CTA: Nominate 2026 — desktop only */}
-            <Button
-              asChild
-              size="sm"
-              className="hidden xl:inline-flex bg-gold text-charcoal hover:bg-gold/90 font-semibold h-9 px-2.5 xl:px-3 text-[11px] xl:text-[12px] shadow-md shadow-gold/20 shrink-0 whitespace-nowrap"
+              className="hidden xl:inline-flex bg-gold text-charcoal hover:bg-gold/90 font-semibold h-9 px-3 text-[12px] shadow-md shadow-gold/20 shrink-0 whitespace-nowrap"
             >
               <Link to="/nominate" aria-label="Nominate for NESA-Africa 2026">
-                <Trophy className="h-3.5 w-3.5 sm:mr-1" />
-                <span>Nominate 2026</span>
+                <Trophy className="h-3.5 w-3.5 mr-1" />
+                Nominate 2026
               </Link>
             </Button>
 
-            {/* Mobile-only: Get Involved dropdown (replaces overlapping CTAs below xl) */}
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <Button
-                  size="sm"
-                  variant="outline"
-                  className="xl:hidden inline-flex border-gold/40 text-gold hover:bg-gold/10 hover:text-gold bg-transparent h-9 px-2.5 text-[11px] whitespace-nowrap shrink-0 gap-1"
-                  aria-label="Get Involved with NESA-Africa 2026"
-                >
-                  <Trophy className="h-3.5 w-3.5" />
-                  <span>Get Involved</span>
-                  <ChevronDown className="h-3.5 w-3.5" />
-                </Button>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent
-                align="end"
-                sideOffset={8}
-                className="w-56 bg-charcoal border-gold/30 text-white"
-              >
-                <DropdownMenuItem asChild className="focus:bg-gold/10 focus:text-gold cursor-pointer py-3">
-                  <Link to="/nominate" className="flex items-center gap-2">
-                    <Trophy className="h-4 w-4 text-gold" />
-                    <span className="font-semibold">Nominate 2026</span>
-                  </Link>
-                </DropdownMenuItem>
-                <DropdownMenuItem asChild className="focus:bg-gold/10 focus:text-gold cursor-pointer py-3">
-                  <Link to="/vote" className="flex items-center gap-2">
-                    <Vote className="h-4 w-4 text-gold" />
-                    <span>Vote</span>
-                  </Link>
-                </DropdownMenuItem>
-                <DropdownMenuItem asChild className="focus:bg-gold/10 focus:text-gold cursor-pointer py-3">
-                  <Link to={MAIN_NAV_CTA.href} className="flex items-center gap-2">
-                    <Sparkles className="h-4 w-4 text-gold" />
-                    <span>Become a Sponsor</span>
-                  </Link>
-                </DropdownMenuItem>
-              </DropdownMenuContent>
-            </DropdownMenu>
-
+            {/* Mobile / tablet primary CTA — single button, no overlap */}
+            <Button
+              asChild
+              size="sm"
+              className="xl:hidden inline-flex bg-gold text-charcoal hover:bg-gold/90 font-semibold h-9 px-3 text-[11px] shadow-md shadow-gold/20 shrink-0 whitespace-nowrap"
+            >
+              <Link to="/nominate" aria-label="Nominate for NESA-Africa 2026">
+                <Trophy className="h-3.5 w-3.5 mr-1" />
+                Nominate
+              </Link>
+            </Button>
 
             {/* Utility: Search */}
             <NavSearch />
 
-            {/* Utility: Language Selector — wide screens only to keep navbar uncluttered */}
-            <LanguageSwitcher className="hidden 2xl:flex" />
-
-            {/* Utility: User Menu / Sign In (Desktop) */}
+            {/* Utility: User Menu (Desktop) */}
             <div className="hidden xl:block">
               <UserMenu />
             </div>
-
 
             {/* Mobile Menu */}
             <MobileNav onOpenCVOMessage={() => setCVOMessageOpen(true)} />
