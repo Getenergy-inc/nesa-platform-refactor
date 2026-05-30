@@ -38,7 +38,6 @@ export function NESAHero() {
             alt="NESA Africa 2026 Award Stage"
             className="h-full w-full object-cover object-[50%_35%] sm:object-center"
             decoding="async"
-            fetchPriority="high"
           />
         </picture>
         
