@@ -1,11 +1,21 @@
 // Runs before `vite dev` and `vite build` (predev/prebuild hooks); writes public/sitemap.xml.
-// Includes Phase 1–4 award + nominee routes.
+//
+// Goals:
+//   • Only emit URLs that correspond to REAL, public, canonical SPA routes.
+//   • Never emit URLs that are themselves 301/Navigate redirect SOURCES
+//     (those targets cause duplicate-content + redirect-chain warnings in
+//     Google Search Console).
+//   • Never emit dynamic (`:slug`) routes, wildcard routes, or private
+//     admin / dashboard / auth-only routes.
+//   • Validate curated entries against the live route table; drop any
+//     curated path that no longer exists in src/App.tsx.
 
-import { writeFileSync } from "fs";
+import { readFileSync, writeFileSync } from "fs";
 import { resolve } from "path";
 import { ALL_CATEGORIES, GROUP_META } from "../src/config/awardCategories/index.ts";
 
 const BASE_URL = "https://nesaafrica.lovable.app";
+const APP_TSX = resolve("src/App.tsx");
 
 interface SitemapEntry {
   path: string;
@@ -13,6 +23,70 @@ interface SitemapEntry {
   priority?: string;
 }
 
+// ---------------------------------------------------------------------------
+// 1. Parse src/App.tsx → set of CANONICAL public routes
+// ---------------------------------------------------------------------------
+const source = readFileSync(APP_TSX, "utf8");
+
+// Match each <Route ...> opening tag with its element="..." payload (best-effort).
+// We capture the path and a short window after it so we can detect <Navigate>.
+const ROUTE_RE = /<Route\s+path=["']([^"']+)["'][^>]*element=\{([\s\S]*?)\}\s*\/?>/g;
+
+const allRoutePaths = new Set<string>();
+const redirectSources = new Set<string>(); // routes whose element is <Navigate ...> or SlugRedirect
+
+let m: RegExpExecArray | null;
+while ((m = ROUTE_RE.exec(source)) !== null) {
+  const path = m[1];
+  const element = m[2];
+  allRoutePaths.add(path);
+  if (/<Navigate\b/.test(element) || /<SlugRedirect\b/.test(element)) {
+    redirectSources.add(path);
+  }
+}
+
+// Fallback: if the greedy element regex missed any path (e.g. nested braces),
+// pick them up with the simpler path-only regex so we still know the route exists.
+const PATH_ONLY_RE = /<Route\s+path=["']([^"']+)["']/g;
+while ((m = PATH_ONLY_RE.exec(source)) !== null) {
+  allRoutePaths.add(m[1]);
+}
+
+const PRIVATE_PREFIXES = [
+  "/admin",
+  "/nrc",
+  "/olc",
+  "/dashboard",
+  "/wallet",
+  "/account",
+  "/install",
+  "/judge/",
+  "/judge-signup",
+  "/judge-verify",
+  "/volunteer/", // private volunteer console; public /volunteer index stays
+  "/auth", // canonical auth pages live at /login, /register, etc.
+  "/otp",
+  "/forgot-password",
+  "/reset-password",
+];
+
+function isIndexable(path: string): boolean {
+  if (path === "*" || path === "/*") return false;
+  if (path.includes(":")) return false; // dynamic
+  if (redirectSources.has(path)) return false;
+  if (PRIVATE_PREFIXES.some((p) => path === p || path.startsWith(p + "/") || path === p.replace(/\/$/, ""))) {
+    return false;
+  }
+  return true;
+}
+
+const canonicalRoutes = new Set(
+  Array.from(allRoutePaths).filter(isIndexable),
+);
+
+// ---------------------------------------------------------------------------
+// 2. Curated high-priority entries (validated against route table)
+// ---------------------------------------------------------------------------
 const ICON_SUBCATEGORIES = [
   "literary-new-curriculum-advocate",
   "technical-educator-icon",
@@ -29,20 +103,19 @@ const GOLD_TRACKS = [
   "social-media-for-education",
 ];
 
-const staticEntries: SitemapEntry[] = [
+const curated: SitemapEntry[] = [
   { path: "/", changefreq: "daily", priority: "1.0" },
-  // Award pillars (Phase 4)
+  // Award pillars
   { path: "/awards/africa-education-icon", changefreq: "weekly", priority: "0.9" },
   { path: "/awards/gold-special-recognition", changefreq: "weekly", priority: "0.9" },
   { path: "/awards/csr-education", changefreq: "weekly", priority: "0.9" },
   { path: "/awards/digital-voices", changefreq: "weekly", priority: "0.9" },
   { path: "/awards/global-partnerships", changefreq: "weekly", priority: "0.9" },
   { path: "/awards/winners", changefreq: "weekly", priority: "0.8" },
-  // Nominee directories (Phase 1)
+  // Nominee directories
   { path: "/nominees", changefreq: "daily", priority: "0.9" },
   { path: "/nominees/africa-education-icon-award", changefreq: "weekly", priority: "0.8" },
   { path: "/nominees/gold-special-recognition", changefreq: "weekly", priority: "0.8" },
-  // Region-first nominee ecosystem (Phase 5)
   { path: "/nominees/west-africa", changefreq: "weekly", priority: "0.85" },
   { path: "/nominees/east-africa", changefreq: "weekly", priority: "0.85" },
   { path: "/nominees/north-africa", changefreq: "weekly", priority: "0.85" },
@@ -70,18 +143,17 @@ const staticEntries: SitemapEntry[] = [
   // Media
   { path: "/media", changefreq: "weekly", priority: "0.6" },
   { path: "/videos", changefreq: "weekly", priority: "0.6" },
-  // Governance pages
+  // Governance / impact
   { path: "/pathways", changefreq: "monthly", priority: "0.5" },
   { path: "/ecosystem", changefreq: "monthly", priority: "0.5" },
   { path: "/movement", changefreq: "monthly", priority: "0.5" },
   { path: "/impact", changefreq: "monthly", priority: "0.5" },
   { path: "/programs", changefreq: "monthly", priority: "0.5" },
-  // Auth
-  { path: "/auth/login", changefreq: "yearly", priority: "0.3" },
-  { path: "/auth/register", changefreq: "yearly", priority: "0.3" },
+  // Auth landing — explicitly the canonical public-facing login (not /auth/* aliases)
+  { path: "/login", changefreq: "yearly", priority: "0.3" },
+  { path: "/register", changefreq: "yearly", priority: "0.3" },
 ];
 
-// Icon nested directory pages (Phase 1)
 const iconNested: SitemapEntry[] = ICON_SUBCATEGORIES.flatMap((sub) => [
   { path: `/nominees/africa-education-icon-award/${sub}`, changefreq: "weekly", priority: "0.7" },
   ...ICON_CLASSIFICATIONS.map((cls) => ({
@@ -91,14 +163,12 @@ const iconNested: SitemapEntry[] = ICON_SUBCATEGORIES.flatMap((sub) => [
   })),
 ]);
 
-// Gold track pages
 const goldNested: SitemapEntry[] = GOLD_TRACKS.map((slug) => ({
   path: `/nominees/gold-special-recognition/${slug}`,
   changefreq: "weekly",
   priority: "0.7",
 }));
 
-// Award category group index pages (driven from GROUP_META)
 const groupIndexEntries: SitemapEntry[] = Array.from(
   new Set(
     Object.values(GROUP_META)
@@ -107,22 +177,23 @@ const groupIndexEntries: SitemapEntry[] = Array.from(
   ),
 ).map((path) => ({ path, changefreq: "weekly" as const, priority: "0.85" }));
 
-// One sitemap entry per canonical award category URL
 const categoryEntries: SitemapEntry[] = ALL_CATEGORIES.map((c) => ({
-  path: c.url,
+  path: c.url.split("#")[0],
   changefreq: "weekly" as const,
   priority: "0.8",
 }));
 
-// Master /awards/categories index
 const categoriesIndex: SitemapEntry = {
   path: "/awards/categories",
   changefreq: "weekly",
   priority: "0.9",
 };
 
-const allEntries = [
-  ...staticEntries,
+// ---------------------------------------------------------------------------
+// 3. Combine, dedupe, validate against actual route table
+// ---------------------------------------------------------------------------
+const combined = [
+  ...curated,
   ...iconNested,
   ...goldNested,
   categoriesIndex,
@@ -130,11 +201,50 @@ const allEntries = [
   ...categoryEntries,
 ];
 
-// Dedupe by path (last one wins)
 const dedupedMap = new Map<string, SitemapEntry>();
-for (const e of allEntries) dedupedMap.set(e.path, e);
-const entries = Array.from(dedupedMap.values());
+for (const e of combined) {
+  // Normalise: strip query string + trailing slash (except root)
+  let p = e.path.split("?")[0];
+  if (p.length > 1 && p.endsWith("/")) p = p.slice(0, -1);
+  dedupedMap.set(p, { ...e, path: p });
+}
 
+// Validate against canonical route table. Two-pass: exact match first,
+// then prefix match for dynamic parents (e.g. /nominees/west-africa is
+// served by /nominees/:region in App.tsx — accept if a prefix route exists).
+const dynamicParents = Array.from(allRoutePaths)
+  .filter((p) => p.includes(":"))
+  .map((p) => p.replace(/\/:.+$/, "")); // crude: take prefix before first :param
+
+function isServed(path: string): boolean {
+  if (canonicalRoutes.has(path)) return true;
+  // Accept if a dynamic parent route would serve it.
+  return dynamicParents.some(
+    (parent) => parent && (path === parent || path.startsWith(parent + "/")),
+  );
+}
+
+const dropped: string[] = [];
+const entries: SitemapEntry[] = [];
+for (const e of Array.from(dedupedMap.values()).sort((a, b) => a.path.localeCompare(b.path))) {
+  if (redirectSources.has(e.path)) {
+    dropped.push(`${e.path} (redirect source)`);
+    continue;
+  }
+  if (PRIVATE_PREFIXES.some((p) => e.path === p || e.path.startsWith(p + "/"))) {
+    dropped.push(`${e.path} (private)`);
+    continue;
+  }
+  if (!isServed(e.path)) {
+    dropped.push(`${e.path} (no matching route)`);
+    continue;
+  }
+  entries.push(e);
+}
+
+// ---------------------------------------------------------------------------
+// 4. Emit sitemap.xml
+// ---------------------------------------------------------------------------
 function generateSitemap(entries: SitemapEntry[]) {
   const urls = entries.map((e) =>
     [
@@ -145,11 +255,12 @@ function generateSitemap(entries: SitemapEntry[]) {
       `  </url>`,
     ]
       .filter(Boolean)
-      .join("\n")
+      .join("\n"),
   );
 
   return [
     `<?xml version="1.0" encoding="UTF-8"?>`,
+    `<!-- Auto-generated by scripts/generate-sitemap.ts — do not edit by hand -->`,
     `<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">`,
     ...urls,
     `</urlset>`,
@@ -157,4 +268,10 @@ function generateSitemap(entries: SitemapEntry[]) {
 }
 
 writeFileSync(resolve("public/sitemap.xml"), generateSitemap(entries));
-console.log(`sitemap.xml written (${entries.length} entries)`);
+console.log(
+  `sitemap.xml written (${entries.length} entries; ${dropped.length} dropped, ${redirectSources.size} known redirect sources excluded)`,
+);
+if (dropped.length) {
+  console.log("  Dropped:");
+  for (const d of dropped) console.log(`    - ${d}`);
+}
