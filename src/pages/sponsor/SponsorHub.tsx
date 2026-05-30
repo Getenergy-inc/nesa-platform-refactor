@@ -11,6 +11,7 @@ import { LegacyFundCallout } from "@/components/sponsor/LegacyFundCallout";
 import { SponsorshipDefinitions } from "@/components/sponsor/SponsorshipDefinitions";
 import { SponsorFirewallBanner } from "@/components/governance/SponsorFirewallBanner";
 import { DonorTrustPanel } from "@/components/governance/DonorTrustPanel";
+import { SponsorSlotMatrix } from "@/components/sponsor/SponsorSlotMatrix";
 
 export default function SponsorHub() {
   return (
@@ -123,6 +124,9 @@ export default function SponsorHub() {
           </div>
         </div>
       </section>
+
+      {/* Sponsor slot limits — governance rule */}
+      <SponsorSlotMatrix />
 
       {/* Sponsorship vs Partnership vs Endorsement definitions */}
       <SponsorshipDefinitions />

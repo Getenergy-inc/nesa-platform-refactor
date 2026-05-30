@@ -11,6 +11,7 @@ import { trackEvent } from "@/lib/analytics";
 import { SponsorFirewallBanner } from "@/components/governance/SponsorFirewallBanner";
 import { LegacyFundCallout } from "@/components/sponsor/LegacyFundCallout";
 import { DonorTrustPanel } from "@/components/governance/DonorTrustPanel";
+import { SponsorSlotBadge } from "@/components/sponsor/SponsorSlotBadge";
 
 export default function SponsorCategoryPage() {
   const { slug } = useParams<{ slug: string }>();
@@ -94,8 +95,9 @@ export default function SponsorCategoryPage() {
 
       {/* Sponsor firewall — governance disclosure */}
       <section className="bg-charcoal pt-8 md:pt-10">
-        <div className="container mx-auto px-4">
+        <div className="container mx-auto px-4 space-y-6">
           <SponsorFirewallBanner variant="compact" />
+          {!isDeck && <SponsorSlotBadge slug={cat.slug} />}
         </div>
       </section>
 
