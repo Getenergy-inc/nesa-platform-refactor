@@ -275,12 +275,13 @@ function MobileNav({ onOpenCVOMessage }: { onOpenCVOMessage: () => void }) {
                         aria-expanded={expandedItems.includes(item.href)}
                         aria-controls={`mnav-sub-${item.href}`}
                         className={cn(
-                          "flex items-center justify-between w-full px-4 py-4 text-left transition-colors touch-manipulation min-h-[44px]",
+                          "flex items-center justify-between w-full px-4 py-4 text-left transition-colors touch-manipulation min-h-[48px]",
                           "hover:bg-gold/5 active:bg-gold/10",
                           expandedItems.includes(item.href)
                             ? "text-gold bg-gold/5"
                             : "text-white/90",
                         )}
+
                       >
                         <span className="flex items-center gap-3">
                           {item.icon && <item.icon className="h-5 w-5" />}
