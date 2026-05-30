@@ -6,6 +6,9 @@ import { Badge } from "@/components/ui/badge";
 import { useSeason } from "@/contexts/SeasonContext";
 import { NESALogo3D } from "@/components/nesa/NESALogo3D";
 import stageBackdrop from "@/assets/nesa-stage-backdrop.jpg";
+import stageBackdrop640 from "@/assets/nesa-stage-backdrop-640.webp";
+import stageBackdrop960 from "@/assets/nesa-stage-backdrop-960.webp";
+import stageBackdrop1080 from "@/assets/nesa-stage-backdrop-1080.webp";
 
 export function NESAHero() {
   const { t } = useTranslation("pages");
@@ -22,13 +25,21 @@ export function NESAHero() {
 
   return (
     <section className="relative min-h-[85vh] sm:min-h-[90vh] flex flex-col bg-charcoal overflow-hidden">
-      {/* 3D Stage Backdrop Image with Ken Burns Effect */}
+      {/* Stable uploaded photo backdrop — no Ken Burns zoom or video motion */}
       <div className="absolute inset-0">
-        <img
-          src={stageBackdrop}
-          alt="NESA Africa 2026 Award Stage"
-          className="absolute inset-0 w-full h-full object-cover object-center animate-ken-burns"
-        />
+        <picture className="absolute inset-0 block h-full w-full">
+          <source
+            type="image/webp"
+            srcSet={`${stageBackdrop640} 640w, ${stageBackdrop960} 960w, ${stageBackdrop1080} 1080w`}
+            sizes="100vw"
+          />
+          <img
+            src={stageBackdrop}
+            alt="NESA Africa 2026 Award Stage"
+            className="h-full w-full object-cover object-[50%_35%] sm:object-center"
+            decoding="async"
+          />
+        </picture>
         
         {/* Layered overlays for depth and text readability */}
         <div className="absolute inset-0 bg-charcoal/50" />
