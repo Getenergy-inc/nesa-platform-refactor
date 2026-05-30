@@ -99,10 +99,17 @@ export const MAIN_NAV: NavItem[] = [
     icon: Info,
     children: [
       { label: "About NESA-Africa", href: "/about", description: "New Education Standard Award Africa", icon: Info },
+      { label: "Mission & Vision", href: "/about#mission", description: "Why NESA-Africa exists", icon: Target },
       { label: "Our Story", href: "/about#story", description: "From 2006 to NESA-Africa 2026", icon: BookOpen },
-      { label: "Governance", href: "/about/governance", description: "Firewalls, jury panels, accountability", icon: Shield },
-      { label: "Team", href: "/contributors", description: "The people powering NESA-Africa", icon: Users },
-      { label: "FAQs", href: "/faq", description: "Frequently asked questions", icon: MessageSquare },
+      { label: "SCEF Foundation", href: "/about/scef", description: "Santos Creations Educational Foundation", icon: Building },
+      { label: "Our Model", href: "/about#model", description: "Recognition → Visibility → Partnerships → Legacy", icon: Sparkles },
+      { label: "Governance & Award Integrity", href: "/about/governance", description: "Firewalls, jury panels, accountability", icon: Shield },
+      { label: "2026 Timeline", href: "/about/timeline", description: "Key dates & milestones", icon: Calendar },
+      { label: "Meet Our Team", href: "/contributors", description: "The people powering NESA-Africa", icon: Users },
+      { label: "Meet Our Judges", href: "/judges/directory", description: "Independent jury panel", icon: Gavel },
+      { label: "Meet Our Volunteers", href: "/volunteers", description: "Continental volunteer force", icon: Heart },
+      { label: "Advisory Board / Council", href: "/about#advisory", description: "Continental advisory council", icon: Star },
+      { label: "Ambassadors", href: "/volunteers#ambassadors", description: "Continental & diaspora ambassadors", icon: Star },
     ],
   },
 
@@ -112,11 +119,15 @@ export const MAIN_NAV: NavItem[] = [
     href: "/awards",
     icon: Trophy,
     children: [
-      { label: "Africa Education Icon", href: "/awards/icon", description: "Lifetime achievement (2006–2026)", icon: Star },
-      { label: "Blue Garnet Awards", href: "/awards/blue-garnet", description: "Competitive excellence — Jury + Public", icon: Trophy },
-      { label: "Platinum Recognition", href: "/awards/platinum", description: "Institutional leadership recognition", icon: Medal },
-      { label: "Influencer Education Impact Awards", href: "/awards/influencers-education-impact-2026-recognition", description: "Sports, Music & Social Media impact", icon: Sparkles, badge: "2026" },
-      { label: "All Award Categories", href: "/categories", description: "Browse every category", icon: BookOpen },
+      { label: "Award Overview", href: "/awards", description: "How NESA-Africa awards work", icon: Award },
+      { label: "Award Categories", href: "/categories", description: "Browse every category", icon: BookOpen },
+      { label: "Blue Garnet Award Categories", href: "/awards/blue-garnet", description: "Competitive excellence — Jury + Public", icon: Trophy },
+      { label: "Platinum Certificate Categories", href: "/awards/platinum", description: "Institutional leadership recognition", icon: Medal },
+      { label: "Africa Education Icon (2006–2026)", href: "/awards/icon", description: "Lifetime achievement award", icon: Star },
+      { label: "Influencers Education Impact 2026", href: "/awards/influencers-education-impact-2026-recognition", description: "Sports, Music & Social Media impact", icon: Sparkles, badge: "2026" },
+      { label: "Eligibility & Criteria", href: "/awards#eligibility", description: "Who can be nominated", icon: FileCheck },
+      { label: "Nomination Process", href: "/nominate", description: "How nominations work", icon: FileCheck },
+      { label: "Voting & Judging Integrity", href: "/policies/voting-integrity", description: "Firewalls protecting outcomes", icon: Shield },
     ],
   },
 
@@ -127,14 +138,16 @@ export const MAIN_NAV: NavItem[] = [
     icon: Heart,
     children: [
       { label: "EduAid-Africa", href: "/eduaid", description: "Scholarships, learning access & inclusion", icon: GraduationCap },
+      { label: "NESA-Africa TV", href: "/media/tv", description: "Live streams, shows & documentaries", icon: Tv, badge: "Live" },
       { label: "Rebuild My School Africa", href: "/rebuild", description: "Classrooms, infrastructure & accessibility", icon: Building2 },
-      { label: "Special Needs Education", href: "/programs#special-needs", description: "Inclusive education programs", icon: Heart },
-      { label: "Scholarships", href: "/programs#scholarships", description: "Continental scholarship pipeline", icon: GraduationCap },
-      { label: "Educational Tourism", href: "/events/tourism", description: "Cross-border learning experiences", icon: Globe2 },
+      { label: "Post-Award Legacy", href: "/programs#legacy", description: "SCEF / NESA-Africa social impact", icon: Heart },
+      { label: "Education Impact Webinars", href: "/media/webinars", description: "Continental webinar series", icon: Mic },
+      { label: "Community Chapters", href: "/chapters", description: "Local chapters across Africa", icon: MapPin },
+      { label: "Digital Learning & Inclusion", href: "/programs#digital-learning", description: "Inclusive digital education projects", icon: GraduationCap },
     ],
   },
 
-  // 4. ENGAGE (Vote lives here per IA brief — keeps right-side CTAs uncluttered)
+  // 4. ENGAGE (Sponsorship also lives here + primary CTA)
   {
     label: "Engage",
     href: "/get-involved",
@@ -142,10 +155,16 @@ export const MAIN_NAV: NavItem[] = [
     children: [
       { label: "Nominate 2026", href: "/nominate", description: "Submit a nomination", icon: FileCheck, badge: "2026" },
       { label: "Vote", href: "/vote", description: "Cast your public vote", icon: Vote },
+      { label: "Sponsor NESA-Africa 2026", href: "/sponsor", description: "CSR & headline sponsorship", icon: Sparkles },
+      { label: "Partner With Us", href: "/partners", description: "Institutional partnerships", icon: Handshake },
+      { label: "Endorse NESA-Africa", href: "/endorse", description: "Institutional endorsements", icon: Shield },
+      { label: "Become a Media Partner", href: "/partners#media", description: "Editorial & broadcast partners", icon: Tv },
+      { label: "Exhibit / Showcase", href: "/partners#exhibit", description: "Show your work at NESA-Africa", icon: Megaphone },
       { label: "Become a Volunteer", href: "/volunteer", description: "Join the continental volunteer force", icon: UserPlus },
-      { label: "Become a Judge", href: "/judges", description: "Apply to the independent jury", icon: Gavel },
-      { label: "Become an Ambassador", href: "/volunteers#ambassadors", description: "Continental & diaspora ambassadors", icon: Star },
+      { label: "Meet Our Volunteers", href: "/volunteers", description: "People powering the movement", icon: Heart },
       { label: "Join a Local Chapter", href: "/chapters", description: "Find your regional chapter", icon: MapPin },
+      { label: "NESA-Africa Store", href: "/shop", description: "Official merchandise", icon: ShoppingBag },
+      { label: "Contact Partnerships Team", href: "/contact#partnerships", description: "Speak to our partnerships team", icon: Mail },
     ],
   },
 
@@ -155,62 +174,39 @@ export const MAIN_NAV: NavItem[] = [
     href: "/media",
     icon: Tv,
     children: [
-      { label: "NESA-Africa TV", href: "/media/tv", description: "Live streams, shows & documentaries", icon: Tv, badge: "Live" },
       { label: "News & Updates", href: "/media", description: "Latest from across the movement", icon: MessageSquare },
       { label: "Press Releases", href: "/press", description: "Official announcements", icon: FileCheck },
+      { label: "Media Kit", href: "/media#kit", description: "Logos, brand assets & boilerplate", icon: FileDown },
       { label: "Gallery", href: "/gallery", description: "Photo archives across NESA seasons", icon: Play },
-      { label: "Impact Stories", href: "/media/shows", description: "Voices powering African education", icon: Mic },
+      { label: "Interviews & Features", href: "/media/shows", description: "Voices powering African education", icon: Mic },
+      { label: "Media Accreditation", href: "/media#accreditation", description: "Apply for press accreditation", icon: FileCheck },
+      { label: "NESA-Africa TV", href: "/media/tv", description: "Live streams & broadcasts", icon: Tv, badge: "Live" },
     ],
   },
 
-  // 6. SUPPORT (philanthropy / fundraising)
+  // 6. SUPPORT (FAQs, Contact, Help, all support desks)
   {
     label: "Support",
-    href: "/donate",
-    icon: Heart,
+    href: "/faq",
+    icon: MessageSquare,
     children: [
+      { label: "FAQs", href: "/faq", description: "Frequently asked questions", icon: MessageSquare },
+      { label: "Contact", href: "/contact", description: "Reach the NESA-Africa team", icon: Mail },
+      { label: "Help Desk", href: "/faq#help", description: "General assistance", icon: Info },
+      { label: "Technical Support", href: "/contact#technical", description: "Bugs, access & device issues", icon: Settings },
+      { label: "Nomination Support", href: "/contact#nominations", description: "Help with nominations", icon: FileCheck },
+      { label: "Voting Support", href: "/contact#voting", description: "Help with voting", icon: Vote },
+      { label: "Sponsorship Support", href: "/contact#partnerships", description: "Help for sponsors & partners", icon: Handshake },
       { label: "Donate", href: "/donate", description: "Support our mission", icon: Heart },
-      { label: "Fundraise", href: "/donate#fundraise", description: "Run a fundraising campaign", icon: Sparkles },
-      { label: "CSR Support", href: "/partners#csr", description: "Corporate social responsibility partnerships", icon: Handshake },
-      { label: "Education Grants", href: "/programs#grants", description: "Apply for or fund education grants", icon: GraduationCap },
-      { label: "Legacy Projects", href: "/programs#legacy", description: "Where recognition becomes lasting impact", icon: Building2 },
-    ],
-  },
-
-  // 7. SPONSOR NESA-AFRICA
-  {
-    label: "Sponsor NESA-Africa",
-    href: "/sponsor",
-    icon: Sparkles,
-    children: [
-      { label: "Category Sponsorship", href: "/sponsor#categories", description: "Sponsor an award category", icon: Award },
-      { label: "Africa Education Icon Sponsorship", href: "/sponsor#icon", description: "Headline lifetime achievement", icon: Star },
-      { label: "Gala Sponsorship", href: "/sponsor#gala", description: "Sponsor the awards gala night", icon: Trophy },
-      { label: "NESA TV Sponsorship", href: "/sponsor/nesa-tv", description: "Broadcast partnerships", icon: Tv },
-      { label: "EduAid Webinar Sponsorship", href: "/sponsor#webinars", description: "Sponsor the webinar series", icon: Mic },
-      { label: "RMSA Sponsorship", href: "/sponsor#rmsa", description: "Rebuild My School Africa partnerships", icon: Building2 },
-      { label: "Advertise With Us", href: "/sponsor/advertise", description: "Showcase your brand", icon: Megaphone },
-    ],
-  },
-
-  // 8. CONTACT
-  {
-    label: "Contact",
-    href: "/contact",
-    icon: Mail,
-    children: [
-      { label: "Contact Us", href: "/contact", description: "Reach the NESA-Africa team", icon: Mail },
-      { label: "Support Centre", href: "/faq", description: "Help, FAQs & assistance", icon: MessageSquare },
-      { label: "Partnership Desk", href: "/contact#partnerships", description: "Speak to our partnerships team", icon: Handshake },
     ],
   },
 ];
 
-// Right-side action CTAs — only 2 primary buttons per IA brief
-// 1) Nominate 2026 (filled gold) 2) Become a Sponsor (outline gold)
-// Vote intentionally removed from CTA row — lives inside Engage dropdown.
+// Right-side action CTAs — three primary buttons per IA brief
+// 1) Nominate (filled gold) 2) Vote (outline) 3) Become a Sponsor (outline gold)
 export const MAIN_NAV_CTAS: NavItem[] = [
   { label: "Nominate 2026", href: "/nominate", icon: FileCheck, badge: "2026" },
+  { label: "Vote", href: "/vote", icon: Vote },
   { label: "Become a Sponsor", href: "/sponsor", icon: Sparkles },
 ];
 
@@ -227,11 +223,9 @@ export const MAIN_NAV_MOBILE_ORDER: readonly string[] = [
   "Engage",
   "Awards",
   "Impact Programs",
-  "Sponsor NESA-Africa",
   "Media",
   "About",
   "Support",
-  "Contact",
 ];
 
 
