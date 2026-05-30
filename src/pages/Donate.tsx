@@ -17,6 +17,7 @@ import {
 } from "lucide-react";
 import { useState } from "react";
 import { MiniMusicPlayer } from "@/components/nesa/MiniMusicPlayer";
+import { DonorTrustPanel } from "@/components/governance/DonorTrustPanel";
 import africaMapImg from "@/assets/africa-map-silhouette.png";
 
 // African textile patterns
@@ -130,7 +131,15 @@ export default function Donate() {
           </div>
         </section>
 
+        {/* Donor Trust */}
+        <section className="py-6">
+          <div className="container mx-auto px-4 max-w-3xl">
+            <DonorTrustPanel />
+          </div>
+        </section>
+
         {/* Regional School Cards with African Textiles */}
+
         <section className="py-12">
           <div className="container mx-auto px-4">
             <h2 className="mb-2 text-center font-display text-xl font-semibold text-white">
