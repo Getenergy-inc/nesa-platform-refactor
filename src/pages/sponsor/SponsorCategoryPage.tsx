@@ -187,6 +187,16 @@ export default function SponsorCategoryPage() {
         </section>
       )}
 
+      {/* 5% RMSA Legacy Fund — shown on every sponsor category page */}
+      <LegacyFundCallout />
+
+      {/* Donor & Sponsor Trust Center */}
+      <section className="bg-charcoal py-12 md:py-16 border-t border-gold/10">
+        <div className="container mx-auto px-4">
+          <DonorTrustPanel />
+        </div>
+      </section>
+
       {/* Other lanes */}
       <section className="bg-charcoal py-14 border-t border-gold/10">
         <div className="container mx-auto px-4">
