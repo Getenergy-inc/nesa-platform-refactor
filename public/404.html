@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover" />
+
+    <!--
+      This file is served by Netlify with HTTP status 404 for any URL that
+      does not match an explicit rule in /_redirects. The body is the same
+      SPA shell as index.html so React Router can still render the branded
+      NotFound page — but bots / crawlers receive a real 404 status code.
+    -->
+    <meta name="robots" content="noindex, follow" />
+
+    <link rel="preconnect" href="https://sjghitoydzpirpqjules.supabase.co" crossorigin />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+    <title>Page Not Found | NESA-Africa</title>
+    <meta name="description" content="The page you are looking for may have moved or the link may be outdated. Return to NESA-Africa to explore award categories, nominate, vote, or contact support." />
+    <meta name="author" content="NESA-Africa" />
+    <meta name="theme-color" content="#1a1a2e" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Page Not Found | NESA-Africa" />
+    <meta property="og:site_name" content="NESA-Africa" />
+
+    <link rel="icon" type="image/x-icon" href="https://storage.googleapis.com/gpt-engineer-file-uploads/hBUEq1N2KhPRABdUjj6IIzcKq463/uploads/1770158849162-PHOTO-2026-01-31-02-33-38.jpg">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/manifest.webmanifest" />
+
+    <style>
+      *,*::before,*::after{box-sizing:border-box}
+      html{-webkit-text-size-adjust:100%;line-height:1.5}
+      body{margin:0;font-family:system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background-color:#1a1a2e;color:#fff}
+      #root{min-height:100vh}
+      .initial-loader{display:flex;align-items:center;justify-content:center;min-height:100vh;background:#1a1a2e}
+      .initial-loader svg{animation:spin 1s linear infinite;width:2rem;height:2rem;color:#d4af37}
+      @keyframes spin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+    </style>
+  </head>
+
+  <body>
+    <div id="root">
+      <div class="initial-loader" id="initial-loader">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <circle cx="12" cy="12" r="10" stroke-width="2" stroke-dasharray="31.416" stroke-dashoffset="10" stroke-linecap="round"/>
+        </svg>
+      </div>
+    </div>
+
+    <script>
+      window.addEventListener('DOMContentLoaded', function() {
+        var loader = document.getElementById('initial-loader');
+        if (loader) {
+          setTimeout(function() {
+            loader.style.transition = 'opacity 0.2s ease';
+            loader.style.opacity = '0';
+            setTimeout(function() { loader.remove(); }, 200);
+          }, 100);
+        }
+      });
+    </script>
+
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

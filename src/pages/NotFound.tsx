@@ -25,6 +25,7 @@ const NotFound = () => {
     <>
       <Helmet>
         <title>Page Not Found | NESA-Africa</title>
+        <meta name="robots" content="noindex, follow" />
       </Helmet>
       <div className="min-h-screen bg-charcoal flex flex-col items-center justify-center px-4 py-16">
         {/* Logo */}

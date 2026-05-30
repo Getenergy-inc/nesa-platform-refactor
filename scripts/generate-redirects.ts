@@ -1,0 +1,161 @@
+/**
+ * Generates public/_redirects so that:
+ *   - Every React Router path (from src/App.tsx) is explicitly served
+ *     /index.html with status 200 (SPA hydration works on deep links).
+ *   - Legacy / alias URLs return a 301 to their canonical path.
+ *   - Anything else falls through to /404.html with a real HTTP 404 status.
+ *
+ * Runs from `predev` and `prebuild` hooks so the file stays in sync with
+ * src/App.tsx routes automatically.
+ */
+
+import { readFileSync, writeFileSync } from "node:fs";
+import { resolve } from "node:path";
+
+const APP_TSX = resolve("src/App.tsx");
+const OUT = resolve("public/_redirects");
+
+// ----------------------------------------------------------------------------
+// 1. Extract all <Route path="..."> values from src/App.tsx
+// ----------------------------------------------------------------------------
+const source = readFileSync(APP_TSX, "utf8");
+const routeRe = /<Route\s+path=["']([^"']+)["']/g;
+const rawPaths = new Set<string>();
+for (const m of source.matchAll(routeRe)) {
+  rawPaths.add(m[1]);
+}
+
+const PAD = 60;
+function rule(from: string, to: string, status: number) {
+  return `${from.padEnd(PAD)} ${to.padEnd(20)} ${status}`;
+}
+
+// Skip the wildcard NotFound route — it's the whole point of the 404 fallback.
+const spaPaths = Array.from(rawPaths)
+  .filter((p) => p !== "*" && p !== "/*")
+  .sort((a, b) => {
+    // Longest / most-specific first so /foo/:a/:b wins over /foo/:a
+    if (a.length !== b.length) return b.length - a.length;
+    return a.localeCompare(b);
+  });
+
+// ----------------------------------------------------------------------------
+// 2. Legacy 301 aliases (curated — these are URLs that may exist out in the
+//    wild but are NOT defined as Routes in App.tsx). Each must redirect
+//    BEFORE the 200/SPA block so the canonical URL wins in the address bar.
+// ----------------------------------------------------------------------------
+const legacy301: Array<[string, string]> = [
+  // Sponsorship / partnerships
+  ["/sponsorship", "/sponsor"],
+  ["/sponsorships", "/sponsor"],
+  ["/engage/sponsor", "/sponsor"],
+  ["/engage/partner", "/partners"],
+  ["/engage/endorse", "/endorse-nesa"],
+  ["/engage/media-partner", "/partners"],
+  ["/engage/exhibit", "/partners"],
+  ["/engage/volunteer", "/volunteer"],
+  ["/engage/volunteers", "/volunteers"],
+  ["/engage/community-chapter", "/chapters"],
+  ["/engage/store", "/shop"],
+  ["/engage/contact-partnerships", "/partners"],
+  ["/endorsement", "/endorse-nesa"],
+  // Support aliases
+  ["/faqs", "/faq"],
+  ["/support/faqs", "/faq"],
+  ["/support/contact", "/contact"],
+  ["/support/help-desk", "/contact"],
+  ["/support/technical-support", "/contact"],
+  ["/support/nomination-support", "/contact"],
+  ["/support/voting-support", "/contact"],
+  ["/support/sponsorship-support", "/contact"],
+  ["/support", "/faq"],
+  // About aliases
+  ["/about/people", "/about"],
+  ["/about/team", "/about"],
+  ["/about/judges", "/judges"],
+  ["/about/volunteers", "/volunteers"],
+  ["/about/advisory-board", "/about/governance"],
+  ["/about/ambassadors", "/ambassadors"],
+  ["/meet-our-judges", "/judges"],
+  ["/meet-our-volunteers", "/volunteers"],
+  // Awards aliases
+  ["/awards/blue-garnet-categories", "/awards/blue-garnet"],
+  ["/awards/platinum-certificate-categories", "/awards/platinum"],
+  ["/awards/influencers-education-impact", "/awards/influencer-education"],
+  ["/awards/eligibility-criteria", "/guidelines/nominees"],
+  ["/awards/nomination-process", "/nominate"],
+  ["/awards/voting-judging-integrity", "/guidelines/voters"],
+  // Impact Programs aliases
+  ["/impact-programs", "/impact"],
+  ["/impact-programs/eduaid-africa", "/eduaid"],
+  ["/impact-programs/rebuild-my-school-africa", "/rebuild"],
+  ["/impact-programs/post-award-legacy", "/rebuild"],
+  ["/impact-programs/webinars", "/media/webinars"],
+  ["/impact-programs/community-chapters", "/chapters"],
+  ["/impact-programs/digital-learning-inclusion", "/impact"],
+  ["/eduaid-africa", "/eduaid"],
+  ["/rebuild-my-school-africa", "/rebuild"],
+  // Media aliases
+  ["/media/nesa-africa-tv", "/media/tv"],
+  ["/nesa-tv", "/media/tv"],
+  ["/nesa-africa-tv", "/media/tv"],
+  ["/media/news", "/media"],
+  ["/media/press-releases", "/media"],
+  ["/media/media-kit", "/media"],
+  ["/media/interviews-features", "/media"],
+  ["/media/accreditation", "/media"],
+  // Store
+  ["/buy-merchandise", "/shop"],
+  // Auth aliases not already in App.tsx
+  ["/sign-in", "/login"],
+  ["/sign-up", "/register"],
+  ["/get-started", "/register"],
+  // Legal
+  ["/privacy-policy", "/policies"],
+  ["/terms", "/policies"],
+  ["/cookie-policy", "/policies"],
+  // Misc
+  ["/language", "/"],
+];
+
+// ----------------------------------------------------------------------------
+// 3. Compose _redirects
+// ----------------------------------------------------------------------------
+const banner = `# Auto-generated by scripts/generate-redirects.ts
+# DO NOT EDIT BY HAND — re-run \`tsx scripts/generate-redirects.ts\`
+# or just \`npm run dev\` / \`npm run build\` (predev/prebuild hooks).
+#
+# Order matters:
+#   1) 301 legacy aliases
+#   2) Explicit 200 /index.html for every defined SPA route
+#   3) Final /* /404.html 404 fallback so unknown URLs return a REAL 404 status
+`;
+
+const legacyBlock = legacy301
+  .filter(([from]) => !rawPaths.has(from)) // never shadow a real route
+  .map(([from, to]) => rule(from, to, 301))
+  .join("\n");
+
+const spaBlock = spaPaths.map((p) => rule(p, "/index.html", 200)).join("\n");
+
+const tail = `
+# Final catch-all — REAL HTTP 404 for anything not matched above.
+# /404.html is a copy of the SPA shell; React Router still renders the
+# branded NotFound page, but bots / crawlers see a true 404 status.
+${rule("/*", "/404.html", 404)}
+`;
+
+const output = `${banner}
+# --- 1. Legacy 301 aliases ---
+${legacyBlock}
+
+# --- 2. SPA routes (${spaPaths.length} explicit paths from src/App.tsx) ---
+${spaBlock}
+
+# --- 3. True-404 fallback ---
+${tail}`;
+
+writeFileSync(OUT, output);
+console.log(
+  `_redirects written: ${legacy301.length} legacy 301s + ${spaPaths.length} SPA 200s + 1 true 404`,
+);
