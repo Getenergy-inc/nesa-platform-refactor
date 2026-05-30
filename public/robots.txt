@@ -1,16 +1,103 @@
-User-agent: Googlebot
-Allow: /
-
-User-agent: Bingbot
-Allow: /
-
-User-agent: Twitterbot
-Allow: /
-
-User-agent: facebookexternalhit
-Allow: /
+# NESA-Africa robots.txt
+# Allow public marketing, awards, nominees, voting, media, and policy pages.
+# Disallow private dashboards, admin tooling, auth flows, and legacy aliases
+# that 301 to canonical URLs (no value in indexing the redirect source).
 
 User-agent: *
 Allow: /
+
+# --- Private application areas (auth-only; never index) ---
+Disallow: /admin
+Disallow: /admin/
+Disallow: /nrc
+Disallow: /nrc/
+Disallow: /olc
+Disallow: /olc/
+Disallow: /dashboard
+Disallow: /dashboard/
+Disallow: /wallet
+Disallow: /account
+Disallow: /account/
+Disallow: /install
+Disallow: /volunteer/dashboard
+Disallow: /volunteer/profile
+Disallow: /volunteer/analytics
+Disallow: /volunteer/referrals
+Disallow: /volunteer/settings
+Disallow: /volunteer/share-assets
+Disallow: /volunteer/tasks
+Disallow: /judge/
+Disallow: /judge-signup
+Disallow: /judge-verify
+Disallow: /otp
+
+# --- Auth aliases (canonical pages are /login, /register) ---
+Disallow: /auth
+Disallow: /auth/
+Disallow: /signin
+Disallow: /signup
+Disallow: /sign-in
+Disallow: /sign-up
+Disallow: /get-started
+Disallow: /forgot-password
+Disallow: /reset-password
+
+# --- Legacy 301 redirect sources (kept in _redirects for back-compat,
+#     but excluded from indexing so canonical URLs win in search) ---
+Disallow: /sponsorship
+Disallow: /sponsorships
+Disallow: /become-a-sponsor
+Disallow: /become-sponsor
+Disallow: /our-sponsors
+Disallow: /our-partners
+Disallow: /partner
+Disallow: /partnerships
+Disallow: /engage/
+Disallow: /endorsement
+Disallow: /faqs
+Disallow: /support
+Disallow: /support/
+Disallow: /nominee
+Disallow: /nominee-directory
+Disallow: /nominees-directory
+Disallow: /award
+Disallow: /award-categories
+Disallow: /category
+Disallow: /regions
+Disallow: /jury
+Disallow: /music
+Disallow: /media/nesa-tv
+Disallow: /media/nesa-africa-tv
+Disallow: /nesa-tv
+Disallow: /nesa-africa-tv
+Disallow: /media/news
+Disallow: /media/press-releases
+Disallow: /media/media-kit
+Disallow: /media/interviews-features
+Disallow: /media/accreditation
+Disallow: /buy-merchandise
+Disallow: /impact-programs
+Disallow: /impact-programs/
+Disallow: /eduaid-africa
+Disallow: /rebuild-my-school-africa
+Disallow: /privacy-policy
+Disallow: /terms
+Disallow: /cookie-policy
+Disallow: /policies/coi
+Disallow: /policies/privacy
+Disallow: /policies/terms
+Disallow: /meet-our-judges
+Disallow: /meet-our-volunteers
+Disallow: /about/team
+Disallow: /about/people
+Disallow: /about/judges
+Disallow: /about/volunteers
+Disallow: /about/advisory-board
+Disallow: /about/ambassadors
+Disallow: /agc-rewards
+Disallow: /earn-credits
+Disallow: /earn-voting-coins
+Disallow: /volunteer-bod
+Disallow: /language
 
 Sitemap: https://nesaafrica.lovable.app/sitemap.xml
