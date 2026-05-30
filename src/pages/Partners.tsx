@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
+import { DonorTrustPanel } from "@/components/governance/DonorTrustPanel";
 import { GFAWalletIcon } from "@/components/ui/GFAWalletIcon";
 import {
   Building2,
@@ -249,6 +250,15 @@ export default function Partners() {
             </div>
           </div>
         </section>
+
+        {/* Donor & Sponsor Trust */}
+        <section className="py-8">
+          <div className="container mx-auto px-4 max-w-5xl">
+            <DonorTrustPanel />
+          </div>
+        </section>
+
+
 
         {/* ================================================================
             WHY PARTNER
