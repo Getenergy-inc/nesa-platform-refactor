@@ -1,5 +1,9 @@
 // NESA-Africa Contributors Hall of Fame
-// Volunteers, Interns, Judges, BOA, Ambassadors, LCPs, Data Team, Media Hosts — 2021 to date
+import stellaOkparaPhoto from "@/assets/volunteers/stella-okpara.jpg";
+import maduChidinmaPhoto from "@/assets/volunteers/madu-chidinma-priscillia.png";
+import omoladeAkinradewoPhoto from "@/assets/volunteers/omolade-akinradewo.jpg";
+import stephanieOkekePhoto from "@/assets/volunteers/stephanie-okeke.jpg";
+
 
 export type ContributorRole =
   | "Volunteer"
