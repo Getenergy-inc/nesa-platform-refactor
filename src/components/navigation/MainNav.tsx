@@ -488,6 +488,11 @@ function MobileNav({ onOpenCVOMessage }: { onOpenCVOMessage: () => void }) {
                     Sign In
                   </Button>
                 </Link>
+                {/* Utility: Language Switcher */}
+                <div className="flex items-center justify-center pt-1">
+                  <LanguageSwitcher className="flex" />
+                </div>
+
 
               </div>
             )}
