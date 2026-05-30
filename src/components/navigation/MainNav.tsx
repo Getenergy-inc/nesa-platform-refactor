@@ -716,12 +716,14 @@ export function MainNav() {
               alt="NESA-Africa"
               className="h-8 sm:h-10 w-8 sm:w-10 rounded-full object-contain"
             />
-            <div className="hidden sm:flex flex-col leading-tight">
-              <span className="text-sm font-display font-bold text-gold tracking-wide">
+            <div className="flex flex-col leading-tight">
+              <span className="text-[13px] sm:text-sm font-display font-bold text-gold tracking-wide whitespace-nowrap">
                 NESA-Africa <span className="text-white/70 font-medium">2026</span>
               </span>
-              <span className="text-[9px] xl:text-[10px] text-gold/70 font-medium tracking-wider italic">
-                The African Blue-Garnet Awards for Education
+              {/* Motto: short on mobile, full on tablet+ */}
+              <span className="text-[9px] xl:text-[10px] text-gold/70 font-medium tracking-wider italic whitespace-nowrap">
+                <span className="sm:hidden">Blue-Garnet Awards for Education</span>
+                <span className="hidden sm:inline">The African Blue-Garnet Awards for Education</span>
               </span>
             </div>
           </Link>
@@ -758,15 +760,26 @@ export function MainNav() {
               </Link>
             </Button>
 
-            {/* Mobile / tablet primary CTA — single button, no overlap */}
+            {/* Mobile / tablet primary CTAs — Nominate + Vote (compact, no overlap) */}
             <Button
               asChild
               size="sm"
-              className="xl:hidden inline-flex bg-gold text-charcoal hover:bg-gold/90 font-semibold h-9 px-3 text-[11px] shadow-md shadow-gold/20 shrink-0 whitespace-nowrap"
+              className="xl:hidden inline-flex bg-gold text-charcoal hover:bg-gold/90 font-semibold h-9 px-2.5 text-[11px] shadow-md shadow-gold/20 shrink-0 whitespace-nowrap"
             >
               <Link to="/nominate" aria-label="Nominate for NESA-Africa 2026">
-                <Trophy className="h-3.5 w-3.5 mr-1" />
-                Nominate
+                <Trophy className="h-3.5 w-3.5 sm:mr-1" />
+                <span className="hidden sm:inline">Nominate</span>
+              </Link>
+            </Button>
+            <Button
+              asChild
+              size="sm"
+              variant="outline"
+              className="xl:hidden inline-flex border-gold/40 text-gold hover:bg-gold/10 hover:text-gold h-9 px-2.5 text-[11px] bg-transparent shrink-0 whitespace-nowrap"
+            >
+              <Link to="/vote" aria-label="Vote in NESA-Africa 2026">
+                <Vote className="h-3.5 w-3.5 sm:mr-1" />
+                <span className="hidden sm:inline">Vote</span>
               </Link>
             </Button>
 
