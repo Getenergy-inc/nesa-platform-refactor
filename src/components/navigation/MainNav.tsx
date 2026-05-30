@@ -488,6 +488,11 @@ function MobileNav({ onOpenCVOMessage }: { onOpenCVOMessage: () => void }) {
                     Sign In
                   </Button>
                 </Link>
+                {/* Utility: Language Switcher */}
+                <div className="flex items-center justify-center pt-1">
+                  <LanguageSwitcher className="flex" />
+                </div>
+
 
               </div>
             )}
@@ -733,14 +738,39 @@ export function MainNav() {
             <DesktopNav onOpenCVOMessage={() => setCVOMessageOpen(true)} />
           </div>
 
-          {/* Right Side: only 2 primary CTAs (Nominate 2026, Become a Sponsor) + utility */}
+          {/* Right Side: 3 primary CTAs (Nominate, Vote, Become a Sponsor) + utility */}
           <div className="flex items-center gap-1.5 xl:gap-2 shrink-0">
-            {/* CTA 1 — Become a Sponsor (outline) */}
+            {/* Desktop CTA 1 — Nominate (secondary outline) */}
             <Button
               asChild
               size="sm"
               variant="outline"
               className="hidden xl:inline-flex border-gold/40 text-gold hover:bg-gold/10 hover:text-gold h-9 px-3 text-[12px] bg-transparent whitespace-nowrap shrink-0"
+            >
+              <Link to="/nominate" aria-label="Nominate for NESA-Africa 2026">
+                <Trophy className="h-3.5 w-3.5 mr-1" />
+                Nominate
+              </Link>
+            </Button>
+
+            {/* Desktop CTA 2 — Vote (secondary outline) */}
+            <Button
+              asChild
+              size="sm"
+              variant="outline"
+              className="hidden xl:inline-flex border-gold/40 text-gold hover:bg-gold/10 hover:text-gold h-9 px-3 text-[12px] bg-transparent whitespace-nowrap shrink-0"
+            >
+              <Link to="/vote" aria-label="Vote in NESA-Africa 2026">
+                <Vote className="h-3.5 w-3.5 mr-1" />
+                Vote
+              </Link>
+            </Button>
+
+            {/* Desktop CTA 3 — Become a Sponsor (primary filled, strongest) */}
+            <Button
+              asChild
+              size="sm"
+              className="hidden xl:inline-flex bg-gold text-charcoal hover:bg-gold/90 font-semibold h-9 px-3 text-[12px] shadow-md shadow-gold/20 shrink-0 whitespace-nowrap"
             >
               <Link to="/sponsor" aria-label="Become a Sponsor of NESA-Africa 2026">
                 <Sparkles className="h-3.5 w-3.5 mr-1" />
@@ -748,19 +778,7 @@ export function MainNav() {
               </Link>
             </Button>
 
-            {/* CTA 2 — Nominate 2026 (filled, primary) */}
-            <Button
-              asChild
-              size="sm"
-              className="hidden xl:inline-flex bg-gold text-charcoal hover:bg-gold/90 font-semibold h-9 px-3 text-[12px] shadow-md shadow-gold/20 shrink-0 whitespace-nowrap"
-            >
-              <Link to="/nominate" aria-label="Nominate for NESA-Africa 2026">
-                <Trophy className="h-3.5 w-3.5 mr-1" />
-                Nominate 2026
-              </Link>
-            </Button>
-
-            {/* Mobile / tablet primary CTAs — Nominate + Vote (compact, no overlap) */}
+            {/* Mobile / tablet header CTAs — Nominate + Vote (compact, no overlap) */}
             <Button
               asChild
               size="sm"
