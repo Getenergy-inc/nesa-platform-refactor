@@ -1,7 +1,7 @@
 // Main Navigation Component
 // Responsive navbar with dropdown menus for NESA-Africa
 
-import { useState, forwardRef } from "react";
+import { useState, forwardRef, useRef, useEffect, type KeyboardEvent as ReactKeyboardEvent } from "react";
 import { Link, useLocation } from "react-router-dom";
 import {
   ChevronDown,
@@ -173,11 +173,58 @@ function MobileNav({ onOpenCVOMessage }: { onOpenCVOMessage: () => void }) {
 
 
 
+  // Refs to panels + triggers for keyboard focus management
+  const panelRefs = useRef<Record<string, HTMLDivElement | null>>({});
+  const triggerRefs = useRef<Record<string, HTMLButtonElement | null>>({});
+  const [pendingFocus, setPendingFocus] = useState<string | null>(null);
+
   const toggleExpanded = (href: string) => {
-    setExpandedItems((prev) =>
-      prev.includes(href) ? prev.filter((h) => h !== href) : [...prev, href],
-    );
+    setExpandedItems((prev) => {
+      const isOpen = prev.includes(href);
+      if (isOpen) return prev.filter((h) => h !== href);
+      setPendingFocus(href);
+      return [...prev, href];
+    });
   };
+
+  // After a panel expands, move focus to its first link
+  useEffect(() => {
+    if (!pendingFocus) return;
+    if (!expandedItems.includes(pendingFocus)) return;
+    const panel = panelRefs.current[pendingFocus];
+    const firstLink = panel?.querySelector<HTMLElement>(
+      'a, button, [tabindex]:not([tabindex="-1"])',
+    );
+    firstLink?.focus();
+    setPendingFocus(null);
+  }, [pendingFocus, expandedItems]);
+
+  const handleTriggerKeyDown = (
+    href: string,
+  ) => (e: ReactKeyboardEvent<HTMLButtonElement>) => {
+    // ArrowDown opens (if collapsed) and focuses first item; if already open, jump in
+    if (e.key === "ArrowDown" && !e.altKey) {
+      e.preventDefault();
+      if (!expandedItems.includes(href)) {
+        setPendingFocus(href);
+        setExpandedItems((prev) => [...prev, href]);
+      } else {
+        const panel = panelRefs.current[href];
+        panel?.querySelector<HTMLElement>('a, button')?.focus();
+      }
+    }
+  };
+
+  const handlePanelKeyDown = (
+    href: string,
+  ) => (e: ReactKeyboardEvent<HTMLDivElement>) => {
+    if (e.key === "Escape") {
+      e.preventDefault();
+      setExpandedItems((prev) => prev.filter((h) => h !== href));
+      triggerRefs.current[href]?.focus();
+    }
+  };
+
 
   const handleLinkClick = () => {
     setOpen(false);
@@ -271,12 +318,14 @@ function MobileNav({ onOpenCVOMessage }: { onOpenCVOMessage: () => void }) {
                   {item.children ? (
                     <div>
                       <button
+                        ref={(el) => { triggerRefs.current[item.href] = el; }}
                         onClick={() => toggleExpanded(item.href)}
+                        onKeyDown={handleTriggerKeyDown(item.href)}
                         aria-expanded={expandedItems.includes(item.href)}
                         aria-controls={`mnav-sub-${item.href}`}
                         className={cn(
                           "flex items-center justify-between w-full px-4 py-4 text-left transition-colors touch-manipulation min-h-[48px]",
-                          "hover:bg-gold/5 active:bg-gold/10",
+                          "hover:bg-gold/5 active:bg-gold/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold/60 focus-visible:ring-inset",
                           expandedItems.includes(item.href)
                             ? "text-gold bg-gold/5"
                             : "text-white/90",
@@ -299,6 +348,11 @@ function MobileNav({ onOpenCVOMessage }: { onOpenCVOMessage: () => void }) {
                       </button>
                       <div
                         id={`mnav-sub-${item.href}`}
+                        ref={(el) => { panelRefs.current[item.href] = el; }}
+                        role="region"
+                        aria-label={`${item.label} submenu`}
+                        hidden={!expandedItems.includes(item.href)}
+                        onKeyDown={handlePanelKeyDown(item.href)}
                         className={cn(
                           "overflow-hidden transition-all duration-200",
                           expandedItems.includes(item.href)
@@ -306,6 +360,7 @@ function MobileNav({ onOpenCVOMessage }: { onOpenCVOMessage: () => void }) {
                             : "max-h-0",
                         )}
                       >
+
                         <div className="bg-charcoal-light/30 py-2">
                           {/* CVO Message for About menu in mobile */}
                           {item.label === "About" && (
