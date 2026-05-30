@@ -6,6 +6,11 @@ import { PublicLayout } from "@/components/layout/PublicLayout";
 import { Button } from "@/components/ui/button";
 import { SPONSOR_CATEGORIES } from "@/config/sponsorCategories";
 import { trackEvent } from "@/lib/analytics";
+import { SponsorPillarsSection } from "@/components/sponsor/SponsorPillarsSection";
+import { LegacyFundCallout } from "@/components/sponsor/LegacyFundCallout";
+import { SponsorshipDefinitions } from "@/components/sponsor/SponsorshipDefinitions";
+import { SponsorFirewallBanner } from "@/components/governance/SponsorFirewallBanner";
+import { DonorTrustPanel } from "@/components/governance/DonorTrustPanel";
 
 export default function SponsorHub() {
   return (
