@@ -182,8 +182,38 @@ export function RegionHubPage() {
           </div>
         </section>
 
+        {/* Regional Ecosystem — full action grid per IA brief */}
+        <section className="py-12 border-t border-gold/10">
+          <div className="container max-w-5xl mx-auto px-4">
+            <h2 className="text-lg font-semibold text-ivory/70 uppercase tracking-widest mb-6 text-center">
+              {hub.shortName} Ecosystem
+            </h2>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+              {[
+                { label: "Regional Profile", to: `/region/${hub.slug}` },
+                { label: "EduAid Conference", to: "/eduaid" },
+                { label: "RMSA Legacy Project", to: "/rebuild" },
+                { label: "Special-Needs Nomination", to: `/nominate?category=special-needs&region=${hub.slug}` },
+                { label: "Vote", to: "/vote" },
+                { label: "Regional GFA Wallet", to: "/wallet" },
+                { label: "Sponsorship Opportunities", to: "/sponsor" },
+                { label: "Impact Reports", to: "/programs#legacy" },
+              ].map((a) => (
+                <Link
+                  key={a.label}
+                  to={a.to}
+                  className="rounded-lg border border-gold/15 bg-charcoal-light/50 px-4 py-3 text-sm text-ivory/80 hover:text-gold hover:border-gold/40 hover:bg-gold/5 transition-colors text-center"
+                >
+                  {a.label}
+                </Link>
+              ))}
+            </div>
+          </div>
+        </section>
+
         {/* 2026–2027 Legacy Impact Section */}
         <RegionLegacySection slug={LEGACY_SLUG_MAP[hub.slug] ?? hub.slug} />
+
 
         {/* Other Regions */}
         <section className="py-16 border-t border-gold/10">
