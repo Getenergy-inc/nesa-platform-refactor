@@ -396,7 +396,7 @@ function MobileNav({ onOpenCVOMessage }: { onOpenCVOMessage: () => void }) {
               <div className="space-y-3">
                 {/* Primary CTA: Become a Sponsor (full-width) */}
                 <Link to="/sponsor" onClick={handleLinkClick} className="block">
-                  <Button className="w-full bg-gold text-charcoal hover:bg-gold/90 font-semibold py-3 h-auto touch-manipulation shadow-md shadow-gold/20">
+                  <Button className="w-full bg-gold text-charcoal hover:bg-gold/90 font-semibold min-h-[48px] py-3 h-auto touch-manipulation shadow-md shadow-gold/20">
                     <Sparkles className="h-4 w-4 mr-2" />
                     Become a Sponsor
                   </Button>
@@ -404,12 +404,12 @@ function MobileNav({ onOpenCVOMessage }: { onOpenCVOMessage: () => void }) {
                 {/* Secondary: Nominate + Vote */}
                 <div className="grid grid-cols-2 gap-2">
                   <Link to="/nominate" onClick={handleLinkClick}>
-                    <Button variant="outline" className="w-full border-gold/40 text-gold hover:bg-gold/10 hover:text-gold bg-transparent py-3 h-auto touch-manipulation">
+                    <Button variant="outline" className="w-full border-gold/40 text-gold hover:bg-gold/10 hover:text-gold bg-transparent min-h-[48px] py-3 h-auto touch-manipulation">
                       Nominate
                     </Button>
                   </Link>
                   <Link to="/vote" onClick={handleLinkClick}>
-                    <Button variant="outline" className="w-full border-gold/40 text-gold hover:bg-gold/10 hover:text-gold bg-transparent py-3 h-auto touch-manipulation">
+                    <Button variant="outline" className="w-full border-gold/40 text-gold hover:bg-gold/10 hover:text-gold bg-transparent min-h-[48px] py-3 h-auto touch-manipulation">
                       Vote
                     </Button>
                   </Link>
@@ -418,7 +418,7 @@ function MobileNav({ onOpenCVOMessage }: { onOpenCVOMessage: () => void }) {
                 <Link to="/get-involved" onClick={handleLinkClick} className="block">
                   <Button
                     variant="ghost"
-                    className="w-full text-white/80 hover:text-gold hover:bg-gold/10 py-3 h-auto touch-manipulation border border-gold/20"
+                    className="w-full text-white/80 hover:text-gold hover:bg-gold/10 min-h-[48px] py-3 h-auto touch-manipulation border border-gold/20"
                   >
                     Get Started
                   </Button>
@@ -427,11 +427,12 @@ function MobileNav({ onOpenCVOMessage }: { onOpenCVOMessage: () => void }) {
                 <Link to="/login" onClick={handleLinkClick} className="block">
                   <Button
                     variant="ghost"
-                    className="w-full text-white/80 hover:text-gold hover:bg-gold/10 py-3 h-auto touch-manipulation"
+                    className="w-full text-white/80 hover:text-gold hover:bg-gold/10 min-h-[48px] py-3 h-auto touch-manipulation"
                   >
                     Sign In
                   </Button>
                 </Link>
+
               </div>
             )}
           </div>
