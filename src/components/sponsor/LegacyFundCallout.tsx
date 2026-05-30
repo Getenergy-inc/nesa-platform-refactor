@@ -39,11 +39,18 @@ export function LegacyFundCallout() {
             </div>
           </div>
 
-          <p className="text-ivory/75 text-sm md:text-base leading-relaxed mb-6 max-w-3xl">
-            <span className="text-gold font-semibold">5% of all eligible sponsorship income</span> is
-            allocated to the Rebuild My School Africa (RMSA) Legacy Fund to support school
-            interventions across the continent — running{" "}
-            <span className="text-ivory">October 2026 – October 2027</span>.
+          <p className="text-ivory/75 text-sm md:text-base leading-relaxed mb-4 max-w-3xl">
+            NESA-Africa 2026 will allocate{" "}
+            <span className="text-gold font-semibold">5% of eligible sponsorship income</span> to the
+            Rebuild My School Africa Legacy Fund, supporting post-award education infrastructure,
+            Special Needs Education interventions, accessibility upgrades, digital learning spaces,
+            and community-led school improvement from{" "}
+            <span className="text-ivory">October 2026 to October 2027</span>.
+          </p>
+          <p className="text-ivory/55 text-xs md:text-sm leading-relaxed mb-6 max-w-3xl">
+            Subject to Board, Finance, and Compliance approval, allocations may be distributed across
+            the approved 8 African regional GFA Wzip wallet accounts with monthly reconciliation and
+            reporting.
           </p>
 
           {/* Flow */}
