@@ -1,15 +1,12 @@
-import { Trophy, ArrowRight, Sparkles, Users, Globe, Calendar, Coins, LayoutGrid, Search } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Sparkles } from "lucide-react";
 import { useTranslation } from "react-i18next";
-import { Button } from "@/components/ui/button";
-import { useSeason } from "@/contexts/SeasonContext";
-import { motion, AnimatePresence } from "framer-motion";
-import { useState, useEffect, useMemo } from "react";
+import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
+import { useState, useEffect } from "react";
 import { NESALogo3D } from "@/components/nesa/NESALogo3D";
-import { useRegionNomineeCounts } from "@/hooks/useRegionNomineeCounts";
-import { FloatingParticles } from "@/components/ui/floating-particles";
-import stageBackdropVideo from "@/assets/nesa-stage-backdrop-motion.mp4";
-import stageBackdropFallback from "@/assets/nesa-stage-backdrop.jpg";
+import stageBackdrop from "@/assets/nesa-stage-backdrop.jpg";
+import stageBackdrop640 from "@/assets/nesa-stage-backdrop-640.webp";
+import stageBackdrop960 from "@/assets/nesa-stage-backdrop-960.webp";
+import stageBackdrop1080 from "@/assets/nesa-stage-backdrop-1080.webp";
 import blueGarnetTrophyIcon from "@/assets/blue-garnet-trophy-icon.png";
 import blueGarnetTrophyWinners from "@/assets/blue-garnet-trophy-winners.png";
 import { HeroCTAStack } from "@/components/nesa/HeroCTAStack";
@@ -19,15 +16,12 @@ type CarouselItem = typeof CAROUSEL_ITEMS[number];
 
 export function TrophyHeroSection() {
   const { t } = useTranslation("pages");
-  const { getBannerText } = useSeason();
   const [currentItem, setCurrentItem] = useState<CarouselItem>("trophy-icon");
-  const { data: countsData } = useRegionNomineeCounts();
-  const nomineeLabel = useMemo(() => {
-    const count = countsData?.totalCount ?? 1760;
-    return t("landing.trophyHero.trustNominees", { count: count.toLocaleString() } as any);
-  }, [countsData, t]);
+  const shouldReduceMotion = useReducedMotion();
 
   useEffect(() => {
+    if (shouldReduceMotion) return;
+
     const interval = setInterval(() => {
       setCurrentItem((prev) => {
         const idx = CAROUSEL_ITEMS.indexOf(prev);
@@ -35,43 +29,35 @@ export function TrophyHeroSection() {
       });
     }, 3500);
     return () => clearInterval(interval);
-  }, []);
-
-  const bannerText = getBannerText();
+  }, [shouldReduceMotion]);
 
   return (
     <section className="relative min-h-[60vh] sm:min-h-[78vh] lg:min-h-[95vh] flex items-center bg-charcoal overflow-hidden">
-      {/* Stage Backdrop — Cinematic video with warm overlay */}
-      <div className="absolute inset-0">
-        <video
-          autoPlay
-          loop
-          muted
-          playsInline
-          poster={stageBackdropFallback}
-          className="absolute inset-0 w-full h-full object-cover object-center"
-        >
-          <source src={stageBackdropVideo} type="video/mp4" />
-        </video>
+      {/* Stable uploaded photo backdrop — no autoplay video or zoom animation */}
+      <div className="absolute inset-0 bg-charcoal">
+        <picture className="absolute inset-0 block h-full w-full">
+          <source
+            type="image/webp"
+            srcSet={`${stageBackdrop640} 640w, ${stageBackdrop960} 960w, ${stageBackdrop1080} 1080w`}
+            sizes="100vw"
+          />
+          <img
+            src={stageBackdrop}
+            alt="NESA-Africa award stage backdrop"
+            className="h-full w-full object-cover object-[50%_35%] sm:object-center"
+            decoding="async"
+            fetchPriority="high"
+          />
+        </picture>
         <div className="absolute inset-0 bg-charcoal/55" />
         <div className="absolute inset-0 bg-gradient-to-b from-charcoal/40 via-transparent to-charcoal" />
         <div className="absolute inset-0 bg-gradient-to-r from-charcoal/50 via-transparent to-charcoal/50" />
       </div>
       
-      <FloatingParticles count={20} color="gold" className="opacity-40" />
-      
-      {/* Spotlight Effects — Desktop only */}
+      {/* Static spotlight accents — desktop only, no continuous background movement */}
       <div className="pointer-events-none absolute inset-0 overflow-hidden hidden lg:block">
-        <motion.div 
-          className="absolute -left-20 top-0 h-[80vh] w-48 rotate-[18deg] bg-gradient-to-b from-gold/12 to-transparent blur-3xl"
-          animate={{ opacity: [0.2, 0.5, 0.2] }}
-          transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
-        />
-        <motion.div 
-          className="absolute -right-20 top-0 h-[80vh] w-48 rotate-[-18deg] bg-gradient-to-b from-gold/12 to-transparent blur-3xl"
-          animate={{ opacity: [0.2, 0.5, 0.2] }}
-          transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 2.5 }}
-        />
+        <div className="absolute -left-20 top-0 h-[80vh] w-48 rotate-[18deg] bg-gradient-to-b from-gold/12 to-transparent blur-3xl" />
+        <div className="absolute -right-20 top-0 h-[80vh] w-48 rotate-[-18deg] bg-gradient-to-b from-gold/12 to-transparent blur-3xl" />
       </div>
 
       <div className="container relative z-10 py-6 sm:py-12 lg:py-16">
