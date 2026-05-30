@@ -124,6 +124,16 @@ export default function SponsorHub() {
         </div>
       </section>
 
+      {/* Sponsorship vs Partnership vs Endorsement definitions */}
+      <SponsorshipDefinitions />
+
+      {/* Donor & Sponsor Trust Center */}
+      <section className="bg-charcoal py-12 md:py-16 border-t border-gold/10">
+        <div className="container mx-auto px-4">
+          <DonorTrustPanel />
+        </div>
+      </section>
+
       {/* Footer CTA */}
       <section className="bg-charcoal border-t border-gold/10 py-14">
         <div className="container mx-auto px-4 text-center max-w-2xl">
