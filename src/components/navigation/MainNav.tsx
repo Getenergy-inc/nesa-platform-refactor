@@ -1,7 +1,7 @@
 // Main Navigation Component
 // Responsive navbar with dropdown menus for NESA-Africa
 
-import { useState, forwardRef } from "react";
+import { useState, forwardRef, useRef, useEffect, type KeyboardEvent as ReactKeyboardEvent } from "react";
 import { Link, useLocation } from "react-router-dom";
 import {
   ChevronDown,
