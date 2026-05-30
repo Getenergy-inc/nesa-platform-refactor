@@ -323,12 +323,13 @@ function MobileNav({ onOpenCVOMessage }: { onOpenCVOMessage: () => void }) {
                               to={child.href}
                               onClick={handleTrackedClick(child.label, child.href)}
                               className={cn(
-                                "flex items-center gap-3 px-8 py-3.5 text-sm transition-colors touch-manipulation",
+                                "flex items-center gap-3 px-8 py-3.5 min-h-[48px] text-sm transition-colors touch-manipulation",
                                 "hover:bg-gold/5 hover:text-gold active:bg-gold/10",
                                 location.pathname === child.href
                                   ? "text-gold bg-gold/5"
                                   : "text-white/70",
                               )}
+
                             >
                               {child.icon && (
                                 <child.icon className="h-4 w-4 flex-shrink-0" />
