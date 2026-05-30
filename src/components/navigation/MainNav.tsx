@@ -243,6 +243,24 @@ function MobileNav({ onOpenCVOMessage }: { onOpenCVOMessage: () => void }) {
 
             {/* Full Navigation */}
             <div className="py-2">
+              {/* Governance / Quick-Access strip (mobile mirror of Level-1 bar) */}
+              <div className="px-4 pb-2 pt-1">
+                <p className="text-[10px] uppercase tracking-wider text-gold/60 font-semibold mb-2">Quick access</p>
+                <div className="flex flex-wrap gap-1.5">
+                  {GOVERNANCE_NAV.map((g) => (
+                    <Link
+                      key={g.href}
+                      to={g.href}
+                      onClick={handleLinkClick}
+                      className="text-[11px] text-white/80 hover:text-gold border border-gold/20 rounded-full px-2.5 py-1 transition-colors"
+                    >
+                      {g.label}
+                    </Link>
+                  ))}
+                </div>
+              </div>
+              <div className="h-px bg-gold/10 mx-4 my-2" />
+
               {mobileOrdered.map((item) => (
                 <div
                   key={item.href}
