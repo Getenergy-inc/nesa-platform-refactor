@@ -204,13 +204,14 @@ function MobileNav({ onOpenCVOMessage }: { onOpenCVOMessage: () => void }) {
         <Button
           variant="ghost"
           size="icon"
-          className="lg:hidden text-white hover:text-gold hover:bg-gold/10 min-h-[44px] min-w-[44px]"
+          className="lg:hidden text-white hover:text-gold hover:bg-gold/10 min-h-[48px] min-w-[48px]"
           aria-label="Open navigation menu"
           aria-expanded={open}
           aria-controls="mobile-nav-drawer"
         >
           <Menu className="h-6 w-6" />
         </Button>
+
       </SheetTrigger>
       <SheetContent
         id="mobile-nav-drawer"
@@ -246,18 +247,19 @@ function MobileNav({ onOpenCVOMessage }: { onOpenCVOMessage: () => void }) {
               {/* Governance / Quick-Access strip (mobile mirror of Level-1 bar) */}
               <div className="px-4 pb-2 pt-1">
                 <p className="text-[10px] uppercase tracking-wider text-gold/60 font-semibold mb-2">Quick access</p>
-                <div className="flex flex-wrap gap-1.5">
+                <div className="flex flex-wrap gap-2">
                   {GOVERNANCE_NAV.map((g) => (
                     <Link
                       key={g.href}
                       to={g.href}
                       onClick={handleLinkClick}
-                      className="text-[11px] text-white/80 hover:text-gold border border-gold/20 rounded-full px-2.5 py-1 transition-colors"
+                      className="inline-flex items-center text-xs text-white/85 hover:text-gold border border-gold/20 rounded-full px-3 min-h-[48px] transition-colors touch-manipulation"
                     >
                       {g.label}
                     </Link>
                   ))}
                 </div>
+
               </div>
               <div className="h-px bg-gold/10 mx-4 my-2" />
 
@@ -273,12 +275,13 @@ function MobileNav({ onOpenCVOMessage }: { onOpenCVOMessage: () => void }) {
                         aria-expanded={expandedItems.includes(item.href)}
                         aria-controls={`mnav-sub-${item.href}`}
                         className={cn(
-                          "flex items-center justify-between w-full px-4 py-4 text-left transition-colors touch-manipulation min-h-[44px]",
+                          "flex items-center justify-between w-full px-4 py-4 text-left transition-colors touch-manipulation min-h-[48px]",
                           "hover:bg-gold/5 active:bg-gold/10",
                           expandedItems.includes(item.href)
                             ? "text-gold bg-gold/5"
                             : "text-white/90",
                         )}
+
                       >
                         <span className="flex items-center gap-3">
                           {item.icon && <item.icon className="h-5 w-5" />}
@@ -320,12 +323,13 @@ function MobileNav({ onOpenCVOMessage }: { onOpenCVOMessage: () => void }) {
                               to={child.href}
                               onClick={handleTrackedClick(child.label, child.href)}
                               className={cn(
-                                "flex items-center gap-3 px-8 py-3.5 text-sm transition-colors touch-manipulation",
+                                "flex items-center gap-3 px-8 py-3.5 min-h-[48px] text-sm transition-colors touch-manipulation",
                                 "hover:bg-gold/5 hover:text-gold active:bg-gold/10",
                                 location.pathname === child.href
                                   ? "text-gold bg-gold/5"
                                   : "text-white/70",
                               )}
+
                             >
                               {child.icon && (
                                 <child.icon className="h-4 w-4 flex-shrink-0" />
@@ -346,12 +350,13 @@ function MobileNav({ onOpenCVOMessage }: { onOpenCVOMessage: () => void }) {
                       to={item.href}
                       onClick={handleTrackedClick(item.label, item.href)}
                       className={cn(
-                        "flex items-center gap-3 px-4 py-4 transition-colors touch-manipulation",
+                        "flex items-center gap-3 px-4 py-4 min-h-[48px] transition-colors touch-manipulation",
                         "hover:bg-gold/5 hover:text-gold active:bg-gold/10",
                         location.pathname === item.href
                           ? "text-gold bg-gold/5"
                           : "text-white/90",
                       )}
+
                     >
                       {item.icon && <item.icon className="h-5 w-5" />}
                       <span className="font-medium">{item.label}</span>
@@ -369,14 +374,14 @@ function MobileNav({ onOpenCVOMessage }: { onOpenCVOMessage: () => void }) {
                 <Link
                   to="/dashboard"
                   onClick={handleLinkClick}
-                  className="flex items-center gap-3 px-4 py-3 rounded-xl bg-gold/10 text-gold hover:bg-gold/20 transition-colors touch-manipulation"
+                  className="flex items-center gap-3 px-4 py-3 min-h-[48px] rounded-xl bg-gold/10 text-gold hover:bg-gold/20 transition-colors touch-manipulation"
                 >
                   <User className="h-5 w-5" />
                   <span className="font-medium">Dashboard</span>
                 </Link>
                 <Button
                   variant="ghost"
-                  className="w-full justify-start text-white/70 hover:text-red-400 hover:bg-red-400/10 py-3 h-auto touch-manipulation"
+                  className="w-full justify-start text-white/70 hover:text-red-400 hover:bg-red-400/10 min-h-[48px] py-3 h-auto touch-manipulation"
                   onClick={() => {
                     signOut();
                     handleLinkClick();
@@ -385,12 +390,13 @@ function MobileNav({ onOpenCVOMessage }: { onOpenCVOMessage: () => void }) {
                   <LogOut className="h-5 w-5 mr-3" />
                   <span className="font-medium">Sign Out</span>
                 </Button>
+
               </div>
             ) : (
               <div className="space-y-3">
                 {/* Primary CTA: Become a Sponsor (full-width) */}
                 <Link to="/sponsor" onClick={handleLinkClick} className="block">
-                  <Button className="w-full bg-gold text-charcoal hover:bg-gold/90 font-semibold py-3 h-auto touch-manipulation shadow-md shadow-gold/20">
+                  <Button className="w-full bg-gold text-charcoal hover:bg-gold/90 font-semibold min-h-[48px] py-3 h-auto touch-manipulation shadow-md shadow-gold/20">
                     <Sparkles className="h-4 w-4 mr-2" />
                     Become a Sponsor
                   </Button>
@@ -398,12 +404,12 @@ function MobileNav({ onOpenCVOMessage }: { onOpenCVOMessage: () => void }) {
                 {/* Secondary: Nominate + Vote */}
                 <div className="grid grid-cols-2 gap-2">
                   <Link to="/nominate" onClick={handleLinkClick}>
-                    <Button variant="outline" className="w-full border-gold/40 text-gold hover:bg-gold/10 hover:text-gold bg-transparent py-3 h-auto touch-manipulation">
+                    <Button variant="outline" className="w-full border-gold/40 text-gold hover:bg-gold/10 hover:text-gold bg-transparent min-h-[48px] py-3 h-auto touch-manipulation">
                       Nominate
                     </Button>
                   </Link>
                   <Link to="/vote" onClick={handleLinkClick}>
-                    <Button variant="outline" className="w-full border-gold/40 text-gold hover:bg-gold/10 hover:text-gold bg-transparent py-3 h-auto touch-manipulation">
+                    <Button variant="outline" className="w-full border-gold/40 text-gold hover:bg-gold/10 hover:text-gold bg-transparent min-h-[48px] py-3 h-auto touch-manipulation">
                       Vote
                     </Button>
                   </Link>
@@ -412,7 +418,7 @@ function MobileNav({ onOpenCVOMessage }: { onOpenCVOMessage: () => void }) {
                 <Link to="/get-involved" onClick={handleLinkClick} className="block">
                   <Button
                     variant="ghost"
-                    className="w-full text-white/80 hover:text-gold hover:bg-gold/10 py-3 h-auto touch-manipulation border border-gold/20"
+                    className="w-full text-white/80 hover:text-gold hover:bg-gold/10 min-h-[48px] py-3 h-auto touch-manipulation border border-gold/20"
                   >
                     Get Started
                   </Button>
@@ -421,11 +427,12 @@ function MobileNav({ onOpenCVOMessage }: { onOpenCVOMessage: () => void }) {
                 <Link to="/login" onClick={handleLinkClick} className="block">
                   <Button
                     variant="ghost"
-                    className="w-full text-white/80 hover:text-gold hover:bg-gold/10 py-3 h-auto touch-manipulation"
+                    className="w-full text-white/80 hover:text-gold hover:bg-gold/10 min-h-[48px] py-3 h-auto touch-manipulation"
                   >
                     Sign In
                   </Button>
                 </Link>
+
               </div>
             )}
           </div>
