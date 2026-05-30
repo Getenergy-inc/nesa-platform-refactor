@@ -374,14 +374,14 @@ function MobileNav({ onOpenCVOMessage }: { onOpenCVOMessage: () => void }) {
                 <Link
                   to="/dashboard"
                   onClick={handleLinkClick}
-                  className="flex items-center gap-3 px-4 py-3 rounded-xl bg-gold/10 text-gold hover:bg-gold/20 transition-colors touch-manipulation"
+                  className="flex items-center gap-3 px-4 py-3 min-h-[48px] rounded-xl bg-gold/10 text-gold hover:bg-gold/20 transition-colors touch-manipulation"
                 >
                   <User className="h-5 w-5" />
                   <span className="font-medium">Dashboard</span>
                 </Link>
                 <Button
                   variant="ghost"
-                  className="w-full justify-start text-white/70 hover:text-red-400 hover:bg-red-400/10 py-3 h-auto touch-manipulation"
+                  className="w-full justify-start text-white/70 hover:text-red-400 hover:bg-red-400/10 min-h-[48px] py-3 h-auto touch-manipulation"
                   onClick={() => {
                     signOut();
                     handleLinkClick();
@@ -390,6 +390,7 @@ function MobileNav({ onOpenCVOMessage }: { onOpenCVOMessage: () => void }) {
                   <LogOut className="h-5 w-5 mr-3" />
                   <span className="font-medium">Sign Out</span>
                 </Button>
+
               </div>
             ) : (
               <div className="space-y-3">
