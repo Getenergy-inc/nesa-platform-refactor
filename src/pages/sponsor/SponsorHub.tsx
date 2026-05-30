@@ -6,6 +6,11 @@ import { PublicLayout } from "@/components/layout/PublicLayout";
 import { Button } from "@/components/ui/button";
 import { SPONSOR_CATEGORIES } from "@/config/sponsorCategories";
 import { trackEvent } from "@/lib/analytics";
+import { SponsorPillarsSection } from "@/components/sponsor/SponsorPillarsSection";
+import { LegacyFundCallout } from "@/components/sponsor/LegacyFundCallout";
+import { SponsorshipDefinitions } from "@/components/sponsor/SponsorshipDefinitions";
+import { SponsorFirewallBanner } from "@/components/governance/SponsorFirewallBanner";
+import { DonorTrustPanel } from "@/components/governance/DonorTrustPanel";
 
 export default function SponsorHub() {
   return (
@@ -60,6 +65,19 @@ export default function SponsorHub() {
         </div>
       </section>
 
+      {/* Sponsor firewall — governance prominence */}
+      <section className="bg-charcoal pt-10 md:pt-12">
+        <div className="container mx-auto px-4">
+          <SponsorFirewallBanner />
+        </div>
+      </section>
+
+      {/* 4 Governance Pillars */}
+      <SponsorPillarsSection />
+
+      {/* 5% RMSA Legacy Fund */}
+      <LegacyFundCallout />
+
       {/* Categories grid */}
       <section className="bg-charcoal py-14 md:py-20">
         <div className="container mx-auto px-4">
@@ -103,6 +121,16 @@ export default function SponsorHub() {
               </motion.div>
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* Sponsorship vs Partnership vs Endorsement definitions */}
+      <SponsorshipDefinitions />
+
+      {/* Donor & Sponsor Trust Center */}
+      <section className="bg-charcoal py-12 md:py-16 border-t border-gold/10">
+        <div className="container mx-auto px-4">
+          <DonorTrustPanel />
         </div>
       </section>
 
