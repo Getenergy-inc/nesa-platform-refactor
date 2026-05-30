@@ -94,10 +94,11 @@ export function TrophyHeroSection() {
               transition={{ duration: 0.6, delay: 0.3 }}
               className="font-display text-[22px] leading-[1.18] sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4"
             >
-              Don't Just Clap for Education Changemakers.{" "}
+              Nominate the{" "}
               <span className="text-gold bg-gradient-to-r from-gold to-amber-400 bg-clip-text text-transparent">
-                Nominate Them for NESA-Africa 2026.
-              </span>
+                2026 Honourees
+              </span>{" "}
+              Shaping Africa's Future
             </motion.h1>
 
             <motion.p
