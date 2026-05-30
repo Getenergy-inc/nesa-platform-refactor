@@ -178,12 +178,13 @@ function MobileNav({ onOpenCVOMessage }: { onOpenCVOMessage: () => void }) {
   const triggerRefs = useRef<Record<string, HTMLButtonElement | null>>({});
   const [pendingFocus, setPendingFocus] = useState<string | null>(null);
 
+  // Mobile: only ONE dropdown open at a time (accordion behavior per IA brief).
   const toggleExpanded = (href: string) => {
     setExpandedItems((prev) => {
       const isOpen = prev.includes(href);
-      if (isOpen) return prev.filter((h) => h !== href);
+      if (isOpen) return [];
       setPendingFocus(href);
-      return [...prev, href];
+      return [href];
     });
   };
 
@@ -207,7 +208,7 @@ function MobileNav({ onOpenCVOMessage }: { onOpenCVOMessage: () => void }) {
       e.preventDefault();
       if (!expandedItems.includes(href)) {
         setPendingFocus(href);
-        setExpandedItems((prev) => [...prev, href]);
+        setExpandedItems([href]); // single-open accordion
       } else {
         const panel = panelRefs.current[href];
         panel?.querySelector<HTMLElement>('a, button')?.focus();
