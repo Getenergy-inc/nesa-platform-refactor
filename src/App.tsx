@@ -90,6 +90,7 @@ import GoldSpecialRecognition from "./pages/awards/GoldSpecialRecognition";
 import DigitalVoices from "./pages/awards/DigitalVoices";
 import Winners from "./pages/awards/Winners";
 import GovernancePage from "./pages/GovernancePage";
+import EDXMatrixPage from "./pages/EDXMatrixPage";
 
 // Category Pages (data-driven)
 import {
