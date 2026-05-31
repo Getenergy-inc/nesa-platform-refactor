@@ -174,10 +174,11 @@ export function ImpactWrapUpSection() {
                 <div className="mt-5 rounded-xl border border-gold/25 bg-gold/5 p-4">
                   <p className="text-white/80 text-xs sm:text-sm leading-relaxed">
                     <span className="text-gold font-semibold">Regional Special Needs School Intervention:</span>{" "}
-                    Each of the approved 8 African regions will feature 20 Special Needs
-                    School nomination and intervention slots — 160 in total — for
-                    communities and supporters to nominate, vote, donate, and partner for
-                    inclusive education impact.
+                    Each of the approved 8 African regions opens 20 Special Needs
+                    School nomination slots (160 total). After regional intervention
+                    voting, <span className="text-gold font-semibold">only 1 school per
+                    region — 8 schools continent-wide</span> — will be selected for the
+                    2027 Rebuild My School Africa intervention.
                   </p>
                   <Link
                     to="/donate#regional-intervention"
