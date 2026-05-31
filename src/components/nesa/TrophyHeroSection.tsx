@@ -98,7 +98,7 @@ export function TrophyHeroSection() {
               <span className="text-gold bg-gradient-to-r from-gold to-amber-400 bg-clip-text text-transparent">
                 2026 Honourees
               </span>{" "}
-              Shaping Africa's Future
+              Shaping Africa's Education Future
             </motion.h1>
 
             <motion.p
@@ -107,7 +107,11 @@ export function TrophyHeroSection() {
               transition={{ duration: 0.5, delay: 0.6 }}
               className="hidden sm:block text-white/80 text-sm sm:text-[15px] mb-6 max-w-xl mx-auto lg:mx-0 leading-relaxed"
             >
-              {t("landing.trophyHero.valueProposition")}
+              Across Africa and the diaspora, educators, innovators, advocates, institutions, funders, mentors, technology leaders, policy actors, and community changemakers are transforming education through real impact.
+              <br className="hidden md:block" /><br className="hidden md:block" />
+              Help New Education Standard Award Africa (NESA-Africa) 2026 recognise the people and organisations advancing learning, inclusion, infrastructure, innovation, mentorship, community action, and social progress.
+              <br className="hidden md:block" /><br className="hidden md:block" />
+              Nominate a changemaker today, discover Africa's education impact stories, and get ready to support your favourite nominees when voting opens.
             </motion.p>
 
 
@@ -124,9 +128,9 @@ export function TrophyHeroSection() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.5, delay: 0.8 }}
-              className="text-gold/80 text-xs sm:text-sm font-semibold tracking-wide mb-10"
+              className="text-gold/70 text-xs sm:text-sm tracking-wide mb-10 max-w-xl mx-auto lg:mx-0 leading-relaxed"
             >
-              Nominate. Earn AGC. Celebrate Education Impact.
+              Voting opens according to the official NESA-Africa 2026 timeline. AGC voting points are subject to NESA-Africa participation rules.
             </motion.p>
           </div>
 
