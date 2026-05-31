@@ -6,6 +6,7 @@ import { AwardCategoriesGrid } from "@/components/awards/AwardCategoriesGrid";
 import { BrandedCategoryHero } from "@/components/awards/BrandedCategoryHero";
 import { BrandedDocumentaryPreview } from "@/components/awards/BrandedDocumentaryPreview";
 import { BreadcrumbJsonLd } from "@/components/seo/BreadcrumbJsonLd";
+import { AwardStandardStack } from "@/components/awards/AwardStandardSections";
 
 import { getTVShowByAward } from "@/config/awardTVShows";
 import { getCategoriesGrouped } from "@/config/nesaCategories";
@@ -212,8 +213,44 @@ export default function IconAward() {
         />
 
 
-        {/* CTA */}
-        <section className="bg-charcoal py-16 lg:py-24">
+        {/* Standard NESA-Africa premium platform stack */}
+        <AwardStandardStack
+          awardName="Africa Education Icon"
+          why={{
+            title: "Why the Africa Education Icon Award Exists",
+            pillars: [
+              { label: "Educational Relevance", description: "Honours lifetime contributions that shaped curricula, institutions, and learning outcomes across decades." },
+              { label: "Social Impact", description: "Recognises figures whose work transformed communities, opened opportunity, and lifted access at scale." },
+              { label: "Recognition Value", description: "Sets the continental benchmark for what a life dedicated to African education looks like." },
+            ],
+          }}
+          eligibility={{
+            intro: "Reserved for individuals with 20+ years of demonstrable, evidence-backed contribution to African education.",
+            bullets: [
+              "20+ years of sustained education work in or for Africa",
+              "Verifiable impact on learners, teachers, or institutions",
+              "Founders, ministers, chancellors, philanthropists, advocates",
+              "African, Diaspora, or Friends of Africa pathways",
+            ],
+            disqualifiers: [
+              "Self-promotional submissions without evidence",
+              "Unverifiable or unsourced impact claims",
+              "Active conflict-of-interest with NESA governance",
+            ],
+          }}
+          edx={{
+            weights: { E: "40%", D: "35%", X: "25%" },
+            highlights: ["Lifetime Education Impact", "Leadership", "Sustainability", "Inclusion"],
+          }}
+          faqs={[
+            { q: "Can the Icon Award be self-nominated?", a: "Yes, but with the same evidence standards. Self-nominations are scored identically and audited by the NRC engine." },
+            { q: "How many Icons are recognised each year?", a: "Up to 9 — 3 Africa, 3 Diaspora, 3 Friends of Africa." },
+            { q: "Is there public voting?", a: "No. The Icon Award is jury-evaluated under the EDX Matrix; public voting is reserved for Blue Garnet tracks." },
+          ]}
+        />
+
+        {/* Legacy CTA preserved */}
+        <section className="bg-charcoal py-12 lg:py-16">
           <div className="container mx-auto px-4 text-center">
             <h2 className="mb-4 font-display text-2xl font-bold text-white">
               Know an Education Icon?

@@ -6,6 +6,7 @@ import { AwardCategoriesGrid } from "@/components/awards/AwardCategoriesGrid";
 import { BrandedCategoryHero } from "@/components/awards/BrandedCategoryHero";
 import { BrandedDocumentaryPreview } from "@/components/awards/BrandedDocumentaryPreview";
 import { BreadcrumbJsonLd } from "@/components/seo/BreadcrumbJsonLd";
+import { AwardStandardStack } from "@/components/awards/AwardStandardSections";
 import { getTVShowByAward } from "@/config/awardTVShows";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -154,6 +155,45 @@ export default function BlueGarnetAward() {
           accentColor="blue"
           title="Blue Garnet Award Categories"
           description="9 major categories + 1 Africa Education Icon Blue Garnet. Gold winners advance to Blue Garnet with 60% jury + 40% public scoring."
+        />
+
+        {/* Standard NESA-Africa premium platform stack */}
+        <AwardStandardStack
+          awardName="Blue Garnet"
+          why={{
+            title: "Why the Blue Garnet Award Exists",
+            pillars: [
+              { label: "Competitive Excellence", description: "Identifies the strongest current education changemakers across nine flagship continental tracks." },
+              { label: "Public Participation", description: "Anchored in audited AGC voting so Africa itself helps decide who wins." },
+              { label: "Evidence-First Recognition", description: "Combines expert jury scoring with public voice under the verifiable Blue Garnet formula." },
+            ],
+          }}
+          eligibility={{
+            intro: "Open to nominees advanced from the Gold tier with verifiable, current-cycle impact in an eligible Blue Garnet category.",
+            bullets: [
+              "Active, verifiable education impact in 2024–2026",
+              "Successful NRC verification of evidence and identity",
+              "Advanced from a Gold tier category in the same cycle",
+              "Adherence to NESA-Africa conflict-of-interest rules",
+            ],
+            disqualifiers: [
+              "Vote manipulation or coordinated inauthentic behaviour",
+              "Failure to provide evidence within the cure window",
+              "Sanctions or disqualifying integrity findings",
+            ],
+          }}
+          edx={{
+            weights: { E: "35%", D: "30%", X: "35%" },
+            highlights: ["Education Impact", "Innovation", "Reach", "Governance"],
+          }}
+          timeline={{
+            intro: "Blue Garnet adds a public voting stage that runs alongside jury scoring before the live gala reveal.",
+          }}
+          faqs={[
+            { q: "How is the final Blue Garnet score calculated?", a: "60% independent jury score + 40% audited public AGC voting, combined via the published Blue Garnet formula." },
+            { q: "Who votes?", a: "Verified NESA-Africa participants using AGC voting credits, with per-session uniqueness enforced at the database level." },
+            { q: "When are winners announced?", a: "9 continental winners are revealed live at the Blue Garnet Gala broadcast." },
+          ]}
         />
 
       </div>
