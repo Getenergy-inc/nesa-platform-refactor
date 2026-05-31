@@ -92,27 +92,49 @@ export function TrophyHeroSection() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.3 }}
-              className="font-display text-[22px] leading-[1.18] sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4"
+              className="font-display text-[26px] leading-[1.15] sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4"
             >
-              Nominate the{" "}
+              Africa's Education{" "}
               <span className="text-gold bg-gradient-to-r from-gold to-amber-400 bg-clip-text text-transparent">
-                2026 Honourees
+                Recognition & Impact
               </span>{" "}
-              Shaping Africa's Education Future
+              Platform
             </motion.h1>
 
             <motion.p
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.6 }}
-              className="hidden sm:block text-white/80 text-sm sm:text-[15px] mb-6 max-w-xl mx-auto lg:mx-0 leading-relaxed"
+              transition={{ duration: 0.5, delay: 0.55 }}
+              className="text-white/85 text-sm sm:text-base md:text-lg mb-5 max-w-xl mx-auto lg:mx-0 leading-relaxed"
             >
-              Across Africa and the diaspora, educators, innovators, advocates, institutions, funders, mentors, technology leaders, policy actors, and community changemakers are transforming education through real impact.
-              <br className="hidden md:block" /><br className="hidden md:block" />
-              Help New Education Standard Award Africa (NESA-Africa) 2026 recognise the people and organisations advancing learning, inclusion, infrastructure, innovation, mentorship, community action, and social progress.
-              <br className="hidden md:block" /><br className="hidden md:block" />
-              Nominate a changemaker today, discover Africa's education impact stories, and get ready to support your favourite nominees when voting opens.
+              Recognizing changemakers. Supporting education. Building measurable
+              impact across Africa.
             </motion.p>
+
+            {/* Feature chips — six platform pillars */}
+            <motion.ul
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.6 }}
+              className="flex flex-wrap gap-1.5 sm:gap-2 justify-center lg:justify-start mb-6"
+              aria-label="Platform pillars"
+            >
+              {[
+                "Nominations",
+                "Voting",
+                "Education Impact",
+                "Scholarships",
+                "Special Needs",
+                "School Transformation",
+              ].map((chip) => (
+                <li
+                  key={chip}
+                  className="px-2.5 py-1 rounded-full bg-white/5 border border-gold/25 text-white/85 text-[11px] sm:text-xs font-medium"
+                >
+                  {chip}
+                </li>
+              ))}
+            </motion.ul>
 
 
             <motion.div
