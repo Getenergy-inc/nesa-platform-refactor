@@ -5,11 +5,13 @@ import { Recycle, ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
 
 const FLOW = [
-  "Recognition",
-  "Sponsorship",
-  "Legacy Fund",
+  "Sponsorship Income",
+  "5% Legacy Allocation",
+  "RMSA Legacy Fund",
+  "Regional Wallet Allocation",
   "School Intervention",
-  "Impact Report",
+  "Monitoring & Reporting",
+  "Sponsor Impact Report",
 ];
 
 const PURPOSES = [
