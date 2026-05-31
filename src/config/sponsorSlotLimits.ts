@@ -119,22 +119,23 @@ export const SPONSOR_SLOT_GROUPS: SponsorSlotGroup[] = [
     ],
   },
   {
-    title: "10. Endorsement Visibility",
+    title: "10. Supporter Visibility Listing",
     summary:
-      "Unlimited, but grouped properly. Endorsements are not sponsorship and never imply award influence, sponsor control or winner-selection power.",
+      "Paid public supporter listings — unlimited but grouped by type. Supporter Visibility Listing does NOT create sponsorship rights, category ownership, judging authority, nomination influence, voting influence or winner-selection power.",
     rows: [
-      { area: "Institutional Endorsers", mainSlots: "Unlimited", mainAmount: "$500" },
-      { area: "Civil Society Endorsers", mainSlots: "Unlimited", mainAmount: "$500" },
-      { area: "Academic Endorsers", mainSlots: "Unlimited", mainAmount: "$500" },
-      { area: "Media Endorsers", mainSlots: "Unlimited", mainAmount: "$500" },
-      { area: "Diaspora Endorsers", mainSlots: "Unlimited", mainAmount: "$500" },
-      { area: "Corporate Support Endorsers", mainSlots: "Unlimited", mainAmount: "$500" },
+      { area: "Institutional Supporters", mainSlots: "Unlimited", mainAmount: "$500" },
+      { area: "Civil Society Supporters", mainSlots: "Unlimited", mainAmount: "$500" },
+      { area: "Academic Supporters", mainSlots: "Unlimited", mainAmount: "$500" },
+      { area: "Media Supporters", mainSlots: "Unlimited", mainAmount: "$500" },
+      { area: "Diaspora Supporters", mainSlots: "Unlimited", mainAmount: "$500" },
+      { area: "Corporate Supporters", mainSlots: "Unlimited", mainAmount: "$500" },
+      { area: "Community Supporters", mainSlots: "Unlimited", mainAmount: "$500" },
     ],
   },
 ];
 
 /** Policy statement displayed alongside the matrix. */
-export const SPONSOR_SLOT_POLICY = `To protect sponsor value, brand visibility and award integrity, NESA-Africa 2026 limits sponsorship rights by category. Each major award category has only one main sponsor, while selected supporting partners may be allowed for media, storytelling, hospitality, visibility or legacy impact. Sub-category pages carry a maximum of three sponsors per page. Endorsement visibility is separate from sponsorship and does not create category ownership or influence over award outcomes.`;
+export const SPONSOR_SLOT_POLICY = `To protect sponsor value, brand visibility and award integrity, NESA-Africa 2026 limits sponsorship rights by category. Each major award category has only one main sponsor, while selected supporting partners may be allowed for media, storytelling, hospitality, visibility or legacy impact. Sub-category pages carry a maximum of three sponsors per page. Supporter Visibility Listing is a paid public listing — separate from sponsorship — and never creates category ownership or influence over award outcomes.`;
 
 export function getSlotGroupForCategory(slug?: string): SponsorSlotGroup | undefined {
   if (!slug) return undefined;
