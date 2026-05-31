@@ -69,10 +69,14 @@ export default function Donate() {
                 <span className="text-sm font-medium text-primary">Rebuild My School Africa</span>
               </div>
               <h1 className="mb-4 font-display text-3xl font-bold text-white md:text-4xl">
-                5 Schools. 5 Regions. <span className="text-primary">One Mission.</span>
+                {TOTAL_REGIONS} Regions. {TOTAL_SLOTS} Schools.{" "}
+                <span className="text-primary">One Inclusive Mission.</span>
               </h1>
               <p className="text-white/70">
-                Each donation supports a special needs school in one of Africa's five regions — upgrading inclusive education facilities.
+                Through EduAid-Africa and Rebuild My School Africa, NESA-Africa 2026
+                opens 20 Special Needs School nomination and intervention slots in each
+                of the approved 8 African regions — for nominations, regional voting,
+                donations, sponsorships, and EduTourism 2027 visits.
               </p>
             </div>
           </div>
@@ -85,46 +89,8 @@ export default function Donate() {
           </div>
         </section>
 
-        {/* Regional School Cards with African Textiles */}
-
-        <section className="py-12">
-          <div className="container mx-auto px-4">
-            <h2 className="mb-2 text-center font-display text-xl font-semibold text-white">
-              Choose a School to Support
-            </h2>
-            <p className="mb-8 text-center text-sm text-white/50">
-              Each card features the cultural textile heritage of its region
-            </p>
-            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
-              {regions.map((region) => (
-                <div key={region.name} className={`group relative overflow-hidden rounded-xl border ${region.accent}`}>
-                  {/* Pattern background */}
-                  <div className="aspect-[4/3] overflow-hidden">
-                    <img
-                      src={region.pattern}
-                      alt={`${region.patternName} — ${region.name}`}
-                      className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
-                      loading="lazy"
-                    />
-                  </div>
-                  <div className={`absolute inset-0 bg-gradient-to-t ${region.color} to-transparent opacity-70`} />
-                  <div className="absolute inset-0 bg-gradient-to-t from-charcoal via-charcoal/60 to-transparent" />
-                  <div className="absolute inset-x-0 bottom-0 p-4">
-                    <div className="flex items-center gap-1.5 mb-1">
-                      <MapPin className="h-3 w-3 text-white/60" />
-                      <span className="text-[10px] text-white/60 uppercase tracking-wider">{region.name}</span>
-                    </div>
-                    <div className="flex items-center gap-1.5 mb-0.5">
-                      <School className="h-3.5 w-3.5 text-white" />
-                      <h3 className="font-semibold text-white text-sm">{region.school}</h3>
-                    </div>
-                    <p className="text-[10px] text-white/60">{region.country} • {region.patternName}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
+        {/* Regional Special Needs School Intervention */}
+        <RegionalSchoolInterventionSection />
 
         {/* Donation Section */}
         <section className="py-12 lg:py-16">
