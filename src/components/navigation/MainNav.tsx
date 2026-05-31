@@ -758,22 +758,24 @@ export function MainNav() {
               alt="NESA-Africa"
               className="h-8 sm:h-10 w-8 sm:w-10 rounded-full object-contain"
             />
-            <div className="flex flex-col leading-tight">
+            <div className="flex flex-col leading-tight min-w-0">
               <span className="text-[13px] sm:text-sm font-display font-bold text-gold tracking-wide whitespace-nowrap">
                 NESA-Africa <span className="text-white/70 font-medium">2026</span>
               </span>
-              {/* Motto: short on mobile, full on tablet+ */}
-              <span className="text-[9px] xl:text-[10px] text-gold/70 font-medium tracking-wider italic whitespace-nowrap">
-                <span className="sm:hidden">Blue-Garnet Awards for Education</span>
-                <span className="hidden sm:inline">The African Blue-Garnet Awards for Education</span>
+              {/* Motto: hidden below 1200px to protect brand area; shown on desktop only */}
+              <span className="hidden min-[1200px]:inline text-[10px] text-gold/70 font-medium tracking-wider italic whitespace-nowrap">
+                The African Blue-Garnet Awards for Education
               </span>
             </div>
           </Link>
 
-          {/* Desktop Navigation */}
-          <div className="flex-1 min-w-0">
+          {/* Desktop Navigation — only at >=1200px */}
+          <div className="hidden min-[1200px]:block flex-1 min-w-0">
             <DesktopNav onOpenCVOMessage={() => setCVOMessageOpen(true)} />
           </div>
+
+          {/* Spacer to push CTAs right on tablet/mobile */}
+          <div className="flex-1 min-[1200px]:hidden" />
 
           {/* Right Side: 3 primary CTAs (Nominate, Vote, Become a Sponsor) + utility */}
           <div className="flex items-center gap-1.5 xl:gap-2 shrink-0">
@@ -782,7 +784,7 @@ export function MainNav() {
               asChild
               size="sm"
               variant="outline"
-              className="hidden xl:inline-flex border-gold/40 text-gold hover:bg-gold/10 hover:text-gold h-9 px-3 text-[12px] bg-transparent whitespace-nowrap shrink-0"
+              className="hidden min-[1200px]:inline-flex border-gold/40 text-gold hover:bg-gold/10 hover:text-gold h-9 px-3 text-[12px] bg-transparent whitespace-nowrap shrink-0"
             >
               <Link to="/nominate" aria-label="Nominate for NESA-Africa 2026">
                 <Trophy className="h-3.5 w-3.5 mr-1" />
@@ -795,7 +797,7 @@ export function MainNav() {
               asChild
               size="sm"
               variant="outline"
-              className="hidden xl:inline-flex border-gold/40 text-gold hover:bg-gold/10 hover:text-gold h-9 px-3 text-[12px] bg-transparent whitespace-nowrap shrink-0"
+              className="hidden min-[1200px]:inline-flex border-gold/40 text-gold hover:bg-gold/10 hover:text-gold h-9 px-3 text-[12px] bg-transparent whitespace-nowrap shrink-0"
             >
               <Link to="/vote" aria-label="Vote in NESA-Africa 2026">
                 <Vote className="h-3.5 w-3.5 mr-1" />
@@ -807,7 +809,7 @@ export function MainNav() {
             <Button
               asChild
               size="sm"
-              className="hidden xl:inline-flex bg-gold text-charcoal hover:bg-gold/90 font-semibold h-9 px-3 text-[12px] shadow-md shadow-gold/20 shrink-0 whitespace-nowrap"
+              className="hidden min-[1200px]:inline-flex bg-gold text-charcoal hover:bg-gold/90 font-semibold h-9 px-3 text-[12px] shadow-md shadow-gold/20 shrink-0 whitespace-nowrap"
             >
               <Link to="/sponsor" aria-label="Become a Sponsor of NESA-Africa 2026">
                 <Sparkles className="h-3.5 w-3.5 mr-1" />
@@ -819,10 +821,10 @@ export function MainNav() {
             <Button
               asChild
               size="sm"
-              className="xl:hidden inline-flex bg-gold text-charcoal hover:bg-gold/90 font-semibold h-9 px-2.5 text-[11px] shadow-md shadow-gold/20 shrink-0 whitespace-nowrap"
+              className="min-[1200px]:hidden inline-flex bg-gold text-charcoal hover:bg-gold/90 font-semibold h-9 px-2.5 text-[11px] shadow-md shadow-gold/20 shrink-0 whitespace-nowrap"
             >
               <Link to="/nominate" aria-label="Nominate for NESA-Africa 2026">
-                <Trophy className="h-3.5 w-3.5 sm:mr-1" />
+                <Trophy className="h-3.5 w-3.5 sm:mr-1" aria-hidden="true" />
                 <span className="hidden sm:inline">Nominate</span>
               </Link>
             </Button>
@@ -830,10 +832,10 @@ export function MainNav() {
               asChild
               size="sm"
               variant="outline"
-              className="xl:hidden inline-flex border-gold/40 text-gold hover:bg-gold/10 hover:text-gold h-9 px-2.5 text-[11px] bg-transparent shrink-0 whitespace-nowrap"
+              className="min-[1200px]:hidden inline-flex border-gold/40 text-gold hover:bg-gold/10 hover:text-gold h-9 px-2.5 text-[11px] bg-transparent shrink-0 whitespace-nowrap"
             >
               <Link to="/vote" aria-label="Vote in NESA-Africa 2026">
-                <Vote className="h-3.5 w-3.5 sm:mr-1" />
+                <Vote className="h-3.5 w-3.5 sm:mr-1" aria-hidden="true" />
                 <span className="hidden sm:inline">Vote</span>
               </Link>
             </Button>
@@ -841,12 +843,12 @@ export function MainNav() {
             {/* Utility: Search */}
             <NavSearch />
 
-            {/* Utility: User Menu (Desktop) */}
-            <div className="hidden xl:block">
+            {/* Utility: User Menu (Desktop only at >=1200px) */}
+            <div className="hidden min-[1200px]:block">
               <UserMenu />
             </div>
 
-            {/* Mobile Menu */}
+            {/* Mobile Menu (visible below 1200px) */}
             <MobileNav onOpenCVOMessage={() => setCVOMessageOpen(true)} />
           </div>
         </div>
