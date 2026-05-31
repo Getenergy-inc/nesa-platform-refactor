@@ -132,6 +132,11 @@ export function NESALandingPage() {
           <SponsorsSection />
         </LazySection>
 
+        {/* Sponsor tier preview cards — mobile-friendly pricing tiers */}
+        <LazySection>
+          <SponsorTiersPreview />
+        </LazySection>
+
 
 
         <LazySection>
