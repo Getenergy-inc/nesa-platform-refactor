@@ -69,14 +69,15 @@ export default function Donate() {
                 <span className="text-sm font-medium text-primary">Rebuild My School Africa</span>
               </div>
               <h1 className="mb-4 font-display text-3xl font-bold text-white md:text-4xl">
-                {TOTAL_REGIONS} Regions. {TOTAL_SLOTS} Schools.{" "}
-                <span className="text-primary">One Inclusive Mission.</span>
+                {TOTAL_REGIONS} Regions. {TOTAL_SLOTS} Nominations.{" "}
+                <span className="text-primary">{TOTAL_REGIONS} Schools Picked for 2027.</span>
               </h1>
               <p className="text-white/70">
                 Through EduAid-Africa and Rebuild My School Africa, NESA-Africa 2026
-                opens 20 Special Needs School nomination and intervention slots in each
-                of the approved 8 African regions — for nominations, regional voting,
-                donations, sponsorships, and EduTourism 2027 visits.
+                opens 20 Special Needs School nomination slots in each of the approved
+                8 African regions. After regional intervention voting, only{" "}
+                <span className="text-gold font-semibold">1 school per region</span> —
+                8 schools continent-wide — will be selected for the 2027 intervention.
               </p>
             </div>
           </div>
