@@ -382,9 +382,11 @@ function MobileNav({ onOpenCVOMessage }: { onOpenCVOMessage: () => void }) {
                               key={child.href}
                               to={child.href}
                               onClick={handleTrackedClick(child.label, child.href)}
+                              aria-current={location.pathname === child.href ? "page" : undefined}
                               className={cn(
                                 "flex items-center gap-3 px-8 py-3.5 min-h-[48px] text-sm transition-colors touch-manipulation",
                                 "hover:bg-gold/5 hover:text-gold active:bg-gold/10",
+                                "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold/60 focus-visible:ring-inset",
                                 location.pathname === child.href
                                   ? "text-gold bg-gold/5"
                                   : "text-white/70",
@@ -392,7 +394,7 @@ function MobileNav({ onOpenCVOMessage }: { onOpenCVOMessage: () => void }) {
 
                             >
                               {child.icon && (
-                                <child.icon className="h-4 w-4 flex-shrink-0" />
+                                <child.icon className="h-4 w-4 flex-shrink-0" aria-hidden="true" />
                               )}
                               <span className="flex-1">{child.label}</span>
                               {child.badge && (
