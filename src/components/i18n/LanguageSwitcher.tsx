@@ -25,9 +25,10 @@ import { cn } from '@/lib/utils';
 interface LanguageSwitcherProps {
   variant?: 'default' | 'compact' | 'footer';
   className?: string;
+  label?: string;
 }
 
-export function LanguageSwitcher({ variant = 'default', className }: LanguageSwitcherProps) {
+export function LanguageSwitcher({ variant = 'default', className, label }: LanguageSwitcherProps) {
   const { i18n } = useTranslation();
   const [isOpen, setIsOpen] = useState(false);
   const currentLocale = getCurrentLanguage();
@@ -43,18 +44,24 @@ export function LanguageSwitcher({ variant = 'default', className }: LanguageSwi
       <DropdownMenuTrigger asChild>
         <Button
           variant="ghost"
-          size={variant === 'compact' ? 'icon' : 'sm'}
+          size={variant === 'compact' && !label ? 'icon' : 'sm'}
           className={cn(
             'text-white/90 hover:text-gold hover:bg-gold/10 gap-2',
             variant === 'footer' && 'text-white/60 hover:text-white',
             className
           )}
         >
-          <Globe className="h-4 w-4" />
-          {variant !== 'compact' && (
+          {label ? (
+            <span>{label}</span>
+          ) : (
             <>
-              <span className="hidden md:inline">{currentConfig.flag}</span>
-              <span className="hidden md:inline">{currentConfig.code.toUpperCase()}</span>
+              <Globe className="h-4 w-4" />
+              {variant !== 'compact' && (
+                <>
+                  <span className="hidden md:inline">{currentConfig.flag}</span>
+                  <span className="hidden md:inline">{currentConfig.code.toUpperCase()}</span>
+                </>
+              )}
             </>
           )}
         </Button>
