@@ -720,8 +720,27 @@ function GovernanceBar() {
 export function MainNav() {
   const [cvoMessageOpen, setCVOMessageOpen] = useState(false);
 
+  const handleSkip = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault();
+    const main =
+      (document.getElementById("main-content") as HTMLElement | null) ||
+      (document.querySelector("main") as HTMLElement | null);
+    if (main) {
+      if (!main.hasAttribute("tabindex")) main.setAttribute("tabindex", "-1");
+      main.focus({ preventScroll: false });
+      main.scrollIntoView({ block: "start" });
+    }
+  };
+
   return (
     <>
+      <a
+        href="#main-content"
+        onClick={handleSkip}
+        className="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-[100] focus:px-4 focus:py-2 focus:rounded-md focus:bg-gold focus:text-charcoal focus:font-semibold focus:shadow-lg focus:outline-none focus:ring-2 focus:ring-gold/60"
+      >
+        Skip to main content
+      </a>
       <header className="fixed top-0 left-0 right-0 z-50 w-full bg-charcoal/95 backdrop-blur-md border-b border-gold/20 overflow-x-clip">
         {/* LEVEL 1 — Governance / Quick Access Bar */}
         <GovernanceBar />
