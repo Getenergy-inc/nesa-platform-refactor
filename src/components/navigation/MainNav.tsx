@@ -672,6 +672,7 @@ MobileBottomNav.displayName = "MobileBottomNav";
 
 function GovernanceBar() {
   const { user } = useAuth();
+  const location = useLocation();
   return (
     <div className="hidden lg:block w-full bg-charcoal-light/60 border-b border-gold/10">
       <div className="container max-w-screen-2xl flex h-9 items-center justify-between gap-4 px-4 text-[11px] xl:text-[12px]">
@@ -681,7 +682,8 @@ function GovernanceBar() {
             <Link
               key={item.href}
               to={item.href}
-              className="text-white/70 hover:text-gold whitespace-nowrap transition-colors"
+              aria-current={location.pathname === item.href ? "page" : undefined}
+              className="text-white/70 hover:text-gold whitespace-nowrap transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold/60 rounded"
             >
               {item.label}
             </Link>
@@ -690,7 +692,7 @@ function GovernanceBar() {
         {/* Right: utility */}
         <div className="flex items-center gap-3 xl:gap-4 shrink-0">
           <Link to="/wallet" className="text-white/70 hover:text-gold whitespace-nowrap transition-colors flex items-center gap-1">
-            <Wallet className="h-3.5 w-3.5" /> Wallet
+            <Wallet className="h-3.5 w-3.5" aria-hidden="true" /> Wallet
           </Link>
           {!user && (
             <Link to="/login" className="text-white/70 hover:text-gold whitespace-nowrap transition-colors">
