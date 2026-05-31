@@ -635,7 +635,7 @@ export const MobileBottomNav = forwardRef<HTMLElement, object>(
       <nav
         ref={ref}
         aria-label="Quick actions"
-        className="fixed bottom-0 left-0 right-0 z-40 lg:hidden bg-charcoal/95 backdrop-blur-md border-t border-gold/20 safe-area-inset-bottom"
+        className="fixed bottom-0 left-0 right-0 z-40 min-[1200px]:hidden bg-charcoal/95 backdrop-blur-md border-t border-gold/20 safe-area-inset-bottom"
       >
         <div className="flex justify-around items-center py-2 px-1">
           {mobileQuickActions.map((item) => {
