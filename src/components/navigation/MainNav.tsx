@@ -817,26 +817,45 @@ export function MainNav() {
               </Link>
             </Button>
 
-            {/* Mobile / tablet header CTAs — Nominate + Vote (compact, no overlap) */}
+            {/* Mobile / tablet header CTAs — Vote, Nominate, Language, Sponsor.
+                Icon-only on the smallest widths to avoid overflow; labels from sm+. */}
             <Button
               asChild
               size="sm"
-              className="min-[1200px]:hidden inline-flex bg-gold text-charcoal hover:bg-gold/90 font-semibold h-9 px-2.5 text-[11px] shadow-md shadow-gold/20 shrink-0 whitespace-nowrap"
+              variant="outline"
+              className="min-[1200px]:hidden inline-flex border-gold/40 text-gold hover:bg-gold/10 hover:text-gold h-9 px-2 sm:px-2.5 text-[11px] bg-transparent shrink-0 whitespace-nowrap"
             >
-              <Link to="/nominate" aria-label="Nominate for NESA-Africa 2026">
-                <Trophy className="h-3.5 w-3.5 sm:mr-1" aria-hidden="true" />
-                <span className="hidden sm:inline">Nominate</span>
+              <Link to="/vote" aria-label="Vote in NESA-Africa 2026">
+                <Vote className="h-3.5 w-3.5 sm:mr-1" aria-hidden="true" />
+                <span className="hidden sm:inline">Vote</span>
               </Link>
             </Button>
             <Button
               asChild
               size="sm"
               variant="outline"
-              className="min-[1200px]:hidden inline-flex border-gold/40 text-gold hover:bg-gold/10 hover:text-gold h-9 px-2.5 text-[11px] bg-transparent shrink-0 whitespace-nowrap"
+              className="min-[1200px]:hidden inline-flex border-gold/40 text-gold hover:bg-gold/10 hover:text-gold h-9 px-2 sm:px-2.5 text-[11px] bg-transparent shrink-0 whitespace-nowrap"
             >
-              <Link to="/vote" aria-label="Vote in NESA-Africa 2026">
-                <Vote className="h-3.5 w-3.5 sm:mr-1" aria-hidden="true" />
-                <span className="hidden sm:inline">Vote</span>
+              <Link to="/nominate" aria-label="Nominate for NESA-Africa 2026">
+                <Trophy className="h-3.5 w-3.5 sm:mr-1" aria-hidden="true" />
+                <span className="hidden sm:inline">Nominate</span>
+              </Link>
+            </Button>
+
+            {/* Mobile / tablet Language Switcher (icon-only) */}
+            <div className="min-[1200px]:hidden">
+              <LanguageSwitcher variant="compact" />
+            </div>
+
+            {/* Mobile / tablet Sponsor CTA — primary filled gold */}
+            <Button
+              asChild
+              size="sm"
+              className="min-[1200px]:hidden inline-flex bg-gold text-charcoal hover:bg-gold/90 font-semibold h-9 px-2 sm:px-2.5 text-[11px] shadow-md shadow-gold/20 shrink-0 whitespace-nowrap"
+            >
+              <Link to="/sponsor" aria-label="Become a Sponsor of NESA-Africa 2026">
+                <Sparkles className="h-3.5 w-3.5 sm:mr-1" aria-hidden="true" />
+                <span className="hidden sm:inline">Sponsor</span>
               </Link>
             </Button>
 
