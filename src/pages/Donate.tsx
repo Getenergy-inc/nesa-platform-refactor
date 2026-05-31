@@ -19,61 +19,8 @@ import { useState } from "react";
 import { MiniMusicPlayer } from "@/components/nesa/MiniMusicPlayer";
 import { DonorTrustPanel } from "@/components/governance/DonorTrustPanel";
 import africaMapImg from "@/assets/africa-map-silhouette.png";
-
-// African textile patterns
-import kenteImg from "@/assets/patterns/kente-west-africa.jpg";
-import ethiopianImg from "@/assets/patterns/ethiopian-east-africa.jpg";
-import ndebeleImg from "@/assets/patterns/ndebele-southern-africa.jpg";
-import kubaImg from "@/assets/patterns/kuba-central-africa.jpg";
-import zelligeImg from "@/assets/patterns/zellige-north-africa.jpg";
-
-const regions = [
-  {
-    name: "West Africa",
-    school: "Hope Academy",
-    country: "Nigeria",
-    pattern: kenteImg,
-    patternName: "Kente Cloth",
-    color: "from-amber-500/80",
-    accent: "border-amber-500/40",
-  },
-  {
-    name: "East Africa",
-    school: "Sunrise Inclusive School",
-    country: "Kenya",
-    pattern: ethiopianImg,
-    patternName: "Ethiopian Weave",
-    color: "from-blue-500/80",
-    accent: "border-blue-500/40",
-  },
-  {
-    name: "Southern Africa",
-    school: "Rainbow Learning Centre",
-    country: "South Africa",
-    pattern: ndebeleImg,
-    patternName: "Ndebele Art",
-    color: "from-green-500/80",
-    accent: "border-green-500/40",
-  },
-  {
-    name: "North Africa",
-    school: "Al-Noor Academy",
-    country: "Morocco",
-    pattern: zelligeImg,
-    patternName: "Zellige Mosaic",
-    color: "from-purple-500/80",
-    accent: "border-purple-500/40",
-  },
-  {
-    name: "Central Africa",
-    school: "Unity Special Education",
-    country: "Cameroon",
-    pattern: kubaImg,
-    patternName: "Kuba Cloth",
-    color: "from-orange-500/80",
-    accent: "border-orange-500/40",
-  },
-];
+import { RegionalSchoolInterventionSection } from "@/components/donate/RegionalSchoolInterventionSection";
+import { TOTAL_REGIONS, TOTAL_SLOTS } from "@/config/specialNeedsSchoolSlots";
 
 const donationAmounts = [
   { value: "10", label: "$10" },
@@ -83,10 +30,10 @@ const donationAmounts = [
 ];
 
 const impactPoints = [
-  "Scholarships for underprivileged students",
-  "Learning materials and textbooks",
-  "School infrastructure development",
-  "Teacher training programs",
+  "Accessibility upgrades for inclusive classrooms",
+  "Assistive learning tools & special-needs materials",
+  "Teacher support & inclusive education training",
+  "WASH, digital learning, and safety improvements",
 ];
 
 export default function Donate() {
