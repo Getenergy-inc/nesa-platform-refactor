@@ -411,16 +411,18 @@ function MobileNav({ onOpenCVOMessage }: { onOpenCVOMessage: () => void }) {
                     <Link
                       to={item.href}
                       onClick={handleTrackedClick(item.label, item.href)}
+                      aria-current={location.pathname === item.href ? "page" : undefined}
                       className={cn(
                         "flex items-center gap-3 px-4 py-4 min-h-[48px] transition-colors touch-manipulation",
                         "hover:bg-gold/5 hover:text-gold active:bg-gold/10",
+                        "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold/60 focus-visible:ring-inset",
                         location.pathname === item.href
                           ? "text-gold bg-gold/5"
                           : "text-white/90",
                       )}
 
                     >
-                      {item.icon && <item.icon className="h-5 w-5" />}
+                      {item.icon && <item.icon className="h-5 w-5" aria-hidden="true" />}
                       <span className="font-medium">{item.label}</span>
                     </Link>
                   )}
