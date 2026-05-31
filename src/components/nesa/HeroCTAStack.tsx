@@ -1,24 +1,22 @@
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { Trophy, Coins, Users, Vote as VoteIcon, ArrowRight, Heart } from "lucide-react";
+import { Trophy, Coins, Users, Vote as VoteIcon, ArrowRight, Heart, Compass } from "lucide-react";
 import { trackEvent } from "@/lib/analytics";
 
 const onCta = (cta: string, to: string) => () =>
   trackEvent("hero_cta_click", { cta, to, location: "hero" });
 
-
 /**
  * HeroCTAStack — Compact premium CTA system
  *
- * Hierarchy (subtle, not loud):
- *  1. PRIMARY    — Nominate a Changemaker (gold fill)
- *  2. SECONDARY  — Earn AGC Voting Points (gold outline + coin)
- *  3. TERTIARY   — Explore Existing Nominees (gold outline + users)
- *  4. QUATERNARY — View Award Categories (ghost outline)
+ * Hierarchy:
+ *  1. PRIMARY    — Nominate for 2026 (gold fill)
+ *  2. SECONDARY  — Discover Africa's Education Changemakers (gold outline)
+ *  3. SUPPORT    — Explore Nominees / View Voting Timeline / Learn About AGC / Become a Volunteer (lighter)
  *
  * Layout:
- *  - Mobile: 2x2 grid, all CTAs above the fold
- *  - Desktop: single horizontal row, compact and balanced
+ *  - Mobile: vertical stack, all CTAs above the fold
+ *  - Desktop: primary + secondary on top row; 4 support CTAs on second row
  */
 
 const container = {
@@ -45,8 +43,8 @@ export function HeroCTAStack() {
       animate="show"
       className="w-full max-w-xl mx-auto lg:mx-0"
     >
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-2.5">
-
+      {/* PRIMARY + SECONDARY row */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-2.5">
         {/* PRIMARY */}
         <motion.div variants={item}>
           <Link
@@ -61,64 +59,74 @@ export function HeroCTAStack() {
           </Link>
         </motion.div>
 
-        {/* SECONDARY — Explore Nominees */}
+        {/* SECONDARY */}
         <motion.div variants={item}>
           <Link
             to="/nominees"
-            aria-label="Explore Existing Nominees"
-            onClick={onCta("explore_nominees", "/nominees")}
-            className={`${baseBtn} border border-gold/50 bg-charcoal/40 text-white hover:border-gold hover:bg-gold/10 hover:text-gold hover:-translate-y-0.5`}
+            aria-label="Discover Africa's Education Changemakers"
+            onClick={onCta("discover_changemakers", "/nominees")}
+            className={`${baseBtn} border border-gold/60 bg-charcoal/40 text-white hover:border-gold hover:bg-gold/10 hover:text-gold hover:-translate-y-0.5`}
           >
-            <Users className="h-4 w-4 text-gold" />
+            <Compass className="h-4 w-4 text-gold" />
+            <span className="truncate">Discover Africa's Education Changemakers</span>
+          </Link>
+        </motion.div>
+      </div>
+
+      {/* SUPPORT CTAs row — visually lighter */}
+      <div className="mt-3 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-2.5">
+        {/* SUPPORT — Explore Nominees */}
+        <motion.div variants={item}>
+          <Link
+            to="/nominees"
+            aria-label="Explore Nominees"
+            onClick={onCta("explore_nominees", "/nominees")}
+            className={`${baseBtn} border border-gold/30 bg-charcoal/30 text-white/90 hover:border-gold/50 hover:bg-gold/5 hover:text-gold hover:-translate-y-0.5`}
+          >
+            <Users className="h-4 w-4 text-gold/80 group-hover:text-gold" />
             <span className="truncate">Explore Nominees</span>
           </Link>
         </motion.div>
 
-        {/* TERTIARY — Vote */}
+        {/* SUPPORT — View Voting Timeline */}
         <motion.div variants={item}>
           <Link
             to="/vote"
-            aria-label="Vote for Nominees"
-            onClick={onCta("vote", "/vote")}
-            className={`${baseBtn} border border-gold/40 bg-charcoal/40 text-white hover:border-gold hover:bg-gold/10 hover:text-gold hover:-translate-y-0.5`}
+            aria-label="View Voting Timeline"
+            onClick={onCta("view_voting_timeline", "/vote")}
+            className={`${baseBtn} border border-gold/30 bg-charcoal/30 text-white/90 hover:border-gold/50 hover:bg-gold/5 hover:text-gold hover:-translate-y-0.5`}
           >
-            <VoteIcon className="h-4 w-4 text-gold/90 group-hover:text-gold" />
-            <span className="truncate">Vote</span>
+            <VoteIcon className="h-4 w-4 text-gold/80 group-hover:text-gold" />
+            <span className="truncate">View Voting Timeline</span>
           </Link>
         </motion.div>
 
-        {/* QUATERNARY — Earn AGC */}
+        {/* SUPPORT — Learn About AGC Voting Points */}
         <motion.div variants={item}>
           <Link
             to="/earn-agc"
-            aria-label="Earn AGC Voting Points"
-            onClick={onCta("earn_agc", "/earn-agc")}
-            className={`${baseBtn} border border-white/15 bg-transparent text-white/85 hover:border-gold/50 hover:text-gold hover:-translate-y-0.5`}
+            aria-label="Learn About AGC Voting Points"
+            onClick={onCta("learn_about_agc", "/earn-agc")}
+            className={`${baseBtn} border border-white/15 bg-transparent text-white/80 hover:border-gold/40 hover:text-gold hover:-translate-y-0.5`}
           >
-            <Coins className="h-4 w-4 text-white/70 group-hover:text-gold" />
-            <span className="truncate">Earn AGC</span>
+            <Coins className="h-4 w-4 text-white/60 group-hover:text-gold" />
+            <span className="truncate">Learn About AGC Voting Points</span>
           </Link>
         </motion.div>
 
+        {/* SUPPORT — Become a Volunteer */}
+        <motion.div variants={item}>
+          <Link
+            to="/volunteer"
+            aria-label="Become a Volunteer"
+            onClick={onCta("become_volunteer", "/volunteer")}
+            className={`${baseBtn} border border-white/15 bg-transparent text-white/80 hover:border-gold/40 hover:text-gold hover:-translate-y-0.5`}
+          >
+            <Heart className="h-4 w-4 text-white/60 group-hover:text-gold" />
+            <span className="truncate">Become a Volunteer</span>
+          </Link>
+        </motion.div>
       </div>
-
-      {/* Volunteer conversion pill */}
-      <motion.div variants={item} className="mt-3 flex justify-center lg:justify-start">
-        <Link
-          to="/volunteer"
-          onClick={onCta("become_volunteer", "/volunteer")}
-          className="group inline-flex items-center gap-2 rounded-full border border-gold/30 bg-gold/5 px-4 py-1.5 text-xs font-medium text-gold/90 hover:border-gold hover:bg-gold/10 hover:text-gold transition"
-        >
-          <Heart className="h-3.5 w-3.5" />
-          Become a Volunteer
-          <ArrowRight className="h-3 w-3 transition-transform group-hover:translate-x-0.5" />
-        </Link>
-      </motion.div>
-
-      {/* Subtle helper line */}
-      <p className="mt-3 text-center lg:text-left text-[11px] text-white/45">
-        Nominate · Earn AGC · Discover changemakers · Volunteer
-      </p>
     </motion.div>
   );
 }
