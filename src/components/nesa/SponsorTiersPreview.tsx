@@ -96,7 +96,7 @@ export function SponsorTiersPreview() {
             asChild
             className="bg-gold text-charcoal hover:bg-gold/90 font-semibold"
           >
-            <Link to="/sponsor">View Full Sponsorship Packages</Link>
+            <Link to="/sponsorship-packages">View Full Sponsorship Packages</Link>
           </Button>
           <Button
             asChild
