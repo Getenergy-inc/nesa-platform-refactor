@@ -139,13 +139,15 @@ function DesktopNav({ onOpenCVOMessage }: { onOpenCVOMessage: () => void }) {
               <NavigationMenuLink asChild>
                 <Link
                   to={item.href}
+                  aria-current={location.pathname === item.href ? "page" : undefined}
                   className={cn(
                     navigationMenuTriggerStyle(),
                     "bg-transparent text-white/90 hover:text-gold hover:bg-gold/10 h-8 xl:h-9 px-1.5 xl:px-2 text-[11px] xl:text-[13px] leading-none whitespace-nowrap",
+                    "focus-visible:ring-2 focus-visible:ring-gold/60 focus-visible:ring-offset-1 focus-visible:ring-offset-charcoal",
                     location.pathname === item.href && "text-gold bg-gold/10",
                   )}
                 >
-                  {item.icon && <item.icon className="h-3.5 w-3.5 mr-1.5" />}
+                  {item.icon && <item.icon className="h-3.5 w-3.5 mr-1.5" aria-hidden="true" />}
                   {item.label}
                 </Link>
               </NavigationMenuLink>
