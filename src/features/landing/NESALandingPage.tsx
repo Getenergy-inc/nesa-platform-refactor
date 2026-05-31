@@ -13,6 +13,7 @@ import { TrustLogosStrip } from "@/components/nesa/TrustLogosStrip";
 import { CountdownSection } from "@/components/nesa/CountdownSection";
 import { NESAFooter } from "@/components/nesa/NESAFooter";
 import { NESAHeader } from "@/components/nesa/NESAHeader";
+import { UtilityBar } from "@/components/nesa/UtilityBar";
 import { LazySection } from "@/components/ui/lazy-section";
 import { BottomPageNav } from "@/components/navigation/PageNavigation";
 import { MobileBottomNav } from "@/components/navigation/MainNav";
