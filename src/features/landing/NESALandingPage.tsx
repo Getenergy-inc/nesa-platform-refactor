@@ -152,6 +152,11 @@ export function NESALandingPage() {
           <SponsorTiersPreview />
         </LazySection>
 
+        {/* Governance firewall — integrity messaging */}
+        <LazySection>
+          <GovernanceFirewallSection />
+        </LazySection>
+
 
 
         <LazySection>
