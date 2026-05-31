@@ -778,7 +778,7 @@ export function MainNav() {
           <div className="flex-1 min-[1200px]:hidden" />
 
           {/* Right Side: 3 primary CTAs (Nominate, Vote, Become a Sponsor) + utility */}
-          <div className="flex items-center gap-1.5 xl:gap-2 shrink-0">
+          <div className="flex items-center gap-1 sm:gap-1.5 xl:gap-2 shrink-0">
             {/* Desktop CTA 1 — Nominate (secondary outline) */}
             <Button
               asChild
