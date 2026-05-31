@@ -287,7 +287,6 @@ function MobileNav({ onOpenCVOMessage }: { onOpenCVOMessage: () => void }) {
             <div className="px-4 pt-4 pb-2">
               <Link to="/sponsor" onClick={handleLinkClick} className="block">
                 <Button className="w-full bg-gold text-charcoal hover:bg-gold/90 font-semibold h-12 touch-manipulation shadow-md shadow-gold/20">
-                  <Sparkles className="h-4 w-4 mr-2" />
                   Sponsor NESA-Africa 2026
                 </Button>
               </Link>
@@ -439,9 +438,8 @@ function MobileNav({ onOpenCVOMessage }: { onOpenCVOMessage: () => void }) {
                 <Link
                   to="/dashboard"
                   onClick={handleLinkClick}
-                  className="flex items-center gap-3 px-4 py-3 min-h-[48px] rounded-xl bg-gold/10 text-gold hover:bg-gold/20 transition-colors touch-manipulation"
+                  className="flex items-center px-4 py-3 min-h-[48px] rounded-xl bg-gold/10 text-gold hover:bg-gold/20 transition-colors touch-manipulation"
                 >
-                  <User className="h-5 w-5" />
                   <span className="font-medium">Dashboard</span>
                 </Link>
                 <Button
@@ -452,7 +450,6 @@ function MobileNav({ onOpenCVOMessage }: { onOpenCVOMessage: () => void }) {
                     handleLinkClick();
                   }}
                 >
-                  <LogOut className="h-5 w-5 mr-3" />
                   <span className="font-medium">Sign Out</span>
                 </Button>
 
@@ -462,7 +459,6 @@ function MobileNav({ onOpenCVOMessage }: { onOpenCVOMessage: () => void }) {
                 {/* Primary CTA: Become a Sponsor (full-width) */}
                 <Link to="/sponsor" onClick={handleLinkClick} className="block">
                   <Button className="w-full bg-gold text-charcoal hover:bg-gold/90 font-semibold min-h-[48px] py-3 h-auto touch-manipulation shadow-md shadow-gold/20">
-                    <Sparkles className="h-4 w-4 mr-2" />
                     Become a Sponsor
                   </Button>
                 </Link>
@@ -746,7 +742,7 @@ export function MainNav() {
         <GovernanceBar />
 
         {/* LEVEL 2 — Primary Navigation */}
-        <div className="container flex h-14 sm:h-16 items-center gap-2 px-3 sm:px-4 max-w-screen-2xl">
+        <div className="container flex h-14 sm:h-16 items-center gap-1 sm:gap-2 px-3 sm:px-4 max-w-screen-2xl">
           {/* Brand */}
           <Link
             to="/"
@@ -760,7 +756,7 @@ export function MainNav() {
             />
             <div className="flex flex-col leading-tight min-w-0">
               <span className="text-[13px] sm:text-sm font-display font-bold text-gold tracking-wide whitespace-nowrap">
-                NESA-Africa <span className="text-white/70 font-medium">2026</span>
+                NESA-Africa <span className="hidden sm:inline text-white/70 font-medium">2026</span>
               </span>
               {/* Motto: hidden below 1200px to protect brand area; shown on desktop only */}
               <span className="hidden min-[1200px]:inline text-[10px] text-gold/70 font-medium tracking-wider italic whitespace-nowrap">
@@ -778,7 +774,7 @@ export function MainNav() {
           <div className="flex-1 min-[1200px]:hidden" />
 
           {/* Right Side: 3 primary CTAs (Nominate, Vote, Become a Sponsor) + utility */}
-          <div className="flex items-center gap-1 sm:gap-1.5 xl:gap-2 shrink-0">
+          <div className="flex items-center gap-1 sm:gap-1.5 xl:gap-2 shrink-0 overflow-x-auto scrollbar-hide">
             {/* Desktop CTA 1 — Nominate (secondary outline) */}
             <Button
               asChild
@@ -817,50 +813,45 @@ export function MainNav() {
               </Link>
             </Button>
 
-            {/* Mobile / tablet header CTAs — Vote, Nominate, Language, Sponsor.
-                Icon-only on the smallest widths to avoid overflow; labels from sm+. */}
+            {/* Mobile / tablet header CTAs — text-only labels, no icons */}
             <Button
               asChild
               size="sm"
               variant="outline"
-              className="min-[1200px]:hidden inline-flex border-gold/40 text-gold hover:bg-gold/10 hover:text-gold h-9 px-2 sm:px-2.5 text-[11px] bg-transparent shrink-0 whitespace-nowrap"
+              className="min-[1200px]:hidden inline-flex border-gold/40 text-gold hover:bg-gold/10 hover:text-gold h-9 px-1 sm:px-2.5 text-[10px] sm:text-[11px] bg-transparent shrink-0 whitespace-nowrap"
             >
-              <Link to="/vote" aria-label="Vote in NESA-Africa 2026">
-                <Vote className="h-3.5 w-3.5 sm:mr-1" aria-hidden="true" />
-                <span className="hidden sm:inline">Vote</span>
-              </Link>
+              <Link to="/vote" aria-label="Vote in NESA-Africa 2026">Vote</Link>
             </Button>
             <Button
               asChild
               size="sm"
               variant="outline"
-              className="min-[1200px]:hidden inline-flex border-gold/40 text-gold hover:bg-gold/10 hover:text-gold h-9 px-2 sm:px-2.5 text-[11px] bg-transparent shrink-0 whitespace-nowrap"
+              className="min-[1200px]:hidden inline-flex border-gold/40 text-gold hover:bg-gold/10 hover:text-gold h-9 px-1 sm:px-2.5 text-[10px] sm:text-[11px] bg-transparent shrink-0 whitespace-nowrap"
             >
               <Link to="/nominate" aria-label="Nominate for NESA-Africa 2026">
-                <Trophy className="h-3.5 w-3.5 sm:mr-1" aria-hidden="true" />
+                <span className="inline sm:hidden">Nom</span>
                 <span className="hidden sm:inline">Nominate</span>
               </Link>
             </Button>
 
-            {/* Mobile / tablet Language Switcher (icon-only) */}
+            {/* Mobile / tablet Language Switcher (text-only) */}
             <div className="min-[1200px]:hidden">
-              <LanguageSwitcher variant="compact" />
+              <LanguageSwitcher label="Lang" className="h-9 px-1 sm:px-2.5 text-[10px] sm:text-[11px]" />
             </div>
 
-            {/* Mobile / tablet Sponsor CTA — primary filled gold */}
+            {/* Mobile / tablet Sponsor CTA — primary filled gold, text-only */}
             <Button
               asChild
               size="sm"
-              className="min-[1200px]:hidden inline-flex bg-gold text-charcoal hover:bg-gold/90 font-semibold h-9 px-2 sm:px-2.5 text-[11px] shadow-md shadow-gold/20 shrink-0 whitespace-nowrap"
+              className="min-[1200px]:hidden inline-flex bg-gold text-charcoal hover:bg-gold/90 font-semibold h-9 px-1 sm:px-2.5 text-[10px] sm:text-[11px] shadow-md shadow-gold/20 shrink-0 whitespace-nowrap"
             >
-              <Link to="/sponsor" aria-label="Become a Sponsor of NESA-Africa 2026">
-                <Sparkles className="h-3.5 w-3.5 sm:mr-1" aria-hidden="true" />
-                <span className="hidden sm:inline">Sponsor</span>
-              </Link>
+              <Link to="/sponsor" aria-label="Become a Sponsor of NESA-Africa 2026">Sponsor</Link>
             </Button>
 
-            {/* Utility: Search */}
-            <NavSearch />
+            {/* Utility: Search — hidden below sm to preserve CTA space */}
+            <div className="hidden sm:block">
+              <NavSearch />
+            </div>
 
             {/* Utility: User Menu (Desktop only at >=1200px) */}
             <div className="hidden min-[1200px]:block">
