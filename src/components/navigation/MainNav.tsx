@@ -338,12 +338,13 @@ function MobileNav({ onOpenCVOMessage }: { onOpenCVOMessage: () => void }) {
 
                       >
                         <span className="flex items-center gap-3">
-                          {item.icon && <item.icon className="h-5 w-5" />}
+                          {item.icon && <item.icon className="h-5 w-5" aria-hidden="true" />}
                           <span className="font-medium text-base">
                             {item.label === "Impact Programs" ? "Programs" : item.label}
                           </span>
                         </span>
                         <ChevronDown
+                          aria-hidden="true"
                           className={cn(
                             "h-5 w-5 transition-transform duration-200",
                             expandedItems.includes(item.href) && "rotate-180",
