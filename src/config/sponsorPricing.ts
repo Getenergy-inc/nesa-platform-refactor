@@ -1,8 +1,17 @@
 // NESA-Africa 2026 — Master sponsorship pricing table.
-// Single source of truth for the Sponsor Hub pricing matrix, the partnership
-// lane cards and downstream sponsor pages. Figures here are governance-approved.
+// Derived from src/config/sponsorLaneCopy.ts so that headline, amount,
+// sponsor limit and purpose are single-sourced. Update copy once → it
+// propagates through the Pricing Table, Slot Matrix and Partnership Lane
+// components.
+
+import {
+  SPONSOR_LANE_COPY,
+  type SponsorLaneSlug,
+  type SponsorLaneCopy,
+} from "@/config/sponsorLaneCopy";
 
 export interface SponsorPricingRow {
+  slug?: SponsorLaneSlug;
   lane: string;
   amount: string;
   limit: string;
@@ -11,162 +20,50 @@ export interface SponsorPricingRow {
   href?: string;
 }
 
-export const SPONSOR_PRICING_ROWS: SponsorPricingRow[] = [
-  {
-    lane: "Blue Diamond Sponsorship — All-Inclusive Premier Partner",
-    amount: "$800,000",
-    limit: "1 only",
-    purpose:
-      "Highest sponsorship level covering the full NESA-Africa 2026 ecosystem.",
-    href: "/contact?topic=sponsorship&lane=blue-diamond",
-  },
-  {
-    lane: "Award Gala Night Main Sponsor",
-    amount: "$200,000",
-    limit: "1",
-    purpose: "Main Gala visibility and premium event positioning.",
-    href: "/sponsor/gala",
-  },
-  {
-    lane: "Gala Supporting Partners",
-    amount: "$25,000 – $50,000",
-    limit: "3 – 5",
-    purpose:
-      "Hospitality, red carpet, media wall, VIP reception, accessibility, cultural performance.",
-    href: "/sponsor/gala",
-  },
-  {
-    lane: "Africa Education Icon Main Sponsor",
-    amount: "$100,000",
-    limit: "1",
-    purpose: "Premium lifetime education impact recognition.",
-    href: "/contact?topic=sponsorship&lane=africa-education-icon",
-  },
-  {
-    lane: "Legacy Documentary Partner",
-    amount: "$40,000 – $60,000",
-    limit: "1",
-    purpose: "Africa Education Icon documentary and tribute storytelling.",
-  },
-  {
-    lane: "Icon Reception / Tribute Partner",
-    amount: "$20,000 – $35,000",
-    limit: "1",
-    purpose: "Icon reception, tribute publication, or honouree acknowledgement.",
-  },
-  {
-    lane: "Gold / Blue Garnet Sponsor",
-    amount: "$150,000",
-    limit: "1 main / 1 per category",
-    purpose: "Core recognition and category visibility.",
-    href: "/sponsor/categories",
-  },
-  {
-    lane: "Blue Garnet Category Sponsor",
-    amount: "$20,000 / category",
-    limit: "1 per category",
-    purpose: "Exclusive category visibility with non-influence firewall.",
-    href: "/sponsor/categories",
-  },
-  {
-    lane: "Platinum Recognition Sponsor",
-    amount: "$70,000",
-    limit: "1",
-    purpose: "Verified excellence recognition partner.",
-    href: "/contact?topic=sponsorship&lane=platinum",
-  },
-  {
-    lane: "Platinum Category Sponsor",
-    amount: "$10,000 – $15,000 / category",
-    limit: "1 per category",
-    purpose: "Sector-specific Platinum category visibility.",
-  },
-  {
-    lane: "Influencers Education Impact Main Sponsor",
-    amount: "$50,000",
-    limit: "1",
-    purpose:
-      "Youth, media, digital advocacy, creator and student-voice platform.",
-    href: "/contact?topic=sponsorship&lane=influencers",
-  },
-  {
-    lane: "Influencers Supporting Partners",
-    amount: "$10,000 – $25,000",
-    limit: "3 – 6",
-    purpose:
-      "Youth voice, creator cohort, teacher creator, storytelling, social amplification.",
-  },
-  {
-    lane: "EduAid-Africa Webinar Sponsorship",
-    amount: "$500 – $1,500 / episode",
-    limit: "1 main per episode",
-    purpose:
-      "Public education, parent engagement, teacher development, inclusion and community learning.",
-    href: "/sponsor/webinars",
-  },
-  {
-    lane: "EduAid-Africa Webinar Supporting Visibility",
-    amount: "$250 – $500 / episode",
-    limit: "Up to 2 per episode",
-    purpose: "Supporting acknowledgement and visibility.",
-  },
-  {
-    lane: "NESA-Africa TV Feature Sponsorship",
-    amount: "$3,000 – $5,000 / feature",
-    limit: "1 main per feature",
-    purpose:
-      "Broadcast storytelling, category feature, CSR visibility and impact documentation.",
-    href: "/sponsor/nesa-tv",
-  },
-  {
-    lane: "NESA-Africa TV Episode Supporting Partner",
-    amount: "$1,000 – $2,500 / episode",
-    limit: "Up to 2 per episode",
-    purpose: "Supporting media acknowledgement and feature visibility.",
-  },
-  {
-    lane: "Sub-Category Page Lead Sponsor",
-    amount: "$5,000 / page",
-    limit: "1 per page",
-    purpose: "Highest page-level visibility.",
-  },
-  {
-    lane: "Sub-Category Page Supporting Sponsor",
-    amount: "$2,500 / page",
-    limit: "1 per page",
-    purpose: "Supporting page-level visibility.",
-  },
-  {
-    lane: "Sub-Category Page Visibility Sponsor",
-    amount: "$1,000 / page",
-    limit: "1 per page",
-    purpose: "Basic page-level visibility.",
-  },
-  {
-    lane: "Supporter Visibility Listing",
-    amount: "$500",
-    limit: "Unlimited, grouped by type",
-    purpose:
-      "Public supporter listing — not endorsement control or award influence.",
-    href: "/endorse",
-  },
-  {
-    lane: "Merchandise / Community Visibility Add-On",
-    amount: "Approved amount",
-    limit: "3 – 10 by product",
-    purpose: "Merchandise, community campaigns and supporter visibility.",
-  },
-  {
-    lane: "Rebuild My School Africa Regional Partner",
-    amount: "Approved amount",
-    limit: "1 main per region",
-    purpose: "Regional legacy support and education infrastructure impact.",
-    href: "/rebuild",
-  },
+/** Order in which lanes appear in the master pricing table. */
+const PRICING_ORDER: SponsorLaneSlug[] = [
+  "blue-diamond",
+  "gala-main",
+  "gala-supporting",
+  "africa-icon-main",
+  "icon-documentary",
+  "icon-tribute",
+  "gold-blue-garnet-main",
+  "blue-garnet-category",
+  "platinum-main",
+  "platinum-category",
+  "influencers-main",
+  "influencers-supporting",
+  "eduaid-webinar-main",
+  "eduaid-webinar-supporting",
+  "nesa-tv-feature",
+  "nesa-tv-supporting",
+  "subcategory-lead",
+  "subcategory-supporting",
+  "subcategory-visibility",
+  "supporter-visibility-listing",
+  "merchandise-visibility",
+  "rmsa-regional-partner",
 ];
+
+function rowFromCopy(copy: SponsorLaneCopy): SponsorPricingRow {
+  return {
+    slug: copy.slug,
+    lane: copy.headline,
+    amount: copy.amount,
+    limit: copy.sponsorLimit,
+    purpose: copy.subheadline || copy.purpose,
+    href: copy.href,
+  };
+}
+
+export const SPONSOR_PRICING_ROWS: SponsorPricingRow[] = PRICING_ORDER.map(
+  (slug) => rowFromCopy(SPONSOR_LANE_COPY[slug]),
+);
 
 /** 12 partnership lane cards displayed in the "Choose your partnership lane" grid. */
 export interface SponsorLaneCard {
+  slug?: SponsorLaneSlug;
   title: string;
   description: string;
   startingAmount: string;
@@ -175,12 +72,18 @@ export interface SponsorLaneCard {
   href: string;
 }
 
+/**
+ * Grid cards aggregate multiple related lanes (e.g. Gala = main + supporting)
+ * so the title, description and starting amount are intentionally composed
+ * rather than 1:1 to a lane copy block. Where a card maps cleanly to a single
+ * lane, the `slug` is provided to keep CTA/href/limit in sync via the copy.
+ */
 export const SPONSOR_LANE_CARDS: SponsorLaneCard[] = [
   {
     title: "Sponsor the Blue Garnet Awards Gala",
     description:
       "Headline the Gala night, hospitality, red carpet, broadcast and VIP reception.",
-    startingAmount: "Main $200,000 · Supporting $25,000 – $50,000",
+    startingAmount: `Main ${SPONSOR_LANE_COPY["gala-main"].amount} · Supporting ${SPONSOR_LANE_COPY["gala-supporting"].amount}`,
     limit: "1 main + 3–5 supporting",
     ctaLabel: "Sponsor the Gala",
     href: "/sponsor/gala",
@@ -189,70 +92,76 @@ export const SPONSOR_LANE_CARDS: SponsorLaneCard[] = [
     title: "Sponsor Award Categories",
     description:
       "Own a Blue Garnet, Platinum, EduTech, STEM, NGO or regional award category.",
-    startingAmount: "$20,000 – $150,000 / category",
+    startingAmount: `${SPONSOR_LANE_COPY["blue-garnet-category"].amount} – ${SPONSOR_LANE_COPY["gold-blue-garnet-main"].amount} / category`,
     limit: "1 per category",
     ctaLabel: "Sponsor a Category",
     href: "/sponsor/categories",
   },
   {
+    slug: "africa-icon-main",
     title: "Sponsor Africa Education Icon",
     description:
       "Premium lifetime achievement recognition with documentary and tribute partners.",
-    startingAmount: "Main $100,000 · Docu $40k – $60k",
-    limit: "1 main",
-    ctaLabel: "Sponsor the Icon Award",
-    href: "/contact?topic=sponsorship&lane=africa-education-icon",
+    startingAmount: `Main ${SPONSOR_LANE_COPY["africa-icon-main"].amount} · Docu ${SPONSOR_LANE_COPY["icon-documentary"].amount}`,
+    limit: SPONSOR_LANE_COPY["africa-icon-main"].sponsorLimit,
+    ctaLabel: SPONSOR_LANE_COPY["africa-icon-main"].ctaLabel,
+    href: SPONSOR_LANE_COPY["africa-icon-main"].href,
   },
   {
+    slug: "platinum-main",
     title: "Sponsor Platinum Recognition",
     description:
       "Recognise verified excellence across institutional and sector categories.",
-    startingAmount: "$70,000 main · $10k – $15k / category",
+    startingAmount: `${SPONSOR_LANE_COPY["platinum-main"].amount} main · ${SPONSOR_LANE_COPY["platinum-category"].amount}`,
     limit: "1 main + 1 per category",
     ctaLabel: "Sponsor Platinum",
-    href: "/contact?topic=sponsorship&lane=platinum",
+    href: SPONSOR_LANE_COPY["platinum-main"].href,
   },
   {
+    slug: "influencers-main",
     title: "Sponsor Influencers Education Impact",
     description:
       "Power youth voice, creator cohorts, digital advocacy and social amplification.",
-    startingAmount: "$50,000 main · $10k – $25k supporting",
+    startingAmount: `${SPONSOR_LANE_COPY["influencers-main"].amount} main · ${SPONSOR_LANE_COPY["influencers-supporting"].amount} supporting`,
     limit: "1 main + 3–6 supporting",
     ctaLabel: "Sponsor Influencers",
-    href: "/contact?topic=sponsorship&lane=influencers",
+    href: SPONSOR_LANE_COPY["influencers-main"].href,
   },
   {
+    slug: "eduaid-webinar-main",
     title: "Sponsor EduAid-Africa Webinars",
     description:
       "Fund parent, teacher, inclusion and community education webinars.",
-    startingAmount: "$500 – $1,500 / episode",
+    startingAmount: SPONSOR_LANE_COPY["eduaid-webinar-main"].amount,
     limit: "1 main + up to 2 supporting / episode",
     ctaLabel: "Sponsor a Webinar",
-    href: "/sponsor/webinars",
+    href: SPONSOR_LANE_COPY["eduaid-webinar-main"].href,
   },
   {
+    slug: "nesa-tv-feature",
     title: "Sponsor NESA-Africa TV Features",
     description:
       "Power broadcast storytelling, documentaries and online category features.",
-    startingAmount: "$3,000 – $5,000 / feature",
+    startingAmount: SPONSOR_LANE_COPY["nesa-tv-feature"].amount,
     limit: "1 main + up to 2 supporting / episode",
     ctaLabel: "Sponsor NESA-Africa TV",
-    href: "/sponsor/nesa-tv",
+    href: SPONSOR_LANE_COPY["nesa-tv-feature"].href,
   },
   {
+    slug: "rmsa-regional-partner",
     title: "Sponsor Rebuild My School Africa",
     description:
       "Fund infrastructure, accessibility, libraries, WASH and learning resources.",
     startingAmount: "Approved amount — regional partner tier",
-    limit: "1 main partner per region",
-    ctaLabel: "Support RMSA",
-    href: "/rebuild",
+    limit: SPONSOR_LANE_COPY["rmsa-regional-partner"].sponsorLimit,
+    ctaLabel: SPONSOR_LANE_COPY["rmsa-regional-partner"].ctaLabel,
+    href: SPONSOR_LANE_COPY["rmsa-regional-partner"].href,
   },
   {
     title: "Sponsor Sub-Category Pages",
     description:
       "Page-level visibility across sub-category and regional listing pages.",
-    startingAmount: "$1,000 – $5,000 / page",
+    startingAmount: `${SPONSOR_LANE_COPY["subcategory-visibility"].amount} – ${SPONSOR_LANE_COPY["subcategory-lead"].amount}`,
     limit: "Up to 3 sponsors per page",
     ctaLabel: "Sponsor a Page",
     href: "/contact?topic=sponsorship&lane=sub-category",
@@ -266,13 +175,14 @@ export const SPONSOR_LANE_CARDS: SponsorLaneCard[] = [
     href: "/contact?topic=sponsorship&lane=strategic",
   },
   {
+    slug: "supporter-visibility-listing",
     title: "Join as Supporter Visibility Listing",
     description:
       "Public supporter listing for institutions, civil society, academia, media and diaspora.",
-    startingAmount: "$500",
-    limit: "Unlimited, grouped by type",
-    ctaLabel: "Join the Supporters",
-    href: "/endorse",
+    startingAmount: SPONSOR_LANE_COPY["supporter-visibility-listing"].amount,
+    limit: SPONSOR_LANE_COPY["supporter-visibility-listing"].sponsorLimit,
+    ctaLabel: SPONSOR_LANE_COPY["supporter-visibility-listing"].ctaLabel,
+    href: SPONSOR_LANE_COPY["supporter-visibility-listing"].href,
   },
   {
     title: "Request a Custom Partnership Package",
