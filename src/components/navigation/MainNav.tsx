@@ -101,9 +101,11 @@ function DesktopNav({ onOpenCVOMessage }: { onOpenCVOMessage: () => void }) {
                         <NavigationMenuLink asChild>
                           <Link
                             to={child.href}
+                            aria-current={location.pathname === child.href ? "page" : undefined}
                             className={cn(
                               "block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors",
                               "hover:bg-gold/10 hover:text-gold focus:bg-gold/10 focus:text-gold",
+                              "focus-visible:ring-2 focus-visible:ring-gold/60 focus-visible:ring-offset-1 focus-visible:ring-offset-charcoal",
                               location.pathname === child.href &&
                                 "bg-gold/10 text-gold",
                             )}
