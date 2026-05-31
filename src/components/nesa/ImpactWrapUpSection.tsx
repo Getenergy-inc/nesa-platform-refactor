@@ -84,10 +84,13 @@ export function ImpactWrapUpSection() {
                   <span className="text-gold font-semibold">Rebuild My School Africa</span>, the
                   NESA-Africa 2026 season connects award recognition to practical school
                   intervention between <span className="text-gold font-semibold">October 2026 and October 2027</span>.
-                  Special needs school nominations open on EduAid.Africa, verified schools are
-                  organized by region, regional voting opens, GFA Wzip regional funding portals
-                  activate, and selected schools receive infrastructure, accessibility, learning
-                  materials, teacher support and inclusive education projects.
+                  Special Needs School nominations open through EduAid-Africa. Verified schools
+                  are organised by the approved 8 African regions, regional voting opens for
+                  intervention priority, GFA Wzip regional funding portals activate, and
+                  selected schools receive infrastructure, accessibility, learning materials,
+                  teacher support, digital learning, WASH, and inclusive education projects.
+                  This is how NESA-Africa moves from recognition to measurable regional
+                  education impact.
                 </p>
 
                 <div className="grid sm:grid-cols-2 gap-3 mb-8">
