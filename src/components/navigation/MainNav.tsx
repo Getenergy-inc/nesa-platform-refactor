@@ -63,7 +63,7 @@ function DesktopNav({ onOpenCVOMessage }: { onOpenCVOMessage: () => void }) {
   const location = useLocation();
 
   return (
-    <NavigationMenu className="flex w-full min-w-0">
+    <NavigationMenu className="flex w-full min-w-0" aria-label="Primary">
       <NavigationMenuList className="px-0 gap-0 flex-nowrap overflow-x-auto scrollbar-hide max-w-full">
         {MAIN_NAV.map((item) => (
           <NavigationMenuItem key={item.href} className="shrink-0">
@@ -101,9 +101,11 @@ function DesktopNav({ onOpenCVOMessage }: { onOpenCVOMessage: () => void }) {
                         <NavigationMenuLink asChild>
                           <Link
                             to={child.href}
+                            aria-current={location.pathname === child.href ? "page" : undefined}
                             className={cn(
                               "block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors",
                               "hover:bg-gold/10 hover:text-gold focus:bg-gold/10 focus:text-gold",
+                              "focus-visible:ring-2 focus-visible:ring-gold/60 focus-visible:ring-offset-1 focus-visible:ring-offset-charcoal",
                               location.pathname === child.href &&
                                 "bg-gold/10 text-gold",
                             )}
@@ -137,13 +139,15 @@ function DesktopNav({ onOpenCVOMessage }: { onOpenCVOMessage: () => void }) {
               <NavigationMenuLink asChild>
                 <Link
                   to={item.href}
+                  aria-current={location.pathname === item.href ? "page" : undefined}
                   className={cn(
                     navigationMenuTriggerStyle(),
                     "bg-transparent text-white/90 hover:text-gold hover:bg-gold/10 h-8 xl:h-9 px-1.5 xl:px-2 text-[11px] xl:text-[13px] leading-none whitespace-nowrap",
+                    "focus-visible:ring-2 focus-visible:ring-gold/60 focus-visible:ring-offset-1 focus-visible:ring-offset-charcoal",
                     location.pathname === item.href && "text-gold bg-gold/10",
                   )}
                 >
-                  {item.icon && <item.icon className="h-3.5 w-3.5 mr-1.5" />}
+                  {item.icon && <item.icon className="h-3.5 w-3.5 mr-1.5" aria-hidden="true" />}
                   {item.label}
                 </Link>
               </NavigationMenuLink>
@@ -277,7 +281,7 @@ function MobileNav({ onOpenCVOMessage }: { onOpenCVOMessage: () => void }) {
           </SheetTitle>
         </SheetHeader>
 
-        <nav className="flex flex-col h-[calc(100%-65px)]">
+        <nav aria-label="Mobile primary navigation" className="flex flex-col h-[calc(100%-65px)]">
           <div className="flex-1 overflow-y-auto overscroll-contain">
             {/* Sticky Sponsor CTA — top-level per IA brief */}
             <div className="px-4 pt-4 pb-2">
@@ -334,12 +338,13 @@ function MobileNav({ onOpenCVOMessage }: { onOpenCVOMessage: () => void }) {
 
                       >
                         <span className="flex items-center gap-3">
-                          {item.icon && <item.icon className="h-5 w-5" />}
+                          {item.icon && <item.icon className="h-5 w-5" aria-hidden="true" />}
                           <span className="font-medium text-base">
                             {item.label === "Impact Programs" ? "Programs" : item.label}
                           </span>
                         </span>
                         <ChevronDown
+                          aria-hidden="true"
                           className={cn(
                             "h-5 w-5 transition-transform duration-200",
                             expandedItems.includes(item.href) && "rotate-180",
@@ -378,9 +383,11 @@ function MobileNav({ onOpenCVOMessage }: { onOpenCVOMessage: () => void }) {
                               key={child.href}
                               to={child.href}
                               onClick={handleTrackedClick(child.label, child.href)}
+                              aria-current={location.pathname === child.href ? "page" : undefined}
                               className={cn(
                                 "flex items-center gap-3 px-8 py-3.5 min-h-[48px] text-sm transition-colors touch-manipulation",
                                 "hover:bg-gold/5 hover:text-gold active:bg-gold/10",
+                                "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold/60 focus-visible:ring-inset",
                                 location.pathname === child.href
                                   ? "text-gold bg-gold/5"
                                   : "text-white/70",
@@ -388,7 +395,7 @@ function MobileNav({ onOpenCVOMessage }: { onOpenCVOMessage: () => void }) {
 
                             >
                               {child.icon && (
-                                <child.icon className="h-4 w-4 flex-shrink-0" />
+                                <child.icon className="h-4 w-4 flex-shrink-0" aria-hidden="true" />
                               )}
                               <span className="flex-1">{child.label}</span>
                               {child.badge && (
@@ -405,16 +412,18 @@ function MobileNav({ onOpenCVOMessage }: { onOpenCVOMessage: () => void }) {
                     <Link
                       to={item.href}
                       onClick={handleTrackedClick(item.label, item.href)}
+                      aria-current={location.pathname === item.href ? "page" : undefined}
                       className={cn(
                         "flex items-center gap-3 px-4 py-4 min-h-[48px] transition-colors touch-manipulation",
                         "hover:bg-gold/5 hover:text-gold active:bg-gold/10",
+                        "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold/60 focus-visible:ring-inset",
                         location.pathname === item.href
                           ? "text-gold bg-gold/5"
                           : "text-white/90",
                       )}
 
                     >
-                      {item.icon && <item.icon className="h-5 w-5" />}
+                      {item.icon && <item.icon className="h-5 w-5" aria-hidden="true" />}
                       <span className="font-medium">{item.label}</span>
                     </Link>
                   )}
@@ -623,33 +632,40 @@ export const MobileBottomNav = forwardRef<HTMLElement, object>(
   function MobileBottomNav(_, ref) {
     const location = useLocation();
     return (
-      <nav 
+      <nav
         ref={ref}
+        aria-label="Quick actions"
         className="fixed bottom-0 left-0 right-0 z-40 lg:hidden bg-charcoal/95 backdrop-blur-md border-t border-gold/20 safe-area-inset-bottom"
       >
         <div className="flex justify-around items-center py-2 px-1">
-          {mobileQuickActions.map((item) => (
-            <Link
-              key={item.href}
-              to={item.href}
-              className={cn(
-                "flex flex-col items-center justify-center gap-0.5 p-2 rounded-lg transition-all min-w-[60px] min-h-[52px] touch-manipulation active:scale-95",
-                location.pathname === item.href
-                  ? "text-gold bg-gold/10"
-                  : "text-white/60 hover:text-gold hover:bg-gold/5",
-              )}
-            >
-              <item.icon
+          {mobileQuickActions.map((item) => {
+            const active = location.pathname === item.href;
+            return (
+              <Link
+                key={item.href}
+                to={item.href}
+                aria-current={active ? "page" : undefined}
                 className={cn(
-                  "h-5 w-5 transition-transform",
-                  location.pathname === item.href && "scale-110",
+                  "flex flex-col items-center justify-center gap-0.5 p-2 rounded-lg transition-all min-w-[60px] min-h-[52px] touch-manipulation active:scale-95",
+                  "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold/60",
+                  active
+                    ? "text-gold bg-gold/10"
+                    : "text-white/60 hover:text-gold hover:bg-gold/5",
                 )}
-              />
-              <span className="text-[10px] font-medium leading-tight">
-                {item.label}
-              </span>
-            </Link>
-          ))}
+              >
+                <item.icon
+                  aria-hidden="true"
+                  className={cn(
+                    "h-5 w-5 transition-transform",
+                    active && "scale-110",
+                  )}
+                />
+                <span className="text-[10px] font-medium leading-tight">
+                  {item.label}
+                </span>
+              </Link>
+            );
+          })}
         </div>
       </nav>
     );
@@ -663,6 +679,7 @@ MobileBottomNav.displayName = "MobileBottomNav";
 
 function GovernanceBar() {
   const { user } = useAuth();
+  const location = useLocation();
   return (
     <div className="hidden lg:block w-full bg-charcoal-light/60 border-b border-gold/10">
       <div className="container max-w-screen-2xl flex h-9 items-center justify-between gap-4 px-4 text-[11px] xl:text-[12px]">
@@ -672,7 +689,8 @@ function GovernanceBar() {
             <Link
               key={item.href}
               to={item.href}
-              className="text-white/70 hover:text-gold whitespace-nowrap transition-colors"
+              aria-current={location.pathname === item.href ? "page" : undefined}
+              className="text-white/70 hover:text-gold whitespace-nowrap transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold/60 rounded"
             >
               {item.label}
             </Link>
@@ -681,7 +699,7 @@ function GovernanceBar() {
         {/* Right: utility */}
         <div className="flex items-center gap-3 xl:gap-4 shrink-0">
           <Link to="/wallet" className="text-white/70 hover:text-gold whitespace-nowrap transition-colors flex items-center gap-1">
-            <Wallet className="h-3.5 w-3.5" /> Wallet
+            <Wallet className="h-3.5 w-3.5" aria-hidden="true" /> Wallet
           </Link>
           {!user && (
             <Link to="/login" className="text-white/70 hover:text-gold whitespace-nowrap transition-colors">
@@ -702,8 +720,27 @@ function GovernanceBar() {
 export function MainNav() {
   const [cvoMessageOpen, setCVOMessageOpen] = useState(false);
 
+  const handleSkip = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault();
+    const main =
+      (document.getElementById("main-content") as HTMLElement | null) ||
+      (document.querySelector("main") as HTMLElement | null);
+    if (main) {
+      if (!main.hasAttribute("tabindex")) main.setAttribute("tabindex", "-1");
+      main.focus({ preventScroll: false });
+      main.scrollIntoView({ block: "start" });
+    }
+  };
+
   return (
     <>
+      <a
+        href="#main-content"
+        onClick={handleSkip}
+        className="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-[100] focus:px-4 focus:py-2 focus:rounded-md focus:bg-gold focus:text-charcoal focus:font-semibold focus:shadow-lg focus:outline-none focus:ring-2 focus:ring-gold/60"
+      >
+        Skip to main content
+      </a>
       <header className="fixed top-0 left-0 right-0 z-50 w-full bg-charcoal/95 backdrop-blur-md border-b border-gold/20 overflow-x-clip">
         {/* LEVEL 1 — Governance / Quick Access Bar */}
         <GovernanceBar />
