@@ -813,40 +813,43 @@ export function MainNav() {
               </Link>
             </Button>
 
-            {/* Mobile / tablet header CTAs — text-only labels, no icons */}
+            {/* Mobile / tablet header CTAs — order: Nominate, Vote, Become a Sponsor, Language(icon) */}
             <Button
               asChild
               size="sm"
               variant="outline"
-              className="min-[1200px]:hidden inline-flex border-gold/40 text-gold hover:bg-gold/10 hover:text-gold h-9 px-1 sm:px-2.5 text-[10px] sm:text-[11px] bg-transparent shrink-0 whitespace-nowrap"
-            >
-              <Link to="/vote" aria-label="Vote in NESA-Africa 2026">Vote</Link>
-            </Button>
-            <Button
-              asChild
-              size="sm"
-              variant="outline"
-              className="min-[1200px]:hidden inline-flex border-gold/40 text-gold hover:bg-gold/10 hover:text-gold h-9 px-1 sm:px-2.5 text-[10px] sm:text-[11px] bg-transparent shrink-0 whitespace-nowrap"
+              className="min-[1200px]:hidden inline-flex border-gold/40 text-gold hover:bg-gold/10 hover:text-gold h-9 px-1.5 sm:px-2.5 text-[10px] sm:text-[11px] bg-transparent shrink-0 whitespace-nowrap"
             >
               <Link to="/nominate" aria-label="Nominate for NESA-Africa 2026">
                 <span className="inline sm:hidden">Nom</span>
                 <span className="hidden sm:inline">Nominate</span>
               </Link>
             </Button>
-
-            {/* Mobile / tablet Language Switcher (text-only) */}
-            <div className="min-[1200px]:hidden">
-              <LanguageSwitcher label="Lang" className="h-9 px-1 sm:px-2.5 text-[10px] sm:text-[11px]" />
-            </div>
-
-            {/* Mobile / tablet Sponsor CTA — primary filled gold, text-only */}
             <Button
               asChild
               size="sm"
-              className="min-[1200px]:hidden inline-flex bg-gold text-charcoal hover:bg-gold/90 font-semibold h-9 px-1 sm:px-2.5 text-[10px] sm:text-[11px] shadow-md shadow-gold/20 shrink-0 whitespace-nowrap"
+              variant="outline"
+              className="min-[1200px]:hidden inline-flex border-gold/40 text-gold hover:bg-gold/10 hover:text-gold h-9 px-1.5 sm:px-2.5 text-[10px] sm:text-[11px] bg-transparent shrink-0 whitespace-nowrap"
             >
-              <Link to="/sponsor" aria-label="Become a Sponsor of NESA-Africa 2026">Sponsor</Link>
+              <Link to="/vote" aria-label="Vote in NESA-Africa 2026">Vote</Link>
             </Button>
+
+            {/* Mobile / tablet Sponsor CTA — primary filled gold */}
+            <Button
+              asChild
+              size="sm"
+              className="min-[1200px]:hidden inline-flex bg-gold text-charcoal hover:bg-gold/90 font-semibold h-9 px-1.5 sm:px-2.5 text-[10px] sm:text-[11px] shadow-md shadow-gold/20 shrink-0 whitespace-nowrap"
+            >
+              <Link to="/sponsor" aria-label="Become a Sponsor of NESA-Africa 2026">
+                <span className="inline sm:hidden">Sponsor</span>
+                <span className="hidden sm:inline">Become a Sponsor</span>
+              </Link>
+            </Button>
+
+            {/* Mobile / tablet Language Switcher — icon only */}
+            <div className="min-[1200px]:hidden shrink-0">
+              <LanguageSwitcher variant="compact" className="h-9 w-9" />
+            </div>
 
             {/* Utility: Search — hidden below sm to preserve CTA space */}
             <div className="hidden sm:block">
