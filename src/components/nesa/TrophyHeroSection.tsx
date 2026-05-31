@@ -73,17 +73,17 @@ export function TrophyHeroSection() {
               {t("landing.trophyHero.slogan")}
             </motion.p>
 
-            {/* Official brand block — compact on mobile */}
+            {/* Official brand block — full content parity on mobile */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.25 }}
-              className="mb-3 sm:mb-5"
+              className="mb-4 sm:mb-5"
             >
-              <p className="font-display text-lg sm:text-2xl md:text-3xl lg:text-4xl font-bold text-white leading-tight">
+              <p className="font-display text-[28px] leading-[1.1] sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white">
                 NESA-Africa <span className="text-gold">2026</span>
               </p>
-              <p className="text-xs sm:text-sm md:text-base italic text-gold/90 mt-1">
+              <p className="text-[18px] sm:text-lg md:text-xl italic text-gold/95 mt-2 leading-snug">
                 "The African Blue-Garnet Awards for Education"
               </p>
             </motion.div>
@@ -92,30 +92,46 @@ export function TrophyHeroSection() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.3 }}
-              className="font-display text-[26px] leading-[1.15] sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4"
+              className="font-display text-[22px] leading-[1.2] sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4"
             >
-              Africa's Education{" "}
+              Nominate the 2026 Honourees{" "}
               <span className="text-gold bg-gradient-to-r from-gold to-amber-400 bg-clip-text text-transparent">
-                Recognition & Impact
-              </span>{" "}
-              Platform
+                Shaping Africa's Education Future
+              </span>
             </motion.h1>
 
             <motion.p
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.55 }}
-              className="text-white/85 text-sm sm:text-base md:text-lg mb-5 max-w-xl mx-auto lg:mx-0 leading-relaxed"
+              transition={{ duration: 0.5, delay: 0.5 }}
+              className="text-white/90 text-[15px] sm:text-base md:text-lg mb-4 max-w-xl mx-auto lg:mx-0 leading-relaxed"
             >
-              Recognizing changemakers. Supporting education. Building measurable
-              impact across Africa.
+              Across Africa and the diaspora, educators, innovators, advocates, institutions, funders, mentors, technology leaders, policy actors, and community changemakers are transforming education through real impact.
+            </motion.p>
+
+            <motion.p
+              initial={{ opacity: 0, y: 15 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.6 }}
+              className="text-white/85 text-[15px] sm:text-base md:text-lg mb-4 max-w-xl mx-auto lg:mx-0 leading-relaxed"
+            >
+              Help <span className="text-gold font-semibold">New Education Standard Award Africa (NESA-Africa) 2026</span> recognise the people and organisations advancing learning, inclusion, infrastructure, innovation, mentorship, community action, and social progress.
+            </motion.p>
+
+            <motion.p
+              initial={{ opacity: 0, y: 15 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.65 }}
+              className="text-white/85 text-[15px] sm:text-base md:text-lg mb-5 max-w-xl mx-auto lg:mx-0 leading-relaxed"
+            >
+              Nominate a changemaker today, discover Africa's education impact stories, and get ready to support your favourite nominees when voting opens.
             </motion.p>
 
             {/* Feature chips — six platform pillars */}
             <motion.ul
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.6 }}
+              transition={{ duration: 0.5, delay: 0.7 }}
               className="flex flex-wrap gap-1.5 sm:gap-2 justify-center lg:justify-start mb-6"
               aria-label="Platform pillars"
             >
@@ -140,7 +156,7 @@ export function TrophyHeroSection() {
             <motion.div
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.65 }}
+              transition={{ duration: 0.5, delay: 0.75 }}
               className="mb-4"
             >
               <HeroCTAStack />
@@ -149,7 +165,7 @@ export function TrophyHeroSection() {
             <motion.p
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              transition={{ duration: 0.5, delay: 0.8 }}
+              transition={{ duration: 0.5, delay: 0.85 }}
               className="text-gold/70 text-xs sm:text-sm tracking-wide mb-10 max-w-xl mx-auto lg:mx-0 leading-relaxed"
             >
               Voting opens according to the official NESA-Africa 2026 timeline. AGC voting points are subject to NESA-Africa participation rules.
