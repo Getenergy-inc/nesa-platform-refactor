@@ -187,10 +187,6 @@ export function ImpactWrapUpSection() {
             </div>
           </div>
         </motion.div>
-              </div>
-            </div>
-          </div>
-        </motion.div>
 
       </div>
     </section>
