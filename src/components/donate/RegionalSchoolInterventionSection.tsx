@@ -41,17 +41,34 @@ export function RegionalSchoolInterventionSection() {
             Support Special Needs Schools Across Africa
           </h2>
           <p className="text-gold/90 text-sm md:text-base font-semibold mb-4">
-            One Region. Twenty Schools. One Inclusive Education Mission.
+            20 Nominations per Region · 1 School Selected per Region for 2027 Intervention
           </p>
           <p className="text-white/70 text-sm md:text-base leading-relaxed">
             Through <span className="text-gold font-semibold">EduAid-Africa</span> and{" "}
             <span className="text-gold font-semibold">Rebuild My School Africa</span>,
             NESA-Africa 2026 is opening a continental Special Needs Education support
-            pathway across the approved {TOTAL_REGIONS} African regions. Each region features{" "}
+            pathway across the approved {TOTAL_REGIONS} African regions. Each region opens{" "}
             <span className="text-gold font-semibold">20 Special Needs School nomination
-            and intervention slots</span> — {TOTAL_SLOTS} in total — for communities,
-            donors, sponsors, diaspora supporters, CSR partners, and education stakeholders
-            to nominate, support, and vote for inclusive education impact.
+            slots</span> ({TOTAL_SLOTS} in total). After verification and regional
+            intervention voting,{" "}
+            <span className="text-gold font-semibold">only 1 school per region</span> —
+            a total of <span className="text-gold font-semibold">{TOTAL_REGIONS} schools
+            continent-wide</span> — will be selected for the 2027 Rebuild My School Africa
+            intervention.
+          </p>
+        </div>
+
+        {/* 1-per-region selection callout */}
+        <div className="mx-auto max-w-4xl mb-8 rounded-2xl border border-gold/40 bg-gold/10 p-4 sm:p-5 text-center">
+          <p className="text-gold text-xs sm:text-sm font-bold uppercase tracking-[0.18em] mb-1">
+            2027 Selection Rule
+          </p>
+          <p className="text-white/85 text-xs sm:text-sm leading-relaxed">
+            Communities nominate 20 schools per region. Regional intervention voting then
+            shortlists the highest-priority school in each of the 8 regions.{" "}
+            <span className="text-gold font-semibold">One school per region · 8 schools
+            total</span> will move into the October 2026 – October 2027 intervention
+            pipeline (fundraising, project delivery, and impact reporting).
           </p>
         </div>
 
@@ -95,11 +112,11 @@ export function RegionalSchoolInterventionSection() {
                       {region.regionName}
                     </h3>
                     <p className="text-white/55 text-[11px] sm:text-xs truncate">
-                      {region.countries.length} countries · 20 school slots · GFA Wzip portal
+                      {region.countries.length} countries · 20 nominations · 1 selected for 2027
                     </p>
                   </div>
                   <span className="hidden sm:inline-flex shrink-0 text-[10px] uppercase tracking-wider px-2 py-1 rounded-full bg-gold/10 border border-gold/30 text-gold font-semibold">
-                    20 slots
+                    1 of 20
                   </span>
                 </div>
               </AccordionTrigger>
@@ -159,10 +176,10 @@ export function RegionalSchoolInterventionSection() {
                 <div>
                   <div className="flex items-center justify-between mb-3">
                     <p className="text-[10px] uppercase tracking-wider text-white/50">
-                      20 Special Needs School Slots
+                      20 Nomination Slots · 1 Will Be Selected for 2027
                     </p>
                     <p className="text-[10px] text-white/40">
-                      0 verified · 20 open
+                      0 verified · 20 open · 1 final pick
                     </p>
                   </div>
                   <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-2">
