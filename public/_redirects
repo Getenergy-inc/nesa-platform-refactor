@@ -8,7 +8,6 @@
 #   3) Final /* /404.html 404 fallback so unknown URLs return a REAL 404 status
 
 # --- 1. Legacy 301 aliases ---
-/sponsorship                                                 /sponsor             301
 /sponsorships                                                /sponsor             301
 /engage/sponsor                                              /sponsor             301
 /engage/partner                                              /partners            301
@@ -66,7 +65,7 @@
 /cookie-policy                                               /policies            301
 /language                                                    /                    301
 
-# --- 2. SPA routes (292 explicit paths from src/App.tsx) ---
+# --- 2. SPA routes (295 explicit paths from src/App.tsx) ---
 /nominees/gold-special-recognition/:categorySlug/:nomineeSlug /index.html          200
 /nominees/best-ngo-contribution-to-education/profile/:slug   /index.html          200
 /awards/influencers-education-impact-2026-recognition        /index.html          200
@@ -151,6 +150,7 @@
 /claim-voting-credits                                        /index.html          200
 /nrc/dashboard/intake                                        /index.html          200
 /programs/nesa-africa                                        /index.html          200
+/sponsorship-packages                                        /index.html          200
 /about/social-impact                                         /index.html          200
 /admin/nominee-media                                         /index.html          200
 /auth/reset-password                                         /index.html          200
@@ -194,6 +194,7 @@
 /payments/gfawzip                                            /index.html          200
 /policies/privacy                                            /index.html          200
 /shop/bulk-orders                                            /index.html          200
+/sponsor/packages                                            /index.html          200
 /volunteers/:slug                                            /index.html          200
 /vote/blue-garnet                                            /index.html          200
 /admin/bulk-seed                                             /index.html          200
@@ -280,6 +281,7 @@
 /nrc/members                                                 /index.html          200
 /nrc/scoring                                                 /index.html          200
 /olc/members                                                 /index.html          200
+/sponsorship                                                 /index.html          200
 /about/scef                                                  /index.html          200
 /auth/login                                                  /index.html          200
 /categories                                                  /index.html          200
