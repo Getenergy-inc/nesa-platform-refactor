@@ -112,11 +112,11 @@ export function RegionalSchoolInterventionSection() {
                       {region.regionName}
                     </h3>
                     <p className="text-white/55 text-[11px] sm:text-xs truncate">
-                      {region.countries.length} countries · 20 school slots · GFA Wzip portal
+                      {region.countries.length} countries · 20 nominations · 1 selected for 2027
                     </p>
                   </div>
                   <span className="hidden sm:inline-flex shrink-0 text-[10px] uppercase tracking-wider px-2 py-1 rounded-full bg-gold/10 border border-gold/30 text-gold font-semibold">
-                    20 slots
+                    1 of 20
                   </span>
                 </div>
               </AccordionTrigger>
