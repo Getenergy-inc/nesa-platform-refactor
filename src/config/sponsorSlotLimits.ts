@@ -1,8 +1,15 @@
 // NESA-Africa 2026 — Sponsor Slot Limit Matrix
-// Defines how many sponsors/partners are allowed per category, to protect
-// sponsor value, brand visibility and award integrity.
+// Defines how many sponsors/partners are allowed per category. Lane rows are
+// derived from src/config/sponsorLaneCopy.ts so headline, amount and limit
+// stay in lock-step with the Pricing Table and Partnership Lane components.
+
+import {
+  SPONSOR_LANE_COPY,
+  type SponsorLaneSlug,
+} from "@/config/sponsorLaneCopy";
 
 export interface SponsorSlotRow {
+  slug?: SponsorLaneSlug;
   area: string;
   mainSlots: string;         // e.g. "1 only"
   supportingSlots?: string;  // e.g. "3–5 supporting partners"
@@ -18,6 +25,18 @@ export interface SponsorSlotGroup {
   rows: SponsorSlotRow[];
 }
 
+/** Build a row from a single lane copy block (headline / limit / amount). */
+function rowFromLane(slug: SponsorLaneSlug, notes?: string): SponsorSlotRow {
+  const copy = SPONSOR_LANE_COPY[slug];
+  return {
+    slug,
+    area: copy.headline,
+    mainSlots: copy.sponsorLimit,
+    mainAmount: copy.amount,
+    notes,
+  };
+}
+
 export const SPONSOR_SLOT_GROUPS: SponsorSlotGroup[] = [
   {
     categorySlug: "partners",
@@ -25,12 +44,10 @@ export const SPONSOR_SLOT_GROUPS: SponsorSlotGroup[] = [
     summary:
       "The highest sponsorship level — exclusive across the full NESA-Africa 2026 ecosystem.",
     rows: [
-      {
-        area: "Official Blue Diamond Partner — NESA-Africa 2026",
-        mainSlots: "1 only",
-        mainAmount: "$800,000",
-        notes: "Exclusive continental partner status across the full ecosystem.",
-      },
+      rowFromLane(
+        "blue-diamond",
+        "Exclusive continental partner status across the full ecosystem.",
+      ),
     ],
   },
   {
@@ -39,12 +56,11 @@ export const SPONSOR_SLOT_GROUPS: SponsorSlotGroup[] = [
     summary:
       "One main sponsor holds the naming right; supporting partners cover hospitality, red carpet, media wall, VIP reception, cultural performance and accessibility.",
     rows: [
-      { area: "Gala Night Main Sponsor", mainSlots: "1", mainAmount: "$200,000" },
-      {
-        area: "Gala Supporting Partners",
-        mainSlots: "3–5",
-        notes: "Hospitality · Red Carpet · Media Wall · VIP Reception · Accessibility",
-      },
+      rowFromLane("gala-main"),
+      rowFromLane(
+        "gala-supporting",
+        "Hospitality · Red Carpet · Media Wall · VIP Reception · Accessibility",
+      ),
     ],
   },
   {
@@ -52,9 +68,9 @@ export const SPONSOR_SLOT_GROUPS: SponsorSlotGroup[] = [
     summary:
       "A premium lifetime achievement recognition — kept uncrowded to protect prestige.",
     rows: [
-      { area: "Africa Education Icon Main Sponsor", mainSlots: "1", mainAmount: "$100,000" },
-      { area: "Legacy Documentary Partner", mainSlots: "1" },
-      { area: "Icon Reception / Tribute Partner", mainSlots: "1" },
+      rowFromLane("africa-icon-main"),
+      rowFromLane("icon-documentary"),
+      rowFromLane("icon-tribute"),
     ],
   },
   {
@@ -63,9 +79,8 @@ export const SPONSOR_SLOT_GROUPS: SponsorSlotGroup[] = [
     summary:
       "Exclusive category sponsorship with strict non-influence firewalls.",
     rows: [
-      { area: "Main Gold / Blue Garnet Sponsor", mainSlots: "1 per category", mainAmount: "$150,000" },
-      { area: "Supporting Media / Storytelling Partner", mainSlots: "1" },
-      { area: "Optional Category Page Sponsor", mainSlots: "1–3" },
+      rowFromLane("gold-blue-garnet-main"),
+      rowFromLane("blue-garnet-category"),
     ],
   },
   {
@@ -73,8 +88,8 @@ export const SPONSOR_SLOT_GROUPS: SponsorSlotGroup[] = [
     summary:
       "One main Platinum sponsor plus optional sub-category page sponsors.",
     rows: [
-      { area: "Platinum Main Sponsor", mainSlots: "1", mainAmount: "$70,000" },
-      { area: "Platinum Sub-Category Page Sponsors", mainSlots: "Maximum 3 per page" },
+      rowFromLane("platinum-main"),
+      rowFromLane("platinum-category"),
     ],
   },
   {
@@ -82,12 +97,11 @@ export const SPONSOR_SLOT_GROUPS: SponsorSlotGroup[] = [
     summary:
       "Built for digital amplification — one main sponsor with multiple specialised supporting partners.",
     rows: [
-      { area: "Main Influencers Education Impact Sponsor", mainSlots: "1", mainAmount: "$50,000" },
-      { area: "Youth Voice Partner", mainSlots: "1" },
-      { area: "Digital Creator Partner", mainSlots: "1" },
-      { area: "Social Media Amplification Partner", mainSlots: "1" },
-      { area: "Radio / Community Campaign Partner", mainSlots: "1" },
-      { area: "Category Page Sponsors", mainSlots: "1–3 per page" },
+      rowFromLane("influencers-main"),
+      rowFromLane(
+        "influencers-supporting",
+        "Youth voice · Digital creator · Social amplification · Radio / community campaign",
+      ),
     ],
   },
   {
@@ -95,9 +109,9 @@ export const SPONSOR_SLOT_GROUPS: SponsorSlotGroup[] = [
     summary:
       "Each sub-category page may carry a maximum of three sponsors.",
     rows: [
-      { area: "Page Lead Sponsor", mainSlots: "1", mainAmount: "$5,000" },
-      { area: "Page Supporting Sponsor", mainSlots: "1", mainAmount: "$2,500" },
-      { area: "Page Visibility Sponsor", mainSlots: "1", mainAmount: "$1,000" },
+      rowFromLane("subcategory-lead"),
+      rowFromLane("subcategory-supporting"),
+      rowFromLane("subcategory-visibility"),
     ],
   },
   {
@@ -105,8 +119,8 @@ export const SPONSOR_SLOT_GROUPS: SponsorSlotGroup[] = [
     title: "8. EduAid-Africa Webinars & Events",
     summary: "One main sponsor per episode/event; supporting visibility available.",
     rows: [
-      { area: "Webinar / Event Main Sponsor", mainSlots: "1 per episode" },
-      { area: "Supporting Visibility Partners", mainSlots: "Up to 2 per episode" },
+      rowFromLane("eduaid-webinar-main"),
+      rowFromLane("eduaid-webinar-supporting"),
     ],
   },
   {
@@ -114,23 +128,30 @@ export const SPONSOR_SLOT_GROUPS: SponsorSlotGroup[] = [
     title: "9. NESA-Africa TV Feature Sponsor",
     summary: "One main sponsor per feature, documentary or category coverage.",
     rows: [
-      { area: "Feature / Category Main Sponsor", mainSlots: "1 per feature" },
-      { area: "Episode Supporting Partners", mainSlots: "Up to 2 per episode" },
+      rowFromLane("nesa-tv-feature"),
+      rowFromLane("nesa-tv-supporting"),
     ],
   },
   {
     title: "10. Supporter Visibility Listing",
     summary:
       "Paid public supporter listings — unlimited but grouped by type. Supporter Visibility Listing does NOT create sponsorship rights, category ownership, judging authority, nomination influence, voting influence or winner-selection power.",
-    rows: [
-      { area: "Institutional Supporters", mainSlots: "Unlimited", mainAmount: "$500" },
-      { area: "Civil Society Supporters", mainSlots: "Unlimited", mainAmount: "$500" },
-      { area: "Academic Supporters", mainSlots: "Unlimited", mainAmount: "$500" },
-      { area: "Media Supporters", mainSlots: "Unlimited", mainAmount: "$500" },
-      { area: "Diaspora Supporters", mainSlots: "Unlimited", mainAmount: "$500" },
-      { area: "Corporate Supporters", mainSlots: "Unlimited", mainAmount: "$500" },
-      { area: "Community Supporters", mainSlots: "Unlimited", mainAmount: "$500" },
-    ],
+    rows: (
+      [
+        "Institutional Supporters",
+        "Civil Society Supporters",
+        "Academic Supporters",
+        "Media Supporters",
+        "Diaspora Supporters",
+        "Corporate Supporters",
+        "Community Supporters",
+      ] as const
+    ).map((area) => ({
+      slug: "supporter-visibility-listing" as SponsorLaneSlug,
+      area,
+      mainSlots: "Unlimited",
+      mainAmount: SPONSOR_LANE_COPY["supporter-visibility-listing"].amount,
+    })),
   },
 ];
 
