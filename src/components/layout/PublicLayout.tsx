@@ -4,6 +4,7 @@
 import { ReactNode } from "react";
 import { NESAHeader } from "@/components/nesa/NESAHeader";
 import { NESAFooter } from "@/components/nesa/NESAFooter";
+import { UtilityBar } from "@/components/nesa/UtilityBar";
 import { MobileBottomNav } from "@/components/navigation/MainNav";
 import { BottomPageNav } from "@/components/navigation/PageNavigation";
 import { ExitIntentPopup } from "@/components/nesa/ExitIntentPopup";
@@ -31,6 +32,7 @@ export function PublicLayout({
 }: PublicLayoutProps) {
   return (
     <div className="min-h-screen bg-charcoal flex flex-col">
+      <UtilityBar />
       <NESAHeader />
       <main className="flex-1 pt-14 sm:pt-16 lg:pt-[100px] pb-20 lg:pb-16">
         {children}
