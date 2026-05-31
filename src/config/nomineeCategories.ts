@@ -14,7 +14,7 @@
  * Global CTA Rule:
  *   - Primary CTA on every card  = "Explore Nominees" / "View Profile"
  *   - Secondary CTA on Blue Garnet = "Vote"
- *   - Secondary CTA on all others  = "Re-nominate"
+ *   - Secondary CTA on all others  = "Recommend Again"
  *   (Future: Support / Donate / Join Campaign / Attend Gala / View Legacy)
  */
 
@@ -119,7 +119,7 @@ export function getSecondaryCta(slug: string): SecondaryCTA {
 }
 
 export function getSecondaryCtaLabel(slug: string): string {
-  return getSecondaryCta(slug) === "vote" ? "Vote" : "Re-nominate";
+  return getSecondaryCta(slug) === "vote" ? "Vote" : "Recommend Again";
 }
 
 /**

@@ -6,6 +6,7 @@ import { AwardCategoriesGrid } from "@/components/awards/AwardCategoriesGrid";
 import { BrandedCategoryHero } from "@/components/awards/BrandedCategoryHero";
 import { BrandedDocumentaryPreview } from "@/components/awards/BrandedDocumentaryPreview";
 import { BreadcrumbJsonLd } from "@/components/seo/BreadcrumbJsonLd";
+import { AwardStandardStack } from "@/components/awards/AwardStandardSections";
 import { getTVShowByAward } from "@/config/awardTVShows";
 import { getCategoriesByTier, getCategoriesGrouped } from "@/config/nesaCategories";
 import { Button } from "@/components/ui/button";
@@ -136,6 +137,42 @@ export default function PlatinumAward() {
             </Button>
           </div>
         </section>
+
+        {/* Standard NESA-Africa premium platform stack */}
+        <AwardStandardStack
+          awardName="Platinum Recognition"
+          why={{
+            title: "Why Platinum Recognition Exists",
+            pillars: [
+              { label: "Institutional Trust", description: "Verifies institutions, ministries, foundations, and corporates whose education work is real, governed, and reportable." },
+              { label: "Verification Before Recognition", description: "Every Platinum honouree clears NRC review and EDX scoring before any certificate is issued." },
+              { label: "Partner Confidence", description: "Gives donors, ministries, and multilateral partners a credible signal of impact and governance." },
+            ],
+          }}
+          eligibility={{
+            intro: "Open to NGOs, schools, government agencies, universities, and corporates with verifiable education impact and governance.",
+            bullets: [
+              "Legally registered entity with public-record governance",
+              "Documented education programmes with beneficiary evidence",
+              "Multi-year track record (typically 3+ years)",
+              "Willingness to submit to NRC verification and EDX scoring",
+            ],
+            disqualifiers: [
+              "Unverifiable or contradictory institutional records",
+              "Active safeguarding or anti-bribery red flags",
+              "Refusal of evidence audit during the cure window",
+            ],
+          }}
+          edx={{
+            weights: { E: "35%", D: "40%", X: "25%" },
+            highlights: ["Education Impact", "Sustainability", "Governance", "Community Impact"],
+          }}
+          faqs={[
+            { q: "Is Platinum a competition?", a: "No. Platinum is a verified institutional certificate, not a competitive ranking. Each qualifying institution can be recognised on its own merits." },
+            { q: "How long is the certificate valid?", a: "One year, renewable through a streamlined re-verification." },
+            { q: "Can a Platinum institution also enter Blue Garnet?", a: "Yes, where an eligible Blue Garnet category exists for the institution's work." },
+          ]}
+        />
       </div>
     </>
   );

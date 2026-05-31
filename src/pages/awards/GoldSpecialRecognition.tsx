@@ -6,6 +6,7 @@ import { BrandedCategoryHero } from "@/components/awards/BrandedCategoryHero";
 import { BrandedDocumentaryPreview } from "@/components/awards/BrandedDocumentaryPreview";
 import { GoldTrackNavGrid } from "@/components/awards/GoldTrackNavGrid";
 import { BreadcrumbJsonLd } from "@/components/seo/BreadcrumbJsonLd";
+import { AwardStandardStack } from "@/components/awards/AwardStandardSections";
 
 export default function GoldSpecialRecognition() {
   return (
@@ -50,6 +51,43 @@ export default function GoldSpecialRecognition() {
         />
         <GoldTrackNavGrid />
         <GoldSpecialRecognitionSection />
+
+        {/* Standard NESA-Africa premium platform stack */}
+        <AwardStandardStack
+          awardName="Influencer Education Impact"
+          why={{
+            title: "Why the Influencer Education Impact Award Exists",
+            pillars: [
+              { label: "Education Through Influence", description: "Recognises creators, musicians, athletes, actors, and public voices who turn cultural reach into education impact." },
+              { label: "Cultural Bridge", description: "Connects mainstream culture with classroom realities — funding, advocacy, mentorship, and visibility." },
+              { label: "Youth Inspiration", description: "Models a generation of role models who treat education as the defining African story." },
+            ],
+          }}
+          eligibility={{
+            intro: "Open to public figures whose platform measurably advances education access, advocacy, or funding in Africa.",
+            bullets: [
+              "Documented public platform with continental reach",
+              "Verifiable education-linked advocacy, funding, or programmes",
+              "Authentic engagement (no coordinated inauthentic behaviour)",
+              "Willingness to participate in the recognition campaign",
+            ],
+            disqualifiers: [
+              "Brand-only association with no programme evidence",
+              "Active safeguarding or integrity concerns",
+              "Audience-buying or vote-manipulation patterns",
+            ],
+          }}
+          edx={{
+            weights: { E: "25%", D: "30%", X: "45%" },
+            highlights: ["Reach", "Inclusion", "Innovation", "Community Impact"],
+          }}
+          faqs={[
+            { q: "Does follower count alone qualify?", a: "No. Reach matters, but it is one of three pillars — Education Impact and Development Contribution evidence is still required." },
+            { q: "Can teams or labels be nominated?", a: "Yes, where a named lead figure represents the work and accepts the recognition responsibilities." },
+            { q: "Is public voting used?", a: "Public participation is used in eligible tracks; final recognition is governed by the EDX Matrix and integrity rules." },
+          ]}
+        />
+
         <NESAFooter />
       </div>
     </>

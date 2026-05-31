@@ -39,7 +39,7 @@ const STEPS = [
 
 const RULES = [
   { icon: Shield, title: "One vote per session", body: "Database constraints enforce unique voting attribution to keep results fair." },
-  { icon: Lock, title: "Blue Garnet only", body: "Only Blue Garnet category nominees are open for public voting. Other categories use Re-nominate." },
+  { icon: Lock, title: "Blue Garnet only", body: "Only Blue Garnet category nominees are open for public voting. Other categories use Recommend Again." },
   { icon: FileCheck, title: "Audit trail", body: "Every vote is hashed and logged. Results are independently verifiable." },
   { icon: CheckCircle2, title: "AGC-backed integrity", body: "Voting requires AGC, which deters spam and rewards real participation." },
 ];

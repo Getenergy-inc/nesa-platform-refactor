@@ -7,7 +7,7 @@
  *
  * Applies the global CTA rule from src/config/nomineeCategories.ts:
  *   - Primary CTA   = "Explore Nominees"  → /nominees/category/{slug}
- *   - Secondary CTA = "Vote" (Blue Garnet) | "Re-nominate" (all others)
+ *   - Secondary CTA = "Vote" (Blue Garnet) | "Recommend Again" (all others)
  */
 
 import { useMemo } from "react";

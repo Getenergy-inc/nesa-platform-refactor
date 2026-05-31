@@ -1,6 +1,6 @@
 /**
  * Premium nominee card for the landing page showcase.
- * Displays profile, contribution, and Nominate / Re-Nominate / Vote CTAs.
+ * Displays profile, contribution, and Nominate / Recommend Again / Vote CTAs.
  */
 
 import { Link, useNavigate } from "react-router-dom";
