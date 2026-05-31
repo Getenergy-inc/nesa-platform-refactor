@@ -213,6 +213,7 @@ import {
 import { SponsorLanding, SponsorsHub } from "./pages/sponsors";
 import SponsorHub from "./pages/sponsor/SponsorHub";
 import SponsorCategoryPage from "./pages/sponsor/SponsorCategoryPage";
+import SponsorshipPackages from "./pages/sponsor/SponsorshipPackages";
 
 import Wallet from "./pages/Wallet";
 import EndorseNESA from "./pages/EndorseNESA";
@@ -365,6 +366,9 @@ const App = () => (
 
                   {/* Sponsor NESA-Africa 2026 — premium partnership ecosystem */}
                   <Route path="/sponsor" element={<SponsorHub />} />
+                  <Route path="/sponsorship-packages" element={<SponsorshipPackages />} />
+                  <Route path="/sponsorship" element={<Navigate to="/sponsorship-packages" replace />} />
+                  <Route path="/sponsor/packages" element={<Navigate to="/sponsorship-packages" replace />} />
                   <Route path="/sponsor/:slug" element={<SponsorCategoryPage />} />
                   {/* Sponsor legacy */}
                   <Route path="/our-sponsors" element={<Navigate to="/sponsors" replace />} />
