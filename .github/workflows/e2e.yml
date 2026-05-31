@@ -43,20 +43,39 @@ jobs:
 
       # Dedicated bundle for the navbar visual regression spec. Playwright
       # writes -actual.png / -expected.png / -diff.png into
-      # test-results/<test-id>/ on failure; we collect just the navbar ones
-      # plus the committed baselines so reviewers can diff in one download.
+      # test-results/<test-id>/ on failure; we also re-run a capture-only
+      # spec so reviewers get a fresh header screenshot at EVERY tracked
+      # viewport width (not only the failing ones).
+      - name: Capture navbar at every width (failure only)
+        if: failure()
+        env:
+          PLAYWRIGHT_CAPTURE_NAVBAR: "1"
+          # Reuse the already-built preview if still running; otherwise the
+          # config's webServer will rebuild.
+          PLAYWRIGHT_BASE_URL: http://localhost:4173
+        run: |
+          # Start preview in background if the previous server isn't up.
+          (curl -sf http://localhost:4173 > /dev/null) || (bun run preview -- --port 4173 --strictPort &)
+          for i in $(seq 1 60); do curl -sf http://localhost:4173 > /dev/null && break || sleep 2; done
+          bun playwright test navbar-visual-capture --reporter=list || true
+
       - name: Collect navbar-visual diff bundle
         if: failure()
         run: |
           set -e
-          mkdir -p navbar-visual-artifacts/diffs navbar-visual-artifacts/baselines
-          # Failure outputs (actual + expected + diff PNGs)
+          mkdir -p navbar-visual-artifacts/diffs navbar-visual-artifacts/baselines navbar-visual-artifacts/captures
+          # Failure outputs (actual + expected + diff PNGs) — only present
+          # for the widths that actually failed.
           if compgen -G "test-results/*navbar-visual*" > /dev/null; then
             cp -r test-results/*navbar-visual* navbar-visual-artifacts/diffs/ || true
           fi
-          # Committed baselines for side-by-side comparison
+          # Committed baselines for side-by-side comparison.
           if [ -d tests/e2e/navbar-visual.spec.ts-snapshots ]; then
             cp -r tests/e2e/navbar-visual.spec.ts-snapshots/. navbar-visual-artifacts/baselines/ || true
+          fi
+          # Fresh per-width captures from the capture-only spec.
+          if [ -d test-results/navbar-captures ]; then
+            cp -r test-results/navbar-captures/. navbar-visual-artifacts/captures/ || true
           fi
           ls -R navbar-visual-artifacts || true
 
