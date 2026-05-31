@@ -176,10 +176,10 @@ export function RegionalSchoolInterventionSection() {
                 <div>
                   <div className="flex items-center justify-between mb-3">
                     <p className="text-[10px] uppercase tracking-wider text-white/50">
-                      20 Special Needs School Slots
+                      20 Nomination Slots · 1 Will Be Selected for 2027
                     </p>
                     <p className="text-[10px] text-white/40">
-                      0 verified · 20 open
+                      0 verified · 20 open · 1 final pick
                     </p>
                   </div>
                   <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-2">
