@@ -76,12 +76,10 @@ export function NESALandingPage() {
         </LazySection>
 
 
-        {/* 4. NOMINEE DISCOVERY — desktop/tablet only; mobile gets dedicated /nominees */}
-        <div className="hidden md:block">
-          <LazySection>
-            <NomineeDiscoverySwitcher />
-          </LazySection>
-        </div>
+        {/* 4. NOMINEE DISCOVERY — responsive on all devices */}
+        <LazySection>
+          <NomineeDiscoverySwitcher />
+        </LazySection>
 
 
         {/* 5. MOMENTS PREVIEW — visible on all devices */}
@@ -118,26 +116,20 @@ export function NESALandingPage() {
           <ImpactWrapUpSection />
         </LazySection>
 
-        {/* About NESA-Africa 2026 — desktop/tablet only; mobile gets dedicated /about */}
-        <div className="hidden md:block">
-          <LazySection>
-            <AboutNESASection />
-          </LazySection>
-        </div>
+        {/* About NESA-Africa 2026 — responsive on all devices */}
+        <LazySection>
+          <AboutNESASection />
+        </LazySection>
 
-        {/* Powered by Volunteers — desktop/tablet only; mobile gets dedicated /volunteer */}
-        <div className="hidden md:block">
-          <LazySection>
-            <PoweredByVolunteersSection />
-          </LazySection>
-        </div>
+        {/* Powered by Volunteers — responsive on all devices */}
+        <LazySection>
+          <PoweredByVolunteersSection />
+        </LazySection>
 
-        {/* Trust supporting Final CTA — desktop/tablet only; mobile gets dedicated /sponsors */}
-        <div className="hidden md:block">
-          <LazySection>
-            <SponsorsSection />
-          </LazySection>
-        </div>
+        {/* Sponsors conversion section — responsive on all devices */}
+        <LazySection>
+          <SponsorsSection />
+        </LazySection>
 
 
 
