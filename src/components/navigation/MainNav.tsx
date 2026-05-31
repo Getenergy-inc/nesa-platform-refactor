@@ -538,12 +538,12 @@ function UserMenu() {
 
   if (!user) {
     return (
-      <div className="hidden xl:flex items-center gap-2">
+      <div className="hidden min-[1200px]:flex items-center gap-2">
         <Link to="/login">
           <Button
             variant="ghost"
             size="sm"
-            className="text-white/90 hover:text-gold hover:bg-gold/10 h-8 xl:h-9 px-3 text-[11px] xl:text-sm"
+            className="text-white/90 hover:text-gold hover:bg-gold/10 h-9 px-3 text-[12px]"
           >
             Sign In
           </Button>
