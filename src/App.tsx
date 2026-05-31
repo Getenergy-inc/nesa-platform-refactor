@@ -213,6 +213,7 @@ import {
 import { SponsorLanding, SponsorsHub } from "./pages/sponsors";
 import SponsorHub from "./pages/sponsor/SponsorHub";
 import SponsorCategoryPage from "./pages/sponsor/SponsorCategoryPage";
+import SponsorshipPackages from "./pages/sponsor/SponsorshipPackages";
 
 import Wallet from "./pages/Wallet";
 import EndorseNESA from "./pages/EndorseNESA";
