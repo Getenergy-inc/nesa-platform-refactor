@@ -84,10 +84,13 @@ export function ImpactWrapUpSection() {
                   <span className="text-gold font-semibold">Rebuild My School Africa</span>, the
                   NESA-Africa 2026 season connects award recognition to practical school
                   intervention between <span className="text-gold font-semibold">October 2026 and October 2027</span>.
-                  Special needs school nominations open on EduAid.Africa, verified schools are
-                  organized by region, regional voting opens, GFA Wzip regional funding portals
-                  activate, and selected schools receive infrastructure, accessibility, learning
-                  materials, teacher support and inclusive education projects.
+                  Special Needs School nominations open through EduAid-Africa. Verified schools
+                  are organised by the approved 8 African regions, regional voting opens for
+                  intervention priority, GFA Wzip regional funding portals activate, and
+                  selected schools receive infrastructure, accessibility, learning materials,
+                  teacher support, digital learning, WASH, and inclusive education projects.
+                  This is how NESA-Africa moves from recognition to measurable regional
+                  education impact.
                 </p>
 
                 <div className="grid sm:grid-cols-2 gap-3 mb-8">
@@ -134,6 +137,53 @@ export function ImpactWrapUpSection() {
                       Partner for Impact
                       <ArrowRight className="h-4 w-4" />
                     </Button>
+                  </Link>
+                </div>
+
+                {/* Support CTAs */}
+                <div className="mt-4 flex flex-wrap gap-2">
+                  <Link to="/vote">
+                    <Button variant="ghost" size="sm" className="text-gold/85 hover:text-gold hover:bg-gold/10 rounded-full">
+                      Vote for Regional Intervention
+                    </Button>
+                  </Link>
+                  <Link to="/donate">
+                    <Button variant="ghost" size="sm" className="text-gold/85 hover:text-gold hover:bg-gold/10 rounded-full">
+                      Support a Regional School
+                    </Button>
+                  </Link>
+                  <Link to="/eduaid-africa/edutourism-2027">
+                    <Button variant="ghost" size="sm" className="text-gold/85 hover:text-gold hover:bg-gold/10 rounded-full">
+                      Join EduTourism 2027
+                    </Button>
+                  </Link>
+                  <Link to="/eduaid-africa/rebuild-my-school">
+                    <Button variant="ghost" size="sm" className="text-gold/85 hover:text-gold hover:bg-gold/10 rounded-full">
+                      Learn About EduAid-Africa
+                    </Button>
+                  </Link>
+                </div>
+
+                {/* Powered by strip */}
+                <p className="mt-5 text-[11px] sm:text-xs text-white/55">
+                  <span className="text-gold font-semibold">Powered by EduAid-Africa</span>{" "}
+                  · Implemented through Rebuild My School Africa
+                </p>
+
+                {/* Regional preview note */}
+                <div className="mt-5 rounded-xl border border-gold/25 bg-gold/5 p-4">
+                  <p className="text-white/80 text-xs sm:text-sm leading-relaxed">
+                    <span className="text-gold font-semibold">Regional Special Needs School Intervention:</span>{" "}
+                    Each of the approved 8 African regions will feature 20 Special Needs
+                    School nomination and intervention slots — 160 in total — for
+                    communities and supporters to nominate, vote, donate, and partner for
+                    inclusive education impact.
+                  </p>
+                  <Link
+                    to="/donate#regional-intervention"
+                    className="mt-2 inline-flex items-center gap-1 text-gold text-xs font-semibold hover:underline"
+                  >
+                    View Regional School Intervention Map →
                   </Link>
                 </div>
               </div>
