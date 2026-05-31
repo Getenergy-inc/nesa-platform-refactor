@@ -446,7 +446,7 @@ function GoldCategoryCard({ card, index }: { card: CategoryCard; index: number }
                 className="border-primary/20 text-primary hover:bg-primary/10 font-medium text-xs h-9"
                 asChild
               >
-                <Link to="/nominate?tier=gold-special">Re-Nominate</Link>
+                <Link to="/nominate?tier=gold-special">Recommend Again</Link>
               </Button>
             </div>
             {/* Secondary links */}
@@ -567,7 +567,7 @@ function ClosingStatement() {
             </Link>
           </Button>
           <Button size="lg" variant="outline" className="border-primary/25 text-primary hover:bg-primary/10 h-12 px-6" asChild>
-            <Link to="/nominate?tier=gold-special">Re-Nominate</Link>
+            <Link to="/nominate?tier=gold-special">Recommend Again</Link>
           </Button>
           <Button size="lg" variant="ghost" className="text-white/30 hover:text-white hover:bg-white/5 h-12 px-6" asChild>
             <Link to="/guidelines/edi-matrix">

@@ -149,7 +149,7 @@ export default function NomineesHubPage() {
         <title>Nominees Directory — NESA-Africa 2026</title>
         <meta
           name="description"
-          content="Explore every NESA-Africa nominee by award category. Discover changemakers, vote, and renominate champions advancing Education for All."
+          content="Explore every NESA-Africa nominee by award category. Discover changemakers, vote, and recommend champions again to advance Education for All."
         />
         <link rel="canonical" href="https://nesaafrica.lovable.app/nominees" />
         <meta property="og:title" content="NESA-Africa Nominees Directory" />
@@ -298,7 +298,7 @@ export default function NomineesHubPage() {
                 <Trophy className="w-6 h-6 text-gold" /> Browse by Award Category
               </h2>
               <p className="text-ivory/65 text-sm md:text-base max-w-3xl">
-                Every nominee belongs to an award track. Pick a category to explore its nominees, vote in Blue Garnet tracks, or re-nominate a champion.
+                Every nominee belongs to an award track. Pick a category to explore its nominees, vote in Blue Garnet tracks, or recommend an existing champion again.
               </p>
             </div>
 

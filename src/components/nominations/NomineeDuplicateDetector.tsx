@@ -59,7 +59,7 @@ export function NomineeDuplicateDetector({
             </p>
             <p className="text-xs text-white/50 mt-1">
               {hasExact
-                ? "You can re-nominate them or continue if this is a different person."
+                ? "You can recommend them again or continue if this is a different person."
                 : "Review the matches below to avoid duplicate entries."}
             </p>
           </div>

@@ -137,7 +137,7 @@ export function LandingNomineeShowcase() {
             Discover Africa's Education Leaders
           </h2>
           <p className="text-muted-foreground max-w-2xl mx-auto">
-            Browse nominees by category and subcategory. Nominate new leaders, re-nominate impactful changemakers, and vote in eligible Blue Garnet categories.
+            Browse nominees by category and subcategory. Nominate new leaders, recommend impactful changemakers again, and vote in eligible Blue Garnet categories.
           </p>
         </motion.div>
 
@@ -270,7 +270,7 @@ export function LandingNomineeShowcase() {
             Ready to Make an Impact?
           </h3>
           <p className="text-muted-foreground max-w-lg mx-auto mb-6">
-            Nominate an education leader, re-nominate an existing changemaker, or sign up to participate.
+            Nominate an education leader, recommend an existing changemaker again, or sign up to participate.
           </p>
           <p className="text-xs text-muted-foreground mb-6">
             You can begin a nomination now, but final confirmation requires sign-up or sign-in.
