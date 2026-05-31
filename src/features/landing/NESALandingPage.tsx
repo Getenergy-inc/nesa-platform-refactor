@@ -13,6 +13,7 @@ import { TrustLogosStrip } from "@/components/nesa/TrustLogosStrip";
 import { CountdownSection } from "@/components/nesa/CountdownSection";
 import { NESAFooter } from "@/components/nesa/NESAFooter";
 import { NESAHeader } from "@/components/nesa/NESAHeader";
+import { UtilityBar } from "@/components/nesa/UtilityBar";
 import { LazySection } from "@/components/ui/lazy-section";
 import { BottomPageNav } from "@/components/navigation/PageNavigation";
 import { MobileBottomNav } from "@/components/navigation/MainNav";
@@ -36,6 +37,9 @@ const NomineeDiscoverySwitcher = lazy(() => import("@/components/nominees/Nomine
 const AboutNESASection = lazy(() => import("@/components/nesa/AboutNESASection").then(m => ({ default: m.AboutNESASection })));
 const PoweredByVolunteersSection = lazy(() => import("@/components/nesa/PoweredByVolunteersSection").then(m => ({ default: m.PoweredByVolunteersSection })));
 const MobileCategoryRail = lazy(() => import("@/components/landing/MobileCategoryRail").then(m => ({ default: m.MobileCategoryRail })));
+const AwardShowcaseSection = lazy(() => import("@/components/nesa/AwardShowcaseSection").then(m => ({ default: m.AwardShowcaseSection })));
+const ImpactProgramsSection = lazy(() => import("@/components/nesa/ImpactProgramsSection").then(m => ({ default: m.ImpactProgramsSection })));
+const GovernanceFirewallSection = lazy(() => import("@/components/nesa/GovernanceFirewallSection").then(m => ({ default: m.GovernanceFirewallSection })));
 
 
 
@@ -57,6 +61,7 @@ export function NESALandingPage() {
       <ScrollProgressIndicator />
 
       <div className="min-h-screen bg-charcoal pt-14 sm:pt-16 pb-16 text-center md:text-left">
+        <UtilityBar />
         <NESAHeader />
 
         {/* 1. HERO — primary CTAs */}
@@ -66,6 +71,11 @@ export function NESALandingPage() {
         <TrustLogosStrip />
         <LazySection>
           <EcosystemCarousel />
+        </LazySection>
+
+        {/* 2b. AWARD ARCHITECTURE — four-tier showcase */}
+        <LazySection>
+          <AwardShowcaseSection />
         </LazySection>
 
         {/* 3. COUNTDOWN — Blue Garnet 2026 Gala urgency */}
@@ -80,6 +90,11 @@ export function NESALandingPage() {
         {/* 4. NOMINEE DISCOVERY — responsive on all devices */}
         <LazySection>
           <NomineeDiscoverySwitcher />
+        </LazySection>
+
+        {/* 4b. IMPACT PROGRAMS — EduAid / RMSA / Special Needs / Edu-Tourism */}
+        <LazySection>
+          <ImpactProgramsSection />
         </LazySection>
 
 
@@ -135,6 +150,11 @@ export function NESALandingPage() {
         {/* Sponsor tier preview cards — mobile-friendly pricing tiers */}
         <LazySection>
           <SponsorTiersPreview />
+        </LazySection>
+
+        {/* Governance firewall — integrity messaging */}
+        <LazySection>
+          <GovernanceFirewallSection />
         </LazySection>
 
 
