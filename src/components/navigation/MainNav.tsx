@@ -281,7 +281,7 @@ function MobileNav({ onOpenCVOMessage }: { onOpenCVOMessage: () => void }) {
           </SheetTitle>
         </SheetHeader>
 
-        <nav className="flex flex-col h-[calc(100%-65px)]">
+        <nav aria-label="Mobile primary navigation" className="flex flex-col h-[calc(100%-65px)]">
           <div className="flex-1 overflow-y-auto overscroll-contain">
             {/* Sticky Sponsor CTA — top-level per IA brief */}
             <div className="px-4 pt-4 pb-2">
