@@ -20,6 +20,7 @@ import { MiniMusicPlayer } from "@/components/nesa/MiniMusicPlayer";
 import { DonorTrustPanel } from "@/components/governance/DonorTrustPanel";
 import africaMapImg from "@/assets/africa-map-silhouette.png";
 import { RegionalSchoolInterventionSection } from "@/components/donate/RegionalSchoolInterventionSection";
+import { ProvidusBankAccounts } from "@/components/donate/ProvidusBankAccounts";
 import { TOTAL_REGIONS, TOTAL_SLOTS } from "@/config/specialNeedsSchoolSlots";
 
 const donationAmounts = [
@@ -185,6 +186,9 @@ export default function Donate() {
             </div>
           </div>
         </section>
+
+        {/* Providus Bank Manual Transfer Hub */}
+        <ProvidusBankAccounts />
 
         {/* Music For A Cause */}
         <section className="py-8">
