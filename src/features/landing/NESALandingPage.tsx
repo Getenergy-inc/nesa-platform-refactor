@@ -61,6 +61,7 @@ export function NESALandingPage() {
       <ScrollProgressIndicator />
 
       <div className="min-h-screen bg-charcoal pt-14 sm:pt-16 pb-16 text-center md:text-left">
+        <UtilityBar />
         <NESAHeader />
 
         {/* 1. HERO — primary CTAs */}
@@ -70,6 +71,11 @@ export function NESALandingPage() {
         <TrustLogosStrip />
         <LazySection>
           <EcosystemCarousel />
+        </LazySection>
+
+        {/* 2b. AWARD ARCHITECTURE — four-tier showcase */}
+        <LazySection>
+          <AwardShowcaseSection />
         </LazySection>
 
         {/* 3. COUNTDOWN — Blue Garnet 2026 Gala urgency */}
@@ -84,6 +90,11 @@ export function NESALandingPage() {
         {/* 4. NOMINEE DISCOVERY — responsive on all devices */}
         <LazySection>
           <NomineeDiscoverySwitcher />
+        </LazySection>
+
+        {/* 4b. IMPACT PROGRAMS — EduAid / RMSA / Special Needs / Edu-Tourism */}
+        <LazySection>
+          <ImpactProgramsSection />
         </LazySection>
 
 
