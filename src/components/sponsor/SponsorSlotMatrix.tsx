@@ -91,8 +91,9 @@ export function SponsorSlotMatrix() {
               </p>
               <p className="text-ivory/55 text-xs mt-3 flex items-center gap-1.5">
                 <Users2 className="h-3.5 w-3.5 text-gold" />
-                Endorsements remain unlimited but are grouped separately and
-                never imply sponsor control or influence over award outcomes.
+                Supporter Visibility Listing remains unlimited but is grouped
+                separately and never implies sponsor control or influence over
+                award outcomes.
               </p>
             </div>
           </div>

@@ -5,11 +5,13 @@ import { Recycle, ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
 
 const FLOW = [
-  "Recognition",
-  "Sponsorship",
-  "Legacy Fund",
+  "Sponsorship Income",
+  "5% Legacy Allocation",
+  "RMSA Legacy Fund",
+  "Regional Wallet Allocation",
   "School Intervention",
-  "Impact Report",
+  "Monitoring & Reporting",
+  "Sponsor Impact Report",
 ];
 
 const PURPOSES = [
@@ -22,7 +24,10 @@ const PURPOSES = [
 
 export function LegacyFundCallout() {
   return (
-    <section className="bg-charcoal py-14 md:py-20 border-t border-gold/10">
+    <section
+      id="legacy-fund"
+      className="bg-charcoal py-14 md:py-20 border-t border-gold/10 scroll-mt-24"
+    >
       <div className="container mx-auto px-4">
         <div className="rounded-2xl border border-gold/30 bg-gradient-to-br from-gold/10 via-gold/5 to-transparent p-6 md:p-10">
           <div className="flex items-start gap-4 mb-6">
