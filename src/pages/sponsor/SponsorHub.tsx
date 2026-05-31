@@ -23,6 +23,7 @@ import { SponsorPricingTable } from "@/components/sponsor/SponsorPricingTable";
 import { SponsorPartnershipLanes } from "@/components/sponsor/SponsorPartnershipLanes";
 import { SponsorFAQ } from "@/components/sponsor/SponsorFAQ";
 import { SponsorSectionNav } from "@/components/sponsor/SponsorSectionNav";
+import { SponsorLaneDetails } from "@/components/sponsor/SponsorLaneDetails";
 
 export default function SponsorHub() {
   return (
@@ -149,6 +150,9 @@ export default function SponsorHub() {
 
       {/* Partnership lane cards */}
       <SponsorPartnershipLanes />
+
+      {/* Lane-by-lane developer-ready copy blocks (config-driven) */}
+      <SponsorLaneDetails />
 
       {/* 5% RMSA Legacy Fund */}
       <LegacyFundCallout />

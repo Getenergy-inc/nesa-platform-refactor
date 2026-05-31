@@ -6,6 +6,7 @@ const SECTIONS = [
   { id: "overview", label: "Overview" },
   { id: "packages", label: "Packages" },
   { id: "pillars", label: "Pillars" },
+  { id: "lane-details", label: "Lane Details" },
   { id: "legacy-fund", label: "Legacy Fund" },
   { id: "sponsor-slot-matrix", label: "Sponsor Limits" },
   { id: "payment-trust", label: "Payment Trust" },
