@@ -40,3 +40,31 @@ jobs:
           name: snapshot-diffs
           path: tests/e2e/**/*.spec.ts-snapshots/
           retention-days: 7
+
+      # Dedicated bundle for the navbar visual regression spec. Playwright
+      # writes -actual.png / -expected.png / -diff.png into
+      # test-results/<test-id>/ on failure; we collect just the navbar ones
+      # plus the committed baselines so reviewers can diff in one download.
+      - name: Collect navbar-visual diff bundle
+        if: failure()
+        run: |
+          set -e
+          mkdir -p navbar-visual-artifacts/diffs navbar-visual-artifacts/baselines
+          # Failure outputs (actual + expected + diff PNGs)
+          if compgen -G "test-results/*navbar-visual*" > /dev/null; then
+            cp -r test-results/*navbar-visual* navbar-visual-artifacts/diffs/ || true
+          fi
+          # Committed baselines for side-by-side comparison
+          if [ -d tests/e2e/navbar-visual.spec.ts-snapshots ]; then
+            cp -r tests/e2e/navbar-visual.spec.ts-snapshots/. navbar-visual-artifacts/baselines/ || true
+          fi
+          ls -R navbar-visual-artifacts || true
+
+      - name: Upload navbar-visual diff bundle
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: navbar-visual-diffs
+          path: navbar-visual-artifacts/
+          retention-days: 14
+          if-no-files-found: ignore
