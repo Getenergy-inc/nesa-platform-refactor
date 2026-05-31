@@ -29,6 +29,7 @@ const ImpactWrapUpSection = lazy(() => import("@/components/nesa/ImpactWrapUpSec
 
 const InteractiveAfricaMap = lazy(() => import("@/components/nesa/InteractiveAfricaMap").then(m => ({ default: m.InteractiveAfricaMap })));
 const SponsorsSection = lazy(() => import("@/components/nesa/SponsorsSection").then(m => ({ default: m.SponsorsSection })));
+const SponsorTiersPreview = lazy(() => import("@/components/nesa/SponsorTiersPreview").then(m => ({ default: m.SponsorTiersPreview })));
 const FinalCTASection = lazy(() => import("@/components/nesa/FinalCTASection").then(m => ({ default: m.FinalCTASection })));
 const HomepageGalleryTeaser = lazy(() => import("@/components/gallery/HomepageGalleryTeaser").then(m => ({ default: m.HomepageGalleryTeaser })));
 const NomineeDiscoverySwitcher = lazy(() => import("@/components/nominees/NomineeDiscoverySwitcher").then(m => ({ default: m.NomineeDiscoverySwitcher })));
@@ -129,6 +130,11 @@ export function NESALandingPage() {
         {/* Sponsors conversion section — responsive on all devices */}
         <LazySection>
           <SponsorsSection />
+        </LazySection>
+
+        {/* Sponsor tier preview cards — mobile-friendly pricing tiers */}
+        <LazySection>
+          <SponsorTiersPreview />
         </LazySection>
 
 
