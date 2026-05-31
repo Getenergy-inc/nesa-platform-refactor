@@ -35,7 +35,7 @@ const item = {
 };
 
 const baseBtn =
-  "group inline-flex h-11 w-full items-center justify-center gap-2 rounded-full px-4 sm:px-5 text-sm font-medium transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold/60 focus-visible:ring-offset-2 focus-visible:ring-offset-charcoal";
+  "group inline-flex h-[52px] sm:h-12 lg:h-11 w-full items-center justify-center gap-2 rounded-2xl sm:rounded-full px-4 sm:px-5 text-[15px] sm:text-sm font-medium transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold/60 focus-visible:ring-offset-2 focus-visible:ring-offset-charcoal";
 
 export function HeroCTAStack() {
   return (
@@ -45,7 +45,8 @@ export function HeroCTAStack() {
       animate="show"
       className="w-full max-w-xl mx-auto lg:mx-0"
     >
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-2 sm:gap-2.5">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-2.5">
+
         {/* PRIMARY */}
         <motion.div variants={item}>
           <Link

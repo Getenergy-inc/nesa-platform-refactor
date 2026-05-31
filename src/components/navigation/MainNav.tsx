@@ -256,7 +256,7 @@ function MobileNav({ onOpenCVOMessage }: { onOpenCVOMessage: () => void }) {
         <Button
           variant="ghost"
           size="icon"
-          className="lg:hidden text-white hover:text-gold hover:bg-gold/10 min-h-[48px] min-w-[48px]"
+          className="min-[1200px]:hidden text-white hover:text-gold hover:bg-gold/10 min-h-[44px] min-w-[44px]"
           aria-label="Open navigation menu"
           aria-expanded={open}
           aria-controls="mobile-nav-drawer"
@@ -538,12 +538,12 @@ function UserMenu() {
 
   if (!user) {
     return (
-      <div className="hidden xl:flex items-center gap-2">
+      <div className="hidden min-[1200px]:flex items-center gap-2">
         <Link to="/login">
           <Button
             variant="ghost"
             size="sm"
-            className="text-white/90 hover:text-gold hover:bg-gold/10 h-8 xl:h-9 px-3 text-[11px] xl:text-sm"
+            className="text-white/90 hover:text-gold hover:bg-gold/10 h-9 px-3 text-[12px]"
           >
             Sign In
           </Button>
@@ -635,7 +635,7 @@ export const MobileBottomNav = forwardRef<HTMLElement, object>(
       <nav
         ref={ref}
         aria-label="Quick actions"
-        className="fixed bottom-0 left-0 right-0 z-40 lg:hidden bg-charcoal/95 backdrop-blur-md border-t border-gold/20 safe-area-inset-bottom"
+        className="fixed bottom-0 left-0 right-0 z-40 min-[1200px]:hidden bg-charcoal/95 backdrop-blur-md border-t border-gold/20 safe-area-inset-bottom"
       >
         <div className="flex justify-around items-center py-2 px-1">
           {mobileQuickActions.map((item) => {
@@ -758,22 +758,24 @@ export function MainNav() {
               alt="NESA-Africa"
               className="h-8 sm:h-10 w-8 sm:w-10 rounded-full object-contain"
             />
-            <div className="flex flex-col leading-tight">
+            <div className="flex flex-col leading-tight min-w-0">
               <span className="text-[13px] sm:text-sm font-display font-bold text-gold tracking-wide whitespace-nowrap">
                 NESA-Africa <span className="text-white/70 font-medium">2026</span>
               </span>
-              {/* Motto: short on mobile, full on tablet+ */}
-              <span className="text-[9px] xl:text-[10px] text-gold/70 font-medium tracking-wider italic whitespace-nowrap">
-                <span className="sm:hidden">Blue-Garnet Awards for Education</span>
-                <span className="hidden sm:inline">The African Blue-Garnet Awards for Education</span>
+              {/* Motto: hidden below 1200px to protect brand area; shown on desktop only */}
+              <span className="hidden min-[1200px]:inline text-[10px] text-gold/70 font-medium tracking-wider italic whitespace-nowrap">
+                The African Blue-Garnet Awards for Education
               </span>
             </div>
           </Link>
 
-          {/* Desktop Navigation */}
-          <div className="flex-1 min-w-0">
+          {/* Desktop Navigation — only at >=1200px */}
+          <div className="hidden min-[1200px]:block flex-1 min-w-0">
             <DesktopNav onOpenCVOMessage={() => setCVOMessageOpen(true)} />
           </div>
+
+          {/* Spacer to push CTAs right on tablet/mobile */}
+          <div className="flex-1 min-[1200px]:hidden" />
 
           {/* Right Side: 3 primary CTAs (Nominate, Vote, Become a Sponsor) + utility */}
           <div className="flex items-center gap-1.5 xl:gap-2 shrink-0">
@@ -782,7 +784,7 @@ export function MainNav() {
               asChild
               size="sm"
               variant="outline"
-              className="hidden xl:inline-flex border-gold/40 text-gold hover:bg-gold/10 hover:text-gold h-9 px-3 text-[12px] bg-transparent whitespace-nowrap shrink-0"
+              className="hidden min-[1200px]:inline-flex border-gold/40 text-gold hover:bg-gold/10 hover:text-gold h-9 px-3 text-[12px] bg-transparent whitespace-nowrap shrink-0"
             >
               <Link to="/nominate" aria-label="Nominate for NESA-Africa 2026">
                 <Trophy className="h-3.5 w-3.5 mr-1" />
@@ -795,7 +797,7 @@ export function MainNav() {
               asChild
               size="sm"
               variant="outline"
-              className="hidden xl:inline-flex border-gold/40 text-gold hover:bg-gold/10 hover:text-gold h-9 px-3 text-[12px] bg-transparent whitespace-nowrap shrink-0"
+              className="hidden min-[1200px]:inline-flex border-gold/40 text-gold hover:bg-gold/10 hover:text-gold h-9 px-3 text-[12px] bg-transparent whitespace-nowrap shrink-0"
             >
               <Link to="/vote" aria-label="Vote in NESA-Africa 2026">
                 <Vote className="h-3.5 w-3.5 mr-1" />
@@ -807,7 +809,7 @@ export function MainNav() {
             <Button
               asChild
               size="sm"
-              className="hidden xl:inline-flex bg-gold text-charcoal hover:bg-gold/90 font-semibold h-9 px-3 text-[12px] shadow-md shadow-gold/20 shrink-0 whitespace-nowrap"
+              className="hidden min-[1200px]:inline-flex bg-gold text-charcoal hover:bg-gold/90 font-semibold h-9 px-3 text-[12px] shadow-md shadow-gold/20 shrink-0 whitespace-nowrap"
             >
               <Link to="/sponsor" aria-label="Become a Sponsor of NESA-Africa 2026">
                 <Sparkles className="h-3.5 w-3.5 mr-1" />
@@ -819,10 +821,10 @@ export function MainNav() {
             <Button
               asChild
               size="sm"
-              className="xl:hidden inline-flex bg-gold text-charcoal hover:bg-gold/90 font-semibold h-9 px-2.5 text-[11px] shadow-md shadow-gold/20 shrink-0 whitespace-nowrap"
+              className="min-[1200px]:hidden inline-flex bg-gold text-charcoal hover:bg-gold/90 font-semibold h-9 px-2.5 text-[11px] shadow-md shadow-gold/20 shrink-0 whitespace-nowrap"
             >
               <Link to="/nominate" aria-label="Nominate for NESA-Africa 2026">
-                <Trophy className="h-3.5 w-3.5 sm:mr-1" />
+                <Trophy className="h-3.5 w-3.5 sm:mr-1" aria-hidden="true" />
                 <span className="hidden sm:inline">Nominate</span>
               </Link>
             </Button>
@@ -830,10 +832,10 @@ export function MainNav() {
               asChild
               size="sm"
               variant="outline"
-              className="xl:hidden inline-flex border-gold/40 text-gold hover:bg-gold/10 hover:text-gold h-9 px-2.5 text-[11px] bg-transparent shrink-0 whitespace-nowrap"
+              className="min-[1200px]:hidden inline-flex border-gold/40 text-gold hover:bg-gold/10 hover:text-gold h-9 px-2.5 text-[11px] bg-transparent shrink-0 whitespace-nowrap"
             >
               <Link to="/vote" aria-label="Vote in NESA-Africa 2026">
-                <Vote className="h-3.5 w-3.5 sm:mr-1" />
+                <Vote className="h-3.5 w-3.5 sm:mr-1" aria-hidden="true" />
                 <span className="hidden sm:inline">Vote</span>
               </Link>
             </Button>
@@ -841,12 +843,12 @@ export function MainNav() {
             {/* Utility: Search */}
             <NavSearch />
 
-            {/* Utility: User Menu (Desktop) */}
-            <div className="hidden xl:block">
+            {/* Utility: User Menu (Desktop only at >=1200px) */}
+            <div className="hidden min-[1200px]:block">
               <UserMenu />
             </div>
 
-            {/* Mobile Menu */}
+            {/* Mobile Menu (visible below 1200px) */}
             <MobileNav onOpenCVOMessage={() => setCVOMessageOpen(true)} />
           </div>
         </div>
