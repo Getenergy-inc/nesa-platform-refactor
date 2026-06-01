@@ -433,7 +433,7 @@ function MobileNav({ onOpenCVOMessage }: { onOpenCVOMessage: () => void }) {
                         id={`mnav-sub-${item.href}`}
                         ref={(el) => { panelRefs.current[item.href] = el; }}
                         role="region"
-                        aria-label={`${item.label} submenu`}
+                        aria-labelledby={`mnav-trigger-${item.href}`}
                         hidden={!expandedItems.includes(item.href)}
                         onKeyDown={handlePanelKeyDown(item.href)}
                         className={cn(
