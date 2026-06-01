@@ -26,11 +26,11 @@ import { useSeason } from "@/contexts/SeasonContext";
 
 // Lazy below-fold
 const EcosystemCarousel = lazy(() => import("@/components/landing/EcosystemCarousel").then(m => ({ default: m.EcosystemCarousel })));
-const ImpactWrapUpSection = lazy(() => import("@/components/nesa/ImpactWrapUpSection").then(m => ({ default: m.ImpactWrapUpSection })));
+const ImpactPreviewSection = lazy(() => import("@/components/nesa/ImpactPreviewSection").then(m => ({ default: m.ImpactPreviewSection })));
+const SponsorPreviewSection = lazy(() => import("@/components/nesa/SponsorPreviewSection").then(m => ({ default: m.SponsorPreviewSection })));
 
 const InteractiveAfricaMap = lazy(() => import("@/components/nesa/InteractiveAfricaMap").then(m => ({ default: m.InteractiveAfricaMap })));
 const SponsorsSection = lazy(() => import("@/components/nesa/SponsorsSection").then(m => ({ default: m.SponsorsSection })));
-const SponsorTiersPreview = lazy(() => import("@/components/nesa/SponsorTiersPreview").then(m => ({ default: m.SponsorTiersPreview })));
 const FinalCTASection = lazy(() => import("@/components/nesa/FinalCTASection").then(m => ({ default: m.FinalCTASection })));
 const HomepageGalleryTeaser = lazy(() => import("@/components/gallery/HomepageGalleryTeaser").then(m => ({ default: m.HomepageGalleryTeaser })));
 const NomineeDiscoverySwitcher = lazy(() => import("@/components/nominees/NomineeDiscoverySwitcher").then(m => ({ default: m.NomineeDiscoverySwitcher })));
@@ -127,9 +127,9 @@ export function NESALandingPage() {
           </div>
         </div>
 
-        {/* 7. IMPACT WRAP-UP — EduAid storytelling */}
+        {/* 7. IMPACT PREVIEW — short gateway card (full content lives on /impact, /impact/regional-school-intervention, /eduaid-africa, /eduaid-africa/rebuild-my-school) */}
         <LazySection>
-          <ImpactWrapUpSection />
+          <ImpactPreviewSection />
         </LazySection>
 
         {/* About NESA-Africa 2026 — responsive on all devices */}
@@ -142,14 +142,14 @@ export function NESALandingPage() {
           <PoweredByVolunteersSection />
         </LazySection>
 
-        {/* Sponsors conversion section — responsive on all devices */}
+        {/* Sponsors logos strip — credibility only, no pricing */}
         <LazySection>
           <SponsorsSection />
         </LazySection>
 
-        {/* Sponsor tier preview cards — mobile-friendly pricing tiers */}
+        {/* SPONSOR PREVIEW — short gateway card (full pricing lives on /sponsorship-packages, /sponsor, /sponsor/:slug) */}
         <LazySection>
-          <SponsorTiersPreview />
+          <SponsorPreviewSection />
         </LazySection>
 
         {/* Governance firewall — integrity messaging */}
