@@ -277,7 +277,12 @@ function MobileNav({ onOpenCVOMessage }: { onOpenCVOMessage: () => void }) {
               alt="NESA"
               className="h-7 w-7 rounded-full object-contain"
             />
-            <span className="text-gold font-display text-base">NESA-Africa</span>
+            <span className="flex flex-col text-left leading-tight">
+              <span className="text-gold font-display text-base">NESA-Africa 2026</span>
+              <span className="text-[11px] font-medium italic tracking-wide text-white/70">
+                The African Blue-Garnet Awards for Education
+              </span>
+            </span>
           </SheetTitle>
         </SheetHeader>
 
@@ -339,7 +344,7 @@ function MobileNav({ onOpenCVOMessage }: { onOpenCVOMessage: () => void }) {
                         <span className="flex items-center gap-3">
                           {item.icon && <item.icon className="h-5 w-5" aria-hidden="true" />}
                           <span className="font-medium text-base">
-                            {item.label === "Impact Programs" ? "Programs" : item.label}
+                            {item.label}
                           </span>
                         </span>
                         <ChevronDown
@@ -742,7 +747,7 @@ export function MainNav() {
         <GovernanceBar />
 
         {/* LEVEL 2 — Primary Navigation */}
-        <div className="container flex h-14 sm:h-16 items-center gap-1 sm:gap-2 px-3 sm:px-4 max-w-screen-2xl">
+        <div className="container flex min-h-16 flex-wrap items-center gap-x-1 gap-y-2 px-3 py-2 sm:min-h-[72px] sm:gap-x-2 sm:px-4 min-[1200px]:h-16 min-[1200px]:flex-nowrap min-[1200px]:py-0 max-w-screen-2xl">
           {/* Brand */}
           <Link
             to="/"
@@ -756,10 +761,9 @@ export function MainNav() {
             />
             <div className="flex flex-col leading-tight min-w-0">
               <span className="text-[13px] sm:text-sm font-display font-bold text-gold tracking-wide whitespace-nowrap">
-                NESA-Africa <span className="hidden sm:inline text-white/70 font-medium">2026</span>
+                NESA-Africa <span className="text-white/70 font-medium">2026</span>
               </span>
-              {/* Motto: hidden below 1200px to protect brand area; shown on desktop only */}
-              <span className="hidden min-[1200px]:inline text-[10px] text-gold/70 font-medium tracking-wider italic whitespace-nowrap">
+              <span className="block max-w-[178px] text-[9px] text-gold/70 font-medium tracking-wide italic leading-snug sm:max-w-none sm:text-[10px] min-[1200px]:whitespace-nowrap">
                 The African Blue-Garnet Awards for Education
               </span>
             </div>
@@ -774,7 +778,8 @@ export function MainNav() {
           <div className="flex-1 min-[1200px]:hidden" />
 
           {/* Right Side: 3 primary CTAs (Nominate, Vote, Become a Sponsor) + utility */}
-          <div className="flex items-center gap-1 sm:gap-1.5 xl:gap-2 shrink-0 overflow-x-auto scrollbar-hide">
+          <div className="order-3 grid w-full grid-cols-[1fr_auto] items-center gap-2 min-[430px]:order-none min-[430px]:flex min-[430px]:w-auto min-[430px]:justify-start sm:gap-1.5 xl:gap-2 shrink-0">
+            <div className="grid min-w-0 grid-cols-3 gap-1 min-[430px]:contents">
             {/* Desktop CTA 1 — Nominate (secondary outline) */}
             <Button
               asChild
@@ -818,18 +823,18 @@ export function MainNav() {
               asChild
               size="sm"
               variant="outline"
-              className="min-[1200px]:hidden inline-flex border-gold/40 text-gold hover:bg-gold/10 hover:text-gold h-9 px-1.5 sm:px-2.5 text-[10px] sm:text-[11px] bg-transparent shrink-0 whitespace-nowrap"
+              className="min-[1200px]:hidden inline-flex border-gold/40 text-gold hover:bg-gold/10 hover:text-gold h-9 px-1.5 min-[430px]:px-2.5 text-[10px] min-[430px]:text-[11px] bg-transparent min-w-0 shrink-0 whitespace-nowrap"
             >
               <Link to="/nominate" aria-label="Nominate for NESA-Africa 2026">
-                <span className="inline sm:hidden">Nom</span>
-                <span className="hidden sm:inline">Nominate</span>
+                <span className="inline min-[430px]:hidden">Nominate</span>
+                <span className="hidden min-[430px]:inline">Nominate 2026</span>
               </Link>
             </Button>
             <Button
               asChild
               size="sm"
               variant="outline"
-              className="min-[1200px]:hidden inline-flex border-gold/40 text-gold hover:bg-gold/10 hover:text-gold h-9 px-1.5 sm:px-2.5 text-[10px] sm:text-[11px] bg-transparent shrink-0 whitespace-nowrap"
+              className="min-[1200px]:hidden inline-flex border-gold/40 text-gold hover:bg-gold/10 hover:text-gold h-9 px-1.5 min-[430px]:px-2.5 text-[10px] min-[430px]:text-[11px] bg-transparent min-w-0 shrink-0 whitespace-nowrap"
             >
               <Link to="/vote" aria-label="Vote in NESA-Africa 2026">Vote</Link>
             </Button>
@@ -838,16 +843,17 @@ export function MainNav() {
             <Button
               asChild
               size="sm"
-              className="min-[1200px]:hidden inline-flex bg-gold text-charcoal hover:bg-gold/90 font-semibold h-9 px-1.5 sm:px-2.5 text-[10px] sm:text-[11px] shadow-md shadow-gold/20 shrink-0 whitespace-nowrap"
+              className="min-[1200px]:hidden inline-flex bg-gold text-charcoal hover:bg-gold/90 font-semibold h-9 px-1.5 min-[430px]:px-2.5 text-[10px] min-[430px]:text-[11px] shadow-md shadow-gold/20 min-w-0 shrink-0 whitespace-nowrap"
             >
               <Link to="/sponsor" aria-label="Become a Sponsor of NESA-Africa 2026">
-                <span className="inline sm:hidden">Sponsor</span>
-                <span className="hidden sm:inline">Become a Sponsor</span>
+                <span className="inline min-[430px]:hidden">Sponsor</span>
+                <span className="hidden min-[430px]:inline">Become a Sponsor</span>
               </Link>
             </Button>
+            </div>
 
             {/* Mobile / tablet Language Switcher — icon only */}
-            <div className="min-[1200px]:hidden shrink-0">
+            <div className="hidden min-[430px]:block min-[1200px]:hidden shrink-0">
               <LanguageSwitcher variant="compact" className="h-9 w-9" />
             </div>
 

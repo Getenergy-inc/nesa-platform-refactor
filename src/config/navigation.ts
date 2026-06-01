@@ -220,11 +220,11 @@ export const MAIN_NAV_CTA: NavItem = {
 
 // Mobile-first menu order (information architecture only — CTAs render separately)
 export const MAIN_NAV_MOBILE_ORDER: readonly string[] = [
-  "Engage",
+  "About",
   "Awards",
   "Impact Programs",
+  "Engage",
   "Media",
-  "About",
   "Support",
 ];
 
