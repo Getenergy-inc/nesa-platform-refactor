@@ -277,7 +277,12 @@ function MobileNav({ onOpenCVOMessage }: { onOpenCVOMessage: () => void }) {
               alt="NESA"
               className="h-7 w-7 rounded-full object-contain"
             />
-            <span className="text-gold font-display text-base">NESA-Africa</span>
+            <span className="flex flex-col text-left leading-tight">
+              <span className="text-gold font-display text-base">NESA-Africa 2026</span>
+              <span className="text-[11px] font-medium italic tracking-wide text-white/70">
+                The African Blue-Garnet Awards for Education
+              </span>
+            </span>
           </SheetTitle>
         </SheetHeader>
 
@@ -339,7 +344,7 @@ function MobileNav({ onOpenCVOMessage }: { onOpenCVOMessage: () => void }) {
                         <span className="flex items-center gap-3">
                           {item.icon && <item.icon className="h-5 w-5" aria-hidden="true" />}
                           <span className="font-medium text-base">
-                            {item.label === "Impact Programs" ? "Programs" : item.label}
+                            {item.label}
                           </span>
                         </span>
                         <ChevronDown
