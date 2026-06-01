@@ -397,36 +397,38 @@ function MobileNav({ onOpenCVOMessage }: { onOpenCVOMessage: () => void }) {
                 >
                   {item.children ? (
                     <div>
-                      <button
-                        ref={(el) => { triggerRefs.current[item.href] = el; }}
-                        onClick={() => toggleExpanded(item.href)}
-                        onKeyDown={handleTriggerKeyDown(item.href)}
-                        aria-expanded={expandedItems.includes(item.href)}
-                        aria-controls={`mnav-sub-${item.href}`}
-                        className={cn(
-                          "flex items-center justify-between w-full px-4 py-4 text-left transition-colors touch-manipulation min-h-[48px]",
-                          "hover:bg-gold/5 active:bg-gold/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold/60 focus-visible:ring-inset",
-                          expandedItems.includes(item.href)
-                            ? "text-gold bg-gold/5"
-                            : "text-white/90",
-                        )}
-
-                      >
-                        <span className="flex items-center gap-3">
-                          {item.icon && <item.icon className="h-5 w-5" aria-hidden="true" />}
-                          <span className="font-medium text-base">
-                            {item.label}
-                          </span>
-                        </span>
-                        <ChevronDown
-                          aria-hidden="true"
+                      <h3 className="m-0">
+                        <button
+                          type="button"
+                          ref={(el) => { triggerRefs.current[item.href] = el; }}
+                          onClick={() => toggleExpanded(item.href)}
+                          onKeyDown={handleTriggerKeyDown(item.href)}
+                          aria-expanded={expandedItems.includes(item.href)}
+                          aria-controls={`mnav-sub-${item.href}`}
+                          id={`mnav-trigger-${item.href}`}
                           className={cn(
-                            "h-5 w-5 transition-transform duration-200",
-                            expandedItems.includes(item.href) && "rotate-180",
+                            "flex items-center justify-between w-full px-4 py-4 text-left transition-colors touch-manipulation min-h-[48px]",
+                            "hover:bg-gold/5 active:bg-gold/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold/60 focus-visible:ring-inset",
+                            expandedItems.includes(item.href)
+                              ? "text-gold bg-gold/5"
+                              : "text-white/90",
                           )}
-                        />
-
-                      </button>
+                        >
+                          <span className="flex items-center gap-3">
+                            {item.icon && <item.icon className="h-5 w-5" aria-hidden="true" />}
+                            <span className="font-medium text-base">
+                              {item.label}
+                            </span>
+                          </span>
+                          <ChevronDown
+                            aria-hidden="true"
+                            className={cn(
+                              "h-5 w-5 transition-transform duration-200",
+                              expandedItems.includes(item.href) && "rotate-180",
+                            )}
+                          />
+                        </button>
+                      </h3>
                       <div
                         id={`mnav-sub-${item.href}`}
                         ref={(el) => { panelRefs.current[item.href] = el; }}
