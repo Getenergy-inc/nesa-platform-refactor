@@ -412,6 +412,9 @@ const App = () => (
                   <Route path="/policies/coi" element={<Navigate to="/policies" replace />} />
                   <Route path="/policies/privacy" element={<Navigate to="/policies" replace />} />
                   <Route path="/policies/terms" element={<Navigate to="/policies" replace />} />
+                  <Route path="/policies/voting-integrity" element={<Navigate to="/policies" replace />} />
+                  <Route path="/get-involved" element={<Navigate to="/volunteer" replace />} />
+                  <Route path="/press" element={<Navigate to="/media" replace />} />
 
 
 
