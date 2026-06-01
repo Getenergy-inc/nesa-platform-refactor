@@ -778,7 +778,8 @@ export function MainNav() {
           <div className="flex-1 min-[1200px]:hidden" />
 
           {/* Right Side: 3 primary CTAs (Nominate, Vote, Become a Sponsor) + utility */}
-          <div className="order-3 flex w-full items-center justify-between gap-1 overflow-x-auto scrollbar-hide min-[430px]:order-none min-[430px]:w-auto min-[430px]:justify-start sm:gap-1.5 xl:gap-2 shrink-0">
+          <div className="order-3 grid w-full grid-cols-[1fr_auto] items-center gap-2 min-[430px]:order-none min-[430px]:flex min-[430px]:w-auto min-[430px]:justify-start sm:gap-1.5 xl:gap-2 shrink-0">
+            <div className="grid min-w-0 grid-cols-3 gap-1 min-[430px]:contents">
             {/* Desktop CTA 1 — Nominate (secondary outline) */}
             <Button
               asChild
@@ -822,17 +823,18 @@ export function MainNav() {
               asChild
               size="sm"
               variant="outline"
-              className="min-[1200px]:hidden inline-flex border-gold/40 text-gold hover:bg-gold/10 hover:text-gold h-9 px-2.5 text-[11px] bg-transparent shrink-0 whitespace-nowrap"
+              className="min-[1200px]:hidden inline-flex border-gold/40 text-gold hover:bg-gold/10 hover:text-gold h-9 px-1.5 min-[430px]:px-2.5 text-[10px] min-[430px]:text-[11px] bg-transparent min-w-0 shrink-0 whitespace-nowrap"
             >
               <Link to="/nominate" aria-label="Nominate for NESA-Africa 2026">
-                Nominate 2026
+                <span className="inline min-[430px]:hidden">Nominate</span>
+                <span className="hidden min-[430px]:inline">Nominate 2026</span>
               </Link>
             </Button>
             <Button
               asChild
               size="sm"
               variant="outline"
-              className="min-[1200px]:hidden inline-flex border-gold/40 text-gold hover:bg-gold/10 hover:text-gold h-9 px-2.5 text-[11px] bg-transparent shrink-0 whitespace-nowrap"
+              className="min-[1200px]:hidden inline-flex border-gold/40 text-gold hover:bg-gold/10 hover:text-gold h-9 px-1.5 min-[430px]:px-2.5 text-[10px] min-[430px]:text-[11px] bg-transparent min-w-0 shrink-0 whitespace-nowrap"
             >
               <Link to="/vote" aria-label="Vote in NESA-Africa 2026">Vote</Link>
             </Button>
@@ -841,15 +843,17 @@ export function MainNav() {
             <Button
               asChild
               size="sm"
-              className="min-[1200px]:hidden inline-flex bg-gold text-charcoal hover:bg-gold/90 font-semibold h-9 px-2.5 text-[11px] shadow-md shadow-gold/20 shrink-0 whitespace-nowrap"
+              className="min-[1200px]:hidden inline-flex bg-gold text-charcoal hover:bg-gold/90 font-semibold h-9 px-1.5 min-[430px]:px-2.5 text-[10px] min-[430px]:text-[11px] shadow-md shadow-gold/20 min-w-0 shrink-0 whitespace-nowrap"
             >
               <Link to="/sponsor" aria-label="Become a Sponsor of NESA-Africa 2026">
-                Become a Sponsor
+                <span className="inline min-[430px]:hidden">Sponsor</span>
+                <span className="hidden min-[430px]:inline">Become a Sponsor</span>
               </Link>
             </Button>
+            </div>
 
             {/* Mobile / tablet Language Switcher — icon only */}
-            <div className="min-[1200px]:hidden shrink-0">
+            <div className="hidden min-[430px]:block min-[1200px]:hidden shrink-0">
               <LanguageSwitcher variant="compact" className="h-9 w-9" />
             </div>
 
