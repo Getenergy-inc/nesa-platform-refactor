@@ -499,6 +499,9 @@ const App = () => (
                       </WithLayout>
                     }
                   />
+                  <Route path="/impact/regional-school-intervention" element={<Navigate to="/impact" replace />} />
+                  <Route path="/impact/rebuild-my-school-africa" element={<Navigate to="/eduaid-africa/rebuild-my-school" replace />} />
+
                   <Route
                     path="/videos"
                     element={
@@ -1564,6 +1567,8 @@ const App = () => (
                       </WithLayout>
                     }
                   />
+                  <Route path="/eduaid-africa" element={<Navigate to="/eduaid" replace />} />
+
                   <Route
                     path="/rebuild"
                     element={
