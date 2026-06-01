@@ -204,19 +204,59 @@ function MobileNav({ onOpenCVOMessage }: { onOpenCVOMessage: () => void }) {
     setPendingFocus(null);
   }, [pendingFocus, expandedItems]);
 
+  // Ordered list of trigger hrefs (only items with children — accordion targets).
+  // Computed inside the handler via mobileOrdered so it stays in sync.
+  const getTriggerHrefs = () =>
+    mobileOrdered.filter((i) => i.children?.length).map((i) => i.href);
+
+  const focusTriggerAt = (hrefs: string[], index: number) => {
+    const wrapped = (index + hrefs.length) % hrefs.length;
+    triggerRefs.current[hrefs[wrapped]]?.focus();
+  };
+
   const handleTriggerKeyDown = (
     href: string,
   ) => (e: ReactKeyboardEvent<HTMLButtonElement>) => {
-    // ArrowDown opens (if collapsed) and focuses first item; if already open, jump in
-    if (e.key === "ArrowDown" && !e.altKey) {
-      e.preventDefault();
-      if (!expandedItems.includes(href)) {
-        setPendingFocus(href);
-        setExpandedItems([href]); // single-open accordion
-      } else {
-        const panel = panelRefs.current[href];
-        panel?.querySelector<HTMLElement>('a, button')?.focus();
+    const hrefs = getTriggerHrefs();
+    const idx = hrefs.indexOf(href);
+
+    switch (e.key) {
+      case "ArrowDown": {
+        if (e.altKey) {
+          // Alt+Down opens panel (APG convention)
+          e.preventDefault();
+          if (!expandedItems.includes(href)) {
+            setPendingFocus(href);
+            setExpandedItems([href]);
+          }
+          return;
+        }
+        e.preventDefault();
+        focusTriggerAt(hrefs, idx + 1);
+        return;
       }
+      case "ArrowUp": {
+        e.preventDefault();
+        focusTriggerAt(hrefs, idx - 1);
+        return;
+      }
+      case "Home": {
+        e.preventDefault();
+        focusTriggerAt(hrefs, 0);
+        return;
+      }
+      case "End": {
+        e.preventDefault();
+        focusTriggerAt(hrefs, hrefs.length - 1);
+        return;
+      }
+      case "Enter":
+      case " ": {
+        // Native button activation handles toggling; no-op here.
+        return;
+      }
+      default:
+        return;
     }
   };
 
@@ -227,6 +267,37 @@ function MobileNav({ onOpenCVOMessage }: { onOpenCVOMessage: () => void }) {
       e.preventDefault();
       setExpandedItems((prev) => prev.filter((h) => h !== href));
       triggerRefs.current[href]?.focus();
+      return;
+    }
+
+    // Arrow navigation between links inside the open panel
+    if (e.key === "ArrowDown" || e.key === "ArrowUp") {
+      const panel = panelRefs.current[href];
+      if (!panel) return;
+      const items = Array.from(
+        panel.querySelectorAll<HTMLElement>(
+          'a, button, [tabindex]:not([tabindex="-1"])',
+        ),
+      );
+      if (items.length === 0) return;
+      const active = document.activeElement as HTMLElement | null;
+      const currentIdx = active ? items.indexOf(active) : -1;
+      e.preventDefault();
+      const delta = e.key === "ArrowDown" ? 1 : -1;
+      const next = (currentIdx + delta + items.length) % items.length;
+      items[next]?.focus();
+      return;
+    }
+
+    if (e.key === "Home" || e.key === "End") {
+      const panel = panelRefs.current[href];
+      if (!panel) return;
+      const items = panel.querySelectorAll<HTMLElement>(
+        'a, button, [tabindex]:not([tabindex="-1"])',
+      );
+      if (items.length === 0) return;
+      e.preventDefault();
+      (e.key === "Home" ? items[0] : items[items.length - 1])?.focus();
     }
   };
 
