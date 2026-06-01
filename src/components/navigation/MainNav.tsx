@@ -204,19 +204,59 @@ function MobileNav({ onOpenCVOMessage }: { onOpenCVOMessage: () => void }) {
     setPendingFocus(null);
   }, [pendingFocus, expandedItems]);
 
+  // Ordered list of trigger hrefs (only items with children — accordion targets).
+  // Computed inside the handler via mobileOrdered so it stays in sync.
+  const getTriggerHrefs = () =>
+    mobileOrdered.filter((i) => i.children?.length).map((i) => i.href);
+
+  const focusTriggerAt = (hrefs: string[], index: number) => {
+    const wrapped = (index + hrefs.length) % hrefs.length;
+    triggerRefs.current[hrefs[wrapped]]?.focus();
+  };
+
   const handleTriggerKeyDown = (
     href: string,
   ) => (e: ReactKeyboardEvent<HTMLButtonElement>) => {
-    // ArrowDown opens (if collapsed) and focuses first item; if already open, jump in
-    if (e.key === "ArrowDown" && !e.altKey) {
-      e.preventDefault();
-      if (!expandedItems.includes(href)) {
-        setPendingFocus(href);
-        setExpandedItems([href]); // single-open accordion
-      } else {
-        const panel = panelRefs.current[href];
-        panel?.querySelector<HTMLElement>('a, button')?.focus();
+    const hrefs = getTriggerHrefs();
+    const idx = hrefs.indexOf(href);
+
+    switch (e.key) {
+      case "ArrowDown": {
+        if (e.altKey) {
+          // Alt+Down opens panel (APG convention)
+          e.preventDefault();
+          if (!expandedItems.includes(href)) {
+            setPendingFocus(href);
+            setExpandedItems([href]);
+          }
+          return;
+        }
+        e.preventDefault();
+        focusTriggerAt(hrefs, idx + 1);
+        return;
       }
+      case "ArrowUp": {
+        e.preventDefault();
+        focusTriggerAt(hrefs, idx - 1);
+        return;
+      }
+      case "Home": {
+        e.preventDefault();
+        focusTriggerAt(hrefs, 0);
+        return;
+      }
+      case "End": {
+        e.preventDefault();
+        focusTriggerAt(hrefs, hrefs.length - 1);
+        return;
+      }
+      case "Enter":
+      case " ": {
+        // Native button activation handles toggling; no-op here.
+        return;
+      }
+      default:
+        return;
     }
   };
 
@@ -227,6 +267,37 @@ function MobileNav({ onOpenCVOMessage }: { onOpenCVOMessage: () => void }) {
       e.preventDefault();
       setExpandedItems((prev) => prev.filter((h) => h !== href));
       triggerRefs.current[href]?.focus();
+      return;
+    }
+
+    // Arrow navigation between links inside the open panel
+    if (e.key === "ArrowDown" || e.key === "ArrowUp") {
+      const panel = panelRefs.current[href];
+      if (!panel) return;
+      const items = Array.from(
+        panel.querySelectorAll<HTMLElement>(
+          'a, button, [tabindex]:not([tabindex="-1"])',
+        ),
+      );
+      if (items.length === 0) return;
+      const active = document.activeElement as HTMLElement | null;
+      const currentIdx = active ? items.indexOf(active) : -1;
+      e.preventDefault();
+      const delta = e.key === "ArrowDown" ? 1 : -1;
+      const next = (currentIdx + delta + items.length) % items.length;
+      items[next]?.focus();
+      return;
+    }
+
+    if (e.key === "Home" || e.key === "End") {
+      const panel = panelRefs.current[href];
+      if (!panel) return;
+      const items = panel.querySelectorAll<HTMLElement>(
+        'a, button, [tabindex]:not([tabindex="-1"])',
+      );
+      if (items.length === 0) return;
+      e.preventDefault();
+      (e.key === "Home" ? items[0] : items[items.length - 1])?.focus();
     }
   };
 
@@ -326,41 +397,43 @@ function MobileNav({ onOpenCVOMessage }: { onOpenCVOMessage: () => void }) {
                 >
                   {item.children ? (
                     <div>
-                      <button
-                        ref={(el) => { triggerRefs.current[item.href] = el; }}
-                        onClick={() => toggleExpanded(item.href)}
-                        onKeyDown={handleTriggerKeyDown(item.href)}
-                        aria-expanded={expandedItems.includes(item.href)}
-                        aria-controls={`mnav-sub-${item.href}`}
-                        className={cn(
-                          "flex items-center justify-between w-full px-4 py-4 text-left transition-colors touch-manipulation min-h-[48px]",
-                          "hover:bg-gold/5 active:bg-gold/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold/60 focus-visible:ring-inset",
-                          expandedItems.includes(item.href)
-                            ? "text-gold bg-gold/5"
-                            : "text-white/90",
-                        )}
-
-                      >
-                        <span className="flex items-center gap-3">
-                          {item.icon && <item.icon className="h-5 w-5" aria-hidden="true" />}
-                          <span className="font-medium text-base">
-                            {item.label}
-                          </span>
-                        </span>
-                        <ChevronDown
-                          aria-hidden="true"
+                      <h3 className="m-0">
+                        <button
+                          type="button"
+                          ref={(el) => { triggerRefs.current[item.href] = el; }}
+                          onClick={() => toggleExpanded(item.href)}
+                          onKeyDown={handleTriggerKeyDown(item.href)}
+                          aria-expanded={expandedItems.includes(item.href)}
+                          aria-controls={`mnav-sub-${item.href}`}
+                          id={`mnav-trigger-${item.href}`}
                           className={cn(
-                            "h-5 w-5 transition-transform duration-200",
-                            expandedItems.includes(item.href) && "rotate-180",
+                            "flex items-center justify-between w-full px-4 py-4 text-left transition-colors touch-manipulation min-h-[48px]",
+                            "hover:bg-gold/5 active:bg-gold/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold/60 focus-visible:ring-inset",
+                            expandedItems.includes(item.href)
+                              ? "text-gold bg-gold/5"
+                              : "text-white/90",
                           )}
-                        />
-
-                      </button>
+                        >
+                          <span className="flex items-center gap-3">
+                            {item.icon && <item.icon className="h-5 w-5" aria-hidden="true" />}
+                            <span className="font-medium text-base">
+                              {item.label}
+                            </span>
+                          </span>
+                          <ChevronDown
+                            aria-hidden="true"
+                            className={cn(
+                              "h-5 w-5 transition-transform duration-200",
+                              expandedItems.includes(item.href) && "rotate-180",
+                            )}
+                          />
+                        </button>
+                      </h3>
                       <div
                         id={`mnav-sub-${item.href}`}
                         ref={(el) => { panelRefs.current[item.href] = el; }}
                         role="region"
-                        aria-label={`${item.label} submenu`}
+                        aria-labelledby={`mnav-trigger-${item.href}`}
                         hidden={!expandedItems.includes(item.href)}
                         onKeyDown={handlePanelKeyDown(item.href)}
                         className={cn(
