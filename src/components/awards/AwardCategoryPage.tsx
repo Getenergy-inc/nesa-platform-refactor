@@ -11,6 +11,10 @@ import {
   FileText,
   Sparkles,
   ChevronRight,
+  Target,
+  Layers,
+  Handshake,
+  Search,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -23,7 +27,41 @@ import {
   SPONSOR_DISCLAIMER,
   getCategoryBySlug,
   type AwardCategoryConfig,
+  type CategoryGroup,
 } from "@/config/awardCategories";
+
+/** EDX matrix indicators inferred from the category's group. */
+const EDX_BY_GROUP: Record<CategoryGroup, string[]> = {
+  blue_garnet: ["Education Impact", "Community Impact", "Innovation", "Reach"],
+  platinum: ["Education Impact", "Leadership", "Sustainability", "Reach"],
+  icon: ["Education Impact", "Leadership", "Sustainability", "Inclusion", "Reach"],
+  influencers: ["Education Impact", "Community Impact", "Reach"],
+  special_recognition: ["Education Impact", "Reach"],
+};
+
+/** Standard 5-step nomination flow surfaced on every category page. */
+const NOMINATION_FLOW: Array<{ title: string; description: string }> = [
+  {
+    title: "Submit nomination",
+    description: "Complete the guided form with the nominee's profile, impact summary and evidence.",
+  },
+  {
+    title: "NRC eligibility check",
+    description: "The Nominations Review Committee verifies eligibility, evidence and duplicates.",
+  },
+  {
+    title: "Jury shortlist",
+    description: "Independent judges review qualified nominees against the EDX Matrix rubric.",
+  },
+  {
+    title: "Public vote (where applicable)",
+    description: "Blue Garnet and influencer tracks open for verified public voting.",
+  },
+  {
+    title: "Finalists & recognition",
+    description: "Final jury score determines winners; recognition is awarded at the gala.",
+  },
+];
 
 const SITE = "https://nesaafrica.lovable.app";
 
@@ -143,6 +181,125 @@ export function AwardCategoryPage({ config, legacyHero }: Props) {
               </CardContent>
             </Card>
           </div>
+
+          {/* Why this category matters */}
+          <div className="mt-6">
+            <Card className="border-gold/20 bg-charcoal-light/60">
+              <CardContent className="p-4 md:p-6">
+                <div className="flex items-center gap-2 text-gold mb-3">
+                  <Target className="h-5 w-5" />
+                  <h3 className="font-semibold">Why this category matters</h3>
+                </div>
+                <p className="text-sm text-foreground/80 leading-relaxed">
+                  {config.eligibilitySummary} This category exists to surface and recognise the work
+                  that measurably advances African education within{" "}
+                  <span className="text-gold/90">{group.label.replace(/ Categories?$/i, "")}</span>,
+                  ensuring impact is visible, verifiable and celebrated.
+                </p>
+              </CardContent>
+            </Card>
+          </div>
+
+          {/* EDX Matrix indicators */}
+          <div className="mt-6">
+            <Card className="border-gold/20 bg-charcoal-light/60">
+              <CardContent className="p-4 md:p-6">
+                <div className="flex items-center gap-2 text-gold mb-3">
+                  <Layers className="h-5 w-5" />
+                  <h3 className="font-semibold">EDX Matrix indicators</h3>
+                </div>
+                <p className="text-sm text-foreground/70 leading-relaxed mb-3">
+                  Nominees in this category are evaluated against the Education Development &amp;
+                  Impact (EDX) Matrix on the following dimensions:
+                </p>
+                <div className="flex flex-wrap gap-2">
+                  {(EDX_BY_GROUP[config.group] ?? []).map((p) => (
+                    <span
+                      key={p}
+                      className="text-xs px-3 py-1 rounded-full bg-gold/10 text-gold border border-gold/25"
+                    >
+                      {p}
+                    </span>
+                  ))}
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+
+          {/* Nomination flow */}
+          <div className="mt-6">
+            <Card className="border-gold/20 bg-charcoal-light/60">
+              <CardContent className="p-4 md:p-6">
+                <div className="flex items-center gap-2 text-gold mb-4">
+                  <Sparkles className="h-5 w-5" />
+                  <h3 className="font-semibold">Nomination flow</h3>
+                </div>
+                <ol className="grid gap-3 sm:grid-cols-2 lg:grid-cols-5">
+                  {NOMINATION_FLOW.map((step, i) => (
+                    <li key={step.title} className="rounded-lg border border-gold/15 bg-charcoal/40 p-3">
+                      <div className="flex items-center gap-2 mb-1.5">
+                        <span className="h-6 w-6 rounded-full bg-gold/15 text-gold text-xs font-bold flex items-center justify-center">
+                          {i + 1}
+                        </span>
+                        <span className="text-sm font-semibold text-foreground">{step.title}</span>
+                      </div>
+                      <p className="text-xs text-foreground/65 leading-relaxed">{step.description}</p>
+                    </li>
+                  ))}
+                </ol>
+                <div className="mt-4 flex flex-wrap gap-2">
+                  <Button asChild size="sm" className="bg-gold text-charcoal hover:bg-gold/90">
+                    <Link to={nominateHref}>Start nomination</Link>
+                  </Button>
+                  <Button asChild size="sm" variant="outline" className="border-gold/40 text-gold hover:bg-gold/10">
+                    <Link to="/how-voting-works">How evaluation works</Link>
+                  </Button>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+
+          {/* Explore nominees + Sponsor this category */}
+          <div className="mt-6 grid gap-4 md:grid-cols-2">
+            <Card className="border-gold/20 bg-charcoal-light/60">
+              <CardContent className="p-4 md:p-6 flex flex-col h-full">
+                <div className="flex items-center gap-2 text-gold mb-2">
+                  <Search className="h-5 w-5" />
+                  <h3 className="font-semibold">Explore existing nominees</h3>
+                </div>
+                <p className="text-sm text-foreground/75 leading-relaxed mb-4 flex-1">
+                  Browse nominees already recognised in this category. Filter by country, region and institution.
+                </p>
+                <Button asChild size="sm" className="bg-gold text-charcoal hover:bg-gold/90 w-fit">
+                  <Link to={`/nominees?category=${encodeURIComponent(config.slug)}`}>Explore Nominees</Link>
+                </Button>
+              </CardContent>
+            </Card>
+
+            <Card className="border-gold/20 bg-charcoal-light/60">
+              <CardContent className="p-4 md:p-6 flex flex-col h-full">
+                <div className="flex items-center gap-2 text-gold mb-2">
+                  <Handshake className="h-5 w-5" />
+                  <h3 className="font-semibold">Sponsor this category</h3>
+                </div>
+                <p className="text-sm text-foreground/75 leading-relaxed mb-2 flex-1">
+                  Support recognition and education impact within this category.
+                </p>
+                <p className="text-[11px] text-foreground/55 italic mb-3">
+                  Sponsorship does not influence nominations, judging, voting, finalists or winners.
+                </p>
+                <div className="flex flex-wrap gap-2">
+                  <Button asChild size="sm" className="bg-gold text-charcoal hover:bg-gold/90">
+                    <Link to={`/sponsor?category=${encodeURIComponent(config.slug)}`}>Sponsor Category</Link>
+                  </Button>
+                  <Button asChild size="sm" variant="outline" className="border-gold/40 text-gold hover:bg-gold/10">
+                    <Link to="/sponsor#packages">View Packages</Link>
+                  </Button>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+
 
           {/* Desktop CTAs (mobile uses sticky bar below) */}
           <motion.div
