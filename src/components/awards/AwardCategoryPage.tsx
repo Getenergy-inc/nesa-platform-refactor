@@ -11,6 +11,10 @@ import {
   FileText,
   Sparkles,
   ChevronRight,
+  Target,
+  Layers,
+  Handshake,
+  Search,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -23,7 +27,41 @@ import {
   SPONSOR_DISCLAIMER,
   getCategoryBySlug,
   type AwardCategoryConfig,
+  type CategoryGroup,
 } from "@/config/awardCategories";
+
+/** EDX matrix indicators inferred from the category's group. */
+const EDX_BY_GROUP: Record<CategoryGroup, string[]> = {
+  blue_garnet: ["Education Impact", "Community Impact", "Innovation", "Reach"],
+  platinum: ["Education Impact", "Leadership", "Sustainability", "Reach"],
+  icon: ["Education Impact", "Leadership", "Sustainability", "Inclusion", "Reach"],
+  influencers: ["Education Impact", "Community Impact", "Reach"],
+  special_recognition: ["Education Impact", "Reach"],
+};
+
+/** Standard 5-step nomination flow surfaced on every category page. */
+const NOMINATION_FLOW: Array<{ title: string; description: string }> = [
+  {
+    title: "Submit nomination",
+    description: "Complete the guided form with the nominee's profile, impact summary and evidence.",
+  },
+  {
+    title: "NRC eligibility check",
+    description: "The Nominations Review Committee verifies eligibility, evidence and duplicates.",
+  },
+  {
+    title: "Jury shortlist",
+    description: "Independent judges review qualified nominees against the EDX Matrix rubric.",
+  },
+  {
+    title: "Public vote (where applicable)",
+    description: "Blue Garnet and influencer tracks open for verified public voting.",
+  },
+  {
+    title: "Finalists & recognition",
+    description: "Final jury score determines winners; recognition is awarded at the gala.",
+  },
+];
 
 const SITE = "https://nesaafrica.lovable.app";
 
