@@ -70,7 +70,7 @@ export function EcosystemCarousel() {
               </span>
             </div>
             <h2 className="font-display text-3xl md:text-5xl font-bold text-ivory leading-[1.05]">
-              Nominate the <span className="text-gold">2026 Honourees</span> Shaping <span className="text-gold">Africa's Future</span>
+              Don't Just Applaud Education Changemakers. Nominate Them As The <span className="text-gold">2026 Honourees</span> Shaping <span className="text-gold">Africa's Education Future</span>
             </h2>
             <p className="text-ivory/65 mt-3 max-w-2xl text-sm md:text-base leading-relaxed">
               From Lifetime Icons to today's cultural changemakers — meet the
