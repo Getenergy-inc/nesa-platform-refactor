@@ -94,7 +94,7 @@ export function TrophyHeroSection() {
               transition={{ duration: 0.6, delay: 0.3 }}
               className="font-display text-[22px] leading-[1.2] sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4"
             >
-              Nominate the 2026 Honourees{" "}
+              Don't Just Applaud Education Changemakers. Nominate Them As The 2026 Honourees{" "}
               <span className="text-gold bg-gradient-to-r from-gold to-amber-400 bg-clip-text text-transparent">
                 Shaping Africa's Education Future
               </span>
