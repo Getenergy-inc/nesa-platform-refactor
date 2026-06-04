@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { Trophy, Coins, Users, Vote as VoteIcon, ArrowRight, Heart, Compass } from "lucide-react";
+import { Trophy, Coins, Users, Vote as VoteIcon, ArrowRight, Heart, Compass, LayoutGrid } from "lucide-react";
 import { trackEvent } from "@/lib/analytics";
 
 const onCta = (cta: string, to: string) => () =>
