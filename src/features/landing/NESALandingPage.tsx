@@ -87,6 +87,12 @@ export function NESALandingPage() {
           <MobileCategoryRail />
         </LazySection>
 
+        {/* 3c. FEATURED NOMINEES — Africa's Education Impact Directory gateway */}
+        <LazySection>
+          <FeaturedNomineesSection />
+        </LazySection>
+
+
 
         {/* 4. NOMINEE DISCOVERY — responsive on all devices */}
         <LazySection>
