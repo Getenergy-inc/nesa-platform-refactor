@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { Trophy, Coins, Users, Vote as VoteIcon, ArrowRight, Heart, Compass } from "lucide-react";
+import { Trophy, Coins, Users, Vote as VoteIcon, ArrowRight, Heart, Compass, LayoutGrid } from "lucide-react";
 import { trackEvent } from "@/lib/analytics";
 
 const onCta = (cta: string, to: string) => () =>
@@ -43,8 +43,8 @@ export function HeroCTAStack() {
       animate="show"
       className="w-full max-w-xl mx-auto lg:mx-0"
     >
-      {/* PRIMARY + SECONDARY row */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-2.5">
+      {/* PRIMARY · EXPLORE EXISTING NOMINEES · CATEGORIES — 3-CTA row */}
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-2.5">
         {/* PRIMARY */}
         <motion.div variants={item}>
           <Link
@@ -59,34 +59,48 @@ export function HeroCTAStack() {
           </Link>
         </motion.div>
 
-        {/* SECONDARY */}
+        {/* SECONDARY — Explore Existing Nominees */}
         <motion.div variants={item}>
           <Link
             to="/nominees"
-            aria-label="Discover Africa's Education Changemakers"
-            onClick={onCta("discover_changemakers", "/nominees")}
+            aria-label="Explore Existing Nominees"
+            onClick={onCta("explore_existing_nominees", "/nominees")}
             className={`${baseBtn} border border-gold/60 bg-charcoal/40 text-white hover:border-gold hover:bg-gold/10 hover:text-gold hover:-translate-y-0.5`}
           >
-            <Compass className="h-4 w-4 text-gold" />
-            <span className="truncate">Discover Africa's Education Changemakers</span>
+            <Users className="h-4 w-4 text-gold" />
+            <span className="truncate">Explore Existing Nominees</span>
+          </Link>
+        </motion.div>
+
+        {/* TERTIARY — Explore Award Categories */}
+        <motion.div variants={item}>
+          <Link
+            to="/categories"
+            aria-label="Explore Award Categories"
+            onClick={onCta("explore_categories", "/categories")}
+            className={`${baseBtn} border border-gold/60 bg-charcoal/40 text-white hover:border-gold hover:bg-gold/10 hover:text-gold hover:-translate-y-0.5`}
+          >
+            <LayoutGrid className="h-4 w-4 text-gold" />
+            <span className="truncate">Explore Award Categories</span>
           </Link>
         </motion.div>
       </div>
 
       {/* SUPPORT CTAs row — visually lighter */}
       <div className="mt-3 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-2.5">
-        {/* SUPPORT — Explore Nominees */}
+        {/* SUPPORT — Discover Changemakers (story-led discovery) */}
         <motion.div variants={item}>
           <Link
-            to="/nominees"
-            aria-label="Explore Nominees"
-            onClick={onCta("explore_nominees", "/nominees")}
+            to="/nominees?view=discover"
+            aria-label="Discover Africa's Education Changemakers"
+            onClick={onCta("discover_changemakers", "/nominees?view=discover")}
             className={`${baseBtn} border border-gold/30 bg-charcoal/30 text-white/90 hover:border-gold/50 hover:bg-gold/5 hover:text-gold hover:-translate-y-0.5`}
           >
-            <Users className="h-4 w-4 text-gold/80 group-hover:text-gold" />
-            <span className="truncate">Explore Nominees</span>
+            <Compass className="h-4 w-4 text-gold/80 group-hover:text-gold" />
+            <span className="truncate">Discover Changemakers</span>
           </Link>
         </motion.div>
+
 
         {/* SUPPORT — View Voting Timeline */}
         <motion.div variants={item}>
