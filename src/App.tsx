@@ -1074,14 +1074,6 @@ const App = () => (
                     }
                   />
                   <Route
-                    path="/shop/checkout"
-                    element={
-                      <WithLayout>
-                        <Checkout />
-                      </WithLayout>
-                    }
-                  />
-                  <Route
                     path="/shop/bulk-orders"
                     element={
                       <WithLayout>
