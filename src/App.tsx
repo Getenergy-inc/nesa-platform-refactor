@@ -1054,14 +1054,7 @@ const App = () => (
                     }
                   />
                   <Route path="/tickets" element={<Navigate to="/media/gala" replace />} />
-                  <Route
-                    path="/buy-your-ticket"
-                    element={
-                      <WithLayout>
-                        <BuyYourTicket />
-                      </WithLayout>
-                    }
-                  />
+
 
                   {/* Shop / Merchandise - specific routes before dynamic :slug */}
                   <Route
