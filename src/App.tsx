@@ -1264,22 +1264,8 @@ const App = () => (
                       </WithLayout>
                     }
                   />
-                  <Route
-                    path="/vote/gold"
-                    element={
-                      <WithLayout>
-                        <GoldVoting />
-                      </WithLayout>
-                    }
-                  />
-                  <Route
-                    path="/vote/blue-garnet"
-                    element={
-                      <WithLayout>
-                        <BlueGarnetVoting />
-                      </WithLayout>
-                    }
-                  />
+                  <Route path="/vote/gold" element={<Navigate to="/vote" replace />} />
+                  <Route path="/vote/blue-garnet" element={<Navigate to="/vote" replace />} />
                   <Route
                     path="/about-agc"
                     element={
