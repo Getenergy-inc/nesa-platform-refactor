@@ -699,22 +699,8 @@ const App = () => (
                       </WithLayout>
                     }
                   />
-                  <Route
-                    path="/pathways-to-recognition"
-                    element={
-                      <WithLayout>
-                        <PathwaysPage />
-                      </WithLayout>
-                    }
-                  />
-                  <Route
-                    path="/awards/africa-education-icon"
-                    element={
-                      <WithLayout>
-                        <AwardCategoryRoute config={ICON_CATEGORY} />
-                      </WithLayout>
-                    }
-                  />
+                  <Route path="/pathways-to-recognition" element={<Navigate to="/pathways" replace />} />
+                  <Route path="/awards/africa-education-icon" element={<Navigate to="/awards/icon" replace />} />
                   <Route
                     path="/awards/csr-education"
                     element={
