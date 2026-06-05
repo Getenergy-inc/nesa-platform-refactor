@@ -1346,24 +1346,10 @@ const App = () => (
                       </WithLayout>
                     }
                   />
-                  <Route
-                    path="/wallet"
-                    element={
-                      <WithLayout>
-                        <Wallet />
-                      </WithLayout>
-                    }
-                  />
+                  <Route path="/wallet" element={<Navigate to="/about-agc" replace />} />
                   <Route path="/sponsors" element={<SponsorsHub />} />
                   <Route path="/sponsors/:slug" element={<SponsorLanding />} />
-                  <Route
-                    path="/results"
-                    element={
-                      <WithLayout>
-                        <Results />
-                      </WithLayout>
-                    }
-                  />
+                  <Route path="/results" element={<Navigate to="/vote" replace />} />
 
                   {/* Dashboards - use their own layout */}
                   <Route path="/dashboard" element={<Dashboard />} />
