@@ -26,7 +26,6 @@ import { useSeason } from "@/contexts/SeasonContext";
 
 // Lazy below-fold
 const EcosystemCarousel = lazy(() => import("@/components/landing/EcosystemCarousel").then(m => ({ default: m.EcosystemCarousel })));
-const FeaturedNomineesSection = lazy(() => import("@/components/landing/FeaturedNomineesSection").then(m => ({ default: m.FeaturedNomineesSection })));
 const ImpactPreviewSection = lazy(() => import("@/components/nesa/ImpactPreviewSection").then(m => ({ default: m.ImpactPreviewSection })));
 const SponsorPreviewSection = lazy(() => import("@/components/nesa/SponsorPreviewSection").then(m => ({ default: m.SponsorPreviewSection })));
 
@@ -86,12 +85,6 @@ export function NESALandingPage() {
         <LazySection>
           <MobileCategoryRail />
         </LazySection>
-
-        {/* 3c. FEATURED NOMINEES — Africa's Education Impact Directory gateway */}
-        <LazySection>
-          <FeaturedNomineesSection />
-        </LazySection>
-
 
 
         {/* 4. NOMINEE DISCOVERY — responsive on all devices */}

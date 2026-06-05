@@ -146,14 +146,14 @@ export default function NomineesHubPage() {
   return (
     <>
       <Helmet>
-        <title>Explore Existing Nominees — NESA-Africa 2026</title>
+        <title>Nominees Directory — NESA-Africa 2026</title>
         <meta
           name="description"
-          content="Discover educators, innovators, institutions, advocates, philanthropists, influencers, policymakers, community leaders, and organisations transforming education across Africa and the diaspora."
+          content="Explore every NESA-Africa nominee by award category. Discover changemakers, vote, and recommend champions again to advance Education for All."
         />
         <link rel="canonical" href="https://nesaafrica.lovable.app/nominees" />
-        <meta property="og:title" content="Explore Existing Nominees — NESA-Africa 2026" />
-        <meta property="og:description" content="Africa's Education Impact Directory — discover changemakers across all award groups, regions and countries." />
+        <meta property="og:title" content="NESA-Africa Nominees Directory" />
+        <meta property="og:description" content="Browse every NESA-Africa nominee by award category." />
         <meta property="og:url" content="https://nesaafrica.lovable.app/nominees" />
         <meta property="og:type" content="website" />
         <script type="application/ld+json">
@@ -175,38 +175,15 @@ export default function NomineesHubPage() {
             animate={{ opacity: 1, y: 0 }}
           >
             <Badge className="mb-4 bg-gold/15 text-gold border-gold/30">
-              <Sparkles className="w-3 h-3 mr-1" /> Africa's Education Impact Directory · 2026
+              <Sparkles className="w-3 h-3 mr-1" /> Nominees Directory — 2026 Edition
             </Badge>
             <h1 className="font-display text-3xl md:text-5xl font-bold text-ivory mb-3">
-              Explore Existing Nominees
+              Discover Africa's Education Changemakers
             </h1>
-            <p className="text-ivory/75 max-w-3xl mx-auto mb-6 text-[15px] md:text-base leading-relaxed">
-              Discover educators, innovators, institutions, advocates, philanthropists, influencers,
-              policymakers, community leaders, and organisations transforming education across
-              Africa and the diaspora.
+            <p className="text-ivory/70 max-w-2xl mx-auto mb-6">
+              Explore nominees, education impact leaders, institutions, innovators and supporters
+              across Africa, the diaspora and friends of Africa.
             </p>
-
-            {/* Top-of-page CTAs */}
-            <div className="mb-7 flex flex-col sm:flex-row gap-3 justify-center">
-              <Link
-                to="/nominate"
-                className="inline-flex h-11 items-center justify-center gap-2 rounded-full px-5 bg-gold text-charcoal text-sm font-semibold hover:bg-gold-dark transition-all"
-              >
-                <Trophy className="h-4 w-4" /> Nominate for 2026
-              </Link>
-              <Link
-                to="/categories"
-                className="inline-flex h-11 items-center justify-center gap-2 rounded-full px-5 border border-gold/60 bg-charcoal/40 text-white text-sm font-medium hover:border-gold hover:bg-gold/10 hover:text-gold transition-all"
-              >
-                <Sparkles className="h-4 w-4 text-gold" /> Explore Categories
-              </Link>
-              <Link
-                to="/sponsor"
-                className="inline-flex h-11 items-center justify-center gap-2 rounded-full px-5 border border-gold/60 bg-charcoal/40 text-white text-sm font-medium hover:border-gold hover:bg-gold/10 hover:text-gold transition-all"
-              >
-                <Flame className="h-4 w-4 text-gold" /> Become a Sponsor
-              </Link>
-            </div>
 
             <form onSubmit={onSearchSubmit} className="max-w-xl mx-auto relative">
               <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-gold" />
@@ -217,13 +194,6 @@ export default function NomineesHubPage() {
                 className="pl-12 h-12 bg-charcoal-light border-gold/30 text-ivory placeholder:text-ivory/40 focus:border-gold rounded-full"
               />
             </form>
-
-            {/* Governance notice */}
-            <p className="mt-5 text-[11px] md:text-xs text-ivory/55 max-w-3xl mx-auto leading-relaxed">
-              Being listed as a nominee does not imply finalist status, jury endorsement, winner
-              status, sponsorship endorsement, or award selection. Nominee status remains subject
-              to verification, evaluation, voting, and governance procedures.
-            </p>
 
             {/* Nominee-group chips — UI-ready. Wire `activeGroup` to data filter later. */}
             <div className="mt-6 flex flex-wrap justify-center gap-2">
@@ -249,7 +219,6 @@ export default function NomineesHubPage() {
               })}
             </div>
           </motion.div>
-
 
           {/* Structured Filters — UI-ready; wire to nominee query when fields confirmed */}
           <motion.div

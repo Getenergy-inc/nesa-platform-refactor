@@ -416,79 +416,6 @@ const App = () => (
                   <Route path="/get-involved" element={<Navigate to="/volunteer" replace />} />
                   <Route path="/press" element={<Navigate to="/media" replace />} />
 
-                  {/* === IA REFACTOR (Phase 3) — Coming-Soon & merged routes === */}
-                  {/* Voting sub-tracks not yet active */}
-                  <Route path="/vote/jury" element={<Navigate to="/vote" replace />} />
-                  <Route path="/vote/results" element={<Navigate to="/vote" replace />} />
-                  <Route path="/vote/analytics" element={<Navigate to="/vote" replace />} />
-                  <Route path="/vote/receipt/:id" element={<Navigate to="/vote" replace />} />
-                  <Route path="/vote/rules" element={<Navigate to="/guidelines/voters" replace />} />
-                  <Route path="/vote/faqs" element={<Navigate to="/faq" replace />} />
-                  {/* Rebuild My School Africa — canonical /rebuild */}
-                  <Route path="/rmsa" element={<Navigate to="/rebuild" replace />} />
-                  <Route path="/rmsa/map" element={<Navigate to="/rebuild" replace />} />
-                  <Route path="/rmsa/vote" element={<Navigate to="/rebuild" replace />} />
-                  <Route path="/rmsa/funding" element={<Navigate to="/rebuild" replace />} />
-                  <Route path="/rmsa/reports" element={<Navigate to="/rebuild" replace />} />
-                  <Route path="/rmsa/schools" element={<Navigate to="/rebuild" replace />} />
-                  <Route path="/rmsa/gallery" element={<Navigate to="/rebuild" replace />} />
-                  <Route path="/rmsa/nominate-school" element={<Navigate to="/rebuild" replace />} />
-                  {/* Nomination ecosystem */}
-                  <Route path="/prenominate" element={<Navigate to="/nominate" replace />} />
-                  <Route path="/nominate/status" element={<Navigate to="/nominate" replace />} />
-                  <Route path="/nominate/guidelines" element={<Navigate to="/guidelines/nominators" replace />} />
-                  <Route path="/nominate/edx-guide" element={<Navigate to="/edx-matrix" replace />} />
-                  <Route path="/nominate/faqs" element={<Navigate to="/faq" replace />} />
-                  <Route path="/nominees/recommend" element={<Navigate to="/nominees" replace />} />
-                  {/* EduAid sub-routes — funnel into hub until built */}
-                  <Route path="/eduaid/scholarships" element={<Navigate to="/eduaid" replace />} />
-                  <Route path="/eduaid/school-support" element={<Navigate to="/eduaid" replace />} />
-                  <Route path="/eduaid/teachers" element={<Navigate to="/eduaid" replace />} />
-                  <Route path="/eduaid/women-girls" element={<Navigate to="/eduaid" replace />} />
-                  <Route path="/eduaid/special-needs" element={<Navigate to="/eduaid" replace />} />
-                  <Route path="/eduaid/edutourism" element={<Navigate to="/eduaid" replace />} />
-                  <Route path="/eduaid/campaigns" element={<Navigate to="/eduaid" replace />} />
-                  <Route path="/eduaid/grants" element={<Navigate to="/eduaid" replace />} />
-                  <Route path="/eduaid/webinars" element={<Navigate to="/media/webinars" replace />} />
-                  {/* Media sub-routes */}
-                  <Route path="/tv" element={<Navigate to="/media/tv" replace />} />
-                  <Route path="/media/live" element={<Navigate to="/media/tv" replace />} />
-                  <Route path="/media/archive" element={<Navigate to="/media" replace />} />
-                  <Route path="/media/press" element={<Navigate to="/media" replace />} />
-                  <Route path="/media/stories" element={<Navigate to="/media" replace />} />
-                  <Route path="/media/shows/platinum" element={<Navigate to="/media/shows" replace />} />
-                  <Route path="/media/shows/icon" element={<Navigate to="/media/shows" replace />} />
-                  <Route path="/media/shows/gold" element={<Navigate to="/media/shows" replace />} />
-                  <Route path="/media/shows/gala" element={<Navigate to="/media/gala" replace />} />
-                  <Route path="/webinars" element={<Navigate to="/media/webinars" replace />} />
-                  <Route path="/announcements" element={<Navigate to="/media" replace />} />
-                  {/* About / foundation pages — collapse to canonical hubs */}
-                  <Route path="/standards" element={<Navigate to="/about/governance" replace />} />
-                  <Route path="/recognition" element={<Navigate to="/pathways" replace />} />
-                  <Route path="/calendar" element={<Navigate to="/about/timeline" replace />} />
-                  <Route path="/support" element={<Navigate to="/faq" replace />} />
-                  <Route path="/sophia" element={<Navigate to="/faq" replace />} />
-                  <Route path="/search" element={<Navigate to="/nominees" replace />} />
-                  {/* Membership / community */}
-                  <Route path="/membership" element={<Navigate to="/chapters" replace />} />
-                  <Route path="/chapters/join" element={<Navigate to="/join-local-chapter" replace />} />
-                  <Route path="/volunteers/meet" element={<Navigate to="/volunteers" replace />} />
-                  <Route path="/ambassadors/meet" element={<Navigate to="/ambassadors" replace />} />
-                  <Route path="/judges/apply" element={<Navigate to="/judge/apply" replace />} />
-                  {/* Awards subcategory legacy */}
-                  <Route path="/awards/subcategories" element={<Navigate to="/awards/categories" replace />} />
-                  <Route path="/awards/timeline" element={<Navigate to="/about/timeline" replace />} />
-                  <Route path="/awards/rules" element={<Navigate to="/policies" replace />} />
-                  <Route path="/awards/faqs" element={<Navigate to="/faq" replace />} />
-                  {/* Certificates (except verify) */}
-                  <Route path="/certificates" element={<Navigate to="/certificates/verify" replace />} />
-                  <Route path="/certificates/nomination/:id" element={<Navigate to="/certificates/verify" replace />} />
-                  {/* Misc */}
-                  <Route path="/upcoming-events" element={<Navigate to="/media/gala" replace />} />
-                  <Route path="/buy-your-ticket" element={<Navigate to="/media/gala" replace />} />
-                  <Route path="/shop/checkout" element={<Navigate to="/shop" replace />} />
-
-
 
 
 
@@ -772,8 +699,22 @@ const App = () => (
                       </WithLayout>
                     }
                   />
-                  <Route path="/pathways-to-recognition" element={<Navigate to="/pathways" replace />} />
-                  <Route path="/awards/africa-education-icon" element={<Navigate to="/awards/icon" replace />} />
+                  <Route
+                    path="/pathways-to-recognition"
+                    element={
+                      <WithLayout>
+                        <PathwaysPage />
+                      </WithLayout>
+                    }
+                  />
+                  <Route
+                    path="/awards/africa-education-icon"
+                    element={
+                      <WithLayout>
+                        <AwardCategoryRoute config={ICON_CATEGORY} />
+                      </WithLayout>
+                    }
+                  />
                   <Route
                     path="/awards/csr-education"
                     element={
@@ -786,7 +727,14 @@ const App = () => (
                     path="/awards/csr-for-education"
                     element={<Navigate to="/awards/csr-education" replace />}
                   />
-                  <Route path="/awards/influencer-education" element={<Navigate to="/awards/influencers-education-impact" replace />} />
+                  <Route
+                    path="/awards/influencer-education"
+                    element={
+                      <WithLayout>
+                        <DigitalVoices />
+                      </WithLayout>
+                    }
+                  />
                   <Route
                     path="/awards/digital-voices"
                     element={
@@ -1053,8 +1001,22 @@ const App = () => (
                       </WithLayout>
                     }
                   />
-                  <Route path="/tickets" element={<Navigate to="/media/gala" replace />} />
-
+                  <Route
+                    path="/tickets"
+                    element={
+                      <WithLayout>
+                        <Tickets />
+                      </WithLayout>
+                    }
+                  />
+                  <Route
+                    path="/buy-your-ticket"
+                    element={
+                      <WithLayout>
+                        <BuyYourTicket />
+                      </WithLayout>
+                    }
+                  />
 
                   {/* Shop / Merchandise - specific routes before dynamic :slug */}
                   <Route
@@ -1070,6 +1032,14 @@ const App = () => (
                     element={
                       <WithLayout>
                         <Cart />
+                      </WithLayout>
+                    }
+                  />
+                  <Route
+                    path="/shop/checkout"
+                    element={
+                      <WithLayout>
+                        <Checkout />
                       </WithLayout>
                     }
                   />
@@ -1322,8 +1292,22 @@ const App = () => (
                       </WithLayout>
                     }
                   />
-                  <Route path="/vote/gold" element={<Navigate to="/vote" replace />} />
-                  <Route path="/vote/blue-garnet" element={<Navigate to="/vote" replace />} />
+                  <Route
+                    path="/vote/gold"
+                    element={
+                      <WithLayout>
+                        <GoldVoting />
+                      </WithLayout>
+                    }
+                  />
+                  <Route
+                    path="/vote/blue-garnet"
+                    element={
+                      <WithLayout>
+                        <BlueGarnetVoting />
+                      </WithLayout>
+                    }
+                  />
                   <Route
                     path="/about-agc"
                     element={
@@ -1404,10 +1388,24 @@ const App = () => (
                       </WithLayout>
                     }
                   />
-                  <Route path="/wallet" element={<Navigate to="/about-agc" replace />} />
+                  <Route
+                    path="/wallet"
+                    element={
+                      <WithLayout>
+                        <Wallet />
+                      </WithLayout>
+                    }
+                  />
                   <Route path="/sponsors" element={<SponsorsHub />} />
                   <Route path="/sponsors/:slug" element={<SponsorLanding />} />
-                  <Route path="/results" element={<Navigate to="/vote" replace />} />
+                  <Route
+                    path="/results"
+                    element={
+                      <WithLayout>
+                        <Results />
+                      </WithLayout>
+                    }
+                  />
 
                   {/* Dashboards - use their own layout */}
                   <Route path="/dashboard" element={<Dashboard />} />
