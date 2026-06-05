@@ -1,89 +1,133 @@
-# NESA-Africa 2026 Refactor Plan
+# NESA-Africa Public Platform Refactor — Phased Plan
 
-This is a large, multi-area refactor. To keep it shippable and reviewable, I'll break it into **6 phases**. Each phase is independently deployable and preserves all existing content (branding, Blue Garnet, categories, nominees, volunteers, judges, regions, EduAid, RMSA, Sophia AI, donations, sponsorship).
+**Goal**: Compress 130 internal routes into a clean 9-item public navigation, retain the landing page, normalize award language, gate backend routes, and redirect duplicates — without reducing platform scope.
 
-You can approve the whole plan, or tell me to start at a specific phase.
-
----
-
-## Phase 1 — Two-Level Navigation (SCEF model)
-
-Refactor `src/config/navigation.ts` + `src/components/navigation/MainNav.tsx` into two stacked bars:
-
-**Level 1 — Governance Bar** (thin, top, dark):
-Governance · Judges · Volunteers · Local Chapters · Partners · Sponsors · Donate · Login · Wallet · Language
-
-**Level 2 — Primary Nav** (main bar, gold accents):
-About · Awards · Impact Programs · Engage · Media · Support · Sponsor NESA-Africa · Contact
-
-Each Level 2 item gets the exact submenu tree from your spec (e.g. Awards → Africa Education Icon, Blue Garnet, Platinum, Influencer, All Categories).
-
-Mobile: single hamburger drawer with accordion sections for **both** levels (keyboard nav + focus trap already shipped).
-
-Adjust `PublicLayout` top padding (`pt-14 sm:pt-16 lg:pt-[100px]`) to account for the new two-bar height.
-
-## Phase 2 — Governance & Transparency Hub
-
-New route `/governance` with anchored sections:
-- Transparency · Conflict of Interest · Independent Verification · Voting Integrity · Judge Independence · Anti-Bribery · Sponsor Firewall · Appeals & Complaints · Data Protection
-
-Reuses existing `INTEGRITY_DISCLAIMER` / `SPONSOR_DISCLAIMER` from `src/config/awardCategories/disclaimers.ts`.
-
-Add a persistent **sponsor-firewall banner** component used on Awards, Nominate, Vote, Sponsor pages:
-> "Sponsorship, partnership, donations, endorsements, and visibility opportunities do not influence nominees, judges, voting outcomes, finalists, or winners."
-
-## Phase 3 — Meet Our Volunteers / Meet Our Judges (dynamic profiles)
-
-**Volunteers** (`useVolunteers` hook already exists):
-- `/volunteers` index — grid of cards
-- `/volunteers/:slug` — profile page: bio, country of residence, country of origin, contributions, social links, referral link, certificate eligibility badge, link to volunteer dashboard
-
-**Judges**:
-- `/judges` index (extend existing `MeetOurJudges` component)
-- `/judges/:slug` — profile page: expertise, country, bio, social links, governance declaration block, COI status badge
-
-No schema changes required for phase 3 — uses existing tables; adds only frontend routes.
-
-## Phase 4 — Sophia AI repositioning
-
-Update `CustomerCareChat` header/intro copy → "Sophia — Official NESA-Africa Support Assistant". Add capability chips (Nominations · Voting · Sponsorship · Volunteering · Judging · Local Chapters · RMSA · EduAid). Add WhatsApp escalation CTA → `+2348109765897`.
-
-## Phase 5 — Regional Ecosystem links
-
-On each region hub page, ensure the action list links to: regional profile, EduAid conference, RMSA legacy project, special-needs nomination, voting, regional GFA Wallet, sponsorship, impact reports. Most exist — this phase audits and fills gaps.
-
-## Phase 6 — Donor & Sponsor Trust block
-
-New reusable `<DonorTrustPanel />` shown on `/partners`, `/support/donate`, sponsorship pages:
-- Approved channels (GFA Wallet, bank transfer)
-- Anti-fraud notice
-- Sponsorship policy link
-- Legacy fund reporting link
-
-## Mobile QA (cross-cutting)
-
-After Phase 1 + 2, verify at 320 / 375 / 414 / 768 / 1024:
-- No navbar overlap (existing `tests/e2e/navbar-overlap.spec.ts`)
-- Drawer focus trap (existing `tests/e2e/mobile-drawer-focus-trap.spec.ts`)
-- Touch targets ≥ 48px (already enforced in current drawer)
+**User-confirmed decisions**:
+- Award labels site-wide: **Africa Education Icon**, **Gold / Blue Garnet Awards**, **Platinum Recognition**, **Influencer Education Impact** (4 structures, not 3). Influencer remains its own surface but ranked below the 3 core structures.
+- Coming-Soon routes (wallet, results, analytics, checkout, certificates, jury, etc.): **redirect to nearest parent** rather than render placeholder.
+- Landing page: **reorder + trim existing sections** (no rebuild from scratch).
+- Phase 1 = this plan document; execute phase-by-phase after approval.
 
 ---
 
-## What I will NOT touch
+## Public Navigation Target (9 top-level + 2 header CTAs)
 
-Branding, Blue Garnet identity, award categories, nominee data, existing volunteer/judge/region pages, EduAid, RMSA, Sophia core logic, donation flows, sponsorship flows, wallet, auth, RLS, backend.
+| Top-level | Dropdown items | Backing routes |
+|---|---|---|
+| Home | — | `/` |
+| About | About NESA, About the Award, Why It Matters, Standards & Governance, Recognition Framework, FAQs, Help Centre | `/about`, `/about/awards-recognition`, `/about/social-impact`, `/about/governance` + `/governance`, `/pathways`, `/faq`, `/faq` |
+| Awards | Awards Hub, Africa Education Icon, Gold / Blue Garnet Awards, Platinum Recognition, Influencer Education Impact, Award Categories, Timeline, Rules | `/awards`, `/awards/icon` (alias `/awards/africa-education-icon`), `/awards/blue-garnet` + `/awards/gold`, `/awards/platinum`, `/awards/influencers-education-impact`, `/awards/categories`, `/about/timeline`, `/policies` |
+| Participate | Explore Nominees, Nominate 2026, Pre-Nomination, Nomination Guidelines, Vote & Earn AGC, Voting Rules, Nomination FAQs | `/nominees`, `/nominate`, `/nominate` (pre-nom gated), `/guidelines/nominators` + `/guidelines/nominees`, `/vote` + `/earn-agc`, `/guidelines/voters`, `/faq` |
+| Sponsors & Partners | Sponsor NESA, Sponsorship Packages, Category Sponsorship, Gala Sponsorship, NESA TV Sponsorship, EduAid Sponsorship, RMSA Sponsorship, CSR Education Fund, Partner With Us, Endorse NESA | `/sponsor`, `/sponsorship-packages`, `/sponsor/:slug`, `/sponsors`, `/endorse` |
+| Impact Programs | EduAid-Africa, Scholarships, School Support, Teacher Development, Women & Girls, Special Needs, Rebuild My School Africa, Regional Map, Impact Reports | `/eduaid`, `/eduaid-africa/rebuild-my-school`, `/rebuild`, `/impact`, `/region` |
+| Media & Events | Media Hub, NESA-Africa TV, Live Broadcast, Shows, Webinars, Announcements, Press, Impact Stories, Gallery, Gala | `/media`, `/media/tv`, `/media/shows`, `/media/webinars`, `/media/gala`, `/gallery`, `/videos`, `/trending` |
+| Join the Movement | Membership, Chapters, Join Chapter, Ambassadors, Volunteers, Meet Judges, Become a Judge, Nominee Research Corps | `/chapters`, `/join-local-chapter`, `/ambassadors`, `/volunteers`, `/judges`, `/judge/apply`, `/nrc` (public landing variant) |
+| Contact | Contact, Help Centre, Search, Sophia AI | `/contact`, `/faq` |
 
-## Technical notes
-
-- All new routes registered in `src/App.tsx` and `ROUTES.md`.
-- All copy goes through `react-i18next` keys under `pages.*` so the 11-language coverage is preserved.
-- Colors: only `charcoal` / `gold` semantic tokens — no hex in components.
-- No DB migrations needed for any phase.
+**Header CTAs**: Primary `Nominate Now → /nominate` · Secondary `Explore Nominees → /nominees`.
 
 ---
 
-## How would you like to proceed?
+## Route Disposition Table (130 routes → Keep / Merge / Hide / Redirect)
 
-1. **Ship all 6 phases sequentially** (large change, ~6 follow-up turns)
-2. **Start with Phase 1 + 2 only** (navigation + governance — biggest credibility lift)
-3. **Pick specific phases** — tell me which numbers
+### KEEP — Public primary
+
+`/`, `/about`, `/about/vision-2035`, `/about/governance`, `/about/timeline`, `/about/scef`, `/about/awards-recognition`, `/about/social-impact`, `/governance`, `/edx-matrix`, `/pathways`, `/awards`, `/awards/icon`, `/awards/blue-garnet`, `/awards/gold`, `/awards/platinum`, `/awards/influencers-education-impact`, `/awards/categories`, `/awards/blue-garnet-categories`, `/awards/platinum-certificate-categories`, `/awards/gold-special-recognition`, `/categories/:slug`, `/nominees`, `/nominees/:slug` (or `/nominee/:slug`), `/nominate`, `/vote`, `/earn-agc`, `/about-agc`, `/how-voting-works`, `/sponsor`, `/sponsorship-packages`, `/sponsors`, `/endorse`, `/partners`, `/eduaid`, `/eduaid-africa/rebuild-my-school`, `/rebuild`, `/impact`, `/region`, `/region/:slug`, `/media`, `/media/tv`, `/media/shows`, `/media/webinars`, `/media/gala`, `/gallery`, `/videos`, `/trending`, `/chapters`, `/join-local-chapter`, `/ambassadors`, `/volunteers`, `/judges`, `/judge/apply`, `/contact`, `/faq`, `/policies`, `/guidelines/*` (5 role pages).
+
+### MERGE — Consolidate to canonical
+
+| Source | Canonical | Action |
+|---|---|---|
+| `/awards/africa-education-icon` | `/awards/icon` | redirect |
+| `/awards/influencers-education-impact-2026-recognition` | `/awards/influencers-education-impact` | redirect |
+| `/awards/csr-education`, `/awards/csr-for-education`, `/awards/influencer-education`, `/awards/digital-voices`, `/awards/grants-global-support`, `/awards/global-partnerships` | `/awards/categories` (or relevant category slug) | redirect |
+| `/category/*` legacy slugs (12 routes) | `/categories/:slug` | already redirected — verify |
+| `/pathways-to-recognition` | `/pathways` | redirect |
+| `/ecosystem`, `/movement` | merge into `/about/social-impact` | redirect |
+| `/contributors`, `/contributors/:id` | keep but link only from About | demote |
+| `/upcoming-events` | merge into `/media/gala` | redirect |
+
+### HIDE from nav (Public but Secondary — reachable by deep link/footer)
+
+`/edx-matrix`, `/governance`, `/about/timeline`, `/about/scef`, `/policies`, `/guidelines/*`, `/region/*` subpages, `/gallery/:slug`, `/videos`, `/trending`, `/judges/directory`, `/judges/:slug`, `/ambassadors/*`, `/volunteers/:slug`, `/volunteer-*` (teams/leaderboard/stories), `/contributors*`, `/install`, `/programs`, `/programs/nesa-africa`.
+
+### COMING SOON → redirect to nearest parent
+
+| Coming-Soon route | Redirect target |
+|---|---|
+| `/vote/jury`, `/vote/gold`, `/vote/blue-garnet`, `/vote/receipt/:id`, `/vote/analytics`, `/vote/results`, `/results` | `/vote` |
+| `/wallet`, `/dashboard/wallet` | `/about-agc` |
+| `/certificates/*` (except `/certificates/verify`) | `/about` |
+| `/verify/:hash` | keep (verification works) |
+| `/rmsa/vote`, `/rmsa/funding` | `/rebuild` |
+| `/tickets`, `/shop/checkout` | `/media/gala` (until commerce ready) |
+
+### PROTECTED (require auth — keep mounted, never in public nav)
+
+`/login`, `/register`, `/forgot-password`, `/reset-password`, `/dashboard*`, `/profile*`, `/nominee/dashboard/:token`, `/nominee/accept/:token`, `/nominee/decline/:token`, `/judge/dashboard`, `/judge/scoring`, `/judge/coi`, `/judge/chat`, `/judge/rubric`, `/judge/guidelines`, `/judge/panel`, `/judge/help`, `/judge/settings`, `/judge/icon-lifetime`, `/judge/status`, `/judge/verify`, `/judge/signup`, `/volunteer/dashboard` + sub-routes, `/olc/*`.
+
+### PRIVATE ADMIN (never public)
+
+All `/admin/*` (18 routes), `/nrc/*` portal pages (15 routes). NRC public landing may show "Apply" CTA only.
+
+---
+
+## Phased Execution
+
+### Phase 2 — Navigation IA (1 PR)
+- Refactor `src/components/navigation/MainNav.tsx` to 9 top-level items with dropdowns above.
+- Refactor `MobileBottomNav` and Drawer to mirror the structure (Home / Awards / Nominate / Participate / More).
+- Refactor `src/components/nesa/NESAFooter.tsx` columns to: Awards · Participate · Programs · Sponsors · Movement · Contact.
+- Update `src/components/layout/PublicLayout.tsx` only if header signature changes.
+- Header CTAs: `Nominate Now` (primary), `Explore Nominees` (secondary).
+
+### Phase 3 — Redirects & route hygiene (1 PR)
+- Add `<Route>` redirects in `src/App.tsx` for every row in MERGE and COMING SOON tables.
+- Update `src/config/page-sequence.ts` to drop hidden/admin/protected routes from book pagination.
+- Update `scripts/generate-sitemap.ts` (or `public/sitemap.xml`) to include only KEEP routes.
+
+### Phase 4 — Award language normalization (1 PR)
+- Site-wide replace to the 4 confirmed labels. Touch `src/locales/en/pages.json`, `src/config/awardCategories/*`, hero/landing/dropdown copy.
+- Remove voting language from Icon and Platinum surfaces; keep only on Gold/Blue Garnet and Influencer where applicable.
+
+### Phase 5 — Landing page reorder (1 PR)
+Reorder existing sections in `src/features/landing/NESALandingPage.tsx` to:
+1. Hero (existing TrophyHeroSection) — confirmed copy
+2. About NESA-Africa Awards (existing About block, trimmed)
+3. Why NESA-Africa Matters (extract from existing)
+4. Three+1 Award Structures (existing Awards carousel, ensure 4 cards)
+5. How Participation Works (existing EcosystemCarousel, relabel)
+6. Gala Countdown (existing)
+7. Explore Existing Nominees Preview (FeaturedNomineesSection — already added)
+8. Sponsors & CSR Preview
+9. Impact Programs Preview (EduAid + RMSA)
+10. Media & NESA TV Preview
+11. Join the Movement Preview
+12. Final CTA (Nominate / Explore / Sponsor / Join)
+
+Trim any sections not in the 12-block list.
+
+### Phase 6 — SEO sweep (1 PR)
+- Unique `<Helmet>` title + meta description on every KEEP page.
+- Canonical tags on category/nominee/award detail pages.
+- OG tags inherited from `index.html` defaults; per-page where content differs.
+- Regenerate `public/sitemap.xml` from KEEP list.
+
+### Phase 7 — Mobile-first QA (1 PR)
+- Verify single primary CTA per page.
+- Verify dropdown depth ≤ 2 on mobile.
+- Run `tests/e2e/navbar-*.spec.ts` and add coverage for new IA.
+- Update `ROUTES.md` to reflect public vs internal split.
+
+---
+
+## Out of Scope (explicit)
+- No DB schema changes.
+- No new pages — only reorganization, redirects, and copy.
+- No removal of existing functionality; admin/dashboard/NRC remain mounted under auth.
+- No new design system tokens; reuse charcoal/gold tokens.
+
+---
+
+## Approval Gate
+Reply with the phase number to execute next (e.g. "go Phase 2") or request edits to this plan.
