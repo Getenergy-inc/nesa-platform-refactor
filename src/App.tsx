@@ -713,14 +713,7 @@ const App = () => (
                     path="/awards/csr-for-education"
                     element={<Navigate to="/awards/csr-education" replace />}
                   />
-                  <Route
-                    path="/awards/influencer-education"
-                    element={
-                      <WithLayout>
-                        <DigitalVoices />
-                      </WithLayout>
-                    }
-                  />
+                  <Route path="/awards/influencer-education" element={<Navigate to="/awards/influencers-education-impact" replace />} />
                   <Route
                     path="/awards/digital-voices"
                     element={
