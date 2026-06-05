@@ -980,14 +980,7 @@ const App = () => (
                       </WithLayout>
                     }
                   />
-                  <Route
-                    path="/tickets"
-                    element={
-                      <WithLayout>
-                        <Tickets />
-                      </WithLayout>
-                    }
-                  />
+                  <Route path="/tickets" element={<Navigate to="/media/gala" replace />} />
                   <Route
                     path="/buy-your-ticket"
                     element={
