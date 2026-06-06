@@ -49,7 +49,7 @@ export default function NGOEducationNigeriaPage() {
         categoryName="Best NGO Contribution to Education (Nigeria)"
         title="Live Nigerian NGO Nominees"
       />
-      <DynamicCategoryPage categoryTitle="Best NGO Contribution to Education (Nigeria)" nominationType="NGO Nigeria" />
+      <DynamicCategoryPage categoryTitle="Best NGO Contribution to Education (Nigeria)" nominationType="NGO Nigeria" nominateCategorySlug="best-ngo-for-education-advancement-nigeria" />
     </>
   );
 }
