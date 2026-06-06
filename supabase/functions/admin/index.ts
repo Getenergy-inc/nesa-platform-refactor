@@ -552,6 +552,68 @@ Deno.serve(async (req) => {
       }
     }
 
+    // ================================================================
+    // AUDIT-LOGS ENDPOINT (v1 contract)
+    // GET /admin/audit-logs?action=form_auto_promoted&form_kind=&form_slug=&page=&limit=
+    // ================================================================
+    if (domain === "audit-logs") {
+      if (!action && req.method === "GET") {
+        const page = Math.max(1, parseInt(url.searchParams.get("page") || "1"));
+        const limit = Math.min(
+          Math.max(1, parseInt(url.searchParams.get("limit") || "25")),
+          100,
+        );
+        const offset = (page - 1) * limit;
+        const actionFilter = url.searchParams.get("action") || "form_auto_promoted";
+        const formKind = url.searchParams.get("form_kind")?.trim();
+        const formSlug = url.searchParams.get("form_slug")?.trim();
+
+        let query = adminSupabase
+          .from("audit_events")
+          .select("id, action, entity_type, entity_id, actor_id, metadata, created_at", {
+            count: "exact",
+          })
+          .eq("action", actionFilter);
+
+        if (formKind) query = query.eq("metadata->>form_kind", formKind);
+        if (formSlug) query = query.ilike("metadata->>form_slug", `%${formSlug}%`);
+
+        const { data, count, error } = await query
+          .order("created_at", { ascending: false })
+          .range(offset, offset + limit - 1);
+
+        if (error) throw error;
+
+        const rows = (data || []).map((row: Record<string, unknown>) => {
+          const metadata = (row.metadata || {}) as Record<string, unknown>;
+          return {
+            id: row.id,
+            action: row.action,
+            actor_id: row.actor_id ?? null,
+            entity_type: row.entity_type ?? null,
+            entity_id: row.entity_id ?? null,
+            form_kind: (metadata.form_kind as string) ?? null,
+            form_slug: (metadata.form_slug as string) ?? null,
+            raw_status: (metadata.raw_status as string) ?? null,
+            resolved_status: (metadata.resolved_status as string) ?? null,
+            created_at: row.created_at,
+          };
+        });
+
+        return respond(rows, {
+          page,
+          limit,
+          total: count || 0,
+          total_pages: Math.max(1, Math.ceil((count || 0) / limit)),
+          filters: {
+            action: actionFilter,
+            form_kind: formKind || null,
+            form_slug: formSlug || null,
+          },
+        });
+      }
+    }
+
     return errorResponse("Not found", 404);
 
   } catch (error: unknown) {
