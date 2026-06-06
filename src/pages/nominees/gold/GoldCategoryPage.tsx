@@ -342,7 +342,7 @@ export default function GoldCategoryPage() {
             <p className="text-ivory/60 mb-5 text-sm md:text-base">
               Submit a {category.shortName} nominee advancing education across Africa.
             </p>
-            <Link to="/nominate">
+            <Link to={`/nominate?family=gold-blue-garnet&source=gold-${categorySlug}`}>
               <Button className="bg-gold hover:bg-gold/90 text-charcoal font-bold rounded-full px-7 gap-2">
                 Nominate Now <ArrowRight className="w-4 h-4" />
               </Button>
