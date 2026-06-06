@@ -259,7 +259,7 @@ export default function IconAward() {
               Help us recognize the legends who have dedicated their lives to African education — whether living in Africa, in the diaspora, or as friends of Africa.
             </p>
             <Button asChild size="lg" className="bg-primary text-primary-foreground">
-              <Link to="/nominate">Submit a Nomination</Link>
+              <Link to="/nominate?family=africa-education-icon">Submit a Nomination</Link>
             </Button>
           </div>
         </section>
