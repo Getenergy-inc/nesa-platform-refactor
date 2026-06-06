@@ -18,6 +18,7 @@ export { SettlementOverviewCard, SettlementRunsTable, SettlementInstructionCard 
 // Governance Components
 export { StageControlCard } from "./governance/StageControlCard";
 export { AuditTrailCard } from "./governance/AuditTrailCard";
+export { FormAutoPromotedAuditCard } from "./governance/FormAutoPromotedAuditCard";
 
 // Technical Components
 export { PaymentProviderStatusCard } from "./technical/PaymentProviderStatusCard";
