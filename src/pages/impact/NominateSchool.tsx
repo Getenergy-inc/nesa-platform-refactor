@@ -21,6 +21,10 @@ export default function NominateSchool() {
     () => (regionParam ? getRmsaRegionFormBySlug(regionParam) : null),
     [regionParam],
   );
+  const rawRegion = useMemo(
+    () => (regionParam ? RMSA_REGIONAL_FORMS_RAW.find((r) => r.slug === regionParam) : null),
+    [regionParam],
+  );
 
   useEffect(() => {
     if (regionParam && !region) {
