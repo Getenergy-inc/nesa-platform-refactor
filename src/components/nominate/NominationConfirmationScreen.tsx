@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import { Button } from "@/components/ui/button";
 import { CheckCircle2, Users, Plus, BookOpen, Handshake } from "lucide-react";
 import { IntegrityNotice } from "./IntegrityNotice";
@@ -10,6 +11,7 @@ export function NominationConfirmationScreen({
   count: number;
   onNominateAnother: () => void;
 }) {
+  const { t } = useTranslation("nomination");
   return (
     <div className="space-y-6">
       <div className="rounded-2xl border border-gold/40 bg-gradient-to-br from-gold/15 to-charcoal p-6 md:p-8 text-center space-y-4">
@@ -17,17 +19,13 @@ export function NominationConfirmationScreen({
           <CheckCircle2 className="h-7 w-7 text-gold" />
         </div>
         <h2 className="font-display text-2xl md:text-3xl font-bold text-white">
-          Nomination Submitted Successfully
+          {t("flow.confirmation.title")}
         </h2>
         <p className="text-sm md:text-base text-white/75 max-w-2xl mx-auto leading-relaxed">
-          Thank you for nominating {count} education {count === 1 ? "changemaker" : "changemakers"}{" "}
-          for NESA-Africa. Your nomination will go through a structured review process —
-          completeness, category fit, evidence review, verification, shortlisting, and
-          governance/integrity review.
+          {t("flow.confirmation.thanks", { count })}
         </p>
         <p className="text-xs text-white/55 max-w-xl mx-auto">
-          Not all nominations become published nominees. Not all nominees become finalists. Not
-          all finalists become winners.
+          {t("flow.confirmation.funnelNote")}
         </p>
       </div>
 
@@ -39,7 +37,7 @@ export function NominationConfirmationScreen({
           className="bg-gold hover:bg-gold-dark text-charcoal font-semibold rounded-full gap-2 shadow-gold"
         >
           <Link to="/nominees">
-            <Users className="h-4 w-4" /> Explore Nominees
+            <Users className="h-4 w-4" /> {t("flow.confirmation.explore")}
           </Link>
         </Button>
         <Button
@@ -47,7 +45,7 @@ export function NominationConfirmationScreen({
           variant="outline"
           className="rounded-full border-gold/40 text-gold hover:bg-gold/10 hover:text-gold gap-2"
         >
-          <Plus className="h-4 w-4" /> Nominate Another
+          <Plus className="h-4 w-4" /> {t("flow.confirmation.another")}
         </Button>
         <Button
           asChild
@@ -55,7 +53,7 @@ export function NominationConfirmationScreen({
           className="rounded-full border-white/20 text-white hover:bg-white/10 gap-2"
         >
           <Link to="/nominate/guidelines">
-            <BookOpen className="h-4 w-4" /> Read Guidelines
+            <BookOpen className="h-4 w-4" /> {t("flow.confirmation.guidelines")}
           </Link>
         </Button>
         <Button
@@ -64,7 +62,7 @@ export function NominationConfirmationScreen({
           className="rounded-full border-white/20 text-white hover:bg-white/10 gap-2"
         >
           <Link to="/sponsor">
-            <Handshake className="h-4 w-4" /> Become a Sponsor
+            <Handshake className="h-4 w-4" /> {t("flow.confirmation.sponsor")}
           </Link>
         </Button>
       </div>
