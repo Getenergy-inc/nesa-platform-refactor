@@ -965,25 +965,48 @@ Deno.serve(async (req) => {
       const uniqueCount = rowList.filter((r) => r.duplicate_status === "Unique").length;
 
       if (format === "csv") {
-        // Flatten each intake row + its audit_trail entries into CSV rows.
-        const headers = [
-          "batch_id",
-          "intake_id",
-          "record_id",
-          "form_kind",
-          "form_slug",
-          "identity_hash",
-          "duplicate_status",
-          "duplicate_of",
-          "ingested_at",
-          "ingested_by",
-          "audit_action",
-          "audit_reason",
-          "audit_canonical_id",
-          "audit_previous_status",
-          "audit_new_status",
-          "audit_actor_id",
-          "audit_created_at",
+        // Explicit, stable CSV column order and field-to-header mapping.
+        // Intake columns align with export_nomination_batch RPC output.
+        // Audit columns align with nomination_ingest_audit schema.
+        const INTAKE_CSV_COLUMNS: {
+          header: string;
+          accessor: (row: Record<string, unknown>) => unknown;
+        }[] = [
+          { header: "batch_id", accessor: () => batchId },
+          { header: "intake_id", accessor: (row) => row.intake_id ?? row.id },
+          { header: "record_id", accessor: (row) => row.record_id },
+          { header: "form_type", accessor: (row) => row.form_type },
+          { header: "award_group", accessor: (row) => row.award_group },
+          { header: "award_category", accessor: (row) => row.award_category },
+          { header: "award_subcategory", accessor: (row) => row.award_subcategory },
+          { header: "nominee_name_clean", accessor: (row) => row.nominee_name_clean },
+          { header: "nominee_type_clean", accessor: (row) => row.nominee_type_clean },
+          { header: "nominee_country_clean", accessor: (row) => row.nominee_country_clean },
+          { header: "nominee_region_clean", accessor: (row) => row.nominee_region_clean },
+          { header: "nominee_city_clean", accessor: (row) => row.nominee_city_clean },
+          { header: "impact_summary_clean", accessor: (row) => row.impact_summary_clean },
+          { header: "evidence_status", accessor: (row) => row.evidence_status },
+          { header: "verification_status", accessor: (row) => row.verification_status },
+          { header: "nomination_status", accessor: (row) => row.nomination_status },
+          { header: "identity_hash", accessor: (row) => row.identity_hash },
+          { header: "duplicate_status", accessor: (row) => row.duplicate_status },
+          { header: "duplicate_of", accessor: (row) => row.duplicate_of },
+          { header: "ingested_at", accessor: (row) => row.ingested_at },
+          { header: "ingested_by", accessor: (row) => row.ingested_by },
+          { header: "updated_at", accessor: (row) => row.updated_at },
+        ];
+
+        const AUDIT_CSV_COLUMNS: {
+          header: string;
+          accessor: (audit: Record<string, unknown>) => unknown;
+        }[] = [
+          { header: "audit_action", accessor: (a) => a.action },
+          { header: "audit_reason", accessor: (a) => a.reason },
+          { header: "audit_canonical_id", accessor: (a) => a.canonical_id },
+          { header: "audit_previous_status", accessor: (a) => a.previous_duplicate_status },
+          { header: "audit_new_status", accessor: (a) => a.new_duplicate_status },
+          { header: "audit_actor_id", accessor: (a) => a.actor_id },
+          { header: "audit_created_at", accessor: (a) => a.created_at },
         ];
 
         const escape = (v: unknown): string => {
@@ -992,35 +1015,19 @@ Deno.serve(async (req) => {
           return /[",\n\r]/.test(s) ? `"${s.replace(/"/g, '""')}"` : s;
         };
 
+        const headers = [
+          ...INTAKE_CSV_COLUMNS.map((c) => c.header),
+          ...AUDIT_CSV_COLUMNS.map((c) => c.header),
+        ];
         const lines: string[] = [headers.join(",")];
         for (const row of rowList) {
-          const trail = Array.isArray(row.audit_trail) ? row.audit_trail as Array<Record<string, unknown>> : [];
-          const base = [
-            batchId,
-            row.id,
-            row.record_id,
-            row.form_kind,
-            row.form_slug,
-            row.identity_hash,
-            row.duplicate_status,
-            row.duplicate_of,
-            row.ingested_at,
-            row.ingested_by,
-          ];
+          const trail = Array.isArray(row.audit_trail) ? (row.audit_trail as Array<Record<string, unknown>>) : [];
+          const base = INTAKE_CSV_COLUMNS.map((c) => c.accessor(row));
           if (trail.length === 0) {
-            lines.push([...base, "", "", "", "", "", "", ""].map(escape).join(","));
+            lines.push([...base, ...AUDIT_CSV_COLUMNS.map(() => "")].map(escape).join(","));
           } else {
             for (const a of trail) {
-              lines.push([
-                ...base,
-                a.action,
-                a.reason,
-                a.canonical_id,
-                a.previous_duplicate_status,
-                a.new_duplicate_status,
-                a.actor_id,
-                a.created_at,
-              ].map(escape).join(","));
+              lines.push([...base, ...AUDIT_CSV_COLUMNS.map((c) => c.accessor(a))].map(escape).join(","));
             }
           }
         }
