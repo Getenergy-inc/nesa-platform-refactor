@@ -208,7 +208,19 @@ export function CustomerCareChat() {
                   <span>{error}</span>
                 </div>
               </div>
-            )}
+            {/* Persistent escalation strip */}
+            <a
+              href={WHATSAPP_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="px-4 py-2 border-t border-border bg-muted/40 text-[11px] text-muted-foreground hover:text-primary flex items-center justify-between gap-2"
+            >
+              <span className="flex items-center gap-1.5">
+                <Sparkles className="h-3 w-3 text-primary" />
+                Need a human? Escalate on WhatsApp
+              </span>
+              <span className="font-medium text-foreground">+234 810 976 5897</span>
+            </a>
 
             {/* Input Area */}
             <form onSubmit={handleSubmit} className="p-4 border-t border-border">
