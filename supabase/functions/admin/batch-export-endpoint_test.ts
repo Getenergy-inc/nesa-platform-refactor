@@ -264,6 +264,7 @@ Deno.test("E2E: default (no format) returns JSON, not CSV", async () => {
   await withServer(async (base) => {
     const res = await fetch(
       `${base}/admin/nominations/batch-export/${BATCH_ID}`,
+      { headers: adminAuth },
     );
     const ct = res.headers.get("Content-Type") || "";
     const body = await res.json();
