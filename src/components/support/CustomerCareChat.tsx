@@ -1,11 +1,24 @@
 import { useState, useRef, useEffect } from "react";
+import { Link } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
-import { MessageCircle, X, Send, Trash2, Bot, User, Loader2, AlertCircle } from "lucide-react";
+import { MessageCircle, X, Send, Trash2, Bot, User, Loader2, AlertCircle, Sparkles, ShieldCheck } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { useCustomerCareChat, ChatMessage } from "@/hooks/useCustomerCareChat";
 import ReactMarkdown from "react-markdown";
+
+const CAPABILITY_LINKS: { label: string; to: string }[] = [
+  { label: "Nominations", to: "/nominate" },
+  { label: "Voting", to: "/vote" },
+  { label: "Sponsorship", to: "/sponsor" },
+  { label: "Volunteering", to: "/volunteer" },
+  { label: "Judging", to: "/judges" },
+  { label: "Local Chapters", to: "/chapters" },
+  { label: "RMSA", to: "/rebuild-my-school-africa" },
+  { label: "EduAid", to: "/eduaid-africa" },
+];
+const WHATSAPP_URL = "https://wa.me/2348109765897";
 
 export function CustomerCareChat() {
   const [isOpen, setIsOpen] = useState(false);
@@ -54,10 +67,13 @@ export function CustomerCareChat() {
             <Button
               onClick={() => setIsOpen(true)}
               size="lg"
-              aria-label="Chat with Sophia Support"
-              className="h-14 w-14 rounded-full bg-primary hover:bg-primary/90 shadow-lg hover:shadow-xl transition-all"
+              aria-label="Chat with Sophia — Official NESA-Africa Support Assistant"
+              className="h-14 w-14 rounded-full bg-primary hover:bg-primary/90 shadow-lg hover:shadow-xl transition-all relative"
             >
               <MessageCircle className="h-6 w-6" aria-hidden="true" />
+              <span className="absolute -top-1 -right-1 h-4 w-4 rounded-full bg-background border border-primary flex items-center justify-center">
+                <Sparkles className="h-2.5 w-2.5 text-primary" />
+              </span>
             </Button>
           </motion.div>
         )}
@@ -123,23 +139,20 @@ export function CustomerCareChat() {
                     judging, local chapters, RMSA and EduAid-Africa.
                   </p>
                   <div className="flex flex-wrap gap-1.5 justify-center mb-4">
-                    {[
-                      "Nominations",
-                      "Voting",
-                      "Sponsorship",
-                      "Volunteering",
-                      "Judging",
-                      "Local Chapters",
-                      "RMSA",
-                      "EduAid",
-                    ].map((cap) => (
-                      <span
-                        key={cap}
-                        className="text-[10px] px-2 py-0.5 rounded-full border border-primary/20 bg-primary/5 text-primary"
+                    {CAPABILITY_LINKS.map((cap) => (
+                      <Link
+                        key={cap.label}
+                        to={cap.to}
+                        onClick={() => setIsOpen(false)}
+                        className="text-[10px] px-2 py-0.5 rounded-full border border-primary/20 bg-primary/5 text-primary hover:bg-primary/10 transition-colors"
                       >
-                        {cap}
-                      </span>
+                        {cap.label}
+                      </Link>
                     ))}
+                  </div>
+                  <div className="flex items-center gap-1.5 text-[10px] text-muted-foreground mb-3">
+                    <ShieldCheck className="h-3 w-3 text-primary" />
+                    <span>Independent of judging, voting & sponsorship outcomes.</span>
                   </div>
                   <div className="flex flex-wrap gap-2 justify-center mb-4">
                     {[
@@ -196,6 +209,20 @@ export function CustomerCareChat() {
                 </div>
               </div>
             )}
+
+            {/* Persistent escalation strip */}
+            <a
+              href={WHATSAPP_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="px-4 py-2 border-t border-border bg-muted/40 text-[11px] text-muted-foreground hover:text-primary flex items-center justify-between gap-2"
+            >
+              <span className="flex items-center gap-1.5">
+                <Sparkles className="h-3 w-3 text-primary" />
+                Need a human? Escalate on WhatsApp
+              </span>
+              <span className="font-medium text-foreground">+234 810 976 5897</span>
+            </a>
 
             {/* Input Area */}
             <form onSubmit={handleSubmit} className="p-4 border-t border-border">
