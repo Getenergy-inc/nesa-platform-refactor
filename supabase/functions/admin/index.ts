@@ -959,7 +959,11 @@ Deno.serve(async (req) => {
 
       const batchMeta = metaEvent?.metadata ?? null;
 
-      const format = (url.searchParams.get("format") || "json").toLowerCase();
+      const formatParam = url.searchParams.get("format");
+      const format = (formatParam || "json").toLowerCase();
+      if (formatParam && format !== "csv" && format !== "json") {
+        return errorResponse(`Unsupported format "${format}". Use "csv" or "json".`, 400);
+      }
       const rowList = (rows || []) as Array<Record<string, unknown>>;
       const duplicateCount = rowList.filter((r) => r.duplicate_status === "Potential Duplicate").length;
       const uniqueCount = rowList.filter((r) => r.duplicate_status === "Unique").length;

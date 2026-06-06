@@ -125,7 +125,14 @@ function handler(req: Request): Response {
     (r) => r.duplicate_status === "Potential Duplicate",
   ).length;
   const uniqueCount = rows.filter((r) => r.duplicate_status === "Unique").length;
-  const format = (url.searchParams.get("format") || "json").toLowerCase();
+  const formatParam = url.searchParams.get("format");
+  const format = (formatParam || "json").toLowerCase();
+  if (formatParam && format !== "csv" && format !== "json") {
+    return new Response(
+      JSON.stringify({ ok: false, error: `Unsupported format "${format}". Use "csv" or "json".` }),
+      { status: 400, headers: { ...corsHeaders, "Content-Type": "application/json" } },
+    );
+  }
   if (format === "csv") {
     const csv = buildBatchExportCsv(rows, batchId);
     return new Response(csv, {
@@ -237,5 +244,24 @@ Deno.test("E2E: default (no format) returns JSON, not CSV", async () => {
     assertEquals(body.ok, true);
     assertEquals(Array.isArray(body.data), true);
     assertEquals(body.data.length, 2);
+  });
+});
+
+Deno.test("E2E: invalid format=bad returns 400 JSON error, not CSV", async () => {
+  await withServer(async (base) => {
+    const res = await fetch(
+      `${base}/admin/nominations/batch-export/${BATCH_ID}?format=bad`,
+    );
+    const ct = res.headers.get("Content-Type") || "";
+    const body = await res.json();
+
+    assertEquals(res.status, 400);
+    assertStringIncludes(ct, "application/json");
+    assertEquals(body.ok, false);
+    assertStringIncludes(body.error, "Unsupported format");
+    assertStringIncludes(body.error, "bad");
+    // Ensure no CSV download artifacts are present
+    assertEquals(res.headers.get("Content-Disposition"), null);
+    assertEquals(ct.includes("text/csv"), false);
   });
 });
