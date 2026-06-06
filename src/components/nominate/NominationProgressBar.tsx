@@ -1,25 +1,27 @@
 import { Check } from "lucide-react";
+import { useTranslation } from "react-i18next";
 import type { FlowStep } from "./types";
 
-const STEPS: { key: FlowStep; label: string }[] = [
-  { key: "flash", label: "How it works" },
-  { key: "pathway", label: "Pathway" },
-  { key: "entry", label: "Nominee details" },
-  { key: "review", label: "Review" },
-  { key: "identity", label: "Your details" },
-  { key: "confirmation", label: "Done" },
+const STEP_KEYS: { key: FlowStep; i18n: string }[] = [
+  { key: "flash", i18n: "flow.steps.flash" },
+  { key: "pathway", i18n: "flow.steps.pathway" },
+  { key: "entry", i18n: "flow.steps.entry" },
+  { key: "review", i18n: "flow.steps.review" },
+  { key: "identity", i18n: "flow.steps.identity" },
+  { key: "confirmation", i18n: "flow.steps.confirmation" },
 ];
 
 export function NominationProgressBar({ current }: { current: FlowStep }) {
+  const { t } = useTranslation("nomination");
   const currentIdx = Math.max(
     0,
-    STEPS.findIndex((s) => s.key === current || (current === "auth" && s.key === "identity")),
+    STEP_KEYS.findIndex((s) => s.key === current || (current === "auth" && s.key === "identity")),
   );
 
   return (
     <nav aria-label="Nomination progress" className="w-full">
       <ol className="flex items-center gap-2 overflow-x-auto pb-2">
-        {STEPS.map((s, i) => {
+        {STEP_KEYS.map((s, i) => {
           const done = i < currentIdx;
           const active = i === currentIdx;
           return (
@@ -34,9 +36,9 @@ export function NominationProgressBar({ current }: { current: FlowStep }) {
                 }`}
               >
                 {done ? <Check className="h-3 w-3" /> : <span className="font-semibold">{i + 1}</span>}
-                <span className="whitespace-nowrap">{s.label}</span>
+                <span className="whitespace-nowrap">{t(s.i18n)}</span>
               </div>
-              {i < STEPS.length - 1 && <span className="h-px w-4 bg-white/15" aria-hidden />}
+              {i < STEP_KEYS.length - 1 && <span className="h-px w-4 bg-white/15" aria-hidden />}
             </li>
           );
         })}
