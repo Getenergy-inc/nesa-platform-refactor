@@ -614,6 +614,228 @@ Deno.serve(async (req) => {
       }
     }
 
+    // ================================================================
+    // NOMINATIONS INGEST — POST /admin/nominations/ingest
+    // Maps Raw Form Responses rows → Cleaned Data records using the
+    // dataIntakeSpec contract (NESA2026/RMSA2027 record_id, status enums).
+    // Returns cleaned rows + per-row warnings; does NOT persist.
+    // ================================================================
+    if (domain === "nominations" && action === "ingest" && req.method === "POST") {
+      // Award family + category code maps (mirrors src/config/nomination/dataIntakeSpec.ts)
+      const AWARD_GROUP_CODES: Record<string, string> = {
+        "africa-education-icon": "ICON",
+        "gold-blue-garnet": "GBG",
+        platinum: "PLT",
+        influencer: "IEIA",
+      };
+      const CATEGORY_CODES: Record<string, string> = {
+        "education-content-social-media-influencers": "SMI",
+        "african-footballers-supporting-education": "FTB",
+        "african-musicians-supporting-education": "MUS",
+        "africa-education-icon-lifetime-achievement-2006-2026": "ICON",
+        "africa-education-philanthropy-icon-of-the-decade": "PHIL",
+        "literary-new-curriculum-advocate-icon-of-the-decade": "LITCUR",
+        "africa-technical-educator-icon-of-the-decade": "TECH",
+        "best-csr-for-education-nigeria": "CSRNG",
+        "best-csr-for-education-africa-regional": "CSRAF",
+        "best-edutech-innovation-for-education-africa-regional": "EDTECH",
+        "best-media-organisation-for-education-advocacy-nigeria": "MEDIA",
+        "best-ngo-for-education-advancement-nigeria": "NGONG",
+        "best-ngo-for-education-advancement-africa-regional": "NGOAF",
+        "best-stem-education-programme-africa-regional": "STEM",
+        "best-creative-arts-contribution-to-education-nigeria": "ARTNG",
+        "best-education-policy-implementation-state-nigeria": "POLST",
+        "best-tertiary-institution-library-nigeria": "LIBNG",
+        "excellence-in-research-development-for-education-nigeria": "RDNG",
+        "excellence-in-christian-education-impact-africa-regional": "CHRIST",
+        "excellence-in-islamic-education-impact-africa-regional": "ISLAM",
+        "excellence-in-political-leadership-for-education-nigeria": "POLNG",
+        "excellence-in-international-partnership-for-education-africa": "INTPART",
+        "excellence-in-diaspora-educational-impact-international": "DIASP",
+      };
+      const REGION_CODES: Record<string, string> = {
+        "west-africa": "WAF", "east-africa": "EAF", "central-africa": "CAF",
+        "southern-africa": "SAF", "north-africa": "NAF", "sahel-africa": "SAH",
+        "horn-of-africa": "HAF", "indian-ocean-islands": "IOI",
+        "african-diaspora": "DIA", "friends-of-africa": "FOA",
+      };
+
+      const ContextSchema = z.discriminatedUnion("formType", [
+        z.object({
+          formType: z.literal("award"),
+          family: z.enum(["africa-education-icon", "gold-blue-garnet", "platinum", "influencer"]),
+          categorySlug: z.string().min(1),
+          categoryName: z.string().min(1).max(200),
+          subcategorySlug: z.string().max(200).optional(),
+          defaultRegion: z.string().max(100).optional(),
+        }),
+        z.object({
+          formType: z.literal("rmsa"),
+          regionSlug: z.string().min(1),
+          regionName: z.string().min(1).max(100),
+        }),
+      ]);
+
+      const BodySchema = z.object({
+        headers: z.array(z.string()).min(1).max(200),
+        rows: z.array(z.array(z.union([z.string(), z.number(), z.null()]).transform((v) => v == null ? "" : String(v)))).max(1000),
+        startingRowNumber: z.number().int().min(1).max(1_000_000).optional(),
+        context: ContextSchema,
+      });
+
+      const parsed = BodySchema.safeParse(await req.json());
+      if (!parsed.success) return errorResponse(formatZodError(parsed.error), 400);
+
+      const { headers, rows, context } = parsed.data;
+      const start = parsed.data.startingRowNumber ?? 1;
+
+      // --- inline mapping helpers (mirror src/lib/nominations/mapRawRow.ts) ---
+      const URL_RE = /^https?:\/\/[^\s]+$/i;
+      const PLACEHOLDER_EVIDENCE = new Set([
+        "yes", "no", "google it", "instagram", "facebook", "twitter", "x", "tiktok", "n/a", "na", "none",
+      ]);
+      const norm = (h: string) =>
+        h.trim().toLowerCase().replace(/[^a-z0-9]+/g, "_").replace(/^_+|_+$/g, "");
+      const idx = new Map<string, number>();
+      headers.forEach((h, i) => {
+        const k = norm(h);
+        if (k && !idx.has(k)) idx.set(k, i);
+      });
+      const getField = (row: string[], ...aliases: string[]): string => {
+        for (const a of aliases) {
+          const pos = idx.get(norm(a));
+          if (pos != null) {
+            const v = row[pos];
+            if (v != null && String(v).trim().length > 0) return String(v).trim();
+          }
+        }
+        return "";
+      };
+      const properCase = (s: string): string =>
+        !s ? s : s.split(/(\s+|[-/])/).map((t) => {
+          if (!t.trim() || /[-/\s]/.test(t)) return t;
+          if (t.length > 1 && t === t.toUpperCase() && /^[A-Z0-9]+$/.test(t)) return t;
+          return t.charAt(0).toUpperCase() + t.slice(1).toLowerCase();
+        }).join("");
+      const classifyEvidence = (links: string[]) => {
+        const real = links.filter((l) => URL_RE.test(l) && !PLACEHOLDER_EVIDENCE.has(l.toLowerCase()));
+        if (real.length === 0) return "Evidence Missing";
+        if (real.length === 1) return "Evidence Weak";
+        return "Evidence Review Pending";
+      };
+      const fmtDate = (d: Date) => {
+        const y = d.getUTCFullYear();
+        const m = String(d.getUTCMonth() + 1).padStart(2, "0");
+        const dd = String(d.getUTCDate()).padStart(2, "0");
+        return `${y}${m}${dd}`;
+      };
+      const fmtRow = (r: number) => String(Math.max(0, Math.floor(r))).padStart(4, "0");
+
+      const cleaned: Record<string, string>[] = [];
+      const warnings: { rowNumber: number; messages: string[] }[] = [];
+
+      rows.forEach((row, i) => {
+        const rowNumber = start + i;
+        const msgs: string[] = [];
+        if (row.length !== headers.length) {
+          msgs.push(`row length ${row.length} ≠ headers length ${headers.length}`);
+        }
+        const stampRaw = getField(row, "Timestamp", "Submitted At");
+        const submittedAt =
+          stampRaw && !Number.isNaN(Date.parse(stampRaw)) ? new Date(stampRaw) : new Date();
+
+        let recordId = "";
+        try {
+          if (context.formType === "award") {
+            const group = AWARD_GROUP_CODES[context.family];
+            const cat = CATEGORY_CODES[context.categorySlug];
+            if (!group) throw new Error(`Unknown award family: ${context.family}`);
+            if (!cat) throw new Error(`Unknown category slug: ${context.categorySlug}`);
+            recordId = `NESA2026-${group}-${cat}-${fmtDate(submittedAt)}-${fmtRow(rowNumber)}`;
+          } else {
+            const region = REGION_CODES[context.regionSlug];
+            if (!region) throw new Error(`Unknown region slug: ${context.regionSlug}`);
+            recordId = `RMSA2027-${region}-${fmtDate(submittedAt)}-${fmtRow(rowNumber)}`;
+          }
+        } catch (err) {
+          msgs.push(`record_id build failed: ${(err as Error).message}`);
+        }
+
+        const nomineeName = properCase(getField(row, "Nominee Name", "Nominee Full Name", "Name"));
+        const nomineeCountry = getField(row, "Nominee Country", "Country");
+        const evidenceLinks = [
+          getField(row, "Evidence Link 1", "Evidence Link"),
+          getField(row, "Evidence Link 2"),
+          getField(row, "Website or Public Profile Link", "Website"),
+          getField(row, "Social Media Link", "Social Media"),
+          getField(row, "News Article or Public Record Link"),
+        ].filter(Boolean);
+        const evidenceStatus = classifyEvidence(evidenceLinks);
+        const declarationRaw = getField(row, "I agree", "Declaration", "Consent");
+        const declarationOk = /^(yes|true|i agree|agree|y|1|checked)$/i.test(declarationRaw);
+        if (!declarationOk) msgs.push("declaration checkbox not confirmed");
+
+        let nominationStatus = "New Submission";
+        if (!nomineeName || !nomineeCountry) nominationStatus = "Incomplete";
+        else if (evidenceStatus === "Evidence Missing") nominationStatus = "Evidence Missing";
+        else if (evidenceStatus === "Evidence Weak") nominationStatus = "Evidence Weak";
+
+        const subcategory =
+          getField(row, "Award Subcategory", "Subcategory") ||
+          (context.formType === "award" ? context.subcategorySlug ?? "" : "");
+
+        cleaned.push({
+          record_id: recordId,
+          form_type: context.formType,
+          award_group: context.formType === "award" ? context.family : "rmsa",
+          award_category:
+            context.formType === "award"
+              ? context.categoryName
+              : "RMSA Special Needs School Intervention",
+          award_subcategory: subcategory,
+          nominee_name_clean: nomineeName,
+          nominee_type_clean: getField(row, "Nominee Type", "Type of Nominee"),
+          nominee_country_clean: nomineeCountry,
+          nominee_region_clean:
+            getField(row, "African Region Connected to Nominee", "Region", "Nominee Region") ||
+            (context.formType === "award"
+              ? context.defaultRegion ?? ""
+              : context.regionName),
+          nominee_city_clean: getField(row, "City", "City / State / Province"),
+          impact_summary_clean: getField(
+            row,
+            "What education impact has the nominee made",
+            "Education Impact",
+            "Impact Summary",
+          ).replace(/\s+/g, " ").trim().slice(0, 2000),
+          evidence_status: evidenceStatus,
+          duplicate_status: "Not Checked",
+          verification_status: "Verification Pending",
+          nomination_status: nominationStatus,
+          assigned_reviewer: "",
+          reviewer_notes: "",
+          website_sync_status: "Not Published",
+        });
+
+        if (msgs.length) warnings.push({ rowNumber, messages: msgs });
+      });
+
+      // Audit (best-effort; never blocks the response)
+      adminSupabase.from("audit_events").insert({
+        action: "nominations_ingest_mapped",
+        entity_type: "google_form",
+        actor_id: userId,
+        metadata: {
+          form_type: context.formType,
+          context: context,
+          total: cleaned.length,
+          warning_count: warnings.length,
+        },
+      }).then(() => {}, (e) => console.error("audit insert failed", e));
+
+      return respond(cleaned, { total: cleaned.length, warnings });
+    }
+
     return errorResponse("Not found", 404);
 
   } catch (error: unknown) {
