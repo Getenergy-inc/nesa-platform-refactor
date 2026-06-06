@@ -92,9 +92,27 @@ function loadInitial(): FlowState {
 }
 
 export default function NominateFlow() {
-  const { t } = useTranslation("nomination");
-  const [params] = useSearchParams();
+  const { t, i18n } = useTranslation("nomination");
+  const [params, setParams] = useSearchParams();
   const [state, dispatch] = useReducer(reducer, undefined, loadInitial);
+
+  // Sync URL ?lang= -> i18n on mount / external navigation
+  useEffect(() => {
+    const langParam = params.get("lang");
+    if (langParam && isValidLocale(langParam) && langParam !== i18n.language) {
+      changeLanguage(langParam);
+    }
+  }, [params, i18n.language]);
+
+  // Sync i18n -> URL ?lang= when user switches language via UI
+  useEffect(() => {
+    const langParam = params.get("lang");
+    if (i18n.language && i18n.language !== langParam) {
+      const next = new URLSearchParams(params);
+      next.set("lang", i18n.language);
+      setParams(next, { replace: true });
+    }
+  }, [i18n.language, params, setParams]);
 
   // Capture URL preselects
   useEffect(() => {
