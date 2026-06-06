@@ -6862,6 +6862,15 @@ export type Database = {
         Args: { nominee_id: string }
         Returns: undefined
       }
+      ingest_nomination_intake_batch: {
+        Args: { p_rows: Json }
+        Returns: {
+          duplicate_of: string
+          duplicate_status: string
+          id: string
+          record_id: string
+        }[]
+      }
       is_stage_open: {
         Args: { _action: Database["public"]["Enums"]["stage_action"] }
         Returns: boolean

@@ -821,8 +821,11 @@ Deno.serve(async (req) => {
       });
 
       // ----------------------------------------------------------------
-      // Persist cleaned rows to public.nomination_intake (idempotent
-      // upsert on record_id) + duplicate detection via identity_hash.
+      // Persist cleaned rows via a single transactional RPC.
+      // The RPC upserts on record_id (preserving duplicate_of/status and
+      // ingested_at on retries) and deterministically marks the earliest
+      // row per identity_hash as canonical. Calling the endpoint with the
+      // same payload N times yields identical persisted state.
       // ----------------------------------------------------------------
       const persisted: { record_id: string; id: string; duplicate_of: string | null; duplicate_status: string }[] = [];
       const persistErrors: { record_id: string; message: string }[] = [];
@@ -855,7 +858,6 @@ Deno.serve(async (req) => {
           nominee_city_clean: row.nominee_city_clean,
           impact_summary_clean: row.impact_summary_clean,
           evidence_status: row.evidence_status,
-          duplicate_status: row.duplicate_status,
           verification_status: row.verification_status,
           nomination_status: row.nomination_status,
           assigned_reviewer: row.assigned_reviewer,
@@ -865,40 +867,26 @@ Deno.serve(async (req) => {
           ingested_by: userId,
         }));
 
-        const { data: upserted, error: upErr } = await adminSupabase
-          .from("nomination_intake")
-          .upsert(payload, { onConflict: "record_id" })
-          .select("id, record_id, identity_hash");
+        const { data: rpcRows, error: rpcErr } = await adminSupabase.rpc(
+          "ingest_nomination_intake_batch",
+          { p_rows: payload },
+        );
 
-        if (upErr) {
-          console.error("nomination_intake upsert failed", upErr);
-          persistErrors.push({ record_id: "*", message: upErr.message });
-        } else if (upserted) {
-          for (const r of upserted) {
-            let duplicateOf: string | null = null;
-            let dupStatus = "Unique";
-            if (r.identity_hash) {
-              const { data: dups } = await adminSupabase
-                .from("nomination_intake")
-                .select("id, ingested_at")
-                .eq("identity_hash", r.identity_hash)
-                .neq("id", r.id)
-                .order("ingested_at", { ascending: true })
-                .limit(1);
-              if (dups && dups.length > 0) {
-                duplicateOf = dups[0].id as string;
-                dupStatus = "Potential Duplicate";
-                await adminSupabase
-                  .from("nomination_intake")
-                  .update({ duplicate_status: dupStatus, duplicate_of: duplicateOf })
-                  .eq("id", r.id);
-              }
-            }
+        if (rpcErr) {
+          console.error("ingest_nomination_intake_batch failed", rpcErr);
+          persistErrors.push({ record_id: "*", message: rpcErr.message });
+        } else if (Array.isArray(rpcRows)) {
+          for (const r of rpcRows as Array<{
+            record_id: string;
+            id: string;
+            duplicate_of: string | null;
+            duplicate_status: string;
+          }>) {
             persisted.push({
-              record_id: r.record_id as string,
-              id: r.id as string,
-              duplicate_of: duplicateOf,
-              duplicate_status: dupStatus,
+              record_id: r.record_id,
+              id: r.id,
+              duplicate_of: r.duplicate_of ?? null,
+              duplicate_status: r.duplicate_status ?? "Unique",
             });
           }
         }
