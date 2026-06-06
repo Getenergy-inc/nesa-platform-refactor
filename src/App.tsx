@@ -549,7 +549,9 @@ const App = () => (
                     path="/awards/categories"
                     element={
                       <WithLayout>
-                        <CategoryMasterIndex />
+                        <WithFirewall>
+                          <CategoryMasterIndex />
+                        </WithFirewall>
                       </WithLayout>
                     }
                   />
