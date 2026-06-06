@@ -5,6 +5,8 @@ import { motion, AnimatePresence } from "framer-motion";
 import { toast } from "sonner";
 import { useTranslation } from "react-i18next";
 import { trackEvent } from "@/lib/analytics";
+import { changeLanguage } from "@/lib/i18n";
+import { isValidLocale } from "@/config/i18n.config";
 
 import { LanguageSwitcher } from "@/components/i18n";
 import { NominationProgressBar } from "@/components/nominate/NominationProgressBar";
