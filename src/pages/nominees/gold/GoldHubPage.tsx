@@ -93,7 +93,7 @@ export default function GoldHubPage() {
                     <Trophy className="w-4 h-4" /> Explore Gold Nominees
                   </Button>
                 </a>
-                <Link to="/nominate">
+                <Link to="/nominate?family=gold-blue-garnet">
                   <Button size="lg" variant="outline" className="border-gold/40 text-gold hover:bg-gold/10 rounded-full px-7 gap-2 bg-charcoal/40 backdrop-blur">
                     Nominate a Candidate <ArrowRight className="w-4 h-4" />
                   </Button>
