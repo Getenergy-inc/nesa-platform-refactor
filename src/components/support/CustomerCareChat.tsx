@@ -208,6 +208,8 @@ export function CustomerCareChat() {
                   <span>{error}</span>
                 </div>
               </div>
+            )}
+
             {/* Persistent escalation strip */}
             <a
               href={WHATSAPP_URL}
