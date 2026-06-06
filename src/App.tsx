@@ -55,6 +55,8 @@ import OTPVerification from "./pages/auth/OTPVerification";
 import ForgotPassword from "./pages/auth/ForgotPassword";
 import ResetPassword from "./pages/auth/ResetPassword";
 import NominateFlow from "./pages/NominateFlow";
+import NominateMvp from "./pages/NominateMvp";
+import NominateSchool from "./pages/impact/NominateSchool";
 import Dashboard from "./pages/Dashboard";
 import Unauthorized from "./pages/Unauthorized";
 import NotFound from "./pages/NotFound";
@@ -515,6 +517,14 @@ const App = () => (
                   />
                   <Route path="/impact/regional-school-intervention" element={<Navigate to="/impact" replace />} />
                   <Route path="/impact/rebuild-my-school-africa" element={<Navigate to="/eduaid-africa/rebuild-my-school" replace />} />
+                  <Route
+                    path="/impact/nominate-school"
+                    element={
+                      <WithLayout>
+                        <NominateSchool />
+                      </WithLayout>
+                    }
+                  />
 
                   <Route
                     path="/videos"
@@ -1167,8 +1177,20 @@ const App = () => (
                   <Route path="/account/login" element={<Login />} />
 
                   {/* User Actions */}
+                  {/* /nominate → Google Forms MVP intake (brief §5). Legacy multi-step
+                      flow remains available at /nominate/advanced for power users. */}
                   <Route
                     path="/nominate"
+                    element={
+                      <WithLayout>
+                        <WithFirewall>
+                          <NominateMvp />
+                        </WithFirewall>
+                      </WithLayout>
+                    }
+                  />
+                  <Route
+                    path="/nominate/advanced"
                     element={
                       <WithLayout>
                         <WithFirewall>
