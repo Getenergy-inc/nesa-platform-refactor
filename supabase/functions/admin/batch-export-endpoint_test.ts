@@ -100,6 +100,8 @@ const FIXTURE_ROWS = [
 ];
 
 // Mirrors the production handler branch in index.ts for the CSV format.
+const UUID_RE = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
+
 function handler(req: Request): Response {
   if (req.method === "OPTIONS") {
     return new Response(null, { headers: corsHeaders });
@@ -118,6 +120,12 @@ function handler(req: Request): Response {
       status: 404,
       headers: { ...corsHeaders, "Content-Type": "application/json" },
     });
+  }
+  if (!UUID_RE.test(resourceId)) {
+    return new Response(
+      JSON.stringify({ ok: false, error: "batch_id must be a valid UUID" }),
+      { status: 400, headers: { ...corsHeaders, "Content-Type": "application/json" } },
+    );
   }
   const batchId = resourceId;
   const rows = FIXTURE_ROWS;
