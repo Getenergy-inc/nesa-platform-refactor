@@ -69,4 +69,18 @@ describe("logFormAutoPromotion", () => {
     expect(second.logged).toBe(true);
     expect(insertMock).toHaveBeenCalledTimes(2);
   });
+
+  it("treats a unique-violation (23505) as a successful cross-session dedupe", async () => {
+    insertMock.mockResolvedValueOnce({
+      error: { code: "23505", message: "duplicate key" },
+    });
+    const res = await logFormAutoPromotion(base);
+    expect(res.logged).toBe(true);
+    expect(res.deduped).toBe(true);
+    // Subsequent calls should be blocked by the local session marker.
+    const repeat = await logFormAutoPromotion(base);
+    expect(repeat.logged).toBe(false);
+    expect(insertMock).toHaveBeenCalledTimes(1);
+  });
 });
+

@@ -44,7 +44,7 @@ function markLogged(input: LogFormAutoPromotionInput): void {
 
 export async function logFormAutoPromotion(
   input: LogFormAutoPromotionInput,
-): Promise<{ logged: boolean; error?: unknown }> {
+): Promise<{ logged: boolean; deduped?: boolean; error?: unknown }> {
   if (input.rawStatus !== "Link Pending" || input.resolvedStatus !== "Active") {
     return { logged: false };
   }
@@ -66,10 +66,16 @@ export async function logFormAutoPromotion(
     },
   });
 
-  if (error) {
+  // 23505 = unique_violation. A partial unique index on
+  // (metadata->>'form_kind', metadata->>'form_slug') WHERE action='form_auto_promoted'
+  // enforces global one-row-per-form dedupe. Treat that as a successful
+  // dedupe — the event already exists from another session/admin, so we
+  // mark it as logged locally and stop retrying.
+  if (error && (error as { code?: string }).code !== "23505") {
     return { logged: false, error };
   }
 
   markLogged(input);
-  return { logged: true };
+  return { logged: true, deduped: error ? true : false };
 }
+
