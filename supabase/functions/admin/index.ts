@@ -867,9 +867,11 @@ Deno.serve(async (req) => {
           ingested_by: userId,
         }));
 
+        const batchId = crypto.randomUUID();
+
         const { data: rpcRows, error: rpcErr } = await adminSupabase.rpc(
           "ingest_nomination_intake_batch",
-          { p_rows: payload },
+          { p_rows: payload, p_batch_id: batchId, p_actor_id: userId },
         );
 
         if (rpcErr) {
@@ -881,6 +883,7 @@ Deno.serve(async (req) => {
             id: string;
             duplicate_of: string | null;
             duplicate_status: string;
+            batch_id: string;
           }>) {
             persisted.push({
               record_id: r.record_id,
@@ -890,22 +893,31 @@ Deno.serve(async (req) => {
             });
           }
         }
-      }
 
-      // Audit (best-effort; never blocks the response)
-      adminSupabase.from("audit_events").insert({
-        action: "nominations_ingest_mapped",
-        entity_type: "google_form",
-        actor_id: userId,
-        metadata: {
-          form_type: context.formType,
-          context: context,
+        // Audit (best-effort; never blocks the response)
+        adminSupabase.from("audit_events").insert({
+          action: "nominations_ingest_mapped",
+          entity_type: "google_form",
+          actor_id: userId,
+          metadata: {
+            form_type: context.formType,
+            context: context,
+            batch_id: batchId,
+            total: cleaned.length,
+            persisted_count: persisted.length,
+            duplicate_count: persisted.filter((p) => p.duplicate_status === "Potential Duplicate").length,
+            warning_count: warnings.length,
+          },
+        }).then(() => {}, (e) => console.error("audit insert failed", e));
+
+        return respond(cleaned, {
           total: cleaned.length,
-          persisted_count: persisted.length,
-          duplicate_count: persisted.filter((p) => p.duplicate_status === "Potential Duplicate").length,
-          warning_count: warnings.length,
-        },
-      }).then(() => {}, (e) => console.error("audit insert failed", e));
+          warnings,
+          persisted,
+          persist_errors: persistErrors,
+          batch_id: batchId,
+        });
+      }
 
       return respond(cleaned, {
         total: cleaned.length,
