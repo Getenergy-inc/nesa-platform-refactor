@@ -162,9 +162,18 @@ export default function NominateSchool() {
                 <p className="text-xs uppercase tracking-[0.18em] text-gold/80 font-semibold">
                   EduAid-Africa · Special Needs School Intervention
                 </p>
-                <h2 className="font-display text-2xl md:text-3xl text-white">
-                  {region.region} — School Nomination
-                </h2>
+                <div className="flex items-center gap-2 flex-wrap">
+                  <h2 className="font-display text-2xl md:text-3xl text-white">
+                    {region.region} — School Nomination
+                  </h2>
+                  {rawRegion && (
+                    <FormAutoPromotedBadge
+                      rawStatus={rawRegion.status}
+                      resolvedStatus={region.status}
+                      size="md"
+                    />
+                  )}
+                </div>
               </div>
 
               <IntegrityNotice />
