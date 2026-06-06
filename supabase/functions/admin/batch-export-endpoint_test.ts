@@ -330,3 +330,38 @@ Deno.test("E2E: invalid batch_id returns 400 JSON error, not CSV", async () => {
     assertEquals(ct.includes("text/csv"), false);
   });
 });
+
+Deno.test("E2E: unauthenticated request returns 403 and no CSV headers", async () => {
+  await withServer(async (base) => {
+    const res = await fetch(
+      `${base}/admin/nominations/batch-export/${BATCH_ID}?format=csv`,
+    );
+    const ct = res.headers.get("Content-Type") || "";
+    const body = await res.json();
+
+    assertEquals(res.status, 403);
+    assertStringIncludes(ct, "application/json");
+    assertEquals(body.ok, false);
+    assertEquals(body.error, "Forbidden");
+    assertEquals(res.headers.get("Content-Disposition"), null);
+    assertEquals(ct.includes("text/csv"), false);
+  });
+});
+
+Deno.test("E2E: unauthorized request with bad token returns 403 and no CSV headers", async () => {
+  await withServer(async (base) => {
+    const res = await fetch(
+      `${base}/admin/nominations/batch-export/${BATCH_ID}?format=csv`,
+      { headers: { Authorization: "Bearer invalid-token" } },
+    );
+    const ct = res.headers.get("Content-Type") || "";
+    const body = await res.json();
+
+    assertEquals(res.status, 403);
+    assertStringIncludes(ct, "application/json");
+    assertEquals(body.ok, false);
+    assertEquals(body.error, "Forbidden");
+    assertEquals(res.headers.get("Content-Disposition"), null);
+    assertEquals(ct.includes("text/csv"), false);
+  });
+});
