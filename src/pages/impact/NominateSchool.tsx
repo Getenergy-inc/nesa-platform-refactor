@@ -130,9 +130,16 @@ export default function NominateSchool() {
                         {r.shortDescription}
                       </p>
                     ) : null}
-                    <p className="text-[11px] uppercase tracking-[0.16em] mt-3 text-white/55">
-                      Form status: <span className="text-gold">{r.status}</span>
-                    </p>
+                    <div className="flex items-center gap-2 mt-3">
+                      <p className="text-[11px] uppercase tracking-[0.16em] text-white/55">
+                        Form status: <span className="text-gold">{r.status}</span>
+                      </p>
+                      <FormAutoPromotedBadge
+                        rawStatus={RMSA_REGIONAL_FORMS_RAW.find((raw) => raw.slug === r.slug)?.status ?? r.status}
+                        resolvedStatus={r.status}
+                        size="sm"
+                      />
+                    </div>
                   </button>
                 ))}
               </div>
