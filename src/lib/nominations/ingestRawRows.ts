@@ -8,10 +8,24 @@ export interface IngestRequest {
   context: IngestContext;
 }
 
+export interface IngestPersistedRecord {
+  record_id: string;
+  id: string;
+  duplicate_of: string | null;
+  duplicate_status: string;
+}
+
+export interface IngestPersistError {
+  record_id: string;
+  message: string;
+}
+
 export interface IngestResponse {
   cleaned: CleanedRow[];
   total: number;
   warnings: { rowNumber: number; messages: string[] }[];
+  persisted: IngestPersistedRecord[];
+  persistErrors: IngestPersistError[];
 }
 
 /**
