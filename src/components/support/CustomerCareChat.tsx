@@ -18,7 +18,7 @@ const CAPABILITY_LINKS: { label: string; to: string }[] = [
   { label: "RMSA", to: "/rebuild-my-school-africa" },
   { label: "EduAid", to: "/eduaid-africa" },
 ];
-const WHATSAPP_URL = "https://wa.me/2348109765897";
+const WHATSAPP_URL = "https://wa.me/2347077456855";
 
 export function CustomerCareChat() {
   const [isOpen, setIsOpen] = useState(false);
@@ -173,12 +173,12 @@ export function CustomerCareChat() {
                     ))}
                   </div>
                   <a
-                    href="https://wa.me/2348109765897"
+                    href="https://wa.me/2347077456855"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-[11px] text-muted-foreground hover:text-primary underline-offset-2 hover:underline"
                   >
-                    Need a human? Escalate on WhatsApp: +234 810 976 5897
+                    Need a human? Escalate on WhatsApp: +234 707 745 6855
                   </a>
                 </div>
               ) : (
@@ -221,7 +221,7 @@ export function CustomerCareChat() {
                 <Sparkles className="h-3 w-3 text-primary" />
                 Need a human? Escalate on WhatsApp
               </span>
-              <span className="font-medium text-foreground">+234 810 976 5897</span>
+              <span className="font-medium text-foreground">+234 707 745 6855</span>
             </a>
 
             {/* Input Area */}
