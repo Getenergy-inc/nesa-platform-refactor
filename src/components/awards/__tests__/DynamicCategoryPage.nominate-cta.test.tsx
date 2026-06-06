@@ -83,7 +83,7 @@ describe("DynamicCategoryPage Nominate CTA deep links", () => {
 
   it.each([
     ["best-csr-for-education-nigeria", "Best CSR in Education (Nigeria)"],
-    ["best-ngo-for-education-advancement-africa-regional", "Best NGO for Education Advancement (Africa Regional)"],
+    ["best-ngo-for-education-advancement-africa-regional", "Best NGO Contribution to Education for All (Africa Regional)"],
     ["best-stem-education-programme-africa-regional", "Best STEM Education Programme (Africa Regional)"],
   ] as const)(
     "slug %s on '%s' yields correct /nominate?category= hrefs",
