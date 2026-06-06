@@ -194,10 +194,13 @@ async function withServer<T>(fn: (baseUrl: string) => Promise<T>): Promise<T> {
   }
 }
 
+const adminAuth = { Authorization: `Bearer ${VALID_ADMIN_TOKEN}` };
+
 Deno.test("E2E: CSV export — status, headers, and Content-Disposition", async () => {
   await withServer(async (base) => {
     const res = await fetch(
       `${base}/admin/nominations/batch-export/${BATCH_ID}?format=csv`,
+      { headers: adminAuth },
     );
     const body = await res.text();
     assertEquals(res.status, 200);
