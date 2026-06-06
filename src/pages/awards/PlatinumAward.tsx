@@ -133,7 +133,7 @@ export default function PlatinumAward() {
               Nominate yourself or someone making a difference in African education.
             </p>
             <Button asChild size="lg" className="bg-primary text-primary-foreground">
-              <Link to="/nominate">Start Nomination</Link>
+              <Link to="/nominate?family=platinum">Start Nomination</Link>
             </Button>
           </div>
         </section>
