@@ -1171,7 +1171,9 @@ const App = () => (
                     path="/nominate"
                     element={
                       <WithLayout>
-                        <Nominate />
+                        <WithFirewall>
+                          <Nominate />
+                        </WithFirewall>
                       </WithLayout>
                     }
                   />
