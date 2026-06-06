@@ -491,7 +491,7 @@ export function DynamicCategoryPage({ categoryTitle, nominationType, nominateCat
             </p>
             <div className="flex flex-wrap justify-center gap-4">
               <Button asChild size="lg" className="bg-gold hover:bg-gold-dark text-charcoal font-semibold rounded-full gap-2">
-                <Link to="/nominate">
+                <Link to={nominateHref}>
                   <Award className="h-4 w-4" />
                   Submit Nomination
                   <ArrowRight className="h-4 w-4" />
