@@ -6861,6 +6861,33 @@ export type Database = {
       detect_vote_fraud: { Args: { p_season_id: string }; Returns: Json }
       ensure_user_wallet: { Args: { _user_id: string }; Returns: string }
       escalate_overdue_nrc_assignments: { Args: never; Returns: number }
+      export_nomination_batch: {
+        Args: { p_batch_id: string }
+        Returns: {
+          audit_trail: Json
+          award_category: string
+          award_group: string
+          award_subcategory: string
+          duplicate_of: string
+          duplicate_status: string
+          evidence_status: string
+          form_type: string
+          identity_hash: string
+          impact_summary_clean: string
+          ingested_at: string
+          ingested_by: string
+          intake_id: string
+          nomination_status: string
+          nominee_city_clean: string
+          nominee_country_clean: string
+          nominee_name_clean: string
+          nominee_region_clean: string
+          nominee_type_clean: string
+          record_id: string
+          updated_at: string
+          verification_status: string
+        }[]
+      }
       generate_identity_hash: {
         Args: {
           p_country?: string
