@@ -54,7 +54,7 @@ import Register from "./pages/auth/Register";
 import OTPVerification from "./pages/auth/OTPVerification";
 import ForgotPassword from "./pages/auth/ForgotPassword";
 import ResetPassword from "./pages/auth/ResetPassword";
-import Nominate from "./pages/Nominate";
+import NominateFlow from "./pages/NominateFlow";
 import Dashboard from "./pages/Dashboard";
 import Unauthorized from "./pages/Unauthorized";
 import NotFound from "./pages/NotFound";
@@ -1172,7 +1172,7 @@ const App = () => (
                     element={
                       <WithLayout>
                         <WithFirewall>
-                          <Nominate />
+                          <NominateFlow />
                         </WithFirewall>
                       </WithLayout>
                     }
