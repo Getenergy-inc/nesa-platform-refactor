@@ -2596,6 +2596,59 @@ export type Database = {
           },
         ]
       }
+      nomination_ingest_audit: {
+        Row: {
+          action: string
+          actor_id: string | null
+          batch_id: string
+          canonical_id: string | null
+          created_at: string
+          id: string
+          identity_hash: string | null
+          intake_id: string
+          new_duplicate_status: string | null
+          previous_duplicate_status: string | null
+          reason: string
+          record_id: string
+        }
+        Insert: {
+          action: string
+          actor_id?: string | null
+          batch_id: string
+          canonical_id?: string | null
+          created_at?: string
+          id?: string
+          identity_hash?: string | null
+          intake_id: string
+          new_duplicate_status?: string | null
+          previous_duplicate_status?: string | null
+          reason: string
+          record_id: string
+        }
+        Update: {
+          action?: string
+          actor_id?: string | null
+          batch_id?: string
+          canonical_id?: string | null
+          created_at?: string
+          id?: string
+          identity_hash?: string | null
+          intake_id?: string
+          new_duplicate_status?: string | null
+          previous_duplicate_status?: string | null
+          reason?: string
+          record_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "nomination_ingest_audit_intake_id_fkey"
+            columns: ["intake_id"]
+            isOneToOne: false
+            referencedRelation: "nomination_intake"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       nomination_intake: {
         Row: {
           assigned_reviewer: string | null
@@ -6863,8 +6916,9 @@ export type Database = {
         Returns: undefined
       }
       ingest_nomination_intake_batch: {
-        Args: { p_rows: Json }
+        Args: { p_actor_id?: string; p_batch_id?: string; p_rows: Json }
         Returns: {
+          batch_id: string
           duplicate_of: string
           duplicate_status: string
           id: string
