@@ -44,7 +44,7 @@ describe("mapRawRowToCleaned", () => {
     });
 
     expect(cleaned.record_id).toBe("NESA2026-GBG-CSRNG-20260601-0001");
-    expect(cleaned.nominee_name_clean).toBe("UNICEF Nigeria");
+    expect(cleaned.nominee_name_clean).toBe("Unicef Nigeria");
     expect(cleaned.nominee_country_clean).toBe("Nigeria");
     expect(cleaned.nominee_region_clean).toBe("West Africa");
     expect(cleaned.award_subcategory).toBe("Scholarships");
