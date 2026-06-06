@@ -43,8 +43,7 @@ export async function queryFormAutoPromoted(
     .from("audit_events")
     .select("id, created_at, actor_id, metadata", { count: "exact" })
     .eq("action", "form_auto_promoted")
-    .order("created_at", { ascending: false })
-    .range(from, to);
+    .order("created_at", { ascending: false });
 
   if (filter.formKind && filter.formKind !== "all") {
     query = query.eq("metadata->>form_kind", filter.formKind);
@@ -55,7 +54,7 @@ export async function queryFormAutoPromoted(
     query = query.ilike("metadata->>form_slug", `%${trimmedSlug}%`);
   }
 
-  const { data, error, count } = await query;
+  const { data, error, count } = await query.range(from, to);
   if (error) throw error;
 
   const events: FormAutoPromotedEvent[] = (data ?? []).map((row) => {
