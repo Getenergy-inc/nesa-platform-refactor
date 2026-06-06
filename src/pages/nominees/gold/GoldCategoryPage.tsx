@@ -139,7 +139,7 @@ export default function GoldCategoryPage() {
                     <Vote className="w-4 h-4" /> Vote Now
                   </Button>
                 </a>
-                <Link to="/nominate">
+                <Link to={`/nominate?family=gold-blue-garnet&source=gold-${categorySlug}`}>
                   <Button size="lg" variant="outline" className="border-gold/40 text-gold hover:bg-gold/10 rounded-full px-7 gap-2 bg-charcoal/40 backdrop-blur">
                     Nominate <ArrowRight className="w-4 h-4" />
                   </Button>
