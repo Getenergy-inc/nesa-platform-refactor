@@ -50,3 +50,12 @@ export function withResolvedStatus<T extends FormUrlPair>(form: T): T {
 export function withResolvedStatuses<T extends FormUrlPair>(forms: T[]): T[] {
   return forms.map(withResolvedStatus);
 }
+
+/**
+ * Returns true when a form was auto-promoted by the resolver:
+ * raw status is "Link Pending" but the resolved status is "Active".
+ * Only possible when both form URLs are present.
+ */
+export function isAutoPromoted(raw: FormUrlPair, resolved: FormUrlPair): boolean {
+  return raw.status === "Link Pending" && resolved.status === "Active";
+}

@@ -4,6 +4,7 @@ import {
   resolveFormStatus,
   withResolvedStatus,
   withResolvedStatuses,
+  isAutoPromoted,
 } from "@/config/nomination/resolveStatus";
 import {
   RMSA_REGIONAL_FORMS,
@@ -153,5 +154,43 @@ describe("RMSA & Award Category configs — resolved exports", () => {
     for (const r of RMSA_REGIONAL_FORMS) {
       expect(r.status).toBe("Link Pending");
     }
+  });
+});
+
+describe("isAutoPromoted", () => {
+  it("returns true when raw is Link Pending and resolved is Active", () => {
+    expect(
+      isAutoPromoted(
+        { status: "Link Pending", formPublicUrl: "a", formEmbedUrl: "b" },
+        { status: "Active", formPublicUrl: "a", formEmbedUrl: "b" },
+      ),
+    ).toBe(true);
+  });
+
+  it("returns false when both statuses are Active", () => {
+    expect(
+      isAutoPromoted(
+        { status: "Active", formPublicUrl: "a", formEmbedUrl: "b" },
+        { status: "Active", formPublicUrl: "a", formEmbedUrl: "b" },
+      ),
+    ).toBe(false);
+  });
+
+  it("returns false when both statuses are Link Pending", () => {
+    expect(
+      isAutoPromoted(
+        { status: "Link Pending", formPublicUrl: "", formEmbedUrl: "" },
+        { status: "Link Pending", formPublicUrl: "", formEmbedUrl: "" },
+      ),
+    ).toBe(false);
+  });
+
+  it("returns false when raw is Draft and resolved is Active", () => {
+    expect(
+      isAutoPromoted(
+        { status: "Draft", formPublicUrl: "a", formEmbedUrl: "b" },
+        { status: "Active", formPublicUrl: "a", formEmbedUrl: "b" },
+      ),
+    ).toBe(false);
   });
 });

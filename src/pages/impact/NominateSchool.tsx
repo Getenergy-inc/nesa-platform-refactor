@@ -9,14 +9,20 @@ import { GoogleFormDisplay } from "@/components/nominate/GoogleFormDisplay";
 import { IntegrityNotice } from "@/components/nominate/IntegrityNotice";
 import {
   RMSA_REGIONAL_FORMS,
+  RMSA_REGIONAL_FORMS_RAW,
   getRmsaRegionFormBySlug,
 } from "@/config/nomination/rmsaRegionalForms";
+import { FormAutoPromotedBadge } from "@/components/nominate/FormAutoPromotedBadge";
 
 export default function NominateSchool() {
   const [params, setParams] = useSearchParams();
   const regionParam = params.get("region");
   const region = useMemo(
     () => (regionParam ? getRmsaRegionFormBySlug(regionParam) : null),
+    [regionParam],
+  );
+  const rawRegion = useMemo(
+    () => (regionParam ? RMSA_REGIONAL_FORMS_RAW.find((r) => r.slug === regionParam) : null),
     [regionParam],
   );
 
@@ -124,9 +130,16 @@ export default function NominateSchool() {
                         {r.shortDescription}
                       </p>
                     ) : null}
-                    <p className="text-[11px] uppercase tracking-[0.16em] mt-3 text-white/55">
-                      Form status: <span className="text-gold">{r.status}</span>
-                    </p>
+                    <div className="flex items-center gap-2 mt-3">
+                      <p className="text-[11px] uppercase tracking-[0.16em] text-white/55">
+                        Form status: <span className="text-gold">{r.status}</span>
+                      </p>
+                      <FormAutoPromotedBadge
+                        rawStatus={RMSA_REGIONAL_FORMS_RAW.find((raw) => raw.slug === r.slug)?.status ?? r.status}
+                        resolvedStatus={r.status}
+                        size="sm"
+                      />
+                    </div>
                   </button>
                 ))}
               </div>
@@ -149,9 +162,18 @@ export default function NominateSchool() {
                 <p className="text-xs uppercase tracking-[0.18em] text-gold/80 font-semibold">
                   EduAid-Africa · Special Needs School Intervention
                 </p>
-                <h2 className="font-display text-2xl md:text-3xl text-white">
-                  {region.region} — School Nomination
-                </h2>
+                <div className="flex items-center gap-2 flex-wrap">
+                  <h2 className="font-display text-2xl md:text-3xl text-white">
+                    {region.region} — School Nomination
+                  </h2>
+                  {rawRegion && (
+                    <FormAutoPromotedBadge
+                      rawStatus={rawRegion.status}
+                      resolvedStatus={region.status}
+                      size="md"
+                    />
+                  )}
+                </div>
               </div>
 
               <IntegrityNotice />
