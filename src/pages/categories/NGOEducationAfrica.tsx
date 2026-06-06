@@ -50,7 +50,7 @@ export default function NGOEducationAfricaPage() {
         title="Live NGO Nominees"
         description="NGOs verified by the NESA Nominee Research Corps, streaming live."
       />
-      <DynamicCategoryPage categoryTitle="Best NGO Contribution to Education for All (Africa Regional)" nominationType="NGO Africa" />
+      <DynamicCategoryPage categoryTitle="Best NGO Contribution to Education for All (Africa Regional)" nominationType="NGO Africa" nominateCategorySlug="best-ngo-for-education-advancement-africa-regional" />
     </>
   );
 }

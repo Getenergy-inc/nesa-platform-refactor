@@ -49,7 +49,7 @@ export default function PoliticalLeadersNigeriaPage() {
         categoryName="Political Leaders' Educational Support (Nigeria)"
         title="Live Leader Nominees"
       />
-      <DynamicCategoryPage categoryTitle="Political Leaders' Educational Support (Nigeria)" nominationType="Political Leaders Nigeria" />
+      <DynamicCategoryPage categoryTitle="Political Leaders' Educational Support (Nigeria)" nominationType="Political Leaders Nigeria" nominateCategorySlug="excellence-in-political-leadership-for-education-nigeria" />
     </>
   );
 }

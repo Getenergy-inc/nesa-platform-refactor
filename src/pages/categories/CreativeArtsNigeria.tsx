@@ -49,7 +49,7 @@ export default function CreativeArtsNigeriaPage() {
         categoryName="Creative Arts Industry Contribution to Education (Nigeria)"
         title="Live Creative Nominees"
       />
-      <DynamicCategoryPage categoryTitle="Creative Arts Industry Contribution to Education (Nigeria)" nominationType="Creative Arts Nigeria" />
+      <DynamicCategoryPage categoryTitle="Creative Arts Industry Contribution to Education (Nigeria)" nominationType="Creative Arts Nigeria" nominateCategorySlug="best-creative-arts-contribution-to-education-nigeria" />
     </>
   );
 }
