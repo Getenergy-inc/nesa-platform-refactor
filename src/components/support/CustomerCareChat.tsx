@@ -1,11 +1,24 @@
 import { useState, useRef, useEffect } from "react";
+import { Link } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
-import { MessageCircle, X, Send, Trash2, Bot, User, Loader2, AlertCircle } from "lucide-react";
+import { MessageCircle, X, Send, Trash2, Bot, User, Loader2, AlertCircle, Sparkles, ShieldCheck } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { useCustomerCareChat, ChatMessage } from "@/hooks/useCustomerCareChat";
 import ReactMarkdown from "react-markdown";
+
+const CAPABILITY_LINKS: { label: string; to: string }[] = [
+  { label: "Nominations", to: "/nominate" },
+  { label: "Voting", to: "/vote" },
+  { label: "Sponsorship", to: "/sponsor" },
+  { label: "Volunteering", to: "/volunteer" },
+  { label: "Judging", to: "/judges" },
+  { label: "Local Chapters", to: "/chapters" },
+  { label: "RMSA", to: "/rebuild-my-school-africa" },
+  { label: "EduAid", to: "/eduaid-africa" },
+];
+const WHATSAPP_URL = "https://wa.me/2348109765897";
 
 export function CustomerCareChat() {
   const [isOpen, setIsOpen] = useState(false);
