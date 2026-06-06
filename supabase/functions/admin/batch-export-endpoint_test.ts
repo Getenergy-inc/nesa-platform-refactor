@@ -383,3 +383,21 @@ Deno.test("E2E: valid non-admin token returns 403 and no CSV headers", async () 
     assertEquals(ct.includes("text/csv"), false);
   });
 });
+
+Deno.test("E2E: valid admin token returns 200 CSV download with non-empty body", async () => {
+  await withServer(async (base) => {
+    const res = await fetch(
+      `${base}/admin/nominations/batch-export/${BATCH_ID}?format=csv`,
+      { headers: adminAuth },
+    );
+    const body = await res.text();
+
+    assertEquals(res.status, 200);
+    assertEquals(res.headers.get("Content-Type"), "text/csv; charset=utf-8");
+    assertStringIncludes(
+      res.headers.get("Content-Disposition") || "",
+      `attachment; filename="nomination-batch-${BATCH_ID}.csv"`,
+    );
+    assertEquals(body.length > 0, true);
+  });
+});
