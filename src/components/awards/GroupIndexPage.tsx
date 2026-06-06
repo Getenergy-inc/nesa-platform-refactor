@@ -35,6 +35,9 @@ export function GroupIndexPage({ group, seoTitle, metaDescription, intro }: Prop
   const meta = GROUP_META[group];
   const categories = getCategoriesByGroup(group);
   const canonical = `${SITE}${meta.indexUrl}`;
+  const nominateHref = GROUP_TO_FAMILY[group]
+    ? `/nominate?family=${GROUP_TO_FAMILY[group]}`
+    : "/nominate";
 
   return (
     <div className="min-h-screen bg-charcoal text-foreground">
