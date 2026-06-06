@@ -46,11 +46,15 @@ export async function ingestRawRows(req: IngestRequest): Promise<IngestResponse>
   const meta = (data.meta ?? {}) as {
     total?: number;
     warnings?: { rowNumber: number; messages: string[] }[];
+    persisted?: IngestPersistedRecord[];
+    persist_errors?: IngestPersistError[];
   };
 
   return {
     cleaned: (data.data ?? []) as CleanedRow[],
     total: meta.total ?? 0,
     warnings: meta.warnings ?? [],
+    persisted: meta.persisted ?? [],
+    persistErrors: meta.persist_errors ?? [],
   };
 }
