@@ -2596,6 +2596,98 @@ export type Database = {
           },
         ]
       }
+      nomination_intake: {
+        Row: {
+          assigned_reviewer: string | null
+          award_category: string | null
+          award_group: string | null
+          award_subcategory: string | null
+          duplicate_of: string | null
+          duplicate_status: string | null
+          evidence_status: string | null
+          form_type: string
+          id: string
+          identity_hash: string | null
+          impact_summary_clean: string | null
+          ingested_at: string
+          ingested_by: string | null
+          nomination_status: string | null
+          nominee_city_clean: string | null
+          nominee_country_clean: string | null
+          nominee_name_clean: string | null
+          nominee_region_clean: string | null
+          nominee_type_clean: string | null
+          raw_payload: Json | null
+          record_id: string
+          reviewer_notes: string | null
+          updated_at: string
+          verification_status: string | null
+          website_sync_status: string | null
+        }
+        Insert: {
+          assigned_reviewer?: string | null
+          award_category?: string | null
+          award_group?: string | null
+          award_subcategory?: string | null
+          duplicate_of?: string | null
+          duplicate_status?: string | null
+          evidence_status?: string | null
+          form_type: string
+          id?: string
+          identity_hash?: string | null
+          impact_summary_clean?: string | null
+          ingested_at?: string
+          ingested_by?: string | null
+          nomination_status?: string | null
+          nominee_city_clean?: string | null
+          nominee_country_clean?: string | null
+          nominee_name_clean?: string | null
+          nominee_region_clean?: string | null
+          nominee_type_clean?: string | null
+          raw_payload?: Json | null
+          record_id: string
+          reviewer_notes?: string | null
+          updated_at?: string
+          verification_status?: string | null
+          website_sync_status?: string | null
+        }
+        Update: {
+          assigned_reviewer?: string | null
+          award_category?: string | null
+          award_group?: string | null
+          award_subcategory?: string | null
+          duplicate_of?: string | null
+          duplicate_status?: string | null
+          evidence_status?: string | null
+          form_type?: string
+          id?: string
+          identity_hash?: string | null
+          impact_summary_clean?: string | null
+          ingested_at?: string
+          ingested_by?: string | null
+          nomination_status?: string | null
+          nominee_city_clean?: string | null
+          nominee_country_clean?: string | null
+          nominee_name_clean?: string | null
+          nominee_region_clean?: string | null
+          nominee_type_clean?: string | null
+          raw_payload?: Json | null
+          record_id?: string
+          reviewer_notes?: string | null
+          updated_at?: string
+          verification_status?: string | null
+          website_sync_status?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "nomination_intake_duplicate_of_fkey"
+            columns: ["duplicate_of"]
+            isOneToOne: false
+            referencedRelation: "nomination_intake"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       nominations: {
         Row: {
           created_at: string | null
