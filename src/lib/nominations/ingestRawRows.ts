@@ -26,6 +26,7 @@ export interface IngestResponse {
   warnings: { rowNumber: number; messages: string[] }[];
   persisted: IngestPersistedRecord[];
   persistErrors: IngestPersistError[];
+  batchId: string | null;
 }
 
 /**
@@ -48,6 +49,7 @@ export async function ingestRawRows(req: IngestRequest): Promise<IngestResponse>
     warnings?: { rowNumber: number; messages: string[] }[];
     persisted?: IngestPersistedRecord[];
     persist_errors?: IngestPersistError[];
+    batch_id?: string;
   };
 
   return {
@@ -56,5 +58,6 @@ export async function ingestRawRows(req: IngestRequest): Promise<IngestResponse>
     warnings: meta.warnings ?? [],
     persisted: meta.persisted ?? [],
     persistErrors: meta.persist_errors ?? [],
+    batchId: meta.batch_id ?? null,
   };
 }
