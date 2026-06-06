@@ -1295,7 +1295,9 @@ const App = () => (
                     path="/vote"
                     element={
                       <WithLayout>
-                        <Vote />
+                        <WithFirewall>
+                          <Vote />
+                        </WithFirewall>
                       </WithLayout>
                     }
                   />
