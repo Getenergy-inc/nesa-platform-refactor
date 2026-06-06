@@ -314,7 +314,7 @@ export default function CategoryMasterIndex() {
           </p>
           <div className="mt-6 flex flex-wrap gap-3">
             <Button asChild className="bg-gold text-charcoal hover:bg-gold/90">
-              <Link to="/nominate">
+              <Link to="/nominate?source=categories-master">
                 <Sparkles className="mr-2 h-4 w-4" />
                 Nominate for 2026
               </Link>

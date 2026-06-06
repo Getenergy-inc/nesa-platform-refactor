@@ -363,7 +363,7 @@ export default function NomineesHubPage() {
               Help us recognize Africa's education leaders. Nominate a new champion or vote in eligible categories.
             </p>
             <div className="flex flex-col sm:flex-row gap-3 justify-center">
-              <Link to="/nominate">
+              <Link to="/nominate?source=nominees-hub">
                 <Button size="lg" className="bg-gold hover:bg-gold/90 text-charcoal font-bold rounded-full px-8 gap-2">
                   <Trophy className="w-5 h-5" /> Start a Nomination
                 </Button>

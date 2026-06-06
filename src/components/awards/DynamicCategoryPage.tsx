@@ -27,6 +27,11 @@ import {
 interface DynamicCategoryPageProps {
   categoryTitle: string;
   nominationType?: string;
+  /**
+   * Optional kebab-case slug from src/config/nomination/awardCategoryForms.ts
+   * to deep-link Nominate CTAs straight to the matching Google Form.
+   */
+  nominateCategorySlug?: string;
 }
 
 // Get icon for region type
@@ -36,7 +41,10 @@ function getRegionIcon(region: AfricanRegion) {
   return <Globe className="h-3 w-3" />;
 }
 
-export function DynamicCategoryPage({ categoryTitle, nominationType }: DynamicCategoryPageProps) {
+export function DynamicCategoryPage({ categoryTitle, nominationType, nominateCategorySlug }: DynamicCategoryPageProps) {
+  const nominateHref = nominateCategorySlug
+    ? `/nominate?category=${nominateCategorySlug}`
+    : "/nominate";
   const [selectedRegion, setSelectedRegion] = useState<AfricanRegion | undefined>();
   const [currentSlide, setCurrentSlide] = useState(0);
 
@@ -271,7 +279,7 @@ export function DynamicCategoryPage({ categoryTitle, nominationType }: DynamicCa
 
                 <div className="flex flex-wrap gap-4">
                   <Button asChild size="lg" className="bg-gold hover:bg-gold-dark text-charcoal font-semibold rounded-full gap-2">
-                    <Link to="/nominate">
+                    <Link to={nominateHref}>
                       <Award className="h-4 w-4" />
                       Nominate Now
                     </Link>
@@ -483,7 +491,7 @@ export function DynamicCategoryPage({ categoryTitle, nominationType }: DynamicCa
             </p>
             <div className="flex flex-wrap justify-center gap-4">
               <Button asChild size="lg" className="bg-gold hover:bg-gold-dark text-charcoal font-semibold rounded-full gap-2">
-                <Link to="/nominate">
+                <Link to={nominateHref}>
                   <Award className="h-4 w-4" />
                   Submit Nomination
                   <ArrowRight className="h-4 w-4" />
