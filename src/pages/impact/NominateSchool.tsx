@@ -9,8 +9,10 @@ import { GoogleFormDisplay } from "@/components/nominate/GoogleFormDisplay";
 import { IntegrityNotice } from "@/components/nominate/IntegrityNotice";
 import {
   RMSA_REGIONAL_FORMS,
+  RMSA_REGIONAL_FORMS_RAW,
   getRmsaRegionFormBySlug,
 } from "@/config/nomination/rmsaRegionalForms";
+import { FormAutoPromotedBadge } from "@/components/nominate/FormAutoPromotedBadge";
 
 export default function NominateSchool() {
   const [params, setParams] = useSearchParams();
