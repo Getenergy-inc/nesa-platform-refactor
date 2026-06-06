@@ -927,6 +927,48 @@ Deno.serve(async (req) => {
       });
     }
 
+    // ================================================================
+    // NOMINATIONS BATCH EXPORT — GET /admin/nominations/batch-export/:batch_id
+    // Returns every nomination_intake row touched in a given ingest
+    // batch, joined with its full per-row audit trail and canonical /
+    // duplicate resolution decisions.
+    // ================================================================
+    if (domain === "nominations" && action === "batch-export" && req.method === "GET" && resourceId) {
+      const batchIdParse = z.string().uuid("batch_id must be a valid UUID").safeParse(resourceId);
+      if (!batchIdParse.success) {
+        return errorResponse(formatZodError(batchIdParse.error), 400);
+      }
+      const batchId = batchIdParse.data;
+
+      const { data: rows, error: rpcErr } = await adminSupabase.rpc("export_nomination_batch", {
+        p_batch_id: batchId,
+      });
+
+      if (rpcErr) {
+        console.error("export_nomination_batch failed", rpcErr);
+        return errorResponse(rpcErr.message, 500);
+      }
+
+      // Also fetch high-level batch meta from audit_events
+      const { data: metaEvent } = await adminSupabase
+        .from("audit_events")
+        .select("created_at, metadata, actor_id")
+        .eq("action", "nominations_ingest_mapped")
+        .contains("metadata", JSON.stringify({ batch_id: batchId }))
+        .maybeSingle();
+
+      const batchMeta = metaEvent?.metadata ?? null;
+
+      return respond(rows || [], {
+        batch_id: batchId,
+        total_rows: (rows || []).length,
+        duplicate_count: (rows || []).filter((r: { duplicate_status: string }) => r.duplicate_status === "Potential Duplicate").length,
+        unique_count: (rows || []).filter((r: { duplicate_status: string }) => r.duplicate_status === "Unique").length,
+        batch_meta: batchMeta,
+        exported_at: new Date().toISOString(),
+      });
+    }
+
     return errorResponse("Not found", 404);
 
   } catch (error: unknown) {
