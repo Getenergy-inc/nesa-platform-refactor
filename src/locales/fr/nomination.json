@@ -1,4 +1,77 @@
 {
+  "flow": {
+    "meta": {
+      "title": "Nominez pour NESA-Africa 2026 — Les Prix Blue-Garnet de l'Éducation en Afrique",
+      "description": "Nominez des acteurs du changement éducatif, institutions, ONG, créateurs et écoles spécialisées pour les prix NESA-Africa 2026."
+    },
+    "steps": {
+      "flash": "Comment ça marche",
+      "pathway": "Parcours",
+      "entry": "Détails du nominé",
+      "review": "Révision",
+      "identity": "Vos coordonnées",
+      "confirmation": "Terminé"
+    },
+    "flash": {
+      "eyebrow": "Commencez ici",
+      "title": "Comment fonctionnent les nominations NESA-Africa",
+      "p1": "Les nominations NESA-Africa aident le public à identifier les acteurs du changement éducatif à travers l'Afrique, la diaspora et les amis de l'Afrique.",
+      "p2": "Vous pouvez nominer des éducateurs, institutions, ONG, défenseurs, créateurs, voix médiatiques, contributeurs RSE, décideurs politiques, écoles spécialisées et autres leaders d'impact éducatif selon la catégorie éligible.",
+      "p3": "Vous pouvez d'abord remplir les détails du nominé. À l'étape finale, il vous sera demandé de fournir votre nom, email, téléphone, pays de résidence et pays d'origine avant la création du compte ou la vérification de l'email.",
+      "p4": "Les nominations sont évaluées selon l'adéquation à la catégorie, les preuves, la pertinence régionale, l'impact éducatif, l'éligibilité, le statut de vérification et le parcours sélectionné.",
+      "startCta": "Commencer la nomination",
+      "guidelinesCta": "Lire les directives"
+    },
+    "review": {
+      "eyebrow": "Étape 4",
+      "title": "Révisez vos nominations",
+      "summary_one": "Vous êtes sur le point de soumettre <0>{{count}}</0> nomination. Ajoutez-en d'autres ou passez à la soumission finale.",
+      "summary_other": "Vous êtes sur le point de soumettre <0>{{count}}</0> nominations. Ajoutez-en d'autres ou passez à la soumission finale.",
+      "addAnother": "Ajouter un autre nominé",
+      "proceed": "Passer à la soumission finale"
+    },
+    "identity": {
+      "eyebrow": "Étape 5",
+      "title": "Complétez votre soumission",
+      "subtitle": "Pour protéger l'intégrité des nominations NESA-Africa, veuillez fournir vos coordonnées avant de soumettre.",
+      "fullName": "Nom complet",
+      "email": "Adresse email",
+      "phone": "Numéro de téléphone",
+      "countryResidence": "Pays de résidence",
+      "countryOrigin": "Pays d'origine",
+      "confirmDeclaration": "Veuillez confirmer la déclaration",
+      "back": "Retour à la révision",
+      "continue": "Continuer"
+    },
+    "auth": {
+      "eyebrow": "Étape finale",
+      "titleAuthed": "Confirmer et soumettre",
+      "titleGuest": "Créer un compte ou vérifier votre email",
+      "summary_one": "Vous soumettez <0>{{count}}</0> nomination en tant que <1>{{name}}</1> ({{email}}).",
+      "summary_other": "Vous soumettez <0>{{count}}</0> nominations en tant que <1>{{name}}</1> ({{email}}).",
+      "signedInNote": "Vous êtes connecté. Vos nominations seront rattachées à votre compte.",
+      "submitNominations": "Soumettre les nominations",
+      "create": { "title": "Créer un compte", "desc": "Configurez un compte avec les détails fournis.", "cta": "Créer & soumettre" },
+      "signin": { "title": "Se connecter", "desc": "Déjà inscrit ? Connectez-vous et rattachez ces nominations.", "cta": "Se connecter & soumettre" },
+      "verify": { "title": "Vérifier l'email", "desc": "Soumettez sans compte — nous vérifierons votre email.", "cta": "Vérifier & soumettre" },
+      "editDetails": "Modifier mes coordonnées"
+    },
+    "confirmation": {
+      "title": "Nomination soumise avec succès",
+      "thanks_one": "Merci d'avoir nominé {{count}} acteur du changement éducatif pour NESA-Africa.",
+      "thanks_other": "Merci d'avoir nominé {{count}} acteurs du changement éducatif pour NESA-Africa.",
+      "funnelNote": "Toutes les nominations ne deviennent pas des nominés publiés. Tous les nominés ne deviennent pas finalistes. Tous les finalistes ne gagnent pas.",
+      "explore": "Explorer les nominés",
+      "another": "Nominer un autre",
+      "guidelines": "Lire les directives",
+      "sponsor": "Devenir sponsor"
+    },
+    "toast": {
+      "added": "Nominé ajouté",
+      "updated": "Nominé mis à jour",
+      "recorded": "Intérêt de nomination enregistré"
+    }
+  },
   "form": {
     "title": "Formulaire de Nomination",
     "step1": "Informations du Nominé",

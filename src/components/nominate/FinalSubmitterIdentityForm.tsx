@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
@@ -16,6 +17,7 @@ export function FinalSubmitterIdentityForm({
   onBack: () => void;
   onContinue: (s: SubmitterIdentity) => void;
 }) {
+  const { t } = useTranslation("nomination");
   const [form, setForm] = useState<SubmitterIdentity>(
     initial ?? {
       fullName: "",
@@ -52,25 +54,26 @@ export function FinalSubmitterIdentityForm({
   return (
     <form onSubmit={submit} className="space-y-6">
       <div className="space-y-2">
-        <p className="text-xs uppercase tracking-[0.2em] text-gold/80 font-semibold">Step 5</p>
+        <p className="text-xs uppercase tracking-[0.2em] text-gold/80 font-semibold">
+          {t("flow.identity.eyebrow")}
+        </p>
         <h2 className="font-display text-2xl md:text-3xl font-bold text-white">
-          Complete Your Submission
+          {t("flow.identity.title")}
         </h2>
         <p className="text-sm text-white/65 max-w-2xl leading-relaxed">
-          To protect the integrity of NESA-Africa nominations, please provide your details before
-          submitting. This helps us prevent duplicate, fake, or unverifiable nominations.
+          {t("flow.identity.subtitle")}
         </p>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <Field label="Full name" error={errors.fullName} required>
+        <Field label={t("flow.identity.fullName")} error={errors.fullName} required>
           <Input
             value={form.fullName}
             onChange={(e) => set("fullName", e.target.value)}
             className="bg-white/5 border-white/10 text-white"
           />
         </Field>
-        <Field label="Email address" error={errors.email} required>
+        <Field label={t("flow.identity.email")} error={errors.email} required>
           <Input
             type="email"
             value={form.email}
@@ -78,7 +81,7 @@ export function FinalSubmitterIdentityForm({
             className="bg-white/5 border-white/10 text-white"
           />
         </Field>
-        <Field label="Phone number" error={errors.phone} required>
+        <Field label={t("flow.identity.phone")} error={errors.phone} required>
           <Input
             value={form.phone}
             onChange={(e) => set("phone", e.target.value)}
@@ -86,7 +89,7 @@ export function FinalSubmitterIdentityForm({
             className="bg-white/5 border-white/10 text-white"
           />
         </Field>
-        <Field label="Country of residence" error={errors.countryOfResidence} required>
+        <Field label={t("flow.identity.countryResidence")} error={errors.countryOfResidence} required>
           <Input
             value={form.countryOfResidence}
             onChange={(e) => set("countryOfResidence", e.target.value)}
@@ -94,7 +97,7 @@ export function FinalSubmitterIdentityForm({
           />
         </Field>
         <Field
-          label="Country of origin"
+          label={t("flow.identity.countryOrigin")}
           error={errors.countryOfOrigin}
           required
           className="md:col-span-2"
@@ -112,7 +115,7 @@ export function FinalSubmitterIdentityForm({
         onChange={(v) => set("consent", v)}
       />
       {errors.consent && (
-        <p className="text-xs text-red-300 -mt-3">Please confirm the declaration</p>
+        <p className="text-xs text-red-300 -mt-3">{t("flow.identity.confirmDeclaration")}</p>
       )}
 
       <IntegrityNotice />
@@ -124,13 +127,13 @@ export function FinalSubmitterIdentityForm({
           onClick={onBack}
           className="rounded-full border-white/20 text-white hover:bg-white/10 gap-2"
         >
-          <ArrowLeft className="h-4 w-4" /> Back to review
+          <ArrowLeft className="h-4 w-4" /> {t("flow.identity.back")}
         </Button>
         <Button
           type="submit"
           className="bg-gold hover:bg-gold-dark text-charcoal font-semibold rounded-full px-6 gap-2 shadow-gold"
         >
-          Continue
+          {t("flow.identity.continue")}
           <ArrowRight className="h-4 w-4" />
         </Button>
       </div>

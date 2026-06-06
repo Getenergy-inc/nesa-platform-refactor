@@ -3,6 +3,7 @@ import { useSearchParams } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import { motion, AnimatePresence } from "framer-motion";
 import { toast } from "sonner";
+import { useTranslation } from "react-i18next";
 import { trackEvent } from "@/lib/analytics";
 
 import { NominationProgressBar } from "@/components/nominate/NominationProgressBar";
@@ -88,6 +89,7 @@ function loadInitial(): FlowState {
 }
 
 export default function NominateFlow() {
+  const { t } = useTranslation("nomination");
   const [params] = useSearchParams();
   const [state, dispatch] = useReducer(reducer, undefined, loadInitial);
 
@@ -145,13 +147,13 @@ export default function NominateFlow() {
   const handleSaveEntry = (entry: Omit<NomineeEntry, "id"> & { id?: string }) => {
     if (entry.id && state.entries.some((e) => e.id === entry.id)) {
       dispatch({ type: "UPDATE_ENTRY", entry: entry as NomineeEntry });
-      toast.success("Nominee updated");
+      toast.success(t("flow.toast.updated"));
       trackEvent("nominate_entry_updated", { id: entry.id });
     } else {
       const id = entry.id ?? `nm_${Math.random().toString(36).slice(2, 10)}`;
       const full = { ...(entry as NomineeEntry), id };
       dispatch({ type: "ADD_ENTRY", entry: full });
-      toast.success("Nominee added");
+      toast.success(t("flow.toast.added"));
       trackEvent("nominate_entry_added", {
         pathway: full.pathway,
         total: state.entries.length + 1,
@@ -166,7 +168,7 @@ export default function NominateFlow() {
       pathways: Array.from(new Set(state.entries.map((e) => e.pathway))),
     });
     // Backend not yet wired — mark complete locally
-    toast.success("Nomination interest recorded");
+    toast.success(t("flow.toast.recorded"));
     dispatch({ type: "SET_STEP", step: "confirmation" });
   };
 
@@ -179,11 +181,8 @@ export default function NominateFlow() {
   return (
     <>
       <Helmet>
-        <title>Nominate for NESA-Africa 2026 — Africa's Blue-Garnet Awards for Education</title>
-        <meta
-          name="description"
-          content="Nominate education changemakers, institutions, NGOs, creators and special needs schools for the NESA-Africa 2026 awards. Multi-nominee, no sign-up until final submission."
-        />
+        <title>{t("flow.meta.title")}</title>
+        <meta name="description" content={t("flow.meta.description")} />
       </Helmet>
 
       <div className="bg-charcoal min-h-screen">

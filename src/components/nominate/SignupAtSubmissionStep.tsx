@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
+import { Trans, useTranslation } from "react-i18next";
 import { ArrowLeft, MailCheck, UserPlus, LogIn, ShieldCheck } from "lucide-react";
 import { LaunchingAfterVerificationBanner } from "./ComingSoonBanner";
 import { useAuth } from "@/contexts/AuthContext";
@@ -16,6 +17,7 @@ export function SignupAtSubmissionStep({
   onBack: () => void;
   onSubmit: (mode: "create" | "signin" | "verify") => void;
 }) {
+  const { t } = useTranslation("nomination");
   const { user } = useAuth();
   const isAuthed = Boolean(user);
 
@@ -23,15 +25,22 @@ export function SignupAtSubmissionStep({
     <div className="space-y-6">
       <div className="space-y-2">
         <p className="text-xs uppercase tracking-[0.2em] text-gold/80 font-semibold">
-          Final step
+          {t("flow.auth.eyebrow")}
         </p>
         <h2 className="font-display text-2xl md:text-3xl font-bold text-white">
-          {isAuthed ? "Confirm and submit" : "Create account or verify your email"}
+          {isAuthed ? t("flow.auth.titleAuthed") : t("flow.auth.titleGuest")}
         </h2>
         <p className="text-sm text-white/65 max-w-2xl">
-          You are submitting <span className="text-gold font-semibold">{entries.length}</span>{" "}
-          {entries.length === 1 ? "nomination" : "nominations"} as{" "}
-          <span className="text-white">{submitter.fullName}</span> ({submitter.email}).
+          <Trans
+            i18nKey="flow.auth.summary"
+            ns="nomination"
+            count={entries.length}
+            values={{ count: entries.length, name: submitter.fullName, email: submitter.email }}
+            components={[
+              <span className="text-gold font-semibold" />,
+              <span className="text-white" />,
+            ]}
+          />
         </p>
       </div>
 
@@ -40,14 +49,12 @@ export function SignupAtSubmissionStep({
           <div className="flex items-start gap-3">
             <ShieldCheck className="h-5 w-5 text-gold shrink-0 mt-0.5" />
             <div className="space-y-3">
-              <p className="text-sm text-white/80">
-                You are signed in. Your nomination entries will be attached to your account.
-              </p>
+              <p className="text-sm text-white/80">{t("flow.auth.signedInNote")}</p>
               <Button
                 onClick={() => onSubmit("signin")}
                 className="bg-gold hover:bg-gold-dark text-charcoal font-semibold rounded-full px-6 shadow-gold"
               >
-                Submit nominations
+                {t("flow.auth.submitNominations")}
               </Button>
             </div>
           </div>
@@ -56,23 +63,23 @@ export function SignupAtSubmissionStep({
         <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
           <OptionCard
             icon={UserPlus}
-            title="Create account"
-            description="Set up an account with your submitted details."
-            cta="Create account & submit"
+            title={t("flow.auth.create.title")}
+            description={t("flow.auth.create.desc")}
+            cta={t("flow.auth.create.cta")}
             onClick={() => onSubmit("create")}
           />
           <OptionCard
             icon={LogIn}
-            title="Sign in"
-            description="Already have an account? Sign in and attach these nominations."
-            cta="Sign in & submit"
+            title={t("flow.auth.signin.title")}
+            description={t("flow.auth.signin.desc")}
+            cta={t("flow.auth.signin.cta")}
             onClick={() => onSubmit("signin")}
           />
           <OptionCard
             icon={MailCheck}
-            title="Verify email only"
-            description="Submit without an account — we'll verify your email."
-            cta="Verify email & submit"
+            title={t("flow.auth.verify.title")}
+            description={t("flow.auth.verify.desc")}
+            cta={t("flow.auth.verify.cta")}
             onClick={() => onSubmit("verify")}
             primary
           />
@@ -87,7 +94,7 @@ export function SignupAtSubmissionStep({
         onClick={onBack}
         className="rounded-full border-white/20 text-white hover:bg-white/10 gap-2"
       >
-        <ArrowLeft className="h-4 w-4" /> Edit my details
+        <ArrowLeft className="h-4 w-4" /> {t("flow.auth.editDetails")}
       </Button>
     </div>
   );
