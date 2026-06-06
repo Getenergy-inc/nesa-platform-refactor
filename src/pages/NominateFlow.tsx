@@ -188,7 +188,10 @@ export default function NominateFlow() {
 
       <div className="bg-charcoal min-h-screen">
         <div className="container max-w-4xl py-8 md:py-12 space-y-8">
-          <NominationProgressBar current={state.step} />
+          <div className="flex items-center justify-between">
+            <NominationProgressBar current={state.step} />
+            <LanguageSwitcher variant="compact" />
+          </div>
 
           <AnimatePresence mode="wait">
             <motion.div
