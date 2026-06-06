@@ -138,6 +138,8 @@ export default function NominateSchool() {
                         rawStatus={RMSA_REGIONAL_FORMS_RAW.find((raw) => raw.slug === r.slug)?.status ?? r.status}
                         resolvedStatus={r.status}
                         size="sm"
+                        formSlug={r.slug}
+                        formKind="rmsa-region"
                       />
                     </div>
                   </button>
@@ -171,6 +173,8 @@ export default function NominateSchool() {
                       rawStatus={rawRegion.status}
                       resolvedStatus={region.status}
                       size="md"
+                      formSlug={region.slug}
+                      formKind="rmsa-region"
                     />
                   )}
                 </div>
