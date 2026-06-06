@@ -2,19 +2,109 @@
   "$schema": "./email-routing-registry.schema.json",
   "system": "NESA-Africa Google Pre-Nomination Services",
   "project": "NESA-Africa 2026 — The African Blue-Garnet Awards for Education",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "updated": "2026-06-06",
   "adminFallbackEmail": "nesa.africa@gmail.com",
+  "fromName": {
+    "award": "NESA-Africa 2026 Pre-Nomination Review Team",
+    "rmsa": "NESA-Africa / EduAid-Africa / Rebuild My School Africa Team"
+  },
   "subjectTemplates": {
-    "award": "NESA 2026 Pre-Nomination Submission - {category} - {nomineeName}",
-    "rmsa": "NESA 2026/2027 RMSA School Nomination - {region} - {schoolName}"
+    "award": {
+      "nominatorConfirmation": "NESA-Africa 2026 Nomination Received - {category}",
+      "internalReview":        "New NESA-Africa 2026 Pre-Nomination - {category} - {nomineeName}",
+      "nomineeAwareness":      "You Have Been Recommended for NESA-Africa 2026 Review"
+    },
+    "rmsa": {
+      "nominatorConfirmation": "Special Needs School Nomination Received - NESA-Africa / EduAid-Africa / RMSA",
+      "internalReview":        "New RMSA / EduAid Special Needs School Nomination - {region} - {schoolName}",
+      "schoolAwareness":       "Your School Has Been Recommended for EduAid-Africa / Rebuild My School Africa Review"
+    },
+    "adminCopyPrefix": "Copy: "
   },
   "rules": {
     "oneCategoryOneRecipient": true,
     "replyToIsNominator": true,
-    "sendConfirmationToNominator": true,
+    "sendNominatorConfirmation": true,
+    "sendInternalReview": true,
+    "sendNomineeAwareness": true,
+    "sendSchoolAwareness": true,
+    "requireConsentForNomineeOrSchoolContact": true,
+    "noApprovalImplied": true,
+    "noPaymentInfluence": true,
+    "noPasswordsInCode": true,
     "logNotifications": true,
-    "storePasswordsInCode": false
+    "bccAdminCopy": false,
+    "missingFieldPlaceholder": "Not provided"
+  },
+  "fieldHints": {
+    "nominatorFullName":  ["nominator full name", "your full name", "full name"],
+    "nominatorEmail":     ["nominator email", "your email", "email address", "email"],
+    "nominatorPhone":     ["whatsapp", "phone"],
+    "nominatorCountryResidence": ["country of residence"],
+    "nominatorCountryOrigin":    ["country of origin"],
+    "nominatorConsentShare":     ["consent for nesa-africa to share", "consent to share contact", "share my name and contact"],
+    "nominatorConsentUpdates":   ["consent to receive nesa-africa updates", "receive updates"],
+    "nomineeName":        ["nominee name", "full name of nominee", "nominee"],
+    "nomineeType":        ["nominee type"],
+    "nomineeEmail":       ["nominee email", "nominee contact email", "public contact email"],
+    "nomineeCountry":     ["nominee country"],
+    "nomineeRegion":      ["african region", "region"],
+    "nomineeOrganization":["organization", "platform"],
+    "nomineeWebsite":     ["website", "social media", "social link"],
+    "nomineeContactRoute":["best contact", "verification route", "nominee contact"],
+    "awardGroup":         ["award group"],
+    "awardCategory":      ["award category"],
+    "awardSubcategory":   ["award subcategory", "subcategory"],
+    "impactSummary":      ["education impact summary", "impact summary"],
+    "beneficiaries":      ["beneficiaries"],
+    "evidenceLink1":      ["evidence link 1", "evidence link"],
+    "evidenceLink2":      ["evidence link 2"],
+    "reasonForNomination":["reason for nomination", "reason"],
+    "knowsNomineePersonally": ["know nominee personally", "knows nominee"],
+    "accuracyConfirmation":   ["accuracy confirmation", "confirm accuracy"],
+    "integrityDeclaration":   ["integrity declaration"],
+    "schoolName":         ["school name", "name of school"],
+    "schoolType":         ["school type"],
+    "schoolOwnership":    ["school ownership", "ownership type"],
+    "schoolState":        ["state", "province", "district"],
+    "schoolCity":         ["city", "town", "community"],
+    "schoolAddress":      ["school address", "address"],
+    "schoolContactPerson":["school contact person", "contact person"],
+    "schoolContactEmail": ["school contact email", "school email"],
+    "schoolContactPhone": ["school contact phone", "school phone", "school whatsapp"],
+    "schoolContactConsent":["can nesa-africa", "can eduaid-africa", "can rmsa contact", "can team contact school", "contact the school"],
+    "schoolWebsite":      ["school website", "social media"],
+    "specialNeedsCategories": ["special needs categor"],
+    "estimatedLearners":  ["estimated learners", "number of learners"],
+    "estimatedTeachers":  ["estimated teachers"],
+    "estimatedSupportStaff":["estimated support staff"],
+    "ageRange":           ["age range"],
+    "studentType":        ["residential", "day", "mixed"],
+    "grantNeeds":         ["grant / service needs", "grant needs"],
+    "topThreeNeeds":      ["top three urgent needs", "urgent needs"],
+    "supportLevel":       ["support level"],
+    "verificationVisit":  ["verification visit"],
+    "schoolStructure":    ["legal", "board", "pta", "management structure"],
+    "photoVideoEvidence": ["photo", "video evidence"],
+    "visitedSchool":      ["visited school"],
+    "eduTourismInterest": ["edutourism interest", "edutourism"],
+    "participantType":    ["participant type"],
+    "preferredRegion":    ["preferred commissioning region", "preferred region"],
+    "participationInterest": ["participation interest", "selected interests"],
+    "preferredContactMethod":["preferred contact method"],
+    "donationInterest":   ["donation", "pledge interest"],
+    "supportType":        ["support type"],
+    "regionToSupport":    ["region to support"],
+    "donationLevel":      ["donation level", "pledge level"],
+    "donorType":          ["donor type"],
+    "contactPermission":  ["contact permission"]
+  },
+  "consent": {
+    "shareNominatorAllowValues": ["yes", "yes, nesa-africa may share"],
+    "denyNominatorValues":       ["no", "no, please keep"],
+    "contactFirstValues":        ["contact me first"],
+    "schoolContactAllowValues":  ["yes"]
   },
   "awardForms": [
     { "id": 1,  "category": "Education Content Social Media Influencers",                              "slug": "education-content-social-media-influencers",          "recipient": "socialinfl4edafricanesa2026@gmail.com" },
@@ -53,10 +143,12 @@
   ],
   "notificationLogColumns": [
     "timestamp", "response_id", "form_type", "category_or_region",
-    "nominator_email", "recipient_email", "notification_subject",
-    "notification_status", "error_message", "sent_at"
+    "nominator_email", "nominee_email", "school_email", "recipient_review_email",
+    "nominator_confirmation_status", "internal_review_notification_status",
+    "nominee_awareness_status", "school_awareness_status",
+    "error_message", "sent_at"
   ],
   "notificationStatuses": [
-    "Sent", "Failed", "Recipient Missing", "Nominator Email Missing", "Retry Required"
+    "Sent", "Not Sent", "Failed", "Missing Email", "Consent Not Given", "Pending", "Retry Required"
   ]
 }
