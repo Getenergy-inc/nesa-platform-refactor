@@ -28,6 +28,9 @@ const corsHeaders = {
 
 const BATCH_ID = "22222222-2222-2222-2222-222222222222";
 
+// Mock token that the test handler accepts as "valid admin"
+const VALID_ADMIN_TOKEN = "test-admin-token-xyz";
+
 const FIXTURE_ROWS = [
   {
     intake_id: "i-100",
@@ -106,6 +109,18 @@ function handler(req: Request): Response {
   if (req.method === "OPTIONS") {
     return new Response(null, { headers: corsHeaders });
   }
+
+  // Auth middleware — mirror production requireAdmin() check
+  const authHeader = req.headers.get("Authorization");
+  const isAdmin = authHeader?.startsWith("Bearer ") &&
+    authHeader.replace("Bearer ", "") === VALID_ADMIN_TOKEN;
+  if (!isAdmin) {
+    return new Response(
+      JSON.stringify({ ok: false, error: "Forbidden" }),
+      { status: 403, headers: { ...corsHeaders, "Content-Type": "application/json" } },
+    );
+  }
+
   const url = new URL(req.url);
   const parts = url.pathname.split("/").filter(Boolean);
   // /admin/{domain}/{action}/{id}
@@ -179,10 +194,13 @@ async function withServer<T>(fn: (baseUrl: string) => Promise<T>): Promise<T> {
   }
 }
 
+const adminAuth = { Authorization: `Bearer ${VALID_ADMIN_TOKEN}` };
+
 Deno.test("E2E: CSV export — status, headers, and Content-Disposition", async () => {
   await withServer(async (base) => {
     const res = await fetch(
       `${base}/admin/nominations/batch-export/${BATCH_ID}?format=csv`,
+      { headers: adminAuth },
     );
     const body = await res.text();
     assertEquals(res.status, 200);
@@ -205,6 +223,7 @@ Deno.test("E2E: CSV export — field mapping for canonical and duplicate rows", 
   await withServer(async (base) => {
     const res = await fetch(
       `${base}/admin/nominations/batch-export/${BATCH_ID}?format=csv`,
+      { headers: adminAuth },
     );
     const body = await res.text();
     const lines = body.split("\n");
@@ -245,6 +264,7 @@ Deno.test("E2E: default (no format) returns JSON, not CSV", async () => {
   await withServer(async (base) => {
     const res = await fetch(
       `${base}/admin/nominations/batch-export/${BATCH_ID}`,
+      { headers: adminAuth },
     );
     const ct = res.headers.get("Content-Type") || "";
     const body = await res.json();
@@ -259,6 +279,7 @@ Deno.test("E2E: invalid format=bad returns 400 JSON error, not CSV", async () =>
   await withServer(async (base) => {
     const res = await fetch(
       `${base}/admin/nominations/batch-export/${BATCH_ID}?format=bad`,
+      { headers: adminAuth },
     );
     const ct = res.headers.get("Content-Type") || "";
     const body = await res.json();
@@ -278,6 +299,7 @@ Deno.test("E2E: missing batch_id returns 404 JSON error, not CSV", async () => {
   await withServer(async (base) => {
     const res = await fetch(
       `${base}/admin/nominations/batch-export/?format=csv`,
+      { headers: adminAuth },
     );
     const ct = res.headers.get("Content-Type") || "";
     const body = await res.json();
@@ -295,6 +317,7 @@ Deno.test("E2E: invalid batch_id returns 400 JSON error, not CSV", async () => {
   await withServer(async (base) => {
     const res = await fetch(
       `${base}/admin/nominations/batch-export/not-a-uuid?format=csv`,
+      { headers: adminAuth },
     );
     const ct = res.headers.get("Content-Type") || "";
     const body = await res.json();
@@ -303,6 +326,41 @@ Deno.test("E2E: invalid batch_id returns 400 JSON error, not CSV", async () => {
     assertStringIncludes(ct, "application/json");
     assertEquals(body.ok, false);
     assertStringIncludes(body.error, "batch_id must be a valid UUID");
+    assertEquals(res.headers.get("Content-Disposition"), null);
+    assertEquals(ct.includes("text/csv"), false);
+  });
+});
+
+Deno.test("E2E: unauthenticated request returns 403 and no CSV headers", async () => {
+  await withServer(async (base) => {
+    const res = await fetch(
+      `${base}/admin/nominations/batch-export/${BATCH_ID}?format=csv`,
+    );
+    const ct = res.headers.get("Content-Type") || "";
+    const body = await res.json();
+
+    assertEquals(res.status, 403);
+    assertStringIncludes(ct, "application/json");
+    assertEquals(body.ok, false);
+    assertEquals(body.error, "Forbidden");
+    assertEquals(res.headers.get("Content-Disposition"), null);
+    assertEquals(ct.includes("text/csv"), false);
+  });
+});
+
+Deno.test("E2E: unauthorized request with bad token returns 403 and no CSV headers", async () => {
+  await withServer(async (base) => {
+    const res = await fetch(
+      `${base}/admin/nominations/batch-export/${BATCH_ID}?format=csv`,
+      { headers: { Authorization: "Bearer invalid-token" } },
+    );
+    const ct = res.headers.get("Content-Type") || "";
+    const body = await res.json();
+
+    assertEquals(res.status, 403);
+    assertStringIncludes(ct, "application/json");
+    assertEquals(body.ok, false);
+    assertEquals(body.error, "Forbidden");
     assertEquals(res.headers.get("Content-Disposition"), null);
     assertEquals(ct.includes("text/csv"), false);
   });
