@@ -139,23 +139,20 @@ export function CustomerCareChat() {
                     judging, local chapters, RMSA and EduAid-Africa.
                   </p>
                   <div className="flex flex-wrap gap-1.5 justify-center mb-4">
-                    {[
-                      "Nominations",
-                      "Voting",
-                      "Sponsorship",
-                      "Volunteering",
-                      "Judging",
-                      "Local Chapters",
-                      "RMSA",
-                      "EduAid",
-                    ].map((cap) => (
-                      <span
-                        key={cap}
-                        className="text-[10px] px-2 py-0.5 rounded-full border border-primary/20 bg-primary/5 text-primary"
+                    {CAPABILITY_LINKS.map((cap) => (
+                      <Link
+                        key={cap.label}
+                        to={cap.to}
+                        onClick={() => setIsOpen(false)}
+                        className="text-[10px] px-2 py-0.5 rounded-full border border-primary/20 bg-primary/5 text-primary hover:bg-primary/10 transition-colors"
                       >
-                        {cap}
-                      </span>
+                        {cap.label}
+                      </Link>
                     ))}
+                  </div>
+                  <div className="flex items-center gap-1.5 text-[10px] text-muted-foreground mb-3">
+                    <ShieldCheck className="h-3 w-3 text-primary" />
+                    <span>Independent of judging, voting & sponsorship outcomes.</span>
                   </div>
                   <div className="flex flex-wrap gap-2 justify-center mb-4">
                     {[
