@@ -44,7 +44,7 @@ function markLogged(input: LogFormAutoPromotionInput): void {
 
 export async function logFormAutoPromotion(
   input: LogFormAutoPromotionInput,
-): Promise<{ logged: boolean; error?: unknown }> {
+): Promise<{ logged: boolean; deduped?: boolean; error?: unknown }> {
   if (input.rawStatus !== "Link Pending" || input.resolvedStatus !== "Active") {
     return { logged: false };
   }
