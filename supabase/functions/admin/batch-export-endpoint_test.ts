@@ -401,3 +401,23 @@ Deno.test("E2E: valid admin token returns 200 CSV download with non-empty body",
     assertEquals(body.length > 0, true);
   });
 });
+
+Deno.test("E2E: valid batch_id CSV contains expected headers and at least one data row", async () => {
+  await withServer(async (base) => {
+    const res = await fetch(
+      `${base}/admin/nominations/batch-export/${BATCH_ID}?format=csv`,
+      { headers: adminAuth },
+    );
+    const body = await res.text();
+    const lines = body.split("\n").filter((l) => l.trim().length > 0);
+
+    assertEquals(res.status, 200);
+    assertEquals(lines.length >= 2, true);
+
+    const headers = lines[0].split(",");
+    assertEquals(headers.length, CSV_HEADERS.length);
+    for (const expected of CSV_HEADERS) {
+      assertEquals(headers.includes(expected), true);
+    }
+  });
+});
