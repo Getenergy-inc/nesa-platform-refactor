@@ -273,3 +273,37 @@ Deno.test("E2E: invalid format=bad returns 400 JSON error, not CSV", async () =>
     assertEquals(ct.includes("text/csv"), false);
   });
 });
+
+Deno.test("E2E: missing batch_id returns 404 JSON error, not CSV", async () => {
+  await withServer(async (base) => {
+    const res = await fetch(
+      `${base}/admin/nominations/batch-export/?format=csv`,
+    );
+    const ct = res.headers.get("Content-Type") || "";
+    const body = await res.json();
+
+    assertEquals(res.status, 404);
+    assertStringIncludes(ct, "application/json");
+    assertEquals(body.ok, false);
+    assertStringIncludes(body.error, "Not found");
+    assertEquals(res.headers.get("Content-Disposition"), null);
+    assertEquals(ct.includes("text/csv"), false);
+  });
+});
+
+Deno.test("E2E: invalid batch_id returns 400 JSON error, not CSV", async () => {
+  await withServer(async (base) => {
+    const res = await fetch(
+      `${base}/admin/nominations/batch-export/not-a-uuid?format=csv`,
+    );
+    const ct = res.headers.get("Content-Type") || "";
+    const body = await res.json();
+
+    assertEquals(res.status, 400);
+    assertStringIncludes(ct, "application/json");
+    assertEquals(body.ok, false);
+    assertStringIncludes(body.error, "batch_id must be a valid UUID");
+    assertEquals(res.headers.get("Content-Disposition"), null);
+    assertEquals(ct.includes("text/csv"), false);
+  });
+});
