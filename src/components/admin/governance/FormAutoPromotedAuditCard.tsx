@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import {
   Card,
   CardContent,
@@ -26,20 +26,10 @@ import { Badge } from "@/components/ui/badge";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Button } from "@/components/ui/button";
 import { Sparkles, ChevronLeft, ChevronRight, RefreshCw } from "lucide-react";
-import { supabase } from "@/integrations/supabase/client";
+import { useFormAutoPromotedAudit } from "@/hooks/useFormAutoPromotedAudit";
 import { toast } from "sonner";
 
 type FormKindFilter = "all" | "rmsa-region" | "award-category";
-
-interface PromotionRow {
-  id: string;
-  created_at: string;
-  actor_id: string | null;
-  form_kind: string;
-  form_slug: string;
-  raw_status: string;
-  resolved_status: string;
-}
 
 const PAGE_SIZE = 25;
 
@@ -54,68 +44,35 @@ const PAGE_SIZE = 25;
  * appears at most once.
  */
 export function FormAutoPromotedAuditCard() {
-  const [rows, setRows] = useState<PromotionRow[]>([]);
-  const [loading, setLoading] = useState(true);
   const [kind, setKind] = useState<FormKindFilter>("all");
   const [slug, setSlug] = useState("");
   const [page, setPage] = useState(1);
-  const [total, setTotal] = useState(0);
+
+  const {
+    data,
+    isLoading: loading,
+    isError,
+    error,
+    refetch,
+  } = useFormAutoPromotedAudit({
+    formKind: kind,
+    slug,
+    page,
+    pageSize: PAGE_SIZE,
+  });
+
+  const rows = data?.events ?? [];
+  const total = data?.total ?? 0;
 
   const totalPages = useMemo(
     () => Math.max(1, Math.ceil(total / PAGE_SIZE)),
     [total],
   );
 
-  async function load() {
-    setLoading(true);
-    try {
-      const from = (page - 1) * PAGE_SIZE;
-      const to = from + PAGE_SIZE - 1;
-
-      let query = supabase
-        .from("audit_events")
-        .select("id, created_at, actor_id, metadata", { count: "exact" })
-        .eq("action", "form_auto_promoted")
-        .order("created_at", { ascending: false })
-        .range(from, to);
-
-      if (kind !== "all") {
-        query = query.eq("metadata->>form_kind", kind);
-      }
-      const trimmed = slug.trim();
-      if (trimmed) {
-        query = query.ilike("metadata->>form_slug", `%${trimmed}%`);
-      }
-
-      const { data, error, count } = await query;
-      if (error) throw error;
-
-      const mapped: PromotionRow[] = (data ?? []).map((r) => {
-        const meta = (r.metadata ?? {}) as Record<string, unknown>;
-        return {
-          id: r.id as string,
-          created_at: r.created_at as string,
-          actor_id: (r.actor_id as string | null) ?? null,
-          form_kind: String(meta.form_kind ?? "—"),
-          form_slug: String(meta.form_slug ?? "—"),
-          raw_status: String(meta.raw_status ?? "—"),
-          resolved_status: String(meta.resolved_status ?? "—"),
-        };
-      });
-      setRows(mapped);
-      setTotal(count ?? 0);
-    } catch (err) {
-      console.error("Failed to load auto-promotion audit events", err);
-      toast.error("Failed to load auto-promotion audit events");
-    } finally {
-      setLoading(false);
-    }
+  if (isError && error) {
+    console.error("Failed to load auto-promotion audit events", error);
+    toast.error("Failed to load auto-promotion audit events");
   }
-
-  useEffect(() => {
-    load();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [page, kind]);
 
   return (
     <Card>
