@@ -6,6 +6,7 @@
 // See: docs/NOMINATION_FORM_MAPPING.md for the full operational register.
 
 import type { AwardCategoryForm, NominationSubcategory } from "./types";
+import { withResolvedStatuses } from "./resolveStatus";
 
 const placeholderSubs = (
   names: string[],
@@ -194,7 +195,9 @@ const EDUTECH_SUBS = placeholderSubs([
   "Other",
 ]);
 
-export const AWARD_CATEGORY_FORMS: AwardCategoryForm[] = [
+// Raw declarations — paste form URLs here as each Google Form goes live.
+// Status auto-promotes to "Active" when both URLs are non-empty.
+const AWARD_CATEGORY_FORMS_RAW: AwardCategoryForm[] = [
   // ── Influencer Education Impact ────────────────────────────────────────
   {
     slug: "education-content-social-media-influencers",
@@ -511,6 +514,18 @@ export const AWARD_CATEGORY_FORMS: AwardCategoryForm[] = [
     subcategories: PLATINUM_SUBS,
   },
 ];
+
+/**
+ * Public award-category forms array — statuses already resolved.
+ * A form whose raw status is "Link Pending" is auto-promoted to "Active"
+ * once both formPublicUrl and formEmbedUrl are present.
+ */
+export const AWARD_CATEGORY_FORMS: AwardCategoryForm[] = withResolvedStatuses(
+  AWARD_CATEGORY_FORMS_RAW,
+);
+
+/** Raw, unresolved array — for the admin mapping register only. */
+export { AWARD_CATEGORY_FORMS_RAW };
 
 export function getCategoryFormBySlug(
   slug: string,
