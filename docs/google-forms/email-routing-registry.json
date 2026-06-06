@@ -1,0 +1,62 @@
+{
+  "$schema": "./email-routing-registry.schema.json",
+  "system": "NESA-Africa Google Pre-Nomination Services",
+  "project": "NESA-Africa 2026 — The African Blue-Garnet Awards for Education",
+  "version": "1.0.0",
+  "updated": "2026-06-06",
+  "adminFallbackEmail": "nesa.africa@gmail.com",
+  "subjectTemplates": {
+    "award": "NESA 2026 Pre-Nomination Submission - {category} - {nomineeName}",
+    "rmsa": "NESA 2026/2027 RMSA School Nomination - {region} - {schoolName}"
+  },
+  "rules": {
+    "oneCategoryOneRecipient": true,
+    "replyToIsNominator": true,
+    "sendConfirmationToNominator": true,
+    "logNotifications": true,
+    "storePasswordsInCode": false
+  },
+  "awardForms": [
+    { "id": 1,  "category": "Education Content Social Media Influencers",                              "slug": "education-content-social-media-influencers",          "recipient": "socialinfl4edafricanesa2026@gmail.com" },
+    { "id": 2,  "category": "African Footballers Supporting Education",                                "slug": "african-footballers-supporting-education",            "recipient": "footballers4edafricanesa2026@gmail.com" },
+    { "id": 3,  "category": "African Musicians Supporting Education",                                  "slug": "african-musicians-supporting-education",              "recipient": "musicians4edafricanesa2026@gmail.com" },
+    { "id": 4,  "category": "Africa Education Icon Lifetime Achievement Award 2006-2026",              "slug": "africa-education-icon-lifetime-achievement-2006-2026","recipient": "eduicon2006to2026nesa2026@gmail.com" },
+    { "id": 5,  "category": "Africa Education Philanthropy Icon of the Decade",                        "slug": "africa-education-philanthropy-icon-of-the-decade",    "recipient": "eduphilanthropynesa2026@gmail.com" },
+    { "id": 6,  "category": "Literary & New Curriculum Advocate Icon of the Decade",                   "slug": "literary-new-curriculum-advocate-icon-of-the-decade", "recipient": "literarycurriculumnesa2026@gmail.com" },
+    { "id": 7,  "category": "Africa Technical Educator Icon of the Decade",                            "slug": "africa-technical-educator-icon-of-the-decade",        "recipient": "technicaleducatornesa2026@gmail.com" },
+    { "id": 8,  "category": "Best CSR for Education - Africa Regional",                                "slug": "best-csr-for-education-africa-regional",              "recipient": "csreduafricanesa2026@gmail.com" },
+    { "id": 9,  "category": "Best CSR for Education - Nigeria",                                        "slug": "best-csr-for-education-nigeria",                      "recipient": "csredunigerianesa2026@gmail.com" },
+    { "id": 10, "category": "Best EduTech Innovation for Education - Africa Regional",                 "slug": "best-edutech-innovation-for-education-africa-regional","recipient": "edtechafricanesa2026@gmail.com" },
+    { "id": 11, "category": "Best Media Organisation for Education Advocacy - Nigeria",                "slug": "best-media-organisation-for-education-advocacy-nigeria","recipient": "mediaadvocacyngnesa2026@gmail.com" },
+    { "id": 12, "category": "Best NGO for Education Advancement - Nigeria",                            "slug": "best-ngo-for-education-advancement-nigeria",          "recipient": "ngoadvancementngnesa2026@gmail.com" },
+    { "id": 13, "category": "Best NGO for Education Advancement - Africa Regional",                    "slug": "best-ngo-for-education-advancement-africa-regional",  "recipient": "ngoadvanceafricanesa2026@gmail.com" },
+    { "id": 14, "category": "Best STEM Education Programme - Africa Regional",                         "slug": "best-stem-education-programme-africa-regional",       "recipient": "stemprogramafricanesa2026@gmail.com" },
+    { "id": 15, "category": "Best Creative Arts Contribution to Education - Nigeria",                  "slug": "best-creative-arts-contribution-to-education-nigeria","recipient": "creativeartsngnesa2026@gmail.com" },
+    { "id": 16, "category": "Best Education Policy & Implementation State - Nigeria",                  "slug": "best-education-policy-implementation-state-nigeria",  "recipient": "edupolicystatenesa2026@gmail.com" },
+    { "id": 17, "category": "Best Tertiary Institution Library - Nigeria",                             "slug": "best-tertiary-institution-library-nigeria",           "recipient": "tertiarylibraryngnesa2026@gmail.com" },
+    { "id": 18, "category": "Excellence in Research & Development for Education - Nigeria",            "slug": "excellence-research-development-education-nigeria",   "recipient": "researchdevngnesa2026@gmail.com" },
+    { "id": 19, "category": "Excellence in Christian Education Impact - Africa Regional",              "slug": "excellence-christian-education-impact-africa",        "recipient": "christianeduafricanesa2026@gmail.com" },
+    { "id": 20, "category": "Excellence in Islamic Education Impact - Africa Regional",                "slug": "excellence-islamic-education-impact-africa",          "recipient": "islamiceduafricanesa2026@gmail.com" },
+    { "id": 21, "category": "Excellence in Political Leadership for Education - Nigeria",              "slug": "excellence-political-leadership-education-nigeria",   "recipient": "politicaledungnesa2026@gmail.com" },
+    { "id": 22, "category": "Excellence in International Partnership for Education - Africa",          "slug": "excellence-international-partnership-education-africa","recipient": "intlpartnerafricanesa2026@gmail.com" },
+    { "id": 23, "category": "Excellence in Diaspora Educational Impact - International",               "slug": "excellence-diaspora-educational-impact-international","recipient": "diasporaeduimpactnesa2026@gmail.com" }
+  ],
+  "rmsaRegionalForms": [
+    { "id": 1, "region": "West Africa",          "slug": "rmsa-west-africa",          "recipient": "rmsawafricaeduaidafrica@gmail.com" },
+    { "id": 2, "region": "East Africa",          "slug": "rmsa-east-africa",          "recipient": "rmsaeafricaeduaidafrica@gmail.com" },
+    { "id": 3, "region": "Central Africa",       "slug": "rmsa-central-africa",       "recipient": "rmsacafricaeduaidafrica@gmail.com" },
+    { "id": 4, "region": "Southern Africa",      "slug": "rmsa-southern-africa",      "recipient": "rmsasafricaeduaidafrica@gmail.com" },
+    { "id": 5, "region": "North Africa",         "slug": "rmsa-north-africa",         "recipient": "rmsanafricaeduaidafrica@gmail.com" },
+    { "id": 6, "region": "Sahel Africa",         "slug": "rmsa-sahel-africa",         "recipient": "rmsasaheleduaidafrica@gmail.com" },
+    { "id": 7, "region": "Horn of Africa",       "slug": "rmsa-horn-of-africa",       "recipient": "rmsahornafricaeduaidafrica@gmail.com" },
+    { "id": 8, "region": "Indian Ocean Islands", "slug": "rmsa-indian-ocean-islands", "recipient": "rmsaindianoceaneduaidafrica@gmail.com" }
+  ],
+  "notificationLogColumns": [
+    "timestamp", "response_id", "form_type", "category_or_region",
+    "nominator_email", "recipient_email", "notification_subject",
+    "notification_status", "error_message", "sent_at"
+  ],
+  "notificationStatuses": [
+    "Sent", "Failed", "Recipient Missing", "Nominator Email Missing", "Retry Required"
+  ]
+}
