@@ -61,6 +61,7 @@ export default function AfricaEducationIconPage() {
       <DynamicCategoryPage
         categoryTitle="Africa Education Icon Award (2006–2026)"
         nominationType="Africa Education Icon"
+        nominateCategorySlug="africa-education-icon-lifetime-achievement-2006-2026"
       />
     </>
   );
