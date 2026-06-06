@@ -279,6 +279,7 @@ Deno.test("E2E: invalid format=bad returns 400 JSON error, not CSV", async () =>
   await withServer(async (base) => {
     const res = await fetch(
       `${base}/admin/nominations/batch-export/${BATCH_ID}?format=bad`,
+      { headers: adminAuth },
     );
     const ct = res.headers.get("Content-Type") || "";
     const body = await res.json();
@@ -298,6 +299,7 @@ Deno.test("E2E: missing batch_id returns 404 JSON error, not CSV", async () => {
   await withServer(async (base) => {
     const res = await fetch(
       `${base}/admin/nominations/batch-export/?format=csv`,
+      { headers: adminAuth },
     );
     const ct = res.headers.get("Content-Type") || "";
     const body = await res.json();
@@ -315,6 +317,7 @@ Deno.test("E2E: invalid batch_id returns 400 JSON error, not CSV", async () => {
   await withServer(async (base) => {
     const res = await fetch(
       `${base}/admin/nominations/batch-export/not-a-uuid?format=csv`,
+      { headers: adminAuth },
     );
     const ct = res.headers.get("Content-Type") || "";
     const body = await res.json();
