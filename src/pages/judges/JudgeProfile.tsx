@@ -148,6 +148,9 @@ export default function JudgeProfile() {
                     <Badge variant="outline" className="border-white/20 text-white/70 capitalize">
                       {judge.judge_status}
                     </Badge>
+                    <Badge className="bg-gold/15 text-gold border border-gold/40">
+                      <ShieldCheck className="mr-1 h-3 w-3" /> COI declared
+                    </Badge>
                   </div>
 
                   <h1 className="font-serif text-3xl md:text-4xl font-bold text-gold">
