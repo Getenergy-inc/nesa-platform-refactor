@@ -6,10 +6,14 @@
 // See: docs/NOMINATION_FORM_MAPPING.md for the full operational register.
 
 import type { RmsaRegionalForm } from "./types";
+import { withResolvedStatuses } from "./resolveStatus";
 
 const TODAY = "2026-06-06";
 
-export const RMSA_REGIONAL_FORMS: RmsaRegionalForm[] = [
+// Raw declarations — edit this array to paste in URLs as the data team
+// builds each Google Form. Status is auto-promoted to "Active" the moment
+// both formPublicUrl and formEmbedUrl are non-empty (see resolveStatus.ts).
+const RMSA_REGIONAL_FORMS_RAW: RmsaRegionalForm[] = [
   {
     slug: "west-africa",
     region: "West Africa",
@@ -107,6 +111,18 @@ export const RMSA_REGIONAL_FORMS: RmsaRegionalForm[] = [
       "Nominate a special needs school in the Indian Ocean Islands for EduAid-Africa intervention.",
   },
 ];
+
+/**
+ * Public regional forms array — statuses already resolved.
+ * A form whose raw status is "Link Pending" is auto-promoted to "Active"
+ * once both formPublicUrl and formEmbedUrl are present.
+ */
+export const RMSA_REGIONAL_FORMS: RmsaRegionalForm[] = withResolvedStatuses(
+  RMSA_REGIONAL_FORMS_RAW,
+);
+
+/** Raw, unresolved array — for the admin mapping register only. */
+export { RMSA_REGIONAL_FORMS_RAW };
 
 export function getRmsaRegionFormBySlug(
   slug: string,
