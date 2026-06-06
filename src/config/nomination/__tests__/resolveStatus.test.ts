@@ -4,6 +4,7 @@ import {
   resolveFormStatus,
   withResolvedStatus,
   withResolvedStatuses,
+  isAutoPromoted,
 } from "@/config/nomination/resolveStatus";
 import {
   RMSA_REGIONAL_FORMS,
