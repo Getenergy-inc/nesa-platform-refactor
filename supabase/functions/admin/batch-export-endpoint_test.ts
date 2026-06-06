@@ -109,6 +109,18 @@ function handler(req: Request): Response {
   if (req.method === "OPTIONS") {
     return new Response(null, { headers: corsHeaders });
   }
+
+  // Auth middleware — mirror production requireAdmin() check
+  const authHeader = req.headers.get("Authorization");
+  const isAdmin = authHeader?.startsWith("Bearer ") &&
+    authHeader.replace("Bearer ", "") === VALID_ADMIN_TOKEN;
+  if (!isAdmin) {
+    return new Response(
+      JSON.stringify({ ok: false, error: "Forbidden" }),
+      { status: 403, headers: { ...corsHeaders, "Content-Type": "application/json" } },
+    );
+  }
+
   const url = new URL(req.url);
   const parts = url.pathname.split("/").filter(Boolean);
   // /admin/{domain}/{action}/{id}
