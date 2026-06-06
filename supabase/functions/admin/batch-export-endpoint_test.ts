@@ -28,6 +28,9 @@ const corsHeaders = {
 
 const BATCH_ID = "22222222-2222-2222-2222-222222222222";
 
+// Mock token that the test handler accepts as "valid admin"
+const VALID_ADMIN_TOKEN = "test-admin-token-xyz";
+
 const FIXTURE_ROWS = [
   {
     intake_id: "i-100",
