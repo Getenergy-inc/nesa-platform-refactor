@@ -59,8 +59,12 @@ export default function NominateSchool() {
               Nominate a Special Needs School
             </h1>
             <p className="text-white/80 text-sm md:text-base max-w-3xl">
-              NESA-Africa 2026/2027 Impact Program — EduAid-Africa Special Needs
-              School Intervention powered through Rebuild My School Africa.
+              NESA-Africa 2026/2027 invites the public to nominate special needs
+              schools for possible support through the EduAid-Africa Special
+              Needs Schools Grant Services and the Rebuild My School Africa
+              regional intervention program. Submitting this form does not
+              guarantee school selection, grant approval, donation allocation
+              or intervention approval.
             </p>
           </header>
 
@@ -161,6 +165,36 @@ export default function NominateSchool() {
                 </p>
               </div>
 
+              {/* What this form will ask — 10-section preview */}
+              <div className="rounded-2xl border border-gold/30 bg-charcoal-light/40 p-6 space-y-3">
+                <h3 className="font-display text-lg text-white">
+                  What this form will ask
+                </h3>
+                <ol className="grid sm:grid-cols-2 gap-x-6 gap-y-1.5 text-sm text-white/80 list-decimal list-inside">
+                  <li>Submitter / Nominator Details</li>
+                  <li>School Identity</li>
+                  <li>Special Needs Category Served</li>
+                  <li>Learner and Staff Information</li>
+                  <li>Current Needs and Intervention Request</li>
+                  <li className="text-gold">
+                    EduAid-Africa Special Needs Schools Grant Services
+                  </li>
+                  <li>Evidence and Verification</li>
+                  <li className="text-gold">
+                    EduTourism 2027 Commissioning Interest
+                  </li>
+                  <li className="text-gold">
+                    Donate to Rebuild My School Africa
+                  </li>
+                  <li>Declaration and Integrity Confirmation</li>
+                </ol>
+                <p className="text-xs text-white/55 pt-1">
+                  Sections highlighted in gold are donor / partner / grant
+                  intake — pledge and interest only unless payment backend is
+                  active.
+                </p>
+              </div>
+
               <GoogleFormDisplay
                 title={`${region.region} — Special Needs School Nomination`}
                 status={region.status}
@@ -180,9 +214,11 @@ export default function NominateSchool() {
                     </h3>
                   </div>
                   <p className="text-sm text-white/80 leading-relaxed">
-                    Express interest in attending regional project commissioning
-                    in 2027 through EduAid-Africa EduTourism — open to partners,
-                    sponsors, ambassadors and supporters.
+                    EduAid-Africa EduTourism 2027 will support regional
+                    education-impact visits, project commissioning, donor
+                    visibility and volunteer participation. Use the in-form
+                    section to indicate attendance, sponsorship or volunteer
+                    interest. Interest does not influence school selection.
                   </p>
                 </div>
                 <div className="rounded-2xl border border-gold/30 bg-charcoal-light/40 p-6 space-y-2">
@@ -193,9 +229,11 @@ export default function NominateSchool() {
                     </h3>
                   </div>
                   <p className="text-sm text-white/80 leading-relaxed">
-                    Indicate donation or pledge interest in the form. Donation
-                    interest does not guarantee that a nominated school will be
-                    selected as a regional intervention beneficiary.
+                    Pledge or interest only — no payment is processed here.
+                    Donation, sponsorship, EduTourism participation or public
+                    support does <strong>not</strong> guarantee that any school
+                    will be selected as a beneficiary. No donor, sponsor or
+                    supporter may buy school selection.
                   </p>
                 </div>
               </div>
