@@ -27,6 +27,11 @@ import {
 interface DynamicCategoryPageProps {
   categoryTitle: string;
   nominationType?: string;
+  /**
+   * Optional kebab-case slug from src/config/nomination/awardCategoryForms.ts
+   * to deep-link Nominate CTAs straight to the matching Google Form.
+   */
+  nominateCategorySlug?: string;
 }
 
 // Get icon for region type
@@ -36,7 +41,10 @@ function getRegionIcon(region: AfricanRegion) {
   return <Globe className="h-3 w-3" />;
 }
 
-export function DynamicCategoryPage({ categoryTitle, nominationType }: DynamicCategoryPageProps) {
+export function DynamicCategoryPage({ categoryTitle, nominationType, nominateCategorySlug }: DynamicCategoryPageProps) {
+  const nominateHref = nominateCategorySlug
+    ? `/nominate?category=${nominateCategorySlug}`
+    : "/nominate";
   const [selectedRegion, setSelectedRegion] = useState<AfricanRegion | undefined>();
   const [currentSlide, setCurrentSlide] = useState(0);
 
