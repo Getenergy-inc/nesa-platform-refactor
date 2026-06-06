@@ -100,6 +100,8 @@ const FIXTURE_ROWS = [
 ];
 
 // Mirrors the production handler branch in index.ts for the CSV format.
+const UUID_RE = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
+
 function handler(req: Request): Response {
   if (req.method === "OPTIONS") {
     return new Response(null, { headers: corsHeaders });
@@ -118,6 +120,12 @@ function handler(req: Request): Response {
       status: 404,
       headers: { ...corsHeaders, "Content-Type": "application/json" },
     });
+  }
+  if (!UUID_RE.test(resourceId)) {
+    return new Response(
+      JSON.stringify({ ok: false, error: "batch_id must be a valid UUID" }),
+      { status: 400, headers: { ...corsHeaders, "Content-Type": "application/json" } },
+    );
   }
   const batchId = resourceId;
   const rows = FIXTURE_ROWS;
@@ -261,6 +269,40 @@ Deno.test("E2E: invalid format=bad returns 400 JSON error, not CSV", async () =>
     assertStringIncludes(body.error, "Unsupported format");
     assertStringIncludes(body.error, "bad");
     // Ensure no CSV download artifacts are present
+    assertEquals(res.headers.get("Content-Disposition"), null);
+    assertEquals(ct.includes("text/csv"), false);
+  });
+});
+
+Deno.test("E2E: missing batch_id returns 404 JSON error, not CSV", async () => {
+  await withServer(async (base) => {
+    const res = await fetch(
+      `${base}/admin/nominations/batch-export/?format=csv`,
+    );
+    const ct = res.headers.get("Content-Type") || "";
+    const body = await res.json();
+
+    assertEquals(res.status, 404);
+    assertStringIncludes(ct, "application/json");
+    assertEquals(body.ok, false);
+    assertStringIncludes(body.error, "Not found");
+    assertEquals(res.headers.get("Content-Disposition"), null);
+    assertEquals(ct.includes("text/csv"), false);
+  });
+});
+
+Deno.test("E2E: invalid batch_id returns 400 JSON error, not CSV", async () => {
+  await withServer(async (base) => {
+    const res = await fetch(
+      `${base}/admin/nominations/batch-export/not-a-uuid?format=csv`,
+    );
+    const ct = res.headers.get("Content-Type") || "";
+    const body = await res.json();
+
+    assertEquals(res.status, 400);
+    assertStringIncludes(ct, "application/json");
+    assertEquals(body.ok, false);
+    assertStringIncludes(body.error, "batch_id must be a valid UUID");
     assertEquals(res.headers.get("Content-Disposition"), null);
     assertEquals(ct.includes("text/csv"), false);
   });
