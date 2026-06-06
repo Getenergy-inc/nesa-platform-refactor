@@ -125,7 +125,14 @@ function handler(req: Request): Response {
     (r) => r.duplicate_status === "Potential Duplicate",
   ).length;
   const uniqueCount = rows.filter((r) => r.duplicate_status === "Unique").length;
-  const format = (url.searchParams.get("format") || "json").toLowerCase();
+  const formatParam = url.searchParams.get("format");
+  const format = (formatParam || "json").toLowerCase();
+  if (formatParam && format !== "csv" && format !== "json") {
+    return new Response(
+      JSON.stringify({ ok: false, error: `Unsupported format "${format}". Use "csv" or "json".` }),
+      { status: 400, headers: { ...corsHeaders, "Content-Type": "application/json" } },
+    );
+  }
   if (format === "csv") {
     const csv = buildBatchExportCsv(rows, batchId);
     return new Response(csv, {
