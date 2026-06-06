@@ -244,6 +244,7 @@ Deno.test("E2E: default (no format) returns JSON, not CSV", async () => {
     assertEquals(body.ok, true);
     assertEquals(Array.isArray(body.data), true);
     assertEquals(body.data.length, 2);
+  });
 });
 
 Deno.test("E2E: invalid format=bad returns 400 JSON error, not CSV", async () => {
@@ -263,5 +264,4 @@ Deno.test("E2E: invalid format=bad returns 400 JSON error, not CSV", async () =>
     assertEquals(res.headers.get("Content-Disposition"), null);
     assertEquals(ct.includes("text/csv"), false);
   });
-});
 });
