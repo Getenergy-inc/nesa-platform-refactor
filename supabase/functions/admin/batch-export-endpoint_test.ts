@@ -365,3 +365,21 @@ Deno.test("E2E: unauthorized request with bad token returns 403 and no CSV heade
     assertEquals(ct.includes("text/csv"), false);
   });
 });
+
+Deno.test("E2E: valid non-admin token returns 403 and no CSV headers", async () => {
+  await withServer(async (base) => {
+    const res = await fetch(
+      `${base}/admin/nominations/batch-export/${BATCH_ID}?format=csv`,
+      { headers: { Authorization: "Bearer valid-non-admin-token-abc" } },
+    );
+    const ct = res.headers.get("Content-Type") || "";
+    const body = await res.json();
+
+    assertEquals(res.status, 403);
+    assertStringIncludes(ct, "application/json");
+    assertEquals(body.ok, false);
+    assertEquals(body.error, "Forbidden");
+    assertEquals(res.headers.get("Content-Disposition"), null);
+    assertEquals(ct.includes("text/csv"), false);
+  });
+});
