@@ -959,15 +959,98 @@ Deno.serve(async (req) => {
 
       const batchMeta = metaEvent?.metadata ?? null;
 
-      return respond(rows || [], {
+      const format = (url.searchParams.get("format") || "json").toLowerCase();
+      const rowList = (rows || []) as Array<Record<string, unknown>>;
+      const duplicateCount = rowList.filter((r) => r.duplicate_status === "Potential Duplicate").length;
+      const uniqueCount = rowList.filter((r) => r.duplicate_status === "Unique").length;
+
+      if (format === "csv") {
+        // Flatten each intake row + its audit_trail entries into CSV rows.
+        const headers = [
+          "batch_id",
+          "intake_id",
+          "record_id",
+          "form_kind",
+          "form_slug",
+          "identity_hash",
+          "duplicate_status",
+          "duplicate_of",
+          "ingested_at",
+          "ingested_by",
+          "audit_action",
+          "audit_reason",
+          "audit_canonical_id",
+          "audit_previous_status",
+          "audit_new_status",
+          "audit_actor_id",
+          "audit_created_at",
+        ];
+
+        const escape = (v: unknown): string => {
+          if (v === null || v === undefined) return "";
+          const s = typeof v === "object" ? JSON.stringify(v) : String(v);
+          return /[",\n\r]/.test(s) ? `"${s.replace(/"/g, '""')}"` : s;
+        };
+
+        const lines: string[] = [headers.join(",")];
+        for (const row of rowList) {
+          const trail = Array.isArray(row.audit_trail) ? row.audit_trail as Array<Record<string, unknown>> : [];
+          const base = [
+            batchId,
+            row.id,
+            row.record_id,
+            row.form_kind,
+            row.form_slug,
+            row.identity_hash,
+            row.duplicate_status,
+            row.duplicate_of,
+            row.ingested_at,
+            row.ingested_by,
+          ];
+          if (trail.length === 0) {
+            lines.push([...base, "", "", "", "", "", "", ""].map(escape).join(","));
+          } else {
+            for (const a of trail) {
+              lines.push([
+                ...base,
+                a.action,
+                a.reason,
+                a.canonical_id,
+                a.previous_duplicate_status,
+                a.new_duplicate_status,
+                a.actor_id,
+                a.created_at,
+              ].map(escape).join(","));
+            }
+          }
+        }
+
+        const csv = lines.join("\n");
+        const filename = `nomination-batch-${batchId}.csv`;
+        return new Response(csv, {
+          status: 200,
+          headers: {
+            ...corsHeaders,
+            "Content-Type": "text/csv; charset=utf-8",
+            "Content-Disposition": `attachment; filename="${filename}"`,
+            "X-Batch-Id": batchId,
+            "X-Total-Rows": String(rowList.length),
+            "X-Duplicate-Count": String(duplicateCount),
+            "X-Unique-Count": String(uniqueCount),
+          },
+        });
+      }
+
+      return respond(rowList, {
         batch_id: batchId,
-        total_rows: (rows || []).length,
-        duplicate_count: (rows || []).filter((r: { duplicate_status: string }) => r.duplicate_status === "Potential Duplicate").length,
-        unique_count: (rows || []).filter((r: { duplicate_status: string }) => r.duplicate_status === "Unique").length,
+        total_rows: rowList.length,
+        duplicate_count: duplicateCount,
+        unique_count: uniqueCount,
         batch_meta: batchMeta,
         exported_at: new Date().toISOString(),
       });
     }
+
 
     return errorResponse("Not found", 404);
 
