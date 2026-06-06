@@ -166,12 +166,12 @@ export function NESAFooter() {
                   <Mail className="h-4 w-4" /> info@nesa.africa
                 </a>
                 <a
-                  href="https://wa.me/2348109765897"
+                  href="https://wa.me/2347077456855"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-2 text-white/70 hover:text-gold transition-colors text-sm"
                 >
-                  <MessageCircle className="h-4 w-4" /> +234 810 976 5897
+                  <MessageCircle className="h-4 w-4" /> +234 707 745 6855
                 </a>
                 <Link
                   to="/help"
@@ -193,12 +193,12 @@ export function NESAFooter() {
                   <Mail className="h-4 w-4" /> info@nesa.africa
                 </a>
                 <a
-                  href="https://wa.me/2348109765897"
+                  href="https://wa.me/2347077456855"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-2 text-white/65 hover:text-gold transition-colors"
                 >
-                  <MessageCircle className="h-4 w-4" /> +234 810 976 5897
+                  <MessageCircle className="h-4 w-4" /> +234 707 745 6855
                 </a>
                 <Link
                   to="/help"
