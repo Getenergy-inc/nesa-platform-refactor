@@ -91,6 +91,17 @@ import DigitalVoices from "./pages/awards/DigitalVoices";
 import Winners from "./pages/awards/Winners";
 import GovernancePage from "./pages/GovernancePage";
 import EDXMatrixPage from "./pages/EDXMatrixPage";
+import { SponsorFirewallBanner } from "@/components/governance/SponsorFirewallBanner";
+
+/** Wraps a page with a top compact sponsor-firewall banner for governance visibility. */
+const WithFirewall = ({ children }: { children: React.ReactNode }) => (
+  <>
+    <div className="container mx-auto max-w-6xl px-4 pt-3">
+      <SponsorFirewallBanner variant="compact" />
+    </div>
+    {children}
+  </>
+);
 
 // Category Pages (data-driven)
 import {
@@ -538,7 +549,9 @@ const App = () => (
                     path="/awards/categories"
                     element={
                       <WithLayout>
-                        <CategoryMasterIndex />
+                        <WithFirewall>
+                          <CategoryMasterIndex />
+                        </WithFirewall>
                       </WithLayout>
                     }
                   />
@@ -1158,7 +1171,9 @@ const App = () => (
                     path="/nominate"
                     element={
                       <WithLayout>
-                        <Nominate />
+                        <WithFirewall>
+                          <Nominate />
+                        </WithFirewall>
                       </WithLayout>
                     }
                   />
@@ -1280,7 +1295,9 @@ const App = () => (
                     path="/vote"
                     element={
                       <WithLayout>
-                        <Vote />
+                        <WithFirewall>
+                          <Vote />
+                        </WithFirewall>
                       </WithLayout>
                     }
                   />
