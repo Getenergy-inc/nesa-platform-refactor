@@ -6,6 +6,7 @@ import { toast } from "sonner";
 import { useTranslation } from "react-i18next";
 import { trackEvent } from "@/lib/analytics";
 
+import { LanguageSwitcher } from "@/components/i18n";
 import { NominationProgressBar } from "@/components/nominate/NominationProgressBar";
 import { NominationFlashMessage } from "@/components/nominate/NominationFlashMessage";
 import { NominationPathwaySelector } from "@/components/nominate/NominationPathwaySelector";
@@ -187,7 +188,12 @@ export default function NominateFlow() {
 
       <div className="bg-charcoal min-h-screen">
         <div className="container max-w-4xl py-8 md:py-12 space-y-8">
-          <NominationProgressBar current={state.step} />
+          <div className="flex items-center gap-3 justify-between">
+            <div className="flex-1 min-w-0">
+              <NominationProgressBar current={state.step} />
+            </div>
+            <LanguageSwitcher variant="compact" />
+          </div>
 
           <AnimatePresence mode="wait">
             <motion.div
