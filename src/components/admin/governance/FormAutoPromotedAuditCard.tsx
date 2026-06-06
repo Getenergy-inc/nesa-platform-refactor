@@ -90,7 +90,7 @@ export function FormAutoPromotedAuditCard() {
               guarantees one row per form.
             </CardDescription>
           </div>
-          <Button variant="outline" size="sm" onClick={() => load()}>
+          <Button variant="outline" size="sm" onClick={() => refetch()}>
             <RefreshCw className="h-4 w-4 mr-2" />
             Refresh
           </Button>
@@ -121,7 +121,7 @@ export function FormAutoPromotedAuditCard() {
             onKeyDown={(e) => {
               if (e.key === "Enter") {
                 setPage(1);
-                load();
+                refetch();
               }
             }}
             className="w-[220px]"
@@ -131,7 +131,7 @@ export function FormAutoPromotedAuditCard() {
             size="sm"
             onClick={() => {
               setPage(1);
-              load();
+              refetch();
             }}
           >
             Apply
