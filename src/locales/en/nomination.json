@@ -1,4 +1,89 @@
 {
+  "flow": {
+    "meta": {
+      "title": "Nominate for NESA-Africa 2026 — Africa's Blue-Garnet Awards for Education",
+      "description": "Nominate education changemakers, institutions, NGOs, creators and special needs schools for the NESA-Africa 2026 awards. Multi-nominee, no sign-up until final submission."
+    },
+    "steps": {
+      "flash": "How it works",
+      "pathway": "Pathway",
+      "entry": "Nominee details",
+      "review": "Review",
+      "identity": "Your details",
+      "confirmation": "Done"
+    },
+    "flash": {
+      "eyebrow": "Start here",
+      "title": "How NESA-Africa Nominations Work",
+      "p1": "NESA-Africa nominations help the public identify education changemakers across Africa, the diaspora, and friends of Africa.",
+      "p2": "You can nominate educators, institutions, NGOs, advocates, creators, media voices, CSR contributors, policymakers, special needs schools, and other education impact leaders depending on the eligible category.",
+      "p3": "You may fill in nominee details first. At the final submission stage, you will be asked to provide your name, email address, phone number, country of residence, and country of origin before account creation or email verification. This helps NESA-Africa prevent fake, duplicate, or unverifiable nominations.",
+      "p4": "Nominations are reviewed based on category fit, evidence, regional relevance, education impact, eligibility, verification status, and the award pathway selected. Shortlisted nominees may move into screening, public visibility, Nominate & Earn AGC Voting Coin participation where applicable, expert judging, sponsor-independent review, and final governance approval.",
+      "startCta": "Start Nomination",
+      "guidelinesCta": "Read Nomination Guidelines"
+    },
+    "review": {
+      "eyebrow": "Step 4",
+      "title": "Review Your Nomination Entries",
+      "summary_one": "You are about to submit <0>{{count}}</0> nomination entry. Add more or proceed to final submission.",
+      "summary_other": "You are about to submit <0>{{count}}</0> nomination entries. Add more or proceed to final submission.",
+      "addAnother": "Add Another Nominee",
+      "proceed": "Proceed to Final Submission"
+    },
+    "identity": {
+      "eyebrow": "Step 5",
+      "title": "Complete Your Submission",
+      "subtitle": "To protect the integrity of NESA-Africa nominations, please provide your details before submitting. This helps us prevent duplicate, fake, or unverifiable nominations.",
+      "fullName": "Full name",
+      "email": "Email address",
+      "phone": "Phone number",
+      "countryResidence": "Country of residence",
+      "countryOrigin": "Country of origin",
+      "confirmDeclaration": "Please confirm the declaration",
+      "back": "Back to review",
+      "continue": "Continue"
+    },
+    "auth": {
+      "eyebrow": "Final step",
+      "titleAuthed": "Confirm and submit",
+      "titleGuest": "Create account or verify your email",
+      "summary_one": "You are submitting <0>{{count}}</0> nomination as <1>{{name}}</1> ({{email}}).",
+      "summary_other": "You are submitting <0>{{count}}</0> nominations as <1>{{name}}</1> ({{email}}).",
+      "signedInNote": "You are signed in. Your nomination entries will be attached to your account.",
+      "submitNominations": "Submit nominations",
+      "create": {
+        "title": "Create account",
+        "desc": "Set up an account with your submitted details.",
+        "cta": "Create account & submit"
+      },
+      "signin": {
+        "title": "Sign in",
+        "desc": "Already have an account? Sign in and attach these nominations.",
+        "cta": "Sign in & submit"
+      },
+      "verify": {
+        "title": "Verify email only",
+        "desc": "Submit without an account — we'll verify your email.",
+        "cta": "Verify email & submit"
+      },
+      "editDetails": "Edit my details"
+    },
+    "confirmation": {
+      "title": "Nomination Submitted Successfully",
+      "thanks_one": "Thank you for nominating {{count}} education changemaker for NESA-Africa. Your nomination will go through a structured review process — completeness, category fit, evidence review, verification, shortlisting, and governance/integrity review.",
+      "thanks_other": "Thank you for nominating {{count}} education changemakers for NESA-Africa. Your nomination will go through a structured review process — completeness, category fit, evidence review, verification, shortlisting, and governance/integrity review.",
+      "funnelNote": "Not all nominations become published nominees. Not all nominees become finalists. Not all finalists become winners.",
+      "explore": "Explore Nominees",
+      "another": "Nominate Another",
+      "guidelines": "Read Guidelines",
+      "sponsor": "Become a Sponsor"
+    },
+    "toast": {
+      "added": "Nominee added",
+      "updated": "Nominee updated",
+      "recorded": "Nomination interest recorded"
+    }
+  },
   "form": {
     "title": "Nomination Form",
     "step1": "Nominee Information",
