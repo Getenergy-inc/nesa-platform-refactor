@@ -223,6 +223,7 @@ Deno.test("E2E: CSV export — field mapping for canonical and duplicate rows", 
   await withServer(async (base) => {
     const res = await fetch(
       `${base}/admin/nominations/batch-export/${BATCH_ID}?format=csv`,
+      { headers: adminAuth },
     );
     const body = await res.text();
     const lines = body.split("\n");
