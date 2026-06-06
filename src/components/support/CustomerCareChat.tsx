@@ -67,10 +67,13 @@ export function CustomerCareChat() {
             <Button
               onClick={() => setIsOpen(true)}
               size="lg"
-              aria-label="Chat with Sophia Support"
-              className="h-14 w-14 rounded-full bg-primary hover:bg-primary/90 shadow-lg hover:shadow-xl transition-all"
+              aria-label="Chat with Sophia — Official NESA-Africa Support Assistant"
+              className="h-14 w-14 rounded-full bg-primary hover:bg-primary/90 shadow-lg hover:shadow-xl transition-all relative"
             >
               <MessageCircle className="h-6 w-6" aria-hidden="true" />
+              <span className="absolute -top-1 -right-1 h-4 w-4 rounded-full bg-background border border-primary flex items-center justify-center">
+                <Sparkles className="h-2.5 w-2.5 text-primary" />
+              </span>
             </Button>
           </motion.div>
         )}
