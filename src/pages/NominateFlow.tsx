@@ -6,6 +6,7 @@ import { toast } from "sonner";
 import { useTranslation } from "react-i18next";
 import { trackEvent } from "@/lib/analytics";
 
+import { LanguageSwitcher } from "@/components/i18n";
 import { NominationProgressBar } from "@/components/nominate/NominationProgressBar";
 import { NominationFlashMessage } from "@/components/nominate/NominationFlashMessage";
 import { NominationPathwaySelector } from "@/components/nominate/NominationPathwaySelector";
