@@ -272,7 +272,7 @@ export default function GoldAward() {
             </p>
             <div className="flex flex-wrap justify-center gap-4">
               <Button asChild size="lg" className="bg-amber-500 hover:bg-amber-600 text-charcoal font-semibold rounded-full gap-2">
-                <Link to="/nominate">
+                <Link to="/nominate?family=gold-blue-garnet">
                   <Award className="h-4 w-4" />
                   Submit Nomination
                   <ArrowRight className="h-4 w-4" />
