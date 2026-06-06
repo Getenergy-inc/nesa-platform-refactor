@@ -820,6 +820,90 @@ Deno.serve(async (req) => {
         if (msgs.length) warnings.push({ rowNumber, messages: msgs });
       });
 
+      // ----------------------------------------------------------------
+      // Persist cleaned rows to public.nomination_intake (idempotent
+      // upsert on record_id) + duplicate detection via identity_hash.
+      // ----------------------------------------------------------------
+      const persisted: { record_id: string; id: string; duplicate_of: string | null; duplicate_status: string }[] = [];
+      const persistErrors: { record_id: string; message: string }[] = [];
+
+      const validRows = cleaned.filter((c) => c.record_id && c.record_id.length > 0);
+
+      const rowsWithHash = await Promise.all(
+        validRows.map(async (c) => {
+          const { data: hash } = await adminSupabase.rpc("generate_identity_hash", {
+            p_name: c.nominee_name_clean || "",
+            p_email: null,
+            p_phone: null,
+            p_country: c.nominee_country_clean || "",
+          });
+          return { row: c, identity_hash: (hash as string) || null };
+        }),
+      );
+
+      if (rowsWithHash.length > 0) {
+        const payload = rowsWithHash.map(({ row, identity_hash }) => ({
+          record_id: row.record_id,
+          form_type: row.form_type,
+          award_group: row.award_group,
+          award_category: row.award_category,
+          award_subcategory: row.award_subcategory,
+          nominee_name_clean: row.nominee_name_clean,
+          nominee_type_clean: row.nominee_type_clean,
+          nominee_country_clean: row.nominee_country_clean,
+          nominee_region_clean: row.nominee_region_clean,
+          nominee_city_clean: row.nominee_city_clean,
+          impact_summary_clean: row.impact_summary_clean,
+          evidence_status: row.evidence_status,
+          duplicate_status: row.duplicate_status,
+          verification_status: row.verification_status,
+          nomination_status: row.nomination_status,
+          assigned_reviewer: row.assigned_reviewer,
+          reviewer_notes: row.reviewer_notes,
+          website_sync_status: row.website_sync_status,
+          identity_hash,
+          ingested_by: userId,
+        }));
+
+        const { data: upserted, error: upErr } = await adminSupabase
+          .from("nomination_intake")
+          .upsert(payload, { onConflict: "record_id" })
+          .select("id, record_id, identity_hash");
+
+        if (upErr) {
+          console.error("nomination_intake upsert failed", upErr);
+          persistErrors.push({ record_id: "*", message: upErr.message });
+        } else if (upserted) {
+          for (const r of upserted) {
+            let duplicateOf: string | null = null;
+            let dupStatus = "Unique";
+            if (r.identity_hash) {
+              const { data: dups } = await adminSupabase
+                .from("nomination_intake")
+                .select("id, ingested_at")
+                .eq("identity_hash", r.identity_hash)
+                .neq("id", r.id)
+                .order("ingested_at", { ascending: true })
+                .limit(1);
+              if (dups && dups.length > 0) {
+                duplicateOf = dups[0].id as string;
+                dupStatus = "Potential Duplicate";
+                await adminSupabase
+                  .from("nomination_intake")
+                  .update({ duplicate_status: dupStatus, duplicate_of: duplicateOf })
+                  .eq("id", r.id);
+              }
+            }
+            persisted.push({
+              record_id: r.record_id as string,
+              id: r.id as string,
+              duplicate_of: duplicateOf,
+              duplicate_status: dupStatus,
+            });
+          }
+        }
+      }
+
       // Audit (best-effort; never blocks the response)
       adminSupabase.from("audit_events").insert({
         action: "nominations_ingest_mapped",
@@ -829,11 +913,18 @@ Deno.serve(async (req) => {
           form_type: context.formType,
           context: context,
           total: cleaned.length,
+          persisted_count: persisted.length,
+          duplicate_count: persisted.filter((p) => p.duplicate_status === "Potential Duplicate").length,
           warning_count: warnings.length,
         },
       }).then(() => {}, (e) => console.error("audit insert failed", e));
 
-      return respond(cleaned, { total: cleaned.length, warnings });
+      return respond(cleaned, {
+        total: cleaned.length,
+        warnings,
+        persisted,
+        persist_errors: persistErrors,
+      });
     }
 
     return errorResponse("Not found", 404);
