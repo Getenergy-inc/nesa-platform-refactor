@@ -173,6 +173,8 @@ export default function NominateSchool() {
                       rawStatus={rawRegion.status}
                       resolvedStatus={region.status}
                       size="md"
+                      formSlug={region.slug}
+                      formKind="rmsa-region"
                     />
                   )}
                 </div>
