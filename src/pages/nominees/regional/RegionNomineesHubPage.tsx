@@ -143,7 +143,7 @@ export default function RegionNomineesHubPage({ region: regionProp }: { region?:
               <p className="text-ivory/60 max-w-md mx-auto mb-6">
                 Be the first to nominate an education changemaker from {meta.name} for the 2026 NESA-Africa Awards.
               </p>
-              <Link to="/nominate"><Button className="bg-gold hover:bg-gold/90 text-charcoal font-bold rounded-full px-7 gap-2"><Trophy className="w-4 h-4" /> Submit a Nomination</Button></Link>
+              <Link to={`/nominate?region=${region}&source=region-${region}`}><Button className="bg-gold hover:bg-gold/90 text-charcoal font-bold rounded-full px-7 gap-2"><Trophy className="w-4 h-4" /> Submit a Nomination</Button></Link>
             </div>
           )}
 
