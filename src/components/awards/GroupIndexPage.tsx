@@ -22,6 +22,15 @@ interface Props {
 
 const SITE = "https://nesaafrica.lovable.app";
 
+// Map awardCategories CategoryGroup → NominateMvp award family id.
+const GROUP_TO_FAMILY: Record<CategoryGroup, string | null> = {
+  blue_garnet: "gold-blue-garnet",
+  platinum: "platinum",
+  icon: "africa-education-icon",
+  influencers: "influencer",
+  special_recognition: "gold-blue-garnet",
+};
+
 export function GroupIndexPage({ group, seoTitle, metaDescription, intro }: Props) {
   const meta = GROUP_META[group];
   const categories = getCategoriesByGroup(group);
