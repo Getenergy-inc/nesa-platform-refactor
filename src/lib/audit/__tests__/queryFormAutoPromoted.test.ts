@@ -1,21 +1,22 @@
 import { describe, it, expect, vi, beforeEach } from "vitest";
 import { queryFormAutoPromoted } from "../queryFormAutoPromoted";
 
-const mockSelect = vi.fn();
-const mockEq = vi.fn();
-const mockIlike = vi.fn();
-const mockOrder = vi.fn();
 const mockRange = vi.fn();
+
+function createChain() {
+  const chain = {
+    select: vi.fn(() => chain),
+    eq: vi.fn(() => chain),
+    ilike: vi.fn(() => chain),
+    order: vi.fn(() => chain),
+    range: mockRange,
+  };
+  return chain;
+}
 
 vi.mock("@/integrations/supabase/client", () => ({
   supabase: {
-    from: () => ({
-      select: mockSelect.mockReturnThis(),
-      eq: mockEq.mockReturnThis(),
-      ilike: mockIlike.mockReturnThis(),
-      order: mockOrder.mockReturnThis(),
-      range: mockRange,
-    }),
+    from: createChain,
   },
 }));
 
