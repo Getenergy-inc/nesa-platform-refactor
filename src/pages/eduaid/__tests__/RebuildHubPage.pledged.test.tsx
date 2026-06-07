@@ -98,6 +98,7 @@ describe("RebuildHubPage — ?pledged=success handling", () => {
 
   it("does nothing when ?pledged is absent", async () => {
     window.history.replaceState({}, "", PATH);
+    replaceStateSpy.mockClear();
     renderAt(PATH);
 
     await new Promise((r) => setTimeout(r, 0));
@@ -108,6 +109,7 @@ describe("RebuildHubPage — ?pledged=success handling", () => {
   it("preserves other query params alongside the stripped pledged param", async () => {
     const url = `${PATH}?pledged=success&ref=email#donate`;
     window.history.replaceState({}, "", url);
+    replaceStateSpy.mockClear();
     renderAt(url);
 
     await waitFor(() => expect(replaceStateSpy).toHaveBeenCalledTimes(1));
