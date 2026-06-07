@@ -30,11 +30,15 @@ export type RecognitionClass =
   | "African Living in Africa"
   | "African in the Diaspora";
 export type RegionId =
+  | "North Africa"
   | "West Africa"
   | "East Africa"
-  | "Southern Africa"
   | "Central Africa"
-  | "North Africa";
+  | "Southern Africa"
+  | "Horn of Africa"
+  | "Sahel"
+  | "Indian Ocean Islands"
+  | "African Diaspora";
 export type VerificationStatus = "VERIFIED" | "PENDING" | "REJECTED";
 
 export const RECOGNITION_CLASSES: RecognitionClass[] = [
@@ -42,12 +46,17 @@ export const RECOGNITION_CLASSES: RecognitionClass[] = [
   "African in the Diaspora",
 ];
 
+// 8 African regions + African Diaspora
 export const REGIONS: RegionId[] = [
+  "North Africa",
   "West Africa",
   "East Africa",
-  "Southern Africa",
   "Central Africa",
-  "North Africa",
+  "Southern Africa",
+  "Horn of Africa",
+  "Sahel",
+  "Indian Ocean Islands",
+  "African Diaspora",
 ];
 
 // ── Category taxonomies ─────────────────────────────────────────────
