@@ -1698,6 +1698,117 @@ export type Database = {
           },
         ]
       }
+      influencer_impact_nominees: {
+        Row: {
+          artist_profile_link: string | null
+          athlete_status: string | null
+          award_category: string
+          award_family: string
+          club_team_or_foundation: string | null
+          content_impact_area: string | null
+          created_at: string
+          education_impact_summary: string
+          evidence_links: string[]
+          follower_count_range: string | null
+          id: string
+          image_url: string | null
+          label_or_foundation: string | null
+          music_education_impact_area: string | null
+          music_genre: string | null
+          nominee_country: string
+          nominee_name: string
+          nominee_region: string
+          other_music_genres: string[] | null
+          other_platforms: string[] | null
+          platform_profile_link: string | null
+          primary_social_media_platform: string | null
+          primary_sport_area: string | null
+          recognition_class: string
+          reviewed_at: string | null
+          reviewed_by: string | null
+          slug: string
+          sports_education_impact_area: string | null
+          sports_profile_link: string | null
+          stage_name: string | null
+          submitted_by: string | null
+          updated_at: string
+          verification_status: string
+          verified_nominations: number
+        }
+        Insert: {
+          artist_profile_link?: string | null
+          athlete_status?: string | null
+          award_category: string
+          award_family?: string
+          club_team_or_foundation?: string | null
+          content_impact_area?: string | null
+          created_at?: string
+          education_impact_summary?: string
+          evidence_links?: string[]
+          follower_count_range?: string | null
+          id?: string
+          image_url?: string | null
+          label_or_foundation?: string | null
+          music_education_impact_area?: string | null
+          music_genre?: string | null
+          nominee_country: string
+          nominee_name: string
+          nominee_region: string
+          other_music_genres?: string[] | null
+          other_platforms?: string[] | null
+          platform_profile_link?: string | null
+          primary_social_media_platform?: string | null
+          primary_sport_area?: string | null
+          recognition_class: string
+          reviewed_at?: string | null
+          reviewed_by?: string | null
+          slug: string
+          sports_education_impact_area?: string | null
+          sports_profile_link?: string | null
+          stage_name?: string | null
+          submitted_by?: string | null
+          updated_at?: string
+          verification_status?: string
+          verified_nominations?: number
+        }
+        Update: {
+          artist_profile_link?: string | null
+          athlete_status?: string | null
+          award_category?: string
+          award_family?: string
+          club_team_or_foundation?: string | null
+          content_impact_area?: string | null
+          created_at?: string
+          education_impact_summary?: string
+          evidence_links?: string[]
+          follower_count_range?: string | null
+          id?: string
+          image_url?: string | null
+          label_or_foundation?: string | null
+          music_education_impact_area?: string | null
+          music_genre?: string | null
+          nominee_country?: string
+          nominee_name?: string
+          nominee_region?: string
+          other_music_genres?: string[] | null
+          other_platforms?: string[] | null
+          platform_profile_link?: string | null
+          primary_social_media_platform?: string | null
+          primary_sport_area?: string | null
+          recognition_class?: string
+          reviewed_at?: string | null
+          reviewed_by?: string | null
+          slug?: string
+          sports_education_impact_area?: string | null
+          sports_profile_link?: string | null
+          stage_name?: string | null
+          submitted_by?: string | null
+          updated_at?: string
+          verification_status?: string
+          verified_nominations?: number
+        }
+        Relationships: []
+      }
       judge_activity_logs: {
         Row: {
           action: string
