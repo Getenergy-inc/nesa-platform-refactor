@@ -8,10 +8,6 @@ import {
   ArrowRight,
   MapPin,
   Shield,
-
-  MapPin,
-  Shield,
-  ChevronDown,
   CheckCircle2,
   School,
   Heart,
