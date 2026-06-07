@@ -2,7 +2,7 @@
 // Public-facing landing & conversion page for /eduaid-africa/rebuild-my-school
 // Refactored per NESA-Africa 2026/2027 spec (14 sections, 8 regions).
 
-import { Helmet } from "react-helmet-async";
+import { Link } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { useState } from "react";
