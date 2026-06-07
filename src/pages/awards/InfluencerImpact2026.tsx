@@ -9,6 +9,7 @@ import { NomineeDiscovery } from "@/components/influencer-impact/NomineeDiscover
 import { EvidenceImpactSection } from "@/components/influencer-impact/EvidenceImpactSection";
 import { EDXFrameworkPanel } from "@/components/influencer-impact/EDXFrameworkPanel";
 import { GovernanceNotice } from "@/components/influencer-impact/GovernanceNotice";
+import { ProjectTimelineSection } from "@/components/influencer-impact/ProjectTimelineSection";
 import { AWARD_ROUTE, type CategoryId } from "@/config/awards/influencerImpact2026";
 
 export default function InfluencerImpact2026() {
@@ -63,6 +64,7 @@ export default function InfluencerImpact2026() {
         <EvidenceImpactSection />
         <NomineeDiscovery category={category} onCategoryChange={setCategory} />
         <EDXFrameworkPanel />
+        <ProjectTimelineSection />
         <GovernanceNotice />
         <NESAFooter />
       </div>
