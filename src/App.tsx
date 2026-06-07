@@ -89,6 +89,7 @@ import IconAward from "./pages/awards/IconAward";
 import GoldAward from "./pages/awards/GoldAward";
 import BlueGarnetAward from "./pages/awards/BlueGarnetAward";
 import GoldSpecialRecognition from "./pages/awards/GoldSpecialRecognition";
+import InfluencerImpact2026 from "./pages/awards/InfluencerImpact2026";
 import DigitalVoices from "./pages/awards/DigitalVoices";
 import Winners from "./pages/awards/Winners";
 import GovernancePage from "./pages/GovernancePage";
@@ -665,9 +666,13 @@ const App = () => (
                   />
                   <Route
                     path="/awards/influencers-education-impact-2026-recognition"
+                    element={<InfluencerImpact2026 />}
+                  />
+                  {/* Legacy shell — keep importable from other entry points */}
+                  <Route
+                    path="/awards/gold-special-recognition-legacy"
                     element={<GoldSpecialRecognition />}
                   />
-                  {/* Legacy alias — 301-style redirect preserving query string */}
                   <Route
                     path="/awards/gold-special-recognition"
                     element={<Navigate to="/awards/influencers-education-impact-2026-recognition" replace />}
