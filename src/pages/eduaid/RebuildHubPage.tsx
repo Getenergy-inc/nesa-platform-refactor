@@ -1,13 +1,14 @@
 // Rebuild My School Africa — EduAid-Africa Special Needs School Intervention
 // Public-facing landing & conversion page for /eduaid-africa/rebuild-my-school
-// Refactored per NESA-Africa 2026/2027 spec (14 sections, 8 regions).
 
-import { Link } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { useState } from "react";
 import {
   ArrowRight,
+  MapPin,
+  Shield,
+
   MapPin,
   Shield,
   ChevronDown,
