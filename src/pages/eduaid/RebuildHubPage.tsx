@@ -154,7 +154,6 @@ const STATUS_BADGE: Record<string, string> = {
 const nominateRoute = (slug: string) => `/impact/nominate-school?region=${slug}`;
 
 export default function RebuildHubPage() {
-  const [openTrack, setOpenTrack] = useState<string | null>(null);
 
   return (
     <>
