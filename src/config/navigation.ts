@@ -125,6 +125,7 @@ export const MAIN_NAV: NavItem[] = [
       { label: "Platinum Certificate Categories", href: "/awards/platinum", description: "Institutional leadership recognition", icon: Medal },
       { label: "Africa Education Icon (2006–2026)", href: "/awards/icon", description: "Lifetime achievement award", icon: Star },
       { label: "Influencers Education Impact 2026", href: "/awards/influencers-education-impact-2026-recognition", description: "Sports, Music & Social Media impact", icon: Sparkles, badge: "2026" },
+      { label: "Guidelines", href: "/guidelines/nominators", description: "Nomination guidelines and how to participate", icon: BookOpen },
       { label: "Eligibility & Criteria", href: "/awards#eligibility", description: "Who can be nominated", icon: FileCheck },
       { label: "Nomination Process", href: "/nominate", description: "How nominations work", icon: FileCheck },
       { label: "Voting & Judging Integrity", href: "/policies/voting-integrity", description: "Firewalls protecting outcomes", icon: Shield },
