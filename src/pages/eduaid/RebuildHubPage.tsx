@@ -497,8 +497,24 @@ export default function RebuildHubPage() {
         </section>
 
         {/* ── 10. DONATE / PLEDGE (inline, no fake payment) ── */}
-        <section id="donate" className="py-14 border-t border-primary/10">
+        <section id="donate" className="py-14 border-t border-primary/10 scroll-mt-20">
           <div className="container max-w-4xl mx-auto px-4">
+            {pledgeSuccess && (
+              <div
+                role="status"
+                aria-live="polite"
+                className="mb-6 rounded-xl border border-emerald-400/30 bg-emerald-500/10 p-4 flex items-start gap-3"
+              >
+                <CheckCircle2 className="h-5 w-5 text-emerald-300 shrink-0 mt-0.5" />
+                <div className="text-sm text-white/85">
+                  <p className="font-semibold text-emerald-200 mb-0.5">Pledge recorded — thank you.</p>
+                  <p className="text-white/70 text-xs leading-relaxed">
+                    Your interest in supporting Rebuild My School Africa has been logged. The SCEF /
+                    NESA-Africa partnerships team will follow up. No payment was processed.
+                  </p>
+                </div>
+              </div>
+            )}
             <div className="rounded-2xl border border-gold/30 bg-gold/5 p-6 md:p-8">
               <div className="flex items-center gap-2 mb-3">
                 <HandHeart className="h-5 w-5 text-gold" />
