@@ -151,7 +151,24 @@ const STATUS_BADGE: Record<string, string> = {
 
 const nominateRoute = (slug: string) => `/impact/nominate-school?region=${slug}`;
 
+const PLEDGE_RETURN = "/eduaid-africa/rebuild-my-school#donate";
+const DONATE_PLEDGE_URL = `/donate?return_to=${encodeURIComponent(PLEDGE_RETURN)}`;
+
 export default function RebuildHubPage() {
+  const [searchParams, setSearchParams] = useSearchParams();
+  const [pledgeSuccess, setPledgeSuccess] = useState(false);
+
+  useEffect(() => {
+    if (searchParams.get("pledged") === "success") {
+      setPledgeSuccess(true);
+      // Scroll to the donate section and clean the URL param (keep the hash).
+      const el = document.getElementById("donate");
+      if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+      const next = new URLSearchParams(searchParams);
+      next.delete("pledged");
+      setSearchParams(next, { replace: true });
+    }
+  }, [searchParams, setSearchParams]);
 
   return (
     <>
