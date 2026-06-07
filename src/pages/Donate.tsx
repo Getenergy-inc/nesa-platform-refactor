@@ -1,5 +1,5 @@
 import { Helmet } from "react-helmet-async";
-import { Link } from "react-router-dom";
+import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -40,10 +40,23 @@ const impactPoints = [
 export default function Donate() {
   const [selectedAmount, setSelectedAmount] = useState("25");
   const [customAmount, setCustomAmount] = useState("");
+  const [searchParams] = useSearchParams();
+  const navigate = useNavigate();
+  const returnTo = searchParams.get("return_to");
+  const isPledgeMode = Boolean(returnTo);
 
   const handleDonate = () => {
     const amount = customAmount || selectedAmount;
-    console.log(`Donating $${amount}`);
+    console.log(`${isPledgeMode ? "Pledging" : "Donating"} $${amount}`);
+    if (returnTo) {
+      try {
+        const url = new URL(returnTo, window.location.origin);
+        url.searchParams.set("pledged", "success");
+        navigate(url.pathname + url.search + url.hash, { replace: true });
+      } catch {
+        navigate(returnTo, { replace: true });
+      }
+    }
   };
 
   return (
@@ -83,6 +96,21 @@ export default function Donate() {
             </div>
           </div>
         </section>
+
+        {isPledgeMode && (
+          <section className="pt-2">
+            <div className="container mx-auto px-4 max-w-3xl">
+              <div className="rounded-xl border border-gold/30 bg-gold/5 p-4 text-sm text-white/80 flex items-start gap-3">
+                <Heart className="h-4 w-4 text-gold shrink-0 mt-0.5" />
+                <p>
+                  <span className="text-gold font-semibold">Pledge mode.</span> No payment will be
+                  processed here. Submitting records your pledge interest and returns you to the
+                  Rebuild My School Africa page with a confirmation.
+                </p>
+              </div>
+            </div>
+          </section>
+        )}
 
         {/* Donor Trust */}
         <section className="py-6">
@@ -168,14 +196,23 @@ export default function Donate() {
                     Secure payment via Paystack / Flutterwave
                   </div>
 
-                  {/* Donate Button */}
+                  {/* Donate / Pledge Button */}
                   <Button
                     onClick={handleDonate}
                     size="lg"
                     className="w-full bg-primary text-primary-foreground"
                   >
-                    <CreditCard className="mr-2 h-5 w-5" />
-                    Donate ${customAmount || selectedAmount}
+                    {isPledgeMode ? (
+                      <>
+                        <Heart className="mr-2 h-5 w-5" />
+                        Submit Pledge ${customAmount || selectedAmount}
+                      </>
+                    ) : (
+                      <>
+                        <CreditCard className="mr-2 h-5 w-5" />
+                        Donate ${customAmount || selectedAmount}
+                      </>
+                    )}
                   </Button>
 
                   <p className="text-center text-xs text-white/50">

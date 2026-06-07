@@ -1,8 +1,9 @@
 // Rebuild My School Africa — EduAid-Africa Special Needs School Intervention
 // Public-facing landing & conversion page for /eduaid-africa/rebuild-my-school
 
+import { useEffect, useState } from "react";
 import { Helmet } from "react-helmet-async";
-import { Link } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 import { motion } from "framer-motion";
 import {
   ArrowRight,
@@ -150,7 +151,24 @@ const STATUS_BADGE: Record<string, string> = {
 
 const nominateRoute = (slug: string) => `/impact/nominate-school?region=${slug}`;
 
+const PLEDGE_RETURN = "/eduaid-africa/rebuild-my-school#donate";
+const DONATE_PLEDGE_URL = `/donate?return_to=${encodeURIComponent(PLEDGE_RETURN)}`;
+
 export default function RebuildHubPage() {
+  const [searchParams, setSearchParams] = useSearchParams();
+  const [pledgeSuccess, setPledgeSuccess] = useState(false);
+
+  useEffect(() => {
+    if (searchParams.get("pledged") === "success") {
+      setPledgeSuccess(true);
+      // Scroll to the donate section and clean the URL param (keep the hash).
+      const el = document.getElementById("donate");
+      if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+      const next = new URLSearchParams(searchParams);
+      next.delete("pledged");
+      setSearchParams(next, { replace: true });
+    }
+  }, [searchParams, setSearchParams]);
 
   return (
     <>
@@ -479,8 +497,24 @@ export default function RebuildHubPage() {
         </section>
 
         {/* ── 10. DONATE / PLEDGE (inline, no fake payment) ── */}
-        <section id="donate" className="py-14 border-t border-primary/10">
+        <section id="donate" className="py-14 border-t border-primary/10 scroll-mt-20">
           <div className="container max-w-4xl mx-auto px-4">
+            {pledgeSuccess && (
+              <div
+                role="status"
+                aria-live="polite"
+                className="mb-6 rounded-xl border border-emerald-400/30 bg-emerald-500/10 p-4 flex items-start gap-3"
+              >
+                <CheckCircle2 className="h-5 w-5 text-emerald-300 shrink-0 mt-0.5" />
+                <div className="text-sm text-white/85">
+                  <p className="font-semibold text-emerald-200 mb-0.5">Pledge recorded — thank you.</p>
+                  <p className="text-white/70 text-xs leading-relaxed">
+                    Your interest in supporting Rebuild My School Africa has been logged. The SCEF /
+                    NESA-Africa partnerships team will follow up. No payment was processed.
+                  </p>
+                </div>
+              </div>
+            )}
             <div className="rounded-2xl border border-gold/30 bg-gold/5 p-6 md:p-8">
               <div className="flex items-center gap-2 mb-3">
                 <HandHeart className="h-5 w-5 text-gold" />
@@ -505,7 +539,7 @@ export default function RebuildHubPage() {
               </div>
 
               <div className="flex flex-wrap gap-3 mb-5">
-                <Link to="/donate">
+                <Link to={DONATE_PLEDGE_URL}>
                   <Button className="bg-gold hover:bg-gold/90 text-charcoal font-semibold gap-2">
                     <Heart className="h-4 w-4" /> Pledge Support
                   </Button>
@@ -642,7 +676,7 @@ export default function RebuildHubPage() {
                     <School className="h-4 w-4" /> Nominate a Special Needs School
                   </Button>
                 </Link>
-                <Link to="/donate">
+                <Link to={DONATE_PLEDGE_URL}>
                   <Button size="lg" variant="outline" className="border-gold/40 text-gold hover:bg-gold/10 gap-2">
                     <Heart className="h-4 w-4" /> Donate or Pledge Support
                   </Button>
