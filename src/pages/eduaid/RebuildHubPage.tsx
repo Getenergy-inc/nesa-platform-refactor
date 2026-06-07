@@ -539,7 +539,7 @@ export default function RebuildHubPage() {
               </div>
 
               <div className="flex flex-wrap gap-3 mb-5">
-                <Link to="/donate">
+                <Link to={DONATE_PLEDGE_URL}>
                   <Button className="bg-gold hover:bg-gold/90 text-charcoal font-semibold gap-2">
                     <Heart className="h-4 w-4" /> Pledge Support
                   </Button>
@@ -676,7 +676,7 @@ export default function RebuildHubPage() {
                     <School className="h-4 w-4" /> Nominate a Special Needs School
                   </Button>
                 </Link>
-                <Link to="/donate">
+                <Link to={DONATE_PLEDGE_URL}>
                   <Button size="lg" variant="outline" className="border-gold/40 text-gold hover:bg-gold/10 gap-2">
                     <Heart className="h-4 w-4" /> Donate or Pledge Support
                   </Button>
