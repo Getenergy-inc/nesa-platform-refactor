@@ -34,10 +34,11 @@ export function NomineeDiscovery({ category, onCategoryChange }: Props) {
     ...MUSIC_IMPACT_AREAS,
   ];
 
-  const countries = useMemo(
-    () => Array.from(new Set(SEED_NOMINEES.map((n) => n.nominee_country))).sort(),
-    [],
-  );
+  const countries = useMemo(() => {
+    const region = filters.region;
+    if (region && region !== "all") return COUNTRIES_BY_REGION[region] ?? [];
+    return ALL_COUNTRIES;
+  }, [filters.region]);
 
   const results = useMemo(
     () =>
