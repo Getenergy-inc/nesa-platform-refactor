@@ -1,7 +1,7 @@
 // Rebuild My School Africa — EduAid-Africa Special Needs School Intervention
 // Public-facing landing & conversion page for /eduaid-africa/rebuild-my-school
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Helmet } from "react-helmet-async";
 import { Link, useSearchParams } from "react-router-dom";
 import { motion } from "framer-motion";
