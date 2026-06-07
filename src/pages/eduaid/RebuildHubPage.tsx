@@ -1,7 +1,7 @@
 // Rebuild My School Africa — EduAid-Africa Special Needs School Intervention
 // Public-facing landing & conversion page for /eduaid-africa/rebuild-my-school
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Helmet } from "react-helmet-async";
 import { Link, useSearchParams } from "react-router-dom";
 import { motion } from "framer-motion";
@@ -155,20 +155,41 @@ const PLEDGE_RETURN = "/eduaid-africa/rebuild-my-school#donate";
 const DONATE_PLEDGE_URL = `/donate?return_to=${encodeURIComponent(PLEDGE_RETURN)}`;
 
 export default function RebuildHubPage() {
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [searchParams] = useSearchParams();
   const [pledgeSuccess, setPledgeSuccess] = useState(false);
+  const consumedRef = useRef(false);
 
   useEffect(() => {
-    if (searchParams.get("pledged") === "success") {
-      setPledgeSuccess(true);
-      // Scroll to the donate section and clean the URL param (keep the hash).
+    if (consumedRef.current) return;
+    if (searchParams.get("pledged") !== "success") return;
+    consumedRef.current = true;
+
+    setPledgeSuccess(true);
+
+    // Strip ONLY the `pledged` query param while preserving pathname,
+    // any other query params, and the hash (#donate). Using
+    // history.replaceState avoids React Router stripping the hash and
+    // avoids triggering another navigation/effect cycle.
+    const url = new URL(window.location.href);
+    url.searchParams.delete("pledged");
+    if (!url.hash) url.hash = "#donate";
+    window.history.replaceState(
+      window.history.state,
+      "",
+      `${url.pathname}${url.search}${url.hash}`,
+    );
+
+    // Defer scroll until after layout so the #donate section is mounted.
+    const scroll = () => {
       const el = document.getElementById("donate");
-      if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
-      const next = new URLSearchParams(searchParams);
-      next.delete("pledged");
-      setSearchParams(next, { replace: true });
-    }
-  }, [searchParams, setSearchParams]);
+      if (el) {
+        el.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+    };
+    const raf = requestAnimationFrame(() => requestAnimationFrame(scroll));
+    return () => cancelAnimationFrame(raf);
+  }, [searchParams]);
+
 
   return (
     <>
