@@ -319,7 +319,7 @@ export default function NominateMvp() {
                 <Button
                   variant="ghost"
                   size="sm"
-                  onClick={() => update({ category: null, subcategory: null, region: null })}
+                  onClick={() => update({ category: null, subcategory: null, region: null, zone: null, state: null })}
                   className="text-white/80 hover:text-gold gap-1"
                 >
                   <ChevronLeft className="h-4 w-4" /> Back to categories
