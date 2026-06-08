@@ -8,6 +8,10 @@
 import type { AwardCategoryForm, AwardCategoryRegion, NominationSubcategory } from "./types";
 import { withResolvedStatus, withResolvedStatuses } from "./resolveStatus";
 import { withAfricaRegions } from "./africaRegionalBuilder";
+import {
+  NIGERIA_EDU_IMPACT_SUBCATEGORIES,
+  NIGERIA_POLITICAL_ROLES,
+} from "./nigeriaZones";
 
 // Base subcategory NAMES (without region suffix) for the 4 Africa Regional
 // categories. The regional builder appends " — <Region>" per zone.
