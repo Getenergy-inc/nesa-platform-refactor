@@ -72,8 +72,10 @@ export default function NominateMvp() {
       category: category?.slug ?? null,
       subcategory: subcategoryParam ?? null,
       region: regionParam ?? null,
+      zone: zoneParam ?? null,
+      state: stateParam ?? null,
     });
-  }, [family, category?.slug, subcategoryParam, regionParam]);
+  }, [family, category?.slug, subcategoryParam, regionParam, zoneParam, stateParam]);
 
   // ── handlers ──────────────────────────────────────────────────────────
   const update = (patch: Record<string, string | null>) => {
