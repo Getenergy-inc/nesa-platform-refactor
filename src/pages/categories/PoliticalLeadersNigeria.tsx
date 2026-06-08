@@ -45,6 +45,7 @@ export default function PoliticalLeadersNigeriaPage() {
         watchCtaHref="/media"
         imageAlt="Political leadership stories preview"
       />
+      <PoliticalLeadersNigeriaDirectory />
       <BrandedNomineeDirectory
         theme="corporate"
         categoryName="Political Leaders' Educational Support (Nigeria)"
