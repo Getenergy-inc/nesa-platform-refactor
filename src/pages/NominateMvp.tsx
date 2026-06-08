@@ -40,6 +40,8 @@ export default function NominateMvp() {
   const categoryParam = params.get("category");
   const subcategoryParam = params.get("subcategory");
   const regionParam = params.get("region") ?? undefined;
+  const zoneParam = params.get("zone") ?? undefined;
+  const stateParam = params.get("state") ?? undefined;
 
   const family =
     familyParam && VALID_FAMILIES.has(familyParam) ? familyParam : null;
