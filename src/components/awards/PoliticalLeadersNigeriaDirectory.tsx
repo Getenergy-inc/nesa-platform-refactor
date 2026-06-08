@@ -238,8 +238,11 @@ export function PoliticalLeadersNigeriaDirectory({
             <Select
               value={zone}
               onValueChange={(v) => {
-                setZone(v);
-                setStateSlug("all");
+                const params = new URLSearchParams(searchParams);
+                if (!v || v === "all") params.delete("zone");
+                else params.set("zone", v);
+                params.delete("state");
+                setSearchParams(params, { replace: true });
               }}
             >
               <SelectTrigger className="h-9 border-gold/20 bg-charcoal text-xs text-ivory">
@@ -255,7 +258,7 @@ export function PoliticalLeadersNigeriaDirectory({
               </SelectContent>
             </Select>
 
-            <Select value={stateSlug} onValueChange={setStateSlug}>
+            <Select value={stateSlug} onValueChange={(v) => setParam("state", v)}>
               <SelectTrigger className="h-9 border-gold/20 bg-charcoal text-xs text-ivory">
                 <SelectValue placeholder="State / FCT" />
               </SelectTrigger>
@@ -269,7 +272,7 @@ export function PoliticalLeadersNigeriaDirectory({
               </SelectContent>
             </Select>
 
-            <Select value={role} onValueChange={setRole}>
+            <Select value={role} onValueChange={(v) => setParam("role", v)}>
               <SelectTrigger className="h-9 border-gold/20 bg-charcoal text-xs text-ivory">
                 <SelectValue placeholder="Political Role" />
               </SelectTrigger>
@@ -283,7 +286,7 @@ export function PoliticalLeadersNigeriaDirectory({
               </SelectContent>
             </Select>
 
-            <Select value={impact} onValueChange={setImpact}>
+            <Select value={impact} onValueChange={(v) => setParam("impact", v)}>
               <SelectTrigger className="h-9 border-gold/20 bg-charcoal text-xs text-ivory">
                 <SelectValue placeholder="Education Impact" />
               </SelectTrigger>
@@ -299,7 +302,7 @@ export function PoliticalLeadersNigeriaDirectory({
 
             <Select
               value={verification}
-              onValueChange={(v) => setVerification(v as VerificationStatus)}
+              onValueChange={(v) => setParam("verification", v)}
             >
               <SelectTrigger className="h-9 border-gold/20 bg-charcoal text-xs text-ivory">
                 <SelectValue placeholder="Verification" />
@@ -314,7 +317,7 @@ export function PoliticalLeadersNigeriaDirectory({
 
             <Select
               value={publication}
-              onValueChange={(v) => setPublication(v as PublicationStatus)}
+              onValueChange={(v) => setParam("publication", v)}
             >
               <SelectTrigger className="h-9 border-gold/20 bg-charcoal text-xs text-ivory">
                 <SelectValue placeholder="Publication" />
@@ -330,7 +333,7 @@ export function PoliticalLeadersNigeriaDirectory({
           <div className="mt-2">
             <Input
               value={search}
-              onChange={(e) => setSearch(e.target.value)}
+              onChange={(e) => setParam("search", e.target.value)}
               placeholder="Search by name, title, organization or impact area…"
               className="h-9 border-gold/20 bg-charcoal text-xs text-ivory placeholder:text-ivory/40"
             />
