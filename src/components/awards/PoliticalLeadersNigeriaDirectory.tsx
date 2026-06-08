@@ -85,14 +85,25 @@ export function PoliticalLeadersNigeriaDirectory({
   maxNominees?: number;
 }) {
   const { data: allNominees = [], isLoading } = useNominees();
+  const [searchParams, setSearchParams] = useSearchParams();
 
-  const [zone, setZone] = useState<string>("all");
-  const [stateSlug, setStateSlug] = useState<string>("all");
-  const [role, setRole] = useState<string>("all");
-  const [impact, setImpact] = useState<string>("all");
-  const [verification, setVerification] = useState<VerificationStatus>("all");
-  const [publication, setPublication] = useState<PublicationStatus>("all");
-  const [search, setSearch] = useState("");
+  const zone = searchParams.get("zone") || "all";
+  const stateSlug = searchParams.get("state") || "all";
+  const role = searchParams.get("role") || "all";
+  const impact = searchParams.get("impact") || "all";
+  const verification = (searchParams.get("verification") as VerificationStatus) || "all";
+  const publication = (searchParams.get("publication") as PublicationStatus) || "all";
+  const search = searchParams.get("search") || "";
+
+  const setParam = (key: string, value: string) => {
+    const params = new URLSearchParams(searchParams);
+    if (!value || value === "all") {
+      params.delete(key);
+    } else {
+      params.set(key, value);
+    }
+    setSearchParams(params, { replace: true });
+  };
 
   const categoryNominees = useMemo(
     () => allNominees.filter(matchesCategory),
@@ -161,13 +172,7 @@ export function PoliticalLeadersNigeriaDirectory({
     search.trim() !== "";
 
   const clearFilters = () => {
-    setZone("all");
-    setStateSlug("all");
-    setRole("all");
-    setImpact("all");
-    setVerification("all");
-    setPublication("all");
-    setSearch("");
+    setSearchParams({}, { replace: true });
   };
 
   return (
