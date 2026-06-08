@@ -8,6 +8,10 @@
 import type { AwardCategoryForm, AwardCategoryRegion, NominationSubcategory } from "./types";
 import { withResolvedStatus, withResolvedStatuses } from "./resolveStatus";
 import { withAfricaRegions } from "./africaRegionalBuilder";
+import {
+  NIGERIA_EDU_IMPACT_SUBCATEGORIES,
+  NIGERIA_POLITICAL_ROLES,
+} from "./nigeriaZones";
 
 // Base subcategory NAMES (without region suffix) for the 4 Africa Regional
 // categories. The regional builder appends " — <Region>" per zone.
@@ -196,14 +200,9 @@ const FAITH_SUBS = placeholderSubs([
   "Other",
 ]);
 
-const POLITICAL_SUBS = placeholderSubs([
-  "Legislative advocacy",
-  "Budget & financing",
-  "Implementation oversight",
-  "Public-private partnership",
-  "Reform leadership",
-  "Other",
-]);
+const POLITICAL_SUBS = placeholderSubs(NIGERIA_EDU_IMPACT_SUBCATEGORIES);
+
+
 
 const INTL_PARTNER_SUBS = placeholderSubs([
   "Bilateral partnership",
@@ -524,6 +523,10 @@ const AWARD_CATEGORY_FORMS_RAW: AwardCategoryForm[] = [
     status: "Link Pending",
     lastUpdated: TODAY,
     subcategories: POLITICAL_SUBS,
+    isNigeriaZonalCategory: true,
+    leadershipRoles: NIGERIA_POLITICAL_ROLES,
+    shortDescription:
+      "Nominate Nigerian political leaders whose policies, reforms or interventions delivered measurable education impact. Nominations are organized by Nigeria's 6 geopolitical zones and 36 states + FCT.",
   },
   {
     slug: "excellence-in-international-partnership-for-education-africa",

@@ -19,6 +19,11 @@ import {
   AWARD_FAMILIES,
   type AwardFamilyId,
 } from "@/config/nomination/types";
+import {
+  NIGERIA_ZONES,
+  getNigeriaZone,
+  getNigeriaState,
+} from "@/config/nomination/nigeriaZones";
 import { changeLanguage } from "@/lib/i18n";
 import { isValidLocale } from "@/config/i18n.config";
 import { trackEvent } from "@/lib/analytics";
@@ -35,6 +40,8 @@ export default function NominateMvp() {
   const categoryParam = params.get("category");
   const subcategoryParam = params.get("subcategory");
   const regionParam = params.get("region") ?? undefined;
+  const zoneParam = params.get("zone") ?? undefined;
+  const stateParam = params.get("state") ?? undefined;
 
   const family =
     familyParam && VALID_FAMILIES.has(familyParam) ? familyParam : null;
@@ -65,8 +72,10 @@ export default function NominateMvp() {
       category: category?.slug ?? null,
       subcategory: subcategoryParam ?? null,
       region: regionParam ?? null,
+      zone: zoneParam ?? null,
+      state: stateParam ?? null,
     });
-  }, [family, category?.slug, subcategoryParam, regionParam]);
+  }, [family, category?.slug, subcategoryParam, regionParam, zoneParam, stateParam]);
 
   // ── handlers ──────────────────────────────────────────────────────────
   const update = (patch: Record<string, string | null>) => {
@@ -91,6 +100,22 @@ export default function NominateMvp() {
         : null,
     [category, regionParam],
   );
+
+  // Resolve the Nigeria zone + state when category is zonal.
+  const zone = useMemo(
+    () =>
+      category?.isNigeriaZonalCategory && zoneParam
+        ? getNigeriaZone(zoneParam) ?? null
+        : null,
+    [category, zoneParam],
+  );
+  const stateEntry = useMemo(
+    () =>
+      zone && stateParam ? getNigeriaState(zone.slug, stateParam) ?? null : null,
+    [zone, stateParam],
+  );
+  const zonalReady =
+    !category?.isNigeriaZonalCategory || (zone !== null && stateEntry !== null);
 
   // Effective subcategory list — region-specific when applicable.
   const effectiveSubcategories = useMemo(
@@ -225,7 +250,7 @@ export default function NominateMvp() {
                   <button
                     key={f.id}
                     type="button"
-                    onClick={() => update({ family: f.id, category: null, subcategory: null, region: null })}
+                    onClick={() => update({ family: f.id, category: null, subcategory: null, region: null, zone: null, state: null })}
                     className="text-left rounded-2xl border border-gold/30 bg-charcoal-light/40 p-6 hover:border-gold hover:bg-charcoal-light/60 transition group"
                   >
                     <p className="text-xs uppercase tracking-[0.18em] text-gold/80 font-semibold">
@@ -294,7 +319,7 @@ export default function NominateMvp() {
                 <Button
                   variant="ghost"
                   size="sm"
-                  onClick={() => update({ category: null, subcategory: null, region: null })}
+                  onClick={() => update({ category: null, subcategory: null, region: null, zone: null, state: null })}
                   className="text-white/80 hover:text-gold gap-1"
                 >
                   <ChevronLeft className="h-4 w-4" /> Back to categories
@@ -378,12 +403,131 @@ export default function NominateMvp() {
                 </div>
               )}
 
-              {/* Subcategory selector — region-scoped when applicable */}
+              {/* ── Nigeria zone selector (zonal categories only) ─────── */}
+              {category.isNigeriaZonalCategory && !zone && (
+                <div className="space-y-3">
+                  <h3 className="font-display text-lg text-white">
+                    Select a Geopolitical Zone
+                  </h3>
+                  <p className="text-sm text-white/75 max-w-3xl">
+                    Nominations for this category are organized by Nigeria's 6
+                    geopolitical zones. Choose the zone where the political
+                    leader's education impact is based.
+                  </p>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+                    {NIGERIA_ZONES.map((z) => (
+                      <button
+                        key={z.slug}
+                        type="button"
+                        onClick={() =>
+                          update({ zone: z.slug, state: null, subcategory: null })
+                        }
+                        className="text-left rounded-xl border border-gold/30 bg-charcoal-light/40 p-4 hover:border-gold hover:bg-charcoal-light/60 transition"
+                      >
+                        <h4 className="font-display text-base text-white">
+                          {z.name}
+                        </h4>
+                        <p className="text-xs text-white/65 mt-1">
+                          {z.states.length} states
+                        </p>
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {/* ── Nigeria state selector (after zone is chosen) ─────── */}
+              {category.isNigeriaZonalCategory && zone && !stateEntry && (
+                <div className="space-y-3">
+                  <div className="flex items-center justify-between gap-3 flex-wrap">
+                    <div>
+                      <p className="text-[11px] uppercase tracking-[0.18em] text-gold/80 font-semibold">
+                        Selected zone
+                      </p>
+                      <h3 className="font-display text-lg text-white">
+                        {zone.name} — Choose a State / FCT
+                      </h3>
+                    </div>
+                    <Button
+                      variant="ghost"
+                      size="sm"
+                      onClick={() =>
+                        update({ zone: null, state: null, subcategory: null })
+                      }
+                      className="text-white/80 hover:text-gold gap-1"
+                    >
+                      <ChevronLeft className="h-3.5 w-3.5" /> Change zone
+                    </Button>
+                  </div>
+                  <div className="flex flex-wrap gap-2">
+                    {zone.states.map((s) => (
+                      <button
+                        key={s.slug}
+                        type="button"
+                        onClick={() =>
+                          update({ state: s.slug, subcategory: null })
+                        }
+                        className="px-4 py-2 rounded-full text-sm border border-gold/40 text-white/85 hover:bg-gold/10 hover:text-gold transition"
+                      >
+                        {s.name}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {/* ── Zone + state context strip ────────────────────────── */}
+              {category.isNigeriaZonalCategory && zone && stateEntry && (
+                <div className="rounded-xl border border-gold/30 bg-charcoal-light/40 p-4 space-y-2">
+                  <div className="flex items-center justify-between gap-3 flex-wrap">
+                    <div>
+                      <p className="text-[11px] uppercase tracking-[0.18em] text-gold/80 font-semibold">
+                        Selected zone & state
+                      </p>
+                      <h3 className="font-display text-lg text-white">
+                        {stateEntry.name} · {zone.name}
+                      </h3>
+                    </div>
+                    <div className="flex gap-2">
+                      <Button
+                        variant="ghost"
+                        size="sm"
+                        onClick={() =>
+                          update({ state: null, subcategory: null })
+                        }
+                        className="text-white/80 hover:text-gold gap-1"
+                      >
+                        <ChevronLeft className="h-3.5 w-3.5" /> Change state
+                      </Button>
+                      <Button
+                        variant="ghost"
+                        size="sm"
+                        onClick={() =>
+                          update({ zone: null, state: null, subcategory: null })
+                        }
+                        className="text-white/80 hover:text-gold gap-1"
+                      >
+                        <ChevronLeft className="h-3.5 w-3.5" /> Change zone
+                      </Button>
+                    </div>
+                  </div>
+                  {category.leadershipRoles && (
+                    <p className="text-xs text-white/70 leading-relaxed">
+                      Eligible leadership roles: {category.leadershipRoles.join(", ")}.
+                    </p>
+                  )}
+                </div>
+              )}
+
+              {/* Subcategory selector — region / zone-scoped when applicable */}
               {(!category.isRegionalCategory || regionVariant) &&
+              zonalReady &&
               effectiveSubcategories.length > 0 ? (
                 <div className="space-y-3">
                   <h3 className="font-display text-lg text-white">
-                    Choose a Subcategory
+                    {category.isNigeriaZonalCategory
+                      ? "Choose an Education Impact Subcategory"
+                      : "Choose a Subcategory"}
                   </h3>
                   <div className="flex flex-wrap gap-2">
                     {effectiveSubcategories.map((s) => {
@@ -410,8 +554,8 @@ export default function NominateMvp() {
                 </div>
               ) : null}
 
-              {/* Form embed — only when category is non-regional OR a region is chosen */}
-              {(!category.isRegionalCategory || regionVariant) && (
+              {/* Form embed — gated by region (regional) and zone+state (zonal) */}
+              {(!category.isRegionalCategory || regionVariant) && zonalReady && (
                 <>
                   <IntegrityNotice />
 
@@ -428,7 +572,9 @@ export default function NominateMvp() {
                     title={
                       regionVariant
                         ? `${category.name} — ${regionVariant.name}`
-                        : category.name
+                        : zone && stateEntry
+                          ? `${category.name} — ${stateEntry.name} (${zone.name})`
+                          : category.name
                     }
                     status={regionVariant?.status ?? category.status}
                     formPublicUrl={
@@ -442,6 +588,12 @@ export default function NominateMvp() {
                       { label: "Award category", value: category.name },
                       ...(regionVariant
                         ? [{ label: "Region", value: regionVariant.name }]
+                        : []),
+                      ...(zone
+                        ? [{ label: "Geopolitical zone", value: zone.name }]
+                        : []),
+                      ...(stateEntry
+                        ? [{ label: "State / FCT", value: stateEntry.name }]
                         : []),
                       ...(selectedSubcategory
                         ? [{ label: "Subcategory", value: selectedSubcategory.name }]

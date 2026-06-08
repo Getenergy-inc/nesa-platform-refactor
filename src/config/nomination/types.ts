@@ -98,6 +98,16 @@ export interface AwardCategoryForm {
   isRegionalCategory?: boolean;
   /** Per-region form variants (only set when isRegionalCategory === true). */
   regions?: AwardCategoryRegion[];
+  /**
+   * Nigeria-zonal categories — single national form scoped by Nigeria's 6
+   * geopolitical zones and 36 states + FCT. When true, the nomination flow
+   * must ask the nominator to pick a zone, then a state, before the form
+   * is shown. Used by "Excellence in Political Leadership for Education —
+   * Nigeria".
+   */
+  isNigeriaZonalCategory?: boolean;
+  /** Political leadership role dropdown (Nigeria zonal categories). */
+  leadershipRoles?: string[];
 }
 
 export interface RmsaRegionalForm {
