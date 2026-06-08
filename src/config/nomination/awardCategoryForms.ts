@@ -196,14 +196,13 @@ const FAITH_SUBS = placeholderSubs([
   "Other",
 ]);
 
-const POLITICAL_SUBS = placeholderSubs([
-  "Legislative advocacy",
-  "Budget & financing",
-  "Implementation oversight",
-  "Public-private partnership",
-  "Reform leadership",
-  "Other",
-]);
+import {
+  NIGERIA_EDU_IMPACT_SUBCATEGORIES,
+  NIGERIA_POLITICAL_ROLES,
+} from "./nigeriaZones";
+
+const POLITICAL_SUBS = placeholderSubs(NIGERIA_EDU_IMPACT_SUBCATEGORIES);
+
 
 const INTL_PARTNER_SUBS = placeholderSubs([
   "Bilateral partnership",
