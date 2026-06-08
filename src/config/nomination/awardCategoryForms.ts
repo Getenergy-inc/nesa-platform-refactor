@@ -523,6 +523,10 @@ const AWARD_CATEGORY_FORMS_RAW: AwardCategoryForm[] = [
     status: "Link Pending",
     lastUpdated: TODAY,
     subcategories: POLITICAL_SUBS,
+    isNigeriaZonalCategory: true,
+    leadershipRoles: NIGERIA_POLITICAL_ROLES,
+    shortDescription:
+      "Nominate Nigerian political leaders whose policies, reforms or interventions delivered measurable education impact. Nominations are organized by Nigeria's 6 geopolitical zones and 36 states + FCT.",
   },
   {
     slug: "excellence-in-international-partnership-for-education-africa",
