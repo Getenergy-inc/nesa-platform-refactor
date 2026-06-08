@@ -46,11 +46,6 @@ export default function PoliticalLeadersNigeriaPage() {
         imageAlt="Political leadership stories preview"
       />
       <PoliticalLeadersNigeriaDirectory />
-      <BrandedNomineeDirectory
-        theme="corporate"
-        categoryName="Political Leaders' Educational Support (Nigeria)"
-        title="Live Leader Nominees"
-      />
       <DynamicCategoryPage categoryTitle="Political Leaders' Educational Support (Nigeria)" nominationType="Political Leaders Nigeria" nominateCategorySlug="excellence-in-political-leadership-for-education-nigeria" />
     </>
   );
