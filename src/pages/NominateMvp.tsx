@@ -250,7 +250,7 @@ export default function NominateMvp() {
                   <button
                     key={f.id}
                     type="button"
-                    onClick={() => update({ family: f.id, category: null, subcategory: null, region: null })}
+                    onClick={() => update({ family: f.id, category: null, subcategory: null, region: null, zone: null, state: null })}
                     className="text-left rounded-2xl border border-gold/30 bg-charcoal-light/40 p-6 hover:border-gold hover:bg-charcoal-light/60 transition group"
                   >
                     <p className="text-xs uppercase tracking-[0.18em] text-gold/80 font-semibold">
