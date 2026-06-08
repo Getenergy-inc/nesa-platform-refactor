@@ -101,6 +101,22 @@ export default function NominateMvp() {
     [category, regionParam],
   );
 
+  // Resolve the Nigeria zone + state when category is zonal.
+  const zone = useMemo(
+    () =>
+      category?.isNigeriaZonalCategory && zoneParam
+        ? getNigeriaZone(zoneParam) ?? null
+        : null,
+    [category, zoneParam],
+  );
+  const stateEntry = useMemo(
+    () =>
+      zone && stateParam ? getNigeriaState(zone.slug, stateParam) ?? null : null,
+    [zone, stateParam],
+  );
+  const zonalReady =
+    !category?.isNigeriaZonalCategory || (zone !== null && stateEntry !== null);
+
   // Effective subcategory list — region-specific when applicable.
   const effectiveSubcategories = useMemo(
     () =>
