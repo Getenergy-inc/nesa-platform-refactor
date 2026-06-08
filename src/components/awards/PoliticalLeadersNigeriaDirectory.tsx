@@ -1,7 +1,7 @@
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 import { Link, useSearchParams } from "react-router-dom";
 import { motion } from "framer-motion";
-import { ArrowRight, Award, Filter, Sparkles, Users, X } from "lucide-react";
+import { ArrowRight, Award, Check, Copy, Filter, Sparkles, Users, X } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
@@ -171,6 +171,19 @@ export function PoliticalLeadersNigeriaDirectory({
     publication !== "all" ||
     search.trim() !== "";
 
+  const [copied, setCopied] = useState(false);
+
+  const copyShareLink = async () => {
+    try {
+      const url = typeof window !== "undefined" ? window.location.href : "";
+      await navigator.clipboard.writeText(url);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch {
+      // silently fail
+    }
+  };
+
   const clearFilters = () => {
     setSearchParams({}, { replace: true });
   };
@@ -223,15 +236,32 @@ export function PoliticalLeadersNigeriaDirectory({
               <Filter className="h-3.5 w-3.5 text-emerald-300" />
               Refine — Political Leadership (Nigeria)
             </span>
-            {hasFilters && (
+            <div className="flex items-center gap-2">
               <button
                 type="button"
-                onClick={clearFilters}
-                className="inline-flex items-center gap-1 rounded-full border border-emerald-500/30 px-2 py-0.5 text-[10px] text-emerald-300 hover:bg-emerald-500/10"
+                onClick={copyShareLink}
+                className="inline-flex items-center gap-1 rounded-full border border-gold/30 px-2 py-0.5 text-[10px] text-gold hover:bg-gold/10"
               >
-                <X className="h-3 w-3" /> Clear
+                {copied ? (
+                  <>
+                    <Check className="h-3 w-3" /> Copied
+                  </>
+                ) : (
+                  <>
+                    <Copy className="h-3 w-3" /> Copy link
+                  </>
+                )}
               </button>
-            )}
+              {hasFilters && (
+                <button
+                  type="button"
+                  onClick={clearFilters}
+                  className="inline-flex items-center gap-1 rounded-full border border-emerald-500/30 px-2 py-0.5 text-[10px] text-emerald-300 hover:bg-emerald-500/10"
+                >
+                  <X className="h-3 w-3" /> Clear
+                </button>
+              )}
+            </div>
           </div>
 
           <div className="grid grid-cols-1 gap-2 md:grid-cols-3 lg:grid-cols-6">
