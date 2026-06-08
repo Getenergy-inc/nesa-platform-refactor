@@ -553,14 +553,33 @@ const AWARD_CATEGORY_FORMS_RAW: AwardCategoryForm[] = [
   },
 ];
 
+// Slugs of the 4 Africa Regional categories that must be split into 5
+// region-specific Google Forms (North/West/East/Central/Southern Africa).
+const AFRICA_REGIONAL_SLUGS: Record<string, string[]> = {
+  "best-csr-for-education-africa-regional": CSR_REGIONAL_BASE_SUBS,
+  "best-edutech-innovation-for-education-africa-regional": EDUTECH_REGIONAL_BASE_SUBS,
+  "best-ngo-for-education-advancement-africa-regional": NGO_REGIONAL_BASE_SUBS,
+  "best-stem-education-programme-africa-regional": STEM_REGIONAL_BASE_SUBS,
+};
+
 /**
  * Public award-category forms array — statuses already resolved.
  * A form whose raw status is "Link Pending" is auto-promoted to "Active"
  * once both formPublicUrl and formEmbedUrl are present.
+ *
+ * Africa Regional categories are additionally expanded with `regions` —
+ * one form variant per AFRICA_REGION (5 regions × 4 categories = 20 variants).
  */
 export const AWARD_CATEGORY_FORMS: AwardCategoryForm[] = withResolvedStatuses(
   AWARD_CATEGORY_FORMS_RAW,
-);
+).map((form) => {
+  const baseSubs = AFRICA_REGIONAL_SLUGS[form.slug];
+  if (!baseSubs) return form;
+  const expanded = withAfricaRegions({ base: form, baseSubcategories: baseSubs });
+  // Resolve status of each region independently (Link Pending → Active when URLs land).
+  expanded.regions = expanded.regions!.map((r) => withResolvedStatus(r));
+  return expanded;
+});
 
 /** Raw, unresolved array — for the admin mapping register only. */
 export { AWARD_CATEGORY_FORMS_RAW };
@@ -575,4 +594,14 @@ export function getCategoryFormsByFamily(
   family: string,
 ): AwardCategoryForm[] {
   return AWARD_CATEGORY_FORMS.filter((c) => c.family === family);
+}
+
+/** Look up a regional form variant for an Africa Regional category. */
+export function getCategoryRegion(
+  categorySlug: string,
+  regionSlug: string,
+): AwardCategoryRegion | undefined {
+  const cat = getCategoryFormBySlug(categorySlug);
+  if (!cat?.isRegionalCategory || !cat.regions) return undefined;
+  return cat.regions.find((r) => r.slug === regionSlug);
 }
