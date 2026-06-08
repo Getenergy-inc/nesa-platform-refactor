@@ -83,12 +83,30 @@ export default function NominateMvp() {
     [family],
   );
 
+  // Resolve the region variant when category is Africa Regional + ?region= present.
+  const regionVariant = useMemo(
+    () =>
+      category?.isRegionalCategory && regionParam
+        ? getCategoryRegion(category.slug, regionParam) ?? null
+        : null,
+    [category, regionParam],
+  );
+
+  // Effective subcategory list — region-specific when applicable.
+  const effectiveSubcategories = useMemo(
+    () =>
+      regionVariant
+        ? regionVariant.subcategories
+        : category?.subcategories ?? [],
+    [regionVariant, category],
+  );
+
   const selectedSubcategory = useMemo(
     () =>
-      category && subcategoryParam
-        ? category.subcategories.find((s) => s.slug === subcategoryParam) ?? null
+      subcategoryParam
+        ? effectiveSubcategories.find((s) => s.slug === subcategoryParam) ?? null
         : null,
-    [category, subcategoryParam],
+    [effectiveSubcategories, subcategoryParam],
   );
 
   // ── render ────────────────────────────────────────────────────────────
