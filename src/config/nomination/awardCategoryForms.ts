@@ -5,8 +5,46 @@
 //
 // See: docs/NOMINATION_FORM_MAPPING.md for the full operational register.
 
-import type { AwardCategoryForm, NominationSubcategory } from "./types";
-import { withResolvedStatuses } from "./resolveStatus";
+import type { AwardCategoryForm, AwardCategoryRegion, NominationSubcategory } from "./types";
+import { withResolvedStatus, withResolvedStatuses } from "./resolveStatus";
+import { withAfricaRegions } from "./africaRegionalBuilder";
+
+// Base subcategory NAMES (without region suffix) for the 4 Africa Regional
+// categories. The regional builder appends " — <Region>" per zone.
+const CSR_REGIONAL_BASE_SUBS = [
+  "Banking & Finance CSR",
+  "Telecommunications CSR",
+  "Technology & ICT CSR",
+  "Oil & Gas CSR",
+  "Food & Beverages CSR",
+  "Aviation CSR",
+];
+const EDUTECH_REGIONAL_BASE_SUBS = [
+  "EduTech Startup",
+  "EduTech Established Company",
+  "EduTech Social Impact Initiative",
+  "EduTech Social Impact",
+];
+const NGO_REGIONAL_BASE_SUBS = [
+  "Educational Infrastructure",
+  "Education Aid & Scholarships",
+  "Educational Materials & Resources",
+  "Youth Skills & Learning Programmes",
+  "Women & Girls Education Advocacy",
+  "Teacher Training",
+  "Girl-Child Education",
+  "Special Needs Education",
+  "Community Development",
+];
+const STEM_REGIONAL_BASE_SUBS = [
+  "Inclusive STEM Programme",
+  "Digital STEM Innovation",
+  "Community-Based STEM Outreach",
+  "Girls in STEM Advancement",
+  "Women in STEM",
+  "Youth STEM",
+  "Institutional STEM",
+];
 
 const placeholderSubs = (
   names: string[],
