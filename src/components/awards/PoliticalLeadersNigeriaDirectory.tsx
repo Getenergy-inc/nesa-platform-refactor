@@ -171,6 +171,19 @@ export function PoliticalLeadersNigeriaDirectory({
     publication !== "all" ||
     search.trim() !== "";
 
+  const [copied, setCopied] = useState(false);
+
+  const copyShareLink = async () => {
+    try {
+      const url = typeof window !== "undefined" ? window.location.href : "";
+      await navigator.clipboard.writeText(url);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch {
+      // silently fail
+    }
+  };
+
   const clearFilters = () => {
     setSearchParams({}, { replace: true });
   };
