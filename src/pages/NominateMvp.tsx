@@ -315,14 +315,78 @@ export default function NominateMvp() {
                 ) : null}
               </div>
 
-              {/* Subcategory selector */}
-              {category.subcategories.length > 0 ? (
+              {/* ── Region selector (Africa Regional categories only) ── */}
+              {category.isRegionalCategory && category.regions && !regionVariant && (
+                <div className="space-y-3">
+                  <h3 className="font-display text-lg text-white">
+                    Select Your Africa Region
+                  </h3>
+                  <p className="text-sm text-white/75 max-w-3xl">
+                    Please select your Africa region to open the correct
+                    regional nomination form. Each region has its own
+                    subcategories, country dropdown, and Google Form.
+                  </p>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+                    {category.regions.map((r) => (
+                      <button
+                        key={r.slug}
+                        type="button"
+                        onClick={() =>
+                          update({ region: r.slug, subcategory: null })
+                        }
+                        className="text-left rounded-xl border border-gold/30 bg-charcoal-light/40 p-4 hover:border-gold hover:bg-charcoal-light/60 transition"
+                      >
+                        <h4 className="font-display text-base text-white">
+                          {r.name}
+                        </h4>
+                        <p className="text-xs text-white/65 mt-1">
+                          {r.countries.length} countries · {r.subcategories.length} subcategories
+                        </p>
+                        <p className="text-[11px] uppercase tracking-[0.16em] mt-2 text-white/55">
+                          Form status: <span className="text-gold">{r.status}</span>
+                        </p>
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {/* ── Region context strip (after a region is chosen) ──── */}
+              {regionVariant && (
+                <div className="rounded-xl border border-gold/30 bg-charcoal-light/40 p-4 space-y-2">
+                  <div className="flex items-center justify-between gap-3 flex-wrap">
+                    <div>
+                      <p className="text-[11px] uppercase tracking-[0.18em] text-gold/80 font-semibold">
+                        Selected region
+                      </p>
+                      <h3 className="font-display text-lg text-white">
+                        {regionVariant.name}
+                      </h3>
+                    </div>
+                    <Button
+                      variant="ghost"
+                      size="sm"
+                      onClick={() => update({ region: null, subcategory: null })}
+                      className="text-white/80 hover:text-gold gap-1"
+                    >
+                      <ChevronLeft className="h-3.5 w-3.5" /> Change region
+                    </Button>
+                  </div>
+                  <p className="text-xs text-white/70 leading-relaxed">
+                    Eligible countries: {regionVariant.countries.join(", ")}.
+                  </p>
+                </div>
+              )}
+
+              {/* Subcategory selector — region-scoped when applicable */}
+              {(!category.isRegionalCategory || regionVariant) &&
+              effectiveSubcategories.length > 0 ? (
                 <div className="space-y-3">
                   <h3 className="font-display text-lg text-white">
                     Choose a Subcategory
                   </h3>
                   <div className="flex flex-wrap gap-2">
-                    {category.subcategories.map((s) => {
+                    {effectiveSubcategories.map((s) => {
                       const active = subcategoryParam === s.slug;
                       return (
                         <button
@@ -346,33 +410,46 @@ export default function NominateMvp() {
                 </div>
               ) : null}
 
-              <IntegrityNotice />
+              {/* Form embed — only when category is non-regional OR a region is chosen */}
+              {(!category.isRegionalCategory || regionVariant) && (
+                <>
+                  <IntegrityNotice />
 
-              <div className="rounded-xl border border-gold/20 bg-charcoal-light/30 p-4 text-sm text-white/80 flex items-start gap-3">
-                <ShieldCheck className="h-4 w-4 text-gold mt-0.5 shrink-0" />
-                <p>
-                  Provide at least one credible evidence link (website, news
-                  article, foundation report, social profile, or public record).
-                  Unverifiable nominations may be removed during review.
-                </p>
-              </div>
+                  <div className="rounded-xl border border-gold/20 bg-charcoal-light/30 p-4 text-sm text-white/80 flex items-start gap-3">
+                    <ShieldCheck className="h-4 w-4 text-gold mt-0.5 shrink-0" />
+                    <p>
+                      Provide at least one credible evidence link (website, news
+                      article, foundation report, social profile, or public record).
+                      Unverifiable nominations may be removed during review.
+                    </p>
+                  </div>
 
-              <GoogleFormDisplay
-                title={category.name}
-                status={category.status}
-                formPublicUrl={category.formPublicUrl}
-                formEmbedUrl={category.formEmbedUrl}
-                gmail={category.gmail}
-                prefillHints={[
-                  { label: "Award category", value: category.name },
-                  ...(selectedSubcategory
-                    ? [{ label: "Subcategory", value: selectedSubcategory.name }]
-                    : []),
-                  ...(regionParam
-                    ? [{ label: "Region", value: regionParam }]
-                    : []),
-                ]}
-              />
+                  <GoogleFormDisplay
+                    title={
+                      regionVariant
+                        ? `${category.name} — ${regionVariant.name}`
+                        : category.name
+                    }
+                    status={regionVariant?.status ?? category.status}
+                    formPublicUrl={
+                      regionVariant?.formPublicUrl ?? category.formPublicUrl
+                    }
+                    formEmbedUrl={
+                      regionVariant?.formEmbedUrl ?? category.formEmbedUrl
+                    }
+                    gmail={category.gmail}
+                    prefillHints={[
+                      { label: "Award category", value: category.name },
+                      ...(regionVariant
+                        ? [{ label: "Region", value: regionVariant.name }]
+                        : []),
+                      ...(selectedSubcategory
+                        ? [{ label: "Subcategory", value: selectedSubcategory.name }]
+                        : []),
+                    ]}
+                  />
+                </>
+              )}
             </section>
           )}
 
