@@ -39,6 +39,25 @@ export interface NominationSubcategory {
   status?: FormStatus;
 }
 
+export interface AwardCategoryRegion {
+  /** kebab-case region slug (e.g. "west-africa") */
+  slug: string;
+  /** Display region name (e.g. "West Africa") */
+  name: string;
+  /** Countries shown in this region's country dropdown */
+  countries: string[];
+  /** Region-scoped subcategories (already suffixed with " — <Region>") */
+  subcategories: NominationSubcategory[];
+  /** Region-specific Google Form public URL */
+  formPublicUrl: string;
+  /** Region-specific Google Form embed URL */
+  formEmbedUrl: string;
+  /** Region-specific Google Sheet title */
+  sheetTitle: string;
+  /** Region-specific lifecycle status */
+  status: FormStatus;
+}
+
 export interface AwardCategoryForm {
   /** kebab-case slug used in ?category= query */
   slug: string;
@@ -70,6 +89,15 @@ export interface AwardCategoryForm {
   subcategories: NominationSubcategory[];
   /** Internal notes (not rendered publicly) */
   notes?: string;
+  /**
+   * Africa Regional categories split into one form per region.
+   * When true, `regions` is the source of truth for subcategories,
+   * country dropdowns, and Google Form URLs per region. The top-level
+   * `subcategories` / `formPublicUrl` fields remain as fallbacks only.
+   */
+  isRegionalCategory?: boolean;
+  /** Per-region form variants (only set when isRegionalCategory === true). */
+  regions?: AwardCategoryRegion[];
 }
 
 export interface RmsaRegionalForm {
