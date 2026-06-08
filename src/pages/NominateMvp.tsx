@@ -19,6 +19,11 @@ import {
   AWARD_FAMILIES,
   type AwardFamilyId,
 } from "@/config/nomination/types";
+import {
+  NIGERIA_ZONES,
+  getNigeriaZone,
+  getNigeriaState,
+} from "@/config/nomination/nigeriaZones";
 import { changeLanguage } from "@/lib/i18n";
 import { isValidLocale } from "@/config/i18n.config";
 import { trackEvent } from "@/lib/analytics";
