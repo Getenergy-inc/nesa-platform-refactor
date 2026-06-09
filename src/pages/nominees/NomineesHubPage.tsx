@@ -19,6 +19,7 @@ import {
   getSecondaryCtaHref,
   TIER_BADGE_STYLES,
 } from "@/config/nomineeCategories";
+import { parseFilterParams, applyFilterChange, activeFilterCount } from "@/pages/nominees/lib/filterNominees";
 import { CategoryDiscoveryGrid } from "@/components/nominees/CategoryDiscoveryGrid";
 import { NIGERIA_ZONES } from "@/config/nomination/nigeriaZones";
 import { normalizeRegion } from "@/lib/regions";
@@ -118,7 +119,7 @@ export default function NomineesHubPage() {
 
   const isNigeria = filterCountry.toLowerCase() === "nigeria";
   const activeZone = NIGERIA_ZONES.find((z) => z.slug === filterZone);
-  const activeFilterCountValue = activeFilterCount(filters);
+  const activeFilterCountValueValue = activeFilterCount(filters);
 
   const clearAllFilters = () => {
     setParams(new URLSearchParams(), { replace: true });
@@ -401,9 +402,9 @@ export default function NomineesHubPage() {
             <div className="mt-3 flex items-center justify-between text-[11px] text-ivory/55">
               <span>
                 Showing {totalCount.toLocaleString()}+ nominees across African education awards
-                {activeFilterCount > 0 && ` • ${activeFilterCount} filter${activeFilterCount === 1 ? "" : "s"} active`}.
+                {activeFilterCountValue > 0 && ` • ${activeFilterCountValue} filter${activeFilterCountValue === 1 ? "" : "s"} active`}.
               </span>
-              {activeFilterCount > 0 && (
+              {activeFilterCountValue > 0 && (
                 <Button
                   size="sm"
                   variant="ghost"
@@ -420,7 +421,7 @@ export default function NomineesHubPage() {
           {/* ════════════════════════════════════════════════════════════ */}
           {/* Filtered Results — only renders when at least one filter is on */}
           {/* ════════════════════════════════════════════════════════════ */}
-          {activeFilterCount > 0 && (
+          {activeFilterCountValue > 0 && (
             <section className="mb-12" aria-labelledby="filtered-results-heading">
               <div className="mb-4 flex items-end justify-between">
                 <div>
