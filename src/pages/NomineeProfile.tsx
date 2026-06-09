@@ -158,22 +158,28 @@ export default function NomineeProfile() {
     window.open(urls[platform], "_blank", "width=600,height=400");
   };
 
-  // --- 404 ---
+  // --- Gated / not found ---
   if (!nominee) {
     return (
       <div className="min-h-screen bg-charcoal flex items-center justify-center">
+        <Helmet>
+          <title>Nominee profile pending verification | NESA-Africa</title>
+          <meta name="robots" content="noindex" />
+        </Helmet>
         <div className="max-w-md mx-auto text-center px-4">
           <div className="w-20 h-20 mx-auto mb-5 rounded-full bg-gold/10 flex items-center justify-center">
             <Users className="w-10 h-10 text-gold/30" />
           </div>
-          <h1 className="text-2xl font-display text-ivory mb-3">Profile Not Available</h1>
-          <p className="text-ivory/70 text-sm mb-6">This nominee profile may be under review or the link may be incorrect.</p>
+          <h1 className="text-2xl font-display text-ivory mb-3">Profile pending verification</h1>
+          <p className="text-ivory/70 text-sm mb-6">
+            This nominee profile is still being verified by the NESA-Africa Review Committee, or the link may be incorrect. Only complete, verified profiles are published publicly.
+          </p>
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
             <Button asChild className="bg-gold hover:bg-gold-dark text-charcoal">
-              <Link to="/nominees"><ArrowLeft className="w-4 h-4 mr-2" />Browse Nominees</Link>
+              <Link to="/nominees"><ArrowLeft className="w-4 h-4 mr-2" />Explore Nominees</Link>
             </Button>
             <Button asChild variant="outline" className="border-gold/30 text-gold hover:bg-gold/10">
-              <Link to="/nominate">Nominate Someone</Link>
+              <Link to="/nominate">Nominate a Champion</Link>
             </Button>
           </div>
         </div>
