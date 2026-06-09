@@ -124,7 +124,7 @@ export default function NomineesHubPage() {
     setParams(new URLSearchParams(), { replace: true });
   };
 
-  };
+
 
   const { categories, trending, mostVoted, totalCount } = useMemo(() => {
     if (!nominees) return { categories: [], trending: [], mostVoted: [], totalCount: 0 };
