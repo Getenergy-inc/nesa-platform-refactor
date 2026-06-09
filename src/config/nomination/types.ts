@@ -140,7 +140,34 @@ export interface AwardCategoryForm {
   isNigeriaZonalCategory?: boolean;
   /** Political leadership role dropdown (Nigeria zonal categories). */
   leadershipRoles?: string[];
+  /**
+   * Long audit-aligned award family name (see `AwardFamilyName`).
+   * First-class field that powers the `awardFamily` filter on /nominees.
+   */
+  awardFamilyName?: AwardFamilyName;
+  /**
+   * Recognition class chip — first-class. Drives `recognitionClass` filter
+   * on /nominees and the eligibility banner on the form intro.
+   */
+  recognitionClass?: RecognitionClass;
+  /**
+   * First-class region slug — only set when the form is scoped to a single
+   * region (Nigeria-only forms leave this blank; regional categories carry
+   * one regionSlug per entry in `regions[]`).
+   */
+  regionSlug?: string;
+  /**
+   * Nigeria geopolitical zone slug — populated downstream when a nomination
+   * targets a specific zone (e.g. "south-west").
+   */
+  zoneSlug?: string;
+  /**
+   * Nigeria state slug — populated downstream when a nomination targets a
+   * specific state (e.g. "lagos").
+   */
+  stateSlug?: string;
 }
+
 
 export interface RmsaRegionalForm {
   /** kebab-case slug used in ?region= query */
