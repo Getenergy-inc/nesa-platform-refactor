@@ -90,14 +90,60 @@ const CANONICAL_CATEGORIES: { slug: string; name: string }[] = [
 export default function NomineesHubPage() {
   const navigate = useNavigate();
   const { data: nominees, isLoading } = useNominees();
-  const [search, setSearch] = useState("");
-  // UI-ready filters — connect to nominee query/data when backend fields land
-  const [activeGroup, setActiveGroup] = useState<string>("all");
-  const [filterCategory, setFilterCategory] = useState<string>("all");
-  const [filterType, setFilterType] = useState<string>("all");
-  const [filterCountry, setFilterCountry] = useState<string>("all");
-  const [filterRegion, setFilterRegion] = useState<string>("all");
-  const [filterEdition, setFilterEdition] = useState<string>("2026");
+
+  // URL-driven filters — deep-linkable per Pass D audit.
+  const [params, setParams] = useSearchParams();
+  const search = params.get("q") ?? "";
+  const activeGroup = params.get("group") ?? "all";
+  const filterCategory = params.get("category") ?? "all";
+  const filterType = params.get("type") ?? "all";
+  const filterCountry = params.get("country") ?? "all";
+  const filterRegion = params.get("region") ?? "all";
+  const filterEdition = params.get("edition") ?? "2026";
+  const filterAwardFamily = params.get("awardFamily") ?? "all";
+  const filterRecognitionClass = params.get("recognitionClass") ?? "all";
+  const filterZone = params.get("zone") ?? "all";
+  const filterState = params.get("state") ?? "all";
+
+  const setParam = (key: string, value: string) => {
+    const next = new URLSearchParams(params);
+    if (!value || value === "all" || (key === "edition" && value === "2026") || (key === "group" && value === "all")) {
+      next.delete(key);
+    } else {
+      next.set(key, value);
+    }
+    // Zone/state only meaningful for Nigeria — clear when country changes away
+    if (key === "country" && value !== "nigeria") {
+      next.delete("zone");
+      next.delete("state");
+    }
+    if (key === "zone" && value === "all") next.delete("state");
+    setParams(next, { replace: true });
+  };
+  const setSearch = (v: string) => setParam("q", v);
+  const setActiveGroup = (v: string) => setParam("group", v);
+  const setFilterCategory = (v: string) => setParam("category", v);
+  const setFilterType = (v: string) => setParam("type", v);
+  const setFilterCountry = (v: string) => setParam("country", v);
+  const setFilterRegion = (v: string) => setParam("region", v);
+  const setFilterEdition = (v: string) => setParam("edition", v);
+  const setFilterAwardFamily = (v: string) => setParam("awardFamily", v);
+  const setFilterRecognitionClass = (v: string) => setParam("recognitionClass", v);
+  const setFilterZone = (v: string) => setParam("zone", v);
+  const setFilterState = (v: string) => setParam("state", v);
+
+  const isNigeria = filterCountry === "nigeria" || filterCountry.toLowerCase() === "nigeria";
+  const activeZone = NIGERIA_ZONES.find((z) => z.slug === filterZone);
+
+  const activeFilterCount = [
+    filterCategory, filterType, filterCountry, filterRegion,
+    filterAwardFamily, filterRecognitionClass, filterZone, filterState,
+  ].filter((v) => v && v !== "all").length + (search.trim() ? 1 : 0);
+
+  const clearAllFilters = () => {
+    const next = new URLSearchParams();
+    setParams(next, { replace: true });
+  };
 
   const { categories, trending, mostVoted, totalCount } = useMemo(() => {
     if (!nominees) return { categories: [], trending: [], mostVoted: [], totalCount: 0 };
