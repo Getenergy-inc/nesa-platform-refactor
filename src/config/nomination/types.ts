@@ -22,12 +22,41 @@ export type AwardFamilyId =
   | "platinum"
   | "influencer";
 
+/**
+ * Long-form award family names exactly as printed in the 54-Form Audit
+ * (`nesa_54_forms_audit_v1.{md,csv}`). These power the `awardFamily` filter
+ * on `/nominees`, certificates, and the public award-family chip.
+ */
+export type AwardFamilyName =
+  | "Influencer Education Impact Award 2026"
+  | "Africa Education Icon Lifetime Achievement Award 2006–2026"
+  | "Gold-Blue Garnet — Competitive Excellence"
+  | "Platinum / Institutional Leadership"
+  | "Rebuild My School Africa / EduAid-Africa";
+
+/**
+ * Recognition class — drives the eligibility chip shown on the form intro
+ * and the `recognitionClass` filter on `/nominees`.
+ */
+export type RecognitionClass =
+  | "Africa-Resident"
+  | "Diaspora"
+  | "Friend of Africa"
+  | "Africa-Resident / Diaspora"
+  | "Africa-Resident / Diaspora / Friend of Africa"
+  | "Institutional"
+  | "School";
+
 export interface AwardFamilyMeta {
   id: AwardFamilyId;
+  /** Short family name (legacy / nav chips). */
   name: string;
+  /** Long audit-aligned name; used for filtering and certificates. */
+  longName: AwardFamilyName;
   tagline: string;
   description: string;
 }
+
 
 export interface NominationSubcategory {
   slug: string;
