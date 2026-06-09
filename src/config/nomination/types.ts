@@ -22,12 +22,41 @@ export type AwardFamilyId =
   | "platinum"
   | "influencer";
 
+/**
+ * Long-form award family names exactly as printed in the 54-Form Audit
+ * (`nesa_54_forms_audit_v1.{md,csv}`). These power the `awardFamily` filter
+ * on `/nominees`, certificates, and the public award-family chip.
+ */
+export type AwardFamilyName =
+  | "Influencer Education Impact Award 2026"
+  | "Africa Education Icon Lifetime Achievement Award 2006–2026"
+  | "Gold-Blue Garnet — Competitive Excellence"
+  | "Platinum / Institutional Leadership"
+  | "Rebuild My School Africa / EduAid-Africa";
+
+/**
+ * Recognition class — drives the eligibility chip shown on the form intro
+ * and the `recognitionClass` filter on `/nominees`.
+ */
+export type RecognitionClass =
+  | "Africa-Resident"
+  | "Diaspora"
+  | "Friend of Africa"
+  | "Africa-Resident / Diaspora"
+  | "Africa-Resident / Diaspora / Friend of Africa"
+  | "Institutional"
+  | "School";
+
 export interface AwardFamilyMeta {
   id: AwardFamilyId;
+  /** Short family name (legacy / nav chips). */
   name: string;
+  /** Long audit-aligned name; used for filtering and certificates. */
+  longName: AwardFamilyName;
   tagline: string;
   description: string;
 }
+
 
 export interface NominationSubcategory {
   slug: string;
@@ -40,8 +69,10 @@ export interface NominationSubcategory {
 }
 
 export interface AwardCategoryRegion {
-  /** kebab-case region slug (e.g. "west-africa") */
+  /** kebab-case region slug (e.g. "west-africa") — alias of `regionSlug`. */
   slug: string;
+  /** Explicit first-class region slug, matches `slug`. Used by /nominees filter. */
+  regionSlug: string;
   /** Display region name (e.g. "West Africa") */
   name: string;
   /** Countries shown in this region's country dropdown */
@@ -57,6 +88,7 @@ export interface AwardCategoryRegion {
   /** Region-specific lifecycle status */
   status: FormStatus;
 }
+
 
 export interface AwardCategoryForm {
   /** kebab-case slug used in ?category= query */
@@ -108,7 +140,34 @@ export interface AwardCategoryForm {
   isNigeriaZonalCategory?: boolean;
   /** Political leadership role dropdown (Nigeria zonal categories). */
   leadershipRoles?: string[];
+  /**
+   * Long audit-aligned award family name (see `AwardFamilyName`).
+   * First-class field that powers the `awardFamily` filter on /nominees.
+   */
+  awardFamilyName?: AwardFamilyName;
+  /**
+   * Recognition class chip — first-class. Drives `recognitionClass` filter
+   * on /nominees and the eligibility banner on the form intro.
+   */
+  recognitionClass?: RecognitionClass;
+  /**
+   * First-class region slug — only set when the form is scoped to a single
+   * region (Nigeria-only forms leave this blank; regional categories carry
+   * one regionSlug per entry in `regions[]`).
+   */
+  regionSlug?: string;
+  /**
+   * Nigeria geopolitical zone slug — populated downstream when a nomination
+   * targets a specific zone (e.g. "south-west").
+   */
+  zoneSlug?: string;
+  /**
+   * Nigeria state slug — populated downstream when a nomination targets a
+   * specific state (e.g. "lagos").
+   */
+  stateSlug?: string;
 }
+
 
 export interface RmsaRegionalForm {
   /** kebab-case slug used in ?region= query */
@@ -131,6 +190,7 @@ export const AWARD_FAMILIES: AwardFamilyMeta[] = [
   {
     id: "africa-education-icon",
     name: "Africa Education Icon",
+    longName: "Africa Education Icon Lifetime Achievement Award 2006–2026",
     tagline: "Lifetime Impact Recognition",
     description:
       "Hall-of-fame lifetime recognition for two decades of measurable continental education impact (2006–2026).",
@@ -138,6 +198,7 @@ export const AWARD_FAMILIES: AwardFamilyMeta[] = [
   {
     id: "gold-blue-garnet",
     name: "Gold-Blue Garnet Categories",
+    longName: "Gold-Blue Garnet — Competitive Excellence",
     tagline: "Competitive Excellence Recognition",
     description:
       "Competitive, voting-enabled awards across NGO, CSR, EduTech, STEM, Media, Creative Arts and State leadership.",
@@ -145,6 +206,7 @@ export const AWARD_FAMILIES: AwardFamilyMeta[] = [
   {
     id: "platinum",
     name: "Platinum Recognition",
+    longName: "Platinum / Institutional Leadership",
     tagline: "Institutional Impact Recognition",
     description:
       "Elite institutional recognition decided by jury review — no public vote.",
@@ -152,8 +214,10 @@ export const AWARD_FAMILIES: AwardFamilyMeta[] = [
   {
     id: "influencer",
     name: "Influencer Education Impact",
+    longName: "Influencer Education Impact Award 2026",
     tagline: "Creators Advancing Education",
     description:
       "Sports, music, and social media voices using their platforms to advance African education.",
   },
 ];
+
