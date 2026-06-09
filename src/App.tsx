@@ -55,6 +55,7 @@ import OTPVerification from "./pages/auth/OTPVerification";
 import ForgotPassword from "./pages/auth/ForgotPassword";
 import ResetPassword from "./pages/auth/ResetPassword";
 import NominateFlow from "./pages/NominateFlow";
+import NominateOfficial from "./pages/NominateOfficial";
 import NominateMvp from "./pages/NominateMvp";
 import NominateSchool from "./pages/impact/NominateSchool";
 import Dashboard from "./pages/Dashboard";
@@ -1200,6 +1201,36 @@ const App = () => (
                       <WithLayout>
                         <WithFirewall>
                           <NominateFlow />
+                        </WithFirewall>
+                      </WithLayout>
+                    }
+                  />
+                  <Route
+                    path="/nominate/official"
+                    element={
+                      <WithLayout>
+                        <WithFirewall>
+                          <NominateOfficial />
+                        </WithFirewall>
+                      </WithLayout>
+                    }
+                  />
+                  <Route
+                    path="/nominate/official/:family"
+                    element={
+                      <WithLayout>
+                        <WithFirewall>
+                          <NominateOfficial />
+                        </WithFirewall>
+                      </WithLayout>
+                    }
+                  />
+                  <Route
+                    path="/nominate/official/:family/:category"
+                    element={
+                      <WithLayout>
+                        <WithFirewall>
+                          <NominateOfficial />
                         </WithFirewall>
                       </WithLayout>
                     }
