@@ -33,7 +33,7 @@ export default function AfricaEducationIconPage() {
           { value: "Continental", label: "Transforming Africa" },
         ]}
         primaryCta={{ label: "Explore Icon Nominees", href: "/nominees?category=Africa%20Education%20Icon%20Award%20(2006%E2%80%932026)" }}
-        secondaryCta={{ label: "Nominate an Education Legend", href: "/nominate?category=africa-education-icon-award" }}
+        secondaryCta={{ label: "Nominate an Education Legend", href: "/nominate?family=africa-education-icon&awardFamily=Africa%20Education%20Icon%20Lifetime%20Achievement%20Award%202006%E2%80%932026&category=africa-education-icon-lifetime-achievement-2006-2026" }}
         watchCta={{ label: "Watch Legacy Stories", href: "/media" }}
         imageAlt="Africa Education Icon Award — two decades of legacy"
       />
