@@ -119,7 +119,7 @@ export default function NomineesHubPage() {
 
   const isNigeria = filterCountry.toLowerCase() === "nigeria";
   const activeZone = NIGERIA_ZONES.find((z) => z.slug === filterZone);
-  const activeFilterCountValueValue = activeFilterCount(filters);
+  const activeFilterCountValue = activeFilterCount(filters);
 
   const clearAllFilters = () => {
     setParams(new URLSearchParams(), { replace: true });
