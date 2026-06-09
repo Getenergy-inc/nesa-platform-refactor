@@ -443,13 +443,16 @@ export default function NomineesHubPage() {
               </div>
 
               {filteredNominees.length > 0 ? (
-                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
+                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3" data-testid="filtered-results-grid">
                   {filteredNominees.slice(0, 12).map((n) => (
                     <LandingNomineeCard key={n.id} nominee={n} />
                   ))}
                 </div>
               ) : (
-                <div className="rounded-2xl border border-dashed border-gold/25 bg-charcoal-light/30 p-8 md:p-10 text-center">
+                <div
+                  data-testid="filtered-results-empty"
+                  className="rounded-2xl border border-dashed border-gold/25 bg-charcoal-light/30 p-8 md:p-10 text-center"
+                >
                   <Sparkles className="w-8 h-8 text-gold mx-auto mb-3" />
                   <h3 className="font-display text-lg md:text-xl font-bold text-ivory mb-2">
                     No nominees match these filters — yet.
