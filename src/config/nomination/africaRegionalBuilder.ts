@@ -63,6 +63,7 @@ export function withAfricaRegions(spec: RegionalCategorySpec): AwardCategoryForm
   const short = shortCategoryName(spec.base.name);
   const regions: AwardCategoryRegion[] = AFRICA_REGIONS.map((r) => ({
     slug: r.slug,
+    regionSlug: r.slug,
     name: r.name,
     countries: r.countries,
     subcategories: buildRegionalSubs(spec.baseSubcategories, r.name),
@@ -71,6 +72,7 @@ export function withAfricaRegions(spec: RegionalCategorySpec): AwardCategoryForm
     sheetTitle: `NESA 2026 — ${short} — Africa Regional — ${r.name} — Responses`,
     status: "Link Pending",
   }));
+
 
   return {
     ...spec.base,
