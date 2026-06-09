@@ -190,6 +190,7 @@ export const AWARD_FAMILIES: AwardFamilyMeta[] = [
   {
     id: "africa-education-icon",
     name: "Africa Education Icon",
+    longName: "Africa Education Icon Lifetime Achievement Award 2006–2026",
     tagline: "Lifetime Impact Recognition",
     description:
       "Hall-of-fame lifetime recognition for two decades of measurable continental education impact (2006–2026).",
@@ -197,6 +198,7 @@ export const AWARD_FAMILIES: AwardFamilyMeta[] = [
   {
     id: "gold-blue-garnet",
     name: "Gold-Blue Garnet Categories",
+    longName: "Gold-Blue Garnet — Competitive Excellence",
     tagline: "Competitive Excellence Recognition",
     description:
       "Competitive, voting-enabled awards across NGO, CSR, EduTech, STEM, Media, Creative Arts and State leadership.",
@@ -204,6 +206,7 @@ export const AWARD_FAMILIES: AwardFamilyMeta[] = [
   {
     id: "platinum",
     name: "Platinum Recognition",
+    longName: "Platinum / Institutional Leadership",
     tagline: "Institutional Impact Recognition",
     description:
       "Elite institutional recognition decided by jury review — no public vote.",
@@ -211,8 +214,10 @@ export const AWARD_FAMILIES: AwardFamilyMeta[] = [
   {
     id: "influencer",
     name: "Influencer Education Impact",
+    longName: "Influencer Education Impact Award 2026",
     tagline: "Creators Advancing Education",
     description:
       "Sports, music, and social media voices using their platforms to advance African education.",
   },
 ];
+
