@@ -295,9 +295,27 @@ export default function NomineesHubPage() {
             <div className="flex items-center gap-2 mb-3 text-ivory/70 text-xs uppercase tracking-wider">
               <Filter className="w-3.5 h-3.5 text-gold" /> Refine your search
             </div>
-            <div className="grid grid-cols-2 md:grid-cols-5 gap-2">
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-2">
+              <Select value={filterAwardFamily} onValueChange={setFilterAwardFamily}>
+                <SelectTrigger className="bg-charcoal border-gold/20 text-ivory text-xs h-9" aria-label="Award Family"><SelectValue placeholder="Award Family" /></SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="all">All Award Families</SelectItem>
+                  {AWARD_FAMILIES.map((f) => (
+                    <SelectItem key={f.slug} value={f.slug}>{f.label}</SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+              <Select value={filterRecognitionClass} onValueChange={setFilterRecognitionClass}>
+                <SelectTrigger className="bg-charcoal border-gold/20 text-ivory text-xs h-9" aria-label="Recognition Class"><SelectValue placeholder="Recognition Class" /></SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="all">All Recognition Classes</SelectItem>
+                  {RECOGNITION_CLASSES.map((r) => (
+                    <SelectItem key={r.slug} value={r.slug}>{r.label}</SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
               <Select value={filterCategory} onValueChange={setFilterCategory}>
-                <SelectTrigger className="bg-charcoal border-gold/20 text-ivory text-xs h-9"><SelectValue placeholder="Award Category" /></SelectTrigger>
+                <SelectTrigger className="bg-charcoal border-gold/20 text-ivory text-xs h-9" aria-label="Award Category"><SelectValue placeholder="Award Category" /></SelectTrigger>
                 <SelectContent>
                   <SelectItem value="all">All Award Categories</SelectItem>
                   {categories.slice(0, 30).map((c) => (
@@ -306,7 +324,7 @@ export default function NomineesHubPage() {
                 </SelectContent>
               </Select>
               <Select value={filterType} onValueChange={setFilterType}>
-                <SelectTrigger className="bg-charcoal border-gold/20 text-ivory text-xs h-9"><SelectValue placeholder="Nominee Type" /></SelectTrigger>
+                <SelectTrigger className="bg-charcoal border-gold/20 text-ivory text-xs h-9" aria-label="Nominee Type"><SelectValue placeholder="Nominee Type" /></SelectTrigger>
                 <SelectContent>
                   <SelectItem value="all">All Nominee Types</SelectItem>
                   <SelectItem value="individual">Individual</SelectItem>
@@ -316,14 +334,14 @@ export default function NomineesHubPage() {
                 </SelectContent>
               </Select>
               <Select value={filterCountry} onValueChange={setFilterCountry}>
-                <SelectTrigger className="bg-charcoal border-gold/20 text-ivory text-xs h-9"><SelectValue placeholder="Country" /></SelectTrigger>
+                <SelectTrigger className="bg-charcoal border-gold/20 text-ivory text-xs h-9" aria-label="Country"><SelectValue placeholder="Country" /></SelectTrigger>
                 <SelectContent>
                   <SelectItem value="all">All Countries</SelectItem>
                   {countries.map((c) => <SelectItem key={c} value={c}>{c}</SelectItem>)}
                 </SelectContent>
               </Select>
               <Select value={filterRegion} onValueChange={setFilterRegion}>
-                <SelectTrigger className="bg-charcoal border-gold/20 text-ivory text-xs h-9"><SelectValue placeholder="African Region" /></SelectTrigger>
+                <SelectTrigger className="bg-charcoal border-gold/20 text-ivory text-xs h-9" aria-label="African Region"><SelectValue placeholder="African Region" /></SelectTrigger>
                 <SelectContent>
                   <SelectItem value="all">All African Regions</SelectItem>
                   <SelectItem value="west-africa">West Africa</SelectItem>
@@ -334,8 +352,30 @@ export default function NomineesHubPage() {
                   <SelectItem value="diaspora">Diaspora</SelectItem>
                 </SelectContent>
               </Select>
+              {isNigeria && (
+                <>
+                  <Select value={filterZone} onValueChange={setFilterZone}>
+                    <SelectTrigger className="bg-charcoal border-gold/20 text-ivory text-xs h-9" aria-label="Nigeria Geopolitical Zone"><SelectValue placeholder="Nigeria Zone" /></SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="all">All Nigeria Zones</SelectItem>
+                      {NIGERIA_ZONES.map((z) => (
+                        <SelectItem key={z.slug} value={z.slug}>{z.name}</SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                  <Select value={filterState} onValueChange={setFilterState} disabled={!activeZone}>
+                    <SelectTrigger className="bg-charcoal border-gold/20 text-ivory text-xs h-9" aria-label="Nigeria State"><SelectValue placeholder={activeZone ? "Nigeria State" : "Pick zone first"} /></SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="all">All States in Zone</SelectItem>
+                      {(activeZone?.states ?? []).map((s) => (
+                        <SelectItem key={s.slug} value={s.slug}>{s.name}</SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                </>
+              )}
               <Select value={filterEdition} onValueChange={setFilterEdition}>
-                <SelectTrigger className="bg-charcoal border-gold/20 text-ivory text-xs h-9"><SelectValue placeholder="Edition" /></SelectTrigger>
+                <SelectTrigger className="bg-charcoal border-gold/20 text-ivory text-xs h-9" aria-label="Edition"><SelectValue placeholder="Edition" /></SelectTrigger>
                 <SelectContent>
                   <SelectItem value="2026">2026 Edition</SelectItem>
                   <SelectItem value="2024">2024 Archive</SelectItem>
@@ -343,11 +383,24 @@ export default function NomineesHubPage() {
                 </SelectContent>
               </Select>
             </div>
-            <p className="mt-2 text-[10px] text-ivory/40">
-              {/* Filters are UI-ready; connect to nominee dataset in a follow-up. */}
-              Showing {totalCount.toLocaleString()}+ nominees across African education awards.
-            </p>
+            <div className="mt-3 flex items-center justify-between text-[11px] text-ivory/55">
+              <span>
+                Showing {totalCount.toLocaleString()}+ nominees across African education awards
+                {activeFilterCount > 0 && ` • ${activeFilterCount} filter${activeFilterCount === 1 ? "" : "s"} active`}.
+              </span>
+              {activeFilterCount > 0 && (
+                <Button
+                  size="sm"
+                  variant="ghost"
+                  onClick={clearAllFilters}
+                  className="h-7 text-gold hover:text-gold/80 hover:bg-gold/10 gap-1"
+                >
+                  <X className="w-3 h-3" /> Clear all
+                </Button>
+              )}
+            </div>
           </motion.div>
+
 
           {/* How Nominees Are Organized + Explore by Region — moved to bottom of page */}
 
