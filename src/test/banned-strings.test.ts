@@ -56,7 +56,7 @@ function shouldScan(file: string): boolean {
 }
 
 describe("banned strings governance", () => {
-  for (const { needle } of BANNED) {
+  for (const { needle, pattern } of BANNED) {
     it(`source tree contains no occurrences of "${needle}"`, () => {
       const offenders: string[] = [];
       for (const root of ROOTS) {
@@ -64,9 +64,8 @@ describe("banned strings governance", () => {
           if (!shouldScan(file)) continue;
           let body: string;
           try { body = readFileSync(file, "utf8"); } catch { continue; }
-          if (body.includes(needle)) {
-            offenders.push(relative(process.cwd(), file));
-          }
+          const hit = pattern ? pattern.test(body) : body.includes(needle);
+          if (hit) offenders.push(relative(process.cwd(), file));
         }
       }
       expect(
