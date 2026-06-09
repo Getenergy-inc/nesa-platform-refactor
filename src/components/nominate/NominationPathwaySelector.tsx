@@ -78,10 +78,19 @@ export function NominationPathwaySelector({
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         {PATHWAYS.map((p) => {
           const Icon = p.icon;
-          const isPreselected =
-            preselectFamily &&
-            (preselectFamily.toLowerCase().includes(p.key) ||
-              (p.key === "gold-bluegarnet" && /gold|blue/i.test(preselectFamily)));
+          const f = preselectFamily?.toLowerCase() ?? "";
+          const isPreselected = Boolean(
+            f &&
+              ((p.key === "icon" && /icon|lifetime|legend/.test(f)) ||
+                (p.key === "influencer" &&
+                  /influenc|creator|musician|footballer|sports|social-media/.test(f)) ||
+                (p.key === "platinum" && /platinum|institutional/.test(f)) ||
+                (p.key === "gold-bluegarnet" &&
+                  /gold|blue|garnet|competitive/.test(f)) ||
+                (p.key === "special-needs-school" &&
+                  /rmsa|special-needs|school-intervention/.test(f))),
+          );
+
           return (
             <Card
               key={p.key}

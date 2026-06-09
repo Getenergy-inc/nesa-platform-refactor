@@ -27,11 +27,20 @@ const PATHWAY_FAMILY: Record<NominationPathway, string> = {
 interface Props {
   pathway: NominationPathway;
   initial?: NomineeEntry | null;
-  preselect?: { category?: string; region?: string };
+  preselect?: {
+    category?: string;
+    subcategory?: string;
+    region?: string;
+    zone?: string;
+    state?: string;
+    awardFamily?: string;
+    recognitionClass?: string;
+  };
   onCancel: () => void;
   onSave: (entry: Omit<NomineeEntry, "id"> & { id?: string }) => void;
   totalEntries: number;
 }
+
 
 function uid() {
   return `nm_${Math.random().toString(36).slice(2, 10)}`;
@@ -51,9 +60,9 @@ export function NomineeEntryForm({
       pathway,
       nomineeName: "",
       nomineeType: pathway === "platinum" ? "Organization" : "Individual",
-      awardFamily: PATHWAY_FAMILY[pathway],
+      awardFamily: preselect?.awardFamily ?? PATHWAY_FAMILY[pathway],
       category: preselect?.category ?? "",
-      subcategory: "",
+      subcategory: preselect?.subcategory ?? "",
       country: "",
       region: preselect?.region ?? "",
       city: "",
@@ -61,6 +70,7 @@ export function NomineeEntryForm({
       contact: "",
       website: "",
       socialLinks: "",
+
       biography: "",
       impactSummary: "",
       reason: "",

@@ -27,6 +27,28 @@ import type {
 
 const SESSION_KEY = "nesa-nomination-flow-v1";
 
+/**
+ * Map a URL `?family=` slug (or audit long name) onto the local
+ * NominationPathway. Accepts kebab-case slugs, audit long names, and a few
+ * historical aliases so that legacy CTAs and the new 54-form taxonomy both
+ * resolve correctly.
+ */
+function resolvePathwayFromFamily(
+  family: string | undefined,
+): NominationPathway | null {
+  if (!family) return null;
+  const f = family.toLowerCase();
+  if (/icon|lifetime|legend/.test(f)) return "icon";
+  if (/influenc|creator|musician|footballer|sports|social-media/.test(f))
+    return "influencer";
+  if (/platinum|institutional/.test(f)) return "platinum";
+  if (/gold|blue|garnet|competitive/.test(f)) return "gold-bluegarnet";
+  if (/rmsa|special-needs|school-intervention/.test(f))
+    return "special-needs-school";
+  return null;
+}
+
+
 type Action =
   | { type: "SET_STEP"; step: FlowStep }
   | { type: "SET_PATHWAY"; pathway: NominationPathway }
@@ -114,21 +136,37 @@ export default function NominateFlow() {
     }
   }, [i18n.language, params, setParams]);
 
-  // Capture URL preselects
+  // Capture URL preselects (Pass C — supports awardFamily, recognitionClass,
+  // subcategory, zone, state in addition to family/category/region).
   useEffect(() => {
     const preselect = {
       family: params.get("family") ?? undefined,
+      awardFamily: params.get("awardFamily") ?? undefined,
+      recognitionClass: params.get("recognitionClass") ?? undefined,
       category: params.get("category") ?? undefined,
+      subcategory: params.get("subcategory") ?? undefined,
       region: params.get("region") ?? undefined,
+      zone: params.get("zone") ?? undefined,
+      state: params.get("state") ?? undefined,
     };
     dispatch({ type: "SET_PRESELECT", preselect });
 
-    // Auto-jump from flash if a family is preselected (deep-link from category page)
-    if (preselect.family && state.step === "flash" && state.entries.length === 0) {
-      dispatch({ type: "SET_STEP", step: "pathway" });
+    // URL-driven preselect bypasses the old family cards entirely.
+    // Map an incoming `family` query slug to a NominationPathway and jump
+    // straight to the entry form (or pathway picker if only family given).
+    const pathway = resolvePathwayFromFamily(preselect.family);
+    if (state.step === "flash" && state.entries.length === 0) {
+      if (pathway && preselect.category) {
+        dispatch({ type: "SET_PATHWAY", pathway });
+      } else if (pathway) {
+        dispatch({ type: "SET_PATHWAY", pathway });
+      } else if (preselect.family) {
+        dispatch({ type: "SET_STEP", step: "pathway" });
+      }
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [params]);
+
 
   // Persist to sessionStorage
   useEffect(() => {
