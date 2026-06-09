@@ -197,6 +197,40 @@ export default function NomineesHubPage() {
     return categories.filter((c) => c.name.toLowerCase().includes(q));
   }, [categories, search]);
 
+  // Pass D — filtered nominee list driven by URL params. Award family /
+  // recognition class / zone / state are first-class filters; when nominee
+  // rows don't yet carry those fields they cleanly fall through to the
+  // empty-state copy below (audit-compliant).
+  const filteredNominees = useMemo(() => {
+    const all = (nominees ?? []).filter(
+      (n) => n.status === "approved" || n.status === "platinum" || n.status === "pending",
+    );
+    const q = search.trim().toLowerCase();
+    return all.filter((n) => {
+      if (filterCategory !== "all" && n.categorySlug !== filterCategory) return false;
+      if (filterCountry !== "all" && (n.country ?? "").toLowerCase() !== filterCountry.toLowerCase()) return false;
+      if (filterRegion !== "all") {
+        const norm = normalizeRegion(n.region ?? "");
+        const want = filterRegion.replace(/-africa$/, "");
+        if (!norm || !norm.toLowerCase().includes(want)) return false;
+      }
+      const anyN = n as unknown as Record<string, unknown>;
+      if (filterAwardFamily !== "all" && anyN.awardFamily !== filterAwardFamily) return false;
+      if (filterRecognitionClass !== "all" && anyN.recognitionClass !== filterRecognitionClass) return false;
+      if (filterZone !== "all" && anyN.zoneSlug !== filterZone) return false;
+      if (filterState !== "all" && anyN.stateSlug !== filterState) return false;
+      if (q) {
+        const hay = `${n.name} ${n.categoryName} ${n.country ?? ""} ${n.region ?? ""}`.toLowerCase();
+        if (!hay.includes(q)) return false;
+      }
+      return true;
+    });
+  }, [
+    nominees, search, filterCategory, filterCountry, filterRegion,
+    filterAwardFamily, filterRecognitionClass, filterZone, filterState,
+  ]);
+
+
   const onSearchSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!search.trim()) return;
