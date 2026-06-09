@@ -69,8 +69,10 @@ export interface NominationSubcategory {
 }
 
 export interface AwardCategoryRegion {
-  /** kebab-case region slug (e.g. "west-africa") */
+  /** kebab-case region slug (e.g. "west-africa") — alias of `regionSlug`. */
   slug: string;
+  /** Explicit first-class region slug, matches `slug`. Used by /nominees filter. */
+  regionSlug: string;
   /** Display region name (e.g. "West Africa") */
   name: string;
   /** Countries shown in this region's country dropdown */
@@ -86,6 +88,7 @@ export interface AwardCategoryRegion {
   /** Region-specific lifecycle status */
   status: FormStatus;
 }
+
 
 export interface AwardCategoryForm {
   /** kebab-case slug used in ?category= query */
