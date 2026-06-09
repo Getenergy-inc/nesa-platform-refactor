@@ -50,15 +50,26 @@ export default function MasterNomineeProfile() {
   if (!nominee || !bio) {
     return (
       <div className="min-h-screen bg-charcoal flex items-center justify-center">
-        <div className="text-center px-4">
+        <Helmet>
+          <title>Nominee profile pending verification | NESA-Africa</title>
+          <meta name="robots" content="noindex" />
+        </Helmet>
+        <div className="text-center px-4 max-w-md">
           <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-gold/10 flex items-center justify-center">
             <Award className="w-8 h-8 text-gold/30" />
           </div>
-          <h1 className="text-xl font-display text-ivory mb-2">Nominee Not Found</h1>
-          <p className="text-ivory/70 text-sm mb-4">This profile may be under review or the link is incorrect.</p>
-          <Button asChild className="bg-gold hover:bg-gold-dark text-charcoal">
-            <Link to="/directory"><ArrowLeft className="w-4 h-4 mr-2" /> Browse Directory</Link>
-          </Button>
+          <h1 className="text-xl font-display text-ivory mb-2">Profile pending verification</h1>
+          <p className="text-ivory/70 text-sm mb-4">
+            This nominee profile is still being verified by the NESA-Africa Review Committee, or the link may be incorrect. Only complete, verified profiles are published publicly.
+          </p>
+          <div className="flex flex-col sm:flex-row gap-3 justify-center">
+            <Button asChild className="bg-gold hover:bg-gold-dark text-charcoal">
+              <Link to="/nominees"><ArrowLeft className="w-4 h-4 mr-2" /> Explore Nominees</Link>
+            </Button>
+            <Button asChild variant="outline" className="border-gold/30 text-gold hover:bg-gold/10">
+              <Link to="/nominate">Nominate a Champion</Link>
+            </Button>
+          </div>
         </div>
       </div>
     );
