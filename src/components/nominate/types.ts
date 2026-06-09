@@ -55,8 +55,22 @@ export interface FlowState {
   editingId: string | null;
   submitter: SubmitterIdentity | null;
   preselect: {
+    /** Award family slug or long name — drives pathway auto-select. */
     family?: string;
+    /** Audit-aligned award family long name (e.g. "Influencer Education Impact Award 2026"). */
+    awardFamily?: string;
+    /** Audit recognition class chip (e.g. "Africa-Resident / Diaspora"). */
+    recognitionClass?: string;
+    /** Category slug (e.g. "best-csr-for-education-africa-regional"). */
     category?: string;
+    /** Subcategory slug. */
+    subcategory?: string;
+    /** Africa region slug (e.g. "west-africa"). */
     region?: string;
+    /** Nigeria geopolitical zone slug (e.g. "south-west"). */
+    zone?: string;
+    /** Nigeria state slug (e.g. "lagos"). */
+    state?: string;
   };
 }
+
