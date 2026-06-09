@@ -3231,7 +3231,9 @@ export type Database = {
           acceptance_token: string | null
           acceptance_token_expires_at: string | null
           accepted_at: string | null
+          award_family: string | null
           bio: string | null
+          category_fit_summary: string | null
           country: string | null
           created_at: string | null
           email: string | null
@@ -3240,12 +3242,14 @@ export type Database = {
           first_letter_sent: boolean | null
           id: string
           identity_hash: string | null
+          impact_area: string | null
           is_platinum: boolean | null
           jury_score: number | null
           legacy_ids: Json | null
           legacy_source: string | null
           linkedin_url: string | null
           logo_url: string | null
+          media_gallery: Json
           name: string
           nominator_user_id: string | null
           nrc_reviewer_id: string | null
@@ -3254,16 +3258,24 @@ export type Database = {
           organization: string | null
           phone: string | null
           photo_url: string | null
+          profile_completion_score: number
+          profile_status: Database["public"]["Enums"]["nominee_profile_status"]
+          public_documents: Json
           public_votes: number | null
+          publication_status: Database["public"]["Enums"]["nominee_publication_status"]
           published_at: string | null
           published_by: string | null
+          recognition_class: string | null
           region: string | null
+          region_slug: string | null
           renomination_count: number
           review_notes: string | null
           reviewed_at: string | null
           season_id: string
           slug: string
+          social_profile_links: Json
           source_nomination_id: string | null
+          state_slug: string | null
           status: Database["public"]["Enums"]["nomination_status"] | null
           subcategory_id: string
           title: string | null
@@ -3271,6 +3283,7 @@ export type Database = {
           verification_tier: string | null
           website: string | null
           work_done: string | null
+          zone_slug: string | null
         }
         Insert: {
           acceptance_status?:
@@ -3279,7 +3292,9 @@ export type Database = {
           acceptance_token?: string | null
           acceptance_token_expires_at?: string | null
           accepted_at?: string | null
+          award_family?: string | null
           bio?: string | null
+          category_fit_summary?: string | null
           country?: string | null
           created_at?: string | null
           email?: string | null
@@ -3288,12 +3303,14 @@ export type Database = {
           first_letter_sent?: boolean | null
           id?: string
           identity_hash?: string | null
+          impact_area?: string | null
           is_platinum?: boolean | null
           jury_score?: number | null
           legacy_ids?: Json | null
           legacy_source?: string | null
           linkedin_url?: string | null
           logo_url?: string | null
+          media_gallery?: Json
           name: string
           nominator_user_id?: string | null
           nrc_reviewer_id?: string | null
@@ -3302,16 +3319,24 @@ export type Database = {
           organization?: string | null
           phone?: string | null
           photo_url?: string | null
+          profile_completion_score?: number
+          profile_status?: Database["public"]["Enums"]["nominee_profile_status"]
+          public_documents?: Json
           public_votes?: number | null
+          publication_status?: Database["public"]["Enums"]["nominee_publication_status"]
           published_at?: string | null
           published_by?: string | null
+          recognition_class?: string | null
           region?: string | null
+          region_slug?: string | null
           renomination_count?: number
           review_notes?: string | null
           reviewed_at?: string | null
           season_id: string
           slug: string
+          social_profile_links?: Json
           source_nomination_id?: string | null
+          state_slug?: string | null
           status?: Database["public"]["Enums"]["nomination_status"] | null
           subcategory_id: string
           title?: string | null
@@ -3319,6 +3344,7 @@ export type Database = {
           verification_tier?: string | null
           website?: string | null
           work_done?: string | null
+          zone_slug?: string | null
         }
         Update: {
           acceptance_status?:
@@ -3327,7 +3353,9 @@ export type Database = {
           acceptance_token?: string | null
           acceptance_token_expires_at?: string | null
           accepted_at?: string | null
+          award_family?: string | null
           bio?: string | null
+          category_fit_summary?: string | null
           country?: string | null
           created_at?: string | null
           email?: string | null
@@ -3336,12 +3364,14 @@ export type Database = {
           first_letter_sent?: boolean | null
           id?: string
           identity_hash?: string | null
+          impact_area?: string | null
           is_platinum?: boolean | null
           jury_score?: number | null
           legacy_ids?: Json | null
           legacy_source?: string | null
           linkedin_url?: string | null
           logo_url?: string | null
+          media_gallery?: Json
           name?: string
           nominator_user_id?: string | null
           nrc_reviewer_id?: string | null
@@ -3350,16 +3380,24 @@ export type Database = {
           organization?: string | null
           phone?: string | null
           photo_url?: string | null
+          profile_completion_score?: number
+          profile_status?: Database["public"]["Enums"]["nominee_profile_status"]
+          public_documents?: Json
           public_votes?: number | null
+          publication_status?: Database["public"]["Enums"]["nominee_publication_status"]
           published_at?: string | null
           published_by?: string | null
+          recognition_class?: string | null
           region?: string | null
+          region_slug?: string | null
           renomination_count?: number
           review_notes?: string | null
           reviewed_at?: string | null
           season_id?: string
           slug?: string
+          social_profile_links?: Json
           source_nomination_id?: string | null
+          state_slug?: string | null
           status?: Database["public"]["Enums"]["nomination_status"] | null
           subcategory_id?: string
           title?: string | null
@@ -3367,6 +3405,7 @@ export type Database = {
           verification_tier?: string | null
           website?: string | null
           work_done?: string | null
+          zone_slug?: string | null
         }
         Relationships: [
           {
@@ -7485,6 +7524,13 @@ export type Database = {
         | "approved"
         | "rejected"
         | "platinum"
+      nominee_profile_status: "incomplete" | "partial" | "complete"
+      nominee_publication_status:
+        | "draft"
+        | "pending"
+        | "published"
+        | "unpublished"
+        | "archived"
       notification_status: "PENDING" | "SENT" | "FAILED" | "READ"
       nrc_review_decision:
         | "APPROVE"
@@ -7799,6 +7845,14 @@ export const Constants = {
         "approved",
         "rejected",
         "platinum",
+      ],
+      nominee_profile_status: ["incomplete", "partial", "complete"],
+      nominee_publication_status: [
+        "draft",
+        "pending",
+        "published",
+        "unpublished",
+        "archived",
       ],
       notification_status: ["PENDING", "SENT", "FAILED", "READ"],
       nrc_review_decision: [
