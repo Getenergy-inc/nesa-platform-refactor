@@ -19,6 +19,7 @@ import {
   getSecondaryCtaHref,
   TIER_BADGE_STYLES,
 } from "@/config/nomineeCategories";
+import { parseFilterParams, applyFilterChange, activeFilterCount } from "@/pages/nominees/lib/filterNominees";
 import { CategoryDiscoveryGrid } from "@/components/nominees/CategoryDiscoveryGrid";
 import { NIGERIA_ZONES } from "@/config/nomination/nigeriaZones";
 import { normalizeRegion } from "@/lib/regions";
@@ -93,32 +94,16 @@ export default function NomineesHubPage() {
 
   // URL-driven filters — deep-linkable per Pass D audit.
   const [params, setParams] = useSearchParams();
-  const search = params.get("q") ?? "";
-  const activeGroup = params.get("group") ?? "all";
-  const filterCategory = params.get("category") ?? "all";
-  const filterType = params.get("type") ?? "all";
-  const filterCountry = params.get("country") ?? "all";
-  const filterRegion = params.get("region") ?? "all";
-  const filterEdition = params.get("edition") ?? "2026";
-  const filterAwardFamily = params.get("awardFamily") ?? "all";
-  const filterRecognitionClass = params.get("recognitionClass") ?? "all";
-  const filterZone = params.get("zone") ?? "all";
-  const filterState = params.get("state") ?? "all";
+  const filters = parseFilterParams(params);
+  const {
+    q: search, category: filterCategory, type: filterType,
+    country: filterCountry, region: filterRegion, edition: filterEdition,
+    awardFamily: filterAwardFamily, recognitionClass: filterRecognitionClass,
+    zone: filterZone, state: filterState, group: activeGroup,
+  } = filters;
 
   const setParam = (key: string, value: string) => {
-    const next = new URLSearchParams(params);
-    if (!value || value === "all" || (key === "edition" && value === "2026") || (key === "group" && value === "all")) {
-      next.delete(key);
-    } else {
-      next.set(key, value);
-    }
-    // Zone/state only meaningful for Nigeria — clear when country changes away
-    if (key === "country" && value !== "nigeria") {
-      next.delete("zone");
-      next.delete("state");
-    }
-    if (key === "zone" && value === "all") next.delete("state");
-    setParams(next, { replace: true });
+    setParams(applyFilterChange(params, key, value), { replace: true });
   };
   const setSearch = (v: string) => setParam("q", v);
   const setActiveGroup = (v: string) => setParam("group", v);
@@ -132,18 +117,15 @@ export default function NomineesHubPage() {
   const setFilterZone = (v: string) => setParam("zone", v);
   const setFilterState = (v: string) => setParam("state", v);
 
-  const isNigeria = filterCountry === "nigeria" || filterCountry.toLowerCase() === "nigeria";
+  const isNigeria = filterCountry.toLowerCase() === "nigeria";
   const activeZone = NIGERIA_ZONES.find((z) => z.slug === filterZone);
-
-  const activeFilterCount = [
-    filterCategory, filterType, filterCountry, filterRegion,
-    filterAwardFamily, filterRecognitionClass, filterZone, filterState,
-  ].filter((v) => v && v !== "all").length + (search.trim() ? 1 : 0);
+  const activeFilterCountValue = activeFilterCount(filters);
 
   const clearAllFilters = () => {
-    const next = new URLSearchParams();
-    setParams(next, { replace: true });
+    setParams(new URLSearchParams(), { replace: true });
   };
+
+
 
   const { categories, trending, mostVoted, totalCount } = useMemo(() => {
     if (!nominees) return { categories: [], trending: [], mostVoted: [], totalCount: 0 };
@@ -420,9 +402,9 @@ export default function NomineesHubPage() {
             <div className="mt-3 flex items-center justify-between text-[11px] text-ivory/55">
               <span>
                 Showing {totalCount.toLocaleString()}+ nominees across African education awards
-                {activeFilterCount > 0 && ` • ${activeFilterCount} filter${activeFilterCount === 1 ? "" : "s"} active`}.
+                {activeFilterCountValue > 0 && ` • ${activeFilterCountValue} filter${activeFilterCountValue === 1 ? "" : "s"} active`}.
               </span>
-              {activeFilterCount > 0 && (
+              {activeFilterCountValue > 0 && (
                 <Button
                   size="sm"
                   variant="ghost"
@@ -439,7 +421,7 @@ export default function NomineesHubPage() {
           {/* ════════════════════════════════════════════════════════════ */}
           {/* Filtered Results — only renders when at least one filter is on */}
           {/* ════════════════════════════════════════════════════════════ */}
-          {activeFilterCount > 0 && (
+          {activeFilterCountValue > 0 && (
             <section className="mb-12" aria-labelledby="filtered-results-heading">
               <div className="mb-4 flex items-end justify-between">
                 <div>
