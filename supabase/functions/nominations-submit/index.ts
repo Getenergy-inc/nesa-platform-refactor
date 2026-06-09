@@ -131,13 +131,31 @@ Deno.serve(async (req) => {
       .eq("id", nominatorId);
   }
 
+  // Build evidence_urls array from website + social + evidence_links (comma/newline separated)
+  const evidenceUrls = [
+    nomination.website,
+    ...nomination.social_links.split(/[\s,]+/),
+    ...nomination.evidence_links.split(/[\s,]+/),
+  ]
+    .map((s) => s.trim())
+    .filter((s) => s.length > 0 && /^https?:\/\//i.test(s));
+
+  const bioParts = [
+    nomination.impact_summary,
+    nomination.nominee_city || nomination.nominee_region || nomination.nominee_country
+      ? `Location: ${[nomination.nominee_city, nomination.nominee_region, nomination.nominee_country].filter(Boolean).join(", ")}`
+      : "",
+  ].filter(Boolean);
+
   const { data: nom, error: nomErr } = await supabase
     .from("nominations")
     .insert({
       nominator_id: nominatorId,
+      source: "website",
       source_channel: "website_official",
       submission_kind: "official_nomination",
       publication_status: "under_review",
+      workflow_status: "SUBMITTED",
       award_family: nomination.award_family,
       award_category_slug: nomination.award_category_slug,
       award_subcategory_slug: nomination.award_subcategory_slug ?? null,
@@ -146,17 +164,12 @@ Deno.serve(async (req) => {
       zone_slug: nomination.zone_slug ?? null,
       state_slug: nomination.state_slug ?? null,
       nominee_name: nomination.nominee_name,
-      nominee_type: nomination.nominee_type,
-      nominee_country: nomination.nominee_country,
-      nominee_region: nomination.nominee_region,
-      nominee_city: nomination.nominee_city,
-      organization: nomination.organization,
-      website: nomination.website,
-      social_links: nomination.social_links,
-      impact_summary: nomination.impact_summary,
-      reason: nomination.reason,
-      evidence_links: nomination.evidence_links,
-      status: "pending",
+      nominee_title: nomination.nominee_type,
+      nominee_organization: nomination.organization || null,
+      nominee_bio: bioParts.join("\n\n"),
+      justification: nomination.reason,
+      evidence_urls: evidenceUrls,
+      status: "submitted",
     })
     .select("id")
     .single();
