@@ -27,6 +27,11 @@ const BANNED: { needle: string; pattern?: RegExp }[] = [
   { needle: "Gold and Blue Garnet" },
   { needle: "Vote & Earn AGC" }, // replaced by "Nominate & Earn AGC Voting Coin"
   { needle: "Nominate your Champion" }, // replaced by "Submit Evidence-Based Nomination"
+  // Pass F — nominee profile gating must use branded copy, not generic 404s.
+  { needle: "Profile Not Available" },
+  { needle: "Nominee Not Found" },
+  { needle: "Document Not Available" },
+  { needle: "Image unavailable" },
 ];
 
 const ROOTS = ["src", "public", "index.html"];
