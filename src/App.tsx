@@ -1234,7 +1234,7 @@ const App = () => (
                         </WithFirewall>
                       </WithLayout>
                     }
-                  />)
+                  />
                   <Route
                     path="/nominees"
                     element={
