@@ -18,7 +18,7 @@ interface DashboardCard {
 const cards: DashboardCard[] = [
   {
     title: "Awards Season",
-    description: "Explore the current award cycle — Platinum, Gold, Blue Garnet, and Africa Icons.",
+    description: "Explore the current award cycle — Platinum, Gold-Blue Garnet, and Africa Icons.",
     href: "/awards",
     cta: "Explore Awards",
     icon: Trophy,

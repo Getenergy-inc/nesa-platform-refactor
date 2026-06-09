@@ -130,7 +130,7 @@
         },
         "blueGarnetGold": {
           "badge": "Public Voting",
-          "title": "Blue Garnet & Gold Certificate Awards",
+          "title": "Gold-Blue Garnet Certificate Awards",
           "description": "Open competition with public participation through AGC voting and expert judging.",
           "bullets": [
             "Public Voting",
@@ -343,13 +343,13 @@
       "badge": "Structured Civic Participation",
       "title": "Afrigold Participation",
       "titleAccent": "Credit (AGC)",
-      "description": "Your participation earns Afrigold Credits (AGCc) — structured participation credits to support nominees for Gold and Blue Garnet awards.",
+      "description": "Your participation earns Afrigold Credits (AGCc) — structured participation credits to support nominees for Gold-Blue Garnet awards.",
       "joinTitle": "Join & Participate",
       "joinDesc": "Create your account and engage through nominations, referrals, and daily activities.",
       "earnTitle": "Earn Voting Points",
       "earnDesc": "Your participation unlocks AGC voting points—structured credits for public participation.",
       "voteTitle": "Vote During Windows",
-      "voteDesc": "Use your AGC during official voting windows to support Gold and Blue Garnet nominees.",
+      "voteDesc": "Use your AGC during official voting windows to support Gold-Blue Garnet nominees.",
       "impactTitle": "Impact Education",
       "impactDesc": "Winners are announced and legacy funding flows to Rebuild My School Africa projects.",
       "nominationAmount": "+2 AGCc",
@@ -420,7 +420,7 @@
       "iconFeature3": "Expert panel selection",
       "iconCta": "Nominate an Icon",
       "votingBadge": "Public Voting",
-      "votingTitle": "Blue Garnet & Gold",
+      "votingTitle": "Gold-Blue Garnet",
       "votingSubtitle": "Annual Competition",
       "votingFeature1": "Earn voting points through participation",
       "votingFeature2": "Vote with AGC during official windows",
@@ -915,7 +915,7 @@
       },
       "voting": {
         "badge": "Public Voting",
-        "title": "Blue Garnet & Gold",
+        "title": "Gold-Blue Garnet",
         "subtitle": "Annual Competition",
         "features": [
           "Earn voting points through participation",
@@ -1073,7 +1073,7 @@
       },
       "voting": {
         "title": "Public Voting",
-        "subtitle": "Blue Garnet & Gold Awards",
+        "subtitle": "Gold-Blue Garnet Awards",
         "description": "9 categories. 135 subcategories. Public + Jury weighted.",
         "cta": "Nominate",
         "ctaSecondary": "How It Works"

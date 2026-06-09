@@ -42,7 +42,7 @@ export function DailyEngagementBanner() {
               </h3>
             </div>
             <p className="text-white/55 text-sm md:text-base max-w-xl ml-0 md:ml-[2.75rem]">
-              Verified participation unlocks structured voting access during Gold and Blue Garnet stages.
+              Verified participation unlocks structured voting access during Gold-Blue Garnet stages.
             </p>
           </div>
 
