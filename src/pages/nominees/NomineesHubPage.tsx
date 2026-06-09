@@ -422,7 +422,7 @@ export default function NomineesHubPage() {
           {/* Filtered Results — only renders when at least one filter is on */}
           {/* ════════════════════════════════════════════════════════════ */}
           {activeFilterCountValue > 0 && (
-            <section className="mb-12" aria-labelledby="filtered-results-heading">
+            <section className="mb-12" aria-labelledby="filtered-results-heading" data-testid="filtered-results">
               <div className="mb-4 flex items-end justify-between">
                 <div>
                   <h2 id="filtered-results-heading" className="font-display text-xl md:text-2xl font-bold text-ivory flex items-center gap-2">
