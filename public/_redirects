@@ -64,7 +64,7 @@
 /cookie-policy                                               /policies            301
 /language                                                    /                    301
 
-# --- 2. SPA routes (306 explicit paths from src/App.tsx) ---
+# --- 2. SPA routes (309 explicit paths from src/App.tsx) ---
 /nominees/gold-special-recognition/:categorySlug/:nomineeSlug /index.html          200
 /nominees/best-ngo-contribution-to-education/profile/:slug   /index.html          200
 /awards/influencers-education-impact-2026-recognition        /index.html          200
@@ -87,6 +87,7 @@
 /awards/influencers-education-impact                         /index.html          200
 /category/christian-education-africa                         /index.html          200
 /impact/regional-school-intervention                         /index.html          200
+/nominate/official/:family/:category                         /index.html          200
 /category/political-leaders-nigeria                          /index.html          200
 /category/islamic-education-africa                           /index.html          200
 /nominees/gold-special-recognition                           /index.html          200
@@ -111,6 +112,7 @@
 /category/diaspora-education                                 /index.html          200
 /nrc/dashboard/edi-analytics                                 /index.html          200
 /awards/global-partnerships                                  /index.html          200
+/nominate/official/:family                                   /index.html          200
 /policies/voting-integrity                                   /index.html          200
 /about/awards-recognition                                    /index.html          200
 /admin/contributor-photos                                    /index.html          200
@@ -181,6 +183,7 @@
 /guidelines/judges                                           /index.html          200
 /guidelines/voters                                           /index.html          200
 /nominate/advanced                                           /index.html          200
+/nominate/official                                           /index.html          200
 /nominee-directory                                           /index.html          200
 /volunteer-stories                                           /index.html          200
 /volunteer/profile                                           /index.html          200
