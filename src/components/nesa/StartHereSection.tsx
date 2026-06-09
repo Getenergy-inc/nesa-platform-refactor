@@ -19,7 +19,7 @@ const paths = [
   {
     icon: Trophy,
     title: "Explore Awards",
-    description: "Learn about Platinum, Gold, Blue Garnet & Icon recognition tiers",
+    description: "Learn about Platinum, Gold-Blue Garnet & Icon recognition tiers",
     href: "/categories",
     color: "text-blue-400",
     borderColor: "border-blue-500/30",
