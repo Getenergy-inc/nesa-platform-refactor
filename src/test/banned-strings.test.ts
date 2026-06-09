@@ -7,7 +7,7 @@ import { join, relative, resolve } from "node:path";
  * Mirrors `scripts/check-banned-strings.sh` (date strings) plus the audit
  * cleanup list and surfaces failures as a failing unit test in CI.
  */
-const BANNED: { needle: string; allowExtensionRegex?: RegExp }[] = [
+const BANNED: { needle: string; pattern?: RegExp }[] = [
   // Legacy date windows — must be 2006–2026.
   { needle: "2005–2025" },
   { needle: "2005-2025" },
@@ -16,7 +16,12 @@ const BANNED: { needle: string; allowExtensionRegex?: RegExp }[] = [
   { needle: "2006-2025" },
   // Audit-aligned terminology cleanup (Pass A).
   { needle: "Blue Garnet & Gold" },
-  { needle: "Blue Garnet — Competitive Excellence" }, // must read "Gold-Blue Garnet — Competitive Excellence"
+  // Must read "Gold-Blue Garnet — Competitive Excellence" — flag any
+  // occurrence NOT preceded by "Gold-".
+  {
+    needle: "Blue Garnet — Competitive Excellence (must be Gold-Blue Garnet …)",
+    pattern: /(?<!Gold-)Blue Garnet — Competitive Excellence/,
+  },
   { needle: "Gold / Blue Garnet" },
   { needle: "Gold, Blue Garnet" },
   { needle: "Gold and Blue Garnet" },
