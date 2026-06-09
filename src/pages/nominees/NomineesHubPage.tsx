@@ -436,7 +436,71 @@ export default function NomineesHubPage() {
           </motion.div>
 
 
+          {/* ════════════════════════════════════════════════════════════ */}
+          {/* Filtered Results — only renders when at least one filter is on */}
+          {/* ════════════════════════════════════════════════════════════ */}
+          {activeFilterCount > 0 && (
+            <section className="mb-12" aria-labelledby="filtered-results-heading">
+              <div className="mb-4 flex items-end justify-between">
+                <div>
+                  <h2 id="filtered-results-heading" className="font-display text-xl md:text-2xl font-bold text-ivory flex items-center gap-2">
+                    <Filter className="w-5 h-5 text-gold" /> Filtered Results
+                  </h2>
+                  <p className="text-xs text-ivory/60 mt-1">
+                    {filteredNominees.length.toLocaleString()} nominee{filteredNominees.length === 1 ? "" : "s"} match your filters.
+                  </p>
+                </div>
+                <Button
+                  size="sm"
+                  variant="ghost"
+                  onClick={clearAllFilters}
+                  className="h-8 text-gold hover:text-gold/80 hover:bg-gold/10 gap-1"
+                >
+                  <X className="w-3.5 h-3.5" /> Reset
+                </Button>
+              </div>
+
+              {filteredNominees.length > 0 ? (
+                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
+                  {filteredNominees.slice(0, 12).map((n) => (
+                    <LandingNomineeCard key={n.id} nominee={n} />
+                  ))}
+                </div>
+              ) : (
+                <div className="rounded-2xl border border-dashed border-gold/25 bg-charcoal-light/30 p-8 md:p-10 text-center">
+                  <Sparkles className="w-8 h-8 text-gold mx-auto mb-3" />
+                  <h3 className="font-display text-lg md:text-xl font-bold text-ivory mb-2">
+                    No nominees match these filters — yet.
+                  </h3>
+                  <p className="text-ivory/65 text-sm max-w-xl mx-auto mb-5">
+                    Some refinements (award family, recognition class, Nigeria zone or state) only
+                    activate once nominees have been formally accepted into that bracket. Try widening
+                    your search, switch region, or start a fresh nomination so a deserving champion
+                    appears here next.
+                  </p>
+                  <div className="flex flex-col sm:flex-row gap-2 justify-center">
+                    <Button
+                      size="sm"
+                      variant="outline"
+                      onClick={clearAllFilters}
+                      className="border-gold/40 text-gold hover:bg-gold/10 rounded-full gap-1"
+                    >
+                      <X className="w-3.5 h-3.5" /> Clear all filters
+                    </Button>
+                    <Link to="/nominate?source=nominees-empty-state">
+                      <Button size="sm" className="bg-gold hover:bg-gold/90 text-charcoal font-semibold rounded-full gap-1">
+                        <Trophy className="w-3.5 h-3.5" /> Nominate a champion
+                      </Button>
+                    </Link>
+                  </div>
+                </div>
+              )}
+            </section>
+          )}
+
           {/* How Nominees Are Organized + Explore by Region — moved to bottom of page */}
+
+
 
 
 
