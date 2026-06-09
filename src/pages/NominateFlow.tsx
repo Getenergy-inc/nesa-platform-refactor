@@ -27,6 +27,28 @@ import type {
 
 const SESSION_KEY = "nesa-nomination-flow-v1";
 
+/**
+ * Map a URL `?family=` slug (or audit long name) onto the local
+ * NominationPathway. Accepts kebab-case slugs, audit long names, and a few
+ * historical aliases so that legacy CTAs and the new 54-form taxonomy both
+ * resolve correctly.
+ */
+function resolvePathwayFromFamily(
+  family: string | undefined,
+): NominationPathway | null {
+  if (!family) return null;
+  const f = family.toLowerCase();
+  if (/icon|lifetime|legend/.test(f)) return "icon";
+  if (/influenc|creator|musician|footballer|sports|social-media/.test(f))
+    return "influencer";
+  if (/platinum|institutional/.test(f)) return "platinum";
+  if (/gold|blue|garnet|competitive/.test(f)) return "gold-bluegarnet";
+  if (/rmsa|special-needs|school-intervention/.test(f))
+    return "special-needs-school";
+  return null;
+}
+
+
 type Action =
   | { type: "SET_STEP"; step: FlowStep }
   | { type: "SET_PATHWAY"; pathway: NominationPathway }
