@@ -640,5 +640,17 @@ export function getCategory(id: CategoryId): CategoryConfig {
   return c;
 }
 
+// Maps the 3 page categories onto the audit-aligned nomination form slugs
+// in src/config/nomination/influencerForms.ts. URL-driven preselect bypasses
+// the family cards in NominateFlow (see Pass C).
+const CATEGORY_TO_FORM_SLUG: Record<CategoryId, string> = {
+  "social-media": "education-content-social-media-influencers",
+  sports: "african-footballers-supporting-education",
+  music: "african-musicians-supporting-education",
+};
+
 export const NOMINATE_URL = (categoryId: CategoryId) =>
-  `/nominate?family=influencer-education-impact&category=${categoryId}`;
+  `/nominate?family=influencer&awardFamily=${encodeURIComponent(
+    "Influencer Education Impact Award 2026",
+  )}&category=${CATEGORY_TO_FORM_SLUG[categoryId]}`;
+
