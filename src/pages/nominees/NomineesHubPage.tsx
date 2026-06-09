@@ -1,10 +1,10 @@
-import { useMemo, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useMemo } from "react";
+import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import { motion } from "framer-motion";
 import {
   Search, Trophy, Users, ArrowRight, ChevronRight, Flame, TrendingUp, Sparkles,
-  Globe2, Plane, HeartHandshake, MapPin, Crown, Building2, Rocket, Filter,
+  Globe2, Plane, HeartHandshake, MapPin, Crown, Building2, Rocket, Filter, X,
 } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -20,6 +20,26 @@ import {
   TIER_BADGE_STYLES,
 } from "@/config/nomineeCategories";
 import { CategoryDiscoveryGrid } from "@/components/nominees/CategoryDiscoveryGrid";
+import { NIGERIA_ZONES } from "@/config/nomination/nigeriaZones";
+import { normalizeRegion } from "@/lib/regions";
+
+// Audit-aligned award families & recognition classes — mirror
+// src/config/nomination/types.ts. Drives URL-driven /nominees filters.
+const AWARD_FAMILIES: { slug: string; label: string }[] = [
+  { slug: "influencer", label: "Influencer Education Impact Award 2026" },
+  { slug: "icon", label: "Africa Education Icon Lifetime Achievement (2006–2026)" },
+  { slug: "gold-bluegarnet", label: "Gold-Blue Garnet — Competitive Excellence" },
+  { slug: "platinum", label: "Platinum / Institutional Leadership" },
+  { slug: "rmsa", label: "Rebuild My School Africa / EduAid-Africa" },
+];
+
+const RECOGNITION_CLASSES: { slug: string; label: string }[] = [
+  { slug: "africa-resident", label: "Africa-Resident" },
+  { slug: "diaspora", label: "Diaspora" },
+  { slug: "friend-of-africa", label: "Friend of Africa" },
+  { slug: "institutional", label: "Institutional" },
+  { slug: "school", label: "School" },
+];
 
 
 
