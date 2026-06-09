@@ -2854,8 +2854,13 @@ export type Database = {
       }
       nominations: {
         Row: {
+          award_category_slug: string | null
+          award_family: string | null
+          award_subcategory_slug: string | null
           created_at: string | null
           created_nominee_id: string | null
+          dedupe_match_id: string | null
+          dedupe_score: number | null
           evidence_urls: string[] | null
           id: string
           identity_hash: string | null
@@ -2868,21 +2873,37 @@ export type Database = {
           nominee_photo_url: string | null
           nominee_title: string | null
           nrc_reviewer_id: string | null
+          publication_status: string
           query_count: number | null
+          recognition_class: string | null
+          region_slug: string | null
           review_notes: string | null
           reviewed_at: string | null
           rubric_version: string | null
           season_id: string
           sla_deadline: string | null
           source: Database["public"]["Enums"]["nomination_source"] | null
+          source_channel: string
+          source_form_id: string | null
+          source_row_id: string | null
+          source_sheet_id: string | null
+          state_slug: string | null
           status: Database["public"]["Enums"]["nomination_status"] | null
           subcategory_id: string
+          submission_kind: string
           updated_at: string | null
+          verification_tier: string | null
           workflow_status: string | null
+          zone_slug: string | null
         }
         Insert: {
+          award_category_slug?: string | null
+          award_family?: string | null
+          award_subcategory_slug?: string | null
           created_at?: string | null
           created_nominee_id?: string | null
+          dedupe_match_id?: string | null
+          dedupe_score?: number | null
           evidence_urls?: string[] | null
           id?: string
           identity_hash?: string | null
@@ -2895,21 +2916,37 @@ export type Database = {
           nominee_photo_url?: string | null
           nominee_title?: string | null
           nrc_reviewer_id?: string | null
+          publication_status?: string
           query_count?: number | null
+          recognition_class?: string | null
+          region_slug?: string | null
           review_notes?: string | null
           reviewed_at?: string | null
           rubric_version?: string | null
           season_id: string
           sla_deadline?: string | null
           source?: Database["public"]["Enums"]["nomination_source"] | null
+          source_channel?: string
+          source_form_id?: string | null
+          source_row_id?: string | null
+          source_sheet_id?: string | null
+          state_slug?: string | null
           status?: Database["public"]["Enums"]["nomination_status"] | null
           subcategory_id: string
+          submission_kind?: string
           updated_at?: string | null
+          verification_tier?: string | null
           workflow_status?: string | null
+          zone_slug?: string | null
         }
         Update: {
+          award_category_slug?: string | null
+          award_family?: string | null
+          award_subcategory_slug?: string | null
           created_at?: string | null
           created_nominee_id?: string | null
+          dedupe_match_id?: string | null
+          dedupe_score?: number | null
           evidence_urls?: string[] | null
           id?: string
           identity_hash?: string | null
@@ -2922,17 +2959,28 @@ export type Database = {
           nominee_photo_url?: string | null
           nominee_title?: string | null
           nrc_reviewer_id?: string | null
+          publication_status?: string
           query_count?: number | null
+          recognition_class?: string | null
+          region_slug?: string | null
           review_notes?: string | null
           reviewed_at?: string | null
           rubric_version?: string | null
           season_id?: string
           sla_deadline?: string | null
           source?: Database["public"]["Enums"]["nomination_source"] | null
+          source_channel?: string
+          source_form_id?: string | null
+          source_row_id?: string | null
+          source_sheet_id?: string | null
+          state_slug?: string | null
           status?: Database["public"]["Enums"]["nomination_status"] | null
           subcategory_id?: string
+          submission_kind?: string
           updated_at?: string | null
+          verification_tier?: string | null
           workflow_status?: string | null
+          zone_slug?: string | null
         }
         Relationships: [
           {
@@ -2964,6 +3012,57 @@ export type Database = {
             referencedColumns: ["id"]
           },
         ]
+      }
+      nominators: {
+        Row: {
+          consent_at: string | null
+          consent_given: boolean
+          country_origin: string | null
+          country_residence: string | null
+          created_at: string
+          email_lower: string | null
+          full_name: string
+          id: string
+          metadata: Json
+          phone_hash: string | null
+          phone_raw: string | null
+          source: string
+          updated_at: string
+          user_id: string | null
+        }
+        Insert: {
+          consent_at?: string | null
+          consent_given?: boolean
+          country_origin?: string | null
+          country_residence?: string | null
+          created_at?: string
+          email_lower?: string | null
+          full_name: string
+          id?: string
+          metadata?: Json
+          phone_hash?: string | null
+          phone_raw?: string | null
+          source?: string
+          updated_at?: string
+          user_id?: string | null
+        }
+        Update: {
+          consent_at?: string | null
+          consent_given?: boolean
+          country_origin?: string | null
+          country_residence?: string | null
+          created_at?: string
+          email_lower?: string | null
+          full_name?: string
+          id?: string
+          metadata?: Json
+          phone_hash?: string | null
+          phone_raw?: string | null
+          source?: string
+          updated_at?: string
+          user_id?: string | null
+        }
+        Relationships: []
       }
       nominee_enrichments: {
         Row: {
@@ -3156,16 +3255,20 @@ export type Database = {
           phone: string | null
           photo_url: string | null
           public_votes: number | null
+          published_at: string | null
+          published_by: string | null
           region: string | null
           renomination_count: number
           review_notes: string | null
           reviewed_at: string | null
           season_id: string
           slug: string
+          source_nomination_id: string | null
           status: Database["public"]["Enums"]["nomination_status"] | null
           subcategory_id: string
           title: string | null
           updated_at: string | null
+          verification_tier: string | null
           website: string | null
           work_done: string | null
         }
@@ -3200,16 +3303,20 @@ export type Database = {
           phone?: string | null
           photo_url?: string | null
           public_votes?: number | null
+          published_at?: string | null
+          published_by?: string | null
           region?: string | null
           renomination_count?: number
           review_notes?: string | null
           reviewed_at?: string | null
           season_id: string
           slug: string
+          source_nomination_id?: string | null
           status?: Database["public"]["Enums"]["nomination_status"] | null
           subcategory_id: string
           title?: string | null
           updated_at?: string | null
+          verification_tier?: string | null
           website?: string | null
           work_done?: string | null
         }
@@ -3244,16 +3351,20 @@ export type Database = {
           phone?: string | null
           photo_url?: string | null
           public_votes?: number | null
+          published_at?: string | null
+          published_by?: string | null
           region?: string | null
           renomination_count?: number
           review_notes?: string | null
           reviewed_at?: string | null
           season_id?: string
           slug?: string
+          source_nomination_id?: string | null
           status?: Database["public"]["Enums"]["nomination_status"] | null
           subcategory_id?: string
           title?: string | null
           updated_at?: string | null
+          verification_tier?: string | null
           website?: string | null
           work_done?: string | null
         }
@@ -3266,10 +3377,79 @@ export type Database = {
             referencedColumns: ["id"]
           },
           {
+            foreignKeyName: "nominees_source_nomination_id_fkey"
+            columns: ["source_nomination_id"]
+            isOneToOne: false
+            referencedRelation: "nominations"
+            referencedColumns: ["id"]
+          },
+          {
             foreignKeyName: "nominees_subcategory_id_fkey"
             columns: ["subcategory_id"]
             isOneToOne: false
             referencedRelation: "subcategories"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      notification_logs: {
+        Row: {
+          channel: string
+          created_at: string
+          error_message: string | null
+          id: string
+          nomination_id: string | null
+          payload: Json
+          provider: string | null
+          provider_message_id: string | null
+          recipient: string
+          related_entity_id: string | null
+          related_entity_type: string | null
+          sent_at: string | null
+          status: string
+          template: string
+          updated_at: string
+        }
+        Insert: {
+          channel: string
+          created_at?: string
+          error_message?: string | null
+          id?: string
+          nomination_id?: string | null
+          payload?: Json
+          provider?: string | null
+          provider_message_id?: string | null
+          recipient: string
+          related_entity_id?: string | null
+          related_entity_type?: string | null
+          sent_at?: string | null
+          status?: string
+          template: string
+          updated_at?: string
+        }
+        Update: {
+          channel?: string
+          created_at?: string
+          error_message?: string | null
+          id?: string
+          nomination_id?: string | null
+          payload?: Json
+          provider?: string | null
+          provider_message_id?: string | null
+          recipient?: string
+          related_entity_id?: string | null
+          related_entity_type?: string | null
+          sent_at?: string | null
+          status?: string
+          template?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "notification_logs_nomination_id_fkey"
+            columns: ["nomination_id"]
+            isOneToOne: false
+            referencedRelation: "nominations"
             referencedColumns: ["id"]
           },
         ]
@@ -5593,6 +5773,126 @@ export type Database = {
             columns: ["chapter_id"]
             isOneToOne: false
             referencedRelation: "chapters"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      sync_batches: {
+        Row: {
+          created_at: string
+          error_message: string | null
+          finished_at: string | null
+          id: string
+          metadata: Json
+          rows_failed: number
+          rows_inserted: number
+          rows_seen: number
+          rows_skipped: number
+          rows_updated: number
+          source_form_id: string | null
+          source_kind: string
+          source_label: string
+          source_sheet_id: string | null
+          started_at: string
+          status: string
+          trigger_kind: string
+          triggered_by: string | null
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          error_message?: string | null
+          finished_at?: string | null
+          id?: string
+          metadata?: Json
+          rows_failed?: number
+          rows_inserted?: number
+          rows_seen?: number
+          rows_skipped?: number
+          rows_updated?: number
+          source_form_id?: string | null
+          source_kind: string
+          source_label: string
+          source_sheet_id?: string | null
+          started_at?: string
+          status?: string
+          trigger_kind?: string
+          triggered_by?: string | null
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          error_message?: string | null
+          finished_at?: string | null
+          id?: string
+          metadata?: Json
+          rows_failed?: number
+          rows_inserted?: number
+          rows_seen?: number
+          rows_skipped?: number
+          rows_updated?: number
+          source_form_id?: string | null
+          source_kind?: string
+          source_label?: string
+          source_sheet_id?: string | null
+          started_at?: string
+          status?: string
+          trigger_kind?: string
+          triggered_by?: string | null
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      sync_logs: {
+        Row: {
+          action: string
+          batch_id: string
+          created_at: string
+          dedupe_score: number | null
+          id: string
+          nomination_id: string | null
+          normalized_payload: Json | null
+          raw_payload: Json | null
+          reason: string | null
+          source_row_id: string | null
+        }
+        Insert: {
+          action: string
+          batch_id: string
+          created_at?: string
+          dedupe_score?: number | null
+          id?: string
+          nomination_id?: string | null
+          normalized_payload?: Json | null
+          raw_payload?: Json | null
+          reason?: string | null
+          source_row_id?: string | null
+        }
+        Update: {
+          action?: string
+          batch_id?: string
+          created_at?: string
+          dedupe_score?: number | null
+          id?: string
+          nomination_id?: string | null
+          normalized_payload?: Json | null
+          raw_payload?: Json | null
+          reason?: string | null
+          source_row_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "sync_logs_batch_id_fkey"
+            columns: ["batch_id"]
+            isOneToOne: false
+            referencedRelation: "sync_batches"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "sync_logs_nomination_id_fkey"
+            columns: ["nomination_id"]
+            isOneToOne: false
+            referencedRelation: "nominations"
             referencedColumns: ["id"]
           },
         ]
