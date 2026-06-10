@@ -171,7 +171,12 @@ export default function NomineeProfile() {
   };
 
   // --- Gated / not found ---
-  if (!nominee) {
+  // --- Gated / not found / pending verification ---
+  // Block render unless the static record exists AND the DB confirms the
+  // nominee is published with a non-incomplete profile. While the gate is
+  // still loading we render the same branded UI to avoid leaking unverified
+  // content on first paint.
+  if (!nominee || publishCheck !== "allowed") {
     return (
       <div className="min-h-screen bg-charcoal flex items-center justify-center">
         <Helmet>
