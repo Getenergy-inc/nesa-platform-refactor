@@ -55,6 +55,7 @@ const SECTIONS: FooterSection[] = [
       { label: "Become a Judge", href: "/judges" },
       { label: "Become a Sponsor", href: "/sponsorship-packages" },
       { label: "Join a Local Chapter", href: "/join-local-chapter" },
+      { label: "Buy Merchandise", href: "/shop" },
     ],
   },
 ];
