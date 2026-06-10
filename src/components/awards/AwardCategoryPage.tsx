@@ -21,6 +21,8 @@ import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
 import { BreadcrumbJsonLd } from "@/components/seo/BreadcrumbJsonLd";
 import { CategoryFaqSection } from "./CategoryFaqSection";
+import { CategoryNominationForm } from "./CategoryNominationForm";
+import { CategoryNominationDialog } from "./CategoryNominationDialog";
 import {
   GROUP_META,
   INTEGRITY_DISCLAIMER,
