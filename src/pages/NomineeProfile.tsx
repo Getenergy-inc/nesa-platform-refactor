@@ -170,7 +170,7 @@ export default function NomineeProfile() {
     window.open(urls[platform], "_blank", "width=600,height=400");
   };
 
-  // --- Gated / not found ---
+  
   // --- Gated / not found / pending verification ---
   // Block render unless the static record exists AND the DB confirms the
   // nominee is published with a non-incomplete profile. While the gate is
