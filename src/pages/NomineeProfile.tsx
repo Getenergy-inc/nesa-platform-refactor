@@ -86,6 +86,13 @@ export default function NomineeProfile() {
   const { slug: rawSlug } = useParams<{ slug: string }>();
   const [dbNomineeId, setDbNomineeId] = useState<string | null>(null);
   const [renominationCount, setRenominationCount] = useState(0);
+  // Publication gate: must be confirmed against the DB before rendering the
+  // public profile. The `public_nominees` view enforces
+  // publication_status='published' AND profile_status IN ('partial','complete').
+  // 'loading' → still verifying; 'allowed' → safe to render; 'blocked' → show
+  // branded "pending verification" UI. Incomplete and pending profiles never
+  // render publicly.
+  const [publishCheck, setPublishCheck] = useState<"loading" | "allowed" | "blocked">("loading");
   const { addToRecentlyViewed } = useRecentlyViewed();
 
   const slug = rawSlug ? decodeURIComponent(rawSlug) : undefined;
@@ -96,7 +103,7 @@ export default function NomineeProfile() {
   }, [slug]);
 
   useEffect(() => {
-    if (nominee) {
+    if (nominee && publishCheck === "allowed") {
       addToRecentlyViewed({
         id: nominee.id,
         slug: nominee.slug,
@@ -106,35 +113,40 @@ export default function NomineeProfile() {
         subtitle: nominee.awardTitle,
       });
     }
-  }, [nominee?.id]);
+  }, [nominee?.id, publishCheck]);
 
   useEffect(() => {
-    async function fetchOrCreateNomineeData() {
-      if (!nominee) return;
-      const nameSlug = nominee.name.toLowerCase().trim().replace(/\s+/g, "-").replace(/[^a-z0-9-]/g, "").replace(/-+/g, "-").replace(/^-|-$/g, "");
-      const { data } = await (supabase as any)
-        .from("public_nominees")
-        .select("id, renomination_count")
-        .or(`slug.eq.${slug},slug.eq.${nameSlug}`)
-        .maybeSingle();
-      if (data) {
-        setDbNomineeId(data.id);
-        setRenominationCount(data.renomination_count ?? 0);
+    let cancelled = false;
+    async function verifyPublishedNominee() {
+      if (!slug) {
+        setPublishCheck("blocked");
         return;
       }
-      try {
-        const { ensureNomineeInDb } = await import("@/lib/ensureNomineeInDb");
-        const created = await ensureNomineeInDb(nominee);
-        if (created) {
-          setDbNomineeId(created.id);
-          setRenominationCount(created.renomination_count ?? 0);
-        }
-      } catch (err) {
-        console.warn("Could not auto-create nominee in DB:", err);
+      setPublishCheck("loading");
+      const nameSlug = nominee
+        ? nominee.name.toLowerCase().trim().replace(/\s+/g, "-").replace(/[^a-z0-9-]/g, "").replace(/-+/g, "-").replace(/^-|-$/g, "")
+        : slug;
+      const { data, error } = await (supabase as any)
+        .from("public_nominees")
+        .select("id, renomination_count, publication_status, profile_status")
+        .or(`slug.eq.${slug},slug.eq.${nameSlug}`)
+        .maybeSingle();
+      if (cancelled) return;
+      if (error || !data) {
+        setDbNomineeId(null);
+        setRenominationCount(0);
+        setPublishCheck("blocked");
+        return;
       }
+      setDbNomineeId(data.id);
+      setRenominationCount(data.renomination_count ?? 0);
+      setPublishCheck("allowed");
     }
-    fetchOrCreateNomineeData();
-  }, [slug, nominee]);
+    verifyPublishedNominee();
+    return () => {
+      cancelled = true;
+    };
+  }, [slug, nominee?.name]);
 
   const relatedNominees = useMemo(() => {
     if (!nominee) return [];
