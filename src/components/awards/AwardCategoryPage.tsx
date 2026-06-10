@@ -311,15 +311,25 @@ export function AwardCategoryPage({ config, legacyHero }: Props) {
             className="mt-10 hidden md:flex flex-wrap gap-3"
           >
             <Button asChild size="lg" className="bg-gold text-charcoal hover:bg-gold/90">
-              <Link to={nominateHref}>
+              <a href="#nominate">
                 <Sparkles className="mr-2 h-4 w-4" />
                 Nominate in this Category
-              </Link>
+              </a>
             </Button>
+            <CategoryNominationDialog
+              config={config}
+              trigger={
+                <Button size="lg" variant="outline" className="border-gold/40 text-gold hover:bg-gold/10">
+                  <FileText className="mr-2 h-4 w-4" />
+                  Open form in popup
+                </Button>
+              }
+            />
             <Button asChild size="lg" variant="outline" className="border-gold/40 text-gold hover:bg-gold/10">
               <Link to={group.indexUrl}>Back to {group.label}</Link>
             </Button>
           </motion.div>
+
 
           {/* Related categories */}
           {config.relatedCategories.length > 0 && (
