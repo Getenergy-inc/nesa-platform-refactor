@@ -239,6 +239,7 @@ export const MAIN_NAV_MOBILE_ORDER: readonly string[] = [
   "Engage",
   "Media",
   "Support",
+  "Shop",
 ];
 
 
