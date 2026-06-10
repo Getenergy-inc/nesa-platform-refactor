@@ -201,6 +201,18 @@ export const MAIN_NAV: NavItem[] = [
       { label: "Donate", href: "/donate", description: "Support our mission", icon: Heart },
     ],
   },
+
+  // 7. SHOP — Buy NESA-Africa merchandise
+  {
+    label: "Shop",
+    href: "/shop",
+    icon: ShoppingBag,
+    children: [
+      { label: "Buy Merchandise", href: "/shop", description: "Official NESA-Africa apparel & gifts", icon: ShoppingBag },
+      { label: "Cart", href: "/shop/cart", description: "Review items in your cart", icon: ShoppingBag },
+      { label: "Bulk Orders", href: "/shop/bulk-orders", description: "Institutional & chapter orders", icon: ShoppingBag },
+    ],
+  },
 ];
 
 // Right-side action CTAs — three primary buttons per IA brief
@@ -227,6 +239,7 @@ export const MAIN_NAV_MOBILE_ORDER: readonly string[] = [
   "Engage",
   "Media",
   "Support",
+  "Shop",
 ];
 
 
