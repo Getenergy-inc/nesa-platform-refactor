@@ -355,6 +355,9 @@ export function AwardCategoryPage({ config, legacyHero }: Props) {
         </div>
       </section>
 
+      {/* Inline nomination form for this category */}
+      <CategoryNominationForm config={config} />
+
       {/* FAQs */}
       <CategoryFaqSection faqs={config.faqs} />
 
