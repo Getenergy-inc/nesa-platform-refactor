@@ -385,10 +385,10 @@ export function AwardCategoryPage({ config, legacyHero }: Props) {
       {/* Mobile sticky nominate CTA */}
       <div className="md:hidden fixed bottom-0 inset-x-0 z-40 border-t border-gold/20 bg-charcoal/95 backdrop-blur px-4 py-3 pb-[calc(0.75rem+env(safe-area-inset-bottom))]">
         <Button asChild size="lg" className="w-full h-12 bg-gold text-charcoal hover:bg-gold/90 font-semibold">
-          <Link to={nominateHref}>
+          <a href="#nominate">
             <Sparkles className="mr-2 h-4 w-4" />
             Nominate in this Category
-          </Link>
+          </a>
         </Button>
       </div>
     </div>
