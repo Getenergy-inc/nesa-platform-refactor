@@ -6927,79 +6927,133 @@ export type Database = {
           acceptance_status:
             | Database["public"]["Enums"]["acceptance_status"]
             | null
+          award_family: string | null
           bio: string | null
+          category_fit_summary: string | null
           country: string | null
           created_at: string | null
           final_score: number | null
           id: string | null
+          impact_area: string | null
           is_platinum: boolean | null
           jury_score: number | null
           logo_url: string | null
+          media_gallery: Json | null
           name: string | null
           nrc_verified: boolean | null
           organization: string | null
           photo_url: string | null
+          profile_completion_score: number | null
+          profile_status:
+            | Database["public"]["Enums"]["nominee_profile_status"]
+            | null
+          public_documents: Json | null
           public_votes: number | null
+          publication_status:
+            | Database["public"]["Enums"]["nominee_publication_status"]
+            | null
+          published_at: string | null
+          recognition_class: string | null
           region: string | null
+          region_slug: string | null
           renomination_count: number | null
           season_id: string | null
           slug: string | null
+          social_profile_links: Json | null
+          state_slug: string | null
           status: Database["public"]["Enums"]["nomination_status"] | null
           subcategory_id: string | null
           title: string | null
           updated_at: string | null
+          zone_slug: string | null
         }
         Insert: {
           acceptance_status?:
             | Database["public"]["Enums"]["acceptance_status"]
             | null
+          award_family?: string | null
           bio?: string | null
+          category_fit_summary?: string | null
           country?: string | null
           created_at?: string | null
           final_score?: number | null
           id?: string | null
+          impact_area?: string | null
           is_platinum?: boolean | null
           jury_score?: number | null
           logo_url?: string | null
+          media_gallery?: Json | null
           name?: string | null
           nrc_verified?: boolean | null
           organization?: string | null
           photo_url?: string | null
+          profile_completion_score?: number | null
+          profile_status?:
+            | Database["public"]["Enums"]["nominee_profile_status"]
+            | null
+          public_documents?: Json | null
           public_votes?: number | null
+          publication_status?:
+            | Database["public"]["Enums"]["nominee_publication_status"]
+            | null
+          published_at?: string | null
+          recognition_class?: string | null
           region?: string | null
+          region_slug?: string | null
           renomination_count?: number | null
           season_id?: string | null
           slug?: string | null
+          social_profile_links?: Json | null
+          state_slug?: string | null
           status?: Database["public"]["Enums"]["nomination_status"] | null
           subcategory_id?: string | null
           title?: string | null
           updated_at?: string | null
+          zone_slug?: string | null
         }
         Update: {
           acceptance_status?:
             | Database["public"]["Enums"]["acceptance_status"]
             | null
+          award_family?: string | null
           bio?: string | null
+          category_fit_summary?: string | null
           country?: string | null
           created_at?: string | null
           final_score?: number | null
           id?: string | null
+          impact_area?: string | null
           is_platinum?: boolean | null
           jury_score?: number | null
           logo_url?: string | null
+          media_gallery?: Json | null
           name?: string | null
           nrc_verified?: boolean | null
           organization?: string | null
           photo_url?: string | null
+          profile_completion_score?: number | null
+          profile_status?:
+            | Database["public"]["Enums"]["nominee_profile_status"]
+            | null
+          public_documents?: Json | null
           public_votes?: number | null
+          publication_status?:
+            | Database["public"]["Enums"]["nominee_publication_status"]
+            | null
+          published_at?: string | null
+          recognition_class?: string | null
           region?: string | null
+          region_slug?: string | null
           renomination_count?: number | null
           season_id?: string | null
           slug?: string | null
+          social_profile_links?: Json | null
+          state_slug?: string | null
           status?: Database["public"]["Enums"]["nomination_status"] | null
           subcategory_id?: string | null
           title?: string | null
           updated_at?: string | null
+          zone_slug?: string | null
         }
         Relationships: [
           {
