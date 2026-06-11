@@ -6,7 +6,8 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { GFAWalletIcon } from "@/components/ui/GFAWalletIcon";
 import { ArrowLeft, ArrowRight, Minus, Plus, Trash2, ShoppingBag, Package } from "lucide-react";
-import { getCartWithProducts, updateLocalCartItem, removeFromLocalCart, clearLocalCart, type LocalCartItem } from "@/api/shop";
+import { getCartWithProducts, type LocalCartItem } from "@/api/shop";
+import { useCart } from "@/hooks/useCart";
 import { AGC_BONUS_RATE } from "@/types/shop";
 
 export default function Cart() {
