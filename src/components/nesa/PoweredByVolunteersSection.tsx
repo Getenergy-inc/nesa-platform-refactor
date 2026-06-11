@@ -57,7 +57,7 @@ export function PoweredByVolunteersSection() {
             <Sparkles className="h-3 w-3" /> The People Behind the Movement
           </div>
           <h2 className="font-playfair text-3xl md:text-5xl text-gold mb-4">
-            Powered by Volunteers Across All Continents
+            Powered by Volunteers Across Africa
           </h2>
           <p className="text-white/70 max-w-2xl mx-auto">
             NESA-Africa is built by contributors, creators, technologists, ambassadors,

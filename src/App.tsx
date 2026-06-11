@@ -412,9 +412,6 @@ const App = () => (
                   <Route path="/policies/coi" element={<Navigate to="/policies" replace />} />
                   <Route path="/policies/privacy" element={<Navigate to="/policies" replace />} />
                   <Route path="/policies/terms" element={<Navigate to="/policies" replace />} />
-                  <Route path="/policies/voting-integrity" element={<Navigate to="/policies" replace />} />
-                  <Route path="/get-involved" element={<Navigate to="/volunteer" replace />} />
-                  <Route path="/press" element={<Navigate to="/media" replace />} />
 
 
 
@@ -502,9 +499,6 @@ const App = () => (
                       </WithLayout>
                     }
                   />
-                  <Route path="/impact/regional-school-intervention" element={<Navigate to="/impact" replace />} />
-                  <Route path="/impact/rebuild-my-school-africa" element={<Navigate to="/eduaid-africa/rebuild-my-school" replace />} />
-
                   <Route
                     path="/videos"
                     element={
@@ -1570,8 +1564,6 @@ const App = () => (
                       </WithLayout>
                     }
                   />
-                  <Route path="/eduaid-africa" element={<Navigate to="/eduaid" replace />} />
-
                   <Route
                     path="/rebuild"
                     element={
