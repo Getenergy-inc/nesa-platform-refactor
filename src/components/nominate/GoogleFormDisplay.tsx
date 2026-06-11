@@ -33,6 +33,7 @@ export function GoogleFormDisplay({
   formEmbedUrl,
   gmail,
   prefillHints,
+  fallback,
 }: Props) {
   const isActive =
     status === "Active" && Boolean(formEmbedUrl) && Boolean(formPublicUrl);
