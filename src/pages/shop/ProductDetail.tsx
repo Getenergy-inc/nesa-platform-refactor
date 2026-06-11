@@ -18,12 +18,11 @@ export default function ProductDetail() {
   const [product, setProduct] = useState<Product | null>(null);
   const [loading, setLoading] = useState(true);
   const [quantity, setQuantity] = useState(1);
-  const [cartCount, setCartCount] = useState(0);
+  const { count: cartCount, add } = useCart();
 
   useEffect(() => {
     window.scrollTo(0, 0);
     if (slug) loadProduct();
-    updateCartCount();
   }, [slug]);
 
   const loadProduct = async () => {
@@ -38,15 +37,9 @@ export default function ProductDetail() {
     setLoading(false);
   };
 
-  const updateCartCount = () => {
-    const cart = getLocalCart();
-    setCartCount(cart.reduce((sum, item) => sum + item.quantity, 0));
-  };
-
   const handleAddToCart = () => {
     if (!product) return;
-    addToLocalCart(product.id, quantity);
-    updateCartCount();
+    add(product.id, quantity);
     toast.success(`${quantity}x ${product.name} added to cart`);
   };
 
