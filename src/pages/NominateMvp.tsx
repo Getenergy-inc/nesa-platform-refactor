@@ -8,6 +8,7 @@ import { ArrowRight, BookOpen, ShieldCheck, Mail, ChevronLeft } from "lucide-rea
 import { Button } from "@/components/ui/button";
 import { LanguageSwitcher } from "@/components/i18n";
 import { GoogleFormDisplay } from "@/components/nominate/GoogleFormDisplay";
+import { NativeCategoryNominationForm } from "@/components/awards/NativeCategoryNominationForm";
 import { IntegrityNotice } from "@/components/nominate/IntegrityNotice";
 import {
   AWARD_CATEGORY_FORMS,
