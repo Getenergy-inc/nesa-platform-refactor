@@ -64,8 +64,17 @@ export function getLocalCart(): LocalCartItem[] {
   }
 }
 
+export const CART_UPDATED_EVENT = "nesa:cart-updated";
+
+function emitCartUpdated() {
+  if (typeof window !== "undefined") {
+    window.dispatchEvent(new CustomEvent(CART_UPDATED_EVENT));
+  }
+}
+
 export function saveLocalCart(items: LocalCartItem[]) {
   localStorage.setItem(CART_STORAGE_KEY, JSON.stringify(items));
+  emitCartUpdated();
 }
 
 export function addToLocalCart(productId: string, quantity: number = 1) {
