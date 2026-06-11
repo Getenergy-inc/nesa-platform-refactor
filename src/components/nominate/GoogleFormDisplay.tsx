@@ -61,6 +61,8 @@ export function GoogleFormDisplay({
   }
 
   if (!isActive) {
+    if (fallback) return <>{fallback}</>;
+
     return (
       <div className="rounded-2xl border border-gold/30 bg-charcoal-light/40 p-6 text-white/85">
         <div className="flex items-start gap-3">
