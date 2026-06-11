@@ -7,7 +7,8 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { GFAWalletIcon } from "@/components/ui/GFAWalletIcon";
 import { ShoppingCart, Minus, Plus, ArrowLeft, Sparkles, Package, Gift, CheckCircle } from "lucide-react";
-import { getProductBySlug, addToLocalCart, getLocalCart } from "@/api/shop";
+import { getProductBySlug } from "@/api/shop";
+import { useCart } from "@/hooks/useCart";
 import { AGC_BONUS_RATE, IMPACT_DESTINATIONS, type Product } from "@/types/shop";
 import { toast } from "sonner";
 
