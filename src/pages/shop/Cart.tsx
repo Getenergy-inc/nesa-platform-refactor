@@ -12,37 +12,40 @@ import { AGC_BONUS_RATE } from "@/types/shop";
 
 export default function Cart() {
   const navigate = useNavigate();
+  const { items: cartSignal, update, remove, clear } = useCart();
   const [cartItems, setCartItems] = useState<LocalCartItem[]>([]);
   const [total, setTotal] = useState(0);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     window.scrollTo(0, 0);
-    loadCart();
   }, []);
 
-  const loadCart = async () => {
-    setLoading(true);
-    const { items, total } = await getCartWithProducts();
-    setCartItems(items);
-    setTotal(total);
-    setLoading(false);
+  useEffect(() => {
+    let alive = true;
+    (async () => {
+      setLoading(true);
+      const { items, total } = await getCartWithProducts();
+      if (!alive) return;
+      setCartItems(items);
+      setTotal(total);
+      setLoading(false);
+    })();
+    return () => {
+      alive = false;
+    };
+  }, [cartSignal]);
+
+  const handleUpdateQuantity = (productId: string, quantity: number) => {
+    update(productId, quantity);
   };
 
-  const handleUpdateQuantity = async (productId: string, quantity: number) => {
-    updateLocalCartItem(productId, quantity);
-    await loadCart();
-  };
-
-  const handleRemove = async (productId: string) => {
-    removeFromLocalCart(productId);
-    await loadCart();
+  const handleRemove = (productId: string) => {
+    remove(productId);
   };
 
   const handleClearCart = () => {
-    clearLocalCart();
-    setCartItems([]);
-    setTotal(0);
+    clear();
   };
 
   const bonusAGC = Math.floor(total * AGC_BONUS_RATE);
