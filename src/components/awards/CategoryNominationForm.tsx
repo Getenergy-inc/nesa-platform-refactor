@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { Sparkles, FileCheck, ExternalLink } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { GoogleFormDisplay } from "@/components/nominate/GoogleFormDisplay";
+import { NativeCategoryNominationForm } from "@/components/awards/NativeCategoryNominationForm";
 import {
   AWARD_CATEGORY_FORMS,
   getCategoryFormBySlug,
@@ -64,6 +65,12 @@ export function CategoryNominationForm({ config }: Props) {
   const nominateHref =
     config.ctaNominateHref ?? `/nominate?category=${encodeURIComponent(config.slug)}`;
 
+  const isGoogleFormReady =
+    !!form &&
+    form.status === "Active" &&
+    Boolean(form.formEmbedUrl) &&
+    Boolean(form.formPublicUrl);
+
   return (
     <section
       id="nominate"
@@ -79,13 +86,13 @@ export function CategoryNominationForm({ config }: Props) {
             Nominate for {config.finalName}
           </h2>
           <p className="text-foreground/75 text-sm sm:text-base max-w-3xl">
-            Complete the official Google Form below. Submissions are reviewed by
-            the NRC before reaching the jury. You can also open the form on the
-            full nomination page.
+            {isGoogleFormReady
+              ? "Complete the official Google Form below. Submissions are reviewed by the NRC before reaching the jury."
+              : "Use the native intake form below to submit your nomination. Pick the matching subcategory — submissions are reviewed by the NRC before reaching the jury."}
           </p>
         </div>
 
-        {form ? (
+        {isGoogleFormReady && form ? (
           <GoogleFormDisplay
             title={form.name}
             status={form.status}
@@ -93,6 +100,8 @@ export function CategoryNominationForm({ config }: Props) {
             formEmbedUrl={form.formEmbedUrl}
             gmail={form.gmail}
           />
+        ) : form ? (
+          <NativeCategoryNominationForm form={form} />
         ) : (
           <div className="rounded-2xl border border-gold/30 bg-charcoal-light/40 p-6 text-foreground/85">
             <p className="text-sm mb-4">

@@ -1,3 +1,4 @@
+import type { ReactNode } from "react";
 import { ExternalLink, AlertCircle, ShieldCheck } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import type { FormStatus } from "@/config/nomination/types";
@@ -10,6 +11,12 @@ interface Props {
   gmail?: string;
   /** Optional pre-fill hints rendered above the embed for users to copy into the form. */
   prefillHints?: Array<{ label: string; value: string }>;
+  /**
+   * Optional fallback rendered in place of the "form is being prepared"
+   * notice when the Google Form is not yet Active. Use this to embed a
+   * native per-category nomination form for "Link Pending" categories.
+   */
+  fallback?: ReactNode;
 }
 
 /**
@@ -26,6 +33,7 @@ export function GoogleFormDisplay({
   formEmbedUrl,
   gmail,
   prefillHints,
+  fallback,
 }: Props) {
   const isActive =
     status === "Active" && Boolean(formEmbedUrl) && Boolean(formPublicUrl);
@@ -53,6 +61,8 @@ export function GoogleFormDisplay({
   }
 
   if (!isActive) {
+    if (fallback) return <>{fallback}</>;
+
     return (
       <div className="rounded-2xl border border-gold/30 bg-charcoal-light/40 p-6 text-white/85">
         <div className="flex items-start gap-3">
