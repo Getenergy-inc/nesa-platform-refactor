@@ -7,7 +7,8 @@ import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { GFAWalletIcon } from "@/components/ui/GFAWalletIcon";
 import { ShoppingCart, Gift, Heart, Building2, Sparkles, Package } from "lucide-react";
-import { getProducts, addToLocalCart, getLocalCart } from "@/api/shop";
+import { getProducts } from "@/api/shop";
+import { useCart } from "@/hooks/useCart";
 import { AGC_BONUS_RATE, type Product } from "@/types/shop";
 import { toast } from "sonner";
 
@@ -22,12 +23,11 @@ export default function Shop() {
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
   const [category, setCategory] = useState("all");
-  const [cartCount, setCartCount] = useState(0);
+  const { count: cartCount, add } = useCart();
 
   useEffect(() => {
     window.scrollTo(0, 0);
     loadProducts();
-    updateCartCount();
   }, [category]);
 
   const loadProducts = async () => {
@@ -39,14 +39,8 @@ export default function Shop() {
     setLoading(false);
   };
 
-  const updateCartCount = () => {
-    const cart = getLocalCart();
-    setCartCount(cart.reduce((sum, item) => sum + item.quantity, 0));
-  };
-
   const handleAddToCart = (product: Product) => {
-    addToLocalCart(product.id, 1);
-    updateCartCount();
+    add(product.id, 1);
     toast.success(`${product.name} added to cart`);
   };
 
