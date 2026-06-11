@@ -552,6 +552,454 @@ Deno.serve(async (req) => {
       }
     }
 
+    // ================================================================
+    // AUDIT-LOGS ENDPOINT (v1 contract)
+    // GET /admin/audit-logs?action=form_auto_promoted&form_kind=&form_slug=&page=&limit=
+    // ================================================================
+    if (domain === "audit-logs") {
+      if (!action && req.method === "GET") {
+        const page = Math.max(1, parseInt(url.searchParams.get("page") || "1"));
+        const limit = Math.min(
+          Math.max(1, parseInt(url.searchParams.get("limit") || "25")),
+          100,
+        );
+        const offset = (page - 1) * limit;
+        const actionFilter = url.searchParams.get("action") || "form_auto_promoted";
+        const formKind = url.searchParams.get("form_kind")?.trim();
+        const formSlug = url.searchParams.get("form_slug")?.trim();
+
+        let query = adminSupabase
+          .from("audit_events")
+          .select("id, action, entity_type, entity_id, actor_id, metadata, created_at", {
+            count: "exact",
+          })
+          .eq("action", actionFilter);
+
+        if (formKind) query = query.eq("metadata->>form_kind", formKind);
+        if (formSlug) query = query.ilike("metadata->>form_slug", `%${formSlug}%`);
+
+        const { data, count, error } = await query
+          .order("created_at", { ascending: false })
+          .range(offset, offset + limit - 1);
+
+        if (error) throw error;
+
+        const rows = (data || []).map((row: Record<string, unknown>) => {
+          const metadata = (row.metadata || {}) as Record<string, unknown>;
+          return {
+            id: row.id,
+            action: row.action,
+            actor_id: row.actor_id ?? null,
+            entity_type: row.entity_type ?? null,
+            entity_id: row.entity_id ?? null,
+            form_kind: (metadata.form_kind as string) ?? null,
+            form_slug: (metadata.form_slug as string) ?? null,
+            raw_status: (metadata.raw_status as string) ?? null,
+            resolved_status: (metadata.resolved_status as string) ?? null,
+            created_at: row.created_at,
+          };
+        });
+
+        return respond(rows, {
+          page,
+          limit,
+          total: count || 0,
+          total_pages: Math.max(1, Math.ceil((count || 0) / limit)),
+          filters: {
+            action: actionFilter,
+            form_kind: formKind || null,
+            form_slug: formSlug || null,
+          },
+        });
+      }
+    }
+
+    // ================================================================
+    // NOMINATIONS INGEST — POST /admin/nominations/ingest
+    // Maps Raw Form Responses rows → Cleaned Data records using the
+    // dataIntakeSpec contract (NESA2026/RMSA2027 record_id, status enums).
+    // Returns cleaned rows + per-row warnings; does NOT persist.
+    // ================================================================
+    if (domain === "nominations" && action === "ingest" && req.method === "POST") {
+      // Award family + category code maps (mirrors src/config/nomination/dataIntakeSpec.ts)
+      const AWARD_GROUP_CODES: Record<string, string> = {
+        "africa-education-icon": "ICON",
+        "gold-blue-garnet": "GBG",
+        platinum: "PLT",
+        influencer: "IEIA",
+      };
+      const CATEGORY_CODES: Record<string, string> = {
+        "education-content-social-media-influencers": "SMI",
+        "african-footballers-supporting-education": "FTB",
+        "african-musicians-supporting-education": "MUS",
+        "africa-education-icon-lifetime-achievement-2006-2026": "ICON",
+        "africa-education-philanthropy-icon-of-the-decade": "PHIL",
+        "literary-new-curriculum-advocate-icon-of-the-decade": "LITCUR",
+        "africa-technical-educator-icon-of-the-decade": "TECH",
+        "best-csr-for-education-nigeria": "CSRNG",
+        "best-csr-for-education-africa-regional": "CSRAF",
+        "best-edutech-innovation-for-education-africa-regional": "EDTECH",
+        "best-media-organisation-for-education-advocacy-nigeria": "MEDIA",
+        "best-ngo-for-education-advancement-nigeria": "NGONG",
+        "best-ngo-for-education-advancement-africa-regional": "NGOAF",
+        "best-stem-education-programme-africa-regional": "STEM",
+        "best-creative-arts-contribution-to-education-nigeria": "ARTNG",
+        "best-education-policy-implementation-state-nigeria": "POLST",
+        "best-tertiary-institution-library-nigeria": "LIBNG",
+        "excellence-in-research-development-for-education-nigeria": "RDNG",
+        "excellence-in-christian-education-impact-africa-regional": "CHRIST",
+        "excellence-in-islamic-education-impact-africa-regional": "ISLAM",
+        "excellence-in-political-leadership-for-education-nigeria": "POLNG",
+        "excellence-in-international-partnership-for-education-africa": "INTPART",
+        "excellence-in-diaspora-educational-impact-international": "DIASP",
+      };
+      const REGION_CODES: Record<string, string> = {
+        "west-africa": "WAF", "east-africa": "EAF", "central-africa": "CAF",
+        "southern-africa": "SAF", "north-africa": "NAF", "sahel-africa": "SAH",
+        "horn-of-africa": "HAF", "indian-ocean-islands": "IOI",
+        "african-diaspora": "DIA", "friends-of-africa": "FOA",
+      };
+
+      const ContextSchema = z.discriminatedUnion("formType", [
+        z.object({
+          formType: z.literal("award"),
+          family: z.enum(["africa-education-icon", "gold-blue-garnet", "platinum", "influencer"]),
+          categorySlug: z.string().min(1),
+          categoryName: z.string().min(1).max(200),
+          subcategorySlug: z.string().max(200).optional(),
+          defaultRegion: z.string().max(100).optional(),
+        }),
+        z.object({
+          formType: z.literal("rmsa"),
+          regionSlug: z.string().min(1),
+          regionName: z.string().min(1).max(100),
+        }),
+      ]);
+
+      const BodySchema = z.object({
+        headers: z.array(z.string()).min(1).max(200),
+        rows: z.array(z.array(z.union([z.string(), z.number(), z.null()]).transform((v) => v == null ? "" : String(v)))).max(1000),
+        startingRowNumber: z.number().int().min(1).max(1_000_000).optional(),
+        context: ContextSchema,
+      });
+
+      const parsed = BodySchema.safeParse(await req.json());
+      if (!parsed.success) return errorResponse(formatZodError(parsed.error), 400);
+
+      const { headers, rows, context } = parsed.data;
+      const start = parsed.data.startingRowNumber ?? 1;
+
+      // --- inline mapping helpers (mirror src/lib/nominations/mapRawRow.ts) ---
+      const URL_RE = /^https?:\/\/[^\s]+$/i;
+      const PLACEHOLDER_EVIDENCE = new Set([
+        "yes", "no", "google it", "instagram", "facebook", "twitter", "x", "tiktok", "n/a", "na", "none",
+      ]);
+      const norm = (h: string) =>
+        h.trim().toLowerCase().replace(/[^a-z0-9]+/g, "_").replace(/^_+|_+$/g, "");
+      const idx = new Map<string, number>();
+      headers.forEach((h, i) => {
+        const k = norm(h);
+        if (k && !idx.has(k)) idx.set(k, i);
+      });
+      const getField = (row: string[], ...aliases: string[]): string => {
+        for (const a of aliases) {
+          const pos = idx.get(norm(a));
+          if (pos != null) {
+            const v = row[pos];
+            if (v != null && String(v).trim().length > 0) return String(v).trim();
+          }
+        }
+        return "";
+      };
+      const properCase = (s: string): string =>
+        !s ? s : s.split(/(\s+|[-/])/).map((t) => {
+          if (!t.trim() || /[-/\s]/.test(t)) return t;
+          if (t.length > 1 && t === t.toUpperCase() && /^[A-Z0-9]+$/.test(t)) return t;
+          return t.charAt(0).toUpperCase() + t.slice(1).toLowerCase();
+        }).join("");
+      const classifyEvidence = (links: string[]) => {
+        const real = links.filter((l) => URL_RE.test(l) && !PLACEHOLDER_EVIDENCE.has(l.toLowerCase()));
+        if (real.length === 0) return "Evidence Missing";
+        if (real.length === 1) return "Evidence Weak";
+        return "Evidence Review Pending";
+      };
+      const fmtDate = (d: Date) => {
+        const y = d.getUTCFullYear();
+        const m = String(d.getUTCMonth() + 1).padStart(2, "0");
+        const dd = String(d.getUTCDate()).padStart(2, "0");
+        return `${y}${m}${dd}`;
+      };
+      const fmtRow = (r: number) => String(Math.max(0, Math.floor(r))).padStart(4, "0");
+
+      const cleaned: Record<string, string>[] = [];
+      const warnings: { rowNumber: number; messages: string[] }[] = [];
+
+      rows.forEach((row, i) => {
+        const rowNumber = start + i;
+        const msgs: string[] = [];
+        if (row.length !== headers.length) {
+          msgs.push(`row length ${row.length} ≠ headers length ${headers.length}`);
+        }
+        const stampRaw = getField(row, "Timestamp", "Submitted At");
+        const submittedAt =
+          stampRaw && !Number.isNaN(Date.parse(stampRaw)) ? new Date(stampRaw) : new Date();
+
+        let recordId = "";
+        try {
+          if (context.formType === "award") {
+            const group = AWARD_GROUP_CODES[context.family];
+            const cat = CATEGORY_CODES[context.categorySlug];
+            if (!group) throw new Error(`Unknown award family: ${context.family}`);
+            if (!cat) throw new Error(`Unknown category slug: ${context.categorySlug}`);
+            recordId = `NESA2026-${group}-${cat}-${fmtDate(submittedAt)}-${fmtRow(rowNumber)}`;
+          } else {
+            const region = REGION_CODES[context.regionSlug];
+            if (!region) throw new Error(`Unknown region slug: ${context.regionSlug}`);
+            recordId = `RMSA2027-${region}-${fmtDate(submittedAt)}-${fmtRow(rowNumber)}`;
+          }
+        } catch (err) {
+          msgs.push(`record_id build failed: ${(err as Error).message}`);
+        }
+
+        const nomineeName = properCase(getField(row, "Nominee Name", "Nominee Full Name", "Name"));
+        const nomineeCountry = getField(row, "Nominee Country", "Country");
+        const evidenceLinks = [
+          getField(row, "Evidence Link 1", "Evidence Link"),
+          getField(row, "Evidence Link 2"),
+          getField(row, "Website or Public Profile Link", "Website"),
+          getField(row, "Social Media Link", "Social Media"),
+          getField(row, "News Article or Public Record Link"),
+        ].filter(Boolean);
+        const evidenceStatus = classifyEvidence(evidenceLinks);
+        const declarationRaw = getField(row, "I agree", "Declaration", "Consent");
+        const declarationOk = /^(yes|true|i agree|agree|y|1|checked)$/i.test(declarationRaw);
+        if (!declarationOk) msgs.push("declaration checkbox not confirmed");
+
+        let nominationStatus = "New Submission";
+        if (!nomineeName || !nomineeCountry) nominationStatus = "Incomplete";
+        else if (evidenceStatus === "Evidence Missing") nominationStatus = "Evidence Missing";
+        else if (evidenceStatus === "Evidence Weak") nominationStatus = "Evidence Weak";
+
+        const subcategory =
+          getField(row, "Award Subcategory", "Subcategory") ||
+          (context.formType === "award" ? context.subcategorySlug ?? "" : "");
+
+        cleaned.push({
+          record_id: recordId,
+          form_type: context.formType,
+          award_group: context.formType === "award" ? context.family : "rmsa",
+          award_category:
+            context.formType === "award"
+              ? context.categoryName
+              : "RMSA Special Needs School Intervention",
+          award_subcategory: subcategory,
+          nominee_name_clean: nomineeName,
+          nominee_type_clean: getField(row, "Nominee Type", "Type of Nominee"),
+          nominee_country_clean: nomineeCountry,
+          nominee_region_clean:
+            getField(row, "African Region Connected to Nominee", "Region", "Nominee Region") ||
+            (context.formType === "award"
+              ? context.defaultRegion ?? ""
+              : context.regionName),
+          nominee_city_clean: getField(row, "City", "City / State / Province"),
+          impact_summary_clean: getField(
+            row,
+            "What education impact has the nominee made",
+            "Education Impact",
+            "Impact Summary",
+          ).replace(/\s+/g, " ").trim().slice(0, 2000),
+          evidence_status: evidenceStatus,
+          duplicate_status: "Not Checked",
+          verification_status: "Verification Pending",
+          nomination_status: nominationStatus,
+          assigned_reviewer: "",
+          reviewer_notes: "",
+          website_sync_status: "Not Published",
+        });
+
+        if (msgs.length) warnings.push({ rowNumber, messages: msgs });
+      });
+
+      // ----------------------------------------------------------------
+      // Persist cleaned rows via a single transactional RPC.
+      // The RPC upserts on record_id (preserving duplicate_of/status and
+      // ingested_at on retries) and deterministically marks the earliest
+      // row per identity_hash as canonical. Calling the endpoint with the
+      // same payload N times yields identical persisted state.
+      // ----------------------------------------------------------------
+      const persisted: { record_id: string; id: string; duplicate_of: string | null; duplicate_status: string }[] = [];
+      const persistErrors: { record_id: string; message: string }[] = [];
+
+      const validRows = cleaned.filter((c) => c.record_id && c.record_id.length > 0);
+
+      const rowsWithHash = await Promise.all(
+        validRows.map(async (c) => {
+          const { data: hash } = await adminSupabase.rpc("generate_identity_hash", {
+            p_name: c.nominee_name_clean || "",
+            p_email: null,
+            p_phone: null,
+            p_country: c.nominee_country_clean || "",
+          });
+          return { row: c, identity_hash: (hash as string) || null };
+        }),
+      );
+
+      if (rowsWithHash.length > 0) {
+        const payload = rowsWithHash.map(({ row, identity_hash }) => ({
+          record_id: row.record_id,
+          form_type: row.form_type,
+          award_group: row.award_group,
+          award_category: row.award_category,
+          award_subcategory: row.award_subcategory,
+          nominee_name_clean: row.nominee_name_clean,
+          nominee_type_clean: row.nominee_type_clean,
+          nominee_country_clean: row.nominee_country_clean,
+          nominee_region_clean: row.nominee_region_clean,
+          nominee_city_clean: row.nominee_city_clean,
+          impact_summary_clean: row.impact_summary_clean,
+          evidence_status: row.evidence_status,
+          verification_status: row.verification_status,
+          nomination_status: row.nomination_status,
+          assigned_reviewer: row.assigned_reviewer,
+          reviewer_notes: row.reviewer_notes,
+          website_sync_status: row.website_sync_status,
+          identity_hash,
+          ingested_by: userId,
+        }));
+
+        const batchId = crypto.randomUUID();
+
+        const { data: rpcRows, error: rpcErr } = await adminSupabase.rpc(
+          "ingest_nomination_intake_batch",
+          { p_rows: payload, p_batch_id: batchId, p_actor_id: userId },
+        );
+
+        if (rpcErr) {
+          console.error("ingest_nomination_intake_batch failed", rpcErr);
+          persistErrors.push({ record_id: "*", message: rpcErr.message });
+        } else if (Array.isArray(rpcRows)) {
+          for (const r of rpcRows as Array<{
+            record_id: string;
+            id: string;
+            duplicate_of: string | null;
+            duplicate_status: string;
+            batch_id: string;
+          }>) {
+            persisted.push({
+              record_id: r.record_id,
+              id: r.id,
+              duplicate_of: r.duplicate_of ?? null,
+              duplicate_status: r.duplicate_status ?? "Unique",
+            });
+          }
+        }
+
+        // Audit (best-effort; never blocks the response)
+        adminSupabase.from("audit_events").insert({
+          action: "nominations_ingest_mapped",
+          entity_type: "google_form",
+          actor_id: userId,
+          metadata: {
+            form_type: context.formType,
+            context: context,
+            batch_id: batchId,
+            total: cleaned.length,
+            persisted_count: persisted.length,
+            duplicate_count: persisted.filter((p) => p.duplicate_status === "Potential Duplicate").length,
+            warning_count: warnings.length,
+          },
+        }).then(() => {}, (e) => console.error("audit insert failed", e));
+
+        return respond(cleaned, {
+          total: cleaned.length,
+          warnings,
+          persisted,
+          persist_errors: persistErrors,
+          batch_id: batchId,
+        });
+      }
+
+      return respond(cleaned, {
+        total: cleaned.length,
+        warnings,
+        persisted,
+        persist_errors: persistErrors,
+      });
+    }
+
+    // ================================================================
+    // NOMINATIONS BATCH EXPORT — GET /admin/nominations/batch-export/:batch_id
+    // Returns every nomination_intake row touched in a given ingest
+    // batch, joined with its full per-row audit trail and canonical /
+    // duplicate resolution decisions.
+    // ================================================================
+    if (domain === "nominations" && action === "batch-export" && req.method === "GET" && resourceId) {
+      const batchIdParse = z.string().uuid("batch_id must be a valid UUID").safeParse(resourceId);
+      if (!batchIdParse.success) {
+        return errorResponse(formatZodError(batchIdParse.error), 400);
+      }
+      const batchId = batchIdParse.data;
+
+      const { data: rows, error: rpcErr } = await adminSupabase.rpc("export_nomination_batch", {
+        p_batch_id: batchId,
+      });
+
+      if (rpcErr) {
+        console.error("export_nomination_batch failed", rpcErr);
+        return errorResponse(rpcErr.message, 500);
+      }
+
+      // Also fetch high-level batch meta from audit_events
+      const { data: metaEvent } = await adminSupabase
+        .from("audit_events")
+        .select("created_at, metadata, actor_id")
+        .eq("action", "nominations_ingest_mapped")
+        .contains("metadata", JSON.stringify({ batch_id: batchId }))
+        .maybeSingle();
+
+      const batchMeta = metaEvent?.metadata ?? null;
+
+      const formatParam = url.searchParams.get("format");
+      const format = (formatParam || "json").toLowerCase();
+      if (formatParam && format !== "csv" && format !== "json") {
+        return errorResponse(`Unsupported format "${format}". Use "csv" or "json".`, 400);
+      }
+      const rowList = (rows || []) as Array<Record<string, unknown>>;
+      const duplicateCount = rowList.filter((r) => r.duplicate_status === "Potential Duplicate").length;
+      const uniqueCount = rowList.filter((r) => r.duplicate_status === "Unique").length;
+
+      if (format === "csv") {
+        // Stable column order + field-to-header mapping lives in
+        // ./batch-export-csv.ts and is covered by batch-export-csv_test.ts.
+        const { buildBatchExportCsv } = await import("./batch-export-csv.ts");
+        const csv = buildBatchExportCsv(rowList, batchId);
+        const filename = `nomination-batch-${batchId}.csv`;
+        return new Response(csv, {
+          status: 200,
+          headers: {
+            ...corsHeaders,
+            "Content-Type": "text/csv; charset=utf-8",
+            "Content-Disposition": `attachment; filename="${filename}"`,
+            "X-Batch-Id": batchId,
+            "X-Total-Rows": String(rowList.length),
+            "X-Duplicate-Count": String(duplicateCount),
+            "X-Unique-Count": String(uniqueCount),
+          },
+        });
+      }
+
+
+      return respond(rowList, {
+        batch_id: batchId,
+        total_rows: rowList.length,
+        duplicate_count: duplicateCount,
+        unique_count: uniqueCount,
+        batch_meta: batchMeta,
+        exported_at: new Date().toISOString(),
+      });
+    }
+
+
     return errorResponse("Not found", 404);
 
   } catch (error: unknown) {

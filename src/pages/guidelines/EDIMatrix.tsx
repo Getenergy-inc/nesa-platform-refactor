@@ -58,7 +58,7 @@ import {
 // ─────────────────────────────────────────────────────────────────────────────
 
 const BLUE_GARNET_EDI = {
-  title: "Blue Garnet — Competitive Excellence",
+  title: "Gold-Blue Garnet — Competitive Excellence",
   subtitle: "10 categories · Public voting (40%) + Jury assessment (60%)",
   description: "The pinnacle competitive track. Nominees progress through public voting and expert jury evaluation. Top 3 finalists in each subcategory compete for the Blue Garnet Award.",
   scoringBreakdown: [

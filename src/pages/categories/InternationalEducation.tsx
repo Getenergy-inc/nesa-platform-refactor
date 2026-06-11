@@ -64,6 +64,7 @@ export default function InternationalEducationPage() {
       <DynamicCategoryPage
         categoryTitle="International & Bilateral Contributors to Education"
         nominationType="International Contributors"
+        nominateCategorySlug="excellence-in-international-partnership-for-education-africa"
       />
     </>
   );

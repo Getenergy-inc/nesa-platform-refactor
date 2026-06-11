@@ -50,7 +50,7 @@ export default function STEMEducationAfricaPage() {
         title="Live STEM Nominees"
         description="Verified STEM education nominees streaming live from the NESA database."
       />
-      <DynamicCategoryPage categoryTitle="Best STEM Education Programme (Africa Regional)" nominationType="STEM Africa" />
+      <DynamicCategoryPage categoryTitle="Best STEM Education Programme (Africa Regional)" nominationType="STEM Africa" nominateCategorySlug="best-stem-education-programme-africa-regional" />
     </>
   );
 }

@@ -28,7 +28,7 @@ export function NominationPathSection() {
     {
       icon: Vote,
       badge: "Public Voting",
-      title: "Blue Garnet & Gold Certificate Awards",
+      title: "Gold-Blue Garnet Certificate Awards",
       period: "Annual Competition",
       description: "Open competition with public participation through AGC voting and expert judging.",
       bullets: [

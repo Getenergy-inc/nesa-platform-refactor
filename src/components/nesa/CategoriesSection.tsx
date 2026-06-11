@@ -206,7 +206,7 @@ export function CategoriesSection() {
 
         {/* ═══ GROUP 2: BLUE GARNET — Competitive Excellence ═══ */}
         <motion.div className="mb-16" initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }}>
-          <TierGroupHeader icon={Trophy} title="Blue Garnet — Competitive Excellence" subtitle="Public voting → Jury evaluation" count={groups.blueGarnet.length} color="bg-blue-600" />
+          <TierGroupHeader icon={Trophy} title="Gold-Blue Garnet — Competitive Excellence" subtitle="Public voting → Jury evaluation" count={groups.blueGarnet.length} color="bg-blue-600" />
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
             {blueGarnetToShow.map((cat, i) => (
               <motion.div key={cat.id} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.04 }} viewport={{ once: true }}>

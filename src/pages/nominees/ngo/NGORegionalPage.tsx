@@ -125,7 +125,7 @@ function NomineeGrid({ items, region }: { items: ReturnType<typeof getNGOsByRegi
           Help us recognise more NGOs across {getNGORegionMeta(region).name}.
         </p>
         <Button asChild className="bg-gold text-black hover:bg-gold/90">
-          <Link to="/nominate">Nominate an NGO</Link>
+          <Link to="/nominate?category=best-ngo-for-education-advancement-africa-regional">Nominate an NGO</Link>
         </Button>
       </Card>
     );

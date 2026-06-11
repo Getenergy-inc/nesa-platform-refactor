@@ -86,6 +86,13 @@ export default function NomineeProfile() {
   const { slug: rawSlug } = useParams<{ slug: string }>();
   const [dbNomineeId, setDbNomineeId] = useState<string | null>(null);
   const [renominationCount, setRenominationCount] = useState(0);
+  // Publication gate: must be confirmed against the DB before rendering the
+  // public profile. The `public_nominees` view enforces
+  // publication_status='published' AND profile_status IN ('partial','complete').
+  // 'loading' → still verifying; 'allowed' → safe to render; 'blocked' → show
+  // branded "pending verification" UI. Incomplete and pending profiles never
+  // render publicly.
+  const [publishCheck, setPublishCheck] = useState<"loading" | "allowed" | "blocked">("loading");
   const { addToRecentlyViewed } = useRecentlyViewed();
 
   const slug = rawSlug ? decodeURIComponent(rawSlug) : undefined;
@@ -96,7 +103,7 @@ export default function NomineeProfile() {
   }, [slug]);
 
   useEffect(() => {
-    if (nominee) {
+    if (nominee && publishCheck === "allowed") {
       addToRecentlyViewed({
         id: nominee.id,
         slug: nominee.slug,
@@ -106,35 +113,40 @@ export default function NomineeProfile() {
         subtitle: nominee.awardTitle,
       });
     }
-  }, [nominee?.id]);
+  }, [nominee?.id, publishCheck]);
 
   useEffect(() => {
-    async function fetchOrCreateNomineeData() {
-      if (!nominee) return;
-      const nameSlug = nominee.name.toLowerCase().trim().replace(/\s+/g, "-").replace(/[^a-z0-9-]/g, "").replace(/-+/g, "-").replace(/^-|-$/g, "");
-      const { data } = await (supabase as any)
-        .from("public_nominees")
-        .select("id, renomination_count")
-        .or(`slug.eq.${slug},slug.eq.${nameSlug}`)
-        .maybeSingle();
-      if (data) {
-        setDbNomineeId(data.id);
-        setRenominationCount(data.renomination_count ?? 0);
+    let cancelled = false;
+    async function verifyPublishedNominee() {
+      if (!slug) {
+        setPublishCheck("blocked");
         return;
       }
-      try {
-        const { ensureNomineeInDb } = await import("@/lib/ensureNomineeInDb");
-        const created = await ensureNomineeInDb(nominee);
-        if (created) {
-          setDbNomineeId(created.id);
-          setRenominationCount(created.renomination_count ?? 0);
-        }
-      } catch (err) {
-        console.warn("Could not auto-create nominee in DB:", err);
+      setPublishCheck("loading");
+      const nameSlug = nominee
+        ? nominee.name.toLowerCase().trim().replace(/\s+/g, "-").replace(/[^a-z0-9-]/g, "").replace(/-+/g, "-").replace(/^-|-$/g, "")
+        : slug;
+      const { data, error } = await (supabase as any)
+        .from("public_nominees")
+        .select("id, renomination_count, publication_status, profile_status")
+        .or(`slug.eq.${slug},slug.eq.${nameSlug}`)
+        .maybeSingle();
+      if (cancelled) return;
+      if (error || !data) {
+        setDbNomineeId(null);
+        setRenominationCount(0);
+        setPublishCheck("blocked");
+        return;
       }
+      setDbNomineeId(data.id);
+      setRenominationCount(data.renomination_count ?? 0);
+      setPublishCheck("allowed");
     }
-    fetchOrCreateNomineeData();
-  }, [slug, nominee]);
+    verifyPublishedNominee();
+    return () => {
+      cancelled = true;
+    };
+  }, [slug, nominee?.name]);
 
   const relatedNominees = useMemo(() => {
     if (!nominee) return [];
@@ -158,22 +170,33 @@ export default function NomineeProfile() {
     window.open(urls[platform], "_blank", "width=600,height=400");
   };
 
-  // --- 404 ---
-  if (!nominee) {
+  
+  // --- Gated / not found / pending verification ---
+  // Block render unless the static record exists AND the DB confirms the
+  // nominee is published with a non-incomplete profile. While the gate is
+  // still loading we render the same branded UI to avoid leaking unverified
+  // content on first paint.
+  if (!nominee || publishCheck !== "allowed") {
     return (
       <div className="min-h-screen bg-charcoal flex items-center justify-center">
+        <Helmet>
+          <title>Nominee profile pending verification | NESA-Africa</title>
+          <meta name="robots" content="noindex" />
+        </Helmet>
         <div className="max-w-md mx-auto text-center px-4">
           <div className="w-20 h-20 mx-auto mb-5 rounded-full bg-gold/10 flex items-center justify-center">
             <Users className="w-10 h-10 text-gold/30" />
           </div>
-          <h1 className="text-2xl font-display text-ivory mb-3">Profile Not Available</h1>
-          <p className="text-ivory/70 text-sm mb-6">This nominee profile may be under review or the link may be incorrect.</p>
+          <h1 className="text-2xl font-display text-ivory mb-3">Profile pending verification</h1>
+          <p className="text-ivory/70 text-sm mb-6">
+            This nominee profile is still being verified by the NESA-Africa Review Committee, or the link may be incorrect. Only complete, verified profiles are published publicly.
+          </p>
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
             <Button asChild className="bg-gold hover:bg-gold-dark text-charcoal">
-              <Link to="/nominees"><ArrowLeft className="w-4 h-4 mr-2" />Browse Nominees</Link>
+              <Link to="/nominees"><ArrowLeft className="w-4 h-4 mr-2" />Explore Nominees</Link>
             </Button>
             <Button asChild variant="outline" className="border-gold/30 text-gold hover:bg-gold/10">
-              <Link to="/nominate">Nominate Someone</Link>
+              <Link to="/nominate">Nominate a Champion</Link>
             </Button>
           </div>
         </div>

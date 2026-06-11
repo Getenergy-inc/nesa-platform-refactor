@@ -35,7 +35,7 @@ const FAQS: FAQ[] = [
     a: "A premium lifetime education impact recognition with a Main Sponsor at $100,000 (1 slot), a Legacy Documentary Partner at $40,000–$60,000, and an Icon Reception / Tribute Partner at $20,000–$35,000.",
   },
   {
-    q: "What is Gold / Blue Garnet Sponsorship?",
+    q: "What is Gold-Blue Garnet Sponsorship?",
     a: "Core continental recognition sponsorship at $150,000 for the main sponsor, with Blue Garnet Category Sponsors at $20,000 per category — one per category — under a strict non-influence firewall.",
   },
   {

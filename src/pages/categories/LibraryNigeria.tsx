@@ -49,7 +49,7 @@ export default function LibraryNigeriaPage() {
         categoryName="Best Library in Nigerian Tertiary Institutions"
         title="Live Library Nominees"
       />
-      <DynamicCategoryPage categoryTitle="Best Library in Nigerian Tertiary Institutions" nominationType="Library Nigeria" />
+      <DynamicCategoryPage categoryTitle="Best Library in Nigerian Tertiary Institutions" nominationType="Library Nigeria" nominateCategorySlug="best-tertiary-institution-library-nigeria" />
     </>
   );
 }

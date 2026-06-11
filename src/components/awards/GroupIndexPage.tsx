@@ -22,10 +22,22 @@ interface Props {
 
 const SITE = "https://nesaafrica.lovable.app";
 
+// Map awardCategories CategoryGroup → NominateMvp award family id.
+const GROUP_TO_FAMILY: Record<CategoryGroup, string | null> = {
+  blue_garnet: "gold-blue-garnet",
+  platinum: "platinum",
+  icon: "africa-education-icon",
+  influencers: "influencer",
+  special_recognition: "gold-blue-garnet",
+};
+
 export function GroupIndexPage({ group, seoTitle, metaDescription, intro }: Props) {
   const meta = GROUP_META[group];
   const categories = getCategoriesByGroup(group);
   const canonical = `${SITE}${meta.indexUrl}`;
+  const nominateHref = GROUP_TO_FAMILY[group]
+    ? `/nominate?family=${GROUP_TO_FAMILY[group]}`
+    : "/nominate";
 
   return (
     <div className="min-h-screen bg-charcoal text-foreground">
@@ -54,7 +66,7 @@ export function GroupIndexPage({ group, seoTitle, metaDescription, intro }: Prop
           <p className="text-foreground/80 text-lg max-w-3xl">{intro}</p>
           <div className="mt-6 flex flex-wrap gap-3">
             <Button asChild className="bg-gold text-charcoal hover:bg-gold/90">
-              <Link to="/nominate">
+              <Link to={nominateHref}>
                 <Sparkles className="mr-2 h-4 w-4" />
                 Nominate Now
               </Link>

@@ -1,4 +1,77 @@
 {
+  "flow": {
+    "meta": {
+      "title": "Indique para o NESA-Africa 2026 — Prémios Blue-Garnet de Educação de África",
+      "description": "Indique agentes de mudança educacional, instituições, ONGs, criadores e escolas especiais para os prémios NESA-Africa 2026."
+    },
+    "steps": {
+      "flash": "Como funciona",
+      "pathway": "Trajetória",
+      "entry": "Dados do indicado",
+      "review": "Revisão",
+      "identity": "Seus dados",
+      "confirmation": "Concluído"
+    },
+    "flash": {
+      "eyebrow": "Comece aqui",
+      "title": "Como funcionam as indicações NESA-Africa",
+      "p1": "As indicações NESA-Africa ajudam o público a identificar agentes de mudança na educação em África, na diáspora e amigos de África.",
+      "p2": "Pode indicar educadores, instituições, ONGs, defensores, criadores, vozes mediáticas, contribuidores de RSE, formuladores de políticas, escolas de necessidades especiais e outros líderes de impacto educacional.",
+      "p3": "Pode preencher primeiro os dados do indicado. Na fase final, ser-lhe-á pedido o seu nome, email, telefone, país de residência e país de origem antes da criação de conta ou verificação de email.",
+      "p4": "As indicações são avaliadas com base na adequação à categoria, evidências, relevância regional, impacto educacional, elegibilidade e trajetória selecionada.",
+      "startCta": "Iniciar indicação",
+      "guidelinesCta": "Ler as diretrizes"
+    },
+    "review": {
+      "eyebrow": "Passo 4",
+      "title": "Reveja as suas indicações",
+      "summary_one": "Está prestes a submeter <0>{{count}}</0> indicação. Adicione mais ou avance para a submissão final.",
+      "summary_other": "Está prestes a submeter <0>{{count}}</0> indicações. Adicione mais ou avance para a submissão final.",
+      "addAnother": "Adicionar outro indicado",
+      "proceed": "Avançar para submissão final"
+    },
+    "identity": {
+      "eyebrow": "Passo 5",
+      "title": "Complete a sua submissão",
+      "subtitle": "Para proteger a integridade das indicações NESA-Africa, forneça os seus dados antes de submeter.",
+      "fullName": "Nome completo",
+      "email": "Endereço de email",
+      "phone": "Número de telefone",
+      "countryResidence": "País de residência",
+      "countryOrigin": "País de origem",
+      "confirmDeclaration": "Confirme a declaração",
+      "back": "Voltar à revisão",
+      "continue": "Continuar"
+    },
+    "auth": {
+      "eyebrow": "Passo final",
+      "titleAuthed": "Confirmar e submeter",
+      "titleGuest": "Crie conta ou verifique o seu email",
+      "summary_one": "Está a submeter <0>{{count}}</0> indicação como <1>{{name}}</1> ({{email}}).",
+      "summary_other": "Está a submeter <0>{{count}}</0> indicações como <1>{{name}}</1> ({{email}}).",
+      "signedInNote": "Tem sessão iniciada. As suas indicações serão anexadas à sua conta.",
+      "submitNominations": "Submeter indicações",
+      "create": { "title": "Criar conta", "desc": "Crie conta com os dados fornecidos.", "cta": "Criar & submeter" },
+      "signin": { "title": "Entrar", "desc": "Já tem conta? Entre e anexe estas indicações.", "cta": "Entrar & submeter" },
+      "verify": { "title": "Verificar email", "desc": "Submeta sem conta — verificaremos o seu email.", "cta": "Verificar & submeter" },
+      "editDetails": "Editar meus dados"
+    },
+    "confirmation": {
+      "title": "Indicação submetida com sucesso",
+      "thanks_one": "Obrigado por indicar {{count}} agente de mudança educacional para o NESA-Africa.",
+      "thanks_other": "Obrigado por indicar {{count}} agentes de mudança educacional para o NESA-Africa.",
+      "funnelNote": "Nem todas as indicações se tornam indicados publicados. Nem todos os indicados são finalistas. Nem todos os finalistas vencem.",
+      "explore": "Explorar indicados",
+      "another": "Indicar outro",
+      "guidelines": "Ler diretrizes",
+      "sponsor": "Tornar-se patrocinador"
+    },
+    "toast": {
+      "added": "Indicado adicionado",
+      "updated": "Indicado atualizado",
+      "recorded": "Interesse de indicação registado"
+    }
+  },
   "form": {
     "title": "Formulário de Nomeação",
     "step1": "Informações do Nomeado",
