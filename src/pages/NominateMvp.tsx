@@ -600,6 +600,12 @@ export default function NominateMvp() {
                         ? [{ label: "Subcategory", value: selectedSubcategory.name }]
                         : []),
                     ]}
+                    fallback={
+                      <NativeCategoryNominationForm
+                        form={category}
+                        defaultSubcategorySlug={selectedSubcategory?.slug}
+                      />
+                    }
                   />
                 </>
               )}
