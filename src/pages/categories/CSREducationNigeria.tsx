@@ -49,7 +49,7 @@ export default function CSREducationNigeriaPage() {
         categoryName="Best CSR in Education (Nigeria)"
         title="Live Corporate Nominees"
       />
-      <DynamicCategoryPage categoryTitle="Best CSR in Education (Nigeria)" nominationType="CSR Nigeria" nominateCategorySlug="best-csr-for-education-nigeria" />
+      <DynamicCategoryPage categoryTitle="Best CSR in Education (Nigeria)" nominationType="CSR Nigeria" />
     </>
   );
 }

@@ -49,7 +49,7 @@ export default function DiasporaEducationPage() {
         categoryName="Diaspora Association Educational Impact"
         title="Live Diaspora Nominees"
       />
-      <DynamicCategoryPage categoryTitle="Diaspora Association Educational Impact" nominationType="Diaspora Impact" nominateCategorySlug="excellence-in-diaspora-educational-impact-international" />
+      <DynamicCategoryPage categoryTitle="Diaspora Association Educational Impact" nominationType="Diaspora Impact" />
     </>
   );
 }

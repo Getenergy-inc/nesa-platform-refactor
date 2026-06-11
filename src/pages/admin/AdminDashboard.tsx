@@ -18,7 +18,6 @@ import {
   DisbursementRunsCard,
   StageControlCard,
   AuditTrailCard,
-  FormAutoPromotedAuditCard,
   PaymentProviderStatusCard,
   APILogsCard,
 } from "@/components/admin";
@@ -505,7 +504,6 @@ export default function AdminDashboard() {
             onFilter={(filters) => loadAuditLogs(1, filters)}
             onExport={handleExportAuditLogs}
           />
-          <FormAutoPromotedAuditCard />
         </TabsContent>
       </Tabs>
     </DashboardLayout>

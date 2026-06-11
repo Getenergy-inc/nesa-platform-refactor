@@ -176,14 +176,14 @@ export const SPONSOR_LANE_COPY: Record<SponsorLaneSlug, SponsorLaneCopy> = {
   },
   "gold-blue-garnet-main": {
     slug: "gold-blue-garnet-main",
-    headline: "Gold-Blue Garnet Sponsor",
+    headline: "Gold / Blue Garnet Sponsor",
     subheadline: "Anchor sponsor across the Blue Garnet recognition core.",
     amount: "$150,000",
     sponsorLimit: "1 main / 1 per category",
     purpose:
       "Anchor sponsor across the Blue Garnet recognition core — the central visibility band of NESA-Africa 2026.",
     benefits: [
-      "Main Gold-Blue Garnet sponsor visibility across the recognition cycle",
+      "Main Gold / Blue Garnet sponsor visibility across the recognition cycle",
       "Logo and acknowledgement across Blue Garnet category pages",
       "Branded recognition in Gala Blue Garnet announcement segments",
       "Inclusion in NESA-Africa TV Blue Garnet category features",

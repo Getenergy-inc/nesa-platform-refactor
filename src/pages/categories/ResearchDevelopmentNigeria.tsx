@@ -49,7 +49,7 @@ export default function ResearchDevelopmentNigeriaPage() {
         categoryName="Best Research & Development Contribution to Education (Nigeria)"
         title="Live R&D Nominees"
       />
-      <DynamicCategoryPage categoryTitle="Best Research & Development Contribution to Education (Nigeria)" nominationType="R&D Nigeria" nominateCategorySlug="excellence-in-research-development-for-education-nigeria" />
+      <DynamicCategoryPage categoryTitle="Best Research & Development Contribution to Education (Nigeria)" nominationType="R&D Nigeria" />
     </>
   );
 }

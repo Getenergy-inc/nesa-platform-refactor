@@ -4,7 +4,6 @@ import { BrandedCategoryHero } from "@/components/awards/BrandedCategoryHero";
 import { BrandedDocumentaryPreview } from "@/components/awards/BrandedDocumentaryPreview";
 import { AnimatedActionWords } from "@/components/awards/AnimatedActionWords";
 import { BrandedNomineeDirectory } from "@/components/awards/BrandedNomineeDirectory";
-import { PoliticalLeadersNigeriaDirectory } from "@/components/awards/PoliticalLeadersNigeriaDirectory";
 import { BreadcrumbJsonLd } from "@/components/seo/BreadcrumbJsonLd";
 
 export default function PoliticalLeadersNigeriaPage() {
@@ -45,8 +44,12 @@ export default function PoliticalLeadersNigeriaPage() {
         watchCtaHref="/media"
         imageAlt="Political leadership stories preview"
       />
-      <PoliticalLeadersNigeriaDirectory />
-      <DynamicCategoryPage categoryTitle="Political Leaders' Educational Support (Nigeria)" nominationType="Political Leaders Nigeria" nominateCategorySlug="excellence-in-political-leadership-for-education-nigeria" />
+      <BrandedNomineeDirectory
+        theme="corporate"
+        categoryName="Political Leaders' Educational Support (Nigeria)"
+        title="Live Leader Nominees"
+      />
+      <DynamicCategoryPage categoryTitle="Political Leaders' Educational Support (Nigeria)" nominationType="Political Leaders Nigeria" />
     </>
   );
 }

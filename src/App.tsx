@@ -54,10 +54,7 @@ import Register from "./pages/auth/Register";
 import OTPVerification from "./pages/auth/OTPVerification";
 import ForgotPassword from "./pages/auth/ForgotPassword";
 import ResetPassword from "./pages/auth/ResetPassword";
-import NominateFlow from "./pages/NominateFlow";
-import NominateOfficial from "./pages/NominateOfficial";
-import NominateMvp from "./pages/NominateMvp";
-import NominateSchool from "./pages/impact/NominateSchool";
+import Nominate from "./pages/Nominate";
 import Dashboard from "./pages/Dashboard";
 import Unauthorized from "./pages/Unauthorized";
 import NotFound from "./pages/NotFound";
@@ -90,22 +87,10 @@ import IconAward from "./pages/awards/IconAward";
 import GoldAward from "./pages/awards/GoldAward";
 import BlueGarnetAward from "./pages/awards/BlueGarnetAward";
 import GoldSpecialRecognition from "./pages/awards/GoldSpecialRecognition";
-import InfluencerImpact2026 from "./pages/awards/InfluencerImpact2026";
 import DigitalVoices from "./pages/awards/DigitalVoices";
 import Winners from "./pages/awards/Winners";
 import GovernancePage from "./pages/GovernancePage";
 import EDXMatrixPage from "./pages/EDXMatrixPage";
-import { SponsorFirewallBanner } from "@/components/governance/SponsorFirewallBanner";
-
-/** Wraps a page with a top compact sponsor-firewall banner for governance visibility. */
-const WithFirewall = ({ children }: { children: React.ReactNode }) => (
-  <>
-    <div className="container mx-auto max-w-6xl px-4 pt-3">
-      <SponsorFirewallBanner variant="compact" />
-    </div>
-    {children}
-  </>
-);
 
 // Category Pages (data-driven)
 import {
@@ -519,14 +504,6 @@ const App = () => (
                   />
                   <Route path="/impact/regional-school-intervention" element={<Navigate to="/impact" replace />} />
                   <Route path="/impact/rebuild-my-school-africa" element={<Navigate to="/eduaid-africa/rebuild-my-school" replace />} />
-                  <Route
-                    path="/impact/nominate-school"
-                    element={
-                      <WithLayout>
-                        <NominateSchool />
-                      </WithLayout>
-                    }
-                  />
 
                   <Route
                     path="/videos"
@@ -561,9 +538,7 @@ const App = () => (
                     path="/awards/categories"
                     element={
                       <WithLayout>
-                        <WithFirewall>
-                          <CategoryMasterIndex />
-                        </WithFirewall>
+                        <CategoryMasterIndex />
                       </WithLayout>
                     }
                   />
@@ -667,13 +642,9 @@ const App = () => (
                   />
                   <Route
                     path="/awards/influencers-education-impact-2026-recognition"
-                    element={<InfluencerImpact2026 />}
-                  />
-                  {/* Legacy shell — keep importable from other entry points */}
-                  <Route
-                    path="/awards/gold-special-recognition-legacy"
                     element={<GoldSpecialRecognition />}
                   />
+                  {/* Legacy alias — 301-style redirect preserving query string */}
                   <Route
                     path="/awards/gold-special-recognition"
                     element={<Navigate to="/awards/influencers-education-impact-2026-recognition" replace />}
@@ -1183,55 +1154,11 @@ const App = () => (
                   <Route path="/account/login" element={<Login />} />
 
                   {/* User Actions */}
-                  {/* /nominate → Google Forms MVP intake (brief §5). Legacy multi-step
-                      flow remains available at /nominate/advanced for power users. */}
                   <Route
                     path="/nominate"
                     element={
                       <WithLayout>
-                        <WithFirewall>
-                          <NominateMvp />
-                        </WithFirewall>
-                      </WithLayout>
-                    }
-                  />
-                  <Route
-                    path="/nominate/advanced"
-                    element={
-                      <WithLayout>
-                        <WithFirewall>
-                          <NominateFlow />
-                        </WithFirewall>
-                      </WithLayout>
-                    }
-                  />
-                  <Route
-                    path="/nominate/official"
-                    element={
-                      <WithLayout>
-                        <WithFirewall>
-                          <NominateOfficial />
-                        </WithFirewall>
-                      </WithLayout>
-                    }
-                  />
-                  <Route
-                    path="/nominate/official/:family"
-                    element={
-                      <WithLayout>
-                        <WithFirewall>
-                          <NominateOfficial />
-                        </WithFirewall>
-                      </WithLayout>
-                    }
-                  />
-                  <Route
-                    path="/nominate/official/:family/:category"
-                    element={
-                      <WithLayout>
-                        <WithFirewall>
-                          <NominateOfficial />
-                        </WithFirewall>
+                        <Nominate />
                       </WithLayout>
                     }
                   />
@@ -1353,9 +1280,7 @@ const App = () => (
                     path="/vote"
                     element={
                       <WithLayout>
-                        <WithFirewall>
-                          <Vote />
-                        </WithFirewall>
+                        <Vote />
                       </WithLayout>
                     }
                   />

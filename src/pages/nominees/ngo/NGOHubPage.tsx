@@ -57,7 +57,7 @@ export default function NGOHubPage() {
                   <Link to="/vote">Vote Now</Link>
                 </Button>
                 <Button asChild size="lg" variant="outline" className="border-gold/30 text-gold hover:bg-gold/10">
-                  <Link to="/nominate?category=best-ngo-for-education-advancement-africa-regional">Nominate an NGO</Link>
+                  <Link to="/nominate">Nominate an NGO</Link>
                 </Button>
               </div>
             </motion.div>

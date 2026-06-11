@@ -148,9 +148,6 @@ export default function JudgeProfile() {
                     <Badge variant="outline" className="border-white/20 text-white/70 capitalize">
                       {judge.judge_status}
                     </Badge>
-                    <Badge className="bg-gold/15 text-gold border border-gold/40">
-                      <ShieldCheck className="mr-1 h-3 w-3" /> COI declared
-                    </Badge>
                   </div>
 
                   <h1 className="font-serif text-3xl md:text-4xl font-bold text-gold">
@@ -274,29 +271,6 @@ export default function JudgeProfile() {
               </Card>
             </TabsContent>
           </Tabs>
-
-          {/* Governance declaration */}
-          <Card className="mt-8 border-gold/30 bg-charcoal-light/60">
-            <CardHeader>
-              <CardTitle className="text-gold flex items-center gap-2">
-                <ShieldCheck className="h-5 w-5" /> Governance Declaration
-              </CardTitle>
-            </CardHeader>
-            <CardContent className="text-sm text-white/80 leading-relaxed space-y-2">
-              <p>
-                This judge has filed a binding Conflict of Interest declaration and accepted the
-                NESA-Africa independent jury charter, including mandatory recusal, anti-bribery and
-                confidentiality obligations.
-              </p>
-              <p className="text-white/60">
-                Sponsorship, partnership, donations and endorsements do not influence jury decisions.{" "}
-                <Link to="/governance#judge-independence" className="text-gold hover:underline">
-                  Read the integrity policy
-                </Link>
-                .
-              </p>
-            </CardContent>
-          </Card>
 
           {/* Footer CTA */}
           <div className="mt-10 flex flex-wrap gap-3">

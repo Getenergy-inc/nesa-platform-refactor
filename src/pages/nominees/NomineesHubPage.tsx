@@ -1,10 +1,10 @@
-import { useMemo } from "react";
-import { Link, useNavigate, useSearchParams } from "react-router-dom";
+import { useMemo, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import { motion } from "framer-motion";
 import {
   Search, Trophy, Users, ArrowRight, ChevronRight, Flame, TrendingUp, Sparkles,
-  Globe2, Plane, HeartHandshake, MapPin, Crown, Building2, Rocket, Filter, X,
+  Globe2, Plane, HeartHandshake, MapPin, Crown, Building2, Rocket, Filter,
 } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -19,28 +19,7 @@ import {
   getSecondaryCtaHref,
   TIER_BADGE_STYLES,
 } from "@/config/nomineeCategories";
-import { parseFilterParams, applyFilterChange, activeFilterCount } from "@/pages/nominees/lib/filterNominees";
 import { CategoryDiscoveryGrid } from "@/components/nominees/CategoryDiscoveryGrid";
-import { NIGERIA_ZONES } from "@/config/nomination/nigeriaZones";
-import { normalizeRegion } from "@/lib/regions";
-
-// Audit-aligned award families & recognition classes — mirror
-// src/config/nomination/types.ts. Drives URL-driven /nominees filters.
-const AWARD_FAMILIES: { slug: string; label: string }[] = [
-  { slug: "influencer", label: "Influencer Education Impact Award 2026" },
-  { slug: "icon", label: "Africa Education Icon Lifetime Achievement (2006–2026)" },
-  { slug: "gold-bluegarnet", label: "Gold-Blue Garnet — Competitive Excellence" },
-  { slug: "platinum", label: "Platinum / Institutional Leadership" },
-  { slug: "rmsa", label: "Rebuild My School Africa / EduAid-Africa" },
-];
-
-const RECOGNITION_CLASSES: { slug: string; label: string }[] = [
-  { slug: "africa-resident", label: "Africa-Resident" },
-  { slug: "diaspora", label: "Diaspora" },
-  { slug: "friend-of-africa", label: "Friend of Africa" },
-  { slug: "institutional", label: "Institutional" },
-  { slug: "school", label: "School" },
-];
 
 
 
@@ -91,41 +70,14 @@ const CANONICAL_CATEGORIES: { slug: string; name: string }[] = [
 export default function NomineesHubPage() {
   const navigate = useNavigate();
   const { data: nominees, isLoading } = useNominees();
-
-  // URL-driven filters — deep-linkable per Pass D audit.
-  const [params, setParams] = useSearchParams();
-  const filters = parseFilterParams(params);
-  const {
-    q: search, category: filterCategory, type: filterType,
-    country: filterCountry, region: filterRegion, edition: filterEdition,
-    awardFamily: filterAwardFamily, recognitionClass: filterRecognitionClass,
-    zone: filterZone, state: filterState, group: activeGroup,
-  } = filters;
-
-  const setParam = (key: string, value: string) => {
-    setParams(applyFilterChange(params, key, value), { replace: true });
-  };
-  const setSearch = (v: string) => setParam("q", v);
-  const setActiveGroup = (v: string) => setParam("group", v);
-  const setFilterCategory = (v: string) => setParam("category", v);
-  const setFilterType = (v: string) => setParam("type", v);
-  const setFilterCountry = (v: string) => setParam("country", v);
-  const setFilterRegion = (v: string) => setParam("region", v);
-  const setFilterEdition = (v: string) => setParam("edition", v);
-  const setFilterAwardFamily = (v: string) => setParam("awardFamily", v);
-  const setFilterRecognitionClass = (v: string) => setParam("recognitionClass", v);
-  const setFilterZone = (v: string) => setParam("zone", v);
-  const setFilterState = (v: string) => setParam("state", v);
-
-  const isNigeria = filterCountry.toLowerCase() === "nigeria";
-  const activeZone = NIGERIA_ZONES.find((z) => z.slug === filterZone);
-  const activeFilterCountValue = activeFilterCount(filters);
-
-  const clearAllFilters = () => {
-    setParams(new URLSearchParams(), { replace: true });
-  };
-
-
+  const [search, setSearch] = useState("");
+  // UI-ready filters — connect to nominee query/data when backend fields land
+  const [activeGroup, setActiveGroup] = useState<string>("all");
+  const [filterCategory, setFilterCategory] = useState<string>("all");
+  const [filterType, setFilterType] = useState<string>("all");
+  const [filterCountry, setFilterCountry] = useState<string>("all");
+  const [filterRegion, setFilterRegion] = useState<string>("all");
+  const [filterEdition, setFilterEdition] = useState<string>("2026");
 
   const { categories, trending, mostVoted, totalCount } = useMemo(() => {
     if (!nominees) return { categories: [], trending: [], mostVoted: [], totalCount: 0 };
@@ -178,40 +130,6 @@ export default function NomineesHubPage() {
     const q = search.toLowerCase();
     return categories.filter((c) => c.name.toLowerCase().includes(q));
   }, [categories, search]);
-
-  // Pass D — filtered nominee list driven by URL params. Award family /
-  // recognition class / zone / state are first-class filters; when nominee
-  // rows don't yet carry those fields they cleanly fall through to the
-  // empty-state copy below (audit-compliant).
-  const filteredNominees = useMemo(() => {
-    const all = (nominees ?? []).filter(
-      (n) => n.status === "approved" || n.status === "platinum" || n.status === "pending",
-    );
-    const q = search.trim().toLowerCase();
-    return all.filter((n) => {
-      if (filterCategory !== "all" && n.categorySlug !== filterCategory) return false;
-      if (filterCountry !== "all" && (n.country ?? "").toLowerCase() !== filterCountry.toLowerCase()) return false;
-      if (filterRegion !== "all") {
-        const norm = normalizeRegion(n.region ?? "");
-        const want = filterRegion.replace(/-africa$/, "");
-        if (!norm || !norm.toLowerCase().includes(want)) return false;
-      }
-      const anyN = n as unknown as Record<string, unknown>;
-      if (filterAwardFamily !== "all" && anyN.awardFamily !== filterAwardFamily) return false;
-      if (filterRecognitionClass !== "all" && anyN.recognitionClass !== filterRecognitionClass) return false;
-      if (filterZone !== "all" && anyN.zoneSlug !== filterZone) return false;
-      if (filterState !== "all" && anyN.stateSlug !== filterState) return false;
-      if (q) {
-        const hay = `${n.name} ${n.categoryName} ${n.country ?? ""} ${n.region ?? ""}`.toLowerCase();
-        if (!hay.includes(q)) return false;
-      }
-      return true;
-    });
-  }, [
-    nominees, search, filterCategory, filterCountry, filterRegion,
-    filterAwardFamily, filterRecognitionClass, filterZone, filterState,
-  ]);
-
 
   const onSearchSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -311,27 +229,9 @@ export default function NomineesHubPage() {
             <div className="flex items-center gap-2 mb-3 text-ivory/70 text-xs uppercase tracking-wider">
               <Filter className="w-3.5 h-3.5 text-gold" /> Refine your search
             </div>
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-2">
-              <Select value={filterAwardFamily} onValueChange={setFilterAwardFamily}>
-                <SelectTrigger className="bg-charcoal border-gold/20 text-ivory text-xs h-9" aria-label="Award Family"><SelectValue placeholder="Award Family" /></SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="all">All Award Families</SelectItem>
-                  {AWARD_FAMILIES.map((f) => (
-                    <SelectItem key={f.slug} value={f.slug}>{f.label}</SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-              <Select value={filterRecognitionClass} onValueChange={setFilterRecognitionClass}>
-                <SelectTrigger className="bg-charcoal border-gold/20 text-ivory text-xs h-9" aria-label="Recognition Class"><SelectValue placeholder="Recognition Class" /></SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="all">All Recognition Classes</SelectItem>
-                  {RECOGNITION_CLASSES.map((r) => (
-                    <SelectItem key={r.slug} value={r.slug}>{r.label}</SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
+            <div className="grid grid-cols-2 md:grid-cols-5 gap-2">
               <Select value={filterCategory} onValueChange={setFilterCategory}>
-                <SelectTrigger className="bg-charcoal border-gold/20 text-ivory text-xs h-9" aria-label="Award Category"><SelectValue placeholder="Award Category" /></SelectTrigger>
+                <SelectTrigger className="bg-charcoal border-gold/20 text-ivory text-xs h-9"><SelectValue placeholder="Award Category" /></SelectTrigger>
                 <SelectContent>
                   <SelectItem value="all">All Award Categories</SelectItem>
                   {categories.slice(0, 30).map((c) => (
@@ -340,7 +240,7 @@ export default function NomineesHubPage() {
                 </SelectContent>
               </Select>
               <Select value={filterType} onValueChange={setFilterType}>
-                <SelectTrigger className="bg-charcoal border-gold/20 text-ivory text-xs h-9" aria-label="Nominee Type"><SelectValue placeholder="Nominee Type" /></SelectTrigger>
+                <SelectTrigger className="bg-charcoal border-gold/20 text-ivory text-xs h-9"><SelectValue placeholder="Nominee Type" /></SelectTrigger>
                 <SelectContent>
                   <SelectItem value="all">All Nominee Types</SelectItem>
                   <SelectItem value="individual">Individual</SelectItem>
@@ -350,14 +250,14 @@ export default function NomineesHubPage() {
                 </SelectContent>
               </Select>
               <Select value={filterCountry} onValueChange={setFilterCountry}>
-                <SelectTrigger className="bg-charcoal border-gold/20 text-ivory text-xs h-9" aria-label="Country"><SelectValue placeholder="Country" /></SelectTrigger>
+                <SelectTrigger className="bg-charcoal border-gold/20 text-ivory text-xs h-9"><SelectValue placeholder="Country" /></SelectTrigger>
                 <SelectContent>
                   <SelectItem value="all">All Countries</SelectItem>
                   {countries.map((c) => <SelectItem key={c} value={c}>{c}</SelectItem>)}
                 </SelectContent>
               </Select>
               <Select value={filterRegion} onValueChange={setFilterRegion}>
-                <SelectTrigger className="bg-charcoal border-gold/20 text-ivory text-xs h-9" aria-label="African Region"><SelectValue placeholder="African Region" /></SelectTrigger>
+                <SelectTrigger className="bg-charcoal border-gold/20 text-ivory text-xs h-9"><SelectValue placeholder="African Region" /></SelectTrigger>
                 <SelectContent>
                   <SelectItem value="all">All African Regions</SelectItem>
                   <SelectItem value="west-africa">West Africa</SelectItem>
@@ -368,30 +268,8 @@ export default function NomineesHubPage() {
                   <SelectItem value="diaspora">Diaspora</SelectItem>
                 </SelectContent>
               </Select>
-              {isNigeria && (
-                <>
-                  <Select value={filterZone} onValueChange={setFilterZone}>
-                    <SelectTrigger className="bg-charcoal border-gold/20 text-ivory text-xs h-9" aria-label="Nigeria Geopolitical Zone"><SelectValue placeholder="Nigeria Zone" /></SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="all">All Nigeria Zones</SelectItem>
-                      {NIGERIA_ZONES.map((z) => (
-                        <SelectItem key={z.slug} value={z.slug}>{z.name}</SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
-                  <Select value={filterState} onValueChange={setFilterState} disabled={!activeZone}>
-                    <SelectTrigger className="bg-charcoal border-gold/20 text-ivory text-xs h-9" aria-label="Nigeria State"><SelectValue placeholder={activeZone ? "Nigeria State" : "Pick zone first"} /></SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="all">All States in Zone</SelectItem>
-                      {(activeZone?.states ?? []).map((s) => (
-                        <SelectItem key={s.slug} value={s.slug}>{s.name}</SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
-                </>
-              )}
               <Select value={filterEdition} onValueChange={setFilterEdition}>
-                <SelectTrigger className="bg-charcoal border-gold/20 text-ivory text-xs h-9" aria-label="Edition"><SelectValue placeholder="Edition" /></SelectTrigger>
+                <SelectTrigger className="bg-charcoal border-gold/20 text-ivory text-xs h-9"><SelectValue placeholder="Edition" /></SelectTrigger>
                 <SelectContent>
                   <SelectItem value="2026">2026 Edition</SelectItem>
                   <SelectItem value="2024">2024 Archive</SelectItem>
@@ -399,93 +277,13 @@ export default function NomineesHubPage() {
                 </SelectContent>
               </Select>
             </div>
-            <div className="mt-3 flex items-center justify-between text-[11px] text-ivory/55">
-              <span>
-                Showing {totalCount.toLocaleString()}+ nominees across African education awards
-                {activeFilterCountValue > 0 && ` • ${activeFilterCountValue} filter${activeFilterCountValue === 1 ? "" : "s"} active`}.
-              </span>
-              {activeFilterCountValue > 0 && (
-                <Button
-                  size="sm"
-                  variant="ghost"
-                  onClick={clearAllFilters}
-                  className="h-7 text-gold hover:text-gold/80 hover:bg-gold/10 gap-1"
-                >
-                  <X className="w-3 h-3" /> Clear all
-                </Button>
-              )}
-            </div>
+            <p className="mt-2 text-[10px] text-ivory/40">
+              {/* Filters are UI-ready; connect to nominee dataset in a follow-up. */}
+              Showing {totalCount.toLocaleString()}+ nominees across African education awards.
+            </p>
           </motion.div>
 
-
-          {/* ════════════════════════════════════════════════════════════ */}
-          {/* Filtered Results — only renders when at least one filter is on */}
-          {/* ════════════════════════════════════════════════════════════ */}
-          {activeFilterCountValue > 0 && (
-            <section className="mb-12" aria-labelledby="filtered-results-heading" data-testid="filtered-results">
-              <div className="mb-4 flex items-end justify-between">
-                <div>
-                  <h2 id="filtered-results-heading" className="font-display text-xl md:text-2xl font-bold text-ivory flex items-center gap-2">
-                    <Filter className="w-5 h-5 text-gold" /> Filtered Results
-                  </h2>
-                  <p className="text-xs text-ivory/60 mt-1">
-                    {filteredNominees.length.toLocaleString()} nominee{filteredNominees.length === 1 ? "" : "s"} match your filters.
-                  </p>
-                </div>
-                <Button
-                  size="sm"
-                  variant="ghost"
-                  onClick={clearAllFilters}
-                  className="h-8 text-gold hover:text-gold/80 hover:bg-gold/10 gap-1"
-                >
-                  <X className="w-3.5 h-3.5" /> Reset
-                </Button>
-              </div>
-
-              {filteredNominees.length > 0 ? (
-                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3" data-testid="filtered-results-grid">
-                  {filteredNominees.slice(0, 12).map((n) => (
-                    <LandingNomineeCard key={n.id} nominee={n} />
-                  ))}
-                </div>
-              ) : (
-                <div
-                  data-testid="filtered-results-empty"
-                  className="rounded-2xl border border-dashed border-gold/25 bg-charcoal-light/30 p-8 md:p-10 text-center"
-                >
-                  <Sparkles className="w-8 h-8 text-gold mx-auto mb-3" />
-                  <h3 className="font-display text-lg md:text-xl font-bold text-ivory mb-2">
-                    No nominees match these filters — yet.
-                  </h3>
-                  <p className="text-ivory/65 text-sm max-w-xl mx-auto mb-5">
-                    Some refinements (award family, recognition class, Nigeria zone or state) only
-                    activate once nominees have been formally accepted into that bracket. Try widening
-                    your search, switch region, or start a fresh nomination so a deserving champion
-                    appears here next.
-                  </p>
-                  <div className="flex flex-col sm:flex-row gap-2 justify-center">
-                    <Button
-                      size="sm"
-                      variant="outline"
-                      onClick={clearAllFilters}
-                      className="border-gold/40 text-gold hover:bg-gold/10 rounded-full gap-1"
-                    >
-                      <X className="w-3.5 h-3.5" /> Clear all filters
-                    </Button>
-                    <Link to="/nominate?source=nominees-empty-state">
-                      <Button size="sm" className="bg-gold hover:bg-gold/90 text-charcoal font-semibold rounded-full gap-1">
-                        <Trophy className="w-3.5 h-3.5" /> Nominate a champion
-                      </Button>
-                    </Link>
-                  </div>
-                </div>
-              )}
-            </section>
-          )}
-
           {/* How Nominees Are Organized + Explore by Region — moved to bottom of page */}
-
-
 
 
 
@@ -565,7 +363,7 @@ export default function NomineesHubPage() {
               Help us recognize Africa's education leaders. Nominate a new champion or vote in eligible categories.
             </p>
             <div className="flex flex-col sm:flex-row gap-3 justify-center">
-              <Link to="/nominate?source=nominees-hub">
+              <Link to="/nominate">
                 <Button size="lg" className="bg-gold hover:bg-gold/90 text-charcoal font-bold rounded-full px-8 gap-2">
                   <Trophy className="w-5 h-5" /> Start a Nomination
                 </Button>

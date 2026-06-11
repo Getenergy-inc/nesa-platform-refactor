@@ -118,20 +118,11 @@ export default function VolunteerProfile() {
               </div>
 
               <div className="flex flex-wrap gap-2 mt-5">
-                {/* Certificate eligibility — based on contribution score */}
-                {v.contributionScore >= 100 && (
-                  <Badge className="bg-emerald-500/15 text-emerald-300 border border-emerald-500/40 self-center">
-                    <BadgeCheck className="h-3 w-3 mr-1" /> Certificate eligible
-                  </Badge>
-                )}
                 <Button asChild size="sm" className="bg-gold text-black hover:bg-gold/90">
                   <a href={`/join?v=${encodeURIComponent(v.referralCode)}`}><Share2 className="mr-1 h-4 w-4" /> Join via {v.fullName.split(" ")[0]}</a>
                 </Button>
                 <Button asChild size="sm" variant="outline" className="border-gold/50 text-gold hover:bg-gold/10">
                   <Link to="/chapters">Join Their Chapter</Link>
-                </Button>
-                <Button asChild size="sm" variant="outline" className="border-gold/50 text-gold hover:bg-gold/10">
-                  <Link to="/dashboard/volunteer">Volunteer Dashboard</Link>
                 </Button>
                 <Button asChild size="sm" variant="ghost" className="text-white/80 hover:text-gold">
                   <Link to="/volunteer">Become a Volunteer</Link>

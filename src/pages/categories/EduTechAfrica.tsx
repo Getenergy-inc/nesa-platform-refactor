@@ -49,11 +49,7 @@ export default function EduTechAfricaPage() {
         categoryName="Best EduTech Organisation (Africa Regional)"
         title="Live EduTech Nominees"
       />
-      <DynamicCategoryPage
-        categoryTitle="Best EduTech Organisation (Africa Regional)"
-        nominationType="EduTech Africa"
-        nominateCategorySlug="best-edutech-innovation-for-education-africa-regional"
-      />
+      <DynamicCategoryPage categoryTitle="Best EduTech Organisation (Africa Regional)" nominationType="EduTech Africa" />
     </>
   );
 }

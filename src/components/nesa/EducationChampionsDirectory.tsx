@@ -59,7 +59,7 @@ const SPECIAL_RECOGNITION = [
   {
     id: "voting",
     title: "Public Voting",
-    subtitle: "Gold-Blue Garnet Awards",
+    subtitle: "Blue Garnet & Gold Awards",
     description: "9 categories. 135 subcategories. Top 3 winners each = 405 Gold Certificate winners.",
     icon: Star,
     href: "/awards/gold",

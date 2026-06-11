@@ -49,7 +49,7 @@ export default function ChristianEducationAfricaPage() {
         categoryName="Christian Education Impact (Africa Regional)"
         title="Live Christian Education Nominees"
       />
-      <DynamicCategoryPage categoryTitle="Christian Education Impact (Africa Regional)" nominationType="Christian Education Africa" nominateCategorySlug="excellence-in-christian-education-impact-africa-regional" />
+      <DynamicCategoryPage categoryTitle="Christian Education Impact (Africa Regional)" nominationType="Christian Education Africa" />
     </>
   );
 }

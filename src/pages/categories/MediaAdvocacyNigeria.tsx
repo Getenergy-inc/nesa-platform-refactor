@@ -49,7 +49,7 @@ export default function MediaAdvocacyNigeriaPage() {
         categoryName="Best Media Organisation in Educational Advocacy (Nigeria)"
         title="Live Media Nominees"
       />
-      <DynamicCategoryPage categoryTitle="Best Media Organisation in Educational Advocacy (Nigeria)" nominationType="Media Advocacy Nigeria" nominateCategorySlug="best-media-organisation-for-education-advocacy-nigeria" />
+      <DynamicCategoryPage categoryTitle="Best Media Organisation in Educational Advocacy (Nigeria)" nominationType="Media Advocacy Nigeria" />
     </>
   );
 }

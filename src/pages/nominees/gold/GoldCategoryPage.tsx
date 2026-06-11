@@ -139,7 +139,7 @@ export default function GoldCategoryPage() {
                     <Vote className="w-4 h-4" /> Vote Now
                   </Button>
                 </a>
-                <Link to={`/nominate?family=gold-blue-garnet&source=gold-${categorySlug}`}>
+                <Link to="/nominate">
                   <Button size="lg" variant="outline" className="border-gold/40 text-gold hover:bg-gold/10 rounded-full px-7 gap-2 bg-charcoal/40 backdrop-blur">
                     Nominate <ArrowRight className="w-4 h-4" />
                   </Button>
@@ -342,7 +342,7 @@ export default function GoldCategoryPage() {
             <p className="text-ivory/60 mb-5 text-sm md:text-base">
               Submit a {category.shortName} nominee advancing education across Africa.
             </p>
-            <Link to={`/nominate?family=gold-blue-garnet&source=gold-${categorySlug}`}>
+            <Link to="/nominate">
               <Button className="bg-gold hover:bg-gold/90 text-charcoal font-bold rounded-full px-7 gap-2">
                 Nominate Now <ArrowRight className="w-4 h-4" />
               </Button>

@@ -49,7 +49,7 @@ export default function EducationFriendlyStateNigeriaPage() {
         categoryName="Best Education-Friendly State (Nigeria)"
         title="Live State Nominees"
       />
-      <DynamicCategoryPage categoryTitle="Best Education-Friendly State (Nigeria)" nominationType="Education State Nigeria" nominateCategorySlug="best-education-policy-implementation-state-nigeria" />
+      <DynamicCategoryPage categoryTitle="Best Education-Friendly State (Nigeria)" nominationType="Education State Nigeria" />
     </>
   );
 }

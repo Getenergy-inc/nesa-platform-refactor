@@ -125,7 +125,6 @@ export const MAIN_NAV: NavItem[] = [
       { label: "Platinum Certificate Categories", href: "/awards/platinum", description: "Institutional leadership recognition", icon: Medal },
       { label: "Africa Education Icon (2006–2026)", href: "/awards/icon", description: "Lifetime achievement award", icon: Star },
       { label: "Influencers Education Impact 2026", href: "/awards/influencers-education-impact-2026-recognition", description: "Sports, Music & Social Media impact", icon: Sparkles, badge: "2026" },
-      { label: "Guidelines", href: "/guidelines/nominators", description: "Nomination guidelines and how to participate", icon: BookOpen },
       { label: "Eligibility & Criteria", href: "/awards#eligibility", description: "Who can be nominated", icon: FileCheck },
       { label: "Nomination Process", href: "/nominate", description: "How nominations work", icon: FileCheck },
       { label: "Voting & Judging Integrity", href: "/policies/voting-integrity", description: "Firewalls protecting outcomes", icon: Shield },
@@ -201,18 +200,6 @@ export const MAIN_NAV: NavItem[] = [
       { label: "Donate", href: "/donate", description: "Support our mission", icon: Heart },
     ],
   },
-
-  // 7. SHOP — Buy NESA-Africa merchandise
-  {
-    label: "Shop",
-    href: "/shop",
-    icon: ShoppingBag,
-    children: [
-      { label: "Buy Merchandise", href: "/shop", description: "Official NESA-Africa apparel & gifts", icon: ShoppingBag },
-      { label: "Cart", href: "/shop/cart", description: "Review items in your cart", icon: ShoppingBag },
-      { label: "Bulk Orders", href: "/shop/bulk-orders", description: "Institutional & chapter orders", icon: ShoppingBag },
-    ],
-  },
 ];
 
 // Right-side action CTAs — three primary buttons per IA brief
@@ -239,7 +226,6 @@ export const MAIN_NAV_MOBILE_ORDER: readonly string[] = [
   "Engage",
   "Media",
   "Support",
-  "Shop",
 ];
 
 

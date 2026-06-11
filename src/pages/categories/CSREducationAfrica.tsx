@@ -64,7 +64,6 @@ export default function CSREducationAfricaPage() {
       <DynamicCategoryPage
         categoryTitle="Best CSR in Education (Africa Regional)"
         nominationType="CSR Africa"
-        nominateCategorySlug="best-csr-for-education-africa-regional"
       />
     </>
   );

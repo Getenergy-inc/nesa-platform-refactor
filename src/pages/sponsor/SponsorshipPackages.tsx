@@ -73,7 +73,7 @@ const GROUPS: { id: string; title: string; slugs: SponsorLaneSlug[] }[] = [
   },
   {
     id: "garnet",
-    title: "Gold-Blue Garnet Recognition",
+    title: "Gold / Blue Garnet Recognition",
     slugs: ["gold-blue-garnet-main", "blue-garnet-category"],
   },
   {

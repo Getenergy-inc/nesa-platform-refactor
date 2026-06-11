@@ -47,6 +47,7 @@
 /impact-programs/webinars                                    /media/webinars      301
 /impact-programs/community-chapters                          /chapters            301
 /impact-programs/digital-learning-inclusion                  /impact              301
+/eduaid-africa                                               /eduaid              301
 /rebuild-my-school-africa                                    /rebuild             301
 /media/nesa-africa-tv                                        /media/tv            301
 /nesa-tv                                                     /media/tv            301
@@ -64,7 +65,7 @@
 /cookie-policy                                               /policies            301
 /language                                                    /                    301
 
-# --- 2. SPA routes (309 explicit paths from src/App.tsx) ---
+# --- 2. SPA routes (295 explicit paths from src/App.tsx) ---
 /nominees/gold-special-recognition/:categorySlug/:nomineeSlug /index.html          200
 /nominees/best-ngo-contribution-to-education/profile/:slug   /index.html          200
 /awards/influencers-education-impact-2026-recognition        /index.html          200
@@ -79,15 +80,12 @@
 /category/education-friendly-state-nigeria                   /index.html          200
 /nominees/africa-education-icon-award/:sub                   /index.html          200
 /nominees/category/:categorySlug/:subSlug                    /index.html          200
-/awards/gold-special-recognition-legacy                      /index.html          200
 /awards/platinum-certificate-categories                      /index.html          200
 /category/research-development-nigeria                       /index.html          200
 /nominees/africa-education-icon-award                        /index.html          200
 /awards/blue-garnet-categories/:slug                         /index.html          200
 /awards/influencers-education-impact                         /index.html          200
 /category/christian-education-africa                         /index.html          200
-/impact/regional-school-intervention                         /index.html          200
-/nominate/official/:family/:category                         /index.html          200
 /category/political-leaders-nigeria                          /index.html          200
 /category/islamic-education-africa                           /index.html          200
 /nominees/gold-special-recognition                           /index.html          200
@@ -96,7 +94,6 @@
 /awards/gold-special-recognition                             /index.html          200
 /category/media-advocacy-nigeria                             /index.html          200
 /eduaid-africa/rebuild-my-school                             /index.html          200
-/impact/rebuild-my-school-africa                             /index.html          200
 /nominees/category/:categorySlug                             /index.html          200
 /category/africa-education-icon                              /index.html          200
 /category/creative-arts-nigeria                              /index.html          200
@@ -112,8 +109,6 @@
 /category/diaspora-education                                 /index.html          200
 /nrc/dashboard/edi-analytics                                 /index.html          200
 /awards/global-partnerships                                  /index.html          200
-/nominate/official/:family                                   /index.html          200
-/policies/voting-integrity                                   /index.html          200
 /about/awards-recognition                                    /index.html          200
 /admin/contributor-photos                                    /index.html          200
 /awards/csr-for-education                                    /index.html          200
@@ -132,7 +127,6 @@
 /nominees/category/:slug                                     /index.html          200
 /pathways-to-recognition                                     /index.html          200
 /admin/nominee-profiles                                      /index.html          200
-/impact/nominate-school                                      /index.html          200
 /judge-application-form                                      /index.html          200
 /nominee/decline/:token                                      /index.html          200
 /nominees/profile/:slug                                      /index.html          200
@@ -182,8 +176,6 @@
 /earn-voting-coins                                           /index.html          200
 /guidelines/judges                                           /index.html          200
 /guidelines/voters                                           /index.html          200
-/nominate/advanced                                           /index.html          200
-/nominate/official                                           /index.html          200
 /nominee-directory                                           /index.html          200
 /volunteer-stories                                           /index.html          200
 /volunteer/profile                                           /index.html          200
@@ -235,7 +227,6 @@
 /admin/gallery                                               /index.html          200
 /admin/rebuild                                               /index.html          200
 /auth/register                                               /index.html          200
-/eduaid-africa                                               /index.html          200
 /gallery/:slug                                               /index.html          200
 /gfawzip/links                                               /index.html          200
 /judge/scoring                                               /index.html          200
@@ -256,7 +247,6 @@
 /contributors                                                /index.html          200
 /earn-credits                                                /index.html          200
 /endorse-nesa                                                /index.html          200
-/get-involved                                                /index.html          200
 /judge-signup                                                /index.html          200
 /judge-status                                                /index.html          200
 /judge-verify                                                /index.html          200
@@ -295,7 +285,6 @@
 /about/scef                                                  /index.html          200
 /auth/login                                                  /index.html          200
 /categories                                                  /index.html          200
-/edx-matrix                                                  /index.html          200
 /getfinance                                                  /index.html          200
 /governance                                                  /index.html          200
 /judge/chat                                                  /index.html          200
@@ -361,7 +350,6 @@
 /media                                                       /index.html          200
 /merch                                                       /index.html          200
 /music                                                       /index.html          200
-/press                                                       /index.html          200
 /store                                                       /index.html          200
 /auth                                                        /index.html          200
 /cart                                                        /index.html          200
@@ -369,7 +357,6 @@
 /jury                                                        /index.html          200
 /shop                                                        /index.html          200
 /vote                                                        /index.html          200
-/edx                                                         /index.html          200
 /faq                                                         /index.html          200
 /nrc                                                         /index.html          200
 /otp                                                         /index.html          200

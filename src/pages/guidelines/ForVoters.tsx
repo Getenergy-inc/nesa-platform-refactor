@@ -150,7 +150,7 @@ const VOTING_FAQS = [
     answer: "Final results are announced at the Grand Gala on June 27, 2026. Live vote counts are visible during voting windows.",
   },
   {
-    question: "What's the difference between Gold-Blue Garnet voting?",
+    question: "What's the difference between Gold and Blue Garnet voting?",
     answer: "Gold Certificate winners are determined 100% by public votes. Blue Garnet winners are 40% public votes + 60% jury scores.",
   },
 ];

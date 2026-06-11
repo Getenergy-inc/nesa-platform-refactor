@@ -155,7 +155,7 @@ export default function Winners() {
               Nominate yourself or someone making a difference in African education.
             </p>
             <Button asChild size="lg" className="bg-primary text-primary-foreground">
-              <Link to="/nominate?source=winners">Submit a Nomination</Link>
+              <Link to="/nominate">Submit a Nomination</Link>
             </Button>
           </div>
         </section>

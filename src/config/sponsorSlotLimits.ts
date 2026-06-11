@@ -75,7 +75,7 @@ export const SPONSOR_SLOT_GROUPS: SponsorSlotGroup[] = [
   },
   {
     categorySlug: "categories",
-    title: "4. Gold-Blue Garnet Sponsorship",
+    title: "4. Gold / Blue Garnet Sponsorship",
     summary:
       "Exclusive category sponsorship with strict non-influence firewalls.",
     rows: [

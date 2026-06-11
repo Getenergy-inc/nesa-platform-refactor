@@ -49,7 +49,7 @@ export default function IslamicEducationAfricaPage() {
         categoryName="Islamic Education Impact (Africa Regional)"
         title="Live Islamic Education Nominees"
       />
-      <DynamicCategoryPage categoryTitle="Islamic Education Impact (Africa Regional)" nominationType="Islamic Education Africa" nominateCategorySlug="excellence-in-islamic-education-impact-africa-regional" />
+      <DynamicCategoryPage categoryTitle="Islamic Education Impact (Africa Regional)" nominationType="Islamic Education Africa" />
     </>
   );
 }

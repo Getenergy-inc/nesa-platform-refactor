@@ -1698,117 +1698,6 @@ export type Database = {
           },
         ]
       }
-      influencer_impact_nominees: {
-        Row: {
-          artist_profile_link: string | null
-          athlete_status: string | null
-          award_category: string
-          award_family: string
-          club_team_or_foundation: string | null
-          content_impact_area: string | null
-          created_at: string
-          education_impact_summary: string
-          evidence_links: string[]
-          follower_count_range: string | null
-          id: string
-          image_url: string | null
-          label_or_foundation: string | null
-          music_education_impact_area: string | null
-          music_genre: string | null
-          nominee_country: string
-          nominee_name: string
-          nominee_region: string
-          other_music_genres: string[] | null
-          other_platforms: string[] | null
-          platform_profile_link: string | null
-          primary_social_media_platform: string | null
-          primary_sport_area: string | null
-          recognition_class: string
-          reviewed_at: string | null
-          reviewed_by: string | null
-          slug: string
-          sports_education_impact_area: string | null
-          sports_profile_link: string | null
-          stage_name: string | null
-          submitted_by: string | null
-          updated_at: string
-          verification_status: string
-          verified_nominations: number
-        }
-        Insert: {
-          artist_profile_link?: string | null
-          athlete_status?: string | null
-          award_category: string
-          award_family?: string
-          club_team_or_foundation?: string | null
-          content_impact_area?: string | null
-          created_at?: string
-          education_impact_summary?: string
-          evidence_links?: string[]
-          follower_count_range?: string | null
-          id?: string
-          image_url?: string | null
-          label_or_foundation?: string | null
-          music_education_impact_area?: string | null
-          music_genre?: string | null
-          nominee_country: string
-          nominee_name: string
-          nominee_region: string
-          other_music_genres?: string[] | null
-          other_platforms?: string[] | null
-          platform_profile_link?: string | null
-          primary_social_media_platform?: string | null
-          primary_sport_area?: string | null
-          recognition_class: string
-          reviewed_at?: string | null
-          reviewed_by?: string | null
-          slug: string
-          sports_education_impact_area?: string | null
-          sports_profile_link?: string | null
-          stage_name?: string | null
-          submitted_by?: string | null
-          updated_at?: string
-          verification_status?: string
-          verified_nominations?: number
-        }
-        Update: {
-          artist_profile_link?: string | null
-          athlete_status?: string | null
-          award_category?: string
-          award_family?: string
-          club_team_or_foundation?: string | null
-          content_impact_area?: string | null
-          created_at?: string
-          education_impact_summary?: string
-          evidence_links?: string[]
-          follower_count_range?: string | null
-          id?: string
-          image_url?: string | null
-          label_or_foundation?: string | null
-          music_education_impact_area?: string | null
-          music_genre?: string | null
-          nominee_country?: string
-          nominee_name?: string
-          nominee_region?: string
-          other_music_genres?: string[] | null
-          other_platforms?: string[] | null
-          platform_profile_link?: string | null
-          primary_social_media_platform?: string | null
-          primary_sport_area?: string | null
-          recognition_class?: string
-          reviewed_at?: string | null
-          reviewed_by?: string | null
-          slug?: string
-          sports_education_impact_area?: string | null
-          sports_profile_link?: string | null
-          stage_name?: string | null
-          submitted_by?: string | null
-          updated_at?: string
-          verification_status?: string
-          verified_nominations?: number
-        }
-        Relationships: []
-      }
       judge_activity_logs: {
         Row: {
           action: string
@@ -2707,160 +2596,10 @@ export type Database = {
           },
         ]
       }
-      nomination_ingest_audit: {
-        Row: {
-          action: string
-          actor_id: string | null
-          batch_id: string
-          canonical_id: string | null
-          created_at: string
-          id: string
-          identity_hash: string | null
-          intake_id: string
-          new_duplicate_status: string | null
-          previous_duplicate_status: string | null
-          reason: string
-          record_id: string
-        }
-        Insert: {
-          action: string
-          actor_id?: string | null
-          batch_id: string
-          canonical_id?: string | null
-          created_at?: string
-          id?: string
-          identity_hash?: string | null
-          intake_id: string
-          new_duplicate_status?: string | null
-          previous_duplicate_status?: string | null
-          reason: string
-          record_id: string
-        }
-        Update: {
-          action?: string
-          actor_id?: string | null
-          batch_id?: string
-          canonical_id?: string | null
-          created_at?: string
-          id?: string
-          identity_hash?: string | null
-          intake_id?: string
-          new_duplicate_status?: string | null
-          previous_duplicate_status?: string | null
-          reason?: string
-          record_id?: string
-        }
-        Relationships: [
-          {
-            foreignKeyName: "nomination_ingest_audit_intake_id_fkey"
-            columns: ["intake_id"]
-            isOneToOne: false
-            referencedRelation: "nomination_intake"
-            referencedColumns: ["id"]
-          },
-        ]
-      }
-      nomination_intake: {
-        Row: {
-          assigned_reviewer: string | null
-          award_category: string | null
-          award_group: string | null
-          award_subcategory: string | null
-          duplicate_of: string | null
-          duplicate_status: string | null
-          evidence_status: string | null
-          form_type: string
-          id: string
-          identity_hash: string | null
-          impact_summary_clean: string | null
-          ingested_at: string
-          ingested_by: string | null
-          nomination_status: string | null
-          nominee_city_clean: string | null
-          nominee_country_clean: string | null
-          nominee_name_clean: string | null
-          nominee_region_clean: string | null
-          nominee_type_clean: string | null
-          raw_payload: Json | null
-          record_id: string
-          reviewer_notes: string | null
-          updated_at: string
-          verification_status: string | null
-          website_sync_status: string | null
-        }
-        Insert: {
-          assigned_reviewer?: string | null
-          award_category?: string | null
-          award_group?: string | null
-          award_subcategory?: string | null
-          duplicate_of?: string | null
-          duplicate_status?: string | null
-          evidence_status?: string | null
-          form_type: string
-          id?: string
-          identity_hash?: string | null
-          impact_summary_clean?: string | null
-          ingested_at?: string
-          ingested_by?: string | null
-          nomination_status?: string | null
-          nominee_city_clean?: string | null
-          nominee_country_clean?: string | null
-          nominee_name_clean?: string | null
-          nominee_region_clean?: string | null
-          nominee_type_clean?: string | null
-          raw_payload?: Json | null
-          record_id: string
-          reviewer_notes?: string | null
-          updated_at?: string
-          verification_status?: string | null
-          website_sync_status?: string | null
-        }
-        Update: {
-          assigned_reviewer?: string | null
-          award_category?: string | null
-          award_group?: string | null
-          award_subcategory?: string | null
-          duplicate_of?: string | null
-          duplicate_status?: string | null
-          evidence_status?: string | null
-          form_type?: string
-          id?: string
-          identity_hash?: string | null
-          impact_summary_clean?: string | null
-          ingested_at?: string
-          ingested_by?: string | null
-          nomination_status?: string | null
-          nominee_city_clean?: string | null
-          nominee_country_clean?: string | null
-          nominee_name_clean?: string | null
-          nominee_region_clean?: string | null
-          nominee_type_clean?: string | null
-          raw_payload?: Json | null
-          record_id?: string
-          reviewer_notes?: string | null
-          updated_at?: string
-          verification_status?: string | null
-          website_sync_status?: string | null
-        }
-        Relationships: [
-          {
-            foreignKeyName: "nomination_intake_duplicate_of_fkey"
-            columns: ["duplicate_of"]
-            isOneToOne: false
-            referencedRelation: "nomination_intake"
-            referencedColumns: ["id"]
-          },
-        ]
-      }
       nominations: {
         Row: {
-          award_category_slug: string | null
-          award_family: string | null
-          award_subcategory_slug: string | null
           created_at: string | null
           created_nominee_id: string | null
-          dedupe_match_id: string | null
-          dedupe_score: number | null
           evidence_urls: string[] | null
           id: string
           identity_hash: string | null
@@ -2873,37 +2612,21 @@ export type Database = {
           nominee_photo_url: string | null
           nominee_title: string | null
           nrc_reviewer_id: string | null
-          publication_status: string
           query_count: number | null
-          recognition_class: string | null
-          region_slug: string | null
           review_notes: string | null
           reviewed_at: string | null
           rubric_version: string | null
           season_id: string
           sla_deadline: string | null
           source: Database["public"]["Enums"]["nomination_source"] | null
-          source_channel: string
-          source_form_id: string | null
-          source_row_id: string | null
-          source_sheet_id: string | null
-          state_slug: string | null
           status: Database["public"]["Enums"]["nomination_status"] | null
           subcategory_id: string
-          submission_kind: string
           updated_at: string | null
-          verification_tier: string | null
           workflow_status: string | null
-          zone_slug: string | null
         }
         Insert: {
-          award_category_slug?: string | null
-          award_family?: string | null
-          award_subcategory_slug?: string | null
           created_at?: string | null
           created_nominee_id?: string | null
-          dedupe_match_id?: string | null
-          dedupe_score?: number | null
           evidence_urls?: string[] | null
           id?: string
           identity_hash?: string | null
@@ -2916,37 +2639,21 @@ export type Database = {
           nominee_photo_url?: string | null
           nominee_title?: string | null
           nrc_reviewer_id?: string | null
-          publication_status?: string
           query_count?: number | null
-          recognition_class?: string | null
-          region_slug?: string | null
           review_notes?: string | null
           reviewed_at?: string | null
           rubric_version?: string | null
           season_id: string
           sla_deadline?: string | null
           source?: Database["public"]["Enums"]["nomination_source"] | null
-          source_channel?: string
-          source_form_id?: string | null
-          source_row_id?: string | null
-          source_sheet_id?: string | null
-          state_slug?: string | null
           status?: Database["public"]["Enums"]["nomination_status"] | null
           subcategory_id: string
-          submission_kind?: string
           updated_at?: string | null
-          verification_tier?: string | null
           workflow_status?: string | null
-          zone_slug?: string | null
         }
         Update: {
-          award_category_slug?: string | null
-          award_family?: string | null
-          award_subcategory_slug?: string | null
           created_at?: string | null
           created_nominee_id?: string | null
-          dedupe_match_id?: string | null
-          dedupe_score?: number | null
           evidence_urls?: string[] | null
           id?: string
           identity_hash?: string | null
@@ -2959,28 +2666,17 @@ export type Database = {
           nominee_photo_url?: string | null
           nominee_title?: string | null
           nrc_reviewer_id?: string | null
-          publication_status?: string
           query_count?: number | null
-          recognition_class?: string | null
-          region_slug?: string | null
           review_notes?: string | null
           reviewed_at?: string | null
           rubric_version?: string | null
           season_id?: string
           sla_deadline?: string | null
           source?: Database["public"]["Enums"]["nomination_source"] | null
-          source_channel?: string
-          source_form_id?: string | null
-          source_row_id?: string | null
-          source_sheet_id?: string | null
-          state_slug?: string | null
           status?: Database["public"]["Enums"]["nomination_status"] | null
           subcategory_id?: string
-          submission_kind?: string
           updated_at?: string | null
-          verification_tier?: string | null
           workflow_status?: string | null
-          zone_slug?: string | null
         }
         Relationships: [
           {
@@ -3012,57 +2708,6 @@ export type Database = {
             referencedColumns: ["id"]
           },
         ]
-      }
-      nominators: {
-        Row: {
-          consent_at: string | null
-          consent_given: boolean
-          country_origin: string | null
-          country_residence: string | null
-          created_at: string
-          email_lower: string | null
-          full_name: string
-          id: string
-          metadata: Json
-          phone_hash: string | null
-          phone_raw: string | null
-          source: string
-          updated_at: string
-          user_id: string | null
-        }
-        Insert: {
-          consent_at?: string | null
-          consent_given?: boolean
-          country_origin?: string | null
-          country_residence?: string | null
-          created_at?: string
-          email_lower?: string | null
-          full_name: string
-          id?: string
-          metadata?: Json
-          phone_hash?: string | null
-          phone_raw?: string | null
-          source?: string
-          updated_at?: string
-          user_id?: string | null
-        }
-        Update: {
-          consent_at?: string | null
-          consent_given?: boolean
-          country_origin?: string | null
-          country_residence?: string | null
-          created_at?: string
-          email_lower?: string | null
-          full_name?: string
-          id?: string
-          metadata?: Json
-          phone_hash?: string | null
-          phone_raw?: string | null
-          source?: string
-          updated_at?: string
-          user_id?: string | null
-        }
-        Relationships: []
       }
       nominee_enrichments: {
         Row: {
@@ -3231,9 +2876,7 @@ export type Database = {
           acceptance_token: string | null
           acceptance_token_expires_at: string | null
           accepted_at: string | null
-          award_family: string | null
           bio: string | null
-          category_fit_summary: string | null
           country: string | null
           created_at: string | null
           email: string | null
@@ -3242,14 +2885,12 @@ export type Database = {
           first_letter_sent: boolean | null
           id: string
           identity_hash: string | null
-          impact_area: string | null
           is_platinum: boolean | null
           jury_score: number | null
           legacy_ids: Json | null
           legacy_source: string | null
           linkedin_url: string | null
           logo_url: string | null
-          media_gallery: Json
           name: string
           nominator_user_id: string | null
           nrc_reviewer_id: string | null
@@ -3258,32 +2899,19 @@ export type Database = {
           organization: string | null
           phone: string | null
           photo_url: string | null
-          profile_completion_score: number
-          profile_status: Database["public"]["Enums"]["nominee_profile_status"]
-          public_documents: Json
           public_votes: number | null
-          publication_status: Database["public"]["Enums"]["nominee_publication_status"]
-          published_at: string | null
-          published_by: string | null
-          recognition_class: string | null
           region: string | null
-          region_slug: string | null
           renomination_count: number
           review_notes: string | null
           reviewed_at: string | null
           season_id: string
           slug: string
-          social_profile_links: Json
-          source_nomination_id: string | null
-          state_slug: string | null
           status: Database["public"]["Enums"]["nomination_status"] | null
           subcategory_id: string
           title: string | null
           updated_at: string | null
-          verification_tier: string | null
           website: string | null
           work_done: string | null
-          zone_slug: string | null
         }
         Insert: {
           acceptance_status?:
@@ -3292,9 +2920,7 @@ export type Database = {
           acceptance_token?: string | null
           acceptance_token_expires_at?: string | null
           accepted_at?: string | null
-          award_family?: string | null
           bio?: string | null
-          category_fit_summary?: string | null
           country?: string | null
           created_at?: string | null
           email?: string | null
@@ -3303,14 +2929,12 @@ export type Database = {
           first_letter_sent?: boolean | null
           id?: string
           identity_hash?: string | null
-          impact_area?: string | null
           is_platinum?: boolean | null
           jury_score?: number | null
           legacy_ids?: Json | null
           legacy_source?: string | null
           linkedin_url?: string | null
           logo_url?: string | null
-          media_gallery?: Json
           name: string
           nominator_user_id?: string | null
           nrc_reviewer_id?: string | null
@@ -3319,32 +2943,19 @@ export type Database = {
           organization?: string | null
           phone?: string | null
           photo_url?: string | null
-          profile_completion_score?: number
-          profile_status?: Database["public"]["Enums"]["nominee_profile_status"]
-          public_documents?: Json
           public_votes?: number | null
-          publication_status?: Database["public"]["Enums"]["nominee_publication_status"]
-          published_at?: string | null
-          published_by?: string | null
-          recognition_class?: string | null
           region?: string | null
-          region_slug?: string | null
           renomination_count?: number
           review_notes?: string | null
           reviewed_at?: string | null
           season_id: string
           slug: string
-          social_profile_links?: Json
-          source_nomination_id?: string | null
-          state_slug?: string | null
           status?: Database["public"]["Enums"]["nomination_status"] | null
           subcategory_id: string
           title?: string | null
           updated_at?: string | null
-          verification_tier?: string | null
           website?: string | null
           work_done?: string | null
-          zone_slug?: string | null
         }
         Update: {
           acceptance_status?:
@@ -3353,9 +2964,7 @@ export type Database = {
           acceptance_token?: string | null
           acceptance_token_expires_at?: string | null
           accepted_at?: string | null
-          award_family?: string | null
           bio?: string | null
-          category_fit_summary?: string | null
           country?: string | null
           created_at?: string | null
           email?: string | null
@@ -3364,14 +2973,12 @@ export type Database = {
           first_letter_sent?: boolean | null
           id?: string
           identity_hash?: string | null
-          impact_area?: string | null
           is_platinum?: boolean | null
           jury_score?: number | null
           legacy_ids?: Json | null
           legacy_source?: string | null
           linkedin_url?: string | null
           logo_url?: string | null
-          media_gallery?: Json
           name?: string
           nominator_user_id?: string | null
           nrc_reviewer_id?: string | null
@@ -3380,32 +2987,19 @@ export type Database = {
           organization?: string | null
           phone?: string | null
           photo_url?: string | null
-          profile_completion_score?: number
-          profile_status?: Database["public"]["Enums"]["nominee_profile_status"]
-          public_documents?: Json
           public_votes?: number | null
-          publication_status?: Database["public"]["Enums"]["nominee_publication_status"]
-          published_at?: string | null
-          published_by?: string | null
-          recognition_class?: string | null
           region?: string | null
-          region_slug?: string | null
           renomination_count?: number
           review_notes?: string | null
           reviewed_at?: string | null
           season_id?: string
           slug?: string
-          social_profile_links?: Json
-          source_nomination_id?: string | null
-          state_slug?: string | null
           status?: Database["public"]["Enums"]["nomination_status"] | null
           subcategory_id?: string
           title?: string | null
           updated_at?: string | null
-          verification_tier?: string | null
           website?: string | null
           work_done?: string | null
-          zone_slug?: string | null
         }
         Relationships: [
           {
@@ -3416,79 +3010,10 @@ export type Database = {
             referencedColumns: ["id"]
           },
           {
-            foreignKeyName: "nominees_source_nomination_id_fkey"
-            columns: ["source_nomination_id"]
-            isOneToOne: false
-            referencedRelation: "nominations"
-            referencedColumns: ["id"]
-          },
-          {
             foreignKeyName: "nominees_subcategory_id_fkey"
             columns: ["subcategory_id"]
             isOneToOne: false
             referencedRelation: "subcategories"
-            referencedColumns: ["id"]
-          },
-        ]
-      }
-      notification_logs: {
-        Row: {
-          channel: string
-          created_at: string
-          error_message: string | null
-          id: string
-          nomination_id: string | null
-          payload: Json
-          provider: string | null
-          provider_message_id: string | null
-          recipient: string
-          related_entity_id: string | null
-          related_entity_type: string | null
-          sent_at: string | null
-          status: string
-          template: string
-          updated_at: string
-        }
-        Insert: {
-          channel: string
-          created_at?: string
-          error_message?: string | null
-          id?: string
-          nomination_id?: string | null
-          payload?: Json
-          provider?: string | null
-          provider_message_id?: string | null
-          recipient: string
-          related_entity_id?: string | null
-          related_entity_type?: string | null
-          sent_at?: string | null
-          status?: string
-          template: string
-          updated_at?: string
-        }
-        Update: {
-          channel?: string
-          created_at?: string
-          error_message?: string | null
-          id?: string
-          nomination_id?: string | null
-          payload?: Json
-          provider?: string | null
-          provider_message_id?: string | null
-          recipient?: string
-          related_entity_id?: string | null
-          related_entity_type?: string | null
-          sent_at?: string | null
-          status?: string
-          template?: string
-          updated_at?: string
-        }
-        Relationships: [
-          {
-            foreignKeyName: "notification_logs_nomination_id_fkey"
-            columns: ["nomination_id"]
-            isOneToOne: false
-            referencedRelation: "nominations"
             referencedColumns: ["id"]
           },
         ]
@@ -5816,126 +5341,6 @@ export type Database = {
           },
         ]
       }
-      sync_batches: {
-        Row: {
-          created_at: string
-          error_message: string | null
-          finished_at: string | null
-          id: string
-          metadata: Json
-          rows_failed: number
-          rows_inserted: number
-          rows_seen: number
-          rows_skipped: number
-          rows_updated: number
-          source_form_id: string | null
-          source_kind: string
-          source_label: string
-          source_sheet_id: string | null
-          started_at: string
-          status: string
-          trigger_kind: string
-          triggered_by: string | null
-          updated_at: string
-        }
-        Insert: {
-          created_at?: string
-          error_message?: string | null
-          finished_at?: string | null
-          id?: string
-          metadata?: Json
-          rows_failed?: number
-          rows_inserted?: number
-          rows_seen?: number
-          rows_skipped?: number
-          rows_updated?: number
-          source_form_id?: string | null
-          source_kind: string
-          source_label: string
-          source_sheet_id?: string | null
-          started_at?: string
-          status?: string
-          trigger_kind?: string
-          triggered_by?: string | null
-          updated_at?: string
-        }
-        Update: {
-          created_at?: string
-          error_message?: string | null
-          finished_at?: string | null
-          id?: string
-          metadata?: Json
-          rows_failed?: number
-          rows_inserted?: number
-          rows_seen?: number
-          rows_skipped?: number
-          rows_updated?: number
-          source_form_id?: string | null
-          source_kind?: string
-          source_label?: string
-          source_sheet_id?: string | null
-          started_at?: string
-          status?: string
-          trigger_kind?: string
-          triggered_by?: string | null
-          updated_at?: string
-        }
-        Relationships: []
-      }
-      sync_logs: {
-        Row: {
-          action: string
-          batch_id: string
-          created_at: string
-          dedupe_score: number | null
-          id: string
-          nomination_id: string | null
-          normalized_payload: Json | null
-          raw_payload: Json | null
-          reason: string | null
-          source_row_id: string | null
-        }
-        Insert: {
-          action: string
-          batch_id: string
-          created_at?: string
-          dedupe_score?: number | null
-          id?: string
-          nomination_id?: string | null
-          normalized_payload?: Json | null
-          raw_payload?: Json | null
-          reason?: string | null
-          source_row_id?: string | null
-        }
-        Update: {
-          action?: string
-          batch_id?: string
-          created_at?: string
-          dedupe_score?: number | null
-          id?: string
-          nomination_id?: string | null
-          normalized_payload?: Json | null
-          raw_payload?: Json | null
-          reason?: string | null
-          source_row_id?: string | null
-        }
-        Relationships: [
-          {
-            foreignKeyName: "sync_logs_batch_id_fkey"
-            columns: ["batch_id"]
-            isOneToOne: false
-            referencedRelation: "sync_batches"
-            referencedColumns: ["id"]
-          },
-          {
-            foreignKeyName: "sync_logs_nomination_id_fkey"
-            columns: ["nomination_id"]
-            isOneToOne: false
-            referencedRelation: "nominations"
-            referencedColumns: ["id"]
-          },
-        ]
-      }
       transactions: {
         Row: {
           amount: number
@@ -6927,133 +6332,79 @@ export type Database = {
           acceptance_status:
             | Database["public"]["Enums"]["acceptance_status"]
             | null
-          award_family: string | null
           bio: string | null
-          category_fit_summary: string | null
           country: string | null
           created_at: string | null
           final_score: number | null
           id: string | null
-          impact_area: string | null
           is_platinum: boolean | null
           jury_score: number | null
           logo_url: string | null
-          media_gallery: Json | null
           name: string | null
           nrc_verified: boolean | null
           organization: string | null
           photo_url: string | null
-          profile_completion_score: number | null
-          profile_status:
-            | Database["public"]["Enums"]["nominee_profile_status"]
-            | null
-          public_documents: Json | null
           public_votes: number | null
-          publication_status:
-            | Database["public"]["Enums"]["nominee_publication_status"]
-            | null
-          published_at: string | null
-          recognition_class: string | null
           region: string | null
-          region_slug: string | null
           renomination_count: number | null
           season_id: string | null
           slug: string | null
-          social_profile_links: Json | null
-          state_slug: string | null
           status: Database["public"]["Enums"]["nomination_status"] | null
           subcategory_id: string | null
           title: string | null
           updated_at: string | null
-          zone_slug: string | null
         }
         Insert: {
           acceptance_status?:
             | Database["public"]["Enums"]["acceptance_status"]
             | null
-          award_family?: string | null
           bio?: string | null
-          category_fit_summary?: string | null
           country?: string | null
           created_at?: string | null
           final_score?: number | null
           id?: string | null
-          impact_area?: string | null
           is_platinum?: boolean | null
           jury_score?: number | null
           logo_url?: string | null
-          media_gallery?: Json | null
           name?: string | null
           nrc_verified?: boolean | null
           organization?: string | null
           photo_url?: string | null
-          profile_completion_score?: number | null
-          profile_status?:
-            | Database["public"]["Enums"]["nominee_profile_status"]
-            | null
-          public_documents?: Json | null
           public_votes?: number | null
-          publication_status?:
-            | Database["public"]["Enums"]["nominee_publication_status"]
-            | null
-          published_at?: string | null
-          recognition_class?: string | null
           region?: string | null
-          region_slug?: string | null
           renomination_count?: number | null
           season_id?: string | null
           slug?: string | null
-          social_profile_links?: Json | null
-          state_slug?: string | null
           status?: Database["public"]["Enums"]["nomination_status"] | null
           subcategory_id?: string | null
           title?: string | null
           updated_at?: string | null
-          zone_slug?: string | null
         }
         Update: {
           acceptance_status?:
             | Database["public"]["Enums"]["acceptance_status"]
             | null
-          award_family?: string | null
           bio?: string | null
-          category_fit_summary?: string | null
           country?: string | null
           created_at?: string | null
           final_score?: number | null
           id?: string | null
-          impact_area?: string | null
           is_platinum?: boolean | null
           jury_score?: number | null
           logo_url?: string | null
-          media_gallery?: Json | null
           name?: string | null
           nrc_verified?: boolean | null
           organization?: string | null
           photo_url?: string | null
-          profile_completion_score?: number | null
-          profile_status?:
-            | Database["public"]["Enums"]["nominee_profile_status"]
-            | null
-          public_documents?: Json | null
           public_votes?: number | null
-          publication_status?:
-            | Database["public"]["Enums"]["nominee_publication_status"]
-            | null
-          published_at?: string | null
-          recognition_class?: string | null
           region?: string | null
-          region_slug?: string | null
           renomination_count?: number | null
           season_id?: string | null
           slug?: string | null
-          social_profile_links?: Json | null
-          state_slug?: string | null
           status?: Database["public"]["Enums"]["nomination_status"] | null
           subcategory_id?: string | null
           title?: string | null
           updated_at?: string | null
-          zone_slug?: string | null
         }
         Relationships: [
           {
@@ -7365,33 +6716,6 @@ export type Database = {
       detect_vote_fraud: { Args: { p_season_id: string }; Returns: Json }
       ensure_user_wallet: { Args: { _user_id: string }; Returns: string }
       escalate_overdue_nrc_assignments: { Args: never; Returns: number }
-      export_nomination_batch: {
-        Args: { p_batch_id: string }
-        Returns: {
-          audit_trail: Json
-          award_category: string
-          award_group: string
-          award_subcategory: string
-          duplicate_of: string
-          duplicate_status: string
-          evidence_status: string
-          form_type: string
-          identity_hash: string
-          impact_summary_clean: string
-          ingested_at: string
-          ingested_by: string
-          intake_id: string
-          nomination_status: string
-          nominee_city_clean: string
-          nominee_country_clean: string
-          nominee_name_clean: string
-          nominee_region_clean: string
-          nominee_type_clean: string
-          record_id: string
-          updated_at: string
-          verification_status: string
-        }[]
-      }
       generate_identity_hash: {
         Args: {
           p_country?: string
@@ -7445,16 +6769,6 @@ export type Database = {
       increment_public_votes: {
         Args: { nominee_id: string }
         Returns: undefined
-      }
-      ingest_nomination_intake_batch: {
-        Args: { p_actor_id?: string; p_batch_id?: string; p_rows: Json }
-        Returns: {
-          batch_id: string
-          duplicate_of: string
-          duplicate_status: string
-          id: string
-          record_id: string
-        }[]
       }
       is_stage_open: {
         Args: { _action: Database["public"]["Enums"]["stage_action"] }
@@ -7578,13 +6892,6 @@ export type Database = {
         | "approved"
         | "rejected"
         | "platinum"
-      nominee_profile_status: "incomplete" | "partial" | "complete"
-      nominee_publication_status:
-        | "draft"
-        | "pending"
-        | "published"
-        | "unpublished"
-        | "archived"
       notification_status: "PENDING" | "SENT" | "FAILED" | "READ"
       nrc_review_decision:
         | "APPROVE"
@@ -7899,14 +7206,6 @@ export const Constants = {
         "approved",
         "rejected",
         "platinum",
-      ],
-      nominee_profile_status: ["incomplete", "partial", "complete"],
-      nominee_publication_status: [
-        "draft",
-        "pending",
-        "published",
-        "unpublished",
-        "archived",
       ],
       notification_status: ["PENDING", "SENT", "FAILED", "READ"],
       nrc_review_decision: [

@@ -6,46 +6,42 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { GFAWalletIcon } from "@/components/ui/GFAWalletIcon";
 import { ArrowLeft, ArrowRight, Minus, Plus, Trash2, ShoppingBag, Package } from "lucide-react";
-import { getCartWithProducts, type LocalCartItem } from "@/api/shop";
-import { useCart } from "@/hooks/useCart";
+import { getCartWithProducts, updateLocalCartItem, removeFromLocalCart, clearLocalCart, type LocalCartItem } from "@/api/shop";
 import { AGC_BONUS_RATE } from "@/types/shop";
 
 export default function Cart() {
   const navigate = useNavigate();
-  const { items: cartSignal, update, remove, clear } = useCart();
   const [cartItems, setCartItems] = useState<LocalCartItem[]>([]);
   const [total, setTotal] = useState(0);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     window.scrollTo(0, 0);
+    loadCart();
   }, []);
 
-  useEffect(() => {
-    let alive = true;
-    (async () => {
-      setLoading(true);
-      const { items, total } = await getCartWithProducts();
-      if (!alive) return;
-      setCartItems(items);
-      setTotal(total);
-      setLoading(false);
-    })();
-    return () => {
-      alive = false;
-    };
-  }, [cartSignal]);
-
-  const handleUpdateQuantity = (productId: string, quantity: number) => {
-    update(productId, quantity);
+  const loadCart = async () => {
+    setLoading(true);
+    const { items, total } = await getCartWithProducts();
+    setCartItems(items);
+    setTotal(total);
+    setLoading(false);
   };
 
-  const handleRemove = (productId: string) => {
-    remove(productId);
+  const handleUpdateQuantity = async (productId: string, quantity: number) => {
+    updateLocalCartItem(productId, quantity);
+    await loadCart();
+  };
+
+  const handleRemove = async (productId: string) => {
+    removeFromLocalCart(productId);
+    await loadCart();
   };
 
   const handleClearCart = () => {
-    clear();
+    clearLocalCart();
+    setCartItems([]);
+    setTotal(0);
   };
 
   const bonusAGC = Math.floor(total * AGC_BONUS_RATE);
