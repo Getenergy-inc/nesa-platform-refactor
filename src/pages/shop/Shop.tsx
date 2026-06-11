@@ -23,12 +23,11 @@ export default function Shop() {
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
   const [category, setCategory] = useState("all");
-  const [cartCount, setCartCount] = useState(0);
+  const { count: cartCount, add } = useCart();
 
   useEffect(() => {
     window.scrollTo(0, 0);
     loadProducts();
-    updateCartCount();
   }, [category]);
 
   const loadProducts = async () => {
@@ -40,14 +39,8 @@ export default function Shop() {
     setLoading(false);
   };
 
-  const updateCartCount = () => {
-    const cart = getLocalCart();
-    setCartCount(cart.reduce((sum, item) => sum + item.quantity, 0));
-  };
-
   const handleAddToCart = (product: Product) => {
-    addToLocalCart(product.id, 1);
-    updateCartCount();
+    add(product.id, 1);
     toast.success(`${product.name} added to cart`);
   };
 
