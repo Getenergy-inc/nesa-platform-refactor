@@ -115,6 +115,7 @@ export function removeFromLocalCart(productId: string) {
 
 export function clearLocalCart() {
   localStorage.removeItem(CART_STORAGE_KEY);
+  emitCartUpdated();
 }
 
 export async function getCartWithProducts(): Promise<{ items: LocalCartItem[]; total: number }> {
