@@ -613,12 +613,23 @@ export default function NominateMvp() {
             </section>
           )}
 
+          <section className="pt-6 border-t border-white/10">
+            <ExistingNomineesInline
+              categorySlug={category?.slug}
+              limit={9}
+              title="Explore Existing Nominees"
+              subtitle={
+                category
+                  ? "Approved nominees already in this category."
+                  : "Approved nominees recognised across NESA-Africa."
+              }
+            />
+          </section>
+
           {/* ── Footer links ─────────────────────────────────────────── */}
-          <section className="pt-6 border-t border-white/10 flex flex-wrap gap-x-6 gap-y-2 text-sm">
-            <Link to="/nominees" className="text-gold hover:underline">
-              Explore Existing Nominees
-            </Link>
+          <section className="pt-6 flex flex-wrap gap-x-6 gap-y-2 text-sm">
             <Link to="/nominate/guidelines" className="text-gold hover:underline">
+
               Nomination Guidelines
             </Link>
             <a
