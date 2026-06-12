@@ -23,6 +23,7 @@ import { BreadcrumbJsonLd } from "@/components/seo/BreadcrumbJsonLd";
 import { CategoryFaqSection } from "./CategoryFaqSection";
 import { CategoryNominationForm } from "./CategoryNominationForm";
 import { CategoryNominationDialog } from "./CategoryNominationDialog";
+import { ExistingNomineesInline } from "@/components/nominees/ExistingNomineesInline";
 import {
   GROUP_META,
   INTEGRITY_DISCLAIMER,
@@ -263,20 +264,15 @@ export function AwardCategoryPage({ config, legacyHero }: Props) {
 
           {/* Explore nominees + Sponsor this category */}
           <div className="mt-6 grid gap-4 md:grid-cols-2">
-            <Card className="border-gold/20 bg-charcoal-light/60">
-              <CardContent className="p-4 md:p-6 flex flex-col h-full">
-                <div className="flex items-center gap-2 text-gold mb-2">
-                  <Search className="h-5 w-5" />
-                  <h3 className="font-semibold">Explore existing nominees</h3>
-                </div>
-                <p className="text-sm text-foreground/75 leading-relaxed mb-4 flex-1">
-                  Browse nominees already recognised in this category. Filter by country, region and institution.
-                </p>
-                <Button asChild size="sm" className="bg-gold text-charcoal hover:bg-gold/90 w-fit">
-                  <Link to={`/nominees?category=${encodeURIComponent(config.slug)}`}>Explore Nominees</Link>
-                </Button>
-              </CardContent>
-            </Card>
+            <div className="md:col-span-1">
+              <ExistingNomineesInline
+                categorySlug={config.slug}
+                limit={9}
+                title="Explore existing nominees"
+                subtitle="Approved nominees already recognised in this category."
+              />
+            </div>
+
 
             <Card className="border-gold/20 bg-charcoal-light/60">
               <CardContent className="p-4 md:p-6 flex flex-col h-full">

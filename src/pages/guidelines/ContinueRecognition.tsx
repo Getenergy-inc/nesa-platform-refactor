@@ -11,6 +11,7 @@ import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
+import { ExistingNomineesInline } from "@/components/nominees/ExistingNomineesInline";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import {
@@ -497,15 +498,17 @@ export default function ContinueRecognition() {
               Every verified update strengthens transparency, supports certificate eligibility,
               and powers the recognition of education changemakers across Africa and the diaspora.
             </p>
+            <div className="mb-7 text-left">
+              <ExistingNomineesInline
+                limit={9}
+                title="Explore Existing Nominees"
+                subtitle="Nominees already recognised — update their impact or recommend again."
+              />
+            </div>
             <div className="flex flex-col sm:flex-row flex-wrap justify-center gap-3">
               <Button asChild size="lg" className="bg-gold hover:bg-gold-dark text-charcoal font-semibold rounded-full gap-2">
                 <Link to="/nominate?mode=renominate">
                   <RefreshCcw className="h-4 w-4" /> Update Impact Now
-                </Link>
-              </Button>
-              <Button asChild size="lg" variant="outline" className="border-gold/40 text-gold hover:bg-gold/10 rounded-full gap-2">
-                <Link to="/nominees">
-                  <Users className="h-4 w-4" /> Explore Existing Nominees
                 </Link>
               </Button>
               <Button asChild size="lg" variant="outline" className="border-ivory/20 text-ivory hover:bg-ivory/5 rounded-full gap-2">
@@ -516,6 +519,7 @@ export default function ContinueRecognition() {
             </div>
           </div>
         </section>
+
       </div>
     </>
   );

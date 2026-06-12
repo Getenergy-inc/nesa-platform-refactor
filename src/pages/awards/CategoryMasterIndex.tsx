@@ -26,6 +26,7 @@ import {
   Handshake,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { ExistingNomineesInline } from "@/components/nominees/ExistingNomineesInline";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
@@ -320,12 +321,17 @@ export default function CategoryMasterIndex() {
               </Link>
             </Button>
             <Button asChild variant="outline" className="border-gold/40 text-gold hover:bg-gold/10">
-              <Link to="/nominees">Explore Existing Nominees</Link>
-            </Button>
-            <Button asChild variant="outline" className="border-gold/40 text-gold hover:bg-gold/10">
               <Link to="/sponsor">Sponsor a Category</Link>
             </Button>
           </div>
+          <div className="mt-8">
+            <ExistingNomineesInline
+              limit={9}
+              title="Explore Existing Nominees"
+              subtitle="A snapshot of approved nominees recognised across all categories."
+            />
+          </div>
+
         </div>
       </section>
 
