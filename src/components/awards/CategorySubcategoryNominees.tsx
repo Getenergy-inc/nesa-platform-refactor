@@ -38,36 +38,51 @@ export function CategorySubcategoryNominees({ form }: Props) {
     const subSlugs = form.subcategories.map((s) => s.slug).filter(Boolean);
 
     (async () => {
-      // Best-effort fetch: filter by category_slug OR any of the subcategory slugs
-      let q = supabase
+      const { data, error } = await supabase
         .from("nominees")
         .select(
-          "id,name,slug,organization,country,photo_url,logo_url,subcategory_slug,category_slug,status",
+          `id,name,slug,organization,country,photo_url,logo_url,status,
+           subcategories:subcategory_id ( slug, name, categories:category_id ( slug ) )`,
         )
         .eq("status", "approved")
-        .limit(120);
+        .limit(200);
 
-      if (subSlugs.length > 0) {
-        q = q.or(
-          [
-            `category_slug.eq.${form.slug}`,
-            `subcategory_slug.in.(${subSlugs.join(",")})`,
-          ].join(","),
-        );
-      } else {
-        q = q.eq("category_slug", form.slug);
-      }
-
-      const { data, error } = await q;
       if (cancelled) return;
       if (error) {
         console.warn("[CategorySubcategoryNominees] fetch failed", error);
         setRows([]);
-      } else {
-        setRows((data as NomineeRow[]) ?? []);
+        setLoading(false);
+        return;
       }
+
+      const mapped: NomineeRow[] = ((data as unknown as Array<Record<string, unknown>>) ?? []).map(
+        (r) => {
+          const sub = r.subcategories as { slug?: string; categories?: { slug?: string } } | null;
+          return {
+            id: r.id as string,
+            name: r.name as string,
+            slug: r.slug as string,
+            organization: (r.organization as string | null) ?? null,
+            country: (r.country as string | null) ?? null,
+            photo_url: (r.photo_url as string | null) ?? null,
+            logo_url: (r.logo_url as string | null) ?? null,
+            status: (r.status as string | null) ?? null,
+            subcategory_slug: sub?.slug ?? null,
+            category_slug: sub?.categories?.slug ?? null,
+          };
+        },
+      );
+
+      const filtered = mapped.filter(
+        (r) =>
+          r.category_slug === form.slug ||
+          (r.subcategory_slug && subSlugs.includes(r.subcategory_slug)),
+      );
+
+      setRows(filtered);
       setLoading(false);
     })();
+
 
     return () => {
       cancelled = true;
