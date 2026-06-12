@@ -23,6 +23,7 @@ import { BreadcrumbJsonLd } from "@/components/seo/BreadcrumbJsonLd";
 import { CategoryFaqSection } from "./CategoryFaqSection";
 import { CategoryNominationForm } from "./CategoryNominationForm";
 import { CategoryNominationDialog } from "./CategoryNominationDialog";
+import { ExistingNomineesInline } from "@/components/nominees/ExistingNomineesInline";
 import {
   GROUP_META,
   INTEGRITY_DISCLAIMER,
