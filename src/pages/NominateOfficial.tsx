@@ -11,6 +11,7 @@ import { Label } from "@/components/ui/label";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Card } from "@/components/ui/card";
 import { CheckCircle2, Loader2 } from "lucide-react";
+import { ExistingNomineesInline } from "@/components/nominees/ExistingNomineesInline";
 
 type FormState = {
   // nominator
