@@ -3,6 +3,7 @@ import { Sparkles, FileCheck, ExternalLink } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { GoogleFormDisplay } from "@/components/nominate/GoogleFormDisplay";
 import { NativeCategoryNominationForm } from "@/components/awards/NativeCategoryNominationForm";
+import { CategorySubcategoryNominees } from "@/components/awards/CategorySubcategoryNominees";
 import {
   AWARD_CATEGORY_FORMS,
   getCategoryFormBySlug,
@@ -133,6 +134,8 @@ export function CategoryNominationForm({ config }: Props) {
             </Link>
           </Button>
         </div>
+
+        {form && <CategorySubcategoryNominees form={form} />}
       </div>
     </section>
   );
