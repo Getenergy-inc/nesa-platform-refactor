@@ -134,6 +134,8 @@ export function CategoryNominationForm({ config }: Props) {
             </Link>
           </Button>
         </div>
+
+        {form && <CategorySubcategoryNominees form={form} />}
       </div>
     </section>
   );
