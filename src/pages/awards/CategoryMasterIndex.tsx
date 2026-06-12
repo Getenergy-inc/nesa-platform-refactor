@@ -329,11 +329,8 @@ export default function CategoryMasterIndex() {
               title="Explore Existing Nominees"
               subtitle="A snapshot of approved nominees recognised across all categories."
             />
-
-            <Button asChild variant="outline" className="border-gold/40 text-gold hover:bg-gold/10">
-              <Link to="/sponsor">Sponsor a Category</Link>
-            </Button>
           </div>
+
         </div>
       </section>
 
