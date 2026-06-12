@@ -172,14 +172,20 @@ export default function NominateOfficial() {
               email update when status changes.
             </p>
             <div className="flex gap-3 justify-center pt-4">
-              <Button variant="outline" onClick={() => navigate("/nominees")}>
-                Browse Existing Nominees
-              </Button>
               <Button onClick={() => { setSubmittedId(null); setForm(init); }}>
                 Submit another
               </Button>
             </div>
           </Card>
+
+          <div className="mt-8">
+            <ExistingNomineesInline
+              limit={9}
+              title="Browse Existing Nominees"
+              subtitle="See the approved nominees already part of the NESA-Africa recognition cycle."
+            />
+          </div>
+
         </div>
       </div>
     );
