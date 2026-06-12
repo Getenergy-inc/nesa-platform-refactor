@@ -25,6 +25,7 @@ import {
 } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { ExistingNomineesInline } from "@/components/nominees/ExistingNomineesInline";
 import {
   Accordion,
   AccordionContent,
