@@ -318,13 +318,19 @@ export function AboutNESASection() {
           })}
         </Accordion>
 
+        {/* Existing nominees inline */}
+        <div className="mt-8 md:mt-10">
+          <ExistingNomineesInline
+            limit={9}
+            title="Explore Existing Nominees"
+            subtitle="Education changemakers already recognised on the NESA-Africa platform."
+          />
+        </div>
+
         {/* CTAs */}
         <div className="mt-8 md:mt-10 flex flex-wrap justify-center gap-3">
           <Button asChild className="bg-accent text-charcoal hover:bg-accent/90">
             <Link to="/nominate">Nominate for 2026</Link>
-          </Button>
-          <Button asChild variant="outline" className="border-accent/40 text-accent hover:bg-accent/10">
-            <Link to="/nominees">Explore Existing Nominees</Link>
           </Button>
           <Button asChild variant="outline" className="border-white/20 text-white hover:bg-white/10">
             <Link to="/about">View the 2026 Journey</Link>
@@ -333,6 +339,7 @@ export function AboutNESASection() {
             <Link to="/sponsors">Partner for Impact</Link>
           </Button>
         </div>
+
       </div>
     </section>
   );
