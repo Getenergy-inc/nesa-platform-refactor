@@ -300,7 +300,8 @@ Deno.serve(async (req) => {
         .from("nominee-media")
         .upload(filePath, bytes, { contentType: mime, upsert: false });
       if (upErr && !String(upErr.message).includes("already exists")) {
-        return err(`Storage upload failed: ${upErr.message}`, 500);
+        console.error("Storage upload failed:", upErr);
+        return err("Upload failed", 500);
       }
 
       const publicUrl = `${Deno.env.get("SUPABASE_URL")}/storage/v1/object/public/nominee-media/${filePath}`;
@@ -329,7 +330,7 @@ Deno.serve(async (req) => {
         .select()
         .single();
 
-      if (insErr) return err(`Registry insert failed: ${insErr.message}`, 500);
+      if (insErr) { console.error("Registry insert failed:", insErr); return err("Registration failed", 500); }
 
       return ok({
         duplicate: false,
@@ -341,7 +342,6 @@ Deno.serve(async (req) => {
     return err("Not found", 404);
   } catch (error: unknown) {
     console.error("Uploads function error:", error);
-    const message = error instanceof Error ? error.message : "Internal server error";
-    return err(message, 500);
+    return err("Internal server error", 500);
   }
 });

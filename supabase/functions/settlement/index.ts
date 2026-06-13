@@ -47,6 +47,29 @@ Deno.serve(async (req) => {
       Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!
     );
 
+    // AUTH: Require admin caller (financial endpoint)
+    const authHeader = req.headers.get("Authorization");
+    const token = authHeader?.replace("Bearer ", "");
+    if (!token) {
+      return new Response(JSON.stringify({ ok: false, error: "Unauthorized" }), {
+        status: 401, headers: { ...corsHeaders, "Content-Type": "application/json" },
+      });
+    }
+    const { data: userData } = await supabase.auth.getUser(token);
+    if (!userData?.user) {
+      return new Response(JSON.stringify({ ok: false, error: "Unauthorized" }), {
+        status: 401, headers: { ...corsHeaders, "Content-Type": "application/json" },
+      });
+    }
+    const { data: isAdmin } = await supabase.rpc("has_role", {
+      _user_id: userData.user.id, _role: "admin",
+    });
+    if (!isAdmin) {
+      return new Response(JSON.stringify({ ok: false, error: "Forbidden" }), {
+        status: 403, headers: { ...corsHeaders, "Content-Type": "application/json" },
+      });
+    }
+
     // Parse request body for manual trigger options
     let manualWindow: { start?: string; end?: string } | null = null;
     let dryRun = false;
@@ -459,7 +482,7 @@ Deno.serve(async (req) => {
     return new Response(
       JSON.stringify({
         ok: false,
-        error: error instanceof Error ? error.message : "Unknown error",
+        error: "Internal server error",
       }),
       {
         status: 500,

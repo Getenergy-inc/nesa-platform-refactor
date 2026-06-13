@@ -206,7 +206,6 @@ Deno.serve(async (req: Request): Promise<Response> => {
     return err("Not found", 404);
   } catch (error: unknown) {
     console.error("Verify API error:", error);
-    const message = error instanceof Error ? error.message : "Internal server error";
-    return err(message, 500);
+    return err("Internal server error", 500);
   }
 });

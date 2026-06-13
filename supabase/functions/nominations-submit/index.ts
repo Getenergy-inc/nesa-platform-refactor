@@ -115,7 +115,7 @@ Deno.serve(async (req) => {
       })
       .select("id")
       .single();
-    if (insErr) return json(500, { error: "Failed to create nominator", details: insErr.message });
+    if (insErr) { console.error("Nominator insert failed:", insErr); return json(500, { error: "Failed to create nominator" }); }
     nominatorId = inserted.id;
   } else {
     await supabase
@@ -174,7 +174,7 @@ Deno.serve(async (req) => {
     .select("id")
     .single();
 
-  if (nomErr) return json(500, { error: "Failed to create nomination", details: nomErr.message });
+  if (nomErr) { console.error("Nomination insert failed:", nomErr); return json(500, { error: "Failed to create nomination" }); }
 
   await supabase.from("notification_logs").insert({
     channel: "system",
