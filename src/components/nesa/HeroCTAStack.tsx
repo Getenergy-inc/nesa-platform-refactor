@@ -75,16 +75,29 @@ export function HeroCTAStack() {
 
       {/* SUPPORT CTAs row — visually lighter */}
       <div className="mt-3 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-2.5">
-        {/* SUPPORT — Explore Nominees */}
+        {/* SUPPORT — Explore Existing Nominees */}
         <motion.div variants={item}>
           <Link
             to="/nominees"
-            aria-label="Explore Nominees"
-            onClick={onCta("explore_nominees", "/nominees")}
+            aria-label="Explore Existing Nominees"
+            onClick={onCta("explore_existing_nominees", "/nominees")}
             className={`${baseBtn} border border-gold/30 bg-charcoal/30 text-white/90 hover:border-gold/50 hover:bg-gold/5 hover:text-gold hover:-translate-y-0.5`}
           >
             <Users className="h-4 w-4 text-gold/80 group-hover:text-gold" />
-            <span className="truncate">Explore Nominees</span>
+            <span className="truncate">Explore Existing Nominees</span>
+          </Link>
+        </motion.div>
+
+        {/* SUPPORT — Explore Award Categories */}
+        <motion.div variants={item}>
+          <Link
+            to="/awards"
+            aria-label="Explore Award Categories"
+            onClick={onCta("explore_award_categories", "/awards")}
+            className={`${baseBtn} border border-gold/30 bg-charcoal/30 text-white/90 hover:border-gold/50 hover:bg-gold/5 hover:text-gold hover:-translate-y-0.5`}
+          >
+            <LayoutGrid className="h-4 w-4 text-gold/80 group-hover:text-gold" />
+            <span className="truncate">Explore Award Categories</span>
           </Link>
         </motion.div>
 
