@@ -132,6 +132,11 @@ export default function VotingPortal() {
           <Link to="/certificates/verify" className="text-gold underline">verification page</Link>.
         </p>
       </section>
+
+      <section className="max-w-5xl mx-auto px-4 pt-12">
+        <ExploreNomineesCTA />
+      </section>
+
     </div>
   );
 }
