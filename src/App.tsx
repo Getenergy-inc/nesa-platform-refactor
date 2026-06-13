@@ -205,6 +205,7 @@ import {
   ForJudges,
   ForVoters,
   ContinueRecognition,
+  ImpactStorytelling,
 } from "./pages/guidelines";
 import Vote from "./pages/Vote";
 import VoteWithAGC from "./pages/VoteWithAGC";
@@ -1990,6 +1991,14 @@ const App = () => (
                   <Route
                     path="/guidelines/update-impact"
                     element={<Navigate to="/guidelines/renomination" replace />}
+                  />
+                  <Route
+                    path="/guidelines/impact-storytelling"
+                    element={
+                      <WithLayout>
+                        <ImpactStorytelling />
+                      </WithLayout>
+                    }
                   />
 
                   {/* Get Involved - Endorse NESA */}
