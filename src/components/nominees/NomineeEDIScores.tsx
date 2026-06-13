@@ -55,7 +55,7 @@ export function NomineeEDIScores({ nomineeId, achievement, category, compact = f
           <div className="flex items-center gap-4">
             <div className="text-center">
               <div className={`text-5xl font-display font-bold ${getGradeColor(scorecard.grade)}`}>
-                {scorecard.overallScore}
+                <AnimatedCounter value={scorecard.overallScore} duration={1400} />
               </div>
               <div className="text-ivory/30 text-xs mt-1">/ 100</div>
             </div>
