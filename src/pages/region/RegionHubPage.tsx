@@ -215,6 +215,20 @@ export function RegionHubPage() {
         {/* 2026–2027 Legacy Impact Section */}
         <RegionLegacySection slug={LEGACY_SLUG_MAP[hub.slug] ?? hub.slug} />
 
+        {/* Nominees in this region — gateway to /nominees pre-filtered */}
+        <section className="py-12 bg-charcoal">
+          <div className="container max-w-5xl mx-auto px-4">
+            <FeaturedNomineesBlock
+              title={`Nominees from ${hub.name}`}
+              subtitle="Approved education changemakers recognised across this region."
+              region={hub.name}
+              limit={6}
+              viewAllHref={`/nominees?region=${hub.slug}`}
+            />
+          </div>
+        </section>
+
+
 
         {/* Other Regions */}
         <section className="py-16 border-t border-gold/10">
