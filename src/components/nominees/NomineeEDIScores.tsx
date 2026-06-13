@@ -83,7 +83,7 @@ export function NomineeEDIScores({ nomineeId, achievement, category, compact = f
         <CardContent className="p-4">
           <div className="flex items-center gap-2 mb-3">
             <BarChart3 className="w-4 h-4 text-gold" />
-            <h3 className="text-sm font-display text-ivory/70 font-medium">5-Pillar Analysis</h3>
+            <h3 className="text-sm font-display text-ivory/70 font-medium">EDI 6-Dimension Analysis</h3>
           </div>
           <div className="h-[240px]">
             <ResponsiveContainer width="100%" height="100%">
