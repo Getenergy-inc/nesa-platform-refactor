@@ -35,7 +35,7 @@ export default function MyCertificates() {
       return;
     }
     getMyCertificates()
-      .then((res) => setCerts(res?.data ?? []))
+      .then((res) => setCerts(res?.data?.data ?? []))
       .catch(() => toast({ title: "Could not load certificates", variant: "destructive" }))
       .finally(() => setLoading(false));
   }, [user]);
