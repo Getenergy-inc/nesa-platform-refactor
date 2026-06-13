@@ -34,6 +34,13 @@ const SAFEGUARDS = [
 ];
 
 export default function VotingPortal() {
+  const [params] = useSearchParams();
+  const justVoted = params.get("just-voted") === "1";
+
+  useEffect(() => {
+    if (justVoted) celebratePop();
+  }, [justVoted]);
+
   return (
     <div className="min-h-screen bg-charcoal text-white pb-20">
       <Helmet>
