@@ -16,6 +16,7 @@ import {
   calculateEDIScorecard, getGradeColor, getGradeBg, getPillarColor, getScoreBandColor,
   type EDIScorecard, PILLAR_KEYS, PILLAR_CONFIG,
 } from "@/lib/ediScoring";
+import { AnimatedCounter } from "@/components/ui/AnimatedCounter";
 
 interface NomineeEDIScoresProps {
   nomineeId: number;
