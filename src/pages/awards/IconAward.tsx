@@ -1,5 +1,6 @@
 import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
+import { FeaturedNomineesBlock } from "@/components/nominees/FeaturedNomineesBlock";
 
 import { AwardTVShowSection } from "@/components/awards/AwardTVShowSection";
 import { AwardCategoriesGrid } from "@/components/awards/AwardCategoriesGrid";
