@@ -1,11 +1,12 @@
 /**
  * NESA Africa — Education Development Index (EDI) Scoring Engine
- * 5-Pillar evaluation with pillar-specific max scores totaling 100:
+ * 6-Pillar evaluation with pillar-specific max scores totaling 100:
  *   Access to Education        — max 20
- *   Learning Quality           — max 25
- *   Institutional Strength     — max 20
- *   Innovation & Technology    — max 20
+ *   Learning Quality           — max 20
+ *   Institutional Strength     — max 15
+ *   Innovation & Technology    — max 15
  *   Sustainability & Inclusion — max 15
+ *   Community Reach            — max 15
  */
 
 export interface EDIPillarScore {
