@@ -264,6 +264,18 @@ export default function IconAward() {
             </Button>
           </div>
         </section>
+
+        <section className="bg-charcoal py-8">
+          <div className="container mx-auto px-4">
+            <FeaturedNomineesBlock
+              awardFamily="icon"
+              title="Existing Africa Education Icon Nominees"
+              subtitle="Discover the legends already in the running for Africa's highest lifetime recognition in education."
+              limit={6}
+              viewAllHref="/nominees?awardFamily=icon"
+            />
+          </div>
+        </section>
       </div>
     </>
   );
