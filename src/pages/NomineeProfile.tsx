@@ -27,6 +27,16 @@ import { getResolvedNomineeImage } from "@/hooks/useResolvedNomineeImages";
 import { getEnrichedProfile } from "@/hooks/useEnrichedProfiles";
 import { useRecentlyViewed } from "@/hooks/useRecentlyViewed";
 import { FollowButton } from "@/components/ui/FollowButton";
+import { NomineeEDIScores } from "@/components/nominees/NomineeEDIScores";
+import { EducationForAllMetrics } from "@/components/nominees/EducationForAllMetrics";
+import { NomineeGovernanceNotice } from "@/components/nominees/NomineeGovernanceNotice";
+
+// Deterministic numeric hash from slug, used as nomineeId for EDI scoring.
+function slugToNumericId(slug: string): number {
+  let h = 0;
+  for (let i = 0; i < slug.length; i++) h = (h * 31 + slug.charCodeAt(i)) >>> 0;
+  return h % 1_000_000 || 1;
+}
 
 // --- helpers ---
 function getInitials(name: string): string {
@@ -214,8 +224,26 @@ export default function NomineeProfile() {
   return (
     <>
       <Helmet>
-        <title>{nominee.name} | NESA-Africa Nominee</title>
+        <title>{`${nominee.name} | NESA-Africa Nominee`}</title>
         <meta name="description" content={`${nominee.name} – Nominated for ${nominee.awardTitle} in ${nominee.subcategoryTitle}. Explore their impact on African education.`} />
+        <link rel="canonical" href={`https://nesaafrica.lovable.app/nominees/${encodeURIComponent(nominee.slug)}`} />
+        <meta property="og:title" content={`${nominee.name} | NESA-Africa Nominee`} />
+        <meta property="og:description" content={`Nominated for ${nominee.awardTitle}. Discover their education impact.`} />
+        <meta property="og:type" content="profile" />
+        {resolved.imageUrl && <meta property="og:image" content={resolved.imageUrl} />}
+        <meta name="twitter:card" content="summary_large_image" />
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": isOrganization(nominee.name) ? "Organization" : "Person",
+            name: nominee.name,
+            description: nominee.achievement || `Nominee for ${nominee.awardTitle}`,
+            url: `https://nesaafrica.lovable.app/nominees/${encodeURIComponent(nominee.slug)}`,
+            image: resolved.imageUrl || undefined,
+            address: nominee.country ? { "@type": "PostalAddress", addressCountry: nominee.country } : undefined,
+            award: nominee.awardTitle,
+          })}
+        </script>
       </Helmet>
 
       <div className="min-h-screen bg-charcoal text-ivory">
@@ -363,6 +391,39 @@ export default function NomineeProfile() {
               {enrichedProfile && enrichedProfile.status === "approved" && (
                 <EnrichedProfileCard profile={enrichedProfile} nomineeName={nominee.name} />
               )}
+
+              {/* ===== Education for All — Impact Metrics ===== */}
+              <EducationForAllMetrics
+                nomineeName={nominee.name}
+                metrics={(enrichedProfile as any)?.impact_metrics}
+              />
+
+              {/* ===== EDI Matrix — 6-Pillar Scorecard ===== */}
+              <Card className="bg-charcoal-light/50 border-gold/10">
+                <CardContent className="p-6 md:p-8">
+                  <div className="flex items-center gap-3 mb-5">
+                    <div className="w-10 h-10 rounded-full bg-gold/10 flex items-center justify-center">
+                      <TrendingUp className="w-5 h-5 text-gold" />
+                    </div>
+                    <div>
+                      <h2 className="text-xl font-display text-ivory font-semibold">
+                        Education Development Index (EDI) Matrix
+                      </h2>
+                      <p className="text-[11px] text-ivory/55 mt-0.5">
+                        6-pillar evaluation aligned with NESA-Africa governance standards.
+                      </p>
+                    </div>
+                  </div>
+                  <NomineeEDIScores
+                    nomineeId={slugToNumericId(nominee.slug)}
+                    achievement={nominee.achievement || ""}
+                    category={nominee.subcategoryTitle || nominee.awardTitle}
+                  />
+                </CardContent>
+              </Card>
+
+              {/* Governance disclaimer */}
+              <NomineeGovernanceNotice variant="banner" />
 
               {/* Impact Highlights */}
               <Card className="bg-charcoal-light/50 border-gold/10">
