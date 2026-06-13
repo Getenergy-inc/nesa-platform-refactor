@@ -14,6 +14,7 @@ import {
   type RevenueSplit,
 } from "@/components/dashboard/wallet";
 import type { WalletBalance, WalletLedgerEntry, Referral } from "@/types/wallet";
+import { ExploreNomineesCTA } from "@/components/nominees/ExploreNomineesCTA";
 
 function DashboardContent() {
   const { user } = useAuth();
