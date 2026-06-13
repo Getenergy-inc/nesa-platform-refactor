@@ -9,6 +9,7 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/
 import { useAuth } from "@/contexts/AuthContext";
 import { getMyCertificates, type Certificate } from "@/api/certificates";
 import { toast } from "@/hooks/use-toast";
+import { celebrateBurst } from "@/lib/celebrate";
 
 const tierStyles: Record<string, string> = {
   platinum: "from-slate-300 to-slate-500 text-slate-900",
