@@ -174,6 +174,9 @@ import {
   JudgeChatRoom,
   JudgeIconLifetime,
 } from "./pages/judge";
+import JudgeOnboarding from "./pages/judge/JudgeOnboarding";
+import MyCertificates from "./pages/MyCertificates";
+import VotingPortal from "./pages/VotingPortal";
 import { JudgeArenaGuard } from "./components/judge/JudgeArenaGuard";
 import Partners from "./pages/Partners";
 import Chapters from "./pages/Chapters";
@@ -703,6 +706,24 @@ const App = () => (
                       </WithLayout>
                     }
                   />
+                  <Route
+                    path="/my-certificates"
+                    element={
+                      <WithLayout>
+                        <MyCertificates />
+                      </WithLayout>
+                    }
+                  />
+                  <Route
+                    path="/voting-portal"
+                    element={
+                      <WithLayout>
+                        <VotingPortal />
+                      </WithLayout>
+                    }
+                  />
+
+
 
                   {/* Pathways to Recognition — dedicated page + 4 award category pages */}
                   <Route
@@ -1760,6 +1781,14 @@ const App = () => (
                     element={
                       <JudgeArenaGuard>
                         <JudgeDashboard />
+                      </JudgeArenaGuard>
+                    }
+                  />
+                  <Route
+                    path="/judge/onboarding"
+                    element={
+                      <JudgeArenaGuard>
+                        <JudgeOnboarding />
                       </JudgeArenaGuard>
                     }
                   />
