@@ -89,6 +89,18 @@ export default function GoldSpecialRecognition() {
           ]}
         />
 
+        <section className="bg-charcoal py-8">
+          <div className="container mx-auto px-4">
+            <FeaturedNomineesBlock
+              awardFamily="gold-bluegarnet"
+              title="Existing Gold Special Recognition Nominees"
+              subtitle="Discover the honourees already nominated for this premium 2025 tier."
+              limit={6}
+              viewAllHref="/nominees?awardFamily=gold-bluegarnet"
+            />
+          </div>
+        </section>
+
         <NESAFooter />
       </div>
     </>
