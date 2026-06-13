@@ -84,6 +84,11 @@ export function NESALandingPage() {
           <FeaturedChangemakersSection />
         </LazySection>
 
+        {/* 2d. HALL OF FAME SPOTLIGHT — curated marquee approved nominees */}
+        <LazySection>
+          <CuratedFeaturedNominees />
+        </LazySection>
+
         {/* 3. COUNTDOWN — Blue Garnet 2026 Gala urgency */}
         <CountdownSection />
 
