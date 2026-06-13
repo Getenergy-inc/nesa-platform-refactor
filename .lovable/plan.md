@@ -1,127 +1,63 @@
-## Refactor: Influencer Education Impact Award 2026 Recognition Page
+## Scope
 
-Route: `/awards/influencers-education-impact-2026-recognition`
-Current page: `src/pages/awards/GoldSpecialRecognition.tsx` (95-line shell composed of `BrandedCategoryHero`, `BrandedDocumentaryPreview`, `GoldTrackNavGrid`, `GoldSpecialRecognitionSection`, `AwardStandardStack`).
-Current data: `src/data/goldSpecialRecognition.ts` (3 hardcoded tracks: Sports / Music / Social Media).
+You picked "ALL" for every option, so this is a multi-phase build. To ship safely without breaking the live site, I'll deliver it in 4 sequential phases. Each phase is independently shippable and visible in preview.
 
-This is a large refactor that spans content, taxonomy config, a new nominee-discovery UI, and a small DB schema addition for the classification fields. I will ship it in 4 phases so each can be reviewed before the next runs.
+## Phase 1 — `/nominees` Hub Redesign (ship first)
 
----
+Rebuild `src/pages/nominees/NomineesHubPage.tsx` as a visual-first directory.
 
-### Phase 1 — Taxonomy & config (no DB, no UI yet)
+- **Hero block**: Title "Explore Existing Nominees", subtitle, governance disclaimer chip, primary CTAs (Nominate 2026 / View Categories / Regional Nominees).
+- **NomineeQuickStatsBar** (already added) — keep and polish.
+- **Discovery filters bar**: Award Group, Region (8), Country, Category, Subcategory, Year, Institution Type, Search. URL-synced (`?award=&region=&country=&q=`).
+- **NomineeCardV2** component: photo (with org-vs-person fit rules), name, country flag, region, category badge, organisation, verification badge, year, 1-line impact summary, compact EDI badge (via `<CompactEDI>`), buttons View Profile / Share / Recommend Again.
+- **Responsive grid**: 4 cols desktop / 3 tablet / 2 mobile-landscape / 1 mobile. Book-style pagination (existing system).
+- **Mobile**: swipeable Featured carousel at top.
 
-Add a single source-of-truth config for the new framework:
+## Phase 2 — Interactive Africa Map + Region Explorer
 
-`src/config/awards/influencerImpact2026.ts`
+- New `src/components/nominees/AfricaRegionMap.tsx`: SVG of Africa with 8 clickable regions, hover tooltips showing nominee counts (from `useRegionNomineeCounts`).
+- Region chip fallback grid below the map for mobile/a11y.
+- Click → filter the hub to that region (updates URL).
+- Embed on `/nominees` between hero and filters.
 
-```text
-INFLUENCER_AWARD = {
-  family: "Influencer Education Impact Award 2026",
-  recognitionClasses: ["African Living in Africa", "African in the Diaspora"],
-  regions: ["West Africa","East Africa","Southern Africa","Central Africa","North Africa"],
-  categories: [
-    {
-      id: "social-media",
-      title: "African Social Media Influencers Education Impact Award",
-      platforms: [12 entries — Facebook…Multi-Platform],
-      contentImpactAreas: [10 entries — Education Content Creator…Leadership],
-      classificationFields: ["primary_social_media_platform","content_impact_area"],
-    },
-    {
-      id: "sports",
-      title: "African Sports Icons Supporting Education",
-      sportAreas: [11 entries — Football…Multi-Sport Athlete],
-      impactAreas: [9 entries — Scholarship Support…Out-of-School Child Support],
-      classificationFields: ["primary_sport_area","sports_education_impact_area"],
-    },
-    {
-      id: "music",
-      title: "African Music Icons Supporting Education",
-      genres: [10 entries — Afrobeats…Multi-Genre Artist],
-      impactAreas: [9 entries — Scholarships…Cultural Identity Education],
-      classificationFields: ["music_genre","music_education_impact_area"],
-    },
-  ],
-  evidenceCategories: [8 entries — Scholarships Supported…Girls Education Projects Supported],
-  edxWeights: { education: 25, development: 30, excellence: 45 },
-  governanceRules: [4 disqualifier statements],
-}
-```
+## Phase 3 — Nominee Profile Page Rebuild (`/nominees/[slug]`)
 
-This config drives the hero stats bar, the 3 category cards, nominee filters, profile chips, and the Google-Form-style nomination flow's conditional logic. Nothing else duplicates the lists.
+Rebuild profile with these sections:
+1. **Hero header** — large photo, name, country/region, category badge, organisation, verification badge, impact headline.
+2. **Biography** — from `bio` / enriched profile `summary_2025`.
+3. **Education Impact Story** — Problem → Intervention → Results → Vision (from `nominee_enrichments.education_for_all_contributions`; falls back to bio).
+4. **Education for All metrics** — learners reached, schools, teachers trained, scholarships, communities (read from `nominee_enrichments` JSON; show "Pending verification" when missing).
+5. **EDI Matrix** — full `NomineeEDIScores` (already built) with radar + 5 pillar bars + overall grade + benchmarking vs category/region average.
+6. **6th pillar (Community Reach)** — extend `src/lib/ediScoring.ts` `PILLAR_KEYS` to add Community Reach with deterministic scoring; update radar to 6 axes.
+7. **Media gallery** — uses `useNomineeMedia` (existing).
+8. **Related nominees** — same category or region, top 4 by votes.
+9. **Sponsor recognition** — if present in `sponsor_links`.
+10. **Sticky action bar** — Share, Recommend Again, Explore Category, Explore Region.
+11. **SEO** — `react-helmet-async` with JSON-LD `Person`/`Organization` schema, OG image, canonical.
 
-### Phase 2 — Database (small, additive)
+## Phase 4 — Cross-Surface Embeds
 
-The site already has a `nominees` table. The new framework only adds *classification* fields specific to this award family. I will add one new table, `influencer_impact_nominees`, scoped to this award, plus the standard GRANT + RLS block. No FK to `auth.users`.
+A single reusable `<FeaturedNomineesBlock filter={{ category|region|award }} limit={6} />` component (refactor existing `ExistingNomineesInline`). Inject into:
+- Award category pages (`AwardCategoryPage`)
+- Subcategory pages
+- Regional pages
+- Icon, Blue Garnet, Gold, Platinum, Influencer pages
+- Sponsor + Judge dashboards (read-only preview)
 
-Columns (domain-specific, per spec):
+## Technical Notes
 
-- Common: award_family, award_category, recognition_class, nominee_name, nominee_country, nominee_region, education_impact_summary, evidence_links (text[]), verification_status
-- Social Media: primary_social_media_platform, other_platforms (text[]), content_impact_area, follower_count_range, platform_profile_link
-- Sports: primary_sport_area, club_team_or_foundation, sports_education_impact_area, athlete_status, sports_profile_link
-- Music: music_genre, other_music_genres (text[]), stage_name, label_or_foundation, music_education_impact_area, artist_profile_link
+- **EDI 6th pillar**: edit `src/lib/ediScoring.ts` — add `community_reach` to `PILLAR_KEYS`, `PILLAR_CONFIG` (weight ~15%, rebalance others), `getPillarColor`. All existing callers continue to work.
+- **No schema migration** in this build — impact metrics rendered from existing `nominee_enrichments` table when present, with "Pending verification" placeholder otherwise. (Migration can be a follow-up phase if you want admin-editable metrics.)
+- **Data source**: `useNominees` (existing, hits `public_nominees` view) + `useEnrichedProfiles` (existing) + `nominee_enrichments` table.
+- **Disclaimer chip**: shared `<NomineeGovernanceNotice />` component reused across hub, cards, and profile.
+- **No backend / RLS changes** required.
 
-RLS:
-- `anon` + `authenticated` read rows where `verification_status = 'VERIFIED'`
-- `authenticated` insert into their own `submitted_by = auth.uid()` rows (status auto-set to `PENDING`)
-- Admin / NRC reviewer roles (`has_role(uid,'admin')`, `has_role_code(uid,'NRC_REVIEWER')`) can update verification_status
-- `service_role` full access
+## What I will NOT do this turn
 
-A short seed migration will copy the 9 existing `GOLD_CATEGORIES` nominees into this table with the new classification fields populated (one-time backfill so the page is not empty on first deploy).
+- Will not change nomination flows, voting, or auth.
+- Will not modify `client.ts` or `types.ts`.
+- Will not delete legacy `NomineesHubPage` until Phase 1 replacement is verified.
 
-### Phase 3 — Page refactor (UI)
+## Confirmation needed
 
-Replace `src/pages/awards/GoldSpecialRecognition.tsx` content (keep the same route) with a composition of new section components, each ≤200 lines:
-
-```text
-src/pages/awards/InfluencerImpact2026.tsx           ← new page (route handler unchanged)
-src/components/influencer-impact/
-  HeroSection.tsx          // new headline, sub, 5-stat bar, 4 CTAs
-  RecognitionClassFilter.tsx
-  CategoryCards.tsx        // 3 reframed category cards w/ classification chips
-  NomineeDiscovery.tsx     // searchable + filterable nominee grid
-  NomineeCard.tsx          // photo, name, country, class, category, classification,
-                           //   impact area, verified noms count, status, 4 actions
-  EvidenceImpactSection.tsx
-  GovernanceNotice.tsx
-  EDXFrameworkPanel.tsx    // 25/30/45 weights w/ examples per category
-useInfluencerNominees.ts   // Supabase hook (filter, search, paginate)
-```
-
-Filters wired to taxonomy config: Category, Recognition Class, Region, Country, Platform, Sport Area, Music Genre, Education Impact Area, Verification Status. Search hits nominee_name, label_or_foundation, club_team_or_foundation, stage_name, platform_profile_link, sports_profile_link, artist_profile_link.
-
-CTA wiring:
-- Nominate an Influencer → existing nomination flow `/nominate?family=influencer-education-impact&category=<id>` (conditional logic already supported in `NomineeEntryForm`; I'll extend `src/config/nomination/awardCategoryForms.ts` to surface the new platform / sport / genre selects per category).
-- Explore Existing Nominees → scrolls to `#nominees`
-- Become a Reviewer → existing `/nrc/apply`
-- Earn AGC Voting Coin → existing `/earn-agc`
-
-The existing `GoldSpecialRecognition.tsx` shell will redirect to `InfluencerImpact2026.tsx` (same path, swap the element in `App.tsx`). The legacy `/awards/gold-special-recognition` redirect stays intact.
-
-The old `goldSpecialRecognition.ts` data file is left in place (other pages still import it via `GoldSpecialRecognitionSection`); the new page does NOT consume it. We can deprecate it in a later cleanup pass.
-
-### Phase 4 — Tests + governance
-
-- Unit: taxonomy config invariants (3 categories, classification arrays non-empty, no duplicate platform/genre/sport entries, classification fields named exactly as DB columns).
-- Unit: `NomineeCard` renders all required chips for each category type.
-- Unit: filter reducer (category + recognition class + region intersection).
-- E2E (Playwright, single spec): page loads → hero stats visible → switching category card scrolls to discovery → applying Recognition Class filter narrows result count → "Nominate an Influencer" navigates with correct query string.
-- Governance notice rendered as semantic `<aside role="note">` so screen readers announce the 4 disqualifier rules.
-
----
-
-### Out of scope (call out explicitly)
-
-- The Google Form itself is external; I will only extend the in-app nomination flow's conditional logic and link Google-Form CTAs where the user has previously supplied form URLs. If a fresh Form URL per category is needed I'll ask before Phase 3.
-- NRC verification queue UI changes — the page only *reads* `verification_status`. Reviewer dashboards stay as-is.
-- AGC voting allocation tweaks — the existing `/earn-agc` flow is linked, not modified.
-- Removing the legacy `GOLD_CATEGORIES` data and `GoldSpecialRecognitionSection` — kept for backward compatibility; cleanup in a follow-up.
-
-### Order of operations
-
-1. Phase 1 config (single PR-sized change, no risk).
-2. Phase 2 migration via the migration tool — needs your approval before it runs.
-3. Phase 3 page refactor consuming Phase 1 config + Phase 2 table (with a graceful empty state if the table is unseeded).
-4. Phase 4 tests + CI wiring.
-
-**Confirm to proceed, or tell me to start at a specific phase (e.g. "skip the DB table, render from the config-only seed list for now").**
+Approve and I'll start Phase 1 immediately, then proceed phase-by-phase. If you'd rather I ship all 4 phases without intermediate check-ins, say "ship all phases" and I'll batch the work.
