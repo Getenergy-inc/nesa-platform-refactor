@@ -11,6 +11,7 @@ import { EDXFrameworkPanel } from "@/components/influencer-impact/EDXFrameworkPa
 import { GovernanceNotice } from "@/components/influencer-impact/GovernanceNotice";
 import { ProjectTimelineSection } from "@/components/influencer-impact/ProjectTimelineSection";
 import { AWARD_ROUTE, type CategoryId } from "@/config/awards/influencerImpact2026";
+import { FeaturedNomineesBlock } from "@/components/nominees/FeaturedNomineesBlock";
 
 export default function InfluencerImpact2026() {
   const [category, setCategory] = useState<CategoryId | "all">("all");
