@@ -7,6 +7,7 @@ import { NESAHeader } from "@/components/nesa/NESAHeader";
 import { NESAFooter } from "@/components/nesa/NESAFooter";
 import { getRegionHubBySlug, REGION_HUBS } from "@/config/regionHubs";
 import { RegionLegacySection } from "@/components/region/RegionLegacySection";
+import { FeaturedNomineesBlock } from "@/components/nominees/FeaturedNomineesBlock";
 
 // Map public region-hub slugs to the 8 legacy hub slugs used in RegionalLegacyEcosystem.
 const LEGACY_SLUG_MAP: Record<string, string> = {
