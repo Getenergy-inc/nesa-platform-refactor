@@ -30,6 +30,8 @@ import { FollowButton } from "@/components/ui/FollowButton";
 import { NomineeEDIScores } from "@/components/nominees/NomineeEDIScores";
 import { EducationForAllMetrics } from "@/components/nominees/EducationForAllMetrics";
 import { NomineeGovernanceNotice } from "@/components/nominees/NomineeGovernanceNotice";
+import { ImpactStoryArc } from "@/components/nominees/ImpactStoryArc";
+import { EDIStoryBullets } from "@/components/nominees/EDIStoryBullets";
 
 // Deterministic numeric hash from slug, used as nomineeId for EDI scoring.
 function slugToNumericId(slug: string): number {
@@ -358,6 +360,9 @@ export default function NomineeProfile() {
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
             {/* Main Column */}
             <div className="lg:col-span-2 space-y-8">
+              {/* Impact Story Arc — Problem → Intervention → Results → Vision */}
+              <ImpactStoryArc nominee={nominee} />
+
               {/* Recognition Citation */}
               <Card className="bg-charcoal-light/60 border-gold/15 text-ivory">
                 <CardContent className="p-6 md:p-8">
@@ -425,6 +430,14 @@ export default function NomineeProfile() {
                     achievement={nominee.achievement || ""}
                     category={nominee.subcategoryTitle || nominee.awardTitle}
                   />
+                  <div className="mt-4">
+                    <EDIStoryBullets
+                      nomineeId={slugToNumericId(nominee.slug)}
+                      achievement={nominee.achievement || ""}
+                      category={nominee.subcategoryTitle || nominee.awardTitle}
+                      nomineeName={nominee.name}
+                    />
+                  </div>
                 </CardContent>
               </Card>
 
