@@ -67,6 +67,17 @@ export default function InfluencerImpact2026() {
         <EDXFrameworkPanel />
         <ProjectTimelineSection />
         <GovernanceNotice />
+        <section className="bg-charcoal py-8">
+          <div className="container mx-auto px-4">
+            <FeaturedNomineesBlock
+              awardFamily="influencer"
+              title="Existing Influencer Nominees"
+              subtitle="Creators and voices already nominated for the Influencer Education Impact Award 2026."
+              limit={6}
+              viewAllHref="/nominees?awardFamily=influencer"
+            />
+          </div>
+        </section>
         <NESAFooter />
       </div>
     </>
