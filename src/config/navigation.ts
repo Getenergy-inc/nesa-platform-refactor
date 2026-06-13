@@ -131,6 +131,7 @@ export const MAIN_NAV: NavItem[] = [
       { label: "Voting & Judging Integrity", href: "/policies/voting-integrity", description: "Firewalls protecting outcomes", icon: Shield },
       { label: "Explore Existing Nominees", href: "/nominees", description: "Africa's Education Impact Directory — every approved nominee", icon: Users },
       { label: "EDI Matrix Methodology", href: "/guidelines/edi-matrix#how-edi-is-calculated", description: "How the 6-dimension Education Development Index is calculated", icon: Shield },
+      { label: "Impact Storytelling Guide", href: "/guidelines/impact-storytelling", description: "Templates for telling a compelling Education Impact Story", icon: BookOpen },
     ],
   },
 
