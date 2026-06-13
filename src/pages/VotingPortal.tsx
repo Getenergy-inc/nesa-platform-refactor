@@ -51,6 +51,18 @@ export default function VotingPortal() {
         />
       </Helmet>
 
+      {justVoted && (
+        <div className="bg-gradient-to-r from-gold/20 via-gold/10 to-transparent border-b border-gold/30 px-4 py-3">
+          <div className="max-w-5xl mx-auto flex items-center gap-3 text-sm text-white">
+            <Sparkles className="h-5 w-5 text-gold animate-pulse shrink-0" />
+            <p>
+              <span className="font-semibold text-gold">Vote recorded.</span> Thank you for shaping
+              Africa&rsquo;s education honours — your voice has been securely counted.
+            </p>
+          </div>
+        </div>
+      )}
+
       {/* Hero */}
       <section className="border-b border-white/10 bg-gradient-to-b from-charcoal-dark to-charcoal py-14 px-4">
         <div className="max-w-5xl mx-auto space-y-4">
