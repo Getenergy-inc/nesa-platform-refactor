@@ -23,7 +23,8 @@ export type EDIPillarKey =
   | "quality"
   | "institutional"
   | "innovation"
-  | "sustainability";
+  | "sustainability"
+  | "community";
 
 export interface EDIScorecard {
   nomineeId: number;
@@ -45,19 +46,19 @@ export const PILLAR_CONFIG: Record<EDIPillarKey, { label: string; maxScore: numb
   },
   quality: {
     label: "Learning Quality",
-    maxScore: 25,
+    maxScore: 20,
     description: "Curriculum reform, teacher training, academic standards, literacy improvement, learning outcomes.",
     keywords: ["training", "teacher", "curriculum", "learning", "pedagogy", "mentorship", "literacy", "exam", "quality", "standards"],
   },
   institutional: {
     label: "Institutional Strength",
-    maxScore: 20,
+    maxScore: 15,
     description: "Universities founded, national reforms, institutional leadership, governance improvements.",
     keywords: ["policy", "government", "state", "ministry", "governance", "accreditation", "university", "reform", "leadership", "institution"],
   },
   innovation: {
     label: "Innovation & Technology",
-    maxScore: 20,
+    maxScore: 15,
     description: "EdTech platforms, digital learning, AI in education, STEM programs, technical education.",
     keywords: ["technology", "digital", "ict", "stem", "innovation", "e-learning", "platform", "coding", "ai", "data"],
   },
@@ -67,9 +68,15 @@ export const PILLAR_CONFIG: Record<EDIPillarKey, { label: string; maxScore: numb
     description: "Scalable programs, community ownership, funding sustainability, marginalized learner inclusion.",
     keywords: ["inclusion", "gender", "disability", "community", "sustainable", "environment", "scalable", "equity", "women", "peace"],
   },
+  community: {
+    label: "Community Reach",
+    maxScore: 15,
+    description: "Geographic spread, grassroots engagement, partnerships, multi-country footprint and local ownership.",
+    keywords: ["community", "grassroots", "partnership", "network", "regional", "national", "continental", "village", "outreach", "engagement", "alliance"],
+  },
 };
 
-export const PILLAR_KEYS: EDIPillarKey[] = ["access", "quality", "institutional", "innovation", "sustainability"];
+export const PILLAR_KEYS: EDIPillarKey[] = ["access", "quality", "institutional", "innovation", "sustainability", "community"];
 
 function gradeFromScore(score: number): EDIGrade {
   if (score >= 90) return "A+";
