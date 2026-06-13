@@ -12,14 +12,14 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
 
-const dimensions = [
+const dimensions: { key: string; label: string; desc: string }[] = [
   { key: "equity", label: "Equity", desc: "Fair access and opportunity across populations served." },
   { key: "depth", label: "Depth of Impact", desc: "Tangible, measurable change in learners' lives." },
-  { key: "innovation", label: "Innovation", desc: "Originality and creativity of the approach." },"" as any,
+  { key: "innovation", label: "Innovation", desc: "Originality and creativity of the approach." },
   { key: "scalability", label: "Scalability", desc: "Potential to replicate or expand the model." },
   { key: "sustainability", label: "Sustainability", desc: "Financial, operational, and ecological durability." },
   { key: "integrity", label: "Integrity", desc: "Governance, transparency, and ethical conduct." },
-].filter(Boolean) as { key: string; label: string; desc: string }[];
+];
 
 export default function ArenaReview() {
   const { slug = "shofco-kenya" } = useParams();
