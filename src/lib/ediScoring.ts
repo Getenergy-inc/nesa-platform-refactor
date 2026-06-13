@@ -229,9 +229,10 @@ export function getGradeBg(grade: EDIGrade): string {
 export function getPillarColor(key: EDIPillarKey): string {
   switch (key) {
     case "access": return "#10b981";
-    case "quality": return "#3b82f6";
+    case "quality": return "#eab308";
     case "institutional": return "#f59e0b";
-    case "innovation": return "#8b5cf6";
+    case "innovation": return "#d97706";
     case "sustainability": return "#06b6d4";
+    case "community": return "#ec4899";
   }
 }
