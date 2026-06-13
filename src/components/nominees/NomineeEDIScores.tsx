@@ -124,27 +124,34 @@ export function NomineeEDIScores({ nomineeId, achievement, category, compact = f
       {/* Pillar Score Bars */}
       <Card className="bg-charcoal-light/50 border-gold/10">
         <CardContent className="p-4 space-y-4">
-          <h3 className="text-sm font-display text-ivory/70 font-medium">Pillar Breakdown</h3>
-          {scorecard.pillars.map(p => (
-            <div key={p.key} className="space-y-1.5">
-              <div className="flex items-center justify-between">
-                <span className="text-xs text-ivory/60">{p.pillar}</span>
-                <span className="text-xs font-semibold text-ivory/80">
-                  {p.score} <span className="text-ivory/30">/ {p.maxScore}</span>
-                </span>
+          <h3 className="text-sm font-display text-ivory/70 font-medium">Dimension Breakdown</h3>
+          {scorecard.pillars.map(p => {
+            const band = getScoreBandColor(p.score);
+            return (
+              <div key={p.key} className="space-y-1.5">
+                <div className="flex items-center justify-between">
+                  <span className="text-xs text-ivory/60 flex items-center gap-1.5">
+                    <span className="inline-block w-2 h-2 rounded-full" style={{ backgroundColor: getPillarColor(p.key) }} />
+                    {p.pillar}
+                  </span>
+                  <span className="text-xs font-semibold text-ivory/80 flex items-center gap-1.5">
+                    <span className={band.text}>{Math.round(p.score)}</span>
+                    <span className="text-ivory/30">/ 100</span>
+                    <Badge variant="outline" className={`text-[9px] px-1 py-0 ${band.text} border-current`}>
+                      {band.label}
+                    </Badge>
+                  </span>
+                </div>
+                <div className="relative h-2.5 w-full overflow-hidden rounded-full bg-charcoal">
+                  <div
+                    className="h-full rounded-full transition-all duration-700"
+                    style={{ width: `${p.score}%`, backgroundColor: band.hex }}
+                  />
+                </div>
+                <p className="text-[10px] text-ivory/30 leading-relaxed">{p.description}</p>
               </div>
-              <div className="relative h-2.5 w-full overflow-hidden rounded-full bg-charcoal">
-                <div
-                  className="h-full rounded-full transition-all duration-700"
-                  style={{
-                    width: `${p.percentage}%`,
-                    backgroundColor: getPillarColor(p.key),
-                  }}
-                />
-              </div>
-              <p className="text-[10px] text-ivory/30 leading-relaxed">{p.description}</p>
-            </div>
-          ))}
+            );
+          })}
         </CardContent>
       </Card>
 
