@@ -98,6 +98,12 @@ function DashboardContent() {
         {/* Announcements + Quick Links */}
         <AnnouncementsPanel />
 
+        {/* Explore Africa's Education Impact Directory */}
+        <ExploreNomineesCTA
+          title="Explore Africa's Education Impact Directory"
+          description="Discover approved educators, innovators, institutions, and changemakers across every region and category."
+        />
+
         {/* Wallet + Referral row */}
         <div className="grid gap-4 lg:grid-cols-2">
           <TransactionsList transactions={transactions} loading={loading} limit={5} />
