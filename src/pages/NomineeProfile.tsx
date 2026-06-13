@@ -405,14 +405,20 @@ export default function NomineeProfile() {
                     <div className="w-10 h-10 rounded-full bg-gold/10 flex items-center justify-center">
                       <TrendingUp className="w-5 h-5 text-gold" />
                     </div>
-                    <div>
+                    <div className="flex-1">
                       <h2 className="text-xl font-display text-ivory font-semibold">
                         Education Development Index (EDI) Matrix
                       </h2>
                       <p className="text-[11px] text-ivory/55 mt-0.5">
-                        6-pillar evaluation aligned with NESA-Africa governance standards.
+                        6-dimension evaluation aligned with NESA-Africa governance standards.
                       </p>
                     </div>
+                    <Link
+                      to="/guidelines/edi-matrix#how-edi-is-calculated"
+                      className="hidden sm:inline-flex items-center gap-1 text-[11px] text-gold/80 hover:text-gold border border-gold/30 hover:border-gold rounded-full px-3 py-1 transition-colors"
+                    >
+                      How EDI is calculated →
+                    </Link>
                   </div>
                   <NomineeEDIScores
                     nomineeId={slugToNumericId(nominee.slug)}
