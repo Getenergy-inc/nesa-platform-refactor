@@ -7,6 +7,7 @@ import { BrandedDocumentaryPreview } from "@/components/awards/BrandedDocumentar
 import { GoldTrackNavGrid } from "@/components/awards/GoldTrackNavGrid";
 import { BreadcrumbJsonLd } from "@/components/seo/BreadcrumbJsonLd";
 import { AwardStandardStack } from "@/components/awards/AwardStandardSections";
+import { FeaturedNomineesBlock } from "@/components/nominees/FeaturedNomineesBlock";
 
 export default function GoldSpecialRecognition() {
   return (
@@ -87,6 +88,18 @@ export default function GoldSpecialRecognition() {
             { q: "Is public voting used?", a: "Public participation is used in eligible tracks; final recognition is governed by the EDX Matrix and integrity rules." },
           ]}
         />
+
+        <section className="bg-charcoal py-8">
+          <div className="container mx-auto px-4">
+            <FeaturedNomineesBlock
+              awardFamily="gold-bluegarnet"
+              title="Existing Gold Special Recognition Nominees"
+              subtitle="Discover the honourees already nominated for this premium 2025 tier."
+              limit={6}
+              viewAllHref="/nominees?awardFamily=gold-bluegarnet"
+            />
+          </div>
+        </section>
 
         <NESAFooter />
       </div>
