@@ -174,6 +174,9 @@ import {
   JudgeChatRoom,
   JudgeIconLifetime,
 } from "./pages/judge";
+import JudgeOnboarding from "./pages/judge/JudgeOnboarding";
+import MyCertificates from "./pages/MyCertificates";
+import VotingPortal from "./pages/VotingPortal";
 import { JudgeArenaGuard } from "./components/judge/JudgeArenaGuard";
 import Partners from "./pages/Partners";
 import Chapters from "./pages/Chapters";
