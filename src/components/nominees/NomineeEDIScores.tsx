@@ -108,6 +108,16 @@ export function NomineeEDIScores({ nomineeId, achievement, category, compact = f
                   fill="hsl(var(--gold) / 0.2)"
                   strokeWidth={2}
                 />
+                {comparison && (
+                  <Radar
+                    name={comparison.label}
+                    dataKey="benchmark"
+                    stroke="hsl(var(--ivory) / 0.55)"
+                    fill="hsl(var(--ivory) / 0.05)"
+                    strokeWidth={1.5}
+                    strokeDasharray="4 4"
+                  />
+                )}
                 <Tooltip
                   contentStyle={{
                     backgroundColor: "hsl(var(--charcoal))",
