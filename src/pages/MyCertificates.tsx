@@ -9,6 +9,7 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/
 import { useAuth } from "@/contexts/AuthContext";
 import { getMyCertificates, type Certificate } from "@/api/certificates";
 import { toast } from "@/hooks/use-toast";
+import { celebrateBurst } from "@/lib/celebrate";
 
 const tierStyles: Record<string, string> = {
   platinum: "from-slate-300 to-slate-500 text-slate-900",
@@ -152,7 +153,17 @@ export default function MyCertificates() {
                         </Button>
                       ) : (
                         <Button asChild className="flex-1 bg-gold text-charcoal hover:bg-gold/90">
-                          <a href={cert.downloadUrl!} download>
+                          <a
+                            href={cert.downloadUrl!}
+                            download
+                            onClick={() => {
+                              celebrateBurst();
+                              toast({
+                                title: "🎉 Congratulations!",
+                                description: `Your ${tierLabel[cert.tier] || "certificate"} is downloading. Share your African excellence with the world.`,
+                              });
+                            }}
+                          >
                             <Download className="h-4 w-4 mr-2" /> Download PDF
                           </a>
                         </Button>

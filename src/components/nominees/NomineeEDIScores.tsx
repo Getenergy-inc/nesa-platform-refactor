@@ -4,6 +4,7 @@
  */
 
 import { useMemo } from "react";
+import { motion } from "framer-motion";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { BarChart3, TrendingUp, Sparkles, Info } from "lucide-react";
@@ -15,6 +16,7 @@ import {
   calculateEDIScorecard, getGradeColor, getGradeBg, getPillarColor, getScoreBandColor,
   type EDIScorecard, PILLAR_KEYS, PILLAR_CONFIG,
 } from "@/lib/ediScoring";
+import { AnimatedCounter } from "@/components/ui/AnimatedCounter";
 
 interface NomineeEDIScoresProps {
   nomineeId: number;
@@ -54,7 +56,7 @@ export function NomineeEDIScores({ nomineeId, achievement, category, compact = f
           <div className="flex items-center gap-4">
             <div className="text-center">
               <div className={`text-5xl font-display font-bold ${getGradeColor(scorecard.grade)}`}>
-                {scorecard.overallScore}
+                <AnimatedCounter value={scorecard.overallScore} duration={1400} />
               </div>
               <div className="text-ivory/30 text-xs mt-1">/ 100</div>
             </div>
@@ -88,7 +90,13 @@ export function NomineeEDIScores({ nomineeId, achievement, category, compact = f
             <BarChart3 className="w-4 h-4 text-gold" />
             <h3 className="text-sm font-display text-ivory/70 font-medium">EDI 6-Dimension Analysis</h3>
           </div>
-          <div className="h-[240px]">
+          <motion.div
+            className="h-[240px]"
+            initial={{ opacity: 0, scale: 0.92 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true, margin: "0px 0px -10% 0px" }}
+            transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+          >
             <ResponsiveContainer width="100%" height="100%">
               <RadarChart data={radarData} cx="50%" cy="50%" outerRadius="75%">
                 <PolarGrid stroke="hsl(var(--gold) / 0.1)" />
@@ -107,6 +115,9 @@ export function NomineeEDIScores({ nomineeId, achievement, category, compact = f
                   stroke="hsl(var(--gold))"
                   fill="hsl(var(--gold) / 0.2)"
                   strokeWidth={2}
+                  isAnimationActive
+                  animationDuration={1400}
+                  animationEasing="ease-out"
                 />
                 {comparison && (
                   <Radar
@@ -116,6 +127,9 @@ export function NomineeEDIScores({ nomineeId, achievement, category, compact = f
                     fill="hsl(var(--ivory) / 0.05)"
                     strokeWidth={1.5}
                     strokeDasharray="4 4"
+                    isAnimationActive
+                    animationDuration={1400}
+                    animationBegin={200}
                   />
                 )}
                 <Tooltip
@@ -130,9 +144,10 @@ export function NomineeEDIScores({ nomineeId, achievement, category, compact = f
                 />
               </RadarChart>
             </ResponsiveContainer>
-          </div>
+          </motion.div>
         </CardContent>
       </Card>
+
 
       {/* Pillar Score Bars */}
       <Card className="bg-charcoal-light/50 border-gold/10">
