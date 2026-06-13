@@ -40,21 +40,22 @@ serve(async (req) => {
   const path = url.pathname.split("/").pop();
 
   try {
-    // AUTH: Verify admin
+    // AUTH: Verify admin (REQUIRED — no anonymous access)
     const authHeader = req.headers.get("Authorization");
-    if (authHeader) {
-      const token = authHeader.replace("Bearer ", "");
-      const { data: { user } } = await supabase.auth.getUser(token);
-      if (!user) {
-        return respond({ error: "Unauthorized" }, 401);
-      }
-      const { data: roles } = await supabase
-        .from("user_roles")
-        .select("role")
-        .eq("user_id", user.id);
-      if (!roles?.some(r => r.role === "admin")) {
-        return respond({ error: "Admin required" }, 403);
-      }
+    if (!authHeader) {
+      return respond({ error: "Unauthorized" }, 401);
+    }
+    const token = authHeader.replace("Bearer ", "");
+    const { data: { user } } = await supabase.auth.getUser(token);
+    if (!user) {
+      return respond({ error: "Unauthorized" }, 401);
+    }
+    const { data: roles } = await supabase
+      .from("user_roles")
+      .select("role")
+      .eq("user_id", user.id);
+    if (!roles?.some(r => r.role === "admin")) {
+      return respond({ error: "Admin required" }, 403);
     }
 
     if (req.method === "GET" || path === "status") {
