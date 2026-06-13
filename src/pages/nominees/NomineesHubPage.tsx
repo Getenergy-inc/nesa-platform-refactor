@@ -23,6 +23,8 @@ import { parseFilterParams, applyFilterChange, activeFilterCount } from "@/pages
 import { CategoryDiscoveryGrid } from "@/components/nominees/CategoryDiscoveryGrid";
 import { NIGERIA_ZONES } from "@/config/nomination/nigeriaZones";
 import { normalizeRegion } from "@/lib/regions";
+import { AfricaRegionExplorer } from "@/components/nominees/AfricaRegionExplorer";
+import { NomineeGovernanceNotice } from "@/components/nominees/NomineeGovernanceNotice";
 
 // Audit-aligned award families & recognition classes — mirror
 // src/config/nomination/types.ts. Drives URL-driven /nominees filters.
