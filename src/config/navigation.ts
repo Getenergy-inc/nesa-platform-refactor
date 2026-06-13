@@ -129,6 +129,8 @@ export const MAIN_NAV: NavItem[] = [
       { label: "Eligibility & Criteria", href: "/awards#eligibility", description: "Who can be nominated", icon: FileCheck },
       { label: "Nomination Process", href: "/nominate", description: "How nominations work", icon: FileCheck },
       { label: "Voting & Judging Integrity", href: "/policies/voting-integrity", description: "Firewalls protecting outcomes", icon: Shield },
+      { label: "Explore Existing Nominees", href: "/nominees", description: "Africa's Education Impact Directory — every approved nominee", icon: Users },
+      { label: "EDI Matrix Methodology", href: "/guidelines/edi-matrix#how-edi-is-calculated", description: "How the 6-dimension Education Development Index is calculated", icon: Shield },
     ],
   },
 
