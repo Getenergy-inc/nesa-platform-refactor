@@ -23,9 +23,11 @@ interface NomineeEDIScoresProps {
   compact?: boolean;
   categoryAvg?: number;
   regionAvg?: number;
+  /** Optional comparison overlay drawn as a dashed polygon on the radar (0-100 per dimension). */
+  comparison?: { label: string; values: Partial<Record<string, number>> };
 }
 
-export function NomineeEDIScores({ nomineeId, achievement, category, compact = false, categoryAvg, regionAvg }: NomineeEDIScoresProps) {
+export function NomineeEDIScores({ nomineeId, achievement, category, compact = false, categoryAvg, regionAvg, comparison }: NomineeEDIScoresProps) {
   const scorecard = useMemo(
     () => calculateEDIScorecard(nomineeId, achievement, category),
     [nomineeId, achievement, category]
@@ -36,6 +38,7 @@ export function NomineeEDIScores({ nomineeId, achievement, category, compact = f
     pillar: p.pillar.replace("& ", "&\n"),
     shortLabel: p.pillar.split(" ")[0],
     score: p.percentage,
+    benchmark: comparison?.values?.[p.key] ?? null,
     fullMark: 100,
   }));
 
