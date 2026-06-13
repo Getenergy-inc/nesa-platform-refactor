@@ -705,6 +705,7 @@ const App = () => (
                         <VerifyCertificate />
                       </WithLayout>
                     }
+                  />
                   <Route
                     path="/my-certificates"
                     element={
