@@ -392,6 +392,39 @@ export default function NomineeProfile() {
                 <EnrichedProfileCard profile={enrichedProfile} nomineeName={nominee.name} />
               )}
 
+              {/* ===== Education for All — Impact Metrics ===== */}
+              <EducationForAllMetrics
+                nomineeName={nominee.name}
+                metrics={(enrichedProfile as any)?.impact_metrics}
+              />
+
+              {/* ===== EDI Matrix — 6-Pillar Scorecard ===== */}
+              <Card className="bg-charcoal-light/50 border-gold/10">
+                <CardContent className="p-6 md:p-8">
+                  <div className="flex items-center gap-3 mb-5">
+                    <div className="w-10 h-10 rounded-full bg-gold/10 flex items-center justify-center">
+                      <TrendingUp className="w-5 h-5 text-gold" />
+                    </div>
+                    <div>
+                      <h2 className="text-xl font-display text-ivory font-semibold">
+                        Education Development Index (EDI) Matrix
+                      </h2>
+                      <p className="text-[11px] text-ivory/55 mt-0.5">
+                        6-pillar evaluation aligned with NESA-Africa governance standards.
+                      </p>
+                    </div>
+                  </div>
+                  <NomineeEDIScores
+                    nomineeId={slugToNumericId(nominee.slug)}
+                    achievement={nominee.achievement || ""}
+                    category={nominee.subcategoryTitle || nominee.awardTitle}
+                  />
+                </CardContent>
+              </Card>
+
+              {/* Governance disclaimer */}
+              <NomineeGovernanceNotice variant="banner" />
+
               {/* Impact Highlights */}
               <Card className="bg-charcoal-light/50 border-gold/10">
                 <CardContent className="p-6 md:p-8">
