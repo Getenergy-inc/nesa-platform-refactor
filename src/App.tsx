@@ -705,7 +705,24 @@ const App = () => (
                         <VerifyCertificate />
                       </WithLayout>
                     }
+                  <Route
+                    path="/my-certificates"
+                    element={
+                      <WithLayout>
+                        <MyCertificates />
+                      </WithLayout>
+                    }
                   />
+                  <Route
+                    path="/voting-portal"
+                    element={
+                      <WithLayout>
+                        <VotingPortal />
+                      </WithLayout>
+                    }
+                  />
+
+
 
                   {/* Pathways to Recognition — dedicated page + 4 award category pages */}
                   <Route
