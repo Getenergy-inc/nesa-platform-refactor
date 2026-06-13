@@ -79,6 +79,11 @@ export function NESALandingPage() {
           <AwardShowcaseSection />
         </LazySection>
 
+        {/* 2c. FEATURED CHANGEMAKERS — Africa's Education Impact Directory gateway */}
+        <LazySection>
+          <FeaturedChangemakersSection />
+        </LazySection>
+
         {/* 3. COUNTDOWN — Blue Garnet 2026 Gala urgency */}
         <CountdownSection />
 
