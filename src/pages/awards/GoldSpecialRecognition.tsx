@@ -7,6 +7,7 @@ import { BrandedDocumentaryPreview } from "@/components/awards/BrandedDocumentar
 import { GoldTrackNavGrid } from "@/components/awards/GoldTrackNavGrid";
 import { BreadcrumbJsonLd } from "@/components/seo/BreadcrumbJsonLd";
 import { AwardStandardStack } from "@/components/awards/AwardStandardSections";
+import { FeaturedNomineesBlock } from "@/components/nominees/FeaturedNomineesBlock";
 
 export default function GoldSpecialRecognition() {
   return (
