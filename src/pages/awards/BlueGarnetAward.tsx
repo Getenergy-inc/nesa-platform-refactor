@@ -197,6 +197,18 @@ export default function BlueGarnetAward() {
           ]}
         />
 
+        <section className="bg-charcoal py-8">
+          <div className="container mx-auto px-4">
+            <FeaturedNomineesBlock
+              awardFamily="gold-bluegarnet"
+              title="Existing Blue Garnet Nominees"
+              subtitle="Public voting + jury scoring — discover the changemakers in the running."
+              limit={6}
+              viewAllHref="/nominees?awardFamily=gold-bluegarnet"
+            />
+          </div>
+        </section>
+
       </div>
     </>
   );
