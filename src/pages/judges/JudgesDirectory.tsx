@@ -8,6 +8,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Search, Gavel, ShieldCheck, Star, MapPin } from "lucide-react";
 import { listPublicJudges, type PublicJudge } from "@/lib/api/judges.api";
+import { ExploreNomineesCTA } from "@/components/nominees/ExploreNomineesCTA";
 
 export default function JudgesDirectory() {
   const [judges, setJudges] = useState<PublicJudge[]>([]);
@@ -211,6 +212,13 @@ export default function JudgesDirectory() {
               ))}
             </div>
           )}
+
+          <div className="mt-12">
+            <ExploreNomineesCTA
+              title="The nominees our jury evaluates"
+              description="Meet the approved education changemakers whose work the jury is reviewing for NESA-Africa 2026."
+            />
+          </div>
         </section>
       </div>
     </>
