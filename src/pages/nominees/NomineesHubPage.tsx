@@ -302,7 +302,15 @@ export default function NomineesHubPage() {
                 );
               })}
             </div>
+
+            <div className="mt-5 flex justify-center">
+              <NomineeGovernanceNotice />
+            </div>
           </motion.div>
+
+          {/* Interactive Africa Region Explorer */}
+          <AfricaRegionExplorer />
+
 
           {/* Quick Stats Bar — Africa's Education Impact Directory at a glance */}
           <motion.ul
