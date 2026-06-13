@@ -506,6 +506,17 @@ export function DynamicCategoryPage({ categoryTitle, nominationType, nominateCat
             </div>
           </div>
         </section>
+
+        {/* See all nominees in this category — gateway to /nominees pre-filtered */}
+        <section className="bg-charcoal py-10">
+          <div className="container mx-auto px-4 max-w-5xl">
+            <ExploreNomineesCTA
+              title={`See nominees in ${categoryTitle}`}
+              description="Browse every approved nominee in this category inside Africa's Education Impact Directory."
+              filterQuery={nominateCategorySlug ? `category=${nominateCategorySlug}` : undefined}
+            />
+          </div>
+        </section>
       </div>
     </>
   );
