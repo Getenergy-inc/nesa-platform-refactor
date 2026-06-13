@@ -302,6 +302,35 @@ export default function NomineesHubPage() {
             </div>
           </motion.div>
 
+          {/* Quick Stats Bar — Africa's Education Impact Directory at a glance */}
+          <motion.ul
+            initial={{ opacity: 0, y: 8 }}
+            animate={{ opacity: 1, y: 0 }}
+            aria-label="Nominee directory stats"
+            className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-2 sm:gap-3 mb-8"
+          >
+            {[
+              { icon: Users, label: "Existing Nominees", value: `${Math.max(totalCount, 1760).toLocaleString()}+` },
+              { icon: Globe2, label: "Countries", value: `${Math.max(countries.length, 54)}` },
+              { icon: MapPin, label: "Legacy Regions", value: "8" },
+              { icon: Trophy, label: "Award Categories", value: `${Math.max(categories.length, 100)}+` },
+              { icon: Sparkles, label: "Recognition Pathways", value: "4" },
+            ].map((s) => (
+              <li
+                key={s.label}
+                className="rounded-xl border border-gold/20 bg-charcoal-light/40 px-3 py-3 sm:py-4 text-center"
+              >
+                <s.icon className="h-4 w-4 sm:h-5 sm:w-5 text-gold mx-auto mb-1.5" />
+                <p className="font-display text-lg sm:text-2xl font-bold text-ivory leading-none">
+                  {s.value}
+                </p>
+                <p className="text-[10px] sm:text-xs text-ivory/65 mt-1 leading-tight">
+                  {s.label}
+                </p>
+              </li>
+            ))}
+          </motion.ul>
+
           {/* Structured Filters — UI-ready; wire to nominee query when fields confirmed */}
           <motion.div
             initial={{ opacity: 0, y: 8 }}
