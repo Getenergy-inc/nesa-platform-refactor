@@ -23,6 +23,8 @@ import { parseFilterParams, applyFilterChange, activeFilterCount } from "@/pages
 import { CategoryDiscoveryGrid } from "@/components/nominees/CategoryDiscoveryGrid";
 import { NIGERIA_ZONES } from "@/config/nomination/nigeriaZones";
 import { normalizeRegion } from "@/lib/regions";
+import { AfricaRegionExplorer } from "@/components/nominees/AfricaRegionExplorer";
+import { NomineeGovernanceNotice } from "@/components/nominees/NomineeGovernanceNotice";
 
 // Audit-aligned award families & recognition classes — mirror
 // src/config/nomination/types.ts. Drives URL-driven /nominees filters.
@@ -300,7 +302,15 @@ export default function NomineesHubPage() {
                 );
               })}
             </div>
+
+            <div className="mt-5 flex justify-center">
+              <NomineeGovernanceNotice />
+            </div>
           </motion.div>
+
+          {/* Interactive Africa Region Explorer */}
+          <AfricaRegionExplorer />
+
 
           {/* Quick Stats Bar — Africa's Education Impact Directory at a glance */}
           <motion.ul
