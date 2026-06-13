@@ -178,6 +178,11 @@ import JudgeOnboarding from "./pages/judge/JudgeOnboarding";
 import MyCertificates from "./pages/MyCertificates";
 import VotingPortal from "./pages/VotingPortal";
 import { JudgeArenaGuard } from "./components/judge/JudgeArenaGuard";
+import ArenaShellLayout from "./components/judge/ArenaShellLayout";
+import ArenaDashboard from "./pages/judges-arena/ArenaDashboard";
+import ArenaNominees from "./pages/judges-arena/ArenaNominees";
+import ArenaReview from "./pages/judges-arena/ArenaReview";
+import ArenaDiscussion from "./pages/judges-arena/ArenaDiscussion";
 import Partners from "./pages/Partners";
 import Chapters from "./pages/Chapters";
 import Volunteer from "./pages/Volunteer";
@@ -1872,6 +1877,21 @@ const App = () => (
                       </JudgeArenaGuard>
                     }
                   />
+
+                  {/* Judges Arena (new shell) */}
+                  <Route
+                    path="/judges-arena"
+                    element={
+                      <JudgeArenaGuard>
+                        <ArenaShellLayout />
+                      </JudgeArenaGuard>
+                    }
+                  >
+                    <Route index element={<ArenaDashboard />} />
+                    <Route path="nominees" element={<ArenaNominees />} />
+                    <Route path="nominee/:slug" element={<ArenaReview />} />
+                    <Route path="discussion" element={<ArenaDiscussion />} />
+                  </Route>
                   <Route
                     path="/partners"
                     element={
