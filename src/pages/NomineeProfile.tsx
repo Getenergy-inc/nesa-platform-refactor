@@ -27,6 +27,16 @@ import { getResolvedNomineeImage } from "@/hooks/useResolvedNomineeImages";
 import { getEnrichedProfile } from "@/hooks/useEnrichedProfiles";
 import { useRecentlyViewed } from "@/hooks/useRecentlyViewed";
 import { FollowButton } from "@/components/ui/FollowButton";
+import { NomineeEDIScores } from "@/components/nominees/NomineeEDIScores";
+import { EducationForAllMetrics } from "@/components/nominees/EducationForAllMetrics";
+import { NomineeGovernanceNotice } from "@/components/nominees/NomineeGovernanceNotice";
+
+// Deterministic numeric hash from slug, used as nomineeId for EDI scoring.
+function slugToNumericId(slug: string): number {
+  let h = 0;
+  for (let i = 0; i < slug.length; i++) h = (h * 31 + slug.charCodeAt(i)) >>> 0;
+  return h % 1_000_000 || 1;
+}
 
 // --- helpers ---
 function getInitials(name: string): string {
