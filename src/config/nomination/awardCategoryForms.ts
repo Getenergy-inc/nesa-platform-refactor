@@ -74,10 +74,21 @@ export function getCategoryFormBySlug(
   return AWARD_CATEGORY_FORMS.find((c) => c.slug === slug);
 }
 
+/**
+ * Legacy umbrella form slugs that exist for backwards-compatible deep links
+ * but must NOT be surfaced in the public "Choose a Category" picker.
+ * These entries are excluded from the 46-form audit count.
+ */
+const LEGACY_UMBRELLA_SLUGS = new Set<string>([
+  "africa-education-icon-lifetime-achievement-2006-2026",
+]);
+
 export function getCategoryFormsByFamily(
   family: string,
 ): AwardCategoryForm[] {
-  return AWARD_CATEGORY_FORMS.filter((c) => c.family === family);
+  return AWARD_CATEGORY_FORMS.filter(
+    (c) => c.family === family && !LEGACY_UMBRELLA_SLUGS.has(c.slug),
+  );
 }
 
 /** Look up a regional form variant for an Africa Regional category. */
