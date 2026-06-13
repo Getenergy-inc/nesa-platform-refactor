@@ -224,8 +224,26 @@ export default function NomineeProfile() {
   return (
     <>
       <Helmet>
-        <title>{nominee.name} | NESA-Africa Nominee</title>
+        <title>{`${nominee.name} | NESA-Africa Nominee`}</title>
         <meta name="description" content={`${nominee.name} – Nominated for ${nominee.awardTitle} in ${nominee.subcategoryTitle}. Explore their impact on African education.`} />
+        <link rel="canonical" href={`https://nesaafrica.lovable.app/nominees/${encodeURIComponent(nominee.slug)}`} />
+        <meta property="og:title" content={`${nominee.name} | NESA-Africa Nominee`} />
+        <meta property="og:description" content={`Nominated for ${nominee.awardTitle}. Discover their education impact.`} />
+        <meta property="og:type" content="profile" />
+        {resolved.imageUrl && <meta property="og:image" content={resolved.imageUrl} />}
+        <meta name="twitter:card" content="summary_large_image" />
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": isOrganization(nominee.name) ? "Organization" : "Person",
+            name: nominee.name,
+            description: nominee.achievement || `Nominee for ${nominee.awardTitle}`,
+            url: `https://nesaafrica.lovable.app/nominees/${encodeURIComponent(nominee.slug)}`,
+            image: resolved.imageUrl || undefined,
+            address: nominee.country ? { "@type": "PostalAddress", addressCountry: nominee.country } : undefined,
+            award: nominee.awardTitle,
+          })}
+        </script>
       </Helmet>
 
       <div className="min-h-screen bg-charcoal text-ivory">
