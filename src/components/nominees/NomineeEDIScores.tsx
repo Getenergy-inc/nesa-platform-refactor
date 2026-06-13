@@ -12,7 +12,7 @@ import {
   Radar, ResponsiveContainer, Tooltip,
 } from "recharts";
 import {
-  calculateEDIScorecard, getGradeColor, getGradeBg, getPillarColor,
+  calculateEDIScorecard, getGradeColor, getGradeBg, getPillarColor, getScoreBandColor,
   type EDIScorecard, PILLAR_KEYS, PILLAR_CONFIG,
 } from "@/lib/ediScoring";
 
