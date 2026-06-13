@@ -9,6 +9,7 @@ import {
   Award, ChevronLeft, ChevronRight, Users, ArrowRight, Globe, Plane, Handshake
 } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { ExploreNomineesCTA } from "@/components/nominees/ExploreNomineesCTA";
 import {
   categories,
   getCategoryByTitle,
