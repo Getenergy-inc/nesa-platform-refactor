@@ -1785,6 +1785,14 @@ const App = () => (
                     }
                   />
                   <Route
+                    path="/judge/onboarding"
+                    element={
+                      <JudgeArenaGuard>
+                        <JudgeOnboarding />
+                      </JudgeArenaGuard>
+                    }
+                  />
+                  <Route
                     path="/judge/dashboard"
                     element={
                       <JudgeArenaGuard>
