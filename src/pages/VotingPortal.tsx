@@ -1,9 +1,12 @@
+import { useEffect } from "react";
 import { Helmet } from "react-helmet-async";
-import { Link } from "react-router-dom";
-import { Vote, Award, Trophy, ShieldCheck, BarChart3, Users, ArrowRight } from "lucide-react";
+import { Link, useSearchParams } from "react-router-dom";
+import { Vote, Award, Trophy, ShieldCheck, BarChart3, Users, ArrowRight, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { celebratePop } from "@/lib/celebrate";
+import { ExploreNomineesCTA } from "@/components/nominees/ExploreNomineesCTA";
 
 const TRACKS = [
   {
