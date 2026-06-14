@@ -254,12 +254,14 @@ export const MAIN_NAV_CTA: NavItem = {
 export const MAIN_NAV_MOBILE_ORDER: readonly string[] = [
   "About",
   "Awards",
+  "Explore Nominees",
   "Impact Programs",
   "Engage",
   "Media",
   "Support",
   "Shop",
 ];
+
 
 
 
