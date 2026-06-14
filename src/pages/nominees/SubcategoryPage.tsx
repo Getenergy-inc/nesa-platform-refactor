@@ -214,6 +214,15 @@ export default function SubcategoryPage() {
               )}
             </aside>
           </div>
+
+          {/* Cross-surface CTA — keep discovery flowing */}
+          <div className="mt-12">
+            <ExploreNomineesCTA
+              filterQuery={`?category=${categorySlug}&subcategory=${subSlug}`}
+              title="Explore More Changemakers"
+              description="Discover every approved nominee across Africa, the diaspora, and Friends of Africa communities."
+            />
+          </div>
         </div>
       </section>
     </>
