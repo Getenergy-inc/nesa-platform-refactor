@@ -24,7 +24,10 @@ interface PublicLayoutProps {
   showTrustSpine?: boolean;
   /** Trust Spine variant — defaults to "compact" */
   trustSpineVariant?: "full" | "compact" | "alignment" | "governance";
+  /** Set false to suppress the global "Explore Existing Nominees" CTA above the footer */
+  showExploreNomineesCTA?: boolean;
 }
+
 
 export function PublicLayout({
   children,
