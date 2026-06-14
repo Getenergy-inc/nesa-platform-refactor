@@ -97,7 +97,16 @@ export default function MyCertificates() {
             All your NESA-Africa certificates in one place — nominee, participation, shortlist, winner and judge
             service. Every certificate is verifiable via QR code and a unique serial number.
           </p>
+          <div className="pt-2">
+            <Button asChild variant="outline" size="sm" className="border-gold/40 text-gold hover:bg-gold/10">
+              <Link to="/certificates/guide">
+                <Sparkles className="h-3.5 w-3.5 mr-2" />
+                How to download your certificate
+              </Link>
+            </Button>
+          </div>
         </div>
+
       </section>
 
       {/* Gallery */}
