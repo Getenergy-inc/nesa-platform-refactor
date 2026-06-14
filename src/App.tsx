@@ -721,6 +721,23 @@ const App = () => (
                     }
                   />
                   <Route
+                    path="/certificates/guide"
+                    element={
+                      <WithLayout>
+                        <CertificateGuide />
+                      </WithLayout>
+                    }
+                  />
+                  <Route
+                    path="/my-certificates/guide"
+                    element={
+                      <WithLayout>
+                        <CertificateGuide />
+                      </WithLayout>
+                    }
+                  />
+
+                  <Route
                     path="/voting-portal"
                     element={
                       <WithLayout>
