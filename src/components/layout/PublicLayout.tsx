@@ -35,7 +35,13 @@ export function PublicLayout({
   showFAQ = true,
   showTrustSpine = true,
   trustSpineVariant = "compact",
+  showExploreNomineesCTA = true,
 }: PublicLayoutProps) {
+  const { pathname } = useLocation();
+  // Hide the global CTA on directory/profile surfaces where it would be redundant
+  const onNomineesSurface = pathname.startsWith("/nominees");
+  const showCTA = showExploreNomineesCTA && !onNomineesSurface;
+
   return (
     <div className="min-h-screen bg-charcoal flex flex-col">
       <UtilityBar />
@@ -43,6 +49,11 @@ export function PublicLayout({
       <main className="flex-1 pt-14 sm:pt-16 lg:pt-[100px] pb-20 lg:pb-16">
         {children}
       </main>
+      {showCTA && (
+        <div className="container mx-auto max-w-6xl px-4 pb-8">
+          <ExploreNomineesCTA />
+        </div>
+      )}
       {showTrustSpine && <TrustSpine variant={trustSpineVariant} />}
       {showFAQ && <PageFAQSection />}
       {showFooter && <NESAFooter />}
@@ -54,5 +65,6 @@ export function PublicLayout({
     </div>
   );
 }
+
 
 export default PublicLayout;
