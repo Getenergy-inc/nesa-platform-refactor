@@ -11,6 +11,9 @@ import { ExitIntentPopup } from "@/components/nesa/ExitIntentPopup";
 import { PageFAQSection, FloatingFAQButton } from "@/components/nesa/PageFAQ";
 import { MobileAGCWallet } from "@/components/rewards/MobileAGCWallet";
 import { TrustSpine } from "@/components/trust/TrustSpine";
+import { ExploreNomineesCTA } from "@/components/nominees/ExploreNomineesCTA";
+import { useLocation } from "react-router-dom";
+
 
 interface PublicLayoutProps {
   children: ReactNode;
