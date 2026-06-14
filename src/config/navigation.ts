@@ -135,7 +135,23 @@ export const MAIN_NAV: NavItem[] = [
     ],
   },
 
-  // 3. IMPACT PROGRAMS
+  // 3. EXPLORE NOMINEES — emotional heart of the platform
+  {
+    label: "Explore Nominees",
+    href: "/nominees",
+    icon: Users,
+    children: [
+      { label: "All Approved Nominees", href: "/nominees", description: "Africa's Education Impact Directory — every approved changemaker", icon: Users },
+      { label: "By Region", href: "/regions", description: "Discover nominees across 10 African regions + diaspora", icon: Map },
+      { label: "By Award Category", href: "/categories", description: "Browse nominees by Gold-Blue Garnet category", icon: Trophy },
+      { label: "Trending Nominees", href: "/trending", description: "Most-viewed and most-celebrated this season", icon: Sparkles },
+      { label: "EDI Matrix Methodology", href: "/guidelines/edi-matrix", description: "How nominees are scored across 6 dimensions", icon: Shield },
+      { label: "Nominate a Changemaker", href: "/nominate", description: "Add a new voice to the directory", icon: FileCheck, badge: "2026" },
+    ],
+  },
+
+  // 4. IMPACT PROGRAMS
+
   {
     label: "Impact Programs",
     href: "/programs",
