@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
-import { Award, Download, ShieldCheck, Share2, QrCode, Loader2, Lock } from "lucide-react";
+import { Award, Download, ShieldCheck, Share2, QrCode, Loader2, Lock, Sparkles } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
