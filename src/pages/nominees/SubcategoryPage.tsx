@@ -11,6 +11,7 @@ import { LandingNomineeCard } from "@/components/nesa/LandingNomineeCard";
 import { NomineeBreadcrumbs } from "@/components/nominees/NomineeBreadcrumbs";
 import { CategoryHero } from "@/components/nominees/CategoryHero";
 import { NomineeFilterBar, type NomineeSort } from "@/components/nominees/NomineeFilterBar";
+import { ExploreNomineesCTA } from "@/components/nominees/ExploreNomineesCTA";
 
 const PAGE_SIZE = 12;
 
