@@ -176,6 +176,7 @@ import {
 } from "./pages/judge";
 import JudgeOnboarding from "./pages/judge/JudgeOnboarding";
 import MyCertificates from "./pages/MyCertificates";
+import CertificateGuide from "./pages/CertificateGuide";
 import VotingPortal from "./pages/VotingPortal";
 import { JudgeArenaGuard } from "./components/judge/JudgeArenaGuard";
 import ArenaShellLayout from "./components/judge/ArenaShellLayout";
