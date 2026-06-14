@@ -12,6 +12,7 @@ import { CategoryHero } from "@/components/nominees/CategoryHero";
 import { NomineeFilterBar, type NomineeSort } from "@/components/nominees/NomineeFilterBar";
 import { FeaturedNomineeSpotlight } from "@/components/nominees/FeaturedNomineeSpotlight";
 import { SubcategoryTabs, type SubcategoryTab } from "@/components/nominees/SubcategoryTabs";
+import { ExploreNomineesCTA } from "@/components/nominees/ExploreNomineesCTA";
 
 const PAGE_SIZE = 12;
 
