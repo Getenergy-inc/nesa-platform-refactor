@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
-import { Award, Download, ShieldCheck, Share2, QrCode, Loader2, Lock } from "lucide-react";
+import { Award, Download, ShieldCheck, Share2, QrCode, Loader2, Lock, Sparkles } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -97,7 +97,16 @@ export default function MyCertificates() {
             All your NESA-Africa certificates in one place — nominee, participation, shortlist, winner and judge
             service. Every certificate is verifiable via QR code and a unique serial number.
           </p>
+          <div className="pt-2">
+            <Button asChild variant="outline" size="sm" className="border-gold/40 text-gold hover:bg-gold/10">
+              <Link to="/certificates/guide">
+                <Sparkles className="h-3.5 w-3.5 mr-2" />
+                How to download your certificate
+              </Link>
+            </Button>
+          </div>
         </div>
+
       </section>
 
       {/* Gallery */}
