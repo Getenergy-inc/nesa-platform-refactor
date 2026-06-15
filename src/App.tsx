@@ -990,6 +990,14 @@ const App = () => (
                     }
                   />
                   <Route
+                    path="/categories/diaspora-education-impact"
+                    element={
+                      <WithLayout>
+                        <DiasporaEducation />
+                      </WithLayout>
+                    }
+                  />
+                  <Route
                     path="/category/africa-education-icon"
                     element={<Navigate to="/nominees/africa-education-icon-award" replace />}
                   />
