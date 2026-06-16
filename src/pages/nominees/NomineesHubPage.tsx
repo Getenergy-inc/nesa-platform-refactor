@@ -230,21 +230,21 @@ export default function NomineesHubPage() {
   return (
     <>
       <Helmet>
-        <title>Nominees Directory — NESA-Africa 2026</title>
+        <title>Africa's Education Impact Directory — NESA-Africa 2026</title>
         <meta
           name="description"
-          content="Explore every NESA-Africa nominee by award category. Discover changemakers, vote, and recommend champions again to advance Education for All."
+          content="Africa's Education Impact Directory — every NESA-Africa 2026 nominee, their biography, impact story, EDI Matrix score and contribution to Education for All across Africa."
         />
         <link rel="canonical" href="https://nesaafrica.lovable.app/nominees" />
-        <meta property="og:title" content="NESA-Africa Nominees Directory" />
-        <meta property="og:description" content="Browse every NESA-Africa nominee by award category." />
+        <meta property="og:title" content="Africa's Education Impact Directory — NESA-Africa 2026" />
+        <meta property="og:description" content="Every NESA-Africa nominee, their story, and how they're advancing Education for All." />
         <meta property="og:url" content="https://nesaafrica.lovable.app/nominees" />
         <meta property="og:type" content="website" />
         <script type="application/ld+json">
           {JSON.stringify({
             "@context": "https://schema.org",
             "@type": "CollectionPage",
-            name: "NESA-Africa Nominees Directory",
+            name: "Africa's Education Impact Directory",
             url: "https://nesaafrica.lovable.app/nominees",
           })}
         </script>
@@ -259,15 +259,19 @@ export default function NomineesHubPage() {
             animate={{ opacity: 1, y: 0 }}
           >
             <Badge className="mb-4 bg-gold/15 text-gold border-gold/30">
-              <Sparkles className="w-3 h-3 mr-1" /> Nominees Directory — 2026 Edition
+              <Sparkles className="w-3 h-3 mr-1" /> Africa's Education Impact Directory — 2026 Edition
             </Badge>
             <h1 className="font-display text-3xl md:text-5xl font-bold text-ivory mb-3">
-              Discover Africa's Education Changemakers
+              Africa's Education Impact Directory
             </h1>
-            <p className="text-ivory/70 max-w-2xl mx-auto mb-6">
-              Explore nominees, education impact leaders, institutions, innovators and supporters
-              across Africa, the diaspora and friends of Africa.
+            <p className="text-ivory/70 max-w-2xl mx-auto mb-3">
+              Discover the changemakers, institutions, innovators and supporters advancing
+              Education for All across Africa, the diaspora and friends of Africa.
             </p>
+            <p className="text-gold/90 text-sm md:text-base italic max-w-2xl mx-auto mb-6">
+              Every profile answers one question: <span className="text-gold font-semibold not-italic">How has this nominee contributed to Education for All in Africa?</span>
+            </p>
+
 
             <form onSubmit={onSearchSubmit} className="max-w-xl mx-auto relative">
               <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-gold" />
