@@ -998,6 +998,22 @@ const App = () => (
                     }
                   />
                   <Route
+                    path="/categories/islamic-education-impact-africa"
+                    element={
+                      <WithLayout>
+                        <IslamicEducationAfrica />
+                      </WithLayout>
+                    }
+                  />
+                  <Route
+                    path="/categories/christian-education-impact-africa"
+                    element={
+                      <WithLayout>
+                        <ChristianEducationAfrica />
+                      </WithLayout>
+                    }
+                  />
+                  <Route
                     path="/category/africa-education-icon"
                     element={<Navigate to="/nominees/africa-education-icon-award" replace />}
                   />
