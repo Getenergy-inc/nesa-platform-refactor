@@ -299,7 +299,7 @@ export function FaithCategoryPage({ config }: { config: FaithCategoryConfig }) {
         <section className="container mx-auto px-4 max-w-6xl py-12 border-t border-gold/10">
           <SectionHeading eyebrow="Tracks" title="Sub-categories" />
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
-            {config.subcategories.map((s) => {
+            {resolvedSubcategories.map((s) => {
               const open = !!s.uuid;
               return (
                 <Card key={s.title} className="bg-charcoal-light/40 border-gold/15 hover:border-gold/40 transition-colors">
