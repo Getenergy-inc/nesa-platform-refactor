@@ -70,6 +70,21 @@ export default function NominateMvp() {
     familyParam && VALID_FAMILIES.has(familyParam) ? familyParam : null;
   const category = categoryParam ? getCategoryFormBySlug(categoryParam) : null;
 
+  // Resolve external subcategory UUIDs (e.g. links from category landing pages)
+  // by promoting them to the matching ?category= slug. The UUIDs do not match
+  // any internal subcategory slug, so we drop the unresolved ?subcategory=.
+  useEffect(() => {
+    if (categoryParam || !subcategoryParam) return;
+    const resolved = SUBCATEGORY_UUID_TO_CATEGORY[subcategoryParam];
+    if (!resolved) return;
+    const next = new URLSearchParams(params);
+    next.set("category", resolved);
+    const target = getCategoryFormBySlug(resolved);
+    if (target) next.set("family", target.family);
+    next.delete("subcategory");
+    setParams(next, { replace: true });
+  }, [categoryParam, subcategoryParam, params, setParams]);
+
   // Honor ?lang=
   useEffect(() => {
     const langParam = params.get("lang");
