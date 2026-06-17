@@ -998,6 +998,14 @@ const App = () => (
                     }
                   />
                   <Route
+                    path="/categories/international-bilateral-education"
+                    element={
+                      <WithLayout>
+                        <InternationalEducation />
+                      </WithLayout>
+                    }
+                  />
+                  <Route
                     path="/categories/islamic-education-impact-africa"
                     element={
                       <WithLayout>
