@@ -17,8 +17,17 @@ export type NomineeWorkflowState =
 export type FaithSubcategory = {
   title: string;
   description: string;
-  /** UUID for /nominate?subcategory=...; null = "Nominations opening soon". */
+  /**
+   * Hard-coded UUID. May be null when the backend row does not exist yet —
+   * the page will then attempt to resolve a live UUID via `slug` at runtime.
+   */
   uuid: string | null;
+  /**
+   * Canonical `public.subcategories.slug`. When present, the page resolves
+   * the live UUID at runtime so nominations enable automatically as soon as
+   * the backend row is created (no code change required).
+   */
+  slug?: string;
   tabKey: "infrastructure" | "scholarship" | "holistic" | "advocacy";
 };
 
