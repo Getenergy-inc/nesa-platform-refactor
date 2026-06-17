@@ -58,7 +58,8 @@ describe("Christian Advocacy & Awareness tile — backend gating", () => {
     const disabledBtn = within(tile).getByRole("button", {
       name: /Nominations opening soon/i,
     });
-    expect(disabledBtn).toBeDisabled();
+    // Button is clickable (so it can fire an audit log) but marked aria-disabled.
+    expect(disabledBtn).toHaveAttribute("aria-disabled", "true");
     // No active Nominate link inside this tile while the backend row is missing.
     expect(within(tile).queryByRole("link", { name: /^Nominate$/ })).toBeNull();
   });
