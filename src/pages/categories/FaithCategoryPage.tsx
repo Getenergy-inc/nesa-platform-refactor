@@ -31,6 +31,8 @@ import type {
   NomineeWorkflowState,
 } from "./faithCategoryTypes";
 import { useFaithSubcategoryUuids } from "@/hooks/useFaithSubcategoryUuids";
+import { logLockedNominateAttempt } from "./logLockedNominateAttempt";
+import { toast } from "@/hooks/use-toast";
 
 type EnrichedNominee = FaithNominee & {
   status: NomineeWorkflowState;
@@ -312,7 +314,26 @@ export function FaithCategoryPage({ config }: { config: FaithCategoryConfig }) {
                         <Link to={`/nominate?subcategory=${s.uuid}`}>Nominate</Link>
                       </Button>
                     ) : (
-                      <Button size="sm" disabled className="bg-charcoal text-ivory/40 border border-gold/15 cursor-not-allowed">
+                      <Button
+                        size="sm"
+                        type="button"
+                        aria-disabled="true"
+                        onClick={() => {
+                          void logLockedNominateAttempt({
+                            faith: config.faith,
+                            tabKey: s.tabKey,
+                            slug: s.slug ?? null,
+                            tileTitle: s.title,
+                            routePath: config.routePath,
+                          });
+                          toast({
+                            title: "Nominations opening soon",
+                            description:
+                              "This recognition track will accept nominations as soon as the backend listing is published. We've logged your interest.",
+                          });
+                        }}
+                        className="bg-charcoal text-ivory/40 border border-gold/15 hover:bg-charcoal hover:text-ivory/60"
+                      >
                         Nominations opening soon
                       </Button>
                     )}
