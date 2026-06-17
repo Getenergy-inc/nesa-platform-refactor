@@ -64,7 +64,7 @@
 /cookie-policy                                               /policies            301
 /language                                                    /                    301
 
-# --- 2. SPA routes (319 explicit paths from src/App.tsx) ---
+# --- 2. SPA routes (320 explicit paths from src/App.tsx) ---
 /nominees/gold-special-recognition/:categorySlug/:nomineeSlug /index.html          200
 /nominees/best-ngo-contribution-to-education/profile/:slug   /index.html          200
 /awards/influencers-education-impact-2026-recognition        /index.html          200
@@ -82,6 +82,7 @@
 /awards/gold-special-recognition-legacy                      /index.html          200
 /awards/platinum-certificate-categories                      /index.html          200
 /category/research-development-nigeria                       /index.html          200
+/categories/diaspora-education-impact                        /index.html          200
 /nominees/africa-education-icon-award                        /index.html          200
 /awards/blue-garnet-categories/:slug                         /index.html          200
 /awards/influencers-education-impact                         /index.html          200
