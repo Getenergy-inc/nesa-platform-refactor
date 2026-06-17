@@ -30,6 +30,7 @@ import type {
   FaithCategoryConfig, FaithNominee, FaithSubcategory,
   NomineeWorkflowState,
 } from "./faithCategoryTypes";
+import { useFaithSubcategoryUuids } from "@/hooks/useFaithSubcategoryUuids";
 
 type EnrichedNominee = FaithNominee & {
   status: NomineeWorkflowState;
@@ -126,6 +127,24 @@ export function FaithCategoryPage({ config }: { config: FaithCategoryConfig }) {
     [config],
   );
 
+  // Resolve live UUIDs for any subcategory that ships with a `slug`. This lets
+  // tiles whose static UUID is null (e.g. Christian Advocacy & Awareness) auto-
+  // enable once the backend row exists — no redeploy required.
+  const slugs = useMemo(
+    () => config.subcategories.map((s) => s.slug).filter((x): x is string => !!x),
+    [config],
+  );
+  const { uuidBySlug } = useFaithSubcategoryUuids(slugs);
+
+  const resolvedSubcategories = useMemo<FaithSubcategory[]>(
+    () =>
+      config.subcategories.map((s) => ({
+        ...s,
+        uuid: s.uuid ?? (s.slug ? uuidBySlug[s.slug] ?? null : null),
+      })),
+    [config, uuidBySlug],
+  );
+
   const [mediaFilter, setMediaFilter] = useState<"all" | "photo" | "video" | "none">("all");
   const applyFilter = (items: EnrichedNominee[]) =>
     mediaFilter === "all" ? items : items.filter((i) => i.mediaType === mediaFilter);
@@ -142,10 +161,10 @@ export function FaithCategoryPage({ config }: { config: FaithCategoryConfig }) {
   };
 
   const subByTab: Record<string, FaithSubcategory | undefined> = {
-    infrastructure: config.subcategories.find((s) => s.tabKey === "infrastructure"),
-    scholarship: config.subcategories.find((s) => s.tabKey === "scholarship"),
-    holistic: config.subcategories.find((s) => s.tabKey === "holistic"),
-    advocacy: config.subcategories.find((s) => s.tabKey === "advocacy"),
+    infrastructure: resolvedSubcategories.find((s) => s.tabKey === "infrastructure"),
+    scholarship: resolvedSubcategories.find((s) => s.tabKey === "scholarship"),
+    holistic: resolvedSubcategories.find((s) => s.tabKey === "holistic"),
+    advocacy: resolvedSubcategories.find((s) => s.tabKey === "advocacy"),
   };
 
   return (
