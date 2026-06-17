@@ -64,7 +64,7 @@
 /cookie-policy                                               /policies            301
 /language                                                    /                    301
 
-# --- 2. SPA routes (320 explicit paths from src/App.tsx) ---
+# --- 2. SPA routes (323 explicit paths from src/App.tsx) ---
 /nominees/gold-special-recognition/:categorySlug/:nomineeSlug /index.html          200
 /nominees/best-ngo-contribution-to-education/profile/:slug   /index.html          200
 /awards/influencers-education-impact-2026-recognition        /index.html          200
@@ -73,8 +73,11 @@
 /nominees/africa-education-icon-award/:sub/:cls              /index.html          200
 /nominees/category/africa-education-icon-award               /index.html          200
 /awards/platinum-certificate-categories/:slug                /index.html          200
+/categories/christian-education-impact-africa                /index.html          200
+/categories/international-bilateral-education                /index.html          200
 /eduaid-africa/rebuild-my-school/:regionSlug                 /index.html          200
 /nominees/best-ngo-contribution-to-education                 /index.html          200
+/categories/islamic-education-impact-africa                  /index.html          200
 /awards/influencers-education-impact/:slug                   /index.html          200
 /category/education-friendly-state-nigeria                   /index.html          200
 /nominees/africa-education-icon-award/:sub                   /index.html          200
