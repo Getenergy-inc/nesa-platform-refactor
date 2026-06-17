@@ -34,6 +34,27 @@ const VALID_FAMILIES = new Set<AwardFamilyId>(
   AWARD_FAMILIES.map((f) => f.id),
 );
 
+// Map external subcategory UUIDs (used by category landing pages) to the
+// canonical NominateMvp category slug so deep-links such as
+// /nominate?subcategory=<uuid> resolve to the correct prefiltered category.
+const SUBCATEGORY_UUID_TO_CATEGORY: Record<string, string> = {
+  // Political Leaders' Contribution to Education — Nigeria
+  "316d2796-bd9f-41cc-9299-e42b4f51b1d3":
+    "excellence-in-political-leadership-for-education-nigeria",
+  "a87adfeb-4e32-418d-8901-3128e0df4071":
+    "excellence-in-political-leadership-for-education-nigeria",
+  "9e06ae92-2225-460b-8cf9-73c82851ea4c":
+    "excellence-in-political-leadership-for-education-nigeria",
+  "6f47bbd7-5940-4932-9551-329abf5e5028":
+    "excellence-in-political-leadership-for-education-nigeria",
+  "88d367b9-e304-41a5-b9ee-50bc03671884":
+    "excellence-in-political-leadership-for-education-nigeria",
+  "e748223f-c7d7-4a67-9589-34ceca029834":
+    "excellence-in-political-leadership-for-education-nigeria",
+  "0b6c53b7-5de7-4ac3-ac97-fa6d8612a42b":
+    "excellence-in-political-leadership-for-education-nigeria",
+};
+
 export default function NominateMvp() {
   const { t, i18n } = useTranslation("nomination");
   const [params, setParams] = useSearchParams();
