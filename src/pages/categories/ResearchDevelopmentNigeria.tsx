@@ -1036,16 +1036,26 @@ export default function ResearchDevelopmentNigeriaPage() {
           </div>
 
           <Tabs defaultValue={DOMAINS[0]} className="w-full">
-            <TabsList className="flex flex-wrap h-auto bg-charcoal-light/60 border border-gold/20 p-1 mb-8 gap-1">
+            <TabsList
+              className="flex flex-wrap h-auto bg-charcoal-light/60 border border-gold/20 p-1 mb-8 gap-1"
+              aria-label="Nominee domains with counts"
+            >
               {DOMAINS.map((d) => {
                 const domainNominees = NOMINEES.filter(
                   (n) => n.domain === d,
                 );
+                const docCount = domainNominees.filter(
+                  (n) => n.verification_status === "documented",
+                ).length;
+                const pendingCount = domainNominees.filter(
+                  (n) => n.verification_status === "pending_verification",
+                ).length;
                 return (
                   <TabsTrigger
                     key={d}
                     value={d}
                     className="data-[state=active]:bg-gold data-[state=active]:text-charcoal text-ivory/70 text-xs md:text-sm"
+                    aria-label={`${d}, ${domainNominees.length} nominees: ${docCount} documented, ${pendingCount} pending verification`}
                   >
                     {d}
                     <Badge className="ml-2 bg-gold/15 text-gold border-gold/30 hover:bg-gold/15">
