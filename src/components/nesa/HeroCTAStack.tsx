@@ -28,7 +28,6 @@ const baseBtn =
   "group inline-flex h-[52px] sm:h-12 lg:h-11 w-full items-center justify-center gap-2 rounded-2xl sm:rounded-full px-4 sm:px-5 text-[15px] sm:text-sm font-medium transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold/60 focus-visible:ring-offset-2 focus-visible:ring-offset-charcoal";
 
 const SECONDARY_LINKS: { label: string; to: string; cta: string }[] = [
-  { label: "Explore Existing Nominees", to: "/nominees", cta: "explore_existing_nominees" },
   { label: "Explore Award Categories", to: "/awards", cta: "explore_award_categories" },
   { label: "View Voting Timeline", to: "/vote", cta: "view_voting_timeline" },
   { label: "Learn About AGC Voting Coin", to: "/earn-agc", cta: "learn_about_agc" },
@@ -60,12 +59,12 @@ export function HeroCTAStack() {
         <motion.div variants={item}>
           <Link
             to="/nominees"
-            aria-label="Discover Africa's Education Changemakers"
-            onClick={onCta("discover_changemakers", "/nominees")}
+            aria-label="Explore Existing Nominees"
+            onClick={onCta("explore_existing_nominees", "/nominees")}
             className={`${baseBtn} border border-gold/60 bg-charcoal/40 text-white hover:border-gold hover:bg-gold/10 hover:text-gold hover:-translate-y-0.5`}
           >
             <Compass className="h-4 w-4 text-gold" />
-            <span className="truncate">Discover Changemakers</span>
+            <span className="truncate">Explore Existing Nominees</span>
           </Link>
         </motion.div>
 
