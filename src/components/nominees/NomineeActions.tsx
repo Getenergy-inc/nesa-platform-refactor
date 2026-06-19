@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { VoteModal } from "./VoteModal";
 import { RenominateModal } from "./RenominateModal";
 import { ThumbsUp, RotateCcw } from "lucide-react";
+import { getCategoryTier } from "@/config/nomineeCategories";
 
 export interface NomineeActionsData {
   nomineeId: string;
