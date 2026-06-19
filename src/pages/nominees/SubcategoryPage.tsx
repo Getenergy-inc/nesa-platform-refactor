@@ -129,6 +129,7 @@ export default function SubcategoryPage() {
             description={`Part of ${data.categoryName}. ${data.nominees.length} nominees representing ${data.countries.length} countries.`}
             nomineeCount={data.nominees.length}
             countryCount={data.countries.length}
+            categorySlug={subSlug || categorySlug}
           />
 
           <div className="grid lg:grid-cols-[1fr,260px] gap-8">

@@ -28,7 +28,7 @@ export default function LibraryNigeriaPage() {
           { value: "Nigeria", label: "Academic Excellence" },
         ]}
         primaryCta={{ label: "Explore Library Nominees", href: "/nominees?category=Best%20Library%20in%20Nigerian%20Tertiary%20Institutions" }}
-        secondaryCta={{ label: "Vote for a Library", href: "/vote" }}
+        secondaryCta={{ label: "Recommend Again", href: "/nominate?category=best-library-tertiary-nigeria" }}
         watchCta={{ label: "Watch Library Stories", href: "/media" }}
         imageAlt="Best Library in Nigerian Tertiary Institutions"
       />

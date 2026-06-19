@@ -1,8 +1,9 @@
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { Trophy, Users, ArrowRight, Sparkles } from "lucide-react";
+import { Trophy, Users, ArrowRight, Sparkles, RotateCcw } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import { getCategoryTier } from "@/config/nomineeCategories";
 
 interface Props {
   eyebrow?: string;
@@ -13,6 +14,8 @@ interface Props {
   subcategoryCount?: number;
   voteHref?: string;
   nominateHref?: string;
+  /** Category/subcategory slug — drives Blue Garnet (Vote) vs Recommend Again CTA */
+  categorySlug?: string;
 }
 
 export function CategoryHero({
@@ -24,7 +27,10 @@ export function CategoryHero({
   subcategoryCount,
   voteHref = "/vote",
   nominateHref = "/nominate",
+  categorySlug,
 }: Props) {
+  const isBlueGarnet = categorySlug ? getCategoryTier(categorySlug) === "blue_garnet" : true;
+  const primaryHref = isBlueGarnet ? voteHref : `/nominate?category=${encodeURIComponent(categorySlug || "")}`;
   return (
     <motion.section
       initial={{ opacity: 0, y: 16 }}
@@ -89,9 +95,13 @@ export function CategoryHero({
         </div>
 
         <div className="flex flex-wrap justify-center gap-3">
-          <Link to={voteHref}>
+          <Link to={primaryHref}>
             <Button size="lg" className="bg-gold hover:bg-gold/90 text-charcoal font-bold rounded-full px-7 gap-2 shadow-lg shadow-gold/20">
-              <Trophy className="w-4 h-4" /> Vote Now
+              {isBlueGarnet ? (
+                <><Trophy className="w-4 h-4" /> Vote Now</>
+              ) : (
+                <><RotateCcw className="w-4 h-4" /> Recommend Again</>
+              )}
             </Button>
           </Link>
           <Link to={nominateHref}>

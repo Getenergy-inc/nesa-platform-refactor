@@ -147,6 +147,7 @@ export default function CategoryLandingPage() {
             nomineeCount={categoryData.nominees.length}
             countryCount={categoryData.countries.length}
             subcategoryCount={categoryData.subcategories.length}
+            categorySlug={categorySlug}
           />
 
           {/* Horizontal Netflix-style subcategory tabs */}
