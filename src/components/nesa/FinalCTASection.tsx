@@ -2,18 +2,17 @@
 // Charcoal/Gold tokens. No custom CSS, no inline styles.
 import { Link } from "react-router-dom";
 import {
-  Trophy, Compass, Heart, Gavel, Handshake, MapPin, ArrowRight,
+  Trophy, Heart, Handshake, MapPin, Megaphone, ArrowRight,
 } from "lucide-react";
 import { motion } from "framer-motion";
 import { trackEvent } from "@/lib/analytics";
 
 const ACTIONS = [
-  { icon: Trophy,    label: "Nominate a Changemaker",   to: "/nominate",   cta: "nominate",   featured: true },
-  { icon: Compass,   label: "Explore Existing Nominees", to: "/nominees",  cta: "explore_nominees" },
-  { icon: Heart,     label: "Become a Volunteer",        to: "/volunteer", cta: "volunteer" },
-  { icon: Gavel,     label: "Become a Judge",            to: "/judges",    cta: "judge" },
-  { icon: Handshake, label: "Become a Sponsor",          to: "/sponsor",   cta: "sponsor" },
-  { icon: MapPin,    label: "Join a Local Chapter",      to: "/local-chapters", cta: "chapter" },
+  { icon: Trophy,    label: "Nominate a Changemaker",  to: "/nominate",       cta: "nominate", featured: true },
+  { icon: Heart,     label: "Become a Volunteer",      to: "/volunteer",      cta: "volunteer" },
+  { icon: Handshake, label: "Become a Sponsor",        to: "/sponsor",        cta: "sponsor" },
+  { icon: MapPin,    label: "Join a Local Chapter",    to: "/local-chapters", cta: "chapter" },
+  { icon: Megaphone, label: "Become an Ambassador",    to: "/ambassadors",    cta: "ambassador" },
 ];
 
 export function FinalCTASection() {
