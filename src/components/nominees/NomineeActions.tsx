@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { VoteModal } from "./VoteModal";
 import { RenominateModal } from "./RenominateModal";
 import { ThumbsUp, RotateCcw } from "lucide-react";
+import { getCategoryTier } from "@/config/nomineeCategories";
 
 export interface NomineeActionsData {
   nomineeId: string;
@@ -50,6 +51,10 @@ export function NomineeActions({
   const isCompact = variant === "compact";
   const isIconOnly = variant === "icon-only";
 
+  // Only Blue Garnet tier supports public voting; other tiers use Recommend Again.
+  const tier = getCategoryTier(nominee.subcategorySlug || nominee.awardSlug || "");
+  const allowVote = tier === "blue_garnet";
+
   const handleVoteClick = (e: React.MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
@@ -66,7 +71,8 @@ export function NomineeActions({
     <>
       <div className={`flex items-center gap-2 ${className}`}>
         {/* Vote Button - Primary */}
-        {showVote && (
+        {/* Vote Button - Blue Garnet only */}
+        {showVote && allowVote && (
           <Button
             onClick={handleVoteClick}
             size={isCompact || isIconOnly ? "sm" : "default"}
@@ -84,7 +90,7 @@ export function NomineeActions({
           </Button>
         )}
 
-        {/* Renominate/Endorse Button - Secondary */}
+        {/* Renominate/Endorse Button - shown for non-Blue-Garnet tiers (Platinum, Icon, etc.) */}
         {showRenominate && (
           <Button
             onClick={handleRenominateClick}
@@ -97,10 +103,10 @@ export function NomineeActions({
                 ? "h-8 px-3"
                 : ""
             } border-gold/30 text-gold hover:bg-gold/10`}
-            title="Renominate / Endorse this nominee"
+            title="Recommend Again — endorse this nominee"
           >
             <RotateCcw className={`${isIconOnly ? "h-4 w-4" : "h-4 w-4 mr-1.5"}`} />
-            {!isIconOnly && "Renominate"}
+            {!isIconOnly && "Recommend Again"}
           </Button>
         )}
       </div>

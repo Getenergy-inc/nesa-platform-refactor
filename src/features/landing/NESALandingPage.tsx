@@ -42,6 +42,8 @@ const ImpactProgramsSection = lazy(() => import("@/components/nesa/ImpactProgram
 const GovernanceFirewallSection = lazy(() => import("@/components/nesa/GovernanceFirewallSection").then(m => ({ default: m.GovernanceFirewallSection })));
 const FeaturedChangemakersSection = lazy(() => import("@/components/nesa/FeaturedChangemakersSection").then(m => ({ default: m.FeaturedChangemakersSection })));
 const CuratedFeaturedNominees = lazy(() => import("@/components/nominees/CuratedFeaturedNominees").then(m => ({ default: m.CuratedFeaturedNominees })));
+const VisionMissionSection = lazy(() => import("@/components/nesa/VisionMissionSection").then(m => ({ default: m.VisionMissionSection })));
+const FifteenObjectivesSection = lazy(() => import("@/components/nesa/FifteenObjectivesSection").then(m => ({ default: m.FifteenObjectivesSection })));
 
 
 
@@ -73,6 +75,16 @@ export function NESALandingPage() {
         <TrustLogosStrip />
         <LazySection>
           <EcosystemCarousel />
+        </LazySection>
+
+        {/* 2a. VISION & MISSION — institutional identity */}
+        <LazySection>
+          <VisionMissionSection />
+        </LazySection>
+
+        {/* 2a-ii. 15 STRATEGIC OBJECTIVES */}
+        <LazySection>
+          <FifteenObjectivesSection />
         </LazySection>
 
         {/* 2b. AWARD ARCHITECTURE — four-tier showcase */}

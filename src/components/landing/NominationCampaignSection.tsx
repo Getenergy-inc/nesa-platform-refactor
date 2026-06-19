@@ -26,7 +26,7 @@ export function NominationCampaignSection() {
   // NOTE: All CTAs route to existing pages. Do not replace with `#` placeholders.
   const ctas = [
     { label: "Nominate a Changemaker", to: "/nominate", primary: true, icon: Trophy },
-    { label: "Earn AGC Voting Points", to: "/earn-agc", primary: true, icon: Coins },
+    { label: "Earn AGC Voting Coin", to: "/earn-agc", primary: true, icon: Coins },
     { label: "View Award Categories", to: "/categories", icon: LayoutGrid },
     { label: "Meet the Nominees", to: "/nominees", icon: Users },
     { label: "How AGC Voting Works", to: "/guidelines/voters", icon: HelpCircle },
@@ -78,7 +78,7 @@ export function NominationCampaignSection() {
             className="border-gold/40 bg-gold/10 px-4 py-1.5 text-gold uppercase tracking-[0.18em] text-xs"
           >
             <Sparkles className="mr-2 h-3.5 w-3.5" />
-            Nominations Open · NESA-Africa 2025/26
+            Nominations Open · NESA-Africa 2026
           </Badge>
         </motion.div>
 
@@ -143,7 +143,7 @@ export function NominationCampaignSection() {
                 Nominate. Earn AGC. Celebrate Education Impact.
               </p>
               <p className="mt-1 text-sm text-ivory/70">
-                Nominate a changemaker today and earn AGC voting points to
+                Nominate a changemaker today and earn AGC Voting Coin to
                 support your favourite nominees when voting opens.
               </p>
             </div>
@@ -184,7 +184,7 @@ export function NominationCampaignSection() {
               From classrooms to communities, education changemakers are
               everywhere.{" "}
               <span className="text-gold">Nominate a Changemaker Now</span> and
-              earn AGC voting points to support real education impact across
+              earn AGC Voting Coin to support real education impact across
               Africa and the diaspora.
             </p>
           </motion.aside>
@@ -254,7 +254,7 @@ export function NominationCampaignSection() {
             Community engagement. Education impact storytelling.
           </p>
           <p className="mt-4 font-display text-base sm:text-lg text-gold">
-            Nominate a changemaker today and earn your AGC voting points.
+            Nominate a changemaker today and earn your AGC Voting Coin.
           </p>
           <div className="mt-5 flex flex-wrap justify-center gap-3">
             <Button asChild size="lg" className="bg-gold text-charcoal hover:bg-gold/90">
@@ -271,7 +271,7 @@ export function NominationCampaignSection() {
             >
               <Link to="/earn-agc">
                 <Coins className="mr-2 h-4 w-4" />
-                Earn AGC Voting Points
+                Earn AGC Voting Coin
               </Link>
             </Button>
           </div>

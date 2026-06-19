@@ -112,7 +112,7 @@ export function LandingNomineeCard({ nominee, isBlueGarnet: isBlueGarnetProp }: 
                 {isBlueGarnet ? (
                   <><Vote className="w-3.5 h-3.5 sm:mr-1.5" /> <span className="hidden sm:inline">Vote</span><span className="sm:hidden">Vote</span></>
                 ) : (
-                  <><RotateCcw className="w-3.5 h-3.5 sm:mr-1.5" /> <span>Re-nom</span></>
+                  <><RotateCcw className="w-3.5 h-3.5 sm:mr-1.5" /> <span className="hidden sm:inline">Recommend Again</span><span className="sm:hidden">Recommend</span></>
                 )}
               </Link>
             </Button>

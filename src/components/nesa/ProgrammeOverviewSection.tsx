@@ -64,7 +64,7 @@ export function ProgrammeOverviewSection() {
           <div className="flex items-center justify-center gap-2 p-4 rounded-xl bg-gold/5 border border-gold/20">
             <Coins className="h-5 w-5 text-gold flex-shrink-0" />
             <p className="text-sm text-white/80">
-              AGC voting points enable structured, auditable public participation during official voting stages.
+              AGC Voting Coin enable structured, auditable public participation during official voting stages.
             </p>
           </div>
         </div>
