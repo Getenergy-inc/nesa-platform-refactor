@@ -5,27 +5,31 @@ import { GOVERNANCE_STATS, REGIONAL_BRAND_MESSAGING } from "@/lib/regions";
 export function StatsStrip() {
   const { t } = useTranslation("pages");
   
+  // Stats reconciled (Phase 1): regions split clearly into 8 intervention + 10 engagement.
+  // Reference: REGIONAL_BRAND_MESSAGING retained for tooling/back-compat (not rendered).
+  void REGIONAL_BRAND_MESSAGING;
   const stats = [
-    { 
-      value: "5+2", 
-      label: REGIONAL_BRAND_MESSAGING.shortTagline, 
+    {
+      value: "10",
+      label: "Engagement Regions",
       color: "text-gold",
-      subLabel: "Continental + Global"
+      subLabel: "8 Intervention + Diaspora + Friends of Africa",
     },
-    { 
-      value: String(GOVERNANCE_STATS.judges), 
-      label: "Expert Judges", 
-      color: "text-gold" 
+    {
+      value: String(GOVERNANCE_STATS.judges),
+      label: "Expert Judges",
+      color: "text-gold",
     },
-    { 
-      value: String(GOVERNANCE_STATS.categories), 
-      label: t("landing.stats.categories"), 
-      color: "text-gold" 
+    {
+      value: "22",
+      label: t("landing.stats.categories"),
+      color: "text-gold",
+      subLabel: `${GOVERNANCE_STATS.subcategories}+ sub-categories`,
     },
-    { 
-      value: `${GOVERNANCE_STATS.subcategories}+`, 
-      label: t("landing.stats.subcategories"), 
-      color: "text-gold" 
+    {
+      value: "1,760+",
+      label: "Existing Nominees",
+      color: "text-gold",
     },
   ];
 

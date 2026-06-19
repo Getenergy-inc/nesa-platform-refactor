@@ -104,7 +104,7 @@ export function NESALandingPage() {
           <NomineeDiscoverySwitcher />
         </LazySection>
 
-        {/* 4b. IMPACT PROGRAMS — EduAid / RMSA / Special Needs / Edu-Tourism */}
+        {/* 4b. IMPACT PROGRAMS — EduAid / RMSA / Special Needs / Afri-EduTourism */}
         <LazySection>
           <ImpactProgramsSection />
         </LazySection>
@@ -126,7 +126,7 @@ export function NESALandingPage() {
             <p className="text-ivory/80 text-xs md:text-sm leading-relaxed mb-3">
               Each region now connects to the{" "}
               <span className="text-gold font-semibold">2026–2027 NESA-Africa Legacy Impact pathway</span>
-              {" "}— EduAid-Africa Edu-Tourism Conferences, Special Needs School
+              {" "}— EduAid-Africa Afri-EduTourism Conferences, Special Needs School
               nominations, regional voting, GFA Wzip regional wallets, and Rebuild My
               School Africa interventions.
             </p>

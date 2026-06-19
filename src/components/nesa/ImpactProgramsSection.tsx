@@ -1,5 +1,5 @@
 // Impact Programs grid — EduAid-Africa, Rebuild My School Africa,
-// Special Needs Education, Educational Tourism. Mobile-first, charcoal/gold.
+// Special Needs Education, Afri-EduTourism. Mobile-first, charcoal/gold.
 
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
@@ -24,7 +24,7 @@ const PROGRAMS: Program[] = [
     title: "EduAid-Africa",
     tagline: "Scholarships · Conferences · Training",
     description:
-      "Continental learning hub funding scholarships, hosting regional Edu-Tourism Conferences, and delivering teacher and youth training.",
+      "Continental learning hub funding scholarships, hosting regional Afri-EduTourism Conferences, and delivering teacher and youth training.",
     bullets: ["Send-A-Child-To-School", "Regional Conferences", "Teacher Training"],
     href: "/eduaid",
     cta: "Explore EduAid-Africa",
@@ -52,12 +52,12 @@ const PROGRAMS: Program[] = [
     cta: "Support Inclusion",
   },
   {
-    id: "edu-tourism",
+    id: "afri-edutourism",
     icon: Plane,
-    title: "Educational Tourism",
+    title: "Afri-EduTourism",
     tagline: "Learn · Serve · Tour · Transform",
     description:
-      "Edu-Tourism brings diaspora and global partners to Africa to learn, volunteer, and co-fund education impact in host regions.",
+      "Afri-EduTourism brings diaspora and global partners to Africa to learn, volunteer, and co-fund education impact in host regions.",
     bullets: ["Regional Tours", "Diaspora Volunteers", "Cultural Exchange"],
     href: "/programs/edu-tourism",
     cta: "Plan a Journey",

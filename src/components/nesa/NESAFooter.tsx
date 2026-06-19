@@ -43,14 +43,14 @@ const SECTIONS: FooterSection[] = [
       { label: "Rebuild My School Africa", href: "/eduaid-africa/rebuild-my-school" },
       { label: "Scholarships", href: "/programs/scholarships" },
       { label: "Special Needs Education", href: "/programs/special-needs" },
-      { label: "Educational Tourism", href: "/programs/edu-tourism" },
+      { label: "Afri-EduTourism", href: "/programs/edu-tourism" },
     ],
   },
   {
     title: "Get Involved",
     links: [
       { label: "Nominate 2026", href: "/nominate" },
-      { label: "Vote", href: "/vote" },
+      { label: "Learn About the AGC Voting Coin", href: "/earn-agc" },
       { label: "Become a Volunteer", href: "/volunteer" },
       { label: "Become a Judge", href: "/judges" },
       { label: "Become a Sponsor", href: "/sponsorship-packages" },

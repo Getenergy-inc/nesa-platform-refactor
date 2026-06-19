@@ -127,30 +127,7 @@ export function TrophyHeroSection() {
               Nominate a changemaker today, discover Africa's education impact stories, and get ready to support your favourite nominees when voting opens.
             </motion.p>
 
-            {/* Feature chips — six platform pillars */}
-            <motion.ul
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.7 }}
-              className="flex flex-wrap gap-1.5 sm:gap-2 justify-center lg:justify-start mb-6"
-              aria-label="Platform pillars"
-            >
-              {[
-                "Nominations",
-                "Voting",
-                "Education Impact",
-                "Scholarships",
-                "Special Needs",
-                "School Transformation",
-              ].map((chip) => (
-                <li
-                  key={chip}
-                  className="px-2.5 py-1 rounded-full bg-white/5 border border-gold/25 text-white/85 text-[11px] sm:text-xs font-medium"
-                >
-                  {chip}
-                </li>
-              ))}
-            </motion.ul>
+            {/* Hero tab chips removed (Phase 1): dedicated sections below handle each pillar. */}
 
 
             <motion.div
@@ -168,7 +145,7 @@ export function TrophyHeroSection() {
               transition={{ duration: 0.5, delay: 0.85 }}
               className="text-gold/70 text-xs sm:text-sm tracking-wide mb-10 max-w-xl mx-auto lg:mx-0 leading-relaxed"
             >
-              Voting opens according to the official NESA-Africa 2026 timeline. AGC voting points are subject to NESA-Africa participation rules.
+              Voting opens according to the official NESA-Africa 2026 timeline. The AGC Voting Coin is subject to NESA-Africa participation rules.
             </motion.p>
           </div>
 
