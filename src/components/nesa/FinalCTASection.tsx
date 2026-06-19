@@ -1,4 +1,4 @@
-import { Award, ArrowRight, Vote, Ticket, Heart, Globe, Users, Calendar } from "lucide-react";
+import { Award, ArrowRight, Coins, Ticket, Heart, Globe, Users, Calendar } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { Button } from "@/components/ui/button";
@@ -36,10 +36,10 @@ export function FinalCTASection() {
                 <ArrowRight className="h-5 w-5 group-hover:translate-x-1 transition-transform" />
               </Button>
             </Link>
-            <Link to="/vote" className="group" onClick={() => trackEvent("final_cta_click", { cta: "vote", to: "/vote", location: "final_cta" })}>
+            <Link to="/earn-agc" className="group" onClick={() => trackEvent("final_cta_click", { cta: "agc_voting_coin", to: "/earn-agc", location: "final_cta" })}>
               <Button size="lg" variant="outline" className="border-2 border-gold/50 text-gold hover:bg-gold/10 hover:border-gold rounded-full px-10 gap-2.5 transition-all min-h-[56px] text-lg">
-                <Vote className="h-5 w-5" />
-                {t("common:actions.vote")}
+                <Coins className="h-5 w-5" />
+                Learn About the AGC Voting Coin
               </Button>
             </Link>
           </div>

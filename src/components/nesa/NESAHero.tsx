@@ -160,9 +160,9 @@ export function NESAHero() {
         {/* Stats preview - De-emphasized but present */}
         <div className="flex flex-wrap justify-center gap-4 sm:gap-6 mt-8 sm:mt-10 animate-fade-in opacity-70" style={{ animationDelay: '0.6s' }}>
           {[
-            { label: t("landing.hero.stats.nominees"), value: "2,500+" },
-            { label: "Regions", value: "5+2" },
-            { label: t("landing.hero.stats.categories"), value: "17" },
+            { label: t("landing.hero.stats.nominees"), value: "1,760+" },
+            { label: "Engagement Regions", value: "10" },
+            { label: t("landing.hero.stats.categories"), value: "22" },
           ].map((stat) => (
             <div 
               key={stat.label}

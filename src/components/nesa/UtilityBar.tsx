@@ -8,7 +8,6 @@ import {
   Users,
   Gavel,
   LayoutDashboard,
-  Wallet,
   LogIn,
 } from "lucide-react";
 import { useAuth } from "@/contexts/AuthContext";
@@ -57,22 +56,13 @@ export function UtilityBar() {
         {/* Right: account + language */}
         <div className="flex items-center gap-1 lg:gap-2">
           {user ? (
-            <>
-              <Link
-                to="/dashboard"
-                className="inline-flex items-center gap-1.5 px-2 py-1 rounded-md text-white/70 hover:text-gold hover:bg-gold/10"
-              >
-                <LayoutDashboard className="h-3 w-3" aria-hidden="true" />
-                <span>Dashboard</span>
-              </Link>
-              <Link
-                to="/wallet"
-                className="inline-flex items-center gap-1.5 px-2 py-1 rounded-md text-white/70 hover:text-gold hover:bg-gold/10"
-              >
-                <Wallet className="h-3 w-3" aria-hidden="true" />
-                <span>Wallet</span>
-              </Link>
-            </>
+            <Link
+              to="/dashboard"
+              className="inline-flex items-center gap-1.5 px-2 py-1 rounded-md text-white/70 hover:text-gold hover:bg-gold/10"
+            >
+              <LayoutDashboard className="h-3 w-3" aria-hidden="true" />
+              <span>Dashboard</span>
+            </Link>
           ) : (
             <Link
               to="/login"

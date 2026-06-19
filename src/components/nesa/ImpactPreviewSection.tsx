@@ -4,10 +4,11 @@
 import { Link } from "react-router-dom";
 import { ArrowRight, MapPin, GraduationCap, Building2 } from "lucide-react";
 
+// GFA Wzip Wallets removed from public-facing impact preview (Phase 1).
 const BADGES = [
   "Special Needs Schools",
   "Regional Voting",
-  "GFA Wzip Wallets",
+  "Afri-EduTourism Conferences",
   "Rebuild My School Africa 2027",
 ];
 
@@ -33,9 +34,9 @@ export function ImpactPreviewSection() {
             through <span className="text-gold font-semibold">EduAid-Africa</span> and{" "}
             <span className="text-gold font-semibold">Rebuild My School Africa</span>.
             From October 2026 to October 2027, Special Needs School nominations,
-            regional voting, GFA Wzip funding portals, and selected school
+            regional voting, Afri-EduTourism Conferences, and selected school
             interventions will support inclusive education across the 8 approved
-            African regions.
+            African intervention regions.
           </p>
 
           <ul className="flex flex-wrap gap-2 mb-7 justify-center md:justify-start">

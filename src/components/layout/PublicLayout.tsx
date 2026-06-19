@@ -9,7 +9,7 @@ import { MobileBottomNav } from "@/components/navigation/MainNav";
 import { BottomPageNav } from "@/components/navigation/PageNavigation";
 import { ExitIntentPopup } from "@/components/nesa/ExitIntentPopup";
 import { PageFAQSection, FloatingFAQButton } from "@/components/nesa/PageFAQ";
-import { MobileAGCWallet } from "@/components/rewards/MobileAGCWallet";
+// MobileAGCWallet intentionally removed from public layout — wallet is not exposed in public UI until backend/audit infrastructure is confirmed.
 import { TrustSpine } from "@/components/trust/TrustSpine";
 import { ExploreNomineesCTA } from "@/components/nominees/ExploreNomineesCTA";
 import { useLocation } from "react-router-dom";
@@ -61,7 +61,7 @@ export function PublicLayout({
       <BottomPageNav />
       <ExitIntentPopup />
       <FloatingFAQButton />
-      <MobileAGCWallet />
+      {/* MobileAGCWallet removed from public UI */}
     </div>
   );
 }
