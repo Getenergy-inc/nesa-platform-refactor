@@ -71,7 +71,8 @@ export function NomineeActions({
     <>
       <div className={`flex items-center gap-2 ${className}`}>
         {/* Vote Button - Primary */}
-        {showVote && (
+        {/* Vote Button - Blue Garnet only */}
+        {showVote && allowVote && (
           <Button
             onClick={handleVoteClick}
             size={isCompact || isIconOnly ? "sm" : "default"}
@@ -89,7 +90,7 @@ export function NomineeActions({
           </Button>
         )}
 
-        {/* Renominate/Endorse Button - Secondary */}
+        {/* Renominate/Endorse Button - shown for non-Blue-Garnet tiers (Platinum, Icon, etc.) */}
         {showRenominate && (
           <Button
             onClick={handleRenominateClick}
