@@ -103,10 +103,10 @@ export function NomineeActions({
                 ? "h-8 px-3"
                 : ""
             } border-gold/30 text-gold hover:bg-gold/10`}
-            title="Renominate / Endorse this nominee"
+            title="Recommend Again — endorse this nominee"
           >
             <RotateCcw className={`${isIconOnly ? "h-4 w-4" : "h-4 w-4 mr-1.5"}`} />
-            {!isIconOnly && "Renominate"}
+            {!isIconOnly && "Recommend Again"}
           </Button>
         )}
       </div>
