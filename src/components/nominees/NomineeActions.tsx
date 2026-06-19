@@ -51,6 +51,10 @@ export function NomineeActions({
   const isCompact = variant === "compact";
   const isIconOnly = variant === "icon-only";
 
+  // Only Blue Garnet tier supports public voting; other tiers use Recommend Again.
+  const tier = getCategoryTier(nominee.subcategorySlug || nominee.awardSlug || "");
+  const allowVote = tier === "blue_garnet";
+
   const handleVoteClick = (e: React.MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
