@@ -36,7 +36,7 @@ const ImpactProgramsSection = lazy(() => import("@/components/nesa/ImpactProgram
 const WatchMediaSection = lazy(() => import("@/components/nesa/WatchMediaSection").then(m => ({ default: m.WatchMediaSection })));
 const SponsorsSection = lazy(() => import("@/components/nesa/SponsorsSection").then(m => ({ default: m.SponsorsSection })));
 const GovernanceFirewallSection = lazy(() => import("@/components/nesa/GovernanceFirewallSection").then(m => ({ default: m.GovernanceFirewallSection })));
-const Vision2035Section = lazy(() => import("@/components/nesa/Vision2035Section").then(m => ({ default: m.default ?? (m as any).Vision2035Section })));
+const Vision2035Section = lazy(() => import("@/components/nesa/Vision2035Section").then(m => ({ default: m.Vision2035Section })));
 const FinalCTASection = lazy(() => import("@/components/nesa/FinalCTASection").then(m => ({ default: m.FinalCTASection })));
 
 export function NESALandingPage() {
