@@ -44,6 +44,9 @@ const FeaturedChangemakersSection = lazy(() => import("@/components/nesa/Feature
 const CuratedFeaturedNominees = lazy(() => import("@/components/nominees/CuratedFeaturedNominees").then(m => ({ default: m.CuratedFeaturedNominees })));
 const VisionMissionSection = lazy(() => import("@/components/nesa/VisionMissionSection").then(m => ({ default: m.VisionMissionSection })));
 const FifteenObjectivesSection = lazy(() => import("@/components/nesa/FifteenObjectivesSection").then(m => ({ default: m.FifteenObjectivesSection })));
+const RegionsIntroSection = lazy(() => import("@/components/nesa/RegionsIntroSection").then(m => ({ default: m.RegionsIntroSection })));
+const ChangemakersIntroSection = lazy(() => import("@/components/nesa/ChangemakersIntroSection").then(m => ({ default: m.ChangemakersIntroSection })));
+const PathwaysIntroSection = lazy(() => import("@/components/nesa/PathwaysIntroSection").then(m => ({ default: m.PathwaysIntroSection })));
 
 
 
@@ -68,71 +71,31 @@ export function NESALandingPage() {
         <UtilityBar />
         <NESAHeader />
 
-        {/* 1. HERO — primary CTAs */}
+        {/* SECTION 1 — HERO */}
         <TrophyHeroSection />
 
-        {/* 2. ECOSYSTEM TRUST — honourees/ecosystem strip moved up for fast credibility */}
+        {/* Trust strip — credibility immediately under hero */}
         <TrustLogosStrip />
-        <LazySection>
-          <EcosystemCarousel />
-        </LazySection>
 
-        {/* 2a. VISION & MISSION — institutional identity */}
+        {/* SECTION 2 — VISION, MISSION & PURPOSE */}
         <LazySection>
           <VisionMissionSection />
         </LazySection>
 
-        {/* 2a-ii. 15 STRATEGIC OBJECTIVES */}
+        {/* SECTION 3 — 15 STRATEGIC OBJECTIVES */}
         <LazySection>
           <FifteenObjectivesSection />
         </LazySection>
 
-        {/* 2b. AWARD ARCHITECTURE — four-tier showcase */}
+        {/* SECTION 4 — ONE CONTINENT. TEN EDUCATION REGIONS */}
         <LazySection>
-          <AwardShowcaseSection />
+          <RegionsIntroSection />
         </LazySection>
-
-        {/* 2c. FEATURED CHANGEMAKERS — Africa's Education Impact Directory gateway */}
-        <LazySection>
-          <FeaturedChangemakersSection />
-        </LazySection>
-
-        {/* 2d. HALL OF FAME SPOTLIGHT — curated marquee approved nominees */}
-        <LazySection>
-          <CuratedFeaturedNominees />
-        </LazySection>
-
-        {/* 3. COUNTDOWN — Blue Garnet 2026 Gala urgency */}
-        <CountdownSection />
-
-        {/* 3b. MOBILE CATEGORY DISCOVERY — horizontal swipe rail (mobile only) */}
-        <LazySection>
-          <MobileCategoryRail />
-        </LazySection>
-
-
-        {/* 4. NOMINEE DISCOVERY — responsive on all devices */}
-        <LazySection>
-          <NomineeDiscoverySwitcher />
-        </LazySection>
-
-        {/* 4b. IMPACT PROGRAMS — EduAid / RMSA / Special Needs / Afri-EduTourism */}
-        <LazySection>
-          <ImpactProgramsSection />
-        </LazySection>
-
-
-        {/* 5. MOMENTS PREVIEW — visible on all devices */}
-        <LazySection>
-          <HomepageGalleryTeaser />
-        </LazySection>
-
-        {/* 6. REGIONAL PREVIEW — public map + region cards (gateway to /region/:slug) */}
         <LazySection>
           <InteractiveAfricaMap />
         </LazySection>
 
-        {/* 6b. Bridge note → 2026–2027 Legacy Impact pathway */}
+        {/* Bridge note → 2026–2027 Legacy Impact pathway */}
         <div className="container mx-auto max-w-4xl px-4 -mt-6 mb-8">
           <div className="rounded-2xl border border-gold/25 bg-gold/5 px-5 py-4 text-center">
             <p className="text-ivory/80 text-xs md:text-sm leading-relaxed mb-3">
@@ -151,43 +114,71 @@ export function NESALandingPage() {
           </div>
         </div>
 
-        {/* 7. IMPACT PREVIEW — short gateway card (full content lives on /impact, /impact/regional-school-intervention, /eduaid-africa, /eduaid-africa/rebuild-my-school) */}
+        {/* SECTION 5 — DISCOVER AFRICA'S EDUCATION CHANGEMAKERS */}
+        <LazySection>
+          <ChangemakersIntroSection />
+        </LazySection>
+        <LazySection>
+          <FeaturedChangemakersSection />
+        </LazySection>
+        <LazySection>
+          <CuratedFeaturedNominees />
+        </LazySection>
+        <LazySection>
+          <MobileCategoryRail />
+        </LazySection>
+        <LazySection>
+          <NomineeDiscoverySwitcher />
+        </LazySection>
+
+        {/* SECTION 6 — FOUR RECOGNITION PATHWAYS — Four Tiers. One Standard. */}
+        <LazySection>
+          <PathwaysIntroSection />
+        </LazySection>
+        <LazySection>
+          <AwardShowcaseSection />
+        </LazySection>
+
+        {/* Countdown — Blue Garnet 2026 Gala urgency */}
+        <CountdownSection />
+
+        {/* SECTION 7 — FROM RECOGNITION TO REAL IMPACT */}
+        <LazySection>
+          <ImpactProgramsSection />
+        </LazySection>
         <LazySection>
           <ImpactPreviewSection />
         </LazySection>
 
-        {/* About NESA-Africa 2026 — responsive on all devices */}
+        {/* Moments preview */}
+        <LazySection>
+          <HomepageGalleryTeaser />
+        </LazySection>
+
+        {/* About + Volunteers + Sponsor preview */}
         <LazySection>
           <AboutNESASection />
         </LazySection>
-
-        {/* Powered by Volunteers — responsive on all devices */}
         <LazySection>
           <PoweredByVolunteersSection />
         </LazySection>
-
-        {/* Sponsors logos strip — credibility only, no pricing */}
         <LazySection>
           <SponsorsSection />
         </LazySection>
-
-        {/* SPONSOR PREVIEW — short gateway card (full pricing lives on /sponsorship-packages, /sponsor, /sponsor/:slug) */}
         <LazySection>
           <SponsorPreviewSection />
         </LazySection>
 
-        {/* Governance firewall — integrity messaging */}
+        {/* SECTION 8 — GOVERNANCE & TRUST — A Firewall You Can Trust */}
         <LazySection>
           <GovernanceFirewallSection />
         </LazySection>
-
-
 
         <LazySection>
           <PageFAQSection />
         </LazySection>
 
-        {/* 8. FINAL CTA */}
+        {/* SECTION 9 — FINAL CTA */}
         <LazySection>
           <FinalCTASection />
         </LazySection>
