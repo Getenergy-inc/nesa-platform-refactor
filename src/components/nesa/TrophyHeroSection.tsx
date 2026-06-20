@@ -88,6 +88,15 @@ export function TrophyHeroSection() {
               </p>
             </motion.div>
 
+            <motion.p
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.28 }}
+              className="font-display text-[13px] sm:text-sm md:text-base tracking-[0.22em] uppercase text-gold/90 mb-2"
+            >
+              A Continent in Recognition
+            </motion.p>
+
             <motion.h1
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
