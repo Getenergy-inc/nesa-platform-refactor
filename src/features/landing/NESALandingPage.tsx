@@ -41,6 +41,7 @@ const AwardShowcaseSection = lazy(() => import("@/components/nesa/AwardShowcaseS
 const ImpactProgramsSection = lazy(() => import("@/components/nesa/ImpactProgramsSection").then(m => ({ default: m.ImpactProgramsSection })));
 const GovernanceFirewallSection = lazy(() => import("@/components/nesa/GovernanceFirewallSection").then(m => ({ default: m.GovernanceFirewallSection })));
 const FeaturedChangemakersSection = lazy(() => import("@/components/nesa/FeaturedChangemakersSection").then(m => ({ default: m.FeaturedChangemakersSection })));
+const CuratedFeaturedNominees = lazy(() => import("@/components/nominees/CuratedFeaturedNominees").then(m => ({ default: m.CuratedFeaturedNominees })));
 
 
 
@@ -82,6 +83,11 @@ export function NESALandingPage() {
         {/* 2c. FEATURED CHANGEMAKERS — Africa's Education Impact Directory gateway */}
         <LazySection>
           <FeaturedChangemakersSection />
+        </LazySection>
+
+        {/* 2d. HALL OF FAME SPOTLIGHT — curated marquee approved nominees */}
+        <LazySection>
+          <CuratedFeaturedNominees />
         </LazySection>
 
         {/* 3. COUNTDOWN — Blue Garnet 2026 Gala urgency */}

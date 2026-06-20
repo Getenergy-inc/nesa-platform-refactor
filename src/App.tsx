@@ -174,7 +174,16 @@ import {
   JudgeChatRoom,
   JudgeIconLifetime,
 } from "./pages/judge";
+import JudgeOnboarding from "./pages/judge/JudgeOnboarding";
+import MyCertificates from "./pages/MyCertificates";
+import CertificateGuide from "./pages/CertificateGuide";
+import VotingPortal from "./pages/VotingPortal";
 import { JudgeArenaGuard } from "./components/judge/JudgeArenaGuard";
+import ArenaShellLayout from "./components/judge/ArenaShellLayout";
+import ArenaDashboard from "./pages/judges-arena/ArenaDashboard";
+import ArenaNominees from "./pages/judges-arena/ArenaNominees";
+import ArenaReview from "./pages/judges-arena/ArenaReview";
+import ArenaDiscussion from "./pages/judges-arena/ArenaDiscussion";
 import Partners from "./pages/Partners";
 import Chapters from "./pages/Chapters";
 import Volunteer from "./pages/Volunteer";
@@ -205,6 +214,7 @@ import {
   ForJudges,
   ForVoters,
   ContinueRecognition,
+  ImpactStorytelling,
 } from "./pages/guidelines";
 import Vote from "./pages/Vote";
 import VoteWithAGC from "./pages/VoteWithAGC";
@@ -702,6 +712,41 @@ const App = () => (
                       </WithLayout>
                     }
                   />
+                  <Route
+                    path="/my-certificates"
+                    element={
+                      <WithLayout>
+                        <MyCertificates />
+                      </WithLayout>
+                    }
+                  />
+                  <Route
+                    path="/certificates/guide"
+                    element={
+                      <WithLayout>
+                        <CertificateGuide />
+                      </WithLayout>
+                    }
+                  />
+                  <Route
+                    path="/my-certificates/guide"
+                    element={
+                      <WithLayout>
+                        <CertificateGuide />
+                      </WithLayout>
+                    }
+                  />
+
+                  <Route
+                    path="/voting-portal"
+                    element={
+                      <WithLayout>
+                        <VotingPortal />
+                      </WithLayout>
+                    }
+                  />
+
+
 
                   {/* Pathways to Recognition — dedicated page + 4 award category pages */}
                   <Route
@@ -941,6 +986,38 @@ const App = () => (
                     element={
                       <WithLayout>
                         <DiasporaEducation />
+                      </WithLayout>
+                    }
+                  />
+                  <Route
+                    path="/categories/diaspora-education-impact"
+                    element={
+                      <WithLayout>
+                        <DiasporaEducation />
+                      </WithLayout>
+                    }
+                  />
+                  <Route
+                    path="/categories/international-bilateral-education"
+                    element={
+                      <WithLayout>
+                        <InternationalEducation />
+                      </WithLayout>
+                    }
+                  />
+                  <Route
+                    path="/categories/islamic-education-impact-africa"
+                    element={
+                      <WithLayout>
+                        <IslamicEducationAfrica />
+                      </WithLayout>
+                    }
+                  />
+                  <Route
+                    path="/categories/christian-education-impact-africa"
+                    element={
+                      <WithLayout>
+                        <ChristianEducationAfrica />
                       </WithLayout>
                     }
                   />
@@ -1763,6 +1840,14 @@ const App = () => (
                     }
                   />
                   <Route
+                    path="/judge/onboarding"
+                    element={
+                      <JudgeArenaGuard>
+                        <JudgeOnboarding />
+                      </JudgeArenaGuard>
+                    }
+                  />
+                  <Route
                     path="/judge/dashboard"
                     element={
                       <JudgeArenaGuard>
@@ -1842,6 +1927,21 @@ const App = () => (
                       </JudgeArenaGuard>
                     }
                   />
+
+                  {/* Judges Arena (new shell) */}
+                  <Route
+                    path="/judges-arena"
+                    element={
+                      <JudgeArenaGuard>
+                        <ArenaShellLayout />
+                      </JudgeArenaGuard>
+                    }
+                  >
+                    <Route index element={<ArenaDashboard />} />
+                    <Route path="nominees" element={<ArenaNominees />} />
+                    <Route path="nominee/:slug" element={<ArenaReview />} />
+                    <Route path="discussion" element={<ArenaDiscussion />} />
+                  </Route>
                   <Route
                     path="/partners"
                     element={
@@ -1990,6 +2090,14 @@ const App = () => (
                   <Route
                     path="/guidelines/update-impact"
                     element={<Navigate to="/guidelines/renomination" replace />}
+                  />
+                  <Route
+                    path="/guidelines/impact-storytelling"
+                    element={
+                      <WithLayout>
+                        <ImpactStorytelling />
+                      </WithLayout>
+                    }
                   />
 
                   {/* Get Involved - Endorse NESA */}

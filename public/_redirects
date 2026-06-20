@@ -64,7 +64,7 @@
 /cookie-policy                                               /policies            301
 /language                                                    /                    301
 
-# --- 2. SPA routes (309 explicit paths from src/App.tsx) ---
+# --- 2. SPA routes (323 explicit paths from src/App.tsx) ---
 /nominees/gold-special-recognition/:categorySlug/:nomineeSlug /index.html          200
 /nominees/best-ngo-contribution-to-education/profile/:slug   /index.html          200
 /awards/influencers-education-impact-2026-recognition        /index.html          200
@@ -73,8 +73,11 @@
 /nominees/africa-education-icon-award/:sub/:cls              /index.html          200
 /nominees/category/africa-education-icon-award               /index.html          200
 /awards/platinum-certificate-categories/:slug                /index.html          200
+/categories/christian-education-impact-africa                /index.html          200
+/categories/international-bilateral-education                /index.html          200
 /eduaid-africa/rebuild-my-school/:regionSlug                 /index.html          200
 /nominees/best-ngo-contribution-to-education                 /index.html          200
+/categories/islamic-education-impact-africa                  /index.html          200
 /awards/influencers-education-impact/:slug                   /index.html          200
 /category/education-friendly-state-nigeria                   /index.html          200
 /nominees/africa-education-icon-award/:sub                   /index.html          200
@@ -82,6 +85,7 @@
 /awards/gold-special-recognition-legacy                      /index.html          200
 /awards/platinum-certificate-categories                      /index.html          200
 /category/research-development-nigeria                       /index.html          200
+/categories/diaspora-education-impact                        /index.html          200
 /nominees/africa-education-icon-award                        /index.html          200
 /awards/blue-garnet-categories/:slug                         /index.html          200
 /awards/influencers-education-impact                         /index.html          200
@@ -103,6 +107,7 @@
 /category/csr-education-nigeria                              /index.html          200
 /category/ngo-education-nigeria                              /index.html          200
 /category/stem-education-africa                              /index.html          200
+/guidelines/impact-storytelling                              /index.html          200
 /awards/blue-garnet-categories                               /index.html          200
 /category/csr-education-africa                               /index.html          200
 /category/ngo-education-africa                               /index.html          200
@@ -144,6 +149,7 @@
 /dashboard/nominations                                       /index.html          200
 /guidelines/edi-matrix                                       /index.html          200
 /guidelines/nominators                                       /index.html          200
+/my-certificates/guide                                       /index.html          200
 /nominee/accept/:token                                       /index.html          200
 /nominees/region/:slug                                       /index.html          200
 /nrc/dashboard/flagged                                       /index.html          200
@@ -171,6 +177,7 @@
 /volunteer/referrals                                         /index.html          200
 /admin/contributors                                          /index.html          200
 /awards/blue-garnet                                          /index.html          200
+/certificates/guide                                          /index.html          200
 /dashboard/settings                                          /index.html          200
 /join-local-chapter                                          /index.html          200
 /nominees-directory                                          /index.html          200
@@ -197,6 +204,7 @@
 /dashboard/wallet                                            /index.html          200
 /how-voting-works                                            /index.html          200
 /judge/guidelines                                            /index.html          200
+/judge/onboarding                                            /index.html          200
 /judges/directory                                            /index.html          200
 /media/highlights                                            /index.html          200
 /payments/gfawzip                                            /index.html          200
@@ -212,6 +220,7 @@
 /directory/:slug                                             /index.html          200
 /forgot-password                                             /index.html          200
 /judge/dashboard                                             /index.html          200
+/my-certificates                                             /index.html          200
 /olc/settlements                                             /index.html          200
 /shop/orders/:id                                             /index.html          200
 /upcoming-events                                             /index.html          200
@@ -250,6 +259,7 @@
 /sponsor/:slug                                               /index.html          200
 /volunteer-bod                                               /index.html          200
 /vote-with-agc                                               /index.html          200
+/voting-portal                                               /index.html          200
 /admin/impact                                                /index.html          200
 /admin/orders                                                /index.html          200
 /admin/voting                                                /index.html          200
@@ -264,6 +274,7 @@
 /judge/signup                                                /index.html          200
 /judge/status                                                /index.html          200
 /judge/verify                                                /index.html          200
+/judges-arena                                                /index.html          200
 /judges/:slug                                                /index.html          200
 /media/events                                                /index.html          200
 /media/photos                                                /index.html          200
@@ -276,6 +287,7 @@
 /region/:slug                                                /index.html          200
 /unauthorized                                                /index.html          200
 /verify/:hash                                                /index.html          200
+nominee/:slug                                                /index.html          200
 /account/otp                                                 /index.html          200
 /agc-rewards                                                 /index.html          200
 /ambassadors                                                 /index.html          200
@@ -315,6 +327,7 @@
 /shop/cart                                                   /index.html          200
 /volunteer                                                   /index.html          200
 /vote/gold                                                   /index.html          200
+discussion                                                   /index.html          200
 /category                                                    /index.html          200
 /chapters                                                    /index.html          200
 /checkout                                                    /index.html          200
@@ -343,6 +356,7 @@
 /results                                                     /index.html          200
 /sponsor                                                     /index.html          200
 /tickets                                                     /index.html          200
+nominees                                                     /index.html          200
 /awards                                                      /index.html          200
 /donate                                                      /index.html          200
 /eduaid                                                      /index.html          200

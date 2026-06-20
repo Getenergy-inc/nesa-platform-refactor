@@ -5,3 +5,4 @@ export { default as ForNominees } from "./ForNominees";
 export { default as ForJudges } from "./ForJudges";
 export { default as ForVoters } from "./ForVoters";
 export { default as ContinueRecognition } from "./ContinueRecognition";
+export { default as ImpactStorytelling } from "./ImpactStorytelling";

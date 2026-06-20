@@ -30,6 +30,8 @@ import { FollowButton } from "@/components/ui/FollowButton";
 import { NomineeEDIScores } from "@/components/nominees/NomineeEDIScores";
 import { EducationForAllMetrics } from "@/components/nominees/EducationForAllMetrics";
 import { NomineeGovernanceNotice } from "@/components/nominees/NomineeGovernanceNotice";
+import { ImpactStoryArc } from "@/components/nominees/ImpactStoryArc";
+import { EDIStoryBullets } from "@/components/nominees/EDIStoryBullets";
 
 // Deterministic numeric hash from slug, used as nomineeId for EDI scoring.
 function slugToNumericId(slug: string): number {
@@ -358,6 +360,9 @@ export default function NomineeProfile() {
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
             {/* Main Column */}
             <div className="lg:col-span-2 space-y-8">
+              {/* Impact Story Arc — Problem → Intervention → Results → Vision */}
+              <ImpactStoryArc nominee={nominee} />
+
               {/* Recognition Citation */}
               <Card className="bg-charcoal-light/60 border-gold/15 text-ivory">
                 <CardContent className="p-6 md:p-8">
@@ -405,20 +410,34 @@ export default function NomineeProfile() {
                     <div className="w-10 h-10 rounded-full bg-gold/10 flex items-center justify-center">
                       <TrendingUp className="w-5 h-5 text-gold" />
                     </div>
-                    <div>
+                    <div className="flex-1">
                       <h2 className="text-xl font-display text-ivory font-semibold">
                         Education Development Index (EDI) Matrix
                       </h2>
                       <p className="text-[11px] text-ivory/55 mt-0.5">
-                        6-pillar evaluation aligned with NESA-Africa governance standards.
+                        6-dimension evaluation aligned with NESA-Africa governance standards.
                       </p>
                     </div>
+                    <Link
+                      to="/guidelines/edi-matrix#how-edi-is-calculated"
+                      className="hidden sm:inline-flex items-center gap-1 text-[11px] text-gold/80 hover:text-gold border border-gold/30 hover:border-gold rounded-full px-3 py-1 transition-colors"
+                    >
+                      How EDI is calculated →
+                    </Link>
                   </div>
                   <NomineeEDIScores
                     nomineeId={slugToNumericId(nominee.slug)}
                     achievement={nominee.achievement || ""}
                     category={nominee.subcategoryTitle || nominee.awardTitle}
                   />
+                  <div className="mt-4">
+                    <EDIStoryBullets
+                      nomineeId={slugToNumericId(nominee.slug)}
+                      achievement={nominee.achievement || ""}
+                      category={nominee.subcategoryTitle || nominee.awardTitle}
+                      nomineeName={nominee.name}
+                    />
+                  </div>
                 </CardContent>
               </Card>
 

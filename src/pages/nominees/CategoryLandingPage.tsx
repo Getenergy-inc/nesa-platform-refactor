@@ -12,6 +12,7 @@ import { CategoryHero } from "@/components/nominees/CategoryHero";
 import { NomineeFilterBar, type NomineeSort } from "@/components/nominees/NomineeFilterBar";
 import { FeaturedNomineeSpotlight } from "@/components/nominees/FeaturedNomineeSpotlight";
 import { SubcategoryTabs, type SubcategoryTab } from "@/components/nominees/SubcategoryTabs";
+import { ExploreNomineesCTA } from "@/components/nominees/ExploreNomineesCTA";
 
 const PAGE_SIZE = 12;
 
@@ -226,6 +227,15 @@ export default function CategoryLandingPage() {
               </Button>
             </div>
           )}
+
+          {/* Cross-surface CTA — drive discovery back to the global directory */}
+          <div className="mt-12">
+            <ExploreNomineesCTA
+              filterQuery={`?category=${categorySlug}`}
+              title="Explore All Nominees Across Africa"
+              description="Compare changemakers in this category against the full Africa Education Impact Directory — 1,760+ nominees across 54 countries and 8 regions."
+            />
+          </div>
         </div>
       </section>
     </>
