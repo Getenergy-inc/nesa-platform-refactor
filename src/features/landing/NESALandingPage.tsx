@@ -29,19 +29,14 @@ const EcosystemCarousel = lazy(() => import("@/components/landing/EcosystemCarou
 const ImpactPreviewSection = lazy(() => import("@/components/nesa/ImpactPreviewSection").then(m => ({ default: m.ImpactPreviewSection })));
 const SponsorPreviewSection = lazy(() => import("@/components/nesa/SponsorPreviewSection").then(m => ({ default: m.SponsorPreviewSection })));
 
-const InteractiveAfricaMap = lazy(() => import("@/components/nesa/InteractiveAfricaMap").then(m => ({ default: m.InteractiveAfricaMap })));
 const SponsorsSection = lazy(() => import("@/components/nesa/SponsorsSection").then(m => ({ default: m.SponsorsSection })));
 const FinalCTASection = lazy(() => import("@/components/nesa/FinalCTASection").then(m => ({ default: m.FinalCTASection })));
 const HomepageGalleryTeaser = lazy(() => import("@/components/gallery/HomepageGalleryTeaser").then(m => ({ default: m.HomepageGalleryTeaser })));
-const NomineeDiscoverySwitcher = lazy(() => import("@/components/nominees/NomineeDiscoverySwitcher").then(m => ({ default: m.NomineeDiscoverySwitcher })));
-const AboutNESASection = lazy(() => import("@/components/nesa/AboutNESASection").then(m => ({ default: m.AboutNESASection })));
 const PoweredByVolunteersSection = lazy(() => import("@/components/nesa/PoweredByVolunteersSection").then(m => ({ default: m.PoweredByVolunteersSection })));
 const MobileCategoryRail = lazy(() => import("@/components/landing/MobileCategoryRail").then(m => ({ default: m.MobileCategoryRail })));
 const AwardShowcaseSection = lazy(() => import("@/components/nesa/AwardShowcaseSection").then(m => ({ default: m.AwardShowcaseSection })));
 const ImpactProgramsSection = lazy(() => import("@/components/nesa/ImpactProgramsSection").then(m => ({ default: m.ImpactProgramsSection })));
 const GovernanceFirewallSection = lazy(() => import("@/components/nesa/GovernanceFirewallSection").then(m => ({ default: m.GovernanceFirewallSection })));
-const FeaturedChangemakersSection = lazy(() => import("@/components/nesa/FeaturedChangemakersSection").then(m => ({ default: m.FeaturedChangemakersSection })));
-const CuratedFeaturedNominees = lazy(() => import("@/components/nominees/CuratedFeaturedNominees").then(m => ({ default: m.CuratedFeaturedNominees })));
 
 
 
