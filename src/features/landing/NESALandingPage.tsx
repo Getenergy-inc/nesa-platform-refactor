@@ -75,9 +75,14 @@ export function NESALandingPage() {
         </LazySection>
 
 
-        {/* 4. VISION, MISSION & 15 OBJECTIVES */}
+        {/* 4. VISION, MISSION & 7 OBJECTIVES */}
         <LazySection>
           <VisionMissionObjectivesSection />
+        </LazySection>
+
+        {/* 4b. AWARD TIERS SUMMARY — 4 tiers · 18 categories · 96 subs */}
+        <LazySection>
+          <AwardTiersSummarySection />
         </LazySection>
 
         {/* 5. THE NESA-AFRICA ECOSYSTEM */}
