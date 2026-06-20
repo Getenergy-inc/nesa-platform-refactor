@@ -25,6 +25,7 @@ import accountabilityImage from "@/assets/pillars/accountability.jpg";
 import continentalReachImage from "@/assets/pillars/continental-reach.jpg";
 import legacyImpactImage from "@/assets/pillars/legacy-impact.jpg";
 import { MiniMusicPlayer } from "@/components/nesa/MiniMusicPlayer";
+import { AboutNESASection } from "@/components/nesa/AboutNESASection";
 
 const pillars = [
   {
