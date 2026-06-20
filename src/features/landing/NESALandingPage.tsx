@@ -34,6 +34,7 @@ const SponsorsSection = lazy(() => import("@/components/nesa/SponsorsSection").t
 const GovernanceFirewallSection = lazy(() => import("@/components/nesa/GovernanceFirewallSection").then(m => ({ default: m.GovernanceFirewallSection })));
 const Vision2035RoadmapSection = lazy(() => import("@/components/nesa/Vision2035RoadmapSection").then(m => ({ default: m.Vision2035RoadmapSection })));
 const FinalCTASection = lazy(() => import("@/components/nesa/FinalCTASection").then(m => ({ default: m.FinalCTASection })));
+const HomepageGalleryTeaser = lazy(() => import("@/components/gallery/HomepageGalleryTeaser").then(m => ({ default: m.HomepageGalleryTeaser })));
 
 export function NESALandingPage() {
   const { currentEdition } = useSeason();
@@ -107,7 +108,12 @@ export function NESALandingPage() {
           <Vision2035RoadmapSection />
         </LazySection>
 
-        {/* 14. FINAL CTA */}
+        {/* 14. A CONTINENT IN RECOGNITION — Gallery Teaser */}
+        <LazySection>
+          <HomepageGalleryTeaser />
+        </LazySection>
+
+        {/* 15. FINAL CTA */}
         <LazySection>
           <FinalCTASection />
         </LazySection>
