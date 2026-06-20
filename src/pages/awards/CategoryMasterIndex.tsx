@@ -790,6 +790,11 @@ function ThemeCard({ theme }: { theme: (typeof THEMES)[number] }) {
 function CategoryCard({ category: c }: { category: AwardCategoryConfig }) {
   const Icon = GROUP_ICON[c.group];
   const pills = edxPillsFor(c);
+  const official = OFFICIAL[c.slug];
+  const displayName = official?.name ?? c.finalName;
+  const displayDescription = official?.description ?? c.shortDescription;
+  const viewHref = official?.url ?? c.url;
+  const subCount = official?.subcategoryCount;
   return (
     <Card className="h-full border-gold/20 bg-charcoal-light/60 hover:border-gold/60 transition flex flex-col">
       <CardContent className="p-6 flex flex-col h-full">
@@ -798,9 +803,14 @@ function CategoryCard({ category: c }: { category: AwardCategoryConfig }) {
           <Badge variant="outline" className="border-gold/30 text-gold/90 text-[10px]">
             {GROUP_META[c.group].label.replace(/ Categories?$/i, "")}
           </Badge>
+          {typeof subCount === "number" && subCount > 0 && (
+            <Badge variant="outline" className="border-gold/30 text-gold/80 text-[10px] ml-auto">
+              {subCount} subcategories
+            </Badge>
+          )}
         </div>
-        <h3 className="font-playfair text-lg text-foreground mb-2 leading-tight">{c.finalName}</h3>
-        <p className="text-sm text-foreground/70 leading-relaxed mb-3">{c.shortDescription}</p>
+        <h3 className="font-playfair text-lg text-foreground mb-2 leading-tight">{displayName}</h3>
+        <p className="text-sm text-foreground/70 leading-relaxed mb-3">{displayDescription}</p>
 
         <div className="text-xs text-foreground/65 mb-2">
           <span className="text-gold/90 font-semibold">Why this matters: </span>
@@ -825,7 +835,7 @@ function CategoryCard({ category: c }: { category: AwardCategoryConfig }) {
 
         <div className="mt-auto flex flex-wrap gap-2">
           <Button asChild size="sm" className="bg-gold text-charcoal hover:bg-gold/90">
-            <Link to={c.url}>View Category</Link>
+            <Link to={viewHref}>View Category</Link>
           </Button>
           <Button asChild size="sm" variant="outline" className="border-gold/40 text-gold">
             <Link to={`/nominate?category=${encodeURIComponent(c.slug)}`}>Nominate</Link>
