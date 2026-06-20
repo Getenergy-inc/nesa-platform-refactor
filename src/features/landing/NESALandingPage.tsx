@@ -23,6 +23,9 @@ import { BackToTopButton } from "@/components/ui/back-to-top";
 import { PageFAQSection, FloatingFAQButton } from "@/components/nesa/PageFAQ";
 import { MobileStickyNominateCTA } from "@/components/nesa/MobileStickyNominateCTA";
 import { useSeason } from "@/contexts/SeasonContext";
+import { WhatMakesDifferentSection } from "@/components/nesa/WhatMakesDifferentSection";
+import { JourneySection } from "@/components/nesa/JourneySection";
+import { RecognitionPathwaysSection } from "@/components/nesa/RecognitionPathwaysSection";
 
 // Lazy below-fold
 const EcosystemCarousel = lazy(() => import("@/components/landing/EcosystemCarousel").then(m => ({ default: m.EcosystemCarousel })));
