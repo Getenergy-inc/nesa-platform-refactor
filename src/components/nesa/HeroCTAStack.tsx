@@ -35,6 +35,10 @@ const item = {
 const baseBtn =
   "group inline-flex h-[52px] sm:h-12 lg:h-11 w-full items-center justify-center gap-2 rounded-2xl sm:rounded-full px-4 sm:px-5 text-[15px] sm:text-sm font-medium transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold/60 focus-visible:ring-offset-2 focus-visible:ring-offset-charcoal";
 
+// Hero-level pronounced CTAs — taller, bolder, with persistent glow + pulse halo.
+const heroBtn =
+  "group relative inline-flex h-[64px] sm:h-[68px] w-full items-center justify-center gap-2.5 rounded-2xl px-5 text-base sm:text-lg font-bold tracking-wide uppercase transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold/60 focus-visible:ring-offset-2 focus-visible:ring-offset-charcoal";
+
 export function HeroCTAStack() {
   return (
     <motion.div
@@ -43,35 +47,46 @@ export function HeroCTAStack() {
       animate="show"
       className="w-full max-w-xl mx-auto lg:mx-0"
     >
-      {/* PRIMARY + SECONDARY row */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-2.5">
-        {/* PRIMARY */}
-        <motion.div variants={item}>
+      {/* PRIMARY + SECONDARY row — pronounced hero CTAs */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-3.5">
+        {/* PRIMARY — Nominate Now */}
+        <motion.div variants={item} className="relative">
+          {/* pulsing halo */}
+          <span
+            aria-hidden
+            className="pointer-events-none absolute inset-0 rounded-2xl bg-gold/40 blur-xl animate-pulse"
+          />
           <Link
             to="/nominate"
-            aria-label="Nominate for 2026"
-            onClick={onCta("nominate", "/nominate")}
-            className={`${baseBtn} bg-gold text-charcoal font-semibold shadow-[0_6px_18px_-8px_hsl(var(--gold)/0.7)] hover:bg-gold-dark hover:-translate-y-0.5 hover:shadow-[0_10px_22px_-8px_hsl(var(--gold)/0.85)]`}
+            aria-label="Nominate Now for NESA-Africa 2026"
+            onClick={onCta("nominate_now", "/nominate")}
+            className={`${heroBtn} bg-gradient-to-br from-gold via-amber-400 to-gold text-charcoal shadow-[0_10px_32px_-6px_hsl(var(--gold)/0.85)] hover:-translate-y-1 hover:shadow-[0_18px_42px_-8px_hsl(var(--gold)/1)] ring-2 ring-gold/70 ring-offset-2 ring-offset-charcoal`}
           >
-            <Trophy className="h-4 w-4" />
-            <span className="truncate">Nominate for 2026</span>
-            <ArrowRight className="h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-0.5" />
+            <Trophy className="h-5 w-5" />
+            <span className="truncate">Nominate Now</span>
+            <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
           </Link>
         </motion.div>
 
-        {/* SECONDARY — Discover & Explore Nominees (merged) */}
-        <motion.div variants={item}>
+        {/* SECONDARY — Explore Existing Nominees */}
+        <motion.div variants={item} className="relative">
+          <span
+            aria-hidden
+            className="pointer-events-none absolute inset-0 rounded-2xl bg-gold/15 blur-xl"
+          />
           <Link
             to="/nominees"
-            aria-label="Discover Africa's Education Changemakers — Explore Existing Nominees"
-            onClick={onCta("discover_and_explore_nominees", "/nominees")}
-            className={`${baseBtn} border border-gold/60 bg-charcoal/40 text-white hover:border-gold hover:bg-gold/10 hover:text-gold hover:-translate-y-0.5`}
+            aria-label="Explore Existing Nominees"
+            onClick={onCta("explore_existing_nominees", "/nominees")}
+            className={`${heroBtn} border-2 border-gold bg-charcoal/70 text-gold hover:bg-gold hover:text-charcoal hover:-translate-y-1 shadow-[0_10px_28px_-10px_hsl(var(--gold)/0.7)] hover:shadow-[0_16px_36px_-8px_hsl(var(--gold)/0.95)]`}
           >
-            <Compass className="h-4 w-4 text-gold" />
-            <span className="truncate">Discover Africa's Education Changemakers</span>
+            <Compass className="h-5 w-5" />
+            <span className="truncate">Explore Existing Nominees</span>
+            <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
           </Link>
         </motion.div>
       </div>
+
 
       {/* SUPPORT CTAs row — visually lighter */}
       <div className="mt-3 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-2.5">
