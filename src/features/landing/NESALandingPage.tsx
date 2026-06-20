@@ -114,15 +114,11 @@ export function NESALandingPage() {
           <Vision2035RoadmapSection />
         </LazySection>
 
-        {/* 14. A CONTINENT IN RECOGNITION — Gallery Teaser */}
-        <LazySection>
-          <HomepageGalleryTeaser />
-        </LazySection>
-
         {/* 15. FINAL CTA */}
         <LazySection>
           <FinalCTASection />
         </LazySection>
+
 
         <NESAFooter />
         <BottomPageNav />
