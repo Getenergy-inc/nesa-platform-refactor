@@ -120,19 +120,22 @@ export interface ScheduleTemplate {
   };
 }
 
-// Default schedule template - NESA 2026 single-year cycle (Jun → Oct 2026, Legacy through Oct 2027)
+// Default schedule template - NESA 2026 official timeline (per 2026 brief)
+// Kickoff 20 May · Jury onboarding 29 Jun – 10 Jul · Platinum 5 Jul · Gold close 10 Jul
+// Icon show + opens 12 Jul · Icon close 12 Sep · Gold voting 15 Aug – 15 Sep
+// Gold winners 16 Sep · Blue Garnet voting 16 Sep – 22 Oct · Gala 22 Oct 2026
 export const DEFAULT_SCHEDULE_TEMPLATE: ScheduleTemplate = {
   nominationReview: {
     nrcReviewStart: { monthDay: "05-01", yearOffset: 0 },
-    nrcReviewEnd: { monthDay: "06-10", yearOffset: 0 },
+    nrcReviewEnd: { monthDay: "06-28", yearOffset: 0 },
     jurySelectionStart: { monthDay: "05-01", yearOffset: 0 },
-    jurySelectionEnd: { monthDay: "06-10", yearOffset: 0 },
-    juryOnboarding: { monthDay: "06-15", yearOffset: 0 },
+    jurySelectionEnd: { monthDay: "06-28", yearOffset: 0 },
+    juryOnboarding: { monthDay: "06-29", yearOffset: 0 },
   },
   tvShows: {
-    platinumRecognition: { monthDay: "06-11", yearOffset: 0 },
-    africaIconRecognition: { monthDay: "06-25", yearOffset: 0 },
-    goldCertificateWinners: { monthDay: "10-01", yearOffset: 0 },
+    platinumRecognition: { monthDay: "07-05", yearOffset: 0 },
+    africaIconRecognition: { monthDay: "07-12", yearOffset: 0 },
+    goldCertificateWinners: { monthDay: "09-16", yearOffset: 0 },
   },
   votingWindows: {
     goldVotingOpens: { monthDay: "08-15", yearOffset: 0 },
@@ -145,14 +148,14 @@ export const DEFAULT_SCHEDULE_TEMPLATE: ScheduleTemplate = {
   },
   legacy: {
     rebuildMySchoolLaunch: { monthDay: "10-23", yearOffset: 0 },
-    rebuildMySchoolEnd: { monthDay: "10-22", yearOffset: 1 }, // +1 year from launch (Oct 2027)
+    rebuildMySchoolEnd: { monthDay: "10-22", yearOffset: 1 },
   },
   webinars: {
-    seriesStart: { monthDay: "06-01", yearOffset: 0 },
+    seriesStart: { monthDay: "05-20", yearOffset: 0 },
     seriesEnd: { monthDay: "10-22", yearOffset: 0 },
   },
   deadlines: {
-    iconNominationsClose: { monthDay: "06-20", yearOffset: 0 },
+    iconNominationsClose: { monthDay: "09-12", yearOffset: 0 },
   },
 };
 
@@ -231,76 +234,90 @@ export function buildScheduledEvents(
 // Build timeline from template for a given award year
 export function buildTimeline(
   awardYear: number,
-  template: ScheduleTemplate = DEFAULT_SCHEDULE_TEMPLATE
+  _template: ScheduleTemplate = DEFAULT_SCHEDULE_TEMPLATE,
 ): TimelineItem[] {
-  // 2026 single-year cycle: all events happen within awardYear; legacy extends to awardYear + 1
+  // NESA-Africa 2026 official timeline — single source of truth.
   const ceremonyYear = awardYear;
   const legacyEndYear = awardYear + 1;
-  
+
   return [
     {
-      id: "webinars",
-      phase: "EduAid-Africa Webinars",
-      dateRange: `Jun – Oct ${awardYear}`,
-      description: "Public education series on SDG 4, CSR, STEM, inclusion, and NESA standards",
+      id: "kickoff",
+      phase: "Public Pre-Nomination Activation",
+      dateRange: `20 May ${ceremonyYear}`,
+      description: "Season opener — pre-nomination forms, graphics, storytelling calendar go live.",
       type: "awareness",
       isActive: true,
     },
     {
-      id: "nrc-review",
-      phase: "NRC Nominee Review",
-      dateRange: `1 May – 10 Jun ${ceremonyYear}`,
-      description: "Nominee Research Corps verifies all nominations for eligibility and governance compliance",
-      type: "recognition",
+      id: "webinars",
+      phase: "EduAid-Africa Webinars",
+      dateRange: `May – Oct ${ceremonyYear}`,
+      description: "Public education series on SDG 4, CSR, STEM, inclusion, and NESA standards.",
+      type: "awareness",
     },
     {
-      id: "jury-selection",
-      phase: "Jury Selection & Onboarding",
-      dateRange: `May – Jun ${ceremonyYear}`,
-      description: "Applications reviewed, jury members selected and onboarded for scoring duties",
+      id: "jury-onboarding",
+      phase: "Jury Onboarding",
+      dateRange: `29 Jun – 10 Jul ${ceremonyYear}`,
+      description: "Orientation, governance, conflict-of-interest declarations and scoring calibration.",
       type: "recognition",
     },
     {
       id: "platinum-show",
       phase: "Platinum Recognition Show",
-      dateRange: `11 June ${ceremonyYear}`,
-      description: "3-hour TV Show — Non-competitive baseline recognition of service",
+      dateRange: `5 July ${ceremonyYear}`,
+      description: "Public season officially opens with non-competitive institutional recognition.",
       type: "recognition",
     },
     {
-      id: "icon-show",
-      phase: "Africa Education Icon Show",
-      dateRange: `25 June ${ceremonyYear}`,
-      description: "3-hour TV Show — Lifetime impact recognition (9 Icons)",
-      type: "recognition",
-    },
-    {
-      id: "icon-deadline",
-      phase: "Icon Nominations Close",
-      dateRange: `20 June ${ceremonyYear}`,
-      description: "Final deadline for Africa Education Icon nominations",
+      id: "gold-close",
+      phase: "Gold Certificate Nominations Close",
+      dateRange: `10 July ${ceremonyYear}`,
+      description: "Final deadline for Influencers Education Impact (Gold Certificate) nominations.",
       type: "deadline",
     },
     {
+      id: "icon-show",
+      phase: "Africa Education Icon Show + Nominations Open",
+      dateRange: `12 July ${ceremonyYear}`,
+      description: "Icon show airs; Africa Education Icon nominations open through 12 Sep.",
+      type: "recognition",
+    },
+    {
       id: "gold-voting",
-      phase: "Gold Public Voting",
-      dateRange: `13 Jul – 25 Sep ${ceremonyYear}`,
-      description: "Mass participation voting across 135 sub-categories — Top 3 per subcategory (405 winners)",
+      phase: "Gold Certificate AGC Voting",
+      dateRange: `15 Aug – 15 Sep ${ceremonyYear}`,
+      description: "100% public AGC voting for the Influencers Education Impact Award.",
       type: "voting",
       stageAction: "public_voting",
     },
     {
+      id: "icon-deadline",
+      phase: "Africa Education Icon Nominations Close",
+      dateRange: `12 September ${ceremonyYear}`,
+      description: "Final deadline for Africa Education Icon (Lifetime Achievement) nominations.",
+      type: "deadline",
+    },
+    {
       id: "gold-show",
       phase: "Gold Certificate Winners Show",
-      dateRange: `1 October ${ceremonyYear}`,
-      description: "3-hour TV Show — 405 Gold Certificate winners announced",
+      dateRange: `16 September ${ceremonyYear}`,
+      description: "Gold Certificate winners announced — kicks off Blue Garnet voting.",
       type: "recognition",
+    },
+    {
+      id: "momentum",
+      phase: "Momentum Phase",
+      dateRange: `16 Sep – 15 Oct ${ceremonyYear}`,
+      description: "Storytelling, media, and partnership activations across all regions.",
+      type: "awareness",
     },
     {
       id: "blue-garnet-voting",
       phase: "Blue Garnet Voting",
-      dateRange: `2 – 22 October ${ceremonyYear}`,
-      description: "40% public vote + 60% independent jury review",
+      dateRange: `16 Sep – 22 Oct ${ceremonyYear}`,
+      description: "60% independent jury + 40% public AGC voting. Closes on Gala day.",
       type: "voting",
       stageAction: "jury_scoring",
     },
@@ -308,14 +325,14 @@ export function buildTimeline(
       id: "blue-garnet-gala",
       phase: "Blue Garnet Awards Gala",
       dateRange: `22 October ${ceremonyYear}`,
-      description: "Grand ceremony in Lagos + live broadcast — 9 Blue Garnet winners",
+      description: "Live ceremony in Lagos — Blue Garnet winners announced.",
       type: "gala",
     },
     {
       id: "rmsa-legacy",
       phase: "Rebuild My School Africa",
-      dateRange: `Oct ${ceremonyYear} – Oct ${legacyEndYear}`,
-      description: "Legacy phase: real school transformation across Africa's regions",
+      dateRange: `23 Oct ${ceremonyYear} – Oct ${legacyEndYear}`,
+      description: "Legacy impact phase: real school transformation across Africa's regions.",
       type: "legacy",
     },
   ];

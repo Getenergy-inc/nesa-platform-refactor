@@ -35,6 +35,7 @@ const GovernanceFirewallSection = lazy(() => import("@/components/nesa/Governanc
 const Vision2035RoadmapSection = lazy(() => import("@/components/nesa/Vision2035RoadmapSection").then(m => ({ default: m.Vision2035RoadmapSection })));
 const FinalCTASection = lazy(() => import("@/components/nesa/FinalCTASection").then(m => ({ default: m.FinalCTASection })));
 const HomepageGalleryTeaser = lazy(() => import("@/components/gallery/HomepageGalleryTeaser").then(m => ({ default: m.HomepageGalleryTeaser })));
+const AwardTiersSummarySection = lazy(() => import("@/components/nesa/AwardTiersSummarySection").then(m => ({ default: m.AwardTiersSummarySection })));
 
 export function NESALandingPage() {
   const { currentEdition } = useSeason();
