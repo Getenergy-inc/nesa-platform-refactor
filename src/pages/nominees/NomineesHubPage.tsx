@@ -560,6 +560,22 @@ export default function NomineesHubPage() {
             />
           </section>
 
+          {/* Africa's Education Impact Directory — moved from landing */}
+          <Suspense fallback={<div className="h-32" />}>
+            <FeaturedChangemakersSection />
+          </Suspense>
+
+          {/* Hall of Fame Spotlight — moved from landing */}
+          <Suspense fallback={<div className="h-32" />}>
+            <CuratedFeaturedNominees />
+          </Suspense>
+
+          {/* Nominee Discovery Switcher — moved from landing */}
+          <Suspense fallback={<div className="h-32" />}>
+            <NomineeDiscoverySwitcher />
+          </Suspense>
+
+
 
 
           {/* ════════════════════════════════════════════════════════════ */}
