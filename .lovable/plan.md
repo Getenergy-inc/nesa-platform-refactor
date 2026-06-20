@@ -1,71 +1,82 @@
-# NESA-Africa 2026 MVP Refactor — Implementation Plan
+# NESA-Africa 2026 Content Sync + Volunteer Command Center
 
-This is a large, multi-surface refactor. To ship safely without breaking the live site, I propose **5 slices**. Approve all, or check the ones you want now and I'll defer the rest.
-
----
-
-## Slice 1 — Public Navigation Slim-Down (high impact, low risk)
-
-**File:** `src/config/navigation.ts`
-
-Reduce top-level public nav to exactly 9 items:
-`Home · About · Awards · Participate · Sponsors & Partners · Impact Programs · Media & Events · Join the Movement · Contact`
-
-- Collapse current dropdowns into these 9 buckets (Explore Nominees moves under **Participate** alongside Nominate, Vote, Volunteer).
-- Hide from public nav: Admin, NRC, Audit, Wallet, Dashboard, Jury, Judging, Voting Governance, Payment, internal review surfaces. Routes remain reachable for authenticated roles via `/dashboard/*` only.
-- CTA strip (header + mobile bottom): **Primary** Nominate Now · **Secondary** Explore Existing Nominees · **Support** dropdown (Gala Ticket, Merch, Donate, Become a Sponsor, Nominate a Special Needs School).
-
-## Slice 2 — Landing Page Focus Pass
-
-**File:** `src/features/landing/NESALandingPage.tsx`
-
-Reorder + prune to the approved 10-block flow:
-1. Hero (3 CTAs: Nominate / Explore Nominees / Explore Categories)
-2. Gala Countdown (22 Oct 2026)
-3. Featured Changemakers + "Explore Existing Nominees" CTA
-4. Four Recognition Pathways (Icon, Gold-Blue Garnet, Platinum, Influencer)
-5. Explore Categories
-6. Interactive Africa Map (Explore Africa's Regions)
-7. Special Needs School Intervention (powered by EduAid + RMSA + NESA-Africa TV)
-8. Sponsors & Partners strip
-9. Join the Movement (Volunteers · Ambassadors · Judges · Chapters)
-10. Final CTA: "Don't just applaud education changemakers. Nominate them."
-
-Remove from landing: governance firewall block, sponsor pricing teaser, duplicate impact preview, About-NESA long section (moves to `/about`).
-
-## Slice 3 — Nominee Directory as "Africa's Education Impact Directory"
-
-**Files:** `src/pages/nominees/NomineesHubPage.tsx`, nominee profile component
-
-- Rename hero copy + SEO title to **Africa's Education Impact Directory**.
-- Ensure each profile renders the mandatory question header: **"How has this nominee contributed to Education for All in Africa?"** with EDI Matrix block, impact stories, biography, region map link, category chips.
-- No data migration — uses existing DB-driven nominee feed.
-
-## Slice 4 — Dashboard Consolidation (hide NRC + Judges from public)
-
-**Files:** `src/App.tsx`, `src/config/navigation.ts`, dashboard route registrations.
-
-- Move `/nrc/*` modules under `/dashboard/volunteer/research` (Tasks, Evidence, Duplicates, Reports). Keep old paths as authenticated redirects so existing bookmarks work.
-- Move `/jury/*` under `/dashboard/judge/*` (Assigned Categories, Evidence Review, Scorecards, COI, Submitted Scores).
-- Remove any header/footer links pointing at `/nrc`, `/jury`, `/admin`, `/wallet`, `/audit` for unauthenticated visitors.
-
-## Slice 5 — Support / CTA Plumbing
-
-- Add unified `<SupportCTAGroup>` component used in header (desktop dropdown), footer, and mobile sheet, exposing: Buy Gala Ticket, Buy Merch, Donate, Become a Sponsor, Nominate a Special Needs School.
-- Wire to existing routes: `/tickets`, `/merch`, `/donate`, `/partners`, `/eduaid/special-needs-nomination`.
+Four work streams, executed in this order. All public-facing copy comes verbatim from the brief you pasted; internal volunteer hub builds the operations toolkit.
 
 ---
 
-## Out of Scope (explicitly deferred to Phase 2/3 per your spec)
+## 1. Vision, Mission & Objectives (public landing)
 
-- Database schema changes (entities already exist per current Supabase tables).
-- AGC wallet redesign, ticketing, merchandise checkout, RMSA full build, analytics dashboards.
-- Building 152 enterprise pages — backend register is preserved as-is behind auth.
+File: `src/components/nesa/VisionMissionObjectivesSection.tsx`
 
-## Verification
+- Replace existing vision/mission/objectives copy with the exact wording from section 1 of the brief.
+- Render as three blocks: Vision (single paragraph), Mission (single paragraph crediting SCEF + UN SDGs + AU 2063), and Objectives (numbered list of all 7, including the SMART and 2035 ones).
+- Keep current Charcoal/Gold styling, Playfair display headings, framer-motion fade-in.
+- Strip the old "15 objectives" wording everywhere it referenced this section.
 
-After each slice: visual check of `/`, `/nominees`, `/dashboard`, mobile 561px viewport; confirm no public links to `/admin`, `/nrc`, `/jury`, `/wallet`.
+## 2. Season Timeline sync (public)
 
----
+Files: `src/config/schedule.ts`, `src/components/nesa/TimelineSection.tsx` (read first to confirm shape), `src/components/nesa/CountdownSection.tsx` if it hardcodes phase dates.
 
-**Which slices should I ship now?** Reply with slice numbers (e.g. "1, 2, 3" or "all"). Slice 1 + 2 alone deliver ~70% of the perceived "premium awards platform" outcome and are the safest first push.
+Canonical 2026 timeline (from section 7):
+
+| Phase | Dates |
+|---|---|
+| Public Pre-Nomination Activation (Kickoff) | 20 May 2026 |
+| Jury Onboarding (internal) | 29 Jun – 10 Jul 2026 |
+| Platinum Recognition Show | 5 Jul 2026 |
+| Gold Certificate Nominations Close | 10 Jul 2026 |
+| Africa Education Icon Show + Nominations Open | 12 Jul 2026 |
+| Gold Certificate AGC Voting | 15 Aug – 15 Sep 2026 |
+| Icon Nominations Close | 12 Sep 2026 |
+| Gold Certificate Winners Show | 16 Sep 2026 |
+| Momentum Phase | 16 Sep – 15 Oct 2026 |
+| Blue Garnet Voting (60% jury + 40% public) | 16 Sep – 22 Oct 2026 |
+| Blue Garnet Awards Gala (Lagos) | 22 Oct 2026 |
+| Rebuild My School Africa | 23 Oct 2026 → Oct 2027 |
+
+- Update `DEFAULT_SCHEDULE_TEMPLATE` / `buildTimeline` so dates flow into `TimelineSection`, `KeyDatesBanner`, and `CountdownSection` from one source.
+- Keep season config (`src/config/season.ts`) unchanged for `ceremonyDate` (already 2026-10-22 18:00).
+
+## 3. Award Tiers — 4 tiers · 18 categories · 96 subcategories (public)
+
+New file: `src/config/awardTiers2026.ts` — typed array of tiers with category, subcategory count, vote mechanic, CTA, key dates.
+
+New section: `src/components/nesa/AwardTiersSummarySection.tsx`, lazy-mounted in `NESALandingPage.tsx` between Vision/Mission and Ecosystem.
+
+- 4 tier cards (Blue Garnet · Platinum · Icon · Influencers) with type, vote mechanic, dates, and a "View categories" disclosure listing the 18 categories with subcategory counts.
+- Include Master Summary row (18 categories, 96 subcategories total).
+- Subcategory names: only the confirmed ones (Cat 5 NGO Nigeria, Cat 17 Icon, Cat 18 Influencers) get inline names. The rest render "Subcategories: N · pulled from platform" with a link to the dedicated category route. No invented names.
+- CTAs per tier: Nominate / Vote, Recommend Again, Nominate, Nominate / Vote.
+
+## 4. Volunteer Command Center (internal)
+
+New route: `/volunteers/command-center` (linked from existing `/volunteer` page footer, not added to public nav).
+
+New files under `src/pages/volunteers/`:
+- `CommandCenter.tsx` — page shell using `NESAHeader` + `NESAFooter`, gated behind sign-in (uses existing `AuthContext`; unauthenticated users see CTA to sign in).
+- `sections/MissionStatementCard.tsx` — section 2 mission statement, pull-quote styled.
+- `sections/SocialChannelsTable.tsx` — section 3 handles + the 4 mandatory hashtags.
+- `sections/TeamStructureGrid.tsx` — section 5 four-team table (Alpha, Beta, Gamma, Central) with capacity, KPI, weekly time.
+- `sections/SmatObjectivesAccordion.tsx` — section 6 five SMAT objectives with team-to-objective mapping at the bottom.
+- `sections/NominationCaptionsLibrary.tsx` — section 8, all 22 captions grouped by tier with copy-to-clipboard buttons.
+- `sections/PlatformAdaptationGuide.tsx` — section 9 table (Instagram / TikTok / Facebook / X / LinkedIn formats + CTAs).
+- `sections/SubmissionProcessSteps.tsx` — section 10 four-step checklist with file-naming pattern in `<code>`.
+- `sections/AssignmentTracker.tsx` — section 11 list of all 22 categories with read-only "assignee" placeholder column (no backend yet — purely a printable reference for now).
+
+Routing: add lazy route in `src/App.tsx` (or wherever pages are registered — confirm first).
+
+Styling: Charcoal background, Gold accents, Playfair headings, Inter body — matches existing project standards. Tabs (shadcn `Tabs`) across the top to jump between Mission, Teams, Objectives, Captions, Platforms, Process, Tracker.
+
+## Technical notes
+
+- All copy lives in component files (English only for now). Translations not added — `i18n` keys are out of scope for this pass.
+- No database tables added. Assignment tracker is static; we can wire to Supabase later if you want assignments persisted.
+- No changes to `src/integrations/supabase/client.ts`, no new edge functions, no new migrations.
+- Tests: no new Playwright specs — banned-strings and unit suites will run on save.
+
+## Out of scope (flag for next pass)
+
+- Pulling the missing subcategory names for categories 1–4 and 6–16 from `CategoryMasterIndex.tsx`/admin — requires the export you mentioned.
+- Persisting volunteer assignments to a `volunteer_assignments` table.
+- Localising the new volunteer hub into the other 10 languages.
+- Updating category landing pages (`src/pages/categories/*`) to match the new subcategory counts — separate sweep once subcategory names land.

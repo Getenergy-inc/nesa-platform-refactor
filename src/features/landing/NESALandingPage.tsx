@@ -35,6 +35,7 @@ const GovernanceFirewallSection = lazy(() => import("@/components/nesa/Governanc
 const Vision2035RoadmapSection = lazy(() => import("@/components/nesa/Vision2035RoadmapSection").then(m => ({ default: m.Vision2035RoadmapSection })));
 const FinalCTASection = lazy(() => import("@/components/nesa/FinalCTASection").then(m => ({ default: m.FinalCTASection })));
 const HomepageGalleryTeaser = lazy(() => import("@/components/gallery/HomepageGalleryTeaser").then(m => ({ default: m.HomepageGalleryTeaser })));
+const AwardTiersSummarySection = lazy(() => import("@/components/nesa/AwardTiersSummarySection").then(m => ({ default: m.AwardTiersSummarySection })));
 
 export function NESALandingPage() {
   const { currentEdition } = useSeason();
@@ -74,9 +75,14 @@ export function NESALandingPage() {
         </LazySection>
 
 
-        {/* 4. VISION, MISSION & 15 OBJECTIVES */}
+        {/* 4. VISION, MISSION & 7 OBJECTIVES */}
         <LazySection>
           <VisionMissionObjectivesSection />
+        </LazySection>
+
+        {/* 4b. AWARD TIERS SUMMARY — 4 tiers · 18 categories · 96 subs */}
+        <LazySection>
+          <AwardTiersSummarySection />
         </LazySection>
 
         {/* 5. THE NESA-AFRICA ECOSYSTEM */}
