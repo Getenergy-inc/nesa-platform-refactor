@@ -25,6 +25,10 @@ import { NIGERIA_ZONES } from "@/config/nomination/nigeriaZones";
 import { normalizeRegion } from "@/lib/regions";
 import { AfricaRegionExplorer } from "@/components/nominees/AfricaRegionExplorer";
 import { NomineeGovernanceNotice } from "@/components/nominees/NomineeGovernanceNotice";
+import { lazy, Suspense } from "react";
+const FeaturedChangemakersSection = lazy(() => import("@/components/nesa/FeaturedChangemakersSection").then(m => ({ default: m.FeaturedChangemakersSection })));
+const CuratedFeaturedNominees = lazy(() => import("@/components/nominees/CuratedFeaturedNominees").then(m => ({ default: m.CuratedFeaturedNominees })));
+const NomineeDiscoverySwitcher = lazy(() => import("@/components/nominees/NomineeDiscoverySwitcher").then(m => ({ default: m.NomineeDiscoverySwitcher })));
 
 // Audit-aligned award families & recognition classes — mirror
 // src/config/nomination/types.ts. Drives URL-driven /nominees filters.
