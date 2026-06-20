@@ -126,33 +126,51 @@ function TierCard({ tier }: { tier: AwardTier2026 }) {
 }
 
 export function AwardTiersSummarySection() {
+  const [open, setOpen] = useState(false);
+
   return (
     <section className="py-14 md:py-20 bg-charcoal">
       <div className="container mx-auto px-4">
-        <div className="text-center mb-10">
-          <span className="text-[11px] uppercase tracking-[0.18em] text-gold font-semibold">
-            NESA-Africa 2026
-          </span>
-          <h2 className="font-display text-3xl md:text-4xl font-bold text-ivory mt-2">
-            Award Tiers Summary
-          </h2>
-          <p className="text-ivory/70 text-sm md:text-base mt-3 max-w-2xl mx-auto">
-            {AWARD_TIERS_TOTALS.tiers} tiers · {AWARD_TIERS_TOTALS.categories} categories ·{" "}
-            {AWARD_TIERS_TOTALS.subcategories} subcategories. One continental
-            recognition platform, four pathways to honor education excellence.
-          </p>
-        </div>
+        <button
+          type="button"
+          onClick={() => setOpen((v) => !v)}
+          aria-expanded={open}
+          className="w-full flex items-center justify-between gap-4 text-left group"
+        >
+          <div>
+            <span className="text-[11px] uppercase tracking-[0.18em] text-gold font-semibold">
+              NESA-Africa 2026
+            </span>
+            <h2 className="font-display text-2xl md:text-3xl font-bold text-ivory mt-1 group-hover:text-gold transition-colors">
+              Award Tiers Summary
+            </h2>
+            <p className="text-ivory/70 text-sm mt-2 max-w-2xl">
+              {AWARD_TIERS_TOTALS.tiers} tiers · {AWARD_TIERS_TOTALS.categories} categories ·{" "}
+              {AWARD_TIERS_TOTALS.subcategories} subcategories. One continental
+              recognition platform, four pathways to honor education excellence.
+            </p>
+          </div>
+          <ChevronDown
+            className={`h-6 w-6 text-gold shrink-0 transition-transform duration-300 ${open ? "rotate-180" : ""}`}
+          />
+        </button>
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 max-w-7xl mx-auto">
-          {AWARD_TIERS_2026.map((t) => (
-            <TierCard key={t.id} tier={t} />
-          ))}
-        </div>
+        <div
+          className={`grid transition-all duration-500 ease-in-out ${open ? "grid-rows-[1fr] opacity-100 mt-8" : "grid-rows-[0fr] opacity-0 mt-0"}`}
+        >
+          <div className="overflow-hidden">
+            <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 max-w-7xl mx-auto">
+              {AWARD_TIERS_2026.map((t) => (
+                <TierCard key={t.id} tier={t} />
+              ))}
+            </div>
 
-        <div className="text-center mt-8">
-          <Link to="/categories" className="text-gold text-sm hover:underline">
-            Browse all award categories →
-          </Link>
+            <div className="text-center mt-8">
+              <Link to="/categories" className="text-gold text-sm hover:underline">
+                Browse all award categories →
+              </Link>
+            </div>
+          </div>
         </div>
       </div>
     </section>
