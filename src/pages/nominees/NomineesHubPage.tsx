@@ -25,10 +25,6 @@ import { NIGERIA_ZONES } from "@/config/nomination/nigeriaZones";
 import { normalizeRegion } from "@/lib/regions";
 import { AfricaRegionExplorer } from "@/components/nominees/AfricaRegionExplorer";
 import { NomineeGovernanceNotice } from "@/components/nominees/NomineeGovernanceNotice";
-import { lazy, Suspense } from "react";
-const FeaturedChangemakersSection = lazy(() => import("@/components/nesa/FeaturedChangemakersSection").then(m => ({ default: m.FeaturedChangemakersSection })));
-const CuratedFeaturedNominees = lazy(() => import("@/components/nominees/CuratedFeaturedNominees").then(m => ({ default: m.CuratedFeaturedNominees })));
-const NomineeDiscoverySwitcher = lazy(() => import("@/components/nominees/NomineeDiscoverySwitcher").then(m => ({ default: m.NomineeDiscoverySwitcher })));
 
 // Audit-aligned award families & recognition classes — mirror
 // src/config/nomination/types.ts. Drives URL-driven /nominees filters.
@@ -559,22 +555,6 @@ export default function NomineesHubPage() {
               categories={filteredCategories}
             />
           </section>
-
-          {/* Africa's Education Impact Directory — moved from landing */}
-          <Suspense fallback={<div className="h-32" />}>
-            <FeaturedChangemakersSection />
-          </Suspense>
-
-          {/* Hall of Fame Spotlight — moved from landing */}
-          <Suspense fallback={<div className="h-32" />}>
-            <CuratedFeaturedNominees />
-          </Suspense>
-
-          {/* Nominee Discovery Switcher — moved from landing */}
-          <Suspense fallback={<div className="h-32" />}>
-            <NomineeDiscoverySwitcher />
-          </Suspense>
-
 
 
 

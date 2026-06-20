@@ -1,13 +1,9 @@
 import { Link } from "react-router-dom";
-import { lazy, Suspense } from "react";
 import { motion } from "framer-motion";
 import { Globe, MapPin, Users, ArrowRight } from "lucide-react";
 import { AFRICAN_REGIONS, REGION_SHORT_DESCRIPTIONS, GOVERNANCE_STATS } from "@/lib/regions";
 import { Helmet } from "react-helmet-async";
 import { ExploreNomineesCTA } from "@/components/nominees/ExploreNomineesCTA";
-
-const InteractiveAfricaMap = lazy(() => import("@/components/nesa/InteractiveAfricaMap").then(m => ({ default: m.InteractiveAfricaMap })));
-
 
 const regionSlugs: Record<string, string> = {
   "North Africa": "north-africa",
@@ -51,33 +47,8 @@ export default function RegionsIndexPage() {
           </div>
         </section>
 
-        {/* Interactive Continental Map */}
-        <Suspense fallback={<div className="h-96" />}>
-          <InteractiveAfricaMap />
-        </Suspense>
-
-        {/* Bridge → 2026–2027 Legacy Impact pathway */}
-        <div className="container mx-auto max-w-4xl px-4 -mt-6 mb-8">
-          <div className="rounded-2xl border border-gold/25 bg-gold/5 px-5 py-4 text-center">
-            <p className="text-ivory/80 text-xs md:text-sm leading-relaxed mb-3">
-              Each region now connects to the{" "}
-              <span className="text-gold font-semibold">2026–2027 NESA-Africa Legacy Impact pathway</span>
-              {" "}— EduAid-Africa Edu-Tourism Conferences, Special Needs School
-              nominations, regional voting, GFA Wzip regional wallets, and Rebuild My
-              School Africa interventions.
-            </p>
-            <a
-              href="/eduaid-africa/rebuild-my-school"
-              className="inline-flex items-center gap-1.5 text-gold text-xs md:text-sm font-semibold hover:underline"
-            >
-              Explore the full Continental Impact Ecosystem →
-            </a>
-          </div>
-        </div>
-
         {/* Regions Grid */}
         <section className="py-16 px-4">
-
           <div className="container mx-auto max-w-6xl">
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
               {AFRICAN_REGIONS.map((region, i) => {
