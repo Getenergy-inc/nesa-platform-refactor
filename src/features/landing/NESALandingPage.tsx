@@ -23,6 +23,9 @@ import { BackToTopButton } from "@/components/ui/back-to-top";
 import { PageFAQSection, FloatingFAQButton } from "@/components/nesa/PageFAQ";
 import { MobileStickyNominateCTA } from "@/components/nesa/MobileStickyNominateCTA";
 import { useSeason } from "@/contexts/SeasonContext";
+import { WhatMakesDifferentSection } from "@/components/nesa/WhatMakesDifferentSection";
+import { JourneySection } from "@/components/nesa/JourneySection";
+import { RecognitionPathwaysSection } from "@/components/nesa/RecognitionPathwaysSection";
 
 // Lazy below-fold
 const EcosystemCarousel = lazy(() => import("@/components/landing/EcosystemCarousel").then(m => ({ default: m.EcosystemCarousel })));
@@ -66,6 +69,10 @@ export function NESALandingPage() {
 
         {/* 2. ECOSYSTEM TRUST — honourees/ecosystem strip moved up for fast credibility */}
         <TrustLogosStrip />
+
+        {/* 2a. WHAT MAKES DIFFERENT — impact chain beyond recognition */}
+        <WhatMakesDifferentSection />
+
         <LazySection>
           <EcosystemCarousel />
         </LazySection>
@@ -74,6 +81,12 @@ export function NESALandingPage() {
         <LazySection>
           <AwardShowcaseSection />
         </LazySection>
+
+        {/* 2c. THE JOURNEY — 7-phase lifecycle */}
+        <JourneySection />
+
+        {/* 2d. RECOGNITION PATHWAYS — tier breakdown with examples */}
+        <RecognitionPathwaysSection />
 
         {/* 3. COUNTDOWN — Blue Garnet 2026 Gala urgency */}
         <CountdownSection />
