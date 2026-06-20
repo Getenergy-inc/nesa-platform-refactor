@@ -9,7 +9,6 @@ import {
   Award, ChevronLeft, ChevronRight, Users, ArrowRight, Globe, Plane, Handshake
 } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { ExploreNomineesCTA } from "@/components/nominees/ExploreNomineesCTA";
 import {
   categories,
   getCategoryByTitle,
@@ -504,17 +503,6 @@ export function DynamicCategoryPage({ categoryTitle, nominationType, nominateCat
                 </Link>
               </Button>
             </div>
-          </div>
-        </section>
-
-        {/* See all nominees in this category — gateway to /nominees pre-filtered */}
-        <section className="bg-charcoal py-10">
-          <div className="container mx-auto px-4 max-w-5xl">
-            <ExploreNomineesCTA
-              title={`See nominees in ${categoryTitle}`}
-              description="Browse every approved nominee in this category inside Africa's Education Impact Directory."
-              filterQuery={nominateCategorySlug ? `category=${nominateCategorySlug}` : undefined}
-            />
           </div>
         </section>
       </div>

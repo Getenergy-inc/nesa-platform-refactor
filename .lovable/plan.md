@@ -1,71 +1,63 @@
-# NESA-Africa 2026 MVP Refactor — Implementation Plan
+## Scope
 
-This is a large, multi-surface refactor. To ship safely without breaking the live site, I propose **5 slices**. Approve all, or check the ones you want now and I'll defer the rest.
+You picked "ALL" for every option, so this is a multi-phase build. To ship safely without breaking the live site, I'll deliver it in 4 sequential phases. Each phase is independently shippable and visible in preview.
 
----
+## Phase 1 — `/nominees` Hub Redesign (ship first)
 
-## Slice 1 — Public Navigation Slim-Down (high impact, low risk)
+Rebuild `src/pages/nominees/NomineesHubPage.tsx` as a visual-first directory.
 
-**File:** `src/config/navigation.ts`
+- **Hero block**: Title "Explore Existing Nominees", subtitle, governance disclaimer chip, primary CTAs (Nominate 2026 / View Categories / Regional Nominees).
+- **NomineeQuickStatsBar** (already added) — keep and polish.
+- **Discovery filters bar**: Award Group, Region (8), Country, Category, Subcategory, Year, Institution Type, Search. URL-synced (`?award=&region=&country=&q=`).
+- **NomineeCardV2** component: photo (with org-vs-person fit rules), name, country flag, region, category badge, organisation, verification badge, year, 1-line impact summary, compact EDI badge (via `<CompactEDI>`), buttons View Profile / Share / Recommend Again.
+- **Responsive grid**: 4 cols desktop / 3 tablet / 2 mobile-landscape / 1 mobile. Book-style pagination (existing system).
+- **Mobile**: swipeable Featured carousel at top.
 
-Reduce top-level public nav to exactly 9 items:
-`Home · About · Awards · Participate · Sponsors & Partners · Impact Programs · Media & Events · Join the Movement · Contact`
+## Phase 2 — Interactive Africa Map + Region Explorer
 
-- Collapse current dropdowns into these 9 buckets (Explore Nominees moves under **Participate** alongside Nominate, Vote, Volunteer).
-- Hide from public nav: Admin, NRC, Audit, Wallet, Dashboard, Jury, Judging, Voting Governance, Payment, internal review surfaces. Routes remain reachable for authenticated roles via `/dashboard/*` only.
-- CTA strip (header + mobile bottom): **Primary** Nominate Now · **Secondary** Explore Existing Nominees · **Support** dropdown (Gala Ticket, Merch, Donate, Become a Sponsor, Nominate a Special Needs School).
+- New `src/components/nominees/AfricaRegionMap.tsx`: SVG of Africa with 8 clickable regions, hover tooltips showing nominee counts (from `useRegionNomineeCounts`).
+- Region chip fallback grid below the map for mobile/a11y.
+- Click → filter the hub to that region (updates URL).
+- Embed on `/nominees` between hero and filters.
 
-## Slice 2 — Landing Page Focus Pass
+## Phase 3 — Nominee Profile Page Rebuild (`/nominees/[slug]`)
 
-**File:** `src/features/landing/NESALandingPage.tsx`
+Rebuild profile with these sections:
+1. **Hero header** — large photo, name, country/region, category badge, organisation, verification badge, impact headline.
+2. **Biography** — from `bio` / enriched profile `summary_2025`.
+3. **Education Impact Story** — Problem → Intervention → Results → Vision (from `nominee_enrichments.education_for_all_contributions`; falls back to bio).
+4. **Education for All metrics** — learners reached, schools, teachers trained, scholarships, communities (read from `nominee_enrichments` JSON; show "Pending verification" when missing).
+5. **EDI Matrix** — full `NomineeEDIScores` (already built) with radar + 5 pillar bars + overall grade + benchmarking vs category/region average.
+6. **6th pillar (Community Reach)** — extend `src/lib/ediScoring.ts` `PILLAR_KEYS` to add Community Reach with deterministic scoring; update radar to 6 axes.
+7. **Media gallery** — uses `useNomineeMedia` (existing).
+8. **Related nominees** — same category or region, top 4 by votes.
+9. **Sponsor recognition** — if present in `sponsor_links`.
+10. **Sticky action bar** — Share, Recommend Again, Explore Category, Explore Region.
+11. **SEO** — `react-helmet-async` with JSON-LD `Person`/`Organization` schema, OG image, canonical.
 
-Reorder + prune to the approved 10-block flow:
-1. Hero (3 CTAs: Nominate / Explore Nominees / Explore Categories)
-2. Gala Countdown (22 Oct 2026)
-3. Featured Changemakers + "Explore Existing Nominees" CTA
-4. Four Recognition Pathways (Icon, Gold-Blue Garnet, Platinum, Influencer)
-5. Explore Categories
-6. Interactive Africa Map (Explore Africa's Regions)
-7. Special Needs School Intervention (powered by EduAid + RMSA + NESA-Africa TV)
-8. Sponsors & Partners strip
-9. Join the Movement (Volunteers · Ambassadors · Judges · Chapters)
-10. Final CTA: "Don't just applaud education changemakers. Nominate them."
+## Phase 4 — Cross-Surface Embeds
 
-Remove from landing: governance firewall block, sponsor pricing teaser, duplicate impact preview, About-NESA long section (moves to `/about`).
+A single reusable `<FeaturedNomineesBlock filter={{ category|region|award }} limit={6} />` component (refactor existing `ExistingNomineesInline`). Inject into:
+- Award category pages (`AwardCategoryPage`)
+- Subcategory pages
+- Regional pages
+- Icon, Blue Garnet, Gold, Platinum, Influencer pages
+- Sponsor + Judge dashboards (read-only preview)
 
-## Slice 3 — Nominee Directory as "Africa's Education Impact Directory"
+## Technical Notes
 
-**Files:** `src/pages/nominees/NomineesHubPage.tsx`, nominee profile component
+- **EDI 6th pillar**: edit `src/lib/ediScoring.ts` — add `community_reach` to `PILLAR_KEYS`, `PILLAR_CONFIG` (weight ~15%, rebalance others), `getPillarColor`. All existing callers continue to work.
+- **No schema migration** in this build — impact metrics rendered from existing `nominee_enrichments` table when present, with "Pending verification" placeholder otherwise. (Migration can be a follow-up phase if you want admin-editable metrics.)
+- **Data source**: `useNominees` (existing, hits `public_nominees` view) + `useEnrichedProfiles` (existing) + `nominee_enrichments` table.
+- **Disclaimer chip**: shared `<NomineeGovernanceNotice />` component reused across hub, cards, and profile.
+- **No backend / RLS changes** required.
 
-- Rename hero copy + SEO title to **Africa's Education Impact Directory**.
-- Ensure each profile renders the mandatory question header: **"How has this nominee contributed to Education for All in Africa?"** with EDI Matrix block, impact stories, biography, region map link, category chips.
-- No data migration — uses existing DB-driven nominee feed.
+## What I will NOT do this turn
 
-## Slice 4 — Dashboard Consolidation (hide NRC + Judges from public)
+- Will not change nomination flows, voting, or auth.
+- Will not modify `client.ts` or `types.ts`.
+- Will not delete legacy `NomineesHubPage` until Phase 1 replacement is verified.
 
-**Files:** `src/App.tsx`, `src/config/navigation.ts`, dashboard route registrations.
+## Confirmation needed
 
-- Move `/nrc/*` modules under `/dashboard/volunteer/research` (Tasks, Evidence, Duplicates, Reports). Keep old paths as authenticated redirects so existing bookmarks work.
-- Move `/jury/*` under `/dashboard/judge/*` (Assigned Categories, Evidence Review, Scorecards, COI, Submitted Scores).
-- Remove any header/footer links pointing at `/nrc`, `/jury`, `/admin`, `/wallet`, `/audit` for unauthenticated visitors.
-
-## Slice 5 — Support / CTA Plumbing
-
-- Add unified `<SupportCTAGroup>` component used in header (desktop dropdown), footer, and mobile sheet, exposing: Buy Gala Ticket, Buy Merch, Donate, Become a Sponsor, Nominate a Special Needs School.
-- Wire to existing routes: `/tickets`, `/merch`, `/donate`, `/partners`, `/eduaid/special-needs-nomination`.
-
----
-
-## Out of Scope (explicitly deferred to Phase 2/3 per your spec)
-
-- Database schema changes (entities already exist per current Supabase tables).
-- AGC wallet redesign, ticketing, merchandise checkout, RMSA full build, analytics dashboards.
-- Building 152 enterprise pages — backend register is preserved as-is behind auth.
-
-## Verification
-
-After each slice: visual check of `/`, `/nominees`, `/dashboard`, mobile 561px viewport; confirm no public links to `/admin`, `/nrc`, `/jury`, `/wallet`.
-
----
-
-**Which slices should I ship now?** Reply with slice numbers (e.g. "1, 2, 3" or "all"). Slice 1 + 2 alone deliver ~70% of the perceived "premium awards platform" outcome and are the safest first push.
+Approve and I'll start Phase 1 immediately, then proceed phase-by-phase. If you'd rather I ship all 4 phases without intermediate check-ins, say "ship all phases" and I'll batch the work.

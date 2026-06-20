@@ -308,11 +308,11 @@
     "trophyHero": {
       "headline": "Don't Just Clap for Education Changemakers.",
       "headlineAccent": "Nominate Them for 2026.",
-      "slogan": "Nominations Open · NESA-Africa 2026",
+      "slogan": "Nominations Open · NESA-Africa 2025/26",
       "tagline": "Your mentor. Your school founder. Your NGO leader. Your innovator. Your education impact hero.",
       "ecosystemKicker": "The Ecosystem",
       "ecosystemTitle": "Nominate the 2026 Honourees Shaping Africa's Future",
-      "valueProposition": "Across Africa and the diaspora, changemakers are transforming education through advocacy, innovation, funding, infrastructure, mentorship, technology, policy, community action, and social impact. Now is the time to recognise them. Nominate a changemaker for 2026 today and earn AGC Voting Coin to support your favourite nominees when voting opens.",
+      "valueProposition": "Across Africa and the diaspora, changemakers are transforming education through advocacy, innovation, funding, infrastructure, mentorship, technology, policy, community action, and social impact. Now is the time to recognise them. Nominate a changemaker for 2026 today and earn AGC voting points to support your favourite nominees when voting opens.",
       "nominateNow": "Nominate for 2026",
       "voteWithAGC": "Earn AGC",
       "watchLive": "Watch Live",
@@ -359,7 +359,7 @@
       "joinTitle": "Join & Participate",
       "joinDesc": "Create your account and engage through nominations, referrals, and daily activities.",
       "earnTitle": "Earn Voting Points",
-      "earnDesc": "Your participation unlocks AGC Voting Coin—structured credits for public participation.",
+      "earnDesc": "Your participation unlocks AGC voting points—structured credits for public participation.",
       "voteTitle": "Vote During Windows",
       "voteDesc": "Use your AGC during official voting windows to support Gold-Blue Garnet nominees.",
       "impactTitle": "Impact Education",
@@ -1159,17 +1159,17 @@
   "seo": {
     "landing": {
       "title": "NESA-Africa 2026 | The African Blue Garnet Awards for Education",
-      "description": "Nominate Africa's education changemakers for 2026. Earn AGC Voting Coin, discover nominees, and explore award categories driving Pan-African education impact.",
+      "description": "Nominate Africa's education changemakers for 2026. Earn AGC voting points, discover nominees, and explore award categories driving Pan-African education impact.",
       "ogTitle": "NESA-Africa 2026 — Nominate Education Changemakers",
       "ogDescription": "The Pan-African education recognition movement — nominate, vote with AGC, and discover changemakers across 10 African regions.",
       "keywords": "NESA-Africa 2026, Africa education awards, education changemakers, AGC voting, Blue Garnet Awards, nominations, award categories"
     },
     "nesaAfrica": {
-      "title": "NESA-Africa 2026 | Honoring Africa's Education Changemakers",
-      "description": "Join NESA-Africa 2026 — nominate education changemakers, earn AGC Voting Coin, discover nominees, and explore award categories driving Pan-African education impact.",
-      "ogTitle": "NESA-Africa 2026 — Honoring Africa's Education Changemakers",
+      "title": "NESA-Africa 2025/26 | Honoring Africa's Education Changemakers",
+      "description": "Join NESA-Africa 2025/26 — nominate education changemakers, earn AGC voting points, discover nominees, and explore award categories driving Pan-African education impact.",
+      "ogTitle": "NESA-Africa 2025/26 — Honoring Africa's Education Changemakers",
       "ogDescription": "The Pan-African education recognition movement — nominate, vote with AGC, and discover changemakers across 10 African regions.",
-      "keywords": "NESA-Africa 2026, Africa education awards, education changemakers, AGC voting, Pan-African education impact, nominations, award categories"
+      "keywords": "NESA-Africa 2025/26, Africa education awards, education changemakers, AGC voting, Pan-African education impact, nominations, award categories"
     },
     "nav": {
       "home": "Home",

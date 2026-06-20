@@ -1,6 +1,8 @@
-// NESA-Africa Landing Page — Africa's largest education recognition,
-// impact, volunteer, media, partnership, scholarship, and legacy movement.
-// Movement-first hierarchy (not award-centric).
+// NESA-Africa Landing Page — high-conversion gateway (Phase 1 restructure)
+// Target 8-section flow: Hero → Ecosystem → Countdown → Nominee Discovery →
+// Regional Preview → Moments Preview → Impact → Final CTA.
+// Deep systems (merch, AGC, voting guide, ecosystem programs, full trending,
+// full gallery, full categories, full regions) live on dedicated routes.
 
 import { lazy } from "react";
 import { useTranslation } from "react-i18next";
@@ -18,39 +20,42 @@ import { MobileBottomNav } from "@/components/navigation/MainNav";
 import { ScrollProgressIndicator } from "@/components/nesa/ScrollProgressIndicator";
 import { ExitIntentPopup } from "@/components/nesa/ExitIntentPopup";
 import { BackToTopButton } from "@/components/ui/back-to-top";
-import { FloatingFAQButton } from "@/components/nesa/PageFAQ";
+import { PageFAQSection, FloatingFAQButton } from "@/components/nesa/PageFAQ";
 import { MobileStickyNominateCTA } from "@/components/nesa/MobileStickyNominateCTA";
 import { useSeason } from "@/contexts/SeasonContext";
 
 // Lazy below-fold
-const VisionMissionSection = lazy(() => import("@/components/nesa/VisionMissionSection").then(m => ({ default: m.VisionMissionSection })));
-const FifteenObjectivesSection = lazy(() => import("@/components/nesa/FifteenObjectivesSection").then(m => ({ default: m.FifteenObjectivesSection })));
-const EcosystemModulesSection = lazy(() => import("@/components/nesa/EcosystemModulesSection").then(m => ({ default: m.EcosystemModulesSection })));
-const RegionsIntroSection = lazy(() => import("@/components/nesa/RegionsIntroSection").then(m => ({ default: m.RegionsIntroSection })));
+const EcosystemCarousel = lazy(() => import("@/components/landing/EcosystemCarousel").then(m => ({ default: m.EcosystemCarousel })));
+const ImpactPreviewSection = lazy(() => import("@/components/nesa/ImpactPreviewSection").then(m => ({ default: m.ImpactPreviewSection })));
+const SponsorPreviewSection = lazy(() => import("@/components/nesa/SponsorPreviewSection").then(m => ({ default: m.SponsorPreviewSection })));
+
 const InteractiveAfricaMap = lazy(() => import("@/components/nesa/InteractiveAfricaMap").then(m => ({ default: m.InteractiveAfricaMap })));
-const PoweredByVolunteersSection = lazy(() => import("@/components/nesa/PoweredByVolunteersSection").then(m => ({ default: m.PoweredByVolunteersSection })));
-const ChangemakersIntroSection = lazy(() => import("@/components/nesa/ChangemakersIntroSection").then(m => ({ default: m.ChangemakersIntroSection })));
-const FeaturedChangemakersSection = lazy(() => import("@/components/nesa/FeaturedChangemakersSection").then(m => ({ default: m.FeaturedChangemakersSection })));
-const NomineeDiscoverySwitcher = lazy(() => import("@/components/nominees/NomineeDiscoverySwitcher").then(m => ({ default: m.NomineeDiscoverySwitcher })));
-const ImpactProgramsSection = lazy(() => import("@/components/nesa/ImpactProgramsSection").then(m => ({ default: m.ImpactProgramsSection })));
-const WatchMediaSection = lazy(() => import("@/components/nesa/WatchMediaSection").then(m => ({ default: m.WatchMediaSection })));
 const SponsorsSection = lazy(() => import("@/components/nesa/SponsorsSection").then(m => ({ default: m.SponsorsSection })));
-const GovernanceFirewallSection = lazy(() => import("@/components/nesa/GovernanceFirewallSection").then(m => ({ default: m.GovernanceFirewallSection })));
-const Vision2035Section = lazy(() => import("@/components/nesa/Vision2035Section").then(m => ({ default: m.Vision2035Section })));
 const FinalCTASection = lazy(() => import("@/components/nesa/FinalCTASection").then(m => ({ default: m.FinalCTASection })));
+const HomepageGalleryTeaser = lazy(() => import("@/components/gallery/HomepageGalleryTeaser").then(m => ({ default: m.HomepageGalleryTeaser })));
+const NomineeDiscoverySwitcher = lazy(() => import("@/components/nominees/NomineeDiscoverySwitcher").then(m => ({ default: m.NomineeDiscoverySwitcher })));
+const AboutNESASection = lazy(() => import("@/components/nesa/AboutNESASection").then(m => ({ default: m.AboutNESASection })));
+const PoweredByVolunteersSection = lazy(() => import("@/components/nesa/PoweredByVolunteersSection").then(m => ({ default: m.PoweredByVolunteersSection })));
+const MobileCategoryRail = lazy(() => import("@/components/landing/MobileCategoryRail").then(m => ({ default: m.MobileCategoryRail })));
+const AwardShowcaseSection = lazy(() => import("@/components/nesa/AwardShowcaseSection").then(m => ({ default: m.AwardShowcaseSection })));
+const ImpactProgramsSection = lazy(() => import("@/components/nesa/ImpactProgramsSection").then(m => ({ default: m.ImpactProgramsSection })));
+const GovernanceFirewallSection = lazy(() => import("@/components/nesa/GovernanceFirewallSection").then(m => ({ default: m.GovernanceFirewallSection })));
+const FeaturedChangemakersSection = lazy(() => import("@/components/nesa/FeaturedChangemakersSection").then(m => ({ default: m.FeaturedChangemakersSection })));
+
+
 
 export function NESALandingPage() {
-  useSeason();
+  const { currentEdition } = useSeason();
   const { t } = useTranslation("pages");
 
   return (
     <>
       <LocalizedSEO
         pathname="/"
-        title={t("seo.landing.title", `NESA-Africa | Africa's Largest Education Recognition & Impact Movement`)}
-        description={t("seo.landing.description", `NESA-Africa is Africa's largest education recognition and impact ecosystem — uniting awards, scholarships, volunteers, sponsors, NESA TV, EduAid-Africa, Rebuild My School Africa and Afri-EduTourism across 10 education regions.`)}
-        ogTitle={t("seo.landing.ogTitle", `NESA-Africa — Africa's Education Movement`)}
-        ogDescription={t("seo.landing.ogDescription", `Recognition. Impact. Volunteers. Sponsors. Scholarships. Media. Ten regions. One movement.`)}
+        title={t("seo.landing.title", `New Education Standard Award Africa (NESA-Africa) 2026 | The African Blue-Garnet Awards for Education`)}
+        description={t("seo.landing.description", `New Education Standard Award Africa (NESA-Africa) 2026 celebrates Africa's education changemakers through recognition, visibility, partnerships, and measurable social impact. Motto: "The African Blue-Garnet Awards for Education."`)}
+        ogTitle={t("seo.landing.ogTitle", `New Education Standard Award Africa (NESA-Africa) 2026`)}
+        ogDescription={t("seo.landing.ogDescription", `"The African Blue-Garnet Awards for Education" — a continental education recognition and impact platform powered by SCEF.`)}
         keywords={t("seo.landing.keywords", "")}
       />
 
@@ -60,78 +65,111 @@ export function NESALandingPage() {
         <UtilityBar />
         <NESAHeader />
 
-        {/* 1 — HERO */}
+        {/* 1. HERO — primary CTAs */}
         <TrophyHeroSection />
+
+        {/* 2. ECOSYSTEM TRUST — honourees/ecosystem strip moved up for fast credibility */}
         <TrustLogosStrip />
-
-        {/* 2 — COUNTDOWN TO OCTOBER 22, 2026 */}
-        <CountdownSection />
-
-        {/* 3 — VISION, MISSION & PURPOSE */}
         <LazySection>
-          <VisionMissionSection />
+          <EcosystemCarousel />
         </LazySection>
 
-        {/* 4 — 15 STRATEGIC OBJECTIVES */}
+        {/* 2b. AWARD ARCHITECTURE — four-tier showcase */}
         <LazySection>
-          <FifteenObjectivesSection />
+          <AwardShowcaseSection />
         </LazySection>
 
-        {/* 5 — THE NESA-AFRICA ECOSYSTEM (10 modules) */}
-        <LazySection>
-          <EcosystemModulesSection />
-        </LazySection>
-
-        {/* 6 — ONE CONTINENT. TEN EDUCATION REGIONS */}
-        <LazySection>
-          <RegionsIntroSection />
-        </LazySection>
-        <LazySection>
-          <InteractiveAfricaMap />
-        </LazySection>
-
-        {/* 7 — MEET THE VOLUNTEERS BUILDING NESA-AFRICA */}
-        <LazySection>
-          <PoweredByVolunteersSection />
-        </LazySection>
-
-        {/* 8 — AFRICA EDUCATION HALL OF FAME */}
-        <LazySection>
-          <ChangemakersIntroSection />
-        </LazySection>
+        {/* 2c. FEATURED CHANGEMAKERS — Africa's Education Impact Directory gateway */}
         <LazySection>
           <FeaturedChangemakersSection />
         </LazySection>
+
+        {/* 3. COUNTDOWN — Blue Garnet 2026 Gala urgency */}
+        <CountdownSection />
+
+        {/* 3b. MOBILE CATEGORY DISCOVERY — horizontal swipe rail (mobile only) */}
+        <LazySection>
+          <MobileCategoryRail />
+        </LazySection>
+
+
+        {/* 4. NOMINEE DISCOVERY — responsive on all devices */}
         <LazySection>
           <NomineeDiscoverySwitcher />
         </LazySection>
 
-        {/* 9 — EDUAID-AFRICA · REBUILD MY SCHOOL AFRICA · AFRI-EDUTOURISM */}
+        {/* 4b. IMPACT PROGRAMS — EduAid / RMSA / Special Needs / Edu-Tourism */}
         <LazySection>
           <ImpactProgramsSection />
         </LazySection>
 
-        {/* 10 — NESA TV */}
+
+        {/* 5. MOMENTS PREVIEW — visible on all devices */}
         <LazySection>
-          <WatchMediaSection />
+          <HomepageGalleryTeaser />
         </LazySection>
 
-        {/* 11 — SPONSORS & PARTNERS */}
+        {/* 6. REGIONAL PREVIEW — public map + region cards (gateway to /region/:slug) */}
+        <LazySection>
+          <InteractiveAfricaMap />
+        </LazySection>
+
+        {/* 6b. Bridge note → 2026–2027 Legacy Impact pathway */}
+        <div className="container mx-auto max-w-4xl px-4 -mt-6 mb-8">
+          <div className="rounded-2xl border border-gold/25 bg-gold/5 px-5 py-4 text-center">
+            <p className="text-ivory/80 text-xs md:text-sm leading-relaxed mb-3">
+              Each region now connects to the{" "}
+              <span className="text-gold font-semibold">2026–2027 NESA-Africa Legacy Impact pathway</span>
+              {" "}— EduAid-Africa Edu-Tourism Conferences, Special Needs School
+              nominations, regional voting, GFA Wzip regional wallets, and Rebuild My
+              School Africa interventions.
+            </p>
+            <a
+              href="/eduaid-africa/rebuild-my-school"
+              className="inline-flex items-center gap-1.5 text-gold text-xs md:text-sm font-semibold hover:underline"
+            >
+              Explore the full Continental Impact Ecosystem →
+            </a>
+          </div>
+        </div>
+
+        {/* 7. IMPACT PREVIEW — short gateway card (full content lives on /impact, /impact/regional-school-intervention, /eduaid-africa, /eduaid-africa/rebuild-my-school) */}
+        <LazySection>
+          <ImpactPreviewSection />
+        </LazySection>
+
+        {/* About NESA-Africa 2026 — responsive on all devices */}
+        <LazySection>
+          <AboutNESASection />
+        </LazySection>
+
+        {/* Powered by Volunteers — responsive on all devices */}
+        <LazySection>
+          <PoweredByVolunteersSection />
+        </LazySection>
+
+        {/* Sponsors logos strip — credibility only, no pricing */}
         <LazySection>
           <SponsorsSection />
         </LazySection>
 
-        {/* 12 — GOVERNANCE FIREWALL (short trust section) */}
+        {/* SPONSOR PREVIEW — short gateway card (full pricing lives on /sponsorship-packages, /sponsor, /sponsor/:slug) */}
+        <LazySection>
+          <SponsorPreviewSection />
+        </LazySection>
+
+        {/* Governance firewall — integrity messaging */}
         <LazySection>
           <GovernanceFirewallSection />
         </LazySection>
 
-        {/* 13 — VISION 2035 ROADMAP */}
+
+
         <LazySection>
-          <Vision2035Section />
+          <PageFAQSection />
         </LazySection>
 
-        {/* 14 — FINAL CALL TO ACTION */}
+        {/* 8. FINAL CTA */}
         <LazySection>
           <FinalCTASection />
         </LazySection>
@@ -150,4 +188,3 @@ export function NESALandingPage() {
 }
 
 export default NESALandingPage;
-

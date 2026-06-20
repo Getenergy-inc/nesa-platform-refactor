@@ -1,4 +1,4 @@
-import { Award, Ticket, Heart, Handshake, Coins, Users } from "lucide-react";
+import { Award, Vote, Ticket, Heart, Handshake, Coins } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { Button } from "@/components/ui/button";
@@ -6,10 +6,9 @@ import { Button } from "@/components/ui/button";
 export function GetInvolvedSection() {
   const { t } = useTranslation("pages");
 
-  // Phase 1: Vote CTA removed — public voting is not open. Replaced with Volunteer.
   const actions = [
     { icon: Award, label: "Nominate", href: "/nominate", primary: true },
-    { icon: Users, label: "Volunteer", href: "/volunteer", primary: true },
+    { icon: Vote, label: "Vote", href: "/vote", primary: true },
     { icon: Ticket, label: "Get Tickets", href: "/buy-your-ticket", primary: false },
     { icon: Heart, label: "Donate", href: "/donate", primary: false },
     { icon: Handshake, label: "Partner", href: "/partners", primary: false },
@@ -22,17 +21,14 @@ export function GetInvolvedSection() {
           <h2 className="font-display text-3xl md:text-4xl font-bold text-white mb-4">
             {t("landing.getInvolved.title")}
           </h2>
-
-          {/* AGC Voting Coin explainer */}
-          <Link
-            to="/earn-agc"
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gold/10 border border-gold/30 hover:bg-gold/15 transition-colors"
-          >
+          
+          {/* AGC Strip */}
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gold/10 border border-gold/30">
             <Coins className="h-4 w-4 text-gold" />
-            <span className="text-sm text-white/85">
-              Learn how the AGC Voting Coin powers official voting windows
+            <span className="text-sm text-white/80">
+              Vote with AGC voting points during official windows
             </span>
-          </Link>
+          </div>
         </div>
 
         <div className="flex flex-wrap justify-center gap-4">
@@ -40,7 +36,7 @@ export function GetInvolvedSection() {
             <Link key={action.label} to={action.href}>
               <Button
                 size="lg"
-                className={action.primary
+                className={action.primary 
                   ? "bg-gold hover:bg-gold-dark text-charcoal font-semibold rounded-full px-8 gap-2 shadow-gold"
                   : "bg-white/10 hover:bg-white/20 text-white font-semibold rounded-full px-8 gap-2 border border-white/20"
                 }

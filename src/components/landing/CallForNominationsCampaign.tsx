@@ -32,9 +32,9 @@ const personas = [
 
 const journey = [
   { n: "1", title: "Nominate a Changemaker", desc: "Submit an education impact leader, organisation, or initiative in minutes.", icon: Trophy },
-  { n: "2", title: "Earn AGC Voting Coin", desc: "Every successful nomination rewards you with AGC Voting Coin.", icon: Coins },
+  { n: "2", title: "Earn AGC Voting Points", desc: "Every successful nomination rewards you with AGC voting points.", icon: Coins },
   { n: "3", title: "Share the Movement", desc: "Invite your community, school network, organisation, or diaspora network to participate.", icon: Share2 },
-  { n: "4", title: "Support Your Favourite Nominees", desc: "Use your AGC Voting Coin to support education changemakers when voting opens.", icon: Star },
+  { n: "4", title: "Support Your Favourite Nominees", desc: "Use your AGC voting points to support education changemakers when voting opens.", icon: Star },
 ];
 
 export function CallForNominationsCampaign() {
@@ -173,7 +173,7 @@ export function CallForNominationsCampaign() {
                 </div>
                 <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/85 to-transparent p-3">
                   <p className="text-xs font-medium text-white md:text-sm">
-                    Watch how to nominate a changemaker and earn AGC Voting Coin.
+                    Watch how to nominate a changemaker and earn AGC voting points.
                   </p>
                 </div>
               </div>

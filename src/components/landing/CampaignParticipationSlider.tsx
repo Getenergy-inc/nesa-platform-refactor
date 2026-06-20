@@ -43,7 +43,7 @@ const slides: Slide[] = [
     kicker: "Step 2",
     title: "Who Can Be Nominated?",
     body:
-      "From classrooms to communities, education changemakers are everywhere. Nominate a Changemaker for 2026 now and earn AGC Voting Coin to support real impact.",
+      "From classrooms to communities, education changemakers are everywhere. Nominate a Changemaker for 2026 now and earn AGC voting points to support real impact.",
     bullets: [
       "A mentor or school founder",
       "An NGO leader or youth advocate",

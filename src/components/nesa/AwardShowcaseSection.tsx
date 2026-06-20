@@ -17,41 +17,39 @@ type AwardTier = {
   cta: string;
 };
 
-// Tier order corrected per campaign documents:
-// Tier 1 = Blue Garnet, Tier 2 = Platinum, Tier 3 = Icon, Tier 4 = Influencers.
 const TIERS: AwardTier[] = [
-  {
-    id: "blue-garnet",
-    icon: Trophy,
-    eyebrow: "Tier 1 · Competitive",
-    title: "Blue Garnet Awards",
-    tagline: "Competitive Excellence Recognition",
-    description:
-      "The flagship competitive track — public nominations, AGC Voting Coin participation, expert judging, and the Blue Garnet Gala finale.",
-    href: "/awards/blue-garnet",
-    cta: "See Blue Garnet Categories",
-  },
-  {
-    id: "platinum",
-    icon: Award,
-    eyebrow: "Tier 2 · Institutional",
-    title: "Platinum Recognition",
-    tagline: "Institutional Impact Recognition",
-    description:
-      "Reserved for institutions, ministries, foundations, and multilateral partners delivering measurable, scaled education impact.",
-    href: "/awards/platinum",
-    cta: "View Platinum Honours",
-  },
   {
     id: "icon",
     icon: Crown,
-    eyebrow: "Tier 3 · Lifetime",
+    eyebrow: "Tier 1 · Lifetime",
     title: "Africa Education Icon",
     tagline: "Lifetime Impact Recognition",
     description:
       "Continental honour for individuals whose lifetime work has reshaped African education across decades, borders, and generations.",
     href: "/awards/icon",
     cta: "Explore the Icon Award",
+  },
+  {
+    id: "blue-garnet",
+    icon: Trophy,
+    eyebrow: "Tier 2 · Competitive",
+    title: "Blue Garnet Awards",
+    tagline: "Competitive Excellence Recognition",
+    description:
+      "The flagship competitive track — public nominations, AGC voting, expert judging, and the Blue Garnet Gala finale.",
+    href: "/awards/blue-garnet",
+    cta: "See Blue Garnet Categories",
+  },
+  {
+    id: "platinum",
+    icon: Award,
+    eyebrow: "Tier 3 · Institutional",
+    title: "Platinum Recognition",
+    tagline: "Institutional Impact Recognition",
+    description:
+      "Reserved for institutions, ministries, foundations, and multilateral partners delivering measurable, scaled education impact.",
+    href: "/awards/platinum",
+    cta: "View Platinum Honours",
   },
   {
     id: "influencer",

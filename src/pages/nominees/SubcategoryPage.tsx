@@ -11,7 +11,6 @@ import { LandingNomineeCard } from "@/components/nesa/LandingNomineeCard";
 import { NomineeBreadcrumbs } from "@/components/nominees/NomineeBreadcrumbs";
 import { CategoryHero } from "@/components/nominees/CategoryHero";
 import { NomineeFilterBar, type NomineeSort } from "@/components/nominees/NomineeFilterBar";
-import { ExploreNomineesCTA } from "@/components/nominees/ExploreNomineesCTA";
 
 const PAGE_SIZE = 12;
 
@@ -129,7 +128,6 @@ export default function SubcategoryPage() {
             description={`Part of ${data.categoryName}. ${data.nominees.length} nominees representing ${data.countries.length} countries.`}
             nomineeCount={data.nominees.length}
             countryCount={data.countries.length}
-            categorySlug={subSlug || categorySlug}
           />
 
           <div className="grid lg:grid-cols-[1fr,260px] gap-8">
@@ -214,15 +212,6 @@ export default function SubcategoryPage() {
                 </div>
               )}
             </aside>
-          </div>
-
-          {/* Cross-surface CTA — keep discovery flowing */}
-          <div className="mt-12">
-            <ExploreNomineesCTA
-              filterQuery={`?category=${categorySlug}&subcategory=${subSlug}`}
-              title="Explore More Changemakers"
-              description="Discover every approved nominee across Africa, the diaspora, and Friends of Africa communities."
-            />
           </div>
         </div>
       </section>

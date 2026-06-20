@@ -2,7 +2,6 @@ import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { PublicLayout } from "@/components/layout/PublicLayout";
-import { ExploreNomineesCTA } from "@/components/nominees/ExploreNomineesCTA";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -267,15 +266,6 @@ export default function SponsorsHub() {
               <Link to="/about">Learn About NESA Africa</Link>
             </Button>
           </div>
-        </div>
-      </section>
-
-      <section className="bg-charcoal py-12">
-        <div className="container mx-auto px-4">
-          <ExploreNomineesCTA
-            title="See the nominees your sponsorship empowers"
-            description="Explore approved education changemakers across every region and category — the impact you can amplify."
-          />
         </div>
       </section>
     </PublicLayout>

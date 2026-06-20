@@ -14,7 +14,6 @@ import {
   type RevenueSplit,
 } from "@/components/dashboard/wallet";
 import type { WalletBalance, WalletLedgerEntry, Referral } from "@/types/wallet";
-import { ExploreNomineesCTA } from "@/components/nominees/ExploreNomineesCTA";
 
 function DashboardContent() {
   const { user } = useAuth();
@@ -97,12 +96,6 @@ function DashboardContent() {
 
         {/* Announcements + Quick Links */}
         <AnnouncementsPanel />
-
-        {/* Explore Africa's Education Impact Directory */}
-        <ExploreNomineesCTA
-          title="Explore Africa's Education Impact Directory"
-          description="Discover approved educators, innovators, institutions, and changemakers across every region and category."
-        />
 
         {/* Wallet + Referral row */}
         <div className="grid gap-4 lg:grid-cols-2">

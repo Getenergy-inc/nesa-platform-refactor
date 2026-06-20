@@ -1,83 +1,82 @@
-// Section 9 — Final CTA with six action cards.
-// Charcoal/Gold tokens. No custom CSS, no inline styles.
+import { Award, ArrowRight, Vote, Ticket, Heart, Globe, Users, Calendar } from "lucide-react";
 import { Link } from "react-router-dom";
-import {
-  Trophy, Heart, Handshake, MapPin, Megaphone, ArrowRight,
-} from "lucide-react";
+import { useTranslation } from "react-i18next";
+import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
 import { trackEvent } from "@/lib/analytics";
 
-const ACTIONS = [
-  { icon: Trophy,    label: "Nominate a Changemaker",  to: "/nominate",       cta: "nominate", featured: true },
-  { icon: Heart,     label: "Become a Volunteer",      to: "/volunteer",      cta: "volunteer" },
-  { icon: Handshake, label: "Become a Sponsor",        to: "/sponsor",        cta: "sponsor" },
-  { icon: MapPin,    label: "Join a Local Chapter",    to: "/local-chapters", cta: "chapter" },
-  { icon: Megaphone, label: "Become an Ambassador",    to: "/ambassadors",    cta: "ambassador" },
-];
-
 export function FinalCTASection() {
+  const { t } = useTranslation("pages");
+
   return (
-    <section className="relative py-20 md:py-28 overflow-hidden bg-charcoal">
-      <div className="absolute inset-0 bg-gradient-to-t from-gold/5 via-transparent to-transparent pointer-events-none" />
-      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-gold/25 to-transparent" />
+    <section className="relative py-20 md:py-28 overflow-hidden">
+      <div className="absolute inset-0 bg-gradient-to-br from-charcoal via-charcoal-light/30 to-charcoal" />
+      <div className="absolute inset-0 bg-gradient-to-t from-gold/4 via-transparent to-transparent" />
+      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-gold/20 to-transparent" />
 
-      <div className="container relative z-10 max-w-6xl mx-auto px-4">
-        <motion.div
-          className="text-center max-w-3xl mx-auto mb-10 md:mb-14"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-        >
-          <p className="text-gold text-sm font-medium mb-2 uppercase tracking-wide">
-            Take Action
-          </p>
-          <h2 className="font-display text-3xl md:text-5xl font-bold text-white mb-4">
-            Ready to Shape Africa's{" "}
-            <span className="text-gold">Education Future?</span>
+      <div className="container relative z-10">
+        <motion.div className="max-w-3xl mx-auto text-center" initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
+          <motion.div className="h-20 w-20 rounded-3xl bg-gold/10 border border-gold/25 flex items-center justify-center mx-auto mb-8" whileHover={{ scale: 1.08, rotate: 3 }} transition={{ duration: 0.2 }}>
+            <Award className="h-10 w-10 text-gold" />
+          </motion.div>
+
+          <h2 className="font-display text-3xl md:text-5xl lg:text-6xl font-bold text-white mb-5">
+            {t("landing.finalCTA.title")}{" "}
+            <span className="text-gold">{t("landing.finalCTA.titleAccent")}</span>
           </h2>
-          <p className="text-white/70 text-base md:text-lg leading-relaxed">
-            Choose how you want to make an impact in the NESA-Africa 2026 cycle.
+          
+          <p className="text-white/65 text-lg md:text-xl mb-10 max-w-2xl mx-auto leading-relaxed">
+            {t("landing.finalCTA.description")}
           </p>
-        </motion.div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-5">
-          {ACTIONS.map((a) => {
-            const Icon = a.icon;
-            return (
-              <Link
-                key={a.to}
-                to={a.to}
-                onClick={() =>
-                  trackEvent("final_cta_click", { cta: a.cta, to: a.to, location: "final_cta" })
-                }
-                className={`group rounded-2xl border p-6 transition-all hover:-translate-y-0.5 ${
-                  a.featured
-                    ? "border-gold bg-gold/10 hover:bg-gold/15"
-                    : "border-gold/25 bg-charcoal-light hover:border-gold/55"
-                }`}
-              >
-                <div className="flex items-start gap-4">
-                  <span
-                    className={`inline-flex items-center justify-center h-11 w-11 shrink-0 rounded-full ${
-                      a.featured ? "bg-gold text-charcoal" : "bg-gold/15 text-gold"
-                    }`}
-                  >
-                    <Icon className="h-5 w-5" />
-                  </span>
-                  <div className="min-w-0 flex-1">
-                    <h3 className="font-display text-lg font-bold text-white leading-tight mb-1">
-                      {a.label}
-                    </h3>
-                    <span className="inline-flex items-center gap-1 text-gold text-sm font-semibold">
-                      Get started
-                      <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
-                    </span>
-                  </div>
-                </div>
-              </Link>
-            );
-          })}
-        </div>
+          <div className="flex flex-col sm:flex-row justify-center gap-4 mb-8">
+            <Link to="/nominate" className="group" onClick={() => trackEvent("final_cta_click", { cta: "nominate", to: "/nominate", location: "final_cta" })}>
+              <Button size="lg" className="bg-gold hover:bg-gold-dark text-charcoal font-bold rounded-full px-10 gap-2.5 shadow-xl shadow-gold/25 hover:shadow-gold/40 transition-all min-h-[56px] text-lg">
+                {t("landing.finalCTA.submitNomination")}
+                <ArrowRight className="h-5 w-5 group-hover:translate-x-1 transition-transform" />
+              </Button>
+            </Link>
+            <Link to="/vote" className="group" onClick={() => trackEvent("final_cta_click", { cta: "vote", to: "/vote", location: "final_cta" })}>
+              <Button size="lg" variant="outline" className="border-2 border-gold/50 text-gold hover:bg-gold/10 hover:border-gold rounded-full px-10 gap-2.5 transition-all min-h-[56px] text-lg">
+                <Vote className="h-5 w-5" />
+                {t("common:actions.vote")}
+              </Button>
+            </Link>
+          </div>
+
+          <div className="flex flex-wrap justify-center gap-3 mb-10">
+            <Link to="/buy-your-ticket" onClick={() => trackEvent("final_cta_click", { cta: "tickets", to: "/buy-your-ticket", location: "final_cta" })}>
+              <Button variant="ghost" className="text-gold/60 hover:text-gold hover:bg-gold/8 rounded-full gap-2">
+                <Ticket className="h-4 w-4" />
+                {t("common:actions.getTickets")}
+              </Button>
+            </Link>
+            <Link to="/donate" onClick={() => trackEvent("final_cta_click", { cta: "donate", to: "/donate", location: "final_cta" })}>
+              <Button variant="ghost" className="text-gold/60 hover:text-gold hover:bg-gold/8 rounded-full gap-2">
+                <Heart className="h-4 w-4" />
+                {t("common:actions.donate")}
+              </Button>
+            </Link>
+            <Link to="/partners" onClick={() => trackEvent("final_cta_click", { cta: "partners", to: "/partners", location: "final_cta" })}>
+              <Button variant="ghost" className="text-gold/60 hover:text-gold hover:bg-gold/8 rounded-full">
+                {t("landing.sponsors.title")}
+              </Button>
+            </Link>
+          </div>
+
+          <motion.div className="flex flex-wrap justify-center gap-8" initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} transition={{ delay: 0.3 }} viewport={{ once: true }}>
+            {[
+              { icon: Globe, text: t("landing.finalCTA.trustIndicators.regions") },
+              { icon: Users, text: t("landing.finalCTA.trustIndicators.nominees") },
+              { icon: Calendar, text: t("landing.finalCTA.trustIndicators.years") },
+            ].map((item) => (
+              <div key={item.text} className="flex items-center gap-2 text-sm text-white/50">
+                <item.icon className="h-4 w-4 text-gold/50" />
+                <span>{item.text}</span>
+              </div>
+            ))}
+          </motion.div>
+        </motion.div>
       </div>
     </section>
   );

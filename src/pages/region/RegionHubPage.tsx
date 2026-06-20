@@ -7,7 +7,6 @@ import { NESAHeader } from "@/components/nesa/NESAHeader";
 import { NESAFooter } from "@/components/nesa/NESAFooter";
 import { getRegionHubBySlug, REGION_HUBS } from "@/config/regionHubs";
 import { RegionLegacySection } from "@/components/region/RegionLegacySection";
-import { FeaturedNomineesBlock } from "@/components/nominees/FeaturedNomineesBlock";
 
 // Map public region-hub slugs to the 8 legacy hub slugs used in RegionalLegacyEcosystem.
 const LEGACY_SLUG_MAP: Record<string, string> = {
@@ -214,20 +213,6 @@ export function RegionHubPage() {
 
         {/* 2026–2027 Legacy Impact Section */}
         <RegionLegacySection slug={LEGACY_SLUG_MAP[hub.slug] ?? hub.slug} />
-
-        {/* Nominees in this region — gateway to /nominees pre-filtered */}
-        <section className="py-12 bg-charcoal">
-          <div className="container max-w-5xl mx-auto px-4">
-            <FeaturedNomineesBlock
-              title={`Nominees from ${hub.name}`}
-              subtitle="Approved education changemakers recognised across this region."
-              region={hub.name}
-              limit={6}
-              viewAllHref={`/nominees?region=${hub.slug}`}
-            />
-          </div>
-        </section>
-
 
 
         {/* Other Regions */}

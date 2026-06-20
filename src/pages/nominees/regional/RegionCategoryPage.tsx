@@ -126,7 +126,6 @@ export default function RegionCategoryPage({ region: regionProp }: { region?: st
             nomineeCount={data.nominees.length}
             countryCount={data.countries.length}
             subcategoryCount={data.subcategories.length}
-            categorySlug={activeSub || categorySlug}
           />
 
           <SubcategoryTabs tabs={data.tabs} activeSlug={activeSub} onChange={(s) => { setActiveSub(s); setPage(1); }} />

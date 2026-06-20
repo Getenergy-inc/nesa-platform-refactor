@@ -3,7 +3,6 @@ import { motion } from "framer-motion";
 import { Globe, MapPin, Users, ArrowRight } from "lucide-react";
 import { AFRICAN_REGIONS, REGION_SHORT_DESCRIPTIONS, GOVERNANCE_STATS } from "@/lib/regions";
 import { Helmet } from "react-helmet-async";
-import { ExploreNomineesCTA } from "@/components/nominees/ExploreNomineesCTA";
 
 const regionSlugs: Record<string, string> = {
   "North Africa": "north-africa",
@@ -79,10 +78,6 @@ export default function RegionsIndexPage() {
                   </motion.div>
                 );
               })}
-            </div>
-
-            <div className="mt-10">
-              <ExploreNomineesCTA description="See every approved nominee across all 10 regions in Africa's Education Impact Directory." />
             </div>
           </div>
         </section>

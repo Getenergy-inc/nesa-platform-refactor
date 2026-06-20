@@ -70,7 +70,7 @@ export function TrophyHeroSection() {
               className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-gold/10 border border-gold/30 text-gold text-[10px] sm:text-xs font-semibold tracking-[0.18em] uppercase mb-4"
             >
               <Sparkles className="h-3 w-3" />
-              Africa's Education Movement
+              {t("landing.trophyHero.slogan")}
             </motion.p>
 
             {/* Official brand block — full content parity on mobile */}
@@ -84,7 +84,7 @@ export function TrophyHeroSection() {
                 NESA-Africa <span className="text-gold">2026</span>
               </p>
               <p className="text-[18px] sm:text-lg md:text-xl italic text-gold/95 mt-2 leading-snug">
-                "The Gold-Blue Garnet Awards for Education"
+                "The African Blue-Garnet Awards for Education"
               </p>
             </motion.div>
 
@@ -94,9 +94,9 @@ export function TrophyHeroSection() {
               transition={{ duration: 0.6, delay: 0.3 }}
               className="font-display text-[22px] leading-[1.2] sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4"
             >
-              Celebrating Africa's{" "}
+              Nominate the 2026 Honourees{" "}
               <span className="text-gold bg-gradient-to-r from-gold to-amber-400 bg-clip-text text-transparent">
-                Education Changemakers
+                Shaping Africa's Education Future
               </span>
             </motion.h1>
 
@@ -104,10 +104,54 @@ export function TrophyHeroSection() {
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.5 }}
-              className="text-white/90 text-[15px] sm:text-base md:text-lg mb-5 max-w-xl mx-auto lg:mx-0 leading-relaxed"
+              className="text-white/90 text-[15px] sm:text-base md:text-lg mb-4 max-w-xl mx-auto lg:mx-0 leading-relaxed"
             >
-              The <span className="text-gold font-semibold">Gold-Blue Garnet Awards 2026</span> is Africa's largest education recognition and impact platform — identifying, celebrating, supporting, and amplifying the people and organisations transforming education across the continent and the diaspora.
+              Across Africa and the diaspora, educators, innovators, advocates, institutions, funders, mentors, technology leaders, policy actors, and community changemakers are transforming education through real impact.
             </motion.p>
+
+            <motion.p
+              initial={{ opacity: 0, y: 15 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.6 }}
+              className="text-white/85 text-[15px] sm:text-base md:text-lg mb-4 max-w-xl mx-auto lg:mx-0 leading-relaxed"
+            >
+              Help <span className="text-gold font-semibold">New Education Standard Award Africa (NESA-Africa) 2026</span> recognise the people and organisations advancing learning, inclusion, infrastructure, innovation, mentorship, community action, and social progress.
+            </motion.p>
+
+            <motion.p
+              initial={{ opacity: 0, y: 15 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.65 }}
+              className="text-white/85 text-[15px] sm:text-base md:text-lg mb-5 max-w-xl mx-auto lg:mx-0 leading-relaxed"
+            >
+              Nominate a changemaker today, discover Africa's education impact stories, and get ready to support your favourite nominees when voting opens.
+            </motion.p>
+
+            {/* Feature chips — six platform pillars */}
+            <motion.ul
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.7 }}
+              className="flex flex-wrap gap-1.5 sm:gap-2 justify-center lg:justify-start mb-6"
+              aria-label="Platform pillars"
+            >
+              {[
+                "Nominations",
+                "Voting",
+                "Education Impact",
+                "Scholarships",
+                "Special Needs",
+                "School Transformation",
+              ].map((chip) => (
+                <li
+                  key={chip}
+                  className="px-2.5 py-1 rounded-full bg-white/5 border border-gold/25 text-white/85 text-[11px] sm:text-xs font-medium"
+                >
+                  {chip}
+                </li>
+              ))}
+            </motion.ul>
+
 
             <motion.div
               initial={{ opacity: 0, y: 15 }}
@@ -124,7 +168,7 @@ export function TrophyHeroSection() {
               transition={{ duration: 0.5, delay: 0.85 }}
               className="text-gold/70 text-xs sm:text-sm tracking-wide mb-10 max-w-xl mx-auto lg:mx-0 leading-relaxed"
             >
-              Voting opens according to the official NESA-Africa 2026 timeline. The AGC Voting Coin is subject to NESA-Africa participation rules.
+              Voting opens according to the official NESA-Africa 2026 timeline. AGC voting points are subject to NESA-Africa participation rules.
             </motion.p>
           </div>
 

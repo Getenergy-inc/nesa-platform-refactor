@@ -254,24 +254,10 @@ export function NomineeEntryForm({
           <Textarea
             value={form.impactSummary}
             onChange={(e) => set("impactSummary", e.target.value)}
-            rows={4}
-            placeholder="Challenge → Intervention → Results → Vision. e.g. 'In rural Borno, fewer than 30% of girls completed primary school. We launched 12 community schools and trained 240 teachers. Today 4,800 girls are enrolled, with 78% completion. Next: scale to 5 more states by 2027.'"
+            rows={3}
+            placeholder="Concrete outcomes, learners reached, programs delivered…"
             className="bg-white/5 border-white/10 text-white"
           />
-          <details className="mt-2 text-[11px] text-white/55 group">
-            <summary className="cursor-pointer text-gold/80 hover:text-gold select-none">
-              Need a prompt? Use the NESA story arc ↓
-            </summary>
-            <ul className="mt-2 space-y-1.5 pl-3 border-l border-gold/20">
-              <li><span className="text-amber-300 font-medium">Challenge:</span> What education barrier existed before this nominee acted?</li>
-              <li><span className="text-gold font-medium">Intervention:</span> What bold, sustained action did they take?</li>
-              <li><span className="text-emerald-300 font-medium">Results:</span> What measurable change happened — numbers + human story?</li>
-              <li><span className="text-sky-300 font-medium">Vision:</span> How does this scale or inspire systemic change across Africa?</li>
-            </ul>
-            <p className="mt-2">
-              Full guide: <a href="/guidelines/impact-storytelling" target="_blank" rel="noreferrer" className="underline text-gold/80 hover:text-gold">Impact Storytelling Guide</a>
-            </p>
-          </details>
         </Field>
 
         <Field
@@ -284,12 +270,9 @@ export function NomineeEntryForm({
             value={form.reason}
             onChange={(e) => set("reason", e.target.value)}
             rows={4}
-            placeholder="Make the case for recognition. Cover the 6 EDI dimensions where you can: Impact, Leadership, Innovation, Inclusion, Sustainability, Community Reach."
+            placeholder="Make the case for recognition. Quantify impact where possible."
             className="bg-white/5 border-white/10 text-white"
           />
-          <p className="mt-1.5 text-[11px] text-white/50">
-            Tip: one verifiable sentence per EDI dimension makes nominations score higher.
-          </p>
         </Field>
 
         <Field label="Public evidence links" className="md:col-span-2">

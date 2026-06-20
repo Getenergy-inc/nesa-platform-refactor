@@ -4,7 +4,6 @@
  */
 
 import { useMemo } from "react";
-import { motion } from "framer-motion";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { BarChart3, TrendingUp, Sparkles, Info } from "lucide-react";
@@ -13,10 +12,9 @@ import {
   Radar, ResponsiveContainer, Tooltip,
 } from "recharts";
 import {
-  calculateEDIScorecard, getGradeColor, getGradeBg, getPillarColor, getScoreBandColor,
+  calculateEDIScorecard, getGradeColor, getGradeBg, getPillarColor,
   type EDIScorecard, PILLAR_KEYS, PILLAR_CONFIG,
 } from "@/lib/ediScoring";
-import { AnimatedCounter } from "@/components/ui/AnimatedCounter";
 
 interface NomineeEDIScoresProps {
   nomineeId: number;
@@ -25,11 +23,9 @@ interface NomineeEDIScoresProps {
   compact?: boolean;
   categoryAvg?: number;
   regionAvg?: number;
-  /** Optional comparison overlay drawn as a dashed polygon on the radar (0-100 per dimension). */
-  comparison?: { label: string; values: Partial<Record<string, number>> };
 }
 
-export function NomineeEDIScores({ nomineeId, achievement, category, compact = false, categoryAvg, regionAvg, comparison }: NomineeEDIScoresProps) {
+export function NomineeEDIScores({ nomineeId, achievement, category, compact = false, categoryAvg, regionAvg }: NomineeEDIScoresProps) {
   const scorecard = useMemo(
     () => calculateEDIScorecard(nomineeId, achievement, category),
     [nomineeId, achievement, category]
@@ -40,7 +36,6 @@ export function NomineeEDIScores({ nomineeId, achievement, category, compact = f
     pillar: p.pillar.replace("& ", "&\n"),
     shortLabel: p.pillar.split(" ")[0],
     score: p.percentage,
-    benchmark: comparison?.values?.[p.key] ?? null,
     fullMark: 100,
   }));
 
@@ -56,7 +51,7 @@ export function NomineeEDIScores({ nomineeId, achievement, category, compact = f
           <div className="flex items-center gap-4">
             <div className="text-center">
               <div className={`text-5xl font-display font-bold ${getGradeColor(scorecard.grade)}`}>
-                <AnimatedCounter value={scorecard.overallScore} duration={1400} />
+                {scorecard.overallScore}
               </div>
               <div className="text-ivory/30 text-xs mt-1">/ 100</div>
             </div>
@@ -88,15 +83,9 @@ export function NomineeEDIScores({ nomineeId, achievement, category, compact = f
         <CardContent className="p-4">
           <div className="flex items-center gap-2 mb-3">
             <BarChart3 className="w-4 h-4 text-gold" />
-            <h3 className="text-sm font-display text-ivory/70 font-medium">EDI 6-Dimension Analysis</h3>
+            <h3 className="text-sm font-display text-ivory/70 font-medium">5-Pillar Analysis</h3>
           </div>
-          <motion.div
-            className="h-[240px]"
-            initial={{ opacity: 0, scale: 0.92 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true, margin: "0px 0px -10% 0px" }}
-            transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-          >
+          <div className="h-[240px]">
             <ResponsiveContainer width="100%" height="100%">
               <RadarChart data={radarData} cx="50%" cy="50%" outerRadius="75%">
                 <PolarGrid stroke="hsl(var(--gold) / 0.1)" />
@@ -115,23 +104,7 @@ export function NomineeEDIScores({ nomineeId, achievement, category, compact = f
                   stroke="hsl(var(--gold))"
                   fill="hsl(var(--gold) / 0.2)"
                   strokeWidth={2}
-                  isAnimationActive
-                  animationDuration={1400}
-                  animationEasing="ease-out"
                 />
-                {comparison && (
-                  <Radar
-                    name={comparison.label}
-                    dataKey="benchmark"
-                    stroke="hsl(var(--ivory) / 0.55)"
-                    fill="hsl(var(--ivory) / 0.05)"
-                    strokeWidth={1.5}
-                    strokeDasharray="4 4"
-                    isAnimationActive
-                    animationDuration={1400}
-                    animationBegin={200}
-                  />
-                )}
                 <Tooltip
                   contentStyle={{
                     backgroundColor: "hsl(var(--charcoal))",
@@ -144,42 +117,34 @@ export function NomineeEDIScores({ nomineeId, achievement, category, compact = f
                 />
               </RadarChart>
             </ResponsiveContainer>
-          </motion.div>
+          </div>
         </CardContent>
       </Card>
-
 
       {/* Pillar Score Bars */}
       <Card className="bg-charcoal-light/50 border-gold/10">
         <CardContent className="p-4 space-y-4">
-          <h3 className="text-sm font-display text-ivory/70 font-medium">Dimension Breakdown</h3>
-          {scorecard.pillars.map(p => {
-            const band = getScoreBandColor(p.score);
-            return (
-              <div key={p.key} className="space-y-1.5">
-                <div className="flex items-center justify-between">
-                  <span className="text-xs text-ivory/60 flex items-center gap-1.5">
-                    <span className="inline-block w-2 h-2 rounded-full" style={{ backgroundColor: getPillarColor(p.key) }} />
-                    {p.pillar}
-                  </span>
-                  <span className="text-xs font-semibold text-ivory/80 flex items-center gap-1.5">
-                    <span className={band.text}>{Math.round(p.score)}</span>
-                    <span className="text-ivory/30">/ 100</span>
-                    <Badge variant="outline" className={`text-[9px] px-1 py-0 ${band.text} border-current`}>
-                      {band.label}
-                    </Badge>
-                  </span>
-                </div>
-                <div className="relative h-2.5 w-full overflow-hidden rounded-full bg-charcoal">
-                  <div
-                    className="h-full rounded-full transition-all duration-700"
-                    style={{ width: `${p.score}%`, backgroundColor: band.hex }}
-                  />
-                </div>
-                <p className="text-[10px] text-ivory/30 leading-relaxed">{p.description}</p>
+          <h3 className="text-sm font-display text-ivory/70 font-medium">Pillar Breakdown</h3>
+          {scorecard.pillars.map(p => (
+            <div key={p.key} className="space-y-1.5">
+              <div className="flex items-center justify-between">
+                <span className="text-xs text-ivory/60">{p.pillar}</span>
+                <span className="text-xs font-semibold text-ivory/80">
+                  {p.score} <span className="text-ivory/30">/ {p.maxScore}</span>
+                </span>
               </div>
-            );
-          })}
+              <div className="relative h-2.5 w-full overflow-hidden rounded-full bg-charcoal">
+                <div
+                  className="h-full rounded-full transition-all duration-700"
+                  style={{
+                    width: `${p.percentage}%`,
+                    backgroundColor: getPillarColor(p.key),
+                  }}
+                />
+              </div>
+              <p className="text-[10px] text-ivory/30 leading-relaxed">{p.description}</p>
+            </div>
+          ))}
         </CardContent>
       </Card>
 

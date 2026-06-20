@@ -34,27 +34,6 @@ const VALID_FAMILIES = new Set<AwardFamilyId>(
   AWARD_FAMILIES.map((f) => f.id),
 );
 
-// Map external subcategory UUIDs (used by category landing pages) to the
-// canonical NominateMvp category slug so deep-links such as
-// /nominate?subcategory=<uuid> resolve to the correct prefiltered category.
-const SUBCATEGORY_UUID_TO_CATEGORY: Record<string, string> = {
-  // Political Leaders' Contribution to Education — Nigeria
-  "316d2796-bd9f-41cc-9299-e42b4f51b1d3":
-    "excellence-in-political-leadership-for-education-nigeria",
-  "a87adfeb-4e32-418d-8901-3128e0df4071":
-    "excellence-in-political-leadership-for-education-nigeria",
-  "9e06ae92-2225-460b-8cf9-73c82851ea4c":
-    "excellence-in-political-leadership-for-education-nigeria",
-  "6f47bbd7-5940-4932-9551-329abf5e5028":
-    "excellence-in-political-leadership-for-education-nigeria",
-  "88d367b9-e304-41a5-b9ee-50bc03671884":
-    "excellence-in-political-leadership-for-education-nigeria",
-  "e748223f-c7d7-4a67-9589-34ceca029834":
-    "excellence-in-political-leadership-for-education-nigeria",
-  "0b6c53b7-5de7-4ac3-ac97-fa6d8612a42b":
-    "excellence-in-political-leadership-for-education-nigeria",
-};
-
 export default function NominateMvp() {
   const { t, i18n } = useTranslation("nomination");
   const [params, setParams] = useSearchParams();
@@ -69,21 +48,6 @@ export default function NominateMvp() {
   const family =
     familyParam && VALID_FAMILIES.has(familyParam) ? familyParam : null;
   const category = categoryParam ? getCategoryFormBySlug(categoryParam) : null;
-
-  // Resolve external subcategory UUIDs (e.g. links from category landing pages)
-  // by promoting them to the matching ?category= slug. The UUIDs do not match
-  // any internal subcategory slug, so we drop the unresolved ?subcategory=.
-  useEffect(() => {
-    if (categoryParam || !subcategoryParam) return;
-    const resolved = SUBCATEGORY_UUID_TO_CATEGORY[subcategoryParam];
-    if (!resolved) return;
-    const next = new URLSearchParams(params);
-    next.set("category", resolved);
-    const target = getCategoryFormBySlug(resolved);
-    if (target) next.set("family", target.family);
-    next.delete("subcategory");
-    setParams(next, { replace: true });
-  }, [categoryParam, subcategoryParam, params, setParams]);
 
   // Honor ?lang=
   useEffect(() => {

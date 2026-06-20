@@ -65,25 +65,24 @@ export function PoweredByVolunteersSection() {
           </p>
         </motion.div>
 
-        {/* Stats — movement scale (no country count) */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-5 mb-12 max-w-4xl mx-auto">
+        {/* Stats */}
+        <div className="grid grid-cols-3 gap-3 md:gap-6 mb-12 max-w-3xl mx-auto">
           {[
-            { icon: Globe2, label: "Education Regions", value: "10" },
-            { icon: Sparkles, label: "Regional Ambassador Opportunities", value: "15" },
             { icon: Users, label: "Volunteers", value: stats.count || vols.length || "200+" },
-            { icon: Heart, label: "Operational Teams", value: "10" },
+            { icon: Globe2, label: "Countries", value: stats.countries || "30+" },
+            { icon: Heart, label: "Teams", value: "10" },
           ].map((s, i) => (
             <motion.div
               key={s.label}
               initial={{ opacity: 0, y: 12 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: i * 0.08 }}
+              transition={{ delay: i * 0.1 }}
               className="rounded-xl border border-gold/20 bg-white/5 p-4 md:p-6 text-center backdrop-blur"
             >
               <s.icon className="h-5 w-5 text-gold mx-auto mb-2" />
               <div className="font-playfair text-2xl md:text-3xl text-gold">{s.value}</div>
-              <div className="text-[11px] text-white/60 uppercase tracking-wider mt-1 leading-tight">{s.label}</div>
+              <div className="text-xs text-white/60 uppercase tracking-wider mt-1">{s.label}</div>
             </motion.div>
           ))}
         </div>

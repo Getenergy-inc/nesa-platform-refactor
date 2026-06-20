@@ -1,6 +1,5 @@
 import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
-import { FeaturedNomineesBlock } from "@/components/nominees/FeaturedNomineesBlock";
 
 import { AwardTVShowSection } from "@/components/awards/AwardTVShowSection";
 import { AwardCategoriesGrid } from "@/components/awards/AwardCategoriesGrid";
@@ -292,18 +291,6 @@ export default function GoldAward() {
                 </Link>
               </Button>
             </div>
-          </div>
-        </section>
-
-        <section className="bg-charcoal py-8">
-          <div className="container mx-auto px-4">
-            <FeaturedNomineesBlock
-              awardFamily="gold-bluegarnet"
-              title="Existing Gold-Tier Nominees"
-              subtitle="Education leaders already nominated for Gold-Blue Garnet competitive excellence."
-              limit={6}
-              viewAllHref="/nominees?awardFamily=gold-bluegarnet"
-            />
           </div>
         </section>
       </div>
