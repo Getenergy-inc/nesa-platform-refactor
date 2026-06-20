@@ -400,6 +400,9 @@ export default function About() {
         </div>
       </section>
 
+      {/* About NESA-Africa 2026 — detailed accordion */}
+      <AboutNESASection />
+
       {/* Final CTA */}
       <section className="bg-gradient-to-b from-charcoal to-charcoal/95 py-20 lg:py-28 border-t border-gold/10">
         <div className="container mx-auto px-4">
