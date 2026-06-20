@@ -144,10 +144,8 @@ export function NESALandingPage() {
           <ImpactPreviewSection />
         </LazySection>
 
-        {/* About NESA-Africa 2026 — responsive on all devices */}
-        <LazySection>
-          <AboutNESASection />
-        </LazySection>
+        {/* About NESA-Africa 2026 moved to /about page */}
+
 
         {/* Powered by Volunteers — responsive on all devices */}
         <LazySection>
