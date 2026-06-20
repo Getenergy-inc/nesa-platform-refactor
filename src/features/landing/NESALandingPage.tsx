@@ -63,10 +63,16 @@ export function NESALandingPage() {
         {/* 2. COUNTDOWN — Journey to 22 October 2026 */}
         <CountdownSection />
 
-        {/* 3. WHY NESA-AFRICA EXISTS */}
+        {/* 3. A CONTINENT IN RECOGNITION — 2025 Pre-Opening Gallery Teaser */}
+        <LazySection>
+          <HomepageGalleryTeaser />
+        </LazySection>
+
+        {/* 4. WHY NESA-AFRICA EXISTS */}
         <LazySection>
           <WhyNESAExistsSection />
         </LazySection>
+
 
         {/* 4. VISION, MISSION & 15 OBJECTIVES */}
         <LazySection>
