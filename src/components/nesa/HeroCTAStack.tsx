@@ -59,12 +59,12 @@ export function HeroCTAStack() {
           </Link>
         </motion.div>
 
-        {/* SECONDARY */}
+        {/* SECONDARY — Discover & Explore Nominees (merged) */}
         <motion.div variants={item}>
           <Link
             to="/nominees"
-            aria-label="Discover Africa's Education Changemakers"
-            onClick={onCta("discover_changemakers", "/nominees")}
+            aria-label="Discover Africa's Education Changemakers — Explore Existing Nominees"
+            onClick={onCta("discover_and_explore_nominees", "/nominees")}
             className={`${baseBtn} border border-gold/60 bg-charcoal/40 text-white hover:border-gold hover:bg-gold/10 hover:text-gold hover:-translate-y-0.5`}
           >
             <Compass className="h-4 w-4 text-gold" />
@@ -75,18 +75,6 @@ export function HeroCTAStack() {
 
       {/* SUPPORT CTAs row — visually lighter */}
       <div className="mt-3 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-2.5">
-        {/* SUPPORT — Explore Existing Nominees */}
-        <motion.div variants={item}>
-          <Link
-            to="/nominees"
-            aria-label="Explore Existing Nominees"
-            onClick={onCta("explore_existing_nominees", "/nominees")}
-            className={`${baseBtn} border border-gold/30 bg-charcoal/30 text-white/90 hover:border-gold/50 hover:bg-gold/5 hover:text-gold hover:-translate-y-0.5`}
-          >
-            <Users className="h-4 w-4 text-gold/80 group-hover:text-gold" />
-            <span className="truncate">Explore Existing Nominees</span>
-          </Link>
-        </motion.div>
 
         {/* SUPPORT — Explore Award Categories */}
         <motion.div variants={item}>
