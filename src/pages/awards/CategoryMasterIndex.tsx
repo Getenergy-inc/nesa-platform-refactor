@@ -394,11 +394,14 @@ export default function CategoryMasterIndex() {
     const list = ALL_CATEGORIES.filter((c) => {
       if (groupFilter !== "all" && c.group !== groupFilter) return false;
       if (!q) return true;
+      const official = OFFICIAL[c.slug];
       return (
         c.finalName.toLowerCase().includes(q) ||
         c.shortDescription.toLowerCase().includes(q) ||
         c.eligibilitySummary.toLowerCase().includes(q) ||
-        c.whoCanBeNominated.toLowerCase().includes(q)
+        c.whoCanBeNominated.toLowerCase().includes(q) ||
+        (official?.name.toLowerCase().includes(q) ?? false) ||
+        (official?.description.toLowerCase().includes(q) ?? false)
       );
     });
     if (sort === "az") return [...list].sort((a, b) => a.finalName.localeCompare(b.finalName));
