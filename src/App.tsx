@@ -203,6 +203,7 @@ import {
 import VolunteerShareAssets from "./pages/volunteer/VolunteerShareAssets";
 import VolunteerChaptersHub from "./pages/volunteers/Chapters";
 import JoinLocalChapter from "./pages/volunteers/JoinLocalChapter";
+import VolunteerCommandCenter from "./pages/volunteers/CommandCenter";
 import Ambassadors from "./pages/Ambassadors";
 import Contributors from "./pages/Contributors";
 import ContributorProfile from "./pages/ContributorProfile";
@@ -1987,6 +1988,7 @@ const App = () => (
                   <Route path="/volunteer/share-assets" element={<WithLayout><VolunteerShareAssets /></WithLayout>} />
                   <Route path="/volunteer-chapters" element={<WithLayout><VolunteerChaptersHub /></WithLayout>} />
                   <Route path="/join-local-chapter" element={<WithLayout><JoinLocalChapter /></WithLayout>} />
+                  <Route path="/volunteers/command-center" element={<VolunteerCommandCenter />} />
                   <Route
                     path="/ambassadors"
                     element={
