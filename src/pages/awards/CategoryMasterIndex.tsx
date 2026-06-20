@@ -48,6 +48,137 @@ import {
   type CategoryGroup,
 } from "@/config/awardCategories";
 
+/**
+ * Official nesa.africa category reference — verbatim names, descriptions,
+ * canonical URLs and subcategory counts as published on nesa.africa.
+ * Used to override internal config when rendering this overview page so
+ * cards always match the authoritative source. Keyed by internal slug.
+ */
+const OFFICIAL: Record<string, {
+  name: string;
+  description: string;
+  url: string;
+  subcategoryCount: number;
+}> = {
+  // Tier 1 — Blue Garnet
+  "csr-education-africa": {
+    name: "Best CSR for Education (Africa Regional)",
+    description: "Recognizing corporate social responsibility initiatives advancing education across the African continent.",
+    url: "/categories/best-csr-education-africa",
+    subcategoryCount: 6,
+  },
+  "csr-education-nigeria": {
+    name: "Best CSR for Education (Nigeria)",
+    description: "Celebrating Nigerian corporations making outstanding contributions to education.",
+    url: "/categories/best-csr-education-nigeria",
+    subcategoryCount: 23,
+  },
+  "edutech-africa": {
+    name: "Best EduTech Innovation for Education (Africa Regional)",
+    description: "Honoring technology-driven education innovations transforming learning across Africa.",
+    url: "/categories/best-edutech-organisation-africa",
+    subcategoryCount: 3,
+  },
+  "media-advocacy-nigeria": {
+    name: "Best Media Organisation for Education Advocacy (Nigeria)",
+    description: "Recognising media organisations championing education advocacy in Nigeria.",
+    url: "/categories/best-media-educational-advocacy-nigeria",
+    subcategoryCount: 4,
+  },
+  "ngo-education-nigeria": {
+    name: "Best NGO for Education Advancement (Nigeria)",
+    description: "Celebrating non-governmental organisations advancing education impact in Nigeria.",
+    url: "/categories/best-ngo-education-nigeria",
+    subcategoryCount: 5,
+  },
+  "ngo-education-africa": {
+    name: "Best NGO for Education Advancement (Africa Regional)",
+    description: "Honoring NGOs advancing inclusive education across the African continent.",
+    url: "/categories/best-ngo-education-africa",
+    subcategoryCount: 5,
+  },
+  "stem-education-africa": {
+    name: "Best STEM Education Programme (Africa Regional)",
+    description: "Recognizing excellence in Science, Technology, Engineering, and Mathematics education.",
+    url: "/categories/best-stem-education-africa",
+    subcategoryCount: 4,
+  },
+  "creative-arts-nigeria": {
+    name: "Best Creative Arts Contribution to Education (Nigeria)",
+    description: "Celebrating creative industries advancing education impact in Nigeria.",
+    url: "/categories/creative-arts-education-nigeria",
+    subcategoryCount: 7,
+  },
+  "education-state-nigeria": {
+    name: "Best Education Policy & Implementation State (Nigeria)",
+    description: "Recognizing Nigerian states excelling in education policy and implementation.",
+    url: "/categories/best-education-friendly-state-nigeria",
+    subcategoryCount: 6,
+  },
+  // Tier 2 — Platinum
+  "library-nigeria": {
+    name: "Best Tertiary Institution Library (Nigeria)",
+    description: "Celebrating excellence in library services across Nigerian higher education.",
+    url: "/categories/best-library-tertiary-nigeria",
+    subcategoryCount: 8,
+  },
+  "rd-nigeria": {
+    name: "Excellence in Research & Development for Education (Nigeria)",
+    description: "Honoring research institutions advancing education in Nigeria.",
+    url: "/categories/best-research-development-nigeria",
+    subcategoryCount: 3,
+  },
+  "christian-education-africa": {
+    name: "Excellence in Christian Education Impact (Africa Regional)",
+    description: "Recognising faith-based Christian impact on education across Africa.",
+    url: "/categories/christian-education-impact-africa",
+    subcategoryCount: 3,
+  },
+  "islamic-education-africa": {
+    name: "Excellence in Islamic Education Impact (Africa Regional)",
+    description: "Honoring Islamic impact on education across the African continent.",
+    url: "/categories/islamic-education-impact-africa",
+    subcategoryCount: 3,
+  },
+  "political-leaders-nigeria": {
+    name: "Excellence in Political Leadership for Education (Nigeria)",
+    description: "Recognising political leaders championing education advancement in Nigeria.",
+    url: "/categories/political-leaders-education-nigeria",
+    subcategoryCount: 3,
+  },
+  "international-education": {
+    name: "Excellence in International Partnership for Education (Africa)",
+    description: "Celebrating international partners advancing education across Africa.",
+    url: "/categories/international-bilateral-education",
+    subcategoryCount: 4,
+  },
+  "diaspora-impact": {
+    name: "Excellence in Diaspora Educational Impact (International)",
+    description: "Honoring diaspora organisations advancing education in Africa.",
+    url: "/categories/diaspora-education-impact",
+    subcategoryCount: 3,
+  },
+  // Tier 4 — Influencers
+  "social-media": {
+    name: "African Social Media Influencers Education Impact Award",
+    description: "Recognising creators, educators, digital advocates, podcasters, bloggers, and online personalities advancing education through digital influence.",
+    url: "/nominate?family=influencer&category=education-content-social-media-influencers",
+    subcategoryCount: 0,
+  },
+  "sports": {
+    name: "African Sports Icons Supporting Education",
+    description: "Recognising athletes, sports foundations, academies, coaches, and sports leaders using sports as a tool for educational transformation.",
+    url: "/nominate?family=influencer&category=african-footballers-supporting-education",
+    subcategoryCount: 0,
+  },
+  "music": {
+    name: "African Music Icons Supporting Education",
+    description: "Recognising musicians, performers, producers, music executives, and cultural icons using music, entertainment, concerts, lyrics, influence, and public campaigns to advance education awareness and youth empowerment across Africa.",
+    url: "/nominate?family=influencer",
+    subcategoryCount: 0,
+  },
+};
+
 type SortKey = "default" | "az" | "za";
 
 const SITE = "https://nesaafrica.lovable.app";
