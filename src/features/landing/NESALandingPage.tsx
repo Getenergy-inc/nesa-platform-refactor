@@ -69,6 +69,10 @@ export function NESALandingPage() {
 
         {/* 2. ECOSYSTEM TRUST — honourees/ecosystem strip moved up for fast credibility */}
         <TrustLogosStrip />
+
+        {/* 2a. WHAT MAKES DIFFERENT — impact chain beyond recognition */}
+        <WhatMakesDifferentSection />
+
         <LazySection>
           <EcosystemCarousel />
         </LazySection>
@@ -77,6 +81,12 @@ export function NESALandingPage() {
         <LazySection>
           <AwardShowcaseSection />
         </LazySection>
+
+        {/* 2c. THE JOURNEY — 7-phase lifecycle */}
+        <JourneySection />
+
+        {/* 2d. RECOGNITION PATHWAYS — tier breakdown with examples */}
+        <RecognitionPathwaysSection />
 
         {/* 3. COUNTDOWN — Blue Garnet 2026 Gala urgency */}
         <CountdownSection />
