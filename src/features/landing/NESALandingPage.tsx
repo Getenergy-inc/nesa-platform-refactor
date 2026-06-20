@@ -29,19 +29,14 @@ const EcosystemCarousel = lazy(() => import("@/components/landing/EcosystemCarou
 const ImpactPreviewSection = lazy(() => import("@/components/nesa/ImpactPreviewSection").then(m => ({ default: m.ImpactPreviewSection })));
 const SponsorPreviewSection = lazy(() => import("@/components/nesa/SponsorPreviewSection").then(m => ({ default: m.SponsorPreviewSection })));
 
-const InteractiveAfricaMap = lazy(() => import("@/components/nesa/InteractiveAfricaMap").then(m => ({ default: m.InteractiveAfricaMap })));
 const SponsorsSection = lazy(() => import("@/components/nesa/SponsorsSection").then(m => ({ default: m.SponsorsSection })));
 const FinalCTASection = lazy(() => import("@/components/nesa/FinalCTASection").then(m => ({ default: m.FinalCTASection })));
 const HomepageGalleryTeaser = lazy(() => import("@/components/gallery/HomepageGalleryTeaser").then(m => ({ default: m.HomepageGalleryTeaser })));
-const NomineeDiscoverySwitcher = lazy(() => import("@/components/nominees/NomineeDiscoverySwitcher").then(m => ({ default: m.NomineeDiscoverySwitcher })));
-const AboutNESASection = lazy(() => import("@/components/nesa/AboutNESASection").then(m => ({ default: m.AboutNESASection })));
 const PoweredByVolunteersSection = lazy(() => import("@/components/nesa/PoweredByVolunteersSection").then(m => ({ default: m.PoweredByVolunteersSection })));
 const MobileCategoryRail = lazy(() => import("@/components/landing/MobileCategoryRail").then(m => ({ default: m.MobileCategoryRail })));
 const AwardShowcaseSection = lazy(() => import("@/components/nesa/AwardShowcaseSection").then(m => ({ default: m.AwardShowcaseSection })));
 const ImpactProgramsSection = lazy(() => import("@/components/nesa/ImpactProgramsSection").then(m => ({ default: m.ImpactProgramsSection })));
 const GovernanceFirewallSection = lazy(() => import("@/components/nesa/GovernanceFirewallSection").then(m => ({ default: m.GovernanceFirewallSection })));
-const FeaturedChangemakersSection = lazy(() => import("@/components/nesa/FeaturedChangemakersSection").then(m => ({ default: m.FeaturedChangemakersSection })));
-const CuratedFeaturedNominees = lazy(() => import("@/components/nominees/CuratedFeaturedNominees").then(m => ({ default: m.CuratedFeaturedNominees })));
 
 
 
@@ -80,28 +75,12 @@ export function NESALandingPage() {
           <AwardShowcaseSection />
         </LazySection>
 
-        {/* 2c. FEATURED CHANGEMAKERS — Africa's Education Impact Directory gateway */}
-        <LazySection>
-          <FeaturedChangemakersSection />
-        </LazySection>
-
-        {/* 2d. HALL OF FAME SPOTLIGHT — curated marquee approved nominees */}
-        <LazySection>
-          <CuratedFeaturedNominees />
-        </LazySection>
-
         {/* 3. COUNTDOWN — Blue Garnet 2026 Gala urgency */}
         <CountdownSection />
 
         {/* 3b. MOBILE CATEGORY DISCOVERY — horizontal swipe rail (mobile only) */}
         <LazySection>
           <MobileCategoryRail />
-        </LazySection>
-
-
-        {/* 4. NOMINEE DISCOVERY — responsive on all devices */}
-        <LazySection>
-          <NomineeDiscoverySwitcher />
         </LazySection>
 
         {/* 4b. IMPACT PROGRAMS — EduAid / RMSA / Special Needs / Edu-Tourism */}
@@ -115,39 +94,12 @@ export function NESALandingPage() {
           <HomepageGalleryTeaser />
         </LazySection>
 
-        {/* 6. REGIONAL PREVIEW — public map + region cards (gateway to /region/:slug) */}
-        <LazySection>
-          <InteractiveAfricaMap />
-        </LazySection>
-
-        {/* 6b. Bridge note → 2026–2027 Legacy Impact pathway */}
-        <div className="container mx-auto max-w-4xl px-4 -mt-6 mb-8">
-          <div className="rounded-2xl border border-gold/25 bg-gold/5 px-5 py-4 text-center">
-            <p className="text-ivory/80 text-xs md:text-sm leading-relaxed mb-3">
-              Each region now connects to the{" "}
-              <span className="text-gold font-semibold">2026–2027 NESA-Africa Legacy Impact pathway</span>
-              {" "}— EduAid-Africa Edu-Tourism Conferences, Special Needs School
-              nominations, regional voting, GFA Wzip regional wallets, and Rebuild My
-              School Africa interventions.
-            </p>
-            <a
-              href="/eduaid-africa/rebuild-my-school"
-              className="inline-flex items-center gap-1.5 text-gold text-xs md:text-sm font-semibold hover:underline"
-            >
-              Explore the full Continental Impact Ecosystem →
-            </a>
-          </div>
-        </div>
-
         {/* 7. IMPACT PREVIEW — short gateway card (full content lives on /impact, /impact/regional-school-intervention, /eduaid-africa, /eduaid-africa/rebuild-my-school) */}
         <LazySection>
           <ImpactPreviewSection />
         </LazySection>
 
-        {/* About NESA-Africa 2026 — responsive on all devices */}
-        <LazySection>
-          <AboutNESASection />
-        </LazySection>
+
 
         {/* Powered by Volunteers — responsive on all devices */}
         <LazySection>
