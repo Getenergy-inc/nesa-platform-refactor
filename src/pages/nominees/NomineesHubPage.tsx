@@ -12,6 +12,10 @@ import { Input } from "@/components/ui/input";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import {
+  Pagination, PaginationContent, PaginationItem, PaginationLink,
+  PaginationPrevious, PaginationNext, PaginationEllipsis,
+} from "@/components/ui/pagination";
+import {
   useNomineesList,
   useAwardCategories,
   useSubcategories,
@@ -129,6 +133,17 @@ export default function NomineesHubPage() {
   // CMS-driven subcategory list scoped to the active category.
   const { data: cmsSubcategories } = useSubcategories(filterCategory);
 
+  // Pagination — URL-driven via ?page=N. Page size kept constant; clamped
+  // against total below so deep links never land on a non-existent page.
+  const PAGE_SIZE = 24;
+  const rawPage = Number.parseInt(params.get("page") ?? "1", 10);
+  const requestedPage = Number.isFinite(rawPage) && rawPage > 0 ? rawPage : 1;
+  const setFilterPage = (page: number) => {
+    const next = new URLSearchParams(params);
+    if (page <= 1) next.delete("page"); else next.set("page", String(page));
+    setParams(next, { replace: true });
+  };
+
   const isNigeria = filterCountry.toLowerCase() === "nigeria";
   const activeZone = NIGERIA_ZONES.find((z) => z.slug === filterZone);
   const activeFilterCountValue = activeFilterCount(filters);
@@ -229,6 +244,17 @@ export default function NomineesHubPage() {
     nominees, search, filterCategory, filterSubcategory, filterCountry, filterRegion,
     filterAwardFamily, filterRecognitionClass, filterZone, filterState,
   ]);
+
+  // Clamp the requested page to the available pages so URL-driven values
+  // and filter changes that shrink the list don't strand the user on an
+  // empty page.
+  const totalPages = Math.max(1, Math.ceil(filteredNominees.length / PAGE_SIZE));
+  const currentPage = Math.min(Math.max(requestedPage, 1), totalPages);
+  const pageStart = (currentPage - 1) * PAGE_SIZE;
+  const pagedNominees = filteredNominees.slice(pageStart, pageStart + PAGE_SIZE);
+  const rangeStart = filteredNominees.length === 0 ? 0 : pageStart + 1;
+  const rangeEnd = pageStart + pagedNominees.length;
+
 
 
   const onSearchSubmit = (e: React.FormEvent) => {
@@ -512,7 +538,11 @@ export default function NomineesHubPage() {
                     <Filter className="w-5 h-5 text-gold" /> Filtered Results
                   </h2>
                   <p className="text-xs text-ivory/60 mt-1">
-                    {filteredNominees.length.toLocaleString()} nominee{filteredNominees.length === 1 ? "" : "s"} match your filters.
+                    {filteredNominees.length.toLocaleString()} nominee{filteredNominees.length === 1 ? "" : "s"} match your filters
+                    {filteredNominees.length > 0 && (
+                      <> • showing <span className="text-ivory/80">{rangeStart.toLocaleString()}–{rangeEnd.toLocaleString()}</span> (page {currentPage} of {totalPages})</>
+                    )}
+                    .
                   </p>
                 </div>
                 <Button
@@ -526,11 +556,25 @@ export default function NomineesHubPage() {
               </div>
 
               {filteredNominees.length > 0 ? (
-                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3" data-testid="filtered-results-grid">
-                  {filteredNominees.slice(0, 12).map((n) => (
-                    <LandingNomineeCard key={n.id} nominee={n} />
-                  ))}
-                </div>
+                <>
+                  <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3" data-testid="filtered-results-grid">
+                    {pagedNominees.map((n) => (
+                      <LandingNomineeCard key={n.id} nominee={n} />
+                    ))}
+                  </div>
+                  {totalPages > 1 && (
+                    <NomineesPagination
+                      currentPage={currentPage}
+                      totalPages={totalPages}
+                      onPageChange={(p) => {
+                        setFilterPage(p);
+                        if (typeof window !== "undefined") {
+                          window.scrollTo({ top: 0, behavior: "smooth" });
+                        }
+                      }}
+                    />
+                  )}
+                </>
               ) : (
                 <div
                   data-testid="filtered-results-empty"
@@ -731,4 +775,77 @@ export default function NomineesHubPage() {
       </section>
     </>
   );
+}
+
+/**
+ * Pager for the filtered results grid. Renders first / current±1 / last
+ * with ellipses so long lists (the directory routinely returns 100+
+ * nominees per filter) stay compact on mobile.
+ */
+function NomineesPagination({
+  currentPage,
+  totalPages,
+  onPageChange,
+}: {
+  currentPage: number;
+  totalPages: number;
+  onPageChange: (page: number) => void;
+}) {
+  const pages = buildPageWindow(currentPage, totalPages);
+  const go = (p: number) => (e: React.MouseEvent) => {
+    e.preventDefault();
+    if (p >= 1 && p <= totalPages && p !== currentPage) onPageChange(p);
+  };
+
+  return (
+    <Pagination className="mt-6">
+      <PaginationContent>
+        <PaginationItem>
+          <PaginationPrevious
+            href="#"
+            onClick={go(currentPage - 1)}
+            aria-disabled={currentPage === 1}
+            className={currentPage === 1 ? "pointer-events-none opacity-40" : ""}
+          />
+        </PaginationItem>
+        {pages.map((p, i) =>
+          p === "ellipsis" ? (
+            <PaginationItem key={`e-${i}`}>
+              <PaginationEllipsis />
+            </PaginationItem>
+          ) : (
+            <PaginationItem key={p}>
+              <PaginationLink
+                href="#"
+                isActive={p === currentPage}
+                onClick={go(p)}
+              >
+                {p}
+              </PaginationLink>
+            </PaginationItem>
+          ),
+        )}
+        <PaginationItem>
+          <PaginationNext
+            href="#"
+            onClick={go(currentPage + 1)}
+            aria-disabled={currentPage === totalPages}
+            className={currentPage === totalPages ? "pointer-events-none opacity-40" : ""}
+          />
+        </PaginationItem>
+      </PaginationContent>
+    </Pagination>
+  );
+}
+
+function buildPageWindow(current: number, total: number): (number | "ellipsis")[] {
+  if (total <= 7) return Array.from({ length: total }, (_, i) => i + 1);
+  const out: (number | "ellipsis")[] = [1];
+  const start = Math.max(2, current - 1);
+  const end = Math.min(total - 1, current + 1);
+  if (start > 2) out.push("ellipsis");
+  for (let i = start; i <= end; i++) out.push(i);
+  if (end < total - 1) out.push("ellipsis");
+  out.push(total);
+  return out;
 }
