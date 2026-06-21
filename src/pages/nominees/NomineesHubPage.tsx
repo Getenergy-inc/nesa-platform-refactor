@@ -97,7 +97,8 @@ const CANONICAL_CATEGORIES: { slug: string; name: string }[] = [
 
 export default function NomineesHubPage() {
   const navigate = useNavigate();
-  const { data: nominees, isLoading } = useNominees();
+  const { data: nominees, isLoading } = useNomineesList();
+  const { data: cmsCategories } = useAwardCategories();
 
   // URL-driven filters — deep-linkable per Pass D audit.
   const [params, setParams] = useSearchParams();
