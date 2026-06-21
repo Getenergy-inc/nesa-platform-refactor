@@ -437,11 +437,11 @@ export default function NomineesHubPage() {
             className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-2 sm:gap-3 mb-8"
           >
             {[
-              { icon: Users, label: "Existing Nominees", value: `${Math.max(totalCount, 1760).toLocaleString()}+` },
+              { icon: Users, label: "Nominees Indexed", value: totalCount.toLocaleString() },
+              { icon: Sparkles, label: "Award Tiers", value: "4" },
+              { icon: Trophy, label: "Award Categories", value: `${Math.max(categories.length, 18)}` },
               { icon: Globe2, label: "Countries", value: `${Math.max(countries.length, 54)}` },
-              { icon: MapPin, label: "Legacy Regions", value: "8" },
-              { icon: Trophy, label: "Award Categories", value: `${Math.max(categories.length, 100)}+` },
-              { icon: Sparkles, label: "Recognition Pathways", value: "4" },
+              { icon: MapPin, label: "Regions", value: "10" },
             ].map((s) => (
               <li
                 key={s.label}
