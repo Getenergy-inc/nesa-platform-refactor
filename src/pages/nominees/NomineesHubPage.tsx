@@ -207,6 +207,7 @@ export default function NomineesHubPage() {
     const q = search.trim().toLowerCase();
     return all.filter((n) => {
       if (filterCategory !== "all" && n.categorySlug !== filterCategory) return false;
+      if (filterSubcategory !== "all" && n.subcategorySlug !== filterSubcategory) return false;
       if (filterCountry !== "all" && (n.country ?? "").toLowerCase() !== filterCountry.toLowerCase()) return false;
       if (filterRegion !== "all") {
         const norm = normalizeRegion(n.region ?? "");
@@ -225,7 +226,7 @@ export default function NomineesHubPage() {
       return true;
     });
   }, [
-    nominees, search, filterCategory, filterCountry, filterRegion,
+    nominees, search, filterCategory, filterSubcategory, filterCountry, filterRegion,
     filterAwardFamily, filterRecognitionClass, filterZone, filterState,
   ]);
 
