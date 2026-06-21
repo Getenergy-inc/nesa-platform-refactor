@@ -56,9 +56,9 @@ export function InteractiveAfricaMap() {
           className="text-center mb-12"
         >
           <span className="inline-block px-4 py-1.5 rounded-full bg-primary/20 border border-primary/30 text-primary text-xs font-semibold mb-4 tracking-widest uppercase">
-            Explore Africa's Regions
+            One Continent. Ten Education Regions. One Mission.
           </span>
-          <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4">
+          <h2 className="font-playfair text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4">
             One Continent, <span className="text-primary">Ten Regions</span>
           </h2>
           <p className="text-white/60 max-w-2xl mx-auto text-lg">
