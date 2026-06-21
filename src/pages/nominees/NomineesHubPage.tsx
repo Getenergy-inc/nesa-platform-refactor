@@ -537,12 +537,18 @@ export default function NomineesHubPage() {
                   <h2 id="filtered-results-heading" className="font-display text-xl md:text-2xl font-bold text-ivory flex items-center gap-2">
                     <Filter className="w-5 h-5 text-gold" /> Filtered Results
                   </h2>
-                  <p className="text-xs text-ivory/60 mt-1">
-                    {filteredNominees.length.toLocaleString()} nominee{filteredNominees.length === 1 ? "" : "s"} match your filters
-                    {filteredNominees.length > 0 && (
-                      <> • showing <span className="text-ivory/80">{rangeStart.toLocaleString()}–{rangeEnd.toLocaleString()}</span> (page {currentPage} of {totalPages})</>
+                  <p className="text-xs text-ivory/60 mt-1" aria-live="polite">
+                    {isLoading ? (
+                      <>Loading nominees that match your filters…</>
+                    ) : (
+                      <>
+                        {filteredNominees.length.toLocaleString()} nominee{filteredNominees.length === 1 ? "" : "s"} match your filters
+                        {filteredNominees.length > 0 && (
+                          <> • showing <span className="text-ivory/80">{rangeStart.toLocaleString()}–{rangeEnd.toLocaleString()}</span> (page {currentPage} of {totalPages})</>
+                        )}
+                        .
+                      </>
                     )}
-                    .
                   </p>
                 </div>
                 <Button
@@ -555,7 +561,9 @@ export default function NomineesHubPage() {
                 </Button>
               </div>
 
-              {filteredNominees.length > 0 ? (
+              {isLoading ? (
+                <NomineeGridSkeleton count={PAGE_SIZE} />
+              ) : filteredNominees.length > 0 ? (
                 <>
                   <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3" data-testid="filtered-results-grid">
                     {pagedNominees.map((n) => (
@@ -578,6 +586,7 @@ export default function NomineesHubPage() {
               ) : (
                 <div
                   data-testid="filtered-results-empty"
+                  role="status"
                   className="rounded-2xl border border-dashed border-gold/25 bg-charcoal-light/30 p-8 md:p-10 text-center"
                 >
                   <Sparkles className="w-8 h-8 text-gold mx-auto mb-3" />
@@ -645,36 +654,47 @@ export default function NomineesHubPage() {
           {/* ════════════════════════════════════════════════════════════ */}
           {/* Trending Now — intentionally DEMOTED to below category grid */}
           {/* ════════════════════════════════════════════════════════════ */}
-          {!isLoading && trending.length > 0 && (
-            <section className="mb-12">
+          {(isLoading || trending.length > 0) && (
+            <section className="mb-12" aria-busy={isLoading}>
               <div className="flex items-center justify-between mb-4">
                 <h2 className="font-display text-xl md:text-2xl font-bold text-ivory flex items-center gap-2">
                   <Flame className="w-5 h-5 text-gold" /> Trending Now
                 </h2>
-                <span className="text-xs text-ivory/50">Reward for scroll depth</span>
+                <span className="text-xs text-ivory/50">
+                  {isLoading ? "Loading…" : "Reward for scroll depth"}
+                </span>
               </div>
-              <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
-                {trending.slice(0, 4).map((n) => (
-                  <LandingNomineeCard key={n.id} nominee={n} />
-                ))}
-              </div>
+              {isLoading ? (
+                <NomineeGridSkeleton count={4} />
+              ) : (
+                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
+                  {trending.slice(0, 4).map((n) => (
+                    <LandingNomineeCard key={n.id} nominee={n} />
+                  ))}
+                </div>
+              )}
             </section>
           )}
 
 
           {/* Most Voted rail */}
-          {!isLoading && mostVoted.length > 0 && (
-            <section className="mt-14">
+          {(isLoading || mostVoted.length > 0) && (
+            <section className="mt-14" aria-busy={isLoading}>
               <div className="flex items-center justify-between mb-4">
                 <h2 className="font-display text-xl md:text-2xl font-bold text-ivory flex items-center gap-2">
                   <TrendingUp className="w-5 h-5 text-gold" /> Most Voted
                 </h2>
+                {isLoading && <span className="text-xs text-ivory/50">Loading…</span>}
               </div>
-              <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
-                {mostVoted.slice(0, 8).map((n) => (
-                  <LandingNomineeCard key={n.id} nominee={n} />
-                ))}
-              </div>
+              {isLoading ? (
+                <NomineeGridSkeleton count={8} />
+              ) : (
+                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
+                  {mostVoted.slice(0, 8).map((n) => (
+                    <LandingNomineeCard key={n.id} nominee={n} />
+                  ))}
+                </div>
+              )}
             </section>
           )}
 
@@ -782,6 +802,38 @@ export default function NomineesHubPage() {
  * with ellipses so long lists (the directory routinely returns 100+
  * nominees per filter) stay compact on mobile.
  */
+/**
+ * Card-shaped placeholder grid for the nominee directory. Mirrors the
+ * 2/3/4-column layout of LandingNomineeCard so the page doesn't reflow
+ * once real data lands. Used during initial fetch and while filters are
+ * recomputing against a slow CMS/API response.
+ */
+function NomineeGridSkeleton({ count = 8 }: { count?: number }) {
+  return (
+    <div
+      className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3"
+      role="status"
+      aria-label="Loading nominees"
+      data-testid="nominees-grid-skeleton"
+    >
+      {Array.from({ length: count }).map((_, i) => (
+        <div
+          key={i}
+          className="rounded-2xl border border-gold/10 bg-charcoal-light/30 overflow-hidden"
+        >
+          <Skeleton className="aspect-[4/5] w-full bg-charcoal-light/60" />
+          <div className="p-3 space-y-2">
+            <Skeleton className="h-3 w-1/2 bg-charcoal-light/60" />
+            <Skeleton className="h-4 w-5/6 bg-charcoal-light/60" />
+            <Skeleton className="h-3 w-2/3 bg-charcoal-light/60" />
+          </div>
+        </div>
+      ))}
+      <span className="sr-only">Loading nominees…</span>
+    </div>
+  );
+}
+
 function NomineesPagination({
   currentPage,
   totalPages,
