@@ -104,7 +104,7 @@ export default function NomineesHubPage() {
   const [params, setParams] = useSearchParams();
   const filters = parseFilterParams(params);
   const {
-    q: search, category: filterCategory, type: filterType,
+    q: search, category: filterCategory, subcategory: filterSubcategory, type: filterType,
     country: filterCountry, region: filterRegion, edition: filterEdition,
     awardFamily: filterAwardFamily, recognitionClass: filterRecognitionClass,
     zone: filterZone, state: filterState, group: activeGroup,
@@ -116,6 +116,7 @@ export default function NomineesHubPage() {
   const setSearch = (v: string) => setParam("q", v);
   const setActiveGroup = (v: string) => setParam("group", v);
   const setFilterCategory = (v: string) => setParam("category", v);
+  const setFilterSubcategory = (v: string) => setParam("subcategory", v);
   const setFilterType = (v: string) => setParam("type", v);
   const setFilterCountry = (v: string) => setParam("country", v);
   const setFilterRegion = (v: string) => setParam("region", v);
@@ -124,6 +125,9 @@ export default function NomineesHubPage() {
   const setFilterRecognitionClass = (v: string) => setParam("recognitionClass", v);
   const setFilterZone = (v: string) => setParam("zone", v);
   const setFilterState = (v: string) => setParam("state", v);
+
+  // CMS-driven subcategory list scoped to the active category.
+  const { data: cmsSubcategories } = useSubcategories(filterCategory);
 
   const isNigeria = filterCountry.toLowerCase() === "nigeria";
   const activeZone = NIGERIA_ZONES.find((z) => z.slug === filterZone);
