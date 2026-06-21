@@ -538,7 +538,11 @@ export default function NomineesHubPage() {
                     <Filter className="w-5 h-5 text-gold" /> Filtered Results
                   </h2>
                   <p className="text-xs text-ivory/60 mt-1">
-                    {filteredNominees.length.toLocaleString()} nominee{filteredNominees.length === 1 ? "" : "s"} match your filters.
+                    {filteredNominees.length.toLocaleString()} nominee{filteredNominees.length === 1 ? "" : "s"} match your filters
+                    {filteredNominees.length > 0 && (
+                      <> • showing <span className="text-ivory/80">{rangeStart.toLocaleString()}–{rangeEnd.toLocaleString()}</span> (page {currentPage} of {totalPages})</>
+                    )}
+                    .
                   </p>
                 </div>
                 <Button
@@ -552,11 +556,25 @@ export default function NomineesHubPage() {
               </div>
 
               {filteredNominees.length > 0 ? (
-                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3" data-testid="filtered-results-grid">
-                  {filteredNominees.slice(0, 12).map((n) => (
-                    <LandingNomineeCard key={n.id} nominee={n} />
-                  ))}
-                </div>
+                <>
+                  <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3" data-testid="filtered-results-grid">
+                    {pagedNominees.map((n) => (
+                      <LandingNomineeCard key={n.id} nominee={n} />
+                    ))}
+                  </div>
+                  {totalPages > 1 && (
+                    <NomineesPagination
+                      currentPage={currentPage}
+                      totalPages={totalPages}
+                      onPageChange={(p) => {
+                        setFilterPage(p);
+                        if (typeof window !== "undefined") {
+                          window.scrollTo({ top: 0, behavior: "smooth" });
+                        }
+                      }}
+                    />
+                  )}
+                </>
               ) : (
                 <div
                   data-testid="filtered-results-empty"
