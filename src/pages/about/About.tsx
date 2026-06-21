@@ -237,7 +237,7 @@ export default function About() {
       <MiniMusicPlayer variant="banner" />
 
       {/* Mission Statement */}
-      <section className="bg-gradient-to-b from-charcoal to-charcoal/95 py-20 lg:py-28">
+      <section id="mission" className="bg-gradient-to-b from-charcoal to-charcoal/95 py-20 lg:py-28 scroll-mt-20">
         <div className="container mx-auto px-4">
           <motion.div
             initial={{ opacity: 0, y: 20 }}

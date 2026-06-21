@@ -99,9 +99,9 @@ export function VisionMissionObjectivesSection() {
                 ))}
               </ul>
               <div className="text-center mt-6">
-                <Link to="/about" className="text-gold text-sm hover:underline">
-                  Read the full Vision &amp; Mission →
-                </Link>
+              <Link to="/about#mission" className="text-gold text-sm hover:underline">
+                Read the full Vision &amp; Mission →
+              </Link>
               </div>
             </div>
           </div>
