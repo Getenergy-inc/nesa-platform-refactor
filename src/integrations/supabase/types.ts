@@ -463,6 +463,29 @@ export type Database = {
         }
         Relationships: []
       }
+      categories_excel_alias: {
+        Row: {
+          db_slug: string
+          excel_label: string
+        }
+        Insert: {
+          db_slug: string
+          excel_label: string
+        }
+        Update: {
+          db_slug?: string
+          excel_label?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "categories_excel_alias_db_slug_fkey"
+            columns: ["db_slug"]
+            isOneToOne: false
+            referencedRelation: "categories"
+            referencedColumns: ["slug"]
+          },
+        ]
+      }
       certificate_downloads: {
         Row: {
           certificate_id: string
@@ -3142,6 +3165,42 @@ export type Database = {
           status?: string
           summary_2025?: string | null
           updated_at?: string
+        }
+        Relationships: []
+      }
+      nominee_import_staging: {
+        Row: {
+          achievement: string | null
+          country: string | null
+          imported_at: string
+          main_category: string
+          name: string
+          record_id: string
+          state_city: string | null
+          status_label: string | null
+          subcategory_label: string | null
+        }
+        Insert: {
+          achievement?: string | null
+          country?: string | null
+          imported_at?: string
+          main_category: string
+          name: string
+          record_id: string
+          state_city?: string | null
+          status_label?: string | null
+          subcategory_label?: string | null
+        }
+        Update: {
+          achievement?: string | null
+          country?: string | null
+          imported_at?: string
+          main_category?: string
+          name?: string
+          record_id?: string
+          state_city?: string | null
+          status_label?: string | null
+          subcategory_label?: string | null
         }
         Relationships: []
       }
