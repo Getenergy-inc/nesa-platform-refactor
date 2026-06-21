@@ -6,6 +6,7 @@ import { normalizeRegion } from "@/lib/regions";
 export interface NomineeFilterState {
   q: string;
   category: string;
+  subcategory: string;
   country: string;
   region: string;
   awardFamily: string;
@@ -20,6 +21,7 @@ export interface NomineeFilterState {
 export const DEFAULT_FILTERS: NomineeFilterState = {
   q: "",
   category: "all",
+  subcategory: "all",
   country: "all",
   region: "all",
   awardFamily: "all",
@@ -36,6 +38,7 @@ export function parseFilterParams(params: URLSearchParams): NomineeFilterState {
   return {
     q: params.get("q") ?? "",
     category: params.get("category") ?? "all",
+    subcategory: params.get("subcategory") ?? "all",
     country: params.get("country") ?? "all",
     region: params.get("region") ?? "all",
     awardFamily: params.get("awardFamily") ?? "all",
@@ -76,13 +79,17 @@ export function applyFilterChange(
   if (key === "zone" && value === "all") {
     next.delete("state");
   }
+  // Changing category invalidates any active subcategory choice.
+  if (key === "category") {
+    next.delete("subcategory");
+  }
   return next;
 }
 
 /** Count of non-default filters (drives the "Clear all" affordance). */
 export function activeFilterCount(state: NomineeFilterState): number {
   const tracked: (keyof NomineeFilterState)[] = [
-    "category", "country", "region", "awardFamily",
+    "category", "subcategory", "country", "region", "awardFamily",
     "recognitionClass", "zone", "state", "type",
   ];
   const dropdowns = tracked.filter((k) => state[k] && state[k] !== "all").length;
@@ -94,6 +101,7 @@ export interface FilterableNominee {
   status?: string | null;
   categorySlug?: string | null;
   categoryName?: string | null;
+  subcategorySlug?: string | null;
   country?: string | null;
   region?: string | null;
   awardFamily?: string | null;
@@ -113,6 +121,7 @@ export function filterNominees<T extends FilterableNominee>(
   const q = s.q.trim().toLowerCase();
   return valid.filter((n) => {
     if (s.category !== "all" && n.categorySlug !== s.category) return false;
+    if (s.subcategory !== "all" && n.subcategorySlug !== s.subcategory) return false;
     if (s.country !== "all" && (n.country ?? "").toLowerCase() !== s.country.toLowerCase()) return false;
     if (s.region !== "all") {
       const norm = normalizeRegion(n.region ?? "");

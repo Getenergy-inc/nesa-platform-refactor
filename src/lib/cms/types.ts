@@ -27,6 +27,16 @@ export interface AwardCategory {
   subcategoryCount?: number;
 }
 
+export interface Subcategory {
+  id: string;
+  slug: string;
+  name: string;
+  description: string | null;
+  categoryId: string;
+  categorySlug: string | null;
+  displayOrder: number;
+}
+
 export interface NomineeSummary {
   id: string;
   slug: string;

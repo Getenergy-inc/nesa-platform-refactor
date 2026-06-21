@@ -11,7 +11,12 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { useNominees, type EnrichedDatabaseNominee } from "@/hooks/useNominees";
+import {
+  useNomineesList,
+  useAwardCategories,
+  useSubcategories,
+  type EnrichedDatabaseNominee,
+} from "@/lib/cms/hooks";
 import { LandingNomineeCard } from "@/components/nesa/LandingNomineeCard";
 import {
   getCategoryTier,
@@ -92,13 +97,14 @@ const CANONICAL_CATEGORIES: { slug: string; name: string }[] = [
 
 export default function NomineesHubPage() {
   const navigate = useNavigate();
-  const { data: nominees, isLoading } = useNominees();
+  const { data: nominees, isLoading } = useNomineesList();
+  const { data: cmsCategories } = useAwardCategories();
 
   // URL-driven filters — deep-linkable per Pass D audit.
   const [params, setParams] = useSearchParams();
   const filters = parseFilterParams(params);
   const {
-    q: search, category: filterCategory, type: filterType,
+    q: search, category: filterCategory, subcategory: filterSubcategory, type: filterType,
     country: filterCountry, region: filterRegion, edition: filterEdition,
     awardFamily: filterAwardFamily, recognitionClass: filterRecognitionClass,
     zone: filterZone, state: filterState, group: activeGroup,
@@ -110,6 +116,7 @@ export default function NomineesHubPage() {
   const setSearch = (v: string) => setParam("q", v);
   const setActiveGroup = (v: string) => setParam("group", v);
   const setFilterCategory = (v: string) => setParam("category", v);
+  const setFilterSubcategory = (v: string) => setParam("subcategory", v);
   const setFilterType = (v: string) => setParam("type", v);
   const setFilterCountry = (v: string) => setParam("country", v);
   const setFilterRegion = (v: string) => setParam("region", v);
@@ -118,6 +125,9 @@ export default function NomineesHubPage() {
   const setFilterRecognitionClass = (v: string) => setParam("recognitionClass", v);
   const setFilterZone = (v: string) => setParam("zone", v);
   const setFilterState = (v: string) => setParam("state", v);
+
+  // CMS-driven subcategory list scoped to the active category.
+  const { data: cmsSubcategories } = useSubcategories(filterCategory);
 
   const isNigeria = filterCountry.toLowerCase() === "nigeria";
   const activeZone = NIGERIA_ZONES.find((z) => z.slug === filterZone);
@@ -140,9 +150,14 @@ export default function NomineesHubPage() {
       string,
       { slug: string; name: string; count: number; topNominees: EnrichedDatabaseNominee[] }
     >();
-    // Seed canonical 18 categories so every official award renders a card
-    // even when no nominee data exists yet for that slug.
-    CANONICAL_CATEGORIES.forEach((c) => {
+    // Seed from CMS-driven categories so the discovery grid reflects whatever
+    // the editorial team has published, falling back to the canonical list
+    // only when the CMS query hasn't resolved yet on first paint.
+    const seedSource =
+      cmsCategories && cmsCategories.length > 0
+        ? cmsCategories.map((c) => ({ slug: c.slug, name: c.name }))
+        : CANONICAL_CATEGORIES;
+    seedSource.forEach((c) => {
       catMap.set(c.slug, { slug: c.slug, name: c.name, count: 0, topNominees: [] });
     });
     valid.forEach((n) => {
@@ -166,7 +181,7 @@ export default function NomineesHubPage() {
       mostVoted: sortedByVotes.slice(0, 8),
       totalCount: valid.length,
     };
-  }, [nominees]);
+  }, [nominees, cmsCategories]);
 
   // Country list for the country dropdown (derived from live nominees)
   const countries = useMemo(() => {
@@ -192,6 +207,7 @@ export default function NomineesHubPage() {
     const q = search.trim().toLowerCase();
     return all.filter((n) => {
       if (filterCategory !== "all" && n.categorySlug !== filterCategory) return false;
+      if (filterSubcategory !== "all" && n.subcategorySlug !== filterSubcategory) return false;
       if (filterCountry !== "all" && (n.country ?? "").toLowerCase() !== filterCountry.toLowerCase()) return false;
       if (filterRegion !== "all") {
         const norm = normalizeRegion(n.region ?? "");
@@ -210,7 +226,7 @@ export default function NomineesHubPage() {
       return true;
     });
   }, [
-    nominees, search, filterCategory, filterCountry, filterRegion,
+    nominees, search, filterCategory, filterSubcategory, filterCountry, filterRegion,
     filterAwardFamily, filterRecognitionClass, filterZone, filterState,
   ]);
 
@@ -379,6 +395,30 @@ export default function NomineesHubPage() {
                   <SelectItem value="all">All Award Categories</SelectItem>
                   {categories.slice(0, 30).map((c) => (
                     <SelectItem key={c.slug} value={c.slug}>{c.name}</SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+              <Select
+                value={filterSubcategory}
+                onValueChange={setFilterSubcategory}
+                disabled={filterCategory === "all" || !(cmsSubcategories && cmsSubcategories.length > 0)}
+              >
+                <SelectTrigger
+                  className="bg-charcoal border-gold/20 text-ivory text-xs h-9"
+                  aria-label="Subcategory"
+                >
+                  <SelectValue
+                    placeholder={
+                      filterCategory === "all"
+                        ? "Pick category first"
+                        : "Subcategory"
+                    }
+                  />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="all">All Subcategories</SelectItem>
+                  {(cmsSubcategories ?? []).map((s) => (
+                    <SelectItem key={s.slug} value={s.slug}>{s.name}</SelectItem>
                   ))}
                 </SelectContent>
               </Select>
