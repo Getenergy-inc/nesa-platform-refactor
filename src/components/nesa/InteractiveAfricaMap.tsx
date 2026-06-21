@@ -145,10 +145,10 @@ export function InteractiveAfricaMap() {
                   )}
                 </div>
                 <Link
-                  to={`/region/${hoveredHub.slug}`}
+                  to={`/nominees?region=${hoveredHub.slug}`}
                   className="inline-flex items-center gap-2 text-primary hover:text-primary/80 font-semibold text-sm transition-colors"
                 >
-                  Explore {hoveredHub.shortName} <ArrowRight className="w-4 h-4" />
+                  Explore {hoveredHub.shortName} nominees <ArrowRight className="w-4 h-4" />
                 </Link>
               </motion.div>
             ) : (
