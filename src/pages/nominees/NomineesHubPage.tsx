@@ -130,8 +130,30 @@ export default function NomineesHubPage() {
   const setFilterZone = (v: string) => setParam("zone", v);
   const setFilterState = (v: string) => setParam("state", v);
 
+  // Tier filter — URL-driven via ?tier=1|2|3|4. Maps every nominee's
+  // categorySlug to its NESA-Africa award tier via the CMS-driven
+  // `cmsCategories` lookup below so the chip works the moment a tier
+  // is tagged in the database.
+  const filterTier = params.get("tier") ?? "all";
+  const setFilterTier = (v: string) => {
+    const next = new URLSearchParams(params);
+    if (!v || v === "all") next.delete("tier"); else next.set("tier", v);
+    next.delete("page");
+    setParams(next, { replace: true });
+  };
+
   // CMS-driven subcategory list scoped to the active category.
   const { data: cmsSubcategories } = useSubcategories(filterCategory);
+
+  // Lookup: categorySlug → tier (1..4), built from the CMS categories list
+  // so the tier filter and per-tier counters stay in sync with the DB.
+  const tierByCategory = useMemo(() => {
+    const m = new Map<string, number>();
+    (cmsCategories ?? []).forEach((c) => {
+      if (c.tier) m.set(c.slug, c.tier);
+    });
+    return m;
+  }, [cmsCategories]);
 
   // Pagination — URL-driven via ?page=N. Page size kept constant; clamped
   // against total below so deep links never land on a non-existent page.
@@ -221,6 +243,7 @@ export default function NomineesHubPage() {
     );
     const q = search.trim().toLowerCase();
     return all.filter((n) => {
+      if (filterTier !== "all" && String(tierByCategory.get(n.categorySlug) ?? 0) !== filterTier) return false;
       if (filterCategory !== "all" && n.categorySlug !== filterCategory) return false;
       if (filterSubcategory !== "all" && n.subcategorySlug !== filterSubcategory) return false;
       if (filterCountry !== "all" && (n.country ?? "").toLowerCase() !== filterCountry.toLowerCase()) return false;
@@ -241,9 +264,22 @@ export default function NomineesHubPage() {
       return true;
     });
   }, [
-    nominees, search, filterCategory, filterSubcategory, filterCountry, filterRegion,
-    filterAwardFamily, filterRecognitionClass, filterZone, filterState,
+    nominees, search, filterTier, tierByCategory, filterCategory, filterSubcategory,
+    filterCountry, filterRegion, filterAwardFamily, filterRecognitionClass, filterZone, filterState,
   ]);
+
+  // Per-tier counts for the chip row. Counted against the full valid pool
+  // (not filteredNominees) so users always see how many champions live in
+  // each tier before they drill in.
+  const tierCounts = useMemo(() => {
+    const counts: Record<1 | 2 | 3 | 4, number> = { 1: 0, 2: 0, 3: 0, 4: 0 };
+    (nominees ?? []).forEach((n) => {
+      if (n.status !== "approved" && n.status !== "platinum" && n.status !== "pending") return;
+      const t = tierByCategory.get(n.categorySlug);
+      if (t === 1 || t === 2 || t === 3 || t === 4) counts[t]++;
+    });
+    return counts;
+  }, [nominees, tierByCategory]);
 
   // Clamp the requested page to the available pages so URL-driven values
   // and filter changes that shrink the list don't strand the user on an
@@ -325,6 +361,41 @@ export default function NomineesHubPage() {
               />
             </form>
 
+            {/* Tier chips — 4 NESA-Africa 2026 award tiers. Per-tier
+                counts come from the live nominee pool so visitors can
+                triage by award track before opening any filter. */}
+            <div className="mt-6 flex flex-wrap justify-center gap-2" role="tablist" aria-label="Award tier filter">
+              {[
+                { id: "all", label: "All Tiers", total: (tierCounts[1] + tierCounts[2] + tierCounts[3] + tierCounts[4]) },
+                { id: "1", label: "Tier 1 · Blue Garnet", total: tierCounts[1] },
+                { id: "2", label: "Tier 2 · Platinum", total: tierCounts[2] },
+                { id: "3", label: "Tier 3 · Africa Education Icon", total: tierCounts[3] },
+                { id: "4", label: "Tier 4 · Influencers Impact", total: tierCounts[4] },
+              ].map((t) => {
+                const active = filterTier === t.id;
+                return (
+                  <button
+                    key={t.id}
+                    type="button"
+                    role="tab"
+                    aria-selected={active}
+                    onClick={() => setFilterTier(t.id)}
+                    className={`inline-flex items-center gap-1.5 rounded-full border px-3 py-1.5 text-xs font-medium transition-all ${
+                      active
+                        ? "bg-gold text-charcoal border-gold shadow-md shadow-gold/20"
+                        : "bg-charcoal-light/60 text-ivory/80 border-gold/25 hover:border-gold/60 hover:text-gold"
+                    }`}
+                  >
+                    {t.label}
+                    <span className={`ml-1 rounded-full px-1.5 py-0.5 text-[10px] font-semibold ${active ? "bg-charcoal/20 text-charcoal" : "bg-gold/15 text-gold"}`}>
+                      {t.total.toLocaleString()}
+                    </span>
+                  </button>
+                );
+              })}
+            </div>
+
+
             {/* Nominee-group chips — UI-ready. Wire `activeGroup` to data filter later. */}
             <div className="mt-6 flex flex-wrap justify-center gap-2">
               {NOMINEE_GROUPS.map((g) => {
@@ -366,11 +437,11 @@ export default function NomineesHubPage() {
             className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-2 sm:gap-3 mb-8"
           >
             {[
-              { icon: Users, label: "Existing Nominees", value: `${Math.max(totalCount, 1760).toLocaleString()}+` },
+              { icon: Users, label: "Nominees Indexed", value: totalCount.toLocaleString() },
+              { icon: Sparkles, label: "Award Tiers", value: "4" },
+              { icon: Trophy, label: "Award Categories", value: `${Math.max(categories.length, 18)}` },
               { icon: Globe2, label: "Countries", value: `${Math.max(countries.length, 54)}` },
-              { icon: MapPin, label: "Legacy Regions", value: "8" },
-              { icon: Trophy, label: "Award Categories", value: `${Math.max(categories.length, 100)}+` },
-              { icon: Sparkles, label: "Recognition Pathways", value: "4" },
+              { icon: MapPin, label: "Regions", value: "10" },
             ].map((s) => (
               <li
                 key={s.label}
