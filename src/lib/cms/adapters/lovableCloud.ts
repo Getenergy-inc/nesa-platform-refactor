@@ -3,7 +3,12 @@
 // remain source-agnostic.
 
 import { supabase } from "@/integrations/supabase/client";
-import type { PathwayCard, AwardCategory, NomineeSummary } from "../types";
+import type {
+  PathwayCard,
+  AwardCategory,
+  Subcategory,
+  NomineeSummary,
+} from "../types";
 
 export async function fetchPathwayCards(): Promise<PathwayCard[]> {
   const { data, error } = await supabase
@@ -34,7 +39,9 @@ export async function fetchPathwayCards(): Promise<PathwayCard[]> {
 export async function fetchCategories(): Promise<AwardCategory[]> {
   const { data, error } = await supabase
     .from("categories")
-    .select("id, slug, name, description, icon_name, display_order, is_active")
+    .select(
+      "id, slug, name, description, icon_name, display_order, is_active, subcategories(count)",
+    )
     .eq("is_active", true)
     .order("display_order", { ascending: true });
 
@@ -46,6 +53,37 @@ export async function fetchCategories(): Promise<AwardCategory[]> {
     name: row.name,
     description: row.description,
     iconName: row.icon_name,
+    displayOrder: row.display_order ?? 0,
+    subcategoryCount: Array.isArray(row.subcategories)
+      ? row.subcategories[0]?.count ?? 0
+      : 0,
+  }));
+}
+
+export async function fetchSubcategories(
+  categorySlug?: string,
+): Promise<Subcategory[]> {
+  let query = supabase
+    .from("subcategories")
+    .select(
+      "id, slug, name, description, display_order, category_id, categories!inner(slug)",
+    )
+    .order("display_order", { ascending: true });
+
+  if (categorySlug && categorySlug !== "all") {
+    query = query.eq("categories.slug", categorySlug);
+  }
+
+  const { data, error } = await query;
+  if (error) throw error;
+
+  return (data ?? []).map((row: any) => ({
+    id: row.id,
+    slug: row.slug,
+    name: row.name,
+    description: row.description,
+    categoryId: row.category_id,
+    categorySlug: row.categories?.slug ?? null,
     displayOrder: row.display_order ?? 0,
   }));
 }
