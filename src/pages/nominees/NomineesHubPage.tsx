@@ -11,7 +11,12 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { useNominees, type EnrichedDatabaseNominee } from "@/hooks/useNominees";
+import {
+  useNomineesList,
+  useAwardCategories,
+  useSubcategories,
+  type EnrichedDatabaseNominee,
+} from "@/lib/cms/hooks";
 import { LandingNomineeCard } from "@/components/nesa/LandingNomineeCard";
 import {
   getCategoryTier,
