@@ -245,6 +245,17 @@ export default function NomineesHubPage() {
     filterAwardFamily, filterRecognitionClass, filterZone, filterState,
   ]);
 
+  // Clamp the requested page to the available pages so URL-driven values
+  // and filter changes that shrink the list don't strand the user on an
+  // empty page.
+  const totalPages = Math.max(1, Math.ceil(filteredNominees.length / PAGE_SIZE));
+  const currentPage = Math.min(Math.max(requestedPage, 1), totalPages);
+  const pageStart = (currentPage - 1) * PAGE_SIZE;
+  const pagedNominees = filteredNominees.slice(pageStart, pageStart + PAGE_SIZE);
+  const rangeStart = filteredNominees.length === 0 ? 0 : pageStart + 1;
+  const rangeEnd = pageStart + pagedNominees.length;
+
+
 
   const onSearchSubmit = (e: React.FormEvent) => {
     e.preventDefault();
