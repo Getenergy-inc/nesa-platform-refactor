@@ -561,7 +561,9 @@ export default function NomineesHubPage() {
                 </Button>
               </div>
 
-              {filteredNominees.length > 0 ? (
+              {isLoading ? (
+                <NomineeGridSkeleton count={PAGE_SIZE} />
+              ) : filteredNominees.length > 0 ? (
                 <>
                   <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3" data-testid="filtered-results-grid">
                     {pagedNominees.map((n) => (
@@ -584,6 +586,7 @@ export default function NomineesHubPage() {
               ) : (
                 <div
                   data-testid="filtered-results-empty"
+                  role="status"
                   className="rounded-2xl border border-dashed border-gold/25 bg-charcoal-light/30 p-8 md:p-10 text-center"
                 >
                   <Sparkles className="w-8 h-8 text-gold mx-auto mb-3" />
