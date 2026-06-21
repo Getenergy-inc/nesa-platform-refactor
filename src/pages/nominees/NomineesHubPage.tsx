@@ -398,6 +398,30 @@ export default function NomineesHubPage() {
                   ))}
                 </SelectContent>
               </Select>
+              <Select
+                value={filterSubcategory}
+                onValueChange={setFilterSubcategory}
+                disabled={filterCategory === "all" || !(cmsSubcategories && cmsSubcategories.length > 0)}
+              >
+                <SelectTrigger
+                  className="bg-charcoal border-gold/20 text-ivory text-xs h-9"
+                  aria-label="Subcategory"
+                >
+                  <SelectValue
+                    placeholder={
+                      filterCategory === "all"
+                        ? "Pick category first"
+                        : "Subcategory"
+                    }
+                  />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="all">All Subcategories</SelectItem>
+                  {(cmsSubcategories ?? []).map((s) => (
+                    <SelectItem key={s.slug} value={s.slug}>{s.name}</SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
               <Select value={filterType} onValueChange={setFilterType}>
                 <SelectTrigger className="bg-charcoal border-gold/20 text-ivory text-xs h-9" aria-label="Nominee Type"><SelectValue placeholder="Nominee Type" /></SelectTrigger>
                 <SelectContent>
