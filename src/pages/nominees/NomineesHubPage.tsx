@@ -150,9 +150,14 @@ export default function NomineesHubPage() {
       string,
       { slug: string; name: string; count: number; topNominees: EnrichedDatabaseNominee[] }
     >();
-    // Seed canonical 18 categories so every official award renders a card
-    // even when no nominee data exists yet for that slug.
-    CANONICAL_CATEGORIES.forEach((c) => {
+    // Seed from CMS-driven categories so the discovery grid reflects whatever
+    // the editorial team has published, falling back to the canonical list
+    // only when the CMS query hasn't resolved yet on first paint.
+    const seedSource =
+      cmsCategories && cmsCategories.length > 0
+        ? cmsCategories.map((c) => ({ slug: c.slug, name: c.name }))
+        : CANONICAL_CATEGORIES;
+    seedSource.forEach((c) => {
       catMap.set(c.slug, { slug: c.slug, name: c.name, count: 0, topNominees: [] });
     });
     valid.forEach((n) => {
