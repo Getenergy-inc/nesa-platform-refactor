@@ -243,6 +243,7 @@ export default function NomineesHubPage() {
     );
     const q = search.trim().toLowerCase();
     return all.filter((n) => {
+      if (filterTier !== "all" && String(tierByCategory.get(n.categorySlug) ?? 0) !== filterTier) return false;
       if (filterCategory !== "all" && n.categorySlug !== filterCategory) return false;
       if (filterSubcategory !== "all" && n.subcategorySlug !== filterSubcategory) return false;
       if (filterCountry !== "all" && (n.country ?? "").toLowerCase() !== filterCountry.toLowerCase()) return false;
@@ -263,9 +264,22 @@ export default function NomineesHubPage() {
       return true;
     });
   }, [
-    nominees, search, filterCategory, filterSubcategory, filterCountry, filterRegion,
-    filterAwardFamily, filterRecognitionClass, filterZone, filterState,
+    nominees, search, filterTier, tierByCategory, filterCategory, filterSubcategory,
+    filterCountry, filterRegion, filterAwardFamily, filterRecognitionClass, filterZone, filterState,
   ]);
+
+  // Per-tier counts for the chip row. Counted against the full valid pool
+  // (not filteredNominees) so users always see how many champions live in
+  // each tier before they drill in.
+  const tierCounts = useMemo(() => {
+    const counts: Record<1 | 2 | 3 | 4, number> = { 1: 0, 2: 0, 3: 0, 4: 0 };
+    (nominees ?? []).forEach((n) => {
+      if (n.status !== "approved" && n.status !== "platinum" && n.status !== "pending") return;
+      const t = tierByCategory.get(n.categorySlug);
+      if (t === 1 || t === 2 || t === 3 || t === 4) counts[t]++;
+    });
+    return counts;
+  }, [nominees, tierByCategory]);
 
   // Clamp the requested page to the available pages so URL-driven values
   // and filter changes that shrink the list don't strand the user on an
