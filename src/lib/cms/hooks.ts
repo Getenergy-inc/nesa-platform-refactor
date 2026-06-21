@@ -5,8 +5,15 @@ import { useQuery } from "@tanstack/react-query";
 import {
   fetchPathwayCards,
   fetchCategories,
+  fetchSubcategories,
   fetchFeaturedNominees,
 } from "./index";
+
+// Re-export the nominee listing hook through the CMS surface so pages
+// import nominee data the same way they import categories. The
+// underlying implementation already targets Lovable Cloud and performs
+// enrichment (image type, geographic bucket, region normalisation).
+export { useNominees as useNomineesList, type EnrichedDatabaseNominee } from "@/hooks/useNominees";
 
 export function usePathwayCards() {
   return useQuery({
@@ -20,6 +27,15 @@ export function useAwardCategories() {
   return useQuery({
     queryKey: ["cms", "categories"],
     queryFn: fetchCategories,
+    staleTime: 5 * 60 * 1000,
+  });
+}
+
+export function useSubcategories(categorySlug?: string) {
+  const slug = categorySlug && categorySlug !== "all" ? categorySlug : undefined;
+  return useQuery({
+    queryKey: ["cms", "subcategories", slug ?? "__all__"],
+    queryFn: () => fetchSubcategories(slug),
     staleTime: 5 * 60 * 1000,
   });
 }
