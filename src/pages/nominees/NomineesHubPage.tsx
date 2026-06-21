@@ -654,36 +654,47 @@ export default function NomineesHubPage() {
           {/* ════════════════════════════════════════════════════════════ */}
           {/* Trending Now — intentionally DEMOTED to below category grid */}
           {/* ════════════════════════════════════════════════════════════ */}
-          {!isLoading && trending.length > 0 && (
-            <section className="mb-12">
+          {(isLoading || trending.length > 0) && (
+            <section className="mb-12" aria-busy={isLoading}>
               <div className="flex items-center justify-between mb-4">
                 <h2 className="font-display text-xl md:text-2xl font-bold text-ivory flex items-center gap-2">
                   <Flame className="w-5 h-5 text-gold" /> Trending Now
                 </h2>
-                <span className="text-xs text-ivory/50">Reward for scroll depth</span>
+                <span className="text-xs text-ivory/50">
+                  {isLoading ? "Loading…" : "Reward for scroll depth"}
+                </span>
               </div>
-              <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
-                {trending.slice(0, 4).map((n) => (
-                  <LandingNomineeCard key={n.id} nominee={n} />
-                ))}
-              </div>
+              {isLoading ? (
+                <NomineeGridSkeleton count={4} />
+              ) : (
+                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
+                  {trending.slice(0, 4).map((n) => (
+                    <LandingNomineeCard key={n.id} nominee={n} />
+                  ))}
+                </div>
+              )}
             </section>
           )}
 
 
           {/* Most Voted rail */}
-          {!isLoading && mostVoted.length > 0 && (
-            <section className="mt-14">
+          {(isLoading || mostVoted.length > 0) && (
+            <section className="mt-14" aria-busy={isLoading}>
               <div className="flex items-center justify-between mb-4">
                 <h2 className="font-display text-xl md:text-2xl font-bold text-ivory flex items-center gap-2">
                   <TrendingUp className="w-5 h-5 text-gold" /> Most Voted
                 </h2>
+                {isLoading && <span className="text-xs text-ivory/50">Loading…</span>}
               </div>
-              <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
-                {mostVoted.slice(0, 8).map((n) => (
-                  <LandingNomineeCard key={n.id} nominee={n} />
-                ))}
-              </div>
+              {isLoading ? (
+                <NomineeGridSkeleton count={8} />
+              ) : (
+                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
+                  {mostVoted.slice(0, 8).map((n) => (
+                    <LandingNomineeCard key={n.id} nominee={n} />
+                  ))}
+                </div>
+              )}
             </section>
           )}
 
