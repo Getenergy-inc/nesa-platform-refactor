@@ -24,6 +24,8 @@ export interface AwardCategory {
   description: string | null;
   iconName: string | null;
   displayOrder: number;
+  /** NESA-Africa 2026 award tier: 1 Blue Garnet · 2 Platinum · 3 Africa Education Icon · 4 Influencers. */
+  tier: 1 | 2 | 3 | 4 | null;
   subcategoryCount?: number;
 }
 
