@@ -38,6 +38,7 @@ export function parseFilterParams(params: URLSearchParams): NomineeFilterState {
   return {
     q: params.get("q") ?? "",
     category: params.get("category") ?? "all",
+    subcategory: params.get("subcategory") ?? "all",
     country: params.get("country") ?? "all",
     region: params.get("region") ?? "all",
     awardFamily: params.get("awardFamily") ?? "all",
