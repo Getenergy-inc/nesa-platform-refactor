@@ -130,8 +130,30 @@ export default function NomineesHubPage() {
   const setFilterZone = (v: string) => setParam("zone", v);
   const setFilterState = (v: string) => setParam("state", v);
 
+  // Tier filter — URL-driven via ?tier=1|2|3|4. Maps every nominee's
+  // categorySlug to its NESA-Africa award tier via the CMS-driven
+  // `cmsCategories` lookup below so the chip works the moment a tier
+  // is tagged in the database.
+  const filterTier = params.get("tier") ?? "all";
+  const setFilterTier = (v: string) => {
+    const next = new URLSearchParams(params);
+    if (!v || v === "all") next.delete("tier"); else next.set("tier", v);
+    next.delete("page");
+    setParams(next, { replace: true });
+  };
+
   // CMS-driven subcategory list scoped to the active category.
   const { data: cmsSubcategories } = useSubcategories(filterCategory);
+
+  // Lookup: categorySlug → tier (1..4), built from the CMS categories list
+  // so the tier filter and per-tier counters stay in sync with the DB.
+  const tierByCategory = useMemo(() => {
+    const m = new Map<string, number>();
+    (cmsCategories ?? []).forEach((c) => {
+      if (c.tier) m.set(c.slug, c.tier);
+    });
+    return m;
+  }, [cmsCategories]);
 
   // Pagination — URL-driven via ?page=N. Page size kept constant; clamped
   // against total below so deep links never land on a non-existent page.
