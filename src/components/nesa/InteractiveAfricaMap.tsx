@@ -92,7 +92,7 @@ export function InteractiveAfricaMap() {
                 const isHovered = hoveredRegion === slug;
 
                 return (
-                  <Link key={slug} to={`/region/${slug}`}>
+                  <Link key={slug} to={`/nominees?region=${slug}`} aria-label={`Filter nominees in ${hub.name}`}>
                     <g
                       onMouseEnter={() => setHoveredRegion(slug)}
                       onMouseLeave={() => setHoveredRegion(null)}
@@ -145,10 +145,10 @@ export function InteractiveAfricaMap() {
                   )}
                 </div>
                 <Link
-                  to={`/region/${hoveredHub.slug}`}
+                  to={`/nominees?region=${hoveredHub.slug}`}
                   className="inline-flex items-center gap-2 text-primary hover:text-primary/80 font-semibold text-sm transition-colors"
                 >
-                  Explore {hoveredHub.shortName} <ArrowRight className="w-4 h-4" />
+                  Explore {hoveredHub.shortName} nominees <ArrowRight className="w-4 h-4" />
                 </Link>
               </motion.div>
             ) : (
@@ -156,7 +156,7 @@ export function InteractiveAfricaMap() {
                 {REGION_HUBS.map(hub => (
                   <Link
                     key={hub.slug}
-                    to={`/region/${hub.slug}`}
+                    to={`/nominees?region=${hub.slug}`}
                     onMouseEnter={() => setHoveredRegion(hub.slug)}
                     onMouseLeave={() => setHoveredRegion(null)}
                     className="group flex items-center gap-2 bg-white/5 border border-white/10 rounded-lg px-3 py-2.5 hover:bg-primary/10 hover:border-primary/30 transition-all"

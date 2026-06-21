@@ -248,9 +248,14 @@ export default function NomineesHubPage() {
       if (filterSubcategory !== "all" && n.subcategorySlug !== filterSubcategory) return false;
       if (filterCountry !== "all" && (n.country ?? "").toLowerCase() !== filterCountry.toLowerCase()) return false;
       if (filterRegion !== "all") {
-        const norm = normalizeRegion(n.region ?? "");
-        const want = filterRegion.replace(/-africa$/, "");
-        if (!norm || !norm.toLowerCase().includes(want)) return false;
+        const norm = (normalizeRegion(n.region ?? "") ?? "").toLowerCase();
+        // Match either the legacy short token ("west") or the full slug form
+        // ("west-africa", "horn-of-africa", "indian-ocean-islands") rendered
+        // back as words so every region clicked on the map filters correctly.
+        const slug = filterRegion.toLowerCase();
+        const wantShort = slug.replace(/-africa$/, "");
+        const wantWords = slug.replace(/-/g, " ");
+        if (!norm || (!norm.includes(wantWords) && !norm.includes(wantShort))) return false;
       }
       const anyN = n as unknown as Record<string, unknown>;
       if (filterAwardFamily !== "all" && anyN.awardFamily !== filterAwardFamily) return false;
