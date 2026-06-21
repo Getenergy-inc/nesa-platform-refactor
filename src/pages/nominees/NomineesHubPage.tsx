@@ -776,3 +776,76 @@ export default function NomineesHubPage() {
     </>
   );
 }
+
+/**
+ * Pager for the filtered results grid. Renders first / current±1 / last
+ * with ellipses so long lists (the directory routinely returns 100+
+ * nominees per filter) stay compact on mobile.
+ */
+function NomineesPagination({
+  currentPage,
+  totalPages,
+  onPageChange,
+}: {
+  currentPage: number;
+  totalPages: number;
+  onPageChange: (page: number) => void;
+}) {
+  const pages = buildPageWindow(currentPage, totalPages);
+  const go = (p: number) => (e: React.MouseEvent) => {
+    e.preventDefault();
+    if (p >= 1 && p <= totalPages && p !== currentPage) onPageChange(p);
+  };
+
+  return (
+    <Pagination className="mt-6">
+      <PaginationContent>
+        <PaginationItem>
+          <PaginationPrevious
+            href="#"
+            onClick={go(currentPage - 1)}
+            aria-disabled={currentPage === 1}
+            className={currentPage === 1 ? "pointer-events-none opacity-40" : ""}
+          />
+        </PaginationItem>
+        {pages.map((p, i) =>
+          p === "ellipsis" ? (
+            <PaginationItem key={`e-${i}`}>
+              <PaginationEllipsis />
+            </PaginationItem>
+          ) : (
+            <PaginationItem key={p}>
+              <PaginationLink
+                href="#"
+                isActive={p === currentPage}
+                onClick={go(p)}
+              >
+                {p}
+              </PaginationLink>
+            </PaginationItem>
+          ),
+        )}
+        <PaginationItem>
+          <PaginationNext
+            href="#"
+            onClick={go(currentPage + 1)}
+            aria-disabled={currentPage === totalPages}
+            className={currentPage === totalPages ? "pointer-events-none opacity-40" : ""}
+          />
+        </PaginationItem>
+      </PaginationContent>
+    </Pagination>
+  );
+}
+
+function buildPageWindow(current: number, total: number): (number | "ellipsis")[] {
+  if (total <= 7) return Array.from({ length: total }, (_, i) => i + 1);
+  const out: (number | "ellipsis")[] = [1];
+  const start = Math.max(2, current - 1);
+  const end = Math.min(total - 1, current + 1);
+  if (start > 2) out.push("ellipsis");
+  for (let i = start; i <= end; i++) out.push(i);
+  if (end < total - 1) out.push("ellipsis");
+  out.push(total);
+  return out;
+}
