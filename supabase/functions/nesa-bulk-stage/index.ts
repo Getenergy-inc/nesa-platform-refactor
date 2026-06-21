@@ -1,43 +1,19 @@
-// Bulk-stage rows from the NESA-Africa 2026 nominee master spreadsheet
-// into public.nominee_import_staging. Service-role internally so RLS
-// stays strict, but the function itself only accepts calls bearing the
-// shared NESA_BULK_IMPORT_TOKEN (kept in Lovable Cloud secrets).
+// One-shot import: fetch nominees-2026.json from the nominee-media
+// bucket and stage every row into public.nominee_import_staging. After
+// the merge step ships the rows into public.nominees, this function and
+// the JSON file can be deleted. No request body required.
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2.45.0";
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
-  "Access-Control-Allow-Headers":
-    "authorization, x-client-info, apikey, content-type, x-import-token",
+  "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type",
 };
+
+const SOURCE_URL =
+  "https://sjghitoydzpirpqjules.supabase.co/storage/v1/object/public/nominee-media/imports/nominees-2026.json";
 
 Deno.serve(async (req) => {
   if (req.method === "OPTIONS") return new Response("ok", { headers: corsHeaders });
-
-  const token = req.headers.get("x-import-token");
-  const expected = Deno.env.get("NESA_BULK_IMPORT_TOKEN");
-  if (!expected || token !== expected) {
-    return new Response(JSON.stringify({ error: "unauthorized" }), {
-      status: 401,
-      headers: { ...corsHeaders, "Content-Type": "application/json" },
-    });
-  }
-
-  let body: { rows?: unknown };
-  try {
-    body = await req.json();
-  } catch {
-    return new Response(JSON.stringify({ error: "invalid_json" }), {
-      status: 400,
-      headers: { ...corsHeaders, "Content-Type": "application/json" },
-    });
-  }
-
-  const rows = Array.isArray(body.rows) ? body.rows : [];
-  if (rows.length === 0) {
-    return new Response(JSON.stringify({ staged: 0 }), {
-      headers: { ...corsHeaders, "Content-Type": "application/json" },
-    });
-  }
 
   const supa = createClient(
     Deno.env.get("SUPABASE_URL")!,
@@ -45,13 +21,28 @@ Deno.serve(async (req) => {
     { auth: { persistSession: false } },
   );
 
-  const chunkSize = 200;
+  const res = await fetch(SOURCE_URL);
+  if (!res.ok) {
+    return new Response(JSON.stringify({ error: `fetch_failed ${res.status}` }), {
+      status: 502,
+      headers: { ...corsHeaders, "Content-Type": "application/json" },
+    });
+  }
+  const rows = (await res.json()) as Array<Record<string, unknown>>;
+  if (!Array.isArray(rows) || rows.length === 0) {
+    return new Response(JSON.stringify({ error: "empty_payload" }), {
+      status: 400,
+      headers: { ...corsHeaders, "Content-Type": "application/json" },
+    });
+  }
+
+  const chunkSize = 250;
   let staged = 0;
   for (let i = 0; i < rows.length; i += chunkSize) {
     const chunk = rows.slice(i, i + chunkSize);
     const { error } = await supa
       .from("nominee_import_staging")
-      .upsert(chunk as any, { onConflict: "record_id" });
+      .upsert(chunk, { onConflict: "record_id" });
     if (error) {
       return new Response(
         JSON.stringify({ error: error.message, staged }),
@@ -61,7 +52,7 @@ Deno.serve(async (req) => {
     staged += chunk.length;
   }
 
-  return new Response(JSON.stringify({ staged }), {
+  return new Response(JSON.stringify({ staged, total: rows.length }), {
     headers: { ...corsHeaders, "Content-Type": "application/json" },
   });
 });
