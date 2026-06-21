@@ -537,12 +537,18 @@ export default function NomineesHubPage() {
                   <h2 id="filtered-results-heading" className="font-display text-xl md:text-2xl font-bold text-ivory flex items-center gap-2">
                     <Filter className="w-5 h-5 text-gold" /> Filtered Results
                   </h2>
-                  <p className="text-xs text-ivory/60 mt-1">
-                    {filteredNominees.length.toLocaleString()} nominee{filteredNominees.length === 1 ? "" : "s"} match your filters
-                    {filteredNominees.length > 0 && (
-                      <> • showing <span className="text-ivory/80">{rangeStart.toLocaleString()}–{rangeEnd.toLocaleString()}</span> (page {currentPage} of {totalPages})</>
+                  <p className="text-xs text-ivory/60 mt-1" aria-live="polite">
+                    {isLoading ? (
+                      <>Loading nominees that match your filters…</>
+                    ) : (
+                      <>
+                        {filteredNominees.length.toLocaleString()} nominee{filteredNominees.length === 1 ? "" : "s"} match your filters
+                        {filteredNominees.length > 0 && (
+                          <> • showing <span className="text-ivory/80">{rangeStart.toLocaleString()}–{rangeEnd.toLocaleString()}</span> (page {currentPage} of {totalPages})</>
+                        )}
+                        .
+                      </>
                     )}
-                    .
                   </p>
                 </div>
                 <Button
