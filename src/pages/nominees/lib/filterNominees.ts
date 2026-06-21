@@ -79,13 +79,17 @@ export function applyFilterChange(
   if (key === "zone" && value === "all") {
     next.delete("state");
   }
+  // Changing category invalidates any active subcategory choice.
+  if (key === "category") {
+    next.delete("subcategory");
+  }
   return next;
 }
 
 /** Count of non-default filters (drives the "Clear all" affordance). */
 export function activeFilterCount(state: NomineeFilterState): number {
   const tracked: (keyof NomineeFilterState)[] = [
-    "category", "country", "region", "awardFamily",
+    "category", "subcategory", "country", "region", "awardFamily",
     "recognitionClass", "zone", "state", "type",
   ];
   const dropdowns = tracked.filter((k) => state[k] && state[k] !== "all").length;
