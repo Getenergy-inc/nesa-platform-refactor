@@ -361,6 +361,41 @@ export default function NomineesHubPage() {
               />
             </form>
 
+            {/* Tier chips — 4 NESA-Africa 2026 award tiers. Per-tier
+                counts come from the live nominee pool so visitors can
+                triage by award track before opening any filter. */}
+            <div className="mt-6 flex flex-wrap justify-center gap-2" role="tablist" aria-label="Award tier filter">
+              {[
+                { id: "all", label: "All Tiers", total: (tierCounts[1] + tierCounts[2] + tierCounts[3] + tierCounts[4]) },
+                { id: "1", label: "Tier 1 · Blue Garnet", total: tierCounts[1] },
+                { id: "2", label: "Tier 2 · Platinum", total: tierCounts[2] },
+                { id: "3", label: "Tier 3 · Africa Education Icon", total: tierCounts[3] },
+                { id: "4", label: "Tier 4 · Influencers Impact", total: tierCounts[4] },
+              ].map((t) => {
+                const active = filterTier === t.id;
+                return (
+                  <button
+                    key={t.id}
+                    type="button"
+                    role="tab"
+                    aria-selected={active}
+                    onClick={() => setFilterTier(t.id)}
+                    className={`inline-flex items-center gap-1.5 rounded-full border px-3 py-1.5 text-xs font-medium transition-all ${
+                      active
+                        ? "bg-gold text-charcoal border-gold shadow-md shadow-gold/20"
+                        : "bg-charcoal-light/60 text-ivory/80 border-gold/25 hover:border-gold/60 hover:text-gold"
+                    }`}
+                  >
+                    {t.label}
+                    <span className={`ml-1 rounded-full px-1.5 py-0.5 text-[10px] font-semibold ${active ? "bg-charcoal/20 text-charcoal" : "bg-gold/15 text-gold"}`}>
+                      {t.total.toLocaleString()}
+                    </span>
+                  </button>
+                );
+              })}
+            </div>
+
+
             {/* Nominee-group chips — UI-ready. Wire `activeGroup` to data filter later. */}
             <div className="mt-6 flex flex-wrap justify-center gap-2">
               {NOMINEE_GROUPS.map((g) => {
