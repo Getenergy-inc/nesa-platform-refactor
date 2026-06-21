@@ -133,6 +133,17 @@ export default function NomineesHubPage() {
   // CMS-driven subcategory list scoped to the active category.
   const { data: cmsSubcategories } = useSubcategories(filterCategory);
 
+  // Pagination — URL-driven via ?page=N. Page size kept constant; clamped
+  // against total below so deep links never land on a non-existent page.
+  const PAGE_SIZE = 24;
+  const rawPage = Number.parseInt(params.get("page") ?? "1", 10);
+  const requestedPage = Number.isFinite(rawPage) && rawPage > 0 ? rawPage : 1;
+  const setFilterPage = (page: number) => {
+    const next = new URLSearchParams(params);
+    if (page <= 1) next.delete("page"); else next.set("page", String(page));
+    setParams(next, { replace: true });
+  };
+
   const isNigeria = filterCountry.toLowerCase() === "nigeria";
   const activeZone = NIGERIA_ZONES.find((z) => z.slug === filterZone);
   const activeFilterCountValue = activeFilterCount(filters);
