@@ -181,7 +181,7 @@ export default function NomineesHubPage() {
       mostVoted: sortedByVotes.slice(0, 8),
       totalCount: valid.length,
     };
-  }, [nominees]);
+  }, [nominees, cmsCategories]);
 
   // Country list for the country dropdown (derived from live nominees)
   const countries = useMemo(() => {
