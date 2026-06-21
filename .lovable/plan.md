@@ -1,82 +1,81 @@
-# NESA-Africa 2026 Content Sync + Volunteer Command Center
+# NESA-Africa 2026 — Master Public Experience Refactor
 
-Four work streams, executed in this order. All public-facing copy comes verbatim from the brief you pasted; internal volunteer hub builds the operations toolkit.
+This is a continent-scale refactor. To ship it safely without breaking the live site, I'll execute in **5 sequenced phases**, each independently shippable and reviewable. You approve the plan; I then ship phase-by-phase (or all at once if you say "go straight through").
 
 ---
 
-## 1. Vision, Mission & Objectives (public landing)
+## Phase 1 — Navigation & Information Architecture
 
-File: `src/components/nesa/VisionMissionObjectivesSection.tsx`
+Collapse the public nav to **exactly 9 items** + right-side utilities.
 
-- Replace existing vision/mission/objectives copy with the exact wording from section 1 of the brief.
-- Render as three blocks: Vision (single paragraph), Mission (single paragraph crediting SCEF + UN SDGs + AU 2063), and Objectives (numbered list of all 7, including the SMART and 2035 ones).
-- Keep current Charcoal/Gold styling, Playfair display headings, framer-motion fade-in.
-- Strip the old "15 objectives" wording everywhere it referenced this section.
+**Primary nav:** Home · About · Awards · Participate · Impact Programs · Media & Events · Join the Movement · Sponsors & Partners · Contact
+**Right side:** Become a Sponsor (button) · Sign In · Language Selector · Search
 
-## 2. Season Timeline sync (public)
+- Audit current `Header`/`PublicLayout` nav, fold legacy items into mega-menu groupings or move to footer/discovery.
+- Update mobile bottom bar + drawer to mirror the 9-item structure.
+- Route map: `/`, `/about`, `/awards`, `/participate`, `/impact-programs`, `/media-events`, `/join`, `/sponsors-partners`, `/contact`. Add redirects from any renamed routes.
+- All other existing pages remain reachable via in-page CTAs, filters, search — never top-nav.
 
-Files: `src/config/schedule.ts`, `src/components/nesa/TimelineSection.tsx` (read first to confirm shape), `src/components/nesa/CountdownSection.tsx` if it hardcodes phase dates.
+## Phase 2 — Landing Page (18 sections, exact order)
 
-Canonical 2026 timeline (from section 7):
+Refactor `src/pages/Index.tsx` (or equivalent landing composer) to render exactly these 18 sections in order. Reuse existing components where they map cleanly; build new ones where missing.
 
-| Phase | Dates |
-|---|---|
-| Public Pre-Nomination Activation (Kickoff) | 20 May 2026 |
-| Jury Onboarding (internal) | 29 Jun – 10 Jul 2026 |
-| Platinum Recognition Show | 5 Jul 2026 |
-| Gold Certificate Nominations Close | 10 Jul 2026 |
-| Africa Education Icon Show + Nominations Open | 12 Jul 2026 |
-| Gold Certificate AGC Voting | 15 Aug – 15 Sep 2026 |
-| Icon Nominations Close | 12 Sep 2026 |
-| Gold Certificate Winners Show | 16 Sep 2026 |
-| Momentum Phase | 16 Sep – 15 Oct 2026 |
-| Blue Garnet Voting (60% jury + 40% public) | 16 Sep – 22 Oct 2026 |
-| Blue Garnet Awards Gala (Lagos) | 22 Oct 2026 |
-| Rebuild My School Africa | 23 Oct 2026 → Oct 2027 |
+1. **Hero** — eyebrow "A CONTINENT IN RECOGNITION", new headline, 3 CTAs (Nominate / Explore Nominees / Become a Sponsor)
+2. **Countdown** — 22 Oct 2026, Lagos
+3. **The Road to NESA-Africa 2026** — photos/videos/testimonials carousel + "View More Moments"
+4. **Why NESA Exists** — Recognition → Visibility → Partnerships → Funding → Intervention → Legacy (refactor existing `WhyNESAExistsSection`)
+5. **Vision, Mission & Strategic Objectives** (rewrite copy per spec; keep `#mission` anchor)
+6. **What Makes NESA-Africa Different** — 8 focus-area cards
+7. **Recognition Framework** — 4 tiers · 18 categories · 96 subcategories (refactor `AwardTiersSummarySection`)
+8. **One Continent. Ten Regions. One Mission.** — signature section, 10-region grid
+9. **Explore Africa's Regions** — region cards with overview / leaders / nominees / chapters / stories / EduTourism
+10. **People Behind the Movement** — 200+ volunteers · 30+ countries
+11. **Education Stakeholder Endorsements** — FAWE Africa, CSACEFA + integrity notice
+12. **Rebuild My School Africa**
+13. **EduAid-Africa**
+14. **NESA-Africa TV**
+15. **Sponsors & Partners**
+16. **Governance & Integrity Firewall**
+17. **Vision 2035**
+18. **Final CTA** — Nominate / Become a Sponsor / Join the Movement
 
-- Update `DEFAULT_SCHEDULE_TEMPLATE` / `buildTimeline` so dates flow into `TimelineSection`, `KeyDatesBanner`, and `CountdownSection` from one source.
-- Keep season config (`src/config/season.ts`) unchanged for `ceremonyDate` (already 2026-10-22 18:00).
+Every section gets a clear CTA per spec. Mobile-first, semantic HTML, single H1 in hero.
 
-## 3. Award Tiers — 4 tiers · 18 categories · 96 subcategories (public)
+## Phase 3 — Discovery Model
 
-New file: `src/config/awardTiers2026.ts` — typed array of tiers with category, subcategory count, vote mechanic, CTA, key dates.
+Enforce the funnel: **Recognition Pathway → Geography → Category → Subcategory → Nominate or Explore**.
 
-New section: `src/components/nesa/AwardTiersSummarySection.tsx`, lazy-mounted in `NESALandingPage.tsx` between Vision/Mission and Ecosystem.
+- Refactor `/awards` to land on the 4-tier pathway picker, not a flat 96-subcategory dump.
+- Refactor `/nominees` (and "Explore Nominees" entry from hero) to require a geography or tier filter before showing the full list.
+- Add a global Search overlay (right-side nav) that bridges all four axes.
 
-- 4 tier cards (Blue Garnet · Platinum · Icon · Influencers) with type, vote mechanic, dates, and a "View categories" disclosure listing the 18 categories with subcategory counts.
-- Include Master Summary row (18 categories, 96 subcategories total).
-- Subcategory names: only the confirmed ones (Cat 5 NGO Nigeria, Cat 17 Icon, Cat 18 Influencers) get inline names. The rest render "Subcategories: N · pulled from platform" with a link to the dedicated category route. No invented names.
-- CTAs per tier: Nominate / Vote, Recommend Again, Nominate, Nominate / Vote.
+## Phase 4 — Supporting Public Pages (light refactor pass)
 
-## 4. Volunteer Command Center (internal)
+For each of the 9 top-nav pages, align hero, intro copy, and primary CTAs with the master positioning. No full redesign in this phase — just brand, copy, CTA, and nav alignment so the site feels coherent end-to-end.
 
-New route: `/volunteers/command-center` (linked from existing `/volunteer` page footer, not added to public nav).
+## Phase 5 — SEO, Trust & Conversion polish
 
-New files under `src/pages/volunteers/`:
-- `CommandCenter.tsx` — page shell using `NESAHeader` + `NESAFooter`, gated behind sign-in (uses existing `AuthContext`; unauthenticated users see CTA to sign in).
-- `sections/MissionStatementCard.tsx` — section 2 mission statement, pull-quote styled.
-- `sections/SocialChannelsTable.tsx` — section 3 handles + the 4 mandatory hashtags.
-- `sections/TeamStructureGrid.tsx` — section 5 four-team table (Alpha, Beta, Gamma, Central) with capacity, KPI, weekly time.
-- `sections/SmatObjectivesAccordion.tsx` — section 6 five SMAT objectives with team-to-objective mapping at the bottom.
-- `sections/NominationCaptionsLibrary.tsx` — section 8, all 22 captions grouped by tier with copy-to-clipboard buttons.
-- `sections/PlatformAdaptationGuide.tsx` — section 9 table (Instagram / TikTok / Facebook / X / LinkedIn formats + CTAs).
-- `sections/SubmissionProcessSteps.tsx` — section 10 four-step checklist with file-naming pattern in `<code>`.
-- `sections/AssignmentTracker.tsx` — section 11 list of all 22 categories with read-only "assignee" placeholder column (no backend yet — purely a printable reference for now).
+- Per-route `<title>` / meta description / canonical / OG (already partly in place via `react-helmet-async`)
+- JSON-LD: `Organization`, `Event` (Gala), `BreadcrumbList` on discovery routes
+- Sponsor / Volunteer / Nominate conversion CTAs audited site-wide
+- Integrity firewall messaging visible on Awards, Sponsors, About
 
-Routing: add lazy route in `src/App.tsx` (or wherever pages are registered — confirm first).
-
-Styling: Charcoal background, Gold accents, Playfair headings, Inter body — matches existing project standards. Tabs (shadcn `Tabs`) across the top to jump between Mission, Teams, Objectives, Captions, Platforms, Process, Tracker.
+---
 
 ## Technical notes
 
-- All copy lives in component files (English only for now). Translations not added — `i18n` keys are out of scope for this pass.
-- No database tables added. Assignment tracker is static; we can wire to Supabase later if you want assignments persisted.
-- No changes to `src/integrations/supabase/client.ts`, no new edge functions, no new migrations.
-- Tests: no new Playwright specs — banned-strings and unit suites will run on save.
+- Stack stays: React 18 + Vite + Tailwind + shadcn + framer-motion + react-helmet-async.
+- Tokens stay: Charcoal/Black background, Gold (`42 85% 52%`) accents, Playfair Display headings. No new color systems.
+- New sections built as small focused components under `src/components/nesa/landing/` and composed in `Index.tsx`.
+- Mobile bottom bar (`pb-20`) and bottom-20 chat offsets preserved.
+- No backend schema changes required for this refactor. The unresolved nominee PII security finding remains separate — I'll address it after you pick Option A or B from the previous turn.
+- Content for sections 3 (Road to 2026 media), 10 (volunteer stories), 11 (endorser logos) will use existing assets where available and placeholder slots where not — flagged in code with `TODO(content)` comments so your content team can fill them in.
 
-## Out of scope (flag for next pass)
+---
 
-- Pulling the missing subcategory names for categories 1–4 and 6–16 from `CategoryMasterIndex.tsx`/admin — requires the export you mentioned.
-- Persisting volunteer assignments to a `volunteer_assignments` table.
-- Localising the new volunteer hub into the other 10 languages.
-- Updating category landing pages (`src/pages/categories/*`) to match the new subcategory counts — separate sweep once subcategory names land.
+## What I need from you before I start building
+
+1. **Approve this 5-phase plan** (or tell me to merge phases / change order).
+2. **Ship cadence:** one phase per turn (safer, reviewable) **or** straight through all 5 (faster, one big diff)?
+3. **Nominee PII security fix (from previous turn):** Option A (column-level REVOKE) or Option B (route through `public_nominees` view)? I'll fold the fix into Phase 1.
+4. Any **must-keep sections** currently on the landing page that aren't in the 18-section spec? (Default: I remove anything not listed.)
