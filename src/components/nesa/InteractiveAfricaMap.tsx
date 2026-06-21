@@ -156,7 +156,7 @@ export function InteractiveAfricaMap() {
                 {REGION_HUBS.map(hub => (
                   <Link
                     key={hub.slug}
-                    to={`/region/${hub.slug}`}
+                    to={`/nominees?region=${hub.slug}`}
                     onMouseEnter={() => setHoveredRegion(hub.slug)}
                     onMouseLeave={() => setHoveredRegion(null)}
                     className="group flex items-center gap-2 bg-white/5 border border-white/10 rounded-lg px-3 py-2.5 hover:bg-primary/10 hover:border-primary/30 transition-all"
