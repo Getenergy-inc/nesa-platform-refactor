@@ -40,7 +40,7 @@ export async function fetchCategories(): Promise<AwardCategory[]> {
   const { data, error } = await supabase
     .from("categories")
     .select(
-      "id, slug, name, description, icon_name, display_order, is_active, subcategories(count)",
+      "id, slug, name, description, icon_name, display_order, is_active, tier, subcategories(count)",
     )
     .eq("is_active", true)
     .order("display_order", { ascending: true });
@@ -54,6 +54,7 @@ export async function fetchCategories(): Promise<AwardCategory[]> {
     description: row.description,
     iconName: row.icon_name,
     displayOrder: row.display_order ?? 0,
+    tier: (row.tier ?? null) as AwardCategory["tier"],
     subcategoryCount: Array.isArray(row.subcategories)
       ? row.subcategories[0]?.count ?? 0
       : 0,
