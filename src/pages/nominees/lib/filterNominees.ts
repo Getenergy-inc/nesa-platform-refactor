@@ -6,6 +6,7 @@ import { normalizeRegion } from "@/lib/regions";
 export interface NomineeFilterState {
   q: string;
   category: string;
+  subcategory: string;
   country: string;
   region: string;
   awardFamily: string;
@@ -20,6 +21,7 @@ export interface NomineeFilterState {
 export const DEFAULT_FILTERS: NomineeFilterState = {
   q: "",
   category: "all",
+  subcategory: "all",
   country: "all",
   region: "all",
   awardFamily: "all",
