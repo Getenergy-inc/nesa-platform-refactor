@@ -44,7 +44,7 @@ const WhyNESAExistsSection = lazy(() => import("@/components/nesa/WhyNESAExistsS
 const VisionMissionObjectivesSection = lazy(() => import("@/components/nesa/VisionMissionObjectivesSection").then(m => ({ default: m.VisionMissionObjectivesSection })));
 const WhatMakesNESADifferentSection = lazy(() => import("@/components/nesa/WhatMakesNESADifferentSection").then(m => ({ default: m.WhatMakesNESADifferentSection })));
 const AwardTiersSummarySection = lazy(() => import("@/components/nesa/AwardTiersSummarySection").then(m => ({ default: m.AwardTiersSummarySection })));
-const TenRegionsBannerSection = lazy(() => import("@/components/nesa/TenRegionsBannerSection").then(m => ({ default: m.TenRegionsBannerSection })));
+const TenRegionsBannerSection = lazy(() => import("@/components/nesa/InteractiveAfricaMap").then(m => ({ default: m.InteractiveAfricaMap })));
 const ExploreRegionsSection = lazy(() => import("@/components/nesa/ExploreRegionsSection").then(m => ({ default: m.ExploreRegionsSection })));
 const PoweredByVolunteersSection = lazy(() => import("@/components/nesa/PoweredByVolunteersSection").then(m => ({ default: m.PoweredByVolunteersSection })));
 const EndorsedBySection = lazy(() => import("@/components/nesa/EndorsedBySection").then(m => ({ default: m.EndorsedBySection })));
