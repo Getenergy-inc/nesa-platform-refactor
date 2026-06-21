@@ -101,6 +101,7 @@ export interface FilterableNominee {
   status?: string | null;
   categorySlug?: string | null;
   categoryName?: string | null;
+  subcategorySlug?: string | null;
   country?: string | null;
   region?: string | null;
   awardFamily?: string | null;
@@ -120,6 +121,7 @@ export function filterNominees<T extends FilterableNominee>(
   const q = s.q.trim().toLowerCase();
   return valid.filter((n) => {
     if (s.category !== "all" && n.categorySlug !== s.category) return false;
+    if (s.subcategory !== "all" && n.subcategorySlug !== s.subcategory) return false;
     if (s.country !== "all" && (n.country ?? "").toLowerCase() !== s.country.toLowerCase()) return false;
     if (s.region !== "all") {
       const norm = normalizeRegion(n.region ?? "");
