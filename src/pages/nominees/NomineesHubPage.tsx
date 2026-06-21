@@ -802,6 +802,38 @@ export default function NomineesHubPage() {
  * with ellipses so long lists (the directory routinely returns 100+
  * nominees per filter) stay compact on mobile.
  */
+/**
+ * Card-shaped placeholder grid for the nominee directory. Mirrors the
+ * 2/3/4-column layout of LandingNomineeCard so the page doesn't reflow
+ * once real data lands. Used during initial fetch and while filters are
+ * recomputing against a slow CMS/API response.
+ */
+function NomineeGridSkeleton({ count = 8 }: { count?: number }) {
+  return (
+    <div
+      className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3"
+      role="status"
+      aria-label="Loading nominees"
+      data-testid="nominees-grid-skeleton"
+    >
+      {Array.from({ length: count }).map((_, i) => (
+        <div
+          key={i}
+          className="rounded-2xl border border-gold/10 bg-charcoal-light/30 overflow-hidden"
+        >
+          <Skeleton className="aspect-[4/5] w-full bg-charcoal-light/60" />
+          <div className="p-3 space-y-2">
+            <Skeleton className="h-3 w-1/2 bg-charcoal-light/60" />
+            <Skeleton className="h-4 w-5/6 bg-charcoal-light/60" />
+            <Skeleton className="h-3 w-2/3 bg-charcoal-light/60" />
+          </div>
+        </div>
+      ))}
+      <span className="sr-only">Loading nominees…</span>
+    </div>
+  );
+}
+
 function NomineesPagination({
   currentPage,
   totalPages,
