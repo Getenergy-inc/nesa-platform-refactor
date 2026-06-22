@@ -3293,11 +3293,14 @@ export type Database = {
           acceptance_token: string | null
           acceptance_token_expires_at: string | null
           accepted_at: string | null
+          active_nominee_id: string | null
           award_family: string | null
           bio: string | null
           category_fit_summary: string | null
           country: string | null
+          country_of_impact: string | null
           created_at: string | null
+          edi_band: Database["public"]["Enums"]["nrc_edi_band"] | null
           email: string | null
           evidence_urls: string[] | null
           final_score: number | null
@@ -3313,7 +3316,15 @@ export type Database = {
           logo_url: string | null
           media_gallery: Json
           name: string
+          nigeria_classification_group: string | null
           nominator_user_id: string | null
+          nrc_classification_level:
+            | Database["public"]["Enums"]["nrc_classification_level"]
+            | null
+          nrc_evidence_status:
+            | Database["public"]["Enums"]["nrc_verification_status"]
+            | null
+          nrc_no: number | null
           nrc_reviewer_id: string | null
           nrc_verified: boolean | null
           nrc_verified_at: string | null
@@ -3322,6 +3333,9 @@ export type Database = {
           photo_url: string | null
           profile_completion_score: number
           profile_status: Database["public"]["Enums"]["nominee_profile_status"]
+          public_display_status:
+            | Database["public"]["Enums"]["nrc_public_display_status"]
+            | null
           public_documents: Json
           public_votes: number | null
           publication_status: Database["public"]["Enums"]["nominee_publication_status"]
@@ -3331,6 +3345,9 @@ export type Database = {
           region: string | null
           region_slug: string | null
           renomination_count: number
+          research_priority:
+            | Database["public"]["Enums"]["nrc_research_priority"]
+            | null
           review_notes: string | null
           reviewed_at: string | null
           season_id: string
@@ -3354,11 +3371,14 @@ export type Database = {
           acceptance_token?: string | null
           acceptance_token_expires_at?: string | null
           accepted_at?: string | null
+          active_nominee_id?: string | null
           award_family?: string | null
           bio?: string | null
           category_fit_summary?: string | null
           country?: string | null
+          country_of_impact?: string | null
           created_at?: string | null
+          edi_band?: Database["public"]["Enums"]["nrc_edi_band"] | null
           email?: string | null
           evidence_urls?: string[] | null
           final_score?: number | null
@@ -3374,7 +3394,15 @@ export type Database = {
           logo_url?: string | null
           media_gallery?: Json
           name: string
+          nigeria_classification_group?: string | null
           nominator_user_id?: string | null
+          nrc_classification_level?:
+            | Database["public"]["Enums"]["nrc_classification_level"]
+            | null
+          nrc_evidence_status?:
+            | Database["public"]["Enums"]["nrc_verification_status"]
+            | null
+          nrc_no?: number | null
           nrc_reviewer_id?: string | null
           nrc_verified?: boolean | null
           nrc_verified_at?: string | null
@@ -3383,6 +3411,9 @@ export type Database = {
           photo_url?: string | null
           profile_completion_score?: number
           profile_status?: Database["public"]["Enums"]["nominee_profile_status"]
+          public_display_status?:
+            | Database["public"]["Enums"]["nrc_public_display_status"]
+            | null
           public_documents?: Json
           public_votes?: number | null
           publication_status?: Database["public"]["Enums"]["nominee_publication_status"]
@@ -3392,6 +3423,9 @@ export type Database = {
           region?: string | null
           region_slug?: string | null
           renomination_count?: number
+          research_priority?:
+            | Database["public"]["Enums"]["nrc_research_priority"]
+            | null
           review_notes?: string | null
           reviewed_at?: string | null
           season_id: string
@@ -3415,11 +3449,14 @@ export type Database = {
           acceptance_token?: string | null
           acceptance_token_expires_at?: string | null
           accepted_at?: string | null
+          active_nominee_id?: string | null
           award_family?: string | null
           bio?: string | null
           category_fit_summary?: string | null
           country?: string | null
+          country_of_impact?: string | null
           created_at?: string | null
+          edi_band?: Database["public"]["Enums"]["nrc_edi_band"] | null
           email?: string | null
           evidence_urls?: string[] | null
           final_score?: number | null
@@ -3435,7 +3472,15 @@ export type Database = {
           logo_url?: string | null
           media_gallery?: Json
           name?: string
+          nigeria_classification_group?: string | null
           nominator_user_id?: string | null
+          nrc_classification_level?:
+            | Database["public"]["Enums"]["nrc_classification_level"]
+            | null
+          nrc_evidence_status?:
+            | Database["public"]["Enums"]["nrc_verification_status"]
+            | null
+          nrc_no?: number | null
           nrc_reviewer_id?: string | null
           nrc_verified?: boolean | null
           nrc_verified_at?: string | null
@@ -3444,6 +3489,9 @@ export type Database = {
           photo_url?: string | null
           profile_completion_score?: number
           profile_status?: Database["public"]["Enums"]["nominee_profile_status"]
+          public_display_status?:
+            | Database["public"]["Enums"]["nrc_public_display_status"]
+            | null
           public_documents?: Json
           public_votes?: number | null
           publication_status?: Database["public"]["Enums"]["nominee_publication_status"]
@@ -3453,6 +3501,9 @@ export type Database = {
           region?: string | null
           region_slug?: string | null
           renomination_count?: number
+          research_priority?:
+            | Database["public"]["Enums"]["nrc_research_priority"]
+            | null
           review_notes?: string | null
           reviewed_at?: string | null
           season_id?: string
@@ -3657,6 +3708,100 @@ export type Database = {
         }
         Relationships: []
       }
+      nrc_edi_scores: {
+        Row: {
+          access_to_education: number | null
+          au_agenda_2063_alignment: number | null
+          average_score: number | null
+          community_relevance: number | null
+          created_at: string
+          date_scored: string | null
+          edi_band: Database["public"]["Enums"]["nrc_edi_band"] | null
+          education_for_all_alignment: number | null
+          equity_in_education: number | null
+          evidence_strength: number | null
+          id: string
+          inclusion_safeguarding: number | null
+          innovation: number | null
+          nominee_id: string | null
+          nrc_row_id: string | null
+          reviewer_note: string | null
+          scale_of_impact: number | null
+          sdg4_alignment: number | null
+          sustainability: number | null
+          total_score: number | null
+          updated_at: string
+        }
+        Insert: {
+          access_to_education?: number | null
+          au_agenda_2063_alignment?: number | null
+          average_score?: number | null
+          community_relevance?: number | null
+          created_at?: string
+          date_scored?: string | null
+          edi_band?: Database["public"]["Enums"]["nrc_edi_band"] | null
+          education_for_all_alignment?: number | null
+          equity_in_education?: number | null
+          evidence_strength?: number | null
+          id?: string
+          inclusion_safeguarding?: number | null
+          innovation?: number | null
+          nominee_id?: string | null
+          nrc_row_id?: string | null
+          reviewer_note?: string | null
+          scale_of_impact?: number | null
+          sdg4_alignment?: number | null
+          sustainability?: number | null
+          total_score?: number | null
+          updated_at?: string
+        }
+        Update: {
+          access_to_education?: number | null
+          au_agenda_2063_alignment?: number | null
+          average_score?: number | null
+          community_relevance?: number | null
+          created_at?: string
+          date_scored?: string | null
+          edi_band?: Database["public"]["Enums"]["nrc_edi_band"] | null
+          education_for_all_alignment?: number | null
+          equity_in_education?: number | null
+          evidence_strength?: number | null
+          id?: string
+          inclusion_safeguarding?: number | null
+          innovation?: number | null
+          nominee_id?: string | null
+          nrc_row_id?: string | null
+          reviewer_note?: string | null
+          scale_of_impact?: number | null
+          sdg4_alignment?: number | null
+          sustainability?: number | null
+          total_score?: number | null
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "nrc_edi_scores_nominee_id_fkey"
+            columns: ["nominee_id"]
+            isOneToOne: false
+            referencedRelation: "nominees"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "nrc_edi_scores_nominee_id_fkey"
+            columns: ["nominee_id"]
+            isOneToOne: false
+            referencedRelation: "public_nominees"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "nrc_edi_scores_nrc_row_id_fkey"
+            columns: ["nrc_row_id"]
+            isOneToOne: true
+            referencedRelation: "nrc_evidence_rows"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       nrc_evidence_queries: {
         Row: {
           created_at: string | null
@@ -3709,6 +3854,332 @@ export type Database = {
             columns: ["nomination_id"]
             isOneToOne: false
             referencedRelation: "nominations"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      nrc_evidence_rows: {
+        Row: {
+          access_score: number | null
+          active_nominee_id: string | null
+          award_category: string | null
+          award_subcategory: string | null
+          consent_required: string | null
+          country_base: string | null
+          created_at: string
+          education_contribution_summary: string | null
+          education_impact_area: string | null
+          equity_score: number | null
+          evidence_strength_score: number | null
+          id: string
+          impact_beneficiaries: string | null
+          impact_geography: string | null
+          imported_at: string | null
+          inclusion_safeguarding_score: number | null
+          nesa_region: string | null
+          nigeria_classification_group: string | null
+          nominee_id: string | null
+          nominee_name: string
+          nominee_type: string | null
+          nrc_classification_level:
+            | Database["public"]["Enums"]["nrc_classification_level"]
+            | null
+          nrc_no: number
+          original_legacy_subcategory: string | null
+          original_official_category: string | null
+          original_status: string | null
+          public_display_status:
+            | Database["public"]["Enums"]["nrc_public_display_status"]
+            | null
+          public_website_wording: string | null
+          research_priority:
+            | Database["public"]["Enums"]["nrc_research_priority"]
+            | null
+          researcher_note: string | null
+          search_query_pack: string | null
+          source_type: string | null
+          sustainability_reach_score: number | null
+          total_edi_20: number | null
+          updated_at: string
+          verification_status:
+            | Database["public"]["Enums"]["nrc_verification_status"]
+            | null
+          work_description: string | null
+        }
+        Insert: {
+          access_score?: number | null
+          active_nominee_id?: string | null
+          award_category?: string | null
+          award_subcategory?: string | null
+          consent_required?: string | null
+          country_base?: string | null
+          created_at?: string
+          education_contribution_summary?: string | null
+          education_impact_area?: string | null
+          equity_score?: number | null
+          evidence_strength_score?: number | null
+          id?: string
+          impact_beneficiaries?: string | null
+          impact_geography?: string | null
+          imported_at?: string | null
+          inclusion_safeguarding_score?: number | null
+          nesa_region?: string | null
+          nigeria_classification_group?: string | null
+          nominee_id?: string | null
+          nominee_name: string
+          nominee_type?: string | null
+          nrc_classification_level?:
+            | Database["public"]["Enums"]["nrc_classification_level"]
+            | null
+          nrc_no: number
+          original_legacy_subcategory?: string | null
+          original_official_category?: string | null
+          original_status?: string | null
+          public_display_status?:
+            | Database["public"]["Enums"]["nrc_public_display_status"]
+            | null
+          public_website_wording?: string | null
+          research_priority?:
+            | Database["public"]["Enums"]["nrc_research_priority"]
+            | null
+          researcher_note?: string | null
+          search_query_pack?: string | null
+          source_type?: string | null
+          sustainability_reach_score?: number | null
+          total_edi_20?: number | null
+          updated_at?: string
+          verification_status?:
+            | Database["public"]["Enums"]["nrc_verification_status"]
+            | null
+          work_description?: string | null
+        }
+        Update: {
+          access_score?: number | null
+          active_nominee_id?: string | null
+          award_category?: string | null
+          award_subcategory?: string | null
+          consent_required?: string | null
+          country_base?: string | null
+          created_at?: string
+          education_contribution_summary?: string | null
+          education_impact_area?: string | null
+          equity_score?: number | null
+          evidence_strength_score?: number | null
+          id?: string
+          impact_beneficiaries?: string | null
+          impact_geography?: string | null
+          imported_at?: string | null
+          inclusion_safeguarding_score?: number | null
+          nesa_region?: string | null
+          nigeria_classification_group?: string | null
+          nominee_id?: string | null
+          nominee_name?: string
+          nominee_type?: string | null
+          nrc_classification_level?:
+            | Database["public"]["Enums"]["nrc_classification_level"]
+            | null
+          nrc_no?: number
+          original_legacy_subcategory?: string | null
+          original_official_category?: string | null
+          original_status?: string | null
+          public_display_status?:
+            | Database["public"]["Enums"]["nrc_public_display_status"]
+            | null
+          public_website_wording?: string | null
+          research_priority?:
+            | Database["public"]["Enums"]["nrc_research_priority"]
+            | null
+          researcher_note?: string | null
+          search_query_pack?: string | null
+          source_type?: string | null
+          sustainability_reach_score?: number | null
+          total_edi_20?: number | null
+          updated_at?: string
+          verification_status?:
+            | Database["public"]["Enums"]["nrc_verification_status"]
+            | null
+          work_description?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "nrc_evidence_rows_nominee_id_fkey"
+            columns: ["nominee_id"]
+            isOneToOne: false
+            referencedRelation: "nominees"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "nrc_evidence_rows_nominee_id_fkey"
+            columns: ["nominee_id"]
+            isOneToOne: false
+            referencedRelation: "public_nominees"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      nrc_evidence_sources: {
+        Row: {
+          created_at: string
+          date_checked: string | null
+          evidence_type: string | null
+          id: string
+          nominee_id: string | null
+          nrc_row_id: string | null
+          reference_no: number | null
+          reliability_rating: number | null
+          researcher: string | null
+          researcher_note: string | null
+          source_name: string | null
+          source_status: string | null
+          source_title: string | null
+          source_url: string | null
+          source_year: number | null
+          updated_at: string
+          verification_status:
+            | Database["public"]["Enums"]["nrc_verification_status"]
+            | null
+        }
+        Insert: {
+          created_at?: string
+          date_checked?: string | null
+          evidence_type?: string | null
+          id?: string
+          nominee_id?: string | null
+          nrc_row_id?: string | null
+          reference_no?: number | null
+          reliability_rating?: number | null
+          researcher?: string | null
+          researcher_note?: string | null
+          source_name?: string | null
+          source_status?: string | null
+          source_title?: string | null
+          source_url?: string | null
+          source_year?: number | null
+          updated_at?: string
+          verification_status?:
+            | Database["public"]["Enums"]["nrc_verification_status"]
+            | null
+        }
+        Update: {
+          created_at?: string
+          date_checked?: string | null
+          evidence_type?: string | null
+          id?: string
+          nominee_id?: string | null
+          nrc_row_id?: string | null
+          reference_no?: number | null
+          reliability_rating?: number | null
+          researcher?: string | null
+          researcher_note?: string | null
+          source_name?: string | null
+          source_status?: string | null
+          source_title?: string | null
+          source_url?: string | null
+          source_year?: number | null
+          updated_at?: string
+          verification_status?:
+            | Database["public"]["Enums"]["nrc_verification_status"]
+            | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "nrc_evidence_sources_nominee_id_fkey"
+            columns: ["nominee_id"]
+            isOneToOne: false
+            referencedRelation: "nominees"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "nrc_evidence_sources_nominee_id_fkey"
+            columns: ["nominee_id"]
+            isOneToOne: false
+            referencedRelation: "public_nominees"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "nrc_evidence_sources_nrc_row_id_fkey"
+            columns: ["nrc_row_id"]
+            isOneToOne: false
+            referencedRelation: "nrc_evidence_rows"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      nrc_icon_classifications: {
+        Row: {
+          award_category: string
+          award_subcategory: string | null
+          classification_note: string | null
+          country_base: string | null
+          country_of_impact: string | null
+          created_at: string
+          edi_status: Database["public"]["Enums"]["nrc_edi_band"] | null
+          evidence_status:
+            | Database["public"]["Enums"]["nrc_verification_status"]
+            | null
+          icon_classification_group: Database["public"]["Enums"]["nrc_icon_group"]
+          id: string
+          nominee_id: string | null
+          nrc_row_id: string | null
+          region_of_impact: string | null
+          updated_at: string
+        }
+        Insert: {
+          award_category: string
+          award_subcategory?: string | null
+          classification_note?: string | null
+          country_base?: string | null
+          country_of_impact?: string | null
+          created_at?: string
+          edi_status?: Database["public"]["Enums"]["nrc_edi_band"] | null
+          evidence_status?:
+            | Database["public"]["Enums"]["nrc_verification_status"]
+            | null
+          icon_classification_group?: Database["public"]["Enums"]["nrc_icon_group"]
+          id?: string
+          nominee_id?: string | null
+          nrc_row_id?: string | null
+          region_of_impact?: string | null
+          updated_at?: string
+        }
+        Update: {
+          award_category?: string
+          award_subcategory?: string | null
+          classification_note?: string | null
+          country_base?: string | null
+          country_of_impact?: string | null
+          created_at?: string
+          edi_status?: Database["public"]["Enums"]["nrc_edi_band"] | null
+          evidence_status?:
+            | Database["public"]["Enums"]["nrc_verification_status"]
+            | null
+          icon_classification_group?: Database["public"]["Enums"]["nrc_icon_group"]
+          id?: string
+          nominee_id?: string | null
+          nrc_row_id?: string | null
+          region_of_impact?: string | null
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "nrc_icon_classifications_nominee_id_fkey"
+            columns: ["nominee_id"]
+            isOneToOne: false
+            referencedRelation: "nominees"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "nrc_icon_classifications_nominee_id_fkey"
+            columns: ["nominee_id"]
+            isOneToOne: false
+            referencedRelation: "public_nominees"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "nrc_icon_classifications_nrc_row_id_fkey"
+            columns: ["nrc_row_id"]
+            isOneToOne: false
+            referencedRelation: "nrc_evidence_rows"
             referencedColumns: ["id"]
           },
         ]
@@ -3818,6 +4289,48 @@ export type Database = {
         }
         Relationships: []
       }
+      nrc_nigeria_summary: {
+        Row: {
+          category_coverage_note: string | null
+          created_at: string
+          evidence_required_rows: number | null
+          geopolitical_zone: string | null
+          id: string
+          nigeria_classification_group: string
+          refreshed_at: string | null
+          state: string | null
+          total_rows: number | null
+          updated_at: string
+          verified_rows: number | null
+        }
+        Insert: {
+          category_coverage_note?: string | null
+          created_at?: string
+          evidence_required_rows?: number | null
+          geopolitical_zone?: string | null
+          id?: string
+          nigeria_classification_group: string
+          refreshed_at?: string | null
+          state?: string | null
+          total_rows?: number | null
+          updated_at?: string
+          verified_rows?: number | null
+        }
+        Update: {
+          category_coverage_note?: string | null
+          created_at?: string
+          evidence_required_rows?: number | null
+          geopolitical_zone?: string | null
+          id?: string
+          nigeria_classification_group?: string
+          refreshed_at?: string | null
+          state?: string | null
+          total_rows?: number | null
+          updated_at?: string
+          verified_rows?: number | null
+        }
+        Relationships: []
+      }
       nrc_queue: {
         Row: {
           assigned_by: string | null
@@ -3867,6 +4380,127 @@ export type Database = {
             columns: ["nomination_id"]
             isOneToOne: true
             referencedRelation: "nominations"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      nrc_regional_summary: {
+        Row: {
+          africa_wide_rows: number | null
+          balance_note: string | null
+          created_at: string
+          diaspora_international_rows: number | null
+          evidence_required_rows: number | null
+          id: string
+          nigeria_classified_rows: number | null
+          refreshed_at: string | null
+          region: string
+          total_rows: number | null
+          updated_at: string
+          verified_rows: number | null
+        }
+        Insert: {
+          africa_wide_rows?: number | null
+          balance_note?: string | null
+          created_at?: string
+          diaspora_international_rows?: number | null
+          evidence_required_rows?: number | null
+          id?: string
+          nigeria_classified_rows?: number | null
+          refreshed_at?: string | null
+          region: string
+          total_rows?: number | null
+          updated_at?: string
+          verified_rows?: number | null
+        }
+        Update: {
+          africa_wide_rows?: number | null
+          balance_note?: string | null
+          created_at?: string
+          diaspora_international_rows?: number | null
+          evidence_required_rows?: number | null
+          id?: string
+          nigeria_classified_rows?: number | null
+          refreshed_at?: string | null
+          region?: string
+          total_rows?: number | null
+          updated_at?: string
+          verified_rows?: number | null
+        }
+        Relationships: []
+      }
+      nrc_research_queue: {
+        Row: {
+          assigned_to: string | null
+          category: string | null
+          created_at: string
+          evidence_need: string | null
+          id: string
+          nominee_id: string | null
+          nominee_name: string
+          nrc_row_id: string | null
+          priority: Database["public"]["Enums"]["nrc_research_priority"] | null
+          region: string | null
+          researcher_note: string | null
+          search_query_pack: string | null
+          status: Database["public"]["Enums"]["nrc_research_status"] | null
+          subcategory: string | null
+          updated_at: string
+        }
+        Insert: {
+          assigned_to?: string | null
+          category?: string | null
+          created_at?: string
+          evidence_need?: string | null
+          id?: string
+          nominee_id?: string | null
+          nominee_name: string
+          nrc_row_id?: string | null
+          priority?: Database["public"]["Enums"]["nrc_research_priority"] | null
+          region?: string | null
+          researcher_note?: string | null
+          search_query_pack?: string | null
+          status?: Database["public"]["Enums"]["nrc_research_status"] | null
+          subcategory?: string | null
+          updated_at?: string
+        }
+        Update: {
+          assigned_to?: string | null
+          category?: string | null
+          created_at?: string
+          evidence_need?: string | null
+          id?: string
+          nominee_id?: string | null
+          nominee_name?: string
+          nrc_row_id?: string | null
+          priority?: Database["public"]["Enums"]["nrc_research_priority"] | null
+          region?: string | null
+          researcher_note?: string | null
+          search_query_pack?: string | null
+          status?: Database["public"]["Enums"]["nrc_research_status"] | null
+          subcategory?: string | null
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "nrc_research_queue_nominee_id_fkey"
+            columns: ["nominee_id"]
+            isOneToOne: false
+            referencedRelation: "nominees"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "nrc_research_queue_nominee_id_fkey"
+            columns: ["nominee_id"]
+            isOneToOne: false
+            referencedRelation: "public_nominees"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "nrc_research_queue_nrc_row_id_fkey"
+            columns: ["nrc_row_id"]
+            isOneToOne: false
+            referencedRelation: "nrc_evidence_rows"
             referencedColumns: ["id"]
           },
         ]
@@ -7648,6 +8282,35 @@ export type Database = {
         | "unpublished"
         | "archived"
       notification_status: "PENDING" | "SENT" | "FAILED" | "READ"
+      nrc_classification_level:
+        | "africa_wide"
+        | "nigeria_specific"
+        | "diaspora_international_linked"
+        | "needs_verification"
+      nrc_edi_band:
+        | "insufficient_evidence"
+        | "emerging_evidence"
+        | "verified_contribution"
+        | "strong_evidence"
+        | "platinum_level_candidate"
+        | "pending"
+      nrc_icon_group:
+        | "africans_in_africa"
+        | "africans_in_diaspora"
+        | "friends_of_africa"
+        | "needs_verification"
+      nrc_public_display_status:
+        | "hidden"
+        | "under_nrc_review"
+        | "public_display_ready"
+      nrc_research_priority: "low" | "medium" | "high" | "urgent"
+      nrc_research_status:
+        | "pending"
+        | "in_review"
+        | "evidence_found"
+        | "needs_more_sources"
+        | "ready_for_review"
+        | "public_display_ready"
       nrc_review_decision:
         | "APPROVE"
         | "REJECT"
@@ -7655,6 +8318,14 @@ export type Database = {
         | "RECLASSIFY"
         | "ESCALATE"
       nrc_reviewer_role: "nrc_reviewer" | "nrc_lead" | "nrc_auditor"
+      nrc_verification_status:
+        | "evidence_required"
+        | "under_review"
+        | "verified_contribution"
+        | "needs_category_verification"
+        | "needs_geography_verification"
+        | "insufficient_evidence"
+        | "public_display_ready"
       nrc_workflow_status:
         | "DRAFT"
         | "SUBMITTED_PENDING_ACCEPTANCE"
@@ -7971,6 +8642,40 @@ export const Constants = {
         "archived",
       ],
       notification_status: ["PENDING", "SENT", "FAILED", "READ"],
+      nrc_classification_level: [
+        "africa_wide",
+        "nigeria_specific",
+        "diaspora_international_linked",
+        "needs_verification",
+      ],
+      nrc_edi_band: [
+        "insufficient_evidence",
+        "emerging_evidence",
+        "verified_contribution",
+        "strong_evidence",
+        "platinum_level_candidate",
+        "pending",
+      ],
+      nrc_icon_group: [
+        "africans_in_africa",
+        "africans_in_diaspora",
+        "friends_of_africa",
+        "needs_verification",
+      ],
+      nrc_public_display_status: [
+        "hidden",
+        "under_nrc_review",
+        "public_display_ready",
+      ],
+      nrc_research_priority: ["low", "medium", "high", "urgent"],
+      nrc_research_status: [
+        "pending",
+        "in_review",
+        "evidence_found",
+        "needs_more_sources",
+        "ready_for_review",
+        "public_display_ready",
+      ],
       nrc_review_decision: [
         "APPROVE",
         "REJECT",
@@ -7979,6 +8684,15 @@ export const Constants = {
         "ESCALATE",
       ],
       nrc_reviewer_role: ["nrc_reviewer", "nrc_lead", "nrc_auditor"],
+      nrc_verification_status: [
+        "evidence_required",
+        "under_review",
+        "verified_contribution",
+        "needs_category_verification",
+        "needs_geography_verification",
+        "insufficient_evidence",
+        "public_display_ready",
+      ],
       nrc_workflow_status: [
         "DRAFT",
         "SUBMITTED_PENDING_ACCEPTANCE",
