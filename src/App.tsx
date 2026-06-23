@@ -424,9 +424,9 @@ const App = () => (
                   <Route path="/awards/category/:slug" element={<SlugRedirect to={(s) => `/awards/${s}`} />} />
                   <Route path="/nominees/category/:slug" element={<SlugRedirect to={(s) => `/nominees/${s}`} />} />
 
-                  {/* Region legacy */}
-                  <Route path="/regions" element={<Navigate to="/region" replace />} />
-                  <Route path="/regions/:slug" element={<SlugRedirect to={(s) => `/region/${s}`} />} />
+                  {/* Region legacy — /region is now an alias of canonical /regions */}
+                  <Route path="/region" element={<Navigate to="/regions" replace />} />
+                  <Route path="/region/:slug" element={<SlugRedirect to={(s) => `/regions/${s}`} />} />
                   <Route path="/nominees/region/:slug" element={<SlugRedirect to={(s) => `/nominees/${s}`} />} />
 
 

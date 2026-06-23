@@ -114,12 +114,7 @@ export function NESALandingPage() {
           <AwardTiersSummarySection />
         </LazySection>
 
-        {/* 8. ONE CONTINENT · TEN EDUCATION REGIONS · ONE MISSION (signature) */}
-        <LazySection>
-          <TenRegionsBannerSection />
-        </LazySection>
-
-        {/* 9. EXPLORE AFRICA'S REGIONS */}
+        {/* 8. ONE CONTINENT · TEN EDUCATION REGIONS · ONE MISSION (preview only) */}
         <LazySection>
           <ExploreRegionsSection />
         </LazySection>
