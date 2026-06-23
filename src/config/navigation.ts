@@ -188,6 +188,7 @@ export const MAIN_NAV: NavItem[] = [
       { label: "Press Releases", href: "/press", description: "Official announcements", icon: FileCheck },
       { label: "Awards Gala — 22 Oct 2026", href: "/media/gala", description: "The Blue-Garnet Gala Night", icon: Calendar, badge: "2026" },
       { label: "Buy Gala Ticket", href: "/tickets", description: "Secure your seat", icon: Ticket },
+      { label: "Buy Award Merchandise", href: "/shop", description: "Official NESA-Africa store", icon: ShoppingBag },
     ],
   },
 
@@ -204,7 +205,6 @@ export const MAIN_NAV: NavItem[] = [
       { label: "Meet Our Judges", href: "/judges/directory", description: "Our independent jury", icon: Gavel },
       { label: "Join a Local Chapter", href: "/chapters", description: "Find your regional chapter", icon: MapPin },
       { label: "Donate for Education Impact", href: "/donate", description: "Support our mission", icon: Heart },
-      { label: "Buy Award Merchandise", href: "/shop", description: "Official NESA-Africa store", icon: ShoppingBag },
     ],
   },
 
