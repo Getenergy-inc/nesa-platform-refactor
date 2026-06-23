@@ -842,8 +842,7 @@ export function MainNav() {
         Skip to main content
       </a>
       <header className="fixed top-0 left-0 right-0 z-50 w-full bg-charcoal/95 backdrop-blur-md border-b border-gold/20 overflow-x-clip">
-        {/* LEVEL 1 — Governance / Quick Access Bar */}
-        <GovernanceBar />
+
 
         {/* LEVEL 2 — Primary Navigation */}
         <div className="container flex min-h-16 flex-wrap items-center gap-x-1 gap-y-2 px-3 py-2 sm:min-h-[72px] sm:gap-x-2 sm:px-4 min-[1200px]:h-16 min-[1200px]:flex-nowrap min-[1200px]:py-0 max-w-screen-2xl">
