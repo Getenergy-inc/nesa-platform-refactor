@@ -9,7 +9,6 @@ import {
   Lightbulb,
   Trophy,
   Users,
-  Building2,
   Handshake,
   ArrowRight,
 } from "lucide-react";
