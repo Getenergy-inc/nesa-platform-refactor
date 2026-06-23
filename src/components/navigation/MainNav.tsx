@@ -335,8 +335,22 @@ function MobileNav({ onOpenCVOMessage }: { onOpenCVOMessage: () => void }) {
     setOpen(false);
   };
 
-  const handleTrackedClick = (label: string, href: string) => () => {
-    trackEvent("mobile_nav_item_click", { label, href });
+  const handleTrackedClick = (label: string, href: string, parentLabel?: string) => () => {
+    trackEvent("mobile_nav_item_click", { label, href, parent: parentLabel });
+    if (parentLabel === "About") {
+      trackEvent("about_menu_click", {
+        link_name: label,
+        link_destination: href,
+        device: "mobile",
+        source: location.pathname,
+      });
+      trackEvent("about_route_navigation", {
+        source: location.pathname,
+        destination: href,
+        method: "mobile_accordion",
+        device: "mobile",
+      });
+    }
     setOpen(false);
   };
 
