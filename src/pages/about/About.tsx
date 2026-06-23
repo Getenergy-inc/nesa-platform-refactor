@@ -26,6 +26,7 @@ import continentalReachImage from "@/assets/pillars/continental-reach.jpg";
 import legacyImpactImage from "@/assets/pillars/legacy-impact.jpg";
 import { MiniMusicPlayer } from "@/components/nesa/MiniMusicPlayer";
 import { AboutNESASection } from "@/components/nesa/AboutNESASection";
+import { CVOMessageSection } from "@/components/nesa/CVOMessageSection";
 
 const pillars = [
   {
@@ -401,7 +402,12 @@ export default function About() {
       </section>
 
       {/* About NESA-Africa 2026 — detailed accordion */}
+      {/* Vision Message — CVO Strategic Address (moved from About dropdown) */}
+      <CVOMessageSection />
+
+      {/* About NESA-Africa 2026 — detailed accordion */}
       <AboutNESASection />
+
 
       {/* Final CTA */}
       <section className="bg-gradient-to-b from-charcoal to-charcoal/95 py-20 lg:py-28 border-t border-gold/10">

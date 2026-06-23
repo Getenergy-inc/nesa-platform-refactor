@@ -48,7 +48,7 @@ import { useAuth } from "@/contexts/AuthContext";
 import { MAIN_NAV, MAIN_NAV_CTA, MAIN_NAV_MOBILE_ORDER, MOBILE_NAV, GOVERNANCE_NAV, type NavItem } from "@/config/navigation";
 import { Sparkles, MessageSquare } from "lucide-react";
 import nesaStamp from "@/assets/nesa-stamp.jpeg";
-import { CVOFlashMessage, CVOMessageTrigger } from "@/components/nesa/cvo";
+import { CVOFlashMessage } from "@/components/nesa/cvo";
 import { LanguageSwitcher } from "@/components/i18n";
 import { NavSearch } from "@/components/navigation/NavSearch";
 import { trackEvent } from "@/lib/analytics";
@@ -77,8 +77,10 @@ function DesktopNav({ onOpenCVOMessage }: { onOpenCVOMessage: () => void }) {
                 <NavigationMenuContent>
                   <ul
                     className={cn(
-                      "grid gap-3 p-4 bg-charcoal border border-gold/20",
-                      item.label === "About" || item.label === "Support"
+                      "grid gap-2 p-3 bg-charcoal border border-gold/20",
+                      item.label === "About"
+                        ? "w-[460px] grid-cols-2"
+                        : item.label === "Support"
                         ? "w-[420px]"
                         : item.label === "Engage" || item.label === "Impact Programs" || item.label === "Awards" || item.label === "Media"
                         ? "w-[560px] md:w-[640px] md:grid-cols-2"
@@ -86,15 +88,7 @@ function DesktopNav({ onOpenCVOMessage }: { onOpenCVOMessage: () => void }) {
 
                     )}
                   >
-                    {/* CVO Message Trigger - Only for About menu */}
-                    {item.label === "About" && (
-                      <li className="col-span-full border-b border-gold/10 pb-3 mb-1">
-                        <CVOMessageTrigger
-                          onClick={onOpenCVOMessage}
-                          variant="dropdown"
-                        />
-                      </li>
-                    )}
+
 
                     {item.children.map((child) => (
                       <li key={child.href}>
@@ -311,10 +305,8 @@ function MobileNav({ onOpenCVOMessage }: { onOpenCVOMessage: () => void }) {
     setOpen(false);
   };
 
-  const handleCVOClick = () => {
-    setOpen(false);
-    onOpenCVOMessage();
-  };
+  // CVO Strategic Address is now featured on the /about page, not the navbar.
+
 
   const handleOpenChange = (next: boolean) => {
     if (next) trackEvent("mobile_nav_open", {});
@@ -437,15 +429,8 @@ function MobileNav({ onOpenCVOMessage }: { onOpenCVOMessage: () => void }) {
                       >
 
                         <div className="bg-charcoal-light/30 py-2">
-                          {/* CVO Message for About menu in mobile */}
-                          {item.label === "About" && (
-                            <div className="px-4 py-3 border-b border-gold/10 mb-1">
-                              <CVOMessageTrigger
-                                onClick={handleCVOClick}
-                                variant="dropdown"
-                              />
-                            </div>
-                          )}
+                          {/* CVO Strategic Address moved to the About page */}
+
 
                           {item.children.map((child) => (
                             <Link
