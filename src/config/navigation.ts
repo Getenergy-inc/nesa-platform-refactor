@@ -76,11 +76,16 @@ export interface NavSection {
 // LEVEL 1 — Governance / Quick-Access Bar (thin top bar, desktop)
 // SCEF-style stakeholder strip. Lightweight, no dropdowns.
 // ----------------------------------------------------------------------------
-// Public IA mandates a single 9-item primary nav with no separate governance
-// strip. This array is intentionally empty so legacy consumers no-op; remove
-// once all references are gone.
-export const GOVERNANCE_NAV: NavItem[] = [];
-
+export const GOVERNANCE_NAV: NavItem[] = [
+  { label: "Governance", href: "/about/governance", icon: Shield },
+  { label: "Africa Education Icon", href: "/awards/icon", icon: Star },
+  { label: "Judges", href: "/judges/directory", icon: Gavel },
+  { label: "Volunteers", href: "/volunteers", icon: Heart },
+  { label: "Local Chapters", href: "/chapters", icon: MapPin },
+  { label: "Partners", href: "/partners", icon: Handshake },
+  { label: "Sponsors", href: "/sponsors", icon: Sparkles },
+  { label: "Donate", href: "/donate", icon: Heart },
+];
 
 // ----------------------------------------------------------------------------
 // LEVEL 2 — Primary NESA-Africa Public Navigation
@@ -139,7 +144,22 @@ export const MAIN_NAV: NavItem[] = [
     ],
   },
 
-  // 5. IMPACT PROGRAMS
+  // 5. SPONSORS & PARTNERS
+  {
+    label: "Sponsors & Partners",
+    href: "/partners",
+    icon: Handshake,
+    children: [
+      { label: "Become a Sponsor", href: "/sponsor", description: "CSR & headline sponsorship", icon: Sparkles },
+      { label: "Sponsorship Packages", href: "/sponsorship-packages", description: "Tiers & benefits", icon: Trophy },
+      { label: "Partner With Us", href: "/partners", description: "Institutional partnerships", icon: Handshake },
+      { label: "Media Partners", href: "/partners#media", description: "Editorial & broadcast partners", icon: Tv },
+      { label: "Our Sponsors", href: "/sponsors", description: "Current 2026 sponsors", icon: Star },
+      { label: "Contact Partnerships", href: "/contact#partnerships", description: "Speak to our team", icon: Mail },
+    ],
+  },
+
+  // 6. IMPACT PROGRAMS
   {
     label: "Impact Programs",
     href: "/programs",
@@ -154,7 +174,7 @@ export const MAIN_NAV: NavItem[] = [
     ],
   },
 
-  // 6. MEDIA & EVENTS
+  // 7. MEDIA & EVENTS
   {
     label: "Media & Events",
     href: "/media",
@@ -171,7 +191,7 @@ export const MAIN_NAV: NavItem[] = [
     ],
   },
 
-  // 7. JOIN THE MOVEMENT
+  // 8. JOIN THE MOVEMENT
   {
     label: "Join the Movement",
     href: "/get-involved",
@@ -186,22 +206,6 @@ export const MAIN_NAV: NavItem[] = [
       { label: "Donate for Education Impact", href: "/donate", description: "Support our mission", icon: Heart },
     ],
   },
-
-  // 8. SPONSORS & PARTNERS
-  {
-    label: "Sponsors & Partners",
-    href: "/partners",
-    icon: Handshake,
-    children: [
-      { label: "Become a Sponsor", href: "/sponsor", description: "CSR & headline sponsorship", icon: Sparkles },
-      { label: "Sponsorship Packages", href: "/sponsorship-packages", description: "Tiers & benefits", icon: Trophy },
-      { label: "Partner With Us", href: "/partners", description: "Institutional partnerships", icon: Handshake },
-      { label: "Media Partners", href: "/partners#media", description: "Editorial & broadcast partners", icon: Tv },
-      { label: "Our Sponsors", href: "/sponsors", description: "Current 2026 sponsors", icon: Star },
-      { label: "Contact Partnerships", href: "/contact#partnerships", description: "Speak to our team", icon: Mail },
-    ],
-  },
-
 
   // 9. CONTACT
   {
@@ -252,13 +256,12 @@ export const MAIN_NAV_MOBILE_ORDER: readonly string[] = [
   "About",
   "Awards",
   "Participate",
+  "Sponsors & Partners",
   "Impact Programs",
   "Media & Events",
   "Join the Movement",
-  "Sponsors & Partners",
   "Contact",
 ];
-
 
 
 
