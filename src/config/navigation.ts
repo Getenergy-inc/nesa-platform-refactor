@@ -139,22 +139,7 @@ export const MAIN_NAV: NavItem[] = [
     ],
   },
 
-  // 5. SPONSORS & PARTNERS
-  {
-    label: "Sponsors & Partners",
-    href: "/partners",
-    icon: Handshake,
-    children: [
-      { label: "Become a Sponsor", href: "/sponsor", description: "CSR & headline sponsorship", icon: Sparkles },
-      { label: "Sponsorship Packages", href: "/sponsorship-packages", description: "Tiers & benefits", icon: Trophy },
-      { label: "Partner With Us", href: "/partners", description: "Institutional partnerships", icon: Handshake },
-      { label: "Media Partners", href: "/partners#media", description: "Editorial & broadcast partners", icon: Tv },
-      { label: "Our Sponsors", href: "/sponsors", description: "Current 2026 sponsors", icon: Star },
-      { label: "Contact Partnerships", href: "/contact#partnerships", description: "Speak to our team", icon: Mail },
-    ],
-  },
-
-  // 6. IMPACT PROGRAMS
+  // 5. IMPACT PROGRAMS
   {
     label: "Impact Programs",
     href: "/programs",
@@ -169,7 +154,7 @@ export const MAIN_NAV: NavItem[] = [
     ],
   },
 
-  // 7. MEDIA & EVENTS
+  // 6. MEDIA & EVENTS
   {
     label: "Media & Events",
     href: "/media",
@@ -186,7 +171,7 @@ export const MAIN_NAV: NavItem[] = [
     ],
   },
 
-  // 8. JOIN THE MOVEMENT
+  // 7. JOIN THE MOVEMENT
   {
     label: "Join the Movement",
     href: "/get-involved",
@@ -201,6 +186,22 @@ export const MAIN_NAV: NavItem[] = [
       { label: "Donate for Education Impact", href: "/donate", description: "Support our mission", icon: Heart },
     ],
   },
+
+  // 8. SPONSORS & PARTNERS
+  {
+    label: "Sponsors & Partners",
+    href: "/partners",
+    icon: Handshake,
+    children: [
+      { label: "Become a Sponsor", href: "/sponsor", description: "CSR & headline sponsorship", icon: Sparkles },
+      { label: "Sponsorship Packages", href: "/sponsorship-packages", description: "Tiers & benefits", icon: Trophy },
+      { label: "Partner With Us", href: "/partners", description: "Institutional partnerships", icon: Handshake },
+      { label: "Media Partners", href: "/partners#media", description: "Editorial & broadcast partners", icon: Tv },
+      { label: "Our Sponsors", href: "/sponsors", description: "Current 2026 sponsors", icon: Star },
+      { label: "Contact Partnerships", href: "/contact#partnerships", description: "Speak to our team", icon: Mail },
+    ],
+  },
+
 
   // 9. CONTACT
   {
