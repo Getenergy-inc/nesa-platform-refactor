@@ -13,6 +13,7 @@ import {
   ArrowRight,
 } from "lucide-react";
 import africanSchoolImage from "@/assets/african-school-classroom.jpg";
+import { trackEvent } from "@/lib/analytics";
 
 import { WhyNESAExistsSection } from "@/components/nesa/WhyNESAExistsSection";
 import { AboutChooseJourneySection } from "@/pages/about/AboutChooseJourneySection";
