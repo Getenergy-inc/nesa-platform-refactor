@@ -305,10 +305,8 @@ function MobileNav({ onOpenCVOMessage }: { onOpenCVOMessage: () => void }) {
     setOpen(false);
   };
 
-  const handleCVOClick = () => {
-    setOpen(false);
-    onOpenCVOMessage();
-  };
+  // CVO Strategic Address is now featured on the /about page, not the navbar.
+
 
   const handleOpenChange = (next: boolean) => {
     if (next) trackEvent("mobile_nav_open", {});
