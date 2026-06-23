@@ -1,234 +1,429 @@
-import { Quote, Sparkles, ArrowRight, Target, Globe2, GraduationCap, Users, BookOpen, Lightbulb } from "lucide-react";
+import { motion } from "framer-motion";
+import {
+  Quote,
+  Sparkles,
+  ArrowRight,
+  Award,
+  Eye,
+  Handshake,
+  Coins,
+  Wrench,
+  Crown,
+  ShieldCheck,
+  GraduationCap,
+  Globe2,
+  Heart,
+} from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Link } from "react-router-dom";
 import { Badge } from "@/components/ui/badge";
+import { Link } from "react-router-dom";
 import cvoImage from "@/assets/cvo-santos.png";
 
-const sdg4Goals = [
-  { icon: GraduationCap, label: "Quality Education", description: "Ensure inclusive and equitable quality education" },
-  { icon: Users, label: "Lifelong Learning", description: "Promote lifelong learning opportunities for all" },
-  { icon: BookOpen, label: "Universal Access", description: "Free primary and secondary education by 2030" },
+/* -------------------------------------------------------------------------- */
+/*  Impact Journey — the strategic framework of NESA-Africa                   */
+/* -------------------------------------------------------------------------- */
+
+const impactJourney = [
+  { icon: Award, label: "Recognition", caption: "Celebrate changemakers" },
+  { icon: Eye, label: "Visibility", caption: "Amplify their stories" },
+  { icon: Handshake, label: "Partnerships", caption: "Connect stakeholders" },
+  { icon: Coins, label: "Funding", caption: "Mobilise resources" },
+  { icon: Wrench, label: "Intervention", caption: "Transform schools" },
+  { icon: Crown, label: "Legacy", caption: "Lasting impact" },
 ];
 
-const au2063Aspirations = [
-  { icon: Lightbulb, label: "Knowledge Economy", description: "Well-educated citizens and skills revolution" },
-  { icon: Globe2, label: "Pan-African Unity", description: "United Africa with shared prosperity" },
-  { icon: Target, label: "Africa We Want", description: "Transformed continent by 2063" },
+/* -------------------------------------------------------------------------- */
+/*  Ecosystem — how the four arms work together under SCEF                    */
+/* -------------------------------------------------------------------------- */
+
+const ecosystem = [
+  {
+    name: "NESA-Africa",
+    role: "Recognises excellence across the continent.",
+  },
+  {
+    name: "EduAid-Africa",
+    role: "Scholarships, teacher development, advocacy, access.",
+  },
+  {
+    name: "Rebuild My School Africa",
+    role: "Transforms schools and special-needs institutions.",
+  },
+  {
+    name: "NESA-Africa TV",
+    role: "Amplifies stories and continental conversations.",
+  },
 ];
+
+/* -------------------------------------------------------------------------- */
 
 export function CVOMessageSection() {
   return (
-    <section className="relative py-20 md:py-32 overflow-hidden">
-      {/* Premium gradient background */}
+    <section
+      id="cvo-message"
+      aria-labelledby="cvo-message-heading"
+      className="relative py-20 md:py-28 overflow-hidden"
+    >
+      {/* Premium charcoal gradient backdrop */}
       <div className="absolute inset-0 bg-gradient-to-b from-charcoal via-charcoal-light to-charcoal" />
-      
-      {/* Decorative elements */}
-      <div className="absolute top-0 left-0 w-96 h-96 bg-gold/5 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2" />
-      <div className="absolute bottom-0 right-0 w-96 h-96 bg-gold/5 rounded-full blur-3xl translate-x-1/2 translate-y-1/2" />
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-gradient-radial from-gold/3 to-transparent rounded-full" />
-      
-      {/* SDG 4 & AU 2063 accent lines */}
-      <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-[#C5192D] to-transparent opacity-50" />
-      <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-[#006B3F] to-transparent opacity-50" />
-      
+      <div className="absolute top-0 left-0 w-[28rem] h-[28rem] bg-gold/5 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2" />
+      <div className="absolute bottom-0 right-0 w-[28rem] h-[28rem] bg-gold/5 rounded-full blur-3xl translate-x-1/2 translate-y-1/2" />
+
+      {/* SDG 4 + AU 2063 accent rails */}
+      <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-[#C5192D] to-transparent opacity-60" />
+      <div className="absolute bottom-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-[#006B3F] to-transparent opacity-60" />
+
       <div className="container relative">
-        {/* Section Label */}
-        <div className="flex flex-wrap justify-center gap-3 mb-10">
+        {/* Eyebrow + alignment chips */}
+        <motion.div
+          initial={{ opacity: 0, y: 12 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-80px" }}
+          transition={{ duration: 0.5 }}
+          className="flex flex-wrap justify-center gap-3 mb-10"
+        >
           <div className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-gradient-to-r from-gold/20 via-gold/10 to-gold/20 border border-gold/30 backdrop-blur-sm">
-            <Sparkles className="h-4 w-4 text-gold" />
-            <span className="text-sm font-semibold tracking-wider text-gold uppercase">A Message from Our Visionary</span>
+            <Sparkles className="h-4 w-4 text-gold" aria-hidden="true" />
+            <span className="text-xs sm:text-sm font-semibold tracking-wider text-gold uppercase">
+              A Message from the Chief Visionary Officer
+            </span>
           </div>
+          <Badge variant="outline" className="border-gold/40 text-gold bg-gold/5 px-3 py-1.5">
+            Vision 2035
+          </Badge>
           <Badge variant="outline" className="border-[#C5192D]/50 text-[#C5192D] bg-[#C5192D]/10 px-3 py-1.5">
             SDG 4 Aligned
           </Badge>
           <Badge variant="outline" className="border-[#006B3F]/50 text-[#006B3F] bg-[#006B3F]/10 px-3 py-1.5">
-            AU 2063 Aligned
+            AU Agenda 2063
           </Badge>
-        </div>
+        </motion.div>
 
         <div className="max-w-7xl mx-auto">
-          {/* Main Content Grid */}
-          <div className="grid lg:grid-cols-5 gap-10 lg:gap-16 items-center mb-16">
-            {/* CVO Portrait - Premium Card */}
-            <div className="lg:col-span-2 flex justify-center">
+          {/* Portrait + Message */}
+          <div className="grid lg:grid-cols-5 gap-10 lg:gap-16 items-start mb-16">
+            {/* Portrait card */}
+            <motion.div
+              initial={{ opacity: 0, x: -24 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, margin: "-80px" }}
+              transition={{ duration: 0.6 }}
+              className="lg:col-span-2 flex justify-center lg:sticky lg:top-28"
+            >
               <div className="relative group">
-                {/* Outer glow ring */}
                 <div className="absolute -inset-4 rounded-2xl bg-gradient-to-br from-gold/30 via-gold/10 to-gold/30 blur-xl opacity-60 group-hover:opacity-80 transition-opacity duration-500" />
-                
-                {/* Portrait container */}
                 <div className="relative bg-gradient-to-br from-charcoal-light to-charcoal p-1.5 rounded-2xl border border-gold/30">
                   <div className="relative w-64 h-80 md:w-72 md:h-96 rounded-xl overflow-hidden">
                     <img
                       src={cvoImage}
-                      alt="Babashola-Santos V. Aderibigbe - Chief Visionary Officer"
+                      alt="Engr. (Dr.) Babashola-Santos V. Aderibigbe — Chief Visionary Officer, Santos Creations Educational Foundation"
                       className="w-full h-full object-cover object-top"
+                      loading="lazy"
                     />
-                    {/* Gradient overlay */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-charcoal/90 via-transparent to-transparent" />
-                    
-                    {/* Name card overlay */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-charcoal/95 via-charcoal/20 to-transparent" />
                     <div className="absolute bottom-0 left-0 right-0 p-5 text-center">
-                      <h3 className="font-display text-xl font-bold text-white mb-1">
-                        Babashola-Santos V. Aderibigbe
-                      </h3>
-                      <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-gold/90 text-charcoal text-xs font-bold tracking-wide">
-                        <span>Chief Visionary Officer</span>
-                      </div>
-                      <p className="text-white/60 text-sm mt-2">
-                        Founder, SCEF
+                      <p className="font-display text-lg font-bold text-white leading-tight">
+                        Engr. (Dr.) Babashola-Santos
+                      </p>
+                      <p className="font-display text-lg font-bold text-white leading-tight mb-2">
+                        V. Aderibigbe
+                      </p>
+                      <span className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-gold text-charcoal text-[11px] font-bold tracking-wide">
+                        Chief Visionary Officer
+                      </span>
+                      <p className="text-white/70 text-xs mt-2">
+                        Founder & Steward, SCEF
                       </p>
                     </div>
                   </div>
                 </div>
-                
-                {/* Decorative corner accents */}
+                {/* corner accents */}
                 <div className="absolute -top-2 -left-2 w-6 h-6 border-t-2 border-l-2 border-gold/50 rounded-tl-lg" />
                 <div className="absolute -top-2 -right-2 w-6 h-6 border-t-2 border-r-2 border-gold/50 rounded-tr-lg" />
                 <div className="absolute -bottom-2 -left-2 w-6 h-6 border-b-2 border-l-2 border-gold/50 rounded-bl-lg" />
                 <div className="absolute -bottom-2 -right-2 w-6 h-6 border-b-2 border-r-2 border-gold/50 rounded-br-lg" />
               </div>
-            </div>
+            </motion.div>
 
-            {/* Message Content */}
-            <div className="lg:col-span-3 text-center lg:text-left">
-              <div className="relative">
-                {/* Large decorative quote */}
-                <Quote className="absolute -top-6 -left-4 lg:-left-8 h-16 w-16 text-gold/10" />
-                
-                <blockquote className="relative z-10 text-xl md:text-2xl lg:text-3xl text-white/95 leading-relaxed font-light">
-                  <span className="text-gold font-display font-semibold">"</span>
-                  Welcome to NESA-Africa 2026—a pan-African celebration of{" "}
-                  <span className="text-gold font-medium">educational transformation</span>,{" "}
-                  <span className="text-gold font-medium">social impact</span>, and{" "}
-                  <span className="text-gold font-medium">legacy</span>. Together, aligned with{" "}
-                  <span className="text-[#C5192D] font-medium">SDG 4</span> and{" "}
-                  <span className="text-[#006B3F] font-medium">AU Agenda 2063</span>, we honor 
-                  those who dare to reimagine education and inspire generations across Africa.
-                  <span className="text-gold font-display font-semibold">"</span>
+            {/* Message */}
+            <motion.div
+              initial={{ opacity: 0, x: 24 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, margin: "-80px" }}
+              transition={{ duration: 0.6, delay: 0.1 }}
+              className="lg:col-span-3 text-center lg:text-left"
+            >
+              <h2
+                id="cvo-message-heading"
+                className="font-display text-3xl md:text-4xl lg:text-5xl font-bold text-white leading-tight"
+              >
+                Building Africa's Education{" "}
+                <span className="text-gold">Future Together</span>
+              </h2>
+
+              <p className="mt-4 text-base md:text-lg text-white/70 leading-relaxed">
+                Education remains the greatest force for transforming lives,
+                communities, nations, and the future of our continent.
+              </p>
+
+              {/* Pull-quote */}
+              <div className="relative mt-8 pl-6 lg:pl-8 border-l-2 border-gold/60">
+                <Quote className="absolute -top-3 -left-3 h-6 w-6 text-gold/40 bg-charcoal px-0.5" aria-hidden="true" />
+                <blockquote className="text-lg md:text-xl text-white/95 leading-relaxed font-light italic">
+                  NESA-Africa is more than an award platform — it is a movement
+                  that turns <span className="text-gold not-italic font-medium">recognition</span> into{" "}
+                  <span className="text-gold not-italic font-medium">opportunity</span>, opportunity into{" "}
+                  <span className="text-gold not-italic font-medium">transformation</span>, and transformation into{" "}
+                  <span className="text-gold not-italic font-medium">legacy</span>.
                 </blockquote>
-                
-                <Quote className="absolute -bottom-4 right-0 lg:-right-4 h-12 w-12 text-gold/10 rotate-180" />
               </div>
 
-              {/* Signature line */}
-              <div className="mt-8 pt-6 border-t border-gold/20">
-                <p className="text-white/50 text-sm mb-4 italic">
-                  Championing Africa's educational renaissance since 2020 — Aligned with global and continental development agendas
+              {/* Why NESA-Africa was created */}
+              <div className="mt-8 space-y-4 text-white/80 leading-relaxed">
+                <p>
+                  For too long, Africa's educators, innovators, institutions,
+                  advocates, philanthropists, policymakers and community leaders
+                  have advanced education with little recognition beyond their
+                  immediate circles. Yet these are the people shaping the Africa
+                  we all desire — one learner, one classroom, one school at a time.
+                </p>
+                <p>
+                  NESA-Africa was created to{" "}
+                  <span className="text-white font-medium">
+                    identify, celebrate, document, amplify and support
+                  </span>{" "}
+                  those changemakers. But recognition alone is not enough.
+                  That is why NESA-Africa was designed as part of a larger
+                  ecosystem under the stewardship of the{" "}
+                  <span className="text-gold font-medium">
+                    Santos Creations Educational Foundation (SCEF)
+                  </span>{" "}
+                  — connecting recognition to partnerships, partnerships to
+                  resources, and resources to measurable educational impact.
                 </p>
               </div>
 
-              {/* Action buttons */}
-              <div className="flex flex-col sm:flex-row items-center lg:items-start gap-4 mt-6">
-                <Button
-                  asChild
-                  className="bg-gold text-charcoal hover:bg-gold-light font-semibold px-6 gap-2 group"
-                >
-                  <Link to="/about/vision-2035">
-                    Explore Vision 2035
-                    <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
-                  </Link>
-                </Button>
-                <Button
-                  asChild
-                  variant="outline"
-                  className="border-gold/40 text-gold hover:bg-gold/10 px-6"
-                >
-                  <Link to="/about/scef">
-                    About SCEF
-                  </Link>
-                </Button>
+              {/* Signature */}
+              <div className="mt-8 pt-6 border-t border-gold/20 text-left">
+                <p className="font-display text-white text-base font-semibold">
+                  Engr. (Dr.) Babashola-Santos Vincent Aderibigbe
+                </p>
+                <p className="text-white/60 text-sm">B.Eng., MBA, CMC</p>
+                <p className="text-gold text-sm mt-1">
+                  Chief Visionary Officer — Santos Creations Educational Foundation
+                </p>
+                <p className="text-white/50 text-xs mt-2 italic">
+                  Steward of NESA-Africa • EduAid-Africa • Rebuild My School Africa
+                </p>
+                <p className="text-gold/70 text-xs mt-1 italic">
+                  "Advocating &amp; Achieving Education For All In Africa"
+                </p>
               </div>
-            </div>
+            </motion.div>
           </div>
 
-          {/* SDG 4 & AU 2063 Alignment Cards */}
-          <div className="grid md:grid-cols-2 gap-8 mt-16">
-            {/* SDG 4 Card */}
-            <div className="relative group">
-              <div className="absolute inset-0 bg-gradient-to-br from-[#C5192D]/20 to-transparent rounded-2xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-              <div className="relative bg-gradient-to-br from-charcoal-light/80 to-charcoal/80 backdrop-blur-sm rounded-2xl border border-[#C5192D]/30 p-6 md:p-8">
-                <div className="flex items-center gap-4 mb-6">
-                  <div className="w-16 h-16 rounded-xl bg-[#C5192D] flex items-center justify-center">
-                    <GraduationCap className="h-8 w-8 text-white" />
-                  </div>
-                  <div>
-                    <h3 className="font-display text-xl font-bold text-white">SDG 4</h3>
-                    <p className="text-[#C5192D] text-sm font-medium">Quality Education</p>
-                  </div>
-                </div>
-                <p className="text-white/70 text-sm mb-6 leading-relaxed">
-                  NESA-Africa is committed to the United Nations Sustainable Development Goal 4, 
-                  ensuring inclusive and equitable quality education and promoting lifelong learning opportunities for all Africans.
-                </p>
-                <div className="space-y-4">
-                  {sdg4Goals.map((goal, index) => (
-                    <div key={index} className="flex items-start gap-3">
-                      <div className="w-8 h-8 rounded-lg bg-[#C5192D]/20 flex items-center justify-center flex-shrink-0">
-                        <goal.icon className="h-4 w-4 text-[#C5192D]" />
-                      </div>
-                      <div>
-                        <h4 className="text-white font-medium text-sm">{goal.label}</h4>
-                        <p className="text-white/50 text-xs">{goal.description}</p>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-                <Button
-                  asChild
-                  variant="outline"
-                  size="sm"
-                  className="mt-6 border-[#C5192D]/40 text-[#C5192D] hover:bg-[#C5192D]/10"
-                >
-                  <a href="https://sdgs.un.org/goals/goal4" target="_blank" rel="noopener noreferrer">
-                    Learn about SDG 4
-                    <ArrowRight className="h-3 w-3 ml-2" />
-                  </a>
-                </Button>
-              </div>
+          {/* ------------------------------------------------------------- */}
+          {/*  The Impact Journey                                           */}
+          {/* ------------------------------------------------------------- */}
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-80px" }}
+            transition={{ duration: 0.6 }}
+            className="mt-4 mb-16"
+            aria-labelledby="impact-journey-heading"
+          >
+            <div className="text-center mb-8">
+              <p className="text-[11px] uppercase tracking-[0.2em] text-gold/70 font-semibold">
+                The NESA-Africa Framework
+              </p>
+              <h3
+                id="impact-journey-heading"
+                className="font-display text-2xl md:text-3xl text-white mt-2"
+              >
+                From Recognition to Legacy
+              </h3>
+              <p className="text-white/60 text-sm md:text-base mt-2 max-w-2xl mx-auto">
+                Every nomination flows through six stages — turning visibility
+                into resources, and resources into measurable change.
+              </p>
             </div>
 
-            {/* AU 2063 Card */}
-            <div className="relative group">
-              <div className="absolute inset-0 bg-gradient-to-br from-[#006B3F]/20 to-transparent rounded-2xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-              <div className="relative bg-gradient-to-br from-charcoal-light/80 to-charcoal/80 backdrop-blur-sm rounded-2xl border border-[#006B3F]/30 p-6 md:p-8">
-                <div className="flex items-center gap-4 mb-6">
-                  <div className="w-16 h-16 rounded-xl bg-[#006B3F] flex items-center justify-center">
-                    <Globe2 className="h-8 w-8 text-white" />
-                  </div>
-                  <div>
-                    <h3 className="font-display text-xl font-bold text-white">AU Agenda 2063</h3>
-                    <p className="text-[#006B3F] text-sm font-medium">The Africa We Want</p>
-                  </div>
-                </div>
-                <p className="text-white/70 text-sm mb-6 leading-relaxed">
-                  Aligned with the African Union's Agenda 2063, we champion a prosperous Africa based on inclusive growth 
-                  and sustainable development, with well-educated citizens driving the continent's transformation.
-                </p>
-                <div className="space-y-4">
-                  {au2063Aspirations.map((aspiration, index) => (
-                    <div key={index} className="flex items-start gap-3">
-                      <div className="w-8 h-8 rounded-lg bg-[#006B3F]/20 flex items-center justify-center flex-shrink-0">
-                        <aspiration.icon className="h-4 w-4 text-[#006B3F]" />
-                      </div>
-                      <div>
-                        <h4 className="text-white font-medium text-sm">{aspiration.label}</h4>
-                        <p className="text-white/50 text-xs">{aspiration.description}</p>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-                <Button
-                  asChild
-                  variant="outline"
-                  size="sm"
-                  className="mt-6 border-[#006B3F]/40 text-[#006B3F] hover:bg-[#006B3F]/10"
+            <ol
+              className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 md:gap-4"
+              aria-label="NESA-Africa impact journey: Recognition, Visibility, Partnerships, Funding, Intervention, Legacy"
+            >
+              {impactJourney.map((step, i) => (
+                <motion.li
+                  key={step.label}
+                  initial={{ opacity: 0, y: 16 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.4, delay: i * 0.08 }}
+                  className="relative group"
                 >
-                  <a href="https://au.int/en/agenda2063/overview" target="_blank" rel="noopener noreferrer">
-                    Learn about AU 2063
-                    <ArrowRight className="h-3 w-3 ml-2" />
-                  </a>
-                </Button>
+                  <div className="relative h-full rounded-xl border border-gold/20 bg-gradient-to-br from-charcoal-light/70 to-charcoal/70 backdrop-blur-sm p-4 text-center transition-all duration-300 group-hover:border-gold/50 group-hover:-translate-y-1">
+                    <div className="mx-auto w-10 h-10 rounded-lg bg-gold/15 flex items-center justify-center mb-2">
+                      <step.icon className="h-5 w-5 text-gold" aria-hidden="true" />
+                    </div>
+                    <p className="text-[10px] text-gold/70 font-semibold tracking-wider">
+                      STEP {i + 1}
+                    </p>
+                    <p className="font-display text-white font-semibold text-sm md:text-base mt-1">
+                      {step.label}
+                    </p>
+                    <p className="text-white/55 text-xs mt-1 leading-snug">
+                      {step.caption}
+                    </p>
+                  </div>
+                  {/* connector arrow (desktop only, not on last) */}
+                  {i < impactJourney.length - 1 && (
+                    <ArrowRight
+                      aria-hidden="true"
+                      className="hidden lg:block absolute top-1/2 -right-2.5 -translate-y-1/2 h-4 w-4 text-gold/40"
+                    />
+                  )}
+                </motion.li>
+              ))}
+            </ol>
+          </motion.div>
+
+          {/* ------------------------------------------------------------- */}
+          {/*  Ecosystem grid                                               */}
+          {/* ------------------------------------------------------------- */}
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-80px" }}
+            transition={{ duration: 0.6 }}
+            className="mb-16"
+            aria-labelledby="ecosystem-heading"
+          >
+            <div className="text-center mb-8">
+              <p className="text-[11px] uppercase tracking-[0.2em] text-gold/70 font-semibold">
+                One Stewardship · Four Arms
+              </p>
+              <h3
+                id="ecosystem-heading"
+                className="font-display text-2xl md:text-3xl text-white mt-2"
+              >
+                The SCEF Ecosystem
+              </h3>
+            </div>
+
+            <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+              {ecosystem.map((arm) => (
+                <div
+                  key={arm.name}
+                  className="rounded-xl border border-gold/20 bg-charcoal-light/40 backdrop-blur-sm p-5 hover:border-gold/50 transition-colors"
+                >
+                  <p className="font-display text-gold text-base font-semibold">
+                    {arm.name}
+                  </p>
+                  <p className="text-white/70 text-sm mt-2 leading-relaxed">
+                    {arm.role}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </motion.div>
+
+          {/* ------------------------------------------------------------- */}
+          {/*  Continental Vision strip                                     */}
+          {/* ------------------------------------------------------------- */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true, margin: "-80px" }}
+            transition={{ duration: 0.6 }}
+            className="relative overflow-hidden rounded-2xl border border-gold/30 bg-gradient-to-r from-charcoal-light via-charcoal to-charcoal-light p-6 md:p-10 mb-16"
+          >
+            <div className="absolute -top-10 -right-10 w-60 h-60 bg-gold/10 rounded-full blur-3xl" />
+            <div className="relative grid md:grid-cols-3 gap-6 text-center">
+              <div>
+                <Globe2 className="h-7 w-7 text-gold mx-auto mb-2" aria-hidden="true" />
+                <p className="font-display text-2xl text-white font-bold">One Continent</p>
+                <p className="text-white/60 text-sm mt-1">
+                  Africa, its diaspora, and friends of Africa
+                </p>
               </div>
+              <div>
+                <Sparkles className="h-7 w-7 text-gold mx-auto mb-2" aria-hidden="true" />
+                <p className="font-display text-2xl text-white font-bold">
+                  Ten Education Regions
+                </p>
+                <p className="text-white/60 text-sm mt-1">
+                  A pan-African map of changemakers
+                </p>
+              </div>
+              <div>
+                <GraduationCap className="h-7 w-7 text-gold mx-auto mb-2" aria-hidden="true" />
+                <p className="font-display text-2xl text-white font-bold">One Mission</p>
+                <p className="text-white/60 text-sm mt-1">
+                  Building Africa's education future
+                </p>
+              </div>
+            </div>
+          </motion.div>
+
+          {/* ------------------------------------------------------------- */}
+          {/*  Trust strip                                                  */}
+          {/* ------------------------------------------------------------- */}
+          <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-3 mb-10 text-xs sm:text-sm text-white/60">
+            <span className="inline-flex items-center gap-2">
+              <ShieldCheck className="h-4 w-4 text-gold" aria-hidden="true" />
+              Governance &amp; Integrity Framework
+            </span>
+            <span className="hidden sm:inline text-white/20">•</span>
+            <span className="inline-flex items-center gap-2">
+              <Heart className="h-4 w-4 text-gold" aria-hidden="true" />
+              Education for All
+            </span>
+            <span className="hidden sm:inline text-white/20">•</span>
+            <span className="inline-flex items-center gap-2">
+              <GraduationCap className="h-4 w-4 text-gold" aria-hidden="true" />
+              SDG 4 &amp; AU 2063 Aligned
+            </span>
+          </div>
+
+          {/* ------------------------------------------------------------- */}
+          {/*  Call to action — three primary actions only                  */}
+          {/* ------------------------------------------------------------- */}
+          <div className="text-center">
+            <h3 className="font-display text-2xl md:text-3xl text-white">
+              Be part of the movement
+            </h3>
+            <p className="text-white/60 text-sm md:text-base mt-2 max-w-xl mx-auto">
+              Nominate. Sponsor. Join. Three ways to help turn recognition into
+              real educational impact across Africa.
+            </p>
+            <div className="mt-6 flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-3">
+              <Button
+                asChild
+                size="lg"
+                className="bg-gold text-charcoal hover:bg-gold-light font-semibold gap-2 group"
+              >
+                <Link to="/nominate">
+                  Nominate for 2026
+                  <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
+                </Link>
+              </Button>
+              <Button
+                asChild
+                size="lg"
+                variant="outline"
+                className="border-gold/50 text-gold hover:bg-gold/10 font-semibold"
+              >
+                <Link to="/sponsor">Become a Sponsor</Link>
+              </Button>
+              <Button
+                asChild
+                size="lg"
+                variant="ghost"
+                className="text-white hover:text-gold hover:bg-gold/10 font-semibold"
+              >
+                <Link to="/get-involved">Join the Movement</Link>
+              </Button>
             </div>
           </div>
         </div>
@@ -236,3 +431,5 @@ export function CVOMessageSection() {
     </section>
   );
 }
+
+export default CVOMessageSection;
