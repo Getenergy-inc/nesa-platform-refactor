@@ -38,21 +38,18 @@ import { BackToTopButton } from "@/components/ui/back-to-top";
 import { FloatingFAQButton } from "@/components/nesa/PageFAQ";
 import { MobileStickyNominateCTA } from "@/components/nesa/MobileStickyNominateCTA";
 
-// Lazy below-fold sections
+// Lazy below-fold sections — strict 14-section homepage IA
 const HomepageGalleryTeaser = lazy(() => import("@/components/gallery/HomepageGalleryTeaser").then(m => ({ default: m.HomepageGalleryTeaser })));
 const WhyNESAExistsSection = lazy(() => import("@/components/nesa/WhyNESAExistsSection").then(m => ({ default: m.WhyNESAExistsSection })));
-const VisionMissionObjectivesSection = lazy(() => import("@/components/nesa/VisionMissionObjectivesSection").then(m => ({ default: m.VisionMissionObjectivesSection })));
 const WhatMakesNESADifferentSection = lazy(() => import("@/components/nesa/WhatMakesNESADifferentSection").then(m => ({ default: m.WhatMakesNESADifferentSection })));
 const AwardTiersSummarySection = lazy(() => import("@/components/nesa/AwardTiersSummarySection").then(m => ({ default: m.AwardTiersSummarySection })));
 const TenRegionsBannerSection = lazy(() => import("@/components/nesa/InteractiveAfricaMap").then(m => ({ default: m.InteractiveAfricaMap })));
-const ExploreRegionsSection = lazy(() => import("@/components/nesa/ExploreRegionsSection").then(m => ({ default: m.ExploreRegionsSection })));
 const PoweredByVolunteersSection = lazy(() => import("@/components/nesa/PoweredByVolunteersSection").then(m => ({ default: m.PoweredByVolunteersSection })));
-const EndorsedBySection = lazy(() => import("@/components/nesa/EndorsedBySection").then(m => ({ default: m.EndorsedBySection })));
 const ImpactProgramsSection = lazy(() => import("@/components/nesa/ImpactProgramsSection").then(m => ({ default: m.ImpactProgramsSection })));
 const SponsorsSection = lazy(() => import("@/components/nesa/SponsorsSection").then(m => ({ default: m.SponsorsSection })));
-const GovernanceFirewallSection = lazy(() => import("@/components/nesa/GovernanceFirewallSection").then(m => ({ default: m.GovernanceFirewallSection })));
 const Vision2035RoadmapSection = lazy(() => import("@/components/nesa/Vision2035RoadmapSection").then(m => ({ default: m.Vision2035RoadmapSection })));
 const FinalCTASection = lazy(() => import("@/components/nesa/FinalCTASection").then(m => ({ default: m.FinalCTASection })));
+
 
 export function NESALandingPage() {
   const { t } = useTranslation("pages");
@@ -99,65 +96,46 @@ export function NESALandingPage() {
           <WhyNESAExistsSection />
         </LazySection>
 
-        {/* 5. VISION, MISSION & STRATEGIC OBJECTIVES */}
-        <LazySection>
-          <VisionMissionObjectivesSection />
-        </LazySection>
-
-        {/* 6. WHAT MAKES NESA-AFRICA DIFFERENT */}
+        {/* 5. WHAT MAKES NESA-AFRICA DIFFERENT */}
         <LazySection>
           <WhatMakesNESADifferentSection />
         </LazySection>
 
-        {/* 7. RECOGNITION FRAMEWORK — 4 tiers · 18 categories · 96 subs */}
+        {/* 6. RECOGNITION FRAMEWORK — 4 tiers · 18 categories · 96 pathways */}
         <LazySection>
           <AwardTiersSummarySection />
         </LazySection>
 
-        {/* 8. ONE CONTINENT · TEN EDUCATION REGIONS · ONE MISSION (signature) */}
+        {/* 7. ONE CONTINENT · TEN EDUCATION REGIONS · ONE MISSION */}
         <LazySection>
           <TenRegionsBannerSection />
         </LazySection>
 
-        {/* 9. EXPLORE AFRICA'S REGIONS */}
-        <LazySection>
-          <ExploreRegionsSection />
-        </LazySection>
-
-        {/* 10. PEOPLE BEHIND THE MOVEMENT — volunteers */}
+        {/* 8. THE PEOPLE BEHIND THE MOVEMENT — volunteers */}
         <LazySection>
           <PoweredByVolunteersSection />
         </LazySection>
 
-        {/* 11. EDUCATION STAKEHOLDER ENDORSEMENTS */}
-        <LazySection>
-          <EndorsedBySection />
-        </LazySection>
-
-        {/* 12–14. REBUILD MY SCHOOL · EDUAID-AFRICA · NESA-AFRICA TV (combined) */}
+        {/* 9–11. REBUILD MY SCHOOL · EDUAID-AFRICA · NESA-AFRICA TV (previews) */}
         <LazySection>
           <ImpactProgramsSection />
         </LazySection>
 
-        {/* 15. SPONSORS & PARTNERS */}
+        {/* 12. SPONSORS & PARTNERS (preview) */}
         <LazySection>
           <SponsorsSection />
         </LazySection>
 
-        {/* 16. GOVERNANCE & INTEGRITY FIREWALL */}
-        <LazySection>
-          <GovernanceFirewallSection />
-        </LazySection>
-
-        {/* 17. VISION 2035 */}
+        {/* 13. VISION 2035 (preview) */}
         <LazySection>
           <Vision2035RoadmapSection />
         </LazySection>
 
-        {/* 18. FINAL CTA */}
+        {/* 14. FINAL CTA — Nominate · Become a Sponsor · Join the Movement */}
         <LazySection>
           <FinalCTASection />
         </LazySection>
+
 
         <NESAFooter />
         <BottomPageNav />
