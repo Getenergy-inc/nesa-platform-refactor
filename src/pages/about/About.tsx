@@ -96,7 +96,17 @@ export default function About() {
                   size="lg"
                   className="bg-gold hover:bg-gold-dark text-charcoal font-semibold rounded-full px-8"
                 >
-                  <a href="#choose-journey-heading">
+                  <a
+                    href="#choose-journey-heading"
+                    onClick={() =>
+                      trackEvent("about_cta_click", {
+                        section: "hero",
+                        cta_label: "Explore NESA-Africa",
+                        destination: "#choose-journey-heading",
+                        page: "/about",
+                      })
+                    }
+                  >
                     <ArrowRight className="mr-2 h-5 w-5" />
                     Explore NESA-Africa
                   </a>
