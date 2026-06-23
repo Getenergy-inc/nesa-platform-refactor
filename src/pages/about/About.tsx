@@ -1,153 +1,64 @@
 import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
-import { useSeason } from "@/contexts/SeasonContext";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { motion } from "framer-motion";
 import {
   Award,
-  BookOpen,
   Globe,
-  Heart,
-  Shield,
-  Target,
+  GraduationCap,
+  Lightbulb,
   Trophy,
   Users,
-  ChevronRight,
-  Sparkles,
-  GraduationCap,
   Building2,
-  Lightbulb,
+  Handshake,
+  ArrowRight,
 } from "lucide-react";
 import africanSchoolImage from "@/assets/african-school-classroom.jpg";
-import recognitionImage from "@/assets/pillars/recognition.jpg";
-import accountabilityImage from "@/assets/pillars/accountability.jpg";
-import continentalReachImage from "@/assets/pillars/continental-reach.jpg";
-import legacyImpactImage from "@/assets/pillars/legacy-impact.jpg";
-import { MiniMusicPlayer } from "@/components/nesa/MiniMusicPlayer";
-import { AboutNESASection } from "@/components/nesa/AboutNESASection";
+
+import { WhyNESAExistsSection } from "@/components/nesa/WhyNESAExistsSection";
+import { AboutChooseJourneySection } from "@/pages/about/AboutChooseJourneySection";
+import { TenRegionsBannerSection } from "@/components/nesa/TenRegionsBannerSection";
+import { VisionMissionObjectivesSection } from "@/components/nesa/VisionMissionObjectivesSection";
+import { AwardTiersSummarySection } from "@/components/nesa/AwardTiersSummarySection";
+import { AboutSCEFEcosystemSection } from "@/pages/about/AboutSCEFEcosystemSection";
 import { CVOMessageSection } from "@/components/nesa/CVOMessageSection";
+import { GovernanceFirewallSection } from "@/components/nesa/GovernanceFirewallSection";
+import { ImpactProgramsSection } from "@/components/nesa/ImpactProgramsSection";
+import { EndorsedBySection } from "@/components/nesa/EndorsedBySection";
+import { PageFAQSection } from "@/components/nesa/PageFAQ";
 
-const pillars = [
-  {
-    icon: Trophy,
-    title: "Recognition",
-    description: "Celebrating Africa's education champions through merit-based awards across 17 categories.",
-    gradient: "from-gold/20 to-gold/5",
-    image: recognitionImage,
-  },
-  {
-    icon: Shield,
-    title: "Accountability",
-    description: "Governance-grade firewalls ensure sponsor independence and voting integrity.",
-    gradient: "from-blue-500/20 to-blue-500/5",
-    image: accountabilityImage,
-  },
-  {
-    icon: Globe,
-    title: "Continental Reach",
-    description: "Region-first approach covering all 5 African regions, the African Diaspora, and Friends of Africa.",
-    gradient: "from-emerald-500/20 to-emerald-500/5",
-    image: continentalReachImage,
-  },
-  {
-    icon: Heart,
-    title: "Legacy Impact",
-    description: "Driving Education for All through visibility, validation, and Rebuild My School Africa.",
-    gradient: "from-rose-500/20 to-rose-500/5",
-    image: legacyImpactImage,
-  },
-];
-
-const impactStats = [
-  { value: "5+2", label: "Regions + Diaspora + Friends", icon: Globe },
-  { value: "27", label: "Expert Judges", icon: Building2 },
-  { value: "17", label: "Award Categories", icon: Award },
+const HERO_STATS = [
   { value: "20", label: "Years of Vision (2006–2026)", icon: Lightbulb },
+  { value: "10", label: "Education Regions", icon: Globe },
+  { value: "27+", label: "Expert Judges", icon: Users },
+  { value: "18", label: "Categories", icon: Award },
+  { value: "96", label: "Recognition Pathways", icon: Trophy },
 ];
-
-const awardTiers = [
-  {
-    title: "Blue Garnet Award",
-    subtitle: "Competitive Excellence",
-    description: "The pinnacle competitive recognition — 40% Public voting + 60% Jury assessment. Top 3 finalists compete for Africa's highest education honour.",
-    color: "from-blue-500 to-indigo-600",
-    textColor: "text-blue-400",
-    borderColor: "border-blue-500/30",
-  },
-  {
-    title: "Platinum Certificate",
-    subtitle: "Institutional Leadership",
-    description: "Recognition for institutional and governance contributions to education. NRC verified, non-competitive, valid for 1 year.",
-    color: "from-slate-300 to-slate-400",
-    textColor: "text-slate-300",
-    borderColor: "border-slate-400/30",
-  },
-  {
-    title: "Influencers Education Impact Award",
-    subtitle: "2026 Cultural Impact Edition",
-    description: "Cultural and influence impact recognition for Sports, Music, and Social Media education advocacy. Editorially selected.",
-    color: "from-yellow-400 to-amber-500",
-    textColor: "text-yellow-400",
-    borderColor: "border-yellow-400/30",
-  },
-  {
-    title: "Africa Education Icon",
-    subtitle: "Lifetime Achievement (2006–2026)",
-    description: "Continental honour recognising transformational leaders with 10+ years of sustained educational impact. Jury selection only.",
-    color: "from-purple-500 to-purple-700",
-    textColor: "text-purple-400",
-    borderColor: "border-purple-500/30",
-  },
-];
-
-const quickLinks = [
-  { label: "Vision 2035", href: "/about/vision-2035", icon: Target, description: "Our 15-year strategic roadmap" },
-  { label: "Governance & Firewalls", href: "/about/governance", icon: Shield, description: "Integrity systems & policies" },
-  { label: "Programme Timeline", href: "/about/timeline", icon: BookOpen, description: "Full awards cycle schedule" },
-  { label: "SCEF Foundation", href: "/about/scef", icon: Users, description: "Our founding organization" },
-];
-
-const containerVariants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: { staggerChildren: 0.1 },
-  },
-};
-
-const itemVariants = {
-  hidden: { opacity: 0, y: 20 },
-  visible: { opacity: 1, y: 0 },
-};
 
 export default function About() {
-  const { currentEdition } = useSeason();
-
   return (
     <>
       <Helmet>
-        <title>About | New Education Standard Award Africa (NESA-Africa) 2026 — The African Blue-Garnet Awards for Education</title>
+        <title>About NESA-Africa | The African Blue-Garnet Awards for Education</title>
         <meta
           name="description"
-          content="New Education Standard Award Africa (NESA-Africa) is a continental education recognition and impact platform honouring Africa's changemakers since 2006. Motto: &quot;The African Blue-Garnet Awards for Education.&quot;"
+          content="NESA-Africa is a continental education recognition and impact platform honouring Africa's changemakers across 10 regions, the diaspora, and Friends of Africa. More than awards — a Trust Gateway for the future of African education."
         />
       </Helmet>
 
-      {/* Hero Section with Image */}
+      {/* ─── 1. HERO ─────────────────────────────────────── */}
       <section className="relative min-h-[80vh] flex items-center overflow-hidden">
-        {/* Background Image */}
         <div className="absolute inset-0">
           <img
             src={africanSchoolImage}
-            alt="African school classroom"
+            alt="African students learning in a classroom"
             className="w-full h-full object-cover"
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-charcoal via-charcoal/90 to-charcoal/70" />
+          <div className="absolute inset-0 bg-gradient-to-r from-charcoal via-charcoal/90 to-charcoal/60" />
           <div className="absolute inset-0 bg-gradient-to-t from-charcoal via-transparent to-charcoal/50" />
         </div>
 
-      <div className="container relative z-10 mx-auto px-4 py-20 lg:py-32">
+        <div className="container relative z-10 mx-auto px-4 py-20 lg:py-28">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <motion.div
               initial={{ opacity: 0, x: -30 }}
@@ -156,61 +67,67 @@ export default function About() {
             >
               <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gold/10 border border-gold/30 mb-6">
                 <GraduationCap className="h-4 w-4 text-gold" />
-                <span className="text-sm font-medium text-gold">Since 2006 • Vision 2035</span>
+                <span className="text-sm font-medium text-gold">
+                  Since 2006 · Vision 2035
+                </span>
               </div>
 
               <h1 className="mb-3 font-display text-4xl font-bold text-ivory md:text-5xl lg:text-6xl leading-tight">
-                New Education Standard Award <span className="text-gold">Africa</span>
+                New Education Standard Award{" "}
+                <span className="text-gold">Africa</span>
               </h1>
-              <p className="mb-3 font-display text-2xl md:text-3xl font-semibold text-ivory/90">
-                (NESA-Africa)
-              </p>
               <p className="mb-6 text-lg md:text-xl italic text-gold/90">
-                “The African Blue-Garnet Awards for Education”
+                The African Blue-Garnet Awards for Education
               </p>
 
               <p className="mb-4 text-xl text-ivory/90 font-medium">
-                More than awards. A continental education recognition and impact platform.
+                More than awards. A continental education recognition and impact
+                platform.
               </p>
 
-              <p className="mb-8 text-lg text-ivory/80 leading-relaxed max-w-xl">
-                New Education Standard Award Africa (NESA-Africa) celebrates, documents, amplifies and supports
-                education changemakers across Africa and the diaspora — connecting recognition, storytelling,
-                partnerships and measurable social impact through <span className="text-gold">EduAid-Africa</span>,
-                NESA-Africa TV, and Rebuild My School Africa.
+              <p className="mb-8 text-base md:text-lg text-ivory/75 leading-relaxed max-w-xl">
+                NESA-Africa celebrates, documents, amplifies, and supports
+                education changemakers across Africa, the diaspora, and Friends
+                of Africa communities.
               </p>
-              
+
               <div className="flex flex-wrap gap-4">
-                <Button asChild size="lg" className="bg-gold hover:bg-gold-dark text-charcoal font-semibold rounded-full px-8">
-                  <Link to="/categories">
-                    <Award className="mr-2 h-5 w-5" />
-                    Explore Categories
-                  </Link>
-                </Button>
-                <Button asChild size="lg" variant="outline" className="border-gold/30 text-gold hover:bg-gold/10 rounded-full px-8">
-                  <Link to="/nominate">
-                    <GraduationCap className="mr-2 h-5 w-5" />
-                    Nominate Now
-                  </Link>
+                <Button
+                  asChild
+                  size="lg"
+                  className="bg-gold hover:bg-gold-dark text-charcoal font-semibold rounded-full px-8"
+                >
+                  <a href="#choose-journey-heading">
+                    <ArrowRight className="mr-2 h-5 w-5" />
+                    Explore NESA-Africa
+                  </a>
                 </Button>
               </div>
             </motion.div>
 
-            {/* Impact Stats Floating Card */}
             <motion.div
               initial={{ opacity: 0, x: 30 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
               className="hidden lg:block"
             >
-              <div className="bg-charcoal/80 backdrop-blur-xl rounded-3xl border border-gold/10 p-8 shadow-2xl">
-                <h3 className="text-gold font-display text-xl font-semibold mb-6 text-center">Our Reach</h3>
-                <div className="grid grid-cols-2 gap-6">
-                  {impactStats.map((stat) => (
-                    <div key={stat.label} className="text-center p-4 rounded-xl bg-white/5">
-                      <stat.icon className="h-6 w-6 text-gold mx-auto mb-2" />
-                      <p className="text-3xl font-bold text-ivory">{stat.value}</p>
-                      <p className="text-sm text-ivory/70">{stat.label}</p>
+              <div className="bg-charcoal/80 backdrop-blur-xl rounded-3xl border border-gold/15 p-8 shadow-2xl">
+                <h2 className="text-gold font-display text-xl font-semibold mb-6 text-center">
+                  Our Reach
+                </h2>
+                <div className="grid grid-cols-2 gap-4">
+                  {HERO_STATS.map((stat) => (
+                    <div
+                      key={stat.label}
+                      className="text-center p-4 rounded-xl bg-white/5 border border-white/5"
+                    >
+                      <stat.icon className="h-5 w-5 text-gold mx-auto mb-2" />
+                      <p className="text-2xl font-bold text-ivory">
+                        {stat.value}
+                      </p>
+                      <p className="text-xs text-ivory/70 leading-tight mt-1">
+                        {stat.label}
+                      </p>
                     </div>
                   ))}
                 </div>
@@ -220,196 +137,58 @@ export default function About() {
         </div>
       </section>
 
-      {/* Mobile Stats Strip */}
+      {/* Mobile stats strip */}
       <section className="lg:hidden bg-charcoal border-y border-gold/10 py-6">
         <div className="container mx-auto px-4">
-          <div className="grid grid-cols-4 gap-4">
-            {impactStats.map((stat) => (
+          <div className="grid grid-cols-5 gap-2">
+            {HERO_STATS.map((stat) => (
               <div key={stat.label} className="text-center">
-                <p className="text-xl font-bold text-gold">{stat.value}</p>
-                <p className="text-xs text-ivory/70">{stat.label}</p>
+                <p className="text-lg font-bold text-gold">{stat.value}</p>
+                <p className="text-[10px] text-ivory/70 leading-tight">
+                  {stat.label}
+                </p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Mini Music Player Banner */}
-      <MiniMusicPlayer variant="banner" />
+      {/* ─── 2. WHY NESA-AFRICA EXISTS ───────────────────── */}
+      <WhyNESAExistsSection />
 
-      {/* Mission Statement */}
-      <section id="mission" className="bg-gradient-to-b from-charcoal to-charcoal/95 py-20 lg:py-28 scroll-mt-20">
-        <div className="container mx-auto px-4">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="mx-auto max-w-4xl text-center"
-          >
-            <span className="inline-block mb-4 text-gold text-sm font-semibold uppercase tracking-wider">Our Mission</span>
-            <h2 className="mb-8 font-display text-3xl lg:text-4xl font-bold text-ivory leading-tight">
-              "Advocating & Achieving{" "}
-              <span className="text-gold">Education For All</span> In Africa"
-            </h2>
-            <p className="text-lg lg:text-xl leading-relaxed text-ivory/80">
-              To recognize, validate, and celebrate individuals, organizations, and institutions
-              driving transformative change in African education — through transparent, merit-based awards 
-              that inspire action, ensure accountability, and fund lasting legacy impact.
-            </p>
-          </motion.div>
-        </div>
+      {/* ─── 3. CHOOSE YOUR JOURNEY ──────────────────────── */}
+      <AboutChooseJourneySection />
+
+      {/* ─── 4. TEN EDUCATION REGIONS ────────────────────── */}
+      <TenRegionsBannerSection />
+
+      {/* ─── 5. VISION, MISSION & OBJECTIVES ─────────────── */}
+      <section id="mission" className="scroll-mt-20">
+        <VisionMissionObjectivesSection />
       </section>
 
-      {/* Four Pillars */}
-      <section className="bg-charcoal py-20 lg:py-28">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-16">
-            <span className="inline-block mb-4 text-gold text-sm font-semibold uppercase tracking-wider">Foundation</span>
-            <h2 className="font-display text-3xl lg:text-4xl font-bold text-ivory">
-              Our Four Pillars
-            </h2>
-          </div>
-          
-          <motion.div
-            variants={containerVariants}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            className="grid gap-6 md:grid-cols-2 lg:grid-cols-4"
-          >
-            {pillars.map((pillar) => (
-              <motion.div key={pillar.title} variants={itemVariants}>
-                <Card className="h-full border-gold/10 bg-charcoal/50 backdrop-blur-sm hover:border-gold/30 transition-all duration-300 group overflow-hidden">
-                  {/* Image */}
-                  <div className="relative h-48 overflow-hidden">
-                    <img 
-                      src={pillar.image} 
-                      alt={pillar.title}
-                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                    />
-                    <div className={`absolute inset-0 bg-gradient-to-t ${pillar.gradient} to-charcoal/80`} />
-                    <div className="absolute bottom-4 left-4 flex h-12 w-12 items-center justify-center rounded-xl bg-charcoal/80 backdrop-blur-sm border border-white/20">
-                      <pillar.icon className="h-6 w-6 text-gold" />
-                    </div>
-                  </div>
-                  <CardHeader className="pb-2">
-                    <CardTitle className="text-ivory text-xl">{pillar.title}</CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <CardDescription className="text-ivory/70 text-base leading-relaxed">
-                      {pillar.description}
-                    </CardDescription>
-                  </CardContent>
-                </Card>
-              </motion.div>
-            ))}
-          </motion.div>
-        </div>
-      </section>
+      {/* ─── 6. RECOGNITION FRAMEWORK ────────────────────── */}
+      <AwardTiersSummarySection />
 
-      {/* Award Tiers */}
-      <section className="bg-gradient-to-b from-charcoal/95 to-charcoal py-20 lg:py-28">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-16">
-            <span className="inline-block mb-4 text-gold text-sm font-semibold uppercase tracking-wider">Recognition Levels</span>
-            <h2 className="font-display text-3xl lg:text-4xl font-bold text-ivory mb-4">
-              Award Tiers
-            </h2>
-            <p className="mx-auto max-w-2xl text-ivory/70 text-lg">
-              Four distinct recognition platforms, each with unique criteria and selection processes.
-            </p>
-          </div>
-          
-          <motion.div
-            variants={containerVariants}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            className="grid gap-6 md:grid-cols-2"
-          >
-            {awardTiers.map((tier) => (
-              <motion.div key={tier.title} variants={itemVariants}>
-                <Card className={`h-full border ${tier.borderColor} bg-white/5 hover:bg-white/8 transition-all duration-300 overflow-hidden group`}>
-                  <div className={`h-1 bg-gradient-to-r ${tier.color}`} />
-                  <CardHeader className="pb-3">
-                    <div className="flex items-center justify-between">
-                      <div>
-                        <CardTitle className={`${tier.textColor} text-xl flex items-center gap-2`}>
-                          <Trophy className="h-5 w-5" />
-                          {tier.title}
-                        </CardTitle>
-                        <p className="text-ivory/60 text-sm mt-1">{tier.subtitle}</p>
-                      </div>
-                    </div>
-                  </CardHeader>
-                  <CardContent>
-                    <p className="text-ivory/80 leading-relaxed">{tier.description}</p>
-                  </CardContent>
-                </Card>
-              </motion.div>
-            ))}
-          </motion.div>
-          
-          <div className="text-center mt-10">
-            <Button asChild variant="outline" className="border-gold/50 text-gold hover:bg-gold/10 rounded-full">
-              <Link to="/categories">
-                View All Categories
-                <ChevronRight className="ml-2 h-4 w-4" />
-              </Link>
-            </Button>
-          </div>
-        </div>
-      </section>
+      {/* ─── 7. SCEF ECOSYSTEM ───────────────────────────── */}
+      <AboutSCEFEcosystemSection />
 
-      {/* Quick Links */}
-      <section className="bg-charcoal py-20 lg:py-28 border-t border-gold/10">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-12">
-            <span className="inline-block mb-4 text-gold text-sm font-semibold uppercase tracking-wider">Explore</span>
-            <h2 className="font-display text-3xl lg:text-4xl font-bold text-ivory">
-              Learn More
-            </h2>
-          </div>
-          
-          <motion.div
-            variants={containerVariants}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            className="mx-auto grid max-w-4xl gap-4 md:grid-cols-2"
-          >
-            {quickLinks.map((link) => (
-              <motion.div key={link.href} variants={itemVariants}>
-                <Link
-                  to={link.href}
-                  className="group flex items-center justify-between rounded-2xl border border-gold/10 bg-white/5 p-6 transition-all duration-300 hover:border-gold/50 hover:bg-white/10 hover:shadow-lg hover:shadow-gold/5"
-                >
-                  <div className="flex items-center gap-4">
-                    <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-gold/10 group-hover:bg-gold/20 transition-colors">
-                      <link.icon className="h-6 w-6 text-gold" />
-                    </div>
-                    <div>
-                      <span className="font-semibold text-ivory block">{link.label}</span>
-                      <span className="text-sm text-ivory/60">{link.description}</span>
-                    </div>
-                  </div>
-                  <ChevronRight className="h-5 w-5 text-ivory/50 transition-transform group-hover:translate-x-1 group-hover:text-gold" />
-                </Link>
-              </motion.div>
-            ))}
-          </motion.div>
-        </div>
-      </section>
-
-      {/* About NESA-Africa 2026 — detailed accordion */}
-      {/* Vision Message — CVO Strategic Address (moved from About dropdown) */}
+      {/* ─── 8. CVO MESSAGE ──────────────────────────────── */}
       <CVOMessageSection />
 
-      {/* About NESA-Africa 2026 — detailed accordion */}
-      <AboutNESASection />
+      {/* ─── 9. GOVERNANCE & INTEGRITY FIREWALL ──────────── */}
+      <GovernanceFirewallSection />
 
+      {/* ─── 10. IMPACT IN ACTION ────────────────────────── */}
+      <ImpactProgramsSection />
 
-      {/* Final CTA */}
+      {/* ─── 11. ENDORSED & SUPPORTED BY ─────────────────── */}
+      <EndorsedBySection />
+
+      {/* ─── 12. FAQ ─────────────────────────────────────── */}
+      <PageFAQSection />
+
+      {/* ─── 13. FINAL ACTION BLOCK ──────────────────────── */}
       <section className="bg-gradient-to-b from-charcoal to-charcoal/95 py-20 lg:py-28 border-t border-gold/10">
         <div className="container mx-auto px-4">
           <motion.div
@@ -419,27 +198,44 @@ export default function About() {
             className="mx-auto max-w-3xl text-center"
           >
             <h2 className="mb-6 font-display text-3xl lg:text-4xl font-bold text-ivory">
-              Join the Movement
+              Building Africa's Education{" "}
+              <span className="text-gold">Future Together</span>
             </h2>
-            <p className="mb-8 text-lg text-ivory/80">
-              Be part of Africa's most trusted education recognition platform. Nominate a changemaker, 
-              vote with AGC, or partner with us to amplify impact.
+            <p className="mb-10 text-lg text-ivory/75 max-w-2xl mx-auto">
+              Three ways to power the movement. Pick one — every action
+              strengthens the continent's education story.
             </p>
             <div className="flex flex-wrap justify-center gap-4">
-              <Button asChild size="lg" className="bg-gold hover:bg-gold-dark text-charcoal font-semibold rounded-full px-8">
-                <Link to="/nominate">
+              <Button
+                asChild
+                size="lg"
+                className="bg-gold hover:bg-gold-dark text-charcoal font-semibold rounded-full px-8"
+              >
+                <Link to="/participate/nominate">
                   <Award className="mr-2 h-5 w-5" />
-                  Nominate Now
+                  Nominate for 2026
                 </Link>
               </Button>
-              <Button asChild size="lg" variant="outline" className="border-gold/50 text-gold hover:bg-gold/10 rounded-full px-8">
-                <Link to="/vote">
-                  Vote with AGC
+              <Button
+                asChild
+                size="lg"
+                variant="outline"
+                className="border-gold/50 text-gold hover:bg-gold/10 rounded-full px-8"
+              >
+                <Link to="/sponsors">
+                  <Handshake className="mr-2 h-5 w-5" />
+                  Become a Sponsor
                 </Link>
               </Button>
-              <Button asChild size="lg" variant="ghost" className="text-ivory/80 hover:text-ivory hover:bg-gold/10 rounded-full px-8">
-                <Link to="/partners">
-                  Become a Partner
+              <Button
+                asChild
+                size="lg"
+                variant="ghost"
+                className="text-ivory/80 hover:text-ivory hover:bg-gold/10 rounded-full px-8"
+              >
+                <Link to="/community">
+                  <Users className="mr-2 h-5 w-5" />
+                  Join the Movement
                 </Link>
               </Button>
             </div>
