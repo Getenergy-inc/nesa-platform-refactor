@@ -250,6 +250,7 @@ import RegionDashboard from "./pages/region/RegionDashboard";
 import NigeriaChapterTrack from "./pages/region/NigeriaChapterTrack";
 import RegionHubPage from "./pages/region/RegionHubPage";
 import RegionsIndexPage from "./pages/region/RegionsIndexPage";
+import AfriEduTourismPage from "./pages/AfriEduTourismPage";
 
 // OLC Pages
 import {
@@ -1596,7 +1597,7 @@ const App = () => (
                     element={<RegionDashboard />}
                   />
 
-                  {/* Region Routes */}
+                  {/* Region Routes — canonical lives under /regions */}
                   <Route
                     path="/regions"
                     element={
@@ -1606,14 +1607,23 @@ const App = () => (
                     }
                   />
                   <Route
-                    path="/region/nigeria"
+                    path="/regions/nigeria"
                     element={
                       <WithLayout>
                         <NigeriaChapterTrack />
                       </WithLayout>
                     }
                   />
-                  <Route path="/region/:slug" element={<RegionHubPage />} />
+                  <Route path="/regions/:slug" element={<RegionHubPage />} />
+                  {/* Afri-EduTourism Ecosystem */}
+                  <Route
+                    path="/afri-edutourism"
+                    element={
+                      <WithLayout>
+                        <AfriEduTourismPage />
+                      </WithLayout>
+                    }
+                  />
 
                   {/* NRC Portal Routes (Legacy) */}
                   <Route path="/nrc" element={<NRCPortal />} />
