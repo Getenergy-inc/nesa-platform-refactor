@@ -58,7 +58,7 @@ export function RegionHubPage() {
         <meta name="description" content={`${hub.tagline}. Discover education champions, cultural heritage, and edu-tourism in ${hub.name}. ${hub.countries.slice(0, 4).join(", ")} & more.`} />
         <meta property="og:title" content={`${hub.name} — NESA-Africa`} />
         <meta property="og:description" content={hub.tagline} />
-        <link rel="canonical" href={`https://nesa.africa/region/${hub.slug}`} />
+        <link rel="canonical" href={`https://nesa.africa/regions/${hub.slug}`} />
       </Helmet>
 
       <div className="min-h-screen bg-charcoal">
@@ -133,10 +133,16 @@ export function RegionHubPage() {
         <section className="py-16 md:py-24 bg-charcoal-light/30">
           <div className="container max-w-5xl mx-auto px-4">
             <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
-              <div className="flex items-center gap-3 mb-8">
+              <div className="flex items-center gap-3 mb-3">
                 <GraduationCap className="w-6 h-6 text-gold" />
-                <h2 className="text-2xl md:text-3xl font-bold text-ivory">Edu-Tourism Facts</h2>
+                <h2 className="text-2xl md:text-3xl font-bold text-ivory">Afri-EduTourism Experiences</h2>
               </div>
+              <p className="text-ivory/65 mb-6 text-sm max-w-2xl">
+                Heritage sites, universities, research centres, museums and cultural landmarks anchoring this region's learning ecosystem.{" "}
+                <Link to="/afri-edutourism" className="text-gold hover:underline">
+                  Explore all Afri-EduTourism programmes →
+                </Link>
+              </p>
               <div className="space-y-4">
                 {hub.eduTourismFacts.map((fact, i) => (
                   <motion.div
@@ -191,7 +197,7 @@ export function RegionHubPage() {
             </h2>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
               {[
-                { label: "Regional Profile", to: `/region/${hub.slug}` },
+                { label: "Regional Profile", to: `/regions/${hub.slug}` },
                 { label: "EduAid Conference", to: "/eduaid" },
                 { label: "RMSA Legacy Project", to: "/rebuild" },
                 { label: "Special-Needs Nomination", to: `/nominate?category=special-needs&region=${hub.slug}` },
@@ -238,7 +244,7 @@ export function RegionHubPage() {
               {REGION_HUBS.filter(r => r.slug !== hub.slug).map(region => (
                 <Link
                   key={region.slug}
-                  to={`/region/${region.slug}`}
+                  to={`/regions/${region.slug}`}
                   className="group bg-charcoal-light/60 border border-gold/10 rounded-lg p-3 text-center hover:bg-gold/10 hover:border-gold/30 transition-all"
                 >
                   <p className="text-ivory/80 group-hover:text-ivory text-sm font-medium transition-colors">{region.shortName}</p>
