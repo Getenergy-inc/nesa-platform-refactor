@@ -58,7 +58,7 @@ export function RegionHubPage() {
         <meta name="description" content={`${hub.tagline}. Discover education champions, cultural heritage, and edu-tourism in ${hub.name}. ${hub.countries.slice(0, 4).join(", ")} & more.`} />
         <meta property="og:title" content={`${hub.name} — NESA-Africa`} />
         <meta property="og:description" content={hub.tagline} />
-        <link rel="canonical" href={`https://nesa.africa/region/${hub.slug}`} />
+        <link rel="canonical" href={`https://nesa.africa/regions/${hub.slug}`} />
       </Helmet>
 
       <div className="min-h-screen bg-charcoal">
@@ -244,7 +244,7 @@ export function RegionHubPage() {
               {REGION_HUBS.filter(r => r.slug !== hub.slug).map(region => (
                 <Link
                   key={region.slug}
-                  to={`/region/${region.slug}`}
+                  to={`/regions/${region.slug}`}
                   className="group bg-charcoal-light/60 border border-gold/10 rounded-lg p-3 text-center hover:bg-gold/10 hover:border-gold/30 transition-all"
                 >
                   <p className="text-ivory/80 group-hover:text-ivory text-sm font-medium transition-colors">{region.shortName}</p>
