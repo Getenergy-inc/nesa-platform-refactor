@@ -485,7 +485,7 @@ function MobileNav({ onOpenCVOMessage }: { onOpenCVOMessage: () => void }) {
                             <Link
                               key={child.href}
                               to={child.href}
-                              onClick={handleTrackedClick(child.label, child.href)}
+                              onClick={handleTrackedClick(child.label, child.href, item.label)}
                               aria-current={location.pathname === child.href ? "page" : undefined}
                               className={cn(
                                 "flex items-center gap-3 px-8 py-3.5 min-h-[48px] text-sm transition-colors touch-manipulation",
