@@ -359,14 +359,6 @@ function MobileNav({ onOpenCVOMessage }: { onOpenCVOMessage: () => void }) {
 
         <nav aria-label="Mobile primary navigation" className="flex flex-col h-[calc(100%-65px)]">
           <div className="flex-1 overflow-y-auto overscroll-contain">
-            {/* Sticky Sponsor CTA — top-level per IA brief */}
-            <div className="px-4 pt-4 pb-2">
-              <Link to="/sponsor" onClick={handleLinkClick} className="block">
-                <Button className="w-full bg-gold text-charcoal hover:bg-gold/90 font-semibold h-12 touch-manipulation shadow-md shadow-gold/20">
-                  Sponsor NESA-Africa 2026
-                </Button>
-              </Link>
-            </div>
 
 
             {/* Full Navigation */}
@@ -850,97 +842,24 @@ export function MainNav() {
           {/* Spacer to push CTAs right on tablet/mobile */}
           <div className="flex-1 min-[1200px]:hidden" />
 
-          {/* Right Side: 3 primary CTAs (Nominate, Vote, Become a Sponsor) + utility */}
-          <div className="order-3 grid w-full grid-cols-[1fr_auto] items-center gap-2 min-[430px]:order-none min-[430px]:flex min-[430px]:w-auto min-[430px]:justify-start sm:gap-1.5 xl:gap-2 shrink-0">
-            <div className="grid min-w-0 grid-cols-3 gap-1 min-[430px]:contents">
-            {/* Desktop CTA 1 — Nominate (secondary outline) */}
-            <Button
-              asChild
-              size="sm"
-              variant="outline"
-              className="hidden min-[1200px]:inline-flex border-gold/40 text-gold hover:bg-gold/10 hover:text-gold h-9 px-3 text-[12px] bg-transparent whitespace-nowrap shrink-0"
-            >
-              <Link to="/nominate" aria-label="Nominate for NESA-Africa 2026">
-                <Trophy className="h-3.5 w-3.5 mr-1" />
-                Nominate
-              </Link>
-            </Button>
-
-            {/* Desktop CTA 2 — Vote (secondary outline) */}
-            <Button
-              asChild
-              size="sm"
-              variant="outline"
-              className="hidden min-[1200px]:inline-flex border-gold/40 text-gold hover:bg-gold/10 hover:text-gold h-9 px-3 text-[12px] bg-transparent whitespace-nowrap shrink-0"
-            >
-              <Link to="/vote" aria-label="Vote in NESA-Africa 2026">
-                <Vote className="h-3.5 w-3.5 mr-1" />
-                Vote
-              </Link>
-            </Button>
-
-            {/* Desktop CTA 3 — Become a Sponsor (primary filled, strongest) */}
-            <Button
-              asChild
-              size="sm"
-              className="hidden min-[1200px]:inline-flex bg-gold text-charcoal hover:bg-gold/90 font-semibold h-9 px-3 text-[12px] shadow-md shadow-gold/20 shrink-0 whitespace-nowrap"
-            >
-              <Link to="/sponsor" aria-label="Become a Sponsor of NESA-Africa 2026">
-                <Sparkles className="h-3.5 w-3.5 mr-1" />
-                Become a Sponsor
-              </Link>
-            </Button>
-
-            {/* Mobile / tablet header CTAs — order: Nominate, Vote, Become a Sponsor, Language(icon) */}
-            <Button
-              asChild
-              size="sm"
-              variant="outline"
-              className="min-[1200px]:hidden inline-flex border-gold/40 text-gold hover:bg-gold/10 hover:text-gold h-9 px-1.5 min-[430px]:px-2.5 text-[10px] min-[430px]:text-[11px] bg-transparent min-w-0 shrink-0 whitespace-nowrap"
-            >
-              <Link to="/nominate" aria-label="Nominate for NESA-Africa 2026">
-                <span className="inline min-[430px]:hidden">Nominate</span>
-                <span className="hidden min-[430px]:inline">Nominate 2026</span>
-              </Link>
-            </Button>
-            <Button
-              asChild
-              size="sm"
-              variant="outline"
-              className="min-[1200px]:hidden inline-flex border-gold/40 text-gold hover:bg-gold/10 hover:text-gold h-9 px-1.5 min-[430px]:px-2.5 text-[10px] min-[430px]:text-[11px] bg-transparent min-w-0 shrink-0 whitespace-nowrap"
-            >
-              <Link to="/vote" aria-label="Vote in NESA-Africa 2026">Vote</Link>
-            </Button>
-
-            {/* Mobile / tablet Sponsor CTA — primary filled gold */}
-            <Button
-              asChild
-              size="sm"
-              className="min-[1200px]:hidden inline-flex bg-gold text-charcoal hover:bg-gold/90 font-semibold h-9 px-1.5 min-[430px]:px-2.5 text-[10px] min-[430px]:text-[11px] shadow-md shadow-gold/20 min-w-0 shrink-0 whitespace-nowrap"
-            >
-              <Link to="/sponsor" aria-label="Become a Sponsor of NESA-Africa 2026">
-                <span className="inline min-[430px]:hidden">Sponsor</span>
-                <span className="hidden min-[430px]:inline">Become a Sponsor</span>
-              </Link>
-            </Button>
-            </div>
-
-            {/* Mobile / tablet Language Switcher — icon only */}
-            <div className="hidden min-[430px]:block min-[1200px]:hidden shrink-0">
+          {/* Right Side: utility only — primary actions live in the page (hero + section CTAs) */}
+          <div className="order-3 flex w-full items-center justify-end gap-1.5 min-[430px]:order-none min-[430px]:w-auto sm:gap-2 shrink-0">
+            {/* Language Switcher — compact on mobile/tablet */}
+            <div className="min-[1200px]:hidden shrink-0">
               <LanguageSwitcher variant="compact" className="h-9 w-9" />
             </div>
 
-            {/* Utility: Search — hidden below sm to preserve CTA space */}
+            {/* Search */}
             <div className="hidden sm:block">
               <NavSearch />
             </div>
 
-            {/* Utility: User Menu (Desktop only at >=1200px) */}
+            {/* User Menu / Sign In (desktop) */}
             <div className="hidden min-[1200px]:block">
               <UserMenu />
             </div>
 
-            {/* Mobile Menu (visible below 1200px) */}
+            {/* Mobile Menu (<1200px) */}
             <MobileNav onOpenCVOMessage={() => setCVOMessageOpen(true)} />
           </div>
         </div>
