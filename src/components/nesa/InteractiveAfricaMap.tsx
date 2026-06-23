@@ -92,7 +92,7 @@ export function InteractiveAfricaMap() {
                 const isHovered = hoveredRegion === slug;
 
                 return (
-                  <Link key={slug} to={`/nominees?region=${slug}`} aria-label={`Filter nominees in ${hub.name}`}>
+                  <Link key={slug} to={`/awards/regions/${slug}`} aria-label={`Explore ${hub.name} awards and nominees`}>
                     <g
                       onMouseEnter={() => setHoveredRegion(slug)}
                       onMouseLeave={() => setHoveredRegion(null)}
