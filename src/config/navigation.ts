@@ -98,19 +98,18 @@ export const MAIN_NAV: NavItem[] = [
   // 1. HOME
   { label: "Home", href: "/", icon: Home },
 
-  // 2. ABOUT
+  // 2. ABOUT — compact navigation menu (no inline descriptions)
   {
     label: "About",
     href: "/about",
     icon: Info,
     children: [
-      { label: "About NESA-Africa", href: "/about", description: "The African Blue-Garnet Awards for Education", icon: Info },
-      { label: "Mission & Vision", href: "/about#mission", description: "Why NESA-Africa exists", icon: Target },
-      { label: "Our Story (2006–2026)", href: "/about#story", description: "Two decades of education recognition", icon: BookOpen },
-      { label: "SCEF Foundation", href: "/about/scef", description: "Santos Creations Educational Foundation", icon: Building },
-      { label: "Governance & Integrity", href: "/about/governance", description: "Firewalls, jury panels, accountability", icon: Shield },
-      { label: "2026 Timeline", href: "/about/timeline", description: "Key dates & milestones", icon: Calendar },
-      { label: "Vision 2035", href: "/about/vision-2035", description: "Continental education roadmap", icon: Target },
+      { label: "About NESA-Africa", href: "/about", icon: Info },
+      { label: "Mission & Vision", href: "/about#mission", icon: Target },
+      { label: "Our Story", href: "/about#story", icon: BookOpen },
+      { label: "Governance & Integrity", href: "/about/governance", icon: Shield },
+      { label: "2026 Timeline", href: "/about/timeline", icon: Calendar },
+      { label: "Vision 2035", href: "/about/vision-2035", icon: Target },
     ],
   },
 
