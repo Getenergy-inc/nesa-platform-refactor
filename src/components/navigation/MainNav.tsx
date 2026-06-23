@@ -431,15 +431,8 @@ function MobileNav({ onOpenCVOMessage }: { onOpenCVOMessage: () => void }) {
                       >
 
                         <div className="bg-charcoal-light/30 py-2">
-                          {/* CVO Message for About menu in mobile */}
-                          {item.label === "About" && (
-                            <div className="px-4 py-3 border-b border-gold/10 mb-1">
-                              <CVOMessageTrigger
-                                onClick={handleCVOClick}
-                                variant="dropdown"
-                              />
-                            </div>
-                          )}
+                          {/* CVO Strategic Address moved to the About page */}
+
 
                           {item.children.map((child) => (
                             <Link
