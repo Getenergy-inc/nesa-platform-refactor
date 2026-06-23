@@ -210,7 +210,7 @@ export default function About() {
                 size="lg"
                 className="bg-gold hover:bg-gold-dark text-charcoal font-semibold rounded-full px-8"
               >
-                <Link to="/participate/nominate">
+                <Link to="/nominate">
                   <Award className="mr-2 h-5 w-5" />
                   Nominate for 2026
                 </Link>
@@ -232,7 +232,7 @@ export default function About() {
                 variant="ghost"
                 className="text-ivory/80 hover:text-ivory hover:bg-gold/10 rounded-full px-8"
               >
-                <Link to="/community">
+                <Link to="/movement">
                   <Users className="mr-2 h-5 w-5" />
                   Join the Movement
                 </Link>

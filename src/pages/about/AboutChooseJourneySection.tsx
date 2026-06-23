@@ -17,7 +17,7 @@ const JOURNEYS = [
     icon: UserPlus,
     title: "I Want to Nominate Someone",
     description: "Honour an educator, innovator, or institution shaping African education.",
-    href: "/participate/nominate",
+    href: "/nominate",
     cta: "Start a Nomination",
   },
   {
@@ -45,7 +45,7 @@ const JOURNEYS = [
     icon: Users,
     title: "I Want to Join the Movement",
     description: "Volunteer, ambassador, judge, chapter — find your role.",
-    href: "/community",
+    href: "/movement",
     cta: "Join the Community",
   },
 ];
