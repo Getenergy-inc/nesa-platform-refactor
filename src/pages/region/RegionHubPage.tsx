@@ -197,7 +197,7 @@ export function RegionHubPage() {
             </h2>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
               {[
-                { label: "Regional Profile", to: `/region/${hub.slug}` },
+                { label: "Regional Profile", to: `/regions/${hub.slug}` },
                 { label: "EduAid Conference", to: "/eduaid" },
                 { label: "RMSA Legacy Project", to: "/rebuild" },
                 { label: "Special-Needs Nomination", to: `/nominate?category=special-needs&region=${hub.slug}` },
