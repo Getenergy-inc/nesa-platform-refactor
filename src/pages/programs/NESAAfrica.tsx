@@ -56,9 +56,6 @@ export default function NESAAfrica() {
         
         {/* What's Happening Now */}
         <WhatsLiveSection />
-
-        {/* Education Stakeholder Endorsements */}
-        <EndorsedBySection />
         
         {/* === AWARDS OVERVIEW === */}
         <LazySection>
