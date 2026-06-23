@@ -134,6 +134,8 @@ import BlueGarnetCategoriesIndex from "./pages/awards/BlueGarnetCategoriesIndex"
 import PlatinumCategoriesIndex from "./pages/awards/PlatinumCategoriesIndex";
 import InfluencersCategoriesIndex from "./pages/awards/InfluencersCategoriesIndex";
 import AwardCategoryRoute from "./pages/awards/AwardCategoryRoute";
+import AwardsRegionPage from "./pages/awards/AwardsRegionPage";
+
 import { ICON_CATEGORY, buildRedirectMap as buildCategoryRedirects } from "./config/awardCategories";
 
 // Media Pages
