@@ -2,6 +2,7 @@
 // Five large cards to reduce bounce and guide visitors into the right path.
 
 import { Link } from "react-router-dom";
+import { trackEvent } from "@/lib/analytics";
 import { motion } from "framer-motion";
 import {
   UserPlus,
