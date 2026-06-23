@@ -134,6 +134,8 @@ import BlueGarnetCategoriesIndex from "./pages/awards/BlueGarnetCategoriesIndex"
 import PlatinumCategoriesIndex from "./pages/awards/PlatinumCategoriesIndex";
 import InfluencersCategoriesIndex from "./pages/awards/InfluencersCategoriesIndex";
 import AwardCategoryRoute from "./pages/awards/AwardCategoryRoute";
+import AwardsRegionPage from "./pages/awards/AwardsRegionPage";
+
 import { ICON_CATEGORY, buildRedirectMap as buildCategoryRedirects } from "./config/awardCategories";
 
 // Media Pages
@@ -790,6 +792,19 @@ const App = () => (
                       </WithLayout>
                     }
                   />
+                  <Route
+                    path="/awards/regions"
+                    element={<Navigate to="/awards#regions" replace />}
+                  />
+                  <Route
+                    path="/awards/regions/:slug"
+                    element={
+                      <WithLayout>
+                        <AwardsRegionPage />
+                      </WithLayout>
+                    }
+                  />
+
                   <Route
                     path="/awards/csr-education"
                     element={

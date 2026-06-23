@@ -92,7 +92,7 @@ export function InteractiveAfricaMap() {
                 const isHovered = hoveredRegion === slug;
 
                 return (
-                  <Link key={slug} to={`/nominees?region=${slug}`} aria-label={`Filter nominees in ${hub.name}`}>
+                  <Link key={slug} to={`/awards/regions/${slug}`} aria-label={`Explore ${hub.name} awards and nominees`}>
                     <g
                       onMouseEnter={() => setHoveredRegion(slug)}
                       onMouseLeave={() => setHoveredRegion(null)}
@@ -145,18 +145,20 @@ export function InteractiveAfricaMap() {
                   )}
                 </div>
                 <Link
-                  to={`/nominees?region=${hoveredHub.slug}`}
+                  to={`/awards/regions/${hoveredHub.slug}`}
                   className="inline-flex items-center gap-2 text-primary hover:text-primary/80 font-semibold text-sm transition-colors"
                 >
-                  Explore {hoveredHub.shortName} nominees <ArrowRight className="w-4 h-4" />
+                  Explore {hoveredHub.shortName} awards & nominees <ArrowRight className="w-4 h-4" />
                 </Link>
+
               </motion.div>
             ) : (
               <div className="grid grid-cols-2 gap-2">
                 {REGION_HUBS.map(hub => (
                   <Link
                     key={hub.slug}
-                    to={`/nominees?region=${hub.slug}`}
+                    to={`/awards/regions/${hub.slug}`}
+
                     onMouseEnter={() => setHoveredRegion(hub.slug)}
                     onMouseLeave={() => setHoveredRegion(null)}
                     className="group flex items-center gap-2 bg-white/5 border border-white/10 rounded-lg px-3 py-2.5 hover:bg-primary/10 hover:border-primary/30 transition-all"
