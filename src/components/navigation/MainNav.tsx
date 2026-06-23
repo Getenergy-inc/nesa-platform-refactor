@@ -434,7 +434,7 @@ function MobileNav({ onOpenCVOMessage }: { onOpenCVOMessage: () => void }) {
                         <button
                           type="button"
                           ref={(el) => { triggerRefs.current[item.href] = el; }}
-                          onClick={() => toggleExpanded(item.href)}
+                          onClick={() => toggleExpanded(item.href, item.label)}
                           onKeyDown={handleTriggerKeyDown(item.href)}
                           aria-expanded={expandedItems.includes(item.href)}
                           aria-controls={`mnav-sub-${item.href}`}
