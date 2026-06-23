@@ -29,7 +29,7 @@ const PLATFORMS = [
     role: "Educational Infrastructure & Special Needs Support",
     description:
       "Reviving formal, informal, vocational, and special-needs schools across the continent.",
-    href: "/rebuild-my-school-africa",
+    href: "/eduaid-africa/rebuild-my-school",
     accent: "from-rose-500/30 to-rose-500/5",
   },
   {
