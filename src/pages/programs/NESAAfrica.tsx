@@ -7,6 +7,7 @@ import { TrustLogosStrip } from "@/components/nesa/TrustLogosStrip";
 import { QuickActionBar } from "@/components/nesa/QuickActionBar";
 import { WhatsLiveSection } from "@/components/nesa/WhatsLiveSection";
 import { NominationPathsCards } from "@/components/nesa/NominationPathsCards";
+import { EndorsedBySection } from "@/components/nesa/EndorsedBySection";
 import { NESAFooter } from "@/components/nesa/NESAFooter";
 import { MobileBottomNav } from "@/components/navigation/MainNav";
 import { LazySection } from "@/components/ui/lazy-section";
@@ -56,6 +57,9 @@ export default function NESAAfrica() {
         
         {/* What's Happening Now */}
         <WhatsLiveSection />
+
+        {/* Education Stakeholder Endorsements */}
+        <EndorsedBySection />
         
         {/* === AWARDS OVERVIEW === */}
         <LazySection>
