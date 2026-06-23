@@ -252,12 +252,13 @@ export const MAIN_NAV_MOBILE_ORDER: readonly string[] = [
   "About",
   "Awards",
   "Participate",
-  "Sponsors & Partners",
   "Impact Programs",
   "Media & Events",
   "Join the Movement",
+  "Sponsors & Partners",
   "Contact",
 ];
+
 
 
 
