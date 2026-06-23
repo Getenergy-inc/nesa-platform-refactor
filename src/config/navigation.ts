@@ -76,16 +76,11 @@ export interface NavSection {
 // LEVEL 1 — Governance / Quick-Access Bar (thin top bar, desktop)
 // SCEF-style stakeholder strip. Lightweight, no dropdowns.
 // ----------------------------------------------------------------------------
-export const GOVERNANCE_NAV: NavItem[] = [
-  { label: "Governance", href: "/about/governance", icon: Shield },
-  { label: "Africa Education Icon", href: "/awards/icon", icon: Star },
-  { label: "Judges", href: "/judges/directory", icon: Gavel },
-  { label: "Volunteers", href: "/volunteers", icon: Heart },
-  { label: "Local Chapters", href: "/chapters", icon: MapPin },
-  { label: "Partners", href: "/partners", icon: Handshake },
-  { label: "Sponsors", href: "/sponsors", icon: Sparkles },
-  { label: "Donate", href: "/donate", icon: Heart },
-];
+// Public IA mandates a single 9-item primary nav with no separate governance
+// strip. This array is intentionally empty so legacy consumers no-op; remove
+// once all references are gone.
+export const GOVERNANCE_NAV: NavItem[] = [];
+
 
 // ----------------------------------------------------------------------------
 // LEVEL 2 — Primary NESA-Africa Public Navigation
