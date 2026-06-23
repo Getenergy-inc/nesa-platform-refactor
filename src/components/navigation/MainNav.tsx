@@ -70,12 +70,27 @@ function DesktopNav({ onOpenCVOMessage }: { onOpenCVOMessage: () => void }) {
 
             {item.children ? (
               <>
-                <NavigationMenuTrigger className="bg-transparent text-white/90 hover:text-gold hover:bg-gold/10 data-[state=open]:bg-gold/10 data-[state=open]:text-gold h-8 xl:h-9 px-1.5 xl:px-2 text-[11px] xl:text-[13px] leading-none whitespace-nowrap">
+                <NavigationMenuTrigger
+                  className="bg-transparent text-white/90 hover:text-gold hover:bg-gold/10 data-[state=open]:bg-gold/10 data-[state=open]:text-gold h-8 xl:h-9 px-1.5 xl:px-2 text-[11px] xl:text-[13px] leading-none whitespace-nowrap"
+                  aria-label={`${item.label} menu`}
+                  onPointerEnter={() => {
+                    if (item.label === "About") {
+                      trackEvent("about_menu_open", { device: "desktop", method: "hover" });
+                    }
+                  }}
+                  onFocus={() => {
+                    if (item.label === "About") {
+                      trackEvent("about_menu_open", { device: "desktop", method: "focus" });
+                    }
+                  }}
+                >
                   {/* {item.icon && <item.icon className="h-3.5 w-3.5 mr-1.5" />} */}
                   {item.label}
                 </NavigationMenuTrigger>
                 <NavigationMenuContent>
                   <ul
+                    role="menu"
+                    aria-label={`${item.label} submenu`}
                     className={cn(
                       "grid gap-2 p-3 bg-charcoal border border-gold/20",
                       item.label === "About"
@@ -91,11 +106,28 @@ function DesktopNav({ onOpenCVOMessage }: { onOpenCVOMessage: () => void }) {
 
 
                     {item.children.map((child) => (
-                      <li key={child.href}>
+                      <li key={child.href} role="none">
                         <NavigationMenuLink asChild>
                           <Link
                             to={child.href}
+                            role="menuitem"
                             aria-current={location.pathname === child.href ? "page" : undefined}
+                            onClick={() => {
+                              if (item.label === "About") {
+                                trackEvent("about_menu_click", {
+                                  link_name: child.label,
+                                  link_destination: child.href,
+                                  device: "desktop",
+                                  source: location.pathname,
+                                });
+                                trackEvent("about_route_navigation", {
+                                  source: location.pathname,
+                                  destination: child.href,
+                                  method: "desktop_mega_menu",
+                                  device: "desktop",
+                                });
+                              }
+                            }}
                             className={cn(
                               "block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors",
                               "hover:bg-gold/10 hover:text-gold focus:bg-gold/10 focus:text-gold",
@@ -106,7 +138,7 @@ function DesktopNav({ onOpenCVOMessage }: { onOpenCVOMessage: () => void }) {
                           >
                             <div className="flex items-center gap-2">
                               {child.icon && (
-                                <child.icon className="h-4 w-4 text-gold" />
+                                <child.icon className="h-4 w-4 text-gold" aria-hidden="true" />
                               )}
                               <span className="text-sm font-medium leading-none text-white">
                                 {child.label}
@@ -177,10 +209,13 @@ function MobileNav({ onOpenCVOMessage }: { onOpenCVOMessage: () => void }) {
   const [pendingFocus, setPendingFocus] = useState<string | null>(null);
 
   // Mobile: only ONE dropdown open at a time (accordion behavior per IA brief).
-  const toggleExpanded = (href: string) => {
+  const toggleExpanded = (href: string, label?: string) => {
     setExpandedItems((prev) => {
       const isOpen = prev.includes(href);
       if (isOpen) return [];
+      if (label === "About") {
+        trackEvent("about_menu_open", { device: "mobile", method: "tap" });
+      }
       setPendingFocus(href);
       return [href];
     });
@@ -300,8 +335,22 @@ function MobileNav({ onOpenCVOMessage }: { onOpenCVOMessage: () => void }) {
     setOpen(false);
   };
 
-  const handleTrackedClick = (label: string, href: string) => () => {
-    trackEvent("mobile_nav_item_click", { label, href });
+  const handleTrackedClick = (label: string, href: string, parentLabel?: string) => () => {
+    trackEvent("mobile_nav_item_click", { label, href, parent: parentLabel });
+    if (parentLabel === "About") {
+      trackEvent("about_menu_click", {
+        link_name: label,
+        link_destination: href,
+        device: "mobile",
+        source: location.pathname,
+      });
+      trackEvent("about_route_navigation", {
+        source: location.pathname,
+        destination: href,
+        method: "mobile_accordion",
+        device: "mobile",
+      });
+    }
     setOpen(false);
   };
 
@@ -385,7 +434,7 @@ function MobileNav({ onOpenCVOMessage }: { onOpenCVOMessage: () => void }) {
                         <button
                           type="button"
                           ref={(el) => { triggerRefs.current[item.href] = el; }}
-                          onClick={() => toggleExpanded(item.href)}
+                          onClick={() => toggleExpanded(item.href, item.label)}
                           onKeyDown={handleTriggerKeyDown(item.href)}
                           aria-expanded={expandedItems.includes(item.href)}
                           aria-controls={`mnav-sub-${item.href}`}
@@ -436,7 +485,7 @@ function MobileNav({ onOpenCVOMessage }: { onOpenCVOMessage: () => void }) {
                             <Link
                               key={child.href}
                               to={child.href}
-                              onClick={handleTrackedClick(child.label, child.href)}
+                              onClick={handleTrackedClick(child.label, child.href, item.label)}
                               aria-current={location.pathname === child.href ? "page" : undefined}
                               className={cn(
                                 "flex items-center gap-3 px-8 py-3.5 min-h-[48px] text-sm transition-colors touch-manipulation",
