@@ -425,6 +425,7 @@ const App = () => (
                   <Route path="/nominees/category/:slug" element={<SlugRedirect to={(s) => `/nominees/${s}`} />} />
 
                   {/* Region legacy — /region is now an alias of canonical /regions */}
+                  <Route path="/region/nigeria" element={<Navigate to="/regions/nigeria" replace />} />
                   <Route path="/region" element={<Navigate to="/regions" replace />} />
                   <Route path="/region/:slug" element={<SlugRedirect to={(s) => `/regions/${s}`} />} />
                   <Route path="/nominees/region/:slug" element={<SlugRedirect to={(s) => `/nominees/${s}`} />} />
