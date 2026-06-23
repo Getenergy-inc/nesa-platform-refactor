@@ -887,7 +887,19 @@ export function MainNav() {
               <NavSearch />
             </div>
 
+            {/* Become a Sponsor — primary right-cluster CTA (desktop only) */}
+            <Button
+              asChild
+              size="sm"
+              className="hidden min-[1200px]:inline-flex bg-gold text-charcoal hover:bg-gold/90 font-semibold h-9 px-3 text-[12px] whitespace-nowrap"
+            >
+              <Link to="/sponsor" aria-label="Become a Sponsor">
+                Become a Sponsor
+              </Link>
+            </Button>
+
             {/* User Menu / Sign In (desktop) */}
+
             <div className="hidden min-[1200px]:block">
               <UserMenu />
             </div>
