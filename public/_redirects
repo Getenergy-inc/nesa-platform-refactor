@@ -64,7 +64,7 @@
 /cookie-policy                                               /policies            301
 /language                                                    /                    301
 
-# --- 2. SPA routes (324 explicit paths from src/App.tsx) ---
+# --- 2. SPA routes (326 explicit paths from src/App.tsx) ---
 /nominees/gold-special-recognition/:categorySlug/:nomineeSlug /index.html          200
 /nominees/best-ngo-contribution-to-education/profile/:slug   /index.html          200
 /awards/influencers-education-impact-2026-recognition        /index.html          200
@@ -160,6 +160,7 @@
 /admin/nominee-images                                        /index.html          200
 /auth/forgot-password                                        /index.html          200
 /awards/csr-education                                        /index.html          200
+/awards/regions/:slug                                        /index.html          200
 /claim-voting-credits                                        /index.html          200
 /nrc/dashboard/intake                                        /index.html          200
 /programs/nesa-africa                                        /index.html          200
@@ -229,6 +230,7 @@
 /volunteer/tasks                                             /index.html          200
 /about/timeline                                              /index.html          200
 /admin/pathways                                              /index.html          200
+/awards/regions                                              /index.html          200
 /awards/winners                                              /index.html          200
 /become-sponsor                                              /index.html          200
 /category/:slug                                              /index.html          200
