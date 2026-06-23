@@ -209,10 +209,13 @@ function MobileNav({ onOpenCVOMessage }: { onOpenCVOMessage: () => void }) {
   const [pendingFocus, setPendingFocus] = useState<string | null>(null);
 
   // Mobile: only ONE dropdown open at a time (accordion behavior per IA brief).
-  const toggleExpanded = (href: string) => {
+  const toggleExpanded = (href: string, label?: string) => {
     setExpandedItems((prev) => {
       const isOpen = prev.includes(href);
       if (isOpen) return [];
+      if (label === "About") {
+        trackEvent("about_menu_open", { device: "mobile", method: "tap" });
+      }
       setPendingFocus(href);
       return [href];
     });
