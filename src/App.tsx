@@ -793,6 +793,19 @@ const App = () => (
                     }
                   />
                   <Route
+                    path="/awards/regions"
+                    element={<Navigate to="/awards#regions" replace />}
+                  />
+                  <Route
+                    path="/awards/regions/:slug"
+                    element={
+                      <WithLayout>
+                        <AwardsRegionPage />
+                      </WithLayout>
+                    }
+                  />
+
+                  <Route
                     path="/awards/csr-education"
                     element={
                       <WithLayout>
