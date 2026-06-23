@@ -77,8 +77,10 @@ function DesktopNav({ onOpenCVOMessage }: { onOpenCVOMessage: () => void }) {
                 <NavigationMenuContent>
                   <ul
                     className={cn(
-                      "grid gap-3 p-4 bg-charcoal border border-gold/20",
-                      item.label === "About" || item.label === "Support"
+                      "grid gap-2 p-3 bg-charcoal border border-gold/20",
+                      item.label === "About"
+                        ? "w-[460px] grid-cols-2"
+                        : item.label === "Support"
                         ? "w-[420px]"
                         : item.label === "Engage" || item.label === "Impact Programs" || item.label === "Awards" || item.label === "Media"
                         ? "w-[560px] md:w-[640px] md:grid-cols-2"
@@ -86,15 +88,7 @@ function DesktopNav({ onOpenCVOMessage }: { onOpenCVOMessage: () => void }) {
 
                     )}
                   >
-                    {/* CVO Message Trigger - Only for About menu */}
-                    {item.label === "About" && (
-                      <li className="col-span-full border-b border-gold/10 pb-3 mb-1">
-                        <CVOMessageTrigger
-                          onClick={onOpenCVOMessage}
-                          variant="dropdown"
-                        />
-                      </li>
-                    )}
+
 
                     {item.children.map((child) => (
                       <li key={child.href}>
