@@ -359,14 +359,6 @@ function MobileNav({ onOpenCVOMessage }: { onOpenCVOMessage: () => void }) {
 
         <nav aria-label="Mobile primary navigation" className="flex flex-col h-[calc(100%-65px)]">
           <div className="flex-1 overflow-y-auto overscroll-contain">
-            {/* Sticky Sponsor CTA — top-level per IA brief */}
-            <div className="px-4 pt-4 pb-2">
-              <Link to="/sponsor" onClick={handleLinkClick} className="block">
-                <Button className="w-full bg-gold text-charcoal hover:bg-gold/90 font-semibold h-12 touch-manipulation shadow-md shadow-gold/20">
-                  Sponsor NESA-Africa 2026
-                </Button>
-              </Link>
-            </div>
 
 
             {/* Full Navigation */}
