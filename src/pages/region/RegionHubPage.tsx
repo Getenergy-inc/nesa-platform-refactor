@@ -133,10 +133,16 @@ export function RegionHubPage() {
         <section className="py-16 md:py-24 bg-charcoal-light/30">
           <div className="container max-w-5xl mx-auto px-4">
             <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
-              <div className="flex items-center gap-3 mb-8">
+              <div className="flex items-center gap-3 mb-3">
                 <GraduationCap className="w-6 h-6 text-gold" />
-                <h2 className="text-2xl md:text-3xl font-bold text-ivory">Edu-Tourism Facts</h2>
+                <h2 className="text-2xl md:text-3xl font-bold text-ivory">Afri-EduTourism Experiences</h2>
               </div>
+              <p className="text-ivory/65 mb-6 text-sm max-w-2xl">
+                Heritage sites, universities, research centres, museums and cultural landmarks anchoring this region's learning ecosystem.{" "}
+                <Link to="/afri-edutourism" className="text-gold hover:underline">
+                  Explore all Afri-EduTourism programmes →
+                </Link>
+              </p>
               <div className="space-y-4">
                 {hub.eduTourismFacts.map((fact, i) => (
                   <motion.div
