@@ -13,6 +13,7 @@ import {
   ArrowRight,
 } from "lucide-react";
 import africanSchoolImage from "@/assets/african-school-classroom.jpg";
+import { trackEvent } from "@/lib/analytics";
 
 import { WhyNESAExistsSection } from "@/components/nesa/WhyNESAExistsSection";
 import { AboutChooseJourneySection } from "@/pages/about/AboutChooseJourneySection";
@@ -96,7 +97,17 @@ export default function About() {
                   size="lg"
                   className="bg-gold hover:bg-gold-dark text-charcoal font-semibold rounded-full px-8"
                 >
-                  <a href="#choose-journey-heading">
+                  <a
+                    href="#choose-journey-heading"
+                    onClick={() =>
+                      trackEvent("about_cta_click", {
+                        section: "hero",
+                        cta_label: "Explore NESA-Africa",
+                        destination: "#choose-journey-heading",
+                        page: "/about",
+                      })
+                    }
+                  >
                     <ArrowRight className="mr-2 h-5 w-5" />
                     Explore NESA-Africa
                   </a>
@@ -210,7 +221,17 @@ export default function About() {
                 size="lg"
                 className="bg-gold hover:bg-gold-dark text-charcoal font-semibold rounded-full px-8"
               >
-                <Link to="/nominate">
+                <Link
+                  to="/nominate"
+                  onClick={() =>
+                    trackEvent("about_cta_click", {
+                      section: "final_action",
+                      cta_label: "Nominate for 2026",
+                      destination: "/nominate",
+                      page: "/about",
+                    })
+                  }
+                >
                   <Award className="mr-2 h-5 w-5" />
                   Nominate for 2026
                 </Link>
@@ -221,7 +242,17 @@ export default function About() {
                 variant="outline"
                 className="border-gold/50 text-gold hover:bg-gold/10 rounded-full px-8"
               >
-                <Link to="/sponsors">
+                <Link
+                  to="/sponsors"
+                  onClick={() =>
+                    trackEvent("about_cta_click", {
+                      section: "final_action",
+                      cta_label: "Become a Sponsor",
+                      destination: "/sponsors",
+                      page: "/about",
+                    })
+                  }
+                >
                   <Handshake className="mr-2 h-5 w-5" />
                   Become a Sponsor
                 </Link>
@@ -232,7 +263,17 @@ export default function About() {
                 variant="ghost"
                 className="text-ivory/80 hover:text-ivory hover:bg-gold/10 rounded-full px-8"
               >
-                <Link to="/movement">
+                <Link
+                  to="/movement"
+                  onClick={() =>
+                    trackEvent("about_cta_click", {
+                      section: "final_action",
+                      cta_label: "Join the Movement",
+                      destination: "/movement",
+                      page: "/about",
+                    })
+                  }
+                >
                   <Users className="mr-2 h-5 w-5" />
                   Join the Movement
                 </Link>

@@ -1,6 +1,7 @@
 // AboutSCEFEcosystemSection — One Stewardship • Four Impact Platforms.
 
 import { Link } from "react-router-dom";
+import { trackEvent } from "@/lib/analytics";
 import { motion } from "framer-motion";
 import { Award, GraduationCap, Wrench, Tv, ArrowRight } from "lucide-react";
 
@@ -78,6 +79,15 @@ export function AboutSCEFEcosystemSection() {
             >
               <Link
                 to={p.href}
+                onClick={() =>
+                  trackEvent("about_cta_click", {
+                    section: "scef_ecosystem",
+                    cta_label: "Learn more",
+                    cta_title: p.name,
+                    destination: p.href,
+                    page: "/about",
+                  })
+                }
                 className="group h-full flex flex-col rounded-2xl border border-gold/15 bg-charcoal/60 p-6 hover:border-gold/40 transition-all overflow-hidden relative"
               >
                 <div

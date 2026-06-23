@@ -2,6 +2,7 @@
 // Five large cards to reduce bounce and guide visitors into the right path.
 
 import { Link } from "react-router-dom";
+import { trackEvent } from "@/lib/analytics";
 import { motion } from "framer-motion";
 import {
   UserPlus,
@@ -83,6 +84,15 @@ export function AboutChooseJourneySection() {
             >
               <Link
                 to={j.href}
+                onClick={() =>
+                  trackEvent("about_cta_click", {
+                    section: "choose_journey",
+                    cta_label: j.cta,
+                    cta_title: j.title,
+                    destination: j.href,
+                    page: "/about",
+                  })
+                }
                 className="group h-full flex flex-col rounded-2xl border border-gold/20 bg-charcoal-light/30 p-6 hover:border-gold/50 hover:bg-charcoal-light/50 transition-all"
               >
                 <span className="inline-flex h-12 w-12 items-center justify-center rounded-xl bg-gold/15 border border-gold/30 text-gold mb-4">
