@@ -260,9 +260,12 @@ export default function NomineesHubPage() {
         const wantWords = slug.replace(/-/g, " ");
         if (!norm || (!norm.includes(wantWords) && !norm.includes(wantShort))) return false;
       }
+      const derivedFamily = deriveAwardFamily(n);
+      const derivedClass = deriveRecognitionClass(n);
+      if (filterAwardFamily !== "all" && derivedFamily !== filterAwardFamily) return false;
+      if (filterRecognitionClass !== "all" && derivedClass !== filterRecognitionClass) return false;
+      if (activeGroup !== "all" && !matchesGroup(n, activeGroup, derivedClass)) return false;
       const anyN = n as unknown as Record<string, unknown>;
-      if (filterAwardFamily !== "all" && anyN.awardFamily !== filterAwardFamily) return false;
-      if (filterRecognitionClass !== "all" && anyN.recognitionClass !== filterRecognitionClass) return false;
       if (filterZone !== "all" && anyN.zoneSlug !== filterZone) return false;
       if (filterState !== "all" && anyN.stateSlug !== filterState) return false;
       if (q) {
