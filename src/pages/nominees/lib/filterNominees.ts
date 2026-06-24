@@ -104,10 +104,97 @@ export interface FilterableNominee {
   subcategorySlug?: string | null;
   country?: string | null;
   region?: string | null;
+  organization?: string | null;
   awardFamily?: string | null;
   recognitionClass?: string | null;
   zoneSlug?: string | null;
   stateSlug?: string | null;
+}
+
+export type RecognitionClassSlug =
+  | "africa-resident"
+  | "diaspora"
+  | "friend-of-africa"
+  | "institutional"
+  | "school";
+
+/**
+ * Derive a recognition class for any nominee using whatever signals exist
+ * on the row (region, category, organization). Lets every one of the
+ * 2,500+ legacy nominees fall cleanly into one of the 5 NESA-Africa
+ * recognition classes without requiring a DB backfill.
+ */
+export function deriveRecognitionClass(n: FilterableNominee): RecognitionClassSlug {
+  const cat = (n.categorySlug ?? "").toLowerCase();
+  const catName = (n.categoryName ?? "").toLowerCase();
+  const region = (n.region ?? "").toLowerCase();
+  const org = (n.organization ?? "").toLowerCase();
+
+  if (cat.includes("school") || catName.includes("school") || cat.includes("rebuild")) return "school";
+  if (region.includes("diaspora") || cat.includes("diaspora") || catName.includes("diaspora")) return "diaspora";
+  if (
+    region.includes("friend") ||
+    cat.includes("international") ||
+    cat.includes("bilateral") ||
+    catName.includes("friend of africa") ||
+    catName.includes("friends of africa")
+  ) {
+    return "friend-of-africa";
+  }
+  if (
+    cat.includes("ngo") ||
+    cat.includes("csr") ||
+    cat.includes("edutech") ||
+    cat.includes("institution") ||
+    cat.includes("library") ||
+    cat.includes("research") ||
+    cat.includes("media") ||
+    /(foundation|institute|university|academy|college|school|ltd|inc|llc|trust|society|association|ngo)/.test(org)
+  ) {
+    return "institutional";
+  }
+  return "africa-resident";
+}
+
+/** Derive a Gold/Platinum/Icon/Influencer/RMSA award-family bucket. */
+export function deriveAwardFamily(n: FilterableNominee): string {
+  const c = (n.categorySlug ?? "").toLowerCase();
+  const cn = (n.categoryName ?? "").toLowerCase();
+  if (c.includes("icon") || cn.includes("icon") || cn.includes("lifetime")) return "icon";
+  if (c.includes("influenc") || c.includes("social-media") || cn.includes("influencer")) return "influencer";
+  if (cn.includes("platinum") || c.includes("political") || c.includes("state") || c.includes("bilateral")) return "platinum";
+  if (c.includes("rebuild") || c.includes("rmsa") || cn.includes("rebuild my school")) return "rmsa";
+  return "gold-bluegarnet";
+}
+
+/** Predicate for the Nominee-Group chip row on /nominees. */
+export function matchesGroup(
+  n: FilterableNominee,
+  groupId: string,
+  rc: RecognitionClassSlug,
+): boolean {
+  if (!groupId || groupId === "all") return true;
+  const cat = (n.categorySlug ?? "").toLowerCase();
+  const catName = (n.categoryName ?? "").toLowerCase();
+  const region = (n.region ?? "").toLowerCase();
+  switch (groupId) {
+    case "africans-in-africa":
+      return rc === "africa-resident" || rc === "institutional" || rc === "school";
+    case "africans-in-diaspora":
+      return rc === "diaspora";
+    case "friends-of-africa":
+      return rc === "friend-of-africa";
+    case "africa-regional":
+      return !!region && !region.includes("diaspora") && !region.includes("friend");
+    case "lifetime-icons":
+      return cat.includes("icon") || catName.includes("icon") || catName.includes("lifetime");
+    case "ngos-institutions":
+      return rc === "institutional";
+    case "youth-innovation":
+      return cat.includes("stem") || catName.includes("youth") || catName.includes("innovation") || cat.includes("edutech");
+    default:
+      return true;
+  }
 }
 
 /** Pure filter — used by the page and unit-tested in isolation. */
@@ -128,8 +215,11 @@ export function filterNominees<T extends FilterableNominee>(
       const want = s.region.replace(/-africa$/, "");
       if (!norm || !norm.toLowerCase().includes(want)) return false;
     }
-    if (s.awardFamily !== "all" && n.awardFamily !== s.awardFamily) return false;
-    if (s.recognitionClass !== "all" && n.recognitionClass !== s.recognitionClass) return false;
+    const derivedFamily = n.awardFamily ?? deriveAwardFamily(n);
+    const derivedClass = (n.recognitionClass as RecognitionClassSlug | null) ?? deriveRecognitionClass(n);
+    if (s.awardFamily !== "all" && derivedFamily !== s.awardFamily) return false;
+    if (s.recognitionClass !== "all" && derivedClass !== s.recognitionClass) return false;
+    if (s.group !== "all" && !matchesGroup(n, s.group, derivedClass)) return false;
     if (s.zone !== "all" && n.zoneSlug !== s.zone) return false;
     if (s.state !== "all" && n.stateSlug !== s.state) return false;
     if (q) {
