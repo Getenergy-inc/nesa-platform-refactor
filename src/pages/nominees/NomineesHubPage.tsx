@@ -276,7 +276,8 @@ export default function NomineesHubPage() {
     });
   }, [
     nominees, search, filterTier, tierByCategory, filterCategory, filterSubcategory,
-    filterCountry, filterRegion, filterAwardFamily, filterRecognitionClass, filterZone, filterState,
+    filterCountry, filterRegion, filterAwardFamily, filterRecognitionClass,
+    filterZone, filterState, activeGroup,
   ]);
 
   // Per-tier counts for the chip row. Counted against the full valid pool
