@@ -28,7 +28,10 @@ import {
   getSecondaryCtaHref,
   TIER_BADGE_STYLES,
 } from "@/config/nomineeCategories";
-import { parseFilterParams, applyFilterChange, activeFilterCount } from "@/pages/nominees/lib/filterNominees";
+import {
+  parseFilterParams, applyFilterChange, activeFilterCount,
+  deriveAwardFamily, deriveRecognitionClass, matchesGroup,
+} from "@/pages/nominees/lib/filterNominees";
 import { CategoryDiscoveryGrid } from "@/components/nominees/CategoryDiscoveryGrid";
 import { NIGERIA_ZONES } from "@/config/nomination/nigeriaZones";
 import { normalizeRegion } from "@/lib/regions";
