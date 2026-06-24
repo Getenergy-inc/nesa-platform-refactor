@@ -1,8 +1,14 @@
+import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Badge } from "@/components/ui/badge";
-import { MapPin } from "lucide-react";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Button } from "@/components/ui/button";
+import { MapPin, Building, ChevronRight } from "lucide-react";
+import { listPublicJudges, type PublicJudge } from "@/lib/api/judges.api";
 
-// Import actual judge photos
+// Local fallback judges (used when the public directory is empty or fails to load).
+// These are the verified NESA-Africa 2025 panel members shipped with the app.
 import judge1 from "@/assets/judges/judge1.png";
 import judge6 from "@/assets/judges/judge6.png";
 import judge7 from "@/assets/judges/judge7.png";
@@ -17,9 +23,10 @@ export interface JudgeProfile {
   expertise: string;
   photo: string;
   bio: string;
+  organization?: string;
+  slug?: string;
 }
 
-// Actual NESA-Africa judges from the official website
 export const FEATURED_JUDGES: JudgeProfile[] = [
   {
     name: "Mr Benneth Osarieme Ogbeiwi",
@@ -27,7 +34,8 @@ export const FEATURED_JUDGES: JudgeProfile[] = [
     country: "Nigeria",
     expertise: "Music & Arts Education",
     photo: judge1,
-    bio: "A highly motivated individual with over two decades of experience sharing knowledge in music & the arts. His doggedness makes it impossible for individuals to deviate from the cause.",
+    bio: "Two decades of experience sharing knowledge in music & the arts.",
+    organization: "Adrenaline Entertainment",
   },
   {
     name: "Damilola Omotosho",
@@ -35,7 +43,8 @@ export const FEATURED_JUDGES: JudgeProfile[] = [
     country: "Nigeria",
     expertise: "Quality & Safety",
     photo: judge7,
-    bio: "Sustainability advocate and Cambridge-certified professional influencing energy transition literacy and corporate ESG frameworks in Africa.",
+    bio: "Cambridge-certified sustainability advocate influencing energy transition literacy across Africa.",
+    organization: "Independent",
   },
   {
     name: "Dr Juliet Ihiabe",
@@ -43,7 +52,8 @@ export const FEATURED_JUDGES: JudgeProfile[] = [
     country: "Nigeria",
     expertise: "Philanthropy & Social Impact",
     photo: judge8,
-    bio: "Championing access to education through health interventions, especially for women and children in underserved areas.",
+    bio: "Championing access to education through health interventions for women and children.",
+    organization: "Family Bond Helping Foundation",
   },
   {
     name: "Paul Kayode Joash",
@@ -51,7 +61,8 @@ export const FEATURED_JUDGES: JudgeProfile[] = [
     country: "Nigeria",
     expertise: "Business & Coaching",
     photo: judge9,
-    bio: "A prolific international inspirational Speaker, Sales/Marketing Guru and Personal & Business Transformation Coach. Host of MyDoubleDouble TV/Radio.",
+    bio: "International speaker, sales/marketing guru and personal & business transformation coach.",
+    organization: "MyDoubleDouble International",
   },
   {
     name: "Oluwadaisi Patricia Aderibigbe Santos",
@@ -59,7 +70,8 @@ export const FEATURED_JUDGES: JudgeProfile[] = [
     country: "Nigeria",
     expertise: "Education",
     photo: judge10,
-    bio: "A trailblazer in women-led educational reform and a pillar of early childhood learning advocacy across Nigeria.",
+    bio: "Trailblazer in women-led educational reform and early childhood learning advocacy.",
+    organization: "Independent",
   },
   {
     name: "Dr. Aminah Danjumah",
@@ -67,9 +79,23 @@ export const FEATURED_JUDGES: JudgeProfile[] = [
     country: "Nigeria",
     expertise: "Rural Education",
     photo: judge6,
-    bio: "Dedication to improving rural education, particularly for girls. Created an innovative mobile library system and successful partnership with government.",
+    bio: "Dedicated to improving rural education, particularly for girls, with mobile library innovations.",
+    organization: "Yeelen Education Project",
   },
 ];
+
+function mapPublicToProfile(j: PublicJudge): JudgeProfile {
+  return {
+    name: j.full_name,
+    title: j.professional_title || j.organization || "Jury Member",
+    country: j.country_residence || j.country_origin || j.region || "Africa",
+    expertise: j.expertise_areas?.[0] || "Education",
+    photo: j.photo_url || "",
+    bio: j.bio || j.public_contribution_statement || "",
+    organization: j.organization || undefined,
+    slug: j.slug,
+  };
+}
 
 interface JudgeCardProps {
   judge: JudgeProfile;
@@ -77,60 +103,109 @@ interface JudgeCardProps {
 }
 
 function JudgeCard({ judge, index }: JudgeCardProps) {
+  const initials = judge.name
+    .split(" ")
+    .filter((n) => n.length > 2)
+    .map((n) => n[0])
+    .join("")
+    .slice(0, 2);
+
+  const Inner = (
+    <div className="relative overflow-hidden rounded-2xl bg-gradient-to-b from-charcoal/80 to-charcoal border border-white/10 hover:border-gold/30 transition-all duration-300 h-full">
+      <Badge className="absolute top-4 right-4 z-10 bg-gold text-charcoal font-semibold px-3 py-1 text-xs shadow-lg">
+        {judge.expertise}
+      </Badge>
+
+      <div className="relative aspect-[4/5] overflow-hidden bg-charcoal-light">
+        {judge.photo ? (
+          <img
+            src={judge.photo}
+            alt={judge.name}
+            className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+            loading="lazy"
+          />
+        ) : (
+          <div className="w-full h-full flex items-center justify-center">
+            <Avatar className="h-32 w-32 border-2 border-gold/40">
+              <AvatarFallback className="bg-gradient-to-br from-gold/20 to-gold/5 text-gold text-3xl font-bold">
+                {initials}
+              </AvatarFallback>
+            </Avatar>
+          </div>
+        )}
+        <div className="absolute inset-0 bg-gradient-to-t from-charcoal via-charcoal/40 to-transparent" />
+      </div>
+
+      <div className="absolute bottom-0 left-0 right-0 p-5 bg-gradient-to-t from-white/10 to-transparent backdrop-blur-sm border-t border-white/10 rounded-b-2xl">
+        <h4 className="font-display text-xl font-bold text-white mb-1 leading-tight">
+          {judge.name}
+        </h4>
+        <p className="text-sm text-white/70 mb-2 line-clamp-2">{judge.title}</p>
+        {judge.organization && (
+          <div className="flex items-center gap-1.5 text-white/50 text-xs mb-1">
+            <Building className="h-3 w-3" />
+            <span className="truncate">{judge.organization}</span>
+          </div>
+        )}
+        <div className="flex items-center gap-1.5 text-gold/80">
+          <MapPin className="h-3.5 w-3.5" />
+          <span className="text-sm">{judge.country}</span>
+        </div>
+      </div>
+    </div>
+  );
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
-      transition={{ delay: index * 0.1, duration: 0.5 }}
+      transition={{ delay: index * 0.08, duration: 0.5 }}
       className="group relative"
     >
-      {/* Card Container */}
-      <div className="relative overflow-hidden rounded-2xl bg-gradient-to-b from-charcoal/80 to-charcoal border border-white/10 hover:border-gold/30 transition-all duration-300">
-        {/* Expertise Badge - Floating top right */}
-        <Badge 
-          className="absolute top-4 right-4 z-10 bg-gold text-charcoal font-semibold px-3 py-1 text-xs shadow-lg"
-        >
-          {judge.expertise}
-        </Badge>
-        
-        {/* Photo Container */}
-        <div className="relative aspect-[4/5] overflow-hidden">
-          <img
-            src={judge.photo}
-            alt={judge.name}
-            className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-          />
-          {/* Gradient overlay for text readability */}
-          <div className="absolute inset-0 bg-gradient-to-t from-charcoal via-charcoal/40 to-transparent" />
-        </div>
-        
-        {/* Info Panel - Overlaid at bottom */}
-        <div className="absolute bottom-0 left-0 right-0 p-5 bg-gradient-to-t from-white/10 to-transparent backdrop-blur-sm border-t border-white/10 rounded-b-2xl">
-          <h4 className="font-display text-xl font-bold text-white mb-1 leading-tight">
-            {judge.name}
-          </h4>
-          <p className="text-sm text-white/70 mb-2 whitespace-pre-line line-clamp-2">
-            {judge.title}
-          </p>
-          <div className="flex items-center gap-1.5 text-gold/80">
-            <MapPin className="h-3.5 w-3.5" />
-            <span className="text-sm">{judge.country}</span>
-          </div>
-        </div>
-        
-        {/* Decorative corner accent */}
-        <div className="absolute top-0 left-0 w-16 h-16 bg-gradient-to-br from-gold/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
-      </div>
+      {judge.slug ? (
+        <Link to={`/judges/${judge.slug}`} className="block h-full">
+          {Inner}
+        </Link>
+      ) : (
+        Inner
+      )}
     </motion.div>
   );
 }
 
 export function MeetOurJudgesSection() {
+  const [judges, setJudges] = useState<JudgeProfile[]>(FEATURED_JUDGES);
+  const [totalCount, setTotalCount] = useState<number>(FEATURED_JUDGES.length);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    let cancelled = false;
+    (async () => {
+      try {
+        const featured = await listPublicJudges({ featuredOnly: true });
+        const all = featured.length >= 6 ? featured : await listPublicJudges();
+        if (cancelled) return;
+        if (all && all.length > 0) {
+          setJudges(all.slice(0, 6).map(mapPublicToProfile));
+          setTotalCount(all.length);
+        }
+      } catch {
+        // Keep local fallback list
+      } finally {
+        if (!cancelled) setLoading(false);
+      }
+    })();
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
+  const showing = Math.min(judges.length, 6);
+
   return (
     <section className="bg-charcoal py-20 lg:py-28">
       <div className="container mx-auto px-4">
-        {/* Section Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -144,28 +219,34 @@ export function MeetOurJudgesSection() {
             Meet Our <span className="text-gold">Distinguished Judges</span>
           </h2>
           <p className="text-white/60 max-w-2xl mx-auto">
-            Our jury comprises 27 eminent education leaders from across Africa, 
-            each bringing decades of expertise in their respective fields.
+            Our jury comprises eminent education leaders from across Africa, each
+            bringing decades of expertise in their respective fields.
           </p>
         </motion.div>
 
-        {/* Judges Grid */}
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {FEATURED_JUDGES.map((judge, index) => (
-            <JudgeCard key={judge.name} judge={judge} index={index} />
+          {judges.slice(0, 6).map((judge, index) => (
+            <JudgeCard key={`${judge.name}-${index}`} judge={judge} index={index} />
           ))}
         </div>
 
-        {/* View All Indicator */}
-        <motion.p
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          transition={{ delay: 0.5 }}
-          className="text-center mt-12 text-white/50 text-sm"
-        >
-          Showing 6 of 27 jury members • Full panel accessible to approved judges
-        </motion.p>
+        <div className="text-center mt-12 space-y-4">
+          <p className="text-white/50 text-sm">
+            {loading
+              ? "Loading verified jury members…"
+              : `Showing ${showing} of ${Math.max(totalCount, showing)} jury members`}
+          </p>
+          <Button
+            asChild
+            variant="outline"
+            className="border-gold/40 text-gold hover:bg-gold/10 rounded-full"
+          >
+            <Link to="/judges/directory">
+              View Full Jury Directory
+              <ChevronRight className="ml-1 h-4 w-4" />
+            </Link>
+          </Button>
+        </div>
       </div>
     </section>
   );

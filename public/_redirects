@@ -64,7 +64,7 @@
 /cookie-policy                                               /policies            301
 /language                                                    /                    301
 
-# --- 2. SPA routes (326 explicit paths from src/App.tsx) ---
+# --- 2. SPA routes (329 explicit paths from src/App.tsx) ---
 /nominees/gold-special-recognition/:categorySlug/:nomineeSlug /index.html          200
 /nominees/best-ngo-contribution-to-education/profile/:slug   /index.html          200
 /awards/influencers-education-impact-2026-recognition        /index.html          200
@@ -216,6 +216,7 @@
 /volunteers/:slug                                            /index.html          200
 /vote/blue-garnet                                            /index.html          200
 /admin/bulk-seed                                             /index.html          200
+/afri-edutourism                                             /index.html          200
 /awards/platinum                                             /index.html          200
 /buy-merchandise                                             /index.html          200
 /buy-your-ticket                                             /index.html          200
@@ -224,6 +225,7 @@
 /judge/dashboard                                             /index.html          200
 /my-certificates                                             /index.html          200
 /olc/settlements                                             /index.html          200
+/regions/nigeria                                             /index.html          200
 /shop/orders/:id                                             /index.html          200
 /upcoming-events                                             /index.html          200
 /volunteer-teams                                             /index.html          200
@@ -365,6 +367,7 @@ nominees                                                     /index.html        
 /eduaid                                                      /index.html          200
 /impact                                                      /index.html          200
 /judges                                                      /index.html          200
+/region                                                      /index.html          200
 /signin                                                      /index.html          200
 /signup                                                      /index.html          200
 /videos                                                      /index.html          200
