@@ -90,7 +90,7 @@ export function applyFilterChange(
 export function activeFilterCount(state: NomineeFilterState): number {
   const tracked: (keyof NomineeFilterState)[] = [
     "category", "subcategory", "country", "region", "awardFamily",
-    "recognitionClass", "zone", "state", "type",
+    "recognitionClass", "zone", "state", "type", "group",
   ];
   const dropdowns = tracked.filter((k) => state[k] && state[k] !== "all").length;
   return dropdowns + (state.q.trim() ? 1 : 0);
