@@ -648,16 +648,32 @@ export const ICON_MERGE_STATS: IconMergeStats = (() => {
     }
   }
 
+  for (const n of WORKBOOK_ICON_NOMINEES) {
+    const sub = n.award_subcategory_slug;
+    bySub[sub] ??= { candidates: 0, added: 0, deduped: 0 };
+    bySub[sub].candidates++;
+    const existing = legacyBySlug.get(n.slug);
+    if (existing) {
+      deduped++;
+      bySub[sub].deduped++;
+    } else {
+      ICON_NOMINEES.push(n);
+      legacyBySlug.set(n.slug, n);
+      added++;
+      bySub[sub].added++;
+    }
+  }
+
   return {
     legacyCount,
-    refactoredCandidates: REFACTORED_ICON_NOMINEES.length,
+    refactoredCandidates: REFACTORED_ICON_NOMINEES.length + WORKBOOK_ICON_NOMINEES.length,
     added,
     deduplicated: deduped,
     finalCount: ICON_NOMINEES.length,
     collisions,
     sources: {
       legacy: "src/data/iconAward/index.ts (awards-nominees.csv → 2014–2024 archive)",
-      refactored: "src/data/iconAward/refactoredIconNominees.ts (Santos Aderibigbe secretariat shortlist, Mar 2026 — 2005–2025 period)",
+      refactored: "refactoredIconNominees.ts (Mar 2026 secretariat shortlist) + workbookNominees.ts (NESA_Africa_Icon_Nominee_List 2006–2026, 285 entries)",
     },
     bySubcategoryRefactored: bySub,
   };
