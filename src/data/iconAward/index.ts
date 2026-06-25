@@ -628,8 +628,7 @@ const nameSlug = (name: string): string =>
     .replace(/(^-|-$)/g, "");
 const applyImage = (n: IconNominee): IconNominee => {
   const resolved = resolveIconImage(n.slug, nameSlug(n.name));
-  if (resolved) n.image_url = resolved;
-  else if (!n.image_url || n.image_url.includes("undefined")) n.image_url = PLACEHOLDER_ICON_IMG;
+  n.image_url = resolved ?? PLACEHOLDER_ICON_IMG;
   return n;
 };
 for (const n of ICON_NOMINEES) applyImage(n);
