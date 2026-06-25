@@ -201,6 +201,9 @@ export function NomineeCard({
           alt={nominee.name}
           loading="lazy"
           className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+          onError={(e) => {
+            (e.currentTarget as HTMLImageElement).src = "/images/africaicons/placeholder-icon.svg";
+          }}
         />
         {nominee.verification_status === "verified" && (
           <Badge className="absolute top-3 right-3 bg-gold/90 text-charcoal text-[10px]">
