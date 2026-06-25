@@ -1,5 +1,6 @@
 // Africa Education Icon Award — Lifetime Achievement (2006–2026)
 // Nested data layer: Subcategory → Classification → Nominee
+import { resolveIconImage } from "./imageManifest";
 
 export type IconSubcategorySlug =
   | "literary-new-curriculum-advocate"
@@ -615,6 +616,23 @@ export interface IconMergeStats {
 
 export const LEGACY_ICON_NOMINEES: IconNominee[] = [...ICON_NOMINEES];
 
+// Resolve portrait URLs from the bundled image manifest so nominees always
+// point at a file that actually exists in /public/images/africaicons.
+const PLACEHOLDER_ICON_IMG = "/images/africaicons/placeholder-icon.svg";
+const nameSlug = (name: string): string =>
+  name
+    .toLowerCase()
+    .normalize("NFKD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/(^-|-$)/g, "");
+const applyImage = (n: IconNominee): IconNominee => {
+  const resolved = resolveIconImage(n.slug, nameSlug(n.name));
+  n.image_url = resolved ?? PLACEHOLDER_ICON_IMG;
+  return n;
+};
+for (const n of ICON_NOMINEES) applyImage(n);
+
 export const ICON_MERGE_STATS: IconMergeStats = (() => {
   const legacyCount = ICON_NOMINEES.length;
   const legacyBySlug = new Map(ICON_NOMINEES.map((n) => [n.slug, n]));
@@ -641,7 +659,7 @@ export const ICON_MERGE_STATS: IconMergeStats = (() => {
         refactoredSubcategory: n.award_subcategory_slug,
       });
     } else {
-      ICON_NOMINEES.push(n);
+      ICON_NOMINEES.push(applyImage(n));
       legacyBySlug.set(n.slug, n);
       added++;
       bySub[sub].added++;
@@ -657,7 +675,7 @@ export const ICON_MERGE_STATS: IconMergeStats = (() => {
       deduped++;
       bySub[sub].deduped++;
     } else {
-      ICON_NOMINEES.push(n);
+      ICON_NOMINEES.push(applyImage(n));
       legacyBySlug.set(n.slug, n);
       added++;
       bySub[sub].added++;
