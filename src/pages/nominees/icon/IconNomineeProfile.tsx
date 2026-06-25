@@ -74,7 +74,15 @@ export default function IconNomineeProfile() {
         <section className="border-b border-gold/15 bg-gradient-to-b from-black to-charcoal">
           <div className="container mx-auto px-4 py-12 grid gap-8 md:grid-cols-[280px_1fr]">
             <div className="overflow-hidden rounded-2xl border border-gold/30 bg-black/40 aspect-square">
-              <img src={nominee.image_url} alt={nominee.name} className="h-full w-full object-cover" />
+              <img
+                src={nominee.image_url}
+                alt={nominee.name}
+                loading="lazy"
+                className="h-full w-full object-cover"
+                onError={(e) => {
+                  (e.currentTarget as HTMLImageElement).src = "/images/africaicons/placeholder-icon.svg";
+                }}
+              />
             </div>
             <div>
               <div className="flex flex-wrap gap-2 mb-3">
@@ -126,9 +134,9 @@ export default function IconNomineeProfile() {
           <div className="container mx-auto px-4 grid gap-10 md:grid-cols-3">
             <div className="md:col-span-2">
               <h2 className="font-display text-2xl font-bold text-white mb-4">
-                Lifetime Impact (2006–2026)
+                Individual Contribution to African Education (2006–2026)
               </h2>
-              <p className="text-white/75 leading-relaxed">
+              <p className="text-white/75 leading-relaxed whitespace-pre-line">
                 {nominee.full_impact_story || nominee.impact_summary}
               </p>
               {nominee.impact_area.length > 0 && (

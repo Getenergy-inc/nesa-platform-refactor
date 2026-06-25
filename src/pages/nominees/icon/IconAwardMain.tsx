@@ -3,7 +3,9 @@ import {
   ICON_AWARD,
   ICON_NOMINEES,
   ICON_SUBCATEGORIES,
+  ICON_CLASSIFICATIONS,
   bySubcategory,
+  byClassification,
 } from "@/data/iconAward";
 import {
   FinalCTA,
@@ -56,16 +58,36 @@ export default function IconAwardMain() {
           title="Africa Education Icon Award — Lifetime Achievement (2006–2026)"
           subtitle={ICON_AWARD.subtitle}
           meta={[
-            { label: "Subcategories", value: ICON_SUBCATEGORIES.length },
-            { label: "Nominees", value: total },
-            { label: "Status", value: ICON_AWARD.status },
+            { label: "Verified Nominees", value: total },
+            { label: "Pathways", value: ICON_SUBCATEGORIES.length },
+            { label: "Classifications", value: ICON_CLASSIFICATIONS.length },
+            { label: "Final Laureates", value: 9 },
           ]}
-          primary={{ label: "Explore Icon Nominees", href: "#subcategories" }}
+          primary={{ label: "Explore the Hall of Fame", href: "#subcategories" }}
           secondary={{
             label: "Nominate an Education Icon",
             href: "/nominate?category=africa-education-icon-award",
           }}
         />
+
+        {/* Classifications strip */}
+        <section className="border-y border-gold/10 bg-black/40 py-10">
+          <div className="container mx-auto px-4 grid gap-6 sm:grid-cols-3">
+            {ICON_CLASSIFICATIONS.map((c) => {
+              const count = ICON_SUBCATEGORIES.reduce(
+                (n, s) => n + byClassification(s.slug, c.slug).length,
+                0,
+              );
+              return (
+                <div key={c.slug} className="rounded-xl border border-gold/15 bg-charcoal-light p-5">
+                  <div className="text-3xl font-display font-bold text-gold">{count}</div>
+                  <div className="mt-1 font-display text-white">{c.title}</div>
+                  <p className="mt-2 text-sm text-white/65">{c.description}</p>
+                </div>
+              );
+            })}
+          </div>
+        </section>
 
         <section id="subcategories" className="bg-charcoal py-16 lg:py-20">
           <div className="container mx-auto px-4">
