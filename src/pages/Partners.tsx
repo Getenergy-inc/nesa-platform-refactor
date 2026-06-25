@@ -39,6 +39,7 @@ import {
   BookOpen,
   Wallet,
 } from "lucide-react";
+import { PartnershipProspectsSection } from "@/components/partners/PartnershipProspectsSection";
 
 // ============================================================================
 // DATA
@@ -758,6 +759,11 @@ export default function Partners() {
             </div>
           </div>
         </section>
+
+        {/* ================================================================
+            PROSPECTIVE PARTNERS & ENDORSERS DIRECTORY (500+)
+        ================================================================ */}
+        <PartnershipProspectsSection />
 
         {/* ================================================================
             FINAL CTA
