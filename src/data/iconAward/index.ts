@@ -660,7 +660,7 @@ export const ICON_MERGE_STATS: IconMergeStats = (() => {
         refactoredSubcategory: n.award_subcategory_slug,
       });
     } else {
-      ICON_NOMINEES.push(n);
+      ICON_NOMINEES.push(applyImage(n));
       legacyBySlug.set(n.slug, n);
       added++;
       bySub[sub].added++;
