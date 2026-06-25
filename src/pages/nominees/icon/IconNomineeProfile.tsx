@@ -134,9 +134,9 @@ export default function IconNomineeProfile() {
           <div className="container mx-auto px-4 grid gap-10 md:grid-cols-3">
             <div className="md:col-span-2">
               <h2 className="font-display text-2xl font-bold text-white mb-4">
-                Lifetime Impact (2006–2026)
+                Individual Contribution to African Education (2006–2026)
               </h2>
-              <p className="text-white/75 leading-relaxed">
+              <p className="text-white/75 leading-relaxed whitespace-pre-line">
                 {nominee.full_impact_story || nominee.impact_summary}
               </p>
               {nominee.impact_area.length > 0 && (
