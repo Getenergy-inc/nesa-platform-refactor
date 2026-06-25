@@ -676,7 +676,7 @@ export const ICON_MERGE_STATS: IconMergeStats = (() => {
       deduped++;
       bySub[sub].deduped++;
     } else {
-      ICON_NOMINEES.push(n);
+      ICON_NOMINEES.push(applyImage(n));
       legacyBySlug.set(n.slug, n);
       added++;
       bySub[sub].added++;
