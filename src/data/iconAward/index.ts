@@ -587,6 +587,19 @@ export const ICON_NOMINEES: IconNominee[] = [
   }),
 ];
 
+// Merge refactored 2005–2025 secretariat roster (deduped by slug).
+// Keeps legacy entries authoritative when slugs collide.
+import { REFACTORED_ICON_NOMINEES } from "./refactoredIconNominees";
+{
+  const existing = new Set(ICON_NOMINEES.map((n) => n.slug));
+  for (const n of REFACTORED_ICON_NOMINEES) {
+    if (!existing.has(n.slug)) {
+      ICON_NOMINEES.push(n);
+      existing.add(n.slug);
+    }
+  }
+}
+
 
 // ---------- Selectors ----------
 export const getSubcategory = (slug: string): IconSubcategory | undefined =>
