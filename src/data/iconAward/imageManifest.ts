@@ -187,5 +187,87 @@ export const ICON_IMAGE_MANIFEST: Record<string, string> = {
   "yousriya-sawiris": "/images/africaicons/yousriya-sawiris.jpg"
 };
 
-export const resolveIconImage = (slug: string, nameSlug?: string): string | undefined =>
-  ICON_IMAGE_MANIFEST[slug] ?? (nameSlug ? ICON_IMAGE_MANIFEST[nameSlug] : undefined);
+// Honorifics that may prefix a nominee slug but never appear in the image filename.
+const HONORIFIC_PREFIXES = [
+  "dr-",
+  "prof-",
+  "professor-",
+  "sir-",
+  "dame-",
+  "alhaji-",
+  "hon-",
+  "rev-",
+  "mr-",
+  "mrs-",
+  "ms-",
+  "engr-",
+];
+
+// Track / context suffixes we already index, plus narrative qualifiers that
+// the migration appended (e.g. "-posthumous", "-global-un-role").
+const KNOWN_TRACK_SUFFIXES = [
+  "-tech",
+  "-curriculum",
+  "-philanthropy",
+  "-diaspora",
+  "-africa",
+];
+
+function stripHonorific(slug: string): string {
+  for (const p of HONORIFIC_PREFIXES) {
+    if (slug.startsWith(p)) return slug.slice(p.length);
+  }
+  return slug;
+}
+
+function lookup(candidate: string): string | undefined {
+  if (!candidate) return undefined;
+  if (ICON_IMAGE_MANIFEST[candidate]) return ICON_IMAGE_MANIFEST[candidate];
+  // Try with each known track suffix swapped in.
+  for (const s of KNOWN_TRACK_SUFFIXES) {
+    const v = ICON_IMAGE_MANIFEST[candidate + s];
+    if (v) return v;
+  }
+  return undefined;
+}
+
+/**
+ * Resolve a portrait URL for an Icon nominee.
+ *
+ * Tolerates:
+ *  - exact slug                       ("akinwumi-adesina")
+ *  - track-suffixed slug              ("donald-kaberuka-tech")
+ *  - honorific prefixes               ("dr-akinwumi-adesina")
+ *  - trailing narrative qualifiers    ("amina-mohammed-global-un-role",
+ *                                      "chinua-achebe-posthumous-global-impact",
+ *                                      "audrey-cheng-africa-based-programmes")
+ *  - the unsuffixed nameSlug fallback ("chimamanda-ngozi-adichie")
+ */
+export const resolveIconImage = (slug: string, nameSlug?: string): string | undefined => {
+  const candidates = new Set<string>();
+  const push = (s?: string) => {
+    if (!s) return;
+    candidates.add(s);
+    candidates.add(stripHonorific(s));
+  };
+
+  push(slug);
+  push(nameSlug);
+
+  // Progressively drop trailing dash-segments to peel off narrative qualifiers
+  // like "-posthumous", "-global-un-role", "-nigeria-based-influence".
+  for (const seed of [slug, nameSlug].filter(Boolean) as string[]) {
+    const cleaned = stripHonorific(seed);
+    const parts = cleaned.split("-");
+    while (parts.length > 1) {
+      parts.pop();
+      candidates.add(parts.join("-"));
+    }
+  }
+
+  for (const c of candidates) {
+    const hit = lookup(c);
+    if (hit) return hit;
+  }
+  return undefined;
+};
