@@ -615,6 +615,25 @@ export interface IconMergeStats {
 
 export const LEGACY_ICON_NOMINEES: IconNominee[] = [...ICON_NOMINEES];
 
+// Resolve portrait URLs from the bundled image manifest so nominees always
+// point at a file that actually exists in /public/images/africaicons.
+import { resolveIconImage } from "./imageManifest";
+const PLACEHOLDER_ICON_IMG = "/images/africaicons/placeholder-icon.svg";
+const nameSlug = (name: string): string =>
+  name
+    .toLowerCase()
+    .normalize("NFKD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/(^-|-$)/g, "");
+const applyImage = (n: IconNominee): IconNominee => {
+  const resolved = resolveIconImage(n.slug, nameSlug(n.name));
+  if (resolved) n.image_url = resolved;
+  else if (!n.image_url || n.image_url.includes("undefined")) n.image_url = PLACEHOLDER_ICON_IMG;
+  return n;
+};
+for (const n of ICON_NOMINEES) applyImage(n);
+
 export const ICON_MERGE_STATS: IconMergeStats = (() => {
   const legacyCount = ICON_NOMINEES.length;
   const legacyBySlug = new Map(ICON_NOMINEES.map((n) => [n.slug, n]));
