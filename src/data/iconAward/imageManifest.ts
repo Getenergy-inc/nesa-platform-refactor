@@ -213,6 +213,14 @@ const KNOWN_TRACK_SUFFIXES = [
   "-africa",
 ];
 
+// Known nickname / short-form aliases. Maps an alternate token sequence to
+// the canonical slug fragment used in the image manifest.
+const NAME_ALIASES: Record<string, string> = {
+  "oby-ezekwesili": "obiageli-ezekwesili",
+  "chimamanda-adichie": "chimamanda-ngozi-adichie",
+  "aliko-dangote": "aliko-dangote", // no image yet; placeholder will render
+};
+
 function stripHonorific(slug: string): string {
   for (const p of HONORIFIC_PREFIXES) {
     if (slug.startsWith(p)) return slug.slice(p.length);
