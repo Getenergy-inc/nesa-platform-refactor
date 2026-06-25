@@ -274,7 +274,7 @@ export const resolveIconImage = (slug: string, nameSlug?: string): string | unde
   }
 
   for (const c of candidates) {
-    const hit = lookup(c);
+    const hit = lookup(c) ?? (NAME_ALIASES[c] ? lookup(NAME_ALIASES[c]) : undefined);
     if (hit) return hit;
   }
   return undefined;
