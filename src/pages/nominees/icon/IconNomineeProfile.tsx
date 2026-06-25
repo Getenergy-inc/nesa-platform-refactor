@@ -74,7 +74,15 @@ export default function IconNomineeProfile() {
         <section className="border-b border-gold/15 bg-gradient-to-b from-black to-charcoal">
           <div className="container mx-auto px-4 py-12 grid gap-8 md:grid-cols-[280px_1fr]">
             <div className="overflow-hidden rounded-2xl border border-gold/30 bg-black/40 aspect-square">
-              <img src={nominee.image_url} alt={nominee.name} className="h-full w-full object-cover" />
+              <img
+                src={nominee.image_url}
+                alt={nominee.name}
+                loading="lazy"
+                className="h-full w-full object-cover"
+                onError={(e) => {
+                  (e.currentTarget as HTMLImageElement).src = "/images/africaicons/placeholder-icon.svg";
+                }}
+              />
             </div>
             <div>
               <div className="flex flex-wrap gap-2 mb-3">
