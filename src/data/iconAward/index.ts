@@ -590,15 +590,77 @@ export const ICON_NOMINEES: IconNominee[] = [
 // Merge refactored 2005–2025 secretariat roster (deduped by slug).
 // Keeps legacy entries authoritative when slugs collide.
 import { REFACTORED_ICON_NOMINEES } from "./refactoredIconNominees";
-{
-  const existing = new Set(ICON_NOMINEES.map((n) => n.slug));
+
+export interface IconMergeCollision {
+  slug: string;
+  name: string;
+  legacyName: string;
+  legacySource: string;
+  refactoredSource: string;
+  legacySubcategory: string;
+  refactoredSubcategory: string;
+}
+
+export interface IconMergeStats {
+  legacyCount: number;
+  refactoredCandidates: number;
+  added: number;
+  deduplicated: number;
+  finalCount: number;
+  collisions: IconMergeCollision[];
+  sources: { legacy: string; refactored: string };
+  bySubcategoryRefactored: Record<string, { candidates: number; added: number; deduped: number }>;
+}
+
+export const LEGACY_ICON_NOMINEES: IconNominee[] = [...ICON_NOMINEES];
+
+export const ICON_MERGE_STATS: IconMergeStats = (() => {
+  const legacyCount = ICON_NOMINEES.length;
+  const legacyBySlug = new Map(ICON_NOMINEES.map((n) => [n.slug, n]));
+  const collisions: IconMergeCollision[] = [];
+  const bySub: Record<string, { candidates: number; added: number; deduped: number }> = {};
+  let added = 0;
+  let deduped = 0;
+
   for (const n of REFACTORED_ICON_NOMINEES) {
-    if (!existing.has(n.slug)) {
+    const sub = n.award_subcategory_slug;
+    bySub[sub] ??= { candidates: 0, added: 0, deduped: 0 };
+    bySub[sub].candidates++;
+    const existing = legacyBySlug.get(n.slug);
+    if (existing) {
+      deduped++;
+      bySub[sub].deduped++;
+      collisions.push({
+        slug: n.slug,
+        name: n.name,
+        legacyName: existing.name,
+        legacySource: existing.migration_source ?? "legacy-archive",
+        refactoredSource: n.migration_source ?? "manual",
+        legacySubcategory: existing.award_subcategory_slug,
+        refactoredSubcategory: n.award_subcategory_slug,
+      });
+    } else {
       ICON_NOMINEES.push(n);
-      existing.add(n.slug);
+      legacyBySlug.set(n.slug, n);
+      added++;
+      bySub[sub].added++;
     }
   }
-}
+
+  return {
+    legacyCount,
+    refactoredCandidates: REFACTORED_ICON_NOMINEES.length,
+    added,
+    deduplicated: deduped,
+    finalCount: ICON_NOMINEES.length,
+    collisions,
+    sources: {
+      legacy: "src/data/iconAward/index.ts (awards-nominees.csv → 2014–2024 archive)",
+      refactored: "src/data/iconAward/refactoredIconNominees.ts (Santos Aderibigbe secretariat shortlist, Mar 2026 — 2005–2025 period)",
+    },
+    bySubcategoryRefactored: bySub,
+  };
+})();
 
 
 // ---------- Selectors ----------
