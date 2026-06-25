@@ -1,4 +1,5 @@
 import { useMemo, useState } from "react";
+import { Link } from "react-router-dom";
 import { Search, Building2, Globe2, Info } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
@@ -19,7 +20,9 @@ import {
   PARTNERSHIP_PROSPECT_GROUPS,
   PARTNERSHIP_PROSPECT_TOTAL,
   PARTNERSHIP_PROSPECT_UNIQUE_COUNT,
+  slugifyProspect,
 } from "@/data/partnershipProspects";
+
 
 /**
  * Public directory of NESA-Africa 2026 prospective partners & endorsers.
