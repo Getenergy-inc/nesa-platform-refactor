@@ -146,9 +146,15 @@ export function PartnershipProspectsSection() {
                     <ol className="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-1.5 pb-3 pt-1 list-decimal list-inside text-sm text-foreground/90">
                       {g.organizations.map((org, i) => (
                         <li key={`${g.id}-${i}`} className="leading-relaxed">
-                          <Highlight text={org} query={query} />
+                          <Link
+                            to={`/partners/prospects/${slugifyProspect(org)}`}
+                            className="hover:text-gold hover:underline underline-offset-2 transition-colors"
+                          >
+                            <Highlight text={org} query={query} />
+                          </Link>
                         </li>
                       ))}
+
                     </ol>
                   </AccordionContent>
                 </AccordionItem>
