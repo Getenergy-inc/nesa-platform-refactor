@@ -1,87 +1,67 @@
-# NESA-Africa NRC Evidence Refactor — Phased Delivery Plan
 
-The uploaded workbook (`NESA_NIG_-2026_NRC_EVIDENCE_REFACTORED_NIGERIA_8REGION_3.xlsx`) carries **2,521 NRC rows** across 7 sheets (NRC Evidence Matrix, Nigeria Classification, 8-Region Classification, Category/Subcategory Coverage, Evidence Required Queue, Media Nigeria NRC, EDI Matrix Rules). This is the source of truth for the refactor.
+# Africa Education Icon — Master Refactor Plan
 
-The current live DB already has **2,038 approved nominees** + 18 categories tiered (1–4) + region filter wired to the interactive Africa map. We layer on top — **no deletes, no overwrites**.
+This is a large, multi-phase migration. To keep it shippable and reversible, I'll break it into 5 sequenced phases. Each phase produces a verifiable artefact before the next begins. **Nothing in `src/data/iconAward` legacy files is deleted** — new data merges in via the existing `ICON_NOMINEES` dedup pipeline.
 
-I am proposing **5 sequential phases**. Each phase ships independently, behind read-only public surfaces first, with admin write surfaces after.
+## Phase 0 — Data Ingestion & Audit (no UI changes)
 
----
+1. **Parse the workbook** `NESA_Africa_Icon_Nominee_List_Table_Excel_2006_2026 (8).xlsx` with a script (`scripts/icon/ingest-workbook.ts`). Detect sheets, normalise headers, emit:
+   - `src/data/iconAward/workbook2026.json` — canonical nominee records with: slug, name, subcategory (philanthropy / literary / technical), classification (africa-resident / diaspora / friend-of-africa), country, region, organisation, years, evidence bullets, references, source row.
+   - `migration/icon-workbook.report.md` — totals per subcategory × classification, missing fields, slug collisions vs existing `ICON_NOMINEES`.
+2. **Extract the image archive** to `public/images/icons/` (kebab-case filenames matching nominee slugs). Build `src/data/iconAward/iconImageMap.ts` mapping slug → public path, with a fuzzy-match report for any unmatched names ("(Tech track)" / "(Posthumous)" / "(Curriculum track)" suffixes are stripped during matching).
+3. Emit `migration/icon.images.report.md` listing matched, unmatched-image, and nominee-without-image counts.
 
-## Phase 1 — Database backbone (migration + workbook import)
+I stop and post the two reports to you before Phase 1 so you can spot mis-mappings.
 
-**New tables (all in `public`, RLS + GRANTs per Lovable Cloud rules):**
+## Phase 1 — CMS Merge
 
-- `nrc_evidence_rows` — 1:1 with the workbook's "NRC Evidence Matrix" sheet. Keyed by `nrc_no` + `active_nominee_id`. Stores all 46 columns including the 3 reference triplets, EDI 5-axis scores, total EDI /20, verification_status, research_priority, search_query_pack, public_website_wording.
-- `nrc_evidence_sources` — normalised 1:N source register exploded from Ref 1/2/3 (source_title, source_name, source_url, source_year, evidence_type, reliability_rating 0–5, date_checked, researcher, verification_status).
-- `nrc_edi_scores` — Education Development Index Matrix: 11 axes (Evidence Strength, Access, Equity, Inclusion & Safeguarding, Scale, Sustainability, Innovation, Community Relevance, EFA, SDG4, AU 2063), total, average, band, reviewer_note.
-- `nrc_research_queue` — Evidence Required Queue rows (priority, status enum: pending / in_review / evidence_found / needs_more_sources / ready_for_review / public_display_ready).
-- `nrc_icon_classifications` — **only** for Africa Education Icon Award nominees. icon_classification_group enum: `africans_in_africa | africans_in_diaspora | friends_of_africa | needs_verification`.
-- `nrc_regional_summary` + `nrc_nigeria_summary` — denormalised dashboard tables refreshed by edge function.
-- Extend existing `nominees` with: `nrc_no`, `nrc_classification_level`, `nigeria_classification_group`, `country_of_impact`, `evidence_status`, `edi_band`, `public_display_status`, `research_priority` (all nullable — no breakage of the 2,038 live rows).
+1. Convert `workbook2026.json` into `src/data/iconAward/workbookNominees.ts` exporting typed records that match the existing `IconNominee` shape (slug, kind, subcategory, classification, country, region, organization, summary, contributions[], image, sources[]).
+2. Update `src/data/iconAward/index.ts` so `ICON_NOMINEES` = workbook-first ∪ legacy ∪ refactored — workbook wins on conflict, full provenance retained in `ICON_MERGE_STATS`.
+3. Extend `IconNominee` with `contribution_2006_2026` (the long-form section) generated **only from workbook evidence** — no fabrication; if evidence is thin the section renders a "Verification in Progress" stub rather than invented prose.
+4. Auto-attach images from `iconImageMap` with premium fallback (`PortraitFallback` component) for missing photos.
 
-**RLS:** public `SELECT` only on rows where `public_display_status = 'public_display_ready'`. Admin/NRC roles get full access via `has_role()`.
+## Phase 2 — Gateway Page Refactor (`/awards/africa-education-icon`)
 
-**Import:** one-shot edge function `nrc-evidence-import` that reads the workbook (uploaded to `nominee-media` bucket), upserts by `nrc_no`, links to existing `nominees` by name match, never overwrites approved nominee bios.
+Replace the current long-scroll composition in `src/pages/categories/AfricaEducationIcon.tsx` with a museum-grade structure:
 
----
+```text
+Hero (legacy positioning) → Why this award exists → 3 Icon pathways (premium cards)
+→ 3 Continental classifications (world-map visual) → Selection process (6 steps)
+→ Hall of Fame preview (top verified) → Legacy stories → Final CTA
+```
 
-## Phase 2 — Public directory refactor (`/nominees/explore`)
+Remove duplicate FAQ / governance / sponsor / nomination / trust blocks (each appears once or links out).
 
-Refactor existing `/nominees` (NomineesHubPage) into the **Africa Education Awards Evidence Directory**:
+## Phase 3 — Subcategory Pages Refactor
 
-- Filters added: award tier · award category · subcategory · Nigeria classification group · 8-region · country of base · country of impact · nominee type · evidence status · EDI band · research priority · public display status.
-- **Conditional filter:** "Africa Education Icon Classification" (Africans in Africa / Diaspora / Friends of Africa / Needs Verification) appears **only** when category = Africa Education Icon Award.
-- Nominee cards show safe labels: Under NRC Review · Evidence Required · Verified Contribution · Public Display Ready · EDI band chip.
-- Integrity notice footer on every list and profile page.
-- No nominee called winner/finalist/sponsor/partner/judge/ambassador/endorser.
+Refactor in place (URLs preserved):
+- `/nominees/africa-education-icon-award/education-philanthropy-icon`
+- `/nominees/africa-education-icon-award/literary-new-curriculum-advocate`
+- `/nominees/africa-education-icon-award/technical-educator-icon`
 
-New public pages:
-- `/nominees/nigeria` — Nigeria Classification hub (states, zones, category blocks).
-- `/nominees/regions` — 8-region grid with balance status chips (already half-wired via the Africa map).
-- `/nominees/regions/[regionSlug]` — 8 region pages.
-- `/awards/africa-education-icon` — Icon hub with the 3 classification groups.
-- `/nominee/[slug]` — refactor existing profile to add Evidence Section, EDI Matrix Section, conditional Icon Classification block, Integrity Notice.
+Each page renders three classification rails (Africa-resident / Diaspora / Friend of Africa) populated from `byClassification(sub, cls)`, with sticky filters (country, region, organisation, year, verification), search, swipeable mobile cards, lazy images.
 
----
+## Phase 4 — Profile Experience + "Individual Contribution 2006–2026"
 
-## Phase 3 — Admin NRC portal (`/admin/nrc-*`)
+Upgrade `IconNomineeProfilePage` (existing route preserved) to render:
+- Hero portrait + verification badge
+- Biography
+- **Individual Contribution to African Education (2006–2026)** — generated from `contribution_2006_2026`, with verified-evidence bullets
+- Timeline · Institutions · Sectors · Gallery (if media) · References · Related nominees
+- SEO: canonical preserved, BreadcrumbList + Person/Organization JSON-LD, OG tags
 
-Gated by existing `has_role(auth.uid(), 'admin')` + new `nrc` role.
+Auto-generate profile pages for any workbook nominee that lacks one (data-driven; no new route files needed since the page already resolves by slug).
 
-- `/admin/nrc-dashboard` — totals, coverage, missing evidence, regional balance, Icon classification summary, duplicates, geography flags.
-- `/admin/nrc-evidence-matrix` — full evidence matrix table with inline edits.
-- `/admin/research-queue` — kanban by status.
-- `/admin/source-register` — every reference row, sortable by reliability.
-- `/admin/education-development-index-matrix` — 11-axis scoring UI per nominee, auto-computes total/average/band.
-- `/admin/icon-award-classifications` — Icon-only classification manager.
+## Phase 5 — QA + Live Stats + SEO
 
----
+- Replace hardcoded counters with live `ICON_NOMINEES`-derived stats (totals, per-classification, countries, year span).
+- Add Playwright spec `tests/e2e/icon-hall-of-fame.spec.ts` asserting: gateway loads, 3 pathways link correctly, each subcategory shows 3 classification groups with non-empty rails (or verification placeholder), every workbook nominee resolves to a profile, no broken images, no duplicate H1.
+- Run `bun run build` and verify zero regressions.
 
-## Phase 4 — NRC Research Engine
+## Decisions I need from you before I start Phase 0
 
-- Edge function `nrc-search-pack` — auto-generates the search query packs per nominee type (CSR / Media / Icon variants per the spec).
-- Edge function `nrc-edi-recompute` — recomputes EDI band when scores change.
-- Edge function `nrc-regional-balance` — nightly refresh of `nrc_regional_summary` and `nrc_nigeria_summary`.
-- Daily cron via `pg_cron` to keep summaries fresh.
+1. **Tone of generated `contribution_2006_2026` prose** — strictly bullet evidence (safe, never invents) vs. 150-word narrative summary rewritten from evidence cells (richer, but I will refuse to write if a row has fewer than ~3 evidence fields). Which?
+2. **Legacy nominees with no workbook row** (the 180 from your earlier refactored list) — keep them visible alongside workbook nominees in the Hall of Fame, or hide them until they appear in the workbook?
+3. **Image storage** — public/ folder (committed, ~15 MB, simple) vs. Lovable Assets CDN (recommended for binary >5 MB total, keeps repo lean). Default to CDN unless you prefer public/.
 
----
-
-## Phase 5 — Terminology + integrity sweep
-
-- Repo-wide: rename every "EDI Matrix" reference meaning Equity/Diversity/Inclusion → "Education Development Index Matrix". Audit `src/` + `docs/` + `supabase/migrations/`.
-- Add `INTEGRITY_NOTICE` constant + `<IntegrityNotice />` component used on every public list/profile/category page.
-- Banned-strings test extension: fail CI if winner/finalist/sponsor/etc. appears next to a nominee field without an `approved_*` guard.
-- Nav refactor per the spec (Explore Nominees · Nigeria · Regions · Icon Award).
-
----
-
-## Decisions I need from you before I start Phase 1
-
-I will only ship Phase 1 (schema + import) in the first turn. Phases 2–5 follow turn by turn after you approve each one. Three calls I cannot make without you:
-
-1. **Nominee linking on import** — when a workbook row name matches an existing `nominees` row, do I (a) attach NRC data as a sidecar (existing record untouched, recommended), or (b) overwrite the nominee's category/region/country with the workbook's classification?
-2. **Existing `nominees` not in the workbook** (~1,500 of the 2,038 won't match the 2,521 NRC rows by name) — leave them with `evidence_status = NULL` and let them keep their current `status = 'approved'` public visibility, **or** flip them all to `under_nrc_review` and hide from `/nominees` until classified?
-3. **Public visibility default after import** — should newly imported NRC rows be **hidden** from `/nominees` until an admin flips `public_display_status = 'public_display_ready'` (safer), or **visible** immediately with the "Under NRC Review" chip (faster, matches the spec's "discovery platform" framing)?
-
-Reply with answers (1a/1b, 2a/2b, 3a/3b) and I'll ship Phase 1.
+Once you answer (or say "your call"), I'll run Phase 0 and post the two reports.
