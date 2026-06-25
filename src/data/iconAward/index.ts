@@ -617,7 +617,6 @@ export const LEGACY_ICON_NOMINEES: IconNominee[] = [...ICON_NOMINEES];
 
 // Resolve portrait URLs from the bundled image manifest so nominees always
 // point at a file that actually exists in /public/images/africaicons.
-import { resolveIconImage } from "./imageManifest";
 const PLACEHOLDER_ICON_IMG = "/images/africaicons/placeholder-icon.svg";
 const nameSlug = (name: string): string =>
   name
