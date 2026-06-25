@@ -663,3 +663,78 @@ export const PARTNERSHIP_PROSPECT_UNIQUE_COUNT = new Set(
     g.organizations.map((o) => o.toLowerCase().trim()),
   ),
 ).size;
+
+/** URL-safe slug for an organization name. */
+export function slugifyProspect(name: string): string {
+  return name
+    .toLowerCase()
+    .normalize("NFKD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/['’`]/g, "")
+    .replace(/&/g, " and ")
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "")
+    .slice(0, 96);
+}
+
+export interface ProspectGroupRef {
+  id: string;
+  code: string;
+  title: string;
+  /** 1-based position of the organization within this group as originally listed. */
+  position: number;
+}
+
+export interface ProspectRecord {
+  slug: string;
+  name: string;
+  /** All sub-categories this organization appears under (preserves duplicates intent). */
+  groups: ProspectGroupRef[];
+  /** Source references for this entry. */
+  sources: string[];
+  /** Total number of times the name appears across the consolidated list. */
+  occurrences: number;
+}
+
+const PROSPECT_INDEX: Map<string, ProspectRecord> = (() => {
+  const map = new Map<string, ProspectRecord>();
+  for (const g of PARTNERSHIP_PROSPECT_GROUPS) {
+    g.organizations.forEach((name, idx) => {
+      const slug = slugifyProspect(name);
+      const ref: ProspectGroupRef = {
+        id: g.id,
+        code: g.code,
+        title: g.title,
+        position: idx + 1,
+      };
+      const existing = map.get(slug);
+      if (existing) {
+        existing.groups.push(ref);
+        existing.occurrences += 1;
+      } else {
+        map.set(slug, {
+          slug,
+          name,
+          groups: [ref],
+          occurrences: 1,
+          sources: [
+            "NESA-Africa 2026 Partnerships Team — Consolidated Outreach List (519 entries)",
+            "NESA-Africa Public Partners Directory (/partners#prospective-partners)",
+          ],
+        });
+      }
+    });
+  }
+  return map;
+})();
+
+export const PARTNERSHIP_PROSPECT_INDEX: ReadonlyMap<string, ProspectRecord> = PROSPECT_INDEX;
+
+export function getProspectBySlug(slug: string): ProspectRecord | undefined {
+  return PROSPECT_INDEX.get(slug);
+}
+
+export function listProspectSlugs(): string[] {
+  return Array.from(PROSPECT_INDEX.keys());
+}
+

@@ -187,6 +187,7 @@ import ArenaNominees from "./pages/judges-arena/ArenaNominees";
 import ArenaReview from "./pages/judges-arena/ArenaReview";
 import ArenaDiscussion from "./pages/judges-arena/ArenaDiscussion";
 import Partners from "./pages/Partners";
+import ProspectiveOrgPage from "./pages/partners/ProspectiveOrgPage";
 import Chapters from "./pages/Chapters";
 import Volunteer from "./pages/Volunteer";
 import Volunteers from "./pages/Volunteers";
@@ -1979,6 +1980,15 @@ const App = () => (
                       </WithLayout>
                     }
                   />
+                  <Route
+                    path="/partners/prospects/:slug"
+                    element={
+                      <WithLayout>
+                        <ProspectiveOrgPage />
+                      </WithLayout>
+                    }
+                  />
+
                   <Route
                     path="/chapters"
                     element={

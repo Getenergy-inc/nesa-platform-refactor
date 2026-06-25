@@ -1,4 +1,5 @@
 import { useMemo, useState } from "react";
+import { Link } from "react-router-dom";
 import { Search, Building2, Globe2, Info } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
@@ -19,7 +20,9 @@ import {
   PARTNERSHIP_PROSPECT_GROUPS,
   PARTNERSHIP_PROSPECT_TOTAL,
   PARTNERSHIP_PROSPECT_UNIQUE_COUNT,
+  slugifyProspect,
 } from "@/data/partnershipProspects";
+
 
 /**
  * Public directory of NESA-Africa 2026 prospective partners & endorsers.
@@ -143,9 +146,15 @@ export function PartnershipProspectsSection() {
                     <ol className="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-1.5 pb-3 pt-1 list-decimal list-inside text-sm text-foreground/90">
                       {g.organizations.map((org, i) => (
                         <li key={`${g.id}-${i}`} className="leading-relaxed">
-                          <Highlight text={org} query={query} />
+                          <Link
+                            to={`/partners/prospects/${slugifyProspect(org)}`}
+                            className="hover:text-gold hover:underline underline-offset-2 transition-colors"
+                          >
+                            <Highlight text={org} query={query} />
+                          </Link>
                         </li>
                       ))}
+
                     </ol>
                   </AccordionContent>
                 </AccordionItem>
