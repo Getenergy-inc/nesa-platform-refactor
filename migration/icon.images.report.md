@@ -2,96 +2,69 @@
 
 **Archive files:** 150
 
-**Matched to nominees:** 36
+**Matched to nominees:** 140
 
-**Nominees without image (will use fallback):** 54
+**Nominees without image (premium fallback used):** 145
 
-**Unused image files:** 114
-
-## Nominees without image
+## Unmatched nominees (top 60)
 
 - abdourahman-waberi
 - alain-mabanckou
 - alhaji-aliko-dangote-rural-education-focus
+- ali-partovi-education-partnerships
 - aliko-dangote
 - ama-ata-aidoo
+- amina-mohammed-global-un-role
+- angelina-jolie-curriculum
+- angelina-jolie-philanthropy
 - audrey-cheng-africa-based-programmes
 - audrey-cheng-africa-based-work
+- bill-clinton
 - binyavanga-wainaina-posthumous
+- chibundu-onuzo
+- chika-unigwe
 - chimamanda-adichie-nigeria-based-influence
+- chimamanda-ngozi-adichie
+- chinua-achebe-posthumous-global-impact
+- chris-abani-curriculum
+- chris-abani-philanthropy
+- david-moinina-sengeh-global-partnership-support
+- david-moinina-sengeh-global-partnerships
+- dr-acha-leke
+- dr-akinwumi-adesina
 - dr-bitange-ndemo
+- dr-donald-kaberuka-philanthropy
+- dr-donald-kaberuka-tech
+- dr-hakim-adi
+- dr-ibrahim-mayaki
+- dr-james-mwangi-global-operations
+- dr-jeffrey-sachs-curriculum
+- dr-jeffrey-sachs-philanthropy
+- dr-kola-badmus
+- dr-mary-joy-pigozzi
 - dr-naledi-pandor
-- dr-obiageli-ezekwesili
-- dr-oby-ezekwesili
+- dr-obiageli-ezekwesili-curriculum
+- dr-obiageli-ezekwesili-philanthropy
+- dr-oby-ezekwesili-curriculum
+- dr-oby-ezekwesili-philanthropy
+- dr-oby-ezekwesili-tech-governance-advocacy
+- dr-tajudeen-abdul-raheem-posthumous-influence
+- dr-vera-songwe
 - dr-wandia-njoya
+- e-c-osondu
 - elif-shafak-africa-focused-advocacy-collaborations
+- emma-watson
+- eric-yuan-zoom-access-impact
 - folorunso-alakija
+- george-soros
 - helon-habila
+- hisham-matar
 - idris-elba-philanthropic-education-projects-in-africa
+- jeff-bezos
+- justin-trudeau
+- karim-jovian
+- karim-jovian-education-outreach
 - kole-omotoso
+- larry-page
+- lebo-mashile
 - lola-shoneyin
-- mohammed-ibrahim-foundation-education-team
-- nassef-sawiris
-- nawal-el-saadawi-posthumous-influence
-- ndidi-nwuneli-africa-based-impact
-- ngugi-wa-thiongo
-- ousmane-sembene-posthumous-influence
-- pascal-murasira
-- patrice-motsepe
-- peter-kimani
-- prof-achille-mbembe
-- prof-amina-mama
-- prof-ato-quayson
-- prof-bayo-olukoshi
-- prof-catherine-odora-hoppers
-- prof-francis-nyamnjoh
-- prof-grace-musila
-- prof-jonathan-jansen
-- prof-kwesi-yankah
-- prof-mahmood-mamdani
-- prof-pius-adesanmi-posthumous
-- prof-ruth-meena
-- prof-sabelo-ndlovu-gatsheni
-- prof-thandika-mkandawire-posthumous
-- prof-toyin-falola
-- prof-tshilidzi-marwala
-- rebecca-oke
-- scholastique-mukasonga
-- sefi-atta
-- strive-masiyiwa
-- strive-masiyiwa-foundation-focus
-
-_…and 4 more_
-
-## Unused image files (top 30)
-
-- Abdulrazak Gurnah.jfif
-- Abiola Irele (Posthumous).png
-- Acha Leke (Tech track).jfif
-- Achille Mbembe.jfif
-- Akin Adesokan.jfif
-- Akinwumi Adesina.jfif
-- Ali Partovi.jfif
-- Amartya Sen.jfif
-- Amina Mama.jfif
-- Amina Mohammed (Curriculum track).jfif
-- Antonio Guterres (Curriculum track).png
-- Ashish Thakkar.jfif
-- Ato Quayson.jfif
-- Audrey Cheng (Africa-based).jfif
-- Ban Ki-moon (Curriculum track).jfif
-- Bayo Olukoshi.jfif
-- Bethlehem Tilahun Alemu.jfif
-- Bill Drayton.jfif
-- Bill Gates.jfif
-- Bitange Ndemo.jfif
-- Carli Coetzee.png
-- Catherine Odora Hoppers.jfif
-- Chika Okeke-Agulu.jfif
-- Dare Okoudjou.jfif
-- David Beckham (Curriculum track).jfif
-- Dinaw Mengestu.jfif
-- Donald Kaberuka (Tech track).jfif
-- Eghosa Omoigui (Tech track).jfif
-- Elon Musk.jfif
-- Eric Schmidt.jfif

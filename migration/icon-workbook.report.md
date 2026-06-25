@@ -1,13 +1,19 @@
 # Africa Education Icon — Workbook Ingest Report
 
-**Sheet sources:** Final Refactored Register (180 rows), Full Extract (360 rows)
+**Sources:** Final Refactored Register (180 rows) + Full Extract (360 rows)
 
-**Unique nominees after slug-dedup:** 90
+**Unique nominee records:** 285
 
 ## Counts by subcategory × classification
 
 | Subcategory | Classification | Count |
 |---|---|---|
 | education-philanthropy-icon | africans-in-africa | 30 |
-| literary-new-curriculum-advocate | africans-in-africa | 39 |
-| technical-educator-icon | africans-in-africa | 21 |
+| education-philanthropy-icon | diaspora-africans | 33 |
+| education-philanthropy-icon | friends-of-africa | 35 |
+| literary-new-curriculum-advocate | africans-in-africa | 40 |
+| literary-new-curriculum-advocate | diaspora-africans | 40 |
+| literary-new-curriculum-advocate | friends-of-africa | 28 |
+| technical-educator-icon | africans-in-africa | 23 |
+| technical-educator-icon | diaspora-africans | 28 |
+| technical-educator-icon | friends-of-africa | 28 |
