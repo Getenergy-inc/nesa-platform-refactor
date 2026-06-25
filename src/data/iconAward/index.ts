@@ -1,5 +1,6 @@
 // Africa Education Icon Award — Lifetime Achievement (2006–2026)
 // Nested data layer: Subcategory → Classification → Nominee
+import { resolveIconImage } from "./imageManifest";
 
 export type IconSubcategorySlug =
   | "literary-new-curriculum-advocate"
