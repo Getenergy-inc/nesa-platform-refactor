@@ -1981,6 +1981,15 @@ const App = () => (
                     }
                   />
                   <Route
+                    path="/partners/prospects/:slug"
+                    element={
+                      <WithLayout>
+                        <ProspectiveOrgPage />
+                      </WithLayout>
+                    }
+                  />
+
+                  <Route
                     path="/chapters"
                     element={
                       <WithLayout>
