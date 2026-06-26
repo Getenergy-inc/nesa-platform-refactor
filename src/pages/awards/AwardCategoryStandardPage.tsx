@@ -1,4 +1,5 @@
 import { useMemo } from "react";
+
 import { Helmet } from "react-helmet-async";
 import { useNavigate } from "react-router-dom";
 import { BreadcrumbJsonLd } from "@/components/seo/BreadcrumbJsonLd";
@@ -26,12 +27,8 @@ type Props = { slug: string };
  */
 export default function AwardCategoryStandardPage({ slug }: Props) {
   const content = getAwardPageContent(slug);
-  const navigate = useNavigate();
+  if (!content) return null;
 
-  if (!content) {
-    if (typeof window !== "undefined") navigate("/awards", { replace: true });
-    return null;
-  }
 
   const { hero, eligibility, hallFilter, subcategories, finalCta } = content;
 
