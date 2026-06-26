@@ -111,8 +111,8 @@ export default function AwardCategoryStandardPage({ slug }: Props) {
       />
 
       <div className="min-h-screen bg-charcoal text-white">
-        <Header />
         <main>
+
           <AwardHeroStandard
             pageSlug={content.slug}
             badge={hero.badge}
@@ -150,8 +150,8 @@ export default function AwardCategoryStandardPage({ slug }: Props) {
             secondaryCta={finalCta.secondary}
           />
         </main>
-        <Footer />
       </div>
+
     </>
   );
 }
