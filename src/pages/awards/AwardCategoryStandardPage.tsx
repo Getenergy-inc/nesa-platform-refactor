@@ -1,7 +1,7 @@
 import { useMemo } from "react";
 
 import { Helmet } from "react-helmet-async";
-import { useNavigate } from "react-router-dom";
+
 import { BreadcrumbJsonLd } from "@/components/seo/BreadcrumbJsonLd";
 import {
   AwardHeroStandard,
