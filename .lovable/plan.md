@@ -1,61 +1,101 @@
-# NESA-Africa 2026 — 7-Pillar Communication Refactor
+## NESA-Africa Award Pages — Unified Premium Refactor
 
-## Scope
-Refactor public-facing copy + structure across the homepage hero, Award Categories overview page, and 7 pillar pages so visitors immediately understand: what NESA-Africa is, who it recognises, and one clear first action.
+Refactor all award-tier, category, subcategory, and directory pages to match the `/awards/africa-education-icon` premium standard. Build a reusable section library so every page shares identical structure, visual rhythm, and communication clarity.
 
-All routing, data, governance, and backend logic stay untouched. This is a frontend/presentation refactor (copy, identity tags, CTA labels, section ordering, new pillar pages).
+---
 
-## Deliverables
+### 1. Shared Component Library (new)
 
-### 1. Homepage Hero (`src/components/nesa/TrophyHeroSection.tsx`)
-- Eyebrow: "NESA-Africa 2026 | The African Blue-Garnet Awards for Education"
-- Headline: "Africa's Highest Honour for Education Excellence."
-- Subheadline: enablers narrative (people, institutions, companies, funders, innovators, diaspora, media, advocates)
-- Clarity badge: "Not a student prize. Not just another award ceremony…"
-- Primary CTA: "Nominate an Education Champion" → `/nominate`
-- Secondary CTA: "Explore the 7 Recognition Pillars" → `/awards/pillars`
-- Trust microcopy: integrity firewall line
-- Replace floating identity tags with: Education Icons, CSR for Education, Diaspora Champions, EdTech & STEM, Education Funders, Institutional Excellence, Social Media Education Champions
-- Stats bar: 54 Countries · 18 Categories · 7 Pillars · 2026–2027 Impact Journey
+Create `src/components/awards/standard/` with composable, data-driven sections used by every award page:
 
-### 2. Award Categories Overview (`src/pages/Awards.tsx`)
-- New hero: "Every Force Building African Education Deserves a Stage."
-- Replace top section with 7 Pillar banner cards (each links to its pillar page)
-- Keep existing recognition framework, 9-step journey, and selection flow below
-- Final CTA section: "Know someone making education possible?"
+- `AwardHeroStandard.tsx` — badge, headline, sub-line, lead paragraph, 3–4 stat cards, max 2 CTAs.
+- `WhatThisRecognises.tsx` — "What This Award Recognises" plain-language explainer.
+- `WhoIsThisFor.tsx` — eligibility grid: Who can / Who should not / Evidence / Region / Pathway.
+- `HallOfFamePreview.tsx` — premium nominee preview grid with filter chips (All / Africa-Resident / Diaspora / Friends of Africa / Region / Subcategory / Verified). Graceful empty state with two CTAs. Pulls from existing `nomineeMasterData` + `ICON_NOMINEES` pipelines.
+- `SubcategoryPathways.tsx` — subcategory cards with two CTAs each (View / Nominate).
+- `HowNominationWorks.tsx` — 6-step process timeline.
+- `IntegrityFirewallBlock.tsx` — trust statement + governance link (reuses `INTEGRITY_DISCLAIMER`).
+- `FinalAwardCTA.tsx` — closing "Know someone who belongs?" block.
 
-### 3. New Pillars Hub Route (`/awards/pillars`)
-- New file: `src/pages/awards/PillarsHub.tsx` listing all 7 pillars as rich cards.
+All sections accept typed props sourced from a new `src/config/awards/awardPageContent.ts` content map, keyed by award/category slug.
 
-### 4. 7 Pillar Pages (new files under `src/pages/awards/pillars/`)
-Each follows identical template: Hero → Sell line → Opening intro → Who is eligible → Who is not → Why this pillar exists → Subcategories (with CTAs) → Sponsorship positioning → Sponsor + Nomination CTAs → Hashtags → Standard footer note.
+---
 
-Routes:
-- `/awards/pillars/africa-education-icon` → Pillar 1 (reuses/links existing `/awards/africa-education-icon`)
-- `/awards/pillars/csr-for-education` → Pillar 2
-- `/awards/pillars/diaspora-champions` → Pillar 3
-- `/awards/pillars/edtech-stem` → Pillar 4
-- `/awards/pillars/education-funding` → Pillar 5
-- `/awards/pillars/continental-recognition` → Pillar 6
-- `/awards/pillars/social-media-champions` → Pillar 7
+### 2. Content Layer
 
-Shared template component: `src/components/awards/pillars/PillarPageTemplate.tsx` driving from a `PILLARS` data file (`src/data/pillars.ts`) so all 7 pages stay consistent and copy edits stay one-file.
+`src/config/awards/awardPageContent.ts` — one record per award/category page:
 
-### 5. Routing (`src/App.tsx`)
-Register `/awards/pillars` and the 7 child routes.
+```ts
+{
+  slug, tierBadge, title, subhead, leadParagraph,
+  stats: [{label, value}], primaryCta, secondaryCta,
+  recognises: string, eligibility: {canBe, shouldNotBe, evidence, region, pathway},
+  subcategories: [{slug, title, blurb, recognises, viewHref, nominateHref}],
+  hallOfFameFilter: {awardFamily?, recognitionClass?, subcategorySlug?, region?},
+  emptyState: {message, ctas[]}
+}
+```
 
-### 6. Standard Pillar Footer Block
-Reusable `PillarFooterNote` component injected at the bottom of every pillar page.
+Source values from existing configs: `PILLARS`, `AWARD_CATEGORY_FORMS`, `awardCategories/icon.ts`, `influencerImpact2026.ts`, `nomineeMasterData`. No new data ingestion.
 
-## Out of scope
-- Database/schema changes
-- Existing `/awards/africa-education-icon` Hall of Fame gateway (kept as-is; Pillar 1 page links into it as deep destination)
-- Translations (English copy only — i18n keys can be added later)
-- Visual redesign of unrelated sections
+---
 
-## Technical notes
-- All copy lives in `src/data/pillars.ts` (typed) so future edits are content-only.
-- Reuse existing design tokens (charcoal/gold), Playfair Display headers, framer-motion fade-ins.
-- Add `pillar_cta_click` analytics event via existing `trackEvent` helper.
-- SEO via `react-helmet-async` on each pillar page (title, description, canonical, BreadcrumbList JSON-LD).
-- No changes to nominee/judge/governance components.
+### 3. Pages Refactored (use the new section library)
+
+| Page | File |
+|---|---|
+| Awards Overview | `src/pages/Awards.tsx` |
+| Gold-Blue Garnet hub | `src/pages/awards/PillarPage.tsx` (when slug = gold-blue-garnet) + new `src/pages/awards/GoldBlueGarnet.tsx` route alias |
+| Platinum Recognition | `src/pages/awards/PlatinumRecognition.tsx` (new) |
+| Influencer Education Impact 2026 | `src/pages/awards/InfluencerImpact2026.tsx` (refactor sections) |
+| Africa Education Icon | already standard — extract its layout into the shared library, then re-mount |
+| Every per-category page under `/awards/categories/:slug` | `src/pages/categories/*` — replace bespoke layouts with `<AwardCategoryStandardPage slug=… />` |
+| Subcategory pages | dynamic route renders same shared layout filtered to subcategory |
+| Explore Existing Nominees | `src/pages/nominees/NomineesHub.tsx` — add HallOfFamePreview filter strip parity, keep functionality |
+| Eligibility & Guidelines | `src/pages/about/Eligibility.tsx` — apply hero + integrity blocks |
+
+Each refactored page wires only the content record + helmet/SEO; section order is locked: Hero → WhatThisRecognises → WhoIsThisFor → HallOfFamePreview → SubcategoryPathways → HowNominationWorks → IntegrityFirewall → FinalCTA.
+
+---
+
+### 4. Awards Dropdown Refactor
+
+`src/components/navigation/MainNav.tsx` — restructure Awards mega menu into two clearly labelled column groups:
+
+- **Recognition Pillars**: Africa Education Icon · Gold-Blue Garnet · Platinum Recognition · Influencer Education Impact 2026 · Social Media Education Champions
+- **Explore**: Award Categories · Explore Existing Nominees · Eligibility & Guidelines · Voting Timeline · Governance & Integrity
+
+Keep existing `about_menu_*` analytics pattern; add `awards_menu_click` events.
+
+---
+
+### 5. Visual Standard (locked)
+
+- bg `charcoal`, gold accents (`hsl(42 85% 52%)`), blue-garnet hairlines.
+- Playfair Display headlines, generous spacing, max 2 CTAs per section.
+- Stat cards: gold rule, large numeral, micro-label.
+- Hall-of-Fame cards: portrait + verification chip + classification chip + 2 CTAs, organisation logos `object-contain`, people `object-cover`.
+- Mobile-first; no CTA clusters.
+
+---
+
+### 6. QA
+
+- Type-check (`tsgo`).
+- Playwright spec `tests/e2e/award-pages-standard.spec.ts`: for each pillar + 3 sample categories, assert Hero/Recognises/Eligibility/HallOfFame/Subcategories/Process/Integrity/FinalCTA all render and primary CTA routes to `/nominate?...`.
+- Analytics: `award_page_cta_click`, `hall_of_fame_filter`, `subcategory_card_click`.
+
+---
+
+### Out of scope
+
+- No DB schema changes.
+- No new nominee data — reuse existing pipelines.
+- No copy changes to legal/governance pages beyond hero standardisation.
+
+### Technical notes
+
+- Section components are pure presentational; all copy/data via props.
+- `AwardCategoryStandardPage` wrapper resolves content by slug + applies Helmet/Breadcrumb JSON-LD identical to the Africa Education Icon page.
+- Existing per-category bespoke files are reduced to ~10 lines (slug + wrapper).
+- No breaking URL changes; legacy routes preserved.
