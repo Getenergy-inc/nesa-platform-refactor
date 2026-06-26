@@ -135,6 +135,8 @@ import PlatinumCategoriesIndex from "./pages/awards/PlatinumCategoriesIndex";
 import InfluencersCategoriesIndex from "./pages/awards/InfluencersCategoriesIndex";
 import AwardCategoryRoute from "./pages/awards/AwardCategoryRoute";
 import AwardsRegionPage from "./pages/awards/AwardsRegionPage";
+import PillarsHub from "./pages/awards/PillarsHub";
+import PillarPage from "./pages/awards/PillarPage";
 
 import { ICON_CATEGORY, buildRedirectMap as buildCategoryRedirects } from "./config/awardCategories";
 
@@ -805,6 +807,23 @@ const App = () => (
                     element={
                       <WithLayout>
                         <AwardsRegionPage />
+                      </WithLayout>
+                    }
+                  />
+
+                  <Route
+                    path="/awards/pillars"
+                    element={
+                      <WithLayout>
+                        <PillarsHub />
+                      </WithLayout>
+                    }
+                  />
+                  <Route
+                    path="/awards/pillars/:slug"
+                    element={
+                      <WithLayout>
+                        <PillarPage />
                       </WithLayout>
                     }
                   />

@@ -36,6 +36,7 @@ import {
 import { Button } from "@/components/ui/button";
 import africanSchoolImage from "@/assets/african-school-classroom.jpg";
 import { trackEvent } from "@/lib/analytics";
+import { PILLARS } from "@/data/pillars";
 
 import { TenRegionsBannerSection } from "@/components/nesa/TenRegionsBannerSection";
 import { AwardTiersSummarySection } from "@/components/nesa/AwardTiersSummarySection";
@@ -204,17 +205,19 @@ export default function AwardsPage() {
                 transition={{ duration: 0.6 }}
                 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold text-ivory leading-tight mb-4"
               >
-                The NESA-Africa <span className="text-gold">Recognition Framework</span>
+                Every Force Building African Education{" "}
+                <span className="text-gold">Deserves a Stage.</span>
               </motion.h1>
 
               <p className="text-xl md:text-2xl text-ivory/90 font-medium mb-5">
-                Four Recognition Pathways. One Continent. One Mission.
+                NESA-Africa Award Categories — organised into 7 Recognition Pillars.
               </p>
 
               <p className="text-base md:text-lg text-ivory/75 leading-relaxed max-w-2xl mb-8">
-                NESA-Africa recognises educational excellence, leadership, innovation,
-                advocacy, philanthropy, institutional impact, and lifelong contribution
-                to education across Africa, the diaspora, and Friends of Africa communities.
+                NESA-Africa recognises the people and organisations enabling Education
+                for All across Africa — from lifetime icons and corporate CSR leaders
+                to diaspora champions, EdTech innovators, funders, institutions, media
+                voices, and social advocates.
               </p>
 
               <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 max-w-2xl mb-8">
@@ -229,21 +232,92 @@ export default function AwardsPage() {
                 ))}
               </div>
 
-              <Button
-                asChild
-                size="lg"
-                className="bg-gold hover:bg-gold-dark text-charcoal font-semibold rounded-full px-8"
-              >
-                <a
-                  href="#pathways"
-                  onClick={() =>
-                    track("hero", "Explore Recognition Pathways", "#pathways")
-                  }
+              <div className="flex flex-wrap gap-3">
+                <Button
+                  asChild
+                  size="lg"
+                  className="bg-gold hover:bg-gold-dark text-charcoal font-semibold rounded-full px-8"
                 >
-                  Explore Recognition Pathways
-                  <ArrowRight className="ml-2 h-5 w-5" />
-                </a>
-              </Button>
+                  <a
+                    href="#pillars"
+                    onClick={() => track("hero", "Explore the Recognition Pillars", "#pillars")}
+                  >
+                    Explore the Recognition Pillars
+                    <ArrowRight className="ml-2 h-5 w-5" />
+                  </a>
+                </Button>
+                <Button
+                  asChild
+                  size="lg"
+                  variant="outline"
+                  className="border-gold/40 text-gold hover:bg-gold/10 rounded-full px-8"
+                >
+                  <Link
+                    to="/nominate"
+                    onClick={() => track("hero", "Start a Nomination", "/nominate")}
+                  >
+                    Start a Nomination
+                  </Link>
+                </Button>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* ─── 1B. THE 7 RECOGNITION PILLARS ─────────────── */}
+        <section id="pillars" className="py-16 md:py-24 scroll-mt-20 border-b border-gold/10">
+          <div className="container mx-auto px-4 max-w-6xl">
+            <div className="text-center max-w-3xl mx-auto mb-12">
+              <span className="text-[11px] uppercase tracking-[0.18em] text-gold font-semibold">
+                The 7 Recognition Pillars
+              </span>
+              <h2 className="mt-2 font-display text-3xl md:text-4xl font-bold text-ivory">
+                Find Where Your Nominee <span className="text-gold">Belongs</span>
+              </h2>
+              <p className="mt-3 text-ivory/70 text-sm md:text-base">
+                Every nominee, sponsor, partner, and supporter can quickly find their
+                pathway. Pick the pillar that fits the work.
+              </p>
+            </div>
+
+            <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+              {PILLARS.map((p, i) => {
+                const PIcon = p.icon;
+                return (
+                  <motion.div
+                    key={p.slug}
+                    initial={{ opacity: 0, y: 14 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, margin: "-60px" }}
+                    transition={{ duration: 0.3, delay: i * 0.04 }}
+                  >
+                    <Link
+                      to={`/awards/pillars/${p.slug}`}
+                      onClick={() => track("pillars", p.shortTitle, `/awards/pillars/${p.slug}`)}
+                      className={`group h-full flex flex-col rounded-2xl border border-gold/20 hover:border-gold/60 bg-gradient-to-br ${p.accent} bg-charcoal-light/40 p-5 md:p-6 transition-all`}
+                    >
+                      <div className="flex items-center justify-between mb-3">
+                        <span className="inline-flex h-10 w-10 items-center justify-center rounded-xl bg-gold/15 border border-gold/30 text-gold">
+                          <PIcon className="h-5 w-5" />
+                        </span>
+                        <span className="text-gold/45 font-display text-lg font-bold">
+                          {String(p.number).padStart(2, "0")}
+                        </span>
+                      </div>
+                      <h3 className="font-display text-base md:text-lg font-bold text-ivory mb-2 leading-snug">
+                        {p.shortTitle}
+                      </h3>
+                      <p className="text-ivory/70 text-sm leading-relaxed mb-4 flex-1">
+                        {p.bannerSummary}
+                      </p>
+                      <span className="inline-flex items-center gap-2 text-gold text-sm font-semibold">
+                        {p.bannerCta}
+                        <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+                      </span>
+                    </Link>
+                  </motion.div>
+                );
+              })}
             </div>
           </div>
         </section>

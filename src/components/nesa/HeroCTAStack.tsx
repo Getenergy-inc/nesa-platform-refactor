@@ -58,30 +58,30 @@ export function HeroCTAStack() {
           />
           <Link
             to="/nominate"
-            aria-label="Nominate Now for NESA-Africa 2026"
-            onClick={onCta("nominate_now", "/nominate")}
+            aria-label="Nominate an Education Champion for NESA-Africa 2026"
+            onClick={onCta("nominate_education_champion", "/nominate")}
             className={`${heroBtn} bg-gradient-to-br from-gold via-amber-400 to-gold text-charcoal shadow-[0_10px_32px_-6px_hsl(var(--gold)/0.85)] hover:-translate-y-1 hover:shadow-[0_18px_42px_-8px_hsl(var(--gold)/1)] ring-2 ring-gold/70 ring-offset-2 ring-offset-charcoal`}
           >
             <Trophy className="h-5 w-5" />
-            <span className="truncate">Nominate Now</span>
+            <span className="truncate">Nominate an Education Champion</span>
             <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
           </Link>
         </motion.div>
 
-        {/* SECONDARY — Explore Existing Nominees */}
+        {/* SECONDARY — Explore the 7 Recognition Pillars */}
         <motion.div variants={item} className="relative">
           <span
             aria-hidden
             className="pointer-events-none absolute inset-0 rounded-2xl bg-gold/15 blur-xl"
           />
           <Link
-            to="/nominees"
-            aria-label="Explore Existing Nominees"
-            onClick={onCta("explore_existing_nominees", "/nominees")}
+            to="/awards/pillars"
+            aria-label="Explore the 7 NESA-Africa Recognition Pillars"
+            onClick={onCta("explore_recognition_pillars", "/awards/pillars")}
             className={`${heroBtn} border-2 border-gold bg-charcoal/70 text-gold hover:bg-gold hover:text-charcoal hover:-translate-y-1 shadow-[0_10px_28px_-10px_hsl(var(--gold)/0.7)] hover:shadow-[0_16px_36px_-8px_hsl(var(--gold)/0.95)]`}
           >
             <Compass className="h-5 w-5" />
-            <span className="truncate">Explore Existing Nominees</span>
+            <span className="truncate">Explore the 7 Recognition Pillars</span>
             <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
           </Link>
         </motion.div>
