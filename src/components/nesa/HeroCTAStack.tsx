@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { Trophy, Coins, Users, Vote as VoteIcon, ArrowRight, Heart, Compass, LayoutGrid } from "lucide-react";
+import { Trophy, Users, Vote as VoteIcon, ArrowRight, Heart, Compass, LayoutGrid, Handshake } from "lucide-react";
 import { trackEvent } from "@/lib/analytics";
 
 const onCta = (cta: string, to: string) => () =>
@@ -88,19 +88,32 @@ export function HeroCTAStack() {
       </div>
 
 
-      {/* SUPPORT CTAs row — visually lighter */}
-      <div className="mt-3 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-2.5">
+      {/* SUPPORT CTAs row — visually lighter (5 spec-aligned support links) */}
+      <div className="mt-3 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3 sm:gap-2.5">
 
-        {/* SUPPORT — Explore Award Categories */}
+        {/* SUPPORT — Explore Existing Nominees */}
+        <motion.div variants={item}>
+          <Link
+            to="/nominees"
+            aria-label="Explore Existing Nominees"
+            onClick={onCta("explore_nominees", "/nominees")}
+            className={`${baseBtn} border border-gold/30 bg-charcoal/30 text-white/90 hover:border-gold/50 hover:bg-gold/5 hover:text-gold hover:-translate-y-0.5`}
+          >
+            <Users className="h-4 w-4 text-gold/80 group-hover:text-gold" />
+            <span className="truncate">Explore Nominees</span>
+          </Link>
+        </motion.div>
+
+        {/* SUPPORT — View Award Categories */}
         <motion.div variants={item}>
           <Link
             to="/awards"
-            aria-label="Explore Award Categories"
-            onClick={onCta("explore_award_categories", "/awards")}
+            aria-label="View Award Categories"
+            onClick={onCta("view_award_categories", "/awards")}
             className={`${baseBtn} border border-gold/30 bg-charcoal/30 text-white/90 hover:border-gold/50 hover:bg-gold/5 hover:text-gold hover:-translate-y-0.5`}
           >
             <LayoutGrid className="h-4 w-4 text-gold/80 group-hover:text-gold" />
-            <span className="truncate">Explore Award Categories</span>
+            <span className="truncate">Award Categories</span>
           </Link>
         </motion.div>
 
@@ -113,33 +126,33 @@ export function HeroCTAStack() {
             className={`${baseBtn} border border-gold/30 bg-charcoal/30 text-white/90 hover:border-gold/50 hover:bg-gold/5 hover:text-gold hover:-translate-y-0.5`}
           >
             <VoteIcon className="h-4 w-4 text-gold/80 group-hover:text-gold" />
-            <span className="truncate">View Voting Timeline</span>
+            <span className="truncate">Voting Timeline</span>
           </Link>
         </motion.div>
 
-        {/* SUPPORT — Learn About AGC Voting Points */}
+        {/* SUPPORT — Become a Sponsor */}
         <motion.div variants={item}>
           <Link
-            to="/earn-agc"
-            aria-label="Learn About AGC Voting Points"
-            onClick={onCta("learn_about_agc", "/earn-agc")}
+            to="/sponsors"
+            aria-label="Become a Sponsor"
+            onClick={onCta("become_sponsor", "/sponsors")}
             className={`${baseBtn} border border-white/15 bg-transparent text-white/80 hover:border-gold/40 hover:text-gold hover:-translate-y-0.5`}
           >
-            <Coins className="h-4 w-4 text-white/60 group-hover:text-gold" />
-            <span className="truncate">Learn About AGC Voting Points</span>
+            <Handshake className="h-4 w-4 text-white/60 group-hover:text-gold" />
+            <span className="truncate">Become a Sponsor</span>
           </Link>
         </motion.div>
 
-        {/* SUPPORT — Become a Volunteer */}
+        {/* SUPPORT — Join as Volunteer */}
         <motion.div variants={item}>
           <Link
             to="/volunteer"
-            aria-label="Become a Volunteer"
-            onClick={onCta("become_volunteer", "/volunteer")}
+            aria-label="Join as a Volunteer"
+            onClick={onCta("join_volunteer", "/volunteer")}
             className={`${baseBtn} border border-white/15 bg-transparent text-white/80 hover:border-gold/40 hover:text-gold hover:-translate-y-0.5`}
           >
             <Heart className="h-4 w-4 text-white/60 group-hover:text-gold" />
-            <span className="truncate">Become a Volunteer</span>
+            <span className="truncate">Join as Volunteer</span>
           </Link>
         </motion.div>
       </div>
