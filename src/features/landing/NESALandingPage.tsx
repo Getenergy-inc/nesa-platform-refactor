@@ -53,6 +53,10 @@ const SponsorsSection = lazy(() => import("@/components/nesa/SponsorsSection").t
 const GovernanceFirewallSection = lazy(() => import("@/components/nesa/GovernanceFirewallSection").then(m => ({ default: m.GovernanceFirewallSection })));
 const Vision2035RoadmapSection = lazy(() => import("@/components/nesa/Vision2035RoadmapSection").then(m => ({ default: m.Vision2035RoadmapSection })));
 const FinalCTASection = lazy(() => import("@/components/nesa/FinalCTASection").then(m => ({ default: m.FinalCTASection })));
+const WhatIsNESASection = lazy(() => import("@/components/nesa/WhatIsNESASection").then(m => ({ default: m.WhatIsNESASection })));
+const WhoWeHonourSection = lazy(() => import("@/components/nesa/WhoWeHonourSection").then(m => ({ default: m.WhoWeHonourSection })));
+const SevenPillarsHomeSection = lazy(() => import("@/components/nesa/SevenPillarsHomeSection").then(m => ({ default: m.SevenPillarsHomeSection })));
+const HowItWorksHomeSection = lazy(() => import("@/components/nesa/HowItWorksHomeSection").then(m => ({ default: m.HowItWorksHomeSection })));
 
 export function NESALandingPage() {
   const { t } = useTranslation("pages");
@@ -92,6 +96,26 @@ export function NESALandingPage() {
         {/* 3. THE ROAD TO NESA-AFRICA 2026 — pre-opening moments */}
         <LazySection>
           <HomepageGalleryTeaser />
+        </LazySection>
+
+        {/* 3b. WHAT IS NESA-AFRICA — first-time visitor primer */}
+        <LazySection>
+          <WhatIsNESASection />
+        </LazySection>
+
+        {/* 3c. WHO WE HONOUR — 7 recognition identity cards */}
+        <LazySection>
+          <WhoWeHonourSection />
+        </LazySection>
+
+        {/* 3d. 7 RECOGNITION PILLARS — summary linking to /awards/pillars */}
+        <LazySection>
+          <SevenPillarsHomeSection />
+        </LazySection>
+
+        {/* 3e. HOW IT WORKS — 6-step nomination → impact journey */}
+        <LazySection>
+          <HowItWorksHomeSection />
         </LazySection>
 
         {/* 4. WHY NESA-AFRICA EXISTS */}
