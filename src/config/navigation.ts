@@ -119,14 +119,18 @@ export const MAIN_NAV: NavItem[] = [
     href: "/awards",
     icon: Trophy,
     children: [
-      { label: "Award Overview", href: "/awards", description: "Four recognition pathways", icon: Award },
-      { label: "Africa Education Icon (2006–2026)", href: "/awards/icon", description: "Lifetime achievement", icon: Star },
-      { label: "Gold-Blue Garnet Awards", href: "/awards/blue-garnet", description: "Competitive excellence — Jury + Public", icon: Trophy },
+      // ── Recognition Pillars ──────────────────────────────────────────────
+      { label: "Africa Education Icon (2006–2026)", href: "/awards/africa-education-icon", description: "Lifetime achievement · Jury only", icon: Star },
+      { label: "Gold-Blue Garnet Awards", href: "/awards/blue-garnet", description: "Competitive · Jury + Public", icon: Trophy },
       { label: "Platinum Recognition", href: "/awards/platinum", description: "Institutional leadership", icon: Medal },
       { label: "Influencer Education Impact 2026", href: "/awards/influencers-education-impact-2026-recognition", description: "Sports, Music & Social Media", icon: Sparkles, badge: "2026" },
+      { label: "Social Media Education Champions", href: "/awards/influencers-education-impact/education-content-social-media-influencers", description: "Creators driving learning", icon: Megaphone },
+      // ── Explore ──────────────────────────────────────────────────────────
       { label: "Award Categories", href: "/categories", description: "Browse every category", icon: BookOpen },
       { label: "Explore Existing Nominees", href: "/nominees", description: "Africa's Education Impact Directory", icon: Users },
       { label: "Eligibility & Guidelines", href: "/guidelines/nominators", description: "Who can be nominated", icon: FileCheck },
+      { label: "Voting Timeline", href: "/timeline", description: "Key dates & milestones", icon: Calendar },
+      { label: "Governance & Integrity", href: "/about/governance", description: "Independent firewall", icon: Shield },
     ],
   },
 
