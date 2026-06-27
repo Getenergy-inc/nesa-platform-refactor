@@ -1,101 +1,111 @@
-## NESA-Africa Award Pages — Unified Premium Refactor
+# NESA-Africa 2026 — Platform-Wide Recognition Architecture Refactor
 
-Refactor all award-tier, category, subcategory, and directory pages to match the `/awards/africa-education-icon` premium standard. Build a reusable section library so every page shares identical structure, visual rhythm, and communication clarity.
-
----
-
-### 1. Shared Component Library (new)
-
-Create `src/components/awards/standard/` with composable, data-driven sections used by every award page:
-
-- `AwardHeroStandard.tsx` — badge, headline, sub-line, lead paragraph, 3–4 stat cards, max 2 CTAs.
-- `WhatThisRecognises.tsx` — "What This Award Recognises" plain-language explainer.
-- `WhoIsThisFor.tsx` — eligibility grid: Who can / Who should not / Evidence / Region / Pathway.
-- `HallOfFamePreview.tsx` — premium nominee preview grid with filter chips (All / Africa-Resident / Diaspora / Friends of Africa / Region / Subcategory / Verified). Graceful empty state with two CTAs. Pulls from existing `nomineeMasterData` + `ICON_NOMINEES` pipelines.
-- `SubcategoryPathways.tsx` — subcategory cards with two CTAs each (View / Nominate).
-- `HowNominationWorks.tsx` — 6-step process timeline.
-- `IntegrityFirewallBlock.tsx` — trust statement + governance link (reuses `INTEGRITY_DISCLAIMER`).
-- `FinalAwardCTA.tsx` — closing "Know someone who belongs?" block.
-
-All sections accept typed props sourced from a new `src/config/awards/awardPageContent.ts` content map, keyed by award/category slug.
+Reposition the site from "awards platform" to **Africa's Education Recognition & Impact Platform**, anchored on one canonical hierarchy: **4 Tiers → 18 Categories → ~100 Subcategories → 10 Regions → Nominee**. Every page, nav item, CMS record, and journey is rewired to that single model.
 
 ---
 
-### 2. Content Layer
+## 1. Freeze the canonical architecture (single source of truth)
 
-`src/config/awards/awardPageContent.ts` — one record per award/category page:
+Create `src/config/recognitionArchitecture.ts` — the only place the 4/18/100/10 model lives. Every page, nav, filter, and form imports from here. No duplicate lists anywhere.
 
-```ts
-{
-  slug, tierBadge, title, subhead, leadParagraph,
-  stats: [{label, value}], primaryCta, secondaryCta,
-  recognises: string, eligibility: {canBe, shouldNotBe, evidence, region, pathway},
-  subcategories: [{slug, title, blurb, recognises, viewHref, nominateHref}],
-  hallOfFameFilter: {awardFamily?, recognitionClass?, subcategorySlug?, region?},
-  emptyState: {message, ctas[]}
-}
+- `RECOGNITION_PATHWAYS` (4): `africa-education-icon`, `blue-garnet`, `platinum-recognition`, `influencers-education-impact`
+- `AWARD_CATEGORIES` (18): consolidated from `awardTiers2026.ts` + `awardCategoryForms.ts` into one authoritative list with tier ref, slug, region scope, vote mechanic
+- `RECOGNITION_SUBCATEGORIES` (~100): each tagged with parent category + thematic tag (CSR, STEM, TVET, Faith, Diaspora, etc.)
+- `EDUCATION_REGIONS` (10): West, East, Central, Southern, North, Horn, Sahel, Indian Ocean Islands, Diaspora, Friends of Africa
+- Helpers: `getCategoriesByTier`, `getSubcategoriesByCategory`, `getRegionScope`, `countSubcategories`
+
+Reconciliation note: current data shows 22 categories (9+7+3+3) — consolidate to 18 per brief (merge regional duplicates of CSR/EduTech/NGO/STEM into single category records with `regionScope: 'multi'`).
+
+---
+
+## 2. Six-stage impact framework as a shared component
+
+`src/components/recognition/ImpactJourney.tsx` — horizontal/vertical animated flow used on Home, About, Awards, and Impact Programs:
+
+```
+Recognition → Visibility → Partnerships → Funding → Educational Intervention → Legacy
 ```
 
-Source values from existing configs: `PILLARS`, `AWARD_CATEGORY_FORMS`, `awardCategories/icon.ts`, `influencerImpact2026.ts`, `nomineeMasterData`. No new data ingestion.
+One component, three layout variants (hero/section/compact).
 
 ---
 
-### 3. Pages Refactored (use the new section library)
+## 3. Progressive discovery navigation
 
-| Page | File |
-|---|---|
-| Awards Overview | `src/pages/Awards.tsx` |
-| Gold-Blue Garnet hub | `src/pages/awards/PillarPage.tsx` (when slug = gold-blue-garnet) + new `src/pages/awards/GoldBlueGarnet.tsx` route alias |
-| Platinum Recognition | `src/pages/awards/PlatinumRecognition.tsx` (new) |
-| Influencer Education Impact 2026 | `src/pages/awards/InfluencerImpact2026.tsx` (refactor sections) |
-| Africa Education Icon | already standard — extract its layout into the shared library, then re-mount |
-| Every per-category page under `/awards/categories/:slug` | `src/pages/categories/*` — replace bespoke layouts with `<AwardCategoryStandardPage slug=… />` |
-| Subcategory pages | dynamic route renders same shared layout filtered to subcategory |
-| Explore Existing Nominees | `src/pages/nominees/NomineesHub.tsx` — add HallOfFamePreview filter strip parity, keep functionality |
-| Eligibility & Guidelines | `src/pages/about/Eligibility.tsx` — apply hero + integrity blocks |
+Rewrite `src/config/navigation.ts` + `src/components/navigation/MainNav.tsx` to the 9-item public nav:
 
-Each refactored page wires only the content record + helmet/SEO; section order is locked: Hero → WhatThisRecognises → WhoIsThisFor → HallOfFamePreview → SubcategoryPathways → HowNominationWorks → IntegrityFirewall → FinalCTA.
+`Home · About · Awards · Participate · Impact Programs · Media & Events · Join the Movement · Sponsors & Partners · Contact`
+
+Awards mega-menu becomes a **tier-first** explorer (4 tier cards → reveal categories on hover/tap), not a flat link dump. Mobile keeps the accordion pattern already shipped.
+
+Add a universal `<DiscoveryBreadcrumb>` that always shows: Pathway → Category → Subcategory → Region → Country → Nominee.
 
 ---
 
-### 4. Awards Dropdown Refactor
+## 4. Page-by-page responsibilities (eliminate duplication)
 
-`src/components/navigation/MainNav.tsx` — restructure Awards mega menu into two clearly labelled column groups:
+| Page | Single responsibility | Action |
+|---|---|---|
+| `/` Home | Answer the 4 questions only | Trim to: Hero · ImpactJourney · 4 Pathways teaser · Stats · 10 Regions teaser · One primary CTA |
+| `/about` | Trust + ecosystem | Keep current trust gateway; remove any award-pathway repetition |
+| `/awards` | Gateway to recognition framework | Tier explorer (4 cards) → category grid (18) → subcategory drawer; eligibility/judging/EDI/calendar tabs |
+| `/awards/:tierSlug` | Tier detail | Standardised page from existing `AwardCategoryStandardPage` |
+| `/awards/:tierSlug/:categorySlug` | Category detail + subcategory list | New dynamic route, progressive subcategory reveal |
+| `/participate` | 6-step nominate journey | New page replacing scattered nominate entry points |
+| `/programs` Impact Programs | NESA → EduAid → RMSA → NESA-TV chain | Refactor existing hub around recognition→impact narrative |
+| `/movement` Join the Movement | Volunteers/Ambassadors/Chapters/Judges/Researchers/Media/Partners | Consolidate scattered pages |
+| `/governance` | Board · Council · NRC · Judges · EDI · Firewall · Sponsor non-influence | Promote into top-nav reachable section |
+| `/nominees` Education Impact Directory | Rebrand + full progressive filter chain | Tier → Category → Subcategory → Region → Country → Nominee |
+| `/regions` + `/regions/:slug` | 10 regions, each with overview/featured/priorities/partnerships/Afri-EduTourism/Regional Hall of Fame | Extend existing region pages with the 6 required blocks |
 
-- **Recognition Pillars**: Africa Education Icon · Gold-Blue Garnet · Platinum Recognition · Influencer Education Impact 2026 · Social Media Education Champions
-- **Explore**: Award Categories · Explore Existing Nominees · Eligibility & Guidelines · Voting Timeline · Governance & Integrity
-
-Keep existing `about_menu_*` analytics pattern; add `awards_menu_click` events.
-
----
-
-### 5. Visual Standard (locked)
-
-- bg `charcoal`, gold accents (`hsl(42 85% 52%)`), blue-garnet hairlines.
-- Playfair Display headlines, generous spacing, max 2 CTAs per section.
-- Stat cards: gold rule, large numeral, micro-label.
-- Hall-of-Fame cards: portrait + verification chip + classification chip + 2 CTAs, organisation logos `object-contain`, people `object-cover`.
-- Mobile-first; no CTA clusters.
-
----
-
-### 6. QA
-
-- Type-check (`tsgo`).
-- Playwright spec `tests/e2e/award-pages-standard.spec.ts`: for each pillar + 3 sample categories, assert Hero/Recognises/Eligibility/HallOfFame/Subcategories/Process/Integrity/FinalCTA all render and primary CTA routes to `/nominate?...`.
-- Analytics: `award_page_cta_click`, `hall_of_fame_filter`, `subcategory_card_click`.
+For each page, remove duplicated FAQ blocks, governance text, nominee listings, and integrity statements — link to the canonical page instead.
 
 ---
 
-### Out of scope
+## 5. Africa Education Icon — lock the "9 winners" framing
 
-- No DB schema changes.
-- No new nominee data — reuse existing pipelines.
-- No copy changes to legal/governance pages beyond hero standardisation.
+Update `/awards/africa-education-icon` + Hall of Fame copy to make the **3 categories × 3 classifications = 9 winners** structure unmistakable. Remove any language that implies mass competition. Add the classification grid (Africans in Africa / Diaspora / Friends of Africa) as the primary visual.
 
-### Technical notes
+---
 
-- Section components are pure presentational; all copy/data via props.
-- `AwardCategoryStandardPage` wrapper resolves content by slug + applies Helmet/Breadcrumb JSON-LD identical to the Africa Education Icon page.
-- Existing per-category bespoke files are reduced to ~10 lines (slug + wrapper).
-- No breaking URL changes; legacy routes preserved.
+## 6. Nominee profile = Education Impact Directory entry
+
+Standardise `/nominees/:category/:slug` profile template to include every brief-required block: portrait, biography, timeline, country, organisation, sector, **Individual Contribution to African Education (2006–2026)**, evidence, publications, awards, related nominees, related categories, verification status. Build from existing profile data; fill missing sections with graceful empty states.
+
+---
+
+## 7. Cross-cutting
+
+- **SEO**: per-page `<title>` <60c, meta <160c, JSON-LD `BreadcrumbList` reflecting discovery chain, single H1.
+- **Accessibility**: keyboard/ARIA already shipped for About nav — extend pattern to new Awards tier explorer and Directory filter chain.
+- **Analytics**: add `pathway_view`, `category_view`, `subcategory_view`, `region_view`, `nominee_view`, `discovery_step` (with chain context) to `src/lib/analytics.ts`.
+- **Performance**: subcategory lists render on-demand (filter/drawer), never all at once.
+- **CMS**: existing `src/lib/cms/types.ts` extended with `tier`, `pathwaySlug`, `subcategorySlug` fields so future Lovable Cloud-backed editing maps cleanly.
+
+---
+
+## 8. QA
+
+- `tsgo` clean
+- Playwright `tests/e2e/recognition-architecture.spec.ts`: traverse Pathway → Category → Subcategory → Region → Nominee on desktop + mobile; assert breadcrumb, analytics events, and that no page renders >24 subcategory chips at once.
+- Visual: confirm Home renders only the 4 required answers above the fold on 610×542 (current viewport).
+
+---
+
+## Out of scope (explicit)
+
+- No DB schema changes (architecture is config-driven; CMS adapter shape unchanged).
+- No new nominee ingestion — reuse existing pipelines.
+- No copy rewrites to legal/governance pages beyond hero standardisation.
+- No visual redesign of shipped premium pages (Icon Award, About trust gateway, Judges Directory) — only structural rewiring to the canonical architecture.
+
+---
+
+## Suggested execution order (4 batches)
+
+1. **Foundation**: canonical architecture config + ImpactJourney component + navigation rewrite.
+2. **Awards spine**: `/awards` tier explorer + dynamic tier/category routes + Icon "9 winners" lock.
+3. **Directory & Regions**: progressive filter chain on `/nominees`; extend `/regions/:slug` to 6 blocks.
+4. **Journeys & cleanup**: `/participate`, `/programs`, `/movement`, `/governance` consolidation; dedupe sweep; analytics + Playwright.
+
+Each batch ships independently and leaves the site in a working state.
