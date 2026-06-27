@@ -75,7 +75,10 @@ export default function AwardSpinePage() {
     const matched = pool.filter((n) => {
       const hay = `${n.category} ${n.subcategory} ${n.categorySlug} ${n.subcategorySlug}`.toLowerCase();
       if (!tokens.some((t) => hay.includes(t.slice(0, 6)))) return false;
-      if (regionFilter !== "all" && n.regionSlug !== regionFilter) return false;
+      if (regionFilter !== "all") {
+        const regionName = EDUCATION_REGIONS.find((r) => r.slug === regionFilter)?.name.toLowerCase() ?? "";
+        if (!n.region.toLowerCase().includes(regionName.split(" ")[0])) return false;
+      }
       return true;
     });
     return matched.slice(0, 18);
