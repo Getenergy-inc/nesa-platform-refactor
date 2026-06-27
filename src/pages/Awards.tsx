@@ -7,6 +7,8 @@
 import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
+import TierExplorer from "@/components/recognition/TierExplorer";
+import ImpactJourney from "@/components/recognition/ImpactJourney";
 import {
   ArrowRight,
   Award,
@@ -261,6 +263,14 @@ export default function AwardsPage() {
                 </Button>
               </div>
             </div>
+          </div>
+        </section>
+
+        {/* ─── 1A. CANONICAL TIER EXPLORER + IMPACT JOURNEY ── */}
+        <section className="border-y border-gold/10 bg-charcoal/95 py-16 md:py-20">
+          <div className="container mx-auto px-4">
+            <TierExplorer className="mb-16" />
+            <ImpactJourney variant="section" />
           </div>
         </section>
 
