@@ -773,7 +773,7 @@ export default function Partners() {
             <Handshake className="w-12 h-12 text-gold mx-auto mb-4" />
             <h2 className="text-3xl font-display font-bold mb-4">Ready to Partner?</h2>
             <p className="text-muted-foreground max-w-2xl mx-auto mb-8">
-              Join Africa's premier education excellence movement. Together, we celebrate champions and fund real impact.
+              Join Africa's premier education enablers movement. Together, we celebrate champions and fund real impact.
             </p>
             <div className="flex flex-wrap justify-center gap-3">
               <Button size="lg" className="bg-gradient-gold text-secondary font-semibold" asChild>

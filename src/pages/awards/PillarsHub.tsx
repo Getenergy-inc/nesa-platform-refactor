@@ -15,13 +15,13 @@ export default function PillarsHub() {
   return (
     <>
       <Helmet>
-        <title>The 7 Recognition Pillars | NESA-Africa 2026</title>
+        <title>The 9 Recognition Pillars | NESA-Africa 2026</title>
         <meta
           name="description"
           content="Every force building African education deserves a stage. Explore the 7 NESA-Africa Recognition Pillars — from Africa Education Icons to Social Media Education Champions."
         />
         <link rel="canonical" href={`${SITE}/awards/pillars`} />
-        <meta property="og:title" content="The 7 Recognition Pillars | NESA-Africa 2026" />
+        <meta property="og:title" content="The 9 Recognition Pillars | NESA-Africa 2026" />
         <meta property="og:url" content={`${SITE}/awards/pillars`} />
       </Helmet>
 
@@ -53,7 +53,7 @@ export default function PillarsHub() {
             </p>
             <p className="text-ivory/65 text-sm md:text-base max-w-3xl mx-auto mb-8">
               Rather than overwhelming visitors with long category lists, the awards are
-              organised into <span className="text-gold font-semibold">seven recognition pillars</span>{" "}
+              organised into <span className="text-gold font-semibold">nine recognition pillars</span>{" "}
               so every nominee, sponsor, partner, and supporter can quickly find where
               they belong.
             </p>

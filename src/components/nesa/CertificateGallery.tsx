@@ -58,7 +58,7 @@ const certificates: CertificateInfo[] = [
     image: blueGarnetCertificate,
     tier: "blue-garnet",
     validity: "Lifetime",
-    description: "For Achieving Education Excellence Across Africa",
+    description: "For Achieving Education Enablers Across Africa",
     features: [
       "Highest competitive honor",
       "60% Jury / 40% Public scoring",
@@ -226,7 +226,7 @@ export function CertificateGallery() {
             Award Certificate Designs
           </h2>
           <p className="text-white/70 max-w-2xl mx-auto">
-            Each certificate tier represents a distinct level of recognition in African education excellence, 
+            Each certificate tier represents a distinct level of recognition in African education enablers, 
             featuring QR-code verification and official authentication.
           </p>
         </div>

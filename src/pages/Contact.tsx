@@ -490,7 +490,7 @@ export default function Contact() {
                   </div>
                   <p className="text-sm text-muted-foreground mt-4">
                     Stay connected with NESA-Africa for the latest updates, 
-                    nominee stories, and education excellence news.
+                    nominee stories, and education enablers news.
                   </p>
                 </CardContent>
               </Card>

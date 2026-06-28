@@ -212,7 +212,7 @@ export default function Results() {
         <title>{`Award Results | ${currentEdition?.name || 'NESA-Africa 2026'}`}</title>
         <meta 
           name="description" 
-          content={`View the official award winners and results for ${currentEdition.name}. Celebrating Africa's outstanding education changemakers.`}
+          content={`View the official recognition recipients and results for ${currentEdition.name}. Celebrating Africa's outstanding education changemakers.`}
         />
       </Helmet>
 
@@ -229,7 +229,7 @@ export default function Results() {
               </Badge>
               <h1 className="font-display text-3xl md:text-5xl font-bold text-white mb-4">
                 {currentEdition.name}{" "}
-                <span className="text-gold">Award Winners</span>
+                <span className="text-gold">Recognition Recipients</span>
               </h1>
               <p className="text-white/70 text-lg mb-8">
                 Celebrating the outstanding individuals and organizations recognized for their 

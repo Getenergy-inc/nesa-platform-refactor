@@ -45,7 +45,7 @@ const RUBRIC_CRITERIA = [
   {
     name: "Leadership & Advocacy",
     weight: 20,
-    description: "Demonstrated leadership qualities and advocacy for education excellence",
+    description: "Demonstrated leadership qualities and advocacy for education enablers",
     levels: [
       { score: "0-20", label: "Emerging", desc: "Beginning leadership journey" },
       { score: "21-40", label: "Developing", desc: "Growing influence in their space" },

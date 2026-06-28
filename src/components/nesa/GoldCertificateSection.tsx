@@ -43,7 +43,7 @@ export function GoldCertificateSection() {
             <p className="text-lg text-white/70 mb-6 leading-relaxed">
               The competitive stage of NESA recognition. Winners are determined entirely by{" "}
               <span className="text-amber-400 font-semibold">public votes</span> — your participation 
-              decides who represents Africa's education excellence.
+              decides who represents Africa's education enablers.
             </p>
 
             {/* AGC Integration Message */}

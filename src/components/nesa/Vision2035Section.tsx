@@ -197,7 +197,7 @@ export function Vision2035Section({ variant = "full" }: Vision2035SectionProps) 
                   <ul>
                     <li>Establish NESA chapters in all 54 African nations by 2030</li>
                     <li>Recognize 10,000+ educators and institutions by 2035</li>
-                    <li>Create a continental network of education excellence</li>
+                    <li>Create a continental network of education enablers</li>
                     <li>Partner with governments, NGOs, and private sector for systemic change</li>
                     <li>Launch the NESA Education Fund for underprivileged schools</li>
                   </ul>

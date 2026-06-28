@@ -26,7 +26,7 @@ const cards: DashboardCard[] = [
   },
   {
     title: "Nomination Portal",
-    description: "Submit or review your nominations for education excellence recognition.",
+    description: "Submit or review your nominations for education enablers recognition.",
     href: "/nominate",
     cta: "Submit Nomination",
     icon: FileCheck,

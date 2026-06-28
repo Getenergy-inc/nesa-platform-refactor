@@ -401,7 +401,7 @@ export function buildAwardPhases(awardYear: number): AwardPhaseConfig[] {
       iconName: "Gem",
       features: [
         "From 135 Gold Certificate winners",
-        "9 Blue Garnet Award winners",
+        "9 Blue Garnet Recognition recipients",
         "40% Public Voting + 60% Jury Review",
         "Elite continental honour",
         "Blue Garnet stone in certificate & plaque",

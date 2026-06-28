@@ -163,7 +163,7 @@ export default function Tickets() {
         <title>{`Get Tickets | NESA-Africa Awards Gala ${currentEdition?.displayYear || '2025'}`}</title>
         <meta
           name="description"
-          content={`Purchase tickets for the NESA-Africa ${currentEdition?.displayYear} Awards Gala. Join us for a spectacular celebration of African education excellence.`}
+          content={`Purchase tickets for the NESA-Africa ${currentEdition?.displayYear} Awards Gala. Join us for a spectacular celebration of African education enablers.`}
         />
       </Helmet>
 

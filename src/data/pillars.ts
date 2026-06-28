@@ -435,7 +435,7 @@ export const PILLARS: Pillar[] = [
       "Media or creative campaigns not connected to education",
     ],
     whyExists: [
-      "African education excellence is not built by one group alone.",
+      "Africa's education enablers are not built by one group alone.",
       "It is built by institutions, governments, communities, storytellers, NGOs, researchers, libraries, policy leaders, and public actors. This pillar recognises the full system.",
     ],
     subcategories: [
@@ -511,7 +511,7 @@ export const PILLARS: Pillar[] = [
       },
     ],
     sponsorPositioning:
-      "This pillar allows sponsors to support the broadest recognition platform for African education excellence.",
+      "This pillar allows sponsors to support the broadest recognition platform for Africa's education enablers.",
     sponsorCta: { label: "Sponsor Continental Recognition Awards", href: "/sponsors" },
     nominationCta: {
       label: "Explore All Award Categories",

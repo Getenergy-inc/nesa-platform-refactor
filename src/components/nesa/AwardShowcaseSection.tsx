@@ -83,7 +83,7 @@ export function AwardShowcaseSection() {
             Four Tiers. <span className="text-gold">One Standard.</span>
           </h2>
           <p className="text-white/70 text-sm md:text-base leading-relaxed">
-            NESA-Africa 2026 recognises education excellence through a four-tier
+            NESA-Africa 2026 recognises education enablers through a four-tier
             architecture spanning lifetime icons, competitive winners, institutional
             impact, and creator influence.
           </p>

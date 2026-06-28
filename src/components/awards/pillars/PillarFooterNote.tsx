@@ -12,7 +12,7 @@ export function PillarFooterNote() {
           The African Blue-Garnet Awards for Education
         </p>
         <p className="text-ivory/70 text-sm mt-1">
-          Africa's Highest Honour for Education Excellence
+          Africa's Highest Honour for Education Enablers
         </p>
         <p className="text-ivory/55 text-xs mt-2">
           Powered by Santos Creations Educational Foundation

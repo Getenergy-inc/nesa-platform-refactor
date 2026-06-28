@@ -98,7 +98,7 @@ export function RegionalShowcase() {
         <div className="text-center mt-10">
           <p className="text-sm text-muted-foreground">
             <span className="font-medium text-foreground">One wallet, one Africa.</span>{" "}
-            Pay in your local currency, support education excellence across the continent.
+            Pay in your local currency, support education enablers across the continent.
           </p>
         </div>
       </div>

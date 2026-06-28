@@ -234,7 +234,7 @@ import { VotingStatsStrip } from "@/components/voting/VotingStatsStrip";
                  <span className="text-blue-400">Blue Garnet</span> Award Voting
                </h1>
                <p className="text-blue-100/80 text-lg mb-2">
-                 The highest honor in African education excellence
+                 The highest recognition for Africa's education enablers
                </p>
                <p className="text-blue-100/60 text-sm mb-6">
                  <span className="font-semibold text-blue-300">1 vote = 1 AGC</span> • Your vote counts for 40% of the final score
@@ -309,7 +309,7 @@ import { VotingStatsStrip } from "@/components/voting/VotingStatsStrip";
                    </div>
                    <h3 className="font-semibold text-lg mb-2">Final Score</h3>
                    <p className="text-sm text-muted-foreground">
-                     Combined score determines the Blue Garnet Award winners
+                     Combined score determines the Blue Garnet Recognition recipients
                    </p>
                  </CardContent>
                </Card>
@@ -552,7 +552,7 @@ import { VotingStatsStrip } from "@/components/voting/VotingStatsStrip";
            <div className="container text-center">
              <h2 className="text-2xl font-bold mb-4">Looking for Gold Certificate Voting?</h2>
              <p className="text-muted-foreground mb-6">
-               Gold Certificate is 100% public voting to recognize education excellence.
+               Gold Certificate is 100% public voting to recognise Africa's education enablers.
              </p>
              <Button asChild variant="outline" size="lg">
                <Link to="/vote/gold">

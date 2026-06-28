@@ -233,7 +233,7 @@ export function TrophyHeroSection() {
                   >
                     <img
                       src={blueGarnetTrophyWinners}
-                      alt="NESA Award Winners with Trophies"
+                      alt="NESA Recognition Recipients with Trophies"
                       className="w-44 sm:w-56 md:w-64 lg:w-72 h-auto rounded-2xl shadow-2xl shadow-blue-900/40"
                     />
                     <div className="absolute -bottom-4 left-1/2 -translate-x-1/2 px-4 py-1.5 rounded-full bg-charcoal/80 backdrop-blur-sm border border-gold/30 whitespace-nowrap">
