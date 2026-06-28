@@ -47,40 +47,39 @@ export function HeroCTAStack() {
       animate="show"
       className="w-full max-w-xl mx-auto lg:mx-0"
     >
-      {/* PRIMARY + SECONDARY row — pronounced hero CTAs */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-3.5">
-        {/* PRIMARY — Nominate Now */}
+      {/* PRIMARY + SECONDARY row — pill CTAs matching brand spec */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
+        {/* PRIMARY — Solid gold pill */}
         <motion.div variants={item} className="relative">
-          {/* pulsing halo */}
           <span
             aria-hidden
-            className="pointer-events-none absolute inset-0 rounded-2xl bg-gold/40 blur-xl animate-pulse"
+            className="pointer-events-none absolute -inset-1 rounded-full bg-gold/35 blur-2xl"
           />
           <Link
             to="/nominate"
             aria-label="Nominate an Education Champion for NESA-Africa 2026"
             onClick={onCta("nominate_education_champion", "/nominate")}
-            className={`${heroBtn} bg-gradient-to-br from-gold via-amber-400 to-gold text-charcoal shadow-[0_10px_32px_-6px_hsl(var(--gold)/0.85)] hover:-translate-y-1 hover:shadow-[0_18px_42px_-8px_hsl(var(--gold)/1)] ring-2 ring-gold/70 ring-offset-2 ring-offset-charcoal`}
+            className={`${heroBtn} rounded-full bg-gold text-charcoal shadow-[0_12px_36px_-8px_hsl(var(--gold)/0.85)] hover:-translate-y-1 hover:bg-amber-400 hover:shadow-[0_18px_44px_-8px_hsl(var(--gold)/1)]`}
           >
-            <Trophy className="h-5 w-5" />
+            <Trophy className="h-5 w-5" strokeWidth={2.5} />
             <span className="truncate">Nominate an Education Champion</span>
-            <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
+            <ArrowRight className="h-5 w-5 transition-transform duration-300 group-hover:translate-x-1" strokeWidth={2.5} />
           </Link>
         </motion.div>
 
-        {/* SECONDARY — Explore the 7 Recognition Pillars */}
+        {/* SECONDARY — Ivory/white pill with gold text */}
         <motion.div variants={item} className="relative">
           <span
             aria-hidden
-            className="pointer-events-none absolute inset-0 rounded-2xl bg-gold/15 blur-xl"
+            className="pointer-events-none absolute -inset-1 rounded-full bg-white/10 blur-2xl"
           />
           <Link
             to="/awards/pillars"
             aria-label="Explore the 9 NESA-Africa Recognition Pillars"
             onClick={onCta("explore_recognition_pillars", "/awards/pillars")}
-            className={`${heroBtn} border-2 border-gold bg-charcoal/70 text-gold hover:bg-gold hover:text-charcoal hover:-translate-y-1 shadow-[0_10px_28px_-10px_hsl(var(--gold)/0.7)] hover:shadow-[0_16px_36px_-8px_hsl(var(--gold)/0.95)]`}
+            className={`${heroBtn} rounded-full bg-ivory text-gold border-2 border-ivory hover:-translate-y-1 hover:bg-white shadow-[0_12px_32px_-10px_rgba(255,255,255,0.35)] hover:shadow-[0_18px_40px_-8px_rgba(255,255,255,0.5)]`}
           >
-            <Compass className="h-5 w-5" />
+            <Compass className="h-5 w-5" strokeWidth={2.5} />
             <span className="truncate">Explore the 9 Recognition Pillars</span>
             <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
           </Link>
