@@ -9,7 +9,6 @@ import { trackEvent } from "@/lib/analytics";
  * Data sourced from /src/data/pillars.ts. Each card deep-links to its pillar page.
  * (File name retained for import stability; export alias provided below.)
  */
- */
 export function SevenPillarsHomeSection() {
   return (
     <section className="relative py-20 md:py-28 bg-charcoal" aria-labelledby="seven-pillars-heading">
