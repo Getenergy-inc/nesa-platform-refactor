@@ -335,10 +335,10 @@ export const PILLARS: Pillar[] = [
   {
     slug: "education-funding",
     number: 5,
-    shortTitle: "Best Education Grants & Funding for Africa",
-    pageTitle: "Best Education Grants & Funding for Africa",
-    sellLine: "Behind every school built and every student supported, there is a funder who believed.",
-    heroHeadline: "Honouring Organisations Funding African Education.",
+    shortTitle: "Institutional & Bilateral Grants for Education for All",
+    pageTitle: "Institutional & Bilateral Grants for Education for All",
+    sellLine: "Funding the future of African education.",
+    heroHeadline: "Honouring Bilateral Agencies, Multilateral Partners and Grant-Makers Funding Education for All.",
     intro: [
       "The Best Education Grants & Funding for Africa pillar recognises the foundations, development partners, grant-makers, NGOs, government agencies, donor institutions, and scholarship funds financing measurable education outcomes.",
       "Education impact requires belief. It also requires funding.",
@@ -406,10 +406,10 @@ export const PILLARS: Pillar[] = [
   {
     slug: "continental-recognition",
     number: 6,
-    shortTitle: "Continental Education Recognition & Awards",
-    pageTitle: "Continental Education Recognition & Awards",
-    sellLine: "54 nations. One continental stage. Every category of African education excellence recognised.",
-    heroHeadline: "The Full Award Ceremony Platform for African Education Excellence.",
+    shortTitle: "Institutional Excellence in Education",
+    pageTitle: "Institutional Excellence in Education",
+    sellLine: "Strengthening Africa's education systems.",
+    heroHeadline: "Recognising Governments, Ministries, Universities, Research Institutes, NGOs and Public Institutions Strengthening Education.",
     intro: [
       "The Continental Education Recognition & Awards pillar houses the broader NESA-Africa award categories.",
       "This is where schools, universities, libraries, NGOs, governments, media organisations, creative arts contributors, policy leaders, public institutions, regional education actors, and faith-based education impact organisations find their recognition pathway.",
