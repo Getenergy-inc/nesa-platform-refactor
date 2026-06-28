@@ -73,7 +73,7 @@ export default function Judges() {
               </h1>
               <p className="mb-8 text-lg text-ivory/80">
                 Shape the future of African education recognition. Join our distinguished
-                panel of experts who evaluate and select Blue Garnet Award winners.
+                panel of experts who evaluate and select Blue Garnet Recognition recipients.
               </p>
               <div className="flex flex-wrap justify-center gap-4">
                 <Button asChild size="lg" className="bg-primary text-primary-foreground">
