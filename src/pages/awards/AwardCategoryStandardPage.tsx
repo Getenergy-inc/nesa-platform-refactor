@@ -18,8 +18,47 @@ import { getAwardPageContent } from "@/config/awards/awardPageContent";
 import { filterMasterNominees, getMasterRegions } from "@/lib/nomineeMasterData";
 import { ICON_NOMINEES } from "@/data/iconAward";
 import { resolveIconImage } from "@/data/iconAward/imageManifest";
+import { AwardPageTabs, type AwardPageTab } from "@/components/awards/AwardPageTabs";
 
 type Props = { slug: string };
+
+const TABS_BY_SLUG: Record<string, AwardPageTab[]> = {
+  "africa-education-icon": [
+    { id: "overview", label: "Overview" },
+    { id: "categories", label: "Categories" },
+    { id: "nominees", label: "Africa Education Impact Directory" },
+    { id: "hall-of-fame", label: "Hall of Fame" },
+    { id: "eligibility", label: "Eligibility" },
+    { id: "process", label: "Selection Process" },
+    { id: "nominate", label: "Nominate" },
+  ],
+  "gold-blue-garnet": [
+    { id: "overview", label: "Overview" },
+    { id: "categories", label: "Award Categories" },
+    { id: "nominees", label: "Africa Education Impact Directory" },
+    { id: "hall-of-fame", label: "Hall of Fame" },
+    { id: "voting", label: "Voting" },
+    { id: "eligibility", label: "Judging & Eligibility" },
+    { id: "nominate", label: "Nominate" },
+  ],
+  "platinum-recognition": [
+    { id: "overview", label: "Overview" },
+    { id: "categories", label: "Recognition Categories" },
+    { id: "nominees", label: "Recognised Education Enablers" },
+    { id: "hall-of-fame", label: "Hall of Fame" },
+    { id: "eligibility", label: "Eligibility" },
+    { id: "process", label: "Recognition Process" },
+  ],
+  "influencer-education-impact-2026": [
+    { id: "overview", label: "Overview" },
+    { id: "categories", label: "Social · Sports · Music" },
+    { id: "nominees", label: "Existing Nominees" },
+    { id: "voting", label: "Voting" },
+    { id: "hall-of-fame", label: "Hall of Fame" },
+    { id: "nominate", label: "AfriGold Coin Participation" },
+  ],
+};
+
 
 /**
  * Unified premium award page. Drives every Tier / Pillar / Category page off the
