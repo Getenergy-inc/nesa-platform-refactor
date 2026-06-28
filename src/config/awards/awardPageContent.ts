@@ -62,7 +62,7 @@ const ICON: AwardPageContent = {
     title: "Africa Education Icon Award",
     titleAccent: "2006–2026",
     subhead:
-      "Two decades. Three pathways. Nine laureates. A continental Hall of Fame for the educators, advocates, and philanthropists who reshaped African learning.",
+      "Lifetime recognition for transformational leaders whose contributions have shaped African education across generations — two decades of legacy, three classifications, one continental Hall of Fame.",
     statsBuilder: ({ nominees, subcategories, finalists }) => [
       { label: "Verified Nominees", value: nominees },
       { label: "Pathways", value: subcategories || 3 },
@@ -74,7 +74,7 @@ const ICON: AwardPageContent = {
     trustLine: "Jury-only · No public voting · Independent continental review",
   },
   recognises:
-    "This award recognises individuals whose lifetime work — across philanthropy, curriculum advocacy, technical education, policy reform, or institutional building — has shaped how Africa learns. It honours legacy, not novelty: people whose contribution to African education has lasted, scaled, and outlived a single project, classroom, or country.",
+    "Lifetime recognition for transformational leaders whose contributions have shaped African education across generations. The Africa Education Icon Award honours individuals whose life's work — across philanthropy, curriculum reform, literacy, technical education, policy or institutional building — has lasted, scaled, and outlived a single project, classroom, or country.",
   eligibility: {
     canBeNominated: [
       "Education philanthropists with 15+ years of giving",
@@ -150,7 +150,7 @@ const GOLD_BLUE_GARNET: AwardPageContent = {
     title: "Gold-Blue Garnet Awards",
     titleAccent: "2026",
     subhead:
-      "Competitive continental recognition for companies, NGOs, EdTech innovators, STEM programmes, and faith-based education leaders driving measurable education impact across Africa.",
+      "Africa's competitive continental recognition for companies, NGOs, EdTech innovators, STEM programmes, faith-based organisations and media voices whose Corporate Social Responsibility (CSR) and education programmes create measurable impact through infrastructure, scholarships, technology, inclusion and community development.",
     statsBuilder: ({ nominees, regions, subcategories }) => [
       { label: "Verified Nominees", value: nominees },
       { label: "Regions", value: regions },
@@ -162,7 +162,7 @@ const GOLD_BLUE_GARNET: AwardPageContent = {
     trustLine: "Jury review + verified public participation · Independent NRC verification",
   },
   recognises:
-    "This award recognises organisations, companies, and programmes whose work has created measurable education impact through funding, innovation, advocacy, infrastructure, inclusion, technology, or community action across Africa.",
+    "The Gold-Blue Garnet Awards celebrate corporate organisations, NGOs, EdTech innovators, STEM programmes and faith-based institutions whose CSR and education work creates measurable educational impact — funding schools, expanding digital access, advancing inclusion, building infrastructure, and driving community transformation across Africa.",
   eligibility: {
     canBeNominated: [
       "Companies running education-focused CSR programmes",
@@ -220,7 +220,7 @@ const PLATINUM: AwardPageContent = {
     title: "Platinum Recognition",
     titleAccent: "2026",
     subhead:
-      "Honouring governments, ministries, universities, and continental institutions whose policy, leadership, or systems work is advancing education for all across Africa.",
+      "Recognising universities, educational institutions, libraries, research centres, governments, ministries, policy leaders, curriculum developers, media organisations and public institutions strengthening Africa's education ecosystem at scale.",
     statsBuilder: ({ nominees, regions, subcategories }) => [
       { label: "Verified Nominees", value: nominees },
       { label: "Regions", value: regions },
@@ -232,7 +232,7 @@ const PLATINUM: AwardPageContent = {
     trustLine: "Institutional review · Independent jury · Audit-logged decisions",
   },
   recognises:
-    "This recognition honours institutions whose policies, programmes, and systems have created measurable education impact at scale — improving access, quality, equity, infrastructure, governance, or learner outcomes across communities, regions, or countries.",
+    "Platinum Recognition honours institutions whose policies, programmes, research, leadership and systems create measurable education impact at scale — strengthening access, quality, equity, infrastructure, governance, or learner outcomes across communities, regions and countries. It recognises governments, ministries, universities, libraries, research centres, media organisations, curriculum developers and continental education bodies advancing Africa's learning ecosystem.",
   eligibility: {
     canBeNominated: [
       "Government ministries and education agencies",
@@ -288,7 +288,7 @@ const INFLUENCER: AwardPageContent = {
     title: "Influencer Education Impact",
     titleAccent: "2026",
     subhead:
-      "Honouring social media creators, sports icons, and music icons turning their influence into measurable education impact for African learners.",
+      "Celebrating sports personalities, musicians, digital creators, influencers and media advocates using their platforms to promote Education for All, inspire learning and expand opportunities for young people across Africa and the diaspora.",
     statsBuilder: ({ nominees }) => [
       { label: "Verified Nominees", value: nominees },
       { label: "Tracks", value: 3 },
@@ -300,7 +300,7 @@ const INFLUENCER: AwardPageContent = {
     trustLine: "Verified impact required · Jury + public participation · No purchased recognition",
   },
   recognises:
-    "This award recognises public figures whose influence has translated into measurable education action — funding scholarships, building schools, mentoring learners, producing learning content, or advocating for African education at scale.",
+    "Social Media Education Champions recognises sports icons, musicians, digital creators, influencers and media advocates whose platforms translate into measurable education action — funding scholarships, building schools, mentoring learners, producing learning content, and advocating for Education for All across Africa and the diaspora.",
   eligibility: {
     canBeNominated: [
       "Social media creators producing learning content",
