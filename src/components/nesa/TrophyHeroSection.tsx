@@ -115,20 +115,33 @@ export function TrophyHeroSection() {
               transition={{ duration: 0.5, delay: 0.5 }}
               className="text-white/90 text-[15px] sm:text-base md:text-lg mb-4 max-w-xl mx-auto lg:mx-0 leading-relaxed"
             >
-              NESA-Africa recognises, celebrates and supports governments, corporate CSR leaders, philanthropists, development partners, foundations, faith-based organisations, NGOs, universities, innovators, media organisations, community leaders, Africans in the diaspora and Friends of Africa whose work expands <span className="text-gold font-semibold">Education for All</span>.
+              <span className="text-gold font-semibold">NESA-Africa</span> (New Education Standard Award Africa) is Africa's Education Recognition &amp; Impact Platform — a continental ecosystem that identifies, verifies, recognises, connects and supports the people, organisations and institutions enabling <span className="text-gold font-semibold">Education for All</span>.
             </motion.p>
 
-            <motion.div
+            {/* Recognition Architecture chips — scale at a glance */}
+            <motion.ul
               initial={{ opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.6 }}
-              className="mb-5 max-w-xl mx-auto lg:mx-0 rounded-xl border border-gold/25 bg-charcoal/50 backdrop-blur-sm px-4 py-3"
+              transition={{ duration: 0.5, delay: 0.55 }}
+              className="flex flex-wrap gap-1.5 sm:gap-2 justify-center lg:justify-start mb-5 max-w-xl mx-auto lg:mx-0"
+              aria-label="NESA-Africa recognition architecture at a glance"
             >
-              <p className="text-ivory/90 text-[13px] sm:text-sm leading-relaxed">
-                <span className="text-gold font-semibold">Recognition is only the beginning.</span>{" "}
-                Through SCEF, every recognition becomes visibility, partnerships, funding, educational intervention and lasting legacy via EduAid-Africa, Rebuild My School Africa and NESA-Africa TV.
-              </p>
-            </motion.div>
+              {[
+                "4 Recognition Tiers",
+                "18 Categories",
+                "100+ Pathways",
+                "9 Pillars",
+                "8 Africa Regions",
+                "2 Global Communities",
+              ].map((chip) => (
+                <li
+                  key={chip}
+                  className="px-2.5 py-1 rounded-full bg-gold/10 border border-gold/30 text-gold text-[11px] sm:text-xs font-semibold"
+                >
+                  {chip}
+                </li>
+              ))}
+            </motion.ul>
 
             {/* Identity tags — the 9 Recognition Pillars */}
             <motion.ul
