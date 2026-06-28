@@ -113,24 +113,85 @@ export const MAIN_NAV: NavItem[] = [
     ],
   },
 
-  // 3. AWARDS
+  // 3. AWARDS — 2026 Recognition Architecture (4 Tiers)
   {
     label: "Awards",
     href: "/awards",
     icon: Trophy,
     children: [
-      // ── Recognition Pillars ──────────────────────────────────────────────
-      { label: "Africa Education Icon (2006–2026)", href: "/awards/africa-education-icon", description: "Lifetime achievement · Jury only", icon: Star },
-      { label: "Gold-Blue Garnet Awards", href: "/awards/blue-garnet", description: "Competitive · Jury + Public", icon: Trophy },
-      { label: "Platinum Recognition", href: "/awards/platinum", description: "Institutional leadership", icon: Medal },
-      { label: "Influencer Education Impact 2026", href: "/awards/influencers-education-impact-2026-recognition", description: "Sports, Music & Social Media", icon: Sparkles, badge: "2026" },
-      { label: "Social Media Education Champions", href: "/awards/influencers-education-impact/education-content-social-media-influencers", description: "Creators driving learning", icon: Megaphone },
-      // ── Explore ──────────────────────────────────────────────────────────
-      { label: "Award Categories", href: "/categories", description: "Browse every category", icon: BookOpen },
-      { label: "Explore Existing Nominees", href: "/nominees", description: "Africa's Education Impact Directory", icon: Users },
+      // Top-level orientation
+      { label: "Recognition Architecture", href: "/awards/recognition-architecture", description: "The 4-tier framework explained", icon: Map },
+
+      // ── TIER 1 — Africa Education Icon ─────────────────────────────────
+      {
+        label: "Africa Education Icon Award",
+        href: "/awards/africa-education-icon",
+        icon: Star,
+        description: "Tier 1 · Lifetime · Jury Selected",
+        children: [
+          { label: "About", href: "/awards/africa-education-icon" },
+          { label: "Categories", href: "/awards/africa-education-icon/categories" },
+          { label: "Existing Nominees", href: "/awards/africa-education-icon/nominees" },
+          { label: "Hall of Fame", href: "/awards/africa-education-icon/hall-of-fame" },
+          { label: "Eligibility", href: "/awards/africa-education-icon/eligibility" },
+          { label: "Nominate", href: "/nominate?tier=africa-education-icon" },
+        ],
+      },
+
+      // ── TIER 2 — Gold-Blue Garnet ──────────────────────────────────────
+      {
+        label: "Gold-Blue Garnet Awards",
+        href: "/awards/gold-blue-garnet",
+        icon: Trophy,
+        description: "Tier 2 · Competitive · Jury + Public",
+        children: [
+          { label: "Award Categories", href: "/awards/gold-blue-garnet/categories" },
+          { label: "Existing Nominees", href: "/awards/gold-blue-garnet/nominees" },
+          { label: "Hall of Fame", href: "/awards/gold-blue-garnet/hall-of-fame" },
+          { label: "Voting", href: "/awards/gold-blue-garnet/voting" },
+          { label: "Judging", href: "/awards/gold-blue-garnet/judging" },
+          { label: "Eligibility", href: "/awards/gold-blue-garnet/eligibility" },
+          { label: "Nominate", href: "/nominate?tier=gold-blue-garnet" },
+        ],
+      },
+
+      // ── TIER 3 — Platinum Recognition ──────────────────────────────────
+      {
+        label: "Platinum Recognition",
+        href: "/awards/platinum-recognition",
+        icon: Medal,
+        description: "Tier 3 · Institutional · Invitation",
+        children: [
+          { label: "Recognition Categories", href: "/awards/platinum-recognition/categories" },
+          { label: "Existing Honourees", href: "/awards/platinum-recognition/honourees" },
+          { label: "Hall of Fame", href: "/awards/platinum-recognition/hall-of-fame" },
+          { label: "Eligibility", href: "/awards/platinum-recognition/eligibility" },
+          { label: "Recognition Process", href: "/awards/platinum-recognition/process" },
+        ],
+      },
+
+      // ── TIER 4 — Influencer Education Impact ───────────────────────────
+      {
+        label: "Influencer Education Impact Award",
+        href: "/awards/influencer-education-impact",
+        icon: Sparkles,
+        description: "Tier 4 · 100% Public Recognition",
+        badge: "2026",
+        children: [
+          { label: "Social Media Education Champions", href: "/awards/influencer-education-impact/social-media" },
+          { label: "Sports Icons Supporting Education", href: "/awards/influencer-education-impact/sports" },
+          { label: "Music Icons Supporting Education", href: "/awards/influencer-education-impact/music" },
+          { label: "Existing Nominees", href: "/awards/influencer-education-impact/nominees" },
+          { label: "Voting", href: "/awards/influencer-education-impact/voting" },
+          { label: "Hall of Fame", href: "/awards/influencer-education-impact/hall-of-fame" },
+        ],
+      },
+
+      // ── Cross-cutting ──────────────────────────────────────────────────
+      { label: "Africa Education Impact Directory", href: "/nominees", description: "Browse all nominees by tier, region & country", icon: Users },
+      { label: "Governance & Integrity", href: "/about/governance", description: "Independent firewall", icon: Shield },
       { label: "Eligibility & Guidelines", href: "/guidelines/nominators", description: "Who can be nominated", icon: FileCheck },
       { label: "Voting Timeline", href: "/timeline", description: "Key dates & milestones", icon: Calendar },
-      { label: "Governance & Integrity", href: "/about/governance", description: "Independent firewall", icon: Shield },
     ],
   },
 
