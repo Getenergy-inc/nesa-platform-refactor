@@ -53,7 +53,7 @@ export default function Judges() {
         <title>Become a Judge | NESA-Africa Jury Panel</title>
         <meta
           name="description"
-          content="Join the NESA-Africa expert jury panel. Help select Blue Garnet Award winners through rigorous, transparent evaluation."
+          content="Join the NESA-Africa expert jury panel. Help select Blue Garnet Recognition recipients through rigorous, transparent evaluation."
         />
       </Helmet>
 
