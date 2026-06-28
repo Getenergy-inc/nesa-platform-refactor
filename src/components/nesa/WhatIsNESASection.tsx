@@ -33,20 +33,21 @@ export function WhatIsNESASection() {
 
           <div className="space-y-5 text-white/80 text-base md:text-lg leading-relaxed text-left md:text-center">
             <p>
-              NESA-Africa — the <span className="text-gold font-semibold">New Education Standard Awards Africa</span> —
-              is a continental honours and impact platform celebrating the changemakers and enablers of
-              Education for All across 54 African countries and the diaspora.
+              NESA-Africa — the <span className="text-gold font-semibold">New Education Standard Award Africa</span> —
+              is <span className="text-gold font-semibold">Africa's Education Recognition &amp; Impact Platform</span>,
+              dedicated to identifying, verifying, recognising, celebrating and supporting the enablers of
+              Education for All across <span className="text-gold font-semibold">Eight Africa Regions, Africans in
+              the Diaspora and Friends of Africa</span>.
             </p>
             <p>
-              It recognises the people and organisations building the systems that make education possible:
-              those funding schools, shaping policy, supporting learners, developing technology, telling education
-              stories, promoting inclusion, strengthening institutions, and creating access for underserved
-              communities.
+              More than an awards programme, NESA-Africa is a continental recognition ecosystem that transforms
+              education impact into visibility, credibility, partnerships, investment and measurable educational
+              transformation.
             </p>
             <p className="text-white/90">
-              NESA-Africa is not only an award ceremony. It is a recognition engine that turns education impact into
-              <span className="text-gold font-semibold"> visibility, credibility, partnership, sponsorship,</span> and
-              long-term support.
+              Built around <span className="text-gold font-semibold">Four Recognition Tiers, Eighteen Award
+              Categories and more than One Hundred Recognition Pathways</span>, NESA-Africa provides one of the
+              continent's most comprehensive frameworks for advancing Education for All.
             </p>
           </div>
 

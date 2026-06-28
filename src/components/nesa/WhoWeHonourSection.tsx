@@ -2,10 +2,12 @@ import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import {
   Crown,
+  HeartHandshake,
   Building2,
   Globe2,
   Cpu,
   Coins,
+  BookOpen,
   Landmark,
   Megaphone,
   ArrowRight,
@@ -23,44 +25,56 @@ type HonourCard = {
 const CARDS: HonourCard[] = [
   {
     icon: Crown,
-    title: "Education Icons",
-    body: "Lifetime contributors whose work has shaped African education.",
+    title: "Africa Education Icons",
+    body: "Exceptional individuals whose lifetime contributions have transformed education across Africa.",
     href: "/awards/pillars/africa-education-icon",
   },
   {
+    icon: HeartHandshake,
+    title: "Philanthropy for Education",
+    body: "Philanthropists, foundations and scholarship providers investing in opportunity, equity and access.",
+    href: "/awards/pillars/philanthropy-for-education",
+  },
+  {
     icon: Building2,
-    title: "Corporate CSR Leaders",
-    body: "Companies investing in schools, scholarships, digital access, infrastructure, inclusion, and education equity.",
-    href: "/awards/pillars/best-csr-for-education",
+    title: "CSR for Education by Organisations",
+    body: "Companies whose Corporate Social Responsibility creates measurable education impact across the continent.",
+    href: "/awards/pillars/csr-for-education",
   },
   {
     icon: Globe2,
-    title: "Diaspora Champions",
-    body: "Africans abroad funding, mentoring, advocating, and supporting education back home.",
+    title: "Diaspora African Contributors",
+    body: "Africans abroad whose funding, mentorship, advocacy and partnerships strengthen education back home.",
     href: "/awards/pillars/diaspora-champions",
   },
   {
     icon: Cpu,
-    title: "EdTech & STEM Innovators",
-    body: "Platforms, startups, programmes, and leaders transforming how Africa learns.",
-    href: "/awards/pillars/edtech-and-stem",
+    title: "EdTech & STEM Innovation",
+    body: "Innovators, researchers, TVET institutions and STEM pioneers transforming how Africa learns.",
+    href: "/awards/pillars/edtech-stem",
   },
   {
     icon: Coins,
-    title: "Education Funders",
-    body: "Foundations, grant-makers, development partners, NGOs, and institutions financing measurable education outcomes.",
-    href: "/awards/pillars/education-grants-and-funding",
+    title: "Institutional & Bilateral Grants",
+    body: "Bilateral agencies, multilateral organisations and grant-makers funding sustainable education systems.",
+    href: "/awards/pillars/education-funding",
+  },
+  {
+    icon: BookOpen,
+    title: "Faith-Based & Religious Organisations",
+    body: "Christian, Islamic and other faith-based organisations advancing education, scholarships and inclusion.",
+    href: "/awards/pillars/faith-based-education",
   },
   {
     icon: Landmark,
-    title: "Institutions & Public Leaders",
-    body: "Universities, libraries, governments, NGOs, media organisations, faith-based institutions, and public actors advancing education.",
+    title: "Institutional Excellence in Education",
+    body: "Governments, ministries, universities, research institutes, NGOs and public institutions strengthening systems.",
     href: "/awards/pillars/continental-recognition",
   },
   {
     icon: Megaphone,
     title: "Social Media Education Champions",
-    body: "Africans in Africa, Africans in the diaspora, and Friends of Africa using digital platforms to promote Education for All.",
+    body: "Sports, music and digital creators using their influence to inspire learning and advance Education for All.",
     href: "/awards/pillars/social-media-champions",
   },
 ];
@@ -74,14 +88,15 @@ export function WhoWeHonourSection() {
             id="who-we-honour-heading"
             className="font-display text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4"
           >
-            Who Does <span className="text-gold">NESA-Africa</span> Honour?
+            Who Does <span className="text-gold">NESA-Africa</span> Recognise?
           </h2>
           <p className="text-white/75 text-base md:text-lg">
-            NESA-Africa honours the people and organisations making education possible.
+            NESA-Africa recognises the enablers of Education for All — the individuals, organisations,
+            institutions and partnerships creating lasting educational impact across Africa.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
           {CARDS.map((card, i) => {
             const Icon = card.icon;
             return (

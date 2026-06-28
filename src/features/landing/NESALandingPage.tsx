@@ -57,6 +57,7 @@ const WhatIsNESASection = lazy(() => import("@/components/nesa/WhatIsNESASection
 const WhoWeHonourSection = lazy(() => import("@/components/nesa/WhoWeHonourSection").then(m => ({ default: m.WhoWeHonourSection })));
 const SevenPillarsHomeSection = lazy(() => import("@/components/nesa/SevenPillarsHomeSection").then(m => ({ default: m.SevenPillarsHomeSection })));
 const HowItWorksHomeSection = lazy(() => import("@/components/nesa/HowItWorksHomeSection").then(m => ({ default: m.HowItWorksHomeSection })));
+const RecognitionImpactLegacy = lazy(() => import("@/components/recognition/RecognitionImpactLegacy").then(m => ({ default: m.RecognitionImpactLegacy })));
 
 export function NESALandingPage() {
   const { t } = useTranslation("pages");
@@ -116,6 +117,11 @@ export function NESALandingPage() {
         {/* 3e. HOW IT WORKS — 6-step nomination → impact journey */}
         <LazySection>
           <HowItWorksHomeSection />
+        </LazySection>
+
+        {/* 3f. RECOGNITION → IMPACT → LEGACY — signature 7-step chain */}
+        <LazySection>
+          <RecognitionImpactLegacy />
         </LazySection>
 
         {/* 4. WHY NESA-AFRICA EXISTS */}

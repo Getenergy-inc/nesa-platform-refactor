@@ -5,8 +5,9 @@ import { PILLARS } from "@/data/pillars";
 import { trackEvent } from "@/lib/analytics";
 
 /**
- * SevenPillarsHomeSection — Landing-page summary of the 7 Recognition Pillars.
+ * NinePillarsHomeSection — Landing-page summary of the 9 Recognition Pillars.
  * Data sourced from /src/data/pillars.ts. Each card deep-links to its pillar page.
+ * (File name retained for import stability; export alias provided below.)
  */
 export function SevenPillarsHomeSection() {
   return (
@@ -21,11 +22,12 @@ export function SevenPillarsHomeSection() {
             id="seven-pillars-heading"
             className="font-display text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4"
           >
-            Seven Recognition Pillars. <span className="text-gold">One Continental Mission.</span>
+            Nine Recognition Pillars. <span className="text-gold">One Continental Mission.</span>
           </h2>
           <p className="text-white/75 text-base md:text-lg">
-            Every award and recognition pathway is organised under seven simple pillars — clear doorways for
-            nominees, sponsors, partners, volunteers, media, and the public.
+            NESA-Africa organises its recognition framework through nine simple pillars — clear doorways for
+            nominees, sponsors, partners, volunteers, governments, media organisations and development institutions
+            to participate in advancing Education for All.
           </p>
         </div>
 
@@ -88,7 +90,7 @@ export function SevenPillarsHomeSection() {
             }
             className="inline-flex items-center gap-2 rounded-full border-2 border-gold/60 px-6 py-3 text-gold font-semibold hover:bg-gold hover:text-charcoal transition"
           >
-            Explore All 7 Recognition Pillars
+            Explore All 9 Recognition Pillars
             <ArrowRight className="h-4 w-4" />
           </Link>
         </div>
@@ -97,4 +99,5 @@ export function SevenPillarsHomeSection() {
   );
 }
 
+export const NinePillarsHomeSection = SevenPillarsHomeSection;
 export default SevenPillarsHomeSection;

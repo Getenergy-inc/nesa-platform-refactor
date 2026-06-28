@@ -1,4 +1,4 @@
-// NESA-Africa 2026 — 7 Recognition Pillars
+// NESA-Africa 2026 — 9 Recognition Pillars
 // Content-only file. Edit copy here; pages render from this data.
 
 import {
@@ -9,6 +9,8 @@ import {
   Coins,
   Landmark,
   Megaphone,
+  HeartHandshake,
+  BookOpen,
   type LucideIcon,
 } from "lucide-react";
 
@@ -333,10 +335,10 @@ export const PILLARS: Pillar[] = [
   {
     slug: "education-funding",
     number: 5,
-    shortTitle: "Best Education Grants & Funding for Africa",
-    pageTitle: "Best Education Grants & Funding for Africa",
-    sellLine: "Behind every school built and every student supported, there is a funder who believed.",
-    heroHeadline: "Honouring Organisations Funding African Education.",
+    shortTitle: "Institutional & Bilateral Grants for Education for All",
+    pageTitle: "Institutional & Bilateral Grants for Education for All",
+    sellLine: "Funding the future of African education.",
+    heroHeadline: "Honouring Bilateral Agencies, Multilateral Partners and Grant-Makers Funding Education for All.",
     intro: [
       "The Best Education Grants & Funding for Africa pillar recognises the foundations, development partners, grant-makers, NGOs, government agencies, donor institutions, and scholarship funds financing measurable education outcomes.",
       "Education impact requires belief. It also requires funding.",
@@ -404,10 +406,10 @@ export const PILLARS: Pillar[] = [
   {
     slug: "continental-recognition",
     number: 6,
-    shortTitle: "Continental Education Recognition & Awards",
-    pageTitle: "Continental Education Recognition & Awards",
-    sellLine: "54 nations. One continental stage. Every category of African education excellence recognised.",
-    heroHeadline: "The Full Award Ceremony Platform for African Education Excellence.",
+    shortTitle: "Institutional Excellence in Education",
+    pageTitle: "Institutional Excellence in Education",
+    sellLine: "Strengthening Africa's education systems.",
+    heroHeadline: "Recognising Governments, Ministries, Universities, Research Institutes, NGOs and Public Institutions Strengthening Education.",
     intro: [
       "The Continental Education Recognition & Awards pillar houses the broader NESA-Africa award categories.",
       "This is where schools, universities, libraries, NGOs, governments, media organisations, creative arts contributors, policy leaders, public institutions, regional education actors, and faith-based education impact organisations find their recognition pathway.",
@@ -623,6 +625,144 @@ export const PILLARS: Pillar[] = [
     ],
     extraNote:
       "No minimum follower count is required. Recognition is based on visible education contribution, not popularity.",
+  },
+
+  // PILLAR 8 — Philanthropy for Education (NEW)
+  {
+    slug: "philanthropy-for-education",
+    number: 8,
+    shortTitle: "Philanthropy for Education",
+    pageTitle: "Philanthropy for Education",
+    sellLine: "Transforming generosity into educational opportunity.",
+    heroHeadline: "Honouring Philanthropists, Foundations and Scholarship Providers Expanding Educational Access.",
+    intro: [
+      "The Philanthropy for Education pillar recognises philanthropists, charitable foundations, scholarship providers and education benefactors whose investments expand educational opportunity, equity and access across Africa.",
+      "From individual benefactors funding scholarships to foundations endowing schools, this pillar honours those whose generosity becomes lasting educational opportunity.",
+    ],
+    eligible: [
+      "Individual philanthropists funding education",
+      "Charitable foundations",
+      "Scholarship providers and trusts",
+      "Family foundations",
+      "Education endowments and benefactors",
+      "Africans in Africa, the diaspora, and Friends of Africa",
+    ],
+    notEligible: [
+      "One-off donations without documented education impact",
+      "Publicity-only giving without evidence",
+      "Funding with conditions that compromise educational independence",
+    ],
+    whyExists: [
+      "Behind every scholarship recipient, funded classroom and endowed library is a philanthropist who believed.",
+      "NESA-Africa makes that generosity visible at a continental scale.",
+    ],
+    subcategories: [
+      {
+        title: "Individual Philanthropist for Education",
+        description: "Recognising individuals whose personal giving has expanded educational access.",
+        cta: "Nominate a Philanthropist",
+        href: "/nominate?pillar=philanthropy-for-education&track=individual",
+      },
+      {
+        title: "Foundation for Education",
+        description: "Recognising charitable foundations financing educational opportunity at scale.",
+        cta: "Nominate a Foundation",
+        href: "/nominate?pillar=philanthropy-for-education&track=foundation",
+      },
+      {
+        title: "Scholarship Provider",
+        description: "Recognising scholarship funds opening doors for African learners.",
+        cta: "Nominate a Scholarship Provider",
+        href: "/nominate?pillar=philanthropy-for-education&track=scholarship",
+      },
+    ],
+    sponsorPositioning:
+      "Position your brand alongside Africa's most respected education philanthropists.",
+    sponsorCta: { label: "Sponsor the Philanthropy Pillar", href: "/sponsors" },
+    nominationCta: {
+      label: "Nominate an Education Philanthropist",
+      href: "/nominate?pillar=philanthropy-for-education",
+    },
+    hashtags: [
+      "#PhilanthropyForEducation",
+      "#NESAAfrica2026",
+      "#EducationForAll",
+      "#GivingForLearning",
+    ],
+    icon: HeartHandshake,
+    accent: "from-pink-500/30 via-rose-500/15 to-transparent",
+    bannerCta: "Nominate an Education Philanthropist",
+    bannerSummary:
+      "For philanthropists, foundations and scholarship providers expanding educational opportunity across Africa.",
+  },
+
+  // PILLAR 9 — Faith-Based & Religious Organisations Advancing Education (NEW)
+  {
+    slug: "faith-based-education",
+    number: 9,
+    shortTitle: "Faith-Based & Religious Organisations Advancing Education",
+    pageTitle: "Faith-Based & Religious Organisations Advancing Education",
+    sellLine: "Serving communities through education.",
+    heroHeadline: "Honouring Christian, Islamic and Other Faith-Based Organisations Advancing Education for All.",
+    intro: [
+      "The Faith-Based & Religious Organisations pillar recognises Christian, Islamic and other faith-based organisations advancing education through schools, scholarships, vocational training, humanitarian services, community learning and inclusive educational programmes.",
+      "Across Africa, faith-based institutions are among the largest providers of education, particularly in underserved communities. NESA-Africa honours their consistent, generations-long contribution.",
+    ],
+    eligible: [
+      "Christian education organisations and institutions",
+      "Islamic education organisations and institutions",
+      "Other faith-based education providers",
+      "Faith-led schools, colleges and universities",
+      "Faith-based scholarship and humanitarian programmes",
+      "Religious organisations running vocational and adult learning",
+    ],
+    notEligible: [
+      "Religious activities without an education component",
+      "Programmes that exclude learners on non-faith grounds without explanation",
+      "Unverifiable claims of educational impact",
+    ],
+    whyExists: [
+      "Faith-based organisations have built and sustained much of Africa's education infrastructure for centuries.",
+      "This pillar gives that quiet, consistent contribution the continental recognition it deserves.",
+    ],
+    subcategories: [
+      {
+        title: "Christian Education Impact",
+        description: "Christian institutions and leaders advancing education access, inclusion and community development.",
+        cta: "Nominate a Christian Education Partner",
+        href: "/nominate?pillar=faith-based-education&track=christian",
+      },
+      {
+        title: "Islamic Education Impact",
+        description: "Islamic institutions and leaders advancing education access, inclusion and community development.",
+        cta: "Nominate an Islamic Education Partner",
+        href: "/nominate?pillar=faith-based-education&track=islamic",
+      },
+      {
+        title: "Inter-Faith & Other Faith-Based Education",
+        description: "Other faith-based organisations expanding learning opportunity across Africa.",
+        cta: "Nominate a Faith-Based Partner",
+        href: "/nominate?pillar=faith-based-education&track=interfaith",
+      },
+    ],
+    sponsorPositioning:
+      "Stand alongside Africa's faith communities in building inclusive, values-driven education access.",
+    sponsorCta: { label: "Sponsor the Faith-Based Education Pillar", href: "/sponsors" },
+    nominationCta: {
+      label: "Nominate a Faith-Based Education Partner",
+      href: "/nominate?pillar=faith-based-education",
+    },
+    hashtags: [
+      "#FaithForEducation",
+      "#NESAAfrica2026",
+      "#EducationForAll",
+      "#CommunityLearning",
+    ],
+    icon: BookOpen,
+    accent: "from-purple-500/30 via-indigo-500/15 to-transparent",
+    bannerCta: "Nominate a Faith-Based Education Partner",
+    bannerSummary:
+      "For Christian, Islamic and other faith-based organisations advancing education access, scholarships and inclusion across Africa.",
   },
 ];
 
