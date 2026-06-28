@@ -58,6 +58,9 @@ const WhoWeHonourSection = lazy(() => import("@/components/nesa/WhoWeHonourSecti
 const SevenPillarsHomeSection = lazy(() => import("@/components/nesa/SevenPillarsHomeSection").then(m => ({ default: m.SevenPillarsHomeSection })));
 const HowItWorksHomeSection = lazy(() => import("@/components/nesa/HowItWorksHomeSection").then(m => ({ default: m.HowItWorksHomeSection })));
 const RecognitionImpactLegacy = lazy(() => import("@/components/recognition/RecognitionImpactLegacy").then(m => ({ default: m.RecognitionImpactLegacy })));
+const RecognitionTiersHomeSection = lazy(() => import("@/components/nesa/RecognitionTiersHomeSection").then(m => ({ default: m.RecognitionTiersHomeSection })));
+const WhoWeRecogniseClustersSection = lazy(() => import("@/components/nesa/WhoWeRecogniseClustersSection").then(m => ({ default: m.WhoWeRecogniseClustersSection })));
+const TrustStripSection = lazy(() => import("@/components/nesa/TrustStripSection").then(m => ({ default: m.TrustStripSection })));
 
 export function NESALandingPage() {
   const { t } = useTranslation("pages");
@@ -104,14 +107,29 @@ export function NESALandingPage() {
           <WhatIsNESASection />
         </LazySection>
 
-        {/* 3c. WHO WE HONOUR — 7 recognition identity cards */}
+        {/* 3c. WHO WE HONOUR — 9 recognition identity cards */}
         <LazySection>
           <WhoWeHonourSection />
         </LazySection>
 
-        {/* 3d. 7 RECOGNITION PILLARS — summary linking to /awards/pillars */}
+        {/* 3c-ii. WHO WE RECOGNISE — 3-cluster scannable grid */}
+        <LazySection>
+          <WhoWeRecogniseClustersSection />
+        </LazySection>
+
+        {/* 3c-iii. FOUR RECOGNITION TIERS — architecture surface */}
+        <LazySection>
+          <RecognitionTiersHomeSection />
+        </LazySection>
+
+        {/* 3d. 9 RECOGNITION PILLARS — summary linking to /awards/pillars */}
         <LazySection>
           <SevenPillarsHomeSection />
+        </LazySection>
+
+        {/* 3d-ii. TRUST STRIP — integrity firewall, one-line */}
+        <LazySection>
+          <TrustStripSection />
         </LazySection>
 
         {/* 3e. HOW IT WORKS — 6-step nomination → impact journey */}
