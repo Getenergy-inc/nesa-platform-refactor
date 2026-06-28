@@ -158,6 +158,28 @@ function DesktopNav({ onOpenCVOMessage }: { onOpenCVOMessage: () => void }) {
                             )}
                           </Link>
                         </NavigationMenuLink>
+                        {child.children && child.children.length > 0 && (
+                          <ul className="mt-1 ml-6 space-y-0.5 border-l border-gold/15 pl-3">
+                            {child.children.map((sub) => (
+                              <li key={sub.href}>
+                                <NavigationMenuLink asChild>
+                                  <Link
+                                    to={sub.href}
+                                    role="menuitem"
+                                    className={cn(
+                                      "block rounded-sm px-2 py-1 text-xs text-white/70 transition-colors",
+                                      "hover:bg-gold/10 hover:text-gold focus:bg-gold/10 focus:text-gold",
+                                      "focus-visible:ring-2 focus-visible:ring-gold/60 focus-visible:ring-offset-1 focus-visible:ring-offset-charcoal",
+                                      location.pathname === sub.href && "bg-gold/10 text-gold",
+                                    )}
+                                  >
+                                    {sub.label}
+                                  </Link>
+                                </NavigationMenuLink>
+                              </li>
+                            ))}
+                          </ul>
+                        )}
                       </li>
                     ))}
                   </ul>
