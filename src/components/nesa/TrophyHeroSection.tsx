@@ -94,7 +94,7 @@ export function TrophyHeroSection() {
               transition={{ duration: 0.5, delay: 0.28 }}
               className="font-display text-[13px] sm:text-sm md:text-base tracking-[0.22em] uppercase text-gold/90 mb-2"
             >
-              NESA-Africa 2026 | The African Blue-Garnet Awards for Education
+              Africa's Education Recognition &amp; Impact Platform
             </motion.p>
 
             <motion.h1
@@ -103,9 +103,9 @@ export function TrophyHeroSection() {
               transition={{ duration: 0.6, delay: 0.3 }}
               className="font-display text-[22px] leading-[1.2] sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4"
             >
-              Africa's Highest Honour for{" "}
+              Recognising the Enablers of{" "}
               <span className="text-gold bg-gradient-to-r from-gold to-amber-400 bg-clip-text text-transparent">
-                Education Excellence.
+                Education for All Across Africa.
               </span>
             </motion.h1>
 
@@ -115,7 +115,7 @@ export function TrophyHeroSection() {
               transition={{ duration: 0.5, delay: 0.5 }}
               className="text-white/90 text-[15px] sm:text-base md:text-lg mb-4 max-w-xl mx-auto lg:mx-0 leading-relaxed"
             >
-              NESA-Africa recognises the people, institutions, companies, funders, innovators, diaspora networks, media voices, and social advocates making <span className="text-gold font-semibold">Education for All</span> possible across Africa and the diaspora.
+              NESA-Africa recognises, celebrates and supports governments, corporate CSR leaders, philanthropists, development partners, foundations, faith-based organisations, NGOs, universities, innovators, media organisations, community leaders, Africans in the diaspora and Friends of Africa whose work expands <span className="text-gold font-semibold">Education for All</span>.
             </motion.p>
 
             <motion.div
@@ -125,25 +125,27 @@ export function TrophyHeroSection() {
               className="mb-5 max-w-xl mx-auto lg:mx-0 rounded-xl border border-gold/25 bg-charcoal/50 backdrop-blur-sm px-4 py-3"
             >
               <p className="text-ivory/90 text-[13px] sm:text-sm leading-relaxed">
-                <span className="text-gold font-semibold">Not a student prize. Not just another award ceremony.</span>{" "}
-                NESA-Africa honours the enablers building Africa's education future.
+                <span className="text-gold font-semibold">Recognition is only the beginning.</span>{" "}
+                Through SCEF, every recognition becomes visibility, partnerships, funding, educational intervention and lasting legacy via EduAid-Africa, Rebuild My School Africa and NESA-Africa TV.
               </p>
             </motion.div>
 
-            {/* Identity tags — who NESA-Africa recognises */}
+            {/* Identity tags — the 9 Recognition Pillars */}
             <motion.ul
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.7 }}
               className="flex flex-wrap gap-1.5 sm:gap-2 justify-center lg:justify-start mb-6"
-              aria-label="Who NESA-Africa recognises"
+              aria-label="The 9 NESA-Africa Recognition Pillars"
             >
               {[
-                "Education Icons",
+                "Africa Education Icons",
+                "Philanthropy for Education",
                 "CSR for Education",
                 "Diaspora Champions",
-                "EdTech & STEM",
+                "EdTech & STEM Innovation",
                 "Education Funders",
+                "Faith-Based Organisations",
                 "Institutional Excellence",
                 "Social Media Education Champions",
               ].map((chip) => (
