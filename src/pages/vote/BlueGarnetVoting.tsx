@@ -234,7 +234,7 @@ import { VotingStatsStrip } from "@/components/voting/VotingStatsStrip";
                  <span className="text-blue-400">Blue Garnet</span> Award Voting
                </h1>
                <p className="text-blue-100/80 text-lg mb-2">
-                 The highest honor in African education excellence
+                 The highest recognition for Africa's education enablers
                </p>
                <p className="text-blue-100/60 text-sm mb-6">
                  <span className="font-semibold text-blue-300">1 vote = 1 AGC</span> • Your vote counts for 40% of the final score
