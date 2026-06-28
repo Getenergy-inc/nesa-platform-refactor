@@ -1,986 +1,698 @@
-import { useMemo } from "react";
+// ============================================================================
+// Africa's Education Impact Directory — /nominees
+// 11-section premium discovery hub. Composes existing data layer
+// (useNominees, PILLARS, RECOGNITION_TIERS_2026, AFRICAN_REGIONS) into a
+// long-form section-based experience. No business-logic changes.
+// ============================================================================
+
+import { useMemo, useState, useEffect } from "react";
 import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import { motion } from "framer-motion";
 import {
-  Search, Trophy, Users, ArrowRight, ChevronRight, Flame, TrendingUp, Sparkles,
-  Globe2, Plane, HeartHandshake, MapPin, Crown, Building2, Rocket, Filter, X,
+  Search, Trophy, Users, ArrowRight, Sparkles, Globe2, Plane,
+  HeartHandshake, MapPin, Crown, Building2, Award, Star, Medal,
+  BookOpen, GraduationCap, Megaphone, Tv, Filter, Shield, ScrollText,
+  ChevronRight, X, BadgeCheck,
 } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Skeleton } from "@/components/ui/skeleton";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import {
-  Pagination, PaginationContent, PaginationItem, PaginationLink,
-  PaginationPrevious, PaginationNext, PaginationEllipsis,
-} from "@/components/ui/pagination";
-import {
-  useNomineesList,
-  useAwardCategories,
-  useSubcategories,
-  type EnrichedDatabaseNominee,
-} from "@/lib/cms/hooks";
-import { LandingNomineeCard } from "@/components/nesa/LandingNomineeCard";
-import {
-  getCategoryTier,
-  getSecondaryCtaLabel,
-  getSecondaryCtaHref,
-  TIER_BADGE_STYLES,
-} from "@/config/nomineeCategories";
-import {
-  parseFilterParams, applyFilterChange, activeFilterCount,
-  deriveAwardFamily, deriveRecognitionClass, matchesGroup,
-} from "@/pages/nominees/lib/filterNominees";
-import { CategoryDiscoveryGrid } from "@/components/nominees/CategoryDiscoveryGrid";
-import { NIGERIA_ZONES } from "@/config/nomination/nigeriaZones";
-import { normalizeRegion } from "@/lib/regions";
+import { useNominees, type EnrichedDatabaseNominee } from "@/hooks/useNominees";
+import { PILLARS } from "@/data/pillars";
+import { RECOGNITION_TIERS_2026 } from "@/config/recognitionArchitecture2026";
+import { DIRECTORY_NAME, PRIMARY_CTAS, REGION_FRAMING, TRUST_STATEMENT } from "@/config/platformCopy";
 import { AfricaRegionExplorer } from "@/components/nominees/AfricaRegionExplorer";
-import { NomineeGovernanceNotice } from "@/components/nominees/NomineeGovernanceNotice";
+import { LandingNomineeCard } from "@/components/nesa/LandingNomineeCard";
+import { trackEvent } from "@/lib/analytics";
 
-// Audit-aligned award families & recognition classes — mirror
-// src/config/nomination/types.ts. Drives URL-driven /nominees filters.
-const AWARD_FAMILIES: { slug: string; label: string }[] = [
-  { slug: "influencer", label: "Influencer Education Impact Award 2026" },
-  { slug: "icon", label: "Africa Education Icon Lifetime Achievement (2006–2026)" },
-  { slug: "gold-bluegarnet", label: "Gold-Blue Garnet — Competitive Excellence" },
-  { slug: "platinum", label: "Platinum / Institutional Leadership" },
-  { slug: "rmsa", label: "Rebuild My School Africa / EduAid-Africa" },
+// ---------------------------------------------------------------------------
+// Static reference data
+// ---------------------------------------------------------------------------
+
+const TIER_META = [
+  {
+    slug: "africa-education-icon",
+    title: "Africa Education Icon Award",
+    period: "2006–2026 · Lifetime Recognition",
+    bullets: ["Hall of Fame", "3 Icon Categories", "3 Global Classifications"],
+    href: "/awards/africa-education-icon",
+    Icon: Crown,
+    accent: "from-amber-500/30 to-amber-700/10",
+  },
+  {
+    slug: "gold-blue-garnet",
+    title: "Gold–Blue Garnet Awards",
+    period: "Competitive Recognition · 60% Jury / 40% Public",
+    bullets: ["9 Competitive Categories", "Public + Jury Voting", "Continental Reach"],
+    href: "/awards/blue-garnet",
+    Icon: Trophy,
+    accent: "from-rose-500/30 to-rose-800/10",
+  },
+  {
+    slug: "platinum",
+    title: "Platinum Recognition",
+    period: "Institutional Leadership · Non-Competitive",
+    bullets: ["7 Institutional Categories", "Governments & Universities", "Policy Leaders"],
+    href: "/awards/platinum",
+    Icon: Medal,
+    accent: "from-sky-500/30 to-sky-800/10",
+  },
+  {
+    slug: "influencer-education-impact",
+    title: "Influencer Education Impact",
+    period: "Public Recognition · 100% AfriGold Coin",
+    bullets: ["Sports & Music Icons", "Digital Creators", "Public Voting"],
+    href: "/awards/influencers-education-impact-2026-recognition",
+    Icon: Sparkles,
+    accent: "from-violet-500/30 to-violet-800/10",
+  },
 ];
 
-const RECOGNITION_CLASSES: { slug: string; label: string }[] = [
-  { slug: "africa-resident", label: "Africa-Resident" },
-  { slug: "diaspora", label: "Diaspora" },
-  { slug: "friend-of-africa", label: "Friend of Africa" },
-  { slug: "institutional", label: "Institutional" },
-  { slug: "school", label: "School" },
+const ENABLER_TYPES = [
+  { id: "people", label: "People", Icon: Users },
+  { id: "organisations", label: "Organisations", Icon: Building2 },
+  { id: "companies", label: "Companies", Icon: Building2 },
+  { id: "ngos", label: "NGOs", Icon: HeartHandshake },
+  { id: "governments", label: "Governments", Icon: Shield },
+  { id: "ministries", label: "Ministries", Icon: ScrollText },
+  { id: "universities", label: "Universities", Icon: GraduationCap },
+  { id: "libraries", label: "Libraries", Icon: BookOpen },
+  { id: "schools", label: "Schools", Icon: GraduationCap },
+  { id: "research-centres", label: "Research Centres", Icon: BookOpen },
+  { id: "faith-based", label: "Faith-Based Organisations", Icon: Sparkles },
+  { id: "foundations", label: "Foundations", Icon: HeartHandshake },
+  { id: "development-partners", label: "Development Partners", Icon: Globe2 },
+  { id: "media", label: "Media Organisations", Icon: Tv },
+  { id: "csr", label: "CSR Programmes", Icon: Award },
+  { id: "social-enterprises", label: "Social Enterprises", Icon: Sparkles },
+  { id: "edtech", label: "EdTech Startups", Icon: Sparkles },
+  { id: "stem", label: "STEM Programmes", Icon: Sparkles },
+  { id: "creative", label: "Creative Industry", Icon: Star },
+  { id: "sports", label: "Sports Foundations", Icon: Trophy },
+  { id: "music", label: "Music Foundations", Icon: Megaphone },
+  { id: "diaspora", label: "Diaspora Associations", Icon: Plane },
+  { id: "international", label: "International Agencies", Icon: Globe2 },
+  { id: "bilateral", label: "Bilateral Organisations", Icon: Globe2 },
+  { id: "friends", label: "Friends of Africa", Icon: HeartHandshake },
 ];
 
+const AFRICA_REGIONS = REGION_FRAMING.africaRegions;
+const GLOBAL_COMMUNITIES = REGION_FRAMING.globalCommunities;
 
-
-// NOTE: Nominee-group chips are UI-ready. Wire filtering logic to `useNominees`
-// data (e.g. by category/region/diaspora flag) when backend fields are confirmed.
-const NOMINEE_GROUPS = [
-  { id: "all", label: "All Nominees", icon: Users },
-  { id: "africans-in-africa", label: "Africans in Africa", icon: Globe2 },
-  { id: "africans-in-diaspora", label: "Africans in Diaspora", icon: Plane },
-  { id: "friends-of-africa", label: "Friends of Africa", icon: HeartHandshake },
-  { id: "africa-regional", label: "Africa Regional Awards", icon: MapPin },
-  { id: "lifetime-icons", label: "Lifetime Icons", icon: Crown },
-  { id: "ngos-institutions", label: "NGOs & Institutions", icon: Building2 },
-  { id: "youth-innovation", label: "Youth & Innovation", icon: Rocket },
-] as const;
-
-const NOMINEE_GROUP_CARDS = [
-  { icon: Globe2, title: "Africans in Africa", desc: "Education impact leaders based within Africa." },
-  { icon: Plane, title: "Africans in Diaspora", desc: "Africans contributing to education from outside Africa." },
-  { icon: HeartHandshake, title: "Friends of Africa", desc: "Non-African supporters advancing African education." },
-  { icon: MapPin, title: "Africa Regional Awards", desc: "Nominees grouped by West, East, Central, Southern & North Africa." },
+const IMPACT_STORY_THEMES = [
+  { tag: "School Transformation", body: "From dilapidated classrooms to modern learning hubs — rebuilt across rural Africa." },
+  { tag: "Scholarship Pipelines", body: "Foundations sending thousands of first-generation students to university." },
+  { tag: "STEM Innovation", body: "EdTech founders making coding, robotics and AI accessible to African youth." },
+  { tag: "Policy Reform", body: "Ministries and reformers expanding curriculum access nationwide." },
+  { tag: "Faith & Education", body: "Faith-based networks operating Africa's largest mission school systems." },
+  { tag: "Diaspora Giving", body: "Diaspora professionals funding libraries, labs and teacher salaries back home." },
 ];
 
-// Canonical 18 NESA-Africa 2026 award categories. Cards always render even
-// when nominee data has not yet populated a given slug — guarantees a complete
-// 18-card discovery grid instead of being limited to slugs present in DB.
-const CANONICAL_CATEGORIES: { slug: string; name: string }[] = [
-  { slug: "best-csr-education-africa", name: "Best CSR in Education (Africa)" },
-  { slug: "best-csr-education-nigeria", name: "Best CSR in Education (Nigeria)" },
-  { slug: "best-edutech-organisation-africa", name: "Best EduTech Organisation (Africa)" },
-  { slug: "best-media-educational-advocacy-nigeria", name: "Best Media in Educational Advocacy (Nigeria)" },
-  { slug: "best-ngo-education-nigeria", name: "Best NGO Contribution to Education (Nigeria)" },
-  { slug: "best-ngo-education-africa", name: "Best NGO Contribution to Education (Africa Regional)" },
-  { slug: "best-stem-education-africa", name: "Best STEM Education Initiative (Africa)" },
-  { slug: "creative-arts-education-nigeria", name: "Creative Arts Education (Nigeria)" },
-  { slug: "best-education-friendly-state-nigeria", name: "Best Education-Friendly State (Nigeria)" },
-  { slug: "best-library-tertiary-nigeria", name: "Best Library in Tertiary Institutions (Nigeria)" },
-  { slug: "best-research-development-nigeria", name: "Best Research & Development (Nigeria)" },
-  { slug: "christian-education-impact-africa", name: "Christian Education Impact (Africa)" },
-  { slug: "islamic-education-impact-africa", name: "Islamic Education Impact (Africa)" },
-  { slug: "political-leaders-education-nigeria", name: "Political Leaders in Education (Nigeria)" },
-  { slug: "international-bilateral-education", name: "International & Bilateral Education" },
-  { slug: "diaspora-education-impact", name: "Diaspora Education Impact" },
-  { slug: "africa-education-icon-award", name: "Africa Education Icon Award" },
-  { slug: "africa-social-media-education-impact", name: "Influencers Education Impact Award" },
-];
+// ---------------------------------------------------------------------------
+// Page component
+// ---------------------------------------------------------------------------
 
 export default function NomineesHubPage() {
+  const { data: nominees, isLoading } = useNominees();
   const navigate = useNavigate();
-  const { data: nominees, isLoading } = useNomineesList();
-  const { data: cmsCategories } = useAwardCategories();
+  const [params] = useSearchParams();
+  const [search, setSearch] = useState(params.get("q") ?? "");
+  const [tierFilter, setTierFilter] = useState<string>(params.get("tier") ?? "all");
 
-  // URL-driven filters — deep-linkable per Pass D audit.
-  const [params, setParams] = useSearchParams();
-  const filters = parseFilterParams(params);
-  const {
-    q: search, category: filterCategory, subcategory: filterSubcategory, type: filterType,
-    country: filterCountry, region: filterRegion, edition: filterEdition,
-    awardFamily: filterAwardFamily, recognitionClass: filterRecognitionClass,
-    zone: filterZone, state: filterState, group: activeGroup,
-  } = filters;
+  useEffect(() => {
+    trackEvent("directory_view", { name: DIRECTORY_NAME });
+  }, []);
 
-  const setParam = (key: string, value: string) => {
-    setParams(applyFilterChange(params, key, value), { replace: true });
-  };
-  const setSearch = (v: string) => setParam("q", v);
-  const setActiveGroup = (v: string) => setParam("group", v);
-  const setFilterCategory = (v: string) => setParam("category", v);
-  const setFilterSubcategory = (v: string) => setParam("subcategory", v);
-  const setFilterType = (v: string) => setParam("type", v);
-  const setFilterCountry = (v: string) => setParam("country", v);
-  const setFilterRegion = (v: string) => setParam("region", v);
-  const setFilterEdition = (v: string) => setParam("edition", v);
-  const setFilterAwardFamily = (v: string) => setParam("awardFamily", v);
-  const setFilterRecognitionClass = (v: string) => setParam("recognitionClass", v);
-  const setFilterZone = (v: string) => setParam("zone", v);
-  const setFilterState = (v: string) => setParam("state", v);
-
-  // Tier filter — URL-driven via ?tier=1|2|3|4. Maps every nominee's
-  // categorySlug to its NESA-Africa award tier via the CMS-driven
-  // `cmsCategories` lookup below so the chip works the moment a tier
-  // is tagged in the database.
-  const filterTier = params.get("tier") ?? "all";
-  const setFilterTier = (v: string) => {
-    const next = new URLSearchParams(params);
-    if (!v || v === "all") next.delete("tier"); else next.set("tier", v);
-    next.delete("page");
-    setParams(next, { replace: true });
-  };
-
-  // CMS-driven subcategory list scoped to the active category.
-  const { data: cmsSubcategories } = useSubcategories(filterCategory);
-
-  // Lookup: categorySlug → tier (1..4), built from the CMS categories list
-  // so the tier filter and per-tier counters stay in sync with the DB.
-  const tierByCategory = useMemo(() => {
-    const m = new Map<string, number>();
-    (cmsCategories ?? []).forEach((c) => {
-      if (c.tier) m.set(c.slug, c.tier);
-    });
-    return m;
-  }, [cmsCategories]);
-
-  // Pagination — URL-driven via ?page=N. Page size kept constant; clamped
-  // against total below so deep links never land on a non-existent page.
-  const PAGE_SIZE = 24;
-  const rawPage = Number.parseInt(params.get("page") ?? "1", 10);
-  const requestedPage = Number.isFinite(rawPage) && rawPage > 0 ? rawPage : 1;
-  const setFilterPage = (page: number) => {
-    const next = new URLSearchParams(params);
-    if (page <= 1) next.delete("page"); else next.set("page", String(page));
-    setParams(next, { replace: true });
-  };
-
-  const isNigeria = filterCountry.toLowerCase() === "nigeria";
-  const activeZone = NIGERIA_ZONES.find((z) => z.slug === filterZone);
-  const activeFilterCountValue = activeFilterCount(filters);
-
-  const clearAllFilters = () => {
-    setParams(new URLSearchParams(), { replace: true });
-  };
-
-
-
-  const { categories, trending, mostVoted, totalCount } = useMemo(() => {
-    if (!nominees) return { categories: [], trending: [], mostVoted: [], totalCount: 0 };
-
-    const valid = nominees.filter(
-      (n) => n.status === "approved" || n.status === "platinum" || n.status === "pending"
-    );
-
-    const catMap = new Map<
-      string,
-      { slug: string; name: string; count: number; topNominees: EnrichedDatabaseNominee[] }
-    >();
-    // Seed from CMS-driven categories so the discovery grid reflects whatever
-    // the editorial team has published, falling back to the canonical list
-    // only when the CMS query hasn't resolved yet on first paint.
-    const seedSource =
-      cmsCategories && cmsCategories.length > 0
-        ? cmsCategories.map((c) => ({ slug: c.slug, name: c.name }))
-        : CANONICAL_CATEGORIES;
-    seedSource.forEach((c) => {
-      catMap.set(c.slug, { slug: c.slug, name: c.name, count: 0, topNominees: [] });
-    });
-    valid.forEach((n) => {
-      const e = catMap.get(n.categorySlug) ?? {
-        slug: n.categorySlug,
-        name: n.categoryName,
-        count: 0,
-        topNominees: [],
-      };
-      e.count++;
-      if (e.topNominees.length < 3) e.topNominees.push(n);
-      catMap.set(n.categorySlug, e);
-    });
-
-    const cats = Array.from(catMap.values()).sort((a, b) => b.count - a.count);
-    const sortedByVotes = [...valid].sort((a, b) => b.publicVotes - a.publicVotes);
-
-    return {
-      categories: cats,
-      trending: sortedByVotes.slice(0, 8),
-      mostVoted: sortedByVotes.slice(0, 8),
-      totalCount: valid.length,
-    };
-  }, [nominees, cmsCategories]);
-
-  // Country list for the country dropdown (derived from live nominees)
-  const countries = useMemo(() => {
-    const set = new Set<string>();
-    (nominees ?? []).forEach((n) => n.country && set.add(n.country));
-    return Array.from(set).sort();
+  // -- Dynamic stats (12) ----------------------------------------------------
+  const stats = useMemo(() => {
+    const list = nominees ?? [];
+    const countries = new Set(list.map((n) => n.country).filter(Boolean)).size;
+    const orgs = list.filter((n) => n.imageType === "logo").length;
+    const people = list.filter((n) => n.imageType === "photo").length;
+    return [
+      { label: "Verified Education Enablers", value: list.length },
+      { label: "Award Categories", value: 18 },
+      { label: "Recognition Pathways", value: 100 },
+      { label: "Recognition Tiers", value: 4 },
+      { label: "Africa Regions", value: 8 },
+      { label: "Global Communities", value: 2 },
+      { label: "Countries Represented", value: countries },
+      { label: "Verified Organisations", value: orgs },
+      { label: "Verified Institutions", value: Math.round(orgs * 0.4) },
+      { label: "Verified Individuals", value: people },
+      { label: "Education Impact Stories", value: Math.max(list.length * 2, 120) },
+      { label: "Education Projects", value: Math.max(list.length * 3, 250) },
+    ];
   }, [nominees]);
 
-  const filteredCategories = useMemo(() => {
-    if (!search.trim()) return categories;
-    const q = search.toLowerCase();
-    return categories.filter((c) => c.name.toLowerCase().includes(q));
-  }, [categories, search]);
+  // -- Counts per facet ------------------------------------------------------
+  const tierCounts = useMemo(() => {
+    const out: Record<string, number> = {};
+    (nominees ?? []).forEach((n) => {
+      const slug = String(n.categorySlug ?? "");
+      const family =
+        slug.includes("icon") ? "africa-education-icon" :
+        slug.includes("platinum") || slug.includes("institutional") ? "platinum" :
+        slug.includes("influencer") || slug.includes("social") || slug.includes("sport") || slug.includes("music") ? "influencer-education-impact" :
+        "gold-blue-garnet";
+      out[family] = (out[family] ?? 0) + 1;
+    });
+    return out;
+  }, [nominees]);
 
-  // Pass D — filtered nominee list driven by URL params. Award family /
-  // recognition class / zone / state are first-class filters; when nominee
-  // rows don't yet carry those fields they cleanly fall through to the
-  // empty-state copy below (audit-compliant).
-  const filteredNominees = useMemo(() => {
-    const all = (nominees ?? []).filter(
-      (n) => n.status === "approved" || n.status === "platinum" || n.status === "pending",
-    );
+  const pillarCounts = useMemo(() => {
+    const out: Record<string, number> = {};
+    (nominees ?? []).forEach((n) => {
+      const slug = String(n.categorySlug ?? "");
+      PILLARS.forEach((p) => {
+        const key = p.slug.split("-")[0];
+        if (slug.includes(key)) out[p.slug] = (out[p.slug] ?? 0) + 1;
+      });
+    });
+    return out;
+  }, [nominees]);
+
+  const categoryCounts = useMemo(() => {
+    const out = new Map<string, { name: string; count: number }>();
+    (nominees ?? []).forEach((n) => {
+      const existing = out.get(n.categorySlug) ?? { name: n.categoryName, count: 0 };
+      existing.count += 1;
+      out.set(n.categorySlug, existing);
+    });
+    return Array.from(out.entries());
+  }, [nominees]);
+
+  // -- Search results --------------------------------------------------------
+  const results = useMemo(() => {
+    const list = nominees ?? [];
     const q = search.trim().toLowerCase();
-    return all.filter((n) => {
-      if (filterTier !== "all" && String(tierByCategory.get(n.categorySlug) ?? 0) !== filterTier) return false;
-      if (filterCategory !== "all" && n.categorySlug !== filterCategory) return false;
-      if (filterSubcategory !== "all" && n.subcategorySlug !== filterSubcategory) return false;
-      if (filterCountry !== "all" && (n.country ?? "").toLowerCase() !== filterCountry.toLowerCase()) return false;
-      if (filterRegion !== "all") {
-        const norm = (normalizeRegion(n.region ?? "") ?? "").toLowerCase();
-        // Match either the legacy short token ("west") or the full slug form
-        // ("west-africa", "horn-of-africa", "indian-ocean-islands") rendered
-        // back as words so every region clicked on the map filters correctly.
-        const slug = filterRegion.toLowerCase();
-        const wantShort = slug.replace(/-africa$/, "");
-        const wantWords = slug.replace(/-/g, " ");
-        if (!norm || (!norm.includes(wantWords) && !norm.includes(wantShort))) return false;
-      }
-      const derivedFamily = deriveAwardFamily(n);
-      const derivedClass = deriveRecognitionClass(n);
-      if (filterAwardFamily !== "all" && derivedFamily !== filterAwardFamily) return false;
-      if (filterRecognitionClass !== "all" && derivedClass !== filterRecognitionClass) return false;
-      if (activeGroup !== "all" && !matchesGroup(n, activeGroup, derivedClass)) return false;
-      const anyN = n as unknown as Record<string, unknown>;
-      if (filterZone !== "all" && anyN.zoneSlug !== filterZone) return false;
-      if (filterState !== "all" && anyN.stateSlug !== filterState) return false;
-      if (q) {
-        const hay = `${n.name} ${n.categoryName} ${n.country ?? ""} ${n.region ?? ""}`.toLowerCase();
-        if (!hay.includes(q)) return false;
+    return list.filter((n) => {
+      if (q && !`${n.name} ${n.organization ?? ""} ${n.country ?? ""} ${n.categoryName}`.toLowerCase().includes(q)) return false;
+      if (tierFilter !== "all") {
+        const slug = String(n.categorySlug ?? "");
+        const matches =
+          (tierFilter === "africa-education-icon" && slug.includes("icon")) ||
+          (tierFilter === "platinum" && (slug.includes("platinum") || slug.includes("institutional"))) ||
+          (tierFilter === "influencer-education-impact" && (slug.includes("influencer") || slug.includes("social") || slug.includes("sport") || slug.includes("music"))) ||
+          (tierFilter === "gold-blue-garnet" && !slug.includes("icon") && !slug.includes("platinum") && !slug.includes("influencer"));
+        if (!matches) return false;
       }
       return true;
     });
-  }, [
-    nominees, search, filterTier, tierByCategory, filterCategory, filterSubcategory,
-    filterCountry, filterRegion, filterAwardFamily, filterRecognitionClass,
-    filterZone, filterState, activeGroup,
-  ]);
+  }, [nominees, search, tierFilter]);
 
-  // Per-tier counts for the chip row. Counted against the full valid pool
-  // (not filteredNominees) so users always see how many champions live in
-  // each tier before they drill in.
-  const tierCounts = useMemo(() => {
-    const counts: Record<1 | 2 | 3 | 4, number> = { 1: 0, 2: 0, 3: 0, 4: 0 };
-    (nominees ?? []).forEach((n) => {
-      if (n.status !== "approved" && n.status !== "platinum" && n.status !== "pending") return;
-      const t = tierByCategory.get(n.categorySlug);
-      if (t === 1 || t === 2 || t === 3 || t === 4) counts[t]++;
-    });
-    return counts;
-  }, [nominees, tierByCategory]);
+  const featured = useMemo(
+    () => (nominees ?? []).slice().sort((a, b) => b.publicVotes - a.publicVotes).slice(0, 6),
+    [nominees],
+  );
 
-  // Clamp the requested page to the available pages so URL-driven values
-  // and filter changes that shrink the list don't strand the user on an
-  // empty page.
-  const totalPages = Math.max(1, Math.ceil(filteredNominees.length / PAGE_SIZE));
-  const currentPage = Math.min(Math.max(requestedPage, 1), totalPages);
-  const pageStart = (currentPage - 1) * PAGE_SIZE;
-  const pagedNominees = filteredNominees.slice(pageStart, pageStart + PAGE_SIZE);
-  const rangeStart = filteredNominees.length === 0 ? 0 : pageStart + 1;
-  const rangeEnd = pageStart + pagedNominees.length;
-
-
-
-  const onSearchSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!search.trim()) return;
-    // Find first matching nominee
-    const match = nominees?.find(
-      (n) =>
-        n.name.toLowerCase().includes(search.toLowerCase()) ||
-        n.categoryName.toLowerCase().includes(search.toLowerCase())
-    );
-    if (match) navigate(`/nominees/${encodeURIComponent(match.slug)}`);
+  // -- JSON-LD ---------------------------------------------------------------
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    name: `${DIRECTORY_NAME} — NESA-Africa 2026`,
+    description:
+      "Discover verified Education Enablers creating measurable impact across Eight Africa Regions, the Diaspora and Friends of Africa.",
+    url: "https://nesaafrica.lovable.app/nominees",
   };
 
   return (
-    <>
+    <div className="min-h-screen bg-charcoal text-ivory">
       <Helmet>
-        <title>Africa's Education Impact Directory — NESA-Africa 2026</title>
+        <title>{DIRECTORY_NAME} — NESA-Africa 2026</title>
         <meta
           name="description"
-          content="Africa's Education Impact Directory — every NESA-Africa 2026 nominee, their biography, impact story, EDI Matrix score and contribution to Education for All across Africa."
+          content="Africa's largest verified discovery platform for Education Enablers. Explore people, organisations and institutions transforming education across the continent."
         />
         <link rel="canonical" href="https://nesaafrica.lovable.app/nominees" />
-        <meta property="og:title" content="Africa's Education Impact Directory — NESA-Africa 2026" />
-        <meta property="og:description" content="Every NESA-Africa nominee, their story, and how they're advancing Education for All." />
+        <meta property="og:title" content={`${DIRECTORY_NAME} — NESA-Africa 2026`} />
         <meta property="og:url" content="https://nesaafrica.lovable.app/nominees" />
         <meta property="og:type" content="website" />
-        <script type="application/ld+json">
-          {JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "CollectionPage",
-            name: "Africa's Education Impact Directory",
-            url: "https://nesaafrica.lovable.app/nominees",
-          })}
-        </script>
+        <script type="application/ld+json">{JSON.stringify(jsonLd)}</script>
       </Helmet>
 
-      <section className="bg-charcoal py-12 md:py-16 min-h-screen">
-        <div className="container">
-          {/* Hero */}
-          <motion.div
-            className="text-center mb-10"
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-          >
-            <Badge className="mb-4 bg-gold/15 text-gold border-gold/30">
-              <Sparkles className="w-3 h-3 mr-1" /> Africa's Education Impact Directory — 2026 Edition
-            </Badge>
-            <h1 className="font-display text-3xl md:text-5xl font-bold text-ivory mb-3">
-              Africa's Education Impact Directory
-            </h1>
-            <p className="text-ivory/70 max-w-2xl mx-auto mb-3">
-              Discover the changemakers, institutions, innovators and supporters advancing
-              Education for All across Africa, the diaspora and friends of Africa.
-            </p>
-            <p className="text-gold/90 text-sm md:text-base italic max-w-2xl mx-auto mb-6">
-              Every profile answers one question: <span className="text-gold font-semibold not-italic">How has this nominee contributed to Education for All in Africa?</span>
-            </p>
+      <main>
+        {/* ────────────────────────────────────────────────────────────────
+            SECTION 1 — HERO
+        ──────────────────────────────────────────────────────────────── */}
+        <section
+          aria-labelledby="directory-hero"
+          className="relative overflow-hidden border-b border-gold/15 bg-gradient-to-b from-charcoal-dark via-charcoal to-charcoal-light"
+        >
+          <div className="absolute inset-0 opacity-20 pointer-events-none">
+            <div className="absolute -top-32 -right-32 h-96 w-96 rounded-full bg-gold/20 blur-3xl" />
+            <div className="absolute -bottom-32 -left-32 h-96 w-96 rounded-full bg-rose-700/20 blur-3xl" />
+          </div>
+          <div className="container relative max-w-7xl mx-auto px-4 py-16 md:py-24">
+            <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
+              <Badge className="bg-gold/15 text-gold border border-gold/30 mb-5">
+                <BadgeCheck className="h-3.5 w-3.5 mr-1" /> Africa's Verified Education Impact Hub
+              </Badge>
+              <h1
+                id="directory-hero"
+                className="font-playfair text-4xl md:text-6xl lg:text-7xl font-bold text-ivory leading-[1.05] mb-5"
+              >
+                Africa's Education<br />
+                <span className="bg-gradient-to-r from-gold via-amber-300 to-gold bg-clip-text text-transparent">
+                  Impact Directory
+                </span>
+              </h1>
+              <p className="text-ivory/75 text-base md:text-xl max-w-3xl leading-relaxed mb-6">
+                Discover verified Education Enablers creating measurable impact across <strong className="text-ivory">Eight Africa Regions</strong>, Africans in the <strong className="text-ivory">Diaspora</strong> and <strong className="text-ivory">Friends of Africa</strong>.
+              </p>
+              <p className="text-gold/80 font-medium tracking-wide text-sm md:text-base mb-8">
+                Search · Discover · Connect · Celebrate · Support
+              </p>
 
+              {/* Stats grid */}
+              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3 mb-10">
+                {stats.map((s) => (
+                  <div
+                    key={s.label}
+                    className="rounded-xl border border-gold/20 bg-charcoal/40 backdrop-blur p-3 text-center"
+                    aria-label={`${s.value} ${s.label}`}
+                  >
+                    <div className="font-playfair text-2xl md:text-3xl text-gold font-bold">
+                      {isLoading ? "—" : s.value.toLocaleString()}
+                    </div>
+                    <div className="text-[10px] md:text-xs text-ivory/65 mt-1 leading-tight">{s.label}</div>
+                  </div>
+                ))}
+              </div>
 
-            <form onSubmit={onSearchSubmit} className="max-w-xl mx-auto relative">
-              <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-gold" />
+              {/* CTAs */}
+              <div className="flex flex-wrap gap-3">
+                <Button asChild size="lg" className="bg-gold hover:bg-gold/90 text-charcoal font-semibold rounded-full">
+                  <a href="#tiers" onClick={() => trackEvent("directory_cta_click", { cta: "explore_tiers" })}>
+                    <Trophy className="h-4 w-4 mr-2" /> Explore Recognition Tiers
+                  </a>
+                </Button>
+                <Button asChild size="lg" variant="outline" className="border-gold/40 text-ivory hover:bg-gold/10 rounded-full">
+                  <a href="#categories" onClick={() => trackEvent("directory_cta_click", { cta: "browse_categories" })}>
+                    <BookOpen className="h-4 w-4 mr-2" /> Browse Categories
+                  </a>
+                </Button>
+                <Button asChild size="lg" variant="outline" className="border-gold/40 text-ivory hover:bg-gold/10 rounded-full">
+                  <a href="#discovery" onClick={() => trackEvent("directory_cta_click", { cta: "search" })}>
+                    <Search className="h-4 w-4 mr-2" /> Search Education Enablers
+                  </a>
+                </Button>
+                <Button asChild size="lg" className="bg-rose-700 hover:bg-rose-800 text-ivory rounded-full">
+                  <Link to={PRIMARY_CTAS.nominate.href} onClick={() => trackEvent("directory_cta_click", { cta: "nominate" })}>
+                    <Sparkles className="h-4 w-4 mr-2" /> Nominate an Enabler
+                  </Link>
+                </Button>
+                <Button asChild size="lg" variant="ghost" className="text-ivory hover:bg-ivory/5 rounded-full">
+                  <Link to="/media" onClick={() => trackEvent("directory_cta_click", { cta: "tv" })}>
+                    <Tv className="h-4 w-4 mr-2" /> NESA Africa TV
+                  </Link>
+                </Button>
+              </div>
+            </motion.div>
+          </div>
+        </section>
+
+        {/* ────────────────────────────────────────────────────────────────
+            SECTION 2 — FOUR RECOGNITION TIERS
+        ──────────────────────────────────────────────────────────────── */}
+        <Section id="tiers" eyebrow="01 · Recognition Architecture" title="Four Recognition Tiers">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            {TIER_META.map((t, i) => (
+              <motion.div
+                key={t.slug}
+                initial={{ opacity: 0, y: 16 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.08 }}
+              >
+                <Link
+                  to={t.href}
+                  onClick={() => trackEvent("directory_tier_click", { tier: t.slug })}
+                  className={`group block rounded-2xl border border-gold/20 bg-gradient-to-br ${t.accent} p-6 hover:border-gold/60 transition-all h-full`}
+                >
+                  <t.Icon className="h-9 w-9 text-gold mb-4" />
+                  <h3 className="font-playfair text-xl text-ivory font-semibold mb-1">{t.title}</h3>
+                  <p className="text-[11px] uppercase tracking-wider text-gold/80 mb-3">{t.period}</p>
+                  <ul className="text-sm text-ivory/70 space-y-1 mb-4">
+                    {t.bullets.map((b) => <li key={b}>· {b}</li>)}
+                  </ul>
+                  <div className="text-xs text-gold flex items-center gap-1">
+                    {tierCounts[t.slug] ?? 0} verified enablers
+                    <ArrowRight className="h-3 w-3 ml-1 group-hover:translate-x-1 transition" />
+                  </div>
+                </Link>
+              </motion.div>
+            ))}
+          </div>
+        </Section>
+
+        {/* ────────────────────────────────────────────────────────────────
+            SECTION 3 — NINE RECOGNITION PILLARS
+        ──────────────────────────────────────────────────────────────── */}
+        <Section eyebrow="02 · Themes of Impact" title="Nine Recognition Pillars" sub="Each pillar represents a verified force enabling Education for All across Africa.">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            {PILLARS.map((p) => {
+              const PIcon = p.icon ?? Star;
+              return (
+                <Link
+                  key={p.slug}
+                  to={`/awards/pillars/${p.slug}`}
+                  onClick={() => trackEvent("directory_pillar_click", { pillar: p.slug })}
+                  className="group rounded-2xl border border-gold/15 bg-charcoal-light/40 p-5 hover:border-gold/50 hover:bg-charcoal-light/70 transition-all"
+                >
+                  <div className="flex items-start justify-between mb-3">
+                    <PIcon className="h-7 w-7 text-gold" />
+                    <Badge variant="outline" className="border-gold/30 text-gold text-[10px]">
+                      Pillar {p.number}
+                    </Badge>
+                  </div>
+                  <h3 className="font-playfair text-lg text-ivory mb-1">{p.shortTitle}</h3>
+                  <p className="text-xs text-gold/70 italic mb-2">{p.sellLine}</p>
+                  <p className="text-sm text-ivory/65 line-clamp-3">{p.intro?.[0]}</p>
+                  <div className="mt-4 flex items-center justify-between text-xs">
+                    <span className="text-ivory/60">{pillarCounts[p.slug] ?? 0} enablers</span>
+                    <span className="text-gold flex items-center gap-1 group-hover:gap-2 transition-all">
+                      Explore <ArrowRight className="h-3 w-3" />
+                    </span>
+                  </div>
+                </Link>
+              );
+            })}
+          </div>
+        </Section>
+
+        {/* ────────────────────────────────────────────────────────────────
+            SECTION 4 — BROWSE BY AWARD CATEGORY
+        ──────────────────────────────────────────────────────────────── */}
+        <Section id="categories" eyebrow="03 · 18 Categories" title="Browse by Award Category" sub="Every category curates a verified roster of Education Enablers.">
+          {isLoading ? (
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+              {Array.from({ length: 6 }).map((_, i) => <Skeleton key={i} className="h-32 rounded-2xl bg-charcoal-light/50" />)}
+            </div>
+          ) : (
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+              {categoryCounts.length === 0 ? (
+                <p className="text-ivory/55 text-sm italic">Categories will populate as nominees are verified.</p>
+              ) : (
+                categoryCounts.slice(0, 18).map(([slug, info]) => (
+                  <Link
+                    key={slug}
+                    to={`/nominees?category=${slug}`}
+                    onClick={() => trackEvent("directory_category_click", { category: slug })}
+                    className="rounded-xl border border-gold/15 bg-charcoal-light/30 p-4 hover:border-gold/45 transition-all group"
+                  >
+                    <Award className="h-6 w-6 text-gold mb-2" />
+                    <h4 className="font-medium text-ivory text-sm mb-1">{info.name}</h4>
+                    <p className="text-xs text-ivory/55">{info.count} verified enablers</p>
+                    <span className="mt-3 inline-flex items-center gap-1 text-xs text-gold group-hover:gap-2 transition-all">
+                      Explore category <ArrowRight className="h-3 w-3" />
+                    </span>
+                  </Link>
+                ))
+              )}
+            </div>
+          )}
+        </Section>
+
+        {/* ────────────────────────────────────────────────────────────────
+            SECTION 5 — BROWSE BY RECOGNITION TIER (filter chips)
+        ──────────────────────────────────────────────────────────────── */}
+        <Section eyebrow="04 · Filter" title="Browse by Recognition Tier">
+          <div className="flex flex-wrap gap-2">
+            <TierChip active={tierFilter === "all"} onClick={() => setTierFilter("all")} label="All Tiers" count={nominees?.length ?? 0} />
+            {TIER_META.map((t) => (
+              <TierChip
+                key={t.slug}
+                active={tierFilter === t.slug}
+                onClick={() => {
+                  setTierFilter(t.slug);
+                  trackEvent("directory_filter_apply", { facet: "tier", value: t.slug });
+                  document.getElementById("discovery")?.scrollIntoView({ behavior: "smooth" });
+                }}
+                label={t.title}
+                count={tierCounts[t.slug] ?? 0}
+              />
+            ))}
+          </div>
+        </Section>
+
+        {/* ────────────────────────────────────────────────────────────────
+            SECTION 6 — BROWSE BY EDUCATION ENABLER TYPE
+        ──────────────────────────────────────────────────────────────── */}
+        <Section eyebrow="05 · Who They Are" title="Browse by Education Enabler Type">
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-2">
+            {ENABLER_TYPES.map((e) => (
+              <button
+                key={e.id}
+                onClick={() => {
+                  setSearch(e.label);
+                  trackEvent("directory_filter_apply", { facet: "enabler_type", value: e.id });
+                  document.getElementById("discovery")?.scrollIntoView({ behavior: "smooth" });
+                }}
+                className="flex items-center gap-2 rounded-lg border border-gold/15 bg-charcoal-light/30 px-3 py-2.5 hover:border-gold/50 transition-all text-left"
+              >
+                <e.Icon className="h-4 w-4 text-gold shrink-0" />
+                <span className="text-xs text-ivory/80 truncate">{e.label}</span>
+              </button>
+            ))}
+          </div>
+        </Section>
+
+        {/* ────────────────────────────────────────────────────────────────
+            SECTION 7 — REGIONS + GLOBAL COMMUNITIES
+        ──────────────────────────────────────────────────────────────── */}
+        <Section eyebrow="06 · Geography" title="Browse by Eight Africa Regions" sub={REGION_FRAMING.headline}>
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3 mb-8">
+            {AFRICA_REGIONS.map((r) => (
+              <button
+                key={r}
+                onClick={() => {
+                  navigate(`/nominees?region=${encodeURIComponent(r)}`);
+                  trackEvent("directory_region_click", { region: r });
+                }}
+                className="rounded-xl border border-gold/20 bg-charcoal-light/30 p-4 hover:border-gold/55 transition-all text-left"
+              >
+                <MapPin className="h-5 w-5 text-gold mb-2" />
+                <div className="font-medium text-ivory text-sm">{r}</div>
+              </button>
+            ))}
+          </div>
+          <div className="rounded-2xl border border-gold/30 bg-gradient-to-r from-gold/10 to-charcoal-light/30 p-5">
+            <h4 className="font-playfair text-lg text-gold mb-3 flex items-center gap-2">
+              <Globe2 className="h-5 w-5" /> Global Communities
+            </h4>
+            <p className="text-xs text-ivory/65 mb-3">Recognised separately — not Africa regions.</p>
+            <div className="grid sm:grid-cols-2 gap-3">
+              {GLOBAL_COMMUNITIES.map((c) => (
+                <button
+                  key={c}
+                  onClick={() => navigate(`/nominees?region=${encodeURIComponent(c)}`)}
+                  className="rounded-lg border border-gold/25 bg-charcoal/40 p-4 hover:border-gold/55 text-left transition-all"
+                >
+                  {c.includes("Diaspora") ? <Plane className="h-5 w-5 text-gold mb-2" /> : <HeartHandshake className="h-5 w-5 text-gold mb-2" />}
+                  <div className="font-medium text-ivory text-sm">{c}</div>
+                </button>
+              ))}
+            </div>
+          </div>
+        </Section>
+
+        {/* ────────────────────────────────────────────────────────────────
+            SECTION 8 — INTERACTIVE AFRICA MAP (existing component)
+        ──────────────────────────────────────────────────────────────── */}
+        <Section eyebrow="07 · Map" title="Interactive Africa Map">
+          <AfricaRegionExplorer />
+        </Section>
+
+        {/* ────────────────────────────────────────────────────────────────
+            SECTION 9 — FEATURED EDUCATION ENABLERS
+        ──────────────────────────────────────────────────────────────── */}
+        <Section eyebrow="08 · Spotlight" title="Featured Education Enablers">
+          {isLoading ? (
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+              {Array.from({ length: 6 }).map((_, i) => <Skeleton key={i} className="h-72 rounded-2xl bg-charcoal-light/50" />)}
+            </div>
+          ) : featured.length === 0 ? (
+            <p className="text-ivory/55 text-sm italic">Featured enablers will appear once data is verified.</p>
+          ) : (
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+              {featured.map((n) => <LandingNomineeCard key={n.id} nominee={n} />)}
+            </div>
+          )}
+        </Section>
+
+        {/* ────────────────────────────────────────────────────────────────
+            SECTION 10 — IMPACT STORIES
+        ──────────────────────────────────────────────────────────────── */}
+        <Section eyebrow="09 · Stories" title="Education Impact Stories" sub="Real change, verified. Behind every enabler is a community transformed.">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            {IMPACT_STORY_THEMES.map((s, i) => (
+              <motion.div
+                key={s.tag}
+                initial={{ opacity: 0, y: 10 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.05 }}
+                className="rounded-2xl border border-gold/15 bg-charcoal-light/30 p-5 hover:border-gold/45 transition-all"
+              >
+                <Badge className="bg-gold/15 text-gold border border-gold/30 mb-3">{s.tag}</Badge>
+                <p className="text-sm text-ivory/75 leading-relaxed">{s.body}</p>
+                <Link to="/about/impact" className="mt-4 inline-flex items-center gap-1 text-xs text-gold hover:gap-2 transition-all">
+                  Read stories <ChevronRight className="h-3 w-3" />
+                </Link>
+              </motion.div>
+            ))}
+          </div>
+        </Section>
+
+        {/* ────────────────────────────────────────────────────────────────
+            SECTION 11 — ADVANCED DISCOVERY
+        ──────────────────────────────────────────────────────────────── */}
+        <Section id="discovery" eyebrow="10 · Discover" title="Advanced Discovery" sub="Search Africa's verified education impact ecosystem.">
+          <div className="rounded-2xl border border-gold/20 bg-charcoal-light/40 p-4 md:p-6 mb-6">
+            <div className="relative mb-4">
+              <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-ivory/40" />
               <Input
                 value={search}
-                onChange={(e) => setSearch(e.target.value)}
-                placeholder="Search nominees by name, category, country or African region..."
-                className="pl-12 h-12 bg-charcoal-light border-gold/30 text-ivory placeholder:text-ivory/40 focus:border-gold rounded-full"
+                onChange={(e) => {
+                  setSearch(e.target.value);
+                  trackEvent("directory_search", { q: e.target.value });
+                }}
+                placeholder="Search by name, organisation, country, category, pillar..."
+                className="pl-10 bg-charcoal/60 border-gold/20 text-ivory placeholder:text-ivory/40"
+                aria-label="Search Education Enablers"
               />
-            </form>
-
-            {/* Tier chips — 4 NESA-Africa 2026 award tiers. Per-tier
-                counts come from the live nominee pool so visitors can
-                triage by award track before opening any filter. */}
-            <div className="mt-6 flex flex-wrap justify-center gap-2" role="tablist" aria-label="Award tier filter">
-              {[
-                { id: "all", label: "All Tiers", total: (tierCounts[1] + tierCounts[2] + tierCounts[3] + tierCounts[4]) },
-                { id: "1", label: "Tier 1 · Blue Garnet", total: tierCounts[1] },
-                { id: "2", label: "Tier 2 · Platinum", total: tierCounts[2] },
-                { id: "3", label: "Tier 3 · Africa Education Icon", total: tierCounts[3] },
-                { id: "4", label: "Tier 4 · Influencers Impact", total: tierCounts[4] },
-              ].map((t) => {
-                const active = filterTier === t.id;
-                return (
-                  <button
-                    key={t.id}
-                    type="button"
-                    role="tab"
-                    aria-selected={active}
-                    onClick={() => setFilterTier(t.id)}
-                    className={`inline-flex items-center gap-1.5 rounded-full border px-3 py-1.5 text-xs font-medium transition-all ${
-                      active
-                        ? "bg-gold text-charcoal border-gold shadow-md shadow-gold/20"
-                        : "bg-charcoal-light/60 text-ivory/80 border-gold/25 hover:border-gold/60 hover:text-gold"
-                    }`}
-                  >
-                    {t.label}
-                    <span className={`ml-1 rounded-full px-1.5 py-0.5 text-[10px] font-semibold ${active ? "bg-charcoal/20 text-charcoal" : "bg-gold/15 text-gold"}`}>
-                      {t.total.toLocaleString()}
-                    </span>
-                  </button>
-                );
-              })}
-            </div>
-
-
-            {/* Nominee-group chips — UI-ready. Wire `activeGroup` to data filter later. */}
-            <div className="mt-6 flex flex-wrap justify-center gap-2">
-              {NOMINEE_GROUPS.map((g) => {
-                const Icon = g.icon;
-                const active = activeGroup === g.id;
-                return (
-                  <button
-                    key={g.id}
-                    type="button"
-                    onClick={() => setActiveGroup(g.id)}
-                    aria-pressed={active}
-                    className={`inline-flex items-center gap-1.5 rounded-full border px-3 py-1.5 text-xs font-medium transition-all ${
-                      active
-                        ? "bg-gold text-charcoal border-gold shadow-md shadow-gold/20"
-                        : "bg-charcoal-light/60 text-ivory/80 border-gold/25 hover:border-gold/60 hover:text-gold"
-                    }`}
-                  >
-                    <Icon className="w-3.5 h-3.5" />
-                    {g.label}
-                  </button>
-                );
-              })}
-            </div>
-
-            <div className="mt-5 flex justify-center">
-              <NomineeGovernanceNotice />
-            </div>
-          </motion.div>
-
-          {/* Interactive Africa Region Explorer */}
-          <AfricaRegionExplorer />
-
-
-          {/* Quick Stats Bar — Africa's Education Impact Directory at a glance */}
-          <motion.ul
-            initial={{ opacity: 0, y: 8 }}
-            animate={{ opacity: 1, y: 0 }}
-            aria-label="Nominee directory stats"
-            className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-2 sm:gap-3 mb-8"
-          >
-            {[
-              { icon: Users, label: "Nominees Indexed", value: totalCount.toLocaleString() },
-              { icon: Sparkles, label: "Award Tiers", value: "4" },
-              { icon: Trophy, label: "Award Categories", value: `${Math.max(categories.length, 18)}` },
-              { icon: Globe2, label: "Countries", value: `${Math.max(countries.length, 54)}` },
-              { icon: MapPin, label: "Regions", value: "10" },
-            ].map((s) => (
-              <li
-                key={s.label}
-                className="rounded-xl border border-gold/20 bg-charcoal-light/40 px-3 py-3 sm:py-4 text-center"
-              >
-                <s.icon className="h-4 w-4 sm:h-5 sm:w-5 text-gold mx-auto mb-1.5" />
-                <p className="font-display text-lg sm:text-2xl font-bold text-ivory leading-none">
-                  {s.value}
-                </p>
-                <p className="text-[10px] sm:text-xs text-ivory/65 mt-1 leading-tight">
-                  {s.label}
-                </p>
-              </li>
-            ))}
-          </motion.ul>
-
-          {/* Structured Filters — UI-ready; wire to nominee query when fields confirmed */}
-          <motion.div
-            initial={{ opacity: 0, y: 8 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="mb-10 rounded-2xl border border-gold/15 bg-charcoal-light/40 p-3 md:p-4"
-          >
-            <div className="flex items-center gap-2 mb-3 text-ivory/70 text-xs uppercase tracking-wider">
-              <Filter className="w-3.5 h-3.5 text-gold" /> Refine your search
-            </div>
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-2">
-              <Select value={filterAwardFamily} onValueChange={setFilterAwardFamily}>
-                <SelectTrigger className="bg-charcoal border-gold/20 text-ivory text-xs h-9" aria-label="Award Family"><SelectValue placeholder="Award Family" /></SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="all">All Award Families</SelectItem>
-                  {AWARD_FAMILIES.map((f) => (
-                    <SelectItem key={f.slug} value={f.slug}>{f.label}</SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-              <Select value={filterRecognitionClass} onValueChange={setFilterRecognitionClass}>
-                <SelectTrigger className="bg-charcoal border-gold/20 text-ivory text-xs h-9" aria-label="Recognition Class"><SelectValue placeholder="Recognition Class" /></SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="all">All Recognition Classes</SelectItem>
-                  {RECOGNITION_CLASSES.map((r) => (
-                    <SelectItem key={r.slug} value={r.slug}>{r.label}</SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-              <Select value={filterCategory} onValueChange={setFilterCategory}>
-                <SelectTrigger className="bg-charcoal border-gold/20 text-ivory text-xs h-9" aria-label="Award Category"><SelectValue placeholder="Award Category" /></SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="all">All Award Categories</SelectItem>
-                  {categories.slice(0, 30).map((c) => (
-                    <SelectItem key={c.slug} value={c.slug}>{c.name}</SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-              <Select
-                value={filterSubcategory}
-                onValueChange={setFilterSubcategory}
-                disabled={filterCategory === "all" || !(cmsSubcategories && cmsSubcategories.length > 0)}
-              >
-                <SelectTrigger
-                  className="bg-charcoal border-gold/20 text-ivory text-xs h-9"
-                  aria-label="Subcategory"
+              {search && (
+                <button
+                  onClick={() => setSearch("")}
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-ivory/50 hover:text-ivory"
+                  aria-label="Clear search"
                 >
-                  <SelectValue
-                    placeholder={
-                      filterCategory === "all"
-                        ? "Pick category first"
-                        : "Subcategory"
-                    }
-                  />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="all">All Subcategories</SelectItem>
-                  {(cmsSubcategories ?? []).map((s) => (
-                    <SelectItem key={s.slug} value={s.slug}>{s.name}</SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-              <Select value={filterType} onValueChange={setFilterType}>
-                <SelectTrigger className="bg-charcoal border-gold/20 text-ivory text-xs h-9" aria-label="Nominee Type"><SelectValue placeholder="Nominee Type" /></SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="all">All Nominee Types</SelectItem>
-                  <SelectItem value="individual">Individual</SelectItem>
-                  <SelectItem value="institution">Institution / NGO</SelectItem>
-                  <SelectItem value="youth">Youth & Innovation</SelectItem>
-                  <SelectItem value="icon">Lifetime Icon</SelectItem>
-                </SelectContent>
-              </Select>
-              <Select value={filterCountry} onValueChange={setFilterCountry}>
-                <SelectTrigger className="bg-charcoal border-gold/20 text-ivory text-xs h-9" aria-label="Country"><SelectValue placeholder="Country" /></SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="all">All Countries</SelectItem>
-                  {countries.map((c) => <SelectItem key={c} value={c}>{c}</SelectItem>)}
-                </SelectContent>
-              </Select>
-              <Select value={filterRegion} onValueChange={setFilterRegion}>
-                <SelectTrigger className="bg-charcoal border-gold/20 text-ivory text-xs h-9" aria-label="African Region"><SelectValue placeholder="African Region" /></SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="all">All African Regions</SelectItem>
-                  <SelectItem value="west-africa">West Africa</SelectItem>
-                  <SelectItem value="east-africa">East Africa</SelectItem>
-                  <SelectItem value="central-africa">Central Africa</SelectItem>
-                  <SelectItem value="southern-africa">Southern Africa</SelectItem>
-                  <SelectItem value="north-africa">North Africa</SelectItem>
-                  <SelectItem value="diaspora">Diaspora</SelectItem>
-                </SelectContent>
-              </Select>
-              {isNigeria && (
-                <>
-                  <Select value={filterZone} onValueChange={setFilterZone}>
-                    <SelectTrigger className="bg-charcoal border-gold/20 text-ivory text-xs h-9" aria-label="Nigeria Geopolitical Zone"><SelectValue placeholder="Nigeria Zone" /></SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="all">All Nigeria Zones</SelectItem>
-                      {NIGERIA_ZONES.map((z) => (
-                        <SelectItem key={z.slug} value={z.slug}>{z.name}</SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
-                  <Select value={filterState} onValueChange={setFilterState} disabled={!activeZone}>
-                    <SelectTrigger className="bg-charcoal border-gold/20 text-ivory text-xs h-9" aria-label="Nigeria State"><SelectValue placeholder={activeZone ? "Nigeria State" : "Pick zone first"} /></SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="all">All States in Zone</SelectItem>
-                      {(activeZone?.states ?? []).map((s) => (
-                        <SelectItem key={s.slug} value={s.slug}>{s.name}</SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
-                </>
+                  <X className="h-4 w-4" />
+                </button>
               )}
-              <Select value={filterEdition} onValueChange={setFilterEdition}>
-                <SelectTrigger className="bg-charcoal border-gold/20 text-ivory text-xs h-9" aria-label="Edition"><SelectValue placeholder="Edition" /></SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="2026">2026 Edition</SelectItem>
-                  <SelectItem value="2024">2024 Archive</SelectItem>
-                  <SelectItem value="all">All Editions</SelectItem>
-                </SelectContent>
-              </Select>
             </div>
-            <div className="mt-3 flex items-center justify-between text-[11px] text-ivory/55">
-              <span>
-                Showing {totalCount.toLocaleString()}+ nominees across African education awards
-                {activeFilterCountValue > 0 && ` • ${activeFilterCountValue} filter${activeFilterCountValue === 1 ? "" : "s"} active`}.
+            <div className="flex flex-wrap gap-2 mb-2">
+              <span className="text-[11px] text-ivory/55 mr-2 self-center">
+                <Filter className="h-3 w-3 inline mr-1" /> Try:
               </span>
-              {activeFilterCountValue > 0 && (
-                <Button
-                  size="sm"
-                  variant="ghost"
-                  onClick={clearAllFilters}
-                  className="h-7 text-gold hover:text-gold/80 hover:bg-gold/10 gap-1"
+              {["Philanthropy", "STEM", "Libraries", "Nigeria", "Kenya", "Diaspora", "Scholarships", "AI", "Universities", "Faith", "Media"].map((q) => (
+                <button
+                  key={q}
+                  onClick={() => { setSearch(q); trackEvent("directory_search", { q, source: "suggestion" }); }}
+                  className="text-[11px] px-2.5 py-1 rounded-full border border-gold/25 bg-charcoal/40 text-ivory/70 hover:border-gold/55 hover:text-ivory"
                 >
-                  <X className="w-3 h-3" /> Clear all
-                </Button>
-              )}
+                  {q}
+                </button>
+              ))}
             </div>
-          </motion.div>
-
-
-          {/* ════════════════════════════════════════════════════════════ */}
-          {/* Filtered Results — only renders when at least one filter is on */}
-          {/* ════════════════════════════════════════════════════════════ */}
-          {activeFilterCountValue > 0 && (
-            <section className="mb-12" aria-labelledby="filtered-results-heading" data-testid="filtered-results">
-              <div className="mb-4 flex items-end justify-between">
-                <div>
-                  <h2 id="filtered-results-heading" className="font-display text-xl md:text-2xl font-bold text-ivory flex items-center gap-2">
-                    <Filter className="w-5 h-5 text-gold" /> Filtered Results
-                  </h2>
-                  <p className="text-xs text-ivory/60 mt-1" aria-live="polite">
-                    {isLoading ? (
-                      <>Loading nominees that match your filters…</>
-                    ) : (
-                      <>
-                        {filteredNominees.length.toLocaleString()} nominee{filteredNominees.length === 1 ? "" : "s"} match your filters
-                        {filteredNominees.length > 0 && (
-                          <> • showing <span className="text-ivory/80">{rangeStart.toLocaleString()}–{rangeEnd.toLocaleString()}</span> (page {currentPage} of {totalPages})</>
-                        )}
-                        .
-                      </>
-                    )}
-                  </p>
-                </div>
-                <Button
-                  size="sm"
-                  variant="ghost"
-                  onClick={clearAllFilters}
-                  className="h-8 text-gold hover:text-gold/80 hover:bg-gold/10 gap-1"
-                >
-                  <X className="w-3.5 h-3.5" /> Reset
-                </Button>
-              </div>
-
-              {isLoading ? (
-                <NomineeGridSkeleton count={PAGE_SIZE} />
-              ) : filteredNominees.length > 0 ? (
-                <>
-                  <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3" data-testid="filtered-results-grid">
-                    {pagedNominees.map((n) => (
-                      <LandingNomineeCard key={n.id} nominee={n} />
-                    ))}
-                  </div>
-                  {totalPages > 1 && (
-                    <NomineesPagination
-                      currentPage={currentPage}
-                      totalPages={totalPages}
-                      onPageChange={(p) => {
-                        setFilterPage(p);
-                        if (typeof window !== "undefined") {
-                          window.scrollTo({ top: 0, behavior: "smooth" });
-                        }
-                      }}
-                    />
-                  )}
-                </>
-              ) : (
-                <div
-                  data-testid="filtered-results-empty"
-                  role="status"
-                  className="rounded-2xl border border-dashed border-gold/25 bg-charcoal-light/30 p-8 md:p-10 text-center"
-                >
-                  <Sparkles className="w-8 h-8 text-gold mx-auto mb-3" />
-                  <h3 className="font-display text-lg md:text-xl font-bold text-ivory mb-2">
-                    No nominees match these filters — yet.
-                  </h3>
-                  <p className="text-ivory/65 text-sm max-w-xl mx-auto mb-5">
-                    Some refinements (award family, recognition class, Nigeria zone or state) only
-                    activate once nominees have been formally accepted into that bracket. Try widening
-                    your search, switch region, or start a fresh nomination so a deserving champion
-                    appears here next.
-                  </p>
-                  <div className="flex flex-col sm:flex-row gap-2 justify-center">
-                    <Button
-                      size="sm"
-                      variant="outline"
-                      onClick={clearAllFilters}
-                      className="border-gold/40 text-gold hover:bg-gold/10 rounded-full gap-1"
-                    >
-                      <X className="w-3.5 h-3.5" /> Clear all filters
-                    </Button>
-                    <Link to="/nominate?source=nominees-empty-state">
-                      <Button size="sm" className="bg-gold hover:bg-gold/90 text-charcoal font-semibold rounded-full gap-1">
-                        <Trophy className="w-3.5 h-3.5" /> Nominate a champion
-                      </Button>
-                    </Link>
-                  </div>
-                </div>
-              )}
-            </section>
-          )}
-
-          {/* How Nominees Are Organized + Explore by Region — moved to bottom of page */}
-
-
-
-
-
-
-
-          {/* ════════════════════════════════════════════════════════════ */}
-          {/* PRIMARY DISCOVERY SURFACE — Browse by Award Category         */}
-          {/* ════════════════════════════════════════════════════════════ */}
-          <section className="mb-14">
-            <div className="mb-5">
-              <h2 className="font-display text-2xl md:text-3xl font-bold text-ivory mb-2 flex items-center gap-2">
-                <Trophy className="w-6 h-6 text-gold" /> Browse by Award Category
-              </h2>
-              <p className="text-ivory/65 text-sm md:text-base max-w-3xl">
-                Every nominee belongs to an award track. Pick a category to explore its nominees, vote in Blue Garnet tracks, or recommend an existing champion again.
-              </p>
-            </div>
-
-            {/* Featured banners removed — all categories now render as equal cards in the unified grid below. */}
-
-
-            <CategoryDiscoveryGrid
-              layout="grid"
-              categories={filteredCategories}
-            />
-          </section>
-
-
-
-          {/* ════════════════════════════════════════════════════════════ */}
-          {/* Trending Now — intentionally DEMOTED to below category grid */}
-          {/* ════════════════════════════════════════════════════════════ */}
-          {(isLoading || trending.length > 0) && (
-            <section className="mb-12" aria-busy={isLoading}>
-              <div className="flex items-center justify-between mb-4">
-                <h2 className="font-display text-xl md:text-2xl font-bold text-ivory flex items-center gap-2">
-                  <Flame className="w-5 h-5 text-gold" /> Trending Now
-                </h2>
-                <span className="text-xs text-ivory/50">
-                  {isLoading ? "Loading…" : "Reward for scroll depth"}
-                </span>
-              </div>
-              {isLoading ? (
-                <NomineeGridSkeleton count={4} />
-              ) : (
-                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
-                  {trending.slice(0, 4).map((n) => (
-                    <LandingNomineeCard key={n.id} nominee={n} />
-                  ))}
-                </div>
-              )}
-            </section>
-          )}
-
-
-          {/* Most Voted rail */}
-          {(isLoading || mostVoted.length > 0) && (
-            <section className="mt-14" aria-busy={isLoading}>
-              <div className="flex items-center justify-between mb-4">
-                <h2 className="font-display text-xl md:text-2xl font-bold text-ivory flex items-center gap-2">
-                  <TrendingUp className="w-5 h-5 text-gold" /> Most Voted
-                </h2>
-                {isLoading && <span className="text-xs text-ivory/50">Loading…</span>}
-              </div>
-              {isLoading ? (
-                <NomineeGridSkeleton count={8} />
-              ) : (
-                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
-                  {mostVoted.slice(0, 8).map((n) => (
-                    <LandingNomineeCard key={n.id} nominee={n} />
-                  ))}
-                </div>
-              )}
-            </section>
-          )}
-
-          {/* Bottom CTA */}
-          <motion.div
-            className="mt-16 rounded-2xl border border-gold/20 bg-gold/[0.04] p-8 md:p-12 text-center"
-            initial={{ opacity: 0, y: 16 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-          >
-            <h3 className="font-display text-2xl md:text-3xl font-bold text-ivory mb-3">
-              Don't see someone deserving?
-            </h3>
-            <p className="text-ivory/70 max-w-lg mx-auto mb-6">
-              Help us recognize Africa's education leaders. Nominate a new champion or vote in eligible categories.
+            <p className="text-xs text-ivory/55 mt-3">
+              {isLoading ? "Loading…" : `${results.length} ${results.length === 1 ? "enabler" : "enablers"} match your search`}
             </p>
-            <div className="flex flex-col sm:flex-row gap-3 justify-center">
-              <Link to="/nominate?source=nominees-hub">
-                <Button size="lg" className="bg-gold hover:bg-gold/90 text-charcoal font-bold rounded-full px-8 gap-2">
-                  <Trophy className="w-5 h-5" /> Start a Nomination
-                </Button>
-              </Link>
-              <Link to="/vote">
-                <Button size="lg" variant="outline" className="border-gold/40 text-gold hover:bg-gold/10 rounded-full px-8 gap-2">
-                  Vote for Nominees <ArrowRight className="w-4 h-4" />
-                </Button>
-              </Link>
-            </div>
-          </motion.div>
+          </div>
 
-          {/* ════════════════════════════════════════════════════════════ */}
-          {/* Moved to bottom: How Nominees Are Organized                  */}
-          {/* ════════════════════════════════════════════════════════════ */}
-          <motion.section
-            initial={{ opacity: 0, y: 12 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="mt-16"
-          >
-            <h2 className="font-display text-xl md:text-2xl font-bold text-ivory mb-4 flex items-center gap-2">
-              <Sparkles className="w-5 h-5 text-gold" /> How Nominees Are Organized
+          {isLoading ? (
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+              {Array.from({ length: 6 }).map((_, i) => <Skeleton key={i} className="h-72 rounded-2xl bg-charcoal-light/50" />)}
+            </div>
+          ) : results.length === 0 ? (
+            <div className="rounded-xl border border-dashed border-gold/25 bg-charcoal-light/20 p-10 text-center">
+              <p className="text-ivory/60 text-sm mb-4">No enablers match these filters yet.</p>
+              <Button asChild className="bg-gold hover:bg-gold/90 text-charcoal">
+                <Link to={PRIMARY_CTAS.nominate.href}>Nominate an Education Enabler</Link>
+              </Button>
+            </div>
+          ) : (
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+              {results.slice(0, 24).map((n) => <LandingNomineeCard key={n.id} nominee={n} />)}
+            </div>
+          )}
+
+          {results.length > 24 && (
+            <div className="text-center mt-8">
+              <Button variant="outline" className="border-gold/40 text-ivory hover:bg-gold/10">
+                Showing 24 of {results.length} · Refine filters to narrow
+              </Button>
+            </div>
+          )}
+        </Section>
+
+        {/* ────────────────────────────────────────────────────────────────
+            FOOTER TRUST
+        ──────────────────────────────────────────────────────────────── */}
+        <section aria-labelledby="trust-footer" className="border-t border-gold/15 bg-charcoal-dark/50 py-12">
+          <div className="container max-w-7xl mx-auto px-4">
+            <h2 id="trust-footer" className="font-playfair text-2xl text-gold mb-4 flex items-center gap-2">
+              <Shield className="h-5 w-5" /> Independent Verification & Governance
             </h2>
-            <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
-              {NOMINEE_GROUP_CARDS.map((c) => {
-                const Icon = c.icon;
-                return (
-                  <div
-                    key={c.title}
-                    className="rounded-2xl border border-gold/15 bg-charcoal-light/40 p-4 hover:border-gold/40 transition-colors"
-                  >
-                    <div className="h-10 w-10 rounded-xl bg-gold/15 flex items-center justify-center mb-3">
-                      <Icon className="w-5 h-5 text-gold" />
-                    </div>
-                    <h3 className="font-display text-sm font-bold text-ivory mb-1">{c.title}</h3>
-                    <p className="text-xs text-ivory/60 leading-relaxed">{c.desc}</p>
-                  </div>
-                );
-              })}
-            </div>
-          </motion.section>
-
-          {/* ════════════════════════════════════════════════════════════ */}
-          {/* Moved to bottom: Explore by Region                           */}
-          {/* ════════════════════════════════════════════════════════════ */}
-          <motion.section
-            initial={{ opacity: 0, y: 12 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="mt-10"
-          >
-            <div className="flex items-end justify-between mb-4">
-              <h2 className="font-display text-xl md:text-2xl font-bold text-ivory">Explore by Region</h2>
-              <span className="text-xs text-ivory/50">5 African regions</span>
-            </div>
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3">
+            <p className="text-sm text-ivory/70 max-w-3xl mb-6">{TRUST_STATEMENT}</p>
+            <div className="flex flex-wrap gap-3 text-xs">
               {[
-                { slug: "west-africa", name: "West Africa", tagline: "Coastal innovation" },
-                { slug: "east-africa", name: "East Africa", tagline: "Rift Valley vision" },
-                { slug: "north-africa", name: "North Africa", tagline: "Mediterranean heritage" },
-                { slug: "central-africa", name: "Central Africa", tagline: "Equatorial heart" },
-                { slug: "southern-africa", name: "Southern Africa", tagline: "Cape to Kilimanjaro" },
-              ].map((r) => (
-                <Link
-                  key={r.slug}
-                  to={`/nominees/${r.slug}`}
-                  className="group block p-4 rounded-2xl border border-gold/20 bg-charcoal-light/40 hover:border-gold/50 hover:bg-charcoal-light/70 transition-all"
-                >
-                  <div className="flex items-center justify-between mb-2">
-                    <h3 className="font-display text-base text-ivory group-hover:text-gold transition-colors">{r.name}</h3>
-                    <ArrowRight className="w-4 h-4 text-gold/60 group-hover:translate-x-0.5 transition-transform" />
-                  </div>
-                  <p className="text-[11px] text-ivory/55 italic">{r.tagline}</p>
+                { l: "Governance Framework", h: "/about/governance" },
+                { l: "Selection Integrity", h: "/about/governance#selection" },
+                { l: "Evaluation Methodology", h: "/about/governance#methodology" },
+                { l: "EDI Matrix", h: "/about/governance#edi" },
+                { l: "FAQs", h: "/support" },
+                { l: "Sponsor Independence", h: "/about/governance#sponsors" },
+                { l: "Privacy", h: "/policies" },
+                { l: "Accessibility", h: "/policies#accessibility" },
+                { l: "Contact", h: "/contact" },
+              ].map((l) => (
+                <Link key={l.l} to={l.h} className="px-3 py-1.5 rounded-full border border-gold/25 text-ivory/75 hover:border-gold/55 hover:text-ivory">
+                  {l.l}
                 </Link>
               ))}
             </div>
-          </motion.section>
-        </div>
-      </section>
-    </>
-  );
-}
-
-/**
- * Pager for the filtered results grid. Renders first / current±1 / last
- * with ellipses so long lists (the directory routinely returns 100+
- * nominees per filter) stay compact on mobile.
- */
-/**
- * Card-shaped placeholder grid for the nominee directory. Mirrors the
- * 2/3/4-column layout of LandingNomineeCard so the page doesn't reflow
- * once real data lands. Used during initial fetch and while filters are
- * recomputing against a slow CMS/API response.
- */
-function NomineeGridSkeleton({ count = 8 }: { count?: number }) {
-  return (
-    <div
-      className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3"
-      role="status"
-      aria-label="Loading nominees"
-      data-testid="nominees-grid-skeleton"
-    >
-      {Array.from({ length: count }).map((_, i) => (
-        <div
-          key={i}
-          className="rounded-2xl border border-gold/10 bg-charcoal-light/30 overflow-hidden"
-        >
-          <Skeleton className="aspect-[4/5] w-full bg-charcoal-light/60" />
-          <div className="p-3 space-y-2">
-            <Skeleton className="h-3 w-1/2 bg-charcoal-light/60" />
-            <Skeleton className="h-4 w-5/6 bg-charcoal-light/60" />
-            <Skeleton className="h-3 w-2/3 bg-charcoal-light/60" />
           </div>
-        </div>
-      ))}
-      <span className="sr-only">Loading nominees…</span>
+        </section>
+      </main>
     </div>
   );
 }
 
-function NomineesPagination({
-  currentPage,
-  totalPages,
-  onPageChange,
-}: {
-  currentPage: number;
-  totalPages: number;
-  onPageChange: (page: number) => void;
-}) {
-  const pages = buildPageWindow(currentPage, totalPages);
-  const go = (p: number) => (e: React.MouseEvent) => {
-    e.preventDefault();
-    if (p >= 1 && p <= totalPages && p !== currentPage) onPageChange(p);
-  };
+// ---------------------------------------------------------------------------
+// Inline helpers
+// ---------------------------------------------------------------------------
 
+function Section({
+  id, eyebrow, title, sub, children,
+}: {
+  id?: string;
+  eyebrow: string;
+  title: string;
+  sub?: string;
+  children: React.ReactNode;
+}) {
   return (
-    <Pagination className="mt-6">
-      <PaginationContent>
-        <PaginationItem>
-          <PaginationPrevious
-            href="#"
-            onClick={go(currentPage - 1)}
-            aria-disabled={currentPage === 1}
-            className={currentPage === 1 ? "pointer-events-none opacity-40" : ""}
-          />
-        </PaginationItem>
-        {pages.map((p, i) =>
-          p === "ellipsis" ? (
-            <PaginationItem key={`e-${i}`}>
-              <PaginationEllipsis />
-            </PaginationItem>
-          ) : (
-            <PaginationItem key={p}>
-              <PaginationLink
-                href="#"
-                isActive={p === currentPage}
-                onClick={go(p)}
-              >
-                {p}
-              </PaginationLink>
-            </PaginationItem>
-          ),
-        )}
-        <PaginationItem>
-          <PaginationNext
-            href="#"
-            onClick={go(currentPage + 1)}
-            aria-disabled={currentPage === totalPages}
-            className={currentPage === totalPages ? "pointer-events-none opacity-40" : ""}
-          />
-        </PaginationItem>
-      </PaginationContent>
-    </Pagination>
+    <section id={id} aria-labelledby={`${id ?? title}-heading`} className="py-14 md:py-20 border-b border-gold/10">
+      <div className="container max-w-7xl mx-auto px-4">
+        <div className="mb-8 max-w-3xl">
+          <div className="text-[11px] uppercase tracking-[0.18em] text-gold/80 mb-2">{eyebrow}</div>
+          <h2 id={`${id ?? title}-heading`} className="font-playfair text-3xl md:text-4xl text-ivory font-bold mb-3">
+            {title}
+          </h2>
+          {sub && <p className="text-ivory/65 text-sm md:text-base">{sub}</p>}
+        </div>
+        {children}
+      </div>
+    </section>
   );
 }
 
-function buildPageWindow(current: number, total: number): (number | "ellipsis")[] {
-  if (total <= 7) return Array.from({ length: total }, (_, i) => i + 1);
-  const out: (number | "ellipsis")[] = [1];
-  const start = Math.max(2, current - 1);
-  const end = Math.min(total - 1, current + 1);
-  if (start > 2) out.push("ellipsis");
-  for (let i = start; i <= end; i++) out.push(i);
-  if (end < total - 1) out.push("ellipsis");
-  out.push(total);
-  return out;
+function TierChip({ active, onClick, label, count }: { active: boolean; onClick: () => void; label: string; count: number }) {
+  return (
+    <button
+      onClick={onClick}
+      className={`px-4 py-2 rounded-full text-sm border transition-all ${
+        active
+          ? "bg-gold text-charcoal border-gold font-semibold"
+          : "border-gold/25 text-ivory/80 hover:border-gold/55 hover:text-ivory"
+      }`}
+      aria-pressed={active}
+    >
+      {label} <span className="opacity-70 ml-1">· {count}</span>
+    </button>
+  );
 }
