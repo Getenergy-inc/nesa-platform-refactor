@@ -356,8 +356,8 @@ export function buildAwardPhases(awardYear: number): AwardPhaseConfig[] {
       id: "platinum",
       title: "Platinum Certificate",
       subtitle: "Baseline Recognition of Service",
-      period: `May – June ${ceremonyYear}`,
-      showDate: `11 June ${ceremonyYear}`,
+      period: `July – August ${ceremonyYear}`,
+      showDate: `7 August ${ceremonyYear}`,
       iconName: "Medal",
       features: [
         "Non-competitive entry layer",
@@ -372,8 +372,8 @@ export function buildAwardPhases(awardYear: number): AwardPhaseConfig[] {
       id: "icon",
       title: "Africa Education Icon",
       subtitle: "Lifetime Impact Recognition",
-      period: `May – June ${ceremonyYear}`,
-      showDate: `25 June ${ceremonyYear}`,
+      period: `27 July – 12 September ${ceremonyYear}`,
+      showDate: `21 August ${ceremonyYear}`,
       iconName: "Crown",
       features: [
         "Honours 9 Icons only",
@@ -389,7 +389,7 @@ export function buildAwardPhases(awardYear: number): AwardPhaseConfig[] {
       title: "Gold Certificate",
       subtitle: "Competitive Classification Stage",
       period: `15 August – 15 September ${ceremonyYear}`,
-      showDate: `1 October ${ceremonyYear}`,
+      showDate: `16 September ${ceremonyYear}`,
       iconName: "Trophy",
       features: [
         "9 Award Categories",
