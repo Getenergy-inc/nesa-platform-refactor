@@ -552,7 +552,7 @@ import { VotingStatsStrip } from "@/components/voting/VotingStatsStrip";
            <div className="container text-center">
              <h2 className="text-2xl font-bold mb-4">Looking for Gold Certificate Voting?</h2>
              <p className="text-muted-foreground mb-6">
-               Gold Certificate is 100% public voting to recognize education excellence.
+               Gold Certificate is 100% public voting to recognise Africa's education enablers.
              </p>
              <Button asChild variant="outline" size="lg">
                <Link to="/vote/gold">
