@@ -274,7 +274,7 @@ export default function AwardsPage() {
           </div>
         </section>
 
-        {/* ─── 1B. THE 7 RECOGNITION PILLARS ─────────────── */}
+        {/* ─── 1B. THE 9 RECOGNITION PILLARS ─────────────── */}
         <section id="pillars" className="py-16 md:py-24 scroll-mt-20 border-b border-gold/10">
           <div className="container mx-auto px-4 max-w-6xl">
             <div className="text-center max-w-3xl mx-auto mb-12">
