@@ -191,7 +191,7 @@ export default function JudgeApply() {
     <>
       <Helmet>
         <title>Apply to be a Judge | NESA-Africa</title>
-        <meta name="description" content="Join the NESA-Africa expert jury panel. Apply now to help select Blue Garnet Award winners." />
+        <meta name="description" content="Join the NESA-Africa expert jury panel. Apply now to help select Blue Garnet Recognition recipients." />
       </Helmet>
 
       <div className="min-h-screen bg-charcoal py-12">
@@ -206,7 +206,7 @@ export default function JudgeApply() {
               Apply to be a <span className="text-gold">Judge</span>
             </h1>
             <p className="text-white/70 max-w-xl mx-auto">
-              Join our distinguished panel of education experts who evaluate and select Blue Garnet Award winners.
+              Join our distinguished panel of education experts who evaluate and select Blue Garnet Recognition recipients.
             </p>
           </div>
 

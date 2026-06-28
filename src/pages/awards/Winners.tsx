@@ -95,7 +95,7 @@ export default function Winners() {
                   <Trophy className="mx-auto mb-4 h-12 w-12 text-purple-400" />
                   <h3 className="mb-2 text-xl font-semibold text-white">To Be Announced</h3>
                   <p className="mb-6 text-white/60">
-                    Blue Garnet Award winners will be announced at the NESA-Africa 2026 Gala in June 2026.
+                    Blue Garnet Recognition recipients will be announced at the NESA-Africa 2026 Gala in June 2026.
                   </p>
                   <Button asChild className="bg-primary text-primary-foreground">
                     <Link to="/media/gala">Learn About the Gala</Link>

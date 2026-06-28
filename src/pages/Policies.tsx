@@ -137,7 +137,7 @@ export default function Policies() {
                     </p>
                     <ul className="list-disc pl-6 space-y-2 text-muted-foreground">
                       <li><strong>Public nominees:</strong> Approved nominee profiles are publicly visible</li>
-                      <li><strong>Award winners:</strong> Winner information is published for recognition</li>
+                      <li><strong>Recognition recipients:</strong> Winner information is published for recognition</li>
                       <li><strong>Service providers:</strong> Trusted partners who assist our operations</li>
                       <li><strong>Legal requirements:</strong> When required by law or legal process</li>
                     </ul>
