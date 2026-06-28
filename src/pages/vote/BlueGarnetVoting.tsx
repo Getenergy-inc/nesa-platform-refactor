@@ -309,7 +309,7 @@ import { VotingStatsStrip } from "@/components/voting/VotingStatsStrip";
                    </div>
                    <h3 className="font-semibold text-lg mb-2">Final Score</h3>
                    <p className="text-sm text-muted-foreground">
-                     Combined score determines the Blue Garnet Award winners
+                     Combined score determines the Blue Garnet Recognition recipients
                    </p>
                  </CardContent>
                </Card>
