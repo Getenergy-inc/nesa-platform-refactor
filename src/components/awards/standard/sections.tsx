@@ -519,7 +519,21 @@ export function SubcategoryPathways({
               transition={{ delay: i * 0.05 }}
               className="rounded-2xl border border-gold/20 bg-gradient-to-b from-charcoal-light to-charcoal p-6 flex flex-col hover:border-gold/45 transition-all"
             >
-              <Award className="h-5 w-5 text-gold mb-3" />
+              <div className="flex items-start justify-between gap-2 mb-3">
+                <Award className="h-5 w-5 text-gold" />
+                <div className="flex flex-wrap gap-1.5 justify-end">
+                  {s.scope && (
+                    <Badge variant="outline" className="border-gold/30 text-gold/90 text-[10px]">
+                      {s.scope}
+                    </Badge>
+                  )}
+                  {typeof s.subcategoryCount === "number" && (
+                    <Badge className="bg-gold/15 text-gold border border-gold/30 text-[10px]">
+                      {s.subcategoryCount} sub{s.subcategoryCount === 1 ? "" : "s"}
+                    </Badge>
+                  )}
+                </div>
+              </div>
               <h3 className="font-display text-lg font-bold text-white leading-snug">
                 {s.title}
               </h3>
@@ -527,6 +541,11 @@ export function SubcategoryPathways({
               {s.recognises && (
                 <p className="mt-3 text-xs text-gold/80 italic border-l-2 border-gold/30 pl-3">
                   Recognises: {s.recognises}
+                </p>
+              )}
+              {s.voteSplit && (
+                <p className="mt-2 text-[11px] text-white/55">
+                  Vote split: <span className="text-white/75">{s.voteSplit}</span>
                 </p>
               )}
               <div className="mt-5 flex flex-wrap gap-2 pt-3 border-t border-gold/10">
