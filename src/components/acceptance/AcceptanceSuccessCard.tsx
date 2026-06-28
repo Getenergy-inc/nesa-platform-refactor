@@ -51,7 +51,7 @@ export function AcceptanceSuccessCard({
           <h2 className="text-2xl font-semibold">Nomination Accepted</h2>
           <p className="text-muted-foreground max-w-md mx-auto">
             You have successfully accepted your nomination for the 
-            NESA-Africa 2026 Excellence Awards.
+            NESA-Africa 2026 Education Enabler Recognition.
           </p>
         </div>
 
