@@ -1,66 +1,68 @@
-# NESA-Africa Recognition & Impact Platform Refactor
 
-## Goal
-Shift the site from an awards programme to **Africa's Education Recognition & Impact Platform**. Every page answers one question; no duplication; consistent language; 9 pillars; 8 regions + 2 global communities; Recognition → Impact → Legacy story.
+# NESA-Africa Platform Refactor — Execution Plan
 
-This is a large refactor. I'll deliver it in **4 sequential batches**, each independently shippable and type-checked.
+This refactor turns NESA-Africa from an "awards website" into **Africa's Education Recognition & Impact Platform**. URLs, slugs, metadata and Cloud schema are preserved. Work ships in 6 batches so each can be reviewed before the next.
 
----
-
-## Batch 1 — Canonical Content Foundation (single source of truth)
-
-Create/refactor data files so every page reads from one place. No visual changes yet.
-
-- **`src/data/pillars.ts`** — expand from 7 → **9 pillars** (add Diaspora Contributors, Faith-Based & Religious Organisations, Institutional & Bilateral Grants; rename to canonical pillar names). Each pillar gets: `whatItRecognises`, `whyItMatters`, `contributionToEFA`, `linkedCategories[]`, `linkedNominees` query.
-- **`src/config/recognitionArchitecture.ts`** — update to **8 Africa Regions + 2 Global Communities** (West, East, Central, Southern, North, Horn of Africa, Sahel, Indian Ocean Islands + Diaspora + Friends of Africa). Confirm 4 Tiers → 18 Categories → 100+ Pathways mapping.
-- **New `src/config/platformCopy.ts`** — canonical strings: positioning statement, Recognition→Legacy chain, CTA labels (Nominate an Education Enabler / Explore the Africa Education Impact Directory / Become a Sponsor, Partner or Volunteer), language replacements (Excellence→Enablers, Winners→Recognised Enablers, etc.).
-- **New `src/components/recognition/RecognitionImpactLegacy.tsx`** — reusable 7-step flow component (Recognition → Visibility → Credibility → Partnerships → Investment → Educational Transformation → Legacy).
-
-## Batch 2 — Homepage + Identity (Level 1)
-
-Homepage = "What is NESA-Africa?" Inspire & orient only. Remove duplicated detail.
-
-- **`TrophyHeroSection.tsx`** — headline & subhead from `platformCopy`; replace 7 pillar chips with **9 identity tags**; CTAs locked to the 3 primary journeys.
-- **`HeroCTAStack.tsx`** — reduce to 3 primary CTAs (Nominate Enabler / Explore Directory / Sponsor-Partner-Volunteer).
-- **`WhatIsNESASection.tsx`** — rewrite to the canonical "What is NESA-Africa?" paragraph.
-- **`WhoWeHonourSection.tsx`** — refactor from 7 → **9 enabler cards**.
-- **`SevenPillarsHomeSection.tsx`** → rename to **`NinePillarsHomeSection.tsx`** (keep export alias for safety), reads from updated `pillars.ts`.
-- **`TenRegionsBannerSection`** / **`ExploreRegionsSection`** → "8 Africa Regions + 2 Global Communities" framing.
-- Add `RecognitionImpactLegacy` strip below "How It Works".
-- Trim/remove deep governance + volunteer detail (those live on About/Join now).
-- `NESALandingPage.tsx` — reorder sections to: Hero → Countdown → What Is → Who We Honour → 9 Pillars → How It Works → Recognition→Legacy → Regions → Endorsements → Impact Programs → Sponsors → Final CTA. Remove duplicates already covered by Awards/About.
-
-## Batch 3 — About (Trust) + Awards (Framework) + Pillars
-
-- **About `/about`** — rewrite as **Trust Gateway**: Vision, Mission, History, Why NESA-Africa exists, Governance & Integrity Firewall, EDI, Awards Council, NRC, Independent Judges, SCEF, Recognition→Legacy. Remove any "category preview" / "nominee preview" sections (they belong on Awards/Nominees).
-- **Awards `/awards`** — rebuild around **4 Recognition Tiers** only (Icon, Gold-Blue Garnet, Platinum, Influencer Impact). Tier cards expand to show 18 categories. No deep pillar grid here (pillars get their own hub).
-- **`/awards/pillars` hub + `/awards/pillars/:slug`** — extend `PillarPage` template to render: What it recognises · Why it matters · Contribution to EFA · Linked categories · Linked nominees · Nominate CTA. Build out the 2 new pillar pages (Diaspora, Faith-Based, Bilateral Grants) from data.
-- Update `src/config/navigation.ts` Awards mega menu to show 4 tiers + "9 Pillars" + Categories + Directory + Governance.
-
-## Batch 4 — Directory, Language Sweep, CTAs, Tests
-
-- **Nominee Directory** — rename surfaces to **"Africa Education Impact Directory"** (titles, breadcrumbs, SEO, nav). Add filter chips for the 9 pillars and 8 regions + 2 communities. Profile cards emphasise *contribution / evidence / education impact / pathway / region*.
-- **Global language sweep** (codemod via `rg` + targeted edits) on these strings only in user-facing JSX/MD/JSON:
-  - "Education Excellence" → "Education Enablers"
-  - "Award Winners" → "Recognised Education Enablers"
-  - "Education Awards" → "Education Recognition"
-  - "Continental Honours" → "Continental Recognition Platform"
-  - "Award Ceremony" → "Recognition & Impact Programme"
-  - "Seven Pillars" / "7 Pillars" → "Nine Pillars" / "9 Pillars"
-  - "54 African countries" → "Eight Africa Regions, Africans in the Diaspora and Friends of Africa" (+ optional 5–10 yr line)
-  Each replacement reviewed for grammar; legal/historical references preserved.
-- **CTA consolidation** — audit `HeroCTAStack`, `FinalCTASection`, `BePartOfMovementSection`, `MobileStickyNominateCTA`, page footers; collapse to the 3 primary journeys with consistent labels.
-- **Analytics** — add `pillar_view` (9 pillars), `tier_view`, `directory_filter` events; keep existing `home_cta_click` / `about_cta_click` schema.
-- **i18n** — update `src/locales/en/common.json` brand/nav strings; flag other locales as needing translator update (do not auto-translate).
-- **Tests** — extend Playwright: homepage shows 9 pillar chips, About has no category preview, Awards shows 4 tiers, Directory renamed, banned-strings test updated to forbid the old phrases.
+Much of the foundation is already in place from prior turns (`platformCopy.ts`, `pillars.ts` at 9 pillars, `recognitionArchitecture.ts`, `RecognitionImpactLegacy`, updated `WhatIsNESASection`, `WhoWeHonourSection`, `SevenPillarsHomeSection`→Nine). The plan below completes the remaining ~70%.
 
 ---
 
-## Out of scope (this pass)
-- Translating new copy into the 10 non-English locales (English only updated; others marked stale).
-- Editing nominee profile schema in the database (presentation-layer rename only).
-- Visual redesign of components beyond the structural changes above — palette, typography, and motion stay as-is.
+## Batch 1 — Canonical Identity & Language Layer
+Single source of truth so every page reads from the same strings.
 
-## Risk & verification
-- After each batch: `tsgo` typecheck, banned-strings test, targeted Playwright run, and a manual preview pass on `/`, `/about`, `/awards`, `/awards/pillars`, `/nominees`.
-- All renamed components keep a re-export shim for one release to avoid import breakage.
+- Extend `src/config/platformCopy.ts`:
+  - `PLATFORM_IDENTITY_SENTENCE` (the "(New Education Standard Award Africa)…" paragraph)
+  - `RECOGNITION_ARCHITECTURE_SUMMARY` (4 Tiers · 18 Categories · 100+ Pathways · 8 Regions · 2 Communities)
+  - `WHO_WE_RECOGNISE_CLUSTERS` (Individuals / Organisations / Governments)
+  - `TRUST_STATEMENT`, `PRIMARY_CTAS`, `REGION_LINE`
+- Add `src/lib/copyLint.ts` dev-only helper + an ESLint custom rule entry (`no-restricted-syntax` style) that flags the legacy phrases: "Education Excellence", "Award Winners", "Excellence Awards", "Seven Recognition Pillars", "54 African countries" (in marketing copy only — NOT in regional data files).
+- Replace those phrases in static homepage/about/awards section components.
+
+## Batch 2 — Homepage
+Identity surface only — no category explanations.
+
+- `TrophyHeroSection`: identity sentence + `RECOGNITION_ARCHITECTURE_SUMMARY` chips + 3 CTAs from `PRIMARY_CTAS`.
+- New `RecognitionTiersHomeSection` (4 tier cards → `/awards/tiers/:slug`).
+- `NinePillarsHomeSection` stays (already done).
+- `RecognitionImpactLegacy` stays (already inserted).
+- New `WhoWeRecogniseClustersSection` (3-cluster grid replacing long lists).
+- `TrustStripSection` (one-line trust statement + link to /about#governance).
+- Trim duplicated category copy from homepage.
+
+## Batch 3 — About (Trust Gateway)
+- Rewrite `src/pages/about/About.tsx` sections in this order: Identity → Vision → Mission → Why We Exist → Recognition→Impact→Legacy → Governance (Awards Council, NRC, Independent Judges, EDI, Integrity Firewall, Sponsor Firewall) → SCEF → Choose Your Journey.
+- Remove category descriptions (they belong on /awards and /categories).
+
+## Batch 4 — Awards Spine
+- `/awards` (`src/pages/Awards.tsx`): hero + 4 Recognition Tiers + 9 Pillars summary + 18-category index card + How Recognition Works (6 steps) + Selection Flow.
+- `/awards/tiers/:slug`: tier overview → its categories.
+- `/awards/categories/:slug`: each of the 18 categories with the mandatory 13-block template (Purpose, Why it matters, Who, Contribution to EFA, Benefits ×4, Related pathways, Existing nominees, Process, FAQs). Driven by `src/config/awards/awardCategoryContent.ts` (extend existing).
+- `/awards/pathways/:slug`: 100+ pathway pages from `recognitionArchitecture.ts` with Overview, Eligibility, Contribution areas, Nominees, Hall of Fame, Country & Regional distribution (live counts), Related pathways, CTA.
+- Pillar pages (`/awards/pillars/:slug`) — add the 2 new pillars (Philanthropy, Faith-Based).
+
+## Batch 5 — Africa Education Impact Directory
+- Rename `/nominees` UI label → "Africa Education Impact Directory" (route preserved; add 301-equivalent canonical from `/nominees` self-reference, plus internal links updated).
+- Filters: Tier · Category · Pathway · Region · Country · Cluster (Africans in Africa / Diaspora / Friends of Africa).
+- Profile page template adds: Contribution · Evidence · Impact · Organisation · Region · Country · Recognition pathway · Related nominees · Hall of Fame badge.
+- All counts via Cloud queries (no hardcoded totals). New hook `useDirectoryCounts()` against `nominees` + `nomination_intake`.
+
+## Batch 6 — Cross-cutting + QA
+- Navigation (`src/config/navigation.ts`): mega menu reorganised to Tiers / Categories / Pillars / Directory / Impact / Sponsors / Volunteers / Media.
+- Global footer + breadcrumbs use canonical labels.
+- SEO: per-route Helmet titles/descriptions rewritten around "Recognition & Impact Platform"; canonicals & og:url unchanged.
+- Accessibility sweep on new sections (aria-labels, heading order, focus rings, 44px tap targets).
+- Analytics: extend existing `home_cta_click` + add `tier_view`, `category_view`, `pathway_view`, `directory_filter_apply`, `nominate_cta_click`.
+- Playwright specs: identity sentence present on /, /about, /awards; 9 pillars rendered; tier → category → pathway → directory journey; legacy phrases absent.
+
+---
+
+## Technical Notes
+
+- **No DB migrations** — all changes are content, components, routes, copy. Existing `nominees`, `subcategories`, `regions` tables already support the model.
+- **No URL changes.** Any new route (`/awards/tiers/:slug`, `/awards/pathways/:slug`) is additive; legacy `/awards/:slug` keeps working.
+- **CMS-driven counts**: replace any literal count strings with values from `useDirectoryCounts()` / `useRegionCounts()`.
+- **Risk control**: each batch is independently shippable; build + tsgo run after every batch.
+
+## Proposed Execution Order This Session
+
+I'll implement **Batch 1 and Batch 2** in the next response (foundational + homepage — the highest-leverage changes), then pause for your review before Batches 3–6. If you'd rather I run straight through all six batches without intermediate pauses, say "ship all batches" and I'll proceed.
