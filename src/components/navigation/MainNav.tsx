@@ -506,31 +506,52 @@ function MobileNav({ onOpenCVOMessage }: { onOpenCVOMessage: () => void }) {
 
 
                           {item.children.map((child) => (
-                            <Link
-                              key={child.href}
-                              to={child.href}
-                              onClick={handleTrackedClick(child.label, child.href, item.label)}
-                              aria-current={location.pathname === child.href ? "page" : undefined}
-                              className={cn(
-                                "flex items-center gap-3 px-8 py-3.5 min-h-[48px] text-sm transition-colors touch-manipulation",
-                                "hover:bg-gold/5 hover:text-gold active:bg-gold/10",
-                                "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold/60 focus-visible:ring-inset",
-                                location.pathname === child.href
-                                  ? "text-gold bg-gold/5"
-                                  : "text-white/70",
+                            <div key={child.href}>
+                              <Link
+                                to={child.href}
+                                onClick={handleTrackedClick(child.label, child.href, item.label)}
+                                aria-current={location.pathname === child.href ? "page" : undefined}
+                                className={cn(
+                                  "flex items-center gap-3 px-8 py-3.5 min-h-[48px] text-sm transition-colors touch-manipulation",
+                                  "hover:bg-gold/5 hover:text-gold active:bg-gold/10",
+                                  "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold/60 focus-visible:ring-inset",
+                                  location.pathname === child.href
+                                    ? "text-gold bg-gold/5"
+                                    : "text-white/80 font-medium",
+                                )}
+                              >
+                                {child.icon && (
+                                  <child.icon className="h-4 w-4 flex-shrink-0" aria-hidden="true" />
+                                )}
+                                <span className="flex-1">{child.label}</span>
+                                {child.badge && (
+                                  <span className="text-xs bg-gold/20 text-gold px-2 py-0.5 rounded-full">
+                                    {child.badge}
+                                  </span>
+                                )}
+                              </Link>
+                              {child.children && child.children.length > 0 && (
+                                <div className="border-l border-gold/15 ml-10 mb-2">
+                                  {child.children.map((sub) => (
+                                    <Link
+                                      key={sub.href}
+                                      to={sub.href}
+                                      onClick={handleTrackedClick(sub.label, sub.href, item.label)}
+                                      aria-current={location.pathname === sub.href ? "page" : undefined}
+                                      className={cn(
+                                        "flex items-center px-4 py-2 min-h-[40px] text-xs transition-colors",
+                                        "hover:bg-gold/5 hover:text-gold",
+                                        location.pathname === sub.href
+                                          ? "text-gold bg-gold/5"
+                                          : "text-white/60",
+                                      )}
+                                    >
+                                      {sub.label}
+                                    </Link>
+                                  ))}
+                                </div>
                               )}
-
-                            >
-                              {child.icon && (
-                                <child.icon className="h-4 w-4 flex-shrink-0" aria-hidden="true" />
-                              )}
-                              <span className="flex-1">{child.label}</span>
-                              {child.badge && (
-                                <span className="text-xs bg-gold/20 text-gold px-2 py-0.5 rounded-full">
-                                  {child.badge}
-                                </span>
-                              )}
-                            </Link>
+                            </div>
                           ))}
                         </div>
                       </div>
