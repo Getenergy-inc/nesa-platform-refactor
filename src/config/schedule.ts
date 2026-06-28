@@ -121,9 +121,9 @@ export interface ScheduleTemplate {
 }
 
 // Default schedule template - NESA 2026 official timeline (per 2026 brief)
-// Kickoff 20 May · Jury onboarding 29 Jun – 10 Jul · Platinum 5 Jul · Gold close 10 Jul
-// Icon show + opens 12 Jul · Icon close 12 Sep · Gold voting 15 Aug – 15 Sep
-// Gold winners 16 Sep · Blue Garnet voting 16 Sep – 22 Oct · Gala 22 Oct 2026
+// Pre-nomination activation 1–30 Jul · Jury onboarding 29 Jun – 10 Sep
+// Platinum show 7 Aug · Gold close 10 Aug · Icon opens 27 Jul · Icon show 21 Aug · Icon close 12 Sep
+// Gold voting 15 Aug – 15 Sep · Gold winners 16 Sep · Blue Garnet voting 16 Sep – 22 Oct · Gala 22 Oct 2026
 export const DEFAULT_SCHEDULE_TEMPLATE: ScheduleTemplate = {
   nominationReview: {
     nrcReviewStart: { monthDay: "05-01", yearOffset: 0 },
@@ -133,8 +133,8 @@ export const DEFAULT_SCHEDULE_TEMPLATE: ScheduleTemplate = {
     juryOnboarding: { monthDay: "06-29", yearOffset: 0 },
   },
   tvShows: {
-    platinumRecognition: { monthDay: "07-05", yearOffset: 0 },
-    africaIconRecognition: { monthDay: "07-12", yearOffset: 0 },
+    platinumRecognition: { monthDay: "08-07", yearOffset: 0 },
+    africaIconRecognition: { monthDay: "08-21", yearOffset: 0 },
     goldCertificateWinners: { monthDay: "09-16", yearOffset: 0 },
   },
   votingWindows: {
@@ -151,7 +151,7 @@ export const DEFAULT_SCHEDULE_TEMPLATE: ScheduleTemplate = {
     rebuildMySchoolEnd: { monthDay: "10-22", yearOffset: 1 },
   },
   webinars: {
-    seriesStart: { monthDay: "05-20", yearOffset: 0 },
+    seriesStart: { monthDay: "07-01", yearOffset: 0 },
     seriesEnd: { monthDay: "10-22", yearOffset: 0 },
   },
   deadlines: {
