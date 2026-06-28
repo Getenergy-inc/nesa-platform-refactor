@@ -689,6 +689,12 @@ const App = () => (
                     path="/awards/influencers-education-impact-2026-recognition"
                     element={<InfluencerImpact2026 />}
                   />
+                  {/* Simplified Awards dropdown canonical URLs — keep these alive so the gateway never 404s */}
+                  <Route path="/awards/recognition-architecture" element={<Navigate to="/awards" replace />} />
+                  <Route path="/awards/gold-blue-garnet" element={<WithLayout><BlueGarnetAward /></WithLayout>} />
+                  <Route path="/awards/platinum-recognition" element={<WithLayout><PlatinumAward /></WithLayout>} />
+                  <Route path="/awards/influencer-education-impact" element={<InfluencerImpact2026 />} />
+
                   {/* Legacy shell — keep importable from other entry points */}
                   <Route
                     path="/awards/gold-special-recognition-legacy"
