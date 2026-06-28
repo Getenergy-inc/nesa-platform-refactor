@@ -97,7 +97,9 @@ function DesktopNav({ onOpenCVOMessage }: { onOpenCVOMessage: () => void }) {
                         ? "w-[460px] grid-cols-2"
                         : item.label === "Support"
                         ? "w-[420px]"
-                        : item.label === "Engage" || item.label === "Impact Programs" || item.label === "Awards" || item.label === "Media"
+                        : item.label === "Awards"
+                        ? "w-[720px] md:w-[860px] md:grid-cols-2 lg:w-[960px] lg:grid-cols-3"
+                        : item.label === "Engage" || item.label === "Impact Programs" || item.label === "Media"
                         ? "w-[560px] md:w-[640px] md:grid-cols-2"
                         : "w-[400px] md:w-[500px] md:grid-cols-2 lg:w-[600px]",
 
@@ -156,6 +158,28 @@ function DesktopNav({ onOpenCVOMessage }: { onOpenCVOMessage: () => void }) {
                             )}
                           </Link>
                         </NavigationMenuLink>
+                        {child.children && child.children.length > 0 && (
+                          <ul className="mt-1 ml-6 space-y-0.5 border-l border-gold/15 pl-3">
+                            {child.children.map((sub) => (
+                              <li key={sub.href}>
+                                <NavigationMenuLink asChild>
+                                  <Link
+                                    to={sub.href}
+                                    role="menuitem"
+                                    className={cn(
+                                      "block rounded-sm px-2 py-1 text-xs text-white/70 transition-colors",
+                                      "hover:bg-gold/10 hover:text-gold focus:bg-gold/10 focus:text-gold",
+                                      "focus-visible:ring-2 focus-visible:ring-gold/60 focus-visible:ring-offset-1 focus-visible:ring-offset-charcoal",
+                                      location.pathname === sub.href && "bg-gold/10 text-gold",
+                                    )}
+                                  >
+                                    {sub.label}
+                                  </Link>
+                                </NavigationMenuLink>
+                              </li>
+                            ))}
+                          </ul>
+                        )}
                       </li>
                     ))}
                   </ul>
@@ -482,31 +506,52 @@ function MobileNav({ onOpenCVOMessage }: { onOpenCVOMessage: () => void }) {
 
 
                           {item.children.map((child) => (
-                            <Link
-                              key={child.href}
-                              to={child.href}
-                              onClick={handleTrackedClick(child.label, child.href, item.label)}
-                              aria-current={location.pathname === child.href ? "page" : undefined}
-                              className={cn(
-                                "flex items-center gap-3 px-8 py-3.5 min-h-[48px] text-sm transition-colors touch-manipulation",
-                                "hover:bg-gold/5 hover:text-gold active:bg-gold/10",
-                                "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold/60 focus-visible:ring-inset",
-                                location.pathname === child.href
-                                  ? "text-gold bg-gold/5"
-                                  : "text-white/70",
+                            <div key={child.href}>
+                              <Link
+                                to={child.href}
+                                onClick={handleTrackedClick(child.label, child.href, item.label)}
+                                aria-current={location.pathname === child.href ? "page" : undefined}
+                                className={cn(
+                                  "flex items-center gap-3 px-8 py-3.5 min-h-[48px] text-sm transition-colors touch-manipulation",
+                                  "hover:bg-gold/5 hover:text-gold active:bg-gold/10",
+                                  "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold/60 focus-visible:ring-inset",
+                                  location.pathname === child.href
+                                    ? "text-gold bg-gold/5"
+                                    : "text-white/80 font-medium",
+                                )}
+                              >
+                                {child.icon && (
+                                  <child.icon className="h-4 w-4 flex-shrink-0" aria-hidden="true" />
+                                )}
+                                <span className="flex-1">{child.label}</span>
+                                {child.badge && (
+                                  <span className="text-xs bg-gold/20 text-gold px-2 py-0.5 rounded-full">
+                                    {child.badge}
+                                  </span>
+                                )}
+                              </Link>
+                              {child.children && child.children.length > 0 && (
+                                <div className="border-l border-gold/15 ml-10 mb-2">
+                                  {child.children.map((sub) => (
+                                    <Link
+                                      key={sub.href}
+                                      to={sub.href}
+                                      onClick={handleTrackedClick(sub.label, sub.href, item.label)}
+                                      aria-current={location.pathname === sub.href ? "page" : undefined}
+                                      className={cn(
+                                        "flex items-center px-4 py-2 min-h-[40px] text-xs transition-colors",
+                                        "hover:bg-gold/5 hover:text-gold",
+                                        location.pathname === sub.href
+                                          ? "text-gold bg-gold/5"
+                                          : "text-white/60",
+                                      )}
+                                    >
+                                      {sub.label}
+                                    </Link>
+                                  ))}
+                                </div>
                               )}
-
-                            >
-                              {child.icon && (
-                                <child.icon className="h-4 w-4 flex-shrink-0" aria-hidden="true" />
-                              )}
-                              <span className="flex-1">{child.label}</span>
-                              {child.badge && (
-                                <span className="text-xs bg-gold/20 text-gold px-2 py-0.5 rounded-full">
-                                  {child.badge}
-                                </span>
-                              )}
-                            </Link>
+                            </div>
                           ))}
                         </div>
                       </div>

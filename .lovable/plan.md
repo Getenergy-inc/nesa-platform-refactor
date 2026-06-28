@@ -1,68 +1,67 @@
+# Awards Architecture Refactor — Execution Plan
 
-# NESA-Africa Platform Refactor — Execution Plan
+Restructure the entire Awards section around the official 2026 Recognition Architecture: **Tiers → Categories → Subcategories → Region → Country → Nominee → Hall of Fame**. The Awards menu must be self-explanatory within 5 seconds.
 
-This refactor turns NESA-Africa from an "awards website" into **Africa's Education Recognition & Impact Platform**. URLs, slugs, metadata and Cloud schema are preserved. Work ships in 6 batches so each can be reviewed before the next.
-
-Much of the foundation is already in place from prior turns (`platformCopy.ts`, `pillars.ts` at 9 pillars, `recognitionArchitecture.ts`, `RecognitionImpactLegacy`, updated `WhatIsNESASection`, `WhoWeHonourSection`, `SevenPillarsHomeSection`→Nine). The plan below completes the remaining ~70%.
+This is a large refactor. I'll execute in 5 batches and pause for approval after each.
 
 ---
 
-## Batch 1 — Canonical Identity & Language Layer
-Single source of truth so every page reads from the same strings.
+## Single Source of Truth
 
-- Extend `src/config/platformCopy.ts`:
-  - `PLATFORM_IDENTITY_SENTENCE` (the "(New Education Standard Award Africa)…" paragraph)
-  - `RECOGNITION_ARCHITECTURE_SUMMARY` (4 Tiers · 18 Categories · 100+ Pathways · 8 Regions · 2 Communities)
-  - `WHO_WE_RECOGNISE_CLUSTERS` (Individuals / Organisations / Governments)
-  - `TRUST_STATEMENT`, `PRIMARY_CTAS`, `REGION_LINE`
-- Add `src/lib/copyLint.ts` dev-only helper + an ESLint custom rule entry (`no-restricted-syntax` style) that flags the legacy phrases: "Education Excellence", "Award Winners", "Excellence Awards", "Seven Recognition Pillars", "54 African countries" (in marketing copy only — NOT in regional data files).
-- Replace those phrases in static homepage/about/awards section components.
+Create `src/config/recognitionArchitecture2026.ts` as the canonical spine driving navigation, routing, breadcrumbs, page metadata, and CMS lookups. Shape:
 
-## Batch 2 — Homepage
-Identity surface only — no category explanations.
+```
+RecognitionTier
+ ├── id, slug, label, tagline, selectionMethod, votingMode
+ ├── description, hero copy, eligibility, process
+ ├── categories: AwardCategory[]
+ │    └── subcategories: Subcategory[]
+ │         └── (classification × region × country resolved at query time)
+ └── pages: { about, categories, nominees, hallOfFame, eligibility, nominate, voting?, judging? }
+```
 
-- `TrophyHeroSection`: identity sentence + `RECOGNITION_ARCHITECTURE_SUMMARY` chips + 3 CTAs from `PRIMARY_CTAS`.
-- New `RecognitionTiersHomeSection` (4 tier cards → `/awards/tiers/:slug`).
-- `NinePillarsHomeSection` stays (already done).
-- `RecognitionImpactLegacy` stays (already inserted).
-- New `WhoWeRecogniseClustersSection` (3-cluster grid replacing long lists).
-- `TrustStripSection` (one-line trust statement + link to /about#governance).
-- Trim duplicated category copy from homepage.
+The 4 tiers, ~18 Gold-Blue Garnet categories, 20 Platinum recognition categories, 3 Influencer categories and 3 Icon subcategories all live here. Existing `recognitionArchitecture.ts`, `awardPageContent.ts`, `awardCategories/*`, and `pillars.ts` are kept but the new spine becomes authoritative for nav + tier pages.
 
-## Batch 3 — About (Trust Gateway)
-- Rewrite `src/pages/about/About.tsx` sections in this order: Identity → Vision → Mission → Why We Exist → Recognition→Impact→Legacy → Governance (Awards Council, NRC, Independent Judges, EDI, Integrity Firewall, Sponsor Firewall) → SCEF → Choose Your Journey.
-- Remove category descriptions (they belong on /awards and /categories).
+## Batch 1 — Spine + Navigation (this turn)
 
-## Batch 4 — Awards Spine
-- `/awards` (`src/pages/Awards.tsx`): hero + 4 Recognition Tiers + 9 Pillars summary + 18-category index card + How Recognition Works (6 steps) + Selection Flow.
-- `/awards/tiers/:slug`: tier overview → its categories.
-- `/awards/categories/:slug`: each of the 18 categories with the mandatory 13-block template (Purpose, Why it matters, Who, Contribution to EFA, Benefits ×4, Related pathways, Existing nominees, Process, FAQs). Driven by `src/config/awards/awardCategoryContent.ts` (extend existing).
-- `/awards/pathways/:slug`: 100+ pathway pages from `recognitionArchitecture.ts` with Overview, Eligibility, Contribution areas, Nominees, Hall of Fame, Country & Regional distribution (live counts), Related pathways, CTA.
-- Pillar pages (`/awards/pillars/:slug`) — add the 2 new pillars (Philanthropy, Faith-Based).
+1. **`src/config/recognitionArchitecture2026.ts`** — new canonical tier/category/subcategory data, with copy from the brief.
+2. **`src/config/navigation.ts`** — rebuild Awards mega-menu to match the prescribed tree (Recognition Architecture, 4 Tiers each with sub-links, Africa Education Impact Directory, Governance & Integrity, Eligibility & Guidelines, Voting Timeline). Remove top-level "Social Media Education Champions" and "Award Categories"; nest them inside their tiers.
+3. **`src/components/navigation/MainNav.tsx`** — render the new Awards mega-menu with tier-grouped columns, taglines and "self-explanatory in 5s" layout. Preserve existing analytics hooks.
 
-## Batch 5 — Africa Education Impact Directory
-- Rename `/nominees` UI label → "Africa Education Impact Directory" (route preserved; add 301-equivalent canonical from `/nominees` self-reference, plus internal links updated).
-- Filters: Tier · Category · Pathway · Region · Country · Cluster (Africans in Africa / Diaspora / Friends of Africa).
-- Profile page template adds: Contribution · Evidence · Impact · Organisation · Region · Country · Recognition pathway · Related nominees · Hall of Fame badge.
-- All counts via Cloud queries (no hardcoded totals). New hook `useDirectoryCounts()` against `nominees` + `nomination_intake`.
+## Batch 2 — Recognition Architecture Hub + Tier Landing Pages
 
-## Batch 6 — Cross-cutting + QA
-- Navigation (`src/config/navigation.ts`): mega menu reorganised to Tiers / Categories / Pillars / Directory / Impact / Sponsors / Volunteers / Media.
-- Global footer + breadcrumbs use canonical labels.
-- SEO: per-route Helmet titles/descriptions rewritten around "Recognition & Impact Platform"; canonicals & og:url unchanged.
-- Accessibility sweep on new sections (aria-labels, heading order, focus rings, 44px tap targets).
-- Analytics: extend existing `home_cta_click` + add `tier_view`, `category_view`, `pathway_view`, `directory_filter_apply`, `nominate_cta_click`.
-- Playwright specs: identity sentence present on /, /about, /awards; 9 pillars rendered; tier → category → pathway → directory journey; legacy phrases absent.
+4. **`src/pages/awards/RecognitionArchitecturePage.tsx`** — `/awards/recognition-architecture`. Visual map of all 4 tiers with selection method, voting mode, and entry points.
+5. **`src/pages/awards/tiers/TierLandingPage.tsx`** — dynamic `/awards/tier/:tierSlug` rendering tier hero, sub-nav (About / Categories / Nominees / Hall of Fame / Eligibility / Nominate / Voting / Judging), category grid driven by the spine.
+6. **Replace/wrap existing tier pages** (`AfricaEducationIcon`, `BlueGarnetAward`, `PlatinumAward`, `InfluencerImpact2026`) to consume the new spine while keeping their premium hero sections.
+
+## Batch 3 — Category & Subcategory Spine Pages
+
+7. **`src/pages/awards/CategoryPage.tsx`** — dynamic `/awards/:tierSlug/:categorySlug`. Sections: Overview, Eligibility, Subcategories grid, Existing Nominees preview, Hall of Fame, Voting (where applicable), Judging, FAQs, Nominate CTA.
+8. **`src/pages/awards/SubcategoryPage.tsx`** — `/awards/:tierSlug/:categorySlug/:subcategorySlug`. Filtered nominee grid by classification (Africans in Africa / Diaspora / Friends of Africa) and region.
+9. Wire the new GBG 18-category set and Platinum 20-category set into the spine.
+
+## Batch 4 — Africa Education Impact Directory
+
+10. Rename "Existing Nominees" → **Africa Education Impact Directory** everywhere (nav, page titles, breadcrumbs, copy). Add `src/config/platformCopy.ts` constant `DIRECTORY_NAME`.
+11. **`src/pages/nominees/NomineesHubPage.tsx`** — refactor filter rail to the prescribed hierarchy: Tier → Category → Subcategory → Region → Country → Org/Individual. Persist filters in URL.
+12. Nominee profile page additions: Recognition Tier badge, Category, Subcategory, Evidence of Impact section, Related Nominees, Hall of Fame status chip.
+
+## Batch 5 — Redirects, CMS adapter alignment, QA
+
+13. **Redirects** — map old `/awards/categories`, `/awards/social-media-*`, legacy category URLs → new spine routes via `App.tsx` `<Navigate />` and `buildRedirectMap()`.
+14. **CMS adapter** — extend `src/lib/cms/types.ts` + `lovableCloud.ts` so `tier`, `category`, `subcategory` joins resolve consistently for the Directory.
+15. **Playwright** — `tests/e2e/awards-architecture.spec.ts`: open Awards menu, verify 4 tiers + sub-links, click each tier landing, verify category/subcategory routes resolve, verify Directory filters by tier.
+16. **Terminology sweep** — under Platinum, replace remaining "Excellence" with Leadership / Contribution / Transformation / Education Enabler / Institutional Impact wording.
 
 ---
 
 ## Technical Notes
 
-- **No DB migrations** — all changes are content, components, routes, copy. Existing `nominees`, `subcategories`, `regions` tables already support the model.
-- **No URL changes.** Any new route (`/awards/tiers/:slug`, `/awards/pathways/:slug`) is additive; legacy `/awards/:slug` keeps working.
-- **CMS-driven counts**: replace any literal count strings with values from `useDirectoryCounts()` / `useRegionCounts()`.
-- **Risk control**: each batch is independently shippable; build + tsgo run after every batch.
+- All new pages use the existing `AwardCategoryStandardPage` section primitives (`AwardHeroStandard`, `WhatThisRecognises`, etc.) so the premium black/gold/blue-garnet look is preserved.
+- Routes are additive — old routes redirect, no broken links.
+- CMS-driven: every tier/category/subcategory reads from the spine config; copy can later migrate into Supabase `categories`/`subcategories` tables without code changes by swapping the adapter.
+- No schema changes required in Batch 1–3; Batch 5 only extends select columns if the CMS adapter needs `tier` on `categories` (already present per `src/lib/cms/types.ts`).
 
-## Proposed Execution Order This Session
+---
 
-I'll implement **Batch 1 and Batch 2** in the next response (foundational + homepage — the highest-leverage changes), then pause for your review before Batches 3–6. If you'd rather I run straight through all six batches without intermediate pauses, say "ship all batches" and I'll proceed.
+**Reply "approve" or "continue" to start Batch 1**, or tell me which batches to reorder/skip.
