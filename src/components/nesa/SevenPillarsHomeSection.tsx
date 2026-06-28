@@ -9,8 +9,6 @@ import { trackEvent } from "@/lib/analytics";
  * Data sourced from /src/data/pillars.ts. Each card deep-links to its pillar page.
  * (File name retained for import stability; export alias provided below.)
  */
- * SevenPillarsHomeSection — Landing-page summary of the 7 Recognition Pillars.
- * Data sourced from /src/data/pillars.ts. Each card deep-links to its pillar page.
  */
 export function SevenPillarsHomeSection() {
   return (
