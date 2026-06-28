@@ -97,7 +97,9 @@ function DesktopNav({ onOpenCVOMessage }: { onOpenCVOMessage: () => void }) {
                         ? "w-[460px] grid-cols-2"
                         : item.label === "Support"
                         ? "w-[420px]"
-                        : item.label === "Engage" || item.label === "Impact Programs" || item.label === "Awards" || item.label === "Media"
+                        : item.label === "Awards"
+                        ? "w-[720px] md:w-[860px] md:grid-cols-2 lg:w-[960px] lg:grid-cols-3"
+                        : item.label === "Engage" || item.label === "Impact Programs" || item.label === "Media"
                         ? "w-[560px] md:w-[640px] md:grid-cols-2"
                         : "w-[400px] md:w-[500px] md:grid-cols-2 lg:w-[600px]",
 
