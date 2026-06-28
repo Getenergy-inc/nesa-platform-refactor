@@ -30,7 +30,7 @@ const tierConfig = {
     label: "Blue Garnet Award",
     color: "#1d4ed8",
     accent: "#3b82f6",
-    tagline: "Africa's Highest Education Excellence Honour",
+    tagline: "Africa's Highest Education Enablers Honour",
   },
   icon: {
     label: "Africa Education Icon",

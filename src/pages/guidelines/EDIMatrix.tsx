@@ -99,7 +99,7 @@ const PLATINUM_EDI = {
       ],
     },
     {
-      name: "Faith-Based Education Excellence",
+      name: "Faith-Based Education Enablers",
       areas: [
         "Faith-integrated curriculum development",
         "Values-based character education programmes",

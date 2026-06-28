@@ -263,8 +263,8 @@
     },
     "sponsors": {
       "title": "Our Partners & Sponsors",
-      "description": "Partnering with industry leaders to drive education excellence across Africa.",
-      "organizationsCount": "{{count}} organizations supporting education excellence",
+      "description": "Partnering with industry leaders to drive education enablers across Africa.",
+      "organizationsCount": "{{count}} organizations supporting education enablers",
       "viewAll": "View All"
     },
     "endorsedBy": {

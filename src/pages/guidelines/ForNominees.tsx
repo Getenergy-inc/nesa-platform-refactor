@@ -162,7 +162,7 @@ const RESPONSIBILITIES = [
   },
   {
     title: "Accept with Integrity",
-    description: "If you win, represent the award with honor. Winners become ambassadors for African education excellence.",
+    description: "If you win, represent the award with honor. Winners become ambassadors for African education enablers.",
     icon: Trophy,
   },
 ];

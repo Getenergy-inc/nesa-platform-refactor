@@ -115,7 +115,7 @@ const PLACEHOLDER_IMAGE = "/images/placeholder.svg";
 // Keywords to identify geographic categories
 const DIASPORA_KEYWORDS = ["diaspora"];
 const FRIENDS_OF_AFRICA_KEYWORDS = [
-  "global education excellence",
+  "global education enablers",
   "international",
   "bilateral",
   "embassy",

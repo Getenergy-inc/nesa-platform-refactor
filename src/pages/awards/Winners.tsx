@@ -19,7 +19,7 @@ export default function Winners() {
         <title>Past Winners | NESA-Africa Hall of Fame</title>
         <meta
           name="description"
-          content="Explore NESA-Africa's Hall of Fame featuring past Blue Garnet, Gold, and Icon award winners across all categories."
+          content="Explore NESA-Africa's Hall of Fame featuring past Blue Garnet, Gold, and Icon recognition recipients across all categories."
         />
       </Helmet>
 

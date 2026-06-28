@@ -94,7 +94,7 @@ export default function Chapters() {
             </h1>
             <p className="text-xl text-white/70 mb-8">
               30 country chapters across 5 regions, working together to celebrate 
-              education excellence in every corner of Africa.
+              education enablers in every corner of Africa.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button size="lg" className="bg-gold hover:bg-gold/90 text-charcoal font-semibold">
@@ -170,7 +170,7 @@ export default function Chapters() {
           <div className="text-center mb-12">
             <h2 className="text-3xl font-display font-bold mb-4 text-white">Chapter Leadership Roles</h2>
             <p className="text-white/60 max-w-2xl mx-auto">
-              Join the leadership team driving education excellence in your country
+              Join the leadership team driving education enablers in your country
             </p>
           </div>
           <div className="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto">

@@ -124,7 +124,7 @@ export default function EndorseNESA() {
     return (
       <>
         <Helmet>
-          <title>Endorse NESA-Africa | Support Education Excellence</title>
+          <title>Endorse NESA-Africa | Support Education Enablers</title>
           <meta
             name="description"
             content="Endorse NESA-Africa and support the continental movement for education transformation across Africa."
@@ -142,7 +142,7 @@ export default function EndorseNESA() {
                 </h1>
                 <p className="text-lg md:text-xl text-white/80 max-w-2xl mx-auto">
                   Join leading organizations and institutions in endorsing NESA-Africa's mission to
-                  celebrate and elevate education excellence across African countries.
+                  celebrate and elevate education enablers across African countries.
                 </p>
 
                 {/* Deadline Badges */}

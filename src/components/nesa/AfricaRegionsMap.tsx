@@ -6,7 +6,7 @@ const objectives = [
   {
     id: 1,
     title: "Recognition",
-    description: "Celebrate and recognize education excellence across all African regions",
+    description: "Celebrate and recognize education enablers across all African regions",
     bridgeColor: "#D4AF37",
     regions: ["North", "West"],
   },

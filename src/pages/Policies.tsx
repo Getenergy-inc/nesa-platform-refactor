@@ -34,7 +34,7 @@ export default function Policies() {
         <title>{`Policies & Guidelines | ${currentEdition?.name || 'NESA-Africa 2026'}`}</title>
         <meta 
           name="description" 
-          content="Review NESA Africa's Privacy Policy, Terms of Service, and Governance Guidelines. Transparency and accountability in recognizing education excellence."
+          content="Review NESA Africa's Privacy Policy, Terms of Service, and Governance Guidelines. Transparency and accountability in recognizing education enablers."
         />
       </Helmet>
 
@@ -53,7 +53,7 @@ export default function Policies() {
               </h1>
               <p className="text-white/70 text-lg">
                 Our commitment to transparency, integrity, and ethical governance in recognizing 
-                Africa's education excellence.
+                Africa's education enablers.
               </p>
               <p className="text-white/50 text-sm mt-4">
                 Last updated: {LAST_UPDATED}
@@ -457,7 +457,7 @@ export default function Policies() {
                     <div className="mt-4 p-4 bg-primary/5 rounded-lg border border-primary/20">
                       <p className="text-sm text-foreground flex items-start gap-2">
                         <CheckCircle2 className="w-4 h-4 text-primary mt-0.5 shrink-0" />
-                        <span>Renewal is free of charge. Simply demonstrate continued commitment to education excellence.</span>
+                        <span>Renewal is free of charge. Simply demonstrate continued commitment to education enablers.</span>
                       </p>
                     </div>
                   </PolicyBlock>

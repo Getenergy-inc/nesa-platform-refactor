@@ -245,7 +245,7 @@ export default function Volunteer() {
           <Heart className="w-12 h-12 text-nesa-gold mx-auto mb-4" />
           <h2 className="text-3xl font-bold mb-4">Ready to Make a Difference?</h2>
           <p className="text-muted-foreground max-w-2xl mx-auto mb-8">
-            Join thousands of volunteers across Africa working to recognize and celebrate education excellence.
+            Join thousands of volunteers across Africa working to recognize and celebrate education enablers.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button size="lg" className="bg-nesa-gold hover:bg-nesa-gold/90 text-black">

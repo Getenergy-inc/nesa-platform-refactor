@@ -144,7 +144,7 @@ const GOLD_BLUE_GARNET: AwardPageContent = {
   canonicalPath: "/awards/blue-garnet",
   seoTitle: "Gold-Blue Garnet Awards 2026 | NESA-Africa",
   metaDescription:
-    "Africa's competitive recognition for education excellence — companies, NGOs, EdTech innovators, faith-based programmes, and STEM leaders, judged by independent jury and amplified by public participation.",
+    "Africa's competitive recognition for education enablers — companies, NGOs, EdTech innovators, faith-based programmes, and STEM leaders, judged by independent jury and amplified by public participation.",
   hero: {
     badge: "Gold-Blue Garnet Awards · Competitive Recognition",
     title: "Gold-Blue Garnet Awards",

@@ -147,7 +147,7 @@ export function AwardTiersSummarySection() {
             <p className="text-ivory/70 text-sm mt-2 max-w-2xl">
               {AWARD_TIERS_TOTALS.tiers} tiers · {AWARD_TIERS_TOTALS.categories} categories ·{" "}
               {AWARD_TIERS_TOTALS.subcategories} subcategories. One continental
-              recognition platform, four pathways to honor education excellence.
+              recognition platform, four pathways to honor education enablers.
             </p>
           </div>
           <ChevronDown

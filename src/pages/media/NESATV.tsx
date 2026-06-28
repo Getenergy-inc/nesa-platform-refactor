@@ -296,7 +296,7 @@ export default function NESATV() {
                   <CardContent className="space-y-4 text-white/70">
                     <p>
                       NESA Africa TV is a 24/7 multilingual education broadcasting network dedicated to
-                      celebrating and promoting education excellence across Africa.
+                      celebrating and promoting education enablers across Africa.
                     </p>
                     <p>
                       Broadcasting in 5 languages (English, French, Arabic, Portuguese, and Swahili),
