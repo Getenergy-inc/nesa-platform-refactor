@@ -149,44 +149,64 @@ export default function AwardCategoryStandardPage({ slug }: Props) {
       <div className="min-h-screen bg-charcoal text-white">
         <main>
 
-          <AwardHeroStandard
-            pageSlug={content.slug}
-            badge={hero.badge}
-            title={hero.title}
-            titleAccent={hero.titleAccent}
-            subhead={hero.subhead}
-            lead={hero.lead}
-            stats={stats}
-            primaryCta={hero.primaryCta}
-            secondaryCta={hero.secondaryCta}
-            trustLine={hero.trustLine}
-          />
-          <WhatThisRecognises body={content.recognises} />
-          <WhoIsThisFor
-            canBeNominated={eligibility.canBeNominated}
-            shouldNotBeNominated={eligibility.shouldNotBeNominated}
-            evidence={eligibility.evidence}
-            region={eligibility.region}
-            pathway={eligibility.pathway}
-          />
-          <HallOfFamePreview
-            pageSlug={content.slug}
-            nominees={hallNominees}
-            exploreAllHref={content.exploreAllHref}
-            nominateHref={content.nominateHref}
-          />
-          <SubcategoryPathways pageSlug={content.slug} subcategories={subcategories} />
-          <HowNominationWorks />
-          <IntegrityFirewallBlock />
-          <FinalAwardCTA
-            pageSlug={content.slug}
-            heading={finalCta.heading}
-            body={finalCta.body}
-            primaryCta={finalCta.primary}
-            secondaryCta={finalCta.secondary}
-          />
+          <section id="overview">
+            <AwardHeroStandard
+              pageSlug={content.slug}
+              badge={hero.badge}
+              title={hero.title}
+              titleAccent={hero.titleAccent}
+              subhead={hero.subhead}
+              lead={hero.lead}
+              stats={stats}
+              primaryCta={hero.primaryCta}
+              secondaryCta={hero.secondaryCta}
+              trustLine={hero.trustLine}
+            />
+          </section>
+
+          {TABS_BY_SLUG[content.slug] ? (
+            <AwardPageTabs tabs={TABS_BY_SLUG[content.slug]} />
+          ) : null}
+
+          <section id="categories">
+            <WhatThisRecognises body={content.recognises} />
+            <SubcategoryPathways pageSlug={content.slug} subcategories={subcategories} />
+          </section>
+          <section id="eligibility">
+            <WhoIsThisFor
+              canBeNominated={eligibility.canBeNominated}
+              shouldNotBeNominated={eligibility.shouldNotBeNominated}
+              evidence={eligibility.evidence}
+              region={eligibility.region}
+              pathway={eligibility.pathway}
+            />
+          </section>
+          <section id="nominees">
+            <HallOfFamePreview
+              pageSlug={content.slug}
+              nominees={hallNominees}
+              exploreAllHref={content.exploreAllHref}
+              nominateHref={content.nominateHref}
+            />
+          </section>
+          <section id="hall-of-fame" aria-label="Hall of Fame" />
+          <section id="voting" />
+          <section id="process">
+            <HowNominationWorks />
+            <IntegrityFirewallBlock />
+          </section>
+          <section id="nominate">
+            <FinalAwardCTA
+              pageSlug={content.slug}
+              heading={finalCta.heading}
+              body={finalCta.body}
+              primaryCta={finalCta.primary}
+              secondaryCta={finalCta.secondary}
+            />
+          </section>
         </main>
       </div>
+
 
     </>
   );
