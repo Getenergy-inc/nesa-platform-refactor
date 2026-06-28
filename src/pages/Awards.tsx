@@ -212,7 +212,7 @@ export default function AwardsPage() {
               </motion.h1>
 
               <p className="text-xl md:text-2xl text-ivory/90 font-medium mb-5">
-                NESA-Africa Award Categories — organised into 7 Recognition Pillars.
+                NESA-Africa Award Categories — organised into 9 Recognition Pillars.
               </p>
 
               <p className="text-base md:text-lg text-ivory/75 leading-relaxed max-w-2xl mb-8">
@@ -279,7 +279,7 @@ export default function AwardsPage() {
           <div className="container mx-auto px-4 max-w-6xl">
             <div className="text-center max-w-3xl mx-auto mb-12">
               <span className="text-[11px] uppercase tracking-[0.18em] text-gold font-semibold">
-                The 7 Recognition Pillars
+                The 9 Recognition Pillars
               </span>
               <h2 className="mt-2 font-display text-3xl md:text-4xl font-bold text-ivory">
                 Find Where Your Nominee <span className="text-gold">Belongs</span>
