@@ -498,6 +498,17 @@ const App = () => (
                     }
                   />
                   <Route
+                    path="/timeline"
+                    element={
+                      <WithLayout>
+                        <Timeline />
+                      </WithLayout>
+                    }
+                  />
+                  <Route path="/voting-timeline" element={<Navigate to="/timeline" replace />} />
+                  <Route path="/awards/timeline" element={<Navigate to="/timeline" replace />} />
+
+                  <Route
                     path="/about/scef"
                     element={
                       <WithLayout>
