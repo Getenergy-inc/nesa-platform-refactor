@@ -1,67 +1,64 @@
-# Awards Architecture Refactor — Execution Plan
+## Africa's Education Impact Directory — `/nominees` Refactor
 
-Restructure the entire Awards section around the official 2026 Recognition Architecture: **Tiers → Categories → Subcategories → Region → Country → Nominee → Hall of Fame**. The Awards menu must be self-explanatory within 5 seconds.
+Transform the nominees page into a premium 11-section discovery platform positioned as "Africa's Education Impact Directory."
 
-This is a large refactor. I'll execute in 5 batches and pause for approval after each.
+### Scope
 
----
+Rebuild `/nominees` (NomineesHubPage) into a long-form, section-based directory experience modeled on IMDb/LinkedIn/UNESCO. Reuse existing data layer (`useNominees`, `recognitionArchitecture2026`, `pillars`, `regions`) — no schema changes.
 
-## Single Source of Truth
+### Sections (11)
 
-Create `src/config/recognitionArchitecture2026.ts` as the canonical spine driving navigation, routing, breadcrumbs, page metadata, and CMS lookups. Shape:
+1. **Hero** — Large immersive hero with headline "Africa's Education Impact Directory", subheadline, 12 dynamic stat counters (DB-driven), 5 primary CTAs.
+2. **Four Recognition Tiers** — Interactive cards linking to tier pages (Icon / Gold-Blue Garnet / Platinum / Influencer).
+3. **Nine Recognition Pillars** — Visual nav cards from `src/data/pillars.ts` with counts + featured enablers.
+4. **Browse by Award Category** — Grid of all categories with icon, count, latest profiles, story, explore CTA.
+5. **Browse by Recognition Tier** — Filter chips for the 4 tiers.
+6. **Browse by Education Enabler Type** — 25 enabler-type chips (People, NGOs, Universities, Faith-Based, Diaspora, etc.).
+7. **Browse by Eight Africa Regions + 2 Global Communities** — Regions grid (8) + separated Global Communities block (Diaspora, Friends of Africa).
+8. **Interactive Africa Map** — Reuse existing Africa map component with hover stats.
+9. **Featured Education Enablers** — Horizontal large cards with photo, region, tier, category, impact summary.
+10. **Education Impact Stories** — Dynamic storytelling cards (before/after, school transformation, etc.).
+11. **Advanced Discovery** — Global search with autocomplete + smart filters (tier, category, pillar, country, region, community, enabler type, organisation type, impact area, gender, language, verification, year) + result grid using upgraded NomineeCard.
 
-```
-RecognitionTier
- ├── id, slug, label, tagline, selectionMethod, votingMode
- ├── description, hero copy, eligibility, process
- ├── categories: AwardCategory[]
- │    └── subcategories: Subcategory[]
- │         └── (classification × region × country resolved at query time)
- └── pages: { about, categories, nominees, hallOfFame, eligibility, nominate, voting?, judging? }
-```
+Footer: Independent Verification, Governance, EDI Matrix, FAQs, Sponsor Independence, Privacy, Accessibility, Contact.
 
-The 4 tiers, ~18 Gold-Blue Garnet categories, 20 Platinum recognition categories, 3 Influencer categories and 3 Icon subcategories all live here. Existing `recognitionArchitecture.ts`, `awardPageContent.ts`, `awardCategories/*`, and `pillars.ts` are kept but the new spine becomes authoritative for nav + tier pages.
+### Naming
 
-## Batch 1 — Spine + Navigation (this turn)
+Rename all user-facing references "Nominee Directory" → **Africa's Education Impact Directory**. Internal route stays `/nominees` (preserves SEO + deep links).
 
-1. **`src/config/recognitionArchitecture2026.ts`** — new canonical tier/category/subcategory data, with copy from the brief.
-2. **`src/config/navigation.ts`** — rebuild Awards mega-menu to match the prescribed tree (Recognition Architecture, 4 Tiers each with sub-links, Africa Education Impact Directory, Governance & Integrity, Eligibility & Guidelines, Voting Timeline). Remove top-level "Social Media Education Champions" and "Award Categories"; nest them inside their tiers.
-3. **`src/components/navigation/MainNav.tsx`** — render the new Awards mega-menu with tier-grouped columns, taglines and "self-explanatory in 5s" layout. Preserve existing analytics hooks.
+### Files
 
-## Batch 2 — Recognition Architecture Hub + Tier Landing Pages
+**New components** (`src/components/directory/`):
+- `DirectoryHero.tsx` — hero + 12 stats + CTAs
+- `DirectoryTiersSection.tsx`
+- `DirectoryPillarsSection.tsx`
+- `DirectoryCategoriesSection.tsx`
+- `DirectoryEnablerTypesSection.tsx`
+- `DirectoryRegionsSection.tsx` (8 regions + 2 communities split)
+- `DirectoryMapSection.tsx` (wraps existing Africa map)
+- `DirectoryFeaturedSection.tsx`
+- `DirectoryImpactStoriesSection.tsx`
+- `DirectoryAdvancedDiscovery.tsx` (search + filters + results grid)
+- `DirectoryFooterTrust.tsx`
 
-4. **`src/pages/awards/RecognitionArchitecturePage.tsx`** — `/awards/recognition-architecture`. Visual map of all 4 tiers with selection method, voting mode, and entry points.
-5. **`src/pages/awards/tiers/TierLandingPage.tsx`** — dynamic `/awards/tier/:tierSlug` rendering tier hero, sub-nav (About / Categories / Nominees / Hall of Fame / Eligibility / Nominate / Voting / Judging), category grid driven by the spine.
-6. **Replace/wrap existing tier pages** (`AfricaEducationIcon`, `BlueGarnetAward`, `PlatinumAward`, `InfluencerImpact2026`) to consume the new spine while keeping their premium hero sections.
+**Edited**:
+- `src/pages/nominees/NomineesHubPage.tsx` — replaced with new composed page
+- `src/config/platformCopy.ts` — add `DIRECTORY_NAME = "Africa's Education Impact Directory"`
+- `src/components/navigation/MainNav.tsx` — update label
+- `src/config/navigation.ts` — update label
+- `index.html` / Helmet — title/description/OG/JSON-LD for `/nominees`
 
-## Batch 3 — Category & Subcategory Spine Pages
+### Technical Details
 
-7. **`src/pages/awards/CategoryPage.tsx`** — dynamic `/awards/:tierSlug/:categorySlug`. Sections: Overview, Eligibility, Subcategories grid, Existing Nominees preview, Hall of Fame, Voting (where applicable), Judging, FAQs, Nominate CTA.
-8. **`src/pages/awards/SubcategoryPage.tsx`** — `/awards/:tierSlug/:categorySlug/:subcategorySlug`. Filtered nominee grid by classification (Africans in Africa / Diaspora / Friends of Africa) and region.
-9. Wire the new GBG 18-category set and Platinum 20-category set into the spine.
+- **Data**: existing `useNominees` (public_nominees view), `recognitionArchitecture2026.ts`, `pillars.ts`, `regions.ts`. Counts computed client-side from query results with React Query caching.
+- **Analytics**: `directory_section_view`, `directory_cta_click`, `directory_filter_apply`, `directory_search` via existing `analytics.ts`.
+- **SEO**: per-route Helmet with canonical `/nominees`, OG image, JSON-LD `ItemList` schema. Stack stays React/Vite (project is not Next.js — ignore that part of brief; we have ISR-equivalent via React Query staleTime).
+- **A11y**: AA contrast, focus rings, ARIA labels on stat cards, semantic landmarks (`<main>`, `<section aria-labelledby>`), keyboard nav on filters.
+- **Design**: Charcoal/Gold per brand memory, Playfair display headings, framer-motion section reveals.
+- **No business-logic changes**: pure presentation refactor on existing Supabase data.
 
-## Batch 4 — Africa Education Impact Directory
+### Out of Scope
 
-10. Rename "Existing Nominees" → **Africa Education Impact Directory** everywhere (nav, page titles, breadcrumbs, copy). Add `src/config/platformCopy.ts` constant `DIRECTORY_NAME`.
-11. **`src/pages/nominees/NomineesHubPage.tsx`** — refactor filter rail to the prescribed hierarchy: Tier → Category → Subcategory → Region → Country → Org/Individual. Persist filters in URL.
-12. Nominee profile page additions: Recognition Tier badge, Category, Subcategory, Evidence of Impact section, Related Nominees, Hall of Fame status chip.
-
-## Batch 5 — Redirects, CMS adapter alignment, QA
-
-13. **Redirects** — map old `/awards/categories`, `/awards/social-media-*`, legacy category URLs → new spine routes via `App.tsx` `<Navigate />` and `buildRedirectMap()`.
-14. **CMS adapter** — extend `src/lib/cms/types.ts` + `lovableCloud.ts` so `tier`, `category`, `subcategory` joins resolve consistently for the Directory.
-15. **Playwright** — `tests/e2e/awards-architecture.spec.ts`: open Awards menu, verify 4 tiers + sub-links, click each tier landing, verify category/subcategory routes resolve, verify Directory filters by tier.
-16. **Terminology sweep** — under Platinum, replace remaining "Excellence" with Leadership / Contribution / Transformation / Education Enabler / Institutional Impact wording.
-
----
-
-## Technical Notes
-
-- All new pages use the existing `AwardCategoryStandardPage` section primitives (`AwardHeroStandard`, `WhatThisRecognises`, etc.) so the premium black/gold/blue-garnet look is preserved.
-- Routes are additive — old routes redirect, no broken links.
-- CMS-driven: every tier/category/subcategory reads from the spine config; copy can later migrate into Supabase `categories`/`subcategories` tables without code changes by swapping the adapter.
-- No schema changes required in Batch 1–3; Batch 5 only extends select columns if the CMS adapter needs `tier` on `categories` (already present per `src/lib/cms/types.ts`).
-
----
-
-**Reply "approve" or "continue" to start Batch 1**, or tell me which batches to reorder/skip.
+- Individual nominee profile redesign (separate ticket — current `/nominees/:slug` retained).
+- New DB tables/columns (counts derive from existing data).
+- Multi-language directory copy (English first; i18n keys reserved).
