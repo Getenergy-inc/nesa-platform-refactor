@@ -511,7 +511,7 @@ export const PILLARS: Pillar[] = [
       },
     ],
     sponsorPositioning:
-      "This pillar allows sponsors to support the broadest recognition platform for African education excellence.",
+      "This pillar allows sponsors to support the broadest recognition platform for Africa's education enablers.",
     sponsorCta: { label: "Sponsor Continental Recognition Awards", href: "/sponsors" },
     nominationCta: {
       label: "Explore All Award Categories",
