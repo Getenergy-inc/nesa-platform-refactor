@@ -1,4 +1,4 @@
-// NESA-Africa 2026 — 7 Recognition Pillars
+// NESA-Africa 2026 — 9 Recognition Pillars
 // Content-only file. Edit copy here; pages render from this data.
 
 import {
@@ -9,6 +9,8 @@ import {
   Coins,
   Landmark,
   Megaphone,
+  HeartHandshake,
+  BookOpen,
   type LucideIcon,
 } from "lucide-react";
 
