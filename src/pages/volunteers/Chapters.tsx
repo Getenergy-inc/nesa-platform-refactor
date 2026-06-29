@@ -4,18 +4,35 @@ import { motion } from "framer-motion";
 import { MapPin, Users, ArrowRight, Globe2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
-const REGIONS = [
-  { slug: "west-africa", name: "West Africa", countries: "Nigeria, Ghana, Senegal, Côte d'Ivoire…" },
-  { slug: "east-africa", name: "East Africa", countries: "Kenya, Uganda, Tanzania, Rwanda…" },
-  { slug: "southern-africa", name: "Southern Africa", countries: "South Africa, Zambia, Zimbabwe…" },
-  { slug: "central-africa", name: "Central Africa", countries: "DRC, Cameroon, Gabon…" },
-  { slug: "north-africa", name: "North Africa", countries: "Egypt, Morocco, Tunisia, Algeria…" },
-  { slug: "horn-africa", name: "Horn of Africa", countries: "Ethiopia, Somalia, Djibouti…" },
-  { slug: "sahel", name: "Sahel", countries: "Mali, Burkina Faso, Niger, Chad…" },
-  { slug: "indian-ocean", name: "Indian Ocean", countries: "Madagascar, Mauritius, Comoros…" },
-  { slug: "diaspora-europe", name: "Diaspora — Europe", countries: "UK, France, Germany, Netherlands…" },
-  { slug: "diaspora-americas", name: "Diaspora — Americas", countries: "USA, Canada, Brazil…" },
+type ChapterRegion = {
+  slug: string;
+  name: string;
+  countries: string;
+  group: "africa" | "global";
+};
+
+const AFRICA_REGIONS: ChapterRegion[] = [
+  { slug: "west-africa", name: "West Africa", countries: "Nigeria, Ghana, Senegal, Côte d'Ivoire…", group: "africa" },
+  { slug: "east-africa", name: "East Africa", countries: "Kenya, Uganda, Tanzania, Rwanda…", group: "africa" },
+  { slug: "southern-africa", name: "Southern Africa", countries: "South Africa, Zambia, Zimbabwe…", group: "africa" },
+  { slug: "central-africa", name: "Central Africa", countries: "DRC, Cameroon, Gabon…", group: "africa" },
+  { slug: "north-africa", name: "North Africa", countries: "Egypt, Morocco, Tunisia, Algeria…", group: "africa" },
+  { slug: "horn-africa", name: "Horn of Africa", countries: "Ethiopia, Somalia, Djibouti, Eritrea…", group: "africa" },
+  { slug: "sahel", name: "Sahel", countries: "Mali, Burkina Faso, Niger, Chad…", group: "africa" },
+  { slug: "indian-ocean", name: "Indian Ocean Islands", countries: "Madagascar, Mauritius, Seychelles, Comoros…", group: "africa" },
 ];
+
+const GLOBAL_REGIONS: ChapterRegion[] = [
+  { slug: "diaspora-north-america", name: "North America", countries: "USA, Canada, Mexico", group: "global" },
+  { slug: "diaspora-south-america", name: "South America", countries: "Brazil, Argentina, Colombia, Chile…", group: "global" },
+  { slug: "diaspora-europe", name: "Europe", countries: "France, Germany, Netherlands, Italy, Spain…", group: "global" },
+  { slug: "diaspora-uk-ireland", name: "UK & Ireland", countries: "United Kingdom, Ireland", group: "global" },
+  { slug: "diaspora-middle-east", name: "Middle East", countries: "UAE, Saudi Arabia, Qatar, Kuwait…", group: "global" },
+  { slug: "diaspora-asia-pacific", name: "Asia-Pacific", countries: "India, China, Japan, Australia, Singapore…", group: "global" },
+  { slug: "diaspora-caribbean", name: "Caribbean", countries: "Jamaica, Trinidad & Tobago, Barbados, Bahamas…", group: "global" },
+];
+
+const REGIONS: ChapterRegion[] = [...AFRICA_REGIONS, ...GLOBAL_REGIONS];
 
 export default function Chapters() {
   return (
