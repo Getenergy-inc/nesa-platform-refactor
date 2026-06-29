@@ -759,6 +759,11 @@ export default function PoliticalLeadersNigeriaPage() {
           </p>
         </div>
       </section>
+
+      <CategorySubcategoriesPanel
+        formSlug="excellence-in-political-leadership-for-education-nigeria"
+        categoryTitle="Political Leadership for Education (Nigeria)"
+      />
     </div>
   );
 }
