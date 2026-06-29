@@ -652,6 +652,11 @@ export default function DiasporaEducationPage() {
           )}
         </DialogContent>
       </Dialog>
+
+      <CategorySubcategoriesPanel
+        formSlug="excellence-in-diaspora-educational-impact-international"
+        categoryTitle="Diaspora Education Impact"
+      />
     </div>
   );
 }
