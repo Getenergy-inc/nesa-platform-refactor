@@ -10,6 +10,7 @@ import {
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { ExploreNomineesCTA } from "@/components/nominees/ExploreNomineesCTA";
+import { CategorySubcategoriesPanel } from "@/components/awards/CategorySubcategoriesPanel";
 import {
   categories,
   getCategoryByTitle,
