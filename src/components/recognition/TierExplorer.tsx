@@ -289,7 +289,7 @@ export function TierExplorer({ className = "" }: Props) {
                 type="button"
                 onClick={() => {
                   setExpanded(isOpen ? null : tier.slug);
-                  if (!isOpen) trackPathwayView(tier.slug, { action: "expand" });
+                  if (!isOpen) trackPathwayView(tier.slug);
                 }}
                 aria-expanded={isOpen}
                 className="mt-4 inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider text-gold hover:text-gold/80"
@@ -342,7 +342,7 @@ export function TierExplorer({ className = "" }: Props) {
               <div className="mt-5 flex flex-wrap items-center gap-3">
                 <Link
                   to={tier.href}
-                  onClick={() => trackPathwayView(tier.slug, { action: "premium" })}
+                  onClick={() => trackPathwayView(tier.slug)}
                   className="inline-flex items-center gap-1.5 rounded-full bg-gold px-4 py-2 text-sm font-semibold text-charcoal hover:bg-gold/90"
                 >
                   Explore tier
@@ -350,7 +350,7 @@ export function TierExplorer({ className = "" }: Props) {
                 </Link>
                 <Link
                   to={tier.exploreHref}
-                  onClick={() => trackPathwayView(tier.slug, { action: "spine" })}
+                  onClick={() => trackPathwayView(tier.slug)}
                   className="text-sm font-medium text-white/70 underline-offset-4 hover:text-gold hover:underline"
                 >
                   Browse categories
