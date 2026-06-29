@@ -10,6 +10,7 @@ import {
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { ExploreNomineesCTA } from "@/components/nominees/ExploreNomineesCTA";
+import { CategorySubcategoriesPanel } from "@/components/awards/CategorySubcategoriesPanel";
 import {
   categories,
   getCategoryByTitle,
@@ -506,6 +507,14 @@ export function DynamicCategoryPage({ categoryTitle, nominationType, nominateCat
             </div>
           </div>
         </section>
+
+        {/* Subcategories accordion + voting (GBG only) */}
+        {nominateCategorySlug && (
+          <CategorySubcategoriesPanel
+            formSlug={nominateCategorySlug}
+            categoryTitle={categoryTitle}
+          />
+        )}
 
         {/* See all nominees in this category — gateway to /nominees pre-filtered */}
         <section className="bg-charcoal py-10">
