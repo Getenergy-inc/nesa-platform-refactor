@@ -115,7 +115,7 @@ export const REGION_HUBS: RegionHubConfig[] = [
   },
   {
     slug: "diaspora",
-    name: "Africans in the Diaspora",
+    name: "Diaspora / Global Africa",
     shortName: "Diaspora",
     tagline: "Africa Beyond Borders — One Heritage, Global Impact",
     description: "Africans in the Diaspora are one of NESA-Africa's two Global Communities, alongside Friends of Africa. From London to Lagos, Atlanta to Accra, Toronto to Tunis, and São Paulo to Nairobi — diaspora professionals, associations, philanthropists, EdTech founders and scholarship networks are funding classrooms, training teachers, mentoring learners and powering Africa's education transformation. Recognised across NESA-Africa's 15 worldwide regions, the Diaspora is honoured through the Platinum Diaspora Education Impact category and contributes to every Recognition Tier.",
