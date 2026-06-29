@@ -614,6 +614,21 @@ export default function NomineesHubPage() {
         </Section>
 
         {/* ────────────────────────────────────────────────────────────────
+            SECTION 12 — NOMINATION GUIDANCE (9 steps)
+        ──────────────────────────────────────────────────────────────── */}
+        <Section id="guidance" eyebrow="11 · How Nomination Works" title="Nomination Guidance" sub="A simple nine-step path from discovery to recognition. Begin the form first — sign in only at submission.">
+          <NominationGuidanceSection />
+        </Section>
+
+        {/* ────────────────────────────────────────────────────────────────
+            SECTION 13 — INTEGRITY NOTICE
+        ──────────────────────────────────────────────────────────────── */}
+        <Section id="integrity" eyebrow="12 · Integrity" title="NESA-Africa Integrity Firewall">
+          <IntegrityNotice />
+        </Section>
+
+
+        {/* ────────────────────────────────────────────────────────────────
             FOOTER TRUST
         ──────────────────────────────────────────────────────────────── */}
         <section aria-labelledby="trust-footer" className="border-t border-gold/15 bg-charcoal-dark/50 py-12">
