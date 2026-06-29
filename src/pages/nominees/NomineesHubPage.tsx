@@ -26,6 +26,9 @@ import { DIRECTORY_NAME, PRIMARY_CTAS, REGION_FRAMING, TRUST_STATEMENT } from "@
 import { AfricaRegionExplorer } from "@/components/nominees/AfricaRegionExplorer";
 import DirectoryCategoryMatrix from "@/components/nominees/DirectoryCategoryMatrix";
 import { LandingNomineeCard } from "@/components/nesa/LandingNomineeCard";
+import { IntegrityNotice } from "@/components/awards/IntegrityNotice";
+import { NominationGuidanceSection } from "@/components/nominees/NominationGuidanceSection";
+import { SubcategoryDirectorySection } from "@/components/nominees/SubcategoryDirectorySection";
 import { trackEvent } from "@/lib/analytics";
 
 // ---------------------------------------------------------------------------
@@ -302,7 +305,12 @@ export default function NomineesHubPage() {
                 </Button>
                 <Button asChild size="lg" className="bg-rose-700 hover:bg-rose-800 text-ivory rounded-full">
                   <Link to={PRIMARY_CTAS.nominate.href} onClick={() => trackEvent("directory_cta_click", { cta: "nominate" })}>
-                    <Sparkles className="h-4 w-4 mr-2" /> Nominate an Enabler
+                    <Sparkles className="h-4 w-4 mr-2" /> Nominate an Education Enabler
+                  </Link>
+                </Button>
+                <Button asChild size="lg" variant="outline" className="border-gold/40 text-ivory hover:bg-gold/10 rounded-full">
+                  <Link to="/earn-agc" onClick={() => trackEvent("directory_cta_click", { cta: "earn_agc" })}>
+                    <Award className="h-4 w-4 mr-2" /> Nominate &amp; Earn AGC Voting Coin
                   </Link>
                 </Button>
                 <Button asChild size="lg" variant="ghost" className="text-ivory hover:bg-ivory/5 rounded-full">
@@ -310,6 +318,10 @@ export default function NomineesHubPage() {
                     <Tv className="h-4 w-4 mr-2" /> NESA Africa TV
                   </Link>
                 </Button>
+              </div>
+
+              <div className="mt-8 max-w-3xl">
+                <IntegrityNotice variant="compact" />
               </div>
             </motion.div>
           </div>
@@ -389,6 +401,13 @@ export default function NomineesHubPage() {
         ──────────────────────────────────────────────────────────────── */}
         <Section id="categories" eyebrow="03 · 43 Categories · 100+ Subcategories" title="Browse the Canonical Recognition Architecture" sub="Every NESA-Africa 2026 category — grouped by tier — opens a dedicated page with embedded subcategory pathways and a nomination form.">
           <DirectoryCategoryMatrix />
+        </Section>
+
+        {/* ────────────────────────────────────────────────────────────────
+            SECTION 3b — SUBCATEGORY DIRECTORY (filterable)
+        ──────────────────────────────────────────────────────────────── */}
+        <Section id="subcategories" eyebrow="03b · 100+ Pathways" title="Subcategory Directory" sub="Search and filter every subcategory across the four NESA-Africa 2026 tiers. Each card opens the canonical subcategory page and a pre-selected nomination form.">
+          <SubcategoryDirectorySection />
         </Section>
 
         {/* ────────────────────────────────────────────────────────────────
@@ -593,6 +612,21 @@ export default function NomineesHubPage() {
             </div>
           )}
         </Section>
+
+        {/* ────────────────────────────────────────────────────────────────
+            SECTION 12 — NOMINATION GUIDANCE (9 steps)
+        ──────────────────────────────────────────────────────────────── */}
+        <Section id="guidance" eyebrow="11 · How Nomination Works" title="Nomination Guidance" sub="A simple nine-step path from discovery to recognition. Begin the form first — sign in only at submission.">
+          <NominationGuidanceSection />
+        </Section>
+
+        {/* ────────────────────────────────────────────────────────────────
+            SECTION 13 — INTEGRITY NOTICE
+        ──────────────────────────────────────────────────────────────── */}
+        <Section id="integrity" eyebrow="12 · Integrity" title="NESA-Africa Integrity Firewall">
+          <IntegrityNotice />
+        </Section>
+
 
         {/* ────────────────────────────────────────────────────────────────
             FOOTER TRUST
