@@ -28,6 +28,7 @@ import {
   AccordionContent,
 } from "@/components/ui/accordion";
 import { BreadcrumbJsonLd } from "@/components/seo/BreadcrumbJsonLd";
+import { CategorySubcategoriesPanel } from "@/components/awards/CategorySubcategoriesPanel";
 import {
   INTL_SUBCATEGORIES,
   EDI_ROWS,
@@ -594,6 +595,11 @@ export default function InternationalEducationPage() {
           </Button>
         </div>
       </section>
+
+      <CategorySubcategoriesPanel
+        formSlug="excellence-in-international-partnership-for-education-africa"
+        categoryTitle="International & Bilateral Education Partnership"
+      />
     </div>
   );
 }

@@ -29,6 +29,7 @@ import {
   AccordionContent,
 } from "@/components/ui/accordion";
 import { BreadcrumbJsonLd } from "@/components/seo/BreadcrumbJsonLd";
+import { CategorySubcategoriesPanel } from "@/components/awards/CategorySubcategoriesPanel";
 
 const CANONICAL =
   "https://nesa.africa/categories/best-research-development-nigeria";
@@ -1226,6 +1227,11 @@ export default function ResearchDevelopmentNigeriaPage() {
           </p>
         </div>
       </section>
+
+      <CategorySubcategoriesPanel
+        formSlug="excellence-in-research-development-for-education-nigeria"
+        categoryTitle="Research & Development for Education (Nigeria)"
+      />
     </div>
   );
 }

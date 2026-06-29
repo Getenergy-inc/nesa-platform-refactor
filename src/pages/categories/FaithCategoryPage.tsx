@@ -25,6 +25,7 @@ import {
   Accordion, AccordionContent, AccordionItem, AccordionTrigger,
 } from "@/components/ui/accordion";
 import { BreadcrumbJsonLd } from "@/components/seo/BreadcrumbJsonLd";
+import { CategorySubcategoriesPanel } from "@/components/awards/CategorySubcategoriesPanel";
 
 import type {
   FaithCategoryConfig, FaithNominee, FaithSubcategory,
@@ -547,6 +548,15 @@ export function FaithCategoryPage({ config }: { config: FaithCategoryConfig }) {
             </Button>
           </div>
         </section>
+
+        <CategorySubcategoriesPanel
+          formSlug={
+            config.faith === "christian"
+              ? "excellence-in-christian-education-impact-africa-regional"
+              : "excellence-in-islamic-education-impact-africa-regional"
+          }
+          categoryTitle={config.pageTitle}
+        />
       </div>
     </>
   );

@@ -29,6 +29,7 @@ import {
   AccordionContent,
 } from "@/components/ui/accordion";
 import { BreadcrumbJsonLd } from "@/components/seo/BreadcrumbJsonLd";
+import { CategorySubcategoriesPanel } from "@/components/awards/CategorySubcategoriesPanel";
 
 const CANONICAL = "https://nesa.africa/categories/political-leaders-education-nigeria";
 
@@ -758,6 +759,11 @@ export default function PoliticalLeadersNigeriaPage() {
           </p>
         </div>
       </section>
+
+      <CategorySubcategoriesPanel
+        formSlug="excellence-in-political-leadership-for-education-nigeria"
+        categoryTitle="Political Leadership for Education (Nigeria)"
+      />
     </div>
   );
 }
