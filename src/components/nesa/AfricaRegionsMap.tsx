@@ -112,10 +112,10 @@ export function AfricaRegionsMap() {
             <span className="text-sm font-medium text-gold">Continental Strategy</span>
           </motion.div>
           <h2 className="font-display text-3xl md:text-4xl font-bold text-white mb-4">
-            5 Regions, 5 Bridges, One Vision
+            8 Africa Regions, One Vision
           </h2>
           <p className="text-white/70 max-w-2xl mx-auto text-lg">
-            Connecting Africa's five regions through strategic objectives to achieve{" "}
+            Connecting Africa's eight regions through strategic objectives to achieve{" "}
             <span className="text-gold font-semibold">Education for All by 2035</span>
           </p>
         </div>
@@ -135,7 +135,7 @@ export function AfricaRegionsMap() {
               <svg
                 viewBox="80 30 340 460"
                 className="w-full max-w-lg h-auto relative z-10"
-                aria-label="Map of Africa showing 5 regions connected by bridges"
+                aria-label="Map of Africa showing 8 regions connected by strategic bridges"
               >
                 <defs>
                   {/* Gradient for regions */}

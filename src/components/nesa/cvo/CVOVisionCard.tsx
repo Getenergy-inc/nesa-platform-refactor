@@ -3,7 +3,7 @@ import { Target, Sparkles, Globe } from "lucide-react";
 
 const visionPillars = [
   { icon: Target, label: "Vision 2035", value: "Pan-African" },
-  { icon: Globe, label: "5 Regions", value: "+ Diaspora" },
+  { icon: Globe, label: "8 Regions", value: "+ Diaspora" },
   { icon: Sparkles, label: "Legacy", value: "Excellence" },
 ];
 

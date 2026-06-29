@@ -30,7 +30,7 @@ function buildUpdates(awardYear: number): UpdateItem[] {
       type: "nominees",
       icon: Users,
       title: "New Nominees Across Africa",
-      description: `EduAid-Africa Webinars are live — discover ${ceremonyYear} education champions across all 5 regions.`,
+      description: `EduAid-Africa Webinars are live — discover ${ceremonyYear} education champions across all 8 Africa regions.`,
       date: new Date().toISOString().split("T")[0],
       href: "/nominees",
       badge: "Live",

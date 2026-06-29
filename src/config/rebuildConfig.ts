@@ -23,7 +23,7 @@ export const REBUILD_MILESTONES: RebuildMilestone[] = [
   },
   {
     label: "Regional Public Voting",
-    description: "Shortlisted schools go to public voting across all five regions",
+    description: "Shortlisted schools go to public voting across all 8 Africa regions",
     date: "2026-12-01",
     displayDate: "December 2026",
     icon: Vote,
