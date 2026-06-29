@@ -24,12 +24,11 @@ import {
   TabsTrigger,
 } from "@/components/ui/tabs";
 import { StageGate } from "@/components/StageGate";
-import {
-  getCategoryFormBySlug,
-  type AwardCategoryForm,
-  type AwardCategoryRegion,
-} from "@/config/nomination";
-import type { NominationSubcategory } from "@/config/nomination/types";
+import { getCategoryFormBySlug } from "@/config/nomination/awardCategoryForms";
+import type {
+  AwardCategoryForm,
+  NominationSubcategory,
+} from "@/config/nomination/types";
 import { trackEvent } from "@/lib/analytics";
 
 interface Props {
