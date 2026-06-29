@@ -25,10 +25,10 @@ export default function EighteenCategoriesPage() {
         <link rel="canonical" href={`${SITE}/awards/18-categories`} />
       </Helmet>
       <BreadcrumbJsonLd
-        items={[
-          { name: "Home", url: SITE },
-          { name: "Awards", url: `${SITE}/awards` },
-          { name: "18 Award Categories", url: `${SITE}/awards/18-categories` },
+        crumbs={[
+          { name: "Home", path: "/" },
+          { name: "Awards", path: "/awards" },
+          { name: "18 Award Categories", path: "/awards/18-categories" },
         ]}
       />
 
