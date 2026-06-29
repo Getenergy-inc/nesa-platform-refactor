@@ -600,6 +600,18 @@ const App = () => (
                     }
                   />
                   <Route
+                    path="/awards/18-categories"
+                    element={
+                      <WithLayout>
+                        <EighteenCategoriesPage />
+                      </WithLayout>
+                    }
+                  />
+                  <Route
+                    path="/awards/gold-blue-garnet/categories"
+                    element={<Navigate to="/awards/18-categories" replace />}
+                  />
+                  <Route
                     path="/awards/blue-garnet-categories"
                     element={
                       <WithLayout>
