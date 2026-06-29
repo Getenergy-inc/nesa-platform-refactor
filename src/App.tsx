@@ -429,7 +429,7 @@ const App = () => (
                   <Route path="/category" element={<Navigate to="/categories" replace />} />
                   <Route path="/category/:slug" element={<SlugRedirect to={(s) => `/categories/${s}`} />} />
                   <Route path="/awards/category/:slug" element={<SlugRedirect to={(s) => `/awards/${s}`} />} />
-                  <Route path="/nominees/category/:slug" element={<SlugRedirect to={(s) => `/nominees/${s}`} />} />
+                  {/* /nominees/category/:categorySlug is handled by the canonical CategoryLandingPage route below */}
 
                   {/* Region legacy — /region is now an alias of canonical /regions */}
                   <Route path="/region/nigeria" element={<Navigate to="/regions/nigeria" replace />} />
