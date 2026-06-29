@@ -508,6 +508,14 @@ export function DynamicCategoryPage({ categoryTitle, nominationType, nominateCat
           </div>
         </section>
 
+        {/* Subcategories accordion + voting (GBG only) */}
+        {nominateCategorySlug && (
+          <CategorySubcategoriesPanel
+            formSlug={nominateCategorySlug}
+            categoryTitle={categoryTitle}
+          />
+        )}
+
         {/* See all nominees in this category — gateway to /nominees pre-filtered */}
         <section className="bg-charcoal py-10">
           <div className="container mx-auto px-4 max-w-5xl">
