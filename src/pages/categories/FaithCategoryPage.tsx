@@ -548,6 +548,15 @@ export function FaithCategoryPage({ config }: { config: FaithCategoryConfig }) {
             </Button>
           </div>
         </section>
+
+        <CategorySubcategoriesPanel
+          formSlug={
+            config.faith === "christian"
+              ? "excellence-in-christian-education-impact-africa-regional"
+              : "excellence-in-islamic-education-impact-africa-regional"
+          }
+          categoryTitle={config.pageTitle}
+        />
       </div>
     </>
   );
