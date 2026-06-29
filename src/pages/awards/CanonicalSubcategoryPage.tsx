@@ -20,6 +20,7 @@ import {
   FinalAwardCTA,
 } from "@/components/awards/standard/sections";
 import NativeCategoryNominationForm from "@/components/awards/NativeCategoryNominationForm";
+import { MissingFormFallback } from "@/components/awards/MissingFormFallback";
 import { Button } from "@/components/ui/button";
 
 export default function CanonicalSubcategoryPage() {
