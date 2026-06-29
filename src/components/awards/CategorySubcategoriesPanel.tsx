@@ -124,7 +124,7 @@ function RegionTabs({
             className="data-[state=active]:bg-gold data-[state=active]:text-charcoal"
           >
             <MapPin className="mr-1.5 h-3.5 w-3.5" />
-            {r.regionName}
+            {r.name}
           </TabsTrigger>
         ))}
       </TabsList>
@@ -135,7 +135,7 @@ function RegionTabs({
             categorySlug={r.slug}
             subcategories={r.subcategories}
             isGBG={isGBG}
-            regionLabel={r.regionName}
+            regionLabel={r.name}
           />
         </TabsContent>
       ))}
