@@ -156,7 +156,7 @@ export function GoldCertificateSection() {
                 <div className="flex items-center gap-2">
                   <Globe className="h-4 w-4 text-amber-400" />
                   <div>
-                    <p className="text-white font-bold text-sm">5 Regions</p>
+                    <p className="text-white font-bold text-sm">8 Regions</p>
                     <p className="text-white/50 text-xs">Continent-Wide</p>
                   </div>
                 </div>
