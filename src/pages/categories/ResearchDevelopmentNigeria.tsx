@@ -1227,6 +1227,11 @@ export default function ResearchDevelopmentNigeriaPage() {
           </p>
         </div>
       </section>
+
+      <CategorySubcategoriesPanel
+        formSlug="excellence-in-research-development-for-education-nigeria"
+        categoryTitle="Research & Development for Education (Nigeria)"
+      />
     </div>
   );
 }
