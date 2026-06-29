@@ -135,7 +135,7 @@ export function AfricaRegionsMap() {
               <svg
                 viewBox="80 30 340 460"
                 className="w-full max-w-lg h-auto relative z-10"
-                aria-label="Map of Africa showing 5 regions connected by bridges"
+                aria-label="Map of Africa showing 8 regions connected by strategic bridges"
               >
                 <defs>
                   {/* Gradient for regions */}
