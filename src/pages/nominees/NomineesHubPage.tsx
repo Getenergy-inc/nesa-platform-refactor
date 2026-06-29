@@ -404,6 +404,13 @@ export default function NomineesHubPage() {
         </Section>
 
         {/* ────────────────────────────────────────────────────────────────
+            SECTION 3b — SUBCATEGORY DIRECTORY (filterable)
+        ──────────────────────────────────────────────────────────────── */}
+        <Section id="subcategories" eyebrow="03b · 100+ Pathways" title="Subcategory Directory" sub="Search and filter every subcategory across the four NESA-Africa 2026 tiers. Each card opens the canonical subcategory page and a pre-selected nomination form.">
+          <SubcategoryDirectorySection />
+        </Section>
+
+        {/* ────────────────────────────────────────────────────────────────
             SECTION 5 — BROWSE BY RECOGNITION TIER (filter chips)
         ──────────────────────────────────────────────────────────────── */}
         <Section eyebrow="04 · Filter" title="Browse by Recognition Tier">
