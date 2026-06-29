@@ -138,6 +138,8 @@ import AwardsRegionPage from "./pages/awards/AwardsRegionPage";
 import PillarsHub from "./pages/awards/PillarsHub";
 import PillarPage from "./pages/awards/PillarPage";
 import AwardSpinePage from "./pages/awards/AwardSpinePage";
+import CanonicalCategoryPage from "./pages/awards/CanonicalCategoryPage";
+import CanonicalSubcategoryPage from "./pages/awards/CanonicalSubcategoryPage";
 
 import { ICON_CATEGORY, buildRedirectMap as buildCategoryRedirects } from "./config/awardCategories";
 
@@ -851,6 +853,9 @@ const App = () => (
                   <Route path="/awards/explore/:pathwaySlug" element={<WithLayout><AwardSpinePage /></WithLayout>} />
                   <Route path="/awards/explore/:pathwaySlug/:categorySlug" element={<WithLayout><AwardSpinePage /></WithLayout>} />
                   <Route path="/awards/explore/:pathwaySlug/:categorySlug/:subcategorySlug" element={<WithLayout><AwardSpinePage /></WithLayout>} />
+                  {/* Canonical category & subcategory spine — 4 tiers · 43 categories · 100+ subcategories */}
+                  <Route path="/awards/:tierSlug/category/:categorySlug" element={<WithLayout><CanonicalCategoryPage /></WithLayout>} />
+                  <Route path="/awards/:tierSlug/category/:categorySlug/:subcategorySlug" element={<WithLayout><CanonicalSubcategoryPage /></WithLayout>} />
 
                   <Route
                     path="/awards/csr-education"
