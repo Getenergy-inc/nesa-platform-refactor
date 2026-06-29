@@ -595,6 +595,11 @@ export default function InternationalEducationPage() {
           </Button>
         </div>
       </section>
+
+      <CategorySubcategoriesPanel
+        formSlug="excellence-in-international-partnership-for-education-africa"
+        categoryTitle="International & Bilateral Education Partnership"
+      />
     </div>
   );
 }
