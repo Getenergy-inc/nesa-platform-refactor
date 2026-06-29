@@ -24,6 +24,7 @@ import { PILLARS } from "@/data/pillars";
 import { RECOGNITION_TIERS_2026 } from "@/config/recognitionArchitecture2026";
 import { DIRECTORY_NAME, PRIMARY_CTAS, REGION_FRAMING, TRUST_STATEMENT } from "@/config/platformCopy";
 import { AfricaRegionExplorer } from "@/components/nominees/AfricaRegionExplorer";
+import DirectoryCategoryMatrix from "@/components/nominees/DirectoryCategoryMatrix";
 import { LandingNomineeCard } from "@/components/nesa/LandingNomineeCard";
 import { trackEvent } from "@/lib/analytics";
 
@@ -386,34 +387,8 @@ export default function NomineesHubPage() {
         {/* ────────────────────────────────────────────────────────────────
             SECTION 4 — BROWSE BY AWARD CATEGORY
         ──────────────────────────────────────────────────────────────── */}
-        <Section id="categories" eyebrow="03 · 18 Categories" title="Browse by Award Category" sub="Every category curates a verified roster of Education Enablers.">
-          {isLoading ? (
-            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-              {Array.from({ length: 6 }).map((_, i) => <Skeleton key={i} className="h-32 rounded-2xl bg-charcoal-light/50" />)}
-            </div>
-          ) : (
-            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-              {categoryCounts.length === 0 ? (
-                <p className="text-ivory/55 text-sm italic">Categories will populate as nominees are verified.</p>
-              ) : (
-                categoryCounts.slice(0, 18).map(([slug, info]) => (
-                  <Link
-                    key={slug}
-                    to={`/nominees?category=${slug}`}
-                    onClick={() => trackEvent("directory_category_click", { category: slug })}
-                    className="rounded-xl border border-gold/15 bg-charcoal-light/30 p-4 hover:border-gold/45 transition-all group"
-                  >
-                    <Award className="h-6 w-6 text-gold mb-2" />
-                    <h4 className="font-medium text-ivory text-sm mb-1">{info.name}</h4>
-                    <p className="text-xs text-ivory/55">{info.count} verified enablers</p>
-                    <span className="mt-3 inline-flex items-center gap-1 text-xs text-gold group-hover:gap-2 transition-all">
-                      Explore category <ArrowRight className="h-3 w-3" />
-                    </span>
-                  </Link>
-                ))
-              )}
-            </div>
-          )}
+        <Section id="categories" eyebrow="03 · 43 Categories · 100+ Subcategories" title="Browse the Canonical Recognition Architecture" sub="Every NESA-Africa 2026 category — grouped by tier — opens a dedicated page with embedded subcategory pathways and a nomination form.">
+          <DirectoryCategoryMatrix />
         </Section>
 
         {/* ────────────────────────────────────────────────────────────────
