@@ -20,6 +20,7 @@ import {
   FinalAwardCTA,
 } from "@/components/awards/standard/sections";
 import NativeCategoryNominationForm from "@/components/awards/NativeCategoryNominationForm";
+import { MissingFormFallback } from "@/components/awards/MissingFormFallback";
 import { Button } from "@/components/ui/button";
 
 export default function CanonicalSubcategoryPage() {
@@ -131,21 +132,12 @@ export default function CanonicalSubcategoryPage() {
           </div>
         </section>
       ) : (
-        <section className="py-16 bg-charcoal-light/30 border-y border-gold/15">
-          <div className="container mx-auto max-w-2xl px-4 text-center">
-            <h2 className="font-playfair text-2xl text-gold mb-3">
-              Nominations Opening Soon
-            </h2>
-            <p className="text-ivory/70 mb-6">
-              The dedicated nomination form for {subName} will publish ahead of
-              the 2026 nomination window. Use the button below to register
-              your nomination through the unified intake.
-            </p>
-            <Button asChild className="bg-gold text-charcoal hover:bg-gold/90">
-              <Link to={nominateHref}>Begin Nomination</Link>
-            </Button>
-          </div>
-        </section>
+        <MissingFormFallback
+          contextLabel={subName}
+          tierLabel={tier.shortLabel}
+          tierHref={tier.url}
+          fallbackNominateHref={nominateHref}
+        />
       )}
 
       <FinalAwardCTA

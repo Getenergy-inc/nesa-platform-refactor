@@ -21,6 +21,7 @@ import {
   FinalAwardCTA,
 } from "@/components/awards/standard/sections";
 import CategorySubcategoriesPanel from "@/components/awards/CategorySubcategoriesPanel";
+import { MissingFormFallback } from "@/components/awards/MissingFormFallback";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 
@@ -94,56 +95,48 @@ export default function CanonicalCategoryPage() {
         trustLine={`Reviewed by the NRC · Aligned to SDG 4 · ${tier.tagline}`}
       />
 
-      {/* Embedded subcategories + nomination panel */}
+      {/* Embedded subcategories + nomination panel (or fallback) */}
       {form ? (
         <CategorySubcategoriesPanel formSlug={form.slug} categoryTitle={category.name} />
       ) : (
-        <section className="py-12 md:py-16 bg-charcoal border-y border-gold/15">
-          <div className="container mx-auto max-w-4xl px-4">
-            <Badge variant="outline" className="border-gold/40 text-gold mb-3">
-              Subcategories
-            </Badge>
-            <h2 className="font-playfair text-2xl sm:text-3xl text-gold mb-4">
-              {category.name} — Recognition Lanes
-            </h2>
-            {category.subcategories.length > 0 ? (
-              <ul className="grid sm:grid-cols-2 gap-3">
-                {category.subcategories.map((s) => (
-                  <li key={s.slug}>
-                    <Link
-                      to={`/awards/${tier.slug}/category/${category.slug}/${s.slug}`}
-                      className="block rounded-xl border border-gold/20 bg-charcoal-light/40 p-4 hover:border-gold/50 transition-all group"
-                    >
-                      <h3 className="text-ivory font-medium mb-1">{s.name}</h3>
-                      {s.description && (
-                        <p className="text-ivory/60 text-sm">{s.description}</p>
-                      )}
-                      <span className="mt-3 inline-flex items-center gap-1 text-xs text-gold group-hover:gap-2 transition-all">
-                        View subcategory <ArrowRight className="h-3 w-3" />
-                      </span>
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            ) : (
-              <p className="text-ivory/60 text-sm">
-                Subcategory lanes for {category.name} will publish ahead of the
-                2026 nomination window. Use the button below to register interest
-                or browse related recognition tiers.
-              </p>
-            )}
-            <div className="mt-6 flex flex-wrap gap-3">
-              <Button asChild className="bg-gold text-charcoal hover:bg-gold/90">
-                <Link to={`/nominate?tier=${tier.slug}&category=${category.slug}`}>
-                  Begin Nomination
-                </Link>
-              </Button>
-              <Button asChild variant="outline" className="border-gold/40 text-gold hover:bg-gold/10">
-                <Link to={tier.url}>Back to {tier.shortLabel}</Link>
-              </Button>
-            </div>
-          </div>
-        </section>
+        <>
+          {category.subcategories.length > 0 && (
+            <section className="py-12 md:py-16 bg-charcoal border-y border-gold/15">
+              <div className="container mx-auto max-w-4xl px-4">
+                <Badge variant="outline" className="border-gold/40 text-gold mb-3">
+                  Subcategories
+                </Badge>
+                <h2 className="font-playfair text-2xl sm:text-3xl text-gold mb-4">
+                  {category.name} — Recognition Lanes
+                </h2>
+                <ul className="grid sm:grid-cols-2 gap-3">
+                  {category.subcategories.map((s) => (
+                    <li key={s.slug}>
+                      <Link
+                        to={`/awards/${tier.slug}/category/${category.slug}/${s.slug}`}
+                        className="block rounded-xl border border-gold/20 bg-charcoal-light/40 p-4 hover:border-gold/50 transition-all group"
+                      >
+                        <h3 className="text-ivory font-medium mb-1">{s.name}</h3>
+                        {s.description && (
+                          <p className="text-ivory/60 text-sm">{s.description}</p>
+                        )}
+                        <span className="mt-3 inline-flex items-center gap-1 text-xs text-gold group-hover:gap-2 transition-all">
+                          View subcategory <ArrowRight className="h-3 w-3" />
+                        </span>
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </section>
+          )}
+          <MissingFormFallback
+            contextLabel={category.name}
+            tierLabel={tier.shortLabel}
+            tierHref={tier.url}
+            fallbackNominateHref={`/nominate?tier=${tier.slug}&category=${category.slug}`}
+          />
+        </>
       )}
 
       <FinalAwardCTA
