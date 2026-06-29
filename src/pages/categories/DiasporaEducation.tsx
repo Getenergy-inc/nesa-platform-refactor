@@ -35,6 +35,7 @@ import {
   DialogDescription,
 } from "@/components/ui/dialog";
 import { BreadcrumbJsonLd } from "@/components/seo/BreadcrumbJsonLd";
+import { CategorySubcategoriesPanel } from "@/components/awards/CategorySubcategoriesPanel";
 import {
   NOMINEES_BY_REGION,
   SUBCATEGORIES,
