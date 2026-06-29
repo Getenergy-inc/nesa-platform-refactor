@@ -26,6 +26,9 @@ import { DIRECTORY_NAME, PRIMARY_CTAS, REGION_FRAMING, TRUST_STATEMENT } from "@
 import { AfricaRegionExplorer } from "@/components/nominees/AfricaRegionExplorer";
 import DirectoryCategoryMatrix from "@/components/nominees/DirectoryCategoryMatrix";
 import { LandingNomineeCard } from "@/components/nesa/LandingNomineeCard";
+import { IntegrityNotice } from "@/components/awards/IntegrityNotice";
+import { NominationGuidanceSection } from "@/components/nominees/NominationGuidanceSection";
+import { SubcategoryDirectorySection } from "@/components/nominees/SubcategoryDirectorySection";
 import { trackEvent } from "@/lib/analytics";
 
 // ---------------------------------------------------------------------------
