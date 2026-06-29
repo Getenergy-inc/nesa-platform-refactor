@@ -386,7 +386,7 @@ export default function NomineesHubPage() {
         {/* ────────────────────────────────────────────────────────────────
             SECTION 4 — BROWSE BY AWARD CATEGORY
         ──────────────────────────────────────────────────────────────── */}
-        <Section id="categories" eyebrow="03 · 18 Categories" title="Browse by Award Category" sub="Every category curates a verified roster of Education Enablers.">
+        <Section id="categories" eyebrow={`03 · ${categoryCounts.length || 18} Categories`} title="Browse by Award Category" sub="Every category curates a verified roster of Education Enablers. Click any card to open its dedicated page.">
           {isLoading ? (
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
               {Array.from({ length: 6 }).map((_, i) => <Skeleton key={i} className="h-32 rounded-2xl bg-charcoal-light/50" />)}
@@ -396,12 +396,13 @@ export default function NomineesHubPage() {
               {categoryCounts.length === 0 ? (
                 <p className="text-ivory/55 text-sm italic">Categories will populate as nominees are verified.</p>
               ) : (
-                categoryCounts.slice(0, 18).map(([slug, info]) => (
+                categoryCounts.map(([slug, info]) => (
                   <Link
                     key={slug}
-                    to={`/nominees?category=${slug}`}
+                    to={`/nominees/category/${slug}`}
                     onClick={() => trackEvent("directory_category_click", { category: slug })}
-                    className="rounded-xl border border-gold/15 bg-charcoal-light/30 p-4 hover:border-gold/45 transition-all group"
+                    className="rounded-xl border border-gold/15 bg-charcoal-light/30 p-4 hover:border-gold/45 hover:bg-charcoal-light/50 transition-all group focus:outline-none focus:ring-2 focus:ring-gold/60"
+                    aria-label={`Explore ${info.name} category page`}
                   >
                     <Award className="h-6 w-6 text-gold mb-2" />
                     <h4 className="font-medium text-ivory text-sm mb-1">{info.name}</h4>
