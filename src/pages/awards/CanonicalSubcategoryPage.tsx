@@ -46,7 +46,6 @@ export default function CanonicalSubcategoryPage() {
   const subName = archSub?.name ?? formSub?.name ?? subcategorySlug;
   const subDescription =
     archSub?.description ??
-    formSub?.exampleNominees?.slice(0, 1).join(" · ") ??
     `${subName} — a recognition lane within ${category.name}.`;
 
   // If the subcategory does not exist in either source, send the user back.
@@ -150,10 +149,11 @@ export default function CanonicalSubcategoryPage() {
       )}
 
       <FinalAwardCTA
-        title={`Champion ${subName}`}
-        lead={`Your nomination strengthens Africa's largest verified roster of Education Enablers under ${tier.fullName}.`}
-        primary={{ label: "Start Nomination", href: nominateHref }}
-        secondary={{
+        pageSlug={`${tier.slug}-${category.slug}-${subcategorySlug}`}
+        heading={`Champion ${subName}`}
+        body={`Your nomination strengthens Africa's largest verified roster of Education Enablers under ${tier.fullName}.`}
+        primaryCta={{ label: "Start Nomination", href: nominateHref }}
+        secondaryCta={{
           label: `Explore ${category.name}`,
           href: `/awards/${tier.slug}/category/${category.slug}`,
         }}

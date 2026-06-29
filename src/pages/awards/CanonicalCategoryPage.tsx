@@ -147,15 +147,16 @@ export default function CanonicalCategoryPage() {
       )}
 
       <FinalAwardCTA
-        title={`Nominate a leader for ${category.name}`}
-        lead={`Recognition under ${tier.fullName} reaches verified Education Enablers, jury members and policy stakeholders across Africa.`}
-        primary={{
+        pageSlug={`${tier.slug}-${category.slug}`}
+        heading={`Nominate a leader for ${category.name}`}
+        body={`Recognition under ${tier.fullName} reaches verified Education Enablers, jury members and policy stakeholders across Africa.`}
+        primaryCta={{
           label: "Start Nomination",
           href: form
             ? `/nominate?form=${form.slug}`
             : `/nominate?tier=${tier.slug}&category=${category.slug}`,
         }}
-        secondary={{ label: "Africa's Education Impact Directory", href: "/nominees" }}
+        secondaryCta={{ label: "Africa's Education Impact Directory", href: "/nominees" }}
       />
     </>
   );
