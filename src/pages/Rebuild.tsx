@@ -249,14 +249,14 @@ export default function Rebuild() {
           </div>
         </section>
 
-        {/* ── Five Regions Awaiting Nominations ── */}
+        {/* ── Eight Regions Awaiting Nominations ── */}
         <section id="nominate" className="py-16 md:py-20" style={{ borderBottom: `1px solid hsla(210, 20%, 90%, 0.1)` }}>
           <div className="container mx-auto px-4">
             <div className="text-center mb-10">
               <h2 className="text-3xl md:text-4xl font-display font-bold mb-3"
                 style={{ color: `hsl(210, 20%, 95%)` }}
               >
-                Five Regions, <span style={{ color: `hsl(42, 85%, 52%)` }}>Five Schools</span>
+                8 Regions, <span style={{ color: `hsl(42, 85%, 52%)` }}>8 Schools</span>
               </h2>
               <p className="max-w-xl mx-auto" style={{ color: `hsla(210, 20%, 90%, 0.6)` }}>
                 Schools will be nominated and voted on after the NESA-Africa 2026 ceremony. One winning school per region receives a full EduAid-Africa intervention.

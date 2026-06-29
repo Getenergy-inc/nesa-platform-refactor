@@ -93,7 +93,7 @@ export default function Chapters() {
               NESA-Africa <span className="text-gold">Country Chapters</span>
             </h1>
             <p className="text-xl text-white/70 mb-8">
-              30 country chapters across 5 regions, working together to celebrate 
+              30 country chapters across 15 regions world wide, working together to celebrate 
               education enablers in every corner of Africa.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
