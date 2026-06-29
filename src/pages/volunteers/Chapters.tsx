@@ -48,14 +48,14 @@ export default function Chapters() {
       <section className="relative py-20 px-4 text-center bg-gradient-to-b from-black to-charcoal border-b border-gold/20">
         <motion.div initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }}>
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-gold/10 border border-gold/30 text-gold text-xs uppercase tracking-widest mb-4">
-            <Globe2 className="h-3 w-3" /> Pan-African Network
+            <Globe2 className="h-3 w-3" /> 15 Regions · 8 Africa · 7 Global
           </div>
           <h1 className="font-playfair text-4xl md:text-6xl text-gold mb-4">
             NESA-Africa Chapters
           </h1>
           <p className="text-white/70 max-w-2xl mx-auto mb-8">
-            Local communities of educators, students, volunteers, and partners
-            advancing the African education movement region by region.
+            Local communities of educators, students, volunteers, and partners advancing the
+            African education movement across 8 African regions and 7 global diaspora regions.
           </p>
           <div className="flex flex-wrap justify-center gap-3">
             <Button asChild size="lg" className="bg-gold text-charcoal hover:bg-gold/90">
@@ -70,34 +70,45 @@ export default function Chapters() {
         </motion.div>
       </section>
 
-      <section className="container mx-auto max-w-6xl px-4 py-16">
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
-          {REGIONS.map((r, i) => (
-            <motion.div
-              key={r.slug}
-              initial={{ opacity: 0, y: 14 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: i * 0.04 }}
-              className="rounded-2xl border border-gold/20 bg-white/[0.03] p-6 hover:border-gold/50 transition"
-            >
-              <div className="flex items-start justify-between mb-3">
-                <div className="h-10 w-10 rounded-lg bg-gold/10 flex items-center justify-center">
-                  <MapPin className="h-5 w-5 text-gold" />
-                </div>
-                <Users className="h-4 w-4 text-white/40" />
-              </div>
-              <h3 className="font-playfair text-xl text-gold mb-1">{r.name}</h3>
-              <p className="text-xs text-white/50 mb-4">{r.countries}</p>
-              <Link
-                to={`/join-local-chapter?region=${r.slug}`}
-                className="inline-flex items-center gap-1 text-sm text-gold hover:text-gold/80"
-              >
-                Explore <ArrowRight className="h-3.5 w-3.5" />
-              </Link>
-            </motion.div>
-          ))}
-        </div>
+      <section className="container mx-auto max-w-6xl px-4 py-16 space-y-16">
+        {[
+          { title: "8 Africa Regions", subtitle: "Continental chapters covering every sub-region of Africa.", items: AFRICA_REGIONS },
+          { title: "7 Global Regions", subtitle: "Diaspora and Friends of Africa chapters beyond the continent.", items: GLOBAL_REGIONS },
+        ].map((group) => (
+          <div key={group.title}>
+            <div className="mb-6">
+              <h2 className="font-playfair text-2xl md:text-3xl text-gold">{group.title}</h2>
+              <p className="text-white/60 text-sm mt-1">{group.subtitle}</p>
+            </div>
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+              {group.items.map((r, i) => (
+                <motion.div
+                  key={r.slug}
+                  initial={{ opacity: 0, y: 14 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: i * 0.04 }}
+                  className="rounded-2xl border border-gold/20 bg-white/[0.03] p-6 hover:border-gold/50 transition"
+                >
+                  <div className="flex items-start justify-between mb-3">
+                    <div className="h-10 w-10 rounded-lg bg-gold/10 flex items-center justify-center">
+                      <MapPin className="h-5 w-5 text-gold" />
+                    </div>
+                    <Users className="h-4 w-4 text-white/40" />
+                  </div>
+                  <h3 className="font-playfair text-xl text-gold mb-1">{r.name}</h3>
+                  <p className="text-xs text-white/50 mb-4">{r.countries}</p>
+                  <Link
+                    to={`/join-local-chapter?region=${r.slug}`}
+                    className="inline-flex items-center gap-1 text-sm text-gold hover:text-gold/80"
+                  >
+                    Explore <ArrowRight className="h-3.5 w-3.5" />
+                  </Link>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        ))}
       </section>
     </div>
   );
