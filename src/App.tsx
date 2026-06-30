@@ -87,6 +87,7 @@ import EarnVotingCoins from "./pages/EarnVotingCoins";
 
 // Award Pages
 import PlatinumAward from "./pages/awards/PlatinumAward";
+import PlatinumDiasporaPage from "./pages/awards/PlatinumDiasporaPage";
 import IconAward from "./pages/awards/IconAward";
 import GoldAward from "./pages/awards/GoldAward";
 import BlueGarnetAward from "./pages/awards/BlueGarnetAward";
