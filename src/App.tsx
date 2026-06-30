@@ -87,6 +87,7 @@ import EarnVotingCoins from "./pages/EarnVotingCoins";
 
 // Award Pages
 import PlatinumAward from "./pages/awards/PlatinumAward";
+import PlatinumDiasporaPage from "./pages/awards/PlatinumDiasporaPage";
 import IconAward from "./pages/awards/IconAward";
 import GoldAward from "./pages/awards/GoldAward";
 import BlueGarnetAward from "./pages/awards/BlueGarnetAward";
@@ -718,6 +719,8 @@ const App = () => (
                   <Route path="/awards/recognition-architecture" element={<Navigate to="/awards" replace />} />
                   <Route path="/awards/gold-blue-garnet" element={<WithLayout><BlueGarnetAward /></WithLayout>} />
                   <Route path="/awards/platinum-recognition" element={<WithLayout><PlatinumAward /></WithLayout>} />
+                  <Route path="/awards/platinum-recognition/diaspora" element={<WithLayout><PlatinumDiasporaPage /></WithLayout>} />
+                  <Route path="/awards/platinum/diaspora" element={<Navigate to="/awards/platinum-recognition/diaspora" replace />} />
                   <Route path="/awards/influencer-education-impact" element={<InfluencerImpact2026 />} />
 
                   {/* Legacy shell — keep importable from other entry points */}
