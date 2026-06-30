@@ -1,7 +1,7 @@
 import { Toaster } from "@/components/ui/toaster";
 import { useEffect } from "react";
 import Nominees from "./pages/Nominees";
-import NomineeProfile from "./pages/NomineeProfile";
+
 import NomineeSlugDispatcher from "./pages/nominees/NomineeSlugDispatcher";
 import CategoryLandingPage from "./pages/nominees/CategoryLandingPage";
 import SubcategoryPage from "./pages/nominees/SubcategoryPage";
