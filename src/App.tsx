@@ -1483,7 +1483,7 @@ const App = () => (
                     path="/nominees/:slug"
                     element={
                       <WithLayout>
-                        <NomineeProfile />
+                        <NomineeSlugDispatcher />
                       </WithLayout>
                     }
                   />
