@@ -98,6 +98,12 @@ export function NESALandingPage() {
         {/* 2. COUNTDOWN — Blue-Garnet Awards Gala, 22 Oct 2026, Lagos */}
         <CountdownSection />
 
+        {/* 2b. CALL FOR NOMINATIONS — Africa Education Icon Award (Lifetime 2006–2026) */}
+        <LazySection>
+          <CallForNominationIconAward />
+        </LazySection>
+
+
         {/* 3. THE ROAD TO NESA-AFRICA 2026 — pre-opening moments */}
         <LazySection>
           <HomepageGalleryTeaser />
