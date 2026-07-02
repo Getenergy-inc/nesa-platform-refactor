@@ -246,7 +246,7 @@ export function buildTimeline(
       phase: "Phase 1 · Public Pre-Nomination Activation",
       dateRange: `1 – 30 July ${ceremonyYear}`,
       description:
-        "Continental awareness campaign introducing NESA-Africa 2026. Volunteer recruitment, nomination education, regional media tours and daily social campaigns invite citizens to identify Education Enablers before official nominations open. Weekly programme: NESA Africa Weekly News every Friday in July.",
+        "Continental awareness campaign introducing NESA-Africa 2026. Volunteer recruitment, nomination education, regional media tours and daily social campaigns invite citizens to identify Education Enablers before official nominations open.",
       type: "awareness",
       isActive: true,
     },
@@ -255,7 +255,7 @@ export function buildTimeline(
       phase: "Phase 2 · Independent Jury Onboarding",
       dateRange: `29 June – 10 September ${ceremonyYear}`,
       description:
-        "Independent judging panels are prepared to safeguard the integrity of the recognition process — jury interviews, governance features and transparency campaigns run alongside NESA Africa Weekly News.",
+        "Independent judging panels prepared to safeguard the integrity of the recognition process — jury interviews, governance features and transparency campaigns.",
       type: "recognition",
     },
     {
@@ -263,8 +263,24 @@ export function buildTimeline(
       phase: "Phase 3 · Africa Education Icon Nominations",
       dateRange: `27 July – 12 September ${ceremonyYear}`,
       description:
-        "Nomination window for Africa's highest lifetime recognition celebrating transformational Education Enablers (2006–2026). Weekly programme: Nominee Spotlight, Education Stories and NESA Africa Weekly News.",
+        "Nomination window for Africa's highest lifetime recognition celebrating transformational Education Enablers (2006–2026).",
       type: "recognition",
+    },
+    {
+      id: "weekly-webinars",
+      phase: "Weekly EduAid-Africa Webinar Series",
+      dateRange: `3 August – 15 September ${ceremonyYear}`,
+      description:
+        "Seven-week continental webinar series — one live webinar every week from August to mid-September covering Influencer Impact, Africa Education Icon, Gold–Blue Garnet Categories I–III, Platinum Excellence and Why Your Vote Matters.",
+      type: "awareness",
+    },
+    {
+      id: "weekly-news",
+      phase: "NESA-Africa Weekly News",
+      dateRange: `Every Friday · July – October ${ceremonyYear}`,
+      description:
+        "Weekly Friday news broadcast tracking nominations, jury updates, regional stories, sponsor features and public voting momentum across the full campaign cycle.",
+      type: "awareness",
     },
     {
       id: "platinum-showcase",
@@ -273,14 +289,6 @@ export function buildTimeline(
       description:
         "EduAid-Africa Week 1 event — celebrating Influencer Education Impact (Sports, Music and Social Media icons supporting education).",
       type: "recognition",
-    },
-    {
-      id: "eduaid-webinars",
-      phase: "EduAid-Africa Continental Webinar Series",
-      dateRange: `3 August – 15 September ${ceremonyYear}`,
-      description:
-        "Seven-week public education framework preparing Africa for recognition and public voting: Influencer Impact · Africa Education Icon · Gold–Blue Garnet Categories I–III · Platinum Excellence · Why Your Vote Matters.",
-      type: "awareness",
     },
     {
       id: "icon-showcase",
@@ -314,11 +322,19 @@ export function buildTimeline(
       type: "recognition",
     },
     {
+      id: "daily-momentum",
+      phase: "Daily Continental Momentum Campaign",
+      dateRange: `16 September – 21 October ${ceremonyYear}`,
+      description:
+        "Daily activations across the continent — nominee spotlights, regional stories, sponsor features, social takeovers and NESA Africa TV live broadcasts every day for six weeks leading into the Gala.",
+      type: "awareness",
+    },
+    {
       id: "phase-5-momentum",
       phase: "Phase 5 · Continental Momentum Campaign",
       dateRange: `16 September – 21 October ${ceremonyYear}`,
       description:
-        "Six weeks of continent-wide visibility — weekly EduAid webinars (Education Innovation · CSR Partnerships · Higher Education · Creative Arts & Media · Inclusive Education · Recognition→Impact→Legacy), Friday NESA Africa Weekly News, daily nominee spotlights, regional stories, sponsor features and NESA Africa TV live broadcasts.",
+        "Six weeks of continent-wide visibility combining weekly EduAid webinars (Education Innovation · CSR Partnerships · Higher Education · Creative Arts & Media · Inclusive Education · Recognition→Impact→Legacy), Friday NESA-Africa Weekly News and daily momentum activations.",
       type: "awareness",
     },
     {
@@ -335,7 +351,7 @@ export function buildTimeline(
       phase: "Phase 7 · Gold–Blue Garnet Awards Gala",
       dateRange: `22 October ${ceremonyYear}`,
       description:
-        "Africa's flagship education recognition ceremony celebrating the continent's leading Education Enablers across 8 Africa Regions, the African Diaspora and Friends of Africa.",
+        "Africa's flagship education recognition ceremony on 22 October 2026 celebrating the continent's leading Education Enablers across 8 Africa Regions, the African Diaspora and Friends of Africa.",
       type: "gala",
     },
     {
