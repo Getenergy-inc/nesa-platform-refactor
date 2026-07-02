@@ -56,6 +56,31 @@ const iconCategories = [
   },
 ];
 
+/* ──────────────── BLUE GARNET: CSR & EDTECH ──────────────── */
+const corporateCategories = [
+  {
+    icon: HeartHandshake,
+    title: "Best CSR for Education in Africa",
+    subtitle: "Blue Garnet Award 2026",
+    body:
+      "Companies changing classrooms across Africa! Your CSR programme is building schools, funding scholarships, training teachers, or providing digital learning tools. This is your moment to be recognised continent-wide. Whether you are a bank, telco, oil & gas, manufacturing, or FMCG company — if you are investing in education, we want to celebrate you.",
+    nominateLink: "/nominate?award=csr-education-africa",
+    learnMoreLink: "/awards/blue-garnet-categories/csr-education-africa",
+    eventLabel: "Nominate CSR",
+  },
+  {
+    icon: Cpu,
+    title: "Best EdTech & STEM Innovation for Education",
+    subtitle: "Blue Garnet Award 2026",
+    body:
+      "The future of African education is digital. If your platform, app, coding academy, STEM programme, or EdTech solution is transforming how African children and youth learn — this award is for you. From rural classrooms to urban innovation hubs, we are looking for the boldest EdTech and STEM initiatives making real impact.",
+    nominateLink: "/nominate?award=edutech-africa",
+    learnMoreLink: "/awards/blue-garnet-categories/edutech-africa",
+    eventLabel: "Nominate EdTech",
+  },
+];
+
+
 /* ──────────────── INFLUENCERS (Certificate of Recognition 2026) ──────────────── */
 const influencerCategories = [
   {
