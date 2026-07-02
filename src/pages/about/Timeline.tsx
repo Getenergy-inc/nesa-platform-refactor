@@ -59,7 +59,7 @@ export default function Timeline() {
         <title>NESA-Africa 2026 Recognition Journey | Continental Roadmap</title>
         <meta
           name="description"
-          content="The official 2026 recognition journey for NESA-Africa — 12 phases from public pre-nomination activation to the Gold-Blue Garnet Awards Gala and the Recognition → Impact → Legacy phase."
+          content="The official 2026 recognition journey for NESA-Africa — 13 phases from public pre-nomination activation to the Gold-Blue Garnet Awards Gala, the Recognition → Impact → Legacy phase and the continuous Media & EduAid-Africa engagement track."
         />
         <link rel="canonical" href="https://nesaafrica.lovable.app/about/timeline" />
       </Helmet>
@@ -124,7 +124,7 @@ export default function Timeline() {
       {/* TIMELINE */}
       <section className="container mx-auto px-4 py-20">
         <RecognitionJourneyTimeline
-          heading="The 12 Phases of the 2026 Journey"
+          heading="The 13 Phases of the 2026 Journey"
           intro="From continental activation to recognition, gala and a year-long impact and legacy phase. Every milestone is designed to convert visibility into measurable education impact."
         />
       </section>

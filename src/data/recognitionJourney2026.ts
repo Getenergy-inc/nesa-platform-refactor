@@ -349,7 +349,52 @@ export const RECOGNITION_JOURNEY_2026: JourneyPhase[] = [
     ],
     ctas: [{ label: "See Our Impact Programmes", to: "/programs" }],
   },
+  {
+    id: "media-continuous-engagement",
+    number: 13,
+    name: "Continuous Media & EduAid-Africa Engagement",
+    shortName: "Media & Webinar Engagement",
+    dateRange: "July – October 2026 (parallel operational track)",
+    startsAt: "2026-07-01T00:00:00Z",
+    endsAt: "2026-10-22T23:59:59Z",
+    status: "current",
+    tier: "Cross-Tier",
+    iconName: "Tv",
+    accent: "blue",
+    purpose:
+      "Sustain continental momentum between milestones through a Media Department operational calendar — a 7-week EduAid-Africa Webinar Series (thematic focus group discussions uniting award categories), weekly news, TV programming and daily social engagement that mobilises nominees, sponsors, partners, volunteers and the general public.",
+    description:
+      "Runs alongside the 12-phase Recognition Journey as the continuous engagement layer. Each Tuesday webinar convenes the award categories under a shared weekly theme so that nominees, judges, sponsors and audiences co-create the collaborative strategy, momentum and endorsement narrative for that theme. Weekly news, focus group discussions, regional TV reports, NESA-Africa TV Live and daily social sessions maintain visibility from launch through the Awards Gala.",
+    participants: [
+      "Media Team & TV Presenters",
+      "Nominees & Award Categories",
+      "Judges & Category Chairs",
+      "Sponsors & Partners",
+      "Volunteers & Ambassadors",
+      "Diaspora & Friends of Africa",
+      "General Public",
+    ],
+    activities: [
+      "EduAid-Africa Webinar Series — every Tuesday, 3 August – 15 September 2026 (7 thematic weeks uniting award categories via focus group discussions)",
+      "EduAid Focus Group Discussions — weekly (August – September 2026) for nominee engagement and stakeholder dialogue",
+      "NESA-Africa Weekly News — every Friday (July – October 2026) covering the entire recognition campaign",
+      "Regional TV Reports — weekly across all eight African regions, Diaspora and Friends of Africa",
+      "NESA-Africa TV Live — daily during major events (recognition shows, voting campaigns, Awards Gala)",
+      "Social Media Live Sessions — daily public engagement, nominee spotlights and countdowns",
+    ],
+    outcomes: [
+      "Collaborative strategy across award categories per weekly theme",
+      "Sustained momentum, endorsements and sponsor activation",
+      "Continental storytelling archive for the Media Team",
+      "Higher nominee visibility and public voting turnout",
+    ],
+    ctas: [
+      { label: "Watch the Webinar Series", to: "/media/webinars" },
+      { label: "Explore the Media Hub", to: "/media" },
+    ],
+  },
 ];
+
 
 export const STATUS_LABELS: Record<JourneyStatus, string> = {
   completed: "Completed",
