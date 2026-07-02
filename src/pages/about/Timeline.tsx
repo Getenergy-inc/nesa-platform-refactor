@@ -124,7 +124,7 @@ export default function Timeline() {
       {/* TIMELINE */}
       <section className="container mx-auto px-4 py-20">
         <RecognitionJourneyTimeline
-          heading="The 12 Phases of the 2026 Journey"
+          heading="The 13 Phases of the 2026 Journey"
           intro="From continental activation to recognition, gala and a year-long impact and legacy phase. Every milestone is designed to convert visibility into measurable education impact."
         />
       </section>
