@@ -242,54 +242,52 @@ export function buildTimeline(
 
   return [
     {
-      id: "kickoff",
-      phase: "Public Pre-Nomination Activation",
+      id: "phase-1-pre-nomination",
+      phase: "Phase 1 · Public Pre-Nomination Activation",
       dateRange: `1 – 30 July ${ceremonyYear}`,
       description:
-        "Early public engagement — pre-nomination forms, graphics, and a weekly storytelling calendar invite Gen Z audiences across Africa, the diaspora and friends of Africa to surface education changemakers before official nominations open.",
+        "Continental awareness campaign introducing NESA-Africa 2026. Volunteer recruitment, nomination education, regional media tours and daily social campaigns invite citizens to identify Education Enablers before official nominations open. Weekly programme: NESA Africa Weekly News every Friday in July.",
       type: "awareness",
       isActive: true,
     },
     {
-      id: "webinars",
-      phase: "EduAid-Africa Webinars",
-      dateRange: `July – Oct ${ceremonyYear}`,
-      description: "Public education series on SDG 4, CSR, STEM, inclusion, and NESA standards.",
+      id: "phase-2-jury-onboarding",
+      phase: "Phase 2 · Independent Jury Onboarding",
+      dateRange: `29 June – 10 September ${ceremonyYear}`,
+      description:
+        "Independent judging panels are prepared to safeguard the integrity of the recognition process — jury interviews, governance features and transparency campaigns run alongside NESA Africa Weekly News.",
+      type: "recognition",
+    },
+    {
+      id: "phase-3-icon-nominations",
+      phase: "Phase 3 · Africa Education Icon Nominations",
+      dateRange: `27 July – 12 September ${ceremonyYear}`,
+      description:
+        "Nomination window for Africa's highest lifetime recognition celebrating transformational Education Enablers (2006–2026). Weekly programme: Nominee Spotlight, Education Stories and NESA Africa Weekly News.",
+      type: "recognition",
+    },
+    {
+      id: "platinum-showcase",
+      phase: "Platinum Recognition Showcase",
+      dateRange: `7 August ${ceremonyYear}`,
+      description:
+        "EduAid-Africa Week 1 event — celebrating Influencer Education Impact (Sports, Music and Social Media icons supporting education).",
+      type: "recognition",
+    },
+    {
+      id: "eduaid-webinars",
+      phase: "EduAid-Africa Continental Webinar Series",
+      dateRange: `3 August – 15 September ${ceremonyYear}`,
+      description:
+        "Seven-week public education framework preparing Africa for recognition and public voting: Influencer Impact · Africa Education Icon · Gold–Blue Garnet Categories I–III · Platinum Excellence · Why Your Vote Matters.",
       type: "awareness",
     },
     {
-      id: "jury-onboarding",
-      phase: "Jury Onboarding",
-      dateRange: `29 June – 10 September ${ceremonyYear}`,
-      description: "Orientation, governance review, conflict-of-interest guidance and scoring calibration for selected jury members.",
-      type: "recognition",
-    },
-    {
-      id: "icon-nominations",
-      phase: "Africa Education Icon Nominations Open",
-      dateRange: `27 July – 12 September ${ceremonyYear}`,
-      description: "Two-month nomination window for Africa Education Icon — Lifetime Achievement (2006–2026).",
-      type: "recognition",
-    },
-    {
-      id: "platinum-show",
-      phase: "Platinum Recognition Show",
-      dateRange: `7 August ${ceremonyYear}`,
-      description: "Launches the public season with baseline recognition of institutional and leadership impact across education.",
-      type: "recognition",
-    },
-    {
-      id: "gold-close",
-      phase: "Gold Certificate Nominations Close",
-      dateRange: `10 August ${ceremonyYear}`,
-      description: "Final deadline for Influencers Education Impact Award entries before voting and category review.",
-      type: "deadline",
-    },
-    {
-      id: "icon-show",
-      phase: "Africa Education Icon Show",
+      id: "icon-showcase",
+      phase: "Africa Education Icon Showcase",
       dateRange: `21 August ${ceremonyYear}`,
-      description: "Honours transformational leaders whose work has shaped African education over the past two decades.",
+      description:
+        "EduAid-Africa Week 3 recognition event honouring two decades of educational leadership across Philanthropy, Literacy and Technical Education.",
       type: "recognition",
     },
     {
@@ -308,39 +306,44 @@ export function buildTimeline(
       type: "deadline",
     },
     {
-      id: "gold-show",
-      phase: "Gold Certificate Winners Show",
+      id: "phase-4-influencer-winners",
+      phase: "Phase 4 · Influencer Education Impact Winners Show",
       dateRange: `16 September ${ceremonyYear}`,
-      description: "Official announcement of Influencers Education Impact Award 2026 winners — broadcast live as the kick-off of the Blue Garnet voting window.",
+      description:
+        "Winners of the Influencer Education Impact Awards are announced, officially launching the final continental campaign toward the Gold–Blue Garnet Awards Gala.",
       type: "recognition",
     },
     {
-      id: "momentum",
-      phase: "Momentum Phase",
-      dateRange: `16 September – 15 October ${ceremonyYear}`,
-      description: "Storytelling, media, partnership and audience-building activations running alongside Blue Garnet voting — carrying visibility from the Gold Winners Show into the final stretch before the Gala.",
+      id: "phase-5-momentum",
+      phase: "Phase 5 · Continental Momentum Campaign",
+      dateRange: `16 September – 21 October ${ceremonyYear}`,
+      description:
+        "Six weeks of continent-wide visibility — weekly EduAid webinars (Education Innovation · CSR Partnerships · Higher Education · Creative Arts & Media · Inclusive Education · Recognition→Impact→Legacy), Friday NESA Africa Weekly News, daily nominee spotlights, regional stories, sponsor features and NESA Africa TV live broadcasts.",
       type: "awareness",
     },
     {
-      id: "blue-garnet-voting",
-      phase: "Blue Garnet Voting",
+      id: "phase-6-blue-garnet-voting",
+      phase: "Phase 6 · Gold–Blue Garnet Public Voting",
       dateRange: `16 September – 22 October ${ceremonyYear}`,
-      description: "Final competitive voting window — 60% independent jury + 40% public AGC. Closes on Gala day for transparency and suspense.",
+      description:
+        "Transparent public participation via the AGC framework combined with independent jury review (40% public + 60% jury) determines the final Gold–Blue Garnet honourees.",
       type: "voting",
       stageAction: "jury_scoring",
     },
     {
-      id: "blue-garnet-gala",
-      phase: "Blue Garnet Awards Gala",
+      id: "phase-7-gala",
+      phase: "Phase 7 · Gold–Blue Garnet Awards Gala",
       dateRange: `22 October ${ceremonyYear}`,
-      description: "Live ceremony in Lagos — Blue Garnet winners announced.",
+      description:
+        "Africa's flagship education recognition ceremony celebrating the continent's leading Education Enablers across 8 Africa Regions, the African Diaspora and Friends of Africa.",
       type: "gala",
     },
     {
-      id: "rmsa-legacy",
-      phase: "Rebuild My School Africa",
-      dateRange: `23 Oct ${ceremonyYear} – Oct ${legacyEndYear}`,
-      description: "Legacy impact phase: real school transformation across Africa's regions.",
+      id: "phase-8-impact-legacy",
+      phase: "Phase 8 · Recognition → Impact → Legacy",
+      dateRange: `October ${ceremonyYear} – October ${legacyEndYear}`,
+      description:
+        "Recognition transitions into measurable impact: EduAid-Africa · Rebuild My School Africa · Scholarships · Afri-EduTourism · Teacher Capacity Development · Inclusive Education · School Infrastructure · Annual Impact Reporting.",
       type: "legacy",
     },
   ];
