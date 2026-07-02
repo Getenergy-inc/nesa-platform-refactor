@@ -24,36 +24,77 @@ const eduaidColors = {
   lightGreen: "#6ba32d",
 };
 
+// 7-week EduAid-Africa Focus Group Series — synced with src/config/schedule.ts (buildTimeline)
 const upcomingWebinars = [
   {
     id: 1,
-    title: "Education for All: 2026 Roadmap",
-    speaker: "Dr. Amina Okonkwo",
-    date: "October 14, 2026",
-    time: "14:00 WAT",
-    duration: "75 min",
-    registrations: 1250,
-    category: "Strategy",
+    title: "Week 1 · Influencer Education Impact FGD",
+    speaker: "Sports, Music & Social Media Enablers",
+    date: "3 – 7 August 2026",
+    time: "Tuesday · 15:00 WAT",
+    duration: "90 min",
+    registrations: 1450,
+    category: "Influencers",
   },
   {
     id: 2,
-    title: "STEM Education Innovation in Africa",
-    speaker: "Prof. Kwame Asante",
-    date: "October 21, 2026",
-    time: "10:00 WAT",
-    duration: "75 min",
-    registrations: 890,
-    category: "STEM",
+    title: "Week 2 · Africa Education Icon FGD",
+    speaker: "Philanthropy · Literacy · Technical Education",
+    date: "10 – 14 August 2026",
+    time: "Tuesday · 15:00 WAT",
+    duration: "90 min",
+    registrations: 1320,
+    category: "Icon",
   },
   {
     id: 3,
-    title: "Building Effective School Libraries",
-    speaker: "Ms. Fatima Hassan",
-    date: "October 28, 2026",
-    time: "15:00 WAT",
-    duration: "75 min",
-    registrations: 675,
-    category: "Infrastructure",
+    title: "Week 3 · Gold–Blue Garnet I — CSR, STEM & EdTech",
+    speaker: "Corporate, STEM & EdTech Enablers",
+    date: "17 – 21 August 2026",
+    time: "Tuesday · 15:00 WAT",
+    duration: "90 min",
+    registrations: 1180,
+    category: "Gold–Blue Garnet",
+  },
+  {
+    id: 4,
+    title: "Week 4 · Gold–Blue Garnet II — Media, Creative Arts & Policy",
+    speaker: "Media, Creative & Policy Enablers",
+    date: "24 – 28 August 2026",
+    time: "Tuesday · 15:00 WAT",
+    duration: "90 min",
+    registrations: 1075,
+    category: "Gold–Blue Garnet",
+  },
+  {
+    id: 5,
+    title: "Week 5 · Gold–Blue Garnet III — Partnerships, NGOs & Community Education",
+    speaker: "Partnerships, NGOs & Community Enablers",
+    date: "31 August – 4 September 2026",
+    time: "Tuesday · 15:00 WAT",
+    duration: "90 min",
+    registrations: 990,
+    category: "Gold–Blue Garnet",
+  },
+  {
+    id: 6,
+    title: "Week 6 · Platinum Institutions — Government, Universities & Faith-Based",
+    speaker: "Institutional Enablers of Education for All",
+    date: "7 – 11 September 2026",
+    time: "Tuesday · 15:00 WAT",
+    duration: "90 min",
+    registrations: 1240,
+    category: "Platinum",
+  },
+  {
+    id: 7,
+    title: "Week 7 · Continental Pre-Voting Forum & AGC Voting Education",
+    speaker: "NESA-Africa Voting Integrity Panel",
+    date: "14 – 15 September 2026",
+    time: "Monday–Tuesday · 15:00 WAT",
+    duration: "120 min",
+    registrations: 1680,
+    category: "Pre-Voting",
   },
 ];
 
@@ -64,7 +105,7 @@ const pastWebinars = [
   { title: "Digital Learning Best Practices", views: "5.1K", duration: "75 min" },
 ];
 
-const categories = ["All", "Strategy", "STEM", "Infrastructure", "Policy", "Innovation"];
+const categories = ["All", "Influencers", "Icon", "Gold–Blue Garnet", "Platinum", "Pre-Voting"];
 
 export default function Webinars() {
   return (
