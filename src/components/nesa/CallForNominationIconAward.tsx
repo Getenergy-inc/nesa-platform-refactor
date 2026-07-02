@@ -1,6 +1,6 @@
 // Call for Nominations — NESA-Africa 2026 Multi-Category Surface
 // Premium homepage surface aligned with NESA-Africa charcoal + gold identity.
-// Combines: CSR, EdTech & STEM, Influencers, and Africa Education Icon Award.
+// Combines: CSR, EdTech & STEM, Influencers, Platinum Institutional, and Africa Education Icon Award.
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import {
@@ -19,6 +19,7 @@ import {
   Smartphone,
   Medal,
   Music,
+  Landmark,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -91,6 +92,17 @@ const influencerCategories = [
       "Musicians and music industry figures channelling their reach into African education impact. From benefit concerts to school-building campaigns — your voice builds futures.",
   },
 ];
+
+/* ──────────────── PLATINUM AWARD (Institutional) ──────────────── */
+const platinumData = {
+  icon: Landmark,
+  title: "Platinum Award 2026 – Jury-Only Institutional Recognition",
+  body:
+    "Institutions shaping Africa's education future at scale. Universities, libraries, research bodies, faith-based institutions, political leaders, international partners and diaspora organisations — your policies, programmes and leadership are creating lasting impact. This is Africa's highest institutional honour.",
+  nominateLink: "/nominate?award=platinum-recognition",
+  learnMoreLink: "/awards/platinum-recognition",
+  eventLabel: "Nominate Platinum",
+};
 
 const nominationGroups = [
   { icon: Globe2, label: "Africans Living in Africa" },
@@ -300,6 +312,69 @@ export function CallForNominationIconAward() {
             </Link>
           </Button>
         </motion.div>
+
+        {/* ═══════════════════════════════════════════════════
+            PLATINUM AWARD — INSTITUTIONAL RECOGNITION
+            ═══════════════════════════════════════════════════ */}
+        <motion.div
+          initial={{ opacity: 0, y: 12 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 0.6, delay: 0.15 }}
+          className="mt-16 text-center"
+        >
+          <div className="inline-flex items-center gap-2 rounded-full border border-gold/30 bg-gold/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-wider text-gold">
+            <Landmark className="h-3.5 w-3.5" /> Jury-Only · Institutional Excellence
+          </div>
+          <h3 className="mt-4 font-display text-2xl font-bold text-ivory sm:text-3xl md:text-4xl">
+            Platinum Award 2026 – Jury-Only Institutional Recognition
+          </h3>
+          <p className="mx-auto mt-3 max-w-3xl text-sm text-ivory/75 sm:text-base">
+            Institutions shaping Africa&apos;s education future at scale.
+          </p>
+        </motion.div>
+
+        <div className="mt-10 grid gap-5">
+          <motion.article
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{ duration: 0.5, delay: 0.05 }}
+            className="group relative flex h-full flex-col rounded-2xl border border-gold/20 bg-gradient-to-br from-charcoal-light/70 via-charcoal/80 to-black p-6 transition-all hover:border-gold/50 hover:shadow-[0_20px_60px_-20px_rgba(201,162,39,0.4)]"
+          >
+            <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-gold to-amber-500 text-charcoal shadow-lg">
+              <Landmark className="h-6 w-6" />
+            </div>
+            <h4 className="mt-4 font-display text-lg font-bold text-ivory sm:text-xl">
+              {platinumData.title}
+            </h4>
+            <p className="mt-3 text-sm leading-relaxed text-ivory/70">{platinumData.body}</p>
+
+            <div className="mt-auto pt-6 flex flex-wrap gap-3">
+              <Button
+                asChild
+                size="sm"
+                className="bg-gold font-bold text-charcoal shadow-md shadow-gold/20 hover:bg-gold/90"
+                onClick={() => handleClick(platinumData.nominateLink, platinumData.eventLabel, "platinum_cta_click")}
+              >
+                <Link to={platinumData.nominateLink}>
+                  <Trophy className="mr-1.5 h-3.5 w-3.5" /> Nominate Now
+                </Link>
+              </Button>
+              <Button
+                asChild
+                size="sm"
+                variant="ghost"
+                className="text-ivory/70 hover:bg-white/5 hover:text-ivory"
+                onClick={() => handleClick(platinumData.learnMoreLink, "Learn More — Platinum", "platinum_cta_click")}
+              >
+                <Link to={platinumData.learnMoreLink}>
+                  Learn More <ArrowRight className="ml-1.5 h-3.5 w-3.5" />
+                </Link>
+              </Button>
+            </div>
+          </motion.article>
+        </div>
 
         {/* ═══════════════════════════════════════════════════
             AFRICA EDUCATION ICON AWARD (existing)
