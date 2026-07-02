@@ -57,15 +57,35 @@ const iconCategories = [
 ];
 
 /* ──────────────── TIER 2: PLATINUM (Institutional) ──────────────── */
-const platinumData = {
-  icon: Landmark,
-  title: "Platinum Award 2026 – Jury-Only Institutional Recognition",
-  body:
-    "Enablers of Education for All Across Africa — institutions, leaders, and partners shaping education systems at scale. Universities, libraries, research bodies, faith-based institutions, political leaders, international partners and diaspora organisations.",
-  nominateLink: "/nominate?award=platinum-recognition",
-  learnMoreLink: "/awards/platinum-recognition",
-  eventLabel: "Nominate Platinum",
-};
+const platinumCategories = [
+  {
+    icon: Globe2,
+    tag: "PLATINUM AWARD 2026",
+    title: "Best Bilateral Organisations & International Embassies Education Enablers",
+    body:
+      "Enablers of Education for All Across Africa — International partners and embassies accelerating education outcomes through partnerships, funding, and technical support.",
+    nominateLink: "/nominate?award=platinum-recognition&subcategory=international-bilateral",
+    learnMoreLink: "/awards/platinum-recognition",
+  },
+  {
+    icon: Landmark,
+    tag: "PLATINUM AWARD 2026",
+    title: "Nigeria Political Leaders Education Enablers",
+    body:
+      "Enablers of Education for All Across Africa — Political leaders and public officials whose policies and actions deliver real education transformation in Nigeria.",
+    nominateLink: "/nominate?award=platinum-recognition&subcategory=political-leaders-nigeria",
+    learnMoreLink: "/awards/platinum-recognition",
+  },
+  {
+    icon: Users,
+    tag: "PLATINUM AWARD 2026",
+    title: "Regional Organisations Enablers for Education for All",
+    body:
+      "Enablers of Education for All Across Africa — Regional bodies strengthening education systems, policy, and collaboration across the continent.",
+    nominateLink: "/nominate?award=platinum-recognition&subcategory=regional-organisations",
+    learnMoreLink: "/awards/platinum-recognition",
+  },
+];
 
 /* ──────────────── TIER 3: BLUE GARNET (CSR & EdTech) ──────────────── */
 const corporateCategories = [
