@@ -299,46 +299,47 @@ export function CallForNominationIconAward() {
           </p>
         </motion.div>
 
-        <div className="mt-10 grid gap-5">
-          <motion.article
-            initial={{ opacity: 0, y: 16 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.2 }}
-            transition={{ duration: 0.5, delay: 0.05 }}
-            className="group relative flex h-full flex-col rounded-2xl border border-gold/20 bg-gradient-to-br from-charcoal-light/70 via-charcoal/80 to-black p-6 transition-all hover:border-gold/50 hover:shadow-[0_20px_60px_-20px_rgba(201,162,39,0.4)]"
-          >
-            <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-gold to-amber-500 text-charcoal shadow-lg">
-              <Landmark className="h-6 w-6" />
-            </div>
-            <h4 className="mt-4 font-display text-lg font-bold text-ivory sm:text-xl">
-              {platinumData.title}
-            </h4>
-            <p className="mt-3 text-sm leading-relaxed text-ivory/70">{platinumData.body}</p>
-
-            <div className="mt-auto pt-6 flex flex-wrap gap-3">
-              <Button
-                asChild
-                size="sm"
-                className="bg-gold font-bold text-charcoal shadow-md shadow-gold/20 hover:bg-gold/90"
-                onClick={() => handleClick(platinumData.nominateLink, platinumData.eventLabel, "platinum_cta_click")}
-              >
-                <Link to={platinumData.nominateLink}>
-                  <Trophy className="mr-1.5 h-3.5 w-3.5" /> Nominate Now
-                </Link>
-              </Button>
-              <Button
-                asChild
-                size="sm"
-                variant="ghost"
-                className="text-ivory/70 hover:bg-white/5 hover:text-ivory"
-                onClick={() => handleClick(platinumData.learnMoreLink, "Learn More — Platinum", "platinum_cta_click")}
-              >
-                <Link to={platinumData.learnMoreLink}>
-                  Learn More <ArrowRight className="ml-1.5 h-3.5 w-3.5" />
-                </Link>
-              </Button>
-            </div>
-          </motion.article>
+        <div className="mt-10 grid gap-5 md:grid-cols-3">
+          {platinumCategories.map(({ icon: Icon, tag, title, body, nominateLink, learnMoreLink }, i) => (
+            <motion.article
+              key={title}
+              initial={{ opacity: 0, y: 16 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ duration: 0.5, delay: 0.05 * i }}
+              className="group relative flex h-full flex-col rounded-2xl border border-gold/20 bg-gradient-to-br from-charcoal-light/70 via-charcoal/80 to-black p-6 transition-all hover:border-gold/50 hover:shadow-[0_20px_60px_-20px_rgba(201,162,39,0.4)]"
+            >
+              <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-gold to-amber-500 text-charcoal shadow-lg">
+                <Icon className="h-6 w-6" />
+              </div>
+              <p className="mt-4 text-[10px] font-semibold uppercase tracking-[0.18em] text-gold/80">{tag}</p>
+              <h4 className="mt-1 font-display text-lg font-bold text-ivory sm:text-xl">{title}</h4>
+              <p className="mt-3 text-sm leading-relaxed text-ivory/70">{body}</p>
+              <div className="mt-auto pt-6 flex flex-wrap gap-3">
+                <Button
+                  asChild
+                  size="sm"
+                  className="bg-gold font-bold text-charcoal shadow-md shadow-gold/20 hover:bg-gold/90"
+                  onClick={() => handleClick(nominateLink, `Nominate — ${title}`, "platinum_cta_click")}
+                >
+                  <Link to={nominateLink}>
+                    <Trophy className="mr-1.5 h-3.5 w-3.5" /> Nominate Now
+                  </Link>
+                </Button>
+                <Button
+                  asChild
+                  size="sm"
+                  variant="ghost"
+                  className="text-ivory/70 hover:bg-white/5 hover:text-ivory"
+                  onClick={() => handleClick(learnMoreLink, `Learn More — ${title}`, "platinum_cta_click")}
+                >
+                  <Link to={learnMoreLink}>
+                    Learn More <ArrowRight className="ml-1.5 h-3.5 w-3.5" />
+                  </Link>
+                </Button>
+              </div>
+            </motion.article>
+          ))}
         </div>
 
         {/* ═══════════════════════════════════════════════════
