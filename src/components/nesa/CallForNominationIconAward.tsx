@@ -25,71 +25,65 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { trackEvent } from "@/lib/analytics";
 
-/* ──────────────── ICON AWARD (Lifetime) ──────────────── */
+/* ──────────────── ICON AWARD (Lifetime 2006–2026) ──────────────── */
 const iconCategories = [
   {
     icon: HandCoins,
-    title: "Africa Education Philanthropy Icon (2006–2026)",
+    tag: "LIFETIME ACHIEVEMENT 2006–2026",
+    title: "Africa Education Philanthropy Icon",
     body:
-      "They didn't just donate money. They built schools, funded thousands of scholarships, and changed entire systems. For those who turned wealth into hope for Africa's children.",
+      "Enablers of Education for All Across Africa who turned wealth into hope — building schools, funding thousands of scholarships, and changing entire systems.",
+    nominateLink: "/nominate?award=africa-education-icon&subcategory=philanthropy",
+    learnMoreLink: "/awards/africa-education-icon",
   },
   {
     icon: BookOpenText,
-    title: "Literary & New Curriculum Advocate Icon (2006–2026)",
+    tag: "LIFETIME ACHIEVEMENT 2006–2026",
+    title: "Literary & New Curriculum Advocate Icon",
     body:
-      "They changed what African children learn — and how they see themselves. From decolonising curricula to championing African stories and indigenous knowledge. The minds that shape minds.",
+      "Enablers of Education for All Across Africa who reshaped learning and identity — decolonising curricula and championing African stories and indigenous knowledge.",
+    nominateLink: "/nominate?award=africa-education-icon&subcategory=literary-curriculum",
+    learnMoreLink: "/awards/africa-education-icon",
   },
   {
     icon: Wrench,
-    title: "Africa Technical Educator Icon (2006–2026)",
+    tag: "LIFETIME ACHIEVEMENT 2006–2026",
+    title: "Africa Technical Educator Icon",
     body:
-      "They taught Africa how to build, code, innovate and lead. From coding academies to STEM universities and digital skills hubs. The hands that are building Africa's future.",
+      "Enablers of Education for All Across Africa who taught the continent to build, code, innovate and lead through technical and digital skills.",
+    nominateLink: "/nominate?award=africa-education-icon&subcategory=technical-educator",
+    learnMoreLink: "/awards/africa-education-icon",
   },
 ];
-
-/* ──────────────── BLUE GARNET: CSR & EDTECH ──────────────── */
-const corporateCategories = [
-  {
-    icon: HeartHandshake,
-    title: "Best CSR for Education in Africa",
-    subtitle: "Blue Garnet Award 2026",
-    body:
-      "Companies changing classrooms across Africa! Your CSR programme is building schools, funding scholarships, training teachers, or providing digital learning tools. This is your moment to be recognised continent-wide. Whether you are a bank, telco, oil & gas, manufacturing, or FMCG company — if you are investing in education, we want to celebrate you.",
-    nominateLink: "/nominate?award=csr-education-africa",
-    learnMoreLink: "/awards/blue-garnet-categories/csr-education-africa",
-    eventLabel: "Nominate CSR",
-  },
-  {
-    icon: Cpu,
-    title: "Best EdTech & STEM Innovation for Education",
-    subtitle: "Blue Garnet Award 2026",
-    body:
-      "The future of African education is digital. If your platform, app, coding academy, STEM programme, or EdTech solution is transforming how African children and youth learn — this award is for you. From rural classrooms to urban innovation hubs, we are looking for the boldest EdTech and STEM initiatives making real impact.",
-    nominateLink: "/nominate?award=edutech-africa",
-    learnMoreLink: "/awards/blue-garnet-categories/edutech-africa",
-    eventLabel: "Nominate EdTech",
-  },
-];
-
-/* ──────────────── INFLUENCERS ──────────────── */
+...
+/* ──────────────── INFLUENCERS (Certificate of Recognition 2026) ──────────────── */
 const influencerCategories = [
   {
     icon: Smartphone,
-    title: "Social Media Influencers",
+    tag: "CERTIFICATE OF RECOGNITION 2026",
+    title: "Best Social Media Influencer Education Enablers",
     body:
-      "Digital creators, advocates and online educators advancing African education through social media platforms. If your content changes minds and opens doors for learners, nominate now.",
+      "Enablers of Education for All Across Africa — Digital creators advancing learning through social media platforms.",
+    nominateLink: "/nominate?award=influencers-education-impact&subcategory=social-media",
+    learnMoreLink: "/awards/influencers-education-impact/social-media",
   },
   {
     icon: Medal,
-    title: "Sports Icons",
+    tag: "CERTIFICATE OF RECOGNITION 2026",
+    title: "Best Africa Sports Icon Education Enablers",
     body:
-      "Athletes and sports figures using their platforms to advance African education through campaigns, scholarships and infrastructure. Your legacy is bigger than the game.",
+      "Enablers of Education for All Across Africa — Athletes using their platforms for scholarships, school-building, and youth inspiration.",
+    nominateLink: "/nominate?award=influencers-education-impact&subcategory=sports",
+    learnMoreLink: "/awards/influencers-education-impact/sports",
   },
   {
     icon: Music,
-    title: "Music Icons",
+    tag: "CERTIFICATE OF RECOGNITION 2026",
+    title: "Best Africa Music Icon Education Enablers",
     body:
-      "Musicians and music industry figures channelling their reach into African education impact. From benefit concerts to school-building campaigns — your voice builds futures.",
+      "Enablers of Education for All Across Africa — Musicians channelling their reach into education impact and opportunity.",
+    nominateLink: "/nominate?award=influencers-education-impact&subcategory=music",
+    learnMoreLink: "/awards/influencers-education-impact/music",
   },
 ];
 
