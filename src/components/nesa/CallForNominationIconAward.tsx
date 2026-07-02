@@ -1,6 +1,6 @@
 // Call for Nominations — NESA-Africa 2026 Multi-Category Surface
 // Premium homepage surface aligned with NESA-Africa charcoal + gold identity.
-// Combines: CSR, EdTech & STEM, Influencers, and Africa Education Icon Award.
+// Combines: CSR, EdTech & STEM, Influencers, Platinum Institutional, and Africa Education Icon Award.
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import {
@@ -19,6 +19,7 @@ import {
   Smartphone,
   Medal,
   Music,
+  Landmark,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
