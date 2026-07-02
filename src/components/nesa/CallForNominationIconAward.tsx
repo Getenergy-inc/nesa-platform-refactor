@@ -79,10 +79,10 @@ const platinumCategories = [
   {
     icon: Users,
     tag: "PLATINUM AWARD 2026",
-    title: "Regional Organisations Enablers for Education for All",
+    title: "Faith-Based & Religious Organisations Advancing Education",
     body:
-      "Enablers of Education for All Across Africa — Regional bodies strengthening education systems, policy, and collaboration across the continent.",
-    nominateLink: "/nominate?award=platinum-recognition&subcategory=regional-organisations",
+      "Enablers of Education for All Across Africa — Faith-based and religious organisations advancing education through scholarships, school-building, vocational training, and spiritual formation across the continent.",
+    nominateLink: "/nominate?award=platinum-recognition&subcategory=faith-based-organisations",
     learnMoreLink: "/awards/platinum-recognition",
   },
 ];
