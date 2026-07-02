@@ -230,6 +230,7 @@ import {
 import Vote from "./pages/Vote";
 import VoteWithAGC from "./pages/VoteWithAGC";
 import { GoldVoting, BlueGarnetVoting } from "./pages/vote/index";
+import GoldBlueGarnetVoteHub from "./pages/vote/GoldBlueGarnetVoteHub";
 import AboutAGC from "./pages/AboutAGC";
 import EarnVotingCredits from "./pages/EarnVotingCredits";
 import ClaimVotingCredits from "./pages/ClaimVotingCredits";
