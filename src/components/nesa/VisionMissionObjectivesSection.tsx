@@ -1,22 +1,18 @@
 /**
  * VisionMissionObjectivesSection — homepage summary of NESA-Africa's Vision,
- * Mission, and 7 Strategic Objectives. Detail lives on /about.
+ * Mission, and 4 Strategic Objectives. Detail lives on /about.
  *
- * Copy is canonical per the 2026 brief — do not paraphrase.
+ * Copy is canonical per the 2026 Capability Statement — sourced from
+ * src/content/capability2026.ts. Do not paraphrase.
  */
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Eye, Target, CheckCircle2, ChevronDown } from "lucide-react";
-
-const OBJECTIVES: string[] = [
-  "Advance inclusive, equitable quality education and support lifelong learning opportunities for all, in line with SDG 4.",
-  "Promote girls' education through dedicated award categories and scholarship programs.",
-  "Encourage excellence in STEM, education technology, and vocational training.",
-  "Build multi-sector partnerships that bring financing and advocacy support to education.",
-  "Align programs with international development benchmarks to attract global partners and funders.",
-  "Apply SMART (Specific, Measurable, Achievable, Relevant, Time-bound) standards to every initiative aimed at transforming African education.",
-  "By 2035, grow into the continent's leading education transformation platform, with impact reaching all 54 African countries and the diaspora.",
-];
+import {
+  VISION,
+  MISSION,
+  STRATEGIC_OBJECTIVES,
+} from "@/content/capability2026";
 
 export function VisionMissionObjectivesSection() {
   const [open, setOpen] = useState(false);
@@ -51,49 +47,34 @@ export function VisionMissionObjectivesSection() {
               <div className="rounded-2xl border border-gold/25 bg-charcoal/60 p-6">
                 <div className="flex items-center gap-2 mb-2">
                   <Eye className="h-5 w-5 text-gold" />
-                  <h3 className="font-display text-lg font-bold text-ivory">Vision</h3>
+                  <h3 className="font-display text-lg font-bold text-ivory">{VISION.title}</h3>
                 </div>
-                <p className="text-ivory/80 text-sm leading-relaxed">
-                  To become Africa's leading education recognition and change platform —
-                  bringing public and private investment together, showcasing innovative
-                  educational models, and helping every child and youth across Africa
-                  gain access to quality learning.
-                </p>
+                <p className="text-ivory/80 text-sm leading-relaxed">{VISION.body}</p>
               </div>
               <div className="rounded-2xl border border-gold/25 bg-charcoal/60 p-6">
                 <div className="flex items-center gap-2 mb-2">
                   <Target className="h-5 w-5 text-gold" />
-                  <h3 className="font-display text-lg font-bold text-ivory">Mission</h3>
+                  <h3 className="font-display text-lg font-bold text-ivory">{MISSION.title}</h3>
                 </div>
-                <p className="text-ivory/80 text-sm leading-relaxed">
-                  Under the stewardship of the Santos Creations Educational Foundation
-                  (SCEF), NESA-Africa works to speed up the continent's educational
-                  transformation by recognizing excellence, encouraging digital
-                  innovation, and building sustainable collaborations — with every
-                  activity tied to the UN SDGs and African Union Agenda 2063. In
-                  practice, that means spotlighting the real contributions of
-                  individuals, organizations, and institutions working toward more
-                  accessible, higher-quality education.
-                </p>
+                <p className="text-ivory/80 text-sm leading-relaxed">{MISSION.body}</p>
               </div>
             </div>
 
             <div className="max-w-5xl mx-auto">
               <h3 className="text-center text-ivory/80 text-sm uppercase tracking-wider mb-4">
-                7 Strategic Objectives
+                4 Strategic Objectives
               </h3>
               <ul className="grid md:grid-cols-2 gap-3">
-                {OBJECTIVES.map((o, i) => (
+                {STRATEGIC_OBJECTIVES.map((o) => (
                   <li
-                    key={i}
+                    key={o.number}
                     className="flex items-start gap-3 rounded-lg border border-gold/15 bg-charcoal/50 px-4 py-3 text-ivory/85 text-sm leading-relaxed"
                   >
                     <CheckCircle2 className="h-4 w-4 text-gold shrink-0 mt-1" />
                     <span>
-                      <span className="text-gold/70 font-mono mr-2">
-                        {String(i + 1).padStart(2, "0")}
-                      </span>
-                      {o}
+                      <span className="text-gold/70 font-mono mr-2">{o.number}</span>
+                      <span className="font-semibold text-ivory">{o.title}.</span>{" "}
+                      <span className="text-ivory/80">{o.body}</span>
                     </span>
                   </li>
                 ))}

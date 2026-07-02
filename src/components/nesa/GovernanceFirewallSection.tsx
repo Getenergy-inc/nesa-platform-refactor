@@ -62,6 +62,9 @@ export function GovernanceFirewallSection() {
             >
               A Firewall You Can <span className="text-gold">Trust.</span>
             </h2>
+            <p className="text-gold text-sm md:text-base font-semibold mb-3">
+              Sponsorship does not influence winners.
+            </p>
             <p className="text-white/75 text-sm md:text-base leading-relaxed mb-5">
               Sponsors, partners, donors, volunteers, judges, and contributors
               <span className="text-gold font-semibold"> cannot influence</span>:
