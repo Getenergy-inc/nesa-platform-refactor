@@ -267,11 +267,59 @@ export function buildTimeline(
       type: "recognition",
     },
     {
-      id: "weekly-webinars",
-      phase: "Weekly EduAid-Africa Webinar Series",
-      dateRange: `3 August – 15 September ${ceremonyYear}`,
+      id: "webinar-week-1",
+      phase: "Webinar Week 1 · Influencer Education Impact FGD",
+      dateRange: `3 – 7 August ${ceremonyYear}`,
       description:
-        "Seven-week continental webinar series (every Tuesday) — Week 1: Influencer Education Impact FGD (3–7 Aug) · Week 2: Africa Education Icon FGD (10–14 Aug) · Week 3: Gold–Blue Garnet I — CSR, STEM & EdTech (17–21 Aug) · Week 4: Gold–Blue Garnet II — Media, Creative Arts & Policy (24–28 Aug) · Week 5: Gold–Blue Garnet III — Partnerships, NGOs & Community Education (31 Aug–4 Sep) · Week 6: Platinum Institutions — Government, Universities & Faith-Based (7–11 Sep) · Week 7: Continental Pre-Voting Forum & AGC Voting Education (14–15 Sep).",
+        "EduAid-Africa Focus Group Discussion opening the 7-week continental series — spotlighting Sports, Music and Social Media Influencers advancing Education for All across Africa.",
+      type: "awareness",
+    },
+    {
+      id: "webinar-week-2",
+      phase: "Webinar Week 2 · Africa Education Icon FGD",
+      dateRange: `10 – 14 August ${ceremonyYear}`,
+      description:
+        "Lifetime recognition dialogue celebrating two decades (2006–2026) of transformational Education Enablers — Philanthropy, Literacy and Technical Education leaders.",
+      type: "awareness",
+    },
+    {
+      id: "webinar-week-3",
+      phase: "Webinar Week 3 · Gold–Blue Garnet I — CSR, STEM & EdTech",
+      dateRange: `17 – 21 August ${ceremonyYear}`,
+      description:
+        "Corporate Social Responsibility, STEM leadership and EdTech innovation Enablers of Education for All Across Africa.",
+      type: "awareness",
+    },
+    {
+      id: "webinar-week-4",
+      phase: "Webinar Week 4 · Gold–Blue Garnet II — Media, Creative Arts & Policy",
+      dateRange: `24 – 28 August ${ceremonyYear}`,
+      description:
+        "Media, Creative Arts and Public Policy Enablers driving education transformation across the continent.",
+      type: "awareness",
+    },
+    {
+      id: "webinar-week-5",
+      phase: "Webinar Week 5 · Gold–Blue Garnet III — Partnerships, NGOs & Community Education",
+      dateRange: `31 August – 4 September ${ceremonyYear}`,
+      description:
+        "Partnerships, NGOs and Community Education Enablers extending learning access to the last mile.",
+      type: "awareness",
+    },
+    {
+      id: "webinar-week-6",
+      phase: "Webinar Week 6 · Platinum Institutions — Government, Universities & Faith-Based",
+      dateRange: `7 – 11 September ${ceremonyYear}`,
+      description:
+        "Platinum Institutional Enablers — Government agencies, Universities and Faith-Based Organisations advancing Education for All.",
+      type: "awareness",
+    },
+    {
+      id: "webinar-week-7",
+      phase: "Webinar Week 7 · Continental Pre-Voting Forum & AGC Voting Education",
+      dateRange: `14 – 15 September ${ceremonyYear}`,
+      description:
+        "Continental Pre-Voting Forum preparing citizens for the AGC-powered Gold and Blue Garnet voting phases with transparency and integrity training.",
       type: "awareness",
     },
     {
