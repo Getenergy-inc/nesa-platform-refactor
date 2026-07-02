@@ -25,25 +25,34 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { trackEvent } from "@/lib/analytics";
 
-/* ──────────────── ICON AWARD (Lifetime) ──────────────── */
+/* ──────────────── ICON AWARD (Lifetime 2006–2026) ──────────────── */
 const iconCategories = [
   {
     icon: HandCoins,
-    title: "Africa Education Philanthropy Icon (2006–2026)",
+    tag: "LIFETIME ACHIEVEMENT 2006–2026",
+    title: "Africa Education Philanthropy Icon",
     body:
-      "They didn't just donate money. They built schools, funded thousands of scholarships, and changed entire systems. For those who turned wealth into hope for Africa's children.",
+      "Enablers of Education for All Across Africa who turned wealth into hope — building schools, funding thousands of scholarships, and changing entire systems.",
+    nominateLink: "/nominate?award=africa-education-icon&subcategory=philanthropy",
+    learnMoreLink: "/awards/africa-education-icon",
   },
   {
     icon: BookOpenText,
-    title: "Literary & New Curriculum Advocate Icon (2006–2026)",
+    tag: "LIFETIME ACHIEVEMENT 2006–2026",
+    title: "Literary & New Curriculum Advocate Icon",
     body:
-      "They changed what African children learn — and how they see themselves. From decolonising curricula to championing African stories and indigenous knowledge. The minds that shape minds.",
+      "Enablers of Education for All Across Africa who reshaped learning and identity — decolonising curricula and championing African stories and indigenous knowledge.",
+    nominateLink: "/nominate?award=africa-education-icon&subcategory=literary-curriculum",
+    learnMoreLink: "/awards/africa-education-icon",
   },
   {
     icon: Wrench,
-    title: "Africa Technical Educator Icon (2006–2026)",
+    tag: "LIFETIME ACHIEVEMENT 2006–2026",
+    title: "Africa Technical Educator Icon",
     body:
-      "They taught Africa how to build, code, innovate and lead. From coding academies to STEM universities and digital skills hubs. The hands that are building Africa's future.",
+      "Enablers of Education for All Across Africa who taught the continent to build, code, innovate and lead through technical and digital skills.",
+    nominateLink: "/nominate?award=africa-education-icon&subcategory=technical-educator",
+    learnMoreLink: "/awards/africa-education-icon",
   },
 ];
 
@@ -71,25 +80,35 @@ const corporateCategories = [
   },
 ];
 
-/* ──────────────── INFLUENCERS ──────────────── */
+
+/* ──────────────── INFLUENCERS (Certificate of Recognition 2026) ──────────────── */
 const influencerCategories = [
   {
     icon: Smartphone,
-    title: "Social Media Influencers",
+    tag: "CERTIFICATE OF RECOGNITION 2026",
+    title: "Best Social Media Influencer Education Enablers",
     body:
-      "Digital creators, advocates and online educators advancing African education through social media platforms. If your content changes minds and opens doors for learners, nominate now.",
+      "Enablers of Education for All Across Africa — Digital creators advancing learning through social media platforms.",
+    nominateLink: "/nominate?award=influencers-education-impact&subcategory=social-media",
+    learnMoreLink: "/awards/influencers-education-impact/social-media",
   },
   {
     icon: Medal,
-    title: "Sports Icons",
+    tag: "CERTIFICATE OF RECOGNITION 2026",
+    title: "Best Africa Sports Icon Education Enablers",
     body:
-      "Athletes and sports figures using their platforms to advance African education through campaigns, scholarships and infrastructure. Your legacy is bigger than the game.",
+      "Enablers of Education for All Across Africa — Athletes using their platforms for scholarships, school-building, and youth inspiration.",
+    nominateLink: "/nominate?award=influencers-education-impact&subcategory=sports",
+    learnMoreLink: "/awards/influencers-education-impact/sports",
   },
   {
     icon: Music,
-    title: "Music Icons",
+    tag: "CERTIFICATE OF RECOGNITION 2026",
+    title: "Best Africa Music Icon Education Enablers",
     body:
-      "Musicians and music industry figures channelling their reach into African education impact. From benefit concerts to school-building campaigns — your voice builds futures.",
+      "Enablers of Education for All Across Africa — Musicians channelling their reach into education impact and opportunity.",
+    nominateLink: "/nominate?award=influencers-education-impact&subcategory=music",
+    learnMoreLink: "/awards/influencers-education-impact/music",
   },
 ];
 
@@ -98,7 +117,7 @@ const platinumData = {
   icon: Landmark,
   title: "Platinum Award 2026 – Jury-Only Institutional Recognition",
   body:
-    "Institutions shaping Africa's education future at scale. Universities, libraries, research bodies, faith-based institutions, political leaders, international partners and diaspora organisations — your policies, programmes and leadership are creating lasting impact. This is Africa's highest institutional honour.",
+    "Enablers of Education for All Across Africa — institutions, leaders, and partners shaping education systems at scale. Universities, libraries, research bodies, faith-based institutions, political leaders, international partners and diaspora organisations.",
   nominateLink: "/nominate?award=platinum-recognition",
   learnMoreLink: "/awards/platinum-recognition",
   eventLabel: "Nominate Platinum",
@@ -265,7 +284,7 @@ export function CallForNominationIconAward() {
         </motion.div>
 
         <div className="mt-10 grid gap-5 md:grid-cols-3">
-          {influencerCategories.map(({ icon: Icon, title, body }, i) => (
+          {influencerCategories.map(({ icon: Icon, tag, title, body, nominateLink, learnMoreLink }, i) => (
             <motion.article
               key={title}
               initial={{ opacity: 0, y: 16 }}
@@ -277,11 +296,36 @@ export function CallForNominationIconAward() {
               <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-gold to-amber-500 text-charcoal shadow-lg">
                 <Icon className="h-6 w-6" />
               </div>
-              <h4 className="mt-4 font-display text-lg font-bold text-ivory sm:text-xl">{title}</h4>
+              <p className="mt-4 text-[10px] font-semibold uppercase tracking-[0.18em] text-gold/80">{tag}</p>
+              <h4 className="mt-1 font-display text-lg font-bold text-ivory sm:text-xl">{title}</h4>
               <p className="mt-3 text-sm leading-relaxed text-ivory/70">{body}</p>
+              <div className="mt-auto pt-6 flex flex-wrap gap-3">
+                <Button
+                  asChild
+                  size="sm"
+                  className="bg-gold font-bold text-charcoal shadow-md shadow-gold/20 hover:bg-gold/90"
+                  onClick={() => handleClick(nominateLink, `Nominate — ${title}`, "influencer_cta_click")}
+                >
+                  <Link to={nominateLink}>
+                    <Trophy className="mr-1.5 h-3.5 w-3.5" /> Nominate Now
+                  </Link>
+                </Button>
+                <Button
+                  asChild
+                  size="sm"
+                  variant="ghost"
+                  className="text-ivory/70 hover:bg-white/5 hover:text-ivory"
+                  onClick={() => handleClick(learnMoreLink, `Learn More — ${title}`, "influencer_cta_click")}
+                >
+                  <Link to={learnMoreLink}>
+                    Learn More <ArrowRight className="ml-1.5 h-3.5 w-3.5" />
+                  </Link>
+                </Button>
+              </div>
             </motion.article>
           ))}
         </div>
+
 
         <motion.div
           initial={{ opacity: 0, y: 16 }}
@@ -393,12 +437,12 @@ export function CallForNominationIconAward() {
             The Africa Education Icon Award
           </h3>
           <p className="mx-auto mt-3 max-w-3xl text-sm text-ivory/75 sm:text-base">
-            For 20 years (2006–2026), quiet heroes have transformed education across our continent. This highest honour celebrates lifetime impact and legacy in African education.
+            For 20 years (2006–2026), quiet heroes have transformed education across our continent. This highest honour celebrates lifetime impact and legacy as <span className="text-gold">Enablers of Education for All Across Africa</span>.
           </p>
         </motion.div>
 
         <div className="mt-10 grid gap-5 md:grid-cols-3">
-          {iconCategories.map(({ icon: Icon, title, body }, i) => (
+          {iconCategories.map(({ icon: Icon, tag, title, body, nominateLink, learnMoreLink }, i) => (
             <motion.article
               key={title}
               initial={{ opacity: 0, y: 16 }}
@@ -410,8 +454,32 @@ export function CallForNominationIconAward() {
               <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-gold to-amber-500 text-charcoal shadow-lg">
                 <Icon className="h-6 w-6" />
               </div>
-              <h4 className="mt-4 font-display text-lg font-bold text-ivory sm:text-xl">{title}</h4>
+              <p className="mt-4 text-[10px] font-semibold uppercase tracking-[0.18em] text-gold/80">{tag}</p>
+              <h4 className="mt-1 font-display text-lg font-bold text-ivory sm:text-xl">{title}</h4>
               <p className="mt-3 text-sm leading-relaxed text-ivory/70">{body}</p>
+              <div className="mt-auto pt-6 flex flex-wrap gap-3">
+                <Button
+                  asChild
+                  size="sm"
+                  className="bg-gold font-bold text-charcoal shadow-md shadow-gold/20 hover:bg-gold/90"
+                  onClick={() => handleClick(nominateLink, `Nominate — ${title}`, "icon_award_cta_click")}
+                >
+                  <Link to={nominateLink}>
+                    <Trophy className="mr-1.5 h-3.5 w-3.5" /> Nominate Now
+                  </Link>
+                </Button>
+                <Button
+                  asChild
+                  size="sm"
+                  variant="ghost"
+                  className="text-ivory/70 hover:bg-white/5 hover:text-ivory"
+                  onClick={() => handleClick(learnMoreLink, `Learn More — ${title}`, "icon_award_cta_click")}
+                >
+                  <Link to={learnMoreLink}>
+                    Learn More <ArrowRight className="ml-1.5 h-3.5 w-3.5" />
+                  </Link>
+                </Button>
+              </div>
             </motion.article>
           ))}
         </div>
