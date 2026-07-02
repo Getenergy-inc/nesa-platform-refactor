@@ -141,6 +141,7 @@ import PillarsHub from "./pages/awards/PillarsHub";
 import PillarPage from "./pages/awards/PillarPage";
 import AwardSpinePage from "./pages/awards/AwardSpinePage";
 import EighteenCategoriesPage from "./pages/awards/EighteenCategoriesPage";
+import CategoryDetailPage from "./pages/awards/CategoryDetailPage";
 
 import { ICON_CATEGORY, buildRedirectMap as buildCategoryRedirects } from "./config/awardCategories";
 
@@ -610,9 +611,26 @@ const App = () => (
                     }
                   />
                   <Route
+                    path="/awards/18-categories/:categorySlug"
+                    element={
+                      <WithLayout>
+                        <CategoryDetailPage />
+                      </WithLayout>
+                    }
+                  />
+                  <Route
                     path="/awards/gold-blue-garnet/categories"
                     element={<Navigate to="/awards/18-categories" replace />}
                   />
+                  <Route
+                    path="/awards/gold-blue-garnet/:categorySlug"
+                    element={
+                      <WithLayout>
+                        <CategoryDetailPage />
+                      </WithLayout>
+                    }
+                  />
+
                   <Route
                     path="/awards/blue-garnet-categories"
                     element={
