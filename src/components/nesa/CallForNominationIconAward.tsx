@@ -117,7 +117,7 @@ const platinumData = {
   icon: Landmark,
   title: "Platinum Award 2026 – Jury-Only Institutional Recognition",
   body:
-    "Institutions shaping Africa's education future at scale. Universities, libraries, research bodies, faith-based institutions, political leaders, international partners and diaspora organisations — your policies, programmes and leadership are creating lasting impact. This is Africa's highest institutional honour.",
+    "Enablers of Education for All Across Africa — institutions, leaders, and partners shaping education systems at scale. Universities, libraries, research bodies, faith-based institutions, political leaders, international partners and diaspora organisations.",
   nominateLink: "/nominate?award=platinum-recognition",
   learnMoreLink: "/awards/platinum-recognition",
   eventLabel: "Nominate Platinum",
