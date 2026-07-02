@@ -271,7 +271,7 @@ export function buildTimeline(
       phase: "Weekly EduAid-Africa Webinar Series",
       dateRange: `3 August – 15 September ${ceremonyYear}`,
       description:
-        "Seven-week continental webinar series — one live webinar every week from August to mid-September covering Influencer Impact, Africa Education Icon, Gold–Blue Garnet Categories I–III, Platinum Excellence and Why Your Vote Matters.",
+        "Seven-week continental webinar series (every Tuesday) — Week 1: Influencer Education Impact FGD (3–7 Aug) · Week 2: Africa Education Icon FGD (10–14 Aug) · Week 3: Gold–Blue Garnet I — CSR, STEM & EdTech (17–21 Aug) · Week 4: Gold–Blue Garnet II — Media, Creative Arts & Policy (24–28 Aug) · Week 5: Gold–Blue Garnet III — Partnerships, NGOs & Community Education (31 Aug–4 Sep) · Week 6: Platinum Institutions — Government, Universities & Faith-Based (7–11 Sep) · Week 7: Continental Pre-Voting Forum & AGC Voting Education (14–15 Sep).",
       type: "awareness",
     },
     {
