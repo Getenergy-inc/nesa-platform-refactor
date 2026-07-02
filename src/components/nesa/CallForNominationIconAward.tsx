@@ -284,7 +284,7 @@ export function CallForNominationIconAward() {
         </motion.div>
 
         <div className="mt-10 grid gap-5 md:grid-cols-3">
-          {influencerCategories.map(({ icon: Icon, title, body }, i) => (
+          {influencerCategories.map(({ icon: Icon, tag, title, body, nominateLink, learnMoreLink }, i) => (
             <motion.article
               key={title}
               initial={{ opacity: 0, y: 16 }}
@@ -296,11 +296,36 @@ export function CallForNominationIconAward() {
               <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-gold to-amber-500 text-charcoal shadow-lg">
                 <Icon className="h-6 w-6" />
               </div>
-              <h4 className="mt-4 font-display text-lg font-bold text-ivory sm:text-xl">{title}</h4>
+              <p className="mt-4 text-[10px] font-semibold uppercase tracking-[0.18em] text-gold/80">{tag}</p>
+              <h4 className="mt-1 font-display text-lg font-bold text-ivory sm:text-xl">{title}</h4>
               <p className="mt-3 text-sm leading-relaxed text-ivory/70">{body}</p>
+              <div className="mt-auto pt-6 flex flex-wrap gap-3">
+                <Button
+                  asChild
+                  size="sm"
+                  className="bg-gold font-bold text-charcoal shadow-md shadow-gold/20 hover:bg-gold/90"
+                  onClick={() => handleClick(nominateLink, `Nominate — ${title}`, "influencer_cta_click")}
+                >
+                  <Link to={nominateLink}>
+                    <Trophy className="mr-1.5 h-3.5 w-3.5" /> Nominate Now
+                  </Link>
+                </Button>
+                <Button
+                  asChild
+                  size="sm"
+                  variant="ghost"
+                  className="text-ivory/70 hover:bg-white/5 hover:text-ivory"
+                  onClick={() => handleClick(learnMoreLink, `Learn More — ${title}`, "influencer_cta_click")}
+                >
+                  <Link to={learnMoreLink}>
+                    Learn More <ArrowRight className="ml-1.5 h-3.5 w-3.5" />
+                  </Link>
+                </Button>
+              </div>
             </motion.article>
           ))}
         </div>
+
 
         <motion.div
           initial={{ opacity: 0, y: 16 }}
