@@ -611,9 +611,26 @@ const App = () => (
                     }
                   />
                   <Route
+                    path="/awards/18-categories/:categorySlug"
+                    element={
+                      <WithLayout>
+                        <CategoryDetailPage />
+                      </WithLayout>
+                    }
+                  />
+                  <Route
                     path="/awards/gold-blue-garnet/categories"
                     element={<Navigate to="/awards/18-categories" replace />}
                   />
+                  <Route
+                    path="/awards/gold-blue-garnet/:categorySlug"
+                    element={
+                      <WithLayout>
+                        <CategoryDetailPage />
+                      </WithLayout>
+                    }
+                  />
+
                   <Route
                     path="/awards/blue-garnet-categories"
                     element={
