@@ -55,7 +55,7 @@ const iconCategories = [
     learnMoreLink: "/awards/africa-education-icon",
   },
 ];
-...
+
 /* ──────────────── INFLUENCERS (Certificate of Recognition 2026) ──────────────── */
 const influencerCategories = [
   {
