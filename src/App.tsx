@@ -230,6 +230,7 @@ import {
 import Vote from "./pages/Vote";
 import VoteWithAGC from "./pages/VoteWithAGC";
 import { GoldVoting, BlueGarnetVoting } from "./pages/vote/index";
+import GoldBlueGarnetVoteHub from "./pages/vote/GoldBlueGarnetVoteHub";
 import AboutAGC from "./pages/AboutAGC";
 import EarnVotingCredits from "./pages/EarnVotingCredits";
 import ClaimVotingCredits from "./pages/ClaimVotingCredits";
@@ -736,6 +737,8 @@ const App = () => (
                   {/* Simplified Awards dropdown canonical URLs — keep these alive so the gateway never 404s */}
                   <Route path="/awards/recognition-architecture" element={<Navigate to="/awards" replace />} />
                   <Route path="/awards/gold-blue-garnet" element={<WithLayout><BlueGarnetAward /></WithLayout>} />
+                  <Route path="/awards/gold-blue-garnet/vote" element={<WithLayout><GoldBlueGarnetVoteHub /></WithLayout>} />
+                  <Route path="/awards/gold-blue-garnet/vote-now" element={<Navigate to="/awards/gold-blue-garnet/vote" replace />} />
                   <Route path="/awards/platinum-recognition" element={<WithLayout><PlatinumAward /></WithLayout>} />
                   <Route path="/awards/platinum-recognition/diaspora" element={<WithLayout><PlatinumDiasporaPage /></WithLayout>} />
                   <Route path="/awards/platinum/diaspora" element={<Navigate to="/awards/platinum-recognition/diaspora" replace />} />
