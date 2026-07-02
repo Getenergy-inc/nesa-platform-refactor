@@ -438,14 +438,15 @@ export function buildAwardPhases(awardYear: number): AwardPhaseConfig[] {
   ];
 }
 
-// Webinar themes (static content)
+// Webinar themes — 7-week EduAid-Africa Focus Group Series (Aug–Sep 2026)
 export const WEBINAR_THEMES = [
-  { id: "sdg4", theme: "Education for All & SDG 4", iconName: "GraduationCap" },
-  { id: "csr", theme: "CSR & Private Sector Education Impact", iconName: "Building2" },
-  { id: "ngo", theme: "NGOs & Community-Driven Education", iconName: "Heart" },
-  { id: "stem", theme: "STEM & Innovation", iconName: "Target" },
-  { id: "arts", theme: "Creative Arts & Education", iconName: "Sparkles" },
-  { id: "inclusion", theme: "Inclusion, Disability & Special Needs", iconName: "Accessibility" },
+  { id: "week-1-influencer", theme: "Week 1 · Influencer Education Impact FGD (3–7 Aug)", iconName: "Sparkles" },
+  { id: "week-2-icon", theme: "Week 2 · Africa Education Icon FGD (10–14 Aug)", iconName: "Crown" },
+  { id: "week-3-gbg-i", theme: "Week 3 · Gold–Blue Garnet I — CSR, STEM & EdTech (17–21 Aug)", iconName: "Target" },
+  { id: "week-4-gbg-ii", theme: "Week 4 · Gold–Blue Garnet II — Media, Creative Arts & Policy (24–28 Aug)", iconName: "Sparkles" },
+  { id: "week-5-gbg-iii", theme: "Week 5 · Gold–Blue Garnet III — Partnerships, NGOs & Community (31 Aug–4 Sep)", iconName: "Heart" },
+  { id: "week-6-platinum", theme: "Week 6 · Platinum Institutions — Government, Universities & Faith-Based (7–11 Sep)", iconName: "Building2" },
+  { id: "week-7-pre-voting", theme: "Week 7 · Continental Pre-Voting Forum & AGC Voting Education (14–15 Sep)", iconName: "GraduationCap" },
 ];
 
 // Legacy regions (static content)
