@@ -139,12 +139,7 @@ export function NESALandingPage() {
           <WhatMakesNESADifferentSection />
         </LazySection>
 
-        {/* 7. RECOGNITION FRAMEWORK — 4 tiers · 18 categories · 96 subs */}
-        <LazySection>
-          <AwardTiersSummarySection />
-        </LazySection>
-
-        {/* 8. ONE CONTINENT · TEN EDUCATION REGIONS · ONE MISSION (preview only) */}
+        {/* 7. ONE CONTINENT · TEN EDUCATION REGIONS · ONE MISSION (preview only) */}
         <LazySection>
           <ExploreRegionsSection />
         </LazySection>
