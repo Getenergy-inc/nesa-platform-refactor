@@ -43,7 +43,6 @@ const HomepageGalleryTeaser = lazy(() => import("@/components/gallery/HomepageGa
 const WhyNESAExistsSection = lazy(() => import("@/components/nesa/WhyNESAExistsSection").then(m => ({ default: m.WhyNESAExistsSection })));
 const VisionMissionObjectivesSection = lazy(() => import("@/components/nesa/VisionMissionObjectivesSection").then(m => ({ default: m.VisionMissionObjectivesSection })));
 const WhatMakesNESADifferentSection = lazy(() => import("@/components/nesa/WhatMakesNESADifferentSection").then(m => ({ default: m.WhatMakesNESADifferentSection })));
-const AwardTiersSummarySection = lazy(() => import("@/components/nesa/AwardTiersSummarySection").then(m => ({ default: m.AwardTiersSummarySection })));
 const TenRegionsBannerSection = lazy(() => import("@/components/nesa/InteractiveAfricaMap").then(m => ({ default: m.InteractiveAfricaMap })));
 const ExploreRegionsSection = lazy(() => import("@/components/nesa/ExploreRegionsSection").then(m => ({ default: m.ExploreRegionsSection })));
 const PoweredByVolunteersSection = lazy(() => import("@/components/nesa/PoweredByVolunteersSection").then(m => ({ default: m.PoweredByVolunteersSection })));
@@ -53,14 +52,10 @@ const SponsorsSection = lazy(() => import("@/components/nesa/SponsorsSection").t
 const GovernanceFirewallSection = lazy(() => import("@/components/nesa/GovernanceFirewallSection").then(m => ({ default: m.GovernanceFirewallSection })));
 const Vision2035RoadmapSection = lazy(() => import("@/components/nesa/Vision2035RoadmapSection").then(m => ({ default: m.Vision2035RoadmapSection })));
 const FinalCTASection = lazy(() => import("@/components/nesa/FinalCTASection").then(m => ({ default: m.FinalCTASection })));
-const WhatIsNESASection = lazy(() => import("@/components/nesa/WhatIsNESASection").then(m => ({ default: m.WhatIsNESASection })));
-const WhoWeHonourSection = lazy(() => import("@/components/nesa/WhoWeHonourSection").then(m => ({ default: m.WhoWeHonourSection })));
-const SevenPillarsHomeSection = lazy(() => import("@/components/nesa/SevenPillarsHomeSection").then(m => ({ default: m.SevenPillarsHomeSection })));
 const HowItWorksHomeSection = lazy(() => import("@/components/nesa/HowItWorksHomeSection").then(m => ({ default: m.HowItWorksHomeSection })));
-const RecognitionImpactLegacy = lazy(() => import("@/components/recognition/RecognitionImpactLegacy").then(m => ({ default: m.RecognitionImpactLegacy })));
 const RecognitionTiersHomeSection = lazy(() => import("@/components/nesa/RecognitionTiersHomeSection").then(m => ({ default: m.RecognitionTiersHomeSection })));
 const WhoWeRecogniseClustersSection = lazy(() => import("@/components/nesa/WhoWeRecogniseClustersSection").then(m => ({ default: m.WhoWeRecogniseClustersSection })));
-const TrustStripSection = lazy(() => import("@/components/nesa/TrustStripSection").then(m => ({ default: m.TrustStripSection })));
+
 const CallForNominationIconAward = lazy(() => import("@/components/nesa/CallForNominationIconAward").then(m => ({ default: m.CallForNominationIconAward })));
 
 export function NESALandingPage() {
@@ -109,44 +104,19 @@ export function NESALandingPage() {
           <HomepageGalleryTeaser />
         </LazySection>
 
-        {/* 3b. WHAT IS NESA-AFRICA — first-time visitor primer */}
-        <LazySection>
-          <WhatIsNESASection />
-        </LazySection>
-
-        {/* 3c. WHO WE HONOUR — 9 recognition identity cards */}
-        <LazySection>
-          <WhoWeHonourSection />
-        </LazySection>
-
-        {/* 3c-ii. WHO WE RECOGNISE — 3-cluster scannable grid */}
+        {/* 3a. WHO WE RECOGNISE — 3-cluster scannable grid (canonical identity surface) */}
         <LazySection>
           <WhoWeRecogniseClustersSection />
         </LazySection>
 
-        {/* 3c-iii. FOUR RECOGNITION TIERS — architecture surface */}
+        {/* 3b. FOUR RECOGNITION TIERS — architecture surface */}
         <LazySection>
           <RecognitionTiersHomeSection />
         </LazySection>
 
-        {/* 3d. 9 RECOGNITION PILLARS — summary linking to /awards/pillars */}
-        <LazySection>
-          <SevenPillarsHomeSection />
-        </LazySection>
-
-        {/* 3d-ii. TRUST STRIP — integrity firewall, one-line */}
-        <LazySection>
-          <TrustStripSection />
-        </LazySection>
-
-        {/* 3e. HOW IT WORKS — 6-step nomination → impact journey */}
+        {/* 3c. HOW IT WORKS — 6-step nomination → impact journey */}
         <LazySection>
           <HowItWorksHomeSection />
-        </LazySection>
-
-        {/* 3f. RECOGNITION → IMPACT → LEGACY — signature 7-step chain */}
-        <LazySection>
-          <RecognitionImpactLegacy />
         </LazySection>
 
         {/* 4. WHY NESA-AFRICA EXISTS */}
@@ -164,12 +134,7 @@ export function NESALandingPage() {
           <WhatMakesNESADifferentSection />
         </LazySection>
 
-        {/* 7. RECOGNITION FRAMEWORK — 4 tiers · 18 categories · 96 subs */}
-        <LazySection>
-          <AwardTiersSummarySection />
-        </LazySection>
-
-        {/* 8. ONE CONTINENT · TEN EDUCATION REGIONS · ONE MISSION (preview only) */}
+        {/* 7. ONE CONTINENT · TEN EDUCATION REGIONS · ONE MISSION (preview only) */}
         <LazySection>
           <ExploreRegionsSection />
         </LazySection>
