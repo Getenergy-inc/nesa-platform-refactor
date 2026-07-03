@@ -96,9 +96,9 @@ export function NESAFooter() {
               </div>
             </div>
             <p className="text-white/65 text-xs md:text-sm leading-relaxed mb-4">
-              A continental education recognition and impact platform celebrating
-              Africa's education changemakers through visibility, partnerships,
-              and measurable social impact.
+              NESA-Africa 2026 — Africa's Education Recognition &amp; Impact
+              Platform recognising the Enablers of Education for All Across
+              Africa.
             </p>
             <div className="flex gap-2 justify-center md:justify-start">
               {socialLinks.map((s) => (
