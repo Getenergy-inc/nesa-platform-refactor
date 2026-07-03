@@ -20,6 +20,7 @@ import {
   Medal,
   Music,
   Landmark,
+  Plane,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -84,6 +85,15 @@ const platinumCategories = [
       "Enablers of Education for All Across Africa — Faith-based and religious organisations advancing education through scholarships, school-building, vocational training, and spiritual formation across the continent.",
     nominateLink: "/nominate?award=platinum-recognition&subcategory=faith-based-organisations",
     learnMoreLink: "/awards/platinum-recognition",
+  },
+  {
+    icon: Plane,
+    tag: "PLATINUM RECOGNITION 2026",
+    title: "African Diaspora Education Impact Award",
+    body:
+      "Africans in the Diaspora are powerful Enablers of Education for All Across Africa. Through scholarships, mentorship, school support, advocacy, knowledge transfer, fundraising, partnerships, innovation and community investment, they continue to strengthen education back home. This category recognises diaspora Africans whose commitment, resources, influence and expertise are creating opportunities for learners, schools and communities across the continent.",
+    nominateLink: "/nominate?award=platinum-recognition&subcategory=african-diaspora",
+    learnMoreLink: "/awards/platinum-recognition/diaspora",
   },
 ];
 
@@ -299,7 +309,7 @@ export function CallForNominationIconAward() {
           </p>
         </motion.div>
 
-        <div className="mt-10 grid gap-5 md:grid-cols-3">
+        <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
           {platinumCategories.map(({ icon: Icon, tag, title, body, nominateLink, learnMoreLink }, i) => (
             <motion.article
               key={title}
