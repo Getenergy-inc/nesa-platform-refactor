@@ -30,7 +30,7 @@ const SECTIONS: FooterSection[] = [
     title: "Awards",
     links: [
       { label: "Africa Education Icon", href: "/awards/icon" },
-      { label: "Blue Garnet Awards", href: "/awards/blue-garnet" },
+      { label: "Gold-Blue Garnet Awards", href: "/awards/blue-garnet" },
       { label: "Platinum Recognition", href: "/awards/platinum" },
       { label: "Influencer Impact", href: "/awards/influencers" },
       { label: "All Categories", href: "/categories" },
