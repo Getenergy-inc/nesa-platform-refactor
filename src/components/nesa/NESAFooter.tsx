@@ -66,26 +66,7 @@ export function NESAFooter() {
 
   return (
     <footer className="bg-charcoal border-t border-gold/20 pb-24 md:pb-8">
-      {/* Site-wide "Explore Nominees" band */}
-      <div className="border-b border-gold/15 bg-gradient-to-r from-gold/[0.04] via-gold/[0.08] to-gold/[0.04]">
-        <div className="container mx-auto px-4 py-6 md:py-7 flex flex-col sm:flex-row items-center gap-4 sm:gap-6 text-center sm:text-left">
-          <div className="flex-1">
-            <p className="text-[11px] uppercase tracking-[0.18em] text-gold/80 font-semibold">
-              Africa&rsquo;s Education Hall of Fame
-            </p>
-            <h3 className="font-display text-lg md:text-xl text-ivory mt-1">
-              Discover the heroes transforming Africa&rsquo;s classrooms
-            </h3>
-          </div>
-          <Link
-            to="/nominees"
-            className="inline-flex items-center gap-2 rounded-full bg-gold px-5 h-11 text-sm font-semibold text-charcoal hover:bg-gold-dark hover:-translate-y-0.5 transition-all shadow-[0_6px_20px_-8px_hsl(var(--gold)/0.75)]"
-          >
-            <Sparkles className="h-4 w-4" />
-            Explore Existing Nominees
-          </Link>
-        </div>
-      </div>
+
 
       <div className="container mx-auto px-4 pt-10 md:pt-14">
 
