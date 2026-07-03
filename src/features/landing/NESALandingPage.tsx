@@ -109,44 +109,19 @@ export function NESALandingPage() {
           <HomepageGalleryTeaser />
         </LazySection>
 
-        {/* 3b. WHAT IS NESA-AFRICA — first-time visitor primer */}
-        <LazySection>
-          <WhatIsNESASection />
-        </LazySection>
-
-        {/* 3c. WHO WE HONOUR — 9 recognition identity cards */}
-        <LazySection>
-          <WhoWeHonourSection />
-        </LazySection>
-
-        {/* 3c-ii. WHO WE RECOGNISE — 3-cluster scannable grid */}
+        {/* 3a. WHO WE RECOGNISE — 3-cluster scannable grid (canonical identity surface) */}
         <LazySection>
           <WhoWeRecogniseClustersSection />
         </LazySection>
 
-        {/* 3c-iii. FOUR RECOGNITION TIERS — architecture surface */}
+        {/* 3b. FOUR RECOGNITION TIERS — architecture surface */}
         <LazySection>
           <RecognitionTiersHomeSection />
         </LazySection>
 
-        {/* 3d. 9 RECOGNITION PILLARS — summary linking to /awards/pillars */}
-        <LazySection>
-          <SevenPillarsHomeSection />
-        </LazySection>
-
-        {/* 3d-ii. TRUST STRIP — integrity firewall, one-line */}
-        <LazySection>
-          <TrustStripSection />
-        </LazySection>
-
-        {/* 3e. HOW IT WORKS — 6-step nomination → impact journey */}
+        {/* 3c. HOW IT WORKS — 6-step nomination → impact journey */}
         <LazySection>
           <HowItWorksHomeSection />
-        </LazySection>
-
-        {/* 3f. RECOGNITION → IMPACT → LEGACY — signature 7-step chain */}
-        <LazySection>
-          <RecognitionImpactLegacy />
         </LazySection>
 
         {/* 4. WHY NESA-AFRICA EXISTS */}
