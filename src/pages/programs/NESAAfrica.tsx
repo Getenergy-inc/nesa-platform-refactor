@@ -104,15 +104,6 @@ export default function NESAAfrica() {
           <LegacyImpactSection />
         </LazySection>
         
-        {/* === CLOSING === */}
-        
-        {/* Partners & Sponsors */}
-        <LazySection>
-          <SponsorsSection />
-        </LazySection>
-        
-        {/* Final Call to Action */}
-        <LazySection>
           <FinalCTASection />
         </LazySection>
         
