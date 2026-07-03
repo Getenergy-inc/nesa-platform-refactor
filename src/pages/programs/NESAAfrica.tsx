@@ -104,8 +104,6 @@ export default function NESAAfrica() {
           <LegacyImpactSection />
         </LazySection>
         
-          <FinalCTASection />
-        </LazySection>
         
         <NESAFooter />
       </div>
