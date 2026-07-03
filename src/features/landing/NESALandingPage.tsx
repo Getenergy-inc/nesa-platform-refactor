@@ -43,7 +43,6 @@ const HomepageGalleryTeaser = lazy(() => import("@/components/gallery/HomepageGa
 const WhyNESAExistsSection = lazy(() => import("@/components/nesa/WhyNESAExistsSection").then(m => ({ default: m.WhyNESAExistsSection })));
 const VisionMissionObjectivesSection = lazy(() => import("@/components/nesa/VisionMissionObjectivesSection").then(m => ({ default: m.VisionMissionObjectivesSection })));
 const WhatMakesNESADifferentSection = lazy(() => import("@/components/nesa/WhatMakesNESADifferentSection").then(m => ({ default: m.WhatMakesNESADifferentSection })));
-const AwardTiersSummarySection = lazy(() => import("@/components/nesa/AwardTiersSummarySection").then(m => ({ default: m.AwardTiersSummarySection })));
 const TenRegionsBannerSection = lazy(() => import("@/components/nesa/InteractiveAfricaMap").then(m => ({ default: m.InteractiveAfricaMap })));
 const ExploreRegionsSection = lazy(() => import("@/components/nesa/ExploreRegionsSection").then(m => ({ default: m.ExploreRegionsSection })));
 const PoweredByVolunteersSection = lazy(() => import("@/components/nesa/PoweredByVolunteersSection").then(m => ({ default: m.PoweredByVolunteersSection })));
@@ -53,11 +52,7 @@ const SponsorsSection = lazy(() => import("@/components/nesa/SponsorsSection").t
 const GovernanceFirewallSection = lazy(() => import("@/components/nesa/GovernanceFirewallSection").then(m => ({ default: m.GovernanceFirewallSection })));
 const Vision2035RoadmapSection = lazy(() => import("@/components/nesa/Vision2035RoadmapSection").then(m => ({ default: m.Vision2035RoadmapSection })));
 const FinalCTASection = lazy(() => import("@/components/nesa/FinalCTASection").then(m => ({ default: m.FinalCTASection })));
-const WhatIsNESASection = lazy(() => import("@/components/nesa/WhatIsNESASection").then(m => ({ default: m.WhatIsNESASection })));
-const WhoWeHonourSection = lazy(() => import("@/components/nesa/WhoWeHonourSection").then(m => ({ default: m.WhoWeHonourSection })));
-const SevenPillarsHomeSection = lazy(() => import("@/components/nesa/SevenPillarsHomeSection").then(m => ({ default: m.SevenPillarsHomeSection })));
 const HowItWorksHomeSection = lazy(() => import("@/components/nesa/HowItWorksHomeSection").then(m => ({ default: m.HowItWorksHomeSection })));
-const RecognitionImpactLegacy = lazy(() => import("@/components/recognition/RecognitionImpactLegacy").then(m => ({ default: m.RecognitionImpactLegacy })));
 const RecognitionTiersHomeSection = lazy(() => import("@/components/nesa/RecognitionTiersHomeSection").then(m => ({ default: m.RecognitionTiersHomeSection })));
 const WhoWeRecogniseClustersSection = lazy(() => import("@/components/nesa/WhoWeRecogniseClustersSection").then(m => ({ default: m.WhoWeRecogniseClustersSection })));
 const TrustStripSection = lazy(() => import("@/components/nesa/TrustStripSection").then(m => ({ default: m.TrustStripSection })));
