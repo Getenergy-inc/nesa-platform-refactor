@@ -74,10 +74,6 @@ export default function NESAAfrica() {
           <IntegritySection />
         </LazySection>
         
-        {/* EDI Integrity Wall — Full Lifecycle Journey */}
-        <LazySection>
-          <EDIIntegrityJourney />
-        </LazySection>
         
         {/* Key Dates */}
         <LazySection>
