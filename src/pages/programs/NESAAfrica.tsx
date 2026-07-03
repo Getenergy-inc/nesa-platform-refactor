@@ -53,15 +53,11 @@ export default function NESAAfrica() {
         {/* What's Happening Now */}
         <WhatsLiveSection />
         
-        {/* === AWARDS OVERVIEW === */}
-        <LazySection>
-          <CategoriesSection />
-        </LazySection>
-        
         {/* Choose Your Path */}
         <NominationPathsCards />
         
         {/* === BELOW FOLD — Voting & Governance === */}
+        
         
         {/* How It Works */}
         <LazySection>
