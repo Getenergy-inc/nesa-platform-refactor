@@ -1,64 +1,76 @@
-# NESA-Africa Duplication Cleanup Plan
 
-Content-only refactor. No redesign, no brand/layout changes. Goal: remove repeated sections, cards, CTAs, and copy while keeping the strongest version of each message in one canonical location.
+# NESA-Africa Landing Page — Platinum Update + Conversion Refactor
 
-## Scope & Approach
+## Part A — Immediate Platinum Card Fix (small, safe)
 
-Work in small, verifiable batches — one surface at a time, typecheck after each batch. Every removal keeps the strongest existing component; nothing is rewritten from scratch.
+File: `src/components/nesa/CallForNominationIconAward.tsx`
 
-## Batch 1 — Homepage (`src/features/landing/NESALandingPage.tsx`)
+1. Reorder `platinumCategories` to the approved final sequence:
+   1. Best Bilateral Organisations & International Embassies Education Enablers
+   2. Faith-Based & Religious Organisations Advancing Education
+   3. African Diaspora Education Impact Award
+   4. Nigeria Political Leaders Education Enablers
+2. Update the Faith-Based card body to the exact approved copy (two paragraphs about Christian, Islamic and other faith-based organisations).
+3. Normalise the Faith-Based tag to `PLATINUM RECOGNITION 2026` to match the diaspora card.
+4. Do NOT add a 5th "Civil Society & NGO" Platinum card — per your instruction it lives under Blue-Garnet only.
 
-The landing page currently renders **22 sections** with heavy overlap. Consolidate to a lean, conversion-focused sequence.
+Result: 4 Platinum cards, no duplicates, no design changes.
 
-**Remove (duplication of identity/architecture already covered elsewhere on the same page):**
-- `WhatIsNESASection` — About duplicated by `WhyNESAExistsSection` + `VisionMissionObjectivesSection`
-- `WhoWeHonourSection` — overlaps `WhoWeRecogniseClustersSection` (keep the 3-cluster version per prompt §10)
-- `SevenPillarsHomeSection` — pillars belong on Awards/Pillars page; homepage keeps tiers only
-- `RecognitionImpactLegacy` — duplicates `HowItWorksHomeSection` journey
-- `AwardTiersSummarySection` — duplicates `RecognitionTiersHomeSection` (keep the newer tiers surface)
-- `TrustStripSection` — integrity duplicated by `GovernanceFirewallSection` later on page
+## Part B — Conversion Refactor (larger, content + structure only)
 
-**Keep (canonical homepage sequence per prompt "Rule 2: Keep Homepage Short"):**
-Hero → Countdown → CallForNomination → Gallery teaser → WhoWeRecognise (3 clusters) → RecognitionTiers → HowItWorks → WhyNESAExists → VisionMissionObjectives → WhatMakesDifferent → ExploreRegions → Volunteers → Endorsements → ImpactPrograms → Sponsors → GovernanceFirewall → Vision2035 → FinalCTA.
+Goal: reduce bounce, self-select visitors, cut CTA overload. No redesign, no new components beyond one small pathway section, no colour/typography changes.
 
-## Batch 2 — Programs Page (`src/pages/programs/NESAAfrica.tsx`)
+### B1. Hero CTAs (`src/components/nesa/TrophyHeroSection.tsx`)
+Trim hero action buttons to exactly three:
+- Nominate Now
+- Explore Award Categories
+- Accept Your Nomination
 
-Currently duplicates most of homepage. Remove:
-- `CategoriesSection` (Awards page owns this)
-- `SponsorsSection` (Sponsors page owns this)
-- `FinalCTASection` (duplicates homepage CTA)
-- `EDIIntegrityJourney` — keep only `IntegritySection` (governance appears twice)
-- `NominationPathsCards` if it re-lists tiers already shown elsewhere on this page
+Move Sponsor / Volunteer / Judge / Donate / Wallet CTAs out of the hero. They stay reachable via the existing header nav and their dedicated sections lower on the page.
 
-Programs page keeps: Hero, Trust logos, What's Live, HowItWorks, VoteWithAGC, Integrity, Events, Watch, Music, Champions Directory, LegacyImpact.
+### B2. New "Who Are You Nominating?" pathway section
+New file: `src/components/nesa/VisitorPathwaySection.tsx`
+Four cards using the existing card style tokens (charcoal/gold, same `rounded-2xl border border-gold/20` pattern used in `CallForNominationIconAward`):
+1. An Individual Education Enabler → `/awards/africa-education-icon`
+2. An Organisation or Institution → `/awards/platinum-recognition`
+3. A Diaspora or Global Education Supporter → `/awards/platinum-recognition/diaspora`
+4. A Media, Sports, Music or Digital Voice → `/awards/influencers-education-impact`
 
-## Batch 3 — Footer (`src/components/nesa/NESAFooter.tsx`)
+Mounted in `NESALandingPage.tsx` right after `CountdownSection`, before `CallForNominationIconAward`.
 
-Trim any long mission/vision/pillar/tier prose to the approved short line:
-> "NESA-Africa 2026 — Africa's Education Recognition & Impact Platform recognising the Enablers of Education for All Across Africa."
+### B3. Nomination card ordering
+In `CallForNominationIconAward.tsx` reorder the tier blocks on the page to:
+Tier 1 Icon (Lifetime) → Tier 2 Blue-Garnet (CSR / EdTech / NGO / Media) → Tier 3 Platinum → Tier 4 Influencers.
 
-Keep link columns (Awards, Programmes, Get Involved, Contact), copyright, SCEF line. Remove duplicated About paragraphs, metric blocks, or repeated integrity notices.
+Currently the file renders Icon → Platinum → Blue-Garnet → Influencers. Just swap the JSX order of the Platinum and Blue-Garnet blocks; the arrays themselves don't move.
 
-## Batch 4 — Card CTA cleanup
+### B4. Add Blue-Garnet NGO + Media cards (merged NGO)
+Extend `corporateCategories` from 2 cards to 4:
+- Best CSR for Education in Africa (existing)
+- Best EdTech & STEM Innovation for Education (existing)
+- NGO Education Enablers for Education for All Award (new, merged Nigeria + Africa)
+- Nigeria Media Enablers for Education for All Award (new)
 
-Sweep card components for redundant "Learn More" buttons where the whole card is already a link (`NominateAndVoteSection`, `BePartOfMovementSection` are already clean — audit similar grid components: `WhoWeRecogniseClustersSection`, `RecognitionTiersHomeSection`, `SevenPillarsHomeSection`, `ImpactProgramsSection`). Enforce max 2 CTAs per section; remove trailing duplicate primary buttons.
+The merged NGO card CTA "Nominate Here" links to a new lightweight chooser route `/nominate/ngo` that presents two options (Nigeria NGO / Africa Regional NGO) and forwards to the correct existing nomination URL. New tiny page: `src/pages/nominate/NGOChooser.tsx`, wired in `App.tsx`.
 
-## Batch 5 — Terminology sweep (ripgrep-driven, low risk)
+### B5. Mobile "View All Categories"
+In `CallForNominationIconAward.tsx`, on `sm:` and below, show only the first 6 cards across all tiers and append a single `View All Nomination Categories` button linking to `/nominate` (or `/awards`). Implemented with Tailwind responsive classes (`hidden sm:block` on cards 7+, `sm:hidden` on the button) — no JS state, no design change.
 
-- `NESA Africa` / `Nesa Africa` → `NESA-Africa` (skip proper filenames, translation keys, image alts referring to legacy)
-- `Blue Garnet Awards` standalone → `Gold-Blue Garnet Awards` (skip historical/visual brand references and existing route slugs)
-- Standardize `Afri-EduTourism` spelling
+### B6. Duplication + CTA hygiene sweep
+- Remove repeated "Learn More" buttons on cards that link to the same tier page — keep one Learn More per tier, not per card, where the target URL is identical. (Icon tier cards all point to `/awards/africa-education-icon` — collapse to one Learn More at the tier footer.)
+- Confirm no Sponsor / Volunteer / Judge / Donate / Wallet CTAs appear inside any award card section.
+- No content changes to Sponsors, Volunteers, Governance, Vision2035, FinalCTA sections beyond confirming they aren't duplicated.
 
-## Out of scope (explicit per prompt)
+### B7. Final homepage section order (`NESALandingPage.tsx`)
+Hero → Countdown → **VisitorPathway (new)** → CallForNominations (Icon → Blue-Garnet → Platinum → Influencers) → Gallery → WhoWeRecogniseClusters → RecognitionTiers → HowItWorks → WhyNESAExists → VisionMissionObjectives → WhatMakesDifferent → ExploreRegions → Volunteers → Endorsements → ImpactPrograms → Sponsors → GovernanceFirewall → Vision2035 → FinalCTA.
 
-- No visual/design changes, no new components, no tier/pillar re-writing, no route changes, no translation-file edits beyond terminology, no changes to backend, RLS, or data files.
+## Out of scope
+- No redesign, no colour/typography/layout changes.
+- No backend/schema/RLS changes.
+- No translation file edits (English strings only; i18n can catch up later).
+- No changes to detail pages under `/awards/*` — only the homepage surfaces.
+- No new analytics events beyond reusing existing `trackEvent` calls.
 
-## Verification per batch
-
-1. `tsgo` typecheck
-2. Manual read of edited file
-3. Visit `/`, `/programs/nesa-africa`, footer via Playwright screenshot after Batch 1–3
-
-## Deliverable
-
-A leaner homepage and programs page, a shorter footer, deduplicated CTAs on cards, and consistent naming — same brand, same design system, less repetition.
+## Verification
+1. `tsgo` typecheck.
+2. Playwright screenshot of `/` at mobile (375) and desktop (1280) confirming: 3 hero CTAs, pathway section visible, tier order Icon→BG→Platinum→Influencers, 4 Platinum cards in the new order with the updated Faith-Based copy, mobile "View All Categories" button visible.
