@@ -57,6 +57,7 @@ const RecognitionTiersHomeSection = lazy(() => import("@/components/nesa/Recogni
 const WhoWeRecogniseClustersSection = lazy(() => import("@/components/nesa/WhoWeRecogniseClustersSection").then(m => ({ default: m.WhoWeRecogniseClustersSection })));
 
 const CallForNominationIconAward = lazy(() => import("@/components/nesa/CallForNominationIconAward").then(m => ({ default: m.CallForNominationIconAward })));
+const VisitorPathwaySection = lazy(() => import("@/components/nesa/VisitorPathwaySection").then(m => ({ default: m.VisitorPathwaySection })));
 
 export function NESALandingPage() {
   const { t } = useTranslation("pages");
@@ -93,10 +94,16 @@ export function NESALandingPage() {
         {/* 2. COUNTDOWN — Blue-Garnet Awards Gala, 22 Oct 2026, Lagos */}
         <CountdownSection />
 
-        {/* 2b. CALL FOR NOMINATIONS — Africa Education Icon Award (Lifetime 2006–2026) */}
+        {/* 2b. VISITOR PATHWAY — "Who are you nominating?" self-select before award cards */}
+        <LazySection>
+          <VisitorPathwaySection />
+        </LazySection>
+
+        {/* 2c. CALL FOR NOMINATIONS — Tier 1 Icon → Tier 2 Blue-Garnet → Tier 3 Platinum → Tier 4 Influencers */}
         <LazySection>
           <CallForNominationIconAward />
         </LazySection>
+
 
 
         {/* 3. THE ROAD TO NESA-AFRICA 2026 — pre-opening moments */}
