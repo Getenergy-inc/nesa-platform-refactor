@@ -1,6 +1,7 @@
 // Call for Nominations — NESA-Africa 2026 Multi-Category Surface
-// Premium homepage surface aligned with NESA-Africa charcoal + gold identity.
-// Four Award Tiers: Icon → Platinum → Blue-Garnet → Influencers
+// Homepage award-tier surface (charcoal + gold). Order:
+//   Tier 1 · Icon (Lifetime) → Tier 2 · Blue-Garnet → Tier 3 · Platinum → Tier 4 · Influencers
+// Mobile visitors see Tier 1 + Tier 2 only, then a "View All Nomination Categories" button.
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import {
@@ -21,6 +22,9 @@ import {
   Music,
   Landmark,
   Plane,
+  Newspaper,
+  HandHeart,
+  LayoutGrid,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -57,67 +61,91 @@ const iconCategories = [
   },
 ];
 
-/* ──────────────── TIER 2: PLATINUM (Institutional) ──────────────── */
+/* ──────────────── TIER 2: BLUE-GARNET (CSR · EdTech · NGO · Media) ──────────────── */
+const blueGarnetCategories = [
+  {
+    icon: HeartHandshake,
+    title: "Best CSR for Education in Africa",
+    subtitle: "Blue-Garnet Award 2026",
+    body:
+      "Companies changing classrooms across Africa. If your CSR programme is building schools, funding scholarships, training teachers or delivering digital learning, this is your moment to be recognised continent-wide.",
+    nominateLink: "/nominate?award=csr-education-africa",
+    learnMoreLink: "/awards/blue-garnet-categories/csr-education-africa",
+    eventLabel: "Nominate CSR",
+    nominateCta: "Nominate Here",
+  },
+  {
+    icon: Cpu,
+    title: "Best EdTech & STEM Innovation for Education",
+    subtitle: "Blue-Garnet Award 2026",
+    body:
+      "The future of African education is digital. If your platform, app, coding academy, STEM programme or EdTech solution is transforming how African children and youth learn — this award is for you.",
+    nominateLink: "/nominate?award=edutech-africa",
+    learnMoreLink: "/awards/blue-garnet-categories/edutech-africa",
+    eventLabel: "Nominate EdTech",
+    nominateCta: "Nominate Here",
+  },
+  {
+    icon: HandHeart,
+    title: "NGO Education Enablers for Education for All Award",
+    subtitle: "Blue-Garnet Award 2026",
+    body:
+      "Across Nigeria and Africa, NGOs are closing education gaps through literacy programmes, school support, scholarships, inclusion, community learning, teacher development, advocacy and grassroots interventions. This category recognises non-governmental organisations creating measurable education impact — with two nomination pathways: Nigeria and Africa Regional.",
+    nominateLink: "/nominate/ngo",
+    learnMoreLink: "/awards/blue-garnet-categories/ngo-education",
+    eventLabel: "Nominate NGO",
+    nominateCta: "Nominate Here",
+  },
+  {
+    icon: Newspaper,
+    title: "Nigeria Media Enablers for Education for All Award",
+    subtitle: "Blue-Garnet Award 2026",
+    body:
+      "Recognising Nigerian broadcast, print and digital media organisations amplifying Education for All — through investigative journalism, sustained coverage, educational programming and community advocacy that shifts policy and public attention toward learners.",
+    nominateLink: "/nominate?award=media-education-nigeria",
+    learnMoreLink: "/awards/blue-garnet-categories/media-education-nigeria",
+    eventLabel: "Nominate Media",
+    nominateCta: "Nominate Here",
+  },
+];
+
+/* ──────────────── TIER 3: PLATINUM (Institutional · Jury-only) ──────────────── */
 const platinumCategories = [
   {
     icon: Globe2,
-    tag: "PLATINUM AWARD 2026",
+    tag: "PLATINUM RECOGNITION 2026",
     title: "Best Bilateral Organisations & International Embassies Education Enablers",
     body:
-      "Enablers of Education for All Across Africa — International partners and embassies accelerating education outcomes through partnerships, funding, and technical support.",
+      "Enablers of Education for All Across Africa — International partners and embassies accelerating education outcomes through partnerships, funding and technical support.",
     nominateLink: "/nominate?award=platinum-recognition&subcategory=international-bilateral",
     learnMoreLink: "/awards/platinum-recognition",
   },
   {
-    icon: Landmark,
-    tag: "PLATINUM AWARD 2026",
-    title: "Nigeria Political Leaders Education Enablers",
-    body:
-      "Enablers of Education for All Across Africa — Political leaders and public officials whose policies and actions deliver real education transformation in Nigeria.",
-    nominateLink: "/nominate?award=platinum-recognition&subcategory=political-leaders-nigeria",
-    learnMoreLink: "/awards/platinum-recognition",
-  },
-  {
     icon: Users,
-    tag: "PLATINUM AWARD 2026",
+    tag: "PLATINUM RECOGNITION 2026",
     title: "Faith-Based & Religious Organisations Advancing Education",
     body:
-      "Enablers of Education for All Across Africa — Faith-based and religious organisations advancing education through scholarships, school-building, vocational training, and spiritual formation across the continent.",
+      "Faith-based and religious organisations are vital Enablers of Education for All Across Africa. Through schools, scholarships, vocational training, literacy programmes, community learning, moral formation, inclusion and support for underserved communities, they continue to advance education across the continent. This category recognises Christian, Islamic and other faith-based organisations whose education programmes, institutions and community interventions are creating measurable impact for learners, families and communities across Africa.",
     nominateLink: "/nominate?award=platinum-recognition&subcategory=faith-based-organisations",
-    learnMoreLink: "/awards/platinum-recognition",
+    learnMoreLink: "/awards/platinum-recognition/faith-based",
   },
   {
     icon: Plane,
     tag: "PLATINUM RECOGNITION 2026",
     title: "African Diaspora Education Impact Award",
     body:
-      "Africans in the Diaspora are powerful Enablers of Education for All Across Africa. Through scholarships, mentorship, school support, advocacy, knowledge transfer, fundraising, partnerships, innovation and community investment, they continue to strengthen education back home. This category recognises diaspora Africans whose commitment, resources, influence and expertise are creating opportunities for learners, schools and communities across the continent.",
+      "Africans in the Diaspora are powerful Enablers of Education for All Across Africa. Through scholarships, mentorship, school support, advocacy, knowledge transfer, fundraising, partnerships, innovation and community investment, they continue to strengthen education back home.",
     nominateLink: "/nominate?award=platinum-recognition&subcategory=african-diaspora",
     learnMoreLink: "/awards/platinum-recognition/diaspora",
   },
-];
-
-/* ──────────────── TIER 3: BLUE GARNET (CSR & EdTech) ──────────────── */
-const corporateCategories = [
   {
-    icon: HeartHandshake,
-    title: "Best CSR for Education in Africa",
-    subtitle: "Blue Garnet Award 2026",
+    icon: Landmark,
+    tag: "PLATINUM RECOGNITION 2026",
+    title: "Nigeria Political Leaders Education Enablers",
     body:
-      "Companies changing classrooms across Africa! Your CSR programme is building schools, funding scholarships, training teachers, or providing digital learning tools. This is your moment to be recognised continent-wide. Whether you are a bank, telco, oil & gas, manufacturing, or FMCG company — if you are investing in education, we want to celebrate you.",
-    nominateLink: "/nominate?award=csr-education-africa",
-    learnMoreLink: "/awards/blue-garnet-categories/csr-education-africa",
-    eventLabel: "Nominate CSR",
-  },
-  {
-    icon: Cpu,
-    title: "Best EdTech & STEM Innovation for Education",
-    subtitle: "Blue Garnet Award 2026",
-    body:
-      "The future of African education is digital. If your platform, app, coding academy, STEM programme, or EdTech solution is transforming how African children and youth learn — this award is for you. From rural classrooms to urban innovation hubs, we are looking for the boldest EdTech and STEM initiatives making real impact.",
-    nominateLink: "/nominate?award=edutech-africa",
-    learnMoreLink: "/awards/blue-garnet-categories/edutech-africa",
-    eventLabel: "Nominate EdTech",
+      "Enablers of Education for All Across Africa — Political leaders and public officials whose policies and actions deliver real education transformation in Nigeria.",
+    nominateLink: "/nominate?award=platinum-recognition&subcategory=political-leaders-nigeria",
+    learnMoreLink: "/awards/platinum-recognition",
   },
 ];
 
@@ -137,7 +165,7 @@ const influencerCategories = [
     tag: "CERTIFICATE OF RECOGNITION 2026",
     title: "Best Africa Sports Icon Education Enablers",
     body:
-      "Enablers of Education for All Across Africa — Athletes using their platforms for scholarships, school-building, and youth inspiration.",
+      "Enablers of Education for All Across Africa — Athletes using their platforms for scholarships, school-building and youth inspiration.",
     nominateLink: "/nominate?award=influencers-education-impact&subcategory=sports",
     learnMoreLink: "/awards/influencers-education-impact/sports",
   },
@@ -206,33 +234,12 @@ export function CallForNominationIconAward() {
           <p className="mx-auto mt-3 max-w-3xl text-base text-gold/90 sm:text-lg">
             Africa&apos;s Education Recognition &amp; Impact Platform — Recognising the Enablers of Education for All Across Africa.
           </p>
-          <p className="mx-auto mt-3 max-w-2xl font-display text-lg italic text-ivory/85 sm:text-xl">
-            Africa sees you. Africa appreciates you. Africa says thank you.
-          </p>
-        </motion.div>
-
-        {/* ── Platform description ── */}
-        <motion.div
-          initial={{ opacity: 0, y: 12 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.3 }}
-          transition={{ duration: 0.6, delay: 0.1 }}
-          className="mx-auto mt-8 max-w-3xl rounded-2xl border border-gold/20 bg-charcoal/60 p-5 text-center text-sm leading-relaxed text-ivory/80 sm:p-6 sm:text-base"
-        >
-          <span className="text-gold">NESA-Africa</span> (New Education Standard Award Africa) is Africa&apos;s Education Recognition &amp; Impact Platform — a continental ecosystem that identifies, verifies, recognises, connects and supports the people, organisations and institutions enabling Education for All.
         </motion.div>
 
         {/* ═══════════════════════════════════════════════════
             TIER 1 — AFRICA EDUCATION ICON AWARD
-            Lifetime Achievement · Highest Honour
             ═══════════════════════════════════════════════════ */}
-        <motion.div
-          initial={{ opacity: 0, y: 12 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.3 }}
-          transition={{ duration: 0.6, delay: 0.15 }}
-          className="mt-14 text-center"
-        >
+        <div className="mt-14 text-center">
           <div className="inline-flex items-center gap-2 rounded-full border border-gold/30 bg-gold/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-wider text-gold">
             <Trophy className="h-3.5 w-3.5" /> Tier 1 · Lifetime Achievement · 2006–2026
           </div>
@@ -242,7 +249,7 @@ export function CallForNominationIconAward() {
           <p className="mx-auto mt-3 max-w-3xl text-sm text-ivory/75 sm:text-base">
             For 20 years (2006–2026), quiet heroes have transformed education across our continent. This highest honour celebrates lifetime impact and legacy as <span className="text-gold">Enablers of Education for All Across Africa</span>.
           </p>
-        </motion.div>
+        </div>
 
         <div className="mt-10 grid gap-5 md:grid-cols-3">
           {iconCategories.map(({ icon: Icon, tag, title, body, nominateLink, learnMoreLink }, i) => (
@@ -288,94 +295,22 @@ export function CallForNominationIconAward() {
         </div>
 
         {/* ═══════════════════════════════════════════════════
-            TIER 2 — PLATINUM AWARD
-            Jury-Only · Institutional Excellence
+            TIER 2 — BLUE-GARNET AWARD (CSR · EdTech · NGO · Media)
             ═══════════════════════════════════════════════════ */}
-        <motion.div
-          initial={{ opacity: 0, y: 12 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.3 }}
-          transition={{ duration: 0.6, delay: 0.15 }}
-          className="mt-16 text-center"
-        >
+        <div className="mt-16 text-center">
           <div className="inline-flex items-center gap-2 rounded-full border border-gold/30 bg-gold/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-wider text-gold">
-            <Landmark className="h-3.5 w-3.5" /> Tier 2 · Jury-Only · Institutional Excellence
+            <Trophy className="h-3.5 w-3.5" /> Tier 2 · Blue-Garnet Award 2026
           </div>
           <h3 className="mt-4 font-display text-2xl font-bold text-ivory sm:text-3xl md:text-4xl">
-            Platinum Award 2026 – Jury-Only Institutional Recognition
+            Corporate, NGO, Innovation &amp; Media Recognition
           </h3>
           <p className="mx-auto mt-3 max-w-3xl text-sm text-ivory/75 sm:text-base">
-            Institutions shaping Africa&apos;s education future at scale.
+            Celebrating the companies, NGOs, innovators and media organisations transforming African education through investment, delivery and advocacy.
           </p>
-        </motion.div>
-
-        <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-          {platinumCategories.map(({ icon: Icon, tag, title, body, nominateLink, learnMoreLink }, i) => (
-            <motion.article
-              key={title}
-              initial={{ opacity: 0, y: 16 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.2 }}
-              transition={{ duration: 0.5, delay: 0.05 * i }}
-              className="group relative flex h-full flex-col rounded-2xl border border-gold/20 bg-gradient-to-br from-charcoal-light/70 via-charcoal/80 to-black p-6 transition-all hover:border-gold/50 hover:shadow-[0_20px_60px_-20px_rgba(201,162,39,0.4)]"
-            >
-              <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-gold to-amber-500 text-charcoal shadow-lg">
-                <Icon className="h-6 w-6" />
-              </div>
-              <p className="mt-4 text-[10px] font-semibold uppercase tracking-[0.18em] text-gold/80">{tag}</p>
-              <h4 className="mt-1 font-display text-lg font-bold text-ivory sm:text-xl">{title}</h4>
-              <p className="mt-3 text-sm leading-relaxed text-ivory/70">{body}</p>
-              <div className="mt-auto pt-6 flex flex-wrap gap-3">
-                <Button
-                  asChild
-                  size="sm"
-                  className="bg-gold font-bold text-charcoal shadow-md shadow-gold/20 hover:bg-gold/90"
-                  onClick={() => handleClick(nominateLink, `Nominate — ${title}`, "platinum_cta_click")}
-                >
-                  <Link to={nominateLink}>
-                    <Trophy className="mr-1.5 h-3.5 w-3.5" /> Nominate Now
-                  </Link>
-                </Button>
-                <Button
-                  asChild
-                  size="sm"
-                  variant="ghost"
-                  className="text-ivory/70 hover:bg-white/5 hover:text-ivory"
-                  onClick={() => handleClick(learnMoreLink, `Learn More — ${title}`, "platinum_cta_click")}
-                >
-                  <Link to={learnMoreLink}>
-                    Learn More <ArrowRight className="ml-1.5 h-3.5 w-3.5" />
-                  </Link>
-                </Button>
-              </div>
-            </motion.article>
-          ))}
         </div>
 
-        {/* ═══════════════════════════════════════════════════
-            TIER 3 — BLUE GARNET AWARD
-            Corporate & Innovation Recognition
-            ═══════════════════════════════════════════════════ */}
-        <motion.div
-          initial={{ opacity: 0, y: 12 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.3 }}
-          transition={{ duration: 0.6, delay: 0.15 }}
-          className="mt-16 text-center"
-        >
-          <div className="inline-flex items-center gap-2 rounded-full border border-gold/30 bg-gold/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-wider text-gold">
-            <Trophy className="h-3.5 w-3.5" /> Tier 3 · Blue Garnet Award 2026
-          </div>
-          <h3 className="mt-4 font-display text-2xl font-bold text-ivory sm:text-3xl md:text-4xl">
-            Corporate &amp; Innovation Recognition
-          </h3>
-          <p className="mx-auto mt-3 max-w-3xl text-sm text-ivory/75 sm:text-base">
-            Celebrating the companies and innovators transforming African education through CSR investment and digital solutions.
-          </p>
-        </motion.div>
-
-        <div className="mt-10 grid gap-5 md:grid-cols-2">
-          {corporateCategories.map(({ icon: Icon, title, subtitle, body, nominateLink, learnMoreLink, eventLabel }, i) => (
+        <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+          {blueGarnetCategories.map(({ icon: Icon, title, subtitle, body, nominateLink, learnMoreLink, eventLabel, nominateCta }, i) => (
             <motion.article
               key={title}
               initial={{ opacity: 0, y: 16 }}
@@ -387,12 +322,8 @@ export function CallForNominationIconAward() {
               <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-gold to-amber-500 text-charcoal shadow-lg">
                 <Icon className="h-6 w-6" />
               </div>
-              <h4 className="mt-4 font-display text-lg font-bold text-ivory sm:text-xl">
-                {title}
-              </h4>
-              <p className="mt-1 text-xs font-semibold uppercase tracking-wider text-gold/80">
-                {subtitle}
-              </p>
+              <h4 className="mt-4 font-display text-lg font-bold text-ivory sm:text-xl">{title}</h4>
+              <p className="mt-1 text-xs font-semibold uppercase tracking-wider text-gold/80">{subtitle}</p>
               <p className="mt-3 text-sm leading-relaxed text-ivory/70">{body}</p>
 
               <div className="mt-auto pt-6 flex flex-wrap gap-3">
@@ -403,7 +334,7 @@ export function CallForNominationIconAward() {
                   onClick={() => handleClick(nominateLink, eventLabel, "blue_garnet_cta_click")}
                 >
                   <Link to={nominateLink}>
-                    <Trophy className="mr-1.5 h-3.5 w-3.5" /> Nominate Now
+                    <Trophy className="mr-1.5 h-3.5 w-3.5" /> {nominateCta ?? "Nominate Now"}
                   </Link>
                 </Button>
                 <Button
@@ -411,10 +342,10 @@ export function CallForNominationIconAward() {
                   size="sm"
                   variant="ghost"
                   className="text-ivory/70 hover:bg-white/5 hover:text-ivory"
-                  onClick={() => handleClick(learnMoreLink, `Learn More — ${title}`, "blue_garnet_cta_click")}
+                  onClick={() => handleClick(learnMoreLink, `View — ${title}`, "blue_garnet_cta_click")}
                 >
                   <Link to={learnMoreLink}>
-                    Learn More <ArrowRight className="ml-1.5 h-3.5 w-3.5" />
+                    View <ArrowRight className="ml-1.5 h-3.5 w-3.5" />
                   </Link>
                 </Button>
               </div>
@@ -422,102 +353,139 @@ export function CallForNominationIconAward() {
           ))}
         </div>
 
-        {/* ═══════════════════════════════════════════════════
-            TIER 4 — INFLUENCERS EDUCATION IMPACT AWARD
-            Certificate of Recognition 2026
-            ═══════════════════════════════════════════════════ */}
-        <motion.div
-          initial={{ opacity: 0, y: 12 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.3 }}
-          transition={{ duration: 0.6, delay: 0.15 }}
-          className="mt-16 text-center"
-        >
-          <div className="inline-flex items-center gap-2 rounded-full border border-gold/30 bg-gold/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-wider text-gold">
-            <Users className="h-3.5 w-3.5" /> Tier 4 · Influencers Education Impact Award 2026
-          </div>
-          <h3 className="mt-4 font-display text-2xl font-bold text-ivory sm:text-3xl md:text-4xl">
-            Your Voice is Powerful. Your Platform Can Change Lives.
-          </h3>
-          <p className="mx-auto mt-3 max-w-3xl text-sm text-ivory/75 sm:text-base">
-            Social media influencers, sports stars, musicians, content creators — if you are using your influence to fund scholarships, build schools, mentor young learners, or produce educational content, you deserve to be celebrated.
-          </p>
-        </motion.div>
-
-        <div className="mt-10 grid gap-5 md:grid-cols-3">
-          {influencerCategories.map(({ icon: Icon, tag, title, body, nominateLink, learnMoreLink }, i) => (
-            <motion.article
-              key={title}
-              initial={{ opacity: 0, y: 16 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.2 }}
-              transition={{ duration: 0.5, delay: 0.05 * i }}
-              className="group relative flex h-full flex-col rounded-2xl border border-gold/20 bg-gradient-to-br from-charcoal-light/70 via-charcoal/80 to-black p-6 transition-all hover:border-gold/50 hover:shadow-[0_20px_60px_-20px_rgba(201,162,39,0.4)]"
-            >
-              <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-gold to-amber-500 text-charcoal shadow-lg">
-                <Icon className="h-6 w-6" />
-              </div>
-              <p className="mt-4 text-[10px] font-semibold uppercase tracking-[0.18em] text-gold/80">{tag}</p>
-              <h4 className="mt-1 font-display text-lg font-bold text-ivory sm:text-xl">{title}</h4>
-              <p className="mt-3 text-sm leading-relaxed text-ivory/70">{body}</p>
-              <div className="mt-auto pt-6 flex flex-wrap gap-3">
-                <Button
-                  asChild
-                  size="sm"
-                  className="bg-gold font-bold text-charcoal shadow-md shadow-gold/20 hover:bg-gold/90"
-                  onClick={() => handleClick(nominateLink, `Nominate — ${title}`, "influencer_cta_click")}
-                >
-                  <Link to={nominateLink}>
-                    <Trophy className="mr-1.5 h-3.5 w-3.5" /> Nominate Now
-                  </Link>
-                </Button>
-                <Button
-                  asChild
-                  size="sm"
-                  variant="ghost"
-                  className="text-ivory/70 hover:bg-white/5 hover:text-ivory"
-                  onClick={() => handleClick(learnMoreLink, `Learn More — ${title}`, "influencer_cta_click")}
-                >
-                  <Link to={learnMoreLink}>
-                    Learn More <ArrowRight className="ml-1.5 h-3.5 w-3.5" />
-                  </Link>
-                </Button>
-              </div>
-            </motion.article>
-          ))}
-        </div>
-
-        <motion.div
-          initial={{ opacity: 0, y: 16 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.3 }}
-          transition={{ duration: 0.6 }}
-          className="mt-8 flex flex-col items-center justify-center gap-4 sm:flex-row"
-        >
+        {/* ── Mobile View All Categories (below Tier 2, hides Tier 3 & 4 on mobile) ── */}
+        <div className="mt-8 flex justify-center sm:hidden">
           <Button
             asChild
             size="lg"
             className="bg-gold font-bold text-charcoal shadow-lg shadow-gold/20 hover:bg-gold/90"
-            onClick={() => handleClick("/nominate?award=influencers-education-impact", "Nominate Influencer", "influencer_cta_click")}
+            onClick={() => handleClick("/awards", "View All Nomination Categories", "view_all_categories_click")}
           >
-            <Link to="/nominate?award=influencers-education-impact">
-              <Trophy className="mr-2 h-4 w-4" /> Nominate an Influencer
+            <Link to="/awards">
+              <LayoutGrid className="mr-2 h-4 w-4" /> View All Nomination Categories
             </Link>
           </Button>
-          <Button
-            asChild
-            size="lg"
-            variant="ghost"
-            className="text-ivory/80 hover:bg-white/5 hover:text-ivory"
-            onClick={() => handleClick("/awards/influencers-education-impact", "Learn More — Influencers", "influencer_cta_click")}
-          >
-            <Link to="/awards/influencers-education-impact">
-              Learn More <ArrowRight className="ml-2 h-4 w-4" />
-            </Link>
-          </Button>
-        </motion.div>
+        </div>
 
-        {/* ── Nominate an Education Champion ── */}
+        {/* ═══════════════════════════════════════════════════
+            TIER 3 — PLATINUM AWARD (desktop / tablet only on homepage)
+            ═══════════════════════════════════════════════════ */}
+        <div className="hidden sm:block">
+          <div className="mt-16 text-center">
+            <div className="inline-flex items-center gap-2 rounded-full border border-gold/30 bg-gold/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-wider text-gold">
+              <Landmark className="h-3.5 w-3.5" /> Tier 3 · Jury-Only · Institutional Excellence
+            </div>
+            <h3 className="mt-4 font-display text-2xl font-bold text-ivory sm:text-3xl md:text-4xl">
+              Platinum Recognition 2026
+            </h3>
+            <p className="mx-auto mt-3 max-w-3xl text-sm text-ivory/75 sm:text-base">
+              Institutions shaping Africa&apos;s education future at scale.
+            </p>
+          </div>
+
+          <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+            {platinumCategories.map(({ icon: Icon, tag, title, body, nominateLink, learnMoreLink }, i) => (
+              <motion.article
+                key={title}
+                initial={{ opacity: 0, y: 16 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.2 }}
+                transition={{ duration: 0.5, delay: 0.05 * i }}
+                className="group relative flex h-full flex-col rounded-2xl border border-gold/20 bg-gradient-to-br from-charcoal-light/70 via-charcoal/80 to-black p-6 transition-all hover:border-gold/50 hover:shadow-[0_20px_60px_-20px_rgba(201,162,39,0.4)]"
+              >
+                <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-gold to-amber-500 text-charcoal shadow-lg">
+                  <Icon className="h-6 w-6" />
+                </div>
+                <p className="mt-4 text-[10px] font-semibold uppercase tracking-[0.18em] text-gold/80">{tag}</p>
+                <h4 className="mt-1 font-display text-lg font-bold text-ivory sm:text-xl">{title}</h4>
+                <p className="mt-3 text-sm leading-relaxed text-ivory/70">{body}</p>
+                <div className="mt-auto pt-6 flex flex-wrap gap-3">
+                  <Button
+                    asChild
+                    size="sm"
+                    className="bg-gold font-bold text-charcoal shadow-md shadow-gold/20 hover:bg-gold/90"
+                    onClick={() => handleClick(nominateLink, `Nominate — ${title}`, "platinum_cta_click")}
+                  >
+                    <Link to={nominateLink}>
+                      <Trophy className="mr-1.5 h-3.5 w-3.5" /> Nominate Now
+                    </Link>
+                  </Button>
+                  <Button
+                    asChild
+                    size="sm"
+                    variant="ghost"
+                    className="text-ivory/70 hover:bg-white/5 hover:text-ivory"
+                    onClick={() => handleClick(learnMoreLink, `Learn More — ${title}`, "platinum_cta_click")}
+                  >
+                    <Link to={learnMoreLink}>
+                      Learn More <ArrowRight className="ml-1.5 h-3.5 w-3.5" />
+                    </Link>
+                  </Button>
+                </div>
+              </motion.article>
+            ))}
+          </div>
+
+          {/* ═══════════════════════════════════════════════════
+              TIER 4 — INFLUENCERS EDUCATION IMPACT AWARD
+              ═══════════════════════════════════════════════════ */}
+          <div className="mt-16 text-center">
+            <div className="inline-flex items-center gap-2 rounded-full border border-gold/30 bg-gold/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-wider text-gold">
+              <Users className="h-3.5 w-3.5" /> Tier 4 · Influencers Education Impact Award 2026
+            </div>
+            <h3 className="mt-4 font-display text-2xl font-bold text-ivory sm:text-3xl md:text-4xl">
+              Your Voice is Powerful. Your Platform Can Change Lives.
+            </h3>
+            <p className="mx-auto mt-3 max-w-3xl text-sm text-ivory/75 sm:text-base">
+              Social media influencers, sports stars and musicians using their reach to advance Education for All.
+            </p>
+          </div>
+
+          <div className="mt-10 grid gap-5 md:grid-cols-3">
+            {influencerCategories.map(({ icon: Icon, tag, title, body, nominateLink, learnMoreLink }, i) => (
+              <motion.article
+                key={title}
+                initial={{ opacity: 0, y: 16 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.2 }}
+                transition={{ duration: 0.5, delay: 0.05 * i }}
+                className="group relative flex h-full flex-col rounded-2xl border border-gold/20 bg-gradient-to-br from-charcoal-light/70 via-charcoal/80 to-black p-6 transition-all hover:border-gold/50 hover:shadow-[0_20px_60px_-20px_rgba(201,162,39,0.4)]"
+              >
+                <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-gold to-amber-500 text-charcoal shadow-lg">
+                  <Icon className="h-6 w-6" />
+                </div>
+                <p className="mt-4 text-[10px] font-semibold uppercase tracking-[0.18em] text-gold/80">{tag}</p>
+                <h4 className="mt-1 font-display text-lg font-bold text-ivory sm:text-xl">{title}</h4>
+                <p className="mt-3 text-sm leading-relaxed text-ivory/70">{body}</p>
+                <div className="mt-auto pt-6 flex flex-wrap gap-3">
+                  <Button
+                    asChild
+                    size="sm"
+                    className="bg-gold font-bold text-charcoal shadow-md shadow-gold/20 hover:bg-gold/90"
+                    onClick={() => handleClick(nominateLink, `Nominate — ${title}`, "influencer_cta_click")}
+                  >
+                    <Link to={nominateLink}>
+                      <Trophy className="mr-1.5 h-3.5 w-3.5" /> Nominate Now
+                    </Link>
+                  </Button>
+                  <Button
+                    asChild
+                    size="sm"
+                    variant="ghost"
+                    className="text-ivory/70 hover:bg-white/5 hover:text-ivory"
+                    onClick={() => handleClick(learnMoreLink, `Learn More — ${title}`, "influencer_cta_click")}
+                  >
+                    <Link to={learnMoreLink}>
+                      Learn More <ArrowRight className="ml-1.5 h-3.5 w-3.5" />
+                    </Link>
+                  </Button>
+                </div>
+              </motion.article>
+            ))}
+          </div>
+        </div>
+
+        {/* ── Organisers / Endorsers (kept once, at the foot of the tier surface) ── */}
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -528,10 +496,10 @@ export function CallForNominationIconAward() {
           <div className="grid gap-8 lg:grid-cols-[1.2fr,1fr] lg:items-center">
             <div>
               <h3 className="font-display text-2xl font-bold text-ivory sm:text-3xl">
-                Nominate an Education Champion
+                Who Can Be Nominated?
               </h3>
               <p className="mt-3 text-sm text-ivory/75 sm:text-base">
-                You can nominate in any of these groups:
+                Nominations are open to individuals and organisations in any of these groups:
               </p>
               <ul className="mt-5 grid gap-3 sm:grid-cols-3">
                 {nominationGroups.map(({ icon: Icon, label }) => (
@@ -544,41 +512,6 @@ export function CallForNominationIconAward() {
                   </li>
                 ))}
               </ul>
-
-              <div className="mt-7 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
-                <Button
-                  asChild
-                  size="lg"
-                  className="bg-gold font-bold text-charcoal shadow-lg shadow-gold/20 hover:bg-gold/90"
-                  onClick={() => handleClick("/nominate?award=africa-education-icon", "Nominate Now")}
-                >
-                  <Link to="/nominate?award=africa-education-icon">
-                    <Trophy className="mr-2 h-4 w-4" /> Nominate Now
-                  </Link>
-                </Button>
-                <Button
-                  asChild
-                  size="lg"
-                  variant="outline"
-                  className="border-gold/40 bg-transparent text-gold hover:bg-gold/10 hover:text-gold"
-                  onClick={() => handleClick("/nominees/accept", "Accept Your Nomination")}
-                >
-                  <Link to="/nominees/accept">
-                    <CheckCircle2 className="mr-2 h-4 w-4" /> Accept Your Nomination
-                  </Link>
-                </Button>
-                <Button
-                  asChild
-                  size="lg"
-                  variant="ghost"
-                  className="text-ivory/80 hover:bg-white/5 hover:text-ivory"
-                  onClick={() => handleClick("/awards/africa-education-icon", "Learn More")}
-                >
-                  <Link to="/awards/africa-education-icon">
-                    Learn More <ArrowRight className="ml-2 h-4 w-4" />
-                  </Link>
-                </Button>
-              </div>
             </div>
 
             {/* Organisers + Endorsers */}

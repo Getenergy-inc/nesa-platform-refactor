@@ -58,6 +58,7 @@ import ResetPassword from "./pages/auth/ResetPassword";
 import NominateFlow from "./pages/NominateFlow";
 import NominateOfficial from "./pages/NominateOfficial";
 import NominateMvp from "./pages/NominateMvp";
+import NGOChooser from "./pages/nominate/NGOChooser";
 import NominateSchool from "./pages/impact/NominateSchool";
 import Dashboard from "./pages/Dashboard";
 import Unauthorized from "./pages/Unauthorized";
@@ -1369,6 +1370,16 @@ const App = () => (
                       <WithLayout>
                         <WithFirewall>
                           <NominateMvp />
+                        </WithFirewall>
+                      </WithLayout>
+                    }
+                  />
+                  <Route
+                    path="/nominate/ngo"
+                    element={
+                      <WithLayout>
+                        <WithFirewall>
+                          <NGOChooser />
                         </WithFirewall>
                       </WithLayout>
                     }
