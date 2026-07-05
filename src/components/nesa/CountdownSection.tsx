@@ -57,8 +57,11 @@ export function CountdownSection() {
           <Trophy className="h-5 w-5 text-gold" />
           {GALA_LABEL}
         </h2>
-        <p className="text-xs sm:text-sm text-white/60 mb-6">
+        <p className="text-xs sm:text-sm text-white/60 mb-2">
           22 October 2026 · Lagos, Nigeria
+        </p>
+        <p className="text-xs sm:text-sm text-white/55 mb-6 max-w-xl mx-auto">
+          Africa's flagship education recognition moment celebrating the Enablers of Education for All across Africa, the Diaspora and Friends of Africa.
         </p>
 
         {isExpired ? (
