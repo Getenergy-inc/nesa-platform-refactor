@@ -113,9 +113,17 @@ export function TrophyHeroSection() {
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.5 }}
-              className="text-white/90 text-[15px] sm:text-base md:text-lg mb-4 max-w-xl mx-auto lg:mx-0 leading-relaxed"
+              className="text-white/90 text-[15px] sm:text-base md:text-lg mb-3 max-w-xl mx-auto lg:mx-0 leading-relaxed"
             >
-              <span className="text-gold font-semibold">NESA-Africa</span> (New Education Standard Award Africa) is Africa's Education Recognition &amp; Impact Platform — a continental ecosystem that identifies, verifies, recognises, connects and supports the people, organisations and institutions enabling <span className="text-gold font-semibold">Education for All</span>.
+              <span className="text-gold font-semibold">NESA-Africa</span> — the New Education Standard Award Africa — is a continental recognition and impact platform that identifies, verifies, recognises, celebrates, connects and supports the people, organisations and institutions enabling <span className="text-gold font-semibold">Education for All</span> across Africa.
+            </motion.p>
+            <motion.p
+              initial={{ opacity: 0, y: 15 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.55 }}
+              className="text-gold/90 text-[13px] sm:text-sm md:text-base italic mb-4 max-w-xl mx-auto lg:mx-0"
+            >
+              Africa sees you. Africa appreciates you. Africa says thank you.
             </motion.p>
 
             {/* Recognition Architecture chips — scale at a glance */}
