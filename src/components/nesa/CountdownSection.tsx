@@ -1,17 +1,18 @@
 import { motion } from "framer-motion";
-import { Clock, Trophy } from "lucide-react";
+import { Clock, Trophy, ArrowRight } from "lucide-react";
+import { Link } from "react-router-dom";
 import { useCountdown } from "@/hooks/useCountdown";
 
 /**
  * MAIN LANDING-PAGE COUNTDOWN
  *
- * Hard-locked to: Blue Garnet Awards Gala — 22 October 2026, 18:00 WAT.
+ * Hard-locked to: Gold-Blue Garnet Awards Gala — 22 October 2026, 18:00 WAT.
  * Do NOT reintroduce "first future event" auto-selection here.
  * Other intermediate milestones (TV shows, voting windows) live in
  * <UpcomingEventsSection /> and have their own countdowns.
  */
 const GALA_TARGET = new Date("2026-10-22T18:00:00+01:00");
-const GALA_LABEL = "Blue Garnet Awards Gala — Grand Gala";
+const GALA_LABEL = "NESA-Africa 2026 Gold-Blue Garnet Awards Gala";
 const SEASON_BADGE = "NESA-Africa 2026";
 
 function CountdownBlock({ value, label }: { value: number; label: string }) {
