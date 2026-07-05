@@ -82,6 +82,16 @@ export function CountdownSection() {
             <CountdownBlock value={seconds} label="Sec" />
           </div>
         )}
+
+        <div className="mt-8">
+          <Link
+            to="/gala"
+            className="inline-flex items-center gap-2 rounded-full border border-gold/40 bg-gold/10 px-5 py-2.5 text-sm font-semibold text-gold hover:bg-gold/20 transition-colors"
+          >
+            View Gala Details
+            <ArrowRight className="h-4 w-4" />
+          </Link>
+        </div>
       </motion.div>
     </section>
   );
