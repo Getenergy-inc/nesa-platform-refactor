@@ -130,15 +130,6 @@ const platinumCategories = [
     learnMoreLink: "/awards/platinum-recognition/faith-based",
   },
   {
-    icon: Plane,
-    tag: "PLATINUM RECOGNITION 2026",
-    title: "African Diaspora Education Impact Award",
-    body:
-      "Africans in the Diaspora are powerful Enablers of Education for All Across Africa. Through scholarships, mentorship, school support, advocacy, knowledge transfer, fundraising, partnerships, innovation and community investment, they continue to strengthen education back home.",
-    nominateLink: "/nominate?award=platinum-recognition&subcategory=african-diaspora",
-    learnMoreLink: "/awards/platinum-recognition/diaspora",
-  },
-  {
     icon: Landmark,
     tag: "PLATINUM RECOGNITION 2026",
     title: "Nigeria Political Leaders Education Enablers",
@@ -147,6 +138,15 @@ const platinumCategories = [
     nominateLink: "/nominate?award=platinum-recognition&subcategory=political-leaders-nigeria",
     learnMoreLink: "/awards/platinum-recognition",
   },
+  {
+    icon: Plane,
+    tag: "PLATINUM RECOGNITION 2026",
+    title: "African Diaspora Education Impact Award",
+    body:
+      "Africans in the Diaspora are powerful Enablers of Education for All Across Africa. Through scholarships, mentorship, school support, advocacy, knowledge transfer, fundraising, partnerships, innovation and community investment, they continue to strengthen education back home.",
+    nominateLink: "/nominate?award=platinum-recognition&subcategory=african-diaspora",
+    learnMoreLink: "/awards/platinum-recognition/diaspora",
+  },
 ];
 
 /* ──────────────── TIER 4: INFLUENCERS (Certificate of Recognition 2026) ──────────────── */
@@ -154,7 +154,7 @@ const influencerCategories = [
   {
     icon: Smartphone,
     tag: "CERTIFICATE OF RECOGNITION 2026",
-    title: "Best Social Media Influencer Education Enablers",
+    title: "Best African Social Media Influencer Education Enablers",
     body:
       "Enablers of Education for All Across Africa — Digital creators advancing learning through social media platforms.",
     nominateLink: "/nominate?award=influencers-education-impact&subcategory=social-media",
