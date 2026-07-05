@@ -64,7 +64,7 @@
 /cookie-policy                                               /policies            301
 /language                                                    /                    301
 
-# --- 2. SPA routes (352 explicit paths from src/App.tsx) ---
+# --- 2. SPA routes (351 explicit paths from src/App.tsx) ---
 /nominees/gold-special-recognition/:categorySlug/:nomineeSlug /index.html          200
 /awards/explore/:pathwaySlug/:categorySlug/:subcategorySlug  /index.html          200
 /nominees/best-ngo-contribution-to-education/profile/:slug   /index.html          200
@@ -304,7 +304,6 @@
 /judges/:slug                                                /index.html          200
 /media/events                                                /index.html          200
 /media/photos                                                /index.html          200
-/nominate/ngo                                                /index.html          200
 /nrc/my-queue                                                /index.html          200
 /nrc/settings                                                /index.html          200
 /our-partners                                                /index.html          200
