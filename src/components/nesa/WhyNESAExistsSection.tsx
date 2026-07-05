@@ -52,8 +52,7 @@ export function WhyNESAExistsSection() {
         >
           <div className="overflow-hidden">
             <p className="text-ivory/70 max-w-2xl mx-auto mb-10 text-sm md:text-base text-center">
-              NESA-Africa transforms recognition into measurable educational
-              outcomes across the continent.
+              NESA-Africa connects recognition to action — through awards, media visibility, partnerships, sponsorship, school interventions, scholarships, community engagement and post-award legacy programmes that convert recognition into measurable transformation.
             </p>
 
             <ol className="grid grid-cols-2 md:grid-cols-6 gap-3 max-w-5xl mx-auto">

@@ -1,17 +1,18 @@
 import { motion } from "framer-motion";
-import { Clock, Trophy } from "lucide-react";
+import { Clock, Trophy, ArrowRight } from "lucide-react";
+import { Link } from "react-router-dom";
 import { useCountdown } from "@/hooks/useCountdown";
 
 /**
  * MAIN LANDING-PAGE COUNTDOWN
  *
- * Hard-locked to: Blue Garnet Awards Gala — 22 October 2026, 18:00 WAT.
+ * Hard-locked to: Gold-Blue Garnet Awards Gala — 22 October 2026, 18:00 WAT.
  * Do NOT reintroduce "first future event" auto-selection here.
  * Other intermediate milestones (TV shows, voting windows) live in
  * <UpcomingEventsSection /> and have their own countdowns.
  */
 const GALA_TARGET = new Date("2026-10-22T18:00:00+01:00");
-const GALA_LABEL = "Blue Garnet Awards Gala — Grand Gala";
+const GALA_LABEL = "NESA-Africa 2026 Gold-Blue Garnet Awards Gala";
 const SEASON_BADGE = "NESA-Africa 2026";
 
 function CountdownBlock({ value, label }: { value: number; label: string }) {
@@ -56,8 +57,11 @@ export function CountdownSection() {
           <Trophy className="h-5 w-5 text-gold" />
           {GALA_LABEL}
         </h2>
-        <p className="text-xs sm:text-sm text-white/60 mb-6">
+        <p className="text-xs sm:text-sm text-white/60 mb-2">
           22 October 2026 · Lagos, Nigeria
+        </p>
+        <p className="text-xs sm:text-sm text-white/55 mb-6 max-w-xl mx-auto">
+          Africa's flagship education recognition moment celebrating the Enablers of Education for All across Africa, the Diaspora and Friends of Africa.
         </p>
 
         {isExpired ? (
@@ -78,6 +82,16 @@ export function CountdownSection() {
             <CountdownBlock value={seconds} label="Sec" />
           </div>
         )}
+
+        <div className="mt-8">
+          <Link
+            to="/gala"
+            className="inline-flex items-center gap-2 rounded-full border border-gold/40 bg-gold/10 px-5 py-2.5 text-sm font-semibold text-gold hover:bg-gold/20 transition-colors"
+          >
+            View Gala Details
+            <ArrowRight className="h-4 w-4" />
+          </Link>
+        </div>
       </motion.div>
     </section>
   );
