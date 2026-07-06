@@ -15,14 +15,14 @@ import {
 
 const FOCUS_AREAS = [
   { icon: Award, label: "Recognition", copy: "Continental honours grounded in measurable educational impact." },
-  { icon: Eye, label: "Visibility", copy: "Amplify the work of educators, institutions, and changemakers." },
-  { icon: Handshake, label: "Partnerships", copy: "Connect honourees with funders, governments, and ecosystems." },
-  { icon: Sparkles, label: "Sponsorship", copy: "Channel CSR into verifiable, audited education outcomes." },
-  { icon: Building2, label: "School Interventions", copy: "Rebuild classrooms, accessibility, and inclusive learning spaces." },
-  { icon: GraduationCap, label: "Scholarships", copy: "EduAid-Africa pathways for learners, teachers, and institutions." },
-  { icon: Users, label: "Community Engagement", copy: "Local chapters, volunteers, ambassadors across 10 regions." },
-  { icon: InfinityIcon, label: "Legacy", copy: "Post-award programmes that compound over years, not headlines." },
+  { icon: Eye, label: "Visibility", copy: "Amplifying the work of education changemakers, institutions and communities." },
+  { icon: Handshake, label: "Partnerships", copy: "Connecting honourees with funders, governments, sponsors and development ecosystems." },
+  { icon: Building2, label: "School Interventions", copy: "Supporting classrooms, accessibility, inclusive learning spaces and Rebuild My School Africa projects." },
+  { icon: GraduationCap, label: "Scholarships", copy: "Creating EduAid-Africa pathways for learners, teachers and institutions." },
+  { icon: Users, label: "Community Engagement", copy: "Mobilising local chapters, volunteers and ambassadors across Africa and the Diaspora." },
+  { icon: InfinityIcon, label: "Legacy", copy: "Building post-award programmes that continue beyond the gala." },
 ];
+
 
 export function WhatMakesNESADifferentSection() {
   return (
