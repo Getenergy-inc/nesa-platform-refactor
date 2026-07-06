@@ -1,0 +1,3 @@
+# Vercel hosts the Vite frontend only. The Express app in backend/ is unused
+# (superseded by Supabase Edge Functions) and must not be detected as a service.
+backend
