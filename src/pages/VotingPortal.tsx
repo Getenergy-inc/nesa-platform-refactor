@@ -47,7 +47,7 @@ export default function VotingPortal() {
         <title>Voting Portal — NESA-Africa</title>
         <meta
           name="description"
-          content="Cast your vote in NESA-Africa's Gold and Blue Garnet recognition tracks. Secure, audited and role-based."
+          content="Cast your vote in NESA-Africa's Gold-Blue Garnet recognition tracks. Secure, audited and role-based."
         />
       </Helmet>
 

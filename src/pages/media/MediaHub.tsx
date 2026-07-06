@@ -26,7 +26,7 @@ const mediaCategories = [
   },
   {
     title: "Online Shows",
-    description: "4 flagship shows: Platinum, Icon, Gold & Blue Garnet (3 hrs each).",
+    description: "4 flagship shows: Platinum, Icon, Gold-Blue Garnet (3 hrs each).",
     href: "/media/shows",
     icon: Video,
   },

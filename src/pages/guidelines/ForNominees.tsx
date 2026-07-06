@@ -117,7 +117,7 @@ const TIER_NEXT_STEPS = [
     ],
   },
   {
-    tier: "Competitive Awards (Gold & Blue Garnet)",
+    tier: "Competitive Awards (Gold-Blue Garnet)",
     icon: Star,
     color: "blue",
     description: "Public voting (30–50%) combined with jury assessment (50–70%).",

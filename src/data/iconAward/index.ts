@@ -588,7 +588,7 @@ export const ICON_NOMINEES: IconNominee[] = [
   }),
 ];
 
-// Merge refactored 2005–2025 secretariat roster + 2026 workbook (deduped by slug).
+// Merge refactored 2006–2026 secretariat roster + 2026 workbook (deduped by slug).
 // Keeps legacy entries authoritative when slugs collide.
 import { REFACTORED_ICON_NOMINEES } from "./refactoredIconNominees";
 import { WORKBOOK_ICON_NOMINEES } from "./workbookNominees";

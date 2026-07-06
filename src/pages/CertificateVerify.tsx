@@ -386,7 +386,7 @@ export default function CertificateVerify() {
                       <p className="text-xs text-ivory/50">1-year validity, renewable</p>
                     </div>
                     <div className="p-4 bg-charcoal rounded-lg">
-                      <h4 className="font-medium text-ivory mb-1">Gold & Blue Garnet</h4>
+                      <h4 className="font-medium text-ivory mb-1">Gold-Blue Garnet</h4>
                       <p className="text-xs text-ivory/50">Season-specific recognition</p>
                     </div>
                     <div className="p-4 bg-charcoal rounded-lg">

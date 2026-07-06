@@ -76,7 +76,7 @@ const JOURNEY_STEPS = [
     step: 4,
     title: "Public Voting",
     subtitle: "For Voters",
-    description: "AGC credits, Gold & Blue Garnet voting windows, and ethical rules.",
+    description: "AGC credits, Gold-Blue Garnet voting windows, and ethical rules.",
     icon: Vote,
     image: ediVotingImg,
     href: "/guidelines/voters",

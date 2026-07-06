@@ -63,7 +63,7 @@ const init: FormState = {
 const FAMILY_LABELS: Record<string, string> = {
   icon: "Africa Education Icon",
   "africa-education-icon": "Africa Education Icon",
-  "gold-bluegarnet": "Gold & Blue Garnet",
+  "gold-bluegarnet": "Gold-Blue Garnet",
   platinum: "Platinum Certificate of Recognition",
   influencer: "Education Influencer Impact",
   rmsa: "Rebuild My School Africa",

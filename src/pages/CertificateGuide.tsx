@@ -23,7 +23,7 @@ const STEPS = [
   {
     icon: Sparkles,
     title: "Open My Certificates",
-    body: "Go to /my-certificates from the user menu. Every Platinum, Gold, Blue Garnet, Africa Education Icon, judge, and participation certificate appears here.",
+    body: "Go to /my-certificates from the user menu. Every Platinum, Gold-Blue Garnet, Africa Education Icon, judge, and participation certificate appears here.",
   },
   {
     icon: Download,
