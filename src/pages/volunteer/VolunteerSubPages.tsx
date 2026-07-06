@@ -93,7 +93,12 @@ function ReferralsInner() {
       const { data: v } = await supabase.from("volunteers").select("id,full_name,referral_code,referral_count").eq("user_id", user.id).maybeSingle();
       setVol(v);
       if (v) {
-        const { data: r } = await supabase.from("volunteer_referrals").select("*").eq("volunteer_id", v.id).order("created_at", { ascending: false });
+        // Privacy: do NOT select referred_email — referred person's contact is protected PII.
+        const { data: r } = await supabase
+          .from("volunteer_referrals")
+          .select("id,volunteer_id,referred_name,status,created_at,converted_at,reward_agc")
+          .eq("volunteer_id", v.id)
+          .order("created_at", { ascending: false });
         setRefs(r ?? []);
       }
     })();
