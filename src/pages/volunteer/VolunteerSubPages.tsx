@@ -118,7 +118,7 @@ function ReferralsInner() {
               {refs.map((r) => (
                 <div key={r.id} className="py-3 flex items-center justify-between">
                   <div>
-                    <div className="text-white text-sm">{r.referred_name ?? r.referred_email ?? "Anonymous"}</div>
+                    <div className="text-white text-sm">{r.referred_name ?? "Anonymous"}</div>
                     <div className="text-xs text-white/50">{new Date(r.created_at).toLocaleDateString()}</div>
                   </div>
                   <Badge className={r.status === "converted" ? "bg-gold/20 text-gold border-gold/40" : "bg-white/10 text-white/70"}>
