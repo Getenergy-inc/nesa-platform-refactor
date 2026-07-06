@@ -325,7 +325,10 @@ Deno.serve(async (req) => {
   if (isNewNominee) {
     const acceptanceToken = crypto.randomUUID();
     const tokenExpiry = new Date(Date.now() + 14 * 24 * 60 * 60 * 1000).toISOString();
-    const publicBase = supabaseUrl.replace(".supabase.co", ".lovable.app");
+    // Public site domain for acceptance links. Defaults to the production
+    // domain (nesa.africa); override with the PUBLIC_SITE_URL secret if needed
+    // (e.g. to point at a preview deployment while testing).
+    const publicBase = (Deno.env.get("PUBLIC_SITE_URL") || "https://nesa.africa").replace(/\/+$/, "");
 
     const { error: letterError } = await supabase
       .from("acceptance_letters")
