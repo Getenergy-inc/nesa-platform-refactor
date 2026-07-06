@@ -423,6 +423,16 @@ const App = () => (
                   <Route path="/become-sponsor" element={<Navigate to="/sponsor" replace />} />
 
 
+                  {/* Master-register canonical aliases → existing implementations
+                      (Stage B: make the register's short/canonical paths resolve). */}
+                  <Route path="/awards/influencer" element={<Navigate to="/awards/influencer-education-impact" replace />} />
+                  <Route path="/judges/apply" element={<Navigate to="/judgeapply" replace />} />
+                  <Route path="/gala/tickets" element={<Navigate to="/tickets" replace />} />
+                  <Route path="/gala/attendance" element={<Navigate to="/tickets" replace />} />
+                  <Route path="/prenominate" element={<Navigate to="/nominate" replace />} />
+                  <Route path="/verify" element={<Navigate to="/certificates/verify" replace />} />
+                  <Route path="/membership" element={<Navigate to="/get-involved" replace />} />
+
                   {/* Nominee legacy */}
                   <Route path="/nominee" element={<Navigate to="/nominees" replace />} />
                   <Route path="/nominee-directory" element={<Navigate to="/nominees" replace />} />
