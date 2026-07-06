@@ -144,7 +144,8 @@ Deno.serve(async (req) => {
         phone_raw: nominator.phone || null,
         country_residence: nominator.country_residence || null,
         country_origin: nominator.country_origin || null,
-        consent: nominator.consent,
+        consent_given: nominator.consent,
+        consent_at: nominator.consent ? new Date().toISOString() : null,
         user_id: userId,
       })
       .select("id")
@@ -159,7 +160,8 @@ Deno.serve(async (req) => {
         phone_raw: nominator.phone || null,
         country_residence: nominator.country_residence || null,
         country_origin: nominator.country_origin || null,
-        consent: nominator.consent,
+        consent_given: nominator.consent,
+        consent_at: nominator.consent ? new Date().toISOString() : null,
         ...(userId ? { user_id: userId } : {}),
       })
       .eq("id", nominatorId);
@@ -191,6 +193,14 @@ Deno.serve(async (req) => {
       .limit(1)
       .maybeSingle();
     subcategoryId = sub?.id ?? null;
+  }
+
+  // subcategory_id is NOT NULL on both nominees and nominations — fail clearly
+  // (400) rather than 500 if the slug does not map to a known subcategory.
+  if (!subcategoryId) {
+    return json(400, {
+      error: `Unknown award category "${slugCandidates.join('" / "')}". Nomination not saved.`,
+    });
   }
 
   const nomineeEmail = (nomination.nominee_email || "").trim() || null;
@@ -277,11 +287,11 @@ Deno.serve(async (req) => {
       season_id: season.id,
       subcategory_id: subcategoryId,
       identity_hash: identityHash,
-      source: "website",
-      source_channel: "website_official",
+      source: "PUBLIC",
+      source_channel: "website",
       submission_kind: "official_nomination",
-      publication_status: "under_review",
-      workflow_status: "SUBMITTED",
+      publication_status: "queued",
+      workflow_status: "SUBMITTED_PENDING_ACCEPTANCE",
       award_family: nomination.award_family,
       award_category_slug: nomination.award_category_slug,
       award_subcategory_slug: nomination.award_subcategory_slug ?? null,
@@ -295,7 +305,7 @@ Deno.serve(async (req) => {
       nominee_bio: bio,
       justification: nomination.reason,
       evidence_urls: evidenceUrls,
-      status: "submitted",
+      status: "pending",
     })
     .select("id")
     .single();
