@@ -6,12 +6,12 @@ import {
   Award,
   Eye,
   Handshake,
-  Sparkles,
   Building2,
   GraduationCap,
   Users,
   Infinity as InfinityIcon,
 } from "lucide-react";
+
 
 const FOCUS_AREAS = [
   { icon: Award, label: "Recognition", copy: "Continental honours grounded in measurable educational impact." },
