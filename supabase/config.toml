@@ -51,6 +51,14 @@ verify_jwt = false
 [functions.nominations]
 verify_jwt = false
 
+# Public nomination intake (no login required — validated + rate-limited in-code)
+[functions.nominations-submit]
+verify_jwt = false
+
+# Email dispatcher: drains queued rows from public.notifications via Resend
+[functions.send-notifications]
+verify_jwt = false
+
 [functions.verify]
 verify_jwt = false
 
