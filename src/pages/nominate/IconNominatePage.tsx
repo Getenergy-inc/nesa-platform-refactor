@@ -53,13 +53,13 @@ export default function IconNominatePage() {
       <div className="bg-charcoal min-h-screen">
         <div className="container max-w-5xl py-12 md:py-16">
           <motion.div initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }}>
-            <p className="text-gold-500/80 text-sm font-medium tracking-wide uppercase">
+            <p className="text-gold/80 text-sm font-medium tracking-wide uppercase">
               NESA-Africa 2026 · Call for Nominations
             </p>
-            <h1 className="text-3xl md:text-5xl font-playfair text-gold-500 mt-3">
+            <h1 className="text-3xl md:text-5xl font-playfair text-gold mt-3">
               Africa Education Icon Award
             </h1>
-            <p className="text-muted-foreground mt-4 max-w-2xl">
+            <p className="text-white/60 mt-4 max-w-2xl">
               Recognising lifetime enablers of education across the continent. Choose a category,
               then the recognition group that fits your nominee. Each link opens a ready-to-fill
               nomination form.
@@ -76,24 +76,24 @@ export default function IconNominatePage() {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.05 * i }}
                 >
-                  <Card className="p-6 md:p-7 border-gold-500/20 bg-charcoal-light/40">
+                  <Card className="p-6 md:p-7 border-gold/20 bg-charcoal-light/40">
                     <div className="flex items-start gap-4">
-                      <div className="shrink-0 w-12 h-12 rounded-xl bg-gold-500/15 border border-gold-500/30 grid place-items-center">
-                        <Icon className="w-6 h-6 text-gold-500" />
+                      <div className="shrink-0 w-12 h-12 rounded-xl bg-gold/15 border border-gold/30 grid place-items-center">
+                        <Icon className="w-6 h-6 text-gold" />
                       </div>
                       <div className="flex-1">
-                        <h2 className="text-xl font-playfair text-foreground">{cat.title}</h2>
-                        <p className="text-sm text-muted-foreground mt-1">{cat.blurb}</p>
+                        <h2 className="text-xl font-playfair text-white">{cat.title}</h2>
+                        <p className="text-sm text-white/60 mt-1">{cat.blurb}</p>
 
                         <div className="grid sm:grid-cols-3 gap-3 mt-5">
                           {GROUPS.map((g) => (
                             <Link
                               key={g.key}
                               to={nominateHref(cat.slug, g.key)}
-                              className="group flex items-center justify-between gap-2 rounded-lg border border-gold-500/25 bg-gold-500/5 px-4 py-3 text-sm text-foreground hover:bg-gold-500/15 hover:border-gold-500/50 transition-colors"
+                              className="group flex items-center justify-between gap-2 rounded-lg border border-gold/25 bg-gold/5 px-4 py-3 text-sm text-white hover:bg-gold/15 hover:border-gold/50 transition-colors"
                             >
                               <span>{g.label}</span>
-                              <ArrowRight className="w-4 h-4 text-gold-500 opacity-60 group-hover:opacity-100 group-hover:translate-x-0.5 transition-all" />
+                              <ArrowRight className="w-4 h-4 text-gold opacity-60 group-hover:opacity-100 group-hover:translate-x-0.5 transition-all" />
                             </Link>
                           ))}
                         </div>
@@ -105,7 +105,7 @@ export default function IconNominatePage() {
             })}
           </div>
 
-          <p className="text-xs text-muted-foreground mt-8">
+          <p className="text-xs text-white/60 mt-8">
             Nominations are free. Each nominee is verified by the Nomination Review Committee before
             publication.
           </p>

@@ -181,11 +181,11 @@ export default function NominateOfficial() {
     return (
       <div className="bg-charcoal min-h-screen">
         <div className="container max-w-2xl py-16">
-          <Card className="p-8 text-center space-y-4 border-gold-500/30">
-            <CheckCircle2 className="w-14 h-14 text-gold-500 mx-auto" />
+          <Card className="p-8 text-center space-y-4 border-gold/30">
+            <CheckCircle2 className="w-14 h-14 text-gold mx-auto" />
             <h1 className="text-2xl font-playfair">Nomination received</h1>
             <p className="text-muted-foreground">
-              Reference: <code className="text-gold-500">{submittedId}</code>
+              Reference: <code className="text-gold">{submittedId}</code>
             </p>
             <p className="text-sm text-muted-foreground">
               We've logged your official nomination and queued it for evidence review. You'll receive an
@@ -223,10 +223,10 @@ export default function NominateOfficial() {
       <div className="bg-charcoal min-h-screen">
         <div className="container max-w-3xl py-10 md:py-14">
           <motion.div initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }}>
-            <h1 className="text-3xl md:text-4xl font-playfair text-gold-500">
+            <h1 className="text-3xl md:text-4xl font-playfair text-gold">
               Official Nomination
             </h1>
-            <p className="text-muted-foreground mt-2">
+            <p className="text-white/70 mt-2">
               {familyLabel}
               {category && ` · ${categoryLabel}`}
               {region && ` · ${region}`}
@@ -234,7 +234,7 @@ export default function NominateOfficial() {
               {state && ` · ${state}`}
             </p>
             {recognitionLabel && (
-              <span className="inline-block mt-3 px-3 py-1 rounded-full text-xs font-medium bg-gold-500/15 text-gold-500 border border-gold-500/30">
+              <span className="inline-block mt-3 px-3 py-1 rounded-full text-xs font-medium bg-gold/15 text-gold border border-gold/30">
                 Recognition group: {recognitionLabel}
               </span>
             )}
@@ -252,8 +252,8 @@ export default function NominateOfficial() {
               />
             </div>
 
-            <Card className="p-6 space-y-4">
-              <h2 className="text-lg font-semibold text-gold-500">Nominee</h2>
+            <Card className="p-6 space-y-4 bg-charcoal-light/40 border-gold/20">
+              <h2 className="text-lg font-semibold text-gold">Nominee</h2>
               <div className="grid md:grid-cols-2 gap-4">
                 <Field label="Nominee full name *" value={form.nominee_name} onChange={(v) => set("nominee_name", v)} required />
                 <Field label="Type (individual / organization / school)" value={form.nominee_type} onChange={(v) => set("nominee_type", v)} />
@@ -266,21 +266,21 @@ export default function NominateOfficial() {
                 <Field label="Social links (comma separated)" value={form.social_links} onChange={(v) => set("social_links", v)} />
               </div>
               <div>
-                <Label>Impact summary *</Label>
-                <Textarea rows={4} value={form.impact_summary} onChange={(e) => set("impact_summary", e.target.value)} required />
+                <Label className="text-white/80">Impact summary *</Label>
+                <Textarea rows={4} value={form.impact_summary} onChange={(e) => set("impact_summary", e.target.value)} required className="mt-1.5 bg-charcoal/60 border-gold/20 text-white placeholder:text-white/40 focus-visible:ring-gold/40" />
               </div>
               <div>
-                <Label>Reason for nomination *</Label>
-                <Textarea rows={4} value={form.reason} onChange={(e) => set("reason", e.target.value)} required />
+                <Label className="text-white/80">Reason for nomination *</Label>
+                <Textarea rows={4} value={form.reason} onChange={(e) => set("reason", e.target.value)} required className="mt-1.5 bg-charcoal/60 border-gold/20 text-white placeholder:text-white/40 focus-visible:ring-gold/40" />
               </div>
               <div>
-                <Label>Evidence links (URLs, comma or newline separated)</Label>
-                <Textarea rows={3} value={form.evidence_links} onChange={(e) => set("evidence_links", e.target.value)} placeholder="https://drive.google.com/..." />
+                <Label className="text-white/80">Evidence links (URLs, comma or newline separated)</Label>
+                <Textarea rows={3} value={form.evidence_links} onChange={(e) => set("evidence_links", e.target.value)} placeholder="https://drive.google.com/..." className="mt-1.5 bg-charcoal/60 border-gold/20 text-white placeholder:text-white/40 focus-visible:ring-gold/40" />
               </div>
             </Card>
 
-            <Card className="p-6 space-y-4">
-              <h2 className="text-lg font-semibold text-gold-500">Nominator (you)</h2>
+            <Card className="p-6 space-y-4 bg-charcoal-light/40 border-gold/20">
+              <h2 className="text-lg font-semibold text-gold">Nominator (you)</h2>
               <div className="grid md:grid-cols-2 gap-4">
                 <Field label="Full name *" value={form.nm_full_name} onChange={(v) => set("nm_full_name", v)} required />
                 <Field label="Email *" type="email" value={form.nm_email} onChange={(v) => set("nm_email", v)} required />
@@ -290,7 +290,7 @@ export default function NominateOfficial() {
               </div>
               <label className="flex items-start gap-3 cursor-pointer">
                 <Checkbox checked={form.nm_consent} onCheckedChange={(v) => set("nm_consent", !!v)} />
-                <span className="text-sm text-muted-foreground">
+                <span className="text-sm text-white/70">
                   I confirm the information provided is accurate and I consent to NESA-Africa
                   contacting me about this nomination.
                 </span>
@@ -301,7 +301,7 @@ export default function NominateOfficial() {
               <Button type="button" variant="outline" onClick={() => navigate(-1)} disabled={submitting}>
                 Cancel
               </Button>
-              <Button type="submit" disabled={submitting} className="bg-gold-500 text-charcoal hover:bg-gold-400">
+              <Button type="submit" disabled={submitting} className="bg-gold text-charcoal hover:bg-gold-light">
                 {submitting && <Loader2 className="w-4 h-4 mr-2 animate-spin" />}
                 Submit Official Nomination
               </Button>
@@ -321,13 +321,14 @@ function Field({
 }) {
   return (
     <div>
-      <Label>{label}</Label>
+      <Label className="text-white/80">{label}</Label>
       <Input
         type={type}
         value={value}
         onChange={(e) => onChange(e.target.value)}
         required={required}
         placeholder={placeholder}
+        className="mt-1.5 bg-charcoal/60 border-gold/20 text-white placeholder:text-white/40 focus-visible:ring-gold/40"
       />
     </div>
   );
