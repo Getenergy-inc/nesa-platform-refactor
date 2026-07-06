@@ -2,7 +2,6 @@
  * WhyNESAExistsSection — concise mission framing: recognition → impact pipeline.
  * Replaces long EDI/governance text on the homepage.
  */
-import { useState } from "react";
 import {
   Award,
   Eye,
@@ -10,7 +9,6 @@ import {
   Coins,
   Wrench,
   Sparkles,
-  ChevronDown,
 } from "lucide-react";
 
 const STEPS = [
