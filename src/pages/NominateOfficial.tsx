@@ -24,6 +24,7 @@ type FormState = {
   // nomination
   nominee_name: string;
   nominee_type: string;
+  nominee_email: string;
   nominee_country: string;
   nominee_region: string;
   nominee_city: string;
@@ -46,6 +47,7 @@ const init: FormState = {
   nm_consent: false,
   nominee_name: "",
   nominee_type: "individual",
+  nominee_email: "",
   nominee_country: "",
   nominee_region: "",
   nominee_city: "",
@@ -60,10 +62,25 @@ const init: FormState = {
 
 const FAMILY_LABELS: Record<string, string> = {
   icon: "Africa Education Icon",
+  "africa-education-icon": "Africa Education Icon",
   "gold-bluegarnet": "Gold & Blue Garnet",
   platinum: "Platinum Certificate of Recognition",
   influencer: "Education Influencer Impact",
   rmsa: "Rebuild My School Africa",
+};
+
+// Human-readable labels for the canonical Icon category slugs (DB subcategories).
+const CATEGORY_LABELS: Record<string, string> = {
+  "icon-philanthropy": "Africa Education Philanthropy Icon of the Decade",
+  "icon-literary": "Literary & New Curriculum Advocate Icon of the Decade",
+  "icon-technical": "Africa Technical Educator Icon of the Decade",
+};
+
+// Recognition groups (the memo's three tracks), encoded via ?class= in the link.
+const RECOGNITION_LABELS: Record<string, string> = {
+  "africa-resident": "Africans in Africa",
+  diaspora: "Diaspora Africans",
+  friend: "Friends of Africa",
 };
 
 export default function NominateOfficial() {
@@ -99,6 +116,8 @@ export default function NominateOfficial() {
     setForm((prev) => ({ ...prev, [k]: v }));
 
   const familyLabel = FAMILY_LABELS[family] ?? family;
+  const categoryLabel = CATEGORY_LABELS[category] ?? category;
+  const recognitionLabel = RECOGNITION_LABELS[recognitionClass] ?? recognitionClass;
 
   const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -132,6 +151,7 @@ export default function NominateOfficial() {
             state_slug: state || null,
             nominee_name: form.nominee_name,
             nominee_type: form.nominee_type,
+            nominee_email: form.nominee_email || null,
             nominee_country: form.nominee_country,
             nominee_region: form.nominee_region,
             nominee_city: form.nominee_city,
@@ -208,11 +228,16 @@ export default function NominateOfficial() {
             </h1>
             <p className="text-muted-foreground mt-2">
               {familyLabel}
-              {category && ` · ${category}`}
+              {category && ` · ${categoryLabel}`}
               {region && ` · ${region}`}
               {zone && ` · ${zone}`}
               {state && ` · ${state}`}
             </p>
+            {recognitionLabel && (
+              <span className="inline-block mt-3 px-3 py-1 rounded-full text-xs font-medium bg-gold-500/15 text-gold-500 border border-gold-500/30">
+                Recognition group: {recognitionLabel}
+              </span>
+            )}
           </motion.div>
 
           <form onSubmit={onSubmit} className="mt-8 space-y-8">
@@ -232,6 +257,7 @@ export default function NominateOfficial() {
               <div className="grid md:grid-cols-2 gap-4">
                 <Field label="Nominee full name *" value={form.nominee_name} onChange={(v) => set("nominee_name", v)} required />
                 <Field label="Type (individual / organization / school)" value={form.nominee_type} onChange={(v) => set("nominee_type", v)} />
+                <Field label="Nominee email (so we can send their acceptance link)" type="email" value={form.nominee_email} onChange={(v) => set("nominee_email", v)} placeholder="optional but recommended" />
                 <Field label="Organization (if applicable)" value={form.organization} onChange={(v) => set("organization", v)} />
                 <Field label="Website" value={form.website} onChange={(v) => set("website", v)} placeholder="https://" />
                 <Field label="Country" value={form.nominee_country} onChange={(v) => set("nominee_country", v)} />
