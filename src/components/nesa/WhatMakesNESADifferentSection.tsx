@@ -41,7 +41,7 @@ export function WhatMakesNESADifferentSection() {
           </h2>
         </div>
 
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4">
+        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-4 gap-3 sm:gap-4">
           {FOCUS_AREAS.map((area, i) => (
             <motion.div
               key={area.label}
