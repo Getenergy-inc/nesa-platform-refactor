@@ -58,6 +58,7 @@ import ResetPassword from "./pages/auth/ResetPassword";
 import NominateFlow from "./pages/NominateFlow";
 import NominateOfficial from "./pages/NominateOfficial";
 import NominateMvp from "./pages/NominateMvp";
+import IconNominatePage from "./pages/nominate/IconNominatePage";
 import NominateSchool from "./pages/impact/NominateSchool";
 import Dashboard from "./pages/Dashboard";
 import Unauthorized from "./pages/Unauthorized";
@@ -1369,6 +1370,17 @@ const App = () => (
                       <WithLayout>
                         <WithFirewall>
                           <NominateMvp />
+                        </WithFirewall>
+                      </WithLayout>
+                    }
+                  />
+                  {/* Native Icon Award nomination hub (writes straight to Supabase). */}
+                  <Route
+                    path="/nominate/icon"
+                    element={
+                      <WithLayout>
+                        <WithFirewall>
+                          <IconNominatePage />
                         </WithFirewall>
                       </WithLayout>
                     }
