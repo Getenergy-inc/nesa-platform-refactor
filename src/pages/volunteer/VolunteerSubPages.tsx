@@ -93,7 +93,12 @@ function ReferralsInner() {
       const { data: v } = await supabase.from("volunteers").select("id,full_name,referral_code,referral_count").eq("user_id", user.id).maybeSingle();
       setVol(v);
       if (v) {
-        const { data: r } = await supabase.from("volunteer_referrals").select("*").eq("volunteer_id", v.id).order("created_at", { ascending: false });
+        // Privacy: do NOT select referred_email — referred person's contact is protected PII.
+        const { data: r } = await supabase
+          .from("volunteer_referrals")
+          .select("id,volunteer_id,referred_name,status,created_at,converted_at,reward_agc")
+          .eq("volunteer_id", v.id)
+          .order("created_at", { ascending: false });
         setRefs(r ?? []);
       }
     })();
@@ -113,7 +118,7 @@ function ReferralsInner() {
               {refs.map((r) => (
                 <div key={r.id} className="py-3 flex items-center justify-between">
                   <div>
-                    <div className="text-white text-sm">{r.referred_name ?? r.referred_email ?? "Anonymous"}</div>
+                    <div className="text-white text-sm">{r.referred_name ?? "Anonymous"}</div>
                     <div className="text-xs text-white/50">{new Date(r.created_at).toLocaleDateString()}</div>
                   </div>
                   <Badge className={r.status === "converted" ? "bg-gold/20 text-gold border-gold/40" : "bg-white/10 text-white/70"}>
