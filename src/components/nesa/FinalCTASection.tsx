@@ -21,48 +21,49 @@ export function FinalCTASection() {
           </motion.div>
 
           <h2 className="font-display text-3xl md:text-5xl lg:text-6xl font-bold text-white mb-5">
-            {t("landing.finalCTA.title")}{" "}
-            <span className="text-gold">{t("landing.finalCTA.titleAccent")}</span>
+            Ready to Celebrate Africa's{" "}
+            <span className="text-gold">Education Changemakers?</span>
           </h2>
-          
-          <p className="text-white/65 text-lg md:text-xl mb-10 max-w-2xl mx-auto leading-relaxed">
-            {t("landing.finalCTA.description")}
+
+          <p className="text-white/70 text-lg md:text-xl mb-10 max-w-2xl mx-auto leading-relaxed">
+            Do not just applaud impact — help the world discover it. Nominate an African education changemaker today and join a continental movement recognising the people and institutions transforming education across Africa and the Diaspora.
           </p>
 
           <div className="flex flex-col sm:flex-row justify-center gap-4 mb-8">
             <Link to="/nominate" className="group" onClick={() => trackEvent("final_cta_click", { cta: "nominate", to: "/nominate", location: "final_cta" })}>
               <Button size="lg" className="bg-gold hover:bg-gold-dark text-charcoal font-bold rounded-full px-10 gap-2.5 shadow-xl shadow-gold/25 hover:shadow-gold/40 transition-all min-h-[56px] text-lg">
-                {t("landing.finalCTA.submitNomination")}
+                Nominate a Changemaker Now
                 <ArrowRight className="h-5 w-5 group-hover:translate-x-1 transition-transform" />
               </Button>
             </Link>
-            <Link to="/vote" className="group" onClick={() => trackEvent("final_cta_click", { cta: "vote", to: "/vote", location: "final_cta" })}>
+            <Link to="/categories" className="group" onClick={() => trackEvent("final_cta_click", { cta: "categories", to: "/categories", location: "final_cta" })}>
               <Button size="lg" variant="outline" className="border-2 border-gold/50 text-gold hover:bg-gold/10 hover:border-gold rounded-full px-10 gap-2.5 transition-all min-h-[56px] text-lg">
-                <Vote className="h-5 w-5" />
-                {t("common:actions.vote")}
+                Explore Award Categories
               </Button>
             </Link>
           </div>
 
           <div className="flex flex-wrap justify-center gap-3 mb-10">
+            <Link to="/donate" onClick={() => trackEvent("final_cta_click", { cta: "donate", to: "/donate", location: "final_cta" })}>
+              <Button variant="ghost" className="text-gold/70 hover:text-gold hover:bg-gold/8 rounded-full gap-2">
+                <Heart className="h-4 w-4" />
+                Donate
+              </Button>
+            </Link>
             <Link to="/buy-your-ticket" onClick={() => trackEvent("final_cta_click", { cta: "tickets", to: "/buy-your-ticket", location: "final_cta" })}>
               <Button variant="ghost" className="text-gold/60 hover:text-gold hover:bg-gold/8 rounded-full gap-2">
                 <Ticket className="h-4 w-4" />
-                {t("common:actions.getTickets")}
+                Get Gala Tickets
               </Button>
             </Link>
-            <Link to="/donate" onClick={() => trackEvent("final_cta_click", { cta: "donate", to: "/donate", location: "final_cta" })}>
+            <Link to="/vote" onClick={() => trackEvent("final_cta_click", { cta: "vote", to: "/vote", location: "final_cta" })}>
               <Button variant="ghost" className="text-gold/60 hover:text-gold hover:bg-gold/8 rounded-full gap-2">
-                <Heart className="h-4 w-4" />
-                {t("common:actions.donate")}
-              </Button>
-            </Link>
-            <Link to="/partners" onClick={() => trackEvent("final_cta_click", { cta: "partners", to: "/partners", location: "final_cta" })}>
-              <Button variant="ghost" className="text-gold/60 hover:text-gold hover:bg-gold/8 rounded-full">
-                {t("landing.sponsors.title")}
+                <Vote className="h-4 w-4" />
+                Vote with AGC
               </Button>
             </Link>
           </div>
+
 
           <motion.div className="flex flex-wrap justify-center gap-8" initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} transition={{ delay: 0.3 }} viewport={{ once: true }}>
             {[
