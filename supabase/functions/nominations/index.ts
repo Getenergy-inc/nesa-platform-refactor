@@ -267,8 +267,8 @@ serve(async (req: Request): Promise<Response> => {
             subject: "You've Been Nominated for NESA-Africa 2025!",
             payload: {
               nominee_name: payload.nominee_name,
-              accept_url: `${supabaseUrl.replace('.supabase.co', '.lovable.app')}/nominee/accept/${acceptanceToken}`,
-              decline_url: `${supabaseUrl.replace('.supabase.co', '.lovable.app')}/nominee/decline/${acceptanceToken}`,
+              accept_url: `${(Deno.env.get("PUBLIC_SITE_URL") || "https://nesa.africa")}/nominee/accept/${acceptanceToken}`,
+              decline_url: `${(Deno.env.get("PUBLIC_SITE_URL") || "https://nesa.africa")}/nominee/decline/${acceptanceToken}`,
             },
             channels: payload.nominee_email ? ["email"] : ["sms"],
             idempotency_key: `acceptance_letter_${nomineeId}`,
