@@ -36,10 +36,9 @@ export function ExploreRegionsSection() {
           Explore Africa's Education Regions
         </h2>
         <p className="text-white/70 text-sm sm:text-base max-w-2xl mx-auto mb-10">
-          NESA-Africa connects education changemakers across Africa, the diaspora, and
-          Friends of Africa communities through recognition, partnerships, educational
-          storytelling, and Afri-EduTourism opportunities.
+          NESA-Africa connects education changemakers across <span className="text-gold font-semibold">eight Africa regions</span>, <span className="text-gold font-semibold">Africans in the Diaspora</span> and <span className="text-gold font-semibold">Friends of Africa</span> communities — through recognition, partnerships, storytelling and Afri-EduTourism opportunities.
         </p>
+
 
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-2.5 sm:gap-3 mb-10">
           {ALL_REGIONS.map((r, i) => (
