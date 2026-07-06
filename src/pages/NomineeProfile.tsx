@@ -94,6 +94,39 @@ function generateStory(nominee: EnrichedNominee) {
   };
 }
 
+// Build an EnrichedNominee display object from a published `nominees` DB row,
+// so nominees created via the public intake pipeline (which have no hard-coded
+// nesaData entry) still render a real, shareable profile page.
+function buildEnrichedFromDb(row: {
+  id: string; name: string; slug: string; title?: string | null;
+  organization?: string | null; bio?: string | null; photo_url?: string | null;
+  logo_url?: string | null; country?: string | null; region?: string | null;
+}): EnrichedNominee {
+  const img = row.photo_url || row.logo_url || "";
+  const isLogo = !row.photo_url && !!row.logo_url;
+  const region = row.region || undefined;
+  return {
+    id: row.id,
+    name: row.name,
+    slug: row.slug,
+    image: img,
+    imageUrl: img,
+    achievement:
+      row.bio || `${row.name} is recognised in the NESA-Africa 2026 recognition cycle.`,
+    state: region,
+    country: row.country || undefined,
+    imageType: isLogo ? "logo" : "photo",
+    awardTitle: "NESA-Africa 2026",
+    awardSlug: "nominees",
+    subcategoryTitle: row.title || row.organization || "NESA-Africa Nominee",
+    subcategorySlug: "nominees",
+    regionName: region,
+    regionSlug: undefined,
+    geographicCategory: "africa-regions",
+    status: "approved",
+  };
+}
+
 export default function NomineeProfile() {
   const { slug: rawSlug } = useParams<{ slug: string }>();
   const [dbNomineeId, setDbNomineeId] = useState<string | null>(null);
@@ -109,10 +142,15 @@ export default function NomineeProfile() {
 
   const slug = rawSlug ? decodeURIComponent(rawSlug) : undefined;
 
-  const nominee = useMemo(() => {
+  const hardcodedNominee = useMemo(() => {
     if (!slug) return undefined;
     return getNomineeBySlug(slug);
   }, [slug]);
+
+  // Fallback profile synthesized from the published DB row when there is no
+  // hard-coded nesaData record (e.g. pipeline-created nominees).
+  const [dbNominee, setDbNominee] = useState<EnrichedNominee | null>(null);
+  const nominee = hardcodedNominee ?? dbNominee ?? undefined;
 
   useEffect(() => {
     if (nominee && publishCheck === "allowed") {
@@ -135,16 +173,20 @@ export default function NomineeProfile() {
         return;
       }
       setPublishCheck("loading");
-      const nameSlug = nominee
-        ? nominee.name.toLowerCase().trim().replace(/\s+/g, "-").replace(/[^a-z0-9-]/g, "").replace(/-+/g, "-").replace(/^-|-$/g, "")
+      const nameSlug = hardcodedNominee
+        ? hardcodedNominee.name.toLowerCase().trim().replace(/\s+/g, "-").replace(/[^a-z0-9-]/g, "").replace(/-+/g, "-").replace(/^-|-$/g, "")
         : slug;
+      // Read the nominees table directly: the public_nominees VIEW is not
+      // granted to the anon role, but the table exposes published rows via RLS.
       const { data, error } = await (supabase as any)
-        .from("public_nominees")
-        .select("id, renomination_count, publication_status, profile_status")
+        .from("nominees")
+        .select("id, name, slug, title, organization, bio, photo_url, logo_url, country, region, renomination_count, publication_status, profile_status, is_platinum")
+        .eq("publication_status", "published")
         .or(`slug.eq.${slug},slug.eq.${nameSlug}`)
         .maybeSingle();
       if (cancelled) return;
       if (error || !data) {
+        setDbNominee(null);
         setDbNomineeId(null);
         setRenominationCount(0);
         setPublishCheck("blocked");
@@ -152,13 +194,17 @@ export default function NomineeProfile() {
       }
       setDbNomineeId(data.id);
       setRenominationCount(data.renomination_count ?? 0);
+      // No hard-coded record → build the display object from the DB row.
+      if (!hardcodedNominee) {
+        setDbNominee(buildEnrichedFromDb(data));
+      }
       setPublishCheck("allowed");
     }
     verifyPublishedNominee();
     return () => {
       cancelled = true;
     };
-  }, [slug, nominee?.name]);
+  }, [slug, hardcodedNominee?.name]);
 
   const relatedNominees = useMemo(() => {
     if (!nominee) return [];

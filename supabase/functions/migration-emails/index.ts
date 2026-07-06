@@ -167,7 +167,7 @@ async function handleSend(supabase: any, body: any) {
           .single();
 
         // Build portal link
-        const portalLink = `${Deno.env.get("SUPABASE_URL")?.replace(".supabase.co", ".lovable.app")}/nominees/${nominee?.slug || job.nominee_id}`;
+        const portalLink = `${Deno.env.get("PUBLIC_SITE_URL") || "https://nesa.africa"}/nominees/${nominee?.slug || job.nominee_id}`;
 
         // Mark as sent (actual email sending would integrate with Resend/SendGrid)
         // For now, log the intent and mark ready

@@ -24,7 +24,7 @@ export default function IconMigrationVerification() {
 
   const kpis = [
     { label: "Legacy roster", value: s.legacyCount, hint: "Pre-merge ICON_NOMINEES" },
-    { label: "Refactored candidates", value: s.refactoredCandidates, hint: "Secretariat 2005–2025 shortlist" },
+    { label: "Refactored candidates", value: s.refactoredCandidates, hint: "Secretariat 2006–2026 shortlist" },
     { label: "Added", value: s.added, hint: "New slugs merged in" },
     { label: "Deduplicated", value: s.deduplicated, hint: "Slug collisions skipped" },
     { label: "Final roster", value: s.finalCount, hint: "ICON_NOMINEES after merge" },
@@ -44,7 +44,7 @@ export default function IconMigrationVerification() {
             Africa Education Icon — Migration Verification
           </h1>
           <p className="text-white/70 max-w-3xl">
-            Live diff between the legacy 2014–2024 ICON archive and the refactored 2005–2025
+            Live diff between the legacy 2014–2024 ICON archive and the refactored 2006–2026
             secretariat shortlist. Counts are computed at module load from the same data the app ships.
           </p>
         </header>

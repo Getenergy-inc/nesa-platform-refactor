@@ -1,4 +1,4 @@
-// Refactored Africa Education Icon roster (2005–2025 period)
+// Refactored Africa Education Icon roster (2006–2026 period)
 // Source: secretariat shortlist (Santos Aderibigbe, Mar 2026) — credibility-balanced version.
 // 3 subcategories × 3 classifications × 20 nominees = up to 180 entries.
 // Duplicates of slugs already in ICON_NOMINEES are filtered at export time.
@@ -86,7 +86,7 @@ const build = (
       heritage_identity: heritage,
       residency_status: residency,
       impact_area: [],
-      years_of_contribution: "2005–2025",
+      years_of_contribution: "2006–2026",
       impact_summary: contribution,
       jury_status: "nominated",
       verification_status: "pending",
@@ -98,7 +98,7 @@ const build = (
             : sub === "literary-new-curriculum-advocate"
             ? "Literary & New Curriculum Advocate"
             : "Africa Technical Educator"
-        } Icon of the Period (2005–2025)`,
+        } Icon of the Period (2006–2026)`,
       ],
       nomination_year: 2026,
       migration_source: "manual",

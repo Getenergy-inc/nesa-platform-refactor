@@ -59,6 +59,7 @@ import NominateFlow from "./pages/NominateFlow";
 import NominateOfficial from "./pages/NominateOfficial";
 import NominateMvp from "./pages/NominateMvp";
 import NGOChooser from "./pages/nominate/NGOChooser";
+import IconNominatePage from "./pages/nominate/IconNominatePage";
 import NominateSchool from "./pages/impact/NominateSchool";
 import Dashboard from "./pages/Dashboard";
 import Unauthorized from "./pages/Unauthorized";
@@ -71,6 +72,8 @@ import CategoryDetail from "./pages/CategoryDetail";
 import NomineeAccept from "./pages/NomineeAccept";
 import NomineeDecline from "./pages/NomineeDecline";
 import NomineeDashboard from "./pages/nominee/NomineeDashboard";
+import VolunteerDashboardMerged from "./pages/dashboard/VolunteerDashboard";
+import JudgeDashboardMerged from "./pages/dashboard/JudgeDashboardMerged";
 import NotificationsPage from "./pages/dashboard/Notifications";
 import ProfilePage from "./pages/dashboard/Profile";
 import SettingsPage from "./pages/dashboard/Settings";
@@ -420,6 +423,16 @@ const App = () => (
                   <Route path="/become-a-sponsor" element={<Navigate to="/sponsor" replace />} />
                   <Route path="/become-sponsor" element={<Navigate to="/sponsor" replace />} />
 
+
+                  {/* Master-register canonical aliases → existing implementations
+                      (Stage B: make the register's short/canonical paths resolve). */}
+                  <Route path="/awards/influencer" element={<Navigate to="/awards/influencer-education-impact" replace />} />
+                  <Route path="/judges/apply" element={<Navigate to="/judgeapply" replace />} />
+                  <Route path="/gala/tickets" element={<Navigate to="/tickets" replace />} />
+                  <Route path="/gala/attendance" element={<Navigate to="/tickets" replace />} />
+                  <Route path="/prenominate" element={<Navigate to="/nominate" replace />} />
+                  <Route path="/verify" element={<Navigate to="/certificates/verify" replace />} />
+                  <Route path="/membership" element={<Navigate to="/get-involved" replace />} />
 
                   {/* Nominee legacy */}
                   <Route path="/nominee" element={<Navigate to="/nominees" replace />} />
@@ -1374,6 +1387,17 @@ const App = () => (
                       </WithLayout>
                     }
                   />
+                  {/* Native Icon Award nomination hub (writes straight to Supabase). */}
+                  <Route
+                    path="/nominate/icon"
+                    element={
+                      <WithLayout>
+                        <WithFirewall>
+                          <IconNominatePage />
+                        </WithFirewall>
+                      </WithLayout>
+                    }
+                  />
                   <Route
                     path="/nominate/ngo"
                     element={
@@ -1673,6 +1697,10 @@ const App = () => (
 
                   {/* Dashboards - use their own layout */}
                   <Route path="/dashboard" element={<Dashboard />} />
+                  {/* Register-canonical merged dashboards: NRC lives inside the
+                      Volunteer Dashboard, Judges Arena inside the Judge Dashboard. */}
+                  <Route path="/dashboard/volunteer" element={<VolunteerDashboardMerged />} />
+                  <Route path="/dashboard/judge" element={<JudgeDashboardMerged />} />
                   <Route
                     path="/dashboard/nominations"
                     element={<Dashboard />}
@@ -1719,8 +1747,10 @@ const App = () => (
                     }
                   />
 
-                  {/* NRC Portal Routes (Legacy) */}
-                  <Route path="/nrc" element={<NRCPortal />} />
+                  {/* NRC Portal Routes (Legacy) — canonical entry is now the
+                      Volunteer Dashboard per the master register. */}
+                  <Route path="/nrc" element={<Navigate to="/dashboard/volunteer" replace />} />
+                  <Route path="/nrc/portal" element={<Navigate to="/dashboard/volunteer" replace />} />
                   <Route path="/nrc/my-queue" element={<NRCMyQueue />} />
                   <Route path="/nrc/members" element={<NRCMembersPage />} />
                   <Route path="/nrc/settings" element={<NRCSettings />} />
@@ -2059,7 +2089,9 @@ const App = () => (
                       </JudgeArenaGuard>
                     }
                   >
-                    <Route index element={<ArenaDashboard />} />
+                    {/* Canonical judge entry is the Judge Dashboard per the
+                        master register; deep arena screens remain as children. */}
+                    <Route index element={<Navigate to="/dashboard/judge" replace />} />
                     <Route path="nominees" element={<ArenaNominees />} />
                     <Route path="nominee/:slug" element={<ArenaReview />} />
                     <Route path="discussion" element={<ArenaDiscussion />} />

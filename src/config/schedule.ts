@@ -319,7 +319,7 @@ export function buildTimeline(
       phase: "Webinar Week 7 · Continental Pre-Voting Forum & AGC Voting Education",
       dateRange: `14 – 15 September ${ceremonyYear}`,
       description:
-        "Continental Pre-Voting Forum preparing citizens for the AGC-powered Gold and Blue Garnet voting phases with transparency and integrity training.",
+        "Continental Pre-Voting Forum preparing citizens for the AGC-powered Gold-Blue Garnet voting phases with transparency and integrity training.",
       type: "awareness",
     },
     {
