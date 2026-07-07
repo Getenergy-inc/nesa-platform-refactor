@@ -41,10 +41,10 @@ const Body = z.object({
     nominee_city: z.string().trim().max(120).optional().default(""),
     organization: z.string().trim().max(200).optional().default(""),
     website: z.string().trim().max(500).optional().default(""),
-    social_links: z.string().trim().max(2000).optional().default(""),
+    social_links: z.union([z.string(), z.array(z.string())]).optional().nullable(),
     impact_summary: z.string().trim().min(20).max(4000),
     reason: z.string().trim().min(20).max(4000),
-    evidence_links: z.string().trim().max(4000).optional().default(""),
+    evidence_links: z.union([z.string(), z.array(z.string())]).optional().nullable(),
     // Honeypot — must stay empty
     company_website: z.string().max(0).optional(),
   }),
@@ -184,15 +184,24 @@ Deno.serve(async (req) => {
   const slugCandidates = [nomination.award_subcategory_slug, nomination.award_category_slug]
     .map((s) => (s ?? "").trim())
     .filter(Boolean);
+  const norm = (s: string) =>
+    s.toLowerCase().normalize("NFKD").replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "");
   let subcategoryId: string | null = null;
   if (slugCandidates.length > 0) {
-    const { data: sub } = await supabase
+    // Match by exact slug OR by slugified name, so both the DB canonical slugs
+    // (e.g. "icon-philanthropy") and the form/config slugs (the slugified
+    // category name, e.g. "africa-education-philanthropy-icon-of-the-decade")
+    // resolve to the same subcategory.
+    const targets = new Set(slugCandidates.map(norm));
+    const { data: subs } = await supabase
       .from("subcategories")
-      .select("id")
-      .in("slug", slugCandidates)
-      .limit(1)
-      .maybeSingle();
-    subcategoryId = sub?.id ?? null;
+      .select("id, name, slug")
+      .limit(2000);
+    const match = (subs ?? []).find(
+      (su: { id: string; name: string; slug: string }) =>
+        targets.has(norm(su.slug)) || targets.has(norm(su.name)),
+    );
+    subcategoryId = match?.id ?? null;
   }
 
   // subcategory_id is NOT NULL on both nominees and nominations — fail clearly
@@ -214,11 +223,15 @@ Deno.serve(async (req) => {
     p_country: nomination.nominee_country || null,
   });
 
+  // Link fields may arrive as a string or a string[] (different forms).
+  const toTokens = (v: string | string[] | null | undefined): string[] =>
+    Array.isArray(v) ? v : (v ?? "").split(/[\s,]+/);
+
   // Build evidence + bio.
   const evidenceUrls = [
     nomination.website,
-    ...nomination.social_links.split(/[\s,]+/),
-    ...nomination.evidence_links.split(/[\s,]+/),
+    ...toTokens(nomination.social_links),
+    ...toTokens(nomination.evidence_links),
   ]
     .map((s) => s.trim())
     .filter((s) => s.length > 0 && /^https?:\/\//i.test(s));
