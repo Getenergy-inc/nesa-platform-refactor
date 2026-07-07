@@ -402,6 +402,18 @@ Deno.serve(async (req) => {
     idempotency_key: `nomination_received_${nom.id}`,
   }).then(({ error }) => { if (error) console.error("Nominator confirmation failed:", error); });
 
+  // Option A: fire the email dispatcher so the acceptance + confirmation emails
+  // go out right after the nominee is created. Runs as a background task on the
+  // Supabase runtime so it does not delay this response.
+  const svcKey = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY") ?? "";
+  const dispatch = fetch(`${supabaseUrl}/functions/v1/send-notifications`, {
+    method: "POST",
+    headers: { Authorization: `Bearer ${svcKey}`, apikey: svcKey },
+  }).catch((e) => console.error("send-notifications dispatch failed:", e));
+  const rt = (globalThis as { EdgeRuntime?: { waitUntil?: (p: Promise<unknown>) => void } }).EdgeRuntime;
+  if (rt?.waitUntil) rt.waitUntil(dispatch);
+  else await dispatch;
+
   return json(200, {
     ok: true,
     nomination_id: nom.id,
