@@ -62,7 +62,7 @@ function VolunteerDashboardContent() {
             <div className="grid sm:grid-cols-3 gap-4">
               <StatCard icon={Clock} label="Pending tasks" value={pending} />
               <StatCard icon={CheckCircle2} label="Completed reviews" value={completed} />
-              <StatCard icon={ClipboardList} label="Queue items" value={stats?.queue_items ?? 0} />
+              <StatCard icon={ClipboardList} label="Queue items" value={stats?.total_queue_items ?? 0} />
             </div>
             <p className="text-white/50 text-sm mt-6">
               Signed in as {user?.email}. Use the tabs above to pick up research tasks, submit

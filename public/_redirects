@@ -64,7 +64,7 @@
 /cookie-policy                                               /policies            301
 /language                                                    /                    301
 
-# --- 2. SPA routes (351 explicit paths from src/App.tsx) ---
+# --- 2. SPA routes (363 explicit paths from src/App.tsx) ---
 /nominees/gold-special-recognition/:categorySlug/:nomineeSlug /index.html          200
 /awards/explore/:pathwaySlug/:categorySlug/:subcategorySlug  /index.html          200
 /nominees/best-ngo-contribution-to-education/profile/:slug   /index.html          200
@@ -186,6 +186,7 @@
 /admin/nominee-media                                         /index.html          200
 /auth/reset-password                                         /index.html          200
 /certificates/verify                                         /index.html          200
+/dashboard/volunteer                                         /index.html          200
 /earn-voting-credits                                         /index.html          200
 /guidelines/nominees                                         /index.html          200
 /judge/icon-lifetime                                         /index.html          200
@@ -204,6 +205,7 @@
 /volunteer/settings                                          /index.html          200
 /about/vision-2035                                           /index.html          200
 /awards/categories                                           /index.html          200
+/awards/influencer                                           /index.html          200
 /dashboard/profile                                           /index.html          200
 /earn-voting-coins                                           /index.html          200
 /guidelines/judges                                           /index.html          200
@@ -238,8 +240,10 @@
 /awards/timeline                                             /index.html          200
 /buy-merchandise                                             /index.html          200
 /buy-your-ticket                                             /index.html          200
+/dashboard/judge                                             /index.html          200
 /directory/:slug                                             /index.html          200
 /forgot-password                                             /index.html          200
+/gala/attendance                                             /index.html          200
 /judge/dashboard                                             /index.html          200
 /my-certificates                                             /index.html          200
 /olc/settlements                                             /index.html          200
@@ -276,6 +280,7 @@
 /judge/scoring                                               /index.html          200
 /media/gallery                                               /index.html          200
 /media/nesa-tv                                               /index.html          200
+/nominate/icon                                               /index.html          200
 /nominee/:slug                                               /index.html          200
 /nrc/dashboard                                               /index.html          200
 /olc/dashboard                                               /index.html          200
@@ -292,6 +297,7 @@
 /contributors                                                /index.html          200
 /earn-credits                                                /index.html          200
 /endorse-nesa                                                /index.html          200
+/gala/tickets                                                /index.html          200
 /get-involved                                                /index.html          200
 /judge-signup                                                /index.html          200
 /judge-status                                                /index.html          200
@@ -302,8 +308,10 @@
 /judge/verify                                                /index.html          200
 /judges-arena                                                /index.html          200
 /judges/:slug                                                /index.html          200
+/judges/apply                                                /index.html          200
 /media/events                                                /index.html          200
 /media/photos                                                /index.html          200
+/nominate/ngo                                                /index.html          200
 /nrc/my-queue                                                /index.html          200
 /nrc/settings                                                /index.html          200
 /our-partners                                                /index.html          200
@@ -329,6 +337,7 @@ nominee/:slug                                                /index.html        
 /nrc/members                                                 /index.html          200
 /nrc/scoring                                                 /index.html          200
 /olc/members                                                 /index.html          200
+/prenominate                                                 /index.html          200
 /sponsorship                                                 /index.html          200
 /about/scef                                                  /index.html          200
 /auth/login                                                  /index.html          200
@@ -340,6 +349,8 @@ nominee/:slug                                                /index.html        
 /judge/help                                                  /index.html          200
 /judgeapply                                                  /index.html          200
 /media/gala                                                  /index.html          200
+/membership                                                  /index.html          200
+/nrc/portal                                                  /index.html          200
 /olc/wallet                                                  /index.html          200
 /orders/:id                                                  /index.html          200
 /shop/:slug                                                  /index.html          200
@@ -392,6 +403,7 @@ nominees                                                     /index.html        
 /region                                                      /index.html          200
 /signin                                                      /index.html          200
 /signup                                                      /index.html          200
+/verify                                                      /index.html          200
 /videos                                                      /index.html          200
 /wallet                                                      /index.html          200
 /about                                                       /index.html          200
