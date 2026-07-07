@@ -2892,7 +2892,7 @@ export type Database = {
           identity_hash: string | null
           justification: string | null
           last_query_at: string | null
-          nominator_id: string
+          nominator_id: string | null
           nominee_bio: string | null
           nominee_name: string
           nominee_organization: string | null
@@ -2935,7 +2935,7 @@ export type Database = {
           identity_hash?: string | null
           justification?: string | null
           last_query_at?: string | null
-          nominator_id: string
+          nominator_id?: string | null
           nominee_bio?: string | null
           nominee_name: string
           nominee_organization?: string | null
@@ -2978,7 +2978,7 @@ export type Database = {
           identity_hash?: string | null
           justification?: string | null
           last_query_at?: string | null
-          nominator_id?: string
+          nominator_id?: string | null
           nominee_bio?: string | null
           nominee_name?: string
           nominee_organization?: string | null
@@ -3021,6 +3021,13 @@ export type Database = {
             columns: ["created_nominee_id"]
             isOneToOne: false
             referencedRelation: "public_nominees"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "nominations_nominator_id_fkey"
+            columns: ["nominator_id"]
+            isOneToOne: false
+            referencedRelation: "nominators"
             referencedColumns: ["id"]
           },
           {
