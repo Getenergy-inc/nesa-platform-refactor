@@ -133,6 +133,7 @@ export function NomineeActions({
         groupSlug={nominee.groupSlug}
         groupName={nominee.groupName}
         currentCount={nominee.renominationCount}
+        referralCode={nominee.referralCode}
         onRenominateSuccess={onRenominateSuccess}
       />
     </>
