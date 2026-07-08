@@ -600,6 +600,7 @@ export default function NomineeProfile() {
                   dbNomineeId={dbNomineeId}
                   blueGarnet={blueGarnet}
                   renominationCount={renominationCount}
+                  referralCode={referralCode}
                   onRenominateSuccess={() => setRenominationCount(c => c + 1)}
                 />
               </div>
