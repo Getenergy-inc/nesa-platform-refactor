@@ -20,8 +20,15 @@ import {
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { Copy, Download, ExternalLink, ImageOff, Upload, CheckCircle2, XCircle, RotateCcw } from "lucide-react";
+import { Copy, Download, ExternalLink, ImageOff, Upload, CheckCircle2, XCircle, RotateCcw, Search } from "lucide-react";
 import { toast } from "@/hooks/use-toast";
+import {
+  Sheet,
+  SheetContent,
+  SheetHeader,
+  SheetTitle,
+  SheetDescription,
+} from "@/components/ui/sheet";
 
 const PLACEHOLDER = "placeholder-icon";
 
