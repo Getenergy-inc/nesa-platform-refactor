@@ -14,6 +14,7 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { toast } from "sonner";
 import { useAuth } from "@/contexts/AuthContext";
 import { submitRenomination } from "@/lib/api";
+import { supabase } from "@/integrations/supabase/client";
 import { RotateCcw, Loader2, Award, Info, User, MapPin, Mail, FileText } from "lucide-react";
 import { Link } from "react-router-dom";
 
@@ -30,6 +31,8 @@ export interface RenominateModalProps {
   groupSlug?: string;
   groupName?: string;
   currentCount?: number;
+  /** When present, endorsement is attributed to this nominee referral code and increments the public counter immediately. */
+  referralCode?: string;
   onRenominateSuccess?: () => void;
 }
 
