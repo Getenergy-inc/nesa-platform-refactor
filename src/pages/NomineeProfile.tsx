@@ -1,5 +1,5 @@
 import { useMemo, useState, useEffect } from "react";
-import { useParams, Link } from "react-router-dom";
+import { useParams, Link, useSearchParams } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import {
   ArrowLeft, Award, MapPin, Share2, Trophy, Users, Globe2,
@@ -129,6 +129,8 @@ function buildEnrichedFromDb(row: {
 
 export default function NomineeProfile() {
   const { slug: rawSlug } = useParams<{ slug: string }>();
+  const [searchParams] = useSearchParams();
+  const referralCode = searchParams.get("ref") ?? undefined;
   const [dbNomineeId, setDbNomineeId] = useState<string | null>(null);
   const [renominationCount, setRenominationCount] = useState(0);
   // Publication gate: must be confirmed against the DB before rendering the
@@ -385,6 +387,7 @@ export default function NomineeProfile() {
                         groupName: nominee.regionName,
                         country: nominee.country,
                         renominationCount,
+                        referralCode,
                       }}
                       showVote={blueGarnet}
                       onRenominateSuccess={() => setRenominationCount(c => c + 1)}
@@ -560,6 +563,7 @@ export default function NomineeProfile() {
                   dbNomineeId={dbNomineeId}
                   blueGarnet={blueGarnet}
                   renominationCount={renominationCount}
+                  referralCode={referralCode}
                   onRenominateSuccess={() => setRenominationCount(c => c + 1)}
                 />
               </div>
@@ -596,6 +600,7 @@ export default function NomineeProfile() {
                   dbNomineeId={dbNomineeId}
                   blueGarnet={blueGarnet}
                   renominationCount={renominationCount}
+                  referralCode={referralCode}
                   onRenominateSuccess={() => setRenominationCount(c => c + 1)}
                 />
               </div>
@@ -725,12 +730,14 @@ function ActionCTABar({
   dbNomineeId,
   blueGarnet,
   renominationCount,
+  referralCode,
   onRenominateSuccess,
 }: {
   nominee: EnrichedNominee;
   dbNomineeId: string | null;
   blueGarnet: boolean;
   renominationCount: number;
+  referralCode?: string;
   onRenominateSuccess: () => void;
 }) {
   return (
@@ -761,6 +768,7 @@ function ActionCTABar({
                 groupName: nominee.regionName,
                 country: nominee.country,
                 renominationCount,
+                referralCode,
               }}
               showVote={blueGarnet}
               onRenominateSuccess={onRenominateSuccess}

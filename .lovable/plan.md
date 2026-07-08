@@ -1,76 +1,59 @@
 
-# NESA-Africa Landing Page — Platinum Update + Conversion Refactor
+## Goal
+Every nominee must accept their nomination via a tokenized magic link. Acceptance provisions their public profile page and private dashboard. From the dashboard they get a shareable referral URL. The public profile shows a live renomination/endorsement counter driven by that link.
 
-## Part A — Immediate Platinum Card Fix (small, safe)
+## Flow
 
-File: `src/components/nesa/CallForNominationIconAward.tsx`
+```text
+Nomination approved ──► acceptance email sent
+        │                   │
+        │                   ▼
+        │           /accept/:token  (magic-link sign-in)
+        │                   │
+        │                   ▼
+        │           Accept ─► profile activated + dashboard unlocked + referral_code minted
+        │                   │
+        ▼                   ▼
+Public /nominees/:slug   /nominee/dashboard
+   │  counter: N        │  share URL: /nominees/:slug?ref=CODE
+   │  [Renominate] ─────┴────────► POST /renominations (ref=CODE) ─► counter++, event logged
+```
 
-1. Reorder `platinumCategories` to the approved final sequence:
-   1. Best Bilateral Organisations & International Embassies Education Enablers
-   2. Faith-Based & Religious Organisations Advancing Education
-   3. African Diaspora Education Impact Award
-   4. Nigeria Political Leaders Education Enablers
-2. Update the Faith-Based card body to the exact approved copy (two paragraphs about Christian, Islamic and other faith-based organisations).
-3. Normalise the Faith-Based tag to `PLATINUM RECOGNITION 2026` to match the diaspora card.
-4. Do NOT add a 5th "Civil Society & NGO" Platinum card — per your instruction it lives under Blue-Garnet only.
+## Deliverables
 
-Result: 4 Platinum cards, no duplicates, no design changes.
+### 1. Database (migration)
+- `nominee_acceptance_tokens` — `id, nominee_id, token (unique), email, expires_at, consumed_at, magic_link_user_id`. RLS: service_role only; public reads via token lookup RPC.
+- Add columns on `public.nominees`: `accepted_at timestamptz`, `profile_activated bool default false`, `referral_code text unique`, `endorsement_count int default 0`.
+- RPC `accept_nomination(p_token text)` — validates token, sets `accepted_at`, `profile_activated=true`, mints `referral_code` (`N-XXXXXX`), returns nominee slug + referral code.
+- RPC `record_renomination_via_referral(p_ref text, p_message text)` — resolves nominee by code, inserts into `renominations`, increments `endorsement_count`, logs to `referral_events`. Rate-limited by device_hash (reuse existing pattern).
+- GRANTs per project rules.
 
-## Part B — Conversion Refactor (larger, content + structure only)
+### 2. Edge functions
+- `send-acceptance-email` — mints token, enqueues app email via `send-transactional-email` with new `nominee-acceptance` React Email template. Idempotent by `nominee_id + email`.
+- `backfill-acceptance-emails` (admin only) — batches all `nominees` where `accepted_at IS NULL`, calls `send-acceptance-email` per row.
+- App email template `nominee-acceptance.tsx` with CTA to `${SITE_URL}/accept/{token}`.
 
-Goal: reduce bounce, self-select visitors, cut CTA overload. No redesign, no new components beyond one small pathway section, no colour/typography changes.
+### 3. Auth
+Magic-link sign-in bound to the acceptance email. On `/accept/:token`, if unauthenticated, call `supabase.auth.signInWithOtp({ email, options: { emailRedirectTo: /accept/:token }})`; once session hydrated, call the accept RPC.
 
-### B1. Hero CTAs (`src/components/nesa/TrophyHeroSection.tsx`)
-Trim hero action buttons to exactly three:
-- Nominate Now
-- Explore Award Categories
-- Accept Your Nomination
+### 4. Frontend
+- `src/pages/nominee/AcceptNomination.tsx` (route `/accept/:token`) — three states: verifying, needs-signin (send magic link), accepted (redirect to `/nominee/dashboard`).
+- Extend `NomineeDashboard` with `NomineeReferralCard` (share URL `/nominees/:slug?ref=CODE`, copy/twitter/whatsapp) and live counter subscribed to `nominees.endorsement_count` via Supabase Realtime.
+- Public `Nominees/:slug` page: reads `?ref=CODE` from URL, passes to `RenominateModal`; on success calls the referral RPC.
+- Update `NomineeStatsGrid` to source `endorsementCount` from the row.
+- Admin button on `/admin/nominees` → "Backfill acceptance emails" invoking the edge function.
 
-Move Sponsor / Volunteer / Judge / Donate / Wallet CTAs out of the hero. They stay reachable via the existing header nav and their dedicated sections lower on the page.
+### 5. Email infrastructure
+Uses existing Lovable app-email queue. If email domain isn't configured yet, I'll trigger the setup dialog first.
 
-### B2. New "Who Are You Nominating?" pathway section
-New file: `src/components/nesa/VisitorPathwaySection.tsx`
-Four cards using the existing card style tokens (charcoal/gold, same `rounded-2xl border border-gold/20` pattern used in `CallForNominationIconAward`):
-1. An Individual Education Enabler → `/awards/africa-education-icon`
-2. An Organisation or Institution → `/awards/platinum-recognition`
-3. A Diaspora or Global Education Supporter → `/awards/platinum-recognition/diaspora`
-4. A Media, Sports, Music or Digital Voice → `/awards/influencers-education-impact`
+## Technical notes
+- No changes to `auth.users` FK patterns — magic-link users are matched to nominees via the email on the token, not a nominee→user FK.
+- Referral code format `N-XXXXXX` reuses `generate_referral_code('N')`.
+- Counter uses one authoritative column (`nominees.endorsement_count`) updated inside the RPC — no client-side count queries.
+- All new writes go through SECURITY DEFINER RPCs; no anon INSERT policies added.
 
-Mounted in `NESALandingPage.tsx` right after `CountdownSection`, before `CallForNominationIconAward`.
+## Out of scope (this iteration)
+- Certificate auto-unlock at 200 (already handled by existing `auto_unlock_certificates` trigger — will just start firing once counter grows).
+- Vote fraud detection tuning for referral spam (existing `detect_vote_fraud` covers device reuse).
 
-### B3. Nomination card ordering
-In `CallForNominationIconAward.tsx` reorder the tier blocks on the page to:
-Tier 1 Icon (Lifetime) → Tier 2 Blue-Garnet (CSR / EdTech / NGO / Media) → Tier 3 Platinum → Tier 4 Influencers.
-
-Currently the file renders Icon → Platinum → Blue-Garnet → Influencers. Just swap the JSX order of the Platinum and Blue-Garnet blocks; the arrays themselves don't move.
-
-### B4. Add Blue-Garnet NGO + Media cards (merged NGO)
-Extend `corporateCategories` from 2 cards to 4:
-- Best CSR for Education in Africa (existing)
-- Best EdTech & STEM Innovation for Education (existing)
-- NGO Education Enablers for Education for All Award (new, merged Nigeria + Africa)
-- Nigeria Media Enablers for Education for All Award (new)
-
-The merged NGO card CTA "Nominate Here" links to a new lightweight chooser route `/nominate/ngo` that presents two options (Nigeria NGO / Africa Regional NGO) and forwards to the correct existing nomination URL. New tiny page: `src/pages/nominate/NGOChooser.tsx`, wired in `App.tsx`.
-
-### B5. Mobile "View All Categories"
-In `CallForNominationIconAward.tsx`, on `sm:` and below, show only the first 6 cards across all tiers and append a single `View All Nomination Categories` button linking to `/nominate` (or `/awards`). Implemented with Tailwind responsive classes (`hidden sm:block` on cards 7+, `sm:hidden` on the button) — no JS state, no design change.
-
-### B6. Duplication + CTA hygiene sweep
-- Remove repeated "Learn More" buttons on cards that link to the same tier page — keep one Learn More per tier, not per card, where the target URL is identical. (Icon tier cards all point to `/awards/africa-education-icon` — collapse to one Learn More at the tier footer.)
-- Confirm no Sponsor / Volunteer / Judge / Donate / Wallet CTAs appear inside any award card section.
-- No content changes to Sponsors, Volunteers, Governance, Vision2035, FinalCTA sections beyond confirming they aren't duplicated.
-
-### B7. Final homepage section order (`NESALandingPage.tsx`)
-Hero → Countdown → **VisitorPathway (new)** → CallForNominations (Icon → Blue-Garnet → Platinum → Influencers) → Gallery → WhoWeRecogniseClusters → RecognitionTiers → HowItWorks → WhyNESAExists → VisionMissionObjectives → WhatMakesDifferent → ExploreRegions → Volunteers → Endorsements → ImpactPrograms → Sponsors → GovernanceFirewall → Vision2035 → FinalCTA.
-
-## Out of scope
-- No redesign, no colour/typography/layout changes.
-- No backend/schema/RLS changes.
-- No translation file edits (English strings only; i18n can catch up later).
-- No changes to detail pages under `/awards/*` — only the homepage surfaces.
-- No new analytics events beyond reusing existing `trackEvent` calls.
-
-## Verification
-1. `tsgo` typecheck.
-2. Playwright screenshot of `/` at mobile (375) and desktop (1280) confirming: 3 hero CTAs, pathway section visible, tier order Icon→BG→Platinum→Influencers, 4 Platinum cards in the new order with the updated Faith-Based copy, mobile "View All Categories" button visible.
+Approve to proceed?

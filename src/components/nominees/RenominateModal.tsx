@@ -14,6 +14,7 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { toast } from "sonner";
 import { useAuth } from "@/contexts/AuthContext";
 import { submitRenomination } from "@/lib/api";
+import { supabase } from "@/integrations/supabase/client";
 import { RotateCcw, Loader2, Award, Info, User, MapPin, Mail, FileText } from "lucide-react";
 import { Link } from "react-router-dom";
 
@@ -30,6 +31,8 @@ export interface RenominateModalProps {
   groupSlug?: string;
   groupName?: string;
   currentCount?: number;
+  /** When present, endorsement is attributed to this nominee referral code and increments the public counter immediately. */
+  referralCode?: string;
   onRenominateSuccess?: () => void;
 }
 
@@ -60,6 +63,7 @@ export function RenominateModal({
   groupSlug,
   groupName,
   currentCount = 0,
+  referralCode,
   onRenominateSuccess,
 }: RenominateModalProps) {
   const { user } = useAuth();
@@ -120,28 +124,48 @@ export function RenominateModal({
 
     setIsSubmitting(true);
     try {
-      await submitRenomination({
-        nomineeId,
-        nomineeSlug: nomineeSlug || nomineeId,
-        nomineeName,
-        awardSlug,
-        awardTitle,
-        subcategorySlug,
-        subcategoryTitle,
-        groupSlug,
-        groupName,
-        updatedName: updatedName.trim() || undefined,
-        updatedAchievement: updatedAchievement.trim() || undefined,
-        updatedCountry: updatedCountry.trim() || undefined,
-        updatedState: updatedState.trim() || undefined,
-        contactEmail: contactEmail.trim() || undefined,
-        note: note.trim() || undefined,
-        sessionId: user ? undefined : getSessionId(),
-      });
-      
-      toast.success("Endorsement Submitted!", {
-        description: `Your endorsement for ${nomineeName} has been recorded. Thank you for contributing to quality education!`,
-      });
+      if (referralCode) {
+        // Referral-driven endorsement — atomic counter increment via RPC
+        const { data, error: rpcErr } = await supabase.rpc("record_renomination_via_referral", {
+          p_referral_code: referralCode,
+          p_message: note.trim() || null,
+          p_device_hash: getSessionId(),
+          p_endorser_name: updatedName.trim() || null,
+          p_endorser_email: contactEmail.trim() || null,
+        });
+        if (rpcErr) throw rpcErr;
+        if (data?.[0]?.was_duplicate) {
+          toast.info("You've already endorsed this nominee recently.", {
+            description: "Come back tomorrow to endorse again.",
+          });
+        } else {
+          toast.success("Endorsement counted!", {
+            description: `Your endorsement for ${nomineeName} has been recorded. Thank you for supporting quality education.`,
+          });
+        }
+      } else {
+        await submitRenomination({
+          nomineeId,
+          nomineeSlug: nomineeSlug || nomineeId,
+          nomineeName,
+          awardSlug,
+          awardTitle,
+          subcategorySlug,
+          subcategoryTitle,
+          groupSlug,
+          groupName,
+          updatedName: updatedName.trim() || undefined,
+          updatedAchievement: updatedAchievement.trim() || undefined,
+          updatedCountry: updatedCountry.trim() || undefined,
+          updatedState: updatedState.trim() || undefined,
+          contactEmail: contactEmail.trim() || undefined,
+          note: note.trim() || undefined,
+          sessionId: user ? undefined : getSessionId(),
+        });
+        toast.success("Endorsement Submitted!", {
+          description: `Your endorsement for ${nomineeName} has been recorded. Thank you for contributing to quality education!`,
+        });
+      }
       
       onRenominateSuccess?.();
       resetAndClose();

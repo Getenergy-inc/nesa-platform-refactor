@@ -17,6 +17,8 @@ export interface NomineeActionsData {
   imageUrl?: string;
   country?: string;
   renominationCount?: number;
+  /** Referral code from ?ref= — attributes endorsement + increments counter atomically. */
+  referralCode?: string;
 }
 
 interface NomineeActionsProps {
@@ -131,6 +133,7 @@ export function NomineeActions({
         groupSlug={nominee.groupSlug}
         groupName={nominee.groupName}
         currentCount={nominee.renominationCount}
+        referralCode={nominee.referralCode}
         onRenominateSuccess={onRenominateSuccess}
       />
     </>
