@@ -251,32 +251,43 @@ export default function IconPortraitGaps() {
         </div>
 
         {/* Filters */}
-        <div className="flex flex-col md:flex-row gap-3 md:items-center">
-          <Input
-            placeholder="Search by name, slug, country..."
-            value={q}
-            onChange={(e) => setQ(e.target.value)}
-            className="md:max-w-sm bg-black/40 border-white/15 text-white"
-          />
-          <div className="flex flex-wrap gap-2">
-            <Button
-              size="sm"
-              variant={subFilter === "all" ? "default" : "outline"}
-              onClick={() => setSubFilter("all")}
-            >
-              All ({GAPS.length})
-            </Button>
-            {ICON_SUBCATEGORIES.map((s) => (
+        <div className="flex flex-col md:flex-row gap-3 md:items-center md:justify-between">
+          <div className="flex flex-col md:flex-row gap-3 md:items-center">
+            <Input
+              placeholder="Search by name, slug, country..."
+              value={q}
+              onChange={(e) => setQ(e.target.value)}
+              className="md:max-w-sm bg-black/40 border-white/15 text-white"
+            />
+            <div className="flex flex-wrap gap-2">
               <Button
-                key={s.slug}
                 size="sm"
-                variant={subFilter === s.slug ? "default" : "outline"}
-                onClick={() => setSubFilter(s.slug)}
+                variant={subFilter === "all" ? "default" : "outline"}
+                onClick={() => setSubFilter("all")}
               >
-                {s.short} ({bySub[s.slug] ?? 0})
+                All ({GAPS.length})
               </Button>
-            ))}
+              {ICON_SUBCATEGORIES.map((s) => (
+                <Button
+                  key={s.slug}
+                  size="sm"
+                  variant={subFilter === s.slug ? "default" : "outline"}
+                  onClick={() => setSubFilter(s.slug)}
+                >
+                  {s.short} ({bySub[s.slug] ?? 0})
+                </Button>
+              ))}
+            </div>
           </div>
+          <Button
+            size="sm"
+            variant="outline"
+            onClick={exportGapsToCSV}
+            className="border-gold/30 text-gold hover:bg-gold/10 shrink-0"
+          >
+            <Download className="w-4 h-4 mr-2" />
+            Export CSV
+          </Button>
         </div>
 
         {/* List */}
