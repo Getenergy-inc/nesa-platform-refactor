@@ -524,6 +524,7 @@ export default function IconPortraitGaps() {
   const [onlyUnresolved, setOnlyUnresolved] = useState(false);
   const [overrides, setOverrides] = useState<OverridesMap>({});
   const [importing, setImporting] = useState(false);
+  const [auditGap, setAuditGap] = useState<Gap | null>(null);
   const [lastImport, setLastImport] = useState<{
     fileName: string;
     total: number;
