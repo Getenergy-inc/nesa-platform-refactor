@@ -79,8 +79,11 @@ export function NativeCategoryNominationForm({ form, defaultSubcategorySlug }: P
     [form.subcategories],
   );
 
+  const isIconFamily = form.family === "africa-education-icon";
+
   const [state, setState] = useState<FormState>({
     ...INITIAL,
+    nominee_type: isIconFamily ? "Africans in Africa" : INITIAL.nominee_type,
     subcategory_slug: defaultSubcategorySlug ?? subOptions[0]?.slug ?? "",
   });
   const [submitting, setSubmitting] = useState(false);
