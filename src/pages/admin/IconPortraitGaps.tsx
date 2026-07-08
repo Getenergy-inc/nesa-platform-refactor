@@ -20,7 +20,7 @@ import {
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { Copy, ExternalLink, ImageOff } from "lucide-react";
+import { Copy, Download, ExternalLink, ImageOff } from "lucide-react";
 import { toast } from "@/hooks/use-toast";
 
 const PLACEHOLDER = "placeholder-icon";
