@@ -3349,6 +3349,7 @@ export type Database = {
           published_at: string | null
           published_by: string | null
           recognition_class: string | null
+          referral_code: string | null
           region: string | null
           region_slug: string | null
           renomination_count: number
@@ -3427,6 +3428,7 @@ export type Database = {
           published_at?: string | null
           published_by?: string | null
           recognition_class?: string | null
+          referral_code?: string | null
           region?: string | null
           region_slug?: string | null
           renomination_count?: number
@@ -3505,6 +3507,7 @@ export type Database = {
           published_at?: string | null
           published_by?: string | null
           recognition_class?: string | null
+          referral_code?: string | null
           region?: string | null
           region_slug?: string | null
           renomination_count?: number
@@ -8047,6 +8050,16 @@ export type Database = {
       }
     }
     Functions: {
+      accept_nomination_by_token: {
+        Args: { p_token: string }
+        Returns: {
+          already_accepted: boolean
+          name: string
+          nominee_id: string
+          referral_code: string
+          slug: string
+        }[]
+      }
       assign_nrc_reviewers: {
         Args: { p_nomination_id: string; p_num_reviewers?: number }
         Returns: Json
@@ -8163,9 +8176,32 @@ export type Database = {
         Args: { _action: Database["public"]["Enums"]["stage_action"] }
         Returns: boolean
       }
+      mint_acceptance_token: {
+        Args: { p_nominee_id: string }
+        Returns: {
+          email: string
+          expires_at: string
+          name: string
+          token: string
+        }[]
+      }
       publish_results: {
         Args: { p_contest_type: string; p_season_id: string }
         Returns: Json
+      }
+      record_renomination_via_referral: {
+        Args: {
+          p_device_hash?: string
+          p_endorser_email?: string
+          p_endorser_name?: string
+          p_message?: string
+          p_referral_code: string
+        }
+        Returns: {
+          new_count: number
+          nominee_id: string
+          was_duplicate: boolean
+        }[]
       }
       record_wallet_transaction: {
         Args: {
