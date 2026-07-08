@@ -180,6 +180,112 @@ function exportGapsToCSV() {
   toast({ title: "CSV exported", description: `${GAPS.length} gap(s) downloaded` });
 }
 
+// ---------- CSV import ----------
+
+const OVERRIDES_STORAGE_KEY = "icon-portrait-overrides:v1";
+
+type OverrideStatus = "verified" | "missing";
+interface OverrideEntry {
+  path: string;
+  status: OverrideStatus;
+  source_row?: number;
+}
+type OverridesMap = Record<string, OverrideEntry>;
+
+// Minimal RFC4180-ish CSV parser (handles quotes, escaped quotes, commas, newlines).
+function parseCSV(text: string): string[][] {
+  const rows: string[][] = [];
+  let row: string[] = [];
+  let cell = "";
+  let inQuotes = false;
+  for (let i = 0; i < text.length; i++) {
+    const c = text[i];
+    if (inQuotes) {
+      if (c === '"') {
+        if (text[i + 1] === '"') {
+          cell += '"';
+          i++;
+        } else {
+          inQuotes = false;
+        }
+      } else {
+        cell += c;
+      }
+    } else {
+      if (c === '"') inQuotes = true;
+      else if (c === ",") {
+        row.push(cell);
+        cell = "";
+      } else if (c === "\n" || c === "\r") {
+        if (c === "\r" && text[i + 1] === "\n") i++;
+        row.push(cell);
+        cell = "";
+        if (row.length > 1 || row[0] !== "") rows.push(row);
+        row = [];
+      } else {
+        cell += c;
+      }
+    }
+  }
+  if (cell.length || row.length) {
+    row.push(cell);
+    rows.push(row);
+  }
+  return rows;
+}
+
+function normaliseHeader(h: string) {
+  return h.trim().toLowerCase().replace(/[\s-]+/g, "_");
+}
+
+// Resolve a user-supplied path to a URL loadable by the browser from /public.
+function toPublicUrl(raw: string): string {
+  let p = raw.trim();
+  if (!p) return "";
+  if (/^https?:\/\//i.test(p)) return p;
+  p = p.replace(/^\.?\/+/, "");
+  p = p.replace(/^public\//, "");
+  if (!p.startsWith("/")) p = "/" + p;
+  return p;
+}
+
+function verifyImage(url: string, timeoutMs = 8000): Promise<boolean> {
+  return new Promise((resolve) => {
+    const img = new Image();
+    const done = (ok: boolean) => {
+      img.onload = img.onerror = null;
+      resolve(ok);
+    };
+    const t = setTimeout(() => done(false), timeoutMs);
+    img.onload = () => {
+      clearTimeout(t);
+      done(true);
+    };
+    img.onerror = () => {
+      clearTimeout(t);
+      done(false);
+    };
+    img.src = url;
+  });
+}
+
+function loadOverrides(): OverridesMap {
+  try {
+    const raw = localStorage.getItem(OVERRIDES_STORAGE_KEY);
+    return raw ? (JSON.parse(raw) as OverridesMap) : {};
+  } catch {
+    return {};
+  }
+}
+
+function saveOverrides(o: OverridesMap) {
+  try {
+    localStorage.setItem(OVERRIDES_STORAGE_KEY, JSON.stringify(o));
+  } catch {
+    /* noop */
+  }
+}
+
 export default function IconPortraitGaps() {
   const [q, setQ] = useState("");
   const [subFilter, setSubFilter] = useState<string>("all");
