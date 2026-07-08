@@ -310,6 +310,7 @@ import {
   AdminPathwaysCMS,
   AdminGalleryCMS,
   AdminIconMigrationVerification,
+  AdminIconPortraitGaps,
 } from "./pages/admin";
 import BulkSeedNominees from "./pages/admin/BulkSeedNominees";
 import AdminVolunteersCMS from "./pages/admin/AdminVolunteersCMS";
