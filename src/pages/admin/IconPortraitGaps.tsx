@@ -20,7 +20,7 @@ import {
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { Copy, ExternalLink, ImageOff } from "lucide-react";
+import { Copy, Download, ExternalLink, ImageOff } from "lucide-react";
 import { toast } from "@/hooks/use-toast";
 
 const PLACEHOLDER = "placeholder-icon";
@@ -124,6 +124,62 @@ const copy = (t: string) => {
   );
 };
 
+function csvCell(value: string | number) {
+  const s = String(value);
+  if (/[",\n\r]/.test(s)) return `"${s.replace(/"/g, "\"\"")}"`;
+  return s;
+}
+
+function exportGapsToCSV() {
+  const headers = [
+    "id",
+    "name",
+    "slug",
+    "name_slug_fallback",
+    "subcategory",
+    "classification",
+    "country",
+    "region",
+    "tried_slugs",
+    "suggested_drop_path",
+    "nearest_manifest_slug_1",
+    "nearest_distance_1",
+    "nearest_manifest_slug_2",
+    "nearest_distance_2",
+    "nearest_manifest_slug_3",
+    "nearest_distance_3",
+  ];
+  const rows = GAPS.map((g) => [
+    g.id,
+    g.name,
+    g.slug,
+    g.nSlug,
+    subShort(g.sub),
+    clsShort(g.cls),
+    g.country,
+    g.region,
+    g.candidatesTried.join(" | "),
+    g.expectedFileHint,
+    g.nearest[0]?.slug ?? "",
+    g.nearest[0]?.distance ?? "",
+    g.nearest[1]?.slug ?? "",
+    g.nearest[1]?.distance ?? "",
+    g.nearest[2]?.slug ?? "",
+    g.nearest[2]?.distance ?? "",
+  ]);
+  const csv = [headers.map(csvCell).join(","), ...rows.map((r) => r.map(csvCell).join(","))].join("\n");
+  const blob = new Blob([csv], { type: "text/csv;charset=utf-8;" });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = `icon-portrait-gaps-${new Date().toISOString().slice(0, 10)}.csv`;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+  toast({ title: "CSV exported", description: `${GAPS.length} gap(s) downloaded` });
+}
+
 export default function IconPortraitGaps() {
   const [q, setQ] = useState("");
   const [subFilter, setSubFilter] = useState<string>("all");
@@ -195,32 +251,43 @@ export default function IconPortraitGaps() {
         </div>
 
         {/* Filters */}
-        <div className="flex flex-col md:flex-row gap-3 md:items-center">
-          <Input
-            placeholder="Search by name, slug, country..."
-            value={q}
-            onChange={(e) => setQ(e.target.value)}
-            className="md:max-w-sm bg-black/40 border-white/15 text-white"
-          />
-          <div className="flex flex-wrap gap-2">
-            <Button
-              size="sm"
-              variant={subFilter === "all" ? "default" : "outline"}
-              onClick={() => setSubFilter("all")}
-            >
-              All ({GAPS.length})
-            </Button>
-            {ICON_SUBCATEGORIES.map((s) => (
+        <div className="flex flex-col md:flex-row gap-3 md:items-center md:justify-between">
+          <div className="flex flex-col md:flex-row gap-3 md:items-center">
+            <Input
+              placeholder="Search by name, slug, country..."
+              value={q}
+              onChange={(e) => setQ(e.target.value)}
+              className="md:max-w-sm bg-black/40 border-white/15 text-white"
+            />
+            <div className="flex flex-wrap gap-2">
               <Button
-                key={s.slug}
                 size="sm"
-                variant={subFilter === s.slug ? "default" : "outline"}
-                onClick={() => setSubFilter(s.slug)}
+                variant={subFilter === "all" ? "default" : "outline"}
+                onClick={() => setSubFilter("all")}
               >
-                {s.short} ({bySub[s.slug] ?? 0})
+                All ({GAPS.length})
               </Button>
-            ))}
+              {ICON_SUBCATEGORIES.map((s) => (
+                <Button
+                  key={s.slug}
+                  size="sm"
+                  variant={subFilter === s.slug ? "default" : "outline"}
+                  onClick={() => setSubFilter(s.slug)}
+                >
+                  {s.short} ({bySub[s.slug] ?? 0})
+                </Button>
+              ))}
+            </div>
           </div>
+          <Button
+            size="sm"
+            variant="outline"
+            onClick={exportGapsToCSV}
+            className="border-gold/30 text-gold hover:bg-gold/10 shrink-0"
+          >
+            <Download className="w-4 h-4 mr-2" />
+            Export CSV
+          </Button>
         </div>
 
         {/* List */}
