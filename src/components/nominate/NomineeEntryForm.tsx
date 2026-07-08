@@ -24,6 +24,33 @@ const PATHWAY_FAMILY: Record<NominationPathway, string> = {
   "special-needs-school": "special-needs-school",
 };
 
+const ICON_CATEGORIES = [
+  "Literary & New Curriculum Advocate Icon of the Decade",
+  "Africa Technical Educator Icon of the Decade",
+  "Africa Education Philanthropy Icon of the Decade",
+] as const;
+
+const ICON_NOMINEE_TYPES: { value: string; label: string; description: string }[] = [
+  {
+    value: "Africans in Africa",
+    label: "Africans in Africa",
+    description:
+      "African nominees who live and work primarily within Africa, with direct education impact on the continent.",
+  },
+  {
+    value: "Diaspora Africans",
+    label: "Diaspora Africans",
+    description:
+      "Nominees of African origin, heritage, or identity who live and work primarily outside Africa but contribute significantly to African education.",
+  },
+  {
+    value: "Friends of Africa",
+    label: "Friends of Africa",
+    description:
+      "Non-African individuals, organisations, institutions, or global partners with long-term contributions to African education.",
+  },
+];
+
 interface Props {
   pathway: NominationPathway;
   initial?: NomineeEntry | null;
