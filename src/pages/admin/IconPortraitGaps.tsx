@@ -779,7 +779,8 @@ export default function IconPortraitGaps() {
                 </div>
               </CardContent>
             </Card>
-          ))}
+            );
+          })}
           {!filtered.length && (
             <div className="text-white/60 text-sm text-center py-12 border border-dashed border-white/10 rounded-md">
               No portrait gaps match this filter.
