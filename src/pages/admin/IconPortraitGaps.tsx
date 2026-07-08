@@ -124,6 +124,62 @@ const copy = (t: string) => {
   );
 };
 
+function csvCell(value: string | number) {
+  const s = String(value);
+  if (/[",\n\r]/.test(s)) return `"${s.replace(/"/g, "\"\"")}"`;
+  return s;
+}
+
+function exportGapsToCSV() {
+  const headers = [
+    "id",
+    "name",
+    "slug",
+    "name_slug_fallback",
+    "subcategory",
+    "classification",
+    "country",
+    "region",
+    "tried_slugs",
+    "suggested_drop_path",
+    "nearest_manifest_slug_1",
+    "nearest_distance_1",
+    "nearest_manifest_slug_2",
+    "nearest_distance_2",
+    "nearest_manifest_slug_3",
+    "nearest_distance_3",
+  ];
+  const rows = GAPS.map((g) => [
+    g.id,
+    g.name,
+    g.slug,
+    g.nSlug,
+    subShort(g.sub),
+    clsShort(g.cls),
+    g.country,
+    g.region,
+    g.candidatesTried.join(" | "),
+    g.expectedFileHint,
+    g.nearest[0]?.slug ?? "",
+    g.nearest[0]?.distance ?? "",
+    g.nearest[1]?.slug ?? "",
+    g.nearest[1]?.distance ?? "",
+    g.nearest[2]?.slug ?? "",
+    g.nearest[2]?.distance ?? "",
+  ]);
+  const csv = [headers.map(csvCell).join(","), ...rows.map((r) => r.map(csvCell).join(","))].join("\n");
+  const blob = new Blob([csv], { type: "text/csv;charset=utf-8;" });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = `icon-portrait-gaps-${new Date().toISOString().slice(0, 10)}.csv`;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+  toast({ title: "CSV exported", description: `${GAPS.length} gap(s) downloaded` });
+}
+
 export default function IconPortraitGaps() {
   const [q, setQ] = useState("");
   const [subFilter, setSubFilter] = useState<string>("all");
