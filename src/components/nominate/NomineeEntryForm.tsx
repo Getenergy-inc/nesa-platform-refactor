@@ -86,7 +86,12 @@ export function NomineeEntryForm({
       id: uid(),
       pathway,
       nomineeName: "",
-      nomineeType: pathway === "platinum" ? "Organization" : "Individual",
+      nomineeType:
+        pathway === "icon"
+          ? "Africans in Africa"
+          : pathway === "platinum"
+          ? "Organization"
+          : "Individual",
       awardFamily: preselect?.awardFamily ?? PATHWAY_FAMILY[pathway],
       category: preselect?.category ?? "",
       subcategory: preselect?.subcategory ?? "",
