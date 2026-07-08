@@ -289,11 +289,147 @@ function saveOverrides(o: OverridesMap) {
 export default function IconPortraitGaps() {
   const [q, setQ] = useState("");
   const [subFilter, setSubFilter] = useState<string>("all");
+  const [onlyUnresolved, setOnlyUnresolved] = useState(false);
+  const [overrides, setOverrides] = useState<OverridesMap>({});
+  const [importing, setImporting] = useState(false);
+  const [lastImport, setLastImport] = useState<{
+    fileName: string;
+    total: number;
+    verified: number;
+    missing: number;
+    unmatched: number;
+    unmatchedKeys: string[];
+  } | null>(null);
+  const fileInputRef = useRef<HTMLInputElement | null>(null);
+
+  useEffect(() => {
+    setOverrides(loadOverrides());
+  }, []);
+
+  const bySlug = useMemo(() => {
+    const m: Record<string, Gap> = {};
+    for (const g of GAPS) {
+      m[g.slug] = g;
+      m[g.nSlug] = g;
+    }
+    return m;
+  }, []);
+  const byId = useMemo(() => {
+    const m: Record<string, Gap> = {};
+    for (const g of GAPS) m[g.id] = g;
+    return m;
+  }, []);
+
+  async function handleCSVFile(file: File) {
+    setImporting(true);
+    try {
+      const text = await file.text();
+      const rows = parseCSV(text);
+      if (!rows.length) {
+        toast({ title: "Empty CSV", variant: "destructive" });
+        return;
+      }
+      const headers = rows[0].map(normaliseHeader);
+      const idx = (name: string) => headers.indexOf(name);
+      const idIdx = idx("id");
+      const slugIdx = idx("slug");
+      const pathCandidates = [
+        "resolved_path",
+        "image_path",
+        "new_image_path",
+        "image_url",
+        "suggested_drop_path",
+      ];
+      const pathIdx = pathCandidates.map(idx).find((i) => i >= 0) ?? -1;
+      if (pathIdx < 0) {
+        toast({
+          title: "Missing path column",
+          description: `Expected one of: ${pathCandidates.join(", ")}`,
+          variant: "destructive",
+        });
+        return;
+      }
+
+      const next: OverridesMap = { ...loadOverrides() };
+      const unmatched: string[] = [];
+      let verified = 0;
+      let missing = 0;
+      let total = 0;
+
+      for (let r = 1; r < rows.length; r++) {
+        const row = rows[r];
+        if (!row || row.every((c) => !c.trim())) continue;
+        const rawPath = row[pathIdx]?.trim();
+        if (!rawPath) continue;
+        total++;
+        const rowId = idIdx >= 0 ? row[idIdx]?.trim() : "";
+        const rowSlug = slugIdx >= 0 ? row[slugIdx]?.trim() : "";
+        const gap =
+          (rowId && byId[rowId]) ||
+          (rowSlug && bySlug[rowSlug]) ||
+          null;
+        if (!gap) {
+          unmatched.push(rowId || rowSlug || `row ${r + 1}`);
+          continue;
+        }
+        const url = toPublicUrl(rawPath);
+        // Skip if it still points at the placeholder
+        if (url.includes("placeholder-icon")) {
+          missing++;
+          next[gap.id] = { path: url, status: "missing", source_row: r + 1 };
+          continue;
+        }
+        // eslint-disable-next-line no-await-in-loop
+        const ok = await verifyImage(url);
+        if (ok) verified++;
+        else missing++;
+        next[gap.id] = {
+          path: url,
+          status: ok ? "verified" : "missing",
+          source_row: r + 1,
+        };
+      }
+
+      saveOverrides(next);
+      setOverrides(next);
+      setLastImport({
+        fileName: file.name,
+        total,
+        verified,
+        missing,
+        unmatched: unmatched.length,
+        unmatchedKeys: unmatched.slice(0, 10),
+      });
+      toast({
+        title: "CSV imported",
+        description: `${verified} verified · ${missing} missing · ${unmatched.length} unmatched`,
+      });
+    } catch (err) {
+      console.error(err);
+      toast({ title: "Import failed", description: String(err), variant: "destructive" });
+    } finally {
+      setImporting(false);
+      if (fileInputRef.current) fileInputRef.current.value = "";
+    }
+  }
+
+  function clearOverrides() {
+    saveOverrides({});
+    setOverrides({});
+    setLastImport(null);
+    toast({ title: "Overrides cleared" });
+  }
+
+  const resolvedCount = useMemo(
+    () => Object.values(overrides).filter((o) => o.status === "verified").length,
+    [overrides],
+  );
 
   const filtered = useMemo(() => {
     const needle = q.trim().toLowerCase();
     return GAPS.filter((g) => {
       if (subFilter !== "all" && g.sub !== subFilter) return false;
+      if (onlyUnresolved && overrides[g.id]?.status === "verified") return false;
       if (!needle) return true;
       return (
         g.name.toLowerCase().includes(needle) ||
@@ -301,7 +437,7 @@ export default function IconPortraitGaps() {
         g.country.toLowerCase().includes(needle)
       );
     });
-  }, [q, subFilter]);
+  }, [q, subFilter, onlyUnresolved, overrides]);
 
   const bySub = useMemo(() => {
     const counts: Record<string, number> = {};
