@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
 import {
@@ -20,7 +20,7 @@ import {
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { Copy, Download, ExternalLink, ImageOff } from "lucide-react";
+import { Copy, Download, ExternalLink, ImageOff, Upload, CheckCircle2, XCircle, RotateCcw } from "lucide-react";
 import { toast } from "@/hooks/use-toast";
 
 const PLACEHOLDER = "placeholder-icon";
