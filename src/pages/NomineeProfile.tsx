@@ -728,12 +728,14 @@ function ActionCTABar({
   dbNomineeId,
   blueGarnet,
   renominationCount,
+  referralCode,
   onRenominateSuccess,
 }: {
   nominee: EnrichedNominee;
   dbNomineeId: string | null;
   blueGarnet: boolean;
   renominationCount: number;
+  referralCode?: string;
   onRenominateSuccess: () => void;
 }) {
   return (
@@ -764,6 +766,7 @@ function ActionCTABar({
                 groupName: nominee.regionName,
                 country: nominee.country,
                 renominationCount,
+                referralCode,
               }}
               showVote={blueGarnet}
               onRenominateSuccess={onRenominateSuccess}
