@@ -310,6 +310,7 @@ import {
   AdminPathwaysCMS,
   AdminGalleryCMS,
   AdminIconMigrationVerification,
+  AdminIconPortraitGaps,
 } from "./pages/admin";
 import BulkSeedNominees from "./pages/admin/BulkSeedNominees";
 import AdminVolunteersCMS from "./pages/admin/AdminVolunteersCMS";
@@ -1852,6 +1853,7 @@ const App = () => (
                   <Route path="/admin/pathways" element={<AdminPathwaysCMS />} />
                   <Route path="/admin/gallery" element={<AdminGalleryCMS />} />
                   <Route path="/admin/icon-migration" element={<AdminIconMigrationVerification />} />
+                  <Route path="/admin/icon-portrait-gaps" element={<AdminIconPortraitGaps />} />
                   <Route
                     path="/admin/bulk-seed"
                     element={<BulkSeedNominees />}

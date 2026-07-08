@@ -12,3 +12,4 @@ export { default as AdminContributorsCMS } from "./AdminContributorsCMS";
 export { default as AdminPathwaysCMS } from "./AdminPathwaysCMS";
 export { default as AdminGalleryCMS } from "./GalleryAdmin";
 export { default as AdminIconMigrationVerification } from "./IconMigrationVerification";
+export { default as AdminIconPortraitGaps } from "./IconPortraitGaps";
