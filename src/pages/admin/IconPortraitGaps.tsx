@@ -611,13 +611,25 @@ export default function IconPortraitGaps() {
 
         {/* List */}
         <div className="grid gap-3">
-          {filtered.map((g) => (
-            <Card key={g.id} className="bg-charcoal-light border-white/10">
+          {filtered.map((g) => {
+            const ov = overrides[g.id];
+            const cardBorder =
+              ov?.status === "verified"
+                ? "border-emerald-500/40"
+                : ov?.status === "missing"
+                ? "border-red-500/40"
+                : "border-white/10";
+            return (
+            <Card key={g.id} className={`bg-charcoal-light ${cardBorder}`}>
               <CardHeader className="pb-2">
                 <div className="flex items-start justify-between gap-3">
                   <div>
                     <CardTitle className="text-white text-lg flex items-center gap-2">
-                      <ImageOff className="w-4 h-4 text-gold/70" />
+                      {ov?.status === "verified" ? (
+                        <CheckCircle2 className="w-4 h-4 text-emerald-400" />
+                      ) : (
+                        <ImageOff className="w-4 h-4 text-gold/70" />
+                      )}
                       {g.name}
                     </CardTitle>
                     <CardDescription className="text-white/60">
@@ -633,6 +645,40 @@ export default function IconPortraitGaps() {
                 </div>
               </CardHeader>
               <CardContent className="space-y-3 text-sm">
+                {ov && (
+                  <div
+                    className={`rounded-md border p-3 flex items-center gap-3 ${
+                      ov.status === "verified"
+                        ? "bg-emerald-500/5 border-emerald-500/30"
+                        : "bg-red-500/5 border-red-500/30"
+                    }`}
+                  >
+                    {ov.status === "verified" ? (
+                      <img
+                        src={ov.path}
+                        alt={g.name}
+                        className="w-16 h-16 rounded object-cover border border-white/10"
+                      />
+                    ) : (
+                      <div className="w-16 h-16 rounded border border-white/10 grid place-items-center bg-black/40">
+                        <XCircle className="w-6 h-6 text-red-400" />
+                      </div>
+                    )}
+                    <div className="min-w-0 flex-1">
+                      <div className="text-xs uppercase tracking-wide mb-1 flex items-center gap-2">
+                        {ov.status === "verified" ? (
+                          <span className="text-emerald-400">Resolved from CSV</span>
+                        ) : (
+                          <span className="text-red-400">CSV path not reachable</span>
+                        )}
+                        {ov.source_row && (
+                          <span className="text-white/40">row {ov.source_row}</span>
+                        )}
+                      </div>
+                      <code className="text-white/80 break-all text-xs">{ov.path}</code>
+                    </div>
+                  </div>
+                )}
                 <div className="grid md:grid-cols-2 gap-3">
                   <div className="rounded-md bg-black/30 border border-white/10 p-3">
                     <div className="text-white/50 text-xs uppercase tracking-wide mb-1">
