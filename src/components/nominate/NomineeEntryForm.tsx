@@ -24,6 +24,33 @@ const PATHWAY_FAMILY: Record<NominationPathway, string> = {
   "special-needs-school": "special-needs-school",
 };
 
+const ICON_CATEGORIES = [
+  "Literary & New Curriculum Advocate Icon of the Decade",
+  "Africa Technical Educator Icon of the Decade",
+  "Africa Education Philanthropy Icon of the Decade",
+] as const;
+
+const ICON_NOMINEE_TYPES: { value: string; label: string; description: string }[] = [
+  {
+    value: "Africans in Africa",
+    label: "Africans in Africa",
+    description:
+      "African nominees who live and work primarily within Africa, with direct education impact on the continent.",
+  },
+  {
+    value: "Diaspora Africans",
+    label: "Diaspora Africans",
+    description:
+      "Nominees of African origin, heritage, or identity who live and work primarily outside Africa but contribute significantly to African education.",
+  },
+  {
+    value: "Friends of Africa",
+    label: "Friends of Africa",
+    description:
+      "Non-African individuals, organisations, institutions, or global partners with long-term contributions to African education.",
+  },
+];
+
 interface Props {
   pathway: NominationPathway;
   initial?: NomineeEntry | null;
@@ -59,7 +86,12 @@ export function NomineeEntryForm({
       id: uid(),
       pathway,
       nomineeName: "",
-      nomineeType: pathway === "platinum" ? "Organization" : "Individual",
+      nomineeType:
+        pathway === "icon"
+          ? "Africans in Africa"
+          : pathway === "platinum"
+          ? "Organization"
+          : "Individual",
       awardFamily: preselect?.awardFamily ?? PATHWAY_FAMILY[pathway],
       category: preselect?.category ?? "",
       subcategory: preselect?.subcategory ?? "",
@@ -81,7 +113,19 @@ export function NomineeEntryForm({
   const [errors, setErrors] = useState<Record<string, string>>({});
 
   useEffect(() => {
-    setForm((f) => ({ ...f, pathway, awardFamily: PATHWAY_FAMILY[pathway] }));
+    setForm((f) => {
+      const next = { ...f, pathway, awardFamily: PATHWAY_FAMILY[pathway] };
+      if (pathway === "icon") {
+        if (!ICON_NOMINEE_TYPES.some((t) => t.value === f.nomineeType)) {
+          next.nomineeType = "Africans in Africa";
+        }
+        if (!ICON_CATEGORIES.includes(f.category as typeof ICON_CATEGORIES[number])) {
+          next.category = "";
+        }
+        next.subcategory = "";
+      }
+      return next;
+    });
   }, [pathway]);
 
   const set = <K extends keyof NomineeEntry>(k: K, v: NomineeEntry[K]) =>
@@ -140,39 +184,75 @@ export function NomineeEntryForm({
         </Field>
 
         <Field label="Nominee type" required>
-          <select
-            value={form.nomineeType}
-            onChange={(e) => set("nomineeType", e.target.value)}
-            className="h-10 w-full rounded-md border border-white/10 bg-white/5 px-3 text-sm text-white"
-          >
-            <option value="Individual">Individual</option>
-            <option value="Organization">Organization</option>
-            <option value="School">School</option>
-            <option value="NGO">NGO</option>
-            <option value="Government / Ministry">Government / Ministry</option>
-            <option value="Foundation">Foundation</option>
-            <option value="Creator / Media">Creator / Media</option>
-            <option value="CSR Contributor">CSR Contributor</option>
-          </select>
+          {pathway === "icon" ? (
+            <>
+              <select
+                value={form.nomineeType}
+                onChange={(e) => set("nomineeType", e.target.value)}
+                className="h-10 w-full rounded-md border border-white/10 bg-white/5 px-3 text-sm text-white"
+              >
+                {ICON_NOMINEE_TYPES.map((t) => (
+                  <option key={t.value} value={t.value}>
+                    {t.label}
+                  </option>
+                ))}
+              </select>
+              <p className="mt-1.5 text-[11px] text-white/55">
+                {ICON_NOMINEE_TYPES.find((t) => t.value === form.nomineeType)?.description}
+              </p>
+            </>
+          ) : (
+            <select
+              value={form.nomineeType}
+              onChange={(e) => set("nomineeType", e.target.value)}
+              className="h-10 w-full rounded-md border border-white/10 bg-white/5 px-3 text-sm text-white"
+            >
+              <option value="Individual">Individual</option>
+              <option value="Organization">Organization</option>
+              <option value="School">School</option>
+              <option value="NGO">NGO</option>
+              <option value="Government / Ministry">Government / Ministry</option>
+              <option value="Foundation">Foundation</option>
+              <option value="Creator / Media">Creator / Media</option>
+              <option value="CSR Contributor">CSR Contributor</option>
+            </select>
+          )}
         </Field>
 
         <Field label="Category" error={errors.category} required>
-          <Input
-            value={form.category}
-            onChange={(e) => set("category", e.target.value)}
-            placeholder="e.g. Best STEM Educator"
-            className="bg-white/5 border-white/10 text-white"
-          />
+          {pathway === "icon" ? (
+            <select
+              value={form.category}
+              onChange={(e) => set("category", e.target.value)}
+              className="h-10 w-full rounded-md border border-white/10 bg-white/5 px-3 text-sm text-white"
+            >
+              <option value="">Select an Icon category…</option>
+              {ICON_CATEGORIES.map((c) => (
+                <option key={c} value={c}>
+                  {c}
+                </option>
+              ))}
+            </select>
+          ) : (
+            <Input
+              value={form.category}
+              onChange={(e) => set("category", e.target.value)}
+              placeholder="e.g. Best STEM Educator"
+              className="bg-white/5 border-white/10 text-white"
+            />
+          )}
         </Field>
 
-        <Field label="Sub-category">
-          <Input
-            value={form.subcategory ?? ""}
-            onChange={(e) => set("subcategory", e.target.value)}
-            placeholder="Optional"
-            className="bg-white/5 border-white/10 text-white"
-          />
-        </Field>
+        {pathway !== "icon" && (
+          <Field label="Sub-category">
+            <Input
+              value={form.subcategory ?? ""}
+              onChange={(e) => set("subcategory", e.target.value)}
+              placeholder="Optional"
+              className="bg-white/5 border-white/10 text-white"
+            />
+          </Field>
+        )}
 
         <Field label="Country" error={errors.country} required>
           <Input
