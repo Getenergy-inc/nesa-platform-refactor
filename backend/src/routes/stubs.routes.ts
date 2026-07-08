@@ -8,6 +8,8 @@
 import { Router, type RequestHandler } from "express";
 import { ok, created } from "../utils/http.js";
 import { requireAuth, requireRole } from "../middleware/auth.js";
+import { validateBody } from "../middleware/validate.js";
+import { iconNominationPayloadSchema } from "../schemas/iconNomination.js";
 
 const stubList: RequestHandler = (_req, res) =>
   ok(res, [], "OK", { page: 1, limit: 20, total: 0, totalPages: 0 });
@@ -81,6 +83,8 @@ export const nominationsRouter = (() => {
   r.patch("/:id/approve", requireAuth, requireRole("ADMIN", "SUPER_ADMIN", "OPERATIONS_MANAGER"), stubItem);
   r.patch("/:id/reject", requireAuth, requireRole("ADMIN", "SUPER_ADMIN", "OPERATIONS_MANAGER"), stubItem);
   r.patch("/:id/request-info", requireAuth, stubItem);
+  // Africa Education Icon pathway — locked to 3 categories + 3 nominee types.
+  r.post("/icon", requireAuth, validateBody(iconNominationPayloadSchema), stubCreate);
   return r;
 })();
 
