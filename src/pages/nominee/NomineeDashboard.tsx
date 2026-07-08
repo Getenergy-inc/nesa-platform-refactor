@@ -71,7 +71,7 @@ export default function NomineeDashboard() {
           .select(`
             id, name, slug, title, organization, country, region, bio, 
             photo_url, logo_url, acceptance_status, renomination_count, 
-            public_votes, nrc_verified,
+            public_votes, nrc_verified, referral_code,
             certificates (
               id, tier, status, download_locked, verification_code, 
               issued_at, expires_at
@@ -105,21 +105,12 @@ export default function NomineeDashboard() {
           `)
           .eq("created_nominee_id", nomineeData.id);
 
-        // Extract categories
         const categories = (nominations || []).map((nom: any) => ({
           category: nom.subcategories?.categories?.name || "Unknown",
           subcategory: nom.subcategories?.name || "Unknown",
           justification: nom.justification,
           status: (nom.status === "approved" ? "nrc_verified" : "pending") as "pending" | "nrc_verified" | "jury_review",
         }));
-
-        // Get referral code
-        const { data: referralData } = await supabase
-          .from("referrals")
-          .select("referral_code")
-          .eq("owner_type", "USER")
-          .eq("owner_id", nomineeData.id)
-          .maybeSingle();
 
         setNominee({
           ...nomineeData,
@@ -133,8 +124,24 @@ export default function NomineeDashboard() {
             issued_at: nomineeData.certificates[0].issued_at,
             expires_at: nomineeData.certificates[0].expires_at,
           } : null,
-          referral_code: referralData?.referral_code,
+          referral_code: nomineeData.referral_code ?? undefined,
         } as NomineeData);
+
+        // Live counter — subscribe to nominee row updates
+        const channel = supabase
+          .channel(`nominee-${nomineeData.id}`)
+          .on(
+            "postgres_changes",
+            { event: "UPDATE", schema: "public", table: "nominees", filter: `id=eq.${nomineeData.id}` },
+            (payload) => {
+              const next = payload.new as { renomination_count?: number };
+              if (typeof next.renomination_count === "number") {
+                setNominee((prev) => (prev ? { ...prev, renomination_count: next.renomination_count! } : prev));
+              }
+            },
+          )
+          .subscribe();
+        return () => { supabase.removeChannel(channel); };
       } catch (err: any) {
         console.error("Error loading nominee data:", err);
         setError("Failed to load dashboard data");
