@@ -129,6 +129,8 @@ function buildEnrichedFromDb(row: {
 
 export default function NomineeProfile() {
   const { slug: rawSlug } = useParams<{ slug: string }>();
+  const [searchParams] = useSearchParams();
+  const referralCode = searchParams.get("ref") ?? undefined;
   const [dbNomineeId, setDbNomineeId] = useState<string | null>(null);
   const [renominationCount, setRenominationCount] = useState(0);
   // Publication gate: must be confirmed against the DB before rendering the
