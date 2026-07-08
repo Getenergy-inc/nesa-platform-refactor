@@ -293,6 +293,231 @@ function saveOverrides(o: OverridesMap) {
   }
 }
 
+const PLACEHOLDER_URL = "/images/africaicons/placeholder-icon.svg";
+
+// Try loading /images/africaicons/<slug>.<ext> for a set of common extensions.
+// Returns the first URL that loads, or null.
+async function probeSlugAssets(slug: string): Promise<string | null> {
+  // Fast path: known in manifest.
+  if (ICON_IMAGE_MANIFEST[slug]) return ICON_IMAGE_MANIFEST[slug];
+  const exts = ["jpg", "jpeg", "png", "webp"];
+  for (const ext of exts) {
+    const url = `/images/africaicons/${slug}.${ext}`;
+    // eslint-disable-next-line no-await-in-loop
+    const ok = await verifyImage(url, 4000);
+    if (ok) return url;
+  }
+  return null;
+}
+
+interface AuditTileProps {
+  label: string;
+  sublabel?: string;
+  url: string | null;
+  loading?: boolean;
+  tone?: "default" | "gold" | "emerald" | "muted";
+}
+
+function AuditTile({ label, sublabel, url, loading, tone = "default" }: AuditTileProps) {
+  const [errored, setErrored] = useState(false);
+  useEffect(() => setErrored(false), [url]);
+  const border =
+    tone === "gold"
+      ? "border-gold/40"
+      : tone === "emerald"
+      ? "border-emerald-500/40"
+      : tone === "muted"
+      ? "border-white/10"
+      : "border-white/15";
+  return (
+    <div className={`rounded-md bg-black/40 border ${border} overflow-hidden`}>
+      <div className="aspect-square bg-black/60 grid place-items-center relative">
+        {loading ? (
+          <div className="text-white/40 text-xs">probing…</div>
+        ) : url && !errored ? (
+          <img
+            src={url}
+            alt={label}
+            loading="lazy"
+            onError={() => setErrored(true)}
+            className="w-full h-full object-cover"
+          />
+        ) : (
+          <div className="flex flex-col items-center gap-1 text-white/40 text-xs">
+            <ImageOff className="w-6 h-6" />
+            <span>not found</span>
+          </div>
+        )}
+      </div>
+      <div className="p-2 space-y-0.5">
+        <div className="text-[11px] uppercase tracking-wide text-white/50 truncate">
+          {label}
+        </div>
+        {sublabel && (
+          <code className="text-[10px] text-white/70 block truncate">{sublabel}</code>
+        )}
+      </div>
+    </div>
+  );
+}
+
+interface AuditDrawerProps {
+  gap: Gap | null;
+  overrideEntry?: OverrideEntry;
+  onClose: () => void;
+}
+
+function AuditDrawer({ gap, overrideEntry, onClose }: AuditDrawerProps) {
+  const [probed, setProbed] = useState<Record<string, string | null>>({});
+  const [probing, setProbing] = useState(false);
+
+  useEffect(() => {
+    if (!gap) return;
+    let cancelled = false;
+    setProbing(true);
+    setProbed({});
+    (async () => {
+      const results: Record<string, string | null> = {};
+      await Promise.all(
+        gap.candidatesTried.map(async (slug) => {
+          const url = await probeSlugAssets(slug);
+          results[slug] = url;
+        }),
+      );
+      if (!cancelled) {
+        setProbed(results);
+        setProbing(false);
+      }
+    })();
+    return () => {
+      cancelled = true;
+    };
+  }, [gap]);
+
+  const open = !!gap;
+  return (
+    <Sheet open={open} onOpenChange={(v) => !v && onClose()}>
+      <SheetContent
+        side="right"
+        className="w-full sm:max-w-2xl overflow-y-auto bg-charcoal border-l border-white/10 text-white"
+      >
+        {gap && (
+          <>
+            <SheetHeader className="text-left">
+              <SheetTitle className="text-white font-serif text-2xl">
+                {gap.name}
+              </SheetTitle>
+              <SheetDescription className="text-white/60">
+                {gap.country} · {gap.region} · {subShort(gap.sub)} · {clsShort(gap.cls)}
+                <br />
+                <code className="text-gold text-xs">{gap.slug}</code>
+              </SheetDescription>
+            </SheetHeader>
+
+            <div className="mt-6 space-y-6">
+              {/* Current fallback */}
+              <section>
+                <h3 className="text-sm font-medium text-white/80 mb-2">
+                  Current render
+                </h3>
+                <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
+                  <AuditTile
+                    label="Placeholder fallback"
+                    sublabel={PLACEHOLDER_URL}
+                    url={PLACEHOLDER_URL}
+                    tone="muted"
+                  />
+                  {overrideEntry && (
+                    <AuditTile
+                      label={
+                        overrideEntry.status === "verified"
+                          ? "CSV override (verified)"
+                          : "CSV override (missing)"
+                      }
+                      sublabel={overrideEntry.path}
+                      url={
+                        overrideEntry.status === "verified"
+                          ? overrideEntry.path
+                          : null
+                      }
+                      tone={overrideEntry.status === "verified" ? "emerald" : "default"}
+                    />
+                  )}
+                </div>
+              </section>
+
+              {/* Tried candidate slugs */}
+              <section>
+                <div className="flex items-center justify-between mb-2">
+                  <h3 className="text-sm font-medium text-white/80">
+                    Candidate slugs the resolver tried
+                  </h3>
+                  {probing && (
+                    <span className="text-xs text-white/50">probing assets…</span>
+                  )}
+                </div>
+                <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
+                  {gap.candidatesTried.map((slug) => {
+                    const url = probed[slug];
+                    return (
+                      <AuditTile
+                        key={slug}
+                        label={slug}
+                        sublabel={url ?? `/images/africaicons/${slug}.jpg`}
+                        url={url ?? null}
+                        loading={probing && probed[slug] === undefined}
+                        tone={url ? "emerald" : "default"}
+                      />
+                    );
+                  })}
+                </div>
+              </section>
+
+              {/* Nearest manifest matches */}
+              <section>
+                <h3 className="text-sm font-medium text-white/80 mb-2">
+                  Nearest manifest matches
+                </h3>
+                <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
+                  {gap.nearest.map((m) => (
+                    <AuditTile
+                      key={m.slug}
+                      label={`Δ${m.distance} · ${m.slug}`}
+                      sublabel={m.url}
+                      url={m.url}
+                      tone="gold"
+                    />
+                  ))}
+                </div>
+              </section>
+
+              <div className="flex flex-wrap gap-2 pt-2">
+                <Button
+                  size="sm"
+                  variant="outline"
+                  onClick={() => copy(gap.expectedFileHint)}
+                  className="border-gold/30 text-gold hover:bg-gold/10"
+                >
+                  <Copy className="w-4 h-4 mr-2" />
+                  Copy expected path
+                </Button>
+                <Link
+                  to={`/nominees/africa-education-icon-award/${gap.sub}/${gap.cls}/${gap.slug}`}
+                  className="text-gold text-xs hover:underline inline-flex items-center gap-1 ml-auto self-center"
+                >
+                  Open profile <ExternalLink className="w-3 h-3" />
+                </Link>
+              </div>
+            </div>
+          </>
+        )}
+      </SheetContent>
+    </Sheet>
+  );
+}
+
+
+
 export default function IconPortraitGaps() {
   const [q, setQ] = useState("");
   const [subFilter, setSubFilter] = useState<string>("all");
