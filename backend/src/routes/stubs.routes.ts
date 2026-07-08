@@ -81,6 +81,12 @@ export const nominationsRouter = (() => {
   r.patch("/:id/approve", requireAuth, requireRole("ADMIN", "SUPER_ADMIN", "OPERATIONS_MANAGER"), stubItem);
   r.patch("/:id/reject", requireAuth, requireRole("ADMIN", "SUPER_ADMIN", "OPERATIONS_MANAGER"), stubItem);
   r.patch("/:id/request-info", requireAuth, stubItem);
+  // Africa Education Icon pathway — locked to 3 categories + 3 nominee types.
+  // Validation lives in ../schemas/iconNomination.ts.
+  // eslint-disable-next-line @typescript-eslint/no-var-requires
+  const { iconNominationPayloadSchema } = require("../schemas/iconNomination.js");
+  const { validateBody } = require("../middleware/validate.js");
+  r.post("/icon", requireAuth, validateBody(iconNominationPayloadSchema), stubCreate);
   return r;
 })();
 
