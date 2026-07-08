@@ -387,6 +387,7 @@ export default function NomineeProfile() {
                         groupName: nominee.regionName,
                         country: nominee.country,
                         renominationCount,
+                        referralCode,
                       }}
                       showVote={blueGarnet}
                       onRenominateSuccess={() => setRenominationCount(c => c + 1)}
