@@ -24,7 +24,14 @@ interface Props {
   defaultSubcategorySlug?: string;
 }
 
-type NomineeType = "individual" | "organization" | "school" | "program";
+type NomineeType =
+  | "individual"
+  | "organization"
+  | "school"
+  | "program"
+  | "Africans in Africa"
+  | "Diaspora Africans"
+  | "Friends of Africa";
 
 interface FormState {
   subcategory_slug: string;
