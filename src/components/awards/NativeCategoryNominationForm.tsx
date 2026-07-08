@@ -235,6 +235,11 @@ export function NativeCategoryNominationForm({ form, defaultSubcategorySlug }: P
               )}
             </SelectContent>
           </Select>
+          {isIconFamily && (
+            <p className="text-[11px] text-foreground/60 leading-relaxed">
+              {ICON_NOMINEE_TYPES.find((t) => t.value === state.nominee_type)?.description}
+            </p>
+          )}
         </div>
         <div className="space-y-1.5">
           <Label htmlFor="nominee_country">Nominee country</Label>
