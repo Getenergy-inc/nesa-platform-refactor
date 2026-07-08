@@ -17,6 +17,8 @@ export interface NomineeActionsData {
   imageUrl?: string;
   country?: string;
   renominationCount?: number;
+  /** Referral code from ?ref= — attributes endorsement + increments counter atomically. */
+  referralCode?: string;
 }
 
 interface NomineeActionsProps {
