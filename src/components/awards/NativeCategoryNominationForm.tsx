@@ -219,10 +219,20 @@ export function NativeCategoryNominationForm({ form, defaultSubcategorySlug }: P
               <SelectValue />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="individual">Individual</SelectItem>
-              <SelectItem value="organization">Organization</SelectItem>
-              <SelectItem value="school">School</SelectItem>
-              <SelectItem value="program">Program / Project</SelectItem>
+              {isIconFamily ? (
+                ICON_NOMINEE_TYPES.map((t) => (
+                  <SelectItem key={t.value} value={t.value}>
+                    {t.label}
+                  </SelectItem>
+                ))
+              ) : (
+                <>
+                  <SelectItem value="individual">Individual</SelectItem>
+                  <SelectItem value="organization">Organization</SelectItem>
+                  <SelectItem value="school">School</SelectItem>
+                  <SelectItem value="program">Program / Project</SelectItem>
+                </>
+              )}
             </SelectContent>
           </Select>
         </div>
