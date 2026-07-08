@@ -172,39 +172,75 @@ export function NomineeEntryForm({
         </Field>
 
         <Field label="Nominee type" required>
-          <select
-            value={form.nomineeType}
-            onChange={(e) => set("nomineeType", e.target.value)}
-            className="h-10 w-full rounded-md border border-white/10 bg-white/5 px-3 text-sm text-white"
-          >
-            <option value="Individual">Individual</option>
-            <option value="Organization">Organization</option>
-            <option value="School">School</option>
-            <option value="NGO">NGO</option>
-            <option value="Government / Ministry">Government / Ministry</option>
-            <option value="Foundation">Foundation</option>
-            <option value="Creator / Media">Creator / Media</option>
-            <option value="CSR Contributor">CSR Contributor</option>
-          </select>
+          {pathway === "icon" ? (
+            <>
+              <select
+                value={form.nomineeType}
+                onChange={(e) => set("nomineeType", e.target.value)}
+                className="h-10 w-full rounded-md border border-white/10 bg-white/5 px-3 text-sm text-white"
+              >
+                {ICON_NOMINEE_TYPES.map((t) => (
+                  <option key={t.value} value={t.value}>
+                    {t.label}
+                  </option>
+                ))}
+              </select>
+              <p className="mt-1.5 text-[11px] text-white/55">
+                {ICON_NOMINEE_TYPES.find((t) => t.value === form.nomineeType)?.description}
+              </p>
+            </>
+          ) : (
+            <select
+              value={form.nomineeType}
+              onChange={(e) => set("nomineeType", e.target.value)}
+              className="h-10 w-full rounded-md border border-white/10 bg-white/5 px-3 text-sm text-white"
+            >
+              <option value="Individual">Individual</option>
+              <option value="Organization">Organization</option>
+              <option value="School">School</option>
+              <option value="NGO">NGO</option>
+              <option value="Government / Ministry">Government / Ministry</option>
+              <option value="Foundation">Foundation</option>
+              <option value="Creator / Media">Creator / Media</option>
+              <option value="CSR Contributor">CSR Contributor</option>
+            </select>
+          )}
         </Field>
 
         <Field label="Category" error={errors.category} required>
-          <Input
-            value={form.category}
-            onChange={(e) => set("category", e.target.value)}
-            placeholder="e.g. Best STEM Educator"
-            className="bg-white/5 border-white/10 text-white"
-          />
+          {pathway === "icon" ? (
+            <select
+              value={form.category}
+              onChange={(e) => set("category", e.target.value)}
+              className="h-10 w-full rounded-md border border-white/10 bg-white/5 px-3 text-sm text-white"
+            >
+              <option value="">Select an Icon category…</option>
+              {ICON_CATEGORIES.map((c) => (
+                <option key={c} value={c}>
+                  {c}
+                </option>
+              ))}
+            </select>
+          ) : (
+            <Input
+              value={form.category}
+              onChange={(e) => set("category", e.target.value)}
+              placeholder="e.g. Best STEM Educator"
+              className="bg-white/5 border-white/10 text-white"
+            />
+          )}
         </Field>
 
-        <Field label="Sub-category">
-          <Input
-            value={form.subcategory ?? ""}
-            onChange={(e) => set("subcategory", e.target.value)}
-            placeholder="Optional"
-            className="bg-white/5 border-white/10 text-white"
-          />
-        </Field>
+        {pathway !== "icon" && (
+          <Field label="Sub-category">
+            <Input
+              value={form.subcategory ?? ""}
+              onChange={(e) => set("subcategory", e.target.value)}
+              placeholder="Optional"
+              className="bg-white/5 border-white/10 text-white"
+            />
+          </Field>
+        )}
 
         <Field label="Country" error={errors.country} required>
           <Input
