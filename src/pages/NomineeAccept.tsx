@@ -1,256 +1,260 @@
-import { useState, useEffect } from "react";
-import { useParams, Link } from "react-router-dom";
-import { acceptNomination, getAcceptanceDetails, AcceptanceDetails } from "@/api/nominations";
+import { useState, useEffect, useCallback } from "react";
+import { useParams, Link, useNavigate } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 import { Skeleton } from "@/components/ui/skeleton";
 import { toast } from "sonner";
-import { CheckCircle, Loader2, AlertCircle, Clock, XCircle } from "lucide-react";
-import {
-  AcceptanceLetterHeader,
-  AcceptanceCategoriesList,
-  AcceptanceNextSteps,
-  AcceptanceSuccessCard,
-} from "@/components/acceptance";
+import { CheckCircle, Loader2, AlertCircle, Clock, Mail, Sparkles } from "lucide-react";
+import { useAuth } from "@/contexts/AuthContext";
+import { AcceptanceSuccessCard } from "@/components/acceptance";
+
+interface NomineePreview {
+  id: string;
+  name: string;
+  slug: string;
+  email: string | null;
+  acceptance_status: string | null;
+  acceptance_token_expires_at: string | null;
+  renomination_count: number;
+  country: string | null;
+  region: string | null;
+  organization: string | null;
+  title: string | null;
+}
 
 export default function NomineeAccept() {
   const { token } = useParams<{ token: string }>();
+  const navigate = useNavigate();
+  const { user } = useAuth();
+
   const [loading, setLoading] = useState(true);
   const [submitting, setSubmitting] = useState(false);
-  const [accepted, setAccepted] = useState(false);
-  const [nominee, setNominee] = useState<AcceptanceDetails | null>(null);
   const [error, setError] = useState<string | null>(null);
-  const [chapterInfo, setChapterInfo] = useState<{ name: string; region: string | null } | null>(null);
-  const [result, setResult] = useState<{
-    certificate_download_locked?: boolean;
-    renominations_needed?: number;
-  } | null>(null);
+  const [nominee, setNominee] = useState<NomineePreview | null>(null);
+  const [accepted, setAccepted] = useState(false);
+  const [referralCode, setReferralCode] = useState<string | null>(null);
+  const [signInSent, setSignInSent] = useState(false);
+  const [emailInput, setEmailInput] = useState("");
 
+  // Load nominee preview by token
   useEffect(() => {
-    async function loadDetails() {
+    let cancelled = false;
+    (async () => {
       if (!token) {
         setError("Invalid acceptance link");
         setLoading(false);
         return;
       }
+      const { data, error: fetchErr } = await supabase
+        .from("nominees")
+        .select(
+          "id, name, slug, email, acceptance_status, acceptance_token_expires_at, renomination_count, country, region, organization, title, referral_code",
+        )
+        .eq("acceptance_token", token)
+        .maybeSingle();
 
-      try {
-        const response = await getAcceptanceDetails(token);
-        setNominee(response.data);
-
-        // Fetch chapter info based on nominee's country
-        if (response.data.country) {
-          const { data: chapter } = await supabase
-            .from("chapters")
-            .select("name, region")
-            .eq("country", response.data.country)
-            .eq("is_active", true)
-            .limit(1)
-            .maybeSingle();
-          if (chapter) {
-            setChapterInfo(chapter);
-          }
-        }
-
-        // Check if already responded
-        if (response.data.acceptance_status === "ACCEPTED") {
-          setAccepted(true);
-          setResult({
-            certificate_download_locked: response.data.renomination_count < 200,
-            renominations_needed: Math.max(0, 200 - response.data.renomination_count),
-          });
-        } else if (response.data.acceptance_status === "DECLINED") {
-          setError("This nomination has already been declined.");
-        }
-      } catch (err: any) {
-        if (err.message?.includes("expired")) {
-          setError("This acceptance link has expired. Please contact support for a new link.");
-        } else {
-          setError(err.message || "Failed to load nomination details");
-        }
-      } finally {
+      if (cancelled) return;
+      if (fetchErr || !data) {
+        setError("This acceptance link is invalid or has been revoked.");
         setLoading(false);
+        return;
       }
-    }
-
-    loadDetails();
+      if (data.acceptance_token_expires_at && new Date(data.acceptance_token_expires_at) < new Date()) {
+        setError("This acceptance link has expired. Please contact support for a new one.");
+        setLoading(false);
+        return;
+      }
+      setNominee(data as NomineePreview);
+      setEmailInput(data.email ?? "");
+      if (data.acceptance_status === "ACCEPTED" && data.referral_code) {
+        setAccepted(true);
+        setReferralCode(data.referral_code);
+      }
+      setLoading(false);
+    })();
+    return () => { cancelled = true; };
   }, [token]);
 
-  const handleAccept = async () => {
-    if (!token) {
-      toast.error("Invalid acceptance link");
+  // If the magic-link callback landed us here as an authenticated user, auto-accept.
+  const doAccept = useCallback(async () => {
+    if (!token) return;
+    setSubmitting(true);
+    const { data, error: rpcErr } = await supabase.rpc("accept_nomination_by_token", { p_token: token });
+    setSubmitting(false);
+    if (rpcErr || !data || !data[0]) {
+      toast.error(rpcErr?.message ?? "Failed to accept nomination");
       return;
     }
+    setReferralCode(data[0].referral_code);
+    setAccepted(true);
+    toast.success("Nomination accepted!", {
+      description: "Your public profile and dashboard are now live.",
+    });
+  }, [token]);
 
-    setSubmitting(true);
-    try {
-      const response = await acceptNomination(token);
-      setResult(response.data);
-      setAccepted(true);
-      toast.success("Nomination Accepted!", {
-        description: "Thank you for accepting your nomination. Your profile is now active in the NESA-Africa ecosystem.",
-      });
-    } catch (error: any) {
-      toast.error(error.message || "Failed to accept nomination");
-    } finally {
-      setSubmitting(false);
+  useEffect(() => {
+    // Auto-accept if signed in with matching email and not yet accepted
+    if (!loading && nominee && user && !accepted && !submitting) {
+      const emailMatches = user.email?.toLowerCase() === nominee.email?.toLowerCase();
+      if (emailMatches) void doAccept();
     }
+  }, [loading, nominee, user, accepted, submitting, doAccept]);
+
+  const sendMagicLink = async () => {
+    if (!emailInput || !nominee) return;
+    if (emailInput.toLowerCase() !== (nominee.email ?? "").toLowerCase()) {
+      toast.error("Email must match the address on your nomination.");
+      return;
+    }
+    setSubmitting(true);
+    const { error: otpErr } = await supabase.auth.signInWithOtp({
+      email: emailInput,
+      options: { emailRedirectTo: `${window.location.origin}/nominee/accept/${token}` },
+    });
+    setSubmitting(false);
+    if (otpErr) {
+      toast.error(otpErr.message);
+      return;
+    }
+    setSignInSent(true);
+    toast.success("Sign-in link sent — check your email.");
   };
 
-  // Loading state
   if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-primary/5 via-background to-primary/10 p-4">
-        <Card className="max-w-2xl w-full">
-          <CardContent className="p-8 space-y-6">
-            <div className="flex justify-center">
-              <Skeleton className="h-20 w-48" />
-            </div>
-            <Skeleton className="h-8 w-3/4 mx-auto" />
-            <Skeleton className="h-4 w-1/2 mx-auto" />
-            <div className="space-y-3">
-              <Skeleton className="h-20 w-full" />
-              <Skeleton className="h-20 w-full" />
-            </div>
-            <Skeleton className="h-12 w-full" />
-          </CardContent>
-        </Card>
+        <Card className="max-w-2xl w-full"><CardContent className="p-8 space-y-4">
+          <Skeleton className="h-8 w-3/4" /><Skeleton className="h-4 w-1/2" /><Skeleton className="h-32 w-full" />
+        </CardContent></Card>
       </div>
     );
   }
 
-  // Error state
   if (error) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-background p-4">
-        <Card className="max-w-lg w-full text-center">
-          <CardContent className="p-8 space-y-6">
-            <div className="flex justify-center">
-              <div className="bg-destructive/10 p-4 rounded-full">
-                {error.includes("expired") ? (
-                  <Clock className="h-12 w-12 text-destructive" />
-                ) : error.includes("declined") ? (
-                  <XCircle className="h-12 w-12 text-muted-foreground" />
-                ) : (
-                  <AlertCircle className="h-12 w-12 text-destructive" />
-                )}
-              </div>
+        <Card className="max-w-lg w-full text-center"><CardContent className="p-8 space-y-6">
+          <div className="flex justify-center">
+            <div className="bg-destructive/10 p-4 rounded-full">
+              {error.includes("expired") ? <Clock className="h-12 w-12 text-destructive" /> : <AlertCircle className="h-12 w-12 text-destructive" />}
             </div>
-            <div className="space-y-2">
-              <h2 className="text-xl font-semibold">Unable to Process</h2>
-              <p className="text-muted-foreground">{error}</p>
-            </div>
-            <div className="flex flex-col gap-2">
-              <Button asChild>
-                <Link to="/contact">Contact Support</Link>
-              </Button>
-              <Button variant="ghost" asChild>
-                <Link to="/">Return Home</Link>
-              </Button>
-            </div>
-          </CardContent>
-        </Card>
+          </div>
+          <div><h2 className="text-xl font-semibold">Unable to Process</h2><p className="text-muted-foreground mt-2">{error}</p></div>
+          <Button asChild><Link to="/contact">Contact Support</Link></Button>
+        </CardContent></Card>
       </div>
     );
   }
 
-  // Success state
-  if (accepted && result && nominee) {
+  if (accepted && nominee) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-primary/5 via-background to-primary/10 p-4 py-12">
-        <AcceptanceSuccessCard
-          nomineeName={nominee.name}
-          certificateDownloadLocked={result.certificate_download_locked ?? true}
-          renominationsNeeded={result.renominations_needed ?? 200}
-          token={token}
-          chapterName={chapterInfo?.name}
-          region={chapterInfo?.region || undefined}
-        />
+        <div className="max-w-2xl w-full space-y-4">
+          <AcceptanceSuccessCard
+            nomineeName={nominee.name}
+            certificateDownloadLocked={nominee.renomination_count < 200}
+            renominationsNeeded={Math.max(0, 200 - nominee.renomination_count)}
+            token={token}
+            chapterName={undefined}
+            region={nominee.region ?? undefined}
+          />
+          {referralCode && (
+            <Card className="border-gold/40 bg-gold/5">
+              <CardContent className="p-6 space-y-3">
+                <div className="flex items-center gap-2 text-gold-dark">
+                  <Sparkles className="h-5 w-5" />
+                  <p className="font-semibold">Your shareable endorsement link</p>
+                </div>
+                <p className="text-sm text-muted-foreground">
+                  Share this link so supporters can renominate and endorse you. Every endorsement counts toward your Platinum certificate.
+                </p>
+                <div className="bg-background rounded-md p-3 font-mono text-sm break-all border">
+                  {`${window.location.origin}/nominee/${nominee.slug}?ref=${referralCode}`}
+                </div>
+                <Button
+                  className="w-full bg-gold hover:bg-gold-dark text-charcoal"
+                  onClick={() => navigate(`/nominee/dashboard/${token}`)}
+                >
+                  Go to my dashboard
+                </Button>
+              </CardContent>
+            </Card>
+          )}
+        </div>
       </div>
     );
   }
 
-  // Main acceptance letter view
-  if (!nominee) {
-    return null;
-  }
+  if (!nominee) return null;
+
+  // Not yet accepted — show acceptance CTA with magic-link sign-in if unauthenticated
+  const needsSignIn = !user || user.email?.toLowerCase() !== nominee.email?.toLowerCase();
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-primary/5 via-background to-primary/10 p-4 py-12">
-      <Card className="max-w-2xl w-full shadow-xl border-0">
-        <CardContent className="p-6 md:p-10 space-y-8">
-          {/* Header */}
-          <AcceptanceLetterHeader nomineeName={nominee.name} chapterName={chapterInfo?.name} region={chapterInfo?.region || undefined} />
-
-          {/* Congratulations Message */}
-          <div className="space-y-4">
-            <p className="text-lg font-medium text-primary">Congratulations!</p>
-            <p className="text-muted-foreground leading-relaxed">
-              You have been nominated for the{" "}
-              <strong className="text-foreground">
-                New Education Standard Award Africa (NESA-Africa) (NESA-Africa) 2026
-              </strong>
-              , under the following category(ies):
+      <Card className="max-w-2xl w-full shadow-xl">
+        <CardContent className="p-6 md:p-10 space-y-6">
+          <div className="text-center space-y-2">
+            <h1 className="text-2xl md:text-3xl font-display font-bold">Congratulations, {nominee.name}!</h1>
+            <p className="text-muted-foreground">
+              You have been nominated for the <strong className="text-foreground">New Education Standard Award Africa (NESA-Africa) 2026</strong>.
             </p>
+            {nominee.title || nominee.organization ? (
+              <p className="text-sm text-muted-foreground">
+                {[nominee.title, nominee.organization].filter(Boolean).join(" · ")}
+              </p>
+            ) : null}
           </div>
 
-          {/* Categories List */}
-          <AcceptanceCategoriesList categories={nominee.categories} />
+          <div className="rounded-lg border bg-muted/30 p-4 space-y-2 text-sm">
+            <p className="font-medium">By accepting, you will:</p>
+            <ul className="list-disc list-inside space-y-1 text-muted-foreground">
+              <li>Activate your public nominee profile at <code>/nominee/{nominee.slug}</code></li>
+              <li>Unlock your private nominee dashboard</li>
+              <li>Receive a unique shareable link to gather endorsements</li>
+              <li>Progress toward your Platinum certificate (200 endorsements)</li>
+            </ul>
+          </div>
 
-          {/* Recognition Reason */}
-          {nominee.primary_justification && (
-            <div className="bg-muted/30 rounded-lg p-4 border-l-4 border-primary">
-              <p className="text-sm text-muted-foreground mb-1">
-                This nomination recognizes your outstanding contributions to education through:
+          {needsSignIn ? (
+            <div className="space-y-3 rounded-lg border border-primary/30 bg-primary/5 p-4">
+              <div className="flex items-center gap-2 text-primary">
+                <Mail className="h-5 w-5" />
+                <p className="font-semibold">Verify it's you</p>
+              </div>
+              <p className="text-sm text-muted-foreground">
+                For security, we'll send a one-time sign-in link to the email on your nomination.
               </p>
-              <p className="text-foreground italic">"{nominee.primary_justification}"</p>
-            </div>
-          )}
-
-          {/* Next Steps */}
-          <AcceptanceNextSteps />
-
-          {/* CTA Buttons */}
-          <div className="space-y-4 pt-4">
-            <Button
-              size="lg"
-              onClick={handleAccept}
-              disabled={submitting}
-              className="w-full text-lg py-6"
-            >
-              {submitting && <Loader2 className="h-5 w-5 mr-2 animate-spin" />}
-              {!submitting && <CheckCircle className="h-5 w-5 mr-2" />}
-              Accept My Nomination & Activate Dashboard
-            </Button>
-
-            <div className="text-center">
-              <Button variant="ghost" size="sm" asChild className="text-muted-foreground">
-                <Link to={`/nominee/decline/${token}`}>
-                  I'd like to decline this nomination
-                </Link>
+              <div className="space-y-2">
+                <Label htmlFor="email">Email address</Label>
+                <Input
+                  id="email"
+                  type="email"
+                  value={emailInput}
+                  onChange={(e) => setEmailInput(e.target.value)}
+                  placeholder="you@example.com"
+                  disabled={signInSent}
+                />
+              </div>
+              <Button onClick={sendMagicLink} disabled={submitting || signInSent || !emailInput} className="w-full">
+                {submitting && <Loader2 className="h-4 w-4 mr-2 animate-spin" />}
+                {signInSent ? "Sign-in link sent — check your inbox" : "Send sign-in link"}
               </Button>
             </div>
-          </div>
+          ) : (
+            <Button size="lg" onClick={doAccept} disabled={submitting} className="w-full text-lg py-6">
+              {submitting ? <Loader2 className="h-5 w-5 mr-2 animate-spin" /> : <CheckCircle className="h-5 w-5 mr-2" />}
+              Accept My Nomination & Activate Profile
+            </Button>
+          )}
 
-          {/* Closing */}
-          <div className="text-center text-sm text-muted-foreground pt-4 border-t space-y-2">
-            <p className="font-medium text-foreground">
-              Warm regards,
-            </p>
-            <p>
-              {chapterInfo ? `SCEF ${chapterInfo.name} Local Chapter` : "Santos Creations Educational Foundation"}
-              {chapterInfo?.region && ` — ${chapterInfo.region}`}
-            </p>
-            <p>
-              We are honored to have you join Africa's largest educational recognition movement.
-            </p>
-            <p className="text-xs">
-              Questions? Contact us at{" "}
-              <a href="mailto:nominees@nesa.africa" className="text-primary hover:underline">
-                nominees@nesa.africa
-              </a>
-            </p>
+          <div className="text-center">
+            <Button variant="ghost" size="sm" asChild className="text-muted-foreground">
+              <Link to={`/nominee/decline/${token}`}>I'd like to decline this nomination</Link>
+            </Button>
           </div>
         </CardContent>
       </Card>
