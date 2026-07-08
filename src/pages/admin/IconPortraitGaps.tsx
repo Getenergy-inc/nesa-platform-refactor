@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
 import {
@@ -20,7 +20,7 @@ import {
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { Copy, Download, ExternalLink, ImageOff } from "lucide-react";
+import { Copy, Download, ExternalLink, ImageOff, Upload, CheckCircle2, XCircle, RotateCcw } from "lucide-react";
 import { toast } from "@/hooks/use-toast";
 
 const PLACEHOLDER = "placeholder-icon";
@@ -180,14 +180,256 @@ function exportGapsToCSV() {
   toast({ title: "CSV exported", description: `${GAPS.length} gap(s) downloaded` });
 }
 
+// ---------- CSV import ----------
+
+const OVERRIDES_STORAGE_KEY = "icon-portrait-overrides:v1";
+
+type OverrideStatus = "verified" | "missing";
+interface OverrideEntry {
+  path: string;
+  status: OverrideStatus;
+  source_row?: number;
+}
+type OverridesMap = Record<string, OverrideEntry>;
+
+// Minimal RFC4180-ish CSV parser (handles quotes, escaped quotes, commas, newlines).
+function parseCSV(text: string): string[][] {
+  const rows: string[][] = [];
+  let row: string[] = [];
+  let cell = "";
+  let inQuotes = false;
+  for (let i = 0; i < text.length; i++) {
+    const c = text[i];
+    if (inQuotes) {
+      if (c === '"') {
+        if (text[i + 1] === '"') {
+          cell += '"';
+          i++;
+        } else {
+          inQuotes = false;
+        }
+      } else {
+        cell += c;
+      }
+    } else {
+      if (c === '"') inQuotes = true;
+      else if (c === ",") {
+        row.push(cell);
+        cell = "";
+      } else if (c === "\n" || c === "\r") {
+        if (c === "\r" && text[i + 1] === "\n") i++;
+        row.push(cell);
+        cell = "";
+        if (row.length > 1 || row[0] !== "") rows.push(row);
+        row = [];
+      } else {
+        cell += c;
+      }
+    }
+  }
+  if (cell.length || row.length) {
+    row.push(cell);
+    rows.push(row);
+  }
+  return rows;
+}
+
+function normaliseHeader(h: string) {
+  return h.trim().toLowerCase().replace(/[\s-]+/g, "_");
+}
+
+// Resolve a user-supplied path to a URL loadable by the browser from /public.
+function toPublicUrl(raw: string): string {
+  let p = raw.trim();
+  if (!p) return "";
+  if (/^https?:\/\//i.test(p)) return p;
+  p = p.replace(/^\.?\/+/, "");
+  p = p.replace(/^public\//, "");
+  if (!p.startsWith("/")) p = "/" + p;
+  return p;
+}
+
+function verifyImage(url: string, timeoutMs = 8000): Promise<boolean> {
+  return new Promise((resolve) => {
+    const img = new Image();
+    const done = (ok: boolean) => {
+      img.onload = img.onerror = null;
+      resolve(ok);
+    };
+    const t = setTimeout(() => done(false), timeoutMs);
+    img.onload = () => {
+      clearTimeout(t);
+      done(true);
+    };
+    img.onerror = () => {
+      clearTimeout(t);
+      done(false);
+    };
+    img.src = url;
+  });
+}
+
+function loadOverrides(): OverridesMap {
+  try {
+    const raw = localStorage.getItem(OVERRIDES_STORAGE_KEY);
+    return raw ? (JSON.parse(raw) as OverridesMap) : {};
+  } catch {
+    return {};
+  }
+}
+
+function saveOverrides(o: OverridesMap) {
+  try {
+    localStorage.setItem(OVERRIDES_STORAGE_KEY, JSON.stringify(o));
+  } catch {
+    /* noop */
+  }
+}
+
 export default function IconPortraitGaps() {
   const [q, setQ] = useState("");
   const [subFilter, setSubFilter] = useState<string>("all");
+  const [onlyUnresolved, setOnlyUnresolved] = useState(false);
+  const [overrides, setOverrides] = useState<OverridesMap>({});
+  const [importing, setImporting] = useState(false);
+  const [lastImport, setLastImport] = useState<{
+    fileName: string;
+    total: number;
+    verified: number;
+    missing: number;
+    unmatched: number;
+    unmatchedKeys: string[];
+  } | null>(null);
+  const fileInputRef = useRef<HTMLInputElement | null>(null);
+
+  useEffect(() => {
+    setOverrides(loadOverrides());
+  }, []);
+
+  const bySlug = useMemo(() => {
+    const m: Record<string, Gap> = {};
+    for (const g of GAPS) {
+      m[g.slug] = g;
+      m[g.nSlug] = g;
+    }
+    return m;
+  }, []);
+  const byId = useMemo(() => {
+    const m: Record<string, Gap> = {};
+    for (const g of GAPS) m[g.id] = g;
+    return m;
+  }, []);
+
+  async function handleCSVFile(file: File) {
+    setImporting(true);
+    try {
+      const text = await file.text();
+      const rows = parseCSV(text);
+      if (!rows.length) {
+        toast({ title: "Empty CSV", variant: "destructive" });
+        return;
+      }
+      const headers = rows[0].map(normaliseHeader);
+      const idx = (name: string) => headers.indexOf(name);
+      const idIdx = idx("id");
+      const slugIdx = idx("slug");
+      const pathCandidates = [
+        "resolved_path",
+        "image_path",
+        "new_image_path",
+        "image_url",
+        "suggested_drop_path",
+      ];
+      const pathIdx = pathCandidates.map(idx).find((i) => i >= 0) ?? -1;
+      if (pathIdx < 0) {
+        toast({
+          title: "Missing path column",
+          description: `Expected one of: ${pathCandidates.join(", ")}`,
+          variant: "destructive",
+        });
+        return;
+      }
+
+      const next: OverridesMap = { ...loadOverrides() };
+      const unmatched: string[] = [];
+      let verified = 0;
+      let missing = 0;
+      let total = 0;
+
+      for (let r = 1; r < rows.length; r++) {
+        const row = rows[r];
+        if (!row || row.every((c) => !c.trim())) continue;
+        const rawPath = row[pathIdx]?.trim();
+        if (!rawPath) continue;
+        total++;
+        const rowId = idIdx >= 0 ? row[idIdx]?.trim() : "";
+        const rowSlug = slugIdx >= 0 ? row[slugIdx]?.trim() : "";
+        const gap =
+          (rowId && byId[rowId]) ||
+          (rowSlug && bySlug[rowSlug]) ||
+          null;
+        if (!gap) {
+          unmatched.push(rowId || rowSlug || `row ${r + 1}`);
+          continue;
+        }
+        const url = toPublicUrl(rawPath);
+        // Skip if it still points at the placeholder
+        if (url.includes("placeholder-icon")) {
+          missing++;
+          next[gap.id] = { path: url, status: "missing", source_row: r + 1 };
+          continue;
+        }
+        // eslint-disable-next-line no-await-in-loop
+        const ok = await verifyImage(url);
+        if (ok) verified++;
+        else missing++;
+        next[gap.id] = {
+          path: url,
+          status: ok ? "verified" : "missing",
+          source_row: r + 1,
+        };
+      }
+
+      saveOverrides(next);
+      setOverrides(next);
+      setLastImport({
+        fileName: file.name,
+        total,
+        verified,
+        missing,
+        unmatched: unmatched.length,
+        unmatchedKeys: unmatched.slice(0, 10),
+      });
+      toast({
+        title: "CSV imported",
+        description: `${verified} verified · ${missing} missing · ${unmatched.length} unmatched`,
+      });
+    } catch (err) {
+      console.error(err);
+      toast({ title: "Import failed", description: String(err), variant: "destructive" });
+    } finally {
+      setImporting(false);
+      if (fileInputRef.current) fileInputRef.current.value = "";
+    }
+  }
+
+  function clearOverrides() {
+    saveOverrides({});
+    setOverrides({});
+    setLastImport(null);
+    toast({ title: "Overrides cleared" });
+  }
+
+  const resolvedCount = useMemo(
+    () => Object.values(overrides).filter((o) => o.status === "verified").length,
+    [overrides],
+  );
 
   const filtered = useMemo(() => {
     const needle = q.trim().toLowerCase();
     return GAPS.filter((g) => {
       if (subFilter !== "all" && g.sub !== subFilter) return false;
+      if (onlyUnresolved && overrides[g.id]?.status === "verified") return false;
       if (!needle) return true;
       return (
         g.name.toLowerCase().includes(needle) ||
@@ -195,7 +437,7 @@ export default function IconPortraitGaps() {
         g.country.toLowerCase().includes(needle)
       );
     });
-  }, [q, subFilter]);
+  }, [q, subFilter, onlyUnresolved, overrides]);
 
   const bySub = useMemo(() => {
     const counts: Record<string, number> = {};
@@ -250,6 +492,43 @@ export default function IconPortraitGaps() {
           ))}
         </div>
 
+        {/* Import summary */}
+        {lastImport && (
+          <Card className="bg-charcoal-light border-gold/30">
+            <CardContent className="p-4 space-y-2 text-sm">
+              <div className="flex items-center justify-between gap-3 flex-wrap">
+                <div className="text-white">
+                  <span className="text-white/60">Last import:</span>{" "}
+                  <code className="text-gold">{lastImport.fileName}</code>
+                </div>
+                <div className="flex items-center gap-3 text-xs">
+                  <span className="text-emerald-400 inline-flex items-center gap-1">
+                    <CheckCircle2 className="w-3.5 h-3.5" /> {lastImport.verified} verified
+                  </span>
+                  <span className="text-red-400 inline-flex items-center gap-1">
+                    <XCircle className="w-3.5 h-3.5" /> {lastImport.missing} missing
+                  </span>
+                  <span className="text-white/60">{lastImport.unmatched} unmatched</span>
+                  <span className="text-white/50">/ {lastImport.total} rows</span>
+                </div>
+              </div>
+              {lastImport.unmatchedKeys.length > 0 && (
+                <div className="text-xs text-white/60">
+                  Unmatched id/slug (first 10):{" "}
+                  <code className="text-white/80">
+                    {lastImport.unmatchedKeys.join(", ")}
+                  </code>
+                </div>
+              )}
+              <div className="text-xs text-white/50">
+                Overrides are stored in your browser. Once verified, drop the same file
+                at that path in <code className="text-gold">public/</code> and rebuild
+                the manifest to persist across sessions.
+              </div>
+            </CardContent>
+          </Card>
+        )}
+
         {/* Filters */}
         <div className="flex flex-col md:flex-row gap-3 md:items-center md:justify-between">
           <div className="flex flex-col md:flex-row gap-3 md:items-center">
@@ -277,28 +556,80 @@ export default function IconPortraitGaps() {
                   {s.short} ({bySub[s.slug] ?? 0})
                 </Button>
               ))}
+              <Button
+                size="sm"
+                variant={onlyUnresolved ? "default" : "outline"}
+                onClick={() => setOnlyUnresolved((v) => !v)}
+              >
+                Hide resolved ({resolvedCount})
+              </Button>
             </div>
           </div>
-          <Button
-            size="sm"
-            variant="outline"
-            onClick={exportGapsToCSV}
-            className="border-gold/30 text-gold hover:bg-gold/10 shrink-0"
-          >
-            <Download className="w-4 h-4 mr-2" />
-            Export CSV
-          </Button>
+          <div className="flex flex-wrap gap-2 shrink-0">
+            <input
+              ref={fileInputRef}
+              type="file"
+              accept=".csv,text/csv"
+              className="hidden"
+              onChange={(e) => {
+                const f = e.target.files?.[0];
+                if (f) handleCSVFile(f);
+              }}
+            />
+            <Button
+              size="sm"
+              variant="outline"
+              onClick={() => fileInputRef.current?.click()}
+              disabled={importing}
+              className="border-gold/30 text-gold hover:bg-gold/10"
+            >
+              <Upload className="w-4 h-4 mr-2" />
+              {importing ? "Importing…" : "Import CSV"}
+            </Button>
+            <Button
+              size="sm"
+              variant="outline"
+              onClick={exportGapsToCSV}
+              className="border-gold/30 text-gold hover:bg-gold/10"
+            >
+              <Download className="w-4 h-4 mr-2" />
+              Export CSV
+            </Button>
+            {resolvedCount > 0 || lastImport ? (
+              <Button
+                size="sm"
+                variant="ghost"
+                onClick={clearOverrides}
+                className="text-white/70 hover:text-white"
+              >
+                <RotateCcw className="w-4 h-4 mr-2" />
+                Clear overrides
+              </Button>
+            ) : null}
+          </div>
         </div>
 
         {/* List */}
         <div className="grid gap-3">
-          {filtered.map((g) => (
-            <Card key={g.id} className="bg-charcoal-light border-white/10">
+          {filtered.map((g) => {
+            const ov = overrides[g.id];
+            const cardBorder =
+              ov?.status === "verified"
+                ? "border-emerald-500/40"
+                : ov?.status === "missing"
+                ? "border-red-500/40"
+                : "border-white/10";
+            return (
+            <Card key={g.id} className={`bg-charcoal-light ${cardBorder}`}>
               <CardHeader className="pb-2">
                 <div className="flex items-start justify-between gap-3">
                   <div>
                     <CardTitle className="text-white text-lg flex items-center gap-2">
-                      <ImageOff className="w-4 h-4 text-gold/70" />
+                      {ov?.status === "verified" ? (
+                        <CheckCircle2 className="w-4 h-4 text-emerald-400" />
+                      ) : (
+                        <ImageOff className="w-4 h-4 text-gold/70" />
+                      )}
                       {g.name}
                     </CardTitle>
                     <CardDescription className="text-white/60">
@@ -314,6 +645,40 @@ export default function IconPortraitGaps() {
                 </div>
               </CardHeader>
               <CardContent className="space-y-3 text-sm">
+                {ov && (
+                  <div
+                    className={`rounded-md border p-3 flex items-center gap-3 ${
+                      ov.status === "verified"
+                        ? "bg-emerald-500/5 border-emerald-500/30"
+                        : "bg-red-500/5 border-red-500/30"
+                    }`}
+                  >
+                    {ov.status === "verified" ? (
+                      <img
+                        src={ov.path}
+                        alt={g.name}
+                        className="w-16 h-16 rounded object-cover border border-white/10"
+                      />
+                    ) : (
+                      <div className="w-16 h-16 rounded border border-white/10 grid place-items-center bg-black/40">
+                        <XCircle className="w-6 h-6 text-red-400" />
+                      </div>
+                    )}
+                    <div className="min-w-0 flex-1">
+                      <div className="text-xs uppercase tracking-wide mb-1 flex items-center gap-2">
+                        {ov.status === "verified" ? (
+                          <span className="text-emerald-400">Resolved from CSV</span>
+                        ) : (
+                          <span className="text-red-400">CSV path not reachable</span>
+                        )}
+                        {ov.source_row && (
+                          <span className="text-white/40">row {ov.source_row}</span>
+                        )}
+                      </div>
+                      <code className="text-white/80 break-all text-xs">{ov.path}</code>
+                    </div>
+                  </div>
+                )}
                 <div className="grid md:grid-cols-2 gap-3">
                   <div className="rounded-md bg-black/30 border border-white/10 p-3">
                     <div className="text-white/50 text-xs uppercase tracking-wide mb-1">
@@ -414,7 +779,8 @@ export default function IconPortraitGaps() {
                 </div>
               </CardContent>
             </Card>
-          ))}
+            );
+          })}
           {!filtered.length && (
             <div className="text-white/60 text-sm text-center py-12 border border-dashed border-white/10 rounded-md">
               No portrait gaps match this filter.
