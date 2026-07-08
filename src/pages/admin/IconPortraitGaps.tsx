@@ -1002,13 +1002,22 @@ export default function IconPortraitGaps() {
                   </div>
                 </div>
 
-                <div className="pt-1">
+                <div className="pt-1 flex items-center justify-between gap-2 flex-wrap">
                   <Link
                     to={`/nominees/africa-education-icon-award/${g.sub}/${g.cls}/${g.slug}`}
                     className="text-gold text-xs hover:underline inline-flex items-center gap-1"
                   >
                     Open nominee profile <ExternalLink className="w-3 h-3" />
                   </Link>
+                  <Button
+                    size="sm"
+                    variant="outline"
+                    onClick={() => setAuditGap(g)}
+                    className="border-gold/30 text-gold hover:bg-gold/10"
+                  >
+                    <Search className="w-3.5 h-3.5 mr-1.5" />
+                    Audit images
+                  </Button>
                 </div>
               </CardContent>
             </Card>
@@ -1020,6 +1029,12 @@ export default function IconPortraitGaps() {
             </div>
           )}
         </div>
+
+        <AuditDrawer
+          gap={auditGap}
+          overrideEntry={auditGap ? overrides[auditGap.id] : undefined}
+          onClose={() => setAuditGap(null)}
+        />
       </section>
     </PublicLayout>
   );
