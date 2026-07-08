@@ -492,6 +492,43 @@ export default function IconPortraitGaps() {
           ))}
         </div>
 
+        {/* Import summary */}
+        {lastImport && (
+          <Card className="bg-charcoal-light border-gold/30">
+            <CardContent className="p-4 space-y-2 text-sm">
+              <div className="flex items-center justify-between gap-3 flex-wrap">
+                <div className="text-white">
+                  <span className="text-white/60">Last import:</span>{" "}
+                  <code className="text-gold">{lastImport.fileName}</code>
+                </div>
+                <div className="flex items-center gap-3 text-xs">
+                  <span className="text-emerald-400 inline-flex items-center gap-1">
+                    <CheckCircle2 className="w-3.5 h-3.5" /> {lastImport.verified} verified
+                  </span>
+                  <span className="text-red-400 inline-flex items-center gap-1">
+                    <XCircle className="w-3.5 h-3.5" /> {lastImport.missing} missing
+                  </span>
+                  <span className="text-white/60">{lastImport.unmatched} unmatched</span>
+                  <span className="text-white/50">/ {lastImport.total} rows</span>
+                </div>
+              </div>
+              {lastImport.unmatchedKeys.length > 0 && (
+                <div className="text-xs text-white/60">
+                  Unmatched id/slug (first 10):{" "}
+                  <code className="text-white/80">
+                    {lastImport.unmatchedKeys.join(", ")}
+                  </code>
+                </div>
+              )}
+              <div className="text-xs text-white/50">
+                Overrides are stored in your browser. Once verified, drop the same file
+                at that path in <code className="text-gold">public/</code> and rebuild
+                the manifest to persist across sessions.
+              </div>
+            </CardContent>
+          </Card>
+        )}
+
         {/* Filters */}
         <div className="flex flex-col md:flex-row gap-3 md:items-center md:justify-between">
           <div className="flex flex-col md:flex-row gap-3 md:items-center">
@@ -519,17 +556,57 @@ export default function IconPortraitGaps() {
                   {s.short} ({bySub[s.slug] ?? 0})
                 </Button>
               ))}
+              <Button
+                size="sm"
+                variant={onlyUnresolved ? "default" : "outline"}
+                onClick={() => setOnlyUnresolved((v) => !v)}
+              >
+                Hide resolved ({resolvedCount})
+              </Button>
             </div>
           </div>
-          <Button
-            size="sm"
-            variant="outline"
-            onClick={exportGapsToCSV}
-            className="border-gold/30 text-gold hover:bg-gold/10 shrink-0"
-          >
-            <Download className="w-4 h-4 mr-2" />
-            Export CSV
-          </Button>
+          <div className="flex flex-wrap gap-2 shrink-0">
+            <input
+              ref={fileInputRef}
+              type="file"
+              accept=".csv,text/csv"
+              className="hidden"
+              onChange={(e) => {
+                const f = e.target.files?.[0];
+                if (f) handleCSVFile(f);
+              }}
+            />
+            <Button
+              size="sm"
+              variant="outline"
+              onClick={() => fileInputRef.current?.click()}
+              disabled={importing}
+              className="border-gold/30 text-gold hover:bg-gold/10"
+            >
+              <Upload className="w-4 h-4 mr-2" />
+              {importing ? "Importing…" : "Import CSV"}
+            </Button>
+            <Button
+              size="sm"
+              variant="outline"
+              onClick={exportGapsToCSV}
+              className="border-gold/30 text-gold hover:bg-gold/10"
+            >
+              <Download className="w-4 h-4 mr-2" />
+              Export CSV
+            </Button>
+            {resolvedCount > 0 || lastImport ? (
+              <Button
+                size="sm"
+                variant="ghost"
+                onClick={clearOverrides}
+                className="text-white/70 hover:text-white"
+              >
+                <RotateCcw className="w-4 h-4 mr-2" />
+                Clear overrides
+              </Button>
+            ) : null}
+          </div>
         </div>
 
         {/* List */}
