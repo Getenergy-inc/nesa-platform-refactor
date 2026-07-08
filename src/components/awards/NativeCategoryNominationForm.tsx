@@ -15,6 +15,7 @@ import {
 import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
 import type { AwardCategoryForm } from "@/config/nomination/types";
+import { ICON_NOMINEE_TYPES } from "@/config/nomination/iconTaxonomy";
 
 interface Props {
   /** Resolved category form whose subcategories become the "nominee category" dropdown. */
@@ -23,7 +24,14 @@ interface Props {
   defaultSubcategorySlug?: string;
 }
 
-type NomineeType = "individual" | "organization" | "school" | "program";
+type NomineeType =
+  | "individual"
+  | "organization"
+  | "school"
+  | "program"
+  | "Africans in Africa"
+  | "Diaspora Africans"
+  | "Friends of Africa";
 
 interface FormState {
   subcategory_slug: string;
@@ -71,8 +79,11 @@ export function NativeCategoryNominationForm({ form, defaultSubcategorySlug }: P
     [form.subcategories],
   );
 
+  const isIconFamily = form.family === "africa-education-icon";
+
   const [state, setState] = useState<FormState>({
     ...INITIAL,
+    nominee_type: isIconFamily ? "Africans in Africa" : INITIAL.nominee_type,
     subcategory_slug: defaultSubcategorySlug ?? subOptions[0]?.slug ?? "",
   });
   const [submitting, setSubmitting] = useState(false);
@@ -208,12 +219,27 @@ export function NativeCategoryNominationForm({ form, defaultSubcategorySlug }: P
               <SelectValue />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="individual">Individual</SelectItem>
-              <SelectItem value="organization">Organization</SelectItem>
-              <SelectItem value="school">School</SelectItem>
-              <SelectItem value="program">Program / Project</SelectItem>
+              {isIconFamily ? (
+                ICON_NOMINEE_TYPES.map((t) => (
+                  <SelectItem key={t.value} value={t.value}>
+                    {t.label}
+                  </SelectItem>
+                ))
+              ) : (
+                <>
+                  <SelectItem value="individual">Individual</SelectItem>
+                  <SelectItem value="organization">Organization</SelectItem>
+                  <SelectItem value="school">School</SelectItem>
+                  <SelectItem value="program">Program / Project</SelectItem>
+                </>
+              )}
             </SelectContent>
           </Select>
+          {isIconFamily && (
+            <p className="text-[11px] text-foreground/60 leading-relaxed">
+              {ICON_NOMINEE_TYPES.find((t) => t.value === state.nominee_type)?.description}
+            </p>
+          )}
         </div>
         <div className="space-y-1.5">
           <Label htmlFor="nominee_country">Nominee country</Label>
