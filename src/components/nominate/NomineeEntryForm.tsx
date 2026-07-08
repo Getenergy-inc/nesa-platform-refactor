@@ -113,7 +113,19 @@ export function NomineeEntryForm({
   const [errors, setErrors] = useState<Record<string, string>>({});
 
   useEffect(() => {
-    setForm((f) => ({ ...f, pathway, awardFamily: PATHWAY_FAMILY[pathway] }));
+    setForm((f) => {
+      const next = { ...f, pathway, awardFamily: PATHWAY_FAMILY[pathway] };
+      if (pathway === "icon") {
+        if (!ICON_NOMINEE_TYPES.some((t) => t.value === f.nomineeType)) {
+          next.nomineeType = "Africans in Africa";
+        }
+        if (!ICON_CATEGORIES.includes(f.category as typeof ICON_CATEGORIES[number])) {
+          next.category = "";
+        }
+        next.subcategory = "";
+      }
+      return next;
+    });
   }, [pathway]);
 
   const set = <K extends keyof NomineeEntry>(k: K, v: NomineeEntry[K]) =>
