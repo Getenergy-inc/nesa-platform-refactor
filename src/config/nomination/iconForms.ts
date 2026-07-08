@@ -8,14 +8,12 @@
 import type { AwardCategoryForm } from "./types";
 import { TODAY, placeholderSubs } from "./_shared";
 
+// Locked to the 3 audit-aligned Icon of the Decade categories.
+// Source of truth: src/config/nomination/iconTaxonomy.ts
 const ICON_SUBS = placeholderSubs([
-  "Lifetime education leadership",
-  "Continental advocacy",
-  "Policy & governance",
-  "Curriculum & literary",
-  "Technical & vocational",
-  "Philanthropy",
-  "Other",
+  "Literary & New Curriculum Advocate Icon of the Decade",
+  "Africa Technical Educator Icon of the Decade",
+  "Africa Education Philanthropy Icon of the Decade",
 ]);
 
 export const ICON_FORMS: AwardCategoryForm[] = [
