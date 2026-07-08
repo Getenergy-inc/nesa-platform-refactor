@@ -15,6 +15,7 @@ import {
 import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
 import type { AwardCategoryForm } from "@/config/nomination/types";
+import { ICON_NOMINEE_TYPES } from "@/config/nomination/iconTaxonomy";
 
 interface Props {
   /** Resolved category form whose subcategories become the "nominee category" dropdown. */
