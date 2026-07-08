@@ -63,6 +63,7 @@ export function RenominateModal({
   groupSlug,
   groupName,
   currentCount = 0,
+  referralCode,
   onRenominateSuccess,
 }: RenominateModalProps) {
   const { user } = useAuth();
