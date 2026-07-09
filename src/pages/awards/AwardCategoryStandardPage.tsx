@@ -181,14 +181,16 @@ export default function AwardCategoryStandardPage({ slug }: Props) {
               pathway={eligibility.pathway}
             />
           </section>
-          <section id="nominees">
-            <HallOfFamePreview
-              pageSlug={content.slug}
-              nominees={hallNominees}
-              exploreAllHref={content.exploreAllHref}
-              nominateHref={content.nominateHref}
-            />
-          </section>
+          {content.slug !== "influencer-education-impact-2026" && (
+            <section id="nominees">
+              <HallOfFamePreview
+                pageSlug={content.slug}
+                nominees={hallNominees}
+                exploreAllHref={content.exploreAllHref}
+                nominateHref={content.nominateHref}
+              />
+            </section>
+          )}
           <section id="hall-of-fame" aria-label="Hall of Fame" />
           <section id="voting" />
           <section id="process">
