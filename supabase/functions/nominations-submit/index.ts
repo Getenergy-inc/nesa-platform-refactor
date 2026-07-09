@@ -69,6 +69,30 @@ function slugify(name: string): string {
   );
 }
 
+// ---- Africa Education Icon Lifetime Achievement Award (2006–2026) quotas ----
+// Single source of truth mirrored in src/config/nomination/iconTaxonomy.ts.
+// Each nominator may submit at most 1 nomination per (category × nominee_type),
+// i.e. a maximum of 3 categories × 3 nominee types = 9 icon nominations total.
+const ICON_CATEGORY_SLUGS = new Set([
+  "literary-new-curriculum-advocate-icon-of-the-decade",
+  "africa-technical-educator-icon-of-the-decade",
+  "africa-education-philanthropy-icon-of-the-decade",
+]);
+const ICON_NOMINEE_TYPES = new Set([
+  "africans in africa",
+  "diaspora africans",
+  "friends of africa",
+]);
+const ICON_MAX_TOTAL = 9;
+
+function isIconFamily(family: string, categorySlug: string): boolean {
+  if (ICON_CATEGORY_SLUGS.has(categorySlug)) return true;
+  return /icon|lifetime|legend/i.test(family);
+}
+function normType(v: string): string {
+  return v.trim().toLowerCase().replace(/\s+/g, " ");
+}
+
 Deno.serve(async (req) => {
   if (req.method === "OPTIONS") return new Response("ok", { headers: corsHeaders });
   if (req.method !== "POST") return json(405, { error: "Method not allowed" });
@@ -165,6 +189,52 @@ Deno.serve(async (req) => {
         ...(userId ? { user_id: userId } : {}),
       })
       .eq("id", nominatorId);
+  }
+
+  // Africa Education Icon Lifetime Achievement Award (2006–2026) — enforce
+  // 3 categories × 3 nominee types = max 9 icon nominations per nominator,
+  // with unique (category, nominee_type) slots.
+  if (isIconFamily(nomination.award_family, nomination.award_category_slug)) {
+    if (!ICON_CATEGORY_SLUGS.has(nomination.award_category_slug)) {
+      return json(400, {
+        error:
+          "For the Africa Education Icon Lifetime Achievement Award, category must be one of: Literary & New Curriculum Advocate Icon of the Decade, Africa Technical Educator Icon of the Decade, Africa Education Philanthropy Icon of the Decade.",
+      });
+    }
+    const nomineeTypeNorm = normType(nomination.nominee_type || "");
+    if (!ICON_NOMINEE_TYPES.has(nomineeTypeNorm)) {
+      return json(400, {
+        error:
+          "Nominee type must be one of: Africans in Africa, Diaspora Africans, Friends of Africa.",
+      });
+    }
+
+    const { data: existingIcon } = await supabase
+      .from("nominations")
+      .select("id, award_family, award_category_slug, nominee_title")
+      .eq("nominator_id", nominatorId)
+      .eq("season_id", season.id);
+
+    const iconRows = (existingIcon ?? []).filter((r) =>
+      isIconFamily(String(r.award_family ?? ""), String(r.award_category_slug ?? "")),
+    );
+
+    if (iconRows.length >= ICON_MAX_TOTAL) {
+      return json(409, {
+        error: `You have reached the maximum of ${ICON_MAX_TOTAL} Africa Education Icon nominations (3 categories × 3 nominee types).`,
+      });
+    }
+
+    const duplicateSlot = iconRows.some(
+      (r) =>
+        String(r.award_category_slug ?? "") === nomination.award_category_slug &&
+        normType(String(r.nominee_title ?? "")) === nomineeTypeNorm,
+    );
+    if (duplicateSlot) {
+      return json(409, {
+        error: `You have already nominated someone for "${nomination.award_category_slug}" as "${nomination.nominee_type}". Each nominator may submit only 1 nominee per category × nominee type.`,
+      });
+    }
   }
 
   // Lightweight rate-limit: max 5 nominations per nominator per rolling minute.
