@@ -69,6 +69,30 @@ function slugify(name: string): string {
   );
 }
 
+// ---- Africa Education Icon Lifetime Achievement Award (2006–2026) quotas ----
+// Single source of truth mirrored in src/config/nomination/iconTaxonomy.ts.
+// Each nominator may submit at most 1 nomination per (category × nominee_type),
+// i.e. a maximum of 3 categories × 3 nominee types = 9 icon nominations total.
+const ICON_CATEGORY_SLUGS = new Set([
+  "literary-new-curriculum-advocate-icon-of-the-decade",
+  "africa-technical-educator-icon-of-the-decade",
+  "africa-education-philanthropy-icon-of-the-decade",
+]);
+const ICON_NOMINEE_TYPES = new Set([
+  "africans in africa",
+  "diaspora africans",
+  "friends of africa",
+]);
+const ICON_MAX_TOTAL = 9;
+
+function isIconFamily(family: string, categorySlug: string): boolean {
+  if (ICON_CATEGORY_SLUGS.has(categorySlug)) return true;
+  return /icon|lifetime|legend/i.test(family);
+}
+function normType(v: string): string {
+  return v.trim().toLowerCase().replace(/\s+/g, " ");
+}
+
 Deno.serve(async (req) => {
   if (req.method === "OPTIONS") return new Response("ok", { headers: corsHeaders });
   if (req.method !== "POST") return json(405, { error: "Method not allowed" });
