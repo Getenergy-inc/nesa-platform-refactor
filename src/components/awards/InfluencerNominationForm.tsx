@@ -1,15 +1,5 @@
 import { useMemo, useState } from "react";
-import {
-  ArrowLeft,
-  ArrowRight,
-  Check,
-  Loader2,
-  Music,
-  Send,
-  ShieldCheck,
-  Sparkles,
-  Trophy,
-} from "lucide-react";
+import { Loader2, Send, ShieldCheck } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -22,127 +12,21 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { Progress } from "@/components/ui/progress";
 import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
 
 // ---------------------------------------------------------------------------
-// Area of Influence — 3 award categories (Step 1)
+// Simplified single-page Influencer Education Impact Award 2026 intake form.
+// Mirrors the low-friction Africa Education Icon nomination surface: ~15 fields,
+// under 3 minutes to complete. NRC enrichment (evidence, impact areas, scale,
+// verification, media, judging, certificates) happens post-submission.
 // ---------------------------------------------------------------------------
-type AreaValue = "social-media" | "sports-icons" | "music-icons";
 
-const AREAS: Array<{
-  value: AreaValue;
-  label: string;
-  emoji: string;
-  icon: React.ComponentType<{ className?: string }>;
-  description: string;
-}> = [
-  {
-    value: "social-media",
-    label: "Social Media Education Champion",
-    emoji: "📱",
-    icon: Sparkles,
-    description:
-      "Recognises digital creators using social media to advance Education for All through educational content, advocacy, scholarships, mentorship and awareness campaigns.",
-  },
-  {
-    value: "sports-icons",
-    label: "Sports Icon Supporting Education",
-    emoji: "⚽",
-    icon: Trophy,
-    description:
-      "Recognises sports personalities using their influence, foundations or resources to support Education for All through scholarships, school projects, mentoring and youth development.",
-  },
-  {
-    value: "music-icons",
-    label: "Music Icon Supporting Education",
-    emoji: "🎵",
-    icon: Music,
-    description:
-      "Recognises musicians and music industry personalities using their influence to promote Education for All through advocacy, fundraising, scholarships and educational programmes.",
-  },
-];
-
-// Step 2 — Type of Influence (dynamic per area)
-const TYPE_OPTIONS: Record<AreaValue, { label: string; options: string[] }> = {
-  "social-media": {
-    label: "Type of Social Media Influence",
-    options: [
-      "Educational Content Creator",
-      "Social Media Creator",
-      "YouTuber",
-      "Blogger",
-      "Podcaster",
-      "Digital Learning Creator",
-      "Educational Newsletter Publisher",
-      "Online Community Builder",
-      "Other",
-    ],
-  },
-  "sports-icons": {
-    label: "Sport",
-    options: [
-      "Football",
-      "Basketball",
-      "Athletics",
-      "Rugby",
-      "Cricket",
-      "Tennis",
-      "Motorsport",
-      "Paralympic Sport",
-      "Other",
-    ],
-  },
-  "music-icons": {
-    label: "Music Category",
-    options: [
-      "Music Artist",
-      "Gospel Artist",
-      "Music Producer",
-      "Choir",
-      "Orchestra",
-      "Music Foundation",
-      "Other",
-    ],
-  },
-};
-
-const IMPACT_AREAS: string[] = [
-  "Scholarships",
-  "School Construction",
-  "Classroom Renovation",
-  "Teacher Development",
-  "Books & Libraries",
-  "STEM",
-  "TVET",
-  "Reading Culture",
-  "Digital Literacy",
-  "Coding",
-  "Educational Technology",
-  "Mentorship",
-  "Youth Development",
-  "Girls' Education",
-  "Disability Inclusion",
-  "Educational Campaigns",
-  "Community Learning",
-  "Policy Advocacy",
-  "Research",
-  "Higher Education",
-  "Early Childhood Education",
-  "Adult Education",
-  "Other",
-];
-
-const IMPACT_SCALE: string[] = [
-  "Community",
-  "City",
-  "State",
-  "National",
-  "Regional",
-  "Continental",
-  "Global",
-];
+const MEDIUM_OPTIONS = [
+  { value: "social-media", label: "Social Media Education Champion" },
+  { value: "sports-icons", label: "Sports Icon Supporting Education" },
+  { value: "music-icons", label: "Music Icon Supporting Education" },
+] as const;
 
 const AFRICAN_REGIONS = [
   "North Africa",
@@ -155,7 +39,7 @@ const AFRICAN_REGIONS = [
   "Indian Ocean Islands",
 ];
 
-const RECOGNITION_REGIONS = ["Africa", ...AFRICAN_REGIONS, "Global", "African Diaspora"];
+const RECOGNITION_REGIONS = [...AFRICAN_REGIONS, "African Diaspora"];
 
 const AFRICAN_COUNTRIES = [
   "Algeria", "Angola", "Benin", "Botswana", "Burkina Faso", "Burundi", "Cabo Verde",
@@ -169,7 +53,7 @@ const AFRICAN_COUNTRIES = [
   "Togo", "Tunisia", "Uganda", "Zambia", "Zimbabwe",
 ];
 
-const DIASPORA_CONTINENTAL_REGIONS = [
+const DIASPORA_REGIONS = [
   "North America",
   "South America",
   "Europe",
@@ -180,39 +64,18 @@ const DIASPORA_CONTINENTAL_REGIONS = [
 ];
 
 interface FormState {
-  // Step 1
-  area: AreaValue | "";
-  // Step 2
-  influence_type: string;
-  // Step 3 — Nominee info
+  // Nominee
   nominee_name: string;
-  nominee_country: string;
-  organisation: string;
-  website: string;
-  social_profile: string;
-  // Step 4 — Recognition region
-  recognition_region: string;
+  medium: string;
   african_country: string;
+  recognition_region: string;
   country_of_residence: string;
   diaspora_region: string;
-  // Step 5
-  impact_areas: string[];
-  // Step 6
-  impact_scale: string;
-  // Step 7 — Evidence
-  ev_official_website: string;
-  ev_foundation_website: string;
-  ev_social_pages: string;
-  ev_news_articles: string;
-  ev_interviews: string;
-  ev_videos: string;
-  ev_scholarship_projects: string;
-  ev_school_projects: string;
-  ev_media_reports: string;
-  ev_other_documents: string;
-  // Step 8
+  organisation: string;
+  social_profile: string;
   why_deserve: string;
-  // Step 9 — Nominator
+  evidence_link: string;
+  // Nominator
   nm_full_name: string;
   nm_email: string;
   nm_phone: string;
@@ -221,30 +84,16 @@ interface FormState {
 }
 
 const INITIAL: FormState = {
-  area: "",
-  influence_type: "",
   nominee_name: "",
-  nominee_country: "",
-  organisation: "",
-  website: "",
-  social_profile: "",
-  recognition_region: "",
+  medium: "",
   african_country: "",
+  recognition_region: "",
   country_of_residence: "",
   diaspora_region: "",
-  impact_areas: [],
-  impact_scale: "",
-  ev_official_website: "",
-  ev_foundation_website: "",
-  ev_social_pages: "",
-  ev_news_articles: "",
-  ev_interviews: "",
-  ev_videos: "",
-  ev_scholarship_projects: "",
-  ev_school_projects: "",
-  ev_media_reports: "",
-  ev_other_documents: "",
+  organisation: "",
+  social_profile: "",
   why_deserve: "",
+  evidence_link: "",
   nm_full_name: "",
   nm_email: "",
   nm_phone: "",
@@ -252,26 +101,8 @@ const INITIAL: FormState = {
   nm_consent: false,
 };
 
-const splitLinks = (v: string) =>
-  v ? v.split(/[\s,]+/).map((s) => s.trim()).filter(Boolean) : [];
-
-const TOTAL_STEPS = 9;
-
-const STEP_TITLES: Record<number, string> = {
-  1: "Area of Influence",
-  2: "Type of Influence",
-  3: "Nominee Information",
-  4: "Recognition Region",
-  5: "Education Impact",
-  6: "Scale of Impact",
-  7: "Evidence",
-  8: "Why This Nominee",
-  9: "Nominator Details",
-};
-
 export function InfluencerNominationForm() {
   const [state, setState] = useState<FormState>(INITIAL);
-  const [step, setStep] = useState(1);
   const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [nominationId, setNominationId] = useState<string | null>(null);
@@ -279,87 +110,43 @@ export function InfluencerNominationForm() {
   const set = <K extends keyof FormState>(k: K, v: FormState[K]) =>
     setState((p) => ({ ...p, [k]: v }));
 
-  const toggleArea = (a: string) => {
-    setState((p) => ({
-      ...p,
-      impact_areas: p.impact_areas.includes(a)
-        ? p.impact_areas.filter((x) => x !== a)
-        : [...p.impact_areas, a],
-    }));
-  };
-
-  const activeArea = useMemo(
-    () => AREAS.find((a) => a.value === state.area),
-    [state.area],
-  );
   const isDiaspora = state.recognition_region === "African Diaspora";
-  const isAfricanRegion =
-    state.recognition_region === "Africa" ||
-    AFRICAN_REGIONS.includes(state.recognition_region);
+  const mediumLabel = useMemo(
+    () => MEDIUM_OPTIONS.find((m) => m.value === state.medium)?.label ?? null,
+    [state.medium],
+  );
 
-  // ---------------- Step validation ----------------
-  const canAdvance = (s: number): string | null => {
-    switch (s) {
-      case 1:
-        return state.area ? null : "Choose an Area of Influence to continue.";
-      case 2:
-        return state.influence_type ? null : "Select the Type of Influence.";
-      case 3:
-        if (state.nominee_name.trim().length < 2) return "Nominee full name is required.";
-        return null;
-      case 4:
-        if (!state.recognition_region) return "Select a Recognition Region.";
-        if (isDiaspora && (!state.country_of_residence || !state.diaspora_region))
-          return "Country of Residence and Diaspora Region are required.";
-        if (isAfricanRegion && !state.african_country)
-          return "Select the African Country.";
-        return null;
-      case 5:
-        return state.impact_areas.length ? null : "Select at least one Education Impact area.";
-      case 6:
-        return state.impact_scale ? null : "Select the Scale of Impact.";
-      case 7:
-        return null; // optional evidence
-      case 8:
-        return state.why_deserve.trim().length >= 30
-          ? null
-          : "Please write at least 30 characters explaining the impact.";
-      case 9:
-        if (state.nm_full_name.trim().length < 2) return "Your full name is required.";
-        if (!state.nm_email.includes("@")) return "A valid email is required.";
-        if (!state.nm_consent) return "Please certify the nomination to continue.";
-        return null;
-      default:
-        return null;
+  const validate = (): string | null => {
+    if (state.nominee_name.trim().length < 2) return "Nominee full name is required.";
+    if (!state.medium) return "Please select the Primary Medium of Influence.";
+    if (!state.recognition_region) return "Please select the Recognition Region.";
+    if (isDiaspora) {
+      if (!state.country_of_residence) return "Country of Residence is required.";
+      if (!state.diaspora_region) return "Please select the Diaspora Region.";
+    } else if (!state.african_country) {
+      return "Please select the nominee's African country.";
     }
+    if (state.why_deserve.trim().length < 30)
+      return "Please write at least 30 characters explaining the education impact.";
+    if (state.nm_full_name.trim().length < 2) return "Your full name is required.";
+    if (!state.nm_email.includes("@")) return "A valid email address is required.";
+    if (!state.nm_country.trim()) return "Please enter your country.";
+    if (!state.nm_consent) return "Please confirm the declaration to submit.";
+    return null;
   };
-
-  const next = () => {
-    const err = canAdvance(step);
-    if (err) return toast.error(err);
-    setStep((s) => Math.min(TOTAL_STEPS, s + 1));
-  };
-  const back = () => setStep((s) => Math.max(1, s - 1));
 
   const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (submitting) return;
-    for (let s = 1; s <= TOTAL_STEPS; s++) {
-      const err = canAdvance(s);
-      if (err) {
-        setStep(s);
-        return toast.error(err);
-      }
-    }
+    const err = validate();
+    if (err) return toast.error(err);
 
     setSubmitting(true);
     try {
       const localId = `INF-${Date.now().toString(36).toUpperCase()}`;
       const nomineeCountry = isDiaspora
         ? state.country_of_residence
-        : isAfricanRegion
-          ? state.african_country
-          : state.nominee_country;
+        : state.african_country;
 
       const { error } = await supabase.functions.invoke("nominations-submit", {
         body: {
@@ -372,52 +159,30 @@ export function InfluencerNominationForm() {
           },
           nomination: {
             award_family: "influencer",
-            award_category_slug: `influencer-${state.area}`,
-            award_subcategory_slug: state.area,
-            recognition_class: activeArea?.label ?? null,
+            award_category_slug: `influencer-${state.medium}`,
+            award_subcategory_slug: state.medium,
+            recognition_class: mediumLabel,
             region_slug: state.recognition_region,
             nominee_name: state.nominee_name,
             nominee_type: "individual",
             nominee_country: nomineeCountry,
             organization: state.organisation,
-            website: state.website || state.ev_official_website,
-            social_links: splitLinks(
-              [state.social_profile, state.ev_social_pages].filter(Boolean).join(" "),
-            ),
+            website: state.social_profile,
+            social_links: state.social_profile ? [state.social_profile] : [],
             impact_summary: state.why_deserve,
             reason: state.why_deserve,
             source: "influencer-native-form",
             source_form_slug: "influencer-education-impact-2026",
             metadata: {
               local_id: localId,
-              recognition_pathway: state.area,
-              medium_of_influence: activeArea?.label,
-              influence_type: state.influence_type,
-              education_impact_areas: state.impact_areas,
-              impact_scale: state.impact_scale,
+              medium_of_influence: mediumLabel,
               recognition_region: state.recognition_region,
-              country: state.african_country || state.nominee_country,
-              country_of_residence: state.country_of_residence,
-              diaspora_continent: state.diaspora_region,
-              evidence: {
-                official_website: state.ev_official_website,
-                foundation_website: state.ev_foundation_website,
-                social_pages: splitLinks(state.ev_social_pages),
-                news_articles: splitLinks(state.ev_news_articles),
-                interviews: splitLinks(state.ev_interviews),
-                videos: splitLinks(state.ev_videos),
-                scholarship_projects: state.ev_scholarship_projects,
-                school_projects: state.ev_school_projects,
-                media_reports: splitLinks(state.ev_media_reports),
-                other_documents: splitLinks(state.ev_other_documents),
-              },
+              country: nomineeCountry,
+              country_of_residence: state.country_of_residence || null,
+              diaspora_region: state.diaspora_region || null,
+              evidence_link: state.evidence_link || null,
               nomination_status: "PENDING_NRC_REVIEW",
               nrc_review_status: "queued",
-              verification_status: "pending",
-              website_publish_status: "pending",
-              certificate_status: "pending",
-              media_status: "pending",
-              hall_of_fame_status: "pending",
             },
           },
         },
@@ -457,549 +222,260 @@ export function InfluencerNominationForm() {
     );
   }
 
-  const progress = (step / TOTAL_STEPS) * 100;
-
   return (
     <form
       onSubmit={onSubmit}
-      className="rounded-2xl border border-gold/30 bg-charcoal-light/40 p-5 md:p-6 space-y-6"
+      className="rounded-2xl border border-gold/30 bg-charcoal-light/40 p-5 md:p-6 space-y-8"
     >
       {/* Trust notice */}
-      <div className="flex items-start gap-2 text-xs text-foreground/75 rounded-lg border border-gold/20 bg-charcoal/40 p-3">
+      <div className="flex items-start gap-2 text-xs text-foreground/80 rounded-lg border border-gold/20 bg-charcoal/40 p-3">
         <ShieldCheck className="h-4 w-4 text-gold mt-0.5 shrink-0" />
         <span>
-          Official native nomination form for the NESA-Africa{" "}
-          <span className="text-gold">Influencer Education Impact Award 2026</span>. Every
-          submission is independently reviewed by the Nominee Research Corps (NRC). Follower
-          count or celebrity status does not influence judging.
+          Recognition is based on{" "}
+          <span className="text-gold">verified education impact</span> — not popularity,
+          celebrity status or follower count. Every nomination is independently reviewed by
+          the Nominee Research Corps (NRC).
         </span>
       </div>
 
-      {/* Progress */}
-      <div className="space-y-2">
-        <div className="flex items-center justify-between text-xs text-foreground/70">
-          <span className="uppercase tracking-[0.18em] text-gold/80 font-semibold">
-            Step {step} of {TOTAL_STEPS}
-          </span>
-          <span className="text-gold">{STEP_TITLES[step]}</span>
+      {/* SECTION 1 — Nominee Information */}
+      <section className="space-y-4">
+        <div>
+          <h3 className="font-playfair text-xl text-gold">1. Nominee Information</h3>
+          <p className="text-xs text-foreground/60 mt-1">
+            Share only what you know — the NRC will research and enrich the profile.
+          </p>
         </div>
-        <Progress value={progress} className="h-1.5" />
-      </div>
 
-      {/* ---------------- STEP 1 ---------------- */}
-      {step === 1 && (
-        <StepShell
-          title="Which area of influence best describes the nominee?"
-          hint="Choose one. The rest of the form adapts to your selection."
-        >
-          <div className="grid gap-3 md:grid-cols-3">
-            {AREAS.map((a) => {
-              const selected = state.area === a.value;
-              const Icon = a.icon;
-              return (
-                <button
-                  key={a.value}
-                  type="button"
-                  onClick={() => {
-                    set("area", a.value);
-                    set("influence_type", "");
-                  }}
-                  className={`text-left rounded-xl border p-4 transition-all ${
-                    selected
-                      ? "border-gold bg-gold/10 shadow-[0_0_0_1px_rgba(212,175,55,0.4)]"
-                      : "border-white/10 bg-charcoal/40 hover:border-gold/40"
-                  }`}
-                >
-                  <div className="flex items-center gap-2 mb-2">
-                    <span className="text-2xl">{a.emoji}</span>
-                    <Icon className="h-4 w-4 text-gold" />
-                  </div>
-                  <p className="font-playfair text-base text-white leading-tight mb-1.5">
-                    {a.label}
-                  </p>
-                  <p className="text-xs text-foreground/70 leading-relaxed">
-                    {a.description}
-                  </p>
-                  <span
-                    className={`mt-3 inline-flex items-center gap-1 text-[11px] uppercase tracking-[0.15em] font-semibold ${
-                      selected ? "text-gold" : "text-foreground/50"
-                    }`}
-                  >
-                    {selected ? (
-                      <>
-                        <Check className="h-3 w-3" /> Selected
-                      </>
-                    ) : (
-                      "Select"
-                    )}
-                  </span>
-                </button>
-              );
-            })}
-          </div>
-        </StepShell>
-      )}
+        <div className="grid gap-4 md:grid-cols-2">
+          <Field label="Full Name" required>
+            <Input
+              value={state.nominee_name}
+              onChange={(e) => set("nominee_name", e.target.value)}
+              placeholder="Nominee's full name"
+              required
+            />
+          </Field>
 
-      {/* ---------------- STEP 2 ---------------- */}
-      {step === 2 && activeArea && (
-        <StepShell title={TYPE_OPTIONS[activeArea.value].label} hint="Pick the closest match.">
-          <div className="space-y-1.5 max-w-md">
-            <Label htmlFor="influence_type">
-              {TYPE_OPTIONS[activeArea.value].label} *
-            </Label>
+          <Field label="Primary Medium of Influence" required>
             <Select
-              value={state.influence_type}
-              onValueChange={(v) => set("influence_type", v)}
+              value={state.medium}
+              onValueChange={(v) => set("medium", v)}
             >
-              <SelectTrigger id="influence_type">
-                <SelectValue placeholder="Select an option" />
-              </SelectTrigger>
+              <SelectTrigger><SelectValue placeholder="Select medium" /></SelectTrigger>
               <SelectContent>
-                {TYPE_OPTIONS[activeArea.value].options.map((o) => (
-                  <SelectItem key={o} value={o}>
-                    {o}
-                  </SelectItem>
+                {MEDIUM_OPTIONS.map((m) => (
+                  <SelectItem key={m.value} value={m.value}>{m.label}</SelectItem>
                 ))}
               </SelectContent>
             </Select>
-          </div>
-        </StepShell>
-      )}
+          </Field>
 
-      {/* ---------------- STEP 3 ---------------- */}
-      {step === 3 && (
-        <StepShell title="Nominee Information">
-          <div className="grid gap-4 md:grid-cols-2">
-            <Field label="Full Name *" id="nominee_name">
-              <Input
-                id="nominee_name"
-                value={state.nominee_name}
-                onChange={(e) => set("nominee_name", e.target.value)}
-                required
-              />
-            </Field>
-            <Field label="Country" id="nominee_country">
-              <Input
-                id="nominee_country"
-                value={state.nominee_country}
-                onChange={(e) => set("nominee_country", e.target.value)}
-              />
-            </Field>
-            <Field label="Organisation / Foundation" id="organisation">
-              <Input
-                id="organisation"
-                value={state.organisation}
-                onChange={(e) => set("organisation", e.target.value)}
-              />
-            </Field>
-            <Field label="Website" id="website">
-              <Input
-                id="website"
-                placeholder="https://"
-                value={state.website}
-                onChange={(e) => set("website", e.target.value)}
-              />
-            </Field>
-            <Field label="Social Media Profile" id="social_profile">
-              <Input
-                id="social_profile"
-                placeholder="https://"
-                value={state.social_profile}
-                onChange={(e) => set("social_profile", e.target.value)}
-              />
-            </Field>
-          </div>
-        </StepShell>
-      )}
-
-      {/* ---------------- STEP 4 ---------------- */}
-      {step === 4 && (
-        <StepShell title="Recognition Region">
-          <div className="grid gap-4 md:grid-cols-2">
-            <Field label="Recognition region *" id="region">
-              <Select
-                value={state.recognition_region}
-                onValueChange={(v) => {
-                  set("recognition_region", v);
-                  set("african_country", "");
+          <Field label="Recognition Region" required>
+            <Select
+              value={state.recognition_region}
+              onValueChange={(v) => {
+                set("recognition_region", v);
+                if (v === "African Diaspora") set("african_country", "");
+                else {
                   set("country_of_residence", "");
                   set("diaspora_region", "");
-                }}
+                }
+              }}
+            >
+              <SelectTrigger><SelectValue placeholder="Select region" /></SelectTrigger>
+              <SelectContent>
+                {RECOGNITION_REGIONS.map((r) => (
+                  <SelectItem key={r} value={r}>{r}</SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+          </Field>
+
+          {!isDiaspora ? (
+            <Field label="African Country" required>
+              <Select
+                value={state.african_country}
+                onValueChange={(v) => set("african_country", v)}
               >
-                <SelectTrigger id="region">
-                  <SelectValue placeholder="Select a region" />
-                </SelectTrigger>
+                <SelectTrigger><SelectValue placeholder="Select country" /></SelectTrigger>
                 <SelectContent>
-                  {RECOGNITION_REGIONS.map((r) => (
-                    <SelectItem key={r} value={r}>
-                      {r}
-                    </SelectItem>
+                  {AFRICAN_COUNTRIES.map((c) => (
+                    <SelectItem key={c} value={c}>{c}</SelectItem>
                   ))}
                 </SelectContent>
               </Select>
             </Field>
-
-            {isAfricanRegion && (
-              <Field label="African Country *" id="african_country">
+          ) : (
+            <>
+              <Field label="Country of Residence" required>
+                <Input
+                  value={state.country_of_residence}
+                  onChange={(e) => set("country_of_residence", e.target.value)}
+                  placeholder="e.g. United Kingdom"
+                  required
+                />
+              </Field>
+              <Field label="Diaspora Region" required>
                 <Select
-                  value={state.african_country}
-                  onValueChange={(v) => set("african_country", v)}
+                  value={state.diaspora_region}
+                  onValueChange={(v) => set("diaspora_region", v)}
                 >
-                  <SelectTrigger id="african_country">
-                    <SelectValue placeholder="Select a country" />
-                  </SelectTrigger>
+                  <SelectTrigger><SelectValue placeholder="Select diaspora region" /></SelectTrigger>
                   <SelectContent>
-                    {AFRICAN_COUNTRIES.map((c) => (
-                      <SelectItem key={c} value={c}>
-                        {c}
-                      </SelectItem>
+                    {DIASPORA_REGIONS.map((r) => (
+                      <SelectItem key={r} value={r}>{r}</SelectItem>
                     ))}
                   </SelectContent>
                 </Select>
               </Field>
-            )}
+            </>
+          )}
 
-            {isDiaspora && (
-              <>
-                <Field label="Country of Residence *" id="country_of_residence">
-                  <Input
-                    id="country_of_residence"
-                    placeholder="e.g. Canada, United States, United Kingdom"
-                    value={state.country_of_residence}
-                    onChange={(e) => set("country_of_residence", e.target.value)}
-                  />
-                </Field>
-                <Field label="Diaspora Region *" id="diaspora_region">
-                  <Select
-                    value={state.diaspora_region}
-                    onValueChange={(v) => set("diaspora_region", v)}
-                  >
-                    <SelectTrigger id="diaspora_region">
-                      <SelectValue placeholder="Select a region" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      {DIASPORA_CONTINENTAL_REGIONS.map((r) => (
-                        <SelectItem key={r} value={r}>
-                          {r}
-                        </SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
-                </Field>
-              </>
-            )}
-          </div>
-        </StepShell>
-      )}
+          <Field label="Organisation / Team" hint="Optional">
+            <Input
+              value={state.organisation}
+              onChange={(e) => set("organisation", e.target.value)}
+              placeholder="Foundation, club, label or affiliation"
+            />
+          </Field>
 
-      {/* ---------------- STEP 5 ---------------- */}
-      {step === 5 && (
-        <StepShell
-          title="Education Impact"
-          hint="Which education areas has the nominee supported? Select all that apply."
-        >
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2">
-            {IMPACT_AREAS.map((a) => {
-              const id = `area-${a}`;
-              const checked = state.impact_areas.includes(a);
-              return (
-                <label
-                  key={a}
-                  htmlFor={id}
-                  className={`flex items-center gap-2 rounded-md border px-3 py-2 text-xs cursor-pointer transition-colors ${
-                    checked
-                      ? "border-gold/60 bg-gold/10 text-white"
-                      : "border-white/10 bg-charcoal/40 text-foreground/75 hover:border-gold/30"
-                  }`}
-                >
-                  <Checkbox
-                    id={id}
-                    checked={checked}
-                    onCheckedChange={() => toggleArea(a)}
-                  />
-                  <span>{a}</span>
-                </label>
-              );
-            })}
-          </div>
-        </StepShell>
-      )}
+          <Field label="Social Media Profile" hint="Optional">
+            <Input
+              value={state.social_profile}
+              onChange={(e) => set("social_profile", e.target.value)}
+              placeholder="Instagram, TikTok, YouTube, X, LinkedIn or website"
+            />
+          </Field>
+        </div>
 
-      {/* ---------------- STEP 6 ---------------- */}
-      {step === 6 && (
-        <StepShell title="Scale of Impact">
-          <div className="space-y-1.5 max-w-sm">
-            <Label htmlFor="impact_scale">Scale of impact *</Label>
-            <Select
-              value={state.impact_scale}
-              onValueChange={(v) => set("impact_scale", v)}
-            >
-              <SelectTrigger id="impact_scale">
-                <SelectValue placeholder="Select a scale" />
-              </SelectTrigger>
-              <SelectContent>
-                {IMPACT_SCALE.map((s) => (
-                  <SelectItem key={s} value={s}>
-                    {s}
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
-          </div>
-        </StepShell>
-      )}
-
-      {/* ---------------- STEP 7 ---------------- */}
-      {step === 7 && (
-        <StepShell
-          title="Evidence"
-          hint="Provide links or references. Every field is optional but stronger evidence supports verification."
-        >
-          <div className="grid gap-4 md:grid-cols-2">
-            <Field label="Official Website" id="ev_official_website">
-              <Input
-                id="ev_official_website"
-                placeholder="https://"
-                value={state.ev_official_website}
-                onChange={(e) => set("ev_official_website", e.target.value)}
-              />
-            </Field>
-            <Field label="Foundation Website" id="ev_foundation_website">
-              <Input
-                id="ev_foundation_website"
-                placeholder="https://"
-                value={state.ev_foundation_website}
-                onChange={(e) => set("ev_foundation_website", e.target.value)}
-              />
-            </Field>
-            <Field label="Social Media Pages" id="ev_social_pages">
-              <Input
-                id="ev_social_pages"
-                placeholder="Comma- or space-separated URLs"
-                value={state.ev_social_pages}
-                onChange={(e) => set("ev_social_pages", e.target.value)}
-              />
-            </Field>
-            <Field label="News Articles" id="ev_news_articles">
-              <Input
-                id="ev_news_articles"
-                placeholder="Article URLs"
-                value={state.ev_news_articles}
-                onChange={(e) => set("ev_news_articles", e.target.value)}
-              />
-            </Field>
-            <Field label="Interviews" id="ev_interviews">
-              <Input
-                id="ev_interviews"
-                placeholder="Interview URLs"
-                value={state.ev_interviews}
-                onChange={(e) => set("ev_interviews", e.target.value)}
-              />
-            </Field>
-            <Field label="Videos" id="ev_videos">
-              <Input
-                id="ev_videos"
-                placeholder="Video URLs"
-                value={state.ev_videos}
-                onChange={(e) => set("ev_videos", e.target.value)}
-              />
-            </Field>
-            <Field label="Scholarship Projects" id="ev_scholarship_projects">
-              <Input
-                id="ev_scholarship_projects"
-                placeholder="Project names / links"
-                value={state.ev_scholarship_projects}
-                onChange={(e) => set("ev_scholarship_projects", e.target.value)}
-              />
-            </Field>
-            <Field label="School Projects" id="ev_school_projects">
-              <Input
-                id="ev_school_projects"
-                placeholder="Project names / links"
-                value={state.ev_school_projects}
-                onChange={(e) => set("ev_school_projects", e.target.value)}
-              />
-            </Field>
-            <Field label="Media Reports" id="ev_media_reports">
-              <Input
-                id="ev_media_reports"
-                placeholder="Report URLs"
-                value={state.ev_media_reports}
-                onChange={(e) => set("ev_media_reports", e.target.value)}
-              />
-            </Field>
-            <Field label="Other Supporting Documents" id="ev_other_documents">
-              <Input
-                id="ev_other_documents"
-                placeholder="Any additional evidence URLs"
-                value={state.ev_other_documents}
-                onChange={(e) => set("ev_other_documents", e.target.value)}
-              />
-            </Field>
-          </div>
-        </StepShell>
-      )}
-
-      {/* ---------------- STEP 8 ---------------- */}
-      {step === 8 && (
-        <StepShell title="Why should this person receive the Influencer Education Impact Award?">
+        <Field label="Why are you nominating this person?" required>
           <Textarea
-            id="why_deserve"
-            rows={7}
-            placeholder="Describe the nominee's measurable contribution to Education for All. Focus on educational impact rather than popularity or follower count."
             value={state.why_deserve}
             onChange={(e) => set("why_deserve", e.target.value)}
+            placeholder="Describe how this individual is helping to advance Education for All — e.g. scholarships, school support, mentorship, learning content, youth empowerment, educational advocacy."
+            rows={6}
+            maxLength={3500}
+            required
           />
-          <p className="text-[11px] text-foreground/55 mt-2">
-            Minimum 30 characters · {state.why_deserve.trim().length} typed
+          <p className="text-[11px] text-foreground/50 mt-1">
+            Up to ~500 words. Focus on measurable educational impact.
           </p>
-        </StepShell>
-      )}
+        </Field>
 
-      {/* ---------------- STEP 9 ---------------- */}
-      {step === 9 && (
-        <StepShell title="Nominator Details">
-          <div className="grid gap-4 md:grid-cols-2">
-            <Field label="Full Name *" id="nm_full_name">
-              <Input
-                id="nm_full_name"
-                value={state.nm_full_name}
-                onChange={(e) => set("nm_full_name", e.target.value)}
-                required
-              />
-            </Field>
-            <Field label="Email *" id="nm_email">
-              <Input
-                id="nm_email"
-                type="email"
-                value={state.nm_email}
-                onChange={(e) => set("nm_email", e.target.value)}
-                required
-              />
-            </Field>
-            <Field label="Phone" id="nm_phone">
-              <Input
-                id="nm_phone"
-                type="tel"
-                value={state.nm_phone}
-                onChange={(e) => set("nm_phone", e.target.value)}
-              />
-            </Field>
-            <Field label="Country" id="nm_country">
-              <Input
-                id="nm_country"
-                value={state.nm_country}
-                onChange={(e) => set("nm_country", e.target.value)}
-              />
-            </Field>
-          </div>
-          <div className="flex items-start gap-2 pt-3">
-            <Checkbox
-              id="nm_consent"
-              checked={state.nm_consent}
-              onCheckedChange={(v) => set("nm_consent", Boolean(v))}
+        <Field label="Evidence Link" hint="Optional">
+          <Input
+            value={state.evidence_link}
+            onChange={(e) => set("evidence_link", e.target.value)}
+            placeholder="Website, news article, interview or social media post"
+          />
+        </Field>
+      </section>
+
+      {/* SECTION 2 — Your Details */}
+      <section className="space-y-4 border-t border-gold/15 pt-6">
+        <div>
+          <h3 className="font-playfair text-xl text-gold">2. Your Details</h3>
+          <p className="text-xs text-foreground/60 mt-1">
+            We use your contact details only to acknowledge and verify your nomination.
+          </p>
+        </div>
+
+        <div className="grid gap-4 md:grid-cols-2">
+          <Field label="Full Name" required>
+            <Input
+              value={state.nm_full_name}
+              onChange={(e) => set("nm_full_name", e.target.value)}
+              required
             />
-            <label
-              htmlFor="nm_consent"
-              className="text-xs text-foreground/75 leading-relaxed cursor-pointer"
-            >
-              I certify that this nomination is based on verifiable evidence.
-            </label>
-          </div>
-        </StepShell>
-      )}
+          </Field>
+          <Field label="Email" required>
+            <Input
+              type="email"
+              value={state.nm_email}
+              onChange={(e) => set("nm_email", e.target.value)}
+              required
+            />
+          </Field>
+          <Field label="Phone Number" hint="Optional">
+            <Input
+              value={state.nm_phone}
+              onChange={(e) => set("nm_phone", e.target.value)}
+              placeholder="+234…"
+            />
+          </Field>
+          <Field label="Country" required>
+            <Input
+              value={state.nm_country}
+              onChange={(e) => set("nm_country", e.target.value)}
+              required
+            />
+          </Field>
+        </div>
 
-      {/* ---------------- Nav ---------------- */}
-      <div className="flex flex-col-reverse sm:flex-row items-stretch sm:items-center justify-between gap-3 pt-2">
+        <label className="flex items-start gap-3 text-sm text-foreground/80 cursor-pointer">
+          <Checkbox
+            checked={state.nm_consent}
+            onCheckedChange={(v) => set("nm_consent", Boolean(v))}
+            className="mt-0.5"
+          />
+          <span>
+            I confirm that the information provided is accurate and submitted in good faith,
+            and I understand that recognition is subject to independent NRC verification.
+          </span>
+        </label>
+      </section>
+
+      <div className="pt-2">
         <Button
-          type="button"
-          variant="outline"
-          onClick={back}
-          disabled={step === 1 || submitting}
-          className="border-gold/40 text-gold hover:bg-gold/10"
+          type="submit"
+          disabled={submitting}
+          className="w-full md:w-auto bg-gold text-charcoal hover:bg-gold/90 font-semibold"
         >
-          <ArrowLeft className="mr-2 h-4 w-4" /> Back
+          {submitting ? (
+            <><Loader2 className="mr-2 h-4 w-4 animate-spin" /> Submitting…</>
+          ) : (
+            <><Send className="mr-2 h-4 w-4" /> Submit Nomination</>
+          )}
         </Button>
-
-        {step < TOTAL_STEPS ? (
-          <Button
-            type="button"
-            onClick={next}
-            className="bg-gold text-charcoal hover:bg-gold/90 font-semibold"
-          >
-            Continue <ArrowRight className="ml-2 h-4 w-4" />
-          </Button>
-        ) : (
-          <Button
-            type="submit"
-            size="lg"
-            disabled={submitting}
-            className="bg-gold text-charcoal hover:bg-gold/90 font-semibold"
-          >
-            {submitting ? (
-              <>
-                <Loader2 className="mr-2 h-4 w-4 animate-spin" /> Submitting…
-              </>
-            ) : (
-              <>
-                <Send className="mr-2 h-4 w-4" /> Submit Influencer Nomination
-              </>
-            )}
-          </Button>
-        )}
       </div>
 
-      {/* Governance note */}
-      <div className="rounded-lg border border-gold/20 bg-charcoal/50 p-4 text-xs text-foreground/70 leading-relaxed">
-        <p className="text-gold font-semibold mb-1">
-          The Influencer Education Impact Award recognises Education Enablers — not popularity.
-        </p>
-        Every nomination undergoes independent review by the Nominee Research Corps (NRC)
-        before being considered for recognition. Judging is based on verified educational
-        contribution, measurable impact, integrity, and alignment with the mission of
-        advancing Education for All across Africa.
+      {/* What happens next */}
+      <div className="rounded-xl border border-gold/20 bg-charcoal/40 p-4 text-sm text-foreground/80">
+        <p className="font-semibold text-gold mb-2">What happens next</p>
+        <ol className="space-y-1.5 text-xs leading-relaxed">
+          <li>✅ Nomination received</li>
+          <li>✅ NRC verifies education impact</li>
+          <li>✅ Duplicate check</li>
+          <li>✅ Nominee contacted (where possible)</li>
+          <li>✅ Profile created</li>
+          <li>✅ Recognition review</li>
+        </ol>
       </div>
     </form>
   );
 }
 
-// ---------------------------------------------------------------------------
-// Small helpers
-// ---------------------------------------------------------------------------
-function StepShell({
-  title,
+// ---------------- Field wrapper ----------------
+function Field({
+  label,
+  required,
   hint,
   children,
 }: {
-  title: string;
+  label: string;
+  required?: boolean;
   hint?: string;
   children: React.ReactNode;
 }) {
   return (
-    <section className="space-y-3">
-      <div>
-        <h3 className="font-playfair text-xl md:text-2xl text-gold leading-tight">
-          {title}
-        </h3>
-        {hint && <p className="text-xs text-foreground/65 mt-1">{hint}</p>}
-      </div>
-      <div>{children}</div>
-    </section>
-  );
-}
-
-function Field({
-  id,
-  label,
-  children,
-}: {
-  id: string;
-  label: string;
-  children: React.ReactNode;
-}) {
-  return (
     <div className="space-y-1.5">
-      <Label htmlFor={id}>{label}</Label>
+      <Label className="text-xs uppercase tracking-[0.14em] text-foreground/70 flex items-center gap-2">
+        <span>
+          {label} {required && <span className="text-gold">*</span>}
+        </span>
+        {hint && <span className="text-[10px] text-foreground/40 normal-case tracking-normal">({hint})</span>}
+      </Label>
       {children}
     </div>
   );
