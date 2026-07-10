@@ -207,9 +207,21 @@ export function InfluencerNominationForm({
         throw new Error(payload?.error || "Submission was not accepted.");
       }
 
-      // Format server UUID into a readable, prefixed Nomination ID.
-      const shortId = payload.nomination_id.replace(/-/g, "").slice(0, 8).toUpperCase();
-      setNominationId(`INF-2026-${shortId}`);
+      // Format server UUID into a readable, prefixed Nomination ID by pathway.
+      const shortId = payload.nomination_id.replace(/-/g, "").slice(0, 4).toUpperCase();
+      const pathwayCode =
+        mediumConfig.value === "social-media"
+          ? "SOC"
+          : mediumConfig.value === "sports-icons"
+            ? "SPT"
+            : "MUS";
+      const reference = `NESA2026-INF-${pathwayCode}-${shortId}`;
+      setNominationId(reference);
+      trackEvent("influencer_submission_completed", {
+        reference,
+        pathway: mediumConfig.value,
+      });
+      onSubmitted?.(reference);
       toast.success("Nomination submitted — thank you!");
       setSubmitted(true);
       window.scrollTo({ top: 0, behavior: "smooth" });
