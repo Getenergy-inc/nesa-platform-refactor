@@ -23,7 +23,14 @@ interface NomineePreview {
   region: string | null;
   organization: string | null;
   title: string | null;
+  recognition_pathway: "social_media" | "sports" | "music" | null;
 }
+
+const PATHWAY_LABEL: Record<string, string> = {
+  social_media: "Social Media Education Champion",
+  sports: "Sports Icon Supporting Education",
+  music: "Music Icon Supporting Education",
+};
 
 export default function NomineeAccept() {
   const { token } = useParams<{ token: string }>();
