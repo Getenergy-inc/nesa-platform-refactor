@@ -300,6 +300,21 @@ export default function NomineeProfile() {
       </Helmet>
 
       <div className="min-h-screen bg-charcoal text-ivory">
+        {recognitionPathway ? (
+          <div className="border-b border-gold/20 bg-gold/5">
+            <div className="container mx-auto px-4 py-3 flex flex-col sm:flex-row items-start sm:items-center gap-2 text-xs md:text-sm">
+              <Badge className="bg-gold text-charcoal">
+                {recognitionPathway === "social_media" && "Social Media Education Champion"}
+                {recognitionPathway === "sports" && "Sports Icon Supporting Education"}
+                {recognitionPathway === "music" && "Music Icon Supporting Education"}
+              </Badge>
+              <p className="text-ivory/80">
+                <strong>There is no public voting for the Influencer Education Impact Award.</strong>{" "}
+                Recognition is based on verified impact and governance approval.
+              </p>
+            </div>
+          </div>
+        ) : null}
         {/* ========== HERO ========== */}
         <section className="relative border-b border-gold/10 overflow-hidden">
           <div className="absolute inset-0 bg-gradient-to-b from-gold/5 via-transparent to-transparent" />
