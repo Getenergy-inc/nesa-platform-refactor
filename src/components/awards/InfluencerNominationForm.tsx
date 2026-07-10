@@ -239,18 +239,41 @@ export function InfluencerNominationForm({
       <div className="rounded-2xl border border-gold/40 bg-charcoal-light/50 p-8 text-center text-foreground/90">
         <ShieldCheck className="mx-auto mb-3 h-10 w-10 text-gold" />
         <h3 className="font-playfair text-2xl md:text-3xl text-gold mb-2">
-          Nomination received
+          Nomination Received
         </h3>
         {nominationId && (
           <p className="text-xs uppercase tracking-[0.18em] text-gold/70 mb-3">
-            Nomination ID · {nominationId}
+            Reference · {nominationId}
           </p>
         )}
         <p className="text-sm text-foreground/75 max-w-md mx-auto">
-          Your submission for the{" "}
-          <span className="text-gold">Influencer Education Impact Award 2026</span> has been
-          queued for independent NRC verification. A confirmation email will follow shortly.
+          Thank you for helping NESA-Africa identify an Education Enabler. Your
+          submission has been forwarded to the Nominee Research Corps for review.
+          A confirmation email will follow shortly.
         </p>
+        <div className="mt-6 flex flex-wrap justify-center gap-3">
+          <Button
+            type="button"
+            variant="outline"
+            className="border-gold/40 text-gold hover:bg-gold/10"
+            onClick={() => {
+              trackEvent("influencer_nominate_another_click");
+              setState(INITIAL);
+              setNominationId(null);
+              setSubmitted(false);
+            }}
+          >
+            <Plus className="mr-2 h-4 w-4" /> Nominate another person
+          </Button>
+          <Button
+            asChild
+            className="bg-gold text-charcoal font-semibold hover:bg-gold/90"
+          >
+            <Link to={directoryRoute}>
+              View Existing Nominees <ArrowRight className="ml-2 h-4 w-4" />
+            </Link>
+          </Button>
+        </div>
       </div>
     );
   }
