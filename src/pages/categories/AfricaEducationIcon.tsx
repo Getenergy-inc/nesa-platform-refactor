@@ -128,10 +128,10 @@ export default function AfricaEducationIconPage() {
 
               <div className="mt-9 flex flex-wrap justify-center gap-3">
                 <Button asChild size="lg" className="bg-gold text-charcoal hover:bg-gold/90">
-                  <Link to="#pathways">
-                    Explore the Hall of Fame
+                  <a href="#nomination-form">
+                    Nominate an Education Icon
                     <ArrowRight className="ml-2 h-4 w-4" />
-                  </Link>
+                  </a>
                 </Button>
                 <Button
                   asChild
@@ -139,8 +139,8 @@ export default function AfricaEducationIconPage() {
                   variant="outline"
                   className="border-gold/40 text-white hover:bg-gold/10"
                 >
-                  <Link to="/nominate?category=africa-education-icon-award">
-                    Nominate an Education Icon
+                  <Link to="/awards/africa-education-icon/nominees">
+                    Explore Existing Nominees
                   </Link>
                 </Button>
               </div>

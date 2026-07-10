@@ -72,9 +72,16 @@ interface Props {
   config: AwardCategoryConfig;
   /** Optional rich legacy hero rendered above the structured metadata panel */
   legacyHero?: React.ReactNode;
+  /**
+   * Where to render the inline nomination form.
+   * - "bottom" (default): below the structured metadata panel (existing behavior).
+   * - "top": immediately below the legacy hero, before the structured panel.
+   *   Used to bring the form above the fold on high-conversion pages (e.g. Icon).
+   */
+  formPosition?: "top" | "bottom";
 }
 
-export function AwardCategoryPage({ config, legacyHero }: Props) {
+export function AwardCategoryPage({ config, legacyHero, formPosition = "bottom" }: Props) {
   const group = GROUP_META[config.group];
   const canonical = `${SITE}${config.url}`;
   const nominateHref = config.ctaNominateHref ?? `/nominate?category=${encodeURIComponent(config.slug)}`;
@@ -127,6 +134,14 @@ export function AwardCategoryPage({ config, legacyHero }: Props) {
       />
 
       {legacyHero}
+
+      {/* Optional: nomination form pulled above the structured panel to improve conversion */}
+      {formPosition === "top" && (
+        <>
+          <span id="nomination-form" aria-hidden className="block -mt-1" />
+          <CategoryNominationForm config={config} />
+        </>
+      )}
 
       {/* Structured metadata panel */}
       <section className="border-y border-gold/20 bg-charcoal-light/40 py-10 md:py-16 pb-24 md:pb-16">
@@ -351,8 +366,8 @@ export function AwardCategoryPage({ config, legacyHero }: Props) {
         </div>
       </section>
 
-      {/* Inline nomination form for this category */}
-      <CategoryNominationForm config={config} />
+      {/* Inline nomination form for this category (skipped when already rendered at top) */}
+      {formPosition === "bottom" && <CategoryNominationForm config={config} />}
 
       {/* FAQs */}
       <CategoryFaqSection faqs={config.faqs} />
