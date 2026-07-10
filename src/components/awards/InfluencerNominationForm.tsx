@@ -123,7 +123,10 @@ const INITIAL: FormState = {
   nm_consent: false,
 };
 
-export function InfluencerNominationForm() {
+export function InfluencerNominationForm({
+  directoryRoute = "/awards/influencer-education-impact/nominees",
+  onSubmitted,
+}: InfluencerNominationFormProps = {}) {
   const [state, setState] = useState<FormState>(INITIAL);
   const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
