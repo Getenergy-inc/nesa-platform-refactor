@@ -872,6 +872,10 @@ const App = () => (
                     }
                   />
                   <Route
+                    path="/awards/africa-education-icon/nominees"
+                    element={<Navigate to="/nominees/africa-education-icon-award" replace />}
+                  />
+                  <Route
                     path="/awards/regions"
                     element={<Navigate to="/awards#regions" replace />}
                   />
