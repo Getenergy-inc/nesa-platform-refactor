@@ -135,6 +135,14 @@ export function AwardCategoryPage({ config, legacyHero, formPosition = "bottom" 
 
       {legacyHero}
 
+      {/* Optional: nomination form pulled above the structured panel to improve conversion */}
+      {formPosition === "top" && (
+        <>
+          <span id="nomination-form" aria-hidden className="block -mt-1" />
+          <CategoryNominationForm config={config} />
+        </>
+      )}
+
       {/* Structured metadata panel */}
       <section className="border-y border-gold/20 bg-charcoal-light/40 py-10 md:py-16 pb-24 md:pb-16">
         <div className="container mx-auto max-w-6xl px-4">
