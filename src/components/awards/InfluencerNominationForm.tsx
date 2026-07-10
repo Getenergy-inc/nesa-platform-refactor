@@ -1,5 +1,6 @@
 import { useMemo, useState } from "react";
-import { Loader2, Send, ShieldCheck } from "lucide-react";
+import { Link } from "react-router-dom";
+import { Loader2, Send, ShieldCheck, ArrowRight, Plus } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -14,6 +15,12 @@ import {
 } from "@/components/ui/select";
 import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
+import { trackEvent } from "@/lib/analytics";
+
+interface InfluencerNominationFormProps {
+  directoryRoute?: string;
+  onSubmitted?: (nominationId: string) => void;
+}
 
 // ---------------------------------------------------------------------------
 // Simplified single-page Influencer Education Impact Award 2026 intake form.
