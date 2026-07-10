@@ -72,9 +72,16 @@ interface Props {
   config: AwardCategoryConfig;
   /** Optional rich legacy hero rendered above the structured metadata panel */
   legacyHero?: React.ReactNode;
+  /**
+   * Where to render the inline nomination form.
+   * - "bottom" (default): below the structured metadata panel (existing behavior).
+   * - "top": immediately below the legacy hero, before the structured panel.
+   *   Used to bring the form above the fold on high-conversion pages (e.g. Icon).
+   */
+  formPosition?: "top" | "bottom";
 }
 
-export function AwardCategoryPage({ config, legacyHero }: Props) {
+export function AwardCategoryPage({ config, legacyHero, formPosition = "bottom" }: Props) {
   const group = GROUP_META[config.group];
   const canonical = `${SITE}${config.url}`;
   const nominateHref = config.ctaNominateHref ?? `/nominate?category=${encodeURIComponent(config.slug)}`;
