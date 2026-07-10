@@ -183,7 +183,7 @@ export default function NomineeProfile() {
       // granted to the anon role, but the table exposes published rows via RLS.
       const { data, error } = await (supabase as any)
         .from("nominees")
-        .select("id, name, slug, title, organization, bio, photo_url, logo_url, country, region, renomination_count, publication_status, profile_status, is_platinum")
+        .select("id, name, slug, title, organization, bio, photo_url, logo_url, country, region, renomination_count, publication_status, profile_status, is_platinum, recognition_pathway")
         .eq("publication_status", "published")
         .or(`slug.eq.${slug},slug.eq.${nameSlug}`)
         .maybeSingle();
@@ -192,11 +192,13 @@ export default function NomineeProfile() {
         setDbNominee(null);
         setDbNomineeId(null);
         setRenominationCount(0);
+        setRecognitionPathway(null);
         setPublishCheck("blocked");
         return;
       }
       setDbNomineeId(data.id);
       setRenominationCount(data.renomination_count ?? 0);
+      setRecognitionPathway((data.recognition_pathway as any) ?? null);
       // No hard-coded record → build the display object from the DB row.
       if (!hardcodedNominee) {
         setDbNominee(buildEnrichedFromDb(data));
