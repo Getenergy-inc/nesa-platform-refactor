@@ -152,6 +152,7 @@ export default function NomineeProfile() {
   // Fallback profile synthesized from the published DB row when there is no
   // hard-coded nesaData record (e.g. pipeline-created nominees).
   const [dbNominee, setDbNominee] = useState<EnrichedNominee | null>(null);
+  const [recognitionPathway, setRecognitionPathway] = useState<"social_media" | "sports" | "music" | null>(null);
   const nominee = hardcodedNominee ?? dbNominee ?? undefined;
 
   useEffect(() => {
@@ -182,7 +183,7 @@ export default function NomineeProfile() {
       // granted to the anon role, but the table exposes published rows via RLS.
       const { data, error } = await (supabase as any)
         .from("nominees")
-        .select("id, name, slug, title, organization, bio, photo_url, logo_url, country, region, renomination_count, publication_status, profile_status, is_platinum")
+        .select("id, name, slug, title, organization, bio, photo_url, logo_url, country, region, renomination_count, publication_status, profile_status, is_platinum, recognition_pathway")
         .eq("publication_status", "published")
         .or(`slug.eq.${slug},slug.eq.${nameSlug}`)
         .maybeSingle();
@@ -191,11 +192,13 @@ export default function NomineeProfile() {
         setDbNominee(null);
         setDbNomineeId(null);
         setRenominationCount(0);
+        setRecognitionPathway(null);
         setPublishCheck("blocked");
         return;
       }
       setDbNomineeId(data.id);
       setRenominationCount(data.renomination_count ?? 0);
+      setRecognitionPathway((data.recognition_pathway as any) ?? null);
       // No hard-coded record → build the display object from the DB row.
       if (!hardcodedNominee) {
         setDbNominee(buildEnrichedFromDb(data));
@@ -297,6 +300,21 @@ export default function NomineeProfile() {
       </Helmet>
 
       <div className="min-h-screen bg-charcoal text-ivory">
+        {recognitionPathway ? (
+          <div className="border-b border-gold/20 bg-gold/5">
+            <div className="container mx-auto px-4 py-3 flex flex-col sm:flex-row items-start sm:items-center gap-2 text-xs md:text-sm">
+              <Badge className="bg-gold text-charcoal">
+                {recognitionPathway === "social_media" && "Social Media Education Champion"}
+                {recognitionPathway === "sports" && "Sports Icon Supporting Education"}
+                {recognitionPathway === "music" && "Music Icon Supporting Education"}
+              </Badge>
+              <p className="text-ivory/80">
+                <strong>There is no public voting for the Influencer Education Impact Award.</strong>{" "}
+                Recognition is based on verified impact and governance approval.
+              </p>
+            </div>
+          </div>
+        ) : null}
         {/* ========== HERO ========== */}
         <section className="relative border-b border-gold/10 overflow-hidden">
           <div className="absolute inset-0 bg-gradient-to-b from-gold/5 via-transparent to-transparent" />

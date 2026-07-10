@@ -58,6 +58,13 @@ export default function InfluencerNomineesDirectoryPage() {
         </div>
       </section>
 
+      <div className="border-b border-gold/15 bg-gold/5 py-3">
+        <div className="container mx-auto max-w-5xl px-4 text-center text-xs text-charcoal/80 md:text-sm">
+          <strong>There is no public voting for the Influencer Education Impact Award.</strong>{" "}
+          Recognition is based on verified impact and governance approval.
+        </div>
+      </div>
+
       <InfluencerHallOfFameSection />
 
       <NESAFooter />

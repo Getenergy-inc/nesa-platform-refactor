@@ -334,6 +334,13 @@ Deno.serve(async (req) => {
       .eq("id", nomineeId);
   } else {
     isNewNominee = true;
+    // Derive Influencer Education Impact recognition pathway from the subcategory slug.
+    const subSlug = (nomination.award_subcategory_slug || nomination.award_category_slug || "").toLowerCase();
+    let recognitionPathway: "social_media" | "sports" | "music" | null = null;
+    if (subSlug.startsWith("africa-social-media")) recognitionPathway = "social_media";
+    else if (subSlug.startsWith("africa-sports")) recognitionPathway = "sports";
+    else if (subSlug.startsWith("africa-music")) recognitionPathway = "music";
+
     const { data: newNominee, error: createError } = await supabase
       .from("nominees")
       .insert({
@@ -354,6 +361,7 @@ Deno.serve(async (req) => {
         acceptance_status: "PENDING",
         nominator_user_id: userId,
         status: "pending",
+        recognition_pathway: recognitionPathway,
       })
       .select("id")
       .single();
