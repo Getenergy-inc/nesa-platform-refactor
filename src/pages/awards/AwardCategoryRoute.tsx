@@ -43,6 +43,7 @@ export default function AwardCategoryRoute({ config: explicit }: Props) {
   return (
     <AwardCategoryPage
       config={config}
+      formPosition={config.slug === "africa-education-icon" ? "top" : "bottom"}
       legacyHero={
         Legacy ? (
           <Suspense fallback={null}>
