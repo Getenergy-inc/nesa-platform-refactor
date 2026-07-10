@@ -152,6 +152,7 @@ export default function NomineeProfile() {
   // Fallback profile synthesized from the published DB row when there is no
   // hard-coded nesaData record (e.g. pipeline-created nominees).
   const [dbNominee, setDbNominee] = useState<EnrichedNominee | null>(null);
+  const [pathway, setPathway] = useState<"social_media" | "sports" | "music" | null>(null);
   const nominee = hardcodedNominee ?? dbNominee ?? undefined;
 
   useEffect(() => {
