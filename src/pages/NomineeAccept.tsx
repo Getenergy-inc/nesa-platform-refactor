@@ -58,7 +58,7 @@ export default function NomineeAccept() {
       const { data, error: fetchErr } = await supabase
         .from("nominees")
         .select(
-          "id, name, slug, email, acceptance_status, acceptance_token_expires_at, renomination_count, country, region, organization, title, referral_code",
+          "id, name, slug, email, acceptance_status, acceptance_token_expires_at, renomination_count, country, region, organization, title, referral_code, recognition_pathway",
         )
         .eq("acceptance_token", token)
         .maybeSingle();
@@ -74,7 +74,7 @@ export default function NomineeAccept() {
         setLoading(false);
         return;
       }
-      setNominee(data as NomineePreview);
+      setNominee(data as unknown as NomineePreview);
       setEmailInput(data.email ?? "");
       if (data.acceptance_status === "ACCEPTED" && data.referral_code) {
         setAccepted(true);
