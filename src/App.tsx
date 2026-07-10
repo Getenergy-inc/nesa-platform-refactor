@@ -97,6 +97,7 @@ import GoldAward from "./pages/awards/GoldAward";
 import BlueGarnetAward from "./pages/awards/BlueGarnetAward";
 import GoldSpecialRecognition from "./pages/awards/GoldSpecialRecognition";
 import InfluencerImpact2026 from "./pages/awards/InfluencerImpact2026";
+import InfluencerNomineesDirectoryPage from "./pages/awards/InfluencerNomineesDirectoryPage";
 import DigitalVoices from "./pages/awards/DigitalVoices";
 import Winners from "./pages/awards/Winners";
 import GovernancePage from "./pages/GovernancePage";
@@ -758,6 +759,7 @@ const App = () => (
                   <Route path="/awards/platinum-recognition/diaspora" element={<WithLayout><PlatinumDiasporaPage /></WithLayout>} />
                   <Route path="/awards/platinum/diaspora" element={<Navigate to="/awards/platinum-recognition/diaspora" replace />} />
                   <Route path="/awards/influencer-education-impact" element={<InfluencerImpact2026 />} />
+                  <Route path="/awards/influencer-education-impact/nominees" element={<InfluencerNomineesDirectoryPage />} />
 
                   {/* Legacy shell — keep importable from other entry points */}
                   <Route
