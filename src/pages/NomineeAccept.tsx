@@ -216,15 +216,32 @@ export default function NomineeAccept() {
             ) : null}
           </div>
 
-          <div className="rounded-lg border bg-muted/30 p-4 space-y-2 text-sm">
-            <p className="font-medium">By accepting, you will:</p>
-            <ul className="list-disc list-inside space-y-1 text-muted-foreground">
-              <li>Activate your public nominee profile at <code>/nominee/{nominee.slug}</code></li>
-              <li>Unlock your private nominee dashboard</li>
-              <li>Receive a unique shareable link to gather endorsements</li>
-              <li>Progress toward your Platinum certificate (200 endorsements)</li>
-            </ul>
-          </div>
+          {nominee.recognition_pathway ? (
+            <div className="rounded-lg border border-gold/40 bg-gold/5 p-4 space-y-2 text-sm">
+              <p className="font-medium text-gold-dark">
+                {PATHWAY_LABEL[nominee.recognition_pathway] ?? "Influencer Education Impact Award"}
+              </p>
+              <p className="text-muted-foreground">
+                By accepting you will activate your public profile at <code>/nominee/{nominee.slug}</code>,
+                unlock your private dashboard, and be listed in the Influencer Education Impact directory
+                after governance approval.
+              </p>
+              <p className="text-xs text-muted-foreground">
+                Note: <strong>There is no public voting for the Influencer Education Impact Award.</strong>{" "}
+                Recognition is based on verified impact and governance approval.
+              </p>
+            </div>
+          ) : (
+            <div className="rounded-lg border bg-muted/30 p-4 space-y-2 text-sm">
+              <p className="font-medium">By accepting, you will:</p>
+              <ul className="list-disc list-inside space-y-1 text-muted-foreground">
+                <li>Activate your public nominee profile at <code>/nominee/{nominee.slug}</code></li>
+                <li>Unlock your private nominee dashboard</li>
+                <li>Receive a unique shareable link to gather endorsements</li>
+                <li>Progress toward your Platinum certificate (200 endorsements)</li>
+              </ul>
+            </div>
+          )}
 
           {needsSignIn ? (
             <div className="space-y-3 rounded-lg border border-primary/30 bg-primary/5 p-4">
