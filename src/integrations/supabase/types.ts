@@ -3349,6 +3349,7 @@ export type Database = {
           published_at: string | null
           published_by: string | null
           recognition_class: string | null
+          recognition_pathway: string | null
           referral_code: string | null
           region: string | null
           region_slug: string | null
@@ -3428,6 +3429,7 @@ export type Database = {
           published_at?: string | null
           published_by?: string | null
           recognition_class?: string | null
+          recognition_pathway?: string | null
           referral_code?: string | null
           region?: string | null
           region_slug?: string | null
@@ -3507,6 +3509,7 @@ export type Database = {
           published_at?: string | null
           published_by?: string | null
           recognition_class?: string | null
+          recognition_pathway?: string | null
           referral_code?: string | null
           region?: string | null
           region_slug?: string | null
