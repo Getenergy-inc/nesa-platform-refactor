@@ -126,8 +126,8 @@ export function InfluencerNominationForm() {
     setState((p) => ({ ...p, [k]: v }));
 
   const isDiaspora = state.recognition_region === "African Diaspora";
-  const mediumLabel = useMemo(
-    () => MEDIUM_OPTIONS.find((m) => m.value === state.medium)?.label ?? null,
+  const mediumConfig = useMemo(
+    () => MEDIUM_OPTIONS.find((m) => m.value === state.medium) ?? null,
     [state.medium],
   );
 
@@ -155,15 +155,15 @@ export function InfluencerNominationForm() {
     if (submitting) return;
     const err = validate();
     if (err) return toast.error(err);
+    if (!mediumConfig) return toast.error("Please select the Primary Medium of Influence.");
 
     setSubmitting(true);
     try {
-      const localId = `INF-${Date.now().toString(36).toUpperCase()}`;
       const nomineeCountry = isDiaspora
         ? state.country_of_residence
         : state.african_country;
 
-      const { error } = await supabase.functions.invoke("nominations-submit", {
+      const { data, error } = await supabase.functions.invoke("nominations-submit", {
         body: {
           nominator: {
             full_name: state.nm_full_name,
@@ -173,10 +173,10 @@ export function InfluencerNominationForm() {
             consent: state.nm_consent,
           },
           nomination: {
-            award_family: "influencer",
-            award_category_slug: `influencer-${state.medium}`,
-            award_subcategory_slug: state.medium,
-            recognition_class: mediumLabel,
+            award_family: "influencer-education-impact-2026",
+            award_category_slug: mediumConfig.categorySlug,
+            award_subcategory_slug: mediumConfig.subcategorySlug,
+            recognition_class: mediumConfig.label,
             region_slug: state.recognition_region,
             nominee_name: state.nominee_name,
             nominee_type: "individual",
@@ -184,33 +184,29 @@ export function InfluencerNominationForm() {
             organization: state.organisation,
             website: state.social_profile,
             social_links: state.social_profile ? [state.social_profile] : [],
+            evidence_links: state.evidence_link ? [state.evidence_link] : [],
             impact_summary: state.why_deserve,
             reason: state.why_deserve,
-            source: "influencer-native-form",
-            source_form_slug: "influencer-education-impact-2026",
-            metadata: {
-              local_id: localId,
-              medium_of_influence: mediumLabel,
-              recognition_region: state.recognition_region,
-              country: nomineeCountry,
-              country_of_residence: state.country_of_residence || null,
-              diaspora_region: state.diaspora_region || null,
-              evidence_link: state.evidence_link || null,
-              nomination_status: "PENDING_NRC_REVIEW",
-              nrc_review_status: "queued",
-            },
           },
         },
       });
       if (error) throw error;
 
-      setNominationId(localId);
+      const payload = data as { ok?: boolean; nomination_id?: string; error?: string } | null;
+      if (!payload?.ok || !payload.nomination_id) {
+        throw new Error(payload?.error || "Submission was not accepted.");
+      }
+
+      // Format server UUID into a readable, prefixed Nomination ID.
+      const shortId = payload.nomination_id.replace(/-/g, "").slice(0, 8).toUpperCase();
+      setNominationId(`INF-2026-${shortId}`);
       toast.success("Nomination submitted — thank you!");
       setSubmitted(true);
       window.scrollTo({ top: 0, behavior: "smooth" });
     } catch (err) {
       console.error("Influencer nomination submit failed", err);
-      toast.error("Could not submit nomination. Please try again.");
+      const message = err instanceof Error ? err.message : "Could not submit nomination. Please try again.";
+      toast.error(message);
     } finally {
       setSubmitting(false);
     }
