@@ -759,6 +759,7 @@ const App = () => (
                   <Route path="/awards/platinum-recognition/diaspora" element={<WithLayout><PlatinumDiasporaPage /></WithLayout>} />
                   <Route path="/awards/platinum/diaspora" element={<Navigate to="/awards/platinum-recognition/diaspora" replace />} />
                   <Route path="/awards/influencer-education-impact" element={<InfluencerImpact2026 />} />
+                  <Route path="/awards/influencer-education-impact/nominees" element={<InfluencerNomineesDirectoryPage />} />
 
                   {/* Legacy shell — keep importable from other entry points */}
                   <Route
