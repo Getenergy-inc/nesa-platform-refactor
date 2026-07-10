@@ -366,8 +366,8 @@ export function AwardCategoryPage({ config, legacyHero, formPosition = "bottom" 
         </div>
       </section>
 
-      {/* Inline nomination form for this category */}
-      <CategoryNominationForm config={config} />
+      {/* Inline nomination form for this category (skipped when already rendered at top) */}
+      {formPosition === "bottom" && <CategoryNominationForm config={config} />}
 
       {/* FAQs */}
       <CategoryFaqSection faqs={config.faqs} />
