@@ -23,9 +23,24 @@ import { supabase } from "@/integrations/supabase/client";
 // ---------------------------------------------------------------------------
 
 const MEDIUM_OPTIONS = [
-  { value: "social-media", label: "Social Media Education Champion" },
-  { value: "sports-icons", label: "Sports Icon Supporting Education" },
-  { value: "music-icons", label: "Music Icon Supporting Education" },
+  {
+    value: "social-media",
+    label: "Social Media Education Champion",
+    categorySlug: "africa-social-media-influencer-education",
+    subcategorySlug: "africa-social-media-educational-content",
+  },
+  {
+    value: "sports-icons",
+    label: "Sports Icon Supporting Education",
+    categorySlug: "africa-sports-influencer-education",
+    subcategorySlug: "africa-sportsman-education-advocate",
+  },
+  {
+    value: "music-icons",
+    label: "Music Icon Supporting Education",
+    categorySlug: "africa-music-influencer-education",
+    subcategorySlug: "africa-music-artist-education-advocate",
+  },
 ] as const;
 
 const AFRICAN_REGIONS = [
