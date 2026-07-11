@@ -30,6 +30,7 @@ import {
 } from "@/components/ui/accordion";
 import { BreadcrumbJsonLd } from "@/components/seo/BreadcrumbJsonLd";
 import { CategorySubcategoriesPanel } from "@/components/awards/CategorySubcategoriesPanel";
+import { ResearchDevelopmentStandardsSection } from "@/components/awards/ResearchDevelopmentStandardsSection";
 
 const CANONICAL =
   "https://nesa.africa/categories/best-research-development-nigeria";
