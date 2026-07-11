@@ -4,6 +4,7 @@ import { BrandedCategoryHero } from "@/components/awards/BrandedCategoryHero";
 import { BrandedDocumentaryPreview } from "@/components/awards/BrandedDocumentaryPreview";
 import { AnimatedActionWords } from "@/components/awards/AnimatedActionWords";
 import { BrandedNomineeDirectory } from "@/components/awards/BrandedNomineeDirectory";
+import { LibraryNigeriaStandardsSection } from "@/components/awards/LibraryNigeriaStandardsSection";
 import { BreadcrumbJsonLd } from "@/components/seo/BreadcrumbJsonLd";
 
 export default function LibraryNigeriaPage() {
