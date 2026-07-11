@@ -9,13 +9,17 @@ import {
   NIGERIA_POLITICAL_ROLES,
 } from "./nigeriaZones";
 
+// Batch 1 — Best Library Standards (8 sub-categories × 10 nominees = 80 institutions)
+// Source of truth: SCEF × NESA-Africa × Nigerian Library Association (NLA) 2026 framework.
 const LIBRARY_SUBS = placeholderSubs([
-  "Print collection",
-  "Digital library services",
-  "Research support services",
-  "Accessibility services",
-  "Community outreach",
-  "Other",
+  "Best University Library in Nigeria (Public)",
+  "Best University Library in Nigeria (Private)",
+  "Best Polytechnic Library in Nigeria (Public)",
+  "Best Polytechnic Library in Nigeria (Private)",
+  "Best College of Education Library in Nigeria (Public)",
+  "Best College of Education Library in Nigeria (Private)",
+  "Best College of Nursing Library in Nigeria (Public)",
+  "Best College of Nursing Library in Nigeria (Private)",
 ]);
 
 const RD_SUBS = placeholderSubs([
