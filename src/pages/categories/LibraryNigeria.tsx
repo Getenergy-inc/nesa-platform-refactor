@@ -38,6 +38,7 @@ export default function LibraryNigeriaPage() {
         lead="Libraries Are"
         words={["Knowledge", "Research", "Archives", "Discovery", "Heritage", "Scholarship", "Memory", "Wisdom", "Curiosity", "Excellence"]}
       />
+      <LibraryNigeriaStandardsSection />
       <BrandedDocumentaryPreview
         theme="legacy"
         title="Library Stories"
