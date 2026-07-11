@@ -913,6 +913,9 @@ export default function ResearchDevelopmentNigeriaPage() {
         </div>
       </section>
 
+      {/* ════════════ 4b — R&D STANDARDS FRAMEWORK ════════════ */}
+      <ResearchDevelopmentStandardsSection />
+
       {/* ════════════ 5 — NOMINATE CTA ════════════ */}
       <section className="px-4 py-12">
         <Card className="max-w-5xl mx-auto bg-gradient-to-br from-gold/10 via-charcoal-light to-charcoal border-gold/30">
