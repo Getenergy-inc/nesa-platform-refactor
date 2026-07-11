@@ -22,13 +22,12 @@ const LIBRARY_SUBS = placeholderSubs([
   "Best College of Nursing Library in Nigeria (Private)",
 ]);
 
+// Batch 2 — Excellence in Research & Development (3 sub-categories × 10 institutes = 30 bodies)
+// Source of truth: SCEF × NESA-Africa × AU-STRC 2025 framework.
 const RD_SUBS = placeholderSubs([
-  "Applied research",
-  "Industry partnership",
-  "Patents & innovation",
-  "Postgraduate research",
-  "Knowledge translation",
-  "Other",
+  "Best Agricultural Research Institute",
+  "Best Pharmaceutical & Drug Research Institute",
+  "Best Environmental & Ecological Research Institute",
 ]);
 
 const FAITH_SUBS = placeholderSubs([
