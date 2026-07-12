@@ -175,6 +175,13 @@ import JudgesDirectory from "./pages/judges/JudgesDirectory";
 import JudgeProfile from "./pages/judges/JudgeProfile";
 import Install from "./pages/Install";
 
+// 30-page consolidators (2026 refactor)
+import AboutConsolidated from "./pages/about/AboutConsolidated";
+import EduAidAfricaImpact from "./pages/eduaid/EduAidAfricaImpact";
+import MediaHubConsolidated from "./pages/media/MediaHubConsolidated";
+import GalaConsolidated from "./pages/gala/GalaConsolidated";
+import SupportConsolidated from "./pages/support/SupportConsolidated";
+
 // Judge Portal Pages
 import {
   JudgeApply,
