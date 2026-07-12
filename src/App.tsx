@@ -147,6 +147,7 @@ import PillarPage from "./pages/awards/PillarPage";
 import AwardSpinePage from "./pages/awards/AwardSpinePage";
 import EighteenCategoriesPage from "./pages/awards/EighteenCategoriesPage";
 import CategoryDetailPage from "./pages/awards/CategoryDetailPage";
+import TierCategorySubcategoryPage from "./pages/awards/TierCategorySubcategoryPage";
 import RecognitionHubPage from "./pages/recognition/RecognitionHubPage";
 import RedirectRoute from "./components/routing/RedirectRoute";
 import LegacyCategoryRedirect from "./components/routing/LegacyCategoryRedirect";
@@ -652,6 +653,24 @@ const App = () => (
                       </WithLayout>
                     }
                   />
+                  <Route
+                    path="/awards/gold-blue-garnet/:categorySlug/:subcategorySlug"
+                    element={
+                      <WithLayout>
+                        <TierCategorySubcategoryPage />
+                      </WithLayout>
+                    }
+                  />
+                  <Route
+                    path="/awards/18-categories/:categorySlug/:subcategorySlug"
+                    element={
+                      <WithLayout>
+                        <TierCategorySubcategoryPage />
+                      </WithLayout>
+                    }
+                  />
+
+
 
                   <Route
                     path="/awards/blue-garnet-categories"
