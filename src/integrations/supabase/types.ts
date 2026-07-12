@@ -2901,7 +2901,12 @@ export type Database = {
           nrc_reviewer_id: string | null
           publication_status: string
           query_count: number | null
+          recognition_category_id: string | null
           recognition_class: string | null
+          recognition_classification_id: string | null
+          recognition_cycle_id: string | null
+          recognition_subcategory_id: string | null
+          recognition_tier_id: string | null
           region_slug: string | null
           review_notes: string | null
           reviewed_at: string | null
@@ -2944,7 +2949,12 @@ export type Database = {
           nrc_reviewer_id?: string | null
           publication_status?: string
           query_count?: number | null
+          recognition_category_id?: string | null
           recognition_class?: string | null
+          recognition_classification_id?: string | null
+          recognition_cycle_id?: string | null
+          recognition_subcategory_id?: string | null
+          recognition_tier_id?: string | null
           region_slug?: string | null
           review_notes?: string | null
           reviewed_at?: string | null
@@ -2987,7 +2997,12 @@ export type Database = {
           nrc_reviewer_id?: string | null
           publication_status?: string
           query_count?: number | null
+          recognition_category_id?: string | null
           recognition_class?: string | null
+          recognition_classification_id?: string | null
+          recognition_cycle_id?: string | null
+          recognition_subcategory_id?: string | null
+          recognition_tier_id?: string | null
           region_slug?: string | null
           review_notes?: string | null
           reviewed_at?: string | null
@@ -3028,6 +3043,41 @@ export type Database = {
             columns: ["nominator_id"]
             isOneToOne: false
             referencedRelation: "nominators"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "nominations_recognition_category_id_fkey"
+            columns: ["recognition_category_id"]
+            isOneToOne: false
+            referencedRelation: "recognition_categories"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "nominations_recognition_classification_id_fkey"
+            columns: ["recognition_classification_id"]
+            isOneToOne: false
+            referencedRelation: "recognition_classifications"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "nominations_recognition_cycle_id_fkey"
+            columns: ["recognition_cycle_id"]
+            isOneToOne: false
+            referencedRelation: "recognition_cycles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "nominations_recognition_subcategory_id_fkey"
+            columns: ["recognition_subcategory_id"]
+            isOneToOne: false
+            referencedRelation: "recognition_subcategories"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "nominations_recognition_tier_id_fkey"
+            columns: ["recognition_tier_id"]
+            isOneToOne: false
+            referencedRelation: "recognition_tiers"
             referencedColumns: ["id"]
           },
           {
@@ -5559,6 +5609,227 @@ export type Database = {
             columns: ["season_id"]
             isOneToOne: false
             referencedRelation: "seasons"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      recognition_categories: {
+        Row: {
+          created_at: string
+          description: string | null
+          icon: string | null
+          id: string
+          metadata: Json
+          name: string
+          slug: string
+          sort_order: number
+          tagline: string | null
+          tier_id: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          description?: string | null
+          icon?: string | null
+          id?: string
+          metadata?: Json
+          name: string
+          slug: string
+          sort_order?: number
+          tagline?: string | null
+          tier_id: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          description?: string | null
+          icon?: string | null
+          id?: string
+          metadata?: Json
+          name?: string
+          slug?: string
+          sort_order?: number
+          tagline?: string | null
+          tier_id?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "recognition_categories_tier_id_fkey"
+            columns: ["tier_id"]
+            isOneToOne: false
+            referencedRelation: "recognition_tiers"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      recognition_classifications: {
+        Row: {
+          category_id: string | null
+          created_at: string
+          description: string | null
+          id: string
+          metadata: Json
+          name: string
+          slug: string
+          sort_order: number
+        }
+        Insert: {
+          category_id?: string | null
+          created_at?: string
+          description?: string | null
+          id?: string
+          metadata?: Json
+          name: string
+          slug: string
+          sort_order?: number
+        }
+        Update: {
+          category_id?: string | null
+          created_at?: string
+          description?: string | null
+          id?: string
+          metadata?: Json
+          name?: string
+          slug?: string
+          sort_order?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "recognition_classifications_category_id_fkey"
+            columns: ["category_id"]
+            isOneToOne: false
+            referencedRelation: "recognition_categories"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      recognition_cycles: {
+        Row: {
+          created_at: string
+          ends_on: string | null
+          gala_date: string | null
+          id: string
+          metadata: Json
+          name: string
+          slug: string
+          starts_on: string | null
+          status: string
+          updated_at: string
+          year: number
+        }
+        Insert: {
+          created_at?: string
+          ends_on?: string | null
+          gala_date?: string | null
+          id?: string
+          metadata?: Json
+          name: string
+          slug: string
+          starts_on?: string | null
+          status?: string
+          updated_at?: string
+          year: number
+        }
+        Update: {
+          created_at?: string
+          ends_on?: string | null
+          gala_date?: string | null
+          id?: string
+          metadata?: Json
+          name?: string
+          slug?: string
+          starts_on?: string | null
+          status?: string
+          updated_at?: string
+          year?: number
+        }
+        Relationships: []
+      }
+      recognition_subcategories: {
+        Row: {
+          category_id: string
+          created_at: string
+          description: string | null
+          id: string
+          metadata: Json
+          name: string
+          slug: string
+          sort_order: number
+          updated_at: string
+        }
+        Insert: {
+          category_id: string
+          created_at?: string
+          description?: string | null
+          id?: string
+          metadata?: Json
+          name: string
+          slug: string
+          sort_order?: number
+          updated_at?: string
+        }
+        Update: {
+          category_id?: string
+          created_at?: string
+          description?: string | null
+          id?: string
+          metadata?: Json
+          name?: string
+          slug?: string
+          sort_order?: number
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "recognition_subcategories_category_id_fkey"
+            columns: ["category_id"]
+            isOneToOne: false
+            referencedRelation: "recognition_categories"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      recognition_tiers: {
+        Row: {
+          created_at: string
+          cycle_id: string
+          description: string | null
+          id: string
+          metadata: Json
+          name: string
+          rank: number
+          slug: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          cycle_id: string
+          description?: string | null
+          id?: string
+          metadata?: Json
+          name: string
+          rank?: number
+          slug: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          cycle_id?: string
+          description?: string | null
+          id?: string
+          metadata?: Json
+          name?: string
+          rank?: number
+          slug?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "recognition_tiers_cycle_id_fkey"
+            columns: ["cycle_id"]
+            isOneToOne: false
+            referencedRelation: "recognition_cycles"
             referencedColumns: ["id"]
           },
         ]
