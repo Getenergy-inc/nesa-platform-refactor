@@ -236,6 +236,7 @@ import Vote from "./pages/Vote";
 import VoteWithAGC from "./pages/VoteWithAGC";
 import { GoldVoting, BlueGarnetVoting } from "./pages/vote/index";
 import GoldBlueGarnetVoteHub from "./pages/vote/GoldBlueGarnetVoteHub";
+import { PUBLIC_AWARD_VOTING, VOTING_SUNSET_REDIRECT } from "./config/featureFlags";
 import AboutAGC from "./pages/AboutAGC";
 import EarnVotingCredits from "./pages/EarnVotingCredits";
 import ClaimVotingCredits from "./pages/ClaimVotingCredits";
@@ -753,8 +754,8 @@ const App = () => (
                   {/* Simplified Awards dropdown canonical URLs — keep these alive so the gateway never 404s */}
                   <Route path="/awards/recognition-architecture" element={<Navigate to="/awards" replace />} />
                   <Route path="/awards/gold-blue-garnet" element={<WithLayout><BlueGarnetAward /></WithLayout>} />
-                  <Route path="/awards/gold-blue-garnet/vote" element={<WithLayout><GoldBlueGarnetVoteHub /></WithLayout>} />
-                  <Route path="/awards/gold-blue-garnet/vote-now" element={<Navigate to="/awards/gold-blue-garnet/vote" replace />} />
+                  <Route path="/awards/gold-blue-garnet/vote" element={PUBLIC_AWARD_VOTING ? <WithLayout><GoldBlueGarnetVoteHub /></WithLayout> : <Navigate to={VOTING_SUNSET_REDIRECT} replace />} />
+                  <Route path="/awards/gold-blue-garnet/vote-now" element={<Navigate to={PUBLIC_AWARD_VOTING ? "/awards/gold-blue-garnet/vote" : VOTING_SUNSET_REDIRECT} replace />} />
                   <Route path="/awards/platinum-recognition" element={<WithLayout><PlatinumAward /></WithLayout>} />
                   <Route path="/awards/platinum-recognition/diaspora" element={<WithLayout><PlatinumDiasporaPage /></WithLayout>} />
                   <Route path="/awards/platinum/diaspora" element={<Navigate to="/awards/platinum-recognition/diaspora" replace />} />
@@ -1572,35 +1573,51 @@ const App = () => (
                   <Route
                     path="/vote"
                     element={
-                      <WithLayout>
-                        <WithFirewall>
-                          <Vote />
-                        </WithFirewall>
-                      </WithLayout>
+                      PUBLIC_AWARD_VOTING ? (
+                        <WithLayout>
+                          <WithFirewall>
+                            <Vote />
+                          </WithFirewall>
+                        </WithLayout>
+                      ) : (
+                        <Navigate to={VOTING_SUNSET_REDIRECT} replace />
+                      )
                     }
                   />
                   <Route
                     path="/vote-with-agc"
                     element={
-                      <WithLayout>
-                        <VoteWithAGC />
-                      </WithLayout>
+                      PUBLIC_AWARD_VOTING ? (
+                        <WithLayout>
+                          <VoteWithAGC />
+                        </WithLayout>
+                      ) : (
+                        <Navigate to={VOTING_SUNSET_REDIRECT} replace />
+                      )
                     }
                   />
                   <Route
                     path="/vote/gold"
                     element={
-                      <WithLayout>
-                        <GoldVoting />
-                      </WithLayout>
+                      PUBLIC_AWARD_VOTING ? (
+                        <WithLayout>
+                          <GoldVoting />
+                        </WithLayout>
+                      ) : (
+                        <Navigate to={VOTING_SUNSET_REDIRECT} replace />
+                      )
                     }
                   />
                   <Route
                     path="/vote/blue-garnet"
                     element={
-                      <WithLayout>
-                        <BlueGarnetVoting />
-                      </WithLayout>
+                      PUBLIC_AWARD_VOTING ? (
+                        <WithLayout>
+                          <BlueGarnetVoting />
+                        </WithLayout>
+                      ) : (
+                        <Navigate to={VOTING_SUNSET_REDIRECT} replace />
+                      )
                     }
                   />
                   <Route
