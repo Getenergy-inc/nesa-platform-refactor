@@ -931,6 +931,30 @@ const App = () => (
 
                   {/* Canonical Awards Spine — Pathway → Category → Subcategory */}
                   <Route path="/recognition" element={<WithLayout><RecognitionHubPage /></WithLayout>} />
+
+                  {/* === 38-page canonical spec (2026 refactor) ===
+                      Renders existing tier & category components at the
+                      authoritative /recognition/{tier}[/{category}] URLs.
+                      Legacy /awards/* paths remain as aliases/redirects. */}
+                  <Route path="/recognition/gold-blue-garnet" element={<WithLayout><BlueGarnetAward /></WithLayout>} />
+                  <Route path="/recognition/platinum" element={<WithLayout><PlatinumAward /></WithLayout>} />
+                  <Route path="/recognition/africa-education-icon" element={<WithLayout><IconAward /></WithLayout>} />
+                  <Route path="/recognition/influencer-education-impact" element={<InfluencerImpact2026 />} />
+                  {/* 9 Gold-Blue Garnet categories (dynamic slug — spec URLs resolve here) */}
+                  <Route path="/recognition/gold-blue-garnet/:categorySlug" element={<WithLayout><CategoryDetailPage /></WithLayout>} />
+                  <Route path="/recognition/gold-blue-garnet/:categorySlug/:subcategorySlug" element={<WithLayout><TierCategorySubcategoryPage /></WithLayout>} />
+                  {/* 7 Platinum categories */}
+                  <Route path="/recognition/platinum/:slug" element={<WithLayout><AwardCategoryRoute /></WithLayout>} />
+                  {/* Icon single category */}
+                  <Route path="/recognition/africa-education-icon/africa-education-icon-award" element={<WithLayout><IconAwardMain /></WithLayout>} />
+                  {/* Influencer single category */}
+                  <Route path="/recognition/influencer-education-impact/influencer-education-impact-award" element={<InfluencerImpact2026 />} />
+
+                  {/* Core spec URLs — render existing content at canonical paths */}
+                  <Route path="/gala" element={<WithLayout><Tickets /></WithLayout>} />
+                  <Route path="/support" element={<WithLayout><Partners /></WithLayout>} />
+                  <Route path="/special-needs" element={<WithLayout><EduAid /></WithLayout>} />
+                  <Route path="/rebuild-my-school" element={<WithLayout><Rebuild /></WithLayout>} />
                   {/* Stage 6 — Legacy recognition redirects (data-driven). */}
                   {LEGACY_RECOGNITION_REDIRECTS.map((r) => (
                     <Route key={r.from} path={r.from} element={<RedirectRoute to={r.to} />} />
