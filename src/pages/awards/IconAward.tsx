@@ -8,6 +8,7 @@ import { BrandedCategoryHero } from "@/components/awards/BrandedCategoryHero";
 import { BrandedDocumentaryPreview } from "@/components/awards/BrandedDocumentaryPreview";
 import { BreadcrumbJsonLd } from "@/components/seo/BreadcrumbJsonLd";
 import { AwardStandardStack } from "@/components/awards/AwardStandardSections";
+import { SubcategoryPathways } from "@/components/awards/standard/sections";
 
 import { getTVShowByAward } from "@/config/awardTVShows";
 import { getCategoriesGrouped } from "@/config/nesaCategories";
