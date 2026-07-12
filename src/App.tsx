@@ -147,6 +147,7 @@ import PillarPage from "./pages/awards/PillarPage";
 import AwardSpinePage from "./pages/awards/AwardSpinePage";
 import EighteenCategoriesPage from "./pages/awards/EighteenCategoriesPage";
 import CategoryDetailPage from "./pages/awards/CategoryDetailPage";
+import RecognitionHubPage from "./pages/recognition/RecognitionHubPage";
 
 import { ICON_CATEGORY, buildRedirectMap as buildCategoryRedirects } from "./config/awardCategories";
 
