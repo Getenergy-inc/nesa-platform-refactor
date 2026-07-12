@@ -31,7 +31,7 @@ export const PAGE_SEQUENCE: PageEntry[] = [
   { path: "/awards/icon", label: "Icon Award", section: "Awards" },
   { path: "/awards/winners", label: "Winners", section: "Awards" },
   { path: "/results", label: "Results", section: "Awards" },
-  { path: "/pathways", label: "Recognition Pathways", section: "Awards" },
+  { path: "/recognition", label: "Recognition Hub", section: "Awards" },
 
   // Nominees & Voting
   { path: "/nominees", label: "Nominees Directory", section: "Nominees & Voting" },
