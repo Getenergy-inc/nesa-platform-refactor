@@ -493,7 +493,7 @@ const App = () => (
                     path="/about"
                     element={
                       <WithLayout>
-                        <About />
+                        <AboutConsolidated />
                       </WithLayout>
                     }
                   />
