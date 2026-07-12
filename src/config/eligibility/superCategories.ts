@@ -194,7 +194,7 @@ export const BLUE_GARNET_GOLD_CONFIG: SuperCategoryConfig = {
 export const PLATINUM_CONFIG: SuperCategoryConfig = {
   id: "platinum",
   name: "Platinum Certificate",
-  purpose: "Certify service quality and compliance against verified thresholds; includes Community-Endorsed pathway via re-nomination",
+  purpose: "Certify service quality and compliance against verified thresholds; includes Community-Endorsed subcategory via re-nomination",
   competitive: false,
   subcategoryCount: 53,
   routing: "Immediate certification (standard Platinum) or milestone tracking to Community-Endorsed Platinum",

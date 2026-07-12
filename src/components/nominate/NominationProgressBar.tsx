@@ -4,7 +4,7 @@ import type { FlowStep } from "./types";
 
 const STEP_KEYS: { key: FlowStep; i18n: string }[] = [
   { key: "flash", i18n: "flow.steps.flash" },
-  { key: "pathway", i18n: "flow.steps.pathway" },
+  { key: "subcategory", i18n: "flow.steps.subcategory" },
   { key: "entry", i18n: "flow.steps.entry" },
   { key: "review", i18n: "flow.steps.review" },
   { key: "identity", i18n: "flow.steps.identity" },

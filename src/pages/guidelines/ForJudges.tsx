@@ -134,7 +134,7 @@ const JUDGING_CATEGORIES = [
       { name: "Artistic Excellence and Innovation", weight: 15 },
       { name: "Student Participation and Development", weight: 10 },
       { name: "Cultural Preservation", weight: 10 },
-      { name: "Career Pathway Development", weight: 10 },
+      { name: "Career Subcategory Development", weight: 10 },
       { name: "Community Impact", weight: 10 },
       { name: "Infrastructure and Resources", weight: 10 },
       { name: "Teacher Training and Development", weight: 10 },

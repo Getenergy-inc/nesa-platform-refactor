@@ -36,9 +36,9 @@ function buildArc(n: EnrichedNominee): StoryArc {
 
   return {
     headline: `How ${subject} is advancing ${category.toLowerCase()} across ${place}.`,
-    problem: `Across ${place}, millions of learners still face barriers to quality education — limited access, under-resourced schools, gender and disability gaps, and fragile pathways from classroom to opportunity. ${subject} stepped into this reality with a clear conviction that change is possible.`,
+    problem: `Across ${place}, millions of learners still face barriers to quality education — limited access, under-resourced schools, gender and disability gaps, and fragile subcategories from classroom to opportunity. ${subject} stepped into this reality with a clear conviction that change is possible.`,
     intervention: `${pronoun} responded by ${achievementLower}${achievement.endsWith(".") ? "" : "."} ${possessive} approach blends leadership, innovation and community partnership — designed to be locally rooted and continentally relevant.`,
-    results: `The work is measurable: lives reshaped, institutions strengthened, and new pathways opened for learners who were previously left behind. Beyond the numbers, ${subject}'s impact is felt in the everyday classrooms, families and communities ${pronoun.toLowerCase()} serve${org ? "s" : ""}.`,
+    results: `The work is measurable: lives reshaped, institutions strengthened, and new subcategories opened for learners who were previously left behind. Beyond the numbers, ${subject}'s impact is felt in the everyday classrooms, families and communities ${pronoun.toLowerCase()} serve${org ? "s" : ""}.`,
     vision: `Looking ahead, ${subject} is committed to scaling this model — turning today's breakthroughs into Africa's tomorrow. ${pronoun} embod${org ? "ies" : "y"} the NESA-Africa belief that Education for All is not a slogan, but a shared mandate for the continent.`,
   };
 }

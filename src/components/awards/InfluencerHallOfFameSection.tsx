@@ -204,7 +204,7 @@ export function InfluencerHallOfFameSection() {
               aria-label="Recognition Subcategory"
               className="px-3 py-2.5 rounded-lg bg-white/5 border border-white/10 text-white/85 text-sm focus:outline-none focus:border-gold/60"
             >
-              <option value="all" className="bg-charcoal">All Pathways</option>
+              <option value="all" className="bg-charcoal">All Subcategories</option>
               {CATEGORIES.map((c) => (
                 <option key={c.id} value={c.id} className="bg-charcoal">
                   {c.shortName}
@@ -438,7 +438,7 @@ function RegionalBlock({
   pathway: CategoryId | "all";
 }) {
   const viewAllHref = `/nominees?awardFamily=influencer${
-    pathway !== "all" ? `&category=${pathway}` : ""
+    pathway !== "all" ? `&category=${subcategory}` : ""
   }&region=${encodeURIComponent(region)}`;
   const countryCount = new Set(nominees.map((n) => n.nominee_country)).size;
   const totalRegionCountries = COUNTRIES_BY_REGION[region]?.length ?? 0;

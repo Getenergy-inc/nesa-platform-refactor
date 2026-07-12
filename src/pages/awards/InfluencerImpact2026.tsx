@@ -211,7 +211,7 @@ export default function InfluencerImpact2026() {
               step="3"
               icon={Vote}
               title="Public Participation"
-              body="Approved nominees enter the relevant public AGC participation pathway."
+              body="Approved nominees enter the relevant public AGC participation subcategory."
             />
             <StepCard
               step="4"

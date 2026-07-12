@@ -18,7 +18,7 @@ const FOCUS_AREAS = [
   { icon: Eye, label: "Visibility", copy: "Amplifying the work of education changemakers, institutions and communities." },
   { icon: Handshake, label: "Partnerships", copy: "Connecting honourees with funders, governments, sponsors and development ecosystems." },
   { icon: Building2, label: "School Interventions", copy: "Supporting classrooms, accessibility, inclusive learning spaces and Rebuild My School Africa projects." },
-  { icon: GraduationCap, label: "Scholarships", copy: "Creating EduAid-Africa pathways for learners, teachers and institutions." },
+  { icon: GraduationCap, label: "Scholarships", copy: "Creating EduAid-Africa subcategories for learners, teachers and institutions." },
   { icon: Users, label: "Community Engagement", copy: "Mobilising local chapters, volunteers and ambassadors across Africa and the Diaspora." },
   { icon: InfinityIcon, label: "Legacy", copy: "Building post-award programmes that continue beyond the gala." },
 ];

@@ -161,7 +161,7 @@ export default function NominateFlow() {
       } else if (pathway) {
         dispatch({ type: "SET_PATHWAY", pathway });
       } else if (preselect.family) {
-        dispatch({ type: "SET_STEP", step: "pathway" });
+        dispatch({ type: "SET_STEP", step: "subcategory" });
       }
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -195,7 +195,7 @@ export default function NominateFlow() {
   // ---------------- handlers ----------------
   const handleStart = () => {
     trackEvent("nominate_start", { source: "flash" });
-    dispatch({ type: "SET_STEP", step: "pathway" });
+    dispatch({ type: "SET_STEP", step: "subcategory" });
   };
 
   const handlePathway = (p: NominationPathway) => {
@@ -263,7 +263,7 @@ export default function NominateFlow() {
             >
               {state.step === "flash" && <NominationFlashMessage onStart={handleStart} />}
 
-              {state.step === "pathway" && (
+              {state.step === "subcategory" && (
                 <NominationPathwaySelector
                   onSelect={handlePathway}
                   preselectFamily={state.preselect.family}
@@ -279,7 +279,7 @@ export default function NominateFlow() {
                   onCancel={() =>
                     dispatch({
                       type: "SET_STEP",
-                      step: state.entries.length > 0 ? "review" : "pathway",
+                      step: state.entries.length > 0 ? "review" : "subcategory",
                     })
                   }
                   onSave={handleSaveEntry}
@@ -289,7 +289,7 @@ export default function NominateFlow() {
               {state.step === "review" && (
                 <ReviewAllNomineesStep
                   entries={state.entries}
-                  onAddAnother={() => dispatch({ type: "SET_STEP", step: "pathway" })}
+                  onAddAnother={() => dispatch({ type: "SET_STEP", step: "subcategory" })}
                   onEdit={(id) => dispatch({ type: "EDIT_ENTRY", id })}
                   onRemove={(id) => {
                     dispatch({ type: "REMOVE_ENTRY", id });

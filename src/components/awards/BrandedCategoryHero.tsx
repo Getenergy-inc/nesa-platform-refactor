@@ -5,10 +5,10 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
 
-import iconImg from "@/assets/pathway-cards/icon.jpg";
-import csrImg from "@/assets/pathway-cards/csr.jpg";
-import influencerImg from "@/assets/pathway-cards/influencer.jpg";
-import grantsImg from "@/assets/pathway-cards/grants.jpg";
+import iconImg from "@/assets/subcategory-cards/icon.jpg";
+import csrImg from "@/assets/subcategory-cards/csr.jpg";
+import influencerImg from "@/assets/subcategory-cards/influencer.jpg";
+import grantsImg from "@/assets/subcategory-cards/grants.jpg";
 
 export type BrandedCategoryTheme =
   | "legacy"

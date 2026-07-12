@@ -25,7 +25,7 @@ export default function NomineeDirectory() {
   const search = searchParams.get("search") || "";
   const category = searchParams.get("category") || "all";
   const region = searchParams.get("region") || "all";
-  const pathway = searchParams.get("pathway") || "all";
+  const pathway = searchParams.get("subcategory") || "all";
   const page = parseInt(searchParams.get("page") || "1", 10);
 
   const categories = useMemo(() => getMasterCategories(), []);
@@ -48,13 +48,13 @@ export default function NomineeDirectory() {
   };
 
   const clearFilters = () => setSearchParams({});
-  const hasActiveFilters = category !== "all" || region !== "all" || pathway !== "all" || search;
+  const hasActiveFilters = category !== "all" || region !== "all" || subcategory !== "all" || search;
 
   return (
     <>
       <Helmet>
         <title>2025 Nominee Directory | NESA Africa Awards</title>
-        <meta name="description" content="Explore NESA Africa 2026 Award nominees across 14 categories, 8 Africa regions, and 3 pathways. Vote and support education champions across Africa." />
+        <meta name="description" content="Explore NESA Africa 2026 Award nominees across 14 categories, 8 Africa regions, and 3 subcategories. Vote and support education champions across Africa." />
       </Helmet>
 
       <div className="min-h-screen bg-charcoal">
@@ -122,12 +122,12 @@ export default function NomineeDirectory() {
             </div>
 
             <div className="flex items-center gap-2 flex-wrap">
-              <Select value={pathway} onValueChange={(v) => updateFilter("pathway", v)}>
+              <Select value={pathway} onValueChange={(v) => updateFilter("subcategory", v)}>
                 <SelectTrigger className="w-[170px] h-10 bg-charcoal-light border-gold/10 text-ivory text-sm">
-                  <SelectValue placeholder="Pathway" />
+                  <SelectValue placeholder="Subcategory" />
                 </SelectTrigger>
                 <SelectContent className="bg-charcoal border-gold/10">
-                  <SelectItem value="all" className="text-ivory">All Pathways</SelectItem>
+                  <SelectItem value="all" className="text-ivory">All Subcategories</SelectItem>
                   <SelectItem value="Africans in Africa" className="text-ivory">Africans in Africa</SelectItem>
                   <SelectItem value="Nigeria" className="text-ivory">Nigeria</SelectItem>
                   <SelectItem value="Africans in Diaspora" className="text-ivory">Africans in Diaspora</SelectItem>

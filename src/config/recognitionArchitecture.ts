@@ -122,31 +122,31 @@ export const RECOGNITION_PATHWAYS: RecognitionPathway[] = [
 
 export const AWARD_CATEGORIES: AwardCategory[] = [
   // Tier 3 — Icon (3)
-  { id: 1, slug: "philanthropy-icon", pathway: "africa-education-icon", name: "Africa Education Philanthropy Icon of the Decade", regionScope: "continental", description: "Lifetime philanthropic contribution to African education." },
-  { id: 2, slug: "literary-curriculum-icon", pathway: "africa-education-icon", name: "Literary & New Curriculum Advocate Icon of the Decade", regionScope: "continental", description: "Lifetime literary, curriculum, and pedagogy reform impact." },
-  { id: 3, slug: "technical-educator-icon", pathway: "africa-education-icon", name: "Africa Technical Educator Icon of the Decade", regionScope: "continental", description: "Lifetime technical, STEM, and TVET educator impact." },
+  { id: 1, slug: "philanthropy-icon", subcategory: "africa-education-icon", name: "Africa Education Philanthropy Icon of the Decade", regionScope: "continental", description: "Lifetime philanthropic contribution to African education." },
+  { id: 2, slug: "literary-curriculum-icon", subcategory: "africa-education-icon", name: "Literary & New Curriculum Advocate Icon of the Decade", regionScope: "continental", description: "Lifetime literary, curriculum, and pedagogy reform impact." },
+  { id: 3, slug: "technical-educator-icon", subcategory: "africa-education-icon", name: "Africa Technical Educator Icon of the Decade", regionScope: "continental", description: "Lifetime technical, STEM, and TVET educator impact." },
 
   // Tier 1 — Blue Garnet (9 → consolidated to 9 unique categories;
   // regional duplicates collapse via regionScope)
-  { id: 4, slug: "csr-for-education", pathway: "blue-garnet", name: "Best CSR for Education", regionScope: "multi", description: "Corporate Social Responsibility leadership for education." },
-  { id: 5, slug: "edutech-innovation", pathway: "blue-garnet", name: "Best EduTech Innovation for Education", regionScope: "continental", description: "Technology-led innovation transforming learning." },
-  { id: 6, slug: "media-education-advocacy", pathway: "blue-garnet", name: "Best Media Organisation for Educational Advocacy", regionScope: "nigeria", description: "Editorial and broadcast contribution to education." },
-  { id: 7, slug: "ngo-education-contribution", pathway: "blue-garnet", name: "Best NGO Contribution to Education", regionScope: "multi", description: "Civil society organisations advancing education." },
-  { id: 8, slug: "stem-education-programme", pathway: "blue-garnet", name: "Best STEM Education Programme", regionScope: "continental", description: "Science, Technology, Engineering, and Mathematics programmes." },
-  { id: 9, slug: "creative-arts-education", pathway: "blue-garnet", name: "Best Creative Arts Industry Contribution to Education", regionScope: "nigeria", description: "Creative arts and culture supporting education." },
-  { id: 10, slug: "education-friendly-state", pathway: "blue-garnet", name: "Best Education-Friendly State", regionScope: "nigeria", description: "Sub-national governments advancing education." },
+  { id: 4, slug: "csr-for-education", subcategory: "blue-garnet", name: "Best CSR for Education", regionScope: "multi", description: "Corporate Social Responsibility leadership for education." },
+  { id: 5, slug: "edutech-innovation", subcategory: "blue-garnet", name: "Best EduTech Innovation for Education", regionScope: "continental", description: "Technology-led innovation transforming learning." },
+  { id: 6, slug: "media-education-advocacy", subcategory: "blue-garnet", name: "Best Media Organisation for Educational Advocacy", regionScope: "nigeria", description: "Editorial and broadcast contribution to education." },
+  { id: 7, slug: "ngo-education-contribution", subcategory: "blue-garnet", name: "Best NGO Contribution to Education", regionScope: "multi", description: "Civil society organisations advancing education." },
+  { id: 8, slug: "stem-education-programme", subcategory: "blue-garnet", name: "Best STEM Education Programme", regionScope: "continental", description: "Science, Technology, Engineering, and Mathematics programmes." },
+  { id: 9, slug: "creative-arts-education", subcategory: "blue-garnet", name: "Best Creative Arts Industry Contribution to Education", regionScope: "nigeria", description: "Creative arts and culture supporting education." },
+  { id: 10, slug: "education-friendly-state", subcategory: "blue-garnet", name: "Best Education-Friendly State", regionScope: "nigeria", description: "Sub-national governments advancing education." },
 
   // Tier 2 — Platinum (7)
-  { id: 11, slug: "tertiary-library", pathway: "platinum-recognition", name: "Best Library in Nigerian Tertiary Institutions", regionScope: "nigeria", description: "Library infrastructure and services excellence." },
-  { id: 12, slug: "research-development", pathway: "platinum-recognition", name: "Best Research & Development Contribution to Education", regionScope: "nigeria", description: "Research advancing African education systems." },
-  { id: 13, slug: "christian-education-impact", pathway: "platinum-recognition", name: "Christian Education Impact", regionScope: "continental", description: "Christian institutions and leaders advancing education." },
-  { id: 14, slug: "islamic-education-impact", pathway: "platinum-recognition", name: "Islamic Education Impact", regionScope: "continental", description: "Islamic institutions and leaders advancing education." },
-  { id: 15, slug: "political-leadership-education", pathway: "platinum-recognition", name: "Political Leadership for Education", regionScope: "nigeria", description: "Political leaders championing education reform." },
-  { id: 16, slug: "international-partnership", pathway: "platinum-recognition", name: "International Partnership for Education", regionScope: "continental", description: "Bilateral and multilateral partnerships advancing education." },
-  { id: 17, slug: "diaspora-educational-impact", pathway: "platinum-recognition", name: "Diaspora Educational Impact", regionScope: "diaspora", description: "Diaspora-led educational contributions to Africa." },
+  { id: 11, slug: "tertiary-library", subcategory: "platinum-recognition", name: "Best Library in Nigerian Tertiary Institutions", regionScope: "nigeria", description: "Library infrastructure and services excellence." },
+  { id: 12, slug: "research-development", subcategory: "platinum-recognition", name: "Best Research & Development Contribution to Education", regionScope: "nigeria", description: "Research advancing African education systems." },
+  { id: 13, slug: "christian-education-impact", subcategory: "platinum-recognition", name: "Christian Education Impact", regionScope: "continental", description: "Christian institutions and leaders advancing education." },
+  { id: 14, slug: "islamic-education-impact", subcategory: "platinum-recognition", name: "Islamic Education Impact", regionScope: "continental", description: "Islamic institutions and leaders advancing education." },
+  { id: 15, slug: "political-leadership-education", subcategory: "platinum-recognition", name: "Political Leadership for Education", regionScope: "nigeria", description: "Political leaders championing education reform." },
+  { id: 16, slug: "international-partnership", subcategory: "platinum-recognition", name: "International Partnership for Education", regionScope: "continental", description: "Bilateral and multilateral partnerships advancing education." },
+  { id: 17, slug: "diaspora-educational-impact", subcategory: "platinum-recognition", name: "Diaspora Educational Impact", regionScope: "diaspora", description: "Diaspora-led educational contributions to Africa." },
 
   // Tier 4 — Influencers (1 consolidated category exposing 3 classifications via subcategory layer)
-  { id: 18, slug: "influencer-education-impact", pathway: "influencers-education-impact", name: "Influencers Education Impact", regionScope: "continental", description: "Sports, music, and social-media influencers advancing education." },
+  { id: 18, slug: "influencer-education-impact", subcategory: "influencers-education-impact", name: "Influencers Education Impact", regionScope: "continental", description: "Sports, music, and social-media influencers advancing education." },
 ];
 
 // ============================================================================

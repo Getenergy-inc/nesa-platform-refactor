@@ -146,7 +146,7 @@ export function TrophyHeroSection() {
               {[
                 "4 Recognition Tiers",
                 "18 Categories",
-                "100+ Pathways",
+                "100+ Subcategories",
                 "9 Pillars",
                 "8 Africa Regions",
                 "2 Global Communities",

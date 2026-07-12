@@ -375,8 +375,8 @@ export default function AwardsPage() {
 
         {/* ─── 3. CHOOSE A RECOGNITION PATHWAY ───────────── */}
         <section
-          id="pathways"
-          aria-labelledby="pathways-heading"
+          id="subcategories"
+          aria-labelledby="subcategories-heading"
           className="py-16 md:py-24 scroll-mt-20"
         >
           <div className="container mx-auto px-4">
@@ -385,7 +385,7 @@ export default function AwardsPage() {
                 Step 1
               </span>
               <h2
-                id="pathways-heading"
+                id="subcategories-heading"
                 className="mt-2 font-display text-3xl md:text-4xl font-bold text-ivory"
               >
                 Choose a Recognition Subcategory
@@ -407,7 +407,7 @@ export default function AwardsPage() {
                 >
                   <Link
                     to={p.href}
-                    onClick={() => track("pathways", p.title, p.href)}
+                    onClick={() => track("subcategories", p.title, p.href)}
                     className={`group h-full flex flex-col rounded-2xl border bg-gradient-to-br ${p.accent} ${p.border} bg-charcoal/40 p-6 md:p-7 transition-all relative overflow-hidden`}
                   >
                     <div className="flex items-start justify-between mb-4">

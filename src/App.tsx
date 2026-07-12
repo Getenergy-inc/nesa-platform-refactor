@@ -856,7 +856,7 @@ const App = () => (
 
                   {/* Recognition Hub — dedicated page + 4 award category pages */}
                   <Route
-                    path="/pathways"
+                    path="/subcategories"
                     element={
                       <WithLayout>
                         <PathwaysPage />
@@ -880,7 +880,7 @@ const App = () => (
                     }
                   />
                   <Route
-                    path="/pathways-to-recognition"
+                    path="/subcategories-to-recognition"
                     element={
                       <WithLayout>
                         <PathwaysPage />
@@ -1906,7 +1906,7 @@ const App = () => (
                   <Route path="/admin/contributor-photos" element={<AdminContributorPhotos />} />
                   <Route path="/admin/contributors" element={<AdminContributorsCMS />} />
                   <Route path="/admin/volunteers" element={<AdminVolunteersCMS />} />
-                  <Route path="/admin/pathways" element={<AdminPathwaysCMS />} />
+                  <Route path="/admin/subcategories" element={<AdminPathwaysCMS />} />
                   <Route path="/admin/gallery" element={<AdminGalleryCMS />} />
                   <Route path="/admin/icon-migration" element={<AdminIconMigrationVerification />} />
                   <Route path="/admin/icon-portrait-gaps" element={<AdminIconPortraitGaps />} />

@@ -65,7 +65,7 @@ export default function IconAward() {
           stats={[
             { value: "9", label: "Icons per Season" },
             { value: "20+", label: "Years of Impact" },
-            { value: "3+3+3", label: "Pathways to Icon Status" },
+            { value: "3+3+3", label: "Subcategories to Icon Status" },
           ]}
           primaryCta={{ label: "Nominate an Icon", href: "/nominate" }}
           secondaryCta={{ label: "Icon Show: 28 Mar 2026", href: "/awards/icon" }}
@@ -231,7 +231,7 @@ export default function IconAward() {
               "20+ years of sustained education work in or for Africa",
               "Verifiable impact on learners, teachers, or institutions",
               "Founders, ministers, chancellors, philanthropists, advocates",
-              "African, Diaspora, or Friends of Africa pathways",
+              "African, Diaspora, or Friends of Africa subcategories",
             ],
             disqualifiers: [
               "Self-promotional submissions without evidence",

@@ -339,7 +339,7 @@ export default function DiasporaEducationPage() {
         <SectionTitle
           kicker="Tracks"
           title="Sub-categories"
-          sub="Six recognition tracks aligned with the 2026 Diaspora Education Impact pathway."
+          sub="Six recognition tracks aligned with the 2026 Diaspora Education Impact subcategory."
         />
         <div className="max-w-6xl mx-auto grid md:grid-cols-2 lg:grid-cols-3 gap-4">
           {SUBCATEGORIES.map((c) => (

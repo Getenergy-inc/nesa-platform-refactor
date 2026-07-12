@@ -143,7 +143,7 @@ export const christianEducationConfig: FaithCategoryConfig = {
   primaryNominateUuid: "5195ec64-2a91-4e59-8fff-8e950ee9fe18",
   subcategories: [
     { title: "Best Educational Infrastructure Development", description: "Christian organisations building, equipping, or rehabilitating schools and learning facilities across Africa.", uuid: "5195ec64-2a91-4e59-8fff-8e950ee9fe18", slug: "christian-schools", tabKey: "infrastructure" },
-    { title: "Best Scholarship Program", description: "Christian organisations funding tuition, bursaries, or scholarship pathways for learners.", uuid: "d6c9f60f-7743-43ca-b18c-70a72dca0269", slug: "christian-ngos", tabKey: "scholarship" },
+    { title: "Best Scholarship Program", description: "Christian organisations funding tuition, bursaries, or scholarship subcategories for learners.", uuid: "d6c9f60f-7743-43ca-b18c-70a72dca0269", slug: "christian-ngos", tabKey: "scholarship" },
     { title: "Best Holistic Educational Support", description: "Christian organisations combining education with health, nutrition, or wraparound learner support.", uuid: "12e55305-550c-42ad-b444-7c4b1b215d97", slug: "christian-foundations", tabKey: "holistic" },
     { title: "Best Advocacy for Educational Reforms & Awareness Campaigns", description: "Christian organisations campaigning for education policy reform, access, and public awareness.", uuid: null, slug: "christian-advocacy", tabKey: "advocacy" },
   ],
