@@ -170,6 +170,16 @@ export default function IconAward() {
                       <p className="text-xs text-white/40 font-medium uppercase tracking-wider mb-2">Example profiles</p>
                       <p className="text-xs text-white/50 leading-relaxed">{cat.examples}</p>
                     </div>
+
+                    {/* Subcategory + Nominate links */}
+                    <div className="mt-5 flex flex-wrap gap-2 pt-4 border-t border-white/10">
+                      <Button asChild size="sm" variant="outline" className="border-gold/30 text-white hover:bg-gold/10 h-8">
+                        <Link to={`/awards/africa-education-icon/${cat.slug}`}>View Subcategory</Link>
+                      </Button>
+                      <Button asChild size="sm" className="bg-gold text-charcoal hover:bg-gold/90 h-8">
+                        <Link to={`/nominate?category=africa-education-icon-award&track=${cat.slug}`}>Nominate</Link>
+                      </Button>
+                    </div>
                   </div>
                 </div>
               ))}
