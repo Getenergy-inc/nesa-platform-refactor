@@ -149,6 +149,7 @@ import EighteenCategoriesPage from "./pages/awards/EighteenCategoriesPage";
 import CategoryDetailPage from "./pages/awards/CategoryDetailPage";
 import RecognitionHubPage from "./pages/recognition/RecognitionHubPage";
 import RedirectRoute from "./components/routing/RedirectRoute";
+import LegacyCategoryRedirect from "./components/routing/LegacyCategoryRedirect";
 import { LEGACY_RECOGNITION_REDIRECTS } from "./config/legacyRecognitionRedirects";
 
 import { ICON_CATEGORY, buildRedirectMap as buildCategoryRedirects } from "./config/awardCategories";
