@@ -1,77 +1,75 @@
-# 30-Page Consolidation Refactor
+## Refactor to 22 canonical public pages
 
-Replace the current 38-page structure with **30 task-focused pages**, keeping every word of copy from the current pages. Content is consolidated (not deleted) via sections, tabs, accordions, and anchor navigation.
+Replace the current 30-page structure with **22 task-focused pages**, preserving all copy by mounting existing section components inside consolidator pages. No words removed.
 
-## Target sitemap (30 pages)
+### Target sitemap (22)
 
-| # | Route | Consolidates |
-|---|-------|--------------|
+| # | Route | Consolidates / Source |
+|---|-------|-----------------------|
 | 1 | `/` | Home (unchanged) |
-| 2 | `/about` | About + Governance + SCEF + NRC + COI + FAQs |
-| 3 | `/recognition` | Recognition hub + season overview + eligibility + timeline summary |
-| 4 | `/recognition/africa-education-icon` | Icon tier + its 1 category + subs + laureates + judges + form + FAQs |
-| 5 | `/recognition/influencer-education-impact` | Influencer tier + category + subs + form + FAQs |
-| 6 | `/recognition/platinum` | Platinum hub (7 category cards + common rules) |
-| 7 | `/recognition/gold-blue-garnet` | Gold-Blue Garnet hub (9 category cards + rules) |
-| 8–14 | `/recognition/platinum/:category` (×7) | One page per Platinum category |
-| 15–23 | `/recognition/gold-blue-garnet/:category` (×9) | One page per GBG category |
-| 24 | `/education-enablers` | All nominee/finalist/winner/region/org directories → one filterable directory |
-| 25 | `/nominate` | Tier→category→sub→type gateway with inline form routing |
-| 26 | `/timeline` | 13-phase timeline + current phase + countdown |
-| 27 | `/eduaid-africa` | EduAid + Rebuild + Special-Needs + Afri-EduTourism + Scholarships + Training + Impact Reporting (anchors: `#webinars`, `#rebuild-my-school`, `#nominate-special-needs-school`, `#afri-edutourism`, `#scholarships`, `#training`, `#impact-reporting`) |
-| 28 | `/media` | TV + webinars + shows + interviews + docs + podcasts + news + press + galleries + gala media + accreditation + events |
-| 29 | `/gala` | Gala + tickets + tables + delegates + hospitality + invitations + accreditation + FAQs + QR |
-| 30 | `/support` | Sponsor + partner + donate + volunteer + ambassador + chapters + merch + contact + help + FAQs |
+| 2 | `/about` | AboutConsolidated (About + SCEF + Vision2035 + FAQ) — **remove Governance from this page** |
+| 3 | `/governance` | New consolidator: Governance + Integrity Firewall + NRC + COI + Policies |
+| 4 | `/recognition` | Recognition hub + 4-tier overview |
+| 5 | `/africa-education-icon` | Africa Education Icon tier (rename from `/recognition/africa-education-icon`) |
+| 6 | `/gold-blue-garnet` | Gold-Blue Garnet tier hub (rename from `/recognition/gold-blue-garnet`) |
+| 7 | `/platinum` | Platinum tier hub (rename from `/recognition/platinum`) |
+| 8 | `/influencer-impact` | Influencer tier (rename from `/recognition/influencer-education-impact`) |
+| 9 | `/nominate` | Nomination gateway |
+| 10 | `/directory` | Africa Education Impact Directory (was `/education-enablers`) |
+| 11 | `/regions` | 8 regions + Diaspora index |
+| 12 | `/impact` | New Impact Programmes hub (overview + cards linking to 13–16) |
+| 13 | `/eduaid-africa` | EduAid-Africa (scholarships + training + webinars) — narrowed |
+| 14 | `/rebuild-my-school` | Rebuild My School Africa (standalone) |
+| 15 | `/special-needs` | Special Needs Education (standalone) |
+| 16 | `/afri-edutourism` | Afri-EduTourism (standalone) |
+| 17 | `/media` | MediaHubConsolidated (TV, webinars, shows, news, galleries, events, accreditation) |
+| 18 | `/gala` | GalaConsolidated (gala + tickets + tables + hospitality + FAQ) |
+| 19 | `/sponsors` | Sponsors & Partners consolidator (Partners + SponsorLanding + endorse-as-sponsor) |
+| 20 | `/shop` | Merchandise (Shop) |
+| 21 | `/endorsements` | Endorsements page (EndorseNESA + endorsements list) |
+| 22 | `/chapters` | Chapters + Volunteers + Ambassadors consolidator |
 
-## Execution steps
+**Dropped canonical routes (kept as redirects):** 7 Platinum category detail pages, 9 Gold-Blue Garnet category detail pages, `/timeline`, `/support`. Category detail pages remain reachable via `/platinum/:category` and `/gold-blue-garnet/:category` (still rendered by `TierCategorySubcategoryPage`) but are no longer part of the "22 public pages" navigation. Timeline content is embedded inside `/recognition`. `/support` splits into `/sponsors`, `/shop`, `/endorsements`, `/chapters`.
+
+### Execution steps
 
 **Step 1 — Source of truth**
-Rewrite `src/config/page-sequence.ts` to the 30 entries above. Update `src/config/siteNavigation.ts` main-nav to reflect the 7-item structure pointing at these routes.
+- Rewrite `src/config/page-sequence.ts` to the 22 entries above.
+- Update `src/config/siteNavigation.ts` main-nav to reflect the new top-level structure and anchor links.
 
-**Step 2 — Build the 4 new consolidator pages**
-Create wrapper pages that mount existing section components (no copy loss):
-- `src/pages/about/AboutConsolidated.tsx` — reuses existing About sections + Governance, SCEF, NRC, COI, FAQ sections.
-- `src/pages/eduaid/EduAidAfricaImpact.tsx` — mounts EduAid, Rebuild, Special-Needs nominate, Afri-EduTourism, Scholarships, Training, Impact sections with `id=` anchors and a sticky sub-nav.
-- `src/pages/media/MediaHubConsolidated.tsx` — mounts TV, Webinars, Shows, Interviews, Docs, Podcasts, News, Press, Galleries, Accreditation, Events sections.
-- `src/pages/support/SupportConsolidated.tsx` — mounts Sponsor, Partner, Donate, Volunteer, Ambassador, Chapters, Merch, Contact, Help, FAQ sections.
-- `src/pages/EducationEnablersDirectory.tsx` — single filterable directory replacing separate nominee/finalist/winner/region/org listings.
-- `src/pages/NominateGateway.tsx` — tier → category → subcategory → nominee-type wizard that opens the correct embedded form.
+**Step 2 — New / updated consolidator pages** (no copy loss — mount existing sections)
+- `src/pages/about/AboutConsolidated.tsx` — remove Governance section (moves to `/governance`).
+- `src/pages/governance/GovernanceConsolidated.tsx` — new: mounts Governance + NRC + Integrity Firewall + Policies + COI.
+- `src/pages/impact/ImpactHub.tsx` — new: overview + 4 programme cards linking to /eduaid-africa, /rebuild-my-school, /special-needs, /afri-edutourism.
+- `src/pages/sponsors/SponsorsPartners.tsx` — new: mounts Partners + SponsorLanding + sponsor CTAs.
+- `src/pages/endorsements/EndorsementsPage.tsx` — new: mounts EndorseNESA + endorsements list.
+- `src/pages/chapters/ChaptersConsolidated.tsx` — new: mounts Chapters + Volunteers + Ambassadors sections.
+- Split `EduAidAfricaImpact.tsx` back into 4 standalone routes (`/eduaid-africa`, `/rebuild-my-school`, `/special-needs`, `/afri-edutourism`) — sections already exist as standalone pages, just re-route them.
 
-Each consolidator imports the existing section components verbatim so **no copy is removed**.
-
-**Step 3 — Route table**
-In `src/App.tsx`:
-- Point the 30 canonical routes at the pages above.
-- Add `<Navigate>` redirects from every removed route to its new home (with `#anchor` where applicable):
-  - `/eduaid` → `/eduaid-africa`
-  - `/rebuild` → `/eduaid-africa#rebuild-my-school`
-  - `/special-needs` → `/eduaid-africa#nominate-special-needs-school`
-  - `/events/tourism`, `/afri-edutourism` → `/eduaid-africa#afri-edutourism`
-  - `/media/tv`, `/media/shows`, `/media/webinars`, `/media/gala`, `/press` → `/media` (with anchors)
-  - `/donate`, `/volunteer`, `/ambassadors`, `/partners`, `/endorse`, `/judges`, `/shop`, `/contact`, `/faq`, `/policies` → `/support` (with anchors)
-  - `/about/vision-2035`, `/about/governance`, `/about/scef`, `/about/social-impact` → `/about#…`
-  - `/nominees`, `/regions`, `/impact`, directory variants → `/education-enablers`
-  - `/awards/*` legacy → `/recognition/*`
-  - `/tickets` → `/gala#tickets`
-- Keep dynamic `:category` routes under the two hubs (Platinum, GBG).
+**Step 3 — Route table** (`src/App.tsx`)
+- Point 22 canonical routes at the pages above.
+- Rename tier canonical routes: `/recognition/africa-education-icon` → `/africa-education-icon` (add redirect), same for the other 3 tiers.
+- Redirects: `/support` → `/sponsors`; `/support#volunteers` → `/chapters#volunteers`; `/support#donate` → `/sponsors#donate`; `/education-enablers` → `/directory`; `/timeline` → `/recognition#timeline`; `/gala/tickets` → `/gala#tickets`; legacy consolidator anchors keep working.
+- Keep dynamic `:category` and `:subcategory` routes (still rendered, but not counted in the 22).
 
 **Step 4 — Navigation & footer**
-Update `src/config/siteNavigation.ts`, `MobileBottomNav`, `NESAFooter` link groups, and any hardcoded links across the codebase to the new 30-route map. Preserve labels.
+- Update `src/config/siteNavigation.ts` primary items and children to the 22-route map.
+- Update `NESAFooter` link groups.
+- Update `MobileBottomNav` targets if any point at removed routes.
 
 **Step 5 — Content preservation check**
-Grep each removed page's copy strings and confirm they still render inside the target consolidator. Add anchor `id`s to the section components that need them.
+- Grep each retired page's headline strings; verify they still render inside their new home.
+- Add anchor `id`s to any section that a nav link now targets.
 
 **Step 6 — Verify**
-- `tsgo` typecheck
-- `bun run build`
-- Playwright smoke: visit each of the 30 routes + 5 legacy redirects; assert 200 and heading present.
-- Update `FRONTEND_ARCHITECTURE.md` and `docs/refactor/sitemap-38.md` → new `sitemap-30.md`.
+- `tsgo` typecheck.
+- Playwright smoke: visit all 22 routes + 8 key legacy redirects; assert 200 + heading present.
+- Update `docs/refactor/sitemap-30.md` → `sitemap-22.md`; update `FRONTEND_ARCHITECTURE.md`.
 
-## Notes / trade-offs
+### Notes / trade-offs
+- **No copy deleted** — every existing section component is remounted; only routing/wrappers change.
+- Tier routes shorten (`/africa-education-icon` etc.) to match the user's spec. Old `/recognition/<tier>` URLs redirect.
+- Category detail pages still exist and are linked from tier hubs, but they don't count toward the 22 canonical public pages.
+- Multi-file change (~15 new/edited files + App.tsx routing + nav/footer). Batched in parallel where safe.
 
-- **No copy is deleted.** Every existing section component is remounted inside the new consolidators; only routes/wrappers change.
-- The 16 tier-category detail pages (7 Platinum + 9 GBG) continue to use the existing `TierCategorySubcategoryPage` / `CategoryDetailPage` renderers, hydrated from `useDbSpine`.
-- Legacy URLs keep working via redirects, so external links and SEO are preserved during the transition.
-- This is a large multi-file change (~40–60 files touched, mostly routing + 6 new wrapper pages). I'll batch writes in parallel where safe.
-
-Approve this plan and I'll implement it in one pass.
+Approve and I'll implement in one pass.
