@@ -244,9 +244,7 @@ function MobileMenu() {
           <div className="mt-4 border-t border-gold/20 pt-3 space-y-1">
             {user ? (
               <>
-                <Link to="/account" onClick={close} className={linkCls}>My Wallet</Link>
-                <Link to="/account/notifications" onClick={close} className={linkCls}>Notifications</Link>
-                <Link to="/support#help" onClick={close} className={linkCls}>Help</Link>
+                <Link to="/account" onClick={close} className={linkCls}>My Account</Link>
                 <div className="px-3 py-2"><LanguageSwitcher /></div>
                 <button
                   type="button"
@@ -258,8 +256,6 @@ function MobileMenu() {
               </>
             ) : (
               <>
-                <Link to="/accept-nomination" onClick={close} className={linkCls}>Accept Nomination</Link>
-                <Link to="/support#help" onClick={close} className={linkCls}>Help</Link>
                 <div className="px-3 py-2"><LanguageSwitcher /></div>
                 <Link to="/login" onClick={close} className={linkCls}>Sign In</Link>
               </>
@@ -276,13 +272,13 @@ export function SiteHeader() {
     <>
       <SkipLink />
       <header className="fixed top-0 left-0 right-0 z-50 bg-charcoal/95 backdrop-blur border-b border-gold/20">
-        <UtilityBar />
         <div className="container mx-auto px-4 flex items-center justify-between gap-3 h-14 lg:h-16">
           <BrandBlock />
           <DesktopNav />
           <div className="flex items-center gap-2">
             <NominateButton className="hidden sm:inline-flex" />
             <NominateButton className="sm:hidden text-xs px-3 py-1.5 h-9" />
+            <AccountActions />
             <MobileMenu />
           </div>
         </div>
