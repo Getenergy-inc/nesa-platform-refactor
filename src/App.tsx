@@ -1743,7 +1743,7 @@ const App = () => (
                       </WithLayout>
                     }
                   />
-                  <Route path="/sponsors" element={<SponsorsHub />} />
+                  <Route path="/sponsors" element={<WithLayout><SponsorsPartners /></WithLayout>} />
                   <Route path="/sponsors/:slug" element={<SponsorLanding />} />
                   <Route
                     path="/results"
@@ -1935,7 +1935,7 @@ const App = () => (
                     }
                   />
                   <Route path="/eduaid-africa" element={<WithLayout><EduAidAfricaImpact /></WithLayout>} />
-                  <Route path="/afri-edutourism" element={<Navigate to="/eduaid-africa#afri-edutourism" replace />} />
+                  {/* /afri-edutourism canonical route is defined above (standalone page). */}
 
                   <Route
                     path="/rebuild"
@@ -2178,7 +2178,7 @@ const App = () => (
                     path="/chapters"
                     element={
                       <WithLayout>
-                        <Chapters />
+                        <ChaptersConsolidated />
                       </WithLayout>
                     }
                   />
