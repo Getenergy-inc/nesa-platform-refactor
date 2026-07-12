@@ -1,5 +1,5 @@
 /**
- * /trending — full Trending Nominees discovery page.
+ * /trending — full Featured Nominees discovery page.
  * Extracted from the homepage so the landing page stays a high-conversion gateway.
  */
 
@@ -16,7 +16,7 @@ import { LandingNomineeCard } from "@/components/nesa/LandingNomineeCard";
 import { usePageView } from "@/hooks/usePageView";
 
 export default function TrendingPage() {
-  usePageView("/trending", "Trending Nominees — NESA-Africa 2026");
+  usePageView("/trending", "Featured Nominees — NESA-Africa 2026");
   const { data: nominees, isLoading } = useNominees();
 
   const { trending, mostVoted } = useMemo(() => {
@@ -31,13 +31,13 @@ export default function TrendingPage() {
   return (
     <>
       <Helmet>
-        <title>Trending Nominees — NESA-Africa 2026</title>
+        <title>Featured Nominees — NESA-Africa 2026</title>
         <meta
           name="description"
           content="See who's trending across NESA-Africa nominee categories — the most-voted education changemakers across Africa and the diaspora."
         />
         <link rel="canonical" href="https://nesaafrica.lovable.app/trending" />
-        <meta property="og:title" content="Trending Nominees — NESA-Africa 2026" />
+        <meta property="og:title" content="Featured Nominees — NESA-Africa 2026" />
         <meta property="og:description" content="The most-voted NESA-Africa nominees this season." />
         <meta property="og:url" content="https://nesaafrica.lovable.app/trending" />
         <meta property="og:type" content="website" />
@@ -62,7 +62,7 @@ export default function TrendingPage() {
               <Flame className="w-3 h-3 mr-1" /> Live Trending
             </Badge>
             <h1 className="font-display text-3xl md:text-5xl font-bold text-ivory mb-3">
-              Trending Nominees
+              Featured Nominees
             </h1>
             <p className="text-ivory/70 max-w-2xl mx-auto">
               The most-voted NESA-Africa nominees right now — across every award category, region, and country.

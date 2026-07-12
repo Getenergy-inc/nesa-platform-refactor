@@ -34,7 +34,7 @@ export function NominationPathSection() {
       bullets: [
         "Nominate verified changemakers",
         "Earn voting points through participation",
-        "Vote with AGC during official public voting windows",
+        "Explore Recognition during official public voting windows",
         "Winners protected by integrity controls"
       ],
       cta: { label: "Nominate for Voting Categories", href: "/nominate?tier=voting" },

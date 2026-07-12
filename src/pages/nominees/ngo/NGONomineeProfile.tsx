@@ -84,7 +84,7 @@ export default function NGONomineeProfile() {
               <p className="text-lg text-white/70 mb-6">{ngo.impactSummary}</p>
               <div className="flex flex-wrap gap-3">
                 <Button size="lg" className="bg-gold text-black hover:bg-gold/90">
-                  <Heart className="mr-2 h-4 w-4" /> Vote Now
+                  <Heart className="mr-2 h-4 w-4" /> Learn More
                 </Button>
                 <Button size="lg" variant="outline" className="border-gold/30 text-gold hover:bg-gold/10">
                   <Share2 className="mr-2 h-4 w-4" /> Share Profile

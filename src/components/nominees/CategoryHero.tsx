@@ -91,7 +91,7 @@ export function CategoryHero({
         <div className="flex flex-wrap justify-center gap-3">
           <Link to={voteHref}>
             <Button size="lg" className="bg-gold hover:bg-gold/90 text-charcoal font-bold rounded-full px-7 gap-2 shadow-lg shadow-gold/20">
-              <Trophy className="w-4 h-4" /> Vote Now
+              <Trophy className="w-4 h-4" /> Learn More
             </Button>
           </Link>
           <Link to={nominateHref}>

@@ -284,7 +284,7 @@ export default function ForVoters() {
                           </div>
                         </div>
                         <Button size="sm" className="bg-gold hover:bg-gold-dark text-charcoal text-xs rounded-full">
-                          Vote Now
+                          Learn More
                         </Button>
                       </div>
                       <div className="mb-3">

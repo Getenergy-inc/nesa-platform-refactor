@@ -61,7 +61,7 @@ const slides: Slide[] = [
       "Nominate. Vote. Earn. Use Afri-Gold Coins to back finalists during the Blue Garnet voting window — every vote is auditable.",
     bullets: [
       "Submit a 2026 nominee",
-      "Vote with AGC during the window",
+      "Explore Recognition during the window",
       "Engage, share, refer to grow your wallet",
     ],
     cta: { label: "Earn AGC Now", to: "/earn-agc", icon: Coins },

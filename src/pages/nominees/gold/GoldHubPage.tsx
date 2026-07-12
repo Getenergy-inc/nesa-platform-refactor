@@ -167,7 +167,7 @@ export default function GoldHubPage() {
                       </Link>
                       <Link to={`/nominees/gold-special-recognition/${cat.slug}#vote`} className="flex-1">
                         <Button size="sm" variant="outline" className="w-full border-gold/40 text-gold hover:bg-gold/10 gap-1.5">
-                          <Vote className="w-3.5 h-3.5" /> Vote Now
+                          <Vote className="w-3.5 h-3.5" /> Learn More
                         </Button>
                       </Link>
                     </div>

@@ -84,7 +84,7 @@ function RegionDashboardContent() {
                 <div className="h-12 w-12 rounded-xl bg-blue-500/10 flex items-center justify-center">
                   <Vote className="h-6 w-6 text-blue-400" />
                 </div>
-                <h3 className="font-semibold text-sm">Vote with AGC</h3>
+                <h3 className="font-semibold text-sm">Explore Recognition</h3>
                 <p className="text-xs text-muted-foreground">Support nominees</p>
               </CardContent>
             </Card>

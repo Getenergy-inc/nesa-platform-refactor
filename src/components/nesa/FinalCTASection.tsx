@@ -59,7 +59,7 @@ export function FinalCTASection() {
             <Link to="/vote" onClick={() => trackEvent("final_cta_click", { cta: "vote", to: "/vote", location: "final_cta" })}>
               <Button variant="ghost" className="text-gold/60 hover:text-gold hover:bg-gold/8 rounded-full gap-2">
                 <Vote className="h-4 w-4" />
-                Vote with AGC
+                Explore Recognition
               </Button>
             </Link>
           </div>

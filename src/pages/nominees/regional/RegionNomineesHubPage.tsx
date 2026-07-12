@@ -115,7 +115,7 @@ export default function RegionNomineesHubPage({ region: regionProp }: { region?:
               </div>
 
               <div className="flex flex-wrap justify-center gap-3">
-                <Link to="/vote"><Button size="lg" className="bg-gold hover:bg-gold/90 text-charcoal font-bold rounded-full px-7 gap-2 shadow-lg shadow-gold/20"><Trophy className="w-4 h-4" /> Vote Now</Button></Link>
+                <Link to="/vote"><Button size="lg" className="bg-gold hover:bg-gold/90 text-charcoal font-bold rounded-full px-7 gap-2 shadow-lg shadow-gold/20"><Trophy className="w-4 h-4" /> Learn More</Button></Link>
                 <Link to={`/nominate?region=${region}&source=region-${region}`}><Button size="lg" variant="outline" className="border-gold/40 text-gold hover:bg-gold/10 rounded-full px-7 gap-2 bg-charcoal/40 backdrop-blur">Nominate <ArrowRight className="w-4 h-4" /></Button></Link>
               </div>
 
