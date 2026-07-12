@@ -20,22 +20,25 @@ const iconTVShow = getTVShowByAward("icon");
 
 const subcategories = [
   {
-    title: "Africa Education Icon",
-    description: "3 Icons living and working in Africa who have dedicated 20+ years to transforming education on the continent through direct impact, policy, or institutional leadership.",
+    slug: "education-philanthropy-icon",
+    title: "Africa Education Philanthropy Icon",
+    description: "Once-in-a-decade honour for philanthropists whose lifetime giving has transformed African education — funding, foundations, and endowments that lasted.",
     icon: Globe,
     count: 3,
     examples: "School founders, education ministers, university chancellors, community education pioneers across African nations.",
   },
   {
-    title: "Diaspora Education Icon",
-    description: "3 Africans in the diaspora who have achieved lasting education impact in Africa through activities, funding, mentorship, and institutional support from abroad.",
+    slug: "literary-new-curriculum-advocate",
+    title: "Literary & New Curriculum Advocate Icon",
+    description: "Recognises literary figures and curriculum reformers who reshaped how Africa's children learn — authors, thinkers, and pedagogical pioneers.",
     icon: Users,
     count: 3,
     examples: "Diaspora professionals funding schools, running scholarship programmes, building ed-tech platforms, or leading NGOs serving African learners.",
   },
   {
-    title: "Friends of Africa Education Icon",
-    description: "3 non-African individuals who have achieved lasting education impact in Africa through activities, partnerships, philanthropy, and sustained institutional support.",
+    slug: "technical-educator-icon",
+    title: "Africa Technical Educator Icon",
+    description: "Honours pioneers of technical and vocational education whose work opened doors for an entire generation of African learners and workers.",
     icon: Heart,
     count: 3,
     examples: "International philanthropists, development partners, global education advocates who have invested 20+ years in African education systems.",
@@ -166,6 +169,16 @@ export default function IconAward() {
                     <div className="border-t border-white/10 pt-4">
                       <p className="text-xs text-white/40 font-medium uppercase tracking-wider mb-2">Example profiles</p>
                       <p className="text-xs text-white/50 leading-relaxed">{cat.examples}</p>
+                    </div>
+
+                    {/* Subcategory + Nominate links */}
+                    <div className="mt-5 flex flex-wrap gap-2 pt-4 border-t border-white/10">
+                      <Button asChild size="sm" variant="outline" className="border-gold/30 text-white hover:bg-gold/10 h-8">
+                        <Link to={`/awards/africa-education-icon/${cat.slug}`}>View Subcategory</Link>
+                      </Button>
+                      <Button asChild size="sm" className="bg-gold text-charcoal hover:bg-gold/90 h-8">
+                        <Link to={`/nominate?category=africa-education-icon-award&track=${cat.slug}`}>Nominate</Link>
+                      </Button>
                     </div>
                   </div>
                 </div>
