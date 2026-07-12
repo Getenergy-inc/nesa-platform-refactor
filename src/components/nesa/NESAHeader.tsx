@@ -1,4 +1,5 @@
-// NESA-Africa Header Component
-// Uses the new MainNav with full dropdown navigation
+// NESA-Africa Header — canonical single header (SiteHeader).
+// Replaces the previous MainNav-based header with the approved
+// SkipLink + UtilityBar + 7-item main nav + Nominate CTA structure.
 
-export { MainNav as NESAHeader } from "@/components/navigation/MainNav";
+export { SiteHeader as NESAHeader } from "@/components/navigation/SiteHeader";
