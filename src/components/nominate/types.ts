@@ -42,6 +42,7 @@ export interface SubmitterIdentity {
 export type FlowStep =
   | "flash"
   | "pathway"
+  | "subcategory"
   | "entry"
   | "review"
   | "identity"

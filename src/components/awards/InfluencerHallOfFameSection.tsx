@@ -438,7 +438,7 @@ function RegionalBlock({
   pathway: CategoryId | "all";
 }) {
   const viewAllHref = `/nominees?awardFamily=influencer${
-    pathway !== "all" ? `&category=${subcategory}` : ""
+    pathway !== "all" ? `&category=${pathway}` : ""
   }&region=${encodeURIComponent(region)}`;
   const countryCount = new Set(nominees.map((n) => n.nominee_country)).size;
   const totalRegionCountries = COUNTRIES_BY_REGION[region]?.length ?? 0;

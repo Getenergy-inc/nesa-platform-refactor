@@ -48,7 +48,7 @@ export default function NomineeDirectory() {
   };
 
   const clearFilters = () => setSearchParams({});
-  const hasActiveFilters = category !== "all" || region !== "all" || subcategory !== "all" || search;
+  const hasActiveFilters = category !== "all" || region !== "all" || pathway !== "all" || search;
 
   return (
     <>
