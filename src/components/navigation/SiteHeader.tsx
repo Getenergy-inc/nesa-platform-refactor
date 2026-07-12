@@ -108,13 +108,16 @@ function isActive(pathname: string, href: string) {
 
 function DesktopNav() {
   const location = useLocation();
+  const focusRing =
+    "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2 focus-visible:ring-offset-charcoal";
   return (
-    <NavigationMenu className="hidden min-[1100px]:flex">
+    <NavigationMenu className="hidden min-[1100px]:flex" aria-label="Primary">
       <NavigationMenuList className="gap-1">
         {SITE_NAV.map((item) => {
           const active = isActive(location.pathname, item.href);
           const cls = cn(
             "px-3 py-2 text-sm font-medium rounded-md transition-colors",
+            focusRing,
             active ? "text-gold bg-gold/10" : "text-white/85 hover:text-gold hover:bg-gold/5",
           );
           if (!item.children) {
@@ -131,6 +134,7 @@ function DesktopNav() {
               </NavigationMenuItem>
             );
           }
+          const groupLabelId = `nav-group-${item.href.replace(/[^a-z0-9]+/gi, "-")}`;
           return (
             <NavigationMenuItem key={item.href}>
               <NavigationMenuTrigger
@@ -140,20 +144,40 @@ function DesktopNav() {
                 {item.label}
               </NavigationMenuTrigger>
               <NavigationMenuContent>
-                <ul className="grid w-[300px] gap-1 p-2 bg-charcoal border border-gold/20">
-                  {item.children.map((c) => (
-                    <li key={c.href}>
-                      <NavigationMenuLink asChild>
-                        <Link
-                          to={c.href}
-                          onClick={() => trackEvent("dropdown_item_click", { parent: item.label, label: c.label, href: c.href })}
-                          className="block px-3 py-2 rounded-md text-sm text-white/85 hover:text-gold hover:bg-gold/10"
-                        >
-                          {c.label}
-                        </Link>
-                      </NavigationMenuLink>
-                    </li>
-                  ))}
+                <ul
+                  className="grid w-[300px] gap-1 p-2 bg-charcoal border border-gold/20"
+                  aria-labelledby={groupLabelId}
+                >
+                  <li id={groupLabelId} className="sr-only">
+                    {item.label} submenu
+                  </li>
+                  {item.children.map((c) => {
+                    const childActive = isActive(location.pathname, c.href);
+                    return (
+                      <li key={c.href}>
+                        <NavigationMenuLink asChild>
+                          <Link
+                            to={c.href}
+                            aria-current={childActive ? "page" : undefined}
+                            onClick={() =>
+                              trackEvent("dropdown_item_click", {
+                                parent: item.label,
+                                label: c.label,
+                                href: c.href,
+                              })
+                            }
+                            className={cn(
+                              "block px-3 py-2 rounded-md text-sm hover:text-gold hover:bg-gold/10",
+                              focusRing,
+                              childActive ? "text-gold bg-gold/10" : "text-white/85",
+                            )}
+                          >
+                            {c.label}
+                          </Link>
+                        </NavigationMenuLink>
+                      </li>
+                    );
+                  })}
                 </ul>
               </NavigationMenuContent>
             </NavigationMenuItem>
