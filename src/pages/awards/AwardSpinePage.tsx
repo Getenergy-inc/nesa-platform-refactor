@@ -28,6 +28,7 @@ import {
   trackRegionView,
 } from "@/lib/analytics";
 import { filterMasterNominees, getMasterRegions } from "@/lib/nomineeMasterData";
+import { useDbSpine } from "@/hooks/useDbSpine";
 
 export default function AwardSpinePage() {
   const params = useParams<{
@@ -40,7 +41,25 @@ export default function AwardSpinePage() {
     ? getPathway(params.pathwaySlug as PathwaySlug)
     : undefined;
   const category = params.categorySlug ? getCategory(params.categorySlug) : undefined;
-  const subcategories = category ? getSubcategoriesByCategory(category.slug) : [];
+  const staticSubs = category ? getSubcategoriesByCategory(category.slug) : [];
+
+  // DB-first hydration — merge with static registry so new DB additions surface
+  // automatically without a code deploy. Static fallback provides descriptions.
+  const db = useDbSpine();
+  const dbSubs = category ? db.subcategoriesByCategory[category.slug] ?? [] : [];
+  const subcategories = useMemo(() => {
+    const map = new Map<string, { slug: string; name: string; description?: string }>();
+    staticSubs.forEach((s) => map.set(s.slug, s));
+    dbSubs.forEach((s) =>
+      map.set(s.slug, {
+        slug: s.slug,
+        name: s.name,
+        description: s.description ?? map.get(s.slug)?.description,
+      }),
+    );
+    return Array.from(map.values());
+  }, [staticSubs, dbSubs]);
+
   const subcategory = params.subcategorySlug
     ? subcategories.find((s) => s.slug === params.subcategorySlug)
     : undefined;
@@ -146,21 +165,37 @@ export default function AwardSpinePage() {
           {/* PATHWAY LEVEL — show categories */}
           {!category && (
             <section aria-label="Categories" className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-              {getCategoriesByPathway(pathway.slug).map((c) => (
-                <Link
-                  key={c.slug}
-                  to={`/awards/explore/${pathway.slug}/${c.slug}`}
-                  className="group rounded-xl border border-gold/20 bg-black/40 p-5 hover:border-gold/60"
-                >
-                  <h3 className="font-display text-lg text-white group-hover:text-gold">
-                    {c.name}
-                  </h3>
-                  <p className="mt-2 line-clamp-3 text-sm text-white/65">{c.description}</p>
-                  <span className="mt-3 inline-flex items-center gap-1 text-xs font-semibold text-gold">
-                    Explore subcategories <ChevronRight className="h-3 w-3" aria-hidden />
-                  </span>
-                </Link>
-              ))}
+              {(() => {
+                const staticCats = getCategoriesByPathway(pathway.slug);
+                const dbCats = db.categoriesByTier[pathway.slug] ?? [];
+                const merged = new Map<
+                  string,
+                  { slug: string; name: string; description: string }
+                >();
+                staticCats.forEach((c) => merged.set(c.slug, c));
+                dbCats.forEach((c) =>
+                  merged.set(c.slug, {
+                    slug: c.slug,
+                    name: c.name,
+                    description: c.description ?? merged.get(c.slug)?.description ?? "",
+                  }),
+                );
+                return Array.from(merged.values()).map((c) => (
+                  <Link
+                    key={c.slug}
+                    to={`/awards/explore/${pathway.slug}/${c.slug}`}
+                    className="group rounded-xl border border-gold/20 bg-black/40 p-5 hover:border-gold/60"
+                  >
+                    <h3 className="font-display text-lg text-white group-hover:text-gold">
+                      {c.name}
+                    </h3>
+                    <p className="mt-2 line-clamp-3 text-sm text-white/65">{c.description}</p>
+                    <span className="mt-3 inline-flex items-center gap-1 text-xs font-semibold text-gold">
+                      Explore subcategories <ChevronRight className="h-3 w-3" aria-hidden />
+                    </span>
+                  </Link>
+                ));
+              })()}
             </section>
           )}
 
