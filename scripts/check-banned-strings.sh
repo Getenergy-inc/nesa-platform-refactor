@@ -67,9 +67,9 @@ for pattern in "${TERMINOLOGY_WARN[@]}"; do
        --exclude='recognitionArchitecture.ts' \
        --exclude='banned-strings.test.ts' \
        -- "$pattern" src/ public/ index.html 2>/dev/null); then
-    hits=$(echo "$matches" | wc -l | tr -d ' ')
-    echo "⚠️  Terminology drift: \"$pattern\" ($hits) — prefer 'subcategory' or 'tier'."
-    WARN_COUNT=$((WARN_COUNT + hits))
+    echo "❌ Terminology drift (strict): \"$pattern\" — use 'subcategory' or 'tier'."
+    echo "$matches"
+    FAIL=1
   fi
 done
 
