@@ -611,19 +611,12 @@ function MobileNav({ onOpenCVOMessage }: { onOpenCVOMessage: () => void }) {
                     Become a Sponsor
                   </Button>
                 </Link>
-                {/* Secondary: Nominate + Vote */}
-                <div className="grid grid-cols-2 gap-2">
-                  <Link to="/nominate" onClick={handleLinkClick}>
-                    <Button variant="outline" className="w-full border-gold/40 text-gold hover:bg-gold/10 hover:text-gold bg-transparent min-h-[48px] py-3 h-auto touch-manipulation">
-                      Nominate
-                    </Button>
-                  </Link>
-                  <Link to="/vote" onClick={handleLinkClick}>
-                    <Button variant="outline" className="w-full border-gold/40 text-gold hover:bg-gold/10 hover:text-gold bg-transparent min-h-[48px] py-3 h-auto touch-manipulation">
-                      Vote
-                    </Button>
-                  </Link>
-                </div>
+                {/* Secondary: Nominate (voting sunset for 2026 — no public award voting) */}
+                <Link to="/nominate" onClick={handleLinkClick} className="block">
+                  <Button variant="outline" className="w-full border-gold/40 text-gold hover:bg-gold/10 hover:text-gold bg-transparent min-h-[48px] py-3 h-auto touch-manipulation">
+                    Nominate an Education Enabler
+                  </Button>
+                </Link>
                 {/* Tertiary: Get Started (guided landing — does not compete with primary CTAs) */}
                 <Link to="/get-involved" onClick={handleLinkClick} className="block">
                   <Button
@@ -764,12 +757,13 @@ function UserMenu() {
 // MOBILE BOTTOM NAV - Quick Actions Bar
 // ============================================================================
 
+// 2026: No public award voting. Vote slot replaced with Directory discovery.
 const mobileQuickActions = [
   { icon: Home, label: "Home", href: "/" },
   { icon: Award, label: "Nominate", href: "/nominate" },
-  { icon: Vote, label: "Vote", href: "/vote" },
+  { icon: Globe, label: "Directory", href: "/nominees" },
   { icon: Heart, label: "Donate", href: "/donate" },
-  { icon: Globe, label: "Explore", href: "/regions" },
+  { icon: Globe, label: "Regions", href: "/regions" },
   { icon: LayoutDashboard, label: "Dashboard", href: "/dashboard" },
 ];
 
