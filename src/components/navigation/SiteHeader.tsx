@@ -237,33 +237,54 @@ function MobileMenu() {
         </SheetHeader>
         <div className="p-3">
           <NominateButton className="w-full mb-3" />
-          <Accordion type="single" collapsible className="w-full">
-            {SITE_NAV.map((item) => (
-              item.children ? (
-                <AccordionItem key={item.href} value={item.href} className="border-gold/15">
-                  <AccordionTrigger className="text-white hover:text-gold px-3 text-sm">
-                    {item.label}
-                  </AccordionTrigger>
-                  <AccordionContent className="pb-1">
-                    <Link to={item.href} onClick={close} className={cn(linkCls, "font-semibold text-gold/90")}>
-                      {item.label} overview
-                    </Link>
-                    {item.children.map((c) => (
-                      <Link key={c.href} to={c.href} onClick={close} className={linkCls}>
-                        {c.label}
+          <nav aria-label="Mobile primary">
+            <Accordion type="single" collapsible className="w-full">
+              {SITE_NAV.map((item) => (
+                item.children ? (
+                  <AccordionItem key={item.href} value={item.href} className="border-gold/15">
+                    <AccordionTrigger className="text-white hover:text-gold px-3 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold rounded-md">
+                      {item.label}
+                    </AccordionTrigger>
+                    <AccordionContent className="pb-1">
+                      <Link
+                        to={item.href}
+                        onClick={close}
+                        aria-current={isActive(location.pathname, item.href) ? "page" : undefined}
+                        className={cn(linkCls, "font-semibold text-gold/90")}
+                      >
+                        {item.label} overview
                       </Link>
-                    ))}
-                  </AccordionContent>
-                </AccordionItem>
-              ) : (
-                <div key={item.href} className="border-b border-gold/15">
-                  <Link to={item.href} onClick={close} className="block px-3 py-3 text-sm text-white hover:text-gold">
-                    {item.label}
-                  </Link>
-                </div>
-              )
-            ))}
-          </Accordion>
+                      {item.children.map((c) => {
+                        const childActive = isActive(location.pathname, c.href);
+                        return (
+                          <Link
+                            key={c.href}
+                            to={c.href}
+                            onClick={close}
+                            aria-current={childActive ? "page" : undefined}
+                            className={cn(linkCls, childActive && "text-gold bg-gold/10")}
+                          >
+                            {c.label}
+                          </Link>
+                        );
+                      })}
+                    </AccordionContent>
+                  </AccordionItem>
+                ) : (
+                  <div key={item.href} className="border-b border-gold/15">
+                    <Link
+                      to={item.href}
+                      onClick={close}
+                      aria-current={isActive(location.pathname, item.href) ? "page" : undefined}
+                      className="block px-3 py-3 text-sm text-white hover:text-gold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold rounded-md"
+                    >
+                      {item.label}
+                    </Link>
+                  </div>
+                )
+              ))}
+            </Accordion>
+          </nav>
 
           <div className="mt-4 border-t border-gold/20 pt-3 space-y-1">
             {user ? (
