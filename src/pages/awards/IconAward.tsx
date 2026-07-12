@@ -8,6 +8,7 @@ import { BrandedCategoryHero } from "@/components/awards/BrandedCategoryHero";
 import { BrandedDocumentaryPreview } from "@/components/awards/BrandedDocumentaryPreview";
 import { BreadcrumbJsonLd } from "@/components/seo/BreadcrumbJsonLd";
 import { AwardStandardStack } from "@/components/awards/AwardStandardSections";
+import { SubcategoryPathways } from "@/components/awards/standard/sections";
 
 import { getTVShowByAward } from "@/config/awardTVShows";
 import { getCategoriesGrouped } from "@/config/nesaCategories";
@@ -128,64 +129,24 @@ export default function IconAward() {
           </div>
         </section>
 
-        {/* Subcategories — 3+3+3 = 9 Icons */}
-        <section className="bg-charcoal py-16 lg:py-24">
-          <div className="container mx-auto px-4">
-            <div className="text-center mb-12">
-              <Badge variant="outline" className="border-purple-500/40 text-purple-400 mb-4 px-4 py-1.5">
-                <Star className="h-3.5 w-3.5 mr-1.5" />
-                3 + 3 + 3 = 9 Icons
-              </Badge>
-              <h2 className="mb-3 font-display text-3xl font-bold text-white">
-                Three Pathways to Icon Status
-              </h2>
-              <p className="text-white/60 max-w-2xl mx-auto">
-                Each pathway honours 3 Icons per season — individuals whose 20+ year legacy has reshaped African education.
-              </p>
-            </div>
+        {/* Subcategories — shared reusable grid */}
+        <SubcategoryPathways
+          pageSlug="africa-education-icon"
+          heading="Three Pathways to Icon Status"
+          sub="Each pathway honours 3 Icons per season — individuals whose 20+ year legacy has reshaped African education."
+          subcategories={subcategories.map((cat) => ({
+            slug: cat.slug,
+            title: cat.title,
+            blurb: cat.description,
+            recognises: cat.examples,
+            scope: "Continental",
+            subcategoryCount: cat.count,
+            voteSplit: "Jury only",
+            viewHref: `/awards/africa-education-icon/${cat.slug}`,
+            nominateHref: `/nominate?category=africa-education-icon-award&track=${cat.slug}`,
+          }))}
+        />
 
-            <div className="grid gap-6 md:grid-cols-3">
-              {subcategories.map((cat, i) => (
-                <div
-                  key={cat.title}
-                  className="group relative rounded-2xl border border-white/10 bg-gradient-to-b from-purple-500/10 via-charcoal-light to-charcoal overflow-hidden transition-all duration-300 hover:border-purple-500/40 hover:shadow-lg hover:shadow-purple-500/10"
-                >
-                  {/* Number accent */}
-                  <div className="absolute top-4 right-4 flex h-10 w-10 items-center justify-center rounded-full bg-purple-500/15 border border-purple-500/30">
-                    <span className="text-lg font-bold text-purple-400">{cat.count}</span>
-                  </div>
-
-                  <div className="p-6 pt-8">
-                    {/* Icon */}
-                    <div className="mb-5 flex h-14 w-14 items-center justify-center rounded-xl bg-gradient-to-br from-purple-500/20 to-gold/10 border border-purple-500/20">
-                      <cat.icon className="h-7 w-7 text-purple-400 group-hover:text-gold transition-colors" />
-                    </div>
-
-                    {/* Title & description */}
-                    <h3 className="text-lg font-bold text-white mb-2 group-hover:text-gold transition-colors">{cat.title}</h3>
-                    <p className="text-white/60 text-sm leading-relaxed mb-5">{cat.description}</p>
-
-                    {/* Divider */}
-                    <div className="border-t border-white/10 pt-4">
-                      <p className="text-xs text-white/40 font-medium uppercase tracking-wider mb-2">Example profiles</p>
-                      <p className="text-xs text-white/50 leading-relaxed">{cat.examples}</p>
-                    </div>
-
-                    {/* Subcategory + Nominate links */}
-                    <div className="mt-5 flex flex-wrap gap-2 pt-4 border-t border-white/10">
-                      <Button asChild size="sm" variant="outline" className="border-gold/30 text-white hover:bg-gold/10 h-8">
-                        <Link to={`/awards/africa-education-icon/${cat.slug}`}>View Subcategory</Link>
-                      </Button>
-                      <Button asChild size="sm" className="bg-gold text-charcoal hover:bg-gold/90 h-8">
-                        <Link to={`/nominate?category=africa-education-icon-award&track=${cat.slug}`}>Nominate</Link>
-                      </Button>
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
 
         {/* Criteria */}
         <section className="bg-charcoal/95 py-16 lg:py-24">
