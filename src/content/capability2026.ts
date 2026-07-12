@@ -216,7 +216,7 @@ export const KEY_PROGRAMMES = [
 ] as const;
 
 export const CAPABILITY_AREAS = [
-  { title: "Recognition Programme Design", body: "Award category development, recognition pathway structuring, nomination framework design, nominee profile development, award tier architecture and continental participation structure." },
+  { title: "Recognition Programme Design", body: "Award category development, recognition subcategory structuring, nomination framework design, nominee profile development, award tier architecture and continental participation structure." },
   { title: "Nomination and Verification Management", body: "Public nomination collection, nominee documentation, category review, verification support, regional classification and integrity screening." },
   { title: "Jury and Governance Coordination", body: "Judge onboarding, evaluation framework support, conflict-of-interest guidance, scoring process coordination, governance communication and independent review support." },
   { title: "Media Production and Storytelling", body: "NESA Africa TV programming, documentary production, nominee interviews, public awareness campaigns, gala broadcast planning, social media activation and regional correspondent reporting." },

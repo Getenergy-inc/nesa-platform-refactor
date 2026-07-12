@@ -63,7 +63,7 @@ export function FeaturedChangemakersSection() {
     { icon: Globe2, label: "Countries", value: stats.countries.toString() },
     { icon: MapPin, label: "Legacy Regions", value: stats.regions.toString() },
     { icon: Trophy, label: "Award Categories", value: `${stats.categories}+` },
-    { icon: Sparkles, label: "Recognition Pathways", value: stats.pathways.toString() },
+    { icon: Sparkles, label: "Recognition Subcategories", value: stats.pathways.toString() },
   ];
 
   return (

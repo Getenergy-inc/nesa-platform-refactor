@@ -93,7 +93,7 @@ export default function InfluencerImpact2026() {
           {/* Stats */}
           <div className="mx-auto mt-8 grid max-w-3xl grid-cols-2 gap-3 md:grid-cols-4">
             <StatCard value={String(stats.total)} label="Verified Nominees" />
-            <StatCard value="3" label="Recognition Pathways" />
+            <StatCard value="3" label="Recognition Subcategories" />
             <StatCard value="100%" label="Public AGC Participation" />
             <StatCard value={String(stats.regions)} label="Recognition Regions" />
           </div>

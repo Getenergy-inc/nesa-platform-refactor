@@ -46,7 +46,7 @@ export function WhatIsNESASection() {
             </p>
             <p className="text-white/90">
               Built around <span className="text-gold font-semibold">Four Recognition Tiers, Eighteen Award
-              Categories and more than One Hundred Recognition Pathways</span>, NESA-Africa provides one of the
+              Categories and more than One Hundred Recognition Subcategories</span>, NESA-Africa provides one of the
               continent's most comprehensive frameworks for advancing Education for All.
             </p>
           </div>

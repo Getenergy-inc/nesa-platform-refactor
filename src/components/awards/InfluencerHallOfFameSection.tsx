@@ -29,7 +29,7 @@ import { trackEvent } from "@/lib/analytics";
  * Influencer Education Impact — Existing Nominees & Hall of Fame Preview.
  *
  * Replaces the generic HallOfFamePreview with a dynamic discovery hub organised
- * by the three recognition pathways (Social Media, Sports, Music) and grouped
+ * by the three recognition subcategories (Social Media, Sports, Music) and grouped
  * by 8 African regions + African Diaspora.
  */
 export function InfluencerHallOfFameSection() {
@@ -89,12 +89,12 @@ export function InfluencerHallOfFameSection() {
           </h2>
           <p className="mt-4 text-white/70 text-sm md:text-base leading-relaxed">
             Explore some of Africa's leading public figures using their influence to advance
-            Education for All. Browse nominees by recognition pathway and discover inspiring
+            Education for All. Browse nominees by recognition subcategory and discover inspiring
             Education Enablers from across Africa and the African Diaspora.
           </p>
         </div>
 
-        {/* Recognition Pathway Cards */}
+        {/* Recognition Subcategory Cards */}
         <div className="grid gap-5 md:grid-cols-3 mb-12">
           <PathwayCard
             id="social-media"
@@ -201,7 +201,7 @@ export function InfluencerHallOfFameSection() {
             <select
               value={pathway}
               onChange={(e) => setPathway(e.target.value as CategoryId | "all")}
-              aria-label="Recognition Pathway"
+              aria-label="Recognition Subcategory"
               className="px-3 py-2.5 rounded-lg bg-white/5 border border-white/10 text-white/85 text-sm focus:outline-none focus:border-gold/60"
             >
               <option value="all" className="bg-charcoal">All Pathways</option>

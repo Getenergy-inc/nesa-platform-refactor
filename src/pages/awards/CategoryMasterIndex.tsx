@@ -60,7 +60,7 @@ const GROUP_ICON: Record<CategoryGroup, React.ComponentType<{ className?: string
   special_recognition: Sparkles,
 };
 
-/** Premium descriptors for the four recognition pathways. */
+/** Premium descriptors for the four recognition subcategories. */
 const PATHWAY_CARDS: Array<{
   group: CategoryGroup;
   title: string;
@@ -231,7 +231,7 @@ const MASTER_FAQS = [
   },
   {
     q: "How do I find the right category to nominate in?",
-    a: "Start with the recognition pathway that fits your candidate, then pick a theme or use the filters to narrow by sector, role, country, institution type or impact area.",
+    a: "Start with the recognition subcategory that fits your candidate, then pick a theme or use the filters to narrow by sector, role, country, institution type or impact area.",
   },
   {
     q: "How does the EDX Matrix evaluate categories?",
@@ -340,7 +340,7 @@ export default function CategoryMasterIndex() {
         <div className="container mx-auto max-w-6xl px-4">
           <div className="mb-8">
             <Badge variant="outline" className="border-gold/40 text-gold mb-3">
-              Recognition Pathways
+              Recognition Subcategories
             </Badge>
             <h2 className="font-playfair text-2xl md:text-3xl text-foreground mb-2">
               Four ways NESA-Africa recognises education impact

@@ -228,7 +228,7 @@ export default function ContinueRecognition() {
               className="text-center"
             >
               <Badge className="mb-4 bg-gold/10 text-gold border border-gold/30 uppercase tracking-[0.18em] text-[10px]">
-                NESA-Africa 2026 · Recognition Pathway
+                NESA-Africa 2026 · Recognition Subcategory
               </Badge>
               <h1 className="font-display text-3xl sm:text-4xl md:text-5xl font-bold leading-tight mb-4">
                 Update Impact &{" "}
@@ -296,7 +296,7 @@ export default function ContinueRecognition() {
         <section className="container mx-auto px-5 py-12 max-w-5xl">
           <div className="text-center mb-8">
             <h2 className="font-display text-2xl md:text-3xl font-bold mb-2">
-              Voting vs Recognition Pathways
+              Voting vs Recognition Subcategories
             </h2>
             <p className="text-ivory/65 text-sm md:text-base max-w-2xl mx-auto">
               Two clear routes — choose the one that matches the nominee&apos;s category.

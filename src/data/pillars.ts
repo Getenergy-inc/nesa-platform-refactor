@@ -412,7 +412,7 @@ export const PILLARS: Pillar[] = [
     heroHeadline: "Recognising Governments, Ministries, Universities, Research Institutes, NGOs and Public Institutions Strengthening Education.",
     intro: [
       "The Continental Education Recognition & Awards pillar houses the broader NESA-Africa award categories.",
-      "This is where schools, universities, libraries, NGOs, governments, media organisations, creative arts contributors, policy leaders, public institutions, regional education actors, and faith-based education impact organisations find their recognition pathway.",
+      "This is where schools, universities, libraries, NGOs, governments, media organisations, creative arts contributors, policy leaders, public institutions, regional education actors, and faith-based education impact organisations find their recognition subcategory.",
       "This pillar keeps the full breadth of NESA-Africa intact while giving visitors a simple way to understand where the wider categories belong.",
     ],
     eligible: [

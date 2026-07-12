@@ -835,7 +835,7 @@ const App = () => (
 
 
 
-                  {/* Pathways to Recognition — dedicated page + 4 award category pages */}
+                  {/* Recognition Hub — dedicated page + 4 award category pages */}
                   <Route
                     path="/pathways"
                     element={

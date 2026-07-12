@@ -134,7 +134,7 @@ export default function NomineesHubPage() {
     return [
       { label: "Verified Education Enablers", value: list.length },
       { label: "Award Categories", value: 18 },
-      { label: "Recognition Pathways", value: 100 },
+      { label: "Recognition Subcategories", value: 100 },
       { label: "Recognition Tiers", value: 4 },
       { label: "Africa Regions", value: 8 },
       { label: "Global Communities", value: 2 },
