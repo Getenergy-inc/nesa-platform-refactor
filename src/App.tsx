@@ -147,6 +147,7 @@ import PillarPage from "./pages/awards/PillarPage";
 import AwardSpinePage from "./pages/awards/AwardSpinePage";
 import EighteenCategoriesPage from "./pages/awards/EighteenCategoriesPage";
 import CategoryDetailPage from "./pages/awards/CategoryDetailPage";
+import RecognitionHubPage from "./pages/recognition/RecognitionHubPage";
 
 import { ICON_CATEGORY, buildRedirectMap as buildCategoryRedirects } from "./config/awardCategories";
 
@@ -907,6 +908,8 @@ const App = () => (
                   />
 
                   {/* Canonical Awards Spine — Pathway → Category → Subcategory */}
+                  <Route path="/recognition" element={<WithLayout><RecognitionHubPage /></WithLayout>} />
+                  
                   <Route path="/awards/explore" element={<WithLayout><Awards /></WithLayout>} />
                   <Route path="/awards/explore/:pathwaySlug" element={<WithLayout><AwardSpinePage /></WithLayout>} />
                   <Route path="/awards/explore/:pathwaySlug/:categorySlug" element={<WithLayout><AwardSpinePage /></WithLayout>} />
