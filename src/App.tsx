@@ -916,6 +916,9 @@ const App = () => (
                   {LEGACY_RECOGNITION_REDIRECTS.map((r) => (
                     <Route key={r.from} path={r.from} element={<RedirectRoute to={r.to} />} />
                   ))}
+                  {/* Stage 7 — DB-resolved legacy category redirect (/awards/c/:slug → spine). */}
+                  <Route path="/awards/c/:categorySlug" element={<LegacyCategoryRedirect />} />
+                  <Route path="/awards/category/:categorySlug" element={<LegacyCategoryRedirect />} />
 
                   <Route path="/awards/explore" element={<WithLayout><Awards /></WithLayout>} />
                   <Route path="/awards/explore/:pathwaySlug" element={<WithLayout><AwardSpinePage /></WithLayout>} />
