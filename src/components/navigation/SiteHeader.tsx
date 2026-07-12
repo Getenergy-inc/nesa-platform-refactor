@@ -4,7 +4,7 @@
 
 import { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { ChevronDown, Menu, X, Bell, Wallet, LogOut, LogIn, HelpCircle, FileCheck } from "lucide-react";
+import { Menu, LogOut, LogIn, UserCircle2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   NavigationMenu,
@@ -39,54 +39,45 @@ function SkipLink() {
   );
 }
 
-function UtilityBar({ onNavigate }: { onNavigate?: () => void }) {
+function AccountActions() {
+  // Inline desktop account actions rendered next to Nominate.
+  // Signed-out: EN + Sign In. Signed-in: My Account + EN + Sign Out.
   const { user, signOut } = useAuth();
-  const track = (label: string, href: string) =>
-    trackEvent("utility_navigation_click", { label, href, state: user ? "signed_in" : "signed_out" });
-
   const linkCls =
-    "inline-flex items-center gap-1.5 px-2 py-1 rounded text-white/75 hover:text-gold hover:bg-gold/10 transition-colors";
-
+    "inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-md text-sm text-white/85 hover:text-gold hover:bg-gold/10 transition-colors";
   return (
-    <div className="hidden md:block w-full bg-charcoal/95 border-b border-gold/15 text-[11px] lg:text-xs">
-      <div className="container mx-auto px-4 flex items-center justify-end gap-1 h-8">
-        {user ? (
-          <>
-            <Link to="/account" className={linkCls} onClick={() => { track("My Wallet", "/account"); onNavigate?.(); }}>
-              <Wallet className="h-3 w-3" aria-hidden /> My Wallet
-            </Link>
-            <Link to="/account/notifications" className={linkCls} onClick={() => track("Notifications", "/account/notifications")}>
-              <Bell className="h-3 w-3" aria-hidden /> Notifications
-            </Link>
-            <Link to="/support#help" className={linkCls} onClick={() => track("Help", "/support#help")}>
-              <HelpCircle className="h-3 w-3" aria-hidden /> Help
-            </Link>
-            <span className="h-3 w-px bg-gold/20 mx-1" aria-hidden />
-            <LanguageSwitcher className="text-[11px]" />
-            <button
-              type="button"
-              onClick={async () => { trackEvent("sign_out_click", {}); await signOut(); }}
-              className={linkCls}
-            >
-              <LogOut className="h-3 w-3" aria-hidden /> Sign Out
-            </button>
-          </>
-        ) : (
-          <>
-            <Link to="/accept-nomination" className={linkCls} onClick={() => track("Accept Nomination", "/accept-nomination")}>
-              <FileCheck className="h-3 w-3" aria-hidden /> Accept Nomination
-            </Link>
-            <Link to="/support#help" className={linkCls} onClick={() => track("Help", "/support#help")}>
-              <HelpCircle className="h-3 w-3" aria-hidden /> Help
-            </Link>
-            <span className="h-3 w-px bg-gold/20 mx-1" aria-hidden />
-            <LanguageSwitcher className="text-[11px]" />
-            <Link to="/login" className={linkCls} onClick={() => { trackEvent("sign_in_click", {}); track("Sign In", "/login"); }}>
-              <LogIn className="h-3 w-3" aria-hidden /> Sign In
-            </Link>
-          </>
-        )}
-      </div>
+    <div className="hidden min-[1100px]:flex items-center gap-1">
+      {user ? (
+        <>
+          <Link
+            to="/account"
+            className={linkCls}
+            onClick={() => trackEvent("account_click", { href: "/account" })}
+          >
+            <UserCircle2 className="h-4 w-4" aria-hidden /> My Account
+          </Link>
+          <LanguageSwitcher className="text-sm" />
+          <button
+            type="button"
+            onClick={async () => { trackEvent("sign_out_click", {}); await signOut(); }}
+            className={linkCls}
+            aria-label="Sign out"
+          >
+            <LogOut className="h-4 w-4" aria-hidden /> Sign Out
+          </button>
+        </>
+      ) : (
+        <>
+          <LanguageSwitcher className="text-sm" />
+          <Link
+            to="/login"
+            className={linkCls}
+            onClick={() => trackEvent("sign_in_click", { href: "/login" })}
+          >
+            <LogIn className="h-4 w-4" aria-hidden /> Sign In
+          </Link>
+        </>
+      )}
     </div>
   );
 }
