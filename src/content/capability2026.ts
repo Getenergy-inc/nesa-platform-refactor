@@ -129,7 +129,7 @@ export const WHAT_WE_DO = [
 export const RECOGNITION_ARCHITECTURE_STATS = [
   { value: "4", label: "Recognition Tiers" },
   { value: "18", label: "Award Categories" },
-  { value: "100+", label: "Recognition Pathways" },
+  { value: "100+", label: "Recognition Subcategories" },
   { value: "9", label: "Recognition Pillars" },
   { value: "8", label: "Africa Regions" },
   { value: "2", label: "Global Communities" },

@@ -69,7 +69,7 @@ export const PLATFORM_IDENTITY_SENTENCE =
 export const RECOGNITION_ARCHITECTURE_SUMMARY = [
   { label: "4 Recognition Tiers", href: "/awards" },
   { label: "18 Recognition Categories", href: "/awards#categories" },
-  { label: "100+ Recognition Pathways", href: "/awards#pathways" },
+  { label: "100+ Recognition Subcategories", href: "/awards#subcategories" },
   { label: "9 Recognition Pillars", href: "/awards/pillars" },
   { label: "8 Africa Regions", href: "/regions" },
   { label: "2 Global Communities", href: "/regions#communities" },
