@@ -497,22 +497,8 @@ const App = () => (
                       </WithLayout>
                     }
                   />
-                  <Route
-                    path="/about/vision-2035"
-                    element={
-                      <WithLayout>
-                        <Vision2035 />
-                      </WithLayout>
-                    }
-                  />
-                  <Route
-                    path="/about/governance"
-                    element={
-                      <WithLayout>
-                        <Governance />
-                      </WithLayout>
-                    }
-                  />
+                  <Route path="/about/vision-2035" element={<Navigate to="/about#vision-2035" replace />} />
+                  <Route path="/about/governance" element={<Navigate to="/about#governance" replace />} />
                   <Route
                     path="/governance"
                     element={
