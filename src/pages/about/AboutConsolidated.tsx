@@ -1,8 +1,8 @@
-// About & Governance — one consolidated page (30-page refactor).
+// About NESA-Africa — consolidated page (22-page architecture).
+// Governance moved to its own /governance route.
 import { useEffect } from "react";
 import { Helmet } from "react-helmet-async";
 import About from "@/pages/about/About";
-import Governance from "@/pages/about/Governance";
 import SCEF from "@/pages/about/SCEF";
 import Vision2035 from "@/pages/about/Vision2035";
 import FAQ from "@/pages/FAQ";
@@ -11,9 +11,6 @@ const SECTIONS = [
   { id: "about", label: "About" },
   { id: "scef", label: "SCEF" },
   { id: "vision-2035", label: "Vision 2035" },
-  { id: "governance", label: "Governance & Integrity" },
-  { id: "nrc", label: "NRC" },
-  { id: "coi", label: "Conflict of Interest" },
   { id: "faq", label: "FAQs" },
 ];
 
@@ -30,8 +27,11 @@ export default function AboutConsolidated() {
   return (
     <>
       <Helmet>
-        <title>About NESA-Africa · Mission, Governance, SCEF & Vision 2035</title>
-        <meta name="description" content="About NESA-Africa, our SCEF relationship, mission, history, governance, integrity firewalls, NRC, judge scope, conflict-of-interest rules, sponsor firewall and FAQs." />
+        <title>About NESA-Africa · Vision, Mission, SCEF & Vision 2035</title>
+        <meta
+          name="description"
+          content="About NESA-Africa — vision, mission, our SCEF relationship, history, Vision 2035 continental roadmap, and answers to frequently asked questions."
+        />
       </Helmet>
       <nav aria-label="About sections" className="sticky top-14 sm:top-16 z-30 bg-charcoal/95 backdrop-blur border-b border-gold/20 overflow-x-auto">
         <ul className="flex gap-4 px-4 py-3 text-sm whitespace-nowrap">
@@ -45,16 +45,13 @@ export default function AboutConsolidated() {
       <section id="about"><About /></section>
       <section id="scef"><SCEF /></section>
       <section id="vision-2035"><Vision2035 /></section>
-      <section id="governance"><Governance /></section>
-      <section id="nrc" className="py-16 px-4 max-w-4xl mx-auto text-center">
-        <h2 className="text-3xl font-bold text-gold mb-4">Nominee Review Committee (NRC)</h2>
-        <p className="text-white/80">The NRC verifies every nomination against evidence and eligibility criteria before any judging begins. Full scope described under Governance above.</p>
-      </section>
-      <section id="coi" className="py-16 px-4 max-w-4xl mx-auto text-center">
-        <h2 className="text-3xl font-bold text-gold mb-4">Conflict of Interest & Sponsor Firewall</h2>
-        <p className="text-white/80">Judges, NRC members and staff sign COI declarations. Sponsors have no visibility into scoring. Full policies published under Governance.</p>
-      </section>
       <section id="faq"><FAQ /></section>
+      <section className="py-8 px-4 max-w-4xl mx-auto text-center border-t border-gold/10">
+        <p className="text-white/70 text-sm">
+          Governance, Integrity Firewall, NRC and Conflict-of-Interest policies now live on the dedicated{" "}
+          <a href="/governance" className="text-gold underline">Governance & Integrity</a> page.
+        </p>
+      </section>
     </>
   );
 }
