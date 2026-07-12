@@ -4,8 +4,6 @@
 import { ReactNode } from "react";
 import { NESAHeader } from "@/components/nesa/NESAHeader";
 import { NESAFooter } from "@/components/nesa/NESAFooter";
-import { UtilityBar } from "@/components/nesa/UtilityBar";
-import { MobileBottomNav } from "@/components/navigation/MainNav";
 import { BottomPageNav } from "@/components/navigation/PageNavigation";
 import { ExitIntentPopup } from "@/components/nesa/ExitIntentPopup";
 import { PageFAQSection, FloatingFAQButton } from "@/components/nesa/PageFAQ";
@@ -44,9 +42,8 @@ export function PublicLayout({
 
   return (
     <div className="min-h-screen bg-charcoal flex flex-col">
-      <UtilityBar />
       <NESAHeader />
-      <main id="main-content" tabIndex={-1} className="flex-1 pt-20 sm:pt-24 lg:pt-[104px] pb-20 lg:pb-16">
+      <main id="main-content" tabIndex={-1} className="flex-1 pt-14 lg:pt-16 pb-16">
         {children}
       </main>
       {showCTA && (
@@ -57,7 +54,6 @@ export function PublicLayout({
       {showTrustSpine && <TrustSpine variant={trustSpineVariant} />}
       {showFAQ && <PageFAQSection />}
       {showFooter && <NESAFooter />}
-      <MobileBottomNav />
       <BottomPageNav />
       <ExitIntentPopup />
       <FloatingFAQButton />
