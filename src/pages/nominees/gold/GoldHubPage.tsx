@@ -106,7 +106,7 @@ export default function GoldHubPage() {
           <div id="categories" className="scroll-mt-24">
             <div className="text-center mb-8">
               <Badge className="bg-gold/10 text-gold border-gold/30 mb-3 uppercase tracking-[0.18em] text-[10px]">
-                Choose a Pathway
+                Choose a Subcategory
               </Badge>
               <h2 className="font-display text-2xl md:text-4xl font-bold text-ivory mb-3">
                 Three Cultural Impact Categories

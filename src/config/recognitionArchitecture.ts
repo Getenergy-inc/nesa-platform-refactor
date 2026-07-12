@@ -70,7 +70,7 @@ export interface EducationRegion {
 }
 
 // ============================================================================
-// LEVEL 1 — Four Recognition Pathways
+// LEVEL 1 — Four Recognition Subcategories
 // ============================================================================
 
 export const RECOGNITION_PATHWAYS: RecognitionPathway[] = [

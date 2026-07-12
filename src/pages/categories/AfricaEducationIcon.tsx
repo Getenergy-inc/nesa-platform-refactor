@@ -158,7 +158,7 @@ export default function AfricaEducationIconPage() {
           <div className="container mx-auto px-4">
             <div className="max-w-2xl mb-10">
               <span className="text-[11px] uppercase tracking-[0.18em] text-gold font-semibold">
-                Step 1 · Choose a Pathway
+                Step 1 · Choose a Subcategory
               </span>
               <h2 className="mt-2 font-display text-3xl md:text-4xl font-bold text-white">
                 Three Pathways to Icon Status

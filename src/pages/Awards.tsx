@@ -98,7 +98,7 @@ const PATHWAYS = [
     icon: Crown,
     title: "Africa Education Icon Award",
     subtitle: "Lifetime Achievement · 2006–2026",
-    stats: ["3 Icon Pathways", "Jury Selection", "Continental Honour"],
+    stats: ["3 Icon Subcategories", "Jury Selection", "Continental Honour"],
     description: "Recognising transformational educational leaders with sustained 10+ year impact.",
     href: "/awards/icon",
     cta: "Explore Icon Award",
@@ -124,7 +124,7 @@ const PATHWAYS = [
 const TIER_ARCHITECTURE = [
   { tier: "Tier 1", name: "Blue Garnet Award", a: "9 Categories", b: "63 Subcategories", icon: Gem },
   { tier: "Tier 2", name: "Platinum Recognition", a: "7 Categories", b: "27 Subcategories", icon: Medal },
-  { tier: "Tier 3", name: "Africa Education Icon", a: "3 Icon Pathways", b: "Lifetime Honour", icon: Crown },
+  { tier: "Tier 3", name: "Africa Education Icon", a: "3 Icon Subcategories", b: "Lifetime Honour", icon: Crown },
   { tier: "Tier 4", name: "Influencers Education Impact", a: "3 Public Categories", b: "Editorial Selection", icon: Sparkles },
 ];
 

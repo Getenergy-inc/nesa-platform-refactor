@@ -115,7 +115,7 @@ const CATEGORIES: CategoryCard[] = [
   },
 ];
 
-// ─── Recognition Pathway Steps ───────────────────────────────
+// ─── Recognition Subcategory Steps ───────────────────────────────
 const PATHWAY_STEPS = [
   { label: "Nomination", icon: Award, description: "Submit or re-nominate a cultural leader" },
   { label: "EDI Review", icon: ShieldCheck, description: "Education Development Index evaluation" },
@@ -472,7 +472,7 @@ function GoldCategoryCard({ card, index }: { card: CategoryCard; index: number }
   );
 }
 
-// ─── Recognition Pathway Diagram (Horizontal) ────────────────
+// ─── Recognition Subcategory Diagram (Horizontal) ────────────────
 function RecognitionPathway() {
   return (
     <motion.div
