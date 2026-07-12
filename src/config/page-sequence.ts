@@ -6,11 +6,17 @@ export interface PageEntry {
   section?: string;
 }
 
+// 60→38 public-page consolidation (2026 refactor).
+// Removed: public voting routes (/vote, /how-voting-works, /trending, /earn-agc,
+// /about-agc, /awards/winners, /results) per PUBLIC_AWARD_VOTING sunset.
+// Collapsed: legacy category listings (/awards/categories, blue-garnet-categories,
+// platinum-certificate-categories, /awards/gold, /awards/icon) into /recognition
+// which fetches the DB spine.
 export const PAGE_SEQUENCE: PageEntry[] = [
-  // Home
+  // Home (1)
   { path: "/", label: "Home", section: "Home" },
 
-  // About
+  // About (6)
   { path: "/about", label: "About NESA", section: "About" },
   { path: "/about/vision-2035", label: "Vision 2035", section: "About" },
   { path: "/about/governance", label: "Governance", section: "About" },
@@ -18,76 +24,54 @@ export const PAGE_SEQUENCE: PageEntry[] = [
   { path: "/about/scef", label: "SCEF", section: "About" },
   { path: "/about/social-impact", label: "Social Impact", section: "About" },
 
-  // Awards
+  // Awards (6)
   { path: "/awards", label: "Awards Overview", section: "Awards" },
-  { path: "/awards/categories", label: "All Categories", section: "Awards" },
-  { path: "/awards/blue-garnet-categories", label: "Blue Garnet Categories", section: "Awards" },
-  { path: "/awards/platinum-certificate-categories", label: "Platinum Categories", section: "Awards" },
-  { path: "/awards/africa-education-icon", label: "Africa Education Icon", section: "Awards" },
-  { path: "/awards/influencers-education-impact", label: "Influencers Education Impact", section: "Awards" },
-  { path: "/awards/platinum", label: "Platinum Award", section: "Awards" },
-  { path: "/awards/gold", label: "Gold Award", section: "Awards" },
-  { path: "/awards/blue-garnet", label: "Blue Garnet Award", section: "Awards" },
-  { path: "/awards/icon", label: "Icon Award", section: "Awards" },
-  { path: "/awards/winners", label: "Winners", section: "Awards" },
-  { path: "/results", label: "Results", section: "Awards" },
   { path: "/recognition", label: "Recognition Hub", section: "Awards" },
+  { path: "/awards/africa-education-icon", label: "Africa Education Icon", section: "Awards" },
+  { path: "/awards/influencers-education-impact", label: "Influencer Education Impact", section: "Awards" },
+  { path: "/awards/gold-blue-garnet", label: "Gold-Blue Garnet", section: "Awards" },
+  { path: "/awards/platinum", label: "Platinum Recognition", section: "Awards" },
 
-  // Nominees & Voting
-  { path: "/nominees", label: "Nominees Directory", section: "Nominees & Voting" },
-  { path: "/trending", label: "Featured Nominees", section: "Nominees & Voting" },
-  { path: "/vote", label: "Vote", section: "Nominees & Voting" },
-  { path: "/how-voting-works", label: "How Voting Works", section: "Nominees & Voting" },
-  { path: "/earn-agc", label: "Earn AGC", section: "Nominees & Voting" },
-  { path: "/about-agc", label: "About AGC", section: "Nominees & Voting" },
+  // Nominees (2)
+  { path: "/nominees", label: "Nominees Directory", section: "Nominees" },
+  { path: "/nominate", label: "Nominate Now", section: "Nominees" },
 
-  // Regions
+  // Regions (1)
   { path: "/regions", label: "Explore Regions", section: "Regions" },
 
-  // Media
+  // Media (5)
   { path: "/media", label: "Media Hub", section: "Media" },
   { path: "/media/tv", label: "NESA TV", section: "Media" },
   { path: "/media/shows", label: "Shows", section: "Media" },
   { path: "/media/webinars", label: "Webinars", section: "Media" },
   { path: "/media/gala", label: "Gala Night", section: "Media" },
-  { path: "/videos", label: "Videos", section: "Media" },
 
-  // Get Involved
-  { path: "/nominate", label: "Nominate", section: "Get Involved" },
+  // Get Involved (5)
   { path: "/donate", label: "Donate", section: "Get Involved" },
   { path: "/endorse", label: "Endorse NESA", section: "Get Involved" },
   { path: "/volunteer", label: "Volunteer", section: "Get Involved" },
   { path: "/ambassadors", label: "Ambassadors", section: "Get Involved" },
   { path: "/judges", label: "Meet Our Judges", section: "Get Involved" },
-  { path: "/judge/apply", label: "Apply as Judge", section: "Get Involved" },
 
-  // Programs
+  // Programs (4)
   { path: "/programs", label: "Programs", section: "Programs" },
   { path: "/eduaid", label: "EduAid", section: "Programs" },
   { path: "/rebuild", label: "Rebuild My School", section: "Programs" },
-  { path: "/ecosystem", label: "Ecosystem", section: "Programs" },
-  { path: "/movement", label: "Movement", section: "Programs" },
   { path: "/impact", label: "Impact", section: "Programs" },
 
-  // Shop
+  // Shop (2)
   { path: "/shop", label: "Shop", section: "Shop" },
   { path: "/tickets", label: "Tickets", section: "Shop" },
 
-  // Support
+  // Support (5)
   { path: "/partners", label: "Partners", section: "Support" },
-  { path: "/sponsors", label: "Sponsors", section: "Support" },
-  { path: "/chapters", label: "Chapters", section: "Support" },
   { path: "/contact", label: "Contact", section: "Support" },
   { path: "/faq", label: "FAQ", section: "Support" },
   { path: "/policies", label: "Policies", section: "Support" },
   { path: "/certificates/verify", label: "Verify Certificate", section: "Support" },
 
-  // Guidelines
-  { path: "/guidelines/edi-matrix", label: "EDI Matrix", section: "Guidelines" },
+  // Guidelines (1)
   { path: "/guidelines/nominators", label: "For Nominators", section: "Guidelines" },
-  { path: "/guidelines/nominees", label: "For Nominees", section: "Guidelines" },
-  { path: "/guidelines/judges", label: "For Judges", section: "Guidelines" },
-  { path: "/guidelines/voters", label: "For Voters", section: "Guidelines" },
 ];
 
 export function getPageIndex(pathname: string): number {
