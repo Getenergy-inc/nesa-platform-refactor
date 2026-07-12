@@ -21,6 +21,7 @@ import { InfluencerNominationForm } from "@/components/awards/InfluencerNominati
 import { NomineeCard } from "@/components/influencer-impact/NomineeCard";
 import { SEED_NOMINEES, REGIONS } from "@/config/awards/influencerImpact2026";
 import { trackEvent } from "@/lib/analytics";
+import { SubcategoryPathways } from "@/components/awards/standard/sections";
 
 const DIRECTORY_ROUTE = "/awards/influencer-education-impact/nominees";
 
