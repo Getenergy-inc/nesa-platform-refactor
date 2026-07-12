@@ -923,8 +923,9 @@ const App = () => (
                   <Route path="/recognition/influencer-education-impact/influencer-education-impact-award" element={<InfluencerImpact2026 />} />
 
                   {/* Core spec URLs — render existing content at canonical paths */}
-                  <Route path="/gala" element={<WithLayout><Tickets /></WithLayout>} />
-                  <Route path="/support" element={<WithLayout><Partners /></WithLayout>} />
+                  <Route path="/gala" element={<WithLayout><GalaConsolidated /></WithLayout>} />
+                  <Route path="/support" element={<WithLayout><SupportConsolidated /></WithLayout>} />
+                  <Route path="/education-enablers" element={<WithLayout><NomineeDirectory /></WithLayout>} />
                   <Route path="/special-needs" element={<WithLayout><EduAid /></WithLayout>} />
                   <Route path="/rebuild-my-school" element={<WithLayout><Rebuild /></WithLayout>} />
                   {/* Stage 6 — Legacy recognition redirects (data-driven). */}
