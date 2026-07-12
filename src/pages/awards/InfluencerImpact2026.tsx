@@ -134,6 +134,74 @@ export default function InfluencerImpact2026() {
         </div>
       </div>
 
+      {/* THREE RECOGNITION SUBCATEGORIES */}
+      <section aria-label="Three recognition subcategories" className="border-b border-gold/10 bg-charcoal/95 py-12 md:py-16">
+        <div className="container mx-auto max-w-6xl px-4">
+          <header className="mb-8 text-center">
+            <span className="text-[11px] uppercase tracking-[0.22em] text-gold font-semibold">
+              Enablers of Education for All Across Africa
+            </span>
+            <h2 className="mt-2 font-display text-2xl font-bold text-white md:text-3xl">
+              Three Recognition <span className="text-gold">Subcategories</span>
+            </h2>
+            <p className="mx-auto mt-2 max-w-2xl text-sm text-white/65">
+              Each subcategory links to its own directory. Pick the pathway that matches the Education Enabler you want to nominate.
+            </p>
+          </header>
+          <div className="grid gap-4 md:grid-cols-3">
+            {[
+              {
+                slug: "social-media",
+                title: "African Social Media Influencers",
+                body: "Creators, podcasters, bloggers and digital advocates producing education content.",
+                href: "/awards/influencers-education-impact/education-content-social-media-influencers",
+              },
+              {
+                slug: "sports",
+                title: "African Sports Icons Supporting Education",
+                body: "Athletes, academies, coaches and sports leaders funding learning.",
+                href: "/awards/influencers-education-impact/african-footballers-supporting-education",
+              },
+              {
+                slug: "music",
+                title: "African Music Icons Supporting Education",
+                body: "Musicians, performers, producers and music executives backing education.",
+                href: "/awards/influencers-education-impact/african-musicians-supporting-education",
+              },
+            ].map((c) => (
+              <div
+                key={c.slug}
+                className="flex flex-col rounded-2xl border border-gold/20 bg-gradient-to-b from-charcoal-light to-charcoal p-6 hover:border-gold/45 transition-all"
+              >
+                <h3 className="font-display text-base font-bold text-white">{c.title}</h3>
+                <p className="mt-2 flex-1 text-sm text-white/65">{c.body}</p>
+                <div className="mt-5 flex flex-wrap gap-2 pt-3 border-t border-gold/10">
+                  <Button asChild size="sm" variant="outline" className="border-gold/30 text-white hover:bg-gold/10 h-8">
+                    <Link
+                      to={c.href}
+                      onClick={() => trackEvent("influencer_subcategory_click", { subcategory: c.slug, action: "view" })}
+                    >
+                      View Subcategory
+                    </Link>
+                  </Button>
+                  <Button
+                    size="sm"
+                    className="bg-gold text-charcoal hover:bg-gold/90 h-8"
+                    onClick={() => {
+                      trackEvent("influencer_subcategory_click", { subcategory: c.slug, action: "nominate" });
+                      scrollToForm();
+                    }}
+                  >
+                    Nominate
+                  </Button>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+
       {/* 2. NOMINATION FORM */}
       <section
         id="influencer-nomination-form"
