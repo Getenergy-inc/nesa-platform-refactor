@@ -14,10 +14,10 @@ import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { PathwayVideoCard, type PathwayVideoCardData } from "./PathwayVideoCard";
 import { usePathwayCards } from "@/hooks/usePathwayCards";
-import posterIcon from "@/assets/subcategory-cards/icon.jpg";
-import posterCsr from "@/assets/subcategory-cards/csr.jpg";
-import posterInfluencer from "@/assets/subcategory-cards/influencer.jpg";
-import posterGrants from "@/assets/subcategory-cards/grants.jpg";
+const posterIcon = "/images/placeholder.png";
+const posterCsr = "/images/placeholder.png";
+const posterInfluencer = "/images/placeholder.png";
+const posterGrants = "/images/placeholder.png";
 
 const pathways: PathwayVideoCardData[] = [
   {
