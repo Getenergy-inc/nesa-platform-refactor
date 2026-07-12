@@ -1,4 +1,5 @@
-// Ordered sequence of all public pages for book-style navigation
+// Ordered sequence of public pages for book-style navigation.
+// 30-page architecture (2026 refactor) — task-focused, consolidated hubs.
 
 export interface PageEntry {
   path: string;
@@ -6,72 +7,62 @@ export interface PageEntry {
   section?: string;
 }
 
-// 60→38 public-page consolidation (2026 refactor).
-// Removed: public voting routes (/vote, /how-voting-works, /trending, /earn-agc,
-// /about-agc, /awards/winners, /results) per PUBLIC_AWARD_VOTING sunset.
-// Collapsed: legacy category listings (/awards/categories, blue-garnet-categories,
-// platinum-certificate-categories, /awards/gold, /awards/icon) into /recognition
-// which fetches the DB spine.
 export const PAGE_SEQUENCE: PageEntry[] = [
-  // Home (1)
+  // 1. Home
   { path: "/", label: "Home", section: "Home" },
 
-  // About (6)
-  { path: "/about", label: "About NESA", section: "About" },
-  { path: "/about/vision-2035", label: "Vision 2035", section: "About" },
-  { path: "/about/governance", label: "Governance", section: "About" },
-  { path: "/about/timeline", label: "Timeline", section: "About" },
-  { path: "/about/scef", label: "SCEF", section: "About" },
-  { path: "/about/social-impact", label: "Social Impact", section: "About" },
+  // 2. About & Governance
+  { path: "/about", label: "About NESA-Africa", section: "About" },
 
-  // Awards (6)
-  { path: "/awards", label: "Awards Overview", section: "Awards" },
-  { path: "/recognition", label: "Recognition Hub", section: "Awards" },
-  { path: "/awards/africa-education-icon", label: "Africa Education Icon", section: "Awards" },
-  { path: "/awards/influencers-education-impact", label: "Influencer Education Impact", section: "Awards" },
-  { path: "/awards/gold-blue-garnet", label: "Gold-Blue Garnet", section: "Awards" },
-  { path: "/awards/platinum", label: "Platinum Recognition", section: "Awards" },
+  // 3. Recognition Hub
+  { path: "/recognition", label: "Recognition Season", section: "Recognition" },
 
-  // Nominees (2)
-  { path: "/nominees", label: "Nominees Directory", section: "Nominees" },
-  { path: "/nominate", label: "Nominate Now", section: "Nominees" },
+  // 4–7. Tier pages / hubs
+  { path: "/recognition/africa-education-icon", label: "Africa Education Icon", section: "Recognition" },
+  { path: "/recognition/influencer-education-impact", label: "Influencer Education Impact", section: "Recognition" },
+  { path: "/recognition/platinum", label: "Platinum Recognition Hub", section: "Recognition" },
+  { path: "/recognition/gold-blue-garnet", label: "Gold-Blue Garnet Hub", section: "Recognition" },
 
-  // Regions (1)
-  { path: "/regions", label: "Explore Regions", section: "Regions" },
+  // 8–14. Seven Platinum category pages (dynamic slugs)
+  { path: "/recognition/platinum/library-and-book-development", label: "Platinum · Library & Book Development", section: "Platinum Categories" },
+  { path: "/recognition/platinum/research-and-development", label: "Platinum · Research & Development", section: "Platinum Categories" },
+  { path: "/recognition/platinum/csr-in-education", label: "Platinum · CSR in Education", section: "Platinum Categories" },
+  { path: "/recognition/platinum/international-education", label: "Platinum · International Education", section: "Platinum Categories" },
+  { path: "/recognition/platinum/diaspora-education-impact", label: "Platinum · Diaspora Education Impact", section: "Platinum Categories" },
+  { path: "/recognition/platinum/faith-based-organisations", label: "Platinum · Faith-Based Organisations", section: "Platinum Categories" },
+  { path: "/recognition/platinum/political-leaders", label: "Platinum · Political Leaders", section: "Platinum Categories" },
 
-  // Media (5)
-  { path: "/media", label: "Media Hub", section: "Media" },
-  { path: "/media/tv", label: "NESA TV", section: "Media" },
-  { path: "/media/shows", label: "Shows", section: "Media" },
-  { path: "/media/webinars", label: "Webinars", section: "Media" },
-  { path: "/media/gala", label: "Gala Night", section: "Media" },
+  // 15–23. Nine Gold-Blue Garnet category pages (dynamic slugs)
+  { path: "/recognition/gold-blue-garnet/ngo-education-impact", label: "GBG · NGO Education Impact", section: "Gold-Blue Garnet Categories" },
+  { path: "/recognition/gold-blue-garnet/stem-education", label: "GBG · STEM Education", section: "Gold-Blue Garnet Categories" },
+  { path: "/recognition/gold-blue-garnet/edu-tech", label: "GBG · Edu-Tech", section: "Gold-Blue Garnet Categories" },
+  { path: "/recognition/gold-blue-garnet/media-advocacy", label: "GBG · Media & Advocacy", section: "Gold-Blue Garnet Categories" },
+  { path: "/recognition/gold-blue-garnet/creative-arts", label: "GBG · Creative Arts", section: "Gold-Blue Garnet Categories" },
+  { path: "/recognition/gold-blue-garnet/education-friendly-state", label: "GBG · Education-Friendly State", section: "Gold-Blue Garnet Categories" },
+  { path: "/recognition/gold-blue-garnet/christian-education", label: "GBG · Christian Education", section: "Gold-Blue Garnet Categories" },
+  { path: "/recognition/gold-blue-garnet/islamic-education", label: "GBG · Islamic Education", section: "Gold-Blue Garnet Categories" },
+  { path: "/recognition/gold-blue-garnet/csr-national", label: "GBG · National CSR", section: "Gold-Blue Garnet Categories" },
 
-  // Get Involved (5)
-  { path: "/donate", label: "Donate", section: "Get Involved" },
-  { path: "/endorse", label: "Endorse NESA", section: "Get Involved" },
-  { path: "/volunteer", label: "Volunteer", section: "Get Involved" },
-  { path: "/ambassadors", label: "Ambassadors", section: "Get Involved" },
-  { path: "/judges", label: "Meet Our Judges", section: "Get Involved" },
+  // 24. Directory
+  { path: "/education-enablers", label: "Explore 2026 Education Enablers", section: "Directory" },
 
-  // Programs (4)
-  { path: "/programs", label: "Programs", section: "Programs" },
-  { path: "/eduaid", label: "EduAid", section: "Programs" },
-  { path: "/rebuild", label: "Rebuild My School", section: "Programs" },
-  { path: "/impact", label: "Impact", section: "Programs" },
+  // 25. Nominate
+  { path: "/nominate", label: "Nominate", section: "Participate" },
 
-  // Shop (2)
-  { path: "/shop", label: "Shop", section: "Shop" },
-  { path: "/tickets", label: "Tickets", section: "Shop" },
+  // 26. Timeline
+  { path: "/timeline", label: "2026 Timeline", section: "Timeline" },
 
-  // Support (5)
-  { path: "/partners", label: "Partners", section: "Support" },
-  { path: "/contact", label: "Contact", section: "Support" },
-  { path: "/faq", label: "FAQ", section: "Support" },
-  { path: "/policies", label: "Policies", section: "Support" },
-  { path: "/certificates/verify", label: "Verify Certificate", section: "Support" },
+  // 27. EduAid-Africa Impact (consolidated)
+  { path: "/eduaid-africa", label: "EduAid-Africa Impact", section: "Impact" },
 
-  // Guidelines (1)
-  { path: "/guidelines/nominators", label: "For Nominators", section: "Guidelines" },
+  // 28. Media & Events (consolidated)
+  { path: "/media", label: "Media & Events", section: "Media" },
+
+  // 29. Gala & Tickets (consolidated)
+  { path: "/gala", label: "Gala & Tickets", section: "Gala" },
+
+  // 30. Support & Get Involved (consolidated)
+  { path: "/support", label: "Support & Get Involved", section: "Support" },
 ];
 
 export function getPageIndex(pathname: string): number {

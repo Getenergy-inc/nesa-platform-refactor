@@ -175,6 +175,13 @@ import JudgesDirectory from "./pages/judges/JudgesDirectory";
 import JudgeProfile from "./pages/judges/JudgeProfile";
 import Install from "./pages/Install";
 
+// 30-page consolidators (2026 refactor)
+import AboutConsolidated from "./pages/about/AboutConsolidated";
+import EduAidAfricaImpact from "./pages/eduaid/EduAidAfricaImpact";
+import MediaHubConsolidated from "./pages/media/MediaHubConsolidated";
+import GalaConsolidated from "./pages/gala/GalaConsolidated";
+import SupportConsolidated from "./pages/support/SupportConsolidated";
+
 // Judge Portal Pages
 import {
   JudgeApply,
@@ -486,26 +493,12 @@ const App = () => (
                     path="/about"
                     element={
                       <WithLayout>
-                        <About />
+                        <AboutConsolidated />
                       </WithLayout>
                     }
                   />
-                  <Route
-                    path="/about/vision-2035"
-                    element={
-                      <WithLayout>
-                        <Vision2035 />
-                      </WithLayout>
-                    }
-                  />
-                  <Route
-                    path="/about/governance"
-                    element={
-                      <WithLayout>
-                        <Governance />
-                      </WithLayout>
-                    }
-                  />
+                  <Route path="/about/vision-2035" element={<Navigate to="/about#vision-2035" replace />} />
+                  <Route path="/about/governance" element={<Navigate to="/about#governance" replace />} />
                   <Route
                     path="/governance"
                     element={
@@ -535,30 +528,9 @@ const App = () => (
                   <Route path="/voting-timeline" element={<Navigate to="/timeline" replace />} />
                   <Route path="/awards/timeline" element={<Navigate to="/timeline" replace />} />
 
-                  <Route
-                    path="/about/scef"
-                    element={
-                      <WithLayout>
-                        <SCEF />
-                      </WithLayout>
-                    }
-                  />
-                  <Route
-                    path="/about/awards-recognition"
-                    element={
-                      <WithLayout>
-                        <Awards />
-                      </WithLayout>
-                    }
-                  />
-                  <Route
-                    path="/about/social-impact"
-                    element={
-                      <WithLayout>
-                        <Impact />
-                      </WithLayout>
-                    }
-                  />
+                  <Route path="/about/scef" element={<Navigate to="/about#scef" replace />} />
+                  <Route path="/about/awards-recognition" element={<Navigate to="/recognition" replace />} />
+                  <Route path="/about/social-impact" element={<Navigate to="/eduaid-africa" replace />} />
                   <Route
                     path="/awards"
                     element={
@@ -951,8 +923,9 @@ const App = () => (
                   <Route path="/recognition/influencer-education-impact/influencer-education-impact-award" element={<InfluencerImpact2026 />} />
 
                   {/* Core spec URLs — render existing content at canonical paths */}
-                  <Route path="/gala" element={<WithLayout><Tickets /></WithLayout>} />
-                  <Route path="/support" element={<WithLayout><Partners /></WithLayout>} />
+                  <Route path="/gala" element={<WithLayout><GalaConsolidated /></WithLayout>} />
+                  <Route path="/support" element={<WithLayout><SupportConsolidated /></WithLayout>} />
+                  <Route path="/education-enablers" element={<WithLayout><NomineeDirectory /></WithLayout>} />
                   <Route path="/special-needs" element={<WithLayout><EduAid /></WithLayout>} />
                   <Route path="/rebuild-my-school" element={<WithLayout><Rebuild /></WithLayout>} />
                   {/* Stage 6 — Legacy recognition redirects (data-driven). */}
@@ -1225,14 +1198,7 @@ const App = () => (
                   />
 
                   {/* Media */}
-                  <Route
-                    path="/media"
-                    element={
-                      <WithLayout>
-                        <MediaHub />
-                      </WithLayout>
-                    }
-                  />
+                  <Route path="/media" element={<WithLayout><MediaHubConsolidated /></WithLayout>} />
                   {/* Gallery */}
                   <Route
                     path="/gallery"
@@ -1956,7 +1922,8 @@ const App = () => (
                       </WithLayout>
                     }
                   />
-                  <Route path="/eduaid-africa" element={<Navigate to="/eduaid" replace />} />
+                  <Route path="/eduaid-africa" element={<WithLayout><EduAidAfricaImpact /></WithLayout>} />
+                  <Route path="/afri-edutourism" element={<Navigate to="/eduaid-africa#afri-edutourism" replace />} />
 
                   <Route
                     path="/rebuild"
