@@ -1923,15 +1923,8 @@ const App = () => (
                     }
                   />
                   <Route path="/eduaid-africa" element={<WithLayout><EduAidAfricaImpact /></WithLayout>} />
-                  <Route path="/eduaid" element={<Navigate to="/eduaid-africa" replace />} />
-                  <Route path="/rebuild" element={<Navigate to="/eduaid-africa#rebuild-my-school" replace />} />
-                  <Route path="/special-needs" element={<Navigate to="/eduaid-africa#nominate-special-needs-school" replace />} />
                   <Route path="/afri-edutourism" element={<Navigate to="/eduaid-africa#afri-edutourism" replace />} />
                   <Route path="/rebuild-my-school" element={<Navigate to="/eduaid-africa#rebuild-my-school" replace />} />
-                  <Route path="/donate-redirect" element={<Navigate to="/support#donate" replace />} />
-                  <Route path="/nominees" element={<Navigate to="/education-enablers" replace />} />
-                  <Route path="/regions" element={<Navigate to="/education-enablers" replace />} />
-                  <Route path="/directory" element={<Navigate to="/education-enablers" replace />} />
 
                   <Route
                     path="/rebuild"
