@@ -28,7 +28,6 @@
 /support/nomination-support                                  /contact             301
 /support/voting-support                                      /contact             301
 /support/sponsorship-support                                 /contact             301
-/support                                                     /faq                 301
 /about/people                                                /about               301
 /about/team                                                  /about               301
 /about/judges                                                /judges              301
@@ -64,11 +63,16 @@
 /cookie-policy                                               /policies            301
 /language                                                    /                    301
 
-# --- 2. SPA routes (366 explicit paths from src/App.tsx) ---
+# --- 2. SPA routes (390 explicit paths from src/App.tsx) ---
+/recognition/influencer-education-impact/influencer-education-impact-award /index.html          200
+/recognition/africa-education-icon/africa-education-icon-award /index.html          200
 /nominees/gold-special-recognition/:categorySlug/:nomineeSlug /index.html          200
+/recognition/gold-blue-garnet/:categorySlug/:subcategorySlug /index.html          200
 /awards/explore/:pathwaySlug/:categorySlug/:subcategorySlug  /index.html          200
 /nominees/best-ngo-contribution-to-education/profile/:slug   /index.html          200
+/awards/gold-blue-garnet/:categorySlug/:subcategorySlug      /index.html          200
 /awards/influencers-education-impact-2026-recognition        /index.html          200
+/awards/18-categories/:categorySlug/:subcategorySlug         /index.html          200
 /nominees/best-ngo-contribution-to-education/:region         /index.html          200
 /nominees/gold-special-recognition/:categorySlug             /index.html          200
 /nominees/africa-education-icon-award/:sub/:cls              /index.html          200
@@ -80,11 +84,13 @@
 /eduaid-africa/rebuild-my-school/:regionSlug                 /index.html          200
 /nominees/best-ngo-contribution-to-education                 /index.html          200
 /categories/islamic-education-impact-africa                  /index.html          200
+/recognition/gold-blue-garnet/:categorySlug                  /index.html          200
 /awards/explore/:pathwaySlug/:categorySlug                   /index.html          200
 /awards/influencers-education-impact/:slug                   /index.html          200
 /category/education-friendly-state-nigeria                   /index.html          200
 /nominees/africa-education-icon-award/:sub                   /index.html          200
 /nominees/category/:categorySlug/:subSlug                    /index.html          200
+/recognition/influencer-education-impact                     /index.html          200
 /awards/gold-special-recognition-legacy                      /index.html          200
 /awards/platinum-certificate-categories                      /index.html          200
 /awards/africa-education-icon/nominees                       /index.html          200
@@ -104,6 +110,7 @@
 /category/political-leaders-nigeria                          /index.html          200
 /category/islamic-education-africa                           /index.html          200
 /nominees/gold-special-recognition                           /index.html          200
+/recognition/africa-education-icon                           /index.html          200
 /awards/gold-blue-garnet/vote-now                            /index.html          200
 /category/international-education                            /index.html          200
 /get-involved/endorse-nesa-africa                            /index.html          200
@@ -120,17 +127,21 @@
 /category/stem-education-africa                              /index.html          200
 /guidelines/impact-storytelling                              /index.html          200
 /awards/blue-garnet-categories                               /index.html          200
+/awards/category/:categorySlug                               /index.html          200
 /category/csr-education-africa                               /index.html          200
 /category/ngo-education-africa                               /index.html          200
 /awards/africa-education-icon                                /index.html          200
 /awards/gold-blue-garnet/vote                                /index.html          200
 /awards/grants-global-support                                /index.html          200
+/recognition/gold-blue-garnet                                /index.html          200
+/subcategories-to-recognition                                /index.html          200
 /awards/explore/:pathwaySlug                                 /index.html          200
 /awards/influencer-education                                 /index.html          200
 /awards/platinum-recognition                                 /index.html          200
 /category/diaspora-education                                 /index.html          200
 /nrc/dashboard/edi-analytics                                 /index.html          200
 /awards/global-partnerships                                  /index.html          200
+/recognition/platinum/:slug                                  /index.html          200
 /nominate/official/:family                                   /index.html          200
 /policies/voting-integrity                                   /index.html          200
 /volunteers/command-center                                   /index.html          200
@@ -153,8 +164,8 @@
 /dashboard/notifications                                     /index.html          200
 /guidelines/renomination                                     /index.html          200
 /media/behind-the-scenes                                     /index.html          200
-/pathways-to-recognition                                     /index.html          200
 /admin/nominee-profiles                                      /index.html          200
+/awards/c/:categorySlug                                      /index.html          200
 /impact/nominate-school                                      /index.html          200
 /judge-application-form                                      /index.html          200
 /nominee/decline/:token                                      /index.html          200
@@ -162,6 +173,7 @@
 /nrc/dashboard/nominees                                      /index.html          200
 /nrc/dashboard/settings                                      /index.html          200
 /volunteer/share-assets                                      /index.html          200
+/africa-education-icon                                       /index.html          200
 /awards/category/:slug                                       /index.html          200
 /awards/digital-voices                                       /index.html          200
 /dashboard/nominations                                       /index.html          200
@@ -184,9 +196,11 @@
 /claim-voting-credits                                        /index.html          200
 /nrc/dashboard/intake                                        /index.html          200
 /programs/nesa-africa                                        /index.html          200
+/recognition/platinum                                        /index.html          200
 /sponsorship-packages                                        /index.html          200
 /about/social-impact                                         /index.html          200
 /admin/nominee-media                                         /index.html          200
+/admin/subcategories                                         /index.html          200
 /auth/reset-password                                         /index.html          200
 /certificates/verify                                         /index.html          200
 /dashboard/volunteer                                         /index.html          200
@@ -202,6 +216,7 @@
 /awards/blue-garnet                                          /index.html          200
 /certificates/guide                                          /index.html          200
 /dashboard/settings                                          /index.html          200
+/education-enablers                                          /index.html          200
 /join-local-chapter                                          /index.html          200
 /nominees-directory                                          /index.html          200
 /volunteer-chapters                                          /index.html          200
@@ -213,9 +228,11 @@
 /earn-voting-coins                                           /index.html          200
 /guidelines/judges                                           /index.html          200
 /guidelines/voters                                           /index.html          200
+/influencer-impact                                           /index.html          200
 /nominate/advanced                                           /index.html          200
 /nominate/official                                           /index.html          200
 /nominee-directory                                           /index.html          200
+/rebuild-my-school                                           /index.html          200
 /volunteer-stories                                           /index.html          200
 /volunteer/profile                                           /index.html          200
 /about/governance                                            /index.html          200
@@ -226,6 +243,7 @@
 /contributors/:id                                            /index.html          200
 /dashboard/region                                            /index.html          200
 /dashboard/wallet                                            /index.html          200
+/gold-blue-garnet                                            /index.html          200
 /how-voting-works                                            /index.html          200
 /judge/guidelines                                            /index.html          200
 /judge/onboarding                                            /index.html          200
@@ -257,7 +275,6 @@
 /volunteer/tasks                                             /index.html          200
 /voting-timeline                                             /index.html          200
 /about/timeline                                              /index.html          200
-/admin/pathways                                              /index.html          200
 /awards/explore                                              /index.html          200
 /awards/pillars                                              /index.html          200
 /awards/regions                                              /index.html          200
@@ -290,7 +307,9 @@
 /profile/:slug                                               /index.html          200
 /regions/:slug                                               /index.html          200
 /shop/checkout                                               /index.html          200
+/special-needs                                               /index.html          200
 /sponsor/:slug                                               /index.html          200
+/subcategories                                               /index.html          200
 /volunteer-bod                                               /index.html          200
 /vote-with-agc                                               /index.html          200
 /voting-portal                                               /index.html          200
@@ -300,6 +319,7 @@
 /contributors                                                /index.html          200
 /earn-credits                                                /index.html          200
 /endorse-nesa                                                /index.html          200
+/endorsements                                                /index.html          200
 /gala/tickets                                                /index.html          200
 /get-involved                                                /index.html          200
 /judge-signup                                                /index.html          200
@@ -341,6 +361,7 @@ nominee/:slug                                                /index.html        
 /nrc/scoring                                                 /index.html          200
 /olc/members                                                 /index.html          200
 /prenominate                                                 /index.html          200
+/recognition                                                 /index.html          200
 /sponsorship                                                 /index.html          200
 /about/scef                                                  /index.html          200
 /auth/login                                                  /index.html          200
@@ -377,7 +398,7 @@ discussion                                                   /index.html        
 /nominate                                                    /index.html          200
 /nominees                                                    /index.html          200
 /partners                                                    /index.html          200
-/pathways                                                    /index.html          200
+/platinum                                                    /index.html          200
 /policies                                                    /index.html          200
 /programs                                                    /index.html          200
 /register                                                    /index.html          200
@@ -396,6 +417,7 @@ discussion                                                   /index.html        
 /regions                                                     /index.html          200
 /results                                                     /index.html          200
 /sponsor                                                     /index.html          200
+/support                                                     /index.html          200
 /tickets                                                     /index.html          200
 nominees                                                     /index.html          200
 /awards                                                      /index.html          200
@@ -422,6 +444,7 @@ nominees                                                     /index.html        
 /store                                                       /index.html          200
 /auth                                                        /index.html          200
 /cart                                                        /index.html          200
+/gala                                                        /index.html          200
 /help                                                        /index.html          200
 /jury                                                        /index.html          200
 /shop                                                        /index.html          200
