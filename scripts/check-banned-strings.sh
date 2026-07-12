@@ -21,6 +21,15 @@ VOTING_BANNED=(
   "Trending Nominees"
 )
 
+# User-facing terminology sweep (2026): prefer "subcategory" / "tier" over "pathway".
+# Warn-only — internal type names (NominationPathway, PathwaySlug) are exempt via
+# grep filter below.
+TERMINOLOGY_WARN=(
+  "Pathways to Recognition"
+  "Recognition Pathways"
+  "recognition pathway"
+)
+
 FAIL=0
 for pattern in "${BANNED[@]}"; do
   if matches=$(grep -RIn --exclude-dir=node_modules --exclude-dir=dist --exclude-dir=.git \
@@ -50,6 +59,20 @@ for pattern in "${VOTING_BANNED[@]}"; do
   fi
 done
 
+for pattern in "${TERMINOLOGY_WARN[@]}"; do
+  if matches=$(grep -RIn --exclude-dir=node_modules --exclude-dir=dist --exclude-dir=.git \
+       --exclude-dir=docs --exclude-dir=tests \
+       --exclude='*.csv' --exclude='*.lock' --exclude='bun.lockb' \
+       --exclude='check-banned-strings.sh' \
+       --exclude='recognitionArchitecture.ts' \
+       --exclude='banned-strings.test.ts' \
+       -- "$pattern" src/ public/ index.html 2>/dev/null); then
+    hits=$(echo "$matches" | wc -l | tr -d ' ')
+    echo "⚠️  Terminology drift: \"$pattern\" ($hits) — prefer 'subcategory' or 'tier'."
+    WARN_COUNT=$((WARN_COUNT + hits))
+  fi
+done
+
 if [ "$FAIL" -eq 1 ]; then
   echo ""
   echo "Banned string check FAILED — update legacy date ranges to '2006–2026'."
@@ -58,7 +81,7 @@ fi
 
 if [ "$WARN_COUNT" -gt 0 ]; then
   echo ""
-  echo "ℹ️  $WARN_COUNT voting-copy occurrences remain (warn-only; will fail after Stage 7)."
+  echo "ℹ️  $WARN_COUNT copy occurrences remain (warn-only)."
 fi
 
 echo "✅ Banned-string check passed (strict rules)."
