@@ -108,13 +108,16 @@ function isActive(pathname: string, href: string) {
 
 function DesktopNav() {
   const location = useLocation();
+  const focusRing =
+    "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2 focus-visible:ring-offset-charcoal";
   return (
-    <NavigationMenu className="hidden min-[1100px]:flex">
+    <NavigationMenu className="hidden min-[1100px]:flex" aria-label="Primary">
       <NavigationMenuList className="gap-1">
         {SITE_NAV.map((item) => {
           const active = isActive(location.pathname, item.href);
           const cls = cn(
             "px-3 py-2 text-sm font-medium rounded-md transition-colors",
+            focusRing,
             active ? "text-gold bg-gold/10" : "text-white/85 hover:text-gold hover:bg-gold/5",
           );
           if (!item.children) {
@@ -131,6 +134,7 @@ function DesktopNav() {
               </NavigationMenuItem>
             );
           }
+          const groupLabelId = `nav-group-${item.href.replace(/[^a-z0-9]+/gi, "-")}`;
           return (
             <NavigationMenuItem key={item.href}>
               <NavigationMenuTrigger
@@ -140,20 +144,40 @@ function DesktopNav() {
                 {item.label}
               </NavigationMenuTrigger>
               <NavigationMenuContent>
-                <ul className="grid w-[300px] gap-1 p-2 bg-charcoal border border-gold/20">
-                  {item.children.map((c) => (
-                    <li key={c.href}>
-                      <NavigationMenuLink asChild>
-                        <Link
-                          to={c.href}
-                          onClick={() => trackEvent("dropdown_item_click", { parent: item.label, label: c.label, href: c.href })}
-                          className="block px-3 py-2 rounded-md text-sm text-white/85 hover:text-gold hover:bg-gold/10"
-                        >
-                          {c.label}
-                        </Link>
-                      </NavigationMenuLink>
-                    </li>
-                  ))}
+                <ul
+                  className="grid w-[300px] gap-1 p-2 bg-charcoal border border-gold/20"
+                  aria-labelledby={groupLabelId}
+                >
+                  <li id={groupLabelId} className="sr-only">
+                    {item.label} submenu
+                  </li>
+                  {item.children.map((c) => {
+                    const childActive = isActive(location.pathname, c.href);
+                    return (
+                      <li key={c.href}>
+                        <NavigationMenuLink asChild>
+                          <Link
+                            to={c.href}
+                            aria-current={childActive ? "page" : undefined}
+                            onClick={() =>
+                              trackEvent("dropdown_item_click", {
+                                parent: item.label,
+                                label: c.label,
+                                href: c.href,
+                              })
+                            }
+                            className={cn(
+                              "block px-3 py-2 rounded-md text-sm hover:text-gold hover:bg-gold/10",
+                              focusRing,
+                              childActive ? "text-gold bg-gold/10" : "text-white/85",
+                            )}
+                          >
+                            {c.label}
+                          </Link>
+                        </NavigationMenuLink>
+                      </li>
+                    );
+                  })}
                 </ul>
               </NavigationMenuContent>
             </NavigationMenuItem>
@@ -213,33 +237,54 @@ function MobileMenu() {
         </SheetHeader>
         <div className="p-3">
           <NominateButton className="w-full mb-3" />
-          <Accordion type="single" collapsible className="w-full">
-            {SITE_NAV.map((item) => (
-              item.children ? (
-                <AccordionItem key={item.href} value={item.href} className="border-gold/15">
-                  <AccordionTrigger className="text-white hover:text-gold px-3 text-sm">
-                    {item.label}
-                  </AccordionTrigger>
-                  <AccordionContent className="pb-1">
-                    <Link to={item.href} onClick={close} className={cn(linkCls, "font-semibold text-gold/90")}>
-                      {item.label} overview
-                    </Link>
-                    {item.children.map((c) => (
-                      <Link key={c.href} to={c.href} onClick={close} className={linkCls}>
-                        {c.label}
+          <nav aria-label="Mobile primary">
+            <Accordion type="single" collapsible className="w-full">
+              {SITE_NAV.map((item) => (
+                item.children ? (
+                  <AccordionItem key={item.href} value={item.href} className="border-gold/15">
+                    <AccordionTrigger className="text-white hover:text-gold px-3 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold rounded-md">
+                      {item.label}
+                    </AccordionTrigger>
+                    <AccordionContent className="pb-1">
+                      <Link
+                        to={item.href}
+                        onClick={close}
+                        aria-current={isActive(location.pathname, item.href) ? "page" : undefined}
+                        className={cn(linkCls, "font-semibold text-gold/90")}
+                      >
+                        {item.label} overview
                       </Link>
-                    ))}
-                  </AccordionContent>
-                </AccordionItem>
-              ) : (
-                <div key={item.href} className="border-b border-gold/15">
-                  <Link to={item.href} onClick={close} className="block px-3 py-3 text-sm text-white hover:text-gold">
-                    {item.label}
-                  </Link>
-                </div>
-              )
-            ))}
-          </Accordion>
+                      {item.children.map((c) => {
+                        const childActive = isActive(location.pathname, c.href);
+                        return (
+                          <Link
+                            key={c.href}
+                            to={c.href}
+                            onClick={close}
+                            aria-current={childActive ? "page" : undefined}
+                            className={cn(linkCls, childActive && "text-gold bg-gold/10")}
+                          >
+                            {c.label}
+                          </Link>
+                        );
+                      })}
+                    </AccordionContent>
+                  </AccordionItem>
+                ) : (
+                  <div key={item.href} className="border-b border-gold/15">
+                    <Link
+                      to={item.href}
+                      onClick={close}
+                      aria-current={isActive(location.pathname, item.href) ? "page" : undefined}
+                      className="block px-3 py-3 text-sm text-white hover:text-gold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold rounded-md"
+                    >
+                      {item.label}
+                    </Link>
+                  </div>
+                )
+              ))}
+            </Accordion>
+          </nav>
 
           <div className="mt-4 border-t border-gold/20 pt-3 space-y-1">
             {user ? (
@@ -271,7 +316,10 @@ export function SiteHeader() {
   return (
     <>
       <SkipLink />
-      <header className="fixed top-0 left-0 right-0 z-50 bg-charcoal/95 backdrop-blur border-b border-gold/20">
+      <header
+        role="banner"
+        className="fixed top-0 left-0 right-0 z-50 bg-charcoal/95 backdrop-blur border-b border-gold/20"
+      >
         <div className="container mx-auto px-4 flex items-center justify-between gap-3 h-14 lg:h-16">
           <BrandBlock />
           <DesktopNav />
