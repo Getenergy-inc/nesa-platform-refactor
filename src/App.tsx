@@ -1924,7 +1924,6 @@ const App = () => (
                   />
                   <Route path="/eduaid-africa" element={<WithLayout><EduAidAfricaImpact /></WithLayout>} />
                   <Route path="/afri-edutourism" element={<Navigate to="/eduaid-africa#afri-edutourism" replace />} />
-                  <Route path="/rebuild-my-school" element={<Navigate to="/eduaid-africa#rebuild-my-school" replace />} />
 
                   <Route
                     path="/rebuild"
