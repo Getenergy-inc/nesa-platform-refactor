@@ -487,8 +487,8 @@ export function HallOfFamePreview({
 export function SubcategoryPathways({
   pageSlug,
   subcategories,
-  heading = "Subcategories & Pathways",
-  sub = "Pick the pathway that best fits the changemaker you want to nominate.",
+  heading = "Subcategories & Subcategories",
+  sub = "Pick the subcategory that best fits the changemaker you want to nominate.",
 }: {
   pageSlug: string;
   subcategories: Subcategory[];

@@ -50,7 +50,7 @@ export function AwardsRegionPage() {
     });
 
   const recognitionPillars = [
-    { icon: Trophy, title: "Award Pathways", body: `Nominees from ${hub.shortName} compete across Blue Garnet, Platinum, Africa Education Icon, and Influencers Education Impact tracks.` },
+    { icon: Trophy, title: "Award Subcategories", body: `Nominees from ${hub.shortName} compete across Blue Garnet, Platinum, Africa Education Icon, and Influencers Education Impact tracks.` },
     { icon: Award, title: "Regional Excellence", body: `Recognising educators, institutions, and innovators who have transformed learning outcomes in ${hub.name}.` },
     { icon: Sparkles, title: "Cultural Impact", body: `${hub.tagline}. Each nominee contributes to Africa's continental learning story.` },
     { icon: Globe2, title: "Continental Reach", body: `${hub.countries.length} ${hub.countries.length === 1 ? "territory" : "countries / territories"} represented in this region's awards pipeline.` },
@@ -60,7 +60,7 @@ export function AwardsRegionPage() {
     <>
       <Helmet>
         <title>{`${hub.name} Awards & Nominees | NESA-Africa 2026`}</title>
-        <meta name="description" content={`Explore NESA-Africa 2026 nominees, award pathways and regional education impact across ${hub.name}. ${hub.tagline}.`} />
+        <meta name="description" content={`Explore NESA-Africa 2026 nominees, award subcategories and regional education impact across ${hub.name}. ${hub.tagline}.`} />
         <link rel="canonical" href={`https://nesa.africa/awards/regions/${hub.slug}`} />
       </Helmet>
 
@@ -173,7 +173,7 @@ export function AwardsRegionPage() {
         <section className="py-16 md:py-20">
           <div className="container max-w-6xl mx-auto px-4">
             <h2 className="font-playfair text-2xl md:text-3xl font-bold text-ivory text-center mb-8">
-              Explore Award Pathways
+              Explore Award Subcategories
             </h2>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
               {[

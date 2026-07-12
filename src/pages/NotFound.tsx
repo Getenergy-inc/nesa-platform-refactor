@@ -96,7 +96,7 @@ const NotFound = () => {
               Go Home
             </Button>
           </Link>
-          <Link to="/pathways">
+          <Link to="/subcategories">
             <Button
               variant="outline"
               className="w-full sm:w-auto border-gold/40 text-gold hover:bg-gold/10 rounded-full px-7"

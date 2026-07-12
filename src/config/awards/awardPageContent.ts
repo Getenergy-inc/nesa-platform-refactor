@@ -65,7 +65,7 @@ const ICON: AwardPageContent = {
       "Lifetime recognition for transformational leaders whose contributions have shaped African education across generations — two decades of legacy, three classifications, one continental Hall of Fame.",
     statsBuilder: ({ nominees, subcategories, finalists }) => [
       { label: "Verified Nominees", value: nominees },
-      { label: "Pathways", value: subcategories || 3 },
+      { label: "Subcategories", value: subcategories || 3 },
       { label: "Classifications", value: 3 },
       { label: "Final Laureates", value: finalists || 9 },
     ],
@@ -96,7 +96,7 @@ const ICON: AwardPageContent = {
       "Independent third-party endorsements",
     ],
     region: "Open continent-wide. Three classifications: Africans in Africa · Africans in the Diaspora · Friends of Africa.",
-    pathway: "Three pathways: Philanthropy · Literary & Curriculum · Technical Educator.",
+    pathway: "Three subcategories: Philanthropy · Literary & Curriculum · Technical Educator.",
   },
   hallFilter: { sourceIcon: true },
   exploreAllHref: "/nominees/africa-education-icon-award",
@@ -464,7 +464,7 @@ const INFLUENCER: AwardPageContent = {
   metaDescription:
     "Influencers Education Impact Award 2026: 3 categories honouring African social media creators, sports icons and music icons using their platforms to advance education. 100% public AGC voting.",
   hero: {
-    badge: "Tier 4 · Influencers Education Impact · Gold Certificate Pathway",
+    badge: "Tier 4 · Influencers Education Impact · Gold Certificate Subcategory",
     title: "Influencers Education Impact",
     titleAccent: "2026",
     subhead:
@@ -480,7 +480,7 @@ const INFLUENCER: AwardPageContent = {
     trustLine: "100% Public AGC Voting · Nominations close 10 Jul · Voting 15 Aug – 15 Sep · Winners 16 Sep 2026",
   },
   recognises:
-    "The Influencers Education Impact Award honours 3 categories — African Social Media Influencers, Sports Icons and Music Icons — whose platforms translate into measurable education action. This Gold Certificate pathway is decided entirely by public AGC voting.",
+    "The Influencers Education Impact Award honours 3 categories — African Social Media Influencers, Sports Icons and Music Icons — whose platforms translate into measurable education action. This Gold Certificate subcategory is decided entirely by public AGC voting.",
   eligibility: {
     canBeNominated: [
       "Creators, podcasters, bloggers and digital advocates producing education content",

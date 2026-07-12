@@ -272,7 +272,7 @@ export default function MasterNomineeProfile() {
                       <p className="text-ivory/90 text-sm mt-1 font-medium">{nominee.subcategory}</p>
                     </div>
                     <div className="p-4 rounded-xl bg-charcoal/50 border border-gold/5">
-                      <span className="text-ivory/70 text-xs uppercase tracking-wider">Pathway</span>
+                      <span className="text-ivory/70 text-xs uppercase tracking-wider">Subcategory</span>
                       <p className="text-gold text-sm mt-1 font-medium">{nominee.pathway}</p>
                     </div>
                   </div>
@@ -295,7 +295,7 @@ export default function MasterNomineeProfile() {
                   </h3>
                   {[
                     { label: "Nominee ID", value: bio.overview.nomineeId },
-                    { label: "Pathway", value: nominee.pathway },
+                    { label: "Subcategory", value: nominee.pathway },
                     { label: "Region", value: nominee.region },
                     { label: "Country", value: nominee.country || "N/A" },
                     { label: "Season", value: "2025" },

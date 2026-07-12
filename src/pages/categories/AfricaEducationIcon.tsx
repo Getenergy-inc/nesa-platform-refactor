@@ -40,12 +40,12 @@ const PATHWAY_ICONS: Record<IconSubcategorySlug, typeof ScrollText> = {
 };
 
 const SELECTION_STEPS = [
-  { n: 1, title: "Nomination", body: "Public, peer, and institutional nominations open across all three pathways." },
+  { n: 1, title: "Nomination", body: "Public, peer, and institutional nominations open across all three subcategories." },
   { n: 2, title: "Verification", body: "Nominee Research Corps (NRC) verifies records, evidence, and longevity of impact." },
   { n: 3, title: "Classification", body: "Each verified nominee is sorted into one of three classifications." },
   { n: 4, title: "Jury Review", body: "Independent continental jury evaluates lifetime contribution against rubric." },
   { n: 5, title: "Shortlist", body: "Final shortlist published for public transparency — no public voting on Icon." },
-  { n: 6, title: "Laureate Reveal", body: "Nine laureates honoured at the NESA-Africa 2026 Gala — one per pathway × classification." },
+  { n: 6, title: "Laureate Reveal", body: "Nine laureates honoured at the NESA-Africa 2026 Gala — one per subcategory × classification." },
 ];
 
 export default function AfricaEducationIconPage() {
@@ -60,7 +60,7 @@ export default function AfricaEducationIconPage() {
         <title>Africa Education Icon Award 2006–2026 | NESA-Africa</title>
         <meta
           name="description"
-          content="Two decades of visionary African education leaders — literary advocates, technical educators, and philanthropists. Explore pathways, classifications, and the selection process."
+          content="Two decades of visionary African education leaders — literary advocates, technical educators, and philanthropists. Explore subcategories, classifications, and the selection process."
         />
         <link rel="canonical" href={CANONICAL} />
         <meta property="og:title" content="Africa Education Icon Award 2006–2026 | NESA-Africa" />
@@ -112,7 +112,7 @@ export default function AfricaEducationIconPage() {
               <div className="mt-8 grid grid-cols-2 sm:grid-cols-4 gap-3 max-w-2xl mx-auto">
                 {[
                   { v: total, l: "Verified Nominees" },
-                  { v: ICON_SUBCATEGORIES.length, l: "Pathways" },
+                  { v: ICON_SUBCATEGORIES.length, l: "Subcategories" },
                   { v: ICON_CLASSIFICATIONS.length, l: "Classifications" },
                   { v: 9, l: "Final Laureates" },
                 ].map((m) => (
@@ -154,11 +154,11 @@ export default function AfricaEducationIconPage() {
         </section>
 
         {/* ───────────────── 2. PATHWAYS ───────────────── */}
-        <section id="pathways" className="py-16 lg:py-24">
+        <section id="subcategories" className="py-16 lg:py-24">
           <div className="container mx-auto px-4">
             <div className="max-w-2xl mb-10">
               <span className="text-[11px] uppercase tracking-[0.18em] text-gold font-semibold">
-                Step 1 · Choose a Pathway
+                Step 1 · Choose a Subcategory
               </span>
               <h2 className="mt-2 font-display text-3xl md:text-4xl font-bold text-white">
                 Three Pathways to Icon Status

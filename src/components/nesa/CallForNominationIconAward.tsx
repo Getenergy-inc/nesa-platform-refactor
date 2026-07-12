@@ -90,7 +90,7 @@ const blueGarnetCategories = [
     title: "NGO Education Enablers for Education for All Award",
     subtitle: "Blue-Garnet Award 2026",
     body:
-      "Across Nigeria and Africa, NGOs are closing education gaps through literacy programmes, school support, scholarships, inclusion, community learning, teacher development, advocacy and grassroots interventions. This category recognises non-governmental organisations creating measurable education impact — with two nomination pathways: Nigeria and Africa Regional.",
+      "Across Nigeria and Africa, NGOs are closing education gaps through literacy programmes, school support, scholarships, inclusion, community learning, teacher development, advocacy and grassroots interventions. This category recognises non-governmental organisations creating measurable education impact — with two nomination subcategories: Nigeria and Africa Regional.",
     nominateLink: "/nominate/ngo",
     learnMoreLink: "/awards/blue-garnet-categories/ngo-education",
     eventLabel: "Nominate NGO",

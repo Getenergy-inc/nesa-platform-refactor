@@ -288,7 +288,7 @@ export default function CategoryMasterIndex() {
         <title>NESA-Africa 2026 Award Categories | Recognition Directory</title>
         <meta
           name="description"
-          content="Africa's education impact recognition directory. Discover NESA-Africa 2026 award categories across Blue Garnet, Platinum, Icon and Influencer pathways — nominate, explore nominees, and sponsor."
+          content="Africa's education impact recognition directory. Discover NESA-Africa 2026 award categories across Blue Garnet, Platinum, Icon and Influencer subcategories — nominate, explore nominees, and sponsor."
         />
         <link rel="canonical" href={`${SITE}/awards/categories`} />
       </Helmet>

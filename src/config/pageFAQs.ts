@@ -151,7 +151,7 @@ export const PAGE_FAQS: PageFAQ[] = [
       },
       {
         q: "What makes NESA-Africa different from a conventional awards programme?",
-        a: "It is governance-led, evidence-based and legacy-driven. Every category is tied to verified data, independent review and a follow-through impact pathway.",
+        a: "It is governance-led, evidence-based and legacy-driven. Every category is tied to verified data, independent review and a follow-through impact subcategory.",
       },
       {
         q: "How does NESA-Africa support education transformation across Africa?",

@@ -80,7 +80,7 @@ const PATHWAYS = [
       "Updated evidence strengthens the record",
       "Category relevance reviewed by NRC",
       "Recognition threshold checked",
-      "Certificate pathway applies",
+      "Certificate subcategory applies",
     ],
   },
 ];
@@ -183,7 +183,7 @@ const FAQ = [
   },
   {
     q: "How does this affect voting?",
-    a: "Updates do not replace votes. For Blue Garnet categories, voting still decides finalists. Other categories follow the impact-update pathway.",
+    a: "Updates do not replace votes. For Blue Garnet categories, voting still decides finalists. Other categories follow the impact-update subcategory.",
   },
   {
     q: "Why do Blue Garnet categories use Vote instead?",

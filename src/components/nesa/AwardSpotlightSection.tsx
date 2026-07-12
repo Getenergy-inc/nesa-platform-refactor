@@ -14,10 +14,10 @@ import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { PathwayVideoCard, type PathwayVideoCardData } from "./PathwayVideoCard";
 import { usePathwayCards } from "@/hooks/usePathwayCards";
-import posterIcon from "@/assets/pathway-cards/icon.jpg";
-import posterCsr from "@/assets/pathway-cards/csr.jpg";
-import posterInfluencer from "@/assets/pathway-cards/influencer.jpg";
-import posterGrants from "@/assets/pathway-cards/grants.jpg";
+import posterIcon from "@/assets/subcategory-cards/icon.jpg";
+import posterCsr from "@/assets/subcategory-cards/csr.jpg";
+import posterInfluencer from "@/assets/subcategory-cards/influencer.jpg";
+import posterGrants from "@/assets/subcategory-cards/grants.jpg";
 
 const pathways: PathwayVideoCardData[] = [
   {
@@ -192,7 +192,7 @@ export function AwardSpotlightSection() {
   return (
     <section
       className="relative bg-charcoal py-16 sm:py-24 overflow-hidden"
-      aria-labelledby="pathways-heading"
+      aria-labelledby="subcategories-heading"
     >
       {/* Ambient glow */}
       <div className="pointer-events-none absolute inset-0">
@@ -216,7 +216,7 @@ export function AwardSpotlightSection() {
             </span>
           </div>
           <h2
-            id="pathways-heading"
+            id="subcategories-heading"
             className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-5 leading-tight"
           >
             Nominate and <span className="text-gold">Vote</span>

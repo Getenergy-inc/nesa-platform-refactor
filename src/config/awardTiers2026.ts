@@ -115,7 +115,7 @@ export const AWARD_TIERS_2026: AwardTier2026[] = [
     id: "influencers",
     tierNumber: 4,
     name: "Influencers Education Impact Award",
-    subtitle: "Gold Certificate Pathway",
+    subtitle: "Gold Certificate Subcategory",
     voteMechanic: "public-agc-only",
     voteMechanicLabel: "100% Public AGC Voting Coin · No jury vote",
     cta: "Nominate / Vote",

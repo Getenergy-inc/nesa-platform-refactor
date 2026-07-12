@@ -44,7 +44,7 @@ const SUMMARY_CARDS = [
 ];
 
 const PARTICIPANT_TRACKS = [
-  { label: "Nominees", to: "/nominate", desc: "Discover your pathway and submit a nomination." },
+  { label: "Nominees", to: "/nominate", desc: "Discover your subcategory and submit a nomination." },
   { label: "Voters", to: "/vote/how-it-works", desc: "Participate with AGC during voting windows." },
   { label: "Judges", to: "/judges/directory", desc: "Independent jury onboarding and scoring." },
   { label: "Partners", to: "/partners", desc: "Sponsor, fund or co-host recognition moments." },

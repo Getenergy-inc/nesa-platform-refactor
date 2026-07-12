@@ -113,7 +113,7 @@ export const INTL_SUBCATEGORIES: IntlSubcategory[] = [
     subcategoryId: "8da86667-869f-4852-a596-7ef1fbb52780",
     nominees: [
       { name: "African Leadership Academy", initiative: "Pan-African secondary leadership programme", impact: "1,865 students since 2008 · 40,000+ applicants", verification_status: "documented", media_type: "none" },
-      { name: "ALA Networks Programme", initiative: "Career pathways for young leaders", impact: "5,000+ jobs and internships", verification_status: "documented", media_type: "none" },
+      { name: "ALA Networks Programme", initiative: "Career subcategories for young leaders", impact: "5,000+ jobs and internships", verification_status: "documented", media_type: "none" },
       { name: "YALI (Young African Leaders Initiative)", initiative: "U.S. Government's signature African leadership investment", verification_status: "documented", media_type: "none" },
       { name: "LEAP Africa", initiative: "Youth leadership, entrepreneurship, employability, active citizenship", verification_status: "documented", media_type: "none" },
       { name: "International Youth Foundation", initiative: "Citizenship, employment and entrepreneurship curricula for youth", verification_status: "documented", media_type: "none" },

@@ -85,7 +85,7 @@ export default function AdminPathwaysCMS() {
   const upload = async (id: string, file: File) => {
     setUploading(id);
     const ext = file.name.split(".").pop() || "jpg";
-    const path = `pathways/${id}-${Date.now()}.${ext}`;
+    const path = `subcategories/${id}-${Date.now()}.${ext}`;
     const { error: upErr } = await supabase.storage.from(BUCKET).upload(path, file, {
       upsert: true,
       contentType: file.type,
@@ -104,7 +104,7 @@ export default function AdminPathwaysCMS() {
   return (
     <DashboardLayout>
       <Helmet>
-        <title>Pathways CMS — NESA Africa Admin</title>
+        <title>Subcategories CMS — NESA Africa Admin</title>
       </Helmet>
       <div className="space-y-6">
         <header>

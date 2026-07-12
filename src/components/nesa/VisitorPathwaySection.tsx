@@ -51,8 +51,8 @@ export function VisitorPathwaySection() {
 
   return (
     <section
-      id="visitor-pathway"
-      aria-labelledby="visitor-pathway-heading"
+      id="visitor-subcategory"
+      aria-labelledby="visitor-subcategory-heading"
       className="relative overflow-hidden bg-charcoal py-14 md:py-20"
     >
       <div className="container relative mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
@@ -61,7 +61,7 @@ export function VisitorPathwaySection() {
             Quick Pathway
           </p>
           <h2
-            id="visitor-pathway-heading"
+            id="visitor-subcategory-heading"
             className="mt-3 font-display text-2xl font-bold text-ivory sm:text-3xl md:text-4xl"
           >
             Who Are You Nominating?

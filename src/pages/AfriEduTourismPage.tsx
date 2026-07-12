@@ -94,7 +94,7 @@ export default function AfriEduTourismPage() {
           <div className="container mx-auto max-w-6xl">
             <div className="text-center mb-12">
               <h2 className="font-playfair text-3xl md:text-4xl text-ivory mb-3">Afri-EduTourism Programmes</h2>
-              <p className="text-ivory/70 max-w-2xl mx-auto">Ten flagship pathways into Africa's living education ecosystem.</p>
+              <p className="text-ivory/70 max-w-2xl mx-auto">Ten flagship subcategories into Africa's living education ecosystem.</p>
             </div>
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
               {PROGRAMMES.map((p, i) => (

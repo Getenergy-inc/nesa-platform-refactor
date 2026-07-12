@@ -59,7 +59,7 @@ export default function IconAwardMain() {
           subtitle={ICON_AWARD.subtitle}
           meta={[
             { label: "Verified Nominees", value: total },
-            { label: "Pathways", value: ICON_SUBCATEGORIES.length },
+            { label: "Subcategories", value: ICON_SUBCATEGORIES.length },
             { label: "Classifications", value: ICON_CLASSIFICATIONS.length },
             { label: "Final Laureates", value: 9 },
           ]}

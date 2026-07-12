@@ -688,7 +688,7 @@ export default function RebuildHubPage() {
                 Help us identify the next special needs schools for intervention
               </h3>
               <p className="text-white/65 text-sm leading-relaxed mb-5">
-                One page. Eight regions. One regional nomination pathway. Clean evidence. Clear integrity.
+                One page. Eight regions. One regional nomination subcategory. Clean evidence. Clear integrity.
                 No fake selection. No fake payment. A verified route toward special needs school intervention.
               </p>
               <div className="flex flex-wrap justify-center gap-3">

@@ -567,7 +567,7 @@ export default function NomineeProfile() {
                       <p className="text-ivory/90 text-sm mt-1 font-medium">{normalizeYearReferences(nominee.subcategoryTitle)}</p>
                     </div>
                     <div className="p-4 rounded-xl bg-charcoal/50 border border-gold/5">
-                      <span className="text-ivory/70 text-xs uppercase tracking-wider">Pathway</span>
+                      <span className="text-ivory/70 text-xs uppercase tracking-wider">Subcategory</span>
                       <p className="text-gold text-sm mt-1 font-medium">{pathway}</p>
                     </div>
                   </div>
@@ -596,7 +596,7 @@ export default function NomineeProfile() {
                     <Shield className="w-4 h-4 text-gold" />Nominee Details
                   </h3>
                   {[
-                    { label: "Pathway", value: pathway },
+                    { label: "Subcategory", value: pathway },
                     { label: "Region", value: nominee.regionName || "—" },
                     { label: "Country", value: nominee.country || "—" },
                     { label: "Season", value: "2025" },

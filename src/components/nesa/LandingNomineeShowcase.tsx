@@ -25,7 +25,7 @@ function isBlueGarnetCategory(catName: string): boolean {
 }
 
 const PATHWAY_OPTIONS = [
-  { value: "all", label: "All Pathways" },
+  { value: "all", label: "All Subcategories" },
   { value: "africa", label: "Africans in Africa" },
   { value: "diaspora", label: "Africans in Diaspora" },
   { value: "friends", label: "Friends of Africa" },
@@ -175,7 +175,7 @@ export function LandingNomineeShowcase() {
             <Select value={selectedPathway} onValueChange={setSelectedPathway}>
               <SelectTrigger className="w-full md:w-52 bg-white/[0.04] border-white/[0.08] text-foreground">
                 <Globe className="h-4 w-4 mr-2 text-muted-foreground" />
-                <SelectValue placeholder="All Pathways" />
+                <SelectValue placeholder="All Subcategories" />
               </SelectTrigger>
               <SelectContent>
                 {PATHWAY_OPTIONS.map(p => (

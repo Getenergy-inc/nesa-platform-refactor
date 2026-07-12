@@ -185,7 +185,7 @@ export const EDUTECH_AFRICA_CRITERIA: JudgingCategory = {
     { id: "edutech_13", number: 13, label: "Use of Local Languages", description: "Multilingual options for diverse learners.", maxScore: 10 },
     { id: "edutech_14", number: 14, label: "Crisis & Emergency Education Response", description: "Support for learning in conflict and disaster zones.", maxScore: 10 },
     { id: "edutech_15", number: 15, label: "Affordability & Open-Source Access", description: "Accessibility for underprivileged learners.", maxScore: 10 },
-    { id: "edutech_16", number: 16, label: "Personalized Learning Pathways", description: "Adaptive learning systems based on student needs.", maxScore: 10 },
+    { id: "edutech_16", number: 16, label: "Personalized Learning Subcategories", description: "Adaptive learning systems based on student needs.", maxScore: 10 },
     { id: "edutech_17", number: 17, label: "User Feedback & Customer Support", description: "Strong technical support and response to user feedback.", maxScore: 10 },
     { id: "edutech_18", number: 18, label: "Sustainability of Business Model", description: "Long-term financial sustainability and market impact.", maxScore: 10 },
     { id: "edutech_19", number: 19, label: "Recognition & Industry Awards", description: "Previous achievements in the EduTech sector.", maxScore: 10 },

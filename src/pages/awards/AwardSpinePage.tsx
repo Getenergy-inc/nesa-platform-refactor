@@ -108,12 +108,12 @@ export default function AwardSpinePage() {
   // ---------------------------------------------------------------- breadcrumb
   const crumbs = [
     { label: "Awards", href: "/awards" },
-    { label: pathway.name, href: `/awards/explore/${pathway.slug}` },
+    { label: pathway.name, href: `/awards/explore/${subcategory.slug}` },
     ...(category
       ? [
           {
             label: category.name,
-            href: `/awards/explore/${pathway.slug}/${category.slug}`,
+            href: `/awards/explore/${subcategory.slug}/${category.slug}`,
           },
         ]
       : []),
@@ -183,7 +183,7 @@ export default function AwardSpinePage() {
                 return Array.from(merged.values()).map((c) => (
                   <Link
                     key={c.slug}
-                    to={`/awards/explore/${pathway.slug}/${c.slug}`}
+                    to={`/awards/explore/${subcategory.slug}/${c.slug}`}
                     className="group rounded-xl border border-gold/20 bg-black/40 p-5 hover:border-gold/60"
                   >
                     <h3 className="font-display text-lg text-white group-hover:text-gold">
@@ -209,7 +209,7 @@ export default function AwardSpinePage() {
                 {subcategories.map((s) => (
                   <Link
                     key={s.slug}
-                    to={`/awards/explore/${pathway.slug}/${category.slug}/${s.slug}`}
+                    to={`/awards/explore/${subcategory.slug}/${category.slug}/${s.slug}`}
                     className="rounded-full border border-gold/30 bg-black/40 px-3 py-1.5 text-xs text-white/85 hover:border-gold hover:bg-gold/10 hover:text-gold"
                   >
                     {s.name}

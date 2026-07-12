@@ -29,7 +29,7 @@ export default function NGOChooser() {
   return (
     <section className="min-h-[70vh] bg-charcoal py-16">
       <Helmet>
-        <title>NGO Education Enablers — Choose Your Pathway | NESA-Africa 2026</title>
+        <title>NGO Education Enablers — Choose Your Subcategory | NESA-Africa 2026</title>
         <meta
           name="description"
           content="Choose whether to nominate a Nigeria NGO or an Africa Regional NGO for the NESA-Africa 2026 NGO Education Enablers Award."
@@ -42,7 +42,7 @@ export default function NGOChooser() {
             <HandHeart className="h-3.5 w-3.5" /> NGO Education Enablers Award
           </div>
           <h1 className="mt-4 font-display text-3xl font-bold text-ivory sm:text-4xl">
-            Choose Your NGO Nomination Pathway
+            Choose Your NGO Nomination Subcategory
           </h1>
           <p className="mx-auto mt-3 max-w-2xl text-sm text-ivory/75 sm:text-base">
             Recognising the Enablers of Education for All Across Africa. Select the pathway that fits the NGO you&apos;re nominating.

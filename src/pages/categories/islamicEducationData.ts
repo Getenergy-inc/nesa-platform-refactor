@@ -143,7 +143,7 @@ export const islamicEducationConfig: FaithCategoryConfig = {
   primaryNominateUuid: "b1b19333-917c-4ab5-b5e4-4bb9f5d7e4e2",
   subcategories: [
     { title: "Best Educational Infrastructure Development", description: "Islamic organisations building, equipping, or rehabilitating schools and learning facilities across Africa.", uuid: "b1b19333-917c-4ab5-b5e4-4bb9f5d7e4e2", slug: "islamic-schools", tabKey: "infrastructure" },
-    { title: "Best Scholarship Program", description: "Islamic organisations funding tuition, bursaries, or scholarship pathways for learners.", uuid: "c97afbc4-719e-42fa-b483-3964a30d21b2", slug: "islamic-ngos", tabKey: "scholarship" },
+    { title: "Best Scholarship Program", description: "Islamic organisations funding tuition, bursaries, or scholarship subcategories for learners.", uuid: "c97afbc4-719e-42fa-b483-3964a30d21b2", slug: "islamic-ngos", tabKey: "scholarship" },
     { title: "Best Holistic Educational Support", description: "Islamic organisations combining education with health, nutrition, or wraparound learner support.", uuid: "3ca340f2-80a8-4ae7-a7a9-eb771ac3eb52", slug: "islamic-foundations", tabKey: "holistic" },
     { title: "Best Advocacy for Educational Reforms & Awareness Campaigns", description: "Islamic organisations campaigning for education policy reform, access, and public awareness.", uuid: "4ded4d21-b068-4c51-9193-09c809722961", slug: "islamic-quranic", tabKey: "advocacy" },
   ],
