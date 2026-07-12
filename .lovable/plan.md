@@ -1,95 +1,77 @@
+# 30-Page Consolidation Refactor
 
-# NESA-Africa 60 → 38 Page Refactor
+Replace the current 38-page structure with **30 task-focused pages**, keeping every word of copy from the current pages. Content is consolidated (not deleted) via sections, tabs, accordions, and anchor navigation.
 
-This is a multi-week program of work. To keep it safe (preserve Supabase data, auth, media, payments) and reviewable, I'll execute it in 9 controlled stages, each ending in a working, deployable state. Nothing valuable gets deleted — old routes become redirects or archived sections.
+## Target sitemap (30 pages)
 
-## Guiding principles
+| # | Route | Consolidates |
+|---|-------|--------------|
+| 1 | `/` | Home (unchanged) |
+| 2 | `/about` | About + Governance + SCEF + NRC + COI + FAQs |
+| 3 | `/recognition` | Recognition hub + season overview + eligibility + timeline summary |
+| 4 | `/recognition/africa-education-icon` | Icon tier + its 1 category + subs + laureates + judges + form + FAQs |
+| 5 | `/recognition/influencer-education-impact` | Influencer tier + category + subs + form + FAQs |
+| 6 | `/recognition/platinum` | Platinum hub (7 category cards + common rules) |
+| 7 | `/recognition/gold-blue-garnet` | Gold-Blue Garnet hub (9 category cards + rules) |
+| 8–14 | `/recognition/platinum/:category` (×7) | One page per Platinum category |
+| 15–23 | `/recognition/gold-blue-garnet/:category` (×9) | One page per GBG category |
+| 24 | `/education-enablers` | All nominee/finalist/winner/region/org directories → one filterable directory |
+| 25 | `/nominate` | Tier→category→sub→type gateway with inline form routing |
+| 26 | `/timeline` | 13-phase timeline + current phase + countdown |
+| 27 | `/eduaid-africa` | EduAid + Rebuild + Special-Needs + Afri-EduTourism + Scholarships + Training + Impact Reporting (anchors: `#webinars`, `#rebuild-my-school`, `#nominate-special-needs-school`, `#afri-edutourism`, `#scholarships`, `#training`, `#impact-reporting`) |
+| 28 | `/media` | TV + webinars + shows + interviews + docs + podcasts + news + press + galleries + gala media + accreditation + events |
+| 29 | `/gala` | Gala + tickets + tables + delegates + hospitality + invitations + accreditation + FAQs + QR |
+| 30 | `/support` | Sponsor + partner + donate + volunteer + ambassador + chapters + merch + contact + help + FAQs |
 
-- **One website, in place.** No new project. Preserve domain, auth, Supabase rows, media, forms, payments, analytics.
-- **4 tiers · 18 categories · 96 subcategories · 20 core + 18 category = 38 public pages.**
-- **No public award voting in 2026** anywhere in the UI.
-- **Terminology:** `pathway` → `subcategory` everywhere.
-- **URLs:** `/recognition/{tier-slug}/{category-slug}`. Subcategories never get their own public page.
-- **Config-driven:** one `AwardNominationForm`, one `award_cycles → tiers → categories → subcategories` spine, one timeline table, one media system.
+## Execution steps
 
-## Target IA (final state)
+**Step 1 — Source of truth**
+Rewrite `src/config/page-sequence.ts` to the 30 entries above. Update `src/config/siteNavigation.ts` main-nav to reflect the 7-item structure pointing at these routes.
 
-**Nav (7 + Nominate CTA):** Home · Recognition · Impact Directory · Impact Programmes · Media & Events · Gala & Tickets · Support & Get Involved · **Nominate**.
+**Step 2 — Build the 4 new consolidator pages**
+Create wrapper pages that mount existing section components (no copy loss):
+- `src/pages/about/AboutConsolidated.tsx` — reuses existing About sections + Governance, SCEF, NRC, COI, FAQ sections.
+- `src/pages/eduaid/EduAidAfricaImpact.tsx` — mounts EduAid, Rebuild, Special-Needs nominate, Afri-EduTourism, Scholarships, Training, Impact sections with `id=` anchors and a sticky sub-nav.
+- `src/pages/media/MediaHubConsolidated.tsx` — mounts TV, Webinars, Shows, Interviews, Docs, Podcasts, News, Press, Galleries, Accreditation, Events sections.
+- `src/pages/support/SupportConsolidated.tsx` — mounts Sponsor, Partner, Donate, Volunteer, Ambassador, Chapters, Merch, Contact, Help, FAQ sections.
+- `src/pages/EducationEnablersDirectory.tsx` — single filterable directory replacing separate nominee/finalist/winner/region/org listings.
+- `src/pages/NominateGateway.tsx` — tier → category → subcategory → nominee-type wizard that opens the correct embedded form.
 
-**20 core pages:** `/`, `/about`, `/governance`, `/recognition`, `/recognition/gold-blue-garnet`, `/recognition/platinum`, `/recognition/africa-education-icon`, `/recognition/influencer-education-impact`, `/nominate`, `/directory`, `/regions`, `/timeline`, `/impact`, `/eduaid-africa`, `/rebuild-my-school`, `/special-needs`, `/afri-edutourism`, `/media`, `/gala`, `/support`.
+Each consolidator imports the existing section components verbatim so **no copy is removed**.
 
-**18 category pages** under their tier slug (9 GBG + 7 Platinum + 1 Icon + 1 Influencer).
+**Step 3 — Route table**
+In `src/App.tsx`:
+- Point the 30 canonical routes at the pages above.
+- Add `<Navigate>` redirects from every removed route to its new home (with `#anchor` where applicable):
+  - `/eduaid` → `/eduaid-africa`
+  - `/rebuild` → `/eduaid-africa#rebuild-my-school`
+  - `/special-needs` → `/eduaid-africa#nominate-special-needs-school`
+  - `/events/tourism`, `/afri-edutourism` → `/eduaid-africa#afri-edutourism`
+  - `/media/tv`, `/media/shows`, `/media/webinars`, `/media/gala`, `/press` → `/media` (with anchors)
+  - `/donate`, `/volunteer`, `/ambassadors`, `/partners`, `/endorse`, `/judges`, `/shop`, `/contact`, `/faq`, `/policies` → `/support` (with anchors)
+  - `/about/vision-2035`, `/about/governance`, `/about/scef`, `/about/social-impact` → `/about#…`
+  - `/nominees`, `/regions`, `/impact`, directory variants → `/education-enablers`
+  - `/awards/*` legacy → `/recognition/*`
+  - `/tickets` → `/gala#tickets`
+- Keep dynamic `:category` routes under the two hubs (Platinum, GBG).
 
-## Stages
+**Step 4 — Navigation & footer**
+Update `src/config/siteNavigation.ts`, `MobileBottomNav`, `NESAFooter` link groups, and any hardcoded links across the codebase to the new 30-route map. Preserve labels.
 
-### Stage 1 — Audit & backup (read-only)
-- Enumerate every current route from `src/App.tsx` + lazy routes → `docs/refactor/route-inventory.md`.
-- Classify each: KEEP / MERGE / REDIRECT / CONVERT-TO-SECTION / DYNAMIC / DASHBOARD / ARCHIVE / REMOVE.
-- Produce `docs/refactor/sitemap-38.md`, `route-migration-matrix.md`, `db-relationship-map.md`, `component-reuse-plan.md`.
-- No code changes; deliverables are docs the user can review before Stage 2.
+**Step 5 — Content preservation check**
+Grep each removed page's copy strings and confirm they still render inside the target consolidator. Add anchor `id`s to the section components that need them.
 
-### Stage 2 — Governance & terminology sweep
-- Remove/disable in UI: Vote Now, Vote with AGC (award context), voting leaderboards, trending/most-voted, voting countdowns, finalist/winner pages driven by public vote.
-- Keep AGC wallet earn/spend for non-award utility; hide award-vote spend paths.
-- Global rename `pathway` → `subcategory` across components, copy, i18n JSON, analytics events, config, tests.
-- Restrict the 27 Icon judges to Icon-only routes (`ProtectedRoute` scope + guard in `judge-*` edge functions).
+**Step 6 — Verify**
+- `tsgo` typecheck
+- `bun run build`
+- Playwright smoke: visit each of the 30 routes + 5 legacy redirects; assert 200 and heading present.
+- Update `FRONTEND_ARCHITECTURE.md` and `docs/refactor/sitemap-38.md` → new `sitemap-30.md`.
 
-### Stage 3 — Data spine (Supabase migration)
-Schema (all with GRANTs + RLS):
-- `award_cycles`, `award_tiers`, `award_categories(tier_id)`, `award_subcategories(category_id)`, `award_classifications` (Icon only), `category_scopes`, `eligibility_rules`, `evidence_requirements`, `form_definitions`, `form_fields`, `timeline_events`.
-- Extend `nominations` with `tier_id`, `category_id`, `subcategory_id`, `classification_id` (nullable, required for Icon); backfill from existing rows using current category slugs.
-- Seed the canonical 4/18/96 taxonomy from a single TS source (`src/config/recognition/taxonomy2026.ts`) piped through a seed edge function.
+## Notes / trade-offs
 
-### Stage 4 — Route architecture
-- Add `/recognition` hub + 4 tier hubs.
-- Replace 18 category routes with `/recognition/{tier}/{category}` served by one `<CategoryPage>` template that pulls tier/category/subcategories from DB config.
-- Keep existing rich hero components as `legacyHero` slots (like current `AwardCategoryRoute`).
-- All old category URLs → 301 via `src/config/redirects.ts` consumed by a `<RedirectRoute>` and mirrored in `public/_redirects` isn't used on Lovable (SPA fallback handles paths) — do redirects client-side + update sitemap.
+- **No copy is deleted.** Every existing section component is remounted inside the new consolidators; only routes/wrappers change.
+- The 16 tier-category detail pages (7 Platinum + 9 GBG) continue to use the existing `TierCategorySubcategoryPage` / `CategoryDetailPage` renderers, hydrated from `useDbSpine`.
+- Legacy URLs keep working via redirects, so external links and SEO are preserved during the transition.
+- This is a large multi-file change (~40–60 files touched, mostly routing + 6 new wrapper pages). I'll batch writes in parallel where safe.
 
-### Stage 5 — Unified nomination form
-- One `<AwardNominationForm>` component driven by `form_definitions` + `form_fields` for the active `award_cycle`.
-- Flow: Subcategory → Nominee → Contribution → Evidence → Nominator → Review → Draft/Submit → Email verify → Account link → Wallet link → Reference → NRC record.
-- Config flags per tier: `public_voting_enabled=false` (all), `judge_review_enabled=true` (Icon only), `governance_review_enabled=true` (all).
-- Embed on every category page; `/nominate` becomes the gateway (tier → category → subcategory picker → same component).
-
-### Stage 6 — /timeline and /media
-- `/timeline`: DB-driven from `timeline_events`; seed the 13 phases; mobile accordion + desktop rail; no voting windows.
-- `/media`: hub with the 18 defined sections; back it with existing `media_assets` + new `media_stories`, `media_series`, `media_episodes`, `media_accreditations`, `media_consents`.
-- Media Dashboard (authenticated, not counted in 38).
-
-### Stage 7 — Consolidation pages
-- `/directory` replaces nominees/finalists/winners/trending with unified filters.
-- `/support` merges sponsors, partners, donate, volunteer, ambassadors, chapters, shop, help, contact into tabbed sections.
-- `/impact` + `/eduaid-africa` reposition Rebuild / Special-Needs / Afri-EduTourism as EduAid services.
-- Preserve existing content by moving into these parents; archive raw pages behind redirects.
-
-### Stage 8 — Redirects, SEO, analytics
-- Implement the full redirect map from the prompt + any extras found in Stage 1.
-- Update `scripts/generate-sitemap.ts` to the 38-page set + dynamic category/directory routes.
-- Update `index.html` head + per-route `<Helmet>` for the new IA; JSON-LD (Organization sitewide, Event for Gala, Article for media, BreadcrumbList on category pages).
-- Wire the required analytics events through `src/lib/analytics.ts`.
-
-### Stage 9 — QA, launch, monitoring
-- Playwright specs: nav, tier hubs, category template, nomination form per tier, /timeline phases, /directory filters, redirect matrix, mobile viewport.
-- Banned-strings CI: block reintroduction of `pathway`, `Vote Now`, `Vote with AGC` (award context), voting countdown copy.
-- Preview → stakeholder review → production; keep rollback via git.
-
-## Technical details
-
-- **Category template:** extend existing `AwardCategoryPage` + `AwardCategoryRoute` to consume DB config (tier, category, subcategories, evidence, timeline slice). Keep `legacyHero` per category for visual continuity.
-- **Redirects:** SPA-side `<RedirectRoute to="…" status={301}/>` component + `<meta http-equiv="refresh">` fallback in the rendered shell; add each old path to sitemap-exclude list.
-- **Voting removal:** delete/guard routes `GoldVoting`, `BlueGarnetVoting`, `GoldBlueGarnetVoteHub`, `VoteWithAGCSection`; retain non-award AGC earn flows.
-- **Data safety:** every schema change is additive; backfills run in idempotent migrations; no destructive drops until Stage 9 sign-off.
-- **Icon jury scoping:** enforce `judge_assignments.tier_id = 'africa-education-icon'` in RLS + edge function guards.
-
-## Deliverables per stage
-
-Each stage ends with: a short changelog, updated `ROUTES.md`, updated `docs/refactor/*`, passing typecheck + targeted Playwright, and a preview URL for review before the next stage starts.
-
-## What I need from you to start
-
-1. **Confirm the staged approach** (I'll start Stage 1 audit immediately on approval — no code changes yet).
-2. **Confirm scope of voting removal**: remove entirely from the 2026 UI, or keep behind a feature flag for post-2026 seasons? (Recommended: feature-flag off, code retained.)
-3. **Any routes/pages you explicitly want KEPT** even if the audit flags them as duplicates?
-
-On approval I will produce the Stage 1 audit docs first so we have a shared migration matrix before touching code.
+Approve this plan and I'll implement it in one pass.
