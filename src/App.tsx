@@ -909,7 +909,7 @@ const App = () => (
 
                   {/* Canonical Awards Spine — Pathway → Category → Subcategory */}
                   <Route path="/recognition" element={<WithLayout><RecognitionHubPage /></WithLayout>} />
-                  <Route path="/recognition/:pathwaySlug" element={<Navigate to="/awards/explore/:pathwaySlug" replace />} />
+                  
                   <Route path="/awards/explore" element={<WithLayout><Awards /></WithLayout>} />
                   <Route path="/awards/explore/:pathwaySlug" element={<WithLayout><AwardSpinePage /></WithLayout>} />
                   <Route path="/awards/explore/:pathwaySlug/:categorySlug" element={<WithLayout><AwardSpinePage /></WithLayout>} />
