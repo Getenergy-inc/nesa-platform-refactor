@@ -316,7 +316,10 @@ export function SiteHeader() {
   return (
     <>
       <SkipLink />
-      <header className="fixed top-0 left-0 right-0 z-50 bg-charcoal/95 backdrop-blur border-b border-gold/20">
+      <header
+        role="banner"
+        className="fixed top-0 left-0 right-0 z-50 bg-charcoal/95 backdrop-blur border-b border-gold/20"
+      >
         <div className="container mx-auto px-4 flex items-center justify-between gap-3 h-14 lg:h-16">
           <BrandBlock />
           <DesktopNav />
