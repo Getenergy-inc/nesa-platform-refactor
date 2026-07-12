@@ -1198,14 +1198,7 @@ const App = () => (
                   />
 
                   {/* Media */}
-                  <Route
-                    path="/media"
-                    element={
-                      <WithLayout>
-                        <MediaHub />
-                      </WithLayout>
-                    }
-                  />
+                  <Route path="/media" element={<WithLayout><MediaHubConsolidated /></WithLayout>} />
                   {/* Gallery */}
                   <Route
                     path="/gallery"
