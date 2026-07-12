@@ -911,11 +911,16 @@ const App = () => (
 
                   {/* Canonical Awards Spine — Pathway → Category → Subcategory */}
                   <Route path="/recognition" element={<WithLayout><RecognitionHubPage /></WithLayout>} />
-                  
+                  {/* Stage 6 — Legacy recognition redirects (data-driven). */}
+                  {LEGACY_RECOGNITION_REDIRECTS.map((r) => (
+                    <Route key={r.from} path={r.from} element={<RedirectRoute to={r.to} />} />
+                  ))}
+
                   <Route path="/awards/explore" element={<WithLayout><Awards /></WithLayout>} />
                   <Route path="/awards/explore/:pathwaySlug" element={<WithLayout><AwardSpinePage /></WithLayout>} />
                   <Route path="/awards/explore/:pathwaySlug/:categorySlug" element={<WithLayout><AwardSpinePage /></WithLayout>} />
                   <Route path="/awards/explore/:pathwaySlug/:categorySlug/:subcategorySlug" element={<WithLayout><AwardSpinePage /></WithLayout>} />
+
 
                   <Route
                     path="/awards/csr-education"
