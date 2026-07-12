@@ -554,7 +554,7 @@ export function SubcategoryPathways({
                     asChild
                     size="sm"
                     variant="outline"
-                    className="border-gold/30 text-white hover:bg-gold/10 h-8"
+                    className="border-gold/40 text-white hover:bg-gold/10 h-8 flex-1 min-w-[9rem]"
                     onClick={() =>
                       trackEvent("subcategory_card_click", {
                         page: pageSlug,
@@ -563,13 +563,15 @@ export function SubcategoryPathways({
                       })
                     }
                   >
-                    <Link to={s.viewHref}>View</Link>
+                    <Link to={s.viewHref} aria-label={`View ${s.title} subcategory page`}>
+                      View subcategory →
+                    </Link>
                   </Button>
                 )}
                 <Button
                   asChild
                   size="sm"
-                  className="bg-gold text-charcoal hover:bg-gold/90 h-8"
+                  className="bg-gold text-charcoal hover:bg-gold/90 h-8 flex-1 min-w-[9rem]"
                   onClick={() =>
                     trackEvent("subcategory_card_click", {
                       page: pageSlug,
@@ -578,7 +580,9 @@ export function SubcategoryPathways({
                     })
                   }
                 >
-                  <Link to={s.nominateHref}>Nominate Here</Link>
+                  <Link to={s.nominateHref} aria-label={`Nominate for ${s.title}`}>
+                    Nominate Here
+                  </Link>
                 </Button>
               </div>
             </motion.div>
