@@ -528,30 +528,9 @@ const App = () => (
                   <Route path="/voting-timeline" element={<Navigate to="/timeline" replace />} />
                   <Route path="/awards/timeline" element={<Navigate to="/timeline" replace />} />
 
-                  <Route
-                    path="/about/scef"
-                    element={
-                      <WithLayout>
-                        <SCEF />
-                      </WithLayout>
-                    }
-                  />
-                  <Route
-                    path="/about/awards-recognition"
-                    element={
-                      <WithLayout>
-                        <Awards />
-                      </WithLayout>
-                    }
-                  />
-                  <Route
-                    path="/about/social-impact"
-                    element={
-                      <WithLayout>
-                        <Impact />
-                      </WithLayout>
-                    }
-                  />
+                  <Route path="/about/scef" element={<Navigate to="/about#scef" replace />} />
+                  <Route path="/about/awards-recognition" element={<Navigate to="/recognition" replace />} />
+                  <Route path="/about/social-impact" element={<Navigate to="/eduaid-africa" replace />} />
                   <Route
                     path="/awards"
                     element={
