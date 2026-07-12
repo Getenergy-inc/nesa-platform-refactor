@@ -489,6 +489,14 @@ const App = () => (
                   <Route path="/get-involved" element={<Navigate to="/volunteer" replace />} />
                   <Route path="/press" element={<Navigate to="/media" replace />} />
 
+                  {/* === 22-page canonical spec (2026 final refactor) === */}
+                  {/* Short tier aliases (canonical URLs per spec) */}
+                  <Route path="/africa-education-icon" element={<WithLayout><IconAward /></WithLayout>} />
+                  <Route path="/gold-blue-garnet" element={<WithLayout><BlueGarnetAward /></WithLayout>} />
+                  <Route path="/platinum" element={<WithLayout><PlatinumAward /></WithLayout>} />
+                  <Route path="/influencer-impact" element={<InfluencerImpact2026 />} />
+                  <Route path="/endorsements" element={<WithLayout><EndorsementsPage /></WithLayout>} />
+
 
 
 
@@ -547,7 +555,7 @@ const App = () => (
                     path="/impact"
                     element={
                       <WithLayout>
-                        <Impact />
+                        <ImpactHub />
                       </WithLayout>
                     }
                   />
