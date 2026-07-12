@@ -664,19 +664,12 @@ const App = () => (
                   <Route
                     path="/awards/18-categories/:categorySlug/:subcategorySlug"
                     element={
-                      <Navigate
-                        to={
-                          typeof window !== "undefined"
-                            ? window.location.pathname.replace(
-                                "/awards/18-categories/",
-                                "/awards/gold-blue-garnet/",
-                              )
-                            : "/awards/18-categories"
-                        }
-                        replace
-                      />
+                      <WithLayout>
+                        <TierCategorySubcategoryPage />
+                      </WithLayout>
                     }
                   />
+
 
 
                   <Route
