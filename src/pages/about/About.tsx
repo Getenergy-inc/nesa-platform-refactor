@@ -32,7 +32,7 @@ const HERO_STATS = [
   { value: "10", label: "Education Regions", icon: Globe },
   { value: "27+", label: "Expert Judges", icon: Users },
   { value: "18", label: "Categories", icon: Award },
-  { value: "96", label: "Recognition Pathways", icon: Trophy },
+  { value: "96", label: "Recognition Subcategories", icon: Trophy },
 ];
 
 export default function About() {

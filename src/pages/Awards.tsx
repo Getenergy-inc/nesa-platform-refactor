@@ -50,7 +50,7 @@ const SITE = "https://nesaafrica.lovable.app";
 const HERO_STATS = [
   { value: "4", label: "Award Tiers" },
   { value: "18", label: "Categories" },
-  { value: "96", label: "Recognition Pathways" },
+  { value: "96", label: "Recognition Subcategories" },
   { value: "10", label: "Education Regions" },
 ];
 
@@ -172,7 +172,7 @@ export default function AwardsPage() {
         <title>The NESA-Africa Recognition Framework | Awards 2026</title>
         <meta
           name="description"
-          content="Four Recognition Pathways. One Continent. One Mission. NESA-Africa recognises educational excellence, leadership, innovation, advocacy, philanthropy, and lifelong contribution across Africa, the diaspora, and Friends of Africa."
+          content="Four Recognition Subcategories. One Continent. One Mission. NESA-Africa recognises educational excellence, leadership, innovation, advocacy, philanthropy, and lifelong contribution across Africa, the diaspora, and Friends of Africa."
         />
         <link rel="canonical" href={`${SITE}/awards`} />
         <meta property="og:title" content="The NESA-Africa Recognition Framework | Awards 2026" />
@@ -388,7 +388,7 @@ export default function AwardsPage() {
                 id="pathways-heading"
                 className="mt-2 font-display text-3xl md:text-4xl font-bold text-ivory"
               >
-                Choose a Recognition Pathway
+                Choose a Recognition Subcategory
               </h2>
               <p className="mt-3 text-ivory/70 text-sm md:text-base">
                 Each pathway honours a different kind of educational impact. Pick
@@ -461,7 +461,7 @@ export default function AwardsPage() {
                 How Recognition Is <span className="text-gold">Structured</span>
               </h2>
               <p className="mt-3 text-ivory/70 text-sm md:text-base">
-                18 Categories · 96 Recognition Pathways · One Continental Mission
+                18 Categories · 96 Recognition Subcategories · One Continental Mission
               </p>
             </div>
 

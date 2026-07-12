@@ -70,7 +70,7 @@ export function NominationPathwaySelector({
           Who Are You Nominating?
         </h2>
         <p className="text-sm text-white/65 max-w-2xl">
-          Choose the recognition pathway that best matches your nominee. You can add multiple
+          Choose the recognition subcategory that best matches your nominee. You can add multiple
           nominees across pathways before final submission.
         </p>
       </div>

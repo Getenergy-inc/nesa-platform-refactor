@@ -1,4 +1,4 @@
-// Pathways to Recognition — NESA Africa 2026
+// Recognition Hub — NESA Africa 2026
 // Cinematic 4-card grid with embedded YouTube storytelling experiences.
 
 import { motion } from "framer-motion";

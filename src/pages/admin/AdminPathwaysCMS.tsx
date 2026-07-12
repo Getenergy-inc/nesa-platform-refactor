@@ -109,7 +109,7 @@ export default function AdminPathwaysCMS() {
       <div className="space-y-6">
         <header>
           <h1 className="font-display text-3xl font-bold text-foreground">
-            Pathways to Recognition — CMS
+            Recognition Hub — CMS
           </h1>
           <p className="text-muted-foreground text-sm mt-1">
             Edit the four landing-page recognition cards: copy, CTAs, link destinations, gradient,

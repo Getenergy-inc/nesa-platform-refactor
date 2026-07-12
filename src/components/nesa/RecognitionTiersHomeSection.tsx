@@ -61,7 +61,7 @@ export function RecognitionTiersHomeSection() {
           </h2>
           <p className="text-white/75 text-base md:text-lg">
             NESA-Africa is organised through four recognition tiers, eighteen categories
-            and more than one hundred recognition pathways — each one a route into Africa's
+            and more than one hundred recognition subcategories — each one a route into Africa's
             Education Impact Directory.
           </p>
         </div>

@@ -170,7 +170,7 @@ export default function AwardPathwayPage() {
           <h1 className="font-display text-3xl text-white mb-3">Pathway not found</h1>
           <Link to="/pathways">
             <Button className="bg-gold hover:bg-gold-dark text-charcoal rounded-full">
-              Back to Pathways to Recognition
+              Back to Recognition Hub
             </Button>
           </Link>
         </div>
@@ -237,7 +237,7 @@ export default function AwardPathwayPage() {
                   className="w-full sm:w-auto border-gold/40 text-gold hover:bg-gold/10 rounded-full gap-2 px-7"
                 >
                   <ArrowLeft className="h-4 w-4" />
-                  Back to Pathways to Recognition
+                  Back to Recognition Hub
                 </Button>
               </Link>
             </div>
