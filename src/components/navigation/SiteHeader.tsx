@@ -324,8 +324,7 @@ export function SiteHeader() {
           <BrandBlock />
           <DesktopNav />
           <div className="flex items-center gap-2">
-            <NominateButton className="hidden sm:inline-flex" />
-            <NominateButton className="sm:hidden text-xs px-3 py-1.5 h-9" />
+            <NominateButton className="text-xs sm:text-sm px-3 sm:px-4 py-1.5 sm:py-2 h-9 sm:h-10" />
             <AccountActions />
             <MobileMenu />
           </div>
