@@ -35,7 +35,7 @@ export const PAGE_SEQUENCE: PageEntry[] = [
 
   // Nominees & Voting
   { path: "/nominees", label: "Nominees Directory", section: "Nominees & Voting" },
-  { path: "/trending", label: "Trending Nominees", section: "Nominees & Voting" },
+  { path: "/trending", label: "Featured Nominees", section: "Nominees & Voting" },
   { path: "/vote", label: "Vote", section: "Nominees & Voting" },
   { path: "/how-voting-works", label: "How Voting Works", section: "Nominees & Voting" },
   { path: "/earn-agc", label: "Earn AGC", section: "Nominees & Voting" },

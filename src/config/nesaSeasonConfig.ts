@@ -107,7 +107,7 @@ export const PHASES: PhaseConfig[] = [
     startDate: new Date("2026-07-13"),
     endDate: new Date("2026-09-25"),
     isActive: false,
-    ctaText: "Vote Now",
+    ctaText: "Learn More",
     ctaLink: "/vote",
   },
   {

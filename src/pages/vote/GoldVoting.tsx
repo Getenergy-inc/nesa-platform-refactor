@@ -448,7 +448,7 @@ import { VotingStatsStrip } from "@/components/voting/VotingStatsStrip";
                                    : "w-full bg-amber-500 hover:bg-amber-600 text-white"
                                  }
                                >
-                                 {hasVoted ? "Voted ✓" : "Vote Now"}
+                                 {hasVoted ? "Voted ✓" : "Learn More"}
                                </Button>
                              </div>
                            </div>
@@ -485,7 +485,7 @@ import { VotingStatsStrip } from "@/components/voting/VotingStatsStrip";
                                      : "w-full bg-amber-500 hover:bg-amber-600 text-white"
                                    }
                                  >
-                                   {hasVoted ? "Voted ✓" : "Vote Now"}
+                                   {hasVoted ? "Voted ✓" : "Learn More"}
                                  </Button>
                                </div>
                              </div>

@@ -140,7 +140,7 @@ export default function GoldNomineeProfilePage() {
                         ? "bg-emerald-600 hover:bg-emerald-600 text-white font-bold rounded-full px-7 gap-2 cursor-default"
                         : "bg-gold hover:bg-gold/90 text-charcoal font-bold rounded-full px-7 gap-2 shadow-lg shadow-gold/20"}
                     >
-                      {voted ? <><BadgeCheck className="w-4 h-4" /> Voted</> : <><Vote className="w-4 h-4" /> Vote Now</>}
+                      {voted ? <><BadgeCheck className="w-4 h-4" /> Voted</> : <><Vote className="w-4 h-4" /> Learn More</>}
                     </Button>
                     <Button onClick={handleShare} size="lg" variant="outline" className="border-gold/40 text-gold hover:bg-gold/10 rounded-full px-6 gap-2 bg-charcoal/40 backdrop-blur">
                       <Share2 className="w-4 h-4" /> Share Profile
@@ -213,7 +213,7 @@ export default function GoldNomineeProfilePage() {
                       ? "bg-emerald-600 text-white font-bold rounded-full px-8 gap-2 cursor-default"
                       : "bg-gold hover:bg-gold/90 text-charcoal font-bold rounded-full px-8 gap-2"}
                   >
-                    {voted ? <><BadgeCheck className="w-4 h-4" /> Voted</> : <><Vote className="w-4 h-4" /> Vote Now</>}
+                    {voted ? <><BadgeCheck className="w-4 h-4" /> Voted</> : <><Vote className="w-4 h-4" /> Learn More</>}
                   </Button>
                   <Button onClick={handleShare} size="lg" variant="outline" className="border-gold/40 text-gold hover:bg-gold/10 rounded-full px-7 gap-2 bg-charcoal/40">
                     <UserPlus className="w-4 h-4" /> Invite Others to Vote
@@ -296,7 +296,7 @@ export default function GoldNomineeProfilePage() {
                 ? "flex-1 bg-emerald-600 text-white font-bold gap-2 cursor-default"
                 : "flex-1 bg-gold hover:bg-gold/90 text-charcoal font-bold gap-2"}
             >
-              {voted ? <><BadgeCheck className="w-4 h-4" /> Voted</> : <><Vote className="w-4 h-4" /> Vote Now</>}
+              {voted ? <><BadgeCheck className="w-4 h-4" /> Voted</> : <><Vote className="w-4 h-4" /> Learn More</>}
             </Button>
             <Button onClick={handleShare} variant="outline" className="border-gold/40 text-gold hover:bg-gold/10">
               <Share2 className="w-4 h-4" />

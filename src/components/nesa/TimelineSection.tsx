@@ -68,7 +68,7 @@ export function TimelineSection() {
                     <p className="text-white/70 text-sm">{item.description}</p>
                     {isVotingPhase(item.phase) && (
                       <p className="text-white/50 text-xs mt-1">
-                        Vote with AGC (non-tradeable voting credit)
+                        Explore Recognition (non-tradeable voting credit)
                       </p>
                     )}
                   </div>

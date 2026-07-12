@@ -215,7 +215,7 @@ export function AGCDashboard() {
               {currentPhase ? (
                 <Button size="sm" asChild className="bg-gold hover:bg-gold-dark text-charcoal">
                   <Link to="/vote">
-                    Vote Now <ArrowRight className="ml-1 h-3 w-3" />
+                    Learn More <ArrowRight className="ml-1 h-3 w-3" />
                   </Link>
                 </Button>
               ) : (

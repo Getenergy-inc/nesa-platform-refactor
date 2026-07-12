@@ -53,7 +53,7 @@ export function GoldCertificateSection() {
                   <Coins className="h-5 w-5 text-gold" />
                 </div>
                 <div>
-                  <p className="text-white font-semibold mb-1">Vote with AGC Credits</p>
+                  <p className="text-white font-semibold mb-1">Explore Recognition Credits</p>
                   <p className="text-white/70 text-sm">
                     Earn voting points through participation. Use AGC to vote for Gold winners. 
                     <span className="text-amber-400"> 1 Vote = 1 AGC</span>

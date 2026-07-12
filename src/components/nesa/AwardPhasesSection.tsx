@@ -20,7 +20,7 @@ export function AwardPhasesSection() {
       return "Public participation is enabled through AGC voting points.";
     }
     if (phaseTitle.toLowerCase().includes("blue garnet") && !phaseTitle.toLowerCase().includes("icon")) {
-      return "Vote with AGC during the public window; final results combine public participation and jury review.";
+      return "Explore Recognition during the public window; final results combine public participation and jury review.";
     }
     return null;
   };

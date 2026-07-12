@@ -108,7 +108,7 @@ export function NESAHero() {
         <div className="flex items-center gap-2 px-4 sm:px-6 py-2.5 rounded-full bg-gold/10 border border-gold/30 mb-6 sm:mb-8 animate-fade-in" style={{ animationDelay: '0.45s' }}>
           <Coins className="h-4 w-4 text-gold" />
           <span className="text-sm text-white/90">
-            Earn voting points through participation. <span className="text-gold font-medium">Vote with AGC</span> for Gold-Blue Garnet winners.
+            Earn voting points through participation. <span className="text-gold font-medium">Explore Recognition</span> for Gold-Blue Garnet winners.
           </span>
         </div>
 

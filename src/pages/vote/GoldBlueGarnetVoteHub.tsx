@@ -7,7 +7,7 @@ import { Badge } from "@/components/ui/badge";
 import { Breadcrumbs } from "@/components/ui/breadcrumbs";
 
 /**
- * Vote Now hub for the Gold–Blue Garnet competitive recognition track.
+ * Learn More hub for the Gold–Blue Garnet competitive recognition track.
  * Presents the two-phase voting journey:
  *   Phase 1 → Gold Voting (public qualifier)
  *   Phase 2 → Blue Garnet Voting (continental final)
@@ -57,7 +57,7 @@ export default function GoldBlueGarnetVoteHub() {
   return (
     <>
       <Helmet>
-        <title>Vote Now · Gold–Blue Garnet | NESA-Africa 2026</title>
+        <title>Learn More · Gold–Blue Garnet | NESA-Africa 2026</title>
         <meta
           name="description"
           content="Cast your Gold Vote in Phase 1 and your Blue Garnet Vote in Phase 2 of the NESA-Africa 2026 continental recognition of Enablers of Education for All Across Africa."
@@ -73,15 +73,15 @@ export default function GoldBlueGarnetVoteHub() {
               items={[
                 { label: "Awards", href: "/awards" },
                 { label: "Gold–Blue Garnet", href: "/awards/gold-blue-garnet" },
-                { label: "Vote Now" },
+                { label: "Learn More" },
               ]}
             />
             <div className="mt-6 max-w-3xl">
               <Badge className="bg-amber-500/20 text-amber-200 border border-amber-400/40 mb-4">
-                <VoteIcon className="w-3.5 h-3.5 mr-1.5" /> NESA-Africa 2026 · Vote Now
+                <VoteIcon className="w-3.5 h-3.5 mr-1.5" /> NESA-Africa 2026 · Learn More
               </Badge>
               <h1 className="font-serif text-4xl md:text-6xl font-bold leading-tight">
-                Gold–Blue Garnet <span className="text-amber-400">Vote Now</span>
+                Gold–Blue Garnet <span className="text-amber-400">Learn More</span>
               </h1>
               <p className="mt-4 text-lg text-white/80">
                 A two-phase continental voting journey honouring the{" "}

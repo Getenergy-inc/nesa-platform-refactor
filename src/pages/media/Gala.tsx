@@ -694,7 +694,7 @@ export default function Gala() {
                   <Link to="/tickets"><Ticket className="mr-2 h-5 w-5" /> Buy Ticket</Link>
                 </Button>
                 <Button asChild size="lg" variant="outline" className="border-indigo-400/60 bg-indigo-500/10 text-white hover:bg-indigo-500/20">
-                  <Link to="/vote"><Vote className="mr-2 h-5 w-5" /> Vote Now</Link>
+                  <Link to="/vote"><Vote className="mr-2 h-5 w-5" /> Learn More</Link>
                 </Button>
                 <Button asChild size="lg" variant="outline" className="border-white/20 bg-white/5 text-white hover:bg-white/10">
                   <Link to="/sponsors"><Handshake className="mr-2 h-5 w-5" /> Partner With NESA</Link>

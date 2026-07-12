@@ -136,7 +136,7 @@ export default function GoldCategoryPage() {
               <div className="flex flex-wrap justify-center gap-3">
                 <a href="#vote">
                   <Button size="lg" className="bg-gold hover:bg-gold/90 text-charcoal font-bold rounded-full px-7 gap-2 shadow-lg shadow-gold/20">
-                    <Vote className="w-4 h-4" /> Vote Now
+                    <Vote className="w-4 h-4" /> Learn More
                   </Button>
                 </a>
                 <Link to={`/nominate?family=gold-blue-garnet&source=gold-${categorySlug}`}>
@@ -279,7 +279,7 @@ export default function GoldCategoryPage() {
                     <div className="flex gap-2">
                       <Link to={`/nominees/gold-special-recognition/${category.slug}/${n.slug}#vote`} className="flex-1">
                         <Button size="sm" className="w-full bg-gold hover:bg-gold/90 text-charcoal font-bold gap-1.5">
-                          <Vote className="w-3.5 h-3.5" /> Vote Now
+                          <Vote className="w-3.5 h-3.5" /> Learn More
                         </Button>
                       </Link>
                       <Link to={`/nominees/gold-special-recognition/${category.slug}/${n.slug}`} className="flex-1">

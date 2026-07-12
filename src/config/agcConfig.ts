@@ -341,7 +341,7 @@ export const AGC_FAQS: AGCFAQ[] = [
 export const AGC_PRIMARY_ACTIONS = [
   { label: 'Create Account', href: '/register', variant: 'default' as const },
   { label: 'Earn AGC', href: '/about-agc#earn', variant: 'outline' as const },
-  { label: 'Vote Now', href: '/vote-with-agc#vote', variant: 'default' as const },
+  { label: 'Learn More', href: '/vote-with-agc#vote', variant: 'default' as const },
   { label: 'View Voting Calendar', href: '/vote-with-agc#calendar', variant: 'outline' as const },
 ];
 

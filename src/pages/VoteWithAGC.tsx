@@ -729,7 +729,7 @@ export default function VoteWithAGC() {
               </Link>
               <a href="#vote">
                 <Button size="lg" className="bg-gold hover:bg-gold-dark text-charcoal font-semibold">
-                  Vote Now
+                  Learn More
                   <ArrowRight className="ml-2 h-4 w-4" />
                 </Button>
               </a>

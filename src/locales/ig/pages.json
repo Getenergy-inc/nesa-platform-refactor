@@ -423,7 +423,7 @@
       "votingTitle": "Gold-Blue Garnet",
       "votingSubtitle": "Annual Competition",
       "votingFeature1": "Earn voting points through participation",
-      "votingFeature2": "Vote with AGC during official windows",
+      "votingFeature2": "Explore Recognition during official windows",
       "votingFeature3": "Jury + public weighting (Blue Garnet)",
       "votingCta": "Nominate for Voting",
       "votingSecondaryCta": "How Voting Works",
@@ -601,7 +601,7 @@
     "description": "Cast your vote for Africa's education champions",
     "votingOpen": "Voting is Open",
     "votingClosed": "Voting is Closed",
-    "voteNow": "Vote Now",
+    "voteNow": "Learn More",
     "yourVote": "Your Vote Matters",
     "meta": {
       "title": "Vote for Nominees | {{editionName}}",
@@ -919,7 +919,7 @@
         "subtitle": "Annual Competition",
         "features": [
           "Earn voting points through participation",
-          "Vote with AGC during official windows",
+          "Explore Recognition during official windows",
           "Jury + public weighting (Blue Garnet)"
         ],
         "cta": "Nominate for Voting",

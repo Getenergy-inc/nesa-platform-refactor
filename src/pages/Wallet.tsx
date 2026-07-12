@@ -167,7 +167,7 @@ export default function Wallet() {
                     <Button asChild>
                       <Link to="/vote">
                         <Vote className="mr-2 h-4 w-4" />
-                        Vote with AGC
+                        Explore Recognition
                       </Link>
                     </Button>
                     <Button variant="outline" asChild>

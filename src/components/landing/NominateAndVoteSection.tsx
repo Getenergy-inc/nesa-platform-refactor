@@ -15,7 +15,7 @@ export function NominateAndVoteSection() {
     {
       icon: Vote,
       eyebrow: "Step 2",
-      title: "Vote with AGC",
+      title: "Explore Recognition",
       body: "Use Afri-Gold Coins to back finalists during the Blue Garnet voting window. Every vote is auditable.",
       href: "/vote",
       cta: "Open Voting Hub",
