@@ -149,6 +149,7 @@ import EighteenCategoriesPage from "./pages/awards/EighteenCategoriesPage";
 import CategoryDetailPage from "./pages/awards/CategoryDetailPage";
 import RecognitionHubPage from "./pages/recognition/RecognitionHubPage";
 import RedirectRoute from "./components/routing/RedirectRoute";
+import LegacyCategoryRedirect from "./components/routing/LegacyCategoryRedirect";
 import { LEGACY_RECOGNITION_REDIRECTS } from "./config/legacyRecognitionRedirects";
 
 import { ICON_CATEGORY, buildRedirectMap as buildCategoryRedirects } from "./config/awardCategories";
@@ -915,6 +916,9 @@ const App = () => (
                   {LEGACY_RECOGNITION_REDIRECTS.map((r) => (
                     <Route key={r.from} path={r.from} element={<RedirectRoute to={r.to} />} />
                   ))}
+                  {/* Stage 7 — DB-resolved legacy category redirect (/awards/c/:slug → spine). */}
+                  <Route path="/awards/c/:categorySlug" element={<LegacyCategoryRedirect />} />
+                  <Route path="/awards/category/:categorySlug" element={<LegacyCategoryRedirect />} />
 
                   <Route path="/awards/explore" element={<WithLayout><Awards /></WithLayout>} />
                   <Route path="/awards/explore/:pathwaySlug" element={<WithLayout><AwardSpinePage /></WithLayout>} />
