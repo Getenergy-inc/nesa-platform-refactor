@@ -1,70 +1,95 @@
-## Goal
 
-Give every Influencer Education Impact nominee the same profile + acceptance + dashboard experience Icon nominees already have, add automated acceptance emails via Resend, and remove all voting language/UI from Influencer surfaces.
+# NESA-Africa 60 → 38 Page Refactor
 
-## What already exists (reused as-is)
+This is a multi-week program of work. To keep it safe (preserve Supabase data, auth, media, payments) and reviewable, I'll execute it in 9 controlled stages, each ending in a working, deployable state. Nothing valuable gets deleted — old routes become redirects or archived sections.
 
-- `nominees` table with `slug`, `email`, `acceptance_token`, `acceptance_token_expires_at`, `acceptance_status`, `referral_code`, `renomination_count`, `profile_status`.
-- RPCs `mint_acceptance_token(nominee_id)`, `accept_nomination_by_token(token)`, `record_renomination_via_referral(...)`.
-- Routes `/nominee/:slug` (public profile), `/nominee/accept/:token`, `/nominee/dashboard/:token`.
-- `nominations-submit` edge function already creates a `nominees` row with `status: pending` for Influencer submissions.
-- Resend secrets (`RESEND_API_KEY`, `RESEND_FROM`) already configured.
+## Guiding principles
 
-No new tables needed. No schema duplication.
+- **One website, in place.** No new project. Preserve domain, auth, Supabase rows, media, forms, payments, analytics.
+- **4 tiers · 18 categories · 96 subcategories · 20 core + 18 category = 38 public pages.**
+- **No public award voting in 2026** anywhere in the UI.
+- **Terminology:** `pathway` → `subcategory` everywhere.
+- **URLs:** `/recognition/{tier-slug}/{category-slug}`. Subcategories never get their own public page.
+- **Config-driven:** one `AwardNominationForm`, one `award_cycles → tiers → categories → subcategories` spine, one timeline table, one media system.
 
-## Changes
+## Target IA (final state)
 
-### 1. Data (small migration)
+**Nav (7 + Nominate CTA):** Home · Recognition · Impact Directory · Impact Programmes · Media & Events · Gala & Tickets · Support & Get Involved · **Nominate**.
 
-- Add `nominees.recognition_pathway TEXT` (nullable) — values `social_media` | `sports` | `music` | null. Used only for Influencer nominees; other awards leave it null.
-- Backfill for existing influencer nominees by joining through `nominations → subcategories.slug`:
-  - `africa-social-media-*` → `social_media`
-  - `africa-sports-*` → `sports`
-  - `africa-music-*` → `music`
-- Update `nominations-submit` to set `recognition_pathway` when the incoming payload has one (Influencer form already sends `pathway`).
+**20 core pages:** `/`, `/about`, `/governance`, `/recognition`, `/recognition/gold-blue-garnet`, `/recognition/platinum`, `/recognition/africa-education-icon`, `/recognition/influencer-education-impact`, `/nominate`, `/directory`, `/regions`, `/timeline`, `/impact`, `/eduaid-africa`, `/rebuild-my-school`, `/special-needs`, `/afri-edutourism`, `/media`, `/gala`, `/support`.
 
-### 2. Public profile — pathway awareness
+**18 category pages** under their tier slug (9 GBG + 7 Platinum + 1 Icon + 1 Influencer).
 
-- `/nominee/:slug`: when `recognition_pathway` is set, show a "Recognition Pathway" chip (Social Media / Sports / Music Education Champion) and swap the CTA row to hide any "Vote" button; render the standard no-voting note.
-- Related-nominees block: when pathway is set, filter suggestions to same pathway first, then region.
+## Stages
 
-### 3. Acceptance page — Influencer copy variant
+### Stage 1 — Audit & backup (read-only)
+- Enumerate every current route from `src/App.tsx` + lazy routes → `docs/refactor/route-inventory.md`.
+- Classify each: KEEP / MERGE / REDIRECT / CONVERT-TO-SECTION / DYNAMIC / DASHBOARD / ARCHIVE / REMOVE.
+- Produce `docs/refactor/sitemap-38.md`, `route-migration-matrix.md`, `db-relationship-map.md`, `component-reuse-plan.md`.
+- No code changes; deliverables are docs the user can review before Stage 2.
 
-- `NomineeAccept.tsx`: detect Influencer nominee (pathway present OR primary subcategory in the Influencer set) and swap the heading/body copy to the spec ("You Have Been Nominated … Influencer Education Impact Award 2026 …"), keep the same secure token + auto-accept + magic-link flow.
+### Stage 2 — Governance & terminology sweep
+- Remove/disable in UI: Vote Now, Vote with AGC (award context), voting leaderboards, trending/most-voted, voting countdowns, finalist/winner pages driven by public vote.
+- Keep AGC wallet earn/spend for non-award utility; hide award-vote spend paths.
+- Global rename `pathway` → `subcategory` across components, copy, i18n JSON, analytics events, config, tests.
+- Restrict the 27 Icon judges to Icon-only routes (`ProtectedRoute` scope + guard in `judge-*` edge functions).
 
-### 4. Dashboard — six sections + `/dashboard/nominee/:nomineeId` alias
+### Stage 3 — Data spine (Supabase migration)
+Schema (all with GRANTs + RLS):
+- `award_cycles`, `award_tiers`, `award_categories(tier_id)`, `award_subcategories(category_id)`, `award_classifications` (Icon only), `category_scopes`, `eligibility_rules`, `evidence_requirements`, `form_definitions`, `form_fields`, `timeline_events`.
+- Extend `nominations` with `tier_id`, `category_id`, `subcategory_id`, `classification_id` (nullable, required for Icon); backfill from existing rows using current category slugs.
+- Seed the canonical 4/18/96 taxonomy from a single TS source (`src/config/recognition/taxonomy2026.ts`) piped through a seed edge function.
 
-- Keep the existing token-authenticated `/nominee/dashboard/:token` as the canonical dashboard.
-- Add alias route `/dashboard/nominee/:nomineeId` that resolves to the same page when the signed-in user's email matches the nominee.
-- Restructure `NomineeDashboard` into the 6 tabs from the spec: Overview, My Profile, Education Impact, Evidence & Media, Recognition Status, Messages & Support (Messages tab shows a placeholder if no thread system yet).
-- Recognition Status timeline shows: Nomination Received → NRC Preliminary Review → Acceptance Confirmed → Profile Completed → Evidence Verified → Governance Review → Approved → Published. No voting or judging steps.
-- Profile Completion % = weighted count of filled fields (photo, bio, impact summary, ≥1 evidence link, media consent).
+### Stage 4 — Route architecture
+- Add `/recognition` hub + 4 tier hubs.
+- Replace 18 category routes with `/recognition/{tier}/{category}` served by one `<CategoryPage>` template that pulls tier/category/subcategories from DB config.
+- Keep existing rich hero components as `legacyHero` slots (like current `AwardCategoryRoute`).
+- All old category URLs → 301 via `src/config/redirects.ts` consumed by a `<RedirectRoute>` and mirrored in `public/_redirects` isn't used on Lovable (SPA fallback handles paths) — do redirects client-side + update sitemap.
 
-### 5. No-voting enforcement (Influencer pages only)
+### Stage 5 — Unified nomination form
+- One `<AwardNominationForm>` component driven by `form_definitions` + `form_fields` for the active `award_cycle`.
+- Flow: Subcategory → Nominee → Contribution → Evidence → Nominator → Review → Draft/Submit → Email verify → Account link → Wallet link → Reference → NRC record.
+- Config flags per tier: `public_voting_enabled=false` (all), `judge_review_enabled=true` (Icon only), `governance_review_enabled=true` (all).
+- Embed on every category page; `/nominate` becomes the gateway (tier → category → subcategory picker → same component).
 
-- `/awards/influencer-education-impact`, `/awards/influencer-education-impact/nominees`, `/nominee/:slug` when pathway is Influencer: hide any vote CTAs, vote counts, and add a standard disclosure block:
-  > There is no public voting for the Influencer Education Impact Award. Recognition is based on verified education impact, NRC review and governance approval.
-- Grep for `Vote Now`/`vote_count`/vote-related components on these routes and gate them behind `recognition_pathway == null`.
+### Stage 6 — /timeline and /media
+- `/timeline`: DB-driven from `timeline_events`; seed the 13 phases; mobile accordion + desktop rail; no voting windows.
+- `/media`: hub with the 18 defined sections; back it with existing `media_assets` + new `media_stories`, `media_series`, `media_episodes`, `media_accreditations`, `media_consents`.
+- Media Dashboard (authenticated, not counted in 38).
 
-### 6. Acceptance emails via Resend
+### Stage 7 — Consolidation pages
+- `/directory` replaces nominees/finalists/winners/trending with unified filters.
+- `/support` merges sponsors, partners, donate, volunteer, ambassadors, chapters, shop, help, contact into tabbed sections.
+- `/impact` + `/eduaid-africa` reposition Rebuild / Special-Needs / Afri-EduTourism as EduAid services.
+- Preserve existing content by moving into these parents; archive raw pages behind redirects.
 
-- New edge function `send-nominee-acceptance` (verify_jwt via caller's session; admin role required) that:
-  1. Calls `mint_acceptance_token(nominee_id)` server-side.
-  2. Sends a branded HTML email via Resend from `RESEND_FROM` to the nominee, with the acceptance URL `${SITE_URL}/nominee/accept/${token}`.
-  3. Updates `nominees` acceptance_status to `SENT`.
-- New admin action button in the existing NRC/admin nominee row: "Send acceptance invitation" — calls the function. Also expose a bulk action for approved Influencer nominees.
-- Post-acceptance confirmation email + profile-published email are wired to the same function with a `templateName` parameter (`invitation` | `confirmation` | `published`). Trigger `confirmation` from inside `accept_nomination_by_token` flow (called from `NomineeAccept` after success) and `published` when `profile_status` flips to `published`.
+### Stage 8 — Redirects, SEO, analytics
+- Implement the full redirect map from the prompt + any extras found in Stage 1.
+- Update `scripts/generate-sitemap.ts` to the 38-page set + dynamic category/directory routes.
+- Update `index.html` head + per-route `<Helmet>` for the new IA; JSON-LD (Organization sitewide, Event for Gala, Article for media, BreadcrumbList on category pages).
+- Wire the required analytics events through `src/lib/analytics.ts`.
 
-## Technical notes
+### Stage 9 — QA, launch, monitoring
+- Playwright specs: nav, tier hubs, category template, nomination form per tier, /timeline phases, /directory filters, redirect matrix, mobile viewport.
+- Banned-strings CI: block reintroduction of `pathway`, `Vote Now`, `Vote with AGC` (award context), voting countdown copy.
+- Preview → stakeholder review → production; keep rollback via git.
 
-- One migration: add column + backfill + index on `recognition_pathway`. GRANTs already exist on `nominees`.
-- Edge function uses Resend REST API directly (no SDK) with `RESEND_API_KEY` + `RESEND_FROM`.
-- All acceptance URLs use `Deno.env.get('SITE_URL') ?? 'https://nesa.africa'`.
-- No dashboard-side voting UI to remove (already absent); enforcement is on public/award pages.
-- Analytics: emit `influencer_acceptance_email_sent`, `influencer_acceptance_email_opened` (via existing `trackEvent`).
+## Technical details
 
-## Out of scope (deferred)
+- **Category template:** extend existing `AwardCategoryPage` + `AwardCategoryRoute` to consume DB config (tier, category, subcategories, evidence, timeline slice). Keep `legacyHero` per category for visual continuity.
+- **Redirects:** SPA-side `<RedirectRoute to="…" status={301}/>` component + `<meta http-equiv="refresh">` fallback in the rendered shell; add each old path to sitemap-exclude list.
+- **Voting removal:** delete/guard routes `GoldVoting`, `BlueGarnetVoting`, `GoldBlueGarnetVoteHub`, `VoteWithAGCSection`; retain non-award AGC earn flows.
+- **Data safety:** every schema change is additive; backfills run in idempotent migrations; no destructive drops until Stage 9 sign-off.
+- **Icon jury scoping:** enforce `judge_assignments.tier_id = 'africa-education-icon'` in RLS + edge function guards.
 
-- Full messaging thread system inside dashboard — stub UI with support email link for now.
-- Automated reminder emails (day 3 / day 7) — hook exists but cron not scheduled here.
-- Governance approval workflow beyond `profile_status` flip.
+## Deliverables per stage
+
+Each stage ends with: a short changelog, updated `ROUTES.md`, updated `docs/refactor/*`, passing typecheck + targeted Playwright, and a preview URL for review before the next stage starts.
+
+## What I need from you to start
+
+1. **Confirm the staged approach** (I'll start Stage 1 audit immediately on approval — no code changes yet).
+2. **Confirm scope of voting removal**: remove entirely from the 2026 UI, or keep behind a feature flag for post-2026 seasons? (Recommended: feature-flag off, code retained.)
+3. **Any routes/pages you explicitly want KEPT** even if the audit flags them as duplicates?
+
+On approval I will produce the Stage 1 audit docs first so we have a shared migration matrix before touching code.
