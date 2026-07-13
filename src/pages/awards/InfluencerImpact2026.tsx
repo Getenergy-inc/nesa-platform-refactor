@@ -174,6 +174,15 @@ export default function InfluencerImpact2026() {
         ]}
       />
 
+      {/* Influencer slot inside the 18-category registry */}
+      <TierCategoryCards
+        tier="influencer-education-impact"
+        heading="Influencer Impact in the 18-Category Registry"
+        sub="Influencer Education Impact is the influence-for-education meta-category among the 18. Browse where it sits across the recognition spine."
+      />
+
+
+
 
 
       {/* 2. NOMINATION FORM */}
