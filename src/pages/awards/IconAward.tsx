@@ -10,6 +10,7 @@ import { BreadcrumbJsonLd } from "@/components/seo/BreadcrumbJsonLd";
 import { AwardStandardStack } from "@/components/awards/AwardStandardSections";
 import { SubcategoryPathways } from "@/components/awards/standard/sections";
 import { TierCategoryCards } from "@/components/awards/TierCategoryCards";
+import TierCategoriesGrid from "@/components/recognition2026/TierCategoriesGrid";
 
 import { getTVShowByAward } from "@/config/awardTVShows";
 import { getCategoriesGrouped } from "@/config/nesaCategories";
@@ -232,6 +233,12 @@ export default function IconAward() {
             { q: "How many Icons are recognised each year?", a: "Up to 9 — 3 Africa, 3 Diaspora, 3 Friends of Africa." },
             { q: "Is there public voting?", a: "No. The Icon Award is jury-evaluated under the EDX Matrix; public voting is reserved for Blue Garnet tracks." },
           ]}
+        />
+
+        <TierCategoriesGrid
+          tier="africa-education-icon"
+          heading="Africa Education Icon — Recognition Subcategories"
+          intro="Three lifetime subcategories under the Africa Education Icon Award 2006–2026."
         />
 
         {/* Legacy CTA preserved */}
