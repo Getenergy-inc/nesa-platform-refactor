@@ -59,6 +59,7 @@ export function PublicLayout({
       <ExitIntentPopup />
       <FloatingFAQButton />
       <MobileAGCWallet />
+      <MobileBottomActions />
     </div>
   );
 }
