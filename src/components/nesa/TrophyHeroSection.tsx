@@ -103,9 +103,9 @@ export function TrophyHeroSection() {
               transition={{ duration: 0.6, delay: 0.3 }}
               className="font-display text-[22px] leading-[1.2] sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4"
             >
-              Recognising the Enablers of{" "}
+              Africa Sees Your{" "}
               <span className="text-gold bg-gradient-to-r from-gold to-amber-400 bg-clip-text text-transparent">
-                Education for All Across Africa.
+                Education Impact.
               </span>
             </motion.h1>
 
@@ -115,7 +115,7 @@ export function TrophyHeroSection() {
               transition={{ duration: 0.5, delay: 0.5 }}
               className="text-white/90 text-[15px] sm:text-base md:text-lg mb-3 max-w-xl mx-auto lg:mx-0 leading-relaxed"
             >
-              <span className="text-gold font-semibold">NESA-Africa</span> — the New Education Standard Award Africa — is a continental recognition and impact platform created to identify, verify, recognise, celebrate, connect and support the people, organisations and institutions enabling <span className="text-gold font-semibold">Education for All</span> across Africa.
+              <span className="text-gold font-semibold">NESA-Africa</span> — the New Education Standard Award Africa — identifies, verifies and recognises the individuals, organisations and institutions enabling <span className="text-gold font-semibold">Education for All</span> across Africa, among Diaspora Africans and through Friends of Africa.
             </motion.p>
             <motion.p
               initial={{ opacity: 0, y: 15 }}
@@ -123,7 +123,7 @@ export function TrophyHeroSection() {
               transition={{ duration: 0.5, delay: 0.52 }}
               className="text-white/75 text-[14px] sm:text-sm md:text-base mb-3 max-w-xl mx-auto lg:mx-0 leading-relaxed"
             >
-              Through nominations, independent judging, public participation, media storytelling, AGC-powered voting and post-award impact programmes, NESA-Africa turns recognition into visibility, credibility, partnerships and measurable education impact.
+              Through public nominations, evidence-based verification, independent Icon judging, governance review, media storytelling and post-recognition impact programmes, NESA-Africa turns credible education impact into visibility, partnerships, funding and measurable legacy.
             </motion.p>
             <motion.p
               initial={{ opacity: 0, y: 15 }}
@@ -141,15 +141,16 @@ export function TrophyHeroSection() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.55 }}
               className="flex flex-wrap gap-1.5 sm:gap-2 justify-center lg:justify-start mb-5 max-w-xl mx-auto lg:mx-0"
-              aria-label="NESA-Africa recognition architecture at a glance"
+              aria-label="NESA-Africa 2026 recognition architecture at a glance"
             >
               {[
                 "4 Recognition Tiers",
-                "18 Categories",
-                "100+ Subcategories",
-                "9 Pillars",
-                "8 Africa Regions",
+                "18 Award Categories",
+                "96 Subcategories",
+                "8 African Regions",
                 "2 Global Communities",
+                "27 Independent Icon Judges",
+                "9 Icon Laureate Positions",
               ].map((chip) => (
                 <li
                   key={chip}
@@ -160,24 +161,25 @@ export function TrophyHeroSection() {
               ))}
             </motion.ul>
 
-            {/* Identity tags — the 9 Recognition Pillars */}
+            {/* Topic tags — recognition themes across the four tiers */}
             <motion.ul
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.7 }}
               className="flex flex-wrap gap-1.5 sm:gap-2 justify-center lg:justify-start mb-6"
-              aria-label="The 9 NESA-Africa Recognition Pillars"
+              aria-label="Recognition themes across the four NESA-Africa tiers"
             >
               {[
                 "Africa Education Icons",
                 "Philanthropy for Education",
-                "CSR for Education",
-                "Diaspora Champions",
-                "EdTech & STEM Innovation",
-                "Education Funders",
-                "Faith-Based Organisations",
-                "Institutional Excellence",
-                "Social Media Education Champions",
+                "Curriculum and Knowledge",
+                "Technical Education",
+                "Corporate Education Impact",
+                "NGOs Advancing Education",
+                "EduTech and STEM",
+                "Faith-Based Education",
+                "Diaspora Education Impact",
+                "Media and Public Influence",
               ].map((chip) => (
                 <li
                   key={chip}
@@ -204,7 +206,7 @@ export function TrophyHeroSection() {
               transition={{ duration: 0.5, delay: 0.85 }}
               className="text-gold/70 text-xs sm:text-sm tracking-wide mb-10 max-w-xl mx-auto lg:mx-0 leading-relaxed"
             >
-              Nominations, judging, sponsorship, media, technology, and voting follow a strict integrity firewall. Sponsorship does not influence winners.
+              Recognition is decided by evidence-based NRC verification, independent Icon judging where applicable and governance approval. Sponsorship, donations, ticket sales, merchandise, GFAwzip Wallet activity and AGC Participation Credits do not influence recognition.
             </motion.p>
           </div>
 
