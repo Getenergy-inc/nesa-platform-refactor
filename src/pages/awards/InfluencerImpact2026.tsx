@@ -23,6 +23,7 @@ import { SEED_NOMINEES, REGIONS } from "@/config/awards/influencerImpact2026";
 import { trackEvent } from "@/lib/analytics";
 import { SubcategoryPathways } from "@/components/awards/standard/sections";
 import { TierCategoryCards } from "@/components/awards/TierCategoryCards";
+import TierCategoriesGrid from "@/components/recognition2026/TierCategoriesGrid";
 
 const DIRECTORY_ROUTE = "/awards/influencer-education-impact/nominees";
 
@@ -344,6 +345,12 @@ export default function InfluencerImpact2026() {
           </div>
         </div>
       </section>
+
+      <TierCategoriesGrid
+        tier="influencer-education-impact"
+        heading="Influencer Education Impact — Recognition Subcategories"
+        intro="Three recognition subcategories for public figures using their platforms to advance Education for All across Africa."
+      />
 
       <NESAFooter />
     </>
