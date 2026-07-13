@@ -585,7 +585,7 @@ export default function AwardsPage() {
             >
               <h2 className="mb-4 font-display text-3xl lg:text-4xl font-bold text-ivory">
                 Help Recognise Africa's{" "}
-                <span className="text-gold">Education Changemakers</span>
+                <span className="text-gold">Education Enablers</span>
               </h2>
               <p className="mb-10 text-lg text-ivory/75 max-w-2xl mx-auto">
                 Three ways to participate in the 2026 Recognition Framework.

@@ -488,7 +488,7 @@ export function SubcategoryPathways({
   pageSlug,
   subcategories,
   heading = "Subcategories & Subcategories",
-  sub = "Pick the subcategory that best fits the changemaker you want to nominate.",
+  sub = "Pick the subcategory that best fits the Education Enabler you want to nominate.",
 }: {
   pageSlug: string;
   subcategories: Subcategory[];
@@ -698,7 +698,7 @@ export function IntegrityFirewallBlock() {
 export function FinalAwardCTA({
   pageSlug,
   heading = "Know someone who belongs in this category?",
-  body = "Nominate an education changemaker whose work deserves continental recognition.",
+  body = "Nominate an Education Enabler whose work deserves continental recognition.",
   primaryCta,
   secondaryCta,
 }: {

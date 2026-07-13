@@ -22,11 +22,11 @@ export function FinalCTASection() {
 
           <h2 className="font-display text-3xl md:text-5xl lg:text-6xl font-bold text-white mb-5">
             Ready to Celebrate Africa's{" "}
-            <span className="text-gold">Education Changemakers?</span>
+            <span className="text-gold">Education Enablers?</span>
           </h2>
 
           <p className="text-white/70 text-lg md:text-xl mb-10 max-w-2xl mx-auto leading-relaxed">
-            Do not just applaud impact — help the world discover it. Nominate an African education changemaker today and join a continental movement recognising the people and institutions transforming education across Africa and the Diaspora.
+            Do not just applaud impact — help the world discover it. Nominate an African Education Enabler today and join a continental movement recognising the people and institutions enabling Education for All across Africa and the Diaspora.
           </p>
 
           <div className="flex flex-col sm:flex-row justify-center gap-4 mb-8">
