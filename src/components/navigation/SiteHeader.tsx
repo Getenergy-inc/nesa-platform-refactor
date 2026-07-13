@@ -57,11 +57,12 @@ function BrandBlock() {
         alt=""
         className="h-10 w-10 lg:h-11 lg:w-11 rounded-full object-cover ring-1 ring-gold/40"
       />
-      <div className="hidden sm:flex flex-col leading-tight">
-        <span className="font-playfair text-gold text-base lg:text-lg font-bold">NESA-Africa</span>
-        <span className="text-[10px] text-white/70 -mt-0.5">
+      <div className="hidden sm:flex flex-col leading-tight min-w-0">
+        <span className="font-playfair text-gold text-base lg:text-lg font-bold whitespace-nowrap">NESA-Africa</span>
+        <span className="hidden min-[1400px]:block text-[10px] text-white/70 -mt-0.5 whitespace-nowrap">
           Africa's Education Recognition & Impact Platform
         </span>
+
       </div>
     </Link>
   );
