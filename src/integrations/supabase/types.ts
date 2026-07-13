@@ -8395,6 +8395,38 @@ export type Database = {
       generate_referral_code: { Args: { p_prefix?: string }; Returns: string }
       generate_volunteer_referral_code: { Args: never; Returns: string }
       get_current_season: { Args: never; Returns: string }
+      get_rebuild_schools_admin: {
+        Args: never
+        Returns: {
+          address: string | null
+          admin_notes: string | null
+          contact_email: string | null
+          contact_name: string | null
+          contact_phone: string | null
+          country: string
+          created_at: string | null
+          description: string | null
+          gps_coordinates: string | null
+          id: string
+          is_active: boolean | null
+          name: string
+          photo_urls: string[] | null
+          region_id: string | null
+          school_type: string
+          student_count: number | null
+          updated_at: string | null
+          verification_status: string
+          verified_at: string | null
+          verified_by: string | null
+          website: string | null
+        }[]
+        SetofOptions: {
+          from: "*"
+          to: "rebuild_schools"
+          isOneToOne: false
+          isSetofReturn: true
+        }
+      }
       get_user_roles: {
         Args: { _user_id: string }
         Returns: Database["public"]["Enums"]["app_role"][]
