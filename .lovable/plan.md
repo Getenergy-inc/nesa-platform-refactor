@@ -1,54 +1,58 @@
+
 ## Goal
 
-Rewrite the narrative content of the 4 tier pages using the copy provided, keep every existing nomination form, and ensure each parent category card links to its own subcategory detail page.
+Reallocate today's 18 Gold–Blue Garnet award categories across the four recognition tiers exactly as you described:
 
-## Scope — 4 tier pages
+- **9** categories under **Gold–Blue Garnet** (programme / organisation recognition)
+- **7** categories under **Platinum** (institutional / systemic recognition)
+- **1** meta-category under **Africa Education Icon Award** (its three lifetime pathways: Philanthropy, Literary & Curriculum, Technical)
+- **1** meta-category under **Influencer Education Impact** (its three subcategories: Social Media, Sports, Music)
 
-1. **Africa Education Icon Award** (`/africa-education-icon` → `IconAward.tsx`)
-2. **Blue Garnet Award 2026** (`/gold-blue-garnet` → `BlueGarnetAward.tsx` → `AwardCategoryStandardPage` slug `gold-blue-garnet`)
-3. **Platinum Award 2026** (`/platinum` → `PlatinumAward.tsx` → `AwardCategoryStandardPage` slug `platinum-recognition`)
-4. **Influencer Education Impact 2026** (`/influencer-impact` → `InfluencerImpact2026.tsx`)
+Then render every category as a link card on its parent tier page so users can jump directly into `/awards/18-categories/:slug`.
 
-## Changes
+## Proposed mapping (based on current architecture semantics + prior tier docs)
 
-### A. `src/config/awards/awardPageContent.ts`
-Rewrite the four page entries so the on-page narrative matches the supplied copy:
+**Gold–Blue Garnet (9 — organisations, programmes, campaigns):**
+1. csr-for-education
+2. education-philanthropy
+3. ngos-advancing-education
+4. edtech-and-ai-innovation
+5. stem-education
+6. tvet-and-technical-education
+7. media-and-journalism-for-education
+8. school-transformation
+9. skills-development-and-employability
 
-- **Hero** — new title, subhead, and lead paragraphs.
-- **`recognises` body** — "Why this award matters" / "Recognition Philosophy" sections rendered by `WhatThisRecognises`.
-- **Subcategories** — refresh the `title`, `blurb`, and `recognises` fields so each parent card carries the correct pathway/category description; keep existing `slug`, `viewHref`, and `nominateHref` so the "View" button already links to the subcategory detail route.
-- **Eligibility** — refresh `canBeNominated`, `shouldNotBeNominated`, `evidence` from the "Who Can Be Nominated / Should Not Be Nominated" copy.
-- **Process** — surface the 7–8 recognition steps in `HowNominationWorks` (already generic; just confirm rendering).
-- **Final CTA** — use the "Primary / Secondary / Directory CTA" text from each page.
+**Platinum (7 — institutions & systemic leadership):**
+1. universities-and-higher-education
+2. libraries-and-knowledge-systems
+3. research-and-curriculum-development
+4. faith-based-organisations
+5. institutional-and-bilateral-grants
+6. education-policy-and-government
+7. regional-education-leadership
 
-### B. `src/pages/awards/IconAward.tsx`
-Icon is bespoke, not driven by the config. Replace the copy blocks with:
+**Africa Education Icon (1 meta-category → 3 pathways):**
+- africa-education-icon → Philanthropy · Literary & Curriculum · Technical Education
 
-- Hero: "Two Decades. Three Pathways. Nine Laureates. One Continental Legacy."
-- Recognition Philosophy section.
-- Three Recognition Pathways cards (Philanthropy · Literary & New Curriculum · Technical Education) — each card links to its subcategory page under `/recognition/africa-education-icon/…` and to a "Nominate in this pathway" CTA.
-- Nine Laureates block (3 Africa · 3 Diaspora · 3 Friends of Africa).
-- "No Public Voting" and 8-step process.
-- Preserve the existing `FeaturedNomineesBlock` and any nomination CTA present.
+**Influencer Impact (1 meta-category → 3 subcategories):**
+- influencer-education-impact → Social Media · Sports · Music
 
-### C. `src/pages/awards/InfluencerImpact2026.tsx`
-- Replace hero + narrative with the "Influencer Education Impact 2026" copy (Recognition Philosophy, three pathways: Social Media · Sports · Music, verification by NRC, 7-step process).
-- Add a "Three Pathways" grid where each card links to its subcategory page and includes an in-page anchor to the existing form.
-- **Preserve `InfluencerNominationForm`** exactly where it currently sits.
+Not mapped in the 9/7 split (three residual categories from today's 18 that no longer fit either bucket cleanly): `inclusive-and-special-needs-education`, `early-childhood-education`. These logically belong to the **Rebuild My School Africa / Special-Needs** stream, not to the 4-tier recognition. I'll relocate them under the Special Needs and EduAid-Africa hubs (existing pages) rather than delete them.
 
-### D. Subcategory link surface
-`SubcategoryPathways` already renders per-subcategory "View" and "Nominate" buttons from `viewHref` / `nominateHref`. Audit the four entries and:
+If any of those three should instead stay on Gold–Blue Garnet or move to Platinum, say the word and I'll adjust before wiring.
 
-- Ensure every subcategory has a `viewHref` pointing to `/recognition/<tier>/<category-slug>` (or the tier-specific subcategory route already registered in `App.tsx`).
-- Add missing `viewHref`s where absent so no subcategory renders without a link.
+## Implementation
 
-## Non-goals
+1. **`src/config/recognitionArchitecture2026.ts`** — split the existing 18-category list into two `categories: []` arrays per the mapping above. Add Icon + Influencer meta-category entries where they already live.
+2. **`src/config/recognition/categoryAlias.ts`** — extend `CATEGORY_TO_REGISTRY` with entries for any moved categories so subcategory counts continue to resolve.
+3. **`src/pages/awards/GoldBlueGarnet.tsx` / `Platinum*.tsx`** — under each tier page, render a new "Award Categories" grid using the shared `SubcategoryPathways` component (already used on Icon and Influencer). Cards link to `/awards/18-categories/:slug`; nomination form on each tier page stays intact.
+4. **`src/pages/awards/EighteenCategoriesPage.tsx`** — add a `tier` badge on each card and a `groupBy=tier` toggle so the /18-categories index still shows all 18 but grouped by parent tier.
+5. **Update `docs/refactor/sitemap-38.md`** and inline nav copy where the count "18 Gold–Blue Garnet categories" appears so it reads "18 categories across 4 tiers (9 Gold–Blue Garnet · 7 Platinum · Icon · Influencer)".
+6. No DB / RLS / edge-function changes required — the 18-category registry is purely front-end config.
 
-- No changes to routing, data model, or backend.
-- No removal of any nomination form, `FeaturedNomineesBlock`, `HallOfFamePreview`, or TV show section already on these pages.
-- No changes to shared components beyond confirming their props still fit.
+## Out of scope
 
-## Verification
-
-- `tsgo` typecheck.
-- Spot-render each of the 4 pages in the preview (Playwright screenshot of hero + subcategory grid + form region) and confirm nomination form is still present on Icon and Influencer pages.
+- Rewriting subcategory registries or category detail pages
+- Changing the nomination form logic on any tier page (kept exactly as-is)
+- The full narrative rewrite from your last message — that is a separate copy task; ping me and I'll fold those long-form sections into each tier page next.
