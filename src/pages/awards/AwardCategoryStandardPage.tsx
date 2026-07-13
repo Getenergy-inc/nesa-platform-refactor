@@ -9,15 +9,12 @@ import {
   WhoIsThisFor,
   HallOfFamePreview,
   SubcategoryPathways,
-} from "@/components/awards/standard/sections";
-import { TierCategoryCards } from "@/components/awards/TierCategoryCards";
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-const __TIER_MARKER = true;
   HowNominationWorks,
   IntegrityFirewallBlock,
   FinalAwardCTA,
   type HallNominee,
 } from "@/components/awards/standard/sections";
+import { TierCategoryCards } from "@/components/awards/TierCategoryCards";
 import { getAwardPageContent } from "@/config/awards/awardPageContent";
 import { filterMasterNominees, getMasterRegions } from "@/lib/nomineeMasterData";
 import { ICON_NOMINEES } from "@/data/iconAward";
