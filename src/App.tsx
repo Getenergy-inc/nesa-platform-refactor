@@ -529,7 +529,7 @@ const App = () => (
 
                   {/* Media & Events */}
                   <Route path="/media-events" element={<Navigate to="/media" replace />} />
-                  <Route path="/radio-podcast" element={<Navigate to "/media#radio" replace />} />
+                  <Route path="/radio-podcast" element={<Navigate to="/media#radio" replace />} />
                   <Route path="/news" element={<Navigate to="/media#news" replace />} />
                   <Route path="/stories" element={<Navigate to="/media#stories" replace />} />
                   <Route path="/education-enabler-features" element={<Navigate to="/media#features" replace />} />
