@@ -320,6 +320,11 @@ function MobileMenu() {
     document.body.style.overflow = open ? "hidden" : "";
     return () => { document.body.style.overflow = ""; };
   }, [open]);
+  useEffect(() => {
+    const handler = () => setOpen(true);
+    window.addEventListener(MOBILE_MENU_OPEN_EVENT, handler);
+    return () => window.removeEventListener(MOBILE_MENU_OPEN_EVENT, handler);
+  }, []);
 
   const close = () => setOpen(false);
   const linkCls = "block px-3 py-2 rounded text-sm text-white/85 hover:text-gold hover:bg-gold/10";
