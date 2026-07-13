@@ -451,10 +451,10 @@ const PLATINUM: AwardPageContent = {
     },
   ],
   finalCta: {
-    heading: "Institutional leadership deserves Platinum recognition.",
-    body: "Nominate a university, library, research centre, faith institution, political leader, international partner or diaspora organisation shaping African education at scale.",
+    heading: "Recognise the Institutions Building Africa's Future",
+    body: "Whether a university, library, research organisation, faith-based institution, political leader, international partner or Diaspora organisation — if their long-term work has strengthened education across Africa, they deserve to be recognised. Platinum recognition is jury-only, evidence-based and independently ratified.",
     primary: { label: "Nominate an Institution", href: "/nominate?tier=platinum" },
-    secondary: { label: "Explore Existing Nominees", href: "/nominees?tier=platinum" },
+    secondary: { label: "Explore Verified Institutions", href: "/nominees?tier=platinum" },
   },
 };
 
