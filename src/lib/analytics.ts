@@ -71,3 +71,22 @@ export function trackDiscoveryStep(step: string, ctx: DiscoveryContext = {}) {
   trackEvent("discovery_step", { step, ...ctx });
 }
 
+// Navigation-specific helper — normalises every nav event with the same shape.
+export interface NavEventContext {
+  label?: string;
+  href?: string;
+  section?: string;
+  phase?: string;
+  device?: "desktop" | "mobile";
+  [key: string]: unknown;
+}
+
+export function trackNav(event: string, ctx: NavEventContext = {}) {
+  trackEvent(event, {
+    page_path: typeof window !== "undefined" ? window.location.pathname : undefined,
+    ...ctx,
+  });
+}
+
+
+

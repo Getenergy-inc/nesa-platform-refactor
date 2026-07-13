@@ -486,8 +486,68 @@ const App = () => (
                   <Route path="/policies/privacy" element={<Navigate to="/policies" replace />} />
                   <Route path="/policies/terms" element={<Navigate to="/policies" replace />} />
                   <Route path="/policies/voting-integrity" element={<Navigate to="/policies" replace />} />
-                  <Route path="/get-involved" element={<Navigate to="/volunteer" replace />} />
+                  <Route path="/get-involved" element={<Navigate to="/support" replace />} />
                   <Route path="/press" element={<Navigate to="/media" replace />} />
+
+                  {/* === 2026 nav ecosystem — new hrefs preserved via redirect to nearest live page === */}
+                  {/* About sub-pages -> consolidated About with hash anchors */}
+                  <Route path="/about/vision-mission" element={<Navigate to="/about#vision" replace />} />
+                  <Route path="/about/how-it-works" element={<Navigate to="/about#how-it-works" replace />} />
+                  <Route path="/about/judges" element={<Navigate to="/judges" replace />} />
+                  <Route path="/about/integrity" element={<Navigate to="/governance" replace />} />
+                  <Route path="/about/verification" element={<Navigate to="/governance#verification" replace />} />
+                  <Route path="/about/eligibility" element={<Navigate to="/awards/eligibility" replace />} />
+                  <Route path="/about/partners" element={<Navigate to="/sponsors" replace />} />
+                  <Route path="/faqs" element={<Navigate to="/about#faqs" replace />} />
+
+                  {/* Awards sub-pages */}
+                  <Route path="/awards/eligibility" element={<Navigate to="/awards#eligibility" replace />} />
+                  <Route path="/awards/judging" element={<Navigate to="/governance#judging" replace />} />
+                  <Route path="/guidelines/nominees" element={<Navigate to="/nominate#nominee-guidelines" replace />} />
+                  <Route path="/guidelines/nominators" element={<Navigate to="/nominate#nominator-guidelines" replace />} />
+
+                  {/* Education Enablers taxonomy -> directory (routed pages can back-fill later) */}
+                  <Route path="/education-enablers/regions" element={<Navigate to="/regions" replace />} />
+                  <Route path="/education-enablers/regions/:slug" element={<SlugRedirect to={(s) => `/regions?rec=${s}`} />} />
+                  <Route path="/education-enablers/sectors" element={<Navigate to="/education-enablers?view=sectors" replace />} />
+                  <Route path="/education-enablers/sectors/:slug" element={<SlugRedirect to={(s) => `/education-enablers?sector=${s}`} />} />
+                  <Route path="/education-enablers/edtech" element={<Navigate to="/education-enablers?filter=edtech" replace />} />
+                  <Route path="/education-enablers/edtech/:slug" element={<SlugRedirect to={(s) => `/education-enablers?edtech=${s}`} />} />
+                  <Route path="/education-enablers/edtech/regions" element={<Navigate to="/education-enablers?filter=edtech" replace />} />
+                  <Route path="/education-enablers/edtech/prospects" element={<Navigate to="/prospective-organizations?filter=edtech" replace />} />
+                  <Route path="/education-enablers/claim-profile" element={<Navigate to="/education-enablers?action=claim" replace />} />
+                  <Route path="/education-enablers/submit-evidence" element={<Navigate to="/education-enablers?action=evidence" replace />} />
+                  <Route path="/education-enablers/verification" element={<Navigate to="/governance#verification" replace />} />
+
+                  {/* Impact Programmes */}
+                  <Route path="/impact/regional-voting" element={<Navigate to="/vote" replace />} />
+                  <Route path="/impact/regional-winners" element={<Navigate to="/impact" replace />} />
+                  <Route path="/impact/donate" element={<Navigate to="/donate" replace />} />
+                  <Route path="/impact/afri-edutourism-2027" element={<Navigate to="/afri-edutourism" replace />} />
+                  <Route path="/impact/reports" element={<Navigate to="/impact#reports" replace />} />
+                  <Route path="/impact/map" element={<Navigate to="/impact#map" replace />} />
+
+                  {/* Media & Events */}
+                  <Route path="/media-events" element={<Navigate to="/media" replace />} />
+                  <Route path="/radio-podcast" element={<Navigate to="/media#radio" replace />} />
+                  <Route path="/news" element={<Navigate to="/media#news" replace />} />
+                  <Route path="/stories" element={<Navigate to="/media#stories" replace />} />
+                  <Route path="/education-enabler-features" element={<Navigate to="/media#features" replace />} />
+                  <Route path="/interviews" element={<Navigate to="/media#interviews" replace />} />
+                  <Route path="/press-room" element={<Navigate to="/media#press" replace />} />
+                  <Route path="/gala/tables" element={<Navigate to="/tickets" replace />} />
+                  <Route path="/events/calendar" element={<Navigate to="/media#events" replace />} />
+                  <Route path="/events/afri-edutourism" element={<Navigate to="/afri-edutourism" replace />} />
+
+                  {/* Get Involved */}
+                  <Route path="/get-involved/partner" element={<Navigate to="/support#partner" replace />} />
+                  <Route path="/get-involved/category-sponsorship" element={<Navigate to="/sponsorship-packages" replace />} />
+                  <Route path="/get-involved/enabler-page-sponsorship" element={<Navigate to="/sponsorship-packages" replace />} />
+                  <Route path="/get-involved/gala-sponsorship" element={<Navigate to="/sponsorship-packages" replace />} />
+                  <Route path="/get-involved/media-partnership" element={<Navigate to="/support#media" replace />} />
+                  <Route path="/get-involved/fundraising-partner" element={<Navigate to="/support#fundraising" replace />} />
+                  <Route path="/contact/partnerships" element={<Navigate to="/contact" replace />} />
+
 
                   {/* === 22-page canonical spec (2026 final refactor) === */}
                   {/* Short tier aliases (canonical URLs per spec) */}
