@@ -9,6 +9,10 @@ import {
   WhoIsThisFor,
   HallOfFamePreview,
   SubcategoryPathways,
+} from "@/components/awards/standard/sections";
+import { TierCategoryCards } from "@/components/awards/TierCategoryCards";
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+const __TIER_MARKER = true;
   HowNominationWorks,
   IntegrityFirewallBlock,
   FinalAwardCTA,
