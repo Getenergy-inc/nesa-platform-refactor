@@ -30,6 +30,8 @@ import { trackNav } from "@/lib/analytics";
 import { AnnouncementBar } from "@/components/navigation/AnnouncementBar";
 import { EducationEnablersMegaMenu } from "@/components/navigation/EducationEnablersMegaMenu";
 import { NavSearch } from "@/components/navigation/NavSearch";
+import { AccountMenu } from "@/components/navigation/AccountMenu";
+import { MOBILE_MENU_OPEN_EVENT } from "@/components/navigation/MobileBottomActions";
 import nesaStamp from "@/assets/nesa-stamp.jpeg";
 
 function SkipLink() {
