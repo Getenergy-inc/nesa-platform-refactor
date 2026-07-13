@@ -60,9 +60,9 @@ export const RECOGNITION_JOURNEY_2026: JourneyPhase[] = [
     iconName: "Megaphone",
     accent: "rose",
     purpose:
-      "Launch the continental public awareness campaign introducing NESA-Africa 2026 and encouraging citizens to identify education enablers before official nominations begin.",
+      "Launch the continental public awareness campaign introducing NESA-Africa 2026 and preparing the public to nominate Education Enablers. Public Nominations for all 4 Recognition Tiers open on 1 August 2026.",
     description:
-      "Activates public participation through social media storytelling, regional outreach, ambassador campaigns, educational content and pre-nomination forms — uncovering outstanding people and organisations enabling Education for All across Africa, the Diaspora and Friends of Africa.",
+      "Activates public participation through social media storytelling, regional outreach, ambassador campaigns, educational content and pre-nomination forms — uncovering outstanding people and organisations enabling Education for All across Africa, the Diaspora and Friends of Africa. On 1 August 2026 public nominations open simultaneously for Africa Education Icon, Gold-Blue Garnet, Platinum Recognition and Influencer Education Impact.",
     participants: [
       "General Public",
       "Youth & Gen Z",
@@ -121,8 +121,8 @@ export const RECOGNITION_JOURNEY_2026: JourneyPhase[] = [
     number: 3,
     name: "Africa Education Icon Nominations",
     shortName: "Icon Nominations",
-    dateRange: "27 July – 12 September 2026",
-    startsAt: "2026-07-27T00:00:00Z",
+    dateRange: "1 August – 12 September 2026",
+    startsAt: "2026-08-01T00:00:00Z",
     endsAt: "2026-09-12T23:59:59Z",
     status: "upcoming",
     tier: "Tier 1",
