@@ -488,7 +488,7 @@ export function SubcategoryPathways({
   pageSlug,
   subcategories,
   heading = "Subcategories & Subcategories",
-  sub = "Pick the subcategory that best fits the changemaker you want to nominate.",
+  sub = "Pick the subcategory that best fits the Education Enabler you want to nominate.",
 }: {
   pageSlug: string;
   subcategories: Subcategory[];
