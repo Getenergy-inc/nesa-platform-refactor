@@ -302,7 +302,7 @@ function AccountActions() {
   const linkCls =
     "inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-md text-sm text-white/85 hover:text-gold hover:bg-gold/10 transition-colors";
   return (
-    <div className="hidden min-[1100px]:flex items-center gap-1">
+    <div className="hidden min-[1280px]:flex items-center gap-1">
       {user ? (
         <>
           <Link
