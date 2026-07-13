@@ -24,8 +24,8 @@ const PROGRAMS: Program[] = [
     title: "EduAid-Africa",
     tagline: "Scholarships · Conferences · Training",
     description:
-      "Continental learning hub funding scholarships, hosting regional Edu-Tourism Conferences, and delivering teacher and youth training.",
-    bullets: ["Send-A-Child-To-School", "Regional Conferences", "Teacher Training"],
+      "Continental learning and support hub — scholarships, regional Edu-Tourism conferences, and teacher and youth training that turn recognition into learning outcomes.",
+    bullets: ["Send-A-Child-To-School", "Regional Conferences", "Teacher & Youth Training"],
     href: "/eduaid",
     cta: "Explore EduAid-Africa",
   },
@@ -35,10 +35,10 @@ const PROGRAMS: Program[] = [
     title: "Rebuild My School Africa",
     tagline: "Infrastructure & School Transformation",
     description:
-      "Post-award legacy programme rebuilding classrooms, libraries, sanitation, and digital labs in under-resourced African schools.",
+      "Post-recognition legacy programme rebuilding classrooms, libraries, sanitation, and digital labs in under-resourced African schools.",
     bullets: ["Classroom Rebuilds", "Digital Labs", "WASH Facilities"],
-    href: "/eduaid-africa/rebuild-my-school",
-    cta: "Visit RMSA Hub",
+    href: "/impact/rebuild-my-school",
+    cta: "Visit Rebuild My School",
   },
   {
     id: "special-needs",
@@ -46,20 +46,20 @@ const PROGRAMS: Program[] = [
     title: "Special Needs Education",
     tagline: "Inclusive Learning Support",
     description:
-      "Dedicated support for schools, teachers, and innovators serving learners with disabilities and special educational needs.",
+      "Support for schools, teachers, families and innovators serving learners with disabilities and special educational needs across Africa.",
     bullets: ["Inclusive Schools", "Assistive Tech", "Teacher Capacity"],
-    href: "/programs/special-needs",
+    href: "/impact/special-needs",
     cta: "Support Inclusion",
   },
   {
     id: "edu-tourism",
     icon: Plane,
-    title: "Educational Tourism",
+    title: "Afri-EduTourism",
     tagline: "Learn · Serve · Tour · Transform",
     description:
-      "Edu-Tourism brings diaspora and global partners to Africa to learn, volunteer, and co-fund education impact in host regions.",
+      "Diaspora Africans and Friends of Africa co-learn, volunteer and co-fund education impact in host regions across the continent.",
     bullets: ["Regional Tours", "Diaspora Volunteers", "Cultural Exchange"],
-    href: "/programs/edu-tourism",
+    href: "/impact/afri-edutourism",
     cta: "Plan a Journey",
   },
 ];
@@ -73,17 +73,16 @@ export function ImpactProgramsSection() {
       <div className="container mx-auto px-4">
         <div className="max-w-3xl mx-auto text-center mb-10 md:mb-14">
           <p className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-gold/10 border border-gold/30 text-gold text-[11px] font-semibold tracking-[0.18em] uppercase mb-4">
-            Continental Impact
+            Continental Impact Programmes
           </p>
           <h2
             id="impact-programs-heading"
             className="font-display text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white leading-tight mb-3"
           >
-            Beyond Recognition — <span className="text-gold">Real Impact.</span>
+            Recognition That Rebuilds <span className="text-gold">Education.</span>
           </h2>
           <p className="text-white/70 text-sm md:text-base leading-relaxed">
-            Every NESA-Africa award is connected to a measurable, on-the-ground
-            programme — funded, governed, and reported transparently.
+            Every NESA-Africa recognition connects to a live impact programme — scholarships, school rebuilds, inclusive learning and Afri-EduTourism — governed and reported transparently.
           </p>
         </div>
 
