@@ -1,66 +1,84 @@
-## Goal
 
-Update the landing page copy and small structural fixes (tier ordering, step count, footer columns) inside the **existing** components. Do not rebuild layouts, swap images, or re-theme.
+# NESA-Africa 2026 — 18 Dedicated Category Pages
 
-## Approach
+This is a large refactor. To avoid a wall of untested code, I'll deliver in 4 phases with checkpoints. You can approve/adjust after each.
 
-Every section maps 1:1 to a component already mounted in `src/features/landing/NESALandingPage.tsx`. Work is done as targeted edits inside those components, plus a footer rebuild.
+## Architecture (single source of truth)
 
-## Batch 1 — Hero, notice, countdown, integrity
+```text
+src/config/recognition2026/
+  tiers.ts                       // 4 tiers, order, review routes, integrity notice
+  categories/
+    index.ts                     // registry of 18 categories
+    icon-award.ts                // 1 file per category
+    influencer.ts
+    platinum-library.ts          // …7 platinum
+    gbg-csr-africa.ts            // …9 gold-blue garnet
+    ...
+  formSchemas/
+    <category-slug>.ts           // 18 unique form schemas (sections, questions, evidence, geography)
+  geographyModels.ts             // 7 models: ICON_CLASSIFICATION, AFRICA_REGION_COUNTRY, etc.
+  nomineeTypes.ts
+  evidenceRules.ts
+  integrity.ts                   // shared notice text + FAQs
 
-- `UtilityBar` / announcement bar → "Public Nominations Open 1 August 2026 · NESA-Africa 2026" + Nominate Now CTA
-- `TrophyHeroSection`
-  - Eyebrow, headline "Africa Sees Your Education Impact", brand line, platform statement
-  - New description + emotional statement
-  - Primary CTAs: Nominate an Education Enabler · Explore Recognition 2026
-  - Secondary links: Accept Your Nomination · Explore Education Enablers
-  - Hero image caption + supporting caption
-  - Replace stats row with the 7-metric set (4/18/96/8/2/27/9)
-  - Add topic tag row (10 tags) if not already present as a subcomponent
-- New `HeroIntegrityStrip` (or update existing "Recognition Built on Evidence and Integrity" copy)
-- `PublicNominationsNotice` — reuse copy from master timeline (already aligned; verify)
-- `CountdownSection` — new eyebrow, heading, date, copy, buttons; remove any "votes decide winners" phrasing
+src/components/recognition2026/
+  TierLandingPage.tsx            // one component, tier-driven
+  CategoryPage.tsx               // one component; 13 sections per spec
+  sections/*                     // Breadcrumb, Hero, Overview, WhoCanBeNominated,
+                                 //   SubcategoryPicker, Geography, Eligibility,
+                                 //   Evidence, Integrity, FAQs, FinalCTA
+  form/
+    NominationFormEngine.tsx     // schema-driven renderer
+    fields/*                     // shared inputs (Identity, Contribution, Uploads, Nominator, Declaration)
+    SubmissionSuccess.tsx        // reference number screen
 
-## Batch 2 — Pathways, tiers, architecture, process
+src/pages/recognition/
+  Recognition2026Index.tsx       // /recognition
+  tiers/[tier].tsx               // 4 routes
+  categories/[tier]/[category].tsx  // 18 routes (data-driven via registry)
+```
 
-- `VisitorPathwaySection` → 4 cards (Individual · Org/Institution · Diaspora/Friend · Influencer)
-- `CallForNominationIconAward` → verify tier order Icon → Influencer → Platinum → Blue-Garnet with new tier labels and card copy for all 9 Blue-Garnet, 3 Influencer, 7 Platinum, 3 Icon
-- `WhoWeRecogniseClustersSection` → 3 cards (Individuals · Orgs/Institutions · Govts/International)
-- `RecognitionTiersHomeSection` → convert to compact "Recognition Architecture at a Glance" table
-- `HowItWorksHomeSection` → collapse 6 steps to 5 (Nominate · Accept & Complete · Provide Evidence · Verify & Review · Recognise & Connect); remove vote/shortlist steps
+Every category page = same `CategoryPage.tsx` reading from the category config + its form schema. No copy-paste pages.
 
-## Batch 3 — Story, regions, people, endorsements
+## Phase 1 — Foundation (this batch)
 
-- `WhyNESAExistsSection` → "Recognition Without Impact Is Incomplete" + Recognition → … → Legacy flow
-- `WhatMakesNESADifferentSection` → 6 blocks (Recognition/Visibility/Partnerships/Funding/Intervention/Legacy); drop Scholarships & Community Engagement
-- `ExploreRegionsSection` → "8 African Regions · 2 Global Communities" (drop 10-region/5+2 phrasing)
-- `PoweredByVolunteersSection` → new heading/copy + 3 buttons (Meet · Become · Join Chapter)
-- `EndorsedBySection` → new heading/copy + 3 buttons; remove placeholder logos
+1. Config skeleton: `tiers.ts`, `categories/index.ts`, `geographyModels.ts`, `nomineeTypes.ts`, `integrity.ts` with all 18 category stubs (slug, title, tier, review route, subcategory count, opening/closing dates from `masterTimeline2026`).
+2. Routes: 4 tier routes + 18 category routes wired in `App.tsx` (rendering placeholder from the shared page component).
+3. Publication validator script: asserts `Icon=3, Influencer=3, Platinum=27, GBG=63, total=96` at build time.
+4. Redirects from old award slugs to new `/recognition/...` routes.
 
-## Batch 4 — Programmes, wallet, governance, vision, CTA, footer
+## Phase 2 — Tier + Category page shells
 
-- `ImpactProgramsSection` → 4 cards (EduAid-Africa · Rebuild My School 2027 · Special-Needs Nominations · Afri-EduTourism); global rename Edu-Tourism → Afri-EduTourism
-- `SponsorsSection` → single logo strip + copy + buttons; SCEF/GFAwzip/Pancokrato/Get Energy identified by actual role
-- `GovernanceFirewallSection` → "A Recognition Firewall You Can Trust" + do-not-influence list + process statement + 8 commitments; drop voting/finalists/EDI/AGC-voting language
-- `Vision2035RoadmapSection` → 6 dated milestones (2026/27/28/30/32/35)
-- `FinalCTASection` → new heading/copy/buttons
-- Add "Final Statistics" strip (4/18/96/20-yr/8/2) above or inside FinalCTA
-- `NESAFooter` → rebuild as 7 columns exactly per spec; drop Vote/duplicate Donate/Sponsor/Participate/general Judges recruitment
+1. `TierLandingPage.tsx` — full spec (tier meta, review route, integrity, category cards in approved order).
+2. `CategoryPage.tsx` — all 13 sections rendered from config (form section still a placeholder).
+3. Per-page SEO via `react-helmet-async` (title/description/canonical/OG/breadcrumb JSON-LD).
 
-## Cross-cutting
+## Phase 3 — Nomination Form Engine
 
-- Extend `scripts/checkTimelineIntegrity.ts` denylist with: "10 education regions", "5+2 regions", "9 Pillars", "2,500+ nominees" (unless data-backed), "public voting" on recognition pages, "Edu-Tourism" (bare form)
-- Run vitest + integrity guard to confirm clean
+1. Schema types (section → question groups → fields, with conditional geography).
+2. `NominationFormEngine.tsx`: autosave draft (localStorage keyed by category+session), progress indicator, one-group-at-a-time, file uploads with progress, keyboard/a11y.
+3. Shared field packs (Identity variants, Contribution, Evidence, Nominator, Declaration).
+4. `SubmissionSuccess.tsx` with `NESA-2026-{CODE}-{seq}` reference number.
+5. Wire to existing `nominations` table (map to `category_id`/`subcategory_id`/`nominee_master_id`); no new DB tables in this phase unless a required field is missing — I'll flag any gaps and propose migrations before running them.
 
-## Out of scope (explicit)
+## Phase 4 — 18 Unique Form Schemas + polish
 
-- No layout rebuilds, image swaps, or theme changes
-- No new routes/pages
-- No backend/schema changes
-- Any component that already matches spec is left as-is (verified by read, no rewrite)
+1. Author all 18 `formSchemas/<slug>.ts` per the category-specific field lists in your brief.
+2. FAQs per category, evidence rules per category.
+3. Integrity guardrails: strip any voting/leaderboard UI from these routes; central `IntegrityNotice` component.
+4. QA: Playwright smoke — every category route renders, form validates required fields, submission returns a reference number, mobile viewport clean.
 
-## Sequencing
+## Technical notes
 
-I will execute Batch 1 → 2 → 3 → 4 in order, each batch as one parallel edit round with a read pass immediately before it. After Batch 4, run the timeline guard + typecheck and report any residual mismatches for follow-up.
+- Reuses `masterTimeline2026.ts` for opening/closing dates (single source).
+- Existing DB schema already has `award_categories`, `subcategories`, `nominations` — I'll map to those and only propose migrations for missing columns (e.g. `form_definition_id`, `form_version`, `subcategory_code`). No new "voting" fields.
+- Existing `AwardCategoryStandardPage` and current `/awards/*` routes stay live behind redirects until the new `/recognition/*` routes ship, then flip.
+- No public voting UI added on any `/recognition/*` route.
 
-**Confirm** to start Batch 1, or tell me which batches to skip / re-prioritise.
+## Questions before I start Phase 1
+
+1. **Coexistence vs cutover**: keep the current `/awards/*` tier pages live during rollout and redirect at the end, or hard-cut to `/recognition/*` immediately (breaks inbound links / prior QA)?
+2. **DB scope**: are you OK if I keep nominations flowing into the existing `nominations`/`nominee_master` tables and only add columns as needed, rather than creating the full new table set (`award_cycles`, `nomination_form_definitions`, `nomination_form_sections`, `nomination_form_questions`, `category_nominee_types`, `category_geography_rules`, `category_evidence_requirements`, `duplicate_matches`, `verification_cases`)? Full new-table build is ~2 extra phases.
+3. **Copy source**: use the category-specific field lists in this brief verbatim for the 18 form schemas, or should I first re-check any category against the master workbook you shared earlier for the Icon award?
+4. **Phase 1 kickoff**: approve this plan as-is, or trim/expand phases before I start?

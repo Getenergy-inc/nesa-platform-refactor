@@ -149,6 +149,7 @@ import EighteenCategoriesPage from "./pages/awards/EighteenCategoriesPage";
 import CategoryDetailPage from "./pages/awards/CategoryDetailPage";
 import TierCategorySubcategoryPage from "./pages/awards/TierCategorySubcategoryPage";
 import RecognitionHubPage from "./pages/recognition/RecognitionHubPage";
+import CategoryPage2026 from "./components/recognition2026/CategoryPage";
 import RedirectRoute from "./components/routing/RedirectRoute";
 import LegacyCategoryRedirect from "./components/routing/LegacyCategoryRedirect";
 import { LEGACY_RECOGNITION_REDIRECTS } from "./config/legacyRecognitionRedirects";
@@ -997,15 +998,12 @@ const App = () => (
                   <Route path="/recognition/platinum" element={<WithLayout><PlatinumAward /></WithLayout>} />
                   <Route path="/recognition/africa-education-icon" element={<WithLayout><IconAward /></WithLayout>} />
                   <Route path="/recognition/influencer-education-impact" element={<InfluencerImpact2026 />} />
-                  {/* 9 Gold-Blue Garnet categories (dynamic slug — spec URLs resolve here) */}
-                  <Route path="/recognition/gold-blue-garnet/:categorySlug" element={<WithLayout><CategoryDetailPage /></WithLayout>} />
+                  {/* 3-segment subcategory routes remain */}
                   <Route path="/recognition/gold-blue-garnet/:categorySlug/:subcategorySlug" element={<WithLayout><TierCategorySubcategoryPage /></WithLayout>} />
-                  {/* 7 Platinum categories */}
-                  <Route path="/recognition/platinum/:slug" element={<WithLayout><AwardCategoryRoute /></WithLayout>} />
-                  {/* Icon single category */}
-                  <Route path="/recognition/africa-education-icon/africa-education-icon-award" element={<WithLayout><IconAwardMain /></WithLayout>} />
-                  {/* Influencer single category */}
-                  <Route path="/recognition/influencer-education-impact/influencer-education-impact-award" element={<InfluencerImpact2026 />} />
+                  {/* 18 dedicated category pages — unified renderer driven by src/config/recognition2026 */}
+                  <Route path="/recognition/:tier/:category" element={<WithLayout><CategoryPage2026 /></WithLayout>} />
+
+
 
                   {/* Core spec URLs — render existing content at canonical paths */}
                   <Route path="/gala" element={<WithLayout><GalaConsolidated /></WithLayout>} />
