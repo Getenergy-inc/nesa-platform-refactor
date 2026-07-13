@@ -68,11 +68,12 @@ export const PLATFORM_IDENTITY_SENTENCE =
 // Scale-at-a-glance chips for hero and overview rails.
 export const RECOGNITION_ARCHITECTURE_SUMMARY = [
   { label: "4 Recognition Tiers", href: "/awards" },
-  { label: "18 Recognition Categories", href: "/awards#categories" },
-  { label: "100+ Recognition Subcategories", href: "/awards#subcategories" },
-  { label: "9 Recognition Pillars", href: "/awards/pillars" },
-  { label: "8 Africa Regions", href: "/regions" },
+  { label: "18 Award Categories", href: "/awards#categories" },
+  { label: "96 Subcategories", href: "/awards#subcategories" },
+  { label: "8 African Regions", href: "/regions" },
   { label: "2 Global Communities", href: "/regions#communities" },
+  { label: "27 Independent Icon Judges", href: "/judges" },
+  { label: "9 Icon Laureate Positions", href: "/awards/africa-education-icon" },
 ] as const;
 
 // Who NESA-Africa recognises — grouped clusters (scannable replacement for long lists).
@@ -80,20 +81,23 @@ export const WHO_WE_RECOGNISE_CLUSTERS = [
   {
     id: "individuals",
     title: "Individuals",
-    body: "Education Icons, philanthropists, innovators, researchers, authors, policy leaders, media advocates, sports icons, music icons and social media creators.",
-    href: "/awards/pillars/africa-education-icon",
+    body: "Education Icons, philanthropists, authors, curriculum advocates, political leaders, researchers, sports icons, music icons and social-media creators.",
+    href: "/awards/africa-education-icon",
+    ctaLabel: "Explore Individual Recognition",
   },
   {
     id: "organisations",
-    title: "Organisations",
-    body: "Corporate CSR, foundations, NGOs, faith-based and religious organisations, universities, research institutes, libraries, media and technology companies.",
-    href: "/awards/pillars/csr-for-education",
+    title: "Organisations and Institutions",
+    body: "Companies, foundations, NGOs, faith-based organisations, universities, libraries, research bodies, media organisations and technology companies.",
+    href: "/awards/platinum-recognition",
+    ctaLabel: "Explore Institutional Recognition",
   },
   {
     id: "governments",
-    title: "Governments & Public Institutions",
-    body: "Governments, ministries, development agencies, bilateral partners and multilateral organisations advancing Education for All.",
-    href: "/awards/pillars/continental-recognition",
+    title: "Governments and International Partners",
+    body: "Government bodies, Nigerian states, development agencies, diplomatic missions, bilateral organisations and multilateral partners.",
+    href: "/awards/platinum-recognition/international-partnership",
+    ctaLabel: "Explore Public and International Recognition",
   },
 ] as const;
 
@@ -108,5 +112,11 @@ export const DEPRECATED_PHRASES = [
   "Award Winners",
   "Seven Recognition Pillars",
   "7 Recognition Pillars",
+  "9 Pillars",
+  "9 Recognition Pillars",
+  "100+ Subcategories",
+  "10 education regions",
+  "5+2 Regions",
   "54 African countries",
+  "2,500+ nominees",
 ] as const;

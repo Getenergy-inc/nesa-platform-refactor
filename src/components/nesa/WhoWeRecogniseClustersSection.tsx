@@ -64,7 +64,7 @@ export function WhoWeRecogniseClustersSection() {
                   </h3>
                   <p className="text-white/70 text-sm leading-relaxed">{cluster.body}</p>
                   <span className="mt-4 inline-flex items-center gap-1 text-gold text-sm font-semibold">
-                    See recognition subcategories <ArrowRight className="h-3.5 w-3.5" />
+                    {(cluster as { ctaLabel?: string }).ctaLabel ?? "Explore recognition"} <ArrowRight className="h-3.5 w-3.5" />
                   </span>
                 </Link>
               </motion.div>
