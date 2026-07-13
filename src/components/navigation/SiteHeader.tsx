@@ -59,7 +59,7 @@ function BrandBlock() {
       />
       <div className="hidden sm:flex flex-col leading-tight min-w-0">
         <span className="font-playfair text-gold text-base lg:text-lg font-bold whitespace-nowrap">NESA-Africa</span>
-        <span className="hidden min-[1600px]:block text-[10px] text-white/70 -mt-0.5 whitespace-nowrap">
+        <span className="hidden min-[1700px]:block text-[10px] text-white/70 -mt-0.5 whitespace-nowrap">
           Africa's Education Recognition & Impact Platform
         </span>
 
@@ -275,7 +275,7 @@ function SecondaryPhaseCTA({ className }: { className?: string }) {
       asChild
       variant="outline"
       className={cn(
-        "hidden min-[1600px]:inline-flex border-gold/60 text-gold hover:bg-gold/10 hover:text-gold whitespace-nowrap",
+        "hidden min-[1700px]:inline-flex border-gold/60 text-gold hover:bg-gold/10 hover:text-gold whitespace-nowrap",
         className,
       )}
 
