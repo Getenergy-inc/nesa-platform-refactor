@@ -15,7 +15,7 @@ const ALL_REGIONS = [
   { slug: "horn-of-africa", label: "Horn of Africa" },
   { slug: "sahel", label: "Sahel Region" },
   { slug: "indian-ocean-islands", label: "Indian Ocean Islands" },
-  { slug: "diaspora", label: "Africans in Diaspora" },
+  { slug: "diaspora", label: "Diaspora Africans" },
   { slug: "friends-of-africa", label: "Friends of Africa" },
 ];
 
@@ -27,16 +27,16 @@ export function ExploreRegionsSection() {
     >
       <div className="max-w-5xl mx-auto text-center">
         <p className="text-gold/80 uppercase tracking-[0.2em] text-xs sm:text-sm mb-3 font-semibold">
-          One Continent · Ten Education Regions · One Mission
+          One Continent · Eight African Regions · Two Global Communities
         </p>
         <h2
           id="explore-regions-heading"
           className="font-playfair text-3xl sm:text-4xl md:text-5xl text-white mb-4"
         >
-          Explore Africa's Education Regions
+          Explore Africa's Education Regions and Global Communities
         </h2>
         <p className="text-white/70 text-sm sm:text-base max-w-2xl mx-auto mb-10">
-          NESA-Africa connects education changemakers across <span className="text-gold font-semibold">eight Africa regions</span>, <span className="text-gold font-semibold">Africans in the Diaspora</span> and <span className="text-gold font-semibold">Friends of Africa</span> communities — through recognition, partnerships, storytelling and Afri-EduTourism opportunities.
+          NESA-Africa connects Education Enablers across <span className="text-gold font-semibold">eight African regions</span>, among <span className="text-gold font-semibold">Diaspora Africans</span> and through <span className="text-gold font-semibold">Friends of Africa</span>.
         </p>
 
 
@@ -62,7 +62,7 @@ export function ExploreRegionsSection() {
         <Button asChild size="lg" className="bg-gold hover:bg-gold-dark text-charcoal font-semibold">
           <Link to="/regions">
             <Globe className="mr-2 h-4 w-4" />
-            Explore Africa's Regions
+            Explore Regions and Communities
             <ArrowRight className="ml-2 h-4 w-4" />
           </Link>
         </Button>

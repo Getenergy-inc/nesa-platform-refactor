@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { Users, Globe2, Heart, ArrowRight, Sparkles } from "lucide-react";
+import { Users, Globe2, ArrowRight, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { supabase } from "@/integrations/supabase/client";
 
@@ -57,36 +57,38 @@ export function PoweredByVolunteersSection() {
             <Sparkles className="h-3 w-3" /> The People Behind the Movement
           </div>
           <h2 className="font-playfair text-3xl md:text-5xl text-gold mb-4">
-            Powered by Volunteers Across Continents
+            Powered by People Across Continents
           </h2>
           <p className="text-white/70 max-w-2xl mx-auto">
-            NESA-Africa is built by contributors, creators, technologists, ambassadors,
-            storytellers, media teams and changemakers across Africa and the Diaspora.
+            NESA-Africa is supported by volunteers, technologists, researchers, communicators, chapter teams, ambassadors and programme contributors across Africa and the Diaspora.
           </p>
 
         </motion.div>
 
-        {/* Stats */}
-        <div className="grid grid-cols-3 gap-3 md:gap-6 mb-12 max-w-3xl mx-auto">
-          {[
-            { icon: Users, label: "Volunteers", value: stats.count || vols.length || "200+" },
-            { icon: Globe2, label: "Countries", value: stats.countries || "30+" },
-            { icon: Heart, label: "Teams", value: "10" },
-          ].map((s, i) => (
-            <motion.div
-              key={s.label}
-              initial={{ opacity: 0, y: 12 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: i * 0.1 }}
-              className="rounded-xl border border-gold/20 bg-white/5 p-4 md:p-6 text-center backdrop-blur"
-            >
-              <s.icon className="h-5 w-5 text-gold mx-auto mb-2" />
-              <div className="font-playfair text-2xl md:text-3xl text-gold">{s.value}</div>
-              <div className="text-xs text-white/60 uppercase tracking-wider mt-1">{s.label}</div>
-            </motion.div>
-          ))}
-        </div>
+        {/* Verified stats only — hide the row entirely when we have no verified counts */}
+        {(stats.count > 0 || vols.length > 0) && (
+          <div className="grid grid-cols-2 gap-3 md:gap-6 mb-12 max-w-2xl mx-auto">
+            {[
+              { icon: Users, label: "Verified Volunteers", value: stats.count || vols.length },
+              { icon: Globe2, label: "Countries", value: stats.countries },
+            ]
+              .filter((s) => Number(s.value) > 0)
+              .map((s, i) => (
+                <motion.div
+                  key={s.label}
+                  initial={{ opacity: 0, y: 12 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: i * 0.1 }}
+                  className="rounded-xl border border-gold/20 bg-white/5 p-4 md:p-6 text-center backdrop-blur"
+                >
+                  <s.icon className="h-5 w-5 text-gold mx-auto mb-2" />
+                  <div className="font-playfair text-2xl md:text-3xl text-gold">{s.value}</div>
+                  <div className="text-xs text-white/60 uppercase tracking-wider mt-1">{s.label}</div>
+                </motion.div>
+              ))}
+          </div>
+        )}
 
         {/* Volunteer portrait grid */}
         {vols.length > 0 && (
