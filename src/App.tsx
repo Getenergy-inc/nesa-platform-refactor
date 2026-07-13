@@ -548,6 +548,19 @@ const App = () => (
                   <Route path="/get-involved/fundraising-partner" element={<Navigate to="/support#fundraising" replace />} />
                   <Route path="/contact/partnerships" element={<Navigate to="/contact" replace />} />
 
+                  {/* Canonical consolidation aliases per 2026 IA refactor */}
+                  <Route path="/recognition" element={<Navigate to="/awards" replace />} />
+                  <Route path="/companies" element={<Navigate to="/education-enablers" replace />} />
+                  <Route path="/organisations" element={<Navigate to="/education-enablers" replace />} />
+                  <Route path="/organizations" element={<Navigate to="/education-enablers" replace />} />
+                  <Route path="/enabler-database" element={<Navigate to="/education-enablers" replace />} />
+                  <Route path="/gala" element={<Navigate to="/events/gala-2026" replace />} />
+                  <Route path="/gala/tickets" element={<Navigate to="/tickets" replace />} />
+                  <Route path="/partner" element={<Navigate to="/get-involved/partner" replace />} />
+                  <Route path="/sponsor" element={<Navigate to="/sponsors" replace />} />
+
+
+
 
                   {/* === 22-page canonical spec (2026 final refactor) === */}
                   {/* Short tier aliases (canonical URLs per spec) */}

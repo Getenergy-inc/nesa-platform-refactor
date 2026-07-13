@@ -30,6 +30,8 @@ import { trackNav } from "@/lib/analytics";
 import { AnnouncementBar } from "@/components/navigation/AnnouncementBar";
 import { EducationEnablersMegaMenu } from "@/components/navigation/EducationEnablersMegaMenu";
 import { NavSearch } from "@/components/navigation/NavSearch";
+import { AccountMenu } from "@/components/navigation/AccountMenu";
+import { MOBILE_MENU_OPEN_EVENT } from "@/components/navigation/MobileBottomActions";
 import nesaStamp from "@/assets/nesa-stamp.jpeg";
 
 function SkipLink() {
@@ -298,45 +300,10 @@ function SecondaryPhaseCTA({ className }: { className?: string }) {
 }
 
 function AccountActions() {
-  const { user, signOut } = useAuth();
-  const linkCls =
-    "inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-md text-sm text-white/85 hover:text-gold hover:bg-gold/10 transition-colors";
   return (
     <div className="hidden min-[1360px]:flex items-center gap-1">
-      {user ? (
-        <>
-          <Link
-            to="/account"
-            className={linkCls}
-            onClick={() => trackNav("account_click", { href: "/account", device: "desktop" })}
-          >
-            <UserCircle2 className="h-4 w-4" aria-hidden /> My Account
-          </Link>
-          <LanguageSwitcher className="text-sm" />
-          <button
-            type="button"
-            onClick={async () => {
-              trackNav("sign_out_click", { device: "desktop" });
-              await signOut();
-            }}
-            className={linkCls}
-            aria-label="Sign out"
-          >
-            <LogOut className="h-4 w-4" aria-hidden /> Sign Out
-          </button>
-        </>
-      ) : (
-        <>
-          <LanguageSwitcher className="text-sm" />
-          <Link
-            to="/login"
-            className={linkCls}
-            onClick={() => trackNav("sign_in_click", { href: "/login", device: "desktop" })}
-          >
-            <LogIn className="h-4 w-4" aria-hidden /> Sign In
-          </Link>
-        </>
-      )}
+      <LanguageSwitcher className="text-sm" />
+      <AccountMenu />
     </div>
   );
 }
@@ -353,6 +320,11 @@ function MobileMenu() {
     document.body.style.overflow = open ? "hidden" : "";
     return () => { document.body.style.overflow = ""; };
   }, [open]);
+  useEffect(() => {
+    const handler = () => setOpen(true);
+    window.addEventListener(MOBILE_MENU_OPEN_EVENT, handler);
+    return () => window.removeEventListener(MOBILE_MENU_OPEN_EVENT, handler);
+  }, []);
 
   const close = () => setOpen(false);
   const linkCls = "block px-3 py-2 rounded text-sm text-white/85 hover:text-gold hover:bg-gold/10";

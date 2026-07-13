@@ -62,15 +62,22 @@ export const SITE_NAV: NavItem[] = [
         ],
       },
       {
-        title: "Award Participation",
+        title: "Explore",
         items: [
           { label: "Explore Existing Nominees", href: "/nominees" },
+          { label: "Featured Nominees", href: "/nominees?filter=featured" },
+          { label: "Nominee Profiles", href: "/nominees?view=profiles" },
           { label: "Categories & Subcategories", href: "/awards/categories" },
+        ],
+      },
+      {
+        title: "Process",
+        items: [
           { label: "Eligibility & Nomination Rules", href: "/awards/eligibility" },
+          { label: "Nomination Guidelines", href: "/guidelines/nominees" },
+          { label: "Nominator Guidelines", href: "/guidelines/nominators" },
           { label: "Judging & Public Voting", href: "/awards/judging" },
           { label: "Awards Timeline", href: "/timeline" },
-          { label: "Nominee Guidelines", href: "/guidelines/nominees" },
-          { label: "Nominator Guidelines", href: "/guidelines/nominators" },
         ],
       },
     ],
@@ -137,10 +144,10 @@ export const SITE_NAV: NavItem[] = [
     analyticsId: "nav_get_involved",
     sections: [
       {
-        title: "Organisations",
+        title: "Sponsorship and Partnership",
         items: [
           { label: "Become a Sponsor", href: "/sponsors" },
-          { label: "Sponsorship Packages", href: "/sponsorship-packages" },
+          { label: "View Sponsorship Packages", href: "/sponsorship-packages" },
           { label: "Become a Strategic Partner", href: "/get-involved/partner" },
           { label: "Sponsor an Award Category", href: "/get-involved/category-sponsorship" },
           { label: "Sponsor an Education Enabler Page", href: "/get-involved/enabler-page-sponsorship" },
@@ -150,7 +157,7 @@ export const SITE_NAV: NavItem[] = [
         ],
       },
       {
-        title: "Individuals & Communities",
+        title: "Join the Community",
         items: [
           { label: "Volunteer", href: "/volunteer" },
           { label: "Become an Ambassador", href: "/ambassadors" },
