@@ -22,6 +22,7 @@ import { NomineeCard } from "@/components/influencer-impact/NomineeCard";
 import { SEED_NOMINEES, REGIONS } from "@/config/awards/influencerImpact2026";
 import { trackEvent } from "@/lib/analytics";
 import { SubcategoryPathways } from "@/components/awards/standard/sections";
+import { TierCategoryCards } from "@/components/awards/TierCategoryCards";
 
 const DIRECTORY_ROUTE = "/awards/influencer-education-impact/nominees";
 
@@ -173,6 +174,15 @@ export default function InfluencerImpact2026() {
           },
         ]}
       />
+
+      {/* Influencer slot inside the 18-category registry */}
+      <TierCategoryCards
+        tier="influencer-education-impact"
+        heading="Influencer Impact in the 18-Category Registry"
+        sub="Influencer Education Impact is the influence-for-education meta-category among the 18. Browse where it sits across the recognition spine."
+      />
+
+
 
 
 

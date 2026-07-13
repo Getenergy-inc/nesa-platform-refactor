@@ -14,6 +14,7 @@ import {
   FinalAwardCTA,
   type HallNominee,
 } from "@/components/awards/standard/sections";
+import { TierCategoryCards } from "@/components/awards/TierCategoryCards";
 import { getAwardPageContent } from "@/config/awards/awardPageContent";
 import { filterMasterNominees, getMasterRegions } from "@/lib/nomineeMasterData";
 import { ICON_NOMINEES } from "@/data/iconAward";
@@ -171,6 +172,12 @@ export default function AwardCategoryStandardPage({ slug }: Props) {
           <section id="categories">
             <WhatThisRecognises body={content.recognises} />
             <SubcategoryPathways pageSlug={content.slug} subcategories={subcategories} />
+            {content.slug === "gold-blue-garnet" && (
+              <TierCategoryCards tier="gold-blue-garnet" />
+            )}
+            {content.slug === "platinum-recognition" && (
+              <TierCategoryCards tier="platinum-recognition" />
+            )}
           </section>
           <section id="eligibility">
             <WhoIsThisFor

@@ -9,6 +9,7 @@ import { BrandedDocumentaryPreview } from "@/components/awards/BrandedDocumentar
 import { BreadcrumbJsonLd } from "@/components/seo/BreadcrumbJsonLd";
 import { AwardStandardStack } from "@/components/awards/AwardStandardSections";
 import { SubcategoryPathways } from "@/components/awards/standard/sections";
+import { TierCategoryCards } from "@/components/awards/TierCategoryCards";
 
 import { getTVShowByAward } from "@/config/awardTVShows";
 import { getCategoriesGrouped } from "@/config/nesaCategories";
@@ -146,6 +147,15 @@ export default function IconAward() {
             nominateHref: `/nominate?category=africa-education-icon-award&track=${cat.slug}`,
           }))}
         />
+
+        {/* Icon slot inside the 18-category registry */}
+        <TierCategoryCards
+          tier="africa-education-icon"
+          heading="Africa Education Icon in the 18-Category Registry"
+          sub="Icon is the lifetime meta-category among the 18. Explore how it sits alongside the Gold–Blue Garnet, Platinum and Influencer tiers."
+        />
+
+
 
 
         {/* Criteria */}
