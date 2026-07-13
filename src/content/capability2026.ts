@@ -24,7 +24,7 @@ export const HERO_COPY = {
   tagline: "Recognising the Enablers of Education for All Across Africa",
   body: [
     "NESA-Africa — the New Education Standard Award Africa — is a continental education recognition and impact platform created to identify, verify, recognise, celebrate, connect and support the people, organisations and institutions enabling Education for All across Africa.",
-    "An initiative of Santos Creations Educational Foundation, NESA-Africa 2026 brings together education changemakers, corporate organisations, philanthropists, governments, development partners, universities, faith-based organisations, media platforms, digital creators, diaspora Africans and Friends of Africa.",
+    "An initiative of Santos Creations Educational Foundation, NESA-Africa 2026 brings together Education Enablers, corporate organisations, philanthropists, governments, development partners, universities, faith-based organisations, media platforms, digital creators, diaspora Africans and Friends of Africa.",
     "NESA-Africa turns recognition into visibility, credibility, partnerships, investment and measurable education impact.",
   ],
   primaryCTAs: [
@@ -47,12 +47,12 @@ export const ABOUT_INTRO = {
 
 export const VISION = {
   title: "Our Vision",
-  body: "To build a continent where every genuine education changemaker is seen, celebrated, supported and connected to opportunities that advance Education for All. NESA-Africa envisions an Africa where recognition is not only about applause, but about measurable impact, continental collaboration, investment, institutional credibility and long-term educational transformation.",
+  body: "To build a continent where every genuine Education Enabler is seen, celebrated, supported and connected to opportunities that advance Education for All. NESA-Africa envisions an Africa where recognition is not only about applause, but about measurable impact, continental collaboration, investment, institutional credibility and long-term educational transformation.",
 } as const;
 
 export const MISSION = {
   title: "Our Mission",
-  body: "To create a credible, transparent and impact-driven continental platform that recognises outstanding contributions to education, amplifies the stories of education changemakers, connects nominees and winners to opportunities, and drives measurable impact through partnerships, media, public participation and post-award education programmes.",
+  body: "To create a credible, transparent and impact-driven continental platform that recognises outstanding contributions to education, amplifies the stories of Education Enablers, connects nominees and winners to opportunities, and drives measurable impact through partnerships, media, public participation and post-award education programmes.",
 } as const;
 
 export const STRATEGIC_OBJECTIVES = [
@@ -64,7 +64,7 @@ export const STRATEGIC_OBJECTIVES = [
   {
     number: "02",
     title: "Amplify Education Impact Through Media, Storytelling and Public Participation",
-    body: "Use nominations, nominee profiles, NESA Africa TV, webinars, documentaries, digital campaigns, public voting and regional engagement to make the work of education changemakers visible, trusted and widely celebrated.",
+    body: "Use nominations, nominee profiles, NESA Africa TV, webinars, documentaries, digital campaigns, public voting and regional engagement to make the work of Education Enablers visible, trusted and widely celebrated.",
   },
   {
     number: "03",
@@ -106,7 +106,7 @@ export const WHAT_WE_DO = [
   },
   {
     title: "Media and Storytelling",
-    body: "NESA Africa TV, digital campaigns, documentaries, interviews, webinars and regional correspondent reports amplify the work of education changemakers.",
+    body: "NESA Africa TV, digital campaigns, documentaries, interviews, webinars and regional correspondent reports amplify the work of Education Enablers.",
   },
   {
     title: "Stakeholder Engagement",
