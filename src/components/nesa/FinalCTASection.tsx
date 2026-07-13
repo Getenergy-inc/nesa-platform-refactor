@@ -21,24 +21,24 @@ export function FinalCTASection() {
           </motion.div>
 
           <h2 className="font-display text-3xl md:text-5xl lg:text-6xl font-bold text-white mb-5">
-            Ready to Celebrate Africa's{" "}
+            Ready to Recognise Africa's{" "}
             <span className="text-gold">Education Enablers?</span>
           </h2>
 
           <p className="text-white/70 text-lg md:text-xl mb-10 max-w-2xl mx-auto leading-relaxed">
-            Do not just applaud impact — help the world discover it. Nominate an African Education Enabler today and join a continental movement recognising the people and institutions enabling Education for All across Africa and the Diaspora.
+            Don't just applaud impact — help the continent see it. Nominate an Education Enabler and join a movement recognising the people and institutions enabling Education for All Across Africa and the Diaspora.
           </p>
 
           <div className="flex flex-col sm:flex-row justify-center gap-4 mb-8">
             <Link to="/nominate" className="group" onClick={() => trackEvent("final_cta_click", { cta: "nominate", to: "/nominate", location: "final_cta" })}>
               <Button size="lg" className="bg-gold hover:bg-gold-dark text-charcoal font-bold rounded-full px-10 gap-2.5 shadow-xl shadow-gold/25 hover:shadow-gold/40 transition-all min-h-[56px] text-lg">
-                Nominate a Changemaker Now
+                Nominate an Education Enabler Now
                 <ArrowRight className="h-5 w-5 group-hover:translate-x-1 transition-transform" />
               </Button>
             </Link>
-            <Link to="/categories" className="group" onClick={() => trackEvent("final_cta_click", { cta: "categories", to: "/categories", location: "final_cta" })}>
+            <Link to="/awards" className="group" onClick={() => trackEvent("final_cta_click", { cta: "recognition", to: "/awards", location: "final_cta" })}>
               <Button size="lg" variant="outline" className="border-2 border-gold/50 text-gold hover:bg-gold/10 hover:border-gold rounded-full px-10 gap-2.5 transition-all min-h-[56px] text-lg">
-                Explore Award Categories
+                Explore Recognition 2026
               </Button>
             </Link>
           </div>
