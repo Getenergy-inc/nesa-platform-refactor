@@ -440,7 +440,7 @@ export function buildAwardPhases(awardYear: number): AwardPhaseConfig[] {
       id: "icon",
       title: "Africa Education Icon",
       subtitle: "Lifetime Impact Recognition",
-      period: `27 July – 12 September ${ceremonyYear}`,
+      period: `1 August – 12 September ${ceremonyYear}`,
       showDate: `21 August ${ceremonyYear}`,
       iconName: "Crown",
       features: [
