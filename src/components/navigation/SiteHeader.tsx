@@ -170,7 +170,7 @@ function DropdownSectioned({ item }: { item: NavItem }) {
 function DesktopNav() {
   const location = useLocation();
   return (
-    <NavigationMenu className="hidden min-[1280px]:flex mx-auto" aria-label="Primary">
+    <NavigationMenu className="hidden min-[1360px]:flex mx-auto" aria-label="Primary">
       <NavigationMenuList className="gap-0.5 flex-nowrap">
 
         {SITE_NAV.map((item) => {
@@ -302,7 +302,7 @@ function AccountActions() {
   const linkCls =
     "inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-md text-sm text-white/85 hover:text-gold hover:bg-gold/10 transition-colors";
   return (
-    <div className="hidden min-[1280px]:flex items-center gap-1">
+    <div className="hidden min-[1360px]:flex items-center gap-1">
       {user ? (
         <>
           <Link
@@ -452,7 +452,7 @@ function MobileMenu() {
           size="icon"
           aria-label={open ? "Close navigation" : "Open navigation"}
           aria-expanded={open}
-          className="min-[1280px]:hidden text-white hover:text-gold hover:bg-gold/10 min-h-11 min-w-11"
+          className="min-[1360px]:hidden text-white hover:text-gold hover:bg-gold/10 min-h-11 min-w-11"
         >
           <Menu className="h-6 w-6" aria-hidden />
         </Button>
