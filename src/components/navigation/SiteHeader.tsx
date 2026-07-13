@@ -176,10 +176,11 @@ function DesktopNav() {
         {SITE_NAV.map((item) => {
           const active = isActive(location.pathname, item.href);
           const triggerCls = cn(
-            "px-3 py-2 text-sm font-medium rounded-md transition-colors",
+            "px-2.5 py-2 text-sm font-medium rounded-md transition-colors whitespace-nowrap",
             FOCUS_RING,
             active ? "text-gold bg-gold/10" : "text-white/85 hover:text-gold hover:bg-gold/5",
           );
+
 
           const hasPanel = !!(item.children || item.sections || item.megaMenu);
           if (!hasPanel) {
