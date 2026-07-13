@@ -452,7 +452,7 @@ function MobileMenu() {
           size="icon"
           aria-label={open ? "Close navigation" : "Open navigation"}
           aria-expanded={open}
-          className="min-[1100px]:hidden text-white hover:text-gold hover:bg-gold/10 min-h-11 min-w-11"
+          className="min-[1280px]:hidden text-white hover:text-gold hover:bg-gold/10 min-h-11 min-w-11"
         >
           <Menu className="h-6 w-6" aria-hidden />
         </Button>
