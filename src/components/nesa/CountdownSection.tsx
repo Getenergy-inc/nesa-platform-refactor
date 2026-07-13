@@ -12,7 +12,7 @@ import { useCountdown } from "@/hooks/useCountdown";
  * <UpcomingEventsSection /> and have their own countdowns.
  */
 const GALA_TARGET = new Date("2026-10-22T18:00:00+01:00");
-const GALA_LABEL = "NESA-Africa 2026 Gold-Blue Garnet Awards Gala";
+const GALA_LABEL = "NESA-Africa 2026 Recognition Gala";
 const SEASON_BADGE = "NESA-Africa 2026";
 
 function CountdownBlock({ value, label }: { value: number; label: string }) {
@@ -61,7 +61,7 @@ export function CountdownSection() {
           22 October 2026 · Lagos, Nigeria
         </p>
         <p className="text-xs sm:text-sm text-white/55 mb-6 max-w-xl mx-auto">
-          Africa's flagship education recognition moment celebrating the Enablers of Education for All across Africa, the Diaspora and Friends of Africa.
+          A continental gathering celebrating verified Education Enablers from across Africa, the African Diaspora and Friends of Africa — bringing together recognised individuals, organisations, institutions, partners, media, development leaders and education advocates committed to advancing Education for All.
         </p>
 
         {isExpired ? (
@@ -83,12 +83,19 @@ export function CountdownSection() {
           </div>
         )}
 
-        <div className="mt-8">
+        <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
           <Link
             to="/gala"
             className="inline-flex items-center gap-2 rounded-full border border-gold/40 bg-gold/10 px-5 py-2.5 text-sm font-semibold text-gold hover:bg-gold/20 transition-colors"
           >
             View Gala Details
+            <ArrowRight className="h-4 w-4" />
+          </Link>
+          <Link
+            to="/gala#tickets"
+            className="inline-flex items-center gap-2 rounded-full bg-gold px-5 py-2.5 text-sm font-semibold text-charcoal hover:bg-amber-400 transition-colors"
+          >
+            Get Tickets and Tables
             <ArrowRight className="h-4 w-4" />
           </Link>
         </div>

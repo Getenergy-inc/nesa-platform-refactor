@@ -1,38 +1,33 @@
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { ArrowRight, ClipboardCheck, ShieldCheck, ListOrdered, Vote, Award, Sparkles } from "lucide-react";
+import { ArrowRight, ClipboardCheck, UserCheck, FileText, ShieldCheck, Award } from "lucide-react";
 import { trackEvent } from "@/lib/analytics";
 
 const STEPS = [
   {
     icon: ClipboardCheck,
     title: "Nominate",
-    body: "Nominate a person, organisation, company, institution, funder, innovator, diaspora network, media voice, or education advocate creating real impact.",
+    body: "Submit an eligible individual, organisation, institution, programme or public body under the correct category and subcategory.",
+  },
+  {
+    icon: UserCheck,
+    title: "Accept and Complete",
+    body: "The nominee receives a secure invitation to accept the nomination and complete the required profile.",
+  },
+  {
+    icon: FileText,
+    title: "Provide Evidence",
+    body: "The nominee and nominator submit impact records, references, documents, media and other supporting evidence.",
   },
   {
     icon: ShieldCheck,
-    title: "Review",
-    body: "Nominations are reviewed for category fit, evidence, credibility, relevance, and education impact.",
-  },
-  {
-    icon: ListOrdered,
-    title: "Shortlist",
-    body: "Qualified nominees are shortlisted and prepared for public visibility.",
-  },
-  {
-    icon: Vote,
-    title: "Vote and Support",
-    body: "Where applicable, public voting and community engagement help amplify credible education impact stories.",
+    title: "Verify and Review",
+    body: "The NRC verifies identity, category fit, geography, evidence and integrity. Verified Icon profiles go to the Icon Jury. Other tiers proceed to governance approval.",
   },
   {
     icon: Award,
-    title: "Recognise",
-    body: "Honourees receive awards, certificates, media visibility, public recognition, and continental credibility.",
-  },
-  {
-    icon: Sparkles,
-    title: "Create Impact",
-    body: "Recognition connects changemakers to sponsors, media, funders, volunteers, school support, scholarships, webinars, and Rebuild My School Africa interventions.",
+    title: "Recognise and Connect",
+    body: "Approved Education Enablers receive verified profiles, certificates, media visibility and opportunities for partnerships and post-recognition impact.",
   },
 ];
 
@@ -48,7 +43,7 @@ export function HowItWorksHomeSection() {
             How <span className="text-gold">NESA-Africa</span> Works
           </h2>
           <p className="text-white/75 text-base md:text-lg">
-            From a single nomination to continental recognition and real education impact — six clear steps.
+            From nomination to verified recognition and lasting education impact — five clear steps.
           </p>
         </div>
 

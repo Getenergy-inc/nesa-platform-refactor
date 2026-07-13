@@ -11,37 +11,37 @@ const pathways = [
     icon: User,
     title: "An Individual Education Enabler",
     body:
-      "Lifetime achievers, philanthropists, authors, curriculum advocates, technical education leaders and Africa Education Icons.",
-    cta: "Explore Individual Awards",
+      "For philanthropists, authors, curriculum advocates, technical-education leaders, political leaders, researchers and lifetime education contributors.",
+    cta: "Explore Individual Recognition",
     href: "/awards/africa-education-icon",
     tag: "Individual",
   },
   {
     icon: Building2,
-    title: "An Organisation or Institution",
+    title: "An Organisation, Institution or Programme",
     body:
-      "Companies, NGOs, faith-based organisations, embassies, universities, ministries and public institutions advancing Education for All.",
-    cta: "Explore Organisation Awards",
+      "For companies, NGOs, libraries, universities, research institutions, faith-based organisations, government bodies and international partners.",
+    cta: "Explore Institutional Recognition",
     href: "/awards/platinum-recognition",
     tag: "Institutional",
   },
   {
     icon: Globe2,
-    title: "A Diaspora or Global Education Supporter",
+    title: "A Diaspora African or Friend of Africa",
     body:
-      "Africans in the Diaspora and Friends of Africa supporting education through funding, mentorship, advocacy, partnerships and community investment.",
+      "For individuals, associations, foundations and partners supporting African education through funding, mentorship, knowledge transfer, advocacy and community investment.",
     cta: "Explore Diaspora Recognition",
     href: "/awards/platinum-recognition/diaspora",
-    tag: "Diaspora",
+    tag: "Diaspora & Friends",
   },
   {
     icon: Megaphone,
-    title: "A Media, Sports, Music or Digital Voice",
+    title: "A Social-Media, Sports or Music Influencer",
     body:
-      "Media organisations, social media creators, sports icons and music icons using influence to advance Education for All.",
-    cta: "Explore Media & Influencer Awards",
+      "For public figures whose verified education contributions support scholarships, schools, literacy, mentorship, advocacy and youth development.",
+    cta: "Explore Influencer Recognition",
     href: "/awards/influencers-education-impact",
-    tag: "Media & Influence",
+    tag: "Influencer",
   },
 ];
 
@@ -58,7 +58,7 @@ export function VisitorPathwaySection() {
       <div className="container relative mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
         <div className="text-center">
           <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-gold/85">
-            Quick Pathway
+            Find the Right Recognition Route
           </p>
           <h2
             id="visitor-subcategory-heading"
@@ -67,7 +67,7 @@ export function VisitorPathwaySection() {
             Who Are You Nominating?
           </h2>
           <p className="mx-auto mt-3 max-w-2xl text-sm text-ivory/75 sm:text-base">
-            Choose the pathway that fits — we&apos;ll take you straight to the right awards.
+            Choose the profile that best describes the nominee. We will guide you to the correct recognition tier, category and nomination form.
           </p>
         </div>
 

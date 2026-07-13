@@ -10,7 +10,7 @@ export interface Announcement {
 export const ANNOUNCEMENTS: Announcement[] = [
   {
     id: "nominations-open",
-    text: "NESA-Africa 2026 Nominations Are Open — nominate an Education Enabler",
+    text: "Public Nominations Open 1 August 2026 · NESA-Africa 2026",
     href: "/nominate",
     analyticsId: "announcement_nominate",
   },
@@ -22,7 +22,7 @@ export const ANNOUNCEMENTS: Announcement[] = [
   },
   {
     id: "gala-2026",
-    text: "NESA-Africa 2026 Gala · 22 October 2026 · Lagos, Nigeria",
+    text: "NESA-Africa 2026 Recognition Gala · 22 October 2026 · Lagos, Nigeria",
     href: "/gala",
     analyticsId: "announcement_gala",
   },

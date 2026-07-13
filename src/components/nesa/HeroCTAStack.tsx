@@ -42,7 +42,7 @@ export function HeroCTAStack() {
       animate="show"
       className="w-full max-w-xl mx-auto lg:mx-0"
     >
-      {/* PRIMARY — Nominate Now */}
+      {/* PRIMARY — Nominate an Education Enabler */}
       <motion.div variants={item} className="relative">
         <span
           aria-hidden
@@ -50,12 +50,12 @@ export function HeroCTAStack() {
         />
         <Link
           to="/nominate"
-          aria-label="Nominate an Education Champion for NESA-Africa 2026"
-          onClick={onCta("nominate_now", "/nominate")}
+          aria-label="Nominate an Education Enabler for NESA-Africa 2026"
+          onClick={onCta("nominate_education_enabler", "/nominate")}
           className={`${heroBtn} bg-gold text-charcoal shadow-[0_12px_36px_-8px_hsl(var(--gold)/0.85)] hover:-translate-y-1 hover:bg-amber-400 hover:shadow-[0_18px_44px_-8px_hsl(var(--gold)/1)]`}
         >
           <Trophy className="h-5 w-5" strokeWidth={2.5} />
-          <span className="truncate">Nominate Now</span>
+          <span className="truncate">Nominate an Education Enabler</span>
           <ArrowRight className="h-5 w-5 transition-transform duration-300 group-hover:translate-x-1" strokeWidth={2.5} />
         </Link>
       </motion.div>
@@ -65,12 +65,12 @@ export function HeroCTAStack() {
         <motion.div variants={item}>
           <Link
             to="/awards"
-            aria-label="Explore all NESA-Africa award categories"
-            onClick={onCta("explore_award_categories", "/awards")}
+            aria-label="Explore NESA-Africa 2026 Recognition framework"
+            onClick={onCta("explore_recognition_2026", "/awards")}
             className={`${heroBtn} rounded-2xl bg-ivory text-gold border-2 border-ivory hover:-translate-y-1 hover:bg-white`}
           >
             <LayoutGrid className="h-5 w-5" strokeWidth={2.5} />
-            <span className="truncate">Explore Award Categories</span>
+            <span className="truncate">Explore Recognition 2026</span>
           </Link>
         </motion.div>
 

@@ -1,26 +1,24 @@
-// Section 6 — What Makes NESA-Africa Different
-// Eight focus areas that distinguish NESA-Africa from a traditional awards programme.
+// Section — Recognition Connected to Action
+// Six content blocks (Recognition · Visibility · Partnerships · Funding · Intervention · Legacy).
 
 import { motion } from "framer-motion";
 import {
   Award,
   Eye,
   Handshake,
-  Building2,
-  GraduationCap,
-  Users,
+  Coins,
+  Wrench,
   Infinity as InfinityIcon,
 } from "lucide-react";
 
 
 const FOCUS_AREAS = [
-  { icon: Award, label: "Recognition", copy: "Continental honours grounded in measurable educational impact." },
-  { icon: Eye, label: "Visibility", copy: "Amplifying the work of education changemakers, institutions and communities." },
-  { icon: Handshake, label: "Partnerships", copy: "Connecting honourees with funders, governments, sponsors and development ecosystems." },
-  { icon: Building2, label: "School Interventions", copy: "Supporting classrooms, accessibility, inclusive learning spaces and Rebuild My School Africa projects." },
-  { icon: GraduationCap, label: "Scholarships", copy: "Creating EduAid-Africa subcategories for learners, teachers and institutions." },
-  { icon: Users, label: "Community Engagement", copy: "Mobilising local chapters, volunteers and ambassadors across Africa and the Diaspora." },
-  { icon: InfinityIcon, label: "Legacy", copy: "Building post-award programmes that continue beyond the gala." },
+  { icon: Award, label: "Recognition", copy: "Evidence-based continental recognition for credible education impact." },
+  { icon: Eye, label: "Visibility", copy: "Verified public profiles, media storytelling and continental discovery." },
+  { icon: Handshake, label: "Partnerships", copy: "Connections among Education Enablers, funders, institutions, governments and development partners." },
+  { icon: Coins, label: "Funding", copy: "Transparent support for approved programmes, interventions and education needs." },
+  { icon: Wrench, label: "Intervention", copy: "Practical education services delivered through EduAid-Africa and connected SCEF programmes." },
+  { icon: InfinityIcon, label: "Legacy", copy: "Living impact records and programmes that continue beyond the Recognition Gala." },
 ];
 
 
@@ -36,12 +34,11 @@ export function WhatMakesNESADifferentSection() {
             id="what-makes-different-heading"
             className="font-playfair text-3xl sm:text-4xl md:text-5xl text-white leading-tight"
           >
-            Unlike traditional awards,<br className="hidden sm:block" />
-            <span className="text-gold">NESA-Africa connects recognition to action.</span>
+            <span className="text-gold">Recognition Connected to Action.</span>
           </h2>
         </div>
 
-        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-4 gap-3 sm:gap-4">
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-3 sm:gap-4">
           {FOCUS_AREAS.map((area, i) => (
             <motion.div
               key={area.label}
