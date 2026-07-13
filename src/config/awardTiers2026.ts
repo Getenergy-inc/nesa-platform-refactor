@@ -76,7 +76,7 @@ export const AWARD_TIERS_2026: AwardTier2026[] = [
     voteMechanicLabel: "Jury recognition only · No public vote",
     cta: "Recommend Again",
     ctaHref: "/awards/platinum",
-    keyDates: "Platinum Recognition Show 5 July 2026",
+    keyDates: "NESA-Africa Recognition Gala · 22 October 2026",
     categories: [
       { id: 10, name: "Best Tertiary Institution Library (Nigeria)", subcategoryCount: 8, pendingNames: true, status: "needs-platform-pull" },
       { id: 11, name: "Excellence in Research & Development for Education (Nigeria)", subcategoryCount: 3, pendingNames: true, status: "needs-platform-pull" },

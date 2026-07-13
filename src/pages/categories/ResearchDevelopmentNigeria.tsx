@@ -149,12 +149,12 @@ const TIMELINE_ROWS = [
   },
   {
     step: "EDI Verification",
-    date: "April 2026",
+    date: "September 2026",
     what: "SCEF panels score submissions against the EDI Matrix",
   },
   {
-    step: "Platinum Recognition Show",
-    date: "5 July 2026",
+    step: "NESA-Africa Recognition Gala",
+    date: "22 October 2026",
     what: "Certificates awarded; feature spotlight on NESA TV",
   },
 ];

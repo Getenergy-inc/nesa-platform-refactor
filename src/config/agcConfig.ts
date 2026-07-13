@@ -88,7 +88,7 @@ export const PROGRAMME_TIMELINE_2026 = [
   {
     id: 'jury-onboarding',
     phase: 'Jury Onboarding',
-    period: '29 June – 10 July 2026',
+    period: '24 August – 6 September 2026',
     description: 'Selected jury members complete orientation, governance review, and scoring calibration.',
     focus: 'Integrity · Governance',
     status: 'upcoming' as const,
@@ -96,7 +96,7 @@ export const PROGRAMME_TIMELINE_2026 = [
   {
     id: 'gold-nominations-close',
     phase: 'Gold Certificate Nominations Close',
-    period: '10 July 2026',
+    period: '12 September 2026',
     description: 'Final deadline for Influencers Education Impact Award entries.',
     focus: 'Pipeline Lock-In',
     status: 'upcoming' as const,

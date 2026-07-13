@@ -86,9 +86,9 @@ const THRESHOLDS = [
 ];
 
 const TIMELINE_ROWS = [
-  { step: "Nominations open", date: "Now – 31 March 2026", what: "Submit nominations and supporting evidence via the online portal" },
-  { step: "EDI Verification", date: "April 2026", what: "SCEF panels score submissions against the EDI Matrix, with cross-party review" },
-  { step: "Platinum Recognition Show", date: "5 July 2026", what: "Certificates awarded; feature spotlight on NESA TV" },
+  { step: "Nominations open", date: "1 August – 12 September 2026", what: "Submit nominations and supporting evidence via the online portal" },
+  { step: "EDI Verification", date: "September 2026", what: "SCEF panels score submissions against the EDI Matrix, with cross-party review" },
+  { step: "NESA-Africa Recognition Gala", date: "22 October 2026", what: "Certificates awarded; feature spotlight on NESA TV" },
 ];
 
 type VerificationStatus = "documented" | "pending_verification";
