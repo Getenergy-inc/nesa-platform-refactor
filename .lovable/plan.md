@@ -1,94 +1,113 @@
-# NESA-Africa Navbar Refactor — Implementation Plan
 
-## Goal
-Replace the current 7-item nav with a 6-group ecosystem navbar that repositions NESA-Africa as a continental education platform (not "just awards"), with mega menus, campaign-phase CTAs, an announcement bar and an accessible mobile drawer — driven by one config.
+# NESA-Africa Navigation Consolidation
 
-## Scope (this pass)
-Frontend/presentation only. Existing routes, forms, auth, voting and sponsor logic remain untouched — new links either point to existing routes or to redirect aliases.
+Goal: one information architecture, one shared config, six top-level groups, no duplicate destinations, no broken routes.
 
-## Deliverables
+## 1. Single source of truth
 
-### 1. Single navigation config
-`src/config/siteNavigation.ts` — rewrite as the source of truth used by desktop nav, mobile drawer and footer. Adds: `description`, `icon`, `featured`, `sections` (for mega menus), `campaignPhase`, `analyticsId`.
+Create `src/config/navigation.ts` — the only place any nav surface reads from.
 
-Top-level (desktop, logo = Home):
-1. About
-2. Awards
-3. Education Enablers (mega menu: Explore / 8 RECs / 20 Sectors / EdTech / Actions)
-4. Impact Programmes
-5. Media & Events
-6. Get Involved
+Each node:
+```
+id, label, description?, href?, icon?, section, parent?, children?,
+desktopVisible, mobileVisible, footerVisible, requiresAuth?, campaignPhase?,
+featured?, external?, analyticsEvent?
+```
 
-Right cluster: Search · **Nominate Now** (primary) · **Vote & Earn AGC** (secondary, phase-driven) · Language · Sign In.
+Keep `src/config/campaignPhase.ts` (already exists) as the phase driver for CTAs and announcements. Delete/deprecate `siteNavigation.ts`, `enablersTaxonomy.ts` (fold into new config or import-only), and any ad-hoc menu arrays in components.
 
-### 2. Campaign-phase CTA config
-`src/config/campaignPhase.ts` — exports current phase + primary/secondary CTA labels/hrefs (nomination / voting / gala). Consumed by header + announcement bar.
+Top-level groups (in order): About · Awards · Education Enablers · Impact Programmes · Media & Events · Get Involved.
 
-### 3. Announcement bar
-`src/components/navigation/AnnouncementBar.tsx` — slim rotating strip above header, ≤3 messages from config, dismissible (sessionStorage), clickable, mobile-safe. Data in `src/config/announcements.ts`.
+## 2. Dropdown/mega-menu contents
 
-### 4. Header rewrite
-`src/components/navigation/SiteHeader.tsx` — refactor to:
-- Announcement bar → main header row
-- Desktop: logo, 6 nav items with Radix `NavigationMenu` dropdowns and one true mega menu for Education Enablers
-- Mobile: logo · compact Nominate · hamburger → `Sheet` drawer with accordion sections in the specified order, search at top, ESC + focus-return preserved
-- Optional sticky mobile bottom actions (Explore / Nominate / Vote / Menu) behind a flag, with body `pb-` offset
+Build the six dropdowns exactly per the brief (sections 4A–4F). Enforce max 4 columns, 6–8 links each, with "View all" links to the section landing page. Long sector/region lists collapse behind directory landing pages, not columns.
 
-### 5. Mega menu component
-`src/components/navigation/EducationEnablersMegaMenu.tsx` — 4-column panel: Explore · Browse by REC (8) · Browse by Sector (top 8 + "View all 20") · EdTech (4) · Actions strip. Reads from `src/config/enablersTaxonomy.ts` (new: RECs, 20 sectors, EdTech subcats).
+## 3. Right-side actions
 
-### 6. Global search
-Reuse existing `NavSearch` (Cmd+K dialog) — extend index groups to include Education Enablers, Sectors, RECs, Events. Placeholder updated to the required copy.
+`Search` (opens `GlobalSearch` modal) · `Nominate Now` (always visible, primary) · phase-aware secondary CTA · `Language` · `Sign In`/Account. All labels locked:
+- Primary: always "Nominate Now" → `/nominate`
+- Phase secondary via `campaignPhase.ts`: nomination→"Explore Nominees", voting→"Vote & Earn AGC", gala→"Get Gala Tickets"
 
-### 7. Route preservation & redirects
-`src/App.tsx` — add `<Navigate>` aliases for new URLs that don't yet have dedicated pages, mapping to closest existing page:
-- `/education-enablers/regions/:rec` → existing region hubs
-- `/education-enablers/sectors[/:slug]` → prospective-org / directory filter
-- `/education-enablers/edtech/*` → existing EdTech page
-- `/impact/*` → existing EduAid / Rebuild / Special Needs routes
-- `/media-events`, `/events/*` → existing media + gala routes
-- `/about/*` → About consolidated anchors
-- `/vote` → Gold-Blue Garnet vote hub
-No page deletions. No content replacement.
+## 4. Components to rebuild/replace
 
-### 8. Analytics
-Extend `src/lib/analytics.ts` with `trackNav(event, {label, href, section, phase, device})` and wire it into every dropdown open, mega-menu click, CTA click, search open, drawer open, language change, sign-in click.
+```
+src/components/navigation/
+  AnnouncementBar.tsx        (rotating, ≤3, campaign-only)
+  SiteHeader.tsx             (thin shell)
+  DesktopNavigation.tsx      (Radix NavigationMenu, 6 items)
+  MegaMenu.tsx               (shared 1–4 column renderer)
+  MobileNavigation.tsx       (drawer + accordions, same IA)
+  MobileBottomActions.tsx    (Explore·Nominate·Vote·Menu)
+  GlobalSearch.tsx           (⌘K modal; searches enablers/nominees/etc.)
+  CampaignCTA.tsx            (reads campaignPhase)
+  AccountMenu.tsx            (signed-in vs signed-out)
+  LanguageSelector.tsx       (wrap existing switcher)
+```
 
-### 9. Accessibility
-- Semantic `<nav aria-label>`, Radix primitives for aria-expanded/controls, focus-visible rings, ESC-to-close, focus return to hamburger, 44px targets, reduced-motion respect, no hover-only dropdowns.
+Delete: `EducationEnablersMegaMenu.tsx` (folded into MegaMenu), any legacy `MainNav.tsx`.
 
-### 10. Tests
-- `tests/e2e/navbar-ecosystem-desktop.spec.ts` — 6 groups render, mega menu opens, CTAs visible, active state, ESC closes.
-- `tests/e2e/navbar-ecosystem-mobile.spec.ts` — drawer order, accordion single-open, focus return, Nominate visible, no scroll leak.
-- Extend `banned-strings` check to flag re-introduction of "education changemakers" in nav copy.
+## 5. Footer
 
-## Files created
-- `src/config/campaignPhase.ts`
-- `src/config/announcements.ts`
-- `src/config/enablersTaxonomy.ts`
-- `src/components/navigation/AnnouncementBar.tsx`
-- `src/components/navigation/EducationEnablersMegaMenu.tsx`
-- `tests/e2e/navbar-ecosystem-desktop.spec.ts`
-- `tests/e2e/navbar-ecosystem-mobile.spec.ts`
+Rewrite `src/components/PublicFooter.tsx` to four columns exactly per brief §8 (Platform, Participate, Trust & Support, Legal). No sector/region dumps.
 
-## Files modified
-- `src/config/siteNavigation.ts` (full rewrite of structure)
-- `src/components/navigation/SiteHeader.tsx` (announcement bar + 6-group nav + phase CTA)
-- `src/components/navigation/NavSearch.tsx` (extended index + placeholder)
-- `src/lib/analytics.ts` (`trackNav` helper)
-- `src/App.tsx` (route aliases / redirects)
+## 6. Route audit + redirects
 
-## Explicit non-goals
-- No new landing pages for sectors/RECs/EdTech subcats — links target existing pages or filtered directory views.
-- No changes to nomination form, voting engine, auth, RLS, edge functions.
-- No visual redesign of pages below the header.
-- No footer restructure this pass (config is ready for it next).
+Script (`scripts/audit-routes.ts`) walks `src/App.tsx` and greps `<Link to=`/`navigate(` to produce a route inventory. Then add redirect `<Route>`s in `App.tsx`:
 
-## Risks & mitigations
-- **Route drift:** every new nav href is checked against `App.tsx`; missing ones get a `<Navigate>` alias, never a dead link.
-- **Mega-menu size on tablet:** collapse to standard dropdown below `lg`; mobile uses accordion.
-- **Announcement bar height on mobile:** capped at 32px, single line, marquee-free.
-- **CTA label churn:** driven from `campaignPhase.ts` so admins flip phase without touching components.
+```
+/recognition/*   → /awards/*
+/directory       → /education-enablers
+/companies       → /education-enablers
+/organisations   → /education-enablers
+/gala            → /events/gala-2026
+/tickets         → /events/gala-tickets
+/support         → /get-involved
+/partner         → /get-involved/partner
+/sponsor         → /sponsors  (kept as canonical alias)
+/gala-tickets    → /events/gala-tickets
+```
+Also fold existing `/awards/*` variants once canonicals confirmed. No redirects added before the audit confirms no live-content collision.
 
-## Acceptance
-Matches the 22-point acceptance checklist in the brief: 6 groups, logo=home, mega menu with 8 RECs + 20 sectors + 4 EdTech subcats, Nominate strongest CTA, phase-driven secondary CTA, accessible mobile accordion drawer, all existing routes preserved or redirected, analytics events emitted, keyboard + screen-reader support verified by E2E.
+## 7. Active-state + breadcrumbs
+
+Central helper `getActiveSection(pathname)` used by desktop, mobile, and breadcrumb components. Only one top-level group active per route. Breadcrumb component reads from route metadata attached to each nav node.
+
+## 8. Accessibility
+
+All menus via Radix (`NavigationMenu`, `DropdownMenu`, `Dialog` for mobile drawer/search). `aria-expanded`, `aria-controls`, focus trap on drawer, Escape to close, focus restoration, `prefers-reduced-motion`, ≥44px tap targets, visible `focus-visible` rings, background scroll lock via Radix Dialog. Announcement bar uses `aria-live="polite"`.
+
+## 9. Analytics
+
+Extend `src/lib/analytics.ts` with `trackNav(event, payload)` events per brief §18. Each nav node's `analyticsEvent` fires exactly once per click (dedupe by node id + timestamp) so overlapping surfaces don't double-fire.
+
+## 10. Tests
+
+Playwright specs under `tests/e2e/`:
+- `nav-ia-desktop.spec.ts` — six groups, single active state, no duplicate hrefs across groups
+- `nav-mobile-drawer.spec.ts` — accordion parity, focus trap, Escape, scroll lock
+- `nav-cta-phase.spec.ts` — CTA labels swap per phase config
+- `nav-redirects.spec.ts` — every entry in redirect table resolves
+- `footer-ia.spec.ts` — four columns, no sector/region dumps
+
+Vitest: `navigation.config.test.ts` asserts (a) exactly 6 top-level groups, (b) no href appears under two different `section`s, (c) every leaf has an `analyticsEvent`.
+
+## 11. Delivery artefacts
+
+At the end: screenshots (desktop navbar, mobile drawer, Education Enablers mega, mobile bottom actions), the config file, removed-duplicates list, merged-groups list, redirect table, changed-components list, a11y test output.
+
+## Execution order
+
+1. Write `config/navigation.ts` + Vitest guard.
+2. Build `MegaMenu`, `DesktopNavigation`, `MobileNavigation`, `MobileBottomActions`, `AnnouncementBar`, `AccountMenu`, `GlobalSearch` skeleton (search hooks stubbed to existing endpoints where present).
+3. Wire into `SiteHeader.tsx`; delete legacy nav components.
+4. Rewrite `PublicFooter.tsx`.
+5. Run route audit → add redirects → update internal links flagged as non-canonical.
+6. Add breadcrumbs + active-state helper.
+7. Analytics wiring.
+8. Tests + capture delivery screenshots.
+
+## Confirm before I start
+
+- Scope confirmation: this refactor will touch ~40–60 files (nav config, header/footer, ~30 internal `<Link>` fixes, App.tsx redirect block, tests). OK to proceed as one large change, or split into (a) config+desktop, (b) mobile+footer, (c) redirects+tests?
+- Global search: build a functional modal now (against existing enabler/nominee tables) or ship a stub that focuses the search input and routes to `/search?q=…`?
+- Bottom mobile bar: enable now, or keep hidden behind a flag until content teams sign off?
