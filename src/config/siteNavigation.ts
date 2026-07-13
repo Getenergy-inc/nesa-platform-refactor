@@ -144,10 +144,10 @@ export const SITE_NAV: NavItem[] = [
     analyticsId: "nav_get_involved",
     sections: [
       {
-        title: "Organisations",
+        title: "Sponsorship and Partnership",
         items: [
           { label: "Become a Sponsor", href: "/sponsors" },
-          { label: "Sponsorship Packages", href: "/sponsorship-packages" },
+          { label: "View Sponsorship Packages", href: "/sponsorship-packages" },
           { label: "Become a Strategic Partner", href: "/get-involved/partner" },
           { label: "Sponsor an Award Category", href: "/get-involved/category-sponsorship" },
           { label: "Sponsor an Education Enabler Page", href: "/get-involved/enabler-page-sponsorship" },
@@ -157,7 +157,7 @@ export const SITE_NAV: NavItem[] = [
         ],
       },
       {
-        title: "Individuals & Communities",
+        title: "Join the Community",
         items: [
           { label: "Volunteer", href: "/volunteer" },
           { label: "Become an Ambassador", href: "/ambassadors" },
