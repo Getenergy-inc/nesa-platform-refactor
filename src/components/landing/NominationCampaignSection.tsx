@@ -78,7 +78,7 @@ export function NominationCampaignSection() {
             className="border-gold/40 bg-gold/10 px-4 py-1.5 text-gold uppercase tracking-[0.18em] text-xs"
           >
             <Sparkles className="mr-2 h-3.5 w-3.5" />
-            Nominations Open · NESA-Africa 2025/26
+            Nominations Open · NESA-Africa 2026
           </Badge>
         </motion.div>
 

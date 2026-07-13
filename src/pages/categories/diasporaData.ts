@@ -141,9 +141,9 @@ export const THRESHOLD_ROWS: Array<{ criterion: string; threshold: string }> = [
 ];
 
 export const TIMELINE_ROWS = [
-  { step: "Nominations open", date: "Now – June 2026", what: "Submit nominee profiles and evidence via the online portal" },
-  { step: "Verification", date: "June 2026", what: "SCEF regional panels validate submissions against the Platinum threshold" },
-  { step: "Platinum Recognition Show", date: "5 July 2026", what: "Certificates awarded; feature spotlight on NESA TV" },
+  { step: "Nominations open", date: "1 August – 12 September 2026", what: "Submit nominee profiles and evidence via the online portal" },
+  { step: "Verification", date: "September 2026", what: "SCEF regional panels validate submissions against the Platinum threshold" },
+  { step: "NESA-Africa Recognition Gala", date: "22 October 2026", what: "Certificates awarded; feature spotlight on NESA TV" },
 ];
 
 export const FAQS_SPECIFIC = [
