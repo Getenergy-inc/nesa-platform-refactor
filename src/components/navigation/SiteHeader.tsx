@@ -57,11 +57,12 @@ function BrandBlock() {
         alt=""
         className="h-10 w-10 lg:h-11 lg:w-11 rounded-full object-cover ring-1 ring-gold/40"
       />
-      <div className="hidden sm:flex flex-col leading-tight">
-        <span className="font-playfair text-gold text-base lg:text-lg font-bold">NESA-Africa</span>
-        <span className="text-[10px] text-white/70 -mt-0.5">
+      <div className="hidden sm:flex flex-col leading-tight min-w-0">
+        <span className="font-playfair text-gold text-base lg:text-lg font-bold whitespace-nowrap">NESA-Africa</span>
+        <span className="hidden min-[1700px]:block text-[10px] text-white/70 -mt-0.5 whitespace-nowrap">
           Africa's Education Recognition & Impact Platform
         </span>
+
       </div>
     </Link>
   );
@@ -169,15 +170,17 @@ function DropdownSectioned({ item }: { item: NavItem }) {
 function DesktopNav() {
   const location = useLocation();
   return (
-    <NavigationMenu className="hidden min-[1100px]:flex" aria-label="Primary">
-      <NavigationMenuList className="gap-1">
+    <NavigationMenu className="hidden min-[1360px]:flex mx-auto" aria-label="Primary">
+      <NavigationMenuList className="gap-0.5 flex-nowrap">
+
         {SITE_NAV.map((item) => {
           const active = isActive(location.pathname, item.href);
           const triggerCls = cn(
-            "px-3 py-2 text-sm font-medium rounded-md transition-colors",
+            "px-2.5 py-2 text-sm font-medium rounded-md transition-colors whitespace-nowrap",
             FOCUS_RING,
             active ? "text-gold bg-gold/10" : "text-white/85 hover:text-gold hover:bg-gold/5",
           );
+
 
           const hasPanel = !!(item.children || item.sections || item.megaMenu);
           if (!hasPanel) {
@@ -272,9 +275,10 @@ function SecondaryPhaseCTA({ className }: { className?: string }) {
       asChild
       variant="outline"
       className={cn(
-        "hidden min-[1200px]:inline-flex border-gold/60 text-gold hover:bg-gold/10 hover:text-gold",
+        "hidden min-[1700px]:inline-flex border-gold/60 text-gold hover:bg-gold/10 hover:text-gold whitespace-nowrap",
         className,
       )}
+
     >
       <Link
         to={shown.href}
@@ -298,7 +302,7 @@ function AccountActions() {
   const linkCls =
     "inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-md text-sm text-white/85 hover:text-gold hover:bg-gold/10 transition-colors";
   return (
-    <div className="hidden min-[1100px]:flex items-center gap-1">
+    <div className="hidden min-[1360px]:flex items-center gap-1">
       {user ? (
         <>
           <Link
@@ -448,7 +452,7 @@ function MobileMenu() {
           size="icon"
           aria-label={open ? "Close navigation" : "Open navigation"}
           aria-expanded={open}
-          className="min-[1100px]:hidden text-white hover:text-gold hover:bg-gold/10 min-h-11 min-w-11"
+          className="min-[1360px]:hidden text-white hover:text-gold hover:bg-gold/10 min-h-11 min-w-11"
         >
           <Menu className="h-6 w-6" aria-hidden />
         </Button>
@@ -572,14 +576,15 @@ export function SiteHeader() {
         <div className="container mx-auto px-4 flex items-center justify-between gap-3 h-14 lg:h-16">
           <BrandBlock />
           <DesktopNav />
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-2 shrink-0">
             <NavSearch className="hidden sm:inline-flex" />
-            <NominateButton className="text-xs sm:text-sm px-3 sm:px-4 py-1.5 sm:py-2 h-9 sm:h-10" />
+            <NominateButton className="text-xs sm:text-sm px-3 sm:px-4 py-1.5 sm:py-2 h-9 sm:h-10 whitespace-nowrap" />
             <SecondaryPhaseCTA />
             <AccountActions />
             <MobileMenu />
           </div>
         </div>
+
       </header>
     </>
   );
