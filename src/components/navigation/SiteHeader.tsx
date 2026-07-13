@@ -170,7 +170,7 @@ function DropdownSectioned({ item }: { item: NavItem }) {
 function DesktopNav() {
   const location = useLocation();
   return (
-    <NavigationMenu className="hidden min-[1280px]:flex flex-1 justify-center min-w-0" aria-label="Primary">
+    <NavigationMenu className="hidden min-[1280px]:flex mx-auto" aria-label="Primary">
       <NavigationMenuList className="gap-0.5 flex-nowrap">
 
         {SITE_NAV.map((item) => {
