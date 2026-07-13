@@ -1,113 +1,73 @@
+## Goal
 
-# NESA-Africa Navigation Consolidation
+Deliver a single, consistent architecture for the 4 NESA-Africa award tiers — Africa Education Icon, Gold-Blue Garnet, Platinum Recognition, Influencer Education Impact — with matching category pages and category-specific nomination forms, all driven by one central config. Language reinforces "Education Enablers enabling Education for All across Africa" (no "education changemakers").
 
-Goal: one information architecture, one shared config, six top-level groups, no duplicate destinations, no broken routes.
+Existing assets we will reuse (not rebuild):
+- `src/config/recognition/*` (18 categories, 96 subcategories, 4 tiers) — spine of tier + category data.
+- `src/config/nomination/*` (iconTaxonomy, platinumForms, goldBlueGarnetForms, influencerForms, awardCategoryForms) — schema-per-category source of truth.
+- `src/pages/awards/AwardCategoryStandardPage.tsx` + `src/components/awards/standard/*` — reusable tier layout with `SubcategoryPathways`.
+- `src/components/awards/TierCategoryCards.tsx`, `src/components/awards/InfluencerNominationForm.tsx`, `src/components/nominate/*`, `src/config/nomination/awardPageContent.ts`.
 
-## 1. Single source of truth
+We are consolidating what already exists, not adding a parallel system.
 
-Create `src/config/navigation.ts` — the only place any nav surface reads from.
+## Scope of changes
 
-Each node:
-```
-id, label, description?, href?, icon?, section, parent?, children?,
-desktopVisible, mobileVisible, footerVisible, requiresAuth?, campaignPhase?,
-featured?, external?, analyticsEvent?
-```
+### 1. Central tier + category config
+- Extend `src/config/recognition/taxonomy2026.ts` (or add `tierConfig.ts` alongside) with per-tier metadata the pages need: `tierNumber`, `recognitionType`, `selectionMethod`, `nominationOpen`, `nominationClose`, `voteEnabled`, `eligibilitySummary`, `evidenceRequirements[]`, `evaluationCriteria[]`, `heroCopy`, `whoCanBeNominated`, `finalCta`.
+- Guarantee every one of the 18 categories carries: `slug`, `name`, `description`, `nomineeType`, `geographicScope`, `selectionMethod`, `status` (`open|coming-soon|closed|voting|finalists|winners`), `subcategories[]`, `classifications[]?` (Icon only), `formSlug` (link into `awardCategoryForms.ts`).
 
-Keep `src/config/campaignPhase.ts` (already exists) as the phase driver for CTAs and announcements. Delete/deprecate `siteNavigation.ts`, `enablersTaxonomy.ts` (fold into new config or import-only), and any ad-hoc menu arrays in components.
+### 2. Awards landing `/awards`
+- Refactor to render the 4-tier overview from config: hero ("Four Recognition Tiers. One Continental Mission."), tier cards with tier number, description, recognition type, who may be nominated, selection method, category count, "Explore Tier" + "Nominate" CTAs.
 
-Top-level groups (in order): About · Awards · Education Enablers · Impact Programmes · Media & Events · Get Involved.
+### 3. Tier landing pages (4)
+- One shared `TierLandingPage` component driven by tier slug. Routes:
+  - `/awards/africa-education-icon`
+  - `/awards/gold-blue-garnet`
+  - `/awards/platinum-recognition`
+  - `/awards/influencer-education-impact`
+- Sections: Hero → About this tier → Who can be nominated → Category directory (cards linking to category page + nomination) → How selection works → Evidence requirements → Existing nominees (verified only) → Final CTA. Breadcrumbs on every page.
+- Icon page keeps the 3 classifications (Africans in Africa / Diaspora / Friends of Africa) as tabs on category pages; single page, not 3 duplicates. Icon page states jury-selected; hides voting language.
 
-## 2. Dropdown/mega-menu contents
+### 4. Category pages
+- One reusable `CategoryDetailPage` (already exists; extend) rendered at:
+  - `/awards/africa-education-icon/:categorySlug`
+  - `/awards/gold-blue-garnet/:categorySlug`
+  - `/awards/platinum-recognition/:categorySlug`
+  - `/awards/influencer-education-impact/:categorySlug`
+- Content: hero image, description, eligibility, geographic scope, subcategories, classifications (Icon only), selection method, evaluation criteria, evidence requirements, existing verified nominees, related categories, FAQs, "Nominate in this category" CTA. Draft/Coming Soon badge when category has no approved form.
 
-Build the six dropdowns exactly per the brief (sections 4A–4F). Enforce max 4 columns, 6–8 links each, with "View all" links to the section landing page. Long sector/region lists collapse behind directory landing pages, not columns.
+### 5. Nomination routing
+- `/nominate/:tierSlug/:categorySlug` resolves to the correct category-specific form via `getCategoryFormBySlug` in `awardCategoryForms.ts`. Preserves the existing draft/save/auth-at-submit flow from `src/components/nominate/*`.
+- Tier-specific form variants (Icon lifetime, GBG organisation, Platinum institutional, Influencer public-figure) already exist — wire tier → form component map and enforce required field sets per tier (per spec sections 5, 8, 10, 12).
+- Tier 1 forms strip all public-voting copy.
 
-## 3. Right-side actions
+### 6. Navigation + breadcrumbs
+- Awards mega-menu items match section 17 (Explore All Four Tiers, 4 tier links, Explore Existing Nominees, Nomination Guidelines, Judging & Voting, Awards Timeline). No category links in global nav.
+- Breadcrumb component on every tier / category / nominate page (Home > Awards > Tier > Category).
 
-`Search` (opens `GlobalSearch` modal) · `Nominate Now` (always visible, primary) · phase-aware secondary CTA · `Language` · `Sign In`/Account. All labels locked:
-- Primary: always "Nominate Now" → `/nominate`
-- Phase secondary via `campaignPhase.ts`: nomination→"Explore Nominees", voting→"Vote & Earn AGC", gala→"Get Gala Tickets"
+### 7. SEO + a11y
+- Per-route `<Helmet>` with unique title, description, canonical, OG. Breadcrumb JSON-LD.
+- Semantic headings, labelled form fields, keyboard nav, visible focus, adequate contrast — using existing shadcn/Radix primitives.
 
-## 4. Components to rebuild/replace
+### 8. Database
+The recognition spine tables already exist (`recognition_tiers`, `recognition_categories`, `recognition_subcategories`, `recognition_classifications`, `nominations`). No destructive changes; only add nullable columns if we need `evidence_requirements` / `evaluation_criteria` server-side. Existing nominee + nomination data preserved. No migration required for Phase 1 (config-driven); flag Phase 2 migration only if we move criteria/evidence copy from TS into DB.
 
-```
-src/components/navigation/
-  AnnouncementBar.tsx        (rotating, ≤3, campaign-only)
-  SiteHeader.tsx             (thin shell)
-  DesktopNavigation.tsx      (Radix NavigationMenu, 6 items)
-  MegaMenu.tsx               (shared 1–4 column renderer)
-  MobileNavigation.tsx       (drawer + accordions, same IA)
-  MobileBottomActions.tsx    (Explore·Nominate·Vote·Menu)
-  GlobalSearch.tsx           (⌘K modal; searches enablers/nominees/etc.)
-  CampaignCTA.tsx            (reads campaignPhase)
-  AccountMenu.tsx            (signed-in vs signed-out)
-  LanguageSelector.tsx       (wrap existing switcher)
-```
+## Out of scope (this pass)
+- No changes to voting engine, wallet, judging RPC.
+- No net-new categories — we only render what config already approves; missing content marked Draft.
+- No footer / homepage layout changes.
 
-Delete: `EducationEnablersMegaMenu.tsx` (folded into MegaMenu), any legacy `MainNav.tsx`.
+## Technical notes
+- Single tier component: `src/pages/awards/TierLandingPage.tsx` (extract from existing `AwardCategoryStandardPage.tsx` where possible).
+- Config additions co-located in `src/config/recognition/tierPageContent.ts` (typed).
+- Status badges use existing `Badge` variants + design tokens (`bg-primary`, `bg-muted`, `bg-accent`) — no hardcoded colors.
+- All 4 tier pages, 18 category pages, and 4 form templates render off the same 2 shared components; adding a new subcategory becomes a config-only change.
 
-## 5. Footer
+## Deliverables
+- 4 tier pages + 18 category pages routing cleanly, all sourced from `recognition/*` and `nomination/*` config.
+- Category-specific nomination forms live per tier at `/nominate/:tier/:category`.
+- Breadcrumbs, SEO tags, and a11y on every tier + category page.
+- Redirect audit for any legacy `/awards/*` paths that shift slug.
+- Playwright smoke: `/awards`, each tier page, one category per tier, one nominate route per tier — asserting no 404 and hero heading present.
 
-Rewrite `src/components/PublicFooter.tsx` to four columns exactly per brief §8 (Platform, Participate, Trust & Support, Legal). No sector/region dumps.
-
-## 6. Route audit + redirects
-
-Script (`scripts/audit-routes.ts`) walks `src/App.tsx` and greps `<Link to=`/`navigate(` to produce a route inventory. Then add redirect `<Route>`s in `App.tsx`:
-
-```
-/recognition/*   → /awards/*
-/directory       → /education-enablers
-/companies       → /education-enablers
-/organisations   → /education-enablers
-/gala            → /events/gala-2026
-/tickets         → /events/gala-tickets
-/support         → /get-involved
-/partner         → /get-involved/partner
-/sponsor         → /sponsors  (kept as canonical alias)
-/gala-tickets    → /events/gala-tickets
-```
-Also fold existing `/awards/*` variants once canonicals confirmed. No redirects added before the audit confirms no live-content collision.
-
-## 7. Active-state + breadcrumbs
-
-Central helper `getActiveSection(pathname)` used by desktop, mobile, and breadcrumb components. Only one top-level group active per route. Breadcrumb component reads from route metadata attached to each nav node.
-
-## 8. Accessibility
-
-All menus via Radix (`NavigationMenu`, `DropdownMenu`, `Dialog` for mobile drawer/search). `aria-expanded`, `aria-controls`, focus trap on drawer, Escape to close, focus restoration, `prefers-reduced-motion`, ≥44px tap targets, visible `focus-visible` rings, background scroll lock via Radix Dialog. Announcement bar uses `aria-live="polite"`.
-
-## 9. Analytics
-
-Extend `src/lib/analytics.ts` with `trackNav(event, payload)` events per brief §18. Each nav node's `analyticsEvent` fires exactly once per click (dedupe by node id + timestamp) so overlapping surfaces don't double-fire.
-
-## 10. Tests
-
-Playwright specs under `tests/e2e/`:
-- `nav-ia-desktop.spec.ts` — six groups, single active state, no duplicate hrefs across groups
-- `nav-mobile-drawer.spec.ts` — accordion parity, focus trap, Escape, scroll lock
-- `nav-cta-phase.spec.ts` — CTA labels swap per phase config
-- `nav-redirects.spec.ts` — every entry in redirect table resolves
-- `footer-ia.spec.ts` — four columns, no sector/region dumps
-
-Vitest: `navigation.config.test.ts` asserts (a) exactly 6 top-level groups, (b) no href appears under two different `section`s, (c) every leaf has an `analyticsEvent`.
-
-## 11. Delivery artefacts
-
-At the end: screenshots (desktop navbar, mobile drawer, Education Enablers mega, mobile bottom actions), the config file, removed-duplicates list, merged-groups list, redirect table, changed-components list, a11y test output.
-
-## Execution order
-
-1. Write `config/navigation.ts` + Vitest guard.
-2. Build `MegaMenu`, `DesktopNavigation`, `MobileNavigation`, `MobileBottomActions`, `AnnouncementBar`, `AccountMenu`, `GlobalSearch` skeleton (search hooks stubbed to existing endpoints where present).
-3. Wire into `SiteHeader.tsx`; delete legacy nav components.
-4. Rewrite `PublicFooter.tsx`.
-5. Run route audit → add redirects → update internal links flagged as non-canonical.
-6. Add breadcrumbs + active-state helper.
-7. Analytics wiring.
-8. Tests + capture delivery screenshots.
-
-## Confirm before I start
-
-- Scope confirmation: this refactor will touch ~40–60 files (nav config, header/footer, ~30 internal `<Link>` fixes, App.tsx redirect block, tests). OK to proceed as one large change, or split into (a) config+desktop, (b) mobile+footer, (c) redirects+tests?
-- Global search: build a functional modal now (against existing enabler/nominee tables) or ship a stub that focuses the search input and routes to `/search?q=…`?
-- Bottom mobile bar: enable now, or keep hidden behind a flag until content teams sign off?
+Ready to build on approval.
