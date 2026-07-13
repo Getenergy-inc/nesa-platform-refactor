@@ -14,6 +14,7 @@ import {
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { RecognitionJourneyTimeline } from "@/components/timeline/RecognitionJourneyTimeline";
+import { MasterTimelineTable } from "@/components/timeline/MasterTimelineTable";
 import { RECOGNITION_JOURNEY_2026 } from "@/data/recognitionJourney2026";
 
 const SUMMARY_CARDS = [
@@ -121,8 +122,13 @@ export default function Timeline() {
         </div>
       </section>
 
-      {/* TIMELINE */}
-      <section className="container mx-auto px-4 py-20">
+      {/* MASTER TIMELINE (dated milestones) */}
+      <section className="container mx-auto px-4 py-16">
+        <MasterTimelineTable />
+      </section>
+
+      {/* TIMELINE (phase view) */}
+      <section className="container mx-auto px-4 pb-20">
         <RecognitionJourneyTimeline
           heading="The 13 Phases of the 2026 Journey"
           intro="From continental activation to recognition, gala and a year-long impact and legacy phase. Every milestone is designed to convert visibility into measurable education impact."
