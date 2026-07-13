@@ -843,6 +843,10 @@ const App = () => (
                   <Route path="/awards/platinum/diaspora" element={<Navigate to="/awards/platinum-recognition/diaspora" replace />} />
                   <Route path="/awards/influencer-education-impact" element={<InfluencerImpact2026 />} />
                   <Route path="/awards/influencer-education-impact/nominees" element={<InfluencerNomineesDirectoryPage />} />
+                  <Route path="/nominees/influencer-education-impact/:sub" element={<WithLayout><InfluencerSubcategoryPage /></WithLayout>} />
+                  <Route path="/recognition/influencer-education-impact/african-social-media-influencers" element={<WithLayout><InfluencerSubcategoryPage slugOverride="african-social-media-influencers" /></WithLayout>} />
+                  <Route path="/recognition/influencer-education-impact/african-sports-icons-supporting-education" element={<WithLayout><InfluencerSubcategoryPage slugOverride="african-sports-icons-supporting-education" /></WithLayout>} />
+                  <Route path="/recognition/influencer-education-impact/african-music-icons-supporting-education" element={<WithLayout><InfluencerSubcategoryPage slugOverride="african-music-icons-supporting-education" /></WithLayout>} />
 
                   {/* Legacy shell — keep importable from other entry points */}
                   <Route
