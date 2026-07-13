@@ -1,58 +1,94 @@
+# NESA-Africa Navbar Refactor — Implementation Plan
 
 ## Goal
+Replace the current 7-item nav with a 6-group ecosystem navbar that repositions NESA-Africa as a continental education platform (not "just awards"), with mega menus, campaign-phase CTAs, an announcement bar and an accessible mobile drawer — driven by one config.
 
-Reallocate today's 18 Gold–Blue Garnet award categories across the four recognition tiers exactly as you described:
+## Scope (this pass)
+Frontend/presentation only. Existing routes, forms, auth, voting and sponsor logic remain untouched — new links either point to existing routes or to redirect aliases.
 
-- **9** categories under **Gold–Blue Garnet** (programme / organisation recognition)
-- **7** categories under **Platinum** (institutional / systemic recognition)
-- **1** meta-category under **Africa Education Icon Award** (its three lifetime pathways: Philanthropy, Literary & Curriculum, Technical)
-- **1** meta-category under **Influencer Education Impact** (its three subcategories: Social Media, Sports, Music)
+## Deliverables
 
-Then render every category as a link card on its parent tier page so users can jump directly into `/awards/18-categories/:slug`.
+### 1. Single navigation config
+`src/config/siteNavigation.ts` — rewrite as the source of truth used by desktop nav, mobile drawer and footer. Adds: `description`, `icon`, `featured`, `sections` (for mega menus), `campaignPhase`, `analyticsId`.
 
-## Proposed mapping (based on current architecture semantics + prior tier docs)
+Top-level (desktop, logo = Home):
+1. About
+2. Awards
+3. Education Enablers (mega menu: Explore / 8 RECs / 20 Sectors / EdTech / Actions)
+4. Impact Programmes
+5. Media & Events
+6. Get Involved
 
-**Gold–Blue Garnet (9 — organisations, programmes, campaigns):**
-1. csr-for-education
-2. education-philanthropy
-3. ngos-advancing-education
-4. edtech-and-ai-innovation
-5. stem-education
-6. tvet-and-technical-education
-7. media-and-journalism-for-education
-8. school-transformation
-9. skills-development-and-employability
+Right cluster: Search · **Nominate Now** (primary) · **Vote & Earn AGC** (secondary, phase-driven) · Language · Sign In.
 
-**Platinum (7 — institutions & systemic leadership):**
-1. universities-and-higher-education
-2. libraries-and-knowledge-systems
-3. research-and-curriculum-development
-4. faith-based-organisations
-5. institutional-and-bilateral-grants
-6. education-policy-and-government
-7. regional-education-leadership
+### 2. Campaign-phase CTA config
+`src/config/campaignPhase.ts` — exports current phase + primary/secondary CTA labels/hrefs (nomination / voting / gala). Consumed by header + announcement bar.
 
-**Africa Education Icon (1 meta-category → 3 pathways):**
-- africa-education-icon → Philanthropy · Literary & Curriculum · Technical Education
+### 3. Announcement bar
+`src/components/navigation/AnnouncementBar.tsx` — slim rotating strip above header, ≤3 messages from config, dismissible (sessionStorage), clickable, mobile-safe. Data in `src/config/announcements.ts`.
 
-**Influencer Impact (1 meta-category → 3 subcategories):**
-- influencer-education-impact → Social Media · Sports · Music
+### 4. Header rewrite
+`src/components/navigation/SiteHeader.tsx` — refactor to:
+- Announcement bar → main header row
+- Desktop: logo, 6 nav items with Radix `NavigationMenu` dropdowns and one true mega menu for Education Enablers
+- Mobile: logo · compact Nominate · hamburger → `Sheet` drawer with accordion sections in the specified order, search at top, ESC + focus-return preserved
+- Optional sticky mobile bottom actions (Explore / Nominate / Vote / Menu) behind a flag, with body `pb-` offset
 
-Not mapped in the 9/7 split (three residual categories from today's 18 that no longer fit either bucket cleanly): `inclusive-and-special-needs-education`, `early-childhood-education`. These logically belong to the **Rebuild My School Africa / Special-Needs** stream, not to the 4-tier recognition. I'll relocate them under the Special Needs and EduAid-Africa hubs (existing pages) rather than delete them.
+### 5. Mega menu component
+`src/components/navigation/EducationEnablersMegaMenu.tsx` — 4-column panel: Explore · Browse by REC (8) · Browse by Sector (top 8 + "View all 20") · EdTech (4) · Actions strip. Reads from `src/config/enablersTaxonomy.ts` (new: RECs, 20 sectors, EdTech subcats).
 
-If any of those three should instead stay on Gold–Blue Garnet or move to Platinum, say the word and I'll adjust before wiring.
+### 6. Global search
+Reuse existing `NavSearch` (Cmd+K dialog) — extend index groups to include Education Enablers, Sectors, RECs, Events. Placeholder updated to the required copy.
 
-## Implementation
+### 7. Route preservation & redirects
+`src/App.tsx` — add `<Navigate>` aliases for new URLs that don't yet have dedicated pages, mapping to closest existing page:
+- `/education-enablers/regions/:rec` → existing region hubs
+- `/education-enablers/sectors[/:slug]` → prospective-org / directory filter
+- `/education-enablers/edtech/*` → existing EdTech page
+- `/impact/*` → existing EduAid / Rebuild / Special Needs routes
+- `/media-events`, `/events/*` → existing media + gala routes
+- `/about/*` → About consolidated anchors
+- `/vote` → Gold-Blue Garnet vote hub
+No page deletions. No content replacement.
 
-1. **`src/config/recognitionArchitecture2026.ts`** — split the existing 18-category list into two `categories: []` arrays per the mapping above. Add Icon + Influencer meta-category entries where they already live.
-2. **`src/config/recognition/categoryAlias.ts`** — extend `CATEGORY_TO_REGISTRY` with entries for any moved categories so subcategory counts continue to resolve.
-3. **`src/pages/awards/GoldBlueGarnet.tsx` / `Platinum*.tsx`** — under each tier page, render a new "Award Categories" grid using the shared `SubcategoryPathways` component (already used on Icon and Influencer). Cards link to `/awards/18-categories/:slug`; nomination form on each tier page stays intact.
-4. **`src/pages/awards/EighteenCategoriesPage.tsx`** — add a `tier` badge on each card and a `groupBy=tier` toggle so the /18-categories index still shows all 18 but grouped by parent tier.
-5. **Update `docs/refactor/sitemap-38.md`** and inline nav copy where the count "18 Gold–Blue Garnet categories" appears so it reads "18 categories across 4 tiers (9 Gold–Blue Garnet · 7 Platinum · Icon · Influencer)".
-6. No DB / RLS / edge-function changes required — the 18-category registry is purely front-end config.
+### 8. Analytics
+Extend `src/lib/analytics.ts` with `trackNav(event, {label, href, section, phase, device})` and wire it into every dropdown open, mega-menu click, CTA click, search open, drawer open, language change, sign-in click.
 
-## Out of scope
+### 9. Accessibility
+- Semantic `<nav aria-label>`, Radix primitives for aria-expanded/controls, focus-visible rings, ESC-to-close, focus return to hamburger, 44px targets, reduced-motion respect, no hover-only dropdowns.
 
-- Rewriting subcategory registries or category detail pages
-- Changing the nomination form logic on any tier page (kept exactly as-is)
-- The full narrative rewrite from your last message — that is a separate copy task; ping me and I'll fold those long-form sections into each tier page next.
+### 10. Tests
+- `tests/e2e/navbar-ecosystem-desktop.spec.ts` — 6 groups render, mega menu opens, CTAs visible, active state, ESC closes.
+- `tests/e2e/navbar-ecosystem-mobile.spec.ts` — drawer order, accordion single-open, focus return, Nominate visible, no scroll leak.
+- Extend `banned-strings` check to flag re-introduction of "education changemakers" in nav copy.
+
+## Files created
+- `src/config/campaignPhase.ts`
+- `src/config/announcements.ts`
+- `src/config/enablersTaxonomy.ts`
+- `src/components/navigation/AnnouncementBar.tsx`
+- `src/components/navigation/EducationEnablersMegaMenu.tsx`
+- `tests/e2e/navbar-ecosystem-desktop.spec.ts`
+- `tests/e2e/navbar-ecosystem-mobile.spec.ts`
+
+## Files modified
+- `src/config/siteNavigation.ts` (full rewrite of structure)
+- `src/components/navigation/SiteHeader.tsx` (announcement bar + 6-group nav + phase CTA)
+- `src/components/navigation/NavSearch.tsx` (extended index + placeholder)
+- `src/lib/analytics.ts` (`trackNav` helper)
+- `src/App.tsx` (route aliases / redirects)
+
+## Explicit non-goals
+- No new landing pages for sectors/RECs/EdTech subcats — links target existing pages or filtered directory views.
+- No changes to nomination form, voting engine, auth, RLS, edge functions.
+- No visual redesign of pages below the header.
+- No footer restructure this pass (config is ready for it next).
+
+## Risks & mitigations
+- **Route drift:** every new nav href is checked against `App.tsx`; missing ones get a `<Navigate>` alias, never a dead link.
+- **Mega-menu size on tablet:** collapse to standard dropdown below `lg`; mobile uses accordion.
+- **Announcement bar height on mobile:** capped at 32px, single line, marquee-free.
+- **CTA label churn:** driven from `campaignPhase.ts` so admins flip phase without touching components.
+
+## Acceptance
+Matches the 22-point acceptance checklist in the brief: 6 groups, logo=home, mega menu with 8 RECs + 20 sectors + 4 EdTech subcats, Nominate strongest CTA, phase-driven secondary CTA, accessible mobile accordion drawer, all existing routes preserved or redirected, analytics events emitted, keyboard + screen-reader support verified by E2E.
