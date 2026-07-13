@@ -576,14 +576,15 @@ export function SiteHeader() {
         <div className="container mx-auto px-4 flex items-center justify-between gap-3 h-14 lg:h-16">
           <BrandBlock />
           <DesktopNav />
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-2 shrink-0">
             <NavSearch className="hidden sm:inline-flex" />
-            <NominateButton className="text-xs sm:text-sm px-3 sm:px-4 py-1.5 sm:py-2 h-9 sm:h-10" />
+            <NominateButton className="text-xs sm:text-sm px-3 sm:px-4 py-1.5 sm:py-2 h-9 sm:h-10 whitespace-nowrap" />
             <SecondaryPhaseCTA />
             <AccountActions />
             <MobileMenu />
           </div>
         </div>
+
       </header>
     </>
   );
