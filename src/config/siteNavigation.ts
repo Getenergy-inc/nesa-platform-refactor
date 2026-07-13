@@ -62,15 +62,22 @@ export const SITE_NAV: NavItem[] = [
         ],
       },
       {
-        title: "Award Participation",
+        title: "Explore",
         items: [
           { label: "Explore Existing Nominees", href: "/nominees" },
+          { label: "Featured Nominees", href: "/nominees?filter=featured" },
+          { label: "Nominee Profiles", href: "/nominees?view=profiles" },
           { label: "Categories & Subcategories", href: "/awards/categories" },
+        ],
+      },
+      {
+        title: "Process",
+        items: [
           { label: "Eligibility & Nomination Rules", href: "/awards/eligibility" },
+          { label: "Nomination Guidelines", href: "/guidelines/nominees" },
+          { label: "Nominator Guidelines", href: "/guidelines/nominators" },
           { label: "Judging & Public Voting", href: "/awards/judging" },
           { label: "Awards Timeline", href: "/timeline" },
-          { label: "Nominee Guidelines", href: "/guidelines/nominees" },
-          { label: "Nominator Guidelines", href: "/guidelines/nominators" },
         ],
       },
     ],
