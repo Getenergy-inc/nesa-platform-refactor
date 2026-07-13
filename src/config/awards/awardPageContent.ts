@@ -307,10 +307,10 @@ const GOLD_BLUE_GARNET: AwardPageContent = {
     },
   ],
   finalCta: {
-    heading: "9 categories. 63 subcategories. One continental honour.",
-    body: "Nominate a corporation, NGO, EdTech innovator, STEM programme, media house, creative or Nigerian state advancing education across Africa.",
-    primary: { label: "Nominate in This Category", href: "/nominate?tier=gold-blue-garnet" },
-    secondary: { label: "Explore Existing Nominees", href: "/nominees?tier=blue-garnet" },
+    heading: "Join the Movement",
+    body: "If your organisation is helping to build stronger education systems, expand learning opportunities, empower teachers, support learners or advance educational innovation, we invite you to become part of Africa's growing community of Education Enablers. The Blue Garnet Award 2026 is the beginning of a continental journey — recognising today's Education Enablers while building the trusted foundation for Africa's premier competitive education recognition programme from 2027 onward.",
+    primary: { label: "Nominate an Education Enabler", href: "/nominate?tier=gold-blue-garnet" },
+    secondary: { label: "Explore the Africa Education Impact Directory", href: "/nominees?tier=blue-garnet" },
   },
 };
 
