@@ -37,6 +37,7 @@ const BRAND_TAGLINE = "Enablers of Education for All Across Africa";
 
 export default function CategoryDetailPage() {
   const { categorySlug } = useParams<{ categorySlug: string }>();
+  const [searchParams] = useSearchParams();
   const tier = getTierBySlug("gold-blue-garnet");
   const category = tier?.categories.find((c) => c.slug === categorySlug);
   const subcategories = useMemo(
@@ -47,6 +48,13 @@ export default function CategoryDetailPage() {
     () => (categorySlug ? buildCategoryForm(categorySlug) : null),
     [categorySlug],
   );
+  // Prefill subcategory from ?sub= / ?subcategory= if it matches an available option;
+  // otherwise fall back to the first subcategory (handled inside the form).
+  const subParam = searchParams.get("sub") ?? searchParams.get("subcategory") ?? undefined;
+  const prefillSubSlug = useMemo(() => {
+    if (!subParam || !form) return undefined;
+    return form.subcategories.find((s) => s.slug === subParam)?.slug;
+  }, [subParam, form]);
   const [dropdownOpen, setDropdownOpen] = useState(false);
 
   if (!category) return <Navigate to="/awards/18-categories" replace />;
