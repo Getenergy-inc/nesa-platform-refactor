@@ -33,50 +33,57 @@ interface FooterSection {
 
 const SECTIONS: FooterSection[] = [
   {
-    id: "platform",
-    title: "Platform",
+    id: "about",
+    title: "About",
     links: [
       { label: "About NESA-Africa", href: "/about" },
-      { label: "Awards", href: "/awards" },
-      { label: "Education Enablers", href: "/education-enablers" },
-      { label: "Impact Programmes", href: "/impact" },
-      { label: "Media & Events", href: "/media" },
+      { label: "Governance", href: "/governance" },
+      { label: "Nominee Research Corps (NRC)", href: "/about/nrc" },
+      { label: "SCEF", href: "/about/scef" },
+      { label: "Leadership", href: "/about#leadership" },
+    ],
+  },
+  {
+    id: "recognition",
+    title: "Recognition",
+    links: [
+      { label: "Africa Education Icon", href: "/awards/africa-education-icon" },
+      { label: "Blue Garnet Award", href: "/awards/gold-blue-garnet" },
+      { label: "Platinum Award", href: "/awards/platinum-recognition" },
+      { label: "Influencer Education Impact", href: "/awards/influencer-education-impact" },
+      { label: "Africa Education Impact Directory", href: "/nominees" },
+    ],
+  },
+  {
+    id: "impact",
+    title: "Impact",
+    links: [
+      { label: "EduAid-Africa", href: "/eduaid-africa" },
+      { label: "Rebuild My School Africa", href: "/eduaid-africa/rebuild-my-school" },
+      { label: "Scholarships", href: "/impact/scholarships" },
+      { label: "Afri-EduTourism", href: "/impact/afri-edutourism-2027" },
     ],
   },
   {
     id: "participate",
     title: "Participate",
     links: [
-      { label: "Nominate an Education Enabler", href: "/nominate" },
-      { label: "Africa Education Impact Directory", href: "/nominees" },
-      { label: "Vote & Earn AGC", href: "/vote" },
-      { label: "Become a Sponsor", href: "/sponsors" },
-      { label: "Volunteer & Local Chapters", href: "/get-involved/volunteer" },
-      { label: "Endorse NESA-Africa", href: "/get-involved/endorse-nesa-africa" },
-      { label: "Donate", href: "/donate" },
+      { label: "Nominate", href: "/nominate" },
+      { label: "Volunteer", href: "/volunteer" },
+      { label: "Local Chapters", href: "/chapters" },
+      { label: "Sponsor", href: "/sponsors" },
+      { label: "Partner", href: "/get-involved/partner" },
     ],
   },
   {
-    id: "trust",
-    title: "Trust & Support",
+    id: "support",
+    title: "Support",
     links: [
-      { label: "Governance", href: "/governance" },
-      { label: "Judges", href: "/judges" },
-      { label: "Integrity Policy", href: "/governance#integrity" },
-      { label: "Verification", href: "/governance#verification" },
-      { label: "FAQs", href: "/about#faqs" },
+      { label: "FAQs", href: "/faqs" },
       { label: "Contact", href: "/contact" },
-    ],
-  },
-  {
-    id: "legal",
-    title: "Legal",
-    links: [
       { label: "Privacy Policy", href: "/policies#privacy" },
       { label: "Terms and Conditions", href: "/policies#terms" },
-      { label: "Cookie Policy", href: "/policies#cookies" },
       { label: "Accessibility", href: "/policies#accessibility" },
-      { label: "Sponsorship Non-Influence Policy", href: "/policies#non-influence" },
     ],
   },
 ];
@@ -94,7 +101,7 @@ export function NESAFooter() {
       <h2 id="footer-heading" className="sr-only">Site footer</h2>
 
       <div className="container mx-auto px-4 pt-10 md:pt-14">
-        <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-6 md:gap-10 mb-8">
+        <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-7 md:gap-10 mb-8">
           {/* Brand / Mission — spans 2 cols on desktop */}
           <div className="lg:col-span-2 text-center md:text-left">
             <div className="flex items-center gap-3 justify-center md:justify-start mb-3">
