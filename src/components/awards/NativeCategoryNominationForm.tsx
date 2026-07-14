@@ -1,5 +1,6 @@
 import { useMemo, useState } from "react";
-import { Loader2, Send, ShieldCheck } from "lucide-react";
+import { AlertCircle, Loader2, Send, ShieldCheck } from "lucide-react";
+import { z } from "zod";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -16,6 +17,39 @@ import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
 import type { AwardCategoryForm } from "@/config/nomination/types";
 import { ICON_NOMINEE_TYPES } from "@/config/nomination/iconTaxonomy";
+import { trackEvent } from "@/lib/analytics";
+
+// Mirrors the server-side zod schema in supabase/functions/nominations-submit.
+const submitSchema = z.object({
+  subcategory_slug: z.string().trim().max(120).optional(),
+  nominee_name: z.string().trim().min(2, "Nominee name is required").max(200),
+  nominee_country: z.string().trim().max(120).optional(),
+  organization: z.string().trim().max(200).optional(),
+  website: z
+    .string()
+    .trim()
+    .max(500)
+    .refine((v) => !v || /^https?:\/\//i.test(v), "Website must start with http(s)://")
+    .optional(),
+  social_links: z.string().trim().max(2000).optional(),
+  impact_summary: z
+    .string()
+    .trim()
+    .min(20, "Impact summary needs at least 20 characters")
+    .max(4000),
+  reason: z
+    .string()
+    .trim()
+    .min(20, "Reason needs at least 20 characters")
+    .max(4000),
+  nm_full_name: z.string().trim().min(2, "Your full name is required").max(160),
+  nm_email: z.string().trim().email("Enter a valid email").max(255),
+  nm_phone: z.string().trim().max(40).optional(),
+  nm_country_residence: z.string().trim().max(120).optional(),
+  nm_consent: z.literal(true, {
+    errorMap: () => ({ message: "Consent is required to submit" }),
+  }),
+});
 
 interface Props {
   /** Resolved category form whose subcategories become the "nominee category" dropdown. */
