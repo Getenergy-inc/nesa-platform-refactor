@@ -1,7 +1,8 @@
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { Trophy, ArrowRight, LayoutGrid, CheckCircle2 } from "lucide-react";
+import { Trophy, ArrowRight, Search } from "lucide-react";
 import { trackEvent } from "@/lib/analytics";
+
 
 const onCta = (cta: string, to: string) => () =>
   trackEvent("hero_cta_click", { cta, to, location: "hero" });
