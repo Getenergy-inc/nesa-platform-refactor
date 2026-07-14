@@ -305,7 +305,12 @@ export default function CategoryDetailPage() {
                 <span className="text-gold">{BRAND_TAGLINE}</span>.
               </p>
             </div>
-            <NativeCategoryNominationForm form={form} />
+            <NativeCategoryNominationForm
+              form={form}
+              successRedirectHref="/awards/gold-blue-garnet/nominees"
+              successRedirectLabel="Gold–Blue Garnet Nominees"
+            />
+
           </div>
         </section>
       )}
