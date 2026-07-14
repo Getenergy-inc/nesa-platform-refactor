@@ -24,7 +24,7 @@ import { lazy } from "react";
 import { useTranslation } from "react-i18next";
 import { LocalizedSEO } from "@/components/seo/LocalizedSEO";
 
-import { TrophyHeroSection } from "@/components/nesa/TrophyHeroSection";
+import { HomeHeroBlock } from "@/components/home/HomeHeroBlock";
 import { PublicNominationsNotice } from "@/components/nesa/PublicNominationsNotice";
 import { CountdownSection } from "@/components/nesa/CountdownSection";
 import { NESAFooter } from "@/components/nesa/NESAFooter";
@@ -89,8 +89,8 @@ export function NESALandingPage() {
         <UtilityBar />
         <NESAHeader />
 
-        {/* 1. HERO */}
-        <TrophyHeroSection />
+        {/* 1. HERO — Phase 1 above-the-fold: HeroCompact + TierNoticeBanner + TrustIndicators */}
+        <HomeHeroBlock />
 
         {/* 1b. PUBLIC NOTICE — Nominations for all 4 tiers open 1 August 2026 */}
         <PublicNominationsNotice />
