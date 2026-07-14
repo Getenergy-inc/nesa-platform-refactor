@@ -1,5 +1,5 @@
 import { useMemo, useState } from "react";
-import { Link, useParams, Navigate } from "react-router-dom";
+import { Link, useParams, Navigate, useSearchParams } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import { motion } from "framer-motion";
 import {
@@ -37,6 +37,7 @@ const BRAND_TAGLINE = "Enablers of Education for All Across Africa";
 
 export default function CategoryDetailPage() {
   const { categorySlug } = useParams<{ categorySlug: string }>();
+  const [searchParams] = useSearchParams();
   const tier = getTierBySlug("gold-blue-garnet");
   const category = tier?.categories.find((c) => c.slug === categorySlug);
   const subcategories = useMemo(
@@ -47,6 +48,13 @@ export default function CategoryDetailPage() {
     () => (categorySlug ? buildCategoryForm(categorySlug) : null),
     [categorySlug],
   );
+  // Prefill subcategory from ?sub= / ?subcategory= if it matches an available option;
+  // otherwise fall back to the first subcategory (handled inside the form).
+  const subParam = searchParams.get("sub") ?? searchParams.get("subcategory") ?? undefined;
+  const prefillSubSlug = useMemo(() => {
+    if (!subParam || !form) return undefined;
+    return form.subcategories.find((s) => s.slug === subParam)?.slug;
+  }, [subParam, form]);
   const [dropdownOpen, setDropdownOpen] = useState(false);
 
   if (!category) return <Navigate to="/awards/18-categories" replace />;
@@ -217,8 +225,23 @@ export default function CategoryDetailPage() {
                 <span className="text-gold">{BRAND_TAGLINE}</span>.
               </p>
             </div>
+            <div className="mb-4 rounded-lg border border-gold/30 bg-gold/5 px-4 py-3 text-sm text-ivory/80">
+              <span className="text-gold font-semibold">Prefilled:</span> Award
+              category is locked to{" "}
+              <span className="text-gold">{category.name}</span>
+              {form.subcategories.length > 0 && (
+                <>
+                  {" "}· Subcategory defaults to{" "}
+                  <span className="text-gold">
+                    {(form.subcategories.find((s) => s.slug === (prefillSubSlug ?? form.subcategories[0]?.slug))?.name) ?? form.subcategories[0]?.name}
+                  </span>
+                  {" "}(change it in the dropdown below).
+                </>
+              )}
+            </div>
             <NativeCategoryNominationForm
               form={form}
+              defaultSubcategorySlug={prefillSubSlug}
               successRedirectHref="/awards/gold-blue-garnet/nominees"
               successRedirectLabel="Gold–Blue Garnet Nominees"
             />
