@@ -197,6 +197,35 @@ export default function CategoryDetailPage() {
         </div>
       )}
 
+      {/* Inline Nomination Form — surfaced FIRST so visitors can nominate immediately */}
+      {form && (
+        <section
+          id="nominate"
+          className="border-b border-gold/20 bg-charcoal-light/30 py-12 md:py-16 scroll-mt-24"
+        >
+          <div className="container mx-auto max-w-4xl px-4">
+            <div className="mb-6 text-center">
+              <Badge className="mb-3 border-gold/40 bg-gold/10 text-gold">
+                <UserPlus className="mr-1.5 h-3 w-3" /> Nominate an Enabler
+              </Badge>
+              <h2 className="font-serif text-2xl md:text-4xl text-ivory">
+                Nominate for {category.name}
+              </h2>
+              <p className="mx-auto mt-3 max-w-2xl text-sm text-ivory/70">
+                Submit a nomination directly — NRC will evidence-check the entry
+                before it enters public review.{" "}
+                <span className="text-gold">{BRAND_TAGLINE}</span>.
+              </p>
+            </div>
+            <NativeCategoryNominationForm
+              form={form}
+              successRedirectHref="/awards/gold-blue-garnet/nominees"
+              successRedirectLabel="Gold–Blue Garnet Nominees"
+            />
+          </div>
+        </section>
+      )}
+
       {/* Subcategories */}
       <section className="container mx-auto px-4 py-12 md:py-16">
         <div className="mb-6 flex flex-wrap items-end justify-between gap-3">
@@ -278,40 +307,10 @@ export default function CategoryDetailPage() {
             </h2>
           </div>
           <p className="mb-4 text-sm text-ivory/60 max-w-2xl">
-            Endorse an enabler already nominated, or scroll down to nominate another —
+            Endorse an enabler already nominated, or scroll up to nominate another —
             <span className="text-gold"> {BRAND_TAGLINE}</span>.
           </p>
           <CategorySubcategoryNominees form={form} />
-        </section>
-      )}
-
-      {/* Inline Nomination Form */}
-      {form && (
-        <section
-          id="nominate"
-          className="border-t border-gold/20 bg-charcoal-light/30 py-12 md:py-16 scroll-mt-24"
-        >
-          <div className="container mx-auto max-w-4xl px-4">
-            <div className="mb-6 text-center">
-              <Badge className="mb-3 border-gold/40 bg-gold/10 text-gold">
-                <UserPlus className="mr-1.5 h-3 w-3" /> Nominate an Enabler
-              </Badge>
-              <h2 className="font-serif text-2xl md:text-4xl text-ivory">
-                Nominate for {category.name}
-              </h2>
-              <p className="mx-auto mt-3 max-w-2xl text-sm text-ivory/70">
-                Submit a nomination directly — NRC will evidence-check the entry
-                before it enters public review.{" "}
-                <span className="text-gold">{BRAND_TAGLINE}</span>.
-              </p>
-            </div>
-            <NativeCategoryNominationForm
-              form={form}
-              successRedirectHref="/awards/gold-blue-garnet/nominees"
-              successRedirectLabel="Gold–Blue Garnet Nominees"
-            />
-
-          </div>
         </section>
       )}
 
