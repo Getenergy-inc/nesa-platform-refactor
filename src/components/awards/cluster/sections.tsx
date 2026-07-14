@@ -215,10 +215,19 @@ export function TierNominateSection({ tier }: { tier: TierClusterConfig }) {
 function TierCTAStack({ tier }: { tier: TierClusterConfig }) {
   return (
     <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-4 space-y-2">
-      <Link to={tier.nominate.ctaHref} className={`${btnBase} w-full ${accentBtn[tier.accent]}`}>
-        {tier.nominate.ctaLabel}
-        <ArrowRight className="h-4 w-4" aria-hidden />
-      </Link>
+      <StageGate
+        action="nominations"
+        fallback={
+          <div className="rounded-xl border border-white/10 bg-charcoal/60 px-4 py-3 text-center text-xs text-white/70">
+            Nominations are currently closed. <Link to="/timeline" className="underline text-white">See timeline</Link>
+          </div>
+        }
+      >
+        <Link to={tier.nominate.ctaHref} className={`${btnBase} w-full ${accentBtn[tier.accent]}`}>
+          {tier.nominate.ctaLabel}
+          <ArrowRight className="h-4 w-4" aria-hidden />
+        </Link>
+      </StageGate>
       <Link
         to={`/nominees?tier=${encodeURIComponent(tier.nominees.directoryFilterKey)}`}
         className={`${btnBase} w-full border-2 bg-transparent ${outlineBtn[tier.accent]}`}
