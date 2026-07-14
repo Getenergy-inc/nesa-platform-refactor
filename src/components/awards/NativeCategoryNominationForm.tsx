@@ -235,6 +235,20 @@ export function NativeCategoryNominationForm({ form, defaultSubcategorySlug }: P
         </span>
       </div>
 
+      {errorMsg && (
+        <div
+          role="alert"
+          aria-live="assertive"
+          className="flex items-start gap-2 rounded-lg border border-destructive/50 bg-destructive/10 p-3 text-sm text-destructive"
+        >
+          <AlertCircle className="h-4 w-4 mt-0.5 shrink-0" aria-hidden />
+          <div>
+            <p className="font-semibold">Nomination could not be submitted</p>
+            <p className="text-destructive/90">{errorMsg}</p>
+          </div>
+        </div>
+      )}
+
       {subOptions.length > 0 && (
         <div className="space-y-1.5">
           <Label htmlFor="subcategory">Nominee category *</Label>
