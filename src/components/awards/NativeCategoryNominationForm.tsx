@@ -272,6 +272,14 @@ export function NativeCategoryNominationForm({
             )}
             <Link
               to={successRedirectHref}
+              onClick={() =>
+                trackEvent("nomination_redirect_manual", {
+                  category: form.slug,
+                  family: form.family,
+                  subcategory: state.subcategory_slug || null,
+                  destination: successRedirectHref,
+                })
+              }
               className="inline-flex items-center justify-center rounded-lg border border-gold/60 bg-gold/10 px-4 py-2 text-sm font-semibold text-gold transition hover:bg-gold hover:text-charcoal"
             >
               Go to {successRedirectLabel ?? "Nominees"} now
