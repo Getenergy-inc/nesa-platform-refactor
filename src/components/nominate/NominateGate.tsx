@@ -82,7 +82,7 @@ export function NominateGate({ children }: NominateGateProps) {
                 <Link to={`/account/login?next=${next}`}>Sign in</Link>
               </Button>
               <Button asChild variant="outline">
-                <Link to={`/account/register?next=${next}`}>Create account</Link>
+                <Link to={`/register?next=${next}`}>Create account</Link>
               </Button>
             </div>
           </CardContent>
