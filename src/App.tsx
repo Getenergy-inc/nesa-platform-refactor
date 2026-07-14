@@ -104,6 +104,7 @@ import Winners from "./pages/awards/Winners";
 import GovernancePage from "./pages/GovernancePage";
 import EDXMatrixPage from "./pages/EDXMatrixPage";
 import { SponsorFirewallBanner } from "@/components/governance/SponsorFirewallBanner";
+import { NominateGate } from "@/components/nominate/NominateGate";
 
 /** Wraps a page with a top compact sponsor-firewall banner for governance visibility. */
 const WithFirewall = ({ children }: { children: React.ReactNode }) => (
@@ -1509,7 +1510,9 @@ const App = () => (
                     element={
                       <WithLayout>
                         <WithFirewall>
-                          <NominateMvp />
+                          <NominateGate>
+                            <NominateMvp />
+                          </NominateGate>
                         </WithFirewall>
                       </WithLayout>
                     }
