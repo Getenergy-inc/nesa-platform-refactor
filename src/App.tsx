@@ -156,6 +156,7 @@ import CategoryPage2026 from "./components/recognition2026/CategoryPage";
 import RedirectRoute from "./components/routing/RedirectRoute";
 import LegacyCategoryRedirect from "./components/routing/LegacyCategoryRedirect";
 import { LEGACY_RECOGNITION_REDIRECTS } from "./config/legacyRecognitionRedirects";
+import { REFACTOR_REDIRECTS_2026 } from "./config/refactorRedirects2026";
 
 import { ICON_CATEGORY, buildRedirectMap as buildCategoryRedirects } from "./config/awardCategories";
 
