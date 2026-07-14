@@ -149,6 +149,7 @@ import AwardSpinePage from "./pages/awards/AwardSpinePage";
 import EighteenCategoriesPage from "./pages/awards/EighteenCategoriesPage";
 import CategoryDetailPage from "./pages/awards/CategoryDetailPage";
 import TierCategorySubcategoryPage from "./pages/awards/TierCategorySubcategoryPage";
+import TierClusterPage from "./pages/awards/cluster/TierClusterPage";
 import RecognitionHubPage from "./pages/recognition/RecognitionHubPage";
 import CategoryPage2026 from "./components/recognition2026/CategoryPage";
 import RedirectRoute from "./components/routing/RedirectRoute";
@@ -847,6 +848,13 @@ const App = () => (
                   <Route path="/recognition/influencer-education-impact/african-social-media-influencers" element={<WithLayout><InfluencerSubcategoryPage slugOverride="african-social-media-influencers" /></WithLayout>} />
                   <Route path="/recognition/influencer-education-impact/african-sports-icons-supporting-education" element={<WithLayout><InfluencerSubcategoryPage slugOverride="african-sports-icons-supporting-education" /></WithLayout>} />
                   <Route path="/recognition/influencer-education-impact/african-music-icons-supporting-education" element={<WithLayout><InfluencerSubcategoryPage slugOverride="african-music-icons-supporting-education" /></WithLayout>} />
+
+                  {/* Standardized 4-subpage cluster (About · Criteria · Nominees · Nominate) for each recognition tier */}
+                  <Route path="/awards/:tier/about" element={<WithLayout><TierClusterPage subpage="about" /></WithLayout>} />
+                  <Route path="/awards/:tier/criteria" element={<WithLayout><TierClusterPage subpage="criteria" /></WithLayout>} />
+                  <Route path="/awards/:tier/nominees" element={<WithLayout><TierClusterPage subpage="nominees" /></WithLayout>} />
+                  <Route path="/awards/:tier/nominate" element={<WithLayout><TierClusterPage subpage="nominate" /></WithLayout>} />
+
 
                   {/* Legacy shell — keep importable from other entry points */}
                   <Route
