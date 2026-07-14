@@ -61,32 +61,30 @@ export function HeroCTAStack() {
         </Link>
       </motion.div>
 
-      {/* SECONDARY + TERTIARY row */}
-      <div className="mt-3 grid grid-cols-1 sm:grid-cols-2 gap-3">
-        <motion.div variants={item}>
-          <Link
-            to="/awards"
-            aria-label="Explore NESA-Africa 2026 Recognition framework"
-            onClick={onCta("explore_recognition_2026", "/awards")}
-            className={`${heroBtn} rounded-2xl bg-ivory text-gold border-2 border-ivory hover:-translate-y-1 hover:bg-white`}
-          >
-            <LayoutGrid className="h-5 w-5" strokeWidth={2.5} />
-            <span className="truncate">Explore Recognition 2026</span>
-          </Link>
-        </motion.div>
+      {/* SECONDARY — Explore the Africa Education Impact Directory */}
+      <motion.div variants={item} className="mt-3">
+        <Link
+          to="/nominees"
+          aria-label="Explore the Africa Education Impact Directory"
+          onClick={onCta("explore_impact_directory", "/nominees")}
+          className={`${heroBtn} rounded-2xl bg-transparent text-gold border-2 border-gold/70 hover:-translate-y-1 hover:bg-gold/10`}
+        >
+          <Search className="h-5 w-5" strokeWidth={2.5} />
+          <span className="truncate">Explore the Impact Directory</span>
+        </Link>
+      </motion.div>
 
-        <motion.div variants={item}>
-          <Link
-            to="/nominees/accept"
-            aria-label="Accept your NESA-Africa nomination"
-            onClick={onCta("accept_your_nomination", "/nominees/accept")}
-            className={`${heroBtn} rounded-2xl border-2 border-gold/60 bg-transparent text-gold hover:-translate-y-1 hover:bg-gold/10`}
-          >
-            <CheckCircle2 className="h-5 w-5" strokeWidth={2.5} />
-            <span className="truncate">Accept Your Nomination</span>
-          </Link>
-        </motion.div>
-      </div>
+      {/* Tertiary text link — nominees returning to accept */}
+      <motion.div variants={item} className="mt-3 text-center lg:text-left">
+        <Link
+          to="/nominees/accept"
+          onClick={onCta("accept_your_nomination", "/nominees/accept")}
+          className="inline-flex items-center gap-1.5 text-sm text-white/80 hover:text-gold underline-offset-4 hover:underline transition-colors"
+        >
+          Already nominated? Accept your nomination →
+        </Link>
+      </motion.div>
+
     </motion.div>
   );
 }
