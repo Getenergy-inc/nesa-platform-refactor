@@ -122,6 +122,7 @@ export function NativeCategoryNominationForm({ form, defaultSubcategorySlug }: P
   });
   const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const [errorMsg, setErrorMsg] = useState<string | null>(null);
 
   const set = <K extends keyof FormState>(k: K, v: FormState[K]) =>
     setState((p) => ({ ...p, [k]: v }));
@@ -129,18 +130,20 @@ export function NativeCategoryNominationForm({ form, defaultSubcategorySlug }: P
   const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (submitting) return;
+    setErrorMsg(null);
 
-    if (!state.nm_consent) return toast.error("Please confirm consent to continue.");
-    if (state.nominee_name.trim().length < 2) return toast.error("Nominee name is required.");
-    if (state.impact_summary.trim().length < 20)
-      return toast.error("Impact summary needs at least 20 characters.");
-    if (state.reason.trim().length < 20)
-      return toast.error("Reason needs at least 20 characters.");
-    if (!state.nm_email.includes("@")) return toast.error("Valid nominator email required.");
+    const parsed = submitSchema.safeParse(state);
+    if (!parsed.success) {
+      const first = parsed.error.issues[0];
+      const msg = first?.message ?? "Please review the highlighted fields.";
+      setErrorMsg(msg);
+      toast.error(msg);
+      return;
+    }
 
     setSubmitting(true);
     try {
-      const { error } = await supabase.functions.invoke("nominations-submit", {
+      const { data, error } = await supabase.functions.invoke("nominations-submit", {
         body: {
           nominator: {
             full_name: state.nm_full_name,
@@ -171,13 +174,33 @@ export function NativeCategoryNominationForm({ form, defaultSubcategorySlug }: P
         },
       });
 
-      if (error) throw error;
+      if (error) {
+        // Supabase FunctionsHttpError exposes .context.response for body access.
+        const ctx = (error as { context?: { error?: string; message?: string } }).context;
+        throw new Error(ctx?.error || ctx?.message || error.message || "Submission failed");
+      }
+      if (data && typeof data === "object" && "error" in data && (data as { error?: string }).error) {
+        throw new Error((data as { error: string }).error);
+      }
 
+      trackEvent("nomination_submit_success", {
+        category: form.slug,
+        family: form.family,
+        subcategory: state.subcategory_slug || null,
+      });
       toast.success("Nomination submitted — thank you!");
       setSubmitted(true);
     } catch (err) {
+      const message =
+        err instanceof Error ? err.message : "Could not submit nomination. Please try again.";
       console.error("Native nomination submit failed", err);
-      toast.error("Could not submit nomination. Please try again.");
+      trackEvent("nomination_submit_error", {
+        category: form.slug,
+        family: form.family,
+        message,
+      });
+      setErrorMsg(message);
+      toast.error(message);
     } finally {
       setSubmitting(false);
     }
