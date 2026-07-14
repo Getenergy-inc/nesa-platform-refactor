@@ -849,6 +849,13 @@ const App = () => (
                   <Route path="/recognition/influencer-education-impact/african-sports-icons-supporting-education" element={<WithLayout><InfluencerSubcategoryPage slugOverride="african-sports-icons-supporting-education" /></WithLayout>} />
                   <Route path="/recognition/influencer-education-impact/african-music-icons-supporting-education" element={<WithLayout><InfluencerSubcategoryPage slugOverride="african-music-icons-supporting-education" /></WithLayout>} />
 
+                  {/* Standardized 4-subpage cluster (About · Criteria · Nominees · Nominate) for each recognition tier */}
+                  <Route path="/awards/:tier/about" element={<WithLayout><TierClusterPage subpage="about" /></WithLayout>} />
+                  <Route path="/awards/:tier/criteria" element={<WithLayout><TierClusterPage subpage="criteria" /></WithLayout>} />
+                  <Route path="/awards/:tier/nominees" element={<WithLayout><TierClusterPage subpage="nominees" /></WithLayout>} />
+                  <Route path="/awards/:tier/nominate" element={<WithLayout><TierClusterPage subpage="nominate" /></WithLayout>} />
+
+
                   {/* Legacy shell — keep importable from other entry points */}
                   <Route
                     path="/awards/gold-special-recognition-legacy"
