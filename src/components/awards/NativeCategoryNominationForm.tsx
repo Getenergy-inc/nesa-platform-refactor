@@ -1,5 +1,6 @@
 import { useMemo, useState } from "react";
-import { Loader2, Send, ShieldCheck } from "lucide-react";
+import { AlertCircle, Loader2, Send, ShieldCheck } from "lucide-react";
+import { z } from "zod";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -16,6 +17,39 @@ import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
 import type { AwardCategoryForm } from "@/config/nomination/types";
 import { ICON_NOMINEE_TYPES } from "@/config/nomination/iconTaxonomy";
+import { trackEvent } from "@/lib/analytics";
+
+// Mirrors the server-side zod schema in supabase/functions/nominations-submit.
+const submitSchema = z.object({
+  subcategory_slug: z.string().trim().max(120).optional(),
+  nominee_name: z.string().trim().min(2, "Nominee name is required").max(200),
+  nominee_country: z.string().trim().max(120).optional(),
+  organization: z.string().trim().max(200).optional(),
+  website: z
+    .string()
+    .trim()
+    .max(500)
+    .refine((v) => !v || /^https?:\/\//i.test(v), "Website must start with http(s)://")
+    .optional(),
+  social_links: z.string().trim().max(2000).optional(),
+  impact_summary: z
+    .string()
+    .trim()
+    .min(20, "Impact summary needs at least 20 characters")
+    .max(4000),
+  reason: z
+    .string()
+    .trim()
+    .min(20, "Reason needs at least 20 characters")
+    .max(4000),
+  nm_full_name: z.string().trim().min(2, "Your full name is required").max(160),
+  nm_email: z.string().trim().email("Enter a valid email").max(255),
+  nm_phone: z.string().trim().max(40).optional(),
+  nm_country_residence: z.string().trim().max(120).optional(),
+  nm_consent: z.literal(true, {
+    errorMap: () => ({ message: "Consent is required to submit" }),
+  }),
+});
 
 interface Props {
   /** Resolved category form whose subcategories become the "nominee category" dropdown. */
@@ -88,6 +122,7 @@ export function NativeCategoryNominationForm({ form, defaultSubcategorySlug }: P
   });
   const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const [errorMsg, setErrorMsg] = useState<string | null>(null);
 
   const set = <K extends keyof FormState>(k: K, v: FormState[K]) =>
     setState((p) => ({ ...p, [k]: v }));
@@ -95,18 +130,20 @@ export function NativeCategoryNominationForm({ form, defaultSubcategorySlug }: P
   const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (submitting) return;
+    setErrorMsg(null);
 
-    if (!state.nm_consent) return toast.error("Please confirm consent to continue.");
-    if (state.nominee_name.trim().length < 2) return toast.error("Nominee name is required.");
-    if (state.impact_summary.trim().length < 20)
-      return toast.error("Impact summary needs at least 20 characters.");
-    if (state.reason.trim().length < 20)
-      return toast.error("Reason needs at least 20 characters.");
-    if (!state.nm_email.includes("@")) return toast.error("Valid nominator email required.");
+    const parsed = submitSchema.safeParse(state);
+    if (!parsed.success) {
+      const first = parsed.error.issues[0];
+      const msg = first?.message ?? "Please review the highlighted fields.";
+      setErrorMsg(msg);
+      toast.error(msg);
+      return;
+    }
 
     setSubmitting(true);
     try {
-      const { error } = await supabase.functions.invoke("nominations-submit", {
+      const { data, error } = await supabase.functions.invoke("nominations-submit", {
         body: {
           nominator: {
             full_name: state.nm_full_name,
@@ -137,13 +174,33 @@ export function NativeCategoryNominationForm({ form, defaultSubcategorySlug }: P
         },
       });
 
-      if (error) throw error;
+      if (error) {
+        // Supabase FunctionsHttpError exposes .context.response for body access.
+        const ctx = (error as { context?: { error?: string; message?: string } }).context;
+        throw new Error(ctx?.error || ctx?.message || error.message || "Submission failed");
+      }
+      if (data && typeof data === "object" && "error" in data && (data as { error?: string }).error) {
+        throw new Error((data as { error: string }).error);
+      }
 
+      trackEvent("nomination_submit_success", {
+        category: form.slug,
+        family: form.family,
+        subcategory: state.subcategory_slug || null,
+      });
       toast.success("Nomination submitted — thank you!");
       setSubmitted(true);
     } catch (err) {
+      const message =
+        err instanceof Error ? err.message : "Could not submit nomination. Please try again.";
       console.error("Native nomination submit failed", err);
-      toast.error("Could not submit nomination. Please try again.");
+      trackEvent("nomination_submit_error", {
+        category: form.slug,
+        family: form.family,
+        message,
+      });
+      setErrorMsg(message);
+      toast.error(message);
     } finally {
       setSubmitting(false);
     }
@@ -177,6 +234,20 @@ export function NativeCategoryNominationForm({ form, defaultSubcategorySlug }: P
           evidence-checked by the NRC before review.
         </span>
       </div>
+
+      {errorMsg && (
+        <div
+          role="alert"
+          aria-live="assertive"
+          className="flex items-start gap-2 rounded-lg border border-destructive/50 bg-destructive/10 p-3 text-sm text-destructive"
+        >
+          <AlertCircle className="h-4 w-4 mt-0.5 shrink-0" aria-hidden />
+          <div>
+            <p className="font-semibold">Nomination could not be submitted</p>
+            <p className="text-destructive/90">{errorMsg}</p>
+          </div>
+        </div>
+      )}
 
       {subOptions.length > 0 && (
         <div className="space-y-1.5">
