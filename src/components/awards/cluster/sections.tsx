@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { ArrowRight, CheckCircle2, XCircle, FileCheck2, ClipboardList, Users, Sparkles } from "lucide-react";
 import type { TierClusterConfig } from "@/config/awards/tierCluster";
+import { StageGate, StageStatusBadge } from "@/components/governance/StageGate";
 
 const accentBtn: Record<TierClusterConfig["accent"], string> = {
   gold: "bg-gold text-charcoal hover:bg-amber-400",
@@ -130,8 +131,11 @@ export function TierNomineesSection({ tier }: { tier: TierClusterConfig }) {
       <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-5 sm:p-6">
         <div className="flex items-start gap-3">
           <Users className={`h-5 w-5 mt-0.5 shrink-0`} aria-hidden />
-          <div>
-            <h2 className="font-display text-lg sm:text-xl font-bold">Africa Education Impact Directory</h2>
+          <div className="flex-1">
+            <div className="flex flex-wrap items-center gap-2">
+              <h2 className="font-display text-lg sm:text-xl font-bold">Africa Education Impact Directory</h2>
+              <StageStatusBadge action="nominations" showLabel={false} />
+            </div>
             <p className="mt-1 text-sm sm:text-base text-white/80">{tier.nominees.highlight}</p>
           </div>
         </div>
@@ -161,9 +165,10 @@ export function TierNominateSection({ tier }: { tier: TierClusterConfig }) {
   return (
     <div className="grid gap-6 md:grid-cols-3">
       <div className="md:col-span-2 rounded-2xl border border-white/10 bg-white/[0.03] p-5 sm:p-6">
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-2 flex-wrap">
           <Sparkles className="h-5 w-5" aria-hidden />
           <h2 className="font-display text-lg sm:text-xl font-bold">Nominate an Education Enabler</h2>
+          <StageStatusBadge action="nominations" showLabel={false} />
         </div>
         <p className="mt-2 text-sm sm:text-base text-white/80">{nominate.intro}</p>
 
@@ -178,14 +183,18 @@ export function TierNominateSection({ tier }: { tier: TierClusterConfig }) {
           ))}
         </ol>
 
-        <div className="mt-5 flex flex-wrap gap-2">
-          <Link to={nominate.ctaHref} className={`${btnBase} ${accentBtn[tier.accent]}`}>
-            {nominate.ctaLabel}
-            <ArrowRight className="h-4 w-4" aria-hidden />
-          </Link>
-          <Link to={nominate.supportHref} className={`${btnBase} border-2 bg-transparent ${outlineBtn[tier.accent]}`}>
-            {nominate.supportLabel}
-          </Link>
+        <div className="mt-5">
+          <StageGate action="nominations">
+            <div className="flex flex-wrap gap-2">
+              <Link to={nominate.ctaHref} className={`${btnBase} ${accentBtn[tier.accent]}`}>
+                {nominate.ctaLabel}
+                <ArrowRight className="h-4 w-4" aria-hidden />
+              </Link>
+              <Link to={nominate.supportHref} className={`${btnBase} border-2 bg-transparent ${outlineBtn[tier.accent]}`}>
+                {nominate.supportLabel}
+              </Link>
+            </div>
+          </StageGate>
         </div>
       </div>
 
@@ -206,10 +215,19 @@ export function TierNominateSection({ tier }: { tier: TierClusterConfig }) {
 function TierCTAStack({ tier }: { tier: TierClusterConfig }) {
   return (
     <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-4 space-y-2">
-      <Link to={tier.nominate.ctaHref} className={`${btnBase} w-full ${accentBtn[tier.accent]}`}>
-        {tier.nominate.ctaLabel}
-        <ArrowRight className="h-4 w-4" aria-hidden />
-      </Link>
+      <StageGate
+        action="nominations"
+        fallback={
+          <div className="rounded-xl border border-white/10 bg-charcoal/60 px-4 py-3 text-center text-xs text-white/70">
+            Nominations are currently closed. <Link to="/timeline" className="underline text-white">See timeline</Link>
+          </div>
+        }
+      >
+        <Link to={tier.nominate.ctaHref} className={`${btnBase} w-full ${accentBtn[tier.accent]}`}>
+          {tier.nominate.ctaLabel}
+          <ArrowRight className="h-4 w-4" aria-hidden />
+        </Link>
+      </StageGate>
       <Link
         to={`/nominees?tier=${encodeURIComponent(tier.nominees.directoryFilterKey)}`}
         className={`${btnBase} w-full border-2 bg-transparent ${outlineBtn[tier.accent]}`}
