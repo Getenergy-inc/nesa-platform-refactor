@@ -220,7 +220,16 @@ export function NativeCategoryNominationForm({
     }
   };
 
+  useEffect(() => {
+    if (!submitted || !successRedirectHref || successRedirectDelayMs <= 0) return;
+    const t = window.setTimeout(() => {
+      navigate(successRedirectHref);
+    }, successRedirectDelayMs);
+    return () => window.clearTimeout(t);
+  }, [submitted, successRedirectHref, successRedirectDelayMs, navigate]);
+
   if (submitted) {
+    const seconds = Math.max(1, Math.round(successRedirectDelayMs / 1000));
     return (
       <div className="rounded-2xl border border-gold/40 bg-charcoal-light/50 p-6 text-center text-foreground/90">
         <ShieldCheck className="mx-auto mb-3 h-8 w-8 text-gold" />
@@ -231,9 +240,25 @@ export function NativeCategoryNominationForm({
           Your submission for <span className="text-gold">{form.name}</span> is
           queued for NRC review. You will receive a confirmation email shortly.
         </p>
+        {successRedirectHref && (
+          <div className="mt-5 space-y-2">
+            {successRedirectDelayMs > 0 && (
+              <p className="text-xs text-foreground/60">
+                Redirecting to {successRedirectLabel ?? "the nominees page"} in {seconds}s…
+              </p>
+            )}
+            <Link
+              to={successRedirectHref}
+              className="inline-flex items-center justify-center rounded-lg border border-gold/60 bg-gold/10 px-4 py-2 text-sm font-semibold text-gold transition hover:bg-gold hover:text-charcoal"
+            >
+              Go to {successRedirectLabel ?? "Nominees"} now
+            </Link>
+          </div>
+        )}
       </div>
     );
   }
+
 
   return (
     <form
