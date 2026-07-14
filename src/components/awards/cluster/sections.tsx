@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { ArrowRight, CheckCircle2, XCircle, FileCheck2, ClipboardList, Users, Sparkles } from "lucide-react";
 import type { TierClusterConfig } from "@/config/awards/tierCluster";
+import { StageGate, StageStatusBadge } from "@/components/governance/StageGate";
 
 const accentBtn: Record<TierClusterConfig["accent"], string> = {
   gold: "bg-gold text-charcoal hover:bg-amber-400",
