@@ -231,10 +231,25 @@ export function NativeCategoryNominationForm({
   useEffect(() => {
     if (!submitted || !successRedirectHref || successRedirectDelayMs <= 0) return;
     const t = window.setTimeout(() => {
+      trackEvent("nomination_redirect_auto", {
+        category: form.slug,
+        family: form.family,
+        subcategory: state.subcategory_slug || null,
+        destination: successRedirectHref,
+        delay_ms: successRedirectDelayMs,
+      });
       navigate(successRedirectHref);
     }, successRedirectDelayMs);
     return () => window.clearTimeout(t);
-  }, [submitted, successRedirectHref, successRedirectDelayMs, navigate]);
+  }, [
+    submitted,
+    successRedirectHref,
+    successRedirectDelayMs,
+    navigate,
+    form.slug,
+    form.family,
+    state.subcategory_slug,
+  ]);
 
   if (submitted) {
     const seconds = Math.max(1, Math.round(successRedirectDelayMs / 1000));
