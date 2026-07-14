@@ -24,7 +24,7 @@ import { lazy } from "react";
 import { useTranslation } from "react-i18next";
 import { LocalizedSEO } from "@/components/seo/LocalizedSEO";
 
-import { TrophyHeroSection } from "@/components/nesa/TrophyHeroSection";
+import { HomeHeroBlock } from "@/components/home/HomeHeroBlock";
 import { PublicNominationsNotice } from "@/components/nesa/PublicNominationsNotice";
 import { CountdownSection } from "@/components/nesa/CountdownSection";
 import { NESAFooter } from "@/components/nesa/NESAFooter";
