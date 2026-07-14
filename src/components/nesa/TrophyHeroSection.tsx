@@ -113,44 +113,27 @@ export function TrophyHeroSection() {
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.5 }}
-              className="text-white/90 text-[15px] sm:text-base md:text-lg mb-3 max-w-xl mx-auto lg:mx-0 leading-relaxed"
+              className="text-white/90 text-[15px] sm:text-base md:text-lg mb-5 max-w-xl mx-auto lg:mx-0 leading-relaxed"
             >
-              <span className="text-gold font-semibold">NESA-Africa</span> — the New Education Standard Award Africa — identifies, verifies and recognises the individuals, organisations and institutions enabling <span className="text-gold font-semibold">Education for All</span> across Africa, among Diaspora Africans and through Friends of Africa.
+              Recognising the individuals, organisations and institutions enabling{" "}
+              <span className="text-gold font-semibold">Education for All</span> across Africa,
+              the Diaspora and Friends of Africa.
             </motion.p>
-            <motion.p
-              initial={{ opacity: 0, y: 15 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.52 }}
-              className="text-white/75 text-[14px] sm:text-sm md:text-base mb-3 max-w-xl mx-auto lg:mx-0 leading-relaxed"
-            >
-              Through public nominations, evidence-based verification, independent Icon judging, governance review, media storytelling and post-recognition impact programmes, NESA-Africa turns credible education impact into visibility, partnerships, funding and measurable legacy.
-            </motion.p>
-            <motion.p
-              initial={{ opacity: 0, y: 15 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.55 }}
-              className="text-gold/90 text-[13px] sm:text-sm md:text-base italic mb-4 max-w-xl mx-auto lg:mx-0"
-            >
-              Africa sees you. Africa appreciates you. Africa says thank you.
-            </motion.p>
-
 
             {/* Recognition Architecture chips — scale at a glance */}
             <motion.ul
               initial={{ opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.55 }}
-              className="flex flex-wrap gap-1.5 sm:gap-2 justify-center lg:justify-start mb-5 max-w-xl mx-auto lg:mx-0"
+              className="flex flex-wrap gap-1.5 sm:gap-2 justify-center lg:justify-start mb-6 max-w-xl mx-auto lg:mx-0"
               aria-label="NESA-Africa 2026 recognition architecture at a glance"
             >
               {[
-                "4 Recognition Tiers",
-                "18 Award Categories",
+                "4 Tiers",
+                "18 Categories",
                 "96 Subcategories",
                 "8 African Regions",
                 "2 Global Communities",
-                "27 Independent Icon Judges",
-                "9 Icon Laureate Positions",
               ].map((chip) => (
                 <li
                   key={chip}
@@ -161,40 +144,10 @@ export function TrophyHeroSection() {
               ))}
             </motion.ul>
 
-            {/* Topic tags — recognition themes across the four tiers */}
-            <motion.ul
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.7 }}
-              className="flex flex-wrap gap-1.5 sm:gap-2 justify-center lg:justify-start mb-6"
-              aria-label="Recognition themes across the four NESA-Africa tiers"
-            >
-              {[
-                "Africa Education Icons",
-                "Philanthropy for Education",
-                "Curriculum and Knowledge",
-                "Technical Education",
-                "Corporate Education Impact",
-                "NGOs Advancing Education",
-                "EduTech and STEM",
-                "Faith-Based Education",
-                "Diaspora Education Impact",
-                "Media and Public Influence",
-              ].map((chip) => (
-                <li
-                  key={chip}
-                  className="px-2.5 py-1 rounded-full bg-white/5 border border-gold/25 text-white/85 text-[11px] sm:text-xs font-medium"
-                >
-                  {chip}
-                </li>
-              ))}
-            </motion.ul>
-
-
             <motion.div
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.75 }}
+              transition={{ duration: 0.5, delay: 0.6 }}
               className="mb-4"
             >
               <HeroCTAStack />
@@ -203,11 +156,13 @@ export function TrophyHeroSection() {
             <motion.p
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              transition={{ duration: 0.5, delay: 0.85 }}
-              className="text-gold/70 text-xs sm:text-sm tracking-wide mb-10 max-w-xl mx-auto lg:mx-0 leading-relaxed"
+              transition={{ duration: 0.5, delay: 0.75 }}
+              className="text-gold/70 text-xs tracking-wide mb-10 max-w-xl mx-auto lg:mx-0"
             >
-              Recognition is decided by evidence-based NRC verification, independent Icon judging where applicable and governance approval. Sponsorship, donations, ticket sales, merchandise, GFAwzip Wallet activity and AGC Participation Credits do not influence recognition.
+              Independent NRC verification · Icon judging · Governance approval.
+              Sponsorship and donations do not influence recognition.
             </motion.p>
+
           </div>
 
           {/* Right: Trophy Carousel */}
