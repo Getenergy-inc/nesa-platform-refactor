@@ -57,6 +57,12 @@ interface Props {
   form: AwardCategoryForm;
   /** Optional preselected subcategory slug (deep-link). */
   defaultSubcategorySlug?: string;
+  /** Where to redirect the user after a successful submission. */
+  successRedirectHref?: string;
+  /** Label for the redirect target (e.g. "Gold Nominees"). */
+  successRedirectLabel?: string;
+  /** Auto-redirect delay in ms. Defaults to 2500. Set to 0 to disable auto-redirect. */
+  successRedirectDelayMs?: number;
 }
 
 type NomineeType =
