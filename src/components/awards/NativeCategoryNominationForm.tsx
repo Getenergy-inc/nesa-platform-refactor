@@ -197,10 +197,18 @@ export function NativeCategoryNominationForm({
         throw new Error((data as { error: string }).error);
       }
 
+      const nominationId =
+        data && typeof data === "object" && "id" in data
+          ? (data as { id?: string | number }).id ?? null
+          : null;
       trackEvent("nomination_submit_success", {
         category: form.slug,
         family: form.family,
         subcategory: state.subcategory_slug || null,
+        nomination_id: nominationId,
+        redirect_href: successRedirectHref ?? null,
+        redirect_delay_ms: successRedirectHref ? successRedirectDelayMs : 0,
+        auto_redirect: Boolean(successRedirectHref && successRedirectDelayMs > 0),
       });
       toast.success("Nomination submitted — thank you!");
       setSubmitted(true);
