@@ -25,6 +25,8 @@ import { useTranslation } from "react-i18next";
 import { LocalizedSEO } from "@/components/seo/LocalizedSEO";
 
 import { HomeHeroBlock } from "@/components/home/HomeHeroBlock";
+import { TrophyHeroSection } from "@/components/nesa/TrophyHeroSection";
+import { TrustIndicators } from "@/components/common";
 import { PublicNominationsNotice } from "@/components/nesa/PublicNominationsNotice";
 import { CountdownSection } from "@/components/nesa/CountdownSection";
 import { NESAFooter } from "@/components/nesa/NESAFooter";
