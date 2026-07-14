@@ -131,8 +131,11 @@ export function TierNomineesSection({ tier }: { tier: TierClusterConfig }) {
       <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-5 sm:p-6">
         <div className="flex items-start gap-3">
           <Users className={`h-5 w-5 mt-0.5 shrink-0`} aria-hidden />
-          <div>
-            <h2 className="font-display text-lg sm:text-xl font-bold">Africa Education Impact Directory</h2>
+          <div className="flex-1">
+            <div className="flex flex-wrap items-center gap-2">
+              <h2 className="font-display text-lg sm:text-xl font-bold">Africa Education Impact Directory</h2>
+              <StageStatusBadge action="nominations" showLabel={false} />
+            </div>
             <p className="mt-1 text-sm sm:text-base text-white/80">{tier.nominees.highlight}</p>
           </div>
         </div>
