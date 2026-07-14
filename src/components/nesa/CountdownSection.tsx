@@ -83,22 +83,24 @@ export function CountdownSection() {
           </div>
         )}
 
-        <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
-          <Link
-            to="/gala"
-            className="inline-flex items-center gap-2 rounded-full border border-gold/40 bg-gold/10 px-5 py-2.5 text-sm font-semibold text-gold hover:bg-gold/20 transition-colors"
-          >
-            View Gala Details
-            <ArrowRight className="h-4 w-4" />
-          </Link>
+        {/* CTA hierarchy: hero owns the sole above-the-fold primary.
+            Countdown offers a secondary (outline) + tertiary (text link) only. */}
+        <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
           <Link
             to="/gala#tickets"
-            className="inline-flex items-center gap-2 rounded-full bg-gold px-5 py-2.5 text-sm font-semibold text-charcoal hover:bg-amber-400 transition-colors"
+            className="inline-flex min-h-11 items-center gap-2 rounded-full border border-gold/40 bg-transparent px-5 py-2.5 text-sm font-semibold text-gold transition-colors hover:bg-gold/10"
           >
-            Get Tickets and Tables
+            Request Gala Invitation
             <ArrowRight className="h-4 w-4" />
           </Link>
+          <Link
+            to="/gala"
+            className="text-sm font-medium text-white/70 underline-offset-4 hover:text-gold hover:underline"
+          >
+            View gala details
+          </Link>
         </div>
+
       </motion.div>
     </section>
   );
