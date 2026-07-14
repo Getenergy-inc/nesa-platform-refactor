@@ -165,9 +165,10 @@ export function TierNominateSection({ tier }: { tier: TierClusterConfig }) {
   return (
     <div className="grid gap-6 md:grid-cols-3">
       <div className="md:col-span-2 rounded-2xl border border-white/10 bg-white/[0.03] p-5 sm:p-6">
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-2 flex-wrap">
           <Sparkles className="h-5 w-5" aria-hidden />
           <h2 className="font-display text-lg sm:text-xl font-bold">Nominate an Education Enabler</h2>
+          <StageStatusBadge action="nominations" showLabel={false} />
         </div>
         <p className="mt-2 text-sm sm:text-base text-white/80">{nominate.intro}</p>
 
@@ -182,14 +183,18 @@ export function TierNominateSection({ tier }: { tier: TierClusterConfig }) {
           ))}
         </ol>
 
-        <div className="mt-5 flex flex-wrap gap-2">
-          <Link to={nominate.ctaHref} className={`${btnBase} ${accentBtn[tier.accent]}`}>
-            {nominate.ctaLabel}
-            <ArrowRight className="h-4 w-4" aria-hidden />
-          </Link>
-          <Link to={nominate.supportHref} className={`${btnBase} border-2 bg-transparent ${outlineBtn[tier.accent]}`}>
-            {nominate.supportLabel}
-          </Link>
+        <div className="mt-5">
+          <StageGate action="nominations">
+            <div className="flex flex-wrap gap-2">
+              <Link to={nominate.ctaHref} className={`${btnBase} ${accentBtn[tier.accent]}`}>
+                {nominate.ctaLabel}
+                <ArrowRight className="h-4 w-4" aria-hidden />
+              </Link>
+              <Link to={nominate.supportHref} className={`${btnBase} border-2 bg-transparent ${outlineBtn[tier.accent]}`}>
+                {nominate.supportLabel}
+              </Link>
+            </div>
+          </StageGate>
         </div>
       </div>
 
