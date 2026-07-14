@@ -156,6 +156,7 @@ import CategoryPage2026 from "./components/recognition2026/CategoryPage";
 import RedirectRoute from "./components/routing/RedirectRoute";
 import LegacyCategoryRedirect from "./components/routing/LegacyCategoryRedirect";
 import { LEGACY_RECOGNITION_REDIRECTS } from "./config/legacyRecognitionRedirects";
+import { REFACTOR_REDIRECTS_2026 } from "./config/refactorRedirects2026";
 
 import { ICON_CATEGORY, buildRedirectMap as buildCategoryRedirects } from "./config/awardCategories";
 
@@ -1028,6 +1029,10 @@ const App = () => (
                   {/* Stage 6 — Legacy recognition redirects (data-driven). */}
                   {LEGACY_RECOGNITION_REDIRECTS.map((r) => (
                     <Route key={r.from} path={r.from} element={<RedirectRoute to={r.to} />} />
+                  ))}
+                  {/* Master refactor — 2026 canonical 301 register. */}
+                  {REFACTOR_REDIRECTS_2026.map((r) => (
+                    <Route key={`refactor-${r.from}`} path={r.from} element={<RedirectRoute to={r.to} />} />
                   ))}
                   {/* Stage 7 — DB-resolved legacy category redirect (/awards/c/:slug → spine). */}
                   <Route path="/awards/c/:categorySlug" element={<LegacyCategoryRedirect />} />
