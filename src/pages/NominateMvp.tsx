@@ -641,8 +641,18 @@ export default function NominateMvp() {
                       <NativeCategoryNominationForm
                         form={category}
                         defaultSubcategorySlug={selectedSubcategory?.slug}
+                        successRedirectHref={
+                          ({
+                            "africa-education-icon": "/awards/africa-education-icon/nominees",
+                            "gold-blue-garnet": "/awards/gold-blue-garnet/nominees",
+                            "platinum": "/awards/platinum/nominees",
+                            "influencer": "/awards/influencer/nominees",
+                          } as const)[category.family]
+                        }
+                        successRedirectLabel={`${AWARD_FAMILIES.find((f) => f.id === category.family)?.name ?? "Tier"} Nominees`}
                       />
                     }
+
                   />
                 </>
               )}

@@ -1,4 +1,5 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { AlertCircle, Loader2, Send, ShieldCheck } from "lucide-react";
 import { z } from "zod";
 import { Button } from "@/components/ui/button";
@@ -56,6 +57,12 @@ interface Props {
   form: AwardCategoryForm;
   /** Optional preselected subcategory slug (deep-link). */
   defaultSubcategorySlug?: string;
+  /** Where to redirect the user after a successful submission. */
+  successRedirectHref?: string;
+  /** Label for the redirect target (e.g. "Gold Nominees"). */
+  successRedirectLabel?: string;
+  /** Auto-redirect delay in ms. Defaults to 2500. Set to 0 to disable auto-redirect. */
+  successRedirectDelayMs?: number;
 }
 
 type NomineeType =
@@ -107,7 +114,14 @@ const INITIAL: FormState = {
  * nominee-options dropdown so users can submit immediately without waiting
  * for the external Google Form link.
  */
-export function NativeCategoryNominationForm({ form, defaultSubcategorySlug }: Props) {
+export function NativeCategoryNominationForm({
+  form,
+  defaultSubcategorySlug,
+  successRedirectHref,
+  successRedirectLabel,
+  successRedirectDelayMs = 2500,
+}: Props) {
+  const navigate = useNavigate();
   const subOptions = useMemo(
     () => form.subcategories.filter((s) => s.slug && s.name),
     [form.subcategories],
@@ -206,7 +220,16 @@ export function NativeCategoryNominationForm({ form, defaultSubcategorySlug }: P
     }
   };
 
+  useEffect(() => {
+    if (!submitted || !successRedirectHref || successRedirectDelayMs <= 0) return;
+    const t = window.setTimeout(() => {
+      navigate(successRedirectHref);
+    }, successRedirectDelayMs);
+    return () => window.clearTimeout(t);
+  }, [submitted, successRedirectHref, successRedirectDelayMs, navigate]);
+
   if (submitted) {
+    const seconds = Math.max(1, Math.round(successRedirectDelayMs / 1000));
     return (
       <div className="rounded-2xl border border-gold/40 bg-charcoal-light/50 p-6 text-center text-foreground/90">
         <ShieldCheck className="mx-auto mb-3 h-8 w-8 text-gold" />
@@ -217,9 +240,25 @@ export function NativeCategoryNominationForm({ form, defaultSubcategorySlug }: P
           Your submission for <span className="text-gold">{form.name}</span> is
           queued for NRC review. You will receive a confirmation email shortly.
         </p>
+        {successRedirectHref && (
+          <div className="mt-5 space-y-2">
+            {successRedirectDelayMs > 0 && (
+              <p className="text-xs text-foreground/60">
+                Redirecting to {successRedirectLabel ?? "the nominees page"} in {seconds}s…
+              </p>
+            )}
+            <Link
+              to={successRedirectHref}
+              className="inline-flex items-center justify-center rounded-lg border border-gold/60 bg-gold/10 px-4 py-2 text-sm font-semibold text-gold transition hover:bg-gold hover:text-charcoal"
+            >
+              Go to {successRedirectLabel ?? "Nominees"} now
+            </Link>
+          </div>
+        )}
       </div>
     );
   }
+
 
   return (
     <form

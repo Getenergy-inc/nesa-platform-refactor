@@ -298,7 +298,10 @@ export default function TierCategorySubcategoryPage() {
             <NativeCategoryNominationForm
               form={form}
               defaultSubcategorySlug={subcategory.slug}
+              successRedirectHref="/awards/gold-blue-garnet/nominees"
+              successRedirectLabel="Gold–Blue Garnet Nominees"
             />
+
           </div>
         </section>
       )}
