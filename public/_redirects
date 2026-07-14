@@ -61,9 +61,10 @@
 /cookie-policy                                               /policies            301
 /language                                                    /                    301
 
-# --- 2. SPA routes (438 explicit paths from src/App.tsx) ---
-/recognition/influencer-education-impact/influencer-education-impact-award /index.html          200
-/recognition/africa-education-icon/africa-education-icon-award /index.html          200
+# --- 2. SPA routes (439 explicit paths from src/App.tsx) ---
+/recognition/influencer-education-impact/african-sports-icons-supporting-education /index.html          200
+/recognition/influencer-education-impact/african-music-icons-supporting-education /index.html          200
+/recognition/influencer-education-impact/african-social-media-influencers /index.html          200
 /nominees/gold-special-recognition/:categorySlug/:nomineeSlug /index.html          200
 /recognition/gold-blue-garnet/:categorySlug/:subcategorySlug /index.html          200
 /awards/explore/:pathwaySlug/:categorySlug/:subcategorySlug  /index.html          200
@@ -82,11 +83,11 @@
 /eduaid-africa/rebuild-my-school/:regionSlug                 /index.html          200
 /nominees/best-ngo-contribution-to-education                 /index.html          200
 /categories/islamic-education-impact-africa                  /index.html          200
-/recognition/gold-blue-garnet/:categorySlug                  /index.html          200
 /awards/explore/:pathwaySlug/:categorySlug                   /index.html          200
 /awards/influencers-education-impact/:slug                   /index.html          200
 /category/education-friendly-state-nigeria                   /index.html          200
 /nominees/africa-education-icon-award/:sub                   /index.html          200
+/nominees/influencer-education-impact/:sub                   /index.html          200
 /nominees/category/:categorySlug/:subSlug                    /index.html          200
 /recognition/influencer-education-impact                     /index.html          200
 /awards/gold-special-recognition-legacy                      /index.html          200
@@ -152,11 +153,11 @@
 /category/diaspora-education                                 /index.html          200
 /impact/afri-edutourism-2027                                 /index.html          200
 /nrc/dashboard/edi-analytics                                 /index.html          200
+/recognition/:tier/:category                                 /index.html          200
 /awards/global-partnerships                                  /index.html          200
 /education-enabler-features                                  /index.html          200
 /education-enablers/regions                                  /index.html          200
 /education-enablers/sectors                                  /index.html          200
-/recognition/platinum/:slug                                  /index.html          200
 /education-enablers/edtech                                   /index.html          200
 /nominate/official/:family                                   /index.html          200
 /policies/voting-integrity                                   /index.html          200
