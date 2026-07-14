@@ -225,8 +225,23 @@ export default function CategoryDetailPage() {
                 <span className="text-gold">{BRAND_TAGLINE}</span>.
               </p>
             </div>
+            <div className="mb-4 rounded-lg border border-gold/30 bg-gold/5 px-4 py-3 text-sm text-ivory/80">
+              <span className="text-gold font-semibold">Prefilled:</span> Award
+              category is locked to{" "}
+              <span className="text-gold">{category.name}</span>
+              {form.subcategories.length > 0 && (
+                <>
+                  {" "}· Subcategory defaults to{" "}
+                  <span className="text-gold">
+                    {(form.subcategories.find((s) => s.slug === (prefillSubSlug ?? form.subcategories[0]?.slug))?.name) ?? form.subcategories[0]?.name}
+                  </span>
+                  {" "}(change it in the dropdown below).
+                </>
+              )}
+            </div>
             <NativeCategoryNominationForm
               form={form}
+              defaultSubcategorySlug={prefillSubSlug}
               successRedirectHref="/awards/gold-blue-garnet/nominees"
               successRedirectLabel="Gold–Blue Garnet Nominees"
             />
