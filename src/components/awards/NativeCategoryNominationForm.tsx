@@ -114,7 +114,14 @@ const INITIAL: FormState = {
  * nominee-options dropdown so users can submit immediately without waiting
  * for the external Google Form link.
  */
-export function NativeCategoryNominationForm({ form, defaultSubcategorySlug }: Props) {
+export function NativeCategoryNominationForm({
+  form,
+  defaultSubcategorySlug,
+  successRedirectHref,
+  successRedirectLabel,
+  successRedirectDelayMs = 2500,
+}: Props) {
+  const navigate = useNavigate();
   const subOptions = useMemo(
     () => form.subcategories.filter((s) => s.slug && s.name),
     [form.subcategories],
