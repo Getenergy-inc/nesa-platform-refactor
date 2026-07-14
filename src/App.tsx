@@ -1509,7 +1509,9 @@ const App = () => (
                     element={
                       <WithLayout>
                         <WithFirewall>
-                          <NominateMvp />
+                          <NominateGate>
+                            <NominateMvp />
+                          </NominateGate>
                         </WithFirewall>
                       </WithLayout>
                     }
