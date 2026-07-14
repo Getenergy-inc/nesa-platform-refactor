@@ -149,6 +149,7 @@ import AwardSpinePage from "./pages/awards/AwardSpinePage";
 import EighteenCategoriesPage from "./pages/awards/EighteenCategoriesPage";
 import CategoryDetailPage from "./pages/awards/CategoryDetailPage";
 import TierCategorySubcategoryPage from "./pages/awards/TierCategorySubcategoryPage";
+import TierClusterPage from "./pages/awards/cluster/TierClusterPage";
 import RecognitionHubPage from "./pages/recognition/RecognitionHubPage";
 import CategoryPage2026 from "./components/recognition2026/CategoryPage";
 import RedirectRoute from "./components/routing/RedirectRoute";
