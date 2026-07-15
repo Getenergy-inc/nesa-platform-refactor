@@ -192,17 +192,11 @@ export function AwardSubpageTemplate({ content }: { content: AwardSubpageContent
           imageAlt={content.hero.imageAlt}
         />
 
-        <div className="container mx-auto max-w-6xl px-4 pt-6">
-          <TrustIndicators variant="compact" />
-        </div>
+        <TrustIndicators />
 
         {content.notice ? (
           <div className="container mx-auto max-w-6xl px-4 pt-6">
-            <TierNoticeBanner
-              kind={content.notice.kind}
-              heading={content.notice.heading}
-              body={content.notice.body}
-            />
+            <TierNoticeBanner kind={content.notice.kind} />
           </div>
         ) : null}
 
