@@ -90,6 +90,11 @@ export const TIER_HERO_IMAGES: Record<string, string> = {
 
 
 export function getTierHeroImage(tier: TierSlug | string): string | undefined {
-  return TIER_HERO_IMAGES[tier];
+  return TIER_HERO_IMAGES[tier] ?? SUBPAGE_HERO_IMAGES[tier];
+}
+
+/** Combined lookup: returns a story hero image for any tier, category, or subcategory slug. */
+export function getStoryHeroImage(slug: string): string | undefined {
+  return TIER_HERO_IMAGES[slug] ?? SUBPAGE_HERO_IMAGES[slug];
 }
 
