@@ -73,6 +73,8 @@ export function AwardHeroStandard({
   primaryCta,
   secondaryCta,
   trustLine,
+  heroImage,
+  heroImageAlt,
 }: {
   pageSlug: string;
   badge: string;
@@ -84,17 +86,37 @@ export function AwardHeroStandard({
   primaryCta?: AwardCta;
   secondaryCta?: AwardCta;
   trustLine?: string;
+  heroImage?: string;
+  heroImageAlt?: string;
 }) {
   return (
     <section className="relative overflow-hidden border-b border-gold/15 bg-gradient-to-b from-black via-charcoal to-charcoal-light">
-      <div
-        aria-hidden
-        className="absolute inset-0 opacity-[0.08]"
-        style={{
-          backgroundImage:
-            "radial-gradient(circle at 15% 20%, hsl(42 85% 52%) 0, transparent 45%), radial-gradient(circle at 85% 80%, hsl(42 85% 52%) 0, transparent 45%)",
-        }}
-      />
+      {heroImage ? (
+        <>
+          <img
+            src={heroImage}
+            alt={heroImageAlt ?? ""}
+            aria-hidden={heroImageAlt ? undefined : true}
+            loading="eager"
+            width={1600}
+            height={900}
+            className="absolute inset-0 h-full w-full object-cover opacity-40"
+          />
+          <div
+            aria-hidden
+            className="absolute inset-0 bg-gradient-to-b from-charcoal/70 via-charcoal/80 to-charcoal"
+          />
+        </>
+      ) : (
+        <div
+          aria-hidden
+          className="absolute inset-0 opacity-[0.08]"
+          style={{
+            backgroundImage:
+              "radial-gradient(circle at 15% 20%, hsl(42 85% 52%) 0, transparent 45%), radial-gradient(circle at 85% 80%, hsl(42 85% 52%) 0, transparent 45%)",
+          }}
+        />
+      )}
       <div className="container relative mx-auto px-4 py-20 lg:py-28">
         <motion.div
           initial={{ opacity: 0, y: 18 }}
