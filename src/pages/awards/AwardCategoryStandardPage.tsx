@@ -18,6 +18,7 @@ import { TierCategoryCards } from "@/components/awards/TierCategoryCards";
 import { getAwardPageContent } from "@/config/awards/awardPageContent";
 import { filterMasterNominees, getMasterRegions } from "@/lib/nomineeMasterData";
 import { ICON_NOMINEES } from "@/data/iconAward";
+import { getTierHeroImage } from "@/config/awards/subpageHeroImages";
 import { resolveIconImage } from "@/data/iconAward/imageManifest";
 import { AwardPageTabs, type AwardPageTab } from "@/components/awards/AwardPageTabs";
 
@@ -162,6 +163,8 @@ export default function AwardCategoryStandardPage({ slug }: Props) {
               primaryCta={hero.primaryCta}
               secondaryCta={hero.secondaryCta}
               trustLine={hero.trustLine}
+              heroImage={getTierHeroImage(content.slug)}
+              heroImageAlt={`${hero.title} — Enablers of Education for All Across Africa`}
             />
           </section>
 

@@ -42,10 +42,14 @@ export const SUBPAGE_HERO_IMAGES: Record<string, string> = {
   "icon-lit": iconLit,
   "icon-tech": iconTech,
 
-  // Influencer Education Impact subcategories
+  // Influencer Education Impact subcategories (short codes)
   "inf-soc": infSoc,
   "inf-spt": infSpt,
   "inf-mus": infMus,
+  // Long-form aliases used by InfluencerSubcategoryPage
+  "african-social-media-influencers": infSoc,
+  "african-sports-icons-supporting-education": infSpt,
+  "african-music-icons-supporting-education": infMus,
 
   // Platinum categories (slug = category slug)
   "best-tertiary-institution-library": plt_lib,
@@ -78,12 +82,19 @@ export function getSubpageHeroImage(slug: string): string | undefined {
 export const TIER_HERO_IMAGES: Record<string, string> = {
   "africa-education-icon": tierIcon,
   "influencer-education-impact": tierInfluencer,
+  "influencer-education-impact-2026": tierInfluencer,
   platinum: tierPlatinum,
   "platinum-recognition": tierPlatinum,
   "gold-blue-garnet": tierGbg,
 };
 
+
 export function getTierHeroImage(tier: TierSlug | string): string | undefined {
-  return TIER_HERO_IMAGES[tier];
+  return TIER_HERO_IMAGES[tier] ?? SUBPAGE_HERO_IMAGES[tier];
+}
+
+/** Combined lookup: returns a story hero image for any tier, category, or subcategory slug. */
+export function getStoryHeroImage(slug: string): string | undefined {
+  return TIER_HERO_IMAGES[slug] ?? SUBPAGE_HERO_IMAGES[slug];
 }
 
