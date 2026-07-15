@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { AlertCircle, Loader2, Send, ShieldCheck } from "lucide-react";
+import { AlertCircle, Loader2, Send, ShieldCheck, Sparkles } from "lucide-react";
 import { z } from "zod";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -19,6 +19,10 @@ import { supabase } from "@/integrations/supabase/client";
 import type { AwardCategoryForm } from "@/config/nomination/types";
 import { ICON_NOMINEE_TYPES } from "@/config/nomination/iconTaxonomy";
 import { trackEvent } from "@/lib/analytics";
+import { useDraftPersistence } from "@/features/nominate/useDraftPersistence";
+import { AccountAtSubmitPanel } from "@/features/nominate/AccountAtSubmitPanel";
+import { useAuth } from "@/contexts/AuthContext";
+
 
 // Mirrors the server-side zod schema in supabase/functions/nominations-submit.
 const submitSchema = z.object({
