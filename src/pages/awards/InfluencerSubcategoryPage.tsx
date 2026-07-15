@@ -9,6 +9,7 @@ import {
   type InfluencerSubcategoryContent,
 } from "@/config/influencer/subcategoryContent";
 import { InfluencerNominationForm } from "@/components/awards/InfluencerNominationForm";
+import { getStoryHeroImage } from "@/config/awards/subpageHeroImages";
 
 const CANONICAL_ORIGIN = "https://nesaafrica.lovable.app";
 const PARENT_TIER_HREF = "/awards/influencer-education-impact";
