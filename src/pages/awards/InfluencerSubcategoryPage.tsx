@@ -246,6 +246,7 @@ export default function InfluencerSubcategoryPage({ slugOverride }: Props) {
               </Link>
             </Button>
           </div>
+          </div>
         </header>
 
         {/* Sticky jump nav */}
