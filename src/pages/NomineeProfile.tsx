@@ -428,6 +428,14 @@ export default function NomineeProfile() {
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
             {/* Main Column */}
             <div className="lg:col-span-2 space-y-8">
+              {/* Nominee-owned actions: shareable endorsement link + acceptance entry */}
+              <NomineeEndorseShare
+                nomineeName={nominee.name}
+                nomineeSlug={nominee.slug}
+                awardTitle={nominee.awardTitle}
+                subcategoryTitle={nominee.subcategoryTitle}
+              />
+
               {/* Impact Story Arc — Problem → Intervention → Results → Vision */}
               <ImpactStoryArc nominee={nominee} />
 
