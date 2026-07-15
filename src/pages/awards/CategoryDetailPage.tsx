@@ -31,6 +31,7 @@ import { listSubcategoriesForCategory } from "@/config/recognition/categoryAlias
 import { buildCategoryForm } from "@/config/recognition/buildCategoryForm";
 import { NativeCategoryNominationForm } from "@/components/awards/NativeCategoryNominationForm";
 import { CategorySubcategoryNominees } from "@/components/awards/CategorySubcategoryNominees";
+import { AwardOverviewHowTo } from "@/components/awards/AwardOverviewHowTo";
 import { getStoryHeroImage } from "@/config/awards/subpageHeroImages";
 
 const SITE = "https://nesaafrica.lovable.app";
