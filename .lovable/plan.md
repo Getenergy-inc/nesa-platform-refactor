@@ -1,97 +1,63 @@
-## Objective
+# NESA.Africa 22-Page Master Refactor — Execution Plan
 
-Transform NESA-Africa from a handbook-style site into a scannable recognition & impact platform. Reduce cognitive load, unify the four recognition tiers, remove voting/competition language from 2026 surfaces, and standardise every page around one purpose · one audience · one primary CTA.
+This is a large, multi-phase refactor. Rather than attempting all 22 pages + 22 award subpages + nav + forms + redirects in one turn, this plan sequences the work into shippable phases that build on the Phase 0 foundations already in place (`refactorRedirects2026.ts`, `HeroCompact`, `CTAStack`, `TrustIndicators`, `TierNoticeBanner`, `TierClusterLayout`, `canonical-map.md`).
 
-## Working principles (locked from your brief)
+## Phase A — Architecture & Navigation (ship first)
 
-- **Positioning:** "Africa's Education Recognition & Impact Platform · Recognising the Enablers of Education for All Across Africa."
-- **Geography:** 8 Africa Regions + African Diaspora. Friends of Africa is a participation class, not a region.
-- **Recognition:** 4 tiers — Icon (3 pathways, 9 laureates, no vote), Blue Garnet 2026 (recognition only, competition from 2027), Platinum (jury-only), Influencer (impact-based).
-- **Copy:** short paragraphs, no "excellence" language, no voting/competition wording on 2026 pages, no endorsements-as-votes.
-- **CTAs:** one primary + one secondary + one tertiary per page. Max two repeats of primary.
+1. **Canonical 22-page route map** — update `docs/refactor/canonical-map.md` and `src/config/siteNavigation.ts` to match the exact 22 routes and the 8-item primary nav (About · Recognition · Impact · Directory · Community · Media · Support · Nominate · Sign In · Language). Consolidated new routes: `/recognition`, `/partners-sponsors`, `/events`, `/resources`, `/policies`.
+2. **Redirect register** — extend `src/config/refactorRedirects2026.ts` with every old→new mapping (Partners+Sponsors merge, EduAid/Rebuild/Scholarships/AfriEdu → `/impact`, NESA TV/News/Gallery/Press → `/media`, Gala/Webinars → `/events`, all policies → `/policies`, FAQs → `/faqs`, etc.) and wire in `App.tsx`.
+3. **Footer** — collapse `NESAFooter` to 5 groups (About · Recognition · Impact · Participate · Support), remove obsolete voting links.
+4. **Global nav dropdowns** — restrict Recognition dropdown to 4 tier roots only (no category leaks).
 
-## Delivery model
+## Phase B — Reusable subpage template
 
-Two artefacts precede any code beyond navigation:
+5. Build `src/components/awards/subpage/AwardSubpageTemplate.tsx` implementing the 10-block order from §9 (hero → recognises → who → examples → geography → featured 6 nominees → how it works → integrity → FAQs ≤5 → final CTA). Data-driven from a single `subpageContent` config.
+6. Create `src/config/awards/subpages2026.ts` — the source of truth for all 22 award subpages (3 Icon + 3 Influencer + 9 Blue Garnet + 7 Platinum).
 
-1. **Canonical map** at `docs/refactor/canonical-map.md` — every current route → keep / merge / redirect / delete, with new URL, primary audience, primary CTA, word budget, and hero image slot.
-2. **Redirect + removal register** at `src/config/redirects.ts` — central 301 table wired into `App.tsx` so we can delete duplicates immediately without breaking inbound links (your combined answer 1+2).
+## Phase C — Award subpages (22)
 
-Every phase updates both artefacts. Nothing gets deleted unless a redirect exists.
+7. Register dynamic routes and wire each of the 22 subpages using the template + config. Ensure each is reachable ONLY via its parent tier page (breadcrumbs, pathway cards, category directory) — none appear in global nav.
+8. Update the 4 tier landing pages to expose their subpages via a `PathwaysGrid` / `CategoryGrid` block.
 
-## Phase plan
+## Phase D — Consolidated core pages
 
-### Phase 0 — Foundations (single turn)
-- Ship `docs/refactor/canonical-map.md` covering all ~183 audited pages grouped by the 15 clusters in §47 of the brief.
-- Ship `src/config/redirects.ts` + a `<RedirectResolver />` mounted at the top of `App.tsx` routes so old vote pages, 2025 award pages, duplicate About/Sponsor pages, and 5-region regional pages 301 to their new canonical routes.
-- Ship `src/config/siteNavigation.ts` rewrite to the 10-item primary nav (About · Recognition · Impact Programmes · Directory · Media · Get Involved · Support · Nominate · Sign In · Language) with the three approved dropdowns only.
-- Ship reusable primitives: `PageShell`, `HeroCompact`, `TierNoticeBanner`, `CTAStack` (primary/secondary/tertiary), `FeaturedNomineeStrip`, `FAQAccordion`, `TrustIndicators`. All consume design tokens — no ad-hoc colours.
+9. `/recognition` — new 4-card tier overview page.
+10. `/impact` — merge EduAid, Rebuild, Special Needs, Scholarships, Afri-EduTourism into one hub with section cards.
+11. `/partners-sponsors` — new merged page with two clear journeys + integrity firewall.
+12. `/media` — merge TV / Radio / News / Stories / Gallery / Press.
+13. `/events` — merge Gala 2026 / Conferences / Webinars / Tickets / Accreditation.
+14. `/resources` — new downloads/reports hub.
+15. `/policies` — new policy hub linking existing policy pages.
+16. `/faqs` — searchable accordion (single page, categorised).
+17. `/contact` — single routing form replacing multiple contact endpoints.
+18. Home, About, Directory (`/nominees`), Hall of Fame, `/nominate`, `/sign-in`, `/dashboard`, `/search` — content trims to 300–700 words, one primary + one secondary CTA above the fold. (Home hero already shipped in Phase 1.)
 
-### Phase 1 — Homepage + IA switch-over
-- Rebuild `/` to the 10-block spec (hero → trust · 4 tier cards · directory preview · how it works · impact · participation · media · final CTA) at 500–650 words.
-- Generate a single homepage hero visual (African classroom / laureate portrait mosaic) via imagegen premium; reuse existing portraits where present.
-- Wire `SiteHeader` + `NESAFooter` to the new navigation config; retire mega menu overflow.
-- Analytics events registered: `hero_cta_click`, `tier_card_click`, `directory_preview_click`, `final_cta_click`.
+## Phase E — Nomination flow inversion
 
-### Phase 2 — 4 Award landing clusters
-Standardise every tier around the existing `TierClusterLayout` (hero · tier notice · category cards · nominate CTA · how it works · featured nominees · outputs · integrity · FAQs · final CTA), 700–900 words each. Supporting routes (`/about`, `/criteria`|`/categories`|`/pathways`|`/guidelines`, `/nominate`, `/nominees`) already exist — content rewrite + hero regeneration only.
+19. Rework `/nominate` and tier `/nominate` sub-routes so the form is reachable without a signup wall; account creation happens at submit. Draft persistence across auth handoff. Existing users sign in inline.
 
-| Route | Hero art | Notes |
-|---|---|---|
-| `/awards/africa-education-icon` | Hall of Fame portrait mosaic | 3 pathways, add `/hall-of-fame` link |
-| `/awards/gold-blue-garnet` | Continental impact still | Add `/awards/gold-blue-garnet/2027-competition` teaser |
-| `/awards/platinum` | Institutional/library still | Jury-only notice on every sub-page |
-| `/awards/influencer-education-impact` | Split hero (social · sport · music) | Embedded one-page nomination form after hero |
+## Phase F — Directory, profile, regions
 
-### Phase 3 — Directory + Nominee profile
-- Rename `/nominees` visible title to **Africa Education Impact Directory**; keep URL for SEO, add H1 change + JSON-LD `CollectionPage`.
-- Filter refactor: recognition tier · category · country · region · organisation type. Collapsed by default on mobile.
-- `NomineeProfile` template locked to §19 spec with tabbed evidence/timeline/media. PII columns already restricted server-side — audit `select` calls one more time.
+20. Update `/nominees` filters to the specified set (tier · category · country · region · org type) with 8-region model + Diaspora as separate class.
+21. Country → region auto-assignment in nomination + directory (no manual region selection for public users).
+22. `/nominee/:slug` profile template audit against §15 (hide private evidence, NRC notes, jury scores).
 
-### Phase 4 — Nomination flows
-- `/nominate` becomes a chooser only (four tier cards + "who are you nominating?" selector).
-- Each tier gets a dedicated one-page form under `/awards/:tier/nominate` using existing `NativeCategoryNominationForm` (already emits success + redirect analytics from prior turn). No account required pre-submit.
-- Kill legacy multi-form omnibus pages via redirects.
+## Phase G — QA & analytics
 
-### Phase 5 — Impact, Chapters, Community, Volunteer/Ambassador, Sponsor, Partner, Media, Events, Support
-Apply the standard landing template (§13) to each cluster. Each cluster page ≤ 700 words; long-form policy content moves under `/policies/*` and `/help/*` where the brief already prescribes routes. Sponsorship packages become a downloadable brochure; sponsor landing shrinks to one card grid.
-
-### Phase 6 — Governance, NRC, Judges, Dashboards, Auth
-- Public governance pages compressed; full policies live under `/policies/*`.
-- NRC + Judges portals: no visual overhaul, just navigation labels and copy alignment (workflows already correct).
-- Dashboard task cards standardised via a shared `DashboardTaskCard` primitive.
-
-### Phase 7 — SEO, analytics, performance, accessibility
-- Per-route `<Helmet>` audit: unique title/description/canonical/og. `og:url` self-references route.
-- Regenerate `public/sitemap.xml` via `scripts/generate-sitemap.ts` from the canonical map (removes obsolete vote/2025 URLs).
-- Analytics events registered in `src/lib/analytics.ts` per §50 (page_view, cta_click{slot}, scroll_depth, video_play, form_start/abandon/error/submit, directory_search, filter_use, profile_view, share, endorsement, cert_download, print_request, gala_request, donation_start/complete).
-- Accessibility skill pass on every rebuilt template (button-name, main landmark, tap targets, `h-dvh`).
-- Perf: lazy-load below-the-fold media, compress hero PNGs → WebP, paginate directory (already in place), remove autoplay video.
-
-### Phase 8 — Cleanup + QA
-- Sweep for lingering "excellence", vote language, 60/40 references, five-region maps, Friends-of-Africa-as-region.
-- Playwright coverage: nav breakpoints, tier cluster smoke tests, form submission + redirect analytics, directory filter interactions.
-- Publish redirect audit report + duplicate-removal report to `docs/refactor/`.
-
-## Deliverables per phase
-
-Every phase closes with: updated canonical map row status, redirect entries added, Playwright spec, analytics events registered, and a short changelog under `docs/refactor/changelog/PHASE-N.md`.
+23. Analytics events per §21 (CTA clicks, form starts/abandon/success, directory filters, profile views, endorsements, cert downloads, donation start/complete, video plays, scroll depth).
+24. Playwright specs for: nav shows only 8 items · Recognition dropdown has only 4 tiers · every redirect resolves · each of the 22 subpages renders 10 blocks · nomination-first flow works without signup.
+25. Delete duplicate old routes AFTER redirects verified.
 
 ## Technical notes
 
-- Route contract stays React Router in `src/App.tsx`; redirect table drives 301s so we can delete pages the same turn we redirect them.
-- Design tokens (`bg-charcoal`, `text-gold`, `bg-blue-garnet`) already defined — no new palette.
-- All new hero art generated with imagegen premium at 1600×900 into `src/assets/refactor/*.jpg`, then referenced via ES import. Portraits reuse `imageManifest.ts`.
-- Copy source: NESA voice, written by me, flagged in `data/copy/*.ts` files so you can edit without touching JSX.
-- StageGate + PII RLS already in place from prior turns; no schema changes expected until Phase 6 dashboard tweaks.
+- Content authority: **hybrid** — verbatim for legal/statement blocks (Blue Garnet 2026 Edition statement, integrity notes), NESA voice for hero/CTA copy.
+- All 22 subpages share one template + one config file — do not fork per page.
+- Dynamic totals (nominee counts, country/region counts, verification status) must come from Supabase via existing `useDbSpine`/`useNominees` hooks, not hardcoded.
+- Word budgets enforced via lint in `scripts/check-banned-strings.sh` (add a soft check).
+- No component deleted until its old URL is in `refactorRedirects2026.ts`.
 
-## What I need from you to start Phase 0
+## Shipping cadence
 
-Approve this plan and I'll ship Phase 0 (canonical map + redirect resolver + new nav config + shared primitives) in one turn. Phase 1 follows immediately after.
+Each phase is one turn. I propose to start with **Phase A (Architecture & Navigation)** immediately after your approval — it unblocks every subsequent phase without touching page content yet.
 
-## What is explicitly out of scope
-
-- Backend schema changes beyond additive analytics events.
-- New payments, wallet, or AGC mechanics.
-- Rewriting NRC/judges evaluation logic.
-- Video production — only poster images + embed hardening.
+Reply **"Approve — start Phase A"** to proceed, or tell me which phase to reorder / skip.
