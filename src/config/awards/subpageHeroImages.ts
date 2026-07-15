@@ -42,10 +42,14 @@ export const SUBPAGE_HERO_IMAGES: Record<string, string> = {
   "icon-lit": iconLit,
   "icon-tech": iconTech,
 
-  // Influencer Education Impact subcategories
+  // Influencer Education Impact subcategories (short codes)
   "inf-soc": infSoc,
   "inf-spt": infSpt,
   "inf-mus": infMus,
+  // Long-form aliases used by InfluencerSubcategoryPage
+  "african-social-media-influencers": infSoc,
+  "african-sports-icons-supporting-education": infSpt,
+  "african-music-icons-supporting-education": infMus,
 
   // Platinum categories (slug = category slug)
   "best-tertiary-institution-library": plt_lib,
