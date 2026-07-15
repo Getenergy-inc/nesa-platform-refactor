@@ -84,8 +84,27 @@ export default function CategoryDetailPage() {
       />
 
       {/* Header */}
-      <section className="border-b border-gold/20 bg-gradient-to-b from-charcoal via-charcoal-light to-charcoal">
-        <div className="container mx-auto px-4 py-10 md:py-14">
+      <section className="relative overflow-hidden border-b border-gold/20 bg-gradient-to-b from-charcoal via-charcoal-light to-charcoal">
+        {(() => {
+          const heroImg = getStoryHeroImage(category.slug);
+          return heroImg ? (
+            <>
+              <img
+                src={heroImg}
+                alt={`${category.name} — ${BRAND_TAGLINE}`}
+                loading="eager"
+                width={1600}
+                height={900}
+                className="absolute inset-0 h-full w-full object-cover opacity-30"
+              />
+              <div
+                aria-hidden
+                className="absolute inset-0 bg-gradient-to-b from-charcoal/70 via-charcoal/80 to-charcoal"
+              />
+            </>
+          ) : null;
+        })()}
+        <div className="container relative mx-auto px-4 py-10 md:py-14">
           <Link
             to="/awards/18-categories"
             className="inline-flex items-center gap-1.5 text-xs text-ivory/60 hover:text-gold"
