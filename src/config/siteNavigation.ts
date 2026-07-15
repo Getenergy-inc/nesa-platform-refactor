@@ -42,6 +42,11 @@ import {
  * - Platinum & Gold-Blue Garnet expose their categories directly.
  * Each column starts with the tier landing page as an "Overview" link.
  */
+/** Slugify subcategory codes the same way `subpages2026.ts` does. */
+function subpageSlugFromCode(code: string): string {
+  return code.toLowerCase().replace(/[^a-z0-9]+/g, "-");
+}
+
 function buildRecognitionSections(): NavSection[] {
   const tierLanding: Record<string, string> = {
     "africa-education-icon": "/awards/africa-education-icon",
@@ -56,25 +61,38 @@ function buildRecognitionSections(): NavSection[] {
       { label: `${tier.shortName} Overview`, href: tierLanding[tier.slug] ?? `/recognition/${tier.slug}` },
     ];
 
-    // Single-category tiers → list subcategories.
+    // Single-category tiers → link each subcategory to its canonical subpage.
     if (cats.length === 1 && cats[0].subcategories.length > 0) {
       const cat = cats[0];
       for (const sub of cat.subcategories) {
         items.push({
           label: sub.name,
-          href: `${getCategoryPath(cat)}#${sub.code.toLowerCase()}`,
+          href: `/recognition/subpage/${subpageSlugFromCode(sub.code)}`,
         });
       }
     } else {
-      // Multi-category tiers → list categories.
+      // Multi-category tiers → link each category to its canonical subpage.
       for (const c of cats) {
-        items.push({ label: c.shortName ?? c.name, href: getCategoryPath(c) });
+        items.push({
+          label: c.shortName ?? c.name,
+          href: `/recognition/subpage/${c.slug}`,
+        });
       }
+    }
+
+    // Keep the legacy full category page reachable at the end of each column.
+    if (cats.length > 1) {
+      items.push({
+        label: `All ${tier.shortName} categories →`,
+        href: tierLanding[tier.slug] ?? `/recognition/${tier.slug}`,
+      });
     }
 
     return { title: tier.shortName, items };
   });
 }
+// getCategoryPath retained for other consumers; not used above.
+void getCategoryPath;
 
 export const SITE_NAV: NavItem[] = [
   {
