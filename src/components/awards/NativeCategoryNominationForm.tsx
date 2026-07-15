@@ -133,6 +133,8 @@ export function NativeCategoryNominationForm({
 
   const isIconFamily = form.family === "africa-education-icon";
 
+  const { user } = useAuth();
+
   const [state, setState] = useState<FormState>({
     ...INITIAL,
     nominee_type: isIconFamily ? "Africans in Africa" : INITIAL.nominee_type,
@@ -141,9 +143,25 @@ export function NativeCategoryNominationForm({
   const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
+  const [nominationRef, setNominationRef] = useState<string | null>(null);
+
+  // Draft persistence (localStorage; anon-safe).
+  const { draftToken, hydratedValues, clearDraft } = useDraftPersistence<FormState>(
+    `native-${form.family}-${form.slug}`,
+    state,
+  );
+
+  useEffect(() => {
+    if (hydratedValues) {
+      setState((prev) => ({ ...prev, ...hydratedValues }));
+      trackEvent("nomination_draft_restored", { form: form.slug, token: draftToken });
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [hydratedValues]);
 
   const set = <K extends keyof FormState>(k: K, v: FormState[K]) =>
     setState((p) => ({ ...p, [k]: v }));
+
 
   const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
