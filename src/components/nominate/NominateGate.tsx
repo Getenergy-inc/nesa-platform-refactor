@@ -1,22 +1,22 @@
 import { ReactNode } from "react";
-import { Navigate, useLocation, Link } from "react-router-dom";
-import { ShieldAlert, LogIn } from "lucide-react";
+import { Link } from "react-router-dom";
+import { ShieldAlert, Sparkles } from "lucide-react";
 import { useAuth } from "@/contexts/AuthContext";
 import { StageGate } from "@/components/StageGate";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 
 /**
- * Gate for the /nominate flow.
+ * Gate for the /nominate flow — "Nominate First" model.
  *
- * Layered checks (fail-closed):
- *  1. StageGate("nominations") — respects season/edition timeline. When the
- *     nominations stage is closed the `StageLocked` fallback renders.
- *  2. Authentication — anonymous visitors are redirected to /account/login
- *     with `?next=` so they return to the nomination flow after signing in.
- *  3. Conflict-of-interest RBAC — Jury members and Sponsors cannot submit
- *     nominations. Admins/NRC/Chapter leads can (they may submit on behalf
- *     of the public); standard users can.
+ *  1. StageGate("nominations") — respects the season/edition timeline.
+ *  2. Conflict-of-interest RBAC — signed-in Jury/Sponsors cannot submit
+ *     (anonymous visitors are welcome; the account creation step happens at
+ *     or after submission via `AccountAtSubmitPanel`).
+ *
+ *  Authentication is intentionally NOT required to view or complete the
+ *  nomination form. See `src/features/nominate/` for draft persistence and
+ *  the inline account-at-submit component.
  */
 const COI_BLOCKED_ROLES = new Set(["jury", "sponsor"] as const);
 
@@ -50,8 +50,7 @@ interface NominateGateProps {
 }
 
 export function NominateGate({ children }: NominateGateProps) {
-  const { user, roles, loading } = useAuth();
-  const location = useLocation();
+  const { roles, loading } = useAuth();
 
   if (loading) {
     return (
@@ -61,41 +60,25 @@ export function NominateGate({ children }: NominateGateProps) {
     );
   }
 
-  if (!user) {
-    const next = encodeURIComponent(location.pathname + location.search);
-    return (
-      <div className="container max-w-2xl py-12">
-        <Card className="border-primary/30 bg-primary/5">
-          <CardContent className="flex flex-col items-center text-center py-10">
-            <div className="mb-4 rounded-full bg-primary/10 p-4">
-              <LogIn className="h-8 w-8 text-primary" aria-hidden />
-            </div>
-            <h2 className="font-display text-2xl font-bold mb-2">
-              Sign in to nominate
-            </h2>
-            <p className="text-muted-foreground max-w-md">
-              Nominations require a verified NESA-Africa account so we can
-              contact you if the review committee needs supporting evidence.
-            </p>
-            <div className="mt-6 flex flex-wrap gap-3 justify-center">
-              <Button asChild>
-                <Link to={`/account/login?next=${next}`}>Sign in</Link>
-              </Button>
-              <Button asChild variant="outline">
-                <Link to={`/register?next=${next}`}>Create account</Link>
-              </Button>
-            </div>
-          </CardContent>
-        </Card>
-      </div>
-    );
-  }
-
   if (roles.some((r) => COI_BLOCKED_ROLES.has(r as "jury" | "sponsor"))) {
     return <COIBlocked />;
   }
 
-  return <StageGate action="nominations">{children}</StageGate>;
+  return (
+    <StageGate action="nominations">
+      <div className="border-b border-gold/20 bg-charcoal/40">
+        <div className="container mx-auto px-4 py-2.5 flex items-center gap-2 text-xs text-foreground/75">
+          <Sparkles className="h-3.5 w-3.5 text-gold" aria-hidden />
+          <span>
+            Takes about two minutes · <span className="text-gold">No account required to begin.</span>{" "}
+            You&apos;ll create or confirm your free account at submission to track this nomination.
+          </span>
+        </div>
+      </div>
+      {children}
+    </StageGate>
+  );
 }
 
 export default NominateGate;
+

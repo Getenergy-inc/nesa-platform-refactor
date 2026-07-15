@@ -1,63 +1,105 @@
-# NESA.Africa 22-Page Master Refactor — Execution Plan
+# Nominate-First Refactor Plan
 
-This is a large, multi-phase refactor. Rather than attempting all 22 pages + 22 award subpages + nav + forms + redirects in one turn, this plan sequences the work into shippable phases that build on the Phase 0 foundations already in place (`refactorRedirects2026.ts`, `HeroCompact`, `CTAStack`, `TrustIndicators`, `TierNoticeBanner`, `TierClusterLayout`, `canonical-map.md`).
+Shift every public nomination journey from "sign up → sign in → nominate" to "nominate → create/confirm account at submit → track". Reuse one component across all forms.
 
-## Phase A — Architecture & Navigation (ship first)
+## Scope
 
-1. **Canonical 22-page route map** — update `docs/refactor/canonical-map.md` and `src/config/siteNavigation.ts` to match the exact 22 routes and the 8-item primary nav (About · Recognition · Impact · Directory · Community · Media · Support · Nominate · Sign In · Language). Consolidated new routes: `/recognition`, `/partners-sponsors`, `/events`, `/resources`, `/policies`.
-2. **Redirect register** — extend `src/config/refactorRedirects2026.ts` with every old→new mapping (Partners+Sponsors merge, EduAid/Rebuild/Scholarships/AfriEdu → `/impact`, NESA TV/News/Gallery/Press → `/media`, Gala/Webinars → `/events`, all policies → `/policies`, FAQs → `/faqs`, etc.) and wire in `App.tsx`.
-3. **Footer** — collapse `NESAFooter` to 5 groups (About · Recognition · Impact · Participate · Support), remove obsolete voting links.
-4. **Global nav dropdowns** — restrict Recognition dropdown to 4 tier roots only (no category leaks).
+Forms in scope (all rewired to the same submission gate):
+- Africa Education Icon nomination
+- Blue Garnet (competitive) nominations
+- Platinum Recognition nominations (incl. Diaspora, Library Nigeria, R&D Nigeria)
+- Influencer Education Impact nomination
+- School / Rebuild My School nominations
+- Local Chapter recommendations
+- Any generic `NativeCategoryNominationForm` entry point
 
-## Phase B — Reusable subpage template
+Out of scope: NRC review, judge, admin, and volunteer flows (they remain sign-in first).
 
-5. Build `src/components/awards/subpage/AwardSubpageTemplate.tsx` implementing the 10-block order from §9 (hero → recognises → who → examples → geography → featured 6 nominees → how it works → integrity → FAQs ≤5 → final CTA). Data-driven from a single `subpageContent` config.
-6. Create `src/config/awards/subpages2026.ts` — the source of truth for all 22 award subpages (3 Icon + 3 Influencer + 9 Blue Garnet + 7 Platinum).
+## Phase 1 — Backend (Lovable Cloud)
 
-## Phase C — Award subpages (22)
+Migration adds:
 
-7. Register dynamic routes and wire each of the 22 subpages using the template + config. Ensure each is reachable ONLY via its parent tier page (breadcrumbs, pathway cards, category directory) — none appear in global nav.
-8. Update the 4 tier landing pages to expose their subpages via a `PathwaysGrid` / `CategoryGrid` block.
+1. `public.nomination_drafts`
+   - `id uuid pk`, `draft_token text unique` (format `NOM-DRAFT-2026-XXXXXXXX`)
+   - `form_type text`, `award_tier text`, `category_slug text`, `subcategory_slug text`
+   - `nominee_data jsonb`, `nominator_email citext`, `session_id text`
+   - `status text` (`draft` | `awaiting_account` | `converted` | `expired`)
+   - `converted_to_nomination_id uuid null`
+   - `created_at`, `updated_at`, `expires_at` (default `now() + 30 days`)
+   - RLS: anon can `INSERT` + `SELECT`/`UPDATE` only rows matching their `draft_token` (passed via RPC param, not exposed to PostgREST filter); authenticated users can read drafts they own by email; service_role full.
+   - Nightly cleanup via cron: delete `expires_at < now()`.
 
-## Phase D — Consolidated core pages
+2. `public.nominations` additions (nullable):
+   - `source_draft_id uuid references nomination_drafts(id)`
+   - `nomination_reference text unique` (auto: `NESA-2026-XXXXXX`)
+   - `email_verification_status text default 'pending'`
 
-9. `/recognition` — new 4-card tier overview page.
-10. `/impact` — merge EduAid, Rebuild, Special Needs, Scholarships, Afri-EduTourism into one hub with section cards.
-11. `/partners-sponsors` — new merged page with two clear journeys + integrity firewall.
-12. `/media` — merge TV / Radio / News / Stories / Gallery / Press.
-13. `/events` — merge Gala 2026 / Conferences / Webinars / Tickets / Accreditation.
-14. `/resources` — new downloads/reports hub.
-15. `/policies` — new policy hub linking existing policy pages.
-16. `/faqs` — searchable accordion (single page, categorised).
-17. `/contact` — single routing form replacing multiple contact endpoints.
-18. Home, About, Directory (`/nominees`), Hall of Fame, `/nominate`, `/sign-in`, `/dashboard`, `/search` — content trims to 300–700 words, one primary + one secondary CTA above the fold. (Home hero already shipped in Phase 1.)
+3. Security-definer RPCs (bypass PostgREST guessing):
+   - `create_nomination_draft(payload jsonb) → draft_token`
+   - `update_nomination_draft(token, payload jsonb)`
+   - `get_nomination_draft(token) → jsonb`
+   - `convert_draft_to_nomination(token, user_id) → nomination_reference` — enforces StageGate + one-time conversion + audit event.
 
-## Phase E — Nomination flow inversion
+4. Audit: extend `audit_events` writes for `draft_created`, `draft_updated`, `draft_converted`, `account_prompt_shown`, `existing_account_detected`, `nomination_submitted`.
 
-19. Rework `/nominate` and tier `/nominate` sub-routes so the form is reachable without a signup wall; account creation happens at submit. Draft persistence across auth handoff. Existing users sign in inline.
+5. Keep existing `enforce_nominations_stage_gate` trigger — the RPC runs as invoker of `service_role` bypass only when StageGate is open.
 
-## Phase F — Directory, profile, regions
+## Phase 2 — Shared frontend primitives
 
-20. Update `/nominees` filters to the specified set (tier · category · country · region · org type) with 8-region model + Diaspora as separate class.
-21. Country → region auto-assignment in nomination + directory (no manual region selection for public users).
-22. `/nominee/:slug` profile template audit against §15 (hide private evidence, NRC notes, jury scores).
+New reusable modules under `src/features/nominate/`:
 
-## Phase G — QA & analytics
+- `useNominationDraft.ts` — hook that (a) mints/loads `draft_token` from `localStorage` key `nesa.draft.<formType>`, (b) debounced autosave to `nomination_drafts` via RPC, (c) hydrates initial values, (d) exposes `submit()` that routes through the gate.
+- `AccountAtSubmitDialog.tsx` — compact inline dialog (bottom sheet on mobile) with:
+  - Email → probe existing account (RPC `check_email_exists`).
+  - Branch A (new): full name, password, country, consent, optional phone → `signUp` with `emailRedirectTo: window.location.origin/nominee/verify`.
+  - Branch B (existing): password OR magic link OR reset.
+  - Google OAuth button (already configured). No forced social.
+  - On success → call `convert_draft_to_nomination` → route to success screen. Draft stays intact on any failure.
+- `NominationSuccessScreen.tsx` — reference, verify-email banner (non-blocking), CTA to dashboard + "Nominate another".
+- `DraftBanner.tsx` — "No account required to begin. Draft auto-saves." + restore/discard controls.
 
-23. Analytics events per §21 (CTA clicks, form starts/abandon/success, directory filters, profile views, endorsements, cert downloads, donation start/complete, video plays, scroll depth).
-24. Playwright specs for: nav shows only 8 items · Recognition dropdown has only 4 tiers · every redirect resolves · each of the 22 subpages renders 10 blocks · nomination-first flow works without signup.
-25. Delete duplicate old routes AFTER redirects verified.
+## Phase 3 — Wire into existing forms
+
+Refactor the shared form container(s) to use the hook + gate. Concrete touchpoints:
+
+- `src/components/awards/NativeCategoryNominationForm.tsx` — replace inline auth guard with `useNominationDraft`; swap submit path.
+- `src/components/nominate/NominateGate.tsx` — remove pre-form auth wall; keep StageGate only. Add "takes ~2 minutes · no account required to begin" strip.
+- `InfluencerNominationForm.tsx`, `NomineeEntryForm.tsx` (Icon), platinum form configs in `src/config/nomination/platinumForms.ts`, rebuild school nomination form, chapter recommendation form → all consume the same hook + `AccountAtSubmitDialog`.
+- Remove/adjust any route-level auth redirects on `/nominate/*` and `/awards/:tier/nominate` so anonymous users land directly on the form.
+
+## Phase 4 — Nominator dashboard
+
+Extend `NomineeDashboard` / add `NominatorDashboard` page at `/nominator` showing: reference, nominee, pathway, submitted_at, status, clarification requests, acceptance status. Gate sensitive actions behind `email_verification_status = 'verified'`; nomination itself is always visible.
+
+## Phase 5 — Analytics + copy sweep
+
+- Fire events listed in the brief through existing `analytics.ts` (`track()`), namespaced `nomination_*`.
+- Global copy sweep: "Register to Nominate" / "Sign Up Before Nominating" / "Create Account to Continue" → "Submit Nomination".
+- Add pre-form strip and post-form disclosure copy per brief.
+
+## Phase 6 — QA
+
+- Playwright specs under `tests/e2e/nominate-first/`:
+  - anonymous complete + new account submission
+  - anonymous complete + existing account sign-in
+  - draft survives reload / navigation / auth popup close
+  - StageGate closed → submit blocked with clear message, draft preserved
+  - mobile viewport bottom-sheet flow
+  - duplicate email → "Welcome Back" branch
+- Manual smoke on Icon, Platinum, Influencer, School, Chapter forms.
+
+## Rollout order
+
+1. Migration + RPCs (Phase 1) — requires user approval.
+2. Shared primitives (Phase 2).
+3. Wire Icon + Native forms first, verify, then fan out to remaining forms (Phase 3).
+4. Dashboard, analytics, copy, tests (Phases 4-6).
+
+I'll pause after each phase for a quick check before proceeding.
 
 ## Technical notes
 
-- Content authority: **hybrid** — verbatim for legal/statement blocks (Blue Garnet 2026 Edition statement, integrity notes), NESA voice for hero/CTA copy.
-- All 22 subpages share one template + one config file — do not fork per page.
-- Dynamic totals (nominee counts, country/region counts, verification status) must come from Supabase via existing `useDbSpine`/`useNominees` hooks, not hardcoded.
-- Word budgets enforced via lint in `scripts/check-banned-strings.sh` (add a soft check).
-- No component deleted until its old URL is in `refactorRedirects2026.ts`.
-
-## Shipping cadence
-
-Each phase is one turn. I propose to start with **Phase A (Architecture & Navigation)** immediately after your approval — it unblocks every subsequent phase without touching page content yet.
-
-Reply **"Approve — start Phase A"** to proceed, or tell me which phase to reorder / skip.
+- Drafts are anonymous-writable; the `draft_token` is the capability. Store it only in `localStorage` + returned to the caller — never expose via a list endpoint.
+- Password sign-up keeps Supabase's default confirm-email flow but we do NOT gate submission on confirmation; the RPC accepts `user_id` from the freshly established session.
+- Google OAuth `redirect_uri` stays `window.location.origin`; after callback we detect a pending draft token in `localStorage` and auto-run conversion.
+- Expiry cleanup uses a Supabase cron (`pg_cron`) if enabled, otherwise a scheduled edge function.

@@ -2733,6 +2733,71 @@ export type Database = {
           },
         ]
       }
+      nomination_drafts: {
+        Row: {
+          award_tier: string | null
+          category_slug: string | null
+          converted_at: string | null
+          converted_to_nomination_id: string | null
+          converted_user_id: string | null
+          created_at: string
+          draft_token: string
+          expires_at: string
+          form_type: string
+          id: string
+          nominator_email: string | null
+          nominee_data: Json
+          session_id: string | null
+          status: string
+          subcategory_slug: string | null
+          updated_at: string
+        }
+        Insert: {
+          award_tier?: string | null
+          category_slug?: string | null
+          converted_at?: string | null
+          converted_to_nomination_id?: string | null
+          converted_user_id?: string | null
+          created_at?: string
+          draft_token: string
+          expires_at?: string
+          form_type: string
+          id?: string
+          nominator_email?: string | null
+          nominee_data?: Json
+          session_id?: string | null
+          status?: string
+          subcategory_slug?: string | null
+          updated_at?: string
+        }
+        Update: {
+          award_tier?: string | null
+          category_slug?: string | null
+          converted_at?: string | null
+          converted_to_nomination_id?: string | null
+          converted_user_id?: string | null
+          created_at?: string
+          draft_token?: string
+          expires_at?: string
+          form_type?: string
+          id?: string
+          nominator_email?: string | null
+          nominee_data?: Json
+          session_id?: string | null
+          status?: string
+          subcategory_slug?: string | null
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "nomination_drafts_converted_to_nomination_id_fkey"
+            columns: ["converted_to_nomination_id"]
+            isOneToOne: false
+            referencedRelation: "nominations"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       nomination_ingest_audit: {
         Row: {
           action: string
@@ -2887,11 +2952,13 @@ export type Database = {
           created_nominee_id: string | null
           dedupe_match_id: string | null
           dedupe_score: number | null
+          email_verification_status: string | null
           evidence_urls: string[] | null
           id: string
           identity_hash: string | null
           justification: string | null
           last_query_at: string | null
+          nomination_reference: string | null
           nominator_id: string | null
           nominee_bio: string | null
           nominee_name: string
@@ -2915,6 +2982,7 @@ export type Database = {
           sla_deadline: string | null
           source: Database["public"]["Enums"]["nomination_source"] | null
           source_channel: string
+          source_draft_id: string | null
           source_form_id: string | null
           source_row_id: string | null
           source_sheet_id: string | null
@@ -2935,11 +3003,13 @@ export type Database = {
           created_nominee_id?: string | null
           dedupe_match_id?: string | null
           dedupe_score?: number | null
+          email_verification_status?: string | null
           evidence_urls?: string[] | null
           id?: string
           identity_hash?: string | null
           justification?: string | null
           last_query_at?: string | null
+          nomination_reference?: string | null
           nominator_id?: string | null
           nominee_bio?: string | null
           nominee_name: string
@@ -2963,6 +3033,7 @@ export type Database = {
           sla_deadline?: string | null
           source?: Database["public"]["Enums"]["nomination_source"] | null
           source_channel?: string
+          source_draft_id?: string | null
           source_form_id?: string | null
           source_row_id?: string | null
           source_sheet_id?: string | null
@@ -2983,11 +3054,13 @@ export type Database = {
           created_nominee_id?: string | null
           dedupe_match_id?: string | null
           dedupe_score?: number | null
+          email_verification_status?: string | null
           evidence_urls?: string[] | null
           id?: string
           identity_hash?: string | null
           justification?: string | null
           last_query_at?: string | null
+          nomination_reference?: string | null
           nominator_id?: string | null
           nominee_bio?: string | null
           nominee_name?: string
@@ -3011,6 +3084,7 @@ export type Database = {
           sla_deadline?: string | null
           source?: Database["public"]["Enums"]["nomination_source"] | null
           source_channel?: string
+          source_draft_id?: string | null
           source_form_id?: string | null
           source_row_id?: string | null
           source_sheet_id?: string | null
@@ -3085,6 +3159,13 @@ export type Database = {
             columns: ["season_id"]
             isOneToOne: false
             referencedRelation: "seasons"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "nominations_source_draft_id_fkey"
+            columns: ["source_draft_id"]
+            isOneToOne: false
+            referencedRelation: "nomination_drafts"
             referencedColumns: ["id"]
           },
           {
@@ -8346,12 +8427,40 @@ export type Database = {
         Args: { p_nominee_id: string }
         Returns: boolean
       }
+      check_email_exists: { Args: { p_email: string }; Returns: boolean }
       check_nrc_quorum: { Args: { p_nomination_id: string }; Returns: Json }
       compute_blue_garnet_results: {
         Args: { p_season_id: string }
         Returns: Json
       }
       compute_gold_results: { Args: { p_season_id: string }; Returns: Json }
+      convert_nomination_draft: {
+        Args: {
+          p_season_id?: string
+          p_subcategory_id?: string
+          p_token: string
+        }
+        Returns: {
+          nomination_id: string
+          nomination_reference: string
+        }[]
+      }
+      create_nomination_draft: {
+        Args: {
+          p_award_tier?: string
+          p_category_slug?: string
+          p_form_type: string
+          p_nominator_email?: string
+          p_nominee_data?: Json
+          p_session_id?: string
+          p_subcategory_slug?: string
+        }
+        Returns: {
+          draft_token: string
+          expires_at: string
+          id: string
+        }[]
+      }
       detect_vote_fraud: { Args: { p_season_id: string }; Returns: Json }
       ensure_user_wallet: { Args: { _user_id: string }; Returns: string }
       escalate_overdue_nrc_assignments: { Args: never; Returns: number }
@@ -8382,6 +8491,7 @@ export type Database = {
           verification_status: string
         }[]
       }
+      generate_draft_token: { Args: never; Returns: string }
       generate_identity_hash: {
         Args: {
           p_country?: string
@@ -8391,10 +8501,38 @@ export type Database = {
         }
         Returns: string
       }
+      generate_nomination_reference: { Args: never; Returns: string }
       generate_receipt_number: { Args: never; Returns: string }
       generate_referral_code: { Args: { p_prefix?: string }; Returns: string }
       generate_volunteer_referral_code: { Args: never; Returns: string }
       get_current_season: { Args: never; Returns: string }
+      get_nomination_draft: {
+        Args: { p_token: string }
+        Returns: {
+          award_tier: string | null
+          category_slug: string | null
+          converted_at: string | null
+          converted_to_nomination_id: string | null
+          converted_user_id: string | null
+          created_at: string
+          draft_token: string
+          expires_at: string
+          form_type: string
+          id: string
+          nominator_email: string | null
+          nominee_data: Json
+          session_id: string | null
+          status: string
+          subcategory_slug: string | null
+          updated_at: string
+        }
+        SetofOptions: {
+          from: "*"
+          to: "nomination_drafts"
+          isOneToOne: true
+          isSetofReturn: false
+        }
+      }
       get_rebuild_schools_admin: {
         Args: never
         Returns: {
@@ -8546,6 +8684,40 @@ export type Database = {
         }
       }
       slugify: { Args: { p: string }; Returns: string }
+      update_nomination_draft: {
+        Args: {
+          p_award_tier?: string
+          p_category_slug?: string
+          p_nominator_email?: string
+          p_nominee_data: Json
+          p_subcategory_slug?: string
+          p_token: string
+        }
+        Returns: {
+          award_tier: string | null
+          category_slug: string | null
+          converted_at: string | null
+          converted_to_nomination_id: string | null
+          converted_user_id: string | null
+          created_at: string
+          draft_token: string
+          expires_at: string
+          form_type: string
+          id: string
+          nominator_email: string | null
+          nominee_data: Json
+          session_id: string | null
+          status: string
+          subcategory_slug: string | null
+          updated_at: string
+        }
+        SetofOptions: {
+          from: "*"
+          to: "nomination_drafts"
+          isOneToOne: true
+          isSetofReturn: false
+        }
+      }
     }
     Enums: {
       acceptance_status: "PENDING" | "SENT" | "ACCEPTED" | "DECLINED"
