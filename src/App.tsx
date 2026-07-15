@@ -2351,15 +2351,31 @@ const App = () => (
                     }
                   />
                   <Route
-                    path="/faq"
+                    path="/faqs"
                     element={
                       <WithLayout>
                         <FAQPage />
                       </WithLayout>
                     }
                   />
-                  <Route path="/help-center" element={<Navigate to="/faq" replace />} />
-                  <Route path="/help" element={<Navigate to="/faq" replace />} />
+                  <Route
+                    path="/events"
+                    element={
+                      <WithLayout>
+                        <EventsPage />
+                      </WithLayout>
+                    }
+                  />
+                  <Route
+                    path="/resources"
+                    element={
+                      <WithLayout>
+                        <ResourcesPage />
+                      </WithLayout>
+                    }
+                  />
+                  <Route path="/help-center" element={<Navigate to="/faqs" replace />} />
+                  <Route path="/help" element={<Navigate to="/faqs" replace />} />
 
                   {/* Guidelines & EDI Matrix */}
                   <Route
