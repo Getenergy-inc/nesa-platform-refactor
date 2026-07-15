@@ -152,6 +152,7 @@ import CategoryDetailPage from "./pages/awards/CategoryDetailPage";
 import TierCategorySubcategoryPage from "./pages/awards/TierCategorySubcategoryPage";
 import TierClusterPage from "./pages/awards/cluster/TierClusterPage";
 import RecognitionHubPage from "./pages/recognition/RecognitionHubPage";
+import AwardSubpageRoute from "./pages/recognition/AwardSubpageRoute";
 import CategoryPage2026 from "./components/recognition2026/CategoryPage";
 import RedirectRoute from "./components/routing/RedirectRoute";
 import LegacyCategoryRedirect from "./components/routing/LegacyCategoryRedirect";
@@ -1015,6 +1016,8 @@ const App = () => (
                   <Route path="/recognition/influencer-education-impact" element={<InfluencerImpact2026 />} />
                   {/* 3-segment subcategory routes remain */}
                   <Route path="/recognition/gold-blue-garnet/:categorySlug/:subcategorySlug" element={<WithLayout><TierCategorySubcategoryPage /></WithLayout>} />
+                  {/* Phase C — 22 unified subpages driven by src/config/awards/subpages2026.ts */}
+                  <Route path="/recognition/subpage/:slug" element={<WithLayout><AwardSubpageRoute /></WithLayout>} />
                   {/* 18 dedicated category pages — unified renderer driven by src/config/recognition2026 */}
                   <Route path="/recognition/:tier/:category" element={<WithLayout><CategoryPage2026 /></WithLayout>} />
 
