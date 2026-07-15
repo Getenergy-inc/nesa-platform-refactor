@@ -34,7 +34,6 @@ import { TIERS } from "./recognition2026/tiers";
 import {
   getCategoriesForTier,
   getCategoryPath,
-  type CategoryDefinition,
 } from "./recognition2026/categories";
 
 /**
