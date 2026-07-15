@@ -51,12 +51,7 @@ export const SITE_NAV: NavItem[] = [
     label: "Recognition",
     href: "/recognition",
     analyticsId: "nav_recognition",
-    children: [
-      { label: "Africa Education Icon Award", href: "/awards/africa-education-icon" },
-      { label: "Blue Garnet Award", href: "/awards/gold-blue-garnet" },
-      { label: "Platinum Award", href: "/awards/platinum" },
-      { label: "Influencer Education Impact", href: "/awards/influencer-education-impact" },
-    ],
+    sections: buildRecognitionSections(),
   },
   {
     label: "Impact",
