@@ -7,6 +7,8 @@ import {
   type TierClusterConfig,
   type TierSubpage,
 } from "@/config/awards/tierCluster";
+import { getTierHeroImage } from "@/config/awards/subpageHeroImages";
+
 
 const CANONICAL_HOST = "https://nesaafrica.lovable.app";
 
@@ -93,6 +95,22 @@ export function TierClusterLayout({ tier, subpage, children }: Props) {
 
         {/* Hero */}
         <header className="container pt-4 pb-6 sm:pt-8 sm:pb-10">
+          {(() => {
+            const heroImg = getTierHeroImage(tier.slug);
+            return heroImg ? (
+              <div className="relative mb-6 overflow-hidden rounded-2xl border border-gold/20">
+                <img
+                  src={heroImg}
+                  alt={`${tier.name} — Enablers of Education for All Across Africa`}
+                  loading="eager"
+                  width={1600}
+                  height={900}
+                  className="h-48 w-full object-cover sm:h-64 md:h-80"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-charcoal via-charcoal/40 to-transparent" />
+              </div>
+            ) : null;
+          })()}
           <span
             className={`inline-flex items-center gap-2 rounded-full border px-3 py-1 text-[11px] sm:text-xs font-semibold uppercase tracking-[0.16em] ${accent.badge}`}
           >
@@ -103,6 +121,7 @@ export function TierClusterLayout({ tier, subpage, children }: Props) {
           </h1>
           <p className="mt-2 text-sm sm:text-base text-white/75 max-w-2xl">{tier.tagline}</p>
         </header>
+
 
         {/* Sticky sub-nav */}
         <div className="sticky top-14 sm:top-16 z-30 border-y border-white/10 bg-charcoal/95 backdrop-blur supports-[backdrop-filter]:bg-charcoal/70">
