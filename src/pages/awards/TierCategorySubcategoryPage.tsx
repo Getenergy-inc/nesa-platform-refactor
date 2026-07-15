@@ -17,6 +17,7 @@ import { getTierBySlug } from "@/config/recognitionArchitecture2026";
 import { listSubcategoriesForCategory } from "@/config/recognition/categoryAlias";
 import { buildCategoryForm } from "@/config/recognition/buildCategoryForm";
 import { NativeCategoryNominationForm } from "@/components/awards/NativeCategoryNominationForm";
+import { AwardOverviewHowTo } from "@/components/awards/AwardOverviewHowTo";
 import { getStoryHeroImage } from "@/config/awards/subpageHeroImages";
 import { supabase } from "@/integrations/supabase/client";
 import { useEffect, useState } from "react";
@@ -191,6 +192,17 @@ export default function TierCategorySubcategoryPage() {
           </div>
         </div>
       </section>
+
+      {/* Overview & How to Nominate */}
+      <AwardOverviewHowTo
+        name={subcategory.title}
+        tagline={subcategory.description}
+        tierLabel={`Gold–Blue Garnet · ${category.name}`}
+        nominateHref="#nominate"
+        secondaryHref={basePath}
+        secondaryLabel={`All of ${category.name}`}
+        kind="subcategory"
+      />
 
       {/* About */}
       <section className="container mx-auto px-4 py-10">
