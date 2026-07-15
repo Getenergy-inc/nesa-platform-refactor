@@ -22,6 +22,7 @@ import {
   type SubcategoryDef,
 } from "@/config/recognition2026/categories";
 import type { TierSlug } from "@/config/recognition2026/tiers";
+import { getSubpageHeroImage } from "@/config/awards/subpageHeroImages";
 
 // ── Shared building blocks ──────────────────────────────────────────────────
 
@@ -157,6 +158,8 @@ function fromCategory(cat: CategoryDefinition): AwardSubpageContent {
       lede: cat.summary,
       primary: { label: "Nominate an Education Enabler", href: nominateHref },
       secondary: { label: "Explore verified Enablers", href: directoryHref },
+      imageSrc: getSubpageHeroImage(slug),
+      imageAlt: `${cat.name} — Enablers of Education for All Across Africa`,
     },
     notice: {
       kind: TIER_NOTICE_KIND[cat.tier],
@@ -229,6 +232,8 @@ function fromSubcategory(
       lede: sub.description,
       primary: { label: "Nominate an Education Enabler", href: nominateHref },
       secondary: { label: "Explore verified Enablers", href: directoryHref },
+      imageSrc: getSubpageHeroImage(slug),
+      imageAlt: `${sub.name} — ${parent.shortName}`,
     },
     notice: {
       kind: TIER_NOTICE_KIND[parent.tier],
