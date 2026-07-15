@@ -22,6 +22,7 @@ import {
   type EnrichedNominee,
 } from "@/lib/nesaData";
 import { NomineeActions, EnrichedProfileCard } from "@/components/nominees";
+import { NomineeEndorseShare } from "@/components/nominees/NomineeEndorseShare";
 import { NomineeImage } from "@/components/shared/NomineeImage";
 import { getResolvedNomineeImage } from "@/hooks/useResolvedNomineeImages";
 import { getEnrichedProfile } from "@/hooks/useEnrichedProfiles";
