@@ -49,7 +49,7 @@ const SECTIONS: FooterSection[] = [
     links: [
       { label: "Africa Education Icon", href: "/awards/africa-education-icon" },
       { label: "Blue Garnet Award", href: "/awards/gold-blue-garnet" },
-      { label: "Platinum Award", href: "/awards/platinum-recognition" },
+      { label: "Platinum Award", href: "/awards/platinum" },
       { label: "Influencer Education Impact", href: "/awards/influencer-education-impact" },
       { label: "Africa Education Impact Directory", href: "/nominees" },
     ],
@@ -58,9 +58,9 @@ const SECTIONS: FooterSection[] = [
     id: "impact",
     title: "Impact",
     links: [
+      { label: "Impact Programmes", href: "/impact" },
       { label: "EduAid-Africa", href: "/eduaid-africa" },
       { label: "Rebuild My School Africa", href: "/eduaid-africa/rebuild-my-school" },
-      { label: "Scholarships", href: "/impact/scholarships" },
       { label: "Afri-EduTourism", href: "/impact/afri-edutourism-2027" },
     ],
   },
@@ -69,24 +69,24 @@ const SECTIONS: FooterSection[] = [
     title: "Participate",
     links: [
       { label: "Nominate", href: "/nominate" },
-      { label: "Volunteer", href: "/volunteer" },
+      { label: "Community", href: "/community" },
       { label: "Local Chapters", href: "/chapters" },
-      { label: "Sponsor", href: "/sponsors" },
-      { label: "Partner", href: "/get-involved/partner" },
+      { label: "Volunteer", href: "/volunteer" },
+      { label: "Partners & Sponsors", href: "/partners-sponsors" },
     ],
   },
   {
     id: "support",
     title: "Support",
     links: [
+      { label: "Resources", href: "/resources" },
       { label: "FAQs", href: "/faqs" },
       { label: "Contact", href: "/contact" },
-      { label: "Privacy Policy", href: "/policies#privacy" },
-      { label: "Terms and Conditions", href: "/policies#terms" },
-      { label: "Accessibility", href: "/policies#accessibility" },
+      { label: "Policies", href: "/policies" },
     ],
   },
 ];
+
 
 function trackFooter(section: string, label: string, href: string) {
   trackNav("footer_click", { section, label, href });
