@@ -77,6 +77,7 @@ const GEOGRAPHY_REGIONS: Record<CategoryDefinition["geographyModel"], string[]> 
   ],
   MULTI_COUNTRY_AFRICA: ["Multi-country (≥2 African countries)", "Continental reach"],
   NIGERIA_STATE_ZONE: ["Nigeria (36 states + FCT)", "6 geopolitical zones"],
+  NIGERIA_STATE_ONLY: ["Nigeria (36 states + FCT)"],
   INTERNATIONAL_PARTNERSHIP: ["Africa + international partner country", "Multi-country African footprint"],
   DIASPORA_COUNTRY_IMPACT: ["Diaspora country of residence", "African country of programme impact"],
 };
