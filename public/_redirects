@@ -61,7 +61,7 @@
 /cookie-policy                                               /policies            301
 /language                                                    /                    301
 
-# --- 2. SPA routes (439 explicit paths from src/App.tsx) ---
+# --- 2. SPA routes (443 explicit paths from src/App.tsx) ---
 /recognition/influencer-education-impact/african-sports-icons-supporting-education /index.html          200
 /recognition/influencer-education-impact/african-music-icons-supporting-education /index.html          200
 /recognition/influencer-education-impact/african-social-media-influencers /index.html          200
@@ -194,6 +194,9 @@
 /nrc/dashboard/settings                                      /index.html          200
 /volunteer/share-assets                                      /index.html          200
 /africa-education-icon                                       /index.html          200
+/awards/:tier/criteria                                       /index.html          200
+/awards/:tier/nominate                                       /index.html          200
+/awards/:tier/nominees                                       /index.html          200
 /awards/category/:slug                                       /index.html          200
 /awards/digital-voices                                       /index.html          200
 /dashboard/nominations                                       /index.html          200
@@ -238,6 +241,7 @@
 /about/how-it-works                                          /index.html          200
 /about/verification                                          /index.html          200
 /admin/contributors                                          /index.html          200
+/awards/:tier/about                                          /index.html          200
 /awards/blue-garnet                                          /index.html          200
 /awards/eligibility                                          /index.html          200
 /certificates/guide                                          /index.html          200
