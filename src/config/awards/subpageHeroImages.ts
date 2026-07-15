@@ -72,14 +72,18 @@ export function getSubpageHeroImage(slug: string): string | undefined {
   return SUBPAGE_HERO_IMAGES[slug];
 }
 
-/** Editorial hero image for each of the 4 recognition tiers. */
-export const TIER_HERO_IMAGES: Record<TierSlug, string> = {
+/** Editorial hero image for each of the 4 recognition tiers.
+ *  Keyed by both canonical TierSlug and the tier-cluster URL slug variant
+ *  (`platinum-recognition`) so either lookup works. */
+export const TIER_HERO_IMAGES: Record<string, string> = {
   "africa-education-icon": tierIcon,
   "influencer-education-impact": tierInfluencer,
   platinum: tierPlatinum,
+  "platinum-recognition": tierPlatinum,
   "gold-blue-garnet": tierGbg,
 };
 
-export function getTierHeroImage(tier: TierSlug): string {
+export function getTierHeroImage(tier: TierSlug | string): string | undefined {
   return TIER_HERO_IMAGES[tier];
 }
+
