@@ -506,7 +506,8 @@ const App = () => (
                   <Route path="/about/verification" element={<Navigate to="/governance#verification" replace />} />
                   <Route path="/about/eligibility" element={<Navigate to="/awards/eligibility" replace />} />
                   <Route path="/about/partners" element={<Navigate to="/sponsors" replace />} />
-                  <Route path="/faqs" element={<Navigate to="/about#faqs" replace />} />
+                  {/* /faqs is canonical (Phase D); /faq legacy points to it */}
+                  <Route path="/faq" element={<Navigate to="/faqs" replace />} />
 
                   {/* Awards sub-pages */}
                   <Route path="/awards/eligibility" element={<Navigate to="/awards#eligibility" replace />} />
