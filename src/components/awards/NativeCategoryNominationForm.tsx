@@ -286,34 +286,71 @@ export function NativeCategoryNominationForm({
   if (submitted) {
     const seconds = Math.max(1, Math.round(successRedirectDelayMs / 1000));
     return (
-      <div className="rounded-2xl border border-gold/40 bg-charcoal-light/50 p-6 text-center text-foreground/90">
-        <ShieldCheck className="mx-auto mb-3 h-8 w-8 text-gold" />
-        <h3 className="font-playfair text-2xl text-gold mb-2">
-          Nomination received
-        </h3>
-        <p className="text-sm text-foreground/75 max-w-md mx-auto">
-          Your submission for <span className="text-gold">{form.name}</span> is
-          queued for NRC review. You will receive a confirmation email shortly.
-        </p>
-        {successRedirectHref && (
-          <div className="mt-5 space-y-2">
-            {successRedirectDelayMs > 0 && (
-              <p className="text-xs text-foreground/60">
-                Redirecting to {successRedirectLabel ?? "the nominees page"} in {seconds}s…
-              </p>
-            )}
-            <Link
-              to={successRedirectHref}
-              onClick={() =>
-                trackEvent("nomination_redirect_manual", {
-                  category: form.slug,
-                  family: form.family,
-                  subcategory: state.subcategory_slug || null,
-                  destination: successRedirectHref,
-                })
-              }
-              className="inline-flex items-center justify-center rounded-lg border border-gold/60 bg-gold/10 px-4 py-2 text-sm font-semibold text-gold transition hover:bg-gold hover:text-charcoal"
-            >
+      <div className="space-y-5">
+        <div className="rounded-2xl border border-gold/40 bg-charcoal-light/50 p-6 text-center text-foreground/90">
+          <ShieldCheck className="mx-auto mb-3 h-8 w-8 text-gold" />
+          <h3 className="font-playfair text-2xl text-gold mb-2">Nomination received</h3>
+          <p className="text-sm text-foreground/75 max-w-md mx-auto">
+            Your submission for <span className="text-gold">{form.name}</span> is queued for NRC
+            review.
+          </p>
+          {nominationRef && (
+            <p className="mt-2 text-xs text-foreground/70">
+              Reference: <span className="text-gold font-mono">{nominationRef}</span>
+            </p>
+          )}
+          {successRedirectHref && (
+            <div className="mt-5 space-y-2">
+              {successRedirectDelayMs > 0 && (
+                <p className="text-xs text-foreground/60">
+                  Redirecting to {successRedirectLabel ?? "the nominees page"} in {seconds}s…
+                </p>
+              )}
+              <Link
+                to={successRedirectHref}
+                onClick={() =>
+                  trackEvent("nomination_redirect_manual", {
+                    category: form.slug,
+                    family: form.family,
+                    subcategory: state.subcategory_slug || null,
+                    destination: successRedirectHref,
+                  })
+                }
+                className="inline-flex items-center justify-center rounded-lg border border-gold/60 bg-gold/10 px-4 py-2 text-sm font-semibold text-gold transition hover:bg-gold hover:text-charcoal"
+              >
+                Go to {successRedirectLabel ?? "Nominees"} now
+              </Link>
+            </div>
+          )}
+        </div>
+
+        {!user && (
+          <AccountAtSubmitPanel
+            reference={nominationRef}
+            defaultEmail={state.nm_email}
+            defaultFullName={state.nm_full_name}
+            formSlug={form.slug}
+          />
+        )}
+      </div>
+    );
+  }
+
+
+  return (
+    <form
+      onSubmit={onSubmit}
+      className="rounded-2xl border border-gold/30 bg-charcoal-light/40 p-5 md:p-6 space-y-5"
+    >
+      <div className="flex items-start gap-2 rounded-lg border border-gold/30 bg-charcoal/40 p-3 text-xs text-foreground/80">
+        <Sparkles className="h-4 w-4 text-gold mt-0.5 shrink-0" aria-hidden />
+        <span>
+          <span className="text-gold font-semibold">No account required to begin.</span>{" "}
+          Complete the form below — you&apos;ll be offered a free account at submission to
+          track this nomination. Your draft auto-saves on this device.
+        </span>
+      </div>
+
               Go to {successRedirectLabel ?? "Nominees"} now
             </Link>
           </div>
