@@ -226,6 +226,17 @@ export default function CategoryDetailPage() {
         </div>
       )}
 
+      {/* Overview & How to Nominate */}
+      <AwardOverviewHowTo
+        name={category.name}
+        tagline={category.tagline}
+        tierLabel="Gold–Blue Garnet · Category"
+        nominateHref="#nominate"
+        secondaryHref="/awards/gold-blue-garnet"
+        secondaryLabel="Tier Overview"
+        kind="category"
+      />
+
       {/* Inline Nomination Form — surfaced FIRST so visitors can nominate immediately */}
       {form && (
         <section
