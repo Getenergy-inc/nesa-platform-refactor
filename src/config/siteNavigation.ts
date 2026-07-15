@@ -30,6 +30,53 @@ export interface NavItem {
   analyticsId?: string;
 }
 
+import { TIERS } from "./recognition2026/tiers";
+import {
+  getCategoriesForTier,
+  getCategoryPath,
+  type CategoryDefinition,
+} from "./recognition2026/categories";
+
+/**
+ * Recognition dropdown = 4 columns, one per tier.
+ * - Icon & Influencer (single-category tiers) expose their subcategories.
+ * - Platinum & Gold-Blue Garnet expose their categories directly.
+ * Each column starts with the tier landing page as an "Overview" link.
+ */
+function buildRecognitionSections(): NavSection[] {
+  const tierLanding: Record<string, string> = {
+    "africa-education-icon": "/awards/africa-education-icon",
+    "influencer-education-impact": "/awards/influencer-education-impact",
+    platinum: "/awards/platinum",
+    "gold-blue-garnet": "/awards/gold-blue-garnet",
+  };
+
+  return TIERS.map((tier) => {
+    const cats = getCategoriesForTier(tier.slug);
+    const items: NavChild[] = [
+      { label: `${tier.shortName} Overview`, href: tierLanding[tier.slug] ?? `/recognition/${tier.slug}` },
+    ];
+
+    // Single-category tiers → list subcategories.
+    if (cats.length === 1 && cats[0].subcategories.length > 0) {
+      const cat = cats[0];
+      for (const sub of cat.subcategories) {
+        items.push({
+          label: sub.name,
+          href: `${getCategoryPath(cat)}#${sub.code.toLowerCase()}`,
+        });
+      }
+    } else {
+      // Multi-category tiers → list categories.
+      for (const c of cats) {
+        items.push({ label: c.shortName ?? c.name, href: getCategoryPath(c) });
+      }
+    }
+
+    return { title: tier.shortName, items };
+  });
+}
+
 export const SITE_NAV: NavItem[] = [
   {
     label: "About",
