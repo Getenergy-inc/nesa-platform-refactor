@@ -48,6 +48,8 @@ import { CustomerCareChat } from "@/components/support/CustomerCareChat";
 // Pages
 import NESALandingPage from "./features/landing/NESALandingPage";
 import UpcomingEventsPage from "./pages/UpcomingEvents";
+import EventsPage from "./pages/EventsPage";
+import ResourcesPage from "./pages/ResourcesPage";
 import Categories from "./pages/Categories";
 import Programs from "./pages/Programs";
 import Login from "./pages/auth/Login";
