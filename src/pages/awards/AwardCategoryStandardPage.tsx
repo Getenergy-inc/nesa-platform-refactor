@@ -162,6 +162,8 @@ export default function AwardCategoryStandardPage({ slug }: Props) {
               primaryCta={hero.primaryCta}
               secondaryCta={hero.secondaryCta}
               trustLine={hero.trustLine}
+              heroImage={getTierHeroImage(content.slug)}
+              heroImageAlt={`${hero.title} — Enablers of Education for All Across Africa`}
             />
           </section>
 
