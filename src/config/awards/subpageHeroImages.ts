@@ -78,10 +78,12 @@ export function getSubpageHeroImage(slug: string): string | undefined {
 export const TIER_HERO_IMAGES: Record<string, string> = {
   "africa-education-icon": tierIcon,
   "influencer-education-impact": tierInfluencer,
+  "influencer-education-impact-2026": tierInfluencer,
   platinum: tierPlatinum,
   "platinum-recognition": tierPlatinum,
   "gold-blue-garnet": tierGbg,
 };
+
 
 export function getTierHeroImage(tier: TierSlug | string): string | undefined {
   return TIER_HERO_IMAGES[tier];
