@@ -117,13 +117,25 @@ function DropdownSectioned({ item }: { item: NavItem }) {
   const sections = item.sections!;
   const cols = sections.length;
   const widthCls =
-    cols >= 3 ? "w-[min(96vw,880px)]" : cols === 2 ? "w-[min(96vw,640px)]" : "w-[380px]";
+    cols >= 4
+      ? "w-[min(98vw,1120px)]"
+      : cols === 3
+        ? "w-[min(96vw,880px)]"
+        : cols === 2
+          ? "w-[min(96vw,640px)]"
+          : "w-[380px]";
   return (
     <div className={cn(widthCls, "bg-charcoal border border-gold/20 p-4")}>
       <div
         className={cn(
           "grid gap-4",
-          cols === 1 ? "grid-cols-1" : cols === 2 ? "grid-cols-1 md:grid-cols-2" : "grid-cols-1 md:grid-cols-3",
+          cols >= 4
+            ? "grid-cols-1 md:grid-cols-2 lg:grid-cols-4"
+            : cols === 3
+              ? "grid-cols-1 md:grid-cols-3"
+              : cols === 2
+                ? "grid-cols-1 md:grid-cols-2"
+                : "grid-cols-1",
         )}
       >
         {sections.map((sec: NavSection) => (
