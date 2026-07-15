@@ -31,6 +31,7 @@ import { listSubcategoriesForCategory } from "@/config/recognition/categoryAlias
 import { buildCategoryForm } from "@/config/recognition/buildCategoryForm";
 import { NativeCategoryNominationForm } from "@/components/awards/NativeCategoryNominationForm";
 import { CategorySubcategoryNominees } from "@/components/awards/CategorySubcategoryNominees";
+import { getStoryHeroImage } from "@/config/awards/subpageHeroImages";
 
 const SITE = "https://nesaafrica.lovable.app";
 const BRAND_TAGLINE = "Enablers of Education for All Across Africa";
