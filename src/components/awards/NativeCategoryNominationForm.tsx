@@ -223,17 +223,27 @@ export function NativeCategoryNominationForm({
         data && typeof data === "object" && "id" in data
           ? (data as { id?: string | number }).id ?? null
           : null;
+      const reference =
+        data && typeof data === "object" && "reference" in data
+          ? String((data as { reference?: string }).reference ?? "") || null
+          : null;
+      setNominationRef(reference ?? (nominationId ? `NESA-${String(nominationId).slice(-6).toUpperCase()}` : null));
       trackEvent("nomination_submit_success", {
         category: form.slug,
         family: form.family,
         subcategory: state.subcategory_slug || null,
         nomination_id: nominationId,
+        reference,
+        draft_token: draftToken,
+        signed_in: Boolean(user),
         redirect_href: successRedirectHref ?? null,
         redirect_delay_ms: successRedirectHref ? successRedirectDelayMs : 0,
         auto_redirect: Boolean(successRedirectHref && successRedirectDelayMs > 0),
       });
+      clearDraft();
       toast.success("Nomination submitted — thank you!");
       setSubmitted(true);
+
     } catch (err) {
       const message =
         err instanceof Error ? err.message : "Could not submit nomination. Please try again.";
