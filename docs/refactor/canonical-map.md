@@ -165,11 +165,12 @@ Update this table per phase.
 | Phase | Status | PR / changelog |
 |---|---|---|
 | 0 — Foundations | shipped | `docs/refactor/changelog/PHASE-0.md` |
-| 1 — Homepage + nav | pending | — |
-| 2 — Award clusters | pending | — |
-| 3 — Directory + profile | pending | — |
-| 4 — Nomination flows | pending | — |
-| 5 — Programme clusters | pending | — |
-| 6 — Governance/NRC/dashboards | pending | — |
-| 7 — SEO/analytics/perf/a11y | pending | — |
-| 8 — Cleanup + QA | pending | — |
+| 1 — Homepage + nav | shipped | Hero + CTA stack |
+| A — 22-page nav + redirects + footer | shipped | siteNavigation.ts / refactorRedirects2026.ts / NESAFooter.tsx |
+| B — Reusable subpage template | pending | — |
+| C — 22 award subpages | pending | — |
+| D — Consolidated core pages | pending | — |
+| E — Nomination flow inversion | pending | — |
+| F — Directory + regions | pending | — |
+| G — QA + analytics | pending | — |
+

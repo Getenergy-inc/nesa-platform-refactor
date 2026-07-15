@@ -78,4 +78,55 @@ export const REFACTOR_REDIRECTS_2026: RefactorRedirect[] = [
   // --- Endorsements language cleanup ---
   { from: "/vote-endorse", to: "/endorsements", reason: "Endorsements are not votes" },
   { from: "/endorse", to: "/endorsements", reason: "Canonical endorsements hub" },
+
+  // --- 22-page consolidation (Phase A) ---
+  // Partners + Sponsors merged into single /partners-sponsors entry page
+  { from: "/sponsors", to: "/partners-sponsors", reason: "Merged into Partners & Sponsors" },
+  { from: "/sponsors/packages", to: "/partners-sponsors#sponsor-packages", reason: "Merged" },
+  { from: "/sponsors/enquire", to: "/partners-sponsors#sponsor-enquire", reason: "Merged" },
+  { from: "/partners", to: "/partners-sponsors", reason: "Merged" },
+  { from: "/get-involved/partner", to: "/partners-sponsors#partner", reason: "Merged" },
+
+  // Media Centre consolidation
+  { from: "/nesatv", to: "/media/tv", reason: "Media Centre consolidation" },
+  { from: "/radio-podcast", to: "/media", reason: "Media Centre consolidation" },
+  { from: "/media/news", to: "/news", reason: "Media Centre consolidation" },
+  { from: "/media/stories", to: "/news", reason: "Media Centre consolidation" },
+  { from: "/media/gallery", to: "/gallery", reason: "Media Centre consolidation" },
+  { from: "/media/press", to: "/press-room", reason: "Media Centre consolidation" },
+
+  // Events & Gala consolidation
+  { from: "/gala", to: "/events", reason: "Events & Gala consolidation" },
+  { from: "/events/gala-2026", to: "/events#gala-2026", reason: "Events & Gala consolidation" },
+  { from: "/events/tickets", to: "/events#tickets", reason: "Events & Gala consolidation" },
+  { from: "/events/media-accreditation", to: "/events#accreditation", reason: "Events & Gala consolidation" },
+  { from: "/events/attendance-request", to: "/events#attendance", reason: "Events & Gala consolidation" },
+  { from: "/events/calendar", to: "/events", reason: "Events & Gala consolidation" },
+  { from: "/webinars", to: "/events", reason: "Events & Gala consolidation" },
+
+  // Policies hub
+  { from: "/privacy", to: "/policies#privacy", reason: "Policies hub" },
+  { from: "/terms", to: "/policies#terms", reason: "Policies hub" },
+  { from: "/cookies", to: "/policies#cookies", reason: "Policies hub" },
+  { from: "/accessibility", to: "/policies#accessibility", reason: "Policies hub" },
+  { from: "/policies/nomination-integrity", to: "/policies#nomination-integrity", reason: "Policies hub" },
+  { from: "/policies/sponsor-independence", to: "/policies#sponsor-independence", reason: "Policies hub" },
+  { from: "/policies/data-protection", to: "/policies#data-protection", reason: "Policies hub" },
+  { from: "/policies/conflict-of-interest", to: "/policies#conflict-of-interest", reason: "Policies hub" },
+  { from: "/policies/endorsement", to: "/policies#endorsement", reason: "Policies hub" },
+  { from: "/policies/certificate", to: "/policies#certificate", reason: "Policies hub" },
+  { from: "/policies/media-consent", to: "/policies#media-consent", reason: "Policies hub" },
+
+  // Resources hub — reports consolidation
+  { from: "/reports", to: "/resources#reports", reason: "Resources hub" },
+  { from: "/impact/reports", to: "/resources#impact-reports", reason: "Resources hub" },
+
+  // Recognition tier alias (spec says /awards/platinum canonical)
+  { from: "/awards/platinum-recognition", to: "/awards/platinum", reason: "Canonical tier slug" },
+
+  // Community merges (Get Involved → Community)
+  { from: "/get-involved", to: "/community", reason: "Renamed to Community" },
+  { from: "/membership/types", to: "/membership", reason: "Membership consolidation" },
+  { from: "/membership/benefits", to: "/membership", reason: "Membership consolidation" },
 ];
+

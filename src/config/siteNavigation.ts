@@ -1,8 +1,14 @@
 // Single source of truth for the NESA-Africa public navigation.
-// 2026 conversion-focused refactor — 7 top-level groups.
+// 2026 refactor — 7 top-level groups matching the 22-page architecture.
 // Nominate / Sign In / Language render outside SITE_NAV as fixed CTAs
 // in SiteHeader. Logo = Home.
 // Consumed by SiteHeader (desktop + mobile drawer) and NESAFooter.
+//
+// Rules enforced here:
+// - Recognition dropdown shows ONLY the 4 tier roots (no category leaks).
+// - Community merges membership/chapters/volunteers/ambassadors/judges/NRC.
+// - Support dropdown funnels into consolidated /events, /resources, /policies, /faqs.
+// - No obsolete voting links.
 
 export interface NavChild {
   label: string;
@@ -11,7 +17,6 @@ export interface NavChild {
 }
 
 export interface NavSection {
-  /** Section heading inside a dropdown/mega-menu column. */
   title: string;
   items: NavChild[];
 }
@@ -19,11 +24,8 @@ export interface NavSection {
 export interface NavItem {
   label: string;
   href: string;
-  /** Simple dropdown children. */
   children?: NavChild[];
-  /** Grouped sections (used for grouped dropdowns like Get Involved). */
   sections?: NavSection[];
-  /** Legacy mega-menu slot. No longer used in 2026 nav. */
   megaMenu?: "education-enablers";
   analyticsId?: string;
 }
@@ -35,41 +37,36 @@ export const SITE_NAV: NavItem[] = [
     analyticsId: "nav_about",
     children: [
       { label: "About NESA-Africa", href: "/about" },
-      { label: "Vision, Mission & Strategic Objectives", href: "/about/vision-mission" },
-      { label: "Recognition Philosophy", href: "/about#philosophy" },
-      { label: "Education Enablers", href: "/about#enablers" },
-      { label: "Regional Framework", href: "/regions" },
+      { label: "Vision & Mission", href: "/about/vision-mission" },
       { label: "Governance", href: "/governance" },
-      { label: "Nominee Research Corps (NRC)", href: "/about/nrc" },
+      { label: "NRC", href: "/about/nrc" },
       { label: "SCEF", href: "/about/scef" },
       { label: "History", href: "/about#history" },
       { label: "Leadership", href: "/about#leadership" },
-      { label: "Annual Reports", href: "/impact/reports" },
+      { label: "Reports", href: "/impact/reports" },
       { label: "FAQs", href: "/faqs" },
     ],
   },
   {
     label: "Recognition",
-    href: "/awards",
+    href: "/recognition",
     analyticsId: "nav_recognition",
     children: [
       { label: "Africa Education Icon Award", href: "/awards/africa-education-icon" },
       { label: "Blue Garnet Award", href: "/awards/gold-blue-garnet" },
-      { label: "Platinum Award", href: "/awards/platinum-recognition" },
+      { label: "Platinum Award", href: "/awards/platinum" },
       { label: "Influencer Education Impact", href: "/awards/influencer-education-impact" },
-      { label: "All Recognition Categories", href: "/awards/categories" },
-      { label: "Recognition Timeline", href: "/timeline" },
-      { label: "Recognition Guidelines", href: "/guidelines/nominators" },
     ],
   },
   {
-    label: "Impact Programmes",
+    label: "Impact",
     href: "/impact",
     analyticsId: "nav_impact",
     children: [
+      { label: "Impact Programmes", href: "/impact" },
       { label: "EduAid-Africa", href: "/eduaid-africa" },
       { label: "Rebuild My School Africa", href: "/eduaid-africa/rebuild-my-school" },
-      { label: "Special Needs School Intervention", href: "/special-needs" },
+      { label: "Special Needs Education", href: "/special-needs" },
       { label: "Scholarships", href: "/impact/scholarships" },
       { label: "Afri-EduTourism", href: "/impact/afri-edutourism-2027" },
       { label: "Impact Reports", href: "/impact/reports" },
@@ -81,49 +78,28 @@ export const SITE_NAV: NavItem[] = [
     analyticsId: "nav_directory",
   },
   {
+    label: "Community",
+    href: "/community",
+    analyticsId: "nav_community",
+    children: [
+      { label: "Join the Community", href: "/community" },
+      { label: "Local Chapters", href: "/chapters" },
+      { label: "Volunteer", href: "/volunteer" },
+      { label: "Ambassadors", href: "/ambassadors" },
+      { label: "Judges", href: "/judges/apply" },
+      { label: "NRC", href: "/about/nrc#apply" },
+      { label: "Membership", href: "/membership" },
+    ],
+  },
+  {
     label: "Media",
     href: "/media",
     analyticsId: "nav_media",
     children: [
       { label: "NESA Africa TV", href: "/media/tv" },
       { label: "News & Stories", href: "/news" },
-      { label: "Videos", href: "/videos" },
-      { label: "Photo Gallery", href: "/gallery" },
+      { label: "Gallery", href: "/gallery" },
       { label: "Press Room", href: "/press-room" },
-      { label: "NESA-Africa 2026 Gala", href: "/gala" },
-      { label: "Event Calendar", href: "/events/calendar" },
-    ],
-  },
-  {
-    label: "Get Involved",
-    href: "/get-involved",
-    analyticsId: "nav_get_involved",
-    sections: [
-      {
-        title: "Join the Community",
-        items: [
-          { label: "Join the Community", href: "/get-involved" },
-          { label: "Local Chapters", href: "/chapters" },
-          { label: "Volunteer", href: "/volunteer" },
-          { label: "Become an Ambassador", href: "/ambassadors" },
-        ],
-      },
-      {
-        title: "Contribute Expertise",
-        items: [
-          { label: "Become a Judge", href: "/judges/apply" },
-          { label: "Become an NRC Researcher", href: "/about/nrc#apply" },
-          { label: "Become a Nominator", href: "/guidelines/nominators" },
-        ],
-      },
-      {
-        title: "Partner & Sponsor",
-        items: [
-          { label: "Partner with NESA-Africa", href: "/get-involved/partner" },
-          { label: "Sponsor NESA-Africa", href: "/sponsors" },
-          { label: "Endorse NESA-Africa", href: "/endorsements" },
-        ],
-      },
     ],
   },
   {
@@ -131,11 +107,11 @@ export const SITE_NAV: NavItem[] = [
     href: "/support",
     analyticsId: "nav_support",
     children: [
-      { label: "FAQs", href: "/faqs" },
-      { label: "Contact", href: "/contact" },
-      { label: "Chat with Sophia AI", href: "/help" },
+      { label: "Partners & Sponsors", href: "/partners-sponsors" },
       { label: "Donate", href: "/donate" },
-      { label: "Merchandise", href: "/merchandise" },
+      { label: "Events & Gala", href: "/events" },
+      { label: "Resources", href: "/resources" },
+      { label: "Contact", href: "/contact" },
     ],
   },
 ];
