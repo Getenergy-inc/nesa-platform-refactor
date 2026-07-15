@@ -17,6 +17,7 @@ import { getTierBySlug } from "@/config/recognitionArchitecture2026";
 import { listSubcategoriesForCategory } from "@/config/recognition/categoryAlias";
 import { buildCategoryForm } from "@/config/recognition/buildCategoryForm";
 import { NativeCategoryNominationForm } from "@/components/awards/NativeCategoryNominationForm";
+import { getStoryHeroImage } from "@/config/awards/subpageHeroImages";
 import { supabase } from "@/integrations/supabase/client";
 import { useEffect, useState } from "react";
 
