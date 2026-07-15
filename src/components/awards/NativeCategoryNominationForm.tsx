@@ -351,20 +351,7 @@ export function NativeCategoryNominationForm({
         </span>
       </div>
 
-              Go to {successRedirectLabel ?? "Nominees"} now
-            </Link>
-          </div>
-        )}
-      </div>
-    );
-  }
 
-
-  return (
-    <form
-      onSubmit={onSubmit}
-      className="rounded-2xl border border-gold/30 bg-charcoal-light/40 p-5 md:p-6 space-y-5"
-    >
       <div className="flex items-start gap-2 text-xs text-foreground/70">
         <ShieldCheck className="h-4 w-4 text-gold mt-0.5 shrink-0" />
         <span>
