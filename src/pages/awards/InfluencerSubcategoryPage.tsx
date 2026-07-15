@@ -179,7 +179,27 @@ export default function InfluencerSubcategoryPage({ slugOverride }: Props) {
         </nav>
 
         {/* Hero */}
-        <header className="mb-8">
+        <header className="mb-8 relative overflow-hidden rounded-2xl border border-gold/20">
+          {(() => {
+            const heroImg = getStoryHeroImage(content.slug);
+            return heroImg ? (
+              <>
+                <img
+                  src={heroImg}
+                  alt={`${content.title} — Enablers of Education for All Across Africa`}
+                  loading="eager"
+                  width={1600}
+                  height={900}
+                  className="absolute inset-0 h-full w-full object-cover opacity-30"
+                />
+                <div
+                  aria-hidden
+                  className="absolute inset-0 bg-gradient-to-b from-charcoal/70 via-charcoal/85 to-charcoal"
+                />
+              </>
+            ) : null;
+          })()}
+          <div className="relative p-6 md:p-8">
           <p className="text-[11px] uppercase tracking-[0.2em] text-gold/80 font-semibold mb-2">
             {content.tierLabel}
           </p>
