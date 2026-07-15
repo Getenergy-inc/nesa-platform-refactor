@@ -61,8 +61,7 @@ const iconAfrican: AwardSubpageContent = {
     secondary: { label: "Explore the Hall of Fame", href: "/nominees?tier=africa-education-icon&class=african-in-africa" },
   },
   notice: {
-    kind: "no-voting",
-    heading: "Icon awards are jury-verified",
+    kind: "icon",
     body: "Recognition is determined by NRC verification, independent assessment and governance ratification.",
   },
   recognises: {
