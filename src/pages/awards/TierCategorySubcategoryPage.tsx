@@ -193,6 +193,17 @@ export default function TierCategorySubcategoryPage() {
         </div>
       </section>
 
+      {/* Overview & How to Nominate */}
+      <AwardOverviewHowTo
+        name={subcategory.title}
+        tagline={subcategory.description}
+        tierLabel={`Gold–Blue Garnet · ${category.name}`}
+        nominateHref="#nominate"
+        secondaryHref={basePath}
+        secondaryLabel={`All of ${category.name}`}
+        kind="subcategory"
+      />
+
       {/* About */}
       <section className="container mx-auto px-4 py-10">
         <div className="grid gap-6 md:grid-cols-3">
