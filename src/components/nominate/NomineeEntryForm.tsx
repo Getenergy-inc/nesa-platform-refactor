@@ -218,6 +218,24 @@ export function NomineeEntryForm({
         </Button>
       </div>
 
+      <div className="flex flex-wrap items-center justify-between gap-3 rounded-lg border border-gold/25 bg-gold/5 px-3 py-2 text-xs text-white/80">
+        <span className="inline-flex items-center gap-2">
+          <ShieldCheck className="h-3.5 w-3.5 text-gold" aria-hidden />
+          No account required to start — your draft is saved on this device and
+          only submitted when you're ready.
+        </span>
+        {!initial && (
+          <button
+            type="button"
+            onClick={handleDiscardDraft}
+            className="inline-flex items-center gap-1 text-gold/80 hover:text-gold underline underline-offset-2"
+          >
+            <RotateCcw className="h-3 w-3" /> Discard draft
+          </button>
+        )}
+      </div>
+
+
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <Field label="Nominee name" error={errors.nomineeName} required>
           <Input
