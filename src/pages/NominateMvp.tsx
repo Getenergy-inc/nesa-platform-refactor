@@ -57,6 +57,51 @@ const INFLUENCER_REGION_OPTIONS = [
 const INFLUENCER_REGION_NAME_BY_SLUG: Record<string, string> =
   Object.fromEntries(INFLUENCER_REGION_OPTIONS.map((o) => [o.slug, o.name]));
 
+// Legacy / alternate region slugs accepted from external links, mapped to
+// canonical Africa-region + African-Diaspora slugs used by INFLUENCER_REGION_OPTIONS.
+const INFLUENCER_REGION_ALIASES: Record<string, string> = {
+  north: "north-africa",
+  "north-africa": "north-africa",
+  west: "west-africa",
+  "west-africa": "west-africa",
+  east: "east-africa",
+  "east-africa": "east-africa",
+  south: "southern-africa",
+  southern: "southern-africa",
+  "southern-africa": "southern-africa",
+  central: "central-africa",
+  "central-africa": "central-africa",
+  horn: "horn-of-africa",
+  "horn-of-africa": "horn-of-africa",
+  sahel: "sahel-region",
+  "sahel-region": "sahel-region",
+  "indian-ocean": "indian-ocean-islands",
+  "indian-ocean-islands": "indian-ocean-islands",
+  islands: "indian-ocean-islands",
+  diaspora: AFRICAN_DIASPORA_SLUG,
+  "african-diaspora": AFRICAN_DIASPORA_SLUG,
+  global: AFRICAN_DIASPORA_SLUG,
+};
+
+// Zod schema — accepts any short string, normalizes, then validates against
+// the canonical influencer region set. Returns undefined for unrecognized input
+// so the caller can strip the ?region= param rather than throwing.
+const influencerRegionSchema = z
+  .string()
+  .trim()
+  .toLowerCase()
+  .max(64)
+  .transform((raw) => INFLUENCER_REGION_ALIASES[raw])
+  .refine((slug): slug is string =>
+    typeof slug === "string" && slug in INFLUENCER_REGION_NAME_BY_SLUG,
+  );
+
+function normalizeInfluencerRegion(raw: string | null | undefined): string | null {
+  if (!raw) return null;
+  const parsed = influencerRegionSchema.safeParse(raw);
+  return parsed.success ? parsed.data : null;
+}
+
 const VALID_FAMILIES = new Set<AwardFamilyId>(
   AWARD_FAMILIES.map((f) => f.id),
 );
