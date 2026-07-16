@@ -4,6 +4,7 @@ import { Helmet } from "react-helmet-async";
 import { motion } from "framer-motion";
 import { useTranslation } from "react-i18next";
 import { ArrowRight, BookOpen, ShieldCheck, Mail, ChevronLeft } from "lucide-react";
+import { z } from "zod";
 
 import { Button } from "@/components/ui/button";
 import { LanguageSwitcher } from "@/components/i18n";
