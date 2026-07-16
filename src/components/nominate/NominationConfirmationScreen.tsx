@@ -38,9 +38,25 @@ export function NominationConfirmationScreen({
         <p className="text-xs text-white/55 max-w-xl mx-auto">
           {t("flow.confirmation.funnelNote")}
         </p>
+        {reference && (
+          <p className="text-xs text-white/70">
+            Reference:{" "}
+            <span className="font-mono text-gold">{reference}</span>
+          </p>
+        )}
       </div>
 
+      {showAccountPanel && (
+        <AccountAtSubmitPanel
+          reference={reference ?? null}
+          defaultEmail={submitterEmail}
+          defaultFullName={submitterName}
+          formSlug="nominate-flow-icon"
+        />
+      )}
+
       <IntegrityNotice />
+
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
         <Button
