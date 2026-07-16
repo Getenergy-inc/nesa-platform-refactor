@@ -18,12 +18,30 @@ import IconAwardMain from "./pages/nominees/icon/IconAwardMain";
 import IconSubcategoryPage from "./pages/nominees/icon/IconSubcategoryPage";
 import IconClassificationPage from "./pages/nominees/icon/IconClassificationPage";
 import { Navigate, useParams } from "react-router-dom";
+import { isValidRegionSlug, resolveLegacyRegionSlug } from "@/lib/regionClassifier";
 
 /** 301-style redirect that preserves the :slug param and query string. */
 const SlugRedirect = ({ to }: { to: (slug: string) => string }) => {
   const { slug = "" } = useParams();
   const search = typeof window !== "undefined" ? window.location.search : "";
   return <Navigate to={`${to(slug)}${search}`} replace />;
+};
+
+/** /nominees/region/:region — canonical 8-region + diaspora landing dispatcher.
+ *  Resolves legacy short slugs (west, east, north, south, central, horn, sahel,
+ *  indian-ocean, african-diaspora) to their canonical slug via a 301-style
+ *  Navigate; canonical slugs render the RegionNomineesHubPage directly. */
+const RegionSlugGate = () => {
+  const { region = "" } = useParams();
+  const search = typeof window !== "undefined" ? window.location.search : "";
+  const alias = resolveLegacyRegionSlug(region);
+  if (alias && alias !== region) {
+    return <Navigate to={`/nominees/region/${alias}${search}`} replace />;
+  }
+  if (!isValidRegionSlug(region)) {
+    return <Navigate to="/nominees" replace />;
+  }
+  return <RegionNomineesHubPage region={region} />;
 };
 import NomineeDirectory from "./pages/NomineeDirectory";
 import MasterNomineeProfile from "./pages/MasterNomineeProfile";
@@ -480,7 +498,10 @@ const App = () => (
                   <Route path="/region/nigeria" element={<Navigate to="/regions/nigeria" replace />} />
                   <Route path="/region" element={<Navigate to="/regions" replace />} />
                   <Route path="/region/:slug" element={<SlugRedirect to={(s) => `/regions/${s}`} />} />
-                  <Route path="/nominees/region/:slug" element={<SlugRedirect to={(s) => `/nominees/${s}`} />} />
+                  <Route path="/nominees/region/:region" element={<RegionSlugGate />} />
+                  {/* Legacy 5-region short-slugs redirect to canonical 8-region URLs */}
+                  <Route path="/nominees/region" element={<Navigate to="/nominees#regions" replace />} />
+
 
 
                   {/* Misc legacy paths flagged in audit */}
