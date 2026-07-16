@@ -1,11 +1,14 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { ConsentDeclarationCheckbox } from "./ConsentDeclarationCheckbox";
 import { IntegrityNotice } from "./IntegrityNotice";
-import { ArrowLeft, Save, X } from "lucide-react";
+import { ArrowLeft, Save, X, ShieldCheck, RotateCcw } from "lucide-react";
+import { toast } from "sonner";
+import { useDraftPersistence } from "@/features/nominate/useDraftPersistence";
+import { trackEvent } from "@/lib/analytics";
 import type { NominationPathway, NomineeEntry } from "./types";
 
 const PATHWAY_LABEL: Record<NominationPathway, string> = {
