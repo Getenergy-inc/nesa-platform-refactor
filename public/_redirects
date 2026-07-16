@@ -61,7 +61,7 @@
 /cookie-policy                                               /policies            301
 /language                                                    /                    301
 
-# --- 2. SPA routes (443 explicit paths from src/App.tsx) ---
+# --- 2. SPA routes (447 explicit paths from src/App.tsx) ---
 /recognition/influencer-education-impact/african-sports-icons-supporting-education /index.html          200
 /recognition/influencer-education-impact/african-music-icons-supporting-education /index.html          200
 /recognition/influencer-education-impact/african-social-media-influencers /index.html          200
@@ -161,6 +161,7 @@
 /education-enablers/edtech                                   /index.html          200
 /nominate/official/:family                                   /index.html          200
 /policies/voting-integrity                                   /index.html          200
+/recognition/subpage/:slug                                   /index.html          200
 /volunteers/command-center                                   /index.html          200
 /about/awards-recognition                                    /index.html          200
 /admin/contributor-photos                                    /index.html          200
@@ -182,6 +183,7 @@
 /guidelines/renomination                                     /index.html          200
 /impact/regional-winners                                     /index.html          200
 /media/behind-the-scenes                                     /index.html          200
+/nominees/region/:region                                     /index.html          200
 /admin/nominee-profiles                                      /index.html          200
 /awards/c/:categorySlug                                      /index.html          200
 /events/afri-edutourism                                      /index.html          200
@@ -204,7 +206,6 @@
 /guidelines/nominators                                       /index.html          200
 /my-certificates/guide                                       /index.html          200
 /nominee/accept/:token                                       /index.html          200
-/nominees/region/:slug                                       /index.html          200
 /nrc/dashboard/flagged                                       /index.html          200
 /nrc/dashboard/profile                                       /index.html          200
 /nrc/dashboard/reports                                       /index.html          200
@@ -301,6 +302,7 @@
 /gala/attendance                                             /index.html          200
 /judge/dashboard                                             /index.html          200
 /my-certificates                                             /index.html          200
+/nominees/region                                             /index.html          200
 /olc/settlements                                             /index.html          200
 /regions/nigeria                                             /index.html          200
 /shop/orders/:id                                             /index.html          200
@@ -433,6 +435,7 @@ nominee/:slug                                                /index.html        
 /directory                                                   /index.html          200
 /ecosystem                                                   /index.html          200
 /judge/coi                                                   /index.html          200
+/resources                                                   /index.html          200
 /shop/cart                                                   /index.html          200
 /volunteer                                                   /index.html          200
 /vote/gold                                                   /index.html          200
@@ -472,6 +475,7 @@ nominees                                                     /index.html        
 /awards                                                      /index.html          200
 /donate                                                      /index.html          200
 /eduaid                                                      /index.html          200
+/events                                                      /index.html          200
 /impact                                                      /index.html          200
 /judges                                                      /index.html          200
 /region                                                      /index.html          200
