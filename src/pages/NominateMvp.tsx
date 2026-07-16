@@ -29,6 +29,32 @@ import {
 import { changeLanguage } from "@/lib/i18n";
 import { isValidLocale } from "@/config/i18n.config";
 import { trackEvent } from "@/lib/analytics";
+import {
+  AFRICA_REGIONS as CANONICAL_AFRICA_REGIONS,
+  AFRICAN_DIASPORA_SLUG,
+} from "@/config/regions/africaRegions";
+
+// Influencer Education Impact — 8 Africa Regions + African Diaspora.
+// Applied to family === "influencer" so social-media / sports / music tracks
+// share one canonical region taxonomy.
+const INFLUENCER_REGION_OPTIONS = [
+  ...CANONICAL_AFRICA_REGIONS
+    .slice()
+    .sort((a, b) => a.order - b.order)
+    .map((r) => ({
+      slug: r.slug,
+      name: r.name,
+      description: `${r.countries.length} countries`,
+    })),
+  {
+    slug: AFRICAN_DIASPORA_SLUG,
+    name: "African Diaspora",
+    description: "Global Community — Africans making impact from abroad",
+  },
+];
+
+const INFLUENCER_REGION_NAME_BY_SLUG: Record<string, string> =
+  Object.fromEntries(INFLUENCER_REGION_OPTIONS.map((o) => [o.slug, o.name]));
 
 const VALID_FAMILIES = new Set<AwardFamilyId>(
   AWARD_FAMILIES.map((f) => f.id),
