@@ -333,8 +333,12 @@ export default function NominateFlow() {
                 <NominationConfirmationScreen
                   count={state.entries.length}
                   onNominateAnother={reset}
+                  reference={submissionReference}
+                  submitterEmail={state.submitter?.email}
+                  submitterName={state.submitter?.fullName}
                 />
               )}
+
             </motion.div>
           </AnimatePresence>
         </div>
