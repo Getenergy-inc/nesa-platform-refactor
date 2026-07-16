@@ -1,110 +1,71 @@
 
-# Expand Africa Regional model: 5 → 8 Africa Regions (+ African Diaspora)
+# Refactor 16 Category Pages onto One Approved Standard
 
-This is a large, cross-cutting refactor touching config, database, forms, directories, dashboards, SEO and copy. It should ship in staged phases so preview stays green after each step.
+## Goal
+Rebuild the 9 Blue Garnet + 7 Platinum category/pathway pages using **one reusable template** driven by centralised content, matching the approved 14-section standard, with correct 2026 policy language (no voting, no competitive ranking on Blue Garnet 2026; Platinum jury-only).
 
-## Goals
+## Approach: Central Content + One Template
 
-- Replace the existing 5-region model with 8 approved Africa regions.
-- Treat **African Diaspora** as a separate Global Community track (never counted as an Africa region).
-- Establish one country → region mapping as the single source of truth.
-- Migrate existing nominee/nomination records with an auditable log.
-- Update forms, directories, dashboards, SEO copy and routes consistently.
+### 1. Central content bible
+Create `src/content/contentBible2026/pathwayPages.ts` as the single source of truth:
+- `DetailedAwardCategoryPage` type (as in the prompt spec)
+- Shared constants: EDI matrix (8 criteria), threshold bands (Platinum + Blue Garnet 2026), timeline stages (10), trust links, evidence checklist, benefits blocks (nominee/nominator/region/Africa)
+- 16 page objects (BG-1…BG-9, PT-1…PT-7) with only the category-specific fields filled in (title, subtitle, story, eligible nominee types, subcategories with existing UUIDs, scoring emphasis notes, category FAQs, SEO, catalogue config, hero image key, existing route)
 
-## Approved regions (canonical order everywhere)
+### 2. Reusable template component
+Create `src/components/awards/DetailedCategoryPageTemplate.tsx` that renders the exact 14 sections in order, composed from existing components:
+`HeroSection → BadgeRow → OverviewSection → EnablerStorySection → TwoColumnSection (Who Qualifies + EdiScoreTable + ThresholdStrip) → SubcategoryCards → BenefitCards (×4) → NominationCTA → RecognitionTimeline → NomineeTabs + MediaFilterBar + NomineeCard grid → EvidenceCTA → RecognitionPackage → TrustAccountability → FAQAccordion → FinalCTA`
 
-1. North Africa
-2. West Africa
-3. Central Africa
-4. East Africa
-5. Horn of Africa
-6. Southern Africa
-7. Sahel Region
-8. Indian Ocean Islands
+Where a matching component doesn't already exist, add a thin new one that reuses shadcn primitives (no custom CSS). Reuse `BrandedNomineeDirectory` for Section 9 catalogue with grouping + media filter props.
 
-Separate track: **African Diaspora** (with sub-continents: North America, South America, Europe, Caribbean, Middle East, Asia, Oceania).
+### 3. Wire the 16 existing page files
+Replace the body of each of the 16 category/pathway route components with:
+```tsx
+<DetailedCategoryPageTemplate page={pathwayPages["bg-csr-africa"]} />
+```
+- Keep every current route unchanged.
+- Keep every valid subcategory UUID unchanged (read from existing config first; never invent).
+- Delete duplicate/legacy JSX inside each page file only — no route changes.
 
-## Phase 1 — Canonical region source of truth (frontend config)
+Pages to refactor (route mapping preserved):
+- BG-1 CSR Africa · BG-2 CSR Nigeria · BG-3 EdTech Africa · BG-4 Media Nigeria · BG-5 NGO Nigeria · BG-6 NGO Africa · BG-7 STEM Africa · BG-8 Creative Arts Nigeria · BG-9 Education Policy Nigeria
+- PT-1 Library Nigeria · PT-2 R&D · PT-3 Christian · PT-4 Islamic · PT-5 Political Leadership · PT-6 International Partners (keep as reference impl) · PT-7 Diaspora
 
-- Rewrite `src/config/regions/africaRegions.ts` (new) as the single export used everywhere:
-  - `AFRICA_REGIONS` (id, code, slug, name, order, description, countries[])
-  - `DIASPORA_REGIONS` (continents)
-  - `COUNTRY_TO_REGION` map (ISO2 → region code) using the country lists in the prompt
-  - Helpers: `getRegionByCountry(iso2)`, `getRegionBySlug(slug)`, `listAfricaRegions()`, `listDiasporaContinents()`
-- Deprecate/rewire `src/lib/regions.ts`, `src/lib/regionClassifier.ts`, `src/config/regionHubs.ts` to re-export from the new module. Keep old exports as thin aliases while call sites are migrated so the build never breaks.
-- Add legacy → new region migration table (e.g. "East Africa" nominee in Ethiopia → Horn of Africa).
+### 4. 2026 policy corrections applied globally in the template
+- Blue Garnet badge = "2026 Recognition Edition"; Platinum badge = "Jury-Only Institutional Recognition"
+- Threshold band labels switch by `awardTier`
+- Trust + FAQ blocks include the "no public voting in 2026 / competitive Blue Garnet from 2027" statement
+- Endorsements described as "expressions of appreciation, not votes"
+- Timeline pulls dynamically from the existing 2026 season config — no hardcoded expired dates; Gala line = "22 October 2026 in Lagos"
 
-## Phase 2 — Database schema & migration
+### 5. Geographic logic
+Template reads `page.nomineeCatalogue.grouping`:
+- `region` (8 Africa regions from canonical `regions_v2`) — BG-1, BG-3, BG-6, BG-7
+- `state` (Nigerian states/zones) — BG-2, BG-4, BG-5, BG-8, BG-9, PT-1
+- `nominee_type` (partner-type tabs, continental, no regional tabs) — PT-6
+- Diaspora (PT-7) adds diaspora-region + supported-African-region fields
+- `subcategory` default otherwise
 
-Create migration (single approval):
+### 6. Mobile behaviour
+Handled once in the template: horizontal-scroll subcategory tabs, sticky-safe media filter bar, stacked eligibility/scoring, one nominee card per row < md, no autoplay video.
 
-- `public.regions` — id, code, slug, name, region_type (`africa_region` | `global_community`), display_order, is_active, effective_date. Seed 8 Africa regions + `african-diaspora`.
-- `public.countries` — id, iso2, iso3, name, region_id, is_african, is_active. Seed from the country list.
-- `public.region_migration_log` — entity_type, entity_id, old_region, new_region, reason, changed_by, changed_at.
-- Extend `nominees`: add `country_id`, `region_id`, `diaspora_status`, `country_of_residence_id`, `diaspora_region_id` (nullable; backfill later).
-- Extend `nominations`: add `country_id`, `auto_assigned_region_id`, `region_override_reason`, `diaspora_status`.
-- Extend `award_categories`: `geographic_scope`, `regional_model` (`one_per_region` | `filter_only` | `landing_pages`), `applies_to_all_regions`, `region_version`.
-- GRANTs + RLS on all new tables (public read for regions/countries; admin write; migration log admin-only).
+### 7. Data integrity guardrails
+- Nominee catalogue fetches from existing Supabase-backed nominee source only — no fabricated entries.
+- Verification-status badges + EDI-score display gated on approval flag from DB.
+- Category-specific nomination CTAs deep-link to existing `nominateCategorySlug`/subcategory forms (already present in each page today) — reused, never regenerated.
 
-Data backfill (via `supabase--insert`, batched after migration):
+## Out of scope (explicit)
+- No database schema changes.
+- No new routes, no `_redirects` changes.
+- No changes to nomination forms themselves.
+- No new UUIDs invented; unresolved subcategories stay marked and use current DB value.
+- International Partners page (PT-6) content stays as reference; only reshaped to the shared template so it renders identically.
 
-- Populate `regions` and `countries` seeds.
-- Backfill `nominees.region_id` from existing `country`/legacy region using the new mapping; log every reassignment into `region_migration_log`.
+## Deliverables
+1. `src/content/contentBible2026/pathwayPages.ts` (+ shared constants file)
+2. `src/components/awards/DetailedCategoryPageTemplate.tsx` (+ any small missing sub-components: `EnablerStorySection`, `ThresholdStrip`, `BenefitCards`, `EvidenceCTA`, `RecognitionPackage`, `TrustAccountability`, `FinalCTA` — each ≤80 LoC, shadcn-only)
+3. 16 slimmed page files rewired to the template
+4. Quick visual pass on 2 representative pages (1 Blue Garnet regional, 1 Platinum) via Playwright screenshot to confirm section order + mobile stacking
 
-## Phase 3 — Nomination flow
-
-- Update `NativeCategoryNominationForm`, `NomineeEntryForm` (Icon), Influencer form, Platinum/Diaspora form:
-  - Country select → auto-derives region (read-only "Recognition Region: …" helper).
-  - If `diaspora_status = true`: show country of residence, diaspora continental region, and African countries/regions supported.
-  - Persist `country_id`, `region_id`, `diaspora_*` fields.
-- Update draft JSON schema in `nomination_drafts` writes.
-
-## Phase 4 — Discovery: directory, filters, cards, profiles
-
-- `RegionSelector`, `RegionBadge`, `RegionCard`, `RegionalNomineeGrid`, `RegionalStats`, `RegionalFilterDrawer`, `DiasporaSelector` — one shared component set under `src/components/regions/`.
-- Update `/nominees` and every award-specific directory to filter by 8 regions + Diaspora tab.
-- Nominee cards show country + region + category + verification.
-- Nominee profile: primary country, recognition region, geographic reach, countries served, diaspora classification.
-- "Explore by Africa Region" reusable section on hub pages with dynamic counts.
-
-## Phase 5 — Award pages, routes, SEO
-
-- Route slugs: `north-africa`, `west-africa`, `central-africa`, `east-africa`, `horn-of-africa`, `southern-africa`, `sahel-region`, `indian-ocean-islands`, `african-diaspora`.
-- Add `/nominees/region/:slug` regional landing pages driven by config.
-- Register redirects in `src/config/refactorRedirects2026.ts` for old region URLs.
-- Update award cards to display "Scope: 8 Africa Regions" (list all 8 once in the shared regional block, not on every card).
-- Update SEO titles/descriptions per region.
-- Global copy sweep: replace "5 / five African regions" and "North, West, East, Central and Southern Africa" phrasing across content configs (`pillars.ts`, `capability2026.ts`, `awardPageContent.ts`, `tierCluster.ts`, `regionHubs.ts`, homepage hero, footer, About).
-- Canonical tagline: **"One Continent. Eight Africa Regions. One African Diaspora Community. One Mission."**
-
-## Phase 6 — Dashboards, NRC, analytics
-
-- Update executive/regional/chapter/NRC/media/sponsor dashboards: 8-region charts + separate Diaspora slice.
-- NRC assignment rules: 8 Africa regional teams + African Diaspora team; auto-assign based on country → region.
-- Import/export templates (`nomineeExport.ts`, admin CSV import): add Country, Country Code, Region, Region Code, Diaspora Status, Country of Residence, Diaspora Continental Region, African Country Supported.
-
-## Phase 7 — QA
-
-- Unit tests for `getRegionByCountry` covering every listed country.
-- Integration tests: form country → region auto-assignment; directory filters return correct counts; diaspora fields conditional rendering.
-- Redirect test for legacy region URLs.
-- Manual QA pass via Playwright on nominee directory + one nomination form + regional landing page.
-
-## Technical notes
-
-- Because this touches ~60 files, do it in the phase order above and land Phase 1 + Phase 5 copy sweep before Phase 4 UI so pages don't render stale labels while wiring is in flight.
-- Keep legacy `regionClassifier` API surface temporarily to avoid a big-bang breakage; delete after all call sites migrate.
-- Do **not** silently mutate existing nominee records — every reassignment goes through `region_migration_log`.
-- Diaspora is never included in the 8-region counters or the Africa region dropdowns; it lives in its own tab/section.
-
-## Out of scope for this plan (call out for follow-up)
-
-- Rewriting award tier scoring formulas.
-- Migrating historical winner records from earlier seasons (before NESA-Africa 2026) beyond region reassignment.
-- Localisation of new copy into the 11 supported languages — will follow once English copy is frozen.
-
-## Deliverables (matches the master prompt)
-
-Old 5-region audit report, approved country→region mapping, affected page list, affected category list, DB migration, API spec, spreadsheet template, updated forms, updated filters, updated profiles, updated NRC logic, updated dashboards, copy diff, redirect map, QA plan, migration report, final 8-region checklist.
-
-**Please confirm the plan (or flag phases to drop / reorder) and I will start with Phase 1 + the Phase 2 migration.**
+## Confirm before I build
+- OK to slim the existing rich pages (e.g. `EduTechAfrica`, `LibraryNigeria`, `CSREducationNigeria`) down to the shared template? Their current bespoke hero/animated-words/documentary sections would be **replaced** by the standard 14-section layout so all 16 pages look and behave consistently. Say "yes, slim them" or "keep the bespoke hero on top and append the standard sections below" and I'll proceed.
