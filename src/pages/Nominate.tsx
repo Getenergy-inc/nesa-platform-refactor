@@ -842,7 +842,17 @@ export default function Nominate() {
                               <SelectValue placeholder="Select region" />
                             </SelectTrigger>
                             <SelectContent>
-                              {["West Africa", "East Africa", "Central Africa", "Southern Africa", "North Africa"].map(r => (
+                              {[
+                                "North Africa",
+                                "West Africa",
+                                "Central Africa",
+                                "East Africa",
+                                "Horn of Africa",
+                                "Southern Africa",
+                                "Sahel Region",
+                                "Indian Ocean Islands",
+                                "African Diaspora",
+                              ].map(r => (
                                 <SelectItem key={r} value={r}>{r}</SelectItem>
                               ))}
                             </SelectContent>
