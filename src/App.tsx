@@ -18,6 +18,7 @@ import IconAwardMain from "./pages/nominees/icon/IconAwardMain";
 import IconSubcategoryPage from "./pages/nominees/icon/IconSubcategoryPage";
 import IconClassificationPage from "./pages/nominees/icon/IconClassificationPage";
 import { Navigate, useParams } from "react-router-dom";
+import { isValidRegionSlug, resolveLegacyRegionSlug } from "@/lib/regionClassifier";
 
 /** 301-style redirect that preserves the :slug param and query string. */
 const SlugRedirect = ({ to }: { to: (slug: string) => string }) => {
