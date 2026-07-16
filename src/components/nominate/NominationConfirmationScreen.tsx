@@ -3,15 +3,26 @@ import { useTranslation } from "react-i18next";
 import { Button } from "@/components/ui/button";
 import { CheckCircle2, Users, Plus, BookOpen, Handshake } from "lucide-react";
 import { IntegrityNotice } from "./IntegrityNotice";
+import { AccountAtSubmitPanel } from "@/features/nominate/AccountAtSubmitPanel";
+import { useAuth } from "@/contexts/AuthContext";
 
 export function NominationConfirmationScreen({
   count,
   onNominateAnother,
+  reference,
+  submitterEmail,
+  submitterName,
 }: {
   count: number;
   onNominateAnother: () => void;
+  reference?: string | null;
+  submitterEmail?: string;
+  submitterName?: string;
 }) {
   const { t } = useTranslation("nomination");
+  const { user } = useAuth();
+  const showAccountPanel = !user && Boolean(submitterEmail);
+
   return (
     <div className="space-y-6">
       <div className="rounded-2xl border border-gold/40 bg-gradient-to-br from-gold/15 to-charcoal p-6 md:p-8 text-center space-y-4">
