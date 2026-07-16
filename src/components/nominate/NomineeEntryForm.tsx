@@ -95,6 +95,35 @@ export function NomineeEntryForm({
   );
   const [errors, setErrors] = useState<Record<string, string>>({});
 
+  // Draft persistence — nominate-first: values survive refresh/close
+  // without requiring an account. Keyed per pathway + editing target so
+  // multiple in-progress entries don't clobber each other.
+  const draftKey = `entry-${pathway}-${initial?.id ?? "new"}`;
+  const { hydratedValues, clearDraft, draftToken } = useDraftPersistence<NomineeEntry>(
+    draftKey,
+    form,
+  );
+  const hydratedRef = useRef(false);
+  useEffect(() => {
+    if (hydratedRef.current) return;
+    if (initial) {
+      hydratedRef.current = true;
+      return;
+    }
+    if (hydratedValues && hydratedValues.pathway === pathway) {
+      hydratedRef.current = true;
+      setForm(hydratedValues);
+      toast.message("Draft restored — pick up where you left off.", {
+        description: "No account required. Your entry is saved on this device.",
+      });
+      trackEvent("nomination_draft_restored", {
+        form: draftKey,
+        token: draftToken,
+        source: "nominee_entry_form",
+      });
+    }
+  }, [hydratedValues, initial, pathway, draftKey, draftToken]);
+
   useEffect(() => {
     setForm((f) => {
       const next = { ...f, pathway, awardFamily: PATHWAY_FAMILY[pathway] };
@@ -131,7 +160,40 @@ export function NomineeEntryForm({
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!validate()) return;
+    clearDraft();
     onSave(form);
+  };
+
+  const handleDiscardDraft = () => {
+    clearDraft();
+    hydratedRef.current = true;
+    setForm({
+      id: uid(),
+      pathway,
+      nomineeName: "",
+      nomineeType:
+        pathway === "icon"
+          ? "Africans in Africa"
+          : pathway === "platinum"
+          ? "Organization"
+          : "Individual",
+      awardFamily: preselect?.awardFamily ?? PATHWAY_FAMILY[pathway],
+      category: preselect?.category ?? "",
+      subcategory: preselect?.subcategory ?? "",
+      country: "",
+      region: preselect?.region ?? "",
+      city: "",
+      organization: "",
+      contact: "",
+      website: "",
+      socialLinks: "",
+      biography: "",
+      impactSummary: "",
+      reason: "",
+      evidenceLinks: "",
+      consent: false,
+    });
+    toast.success("Draft cleared.");
   };
 
   return (
