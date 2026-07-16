@@ -9,7 +9,17 @@ import { ArrowLeft, Save, X, ShieldCheck, RotateCcw } from "lucide-react";
 import { toast } from "sonner";
 import { useDraftPersistence } from "@/features/nominate/useDraftPersistence";
 import { trackEvent } from "@/lib/analytics";
+import { AFRICA_REGIONS as CANONICAL_AFRICA_REGIONS, AFRICAN_DIASPORA_SLUG } from "@/config/regions/africaRegions";
 import type { NominationPathway, NomineeEntry } from "./types";
+
+// Canonical 8 Africa regions + African Diaspora (Global Community).
+const NOMINEE_REGION_OPTIONS: { value: string; label: string }[] = [
+  ...CANONICAL_AFRICA_REGIONS
+    .slice()
+    .sort((a, b) => a.order - b.order)
+    .map((r) => ({ value: r.name, label: r.name })),
+  { value: "African Diaspora", label: "African Diaspora (Global Community)" },
+];
 
 const PATHWAY_LABEL: Record<NominationPathway, string> = {
   icon: "Africa Education Icon",
