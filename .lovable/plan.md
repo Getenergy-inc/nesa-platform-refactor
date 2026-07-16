@@ -1,105 +1,110 @@
-# Nominate-First Refactor Plan
 
-Shift every public nomination journey from "sign up → sign in → nominate" to "nominate → create/confirm account at submit → track". Reuse one component across all forms.
+# Expand Africa Regional model: 5 → 8 Africa Regions (+ African Diaspora)
 
-## Scope
+This is a large, cross-cutting refactor touching config, database, forms, directories, dashboards, SEO and copy. It should ship in staged phases so preview stays green after each step.
 
-Forms in scope (all rewired to the same submission gate):
-- Africa Education Icon nomination
-- Blue Garnet (competitive) nominations
-- Platinum Recognition nominations (incl. Diaspora, Library Nigeria, R&D Nigeria)
-- Influencer Education Impact nomination
-- School / Rebuild My School nominations
-- Local Chapter recommendations
-- Any generic `NativeCategoryNominationForm` entry point
+## Goals
 
-Out of scope: NRC review, judge, admin, and volunteer flows (they remain sign-in first).
+- Replace the existing 5-region model with 8 approved Africa regions.
+- Treat **African Diaspora** as a separate Global Community track (never counted as an Africa region).
+- Establish one country → region mapping as the single source of truth.
+- Migrate existing nominee/nomination records with an auditable log.
+- Update forms, directories, dashboards, SEO copy and routes consistently.
 
-## Phase 1 — Backend (Lovable Cloud)
+## Approved regions (canonical order everywhere)
 
-Migration adds:
+1. North Africa
+2. West Africa
+3. Central Africa
+4. East Africa
+5. Horn of Africa
+6. Southern Africa
+7. Sahel Region
+8. Indian Ocean Islands
 
-1. `public.nomination_drafts`
-   - `id uuid pk`, `draft_token text unique` (format `NOM-DRAFT-2026-XXXXXXXX`)
-   - `form_type text`, `award_tier text`, `category_slug text`, `subcategory_slug text`
-   - `nominee_data jsonb`, `nominator_email citext`, `session_id text`
-   - `status text` (`draft` | `awaiting_account` | `converted` | `expired`)
-   - `converted_to_nomination_id uuid null`
-   - `created_at`, `updated_at`, `expires_at` (default `now() + 30 days`)
-   - RLS: anon can `INSERT` + `SELECT`/`UPDATE` only rows matching their `draft_token` (passed via RPC param, not exposed to PostgREST filter); authenticated users can read drafts they own by email; service_role full.
-   - Nightly cleanup via cron: delete `expires_at < now()`.
+Separate track: **African Diaspora** (with sub-continents: North America, South America, Europe, Caribbean, Middle East, Asia, Oceania).
 
-2. `public.nominations` additions (nullable):
-   - `source_draft_id uuid references nomination_drafts(id)`
-   - `nomination_reference text unique` (auto: `NESA-2026-XXXXXX`)
-   - `email_verification_status text default 'pending'`
+## Phase 1 — Canonical region source of truth (frontend config)
 
-3. Security-definer RPCs (bypass PostgREST guessing):
-   - `create_nomination_draft(payload jsonb) → draft_token`
-   - `update_nomination_draft(token, payload jsonb)`
-   - `get_nomination_draft(token) → jsonb`
-   - `convert_draft_to_nomination(token, user_id) → nomination_reference` — enforces StageGate + one-time conversion + audit event.
+- Rewrite `src/config/regions/africaRegions.ts` (new) as the single export used everywhere:
+  - `AFRICA_REGIONS` (id, code, slug, name, order, description, countries[])
+  - `DIASPORA_REGIONS` (continents)
+  - `COUNTRY_TO_REGION` map (ISO2 → region code) using the country lists in the prompt
+  - Helpers: `getRegionByCountry(iso2)`, `getRegionBySlug(slug)`, `listAfricaRegions()`, `listDiasporaContinents()`
+- Deprecate/rewire `src/lib/regions.ts`, `src/lib/regionClassifier.ts`, `src/config/regionHubs.ts` to re-export from the new module. Keep old exports as thin aliases while call sites are migrated so the build never breaks.
+- Add legacy → new region migration table (e.g. "East Africa" nominee in Ethiopia → Horn of Africa).
 
-4. Audit: extend `audit_events` writes for `draft_created`, `draft_updated`, `draft_converted`, `account_prompt_shown`, `existing_account_detected`, `nomination_submitted`.
+## Phase 2 — Database schema & migration
 
-5. Keep existing `enforce_nominations_stage_gate` trigger — the RPC runs as invoker of `service_role` bypass only when StageGate is open.
+Create migration (single approval):
 
-## Phase 2 — Shared frontend primitives
+- `public.regions` — id, code, slug, name, region_type (`africa_region` | `global_community`), display_order, is_active, effective_date. Seed 8 Africa regions + `african-diaspora`.
+- `public.countries` — id, iso2, iso3, name, region_id, is_african, is_active. Seed from the country list.
+- `public.region_migration_log` — entity_type, entity_id, old_region, new_region, reason, changed_by, changed_at.
+- Extend `nominees`: add `country_id`, `region_id`, `diaspora_status`, `country_of_residence_id`, `diaspora_region_id` (nullable; backfill later).
+- Extend `nominations`: add `country_id`, `auto_assigned_region_id`, `region_override_reason`, `diaspora_status`.
+- Extend `award_categories`: `geographic_scope`, `regional_model` (`one_per_region` | `filter_only` | `landing_pages`), `applies_to_all_regions`, `region_version`.
+- GRANTs + RLS on all new tables (public read for regions/countries; admin write; migration log admin-only).
 
-New reusable modules under `src/features/nominate/`:
+Data backfill (via `supabase--insert`, batched after migration):
 
-- `useNominationDraft.ts` — hook that (a) mints/loads `draft_token` from `localStorage` key `nesa.draft.<formType>`, (b) debounced autosave to `nomination_drafts` via RPC, (c) hydrates initial values, (d) exposes `submit()` that routes through the gate.
-- `AccountAtSubmitDialog.tsx` — compact inline dialog (bottom sheet on mobile) with:
-  - Email → probe existing account (RPC `check_email_exists`).
-  - Branch A (new): full name, password, country, consent, optional phone → `signUp` with `emailRedirectTo: window.location.origin/nominee/verify`.
-  - Branch B (existing): password OR magic link OR reset.
-  - Google OAuth button (already configured). No forced social.
-  - On success → call `convert_draft_to_nomination` → route to success screen. Draft stays intact on any failure.
-- `NominationSuccessScreen.tsx` — reference, verify-email banner (non-blocking), CTA to dashboard + "Nominate another".
-- `DraftBanner.tsx` — "No account required to begin. Draft auto-saves." + restore/discard controls.
+- Populate `regions` and `countries` seeds.
+- Backfill `nominees.region_id` from existing `country`/legacy region using the new mapping; log every reassignment into `region_migration_log`.
 
-## Phase 3 — Wire into existing forms
+## Phase 3 — Nomination flow
 
-Refactor the shared form container(s) to use the hook + gate. Concrete touchpoints:
+- Update `NativeCategoryNominationForm`, `NomineeEntryForm` (Icon), Influencer form, Platinum/Diaspora form:
+  - Country select → auto-derives region (read-only "Recognition Region: …" helper).
+  - If `diaspora_status = true`: show country of residence, diaspora continental region, and African countries/regions supported.
+  - Persist `country_id`, `region_id`, `diaspora_*` fields.
+- Update draft JSON schema in `nomination_drafts` writes.
 
-- `src/components/awards/NativeCategoryNominationForm.tsx` — replace inline auth guard with `useNominationDraft`; swap submit path.
-- `src/components/nominate/NominateGate.tsx` — remove pre-form auth wall; keep StageGate only. Add "takes ~2 minutes · no account required to begin" strip.
-- `InfluencerNominationForm.tsx`, `NomineeEntryForm.tsx` (Icon), platinum form configs in `src/config/nomination/platinumForms.ts`, rebuild school nomination form, chapter recommendation form → all consume the same hook + `AccountAtSubmitDialog`.
-- Remove/adjust any route-level auth redirects on `/nominate/*` and `/awards/:tier/nominate` so anonymous users land directly on the form.
+## Phase 4 — Discovery: directory, filters, cards, profiles
 
-## Phase 4 — Nominator dashboard
+- `RegionSelector`, `RegionBadge`, `RegionCard`, `RegionalNomineeGrid`, `RegionalStats`, `RegionalFilterDrawer`, `DiasporaSelector` — one shared component set under `src/components/regions/`.
+- Update `/nominees` and every award-specific directory to filter by 8 regions + Diaspora tab.
+- Nominee cards show country + region + category + verification.
+- Nominee profile: primary country, recognition region, geographic reach, countries served, diaspora classification.
+- "Explore by Africa Region" reusable section on hub pages with dynamic counts.
 
-Extend `NomineeDashboard` / add `NominatorDashboard` page at `/nominator` showing: reference, nominee, pathway, submitted_at, status, clarification requests, acceptance status. Gate sensitive actions behind `email_verification_status = 'verified'`; nomination itself is always visible.
+## Phase 5 — Award pages, routes, SEO
 
-## Phase 5 — Analytics + copy sweep
+- Route slugs: `north-africa`, `west-africa`, `central-africa`, `east-africa`, `horn-of-africa`, `southern-africa`, `sahel-region`, `indian-ocean-islands`, `african-diaspora`.
+- Add `/nominees/region/:slug` regional landing pages driven by config.
+- Register redirects in `src/config/refactorRedirects2026.ts` for old region URLs.
+- Update award cards to display "Scope: 8 Africa Regions" (list all 8 once in the shared regional block, not on every card).
+- Update SEO titles/descriptions per region.
+- Global copy sweep: replace "5 / five African regions" and "North, West, East, Central and Southern Africa" phrasing across content configs (`pillars.ts`, `capability2026.ts`, `awardPageContent.ts`, `tierCluster.ts`, `regionHubs.ts`, homepage hero, footer, About).
+- Canonical tagline: **"One Continent. Eight Africa Regions. One African Diaspora Community. One Mission."**
 
-- Fire events listed in the brief through existing `analytics.ts` (`track()`), namespaced `nomination_*`.
-- Global copy sweep: "Register to Nominate" / "Sign Up Before Nominating" / "Create Account to Continue" → "Submit Nomination".
-- Add pre-form strip and post-form disclosure copy per brief.
+## Phase 6 — Dashboards, NRC, analytics
 
-## Phase 6 — QA
+- Update executive/regional/chapter/NRC/media/sponsor dashboards: 8-region charts + separate Diaspora slice.
+- NRC assignment rules: 8 Africa regional teams + African Diaspora team; auto-assign based on country → region.
+- Import/export templates (`nomineeExport.ts`, admin CSV import): add Country, Country Code, Region, Region Code, Diaspora Status, Country of Residence, Diaspora Continental Region, African Country Supported.
 
-- Playwright specs under `tests/e2e/nominate-first/`:
-  - anonymous complete + new account submission
-  - anonymous complete + existing account sign-in
-  - draft survives reload / navigation / auth popup close
-  - StageGate closed → submit blocked with clear message, draft preserved
-  - mobile viewport bottom-sheet flow
-  - duplicate email → "Welcome Back" branch
-- Manual smoke on Icon, Platinum, Influencer, School, Chapter forms.
+## Phase 7 — QA
 
-## Rollout order
-
-1. Migration + RPCs (Phase 1) — requires user approval.
-2. Shared primitives (Phase 2).
-3. Wire Icon + Native forms first, verify, then fan out to remaining forms (Phase 3).
-4. Dashboard, analytics, copy, tests (Phases 4-6).
-
-I'll pause after each phase for a quick check before proceeding.
+- Unit tests for `getRegionByCountry` covering every listed country.
+- Integration tests: form country → region auto-assignment; directory filters return correct counts; diaspora fields conditional rendering.
+- Redirect test for legacy region URLs.
+- Manual QA pass via Playwright on nominee directory + one nomination form + regional landing page.
 
 ## Technical notes
 
-- Drafts are anonymous-writable; the `draft_token` is the capability. Store it only in `localStorage` + returned to the caller — never expose via a list endpoint.
-- Password sign-up keeps Supabase's default confirm-email flow but we do NOT gate submission on confirmation; the RPC accepts `user_id` from the freshly established session.
-- Google OAuth `redirect_uri` stays `window.location.origin`; after callback we detect a pending draft token in `localStorage` and auto-run conversion.
-- Expiry cleanup uses a Supabase cron (`pg_cron`) if enabled, otherwise a scheduled edge function.
+- Because this touches ~60 files, do it in the phase order above and land Phase 1 + Phase 5 copy sweep before Phase 4 UI so pages don't render stale labels while wiring is in flight.
+- Keep legacy `regionClassifier` API surface temporarily to avoid a big-bang breakage; delete after all call sites migrate.
+- Do **not** silently mutate existing nominee records — every reassignment goes through `region_migration_log`.
+- Diaspora is never included in the 8-region counters or the Africa region dropdowns; it lives in its own tab/section.
+
+## Out of scope for this plan (call out for follow-up)
+
+- Rewriting award tier scoring formulas.
+- Migrating historical winner records from earlier seasons (before NESA-Africa 2026) beyond region reassignment.
+- Localisation of new copy into the 11 supported languages — will follow once English copy is frozen.
+
+## Deliverables (matches the master prompt)
+
+Old 5-region audit report, approved country→region mapping, affected page list, affected category list, DB migration, API spec, spreadsheet template, updated forms, updated filters, updated profiles, updated NRC logic, updated dashboards, copy diff, redirect map, QA plan, migration report, final 8-region checklist.
+
+**Please confirm the plan (or flag phases to drop / reorder) and I will start with Phase 1 + the Phase 2 migration.**

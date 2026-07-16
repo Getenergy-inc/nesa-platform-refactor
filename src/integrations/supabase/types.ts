@@ -261,28 +261,40 @@ export type Database = {
       }
       award_categories: {
         Row: {
+          applies_to_all_regions: boolean
           created_at: string
+          geographic_scope: string | null
           group_key: string
           is_published: boolean
           payload: Json
+          region_version: string
+          regional_model: string | null
           slug: string
           sort_order: number
           updated_at: string
         }
         Insert: {
+          applies_to_all_regions?: boolean
           created_at?: string
+          geographic_scope?: string | null
           group_key: string
           is_published?: boolean
           payload: Json
+          region_version?: string
+          regional_model?: string | null
           slug: string
           sort_order?: number
           updated_at?: string
         }
         Update: {
+          applies_to_all_regions?: boolean
           created_at?: string
+          geographic_scope?: string | null
           group_key?: string
           is_published?: boolean
           payload?: Json
+          region_version?: string
+          regional_model?: string | null
           slug?: string
           sort_order?: number
           updated_at?: string
@@ -1042,6 +1054,50 @@ export type Database = {
             isOneToOne: false
             referencedRelation: "regions"
             referencedColumns: ["id"]
+          },
+        ]
+      }
+      countries: {
+        Row: {
+          created_at: string
+          id: string
+          is_active: boolean
+          is_african: boolean
+          iso2: string
+          iso3: string | null
+          name: string
+          region_code: string | null
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          is_active?: boolean
+          is_african?: boolean
+          iso2: string
+          iso3?: string | null
+          name: string
+          region_code?: string | null
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          is_active?: boolean
+          is_african?: boolean
+          iso2?: string
+          iso3?: string | null
+          name?: string
+          region_code?: string | null
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "countries_region_code_fkey"
+            columns: ["region_code"]
+            isOneToOne: false
+            referencedRelation: "regions_v2"
+            referencedColumns: ["code"]
           },
         ]
       }
@@ -2945,13 +3001,16 @@ export type Database = {
       }
       nominations: {
         Row: {
+          auto_assigned_region_code: string | null
           award_category_slug: string | null
           award_family: string | null
           award_subcategory_slug: string | null
+          country_iso2: string | null
           created_at: string | null
           created_nominee_id: string | null
           dedupe_match_id: string | null
           dedupe_score: number | null
+          diaspora_status: boolean
           email_verification_status: string | null
           evidence_urls: string[] | null
           id: string
@@ -2974,6 +3033,7 @@ export type Database = {
           recognition_cycle_id: string | null
           recognition_subcategory_id: string | null
           recognition_tier_id: string | null
+          region_override_reason: string | null
           region_slug: string | null
           review_notes: string | null
           reviewed_at: string | null
@@ -2996,13 +3056,16 @@ export type Database = {
           zone_slug: string | null
         }
         Insert: {
+          auto_assigned_region_code?: string | null
           award_category_slug?: string | null
           award_family?: string | null
           award_subcategory_slug?: string | null
+          country_iso2?: string | null
           created_at?: string | null
           created_nominee_id?: string | null
           dedupe_match_id?: string | null
           dedupe_score?: number | null
+          diaspora_status?: boolean
           email_verification_status?: string | null
           evidence_urls?: string[] | null
           id?: string
@@ -3025,6 +3088,7 @@ export type Database = {
           recognition_cycle_id?: string | null
           recognition_subcategory_id?: string | null
           recognition_tier_id?: string | null
+          region_override_reason?: string | null
           region_slug?: string | null
           review_notes?: string | null
           reviewed_at?: string | null
@@ -3047,13 +3111,16 @@ export type Database = {
           zone_slug?: string | null
         }
         Update: {
+          auto_assigned_region_code?: string | null
           award_category_slug?: string | null
           award_family?: string | null
           award_subcategory_slug?: string | null
+          country_iso2?: string | null
           created_at?: string | null
           created_nominee_id?: string | null
           dedupe_match_id?: string | null
           dedupe_score?: number | null
+          diaspora_status?: boolean
           email_verification_status?: string | null
           evidence_urls?: string[] | null
           id?: string
@@ -3076,6 +3143,7 @@ export type Database = {
           recognition_cycle_id?: string | null
           recognition_subcategory_id?: string | null
           recognition_tier_id?: string | null
+          region_override_reason?: string | null
           region_slug?: string | null
           review_notes?: string | null
           reviewed_at?: string | null
@@ -3098,6 +3166,20 @@ export type Database = {
           zone_slug?: string | null
         }
         Relationships: [
+          {
+            foreignKeyName: "nominations_auto_assigned_region_code_fkey"
+            columns: ["auto_assigned_region_code"]
+            isOneToOne: false
+            referencedRelation: "regions_v2"
+            referencedColumns: ["code"]
+          },
+          {
+            foreignKeyName: "nominations_country_iso2_fkey"
+            columns: ["country_iso2"]
+            isOneToOne: false
+            referencedRelation: "countries"
+            referencedColumns: ["iso2"]
+          },
           {
             foreignKeyName: "nominations_created_nominee_id_fkey"
             columns: ["created_nominee_id"]
@@ -3436,8 +3518,12 @@ export type Database = {
           bio: string | null
           category_fit_summary: string | null
           country: string | null
+          country_iso2: string | null
           country_of_impact: string | null
+          country_of_residence_iso2: string | null
           created_at: string | null
+          diaspora_continent: string | null
+          diaspora_status: boolean
           edi_band: Database["public"]["Enums"]["nrc_edi_band"] | null
           email: string | null
           evidence_urls: string[] | null
@@ -3483,6 +3569,7 @@ export type Database = {
           recognition_pathway: string | null
           referral_code: string | null
           region: string | null
+          region_code: string | null
           region_slug: string | null
           renomination_count: number
           research_priority:
@@ -3516,8 +3603,12 @@ export type Database = {
           bio?: string | null
           category_fit_summary?: string | null
           country?: string | null
+          country_iso2?: string | null
           country_of_impact?: string | null
+          country_of_residence_iso2?: string | null
           created_at?: string | null
+          diaspora_continent?: string | null
+          diaspora_status?: boolean
           edi_band?: Database["public"]["Enums"]["nrc_edi_band"] | null
           email?: string | null
           evidence_urls?: string[] | null
@@ -3563,6 +3654,7 @@ export type Database = {
           recognition_pathway?: string | null
           referral_code?: string | null
           region?: string | null
+          region_code?: string | null
           region_slug?: string | null
           renomination_count?: number
           research_priority?:
@@ -3596,8 +3688,12 @@ export type Database = {
           bio?: string | null
           category_fit_summary?: string | null
           country?: string | null
+          country_iso2?: string | null
           country_of_impact?: string | null
+          country_of_residence_iso2?: string | null
           created_at?: string | null
+          diaspora_continent?: string | null
+          diaspora_status?: boolean
           edi_band?: Database["public"]["Enums"]["nrc_edi_band"] | null
           email?: string | null
           evidence_urls?: string[] | null
@@ -3643,6 +3739,7 @@ export type Database = {
           recognition_pathway?: string | null
           referral_code?: string | null
           region?: string | null
+          region_code?: string | null
           region_slug?: string | null
           renomination_count?: number
           research_priority?:
@@ -3665,6 +3762,27 @@ export type Database = {
           zone_slug?: string | null
         }
         Relationships: [
+          {
+            foreignKeyName: "nominees_country_iso2_fkey"
+            columns: ["country_iso2"]
+            isOneToOne: false
+            referencedRelation: "countries"
+            referencedColumns: ["iso2"]
+          },
+          {
+            foreignKeyName: "nominees_country_of_residence_iso2_fkey"
+            columns: ["country_of_residence_iso2"]
+            isOneToOne: false
+            referencedRelation: "countries"
+            referencedColumns: ["iso2"]
+          },
+          {
+            foreignKeyName: "nominees_region_code_fkey"
+            columns: ["region_code"]
+            isOneToOne: false
+            referencedRelation: "regions_v2"
+            referencedColumns: ["code"]
+          },
           {
             foreignKeyName: "nominees_season_id_fkey"
             columns: ["season_id"]
@@ -5999,6 +6117,47 @@ export type Database = {
         }
         Relationships: []
       }
+      region_migration_log: {
+        Row: {
+          changed_at: string
+          changed_by: string | null
+          entity_id: string
+          entity_type: string
+          id: string
+          new_region_code: string | null
+          old_region: string | null
+          reason: string | null
+        }
+        Insert: {
+          changed_at?: string
+          changed_by?: string | null
+          entity_id: string
+          entity_type: string
+          id?: string
+          new_region_code?: string | null
+          old_region?: string | null
+          reason?: string | null
+        }
+        Update: {
+          changed_at?: string
+          changed_by?: string | null
+          entity_id?: string
+          entity_type?: string
+          id?: string
+          new_region_code?: string | null
+          old_region?: string | null
+          reason?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "region_migration_log_new_region_code_fkey"
+            columns: ["new_region_code"]
+            isOneToOne: false
+            referencedRelation: "regions_v2"
+            referencedColumns: ["code"]
+          },
+        ]
+      }
       regions: {
         Row: {
           created_at: string
@@ -6024,6 +6183,48 @@ export type Database = {
           id?: string
           is_active?: boolean
           name?: string
+          slug?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      regions_v2: {
+        Row: {
+          code: string
+          created_at: string
+          description: string | null
+          display_order: number
+          effective_date: string
+          id: string
+          is_active: boolean
+          name: string
+          region_type: string
+          slug: string
+          updated_at: string
+        }
+        Insert: {
+          code: string
+          created_at?: string
+          description?: string | null
+          display_order?: number
+          effective_date?: string
+          id?: string
+          is_active?: boolean
+          name: string
+          region_type: string
+          slug: string
+          updated_at?: string
+        }
+        Update: {
+          code?: string
+          created_at?: string
+          description?: string | null
+          display_order?: number
+          effective_date?: string
+          id?: string
+          is_active?: boolean
+          name?: string
+          region_type?: string
           slug?: string
           updated_at?: string
         }
