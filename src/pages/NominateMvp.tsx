@@ -157,6 +157,48 @@ export default function NominateMvp() {
     setParams(next, { replace: true });
   }, [categoryParam, subcategoryParam, params, setParams]);
 
+  // ── Region param validation + normalization ──────────────────────────
+  // For the Influencer family (no per-category region config), coerce any
+  // legacy / short / mixed-case ?region= into the canonical 8-region +
+  // African-Diaspora slug set. For Africa-Regional categories, drop the
+  // ?region= if it doesn't resolve to a real region variant. This runs
+  // before submission gating so the form is never opened with a stale slug.
+  useEffect(() => {
+    if (!regionParam) return;
+
+    // Influencer family: normalize against the canonical influencer set.
+    if (family === "influencer" && !category?.isRegionalCategory) {
+      const canonical = normalizeInfluencerRegion(regionParam);
+      if (canonical === null) {
+        const next = new URLSearchParams(params);
+        next.delete("region");
+        setParams(next, { replace: true });
+      } else if (canonical !== regionParam) {
+        const next = new URLSearchParams(params);
+        next.set("region", canonical);
+        setParams(next, { replace: true });
+      }
+      return;
+    }
+
+    // Africa-Regional categories: strip if the region doesn't match a variant.
+    if (category?.isRegionalCategory) {
+      const variant = getCategoryRegion(category.slug, regionParam);
+      if (!variant) {
+        const aliased = INFLUENCER_REGION_ALIASES[regionParam.trim().toLowerCase()];
+        const retry = aliased ? getCategoryRegion(category.slug, aliased) : null;
+        const next = new URLSearchParams(params);
+        if (retry) {
+          next.set("region", retry.slug);
+        } else {
+          next.delete("region");
+          next.delete("subcategory");
+        }
+        setParams(next, { replace: true });
+      }
+    }
+  }, [family, category, regionParam, params, setParams]);
+
   // Honor ?lang=
   useEffect(() => {
     const langParam = params.get("lang");
