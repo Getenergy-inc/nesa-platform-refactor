@@ -228,10 +228,14 @@ export default function NominateFlow() {
   };
 
   const handleSubmit = (mode: "create" | "signin" | "verify") => {
+    const reference = generateReference();
+    setSubmissionReference(reference);
     trackEvent("nominate_submit", {
       mode,
+      reference,
       total: state.entries.length,
       pathways: Array.from(new Set(state.entries.map((e) => e.pathway))),
+      guest: mode === "verify",
     });
     // Backend not yet wired — mark complete locally
     toast.success(t("flow.toast.recorded"));
@@ -240,8 +244,10 @@ export default function NominateFlow() {
 
   const reset = () => {
     sessionStorage.removeItem(SESSION_KEY);
+    setSubmissionReference(null);
     dispatch({ type: "RESET" });
   };
+
 
   // ---------------- render ----------------
   return (
