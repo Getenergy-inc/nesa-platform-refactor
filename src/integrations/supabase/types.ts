@@ -1806,6 +1806,7 @@ export type Database = {
           primary_social_media_platform: string | null
           primary_sport_area: string | null
           recognition_class: string
+          region_slug: string | null
           reviewed_at: string | null
           reviewed_by: string | null
           slug: string
@@ -1842,6 +1843,7 @@ export type Database = {
           primary_social_media_platform?: string | null
           primary_sport_area?: string | null
           recognition_class: string
+          region_slug?: string | null
           reviewed_at?: string | null
           reviewed_by?: string | null
           slug: string
@@ -1878,6 +1880,7 @@ export type Database = {
           primary_social_media_platform?: string | null
           primary_sport_area?: string | null
           recognition_class?: string
+          region_slug?: string | null
           reviewed_at?: string | null
           reviewed_by?: string | null
           slug?: string
@@ -1889,7 +1892,22 @@ export type Database = {
           verification_status?: string
           verified_nominations?: number
         }
-        Relationships: []
+        Relationships: [
+          {
+            foreignKeyName: "influencer_impact_nominees_region_slug_fkey"
+            columns: ["region_slug"]
+            isOneToOne: false
+            referencedRelation: "influencer_nominees_by_region"
+            referencedColumns: ["region_slug"]
+          },
+          {
+            foreignKeyName: "influencer_impact_nominees_region_slug_fkey"
+            columns: ["region_slug"]
+            isOneToOne: false
+            referencedRelation: "regions_v2"
+            referencedColumns: ["slug"]
+          },
+        ]
       }
       judge_activity_logs: {
         Row: {
@@ -8111,6 +8129,16 @@ export type Database = {
             referencedColumns: ["id"]
           },
         ]
+      }
+      influencer_nominees_by_region: {
+        Row: {
+          award_family: string | null
+          nominee_count: number | null
+          region_name: string | null
+          region_slug: string | null
+          verified_count: number | null
+        }
+        Relationships: []
       }
       judges_public: {
         Row: {
