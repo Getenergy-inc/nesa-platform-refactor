@@ -4,6 +4,7 @@ import { Helmet } from "react-helmet-async";
 import { motion } from "framer-motion";
 import { useTranslation } from "react-i18next";
 import { ArrowRight, BookOpen, ShieldCheck, Mail, ChevronLeft } from "lucide-react";
+import { z } from "zod";
 
 import { Button } from "@/components/ui/button";
 import { LanguageSwitcher } from "@/components/i18n";
@@ -55,6 +56,51 @@ const INFLUENCER_REGION_OPTIONS = [
 
 const INFLUENCER_REGION_NAME_BY_SLUG: Record<string, string> =
   Object.fromEntries(INFLUENCER_REGION_OPTIONS.map((o) => [o.slug, o.name]));
+
+// Legacy / alternate region slugs accepted from external links, mapped to
+// canonical Africa-region + African-Diaspora slugs used by INFLUENCER_REGION_OPTIONS.
+const INFLUENCER_REGION_ALIASES: Record<string, string> = {
+  north: "north-africa",
+  "north-africa": "north-africa",
+  west: "west-africa",
+  "west-africa": "west-africa",
+  east: "east-africa",
+  "east-africa": "east-africa",
+  south: "southern-africa",
+  southern: "southern-africa",
+  "southern-africa": "southern-africa",
+  central: "central-africa",
+  "central-africa": "central-africa",
+  horn: "horn-of-africa",
+  "horn-of-africa": "horn-of-africa",
+  sahel: "sahel-region",
+  "sahel-region": "sahel-region",
+  "indian-ocean": "indian-ocean-islands",
+  "indian-ocean-islands": "indian-ocean-islands",
+  islands: "indian-ocean-islands",
+  diaspora: AFRICAN_DIASPORA_SLUG,
+  "african-diaspora": AFRICAN_DIASPORA_SLUG,
+  global: AFRICAN_DIASPORA_SLUG,
+};
+
+// Zod schema — accepts any short string, normalizes, then validates against
+// the canonical influencer region set. Returns undefined for unrecognized input
+// so the caller can strip the ?region= param rather than throwing.
+const influencerRegionSchema = z
+  .string()
+  .trim()
+  .toLowerCase()
+  .max(64)
+  .transform((raw) => INFLUENCER_REGION_ALIASES[raw])
+  .refine((slug): slug is string =>
+    typeof slug === "string" && slug in INFLUENCER_REGION_NAME_BY_SLUG,
+  );
+
+function normalizeInfluencerRegion(raw: string | null | undefined): string | null {
+  if (!raw) return null;
+  const parsed = influencerRegionSchema.safeParse(raw);
+  return parsed.success ? parsed.data : null;
+}
 
 const VALID_FAMILIES = new Set<AwardFamilyId>(
   AWARD_FAMILIES.map((f) => f.id),
@@ -110,6 +156,48 @@ export default function NominateMvp() {
     next.delete("subcategory");
     setParams(next, { replace: true });
   }, [categoryParam, subcategoryParam, params, setParams]);
+
+  // ── Region param validation + normalization ──────────────────────────
+  // For the Influencer family (no per-category region config), coerce any
+  // legacy / short / mixed-case ?region= into the canonical 8-region +
+  // African-Diaspora slug set. For Africa-Regional categories, drop the
+  // ?region= if it doesn't resolve to a real region variant. This runs
+  // before submission gating so the form is never opened with a stale slug.
+  useEffect(() => {
+    if (!regionParam) return;
+
+    // Influencer family: normalize against the canonical influencer set.
+    if (family === "influencer" && !category?.isRegionalCategory) {
+      const canonical = normalizeInfluencerRegion(regionParam);
+      if (canonical === null) {
+        const next = new URLSearchParams(params);
+        next.delete("region");
+        setParams(next, { replace: true });
+      } else if (canonical !== regionParam) {
+        const next = new URLSearchParams(params);
+        next.set("region", canonical);
+        setParams(next, { replace: true });
+      }
+      return;
+    }
+
+    // Africa-Regional categories: strip if the region doesn't match a variant.
+    if (category?.isRegionalCategory) {
+      const variant = getCategoryRegion(category.slug, regionParam);
+      if (!variant) {
+        const aliased = INFLUENCER_REGION_ALIASES[regionParam.trim().toLowerCase()];
+        const retry = aliased ? getCategoryRegion(category.slug, aliased) : null;
+        const next = new URLSearchParams(params);
+        if (retry) {
+          next.set("region", retry.slug);
+        } else {
+          next.delete("region");
+          next.delete("subcategory");
+        }
+        setParams(next, { replace: true });
+      }
+    }
+  }, [family, category, regionParam, params, setParams]);
 
   // Honor ?lang=
   useEffect(() => {
@@ -672,8 +760,13 @@ export default function NominateMvp() {
                 </div>
               ) : null}
 
-              {/* Form embed — gated by region (regional) and zone+state (zonal) */}
-              {(!category.isRegionalCategory || regionVariant) && zonalReady && (
+              {/* Form embed — gated by region (regional + influencer) and zone+state (zonal) */}
+              {(!category.isRegionalCategory || regionVariant) &&
+                zonalReady &&
+                (family !== "influencer" ||
+                  category.isRegionalCategory ||
+                  (regionParam &&
+                    INFLUENCER_REGION_NAME_BY_SLUG[regionParam])) && (
                 <>
                   <IntegrityNotice />
 
@@ -692,7 +785,9 @@ export default function NominateMvp() {
                         ? `${category.name} — ${regionVariant.name}`
                         : zone && stateEntry
                           ? `${category.name} — ${stateEntry.name} (${zone.name})`
-                          : category.name
+                          : family === "influencer" && regionParam && INFLUENCER_REGION_NAME_BY_SLUG[regionParam]
+                            ? `${category.name} — ${INFLUENCER_REGION_NAME_BY_SLUG[regionParam]}`
+                            : category.name
                     }
                     status={regionVariant?.status ?? category.status}
                     formPublicUrl={
@@ -706,7 +801,11 @@ export default function NominateMvp() {
                       { label: "Award category", value: category.name },
                       ...(regionVariant
                         ? [{ label: "Region", value: regionVariant.name }]
-                        : []),
+                        : family === "influencer" &&
+                            regionParam &&
+                            INFLUENCER_REGION_NAME_BY_SLUG[regionParam]
+                          ? [{ label: "Africa Region", value: INFLUENCER_REGION_NAME_BY_SLUG[regionParam] }]
+                          : []),
                       ...(zone
                         ? [{ label: "Geopolitical zone", value: zone.name }]
                         : []),
