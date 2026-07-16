@@ -29,6 +29,32 @@ import {
 import { changeLanguage } from "@/lib/i18n";
 import { isValidLocale } from "@/config/i18n.config";
 import { trackEvent } from "@/lib/analytics";
+import {
+  AFRICA_REGIONS as CANONICAL_AFRICA_REGIONS,
+  AFRICAN_DIASPORA_SLUG,
+} from "@/config/regions/africaRegions";
+
+// Influencer Education Impact — 8 Africa Regions + African Diaspora.
+// Applied to family === "influencer" so social-media / sports / music tracks
+// share one canonical region taxonomy.
+const INFLUENCER_REGION_OPTIONS = [
+  ...CANONICAL_AFRICA_REGIONS
+    .slice()
+    .sort((a, b) => a.order - b.order)
+    .map((r) => ({
+      slug: r.slug,
+      name: r.name,
+      description: `${r.countries.length} countries`,
+    })),
+  {
+    slug: AFRICAN_DIASPORA_SLUG,
+    name: "African Diaspora",
+    description: "Global Community — Africans making impact from abroad",
+  },
+];
+
+const INFLUENCER_REGION_NAME_BY_SLUG: Record<string, string> =
+  Object.fromEntries(INFLUENCER_REGION_OPTIONS.map((o) => [o.slug, o.name]));
 
 const VALID_FAMILIES = new Set<AwardFamilyId>(
   AWARD_FAMILIES.map((f) => f.id),
@@ -411,6 +437,60 @@ export default function NominateMvp() {
                       </button>
                     ))}
                   </div>
+                </div>
+              )}
+
+              {/* ── Influencer Africa Region selector (family=influencer, non-regional categories) ── */}
+              {family === "influencer" && !category.isRegionalCategory && !regionParam && (
+                <div className="space-y-3">
+                  <h3 className="font-display text-lg text-white">
+                    Select Your Africa Region
+                  </h3>
+                  <p className="text-sm text-white/75 max-w-3xl">
+                    Where is this influencer's primary education impact based?
+                    Choose one of the 8 Africa Regions, or African Diaspora for
+                    Africans making impact from abroad.
+                  </p>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+                    {INFLUENCER_REGION_OPTIONS.map((r) => (
+                      <button
+                        key={r.slug}
+                        type="button"
+                        onClick={() => update({ region: r.slug })}
+                        className="text-left rounded-xl border border-gold/30 bg-charcoal-light/40 p-4 hover:border-gold hover:bg-charcoal-light/60 transition"
+                      >
+                        <h4 className="font-display text-base text-white">
+                          {r.name}
+                        </h4>
+                        <p className="text-xs text-white/65 mt-1">{r.description}</p>
+                      </button>
+                    ))}
+                  </div>
+                  <p className="text-[11px] uppercase tracking-[0.16em] text-white/50">
+                    One Continent. Eight Africa Regions. One African Diaspora Community.
+                  </p>
+                </div>
+              )}
+
+              {/* ── Influencer region context strip (after selection) ── */}
+              {family === "influencer" && !category.isRegionalCategory && regionParam && INFLUENCER_REGION_NAME_BY_SLUG[regionParam] && (
+                <div className="rounded-xl border border-gold/30 bg-charcoal-light/40 p-4 flex items-center justify-between gap-3 flex-wrap">
+                  <div>
+                    <p className="text-[11px] uppercase tracking-[0.18em] text-gold/80 font-semibold">
+                      Selected Africa Region
+                    </p>
+                    <h3 className="font-display text-lg text-white">
+                      {INFLUENCER_REGION_NAME_BY_SLUG[regionParam]}
+                    </h3>
+                  </div>
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    onClick={() => update({ region: null })}
+                    className="text-white/80 hover:text-gold gap-1"
+                  >
+                    <ChevronLeft className="h-3.5 w-3.5" /> Change region
+                  </Button>
                 </div>
               )}
 
