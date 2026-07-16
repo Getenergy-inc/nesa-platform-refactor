@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useReducer } from "react";
+import { useEffect, useMemo, useReducer, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import { motion, AnimatePresence } from "framer-motion";
@@ -69,6 +69,12 @@ const initial: FlowState = {
   preselect: {},
 };
 
+function generateReference(): string {
+  const r = Math.random().toString(36).slice(2, 8).toUpperCase();
+  return `NOM-2026-${r}`;
+}
+
+
 function reducer(state: FlowState, action: Action): FlowState {
   switch (action.type) {
     case "SET_STEP":
@@ -117,6 +123,7 @@ export default function NominateFlow() {
   const { t, i18n } = useTranslation("nomination");
   const [params, setParams] = useSearchParams();
   const [state, dispatch] = useReducer(reducer, undefined, loadInitial);
+  const [submissionReference, setSubmissionReference] = useState<string | null>(null);
 
   // Sync URL ?lang= -> i18n on mount / external navigation
   useEffect(() => {
@@ -221,10 +228,14 @@ export default function NominateFlow() {
   };
 
   const handleSubmit = (mode: "create" | "signin" | "verify") => {
+    const reference = generateReference();
+    setSubmissionReference(reference);
     trackEvent("nominate_submit", {
       mode,
+      reference,
       total: state.entries.length,
       pathways: Array.from(new Set(state.entries.map((e) => e.pathway))),
+      guest: mode === "verify",
     });
     // Backend not yet wired — mark complete locally
     toast.success(t("flow.toast.recorded"));
@@ -233,8 +244,10 @@ export default function NominateFlow() {
 
   const reset = () => {
     sessionStorage.removeItem(SESSION_KEY);
+    setSubmissionReference(null);
     dispatch({ type: "RESET" });
   };
+
 
   // ---------------- render ----------------
   return (
@@ -320,8 +333,12 @@ export default function NominateFlow() {
                 <NominationConfirmationScreen
                   count={state.entries.length}
                   onNominateAnother={reset}
+                  reference={submissionReference}
+                  submitterEmail={state.submitter?.email}
+                  submitterName={state.submitter?.fullName}
                 />
               )}
+
             </motion.div>
           </AnimatePresence>
         </div>

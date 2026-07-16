@@ -60,31 +60,50 @@ export function SignupAtSubmissionStep({
           </div>
         </Card>
       ) : (
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
-          <OptionCard
-            icon={UserPlus}
-            title={t("flow.auth.create.title")}
-            description={t("flow.auth.create.desc")}
-            cta={t("flow.auth.create.cta")}
-            onClick={() => onSubmit("create")}
-          />
-          <OptionCard
-            icon={LogIn}
-            title={t("flow.auth.signin.title")}
-            description={t("flow.auth.signin.desc")}
-            cta={t("flow.auth.signin.cta")}
-            onClick={() => onSubmit("signin")}
-          />
-          <OptionCard
-            icon={MailCheck}
-            title={t("flow.auth.verify.title")}
-            description={t("flow.auth.verify.desc")}
-            cta={t("flow.auth.verify.cta")}
-            onClick={() => onSubmit("verify")}
-            primary
-          />
-        </div>
+        <>
+          <Card className="bg-charcoal/60 border-gold/40 p-5">
+            <div className="flex items-start gap-3">
+              <ShieldCheck className="h-5 w-5 text-gold shrink-0 mt-0.5" />
+              <div className="space-y-3">
+                <div>
+                  <h3 className="font-display text-lg font-semibold text-white">
+                    Submit without an account
+                  </h3>
+                  <p className="text-xs text-white/65 mt-1 max-w-xl">
+                    Your nomination is recorded immediately. You can create a
+                    free account on the next screen to track its status — it's
+                    optional and never required for review.
+                  </p>
+                </div>
+                <Button
+                  onClick={() => onSubmit("verify")}
+                  className="bg-gold hover:bg-gold-dark text-charcoal font-semibold rounded-full px-6 shadow-gold"
+                >
+                  Submit nomination
+                </Button>
+              </div>
+            </div>
+          </Card>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+            <OptionCard
+              icon={UserPlus}
+              title={t("flow.auth.create.title")}
+              description={t("flow.auth.create.desc")}
+              cta={t("flow.auth.create.cta")}
+              onClick={() => onSubmit("create")}
+            />
+            <OptionCard
+              icon={LogIn}
+              title={t("flow.auth.signin.title")}
+              description={t("flow.auth.signin.desc")}
+              cta={t("flow.auth.signin.cta")}
+              onClick={() => onSubmit("signin")}
+            />
+          </div>
+        </>
       )}
+
 
       <LaunchingAfterVerificationBanner />
 

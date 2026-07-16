@@ -1,11 +1,14 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { ConsentDeclarationCheckbox } from "./ConsentDeclarationCheckbox";
 import { IntegrityNotice } from "./IntegrityNotice";
-import { ArrowLeft, Save, X } from "lucide-react";
+import { ArrowLeft, Save, X, ShieldCheck, RotateCcw } from "lucide-react";
+import { toast } from "sonner";
+import { useDraftPersistence } from "@/features/nominate/useDraftPersistence";
+import { trackEvent } from "@/lib/analytics";
 import type { NominationPathway, NomineeEntry } from "./types";
 
 const PATHWAY_LABEL: Record<NominationPathway, string> = {
@@ -92,6 +95,35 @@ export function NomineeEntryForm({
   );
   const [errors, setErrors] = useState<Record<string, string>>({});
 
+  // Draft persistence — nominate-first: values survive refresh/close
+  // without requiring an account. Keyed per pathway + editing target so
+  // multiple in-progress entries don't clobber each other.
+  const draftKey = `entry-${pathway}-${initial?.id ?? "new"}`;
+  const { hydratedValues, clearDraft, draftToken } = useDraftPersistence<NomineeEntry>(
+    draftKey,
+    form,
+  );
+  const hydratedRef = useRef(false);
+  useEffect(() => {
+    if (hydratedRef.current) return;
+    if (initial) {
+      hydratedRef.current = true;
+      return;
+    }
+    if (hydratedValues && hydratedValues.pathway === pathway) {
+      hydratedRef.current = true;
+      setForm(hydratedValues);
+      toast.message("Draft restored — pick up where you left off.", {
+        description: "No account required. Your entry is saved on this device.",
+      });
+      trackEvent("nomination_draft_restored", {
+        form: draftKey,
+        token: draftToken,
+        source: "nominee_entry_form",
+      });
+    }
+  }, [hydratedValues, initial, pathway, draftKey, draftToken]);
+
   useEffect(() => {
     setForm((f) => {
       const next = { ...f, pathway, awardFamily: PATHWAY_FAMILY[pathway] };
@@ -128,7 +160,40 @@ export function NomineeEntryForm({
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!validate()) return;
+    clearDraft();
     onSave(form);
+  };
+
+  const handleDiscardDraft = () => {
+    clearDraft();
+    hydratedRef.current = true;
+    setForm({
+      id: uid(),
+      pathway,
+      nomineeName: "",
+      nomineeType:
+        pathway === "icon"
+          ? "Africans in Africa"
+          : pathway === "platinum"
+          ? "Organization"
+          : "Individual",
+      awardFamily: preselect?.awardFamily ?? PATHWAY_FAMILY[pathway],
+      category: preselect?.category ?? "",
+      subcategory: preselect?.subcategory ?? "",
+      country: "",
+      region: preselect?.region ?? "",
+      city: "",
+      organization: "",
+      contact: "",
+      website: "",
+      socialLinks: "",
+      biography: "",
+      impactSummary: "",
+      reason: "",
+      evidenceLinks: "",
+      consent: false,
+    });
+    toast.success("Draft cleared.");
   };
 
   return (
@@ -152,6 +217,24 @@ export function NomineeEntryForm({
           <ArrowLeft className="h-4 w-4 mr-1" /> Back
         </Button>
       </div>
+
+      <div className="flex flex-wrap items-center justify-between gap-3 rounded-lg border border-gold/25 bg-gold/5 px-3 py-2 text-xs text-white/80">
+        <span className="inline-flex items-center gap-2">
+          <ShieldCheck className="h-3.5 w-3.5 text-gold" aria-hidden />
+          No account required to start — your draft is saved on this device and
+          only submitted when you're ready.
+        </span>
+        {!initial && (
+          <button
+            type="button"
+            onClick={handleDiscardDraft}
+            className="inline-flex items-center gap-1 text-gold/80 hover:text-gold underline underline-offset-2"
+          >
+            <RotateCcw className="h-3 w-3" /> Discard draft
+          </button>
+        )}
+      </div>
+
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <Field label="Nominee name" error={errors.nomineeName} required>
