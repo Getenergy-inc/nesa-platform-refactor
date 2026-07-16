@@ -760,8 +760,13 @@ export default function NominateMvp() {
                 </div>
               ) : null}
 
-              {/* Form embed — gated by region (regional) and zone+state (zonal) */}
-              {(!category.isRegionalCategory || regionVariant) && zonalReady && (
+              {/* Form embed — gated by region (regional + influencer) and zone+state (zonal) */}
+              {(!category.isRegionalCategory || regionVariant) &&
+                zonalReady &&
+                (family !== "influencer" ||
+                  category.isRegionalCategory ||
+                  (regionParam &&
+                    INFLUENCER_REGION_NAME_BY_SLUG[regionParam])) && (
                 <>
                   <IntegrityNotice />
 
@@ -780,7 +785,9 @@ export default function NominateMvp() {
                         ? `${category.name} — ${regionVariant.name}`
                         : zone && stateEntry
                           ? `${category.name} — ${stateEntry.name} (${zone.name})`
-                          : category.name
+                          : family === "influencer" && regionParam && INFLUENCER_REGION_NAME_BY_SLUG[regionParam]
+                            ? `${category.name} — ${INFLUENCER_REGION_NAME_BY_SLUG[regionParam]}`
+                            : category.name
                     }
                     status={regionVariant?.status ?? category.status}
                     formPublicUrl={
@@ -794,7 +801,11 @@ export default function NominateMvp() {
                       { label: "Award category", value: category.name },
                       ...(regionVariant
                         ? [{ label: "Region", value: regionVariant.name }]
-                        : []),
+                        : family === "influencer" &&
+                            regionParam &&
+                            INFLUENCER_REGION_NAME_BY_SLUG[regionParam]
+                          ? [{ label: "Africa Region", value: INFLUENCER_REGION_NAME_BY_SLUG[regionParam] }]
+                          : []),
                       ...(zone
                         ? [{ label: "Geopolitical zone", value: zone.name }]
                         : []),
