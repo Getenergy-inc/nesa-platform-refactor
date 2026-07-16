@@ -812,7 +812,7 @@ const pages: Record<string, DetailedAwardCategoryPage> = {
     subtitle: "Celebrating international partners advancing education across Africa.",
     scope: "continental",
     heroAlt: "International education partners meeting with African stakeholders",
-    primaryCta: { label: "Nominate in This Category", href: nominateHref("platinum-recognition", "international-partners-supporting-education") },
+    primaryCta: { label: "Nominate in This Category", href: "/nominate?subcategory=51dcefcf-e410-4372-85de-65c997c587bf" },
     secondaryCta: { label: "Explore Existing Nominees", href: exploreHref("International Partners Supporting Education") },
     overview: [
       "International partners — embassies, agencies, foundations, and UN bodies — extend the reach of African education systems through funding, expertise, and collaboration.",
