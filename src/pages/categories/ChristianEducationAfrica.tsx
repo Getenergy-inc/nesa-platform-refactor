@@ -1,6 +1,6 @@
-import { FaithCategoryPage } from "./FaithCategoryPage";
-import { christianEducationConfig } from "./christianEducationData";
+import DetailedCategoryPageTemplate from "@/components/awards/DetailedCategoryPageTemplate";
+import { getPathwayPage } from "@/content/contentBible2026/pathwayPages";
 
 export default function ChristianEducationAfricaPage() {
-  return <FaithCategoryPage config={christianEducationConfig} />;
+  return <DetailedCategoryPageTemplate page={getPathwayPage("pt-christian")} theme="legacy" />;
 }
