@@ -25,6 +25,23 @@ const SlugRedirect = ({ to }: { to: (slug: string) => string }) => {
   const search = typeof window !== "undefined" ? window.location.search : "";
   return <Navigate to={`${to(slug)}${search}`} replace />;
 };
+
+/** /nominees/region/:region — canonical 8-region + diaspora landing dispatcher.
+ *  Resolves legacy short slugs (west, east, north, south, central, horn, sahel,
+ *  indian-ocean, african-diaspora) to their canonical slug via a 301-style
+ *  Navigate; canonical slugs render the RegionNomineesHubPage directly. */
+const RegionSlugGate = () => {
+  const { region = "" } = useParams();
+  const search = typeof window !== "undefined" ? window.location.search : "";
+  const alias = resolveLegacyRegionSlug(region);
+  if (alias && alias !== region) {
+    return <Navigate to={`/nominees/region/${alias}${search}`} replace />;
+  }
+  if (!isValidRegionSlug(region)) {
+    return <Navigate to="/nominees" replace />;
+  }
+  return <RegionNomineesHubPage region={region} />;
+};
 import NomineeDirectory from "./pages/NomineeDirectory";
 import MasterNomineeProfile from "./pages/MasterNomineeProfile";
 import CertificateVerify from "./pages/CertificateVerify";
