@@ -69,6 +69,12 @@ const initial: FlowState = {
   preselect: {},
 };
 
+function generateReference(): string {
+  const r = Math.random().toString(36).slice(2, 8).toUpperCase();
+  return `NOM-2026-${r}`;
+}
+
+
 function reducer(state: FlowState, action: Action): FlowState {
   switch (action.type) {
     case "SET_STEP":
