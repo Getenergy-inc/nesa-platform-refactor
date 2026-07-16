@@ -22,7 +22,7 @@ const SUB_COUNTS: Record<string, number> = {
 
 describe("Africa Regional category forms", () => {
   it.each(REGIONAL_SLUGS)(
-    "%s is flagged as regional and has all 5 African regions",
+    "%s is flagged as regional and has all 8 African regions",
     (slug) => {
       const cat = getCategoryFormBySlug(slug)!;
       expect(cat).toBeDefined();
