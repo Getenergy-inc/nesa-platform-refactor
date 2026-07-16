@@ -1,6 +1,6 @@
-import { FaithCategoryPage } from "./FaithCategoryPage";
-import { islamicEducationConfig } from "./islamicEducationData";
+import DetailedCategoryPageTemplate from "@/components/awards/DetailedCategoryPageTemplate";
+import { getPathwayPage } from "@/content/contentBible2026/pathwayPages";
 
 export default function IslamicEducationAfricaPage() {
-  return <FaithCategoryPage config={islamicEducationConfig} />;
+  return <DetailedCategoryPageTemplate page={getPathwayPage("pt-islamic")} theme="legacy" />;
 }
