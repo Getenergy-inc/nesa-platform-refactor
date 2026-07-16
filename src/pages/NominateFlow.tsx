@@ -123,6 +123,7 @@ export default function NominateFlow() {
   const { t, i18n } = useTranslation("nomination");
   const [params, setParams] = useSearchParams();
   const [state, dispatch] = useReducer(reducer, undefined, loadInitial);
+  const [submissionReference, setSubmissionReference] = useState<string | null>(null);
 
   // Sync URL ?lang= -> i18n on mount / external navigation
   useEffect(() => {
