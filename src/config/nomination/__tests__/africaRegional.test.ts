@@ -22,7 +22,7 @@ const SUB_COUNTS: Record<string, number> = {
 
 describe("Africa Regional category forms", () => {
   it.each(REGIONAL_SLUGS)(
-    "%s is flagged as regional and has all 5 African regions",
+    "%s is flagged as regional and has all 8 African regions",
     (slug) => {
       const cat = getCategoryFormBySlug(slug)!;
       expect(cat).toBeDefined();
@@ -74,11 +74,11 @@ describe("Africa Regional category forms", () => {
     );
   });
 
-  it("yields exactly 20 regional variants across the 4 Africa Regional categories", () => {
+  it("yields exactly 32 regional variants across the 4 Africa Regional categories (4 × 8 regions)", () => {
     const total = AWARD_CATEGORY_FORMS.filter((c) => c.isRegionalCategory).reduce(
       (n, c) => n + (c.regions?.length ?? 0),
       0,
     );
-    expect(total).toBe(20);
+    expect(total).toBe(32);
   });
 });

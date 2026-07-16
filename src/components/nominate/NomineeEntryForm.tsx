@@ -9,7 +9,17 @@ import { ArrowLeft, Save, X, ShieldCheck, RotateCcw } from "lucide-react";
 import { toast } from "sonner";
 import { useDraftPersistence } from "@/features/nominate/useDraftPersistence";
 import { trackEvent } from "@/lib/analytics";
+import { AFRICA_REGIONS as CANONICAL_AFRICA_REGIONS, AFRICAN_DIASPORA_SLUG } from "@/config/regions/africaRegions";
 import type { NominationPathway, NomineeEntry } from "./types";
+
+// Canonical 8 Africa regions + African Diaspora (Global Community).
+const NOMINEE_REGION_OPTIONS: { value: string; label: string }[] = [
+  ...CANONICAL_AFRICA_REGIONS
+    .slice()
+    .sort((a, b) => a.order - b.order)
+    .map((r) => ({ value: r.name, label: r.name })),
+  { value: "African Diaspora", label: "African Diaspora (Global Community)" },
+];
 
 const PATHWAY_LABEL: Record<NominationPathway, string> = {
   icon: "Africa Education Icon",
@@ -326,13 +336,22 @@ export function NomineeEntryForm({
           />
         </Field>
 
-        <Field label="Region" error={errors.region} required>
-          <Input
+        <Field label="Africa Region" error={errors.region} required>
+          <select
             value={form.region}
             onChange={(e) => set("region", e.target.value)}
-            placeholder="e.g. West Africa"
-            className="bg-white/5 border-white/10 text-white"
-          />
+            className="w-full h-10 rounded-md border border-white/10 bg-white/5 px-3 text-white text-sm"
+          >
+            <option value="" className="bg-charcoal">Select an Africa region…</option>
+            {NOMINEE_REGION_OPTIONS.map((opt) => (
+              <option key={opt.value} value={opt.value} className="bg-charcoal">
+                {opt.label}
+              </option>
+            ))}
+          </select>
+          <p className="mt-1 text-[11px] text-white/50">
+            One Continent. Eight Africa Regions. One African Diaspora Community.
+          </p>
         </Field>
 
         <Field label="City / community">
