@@ -480,7 +480,10 @@ const App = () => (
                   <Route path="/region/nigeria" element={<Navigate to="/regions/nigeria" replace />} />
                   <Route path="/region" element={<Navigate to="/regions" replace />} />
                   <Route path="/region/:slug" element={<SlugRedirect to={(s) => `/regions/${s}`} />} />
-                  <Route path="/nominees/region/:slug" element={<SlugRedirect to={(s) => `/nominees/${s}`} />} />
+                  <Route path="/nominees/region/:region" element={<RegionSlugGate />} />
+                  {/* Legacy 5-region short-slugs redirect to canonical 8-region URLs */}
+                  <Route path="/nominees/region" element={<Navigate to="/nominees#regions" replace />} />
+
 
 
                   {/* Misc legacy paths flagged in audit */}
