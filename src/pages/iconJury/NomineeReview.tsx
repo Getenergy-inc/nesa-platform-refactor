@@ -26,6 +26,7 @@ export default function IconJuryNomineeReview() {
   const [recommendation, setRecommendation] = useState<string>("");
   const [evidenceFlag, setEvidenceFlag] = useState<string>("adequate");
   const [conflictType, setConflictType] = useState<string>("");
+  const [conflictSeverity, setConflictSeverity] = useState<string>("medium");
   const [conflictDesc, setConflictDesc] = useState<string>("");
   const [loading, setLoading] = useState(true);
   const [busy, setBusy] = useState(false);
@@ -37,18 +38,19 @@ export default function IconJuryNomineeReview() {
       if (!judge?.id) { setLoading(false); return; }
       setJudgeId(judge.id);
 
-      const [{ data: nom }, { data: crit }] = await Promise.all([
+      const [{ data: nom }, { data: crit }, { data: asg }] = await Promise.all([
         supabase.from("nominees").select("id, name, bio, photo_url, organization").eq("id", nomineeId).maybeSingle(),
         supabase.from("icon_scoring_criteria").select("id, slug, name, weight, max_score, description").eq("active", true).order("sort_order"),
+        supabase.from("icon_judge_assignments").select("id").eq("judge_id", judge.id).eq("nominee_id", nomineeId).maybeSingle(),
       ]);
       setNominee(nom as any);
       setCriteria((crit ?? []) as Criterion[]);
 
-      const { data: rev } = await supabase.rpc("icon_ensure_review", {
-        p_judge_id: judge.id, p_nominee_id: nomineeId,
-      });
-      const rid = Array.isArray(rev) ? rev[0]?.review_id ?? rev[0] : (rev as any)?.review_id ?? rev;
-      const reviewIdVal = typeof rid === "string" ? rid : (rid?.review_id ?? null);
+      let reviewIdVal: string | null = null;
+      if (asg?.id) {
+        const { data: rev } = await supabase.rpc("icon_ensure_review", { p_assignment_id: asg.id });
+        reviewIdVal = (typeof rev === "string" ? rev : (rev as any)?.review_id ?? (Array.isArray(rev) ? rev[0] : null)) ?? null;
+      }
       setReviewId(reviewIdVal);
 
       if (reviewIdVal) {
