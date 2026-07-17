@@ -1,71 +1,127 @@
 
-# Refactor 16 Category Pages onto One Approved Standard
+# Africa Education Icon Judges Portal — Implementation Plan
 
-## Goal
-Rebuild the 9 Blue Garnet + 7 Platinum category/pathway pages using **one reusable template** driven by centralised content, matching the approved 14-section standard, with correct 2026 policy language (no voting, no competitive ranking on Blue Garnet 2026; Platinum jury-only).
+A dedicated, authenticated jury system for the **Africa Education Icon Award 2006–2026** only. Separate from public site, NRC portal, nominee dashboard, and all other award tiers.
 
-## Approach: Central Content + One Template
+## Scope
 
-### 1. Central content bible
-Create `src/content/contentBible2026/pathwayPages.ts` as the single source of truth:
-- `DetailedAwardCategoryPage` type (as in the prompt spec)
-- Shared constants: EDI matrix (8 criteria), threshold bands (Platinum + Blue Garnet 2026), timeline stages (10), trust links, evidence checklist, benefits blocks (nominee/nominator/region/Africa)
-- 16 page objects (BG-1…BG-9, PT-1…PT-7) with only the category-specific fields filled in (title, subtitle, story, eligible nominee types, subcategories with existing UUIDs, scoring emphasis notes, category FAQs, SEO, catalogue config, hero image key, existing route)
+- 27 judges → 500+ nominees → 3 pathways × 3 classifications = **9 laureates**
+- Applies **only** to the Africa Education Icon Award. No Blue Garnet, Platinum, Influencer, public voting, endorsements, donations, or Gala ticketing.
 
-### 2. Reusable template component
-Create `src/components/awards/DetailedCategoryPageTemplate.tsx` that renders the exact 14 sections in order, composed from existing components:
-`HeroSection → BadgeRow → OverviewSection → EnablerStorySection → TwoColumnSection (Who Qualifies + EdiScoreTable + ThresholdStrip) → SubcategoryCards → BenefitCards (×4) → NominationCTA → RecognitionTimeline → NomineeTabs + MediaFilterBar + NomineeCard grid → EvidenceCTA → RecognitionPackage → TrustAccountability → FAQAccordion → FinalCTA`
+## 1. Database (single migration)
 
-Where a matching component doesn't already exist, add a thin new one that reuses shadcn primitives (no custom CSS). Reuse `BrandedNomineeDirectory` for Section 9 catalogue with grouping + media filter props.
+New tables under `public.` (all with GRANTs + RLS + policies):
 
-### 3. Wire the 16 existing page files
-Replace the body of each of the 16 category/pathway route components with:
-```tsx
-<DetailedCategoryPageTemplate page={pathwayPages["bg-csr-africa"]} />
 ```
-- Keep every current route unchanged.
-- Keep every valid subcategory UUID unchanged (read from existing config first; never invent).
-- Delete duplicate/legacy JSX inside each page file only — no route changes.
+icon_judges                 — judge roster (user_id, status, expertise, region, active)
+icon_judge_profiles         — bio, photo, affiliations, availability
+icon_judge_invitations      — invitation-only access tokens
+icon_judge_onboarding       — 7-step checklist status
+icon_pathways               — 3 seeded rows
+icon_classifications        — 3 seeded rows
+icon_judge_assignments      — judge_id × nominee_id × pathway × classification × deadline × status
+icon_judge_conflicts        — declared conflicts + recusal action
+icon_judge_reviews          — one per assignment; draft/submitted/locked; recommendation enum
+icon_scoring_criteria       — 8 seeded rows (25/15/15/10/10/10/10/5 weights)
+icon_judge_scores           — per-criterion score + justification + evidence ref
+icon_judge_notes            — confidential notes (moderation-visible only)
+icon_jury_deliberations     — shared deliberation threads
+icon_jury_result_snapshots  — point-in-time result computation
+icon_jury_result_positions  — 9 final positions with governance status
+icon_jury_moderation_actions— reassign/reopen/exclude actions
+icon_jury_notifications     — in-app notification queue
+icon_jury_audit_logs        — immutable, INSERT-only (revoke UPDATE/DELETE)
+```
 
-Pages to refactor (route mapping preserved):
-- BG-1 CSR Africa · BG-2 CSR Nigeria · BG-3 EdTech Africa · BG-4 Media Nigeria · BG-5 NGO Nigeria · BG-6 NGO Africa · BG-7 STEM Africa · BG-8 Creative Arts Nigeria · BG-9 Education Policy Nigeria
-- PT-1 Library Nigeria · PT-2 R&D · PT-3 Christian · PT-4 Islamic · PT-5 Political Leadership · PT-6 International Partners (keep as reference impl) · PT-7 Diaspora
+RLS pattern: `has_icon_judge_role(uid)` and `has_icon_moderator_role(uid)` security-definer functions using existing `user_roles` (add role codes `ICON_JUDGE`, `ICON_MODERATOR`, `ICON_GOVERNANCE`). Judges see only own assignments/scores/notes; moderators see aggregated blind data; audit logs immutable via revoked privileges + trigger.
 
-### 4. 2026 policy corrections applied globally in the template
-- Blue Garnet badge = "2026 Recognition Edition"; Platinum badge = "Jury-Only Institutional Recognition"
-- Threshold band labels switch by `awardTier`
-- Trust + FAQ blocks include the "no public voting in 2026 / competitive Blue Garnet from 2027" statement
-- Endorsements described as "expressions of appreciation, not votes"
-- Timeline pulls dynamically from the existing 2026 season config — no hardcoded expired dates; Gala line = "22 October 2026 in Lagos"
+RPCs:
+- `submit_icon_score(assignment_id, scores[])` — validates all criteria present, locks review, writes audit
+- `declare_icon_conflict(nominee_id, type, severity)` — auto-recuses when severity=recusal
+- `compute_icon_results(snapshot_label)` — aggregates avg/median/variance per pathway×classification, applies min-reviewer + NRC-verified gates, produces 9 positions with tie-break chain
+- `reopen_icon_review(review_id, reason)` — moderator only, preserves original
+- `approve_icon_laureate(position_id)` — governance role only
 
-### 5. Geographic logic
-Template reads `page.nomineeCatalogue.grouping`:
-- `region` (8 Africa regions from canonical `regions_v2`) — BG-1, BG-3, BG-6, BG-7
-- `state` (Nigerian states/zones) — BG-2, BG-4, BG-5, BG-8, BG-9, PT-1
-- `nominee_type` (partner-type tabs, continental, no regional tabs) — PT-6
-- Diaspora (PT-7) adds diaspora-region + supported-African-region fields
-- `subcategory` default otherwise
+## 2. Routes (`src/App.tsx`)
 
-### 6. Mobile behaviour
-Handled once in the template: horizontal-scroll subcategory tabs, sticky-safe media filter bar, stacked eligibility/scoring, one nominee card per row < md, no autoplay video.
+Judge routes (behind `IconJudgeGate` — auth + role + 2FA + onboarding-complete):
+```
+/judges/sign-in        /judges/dashboard      /judges/assignments
+/judges/nominees       /judges/nominee/:id    /judges/conflicts
+/judges/scoring        /judges/notes          /judges/results
+/judges/profile        /judges/help
+```
 
-### 7. Data integrity guardrails
-- Nominee catalogue fetches from existing Supabase-backed nominee source only — no fabricated entries.
-- Verification-status badges + EDI-score display gated on approval flag from DB.
-- Category-specific nomination CTAs deep-link to existing `nominateCategorySlug`/subcategory forms (already present in each page today) — reused, never regenerated.
+Admin/governance routes (behind `IconModeratorGate`):
+```
+/admin/judges              /admin/judge-assignments   /admin/judge-moderation
+/admin/judge-results       /admin/judge-audit
+```
 
-## Out of scope (explicit)
-- No database schema changes.
-- No new routes, no `_redirects` changes.
-- No changes to nomination forms themselves.
-- No new UUIDs invented; unresolved subcategories stay marked and use current DB value.
-- International Partners page (PT-6) content stays as reference; only reshaped to the shared template so it renders identically.
+All routes namespaced under `src/pages/iconJudges/` and `src/pages/admin/iconJury/` — no coupling to existing NRC/nominee/public pages.
 
-## Deliverables
-1. `src/content/contentBible2026/pathwayPages.ts` (+ shared constants file)
-2. `src/components/awards/DetailedCategoryPageTemplate.tsx` (+ any small missing sub-components: `EnablerStorySection`, `ThresholdStrip`, `BenefitCards`, `EvidenceCTA`, `RecognitionPackage`, `TrustAccountability`, `FinalCTA` — each ≤80 LoC, shadcn-only)
-3. 16 slimmed page files rewired to the template
-4. Quick visual pass on 2 representative pages (1 Blue Garnet regional, 1 Platinum) via Playwright screenshot to confirm section order + mobile stacking
+## 3. Components
 
-## Confirm before I build
-- OK to slim the existing rich pages (e.g. `EduTechAfrica`, `LibraryNigeria`, `CSREducationNigeria`) down to the shared template? Their current bespoke hero/animated-words/documentary sections would be **replaced** by the standard 14-section layout so all 16 pages look and behave consistently. Say "yes, slim them" or "keep the bespoke hero on top and append the standard sections below" and I'll proceed.
+`src/features/iconJudges/`:
+- `IconJudgeGate.tsx` — auth + role + 2FA + onboarding gate (mirrors `JudgeOTPGate` pattern)
+- `JudgesLayout.tsx` — dedicated shell (dark charcoal + gold, distinct from public header)
+- `DashboardSummaryStrip.tsx` — 27 / 3 / 9 / 500+ live counters
+- `AssignmentCard.tsx`, `AssignmentFilters.tsx`
+- `NomineeReviewWorkspace.tsx` — left profile panel + right scoring panel
+- `ScoringForm.tsx` — 8 criteria, per-criterion score + justification + evidence; draft/submit/lock
+- `ConflictDeclarationDialog.tsx`
+- `ConfidentialNotesPanel.tsx`
+- `RecommendationSelect.tsx` (5 enum values)
+- `ResultMatrix3x3.tsx` — the 9-position grid
+- `DeliberationThread.tsx`
+
+Admin:
+- `ModerationTable.tsx` — variance flags, overdue, reopened, conflict warnings
+- `ResultsAggregationView.tsx` — blind by default
+- `AuditLogViewer.tsx` (read-only)
+
+## 4. Scoring, tie-break, and result rules
+
+Hard-coded in `src/config/iconAward/scoring.ts`:
+- 100-point framework with the 8 weighted criteria
+- Min 3 valid judges (admin-configurable via `platform_config`)
+- Tie-break chain: Lifetime Impact → Sustainability → Evidence Quality → median → variance → jury deliberation → governance
+- Result statuses: 10 enums as specified
+- Public-ready result object generated separately; never auto-published
+
+## 5. Security & audit
+
+- Invitation-only signup (`icon_judge_invitations` token consumed)
+- 2FA required for all `/judges/*` routes (reuse existing `judge_otp_sessions` pattern, new session table `icon_judge_otp_sessions`)
+- Session timeout 30 min
+- Rate limiting on score submission
+- All mutations write to `icon_jury_audit_logs` via triggers
+- Audit table: `REVOKE UPDATE, DELETE` from all roles; only `INSERT` allowed
+- No judge score/note data ever sent to public analytics; server-side only
+
+## 6. Explicit exclusions
+
+- No public voting UI, no endorsement flows, no donation prompts, no ticketing
+- No Blue Garnet / Platinum / Influencer integration
+- No nominee-facing views of judge notes or scores
+- No cross-pollination with `judges`, `judge_reviews`, `nrc_*` tables (Icon jury is fully isolated)
+
+## 7. Out of scope for this build
+
+- Sending real email/SMS/WhatsApp — notification records written to `icon_jury_notifications`; delivery workers can be wired later
+- Judge onboarding video/training content — status flags exist, content is placeholder
+- Public laureate announcement page — data object exposed but no public route
+
+## Technical implementation order
+
+1. Migration: tables + RLS + GRANTs + seed pathways/classifications/criteria + role codes + audit-immutability triggers
+2. RPCs: submit_icon_score, declare_icon_conflict, compute_icon_results, reopen_icon_review, approve_icon_laureate
+3. Gate components + layout + routes wired in `App.tsx`
+4. Sign-in + onboarding + profile
+5. Dashboard + assignments + review workspace + scoring + notes + conflicts
+6. Results view (judge-scoped) + deliberation
+7. Admin moderation + results aggregation + audit viewer
+
+## Deliverable size
+
+~35 new files, 1 migration, 5 RPCs, ~15 routes. All isolated under Icon-specific namespaces so nothing else in the platform is touched.

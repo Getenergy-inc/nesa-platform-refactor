@@ -1780,6 +1780,855 @@ export type Database = {
           },
         ]
       }
+      icon_classifications: {
+        Row: {
+          created_at: string
+          description: string | null
+          id: string
+          name: string
+          slug: string
+          sort_order: number
+        }
+        Insert: {
+          created_at?: string
+          description?: string | null
+          id?: string
+          name: string
+          slug: string
+          sort_order?: number
+        }
+        Update: {
+          created_at?: string
+          description?: string | null
+          id?: string
+          name?: string
+          slug?: string
+          sort_order?: number
+        }
+        Relationships: []
+      }
+      icon_judge_assignments: {
+        Row: {
+          assigned_at: string
+          assigned_by: string | null
+          classification_id: string
+          deadline: string | null
+          id: string
+          judge_id: string
+          nominee_id: string
+          pathway_id: string
+          status: string
+          updated_at: string
+        }
+        Insert: {
+          assigned_at?: string
+          assigned_by?: string | null
+          classification_id: string
+          deadline?: string | null
+          id?: string
+          judge_id: string
+          nominee_id: string
+          pathway_id: string
+          status?: string
+          updated_at?: string
+        }
+        Update: {
+          assigned_at?: string
+          assigned_by?: string | null
+          classification_id?: string
+          deadline?: string | null
+          id?: string
+          judge_id?: string
+          nominee_id?: string
+          pathway_id?: string
+          status?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "icon_judge_assignments_classification_id_fkey"
+            columns: ["classification_id"]
+            isOneToOne: false
+            referencedRelation: "icon_classifications"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "icon_judge_assignments_judge_id_fkey"
+            columns: ["judge_id"]
+            isOneToOne: false
+            referencedRelation: "icon_judges"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "icon_judge_assignments_pathway_id_fkey"
+            columns: ["pathway_id"]
+            isOneToOne: false
+            referencedRelation: "icon_pathways"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      icon_judge_conflicts: {
+        Row: {
+          conflict_type: string
+          created_at: string
+          description: string | null
+          id: string
+          judge_id: string
+          nominee_id: string
+          resolved_at: string | null
+          resolved_by: string | null
+          severity: string
+        }
+        Insert: {
+          conflict_type: string
+          created_at?: string
+          description?: string | null
+          id?: string
+          judge_id: string
+          nominee_id: string
+          resolved_at?: string | null
+          resolved_by?: string | null
+          severity?: string
+        }
+        Update: {
+          conflict_type?: string
+          created_at?: string
+          description?: string | null
+          id?: string
+          judge_id?: string
+          nominee_id?: string
+          resolved_at?: string | null
+          resolved_by?: string | null
+          severity?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "icon_judge_conflicts_judge_id_fkey"
+            columns: ["judge_id"]
+            isOneToOne: false
+            referencedRelation: "icon_judges"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      icon_judge_invitations: {
+        Row: {
+          consumed_at: string | null
+          consumed_by: string | null
+          created_at: string
+          email: string
+          expires_at: string
+          full_name: string | null
+          id: string
+          invited_by: string | null
+          token: string
+        }
+        Insert: {
+          consumed_at?: string | null
+          consumed_by?: string | null
+          created_at?: string
+          email: string
+          expires_at?: string
+          full_name?: string | null
+          id?: string
+          invited_by?: string | null
+          token?: string
+        }
+        Update: {
+          consumed_at?: string | null
+          consumed_by?: string | null
+          created_at?: string
+          email?: string
+          expires_at?: string
+          full_name?: string | null
+          id?: string
+          invited_by?: string | null
+          token?: string
+        }
+        Relationships: []
+      }
+      icon_judge_notes: {
+        Row: {
+          body: string
+          created_at: string
+          id: string
+          judge_id: string
+          nominee_id: string
+          note_type: string
+          review_id: string
+        }
+        Insert: {
+          body: string
+          created_at?: string
+          id?: string
+          judge_id: string
+          nominee_id: string
+          note_type?: string
+          review_id: string
+        }
+        Update: {
+          body?: string
+          created_at?: string
+          id?: string
+          judge_id?: string
+          nominee_id?: string
+          note_type?: string
+          review_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "icon_judge_notes_judge_id_fkey"
+            columns: ["judge_id"]
+            isOneToOne: false
+            referencedRelation: "icon_judges"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "icon_judge_notes_review_id_fkey"
+            columns: ["review_id"]
+            isOneToOne: false
+            referencedRelation: "icon_judge_reviews"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      icon_judge_onboarding: {
+        Row: {
+          code_of_conduct: boolean
+          completed_at: string | null
+          confidentiality_signed: boolean
+          conflict_declared: boolean
+          id: string
+          identity_verified: boolean
+          judge_id: string
+          profile_completed: boolean
+          sample_review: boolean
+          scoring_orientation: boolean
+          updated_at: string
+        }
+        Insert: {
+          code_of_conduct?: boolean
+          completed_at?: string | null
+          confidentiality_signed?: boolean
+          conflict_declared?: boolean
+          id?: string
+          identity_verified?: boolean
+          judge_id: string
+          profile_completed?: boolean
+          sample_review?: boolean
+          scoring_orientation?: boolean
+          updated_at?: string
+        }
+        Update: {
+          code_of_conduct?: boolean
+          completed_at?: string | null
+          confidentiality_signed?: boolean
+          conflict_declared?: boolean
+          id?: string
+          identity_verified?: boolean
+          judge_id?: string
+          profile_completed?: boolean
+          sample_review?: boolean
+          scoring_orientation?: boolean
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "icon_judge_onboarding_judge_id_fkey"
+            columns: ["judge_id"]
+            isOneToOne: true
+            referencedRelation: "icon_judges"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      icon_judge_otp_sessions: {
+        Row: {
+          expires_at: string
+          id: string
+          ip_address: string | null
+          user_agent: string | null
+          user_id: string
+          verified_at: string
+        }
+        Insert: {
+          expires_at?: string
+          id?: string
+          ip_address?: string | null
+          user_agent?: string | null
+          user_id: string
+          verified_at?: string
+        }
+        Update: {
+          expires_at?: string
+          id?: string
+          ip_address?: string | null
+          user_agent?: string | null
+          user_id?: string
+          verified_at?: string
+        }
+        Relationships: []
+      }
+      icon_judge_profiles: {
+        Row: {
+          affiliation: string | null
+          availability: string | null
+          bio: string | null
+          code_of_conduct_signed_at: string | null
+          confidentiality_signed_at: string | null
+          created_at: string
+          id: string
+          judge_id: string
+          linkedin_url: string | null
+          photo_url: string | null
+          updated_at: string
+        }
+        Insert: {
+          affiliation?: string | null
+          availability?: string | null
+          bio?: string | null
+          code_of_conduct_signed_at?: string | null
+          confidentiality_signed_at?: string | null
+          created_at?: string
+          id?: string
+          judge_id: string
+          linkedin_url?: string | null
+          photo_url?: string | null
+          updated_at?: string
+        }
+        Update: {
+          affiliation?: string | null
+          availability?: string | null
+          bio?: string | null
+          code_of_conduct_signed_at?: string | null
+          confidentiality_signed_at?: string | null
+          created_at?: string
+          id?: string
+          judge_id?: string
+          linkedin_url?: string | null
+          photo_url?: string | null
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "icon_judge_profiles_judge_id_fkey"
+            columns: ["judge_id"]
+            isOneToOne: true
+            referencedRelation: "icon_judges"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      icon_judge_reviews: {
+        Row: {
+          assignment_id: string
+          created_at: string
+          evidence_quality_flag: string | null
+          id: string
+          judge_id: string
+          locked_at: string | null
+          nominee_id: string
+          recommendation: string | null
+          status: string
+          submitted_at: string | null
+          total_score: number | null
+          updated_at: string
+        }
+        Insert: {
+          assignment_id: string
+          created_at?: string
+          evidence_quality_flag?: string | null
+          id?: string
+          judge_id: string
+          locked_at?: string | null
+          nominee_id: string
+          recommendation?: string | null
+          status?: string
+          submitted_at?: string | null
+          total_score?: number | null
+          updated_at?: string
+        }
+        Update: {
+          assignment_id?: string
+          created_at?: string
+          evidence_quality_flag?: string | null
+          id?: string
+          judge_id?: string
+          locked_at?: string | null
+          nominee_id?: string
+          recommendation?: string | null
+          status?: string
+          submitted_at?: string | null
+          total_score?: number | null
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "icon_judge_reviews_assignment_id_fkey"
+            columns: ["assignment_id"]
+            isOneToOne: true
+            referencedRelation: "icon_judge_assignments"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "icon_judge_reviews_judge_id_fkey"
+            columns: ["judge_id"]
+            isOneToOne: false
+            referencedRelation: "icon_judges"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      icon_judge_scores: {
+        Row: {
+          created_at: string
+          criterion_id: string
+          evidence_ref: string | null
+          id: string
+          justification: string | null
+          review_id: string
+          score: number
+        }
+        Insert: {
+          created_at?: string
+          criterion_id: string
+          evidence_ref?: string | null
+          id?: string
+          justification?: string | null
+          review_id: string
+          score: number
+        }
+        Update: {
+          created_at?: string
+          criterion_id?: string
+          evidence_ref?: string | null
+          id?: string
+          justification?: string | null
+          review_id?: string
+          score?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "icon_judge_scores_criterion_id_fkey"
+            columns: ["criterion_id"]
+            isOneToOne: false
+            referencedRelation: "icon_scoring_criteria"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "icon_judge_scores_review_id_fkey"
+            columns: ["review_id"]
+            isOneToOne: false
+            referencedRelation: "icon_judge_reviews"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      icon_judges: {
+        Row: {
+          active: boolean
+          country: string | null
+          created_at: string
+          email: string
+          expertise: string[] | null
+          full_name: string
+          id: string
+          region: string | null
+          status: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          active?: boolean
+          country?: string | null
+          created_at?: string
+          email: string
+          expertise?: string[] | null
+          full_name: string
+          id?: string
+          region?: string | null
+          status?: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          active?: boolean
+          country?: string | null
+          created_at?: string
+          email?: string
+          expertise?: string[] | null
+          full_name?: string
+          id?: string
+          region?: string | null
+          status?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      icon_jury_audit_logs: {
+        Row: {
+          action: string
+          actor_user_id: string | null
+          created_at: string
+          entity_id: string | null
+          entity_type: string
+          id: string
+          ip_address: string | null
+          metadata: Json
+          user_agent: string | null
+        }
+        Insert: {
+          action: string
+          actor_user_id?: string | null
+          created_at?: string
+          entity_id?: string | null
+          entity_type: string
+          id?: string
+          ip_address?: string | null
+          metadata?: Json
+          user_agent?: string | null
+        }
+        Update: {
+          action?: string
+          actor_user_id?: string | null
+          created_at?: string
+          entity_id?: string | null
+          entity_type?: string
+          id?: string
+          ip_address?: string | null
+          metadata?: Json
+          user_agent?: string | null
+        }
+        Relationships: []
+      }
+      icon_jury_deliberation_messages: {
+        Row: {
+          author_user_id: string
+          body: string
+          created_at: string
+          deliberation_id: string
+          id: string
+        }
+        Insert: {
+          author_user_id: string
+          body: string
+          created_at?: string
+          deliberation_id: string
+          id?: string
+        }
+        Update: {
+          author_user_id?: string
+          body?: string
+          created_at?: string
+          deliberation_id?: string
+          id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "icon_jury_deliberation_messages_deliberation_id_fkey"
+            columns: ["deliberation_id"]
+            isOneToOne: false
+            referencedRelation: "icon_jury_deliberations"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      icon_jury_deliberations: {
+        Row: {
+          classification_id: string | null
+          created_at: string
+          created_by: string | null
+          decision_summary: string | null
+          id: string
+          nominee_id: string | null
+          pathway_id: string | null
+          status: string
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          classification_id?: string | null
+          created_at?: string
+          created_by?: string | null
+          decision_summary?: string | null
+          id?: string
+          nominee_id?: string | null
+          pathway_id?: string | null
+          status?: string
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          classification_id?: string | null
+          created_at?: string
+          created_by?: string | null
+          decision_summary?: string | null
+          id?: string
+          nominee_id?: string | null
+          pathway_id?: string | null
+          status?: string
+          title?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "icon_jury_deliberations_classification_id_fkey"
+            columns: ["classification_id"]
+            isOneToOne: false
+            referencedRelation: "icon_classifications"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "icon_jury_deliberations_pathway_id_fkey"
+            columns: ["pathway_id"]
+            isOneToOne: false
+            referencedRelation: "icon_pathways"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      icon_jury_moderation_actions: {
+        Row: {
+          action: string
+          actor_user_id: string
+          created_at: string
+          id: string
+          metadata: Json
+          reason: string | null
+          target_id: string
+          target_type: string
+        }
+        Insert: {
+          action: string
+          actor_user_id: string
+          created_at?: string
+          id?: string
+          metadata?: Json
+          reason?: string | null
+          target_id: string
+          target_type: string
+        }
+        Update: {
+          action?: string
+          actor_user_id?: string
+          created_at?: string
+          id?: string
+          metadata?: Json
+          reason?: string | null
+          target_id?: string
+          target_type?: string
+        }
+        Relationships: []
+      }
+      icon_jury_notifications: {
+        Row: {
+          body: string | null
+          created_at: string
+          id: string
+          judge_id: string | null
+          kind: string
+          read_at: string | null
+          title: string
+          user_id: string | null
+        }
+        Insert: {
+          body?: string | null
+          created_at?: string
+          id?: string
+          judge_id?: string | null
+          kind: string
+          read_at?: string | null
+          title: string
+          user_id?: string | null
+        }
+        Update: {
+          body?: string | null
+          created_at?: string
+          id?: string
+          judge_id?: string | null
+          kind?: string
+          read_at?: string | null
+          title?: string
+          user_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "icon_jury_notifications_judge_id_fkey"
+            columns: ["judge_id"]
+            isOneToOne: false
+            referencedRelation: "icon_judges"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      icon_jury_result_positions: {
+        Row: {
+          average_score: number | null
+          classification_id: string
+          created_at: string
+          governance_approved_at: string | null
+          governance_approved_by: string | null
+          highest_score: number | null
+          id: string
+          lowest_score: number | null
+          median_score: number | null
+          nominee_id: string | null
+          pathway_id: string
+          recommendation_summary: Json | null
+          score_variance: number | null
+          snapshot_id: string
+          status: string
+          updated_at: string
+          valid_review_count: number
+        }
+        Insert: {
+          average_score?: number | null
+          classification_id: string
+          created_at?: string
+          governance_approved_at?: string | null
+          governance_approved_by?: string | null
+          highest_score?: number | null
+          id?: string
+          lowest_score?: number | null
+          median_score?: number | null
+          nominee_id?: string | null
+          pathway_id: string
+          recommendation_summary?: Json | null
+          score_variance?: number | null
+          snapshot_id: string
+          status?: string
+          updated_at?: string
+          valid_review_count?: number
+        }
+        Update: {
+          average_score?: number | null
+          classification_id?: string
+          created_at?: string
+          governance_approved_at?: string | null
+          governance_approved_by?: string | null
+          highest_score?: number | null
+          id?: string
+          lowest_score?: number | null
+          median_score?: number | null
+          nominee_id?: string | null
+          pathway_id?: string
+          recommendation_summary?: Json | null
+          score_variance?: number | null
+          snapshot_id?: string
+          status?: string
+          updated_at?: string
+          valid_review_count?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "icon_jury_result_positions_classification_id_fkey"
+            columns: ["classification_id"]
+            isOneToOne: false
+            referencedRelation: "icon_classifications"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "icon_jury_result_positions_pathway_id_fkey"
+            columns: ["pathway_id"]
+            isOneToOne: false
+            referencedRelation: "icon_pathways"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "icon_jury_result_positions_snapshot_id_fkey"
+            columns: ["snapshot_id"]
+            isOneToOne: false
+            referencedRelation: "icon_jury_result_snapshots"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      icon_jury_result_snapshots: {
+        Row: {
+          computed_at: string
+          computed_by: string | null
+          id: string
+          label: string
+          metadata: Json
+        }
+        Insert: {
+          computed_at?: string
+          computed_by?: string | null
+          id?: string
+          label: string
+          metadata?: Json
+        }
+        Update: {
+          computed_at?: string
+          computed_by?: string | null
+          id?: string
+          label?: string
+          metadata?: Json
+        }
+        Relationships: []
+      }
+      icon_pathways: {
+        Row: {
+          created_at: string
+          description: string | null
+          id: string
+          name: string
+          slug: string
+          sort_order: number
+        }
+        Insert: {
+          created_at?: string
+          description?: string | null
+          id?: string
+          name: string
+          slug: string
+          sort_order?: number
+        }
+        Update: {
+          created_at?: string
+          description?: string | null
+          id?: string
+          name?: string
+          slug?: string
+          sort_order?: number
+        }
+        Relationships: []
+      }
+      icon_scoring_criteria: {
+        Row: {
+          active: boolean
+          description: string | null
+          id: string
+          max_score: number
+          name: string
+          slug: string
+          sort_order: number
+          weight: number
+        }
+        Insert: {
+          active?: boolean
+          description?: string | null
+          id?: string
+          max_score?: number
+          name: string
+          slug: string
+          sort_order?: number
+          weight: number
+        }
+        Update: {
+          active?: boolean
+          description?: string | null
+          id?: string
+          max_score?: number
+          name?: string
+          slug?: string
+          sort_order?: number
+          weight?: number
+        }
+        Relationships: []
+      }
       influencer_impact_nominees: {
         Row: {
           artist_profile_link: string | null
@@ -8644,6 +9493,10 @@ export type Database = {
           slug: string
         }[]
       }
+      approve_icon_laureate: {
+        Args: { p_position_id: string }
+        Returns: undefined
+      }
       assign_nrc_reviewers: {
         Args: { p_nomination_id: string; p_num_reviewers?: number }
         Returns: Json
@@ -8663,6 +9516,10 @@ export type Database = {
         Returns: Json
       }
       compute_gold_results: { Args: { p_season_id: string }; Returns: Json }
+      compute_icon_results: {
+        Args: { p_label: string; p_min_reviewers?: number }
+        Returns: string
+      }
       convert_nomination_draft: {
         Args: {
           p_season_id?: string
@@ -8689,6 +9546,15 @@ export type Database = {
           expires_at: string
           id: string
         }[]
+      }
+      declare_icon_conflict: {
+        Args: {
+          p_conflict_type: string
+          p_description?: string
+          p_nominee_id: string
+          p_severity: string
+        }
+        Returns: string
       }
       detect_vote_fraud: { Args: { p_season_id: string }; Returns: Json }
       ensure_user_wallet: { Args: { _user_id: string }; Returns: string }
@@ -8831,6 +9697,7 @@ export type Database = {
         }
         Returns: boolean
       }
+      icon_ensure_review: { Args: { p_assignment_id: string }; Returns: string }
       increment_public_votes: {
         Args: { nominee_id: string }
         Returns: undefined
@@ -8845,6 +9712,9 @@ export type Database = {
           record_id: string
         }[]
       }
+      is_icon_governance: { Args: { _uid: string }; Returns: boolean }
+      is_icon_judge: { Args: { _uid: string }; Returns: boolean }
+      is_icon_moderator: { Args: { _uid: string }; Returns: boolean }
       is_stage_open: {
         Args: { _action: Database["public"]["Enums"]["stage_action"] }
         Returns: boolean
@@ -8912,7 +9782,19 @@ export type Database = {
           isSetofReturn: false
         }
       }
+      reopen_icon_review: {
+        Args: { p_reason: string; p_review_id: string }
+        Returns: undefined
+      }
       slugify: { Args: { p: string }; Returns: string }
+      submit_icon_score: {
+        Args: {
+          p_evidence_flag?: string
+          p_recommendation: string
+          p_review_id: string
+        }
+        Returns: undefined
+      }
       update_nomination_draft: {
         Args: {
           p_award_tier?: string
@@ -9113,6 +9995,9 @@ export type Database = {
         | "SPONSOR"
         | "ADMIN"
         | "SUPER_ADMIN"
+        | "ICON_JUDGE"
+        | "ICON_MODERATOR"
+        | "ICON_GOVERNANCE"
       settlement_status: "STARTED" | "PROCESSING" | "COMPLETED" | "FAILED"
       stage_action:
         | "nominations"
@@ -9483,6 +10368,9 @@ export const Constants = {
         "SPONSOR",
         "ADMIN",
         "SUPER_ADMIN",
+        "ICON_JUDGE",
+        "ICON_MODERATOR",
+        "ICON_GOVERNANCE",
       ],
       settlement_status: ["STARTED", "PROCESSING", "COMPLETED", "FAILED"],
       stage_action: [
