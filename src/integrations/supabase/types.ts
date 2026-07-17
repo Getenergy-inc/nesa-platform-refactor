@@ -9113,6 +9113,9 @@ export type Database = {
         | "SPONSOR"
         | "ADMIN"
         | "SUPER_ADMIN"
+        | "ICON_JUDGE"
+        | "ICON_MODERATOR"
+        | "ICON_GOVERNANCE"
       settlement_status: "STARTED" | "PROCESSING" | "COMPLETED" | "FAILED"
       stage_action:
         | "nominations"
@@ -9483,6 +9486,9 @@ export const Constants = {
         "SPONSOR",
         "ADMIN",
         "SUPER_ADMIN",
+        "ICON_JUDGE",
+        "ICON_MODERATOR",
+        "ICON_GOVERNANCE",
       ],
       settlement_status: ["STARTED", "PROCESSING", "COMPLETED", "FAILED"],
       stage_action: [
