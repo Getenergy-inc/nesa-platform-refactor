@@ -177,10 +177,14 @@ export default function IconJuryNomineeReview() {
           <AlertTriangle className="h-4 w-4" />
           <h2 className="text-sm font-semibold">Declare a conflict of interest</h2>
         </div>
-        <div className="grid md:grid-cols-3 gap-3">
+        <div className="grid md:grid-cols-4 gap-3">
           <Select value={conflictType} onValueChange={setConflictType}>
             <SelectTrigger><SelectValue placeholder="Conflict type" /></SelectTrigger>
             <SelectContent>{ICON_CONFLICT_TYPES.map(t => <SelectItem key={t} value={t}>{t}</SelectItem>)}</SelectContent>
+          </Select>
+          <Select value={conflictSeverity} onValueChange={setConflictSeverity}>
+            <SelectTrigger><SelectValue placeholder="Severity" /></SelectTrigger>
+            <SelectContent>{["low","medium","high","critical"].map(s => <SelectItem key={s} value={s}>{s}</SelectItem>)}</SelectContent>
           </Select>
           <Input placeholder="Brief description" value={conflictDesc} onChange={(e) => setConflictDesc(e.target.value)} className="md:col-span-2" />
         </div>
