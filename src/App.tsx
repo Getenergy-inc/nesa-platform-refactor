@@ -2486,6 +2486,39 @@ const App = () => (
                     }
                   />
 
+                  {/* Africa Education Icon — Judges Portal (isolated, no site layout) */}
+                  <Route path="/icon-jury/sign-in" element={<IconJurySignIn />} />
+                  <Route
+                    path="/icon-jury"
+                    element={
+                      <IconJudgeGate>
+                        <IconJuryLayout />
+                      </IconJudgeGate>
+                    }
+                  >
+                    <Route index element={<Navigate to="/icon-jury/dashboard" replace />} />
+                    <Route path="dashboard" element={<IconJuryDashboard />} />
+                    <Route path="assignments" element={<IconJuryAssignments />} />
+                    <Route path="nominees/:nomineeId" element={<IconJuryNomineeReview />} />
+                    <Route path="conflicts" element={<IconJuryConflicts />} />
+                    <Route path="scoring" element={<IconJuryScoringGuide />} />
+                    <Route path="notes" element={<IconJuryNotes />} />
+                    <Route path="results" element={<IconJuryResults />} />
+                    <Route path="profile" element={<IconJuryProfile />} />
+                    <Route path="help" element={<IconJuryHelp />} />
+                  </Route>
+                  <Route
+                    path="/admin/icon-jury"
+                    element={
+                      <IconJudgeGate requireModerator>
+                        <IconJuryLayout />
+                      </IconJudgeGate>
+                    }
+                  >
+                    <Route index element={<IconJuryAdminDashboard />} />
+                    <Route path="results" element={<IconJuryResults />} />
+                  </Route>
+
                   {/* Utility */}
                   <Route
                     path="/unauthorized"
