@@ -88,40 +88,52 @@ export default function IconJuryNomineeReview() {
   const saveDraft = async (submit = false) => {
     if (!reviewId || !judgeId) return;
     setBusy(true);
-    for (const c of criteria) {
-      const s = scores[c.id];
-      if (!s) continue;
-      const { error } = await supabase.rpc("submit_icon_score", {
-        p_review_id: reviewId,
-        p_criterion_id: c.id,
-        p_score: s.score,
-        p_justification: s.justification,
-        p_evidence_ref: s.evidence_ref,
-      });
+    const rows = criteria
+      .filter(c => scores[c.id])
+      .map(c => ({
+        review_id: reviewId,
+        criterion_id: c.id,
+        score: scores[c.id].score,
+        justification: scores[c.id].justification || null,
+        evidence_ref: scores[c.id].evidence_ref || null,
+      }));
+    if (rows.length) {
+      const { error } = await supabase
+        .from("icon_judge_scores")
+        .upsert(rows, { onConflict: "review_id,criterion_id" });
       if (error) { setBusy(false); toast.error(`Save failed: ${error.message}`); return; }
     }
-    await supabase.from("icon_judge_reviews").update({
-      recommendation: recommendation || null,
-      evidence_quality_flag: evidenceFlag,
-      total_score: weightedTotal,
-      status: submit ? "submitted" : "in_progress",
-      submitted_at: submit ? new Date().toISOString() : null,
-    }).eq("id", reviewId);
+    if (submit) {
+      const { error } = await supabase.rpc("submit_icon_score", {
+        p_review_id: reviewId,
+        p_recommendation: recommendation,
+        p_evidence_flag: evidenceFlag,
+      });
+      if (error) { setBusy(false); toast.error(error.message); return; }
+      setStatus("submitted");
+    } else {
+      await supabase.from("icon_judge_reviews").update({
+        recommendation: recommendation || null,
+        evidence_quality_flag: evidenceFlag,
+        total_score: weightedTotal,
+      }).eq("id", reviewId);
+    }
     await supabase.from("icon_jury_audit_logs").insert({
       actor_user_id: user!.id, action: submit ? "icon_review_submitted" : "icon_review_saved",
       entity_type: "review", entity_id: reviewId, metadata: { nominee_id: nomineeId, total: weightedTotal },
     });
     setBusy(false);
     toast.success(submit ? "Review submitted" : "Draft saved");
-    if (submit) setStatus("submitted");
   };
 
   const declareConflict = async () => {
     if (!judgeId || !conflictType) return;
     setBusy(true);
     const { error } = await supabase.rpc("declare_icon_conflict", {
-      p_judge_id: judgeId, p_nominee_id: nomineeId,
-      p_conflict_type: conflictType, p_description: conflictDesc,
+      p_nominee_id: nomineeId,
+      p_conflict_type: conflictType,
+      p_severity: conflictSeverity,
+      p_description: conflictDesc,
     });
     setBusy(false);
     if (error) return toast.error(error.message);
