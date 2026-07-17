@@ -22,9 +22,9 @@ export default function IconJuryResults() {
   useEffect(() => {
     (async () => {
       const { data: snap } = await supabase.from("icon_jury_result_snapshots")
-        .select("id, created_at").order("created_at", { ascending: false }).limit(1).maybeSingle();
+        .select("id, computed_at").order("computed_at", { ascending: false }).limit(1).maybeSingle();
       if (!snap) { setLoading(false); return; }
-      setSnapshotAt(snap.created_at);
+      setSnapshotAt(snap.computed_at);
       const { data } = await supabase.from("icon_jury_result_positions")
         .select("id, pathway_id, classification_id, nominee_id, average_score, status")
         .eq("snapshot_id", snap.id);
