@@ -4,7 +4,8 @@ import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
 import { Helmet } from "react-helmet-async";
 import { DashboardSummaryStrip } from "@/features/iconJudges/DashboardSummaryStrip";
-import { Loader2 } from "lucide-react";
+import { Loader2, ShieldCheck } from "lucide-react";
+import { Link } from "react-router-dom";
 
 interface JudgeStat { id: string; full_name: string; email: string; status: string; region: string | null; }
 
