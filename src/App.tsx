@@ -97,6 +97,8 @@ import IconJuryResults from "./pages/iconJury/Results";
 import IconJuryProfile from "./pages/iconJury/Profile";
 import IconJuryHelp from "./pages/iconJury/Help";
 import IconJuryAdminDashboard from "./pages/iconJury/AdminDashboard";
+import IconJuryAuditTrailPage from "./pages/iconJury/AuditTrail";
+import IconJuryAdminAuditTrailPage from "./pages/iconJury/AdminAuditTrail";
 import PathwaysPage from "./pages/PathwaysPage";
 import AwardPathwayPage from "./pages/AwardPathwayPage";
 import EcosystemPage from "./pages/EcosystemPage";
