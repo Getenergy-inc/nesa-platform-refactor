@@ -97,6 +97,8 @@ import IconJuryResults from "./pages/iconJury/Results";
 import IconJuryProfile from "./pages/iconJury/Profile";
 import IconJuryHelp from "./pages/iconJury/Help";
 import IconJuryAdminDashboard from "./pages/iconJury/AdminDashboard";
+import IconJuryAuditTrailPage from "./pages/iconJury/AuditTrail";
+import IconJuryAdminAuditTrailPage from "./pages/iconJury/AdminAuditTrail";
 import PathwaysPage from "./pages/PathwaysPage";
 import AwardPathwayPage from "./pages/AwardPathwayPage";
 import EcosystemPage from "./pages/EcosystemPage";
@@ -2518,6 +2520,7 @@ const App = () => (
                     <Route path="notes" element={<IconJuryNotes />} />
                     <Route path="results" element={<IconJuryResults />} />
                     <Route path="profile" element={<IconJuryProfile />} />
+                    <Route path="audit" element={<IconJuryAuditTrailPage />} />
                     <Route path="help" element={<IconJuryHelp />} />
                   </Route>
                   <Route
@@ -2530,6 +2533,7 @@ const App = () => (
                   >
                     <Route index element={<IconJuryAdminDashboard />} />
                     <Route path="results" element={<IconJuryResults />} />
+                    <Route path="audit" element={<IconJuryAdminAuditTrailPage />} />
                   </Route>
 
                   {/* Utility */}

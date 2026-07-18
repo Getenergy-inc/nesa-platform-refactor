@@ -4,7 +4,8 @@ import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
 import { Helmet } from "react-helmet-async";
 import { DashboardSummaryStrip } from "@/features/iconJudges/DashboardSummaryStrip";
-import { Loader2 } from "lucide-react";
+import { Loader2, ShieldCheck } from "lucide-react";
+import { Link } from "react-router-dom";
 
 interface JudgeStat { id: string; full_name: string; email: string; status: string; region: string | null; }
 
@@ -51,9 +52,14 @@ export default function IconJuryAdminDashboard() {
             Governance-only view. Manage judges, monitor progress, and compute laureate snapshots.
           </p>
         </div>
-        <Button onClick={computeResults} disabled={busy} className="bg-gold text-black hover:bg-gold/90">
-          {busy ? <Loader2 className="h-4 w-4 animate-spin" /> : "Compute Results Snapshot"}
-        </Button>
+        <div className="flex gap-2">
+          <Button asChild variant="outline" className="border-gold/40 text-gold hover:bg-gold/10">
+            <Link to="/admin/icon-jury/audit"><ShieldCheck className="h-4 w-4 mr-2" /> Audit Trail</Link>
+          </Button>
+          <Button onClick={computeResults} disabled={busy} className="bg-gold text-black hover:bg-gold/90">
+            {busy ? <Loader2 className="h-4 w-4 animate-spin" /> : "Compute Results Snapshot"}
+          </Button>
+        </div>
       </div>
 
       <DashboardSummaryStrip />
