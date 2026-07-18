@@ -2520,6 +2520,7 @@ const App = () => (
                     <Route path="notes" element={<IconJuryNotes />} />
                     <Route path="results" element={<IconJuryResults />} />
                     <Route path="profile" element={<IconJuryProfile />} />
+                    <Route path="audit" element={<IconJuryAuditTrailPage />} />
                     <Route path="help" element={<IconJuryHelp />} />
                   </Route>
                   <Route
@@ -2532,6 +2533,7 @@ const App = () => (
                   >
                     <Route index element={<IconJuryAdminDashboard />} />
                     <Route path="results" element={<IconJuryResults />} />
+                    <Route path="audit" element={<IconJuryAdminAuditTrailPage />} />
                   </Route>
 
                   {/* Utility */}
