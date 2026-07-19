@@ -2,28 +2,29 @@ import { NavLink, Outlet, useNavigate } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import {
   LayoutDashboard, ClipboardList, Users, AlertTriangle,
-  FileEdit, StickyNote, Trophy, UserCircle, LifeBuoy, LogOut, Gavel, ShieldCheck,
+  FileEdit, StickyNote, Trophy, UserCircle, LifeBuoy, LogOut, Gavel, ShieldCheck, Vote,
 } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 
 const NAV = [
-  { to: "/icon-jury/dashboard", label: "Dashboard", icon: LayoutDashboard },
-  { to: "/icon-jury/assignments", label: "Assignments", icon: ClipboardList },
-  { to: "/icon-jury/nominees", label: "Nominees", icon: Users },
-  { to: "/icon-jury/conflicts", label: "Conflicts", icon: AlertTriangle },
-  { to: "/icon-jury/scoring", label: "Scoring Guide", icon: FileEdit },
-  { to: "/icon-jury/notes", label: "My Notes", icon: StickyNote },
-  { to: "/icon-jury/results", label: "Results", icon: Trophy },
-  { to: "/icon-jury/audit", label: "My Audit Trail", icon: ShieldCheck },
-  { to: "/icon-jury/profile", label: "Profile", icon: UserCircle },
-  { to: "/icon-jury/help", label: "Help", icon: LifeBuoy },
+  { to: "/judges/dashboard", label: "Dashboard", icon: LayoutDashboard },
+  { to: "/judges/assignments", label: "Assignments", icon: ClipboardList },
+  { to: "/judges/nominees", label: "Nominees", icon: Users },
+  { to: "/judges/conflicts", label: "Conflicts", icon: AlertTriangle },
+  { to: "/judges/scoring", label: "Scoring Guide", icon: FileEdit },
+  { to: "/judges/notes", label: "My Notes", icon: StickyNote },
+  { to: "/judges/voting", label: "Voting Arena", icon: Vote },
+  { to: "/judges/results", label: "Results", icon: Trophy },
+  { to: "/judges/audit", label: "My Audit Trail", icon: ShieldCheck },
+  { to: "/judges/profile", label: "Profile", icon: UserCircle },
+  { to: "/judges/help", label: "Help", icon: LifeBuoy },
 ];
 
 export function IconJuryLayout() {
   const navigate = useNavigate();
   const signOut = async () => {
     await supabase.auth.signOut();
-    navigate("/icon-jury/sign-in", { replace: true });
+    navigate("/judges/sign-in", { replace: true });
   };
   return (
     <div className="min-h-screen bg-charcoal text-white flex flex-col lg:flex-row">
