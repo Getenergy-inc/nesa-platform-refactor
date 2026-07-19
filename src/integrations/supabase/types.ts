@@ -1807,6 +1807,308 @@ export type Database = {
         }
         Relationships: []
       }
+      icon_governance_reviews: {
+        Row: {
+          decided_at: string
+          decided_by: string | null
+          decision: string
+          group_id: string
+          id: string
+          notes: string | null
+        }
+        Insert: {
+          decided_at?: string
+          decided_by?: string | null
+          decision: string
+          group_id: string
+          id?: string
+          notes?: string | null
+        }
+        Update: {
+          decided_at?: string
+          decided_by?: string | null
+          decision?: string
+          group_id?: string
+          id?: string
+          notes?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "icon_governance_reviews_group_id_fkey"
+            columns: ["group_id"]
+            isOneToOne: false
+            referencedRelation: "icon_grand_jury_groups"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      icon_grand_jury_ballots: {
+        Row: {
+          first_choice_nominee_id: string
+          group_id: string
+          id: string
+          ip_address: unknown
+          judge_id: string
+          locked_at: string
+          receipt_hash: string
+          second_choice_nominee_id: string
+          submitted_at: string
+          third_choice_nominee_id: string
+          user_agent: string | null
+        }
+        Insert: {
+          first_choice_nominee_id: string
+          group_id: string
+          id?: string
+          ip_address?: unknown
+          judge_id: string
+          locked_at?: string
+          receipt_hash: string
+          second_choice_nominee_id: string
+          submitted_at?: string
+          third_choice_nominee_id: string
+          user_agent?: string | null
+        }
+        Update: {
+          first_choice_nominee_id?: string
+          group_id?: string
+          id?: string
+          ip_address?: unknown
+          judge_id?: string
+          locked_at?: string
+          receipt_hash?: string
+          second_choice_nominee_id?: string
+          submitted_at?: string
+          third_choice_nominee_id?: string
+          user_agent?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "icon_grand_jury_ballots_first_choice_nominee_id_fkey"
+            columns: ["first_choice_nominee_id"]
+            isOneToOne: false
+            referencedRelation: "nominees"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "icon_grand_jury_ballots_first_choice_nominee_id_fkey"
+            columns: ["first_choice_nominee_id"]
+            isOneToOne: false
+            referencedRelation: "public_nominees"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "icon_grand_jury_ballots_group_id_fkey"
+            columns: ["group_id"]
+            isOneToOne: false
+            referencedRelation: "icon_grand_jury_groups"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "icon_grand_jury_ballots_judge_id_fkey"
+            columns: ["judge_id"]
+            isOneToOne: false
+            referencedRelation: "icon_judges"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "icon_grand_jury_ballots_second_choice_nominee_id_fkey"
+            columns: ["second_choice_nominee_id"]
+            isOneToOne: false
+            referencedRelation: "nominees"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "icon_grand_jury_ballots_second_choice_nominee_id_fkey"
+            columns: ["second_choice_nominee_id"]
+            isOneToOne: false
+            referencedRelation: "public_nominees"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "icon_grand_jury_ballots_third_choice_nominee_id_fkey"
+            columns: ["third_choice_nominee_id"]
+            isOneToOne: false
+            referencedRelation: "nominees"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "icon_grand_jury_ballots_third_choice_nominee_id_fkey"
+            columns: ["third_choice_nominee_id"]
+            isOneToOne: false
+            referencedRelation: "public_nominees"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      icon_grand_jury_finalists: {
+        Row: {
+          created_at: string
+          group_id: string
+          id: string
+          nominee_id: string
+          seed_rank: number
+        }
+        Insert: {
+          created_at?: string
+          group_id: string
+          id?: string
+          nominee_id: string
+          seed_rank: number
+        }
+        Update: {
+          created_at?: string
+          group_id?: string
+          id?: string
+          nominee_id?: string
+          seed_rank?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "icon_grand_jury_finalists_group_id_fkey"
+            columns: ["group_id"]
+            isOneToOne: false
+            referencedRelation: "icon_grand_jury_groups"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "icon_grand_jury_finalists_nominee_id_fkey"
+            columns: ["nominee_id"]
+            isOneToOne: false
+            referencedRelation: "nominees"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "icon_grand_jury_finalists_nominee_id_fkey"
+            columns: ["nominee_id"]
+            isOneToOne: false
+            referencedRelation: "public_nominees"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      icon_grand_jury_groups: {
+        Row: {
+          classification_id: string
+          created_at: string
+          id: string
+          panel_id: string
+          pathway_id: string
+          title: string
+          updated_at: string
+          voting_status: string
+        }
+        Insert: {
+          classification_id: string
+          created_at?: string
+          id?: string
+          panel_id: string
+          pathway_id: string
+          title: string
+          updated_at?: string
+          voting_status?: string
+        }
+        Update: {
+          classification_id?: string
+          created_at?: string
+          id?: string
+          panel_id?: string
+          pathway_id?: string
+          title?: string
+          updated_at?: string
+          voting_status?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "icon_grand_jury_groups_classification_id_fkey"
+            columns: ["classification_id"]
+            isOneToOne: false
+            referencedRelation: "icon_classifications"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "icon_grand_jury_groups_panel_id_fkey"
+            columns: ["panel_id"]
+            isOneToOne: true
+            referencedRelation: "icon_judge_panels"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "icon_grand_jury_groups_pathway_id_fkey"
+            columns: ["pathway_id"]
+            isOneToOne: false
+            referencedRelation: "icon_pathways"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      icon_grand_jury_results: {
+        Row: {
+          avg_rank: number | null
+          ballot_count: number
+          computed_at: string
+          first_choice_votes: number
+          group_id: string
+          id: string
+          is_laureate: boolean
+          nominee_id: string
+          points: number
+          second_choice_votes: number
+          third_choice_votes: number
+          tie_flag: boolean
+        }
+        Insert: {
+          avg_rank?: number | null
+          ballot_count?: number
+          computed_at?: string
+          first_choice_votes?: number
+          group_id: string
+          id?: string
+          is_laureate?: boolean
+          nominee_id: string
+          points?: number
+          second_choice_votes?: number
+          third_choice_votes?: number
+          tie_flag?: boolean
+        }
+        Update: {
+          avg_rank?: number | null
+          ballot_count?: number
+          computed_at?: string
+          first_choice_votes?: number
+          group_id?: string
+          id?: string
+          is_laureate?: boolean
+          nominee_id?: string
+          points?: number
+          second_choice_votes?: number
+          third_choice_votes?: number
+          tie_flag?: boolean
+        }
+        Relationships: [
+          {
+            foreignKeyName: "icon_grand_jury_results_group_id_fkey"
+            columns: ["group_id"]
+            isOneToOne: false
+            referencedRelation: "icon_grand_jury_groups"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "icon_grand_jury_results_nominee_id_fkey"
+            columns: ["nominee_id"]
+            isOneToOne: false
+            referencedRelation: "nominees"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "icon_grand_jury_results_nominee_id_fkey"
+            columns: ["nominee_id"]
+            isOneToOne: false
+            referencedRelation: "public_nominees"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       icon_judge_assignments: {
         Row: {
           assigned_at: string
@@ -2069,6 +2371,110 @@ export type Database = {
           verified_at?: string
         }
         Relationships: []
+      }
+      icon_judge_panel_members: {
+        Row: {
+          created_at: string
+          id: string
+          judge_id: string
+          panel_id: string
+          role: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          judge_id: string
+          panel_id: string
+          role?: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          judge_id?: string
+          panel_id?: string
+          role?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "icon_judge_panel_members_judge_id_fkey"
+            columns: ["judge_id"]
+            isOneToOne: false
+            referencedRelation: "icon_judges"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "icon_judge_panel_members_panel_id_fkey"
+            columns: ["panel_id"]
+            isOneToOne: false
+            referencedRelation: "icon_judge_panels"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      icon_judge_panels: {
+        Row: {
+          chair_judge_id: string | null
+          classification_id: string
+          created_at: string
+          id: string
+          pathway_id: string
+          secretary_judge_id: string | null
+          status: string
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          chair_judge_id?: string | null
+          classification_id: string
+          created_at?: string
+          id?: string
+          pathway_id: string
+          secretary_judge_id?: string | null
+          status?: string
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          chair_judge_id?: string | null
+          classification_id?: string
+          created_at?: string
+          id?: string
+          pathway_id?: string
+          secretary_judge_id?: string | null
+          status?: string
+          title?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "icon_judge_panels_chair_judge_id_fkey"
+            columns: ["chair_judge_id"]
+            isOneToOne: false
+            referencedRelation: "icon_judges"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "icon_judge_panels_classification_id_fkey"
+            columns: ["classification_id"]
+            isOneToOne: false
+            referencedRelation: "icon_classifications"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "icon_judge_panels_pathway_id_fkey"
+            columns: ["pathway_id"]
+            isOneToOne: false
+            referencedRelation: "icon_pathways"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "icon_judge_panels_secretary_judge_id_fkey"
+            columns: ["secretary_judge_id"]
+            isOneToOne: false
+            referencedRelation: "icon_judges"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       icon_judge_profiles: {
         Row: {
@@ -2568,6 +2974,118 @@ export type Database = {
           metadata?: Json
         }
         Relationships: []
+      }
+      icon_panel_shortlists: {
+        Row: {
+          chair_signed_at: string | null
+          created_at: string
+          finalist_1_nominee_id: string | null
+          finalist_2_nominee_id: string | null
+          finalist_3_nominee_id: string | null
+          id: string
+          justification: string | null
+          panel_id: string
+          reserve_nominee_id: string | null
+          secretary_signed_at: string | null
+          status: string
+          submitted_at: string | null
+          updated_at: string
+        }
+        Insert: {
+          chair_signed_at?: string | null
+          created_at?: string
+          finalist_1_nominee_id?: string | null
+          finalist_2_nominee_id?: string | null
+          finalist_3_nominee_id?: string | null
+          id?: string
+          justification?: string | null
+          panel_id: string
+          reserve_nominee_id?: string | null
+          secretary_signed_at?: string | null
+          status?: string
+          submitted_at?: string | null
+          updated_at?: string
+        }
+        Update: {
+          chair_signed_at?: string | null
+          created_at?: string
+          finalist_1_nominee_id?: string | null
+          finalist_2_nominee_id?: string | null
+          finalist_3_nominee_id?: string | null
+          id?: string
+          justification?: string | null
+          panel_id?: string
+          reserve_nominee_id?: string | null
+          secretary_signed_at?: string | null
+          status?: string
+          submitted_at?: string | null
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "icon_panel_shortlists_finalist_1_nominee_id_fkey"
+            columns: ["finalist_1_nominee_id"]
+            isOneToOne: false
+            referencedRelation: "nominees"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "icon_panel_shortlists_finalist_1_nominee_id_fkey"
+            columns: ["finalist_1_nominee_id"]
+            isOneToOne: false
+            referencedRelation: "public_nominees"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "icon_panel_shortlists_finalist_2_nominee_id_fkey"
+            columns: ["finalist_2_nominee_id"]
+            isOneToOne: false
+            referencedRelation: "nominees"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "icon_panel_shortlists_finalist_2_nominee_id_fkey"
+            columns: ["finalist_2_nominee_id"]
+            isOneToOne: false
+            referencedRelation: "public_nominees"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "icon_panel_shortlists_finalist_3_nominee_id_fkey"
+            columns: ["finalist_3_nominee_id"]
+            isOneToOne: false
+            referencedRelation: "nominees"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "icon_panel_shortlists_finalist_3_nominee_id_fkey"
+            columns: ["finalist_3_nominee_id"]
+            isOneToOne: false
+            referencedRelation: "public_nominees"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "icon_panel_shortlists_panel_id_fkey"
+            columns: ["panel_id"]
+            isOneToOne: true
+            referencedRelation: "icon_judge_panels"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "icon_panel_shortlists_reserve_nominee_id_fkey"
+            columns: ["reserve_nominee_id"]
+            isOneToOne: false
+            referencedRelation: "nominees"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "icon_panel_shortlists_reserve_nominee_id_fkey"
+            columns: ["reserve_nominee_id"]
+            isOneToOne: false
+            referencedRelation: "public_nominees"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       icon_pathways: {
         Row: {
@@ -9516,6 +10034,10 @@ export type Database = {
         Returns: Json
       }
       compute_gold_results: { Args: { p_season_id: string }; Returns: Json }
+      compute_icon_grand_jury_results: {
+        Args: { p_group_id: string }
+        Returns: undefined
+      }
       compute_icon_results: {
         Args: { p_label: string; p_min_reviewers?: number }
         Returns: string
@@ -9698,6 +10220,10 @@ export type Database = {
         Returns: boolean
       }
       icon_ensure_review: { Args: { p_assignment_id: string }; Returns: string }
+      icon_governance_decide: {
+        Args: { p_decision: string; p_group_id: string; p_notes: string }
+        Returns: string
+      }
       increment_public_votes: {
         Args: { nominee_id: string }
         Returns: undefined
@@ -9787,6 +10313,18 @@ export type Database = {
         Returns: undefined
       }
       slugify: { Args: { p: string }; Returns: string }
+      submit_icon_grand_jury_ballot: {
+        Args: {
+          p_first: string
+          p_group_id: string
+          p_second: string
+          p_third: string
+        }
+        Returns: {
+          ballot_id: string
+          receipt: string
+        }[]
+      }
       submit_icon_score: {
         Args: {
           p_evidence_flag?: string
@@ -9794,6 +10332,17 @@ export type Database = {
           p_review_id: string
         }
         Returns: undefined
+      }
+      submit_icon_shortlist: {
+        Args: {
+          p_finalist_1: string
+          p_finalist_2: string
+          p_finalist_3: string
+          p_justification: string
+          p_panel_id: string
+          p_reserve: string
+        }
+        Returns: string
       }
       update_nomination_draft: {
         Args: {

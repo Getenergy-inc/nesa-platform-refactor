@@ -99,6 +99,10 @@ import IconJuryHelp from "./pages/iconJury/Help";
 import IconJuryAdminDashboard from "./pages/iconJury/AdminDashboard";
 import IconJuryAuditTrailPage from "./pages/iconJury/AuditTrail";
 import IconJuryAdminAuditTrailPage from "./pages/iconJury/AdminAuditTrail";
+import JudgesArenaLanding from "./pages/judges/JudgesArenaLanding";
+import GrandJuryVotingHub from "./pages/judges/GrandJuryVotingHub";
+import GrandJuryGroupBallot from "./pages/judges/GrandJuryGroupBallot";
+import GovernanceReviewDashboard from "./pages/judges/GovernanceReviewDashboard";
 import PathwaysPage from "./pages/PathwaysPage";
 import AwardPathwayPage from "./pages/AwardPathwayPage";
 import EcosystemPage from "./pages/EcosystemPage";
@@ -2501,28 +2505,36 @@ const App = () => (
                     }
                   />
 
-                  {/* Africa Education Icon — Judges Portal (isolated, no site layout) */}
-                  <Route path="/icon-jury/sign-in" element={<IconJurySignIn />} />
+                  {/* Africa Education Icon — Judges Arena (public + isolated jury portal) */}
+                  <Route path="/judges" element={<JudgesArenaLanding />} />
+                  <Route path="/judges/sign-in" element={<IconJurySignIn />} />
+                  <Route path="/icon-jury/sign-in" element={<Navigate to="/judges/sign-in" replace />} />
                   <Route
-                    path="/icon-jury"
+                    path="/judges"
                     element={
                       <IconJudgeGate>
                         <IconJuryLayout />
                       </IconJudgeGate>
                     }
                   >
-                    <Route index element={<Navigate to="/icon-jury/dashboard" replace />} />
                     <Route path="dashboard" element={<IconJuryDashboard />} />
                     <Route path="assignments" element={<IconJuryAssignments />} />
                     <Route path="nominees/:nomineeId" element={<IconJuryNomineeReview />} />
+                    <Route path="nominee/:nomineeId" element={<IconJuryNomineeReview />} />
                     <Route path="conflicts" element={<IconJuryConflicts />} />
                     <Route path="scoring" element={<IconJuryScoringGuide />} />
                     <Route path="notes" element={<IconJuryNotes />} />
+                    <Route path="voting" element={<GrandJuryVotingHub />} />
+                    <Route path="voting/:groupId" element={<GrandJuryGroupBallot />} />
                     <Route path="results" element={<IconJuryResults />} />
                     <Route path="profile" element={<IconJuryProfile />} />
                     <Route path="audit" element={<IconJuryAuditTrailPage />} />
                     <Route path="help" element={<IconJuryHelp />} />
                   </Route>
+                  {/* Legacy /icon-jury/* aliases → /judges/* */}
+                  <Route path="/icon-jury" element={<Navigate to="/judges/dashboard" replace />} />
+                  <Route path="/icon-jury/*" element={<Navigate to="/judges/dashboard" replace />} />
+
                   <Route
                     path="/admin/icon-jury"
                     element={
@@ -2533,8 +2545,10 @@ const App = () => (
                   >
                     <Route index element={<IconJuryAdminDashboard />} />
                     <Route path="results" element={<IconJuryResults />} />
+                    <Route path="governance-review" element={<GovernanceReviewDashboard />} />
                     <Route path="audit" element={<IconJuryAdminAuditTrailPage />} />
                   </Route>
+
 
                   {/* Utility */}
                   <Route

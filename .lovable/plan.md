@@ -1,127 +1,114 @@
 
-# Africa Education Icon Judges Portal — Implementation Plan
+# 2026 Africa Education Icon Judges Arena — Implementation Plan
 
-A dedicated, authenticated jury system for the **Africa Education Icon Award 2006–2026** only. Separate from public site, NRC portal, nominee dashboard, and all other award tiers.
+The existing project already has a strong foundation: `icon_judges`, `icon_judge_assignments`, `icon_judge_reviews`, `icon_judge_scores`, `icon_judge_conflicts`, `icon_jury_deliberations`, `icon_jury_moderation_actions`, `icon_jury_result_snapshots`, `icon_jury_audit_logs`, plus `IconJudgeGate`, `IconJuryLayout`, and pages under `src/pages/iconJury/`. This plan extends that spine rather than duplicating it, and adds the missing 27-judge panel matrix, ranked-choice grand jury, governance dashboard, and public `/judges` arena.
 
-## Scope
+## 1. Award calendar — single source of truth
 
-- 27 judges → 500+ nominees → 3 pathways × 3 classifications = **9 laureates**
-- Applies **only** to the Africa Education Icon Award. No Blue Garnet, Platinum, Influencer, public voting, endorsements, donations, or Gala ticketing.
+Create `src/config/iconAward/calendar.ts`:
+- `SCREENING_OPEN` = 2026-09-14
+- `SCREENING_CLOSE` = 2026-09-30
+- `GRAND_JURY_OPEN` = 2026-10-01
+- `GRAND_JURY_CLOSE` = 2026-10-07
+- `GOVERNANCE_REVIEW` = 2026-10-08 → 2026-10-15
+- `GALA` = 2026-10-22
+- Helper `getCurrentIconPhase()` used by ribbon, dashboards, gates.
 
-## 1. Database (single migration)
+Also mirror in a DB row in `platform_config` for server-side gates.
 
-New tables under `public.` (all with GRANTs + RLS + policies):
+## 2. Database — 4 focused migrations
 
-```
-icon_judges                 — judge roster (user_id, status, expertise, region, active)
-icon_judge_profiles         — bio, photo, affiliations, availability
-icon_judge_invitations      — invitation-only access tokens
-icon_judge_onboarding       — 7-step checklist status
-icon_pathways               — 3 seeded rows
-icon_classifications        — 3 seeded rows
-icon_judge_assignments      — judge_id × nominee_id × pathway × classification × deadline × status
-icon_judge_conflicts        — declared conflicts + recusal action
-icon_judge_reviews          — one per assignment; draft/submitted/locked; recommendation enum
-icon_scoring_criteria       — 8 seeded rows (25/15/15/10/10/10/10/5 weights)
-icon_judge_scores           — per-criterion score + justification + evidence ref
-icon_judge_notes            — confidential notes (moderation-visible only)
-icon_jury_deliberations     — shared deliberation threads
-icon_jury_result_snapshots  — point-in-time result computation
-icon_jury_result_positions  — 9 final positions with governance status
-icon_jury_moderation_actions— reassign/reopen/exclude actions
-icon_jury_notifications     — in-app notification queue
-icon_jury_audit_logs        — immutable, INSERT-only (revoke UPDATE/DELETE)
-```
+Extend existing schema (do **not** rename existing tables). Add:
 
-RLS pattern: `has_icon_judge_role(uid)` and `has_icon_moderator_role(uid)` security-definer functions using existing `user_roles` (add role codes `ICON_JUDGE`, `ICON_MODERATOR`, `ICON_GOVERNANCE`). Judges see only own assignments/scores/notes; moderators see aggregated blind data; audit logs immutable via revoked privileges + trigger.
+**a. Panels & panel membership**
+- `icon_judge_panels` (pathway_id, classification_id, chair_judge_id, secretary_judge_id, unique on pathway+classification)
+- `icon_judge_panel_members` (panel_id, judge_id, role: judge/chair/secretary/nrc_rep/governance_observer)
 
-RPCs:
-- `submit_icon_score(assignment_id, scores[])` — validates all criteria present, locks review, writes audit
-- `declare_icon_conflict(nominee_id, type, severity)` — auto-recuses when severity=recusal
-- `compute_icon_results(snapshot_label)` — aggregates avg/median/variance per pathway×classification, applies min-reviewer + NRC-verified gates, produces 9 positions with tie-break chain
-- `reopen_icon_review(review_id, reason)` — moderator only, preserves original
-- `approve_icon_laureate(position_id)` — governance role only
+**b. Screening shortlist / finalists**
+- `icon_panel_shortlists` (panel_id, finalist_1, finalist_2, finalist_3, reserve, justification, chair_signed_at, secretary_signed_at, submitted_at, status)
+- `icon_grand_jury_groups` (id, pathway_id, classification_id, panel_id) — 9 rows
+- `icon_grand_jury_finalists` (group_id, nominee_id, rank_seed)
 
-## 2. Routes (`src/App.tsx`)
+**c. Ranked-choice ballots**
+- `icon_grand_jury_ballots` (group_id, judge_id, first_choice, second_choice, third_choice, submitted_at, locked_at, receipt_hash, ip, user_agent) — unique (group_id, judge_id), CHECK three distinct nominees
+- `icon_grand_jury_results` (group_id, nominee_id, first_choice_votes, points, avg_rank, laureate boolean, computed_at)
+- `icon_governance_reviews` (group_id, decision: approve/hold/reopen, notes, decided_by, decided_at)
 
-Judge routes (behind `IconJudgeGate` — auth + role + 2FA + onboarding-complete):
-```
-/judges/sign-in        /judges/dashboard      /judges/assignments
-/judges/nominees       /judges/nominee/:id    /judges/conflicts
-/judges/scoring        /judges/notes          /judges/results
-/judges/profile        /judges/help
-```
+**d. RLS + RPCs**
+- Judges: read own panel + assigned nominees only; read own ballots.
+- Moderators/governance: read all; only governance can approve/reopen.
+- RPCs: `submit_icon_ballot(group_id, first, second, third)` — validates phase window, distinct rankings, one ballot per judge, writes audit log; `compute_icon_grand_jury_results(group_id)`; `submit_icon_shortlist(panel_id, ...)`; `governance_decide(group_id, decision, notes)`.
+- All writes append to existing `icon_jury_audit_logs`.
 
-Admin/governance routes (behind `IconModeratorGate`):
-```
-/admin/judges              /admin/judge-assignments   /admin/judge-moderation
-/admin/judge-results       /admin/judge-audit
-```
+Grants follow the standard pattern (`authenticated`, `service_role`; no `anon`).
 
-All routes namespaced under `src/pages/iconJudges/` and `src/pages/admin/iconJury/` — no coupling to existing NRC/nominee/public pages.
+## 3. Public landing page — `/judges`
 
-## 3. Components
+New `src/pages/judges/JudgesArenaLanding.tsx` (public, indexable):
+- `ArenaHero` with executive imagery (deep midnight blue + Blue-Garnet accents)
+- Live stat strip pulled from Supabase (`27 / 3 / 9 / 27 / 9 / 500+`)
+- Workflow timeline component (Nomination → … → Laureates)
+- "About the Judges Arena" sections
+- Primary CTA → `/judges/sign-in`, secondary anchor to workflow
+- SEO: title/description exactly as specified; canonical `/judges`
 
-`src/features/iconJudges/`:
-- `IconJudgeGate.tsx` — auth + role + 2FA + onboarding gate (mirrors `JudgeOTPGate` pattern)
-- `JudgesLayout.tsx` — dedicated shell (dark charcoal + gold, distinct from public header)
-- `DashboardSummaryStrip.tsx` — 27 / 3 / 9 / 500+ live counters
-- `AssignmentCard.tsx`, `AssignmentFilters.tsx`
-- `NomineeReviewWorkspace.tsx` — left profile panel + right scoring panel
-- `ScoringForm.tsx` — 8 criteria, per-criterion score + justification + evidence; draft/submit/lock
-- `ConflictDeclarationDialog.tsx`
-- `ConfidentialNotesPanel.tsx`
-- `RecommendationSelect.tsx` (5 enum values)
-- `ResultMatrix3x3.tsx` — the 9-position grid
-- `DeliberationThread.tsx`
+Route registered in `src/App.tsx`. All `/judges/*` authenticated routes get `<meta name="robots" content="noindex,nofollow">` via Helmet inside `IconJuryLayout`, and are excluded from `scripts/generate-sitemap.ts`.
 
-Admin:
-- `ModerationTable.tsx` — variance flags, overdue, reopened, conflict warnings
-- `ResultsAggregationView.tsx` — blind by default
-- `AuditLogViewer.tsx` (read-only)
+## 4. Rename/mount authenticated routes under `/judges`
 
-## 4. Scoring, tie-break, and result rules
+Alias existing `/icon-jury/*` under `/judges/*` (keep old routes as redirects to avoid breaking bookmarks). Add missing pages:
+- `/judges/dashboard` — reuse `DashboardSummaryStrip`, add `AwardPhaseRibbon`, summary cards, quick actions.
+- `/judges/my-panel` — new page reading `icon_judge_panels` + members.
+- `/judges/assignments`, `/judges/nominees`, `/judges/nominee/:id` — extend existing NomineeReview with 3-column layout, evidence viewer tabs, 8-criterion scoring panel (already in `src/config/iconAward/scoring.ts`).
+- `/judges/deliberations`, `/judges/deliberations/:roomId` — extend existing `icon_jury_deliberations` UI with tabs (Discussion, Shortlist, Compare, Evidence, Clarifications, Minutes, Final Report). Gate entry until judge's own scores are locked.
+- `/judges/voting`, `/judges/voting/:groupId` — new grand jury arena with 9 group cards and ranked-choice ballot component + confirmation dialog + receipt.
+- `/judges/compare` — side-by-side finalist comparison matrix.
+- `/judges/results`, `/judges/messages`, `/judges/calendar`, `/judges/notifications`, `/judges/profile`, `/judges/help` — new pages, mostly thin wrappers over existing tables.
 
-Hard-coded in `src/config/iconAward/scoring.ts`:
-- 100-point framework with the 8 weighted criteria
-- Min 3 valid judges (admin-configurable via `platform_config`)
-- Tie-break chain: Lifetime Impact → Sustainability → Evidence Quality → median → variance → jury deliberation → governance
-- Result statuses: 10 enums as specified
-- Public-ready result object generated separately; never auto-published
+Admin/NRC:
+- `/admin/judge-panels`, `/admin/judge-assignments`, `/admin/finalists`, `/admin/grand-jury`, `/admin/governance-review`, `/admin/judge-audit` (audit reuses existing `AdminAuditTrail`).
 
-## 5. Security & audit
+## 5. Reusable components
 
-- Invitation-only signup (`icon_judge_invitations` token consumed)
-- 2FA required for all `/judges/*` routes (reuse existing `judge_otp_sessions` pattern, new session table `icon_judge_otp_sessions`)
-- Session timeout 30 min
-- Rate limiting on score submission
-- All mutations write to `icon_jury_audit_logs` via triggers
-- Audit table: `REVOKE UPDATE, DELETE` from all roles; only `INSERT` allowed
-- No judge score/note data ever sent to public analytics; server-side only
+Under `src/features/iconJudges/arena/`:
+`ArenaHero`, `AwardPhaseRibbon`, `PanelCard`, `NomineeAssignmentCard`, `EvidenceViewer`, `ScoringPanel` (wraps the 8-criterion config), `ConflictModal`, `ComparisonMatrix`, `DeliberationRoom`, `ShortlistSelector`, `GrandJuryGroupCard`, `FinalistCard`, `RankedChoiceBallot`, `BallotConfirmation`, `ResultsMatrix`, `GovernanceChecklist`, `NotificationCentre`, `CalendarPanel`. Consistent midnight-blue / Blue-Garnet / restrained-gold theming (via tokens in `index.css`).
 
-## 6. Explicit exclusions
+## 6. Access control & gating
 
-- No public voting UI, no endorsement flows, no donation prompts, no ticketing
-- No Blue Garnet / Platinum / Influencer integration
-- No nominee-facing views of judge notes or scores
-- No cross-pollination with `judges`, `judge_reviews`, `nrc_*` tables (Icon jury is fully isolated)
+- Reuse `IconJudgeGate` (auth + `ICON_JUDGE` role + valid OTP).
+- Add phase gate: ballot RPC and shortlist RPC reject writes outside their window unless caller is `ICON_GOVERNANCE`.
+- Panel-scoped visibility: judges can only list assignments where their `judge_id` belongs to the assignment's panel.
+- Screening judges revealed publicly on finalist group header, but their individual scores/preferences never leave `icon_judge_scores` (already RLS-scoped to owning judge + moderator).
 
-## 7. Out of scope for this build
+## 7. Governance & audit
 
-- Sending real email/SMS/WhatsApp — notification records written to `icon_jury_notifications`; delivery workers can be wired later
-- Judge onboarding video/training content — status flags exist, content is placeholder
-- Public laureate announcement page — data object exposed but no public route
+- `/admin/governance-review` shows checklist per group: panel completion, conflicts resolved, all 27 ballots in, invalid ballots, tie status, computed results.
+- Approve / Hold / Reopen actions logged via `icon_jury_audit_logs` (new action codes: `shortlist_submitted`, `ballot_submitted`, `ballot_locked`, `results_computed`, `governance_approved`, `governance_hold`, `governance_reopened`).
+- Audit trail already implemented — extend action enum in `IconJuryAuditTrail.tsx` filter list.
 
-## Technical implementation order
+## 8. Out of scope (explicitly excluded)
 
-1. Migration: tables + RLS + GRANTs + seed pathways/classifications/criteria + role codes + audit-immutability triggers
-2. RPCs: submit_icon_score, declare_icon_conflict, compute_icon_results, reopen_icon_review, approve_icon_laureate
-3. Gate components + layout + routes wired in `App.tsx`
-4. Sign-in + onboarding + profile
-5. Dashboard + assignments + review workspace + scoring + notes + conflicts
-6. Results view (judge-scoped) + deliberation
-7. Admin moderation + results aggregation + audit viewer
+Blue Garnet / Platinum / Influencer surfaces, public voting, endorsements, donations, sponsorship, gala ticketing. None of those are touched.
 
-## Deliverable size
+## 9. Delivery order
 
-~35 new files, 1 migration, 5 RPCs, ~15 routes. All isolated under Icon-specific namespaces so nothing else in the platform is touched.
+1. Migration (calendar table + panels + ballots + RLS + RPCs).
+2. Config + calendar module + phase helper.
+3. Public `/judges` landing + SEO + sitemap exclusion.
+4. Route aliasing under `/judges/*` + `IconJuryLayout` header/ribbon updates.
+5. Panels + assignments + review workspace enhancements.
+6. Deliberation rooms + shortlist submission.
+7. Grand Jury voting arena + ranked-choice ballot + results computation.
+8. Governance review dashboard.
+9. Notifications, calendar, profile, help pages.
+10. Mobile polish (bottom nav for /judges), a11y pass, noindex verification.
+
+## Technical notes
+
+- Icon jury schema, roles (`ICON_JUDGE`, `ICON_MODERATOR`, `ICON_GOVERNANCE`), and OTP already exist — no auth refactor needed.
+- Ballot uniqueness enforced by DB (`UNIQUE (group_id, judge_id)`) + RPC checks distinct rankings and phase window.
+- Tie-break chain implemented in `compute_icon_grand_jury_results` following the specified order, falling back to a `tie_case` row for governance if unresolved.
+- All timestamps read from `src/config/iconAward/calendar.ts` on the client and from `platform_config` on the server so dates change in one place.
+- AI evidence summaries (if enabled later) will be rendered read-only with the mandated disclaimer; not part of this build.
+
+Estimated: ~1 migration batch, ~35 new files, ~10 edits to existing icon-jury pages/layout.

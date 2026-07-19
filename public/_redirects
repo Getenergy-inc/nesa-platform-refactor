@@ -61,7 +61,7 @@
 /cookie-policy                                               /policies            301
 /language                                                    /                    301
 
-# --- 2. SPA routes (447 explicit paths from src/App.tsx) ---
+# --- 2. SPA routes (460 explicit paths from src/App.tsx) ---
 /recognition/influencer-education-impact/african-sports-icons-supporting-education /index.html          200
 /recognition/influencer-education-impact/african-music-icons-supporting-education /index.html          200
 /recognition/influencer-education-impact/african-social-media-influencers /index.html          200
@@ -252,6 +252,7 @@
 /nominees-directory                                          /index.html          200
 /volunteer-chapters                                          /index.html          200
 /volunteer/settings                                          /index.html          200
+nominees/:nomineeId                                          /index.html          200
 /about/eligibility                                           /index.html          200
 /about/vision-2035                                           /index.html          200
 /awards/categories                                           /index.html          200
@@ -260,6 +261,7 @@
 /earn-voting-coins                                           /index.html          200
 /guidelines/judges                                           /index.html          200
 /guidelines/voters                                           /index.html          200
+/icon-jury/sign-in                                           /index.html          200
 /influencer-impact                                           /index.html          200
 /nominate/advanced                                           /index.html          200
 /nominate/official                                           /index.html          200
@@ -290,6 +292,7 @@
 /vote/blue-garnet                                            /index.html          200
 /about/integrity                                             /index.html          200
 /admin/bulk-seed                                             /index.html          200
+/admin/icon-jury                                             /index.html          200
 /afri-edutourism                                             /index.html          200
 /awards/platinum                                             /index.html          200
 /awards/timeline                                             /index.html          200
@@ -428,12 +431,14 @@ nominee/:slug                                                /index.html        
 /press-room                                                  /index.html          200
 /shop/:slug                                                  /index.html          200
 /volunteers                                                  /index.html          200
+assignments                                                  /index.html          200
 /about-agc                                                   /index.html          200
 /admin/edx                                                   /index.html          200
 /companies                                                   /index.html          200
 /dashboard                                                   /index.html          200
 /directory                                                   /index.html          200
 /ecosystem                                                   /index.html          200
+/icon-jury                                                   /index.html          200
 /judge/coi                                                   /index.html          200
 /resources                                                   /index.html          200
 /shop/cart                                                   /index.html          200
@@ -457,6 +462,8 @@ discussion                                                   /index.html        
 /sponsors                                                    /index.html          200
 /timeline                                                    /index.html          200
 /trending                                                    /index.html          200
+conflicts                                                    /index.html          200
+dashboard                                                    /index.html          200
 /contact                                                     /index.html          200
 /endorse                                                     /index.html          200
 /gallery                                                     /index.html          200
@@ -484,6 +491,9 @@ nominees                                                     /index.html        
 /verify                                                      /index.html          200
 /videos                                                      /index.html          200
 /wallet                                                      /index.html          200
+profile                                                      /index.html          200
+results                                                      /index.html          200
+scoring                                                      /index.html          200
 /about                                                       /index.html          200
 /admin                                                       /index.html          200
 /award                                                       /index.html          200
@@ -504,10 +514,13 @@ nominees                                                     /index.html        
 /news                                                        /index.html          200
 /shop                                                        /index.html          200
 /vote                                                        /index.html          200
+audit                                                        /index.html          200
+notes                                                        /index.html          200
 /edx                                                         /index.html          200
 /faq                                                         /index.html          200
 /nrc                                                         /index.html          200
 /otp                                                         /index.html          200
+help                                                         /index.html          200
 /                                                            /index.html          200
 
 # --- 3. True-404 fallback ---
