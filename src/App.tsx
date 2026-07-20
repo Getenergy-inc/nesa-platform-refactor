@@ -2518,6 +2518,7 @@ const App = () => (
                     }
                   >
                     <Route path="dashboard" element={<IconJuryDashboard />} />
+                    <Route path="my-panel" element={<MyPanel />} />
                     <Route path="assignments" element={<IconJuryAssignments />} />
                     <Route path="nominees/:nomineeId" element={<IconJuryNomineeReview />} />
                     <Route path="nominee/:nomineeId" element={<IconJuryNomineeReview />} />
