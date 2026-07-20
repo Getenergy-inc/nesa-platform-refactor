@@ -61,7 +61,7 @@
 /cookie-policy                                               /policies            301
 /language                                                    /                    301
 
-# --- 2. SPA routes (460 explicit paths from src/App.tsx) ---
+# --- 2. SPA routes (466 explicit paths from src/App.tsx) ---
 /recognition/influencer-education-impact/african-sports-icons-supporting-education /index.html          200
 /recognition/influencer-education-impact/african-music-icons-supporting-education /index.html          200
 /recognition/influencer-education-impact/african-social-media-influencers /index.html          200
@@ -269,6 +269,7 @@ nominees/:nomineeId                                          /index.html        
 /rebuild-my-school                                           /index.html          200
 /volunteer-stories                                           /index.html          200
 /volunteer/profile                                           /index.html          200
+nominee/:nomineeId                                           /index.html          200
 /about/governance                                            /index.html          200
 /admin/volunteers                                            /index.html          200
 /award-categories                                            /index.html          200
@@ -290,6 +291,7 @@ nominees/:nomineeId                                          /index.html        
 /sponsor/packages                                            /index.html          200
 /volunteers/:slug                                            /index.html          200
 /vote/blue-garnet                                            /index.html          200
+governance-review                                            /index.html          200
 /about/integrity                                             /index.html          200
 /admin/bulk-seed                                             /index.html          200
 /admin/icon-jury                                             /index.html          200
@@ -325,6 +327,7 @@ nominees/:nomineeId                                          /index.html        
 /gfawzip-wallet                                              /index.html          200
 /impact/reports                                              /index.html          200
 /judge/settings                                              /index.html          200
+/judges/sign-in                                              /index.html          200
 /media/webinars                                              /index.html          200
 /nominees/:slug                                              /index.html          200
 /policies/terms                                              /index.html          200
@@ -332,6 +335,7 @@ nominees/:nomineeId                                          /index.html        
 /reset-password                                              /index.html          200
 /sponsors/:slug                                              /index.html          200
 /wallet/gfawzip                                              /index.html          200
+voting/:groupId                                              /index.html          200
 /account/login                                               /index.html          200
 /admin/gallery                                               /index.html          200
 /admin/rebuild                                               /index.html          200
@@ -401,6 +405,7 @@ nominee/:slug                                                /index.html        
 /bulk-orders                                                 /index.html          200
 /gala/tables                                                 /index.html          200
 /help-center                                                 /index.html          200
+/icon-jury/*                                                 /index.html          200
 /judge-apply                                                 /index.html          200
 /judge/apply                                                 /index.html          200
 /judge/panel                                                 /index.html          200
@@ -505,6 +510,7 @@ scoring                                                      /index.html        
 /music                                                       /index.html          200
 /press                                                       /index.html          200
 /store                                                       /index.html          200
+voting                                                       /index.html          200
 /auth                                                        /index.html          200
 /cart                                                        /index.html          200
 /faqs                                                        /index.html          200
