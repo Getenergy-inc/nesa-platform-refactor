@@ -103,6 +103,7 @@ import JudgesArenaLanding from "./pages/judges/JudgesArenaLanding";
 import GrandJuryVotingHub from "./pages/judges/GrandJuryVotingHub";
 import GrandJuryGroupBallot from "./pages/judges/GrandJuryGroupBallot";
 import GovernanceReviewDashboard from "./pages/judges/GovernanceReviewDashboard";
+import MyPanel from "./pages/judges/MyPanel";
 import PathwaysPage from "./pages/PathwaysPage";
 import AwardPathwayPage from "./pages/AwardPathwayPage";
 import EcosystemPage from "./pages/EcosystemPage";
