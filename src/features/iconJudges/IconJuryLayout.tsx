@@ -2,12 +2,13 @@ import { NavLink, Outlet, useNavigate } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import {
   LayoutDashboard, ClipboardList, Users, AlertTriangle,
-  FileEdit, StickyNote, Trophy, UserCircle, LifeBuoy, LogOut, Gavel, ShieldCheck, Vote,
+  FileEdit, StickyNote, Trophy, UserCircle, LifeBuoy, LogOut, Gavel, ShieldCheck, Vote, Layers,
 } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 
 const NAV = [
   { to: "/judges/dashboard", label: "Dashboard", icon: LayoutDashboard },
+  { to: "/judges/my-panel", label: "My Panel", icon: Layers },
   { to: "/judges/assignments", label: "Assignments", icon: ClipboardList },
   { to: "/judges/nominees", label: "Nominees", icon: Users },
   { to: "/judges/conflicts", label: "Conflicts", icon: AlertTriangle },
