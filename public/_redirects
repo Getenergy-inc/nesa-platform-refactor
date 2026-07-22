@@ -61,7 +61,7 @@
 /cookie-policy                                               /policies            301
 /language                                                    /                    301
 
-# --- 2. SPA routes (487 explicit paths from src/App.tsx) ---
+# --- 2. SPA routes (497 explicit paths from src/App.tsx) ---
 /recognition/influencer-education-impact/african-sports-icons-supporting-education /index.html          200
 /recognition/influencer-education-impact/african-music-icons-supporting-education /index.html          200
 /recognition/influencer-education-impact/african-social-media-influencers /index.html          200
@@ -191,6 +191,7 @@
 /judges/nominee-pipeline                                     /index.html          200
 /media/behind-the-scenes                                     /index.html          200
 /nominees/region/:region                                     /index.html          200
+/nrc/handover/governance                                     /index.html          200
 /admin/nominee-profiles                                      /index.html          200
 /awards/c/:categorySlug                                      /index.html          200
 /events/afri-edutourism                                      /index.html          200
@@ -243,6 +244,7 @@
 /judge/icon-lifetime                                         /index.html          200
 /nrc/dashboard/merge                                         /index.html          200
 /nrc/dashboard/queue                                         /index.html          200
+/nrc/handover/judges                                         /index.html          200
 /nrc/teams/:teamSlug                                         /index.html          200
 /volunteer/analytics                                         /index.html          200
 /volunteer/dashboard                                         /index.html          200
@@ -274,6 +276,7 @@ nominees/:nomineeId                                          /index.html        
 /nominate/advanced                                           /index.html          200
 /nominate/official                                           /index.html          200
 /nominee-directory                                           /index.html          200
+/nrc/cases/:caseId                                           /index.html          200
 /rebuild-my-school                                           /index.html          200
 /volunteer-stories                                           /index.html          200
 /volunteer/profile                                           /index.html          200
@@ -293,6 +296,7 @@ nominee/:nomineeId                                           /index.html        
 /judge/onboarding                                            /index.html          200
 /judges/directory                                            /index.html          200
 /media/highlights                                            /index.html          200
+/nrc/endorsements                                            /index.html          200
 /payments/gfawzip                                            /index.html          200
 /policies/privacy                                            /index.html          200
 /shop/bulk-orders                                            /index.html          200
@@ -338,6 +342,8 @@ governance-review                                            /index.html        
 /judges/sign-in                                              /index.html          200
 /media/webinars                                              /index.html          200
 /nominees/:slug                                              /index.html          200
+/nrc/automation                                              /index.html          200
+/nrc/duplicates                                              /index.html          200
 /nrc/onboarding                                              /index.html          200
 /policies/terms                                              /index.html          200
 /region/nigeria                                              /index.html          200
@@ -358,6 +364,7 @@ voting/:groupId                                              /index.html        
 /media/nesa-tv                                               /index.html          200
 /nominate/icon                                               /index.html          200
 /nominee/:slug                                               /index.html          200
+/nrc/audit-log                                               /index.html          200
 /nrc/dashboard                                               /index.html          200
 /nrc/directory                                               /index.html          200
 /olc/dashboard                                               /index.html          200
@@ -398,6 +405,7 @@ voting/:groupId                                              /index.html        
 /media/events                                                /index.html          200
 /media/photos                                                /index.html          200
 /nominate/ngo                                                /index.html          200
+/nrc/evidence                                                /index.html          200
 /nrc/my-queue                                                /index.html          200
 /nrc/settings                                                /index.html          200
 /our-partners                                                /index.html          200
@@ -424,6 +432,7 @@ nominee/:slug                                                /index.html        
 /merchandise                                                 /index.html          200
 /nrc/members                                                 /index.html          200
 /nrc/profile                                                 /index.html          200
+/nrc/reports                                                 /index.html          200
 /nrc/scoring                                                 /index.html          200
 /nrc/sign-in                                                 /index.html          200
 /olc/members                                                 /index.html          200
@@ -460,6 +469,7 @@ assignments                                                  /index.html        
 /ecosystem                                                   /index.html          200
 /icon-jury                                                   /index.html          200
 /judge/coi                                                   /index.html          200
+/nrc/cases                                                   /index.html          200
 /nrc/teams                                                   /index.html          200
 /resources                                                   /index.html          200
 /shop/cart                                                   /index.html          200
