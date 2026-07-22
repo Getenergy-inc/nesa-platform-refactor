@@ -191,13 +191,22 @@ function validateStep(step: number, s: WizardState): string | null {
       return s.pathway ? null : "Choose a recognition pathway.";
     case 1:
       return s.classification ? null : "Choose a classification.";
-    case 2:
+    case 2: {
       if (!s.full_name.trim()) return "Full name is required.";
       if (!s.professional_title.trim()) return "Professional title is required.";
       if (!s.country_nationality.trim()) return "Country of nationality is required.";
       if (!s.country_residence.trim()) return "Country of residence is required.";
       if (!s.country_impact.trim()) return "Primary country of education impact is required.";
+      // Optional fields — validate format only when provided.
+      if (s.email.trim() && !z.string().email().safeParse(s.email.trim()).success) {
+        return "Nominee email is not a valid address.";
+      }
+      const urlOk = (v: string) => /^https?:\/\/.+/i.test(v.trim());
+      if (s.website.trim() && !urlOk(s.website)) return "Nominee website must start with http(s)://";
+      if (s.linkedin.trim() && !urlOk(s.linkedin)) return "LinkedIn/profile link must start with http(s)://";
+      if (s.photo_url.trim() && !urlOk(s.photo_url)) return "Photograph link must start with http(s)://";
       return null;
+    }
     case 3:
       for (const k of ["q_why", "q_lifetime", "q_programmes", "q_beneficiaries", "q_regions", "q_sustainability"] as const) {
         if (!String(s[k]).trim()) return "All nomination detail questions are required.";
@@ -208,8 +217,16 @@ function validateStep(step: number, s: WizardState): string | null {
         if (!String(s[d.key]).trim()) return `EDI dimension "${d.label}" is required.`;
       }
       return null;
-    case 5:
-      return s.evidence_links.trim() ? null : "Provide at least two independent evidence links or files.";
+    case 5: {
+      const entries = s.evidence_links
+        .split(/\r?\n|,/) // one per line, or comma-separated
+        .map((l) => l.trim())
+        .filter(Boolean);
+      if (entries.length < 2) {
+        return "Provide at least two independent evidence sources (one per line).";
+      }
+      return null;
+    }
     case 6:
       if (!s.nm_full_name.trim()) return "Your full name is required.";
       if (!z.string().email().safeParse(s.nm_email).success) return "Valid nominator email is required.";
