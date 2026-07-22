@@ -2064,6 +2064,16 @@ const App = () => (
                     path="/nrc/dashboard"
                     element={<NRCProtectedRoute><NRCArenaDashboard /></NRCProtectedRoute>}
                   />
+                  <Route path="/nrc/cases" element={<NRCProtectedRoute><NRCCases /></NRCProtectedRoute>} />
+                  <Route path="/nrc/cases/:caseId" element={<NRCProtectedRoute><NRCCaseDetail /></NRCProtectedRoute>} />
+                  <Route path="/nrc/evidence" element={<NRCProtectedRoute><NRCEvidence /></NRCProtectedRoute>} />
+                  <Route path="/nrc/duplicates" element={<NRCProtectedRoute><NRCDuplicates /></NRCProtectedRoute>} />
+                  <Route path="/nrc/endorsements" element={<NRCProtectedRoute><NRCEndorsements /></NRCProtectedRoute>} />
+                  <Route path="/nrc/handover/judges" element={<NRCProtectedRoute><NRCHandoverJudges /></NRCProtectedRoute>} />
+                  <Route path="/nrc/handover/governance" element={<NRCProtectedRoute><NRCHandoverGovernance /></NRCProtectedRoute>} />
+                  <Route path="/nrc/reports" element={<NRCProtectedRoute><NRCReportsPage /></NRCProtectedRoute>} />
+                  <Route path="/nrc/audit-log" element={<NRCProtectedRoute><NRCAuditLog /></NRCProtectedRoute>} />
+                  <Route path="/nrc/automation" element={<NRCProtectedRoute><NRCAutomation /></NRCProtectedRoute>} />
                   <Route
                     path="/nrc/dashboard/nominees"
                     element={<NRCNomineeTable />}
