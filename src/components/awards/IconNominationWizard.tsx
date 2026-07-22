@@ -49,7 +49,22 @@ const CLASSIFICATIONS = [
   { slug: "friend-of-africa", label: "Friend of Africa" },
 ] as const;
 
-const EDI_DIMENSIONS = [
+// Stable EDI slot keys — every category-specific matrix uses these same
+// 8 slots (labels/descriptions differ). Wizard state addresses them by key,
+// so validation stays constant while rendering adapts per pathway/category.
+const EDI_SLOT_KEYS = [
+  "edi_lifetime_impact",
+  "edi_scale_reach",
+  "edi_inclusion_equity",
+  "edi_innovation",
+  "edi_sustainability",
+  "edi_leadership",
+  "edi_continental_relevance",
+  "edi_evidence_quality",
+] as const;
+
+// Kept for legacy callers/tests that expect a labelled dimension list.
+const EDI_DIMENSIONS: ReadonlyArray<{ key: (typeof EDI_SLOT_KEYS)[number]; label: string }> = [
   { key: "edi_lifetime_impact", label: "Lifetime education impact" },
   { key: "edi_scale_reach", label: "Scale and reach" },
   { key: "edi_inclusion_equity", label: "Inclusion and equity" },
@@ -58,7 +73,7 @@ const EDI_DIMENSIONS = [
   { key: "edi_leadership", label: "Leadership and integrity" },
   { key: "edi_evidence_quality", label: "Evidence quality" },
   { key: "edi_continental_relevance", label: "Continental relevance" },
-] as const;
+];
 
 const EVIDENCE_CHIPS = [
   "Website links",
