@@ -185,7 +185,7 @@ const INITIAL: WizardState = {
 };
 
 // ─────────────────────────── Validation per step ───────────────────────────
-function validateStep(step: number, s: WizardState): string | null {
+export function validateStep(step: number, s: WizardState): string | null {
   switch (step) {
     case 0:
       return s.pathway ? null : "Choose a recognition pathway.";
