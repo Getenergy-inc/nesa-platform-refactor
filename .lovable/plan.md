@@ -1,84 +1,112 @@
 
-# NESA-Africa NRC Arena + Judges Arena Refactor
+# Refactor: 17 Dedicated Category Nomination Pages
 
-This is a large, multi-phase refactor. To keep it shippable I'll break it into
-5 phases you can approve one at a time. Phase 1 gets the visual/structural
-foundation live using the six uploaded dashboard mocks as the design source of
-truth; later phases wire data, automation and handover.
+All 17 URLs already route through a single component (`src/pages/nominate/NominateCategoryShell.tsx`), so this is a **shell refactor + config expansion**, not 17 separate page rewrites. No new routes.
 
-## Design source of truth
-The six uploaded mocks (Secure Judges Chat Rooms, Literary & New Curriculum
-Advocate Icon, Secure Judges Result Chat Room, General Voting Results Arena,
-Pathway Vote Results, Judges Arena sidebar) become the canonical layout for
-**both** arenas — same navy `#0A1A3F` shell, gold `#D4A84B` accents, left rail
-with brand seal, top identity chip with "Voting Live" / "Voting Closed"
-status, 4- or 5-card KPI strip, 3-column workspace body.
+## Scope
 
-## Phase 1 — Shared shell + Judges landing dashboards (this turn)
+Update in place:
+- `/nominate/influencer-education-impact`
+- 7× `/nominate/platinum/:category`
+- 9× `/nominate/gold-blue-garnet/:category`
 
-1. **`ArenaShell`** — extract the layout in the mocks into
-   `src/components/arena/ArenaShell.tsx` (sidebar, header with Workspace ▼,
-   alerts, profile chip, footer integrity strip). Reused by both arenas.
-2. **`WorkspaceSwitcher`** — upgrade the existing switcher to only show
-   authorised workspaces (NRC / Judges / Governance / Admin) based on
-   `useAuth().roles`. Never grants a role.
-3. **Judges landing dashboards** — refactor `/judges`, `/judges/dashboard`,
-   `/judges-arena`, `/judges/pathways/:slug`, `/judges/results`,
-   `/judges/chat-rooms` to render the mock layouts (KPI strip + pathway
-   trio + chat room grid + results leaderboard). Existing data hooks kept.
-4. **NRC public landing `/nrc`** — mirror Judges landing with NRC identity
-   ("Verification • Research • Evidence • Dossier • Handover").
+Untouched: Icon page, /nominate hub, site nav/footer.
 
-## Phase 2 — NRC Arena routes (22 pages)
+## Design system (all 17 share it)
 
-Wire every route in your spec under `ArenaShell` with real navigation:
+Match the live Icon page exactly — reuse existing nav, announcement bars, hero shell, card/button/select components.
+- bg `#0c0e13`, card `#15181f`, border `#2b3140`
+- Single gold `#d9a441` / dim `#8a6f34` — strip any tier-specific hue (teal/silver/garnet-red) currently on these pages
+- Playfair display for headings, system sans for body
+
+## Section order (identical on every page)
+
+1. Hero — tier badge, H1, italic tagline, description, 3 buttons: `Start Nomination` (#nominate), `Explore Existing Nominees` (#nominees), `Back to All Categories` (/nominate)
+2. **Nomination form** (`#nominate`) — immediately after hero, not at the bottom
+3. About This Category — two-column: paragraphs + 3 pillars (NRC-Verified · Non-competitive · Certificate on approval)
+4. Certificate Categories / Recognition Pathways — subcategory cards (Influencer uses 3 full pathway blocks matching Icon)
+5. **EDI Matrix** (`#edi-matrix`) — 10 core dimensions, two-column, category-specific weighting note, PDF download button (new section on most pages)
+6. Existing Nominees (`#nominees`) — real data or honest empty state, never fabricated
+7. Footer integrity line — category-specific wording
+
+## Per-category form logic
+
+Category-specific step 1 → shared skeleton (Classification → Nominee info → Evidence (≥2 sources) → Nominator/Declaration → "what happens next" ending "Certificate of Recognition released immediately on approval — no endorsement threshold.")
+
+**Step 1 pathway selectors:**
+| Category | Selector |
+|---|---|
+| Influencer | pathway dropdown (Social Media / Sports / Music) → dependent recognition-area dropdown (10 each) |
+| 7 Platinum | single dropdown, 10 certificate options each (exact approved wording) |
+| CSR Africa, CSR Nigeria, NGO Africa | dual dropdown: region/zone → sector/programme |
+| EduTech, Media, NGO Nigeria, STEM, Creative Arts | single dropdown, 10–15 options |
+| Education-Friendly States | 6 certificate-name dropdown + 12-tag multi-select impact grid |
+
+**Classification sets:**
+- Influencer, 7 Platinum, CSR (Africa), EduTech, NGO (Africa), STEM → `African in Africa / Diaspora African / Friend of Africa`
+- CSR (Nigeria), Media (Nigeria), NGO (Nigeria), Creative Arts (Nigeria) → `Nigerian in Nigeria / Nigerian in Diaspora / Friend of Nigeria`
+- Education-Friendly States → "Nominating capacity": State Ministry / Citizen or resident / Institutional or NGO
+
+## Governance copy (verbatim per tier)
+
+- **Influencer** — "Not a competition. No judges, no public voting. Recognition is based entirely on Nominee Research Corps verification and category EDI Matrix assessment — never on follower count or fame."
+- **Platinum** — "Institutional recognition. No judges, no voting, no competition. Multiple organisations may be recognised in the same category after Nominee Research Corps verification and Governance approval."
+- **Gold-Blue Garnet** — "Entirely evidence-based. No judges, no voting, no ranking. Multiple organisations may be recognised per category, region, or sector."
+
+Footer integrity: "Recognition in this category is based on verified education contribution, not popularity or public vote — verified by the Nominee Research Corps and approved by Governance." (adapted per category, same structure)
+
+No 5,000-endorsement gate, no public-vote language, no AGC unlock on these 17 pages.
+
+## Empty nominees state (when zero verified)
 
 ```
-/nrc  /nrc/sign-in  /nrc/onboarding  /nrc/dashboard  /nrc/profile
-/nrc/directory  /nrc/teams  /nrc/teams/:slug
-/nrc/cases  /nrc/cases/:id  /nrc/evidence  /nrc/duplicates
-/nrc/endorsements  /nrc/handover/judges  /nrc/handover/governance
-/nrc/reports  /nrc/audit-log  /nrc/automation
-/nrc/profile/:reference
+🕊 No Verified Nominees Yet
+This category is newly open for nominations. Once nominees are accepted and
+verified by the Nominee Research Corps, their profiles will appear here.
 ```
+Real cards (photo, name, country, pathway tag, classification, verified-impact one-liner, NRC-Verified badge, profile link) only when the live DB returns verified rows for that category.
 
-Dashboard header renders the identity block (photo, NRC ref, tier, category,
-region, MFA, notifications) exactly like the Judges header in the mocks.
-KPI grid uses the tier-specific card set from your spec.
+## Technical plan
 
-## Phase 3 — Database (Phase Two schema)
+**Config-first — one shell, driven by data:**
 
-One migration adding: `nrc_profiles`, `nrc_profile_expertise`,
-`nrc_appointments`, `nrc_review_teams`, `nrc_team_members`,
-`nrc_case_assignments`, `nrc_case_reviews`, `nrc_secondary_reviews`,
-`nrc_quality_checks`, `nrc_evidence_items`, `nrc_evidence_versions`,
-`nrc_conflict_declarations`, `nrc_reassignments`, `nrc_escalations`,
-`nrc_public_endorsements`, `nrc_handoffs`, `nrc_performance_metrics`,
-`nrc_notifications`, `nrc_audit_logs`.
+1. `src/config/nominate2026/categoryContent.ts` (new) — for each of 17 category slugs:
+   - hero copy (H1, tagline, description)
+   - tier + tier badge label
+   - governance blurb key (influencer/platinum/gbg)
+   - classification set key (africa/nigeria/state-capacity)
+   - pathway selector shape (single / dependent / dual / dropdown-plus-tags) + option lists (exact approved wording)
+   - subcategory card list
+   - EDI weighting note + PDF href
+   - footer integrity sentence
+   - nominee-info field overrides (e.g. "Head librarian", "Jurisdiction")
 
-Every table gets `GRANT` block + RLS (member sees own + team; lead sees team;
-director sees all; judges/governance only see handover artefacts).
+2. `src/config/nominate2026/ediMatrix.ts` — already exists; reuse the 10 core dimensions per category. Verify all 17 slugs resolve; fill gaps.
 
-## Phase 4 — Automation engine (Phase One)
+3. `src/pages/nominate/NominateCategoryShell.tsx` — replace with the new 7-section layout above. Renders driven purely by `categoryContent[slug]`. Anchors `#nominate`, `#edi-matrix`, `#nominees` wired to hero buttons.
 
-Edge function `nrc-intake` + tables `nrc_intake_queue`,
-`nrc_duplicate_candidates`, `nrc_routing_decisions`, `nrc_auto_flags`.
-Runs the 9-step pipeline (validate → dedupe → classify → route → assign)
-and produces the `/nrc/automation` dashboard cards from your spec.
+4. New reusable sections under `src/components/nominate/category/`:
+   - `CategoryHero.tsx`
+   - `CategoryAboutPillars.tsx`
+   - `CategorySubcategoryCards.tsx` (+ `InfluencerPathwayBlocks.tsx` variant)
+   - `CategoryEDIMatrix.tsx` (two-column, PDF button, mobile stack)
+   - `CategoryExistingNominees.tsx` (queries verified nominees for the category via existing `nomineesApi`; empty state fallback)
+   - `CategoryFooterIntegrity.tsx`
 
-## Phase 5 — Handover pipelines
+5. Form (`src/components/nominate/category/CategoryNominationForm.tsx`) — reuses existing `NativeCategoryNominationForm` skeleton for Classification/Nominee/Evidence/Nominator/Declaration steps; step 1 renders one of 4 selector variants from config.
 
-Wire `/nrc/handover/judges` (Icon → locks dossier, notifies 3 pathway
-judges — reuses the existing `push_nominee_to_pathway` RPC) and
-`/nrc/handover/governance` (non-Icon → governance queue). Judges Arena
-receives handover records read-only.
+6. Strip old tier accent tokens (teal/silver/garnet-red) referenced by these pages — replace with shared gold token. Sweep only files these 17 pages import.
 
-## Out of scope for now
-- Real biometric MFA (uses existing Supabase MFA)
-- Governance Arena UI (separate track)
-- Public Impact Directory rebuild
+7. Mobile: EDI two-column → single; dual dropdowns stack; tag grid stacks.
 
-## Ship order this turn
-Phase 1 only — shared shell + Judges dashboards visually aligned to the
-mocks + `/nrc` landing. That gives you a reviewable foundation before
-touching schema. Reply "go phase 2" (or later) when ready to continue.
+## Out of scope
+
+- Icon page, /nominate hub, global nav/footer, unrelated routes
+- New nominee data (empty state only until DB has verified rows)
+- New UI dependencies
+
+## Deliverables
+
+- 1 new content config, 1 rewritten shell, 6 new section components, 1 form component
+- All 17 URLs render the unified structure; no route changes
+- Anchors verified; mobile stack verified; no fabricated nominees
