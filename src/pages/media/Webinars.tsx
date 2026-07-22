@@ -475,6 +475,9 @@ export default function Webinars() {
           </div>
         </section>
       </div>
+
+      <WebinarRegistrationDialog open={open} onOpenChange={setOpen} webinar={selected} />
     </>
   );
 }
+
