@@ -294,7 +294,7 @@ function DossiersPanel({ rows, selectedId, onSelect, selectedRow }: any) {
                 >
                   <div className="font-medium truncate">{r.nominee.name}</div>
                   <div className={`text-xs truncate ${selectedId === r.assignment.nominee_id ? "opacity-80" : "text-muted-foreground"}`}>
-                    {r.nominee.country || "—"} · {r.assignment.pipeline_status.replaceAll("_", " ")}
+                    {r.nominee.country || "—"} · {r.assignment.pipeline_status.replace(/_/g, " ")}
                   </div>
                 </button>
               ))}
@@ -379,7 +379,7 @@ function MyReviewPanel({ pathway, rows, reviews, userId, onSaved }: any) {
     setSaving(review.id);
     const { error } = await supabase
       .from("judge_nominee_reviews")
-      .update({ private_notes: notesById[review.nominee_id] || "", status: "IN_PROGRESS", started_at: new Date().toISOString() })
+      .update({ private_notes: notesById[review.nominee_id] || "", status: "in_progress", started_at: new Date().toISOString() })
       .eq("id", review.id);
     setSaving(null);
     if (error) toast({ title: "Save failed", description: error.message, variant: "destructive" });
@@ -389,7 +389,7 @@ function MyReviewPanel({ pathway, rows, reviews, userId, onSaved }: any) {
   const submitReview = async (review: Review) => {
     const { error } = await supabase
       .from("judge_nominee_reviews")
-      .update({ status: "SUBMITTED", submitted_at: new Date().toISOString(), private_notes: notesById[review.nominee_id] || review.private_notes })
+      .update({ status: "submitted", submitted_at: new Date().toISOString(), private_notes: notesById[review.nominee_id] || review.private_notes })
       .eq("id", review.id);
     if (error) toast({ title: "Submit failed", description: error.message, variant: "destructive" });
     else { toast({ title: "Review submitted" }); onSaved(); }
@@ -413,7 +413,7 @@ function MyReviewPanel({ pathway, rows, reviews, userId, onSaved }: any) {
                   <CardTitle className="text-base">{row.nominee.name}</CardTitle>
                   <CardDescription>{row.nominee.country || "—"}</CardDescription>
                 </div>
-                <Badge variant={rev.status === "SUBMITTED" ? "default" : "outline"}>{rev.status.replaceAll("_", " ")}</Badge>
+                <Badge variant={rev.status === "submitted" ? "default" : "outline"}>{rev.status.replace(/_/g, " ")}</Badge>
               </div>
             </CardHeader>
             <CardContent className="space-y-3">
@@ -422,13 +422,13 @@ function MyReviewPanel({ pathway, rows, reviews, userId, onSaved }: any) {
                 value={notesById[rev.nominee_id] ?? ""}
                 onChange={(e) => setNotesById((p) => ({ ...p, [rev.nominee_id]: e.target.value }))}
                 rows={5}
-                disabled={rev.status === "SUBMITTED" || rev.status === "LOCKED"}
+                disabled={rev.status === "submitted" || rev.status === "locked"}
               />
               <div className="flex gap-2">
-                <Button size="sm" variant="outline" onClick={() => saveNotes(rev)} disabled={saving === rev.id || rev.status === "SUBMITTED"}>
+                <Button size="sm" variant="outline" onClick={() => saveNotes(rev)} disabled={saving === rev.id || rev.status === "submitted"}>
                   {saving === rev.id ? <Loader2 className="h-4 w-4 animate-spin" /> : <Save className="h-4 w-4 mr-2" />} Save draft
                 </Button>
-                <Button size="sm" onClick={() => submitReview(rev)} disabled={rev.status === "SUBMITTED" || rev.status === "LOCKED"}>
+                <Button size="sm" onClick={() => submitReview(rev)} disabled={rev.status === "submitted" || rev.status === "locked"}>
                   <CheckCircle2 className="h-4 w-4 mr-2" /> Submit review
                 </Button>
               </div>
@@ -445,7 +445,7 @@ function ClarificationsPanel({ pathway, rows, requests, userId, isNRC, isJudge, 
   const [nomineeId, setNomineeId] = useState<string>("");
   const [section, setSection] = useState("");
   const [question, setQuestion] = useState("");
-  const [urgency, setUrgency] = useState("NORMAL");
+  const [urgency, setUrgency] = useState("normal");
   const [posting, setPosting] = useState(false);
   const [responses, setResponses] = useState<Record<string, string>>({});
 
@@ -456,7 +456,7 @@ function ClarificationsPanel({ pathway, rows, requests, userId, isNRC, isJudge, 
     setPosting(true);
     const { error } = await supabase.from("pathway_clarification_requests").insert({
       pathway_id: pathway.id, nominee_id: nomineeId, requested_by: userId,
-      dossier_section: section || null, question: question.trim(), urgency, status: "OPEN",
+      dossier_section: section || null, question: question.trim(), urgency: urgency.toLowerCase(), status: "open",
     });
     setPosting(false);
     if (error) toast({ title: "Failed", description: error.message, variant: "destructive" });
@@ -467,7 +467,7 @@ function ClarificationsPanel({ pathway, rows, requests, userId, isNRC, isJudge, 
     const txt = (responses[id] || "").trim();
     if (!txt) return;
     const { error } = await supabase.from("pathway_clarification_requests").update({
-      response_text: txt, responded_by: userId, responded_at: new Date().toISOString(), status: "RESPONDED",
+      response_text: txt, responded_by: userId, responded_at: new Date().toISOString(), status: "answered",
     }).eq("id", id);
     if (error) toast({ title: "Failed", description: error.message, variant: "destructive" });
     else { toast({ title: "Response sent" }); onChange(); }
@@ -488,10 +488,10 @@ function ClarificationsPanel({ pathway, rows, requests, userId, isNRC, isJudge, 
               <Select value={urgency} onValueChange={setUrgency}>
                 <SelectTrigger><SelectValue /></SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="LOW">Low</SelectItem>
-                  <SelectItem value="NORMAL">Normal</SelectItem>
-                  <SelectItem value="HIGH">High</SelectItem>
-                  <SelectItem value="URGENT">Urgent</SelectItem>
+                  <SelectItem value="low">Low</SelectItem>
+                  <SelectItem value="normal">Normal</SelectItem>
+                  <SelectItem value="high">High</SelectItem>
+                  <SelectItem value="urgent">Urgent</SelectItem>
                 </SelectContent>
               </Select>
             </div>
@@ -525,7 +525,7 @@ function ClarificationsPanel({ pathway, rows, requests, userId, isNRC, isJudge, 
                       </div>
                       <div className="flex gap-2">
                         <Badge variant="outline">{c.urgency}</Badge>
-                        <Badge variant={c.status === "RESPONDED" ? "default" : "secondary"}>{c.status}</Badge>
+                        <Badge variant={c.status === "answered" ? "default" : "secondary"}>{c.status}</Badge>
                       </div>
                     </div>
                     <p className="text-sm whitespace-pre-wrap">{c.question}</p>
