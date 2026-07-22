@@ -216,14 +216,16 @@ export default function Webinars() {
                 </p>
                 
                 <div className="flex flex-wrap justify-center lg:justify-start gap-4">
-                  <Button 
-                    size="lg" 
+                  <Button
+                    size="lg"
                     className="text-white border-0 shadow-lg"
                     style={{ backgroundColor: eduaidColors.green }}
+                    onClick={openNextWebinar}
                   >
                     <Calendar className="mr-2 h-5 w-5" />
                     Register for Next Webinar
                   </Button>
+
                   <Button 
                     size="lg" 
                     variant="outline" 
