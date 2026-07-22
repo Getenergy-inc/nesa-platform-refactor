@@ -92,11 +92,23 @@ export default function CategoryNominationForm({ content }: Props) {
     if (!nomineeCountry.trim()) return "Enter the nominee country.";
     if (!impactSummary.trim() || impactSummary.trim().length < 60)
       return "Provide an impact summary of at least 60 characters.";
+    if (!whatTheyDid.trim() || whatTheyDid.trim().length < 40)
+      return "Describe what the nominee did (min. 40 characters).";
+    if (!whoBenefited.trim()) return "Describe who benefited from their work.";
+    if (!timeframe.trim()) return "Specify the timeframe of the contribution.";
+    if (!measurableOutcomes.trim() || measurableOutcomes.trim().length < 40)
+      return "Provide measurable outcomes (min. 40 characters).";
     if (!evidence1.trim() || !evidence2.trim())
       return "Provide at least two independent evidence sources.";
+    if (!eligibilityConfirmed)
+      return "You must confirm the eligibility criteria before submitting.";
     if (!nominatorName.trim() || !nominatorEmail.trim())
       return "Enter your name and email.";
-    if (!declaration) return "You must confirm the declaration to submit.";
+    if (!nominatorCountry.trim())
+      return "Enter your country of residence.";
+    if (!nominatorConsent)
+      return "You must consent to being contacted about this nomination.";
+    if (!declaration) return "You must confirm the non-influence declaration to submit.";
     return null;
   }
 
