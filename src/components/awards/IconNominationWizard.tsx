@@ -349,7 +349,9 @@ export function IconNominationWizard({
         state.q_sustainability,
       ].join("\n\n");
 
-      const ediBlock = EDI_DIMENSIONS.map((d) => `${d.label}: ${state[d.key]}`).join("\n\n");
+      const ediBlock = ediIndicators
+        .map((d) => `${d.label}: ${state[d.id]}`)
+        .join("\n\n");
 
       const { data, error } = await supabase.functions.invoke("nominations-submit", {
         body: {
