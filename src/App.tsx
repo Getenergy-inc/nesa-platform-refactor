@@ -102,6 +102,7 @@ import IconJuryAdminDashboard from "./pages/iconJury/AdminDashboard";
 import IconJuryAuditTrailPage from "./pages/iconJury/AuditTrail";
 import IconJuryAdminAuditTrailPage from "./pages/iconJury/AdminAuditTrail";
 import JudgesArenaLanding from "./pages/judges/JudgesArenaLanding";
+import JudgesEntry from "./pages/judges/JudgesEntry";
 import GrandJuryVotingHub from "./pages/judges/GrandJuryVotingHub";
 import GrandJuryGroupBallot from "./pages/judges/GrandJuryGroupBallot";
 import GovernanceReviewDashboard from "./pages/judges/GovernanceReviewDashboard";
@@ -2621,6 +2622,7 @@ const App = () => (
 
                   {/* Africa Education Icon — Judges Arena (public + isolated jury portal) */}
                   <Route path="/judges" element={<JudgesArenaLanding />} />
+                  <Route path="/judges/enter" element={<JudgesEntry />} />
                   <Route path="/judges/sign-in" element={<IconJurySignIn />} />
                   <Route path="/icon-jury/sign-in" element={<Navigate to="/judges/sign-in" replace />} />
                   <Route
