@@ -71,6 +71,21 @@ function render(template: string, subject: string, payload: any): { subject: str
            <p style="color:#999;font-size:13px">Category: ${p.award_category_slug ?? "—"} · Family: ${p.award_family ?? "—"}</p>`,
         ),
       };
+    case "webinar_confirmation":
+      return {
+        subject: subject || `You're registered — ${p.webinar_title ?? "NESA-Africa Webinar"}`,
+        html: shell(
+          `You're registered, ${p.full_name ?? "friend"}!`,
+          `<p>Thank you for reserving your seat for the pre-award session below. We look forward to hosting you.</p>
+           <p style="background:#0f0f0f;border:1px solid #2a2a2a;border-radius:8px;padding:16px">
+             <strong style="color:${BRAND}">${p.webinar_title ?? "NESA-Africa Webinar"}</strong><br>
+             <span style="color:#bbb">${p.webinar_date ?? ""}${p.webinar_time ? " · " + p.webinar_time : ""}</span>
+           </p>
+           <p>Add it to your calendar and share with a peer who enables education for all across Africa.</p>
+           <p>${button(p.calendar_url ?? "#", "Add to calendar", BRAND)} ${button(p.details_url ?? "#", "Session details", "#444")}</p>
+           <p style="color:#999;font-size:13px">Confirmation ID: ${p.registration_id ?? "—"}</p>`,
+        ),
+      };
     default:
       return {
         subject: subject || "NESA-Africa notification",
@@ -78,6 +93,7 @@ function render(template: string, subject: string, payload: any): { subject: str
       };
   }
 }
+
 
 Deno.serve(async (req) => {
   if (req.method === "OPTIONS") return new Response("ok", { headers: corsHeaders });
