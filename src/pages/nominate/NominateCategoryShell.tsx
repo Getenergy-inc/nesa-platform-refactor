@@ -17,7 +17,7 @@ import {
   type TierSlug,
   type NominationFormMeta,
 } from "@/config/nominate2026/forms";
-import { EDI_MATRIX_GENERIC } from "@/config/nominate2026/ediMatrix";
+import { getEDIMatrix } from "@/config/nominate2026/ediMatrix";
 
 interface Props {
   /** For Tier 1 & 2 the tier slug is also the category slug. */
