@@ -120,7 +120,7 @@ Deno.serve(async (req) => {
   if (!parsed.success) {
     return json(400, { error: "Validation failed", details: parsed.error.flatten() });
   }
-  const { nominator, nomination } = parsed.data;
+  const { nominator, nomination, edi } = parsed.data;
 
   // Honeypot — silently accept but do nothing (bot filled hidden field)
   if (nomination.company_website && nomination.company_website.length > 0) {
@@ -128,6 +128,25 @@ Deno.serve(async (req) => {
   }
   if (!nominator.consent) {
     return json(400, { error: "Consent is required" });
+  }
+
+  // Strict server-side EDI validation. Ratings must match the resolved
+  // category-specific matrix — no extra slots, no missing slots, allowed values only.
+  let ediValidated: { matrixKey: string; matrixVersion: string; ratings: Record<string, string> } | null = null;
+  if (edi) {
+    const result = validateEDIRatings({
+      tier: edi.tier,
+      category: edi.category,
+      pathway: edi.pathway ?? null,
+      version: edi.version ?? null,
+      ratings: edi.ratings,
+    });
+    if (!result.ok) return json(400, { error: result.error });
+    ediValidated = {
+      matrixKey: result.matrixKey,
+      matrixVersion: result.matrixVersion,
+      ratings: result.ratings,
+    };
   }
 
   const supabaseUrl = Deno.env.get("SUPABASE_URL")!;
