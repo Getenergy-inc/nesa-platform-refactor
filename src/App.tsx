@@ -1997,10 +1997,36 @@ const App = () => (
                     }
                   />
 
-                  {/* NRC Portal Routes (Legacy) — canonical entry is now the
-                      Volunteer Dashboard per the master register. */}
-                  <Route path="/nrc" element={<Navigate to="/dashboard/volunteer" replace />} />
-                  <Route path="/nrc/portal" element={<Navigate to="/dashboard/volunteer" replace />} />
+                  {/* NRC Arena — public landing + secure workspace shell. */}
+                  <Route path="/nrc" element={<NRCArenaIndex />} />
+                  <Route path="/nrc/sign-in" element={<NRCSignIn />} />
+                  <Route path="/nrc/portal" element={<Navigate to="/nrc" replace />} />
+                  <Route
+                    path="/nrc/onboarding"
+                    element={<NRCProtectedRoute><NRCOnboarding /></NRCProtectedRoute>}
+                  />
+                  <Route
+                    path="/nrc/profile"
+                    element={<NRCProtectedRoute><NRCProfile /></NRCProtectedRoute>}
+                  />
+                  <Route
+                    path="/nrc/profile/:nrcReference"
+                    element={<NRCProtectedRoute><NRCProfile /></NRCProtectedRoute>}
+                  />
+                  <Route
+                    path="/nrc/directory"
+                    element={<NRCProtectedRoute><NRCDirectory /></NRCProtectedRoute>}
+                  />
+                  <Route
+                    path="/nrc/teams"
+                    element={<NRCProtectedRoute><NRCTeams /></NRCProtectedRoute>}
+                  />
+                  <Route
+                    path="/nrc/teams/:teamSlug"
+                    element={<NRCProtectedRoute><NRCTeamDetail /></NRCProtectedRoute>}
+                  />
+
+                  {/* NRC operational pages (legacy screens retained) */}
                   <Route path="/nrc/my-queue" element={<NRCMyQueue />} />
                   <Route path="/nrc/members" element={<NRCMembersPage />} />
                   <Route path="/nrc/settings" element={<NRCSettings />} />
@@ -2009,8 +2035,11 @@ const App = () => (
                     element={<NRCScoringDashboard />}
                   />
 
-                  {/* NRC Dashboard Routes (New Professional Dashboard) */}
-                  <Route path="/nrc/dashboard" element={<NRCDashboardHome />} />
+                  {/* NRC Dashboard — new arena dashboard */}
+                  <Route
+                    path="/nrc/dashboard"
+                    element={<NRCProtectedRoute><NRCArenaDashboard /></NRCProtectedRoute>}
+                  />
                   <Route
                     path="/nrc/dashboard/nominees"
                     element={<NRCNomineeTable />}
