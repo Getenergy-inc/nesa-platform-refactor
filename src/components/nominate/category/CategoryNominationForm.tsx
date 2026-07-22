@@ -44,9 +44,23 @@ export default function CategoryNominationForm({ content }: Props) {
   const [nomineeCountry, setNomineeCountry] = useState("");
   const [nomineeLeadership, setNomineeLeadership] = useState("");
   const [impactSummary, setImpactSummary] = useState("");
+  // Structured evidence — replaces thin "website / social link" fields.
+  const [whatTheyDid, setWhatTheyDid] = useState("");
+  const [whoBenefited, setWhoBenefited] = useState("");
+  const [timeframe, setTimeframe] = useState("");
+  const [measurableOutcomes, setMeasurableOutcomes] = useState("");
   const [evidence1, setEvidence1] = useState("");
   const [evidence2, setEvidence2] = useState("");
   const [evidence3, setEvidence3] = useState("");
+  // Eligibility gate — must be affirmed before submission.
+  const [eligibilityConfirmed, setEligibilityConfirmed] = useState(false);
+  const [nominatorName, setNominatorName] = useState("");
+  const [nominatorEmail, setNominatorEmail] = useState("");
+  const [nominatorPhone, setNominatorPhone] = useState("");
+  const [nominatorCountry, setNominatorCountry] = useState("");
+  const [nominatorConsent, setNominatorConsent] = useState(false);
+  const [declaration, setDeclaration] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
   const [nominatorName, setNominatorName] = useState("");
   const [nominatorEmail, setNominatorEmail] = useState("");
   const [declaration, setDeclaration] = useState(false);
