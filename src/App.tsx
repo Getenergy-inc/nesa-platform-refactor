@@ -1009,7 +1009,7 @@ const App = () => (
                     path="/awards/africa-education-icon"
                     element={
                       <WithLayout>
-                        <AwardCategoryRoute config={ICON_CATEGORY} />
+                        <AfricaEducationIconRefactored />
                       </WithLayout>
                     }
                   />
