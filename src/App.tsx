@@ -102,6 +102,7 @@ import IconJuryAdminDashboard from "./pages/iconJury/AdminDashboard";
 import IconJuryAuditTrailPage from "./pages/iconJury/AuditTrail";
 import IconJuryAdminAuditTrailPage from "./pages/iconJury/AdminAuditTrail";
 import JudgesArenaLanding from "./pages/judges/JudgesArenaLanding";
+import JudgesEntry from "./pages/judges/JudgesEntry";
 import GrandJuryVotingHub from "./pages/judges/GrandJuryVotingHub";
 import GrandJuryGroupBallot from "./pages/judges/GrandJuryGroupBallot";
 import GovernanceReviewDashboard from "./pages/judges/GovernanceReviewDashboard";
