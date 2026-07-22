@@ -22,6 +22,7 @@ import { useAuth } from "@/contexts/AuthContext";
 import { useDraftPersistence } from "@/features/nominate/useDraftPersistence";
 import { AccountAtSubmitPanel } from "@/features/nominate/AccountAtSubmitPanel";
 import { trackEvent } from "@/lib/analytics";
+import { getEDIMatrix, type EDIIndicator } from "@/config/nominate2026/ediMatrix";
 
 // ─────────────────────────── Taxonomy ───────────────────────────
 const PATHWAYS = [
@@ -48,7 +49,22 @@ const CLASSIFICATIONS = [
   { slug: "friend-of-africa", label: "Friend of Africa" },
 ] as const;
 
-const EDI_DIMENSIONS = [
+// Stable EDI slot keys — every category-specific matrix uses these same
+// 8 slots (labels/descriptions differ). Wizard state addresses them by key,
+// so validation stays constant while rendering adapts per pathway/category.
+const EDI_SLOT_KEYS = [
+  "edi_lifetime_impact",
+  "edi_scale_reach",
+  "edi_inclusion_equity",
+  "edi_innovation",
+  "edi_sustainability",
+  "edi_leadership",
+  "edi_continental_relevance",
+  "edi_evidence_quality",
+] as const;
+
+// Kept for legacy callers/tests that expect a labelled dimension list.
+const EDI_DIMENSIONS: ReadonlyArray<{ key: (typeof EDI_SLOT_KEYS)[number]; label: string }> = [
   { key: "edi_lifetime_impact", label: "Lifetime education impact" },
   { key: "edi_scale_reach", label: "Scale and reach" },
   { key: "edi_inclusion_equity", label: "Inclusion and equity" },
@@ -57,7 +73,7 @@ const EDI_DIMENSIONS = [
   { key: "edi_leadership", label: "Leadership and integrity" },
   { key: "edi_evidence_quality", label: "Evidence quality" },
   { key: "edi_continental_relevance", label: "Continental relevance" },
-] as const;
+];
 
 const EVIDENCE_CHIPS = [
   "Website links",
@@ -245,11 +261,17 @@ export function validateStep(step: number, s: WizardState): string | null {
 interface Props {
   ediDownloadHref?: string;
   ediViewHref?: string;
+  /** Tier slug — defaults to Africa Education Icon so existing callers keep working. */
+  tier?: string;
+  /** Category slug — defaults to africa-education-icon. */
+  category?: string;
 }
 
 export function IconNominationWizard({
   ediDownloadHref = "/downloads/nesa-africa-2026-edi-matrix.pdf",
   ediViewHref = "#edi-matrix",
+  tier = "africa-education-icon",
+  category = "africa-education-icon",
 }: Props) {
   const { user } = useAuth();
   const [step, setStep] = useState(0);
@@ -258,6 +280,14 @@ export function IconNominationWizard({
   const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [reference, setReference] = useState<string | null>(null);
+
+  // Category/pathway-specific EDI matrix (label + description overrides).
+  // Slot keys are stable across matrices, so state and validation remain intact.
+  const ediMatrix = useMemo(
+    () => getEDIMatrix(tier, category, state.pathway || undefined),
+    [tier, category, state.pathway],
+  );
+  const ediIndicators: EDIIndicator[] = ediMatrix.indicators;
 
   const { draftToken, hydratedValues, clearDraft } = useDraftPersistence<WizardState>(
     "icon-award-wizard-2026",
@@ -319,7 +349,9 @@ export function IconNominationWizard({
         state.q_sustainability,
       ].join("\n\n");
 
-      const ediBlock = EDI_DIMENSIONS.map((d) => `${d.label}: ${state[d.key]}`).join("\n\n");
+      const ediBlock = ediIndicators
+        .map((d) => `${d.label}: ${state[d.id]}`)
+        .join("\n\n");
 
       const { data, error } = await supabase.functions.invoke("nominations-submit", {
         body: {
@@ -542,23 +574,27 @@ export function IconNominationWizard({
         {step === 4 && (
           <div className="grid gap-6 lg:grid-cols-[1fr,280px]">
             <div className="grid gap-4">
-              {EDI_DIMENSIONS.map((d) => (
+              <div className="text-xs text-foreground/70 -mb-1">
+                Category matrix: <span className="text-gold/90">{ediMatrix.title}</span>
+              </div>
+              {ediIndicators.map((d) => (
                 <FieldTextarea
-                  key={d.key}
+                  key={d.id}
                   required
                   label={d.label}
-                  value={String(state[d.key] ?? "")}
-                  onChange={(v) => set(d.key, v)}
+                  helper={d.description}
+                  value={String(state[d.id] ?? "")}
+                  onChange={(v) => set(d.id, v)}
                 />
               ))}
             </div>
             <aside className="lg:sticky lg:top-6 h-max rounded-xl border border-gold/25 bg-charcoal/50 p-4 space-y-3">
               <div className="text-xs uppercase tracking-wider text-gold font-semibold">
-                EDI Matrix (reference)
+                {ediMatrix.title}
               </div>
               <div className="flex flex-wrap gap-1.5">
-                {EDI_DIMENSIONS.map((d) => (
-                  <Badge key={d.key} variant="outline" className="border-gold/30 text-gold/90 text-[10px]">
+                {ediIndicators.map((d) => (
+                  <Badge key={d.id} variant="outline" className="border-gold/30 text-gold/90 text-[10px]">
                     {d.label}
                   </Badge>
                 ))}

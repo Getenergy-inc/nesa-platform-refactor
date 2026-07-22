@@ -61,7 +61,7 @@
 /cookie-policy                                               /policies            301
 /language                                                    /                    301
 
-# --- 2. SPA routes (467 explicit paths from src/App.tsx) ---
+# --- 2. SPA routes (471 explicit paths from src/App.tsx) ---
 /recognition/influencer-education-impact/african-sports-icons-supporting-education /index.html          200
 /recognition/influencer-education-impact/african-music-icons-supporting-education /index.html          200
 /recognition/influencer-education-impact/african-social-media-influencers /index.html          200
@@ -98,12 +98,14 @@
 /get-involved/enabler-page-sponsorship                       /index.html          200
 /awards/platinum-recognition/diaspora                        /index.html          200
 /categories/diaspora-education-impact                        /index.html          200
+/nominate/influencer-education-impact                        /index.html          200
 /nominees/africa-education-icon-award                        /index.html          200
 /awards/blue-garnet-categories/:slug                         /index.html          200
 /awards/influencers-education-impact                         /index.html          200
 /category/christian-education-africa                         /index.html          200
 /education-enablers/edtech/prospects                         /index.html          200
 /impact/regional-school-intervention                         /index.html          200
+/nominate/gold-blue-garnet/:category                         /index.html          200
 /nominate/official/:family/:category                         /index.html          200
 /awards/18-categories/:categorySlug                          /index.html          200
 /awards/gold-blue-garnet/categories                          /index.html          200
@@ -137,6 +139,7 @@
 /category/stem-education-africa                              /index.html          200
 /get-involved/media-partnership                              /index.html          200
 /guidelines/impact-storytelling                              /index.html          200
+/nominate/africa-education-icon                              /index.html          200
 /awards/blue-garnet-categories                               /index.html          200
 /awards/category/:categorySlug                               /index.html          200
 /category/csr-education-africa                               /index.html          200
@@ -152,6 +155,7 @@
 /awards/platinum-recognition                                 /index.html          200
 /category/diaspora-education                                 /index.html          200
 /impact/afri-edutourism-2027                                 /index.html          200
+/nominate/platinum/:category                                 /index.html          200
 /nrc/dashboard/edi-analytics                                 /index.html          200
 /recognition/:tier/:category                                 /index.html          200
 /awards/global-partnerships                                  /index.html          200

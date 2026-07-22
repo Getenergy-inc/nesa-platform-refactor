@@ -17,7 +17,7 @@ import {
   type TierSlug,
   type NominationFormMeta,
 } from "@/config/nominate2026/forms";
-import { EDI_MATRIX_GENERIC } from "@/config/nominate2026/ediMatrix";
+import { getEDIMatrix } from "@/config/nominate2026/ediMatrix";
 
 interface Props {
   /** For Tier 1 & 2 the tier slug is also the category slug. */
@@ -206,36 +206,40 @@ export default function NominateCategoryShell({ fixedTier, fixedCategory }: Prop
 
             {/* EDI matrix + verification route */}
             <div className="space-y-6">
-              <Card className="border-gold/25 bg-charcoal-light/30">
-                <CardHeader>
-                  <CardTitle className="text-lg text-gold">
-                    Category EDI Matrix
-                  </CardTitle>
-                  <CardDescription>
-                    Ten evidence-driven indicators used to assess this
-                    category. Category-specific weighting is applied by the
-                    NRC.
-                  </CardDescription>
-                </CardHeader>
-                <CardContent className="space-y-2">
-                  {EDI_MATRIX_GENERIC.map((i, idx) => (
-                    <div
-                      key={i.id}
-                      className="rounded-md border border-gold/15 bg-black/30 p-2.5"
-                    >
-                      <div className="text-xs font-semibold text-gold">
-                        <span className="mr-1 font-mono text-foreground/60">
-                          {String(idx + 1).padStart(2, "0")}
-                        </span>
-                        {i.label}
-                      </div>
-                      <p className="text-[11px] leading-relaxed text-foreground/70">
-                        {i.description}
-                      </p>
-                    </div>
-                  ))}
-                </CardContent>
-              </Card>
+              {(() => {
+                const matrix = getEDIMatrix(tier, category);
+                return (
+                  <Card className="border-gold/25 bg-charcoal-light/30">
+                    <CardHeader>
+                      <CardTitle className="text-lg text-gold">
+                        {matrix.title}
+                      </CardTitle>
+                      <CardDescription>
+                        Category-specific indicators used by the NRC to assess
+                        every nomination in this category.
+                      </CardDescription>
+                    </CardHeader>
+                    <CardContent className="space-y-2">
+                      {matrix.indicators.map((i, idx) => (
+                        <div
+                          key={i.id}
+                          className="rounded-md border border-gold/15 bg-black/30 p-2.5"
+                        >
+                          <div className="text-xs font-semibold text-gold">
+                            <span className="mr-1 font-mono text-foreground/60">
+                              {String(idx + 1).padStart(2, "0")}
+                            </span>
+                            {i.label}
+                          </div>
+                          <p className="text-[11px] leading-relaxed text-foreground/70">
+                            {i.description}
+                          </p>
+                        </div>
+                      ))}
+                    </CardContent>
+                  </Card>
+                );
+              })()}
 
               <Card className="border-gold/25 bg-charcoal-light/30">
                 <CardHeader>
