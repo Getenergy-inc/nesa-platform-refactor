@@ -44,11 +44,21 @@ export default function CategoryNominationForm({ content }: Props) {
   const [nomineeCountry, setNomineeCountry] = useState("");
   const [nomineeLeadership, setNomineeLeadership] = useState("");
   const [impactSummary, setImpactSummary] = useState("");
+  // Structured evidence — replaces thin "website / social link" fields.
+  const [whatTheyDid, setWhatTheyDid] = useState("");
+  const [whoBenefited, setWhoBenefited] = useState("");
+  const [timeframe, setTimeframe] = useState("");
+  const [measurableOutcomes, setMeasurableOutcomes] = useState("");
   const [evidence1, setEvidence1] = useState("");
   const [evidence2, setEvidence2] = useState("");
   const [evidence3, setEvidence3] = useState("");
+  // Eligibility gate — must be affirmed before submission.
+  const [eligibilityConfirmed, setEligibilityConfirmed] = useState(false);
   const [nominatorName, setNominatorName] = useState("");
   const [nominatorEmail, setNominatorEmail] = useState("");
+  const [nominatorPhone, setNominatorPhone] = useState("");
+  const [nominatorCountry, setNominatorCountry] = useState("");
+  const [nominatorConsent, setNominatorConsent] = useState(false);
   const [declaration, setDeclaration] = useState(false);
   const [submitting, setSubmitting] = useState(false);
 
@@ -82,11 +92,23 @@ export default function CategoryNominationForm({ content }: Props) {
     if (!nomineeCountry.trim()) return "Enter the nominee country.";
     if (!impactSummary.trim() || impactSummary.trim().length < 60)
       return "Provide an impact summary of at least 60 characters.";
+    if (!whatTheyDid.trim() || whatTheyDid.trim().length < 40)
+      return "Describe what the nominee did (min. 40 characters).";
+    if (!whoBenefited.trim()) return "Describe who benefited from their work.";
+    if (!timeframe.trim()) return "Specify the timeframe of the contribution.";
+    if (!measurableOutcomes.trim() || measurableOutcomes.trim().length < 40)
+      return "Provide measurable outcomes (min. 40 characters).";
     if (!evidence1.trim() || !evidence2.trim())
       return "Provide at least two independent evidence sources.";
+    if (!eligibilityConfirmed)
+      return "You must confirm the eligibility criteria before submitting.";
     if (!nominatorName.trim() || !nominatorEmail.trim())
       return "Enter your name and email.";
-    if (!declaration) return "You must confirm the declaration to submit.";
+    if (!nominatorCountry.trim())
+      return "Enter your country of residence.";
+    if (!nominatorConsent)
+      return "You must consent to being contacted about this nomination.";
+    if (!declaration) return "You must confirm the non-influence declaration to submit.";
     return null;
   }
 
@@ -114,9 +136,18 @@ export default function CategoryNominationForm({ content }: Props) {
         nomineeCountry,
         nomineeLeadership,
         impactSummary,
+        whatTheyDid,
+        whoBenefited,
+        timeframe,
+        measurableOutcomes,
         evidence: [evidence1, evidence2, evidence3].filter(Boolean),
+        eligibilityConfirmed,
         nominatorName,
         nominatorEmail,
+        nominatorPhone,
+        nominatorCountry,
+        nominatorConsent,
+        declaration,
         createdAt: new Date().toISOString(),
       };
       localStorage.setItem(draftKey, JSON.stringify(draft));
@@ -135,11 +166,19 @@ export default function CategoryNominationForm({ content }: Props) {
       setNomineeCountry("");
       setNomineeLeadership("");
       setImpactSummary("");
+      setWhatTheyDid("");
+      setWhoBenefited("");
+      setTimeframe("");
+      setMeasurableOutcomes("");
       setEvidence1("");
       setEvidence2("");
       setEvidence3("");
+      setEligibilityConfirmed(false);
       setNominatorName("");
       setNominatorEmail("");
+      setNominatorPhone("");
+      setNominatorCountry("");
+      setNominatorConsent(false);
       setDeclaration(false);
     } finally {
       setSubmitting(false);
@@ -210,26 +249,60 @@ export default function CategoryNominationForm({ content }: Props) {
         </div>
       </fieldset>
 
-      {/* Step 4 — Evidence of impact */}
+      {/* Step 4 — Structured evidence of impact */}
       <fieldset className="space-y-4">
         <legend className="font-playfair text-xl text-gold">4. Evidence of education impact</legend>
         <Field label="Impact summary (min. 60 characters)" required>
           <Textarea
-            rows={4}
+            rows={3}
             value={impactSummary}
             onChange={(e) => setImpactSummary(e.target.value)}
-            placeholder="Describe the verified educational contribution — outcomes, learners reached, timeframe."
+            placeholder="One-paragraph overview of the verified contribution."
           />
         </Field>
+        <div className="grid gap-4 md:grid-cols-2">
+          <Field label="What did they do?" required>
+            <Textarea
+              rows={3}
+              value={whatTheyDid}
+              onChange={(e) => setWhatTheyDid(e.target.value)}
+              placeholder="Concrete actions, programmes, or interventions delivered."
+            />
+          </Field>
+          <Field label="Who benefited?" required>
+            <Textarea
+              rows={3}
+              value={whoBenefited}
+              onChange={(e) => setWhoBenefited(e.target.value)}
+              placeholder="Learner groups, communities, institutions reached."
+            />
+          </Field>
+          <Field label="Timeframe" required>
+            <Input
+              value={timeframe}
+              onChange={(e) => setTimeframe(e.target.value)}
+              placeholder="e.g. 2018 – present, or Jan 2022 – Dec 2024"
+            />
+          </Field>
+          <Field label="Measurable outcomes" required>
+            <Textarea
+              rows={3}
+              value={measurableOutcomes}
+              onChange={(e) => setMeasurableOutcomes(e.target.value)}
+              placeholder="Numbers, verified results, third-party reports."
+            />
+          </Field>
+        </div>
         <div className="space-y-3">
           <p className="text-sm text-foreground/75">
             Provide at least <span className="text-gold">two independent evidence sources</span>{" "}
-            (URLs, reports, verifiable references). A third is encouraged.
+            (URLs, reports, testimonials). A third is encouraged. File uploads coming shortly —
+            for now, link to hosted documents.
           </p>
-          <Field label="Evidence source 1" required>
+          <Field label="Evidence source 1 (URL)" required>
             <Input value={evidence1} onChange={(e) => setEvidence1(e.target.value)} placeholder="https://…" />
           </Field>
-          <Field label="Evidence source 2" required>
+          <Field label="Evidence source 2 (URL)" required>
             <Input value={evidence2} onChange={(e) => setEvidence2(e.target.value)} placeholder="https://…" />
           </Field>
           <Field label="Evidence source 3 (optional)">
@@ -238,9 +311,27 @@ export default function CategoryNominationForm({ content }: Props) {
         </div>
       </fieldset>
 
-      {/* Step 5 — Nominator + declaration */}
+      {/* Step 5 — Eligibility self-check */}
+      <fieldset className="space-y-3">
+        <legend className="font-playfair text-xl text-gold">5. Eligibility self-check</legend>
+        <label className="flex items-start gap-3 rounded-lg border border-gold/30 bg-gold/5 p-3">
+          <Checkbox
+            checked={eligibilityConfirmed}
+            onCheckedChange={(v) => setEligibilityConfirmed(v === true)}
+            className="mt-0.5"
+          />
+          <span className="text-xs text-foreground/85">
+            I confirm the nominee meets the published eligibility criteria for{" "}
+            <span className="text-gold">{content.hero.h1}</span> — including documented
+            contribution period, verifiable impact, and alignment with the category's Education
+            Development Index indicators shown above.
+          </span>
+        </label>
+      </fieldset>
+
+      {/* Step 6 — Nominator identity + consent */}
       <fieldset className="space-y-4">
-        <legend className="font-playfair text-xl text-gold">5. Nominator &amp; declaration</legend>
+        <legend className="font-playfair text-xl text-gold">6. Nominator identity</legend>
         <div className="grid gap-4 md:grid-cols-2">
           <Field label="Your full name" required>
             <Input value={nominatorName} onChange={(e) => setNominatorName(e.target.value)} />
@@ -252,20 +343,51 @@ export default function CategoryNominationForm({ content }: Props) {
               onChange={(e) => setNominatorEmail(e.target.value)}
             />
           </Field>
+          <Field label="Phone (optional)">
+            <Input value={nominatorPhone} onChange={(e) => setNominatorPhone(e.target.value)} />
+          </Field>
+          <Field label="Country of residence" required>
+            <Input value={nominatorCountry} onChange={(e) => setNominatorCountry(e.target.value)} />
+          </Field>
         </div>
         <label className="flex items-start gap-3 rounded-lg border border-gold/20 bg-black/30 p-3">
+          <Checkbox
+            checked={nominatorConsent}
+            onCheckedChange={(v) => setNominatorConsent(v === true)}
+            className="mt-0.5"
+          />
+          <span className="text-xs text-foreground/80">
+            I consent to being contacted by the Nominee Research Corps for evidence verification
+            and clarification questions relating to this nomination.
+          </span>
+        </label>
+      </fieldset>
+
+      {/* Persistent NON-INFLUENCE DISCLAIMER — always visible pre-submit */}
+      <div className="rounded-lg border-2 border-gold/40 bg-gold/10 p-4">
+        <div className="mb-2 flex items-center gap-2 text-sm font-semibold text-gold">
+          <ShieldCheck className="h-4 w-4" />
+          Non-influence disclaimer — read before submitting
+        </div>
+        <p className="text-xs leading-relaxed text-foreground/85">
+          Your submission does <span className="text-gold">not</span> automatically make the
+          nominee a finalist, winner, or honouree. All submissions are subject to eligibility
+          review, evidence review, duplicate checks, verification by the Nominee Research
+          Corps, and governance/judging review. Sponsorship, donation, ticket purchase, or
+          gala attendance does <span className="text-gold">not</span> influence outcomes.
+        </p>
+        <label className="mt-3 flex items-start gap-3">
           <Checkbox
             checked={declaration}
             onCheckedChange={(v) => setDeclaration(v === true)}
             className="mt-0.5"
           />
-          <span className="text-xs text-foreground/80">
-            I confirm the information above is accurate to the best of my knowledge, that the
-            nominee's contribution to education is verifiable, and that I understand recognition
-            depends on Nominee Research Corps verification and Governance approval.
+          <span className="text-xs text-foreground/85">
+            I have read and understood the non-influence disclaimer above, and confirm the
+            information I have submitted is accurate to the best of my knowledge.
           </span>
         </label>
-      </fieldset>
+      </div>
 
       {/* What happens next */}
       <div className="rounded-lg border border-gold/25 bg-black/30 p-4 text-xs text-foreground/80">
@@ -274,11 +396,13 @@ export default function CategoryNominationForm({ content }: Props) {
         </div>
         <ol className="ml-4 list-decimal space-y-1">
           <li>Submission captured &amp; nominee notified.</li>
-          <li>Nominee Research Corps verifies evidence against the category EDI Matrix.</li>
-          <li>Governance approves verified nominations.</li>
+          <li>NRC Phase One (automated screening + duplicate detection).</li>
+          <li>NRC Phase Two (human evidence verification against the category EDI Matrix).</li>
+          <li>Nominee acceptance &amp; correction window.</li>
+          <li>Governance approval.</li>
           <li>
             <span className="text-gold">
-              Certificate of Recognition released immediately on approval — no endorsement threshold.
+              Certificate of Recognition released after nominee acceptance and Governance approval.
             </span>
           </li>
         </ol>

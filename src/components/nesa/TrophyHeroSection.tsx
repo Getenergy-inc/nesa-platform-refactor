@@ -10,6 +10,7 @@ import stageBackdrop1080 from "@/assets/nesa-stage-backdrop-1080.webp";
 import blueGarnetTrophyIcon from "@/assets/blue-garnet-trophy-icon.png";
 import blueGarnetTrophyWinners from "@/assets/blue-garnet-trophy-winners.png";
 import { HeroCTAStack } from "@/components/nesa/HeroCTAStack";
+import { useSiteStats } from "@/config/siteStats";
 
 const CAROUSEL_ITEMS = ["trophy-icon", "trophy-winners", "logo"] as const;
 type CarouselItem = typeof CAROUSEL_ITEMS[number];
@@ -18,6 +19,7 @@ export function TrophyHeroSection() {
   const { t } = useTranslation("pages");
   const [currentItem, setCurrentItem] = useState<CarouselItem>("trophy-icon");
   const shouldReduceMotion = useReducedMotion();
+  const stats = useSiteStats();
 
   useEffect(() => {
     if (shouldReduceMotion) return;
@@ -129,11 +131,11 @@ export function TrophyHeroSection() {
               aria-label="NESA-Africa 2026 recognition architecture at a glance"
             >
               {[
-                "4 Tiers",
-                "18 Categories",
-                "96 Subcategories",
-                "8 African Regions",
-                "2 Global Communities",
+                `${stats.tiers} Tiers`,
+                `${stats.categories} Categories`,
+                `${stats.subcategories} Subcategories`,
+                `${stats.africanRegions} African Regions`,
+                `${stats.globalCommunities} Global Communities`,
               ].map((chip) => (
                 <li
                   key={chip}
