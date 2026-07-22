@@ -8,6 +8,7 @@
 // nominations (RLS blocks anonymous direct inserts by design).
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2.45.0";
 import { z } from "https://esm.sh/zod@3.23.8";
+import { validateEDIRatings } from "../_shared/ediMatrixRegistry.ts";
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
@@ -48,6 +49,17 @@ const Body = z.object({
     // Honeypot — must stay empty
     company_website: z.string().max(0).optional(),
   }),
+  // Optional structured EDI submission. When present it is strictly validated
+  // against the resolved category-specific EDI matrix (see _shared/ediMatrixRegistry.ts).
+  edi: z
+    .object({
+      tier: z.string().trim().min(1).max(80),
+      category: z.string().trim().min(1).max(120),
+      pathway: z.string().trim().max(120).optional().nullable(),
+      version: z.string().trim().max(60).optional().nullable(),
+      ratings: z.record(z.string(), z.string()),
+    })
+    .optional(),
 });
 
 function json(status: number, body: unknown) {
@@ -108,7 +120,7 @@ Deno.serve(async (req) => {
   if (!parsed.success) {
     return json(400, { error: "Validation failed", details: parsed.error.flatten() });
   }
-  const { nominator, nomination } = parsed.data;
+  const { nominator, nomination, edi } = parsed.data;
 
   // Honeypot — silently accept but do nothing (bot filled hidden field)
   if (nomination.company_website && nomination.company_website.length > 0) {
@@ -116,6 +128,25 @@ Deno.serve(async (req) => {
   }
   if (!nominator.consent) {
     return json(400, { error: "Consent is required" });
+  }
+
+  // Strict server-side EDI validation. Ratings must match the resolved
+  // category-specific matrix — no extra slots, no missing slots, allowed values only.
+  let ediValidated: { matrixKey: string; matrixVersion: string; ratings: Record<string, string> } | null = null;
+  if (edi) {
+    const result = validateEDIRatings({
+      tier: edi.tier,
+      category: edi.category,
+      pathway: edi.pathway ?? null,
+      version: edi.version ?? null,
+      ratings: edi.ratings,
+    });
+    if (!result.ok) return json(400, { error: result.error });
+    ediValidated = {
+      matrixKey: result.matrixKey,
+      matrixVersion: result.matrixVersion,
+      ratings: result.ratings,
+    };
   }
 
   const supabaseUrl = Deno.env.get("SUPABASE_URL")!;
@@ -397,6 +428,9 @@ Deno.serve(async (req) => {
       justification: nomination.reason,
       evidence_urls: evidenceUrls,
       status: "pending",
+      edi_ratings: ediValidated?.ratings ?? null,
+      edi_matrix_key: ediValidated?.matrixKey ?? null,
+      edi_matrix_version: ediValidated?.matrixVersion ?? null,
     })
     .select("id")
     .single();

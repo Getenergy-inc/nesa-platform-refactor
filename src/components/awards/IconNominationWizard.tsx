@@ -22,7 +22,7 @@ import { useAuth } from "@/contexts/AuthContext";
 import { useDraftPersistence } from "@/features/nominate/useDraftPersistence";
 import { AccountAtSubmitPanel } from "@/features/nominate/AccountAtSubmitPanel";
 import { trackEvent } from "@/lib/analytics";
-import { getEDIMatrix, type EDIIndicator } from "@/config/nominate2026/ediMatrix";
+import { getEDIMatrix, EDI_MATRIX_VERSION, type EDIIndicator } from "@/config/nominate2026/ediMatrix";
 
 // ─────────────────────────── Taxonomy ───────────────────────────
 const PATHWAYS = [
@@ -379,6 +379,17 @@ export function IconNominationWizard({
             reason: `${state.q_why}\n\nEDI ASSESSMENT:\n${ediBlock}\n\nEVIDENCE:\n${state.evidence_links}`,
             source: "icon-award-wizard",
             source_form_slug: "icon-award-wizard-2026",
+          },
+          edi: {
+            tier,
+            category,
+            pathway: state.pathway || null,
+            version: EDI_MATRIX_VERSION,
+            // Only ship ratings for slot IDs the resolved matrix declares —
+            // the server rejects any extra keys.
+            ratings: Object.fromEntries(
+              ediIndicators.map((d) => [d.id, String(state[d.id] ?? "").trim()]),
+            ),
           },
         },
       });
