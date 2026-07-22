@@ -261,11 +261,17 @@ export function validateStep(step: number, s: WizardState): string | null {
 interface Props {
   ediDownloadHref?: string;
   ediViewHref?: string;
+  /** Tier slug — defaults to Africa Education Icon so existing callers keep working. */
+  tier?: string;
+  /** Category slug — defaults to africa-education-icon. */
+  category?: string;
 }
 
 export function IconNominationWizard({
   ediDownloadHref = "/downloads/nesa-africa-2026-edi-matrix.pdf",
   ediViewHref = "#edi-matrix",
+  tier = "africa-education-icon",
+  category = "africa-education-icon",
 }: Props) {
   const { user } = useAuth();
   const [step, setStep] = useState(0);
@@ -274,6 +280,14 @@ export function IconNominationWizard({
   const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [reference, setReference] = useState<string | null>(null);
+
+  // Category/pathway-specific EDI matrix (label + description overrides).
+  // Slot keys are stable across matrices, so state and validation remain intact.
+  const ediMatrix = useMemo(
+    () => getEDIMatrix(tier, category, state.pathway || undefined),
+    [tier, category, state.pathway],
+  );
+  const ediIndicators: EDIIndicator[] = ediMatrix.indicators;
 
   const { draftToken, hydratedValues, clearDraft } = useDraftPersistence<WizardState>(
     "icon-award-wizard-2026",
