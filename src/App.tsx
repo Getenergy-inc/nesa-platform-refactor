@@ -366,6 +366,16 @@ import NRCDirectory from "./pages/nrc/arena/NRCDirectory";
 import NRCTeams from "./pages/nrc/arena/NRCTeams";
 import NRCTeamDetail from "./pages/nrc/arena/NRCTeamDetail";
 import NRCArenaDashboard from "./pages/nrc/arena/NRCDashboard";
+import NRCCases from "./pages/nrc/arena/NRCCases";
+import NRCCaseDetail from "./pages/nrc/arena/NRCCaseDetail";
+import NRCEvidence from "./pages/nrc/arena/NRCEvidence";
+import NRCDuplicates from "./pages/nrc/arena/NRCDuplicates";
+import NRCEndorsements from "./pages/nrc/arena/NRCEndorsements";
+import NRCHandoverJudges from "./pages/nrc/arena/NRCHandoverJudges";
+import NRCHandoverGovernance from "./pages/nrc/arena/NRCHandoverGovernance";
+import NRCReportsPage from "./pages/nrc/arena/NRCReportsPage";
+import NRCAuditLog from "./pages/nrc/arena/NRCAuditLog";
+import NRCAutomation from "./pages/nrc/arena/NRCAutomation";
 import {
   NRCDashboardHome,
   NRCNomineeTable,
@@ -2054,6 +2064,16 @@ const App = () => (
                     path="/nrc/dashboard"
                     element={<NRCProtectedRoute><NRCArenaDashboard /></NRCProtectedRoute>}
                   />
+                  <Route path="/nrc/cases" element={<NRCProtectedRoute><NRCCases /></NRCProtectedRoute>} />
+                  <Route path="/nrc/cases/:caseId" element={<NRCProtectedRoute><NRCCaseDetail /></NRCProtectedRoute>} />
+                  <Route path="/nrc/evidence" element={<NRCProtectedRoute><NRCEvidence /></NRCProtectedRoute>} />
+                  <Route path="/nrc/duplicates" element={<NRCProtectedRoute><NRCDuplicates /></NRCProtectedRoute>} />
+                  <Route path="/nrc/endorsements" element={<NRCProtectedRoute><NRCEndorsements /></NRCProtectedRoute>} />
+                  <Route path="/nrc/handover/judges" element={<NRCProtectedRoute><NRCHandoverJudges /></NRCProtectedRoute>} />
+                  <Route path="/nrc/handover/governance" element={<NRCProtectedRoute><NRCHandoverGovernance /></NRCProtectedRoute>} />
+                  <Route path="/nrc/reports" element={<NRCProtectedRoute><NRCReportsPage /></NRCProtectedRoute>} />
+                  <Route path="/nrc/audit-log" element={<NRCProtectedRoute><NRCAuditLog /></NRCProtectedRoute>} />
+                  <Route path="/nrc/automation" element={<NRCProtectedRoute><NRCAutomation /></NRCProtectedRoute>} />
                   <Route
                     path="/nrc/dashboard/nominees"
                     element={<NRCNomineeTable />}

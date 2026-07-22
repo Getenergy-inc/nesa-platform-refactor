@@ -20,6 +20,7 @@ import {
   Menu,
   Bell,
   ArrowLeft,
+  Cpu,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -39,6 +40,7 @@ const NAV: NavItem[] = [
   { href: "/nrc/dashboard", label: "Overview", icon: LayoutDashboard, group: "operations" },
   { href: "/nrc/cases", label: "My Assignments", icon: FolderKanban, group: "operations" },
   { href: "/nrc/teams", label: "Team Queue", icon: UsersRound, group: "operations" },
+  { href: "/nrc/automation", label: "Automation Engine", icon: Cpu, group: "operations" },
   { href: "/nrc/duplicates", label: "Duplicate Review", icon: ShieldAlert, group: "review" },
   { href: "/nrc/evidence", label: "Evidence Room", icon: FileSearch, group: "review" },
   { href: "/nrc/endorsements", label: "Public Endorsements", icon: MessageSquareText, group: "review" },
