@@ -112,8 +112,29 @@ const pastWebinars = [
 const categories = ["All", "Influencers", "Icon", "Gold–Blue Garnet", "Platinum", "Pre-Voting"];
 
 export default function Webinars() {
+  const [selected, setSelected] = useState<WebinarInfo | null>(null);
+  const [open, setOpen] = useState(false);
+
+  const openRegistration = (w: typeof upcomingWebinars[number]) => {
+    trackEvent("webinar_register_open", { webinar_id: String(w.id), title: w.title });
+    setSelected({
+      id: w.id,
+      title: w.title,
+      date: w.date,
+      time: w.time,
+      durationMinutes: parseInt(String(w.duration).replace(/\D/g, ""), 10) || 90,
+      category: w.category,
+    });
+    setOpen(true);
+  };
+
+  const openNextWebinar = () => {
+    if (upcomingWebinars.length > 0) openRegistration(upcomingWebinars[0]);
+  };
+
   return (
     <>
+
       <Helmet>
         <title>EduAid-Africa Webinar Series | NESA-Africa Educational Webinars</title>
         <meta
