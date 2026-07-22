@@ -61,10 +61,6 @@ export default function CategoryNominationForm({ content }: Props) {
   const [nominatorConsent, setNominatorConsent] = useState(false);
   const [declaration, setDeclaration] = useState(false);
   const [submitting, setSubmitting] = useState(false);
-  const [nominatorName, setNominatorName] = useState("");
-  const [nominatorEmail, setNominatorEmail] = useState("");
-  const [declaration, setDeclaration] = useState(false);
-  const [submitting, setSubmitting] = useState(false);
 
   const secondaryOptions = useMemo(() => {
     const s = content.pathwaySelector;
