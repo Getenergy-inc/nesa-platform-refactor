@@ -366,6 +366,16 @@ import NRCDirectory from "./pages/nrc/arena/NRCDirectory";
 import NRCTeams from "./pages/nrc/arena/NRCTeams";
 import NRCTeamDetail from "./pages/nrc/arena/NRCTeamDetail";
 import NRCArenaDashboard from "./pages/nrc/arena/NRCDashboard";
+import NRCCases from "./pages/nrc/arena/NRCCases";
+import NRCCaseDetail from "./pages/nrc/arena/NRCCaseDetail";
+import NRCEvidence from "./pages/nrc/arena/NRCEvidence";
+import NRCDuplicates from "./pages/nrc/arena/NRCDuplicates";
+import NRCEndorsements from "./pages/nrc/arena/NRCEndorsements";
+import NRCHandoverJudges from "./pages/nrc/arena/NRCHandoverJudges";
+import NRCHandoverGovernance from "./pages/nrc/arena/NRCHandoverGovernance";
+import NRCReportsPage from "./pages/nrc/arena/NRCReportsPage";
+import NRCAuditLog from "./pages/nrc/arena/NRCAuditLog";
+import NRCAutomation from "./pages/nrc/arena/NRCAutomation";
 import {
   NRCDashboardHome,
   NRCNomineeTable,
