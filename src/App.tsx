@@ -2219,6 +2219,14 @@ const App = () => (
                     }
                   />
                   <Route
+                    path="/judges/pathways/:pathwaySlug"
+                    element={
+                      <WithLayout>
+                        <PathwayWorkspace />
+                      </WithLayout>
+                    }
+                  />
+                  <Route
                     path="/judges/:slug"
                     element={
                       <WithLayout>
