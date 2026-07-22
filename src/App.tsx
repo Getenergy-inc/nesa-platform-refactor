@@ -352,6 +352,17 @@ import {
   NRCSettings,
   NRCScoringDashboard,
 } from "./pages/nrc";
+
+// NRC Arena — Foundation shell (Phase 1)
+import { NRCProtectedRoute } from "@/components/nrc/arena/NRCProtectedRoute";
+import NRCArenaIndex from "./pages/nrc/arena/NRCArenaIndex";
+import NRCSignIn from "./pages/nrc/arena/NRCSignIn";
+import NRCOnboarding from "./pages/nrc/arena/NRCOnboarding";
+import NRCProfile from "./pages/nrc/arena/NRCProfile";
+import NRCDirectory from "./pages/nrc/arena/NRCDirectory";
+import NRCTeams from "./pages/nrc/arena/NRCTeams";
+import NRCTeamDetail from "./pages/nrc/arena/NRCTeamDetail";
+import NRCArenaDashboard from "./pages/nrc/arena/NRCDashboard";
 import {
   NRCDashboardHome,
   NRCNomineeTable,
