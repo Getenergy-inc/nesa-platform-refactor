@@ -133,6 +133,7 @@ import EarnVotingCoins from "./pages/EarnVotingCoins";
 import PlatinumAward from "./pages/awards/PlatinumAward";
 import PlatinumDiasporaPage from "./pages/awards/PlatinumDiasporaPage";
 import IconAward from "./pages/awards/IconAward";
+import AfricaEducationIconRefactored from "./pages/awards/AfricaEducationIconRefactored";
 import GoldAward from "./pages/awards/GoldAward";
 import BlueGarnetAward from "./pages/awards/BlueGarnetAward";
 import GoldSpecialRecognition from "./pages/awards/GoldSpecialRecognition";
