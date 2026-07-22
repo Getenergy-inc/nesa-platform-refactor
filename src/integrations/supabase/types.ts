@@ -10503,6 +10503,60 @@ export type Database = {
           },
         ]
       }
+      webinar_registrations: {
+        Row: {
+          country: string | null
+          created_at: string
+          email: string
+          full_name: string
+          id: string
+          notes: string | null
+          organization: string | null
+          role: string | null
+          source: string | null
+          status: string
+          user_id: string | null
+          webinar_date: string | null
+          webinar_id: string
+          webinar_time: string | null
+          webinar_title: string
+        }
+        Insert: {
+          country?: string | null
+          created_at?: string
+          email: string
+          full_name: string
+          id?: string
+          notes?: string | null
+          organization?: string | null
+          role?: string | null
+          source?: string | null
+          status?: string
+          user_id?: string | null
+          webinar_date?: string | null
+          webinar_id: string
+          webinar_time?: string | null
+          webinar_title: string
+        }
+        Update: {
+          country?: string | null
+          created_at?: string
+          email?: string
+          full_name?: string
+          id?: string
+          notes?: string | null
+          organization?: string | null
+          role?: string | null
+          source?: string | null
+          status?: string
+          user_id?: string | null
+          webinar_date?: string | null
+          webinar_id?: string
+          webinar_time?: string | null
+          webinar_title?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       correspondence_branding_public: {
