@@ -61,7 +61,7 @@
 /cookie-policy                                               /policies            301
 /language                                                    /                    301
 
-# --- 2. SPA routes (471 explicit paths from src/App.tsx) ---
+# --- 2. SPA routes (486 explicit paths from src/App.tsx) ---
 /recognition/influencer-education-impact/african-sports-icons-supporting-education /index.html          200
 /recognition/influencer-education-impact/african-music-icons-supporting-education /index.html          200
 /recognition/influencer-education-impact/african-social-media-influencers /index.html          200
@@ -148,6 +148,7 @@
 /awards/africa-education-icon                                /index.html          200
 /awards/gold-blue-garnet/vote                                /index.html          200
 /awards/grants-global-support                                /index.html          200
+/judges/pathways/:pathwaySlug                                /index.html          200
 /recognition/gold-blue-garnet                                /index.html          200
 /subcategories-to-recognition                                /index.html          200
 /awards/explore/:pathwaySlug                                 /index.html          200
@@ -164,6 +165,7 @@
 /education-enablers/sectors                                  /index.html          200
 /education-enablers/edtech                                   /index.html          200
 /nominate/official/:family                                   /index.html          200
+/nrc/profile/:nrcReference                                   /index.html          200
 /policies/voting-integrity                                   /index.html          200
 /recognition/subpage/:slug                                   /index.html          200
 /volunteers/command-center                                   /index.html          200
@@ -186,6 +188,7 @@
 /dashboard/notifications                                     /index.html          200
 /guidelines/renomination                                     /index.html          200
 /impact/regional-winners                                     /index.html          200
+/judges/nominee-pipeline                                     /index.html          200
 /media/behind-the-scenes                                     /index.html          200
 /nominees/region/:region                                     /index.html          200
 /admin/nominee-profiles                                      /index.html          200
@@ -240,6 +243,7 @@
 /judge/icon-lifetime                                         /index.html          200
 /nrc/dashboard/merge                                         /index.html          200
 /nrc/dashboard/queue                                         /index.html          200
+/nrc/teams/:teamSlug                                         /index.html          200
 /volunteer/analytics                                         /index.html          200
 /volunteer/dashboard                                         /index.html          200
 /volunteer/referrals                                         /index.html          200
@@ -334,6 +338,7 @@ governance-review                                            /index.html        
 /judges/sign-in                                              /index.html          200
 /media/webinars                                              /index.html          200
 /nominees/:slug                                              /index.html          200
+/nrc/onboarding                                              /index.html          200
 /policies/terms                                              /index.html          200
 /region/nigeria                                              /index.html          200
 /reset-password                                              /index.html          200
@@ -354,6 +359,7 @@ voting/:groupId                                              /index.html        
 /nominate/icon                                               /index.html          200
 /nominee/:slug                                               /index.html          200
 /nrc/dashboard                                               /index.html          200
+/nrc/directory                                               /index.html          200
 /olc/dashboard                                               /index.html          200
 /organisations                                               /index.html          200
 /organizations                                               /index.html          200
@@ -416,11 +422,14 @@ nominee/:slug                                                /index.html        
 /media/shows                                                 /index.html          200
 /merchandise                                                 /index.html          200
 /nrc/members                                                 /index.html          200
+/nrc/profile                                                 /index.html          200
 /nrc/scoring                                                 /index.html          200
+/nrc/sign-in                                                 /index.html          200
 /olc/members                                                 /index.html          200
 /prenominate                                                 /index.html          200
 /recognition                                                 /index.html          200
 /sponsorship                                                 /index.html          200
+judges/:slug                                                 /index.html          200
 /about/scef                                                  /index.html          200
 /auth/login                                                  /index.html          200
 /categories                                                  /index.html          200
@@ -440,6 +449,7 @@ nominee/:slug                                                /index.html        
 /press-room                                                  /index.html          200
 /shop/:slug                                                  /index.html          200
 /volunteers                                                  /index.html          200
+about/:slug                                                  /index.html          200
 assignments                                                  /index.html          200
 /about-agc                                                   /index.html          200
 /admin/edx                                                   /index.html          200
@@ -449,6 +459,7 @@ assignments                                                  /index.html        
 /ecosystem                                                   /index.html          200
 /icon-jury                                                   /index.html          200
 /judge/coi                                                   /index.html          200
+/nrc/teams                                                   /index.html          200
 /resources                                                   /index.html          200
 /shop/cart                                                   /index.html          200
 /volunteer                                                   /index.html          200
@@ -473,6 +484,7 @@ discussion                                                   /index.html        
 /trending                                                    /index.html          200
 conflicts                                                    /index.html          200
 dashboard                                                    /index.html          200
+nrc/:slug                                                    /index.html          200
 /contact                                                     /index.html          200
 /endorse                                                     /index.html          200
 /gallery                                                     /index.html          200
@@ -515,6 +527,7 @@ scoring                                                      /index.html        
 /music                                                       /index.html          200
 /press                                                       /index.html          200
 /store                                                       /index.html          200
+judges                                                       /index.html          200
 voting                                                       /index.html          200
 /auth                                                        /index.html          200
 /cart                                                        /index.html          200
@@ -525,6 +538,7 @@ voting                                                       /index.html        
 /news                                                        /index.html          200
 /shop                                                        /index.html          200
 /vote                                                        /index.html          200
+about                                                        /index.html          200
 audit                                                        /index.html          200
 notes                                                        /index.html          200
 /edx                                                         /index.html          200
@@ -532,6 +546,7 @@ notes                                                        /index.html        
 /nrc                                                         /index.html          200
 /otp                                                         /index.html          200
 help                                                         /index.html          200
+nrc                                                          /index.html          200
 /                                                            /index.html          200
 
 # --- 3. True-404 fallback ---

@@ -1,4 +1,4 @@
-import { Award, ArrowRight, Vote, Ticket, Heart, Globe, Users, Calendar } from "lucide-react";
+import { Award, ArrowRight, Vote, Ticket, Heart, Globe, Users, Calendar, Scale, Handshake, Video, ShoppingBag } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { Button } from "@/components/ui/button";
@@ -44,24 +44,27 @@ export function FinalCTASection() {
           </div>
 
           <div className="flex flex-wrap justify-center gap-3 mb-10">
-            <Link to="/donate" onClick={() => trackEvent("final_cta_click", { cta: "donate", to: "/donate", location: "final_cta" })}>
-              <Button variant="ghost" className="text-gold/70 hover:text-gold hover:bg-gold/8 rounded-full gap-2">
-                <Heart className="h-4 w-4" />
-                Donate
-              </Button>
-            </Link>
-            <Link to="/buy-your-ticket" onClick={() => trackEvent("final_cta_click", { cta: "tickets", to: "/buy-your-ticket", location: "final_cta" })}>
-              <Button variant="ghost" className="text-gold/60 hover:text-gold hover:bg-gold/8 rounded-full gap-2">
-                <Ticket className="h-4 w-4" />
-                Get Gala Tickets
-              </Button>
-            </Link>
-            <Link to="/vote" onClick={() => trackEvent("final_cta_click", { cta: "vote", to: "/vote", location: "final_cta" })}>
-              <Button variant="ghost" className="text-gold/60 hover:text-gold hover:bg-gold/8 rounded-full gap-2">
-                <Vote className="h-4 w-4" />
-                Explore Recognition
-              </Button>
-            </Link>
+            {[
+              { to: "/nominate", label: "Nominate Now", icon: Award, cta: "nominate" },
+              { to: "/buy-your-ticket", label: "Buy Gala Ticket", icon: Ticket, cta: "tickets" },
+              { to: "/judges-arena", label: "Judges Arena", icon: Scale, cta: "judges_arena" },
+              { to: "/sponsor", label: "Sponsor the Timeline", icon: Handshake, cta: "sponsor" },
+              { to: "/media/webinars", label: "Join Pre-Award Webinars", icon: Video, cta: "webinars" },
+              { to: "/donate", label: "Donate", icon: Heart, cta: "donate" },
+              { to: "/shop", label: "Buy Merchandise (Post-Award Impact)", icon: ShoppingBag, cta: "merchandise" },
+              { to: "/vote", label: "Explore Recognition", icon: Vote, cta: "vote" },
+            ].map((item) => (
+              <Link
+                key={item.cta}
+                to={item.to}
+                onClick={() => trackEvent("final_cta_click", { cta: item.cta, to: item.to, location: "final_cta" })}
+              >
+                <Button variant="ghost" className="text-gold/80 hover:text-gold hover:bg-gold/10 rounded-full gap-2 border border-gold/20">
+                  <item.icon className="h-4 w-4" />
+                  {item.label}
+                </Button>
+              </Link>
+            ))}
           </div>
 
 
