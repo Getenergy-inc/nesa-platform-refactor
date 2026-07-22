@@ -1565,12 +1565,58 @@ const App = () => (
                     element={
                       <WithLayout>
                         <WithFirewall>
-                          <NominateGate>
-                            <NominateMvp />
-                          </NominateGate>
+                          <NominateHub2026 />
                         </WithFirewall>
                       </WithLayout>
                     }
+                  />
+                  {/* 18 canonical nomination forms (Phase 1 shells) */}
+                  <Route
+                    path="/nominate/africa-education-icon"
+                    element={
+                      <WithLayout>
+                        <WithFirewall>
+                          <NominateCategoryShell
+                            fixedTier="africa-education-icon"
+                            fixedCategory="africa-education-icon"
+                          />
+                        </WithFirewall>
+                      </WithLayout>
+                    }
+                  />
+                  <Route
+                    path="/nominate/influencer-education-impact"
+                    element={
+                      <WithLayout>
+                        <WithFirewall>
+                          <NominateCategoryShell
+                            fixedTier="influencer-education-impact"
+                            fixedCategory="influencer-education-impact"
+                          />
+                        </WithFirewall>
+                      </WithLayout>
+                    }
+                  />
+                  <Route
+                    path="/nominate/platinum/:category"
+                    element={
+                      <WithLayout>
+                        <WithFirewall>
+                          <NominateCategoryShell fixedTier="platinum" />
+                        </WithFirewall>
+                      </WithLayout>
+                    }
+                  />
+                  <Route
+                    path="/nominate/gold-blue-garnet/:category"
+                    element={
+                      <WithLayout>
+                        <WithFirewall>
+                          <NominateCategoryShell fixedTier="gold-blue-garnet" />
+                        </WithFirewall>
+                      </WithLayout>
+                    }
+                  />
                   />
                   {/* Native Icon Award nomination hub (writes straight to Supabase). */}
                   <Route
