@@ -80,6 +80,8 @@ import NominateOfficial from "./pages/NominateOfficial";
 import NominateMvp from "./pages/NominateMvp";
 import NGOChooser from "./pages/nominate/NGOChooser";
 import IconNominatePage from "./pages/nominate/IconNominatePage";
+import NominateHub2026 from "./pages/nominate/NominateHub2026";
+import NominateCategoryShell from "./pages/nominate/NominateCategoryShell";
 import NominateSchool from "./pages/impact/NominateSchool";
 import Dashboard from "./pages/Dashboard";
 import Unauthorized from "./pages/Unauthorized";
@@ -1563,9 +1565,54 @@ const App = () => (
                     element={
                       <WithLayout>
                         <WithFirewall>
-                          <NominateGate>
-                            <NominateMvp />
-                          </NominateGate>
+                          <NominateHub2026 />
+                        </WithFirewall>
+                      </WithLayout>
+                    }
+                  />
+                  {/* 18 canonical nomination forms (Phase 1 shells) */}
+                  <Route
+                    path="/nominate/africa-education-icon"
+                    element={
+                      <WithLayout>
+                        <WithFirewall>
+                          <NominateCategoryShell
+                            fixedTier="africa-education-icon"
+                            fixedCategory="africa-education-icon"
+                          />
+                        </WithFirewall>
+                      </WithLayout>
+                    }
+                  />
+                  <Route
+                    path="/nominate/influencer-education-impact"
+                    element={
+                      <WithLayout>
+                        <WithFirewall>
+                          <NominateCategoryShell
+                            fixedTier="influencer-education-impact"
+                            fixedCategory="influencer-education-impact"
+                          />
+                        </WithFirewall>
+                      </WithLayout>
+                    }
+                  />
+                  <Route
+                    path="/nominate/platinum/:category"
+                    element={
+                      <WithLayout>
+                        <WithFirewall>
+                          <NominateCategoryShell fixedTier="platinum" />
+                        </WithFirewall>
+                      </WithLayout>
+                    }
+                  />
+                  <Route
+                    path="/nominate/gold-blue-garnet/:category"
+                    element={
+                      <WithLayout>
+                        <WithFirewall>
+                          <NominateCategoryShell fixedTier="gold-blue-garnet" />
                         </WithFirewall>
                       </WithLayout>
                     }
