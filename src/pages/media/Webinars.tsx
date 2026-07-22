@@ -342,12 +342,14 @@ export default function Webinars() {
                     <div className="text-sm" style={{ color: eduaidColors.lightGreen }}>
                       {webinar.time}
                     </div>
-                    <Button 
+                    <Button
                       className="w-full text-white"
                       style={{ backgroundColor: eduaidColors.green }}
+                      onClick={() => openRegistration(webinar)}
                     >
                       Register Free
                     </Button>
+
                   </CardContent>
                 </Card>
               ))}
