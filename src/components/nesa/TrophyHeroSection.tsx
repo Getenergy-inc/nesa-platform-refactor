@@ -10,6 +10,7 @@ import stageBackdrop1080 from "@/assets/nesa-stage-backdrop-1080.webp";
 import blueGarnetTrophyIcon from "@/assets/blue-garnet-trophy-icon.png";
 import blueGarnetTrophyWinners from "@/assets/blue-garnet-trophy-winners.png";
 import { HeroCTAStack } from "@/components/nesa/HeroCTAStack";
+import { useSiteStats } from "@/config/siteStats";
 
 const CAROUSEL_ITEMS = ["trophy-icon", "trophy-winners", "logo"] as const;
 type CarouselItem = typeof CAROUSEL_ITEMS[number];
@@ -18,6 +19,7 @@ export function TrophyHeroSection() {
   const { t } = useTranslation("pages");
   const [currentItem, setCurrentItem] = useState<CarouselItem>("trophy-icon");
   const shouldReduceMotion = useReducedMotion();
+  const stats = useSiteStats();
 
   useEffect(() => {
     if (shouldReduceMotion) return;
