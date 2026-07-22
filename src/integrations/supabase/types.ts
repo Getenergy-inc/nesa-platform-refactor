@@ -4396,6 +4396,9 @@ export type Database = {
           dedupe_match_id: string | null
           dedupe_score: number | null
           diaspora_status: boolean
+          edi_matrix_key: string | null
+          edi_matrix_version: string | null
+          edi_ratings: Json | null
           email_verification_status: string | null
           evidence_urls: string[] | null
           id: string
@@ -4451,6 +4454,9 @@ export type Database = {
           dedupe_match_id?: string | null
           dedupe_score?: number | null
           diaspora_status?: boolean
+          edi_matrix_key?: string | null
+          edi_matrix_version?: string | null
+          edi_ratings?: Json | null
           email_verification_status?: string | null
           evidence_urls?: string[] | null
           id?: string
@@ -4506,6 +4512,9 @@ export type Database = {
           dedupe_match_id?: string | null
           dedupe_score?: number | null
           diaspora_status?: boolean
+          edi_matrix_key?: string | null
+          edi_matrix_version?: string | null
+          edi_ratings?: Json | null
           email_verification_status?: string | null
           evidence_urls?: string[] | null
           id?: string
