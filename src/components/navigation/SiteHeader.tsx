@@ -31,6 +31,7 @@ import { AnnouncementBar } from "@/components/navigation/AnnouncementBar";
 import { EducationEnablersMegaMenu } from "@/components/navigation/EducationEnablersMegaMenu";
 import { NavSearch } from "@/components/navigation/NavSearch";
 import { AccountMenu } from "@/components/navigation/AccountMenu";
+import { WorkspaceSwitcher } from "@/components/navigation/WorkspaceSwitcher";
 import { MOBILE_MENU_OPEN_EVENT } from "@/components/navigation/MobileBottomActions";
 import nesaStamp from "@/assets/nesa-stamp.jpeg";
 
@@ -314,6 +315,7 @@ function SecondaryPhaseCTA({ className }: { className?: string }) {
 function AccountActions() {
   return (
     <div className="hidden min-[1360px]:flex items-center gap-1">
+      <WorkspaceSwitcher />
       <LanguageSwitcher className="text-sm" />
       <AccountMenu />
     </div>
