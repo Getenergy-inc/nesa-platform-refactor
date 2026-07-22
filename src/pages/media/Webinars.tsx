@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -16,6 +17,9 @@ import {
   Video,
 } from "lucide-react";
 import eduaidLogo from "@/assets/partners/eduaid-africa-logo.jpeg";
+import { WebinarRegistrationDialog, type WebinarInfo } from "@/components/webinars/WebinarRegistrationDialog";
+import { trackEvent } from "@/lib/analytics";
+
 
 // EduAid-Africa brand colors
 const eduaidColors = {
