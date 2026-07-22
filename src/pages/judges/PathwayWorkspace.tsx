@@ -568,7 +568,7 @@ function ChatroomPanel({ pathwayId, userId, messages, seats, rows }: any) {
     setSending(true);
     const { error } = await supabase.from("pathway_deliberation_messages").insert({
       pathway_id: pathwayId, author_user_id: userId,
-      nominee_id: nomineeId || null, message: text.trim(),
+      nominee_id: (nomineeId && nomineeId !== "__general__") ? nomineeId : null, message: text.trim(),
     });
     setSending(false);
     if (error) toast({ title: "Failed", description: error.message, variant: "destructive" });
@@ -611,7 +611,7 @@ function ChatroomPanel({ pathwayId, userId, messages, seats, rows }: any) {
           <Select value={nomineeId} onValueChange={setNomineeId}>
             <SelectTrigger className="w-[200px]"><SelectValue placeholder="General" /></SelectTrigger>
             <SelectContent>
-              <SelectItem value="">General</SelectItem>
+              <SelectItem value="__general__">General</SelectItem>
               {rows.map((r: any) => <SelectItem key={r.nominee.id} value={r.nominee.id}>{r.nominee.name}</SelectItem>)}
             </SelectContent>
           </Select>
@@ -756,10 +756,10 @@ function RankPicker({ label, value, onChange, rows, disabled }: any) {
   return (
     <div>
       <label className="text-xs font-semibold text-muted-foreground mb-1 block">{label}</label>
-      <Select value={value} onValueChange={onChange} disabled={disabled}>
+      <Select value={value || "__none__"} onValueChange={(v)=>onChange(v==="__none__"?"":v)} disabled={disabled}>
         <SelectTrigger><SelectValue placeholder="Select nominee" /></SelectTrigger>
         <SelectContent>
-          <SelectItem value="">— none —</SelectItem>
+          <SelectItem value="__none__">— none —</SelectItem>
           {rows.map((r: any) => <SelectItem key={r.nominee.id} value={r.nominee.id}>{r.nominee.name}</SelectItem>)}
         </SelectContent>
       </Select>
