@@ -49,6 +49,17 @@ const Body = z.object({
     // Honeypot — must stay empty
     company_website: z.string().max(0).optional(),
   }),
+  // Optional structured EDI submission. When present it is strictly validated
+  // against the resolved category-specific EDI matrix (see _shared/ediMatrixRegistry.ts).
+  edi: z
+    .object({
+      tier: z.string().trim().min(1).max(80),
+      category: z.string().trim().min(1).max(120),
+      pathway: z.string().trim().max(120).optional().nullable(),
+      version: z.string().trim().max(60).optional().nullable(),
+      ratings: z.record(z.string(), z.string()),
+    })
+    .optional(),
 });
 
 function json(status: number, body: unknown) {
