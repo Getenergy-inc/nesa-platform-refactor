@@ -129,11 +129,11 @@ export function TrophyHeroSection() {
               aria-label="NESA-Africa 2026 recognition architecture at a glance"
             >
               {[
-                "4 Tiers",
-                "18 Categories",
-                "96 Subcategories",
-                "8 African Regions",
-                "2 Global Communities",
+                `${stats.tiers} Tiers`,
+                `${stats.categories} Categories`,
+                `${stats.subcategories} Subcategories`,
+                `${stats.africanRegions} African Regions`,
+                `${stats.globalCommunities} Global Communities`,
               ].map((chip) => (
                 <li
                   key={chip}
