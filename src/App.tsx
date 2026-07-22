@@ -80,6 +80,8 @@ import NominateOfficial from "./pages/NominateOfficial";
 import NominateMvp from "./pages/NominateMvp";
 import NGOChooser from "./pages/nominate/NGOChooser";
 import IconNominatePage from "./pages/nominate/IconNominatePage";
+import NominateHub2026 from "./pages/nominate/NominateHub2026";
+import NominateCategoryShell from "./pages/nominate/NominateCategoryShell";
 import NominateSchool from "./pages/impact/NominateSchool";
 import Dashboard from "./pages/Dashboard";
 import Unauthorized from "./pages/Unauthorized";
