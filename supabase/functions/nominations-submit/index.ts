@@ -428,6 +428,9 @@ Deno.serve(async (req) => {
       justification: nomination.reason,
       evidence_urls: evidenceUrls,
       status: "pending",
+      edi_ratings: ediValidated?.ratings ?? null,
+      edi_matrix_key: ediValidated?.matrixKey ?? null,
+      edi_matrix_version: ediValidated?.matrixVersion ?? null,
     })
     .select("id")
     .single();
