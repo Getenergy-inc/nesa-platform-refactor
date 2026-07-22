@@ -2210,6 +2210,14 @@ const App = () => (
                     }
                   />
                   <Route
+                    path="/judges/nominee-pipeline"
+                    element={
+                      <WithLayout>
+                        <NomineePipeline />
+                      </WithLayout>
+                    }
+                  />
+                  <Route
                     path="/judges/:slug"
                     element={
                       <WithLayout>
