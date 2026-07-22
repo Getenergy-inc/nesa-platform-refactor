@@ -254,6 +254,10 @@ import {
   JudgeIconLifetime,
 } from "./pages/judge";
 import JudgeOnboarding from "./pages/judge/JudgeOnboarding";
+import JudgeApplyPortalLayout from "./pages/judgeapply/PortalLayout";
+import JudgeApplyPortalHome from "./pages/judgeapply/PortalHome";
+import JudgeApplyAreaLanding from "./pages/judgeapply/AreaLanding";
+import JudgeApplySupportingPage from "./pages/judgeapply/SupportingPage";
 import MyCertificates from "./pages/MyCertificates";
 import CertificateGuide from "./pages/CertificateGuide";
 import VotingPortal from "./pages/VotingPortal";
