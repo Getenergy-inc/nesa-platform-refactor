@@ -136,9 +136,18 @@ export default function CategoryNominationForm({ content }: Props) {
         nomineeCountry,
         nomineeLeadership,
         impactSummary,
+        whatTheyDid,
+        whoBenefited,
+        timeframe,
+        measurableOutcomes,
         evidence: [evidence1, evidence2, evidence3].filter(Boolean),
+        eligibilityConfirmed,
         nominatorName,
         nominatorEmail,
+        nominatorPhone,
+        nominatorCountry,
+        nominatorConsent,
+        declaration,
         createdAt: new Date().toISOString(),
       };
       localStorage.setItem(draftKey, JSON.stringify(draft));
@@ -157,11 +166,19 @@ export default function CategoryNominationForm({ content }: Props) {
       setNomineeCountry("");
       setNomineeLeadership("");
       setImpactSummary("");
+      setWhatTheyDid("");
+      setWhoBenefited("");
+      setTimeframe("");
+      setMeasurableOutcomes("");
       setEvidence1("");
       setEvidence2("");
       setEvidence3("");
+      setEligibilityConfirmed(false);
       setNominatorName("");
       setNominatorEmail("");
+      setNominatorPhone("");
+      setNominatorCountry("");
+      setNominatorConsent(false);
       setDeclaration(false);
     } finally {
       setSubmitting(false);
