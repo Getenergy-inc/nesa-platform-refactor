@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -16,6 +17,9 @@ import {
   Video,
 } from "lucide-react";
 import eduaidLogo from "@/assets/partners/eduaid-africa-logo.jpeg";
+import { WebinarRegistrationDialog, type WebinarInfo } from "@/components/webinars/WebinarRegistrationDialog";
+import { trackEvent } from "@/lib/analytics";
+
 
 // EduAid-Africa brand colors
 const eduaidColors = {
@@ -108,8 +112,29 @@ const pastWebinars = [
 const categories = ["All", "Influencers", "Icon", "Gold–Blue Garnet", "Platinum", "Pre-Voting"];
 
 export default function Webinars() {
+  const [selected, setSelected] = useState<WebinarInfo | null>(null);
+  const [open, setOpen] = useState(false);
+
+  const openRegistration = (w: typeof upcomingWebinars[number]) => {
+    trackEvent("webinar_register_open", { webinar_id: String(w.id), title: w.title });
+    setSelected({
+      id: w.id,
+      title: w.title,
+      date: w.date,
+      time: w.time,
+      durationMinutes: parseInt(String(w.duration).replace(/\D/g, ""), 10) || 90,
+      category: w.category,
+    });
+    setOpen(true);
+  };
+
+  const openNextWebinar = () => {
+    if (upcomingWebinars.length > 0) openRegistration(upcomingWebinars[0]);
+  };
+
   return (
     <>
+
       <Helmet>
         <title>EduAid-Africa Webinar Series | NESA-Africa Educational Webinars</title>
         <meta
@@ -191,14 +216,16 @@ export default function Webinars() {
                 </p>
                 
                 <div className="flex flex-wrap justify-center lg:justify-start gap-4">
-                  <Button 
-                    size="lg" 
+                  <Button
+                    size="lg"
                     className="text-white border-0 shadow-lg"
                     style={{ backgroundColor: eduaidColors.green }}
+                    onClick={openNextWebinar}
                   >
                     <Calendar className="mr-2 h-5 w-5" />
                     Register for Next Webinar
                   </Button>
+
                   <Button 
                     size="lg" 
                     variant="outline" 
@@ -315,12 +342,14 @@ export default function Webinars() {
                     <div className="text-sm" style={{ color: eduaidColors.lightGreen }}>
                       {webinar.time}
                     </div>
-                    <Button 
+                    <Button
                       className="w-full text-white"
                       style={{ backgroundColor: eduaidColors.green }}
+                      onClick={() => openRegistration(webinar)}
                     >
                       Register Free
                     </Button>
+
                   </CardContent>
                 </Card>
               ))}
@@ -446,6 +475,9 @@ export default function Webinars() {
           </div>
         </section>
       </div>
+
+      <WebinarRegistrationDialog open={open} onOpenChange={setOpen} webinar={selected} />
     </>
   );
 }
+
