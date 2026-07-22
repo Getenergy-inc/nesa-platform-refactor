@@ -1617,7 +1617,6 @@ const App = () => (
                       </WithLayout>
                     }
                   />
-                  />
                   {/* Native Icon Award nomination hub (writes straight to Supabase). */}
                   <Route
                     path="/nominate/icon"
