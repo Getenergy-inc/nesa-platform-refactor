@@ -2622,6 +2622,7 @@ const App = () => (
 
                   {/* Africa Education Icon — Judges Arena (public + isolated jury portal) */}
                   <Route path="/judges" element={<JudgesArenaLanding />} />
+                  <Route path="/judges/enter" element={<JudgesEntry />} />
                   <Route path="/judges/sign-in" element={<IconJurySignIn />} />
                   <Route path="/icon-jury/sign-in" element={<Navigate to="/judges/sign-in" replace />} />
                   <Route
