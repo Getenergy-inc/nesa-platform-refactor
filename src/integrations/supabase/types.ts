@@ -1540,6 +1540,80 @@ export type Database = {
         }
         Relationships: []
       }
+      final_arena_ballots: {
+        Row: {
+          ballot_hash: string | null
+          created_at: string
+          id: string
+          judge_user_id: string
+          laureate_nominee_id: string
+          locked_at: string | null
+          pathway_id: string
+          points: number
+          rationale: string | null
+          season_id: string | null
+          submitted_at: string | null
+          updated_at: string
+        }
+        Insert: {
+          ballot_hash?: string | null
+          created_at?: string
+          id?: string
+          judge_user_id: string
+          laureate_nominee_id: string
+          locked_at?: string | null
+          pathway_id: string
+          points?: number
+          rationale?: string | null
+          season_id?: string | null
+          submitted_at?: string | null
+          updated_at?: string
+        }
+        Update: {
+          ballot_hash?: string | null
+          created_at?: string
+          id?: string
+          judge_user_id?: string
+          laureate_nominee_id?: string
+          locked_at?: string | null
+          pathway_id?: string
+          points?: number
+          rationale?: string | null
+          season_id?: string | null
+          submitted_at?: string | null
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "final_arena_ballots_laureate_nominee_id_fkey"
+            columns: ["laureate_nominee_id"]
+            isOneToOne: false
+            referencedRelation: "nominees"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "final_arena_ballots_laureate_nominee_id_fkey"
+            columns: ["laureate_nominee_id"]
+            isOneToOne: false
+            referencedRelation: "public_nominees"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "final_arena_ballots_pathway_id_fkey"
+            columns: ["pathway_id"]
+            isOneToOne: false
+            referencedRelation: "judging_pathways"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "final_arena_ballots_season_id_fkey"
+            columns: ["season_id"]
+            isOneToOne: false
+            referencedRelation: "seasons"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       fraud_flags: {
         Row: {
           admin_notes: string | null
@@ -3551,6 +3625,80 @@ export type Database = {
           },
         ]
       }
+      judge_nominee_reviews: {
+        Row: {
+          created_at: string
+          dossier_version_id: string
+          id: string
+          judge_user_id: string
+          locked_at: string | null
+          nominee_id: string
+          pathway_id: string
+          private_notes: string | null
+          started_at: string | null
+          status: Database["public"]["Enums"]["judge_review_status"]
+          submitted_at: string | null
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          dossier_version_id: string
+          id?: string
+          judge_user_id: string
+          locked_at?: string | null
+          nominee_id: string
+          pathway_id: string
+          private_notes?: string | null
+          started_at?: string | null
+          status?: Database["public"]["Enums"]["judge_review_status"]
+          submitted_at?: string | null
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          dossier_version_id?: string
+          id?: string
+          judge_user_id?: string
+          locked_at?: string | null
+          nominee_id?: string
+          pathway_id?: string
+          private_notes?: string | null
+          started_at?: string | null
+          status?: Database["public"]["Enums"]["judge_review_status"]
+          submitted_at?: string | null
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "judge_nominee_reviews_dossier_version_id_fkey"
+            columns: ["dossier_version_id"]
+            isOneToOne: false
+            referencedRelation: "nominee_dossier_versions"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "judge_nominee_reviews_nominee_id_fkey"
+            columns: ["nominee_id"]
+            isOneToOne: false
+            referencedRelation: "nominees"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "judge_nominee_reviews_nominee_id_fkey"
+            columns: ["nominee_id"]
+            isOneToOne: false
+            referencedRelation: "public_nominees"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "judge_nominee_reviews_pathway_id_fkey"
+            columns: ["pathway_id"]
+            isOneToOne: false
+            referencedRelation: "judging_pathways"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       judge_otp_sessions: {
         Row: {
           created_at: string
@@ -3742,6 +3890,56 @@ export type Database = {
             columns: ["application_id"]
             isOneToOne: false
             referencedRelation: "judge_applications"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      judging_pathways: {
+        Row: {
+          award_category: string
+          classification: string
+          created_at: string
+          description: string | null
+          id: string
+          is_active: boolean
+          pathway_number: number
+          season_id: string | null
+          slug: string
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          award_category: string
+          classification: string
+          created_at?: string
+          description?: string | null
+          id?: string
+          is_active?: boolean
+          pathway_number: number
+          season_id?: string | null
+          slug: string
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          award_category?: string
+          classification?: string
+          created_at?: string
+          description?: string | null
+          id?: string
+          is_active?: boolean
+          pathway_number?: number
+          season_id?: string | null
+          slug?: string
+          title?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "judging_pathways_season_id_fkey"
+            columns: ["season_id"]
+            isOneToOne: false
+            referencedRelation: "seasons"
             referencedColumns: ["id"]
           },
         ]
@@ -4704,6 +4902,116 @@ export type Database = {
         }
         Relationships: []
       }
+      nominee_dossier_versions: {
+        Row: {
+          approved_at: string | null
+          approved_by: string | null
+          biography: string | null
+          content_hash: string | null
+          created_at: string
+          evidence_library: Json
+          geographic_reach: string | null
+          id: string
+          impact_summary: string | null
+          known_limitations: string | null
+          lifetime_contribution: string | null
+          locked_at: string | null
+          locked_by: string | null
+          main_beneficiaries: string | null
+          nomination_id: string | null
+          nominee_id: string
+          nrc_recommendation: string | null
+          prepared_by: string | null
+          source_quality_notes: string | null
+          status: Database["public"]["Enums"]["dossier_status"]
+          supersedes_version_id: string | null
+          updated_at: string
+          verified_achievements: Json
+          version_number: number
+        }
+        Insert: {
+          approved_at?: string | null
+          approved_by?: string | null
+          biography?: string | null
+          content_hash?: string | null
+          created_at?: string
+          evidence_library?: Json
+          geographic_reach?: string | null
+          id?: string
+          impact_summary?: string | null
+          known_limitations?: string | null
+          lifetime_contribution?: string | null
+          locked_at?: string | null
+          locked_by?: string | null
+          main_beneficiaries?: string | null
+          nomination_id?: string | null
+          nominee_id: string
+          nrc_recommendation?: string | null
+          prepared_by?: string | null
+          source_quality_notes?: string | null
+          status?: Database["public"]["Enums"]["dossier_status"]
+          supersedes_version_id?: string | null
+          updated_at?: string
+          verified_achievements?: Json
+          version_number: number
+        }
+        Update: {
+          approved_at?: string | null
+          approved_by?: string | null
+          biography?: string | null
+          content_hash?: string | null
+          created_at?: string
+          evidence_library?: Json
+          geographic_reach?: string | null
+          id?: string
+          impact_summary?: string | null
+          known_limitations?: string | null
+          lifetime_contribution?: string | null
+          locked_at?: string | null
+          locked_by?: string | null
+          main_beneficiaries?: string | null
+          nomination_id?: string | null
+          nominee_id?: string
+          nrc_recommendation?: string | null
+          prepared_by?: string | null
+          source_quality_notes?: string | null
+          status?: Database["public"]["Enums"]["dossier_status"]
+          supersedes_version_id?: string | null
+          updated_at?: string
+          verified_achievements?: Json
+          version_number?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "nominee_dossier_versions_nomination_id_fkey"
+            columns: ["nomination_id"]
+            isOneToOne: false
+            referencedRelation: "nominations"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "nominee_dossier_versions_nominee_id_fkey"
+            columns: ["nominee_id"]
+            isOneToOne: false
+            referencedRelation: "nominees"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "nominee_dossier_versions_nominee_id_fkey"
+            columns: ["nominee_id"]
+            isOneToOne: false
+            referencedRelation: "public_nominees"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "nominee_dossier_versions_supersedes_version_id_fkey"
+            columns: ["supersedes_version_id"]
+            isOneToOne: false
+            referencedRelation: "nominee_dossier_versions"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       nominee_enrichments: {
         Row: {
           approved_at: string | null
@@ -4898,6 +5206,214 @@ export type Database = {
           verified?: boolean
         }
         Relationships: []
+      }
+      nominee_pathway_assignments: {
+        Row: {
+          assigned_at: string
+          created_at: string
+          dossier_version_id: string
+          id: string
+          nominee_id: string
+          pathway_id: string
+          pipeline_status: Database["public"]["Enums"]["pipeline_status"]
+          push_id: string | null
+          updated_at: string
+        }
+        Insert: {
+          assigned_at?: string
+          created_at?: string
+          dossier_version_id: string
+          id?: string
+          nominee_id: string
+          pathway_id: string
+          pipeline_status?: Database["public"]["Enums"]["pipeline_status"]
+          push_id?: string | null
+          updated_at?: string
+        }
+        Update: {
+          assigned_at?: string
+          created_at?: string
+          dossier_version_id?: string
+          id?: string
+          nominee_id?: string
+          pathway_id?: string
+          pipeline_status?: Database["public"]["Enums"]["pipeline_status"]
+          push_id?: string | null
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "nominee_pathway_assignments_dossier_version_id_fkey"
+            columns: ["dossier_version_id"]
+            isOneToOne: false
+            referencedRelation: "nominee_dossier_versions"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "nominee_pathway_assignments_nominee_id_fkey"
+            columns: ["nominee_id"]
+            isOneToOne: false
+            referencedRelation: "nominees"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "nominee_pathway_assignments_nominee_id_fkey"
+            columns: ["nominee_id"]
+            isOneToOne: false
+            referencedRelation: "public_nominees"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "nominee_pathway_assignments_pathway_id_fkey"
+            columns: ["pathway_id"]
+            isOneToOne: false
+            referencedRelation: "judging_pathways"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "nominee_pathway_assignments_push_id_fkey"
+            columns: ["push_id"]
+            isOneToOne: false
+            referencedRelation: "nrc_nominee_pushes"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      nominee_pipeline_status: {
+        Row: {
+          created_at: string
+          current_dossier_version_id: string | null
+          current_pathway_id: string | null
+          current_status: Database["public"]["Enums"]["pipeline_status"]
+          last_transition_at: string
+          last_transition_by: string | null
+          metadata: Json
+          nominee_id: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          current_dossier_version_id?: string | null
+          current_pathway_id?: string | null
+          current_status?: Database["public"]["Enums"]["pipeline_status"]
+          last_transition_at?: string
+          last_transition_by?: string | null
+          metadata?: Json
+          nominee_id: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          current_dossier_version_id?: string | null
+          current_pathway_id?: string | null
+          current_status?: Database["public"]["Enums"]["pipeline_status"]
+          last_transition_at?: string
+          last_transition_by?: string | null
+          metadata?: Json
+          nominee_id?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "nominee_pipeline_status_current_dossier_version_id_fkey"
+            columns: ["current_dossier_version_id"]
+            isOneToOne: false
+            referencedRelation: "nominee_dossier_versions"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "nominee_pipeline_status_current_pathway_id_fkey"
+            columns: ["current_pathway_id"]
+            isOneToOne: false
+            referencedRelation: "judging_pathways"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "nominee_pipeline_status_nominee_id_fkey"
+            columns: ["nominee_id"]
+            isOneToOne: true
+            referencedRelation: "nominees"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "nominee_pipeline_status_nominee_id_fkey"
+            columns: ["nominee_id"]
+            isOneToOne: true
+            referencedRelation: "public_nominees"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      nominee_pipeline_transitions: {
+        Row: {
+          actor_role: string | null
+          actor_user_id: string | null
+          created_at: string
+          dossier_version_id: string | null
+          from_status: Database["public"]["Enums"]["pipeline_status"] | null
+          id: string
+          metadata: Json
+          nominee_id: string
+          notes: string | null
+          pathway_id: string | null
+          to_status: Database["public"]["Enums"]["pipeline_status"]
+        }
+        Insert: {
+          actor_role?: string | null
+          actor_user_id?: string | null
+          created_at?: string
+          dossier_version_id?: string | null
+          from_status?: Database["public"]["Enums"]["pipeline_status"] | null
+          id?: string
+          metadata?: Json
+          nominee_id: string
+          notes?: string | null
+          pathway_id?: string | null
+          to_status: Database["public"]["Enums"]["pipeline_status"]
+        }
+        Update: {
+          actor_role?: string | null
+          actor_user_id?: string | null
+          created_at?: string
+          dossier_version_id?: string | null
+          from_status?: Database["public"]["Enums"]["pipeline_status"] | null
+          id?: string
+          metadata?: Json
+          nominee_id?: string
+          notes?: string | null
+          pathway_id?: string | null
+          to_status?: Database["public"]["Enums"]["pipeline_status"]
+        }
+        Relationships: [
+          {
+            foreignKeyName: "nominee_pipeline_transitions_dossier_version_id_fkey"
+            columns: ["dossier_version_id"]
+            isOneToOne: false
+            referencedRelation: "nominee_dossier_versions"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "nominee_pipeline_transitions_nominee_id_fkey"
+            columns: ["nominee_id"]
+            isOneToOne: false
+            referencedRelation: "nominees"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "nominee_pipeline_transitions_nominee_id_fkey"
+            columns: ["nominee_id"]
+            isOneToOne: false
+            referencedRelation: "public_nominees"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "nominee_pipeline_transitions_pathway_id_fkey"
+            columns: ["pathway_id"]
+            isOneToOne: false
+            referencedRelation: "judging_pathways"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       nominees: {
         Row: {
@@ -5987,6 +6503,93 @@ export type Database = {
         }
         Relationships: []
       }
+      nrc_nominee_pushes: {
+        Row: {
+          checklist: Json
+          created_at: string
+          dossier_version_id: string
+          failure_reason: string | null
+          id: string
+          nomination_id: string | null
+          nominee_id: string
+          pathway_id: string
+          pushed_at: string
+          pushed_by: string
+          revoked_at: string | null
+          revoked_by: string | null
+          status: Database["public"]["Enums"]["push_status"]
+          updated_at: string
+        }
+        Insert: {
+          checklist?: Json
+          created_at?: string
+          dossier_version_id: string
+          failure_reason?: string | null
+          id?: string
+          nomination_id?: string | null
+          nominee_id: string
+          pathway_id: string
+          pushed_at?: string
+          pushed_by: string
+          revoked_at?: string | null
+          revoked_by?: string | null
+          status?: Database["public"]["Enums"]["push_status"]
+          updated_at?: string
+        }
+        Update: {
+          checklist?: Json
+          created_at?: string
+          dossier_version_id?: string
+          failure_reason?: string | null
+          id?: string
+          nomination_id?: string | null
+          nominee_id?: string
+          pathway_id?: string
+          pushed_at?: string
+          pushed_by?: string
+          revoked_at?: string | null
+          revoked_by?: string | null
+          status?: Database["public"]["Enums"]["push_status"]
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "nrc_nominee_pushes_dossier_version_id_fkey"
+            columns: ["dossier_version_id"]
+            isOneToOne: false
+            referencedRelation: "nominee_dossier_versions"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "nrc_nominee_pushes_nomination_id_fkey"
+            columns: ["nomination_id"]
+            isOneToOne: false
+            referencedRelation: "nominations"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "nrc_nominee_pushes_nominee_id_fkey"
+            columns: ["nominee_id"]
+            isOneToOne: false
+            referencedRelation: "nominees"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "nrc_nominee_pushes_nominee_id_fkey"
+            columns: ["nominee_id"]
+            isOneToOne: false
+            referencedRelation: "public_nominees"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "nrc_nominee_pushes_pathway_id_fkey"
+            columns: ["pathway_id"]
+            isOneToOne: false
+            referencedRelation: "judging_pathways"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       nrc_queue: {
         Row: {
           assigned_by: string | null
@@ -6627,6 +7230,447 @@ export type Database = {
           visual_gradient?: string
         }
         Relationships: []
+      }
+      pathway_clarification_requests: {
+        Row: {
+          acknowledged_at: string | null
+          created_at: string
+          dossier_section: string | null
+          escalated_at: string | null
+          evidence_reference: string | null
+          id: string
+          nominee_id: string
+          pathway_id: string
+          question: string
+          requested_by: string
+          responded_at: string | null
+          responded_by: string | null
+          response_dossier_version_id: string | null
+          response_text: string | null
+          review_deadline: string | null
+          status: Database["public"]["Enums"]["clarification_status"]
+          updated_at: string
+          urgency: string
+        }
+        Insert: {
+          acknowledged_at?: string | null
+          created_at?: string
+          dossier_section?: string | null
+          escalated_at?: string | null
+          evidence_reference?: string | null
+          id?: string
+          nominee_id: string
+          pathway_id: string
+          question: string
+          requested_by: string
+          responded_at?: string | null
+          responded_by?: string | null
+          response_dossier_version_id?: string | null
+          response_text?: string | null
+          review_deadline?: string | null
+          status?: Database["public"]["Enums"]["clarification_status"]
+          updated_at?: string
+          urgency?: string
+        }
+        Update: {
+          acknowledged_at?: string | null
+          created_at?: string
+          dossier_section?: string | null
+          escalated_at?: string | null
+          evidence_reference?: string | null
+          id?: string
+          nominee_id?: string
+          pathway_id?: string
+          question?: string
+          requested_by?: string
+          responded_at?: string | null
+          responded_by?: string | null
+          response_dossier_version_id?: string | null
+          response_text?: string | null
+          review_deadline?: string | null
+          status?: Database["public"]["Enums"]["clarification_status"]
+          updated_at?: string
+          urgency?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "pathway_clarification_requests_nominee_id_fkey"
+            columns: ["nominee_id"]
+            isOneToOne: false
+            referencedRelation: "nominees"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "pathway_clarification_requests_nominee_id_fkey"
+            columns: ["nominee_id"]
+            isOneToOne: false
+            referencedRelation: "public_nominees"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "pathway_clarification_requests_pathway_id_fkey"
+            columns: ["pathway_id"]
+            isOneToOne: false
+            referencedRelation: "judging_pathways"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "pathway_clarification_requests_response_dossier_version_id_fkey"
+            columns: ["response_dossier_version_id"]
+            isOneToOne: false
+            referencedRelation: "nominee_dossier_versions"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      pathway_deliberation_messages: {
+        Row: {
+          author_user_id: string
+          created_at: string
+          id: string
+          message: string
+          nominee_id: string | null
+          pathway_id: string
+        }
+        Insert: {
+          author_user_id: string
+          created_at?: string
+          id?: string
+          message: string
+          nominee_id?: string | null
+          pathway_id: string
+        }
+        Update: {
+          author_user_id?: string
+          created_at?: string
+          id?: string
+          message?: string
+          nominee_id?: string | null
+          pathway_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "pathway_deliberation_messages_nominee_id_fkey"
+            columns: ["nominee_id"]
+            isOneToOne: false
+            referencedRelation: "nominees"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "pathway_deliberation_messages_nominee_id_fkey"
+            columns: ["nominee_id"]
+            isOneToOne: false
+            referencedRelation: "public_nominees"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "pathway_deliberation_messages_pathway_id_fkey"
+            columns: ["pathway_id"]
+            isOneToOne: false
+            referencedRelation: "judging_pathways"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      pathway_finalist_selections: {
+        Row: {
+          confirmed_at: string
+          created_at: string
+          id: string
+          nominee_id: string
+          panel_chair_id: string | null
+          panel_report_url: string | null
+          pathway_id: string
+          rank: Database["public"]["Enums"]["finalist_rank"]
+          total_points: number | null
+          updated_at: string
+        }
+        Insert: {
+          confirmed_at?: string
+          created_at?: string
+          id?: string
+          nominee_id: string
+          panel_chair_id?: string | null
+          panel_report_url?: string | null
+          pathway_id: string
+          rank: Database["public"]["Enums"]["finalist_rank"]
+          total_points?: number | null
+          updated_at?: string
+        }
+        Update: {
+          confirmed_at?: string
+          created_at?: string
+          id?: string
+          nominee_id?: string
+          panel_chair_id?: string | null
+          panel_report_url?: string | null
+          pathway_id?: string
+          rank?: Database["public"]["Enums"]["finalist_rank"]
+          total_points?: number | null
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "pathway_finalist_selections_nominee_id_fkey"
+            columns: ["nominee_id"]
+            isOneToOne: false
+            referencedRelation: "nominees"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "pathway_finalist_selections_nominee_id_fkey"
+            columns: ["nominee_id"]
+            isOneToOne: false
+            referencedRelation: "public_nominees"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "pathway_finalist_selections_pathway_id_fkey"
+            columns: ["pathway_id"]
+            isOneToOne: false
+            referencedRelation: "judging_pathways"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      pathway_judge_assignments: {
+        Row: {
+          active: boolean
+          assigned_at: string
+          assigned_by: string | null
+          created_at: string
+          id: string
+          is_chair: boolean
+          judge_user_id: string
+          pathway_id: string
+          seat_number: number | null
+          updated_at: string
+        }
+        Insert: {
+          active?: boolean
+          assigned_at?: string
+          assigned_by?: string | null
+          created_at?: string
+          id?: string
+          is_chair?: boolean
+          judge_user_id: string
+          pathway_id: string
+          seat_number?: number | null
+          updated_at?: string
+        }
+        Update: {
+          active?: boolean
+          assigned_at?: string
+          assigned_by?: string | null
+          created_at?: string
+          id?: string
+          is_chair?: boolean
+          judge_user_id?: string
+          pathway_id?: string
+          seat_number?: number | null
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "pathway_judge_assignments_pathway_id_fkey"
+            columns: ["pathway_id"]
+            isOneToOne: false
+            referencedRelation: "judging_pathways"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      pathway_scorecards: {
+        Row: {
+          created_at: string
+          id: string
+          judge_user_id: string
+          justification: string | null
+          locked_at: string | null
+          nominee_id: string
+          pathway_id: string
+          review_id: string
+          rubric_version: string
+          scores: Json
+          status: Database["public"]["Enums"]["scorecard_status"]
+          submitted_at: string | null
+          total_score: number | null
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          judge_user_id: string
+          justification?: string | null
+          locked_at?: string | null
+          nominee_id: string
+          pathway_id: string
+          review_id: string
+          rubric_version?: string
+          scores?: Json
+          status?: Database["public"]["Enums"]["scorecard_status"]
+          submitted_at?: string | null
+          total_score?: number | null
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          judge_user_id?: string
+          justification?: string | null
+          locked_at?: string | null
+          nominee_id?: string
+          pathway_id?: string
+          review_id?: string
+          rubric_version?: string
+          scores?: Json
+          status?: Database["public"]["Enums"]["scorecard_status"]
+          submitted_at?: string | null
+          total_score?: number | null
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "pathway_scorecards_nominee_id_fkey"
+            columns: ["nominee_id"]
+            isOneToOne: false
+            referencedRelation: "nominees"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "pathway_scorecards_nominee_id_fkey"
+            columns: ["nominee_id"]
+            isOneToOne: false
+            referencedRelation: "public_nominees"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "pathway_scorecards_pathway_id_fkey"
+            columns: ["pathway_id"]
+            isOneToOne: false
+            referencedRelation: "judging_pathways"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "pathway_scorecards_review_id_fkey"
+            columns: ["review_id"]
+            isOneToOne: true
+            referencedRelation: "judge_nominee_reviews"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      pathway_voting_ballots: {
+        Row: {
+          ballot_hash: string | null
+          created_at: string
+          first_nominee_id: string | null
+          id: string
+          judge_user_id: string
+          locked_at: string | null
+          pathway_id: string
+          rationale: string | null
+          reserve_nominee_id: string | null
+          second_nominee_id: string | null
+          submitted_at: string | null
+          third_nominee_id: string | null
+          updated_at: string
+        }
+        Insert: {
+          ballot_hash?: string | null
+          created_at?: string
+          first_nominee_id?: string | null
+          id?: string
+          judge_user_id: string
+          locked_at?: string | null
+          pathway_id: string
+          rationale?: string | null
+          reserve_nominee_id?: string | null
+          second_nominee_id?: string | null
+          submitted_at?: string | null
+          third_nominee_id?: string | null
+          updated_at?: string
+        }
+        Update: {
+          ballot_hash?: string | null
+          created_at?: string
+          first_nominee_id?: string | null
+          id?: string
+          judge_user_id?: string
+          locked_at?: string | null
+          pathway_id?: string
+          rationale?: string | null
+          reserve_nominee_id?: string | null
+          second_nominee_id?: string | null
+          submitted_at?: string | null
+          third_nominee_id?: string | null
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "pathway_voting_ballots_first_nominee_id_fkey"
+            columns: ["first_nominee_id"]
+            isOneToOne: false
+            referencedRelation: "nominees"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "pathway_voting_ballots_first_nominee_id_fkey"
+            columns: ["first_nominee_id"]
+            isOneToOne: false
+            referencedRelation: "public_nominees"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "pathway_voting_ballots_pathway_id_fkey"
+            columns: ["pathway_id"]
+            isOneToOne: false
+            referencedRelation: "judging_pathways"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "pathway_voting_ballots_reserve_nominee_id_fkey"
+            columns: ["reserve_nominee_id"]
+            isOneToOne: false
+            referencedRelation: "nominees"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "pathway_voting_ballots_reserve_nominee_id_fkey"
+            columns: ["reserve_nominee_id"]
+            isOneToOne: false
+            referencedRelation: "public_nominees"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "pathway_voting_ballots_second_nominee_id_fkey"
+            columns: ["second_nominee_id"]
+            isOneToOne: false
+            referencedRelation: "nominees"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "pathway_voting_ballots_second_nominee_id_fkey"
+            columns: ["second_nominee_id"]
+            isOneToOne: false
+            referencedRelation: "public_nominees"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "pathway_voting_ballots_third_nominee_id_fkey"
+            columns: ["third_nominee_id"]
+            isOneToOne: false
+            referencedRelation: "nominees"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "pathway_voting_ballots_third_nominee_id_fkey"
+            columns: ["third_nominee_id"]
+            isOneToOne: false
+            referencedRelation: "public_nominees"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       payment_intents: {
         Row: {
@@ -9588,6 +10632,68 @@ export type Database = {
         }
         Relationships: []
       }
+      pathway_scorecards_status: {
+        Row: {
+          id: string | null
+          judge_user_id: string | null
+          locked_at: string | null
+          nominee_id: string | null
+          pathway_id: string | null
+          review_id: string | null
+          status: Database["public"]["Enums"]["scorecard_status"] | null
+          submitted_at: string | null
+        }
+        Insert: {
+          id?: string | null
+          judge_user_id?: string | null
+          locked_at?: string | null
+          nominee_id?: string | null
+          pathway_id?: string | null
+          review_id?: string | null
+          status?: Database["public"]["Enums"]["scorecard_status"] | null
+          submitted_at?: string | null
+        }
+        Update: {
+          id?: string | null
+          judge_user_id?: string | null
+          locked_at?: string | null
+          nominee_id?: string | null
+          pathway_id?: string | null
+          review_id?: string | null
+          status?: Database["public"]["Enums"]["scorecard_status"] | null
+          submitted_at?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "pathway_scorecards_nominee_id_fkey"
+            columns: ["nominee_id"]
+            isOneToOne: false
+            referencedRelation: "nominees"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "pathway_scorecards_nominee_id_fkey"
+            columns: ["nominee_id"]
+            isOneToOne: false
+            referencedRelation: "public_nominees"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "pathway_scorecards_pathway_id_fkey"
+            columns: ["pathway_id"]
+            isOneToOne: false
+            referencedRelation: "judging_pathways"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "pathway_scorecards_review_id_fkey"
+            columns: ["review_id"]
+            isOneToOne: true
+            referencedRelation: "judge_nominee_reviews"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       public_nominees: {
         Row: {
           acceptance_status:
@@ -10267,6 +11373,15 @@ export type Database = {
         Args: { p_contest_type: string; p_season_id: string }
         Returns: Json
       }
+      push_nominee_to_pathway: {
+        Args: {
+          p_checklist?: Json
+          p_dossier_version_id: string
+          p_nominee_id: string
+          p_pathway_id: string
+        }
+        Returns: string
+      }
       record_renomination_via_referral: {
         Args: {
           p_device_hash?: string
@@ -10417,12 +11532,20 @@ export type Database = {
         | "blue_garnet"
         | "icon"
         | "gold_special"
+      clarification_status:
+        | "open"
+        | "answered"
+        | "acknowledged"
+        | "escalated"
+        | "resolved"
       contest_type:
         | "GOLD_PUBLIC"
         | "BLUE_PUBLIC"
         | "BLUE_JUDGES"
         | "ICON_LIFETIME_JUDGES"
       disbursement_status: "DRAFT" | "COMPLETED" | "FAILED"
+      dossier_status: "draft" | "ready" | "approved" | "locked" | "superseded"
+      finalist_rank: "first" | "second" | "third" | "reserve"
       impact_destination:
         | "REBUILD_MY_SCHOOL"
         | "EDUAID_AFRICA"
@@ -10535,7 +11658,32 @@ export type Database = {
         | "SUCCESS"
         | "FAILED"
         | "CANCELLED"
+      pipeline_status:
+        | "NOMINATION_RECEIVED"
+        | "AUTOMATED_SCREENING"
+        | "NRC_REVIEW"
+        | "DUPLICATE_REVIEW"
+        | "ELIGIBILITY_REVIEW"
+        | "AWAITING_ACCEPTANCE"
+        | "EVIDENCE_COLLECTION"
+        | "VERIFICATION_IN_PROGRESS"
+        | "VERIFICATION_COMPLETED"
+        | "DOSSIER_READY"
+        | "APPROVED_FOR_JUDGES"
+        | "PUSHED_TO_PATHWAY"
+        | "UNDER_JUDGE_REVIEW"
+        | "CLARIFICATION_REQUIRED"
+        | "READY_FOR_DELIBERATION"
+        | "PATHWAY_DELIBERATION"
+        | "PATHWAY_VOTING"
+        | "TOP_THREE"
+        | "RESERVE"
+        | "FINAL_VOTING"
+        | "GOVERNANCE_VALIDATION"
+        | "LAUREATE_APPROVED"
+        | "ARCHIVED"
       product_category: "APPAREL" | "ACCESSORIES" | "LIMITED" | "BUNDLES"
+      push_status: "pending" | "pushed" | "failed" | "revoked"
       referral_event_type:
         | "SIGNUP"
         | "NOMINATION_PAID"
@@ -10556,6 +11704,7 @@ export type Database = {
         | "ICON_JUDGE"
         | "ICON_MODERATOR"
         | "ICON_GOVERNANCE"
+      scorecard_status: "not_started" | "draft" | "submitted" | "locked"
       settlement_status: "STARTED" | "PROCESSING" | "COMPLETED" | "FAILED"
       stage_action:
         | "nominations"
@@ -10772,6 +11921,13 @@ export const Constants = {
         "icon",
         "gold_special",
       ],
+      clarification_status: [
+        "open",
+        "answered",
+        "acknowledged",
+        "escalated",
+        "resolved",
+      ],
       contest_type: [
         "GOLD_PUBLIC",
         "BLUE_PUBLIC",
@@ -10779,6 +11935,8 @@ export const Constants = {
         "ICON_LIFETIME_JUDGES",
       ],
       disbursement_status: ["DRAFT", "COMPLETED", "FAILED"],
+      dossier_status: ["draft", "ready", "approved", "locked", "superseded"],
+      finalist_rank: ["first", "second", "third", "reserve"],
       impact_destination: [
         "REBUILD_MY_SCHOOL",
         "EDUAID_AFRICA",
@@ -10907,7 +12065,33 @@ export const Constants = {
         "FAILED",
         "CANCELLED",
       ],
+      pipeline_status: [
+        "NOMINATION_RECEIVED",
+        "AUTOMATED_SCREENING",
+        "NRC_REVIEW",
+        "DUPLICATE_REVIEW",
+        "ELIGIBILITY_REVIEW",
+        "AWAITING_ACCEPTANCE",
+        "EVIDENCE_COLLECTION",
+        "VERIFICATION_IN_PROGRESS",
+        "VERIFICATION_COMPLETED",
+        "DOSSIER_READY",
+        "APPROVED_FOR_JUDGES",
+        "PUSHED_TO_PATHWAY",
+        "UNDER_JUDGE_REVIEW",
+        "CLARIFICATION_REQUIRED",
+        "READY_FOR_DELIBERATION",
+        "PATHWAY_DELIBERATION",
+        "PATHWAY_VOTING",
+        "TOP_THREE",
+        "RESERVE",
+        "FINAL_VOTING",
+        "GOVERNANCE_VALIDATION",
+        "LAUREATE_APPROVED",
+        "ARCHIVED",
+      ],
       product_category: ["APPAREL", "ACCESSORIES", "LIMITED", "BUNDLES"],
+      push_status: ["pending", "pushed", "failed", "revoked"],
       referral_event_type: [
         "SIGNUP",
         "NOMINATION_PAID",
@@ -10930,6 +12114,7 @@ export const Constants = {
         "ICON_MODERATOR",
         "ICON_GOVERNANCE",
       ],
+      scorecard_status: ["not_started", "draft", "submitted", "locked"],
       settlement_status: ["STARTED", "PROCESSING", "COMPLETED", "FAILED"],
       stage_action: [
         "nominations",
