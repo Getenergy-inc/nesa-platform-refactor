@@ -2194,15 +2194,18 @@ const App = () => (
                   <Route path="/judge/signup" element={<JudgeSignup />} />
                   <Route path="/judge/verify" element={<JudgeVerify />} />
 
-                  {/* Judge route aliases (legacy/expected URLs) */}
-                  <Route
-                    path="/judgeapply"
-                    element={
-                      <WithLayout>
-                        <JudgeApply />
-                      </WithLayout>
-                    }
-                  />
+                  {/* /judgeapply — Judges & NRC Portal (dropdown hub with nested pages) */}
+                  <Route path="/judgeapply" element={<JudgeApplyPortalLayout />}>
+                    <Route index element={<JudgeApplyPortalHome />} />
+                    <Route path="about" element={<JudgeApplyAreaLanding areaId="about" />} />
+                    <Route path="about/:slug" element={<JudgeApplySupportingPage areaId="about" />} />
+                    <Route path="judges" element={<JudgeApplyAreaLanding areaId="judges" />} />
+                    <Route path="judges/:slug" element={<JudgeApplySupportingPage areaId="judges" />} />
+                    <Route path="nrc" element={<JudgeApplyAreaLanding areaId="nrc" />} />
+                    <Route path="nrc/:slug" element={<JudgeApplySupportingPage areaId="nrc" />} />
+                    <Route path="*" element={<Navigate to="/judgeapply" replace />} />
+                  </Route>
+
                   <Route
                     path="/judge-apply"
                     element={
