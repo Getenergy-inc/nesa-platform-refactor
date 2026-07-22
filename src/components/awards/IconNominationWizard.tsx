@@ -22,6 +22,7 @@ import { useAuth } from "@/contexts/AuthContext";
 import { useDraftPersistence } from "@/features/nominate/useDraftPersistence";
 import { AccountAtSubmitPanel } from "@/features/nominate/AccountAtSubmitPanel";
 import { trackEvent } from "@/lib/analytics";
+import { getEDIMatrix, type EDIIndicator } from "@/config/nominate2026/ediMatrix";
 
 // ─────────────────────────── Taxonomy ───────────────────────────
 const PATHWAYS = [
