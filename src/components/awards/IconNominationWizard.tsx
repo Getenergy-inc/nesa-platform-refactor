@@ -574,23 +574,27 @@ export function IconNominationWizard({
         {step === 4 && (
           <div className="grid gap-6 lg:grid-cols-[1fr,280px]">
             <div className="grid gap-4">
-              {EDI_DIMENSIONS.map((d) => (
+              <div className="text-xs text-foreground/70 -mb-1">
+                Category matrix: <span className="text-gold/90">{ediMatrix.title}</span>
+              </div>
+              {ediIndicators.map((d) => (
                 <FieldTextarea
-                  key={d.key}
+                  key={d.id}
                   required
                   label={d.label}
-                  value={String(state[d.key] ?? "")}
-                  onChange={(v) => set(d.key, v)}
+                  helper={d.description}
+                  value={String(state[d.id] ?? "")}
+                  onChange={(v) => set(d.id, v)}
                 />
               ))}
             </div>
             <aside className="lg:sticky lg:top-6 h-max rounded-xl border border-gold/25 bg-charcoal/50 p-4 space-y-3">
               <div className="text-xs uppercase tracking-wider text-gold font-semibold">
-                EDI Matrix (reference)
+                {ediMatrix.title}
               </div>
               <div className="flex flex-wrap gap-1.5">
-                {EDI_DIMENSIONS.map((d) => (
-                  <Badge key={d.key} variant="outline" className="border-gold/30 text-gold/90 text-[10px]">
+                {ediIndicators.map((d) => (
+                  <Badge key={d.id} variant="outline" className="border-gold/30 text-gold/90 text-[10px]">
                     {d.label}
                   </Badge>
                 ))}
