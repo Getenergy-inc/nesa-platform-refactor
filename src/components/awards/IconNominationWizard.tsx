@@ -380,6 +380,17 @@ export function IconNominationWizard({
             source: "icon-award-wizard",
             source_form_slug: "icon-award-wizard-2026",
           },
+          edi: {
+            tier,
+            category,
+            pathway: state.pathway || null,
+            version: EDI_MATRIX_VERSION,
+            // Only ship ratings for slot IDs the resolved matrix declares —
+            // the server rejects any extra keys.
+            ratings: Object.fromEntries(
+              ediIndicators.map((d) => [d.id, String(state[d.id] ?? "").trim()]),
+            ),
+          },
         },
       });
 
