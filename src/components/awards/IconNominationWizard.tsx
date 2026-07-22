@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { Check, ChevronDown, Download, FileText, Loader2, Send, ShieldCheck, Sparkles } from "lucide-react";
 import { z } from "zod";
@@ -288,6 +288,9 @@ export function IconNominationWizard({
     [tier, category, state.pathway],
   );
   const ediIndicators: EDIIndicator[] = ediMatrix.indicators;
+  // Stable identity for the resolved matrix — changes when tier/category/pathway
+  // resolve to a different matrix, so we can remap/reset EDI answers.
+  const ediMatrixKey = `${tier}/${category}${state.pathway ? `#${state.pathway}` : ""}::${ediMatrix.title}`;
 
   const { draftToken, hydratedValues, clearDraft } = useDraftPersistence<WizardState>(
     "icon-award-wizard-2026",
@@ -301,6 +304,30 @@ export function IconNominationWizard({
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [hydratedValues]);
+
+  // When the resolved EDI matrix changes (pathway/category/tier switch), clear
+  // any prior EDI answers so responses can never be silently carried across
+  // matrices with different semantic meaning. Slot keys are shared, but the
+  // labels/descriptions differ per matrix — so we remap by resetting to blank
+  // and requiring the nominator to re-answer against the new matrix.
+  const prevMatrixKeyRef = useRef<string | null>(null);
+  useEffect(() => {
+    const prev = prevMatrixKeyRef.current;
+    prevMatrixKeyRef.current = ediMatrixKey;
+    if (prev === null || prev === ediMatrixKey) return;
+    setState((p) => {
+      const cleared: Partial<WizardState> = {};
+      for (const key of EDI_SLOT_KEYS) cleared[key] = "" as WizardState[typeof key];
+      return { ...p, ...cleared };
+    });
+    trackEvent("nomination_edi_matrix_reset", {
+      form: "icon-award",
+      tier,
+      category,
+      pathway: state.pathway || null,
+      matrix: ediMatrix.title,
+    });
+  }, [ediMatrixKey, tier, category, state.pathway, ediMatrix.title]);
 
   const set = <K extends keyof WizardState>(k: K, v: WizardState[K]) =>
     setState((p) => ({ ...p, [k]: v }));
