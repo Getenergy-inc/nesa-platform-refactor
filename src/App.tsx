@@ -223,6 +223,7 @@ import Judges from "./pages/Judges";
 import JudgesDirectory from "./pages/judges/JudgesDirectory";
 import JudgeProfile from "./pages/judges/JudgeProfile";
 import NomineePipeline from "./pages/judges/NomineePipeline";
+import PathwayWorkspace from "./pages/judges/PathwayWorkspace";
 import Install from "./pages/Install";
 
 // 22-page canonical consolidators (2026 final refactor)
@@ -2214,6 +2215,14 @@ const App = () => (
                     element={
                       <WithLayout>
                         <NomineePipeline />
+                      </WithLayout>
+                    }
+                  />
+                  <Route
+                    path="/judges/pathways/:pathwaySlug"
+                    element={
+                      <WithLayout>
+                        <PathwayWorkspace />
                       </WithLayout>
                     }
                   />
