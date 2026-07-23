@@ -1,17 +1,19 @@
 // Guards on the shared navigation configuration.
-// Enforces the 6-group information architecture and rejects duplicate
-// destinations across unrelated top-level sections.
+// Locked 5-item architecture:
+//   About · Recognition · Get Involved · Directory · Support
+//
+// Rule: new content goes INSIDE an existing dropdown, never as a new
+// top-level item — unless it represents a genuinely new visitor intent.
 
 import { describe, it, expect } from "vitest";
 import { SITE_NAV, type NavItem } from "@/config/siteNavigation";
 
 const EXPECTED_TOP_LEVEL = [
   "About",
-  "Awards",
-  "Education Enablers",
-  "Impact Programmes",
-  "Media & Events",
+  "Recognition",
   "Get Involved",
+  "Directory",
+  "Support",
 ];
 
 function collectLeaves(item: NavItem): Array<{ href: string; parent: string; section?: string }> {
@@ -30,21 +32,15 @@ function collectLeaves(item: NavItem): Array<{ href: string; parent: string; sec
 }
 
 // Destinations we intentionally re-surface across sections (canonical exceptions).
-// Everything else must live under exactly one parent group.
 const CROSS_SECTION_ALLOWED = new Set<string>([
   "/nominate",
   "/nominees",
-  "/awards/categories",
-  "/eduaid-africa",
-  "/eduaid-africa/rebuild-my-school",
   "/donate",
-  "/sponsors",
-  "/sponsorship-packages",
-  "/guidelines/nominators",
+  "/partners-sponsors",
 ]);
 
 describe("SITE_NAV configuration", () => {
-  it("exposes exactly the six approved top-level groups in order", () => {
+  it("exposes exactly the five approved top-level groups in order", () => {
     expect(SITE_NAV.map((g) => g.label)).toEqual(EXPECTED_TOP_LEVEL);
   });
 
@@ -55,8 +51,25 @@ describe("SITE_NAV configuration", () => {
     }
   });
 
+  it("Directory is a direct link with no dropdown", () => {
+    const dir = SITE_NAV.find((g) => g.label === "Directory")!;
+    expect(dir.children).toBeUndefined();
+    expect(dir.sections).toBeUndefined();
+    expect(dir.href).toBe("/nominees");
+  });
+
+  it("Recognition exposes the four tier columns in the locked order", () => {
+    const rec = SITE_NAV.find((g) => g.label === "Recognition");
+    expect(rec?.sections?.map((s) => s.title)).toEqual([
+      "Africa Education Icon",
+      "Influencer Education Impact",
+      "Platinum Certificates of Recognition",
+      "Gold-Blue Garnet Regional Certificates",
+    ]);
+  });
+
   it("no leaf href appears under more than one top-level group (except canonical crossovers)", () => {
-    const seen = new Map<string, string>(); // href -> parent
+    const seen = new Map<string, string>();
     const duplicates: Array<{ href: string; a: string; b: string }> = [];
     for (const g of SITE_NAV) {
       for (const leaf of collectLeaves(g)) {
@@ -70,24 +83,6 @@ describe("SITE_NAV configuration", () => {
       }
     }
     expect(duplicates, JSON.stringify(duplicates, null, 2)).toEqual([]);
-  });
-
-  it("Awards dropdown exposes the Programmes / Explore / Process sections", () => {
-    const awards = SITE_NAV.find((g) => g.label === "Awards");
-    expect(awards?.sections?.map((s) => s.title)).toEqual([
-      "Award Programmes",
-      "Explore",
-      "Process",
-    ]);
-  });
-
-  it("Get Involved dropdown uses the approved section headings", () => {
-    const gi = SITE_NAV.find((g) => g.label === "Get Involved");
-    expect(gi?.sections?.map((s) => s.title)).toEqual([
-      "Sponsorship and Partnership",
-      "Join the Community",
-      "Support",
-    ]);
   });
 
   it("no dropdown column exceeds 8 links", () => {
