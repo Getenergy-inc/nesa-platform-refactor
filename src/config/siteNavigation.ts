@@ -1,14 +1,16 @@
 // Single source of truth for the NESA-Africa public navigation.
-// 2026 refactor — 7 top-level groups matching the 22-page architecture.
-// Nominate / Sign In / Language render outside SITE_NAV as fixed CTAs
-// in SiteHeader. Logo = Home.
-// Consumed by SiteHeader (desktop + mobile drawer) and NESAFooter.
+// Locked 5-item architecture:
+//   About ▼   Recognition ▼   Get Involved ▼   Directory   Support ▼
 //
-// Rules enforced here:
-// - Recognition dropdown shows ONLY the 4 tier roots (no category leaks).
-// - Community merges membership/chapters/volunteers/ambassadors/judges/NRC.
-// - Support dropdown funnels into consolidated /events, /resources, /policies, /faqs.
-// - No obsolete voting links.
+// Rule: new content goes INSIDE an existing dropdown (or its overview page),
+// never as a new top-level item — unless it represents a genuinely new
+// visitor intent none of the five current items cover. Recognition is the
+// deliberate exception to "keep it lean"; a visitor opening that dropdown
+// has already decided to nominate and benefits from full depth.
+//
+// Nominate / Sign In / Language render outside SITE_NAV as fixed CTAs
+// in SiteHeader. Logo = Home. Consumed by SiteHeader (desktop + mobile
+// drawer) and NESAFooter.
 
 export interface NavChild {
   label: string;
@@ -30,70 +32,6 @@ export interface NavItem {
   analyticsId?: string;
 }
 
-import { TIERS } from "./recognition2026/tiers";
-import {
-  getCategoriesForTier,
-  getCategoryPath,
-} from "./recognition2026/categories";
-
-/**
- * Recognition dropdown = 4 columns, one per tier.
- * - Icon & Influencer (single-category tiers) expose their subcategories.
- * - Platinum & Gold-Blue Garnet expose their categories directly.
- * Each column starts with the tier landing page as an "Overview" link.
- */
-/** Slugify subcategory codes the same way `subpages2026.ts` does. */
-function subpageSlugFromCode(code: string): string {
-  return code.toLowerCase().replace(/[^a-z0-9]+/g, "-");
-}
-
-function buildRecognitionSections(): NavSection[] {
-  const tierLanding: Record<string, string> = {
-    "africa-education-icon": "/awards/africa-education-icon",
-    "influencer-education-impact": "/awards/influencer-education-impact",
-    platinum: "/awards/platinum",
-    "gold-blue-garnet": "/awards/gold-blue-garnet",
-  };
-
-  return TIERS.map((tier) => {
-    const cats = getCategoriesForTier(tier.slug);
-    const items: NavChild[] = [
-      { label: `${tier.shortName} Overview`, href: tierLanding[tier.slug] ?? `/recognition/${tier.slug}` },
-    ];
-
-    // Single-category tiers → link each subcategory to its canonical subpage.
-    if (cats.length === 1 && cats[0].subcategories.length > 0) {
-      const cat = cats[0];
-      for (const sub of cat.subcategories) {
-        items.push({
-          label: sub.name,
-          href: `/recognition/subpage/${subpageSlugFromCode(sub.code)}`,
-        });
-      }
-    } else {
-      // Multi-category tiers → link each category to its canonical subpage.
-      for (const c of cats) {
-        items.push({
-          label: c.shortName ?? c.name,
-          href: `/recognition/subpage/${c.slug}`,
-        });
-      }
-    }
-
-    // Keep the legacy full category page reachable at the end of each column.
-    if (cats.length > 1) {
-      items.push({
-        label: `All ${tier.shortName} categories →`,
-        href: tierLanding[tier.slug] ?? `/recognition/${tier.slug}`,
-      });
-    }
-
-    return { title: tier.shortName, items };
-  });
-}
-// getCategoryPath retained for other consumers; not used above.
-void getCategoryPath;
-
 export const SITE_NAV: NavItem[] = [
   {
     label: "About",
@@ -101,13 +39,7 @@ export const SITE_NAV: NavItem[] = [
     analyticsId: "nav_about",
     children: [
       { label: "About NESA-Africa", href: "/about" },
-      { label: "Vision & Mission", href: "/about/vision-mission" },
-      { label: "Governance", href: "/governance" },
-      { label: "NRC", href: "/about/nrc" },
-      { label: "SCEF", href: "/about/scef" },
-      { label: "History", href: "/about#history" },
-      { label: "Leadership", href: "/about#leadership" },
-      { label: "Reports", href: "/impact/reports" },
+      { label: "Governance & Integrity", href: "/governance" },
       { label: "FAQs", href: "/faqs" },
     ],
   },
@@ -115,20 +47,82 @@ export const SITE_NAV: NavItem[] = [
     label: "Recognition",
     href: "/recognition",
     analyticsId: "nav_recognition",
-    sections: buildRecognitionSections(),
+    sections: [
+      {
+        title: "Africa Education Icon",
+        items: [
+          { label: "Africa Education Icon Overview", href: "/awards/africa-education-icon" },
+          {
+            label: "Africa Education Philanthropy Icon",
+            href: "/recognition/subpage/africa-education-philanthropy-icon",
+          },
+          {
+            label: "Literary and New Curriculum Advocate Icon",
+            href: "/recognition/subpage/literary-and-new-curriculum-advocate-icon",
+          },
+          {
+            label: "Africa Technical Education Icon",
+            href: "/recognition/subpage/africa-technical-education-icon",
+          },
+        ],
+      },
+      {
+        title: "Influencer Education Impact",
+        items: [
+          { label: "Influencer Impact Overview", href: "/awards/influencer-education-impact" },
+          {
+            label: "African Social Media Influencers Education Impact",
+            href: "/recognition/subpage/african-social-media-influencers-education-impact",
+          },
+          {
+            label: "African Sports Icons Supporting Education",
+            href: "/recognition/subpage/african-sports-icons-supporting-education",
+          },
+          {
+            label: "African Music Icons Supporting Education",
+            href: "/recognition/subpage/african-music-icons-supporting-education",
+          },
+        ],
+      },
+      {
+        title: "Platinum Certificates of Recognition",
+        items: [
+          { label: "Platinum Overview", href: "/awards/platinum" },
+          { label: "Tertiary Institution Library", href: "/recognition/subpage/tertiary-institution-library" },
+          { label: "Research & Development for Education", href: "/recognition/subpage/research-and-development-for-education" },
+          { label: "Christian Education Impact", href: "/recognition/subpage/christian-education-impact" },
+          { label: "Islamic Education Impact", href: "/recognition/subpage/islamic-education-impact" },
+          { label: "Political Leadership for Education", href: "/recognition/subpage/political-leadership-for-education" },
+          { label: "International Partnership for Education", href: "/recognition/subpage/international-partnership-for-education" },
+          { label: "All Platinum categories →", href: "/awards/platinum" },
+        ],
+      },
+      {
+        title: "Gold-Blue Garnet Regional Certificates",
+        items: [
+          { label: "Gold-Blue Garnet Overview", href: "/awards/gold-blue-garnet" },
+          { label: "CSR for Education (Africa Regional)", href: "/recognition/subpage/csr-for-education-africa-regional" },
+          { label: "CSR for Education (Nigeria)", href: "/recognition/subpage/csr-for-education-nigeria" },
+          { label: "EduTech Innovation (Africa)", href: "/recognition/subpage/edutech-innovation-africa" },
+          { label: "Media Education Advocacy (Nigeria)", href: "/recognition/subpage/media-education-advocacy-nigeria" },
+          { label: "NGO for Education (Nigeria)", href: "/recognition/subpage/ngo-for-education-nigeria" },
+          { label: "STEM Education Programme (Africa)", href: "/recognition/subpage/stem-education-programme-africa" },
+          { label: "All Gold-Blue Garnet categories →", href: "/awards/gold-blue-garnet" },
+        ],
+      },
+    ],
   },
   {
-    label: "Impact",
-    href: "/impact",
-    analyticsId: "nav_impact",
+    label: "Get Involved",
+    href: "/community",
+    analyticsId: "nav_get_involved",
     children: [
-      { label: "Impact Programmes", href: "/impact" },
-      { label: "EduAid-Africa", href: "/eduaid-africa" },
-      { label: "Rebuild My School Africa", href: "/eduaid-africa/rebuild-my-school" },
-      { label: "Special Needs Education", href: "/special-needs" },
-      { label: "Scholarships", href: "/impact/scholarships" },
-      { label: "Afri-EduTourism", href: "/impact/afri-edutourism-2027" },
-      { label: "Impact Reports", href: "/impact/reports" },
+      { label: "Nominate an Enabler", href: "/nominate" },
+      { label: "Join a Local Chapter / Volunteer", href: "/chapters" },
+      { label: "Recommend an Independent Judge", href: "/judges/apply" },
+      { label: "Apply to the Nominee Research Corps", href: "/about/nrc#apply" },
+      { label: "Pre-Award Webinars, FGDs & Podcasts", href: "/media/webinars" },
+      { label: "Full 2026–2027 Timeline", href: "/timeline" },
     ],
   },
   {
@@ -137,39 +131,14 @@ export const SITE_NAV: NavItem[] = [
     analyticsId: "nav_directory",
   },
   {
-    label: "Community",
-    href: "/community",
-    analyticsId: "nav_community",
-    children: [
-      { label: "Join the Community", href: "/community" },
-      { label: "Local Chapters", href: "/chapters" },
-      { label: "Volunteer", href: "/volunteer" },
-      { label: "Ambassadors", href: "/ambassadors" },
-      { label: "Judges", href: "/judges/apply" },
-      { label: "NRC", href: "/about/nrc#apply" },
-      { label: "Membership", href: "/membership" },
-    ],
-  },
-  {
-    label: "Media",
-    href: "/media",
-    analyticsId: "nav_media",
-    children: [
-      { label: "NESA Africa TV", href: "/media/tv" },
-      { label: "News & Stories", href: "/news" },
-      { label: "Gallery", href: "/gallery" },
-      { label: "Press Room", href: "/press-room" },
-    ],
-  },
-  {
     label: "Support",
     href: "/support",
     analyticsId: "nav_support",
     children: [
-      { label: "Partners & Sponsors", href: "/partners-sponsors" },
       { label: "Donate", href: "/donate" },
-      { label: "Events & Gala", href: "/events" },
-      { label: "Resources", href: "/resources" },
+      { label: "Merchandise", href: "/merch" },
+      { label: "Sponsors & Partners", href: "/partners-sponsors" },
+      { label: "Endorsements", href: "/endorsements" },
       { label: "Contact", href: "/contact" },
     ],
   },
