@@ -185,7 +185,7 @@ function DropdownSectioned({ item }: { item: NavItem }) {
 function DesktopNav() {
   const location = useLocation();
   return (
-    <NavigationMenu className="hidden min-[1360px]:flex mx-auto" aria-label="Primary">
+    <NavigationMenu className="hidden lg:flex mx-auto" aria-label="Primary">
       <NavigationMenuList className="gap-0.5 flex-nowrap">
 
         {SITE_NAV.map((item) => {
@@ -314,7 +314,7 @@ function SecondaryPhaseCTA({ className }: { className?: string }) {
 
 function AccountActions() {
   return (
-    <div className="hidden min-[1360px]:flex items-center gap-1">
+    <div className="hidden lg:flex items-center gap-1">
       <WorkspaceSwitcher />
       <LanguageSwitcher className="text-sm" />
       <AccountMenu />
@@ -438,7 +438,7 @@ function MobileMenu() {
           size="icon"
           aria-label={open ? "Close navigation" : "Open navigation"}
           aria-expanded={open}
-          className="min-[1360px]:hidden text-white hover:text-gold hover:bg-gold/10 min-h-11 min-w-11"
+          className="lg:hidden text-white hover:text-gold hover:bg-gold/10 min-h-11 min-w-11"
         >
           <Menu className="h-6 w-6" aria-hidden />
         </Button>
