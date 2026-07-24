@@ -67,9 +67,9 @@ export const SITE_NAV: NavItem[] = [
         ],
       },
       {
-        title: "Influencer Education Impact",
+        title: "Influencer Recognition of Service",
         items: [
-          { label: "Influencer Impact Overview", href: "/awards/influencer-education-impact" },
+          { label: "Influencer Recognition Overview", href: "/awards/influencer-education-impact" },
           {
             label: "African Social Media Influencers Education Impact",
             href: "/recognition/subpage/african-social-media-influencers-education-impact",
@@ -85,29 +85,28 @@ export const SITE_NAV: NavItem[] = [
         ],
       },
       {
-        title: "Platinum Certificates of Recognition",
+        title: "CSR for Education & EduTech",
         items: [
-          { label: "Platinum Overview", href: "/awards/platinum" },
+          { label: "CSR & EduTech Overview", href: "/awards/platinum" },
           { label: "Tertiary Institution Library", href: "/recognition/subpage/tertiary-institution-library" },
           { label: "Research & Development for Education", href: "/recognition/subpage/research-and-development-for-education" },
           { label: "Christian Education Impact", href: "/recognition/subpage/christian-education-impact" },
           { label: "Islamic Education Impact", href: "/recognition/subpage/islamic-education-impact" },
           { label: "Political Leadership for Education", href: "/recognition/subpage/political-leadership-for-education" },
-          { label: "International Partnership for Education", href: "/recognition/subpage/international-partnership-for-education" },
-          { label: "All Platinum categories →", href: "/awards/platinum" },
+          { label: "All CSR & EduTech categories →", href: "/awards/platinum" },
         ],
       },
       {
-        title: "Gold-Blue Garnet Regional Certificates",
+        title: "Bilateral & International Recognition",
         items: [
-          { label: "Gold-Blue Garnet Overview", href: "/awards/gold-blue-garnet" },
+          { label: "Bilateral & International Overview", href: "/awards/gold-blue-garnet" },
           { label: "CSR for Education (Africa Regional)", href: "/recognition/subpage/csr-for-education-africa-regional" },
           { label: "CSR for Education (Nigeria)", href: "/recognition/subpage/csr-for-education-nigeria" },
           { label: "EduTech Innovation (Africa)", href: "/recognition/subpage/edutech-innovation-africa" },
           { label: "Media Education Advocacy (Nigeria)", href: "/recognition/subpage/media-education-advocacy-nigeria" },
           { label: "NGO for Education (Nigeria)", href: "/recognition/subpage/ngo-for-education-nigeria" },
           { label: "STEM Education Programme (Africa)", href: "/recognition/subpage/stem-education-programme-africa" },
-          { label: "All Gold-Blue Garnet categories →", href: "/awards/gold-blue-garnet" },
+          { label: "All Bilateral & International categories →", href: "/awards/gold-blue-garnet" },
         ],
       },
     ],
