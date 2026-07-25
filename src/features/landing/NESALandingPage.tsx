@@ -195,6 +195,21 @@ export function NESALandingPage() {
           <GovernanceFirewallSection />
         </LazySection>
 
+        {/* 16b. OUR STORY SO FAR — verified SCEF → NESA-Africa timeline */}
+        <LazySection>
+          <SCEFHistoryTimeline />
+        </LazySection>
+
+        {/* 16c. GALA TICKET — 22 Oct 2026, Lagos */}
+        <LazySection>
+          <GalaTicketBand />
+        </LazySection>
+
+        {/* 16d. SUPPORT & DONATE — Special Needs School Intervention */}
+        <LazySection>
+          <SupportDonateBand />
+        </LazySection>
+
         {/* 17. VISION 2035 */}
         <LazySection>
           <Vision2035RoadmapSection />
@@ -204,6 +219,7 @@ export function NESALandingPage() {
         <LazySection>
           <FinalCTASection />
         </LazySection>
+
 
         <NESAFooter />
         <BottomPageNav />
