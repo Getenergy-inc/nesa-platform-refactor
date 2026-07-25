@@ -67,7 +67,7 @@ export const SITE_NAV: NavItem[] = [
         ],
       },
       {
-        title: "Influencer Recognition of Service",
+        title: "Influencer Education Impact",
         items: [
           { label: "Influencer Recognition Overview", href: "/awards/influencer-education-impact" },
           {
@@ -85,7 +85,7 @@ export const SITE_NAV: NavItem[] = [
         ],
       },
       {
-        title: "CSR for Education & EduTech",
+        title: "Platinum Certificate of Recognition",
         items: [
           { label: "CSR & EduTech Overview", href: "/awards/platinum" },
           { label: "Tertiary Institution Library", href: "/recognition/subpage/tertiary-institution-library" },
@@ -97,7 +97,7 @@ export const SITE_NAV: NavItem[] = [
         ],
       },
       {
-        title: "Bilateral & International Recognition",
+        title: "Gold-Blue Garnet Regional Recognition",
         items: [
           { label: "Bilateral & International Overview", href: "/awards/gold-blue-garnet" },
           { label: "CSR for Education (Africa Regional)", href: "/recognition/subpage/csr-for-education-africa-regional" },
