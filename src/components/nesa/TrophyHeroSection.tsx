@@ -72,7 +72,7 @@ export function TrophyHeroSection() {
               className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-gold/10 border border-gold/30 text-gold text-[10px] sm:text-xs font-semibold tracking-[0.18em] uppercase mb-4"
             >
               <Sparkles className="h-3 w-3" />
-              Nominations Open · NESA-Africa 2026
+              Africa's Flagship Education Recognition Platform
             </motion.p>
 
             {/* Official brand block — full content parity on mobile */}

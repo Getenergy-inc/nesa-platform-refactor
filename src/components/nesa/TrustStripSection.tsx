@@ -22,8 +22,10 @@ export function TrustStripSection() {
             </h2>
           </div>
           <p className="text-white/85 text-sm md:text-base leading-relaxed flex-1">
-            {TRUST_STATEMENT}
+            Independent NRC verification · EDI Matrix evaluation · Icon judging · Governance
+            approval. Sponsorship, donations, and endorsements do not influence recognition.
           </p>
+
           <Link
             to="/about#governance"
             className="inline-flex items-center gap-1 text-gold font-semibold text-sm whitespace-nowrap hover:underline"
