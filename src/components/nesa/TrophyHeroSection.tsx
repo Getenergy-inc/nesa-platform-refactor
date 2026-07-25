@@ -103,26 +103,26 @@ export function TrophyHeroSection() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.3 }}
-              className="font-display text-[22px] leading-[1.2] sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4"
+              className="font-display text-[22px] leading-[1.2] sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4 space-y-1"
             >
-              Africa Sees Your{" "}
-              <span className="text-gold bg-gradient-to-r from-gold to-amber-400 bg-clip-text text-transparent">
-                Education Impact.
-              </span>
+              <span className="block">Africa Sees Your Education Impact.</span>
+              <span className="block text-gold">Africa Appreciates You.</span>
+              <span className="block">Africa Says Thank You.</span>
             </motion.h1>
 
             <motion.p
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.5 }}
-              className="text-white/90 text-[15px] sm:text-base md:text-lg mb-5 max-w-xl mx-auto lg:mx-0 leading-relaxed"
+              className="text-white/90 text-[15px] sm:text-base md:text-lg mb-5 max-w-2xl mx-auto lg:mx-0 leading-relaxed"
             >
-              Recognising the individuals, organisations and institutions enabling{" "}
-              <span className="text-gold font-semibold">Education for All</span> across Africa,
-              the Diaspora and Friends of Africa.
+              Home of the <span className="text-gold font-semibold">Africa Education Icon Award</span> —
+              Africa's Hall of Fame for lifetime education impact — supported by Certificates of
+              Recognition honouring the influencers, corporations, and institutions advancing
+              Education for All across Africa, the Diaspora and Friends of Africa.
             </motion.p>
 
-            {/* Recognition Architecture chips — scale at a glance */}
+            {/* Recognition Architecture chips — categories/subcategories omitted pending D3 */}
             <motion.ul
               initial={{ opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
@@ -131,11 +131,9 @@ export function TrophyHeroSection() {
               aria-label="NESA-Africa 2026 recognition architecture at a glance"
             >
               {[
-                `${stats.tiers} Tiers`,
-                `${stats.categories} Categories`,
-                `${stats.subcategories} Subcategories`,
+                "1 Flagship Award",
+                "3 Certificate of Recognition Tiers",
                 `${stats.africanRegions} African Regions`,
-                `${stats.globalCommunities} Global Communities`,
               ].map((chip) => (
                 <li
                   key={chip}
@@ -145,6 +143,7 @@ export function TrophyHeroSection() {
                 </li>
               ))}
             </motion.ul>
+
 
             <motion.div
               initial={{ opacity: 0, y: 15 }}
@@ -161,9 +160,10 @@ export function TrophyHeroSection() {
               transition={{ duration: 0.5, delay: 0.75 }}
               className="text-gold/70 text-xs tracking-wide mb-10 max-w-xl mx-auto lg:mx-0"
             >
-              Independent NRC verification · Icon judging · Governance approval.
-              Sponsorship and donations do not influence recognition.
+              Independent NRC verification · EDI Matrix evaluation · Icon judging · Governance
+              approval. Sponsorship, donations, and endorsements do not influence recognition.
             </motion.p>
+
 
           </div>
 
