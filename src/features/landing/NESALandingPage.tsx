@@ -61,6 +61,11 @@ const WhoWeRecogniseClustersSection = lazy(() => import("@/components/nesa/WhoWe
 
 const CallForNominationIconAward = lazy(() => import("@/components/nesa/CallForNominationIconAward").then(m => ({ default: m.CallForNominationIconAward })));
 const VisitorPathwaySection = lazy(() => import("@/components/nesa/VisitorPathwaySection").then(m => ({ default: m.VisitorPathwaySection })));
+const TierShowcaseStrip = lazy(() => import("@/components/nesa/TierShowcaseStrip").then(m => ({ default: m.TierShowcaseStrip })));
+const VolunteerTrustBand = lazy(() => import("@/components/nesa/VolunteerTrustBand").then(m => ({ default: m.VolunteerTrustBand })));
+const GalaTicketBand = lazy(() => import("@/components/nesa/GalaTicketBand").then(m => ({ default: m.GalaTicketBand })));
+const SupportDonateBand = lazy(() => import("@/components/nesa/SupportDonateBand").then(m => ({ default: m.SupportDonateBand })));
+const SCEFHistoryTimeline = lazy(() => import("@/components/nesa/SCEFHistoryTimeline").then(m => ({ default: m.SCEFHistoryTimeline })));
 
 export function NESALandingPage() {
   const { t } = useTranslation("pages");
@@ -91,20 +96,32 @@ export function NESALandingPage() {
         <UtilityBar />
         <NESAHeader />
 
-        {/* 1. HERO — Restored formal stage backdrop with NESA trophy plaques carousel */}
+        {/* 1. HERO — Triptych headline + set-B stat pills */}
         <TrophyHeroSection />
+
+        {/* 1b. TIER SHOWCASE — three Certificate of Recognition tiers (set B) */}
+        <LazySection>
+          <TierShowcaseStrip />
+        </LazySection>
+
+        {/* 1c. VOLUNTEER TRUST BAND — live social proof */}
+        <LazySection>
+          <VolunteerTrustBand />
+        </LazySection>
+
         <TrustIndicators />
 
-        {/* 1b. PUBLIC NOTICE — Nominations for all 4 tiers open 1 August 2026 */}
+        {/* 1d. PUBLIC NOTICE — Nominations for all 4 tiers open 1 August 2026 */}
         <PublicNominationsNotice />
 
-        {/* 2. COUNTDOWN — Blue-Garnet Awards Gala, 22 Oct 2026, Lagos */}
+        {/* 2. COUNTDOWN — Recognition Gala, 22 Oct 2026, Lagos */}
         <CountdownSection />
 
         {/* 2b. VISITOR PATHWAY — "Who are you nominating?" self-select before award cards */}
         <LazySection>
           <VisitorPathwaySection />
         </LazySection>
+
 
         {/* 2c. CALL FOR NOMINATIONS — Tier 1 Icon → Tier 2 Blue-Garnet → Tier 3 Platinum → Tier 4 Influencers */}
         <LazySection>
