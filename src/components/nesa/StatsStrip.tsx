@@ -1,31 +1,40 @@
 import { motion } from "framer-motion";
 import { useTranslation } from "react-i18next";
-import { GOVERNANCE_STATS, REGIONAL_BRAND_MESSAGING } from "@/lib/regions";
+import { REGIONAL_BRAND_MESSAGING } from "@/lib/regions";
+import { useSiteStats } from "@/config/siteStats";
 
 export function StatsStrip() {
   const { t } = useTranslation("pages");
-  
+  const s = useSiteStats();
+
+  // Public stat framing — dual count per governance decision:
+  // 18 nomination forms map to 22 conceptual categories (Icon + Influencer
+  // each collapse 3 pathways into 1 form). Both surfaced so visitors and
+  // developers see the same source of truth.
   const stats = [
-    { 
-      value: "5+2", 
-      label: REGIONAL_BRAND_MESSAGING.shortTagline, 
+    {
+      value: String(s.forms),
+      label: "Nomination Forms",
       color: "text-gold",
-      subLabel: "Continental + Global"
+      subLabel: `${s.categories} conceptual categories`,
     },
-    { 
-      value: String(GOVERNANCE_STATS.judges), 
-      label: "Expert Judges", 
-      color: "text-gold" 
+    {
+      value: `${s.subcategories}+`,
+      label: t("landing.stats.subcategories"),
+      color: "text-gold",
+      subLabel: "curated public subset",
     },
-    { 
-      value: String(GOVERNANCE_STATS.categories), 
-      label: t("landing.stats.categories"), 
-      color: "text-gold" 
+    {
+      value: String(s.africanRegions),
+      label: "Africa Regions",
+      color: "text-gold",
+      subLabel: `+${s.globalCommunities} global`,
     },
-    { 
-      value: `${GOVERNANCE_STATS.subcategories}+`, 
-      label: t("landing.stats.subcategories"), 
-      color: "text-gold" 
+    {
+      value: String(s.tiers),
+      label: "Recognition Tiers",
+      color: "text-gold",
+      subLabel: REGIONAL_BRAND_MESSAGING.shortTagline,
     },
   ];
 
