@@ -17,11 +17,21 @@ import { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 
 export interface SiteStats {
-  /** 4 Tiers — 1 flagship + 3 Certificate of Recognition. */
+  /** 4 Tiers — 1 flagship (Icon) + 3 Certificate of Recognition. */
   tiers: number;
-  /** Public-facing count. See D2 decision. */
+  /**
+   * Conceptual recognition categories in the taxonomy.
+   * Icon (3 pathways) + Influencer (3 pathways) + Platinum (7) + Gold-Blue Garnet (9) = 22.
+   * A "category" is a taxonomy unit; multiple categories may share one nomination form.
+   */
   categories: number;
-  /** Public-facing count of curated subcategories. */
+  /**
+   * Distinct public nomination forms on /nominate.
+   * Icon = 1 form (pathway dropdown), Influencer = 1 form (pathway dropdown),
+   * Platinum = 7 forms, Gold-Blue Garnet = 9 forms → 18 total.
+   */
+  forms: number;
+  /** Curated public-facing subcategory subset (D2). */
   subcategories: number;
   /** 8 African regions per africaRegions.ts. */
   africanRegions: number;
@@ -45,8 +55,9 @@ export interface SiteStats {
 
 export const SITE_STATS_FALLBACK: SiteStats = {
   tiers: 4,
-  categories: 18,
-  subcategories: 96,
+  categories: 22,
+  forms: 18,
+  subcategories: 99,
   africanRegions: 8,
   globalCommunities: 2,
   chapters: 10,
