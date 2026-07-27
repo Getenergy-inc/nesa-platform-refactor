@@ -492,9 +492,59 @@ Deno.serve(async (req) => {
     // ============================================================
     if (action === "webhooks" && req.method === "POST") {
       const provider = subAction.toUpperCase();
-      const body = await req.json();
+      const rawBody = await req.text();
 
-      // Extract order ID and payment reference based on provider
+      // Verify webhook signature per provider. Hard-fail if secret is not
+      // configured or signature is missing/invalid to prevent forged webhooks
+      // from marking orders PAID or crediting AGC bonuses.
+      let secretName = "";
+      let signatureHeader = "";
+      if (provider === "PAYSTACK") {
+        secretName = "PAYSTACK_SECRET_KEY";
+        signatureHeader = req.headers.get("x-paystack-signature") ?? "";
+      } else if (provider === "TRANSACTPAY") {
+        secretName = "TRANSACTPAY_WEBHOOK_SECRET";
+        signatureHeader =
+          req.headers.get("x-transactpay-signature") ??
+          req.headers.get("x-transact-signature") ?? "";
+      } else {
+        return errorResponse("Unsupported provider", 400);
+      }
+
+      const secret = Deno.env.get(secretName);
+      if (!secret) {
+        console.error(`${secretName} not configured; rejecting webhook`);
+        return errorResponse("Webhook not configured", 401);
+      }
+      if (!signatureHeader) {
+        return errorResponse("Missing signature", 401);
+      }
+
+      const encoder = new TextEncoder();
+      const key = await crypto.subtle.importKey(
+        "raw",
+        encoder.encode(secret),
+        { name: "HMAC", hash: "SHA-512" },
+        false,
+        ["sign"],
+      );
+      const mac = await crypto.subtle.sign("HMAC", key, encoder.encode(rawBody));
+      const expected = Array.from(new Uint8Array(mac))
+        .map((b) => b.toString(16).padStart(2, "0"))
+        .join("");
+
+      // Constant-time-ish comparison via length + char loop
+      let mismatch = signatureHeader.length !== expected.length ? 1 : 0;
+      for (let i = 0; i < expected.length && i < signatureHeader.length; i++) {
+        mismatch |= expected.charCodeAt(i) ^ signatureHeader.charCodeAt(i);
+      }
+      if (mismatch !== 0) {
+        return errorResponse("Invalid signature", 401);
+      }
+
+      let body: any;
+      try { body = JSON.parse(rawBody); } catch { return errorResponse("Invalid JSON", 400); }
+
       let orderId: string | null = null;
       let providerRef: string | null = null;
       let eventType: string | null = null;
@@ -513,7 +563,6 @@ Deno.serve(async (req) => {
         return errorResponse("Missing order_id or reference");
       }
 
-      // Process based on event type
       if (eventType === "charge.success" || eventType === "payment.successful") {
         const result = await processOrderPayment(adminSupabase, orderId, providerRef, provider);
         if (!result.success) return errorResponse(result.error || "Processing failed");
