@@ -113,13 +113,13 @@ export function CallForNominationsCampaign() {
                 </Link>
               </Button>
               <Button asChild size="lg" variant="outline" className="border-primary/40 bg-transparent text-primary hover:bg-primary/10 hover:text-primary">
-                <Link to="/earn-voting-credits">
-                  <Coins className="h-4 w-4" /> How AGC Voting Works
+                <Link to="/guidelines/nominators">
+                  <ShieldCheck className="h-4 w-4" /> Nominator Guidelines
                 </Link>
               </Button>
               <Button asChild size="lg" variant="outline" className="border-white/20 bg-transparent text-white hover:bg-white/10 hover:text-white">
                 <Link to="/categories">
-                  <Vote className="h-4 w-4" /> View Award Categories
+                  <ClipboardList className="h-4 w-4" /> View Award Categories
                 </Link>
               </Button>
             </div>
