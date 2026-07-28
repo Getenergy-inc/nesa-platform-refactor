@@ -28,7 +28,7 @@ export const PHASE_MAP: Record<CampaignPhase, PhaseConfig> = {
   },
   voting: {
     phase: "voting",
-    primary: { label: "Vote & Earn AGC", href: "/vote", analyticsId: "vote_earn_agc" },
+    primary: { label: "Vote & Earn AGC", href: "/awards/gold-blue-garnet", analyticsId: "vote_earn_agc" },
     secondary: {
       label: "Explore Categories",
       href: "/awards/categories",

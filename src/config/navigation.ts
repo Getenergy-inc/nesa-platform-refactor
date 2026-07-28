@@ -144,7 +144,7 @@ export const MAIN_NAV: NavItem[] = [
     children: [
       { label: "Nominate Now", href: "/nominate", description: "Submit a 2026 nomination", icon: FileCheck, badge: "2026" },
       { label: "Explore Existing Nominees", href: "/nominees", description: "Africa's Education Impact Directory", icon: Users },
-      { label: "Vote", href: "/vote", description: "Cast your public vote", icon: Vote },
+      { label: "Vote", href: "/awards/gold-blue-garnet", description: "Cast your public vote", icon: Vote },
       { label: "Endorse a Nominee", href: "/endorse", description: "Institutional endorsements", icon: Shield },
       { label: "Nominate a Special Needs School", href: "/eduaid", description: "Special Needs School Intervention", icon: Heart },
     ],
@@ -304,7 +304,7 @@ export const FOOTER_NAV: NavSection[] = [
     label: "Participate",
     items: [
       { label: "Nominate", href: "/nominate" },
-      { label: "Vote", href: "/vote" },
+      { label: "Vote", href: "/awards/gold-blue-garnet" },
       { label: "Apply to be a Judge", href: "/judgeapply" },
       { label: "Partners", href: "/partners" },
       { label: "Join a Local Chapter", href: "/chapters" },
@@ -411,7 +411,7 @@ export const ADMIN_DASHBOARD_NAV: NavItem[] = [
 
 export const MOBILE_NAV: NavItem[] = [
   { label: "Nominate", href: "/nominate", icon: FileCheck },
-  { label: "Vote", href: "/vote", icon: Vote },
+  { label: "Vote", href: "/awards/gold-blue-garnet", icon: Vote },
   { label: "Engage", href: "/get-involved", icon: Users },
   { label: "Earn AGC", href: "/earn-agc", icon: Coins },
   { label: "Tickets", href: "/tickets", icon: Ticket },
@@ -455,7 +455,7 @@ export const PAGE_REGISTRY: PageDefinition[] = [
   
   // Participate
   { path: "/nominate", title: "Nominate", description: "Submit nomination", component: "Nominate", category: "public", stageGated: "nominations" },
-  { path: "/vote", title: "Vote", description: "Cast your vote", component: "Vote", category: "public", stageGated: "public_voting" },
+  { path: "/awards/gold-blue-garnet", title: "Vote", description: "Cast your vote", component: "Vote", category: "public", stageGated: "public_voting" },
   { path: "/partners", title: "Partners & Sponsors", description: "Partnership opportunities", component: "Partners", category: "public" },
   { path: "/chapters", title: "Local Chapters", description: "Regional chapters", component: "Chapters", category: "public" },
   { path: "/volunteer", title: "Volunteer", description: "Join our team", component: "Volunteer", category: "public" },

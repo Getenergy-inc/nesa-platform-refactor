@@ -52,7 +52,7 @@ const EARN_GROUPS = [
       { label: "Daily Login", reward: "+10 AGCc", to: "/dashboard", icon: Calendar },
       { label: "Watch Impact Stories", reward: "+15 AGCc", to: "/media/tv", icon: PlayCircle },
       { label: "Share Nominee Profile", reward: "+20 AGCc", to: "/nominees", icon: Share2 },
-      { label: "Vote for Nominees", reward: "+Bonus", to: "/vote", icon: Vote },
+      { label: "Vote for Nominees", reward: "+Bonus", to: "/awards/gold-blue-garnet", icon: Vote },
     ],
   },
   {
@@ -77,7 +77,7 @@ const EARN_GROUPS = [
 ] as const;
 
 const MISSIONS = [
-  { label: "Vote Today", reward: "+25 AGCc", progress: 0, to: "/vote", icon: Vote },
+  { label: "Vote Today", reward: "+25 AGCc", progress: 0, to: "/awards/gold-blue-garnet", icon: Vote },
   { label: "Invite 3 Friends", reward: "+3 AGC", progress: 33, to: "/dashboard?tab=referrals", icon: Users },
   { label: "Watch a Legacy Story", reward: "+15 AGCc", progress: 0, to: "/media/tv", icon: PlayCircle },
 ];
@@ -87,7 +87,7 @@ const QUICK_LINKS = [
   { label: "Leaderboard", to: "/earn-agc#leaderboard", icon: Trophy },
   { label: "AGC Wallet", to: "/dashboard/wallet", icon: Wallet },
   { label: "Reward History", to: "/earn-agc#history", icon: Sparkles },
-  { label: "Voting Center", to: "/vote", icon: Vote },
+  { label: "Voting Center", to: "/awards/gold-blue-garnet", icon: Vote },
   { label: "Ambassadors", to: "/ambassadors", icon: Star },
   { label: "Daily Missions", to: "/earn-agc#missions", icon: Target },
   { label: "Referrals", to: "/dashboard?tab=referrals", icon: Gift },

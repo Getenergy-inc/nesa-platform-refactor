@@ -25,10 +25,10 @@ export function MobileBottomActions() {
   // Vote action uses the phase-driven primary/secondary from campaignPhase.
   const voteTarget =
     CURRENT_PHASE.phase === "nomination"
-      ? { label: "Vote", href: "/vote" } // still surface Vote even in nomination phase
+      ? { label: "Vote", href: "/awards/gold-blue-garnet" } // still surface Vote even in nomination phase
       : CURRENT_PHASE.phase === "voting"
       ? { label: "Vote", href: CURRENT_PHASE.primary.href }
-      : { label: "Vote", href: "/vote" };
+      : { label: "Vote", href: "/awards/gold-blue-garnet" };
 
   const actions: Action[] = [
     {
@@ -50,7 +50,7 @@ export function MobileBottomActions() {
       label: voteTarget.label,
       href: voteTarget.href,
       icon: Vote,
-      matchPrefix: "/vote",
+      matchPrefix: "/awards/gold-blue-garnet",
     },
     {
       id: "menu",
