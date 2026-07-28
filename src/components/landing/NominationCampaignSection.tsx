@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import {
   Sparkles,
   Trophy,
-  Coins,
+  ShieldCheck,
   LayoutGrid,
   Users,
   HelpCircle,
