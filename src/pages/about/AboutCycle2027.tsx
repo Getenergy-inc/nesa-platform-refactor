@@ -14,6 +14,7 @@ import {
   CANONICAL_PIPELINE,
   type TimelinePhase,
 } from "@/pages/about/AboutSharedBlocks";
+import { AboutCanonicalContent } from "@/pages/about/AboutCanonicalContent";
 
 const STATS_2027 = [
   { value: "9", label: "Icon Laureates", sub: "Rolling window 2007 → 2027" },
