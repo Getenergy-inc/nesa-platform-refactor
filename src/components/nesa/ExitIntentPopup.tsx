@@ -109,12 +109,12 @@ export function ExitIntentPopup() {
 
                 {/* Headline */}
                 <h2 className="font-display text-2xl md:text-3xl font-bold text-white mb-3">
-                  Before you go — nominate a changemaker
+                  Before You Go
                 </h2>
 
                 <p className="text-white/70 mb-6 max-w-sm mx-auto">
-                  Put an education enabler forward for NESA-Africa 2026. Every submission enters our{" "}
-                  <span className="text-gold font-semibold">NRC verification & EDI Matrix review</span>, and you can track its status anytime.
+                  Someone in your world is already an enabler of Education for All — a teacher, a founder, a mentor no one's recognised yet. Put their name forward. It takes minutes, it's free, and every submission goes through{" "}
+                  <span className="text-gold font-semibold">independent NRC verification</span>.
                 </p>
 
                 {/* Value props */}
@@ -137,7 +137,7 @@ export function ExitIntentPopup() {
                       className="w-full bg-gold hover:bg-gold-dark text-charcoal font-semibold rounded-full gap-2"
                     >
                       <Award className="h-4 w-4" />
-                      Nominate Now
+                      Nominate an Enabler
                       <ArrowRight className="h-4 w-4" />
                     </Button>
                   </Link>
