@@ -47,7 +47,6 @@ import NomineeDirectory from "./pages/NomineeDirectory";
 import MasterNomineeProfile from "./pages/MasterNomineeProfile";
 import CertificateVerify from "./pages/CertificateVerify";
 import VerifyCertificate from "./pages/VerifyCertificate";
-import Results from "./pages/Results";
 import Policies from "./pages/Policies";
 import FAQPage from "./pages/FAQ";
 import { Toaster as Sonner } from "@/components/ui/sonner";
@@ -304,9 +303,6 @@ import {
   ContinueRecognition,
   ImpactStorytelling,
 } from "./pages/guidelines";
-import Vote from "./pages/Vote";
-import VoteWithAGC from "./pages/VoteWithAGC";
-import { GoldVoting, BlueGarnetVoting } from "./pages/vote/index";
 import GoldBlueGarnetVoteHub from "./pages/vote/GoldBlueGarnetVoteHub";
 import { PUBLIC_AWARD_VOTING, VOTING_SUNSET_REDIRECT } from "./config/featureFlags";
 import AboutAGC from "./pages/AboutAGC";
@@ -601,7 +597,7 @@ const App = () => (
                   <Route path="/education-enablers/verification" element={<Navigate to="/governance#verification" replace />} />
 
                   {/* Impact Programmes */}
-                  <Route path="/impact/regional-voting" element={<Navigate to="/vote" replace />} />
+                  <Route path="/impact/regional-voting" element={<Navigate to={VOTING_SUNSET_REDIRECT} replace />} />
                   <Route path="/impact/regional-winners" element={<Navigate to="/impact" replace />} />
                   <Route path="/impact/donate" element={<Navigate to="/donate" replace />} />
                   <Route path="/impact/afri-edutourism-2027" element={<Navigate to="/afri-edutourism" replace />} />
@@ -1820,56 +1816,10 @@ const App = () => (
                       </WithLayout>
                     }
                   />
-                  <Route
-                    path="/vote"
-                    element={
-                      PUBLIC_AWARD_VOTING ? (
-                        <WithLayout>
-                          <WithFirewall>
-                            <Vote />
-                          </WithFirewall>
-                        </WithLayout>
-                      ) : (
-                        <Navigate to={VOTING_SUNSET_REDIRECT} replace />
-                      )
-                    }
-                  />
-                  <Route
-                    path="/vote-with-agc"
-                    element={
-                      PUBLIC_AWARD_VOTING ? (
-                        <WithLayout>
-                          <VoteWithAGC />
-                        </WithLayout>
-                      ) : (
-                        <Navigate to={VOTING_SUNSET_REDIRECT} replace />
-                      )
-                    }
-                  />
-                  <Route
-                    path="/vote/gold"
-                    element={
-                      PUBLIC_AWARD_VOTING ? (
-                        <WithLayout>
-                          <GoldVoting />
-                        </WithLayout>
-                      ) : (
-                        <Navigate to={VOTING_SUNSET_REDIRECT} replace />
-                      )
-                    }
-                  />
-                  <Route
-                    path="/vote/blue-garnet"
-                    element={
-                      PUBLIC_AWARD_VOTING ? (
-                        <WithLayout>
-                          <BlueGarnetVoting />
-                        </WithLayout>
-                      ) : (
-                        <Navigate to={VOTING_SUNSET_REDIRECT} replace />
-                      )
-                    }
-                  />
+                  <Route path="/vote" element={<Navigate to={VOTING_SUNSET_REDIRECT} replace />} />
+                  <Route path="/vote-with-agc" element={<Navigate to={VOTING_SUNSET_REDIRECT} replace />} />
+                  <Route path="/vote/gold" element={<Navigate to={VOTING_SUNSET_REDIRECT} replace />} />
+                  <Route path="/vote/blue-garnet" element={<Navigate to={VOTING_SUNSET_REDIRECT} replace />} />
                   <Route
                     path="/about-agc"
                     element={
@@ -1960,14 +1910,7 @@ const App = () => (
                   />
                   <Route path="/sponsors" element={<WithLayout><SponsorsPartners /></WithLayout>} />
                   <Route path="/sponsors/:slug" element={<SponsorLanding />} />
-                  <Route
-                    path="/results"
-                    element={
-                      <WithLayout>
-                        <Results />
-                      </WithLayout>
-                    }
-                  />
+                  <Route path="/results" element={<Navigate to={VOTING_SUNSET_REDIRECT} replace />} />
 
                   {/* Dashboards - use their own layout */}
                   <Route path="/dashboard" element={<Dashboard />} />
