@@ -83,7 +83,7 @@ export function DonorTrustPanel({ className, compactLinks = false }: Props) {
 
       <p className="text-xs text-white/60 leading-relaxed mb-4">
         Sponsorship, partnership, donations, endorsements and visibility opportunities do
-        not influence nominees, judges, voting outcomes, finalists or winners.
+        not influence nominees, judges, finalists, laureate selection or winners.
       </p>
 
       {!compactLinks && (
