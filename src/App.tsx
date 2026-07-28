@@ -1914,14 +1914,7 @@ const App = () => (
                   />
                   <Route path="/sponsors" element={<WithLayout><SponsorsPartners /></WithLayout>} />
                   <Route path="/sponsors/:slug" element={<SponsorLanding />} />
-                  <Route
-                    path="/results"
-                    element={
-                      <WithLayout>
-                        <Results />
-                      </WithLayout>
-                    }
-                  />
+                  <Route path="/results" element={<Navigate to={VOTING_SUNSET_REDIRECT} replace />} />
 
                   {/* Dashboards - use their own layout */}
                   <Route path="/dashboard" element={<Dashboard />} />
