@@ -1820,56 +1820,10 @@ const App = () => (
                       </WithLayout>
                     }
                   />
-                  <Route
-                    path="/vote"
-                    element={
-                      PUBLIC_AWARD_VOTING ? (
-                        <WithLayout>
-                          <WithFirewall>
-                            <Vote />
-                          </WithFirewall>
-                        </WithLayout>
-                      ) : (
-                        <Navigate to={VOTING_SUNSET_REDIRECT} replace />
-                      )
-                    }
-                  />
-                  <Route
-                    path="/vote-with-agc"
-                    element={
-                      PUBLIC_AWARD_VOTING ? (
-                        <WithLayout>
-                          <VoteWithAGC />
-                        </WithLayout>
-                      ) : (
-                        <Navigate to={VOTING_SUNSET_REDIRECT} replace />
-                      )
-                    }
-                  />
-                  <Route
-                    path="/vote/gold"
-                    element={
-                      PUBLIC_AWARD_VOTING ? (
-                        <WithLayout>
-                          <GoldVoting />
-                        </WithLayout>
-                      ) : (
-                        <Navigate to={VOTING_SUNSET_REDIRECT} replace />
-                      )
-                    }
-                  />
-                  <Route
-                    path="/vote/blue-garnet"
-                    element={
-                      PUBLIC_AWARD_VOTING ? (
-                        <WithLayout>
-                          <BlueGarnetVoting />
-                        </WithLayout>
-                      ) : (
-                        <Navigate to={VOTING_SUNSET_REDIRECT} replace />
-                      )
-                    }
-                  />
+                  <Route path="/vote" element={<Navigate to={VOTING_SUNSET_REDIRECT} replace />} />
+                  <Route path="/vote-with-agc" element={<Navigate to={VOTING_SUNSET_REDIRECT} replace />} />
+                  <Route path="/vote/gold" element={<Navigate to={VOTING_SUNSET_REDIRECT} replace />} />
+                  <Route path="/vote/blue-garnet" element={<Navigate to={VOTING_SUNSET_REDIRECT} replace />} />
                   <Route
                     path="/about-agc"
                     element={
