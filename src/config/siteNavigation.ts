@@ -39,6 +39,9 @@ export const SITE_NAV: NavItem[] = [
     analyticsId: "nav_about",
     children: [
       { label: "About NESA-Africa", href: "/about" },
+      { label: "About NESA-Africa 2026", href: "/about/2026" },
+      { label: "About NESA-Africa 2027", href: "/about/2027" },
+      { label: "About NESA-Africa 2028–2030", href: "/about/2028-2030" },
       { label: "Governance & Integrity", href: "/governance" },
       { label: "FAQs", href: "/faqs" },
     ],
