@@ -29,7 +29,7 @@ import { PageFAQSection } from "@/components/nesa/PageFAQ";
 
 const HERO_STATS = [
   { value: "20", label: "Years of Vision (2006–2026)", icon: Lightbulb },
-  { value: "10", label: "Education Regions", icon: Globe },
+  { value: "15", label: "Regions (8 Africa + 7 Global)", icon: Globe },
   { value: "27+", label: "Expert Judges", icon: Users },
   { value: "18", label: "Categories", icon: Award },
   { value: "96", label: "Recognition Subcategories", icon: Trophy },

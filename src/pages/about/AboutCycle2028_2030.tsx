@@ -63,8 +63,8 @@ export default function AboutCycle2028_2030() {
             <p>
               The 2028–2030 window is the operational bridge into SCEF's{" "}
               <Link to="/about#vision-2035" className="text-gold underline">Vision 2035</Link> — the
-              continental roadmap for Education for All across Africa, the Diaspora, and Friends of
-              Africa.
+              continental roadmap for Education for All across all 15 regions (8 Africa + 7 Global),
+              the Diaspora, and Friends of Africa.
             </p>
           </section>
 
