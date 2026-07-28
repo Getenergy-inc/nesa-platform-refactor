@@ -177,6 +177,8 @@ export default function AboutCycle2028_2030() {
 
       <GovernanceEvolutionDiagram />
 
+      <AboutCanonicalContent />
+
       <AboutGovernanceProtocol downloadHref="/governance" />
 
       <AboutContactBlock
