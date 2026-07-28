@@ -262,7 +262,7 @@ import JudgeApplyAreaLanding from "./pages/judgeapply/AreaLanding";
 import JudgeApplySupportingPage from "./pages/judgeapply/SupportingPage";
 import MyCertificates from "./pages/MyCertificates";
 import CertificateGuide from "./pages/CertificateGuide";
-import VotingPortal from "./pages/VotingPortal";
+
 import { JudgeArenaGuard } from "./components/judge/JudgeArenaGuard";
 import ArenaShellLayout from "./components/judge/ArenaShellLayout";
 import ArenaDashboard from "./pages/judges-arena/ArenaDashboard";
@@ -303,13 +303,9 @@ import {
   ContinueRecognition,
   ImpactStorytelling,
 } from "./pages/guidelines";
-import GoldBlueGarnetVoteHub from "./pages/vote/GoldBlueGarnetVoteHub";
-import { PUBLIC_AWARD_VOTING, VOTING_SUNSET_REDIRECT } from "./config/featureFlags";
+import { VOTING_SUNSET_REDIRECT } from "./config/featureFlags";
 import AboutAGC from "./pages/AboutAGC";
-import EarnVotingCredits from "./pages/EarnVotingCredits";
-import ClaimVotingCredits from "./pages/ClaimVotingCredits";
 import Trending from "./pages/Trending";
-import HowVotingWorks from "./pages/HowVotingWorks";
 import Tickets from "./pages/Tickets";
 import BuyYourTicket from "./pages/BuyYourTicket";
 import GFAWzipWallet from "./pages/GFAWzipWallet";
