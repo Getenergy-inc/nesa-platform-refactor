@@ -139,6 +139,8 @@ export default function AboutCycle2026() {
         footerCta={{ label: "View full cycle calendar", href: "/calendar" }}
       />
 
+      <AboutCanonicalContent />
+
       <AboutGovernanceProtocol downloadHref="/governance" />
 
       <AboutContactBlock
