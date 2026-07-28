@@ -4,8 +4,8 @@ import { motion } from "framer-motion";
 import {
   Sparkles,
   Users,
-  Vote,
-  Coins,
+  ShieldCheck,
+  ClipboardList,
   Trophy,
   ArrowRight,
   ChevronLeft,
