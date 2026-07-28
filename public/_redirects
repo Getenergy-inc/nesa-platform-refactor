@@ -61,7 +61,7 @@
 /cookie-policy                                               /policies            301
 /language                                                    /                    301
 
-# --- 2. SPA routes (500 explicit paths from src/App.tsx) ---
+# --- 2. SPA routes (503 explicit paths from src/App.tsx) ---
 /recognition/influencer-education-impact/african-sports-icons-supporting-education /index.html          200
 /recognition/influencer-education-impact/african-music-icons-supporting-education /index.html          200
 /recognition/influencer-education-impact/african-social-media-influencers /index.html          200
@@ -151,6 +151,7 @@
 /judges/pathways/:pathwaySlug                                /index.html          200
 /recognition/gold-blue-garnet                                /index.html          200
 /subcategories-to-recognition                                /index.html          200
+/about/nesa-africa-2028-2030                                 /index.html          200
 /awards/explore/:pathwaySlug                                 /index.html          200
 /awards/influencer-education                                 /index.html          200
 /awards/platinum-recognition                                 /index.html          200
@@ -192,6 +193,8 @@
 /media/behind-the-scenes                                     /index.html          200
 /nominees/region/:region                                     /index.html          200
 /nrc/handover/governance                                     /index.html          200
+/about/nesa-africa-2026                                      /index.html          200
+/about/nesa-africa-2027                                      /index.html          200
 /admin/nominee-profiles                                      /index.html          200
 /awards/c/:categorySlug                                      /index.html          200
 /events/afri-edutourism                                      /index.html          200

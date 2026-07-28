@@ -9,8 +9,12 @@ import { ReactNode } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { ArrowRight, ShieldCheck, Download, Trophy, Award, Users, Globe2, Calendar, FileText } from "lucide-react";
+import { ArrowRight, ShieldCheck, Download, Trophy, Award, Users, Globe2, Calendar, FileText, FileDown } from "lucide-react";
 import { cn } from "@/lib/utils";
+import governanceDisclaimerAsset from "@/assets/docs/nesa-africa-governance-non-influence-disclaimer.pdf.asset.json";
+
+export const GOVERNANCE_DISCLAIMER_PDF_URL = governanceDisclaimerAsset.url;
+export const GOVERNANCE_DISCLAIMER_PDF_FILENAME = governanceDisclaimerAsset.original_filename;
 
 /* ─────────────────────────────────────────────────────────────
    1. SEAL-ANCHORED HERO (AU/UN register)
