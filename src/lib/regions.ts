@@ -156,10 +156,10 @@ export {
 // Brand messaging constants (updated to 8-region model).
 export const REGIONAL_BRAND_MESSAGING = {
   tagline: REGIONAL_TAGLINE,
-  shortTagline: "8 Africa Regions + African Diaspora",
+  shortTagline: "8 Africa Regions + 7 Global Regions",
   reachStatement:
-    "Across 8 Africa regions and the African Diaspora community",
-  statsLabel: "8 Africa Regions",
+    "Across 8 Africa regions and 7 global diaspora regions",
+  statsLabel: "15 Regions (8 Africa + 7 Global)",
 };
 
 export const GOVERNANCE_STATS = {
