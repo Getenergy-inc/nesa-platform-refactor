@@ -41,7 +41,7 @@ export default function Chapters() {
         <title>NESA-Africa Chapters — Local Communities Across Africa & Diaspora</title>
         <meta
           name="description"
-          content="Discover NESA-Africa local chapters across 10 regions. Join, lead, or partner with a chapter near you to advance education."
+          content="Discover NESA-Africa local chapters across 15 regions. Join, lead, or partner with a chapter near you to advance education."
         />
       </Helmet>
 

@@ -24,7 +24,7 @@ const JOURNEYS = [
   {
     icon: Search,
     title: "I Want to Explore Nominees",
-    description: "Discover changemakers across 10 regions and the diaspora.",
+    description: "Discover changemakers across 15 regions (8 Africa + 7 Global).",
     href: "/nominees",
     cta: "Browse Nominees",
   },

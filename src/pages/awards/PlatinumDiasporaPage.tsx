@@ -175,7 +175,7 @@ export default function PlatinumDiasporaPage() {
         <title>Diaspora Education Impact — Platinum Recognition | NESA-Africa 2026</title>
         <meta
           name="description"
-          content="Discover 300 diaspora-led organisations across 5 African regions and 3 subcategories — infrastructure, program innovation, and teacher training — competing for Platinum Recognition at NESA-Africa 2026."
+          content="Discover 300 diaspora-led organisations across 8 African regions and 3 subcategories — infrastructure, program innovation, and teacher training — competing for Platinum Recognition at NESA-Africa 2026."
         />
         <link rel="canonical" href="https://nesa.africa/awards/platinum-recognition/diaspora" />
       </Helmet>
@@ -205,7 +205,7 @@ export default function PlatinumDiasporaPage() {
                   Africa's diaspora is rebuilding classrooms, training teachers and
                   digitising learning from abroad. We have verified{" "}
                   <span className="text-gold font-semibold">300 diaspora-led organisations</span>{" "}
-                  across <span className="text-gold font-semibold">5 African regions</span> and{" "}
+                  across <span className="text-gold font-semibold">8 African regions</span> and{" "}
                   <span className="text-gold font-semibold">3 recognition subcategories</span>{" "}
                   for the 2026 Platinum cycle.
                 </p>

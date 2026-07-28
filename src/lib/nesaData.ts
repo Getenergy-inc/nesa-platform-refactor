@@ -718,7 +718,7 @@ export function getGeographicGroups(): GeographicGroup[] {
     {
       id: "africa-regions",
       name: "Africa Regions",
-      description: "Nominees from the 5 African regions",
+      description: "Nominees from the 8 African regions",
       nomineeCount: allNominees.filter(n => africaCategories.includes(n.geographicCategory)).length,
       subcategories: ["North Africa", "East Africa", "West Africa", "South Africa", "Central Africa"],
     },

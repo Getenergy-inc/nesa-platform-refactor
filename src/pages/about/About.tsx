@@ -42,7 +42,7 @@ export default function About() {
         <title>About NESA-Africa | The African Blue-Garnet Awards for Education</title>
         <meta
           name="description"
-          content="NESA-Africa is a continental education recognition and impact platform honouring Africa's changemakers across 10 regions, the diaspora, and Friends of Africa. More than awards — a Trust Gateway for the future of African education."
+          content="NESA-Africa is a continental education recognition and impact platform honouring Africa's changemakers across 15 regions, the diaspora, and Friends of Africa. More than awards — a Trust Gateway for the future of African education."
         />
       </Helmet>
 

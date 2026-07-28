@@ -108,7 +108,7 @@ export default function NGOHubPage() {
           <div className="container mx-auto px-4 py-16">
             <h2 className="font-serif text-3xl font-bold text-white mb-2">Explore by Region</h2>
             <p className="text-white/60 mb-8 max-w-2xl">
-              NGO nominees are organised across the 5 African regions. Click into any region to
+              NGO nominees are organised across the 8 African regions. Click into any region to
               browse by impact pillar.
             </p>
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
