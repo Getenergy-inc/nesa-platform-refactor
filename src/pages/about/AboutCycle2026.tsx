@@ -19,7 +19,8 @@ export default function AboutCycle2026() {
             <h1 className="font-display text-3xl md:text-5xl font-bold">About NESA-Africa 2026</h1>
             <p className="text-ivory/70 text-lg">
               The inaugural public award cycle — the first opportunity for public nomination, verification,
-              and recognition since New Education Standard Award Africa Ltd's incorporation in 2024.
+              and recognition since New Education Standard Award Africa Ltd's incorporation in 2024, spanning
+              all 15 regions (8 Africa + 7 Global).
             </p>
           </header>
 

@@ -37,8 +37,8 @@ export default function AboutCycle2027() {
           <section className="space-y-3">
             <h2 className="font-display text-2xl text-gold">What Evolves in 2027</h2>
             <ul className="list-disc pl-6 space-y-1 text-ivory/85">
-              <li>Expanded Local Chapter coverage across all African regions and priority Diaspora hubs.</li>
-              <li>Deeper EduAid-Africa integration — Special Needs School Intervention delivery in October 2027 to one recipient school per African region via Rebuild My School Africa.</li>
+              <li>Expanded Local Chapter coverage across all 15 regions (8 Africa + 7 Global).</li>
+              <li>Deeper EduAid-Africa integration — Special Needs School Intervention delivery in October 2027 to one recipient school per African region (8 African regions) via Rebuild My School Africa.</li>
               <li>Broader independent judge pool for the Icon Award, with sustained COI vetting.</li>
               <li>Refined EDI Matrix based on 2026 cycle learnings — same weighted standard, category-specific tuning.</li>
             </ul>
