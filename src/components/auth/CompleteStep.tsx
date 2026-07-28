@@ -132,9 +132,9 @@ export function CompleteStep({ accountType, fullName, chapterId, country }: Comp
             <Coins className="h-5 w-5 text-amber-600" />
           </div>
           <div className="text-left">
-            <p className="text-sm font-semibold">You've earned your first Afrigold Points!</p>
+            <p className="text-sm font-semibold">You've earned your first Afri-Gold Coin credits!</p>
             <p className="text-xs text-muted-foreground">
-              +5 AGC welcome credits added to your wallet. Submit verified nominations and earn more voting points.
+              +5 AGC welcome credits added to your wallet. Learn how AGC works on the Wallet & Earn AGC pages.
             </p>
           </div>
         </CardContent>

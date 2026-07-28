@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import {
   Sparkles,
   Trophy,
-  Coins,
+  ShieldCheck,
   LayoutGrid,
   Users,
   HelpCircle,
@@ -26,10 +26,10 @@ export function NominationCampaignSection() {
   // NOTE: All CTAs route to existing pages. Do not replace with `#` placeholders.
   const ctas = [
     { label: "Nominate a Changemaker", to: "/nominate", primary: true, icon: Trophy },
-    { label: "Earn AGC Voting Points", to: "/earn-agc", primary: true, icon: Coins },
+    { label: "How Recognition Works", to: "/about", primary: true, icon: ShieldCheck },
     { label: "View Award Categories", to: "/categories", icon: LayoutGrid },
     { label: "Meet the Nominees", to: "/nominees", icon: Users },
-    { label: "How AGC Voting Works", to: "/guidelines/voters", icon: HelpCircle },
+    { label: "Guidelines for Nominators", to: "/guidelines/nominators", icon: HelpCircle },
   ];
 
   const heroVoices = [
@@ -140,11 +140,10 @@ export function NominationCampaignSection() {
             {/* Banner line */}
             <div className="mt-2 rounded-xl border border-gold/30 bg-gold/5 px-4 py-3 sm:px-5 sm:py-4">
               <p className="font-display text-lg sm:text-xl font-semibold text-gold">
-                Nominate. Earn AGC. Celebrate Education Impact.
+                Nominate. Verify. Celebrate Education Impact.
               </p>
               <p className="mt-1 text-sm text-ivory/70">
-                Nominate a changemaker today and earn AGC voting points to
-                support your favourite nominees when voting opens.
+                Every submission enters our NRC verification and EDI Matrix review — free to submit, and you can track its status anytime.
               </p>
             </div>
           </motion.div>
@@ -183,9 +182,9 @@ export function NominationCampaignSection() {
             <p className="mt-4 text-sm text-ivory/70">
               From classrooms to communities, education changemakers are
               everywhere.{" "}
-              <span className="text-gold">Nominate a Changemaker Now</span> and
-              earn AGC voting points to support real education impact across
-              Africa and the diaspora.
+              <span className="text-gold">Nominate a Changemaker Now</span> —
+              every submission is independently verified and adds to Africa's
+              education impact record.
             </p>
           </motion.aside>
         </div>
@@ -254,7 +253,7 @@ export function NominationCampaignSection() {
             Community engagement. Education impact storytelling.
           </p>
           <p className="mt-4 font-display text-base sm:text-lg text-gold">
-            Nominate a changemaker today and earn your AGC voting points.
+            Nominate a changemaker today — your submission enters independent NRC verification.
           </p>
           <div className="mt-5 flex flex-wrap justify-center gap-3">
             <Button asChild size="lg" className="bg-gold text-charcoal hover:bg-gold/90">
@@ -269,9 +268,9 @@ export function NominationCampaignSection() {
               variant="outline"
               className="border-gold/40 text-gold hover:bg-gold/10"
             >
-              <Link to="/earn-agc">
-                <Coins className="mr-2 h-4 w-4" />
-                Earn AGC Voting Points
+              <Link to="/about">
+                <ShieldCheck className="mr-2 h-4 w-4" />
+                How Recognition Works
               </Link>
             </Button>
           </div>

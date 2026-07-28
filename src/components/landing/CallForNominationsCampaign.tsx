@@ -13,8 +13,8 @@ import {
   Play,
   ArrowRight,
   Trophy,
-  Coins,
-  Vote,
+  ShieldCheck,
+  ClipboardList,
   Share2,
   Star,
   Megaphone,
@@ -32,9 +32,9 @@ const personas = [
 
 const journey = [
   { n: "1", title: "Nominate a Changemaker", desc: "Submit an education impact leader, organisation, or initiative in minutes.", icon: Trophy },
-  { n: "2", title: "Earn AGC Voting Points", desc: "Every successful nomination rewards you with AGC voting points.", icon: Coins },
+  { n: "2", title: "Independent Verification", desc: "Every submission is reviewed by the NRC and scored against the EDI Matrix — no fees, no shortcuts.", icon: ShieldCheck },
   { n: "3", title: "Share the Movement", desc: "Invite your community, school network, organisation, or diaspora network to participate.", icon: Share2 },
-  { n: "4", title: "Support Your Favourite Nominees", desc: "Use your AGC voting points to support education changemakers when voting opens.", icon: Star },
+  { n: "4", title: "Track Your Nomination", desc: "Follow verification status and celebrate when your nominee advances through the recognition pathway.", icon: Star },
 ];
 
 export function CallForNominationsCampaign() {
@@ -68,7 +68,7 @@ export function CallForNominationsCampaign() {
               </span>
             </h2>
             <p className="mt-4 text-lg font-medium text-primary/90 md:text-xl">
-              Nominate. Earn AGC. Share. Support your favourite nominees.
+              Nominate. Verify. Share. Celebrate education impact.
             </p>
             <p className="mt-5 text-base leading-relaxed text-white/75 md:text-lg">
               Education impact lives everywhere — in NGOs and foundations,
@@ -113,13 +113,13 @@ export function CallForNominationsCampaign() {
                 </Link>
               </Button>
               <Button asChild size="lg" variant="outline" className="border-primary/40 bg-transparent text-primary hover:bg-primary/10 hover:text-primary">
-                <Link to="/earn-voting-credits">
-                  <Coins className="h-4 w-4" /> How AGC Voting Works
+                <Link to="/guidelines/nominators">
+                  <ShieldCheck className="h-4 w-4" /> Nominator Guidelines
                 </Link>
               </Button>
               <Button asChild size="lg" variant="outline" className="border-white/20 bg-transparent text-white hover:bg-white/10 hover:text-white">
                 <Link to="/categories">
-                  <Vote className="h-4 w-4" /> View Award Categories
+                  <ClipboardList className="h-4 w-4" /> View Award Categories
                 </Link>
               </Button>
             </div>
@@ -173,7 +173,7 @@ export function CallForNominationsCampaign() {
                 </div>
                 <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/85 to-transparent p-3">
                   <p className="text-xs font-medium text-white md:text-sm">
-                    Watch how to nominate a changemaker and earn AGC voting points.
+                    Watch how to nominate a changemaker and track verification.
                   </p>
                 </div>
               </div>
@@ -192,7 +192,7 @@ export function CallForNominationsCampaign() {
           <div className="inline-flex flex-wrap items-center justify-center gap-2 rounded-full border border-primary/30 bg-primary/10 px-5 py-2.5 text-center">
             <ArrowRight className="h-4 w-4 text-primary" />
             <span className="text-sm font-semibold text-white md:text-base">
-              Nominate. <span className="text-primary">Earn AGC.</span> Celebrate Education Impact.
+              Nominate. <span className="text-primary">Verify.</span> Celebrate Education Impact.
             </span>
           </div>
         </motion.div>

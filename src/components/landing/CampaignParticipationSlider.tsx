@@ -4,8 +4,8 @@ import { motion } from "framer-motion";
 import {
   Sparkles,
   Users,
-  Vote,
-  Coins,
+  ShieldCheck,
+  ClipboardList,
   Trophy,
   ArrowRight,
   ChevronLeft,
@@ -34,7 +34,7 @@ const slides: Slide[] = [
     title: "Why Nominate for 2026?",
     body:
       "NESA-Africa gives the public a platform to recognise, celebrate, and amplify the people and institutions advancing education across Africa — Africans in Africa, Africans in the diaspora, and Friends of Africa.",
-    bullets: ["Recognise impact", "Earn AGC", "Celebrate education"],
+    bullets: ["Recognise impact", "Independently verified", "Celebrate education"],
     cta: { label: "Start Nomination", to: "/nominate", icon: Trophy },
     Icon: Sparkles,
   },
@@ -43,7 +43,7 @@ const slides: Slide[] = [
     kicker: "Step 2",
     title: "Who Can Be Nominated?",
     body:
-      "From classrooms to communities, education changemakers are everywhere. Nominate a Changemaker for 2026 now and earn AGC voting points to support real impact.",
+      "From classrooms to communities, education changemakers are everywhere. Nominate a Changemaker for 2026 now — every submission enters independent NRC verification.",
     bullets: [
       "A mentor or school founder",
       "An NGO leader or youth advocate",
@@ -56,16 +56,16 @@ const slides: Slide[] = [
   {
     key: "how",
     kicker: "Step 3",
-    title: "How Participation Works",
+    title: "How Recognition Works",
     body:
-      "Nominate. Vote. Earn. Use Afri-Gold Coins to back finalists during the Blue Garnet voting window — every vote is auditable.",
+      "Nominate. Verify. Recognise. Every nominee is reviewed by the NRC, scored on the EDI Matrix, and judged by an independent jury — no public voting, no pay-to-win.",
     bullets: [
       "Submit a 2026 nominee",
-      "Explore Recognition during the window",
-      "Engage, share, refer to grow your wallet",
+      "Track verification and EDI scoring",
+      "Explore recognition during the cycle",
     ],
-    cta: { label: "Earn AGC Now", to: "/earn-agc", icon: Coins },
-    Icon: Vote,
+    cta: { label: "View Award Categories", to: "/categories", icon: ClipboardList },
+    Icon: ShieldCheck,
   },
 ];
 
@@ -102,7 +102,7 @@ export function CampaignParticipationSlider() {
             Africa, Who Is Your Education Changemaker?
           </h2>
           <p className="mt-2 text-white/70 text-sm sm:text-base">
-            Nominate. Earn AGC. Celebrate Education Impact.
+            Nominate. Verify. Celebrate Education Impact.
           </p>
         </div>
 
