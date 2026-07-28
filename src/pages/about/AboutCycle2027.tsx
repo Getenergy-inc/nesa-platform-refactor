@@ -83,6 +83,8 @@ export default function AboutCycle2027() {
         footerCta={{ label: "View 2026 cycle for reference", href: "/about/nesa-africa-2026" }}
       />
 
+      <AboutCanonicalContent />
+
       <AboutGovernanceProtocol downloadHref="/governance" />
 
       <AboutContactBlock
