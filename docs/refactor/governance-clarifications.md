@@ -49,19 +49,22 @@ labelled with the ~10 items is bound to a `impact_area_tags[]` column, not to
 
 ---
 
-## 3. Public stat framing — dual count
+## 3. Public stat framing — single count (updated per D0)
 
-Public pills and `site_stats` surface both units side by side because both
-are true and the difference matters:
+**Superseded by [D0 — Category Page Architecture](./d0-category-architecture.md).**
+Under D0 Option A, forms and categories are 1:1 — every Icon pathway and
+every Influencer category has its own dedicated page and its own form.
 
-- **18 Nomination Forms** — the count of distinct forms on `/nominate`.
-- **22 Recognition Categories** — the conceptual taxonomy. Icon collapses 3
-  pathways into 1 form; Influencer collapses 3 pathways into 1 form.
+- **22 Recognition Categories** = **22 Nomination Forms** (per-page,
+  StageGate-scoped). Region-expanded variants are orthogonal and not counted
+  in the headline pill.
+- **4 Tier Overviews** — hubs above the 22 category pages.
 - **99 Subcategories** — curated public subset (D2). Full 250–300+ pathway
   list lives inside forms and NRC tooling.
 
-Never render "18 Categories" or "22 Forms" — those are the two silent-error
-misprints this decision exists to prevent.
+The earlier dual-count framing ("18 forms / 22 categories") is obsolete —
+`useSiteStats()` and `StatsStrip.tsx` must be updated to surface a single
+`22 Categories · 22 Forms` line before public release.
 
 ---
 
