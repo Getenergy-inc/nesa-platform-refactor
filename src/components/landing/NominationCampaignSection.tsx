@@ -182,9 +182,9 @@ export function NominationCampaignSection() {
             <p className="mt-4 text-sm text-ivory/70">
               From classrooms to communities, education changemakers are
               everywhere.{" "}
-              <span className="text-gold">Nominate a Changemaker Now</span> and
-              earn AGC voting points to support real education impact across
-              Africa and the diaspora.
+              <span className="text-gold">Nominate a Changemaker Now</span> —
+              every submission is independently verified and adds to Africa's
+              education impact record.
             </p>
           </motion.aside>
         </div>
