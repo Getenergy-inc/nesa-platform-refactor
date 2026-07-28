@@ -54,7 +54,7 @@ export default function NomineeDirectory() {
     <>
       <Helmet>
         <title>2025 Nominee Directory | NESA Africa Awards</title>
-        <meta name="description" content="Explore NESA Africa 2026 Award nominees across 14 categories, 8 Africa regions, and 3 subcategories. Vote and support education champions across Africa." />
+        <meta name="description" content="Explore NESA Africa 2026 Award nominees across 14 categories, 15 regions (8 Africa + 7 Global), and 3 subcategories. Vote and support education champions across Africa." />
       </Helmet>
 
       <div className="min-h-screen bg-charcoal">

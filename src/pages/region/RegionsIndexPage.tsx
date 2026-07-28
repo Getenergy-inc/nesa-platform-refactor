@@ -103,7 +103,7 @@ export default function RegionsIndexPage() {
             </div>
 
             <div className="mt-10">
-              <ExploreNomineesCTA description="See every approved nominee across all 10 regions in Africa's Education Impact Directory." />
+              <ExploreNomineesCTA description="See every approved nominee across all 15 regions (8 Africa + 7 Global) in Africa's Education Impact Directory." />
             </div>
           </div>
         </section>
