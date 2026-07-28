@@ -32,7 +32,7 @@ export default function DigitalVoices() {
           { value: "Voices", label: "Driving Change" },
         ]}
         primaryCta={{ label: "Explore Gold Nominees", href: "/nominees?category=Influencers%20Education%20Impact%20Award" }}
-        secondaryCta={{ label: "Vote for Influencers", href: "/vote" }}
+        secondaryCta={{ label: "Vote for Influencers", href: "/awards/gold-blue-garnet" }}
         watchCta={{ label: "Watch Impact Stories", href: "/media" }}
         imageAlt="Africa's top education influencers — creators, musicians, athletes"
       />

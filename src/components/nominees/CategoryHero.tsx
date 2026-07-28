@@ -22,7 +22,7 @@ export function CategoryHero({
   nomineeCount,
   countryCount,
   subcategoryCount,
-  voteHref = "/vote",
+  voteHref = "/awards/gold-blue-garnet",
   nominateHref = "/nominate",
 }: Props) {
   return (

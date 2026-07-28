@@ -555,7 +555,7 @@ import { VotingStatsStrip } from "@/components/voting/VotingStatsStrip";
                Gold Certificate is 100% public voting to recognise Africa's education enablers.
              </p>
              <Button asChild variant="outline" size="lg">
-               <Link to="/vote/gold">
+               <Link to="/awards/gold-blue-garnet">
                  Go to Gold Certificate Voting
                </Link>
              </Button>

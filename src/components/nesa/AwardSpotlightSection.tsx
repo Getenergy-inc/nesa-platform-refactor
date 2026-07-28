@@ -109,7 +109,7 @@ const pathways: PathwayVideoCardData[] = [
     previewSummary:
       "Discover the artists, athletes and creators using their platforms to drive literacy, scholarships and school access — honoured under NESA-Africa's Gold Recognition tier.",
     primaryCta: { label: "Explore Gold Nominees", href: "/nominees/gold" },
-    secondaryCta: { label: "Vote With AGC", href: "/vote" },
+    secondaryCta: { label: "Vote With AGC", href: "/awards/gold-blue-garnet" },
     tertiaryCta: { label: "Explore Nominees", href: "/nominees?category=influencers" },
     engagementCtaLabel: "Explore the Journey",
   },
@@ -238,7 +238,7 @@ export function AwardSpotlightSection() {
                 <ArrowRight className="h-4 w-4" />
               </Button>
             </Link>
-            <Link to="/vote">
+            <Link to="/awards/gold-blue-garnet">
               <Button
                 size="lg"
                 variant="outline"

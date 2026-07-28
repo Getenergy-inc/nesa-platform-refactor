@@ -46,7 +46,7 @@ export function WhatsLiveSection() {
       icon: Vote,
       label: t("landing.whatsLive.nextVotingWindow"),
       event: nextVoting,
-      href: "/vote",
+      href: "/awards/gold-blue-garnet",
       gradient: "from-blue-500/20 to-blue-600/10",
       iconColor: "text-blue-400",
       borderColor: "border-blue-500/20 hover:border-blue-500/40",

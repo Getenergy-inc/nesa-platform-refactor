@@ -8,7 +8,7 @@ export function GetInvolvedSection() {
 
   const actions = [
     { icon: Award, label: "Nominate", href: "/nominate", primary: true },
-    { icon: Vote, label: "Vote", href: "/vote", primary: true },
+    { icon: Vote, label: "Vote", href: "/awards/gold-blue-garnet", primary: true },
     { icon: Ticket, label: "Get Tickets", href: "/buy-your-ticket", primary: false },
     { icon: Heart, label: "Donate", href: "/donate", primary: false },
     { icon: Handshake, label: "Partner", href: "/partners", primary: false },

@@ -10,7 +10,7 @@ import ReactMarkdown from "react-markdown";
 
 const CAPABILITY_LINKS: { label: string; to: string }[] = [
   { label: "Nominations", to: "/nominate" },
-  { label: "Voting", to: "/vote" },
+  { label: "Voting", to: "/awards/gold-blue-garnet" },
   { label: "Sponsorship", to: "/sponsor" },
   { label: "Volunteering", to: "/volunteer" },
   { label: "Judging", to: "/judges" },

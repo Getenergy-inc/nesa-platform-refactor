@@ -19,7 +19,7 @@ const nextStepsConfig: Record<AccountType, { title: string; steps: { icon: React
     title: "Start Your NESA Journey",
     steps: [
       { icon: <Award className="h-5 w-5" />, text: "Nominate an educator", link: "/nominate" },
-      { icon: <Vote className="h-5 w-5" />, text: "Vote for nominees", link: "/vote" },
+      { icon: <Vote className="h-5 w-5" />, text: "Vote for nominees", link: "/awards/gold-blue-garnet" },
       { icon: <Trophy className="h-5 w-5" />, text: "Explore award categories", link: "/categories" },
     ],
   },

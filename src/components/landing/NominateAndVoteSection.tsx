@@ -17,7 +17,7 @@ export function NominateAndVoteSection() {
       eyebrow: "Step 2",
       title: "Explore Recognition",
       body: "Use Afri-Gold Coins to back finalists during the Blue Garnet voting window. Every vote is auditable.",
-      href: "/vote",
+      href: "/awards/gold-blue-garnet",
       cta: "Open Voting Hub",
     },
     {

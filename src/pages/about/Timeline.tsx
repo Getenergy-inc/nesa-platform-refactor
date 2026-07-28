@@ -97,7 +97,7 @@ export default function Timeline() {
                 <Link to="/nominate">Nominate an Enabler <ArrowRight className="ml-1.5 h-4 w-4" /></Link>
               </Button>
               <Button asChild size="lg" variant="outline" className="border-white/20 text-white hover:bg-white/5">
-                <Link to="/vote">Explore Recognition</Link>
+                <Link to="/awards/gold-blue-garnet">Explore Recognition</Link>
               </Button>
               <Button asChild size="lg" variant="ghost" className="text-white hover:bg-white/5">
                 <Link to="/programs">Explore Impact Programmes</Link>

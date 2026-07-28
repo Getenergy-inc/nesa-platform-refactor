@@ -508,7 +508,7 @@ import { VotingStatsStrip } from "@/components/voting/VotingStatsStrip";
                Blue Garnet Award combines 40% public votes with 60% jury evaluation for the highest honor.
              </p>
              <Button asChild variant="outline" size="lg">
-               <Link to="/vote/blue-garnet">
+               <Link to="/awards/gold-blue-garnet">
                  Go to Blue Garnet Voting
                </Link>
              </Button>

@@ -282,7 +282,7 @@ export default function ClaimVotingCredits() {
                 </Link>
               </Button>
               <Button asChild size="lg" className="shadow-lg">
-                <Link to="/vote">
+                <Link to="/awards/gold-blue-garnet">
                   <Vote className="mr-2 h-5 w-5" />
                   Start Voting
                 </Link>

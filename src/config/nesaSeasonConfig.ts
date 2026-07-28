@@ -108,7 +108,7 @@ export const PHASES: PhaseConfig[] = [
     endDate: new Date("2026-09-25"),
     isActive: false,
     ctaText: "Learn More",
-    ctaLink: "/vote",
+    ctaLink: "/awards/gold-blue-garnet",
   },
   {
     id: "jury-scoring",
