@@ -26,10 +26,10 @@ export function NominationCampaignSection() {
   // NOTE: All CTAs route to existing pages. Do not replace with `#` placeholders.
   const ctas = [
     { label: "Nominate a Changemaker", to: "/nominate", primary: true, icon: Trophy },
-    { label: "Earn AGC Voting Points", to: "/earn-agc", primary: true, icon: Coins },
+    { label: "How Recognition Works", to: "/about", primary: true, icon: ShieldCheck },
     { label: "View Award Categories", to: "/categories", icon: LayoutGrid },
     { label: "Meet the Nominees", to: "/nominees", icon: Users },
-    { label: "How AGC Voting Works", to: "/guidelines/voters", icon: HelpCircle },
+    { label: "Guidelines for Nominators", to: "/guidelines/nominators", icon: HelpCircle },
   ];
 
   const heroVoices = [
