@@ -10,7 +10,7 @@ const paths = [
   {
     icon: Users,
     title: "Browse Nominees",
-    description: "Discover 1,760+ education champions across 8 Africa regions",
+    description: "Discover 1,760+ education champions across 15 regions (8 Africa + 7 Global)",
     href: "/nominees",
     color: "text-gold",
     borderColor: "border-gold/30",

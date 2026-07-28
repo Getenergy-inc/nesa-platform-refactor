@@ -400,7 +400,7 @@ export function buildTimeline(
       phase: "Phase 7 · Gold–Blue Garnet Awards Gala",
       dateRange: `22 October ${ceremonyYear}`,
       description:
-        "Africa's flagship education recognition ceremony on 22 October 2026 celebrating the continent's leading Education Enablers across 8 Africa Regions, the African Diaspora and Friends of Africa.",
+        "Africa's flagship education recognition ceremony on 22 October 2026 celebrating the continent's leading Education Enablers across 15 regions (8 Africa + 7 Global).",
       type: "gala",
     },
     {
