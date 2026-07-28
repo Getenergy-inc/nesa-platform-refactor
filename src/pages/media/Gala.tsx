@@ -38,7 +38,7 @@ import {
 import galaHeroImage from "@/assets/events/award-gala.jpeg";
 
 // ============== EVENT DETAILS ==============
-const GALA_DATE = new Date("2026-10-22T18:00:00+01:00");
+const GALA_DATE = new Date("2026-12-14T00:00:00+01:00");
 const GALA = {
   title: "Blue Garnet Awards Gala",
   tagline: "The Night Africa Celebrates Education Changemakers",
