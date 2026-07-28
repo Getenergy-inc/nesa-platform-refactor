@@ -3,7 +3,7 @@
 // rollout diagram showing when and how public engagement enters
 // the Gold-Blue Garnet tier only, with Icon and Platinum staying
 // verification-only indefinitely.
-import { Helmet } from "react-helmet-async";
+import { AboutSeo } from "@/pages/about/AboutSeo";
 import { Link } from "react-router-dom";
 import { ShieldCheck, Lock, Vote } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
@@ -143,13 +143,20 @@ function GovernanceEvolutionDiagram() {
 export default function AboutCycle2028_2030() {
   return (
     <>
-      <Helmet>
-        <title>About NESA-Africa 2028–2030 · Governance Evolution Outlook</title>
-        <meta
-          name="description"
-          content="NESA-Africa 2028–2030 outlook — a disclosed, phased governance evolution. Capped public engagement introduced on the Gold-Blue Garnet tier only; Icon and Platinum remain verification-based indefinitely."
-        />
-      </Helmet>
+      <AboutSeo
+        title="About NESA-Africa 2028–2030 · Governance Evolution Outlook"
+        description="NESA-Africa 2028–2030 outlook — a disclosed, phased governance evolution. Capped public engagement introduced on the Gold-Blue Garnet tier only; Icon and Platinum remain verification-based indefinitely."
+        path="/about/nesa-africa-2028-2030"
+        breadcrumbs={[
+          { name: "Home", path: "/" },
+          { name: "About", path: "/about" },
+          { name: "NESA-Africa 2028–2030", path: "/about/nesa-africa-2028-2030" },
+        ]}
+        faqs={[
+          { question: "Will public voting influence the Africa Education Icon Award from 2028?", answer: "No. The Africa Education Icon Award and Platinum Certificates of Recognition remain fully verification-based indefinitely, with no public voting at any point." },
+          { question: "What changes on the Gold-Blue Garnet tier from 2028?", answer: "From the 2028 cycle, the Gold-Blue Garnet tier alone introduces a capped, non-monetary public engagement element — disclosed here in advance, years ahead of implementation." },
+        ]}
+      />
 
       <AboutSealHero
         eyebrow="Medium-Term Outlook · Governance Disclosure"

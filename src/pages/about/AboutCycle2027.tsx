@@ -1,7 +1,7 @@
 // About NESA-Africa 2027 — second public cycle, pre-launch state.
 // Same institutional shell as 2026; phases greyed / unconfirmed
 // except the known December 2027 Gala month in Lagos.
-import { Helmet } from "react-helmet-async";
+import { AboutSeo } from "@/pages/about/AboutSeo";
 import {
   AboutSealHero,
   AboutStatStrip,
@@ -43,13 +43,16 @@ const PHASES_2027: TimelinePhase[] = [
 export default function AboutCycle2027() {
   return (
     <>
-      <Helmet>
-        <title>About NESA-Africa 2027 · Second Public Award Cycle</title>
-        <meta
-          name="description"
-          content="NESA-Africa 2027 — the second public award cycle. Continues verification-only recognition across all four tiers, culminating in the December 2027 Recognition Gala in Lagos."
-        />
-      </Helmet>
+      <AboutSeo
+        title="About NESA-Africa 2027 · Second Public Award Cycle"
+        description="NESA-Africa 2027 — the second public award cycle. Continues verification-only recognition across all four tiers, culminating in the December 2027 Recognition Gala in Lagos."
+        path="/about/nesa-africa-2027"
+        breadcrumbs={[
+          { name: "Home", path: "/" },
+          { name: "About", path: "/about" },
+          { name: "NESA-Africa 2027", path: "/about/nesa-africa-2027" },
+        ]}
+      />
 
       <AboutSealHero
         eyebrow="Second Public Cycle · Pre-Launch"

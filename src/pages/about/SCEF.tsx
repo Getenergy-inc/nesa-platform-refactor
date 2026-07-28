@@ -1,4 +1,4 @@
-import { Helmet } from "react-helmet-async";
+import { AboutSeo } from "@/pages/about/AboutSeo";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -44,13 +44,16 @@ const programs = [
 export default function SCEF() {
   return (
     <>
-      <Helmet>
-        <title>SCEF Foundation | Santos Creations Educational Foundation</title>
-        <meta
-          name="description"
-          content="Santos Creations Educational Foundation (SCEF) is the parent organization driving education transformation across Africa through multiple programmes."
-        />
-      </Helmet>
+      <AboutSeo
+        title="SCEF Foundation | Santos Creations Educational Foundation"
+        description="Santos Creations Educational Foundation (SCEF) is the parent organisation driving education transformation across Africa through NESA-Africa, EduAid-Africa, and Rebuild My School Africa."
+        path="/about/scef"
+        breadcrumbs={[
+          { name: "Home", path: "/" },
+          { name: "About", path: "/about" },
+          { name: "SCEF", path: "/about/scef" },
+        ]}
+      />
 
       <div className="min-h-screen bg-charcoal">
         {/* Hero */}

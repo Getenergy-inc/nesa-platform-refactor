@@ -1,7 +1,7 @@
 // About NESA-Africa — consolidated page (22-page architecture).
 // Governance moved to its own /governance route.
 import { useEffect } from "react";
-import { Helmet } from "react-helmet-async";
+import { AboutSeo } from "@/pages/about/AboutSeo";
 import About from "@/pages/about/About";
 import SCEF from "@/pages/about/SCEF";
 import Vision2035 from "@/pages/about/Vision2035";
@@ -26,13 +26,16 @@ export default function AboutConsolidated() {
 
   return (
     <>
-      <Helmet>
-        <title>About NESA-Africa · Vision, Mission, SCEF & Vision 2035</title>
-        <meta
-          name="description"
-          content="About NESA-Africa — vision, mission, our SCEF relationship, history, Vision 2035 continental roadmap, and answers to frequently asked questions."
-        />
-      </Helmet>
+      <AboutSeo
+        title="About NESA-Africa · Vision, Mission, SCEF & Vision 2035"
+        description="About NESA-Africa — vision, mission, our SCEF relationship, history, Vision 2035 continental roadmap, and answers to frequently asked questions."
+        path="/about/overview"
+        breadcrumbs={[
+          { name: "Home", path: "/" },
+          { name: "About", path: "/about" },
+          { name: "Overview", path: "/about/overview" },
+        ]}
+      />
       <nav aria-label="About sections" className="sticky top-14 sm:top-16 z-30 bg-charcoal/95 backdrop-blur border-b border-gold/20 overflow-x-auto">
         <ul className="flex gap-4 px-4 py-3 text-sm whitespace-nowrap">
           {SECTIONS.map((s) => (

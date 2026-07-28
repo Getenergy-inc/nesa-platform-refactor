@@ -1,4 +1,4 @@
-import { Helmet } from "react-helmet-async";
+import { AboutSeo } from "@/pages/about/AboutSeo";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import {
@@ -56,14 +56,16 @@ const PARTICIPANT_TRACKS = [
 export default function Timeline() {
   return (
     <div className="min-h-screen bg-charcoal text-white">
-      <Helmet>
-        <title>NESA-Africa 2026 Recognition Journey | Continental Roadmap</title>
-        <meta
-          name="description"
-          content="The official 2026 recognition journey for NESA-Africa — 13 phases from public pre-nomination activation to the Gold-Blue Garnet Awards Gala, the Recognition → Impact → Legacy phase and the continuous Media & EduAid-Africa engagement track."
-        />
-        <link rel="canonical" href="https://nesaafrica.lovable.app/about/timeline" />
-      </Helmet>
+      <AboutSeo
+        title="NESA-Africa 2026 Recognition Journey | Continental Roadmap"
+        description="The official 2026 recognition journey for NESA-Africa — 13 phases from public pre-nomination activation to the Gold-Blue Garnet Awards Gala, plus the continuous Media & EduAid-Africa engagement track."
+        path="/about/timeline"
+        breadcrumbs={[
+          { name: "Home", path: "/" },
+          { name: "About", path: "/about" },
+          { name: "Timeline", path: "/about/timeline" },
+        ]}
+      />
 
       {/* HERO */}
       <section className="relative overflow-hidden border-b border-white/10">

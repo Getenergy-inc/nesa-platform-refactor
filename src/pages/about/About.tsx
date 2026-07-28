@@ -1,4 +1,4 @@
-import { Helmet } from "react-helmet-async";
+import { AboutSeo } from "@/pages/about/AboutSeo";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
@@ -40,13 +40,15 @@ const HERO_STATS = [
 export default function About() {
   return (
     <>
-      <Helmet>
-        <title>About NESA-Africa | The African Blue-Garnet Awards for Education</title>
-        <meta
-          name="description"
-          content="NESA-Africa is a continental education recognition and impact platform honouring Africa's changemakers across 15 regions, the diaspora, and Friends of Africa. More than awards — a Trust Gateway for the future of African education."
-        />
-      </Helmet>
+      <AboutSeo
+        title="About NESA-Africa | The African Blue-Garnet Awards for Education"
+        description="NESA-Africa is a continental education recognition and impact platform honouring Africa's changemakers across 15 regions (8 Africa + 7 Global), the diaspora, and Friends of Africa. A Trust Gateway for the future of African education."
+        path="/about"
+        breadcrumbs={[
+          { name: "Home", path: "/" },
+          { name: "About", path: "/about" },
+        ]}
+      />
 
       {/* ─── 1. HERO ─────────────────────────────────────── */}
       <section className="relative min-h-[80vh] flex items-center overflow-hidden">

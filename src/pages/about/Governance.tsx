@@ -1,4 +1,4 @@
-import { Helmet } from "react-helmet-async";
+import { AboutSeo } from "@/pages/about/AboutSeo";
 import { Link } from "react-router-dom";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -53,13 +53,16 @@ const roles = [
 export default function Governance() {
   return (
     <>
-      <Helmet>
-        <title>Governance & Firewalls | NESA-Africa Integrity Framework</title>
-        <meta
-          name="description"
-          content="NESA-Africa's governance framework ensures sponsor independence, voting integrity, and full accountability through multiple firewalls."
-        />
-      </Helmet>
+      <AboutSeo
+        title="Governance & Firewalls | NESA-Africa Integrity Framework"
+        description="NESA-Africa's governance framework ensures sponsor independence, judging integrity, and full accountability through multiple firewalls across every recognition tier."
+        path="/about/governance"
+        breadcrumbs={[
+          { name: "Home", path: "/" },
+          { name: "About", path: "/about" },
+          { name: "Governance", path: "/about/governance" },
+        ]}
+      />
 
       <div className="min-h-screen bg-charcoal">
         {/* Hero */}
