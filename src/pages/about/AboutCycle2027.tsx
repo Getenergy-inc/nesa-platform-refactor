@@ -14,6 +14,7 @@ import {
   CANONICAL_PIPELINE,
   type TimelinePhase,
 } from "@/pages/about/AboutSharedBlocks";
+import { AboutCanonicalContent } from "@/pages/about/AboutCanonicalContent";
 
 const STATS_2027 = [
   { value: "9", label: "Icon Laureates", sub: "Rolling window 2007 → 2027" },
@@ -81,6 +82,8 @@ export default function AboutCycle2027() {
         phases={PHASES_2027}
         footerCta={{ label: "View 2026 cycle for reference", href: "/about/nesa-africa-2026" }}
       />
+
+      <AboutCanonicalContent />
 
       <AboutGovernanceProtocol downloadHref="/governance" />
 
