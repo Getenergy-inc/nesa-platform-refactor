@@ -140,11 +140,10 @@ export function NominationCampaignSection() {
             {/* Banner line */}
             <div className="mt-2 rounded-xl border border-gold/30 bg-gold/5 px-4 py-3 sm:px-5 sm:py-4">
               <p className="font-display text-lg sm:text-xl font-semibold text-gold">
-                Nominate. Earn AGC. Celebrate Education Impact.
+                Nominate. Verify. Celebrate Education Impact.
               </p>
               <p className="mt-1 text-sm text-ivory/70">
-                Nominate a changemaker today and earn AGC voting points to
-                support your favourite nominees when voting opens.
+                Every submission enters our NRC verification and EDI Matrix review — free to submit, and you can track its status anytime.
               </p>
             </div>
           </motion.div>
