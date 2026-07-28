@@ -262,7 +262,7 @@ import JudgeApplyAreaLanding from "./pages/judgeapply/AreaLanding";
 import JudgeApplySupportingPage from "./pages/judgeapply/SupportingPage";
 import MyCertificates from "./pages/MyCertificates";
 import CertificateGuide from "./pages/CertificateGuide";
-import VotingPortal from "./pages/VotingPortal";
+
 import { JudgeArenaGuard } from "./components/judge/JudgeArenaGuard";
 import ArenaShellLayout from "./components/judge/ArenaShellLayout";
 import ArenaDashboard from "./pages/judges-arena/ArenaDashboard";
@@ -303,13 +303,9 @@ import {
   ContinueRecognition,
   ImpactStorytelling,
 } from "./pages/guidelines";
-import GoldBlueGarnetVoteHub from "./pages/vote/GoldBlueGarnetVoteHub";
-import { PUBLIC_AWARD_VOTING, VOTING_SUNSET_REDIRECT } from "./config/featureFlags";
+import { VOTING_SUNSET_REDIRECT } from "./config/featureFlags";
 import AboutAGC from "./pages/AboutAGC";
-import EarnVotingCredits from "./pages/EarnVotingCredits";
-import ClaimVotingCredits from "./pages/ClaimVotingCredits";
 import Trending from "./pages/Trending";
-import HowVotingWorks from "./pages/HowVotingWorks";
 import Tickets from "./pages/Tickets";
 import BuyYourTicket from "./pages/BuyYourTicket";
 import GFAWzipWallet from "./pages/GFAWzipWallet";
@@ -738,15 +734,8 @@ const App = () => (
                       </WithLayout>
                     }
                   />
-                  {/* Voting explainer */}
-                  <Route
-                    path="/how-voting-works"
-                    element={
-                      <WithLayout>
-                        <HowVotingWorks />
-                      </WithLayout>
-                    }
-                  />
+                  {/* Voting explainer — sunset */}
+                  <Route path="/how-voting-works" element={<Navigate to={VOTING_SUNSET_REDIRECT} replace />} />
 
                   {/* Awards — Refactored category architecture (Phase 18B) */}
                   <Route
@@ -911,8 +900,8 @@ const App = () => (
                   {/* Simplified Awards dropdown canonical URLs — keep these alive so the gateway never 404s */}
                   <Route path="/awards/recognition-architecture" element={<Navigate to="/awards" replace />} />
                   <Route path="/awards/gold-blue-garnet" element={<WithLayout><BlueGarnetAward /></WithLayout>} />
-                  <Route path="/awards/gold-blue-garnet/vote" element={PUBLIC_AWARD_VOTING ? <WithLayout><GoldBlueGarnetVoteHub /></WithLayout> : <Navigate to={VOTING_SUNSET_REDIRECT} replace />} />
-                  <Route path="/awards/gold-blue-garnet/vote-now" element={<Navigate to={PUBLIC_AWARD_VOTING ? "/awards/gold-blue-garnet/vote" : VOTING_SUNSET_REDIRECT} replace />} />
+                  <Route path="/awards/gold-blue-garnet/vote" element={<Navigate to={VOTING_SUNSET_REDIRECT} replace />} />
+                  <Route path="/awards/gold-blue-garnet/vote-now" element={<Navigate to={VOTING_SUNSET_REDIRECT} replace />} />
                   <Route path="/awards/platinum-recognition" element={<WithLayout><PlatinumAward /></WithLayout>} />
                   <Route path="/awards/platinum-recognition/diaspora" element={<WithLayout><PlatinumDiasporaPage /></WithLayout>} />
                   <Route path="/awards/platinum/diaspora" element={<Navigate to="/awards/platinum-recognition/diaspora" replace />} />
@@ -988,14 +977,7 @@ const App = () => (
                     }
                   />
 
-                  <Route
-                    path="/voting-portal"
-                    element={
-                      <WithLayout>
-                        <VotingPortal />
-                      </WithLayout>
-                    }
-                  />
+                  <Route path="/voting-portal" element={<Navigate to={VOTING_SUNSET_REDIRECT} replace />} />
 
 
 
@@ -1828,22 +1810,8 @@ const App = () => (
                       </WithLayout>
                     }
                   />
-                  <Route
-                    path="/earn-voting-credits"
-                    element={
-                      <WithLayout>
-                        <EarnVotingCredits />
-                      </WithLayout>
-                    }
-                  />
-                  <Route
-                    path="/claim-voting-credits"
-                    element={
-                      <WithLayout>
-                        <ClaimVotingCredits />
-                      </WithLayout>
-                    }
-                  />
+                  <Route path="/earn-voting-credits" element={<Navigate to="/earn-agc" replace />} />
+                  <Route path="/claim-voting-credits" element={<Navigate to="/earn-agc" replace />} />
                   <Route
                     path="/gfawzip"
                     element={
