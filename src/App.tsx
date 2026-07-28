@@ -228,6 +228,9 @@ import Install from "./pages/Install";
 
 // 22-page canonical consolidators (2026 final refactor)
 import AboutConsolidated from "./pages/about/AboutConsolidated";
+import AboutCycle2026 from "./pages/about/AboutCycle2026";
+import AboutCycle2027 from "./pages/about/AboutCycle2027";
+import AboutCycle2028_2030 from "./pages/about/AboutCycle2028_2030";
 import EduAidAfricaImpact from "./pages/eduaid/EduAidAfricaImpact";
 import MediaHubConsolidated from "./pages/media/MediaHubConsolidated";
 import GalaConsolidated from "./pages/gala/GalaConsolidated";
@@ -655,6 +658,9 @@ const App = () => (
                       </WithLayout>
                     }
                   />
+                  <Route path="/about/2026" element={<WithLayout><AboutCycle2026 /></WithLayout>} />
+                  <Route path="/about/2027" element={<WithLayout><AboutCycle2027 /></WithLayout>} />
+                  <Route path="/about/2028-2030" element={<WithLayout><AboutCycle2028_2030 /></WithLayout>} />
                   <Route path="/about/vision-2035" element={<Navigate to="/about#vision-2035" replace />} />
                   <Route path="/about/governance" element={<Navigate to="/about#governance" replace />} />
                   <Route
