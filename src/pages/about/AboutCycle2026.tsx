@@ -15,6 +15,7 @@ import {
   CANONICAL_PIPELINE,
   type TimelinePhase,
 } from "@/pages/about/AboutSharedBlocks";
+import { AboutCanonicalContent } from "@/pages/about/AboutCanonicalContent";
 
 const STATS_2026 = [
   { value: "9", label: "Icon Laureates", sub: "1 per pathway-classification group" },
