@@ -25,6 +25,7 @@ import { CVOMessageSection } from "@/components/nesa/CVOMessageSection";
 import { GovernanceFirewallSection } from "@/components/nesa/GovernanceFirewallSection";
 import { ImpactProgramsSection } from "@/components/nesa/ImpactProgramsSection";
 import { EndorsedBySection } from "@/components/nesa/EndorsedBySection";
+import { AboutCanonicalContent } from "@/pages/about/AboutCanonicalContent";
 import { PageFAQSection } from "@/components/nesa/PageFAQ";
 
 const HERO_STATS = [
@@ -195,8 +196,12 @@ export default function About() {
       {/* ─── 11. ENDORSED & SUPPORTED BY ─────────────────── */}
       <EndorsedBySection />
 
+      {/* ─── 11b. CANONICAL ABOUT CONTENT ────────────────── */}
+      <AboutCanonicalContent />
+
       {/* ─── 12. FAQ ─────────────────────────────────────── */}
       <PageFAQSection />
+
 
       {/* ─── 13. FINAL ACTION BLOCK ──────────────────────── */}
       <section className="bg-gradient-to-b from-charcoal to-charcoal/95 py-20 lg:py-28 border-t border-gold/10">
