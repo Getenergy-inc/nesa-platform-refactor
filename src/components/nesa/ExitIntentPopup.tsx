@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback } from "react";
-import { X, Award, Coins, ArrowRight, Sparkles } from "lucide-react";
+import { X, Award, ArrowRight, Sparkles, ShieldCheck } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { motion, AnimatePresence } from "framer-motion";
