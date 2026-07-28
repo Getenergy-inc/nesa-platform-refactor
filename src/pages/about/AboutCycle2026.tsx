@@ -2,7 +2,7 @@
 // Institutional-register refactor: seal-anchored hero (AU/UN),
 // Nobel-style stat strip, Oscar-style tier spotlight, process
 // pipeline, awards-season timeline, non-influence declaration.
-import { Helmet } from "react-helmet-async";
+import { AboutSeo } from "@/pages/about/AboutSeo";
 import {
   AboutSealHero,
   AboutStatStrip,
@@ -94,13 +94,21 @@ const PHASES_2026: TimelinePhase[] = [
 export default function AboutCycle2026() {
   return (
     <>
-      <Helmet>
-        <title>About NESA-Africa 2026 · Inaugural Public Award Cycle</title>
-        <meta
-          name="description"
-          content="NESA-Africa 2026 — the inaugural public award cycle: 18 recognition forms across 4 tiers and 15 regions (8 Africa + 7 Global), culminating in the 14 December 2026 Recognition Gala in Lagos."
-        />
-      </Helmet>
+      <AboutSeo
+        title="About NESA-Africa 2026 · Inaugural Public Award Cycle"
+        description="NESA-Africa 2026 — the inaugural public award cycle: 18 recognition forms across 4 tiers and 15 regions (8 Africa + 7 Global), culminating in the 14 December 2026 Recognition Gala in Lagos."
+        path="/about/nesa-africa-2026"
+        breadcrumbs={[
+          { name: "Home", path: "/" },
+          { name: "About", path: "/about" },
+          { name: "NESA-Africa 2026", path: "/about/nesa-africa-2026" },
+        ]}
+        faqs={[
+          { question: "When do NESA-Africa 2026 nominations open?", answer: "Public nominations open 30 August 2026 across all four tiers. The Africa Education Icon Award nomination window runs 30 August – 5 September 2026." },
+          { question: "When is the NESA-Africa 2026 Recognition Gala?", answer: "The Recognition Gala takes place on 14 December 2026 in Lagos, Nigeria, where the 9 Icon Laureates are announced and all Certificates of Recognition are formally presented." },
+          { question: "Is there any public voting in the 2026 cycle?", answer: "No. There is no public voting mechanism at any stage of the 2026 cycle. Recognition is determined exclusively through Nominee Research Corps verification, the EDI Matrix, and — for the Icon Award only — independent judging and Governance ratification." },
+        ]}
+      />
 
       <AboutSealHero
         eyebrow="Inaugural Public Cycle"

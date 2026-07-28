@@ -1,4 +1,4 @@
-import { Helmet } from "react-helmet-async";
+import { AboutSeo } from "@/pages/about/AboutSeo";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -30,13 +30,16 @@ const pillars = [
 export default function Vision2035() {
   return (
     <>
-      <Helmet>
-        <title>Vision 2035 | NESA-Africa Strategic Roadmap</title>
-        <meta
-          name="description"
-          content="NESA-Africa's Vision 2035 outlines the strategic roadmap for achieving Education for All across Africa through recognition and accountability."
-        />
-      </Helmet>
+      <AboutSeo
+        title="Vision 2035 | NESA-Africa Strategic Roadmap"
+        description="NESA-Africa's Vision 2035 outlines the strategic roadmap for achieving Education for All across Africa through recognition, accountability, and continental partnerships."
+        path="/about/vision-2035"
+        breadcrumbs={[
+          { name: "Home", path: "/" },
+          { name: "About", path: "/about" },
+          { name: "Vision 2035", path: "/about/vision-2035" },
+        ]}
+      />
 
       <div className="min-h-screen bg-charcoal">
         {/* Hero */}
