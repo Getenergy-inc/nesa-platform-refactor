@@ -16,6 +16,7 @@ import {
   AboutContactBlock,
   CANONICAL_TIERS,
 } from "@/pages/about/AboutSharedBlocks";
+import { AboutCanonicalContent } from "@/pages/about/AboutCanonicalContent";
 
 const STATS_2028 = [
   { value: "3", label: "Cycle Window", sub: "2028 · 2029 · 2030" },
