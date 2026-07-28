@@ -61,7 +61,7 @@
 /cookie-policy                                               /policies            301
 /language                                                    /                    301
 
-# --- 2. SPA routes (497 explicit paths from src/App.tsx) ---
+# --- 2. SPA routes (500 explicit paths from src/App.tsx) ---
 /recognition/influencer-education-impact/african-sports-icons-supporting-education /index.html          200
 /recognition/influencer-education-impact/african-music-icons-supporting-education /index.html          200
 /recognition/influencer-education-impact/african-social-media-influencers /index.html          200
@@ -304,6 +304,7 @@ nominee/:nomineeId                                           /index.html        
 /volunteers/:slug                                            /index.html          200
 /vote/blue-garnet                                            /index.html          200
 governance-review                                            /index.html          200
+/about/2028-2030                                             /index.html          200
 /about/integrity                                             /index.html          200
 /admin/bulk-seed                                             /index.html          200
 /admin/icon-jury                                             /index.html          200
@@ -440,6 +441,8 @@ nominee/:slug                                                /index.html        
 /recognition                                                 /index.html          200
 /sponsorship                                                 /index.html          200
 judges/:slug                                                 /index.html          200
+/about/2026                                                  /index.html          200
+/about/2027                                                  /index.html          200
 /about/scef                                                  /index.html          200
 /auth/login                                                  /index.html          200
 /categories                                                  /index.html          200
