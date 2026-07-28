@@ -329,7 +329,7 @@ export const PAGE_FAQS: PageFAQ[] = [
 
   // ---------------- 6. VOTING ----------------
   {
-    match: "/vote",
+    match: "/awards/gold-blue-garnet",
     title: "Voting — Frequently Asked Questions",
     subtitle:
       "How public voting works in NESA-Africa 2026 and how its integrity is protected.",
