@@ -123,6 +123,7 @@ export const SITE_NAV: NavItem[] = [
       { label: "Join a Local Chapter / Volunteer", href: "/chapters" },
       { label: "Recommend an Independent Judge", href: "/judges/apply" },
       { label: "Apply to the Nominee Research Corps", href: "/about/nrc#apply" },
+      { label: "Vacancies (13 standing roles)", href: "/vacancies" },
       { label: "Pre-Award Webinars, FGDs & Podcasts", href: "/media/webinars" },
       { label: "Full 2026–2027 Timeline", href: "/timeline" },
     ],
