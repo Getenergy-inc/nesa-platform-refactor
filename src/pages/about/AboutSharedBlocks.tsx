@@ -9,8 +9,12 @@ import { ReactNode } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { ArrowRight, ShieldCheck, Download, Trophy, Award, Users, Globe2, Calendar, FileText } from "lucide-react";
+import { ArrowRight, ShieldCheck, Download, Trophy, Award, Users, Globe2, Calendar, FileText, FileDown } from "lucide-react";
 import { cn } from "@/lib/utils";
+import governanceDisclaimerAsset from "@/assets/docs/nesa-africa-governance-non-influence-disclaimer.pdf.asset.json";
+
+export const GOVERNANCE_DISCLAIMER_PDF_URL = governanceDisclaimerAsset.url;
+export const GOVERNANCE_DISCLAIMER_PDF_FILENAME = governanceDisclaimerAsset.original_filename;
 
 /* ─────────────────────────────────────────────────────────────
    1. SEAL-ANCHORED HERO (AU/UN register)
@@ -334,6 +338,18 @@ export function AboutGovernanceProtocol({ downloadHref = "/governance" }: { down
             </p>
           </div>
           <div className="flex flex-wrap gap-3 mt-6">
+            <Button asChild className="bg-gold hover:bg-gold-dark text-charcoal font-semibold rounded-full">
+              <a
+                href={GOVERNANCE_DISCLAIMER_PDF_URL}
+                download={GOVERNANCE_DISCLAIMER_PDF_FILENAME}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Download Governance & Non-Influence Disclaimer as PDF"
+              >
+                <FileDown className="mr-2 h-4 w-4" />
+                Download Disclaimer (PDF)
+              </a>
+            </Button>
             <Button asChild variant="outline" className="border-gold/50 text-gold hover:bg-gold/10 rounded-full">
               <Link to={downloadHref}>
                 <Download className="mr-2 h-4 w-4" />
