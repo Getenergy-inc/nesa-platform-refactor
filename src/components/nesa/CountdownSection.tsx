@@ -11,7 +11,7 @@ import { useCountdown } from "@/hooks/useCountdown";
  * Other intermediate milestones (TV shows, voting windows) live in
  * <UpcomingEventsSection /> and have their own countdowns.
  */
-const GALA_TARGET = new Date("2026-10-22T18:00:00+01:00");
+const GALA_TARGET = new Date("2026-12-14T00:00:00+01:00");
 const GALA_LABEL = "NESA-Africa 2026 Recognition Gala";
 const SEASON_BADGE = "NESA-Africa 2026";
 
