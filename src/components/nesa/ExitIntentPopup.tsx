@@ -109,12 +109,12 @@ export function ExitIntentPopup() {
 
                 {/* Headline */}
                 <h2 className="font-display text-2xl md:text-3xl font-bold text-white mb-3">
-                  Wait! Don't Miss Out
+                  Before you go — nominate a changemaker
                 </h2>
 
                 <p className="text-white/70 mb-6 max-w-sm mx-auto">
-                  Nominate an education changemaker and earn{" "}
-                  <span className="text-gold font-semibold">+2 free voting points</span> when they're verified.
+                  Put an education enabler forward for NESA-Africa 2026. Every submission enters our{" "}
+                  <span className="text-gold font-semibold">NRC verification & EDI Matrix review</span>, and you can track its status anytime.
                 </p>
 
                 {/* Value props */}
@@ -124,8 +124,8 @@ export function ExitIntentPopup() {
                     <span>Free to submit</span>
                   </div>
                   <div className="flex items-center gap-1.5 text-gold">
-                    <Coins className="h-4 w-4" />
-                    <span>Earn voting power</span>
+                    <ShieldCheck className="h-4 w-4" />
+                    <span>Independently verified</span>
                   </div>
                 </div>
 
