@@ -19,9 +19,9 @@ export function PillarFooterNote() {
         </p>
 
         <p className="mt-6 text-ivory/65 text-xs md:text-sm leading-relaxed max-w-2xl mx-auto">
-          Recognition is based on evidence, category criteria, public participation
-          where applicable, and independent review. Sponsorship does not influence
-          nominations, judging, shortlisting, voting outcomes, or winners.
+          Recognition is based on evidence, category criteria, and independent
+          review. Sponsorship does not influence nominations, judging,
+          shortlisting, finalists, laureate selection, or winners.
         </p>
 
         <div className="mt-6 flex flex-wrap justify-center gap-3">

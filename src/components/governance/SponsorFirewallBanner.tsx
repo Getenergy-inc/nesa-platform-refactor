@@ -13,7 +13,7 @@ interface Props {
 }
 
 const STATEMENT =
-  "Sponsorship, partnership, donations, endorsements, and visibility opportunities do not influence nominees, judges, voting outcomes, finalists, or winners.";
+  "Sponsorship, partnership, donations, endorsements, and visibility opportunities do not influence nominees, judges, finalists, laureate selection, or winners.";
 
 export function SponsorFirewallBanner({ variant = "full", className }: Props) {
   if (variant === "compact") {

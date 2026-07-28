@@ -92,9 +92,9 @@ const sections: Section[] = [
     icon: ShieldCheck,
     title: "Sponsor Firewall",
     content: [
-      "Sponsors, partners, donors and endorsers have zero access to nomination, voting or jury data.",
+      "Sponsors, partners, donors and endorsers have zero access to nomination, judging or jury data.",
       "Category sponsorship supports visibility and programme delivery only — it does not influence award results.",
-      "Sponsorship, partnership, donations, endorsements and visibility opportunities do not influence nominees, judges, voting outcomes, finalists, or winners.",
+      "Sponsorship, partnership, donations, endorsements and visibility opportunities do not influence nominees, judges, finalists, laureate selection, or winners.",
     ],
   },
   {
