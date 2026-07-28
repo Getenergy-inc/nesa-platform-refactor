@@ -9211,6 +9211,72 @@ export type Database = {
           },
         ]
       }
+      site_stats: {
+        Row: {
+          active_volunteer_chapters: number
+          directory_nominees: number
+          global_communities: number
+          gold_blue_garnet_subcategories: number
+          icon_laureates: number
+          icon_subcategories: number
+          id: string
+          impact_stories: number
+          influencer_subcategories: number
+          platinum_subcategories: number
+          registered_chapters: number
+          singleton: boolean
+          tiers: number
+          total_categories: number
+          total_forms: number
+          total_regions: number
+          updated_at: string
+          volunteer_countries: number
+          volunteers: number
+        }
+        Insert: {
+          active_volunteer_chapters?: number
+          directory_nominees?: number
+          global_communities?: number
+          gold_blue_garnet_subcategories?: number
+          icon_laureates?: number
+          icon_subcategories?: number
+          id?: string
+          impact_stories?: number
+          influencer_subcategories?: number
+          platinum_subcategories?: number
+          registered_chapters?: number
+          singleton?: boolean
+          tiers?: number
+          total_categories?: number
+          total_forms?: number
+          total_regions?: number
+          updated_at?: string
+          volunteer_countries?: number
+          volunteers?: number
+        }
+        Update: {
+          active_volunteer_chapters?: number
+          directory_nominees?: number
+          global_communities?: number
+          gold_blue_garnet_subcategories?: number
+          icon_laureates?: number
+          icon_subcategories?: number
+          id?: string
+          impact_stories?: number
+          influencer_subcategories?: number
+          platinum_subcategories?: number
+          registered_chapters?: number
+          singleton?: boolean
+          tiers?: number
+          total_categories?: number
+          total_forms?: number
+          total_regions?: number
+          updated_at?: string
+          volunteer_countries?: number
+          volunteers?: number
+        }
+        Relationships: []
+      }
       sponsor_campaigns: {
         Row: {
           created_at: string | null
