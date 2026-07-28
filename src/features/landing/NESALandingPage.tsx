@@ -80,7 +80,7 @@ export function NESALandingPage() {
         )}
         description={t(
           "seo.landing.description",
-          "A continent in recognition. Nominate, vote for, and support Africa's Education Enablers — across 10 regions, 4 award tiers, and 96 subcategories.",
+          "A continent in recognition. Nominate, vote for, and support Africa's Education Enablers — across 15 regions, 4 award tiers, and 96 subcategories.",
         )}
         ogTitle={t("seo.landing.ogTitle", "NESA-Africa 2026 — A Continent in Recognition")}
         ogDescription={t(

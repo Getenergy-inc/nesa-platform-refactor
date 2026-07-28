@@ -143,7 +143,7 @@ export const SPONSOR_CATEGORIES: SponsorCategory[] = [
     icon: Building2,
     accent: "from-amber-500/20 via-gold/10 to-transparent",
     audience: "Communities, ministries of education, infrastructure partners and humanitarian funders",
-    reach: "100+ schools targeted across 10 regions over 12 months",
+    reach: "100+ schools targeted across 15 regions over 12 months",
     visibility: [
       "Plaque on rebuilt school buildings",
       "Project documentary feature",

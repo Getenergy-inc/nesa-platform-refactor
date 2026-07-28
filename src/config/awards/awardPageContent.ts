@@ -441,7 +441,7 @@ const PLATINUM: AwardPageContent = {
     {
       slug: "diaspora-international",
       title: "Excellence in Diaspora Educational Impact (International)",
-      blurb: "300 verified diaspora-led organisations across 5 African regions and 3 subcategories — infrastructure, program innovation and teacher training. Explore the directory or nominate a champion.",
+      blurb: "300 verified diaspora-led organisations across 8 African regions and 3 subcategories — infrastructure, program innovation and teacher training. Explore the directory or nominate a champion.",
       recognises: "Diaspora organisations investing in African education",
       scope: "International • 5 Africa Regions",
       subcategoryCount: 3,

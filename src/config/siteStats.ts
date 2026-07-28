@@ -67,7 +67,7 @@ export const SITE_STATS_FALLBACK: SiteStats = {
   platinumSubcategories: 27,
   goldBlueGarnetSubcategories: 63,
   africanRegions: 8,
-  globalCommunities: 2,
+  globalCommunities: 7,
   registeredChapters: 30,
   activeVolunteerChapters: 10,
   chapters: 10,

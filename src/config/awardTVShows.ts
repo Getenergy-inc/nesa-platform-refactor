@@ -48,7 +48,7 @@ export const awardTVShows: AwardTVShow[] = [
   {
     awardId: "gold",
     showName: "The Gold Show",
-    description: "Public voting updates, regional competitions, and Gold Certificate winner announcements. Live coverage from all 5 African regions.",
+    description: "Public voting updates, regional competitions, and Gold Certificate winner announcements. Live coverage from all 8 African regions.",
     videoType: "youtube",
     videoUrl: "https://www.youtube.com/embed/aP0SskrfioI",
     thumbnailUrl: "/assets/gold-show-thumbnail.jpg",
