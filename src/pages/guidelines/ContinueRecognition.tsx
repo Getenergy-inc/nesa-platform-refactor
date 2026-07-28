@@ -58,7 +58,7 @@ const PATHWAYS = [
   {
     title: "Blue Garnet Categories",
     badge: "Voting-Driven",
-    cta: { label: "Vote", href: "/vote" },
+    cta: { label: "Vote", href: "/awards/gold-blue-garnet" },
     icon: Vote,
     accent: "border-blue-500/30 bg-blue-500/5",
     badgeClass: "border-blue-500/30 text-blue-400 bg-blue-500/10",

@@ -52,7 +52,7 @@ export function FinalCTASection() {
               { to: "/media/webinars", label: "Join Pre-Award Webinars", icon: Video, cta: "webinars" },
               { to: "/donate", label: "Donate", icon: Heart, cta: "donate" },
               { to: "/shop", label: "Buy Merchandise (Post-Award Impact)", icon: ShoppingBag, cta: "merchandise" },
-              { to: "/vote", label: "Explore Recognition", icon: Vote, cta: "vote" },
+              { to: "/awards/gold-blue-garnet", label: "Explore Recognition", icon: Vote, cta: "vote" },
             ].map((item) => (
               <Link
                 key={item.cta}

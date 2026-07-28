@@ -223,7 +223,7 @@ export const RECOGNITION_JOURNEY_2026: JourneyPhase[] = [
       "A continent-wide public voting window powered 100% by AfriGold Coin (AGC) participation credits.",
     votingModel: "100% AfriGold Coin (AGC) Public Participation",
     ctas: [
-      { label: "Explore Recognition", to: "/vote" },
+      { label: "Explore Recognition", to: "/awards/gold-blue-garnet" },
       { label: "How AGC Works", to: "/earn-agc" },
     ],
   },
@@ -290,7 +290,7 @@ export const RECOGNITION_JOURNEY_2026: JourneyPhase[] = [
       "The final competitive voting window — closes on Gala day for transparency and suspense.",
     votingModel: "60% Independent Jury · 40% Public Participation (AGC)",
     ctas: [
-      { label: "Learn More", to: "/vote" },
+      { label: "Learn More", to: "/awards/gold-blue-garnet" },
       { label: "How Voting Works", to: "/vote/how-it-works" },
     ],
   },

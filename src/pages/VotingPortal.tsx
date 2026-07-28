@@ -12,7 +12,7 @@ const TRACKS = [
   {
     title: "Gold Public Voting",
     description: "Open public voting to recognise the Top 3 nominees per subcategory.",
-    href: "/vote/gold",
+    href: "/awards/gold-blue-garnet",
     icon: Award,
     accent: "from-amber-400 to-amber-600",
     badge: "Public",
@@ -20,7 +20,7 @@ const TRACKS = [
   {
     title: "Blue Garnet Finalist Voting",
     description: "Hybrid track — 40% public vote, 60% jury score. Africa’s highest honour.",
-    href: "/vote/blue-garnet",
+    href: "/awards/gold-blue-garnet",
     icon: Trophy,
     accent: "from-blue-500 to-blue-700",
     badge: "Hybrid",

@@ -54,7 +54,7 @@ export function QuickActionsRow({ onTopUp }: QuickActionsRowProps) {
     {
       label: "Vote",
       icon: <Vote className="h-4 w-4" />,
-      href: "/vote",
+      href: "/awards/gold-blue-garnet",
       disabled: !votingOpen,
       tooltip: !votingOpen ? "Voting Closed" : undefined,
       variant: "outline",

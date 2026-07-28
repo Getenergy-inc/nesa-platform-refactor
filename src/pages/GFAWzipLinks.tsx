@@ -57,7 +57,7 @@ const QUICK_ACTIONS = [
     icon: Vote,
     color: "hsl(var(--chart-2))",
     links: [
-      { label: "Vote for Nominees", href: "/vote", icon: Vote, description: "Use AGC to vote" },
+      { label: "Vote for Nominees", href: "/awards/gold-blue-garnet", icon: Vote, description: "Use AGC to vote" },
       { label: "View Nominees", href: "/nominees", icon: Users, description: "Browse all nominees" },
       { label: "Categories", href: "/categories", icon: Award, description: "Award categories" },
     ],

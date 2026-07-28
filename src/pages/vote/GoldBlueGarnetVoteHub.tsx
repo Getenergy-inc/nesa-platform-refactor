@@ -31,7 +31,7 @@ export default function GoldBlueGarnetVoteHub() {
         "Feeds finalists into Phase 2 Blue Garnet ballot",
       ],
       cta: "Cast Your Gold Vote",
-      href: "/vote/gold",
+      href: "/awards/gold-blue-garnet",
     },
     {
       id: "blue-garnet",
@@ -50,7 +50,7 @@ export default function GoldBlueGarnetVoteHub() {
         "Winners announced at the 22 October 2026 Gala",
       ],
       cta: "Cast Your Blue Garnet Vote",
-      href: "/vote/blue-garnet",
+      href: "/awards/gold-blue-garnet",
     },
   ] as const;
 
