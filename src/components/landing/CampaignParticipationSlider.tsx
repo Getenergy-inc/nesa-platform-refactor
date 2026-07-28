@@ -102,7 +102,7 @@ export function CampaignParticipationSlider() {
             Africa, Who Is Your Education Changemaker?
           </h2>
           <p className="mt-2 text-white/70 text-sm sm:text-base">
-            Nominate. Earn AGC. Celebrate Education Impact.
+            Nominate. Verify. Celebrate Education Impact.
           </p>
         </div>
 
