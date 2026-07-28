@@ -173,7 +173,7 @@ export function CallForNominationsCampaign() {
                 </div>
                 <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/85 to-transparent p-3">
                   <p className="text-xs font-medium text-white md:text-sm">
-                    Watch how to nominate a changemaker and earn AGC voting points.
+                    Watch how to nominate a changemaker and track verification.
                   </p>
                 </div>
               </div>
