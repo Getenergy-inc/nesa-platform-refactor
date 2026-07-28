@@ -47,7 +47,6 @@ import NomineeDirectory from "./pages/NomineeDirectory";
 import MasterNomineeProfile from "./pages/MasterNomineeProfile";
 import CertificateVerify from "./pages/CertificateVerify";
 import VerifyCertificate from "./pages/VerifyCertificate";
-import Results from "./pages/Results";
 import Policies from "./pages/Policies";
 import FAQPage from "./pages/FAQ";
 import { Toaster as Sonner } from "@/components/ui/sonner";
@@ -304,9 +303,6 @@ import {
   ContinueRecognition,
   ImpactStorytelling,
 } from "./pages/guidelines";
-import Vote from "./pages/Vote";
-import VoteWithAGC from "./pages/VoteWithAGC";
-import { GoldVoting, BlueGarnetVoting } from "./pages/vote/index";
 import GoldBlueGarnetVoteHub from "./pages/vote/GoldBlueGarnetVoteHub";
 import { PUBLIC_AWARD_VOTING, VOTING_SUNSET_REDIRECT } from "./config/featureFlags";
 import AboutAGC from "./pages/AboutAGC";
@@ -601,7 +597,7 @@ const App = () => (
                   <Route path="/education-enablers/verification" element={<Navigate to="/governance#verification" replace />} />
 
                   {/* Impact Programmes */}
-                  <Route path="/impact/regional-voting" element={<Navigate to="/vote" replace />} />
+                  <Route path="/impact/regional-voting" element={<Navigate to={VOTING_SUNSET_REDIRECT} replace />} />
                   <Route path="/impact/regional-winners" element={<Navigate to="/impact" replace />} />
                   <Route path="/impact/donate" element={<Navigate to="/donate" replace />} />
                   <Route path="/impact/afri-edutourism-2027" element={<Navigate to="/afri-edutourism" replace />} />
