@@ -26,6 +26,7 @@ import { GovernanceFirewallSection } from "@/components/nesa/GovernanceFirewallS
 import { ImpactProgramsSection } from "@/components/nesa/ImpactProgramsSection";
 import { EndorsedBySection } from "@/components/nesa/EndorsedBySection";
 import { AboutCanonicalContent } from "@/pages/about/AboutCanonicalContent";
+import { AboutGovernanceProtocol, AboutStatStrip } from "@/pages/about/AboutSharedBlocks";
 import { PageFAQSection } from "@/components/nesa/PageFAQ";
 
 const HERO_STATS = [
@@ -198,6 +199,22 @@ export default function About() {
 
       {/* ─── 11b. CANONICAL ABOUT CONTENT ────────────────── */}
       <AboutCanonicalContent />
+
+      {/* ─── 11c. INSTITUTIONAL FACTS STRIP (Nobel register) ── */}
+      <AboutStatStrip
+        title="NESA-Africa in Numbers"
+        stats={[
+          { value: "20", label: "Years of Vision", sub: "2006 → 2026" },
+          { value: "18", label: "Recognition Forms", sub: "22 category pages" },
+          { value: "4", label: "Recognition Tiers", sub: "1 flagship · 3 certificate" },
+          { value: "15", label: "Regions", sub: "8 Africa + 7 Global" },
+          { value: "27+", label: "Independent Judges", sub: "Icon Award panels" },
+          { value: "9", label: "Icon Laureates / Cycle", sub: "From 27 Grand Jury finalists" },
+        ]}
+      />
+
+      {/* ─── 11d. NON-INFLUENCE PROTOCOL (AU declaration) ────── */}
+      <AboutGovernanceProtocol />
 
       {/* ─── 12. FAQ ─────────────────────────────────────── */}
       <PageFAQSection />

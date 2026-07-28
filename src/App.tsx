@@ -658,9 +658,13 @@ const App = () => (
                       </WithLayout>
                     }
                   />
-                  <Route path="/about/2026" element={<WithLayout><AboutCycle2026 /></WithLayout>} />
-                  <Route path="/about/2027" element={<WithLayout><AboutCycle2027 /></WithLayout>} />
-                  <Route path="/about/2028-2030" element={<WithLayout><AboutCycle2028_2030 /></WithLayout>} />
+                  <Route path="/about/nesa-africa-2026" element={<WithLayout><AboutCycle2026 /></WithLayout>} />
+                  <Route path="/about/nesa-africa-2027" element={<WithLayout><AboutCycle2027 /></WithLayout>} />
+                  <Route path="/about/nesa-africa-2028-2030" element={<WithLayout><AboutCycle2028_2030 /></WithLayout>} />
+                  {/* Legacy short-path redirects */}
+                  <Route path="/about/2026" element={<Navigate to="/about/nesa-africa-2026" replace />} />
+                  <Route path="/about/2027" element={<Navigate to="/about/nesa-africa-2027" replace />} />
+                  <Route path="/about/2028-2030" element={<Navigate to="/about/nesa-africa-2028-2030" replace />} />
                   <Route path="/about/vision-2035" element={<Navigate to="/about#vision-2035" replace />} />
                   <Route path="/about/governance" element={<Navigate to="/about#governance" replace />} />
                   <Route
