@@ -142,7 +142,7 @@ export function ImpactWrapUpSection() {
 
                 {/* Support CTAs */}
                 <div className="mt-4 flex flex-wrap gap-2">
-                  <Link to="/vote">
+                  <Link to="/awards/gold-blue-garnet">
                     <Button variant="ghost" size="sm" className="text-gold/85 hover:text-gold hover:bg-gold/10 rounded-full">
                       Vote for Regional Intervention
                     </Button>

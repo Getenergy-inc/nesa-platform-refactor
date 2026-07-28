@@ -165,7 +165,7 @@ export default function Wallet() {
 
                   <div className="mt-6 flex flex-wrap gap-3">
                     <Button asChild>
-                      <Link to="/vote">
+                      <Link to="/awards/gold-blue-garnet">
                         <Vote className="mr-2 h-4 w-4" />
                         Explore Recognition
                       </Link>

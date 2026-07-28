@@ -214,7 +214,7 @@ export function AGCDashboard() {
             <div className="flex gap-2">
               {currentPhase ? (
                 <Button size="sm" asChild className="bg-gold hover:bg-gold-dark text-charcoal">
-                  <Link to="/vote">
+                  <Link to="/awards/gold-blue-garnet">
                     Learn More <ArrowRight className="ml-1 h-3 w-3" />
                   </Link>
                 </Button>

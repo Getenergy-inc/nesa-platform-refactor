@@ -127,7 +127,7 @@ export function NESAHero() {
           </Link>
           
           {/* Primary: Vote — Gold Certificate */}
-          <Link to="/vote?tier=gold" className="w-full sm:w-auto group">
+          <Link to="/awards/gold-blue-garnet" className="w-full sm:w-auto group">
             <Button
               size="lg"
               className="w-full sm:w-auto bg-[hsl(45,100%,50%)] hover:bg-[hsl(45,100%,45%)] text-charcoal font-semibold rounded-full px-6 sm:px-8 gap-2 shadow-lg min-h-[48px] touch-manipulation transition-all duration-300"
@@ -138,7 +138,7 @@ export function NESAHero() {
           </Link>
           
           {/* Primary: Vote — Blue Garnet Award */}
-          <Link to="/vote?tier=bluegarnet" className="w-full sm:w-auto group">
+          <Link to="/awards/gold-blue-garnet" className="w-full sm:w-auto group">
             <Button
               size="lg"
               className="w-full sm:w-auto bg-[hsl(220,70%,50%)] hover:bg-[hsl(220,70%,45%)] text-white font-semibold rounded-full px-6 sm:px-8 gap-2 shadow-lg min-h-[48px] touch-manipulation transition-all duration-300"

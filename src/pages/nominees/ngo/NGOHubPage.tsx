@@ -54,7 +54,7 @@ export default function NGOHubPage() {
               </p>
               <div className="flex flex-wrap gap-3">
                 <Button asChild size="lg" className="bg-gold text-black hover:bg-gold/90">
-                  <Link to="/vote">Learn More</Link>
+                  <Link to="/awards/gold-blue-garnet">Learn More</Link>
                 </Button>
                 <Button asChild size="lg" variant="outline" className="border-gold/30 text-gold hover:bg-gold/10">
                   <Link to="/nominate?category=best-ngo-for-education-advancement-africa-regional">Nominate an NGO</Link>

@@ -111,7 +111,7 @@ export default function Winners() {
                     Gold Certificate winners are determined through public voting. Results will be announced soon.
                   </p>
                   <Button asChild className="bg-primary text-primary-foreground">
-                    <Link to="/vote">Cast Your Vote</Link>
+                    <Link to="/awards/gold-blue-garnet">Cast Your Vote</Link>
                   </Button>
                 </div>
               </TabsContent>

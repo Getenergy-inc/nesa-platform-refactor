@@ -112,7 +112,7 @@ export default function EarnVotingCredits() {
                   </Link>
                 </Button>
                 <Button asChild className="bg-gold hover:bg-gold-dark text-charcoal">
-                  <Link to="/vote">
+                  <Link to="/awards/gold-blue-garnet">
                     <Vote className="mr-2 h-4 w-4" />
                     Go to Voting
                   </Link>

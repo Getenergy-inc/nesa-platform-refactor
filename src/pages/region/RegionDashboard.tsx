@@ -78,7 +78,7 @@ function RegionDashboardContent() {
               </CardContent>
             </Card>
           </Link>
-          <Link to="/vote">
+          <Link to="/awards/gold-blue-garnet">
             <Card className="hover:border-blue-500/50 transition-colors cursor-pointer h-full">
               <CardContent className="p-4 flex flex-col items-center text-center gap-2">
                 <div className="h-12 w-12 rounded-xl bg-blue-500/10 flex items-center justify-center">

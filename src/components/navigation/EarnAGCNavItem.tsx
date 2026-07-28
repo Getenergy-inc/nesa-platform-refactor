@@ -392,7 +392,7 @@ export function EarnAGCNavItem() {
               </Link>
               <div className="grid grid-cols-2 gap-2">
                 <Link
-                  to="/vote"
+                  to="/awards/gold-blue-garnet"
                   className="inline-flex items-center justify-center gap-1 rounded-full border border-gold/40 px-3 py-1.5 text-[11px] font-semibold text-gold hover:bg-gold/10 transition-colors"
                 >
                   <Vote className="h-3 w-3" /> Vote & Earn

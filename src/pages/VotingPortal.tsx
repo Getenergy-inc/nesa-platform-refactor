@@ -76,7 +76,7 @@ export default function VotingPortal() {
           </p>
           <div className="flex flex-wrap gap-3 pt-2">
             <Button asChild className="bg-gold text-charcoal hover:bg-gold/90">
-              <Link to="/vote">Browse all categories</Link>
+              <Link to="/awards/gold-blue-garnet">Browse all categories</Link>
             </Button>
             <Button asChild variant="outline" className="border-white/20 hover:bg-white/10">
               <Link to="/guidelines/voters">How voting works</Link>

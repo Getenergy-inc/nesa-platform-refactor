@@ -97,7 +97,7 @@ export function VoteWithAGCSection() {
                   <ArrowRight className="h-4 w-4" />
                 </Button>
               </Link>
-              <Link to="/vote">
+              <Link to="/awards/gold-blue-garnet">
                 <Button variant="outline" className="border-gold/40 text-gold hover:bg-gold/10 rounded-full gap-2">
                   <Vote className="h-4 w-4" />
                   {t("landing.voteWithAGC.goToVoting")}

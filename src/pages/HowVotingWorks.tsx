@@ -170,7 +170,7 @@ export default function HowVotingWorksPage() {
             </p>
             <div className="flex flex-col sm:flex-row gap-3 justify-center">
               <Button asChild size="lg" className="bg-gold hover:bg-gold/90 text-charcoal font-bold rounded-full px-8">
-                <Link to="/vote"><Vote className="w-5 h-5 mr-1.5" /> Learn More</Link>
+                <Link to="/awards/gold-blue-garnet"><Vote className="w-5 h-5 mr-1.5" /> Learn More</Link>
               </Button>
               <Button asChild size="lg" variant="outline" className="border-gold/40 text-gold hover:bg-gold/10 rounded-full px-8">
                 <Link to="/nominees">Explore Nominees</Link>

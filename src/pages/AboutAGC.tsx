@@ -297,7 +297,7 @@ export default function AboutAGC() {
                   Nominate & Earn
                 </Button>
               </Link>
-              <Link to="/vote-with-agc">
+              <Link to="/awards/gold-blue-garnet">
                 <Button size="lg" className="bg-gold hover:bg-gold-dark text-charcoal font-semibold">
                   Learn More
                   <ArrowRight className="ml-2 h-4 w-4" />

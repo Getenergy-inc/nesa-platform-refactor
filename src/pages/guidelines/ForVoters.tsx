@@ -189,7 +189,7 @@ export default function ForVoters() {
               </p>
 
               <Button asChild size="lg" className="bg-gold hover:bg-gold-dark text-charcoal font-semibold rounded-full px-8">
-                <Link to="/vote">
+                <Link to="/awards/gold-blue-garnet">
                   Go to Voting Portal
                   <ChevronRight className="ml-2 h-4 w-4" />
                 </Link>
@@ -376,7 +376,7 @@ export default function ForVoters() {
             <div className="text-center pt-8 border-t border-white/10">
               <p className="text-white/60 mb-4">Ready to make your voice heard?</p>
               <Button asChild size="lg" className="bg-gold hover:bg-gold-dark text-charcoal font-semibold rounded-full px-10">
-                <Link to="/vote">
+                <Link to="/awards/gold-blue-garnet">
                   Enter Voting Portal
                   <ExternalLink className="ml-2 h-4 w-4" />
                 </Link>

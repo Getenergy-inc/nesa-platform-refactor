@@ -275,7 +275,7 @@ export default function Gala() {
                   <Link to="/tickets"><Ticket className="mr-2 h-5 w-5" /> Buy Gala Ticket</Link>
                 </Button>
                 <Button asChild size="lg" variant="outline" className="border-indigo-400/60 bg-indigo-500/10 text-white backdrop-blur hover:bg-indigo-500/20">
-                  <Link to="/vote"><Vote className="mr-2 h-5 w-5" /> Vote Before Gala</Link>
+                  <Link to="/awards/gold-blue-garnet"><Vote className="mr-2 h-5 w-5" /> Vote Before Gala</Link>
                 </Button>
                 <Button asChild size="lg" variant="outline" className="border-white/20 bg-white/5 text-white backdrop-blur hover:bg-white/10">
                   <Link to="/sponsors"><Handshake className="mr-2 h-5 w-5" /> Become a Sponsor</Link>
@@ -418,7 +418,7 @@ export default function Gala() {
                             Explore <ArrowRight className="h-4 w-4 transition group-hover:translate-x-1" />
                           </span>
                           <Link
-                            to="/vote"
+                            to="/awards/gold-blue-garnet"
                             onClick={(e) => e.stopPropagation()}
                             className="text-xs uppercase tracking-wider text-white/50 hover:text-gold"
                           >
@@ -694,7 +694,7 @@ export default function Gala() {
                   <Link to="/tickets"><Ticket className="mr-2 h-5 w-5" /> Buy Ticket</Link>
                 </Button>
                 <Button asChild size="lg" variant="outline" className="border-indigo-400/60 bg-indigo-500/10 text-white hover:bg-indigo-500/20">
-                  <Link to="/vote"><Vote className="mr-2 h-5 w-5" /> Learn More</Link>
+                  <Link to="/awards/gold-blue-garnet"><Vote className="mr-2 h-5 w-5" /> Learn More</Link>
                 </Button>
                 <Button asChild size="lg" variant="outline" className="border-white/20 bg-white/5 text-white hover:bg-white/10">
                   <Link to="/sponsors"><Handshake className="mr-2 h-5 w-5" /> Partner With NESA</Link>

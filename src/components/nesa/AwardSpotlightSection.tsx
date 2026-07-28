@@ -238,7 +238,7 @@ export function AwardSpotlightSection() {
                 <ArrowRight className="h-4 w-4" />
               </Button>
             </Link>
-            <Link to="/vote">
+            <Link to="/awards/gold-blue-garnet">
               <Button
                 size="lg"
                 variant="outline"
