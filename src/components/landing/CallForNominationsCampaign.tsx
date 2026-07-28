@@ -192,7 +192,7 @@ export function CallForNominationsCampaign() {
           <div className="inline-flex flex-wrap items-center justify-center gap-2 rounded-full border border-primary/30 bg-primary/10 px-5 py-2.5 text-center">
             <ArrowRight className="h-4 w-4 text-primary" />
             <span className="text-sm font-semibold text-white md:text-base">
-              Nominate. <span className="text-primary">Earn AGC.</span> Celebrate Education Impact.
+              Nominate. <span className="text-primary">Verify.</span> Celebrate Education Impact.
             </span>
           </div>
         </motion.div>
