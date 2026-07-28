@@ -275,6 +275,7 @@ import ArenaDiscussion from "./pages/judges-arena/ArenaDiscussion";
 import Partners from "./pages/Partners";
 import ProspectiveOrgPage from "./pages/partners/ProspectiveOrgPage";
 import Chapters from "./pages/Chapters";
+import Vacancies from "./pages/Vacancies";
 import Volunteer from "./pages/Volunteer";
 import Volunteers from "./pages/Volunteers";
 import VolunteerProfile from "./pages/volunteers/VolunteerProfile";
@@ -2373,6 +2374,14 @@ const App = () => (
                     element={
                       <WithLayout>
                         <ChaptersConsolidated />
+                      </WithLayout>
+                    }
+                  />
+                  <Route
+                    path="/vacancies"
+                    element={
+                      <WithLayout>
+                        <Vacancies />
                       </WithLayout>
                     }
                   />
