@@ -68,7 +68,7 @@ export function CallForNominationsCampaign() {
               </span>
             </h2>
             <p className="mt-4 text-lg font-medium text-primary/90 md:text-xl">
-              Nominate. Earn AGC. Share. Support your favourite nominees.
+              Nominate. Verify. Share. Celebrate education impact.
             </p>
             <p className="mt-5 text-base leading-relaxed text-white/75 md:text-lg">
               Education impact lives everywhere — in NGOs and foundations,
