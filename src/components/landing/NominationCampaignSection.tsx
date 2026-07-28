@@ -253,7 +253,7 @@ export function NominationCampaignSection() {
             Community engagement. Education impact storytelling.
           </p>
           <p className="mt-4 font-display text-base sm:text-lg text-gold">
-            Nominate a changemaker today and earn your AGC voting points.
+            Nominate a changemaker today — your submission enters independent NRC verification.
           </p>
           <div className="mt-5 flex flex-wrap justify-center gap-3">
             <Button asChild size="lg" className="bg-gold text-charcoal hover:bg-gold/90">
@@ -268,9 +268,9 @@ export function NominationCampaignSection() {
               variant="outline"
               className="border-gold/40 text-gold hover:bg-gold/10"
             >
-              <Link to="/earn-agc">
-                <Coins className="mr-2 h-4 w-4" />
-                Earn AGC Voting Points
+              <Link to="/about">
+                <ShieldCheck className="mr-2 h-4 w-4" />
+                How Recognition Works
               </Link>
             </Button>
           </div>
