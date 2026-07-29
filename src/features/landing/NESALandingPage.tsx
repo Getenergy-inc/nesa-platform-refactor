@@ -114,7 +114,7 @@ export function NESALandingPage() {
         {/* 1d. PUBLIC NOTICE — Nominations for all 4 tiers open 1 August 2026 */}
         <PublicNominationsNotice />
 
-        {/* 2. COUNTDOWN — Recognition Gala, 22 Oct 2026, Lagos */}
+        {/* 2. COUNTDOWN — Recognition Gala, 14 Dec 2026, Lagos */}
         <CountdownSection />
 
         {/* 2b. VISITOR PATHWAY — "Who are you nominating?" self-select before award cards */}
@@ -200,7 +200,7 @@ export function NESALandingPage() {
           <SCEFHistoryTimeline />
         </LazySection>
 
-        {/* 16c. GALA TICKET — 22 Oct 2026, Lagos */}
+        {/* 16c. GALA TICKET — 14 Dec 2026, Lagos */}
         <LazySection>
           <GalaTicketBand />
         </LazySection>
