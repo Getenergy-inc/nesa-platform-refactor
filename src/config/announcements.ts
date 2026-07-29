@@ -22,7 +22,7 @@ export const ANNOUNCEMENTS: Announcement[] = [
   },
   {
     id: "gala-2026",
-    text: "NESA-Africa 2026 Recognition Gala · 22 October 2026 · Lagos, Nigeria",
+    text: "NESA-Africa 2026 Recognition Gala · 14 December 2026 · Lagos, Nigeria",
     href: "/gala",
     analyticsId: "announcement_gala",
   },

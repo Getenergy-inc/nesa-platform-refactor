@@ -6,7 +6,7 @@ import { useCountdown } from "@/hooks/useCountdown";
 /**
  * MAIN LANDING-PAGE COUNTDOWN
  *
- * Hard-locked to: Gold-Blue Garnet Awards Gala — 22 October 2026, 18:00 WAT.
+ * Hard-locked to: NESA-Africa 2026 Recognition Gala — 14 December 2026, 18:00 WAT.
  * Do NOT reintroduce "first future event" auto-selection here.
  * Other intermediate milestones (TV shows, voting windows) live in
  * <UpcomingEventsSection /> and have their own countdowns.
@@ -58,7 +58,7 @@ export function CountdownSection() {
           {GALA_LABEL}
         </h2>
         <p className="text-xs sm:text-sm text-white/60 mb-2">
-          22 October 2026 · Lagos, Nigeria
+          14 December 2026 · Lagos, Nigeria
         </p>
         <p className="text-xs sm:text-sm text-white/55 mb-6 max-w-xl mx-auto">
           A continental gathering celebrating verified Education Enablers from across Africa, the African Diaspora and Friends of Africa — bringing together recognised individuals, organisations, institutions, partners, media, development leaders and education advocates committed to advancing Education for All.
