@@ -276,6 +276,10 @@ function fromSubcategory(
     },
     integrity: { body: INTEGRITY_2026 },
     faqs: DEFAULT_FAQS,
+    benefits: modules.benefits,
+    timeline: modules.timeline,
+    countdown: modules.countdown,
+    terms: modules.terms,
     finalCta: {
       heading: `Recognise an Enabler — ${sub.name}`,
       body: "Submit a fully evidenced nomination. NRC review begins as soon as evidence is complete.",
