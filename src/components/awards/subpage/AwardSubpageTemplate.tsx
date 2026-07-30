@@ -162,6 +162,36 @@ export interface AwardSubpageContent {
     primary: CTAAction;
     secondary?: CTAAction;
   };
+
+  // ── Optional, additive blocks (Award Pages Module — Phase 1) ──────────────
+  // Each renders only when supplied; existing subpages are unaffected.
+
+  /** Per-award accent override. Defaults resolve from slug → tier → gold. */
+  theme?: { accent?: string; accentSoft?: string; iconKey?: string; bannerSrc?: string };
+
+  /** "What recognition unlocks" cards. */
+  benefits?: { heading?: string; items: SubpageBenefit[] };
+
+  /** Award-specific image gallery. */
+  gallery?: { heading?: string; items: SubpageGalleryItem[] };
+
+  /** YouTube links only — no video files are stored. */
+  videos?: { heading?: string; items: SubpageVideo[] };
+
+  /** Award-specific milestone countdown. */
+  countdown?: SubpageCountdown;
+
+  /** Award-specific phase timeline. */
+  timeline?: { heading?: string; entries: SubpageTimelineEntry[] };
+
+  /** Award-scoped sponsors and partners (firewall note included by default). */
+  partners?: { heading?: string; note?: string; items: SubpageOrg[] };
+
+  /** Award-scoped testimonials. */
+  testimonials?: { heading?: string; items: SubpageTestimonial[] };
+
+  /** Award-specific terms & conditions. */
+  terms?: SubpageTerms;
 }
 
 // ── Small building blocks ────────────────────────────────────────────────────
