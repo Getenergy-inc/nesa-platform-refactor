@@ -605,12 +605,6 @@ function UtilityNavBar() {
         })}
       </nav>
     </div>
-              {item.label}
-            </Link>
-          );
-        })}
-      </nav>
-    </div>
   );
 }
 
