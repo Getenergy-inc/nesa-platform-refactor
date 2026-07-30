@@ -439,6 +439,33 @@ export function AwardSubpageTemplate({ content }: { content: AwardSubpageContent
           </ol>
         </SectionShell>
 
+        {/* 7b–7h. Optional award-specific blocks */}
+        {content.benefits ? (
+          <AwardBenefitsBlock heading={content.benefits.heading} items={content.benefits.items} />
+        ) : null}
+        {content.timeline ? (
+          <AwardTimelineBlock heading={content.timeline.heading} entries={content.timeline.entries} />
+        ) : null}
+        {content.gallery ? (
+          <AwardGalleryBlock heading={content.gallery.heading} items={content.gallery.items} />
+        ) : null}
+        {content.videos ? (
+          <AwardVideosBlock heading={content.videos.heading} items={content.videos.items} />
+        ) : null}
+        {content.testimonials ? (
+          <AwardTestimonialsBlock
+            heading={content.testimonials.heading}
+            items={content.testimonials.items}
+          />
+        ) : null}
+        {content.partners ? (
+          <AwardPartnersBlock
+            heading={content.partners.heading}
+            note={content.partners.note}
+            items={content.partners.items}
+          />
+        ) : null}
+
         {/* 8. Integrity firewall */}
         <SectionShell id="integrity">
           <div className="rounded-2xl border border-gold/30 bg-gradient-to-br from-charcoal to-black/80 p-6 sm:p-8">
