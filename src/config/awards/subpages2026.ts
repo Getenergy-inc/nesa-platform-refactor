@@ -141,6 +141,7 @@ function fromCategory(cat: CategoryDefinition): AwardSubpageContent {
   const slug = cat.slug; // category slug is globally unique in this registry
   const nominateHref = `/nominate?tier=${cat.tier}&category=${cat.slug}`;
   const directoryHref = `/nominees?tier=${cat.tier}&category=${cat.slug}`;
+  const modules = getSubpageModules(cat.tier, cat.shortName);
 
   return {
     slug,
