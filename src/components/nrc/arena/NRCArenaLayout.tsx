@@ -28,6 +28,7 @@ import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { cn } from "@/lib/utils";
 import { useAuth } from "@/contexts/AuthContext";
 import { WorkspaceSwitcher } from "@/components/navigation/WorkspaceSwitcher";
+import { ArenaBrand, ArenaRailBadge, ArenaTopBar, ArenaFooter } from "@/components/arena/ArenaChrome";
 
 interface NavItem {
   href: string;
