@@ -569,10 +569,10 @@ function MobileMenu() {
 function UtilityNavBar() {
   const location = useLocation();
   return (
-    <div className="hidden lg:block border-b border-gold/15 bg-charcoal">
+    <div className="hidden lg:block border-b border-gold/15 bg-black/40">
       <nav
         aria-label="Utility"
-        className="container mx-auto px-4 h-9 flex items-center gap-5 overflow-x-auto"
+        className="container mx-auto px-4 h-8 flex items-center gap-6 overflow-x-auto"
       >
         {UTILITY_NAV.map((item) => {
           const active = isActive(location.pathname, item.href);
@@ -590,15 +590,21 @@ function UtilityNavBar() {
                 })
               }
               className={cn(
-                "text-xs whitespace-nowrap transition-colors rounded px-1",
+                "font-mono text-[11px] tracking-wide whitespace-nowrap transition-colors rounded px-1",
                 FOCUS_RING,
                 item.emphasis
-                  ? "text-gold font-semibold hover:text-gold/80"
+                  ? "text-gold font-bold hover:text-gold/80"
                   : active
                     ? "text-gold"
-                    : "text-white/70 hover:text-gold",
+                    : "text-white/60 hover:text-gold",
               )}
             >
+              {item.label}
+            </Link>
+          );
+        })}
+      </nav>
+    </div>
               {item.label}
             </Link>
           );
