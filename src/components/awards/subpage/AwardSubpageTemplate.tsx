@@ -32,6 +32,36 @@ import {
 import { BreadcrumbJsonLd } from "@/components/seo/BreadcrumbJsonLd";
 import { trackEvent } from "@/lib/analytics";
 import { cn } from "@/lib/utils";
+import {
+  AwardBenefitsBlock,
+  AwardCountdownBlock,
+  AwardGalleryBlock,
+  AwardPartnersBlock,
+  AwardTermsBlock,
+  AwardTestimonialsBlock,
+  AwardTimelineBlock,
+  AwardVideosBlock,
+  type SubpageBenefit,
+  type SubpageCountdown,
+  type SubpageGalleryItem,
+  type SubpageOrg,
+  type SubpageTerms,
+  type SubpageTestimonial,
+  type SubpageTimelineEntry,
+  type SubpageVideo,
+} from "@/components/awards/subpage/AwardSubpageBlocks";
+import { getAwardTheme, awardThemeVars } from "@/config/awards/awardThemes";
+
+export type {
+  SubpageBenefit,
+  SubpageCountdown,
+  SubpageGalleryItem,
+  SubpageOrg,
+  SubpageTerms,
+  SubpageTestimonial,
+  SubpageTimelineEntry,
+  SubpageVideo,
+};
 
 // ── Content contract ────────────────────────────────────────────────────────
 
