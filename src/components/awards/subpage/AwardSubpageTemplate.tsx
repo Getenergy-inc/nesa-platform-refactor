@@ -500,6 +500,9 @@ export function AwardSubpageTemplate({ content }: { content: AwardSubpageContent
           </SectionShell>
         ) : null}
 
+        {/* 9b. Terms & conditions (optional) */}
+        {content.terms ? <AwardTermsBlock terms={content.terms} /> : null}
+
         {/* 10. Final CTA */}
         <SectionShell id="final-cta" className="border-b-0">
           <div className="rounded-2xl border border-gold/30 bg-gradient-to-r from-gold/10 via-charcoal to-charcoal p-8 sm:p-10">
