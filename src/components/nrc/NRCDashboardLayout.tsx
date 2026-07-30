@@ -86,26 +86,24 @@ export function NRCDashboardLayout({ children }: NRCDashboardLayoutProps) {
   };
 
   const sidebarContent = (
-    <div className="flex h-full flex-col">
+    <div className="flex h-full flex-col bg-arena-rail">
       {/* Sidebar Header */}
-      <div className="flex items-center gap-3 border-b border-[hsl(var(--gold)/0.1)] px-4 py-4">
-        <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-[hsl(var(--gold)/0.15)]">
-          <Award className="h-5 w-5 text-primary" />
+      {collapsed ? (
+        <div className="flex items-center justify-center border-b border-white/10 py-4">
+          <ArenaSeal className="h-9 w-9" />
         </div>
-        {!collapsed && (
-          <div className="min-w-0">
-            <h2 className="truncate text-sm font-bold text-foreground">NRC Portal</h2>
-            <p className="text-[10px] text-muted-foreground">Internal Review System</p>
-          </div>
-        )}
-      </div>
+      ) : (
+        <div className="border-b border-white/10">
+          <ArenaBrand workspace="NRC Arena" to="/nrc/dashboard" compact />
+        </div>
+      )}
 
       {/* Navigation */}
       <nav className="flex-1 overflow-y-auto px-3 py-4 space-y-6">
         {SIDEBAR_SECTIONS.map((section) => (
           <div key={section.label}>
             {!collapsed && (
-              <p className="mb-2 px-2 text-[10px] font-semibold uppercase tracking-wider text-muted-foreground/60">
+              <p className="mb-2 px-2 text-[10px] font-semibold uppercase tracking-wider text-white/40">
                 {section.label}
               </p>
             )}
@@ -120,12 +118,12 @@ export function NRCDashboardLayout({ children }: NRCDashboardLayoutProps) {
                     className={cn(
                       "flex items-center gap-3 rounded-lg px-3 py-2 text-sm transition-all",
                       active
-                        ? "bg-[hsl(var(--gold)/0.15)] text-primary font-medium"
-                        : "text-muted-foreground hover:bg-muted/50 hover:text-foreground"
+                        ? "bg-gradient-to-r from-gold/25 to-transparent font-medium text-gold border-l-2 border-gold"
+                        : "text-white/70 hover:bg-white/5 hover:text-gold"
                     )}
                     title={collapsed ? item.label : undefined}
                   >
-                    <item.icon className={cn("h-4 w-4 shrink-0", active ? "text-primary" : "")} />
+                    <item.icon className="h-4 w-4 shrink-0" />
                     {!collapsed && <span className="truncate">{item.label}</span>}
                   </Link>
                 );
@@ -136,11 +134,11 @@ export function NRCDashboardLayout({ children }: NRCDashboardLayoutProps) {
       </nav>
 
       {/* Sidebar Footer */}
-      <div className="border-t border-[hsl(var(--gold)/0.1)] p-3">
+      <div className="border-t border-white/10 p-3">
         <Button
           variant="ghost"
           size="sm"
-          className="w-full justify-start gap-2 text-muted-foreground hover:text-destructive"
+          className="w-full justify-start gap-2 text-white/60 hover:text-destructive"
           onClick={() => signOut()}
         >
           <LogOut className="h-4 w-4" />
@@ -149,6 +147,7 @@ export function NRCDashboardLayout({ children }: NRCDashboardLayoutProps) {
       </div>
     </div>
   );
+
 
   return (
     <div className="min-h-screen bg-background dark">
