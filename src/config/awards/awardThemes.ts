@@ -59,37 +59,43 @@ export const TIER_THEMES: Record<TierSlug, AwardTheme> = {
 };
 
 /**
- * Per-category overrides. Keys are canonical category slugs from
- * `src/config/recognition2026/categories`. Anything absent inherits its tier theme.
+ * Per-award overrides. Keys are the canonical subpage slugs produced by
+ * `src/config/awards/subpages2026.ts` — subcategory codes (lowercased) for the
+ * Icon/Influencer tiers, and category slugs for Platinum / Gold-Blue Garnet.
+ * Anything absent inherits its tier theme.
  */
 export const AWARD_THEME_OVERRIDES: Record<string, Partial<AwardTheme>> = {
   // Africa Education Icon pathways
-  "philanthropy-education": { accent: "42 92% 56%", iconKey: "HeartHandshake" },
-  "literary-new-curriculum": { accent: "38 78% 52%", iconKey: "BookOpen" },
-  "technical-education": { accent: "30 72% 50%", iconKey: "Wrench" },
+  "icon-phil": { accent: "42 92% 56%", iconKey: "HeartHandshake" },
+  "icon-lit": { accent: "38 78% 52%", iconKey: "BookOpen" },
+  "icon-tech": { accent: "30 72% 50%", iconKey: "Wrench" },
 
   // Influencer Education Impact
-  "social-media-influencer": { accent: "199 84% 55%", iconKey: "Share2" },
-  "sports-influencer": { accent: "142 62% 45%", iconKey: "Trophy" },
-  "music-influencer": { accent: "286 62% 62%", iconKey: "Music" },
+  "inf-soc": { accent: "199 84% 55%", iconKey: "Share2" },
+  "inf-spt": { accent: "142 62% 45%", iconKey: "Trophy" },
+  "inf-mus": { accent: "286 62% 62%", iconKey: "Music" },
 
   // Platinum
-  "diaspora-education": { accent: "268 55% 65%", iconKey: "Globe2" },
-  "international-education": { accent: "205 62% 58%", iconKey: "Plane" },
-  "library-nigeria": { accent: "28 55% 55%", iconKey: "Library" },
-  "research-development": { accent: "172 55% 45%", iconKey: "FlaskConical" },
-  "political-leaders": { accent: "352 55% 55%", iconKey: "Landmark" },
-  "creative-arts": { accent: "320 60% 60%", iconKey: "Palette" },
-  "faith-education": { accent: "48 45% 62%", iconKey: "Church" },
+  "best-tertiary-institution-library": { accent: "28 55% 55%", iconKey: "Library" },
+  "research-development-education": { accent: "172 55% 45%", iconKey: "FlaskConical" },
+  "christian-education-impact": { accent: "48 45% 62%", iconKey: "Church" },
+  "islamic-education-impact": { accent: "158 40% 52%", iconKey: "Moon" },
+  "political-leadership-education": { accent: "352 55% 55%", iconKey: "Landmark" },
+  "international-partnership-education": { accent: "205 62% 58%", iconKey: "Globe2" },
+  "diaspora-educational-impact": { accent: "268 55% 65%", iconKey: "Plane" },
 
   // Gold-Blue Garnet
-  "ngo-education": { accent: "212 72% 58%", iconKey: "Users" },
-  "csr-education": { accent: "196 68% 50%", iconKey: "Building2" },
-  "edutech-africa": { accent: "184 70% 46%", iconKey: "Cpu" },
-  "stem-education": { accent: "160 62% 44%", iconKey: "Atom" },
-  "media-advocacy": { accent: "232 62% 62%", iconKey: "Radio" },
-  "education-friendly-state": { accent: "220 55% 52%", iconKey: "MapPinned" },
+  "best-csr-education-africa": { accent: "196 68% 50%", iconKey: "Building2" },
+  "best-csr-education-nigeria": { accent: "192 62% 46%", iconKey: "Building" },
+  "best-edtech-innovation-africa": { accent: "184 70% 46%", iconKey: "Cpu" },
+  "best-media-education-advocacy-nigeria": { accent: "232 62% 62%", iconKey: "Radio" },
+  "best-ngo-education-nigeria": { accent: "212 72% 58%", iconKey: "Users" },
+  "best-ngo-education-africa": { accent: "216 66% 52%", iconKey: "UsersRound" },
+  "best-stem-education-programme-africa": { accent: "160 62% 44%", iconKey: "Atom" },
+  "best-creative-arts-education-nigeria": { accent: "320 60% 60%", iconKey: "Palette" },
+  "best-education-policy-state-nigeria": { accent: "220 55% 52%", iconKey: "MapPinned" },
 };
+
 
 export function getAwardTheme(slug: string, tier?: TierSlug): AwardTheme {
   const base = (tier && TIER_THEMES[tier]) || DEFAULT_AWARD_THEME;
