@@ -24,7 +24,7 @@ import {
 import { cn } from "@/lib/utils";
 import { useAuth } from "@/contexts/AuthContext";
 import { LanguageSwitcher } from "@/components/i18n";
-import { SITE_NAV, type NavItem, type NavChild, type NavSection } from "@/config/siteNavigation";
+import { SITE_NAV, UTILITY_NAV, type NavItem, type NavChild, type NavSection } from "@/config/siteNavigation";
 import { CURRENT_PHASE, NOMINATE_CTA } from "@/config/campaignPhase";
 import { trackNav } from "@/lib/analytics";
 import { AnnouncementBar } from "@/components/navigation/AnnouncementBar";
