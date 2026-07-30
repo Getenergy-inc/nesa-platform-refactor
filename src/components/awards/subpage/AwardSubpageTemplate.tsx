@@ -443,6 +443,7 @@ export function AwardSubpageTemplate({ content }: { content: AwardSubpageContent
         {content.benefits ? (
           <AwardBenefitsBlock heading={content.benefits.heading} items={content.benefits.items} />
         ) : null}
+        {content.countdown ? <AwardCountdownBlock countdown={content.countdown} /> : null}
         {content.timeline ? (
           <AwardTimelineBlock heading={content.timeline.heading} entries={content.timeline.entries} />
         ) : null}

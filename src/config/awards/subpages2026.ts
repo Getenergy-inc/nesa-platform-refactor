@@ -23,6 +23,7 @@ import {
 } from "@/config/recognition2026/categories";
 import type { TierSlug } from "@/config/recognition2026/tiers";
 import { getSubpageHeroImage } from "@/config/awards/subpageHeroImages";
+import { getSubpageModules } from "@/config/awards/subpageModules2026";
 
 // ── Shared building blocks ──────────────────────────────────────────────────
 
@@ -140,6 +141,7 @@ function fromCategory(cat: CategoryDefinition): AwardSubpageContent {
   const slug = cat.slug; // category slug is globally unique in this registry
   const nominateHref = `/nominate?tier=${cat.tier}&category=${cat.slug}`;
   const directoryHref = `/nominees?tier=${cat.tier}&category=${cat.slug}`;
+  const modules = getSubpageModules(cat.tier, cat.shortName);
 
   return {
     slug,
@@ -197,6 +199,10 @@ function fromCategory(cat: CategoryDefinition): AwardSubpageContent {
     },
     integrity: { body: INTEGRITY_2026 },
     faqs: DEFAULT_FAQS,
+    benefits: modules.benefits,
+    timeline: modules.timeline,
+    countdown: modules.countdown,
+    terms: modules.terms,
     finalCta: {
       heading: `Recognise an Enabler of ${cat.shortName}`,
       body: "Submit a fully evidenced nomination. NRC review begins as soon as evidence is complete.",
@@ -214,6 +220,7 @@ function fromSubcategory(
   const slug = sub.code.toLowerCase().replace(/[^a-z0-9]+/g, "-"); // e.g. icon-phil → icon-phil
   const nominateHref = `/nominate?tier=${parent.tier}&category=${parent.slug}&subcategory=${sub.code}`;
   const directoryHref = `/nominees?tier=${parent.tier}&category=${parent.slug}&subcategory=${sub.code}`;
+  const modules = getSubpageModules(parent.tier, sub.name);
 
   return {
     slug,
@@ -269,6 +276,10 @@ function fromSubcategory(
     },
     integrity: { body: INTEGRITY_2026 },
     faqs: DEFAULT_FAQS,
+    benefits: modules.benefits,
+    timeline: modules.timeline,
+    countdown: modules.countdown,
+    terms: modules.terms,
     finalCta: {
       heading: `Recognise an Enabler — ${sub.name}`,
       body: "Submit a fully evidenced nomination. NRC review begins as soon as evidence is complete.",
