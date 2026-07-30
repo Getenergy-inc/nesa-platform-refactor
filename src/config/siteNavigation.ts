@@ -129,7 +129,7 @@ export const SITE_NAV: NavItem[] = [
     ],
   },
   {
-    label: "Directory",
+    label: "Explore Existing Nominees",
     href: "/nominees",
     analyticsId: "nav_directory",
   },
