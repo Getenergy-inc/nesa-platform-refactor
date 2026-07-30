@@ -147,4 +147,3 @@ export default function JudgesArenaLayout() {
   );
 }
 
-export { ShieldCheck };
