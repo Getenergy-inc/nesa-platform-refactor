@@ -220,6 +220,7 @@ function fromSubcategory(
   const slug = sub.code.toLowerCase().replace(/[^a-z0-9]+/g, "-"); // e.g. icon-phil → icon-phil
   const nominateHref = `/nominate?tier=${parent.tier}&category=${parent.slug}&subcategory=${sub.code}`;
   const directoryHref = `/nominees?tier=${parent.tier}&category=${parent.slug}&subcategory=${sub.code}`;
+  const modules = getSubpageModules(parent.tier, sub.name);
 
   return {
     slug,
