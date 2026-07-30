@@ -13,6 +13,7 @@ import { Badge } from "@/components/ui/badge";
 import {
   ArenaSeal, ArenaBrand, ArenaTopBar, ArenaFooter,
 } from "@/components/arena/ArenaChrome";
+import { ArenaSeo } from "@/components/arena/ArenaSeo";
 import {
   Award, LayoutDashboard, Users, ClipboardList, FileCheck, Flag,
   BarChart3, Shield, BookOpen, Settings, LogOut, Bell, Search,
@@ -154,6 +155,7 @@ export function NRCDashboardLayout({ children }: NRCDashboardLayoutProps) {
 
   return (
     <div className="min-h-screen bg-arena-bg text-arena-text">
+      <ArenaSeo workspace="NRC Arena" />
       <ArenaTopBar
         title="NESA-Africa NRC Arena"
         subtitle="Internal Review System · NESA Africa 2026"

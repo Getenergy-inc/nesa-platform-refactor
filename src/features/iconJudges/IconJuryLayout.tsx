@@ -1,5 +1,5 @@
 import { NavLink, Outlet, useNavigate } from "react-router-dom";
-import { Helmet } from "react-helmet-async";
+import { ArenaSeo } from "@/components/arena/ArenaSeo";
 import {
   LayoutDashboard, ClipboardList, Users, AlertTriangle,
   FileEdit, StickyNote, Trophy, UserCircle, LifeBuoy, LogOut, ShieldCheck, Vote, Layers,
@@ -37,10 +37,7 @@ export function IconJuryLayout() {
   };
   return (
     <div className="min-h-screen bg-arena-bg text-arena-text flex flex-col lg:flex-row">
-      <Helmet>
-        <title>Africa Education Icon Judges Portal</title>
-        <meta name="robots" content="noindex, nofollow" />
-      </Helmet>
+      <ArenaSeo workspace="Judges Arena" />
       <aside className="lg:w-64 border-b lg:border-b-0 lg:border-r border-white/10 bg-arena-rail flex flex-col">
         <ArenaBrand workspace="Judges Arena" to="/judges/dashboard" />
         <nav className="flex-1 p-3 space-y-1">

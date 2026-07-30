@@ -1,5 +1,5 @@
 import { ReactNode } from "react";
-import { Helmet } from "react-helmet-async";
+import { ArenaSeo } from "@/components/arena/ArenaSeo";
 import {
   SidebarProvider,
   SidebarTrigger,
@@ -19,11 +19,8 @@ export function JudgesArenaLayout({ children, title, description }: JudgesArenaL
   const { user } = useAuth();
   return (
     <SidebarProvider>
-      {title && (
-        <Helmet>
-          <title>{`${title} | Judges Arena`}</title>
-        </Helmet>
-      )}
+      <ArenaSeo workspace="Judges Arena" title={title} description={description} />
+
       <div className="min-h-screen flex w-full bg-arena-bg text-arena-text">
         <JudgesSidebar />
         <SidebarInset className="bg-arena-bg">

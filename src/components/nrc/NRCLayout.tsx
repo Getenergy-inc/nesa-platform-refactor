@@ -13,6 +13,7 @@ import {
   ArenaTopBar,
   ArenaFooter,
 } from "@/components/arena/ArenaChrome";
+import { ArenaSeo } from "@/components/arena/ArenaSeo";
 import {
   LayoutDashboard,
   ClipboardList,
@@ -43,6 +44,7 @@ export function NRCLayout({ children }: NRCLayoutProps) {
 
   return (
     <div className="min-h-screen bg-arena-bg text-arena-text">
+      <ArenaSeo workspace="NRC Arena" />
       <div className="flex min-h-screen w-full">
         <aside className="hidden w-64 shrink-0 border-r border-white/10 bg-arena-rail lg:block">
           <div className="sticky top-0 flex h-screen flex-col overflow-y-auto">

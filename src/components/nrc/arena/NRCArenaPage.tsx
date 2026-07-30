@@ -3,7 +3,7 @@
 // the approved dashboard mocks.
 
 import { ReactNode } from "react";
-import { Helmet } from "react-helmet-async";
+import { ArenaSeo } from "@/components/arena/ArenaSeo";
 import { Link } from "react-router-dom";
 import { ChevronRight } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
@@ -36,9 +36,7 @@ export function NRCArenaPage({
 }: NRCArenaPageProps) {
   return (
     <NRCArenaLayout>
-      <Helmet>
-        <title>{title} · NRC Arena · NESA-Africa 2026</title>
-      </Helmet>
+      <ArenaSeo workspace="NRC Arena" title={title} description={description} />
 
       {breadcrumb && breadcrumb.length > 0 && (
         <nav aria-label="Breadcrumb" className="mb-3 flex items-center gap-1.5 text-xs text-white/50">
