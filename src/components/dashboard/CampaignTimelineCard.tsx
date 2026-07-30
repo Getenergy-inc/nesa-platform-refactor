@@ -33,14 +33,14 @@ const campaigns: Campaign[] = [
   {
     name: "Blue Garnet Voting",
     startDate: new Date("2026-09-16"),
-    endDate: new Date("2026-10-22"),
+    endDate: new Date("2026-12-14"),
     color: "bg-[#1E3A5F]",
     badge: "Blue Garnet",
   },
   {
     name: "Grand Gala",
-    startDate: new Date("2026-10-22"),
-    endDate: new Date("2026-10-22"),
+    startDate: new Date("2026-12-14"),
+    endDate: new Date("2026-12-14"),
     color: "bg-gold",
     badge: "Gala",
   },

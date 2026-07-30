@@ -42,7 +42,7 @@ const GALA_DATE = new Date("2026-12-14T00:00:00+01:00");
 const GALA = {
   title: "Blue Garnet Awards Gala",
   tagline: "The Night Africa Celebrates Education Changemakers",
-  date: "22 October 2026",
+  date: "14 December 2026",
   time: "18:00 WAT",
   venue: "International Conference Centre",
   city: "Lagos, Nigeria",
@@ -123,7 +123,7 @@ const eventJsonLd = {
   "@context": "https://schema.org",
   "@type": "Event",
   name: `NESA-Africa 2026 ${GALA.title}`,
-  startDate: "2026-10-22T18:00:00+01:00",
+  startDate: "2026-12-14T18:00:00+01:00",
   endDate: "2026-10-23T00:00:00+01:00",
   eventStatus: "https://schema.org/EventScheduled",
   eventAttendanceMode: "https://schema.org/MixedEventAttendanceMode",

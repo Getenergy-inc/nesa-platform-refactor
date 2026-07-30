@@ -470,7 +470,7 @@ export default function Rebuild() {
                 <Calendar className="h-5 w-5 flex-shrink-0 mt-0.5" style={{ color: `hsl(42, 85%, 52%)` }} />
                 <div>
                   <p className="text-sm font-medium" style={{ color: `hsl(210, 20%, 95%)` }}>Legacy Fund Window</p>
-                  <p className="text-xs" style={{ color: `hsla(210, 20%, 90%, 0.5)` }}>October 2026 – October 2027 • Delivered by EduAid-Africa in partnership with local communities</p>
+                  <p className="text-xs" style={{ color: `hsla(210, 20%, 90%, 0.5)` }}>December 2026 – December 2027 • Delivered by EduAid-Africa in partnership with local communities</p>
                 </div>
               </div>
             </div>

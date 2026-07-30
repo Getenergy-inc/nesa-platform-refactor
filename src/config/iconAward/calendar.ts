@@ -12,7 +12,7 @@ export const ICON_CALENDAR = {
   grandJuryClose:     new Date("2026-10-07T23:59:59Z"),
   governanceOpen:     new Date("2026-10-08T00:00:00Z"),
   governanceClose:    new Date("2026-10-15T23:59:59Z"),
-  gala:               new Date("2026-10-22T18:00:00Z"),
+  gala:               new Date("2026-12-14T18:00:00Z"),
 } as const;
 
 export type IconPhase =

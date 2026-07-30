@@ -466,7 +466,7 @@ export const SPONSOR_LANE_COPY: Record<SponsorLaneSlug, SponsorLaneCopy> = {
     amount: "Approved amount",
     sponsorLimit: "1 main partner per region",
     purpose:
-      "Lead regional partner for Rebuild My School Africa — funding infrastructure, accessibility, libraries, WASH and learning resources across the October 2026 – October 2027 RMSA timeline.",
+      "Lead regional partner for Rebuild My School Africa — funding infrastructure, accessibility, libraries, WASH and learning resources across the December 2026 – December 2027 RMSA timeline.",
     benefits: [
       "“RMSA Regional Partner — [Region]” recognition across legacy assets",
       "Logo placement on RMSA regional micro-page and impact dashboard",

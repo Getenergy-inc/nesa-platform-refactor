@@ -37,7 +37,7 @@ const STEPS = [
   {
     icon: Trophy,
     title: "Recognition path",
-    body: "Verified nominees advance to public endorsement and jury review, culminating at the October 2026 Gala.",
+    body: "Verified nominees advance to public endorsement and jury review, culminating at the December 2026 Gala.",
   },
 ] as const;
 

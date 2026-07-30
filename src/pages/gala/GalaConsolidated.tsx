@@ -29,7 +29,7 @@ export default function GalaConsolidated() {
     <>
       <Helmet>
         <title>Gold-Blue Garnet Awards Gala · NESA-Africa 2026</title>
-        <meta name="description" content="NESA-Africa 2026 Gold-Blue Garnet Awards Gala — Lagos, 22 October 2026. Individual tickets, tables, delegates, sponsor hospitality, invitations, media accreditation and QR check-in." />
+        <meta name="description" content="NESA-Africa 2026 Gold-Blue Garnet Awards Gala — Lagos, 14 December 2026. Individual tickets, tables, delegates, sponsor hospitality, invitations, media accreditation and QR check-in." />
       </Helmet>
       <nav aria-label="Gala sections" className="sticky top-14 sm:top-16 z-30 bg-charcoal/95 backdrop-blur border-b border-gold/20 overflow-x-auto">
         <ul className="flex gap-4 px-4 py-3 text-sm whitespace-nowrap">

@@ -50,7 +50,7 @@ export function LegacyFundCallout() {
             Rebuild My School Africa Legacy Fund, supporting post-award education infrastructure,
             Special Needs Education interventions, accessibility upgrades, digital learning spaces,
             and community-led school improvement from{" "}
-            <span className="text-ivory">October 2026 to October 2027</span>.
+            <span className="text-ivory">December 2026 to December 2027</span>.
           </p>
           <p className="text-ivory/55 text-xs md:text-sm leading-relaxed mb-6 max-w-3xl">
             Subject to Board, Finance, and Compliance approval, allocations may be distributed across

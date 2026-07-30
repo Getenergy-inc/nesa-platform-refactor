@@ -121,7 +121,7 @@ export const PROGRAMME_TIMELINE_2026 = [
   {
     id: 'blue-garnet-voting',
     phase: 'Blue Garnet Voting',
-    period: '16 September – 22 October 2026',
+    period: '16 September – 14 December 2026',
     description: 'Final competitive voting window leading directly into the gala. Voting closes on gala day for transparency and suspense.',
     focus: 'Prestige · Suspense · Public + Jury',
     status: 'upcoming' as const,
@@ -130,7 +130,7 @@ export const PROGRAMME_TIMELINE_2026 = [
   {
     id: 'blue-garnet-gala',
     phase: 'Blue Garnet Awards Gala',
-    period: '22 October 2026',
+    period: '14 December 2026',
     description: 'The peak event of the season — a live continental recognition ceremony and media moment.',
     focus: 'Continental Spotlight · Live Broadcast',
     status: 'upcoming' as const,
@@ -138,7 +138,7 @@ export const PROGRAMME_TIMELINE_2026 = [
   {
     id: 'rmsa-launch',
     phase: 'Rebuild My School Africa Launch',
-    period: '23 October 2026 onward',
+    period: '15 December 2026 onward',
     description: 'Transition from awards visibility into school-focused intervention and social impact across African regions.',
     focus: 'Legacy · Social Impact · Regional Schools',
     status: 'upcoming' as const,
@@ -170,13 +170,13 @@ export const VOTING_PHASES: VotingPhaseConfig[] = [
     },
     dates: {
       votingOpens: '2026-10-02',
-      votingCloses: '2026-10-22',
-      resultsDate: '2026-10-22',
+      votingCloses: '2026-12-14',
+      resultsDate: '2026-12-14',
     },
   },
 ];
 
-export const GALA_DATE = '2026-10-22';
+export const GALA_DATE = '2026-12-14';
 export const GALA_WEEKEND = 'October 22, 2026';
 
 // ============================================================================

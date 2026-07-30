@@ -1,5 +1,5 @@
 // NESA-Africa & EduAid-Africa 2026 Master Timeline
-// 1 July – 22 October 2026 — updated per official notice:
+// 1 July – 14 December 2026 — updated per official notice:
 // PUBLIC NOMINATIONS FOR ALL 4 TIERS OPEN 1 AUGUST 2026.
 // Source of truth for the Timeline page master calendar, homepage
 // public notice banner and any dated milestone lookups site-wide.
@@ -347,8 +347,8 @@ export const MASTER_TIMELINE_2026: MasterTimelineEntry[] = [
   },
   {
     id: "recognition-gala",
-    dateLabel: "Thursday, 22 October 2026",
-    startsAt: "2026-10-22T00:00:00Z",
+    dateLabel: "Thursday, 14 December 2026",
+    startsAt: "2026-12-14T00:00:00Z",
     milestone: "NESA-Africa 2026 Recognition Gala",
     activity: "Present 9 Icons + recognised Education Enablers.",
     outcome: "Conclude recognition season",

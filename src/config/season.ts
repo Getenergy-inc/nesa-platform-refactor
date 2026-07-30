@@ -62,7 +62,7 @@ export const DEFAULT_SEASON_CONFIG: SeasonConfig = {
       nominationsClose: "2026-06-20",
       votingOpen: "2026-07-13",
       votingClose: "2026-09-25",
-      ceremonyDate: "2026-10-22T18:00:00",
+      ceremonyDate: "2026-12-14T18:00:00",
       isActive: true,
     },
   },
