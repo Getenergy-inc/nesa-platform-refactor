@@ -63,8 +63,8 @@ describe("SITE_NAV configuration", () => {
     expect(rec?.sections?.map((s) => s.title)).toEqual([
       "Africa Education Icon",
       "Influencer Education Impact",
-      "Platinum Certificates of Recognition",
-      "Gold-Blue Garnet Regional Certificates",
+      "Platinum Certificate of Recognition",
+      "Gold-Blue Garnet Regional Recognition",
     ]);
   });
 
