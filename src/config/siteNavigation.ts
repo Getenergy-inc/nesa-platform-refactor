@@ -147,5 +147,29 @@ export const SITE_NAV: NavItem[] = [
   },
 ];
 
+// ---------------------------------------------------------------------------
+// Secondary utility bar — renders site-wide, above the main nav.
+// Deliberately contains NO wallet / points / voting-adjacent destinations.
+// "Buy Award Gala Ticket" is the single transactional item (gold-highlighted).
+export interface UtilityNavItem {
+  label: string;
+  href: string;
+  analyticsId: string;
+  /** Visually distinct transactional item */
+  emphasis?: boolean;
+  /** Cross-referenced destination outside the awards platform */
+  external?: boolean;
+}
+
+export const UTILITY_NAV: UtilityNavItem[] = [
+  { label: "NRC", href: "/nrc", analyticsId: "util_nrc" },
+  { label: "Judges", href: "/judges", analyticsId: "util_judges" },
+  { label: "Buy Award Gala Ticket", href: "/tickets", analyticsId: "util_gala_ticket", emphasis: true },
+  { label: "Merchandise", href: "/merch", analyticsId: "util_merch" },
+  { label: "Join Webinar", href: "/media/webinars", analyticsId: "util_webinar" },
+  { label: "Watch Award TV Show", href: "/media/tv", analyticsId: "util_tv_show" },
+  { label: "Join Our Team", href: "/vacancies", analyticsId: "util_join_team" },
+];
+
 // Re-export the phase-driven CTA so consumers have one import surface.
 export { NOMINATE_CTA, CURRENT_PHASE } from "./campaignPhase";
