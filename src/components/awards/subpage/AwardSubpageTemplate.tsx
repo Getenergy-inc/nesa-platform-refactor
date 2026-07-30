@@ -32,6 +32,36 @@ import {
 import { BreadcrumbJsonLd } from "@/components/seo/BreadcrumbJsonLd";
 import { trackEvent } from "@/lib/analytics";
 import { cn } from "@/lib/utils";
+import {
+  AwardBenefitsBlock,
+  AwardCountdownBlock,
+  AwardGalleryBlock,
+  AwardPartnersBlock,
+  AwardTermsBlock,
+  AwardTestimonialsBlock,
+  AwardTimelineBlock,
+  AwardVideosBlock,
+  type SubpageBenefit,
+  type SubpageCountdown,
+  type SubpageGalleryItem,
+  type SubpageOrg,
+  type SubpageTerms,
+  type SubpageTestimonial,
+  type SubpageTimelineEntry,
+  type SubpageVideo,
+} from "@/components/awards/subpage/AwardSubpageBlocks";
+import { getAwardTheme, awardThemeVars } from "@/config/awards/awardThemes";
+
+export type {
+  SubpageBenefit,
+  SubpageCountdown,
+  SubpageGalleryItem,
+  SubpageOrg,
+  SubpageTerms,
+  SubpageTestimonial,
+  SubpageTimelineEntry,
+  SubpageVideo,
+};
 
 // ── Content contract ────────────────────────────────────────────────────────
 
@@ -132,6 +162,36 @@ export interface AwardSubpageContent {
     primary: CTAAction;
     secondary?: CTAAction;
   };
+
+  // ── Optional, additive blocks (Award Pages Module — Phase 1) ──────────────
+  // Each renders only when supplied; existing subpages are unaffected.
+
+  /** Per-award accent override. Defaults resolve from slug → tier → gold. */
+  theme?: { accent?: string; accentSoft?: string; iconKey?: string; bannerSrc?: string };
+
+  /** "What recognition unlocks" cards. */
+  benefits?: { heading?: string; items: SubpageBenefit[] };
+
+  /** Award-specific image gallery. */
+  gallery?: { heading?: string; items: SubpageGalleryItem[] };
+
+  /** YouTube links only — no video files are stored. */
+  videos?: { heading?: string; items: SubpageVideo[] };
+
+  /** Award-specific milestone countdown. */
+  countdown?: SubpageCountdown;
+
+  /** Award-specific phase timeline. */
+  timeline?: { heading?: string; entries: SubpageTimelineEntry[] };
+
+  /** Award-scoped sponsors and partners (firewall note included by default). */
+  partners?: { heading?: string; note?: string; items: SubpageOrg[] };
+
+  /** Award-scoped testimonials. */
+  testimonials?: { heading?: string; items: SubpageTestimonial[] };
+
+  /** Award-specific terms & conditions. */
+  terms?: SubpageTerms;
 }
 
 // ── Small building blocks ────────────────────────────────────────────────────
@@ -164,6 +224,7 @@ export function AwardSubpageTemplate({ content }: { content: AwardSubpageContent
   const featured = content.featured.nominees.slice(0, 6);
   const steps = content.howItWorks.steps.slice(0, 6);
   const faqs = content.faqs.slice(0, 5);
+  const theme = { ...getAwardTheme(content.slug, content.tier), ...(content.theme ?? {}) };
   const integrityDefault =
     "NESA-Africa 2026 does not use public voting for award recognition. Sponsorship, donations, Gala tickets, merchandise, endorsements, GFAwzip Wallet transactions, AGC Participation Credits, follower numbers and public popularity do not influence verification or recognition.";
 
@@ -180,7 +241,7 @@ export function AwardSubpageTemplate({ content }: { content: AwardSubpageContent
       </Helmet>
       <BreadcrumbJsonLd crumbs={content.breadcrumbs} />
 
-      <div className="min-h-screen bg-charcoal text-white">
+      <div className="min-h-screen bg-charcoal text-white" style={awardThemeVars(theme)}>
         {/* 1. Hero */}
         <HeroCompact
           eyebrow={content.hero.eyebrow ?? content.parentTierLabel}
@@ -199,6 +260,11 @@ export function AwardSubpageTemplate({ content }: { content: AwardSubpageContent
             <TierNoticeBanner kind={content.notice.kind} />
           </div>
         ) : null}
+
+        {/* 1b. Award-specific countdown (optional) */}
+        {content.countdown ? <AwardCountdownBlock countdown={content.countdown} /> : null}
+
+
 
         {/* 2. Recognises */}
         <SectionShell id="recognises">
@@ -373,6 +439,33 @@ export function AwardSubpageTemplate({ content }: { content: AwardSubpageContent
           </ol>
         </SectionShell>
 
+        {/* 7b–7h. Optional award-specific blocks */}
+        {content.benefits ? (
+          <AwardBenefitsBlock heading={content.benefits.heading} items={content.benefits.items} />
+        ) : null}
+        {content.timeline ? (
+          <AwardTimelineBlock heading={content.timeline.heading} entries={content.timeline.entries} />
+        ) : null}
+        {content.gallery ? (
+          <AwardGalleryBlock heading={content.gallery.heading} items={content.gallery.items} />
+        ) : null}
+        {content.videos ? (
+          <AwardVideosBlock heading={content.videos.heading} items={content.videos.items} />
+        ) : null}
+        {content.testimonials ? (
+          <AwardTestimonialsBlock
+            heading={content.testimonials.heading}
+            items={content.testimonials.items}
+          />
+        ) : null}
+        {content.partners ? (
+          <AwardPartnersBlock
+            heading={content.partners.heading}
+            note={content.partners.note}
+            items={content.partners.items}
+          />
+        ) : null}
+
         {/* 8. Integrity firewall */}
         <SectionShell id="integrity">
           <div className="rounded-2xl border border-gold/30 bg-gradient-to-br from-charcoal to-black/80 p-6 sm:p-8">
@@ -406,6 +499,9 @@ export function AwardSubpageTemplate({ content }: { content: AwardSubpageContent
             </Accordion>
           </SectionShell>
         ) : null}
+
+        {/* 9b. Terms & conditions (optional) */}
+        {content.terms ? <AwardTermsBlock terms={content.terms} /> : null}
 
         {/* 10. Final CTA */}
         <SectionShell id="final-cta" className="border-b-0">
