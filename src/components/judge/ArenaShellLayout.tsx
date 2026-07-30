@@ -11,7 +11,7 @@ import {
   Scale,
   FileText,
   Menu,
-  ShieldCheck,
+
 } from "lucide-react";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Badge } from "@/components/ui/badge";
