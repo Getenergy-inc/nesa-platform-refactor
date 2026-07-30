@@ -11,6 +11,9 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 import {
+  ArenaSeal, ArenaBrand, ArenaTopBar, ArenaFooter,
+} from "@/components/arena/ArenaChrome";
+import {
   Award, LayoutDashboard, Users, ClipboardList, FileCheck, Flag,
   BarChart3, Shield, BookOpen, Settings, LogOut, Bell, Search,
   ChevronLeft, ChevronRight, Menu, X, CheckCircle, XCircle,
@@ -86,26 +89,24 @@ export function NRCDashboardLayout({ children }: NRCDashboardLayoutProps) {
   };
 
   const sidebarContent = (
-    <div className="flex h-full flex-col">
+    <div className="flex h-full flex-col bg-arena-rail">
       {/* Sidebar Header */}
-      <div className="flex items-center gap-3 border-b border-[hsl(var(--gold)/0.1)] px-4 py-4">
-        <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-[hsl(var(--gold)/0.15)]">
-          <Award className="h-5 w-5 text-primary" />
+      {collapsed ? (
+        <div className="flex items-center justify-center border-b border-white/10 py-4">
+          <ArenaSeal className="h-9 w-9" />
         </div>
-        {!collapsed && (
-          <div className="min-w-0">
-            <h2 className="truncate text-sm font-bold text-foreground">NRC Portal</h2>
-            <p className="text-[10px] text-muted-foreground">Internal Review System</p>
-          </div>
-        )}
-      </div>
+      ) : (
+        <div className="border-b border-white/10">
+          <ArenaBrand workspace="NRC Arena" to="/nrc/dashboard" compact />
+        </div>
+      )}
 
       {/* Navigation */}
       <nav className="flex-1 overflow-y-auto px-3 py-4 space-y-6">
         {SIDEBAR_SECTIONS.map((section) => (
           <div key={section.label}>
             {!collapsed && (
-              <p className="mb-2 px-2 text-[10px] font-semibold uppercase tracking-wider text-muted-foreground/60">
+              <p className="mb-2 px-2 text-[10px] font-semibold uppercase tracking-wider text-white/40">
                 {section.label}
               </p>
             )}
@@ -120,12 +121,12 @@ export function NRCDashboardLayout({ children }: NRCDashboardLayoutProps) {
                     className={cn(
                       "flex items-center gap-3 rounded-lg px-3 py-2 text-sm transition-all",
                       active
-                        ? "bg-[hsl(var(--gold)/0.15)] text-primary font-medium"
-                        : "text-muted-foreground hover:bg-muted/50 hover:text-foreground"
+                        ? "bg-gradient-to-r from-gold/25 to-transparent font-medium text-gold border-l-2 border-gold"
+                        : "text-white/70 hover:bg-white/5 hover:text-gold"
                     )}
                     title={collapsed ? item.label : undefined}
                   >
-                    <item.icon className={cn("h-4 w-4 shrink-0", active ? "text-primary" : "")} />
+                    <item.icon className="h-4 w-4 shrink-0" />
                     {!collapsed && <span className="truncate">{item.label}</span>}
                   </Link>
                 );
@@ -136,11 +137,11 @@ export function NRCDashboardLayout({ children }: NRCDashboardLayoutProps) {
       </nav>
 
       {/* Sidebar Footer */}
-      <div className="border-t border-[hsl(var(--gold)/0.1)] p-3">
+      <div className="border-t border-white/10 p-3">
         <Button
           variant="ghost"
           size="sm"
-          className="w-full justify-start gap-2 text-muted-foreground hover:text-destructive"
+          className="w-full justify-start gap-2 text-white/60 hover:text-destructive"
           onClick={() => signOut()}
         >
           <LogOut className="h-4 w-4" />
@@ -150,82 +151,58 @@ export function NRCDashboardLayout({ children }: NRCDashboardLayoutProps) {
     </div>
   );
 
+
   return (
-    <div className="min-h-screen bg-background dark">
-      {/* Top Bar */}
-      <header className="sticky top-0 z-50 border-b border-[hsl(var(--gold)/0.1)] bg-card/95 backdrop-blur supports-[backdrop-filter]:bg-card/80">
-        <div className="flex h-14 items-center justify-between px-4">
-          <div className="flex items-center gap-3">
-            {/* Mobile menu toggle */}
+    <div className="min-h-screen bg-arena-bg text-arena-text">
+      <ArenaTopBar
+        title="NESA-Africa NRC Arena"
+        subtitle="Internal Review System · NESA Africa 2026"
+        statusLabel="Verification Live"
+        statusDetail="2026 Cycle"
+        statusTone="live"
+        identityName={user?.email ?? "Reviewer"}
+        identityRole="NRC Reviewer"
+        notifications={3}
+        leading={
+          <div className="flex items-center gap-1">
             <Button
               variant="ghost"
               size="icon"
-              className="lg:hidden"
+              aria-label="Toggle navigation"
+              className="lg:hidden text-white hover:bg-white/10"
               onClick={() => setMobileOpen(!mobileOpen)}
             >
               {mobileOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
             </Button>
-
-            {/* Desktop collapse */}
             <Button
               variant="ghost"
               size="icon"
-              className="hidden lg:flex"
+              aria-label="Collapse sidebar"
+              className="hidden lg:flex text-white hover:bg-white/10"
               onClick={() => setCollapsed(!collapsed)}
             >
               {collapsed ? <ChevronRight className="h-4 w-4" /> : <ChevronLeft className="h-4 w-4" />}
             </Button>
-
-            <div className="hidden items-center gap-3 sm:flex">
-              <Award className="h-5 w-5 text-primary" />
-              <div>
-                <h1 className="text-sm font-bold">NRC Scoring Dashboard</h1>
-                <p className="text-[10px] text-muted-foreground">NESA Africa 2026</p>
-              </div>
-            </div>
-
-            <Badge variant="outline" className="hidden border-primary/30 text-primary text-[10px] md:flex">
-              Internal Review System
-            </Badge>
           </div>
-
-          <div className="flex items-center gap-2">
-            {/* Search */}
-            <div className="relative hidden md:block">
-              <Search className="absolute left-2.5 top-1/2 h-3.5 w-3.5 -translate-y-1/2 text-muted-foreground" />
-              <Input
-                placeholder="Search nominees..."
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                className="h-8 w-60 bg-muted/30 pl-8 text-xs border-muted"
-              />
-            </div>
-
-            {/* Notifications */}
-            <Button variant="ghost" size="icon" className="relative h-8 w-8">
-              <Bell className="h-4 w-4" />
-              <span className="absolute -right-0.5 -top-0.5 h-2 w-2 rounded-full bg-destructive" />
-            </Button>
-
-            {/* Profile */}
-            <div className="hidden items-center gap-2 rounded-lg bg-muted/30 px-3 py-1.5 sm:flex">
-              <div className="h-6 w-6 rounded-full bg-primary/20 flex items-center justify-center">
-                <User className="h-3.5 w-3.5 text-primary" />
-              </div>
-              <div className="hidden md:block">
-                <p className="text-xs font-medium">{user?.email?.split("@")[0] || "Reviewer"}</p>
-                <p className="text-[10px] text-muted-foreground">NRC Reviewer</p>
-              </div>
-            </div>
+        }
+        actions={
+          <div className="relative hidden md:block">
+            <Search className="absolute left-2.5 top-1/2 h-3.5 w-3.5 -translate-y-1/2 text-white/50" />
+            <Input
+              placeholder="Search nominees..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              className="h-9 w-56 border-white/12 bg-arena-panel pl-8 text-xs text-white placeholder:text-white/40"
+            />
           </div>
-        </div>
-      </header>
+        }
+      />
 
       <div className="flex">
         {/* Desktop Sidebar */}
         <aside
           className={cn(
-            "hidden lg:flex h-[calc(100vh-3.5rem)] sticky top-14 flex-col border-r border-[hsl(var(--gold)/0.08)] bg-card transition-all duration-300",
+            "hidden lg:flex h-[calc(100vh-4rem)] sticky top-16 flex-col border-r border-white/10 bg-arena-rail transition-all duration-300",
             collapsed ? "w-16" : "w-60"
           )}
         >
@@ -236,20 +213,22 @@ export function NRCDashboardLayout({ children }: NRCDashboardLayoutProps) {
         {mobileOpen && (
           <>
             <div
-              className="fixed inset-0 z-40 bg-background/80 backdrop-blur-sm lg:hidden"
+              className="fixed inset-0 z-40 bg-arena-bg/80 backdrop-blur-sm lg:hidden"
               onClick={() => setMobileOpen(false)}
             />
-            <aside className="fixed inset-y-14 left-0 z-50 w-64 border-r border-[hsl(var(--gold)/0.1)] bg-card lg:hidden">
+            <aside className="fixed inset-y-16 left-0 z-50 w-64 overflow-y-auto border-r border-white/10 bg-arena-rail lg:hidden">
               {sidebarContent}
             </aside>
           </>
         )}
 
         {/* Main Content */}
-        <main className="min-w-0 flex-1 p-4 md:p-6 lg:p-8">
-          {children}
-        </main>
+        <div className="flex min-w-0 flex-1 flex-col">
+          <main className="min-w-0 flex-1 p-4 md:p-6 lg:p-8">{children}</main>
+          <ArenaFooter workspace="NRC Arena" />
+        </div>
       </div>
     </div>
   );
 }
+
