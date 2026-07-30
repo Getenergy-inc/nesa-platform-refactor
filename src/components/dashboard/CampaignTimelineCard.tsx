@@ -2,6 +2,8 @@
  * Campaign Timeline — dark theme version
  */
 
+import { PROGRAMME_END_DATE } from "@/config/programme";
+
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
 import { Calendar, Clock } from "lucide-react";
@@ -33,14 +35,14 @@ const campaigns: Campaign[] = [
   {
     name: "Blue Garnet Voting",
     startDate: new Date("2026-09-16"),
-    endDate: new Date("2026-12-14"),
+    endDate: new Date(PROGRAMME_END_DATE),
     color: "bg-[#1E3A5F]",
     badge: "Blue Garnet",
   },
   {
     name: "Grand Gala",
-    startDate: new Date("2026-12-14"),
-    endDate: new Date("2026-12-14"),
+    startDate: new Date(PROGRAMME_END_DATE),
+    endDate: new Date(PROGRAMME_END_DATE),
     color: "bg-gold",
     badge: "Gala",
   },

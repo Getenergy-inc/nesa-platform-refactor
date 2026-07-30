@@ -1,3 +1,5 @@
+import { PROGRAMME_END, PROGRAMME_END_DATETIME, PROGRAMME_END_LABEL } from "@/config/programme";
+
 import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
@@ -38,11 +40,11 @@ import {
 import galaHeroImage from "@/assets/events/award-gala.jpeg";
 
 // ============== EVENT DETAILS ==============
-const GALA_DATE = new Date("2026-12-14T00:00:00+01:00");
+const GALA_DATE = PROGRAMME_END;
 const GALA = {
   title: "Blue Garnet Awards Gala",
   tagline: "The Night Africa Celebrates Education Changemakers",
-  date: "14 December 2026",
+  date: PROGRAMME_END_LABEL,
   time: "18:00 WAT",
   venue: "International Conference Centre",
   city: "Lagos, Nigeria",
@@ -123,7 +125,7 @@ const eventJsonLd = {
   "@context": "https://schema.org",
   "@type": "Event",
   name: `NESA-Africa 2026 ${GALA.title}`,
-  startDate: "2026-12-14T18:00:00+01:00",
+  startDate: PROGRAMME_END_DATETIME,
   endDate: "2026-10-23T00:00:00+01:00",
   eventStatus: "https://schema.org/EventScheduled",
   eventAttendanceMode: "https://schema.org/MixedEventAttendanceMode",

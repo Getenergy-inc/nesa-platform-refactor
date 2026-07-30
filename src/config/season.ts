@@ -1,6 +1,8 @@
 // Season Configuration - Single Source of Truth
 // No hardcoded years in UI - all text derived from this config
 
+import { PROGRAMME_END_DATETIME } from "@/config/programme";
+
 export interface Edition {
   key: string; // e.g., "2025"
   name: string; // e.g., "NESA-Africa 2025"
@@ -62,7 +64,7 @@ export const DEFAULT_SEASON_CONFIG: SeasonConfig = {
       nominationsClose: "2026-06-20",
       votingOpen: "2026-07-13",
       votingClose: "2026-09-25",
-      ceremonyDate: "2026-12-14T18:00:00",
+      ceremonyDate: PROGRAMME_END_DATETIME,
       isActive: true,
     },
   },

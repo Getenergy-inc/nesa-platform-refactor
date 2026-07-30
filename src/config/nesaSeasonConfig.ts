@@ -1,6 +1,8 @@
 // NESA Africa Season Configuration
 // Centralized configuration for phases, dates, categories, and stage management
 
+import { PROGRAMME_END_DATE, PROGRAMME_END_DATETIME } from "@/config/programme";
+
 export type NESAPhase = 
   | "pre-launch"
   | "nominations"
@@ -59,7 +61,7 @@ export const CURRENT_SEASON: SeasonEdition = {
   name: "NESA-Africa 2026",
   theme: "From Recognition to Real Impact Across Africa",
   tagline: "A Continental Platform for Education Transformation",
-  ceremonyDate: new Date("2026-12-14T18:00:00"),
+  ceremonyDate: new Date(PROGRAMME_END_DATETIME),
   ceremonyLocation: "Lagos, Nigeria",
   ceremonyVenue: "Eko Convention Centre",
 };
@@ -116,7 +118,7 @@ export const PHASES: PhaseConfig[] = [
     shortName: "Jury",
     description: "Expert jury evaluates Blue Garnet nominees",
     startDate: new Date("2026-10-02"),
-    endDate: new Date("2026-12-14"),
+    endDate: new Date(PROGRAMME_END_DATE),
     isActive: false,
     ctaText: "Meet the Jury",
     ctaLink: "/jury",
@@ -127,7 +129,7 @@ export const PHASES: PhaseConfig[] = [
     shortName: "Results",
     description: "Winners announced across all categories",
     startDate: new Date("2026-10-01"),
-    endDate: new Date("2026-12-14"),
+    endDate: new Date(PROGRAMME_END_DATE),
     isActive: false,
     ctaText: "View Winners",
     ctaLink: "/winners",
@@ -137,8 +139,8 @@ export const PHASES: PhaseConfig[] = [
     name: "Award Ceremony",
     shortName: "Ceremony",
     description: "Grand ceremony celebrating African excellence",
-    startDate: new Date("2026-12-14"),
-    endDate: new Date("2026-12-14"),
+    startDate: new Date(PROGRAMME_END_DATE),
+    endDate: new Date(PROGRAMME_END_DATE),
     isActive: false,
     ctaText: "Get Tickets",
     ctaLink: "/tickets",
