@@ -1,5 +1,5 @@
 import { NavLink, Outlet, useLocation } from "react-router-dom";
-import { Helmet } from "react-helmet-async";
+import { ArenaSeo } from "@/components/arena/ArenaSeo";
 import { useState } from "react";
 import {
   LayoutDashboard,
@@ -85,9 +85,7 @@ export default function JudgesArenaLayout() {
 
   return (
     <div className="min-h-screen w-full bg-arena-bg text-arena-text">
-      <Helmet>
-        <title>Judges Arena | NESA-Africa</title>
-      </Helmet>
+      <ArenaSeo workspace="Judges Arena" />
 
       <div className="flex min-h-screen w-full">
         <aside className="hidden w-64 shrink-0 border-r border-white/10 lg:block">

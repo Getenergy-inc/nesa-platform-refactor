@@ -27,6 +27,7 @@ import { cn } from "@/lib/utils";
 import { useAuth } from "@/contexts/AuthContext";
 import { WorkspaceSwitcher } from "@/components/navigation/WorkspaceSwitcher";
 import { ArenaBrand, ArenaRailBadge, ArenaTopBar, ArenaFooter } from "@/components/arena/ArenaChrome";
+import { ArenaSeo } from "@/components/arena/ArenaSeo";
 
 interface NavItem {
   href: string;
@@ -107,6 +108,7 @@ export function NRCArenaLayout({ children }: { children: ReactNode }) {
 
   return (
     <div className="min-h-screen bg-arena-bg text-arena-text">
+      <ArenaSeo workspace="NRC Arena" />
       <div className="flex min-h-screen w-full">
         {/* Brand rail */}
         <aside className="hidden w-64 shrink-0 border-r border-white/10 bg-arena-rail lg:block">
