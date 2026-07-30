@@ -67,7 +67,7 @@ export function RegionalSchoolInterventionSection() {
             Communities nominate 20 schools per region. Regional intervention voting then
             shortlists the highest-priority school in each of the 8 regions.{" "}
             <span className="text-gold font-semibold">One school per region · 8 schools
-            total</span> will move into the October 2026 – October 2027 intervention
+            total</span> will move into the December 2026 – December 2027 intervention
             pipeline (fundraising, project delivery, and impact reporting).
           </p>
         </div>
@@ -237,7 +237,7 @@ export function RegionalSchoolInterventionSection() {
             infrastructure, Special Needs Education interventions, accessibility
             upgrades, digital learning spaces, WASH facilities, libraries, learning
             materials, and community-led school improvement from{" "}
-            <span className="text-gold font-semibold">October 2026 to October 2027</span>.
+            <span className="text-gold font-semibold">December 2026 to December 2027</span>.
             Subject to Board, Finance, and Compliance approval, allocations may be
             distributed across the approved 8 African regional GFA Wzip wallet accounts
             with monthly reconciliation, project documentation, transaction records,

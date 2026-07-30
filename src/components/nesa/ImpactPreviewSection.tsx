@@ -32,7 +32,7 @@ export function ImpactPreviewSection() {
             NESA-Africa 2026 connects award recognition to practical education impact
             through <span className="text-gold font-semibold">EduAid-Africa</span> and{" "}
             <span className="text-gold font-semibold">Rebuild My School Africa</span>.
-            From October 2026 to October 2027, Special Needs School nominations,
+            From December 2026 to December 2027, Special Needs School nominations,
             regional voting, GFA Wzip funding portals, and selected school
             interventions will support inclusive education across the 8 approved
             African regions.

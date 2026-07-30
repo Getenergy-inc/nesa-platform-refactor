@@ -17,7 +17,7 @@ interface Props {
 export function MasterTimelineTable({
   hideNotice = false,
   heading = "NESA-Africa & EduAid-Africa 2026 Master Timeline",
-  intro = "1 July – 22 October 2026 · Every milestone from public activation through the Recognition Gala.",
+  intro = "1 July – 14 December 2026 · Every milestone from public activation through the Recognition Gala.",
 }: Props) {
   return (
     <section className="space-y-8">

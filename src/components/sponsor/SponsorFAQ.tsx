@@ -56,7 +56,7 @@ const FAQS: FAQ[] = [
   },
   {
     q: "What is Rebuild My School Africa Sponsorship?",
-    a: "Direct legacy support for school infrastructure, accessibility, Special Needs Education, digital learning spaces, libraries, WASH and community-led improvement — running October 2026 to October 2027. Regional partner amounts are approved per region.",
+    a: "Direct legacy support for school infrastructure, accessibility, Special Needs Education, digital learning spaces, libraries, WASH and community-led improvement — running December 2026 to December 2027. Regional partner amounts are approved per region.",
   },
   {
     q: "What is Sub-Category Page Sponsorship?",

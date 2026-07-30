@@ -27,7 +27,7 @@ const SUMMARY_CARDS = [
   {
     icon: Trophy,
     label: "Awards Gala",
-    value: "22 October 2026",
+    value: "14 December 2026",
     detail: "Gold-Blue Garnet Awards Gala — Africa's flagship education recognition moment",
   },
   {

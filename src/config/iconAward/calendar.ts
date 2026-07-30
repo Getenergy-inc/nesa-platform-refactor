@@ -5,6 +5,8 @@
  * platform_config and the ballot/shortlist RPCs.
  */
 
+import { PROGRAMME_END } from "@/config/programme";
+
 export const ICON_CALENDAR = {
   screeningOpen:      new Date("2026-09-14T00:00:00Z"),
   screeningClose:     new Date("2026-09-30T23:59:59Z"),
@@ -12,7 +14,7 @@ export const ICON_CALENDAR = {
   grandJuryClose:     new Date("2026-10-07T23:59:59Z"),
   governanceOpen:     new Date("2026-10-08T00:00:00Z"),
   governanceClose:    new Date("2026-10-15T23:59:59Z"),
-  gala:               new Date("2026-10-22T18:00:00Z"),
+  gala:               PROGRAMME_END,
 } as const;
 
 export type IconPhase =

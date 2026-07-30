@@ -374,7 +374,7 @@ export function FaithCategoryPage({ config }: { config: FaithCategoryConfig }) {
             {[
               { step: "Nominations open", date: "1 August – 12 September 2026", what: "Submit institution nominations and supporting evidence via the online portal." },
               { step: "EDI Verification", date: "September 2026", what: "SCEF panels score submissions against the EDI Matrix." },
-              { step: "NESA-Africa Recognition Gala", date: "22 October 2026", what: "Certificates awarded; feature spotlight on NESA TV." },
+              { step: "NESA-Africa Recognition Gala", date: "14 December 2026", what: "Certificates awarded; feature spotlight on NESA TV." },
             ].map((row) => (
               <Card key={row.step} className="bg-charcoal-light/40 border-gold/15">
                 <CardContent className="p-4 flex flex-col md:flex-row md:items-center gap-2 md:gap-6">
