@@ -261,6 +261,11 @@ export function AwardSubpageTemplate({ content }: { content: AwardSubpageContent
           </div>
         ) : null}
 
+        {/* 1b. Award-specific countdown (optional) */}
+        {content.countdown ? <AwardCountdownBlock countdown={content.countdown} /> : null}
+
+
+
         {/* 2. Recognises */}
         <SectionShell id="recognises">
           <SectionHeading>{content.recognises.heading ?? "What this recognises"}</SectionHeading>
