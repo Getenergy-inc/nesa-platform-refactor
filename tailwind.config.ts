@@ -91,6 +91,16 @@ export default {
           text: "hsl(var(--nesa-text))",
           "text-muted": "hsl(var(--nesa-text-muted))",
         },
+        arena: {
+          bg: "hsl(var(--arena-bg))",
+          rail: "hsl(var(--arena-rail))",
+          panel: "hsl(var(--arena-panel))",
+          "panel-2": "hsl(var(--arena-panel-2))",
+          border: "hsl(var(--arena-border))",
+          text: "hsl(var(--arena-text))",
+          muted: "hsl(var(--arena-muted))",
+        },
+
       },
       borderRadius: {
         lg: "var(--radius)",

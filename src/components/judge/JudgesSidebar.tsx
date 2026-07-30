@@ -14,6 +14,8 @@ import {
   useSidebar,
 } from "@/components/ui/sidebar";
 import { NavLink } from "@/components/NavLink";
+import { ArenaBrand, ArenaSeal } from "@/components/arena/ArenaChrome";
+
 import { Badge } from "@/components/ui/badge";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
@@ -75,23 +77,20 @@ export function JudgesSidebar() {
 
   return (
     <Sidebar
-      className={`${collapsed ? "w-16" : "w-64"} bg-charcoal border-r border-gold/20`}
+      className={`${collapsed ? "w-16" : "w-64"} bg-arena-rail border-r border-gold/20`}
       collapsible="icon"
     >
-      {/* Header with Logo */}
-      <SidebarHeader className="border-b border-gold/20 p-4">
-        <Link to="/judge/dashboard" className="flex items-center gap-3">
-          <div className="h-10 w-10 rounded-lg bg-gradient-to-br from-gold to-gold/70 flex items-center justify-center flex-shrink-0">
-            <Gavel className="h-5 w-5 text-charcoal" />
-          </div>
-          {!collapsed && (
-            <div className="flex flex-col">
-              <span className="font-bold text-white text-sm">Judges Arena</span>
-              <span className="text-[10px] text-white/50 uppercase tracking-wider">NESA-Africa</span>
-            </div>
-          )}
-        </Link>
+      {/* Header with NESA seal brand block */}
+      <SidebarHeader className="border-b border-gold/20 p-0">
+        {collapsed ? (
+          <Link to="/judge/dashboard" className="grid place-items-center py-4">
+            <ArenaSeal className="h-9 w-9" />
+          </Link>
+        ) : (
+          <ArenaBrand workspace="Judges Arena" to="/judge/dashboard" />
+        )}
       </SidebarHeader>
+
 
       <SidebarContent className="px-2 py-4">
         {ARENA_NAV.map((section) => (

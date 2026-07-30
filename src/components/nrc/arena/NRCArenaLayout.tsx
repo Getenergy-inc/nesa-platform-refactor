@@ -18,16 +18,15 @@ import {
   History,
   LifeBuoy,
   Menu,
-  Bell,
   ArrowLeft,
   Cpu,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { cn } from "@/lib/utils";
 import { useAuth } from "@/contexts/AuthContext";
 import { WorkspaceSwitcher } from "@/components/navigation/WorkspaceSwitcher";
+import { ArenaBrand, ArenaRailBadge, ArenaTopBar, ArenaFooter } from "@/components/arena/ArenaChrome";
 
 interface NavItem {
   href: string;
@@ -107,89 +106,82 @@ export function NRCArenaLayout({ children }: { children: ReactNode }) {
   const { user } = useAuth();
 
   return (
-    <div className="min-h-screen bg-charcoal text-white">
-      {/* Header */}
-      <header className="sticky top-0 z-40 border-b border-white/10 bg-charcoal/95 backdrop-blur">
-        <div className="mx-auto flex h-14 max-w-[1400px] items-center justify-between gap-3 px-4">
-          <div className="flex items-center gap-3 min-w-0">
-            <Sheet>
-              <SheetTrigger asChild>
-                <Button
-                  variant="ghost"
-                  size="icon"
-                  className="lg:hidden text-white hover:bg-white/10"
-                  aria-label="Open NRC navigation"
-                >
-                  <Menu className="h-5 w-5" />
-                </Button>
-              </SheetTrigger>
-              <SheetContent side="left" className="w-72 bg-charcoal border-r border-white/10 p-4">
-                <div className="mb-4">
-                  <p className="text-xs uppercase tracking-wider text-gold/80">NESA-Africa</p>
-                  <p className="font-display text-lg font-bold text-white">NRC Arena</p>
-                </div>
-                <SideNav />
-              </SheetContent>
-            </Sheet>
-
-            <Link to="/nrc" className="flex items-center gap-2 min-w-0">
-              <div className="h-8 w-8 rounded-full bg-gold/15 flex items-center justify-center">
-                <FileSearch className="h-4 w-4 text-gold" aria-hidden />
-              </div>
-              <div className="min-w-0">
-                <p className="font-display text-sm font-bold leading-tight truncate">
-                  NRC Arena
-                </p>
-                <p className="text-[11px] text-white/50 truncate hidden sm:block">
-                  Verification · Research · Evidence · Handover
-                </p>
-              </div>
-            </Link>
-            <Badge variant="outline" className="hidden md:inline-flex border-gold/40 text-gold text-[10px]">
-              NESA-Africa 2026
-            </Badge>
-          </div>
-
-          <div className="flex items-center gap-2">
-            <WorkspaceSwitcher />
-            <Button variant="ghost" size="icon" className="text-white hover:bg-white/10 relative" aria-label="Notifications">
-              <Bell className="h-4 w-4" />
-              <span className="absolute -right-0.5 -top-0.5 h-2 w-2 rounded-full bg-gold" />
-            </Button>
-            <Button variant="ghost" size="sm" asChild className="text-white/70 hover:text-gold hover:bg-white/5">
-              <Link to="/">
-                <ArrowLeft className="mr-1.5 h-4 w-4" />
-                <span className="hidden sm:inline">Exit</span>
-              </Link>
-            </Button>
-          </div>
-        </div>
-      </header>
-
-      <div className="mx-auto flex max-w-[1400px] gap-6 px-4 py-6">
-        <aside className="hidden w-60 shrink-0 lg:block">
-          <div className="sticky top-20">
+    <div className="min-h-screen bg-arena-bg text-arena-text">
+      <div className="flex min-h-screen w-full">
+        {/* Brand rail */}
+        <aside className="hidden w-64 shrink-0 border-r border-white/10 bg-arena-rail lg:block">
+          <div className="sticky top-0 flex h-screen flex-col overflow-y-auto">
+            <ArenaBrand workspace="NRC Arena" to="/nrc" />
             {user && (
-              <div className="mb-4 rounded-lg border border-white/10 bg-white/5 p-3">
+              <div className="mx-3 mb-4 rounded-lg border border-white/10 bg-white/5 p-3">
                 <p className="text-[10px] uppercase tracking-wider text-gold/70">Signed in</p>
-                <p className="text-sm font-medium truncate">{user.email}</p>
-                <p className="text-[11px] text-white/50 mt-0.5">NRC Member · MFA required</p>
+                <p className="truncate text-sm font-medium">{user.email}</p>
+                <p className="mt-0.5 text-[11px] text-arena-muted">NRC Member · MFA required</p>
               </div>
             )}
-            <SideNav />
-            <Link
-              to="/support"
-              className="mt-6 flex items-center gap-2 px-3 py-2 text-xs text-white/50 hover:text-gold"
-            >
-              <LifeBuoy className="h-3.5 w-3.5" /> NRC Support
-            </Link>
+            <div className="flex-1 px-1">
+              <SideNav />
+              <Link
+                to="/support"
+                className="mt-6 flex items-center gap-2 px-3 py-2 text-xs text-white/50 hover:text-gold"
+              >
+                <LifeBuoy className="h-3.5 w-3.5" /> NRC Support
+              </Link>
+            </div>
+            <ArenaRailBadge lines={["2026 NESA-AFRICA", "NOMINEE RESEARCH", "CORPS ARENA"]} />
           </div>
         </aside>
 
-        <main className="min-w-0 flex-1 pb-16 lg:pb-0">{children}</main>
+        <div className="flex min-w-0 flex-1 flex-col">
+          <ArenaTopBar
+            title="NESA-Africa NRC Arena"
+            subtitle="Verification · Research · Evidence · Handover"
+            leading={
+              <Sheet>
+                <SheetTrigger asChild>
+                  <Button
+                    variant="ghost"
+                    size="icon"
+                    className="lg:hidden text-white hover:bg-white/10"
+                    aria-label="Open NRC navigation"
+                  >
+                    <Menu className="h-5 w-5" />
+                  </Button>
+                </SheetTrigger>
+                <SheetContent side="left" className="w-72 overflow-y-auto border-r border-white/10 bg-arena-rail p-0">
+                  <ArenaBrand workspace="NRC Arena" to="/nrc" />
+                  <div className="px-1 pb-6">
+                    <SideNav />
+                  </div>
+                </SheetContent>
+              </Sheet>
+            }
+            statusLabel="Verification Live"
+            statusDetail="2026 Cycle"
+            statusTone="live"
+            identityName={user?.email ?? "NRC Member"}
+            identityRole="NRC Member"
+            notifications={3}
+            actions={
+              <div className="hidden lg:flex items-center gap-2">
+                <WorkspaceSwitcher />
+                <Button variant="ghost" size="sm" asChild className="text-white/70 hover:bg-white/5 hover:text-gold">
+                  <Link to="/">
+                    <ArrowLeft className="mr-1.5 h-4 w-4" />
+                    Exit
+                  </Link>
+                </Button>
+              </div>
+            }
+          />
+
+          <main className="min-w-0 flex-1 px-4 py-6 pb-16 sm:px-6">{children}</main>
+          <ArenaFooter workspace="NRC Arena" />
+        </div>
       </div>
     </div>
   );
 }
+
 
 export default NRCArenaLayout;
