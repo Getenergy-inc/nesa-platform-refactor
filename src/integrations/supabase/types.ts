@@ -11385,6 +11385,24 @@ export type Database = {
           isSetofReturn: false
         }
       }
+      get_nominee_by_acceptance_token: {
+        Args: { p_token: string }
+        Returns: {
+          acceptance_status: Database["public"]["Enums"]["acceptance_status"]
+          acceptance_token_expires_at: string
+          country: string
+          email: string
+          id: string
+          name: string
+          organization: string
+          recognition_pathway: string
+          referral_code: string
+          region: string
+          renomination_count: number
+          slug: string
+          title: string
+        }[]
+      }
       get_rebuild_schools_admin: {
         Args: never
         Returns: {
