@@ -224,6 +224,7 @@ export function AwardSubpageTemplate({ content }: { content: AwardSubpageContent
   const featured = content.featured.nominees.slice(0, 6);
   const steps = content.howItWorks.steps.slice(0, 6);
   const faqs = content.faqs.slice(0, 5);
+  const theme = { ...getAwardTheme(content.slug, content.tier), ...(content.theme ?? {}) };
   const integrityDefault =
     "NESA-Africa 2026 does not use public voting for award recognition. Sponsorship, donations, Gala tickets, merchandise, endorsements, GFAwzip Wallet transactions, AGC Participation Credits, follower numbers and public popularity do not influence verification or recognition.";
 
@@ -240,7 +241,7 @@ export function AwardSubpageTemplate({ content }: { content: AwardSubpageContent
       </Helmet>
       <BreadcrumbJsonLd crumbs={content.breadcrumbs} />
 
-      <div className="min-h-screen bg-charcoal text-white">
+      <div className="min-h-screen bg-charcoal text-white" style={awardThemeVars(theme)}>
         {/* 1. Hero */}
         <HeroCompact
           eyebrow={content.hero.eyebrow ?? content.parentTierLabel}
