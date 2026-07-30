@@ -5,7 +5,7 @@
 import { ReactNode } from "react";
 import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
-import { ChevronRight, ShieldCheck } from "lucide-react";
+import { ChevronRight } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { NRCArenaLayout } from "./NRCArenaLayout";
 
@@ -76,10 +76,6 @@ export function NRCArenaPage({
 
       <div className="pb-16">{children}</div>
 
-      <footer className="mt-10 border-t border-white/10 pt-4 pb-8 text-[11px] text-white/40 flex flex-wrap items-center gap-2">
-        <ShieldCheck className="h-3.5 w-3.5 text-gold/70" aria-hidden />
-        NESA-Africa NRC Arena · All decisions are logged, versioned and independently auditable.
-      </footer>
     </NRCArenaLayout>
   );
 }
