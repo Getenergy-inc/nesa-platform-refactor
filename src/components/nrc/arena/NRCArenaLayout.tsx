@@ -18,12 +18,10 @@ import {
   History,
   LifeBuoy,
   Menu,
-  Bell,
   ArrowLeft,
   Cpu,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { cn } from "@/lib/utils";
 import { useAuth } from "@/contexts/AuthContext";
