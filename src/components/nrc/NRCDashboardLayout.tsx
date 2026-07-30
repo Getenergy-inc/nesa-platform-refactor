@@ -11,6 +11,9 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 import {
+  ArenaSeal, ArenaBrand, ArenaTopBar, ArenaFooter,
+} from "@/components/arena/ArenaChrome";
+import {
   Award, LayoutDashboard, Users, ClipboardList, FileCheck, Flag,
   BarChart3, Shield, BookOpen, Settings, LogOut, Bell, Search,
   ChevronLeft, ChevronRight, Menu, X, CheckCircle, XCircle,
