@@ -522,6 +522,22 @@ function MobileMenu() {
             </Accordion>
           </nav>
 
+          <div className="mt-4 border-t border-gold/20 pt-3">
+            <p className="px-3 pb-1 text-[11px] uppercase tracking-wider text-gold/70 font-semibold">
+              Quick links
+            </p>
+            {UTILITY_NAV.map((item) => (
+              <Link
+                key={item.href}
+                to={item.href}
+                onClick={close}
+                className={cn(linkCls, item.emphasis && "text-gold font-semibold")}
+              >
+                {item.label}
+              </Link>
+            ))}
+          </div>
+
           <div className="mt-4 border-t border-gold/20 pt-3 space-y-1">
             {user ? (
               <>
