@@ -12,7 +12,7 @@ const EXPECTED_TOP_LEVEL = [
   "About",
   "Recognition",
   "Get Involved",
-  "Directory",
+  "Explore Existing Nominees",
   "Support",
 ];
 
@@ -51,8 +51,8 @@ describe("SITE_NAV configuration", () => {
     }
   });
 
-  it("Directory is a direct link with no dropdown", () => {
-    const dir = SITE_NAV.find((g) => g.label === "Directory")!;
+  it("Explore Existing Nominees is a direct link with no dropdown", () => {
+    const dir = SITE_NAV.find((g) => g.label === "Explore Existing Nominees")!;
     expect(dir.children).toBeUndefined();
     expect(dir.sections).toBeUndefined();
     expect(dir.href).toBe("/nominees");
@@ -63,8 +63,8 @@ describe("SITE_NAV configuration", () => {
     expect(rec?.sections?.map((s) => s.title)).toEqual([
       "Africa Education Icon",
       "Influencer Education Impact",
-      "Platinum Certificates of Recognition",
-      "Gold-Blue Garnet Regional Certificates",
+      "Platinum Certificate of Recognition",
+      "Gold-Blue Garnet Regional Recognition",
     ]);
   });
 

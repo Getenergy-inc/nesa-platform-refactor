@@ -24,7 +24,7 @@ import {
 import { cn } from "@/lib/utils";
 import { useAuth } from "@/contexts/AuthContext";
 import { LanguageSwitcher } from "@/components/i18n";
-import { SITE_NAV, type NavItem, type NavChild, type NavSection } from "@/config/siteNavigation";
+import { SITE_NAV, UTILITY_NAV, type NavItem, type NavChild, type NavSection } from "@/config/siteNavigation";
 import { CURRENT_PHASE, NOMINATE_CTA } from "@/config/campaignPhase";
 import { trackNav } from "@/lib/analytics";
 import { AnnouncementBar } from "@/components/navigation/AnnouncementBar";
@@ -522,6 +522,22 @@ function MobileMenu() {
             </Accordion>
           </nav>
 
+          <div className="mt-4 border-t border-gold/20 pt-3">
+            <p className="px-3 pb-1 text-[11px] uppercase tracking-wider text-gold/70 font-semibold">
+              Quick links
+            </p>
+            {UTILITY_NAV.map((item) => (
+              <Link
+                key={item.href}
+                to={item.href}
+                onClick={close}
+                className={cn(linkCls, item.emphasis && "text-gold font-semibold")}
+              >
+                {item.label}
+              </Link>
+            ))}
+          </div>
+
           <div className="mt-4 border-t border-gold/20 pt-3 space-y-1">
             {user ? (
               <>
@@ -548,6 +564,50 @@ function MobileMenu() {
   );
 }
 
+/* ------------------------------- Utility bar ------------------------------ */
+
+function UtilityNavBar() {
+  const location = useLocation();
+  return (
+    <div className="hidden lg:block border-b border-gold/15 bg-charcoal">
+      <nav
+        aria-label="Utility"
+        className="container mx-auto px-4 h-9 flex items-center gap-5 overflow-x-auto"
+      >
+        {UTILITY_NAV.map((item) => {
+          const active = isActive(location.pathname, item.href);
+          return (
+            <Link
+              key={item.href}
+              to={item.href}
+              aria-current={active ? "page" : undefined}
+              onClick={() =>
+                trackNav("utility_nav_click", {
+                  label: item.label,
+                  href: item.href,
+                  section: item.analyticsId,
+                  device: "desktop",
+                })
+              }
+              className={cn(
+                "text-xs whitespace-nowrap transition-colors rounded px-1",
+                FOCUS_RING,
+                item.emphasis
+                  ? "text-gold font-semibold hover:text-gold/80"
+                  : active
+                    ? "text-gold"
+                    : "text-white/70 hover:text-gold",
+              )}
+            >
+              {item.label}
+            </Link>
+          );
+        })}
+      </nav>
+    </div>
+  );
+}
+
 /* ---------------------------------- Root ---------------------------------- */
 
 export function SiteHeader() {
@@ -559,6 +619,7 @@ export function SiteHeader() {
         className="fixed top-0 left-0 right-0 z-50 bg-charcoal/95 backdrop-blur border-b border-gold/20"
       >
         <AnnouncementBar />
+        <UtilityNavBar />
         <div className="container mx-auto px-4 flex items-center justify-between gap-3 h-14 lg:h-16">
           <BrandBlock />
           <DesktopNav />
