@@ -55,13 +55,12 @@ export default function NomineeAccept() {
         setLoading(false);
         return;
       }
-      const { data, error: fetchErr } = await supabase
-        .from("nominees")
-        .select(
-          "id, name, slug, email, acceptance_status, acceptance_token_expires_at, renomination_count, country, region, organization, title, referral_code, recognition_pathway",
-        )
-        .eq("acceptance_token", token)
-        .maybeSingle();
+      const { data: rows, error: fetchErr } = await (supabase as any).rpc(
+        "get_nominee_by_acceptance_token",
+        { p_token: token },
+      );
+      const data = Array.isArray(rows) ? rows[0] : rows;
+
 
       if (cancelled) return;
       if (fetchErr || !data) {
