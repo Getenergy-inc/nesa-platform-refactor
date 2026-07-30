@@ -23,6 +23,7 @@ import {
 } from "@/config/recognition2026/categories";
 import type { TierSlug } from "@/config/recognition2026/tiers";
 import { getSubpageHeroImage } from "@/config/awards/subpageHeroImages";
+import { getSubpageModules } from "@/config/awards/subpageModules2026";
 
 // ── Shared building blocks ──────────────────────────────────────────────────
 
