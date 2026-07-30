@@ -1,5 +1,5 @@
 import { ReactNode } from "react";
-import { Helmet } from "react-helmet-async";
+import { ArenaSeo } from "@/components/arena/ArenaSeo";
 import {
   SidebarProvider,
   SidebarTrigger,
