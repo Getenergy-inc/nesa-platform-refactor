@@ -486,7 +486,9 @@ function PagesDrawer({
               <span className="block text-[11px] text-secondary-foreground/35">
                 <kbd className="px-1 rounded bg-primary/10">←</kbd>{" "}
                 <kbd className="px-1 rounded bg-primary/10">→</kbd> move ·{" "}
-                <kbd className="px-1 rounded bg-primary/10">/</kbd> search ·{" "}
+                <kbd className="px-1 rounded bg-primary/10">/</kbd> or{" "}
+                <kbd className="px-1 rounded bg-primary/10">Shift+P</kbd> pages ·{" "}
+
                 <kbd className="px-1 rounded bg-primary/10">Esc</kbd> close
               </span>
             </div>
