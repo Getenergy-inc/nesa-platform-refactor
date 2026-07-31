@@ -337,8 +337,26 @@ function PagesDrawer({
               </button>
             </div>
 
+            {/* Search */}
+            <div className="px-3 pt-3">
+              <input
+                type="search"
+                value={query}
+                onChange={(e) => setQuery(e.target.value)}
+                placeholder="Search pages…"
+                aria-label="Search pages"
+                className="w-full h-10 rounded-lg bg-primary/5 border border-primary/20 px-3 text-sm text-secondary-foreground placeholder:text-secondary-foreground/40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+              />
+            </div>
+
             {/* Page list */}
             <div className="flex-1 overflow-y-auto overscroll-contain py-3 px-3 space-y-5">
+              {filtered.length === 0 && (
+                <p className="px-2 text-sm text-secondary-foreground/50">
+                  No pages match “{query}”.
+                </p>
+              )}
+
               {Object.entries(sections).map(([section, pages]) => (
                 <div key={section}>
                   <h3 className="text-[11px] font-bold uppercase tracking-widest text-primary/50 mb-1.5 px-2">
