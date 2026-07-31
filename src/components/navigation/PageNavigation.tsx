@@ -17,6 +17,19 @@ import { cn } from "@/lib/utils";
 import { PAGE_SEQUENCE, getPageNavigation } from "@/config/page-sequence";
 import nesaStamp from "@/assets/nesa-stamp.jpeg";
 
+// Ignore shortcuts while the user is typing in a field or editable surface.
+function isTypingTarget(target: EventTarget | null): boolean {
+  const el = target as HTMLElement | null;
+  if (!el || !el.tagName) return false;
+  const tag = el.tagName.toLowerCase();
+  return (
+    tag === "input" ||
+    tag === "textarea" ||
+    tag === "select" ||
+    el.isContentEditable === true
+  );
+}
+
 // ─── Top Navigation Bar ──────────────────────────────────────────────────────
 
 export function TopPageNav() {
