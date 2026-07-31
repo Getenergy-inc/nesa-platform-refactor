@@ -315,6 +315,28 @@ function PagesDrawer({
 }) {
   const navigate = useNavigate();
   const [query, setQuery] = useState("");
+  const searchRef = useRef<HTMLInputElement>(null);
+
+  // Focus the search field whenever the drawer opens; Esc closes it.
+  useEffect(() => {
+    if (!open) {
+      setQuery("");
+      return;
+    }
+    const t = window.setTimeout(() => searchRef.current?.focus(), 120);
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        e.preventDefault();
+        onClose();
+      }
+    };
+    window.addEventListener("keydown", onKeyDown);
+    return () => {
+      window.clearTimeout(t);
+      window.removeEventListener("keydown", onKeyDown);
+    };
+  }, [open, onClose]);
+
 
   const handlePageClick = useCallback(
     (path: string) => {
