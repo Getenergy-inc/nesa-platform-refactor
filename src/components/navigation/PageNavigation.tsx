@@ -475,11 +475,18 @@ function PagesDrawer({
             </div>
 
             {/* Drawer footer */}
-            <div className="px-4 py-3 border-t border-primary/15 text-center">
-              <span className="text-xs text-secondary-foreground/40">
+            <div className="px-4 py-3 border-t border-primary/15 text-center space-y-1">
+              <span className="block text-xs text-secondary-foreground/40">
                 {PAGE_SEQUENCE.length} pages total
               </span>
+              <span className="block text-[11px] text-secondary-foreground/35">
+                <kbd className="px-1 rounded bg-primary/10">←</kbd>{" "}
+                <kbd className="px-1 rounded bg-primary/10">→</kbd> move ·{" "}
+                <kbd className="px-1 rounded bg-primary/10">/</kbd> search ·{" "}
+                <kbd className="px-1 rounded bg-primary/10">Esc</kbd> close
+              </span>
             </div>
+
           </motion.aside>
         </>
       )}
