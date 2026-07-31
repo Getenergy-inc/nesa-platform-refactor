@@ -131,8 +131,6 @@ export function BottomPageNav() {
   const nav = getPageNavigation(location.pathname);
   const [selectorOpen, setSelectorOpen] = useState(false);
 
-  if (!nav.isKnown) return null;
-
   return (
     <>
       <nav
@@ -165,16 +163,30 @@ export function BottomPageNav() {
           {/* Center: Page indicator + selector */}
           <button
             onClick={() => setSelectorOpen(true)}
-            aria-label={`Page ${nav.pageNumber} of ${nav.totalPages}. Tap to jump to a page.`}
+            aria-label={
+              nav.isKnown
+                ? `Page ${nav.pageNumber} of ${nav.totalPages}. Tap to jump to a page.`
+                : "Browse all pages"
+            }
             className="flex items-center gap-2 h-10 px-4 rounded-lg bg-primary/10 hover:bg-primary/20 active:bg-primary/25 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
           >
-            <span className="text-sm font-semibold text-primary">
-              Page {nav.pageNumber}
-            </span>
-            <span className="text-xs text-secondary-foreground/50">
-              of {nav.totalPages}
-            </span>
+            <BookOpen className="h-4 w-4 text-primary" aria-hidden />
+            {nav.isKnown ? (
+              <>
+                <span className="text-sm font-semibold text-primary">
+                  Page {nav.pageNumber}
+                </span>
+                <span className="text-xs text-secondary-foreground/50">
+                  of {nav.totalPages}
+                </span>
+              </>
+            ) : (
+              <span className="text-sm font-semibold text-primary">
+                Browse pages
+              </span>
+            )}
           </button>
+
 
           {/* Right: Next + Last */}
           <div className="flex items-center gap-0.5">
@@ -255,17 +267,29 @@ function PagesDrawer({
   currentPath: string;
 }) {
   const navigate = useNavigate();
+  const [query, setQuery] = useState("");
 
   const handlePageClick = useCallback(
     (path: string) => {
       navigate(path);
+      setQuery("");
       onClose();
     },
     [navigate, onClose]
   );
 
+  const q = query.trim().toLowerCase();
+  const filtered = q
+    ? PAGE_SEQUENCE.filter(
+        (p) =>
+          p.label.toLowerCase().includes(q) ||
+          p.path.toLowerCase().includes(q) ||
+          (p.section || "").toLowerCase().includes(q)
+      )
+    : PAGE_SEQUENCE;
+
   // Group by section
-  const sections = PAGE_SEQUENCE.reduce<
+  const sections = filtered.reduce<
     Record<string, (typeof PAGE_SEQUENCE)[number][]>
   >((acc, page) => {
     const s = page.section || "Other";
@@ -273,6 +297,7 @@ function PagesDrawer({
     acc[s].push(page);
     return acc;
   }, {});
+
 
   return (
     <AnimatePresence>
@@ -312,8 +337,26 @@ function PagesDrawer({
               </button>
             </div>
 
+            {/* Search */}
+            <div className="px-3 pt-3">
+              <input
+                type="search"
+                value={query}
+                onChange={(e) => setQuery(e.target.value)}
+                placeholder="Search pages…"
+                aria-label="Search pages"
+                className="w-full h-10 rounded-lg bg-primary/5 border border-primary/20 px-3 text-sm text-secondary-foreground placeholder:text-secondary-foreground/40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+              />
+            </div>
+
             {/* Page list */}
             <div className="flex-1 overflow-y-auto overscroll-contain py-3 px-3 space-y-5">
+              {filtered.length === 0 && (
+                <p className="px-2 text-sm text-secondary-foreground/50">
+                  No pages match “{query}”.
+                </p>
+              )}
+
               {Object.entries(sections).map(([section, pages]) => (
                 <div key={section}>
                   <h3 className="text-[11px] font-bold uppercase tracking-widest text-primary/50 mb-1.5 px-2">
