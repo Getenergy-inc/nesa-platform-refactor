@@ -267,17 +267,29 @@ function PagesDrawer({
   currentPath: string;
 }) {
   const navigate = useNavigate();
+  const [query, setQuery] = useState("");
 
   const handlePageClick = useCallback(
     (path: string) => {
       navigate(path);
+      setQuery("");
       onClose();
     },
     [navigate, onClose]
   );
 
+  const q = query.trim().toLowerCase();
+  const filtered = q
+    ? PAGE_SEQUENCE.filter(
+        (p) =>
+          p.label.toLowerCase().includes(q) ||
+          p.path.toLowerCase().includes(q) ||
+          (p.section || "").toLowerCase().includes(q)
+      )
+    : PAGE_SEQUENCE;
+
   // Group by section
-  const sections = PAGE_SEQUENCE.reduce<
+  const sections = filtered.reduce<
     Record<string, (typeof PAGE_SEQUENCE)[number][]>
   >((acc, page) => {
     const s = page.section || "Other";
@@ -285,6 +297,7 @@ function PagesDrawer({
     acc[s].push(page);
     return acc;
   }, {});
+
 
   return (
     <AnimatePresence>
