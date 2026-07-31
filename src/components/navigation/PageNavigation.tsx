@@ -128,8 +128,42 @@ function TopNavLink({
 
 export function BottomPageNav() {
   const location = useLocation();
+  const navigate = useNavigate();
   const nav = getPageNavigation(location.pathname);
   const [selectorOpen, setSelectorOpen] = useState(false);
+
+  // ── Keyboard shortcuts ─────────────────────────────────────────────────
+  // ← / → : previous / next page   ·   "/" or Ctrl/Cmd+K : open Pages drawer
+  useEffect(() => {
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (isTypingTarget(e.target)) return;
+
+      const openDrawer =
+        (e.key === "/" && !e.metaKey && !e.ctrlKey && !e.altKey) ||
+        ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === "k");
+
+      if (openDrawer) {
+        e.preventDefault();
+        setSelectorOpen(true);
+        return;
+      }
+
+      if (e.metaKey || e.ctrlKey || e.altKey || e.shiftKey) return;
+      if (selectorOpen) return;
+
+      if (e.key === "ArrowLeft" && nav.previousPage) {
+        e.preventDefault();
+        navigate(nav.previousPage.path);
+      } else if (e.key === "ArrowRight" && nav.nextPage) {
+        e.preventDefault();
+        navigate(nav.nextPage.path);
+      }
+    };
+
+    window.addEventListener("keydown", onKeyDown);
+    return () => window.removeEventListener("keydown", onKeyDown);
+  }, [navigate, nav.previousPage, nav.nextPage, selectorOpen]);
+
 
   return (
     <>
