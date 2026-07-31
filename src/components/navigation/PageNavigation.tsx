@@ -131,8 +131,6 @@ export function BottomPageNav() {
   const nav = getPageNavigation(location.pathname);
   const [selectorOpen, setSelectorOpen] = useState(false);
 
-  if (!nav.isKnown) return null;
-
   return (
     <>
       <nav
@@ -165,16 +163,30 @@ export function BottomPageNav() {
           {/* Center: Page indicator + selector */}
           <button
             onClick={() => setSelectorOpen(true)}
-            aria-label={`Page ${nav.pageNumber} of ${nav.totalPages}. Tap to jump to a page.`}
+            aria-label={
+              nav.isKnown
+                ? `Page ${nav.pageNumber} of ${nav.totalPages}. Tap to jump to a page.`
+                : "Browse all pages"
+            }
             className="flex items-center gap-2 h-10 px-4 rounded-lg bg-primary/10 hover:bg-primary/20 active:bg-primary/25 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
           >
-            <span className="text-sm font-semibold text-primary">
-              Page {nav.pageNumber}
-            </span>
-            <span className="text-xs text-secondary-foreground/50">
-              of {nav.totalPages}
-            </span>
+            <BookOpen className="h-4 w-4 text-primary" aria-hidden />
+            {nav.isKnown ? (
+              <>
+                <span className="text-sm font-semibold text-primary">
+                  Page {nav.pageNumber}
+                </span>
+                <span className="text-xs text-secondary-foreground/50">
+                  of {nav.totalPages}
+                </span>
+              </>
+            ) : (
+              <span className="text-sm font-semibold text-primary">
+                Browse pages
+              </span>
+            )}
           </button>
+
 
           {/* Right: Next + Last */}
           <div className="flex items-center gap-0.5">
