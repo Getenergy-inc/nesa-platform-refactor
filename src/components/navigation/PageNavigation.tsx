@@ -2,7 +2,7 @@
 // Fixed top bar + fixed bottom bar + pages drawer
 // Consistent on every page, mobile-first, accessible
 
-import { useState, useCallback } from "react";
+import { useState, useCallback, useEffect, useRef } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AnimatePresence, motion } from "framer-motion";
 import {
@@ -16,6 +16,19 @@ import {
 import { cn } from "@/lib/utils";
 import { PAGE_SEQUENCE, getPageNavigation } from "@/config/page-sequence";
 import nesaStamp from "@/assets/nesa-stamp.jpeg";
+
+// Ignore shortcuts while the user is typing in a field or editable surface.
+function isTypingTarget(target: EventTarget | null): boolean {
+  const el = target as HTMLElement | null;
+  if (!el || !el.tagName) return false;
+  const tag = el.tagName.toLowerCase();
+  return (
+    tag === "input" ||
+    tag === "textarea" ||
+    tag === "select" ||
+    el.isContentEditable === true
+  );
+}
 
 // ─── Top Navigation Bar ──────────────────────────────────────────────────────
 
@@ -128,8 +141,46 @@ function TopNavLink({
 
 export function BottomPageNav() {
   const location = useLocation();
+  const navigate = useNavigate();
   const nav = getPageNavigation(location.pathname);
   const [selectorOpen, setSelectorOpen] = useState(false);
+
+  // ── Keyboard shortcuts ─────────────────────────────────────────────────
+  // ← / → : previous / next page   ·   "/" or Shift+P : open Pages drawer
+  // (Ctrl/Cmd+K stays reserved for the site-wide NavSearch palette.)
+  useEffect(() => {
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (isTypingTarget(e.target)) return;
+
+      const openDrawer =
+        !e.metaKey &&
+        !e.ctrlKey &&
+        !e.altKey &&
+        (e.key === "/" || (e.shiftKey && e.key.toLowerCase() === "p"));
+
+
+      if (openDrawer) {
+        e.preventDefault();
+        setSelectorOpen(true);
+        return;
+      }
+
+      if (e.metaKey || e.ctrlKey || e.altKey || e.shiftKey) return;
+      if (selectorOpen) return;
+
+      if (e.key === "ArrowLeft" && nav.previousPage) {
+        e.preventDefault();
+        navigate(nav.previousPage.path);
+      } else if (e.key === "ArrowRight" && nav.nextPage) {
+        e.preventDefault();
+        navigate(nav.nextPage.path);
+      }
+    };
+
+    window.addEventListener("keydown", onKeyDown);
+    return () => window.removeEventListener("keydown", onKeyDown);
+  }, [navigate, nav.previousPage, nav.nextPage, selectorOpen]);
+
 
   return (
     <>
@@ -268,6 +319,28 @@ function PagesDrawer({
 }) {
   const navigate = useNavigate();
   const [query, setQuery] = useState("");
+  const searchRef = useRef<HTMLInputElement>(null);
+
+  // Focus the search field whenever the drawer opens; Esc closes it.
+  useEffect(() => {
+    if (!open) {
+      setQuery("");
+      return;
+    }
+    const t = window.setTimeout(() => searchRef.current?.focus(), 120);
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        e.preventDefault();
+        onClose();
+      }
+    };
+    window.addEventListener("keydown", onKeyDown);
+    return () => {
+      window.clearTimeout(t);
+      window.removeEventListener("keydown", onKeyDown);
+    };
+  }, [open, onClose]);
+
 
   const handlePageClick = useCallback(
     (path: string) => {
@@ -340,13 +413,21 @@ function PagesDrawer({
             {/* Search */}
             <div className="px-3 pt-3">
               <input
+                ref={searchRef}
                 type="search"
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter" && filtered.length > 0) {
+                    e.preventDefault();
+                    handlePageClick(filtered[0].path);
+                  }
+                }}
                 placeholder="Search pages…"
                 aria-label="Search pages"
                 className="w-full h-10 rounded-lg bg-primary/5 border border-primary/20 px-3 text-sm text-secondary-foreground placeholder:text-secondary-foreground/40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
               />
+
             </div>
 
             {/* Page list */}
@@ -398,11 +479,20 @@ function PagesDrawer({
             </div>
 
             {/* Drawer footer */}
-            <div className="px-4 py-3 border-t border-primary/15 text-center">
-              <span className="text-xs text-secondary-foreground/40">
+            <div className="px-4 py-3 border-t border-primary/15 text-center space-y-1">
+              <span className="block text-xs text-secondary-foreground/40">
                 {PAGE_SEQUENCE.length} pages total
               </span>
+              <span className="block text-[11px] text-secondary-foreground/35">
+                <kbd className="px-1 rounded bg-primary/10">←</kbd>{" "}
+                <kbd className="px-1 rounded bg-primary/10">→</kbd> move ·{" "}
+                <kbd className="px-1 rounded bg-primary/10">/</kbd> or{" "}
+                <kbd className="px-1 rounded bg-primary/10">Shift+P</kbd> pages ·{" "}
+
+                <kbd className="px-1 rounded bg-primary/10">Esc</kbd> close
+              </span>
             </div>
+
           </motion.aside>
         </>
       )}
