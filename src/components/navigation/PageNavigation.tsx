@@ -146,14 +146,18 @@ export function BottomPageNav() {
   const [selectorOpen, setSelectorOpen] = useState(false);
 
   // ── Keyboard shortcuts ─────────────────────────────────────────────────
-  // ← / → : previous / next page   ·   "/" or Ctrl/Cmd+K : open Pages drawer
+  // ← / → : previous / next page   ·   "/" or Shift+P : open Pages drawer
+  // (Ctrl/Cmd+K stays reserved for the site-wide NavSearch palette.)
   useEffect(() => {
     const onKeyDown = (e: KeyboardEvent) => {
       if (isTypingTarget(e.target)) return;
 
       const openDrawer =
-        (e.key === "/" && !e.metaKey && !e.ctrlKey && !e.altKey) ||
-        ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === "k");
+        !e.metaKey &&
+        !e.ctrlKey &&
+        !e.altKey &&
+        (e.key === "/" || (e.shiftKey && e.key.toLowerCase() === "p"));
+
 
       if (openDrawer) {
         e.preventDefault();
