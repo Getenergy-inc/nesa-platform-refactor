@@ -409,13 +409,21 @@ function PagesDrawer({
             {/* Search */}
             <div className="px-3 pt-3">
               <input
+                ref={searchRef}
                 type="search"
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter" && filtered.length > 0) {
+                    e.preventDefault();
+                    handlePageClick(filtered[0].path);
+                  }
+                }}
                 placeholder="Search pages…"
                 aria-label="Search pages"
                 className="w-full h-10 rounded-lg bg-primary/5 border border-primary/20 px-3 text-sm text-secondary-foreground placeholder:text-secondary-foreground/40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
               />
+
             </div>
 
             {/* Page list */}
