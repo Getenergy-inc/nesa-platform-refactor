@@ -2,7 +2,7 @@
 // Fixed top bar + fixed bottom bar + pages drawer
 // Consistent on every page, mobile-first, accessible
 
-import { useState, useCallback } from "react";
+import { useState, useCallback, useEffect, useRef } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AnimatePresence, motion } from "framer-motion";
 import {
