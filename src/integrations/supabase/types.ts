@@ -4496,6 +4496,7 @@ export type Database = {
           award_category: string | null
           award_group: string | null
           award_subcategory: string | null
+          draft_token: string | null
           duplicate_of: string | null
           duplicate_status: string | null
           evidence_status: string | null
@@ -4506,6 +4507,7 @@ export type Database = {
           ingested_at: string
           ingested_by: string | null
           nomination_status: string | null
+          nominator_email: string | null
           nominee_city_clean: string | null
           nominee_country_clean: string | null
           nominee_name_clean: string | null
@@ -4514,6 +4516,7 @@ export type Database = {
           raw_payload: Json | null
           record_id: string
           reviewer_notes: string | null
+          submitted_by: string | null
           updated_at: string
           verification_status: string | null
           website_sync_status: string | null
@@ -4523,6 +4526,7 @@ export type Database = {
           award_category?: string | null
           award_group?: string | null
           award_subcategory?: string | null
+          draft_token?: string | null
           duplicate_of?: string | null
           duplicate_status?: string | null
           evidence_status?: string | null
@@ -4533,6 +4537,7 @@ export type Database = {
           ingested_at?: string
           ingested_by?: string | null
           nomination_status?: string | null
+          nominator_email?: string | null
           nominee_city_clean?: string | null
           nominee_country_clean?: string | null
           nominee_name_clean?: string | null
@@ -4541,6 +4546,7 @@ export type Database = {
           raw_payload?: Json | null
           record_id: string
           reviewer_notes?: string | null
+          submitted_by?: string | null
           updated_at?: string
           verification_status?: string | null
           website_sync_status?: string | null
@@ -4550,6 +4556,7 @@ export type Database = {
           award_category?: string | null
           award_group?: string | null
           award_subcategory?: string | null
+          draft_token?: string | null
           duplicate_of?: string | null
           duplicate_status?: string | null
           evidence_status?: string | null
@@ -4560,6 +4567,7 @@ export type Database = {
           ingested_at?: string
           ingested_by?: string | null
           nomination_status?: string | null
+          nominator_email?: string | null
           nominee_city_clean?: string | null
           nominee_country_clean?: string | null
           nominee_name_clean?: string | null
@@ -4568,6 +4576,7 @@ export type Database = {
           raw_payload?: Json | null
           record_id?: string
           reviewer_notes?: string | null
+          submitted_by?: string | null
           updated_at?: string
           verification_status?: string | null
           website_sync_status?: string | null
@@ -11358,6 +11367,17 @@ export type Database = {
       generate_referral_code: { Args: { p_prefix?: string }; Returns: string }
       generate_volunteer_referral_code: { Args: never; Returns: string }
       get_current_season: { Args: never; Returns: string }
+      get_my_nomination_status: {
+        Args: { p_reference: string }
+        Returns: {
+          award_category: string
+          nomination_status: string
+          nominee_name: string
+          reference: string
+          submitted_at: string
+          verification_status: string
+        }[]
+      }
       get_nomination_draft: {
         Args: { p_token: string }
         Returns: {
@@ -11498,6 +11518,10 @@ export type Database = {
         Args: { _action: Database["public"]["Enums"]["stage_action"] }
         Returns: boolean
       }
+      link_nomination_to_account: {
+        Args: { p_reference: string }
+        Returns: boolean
+      }
       mint_acceptance_token: {
         Args: { p_nominee_id: string }
         Returns: {
@@ -11605,6 +11629,25 @@ export type Database = {
           p_reserve: string
         }
         Returns: string
+      }
+      submit_public_nomination: {
+        Args: {
+          p_award_tier: string
+          p_category_slug: string
+          p_draft_token?: string
+          p_form_type: string
+          p_impact_summary?: string
+          p_nominator_email?: string
+          p_nominee_country?: string
+          p_nominee_name: string
+          p_payload: Json
+          p_subcategory?: string
+        }
+        Returns: {
+          intake_id: string
+          is_duplicate: boolean
+          reference: string
+        }[]
       }
       update_nomination_draft: {
         Args: {
