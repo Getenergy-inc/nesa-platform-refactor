@@ -1,4 +1,6 @@
 import { useMemo, useState, useEffect } from "react";
+import { getMasterNomineeBySlug, type MasterNominee } from "@/lib/nomineeMasterData";
+import { enrichNomineeGeography, standardiseCountry } from "@/lib/directory/nomineeEnrichment";
 import { useParams, Link, useSearchParams } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import {
@@ -95,6 +97,40 @@ function generateStory(nominee: EnrichedNominee) {
   };
 }
 
+// Build an EnrichedNominee display object from the historical master register
+// (NESA_Award_Nominees_Master_List.xlsx). Register records are already public
+// in the recognition catalogue, so their profiles render with register data
+// only — no field is invented, and NRC status stays "pending verification"
+// until the live pipeline supersedes the record.
+function buildEnrichedFromMaster(n: MasterNominee): EnrichedNominee {
+  const geo = enrichNomineeGeography({
+    region: n.region,
+    country: n.country,
+    state: n.state,
+    category: n.category,
+    subcategory: n.subcategory,
+  });
+  return {
+    id: `nesa-2025-${n.id}`,
+    name: n.name,
+    slug: n.slug,
+    image: "",
+    imageUrl: "",
+    achievement: n.achievement || "",
+    state: n.state || undefined,
+    country: standardiseCountry(n.country) || undefined,
+    imageType: "photo",
+    awardTitle: n.category,
+    awardSlug: "nominees",
+    subcategoryTitle: n.subcategory,
+    subcategorySlug: n.subcategorySlug,
+    regionName: geo.region,
+    regionSlug: undefined,
+    geographicCategory: "africa-regions",
+    status: "approved",
+  };
+}
+
 // Build an EnrichedNominee display object from a published `nominees` DB row,
 // so nominees created via the public intake pipeline (which have no hard-coded
 // nesaData entry) still render a real, shareable profile page.
@@ -180,16 +216,27 @@ export default function NomineeProfile() {
       const nameSlug = hardcodedNominee
         ? hardcodedNominee.name.toLowerCase().trim().replace(/\s+/g, "-").replace(/[^a-z0-9-]/g, "").replace(/-+/g, "-").replace(/^-|-$/g, "")
         : slug;
-      // Read the nominees table directly: the public_nominees VIEW is not
-      // granted to the anon role, but the table exposes published rows via RLS.
+      // Read the PII-free `public_nominees` view: the base `nominees` table is
+      // not readable by anon/authenticated visitors, and the view already
+      // enforces publication_status='published' with a non-incomplete profile.
       const { data, error } = await (supabase as any)
-        .from("nominees")
-        .select("id, name, slug, title, organization, bio, photo_url, logo_url, country, region, renomination_count, publication_status, profile_status, is_platinum, recognition_pathway")
-        .eq("publication_status", "published")
+        .from("public_nominees")
+        .select("id, name, slug, title, organization, bio, photo_url, logo_url, country, region, renomination_count, is_platinum, recognition_class")
         .or(`slug.eq.${slug},slug.eq.${nameSlug}`)
+        .limit(1)
         .maybeSingle();
       if (cancelled) return;
       if (error || !data) {
+        // Fall back to the historical master register before blocking.
+        const master = getMasterNomineeBySlug(slug);
+        if (master) {
+          setDbNominee(buildEnrichedFromMaster(master));
+          setDbNomineeId(null);
+          setRenominationCount(0);
+          setRecognitionPathway(null);
+          setPublishCheck("allowed");
+          return;
+        }
         setDbNominee(null);
         setDbNomineeId(null);
         setRenominationCount(0);
@@ -199,7 +246,7 @@ export default function NomineeProfile() {
       }
       setDbNomineeId(data.id);
       setRenominationCount(data.renomination_count ?? 0);
-      setRecognitionPathway((data.recognition_pathway as any) ?? null);
+      setRecognitionPathway((data.recognition_class as any) ?? null);
       // No hard-coded record → build the display object from the DB row.
       if (!hardcodedNominee) {
         setDbNominee(buildEnrichedFromDb(data));
