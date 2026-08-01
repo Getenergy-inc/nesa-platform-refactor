@@ -201,7 +201,7 @@ export default function NomineesHubPage() {
         {/* ────────────────────────────────────────────────────────────────
             SECTION 1 — BROWSE BY AWARD CATEGORY
         ──────────────────────────────────────────────────────────────── */}
-        <Section id="categories" eyebrow={`03 · ${categoryCounts.length || 18} Categories`} title="Browse by Award Category" sub="Every category curates a verified roster of Education Enablers. Click any card to open its dedicated page.">
+        <Section id="categories" eyebrow={`01 · ${categoryCounts.length || 18} Categories`} title="Browse by Award Category" sub="Every category curates a verified roster of Education Enablers. Click any card to open its dedicated page.">
           {isLoading ? (
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
               {Array.from({ length: 6 }).map((_, i) => <Skeleton key={i} className="h-32 rounded-2xl bg-charcoal-light/50" />)}
