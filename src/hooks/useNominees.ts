@@ -90,6 +90,11 @@ export interface DatabaseNominee {
   public_votes: number | null;
   subcategory_id: string;
   season_id: string;
+  nrc_verified?: boolean | null;
+  acceptance_status?: string | null;
+  award_family?: string | null;
+  recognition_class?: string | null;
+  created_at?: string | null;
   // Joined fields
   subcategory_name?: string;
   subcategory_slug?: string;
