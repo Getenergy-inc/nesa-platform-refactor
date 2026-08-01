@@ -15,7 +15,7 @@
 import { writeFileSync, mkdirSync } from "fs";
 import { NOMINEES_2025 } from "../src/data/nominees-2025";
 import { CATEGORY_MAP, CATALOGUE_TIERS, MIN_MAPPING_CONFIDENCE } from "../src/config/directory/catalogueTaxonomy";
-import { resolveMasterCategorySlug } from "../src/lib/directory/masterCatalogueSource";
+import { resolveMasterCategorySlug } from "../src/lib/directory/masterCategoryRules";
 import {
   enrichNomineeGeography,
   identityKey,
