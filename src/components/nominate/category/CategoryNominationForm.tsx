@@ -562,15 +562,32 @@ export default function CategoryNominationForm({ content }: Props) {
         <p className="mt-3 text-[11px] text-foreground/60">{governanceCopy}</p>
       </div>
 
+      {/* Deferred-account notice — shown immediately above Submit */}
+      <div className="space-y-2 rounded-lg border border-gold/25 bg-black/30 p-4">
+        <p className="text-sm font-semibold text-gold">{NOMINATION_COPY.preSubmit}</p>
+        <p className="text-xs text-foreground/75">{NOMINATION_COPY.accountPrompt}</p>
+        {(saving || savedAt) && (
+          <p className="flex items-center gap-1.5 text-[11px] text-foreground/55">
+            <CloudUpload className="h-3 w-3 text-gold" aria-hidden />
+            {saving ? "Saving your entries…" : "Your entries are saved."}
+          </p>
+        )}
+      </div>
+
       <Button
         type="submit"
-        disabled={submitting}
+        disabled={submitting || Boolean(reference)}
         size="lg"
         className="w-full bg-gold text-charcoal hover:bg-gold/90"
       >
-        <Send className="mr-2 h-4 w-4" />
+        {submitting ? (
+          <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+        ) : (
+          <Send className="mr-2 h-4 w-4" />
+        )}
         {submitting ? "Submitting…" : "Submit nomination"}
       </Button>
+
     </form>
   );
 }
