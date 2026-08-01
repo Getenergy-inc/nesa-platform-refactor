@@ -1,4 +1,6 @@
 import { useMemo, useState, useEffect } from "react";
+import { getMasterNomineeBySlug, type MasterNominee } from "@/lib/nomineeMasterData";
+import { enrichNomineeGeography, standardiseCountry } from "@/lib/directory/nomineeEnrichment";
 import { useParams, Link, useSearchParams } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import {
@@ -92,6 +94,40 @@ function generateStory(nominee: EnrichedNominee) {
       `${possessive} work represents the kind of sustained, evidence-based commitment to education that transforms communities and nations. The nomination reflects recognition by peers and stakeholders of real, tangible impact.`,
       `As Africa continues to address its education challenges, ${entity}s like ${nominee.name.split(" ")[0]} serve as beacons of what is possible when dedication meets innovation in the pursuit of educational excellence for all.`,
     ],
+  };
+}
+
+// Build an EnrichedNominee display object from the historical master register
+// (NESA_Award_Nominees_Master_List.xlsx). Register records are already public
+// in the recognition catalogue, so their profiles render with register data
+// only — no field is invented, and NRC status stays "pending verification"
+// until the live pipeline supersedes the record.
+function buildEnrichedFromMaster(n: MasterNominee): EnrichedNominee {
+  const geo = enrichNomineeGeography({
+    region: n.region,
+    country: n.country,
+    state: n.state,
+    category: n.category,
+    subcategory: n.subcategory,
+  });
+  return {
+    id: `nesa-2025-${n.id}`,
+    name: n.name,
+    slug: n.slug,
+    image: "",
+    imageUrl: "",
+    achievement: n.achievement || "",
+    state: n.state || undefined,
+    country: standardiseCountry(n.country) || undefined,
+    imageType: "photo",
+    awardTitle: n.category,
+    awardSlug: "nominees",
+    subcategoryTitle: n.subcategory,
+    subcategorySlug: n.subcategorySlug,
+    regionName: geo.region,
+    regionSlug: undefined,
+    geographicCategory: "africa-regions",
+    status: "approved",
   };
 }
 
@@ -190,6 +226,16 @@ export default function NomineeProfile() {
         .maybeSingle();
       if (cancelled) return;
       if (error || !data) {
+        // Fall back to the historical master register before blocking.
+        const master = getMasterNomineeBySlug(slug);
+        if (master) {
+          setDbNominee(buildEnrichedFromMaster(master));
+          setDbNomineeId(null);
+          setRenominationCount(0);
+          setRecognitionPathway(null);
+          setPublishCheck("allowed");
+          return;
+        }
         setDbNominee(null);
         setDbNomineeId(null);
         setRenominationCount(0);
