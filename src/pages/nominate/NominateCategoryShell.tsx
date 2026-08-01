@@ -67,9 +67,16 @@ export default function NominateCategoryShell({ fixedTier, fixedCategory }: Prop
   const tierMeta = getTierMeta(tier);
   const content = getCategoryContent(category);
 
+  // The Africa Education Icon form is the dedicated 9-step wizard rather than
+  // the shared category skeleton — it follows the same deferred-account flow.
+  if (category === "africa-education-icon") {
+    return <IconNominationFormPage />;
+  }
+
   if (!form || !tierMeta || !content) {
     return <Navigate to="/nominate" replace />;
   }
+
 
   const matrix = getEDIMatrix(tier, category);
   const governance = GOVERNANCE_COPY[content.governance];
