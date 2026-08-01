@@ -1,5 +1,5 @@
 import { useMemo, useState } from "react";
-import { useParams, Navigate } from "react-router-dom";
+import { useParams, Navigate, Link } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import { motion } from "framer-motion";
 import { Users } from "lucide-react";
@@ -13,12 +13,29 @@ import { NomineeFilterBar, type NomineeSort } from "@/components/nominees/Nomine
 import { FeaturedNomineeSpotlight } from "@/components/nominees/FeaturedNomineeSpotlight";
 import { SubcategoryTabs, type SubcategoryTab } from "@/components/nominees/SubcategoryTabs";
 import { ExploreNomineesCTA } from "@/components/nominees/ExploreNomineesCTA";
+import {
+  resolveTierForCategory,
+  TIER_BY_SLUG,
+} from "@/config/directory/catalogueTaxonomy";
 
 const PAGE_SIZE = 12;
 
 export default function CategoryLandingPage() {
   const { categorySlug } = useParams<{ categorySlug: string }>();
   const { data: nominees, isLoading } = useNominees();
+
+  const tierMapping = useMemo(() => {
+    const mapping = resolveTierForCategory(categorySlug);
+    if (!mapping) return null;
+    const tier = TIER_BY_SLUG[mapping.tier];
+    return {
+      ...mapping,
+      tierSlug: tier.slug,
+      tierName: tier.name,
+      tierNumber: tier.tierNumber,
+    };
+  }, [categorySlug]);
+
 
   const [activeSub, setActiveSub] = useState<string>("");
   const [search, setSearch] = useState("");
@@ -136,6 +153,10 @@ export default function CategoryLandingPage() {
           <NomineeBreadcrumbs
             items={[
               { label: "Nominees", href: "/nominees" },
+              { label: "Recognition Catalogue", href: "/nominees/catalogue" },
+              ...(tierMapping
+                ? [{ label: tierMapping.tierName, href: `/nominees/catalogue?tier=${tierMapping.tierSlug}` }]
+                : []),
               { label: categoryData.name },
               ...(activeSubName ? [{ label: activeSubName }] : []),
             ]}
@@ -148,6 +169,20 @@ export default function CategoryLandingPage() {
             countryCount={categoryData.countries.length}
             subcategoryCount={categoryData.subcategories.length}
           />
+
+          {tierMapping && (
+            <div className="mt-4 flex flex-wrap items-center gap-3 rounded-xl border border-gold/25 bg-charcoal-light/40 px-4 py-3">
+              <span className="text-xs text-foreground/70">
+                Tier {tierMapping.tierNumber} · {tierMapping.tierName} · {tierMapping.scope}
+              </span>
+              <Button asChild size="sm" className="h-8 bg-gold text-xs text-charcoal hover:bg-gold/90">
+                <Link to={tierMapping.nominateHref}>Open nomination form</Link>
+              </Button>
+              <Button asChild size="sm" variant="outline" className="h-8 border-gold/40 text-xs text-gold">
+                <Link to={`/nominees/catalogue?category=${tierMapping.categorySlug}`}>View in catalogue</Link>
+              </Button>
+            </div>
+          )}
 
           {/* Horizontal Netflix-style subcategory tabs */}
           <SubcategoryTabs

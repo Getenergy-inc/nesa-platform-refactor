@@ -90,6 +90,11 @@ export interface DatabaseNominee {
   public_votes: number | null;
   subcategory_id: string;
   season_id: string;
+  nrc_verified?: boolean | null;
+  acceptance_status?: string | null;
+  award_family?: string | null;
+  recognition_class?: string | null;
+  created_at?: string | null;
   // Joined fields
   subcategory_name?: string;
   subcategory_slug?: string;
@@ -117,6 +122,14 @@ export interface EnrichedDatabaseNominee {
   categorySlug: string;
   geographicCategory: GeographicCategory;
   achievement: string;
+  /** NRC verification flag (governance badge). */
+  nrcVerified: boolean;
+  /** Nominee acceptance state (accepted / pending / declined). */
+  acceptanceStatus: string | null;
+  awardFamily: string | null;
+  recognitionClass: string | null;
+  /** Nomination year, derived from the record creation date. */
+  nominationYear: number | null;
 }
 
 const PLACEHOLDER_IMAGE = "/images/placeholder.svg";
@@ -149,22 +162,38 @@ function enrichNominee(nominee: DatabaseNominee): EnrichedDatabaseNominee {
     categorySlug: nominee.category_slug || "general",
     geographicCategory: getGeographicCategory(nominee.region, nominee.category_name || null),
     achievement: nominee.bio || nominee.title || "",
+    nrcVerified: nominee.nrc_verified ?? false,
+    acceptanceStatus: nominee.acceptance_status ?? null,
+    awardFamily: nominee.award_family ?? null,
+    recognitionClass: nominee.recognition_class ?? null,
+    nominationYear: nominee.created_at ? new Date(nominee.created_at).getUTCFullYear() : null,
   };
 }
 
 async function fetchNominees(): Promise<EnrichedDatabaseNominee[]> {
-  // Fetch from public_nominees view (security-hardened, excludes PII)
-  const { data: nominees, error: nomineesError } = await supabase
-    .from("public_nominees")
-    .select("*")
-    .order("name");
+  // Fetch from public_nominees view (security-hardened, excludes PII).
+  // PostgREST caps a single response at 1000 rows — page through the full set
+  // so the catalogue counters reflect every historical nominee.
+  const PAGE = 1000;
+  const nominees: any[] = [];
+  for (let from = 0; ; from += PAGE) {
+    const { data, error } = await supabase
+      .from("public_nominees")
+      .select("*")
+      .order("name")
+      .range(from, from + PAGE - 1);
 
-  if (nomineesError) {
-    console.error("Error fetching nominees:", nomineesError);
-    throw nomineesError;
+    if (error) {
+      console.error("Error fetching nominees:", error);
+      throw error;
+    }
+    if (!data || data.length === 0) break;
+    nominees.push(...data);
+    if (data.length < PAGE) break;
   }
 
-  if (!nominees || nominees.length === 0) return [];
+  if (nominees.length === 0) return [];
+
 
   // Get subcategory IDs to fetch category info
   const subcategoryIds = [...new Set(nominees.map(n => n.subcategory_id))];
@@ -219,6 +248,11 @@ async function fetchNominees(): Promise<EnrichedDatabaseNominee[]> {
       public_votes: row.public_votes,
       subcategory_id: row.subcategory_id,
       season_id: row.season_id,
+      nrc_verified: row.nrc_verified,
+      acceptance_status: row.acceptance_status,
+      award_family: row.award_family,
+      recognition_class: row.recognition_class,
+      created_at: row.created_at,
       subcategory_name: subcatInfo?.name,
       subcategory_slug: subcatInfo?.slug,
       category_name: subcatInfo?.categoryName,
