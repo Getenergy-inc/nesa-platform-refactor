@@ -255,9 +255,9 @@ export default function NomineesHubPage() {
         </Section>
 
         {/* ────────────────────────────────────────────────────────────────
-            SECTION 6 — BROWSE BY EDUCATION ENABLER TYPE
+            SECTION 3 — BROWSE BY EDUCATION ENABLER TYPE
         ──────────────────────────────────────────────────────────────── */}
-        <Section eyebrow="05 · Who They Are" title="Browse by Education Enabler Type">
+        <Section eyebrow="03 · Who They Are" title="Browse by Education Enabler Type">
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-2">
             {ENABLER_TYPES.map((e) => (
               <button
