@@ -15,6 +15,7 @@ import { getAllMasterNominees, type MasterNominee } from "@/lib/nomineeMasterDat
 import { useNominees, type EnrichedDatabaseNominee } from "@/hooks/useNominees";
 import { CATEGORY_MAP } from "@/config/directory/catalogueTaxonomy";
 import { normalizeRegion, type AfricanRegion } from "@/lib/regions";
+import { enrichNomineeGeography } from "@/lib/directory/nomineeEnrichment";
 import type { GeographicCategory } from "@/lib/nesaData";
 
 /**
@@ -88,6 +89,17 @@ export function toCatalogueNominee(n: MasterNominee): EnrichedDatabaseNominee | 
   const categorySlug = resolveMasterCategorySlug(n.category);
   const mapping = categorySlug ? CATEGORY_MAP[categorySlug] : undefined;
 
+  // Derived governance fields — every nominee gets exactly one approved region
+  // and one classification. Original imported values are preserved on the
+  // master record itself and are never overwritten here.
+  const geo = enrichNomineeGeography({
+    region: n.region,
+    country: n.country,
+    state: n.state,
+    category: n.category,
+    subcategory: n.subcategory,
+  });
+
   return {
     id: masterNomineeId(n),
     name: n.name,
@@ -96,7 +108,7 @@ export function toCatalogueNominee(n: MasterNominee): EnrichedDatabaseNominee | 
     bio: n.achievement || null,
     organization: null,
     country: n.country || null,
-    region: n.region && n.region !== "N/A" ? n.region : null,
+    region: geo.region,
     photoUrl: "/images/placeholder.svg",
     imageType: "photo",
     status: n.workflowStatus === "nomination_cleared" ? "approved" : "pending",
@@ -108,12 +120,12 @@ export function toCatalogueNominee(n: MasterNominee): EnrichedDatabaseNominee | 
     // Unmapped records intentionally keep their raw slug so they surface in the
     // Migration Review Queue rather than being silently mis-filed.
     categorySlug: categorySlug ?? n.categorySlug,
-    geographicCategory: geographicFor(n.region, n.country),
+    geographicCategory: geographicFor(geo.region, n.country),
     achievement: n.achievement || "",
     nrcVerified: n.workflowStatus === "nomination_cleared",
     acceptanceStatus: null,
     awardFamily: mapping ? mapping.tier : null,
-    recognitionClass: n.pathway,
+    recognitionClass: geo.classification,
     nominationYear: n.nominationYear,
   };
 }
