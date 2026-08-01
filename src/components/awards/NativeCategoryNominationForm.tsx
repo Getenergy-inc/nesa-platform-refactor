@@ -556,7 +556,14 @@ export function NativeCategoryNominationForm({
         </div>
       </div>
 
+      {/* Deferred-account notice — no account is needed to start or submit */}
+      <div className="space-y-2 rounded-lg border border-gold/25 bg-black/30 p-4">
+        <p className="text-sm font-semibold text-gold">{NOMINATION_COPY.preSubmit}</p>
+        <p className="text-xs text-foreground/75">{NOMINATION_COPY.accountPrompt}</p>
+      </div>
+
       <Button
+
         type="submit"
         size="lg"
         disabled={submitting}
