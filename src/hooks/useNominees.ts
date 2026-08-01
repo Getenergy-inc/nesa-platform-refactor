@@ -171,18 +171,29 @@ function enrichNominee(nominee: DatabaseNominee): EnrichedDatabaseNominee {
 }
 
 async function fetchNominees(): Promise<EnrichedDatabaseNominee[]> {
-  // Fetch from public_nominees view (security-hardened, excludes PII)
-  const { data: nominees, error: nomineesError } = await supabase
-    .from("public_nominees")
-    .select("*")
-    .order("name");
+  // Fetch from public_nominees view (security-hardened, excludes PII).
+  // PostgREST caps a single response at 1000 rows — page through the full set
+  // so the catalogue counters reflect every historical nominee.
+  const PAGE = 1000;
+  const nominees: any[] = [];
+  for (let from = 0; ; from += PAGE) {
+    const { data, error } = await supabase
+      .from("public_nominees")
+      .select("*")
+      .order("name")
+      .range(from, from + PAGE - 1);
 
-  if (nomineesError) {
-    console.error("Error fetching nominees:", nomineesError);
-    throw nomineesError;
+    if (error) {
+      console.error("Error fetching nominees:", error);
+      throw error;
+    }
+    if (!data || data.length === 0) break;
+    nominees.push(...data);
+    if (data.length < PAGE) break;
   }
 
-  if (!nominees || nominees.length === 0) return [];
+  if (nominees.length === 0) return [];
+
 
   // Get subcategory IDs to fetch category info
   const subcategoryIds = [...new Set(nominees.map(n => n.subcategory_id))];
