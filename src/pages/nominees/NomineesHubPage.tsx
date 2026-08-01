@@ -1,8 +1,8 @@
 // ============================================================================
 // Africa's Education Impact Directory — /nominees
-// 11-section premium discovery hub. Composes existing data layer
-// (useNominees, PILLARS, RECOGNITION_TIERS_2026, AFRICAN_REGIONS) into a
-// long-form section-based experience. No business-logic changes.
+// 8-section premium discovery hub. Composes existing data layer
+// (useNominees, AFRICAN_REGIONS) into a long-form section-based experience.
+// No business-logic changes.
 // ============================================================================
 
 import { useMemo, useState, useEffect } from "react";
@@ -13,15 +13,13 @@ import {
   Search, Trophy, Users, ArrowRight, Sparkles, Globe2, Plane,
   HeartHandshake, MapPin, Crown, Building2, Award, Star, Medal,
   BookOpen, GraduationCap, Megaphone, Tv, Filter, Shield, ScrollText,
-  ChevronRight, X, BadgeCheck,
+  ChevronRight, X,
 } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useNominees, type EnrichedDatabaseNominee } from "@/hooks/useNominees";
-import { PILLARS } from "@/data/pillars";
-import { RECOGNITION_TIERS_2026 } from "@/config/recognitionArchitecture2026";
 import { DIRECTORY_NAME, PRIMARY_CTAS, REGION_FRAMING, TRUST_STATEMENT } from "@/config/platformCopy";
 import { AfricaRegionExplorer } from "@/components/nominees/AfricaRegionExplorer";
 import { LandingNomineeCard } from "@/components/nesa/LandingNomineeCard";
@@ -125,28 +123,6 @@ export default function NomineesHubPage() {
     trackEvent("directory_view", { name: DIRECTORY_NAME });
   }, []);
 
-  // -- Dynamic stats (12) ----------------------------------------------------
-  const stats = useMemo(() => {
-    const list = nominees ?? [];
-    const countries = new Set(list.map((n) => n.country).filter(Boolean)).size;
-    const orgs = list.filter((n) => n.imageType === "logo").length;
-    const people = list.filter((n) => n.imageType === "photo").length;
-    return [
-      { label: "Verified Education Enablers", value: list.length },
-      { label: "Award Categories", value: 18 },
-      { label: "Recognition Subcategories", value: 100 },
-      { label: "Recognition Tiers", value: 4 },
-      { label: "Africa Regions", value: 8 },
-      { label: "Global Communities", value: 2 },
-      { label: "Countries Represented", value: countries },
-      { label: "Verified Organisations", value: orgs },
-      { label: "Verified Institutions", value: Math.round(orgs * 0.4) },
-      { label: "Verified Individuals", value: people },
-      { label: "Education Impact Stories", value: Math.max(list.length * 2, 120) },
-      { label: "Education Projects", value: Math.max(list.length * 3, 250) },
-    ];
-  }, [nominees]);
-
   // -- Counts per facet ------------------------------------------------------
   const tierCounts = useMemo(() => {
     const out: Record<string, number> = {};
@@ -158,18 +134,6 @@ export default function NomineesHubPage() {
         slug.includes("influencer") || slug.includes("social") || slug.includes("sport") || slug.includes("music") ? "influencer-education-impact" :
         "gold-blue-garnet";
       out[family] = (out[family] ?? 0) + 1;
-    });
-    return out;
-  }, [nominees]);
-
-  const pillarCounts = useMemo(() => {
-    const out: Record<string, number> = {};
-    (nominees ?? []).forEach((n) => {
-      const slug = String(n.categorySlug ?? "");
-      PILLARS.forEach((p) => {
-        const key = p.slug.split("-")[0];
-        if (slug.includes(key)) out[p.slug] = (out[p.slug] ?? 0) + 1;
-      });
     });
     return out;
   }, [nominees]);
@@ -235,163 +199,9 @@ export default function NomineesHubPage() {
 
       <main>
         {/* ────────────────────────────────────────────────────────────────
-            SECTION 1 — HERO
+            SECTION 1 — BROWSE BY AWARD CATEGORY
         ──────────────────────────────────────────────────────────────── */}
-        <section
-          aria-labelledby="directory-hero"
-          className="relative overflow-hidden border-b border-gold/15 bg-gradient-to-b from-charcoal-dark via-charcoal to-charcoal-light"
-        >
-          <div className="absolute inset-0 opacity-20 pointer-events-none">
-            <div className="absolute -top-32 -right-32 h-96 w-96 rounded-full bg-gold/20 blur-3xl" />
-            <div className="absolute -bottom-32 -left-32 h-96 w-96 rounded-full bg-rose-700/20 blur-3xl" />
-          </div>
-          <div className="container relative max-w-7xl mx-auto px-4 py-16 md:py-24">
-            <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
-              <Badge className="bg-gold/15 text-gold border border-gold/30 mb-5">
-                <BadgeCheck className="h-3.5 w-3.5 mr-1" /> Africa's Verified Education Impact Hub
-              </Badge>
-              <h1
-                id="directory-hero"
-                className="font-playfair text-4xl md:text-6xl lg:text-7xl font-bold text-ivory leading-[1.05] mb-5"
-              >
-                Africa's Education<br />
-                <span className="bg-gradient-to-r from-gold via-amber-300 to-gold bg-clip-text text-transparent">
-                  Impact Directory
-                </span>
-              </h1>
-              <p className="text-ivory/75 text-base md:text-xl max-w-3xl leading-relaxed mb-6">
-                Discover verified Education Enablers creating measurable impact across <strong className="text-ivory">Eight Africa Regions</strong>, Africans in the <strong className="text-ivory">Diaspora</strong> and <strong className="text-ivory">Friends of Africa</strong>.
-              </p>
-              <p className="text-gold/80 font-medium tracking-wide text-sm md:text-base mb-8">
-                Search · Discover · Connect · Celebrate · Support
-              </p>
-
-              {/* Stats grid */}
-              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3 mb-10">
-                {stats.map((s) => (
-                  <div
-                    key={s.label}
-                    className="rounded-xl border border-gold/20 bg-charcoal/40 backdrop-blur p-3 text-center"
-                    aria-label={`${s.value} ${s.label}`}
-                  >
-                    <div className="font-playfair text-2xl md:text-3xl text-gold font-bold">
-                      {isLoading ? "—" : s.value.toLocaleString()}
-                    </div>
-                    <div className="text-[10px] md:text-xs text-ivory/65 mt-1 leading-tight">{s.label}</div>
-                  </div>
-                ))}
-              </div>
-
-              {/* CTAs */}
-              <div className="flex flex-wrap gap-3">
-                <Button asChild size="lg" className="bg-gold hover:bg-gold/90 text-charcoal font-semibold rounded-full">
-                  <Link to="/nominees/catalogue" onClick={() => trackEvent("directory_cta_click", { cta: "recognition_catalogue" })}>
-                    <Trophy className="h-4 w-4 mr-2" /> Open Recognition Catalogue
-                  </Link>
-                </Button>
-                <Button asChild size="lg" variant="outline" className="border-gold/40 text-ivory hover:bg-gold/10 rounded-full">
-                  <a href="#tiers" onClick={() => trackEvent("directory_cta_click", { cta: "explore_tiers" })}>
-                    <Trophy className="h-4 w-4 mr-2" /> Explore Recognition Tiers
-                  </a>
-                </Button>
-                <Button asChild size="lg" variant="outline" className="border-gold/40 text-ivory hover:bg-gold/10 rounded-full">
-                  <a href="#categories" onClick={() => trackEvent("directory_cta_click", { cta: "browse_categories" })}>
-                    <BookOpen className="h-4 w-4 mr-2" /> Browse Categories
-                  </a>
-                </Button>
-                <Button asChild size="lg" variant="outline" className="border-gold/40 text-ivory hover:bg-gold/10 rounded-full">
-                  <a href="#discovery" onClick={() => trackEvent("directory_cta_click", { cta: "search" })}>
-                    <Search className="h-4 w-4 mr-2" /> Search Education Enablers
-                  </a>
-                </Button>
-                <Button asChild size="lg" className="bg-rose-700 hover:bg-rose-800 text-ivory rounded-full">
-                  <Link to={PRIMARY_CTAS.nominate.href} onClick={() => trackEvent("directory_cta_click", { cta: "nominate" })}>
-                    <Sparkles className="h-4 w-4 mr-2" /> Nominate an Enabler
-                  </Link>
-                </Button>
-                <Button asChild size="lg" variant="ghost" className="text-ivory hover:bg-ivory/5 rounded-full">
-                  <Link to="/media" onClick={() => trackEvent("directory_cta_click", { cta: "tv" })}>
-                    <Tv className="h-4 w-4 mr-2" /> NESA Africa TV
-                  </Link>
-                </Button>
-              </div>
-            </motion.div>
-          </div>
-        </section>
-
-        {/* ────────────────────────────────────────────────────────────────
-            SECTION 2 — FOUR RECOGNITION TIERS
-        ──────────────────────────────────────────────────────────────── */}
-        <Section id="tiers" eyebrow="01 · Recognition Architecture" title="Four Recognition Tiers">
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
-            {TIER_META.map((t, i) => (
-              <motion.div
-                key={t.slug}
-                initial={{ opacity: 0, y: 16 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.08 }}
-              >
-                <Link
-                  to={t.href}
-                  onClick={() => trackEvent("directory_tier_click", { tier: t.slug })}
-                  className={`group block rounded-2xl border border-gold/20 bg-gradient-to-br ${t.accent} p-6 hover:border-gold/60 transition-all h-full`}
-                >
-                  <t.Icon className="h-9 w-9 text-gold mb-4" />
-                  <h3 className="font-playfair text-xl text-ivory font-semibold mb-1">{t.title}</h3>
-                  <p className="text-[11px] uppercase tracking-wider text-gold/80 mb-3">{t.period}</p>
-                  <ul className="text-sm text-ivory/70 space-y-1 mb-4">
-                    {t.bullets.map((b) => <li key={b}>· {b}</li>)}
-                  </ul>
-                  <div className="text-xs text-gold flex items-center gap-1">
-                    {tierCounts[t.slug] ?? 0} verified enablers
-                    <ArrowRight className="h-3 w-3 ml-1 group-hover:translate-x-1 transition" />
-                  </div>
-                </Link>
-              </motion.div>
-            ))}
-          </div>
-        </Section>
-
-        {/* ────────────────────────────────────────────────────────────────
-            SECTION 3 — NINE RECOGNITION PILLARS
-        ──────────────────────────────────────────────────────────────── */}
-        <Section eyebrow="02 · Themes of Impact" title="Nine Recognition Pillars" sub="Each pillar represents a verified force enabling Education for All across Africa.">
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-            {PILLARS.map((p) => {
-              const PIcon = p.icon ?? Star;
-              return (
-                <Link
-                  key={p.slug}
-                  to={`/awards/pillars/${p.slug}`}
-                  onClick={() => trackEvent("directory_pillar_click", { pillar: p.slug })}
-                  className="group rounded-2xl border border-gold/15 bg-charcoal-light/40 p-5 hover:border-gold/50 hover:bg-charcoal-light/70 transition-all"
-                >
-                  <div className="flex items-start justify-between mb-3">
-                    <PIcon className="h-7 w-7 text-gold" />
-                    <Badge variant="outline" className="border-gold/30 text-gold text-[10px]">
-                      Pillar {p.number}
-                    </Badge>
-                  </div>
-                  <h3 className="font-playfair text-lg text-ivory mb-1">{p.shortTitle}</h3>
-                  <p className="text-xs text-gold/70 italic mb-2">{p.sellLine}</p>
-                  <p className="text-sm text-ivory/65 line-clamp-3">{p.intro?.[0]}</p>
-                  <div className="mt-4 flex items-center justify-between text-xs">
-                    <span className="text-ivory/60">{pillarCounts[p.slug] ?? 0} enablers</span>
-                    <span className="text-gold flex items-center gap-1 group-hover:gap-2 transition-all">
-                      Explore <ArrowRight className="h-3 w-3" />
-                    </span>
-                  </div>
-                </Link>
-              );
-            })}
-          </div>
-        </Section>
-
-        {/* ────────────────────────────────────────────────────────────────
-            SECTION 4 — BROWSE BY AWARD CATEGORY
-        ──────────────────────────────────────────────────────────────── */}
-        <Section id="categories" eyebrow={`03 · ${categoryCounts.length || 18} Categories`} title="Browse by Award Category" sub="Every category curates a verified roster of Education Enablers. Click any card to open its dedicated page.">
+        <Section id="categories" eyebrow={`01 · ${categoryCounts.length || 18} Categories`} title="Browse by Award Category" sub="Every category curates a verified roster of Education Enablers. Click any card to open its dedicated page.">
           {isLoading ? (
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
               {Array.from({ length: 6 }).map((_, i) => <Skeleton key={i} className="h-32 rounded-2xl bg-charcoal-light/50" />)}
@@ -423,9 +233,9 @@ export default function NomineesHubPage() {
         </Section>
 
         {/* ────────────────────────────────────────────────────────────────
-            SECTION 5 — BROWSE BY RECOGNITION TIER (filter chips)
+            SECTION 2 — BROWSE BY RECOGNITION TIER (filter chips)
         ──────────────────────────────────────────────────────────────── */}
-        <Section eyebrow="04 · Filter" title="Browse by Recognition Tier">
+        <Section eyebrow="02 · Filter" title="Browse by Recognition Tier">
           <div className="flex flex-wrap gap-2">
             <TierChip active={tierFilter === "all"} onClick={() => setTierFilter("all")} label="All Tiers" count={nominees?.length ?? 0} />
             {TIER_META.map((t) => (
@@ -445,9 +255,9 @@ export default function NomineesHubPage() {
         </Section>
 
         {/* ────────────────────────────────────────────────────────────────
-            SECTION 6 — BROWSE BY EDUCATION ENABLER TYPE
+            SECTION 3 — BROWSE BY EDUCATION ENABLER TYPE
         ──────────────────────────────────────────────────────────────── */}
-        <Section eyebrow="05 · Who They Are" title="Browse by Education Enabler Type">
+        <Section eyebrow="03 · Who They Are" title="Browse by Education Enabler Type">
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-2">
             {ENABLER_TYPES.map((e) => (
               <button
@@ -467,9 +277,9 @@ export default function NomineesHubPage() {
         </Section>
 
         {/* ────────────────────────────────────────────────────────────────
-            SECTION 7 — REGIONS + GLOBAL COMMUNITIES
+            SECTION 4 — REGIONS + GLOBAL COMMUNITIES
         ──────────────────────────────────────────────────────────────── */}
-        <Section eyebrow="06 · Geography" title="Browse by Eight Africa Regions" sub={REGION_FRAMING.headline}>
+        <Section eyebrow="04 · Geography" title="Browse by Eight Africa Regions" sub={REGION_FRAMING.headline}>
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3 mb-8">
             {AFRICA_REGIONS.map((r) => (
               <button
@@ -506,16 +316,16 @@ export default function NomineesHubPage() {
         </Section>
 
         {/* ────────────────────────────────────────────────────────────────
-            SECTION 8 — INTERACTIVE AFRICA MAP (existing component)
+            SECTION 5 — INTERACTIVE AFRICA MAP (existing component)
         ──────────────────────────────────────────────────────────────── */}
-        <Section eyebrow="07 · Map" title="Interactive Africa Map">
+        <Section eyebrow="05 · Map" title="Interactive Africa Map">
           <AfricaRegionExplorer />
         </Section>
 
         {/* ────────────────────────────────────────────────────────────────
-            SECTION 9 — FEATURED EDUCATION ENABLERS
+            SECTION 6 — FEATURED EDUCATION ENABLERS
         ──────────────────────────────────────────────────────────────── */}
-        <Section eyebrow="08 · Spotlight" title="Featured Education Enablers">
+        <Section eyebrow="06 · Spotlight" title="Featured Education Enablers">
           {isLoading ? (
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
               {Array.from({ length: 6 }).map((_, i) => <Skeleton key={i} className="h-72 rounded-2xl bg-charcoal-light/50" />)}
@@ -530,9 +340,9 @@ export default function NomineesHubPage() {
         </Section>
 
         {/* ────────────────────────────────────────────────────────────────
-            SECTION 10 — IMPACT STORIES
+            SECTION 7 — IMPACT STORIES
         ──────────────────────────────────────────────────────────────── */}
-        <Section eyebrow="09 · Stories" title="Education Impact Stories" sub="Real change, verified. Behind every enabler is a community transformed.">
+        <Section eyebrow="07 · Stories" title="Education Impact Stories" sub="Real change, verified. Behind every enabler is a community transformed.">
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {IMPACT_STORY_THEMES.map((s, i) => (
               <motion.div
@@ -554,9 +364,9 @@ export default function NomineesHubPage() {
         </Section>
 
         {/* ────────────────────────────────────────────────────────────────
-            SECTION 11 — ADVANCED DISCOVERY
+            SECTION 8 — ADVANCED DISCOVERY
         ──────────────────────────────────────────────────────────────── */}
-        <Section id="discovery" eyebrow="10 · Discover" title="Advanced Discovery" sub="Search Africa's verified education impact ecosystem.">
+        <Section id="discovery" eyebrow="08 · Discover" title="Advanced Discovery" sub="Search Africa's verified education impact ecosystem.">
           <div className="rounded-2xl border border-gold/20 bg-charcoal-light/40 p-4 md:p-6 mb-6">
             <div className="relative mb-4">
               <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-ivory/40" />
