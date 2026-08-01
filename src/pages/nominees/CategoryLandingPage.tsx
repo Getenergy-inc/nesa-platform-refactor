@@ -136,6 +136,10 @@ export default function CategoryLandingPage() {
           <NomineeBreadcrumbs
             items={[
               { label: "Nominees", href: "/nominees" },
+              { label: "Recognition Catalogue", href: "/nominees/catalogue" },
+              ...(tierMapping
+                ? [{ label: tierMapping.tierName, href: `/nominees/catalogue?tier=${tierMapping.tierSlug}` }]
+                : []),
               { label: categoryData.name },
               ...(activeSubName ? [{ label: activeSubName }] : []),
             ]}
@@ -148,6 +152,20 @@ export default function CategoryLandingPage() {
             countryCount={categoryData.countries.length}
             subcategoryCount={categoryData.subcategories.length}
           />
+
+          {tierMapping && (
+            <div className="mt-4 flex flex-wrap items-center gap-3 rounded-xl border border-gold/25 bg-charcoal-light/40 px-4 py-3">
+              <span className="text-xs text-foreground/70">
+                Tier {tierMapping.tierNumber} · {tierMapping.tierName} · {tierMapping.scope}
+              </span>
+              <Button asChild size="sm" className="h-8 bg-gold text-xs text-charcoal hover:bg-gold/90">
+                <Link to={tierMapping.nominateHref}>Open nomination form</Link>
+              </Button>
+              <Button asChild size="sm" variant="outline" className="h-8 border-gold/40 text-xs text-gold">
+                <Link to={`/nominees/catalogue?category=${tierMapping.categorySlug}`}>View in catalogue</Link>
+              </Button>
+            </div>
+          )}
 
           {/* Horizontal Netflix-style subcategory tabs */}
           <SubcategoryTabs
