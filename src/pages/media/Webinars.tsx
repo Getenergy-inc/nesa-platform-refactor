@@ -2,24 +2,34 @@ import { useState } from "react";
 import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Input } from "@/components/ui/input";
 import {
   ArrowLeft,
-  Calendar,
-  Clock,
+  ArrowRight,
+  CalendarDays,
   ExternalLink,
   Mic,
-  Play,
-  Search,
+  ShieldCheck,
   Users,
-  Video,
 } from "lucide-react";
 import eduaidLogo from "@/assets/partners/eduaid-africa-logo.jpeg";
-import { WebinarRegistrationDialog, type WebinarInfo } from "@/components/webinars/WebinarRegistrationDialog";
+import {
+  WebinarRegistrationDialog,
+  type WebinarInfo,
+} from "@/components/webinars/WebinarRegistrationDialog";
 import { trackEvent } from "@/lib/analytics";
-
+import {
+  EDUAID_WEBINAR_SERIES_2026,
+  EDUAID_SERIES_META,
+  EDUAID_CONTENT_BOUNDARY,
+  EDUAID_INTEGRITY_RULE,
+  EDUAID_PRODUCTION_MODEL,
+  EDUAID_STANDARD_CTAS,
+  EDUAID_CROSS_REFERENCE,
+  EDUAID_SERIES_CONTEXT,
+  type EduAidWebinarEpisode,
+} from "@/data/eduaidWebinarSeries2026";
 
 // EduAid-Africa brand colors
 const eduaidColors = {
@@ -28,328 +38,246 @@ const eduaidColors = {
   lightGreen: "#6ba32d",
 };
 
-// 7-week EduAid-Africa Focus Group Series — synced with src/config/schedule.ts (buildTimeline)
-const upcomingWebinars = [
-  {
-    id: 1,
-    title: "Week 1 · Influencer Education Impact FGD",
-    speaker: "Sports, Music & Social Media Enablers",
-    date: "3 – 7 August 2026",
-    time: "Tuesday · 15:00 WAT",
-    duration: "90 min",
-    registrations: 1450,
-    category: "Influencers",
-  },
-  {
-    id: 2,
-    title: "Week 2 · Africa Education Icon FGD",
-    speaker: "Philanthropy · Literacy · Technical Education",
-    date: "10 – 14 August 2026",
-    time: "Tuesday · 15:00 WAT",
-    duration: "90 min",
-    registrations: 1320,
-    category: "Icon",
-  },
-  {
-    id: 3,
-    title: "Week 3 · Gold–Blue Garnet I — CSR, STEM & EdTech",
-    speaker: "Corporate, STEM & EdTech Enablers",
-    date: "17 – 21 August 2026",
-    time: "Tuesday · 15:00 WAT",
-    duration: "90 min",
-    registrations: 1180,
-    category: "Gold–Blue Garnet",
-  },
-  {
-    id: 4,
-    title: "Week 4 · Gold–Blue Garnet II — Media, Creative Arts & Policy",
-    speaker: "Media, Creative & Policy Enablers",
-    date: "24 – 28 August 2026",
-    time: "Tuesday · 15:00 WAT",
-    duration: "90 min",
-    registrations: 1075,
-    category: "Gold–Blue Garnet",
-  },
-  {
-    id: 5,
-    title: "Week 5 · Gold–Blue Garnet III — Partnerships, NGOs & Community Education",
-    speaker: "Partnerships, NGOs & Community Enablers",
-    date: "31 August – 4 September 2026",
-    time: "Tuesday · 15:00 WAT",
-    duration: "90 min",
-    registrations: 990,
-    category: "Gold–Blue Garnet",
-  },
-  {
-    id: 6,
-    title: "Week 6 · Platinum Institutions — Government, Universities & Faith-Based",
-    speaker: "Institutional Enablers of Education for All",
-    date: "7 – 11 September 2026",
-    time: "Tuesday · 15:00 WAT",
-    duration: "90 min",
-    registrations: 1240,
-    category: "Platinum",
-  },
-  {
-    id: 7,
-    title: "Week 7 · Continental Pre-Voting Forum & AGC Voting Education",
-    speaker: "NESA-Africa Voting Integrity Panel",
-    date: "14 – 15 September 2026",
-    time: "Monday–Tuesday · 15:00 WAT",
-    duration: "120 min",
-    registrations: 1680,
-    category: "Pre-Voting",
-  },
-];
-
-const pastWebinars = [
-  { title: "NRC Review Process Explained", views: "4.2K", duration: "75 min" },
-  { title: "Gold Category Nomination Tips", views: "3.8K", duration: "75 min" },
-  { title: "Education Policy in West Africa", views: "2.9K", duration: "75 min" },
-  { title: "Digital Learning Best Practices", views: "5.1K", duration: "75 min" },
-];
-
-const categories = ["All", "Influencers", "Icon", "Gold–Blue Garnet", "Platinum", "Pre-Voting"];
-
 export default function Webinars() {
   const [selected, setSelected] = useState<WebinarInfo | null>(null);
   const [open, setOpen] = useState(false);
 
-  const openRegistration = (w: typeof upcomingWebinars[number]) => {
-    trackEvent("webinar_register_open", { webinar_id: String(w.id), title: w.title });
+  const openRegistration = (ep: EduAidWebinarEpisode) => {
+    trackEvent("webinar_register_open", { webinar_id: ep.id, title: ep.title });
     setSelected({
-      id: w.id,
-      title: w.title,
-      date: w.date,
-      time: w.time,
-      durationMinutes: parseInt(String(w.duration).replace(/\D/g, ""), 10) || 90,
-      category: w.category,
+      id: ep.episode,
+      title: `Episode ${ep.episode} · ${ep.title}`,
+      date: ep.dateLabel,
+      time: "15:00 WAT",
+      durationMinutes: 90,
+      category: ep.tiers,
     });
     setOpen(true);
   };
 
-  const openNextWebinar = () => {
-    if (upcomingWebinars.length > 0) openRegistration(upcomingWebinars[0]);
-  };
-
   return (
     <>
-
       <Helmet>
-        <title>EduAid-Africa Webinar Series | NESA-Africa Educational Webinars</title>
+        <title>EduAid-Africa Webinar Series Timetable | NESA-Africa 2026</title>
         <meta
           name="description"
-          content="Join the EduAid-Africa Webinar Series — 15-25 educational sessions on education funding, policy, STEM, and partnerships across Africa."
+          content="Full timetable for the EduAid-Africa Webinar Series 2026 — 7 bi-weekly episodes from 20 August to 12 November 2026, with linked NESA-Africa recognition tiers and integrity rules."
         />
       </Helmet>
 
       <div className="min-h-screen bg-charcoal">
-        {/* EduAid Hero - branded section */}
-        <section 
-          className="relative py-20 lg:py-28 overflow-hidden"
-          style={{ 
-            background: `linear-gradient(135deg, ${eduaidColors.green}15 0%, ${eduaidColors.brown}10 50%, transparent 100%)` 
+        {/* Hero */}
+        <section
+          className="relative overflow-hidden py-16 lg:py-24"
+          style={{
+            background: `linear-gradient(135deg, ${eduaidColors.green}15 0%, ${eduaidColors.brown}10 50%, transparent 100%)`,
           }}
         >
-          {/* Decorative elements */}
-          <div 
-            className="absolute top-0 right-0 w-96 h-96 rounded-full blur-3xl opacity-20"
-            style={{ backgroundColor: eduaidColors.green }}
-          />
-          <div 
-            className="absolute bottom-0 left-0 w-64 h-64 rounded-full blur-3xl opacity-15"
-            style={{ backgroundColor: eduaidColors.brown }}
-          />
-          
-          <div className="container mx-auto px-4 relative z-10">
+          <div className="container relative z-10 mx-auto px-4">
             <Link
               to="/media"
-              className="mb-6 inline-flex items-center gap-2 text-sm text-white/60 hover:text-white transition-colors"
+              className="mb-6 inline-flex items-center gap-2 text-sm text-white/60 transition-colors hover:text-white"
             >
               <ArrowLeft className="h-4 w-4" />
               Back to Media Hub
             </Link>
-            
-            <div className="flex flex-col lg:flex-row items-center gap-8 lg:gap-12">
-              {/* EduAid Logo */}
+
+            <div className="flex flex-col items-center gap-8 lg:flex-row lg:gap-12">
               <div className="flex-shrink-0">
-                <div className="relative">
-                  <div 
-                    className="absolute -inset-4 rounded-2xl blur-xl opacity-30"
-                    style={{ backgroundColor: eduaidColors.green }}
-                  />
-                  <div className="relative bg-white rounded-2xl p-6 shadow-2xl">
-                    <img 
-                      src={eduaidLogo} 
-                      alt="EduAid-Africa" 
-                      className="w-48 h-auto object-contain"
-                    />
-                  </div>
+                <div className="rounded-2xl bg-white p-5 shadow-2xl">
+                  <img src={eduaidLogo} alt="EduAid-Africa" className="h-auto w-40 object-contain" />
                 </div>
               </div>
-              
-              {/* Content */}
+
               <div className="flex-1 text-center lg:text-left">
-                <div className="mb-4 flex items-center justify-center lg:justify-start gap-2">
-                  <div 
-                    className="p-2 rounded-lg"
-                    style={{ backgroundColor: `${eduaidColors.green}20` }}
-                  >
+                <div className="mb-4 flex items-center justify-center gap-2 lg:justify-start">
+                  <div className="rounded-lg p-2" style={{ backgroundColor: `${eduaidColors.green}20` }}>
                     <Mic className="h-5 w-5" style={{ color: eduaidColors.green }} />
                   </div>
-                  <span 
+                  <span
                     className="text-sm font-medium uppercase tracking-wider"
                     style={{ color: eduaidColors.green }}
                   >
                     ...funding through partnerships
                   </span>
                 </div>
-                
-                <h1 className="mb-4 font-display text-4xl font-bold text-white md:text-5xl">
+
+                <h1 className="mb-3 font-display text-3xl font-bold text-white md:text-5xl">
                   <span style={{ color: eduaidColors.green }}>EduAid-Africa</span>{" "}
                   <span className="text-white">Webinar Series</span>
                 </h1>
-                
-                <p className="mb-8 text-lg text-white/70 max-w-2xl">
-                  15-25 expert-led webinars per season covering education funding, partnerships, 
-                  policy innovation, and best practices across Africa. Each session is 75 minutes.
+                <p className="mb-6 max-w-2xl text-lg text-white/70">
+                  {EDUAID_SERIES_META.strapline}
                 </p>
-                
-                <div className="flex flex-wrap justify-center lg:justify-start gap-4">
+
+                <div className="flex flex-wrap justify-center gap-3 lg:justify-start">
                   <Button
                     size="lg"
-                    className="text-white border-0 shadow-lg"
+                    className="border-0 text-white shadow-lg"
                     style={{ backgroundColor: eduaidColors.green }}
-                    onClick={openNextWebinar}
+                    onClick={() => openRegistration(EDUAID_WEBINAR_SERIES_2026[0])}
                   >
-                    <Calendar className="mr-2 h-5 w-5" />
-                    Register for Next Webinar
+                    <CalendarDays className="mr-2 h-5 w-5" />
+                    Register for Episode 1
                   </Button>
-
-                  <Button 
-                    size="lg" 
-                    variant="outline" 
+                  <Button
+                    asChild
+                    size="lg"
+                    variant="outline"
                     className="text-white hover:bg-white/10"
                     style={{ borderColor: eduaidColors.brown }}
                   >
-                    <ExternalLink className="mr-2 h-4 w-4" />
-                    Visit EduAid-Africa
+                    <a href={EDUAID_CROSS_REFERENCE.href} target="_blank" rel="noopener noreferrer">
+                      <ExternalLink className="mr-2 h-4 w-4" />
+                      Visit EduAid-Africa
+                    </a>
                   </Button>
                 </div>
               </div>
             </div>
           </div>
-          
-          {/* Bottom border gradient */}
-          <div 
+
+          <div
             className="absolute bottom-0 left-0 right-0 h-1"
-            style={{ 
-              background: `linear-gradient(90deg, transparent, ${eduaidColors.green}, ${eduaidColors.brown}, transparent)` 
+            style={{
+              background: `linear-gradient(90deg, transparent, ${eduaidColors.green}, ${eduaidColors.brown}, transparent)`,
             }}
           />
         </section>
 
-        {/* Search & Filters - EduAid themed */}
-        <section className="bg-charcoal/95 py-8">
+        {/* Cross-reference line — platform firewall */}
+        <section className="border-y border-white/10 bg-white/5 py-5">
           <div className="container mx-auto px-4">
-            <div className="mx-auto flex max-w-4xl flex-col gap-4 sm:flex-row">
-              <div className="relative flex-1">
-                <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-white/40" />
-                <Input
-                  placeholder="Search EduAid webinars..."
-                  className="border-white/10 bg-white/5 pl-10 text-white placeholder:text-white/40"
-                  style={{ 
-                    borderColor: `${eduaidColors.green}30`,
-                  }}
-                />
-              </div>
-              <div className="flex flex-wrap gap-2">
-                {categories.map((cat, index) => (
-                  <Badge
-                    key={cat}
-                    variant="outline"
-                    className="cursor-pointer transition-colors"
-                    style={{
-                      borderColor: index === 0 ? eduaidColors.green : 'rgba(255,255,255,0.2)',
-                      backgroundColor: index === 0 ? `${eduaidColors.green}20` : 'transparent',
-                      color: index === 0 ? eduaidColors.lightGreen : 'rgba(255,255,255,0.7)',
-                    }}
-                  >
-                    {cat}
-                  </Badge>
-                ))}
-              </div>
-            </div>
+            <p className="text-center text-sm text-white/75">
+              {EDUAID_CROSS_REFERENCE.text}{" "}
+              <a
+                href={EDUAID_CROSS_REFERENCE.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="font-medium underline"
+                style={{ color: eduaidColors.lightGreen }}
+              >
+                {EDUAID_CROSS_REFERENCE.linkLabel}
+              </a>
+            </p>
           </div>
         </section>
 
-        {/* Upcoming Webinars - EduAid branded */}
-        <section className="bg-charcoal py-16 lg:py-24">
+        {/* Full timetable */}
+        <section className="py-14 lg:py-20">
           <div className="container mx-auto px-4">
-            <div className="flex items-center gap-3 mb-8">
-              <img src={eduaidLogo} alt="" className="h-8 w-auto rounded" />
-              <h2 className="font-display text-2xl font-bold text-white">
-                Upcoming Webinars
-              </h2>
+            <h2 className="mb-2 font-display text-2xl font-bold text-white md:text-3xl">
+              Full Timetable — 7 Episodes
+            </h2>
+            <p className="mb-8 text-white/60">
+              Bi-weekly · {EDUAID_SERIES_META.seriesStartLabel} – {EDUAID_SERIES_META.seriesEndLabel}
+            </p>
+
+            {/* Desktop table */}
+            <div className="hidden overflow-x-auto rounded-xl border border-white/10 lg:block">
+              <table className="w-full text-left text-sm">
+                <caption className="sr-only">
+                  EduAid-Africa Webinar Series 2026 timetable — episode, date, topic, linked tiers and competitive status
+                </caption>
+                <thead className="bg-white/5 text-white/70">
+                  <tr>
+                    <th scope="col" className="px-4 py-3 font-semibold">Ep</th>
+                    <th scope="col" className="px-4 py-3 font-semibold">Date</th>
+                    <th scope="col" className="px-4 py-3 font-semibold">Topic</th>
+                    <th scope="col" className="px-4 py-3 font-semibold">Linked NESA-Africa Tier(s)</th>
+                    <th scope="col" className="px-4 py-3 font-semibold">Competitive Status</th>
+                    <th scope="col" className="px-4 py-3 font-semibold sr-only">Register</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {EDUAID_WEBINAR_SERIES_2026.map((ep) => (
+                    <tr key={ep.id} className="border-t border-white/10 align-top">
+                      <td className="px-4 py-4 font-semibold" style={{ color: eduaidColors.lightGreen }}>
+                        {ep.episode}
+                      </td>
+                      <td className="whitespace-nowrap px-4 py-4 text-white/80">{ep.dateLabel}</td>
+                      <td className="px-4 py-4">
+                        <span className="font-medium text-white">{ep.title}</span>
+                        <span className="block text-white/60">{ep.summary}</span>
+                        {ep.pilot && (
+                          <Badge className="mt-2" style={{ backgroundColor: `${eduaidColors.brown}30`, color: "#f0d9a0" }}>
+                            Pilot episode
+                          </Badge>
+                        )}
+                      </td>
+                      <td className="px-4 py-4 text-white/70">{ep.tiers}</td>
+                      <td className="px-4 py-4">
+                        <Badge
+                          variant="outline"
+                          className={
+                            ep.competitiveStatus === "icon-boundary"
+                              ? "border-amber-400/40 text-amber-200"
+                              : "border-white/20 text-white/70"
+                          }
+                        >
+                          {ep.competitiveLabel}
+                        </Badge>
+                      </td>
+                      <td className="px-4 py-4">
+                        <Button
+                          size="sm"
+                          className="text-white"
+                          style={{ backgroundColor: eduaidColors.green }}
+                          onClick={() => openRegistration(ep)}
+                        >
+                          Register
+                        </Button>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
             </div>
-            <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-              {upcomingWebinars.map((webinar) => (
-                <Card 
-                  key={webinar.id} 
-                  className="border-white/10 bg-white/5 overflow-hidden group hover:border-opacity-30 transition-colors"
+
+            {/* Mobile cards */}
+            <div className="grid gap-4 lg:hidden">
+              {EDUAID_WEBINAR_SERIES_2026.map((ep) => (
+                <Card
+                  key={ep.id}
+                  className="overflow-hidden border bg-white/5"
                   style={{ borderColor: `${eduaidColors.green}20` }}
                 >
-                  {/* Top accent bar */}
-                  <div 
+                  <div
                     className="h-1 w-full"
-                    style={{ 
-                      background: `linear-gradient(90deg, ${eduaidColors.green}, ${eduaidColors.brown})` 
-                    }}
+                    style={{ background: `linear-gradient(90deg, ${eduaidColors.green}, ${eduaidColors.brown})` }}
                   />
-                  <CardHeader>
-                    <div className="flex items-center justify-between">
-                      <Badge 
-                        style={{ 
-                          backgroundColor: `${eduaidColors.green}20`,
-                          color: eduaidColors.lightGreen,
-                        }}
-                      >
-                        {webinar.category}
+                  <CardHeader className="pb-3">
+                    <div className="flex items-center justify-between gap-2">
+                      <Badge style={{ backgroundColor: `${eduaidColors.green}20`, color: eduaidColors.lightGreen }}>
+                        Episode {ep.episode}
                       </Badge>
-                      <Badge variant="outline" className="border-white/20 text-white/60">
-                        <Clock className="mr-1 h-3 w-3" />
-                        {webinar.duration}
-                      </Badge>
+                      <span className="text-sm text-white/70">{ep.dateLabel}</span>
                     </div>
-                    <CardTitle className="mt-3 text-lg text-white group-hover:text-opacity-90">
-                      {webinar.title}
-                    </CardTitle>
-                    <CardDescription className="text-white/60">
-                      {webinar.speaker}
-                    </CardDescription>
+                    <CardTitle className="mt-2 text-lg text-white">{ep.title}</CardTitle>
                   </CardHeader>
-                  <CardContent className="space-y-4">
-                    <div className="flex items-center justify-between text-sm">
-                      <div className="flex items-center gap-2 text-white/60">
-                        <Calendar className="h-4 w-4" />
-                        {webinar.date}
-                      </div>
-                      <div className="flex items-center gap-2 text-white/60">
-                        <Users className="h-4 w-4" />
-                        {webinar.registrations.toLocaleString()}
-                      </div>
-                    </div>
-                    <div className="text-sm" style={{ color: eduaidColors.lightGreen }}>
-                      {webinar.time}
-                    </div>
+                  <CardContent className="space-y-3">
+                    <p className="text-sm text-white/60">{ep.summary}</p>
+                    <p className="text-sm text-white/70">
+                      <span className="text-white/50">Linked tier(s): </span>
+                      {ep.tiers}
+                    </p>
+                    <Badge
+                      variant="outline"
+                      className={
+                        ep.competitiveStatus === "icon-boundary"
+                          ? "border-amber-400/40 text-amber-200"
+                          : "border-white/20 text-white/70"
+                      }
+                    >
+                      {ep.competitiveLabel}
+                    </Badge>
                     <Button
                       className="w-full text-white"
                       style={{ backgroundColor: eduaidColors.green }}
-                      onClick={() => openRegistration(webinar)}
+                      onClick={() => openRegistration(ep)}
                     >
-                      Register Free
+                      Register
                     </Button>
-
                   </CardContent>
                 </Card>
               ))}
@@ -357,121 +285,101 @@ export default function Webinars() {
           </div>
         </section>
 
-        {/* Past Webinars */}
-        <section className="bg-charcoal/95 py-16 lg:py-24">
-          <div className="container mx-auto px-4">
-            <div className="flex items-center gap-3 mb-8">
-              <div 
-                className="p-2 rounded-lg"
-                style={{ backgroundColor: `${eduaidColors.brown}20` }}
-              >
-                <Video className="h-5 w-5" style={{ color: eduaidColors.brown }} />
-              </div>
-              <h2 className="font-display text-2xl font-bold text-white">
-                Watch Past Webinars
-              </h2>
+        {/* Standing rules */}
+        <section className="bg-charcoal/95 py-14">
+          <div className="container mx-auto grid gap-6 px-4 lg:grid-cols-2">
+            <div className="rounded-xl border border-amber-400/25 bg-amber-400/5 p-6">
+              <h3 className="mb-3 flex items-center gap-2 font-display text-lg font-bold text-amber-200">
+                <ShieldCheck className="h-5 w-5" />
+                {EDUAID_CONTENT_BOUNDARY.heading}
+              </h3>
+              <p className="text-sm text-white/75">{EDUAID_CONTENT_BOUNDARY.body}</p>
             </div>
-            <div className="mx-auto grid max-w-4xl gap-4">
-              {pastWebinars.map((webinar) => (
-                <div
-                  key={webinar.title}
-                  className="flex items-center justify-between rounded-lg border bg-white/5 p-4 hover:bg-white/10 transition-colors"
-                  style={{ borderColor: `${eduaidColors.green}20` }}
-                >
-                  <div className="flex items-center gap-4">
-                    <div 
-                      className="flex h-12 w-12 items-center justify-center rounded-lg"
-                      style={{ backgroundColor: `${eduaidColors.green}15` }}
+            <div className="rounded-xl border border-white/10 bg-white/5 p-6">
+              <h3 className="mb-3 font-display text-lg font-bold text-white">
+                Core integrity rule — every episode
+              </h3>
+              <blockquote className="border-l-2 pl-4 text-sm italic text-white/75" style={{ borderColor: eduaidColors.green }}>
+                “{EDUAID_INTEGRITY_RULE}”
+              </blockquote>
+            </div>
+          </div>
+        </section>
+
+        {/* Production model */}
+        <section className="py-14">
+          <div className="container mx-auto px-4">
+            <h2 className="mb-2 flex items-center gap-2 font-display text-2xl font-bold text-white">
+              <Users className="h-6 w-6" style={{ color: eduaidColors.lightGreen }} />
+              {EDUAID_PRODUCTION_MODEL.heading}
+            </h2>
+            <div className="mt-6 grid gap-6 lg:grid-cols-2">
+              <ul className="space-y-3">
+                {EDUAID_PRODUCTION_MODEL.notes.map((note) => (
+                  <li key={note} className="flex gap-3 text-sm text-white/75">
+                    <span className="mt-1.5 h-1.5 w-1.5 flex-shrink-0 rounded-full" style={{ backgroundColor: eduaidColors.green }} />
+                    {note}
+                  </li>
+                ))}
+              </ul>
+              <div className="rounded-xl border border-white/10 bg-white/5 p-6">
+                <p className="mb-3 text-sm font-semibold text-white">
+                  {EDUAID_PRODUCTION_MODEL.seats}-seat FGD · 4 breakout rooms per episode
+                </p>
+                <div className="grid gap-2 sm:grid-cols-2">
+                  {EDUAID_PRODUCTION_MODEL.breakoutRooms.map((room) => (
+                    <div
+                      key={room}
+                      className="rounded-lg border px-3 py-2 text-sm text-white/80"
+                      style={{ borderColor: `${eduaidColors.green}30` }}
                     >
-                      <Video className="h-5 w-5" style={{ color: eduaidColors.green }} />
+                      {room}
                     </div>
-                    <div>
-                      <h3 className="font-medium text-white">{webinar.title}</h3>
-                      <p className="text-sm text-white/60">{webinar.views} views • {webinar.duration}</p>
-                    </div>
-                  </div>
-                  <Button 
-                    size="sm" 
-                    variant="outline" 
-                    className="text-white hover:bg-white/10"
-                    style={{ borderColor: `${eduaidColors.green}40` }}
-                  >
-                    <Play className="mr-2 h-4 w-4" />
-                    Watch
-                  </Button>
+                  ))}
                 </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Standard CTAs */}
+        <section
+          className="py-14"
+          style={{ background: `linear-gradient(135deg, ${eduaidColors.green}10 0%, transparent 60%, ${eduaidColors.brown}10 100%)` }}
+        >
+          <div className="container mx-auto px-4">
+            <h2 className="mb-6 font-display text-2xl font-bold text-white">
+              Standard Call-to-Action — every episode
+            </h2>
+            <div className="grid gap-3 md:grid-cols-2 lg:grid-cols-3">
+              {EDUAID_STANDARD_CTAS.map((cta) => (
+                <Link
+                  key={cta.label}
+                  to={cta.href}
+                  className="group flex items-center justify-between gap-3 rounded-xl border bg-white/5 px-4 py-4 text-sm text-white/85 transition-colors hover:bg-white/10"
+                  style={{ borderColor: `${eduaidColors.green}25` }}
+                >
+                  {cta.label}
+                  <ArrowRight className="h-4 w-4 flex-shrink-0 transition-transform group-hover:translate-x-1" style={{ color: eduaidColors.lightGreen }} />
+                </Link>
               ))}
             </div>
           </div>
         </section>
 
-        {/* Stats - EduAid branded */}
-        <section 
-          className="py-12"
-          style={{ 
-            background: `linear-gradient(135deg, ${eduaidColors.green}10 0%, transparent 50%, ${eduaidColors.brown}10 100%)` 
-          }}
-        >
+        {/* Where this sits in the master timetable */}
+        <section className="border-t border-white/10 py-12">
           <div className="container mx-auto px-4">
-            <div className="mx-auto grid max-w-3xl gap-8 text-center md:grid-cols-4">
-              <div>
-                <div className="mb-2 text-3xl font-bold" style={{ color: eduaidColors.lightGreen }}>
-                  25
-                </div>
-                <div className="text-sm text-white/60">Webinars/Season</div>
-              </div>
-              <div>
-                <div className="mb-2 text-3xl font-bold" style={{ color: eduaidColors.lightGreen }}>
-                  75 min
-                </div>
-                <div className="text-sm text-white/60">Each Session</div>
-              </div>
-              <div>
-                <div className="mb-2 text-3xl font-bold" style={{ color: eduaidColors.lightGreen }}>
-                  50+
-                </div>
-                <div className="text-sm text-white/60">Expert Speakers</div>
-              </div>
-              <div>
-                <div className="mb-2 text-3xl font-bold" style={{ color: eduaidColors.lightGreen }}>
-                  Free
-                </div>
-                <div className="text-sm text-white/60">Registration</div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* EduAid Partnership Banner */}
-        <section className="bg-charcoal py-12">
-          <div className="container mx-auto px-4">
-            <div 
-              className="max-w-4xl mx-auto rounded-2xl p-8 text-center"
-              style={{ 
-                background: `linear-gradient(135deg, ${eduaidColors.green}15, ${eduaidColors.brown}10)`,
-                border: `1px solid ${eduaidColors.green}30`,
-              }}
-            >
-              <img 
-                src={eduaidLogo} 
-                alt="EduAid-Africa" 
-                className="h-16 w-auto mx-auto mb-4 rounded-lg bg-white p-2"
-              />
-              <h3 className="text-xl font-display font-bold text-white mb-2">
-                Powered by EduAid-Africa
-              </h3>
-              <p className="text-white/70 mb-6 max-w-2xl mx-auto">
-                EduAid-Africa is the funding and partnerships arm of SCEF, dedicated to mobilizing 
-                resources for educational development across the continent.
-              </p>
-              <Button 
-                className="text-white"
-                style={{ backgroundColor: eduaidColors.green }}
-              >
-                <ExternalLink className="mr-2 h-4 w-4" />
-                Learn More About EduAid-Africa
-              </Button>
-            </div>
+            <h2 className="mb-3 font-display text-xl font-bold text-white">
+              Where this sits in the master timetable
+            </h2>
+            <p className="max-w-3xl text-sm text-white/70">{EDUAID_SERIES_CONTEXT}</p>
+            <Button asChild variant="outline" className="mt-5 text-white hover:bg-white/10" style={{ borderColor: `${eduaidColors.green}40` }}>
+              <Link to="/about/timeline">
+                View the full 2026 cycle calendar
+                <ArrowRight className="ml-2 h-4 w-4" />
+              </Link>
+            </Button>
           </div>
         </section>
       </div>
@@ -480,4 +388,3 @@ export default function Webinars() {
     </>
   );
 }
-
