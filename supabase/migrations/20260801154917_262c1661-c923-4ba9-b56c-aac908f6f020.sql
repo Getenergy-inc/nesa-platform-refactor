@@ -1,0 +1,1 @@
+DROP POLICY IF EXISTS "Authenticated view approved nominees" ON public.nominees;
