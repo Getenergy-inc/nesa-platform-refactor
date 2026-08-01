@@ -127,8 +127,9 @@ export function NESAFooter() {
               </div>
             </div>
             <p className="text-white/65 text-xs md:text-sm leading-relaxed mb-4 max-w-sm">
-              Identifying, verifying, recognising, connecting and supporting the
-              Enablers of Education for All Across Africa.
+              Enablers of Education for All across Africa — by Africans in
+              Africa, Diaspora Africans, and Friends of Africa (individuals,
+              companies, or organisations)
             </p>
             <div className="flex gap-2 justify-center md:justify-start mb-4">
               {socialLinks.map((s) => (

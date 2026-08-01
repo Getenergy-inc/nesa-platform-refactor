@@ -10,7 +10,7 @@ export interface Announcement {
 export const ANNOUNCEMENTS: Announcement[] = [
   {
     id: "nominations-open",
-    text: "Public Nominations Open 1 August 2026 · NESA-Africa 2026",
+    text: "Public Nominations Open 30 August 2026 · NESA-Africa 2026",
     href: "/nominate",
     analyticsId: "announcement_nominate",
   },
