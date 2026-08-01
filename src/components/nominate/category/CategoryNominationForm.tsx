@@ -242,6 +242,8 @@ export default function CategoryNominationForm({ content }: Props) {
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
+    // Single-submission guard — the reference is issued exactly once.
+    if (submitting || reference) return;
     const err = validate();
     if (err) {
       toast({ title: "Please complete required fields", description: err, variant: "destructive" });
@@ -249,72 +251,95 @@ export default function CategoryNominationForm({ content }: Props) {
     }
     setSubmitting(true);
     try {
-      // Persist as a draft in localStorage for now — the account-at-submit flow
-      // completes submission on the dedicated confirmation route.
-      const draftKey = `nesa:nomination:${content.slug}:${Date.now()}`;
-      const draft = {
-        slug: content.slug,
-        tier: content.tier,
-        pathwayPrimary: primary,
-        pathwaySecondary: secondary,
-        tags,
-        classificationId,
+      trackEvent("nomination_form_completed", { form: content.slug, tier: content.tier });
+      // Make sure the server draft holds the final values before submitting.
+      await flush();
+
+      const result = await submitPublicNomination({
+        formType: `nominate-2026:${content.slug}`,
+        awardTier: content.tier,
+        categorySlug: content.slug,
+        subcategory: secondary || primary || null,
         nomineeName,
-        nomineeOrg,
         nomineeCountry,
-        nomineeLeadership,
         impactSummary,
-        whatTheyDid,
-        whoBenefited,
-        timeframe,
-        measurableOutcomes,
-        evidence: [evidence1, evidence2, evidence3].filter(Boolean),
-        eligibilityConfirmed,
-        nominatorName,
         nominatorEmail,
-        nominatorPhone,
-        nominatorCountry,
-        nominatorConsent,
-        declaration,
-        createdAt: new Date().toISOString(),
-      };
-      localStorage.setItem(draftKey, JSON.stringify(draft));
-      toast({
-        title: "Nomination captured",
-        description:
-          "Your nomination has been saved. You'll be prompted to confirm your account at submission.",
+        draftToken,
+        payload: {
+          slug: content.slug,
+          tier: content.tier,
+          pathwayPrimary: primary,
+          pathwaySecondary: secondary,
+          tags,
+          classificationId,
+          nomineeName,
+          nomineeOrg,
+          nomineeCountry,
+          nomineeLeadership,
+          impactSummary,
+          whatTheyDid,
+          whoBenefited,
+          timeframe,
+          measurableOutcomes,
+          evidence: [evidence1, evidence2, evidence3].filter(Boolean),
+          eligibilityConfirmed,
+          nominatorName,
+          nominatorEmail,
+          nominatorPhone,
+          nominatorCountry,
+          nominatorConsent,
+          declaration,
+          submittedAt: new Date().toISOString(),
+        },
       });
-      // Reset
-      setPrimary("");
-      setSecondary("");
-      setTags([]);
-      setClassificationId("");
-      setNomineeName("");
-      setNomineeOrg("");
-      setNomineeCountry("");
-      setNomineeLeadership("");
-      setImpactSummary("");
-      setWhatTheyDid("");
-      setWhoBenefited("");
-      setTimeframe("");
-      setMeasurableOutcomes("");
-      setEvidence1("");
-      setEvidence2("");
-      setEvidence3("");
-      setEligibilityConfirmed(false);
-      setNominatorName("");
-      setNominatorEmail("");
-      setNominatorPhone("");
-      setNominatorCountry("");
-      setNominatorConsent(false);
-      setDeclaration(false);
+
+      setReference(result.reference);
+      clearDraft();
+      if (user) {
+        // Signed-in nominators are linked immediately — no interruption.
+        await linkNominationToAccount(result.reference);
+      }
+      toast({
+        title: "Nomination received",
+        description: `Your reference is ${result.reference}.`,
+      });
+      window.setTimeout(
+        () => document.getElementById("nomination-submitted")?.scrollIntoView({ behavior: "smooth", block: "start" }),
+        50,
+      );
+    } catch (submitError) {
+      toast({
+        title: "Submission failed",
+        description:
+          submitError instanceof Error
+            ? submitError.message
+            : "Please try again — your entries have been saved.",
+        variant: "destructive",
+      });
     } finally {
       setSubmitting(false);
     }
   }
 
+  // Post-submission: account creation / confirmation, then the confirmation
+  // message with the reference. The nomination is already recorded.
+  if (reference) {
+    return (
+      <div id="nomination-submitted" className="space-y-4">
+        <NominationAccountAtSubmit
+          reference={reference}
+          defaultEmail={nominatorEmail}
+          defaultFullName={nominatorName}
+          formSlug={content.slug}
+          alreadySignedIn={Boolean(user)}
+        />
+      </div>
+    );
+  }
+
   return (
-    <form onSubmit={handleSubmit} className="space-y-8">
+    <form onSubmit={handleSubmit} onChange={markStarted} className="space-y-8">
+
       {/* Step 1 — Pathway selector */}
       <fieldset className="space-y-4">
         <legend className="font-playfair text-xl text-gold">1. Pathway / Certificate category</legend>
