@@ -162,6 +162,11 @@ function enrichNominee(nominee: DatabaseNominee): EnrichedDatabaseNominee {
     categorySlug: nominee.category_slug || "general",
     geographicCategory: getGeographicCategory(nominee.region, nominee.category_name || null),
     achievement: nominee.bio || nominee.title || "",
+    nrcVerified: nominee.nrc_verified ?? false,
+    acceptanceStatus: nominee.acceptance_status ?? null,
+    awardFamily: nominee.award_family ?? null,
+    recognitionClass: nominee.recognition_class ?? null,
+    nominationYear: nominee.created_at ? new Date(nominee.created_at).getUTCFullYear() : null,
   };
 }
 
