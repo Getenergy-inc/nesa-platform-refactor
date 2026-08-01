@@ -936,7 +936,7 @@ export default function EduAid() {
                 </div>
                 <div>
                   <h3 className="text-xl font-bold text-white">EduAid-Africa Webinar Series</h3>
-                  <p className="text-white/60">Expert-led educational sessions every month</p>
+                  <p className="text-white/60">7 bi-weekly episodes · 20 August – 12 November 2026</p>
                 </div>
               </div>
               <Button 
