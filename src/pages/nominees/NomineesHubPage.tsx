@@ -316,9 +316,9 @@ export default function NomineesHubPage() {
         </Section>
 
         {/* ────────────────────────────────────────────────────────────────
-            SECTION 8 — INTERACTIVE AFRICA MAP (existing component)
+            SECTION 5 — INTERACTIVE AFRICA MAP (existing component)
         ──────────────────────────────────────────────────────────────── */}
-        <Section eyebrow="07 · Map" title="Interactive Africa Map">
+        <Section eyebrow="05 · Map" title="Interactive Africa Map">
           <AfricaRegionExplorer />
         </Section>
 
