@@ -8029,6 +8029,13 @@ export type Database = {
             referencedColumns: ["id"]
           },
           {
+            foreignKeyName: "rebuild_nominations_school_id_fkey"
+            columns: ["school_id"]
+            isOneToOne: false
+            referencedRelation: "rebuild_schools_public"
+            referencedColumns: ["id"]
+          },
+          {
             foreignKeyName: "rebuild_nominations_school_region_id_fkey"
             columns: ["school_region_id"]
             isOneToOne: false
@@ -8168,6 +8175,13 @@ export type Database = {
             referencedColumns: ["id"]
           },
           {
+            foreignKeyName: "rebuild_votes_school_id_fkey"
+            columns: ["school_id"]
+            isOneToOne: false
+            referencedRelation: "rebuild_schools_public"
+            referencedColumns: ["id"]
+          },
+          {
             foreignKeyName: "rebuild_votes_season_id_fkey"
             columns: ["season_id"]
             isOneToOne: false
@@ -8248,6 +8262,13 @@ export type Database = {
             columns: ["school_id"]
             isOneToOne: false
             referencedRelation: "rebuild_schools"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "rebuild_winners_school_id_fkey"
+            columns: ["school_id"]
+            isOneToOne: false
+            referencedRelation: "rebuild_schools_public"
             referencedColumns: ["id"]
           },
           {
@@ -11059,6 +11080,13 @@ export type Database = {
             referencedColumns: ["id"]
           },
           {
+            foreignKeyName: "rebuild_nominations_school_id_fkey"
+            columns: ["school_id"]
+            isOneToOne: false
+            referencedRelation: "rebuild_schools_public"
+            referencedColumns: ["id"]
+          },
+          {
             foreignKeyName: "rebuild_nominations_school_region_id_fkey"
             columns: ["school_region_id"]
             isOneToOne: false
@@ -11097,6 +11125,62 @@ export type Database = {
             columns: ["season_id"]
             isOneToOne: false
             referencedRelation: "seasons"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      rebuild_schools_public: {
+        Row: {
+          country: string | null
+          created_at: string | null
+          description: string | null
+          id: string | null
+          is_active: boolean | null
+          name: string | null
+          photo_urls: string[] | null
+          region_id: string | null
+          school_type: string | null
+          student_count: number | null
+          updated_at: string | null
+          verification_status: string | null
+          website: string | null
+        }
+        Insert: {
+          country?: string | null
+          created_at?: string | null
+          description?: string | null
+          id?: string | null
+          is_active?: boolean | null
+          name?: string | null
+          photo_urls?: string[] | null
+          region_id?: string | null
+          school_type?: string | null
+          student_count?: number | null
+          updated_at?: string | null
+          verification_status?: string | null
+          website?: string | null
+        }
+        Update: {
+          country?: string | null
+          created_at?: string | null
+          description?: string | null
+          id?: string | null
+          is_active?: boolean | null
+          name?: string | null
+          photo_urls?: string[] | null
+          region_id?: string | null
+          school_type?: string | null
+          student_count?: number | null
+          updated_at?: string | null
+          verification_status?: string | null
+          website?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "rebuild_schools_region_id_fkey"
+            columns: ["region_id"]
+            isOneToOne: false
+            referencedRelation: "regions"
             referencedColumns: ["id"]
           },
         ]
