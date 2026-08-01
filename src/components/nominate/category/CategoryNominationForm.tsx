@@ -1,12 +1,15 @@
-// Unified nomination form for the 17 dedicated category pages.
-// Renders one of four selector variants for step 1 (pathway/subcategory),
-// then a shared skeleton: Classification → Nominee/Institution info →
-// Evidence (≥2 sources) → Nominator & Declaration.
+// Unified nomination form for the 18 canonical nomination pages
+// (Africa Education Icon, Influencer Education Impact, 7 Platinum,
+// 9 Gold-Blue Garnet). Renders one of four selector variants for step 1
+// (pathway/subcategory), then a shared skeleton: Classification →
+// Nominee/Institution info → Evidence (≥2 sources) → Nominator & Declaration.
 //
-// Submissions POST to the existing native nomination endpoint via the
-// resilient client used elsewhere — no new dependencies.
+// Flow: nominate first → create or confirm account at submission →
+// confirmation with reference → track progress. No account is required to
+// open, fill in, or submit the form; account creation is triggered only by
+// the Submit click and email verification never blocks the submission.
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { toast } from "@/hooks/use-toast";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -25,7 +28,14 @@ import {
   GOVERNANCE_COPY,
   type CategoryContent,
 } from "@/config/nominate2026/categoryContent";
-import { ShieldCheck, Send } from "lucide-react";
+import { ShieldCheck, Send, Loader2, CloudUpload } from "lucide-react";
+import { useAuth } from "@/contexts/AuthContext";
+import { useServerDraft } from "@/features/nominate/useServerDraft";
+import { submitPublicNomination, linkNominationToAccount } from "@/features/nominate/submitPublicNomination";
+import NominationAccountAtSubmit, {
+  NOMINATION_COPY,
+} from "@/components/nominate/NominationAccountAtSubmit";
+import { trackEvent } from "@/lib/analytics";
 
 interface Props {
   content: CategoryContent;
@@ -34,6 +44,8 @@ interface Props {
 export default function CategoryNominationForm({ content }: Props) {
   const classification = CLASSIFICATION_SETS[content.classification];
   const governanceCopy = GOVERNANCE_COPY[content.governance];
+  const { user } = useAuth();
+
 
   const [primary, setPrimary] = useState<string>("");
   const [secondary, setSecondary] = useState<string>("");
