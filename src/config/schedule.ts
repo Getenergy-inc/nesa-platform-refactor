@@ -384,7 +384,7 @@ export function buildTimeline(
       phase: "Phase 5 · Continental Momentum Campaign",
       dateRange: `16 September – 21 October ${ceremonyYear}`,
       description:
-        "Six weeks of continent-wide visibility combining weekly EduAid webinars (Education Innovation · CSR Partnerships · Higher Education · Creative Arts & Media · Inclusive Education · Recognition→Impact→Legacy), Friday NESA-Africa Weekly News and daily momentum activations.",
+        "Six weeks of continent-wide visibility combining the bi-weekly EduAid-Africa Webinar Series (Episodes 3–7 · CSR & Corporate Partnership · Curriculum Innovation · EduTech & Digital Learning · Faith, Leadership & Institutional Impact · Diaspora & International Partnership), Friday NESA-Africa Weekly News and daily momentum activations.",
       type: "awareness",
     },
     {
