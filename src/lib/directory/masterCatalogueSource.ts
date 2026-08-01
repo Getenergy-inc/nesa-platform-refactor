@@ -16,7 +16,7 @@ import { useNominees, type EnrichedDatabaseNominee } from "@/hooks/useNominees";
 import { CATEGORY_MAP } from "@/config/directory/catalogueTaxonomy";
 import { resolveMasterCategorySlug } from "@/lib/directory/masterCategoryRules";
 import { normalizeRegion, type AfricanRegion } from "@/lib/regions";
-import { enrichNomineeGeography } from "@/lib/directory/nomineeEnrichment";
+import { enrichNomineeGeography, standardiseCountry } from "@/lib/directory/nomineeEnrichment";
 import type { GeographicCategory } from "@/lib/nesaData";
 
 export { resolveMasterCategorySlug } from "@/lib/directory/masterCategoryRules";
