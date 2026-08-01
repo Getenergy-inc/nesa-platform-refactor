@@ -216,13 +216,14 @@ export default function NomineeProfile() {
       const nameSlug = hardcodedNominee
         ? hardcodedNominee.name.toLowerCase().trim().replace(/\s+/g, "-").replace(/[^a-z0-9-]/g, "").replace(/-+/g, "-").replace(/^-|-$/g, "")
         : slug;
-      // Read the nominees table directly: the public_nominees VIEW is not
-      // granted to the anon role, but the table exposes published rows via RLS.
+      // Read the PII-free `public_nominees` view: the base `nominees` table is
+      // not readable by anon/authenticated visitors, and the view already
+      // enforces publication_status='published' with a non-incomplete profile.
       const { data, error } = await (supabase as any)
-        .from("nominees")
-        .select("id, name, slug, title, organization, bio, photo_url, logo_url, country, region, renomination_count, publication_status, profile_status, is_platinum, recognition_pathway")
-        .eq("publication_status", "published")
+        .from("public_nominees")
+        .select("id, name, slug, title, organization, bio, photo_url, logo_url, country, region, renomination_count, is_platinum, recognition_pathway")
         .or(`slug.eq.${slug},slug.eq.${nameSlug}`)
+        .limit(1)
         .maybeSingle();
       if (cancelled) return;
       if (error || !data) {
