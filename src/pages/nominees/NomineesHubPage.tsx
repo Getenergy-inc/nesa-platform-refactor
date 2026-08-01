@@ -20,8 +20,6 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useNominees, type EnrichedDatabaseNominee } from "@/hooks/useNominees";
-import { PILLARS } from "@/data/pillars";
-import { RECOGNITION_TIERS_2026 } from "@/config/recognitionArchitecture2026";
 import { DIRECTORY_NAME, PRIMARY_CTAS, REGION_FRAMING, TRUST_STATEMENT } from "@/config/platformCopy";
 import { AfricaRegionExplorer } from "@/components/nominees/AfricaRegionExplorer";
 import { LandingNomineeCard } from "@/components/nesa/LandingNomineeCard";
