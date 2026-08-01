@@ -277,9 +277,9 @@ export default function NomineesHubPage() {
         </Section>
 
         {/* ────────────────────────────────────────────────────────────────
-            SECTION 7 — REGIONS + GLOBAL COMMUNITIES
+            SECTION 4 — REGIONS + GLOBAL COMMUNITIES
         ──────────────────────────────────────────────────────────────── */}
-        <Section eyebrow="06 · Geography" title="Browse by Eight Africa Regions" sub={REGION_FRAMING.headline}>
+        <Section eyebrow="04 · Geography" title="Browse by Eight Africa Regions" sub={REGION_FRAMING.headline}>
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3 mb-8">
             {AFRICA_REGIONS.map((r) => (
               <button
