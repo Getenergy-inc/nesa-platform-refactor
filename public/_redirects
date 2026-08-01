@@ -61,7 +61,7 @@
 /cookie-policy                                               /policies            301
 /language                                                    /                    301
 
-# --- 2. SPA routes (504 explicit paths from src/App.tsx) ---
+# --- 2. SPA routes (505 explicit paths from src/App.tsx) ---
 /recognition/influencer-education-impact/african-sports-icons-supporting-education /index.html          200
 /recognition/influencer-education-impact/african-music-icons-supporting-education /index.html          200
 /recognition/influencer-education-impact/african-social-media-influencers /index.html          200
@@ -263,6 +263,7 @@
 /education-enablers                                          /index.html          200
 /join-local-chapter                                          /index.html          200
 /nominees-directory                                          /index.html          200
+/nominees/catalogue                                          /index.html          200
 /volunteer-chapters                                          /index.html          200
 /volunteer/settings                                          /index.html          200
 nominees/:nomineeId                                          /index.html          200
