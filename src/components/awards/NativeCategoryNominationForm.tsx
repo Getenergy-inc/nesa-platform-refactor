@@ -21,6 +21,8 @@ import { ICON_NOMINEE_TYPES } from "@/config/nomination/iconTaxonomy";
 import { trackEvent } from "@/lib/analytics";
 import { useDraftPersistence } from "@/features/nominate/useDraftPersistence";
 import { AccountAtSubmitPanel } from "@/features/nominate/AccountAtSubmitPanel";
+import { NOMINATION_COPY } from "@/components/nominate/NominationAccountAtSubmit";
+
 import { useAuth } from "@/contexts/AuthContext";
 
 
