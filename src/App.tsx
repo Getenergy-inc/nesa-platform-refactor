@@ -1705,6 +1705,14 @@ const App = () => (
                     }
                   />
                   <Route
+                    path="/nominees/catalogue"
+                    element={
+                      <WithLayout>
+                        <CatalogueIndexPage />
+                      </WithLayout>
+                    }
+                  />
+                  <Route
                     path="/nominees/category/:categorySlug"
                     element={
                       <WithLayout>
