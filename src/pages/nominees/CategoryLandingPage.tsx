@@ -13,12 +13,29 @@ import { NomineeFilterBar, type NomineeSort } from "@/components/nominees/Nomine
 import { FeaturedNomineeSpotlight } from "@/components/nominees/FeaturedNomineeSpotlight";
 import { SubcategoryTabs, type SubcategoryTab } from "@/components/nominees/SubcategoryTabs";
 import { ExploreNomineesCTA } from "@/components/nominees/ExploreNomineesCTA";
+import {
+  resolveTierForCategory,
+  TIER_BY_SLUG,
+} from "@/config/directory/catalogueTaxonomy";
 
 const PAGE_SIZE = 12;
 
 export default function CategoryLandingPage() {
   const { categorySlug } = useParams<{ categorySlug: string }>();
   const { data: nominees, isLoading } = useNominees();
+
+  const tierMapping = useMemo(() => {
+    const mapping = resolveTierForCategory(categorySlug);
+    if (!mapping) return null;
+    const tier = TIER_BY_SLUG[mapping.tier];
+    return {
+      ...mapping,
+      tierSlug: tier.slug,
+      tierName: tier.name,
+      tierNumber: tier.tierNumber,
+    };
+  }, [categorySlug]);
+
 
   const [activeSub, setActiveSub] = useState<string>("");
   const [search, setSearch] = useState("");
