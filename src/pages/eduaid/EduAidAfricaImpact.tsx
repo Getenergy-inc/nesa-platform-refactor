@@ -2,6 +2,8 @@
 // Mounts Rebuild, Special-Needs, Afri-EduTourism, EduAid content verbatim.
 import { useEffect } from "react";
 import { Helmet } from "react-helmet-async";
+import { Link } from "react-router-dom";
+import { EDUAID_CROSS_REFERENCE, EDUAID_SERIES_META } from "@/data/eduaidWebinarSeries2026";
 import EduAid from "@/pages/EduAid";
 import Rebuild from "@/pages/Rebuild";
 import AfriEduTourismPage from "@/pages/AfriEduTourismPage";
@@ -45,7 +47,19 @@ export default function EduAidAfricaImpact() {
       </nav>
 
       <section id="overview"><EduAid /></section>
-      <section id="webinars" aria-hidden="true" />
+      <section id="webinars" className="py-16 px-4 max-w-4xl mx-auto text-center">
+        <h2 className="text-3xl font-bold text-gold mb-4">Pre-Award Webinars, FGDs & Podcasts</h2>
+        <p className="text-white/80 mb-2">
+          {EDUAID_CROSS_REFERENCE.text}{" "}
+          <a href={EDUAID_CROSS_REFERENCE.href} target="_blank" rel="noopener noreferrer" className="text-gold underline">
+            {EDUAID_CROSS_REFERENCE.linkLabel}
+          </a>
+        </p>
+        <p className="text-white/60 text-sm">
+          {EDUAID_SERIES_META.strapline} ·{" "}
+          <Link to="/media/webinars" className="text-gold underline">View the full timetable</Link>
+        </p>
+      </section>
       <section id="rebuild-my-school"><Rebuild /></section>
       <section id="nominate-special-needs-school"><NominateSchool /></section>
       <section id="afri-edutourism"><AfriEduTourismPage /></section>

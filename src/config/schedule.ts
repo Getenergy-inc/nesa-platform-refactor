@@ -152,8 +152,9 @@ export const DEFAULT_SCHEDULE_TEMPLATE: ScheduleTemplate = {
     rebuildMySchoolEnd: { monthDay: "10-22", yearOffset: 1 },
   },
   webinars: {
-    seriesStart: { monthDay: "07-01", yearOffset: 0 },
-    seriesEnd: { monthDay: "10-22", yearOffset: 0 },
+    // EduAid-Africa Webinar Series 2026 — 7 bi-weekly episodes
+    seriesStart: { monthDay: "08-20", yearOffset: 0 },
+    seriesEnd: { monthDay: "11-12", yearOffset: 0 },
   },
   deadlines: {
     iconNominationsClose: { monthDay: "09-12", yearOffset: 0 },
@@ -268,59 +269,59 @@ export function buildTimeline(
       type: "recognition",
     },
     {
-      id: "webinar-week-1",
-      phase: "Webinar Week 1 · Influencer Education Impact FGD",
-      dateRange: `3 – 7 August ${ceremonyYear}`,
+      id: "webinar-episode-1",
+      phase: "EduAid-Africa Webinar Episode 1 · Fame With Purpose",
+      dateRange: "20 August 2026",
       description:
-        "EduAid-Africa Focus Group Discussion opening the 7-week continental series — spotlighting Sports, Music and Social Media Influencers advancing Education for All across Africa.",
+        "Series opener and pilot episode — mobilising influencers and public figures around scholarship support. Linked tier: Influencer Education Impact. Non-competitive.",
       type: "awareness",
     },
     {
-      id: "webinar-week-2",
-      phase: "Webinar Week 2 · Africa Education Icon FGD",
-      dateRange: `10 – 14 August ${ceremonyYear}`,
+      id: "webinar-episode-2",
+      phase: "EduAid-Africa Webinar Episode 2 · Women & Girls in Education",
+      dateRange: "3 September 2026",
       description:
-        "Lifetime recognition dialogue celebrating two decades (2006–2026) of transformational Education Enablers — Philanthropy, Literacy and Technical Education leaders.",
+        "Removing access barriers, in partnership with FAWE Africa. Linked tiers: Influencer / Platinum / Gold-Blue Garnet. Non-competitive.",
       type: "awareness",
     },
     {
-      id: "webinar-week-3",
-      phase: "Webinar Week 3 · Gold–Blue Garnet I — CSR, STEM & EdTech",
-      dateRange: `17 – 21 August ${ceremonyYear}`,
+      id: "webinar-episode-3",
+      phase: "EduAid-Africa Webinar Episode 3 · CSR & Corporate Partnership",
+      dateRange: "17 September 2026",
       description:
-        "Corporate Social Responsibility, STEM leadership and EdTech innovation Enablers of Education for All Across Africa.",
+        "Structured funding pathways for corporate education investment. Linked tier: Gold-Blue Garnet. Non-competitive.",
       type: "awareness",
     },
     {
-      id: "webinar-week-4",
-      phase: "Webinar Week 4 · Gold–Blue Garnet II — Media, Creative Arts & Policy",
-      dateRange: `24 – 28 August ${ceremonyYear}`,
+      id: "webinar-episode-4",
+      phase: "EduAid-Africa Webinar Episode 4 · Curriculum Innovation & Future of Work",
+      dateRange: "1 October 2026",
       description:
-        "Media, Creative Arts and Public Policy Enablers driving education transformation across the continent.",
+        "Reforming what and how Africa's children learn. Linked tiers: Africa Education Icon + Gold-Blue Garnet. Icon content boundary applies.",
       type: "awareness",
     },
     {
-      id: "webinar-week-5",
-      phase: "Webinar Week 5 · Gold–Blue Garnet III — Partnerships, NGOs & Community Education",
-      dateRange: `31 August – 4 September ${ceremonyYear}`,
+      id: "webinar-episode-5",
+      phase: "EduAid-Africa Webinar Episode 5 · EduTech & Digital Learning",
+      dateRange: "15 October 2026",
       description:
-        "Partnerships, NGOs and Community Education Enablers extending learning access to the last mile.",
+        "Technology-driven access and learning outcomes. Linked tier: Gold-Blue Garnet. Non-competitive.",
       type: "awareness",
     },
     {
-      id: "webinar-week-6",
-      phase: "Webinar Week 6 · Platinum Institutions — Government, Universities & Faith-Based",
-      dateRange: `7 – 11 September ${ceremonyYear}`,
+      id: "webinar-episode-6",
+      phase: "EduAid-Africa Webinar Episode 6 · Faith, Leadership & Institutional Impact",
+      dateRange: "29 October 2026",
       description:
-        "Platinum Institutional Enablers — Government agencies, Universities and Faith-Based Organisations advancing Education for All.",
+        "Faith-based, political and institutional contributions to education. Linked tier: Platinum. Non-competitive.",
       type: "awareness",
     },
     {
-      id: "webinar-week-7",
-      phase: "Webinar Week 7 · Continental Pre-Voting Forum & AGC Voting Education",
-      dateRange: `14 – 15 September ${ceremonyYear}`,
+      id: "webinar-episode-7",
+      phase: "EduAid-Africa Webinar Episode 7 · Diaspora & International Partnership",
+      dateRange: "12 November 2026",
       description:
-        "Continental Pre-Voting Forum preparing citizens for the AGC-powered Gold-Blue Garnet voting phases with transparency and integrity training.",
+        "Closing episode — global partners and Diaspora Africans investing in education. Linked tiers: Africa Education Icon + Platinum. Icon content boundary applies.",
       type: "awareness",
     },
     {
@@ -383,7 +384,7 @@ export function buildTimeline(
       phase: "Phase 5 · Continental Momentum Campaign",
       dateRange: `16 September – 21 October ${ceremonyYear}`,
       description:
-        "Six weeks of continent-wide visibility combining weekly EduAid webinars (Education Innovation · CSR Partnerships · Higher Education · Creative Arts & Media · Inclusive Education · Recognition→Impact→Legacy), Friday NESA-Africa Weekly News and daily momentum activations.",
+        "Six weeks of continent-wide visibility combining the bi-weekly EduAid-Africa Webinar Series (Episodes 3–7 · CSR & Corporate Partnership · Curriculum Innovation · EduTech & Digital Learning · Faith, Leadership & Institutional Impact · Diaspora & International Partnership), Friday NESA-Africa Weekly News and daily momentum activations.",
       type: "awareness",
     },
     {
@@ -487,15 +488,15 @@ export function buildAwardPhases(awardYear: number): AwardPhaseConfig[] {
   ];
 }
 
-// Webinar themes — 7-week EduAid-Africa Focus Group Series (Aug–Sep 2026)
+// Webinar themes — see src/data/eduaidWebinarSeries2026.ts (canonical 7-episode timetable)
 export const WEBINAR_THEMES = [
-  { id: "week-1-influencer", theme: "Week 1 · Influencer Education Impact FGD (3–7 Aug)", iconName: "Sparkles" },
-  { id: "week-2-icon", theme: "Week 2 · Africa Education Icon FGD (10–14 Aug)", iconName: "Crown" },
-  { id: "week-3-gbg-i", theme: "Week 3 · Gold–Blue Garnet I — CSR, STEM & EdTech (17–21 Aug)", iconName: "Target" },
-  { id: "week-4-gbg-ii", theme: "Week 4 · Gold–Blue Garnet II — Media, Creative Arts & Policy (24–28 Aug)", iconName: "Sparkles" },
-  { id: "week-5-gbg-iii", theme: "Week 5 · Gold–Blue Garnet III — Partnerships, NGOs & Community (31 Aug–4 Sep)", iconName: "Heart" },
-  { id: "week-6-platinum", theme: "Week 6 · Platinum Institutions — Government, Universities & Faith-Based (7–11 Sep)", iconName: "Building2" },
-  { id: "week-7-pre-voting", theme: "Week 7 · Continental Pre-Voting Forum & AGC Voting Education (14–15 Sep)", iconName: "GraduationCap" },
+  { id: "ep-1-fame-with-purpose", theme: "Ep 1 · Fame With Purpose (20 Aug 2026)", iconName: "Sparkles" },
+  { id: "ep-2-women-and-girls", theme: "Ep 2 · Women & Girls in Education (3 Sep 2026)", iconName: "Heart" },
+  { id: "ep-3-csr-corporate-partnership", theme: "Ep 3 · CSR & Corporate Partnership (17 Sep 2026)", iconName: "Building2" },
+  { id: "ep-4-curriculum-innovation", theme: "Ep 4 · Curriculum Innovation & Future of Work (1 Oct 2026)", iconName: "GraduationCap" },
+  { id: "ep-5-edutech-digital-learning", theme: "Ep 5 · EduTech & Digital Learning (15 Oct 2026)", iconName: "Target" },
+  { id: "ep-6-faith-leadership-institutional", theme: "Ep 6 · Faith, Leadership & Institutional Impact (29 Oct 2026)", iconName: "Crown" },
+  { id: "ep-7-diaspora-international", theme: "Ep 7 · Diaspora & International Partnership (12 Nov 2026)", iconName: "Users" },
 ];
 
 // Legacy regions (static content)

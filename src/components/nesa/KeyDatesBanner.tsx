@@ -10,7 +10,8 @@ export function KeyDatesBanner() {
   // Build events from config for the current season
   const events = buildScheduledEvents(currentEdition.displayYear, DEFAULT_SCHEDULE_TEMPLATE);
   const galaDate = events.galas[0]?.date;
-  const webinarStart = new Date(`${currentEdition.displayYear}-06-01`);
+  // EduAid-Africa Webinar Series 2026 — Episode 1, 20 August (see src/data/eduaidWebinarSeries2026.ts)
+  const webinarStart = new Date(`${currentEdition.displayYear}-08-20`);
   
   const formatDate = (date: Date) => {
     return date.toLocaleDateString("en-US", {

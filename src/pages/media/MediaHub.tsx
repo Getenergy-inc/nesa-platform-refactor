@@ -32,7 +32,7 @@ const mediaCategories = [
   },
   {
     title: "Webinar Hub",
-    description: "15-25 educational webinars and workshops (75 mins each).",
+    description: "EduAid-Africa Webinar Series — 7 bi-weekly episodes, 20 Aug – 12 Nov 2026.",
     href: "/media/webinars",
     icon: Mic,
   },
