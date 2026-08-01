@@ -460,34 +460,23 @@ export function IconNominationWizard({
     }
   };
 
-  // ─────────────────────────── Success state ───────────────────────────
-  if (submitted) {
+  // ─────────────────── Account at submission + confirmation ───────────────
+  // The nomination is already recorded at this point; creating or confirming
+  // an account (and verifying email) never blocks the submission.
+  if (submitted && reference) {
     return (
-      <div className="space-y-6">
-        <div className="rounded-2xl border border-gold/40 bg-charcoal-light/60 p-6 text-center">
-          <ShieldCheck className="mx-auto mb-3 h-8 w-8 text-gold" />
-          <h3 className="font-display text-2xl text-gold mb-2">Nomination received</h3>
-          <p className="text-sm text-foreground/80 max-w-md mx-auto">
-            Your Africa Education Icon nomination is queued for Nominee Research Corps (NRC) verification.
-            A confirmation email has been sent to <span className="text-gold">{state.nm_email}</span>.
-          </p>
-          {reference && (
-            <p className="mt-3 text-xs text-foreground/70">
-              Reference: <span className="text-gold font-mono">{reference}</span>
-            </p>
-          )}
-        </div>
-        {!user && (
-          <AccountAtSubmitPanel
-            reference={reference}
-            defaultEmail={state.nm_email}
-            defaultFullName={state.nm_full_name}
-            formSlug="africa-education-icon"
-          />
-        )}
+      <div id="nomination-submitted">
+        <NominationAccountAtSubmit
+          reference={reference}
+          defaultEmail={state.nm_email}
+          defaultFullName={state.nm_full_name}
+          formSlug="africa-education-icon"
+          alreadySignedIn={Boolean(user)}
+        />
       </div>
     );
   }
+
 
   // ─────────────────────────── UI ───────────────────────────
   return (
