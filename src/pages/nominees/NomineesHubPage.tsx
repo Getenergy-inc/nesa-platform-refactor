@@ -340,9 +340,9 @@ export default function NomineesHubPage() {
         </Section>
 
         {/* ────────────────────────────────────────────────────────────────
-            SECTION 10 — IMPACT STORIES
+            SECTION 7 — IMPACT STORIES
         ──────────────────────────────────────────────────────────────── */}
-        <Section eyebrow="09 · Stories" title="Education Impact Stories" sub="Real change, verified. Behind every enabler is a community transformed.">
+        <Section eyebrow="07 · Stories" title="Education Impact Stories" sub="Real change, verified. Behind every enabler is a community transformed.">
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {IMPACT_STORY_THEMES.map((s, i) => (
               <motion.div
