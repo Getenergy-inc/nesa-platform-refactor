@@ -4,6 +4,7 @@ import Nominees from "./pages/Nominees";
 
 import NomineeSlugDispatcher from "./pages/nominees/NomineeSlugDispatcher";
 import CategoryLandingPage from "./pages/nominees/CategoryLandingPage";
+import CatalogueIndexPage from "./pages/nominees/CatalogueIndexPage";
 import SubcategoryPage from "./pages/nominees/SubcategoryPage";
 import GoldHubPage from "./pages/nominees/gold/GoldHubPage";
 import GoldCategoryPage from "./pages/nominees/gold/GoldCategoryPage";
