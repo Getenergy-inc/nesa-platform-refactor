@@ -59,6 +59,10 @@ export function nomineeIdentityKey(name: string, _subcategory?: string): string 
 
 /** Project a master-list nominee into the catalogue's nominee shape. */
 export function toCatalogueNominee(n: MasterNominee): EnrichedDatabaseNominee | null {
+  // Rows with no nominee name are preserved in the register for audit but are
+  // never published as a public profile (they surface in the review report).
+  if (!n.name || !n.name.trim()) return null;
+
   const categorySlug = resolveMasterCategorySlug(n.category);
   const mapping = categorySlug ? CATEGORY_MAP[categorySlug] : undefined;
 
@@ -80,7 +84,7 @@ export function toCatalogueNominee(n: MasterNominee): EnrichedDatabaseNominee | 
     title: null,
     bio: n.achievement || null,
     organization: null,
-    country: n.country || null,
+    country: standardiseCountry(n.country) || null,
     region: geo.region,
     photoUrl: "/images/placeholder.svg",
     imageType: "photo",

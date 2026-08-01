@@ -92,6 +92,9 @@ export function standardiseName(raw: string | null | undefined): string {
 export function standardiseCountry(raw: string | null | undefined): string {
   const cleaned = standardiseName(raw);
   if (!cleaned) return "";
+  // Reject junk imported into the country column (file paths, URLs, long prose).
+  if (/[\\/]|https?:|\.(png|jpe?g|svg|webp)$/i.test(cleaned)) return "";
+  if (cleaned.length > 60) return "";
   return resolveCanonicalCountry(cleaned) ?? cleaned;
 }
 
