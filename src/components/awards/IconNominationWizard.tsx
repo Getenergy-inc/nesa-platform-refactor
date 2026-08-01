@@ -20,7 +20,10 @@ import {
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/contexts/AuthContext";
 import { useDraftPersistence } from "@/features/nominate/useDraftPersistence";
-import { AccountAtSubmitPanel } from "@/features/nominate/AccountAtSubmitPanel";
+import NominationAccountAtSubmit, {
+  NOMINATION_COPY,
+} from "@/components/nominate/NominationAccountAtSubmit";
+
 import { trackEvent } from "@/lib/analytics";
 import { getEDIMatrix, EDI_MATRIX_VERSION, type EDIIndicator } from "@/config/nominate2026/ediMatrix";
 
