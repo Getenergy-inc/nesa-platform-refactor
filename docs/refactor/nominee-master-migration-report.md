@@ -1,6 +1,6 @@
 # Master Nominee Register — Migration Report
 
-_Generated 2026-08-01T23:36:25.011Z_
+_Generated 2026-08-01T23:40:07.241Z_
 
 **Source of truth:** `NESA_Award_Nominees_Master_List.xlsx` → `src/data/nominees-2025.ts`
 **Worksheet:** All Nominees
@@ -22,10 +22,11 @@ _Generated 2026-08-01T23:36:25.011Z_
 
 | Issue | Records |
 |---|---:|
-| Duplicate identity clusters (name + country) | 242 |
+| Duplicate identity clusters (name + country) | 246 |
 | Duplicate organisation clusters | 278 |
 | Name spelling variants | 9 |
-| Missing country | 553 |
+| Missing nominee name (not published) | 7 |
+| Missing country | 658 |
 | Missing region (source column blank) | 747 |
 | Missing category | 0 |
 | Missing subcategory | 0 |
@@ -33,7 +34,7 @@ _Generated 2026-08-01T23:36:25.011Z_
 | Missing impact summary | 55 |
 | Missing photograph | 1703 |
 | Missing supporting evidence | 1703 |
-| Records standardised (name/country) | 42 |
+| Records standardised (name/country) | 147 |
 
 > The register carries no photograph, contact, evidence or verification columns.
 > Those fields are left blank on the public profile rather than invented, and
@@ -145,7 +146,7 @@ _88 further values omitted._
 
 | Value | Nominees |
 |---|---:|
-| Unspecified | 553 |
+| Unspecified | 658 |
 | Nigeria | 401 |
 | South Africa | 136 |
 | Kenya | 79 |
@@ -162,7 +163,6 @@ _88 further values omitted._
 | Algeria | 11 |
 | Rwanda | 11 |
 | Chad | 10 |
-| DRC/CAR | 9 |
 | Zimbabwe | 8 |
 | Republic of the Congo | 7 |
 | Region | 7 |
@@ -170,13 +170,14 @@ _88 further values omitted._
 | Côte d'Ivoire | 6 |
 | Senegal | 6 |
 | Madagascar | 5 |
-| KE/ET | 5 |
 | Jordan | 4 |
 | Namibia | 4 |
-| MA/TN | 4 |
-| BF/NE/ML | 4 |
+| Mozambique | 4 |
+| France | 3 |
+| Equatorial Guinea | 3 |
+| Malawi | 3 |
 
-_79 further values omitted._
+_29 further values omitted._
 
 ### By Nomination Year
 
@@ -191,7 +192,7 @@ _Empty — every historical category mapped at ≥90% confidence._
 
 Full payload: `docs/refactor/nominee-migration-review-queue.json`
 
-## 5. Duplicate Clusters (242)
+## 5. Duplicate Clusters (246)
 
 | Normalised identity | Rows |
 |---|---|

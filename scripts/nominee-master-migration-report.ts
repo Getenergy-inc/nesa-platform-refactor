@@ -50,6 +50,7 @@ const missing = {
   region: 0,
   category: 0,
   subcategory: 0,
+  name: 0,
   biography: 0,
   impactSummary: 0,
   photograph: 0,
@@ -74,6 +75,7 @@ for (const [id, category, region, subcategory, name, country, state, achievement
   inc(byCountry, cleanCountry || "Unspecified");
   inc(byYear, "2025");
 
+  if (!cleanName) missing.name += 1;
   if (!cleanCountry) missing.country += 1;
   if (!region || region === "N/A") missing.region += 1;
   if (!category) missing.category += 1;
@@ -149,6 +151,7 @@ ${balanced ? "✅ **The register balances 100%.** Every row is imported and acco
 | Duplicate identity clusters (name + country) | ${dupIdentities.length} |
 | Duplicate organisation clusters | ${dupOrgs.length} |
 | Name spelling variants | ${spellingVariants.length} |
+| Missing nominee name (not published) | ${missing.name} |
 | Missing country | ${missing.country} |
 | Missing region (source column blank) | ${missing.region} |
 | Missing category | ${missing.category} |
