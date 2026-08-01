@@ -101,7 +101,7 @@ export function useServerDraft<T extends Record<string, unknown>>(
             p_award_tier: metaRef.current.awardTier ?? null,
             p_category_slug: metaRef.current.categorySlug ?? null,
             p_subcategory_slug: metaRef.current.subcategorySlug ?? null,
-            p_nominee_data: payload as unknown as Record<string, unknown>,
+            p_nominee_data: JSON.parse(JSON.stringify(payload)),
             p_nominator_email: metaRef.current.nominatorEmail ?? null,
             p_session_id: sessionId(),
           });
@@ -122,7 +122,7 @@ export function useServerDraft<T extends Record<string, unknown>>(
         }
         const { error } = await supabase.rpc("update_nomination_draft", {
           p_token: draftToken,
-          p_nominee_data: payload as unknown as Record<string, unknown>,
+          p_nominee_data: JSON.parse(JSON.stringify(payload)),
           p_nominator_email: metaRef.current.nominatorEmail ?? null,
           p_award_tier: metaRef.current.awardTier ?? null,
           p_category_slug: metaRef.current.categorySlug ?? null,
