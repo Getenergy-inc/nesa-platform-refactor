@@ -323,9 +323,9 @@ export default function NomineesHubPage() {
         </Section>
 
         {/* ────────────────────────────────────────────────────────────────
-            SECTION 9 — FEATURED EDUCATION ENABLERS
+            SECTION 6 — FEATURED EDUCATION ENABLERS
         ──────────────────────────────────────────────────────────────── */}
-        <Section eyebrow="08 · Spotlight" title="Featured Education Enablers">
+        <Section eyebrow="06 · Spotlight" title="Featured Education Enablers">
           {isLoading ? (
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
               {Array.from({ length: 6 }).map((_, i) => <Skeleton key={i} className="h-72 rounded-2xl bg-charcoal-light/50" />)}
