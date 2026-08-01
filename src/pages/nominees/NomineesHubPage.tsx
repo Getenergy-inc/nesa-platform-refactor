@@ -1,8 +1,8 @@
 // ============================================================================
 // Africa's Education Impact Directory — /nominees
-// 11-section premium discovery hub. Composes existing data layer
-// (useNominees, PILLARS, RECOGNITION_TIERS_2026, AFRICAN_REGIONS) into a
-// long-form section-based experience. No business-logic changes.
+// 8-section premium discovery hub. Composes existing data layer
+// (useNominees, AFRICAN_REGIONS) into a long-form section-based experience.
+// No business-logic changes.
 // ============================================================================
 
 import { useMemo, useState, useEffect } from "react";
