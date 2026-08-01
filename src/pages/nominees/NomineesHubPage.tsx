@@ -285,6 +285,11 @@ export default function NomineesHubPage() {
               {/* CTAs */}
               <div className="flex flex-wrap gap-3">
                 <Button asChild size="lg" className="bg-gold hover:bg-gold/90 text-charcoal font-semibold rounded-full">
+                  <Link to="/nominees/catalogue" onClick={() => trackEvent("directory_cta_click", { cta: "recognition_catalogue" })}>
+                    <Trophy className="h-4 w-4 mr-2" /> Open Recognition Catalogue
+                  </Link>
+                </Button>
+                <Button asChild size="lg" variant="outline" className="border-gold/40 text-ivory hover:bg-gold/10 rounded-full">
                   <a href="#tiers" onClick={() => trackEvent("directory_cta_click", { cta: "explore_tiers" })}>
                     <Trophy className="h-4 w-4 mr-2" /> Explore Recognition Tiers
                   </a>
