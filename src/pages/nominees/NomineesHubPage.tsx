@@ -123,28 +123,6 @@ export default function NomineesHubPage() {
     trackEvent("directory_view", { name: DIRECTORY_NAME });
   }, []);
 
-  // -- Dynamic stats (12) ----------------------------------------------------
-  const stats = useMemo(() => {
-    const list = nominees ?? [];
-    const countries = new Set(list.map((n) => n.country).filter(Boolean)).size;
-    const orgs = list.filter((n) => n.imageType === "logo").length;
-    const people = list.filter((n) => n.imageType === "photo").length;
-    return [
-      { label: "Verified Education Enablers", value: list.length },
-      { label: "Award Categories", value: 18 },
-      { label: "Recognition Subcategories", value: 100 },
-      { label: "Recognition Tiers", value: 4 },
-      { label: "Africa Regions", value: 8 },
-      { label: "Global Communities", value: 2 },
-      { label: "Countries Represented", value: countries },
-      { label: "Verified Organisations", value: orgs },
-      { label: "Verified Institutions", value: Math.round(orgs * 0.4) },
-      { label: "Verified Individuals", value: people },
-      { label: "Education Impact Stories", value: Math.max(list.length * 2, 120) },
-      { label: "Education Projects", value: Math.max(list.length * 3, 250) },
-    ];
-  }, [nominees]);
-
   // -- Counts per facet ------------------------------------------------------
   const tierCounts = useMemo(() => {
     const out: Record<string, number> = {};
