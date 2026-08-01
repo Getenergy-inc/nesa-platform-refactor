@@ -122,6 +122,14 @@ export interface EnrichedDatabaseNominee {
   categorySlug: string;
   geographicCategory: GeographicCategory;
   achievement: string;
+  /** NRC verification flag (governance badge). */
+  nrcVerified: boolean;
+  /** Nominee acceptance state (accepted / pending / declined). */
+  acceptanceStatus: string | null;
+  awardFamily: string | null;
+  recognitionClass: string | null;
+  /** Nomination year, derived from the record creation date. */
+  nominationYear: number | null;
 }
 
 const PLACEHOLDER_IMAGE = "/images/placeholder.svg";
