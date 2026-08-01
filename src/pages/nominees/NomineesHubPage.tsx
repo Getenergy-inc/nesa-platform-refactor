@@ -364,9 +364,9 @@ export default function NomineesHubPage() {
         </Section>
 
         {/* ────────────────────────────────────────────────────────────────
-            SECTION 11 — ADVANCED DISCOVERY
+            SECTION 8 — ADVANCED DISCOVERY
         ──────────────────────────────────────────────────────────────── */}
-        <Section id="discovery" eyebrow="10 · Discover" title="Advanced Discovery" sub="Search Africa's verified education impact ecosystem.">
+        <Section id="discovery" eyebrow="08 · Discover" title="Advanced Discovery" sub="Search Africa's verified education impact ecosystem.">
           <div className="rounded-2xl border border-gold/20 bg-charcoal-light/40 p-4 md:p-6 mb-6">
             <div className="relative mb-4">
               <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-ivory/40" />
