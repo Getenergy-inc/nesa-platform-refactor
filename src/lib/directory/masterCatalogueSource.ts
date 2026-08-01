@@ -16,7 +16,7 @@ import { useNominees, type EnrichedDatabaseNominee } from "@/hooks/useNominees";
 import { CATEGORY_MAP } from "@/config/directory/catalogueTaxonomy";
 import { resolveMasterCategorySlug } from "@/lib/directory/masterCategoryRules";
 import { normalizeRegion, type AfricanRegion } from "@/lib/regions";
-import { enrichNomineeGeography, standardiseCountry } from "@/lib/directory/nomineeEnrichment";
+import { enrichNomineeGeography, identityKey, standardiseCountry } from "@/lib/directory/nomineeEnrichment";
 import type { GeographicCategory } from "@/lib/nesaData";
 
 export { resolveMasterCategorySlug } from "@/lib/directory/masterCategoryRules";
@@ -45,11 +45,16 @@ export function masterNomineeId(n: MasterNominee): string {
   return `nesa-2025-${n.id}`;
 }
 
-/** Identity key used to dedupe master records against database records. */
-export function nomineeIdentityKey(name: string, subcategory: string): string {
-  const norm = (v: string) =>
-    (v ?? "").toLowerCase().normalize("NFKD").replace(/[^a-z0-9]+/g, " ").trim();
-  return `${norm(name)}::${norm(subcategory)}`;
+/**
+ * Identity key used to dedupe master records against database records.
+ *
+ * Keyed on the normalised nominee name alone: the live database and the master
+ * register are two views of the SAME historical register, and subcategory
+ * labels drift between them. Name-level dedupe guarantees exactly one public
+ * profile per nominee while every source row is preserved in the register.
+ */
+export function nomineeIdentityKey(name: string, _subcategory?: string): string {
+  return identityKey(name);
 }
 
 /** Project a master-list nominee into the catalogue's nominee shape. */
