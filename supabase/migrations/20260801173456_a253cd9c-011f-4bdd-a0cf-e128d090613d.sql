@@ -1,0 +1,1 @@
+UPDATE public.site_stats SET icon_subcategories = 3;

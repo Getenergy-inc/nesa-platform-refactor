@@ -127,8 +127,9 @@ export function NESAFooter() {
               </div>
             </div>
             <p className="text-white/65 text-xs md:text-sm leading-relaxed mb-4 max-w-sm">
-              Identifying, verifying, recognising, connecting and supporting the
-              Enablers of Education for All Across Africa.
+              Enablers of Education for All across Africa — by Africans in
+              Africa, Diaspora Africans, and Friends of Africa (individuals,
+              companies, or organisations)
             </p>
             <div className="flex gap-2 justify-center md:justify-start mb-4">
               {socialLinks.map((s) => (
@@ -154,13 +155,13 @@ export function NESAFooter() {
                 <Mail className="h-4 w-4" /> info@nesa.africa
               </a>
               <a
-                href="https://wa.me/2347077456855"
+                href="https://wa.me/2348056677770"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 hover:text-gold transition-colors"
                 onClick={() => trackFooter("contact", "whatsapp", "wa.me")}
               >
-                <MessageCircle className="h-4 w-4" /> +234 707 745 6855
+                <MessageCircle className="h-4 w-4" /> +234 805 667 7770
               </a>
               <Link
                 to="/help"
