@@ -73,6 +73,110 @@ export default function CategoryNominationForm({ content }: Props) {
   const [nominatorConsent, setNominatorConsent] = useState(false);
   const [declaration, setDeclaration] = useState(false);
   const [submitting, setSubmitting] = useState(false);
+  const [reference, setReference] = useState<string | null>(null);
+  const hydratedOnce = useRef(false);
+  const startedRef = useRef(false);
+
+  // ── Draft persistence (server-side, no account required) ────────────────
+  const draftValues = useMemo(
+    () => ({
+      primary,
+      secondary,
+      tags,
+      classificationId,
+      nomineeName,
+      nomineeOrg,
+      nomineeCountry,
+      nomineeLeadership,
+      impactSummary,
+      whatTheyDid,
+      whoBenefited,
+      timeframe,
+      measurableOutcomes,
+      evidence1,
+      evidence2,
+      evidence3,
+      eligibilityConfirmed,
+      nominatorName,
+      nominatorEmail,
+      nominatorPhone,
+      nominatorCountry,
+      nominatorConsent,
+      declaration,
+    }),
+    [
+      primary,
+      secondary,
+      tags,
+      classificationId,
+      nomineeName,
+      nomineeOrg,
+      nomineeCountry,
+      nomineeLeadership,
+      impactSummary,
+      whatTheyDid,
+      whoBenefited,
+      timeframe,
+      measurableOutcomes,
+      evidence1,
+      evidence2,
+      evidence3,
+      eligibilityConfirmed,
+      nominatorName,
+      nominatorEmail,
+      nominatorPhone,
+      nominatorCountry,
+      nominatorConsent,
+      declaration,
+    ],
+  );
+
+  const { draftToken, hydratedValues, saving, savedAt, clearDraft, flush } = useServerDraft(
+    `cat.${content.slug}`,
+    draftValues,
+    {
+      formType: `nominate-2026:${content.slug}`,
+      awardTier: content.tier,
+      categorySlug: content.slug,
+      subcategorySlug: secondary || primary || null,
+      nominatorEmail: nominatorEmail || null,
+    },
+    { enabled: !reference },
+  );
+
+  // Restore an in-progress draft exactly once (survives refresh / sign-in).
+  useEffect(() => {
+    if (hydratedOnce.current || !hydratedValues) return;
+    hydratedOnce.current = true;
+    const v = hydratedValues as typeof draftValues;
+    setPrimary(v.primary ?? "");
+    setSecondary(v.secondary ?? "");
+    setTags(Array.isArray(v.tags) ? v.tags : []);
+    setClassificationId(v.classificationId ?? "");
+    setNomineeName(v.nomineeName ?? "");
+    setNomineeOrg(v.nomineeOrg ?? "");
+    setNomineeCountry(v.nomineeCountry ?? "");
+    setNomineeLeadership(v.nomineeLeadership ?? "");
+    setImpactSummary(v.impactSummary ?? "");
+    setWhatTheyDid(v.whatTheyDid ?? "");
+    setWhoBenefited(v.whoBenefited ?? "");
+    setTimeframe(v.timeframe ?? "");
+    setMeasurableOutcomes(v.measurableOutcomes ?? "");
+    setEvidence1(v.evidence1 ?? "");
+    setEvidence2(v.evidence2 ?? "");
+    setEvidence3(v.evidence3 ?? "");
+    setEligibilityConfirmed(Boolean(v.eligibilityConfirmed));
+    setNominatorName(v.nominatorName ?? "");
+    setNominatorEmail(v.nominatorEmail ?? "");
+    setNominatorPhone(v.nominatorPhone ?? "");
+    setNominatorCountry(v.nominatorCountry ?? "");
+    setNominatorConsent(Boolean(v.nominatorConsent));
+    setDeclaration(Boolean(v.declaration));
+    toast({
+      title: "Draft restored",
+      description: "We recovered the nomination details you had already entered.",
+    });
+  }, [hydratedValues]);
 
   const secondaryOptions = useMemo(() => {
     const s = content.pathwaySelector;
@@ -84,9 +188,21 @@ export default function CategoryNominationForm({ content }: Props) {
   const orgLabel = content.nomineeFieldOverrides?.orgNameLabel ?? "Institution / Organisation";
   const leadershipLabel = content.nomineeFieldOverrides?.leadershipLabel ?? "Leadership / Contact person";
 
+  function markStarted() {
+    if (startedRef.current) return;
+    startedRef.current = true;
+    trackEvent("nomination_form_started", {
+      form: content.slug,
+      tier: content.tier,
+      authenticated: Boolean(user),
+    });
+  }
+
   function toggleTag(tag: string) {
+    markStarted();
     setTags((prev) => (prev.includes(tag) ? prev.filter((t) => t !== tag) : [...prev, tag]));
   }
+
 
   function validate(): string | null {
     const s = content.pathwaySelector;
