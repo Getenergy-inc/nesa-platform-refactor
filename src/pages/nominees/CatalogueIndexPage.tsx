@@ -19,7 +19,8 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Skeleton } from "@/components/ui/skeleton";
-import { useNominees, type EnrichedDatabaseNominee } from "@/hooks/useNominees";
+import { type EnrichedDatabaseNominee } from "@/hooks/useNominees";
+import { useCatalogueNominees } from "@/lib/directory/masterCatalogueSource";
 import { buildCatalogue } from "@/lib/directory/buildCatalogue";
 import { subcategoryFamilySlug } from "@/config/directory/catalogueTaxonomy";
 import { toast } from "@/hooks/use-toast";
@@ -54,7 +55,7 @@ function Counter({ label, value }: { label: string; value: number | string }) {
 }
 
 export default function CatalogueIndexPage() {
-  const { data: nominees, isLoading } = useNominees();
+  const { data: nominees, isLoading } = useCatalogueNominees();
   const [params, setParams] = useSearchParams();
   const [search, setSearch] = useState(params.get("q") ?? "");
   const [filters, setFilters] = useState<Record<FilterKey, string>>({
