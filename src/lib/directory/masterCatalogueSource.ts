@@ -106,6 +106,26 @@ export function getMasterCatalogueNominees(): EnrichedDatabaseNominee[] {
 }
 
 /**
+ * Normalise a live database record onto the approved region + classification
+ * vocabulary so directory filters only ever offer the ten approved regions.
+ */
+function normaliseDbRecord(n: EnrichedDatabaseNominee): EnrichedDatabaseNominee {
+  const country = standardiseCountry(n.country);
+  const geo = enrichNomineeGeography({
+    region: n.region,
+    country,
+    category: n.categoryName,
+    subcategory: n.subcategoryName,
+  });
+  return {
+    ...n,
+    country: country || null,
+    region: geo.region,
+    recognitionClass: n.recognitionClass ?? geo.classification,
+  };
+}
+
+/**
  * Catalogue data source: database records first (they carry live verification
  * state and real media), then every master-list nominee not already present.
  */
@@ -113,7 +133,7 @@ export function useCatalogueNominees() {
   const query = useNominees();
 
   const data = useMemo(() => {
-    const db = query.data ?? [];
+    const db = (query.data ?? []).map(normaliseDbRecord);
     const seen = new Set(db.map((n) => nomineeIdentityKey(n.name, n.subcategoryName)));
     const merged = [...db];
     for (const n of getMasterCatalogueNominees()) {
@@ -124,6 +144,7 @@ export function useCatalogueNominees() {
     }
     return merged.sort((a, b) => a.name.localeCompare(b.name));
   }, [query.data]);
+
 
   return { ...query, data };
 }
