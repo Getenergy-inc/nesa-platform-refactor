@@ -20,7 +20,10 @@ import {
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/contexts/AuthContext";
 import { useDraftPersistence } from "@/features/nominate/useDraftPersistence";
-import { AccountAtSubmitPanel } from "@/features/nominate/AccountAtSubmitPanel";
+import NominationAccountAtSubmit, {
+  NOMINATION_COPY,
+} from "@/components/nominate/NominationAccountAtSubmit";
+
 import { trackEvent } from "@/lib/analytics";
 import { getEDIMatrix, EDI_MATRIX_VERSION, type EDIIndicator } from "@/config/nominate2026/ediMatrix";
 
@@ -460,34 +463,23 @@ export function IconNominationWizard({
     }
   };
 
-  // ─────────────────────────── Success state ───────────────────────────
-  if (submitted) {
+  // ─────────────────── Account at submission + confirmation ───────────────
+  // The nomination is already recorded at this point; creating or confirming
+  // an account (and verifying email) never blocks the submission.
+  if (submitted && reference) {
     return (
-      <div className="space-y-6">
-        <div className="rounded-2xl border border-gold/40 bg-charcoal-light/60 p-6 text-center">
-          <ShieldCheck className="mx-auto mb-3 h-8 w-8 text-gold" />
-          <h3 className="font-display text-2xl text-gold mb-2">Nomination received</h3>
-          <p className="text-sm text-foreground/80 max-w-md mx-auto">
-            Your Africa Education Icon nomination is queued for Nominee Research Corps (NRC) verification.
-            A confirmation email has been sent to <span className="text-gold">{state.nm_email}</span>.
-          </p>
-          {reference && (
-            <p className="mt-3 text-xs text-foreground/70">
-              Reference: <span className="text-gold font-mono">{reference}</span>
-            </p>
-          )}
-        </div>
-        {!user && (
-          <AccountAtSubmitPanel
-            reference={reference}
-            defaultEmail={state.nm_email}
-            defaultFullName={state.nm_full_name}
-            formSlug="africa-education-icon"
-          />
-        )}
+      <div id="nomination-submitted">
+        <NominationAccountAtSubmit
+          reference={reference}
+          defaultEmail={state.nm_email}
+          defaultFullName={state.nm_full_name}
+          formSlug="africa-education-icon"
+          alreadySignedIn={Boolean(user)}
+        />
       </div>
     );
   }
+
 
   // ─────────────────────────── UI ───────────────────────────
   return (
@@ -762,8 +754,15 @@ export function IconNominationWizard({
         </div>
       )}
 
+      {/* Deferred-account notice — no account is needed to start or submit */}
+      <div className="space-y-2 rounded-lg border border-gold/25 bg-black/30 p-4">
+        <p className="text-sm font-semibold text-gold">{NOMINATION_COPY.preSubmit}</p>
+        <p className="text-xs text-foreground/75">{NOMINATION_COPY.accountPrompt}</p>
+      </div>
+
       {/* Nav */}
       <div className="flex flex-wrap items-center justify-between gap-3 pt-2 border-t border-gold/15">
+
         <div className="flex gap-2">
           <Button
             type="button"

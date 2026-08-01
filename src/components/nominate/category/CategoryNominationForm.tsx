@@ -1,12 +1,15 @@
-// Unified nomination form for the 17 dedicated category pages.
-// Renders one of four selector variants for step 1 (pathway/subcategory),
-// then a shared skeleton: Classification → Nominee/Institution info →
-// Evidence (≥2 sources) → Nominator & Declaration.
+// Unified nomination form for the 18 canonical nomination pages
+// (Africa Education Icon, Influencer Education Impact, 7 Platinum,
+// 9 Gold-Blue Garnet). Renders one of four selector variants for step 1
+// (pathway/subcategory), then a shared skeleton: Classification →
+// Nominee/Institution info → Evidence (≥2 sources) → Nominator & Declaration.
 //
-// Submissions POST to the existing native nomination endpoint via the
-// resilient client used elsewhere — no new dependencies.
+// Flow: nominate first → create or confirm account at submission →
+// confirmation with reference → track progress. No account is required to
+// open, fill in, or submit the form; account creation is triggered only by
+// the Submit click and email verification never blocks the submission.
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { toast } from "@/hooks/use-toast";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -25,7 +28,14 @@ import {
   GOVERNANCE_COPY,
   type CategoryContent,
 } from "@/config/nominate2026/categoryContent";
-import { ShieldCheck, Send } from "lucide-react";
+import { ShieldCheck, Send, Loader2, CloudUpload } from "lucide-react";
+import { useAuth } from "@/contexts/AuthContext";
+import { useServerDraft } from "@/features/nominate/useServerDraft";
+import { submitPublicNomination, linkNominationToAccount } from "@/features/nominate/submitPublicNomination";
+import NominationAccountAtSubmit, {
+  NOMINATION_COPY,
+} from "@/components/nominate/NominationAccountAtSubmit";
+import { trackEvent } from "@/lib/analytics";
 
 interface Props {
   content: CategoryContent;
@@ -34,6 +44,8 @@ interface Props {
 export default function CategoryNominationForm({ content }: Props) {
   const classification = CLASSIFICATION_SETS[content.classification];
   const governanceCopy = GOVERNANCE_COPY[content.governance];
+  const { user } = useAuth();
+
 
   const [primary, setPrimary] = useState<string>("");
   const [secondary, setSecondary] = useState<string>("");
@@ -61,6 +73,110 @@ export default function CategoryNominationForm({ content }: Props) {
   const [nominatorConsent, setNominatorConsent] = useState(false);
   const [declaration, setDeclaration] = useState(false);
   const [submitting, setSubmitting] = useState(false);
+  const [reference, setReference] = useState<string | null>(null);
+  const hydratedOnce = useRef(false);
+  const startedRef = useRef(false);
+
+  // ── Draft persistence (server-side, no account required) ────────────────
+  const draftValues = useMemo(
+    () => ({
+      primary,
+      secondary,
+      tags,
+      classificationId,
+      nomineeName,
+      nomineeOrg,
+      nomineeCountry,
+      nomineeLeadership,
+      impactSummary,
+      whatTheyDid,
+      whoBenefited,
+      timeframe,
+      measurableOutcomes,
+      evidence1,
+      evidence2,
+      evidence3,
+      eligibilityConfirmed,
+      nominatorName,
+      nominatorEmail,
+      nominatorPhone,
+      nominatorCountry,
+      nominatorConsent,
+      declaration,
+    }),
+    [
+      primary,
+      secondary,
+      tags,
+      classificationId,
+      nomineeName,
+      nomineeOrg,
+      nomineeCountry,
+      nomineeLeadership,
+      impactSummary,
+      whatTheyDid,
+      whoBenefited,
+      timeframe,
+      measurableOutcomes,
+      evidence1,
+      evidence2,
+      evidence3,
+      eligibilityConfirmed,
+      nominatorName,
+      nominatorEmail,
+      nominatorPhone,
+      nominatorCountry,
+      nominatorConsent,
+      declaration,
+    ],
+  );
+
+  const { draftToken, hydratedValues, saving, savedAt, clearDraft, flush } = useServerDraft(
+    `cat.${content.slug}`,
+    draftValues,
+    {
+      formType: `nominate-2026:${content.slug}`,
+      awardTier: content.tier,
+      categorySlug: content.slug,
+      subcategorySlug: secondary || primary || null,
+      nominatorEmail: nominatorEmail || null,
+    },
+    { enabled: !reference },
+  );
+
+  // Restore an in-progress draft exactly once (survives refresh / sign-in).
+  useEffect(() => {
+    if (hydratedOnce.current || !hydratedValues) return;
+    hydratedOnce.current = true;
+    const v = hydratedValues as typeof draftValues;
+    setPrimary(v.primary ?? "");
+    setSecondary(v.secondary ?? "");
+    setTags(Array.isArray(v.tags) ? v.tags : []);
+    setClassificationId(v.classificationId ?? "");
+    setNomineeName(v.nomineeName ?? "");
+    setNomineeOrg(v.nomineeOrg ?? "");
+    setNomineeCountry(v.nomineeCountry ?? "");
+    setNomineeLeadership(v.nomineeLeadership ?? "");
+    setImpactSummary(v.impactSummary ?? "");
+    setWhatTheyDid(v.whatTheyDid ?? "");
+    setWhoBenefited(v.whoBenefited ?? "");
+    setTimeframe(v.timeframe ?? "");
+    setMeasurableOutcomes(v.measurableOutcomes ?? "");
+    setEvidence1(v.evidence1 ?? "");
+    setEvidence2(v.evidence2 ?? "");
+    setEvidence3(v.evidence3 ?? "");
+    setEligibilityConfirmed(Boolean(v.eligibilityConfirmed));
+    setNominatorName(v.nominatorName ?? "");
+    setNominatorEmail(v.nominatorEmail ?? "");
+    setNominatorPhone(v.nominatorPhone ?? "");
+    setNominatorCountry(v.nominatorCountry ?? "");
+    setNominatorConsent(Boolean(v.nominatorConsent));
+    setDeclaration(Boolean(v.declaration));
+    toast({
+      title: "Draft restored",
+      description: "We recovered the nomination details you had already entered.",
+    });
+  }, [hydratedValues]);
 
   const secondaryOptions = useMemo(() => {
     const s = content.pathwaySelector;
@@ -72,9 +188,21 @@ export default function CategoryNominationForm({ content }: Props) {
   const orgLabel = content.nomineeFieldOverrides?.orgNameLabel ?? "Institution / Organisation";
   const leadershipLabel = content.nomineeFieldOverrides?.leadershipLabel ?? "Leadership / Contact person";
 
+  function markStarted() {
+    if (startedRef.current) return;
+    startedRef.current = true;
+    trackEvent("nomination_form_started", {
+      form: content.slug,
+      tier: content.tier,
+      authenticated: Boolean(user),
+    });
+  }
+
   function toggleTag(tag: string) {
+    markStarted();
     setTags((prev) => (prev.includes(tag) ? prev.filter((t) => t !== tag) : [...prev, tag]));
   }
+
 
   function validate(): string | null {
     const s = content.pathwaySelector;
@@ -114,6 +242,8 @@ export default function CategoryNominationForm({ content }: Props) {
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
+    // Single-submission guard — the reference is issued exactly once.
+    if (submitting || reference) return;
     const err = validate();
     if (err) {
       toast({ title: "Please complete required fields", description: err, variant: "destructive" });
@@ -121,72 +251,95 @@ export default function CategoryNominationForm({ content }: Props) {
     }
     setSubmitting(true);
     try {
-      // Persist as a draft in localStorage for now — the account-at-submit flow
-      // completes submission on the dedicated confirmation route.
-      const draftKey = `nesa:nomination:${content.slug}:${Date.now()}`;
-      const draft = {
-        slug: content.slug,
-        tier: content.tier,
-        pathwayPrimary: primary,
-        pathwaySecondary: secondary,
-        tags,
-        classificationId,
+      trackEvent("nomination_form_completed", { form: content.slug, tier: content.tier });
+      // Make sure the server draft holds the final values before submitting.
+      await flush();
+
+      const result = await submitPublicNomination({
+        formType: `nominate-2026:${content.slug}`,
+        awardTier: content.tier,
+        categorySlug: content.slug,
+        subcategory: secondary || primary || null,
         nomineeName,
-        nomineeOrg,
         nomineeCountry,
-        nomineeLeadership,
         impactSummary,
-        whatTheyDid,
-        whoBenefited,
-        timeframe,
-        measurableOutcomes,
-        evidence: [evidence1, evidence2, evidence3].filter(Boolean),
-        eligibilityConfirmed,
-        nominatorName,
         nominatorEmail,
-        nominatorPhone,
-        nominatorCountry,
-        nominatorConsent,
-        declaration,
-        createdAt: new Date().toISOString(),
-      };
-      localStorage.setItem(draftKey, JSON.stringify(draft));
-      toast({
-        title: "Nomination captured",
-        description:
-          "Your nomination has been saved. You'll be prompted to confirm your account at submission.",
+        draftToken,
+        payload: {
+          slug: content.slug,
+          tier: content.tier,
+          pathwayPrimary: primary,
+          pathwaySecondary: secondary,
+          tags,
+          classificationId,
+          nomineeName,
+          nomineeOrg,
+          nomineeCountry,
+          nomineeLeadership,
+          impactSummary,
+          whatTheyDid,
+          whoBenefited,
+          timeframe,
+          measurableOutcomes,
+          evidence: [evidence1, evidence2, evidence3].filter(Boolean),
+          eligibilityConfirmed,
+          nominatorName,
+          nominatorEmail,
+          nominatorPhone,
+          nominatorCountry,
+          nominatorConsent,
+          declaration,
+          submittedAt: new Date().toISOString(),
+        },
       });
-      // Reset
-      setPrimary("");
-      setSecondary("");
-      setTags([]);
-      setClassificationId("");
-      setNomineeName("");
-      setNomineeOrg("");
-      setNomineeCountry("");
-      setNomineeLeadership("");
-      setImpactSummary("");
-      setWhatTheyDid("");
-      setWhoBenefited("");
-      setTimeframe("");
-      setMeasurableOutcomes("");
-      setEvidence1("");
-      setEvidence2("");
-      setEvidence3("");
-      setEligibilityConfirmed(false);
-      setNominatorName("");
-      setNominatorEmail("");
-      setNominatorPhone("");
-      setNominatorCountry("");
-      setNominatorConsent(false);
-      setDeclaration(false);
+
+      setReference(result.reference);
+      clearDraft();
+      if (user) {
+        // Signed-in nominators are linked immediately — no interruption.
+        await linkNominationToAccount(result.reference);
+      }
+      toast({
+        title: "Nomination received",
+        description: `Your reference is ${result.reference}.`,
+      });
+      window.setTimeout(
+        () => document.getElementById("nomination-submitted")?.scrollIntoView({ behavior: "smooth", block: "start" }),
+        50,
+      );
+    } catch (submitError) {
+      toast({
+        title: "Submission failed",
+        description:
+          submitError instanceof Error
+            ? submitError.message
+            : "Please try again — your entries have been saved.",
+        variant: "destructive",
+      });
     } finally {
       setSubmitting(false);
     }
   }
 
+  // Post-submission: account creation / confirmation, then the confirmation
+  // message with the reference. The nomination is already recorded.
+  if (reference) {
+    return (
+      <div id="nomination-submitted" className="space-y-4">
+        <NominationAccountAtSubmit
+          reference={reference}
+          defaultEmail={nominatorEmail}
+          defaultFullName={nominatorName}
+          formSlug={content.slug}
+          alreadySignedIn={Boolean(user)}
+        />
+      </div>
+    );
+  }
+
   return (
-    <form onSubmit={handleSubmit} className="space-y-8">
+    <form onSubmit={handleSubmit} onChange={markStarted} className="space-y-8">
+
       {/* Step 1 — Pathway selector */}
       <fieldset className="space-y-4">
         <legend className="font-playfair text-xl text-gold">1. Pathway / Certificate category</legend>
@@ -409,15 +562,32 @@ export default function CategoryNominationForm({ content }: Props) {
         <p className="mt-3 text-[11px] text-foreground/60">{governanceCopy}</p>
       </div>
 
+      {/* Deferred-account notice — shown immediately above Submit */}
+      <div className="space-y-2 rounded-lg border border-gold/25 bg-black/30 p-4">
+        <p className="text-sm font-semibold text-gold">{NOMINATION_COPY.preSubmit}</p>
+        <p className="text-xs text-foreground/75">{NOMINATION_COPY.accountPrompt}</p>
+        {(saving || savedAt) && (
+          <p className="flex items-center gap-1.5 text-[11px] text-foreground/55">
+            <CloudUpload className="h-3 w-3 text-gold" aria-hidden />
+            {saving ? "Saving your entries…" : "Your entries are saved."}
+          </p>
+        )}
+      </div>
+
       <Button
         type="submit"
-        disabled={submitting}
+        disabled={submitting || Boolean(reference)}
         size="lg"
         className="w-full bg-gold text-charcoal hover:bg-gold/90"
       >
-        <Send className="mr-2 h-4 w-4" />
+        {submitting ? (
+          <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+        ) : (
+          <Send className="mr-2 h-4 w-4" />
+        )}
         {submitting ? "Submitting…" : "Submit nomination"}
       </Button>
+
     </form>
   );
 }
