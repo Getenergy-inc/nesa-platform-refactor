@@ -221,7 +221,7 @@ export default function NomineeProfile() {
       // enforces publication_status='published' with a non-incomplete profile.
       const { data, error } = await (supabase as any)
         .from("public_nominees")
-        .select("id, name, slug, title, organization, bio, photo_url, logo_url, country, region, renomination_count, is_platinum, recognition_pathway")
+        .select("id, name, slug, title, organization, bio, photo_url, logo_url, country, region, renomination_count, is_platinum, recognition_class")
         .or(`slug.eq.${slug},slug.eq.${nameSlug}`)
         .limit(1)
         .maybeSingle();
@@ -246,7 +246,7 @@ export default function NomineeProfile() {
       }
       setDbNomineeId(data.id);
       setRenominationCount(data.renomination_count ?? 0);
-      setRecognitionPathway((data.recognition_pathway as any) ?? null);
+      setRecognitionPathway((data.recognition_class as any) ?? null);
       // No hard-coded record → build the display object from the DB row.
       if (!hardcodedNominee) {
         setDbNominee(buildEnrichedFromDb(data));
