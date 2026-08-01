@@ -138,18 +138,6 @@ export default function NomineesHubPage() {
     return out;
   }, [nominees]);
 
-  const pillarCounts = useMemo(() => {
-    const out: Record<string, number> = {};
-    (nominees ?? []).forEach((n) => {
-      const slug = String(n.categorySlug ?? "");
-      PILLARS.forEach((p) => {
-        const key = p.slug.split("-")[0];
-        if (slug.includes(key)) out[p.slug] = (out[p.slug] ?? 0) + 1;
-      });
-    });
-    return out;
-  }, [nominees]);
-
   const categoryCounts = useMemo(() => {
     const out = new Map<string, { name: string; count: number }>();
     (nominees ?? []).forEach((n) => {
