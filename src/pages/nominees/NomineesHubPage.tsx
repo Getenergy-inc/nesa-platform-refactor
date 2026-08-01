@@ -233,9 +233,9 @@ export default function NomineesHubPage() {
         </Section>
 
         {/* ────────────────────────────────────────────────────────────────
-            SECTION 5 — BROWSE BY RECOGNITION TIER (filter chips)
+            SECTION 2 — BROWSE BY RECOGNITION TIER (filter chips)
         ──────────────────────────────────────────────────────────────── */}
-        <Section eyebrow="04 · Filter" title="Browse by Recognition Tier">
+        <Section eyebrow="02 · Filter" title="Browse by Recognition Tier">
           <div className="flex flex-wrap gap-2">
             <TierChip active={tierFilter === "all"} onClick={() => setTierFilter("all")} label="All Tiers" count={nominees?.length ?? 0} />
             {TIER_META.map((t) => (
