@@ -1956,9 +1956,9 @@ export const DATASET_META = {
 
   /** Summary statistics */
   summary: {
-    totalCategories: 14,
-    totalSubcategories: 132,
-    totalNominees: 1703,
+    totalCategories: 15,
+    totalSubcategories: 128,
+    totalNominees: 1674,
     totalCountries: 35,
     totalRegions: 5,
     pathways: {
