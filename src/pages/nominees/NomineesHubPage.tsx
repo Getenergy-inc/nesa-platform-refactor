@@ -13,7 +13,7 @@ import {
   Search, Trophy, Users, ArrowRight, Sparkles, Globe2, Plane,
   HeartHandshake, MapPin, Crown, Building2, Award, Star, Medal,
   BookOpen, GraduationCap, Megaphone, Tv, Filter, Shield, ScrollText,
-  ChevronRight, X, BadgeCheck,
+  ChevronRight, X,
 } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
