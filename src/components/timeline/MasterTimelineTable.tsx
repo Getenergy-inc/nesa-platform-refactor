@@ -149,6 +149,27 @@ export function MasterTimelineTable({
           </li>
         ))}
       </ol>
+
+      {!hideOpenItems && (
+        <div className="rounded-2xl border border-white/10 bg-white/[0.02] p-5 sm:p-6">
+          <div className="flex items-center gap-2">
+            <AlertTriangle className="h-4 w-4 text-amber-300" aria-hidden />
+            <h3 className="font-serif text-lg text-white">Master Open Items List</h3>
+          </div>
+          <p className="mt-1 text-sm text-white/60">
+            Published transparently. These items are unresolved in the source records — no dates have been invented.
+          </p>
+          <ul className="mt-4 space-y-3">
+            {MASTER_TIMELINE_OPEN_ITEMS.map((item) => (
+              <li key={item.id} className="rounded-lg border border-amber-400/20 bg-amber-500/[0.05] p-3">
+                <p className="text-sm font-medium text-white">{item.item}</p>
+                <p className="mt-1 text-xs text-white/65">{item.detail}</p>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
     </section>
   );
+
 }
