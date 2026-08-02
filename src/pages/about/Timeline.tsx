@@ -21,19 +21,19 @@ const SUMMARY_CARDS = [
   {
     icon: Calendar,
     label: "Recognition Campaign",
-    value: "1 July → 22 Oct 2026",
-    detail: "Pre-nomination, nominations, voting, recognition shows and the Awards Gala",
+    value: "1 July → 14 Dec 2026",
+    detail: "Pre-nomination activation, nominations, NRC verification, TV showcases and the Recognition Gala",
   },
   {
     icon: Trophy,
-    label: "Awards Gala",
+    label: "Recognition Gala",
     value: "14 December 2026",
-    detail: "Gold-Blue Garnet Awards Gala — Africa's flagship education recognition moment",
+    detail: "NESA-Africa 2026 Recognition Gala, Lagos — Africa's flagship education recognition moment",
   },
   {
     icon: Heart,
     label: "Impact & Legacy Phase",
-    value: "Oct 2026 → Oct 2027",
+    value: "Dec 2026 → Dec 2027",
     detail: "EduAid-Africa · Rebuild My School Africa · Afri-EduTourism · Scholarships",
   },
   {
@@ -45,13 +45,14 @@ const SUMMARY_CARDS = [
 ];
 
 const PARTICIPANT_TRACKS = [
-  { label: "Nominees", to: "/nominate", desc: "Discover your subcategory and submit a nomination." },
-  { label: "Voters", to: "/vote/how-it-works", desc: "Participate with AGC during voting windows." },
-  { label: "Judges", to: "/judges/directory", desc: "Independent jury onboarding and scoring." },
+  { label: "Nominees", to: "/nominate", desc: "Discover your subcategory and submit a nomination from 30 August 2026." },
+  { label: "NRC Verifiers", to: "/nrc", desc: "Research, verify and evidence every nomination against the EDI Matrix." },
+  { label: "Judges", to: "/judges/directory", desc: "Icon judges' onboarding, calibration and final review." },
   { label: "Partners", to: "/partners", desc: "Sponsor, fund or co-host recognition moments." },
   { label: "Volunteers", to: "/volunteer", desc: "Power regional activation and storytelling." },
   { label: "Media", to: "/media", desc: "Broadcast, interviews and continental coverage." },
 ];
+
 
 export default function Timeline() {
   return (
