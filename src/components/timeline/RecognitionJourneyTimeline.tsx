@@ -9,6 +9,9 @@ import {
   Sparkles,
   Vote,
   Tv,
+  ShieldCheck,
+  Gavel,
+  Clapperboard,
   Gem,
   Trophy,
   Heart,
@@ -42,6 +45,9 @@ const ICONS: Record<string, React.ComponentType<{ className?: string }>> = {
   Gem,
   Trophy,
   Heart,
+  ShieldCheck,
+  Gavel,
+  Clapperboard,
 };
 
 const ACCENTS: Record<JourneyPhase["accent"], { ring: string; chip: string; dot: string; glow: string }> = {
