@@ -1,7 +1,9 @@
 import { Link } from "react-router-dom";
-import { ArrowRight, Megaphone } from "lucide-react";
+import { ArrowRight, Megaphone, AlertTriangle } from "lucide-react";
 import {
   MASTER_TIMELINE_2026,
+  MASTER_TIMELINE_NOMINATION_WINDOWS,
+  MASTER_TIMELINE_OPEN_ITEMS,
   MASTER_TIMELINE_PUBLIC_NOTICE,
   MASTER_TIMELINE_TRACK_ACCENT,
   MASTER_TIMELINE_TRACK_LABELS,
@@ -10,15 +12,19 @@ import {
 interface Props {
   /** Optional filter — hide the public-notice banner when embedded elsewhere. */
   hideNotice?: boolean;
+  /** Hide the flagged Master Open Items List (e.g. on marketing surfaces). */
+  hideOpenItems?: boolean;
   heading?: string;
   intro?: string;
 }
 
 export function MasterTimelineTable({
   hideNotice = false,
+  hideOpenItems = false,
   heading = "NESA-Africa & EduAid-Africa 2026 Master Timeline",
   intro = "1 July – 14 December 2026 · Every milestone from public activation through the Recognition Gala.",
 }: Props) {
+
   return (
     <section className="space-y-8">
       {!hideNotice && (
