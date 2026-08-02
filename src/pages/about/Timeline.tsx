@@ -92,8 +92,9 @@ export default function Timeline() {
               identifies, verifies, celebrates and supports the people and organisations enabling
               Education for All across <span className="text-white">Eight Africa Regions</span>, Africans in the
               <span className="text-white"> Diaspora</span>, and <span className="text-white">Friends of Africa</span>.
-              Each milestone builds momentum toward the Gold-Blue Garnet Awards Gala while
-              opening doors for participation, partnerships, storytelling and measurable impact.
+              Each milestone builds momentum toward the NESA-Africa 2026 Recognition Gala on 14 December
+              while opening doors for participation, partnerships, storytelling and measurable impact.
+
             </p>
             <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
               <Button asChild size="lg" className="bg-gradient-to-r from-amber-500 to-yellow-600 text-charcoal hover:from-amber-400 hover:to-yellow-500">
