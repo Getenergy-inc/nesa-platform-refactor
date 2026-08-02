@@ -3,7 +3,7 @@ import { ArrowRight, Megaphone } from "lucide-react";
 import { MASTER_TIMELINE_PUBLIC_NOTICE } from "@/data/masterTimeline2026";
 
 /**
- * Continental "Public Nominations for All 4 Tiers Open 1 August 2026" notice.
+ * Continental "Public Nominations for All 4 Tiers Open 30 August 2026" notice.
  * Rendered on the landing page and the Timeline page per the 2026 Master Timeline directive.
  */
 export function PublicNominationsNotice() {

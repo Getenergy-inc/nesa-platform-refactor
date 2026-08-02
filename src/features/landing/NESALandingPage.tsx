@@ -111,7 +111,7 @@ export function NESALandingPage() {
 
         <TrustIndicators />
 
-        {/* 1d. PUBLIC NOTICE — Nominations for all 4 tiers open 1 August 2026 */}
+        {/* 1d. PUBLIC NOTICE — Nominations for all 4 tiers open 30 August 2026 */}
         <PublicNominationsNotice />
 
         {/* 2. COUNTDOWN — Recognition Gala, 14 Dec 2026, Lagos */}

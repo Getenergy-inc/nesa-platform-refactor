@@ -122,9 +122,9 @@ export interface ScheduleTemplate {
 
 // Default schedule template - NESA 2026 official timeline (per 2026 Master Timeline)
 // Pre-nomination activation 1–31 Jul · Jury onboarding 29 Jun – 10 Sep
-// PUBLIC NOMINATIONS OPEN FOR ALL 4 TIERS: 1 August 2026
+// PUBLIC NOMINATIONS OPEN FOR ALL 4 TIERS: 30 August 2026
 // Icon nominations 1 Aug – 12 Sep · Platinum show 7 Aug · Icon show 21 Aug
-// Gold voting 15 Aug – 15 Sep · Gold winners 16 Sep · Blue Garnet voting 16 Sep – 22 Oct · Gala 22 Oct 2026
+// Gold voting 15 Aug – 15 Sep · Gold winners 16 Sep · Blue Garnet voting 16 Sep – 22 Oct · Gala 14 Dec 2026
 export const DEFAULT_SCHEDULE_TEMPLATE: ScheduleTemplate = {
   nominationReview: {
     nrcReviewStart: { monthDay: "05-01", yearOffset: 0 },
@@ -265,7 +265,7 @@ export function buildTimeline(
       phase: "Phase 3 · Africa Education Icon Nominations",
       dateRange: `1 August – 12 September ${ceremonyYear}`,
       description:
-        "Public nominations for all four Recognition Tiers open on 1 August 2026. The Africa Education Icon window closes 12 September — celebrating transformational Education Enablers (2006–2026).",
+        "Public nominations for all four Recognition Tiers open on 30 August 2026. The Africa Education Icon window closes 12 September — celebrating transformational Education Enablers (2006–2026).",
       type: "recognition",
     },
     {
