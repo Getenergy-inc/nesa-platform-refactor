@@ -194,8 +194,9 @@ export default function Timeline() {
             One Continent. Eight Africa Regions. Two Global Communities. One Mission.
           </p>
           <p className="mx-auto mt-3 max-w-2xl text-sm text-white/65">
-            {RECOGNITION_JOURNEY_2026.length} phases · 4 Recognition Tiers · 9 Recognition Pillars · powered by AfriGold Coin (AGC).
+            {RECOGNITION_JOURNEY_2026.length} phases · 4 Recognition Tiers · 9 Recognition Pillars · every Enabler verified by the Nominee Research Corps.
           </p>
+
         </div>
       </section>
     </div>
