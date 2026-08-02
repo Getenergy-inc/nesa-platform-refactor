@@ -60,6 +60,23 @@ export function MasterTimelineTable({
         <p className="mt-2 text-white/70">{intro}</p>
       </div>
 
+      {/* Two distinct nomination windows */}
+      <div className="grid gap-3 sm:grid-cols-2">
+        {MASTER_TIMELINE_NOMINATION_WINDOWS.map((w) => (
+          <Link
+            key={w.id}
+            to={w.href}
+            className="group rounded-xl border border-white/10 bg-white/[0.03] p-4 transition hover:border-amber-400/40 hover:bg-white/[0.05]"
+          >
+            <p className="font-serif text-base text-white group-hover:text-amber-200">{w.tier}</p>
+            <p className="mt-1 text-sm font-medium text-amber-200">{w.window}</p>
+            <p className="mt-1 text-xs text-white/60">{w.verification}</p>
+          </Link>
+        ))}
+      </div>
+
+
+
       {/* Desktop table */}
       <div className="hidden overflow-hidden rounded-2xl border border-white/10 md:block">
         <table className="w-full border-collapse text-left text-sm">
