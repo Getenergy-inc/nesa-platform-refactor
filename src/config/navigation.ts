@@ -191,7 +191,7 @@ export const MAIN_NAV: NavItem[] = [
       { label: "Webinars", href: "/media/webinars", description: "Continental webinar series", icon: Mic },
       { label: "Gallery", href: "/gallery", description: "Photo archives across NESA seasons", icon: Play },
       { label: "Press Releases", href: "/press", description: "Official announcements", icon: FileCheck },
-      { label: "Awards Gala — 22 Oct 2026", href: "/media/gala", description: "The Blue-Garnet Gala Night", icon: Calendar, badge: "2026" },
+      { label: "Awards Gala — 14 Dec 2026", href: "/media/gala", description: "The Blue-Garnet Gala Night", icon: Calendar, badge: "2026" },
       { label: "Buy Gala Ticket", href: "/tickets", description: "Secure your seat", icon: Ticket },
       { label: "Buy Award Merchandise", href: "/shop", description: "Official NESA-Africa store", icon: ShoppingBag },
     ],

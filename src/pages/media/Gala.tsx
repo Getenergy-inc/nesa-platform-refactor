@@ -182,10 +182,10 @@ export default function Gala() {
   return (
     <>
       <Helmet>
-        <title>{`NESA-Africa ${year} Blue Garnet Awards Gala | Lagos · 22 Oct 2026`}</title>
+        <title>{`NESA-Africa ${year} Blue Garnet Awards Gala | Lagos · 14 Dec 2026`}</title>
         <meta
           name="description"
-          content={`The NESA-Africa ${year} Blue Garnet Awards Gala — a cinematic continental celebration of Africa's education changemakers. Lagos · 22 Oct 2026.`}
+          content={`The NESA-Africa ${year} Blue Garnet Awards Gala — a cinematic continental celebration of Africa's education changemakers. Lagos · 14 Dec 2026.`}
         />
         <link rel="canonical" href="https://nesaafrica.lovable.app/media/gala" />
         <meta property="og:title" content={`NESA-Africa ${year} Blue Garnet Awards Gala`} />

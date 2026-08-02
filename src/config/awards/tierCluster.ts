@@ -123,13 +123,13 @@ const ICON: TierClusterConfig = {
       "Undisclosed conflicts of interest",
     ],
     timelineNote:
-      "Icon nominations open 1 August 2026 and close 12 September 2026. Governance-approved laureates are announced at the NESA-Africa 2026 Recognition Gala on 14 December 2026 in Lagos.",
+      "Icon nominations open 30 August 2026 and close 12 September 2026. Governance-approved laureates are announced at the NESA-Africa 2026 Recognition Gala on 14 December 2026 in Lagos.",
   },
 
   nominees: {
     directoryFilterKey: "africa-education-icon",
     directoryLabel: "Explore Africa Education Icon nominees",
-    empty: "Icon nominations open 1 August 2026. Confirmed nominees will appear here as NRC verification completes.",
+    empty: "Icon nominations open 30 August 2026. Confirmed nominees will appear here as NRC verification completes.",
     highlight: "Two decades of laureates (2006–2026) are catalogued in the Impact Directory.",
   },
 
@@ -214,13 +214,13 @@ const BLUE_GARNET: TierClusterConfig = {
       "Undisclosed conflicts of interest with judges",
     ],
     timelineNote:
-      "Nominations open 1 August 2026, close 12 September 2026. Finalists announced 5 October 2026. Winners revealed at the Gala on 14 December 2026.",
+      "Nominations open 30 August 2026, close 12 September 2026. Finalists announced 5 October 2026. Winners revealed at the Gala on 14 December 2026.",
   },
 
   nominees: {
     directoryFilterKey: "gold-blue-garnet",
     directoryLabel: "Explore Blue-Garnet nominees",
-    empty: "Blue-Garnet nominations open 1 August 2026 across nine competitive categories.",
+    empty: "Blue-Garnet nominations open 30 August 2026 across nine competitive categories.",
     highlight: "Every Blue-Garnet nominee is verified and scored against the same public rubric.",
   },
 
@@ -304,13 +304,13 @@ const PLATINUM: TierClusterConfig = {
       "Duplicate institutional records without consolidation",
     ],
     timelineNote:
-      "Platinum institutional nominations open 1 August 2026 and close 12 September 2026. Recognised institutions are honoured at the Gala on 14 December 2026.",
+      "Platinum institutional nominations open 30 August 2026 and close 12 September 2026. Recognised institutions are honoured at the Gala on 14 December 2026.",
   },
 
   nominees: {
     directoryFilterKey: "platinum-recognition",
     directoryLabel: "Explore Platinum nominees",
-    empty: "Platinum institutional nominations open 1 August 2026 across seven categories.",
+    empty: "Platinum institutional nominations open 30 August 2026 across seven categories.",
     highlight: "Platinum recognises institutions, not individuals — one recognised entity per institutional record.",
   },
 
@@ -394,13 +394,13 @@ const INFLUENCER: TierClusterConfig = {
       "Undisclosed brand relationships in submitted evidence",
     ],
     timelineNote:
-      "Influencer nominations open 1 August 2026, close 12 September 2026. Recognised influencers appear on the NESA-Africa Recognition Gala broadcast on 14 December 2026.",
+      "Influencer nominations open 30 August 2026, close 12 September 2026. Recognised influencers appear on the NESA-Africa Recognition Gala broadcast on 14 December 2026.",
   },
 
   nominees: {
     directoryFilterKey: "influencer-education-impact",
     directoryLabel: "Explore Influencer nominees",
-    empty: "Influencer nominations open 1 August 2026 across the three subcategories.",
+    empty: "Influencer nominations open 30 August 2026 across the three subcategories.",
     highlight: "Verified reach + verified education outcomes — never reach alone.",
   },
 

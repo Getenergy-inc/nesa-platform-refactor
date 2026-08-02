@@ -80,7 +80,7 @@ const TIMELINE = [
   { date: "14–30 Sept 2026", label: "Judges Arena — Panel Screening" },
   { date: "1–7 Oct 2026", label: "Grand Jury Ranked-Choice Voting" },
   { date: "8–15 Oct 2026", label: "Governance Ratification" },
-  { date: "22 Oct 2026", label: "Recognition Gala · Lagos, Nigeria" },
+  { date: "14 Dec 2026", label: "Recognition Gala · Lagos, Nigeria" },
 ];
 
 const FAQ = [
@@ -126,11 +126,11 @@ export default function AfricaEducationIcon() {
         <title>Africa Education Icon Award 2026 · NESA-Africa Lifetime Recognition</title>
         <meta
           name="description"
-          content="Nominate an Africa Education Icon (2006–2026). Three lifetime pathways, three classifications, nine laureates. Public nominations open 1 August 2026."
+          content="Nominate an Africa Education Icon (2006–2026). Three lifetime pathways, three classifications, nine laureates. Public nominations open 30 August 2026."
         />
         <link rel="canonical" href={PAGE_URL} />
         <meta property="og:title" content="Africa Education Icon Award 2026 · NESA-Africa" />
-        <meta property="og:description" content="Recognising the Enablers of Education for All Across Africa. Public nominations open 1 August 2026." />
+        <meta property="og:description" content="Recognising the Enablers of Education for All Across Africa. Public nominations open 30 August 2026." />
         <meta property="og:type" content="website" />
         <meta property="og:url" content={PAGE_URL} />
         <meta name="twitter:card" content="summary_large_image" />
@@ -139,7 +139,7 @@ export default function AfricaEducationIcon() {
       {/* 1. Announcement bar */}
       <div className="bg-gold text-charcoal">
         <div className="container mx-auto px-4 py-2 text-center text-xs sm:text-sm font-semibold">
-          Public Nominations Open · 1 August 2026 — NESA-Africa 2026
+          Public Nominations Open · 30 August 2026 — NESA-Africa 2026
         </div>
       </div>
 

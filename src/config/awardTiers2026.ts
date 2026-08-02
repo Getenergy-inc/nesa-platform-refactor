@@ -42,7 +42,7 @@ export const AWARD_TIERS_2026: AwardTier2026[] = [
     voteMechanicLabel: "60% Jury + 40% Public AGC Voting Coin",
     cta: "Nominate / Vote",
     ctaHref: "/awards/blue-garnet",
-    keyDates: "Voting 16 Sep – 22 Oct 2026 · Gala 22 Oct 2026, Lagos",
+    keyDates: "Voting 16 Sep – 14 Dec 2026 · Gala 14 Dec 2026, Lagos",
     categories: [
       { id: 1, name: "Best CSR for Education (Africa Regional)", subcategoryCount: 6, pendingNames: true, status: "needs-platform-pull" },
       { id: 2, name: "Best CSR for Education (Nigeria)", subcategoryCount: 23, pendingNames: true, status: "needs-platform-pull" },

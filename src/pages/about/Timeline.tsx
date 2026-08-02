@@ -21,19 +21,19 @@ const SUMMARY_CARDS = [
   {
     icon: Calendar,
     label: "Recognition Campaign",
-    value: "1 July → 22 Oct 2026",
-    detail: "Pre-nomination, nominations, voting, recognition shows and the Awards Gala",
+    value: "1 July → 14 Dec 2026",
+    detail: "Pre-nomination activation, nominations, NRC verification, TV showcases and the Recognition Gala",
   },
   {
     icon: Trophy,
-    label: "Awards Gala",
+    label: "Recognition Gala",
     value: "14 December 2026",
-    detail: "Gold-Blue Garnet Awards Gala — Africa's flagship education recognition moment",
+    detail: "NESA-Africa 2026 Recognition Gala, Lagos — Africa's flagship education recognition moment",
   },
   {
     icon: Heart,
     label: "Impact & Legacy Phase",
-    value: "Oct 2026 → Oct 2027",
+    value: "Dec 2026 → Dec 2027",
     detail: "EduAid-Africa · Rebuild My School Africa · Afri-EduTourism · Scholarships",
   },
   {
@@ -45,13 +45,14 @@ const SUMMARY_CARDS = [
 ];
 
 const PARTICIPANT_TRACKS = [
-  { label: "Nominees", to: "/nominate", desc: "Discover your subcategory and submit a nomination." },
-  { label: "Voters", to: "/vote/how-it-works", desc: "Participate with AGC during voting windows." },
-  { label: "Judges", to: "/judges/directory", desc: "Independent jury onboarding and scoring." },
+  { label: "Nominees", to: "/nominate", desc: "Discover your subcategory and submit a nomination from 30 August 2026." },
+  { label: "NRC Verifiers", to: "/nrc", desc: "Research, verify and evidence every nomination against the EDI Matrix." },
+  { label: "Judges", to: "/judges/directory", desc: "Icon judges' onboarding, calibration and final review." },
   { label: "Partners", to: "/partners", desc: "Sponsor, fund or co-host recognition moments." },
   { label: "Volunteers", to: "/volunteer", desc: "Power regional activation and storytelling." },
   { label: "Media", to: "/media", desc: "Broadcast, interviews and continental coverage." },
 ];
+
 
 export default function Timeline() {
   return (
@@ -91,8 +92,9 @@ export default function Timeline() {
               identifies, verifies, celebrates and supports the people and organisations enabling
               Education for All across <span className="text-white">Eight Africa Regions</span>, Africans in the
               <span className="text-white"> Diaspora</span>, and <span className="text-white">Friends of Africa</span>.
-              Each milestone builds momentum toward the Gold-Blue Garnet Awards Gala while
-              opening doors for participation, partnerships, storytelling and measurable impact.
+              Each milestone builds momentum toward the NESA-Africa 2026 Recognition Gala on 14 December
+              while opening doors for participation, partnerships, storytelling and measurable impact.
+
             </p>
             <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
               <Button asChild size="lg" className="bg-gradient-to-r from-amber-500 to-yellow-600 text-charcoal hover:from-amber-400 hover:to-yellow-500">
@@ -164,8 +166,9 @@ export default function Timeline() {
           </Badge>
           <h2 className="mt-3 font-serif text-3xl text-white sm:text-4xl">Who Participates &amp; How</h2>
           <p className="mt-2 text-white/70">
-            The recognition journey is designed for nominees, voters, judges, partners, volunteers and media — each with a clear pathway.
+            The recognition journey is designed for nominees, NRC verifiers, judges, partners, volunteers and media — each with a clear pathway.
           </p>
+
         </div>
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {PARTICIPANT_TRACKS.map((t) => (
@@ -192,8 +195,9 @@ export default function Timeline() {
             One Continent. Eight Africa Regions. Two Global Communities. One Mission.
           </p>
           <p className="mx-auto mt-3 max-w-2xl text-sm text-white/65">
-            {RECOGNITION_JOURNEY_2026.length} phases · 4 Recognition Tiers · 9 Recognition Pillars · powered by AfriGold Coin (AGC).
+            {RECOGNITION_JOURNEY_2026.length} phases · 4 Recognition Tiers · 9 Recognition Pillars · every Enabler verified by the Nominee Research Corps.
           </p>
+
         </div>
       </section>
     </div>

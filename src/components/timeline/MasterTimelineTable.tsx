@@ -1,7 +1,9 @@
 import { Link } from "react-router-dom";
-import { ArrowRight, Megaphone } from "lucide-react";
+import { ArrowRight, Megaphone, AlertTriangle } from "lucide-react";
 import {
   MASTER_TIMELINE_2026,
+  MASTER_TIMELINE_NOMINATION_WINDOWS,
+  MASTER_TIMELINE_OPEN_ITEMS,
   MASTER_TIMELINE_PUBLIC_NOTICE,
   MASTER_TIMELINE_TRACK_ACCENT,
   MASTER_TIMELINE_TRACK_LABELS,
@@ -10,15 +12,19 @@ import {
 interface Props {
   /** Optional filter — hide the public-notice banner when embedded elsewhere. */
   hideNotice?: boolean;
+  /** Hide the flagged Master Open Items List (e.g. on marketing surfaces). */
+  hideOpenItems?: boolean;
   heading?: string;
   intro?: string;
 }
 
 export function MasterTimelineTable({
   hideNotice = false,
+  hideOpenItems = false,
   heading = "NESA-Africa & EduAid-Africa 2026 Master Timeline",
   intro = "1 July – 14 December 2026 · Every milestone from public activation through the Recognition Gala.",
 }: Props) {
+
   return (
     <section className="space-y-8">
       {!hideNotice && (
@@ -53,6 +59,23 @@ export function MasterTimelineTable({
         <h2 className="font-serif text-3xl text-white sm:text-4xl">{heading}</h2>
         <p className="mt-2 text-white/70">{intro}</p>
       </div>
+
+      {/* Two distinct nomination windows */}
+      <div className="grid gap-3 sm:grid-cols-2">
+        {MASTER_TIMELINE_NOMINATION_WINDOWS.map((w) => (
+          <Link
+            key={w.id}
+            to={w.href}
+            className="group rounded-xl border border-white/10 bg-white/[0.03] p-4 transition hover:border-amber-400/40 hover:bg-white/[0.05]"
+          >
+            <p className="font-serif text-base text-white group-hover:text-amber-200">{w.tier}</p>
+            <p className="mt-1 text-sm font-medium text-amber-200">{w.window}</p>
+            <p className="mt-1 text-xs text-white/60">{w.verification}</p>
+          </Link>
+        ))}
+      </div>
+
+
 
       {/* Desktop table */}
       <div className="hidden overflow-hidden rounded-2xl border border-white/10 md:block">
@@ -126,6 +149,27 @@ export function MasterTimelineTable({
           </li>
         ))}
       </ol>
+
+      {!hideOpenItems && (
+        <div className="rounded-2xl border border-white/10 bg-white/[0.02] p-5 sm:p-6">
+          <div className="flex items-center gap-2">
+            <AlertTriangle className="h-4 w-4 text-amber-300" aria-hidden />
+            <h3 className="font-serif text-lg text-white">Master Open Items List</h3>
+          </div>
+          <p className="mt-1 text-sm text-white/60">
+            Published transparently. These items are unresolved in the source records — no dates have been invented.
+          </p>
+          <ul className="mt-4 space-y-3">
+            {MASTER_TIMELINE_OPEN_ITEMS.map((item) => (
+              <li key={item.id} className="rounded-lg border border-amber-400/20 bg-amber-500/[0.05] p-3">
+                <p className="text-sm font-medium text-white">{item.item}</p>
+                <p className="mt-1 text-xs text-white/65">{item.detail}</p>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
     </section>
   );
+
 }
