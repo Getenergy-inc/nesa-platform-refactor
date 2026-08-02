@@ -78,7 +78,7 @@ export default function EventsPage() {
         </section>
 
         <section className="container pb-16">
-          <MasterTimelineTable hideNotice />
+          <MasterTimelineTable hideNotice hideOpenItems />
         </section>
       </div>
     </>
