@@ -165,8 +165,9 @@ export default function Timeline() {
           </Badge>
           <h2 className="mt-3 font-serif text-3xl text-white sm:text-4xl">Who Participates &amp; How</h2>
           <p className="mt-2 text-white/70">
-            The recognition journey is designed for nominees, voters, judges, partners, volunteers and media — each with a clear pathway.
+            The recognition journey is designed for nominees, NRC verifiers, judges, partners, volunteers and media — each with a clear pathway.
           </p>
+
         </div>
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {PARTICIPANT_TRACKS.map((t) => (
