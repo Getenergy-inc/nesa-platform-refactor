@@ -7,7 +7,8 @@ export interface ContentPage {
   content: string | null;
   metadata: Record<string, unknown>;
   is_published: boolean;
-  author_id: string | null;
+  /** Never returned by the public API — internal staff identifiers are withheld. */
+  author_id?: never;
   created_at: string;
   updated_at: string;
 }

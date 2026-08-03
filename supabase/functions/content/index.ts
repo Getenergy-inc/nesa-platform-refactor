@@ -5,6 +5,10 @@ const corsHeaders = {
   "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type",
 };
 
+// Never expose internal staff identifiers (author_id) through the public API.
+const PUBLIC_PAGE_COLUMNS =
+  "id, slug, title, content, metadata, is_published, created_at, updated_at";
+
 Deno.serve(async (req) => {
   // Handle CORS preflight
   if (req.method === "OPTIONS") {
@@ -49,7 +53,7 @@ Deno.serve(async (req) => {
             // Get single page
             const { data, error } = await supabase
               .from("content_pages")
-              .select("*")
+              .select(PUBLIC_PAGE_COLUMNS)
               .eq("slug", slug)
               .single();
 
@@ -62,7 +66,7 @@ Deno.serve(async (req) => {
 
           // List all pages (admin sees all, public sees published)
           const isAdmin = await checkAdmin();
-          let query = supabase.from("content_pages").select("*");
+          let query = supabase.from("content_pages").select(PUBLIC_PAGE_COLUMNS);
           
           if (!isAdmin) {
             query = query.eq("is_published", true);
@@ -93,7 +97,7 @@ Deno.serve(async (req) => {
           const { data, error } = await supabase
             .from("content_pages")
             .insert({ slug, title, content, metadata, is_published })
-            .select()
+            .select(PUBLIC_PAGE_COLUMNS)
             .single();
 
           if (error) throw error;
@@ -120,7 +124,7 @@ Deno.serve(async (req) => {
             .from("content_pages")
             .update(body)
             .eq("slug", slug)
-            .select()
+            .select(PUBLIC_PAGE_COLUMNS)
             .single();
 
           if (error) throw error;
@@ -189,7 +193,7 @@ Deno.serve(async (req) => {
         if (req.method === "GET") {
           const { data, error } = await supabase
             .from("content_pages")
-            .select("*")
+            .select(PUBLIC_PAGE_COLUMNS)
             .eq("is_published", true)
             .contains("metadata", { category: "press" })
             .order("created_at", { ascending: false });
