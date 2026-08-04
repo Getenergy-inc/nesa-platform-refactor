@@ -11,7 +11,7 @@ import {
   BookOpen,
   ClipboardCheck,
   UserCheck,
-  Vote,
+  CalendarDays,
   Award as AwardIcon,
 } from "lucide-react";
 import { NESAHeader } from "@/components/nesa/NESAHeader";
@@ -97,7 +97,7 @@ export default function InfluencerImpact2026() {
           <div className="mx-auto mt-8 grid max-w-3xl grid-cols-2 gap-3 md:grid-cols-4">
             <StatCard value={String(stats.total)} label="Verified Nominees" />
             <StatCard value="3" label="Recognition Subcategories" />
-            <StatCard value="100%" label="Public AGC Participation" />
+            <StatCard value="NRC" label="Verified Recognition" />
             <StatCard value={String(stats.regions)} label="Recognition Regions" />
           </div>
 
@@ -137,6 +137,21 @@ export default function InfluencerImpact2026() {
         </div>
       </div>
 
+      {/* KEY DATES — NESA-Africa 2026 Complete Timeline Set */}
+      <section aria-label="Key dates" className="border-b border-gold/10 bg-charcoal py-8">
+        <div className="container mx-auto max-w-5xl px-4">
+          <h2 className="text-center font-display text-xl font-bold text-white md:text-2xl">
+            Key <span className="text-gold">Dates</span>
+          </h2>
+          <div className="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+            <StatCard value="30 Aug 2026" label="Nominations Open" />
+            <StatCard value="14 Nov 2026" label="Nominations Close" />
+            <StatCard value="16 Sep – 14 Dec 2026" label="Rolling NRC Verification" />
+            <StatCard value="14 Dec 2026" label="Gold-Blue Garnet Gala" />
+          </div>
+        </div>
+      </section>
+
       {/* THREE RECOGNITION SUBCATEGORIES — shared reusable grid */}
       <SubcategoryPathways
         pageSlug="influencer-education-impact-2026"
@@ -149,7 +164,7 @@ export default function InfluencerImpact2026() {
             blurb: "Creators, podcasters, bloggers and digital advocates producing education content.",
             recognises: "Creators, podcasters, bloggers, digital advocates",
             scope: "Africa & Diaspora",
-            voteSplit: "100% public AGC",
+            voteSplit: "NRC-verified · no public voting",
             viewHref: "/awards/influencers-education-impact/education-content-social-media-influencers",
             nominateHref: "/nominate?tier=influencer-2026&track=social-media",
           },
@@ -159,7 +174,7 @@ export default function InfluencerImpact2026() {
             blurb: "Athletes, academies, coaches and sports leaders funding learning.",
             recognises: "Athletes, academies, coaches, sports leaders",
             scope: "Africa & Diaspora",
-            voteSplit: "100% public AGC",
+            voteSplit: "NRC-verified · no public voting",
             viewHref: "/awards/influencers-education-impact/african-footballers-supporting-education",
             nominateHref: "/nominate?tier=influencer-2026&track=sports",
           },
@@ -169,7 +184,7 @@ export default function InfluencerImpact2026() {
             blurb: "Musicians, performers, producers and music executives backing education.",
             recognises: "Musicians, performers, producers, music executives",
             scope: "Africa & Diaspora",
-            voteSplit: "100% public AGC",
+            voteSplit: "NRC-verified · no public voting",
             viewHref: "/awards/influencers-education-impact/african-musicians-supporting-education",
             nominateHref: "/nominate?tier=influencer-2026&track=music",
           },
@@ -262,9 +277,9 @@ export default function InfluencerImpact2026() {
             />
             <StepCard
               step="3"
-              icon={Vote}
-              title="Public Participation"
-              body="Approved nominees enter the relevant public AGC participation subcategory."
+              icon={CalendarDays}
+              title="Verification & EDX Review"
+              body="Verified nominees are scored against the EDX framework — 25% Education Impact, 30% Development Contribution, 45% Excellence & Reach."
             />
             <StepCard
               step="4"
