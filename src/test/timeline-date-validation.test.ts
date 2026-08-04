@@ -223,8 +223,9 @@ const RETIRED: { pattern: RegExp; reason: string }[] = [
   { pattern: /\b10\s+July\s+2026\b/i, reason: "Retired Icon nominations close date — now 12 September 2026" },
   { pattern: /\b29\s+June\s*[–—-]\s*10\s+July\s+2026\b/i, reason: "Retired Icon nominations window" },
   { pattern: /\b1\s*[–—-]\s*30\s+July\s+2026\b/i, reason: "Retired pre-launch window — now 1 July – 30 August 2026" },
-  { pattern: /\b30\s+September\s+2026\b/i, reason: "Retired nominations-close date — now 14 November 2026" },
-  { pattern: /NESA-?Africa\s*2025\/26/i, reason: "Retired branding — use 'NESA-Africa 2026'" },
+  { pattern: /nominations?[^.\n]{0,40}\b30\s+September\s+2026\b/i, reason: "Retired nominations-close date — now 14 November 2026" },
+  { pattern: /NESA-?Africa\s*2025\s*\/\s*26|نيسا-أفريقيا\s*2025\/26/i, reason: "Retired branding — use 'NESA-Africa 2026'" },
+
 ];
 
 function* walkSrc(dir: string): Generator<string> {
