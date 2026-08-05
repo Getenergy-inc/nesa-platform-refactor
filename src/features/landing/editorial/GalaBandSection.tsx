@@ -1,9 +1,10 @@
 import { Link } from "react-router-dom";
 import { useCountdown } from "@/hooks/useCountdown";
-import { GALA } from "@/config/programme";
+import { PROGRAMME_END_DATETIME } from "@/config/programme";
 
 export function GalaBandSection() {
-  const { days, hours, minutes, seconds } = useCountdown(GALA.dateISO);
+  const { days, hours, minutes, seconds } = useCountdown(PROGRAMME_END_DATETIME);
+
 
   const cells = [
     { v: days, l: "Days" },
