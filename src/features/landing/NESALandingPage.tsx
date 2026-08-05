@@ -1,34 +1,27 @@
-// NESA-Africa Landing Page — 18-section public experience (Master Refactor Spec)
+// NESA-Africa Landing Page — Editorial Recognition Edition (homepage only).
 //
-// Strict section order (per master prompt):
-//   1.  Hero
-//   2.  Countdown to Blue-Garnet Gala
-//   3.  The Road to NESA-Africa 2026 (pre-opening gallery)
-//   4.  Why NESA-Africa Exists
-//   5.  Vision, Mission & Strategic Objectives
-//   6.  What Makes NESA-Africa Different
-//   7.  Recognition Framework (4 tiers · 18 categories · 96 subs)
-//   8.  One Continent. Ten Education Regions. One Mission.
-//   9.  Explore Africa's Regions
-//   10. People Behind the Movement (volunteers)
-//   11. Education Stakeholder Endorsements
-//   12. Rebuild My School Africa  ┐
-//   13. EduAid-Africa             ├─ Combined in ImpactProgramsSection (3 cards)
-//   14. NESA-Africa TV            ┘
-//   15. Sponsors & Partners
-//   16. Governance & Integrity Firewall
-//   17. Vision 2035
-//   18. Final CTA
+// Section order:
+//   1.  Editorial hero (Icon Award lead, 6 certificate pills, dual CTA, trophy card)
+//   2.  Public nominations notice (30 August 2026)
+//   3.  Africa Education Icon — Lifetime Achievement 2006–2026 (3 cards)
+//   4.  Recognition Architecture at a Glance (4-tier table)
+//   5.  Certificate of Recognition tiers (3 cards)
+//   6.  Integrity safeguards + no-public-voting disclaimer
+//   7.  Volunteer band (live site_stats)
+//   8.  SCEF's Board of Advisors
+//   9.  Moments from NESA-Africa 2025 (gallery)
+//   10. Gold-Blue Garnet Awards Gala countdown — 14 December 2026
+//   11. Get Involved (sponsor · donate · volunteer · NRC)
+//   12. Governance & integrity firewall
+//   13. Final CTA
+//
+// Visual skin lives in ./editorial/editorial.css, scoped under `.nesa-ed`.
 
 import { lazy } from "react";
 import { useTranslation } from "react-i18next";
 import { LocalizedSEO } from "@/components/seo/LocalizedSEO";
 
-import { HomeHeroBlock } from "@/components/home/HomeHeroBlock";
-import { TrophyHeroSection } from "@/components/nesa/TrophyHeroSection";
-import { TrustIndicators } from "@/components/common";
 import { PublicNominationsNotice } from "@/components/nesa/PublicNominationsNotice";
-import { CountdownSection } from "@/components/nesa/CountdownSection";
 import { NESAFooter } from "@/components/nesa/NESAFooter";
 import { NESAHeader } from "@/components/nesa/NESAHeader";
 import { UtilityBar } from "@/components/nesa/UtilityBar";
@@ -41,31 +34,28 @@ import { BackToTopButton } from "@/components/ui/back-to-top";
 import { FloatingFAQButton } from "@/components/nesa/PageFAQ";
 import { MobileStickyNominateCTA } from "@/components/nesa/MobileStickyNominateCTA";
 
-// Lazy below-fold sections
-const HomepageGalleryTeaser = lazy(() => import("@/components/gallery/HomepageGalleryTeaser").then(m => ({ default: m.HomepageGalleryTeaser })));
-const WhyNESAExistsSection = lazy(() => import("@/components/nesa/WhyNESAExistsSection").then(m => ({ default: m.WhyNESAExistsSection })));
-const VisionMissionObjectivesSection = lazy(() => import("@/components/nesa/VisionMissionObjectivesSection").then(m => ({ default: m.VisionMissionObjectivesSection })));
-const WhatMakesNESADifferentSection = lazy(() => import("@/components/nesa/WhatMakesNESADifferentSection").then(m => ({ default: m.WhatMakesNESADifferentSection })));
-const TenRegionsBannerSection = lazy(() => import("@/components/nesa/InteractiveAfricaMap").then(m => ({ default: m.InteractiveAfricaMap })));
-const ExploreRegionsSection = lazy(() => import("@/components/nesa/ExploreRegionsSection").then(m => ({ default: m.ExploreRegionsSection })));
-const PoweredByVolunteersSection = lazy(() => import("@/components/nesa/PoweredByVolunteersSection").then(m => ({ default: m.PoweredByVolunteersSection })));
-const EndorsedBySection = lazy(() => import("@/components/nesa/EndorsedBySection").then(m => ({ default: m.EndorsedBySection })));
-const ImpactProgramsSection = lazy(() => import("@/components/nesa/ImpactProgramsSection").then(m => ({ default: m.ImpactProgramsSection })));
-const SponsorsSection = lazy(() => import("@/components/nesa/SponsorsSection").then(m => ({ default: m.SponsorsSection })));
-const GovernanceFirewallSection = lazy(() => import("@/components/nesa/GovernanceFirewallSection").then(m => ({ default: m.GovernanceFirewallSection })));
-const Vision2035RoadmapSection = lazy(() => import("@/components/nesa/Vision2035RoadmapSection").then(m => ({ default: m.Vision2035RoadmapSection })));
-const FinalCTASection = lazy(() => import("@/components/nesa/FinalCTASection").then(m => ({ default: m.FinalCTASection })));
-const HowItWorksHomeSection = lazy(() => import("@/components/nesa/HowItWorksHomeSection").then(m => ({ default: m.HowItWorksHomeSection })));
-const RecognitionTiersHomeSection = lazy(() => import("@/components/nesa/RecognitionTiersHomeSection").then(m => ({ default: m.RecognitionTiersHomeSection })));
-const WhoWeRecogniseClustersSection = lazy(() => import("@/components/nesa/WhoWeRecogniseClustersSection").then(m => ({ default: m.WhoWeRecogniseClustersSection })));
+import "./editorial/editorial.css";
+import {
+  EditorialHero,
+  IconLifetimeSection,
+  ArchitectureTableSection,
+  TierGridSection,
+  TrustBandSection,
+  VolunteerBandSection,
+  BoardOfAdvisorsSection,
+  GallerySection,
+  GalaBandSection,
+  SupportSection,
+} from "./editorial";
 
-const CallForNominationIconAward = lazy(() => import("@/components/nesa/CallForNominationIconAward").then(m => ({ default: m.CallForNominationIconAward })));
-const VisitorPathwaySection = lazy(() => import("@/components/nesa/VisitorPathwaySection").then(m => ({ default: m.VisitorPathwaySection })));
-const TierShowcaseStrip = lazy(() => import("@/components/nesa/TierShowcaseStrip").then(m => ({ default: m.TierShowcaseStrip })));
-const VolunteerTrustBand = lazy(() => import("@/components/nesa/VolunteerTrustBand").then(m => ({ default: m.VolunteerTrustBand })));
-const GalaTicketBand = lazy(() => import("@/components/nesa/GalaTicketBand").then(m => ({ default: m.GalaTicketBand })));
-const SupportDonateBand = lazy(() => import("@/components/nesa/SupportDonateBand").then(m => ({ default: m.SupportDonateBand })));
-const SCEFHistoryTimeline = lazy(() => import("@/components/nesa/SCEFHistoryTimeline").then(m => ({ default: m.SCEFHistoryTimeline })));
+const GovernanceFirewallSection = lazy(() =>
+  import("@/components/nesa/GovernanceFirewallSection").then((m) => ({
+    default: m.GovernanceFirewallSection,
+  })),
+);
+const FinalCTASection = lazy(() =>
+  import("@/components/nesa/FinalCTASection").then((m) => ({ default: m.FinalCTASection })),
+);
 
 export function NESALandingPage() {
   const { t } = useTranslation("pages");
@@ -80,7 +70,7 @@ export function NESALandingPage() {
         )}
         description={t(
           "seo.landing.description",
-          "A continent in recognition. Nominate, vote for, and support Africa's Education Enablers — across 15 regions, 4 award tiers, and 96 subcategories.",
+          "Recognising the Enablers of Education for All Across Africa. Nominations open 30 August 2026 across 4 tiers, 22 categories and 96 subcategories.",
         )}
         ogTitle={t("seo.landing.ogTitle", "NESA-Africa 2026 — A Continent in Recognition")}
         ogDescription={t(
@@ -92,134 +82,52 @@ export function NESALandingPage() {
 
       <ScrollProgressIndicator />
 
-      <div className="min-h-screen bg-charcoal pt-14 sm:pt-16 pb-16 text-center md:text-left">
+      <div className="nesa-ed min-h-screen pt-14 sm:pt-16 pb-16">
         <UtilityBar />
         <NESAHeader />
 
-        {/* 1. HERO — Triptych headline + set-B stat pills */}
-        <TrophyHeroSection />
+        {/* 1. HERO */}
+        <EditorialHero />
 
-        {/* 1b. TIER SHOWCASE — three Certificate of Recognition tiers (set B) */}
-        <LazySection>
-          <TierShowcaseStrip />
-        </LazySection>
-
-        {/* 1c. VOLUNTEER TRUST BAND — live social proof */}
-        <LazySection>
-          <VolunteerTrustBand />
-        </LazySection>
-
-        <TrustIndicators />
-
-        {/* 1d. PUBLIC NOTICE — Nominations for all 4 tiers open 30 August 2026 */}
+        {/* 2. PUBLIC NOTICE — nominations open 30 August 2026 */}
         <PublicNominationsNotice />
 
-        {/* 2. COUNTDOWN — Recognition Gala, 14 Dec 2026, Lagos */}
-        <CountdownSection />
+        {/* 3. AFRICA EDUCATION ICON — lifetime achievement */}
+        <IconLifetimeSection />
 
-        {/* 2b. VISITOR PATHWAY — "Who are you nominating?" self-select before award cards */}
-        <LazySection>
-          <VisitorPathwaySection />
-        </LazySection>
+        {/* 4. RECOGNITION ARCHITECTURE */}
+        <ArchitectureTableSection />
 
+        {/* 5. CERTIFICATE OF RECOGNITION TIERS */}
+        <TierGridSection />
 
-        {/* 2c. CALL FOR NOMINATIONS — Tier 1 Icon → Tier 2 Blue-Garnet → Tier 3 Platinum → Tier 4 Influencers */}
-        <LazySection>
-          <CallForNominationIconAward />
-        </LazySection>
+        {/* 6. INTEGRITY SAFEGUARDS */}
+        <TrustBandSection />
 
+        {/* 7. VOLUNTEER BAND */}
+        <VolunteerBandSection />
 
+        {/* 8. BOARD OF ADVISORS */}
+        <BoardOfAdvisorsSection />
 
-        {/* 3. THE ROAD TO NESA-AFRICA 2026 — pre-opening moments */}
-        <LazySection>
-          <HomepageGalleryTeaser />
-        </LazySection>
+        {/* 9. GALLERY */}
+        <GallerySection />
 
-        {/* 3a. WHO WE RECOGNISE — 3-cluster scannable grid (canonical identity surface) */}
-        <LazySection>
-          <WhoWeRecogniseClustersSection />
-        </LazySection>
+        {/* 10. GALA COUNTDOWN — 14 December 2026 */}
+        <GalaBandSection />
 
-        {/* 3b. FOUR RECOGNITION TIERS — architecture surface */}
-        <LazySection>
-          <RecognitionTiersHomeSection />
-        </LazySection>
+        {/* 11. GET INVOLVED */}
+        <SupportSection />
 
-        {/* 3c. HOW IT WORKS — 6-step nomination → impact journey */}
-        <LazySection>
-          <HowItWorksHomeSection />
-        </LazySection>
-
-        {/* 4. WHY NESA-AFRICA EXISTS */}
-        <LazySection>
-          <WhyNESAExistsSection />
-        </LazySection>
-
-        {/* 5. VISION, MISSION & STRATEGIC OBJECTIVES */}
-        <LazySection>
-          <VisionMissionObjectivesSection />
-        </LazySection>
-
-        {/* 6. WHAT MAKES NESA-AFRICA DIFFERENT */}
-        <LazySection>
-          <WhatMakesNESADifferentSection />
-        </LazySection>
-
-        {/* 7. ONE CONTINENT · TEN EDUCATION REGIONS · ONE MISSION (preview only) */}
-        <LazySection>
-          <ExploreRegionsSection />
-        </LazySection>
-
-        {/* 10. PEOPLE BEHIND THE MOVEMENT — volunteers */}
-        <LazySection>
-          <PoweredByVolunteersSection />
-        </LazySection>
-
-        {/* 11. EDUCATION STAKEHOLDER ENDORSEMENTS */}
-        <LazySection>
-          <EndorsedBySection />
-        </LazySection>
-
-        {/* 12–14. REBUILD MY SCHOOL · EDUAID-AFRICA · NESA-AFRICA TV (combined) */}
-        <LazySection>
-          <ImpactProgramsSection />
-        </LazySection>
-
-        {/* 15. SPONSORS & PARTNERS */}
-        <LazySection>
-          <SponsorsSection />
-        </LazySection>
-
-        {/* 16. GOVERNANCE & INTEGRITY FIREWALL */}
+        {/* 12. GOVERNANCE & INTEGRITY FIREWALL */}
         <LazySection>
           <GovernanceFirewallSection />
         </LazySection>
 
-        {/* 16b. OUR STORY SO FAR — verified SCEF → NESA-Africa timeline */}
-        <LazySection>
-          <SCEFHistoryTimeline />
-        </LazySection>
-
-        {/* 16c. GALA TICKET — 14 Dec 2026, Lagos */}
-        <LazySection>
-          <GalaTicketBand />
-        </LazySection>
-
-        {/* 16d. SUPPORT & DONATE — Special Needs School Intervention */}
-        <LazySection>
-          <SupportDonateBand />
-        </LazySection>
-
-        {/* 17. VISION 2035 */}
-        <LazySection>
-          <Vision2035RoadmapSection />
-        </LazySection>
-
-        {/* 18. FINAL CTA */}
+        {/* 13. FINAL CTA */}
         <LazySection>
           <FinalCTASection />
         </LazySection>
-
 
         <NESAFooter />
         <BottomPageNav />
