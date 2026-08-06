@@ -123,7 +123,7 @@ const ICON: TierClusterConfig = {
       "Undisclosed conflicts of interest",
     ],
     timelineNote:
-      "Icon nominations open 30 August 2026 and close 12 September 2026. Governance-approved laureates are announced at the NESA-Africa 2026 Recognition Gala on 14 December 2026 in Lagos.",
+      "Icon nominations open 30 August 2026 and close 12 September 2026. Governance-approved laureates are announced at the NESA-Africa 2026 Recognition Gala on 13 December 2026 in Lagos.",
   },
 
   nominees: {
@@ -214,7 +214,7 @@ const BLUE_GARNET: TierClusterConfig = {
       "Undisclosed conflicts of interest with judges",
     ],
     timelineNote:
-      "Nominations open 30 August 2026, close 12 September 2026. Finalists announced 5 October 2026. Winners revealed at the Gala on 14 December 2026.",
+      "Nominations open 30 August 2026, close 12 September 2026. Finalists announced 5 October 2026. Winners revealed at the Gala on 13 December 2026.",
   },
 
   nominees: {
@@ -304,7 +304,7 @@ const PLATINUM: TierClusterConfig = {
       "Duplicate institutional records without consolidation",
     ],
     timelineNote:
-      "Platinum institutional nominations open 30 August 2026 and close 12 September 2026. Recognised institutions are honoured at the Gala on 14 December 2026.",
+      "Platinum institutional nominations open 30 August 2026 and close 12 September 2026. Recognised institutions are honoured at the Gala on 13 December 2026.",
   },
 
   nominees: {
@@ -394,7 +394,7 @@ const INFLUENCER: TierClusterConfig = {
       "Undisclosed brand relationships in submitted evidence",
     ],
     timelineNote:
-      "Influencer nominations open 30 August 2026, close 12 September 2026. Recognised influencers appear on the NESA-Africa Recognition Gala broadcast on 14 December 2026.",
+      "Influencer nominations open 30 August 2026, close 12 September 2026. Recognised influencers appear on the NESA-Africa Recognition Gala broadcast on 13 December 2026.",
   },
 
   nominees: {

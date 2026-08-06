@@ -232,7 +232,7 @@ export function AboutCanonicalContent() {
           <h2 className="font-display text-3xl md:text-4xl text-gold">The 2026 Inaugural Cycle</h2>
           <p>
             NESA-Africa's first public award cycle culminates in the{" "}
-            <strong className="text-gold">NESA-Africa 2026 Recognition Gala on 14 December 2026, Lagos, Nigeria</strong>.
+            <strong className="text-gold">NESA-Africa 2026 Recognition Gala on 13 December 2026, Lagos, Nigeria</strong>.
             A second cycle Gala follows in <strong>December 2027</strong> (exact date to be confirmed).
           </p>
         </div>

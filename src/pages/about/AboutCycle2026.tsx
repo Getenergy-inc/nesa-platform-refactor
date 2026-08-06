@@ -75,11 +75,11 @@ const PHASES_2026: TimelinePhase[] = [
   },
   {
     phaseName: "Recognition Gala",
-    window: "14 December 2026 · Lagos",
+    window: "13 December 2026 · Lagos",
     status: "upcoming",
     spotlight: true,
     events: [
-      { date: "14 Dec", title: "NESA-Africa 2026 Recognition Gala", detail: "9 Icon Laureates announced; Certificates presented" },
+      { date: "13 Dec", title: "NESA-Africa 2026 Recognition Gala", detail: "9 Icon Laureates announced; Certificates presented" },
     ],
   },
   {
@@ -97,7 +97,7 @@ export default function AboutCycle2026() {
     <>
       <AboutSeo
         title="About NESA-Africa 2026 · Inaugural Public Award Cycle"
-        description="NESA-Africa 2026 — the inaugural public award cycle: 18 recognition forms across 4 tiers and 15 regions (8 Africa + 7 Global), culminating in the 14 December 2026 Recognition Gala in Lagos."
+        description="NESA-Africa 2026 — the inaugural public award cycle: 18 recognition forms across 4 tiers and 15 regions (8 Africa + 7 Global), culminating in the 13 December 2026 Recognition Gala in Lagos."
         path="/about/nesa-africa-2026"
         breadcrumbs={[
           { name: "Home", path: "/" },
@@ -106,7 +106,7 @@ export default function AboutCycle2026() {
         ]}
         faqs={[
           { question: "When do NESA-Africa 2026 nominations open?", answer: "Public nominations open 30 August 2026 across all four tiers. The Africa Education Icon Award nomination window runs 30 August – 5 September 2026." },
-          { question: "When is the NESA-Africa 2026 Recognition Gala?", answer: "The Recognition Gala takes place on 14 December 2026 in Lagos, Nigeria, where the 9 Icon Laureates are announced and all Certificates of Recognition are formally presented." },
+          { question: "When is the NESA-Africa 2026 Recognition Gala?", answer: "The Recognition Gala takes place on 13 December 2026 in Lagos, Nigeria, where the 9 Icon Laureates are announced and all Certificates of Recognition are formally presented." },
           { question: "Is there any public voting in the 2026 cycle?", answer: "No. There is no public voting mechanism at any stage of the 2026 cycle. Recognition is determined exclusively through Nominee Research Corps verification, the EDI Matrix, and — for the Icon Award only — independent judging and Governance ratification." },
         ]}
       />
@@ -114,7 +114,7 @@ export default function AboutCycle2026() {
       <AboutSealHero
         eyebrow="Inaugural Public Cycle"
         title={<>About <span className="text-gold">NESA-Africa 2026</span></>}
-        positioning="The platform's first public award cycle since incorporation — 18 recognition forms across four tiers, verified end-to-end, culminating in the Recognition Gala in Lagos on 14 December 2026."
+        positioning="The platform's first public award cycle since incorporation — 18 recognition forms across four tiers, verified end-to-end, culminating in the Recognition Gala in Lagos on 13 December 2026."
         cyclePhase="Cycle Status · Pre-Nomination · Nominations open 30 August 2026"
         primaryCta={{ label: "Nominate Now", href: "/nominate", icon: "nominate" }}
         secondaryCta={{ label: "Non-Influence Declaration", href: "#non-influence-protocol" }}
@@ -133,7 +133,7 @@ export default function AboutCycle2026() {
       />
 
       <AboutCycleTimeline
-        title="The Road to the 14 December 2026 Gala"
+        title="The Road to the 13 December 2026 Gala"
         subtitle="Phase-based awards-season roadmap with confirmed dates from the 2026 cycle calendar."
         phases={PHASES_2026}
         footerCta={{ label: "View full cycle calendar", href: "/calendar" }}
@@ -145,7 +145,7 @@ export default function AboutCycle2026() {
 
       <AboutContactBlock
         headline="Engage with the 2026 Cycle"
-        intro="Nominate a changemaker, apply as a judge or NRC member, become a chapter volunteer, or attend the 14 December 2026 Gala."
+        intro="Nominate a changemaker, apply as a judge or NRC member, become a chapter volunteer, or attend the 13 December 2026 Gala."
         primaryCta={{ label: "Nominate Now", href: "/nominate" }}
         secondaryCta={{ label: "Contact the Cycle Desk", href: "mailto:info@nesa.africa" }}
       />

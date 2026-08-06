@@ -21,7 +21,7 @@ export const HomepageGalleryTeaser = () => {
             <p className="mt-2 text-white/70 max-w-xl">
               Relive the stages, stories and standing ovations from the NESA-Africa
               2025 pre-opening — the moments that set the stage for the Blue Garnet
-              Awards Gala on 14 December 2026 in Lagos.
+              Awards Gala on 13 December 2026 in Lagos.
             </p>
           </div>
           <Link

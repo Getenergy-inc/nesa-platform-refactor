@@ -7,7 +7,7 @@
  *   2. Weekday prefixes ("Tuesday, 18 August 2026") are the real weekday.
  *   3. The canonical anchor dates from the source set are present, unchanged.
  *   4. Entries are chronological, uniquely identified and inside the programme
- *      window (1 July 2026 – 14 December 2027 legacy tail).
+ *      window (1 July 2026 – 13 December 2027 legacy tail).
  *   5. No retired date or retired terminology survives anywhere in src/.
  */
 import { describe, it, expect } from "vitest";
@@ -166,12 +166,12 @@ describe("Timeline anchors — Complete Timeline Set source values", () => {
     ["tier234-nominations", "2026-08-30", "2026-11-14"],
     ["icon-judges-onboarding", "2026-09-12", "2026-09-25"],
     ["nrc-icon-review", "2026-09-13", "2026-09-26"],
-    ["gold-blue-garnet-verification", "2026-09-16", "2026-12-14"],
+    ["gold-blue-garnet-verification", "2026-09-16", "2026-12-13"],
     ["judges-final-review", "2026-09-26", "2026-10-31"],
     ["final-verification-gala-production", "2026-10-10", "2026-10-14"],
     ["tv-show-1", "2026-11-15", undefined],
     ["tv-show-2", "2026-12-01", undefined],
-    ["recognition-gala", "2026-12-14", undefined],
+    ["recognition-gala", "2026-12-13", undefined],
   ];
 
   for (const [id, start, end] of CASES) {
@@ -183,10 +183,10 @@ describe("Timeline anchors — Complete Timeline Set source values", () => {
     });
   }
 
-  it("the Gala is the highlighted 14 December 2026 milestone", () => {
+  it("the Gala is the highlighted 13 December 2026 milestone", () => {
     const gala = anchor("recognition-gala");
     expect(gala.highlight).toBe(true);
-    expect(gala.dateLabel).toBe("Monday, 14 December 2026");
+    expect(gala.dateLabel).toBe("Monday, 13 December 2026");
   });
 
   it("nomination windows state the Icon split correctly", () => {
@@ -218,7 +218,7 @@ const ALLOWLIST = new Set<string>([
 
 const RETIRED: { pattern: RegExp; reason: string }[] = [
   { pattern: /\b1\s+August\s+2026\b/i, reason: "Retired nominations-open date — now 30 August 2026" },
-  { pattern: /\b22\s+October\s+2026\b/i, reason: "Retired Gala date — now 14 December 2026" },
+  { pattern: /\b22\s+October\s+2026\b/i, reason: "Retired Gala date — now 13 December 2026" },
   { pattern: /\b5\s+July\s+2026\b/i, reason: "Retired Platinum Recognition Show date" },
   { pattern: /\b10\s+July\s+2026\b/i, reason: "Retired Icon nominations close date — now 12 September 2026" },
   { pattern: /\b29\s+June\s*[–—-]\s*10\s+July\s+2026\b/i, reason: "Retired Icon nominations window" },

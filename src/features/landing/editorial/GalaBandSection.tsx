@@ -17,7 +17,7 @@ export function GalaBandSection() {
     <section className="ed-gala" aria-labelledby="ed-gala-heading">
       <div className="ed-eyebrow">The Blue-Garnet Awards Gala</div>
       <h2 id="ed-gala-heading">NESA-Africa 2026 Gold-Blue Garnet Awards Gala</h2>
-      <div className="ed-gala-date">14 DECEMBER 2026 · LAGOS, NIGERIA</div>
+      <div className="ed-gala-date">13 DECEMBER 2026 · LAGOS, NIGERIA</div>
 
       <div className="ed-countdown">
         {cells.map((c) => (

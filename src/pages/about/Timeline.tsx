@@ -21,13 +21,13 @@ const SUMMARY_CARDS = [
   {
     icon: Calendar,
     label: "Recognition Campaign",
-    value: "1 July → 14 Dec 2026",
+    value: "1 July → 13 Dec 2026",
     detail: "Pre-nomination activation, nominations, NRC verification, TV showcases and the Recognition Gala",
   },
   {
     icon: Trophy,
     label: "Recognition Gala",
-    value: "14 December 2026",
+    value: "13 December 2026",
     detail: "NESA-Africa 2026 Recognition Gala, Lagos — Africa's flagship education recognition moment",
   },
   {
@@ -92,7 +92,7 @@ export default function Timeline() {
               identifies, verifies, celebrates and supports the people and organisations enabling
               Education for All across <span className="text-white">Eight Africa Regions</span>, Africans in the
               <span className="text-white"> Diaspora</span>, and <span className="text-white">Friends of Africa</span>.
-              Each milestone builds momentum toward the NESA-Africa 2026 Recognition Gala on 14 December
+              Each milestone builds momentum toward the NESA-Africa 2026 Recognition Gala on 13 December
               while opening doors for participation, partnerships, storytelling and measurable impact.
 
             </p>

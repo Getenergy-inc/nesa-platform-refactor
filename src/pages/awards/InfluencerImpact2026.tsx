@@ -146,8 +146,8 @@ export default function InfluencerImpact2026() {
           <div className="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
             <StatCard value="30 Aug 2026" label="Nominations Open" />
             <StatCard value="14 Nov 2026" label="Nominations Close" />
-            <StatCard value="16 Sep – 14 Dec 2026" label="Rolling NRC Verification" />
-            <StatCard value="14 Dec 2026" label="Gold-Blue Garnet Gala" />
+            <StatCard value="16 Sep – 13 Dec 2026" label="Rolling NRC Verification" />
+            <StatCard value="13 Dec 2026" label="Gold-Blue Garnet Gala" />
           </div>
         </div>
       </section>

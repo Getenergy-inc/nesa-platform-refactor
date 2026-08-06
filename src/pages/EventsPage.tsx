@@ -8,7 +8,7 @@ const QUICK_LINKS = [
   {
     label: "Buy Gala Tickets",
     href: "/tickets",
-    description: "Reserve seats for the 14 December 2026 Recognition Gala.",
+    description: "Reserve seats for the 13 December 2026 Recognition Gala.",
     icon: Ticket,
   },
   {
@@ -32,7 +32,7 @@ export default function EventsPage() {
         <title>Events & Gala Calendar | NESA-Africa 2026</title>
         <meta
           name="description"
-          content="Consolidated calendar for NESA-Africa 2026 — TV shows, public activations, webinars, the Recognition Gala on 14 December 2026, and the EduAid-Africa launch."
+          content="Consolidated calendar for NESA-Africa 2026 — TV shows, public activations, webinars, the Recognition Gala on 13 December 2026, and the EduAid-Africa launch."
         />
         <link rel="canonical" href="https://nesaafrica.lovable.app/events" />
       </Helmet>
@@ -49,7 +49,7 @@ export default function EventsPage() {
             <p className="mt-4 max-w-2xl text-white/70">
               One canonical calendar for every NESA-Africa 2026 milestone —
               nominations, public activations, TV shows, and the Gold–Blue
-              Garnet Recognition Gala on 14 December 2026 in Lagos.
+              Garnet Recognition Gala on 13 December 2026 in Lagos.
             </p>
           </div>
         </header>

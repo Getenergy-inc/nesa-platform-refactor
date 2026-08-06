@@ -393,7 +393,7 @@ export function AboutContactBlock({
             <Globe2 className="w-4 h-4 text-gold" /> 15 Regions · 8 Africa + 7 Global
           </div>
           <div className="flex items-center justify-center gap-2 rounded-lg border border-gold/20 bg-charcoal-light/25 p-3">
-            <Calendar className="w-4 h-4 text-gold" /> Gala · 14 Dec 2026 · Lagos
+            <Calendar className="w-4 h-4 text-gold" /> Gala · 13 Dec 2026 · Lagos
           </div>
         </div>
         <div className="flex flex-wrap justify-center gap-3 pt-2">

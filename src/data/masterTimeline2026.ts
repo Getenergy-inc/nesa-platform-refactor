@@ -1,6 +1,6 @@
 // NESA-Africa & EduAid-Africa 2026 Master Timeline
 // Source: "NESA-Africa 2026 — Complete Timeline Set" (Sections 1, 2, 3, 6, 8, 9, 10, 11).
-// 1 July – 14 December 2026.
+// 1 July – 13 December 2026.
 //
 // Governance notes carried from the source document:
 //  • Public nominations open 30 August 2026 (NOT 1 August).
@@ -60,7 +60,7 @@ export const MASTER_TIMELINE_NOMINATION_WINDOWS = [
     id: "gold-blue-garnet",
     tier: "Gold-Blue Garnet",
     window: "30 August – 14 November 2026",
-    verification: "Rolling NRC verification, 16 September – 14 December 2026.",
+    verification: "Rolling NRC verification, 16 September – 13 December 2026.",
     href: "/nominate?tier=gold-blue-garnet",
   },
   {
@@ -99,7 +99,7 @@ export const MASTER_TIMELINE_OPEN_ITEMS: { id: string; item: string; detail: str
     id: "platinum-influencer-verification",
     item: "Platinum & Influencer Education Impact NRC verification window",
     detail:
-      "No dedicated verification date range exists (unlike Gold-Blue Garnet's rolling 16 Sep – 14 Dec window). Left as a confirmed gap — no dates invented.",
+      "No dedicated verification date range exists (unlike Gold-Blue Garnet's rolling 16 Sep – 13 Dec window). Left as a confirmed gap — no dates invented.",
   },
   {
     id: "podcast-8-9",
@@ -301,9 +301,9 @@ export const MASTER_TIMELINE_2026: MasterTimelineEntry[] = [
   },
   {
     id: "gold-blue-garnet-verification",
-    dateLabel: "16 September – 14 December 2026",
+    dateLabel: "16 September – 13 December 2026",
     startsAt: "2026-09-16T00:00:00Z",
-    endsAt: "2026-12-14T23:59:59Z",
+    endsAt: "2026-12-13T23:59:59Z",
     milestone: "Gold-Blue Garnet NRC Verification (rolling)",
     activity:
       "Rolling Nominee Research Corps verification of Gold-Blue Garnet nominations against the EDI Matrix and evidence standards.",
@@ -463,8 +463,8 @@ export const MASTER_TIMELINE_2026: MasterTimelineEntry[] = [
   },
   {
     id: "tv-show-3",
-    dateLabel: "Monday, 14 December 2026",
-    startsAt: "2026-12-14T00:00:00Z",
+    dateLabel: "Monday, 13 December 2026",
+    startsAt: "2026-12-13T00:00:00Z",
     milestone: "TV Show 3 — Gala Live Coverage",
     activity: "Live broadcast of the NESA-Africa 2026 Recognition Gala.",
     outcome: "Continental live coverage",
@@ -473,8 +473,8 @@ export const MASTER_TIMELINE_2026: MasterTimelineEntry[] = [
   },
   {
     id: "recognition-gala",
-    dateLabel: "Monday, 14 December 2026",
-    startsAt: "2026-12-14T00:00:00Z",
+    dateLabel: "Monday, 13 December 2026",
+    startsAt: "2026-12-13T00:00:00Z",
     milestone: "NESA-Africa 2026 Recognition Gala, Lagos",
     activity:
       "Honour the 9 Africa Education Icons and every NRC-verified Education Enabler across the four recognition tiers.",
@@ -487,7 +487,7 @@ export const MASTER_TIMELINE_2026: MasterTimelineEntry[] = [
     id: "impact-legacy",
     dateLabel: "December 2026 – December 2027",
     startsAt: "2026-12-15T00:00:00Z",
-    endsAt: "2027-12-14T23:59:59Z",
+    endsAt: "2027-12-13T23:59:59Z",
     milestone: "Impact & Legacy Phase",
     activity:
       "EduAid-Africa, Rebuild My School Africa, Afri-EduTourism and Scholarships programmes run through the year.",

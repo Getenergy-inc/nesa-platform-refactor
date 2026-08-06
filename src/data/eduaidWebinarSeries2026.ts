@@ -170,4 +170,4 @@ export const EDUAID_CROSS_REFERENCE = {
 
 /** Where the series sits in the wider 2026 cycle calendar. */
 export const EDUAID_SERIES_CONTEXT =
-  "This 7-episode run is one line in the larger 2026 cycle calendar — \"20 August 2026 | EduAid-Africa Webinar Series begins\" — running in parallel with the nomination window (30 August onward) and the Icon judging window (1 September – 12 October), and concluding on 12 November, roughly a month before the 14 December Recognition Gala.";
+  "This 7-episode run is one line in the larger 2026 cycle calendar — \"20 August 2026 | EduAid-Africa Webinar Series begins\" — running in parallel with the nomination window (30 August onward) and the Icon judging window (1 September – 12 October), and concluding on 12 November, roughly a month before the 13 December Recognition Gala.";

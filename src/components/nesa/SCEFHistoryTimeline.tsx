@@ -8,7 +8,7 @@ const MILESTONES = [
   { year: "2024", label: "New Education Standard Award Africa Ltd", detail: "RC-7381138" },
   { year: "2026", label: "NESA-Africa inaugural public cycle", detail: "" },
   { year: "1 Aug 2026", label: "Public nominations open", detail: "All four tiers" },
-  { year: "14 Dec 2026", label: "NESA-Africa 2026 Recognition Gala", detail: "Lagos" },
+  { year: "13 Dec 2026", label: "NESA-Africa 2026 Recognition Gala", detail: "Lagos" },
   { year: "2027", label: "Special Needs School Intervention begins", detail: "8 schools, 1 per region" },
 ] as const;
 
