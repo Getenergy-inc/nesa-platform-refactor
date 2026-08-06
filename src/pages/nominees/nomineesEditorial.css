@@ -1,0 +1,214 @@
+/* Directory-specific additions to the editorial skin.
+   Scoped under `.nesa-ed` exactly like editorial.css. */
+
+.nesa-ed .ed-dir-hero {
+  position: relative;
+  padding: 96px 0 56px;
+  border-bottom: 1px solid var(--ed-line);
+  background:
+    radial-gradient(70% 60% at 50% 0%, rgba(201, 162, 39, 0.12), transparent 70%),
+    var(--ed-void);
+}
+
+.nesa-ed .ed-dir-hero-inner {
+  max-width: 900px;
+  margin: 0 auto;
+  text-align: center;
+  padding: 0 20px;
+}
+
+.nesa-ed .ed-dir-title {
+  font-size: clamp(2rem, 5.4vw, 3.4rem);
+  line-height: 1.08;
+  margin: 18px 0 16px;
+}
+
+.nesa-ed .ed-dir-sub {
+  color: var(--ed-stone);
+  font-size: 1rem;
+  max-width: 660px;
+  margin: 0 auto;
+}
+
+/* search */
+.nesa-ed .ed-dir-search {
+  display: flex;
+  gap: 10px;
+  max-width: 640px;
+  margin: 30px auto 0;
+  flex-wrap: wrap;
+}
+
+.nesa-ed .ed-dir-search input {
+  flex: 1 1 260px;
+  background: rgba(243, 239, 230, 0.05);
+  border: 1px solid var(--ed-line);
+  border-radius: 6px;
+  padding: 14px 16px;
+  color: var(--ed-parchment);
+  font-size: 0.95rem;
+  outline: none;
+}
+.nesa-ed .ed-dir-search input::placeholder {
+  color: var(--ed-stone-dim);
+}
+.nesa-ed .ed-dir-search input:focus {
+  border-color: var(--ed-gold);
+}
+
+/* counters */
+.nesa-ed .ed-dir-counters {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: 34px;
+}
+@media (min-width: 768px) {
+  .nesa-ed .ed-dir-counters {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+  }
+}
+
+.nesa-ed .ed-dir-counter {
+  border: 1px solid var(--ed-line);
+  border-radius: 8px;
+  padding: 16px 12px;
+  background: rgba(243, 239, 230, 0.03);
+  text-align: center;
+}
+.nesa-ed .ed-dir-counter-num {
+  font-family: "Space Mono", monospace;
+  font-size: 1.5rem;
+  color: var(--ed-gold-bright);
+}
+.nesa-ed .ed-dir-counter-label {
+  font-size: 0.68rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ed-stone);
+  margin-top: 6px;
+}
+
+/* generic auto grid */
+.nesa-ed .ed-dir-grid-4 {
+  display: grid;
+  gap: 16px;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+}
+
+/* chips */
+.nesa-ed .ed-dir-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: center;
+}
+.nesa-ed .ed-dir-chip {
+  border: 1px solid var(--ed-line);
+  border-radius: 999px;
+  padding: 8px 14px;
+  font-size: 0.78rem;
+  color: var(--ed-parchment);
+  background: rgba(243, 239, 230, 0.03);
+  transition: border-color 0.2s, color 0.2s;
+}
+.nesa-ed .ed-dir-chip:hover,
+.nesa-ed .ed-dir-chip[data-active="true"] {
+  border-color: var(--ed-gold);
+  color: var(--ed-gold-bright);
+}
+
+/* nominee card */
+.nesa-ed .ed-nom-grid {
+  display: grid;
+  gap: 16px;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+}
+
+.nesa-ed .ed-nom-card {
+  display: block;
+  border: 1px solid var(--ed-line);
+  border-radius: 10px;
+  overflow: hidden;
+  background: rgba(243, 239, 230, 0.03);
+  transition: border-color 0.2s, transform 0.2s;
+}
+.nesa-ed .ed-nom-card:hover {
+  border-color: var(--ed-gold);
+  transform: translateY(-2px);
+}
+
+.nesa-ed .ed-nom-media {
+  position: relative;
+  aspect-ratio: 4 / 3;
+  background: #0f1116;
+  overflow: hidden;
+}
+.nesa-ed .ed-nom-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.nesa-ed .ed-nom-body {
+  padding: 12px 14px 16px;
+}
+.nesa-ed .ed-nom-name {
+  font-family: "Fraunces", serif;
+  font-size: 1rem;
+  line-height: 1.25;
+  color: var(--ed-parchment);
+}
+.nesa-ed .ed-nom-meta {
+  font-size: 0.74rem;
+  color: var(--ed-stone);
+  margin-top: 6px;
+}
+.nesa-ed .ed-nom-tag {
+  display: inline-block;
+  margin-top: 10px;
+  font-family: "Space Mono", monospace;
+  font-size: 0.62rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ed-gold);
+  border: 1px solid var(--ed-line);
+  border-radius: 999px;
+  padding: 3px 9px;
+}
+
+/* region list */
+.nesa-ed .ed-dir-regions {
+  display: grid;
+  gap: 10px;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+}
+.nesa-ed .ed-dir-region {
+  border: 1px solid var(--ed-line);
+  border-radius: 8px;
+  padding: 14px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  font-size: 0.9rem;
+  transition: border-color 0.2s, color 0.2s;
+}
+.nesa-ed .ed-dir-region:hover {
+  border-color: var(--ed-gold);
+  color: var(--ed-gold-bright);
+}
+.nesa-ed .ed-dir-region span:last-child {
+  font-family: "Space Mono", monospace;
+  font-size: 0.78rem;
+  color: var(--ed-gold);
+}
+
+.nesa-ed .ed-dir-empty {
+  border: 1px dashed var(--ed-line);
+  border-radius: 10px;
+  padding: 40px 20px;
+  text-align: center;
+  color: var(--ed-stone);
+  font-size: 0.9rem;
+}
