@@ -6,19 +6,19 @@
  */
 
 /** ISO date (no time) of the programme end / Gala day. */
-export const PROGRAMME_END_DATE = "2026-12-14";
+export const PROGRAMME_END_DATE = "2026-12-13";
 
 /** Full ISO timestamp of the Gala start (West Africa Time). */
-export const PROGRAMME_END_DATETIME = "2026-12-14T18:00:00+01:00";
+export const PROGRAMME_END_DATETIME = "2026-12-13T18:00:00+01:00";
 
 /** Date object for countdowns. */
 export const PROGRAMME_END = new Date(PROGRAMME_END_DATETIME);
 
 /** Human-readable label used across the site. */
-export const PROGRAMME_END_LABEL = "14 December 2026";
+export const PROGRAMME_END_LABEL = "13 December 2026";
 
 /** Long label including venue context. */
-export const PROGRAMME_END_LONG_LABEL = "Monday, 14 December 2026 · Lagos, Nigeria";
+export const PROGRAMME_END_LONG_LABEL = "Sunday, 13 December 2026 · Lagos, Nigeria";
 
 /** Post-award legacy window (Rebuild My School Africa etc.). */
 export const LEGACY_WINDOW_LABEL = "December 2026 – December 2027";

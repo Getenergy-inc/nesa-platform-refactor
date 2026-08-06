@@ -42,7 +42,7 @@ export const AWARD_TIERS_2026: AwardTier2026[] = [
     voteMechanicLabel: "60% Jury + 40% Public AGC Voting Coin",
     cta: "Nominate / Vote",
     ctaHref: "/awards/blue-garnet",
-    keyDates: "Voting 16 Sep – 14 Dec 2026 · Gala 14 Dec 2026, Lagos",
+    keyDates: "Voting 16 Sep – 13 Dec 2026 · Gala 13 Dec 2026, Lagos",
     categories: [
       { id: 1, name: "Best CSR for Education (Africa Regional)", subcategoryCount: 6, pendingNames: true, status: "needs-platform-pull" },
       { id: 2, name: "Best CSR for Education (Nigeria)", subcategoryCount: 23, pendingNames: true, status: "needs-platform-pull" },
@@ -76,7 +76,7 @@ export const AWARD_TIERS_2026: AwardTier2026[] = [
     voteMechanicLabel: "Jury recognition only · No public vote",
     cta: "Recommend Again",
     ctaHref: "/awards/platinum",
-    keyDates: "NESA-Africa Recognition Gala · 14 December 2026",
+    keyDates: "NESA-Africa Recognition Gala · 13 December 2026",
     categories: [
       { id: 10, name: "Best Tertiary Institution Library (Nigeria)", subcategoryCount: 8, pendingNames: true, status: "needs-platform-pull" },
       { id: 11, name: "Excellence in Research & Development for Education (Nigeria)", subcategoryCount: 3, pendingNames: true, status: "needs-platform-pull" },

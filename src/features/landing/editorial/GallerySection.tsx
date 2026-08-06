@@ -15,7 +15,7 @@ export function GallerySection() {
           </h2>
           <p className="ed-section-sub">
             The stages, stories and standing ovations that set the scene for the Blue-Garnet Awards
-            Gala on 14 December 2026 in Lagos.
+            Gala on 13 December 2026 in Lagos.
           </p>
         </div>
 

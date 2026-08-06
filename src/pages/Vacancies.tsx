@@ -225,7 +225,7 @@ const CALENDAR = [
   { window: "20 Aug – 12 Nov 2026", label: "Pre-Award Webinar Series", tie: "Presenter-search episode (N-08); Build-With-Us segment (N-03)." },
   { window: "28 Nov 2026", label: "TV Award Show — Recognition Ratification", tie: "Chapter Coordinator regional features (N-09) roll out ahead of broadcast." },
   { window: "6 Dec 2026", label: "TV Award Show — Icon Class Reveal", tie: "Content Producer (N-07) audition reveal published in campaign runway." },
-  { window: "14 Dec 2026", label: "NESA-Africa Recognition Gala, Lagos", tie: "Gala & Events Lead (N-11) \"Countdown to the Gala\" behind-the-scenes." },
+  { window: "13 Dec 2026", label: "NESA-Africa Recognition Gala, Lagos", tie: "Gala & Events Lead (N-11) \"Countdown to the Gala\" behind-the-scenes." },
 ];
 
 function VacancyCard({ v }: { v: Vacancy }) {

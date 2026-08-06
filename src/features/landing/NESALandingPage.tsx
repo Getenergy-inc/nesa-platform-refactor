@@ -10,7 +10,7 @@
 //   7.  Volunteer band (live site_stats)
 //   8.  SCEF's Board of Advisors
 //   9.  Moments from NESA-Africa 2025 (gallery)
-//   10. Gold-Blue Garnet Awards Gala countdown — 14 December 2026
+//   10. Gold-Blue Garnet Awards Gala countdown — 13 December 2026
 //   11. Get Involved (sponsor · donate · volunteer · NRC)
 //   12. Governance & integrity firewall
 //   13. Final CTA
@@ -113,7 +113,7 @@ export function NESALandingPage() {
         {/* 9. GALLERY */}
         <GallerySection />
 
-        {/* 10. GALA COUNTDOWN — 14 December 2026 */}
+        {/* 10. GALA COUNTDOWN — 13 December 2026 */}
         <GalaBandSection />
 
         {/* 11. GET INVOLVED */}

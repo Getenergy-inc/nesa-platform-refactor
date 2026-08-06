@@ -95,7 +95,7 @@ Endorse/Share · Related categories · CTA band.
 4. Fill the 4 remaining template sections (nominees strip, related categories,
    endorse/share, per-award timeline) via existing components.
 5. Author benefits + terms + per-award countdown dates in `subpages2026.ts` overrides,
-   sourcing dates from `src/config/programme.ts` (14 Dec 2026 remains global).
+   sourcing dates from `src/config/programme.ts` (13 Dec 2026 remains global).
 
 **Phase 3 — Database & CMS**
 6. Migration: `award_pages`, `award_sections`, `award_media` (image URL or YouTube URL,

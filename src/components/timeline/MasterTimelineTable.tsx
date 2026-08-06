@@ -22,7 +22,7 @@ export function MasterTimelineTable({
   hideNotice = false,
   hideOpenItems = false,
   heading = "NESA-Africa & EduAid-Africa 2026 Master Timeline",
-  intro = "1 July – 14 December 2026 · Every milestone from public activation through the Recognition Gala.",
+  intro = "1 July – 13 December 2026 · Every milestone from public activation through the Recognition Gala.",
 }: Props) {
 
   return (

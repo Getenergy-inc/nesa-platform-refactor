@@ -13,7 +13,7 @@ export function GalaTicketBand() {
               <Ticket className="h-3.5 w-3.5" /> NESA-Africa 2026 Recognition Gala
             </div>
             <h2 className="font-display text-2xl md:text-3xl text-white font-bold mb-2">
-              Buy Your Ticket · 14 December 2026 · Lagos, Nigeria
+              Buy Your Ticket · 13 December 2026 · Lagos, Nigeria
             </h2>
             <p className="text-white/70 text-sm md:text-base">
               Attending the Gala does not affect nominee selection or award outcomes.
