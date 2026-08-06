@@ -186,7 +186,7 @@ describe("Timeline anchors — Complete Timeline Set source values", () => {
   it("the Gala is the highlighted 13 December 2026 milestone", () => {
     const gala = anchor("recognition-gala");
     expect(gala.highlight).toBe(true);
-    expect(gala.dateLabel).toBe("Monday, 13 December 2026");
+    expect(gala.dateLabel).toBe("Sunday, 13 December 2026");
   });
 
   it("nomination windows state the Icon split correctly", () => {

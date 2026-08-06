@@ -463,7 +463,7 @@ export const MASTER_TIMELINE_2026: MasterTimelineEntry[] = [
   },
   {
     id: "tv-show-3",
-    dateLabel: "Monday, 13 December 2026",
+    dateLabel: "Sunday, 13 December 2026",
     startsAt: "2026-12-13T00:00:00Z",
     milestone: "TV Show 3 — Gala Live Coverage",
     activity: "Live broadcast of the NESA-Africa 2026 Recognition Gala.",
@@ -473,7 +473,7 @@ export const MASTER_TIMELINE_2026: MasterTimelineEntry[] = [
   },
   {
     id: "recognition-gala",
-    dateLabel: "Monday, 13 December 2026",
+    dateLabel: "Sunday, 13 December 2026",
     startsAt: "2026-12-13T00:00:00Z",
     milestone: "NESA-Africa 2026 Recognition Gala, Lagos",
     activity:

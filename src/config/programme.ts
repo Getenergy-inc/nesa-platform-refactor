@@ -18,7 +18,7 @@ export const PROGRAMME_END = new Date(PROGRAMME_END_DATETIME);
 export const PROGRAMME_END_LABEL = "13 December 2026";
 
 /** Long label including venue context. */
-export const PROGRAMME_END_LONG_LABEL = "Monday, 13 December 2026 · Lagos, Nigeria";
+export const PROGRAMME_END_LONG_LABEL = "Sunday, 13 December 2026 · Lagos, Nigeria";
 
 /** Post-award legacy window (Rebuild My School Africa etc.). */
 export const LEGACY_WINDOW_LABEL = "December 2026 – December 2027";
