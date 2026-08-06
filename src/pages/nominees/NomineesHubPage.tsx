@@ -1,514 +1,435 @@
 // ============================================================================
-// Africa's Education Impact Directory — /nominees
-// 8-section premium discovery hub. Composes existing data layer
-// (useNominees, AFRICAN_REGIONS) into a long-form section-based experience.
-// No business-logic changes.
+// Africa Education Impact Directory — /nominees
+//
+// Editorial Recognition edition: mirrors the homepage design system
+// (`.nesa-ed` skin) and its objectives — identity, recognition architecture,
+// verified discovery, geographic reach, integrity firewall, conversion.
+//
+// Presentation-only refactor. Data layer (useCatalogueNominees / buildCatalogue
+// / useSiteStats) is unchanged.
 // ============================================================================
 
-import { useMemo, useState, useEffect } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
-import { motion } from "framer-motion";
-import {
-  Search, Trophy, Users, ArrowRight, Sparkles, Globe2, Plane,
-  HeartHandshake, MapPin, Crown, Building2, Award, Star, Medal,
-  BookOpen, GraduationCap, Megaphone, Tv, Filter, Shield, ScrollText,
-  ChevronRight, X,
-} from "lucide-react";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Skeleton } from "@/components/ui/skeleton";
-import { useNominees, type EnrichedDatabaseNominee } from "@/hooks/useNominees";
-import { DIRECTORY_NAME, PRIMARY_CTAS, REGION_FRAMING, TRUST_STATEMENT } from "@/config/platformCopy";
-import { AfricaRegionExplorer } from "@/components/nominees/AfricaRegionExplorer";
-import { LandingNomineeCard } from "@/components/nesa/LandingNomineeCard";
+import { Search, Sparkles } from "lucide-react";
+
+import { NESAHeader } from "@/components/nesa/NESAHeader";
+import { NESAFooter } from "@/components/nesa/NESAFooter";
+import { UtilityBar } from "@/components/nesa/UtilityBar";
+import { BottomPageNav } from "@/components/navigation/PageNavigation";
+import { MobileBottomNav } from "@/components/navigation/MainNav";
+import { BackToTopButton } from "@/components/ui/back-to-top";
+import { ScrollProgressIndicator } from "@/components/nesa/ScrollProgressIndicator";
+
+import { useCatalogueNominees } from "@/lib/directory/masterCatalogueSource";
+import { buildCatalogue } from "@/lib/directory/buildCatalogue";
+import { CATALOGUE_TIERS } from "@/config/directory/catalogueTaxonomy";
+import { useSiteStats } from "@/config/siteStats";
+import { DIRECTORY_NAME, REGION_FRAMING } from "@/config/platformCopy";
+import { normalizeRegion } from "@/lib/regions";
 import { trackEvent } from "@/lib/analytics";
+import type { EnrichedDatabaseNominee } from "@/hooks/useNominees";
 
-// ---------------------------------------------------------------------------
-// Static reference data
-// ---------------------------------------------------------------------------
+import "@/features/landing/editorial/editorial.css";
+import "./nomineesEditorial.css";
 
-const TIER_META = [
-  {
-    slug: "africa-education-icon",
-    title: "Africa Education Icon Award",
-    period: "2006–2026 · Lifetime Recognition",
-    bullets: ["Hall of Fame", "3 Icon Categories", "3 Global Classifications"],
-    href: "/awards/africa-education-icon",
-    Icon: Crown,
-    accent: "from-amber-500/30 to-amber-700/10",
-  },
-  {
-    slug: "gold-blue-garnet",
-    title: "Gold–Blue Garnet Awards",
-    period: "Competitive Recognition · 60% Jury / 40% Public",
-    bullets: ["9 Competitive Categories", "Public + Jury Voting", "Continental Reach"],
-    href: "/awards/blue-garnet",
-    Icon: Trophy,
-    accent: "from-rose-500/30 to-rose-800/10",
-  },
-  {
-    slug: "platinum",
-    title: "Platinum Recognition",
-    period: "Institutional Leadership · Non-Competitive",
-    bullets: ["7 Institutional Categories", "Governments & Universities", "Policy Leaders"],
-    href: "/awards/platinum",
-    Icon: Medal,
-    accent: "from-sky-500/30 to-sky-800/10",
-  },
-  {
-    slug: "influencer-education-impact",
-    title: "Influencer Education Impact",
-    period: "Public Recognition · 100% AfriGold Coin",
-    bullets: ["Sports & Music Icons", "Digital Creators", "Public Voting"],
-    href: "/awards/influencers-education-impact-2026-recognition",
-    Icon: Sparkles,
-    accent: "from-violet-500/30 to-violet-800/10",
-  },
-];
+const CANONICAL = "https://nesa.africa/nominees";
 
 const ENABLER_TYPES = [
-  { id: "people", label: "People", Icon: Users },
-  { id: "organisations", label: "Organisations", Icon: Building2 },
-  { id: "companies", label: "Companies", Icon: Building2 },
-  { id: "ngos", label: "NGOs", Icon: HeartHandshake },
-  { id: "governments", label: "Governments", Icon: Shield },
-  { id: "ministries", label: "Ministries", Icon: ScrollText },
-  { id: "universities", label: "Universities", Icon: GraduationCap },
-  { id: "libraries", label: "Libraries", Icon: BookOpen },
-  { id: "schools", label: "Schools", Icon: GraduationCap },
-  { id: "research-centres", label: "Research Centres", Icon: BookOpen },
-  { id: "faith-based", label: "Faith-Based Organisations", Icon: Sparkles },
-  { id: "foundations", label: "Foundations", Icon: HeartHandshake },
-  { id: "development-partners", label: "Development Partners", Icon: Globe2 },
-  { id: "media", label: "Media Organisations", Icon: Tv },
-  { id: "csr", label: "CSR Programmes", Icon: Award },
-  { id: "social-enterprises", label: "Social Enterprises", Icon: Sparkles },
-  { id: "edtech", label: "EdTech Startups", Icon: Sparkles },
-  { id: "stem", label: "STEM Programmes", Icon: Sparkles },
-  { id: "creative", label: "Creative Industry", Icon: Star },
-  { id: "sports", label: "Sports Foundations", Icon: Trophy },
-  { id: "music", label: "Music Foundations", Icon: Megaphone },
-  { id: "diaspora", label: "Diaspora Associations", Icon: Plane },
-  { id: "international", label: "International Agencies", Icon: Globe2 },
-  { id: "bilateral", label: "Bilateral Organisations", Icon: Globe2 },
-  { id: "friends", label: "Friends of Africa", Icon: HeartHandshake },
+  "People", "Organisations", "Companies", "NGOs", "Governments", "Ministries",
+  "Universities", "Schools", "Libraries", "Research Centres", "Faith-Based Organisations",
+  "Foundations", "Development Partners", "Media Organisations", "CSR Programmes",
+  "Social Enterprises", "EdTech Startups", "STEM Programmes", "Creative Industry",
+  "Sports Foundations", "Music Foundations", "Diaspora Associations",
+  "International Agencies", "Friends of Africa",
 ];
 
-const AFRICA_REGIONS = REGION_FRAMING.africaRegions;
-const GLOBAL_COMMUNITIES = REGION_FRAMING.globalCommunities;
-
-const IMPACT_STORY_THEMES = [
-  { tag: "School Transformation", body: "From dilapidated classrooms to modern learning hubs — rebuilt across rural Africa." },
-  { tag: "Scholarship Pipelines", body: "Foundations sending thousands of first-generation students to university." },
-  { tag: "STEM Innovation", body: "EdTech founders making coding, robotics and AI accessible to African youth." },
-  { tag: "Policy Reform", body: "Ministries and reformers expanding curriculum access nationwide." },
-  { tag: "Faith & Education", body: "Faith-based networks operating Africa's largest mission school systems." },
-  { tag: "Diaspora Giving", body: "Diaspora professionals funding libraries, labs and teacher salaries back home." },
+const INTEGRITY = [
+  {
+    title: "No public voting",
+    body: "Recognition is never bought or crowd-sourced. Every profile in this directory is reviewed by the NRC and governance board.",
+  },
+  {
+    title: "Evidence-led verification",
+    body: "Nominees are assessed against documented, citable education impact — not popularity, follower count or self-declaration.",
+  },
+  {
+    title: "Listing is not an award",
+    body: "Appearing in the directory records a nomination. Recognition is only conferred at the Gold-Blue Garnet Awards Gala, 13 December 2026.",
+  },
 ];
-
-// ---------------------------------------------------------------------------
-// Page component
-// ---------------------------------------------------------------------------
 
 export default function NomineesHubPage() {
-  const { data: nominees, isLoading } = useNominees();
+  const { data: nominees, isLoading } = useCatalogueNominees();
+  const stats = useSiteStats();
   const navigate = useNavigate();
   const [params] = useSearchParams();
   const [search, setSearch] = useState(params.get("q") ?? "");
-  const [tierFilter, setTierFilter] = useState<string>(params.get("tier") ?? "all");
 
   useEffect(() => {
-    trackEvent("directory_view", { name: DIRECTORY_NAME });
+    trackEvent("directory_view", { name: DIRECTORY_NAME, surface: "nominees_hub" });
   }, []);
 
-  // -- Counts per facet ------------------------------------------------------
+  const catalogue = useMemo(() => buildCatalogue(nominees), [nominees]);
+
   const tierCounts = useMemo(() => {
     const out: Record<string, number> = {};
+    catalogue.tiers.forEach((t) => { out[t.slug] = t.count; });
+    return out;
+  }, [catalogue]);
+
+  const regionCounts = useMemo(() => {
+    const out = new Map<string, number>();
     (nominees ?? []).forEach((n) => {
-      const slug = String(n.categorySlug ?? "");
-      const family =
-        slug.includes("icon") ? "africa-education-icon" :
-        slug.includes("platinum") || slug.includes("institutional") ? "platinum" :
-        slug.includes("influencer") || slug.includes("social") || slug.includes("sport") || slug.includes("music") ? "influencer-education-impact" :
-        "gold-blue-garnet";
-      out[family] = (out[family] ?? 0) + 1;
+      const r = normalizeRegion(n.region ?? n.country ?? "");
+      if (!r) return;
+      out.set(r, (out.get(r) ?? 0) + 1);
     });
     return out;
   }, [nominees]);
 
-  const categoryCounts = useMemo(() => {
-    const out = new Map<string, { name: string; count: number }>();
-    (nominees ?? []).forEach((n) => {
-      const existing = out.get(n.categorySlug) ?? { name: n.categoryName, count: 0 };
-      existing.count += 1;
-      out.set(n.categorySlug, existing);
-    });
-    return Array.from(out.entries());
+  const featured = useMemo(() => {
+    const list = (nominees ?? []).slice();
+    return list
+      .sort((a, b) => Number(b.nrcVerified) - Number(a.nrcVerified) || b.publicVotes - a.publicVotes)
+      .slice(0, 8);
   }, [nominees]);
 
-  // -- Search results --------------------------------------------------------
-  const results = useMemo(() => {
-    const list = nominees ?? [];
-    const q = search.trim().toLowerCase();
-    return list.filter((n) => {
-      if (q && !`${n.name} ${n.organization ?? ""} ${n.country ?? ""} ${n.categoryName}`.toLowerCase().includes(q)) return false;
-      if (tierFilter !== "all") {
-        const slug = String(n.categorySlug ?? "");
-        const matches =
-          (tierFilter === "africa-education-icon" && slug.includes("icon")) ||
-          (tierFilter === "platinum" && (slug.includes("platinum") || slug.includes("institutional"))) ||
-          (tierFilter === "influencer-education-impact" && (slug.includes("influencer") || slug.includes("social") || slug.includes("sport") || slug.includes("music"))) ||
-          (tierFilter === "gold-blue-garnet" && !slug.includes("icon") && !slug.includes("platinum") && !slug.includes("influencer"));
-        if (!matches) return false;
-      }
-      return true;
-    });
-  }, [nominees, search, tierFilter]);
+  const total = (nominees ?? []).length;
 
-  const featured = useMemo(
-    () => (nominees ?? []).slice().sort((a, b) => b.publicVotes - a.publicVotes).slice(0, 6),
-    [nominees],
-  );
+  const goToCatalogue = (extra?: Record<string, string>) => {
+    const p = new URLSearchParams(extra ?? {});
+    if (search.trim()) p.set("q", search.trim());
+    const q = p.toString();
+    trackEvent("directory_search", { surface: "nominees_hub", query: search.trim() });
+    navigate(q ? `/nominees/catalogue?${q}` : "/nominees/catalogue");
+  };
 
-  // -- JSON-LD ---------------------------------------------------------------
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "CollectionPage",
     name: `${DIRECTORY_NAME} — NESA-Africa 2026`,
     description:
-      "Discover verified Education Enablers creating measurable impact across Eight Africa Regions, the Diaspora and Friends of Africa.",
-    url: "https://nesaafrica.lovable.app/nominees",
+      "Africa's verified discovery platform for Education Enablers across eight African regions, the Diaspora and Friends of Africa.",
+    url: CANONICAL,
   };
 
   return (
-    <div className="min-h-screen bg-charcoal text-ivory">
+    <>
       <Helmet>
-        <title>{DIRECTORY_NAME} — NESA-Africa 2026</title>
+        <title>{`${DIRECTORY_NAME} — NESA-Africa 2026`}</title>
         <meta
           name="description"
-          content="Africa's largest verified discovery platform for Education Enablers. Explore people, organisations and institutions transforming education across the continent."
+          content="Explore verified Education Enablers recognised by NESA-Africa 2026 — people, organisations and institutions advancing Education for All across Africa."
         />
-        <link rel="canonical" href="https://nesaafrica.lovable.app/nominees" />
+        <link rel="canonical" href={CANONICAL} />
         <meta property="og:title" content={`${DIRECTORY_NAME} — NESA-Africa 2026`} />
-        <meta property="og:url" content="https://nesaafrica.lovable.app/nominees" />
+        <meta
+          property="og:description"
+          content="Africa's verified directory of Education Enablers: 4 recognition tiers, 22 categories, eight African regions and the global African community."
+        />
         <meta property="og:type" content="website" />
+        <meta property="og:url" content={CANONICAL} />
+        <meta name="twitter:card" content="summary_large_image" />
         <script type="application/ld+json">{JSON.stringify(jsonLd)}</script>
       </Helmet>
 
-      <main>
-        {/* ────────────────────────────────────────────────────────────────
-            SECTION 1 — BROWSE BY AWARD CATEGORY
-        ──────────────────────────────────────────────────────────────── */}
-        <Section id="categories" eyebrow={`01 · ${categoryCounts.length || 18} Categories`} title="Browse by Award Category" sub="Every category curates a verified roster of Education Enablers. Click any card to open its dedicated page.">
-          {isLoading ? (
-            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-              {Array.from({ length: 6 }).map((_, i) => <Skeleton key={i} className="h-32 rounded-2xl bg-charcoal-light/50" />)}
+      <ScrollProgressIndicator />
+
+      <div className="nesa-ed min-h-screen pt-14 sm:pt-16 pb-16">
+        <UtilityBar />
+        <NESAHeader />
+
+        <main>
+          {/* 1 — HERO */}
+          <section className="ed-dir-hero" aria-labelledby="dir-heading">
+            <div className="ed-dir-hero-inner">
+              <div className="ed-badge">
+                <Sparkles className="h-3.5 w-3.5" aria-hidden="true" />
+                NOMINATIONS OPEN 30 AUGUST 2026 · NESA-AFRICA 2026
+              </div>
+
+              <div className="ed-kicker" style={{ marginTop: 18 }}>
+                Recognising the Enablers of Education for All Across Africa
+              </div>
+
+              <h1 id="dir-heading" className="ed-dir-title">
+                Africa Education
+                <br />
+                <span className="ed-accent">Impact Directory</span>
+              </h1>
+
+              <p className="ed-dir-sub">
+                Every nominee, in one verified register. Search people, organisations and
+                institutions across {stats.tiers} recognition tiers, {stats.categories} categories
+                and {stats.subcategories} subcategories.
+              </p>
+
+              <form
+                className="ed-dir-search"
+                onSubmit={(e) => { e.preventDefault(); goToCatalogue(); }}
+                role="search"
+              >
+                <label htmlFor="dir-search" className="sr-only">Search the directory</label>
+                <input
+                  id="dir-search"
+                  type="search"
+                  value={search}
+                  onChange={(e) => setSearch(e.target.value)}
+                  placeholder="Search a nominee, organisation, country or category…"
+                />
+                <button type="submit" className="ed-btn-primary">
+                  <Search className="inline h-4 w-4 mr-1.5 -mt-0.5" aria-hidden="true" />
+                  Search
+                </button>
+              </form>
+
+              <div className="ed-dir-counters">
+                <Counter num={isLoading ? "—" : total.toLocaleString()} label="Nominee Profiles" />
+                <Counter num={stats.tiers} label="Recognition Tiers" />
+                <Counter num={stats.categories} label="Categories" />
+                <Counter num={stats.subcategories} label="Subcategories" />
+                <Counter num={`${stats.africanRegions}+2`} label="Regions & Communities" />
+              </div>
+
+              <div className="ed-hero-cta-row" style={{ justifyContent: "center" }}>
+                <Link to="/nominate" className="ed-btn-primary">
+                  Nominate an Education Enabler
+                </Link>
+                <Link to="/nominees/catalogue" className="ed-btn-ghost">
+                  Browse the Full Catalogue →
+                </Link>
+              </div>
             </div>
-          ) : (
-            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-              {categoryCounts.length === 0 ? (
-                <p className="text-ivory/55 text-sm italic">Categories will populate as nominees are verified.</p>
+          </section>
+
+          {/* 2 — RECOGNITION TIERS */}
+          <section className="ed-section" aria-labelledby="dir-tiers">
+            <div className="ed-wrap">
+              <div className="ed-section-head">
+                <div className="ed-eyebrow">Browse by Recognition Tier</div>
+                <h2 id="dir-tiers" className="ed-section-title">
+                  Four Tiers. One Recognition Architecture.
+                </h2>
+                <p className="ed-section-sub">
+                  Each tier carries its own nominee type, evidence requirements and review route.
+                  Open a tier to see every nominee recorded under it.
+                </p>
+              </div>
+
+              <div className="ed-dir-grid-4">
+                {CATALOGUE_TIERS.map((t) => (
+                  <article key={t.slug} className="ed-card">
+                    <div className="ed-card-badge">TIER {t.tierNumber}</div>
+                    <h3>{t.name}</h3>
+                    <p>{t.blurb}</p>
+                    <p className="ed-mono" style={{ color: "var(--ed-gold)", fontSize: "0.78rem" }}>
+                      {isLoading ? "…" : `${(tierCounts[t.slug] ?? 0).toLocaleString()} nominees`}
+                    </p>
+                    <Link
+                      to={`/nominees/catalogue?tier=${t.slug}`}
+                      className="ed-link-inline"
+                      onClick={() => trackEvent("directory_tier_click", { tier: t.slug })}
+                    >
+                      Explore nominees →
+                    </Link>
+                  </article>
+                ))}
+              </div>
+            </div>
+          </section>
+
+          {/* 3 — VERIFIED PROFILES */}
+          <section className="ed-section ed-section-ink" aria-labelledby="dir-featured">
+            <div className="ed-wrap">
+              <div className="ed-section-head">
+                <div className="ed-eyebrow">Verified Profiles</div>
+                <h2 id="dir-featured" className="ed-section-title">
+                  Education Enablers in the Register
+                </h2>
+                <p className="ed-section-sub">
+                  NRC-verified profiles appear first. A listing records a nomination — it is not an
+                  award.
+                </p>
+              </div>
+
+              {isLoading ? (
+                <div className="ed-nom-grid">
+                  {Array.from({ length: 8 }).map((_, i) => (
+                    <div key={i} className="ed-nom-card" style={{ height: 260, opacity: 0.4 }} />
+                  ))}
+                </div>
+              ) : featured.length === 0 ? (
+                <div className="ed-dir-empty">
+                  Nominee profiles appear here as 2026 nominations are verified.
+                </div>
               ) : (
-                categoryCounts.map(([slug, info]) => (
+                <div className="ed-nom-grid">
+                  {featured.map((n) => <NomineeTile key={n.id} nominee={n} />)}
+                </div>
+              )}
+
+              <div style={{ textAlign: "center", marginTop: 36 }}>
+                <Link to="/nominees/catalogue" className="ed-btn-primary">
+                  Open the Full Recognition Catalogue →
+                </Link>
+              </div>
+            </div>
+          </section>
+
+          {/* 4 — GEOGRAPHIC REACH */}
+          <section className="ed-section" aria-labelledby="dir-regions">
+            <div className="ed-wrap">
+              <div className="ed-section-head">
+                <div className="ed-eyebrow">Geographic Reach</div>
+                <h2 id="dir-regions" className="ed-section-title">{REGION_FRAMING.headline}</h2>
+                <p className="ed-section-sub">
+                  Filter the register by where impact happens — across Africa, in the Diaspora, and
+                  among Friends of Africa.
+                </p>
+              </div>
+
+              <div className="ed-dir-regions">
+                {[...REGION_FRAMING.africaRegions, ...REGION_FRAMING.globalCommunities].map((r) => (
                   <Link
-                    key={slug}
-                    to={`/nominees/category/${slug}`}
-                    onClick={() => trackEvent("directory_category_click", { category: slug })}
-                    className="rounded-xl border border-gold/15 bg-charcoal-light/30 p-4 hover:border-gold/45 hover:bg-charcoal-light/50 transition-all group focus:outline-none focus:ring-2 focus:ring-gold/60"
-                    aria-label={`Explore ${info.name} category page`}
+                    key={r}
+                    to={`/nominees/catalogue?region=${encodeURIComponent(r)}`}
+                    className="ed-dir-region"
+                    onClick={() => trackEvent("directory_region_click", { region: r })}
                   >
-                    <Award className="h-6 w-6 text-gold mb-2" />
-                    <h4 className="font-medium text-ivory text-sm mb-1">{info.name}</h4>
-                    <p className="text-xs text-ivory/55">{info.count} verified enablers</p>
-                    <span className="mt-3 inline-flex items-center gap-1 text-xs text-gold group-hover:gap-2 transition-all">
-                      Explore category <ArrowRight className="h-3 w-3" />
-                    </span>
+                    <span>{r}</span>
+                    <span>{isLoading ? "…" : (regionCounts.get(normalizeRegion(r)) ?? 0)}</span>
                   </Link>
-                ))
-              )}
+                ))}
+              </div>
             </div>
-          )}
-        </Section>
+          </section>
 
-        {/* ────────────────────────────────────────────────────────────────
-            SECTION 2 — BROWSE BY RECOGNITION TIER (filter chips)
-        ──────────────────────────────────────────────────────────────── */}
-        <Section eyebrow="02 · Filter" title="Browse by Recognition Tier">
-          <div className="flex flex-wrap gap-2">
-            <TierChip active={tierFilter === "all"} onClick={() => setTierFilter("all")} label="All Tiers" count={nominees?.length ?? 0} />
-            {TIER_META.map((t) => (
-              <TierChip
-                key={t.slug}
-                active={tierFilter === t.slug}
-                onClick={() => {
-                  setTierFilter(t.slug);
-                  trackEvent("directory_filter_apply", { facet: "tier", value: t.slug });
-                  document.getElementById("discovery")?.scrollIntoView({ behavior: "smooth" });
-                }}
-                label={t.title}
-                count={tierCounts[t.slug] ?? 0}
-              />
-            ))}
-          </div>
-        </Section>
+          {/* 5 — ENABLER TYPES */}
+          <section className="ed-section ed-section-ink" aria-labelledby="dir-types">
+            <div className="ed-wrap">
+              <div className="ed-section-head">
+                <div className="ed-eyebrow">Who We Honour</div>
+                <h2 id="dir-types" className="ed-section-title">Every Kind of Education Enabler</h2>
+                <p className="ed-section-sub">
+                  Recognition is open to individuals and institutions alike — from ministries and
+                  universities to foundations, EdTech founders and diaspora associations.
+                </p>
+              </div>
 
-        {/* ────────────────────────────────────────────────────────────────
-            SECTION 3 — BROWSE BY EDUCATION ENABLER TYPE
-        ──────────────────────────────────────────────────────────────── */}
-        <Section eyebrow="03 · Who They Are" title="Browse by Education Enabler Type">
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-2">
-            {ENABLER_TYPES.map((e) => (
-              <button
-                key={e.id}
-                onClick={() => {
-                  setSearch(e.label);
-                  trackEvent("directory_filter_apply", { facet: "enabler_type", value: e.id });
-                  document.getElementById("discovery")?.scrollIntoView({ behavior: "smooth" });
-                }}
-                className="flex items-center gap-2 rounded-lg border border-gold/15 bg-charcoal-light/30 px-3 py-2.5 hover:border-gold/50 transition-all text-left"
-              >
-                <e.Icon className="h-4 w-4 text-gold shrink-0" />
-                <span className="text-xs text-ivory/80 truncate">{e.label}</span>
-              </button>
-            ))}
-          </div>
-        </Section>
+              <div className="ed-dir-chips">
+                {ENABLER_TYPES.map((t) => (
+                  <Link
+                    key={t}
+                    to={`/nominees/catalogue?q=${encodeURIComponent(t)}`}
+                    className="ed-dir-chip"
+                  >
+                    {t}
+                  </Link>
+                ))}
+              </div>
+            </div>
+          </section>
 
-        {/* ────────────────────────────────────────────────────────────────
-            SECTION 4 — REGIONS + GLOBAL COMMUNITIES
-        ──────────────────────────────────────────────────────────────── */}
-        <Section eyebrow="04 · Geography" title="Browse by Eight Africa Regions" sub={REGION_FRAMING.headline}>
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3 mb-8">
-            {AFRICA_REGIONS.map((r) => (
-              <button
-                key={r}
-                onClick={() => {
-                  navigate(`/nominees?region=${encodeURIComponent(r)}`);
-                  trackEvent("directory_region_click", { region: r });
-                }}
-                className="rounded-xl border border-gold/20 bg-charcoal-light/30 p-4 hover:border-gold/55 transition-all text-left"
-              >
-                <MapPin className="h-5 w-5 text-gold mb-2" />
-                <div className="font-medium text-ivory text-sm">{r}</div>
-              </button>
-            ))}
-          </div>
-          <div className="rounded-2xl border border-gold/30 bg-gradient-to-r from-gold/10 to-charcoal-light/30 p-5">
-            <h4 className="font-playfair text-lg text-gold mb-3 flex items-center gap-2">
-              <Globe2 className="h-5 w-5" /> Global Communities
-            </h4>
-            <p className="text-xs text-ivory/65 mb-3">Recognised separately — not Africa regions.</p>
-            <div className="grid sm:grid-cols-2 gap-3">
-              {GLOBAL_COMMUNITIES.map((c) => (
-                <button
-                  key={c}
-                  onClick={() => navigate(`/nominees?region=${encodeURIComponent(c)}`)}
-                  className="rounded-lg border border-gold/25 bg-charcoal/40 p-4 hover:border-gold/55 text-left transition-all"
+          {/* 6 — INTEGRITY FIREWALL */}
+          <section className="ed-section" aria-labelledby="dir-integrity">
+            <div className="ed-wrap">
+              <div className="ed-section-head">
+                <div className="ed-eyebrow">Integrity Safeguards</div>
+                <h2 id="dir-integrity" className="ed-section-title">
+                  How a Profile Earns Its Place
+                </h2>
+              </div>
+
+              <div className="ed-grid-3">
+                {INTEGRITY.map((i) => (
+                  <article key={i.title} className="ed-card">
+                    <h3>{i.title}</h3>
+                    <p>{i.body}</p>
+                  </article>
+                ))}
+              </div>
+
+              <p className="ed-disclaimer" style={{ marginTop: 28 }}>
+                NESA-Africa operates a governance firewall between nomination, verification and
+                judging. Inclusion in this directory confers no award, ranking or endorsement.
+              </p>
+            </div>
+          </section>
+
+          {/* 7 — CONVERSION */}
+          <section className="ed-section ed-section-ink" aria-labelledby="dir-cta">
+            <div className="ed-wrap">
+              <div className="ed-section-head">
+                <div className="ed-eyebrow">Take Part</div>
+                <h2 id="dir-cta" className="ed-section-title">
+                  Someone You Know Belongs in This Register
+                </h2>
+                <p className="ed-section-sub">
+                  Nominations open 30 August 2026. Submission is free, and you can create your
+                  account at the moment you submit.
+                </p>
+              </div>
+
+              <div className="ed-hero-cta-row" style={{ justifyContent: "center" }}>
+                <Link
+                  to="/nominate"
+                  className="ed-btn-primary"
+                  onClick={() => trackEvent("directory_cta_click", { cta: "nominate" })}
                 >
-                  {c.includes("Diaspora") ? <Plane className="h-5 w-5 text-gold mb-2" /> : <HeartHandshake className="h-5 w-5 text-gold mb-2" />}
-                  <div className="font-medium text-ivory text-sm">{c}</div>
-                </button>
-              ))}
-            </div>
-          </div>
-        </Section>
-
-        {/* ────────────────────────────────────────────────────────────────
-            SECTION 5 — INTERACTIVE AFRICA MAP (existing component)
-        ──────────────────────────────────────────────────────────────── */}
-        <Section eyebrow="05 · Map" title="Interactive Africa Map">
-          <AfricaRegionExplorer />
-        </Section>
-
-        {/* ────────────────────────────────────────────────────────────────
-            SECTION 6 — FEATURED EDUCATION ENABLERS
-        ──────────────────────────────────────────────────────────────── */}
-        <Section eyebrow="06 · Spotlight" title="Featured Education Enablers">
-          {isLoading ? (
-            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-              {Array.from({ length: 6 }).map((_, i) => <Skeleton key={i} className="h-72 rounded-2xl bg-charcoal-light/50" />)}
-            </div>
-          ) : featured.length === 0 ? (
-            <p className="text-ivory/55 text-sm italic">Featured enablers will appear once data is verified.</p>
-          ) : (
-            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-              {featured.map((n) => <LandingNomineeCard key={n.id} nominee={n} />)}
-            </div>
-          )}
-        </Section>
-
-        {/* ────────────────────────────────────────────────────────────────
-            SECTION 7 — IMPACT STORIES
-        ──────────────────────────────────────────────────────────────── */}
-        <Section eyebrow="07 · Stories" title="Education Impact Stories" sub="Real change, verified. Behind every enabler is a community transformed.">
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-            {IMPACT_STORY_THEMES.map((s, i) => (
-              <motion.div
-                key={s.tag}
-                initial={{ opacity: 0, y: 10 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.05 }}
-                className="rounded-2xl border border-gold/15 bg-charcoal-light/30 p-5 hover:border-gold/45 transition-all"
-              >
-                <Badge className="bg-gold/15 text-gold border border-gold/30 mb-3">{s.tag}</Badge>
-                <p className="text-sm text-ivory/75 leading-relaxed">{s.body}</p>
-                <Link to="/about/impact" className="mt-4 inline-flex items-center gap-1 text-xs text-gold hover:gap-2 transition-all">
-                  Read stories <ChevronRight className="h-3 w-3" />
+                  Start a Nomination
                 </Link>
-              </motion.div>
-            ))}
-          </div>
-        </Section>
-
-        {/* ────────────────────────────────────────────────────────────────
-            SECTION 8 — ADVANCED DISCOVERY
-        ──────────────────────────────────────────────────────────────── */}
-        <Section id="discovery" eyebrow="08 · Discover" title="Advanced Discovery" sub="Search Africa's verified education impact ecosystem.">
-          <div className="rounded-2xl border border-gold/20 bg-charcoal-light/40 p-4 md:p-6 mb-6">
-            <div className="relative mb-4">
-              <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-ivory/40" />
-              <Input
-                value={search}
-                onChange={(e) => {
-                  setSearch(e.target.value);
-                  trackEvent("directory_search", { q: e.target.value });
-                }}
-                placeholder="Search by name, organisation, country, category, pillar..."
-                className="pl-10 bg-charcoal/60 border-gold/20 text-ivory placeholder:text-ivory/40"
-                aria-label="Search Education Enablers"
-              />
-              {search && (
-                <button
-                  onClick={() => setSearch("")}
-                  className="absolute right-3 top-1/2 -translate-y-1/2 text-ivory/50 hover:text-ivory"
-                  aria-label="Clear search"
-                >
-                  <X className="h-4 w-4" />
-                </button>
-              )}
-            </div>
-            <div className="flex flex-wrap gap-2 mb-2">
-              <span className="text-[11px] text-ivory/55 mr-2 self-center">
-                <Filter className="h-3 w-3 inline mr-1" /> Try:
-              </span>
-              {["Philanthropy", "STEM", "Libraries", "Nigeria", "Kenya", "Diaspora", "Scholarships", "AI", "Universities", "Faith", "Media"].map((q) => (
-                <button
-                  key={q}
-                  onClick={() => { setSearch(q); trackEvent("directory_search", { q, source: "suggestion" }); }}
-                  className="text-[11px] px-2.5 py-1 rounded-full border border-gold/25 bg-charcoal/40 text-ivory/70 hover:border-gold/55 hover:text-ivory"
-                >
-                  {q}
-                </button>
-              ))}
-            </div>
-            <p className="text-xs text-ivory/55 mt-3">
-              {isLoading ? "Loading…" : `${results.length} ${results.length === 1 ? "enabler" : "enablers"} match your search`}
-            </p>
-          </div>
-
-          {isLoading ? (
-            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-              {Array.from({ length: 6 }).map((_, i) => <Skeleton key={i} className="h-72 rounded-2xl bg-charcoal-light/50" />)}
-            </div>
-          ) : results.length === 0 ? (
-            <div className="rounded-xl border border-dashed border-gold/25 bg-charcoal-light/20 p-10 text-center">
-              <p className="text-ivory/60 text-sm mb-4">No enablers match these filters yet.</p>
-              <Button asChild className="bg-gold hover:bg-gold/90 text-charcoal">
-                <Link to={PRIMARY_CTAS.nominate.href}>Nominate an Education Enabler</Link>
-              </Button>
-            </div>
-          ) : (
-            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-              {results.slice(0, 24).map((n) => <LandingNomineeCard key={n.id} nominee={n} />)}
-            </div>
-          )}
-
-          {results.length > 24 && (
-            <div className="text-center mt-8">
-              <Button variant="outline" className="border-gold/40 text-ivory hover:bg-gold/10">
-                Showing 24 of {results.length} · Refine filters to narrow
-              </Button>
-            </div>
-          )}
-        </Section>
-
-        {/* ────────────────────────────────────────────────────────────────
-            FOOTER TRUST
-        ──────────────────────────────────────────────────────────────── */}
-        <section aria-labelledby="trust-footer" className="border-t border-gold/15 bg-charcoal-dark/50 py-12">
-          <div className="container max-w-7xl mx-auto px-4">
-            <h2 id="trust-footer" className="font-playfair text-2xl text-gold mb-4 flex items-center gap-2">
-              <Shield className="h-5 w-5" /> Independent Verification & Governance
-            </h2>
-            <p className="text-sm text-ivory/70 max-w-3xl mb-6">{TRUST_STATEMENT}</p>
-            <div className="flex flex-wrap gap-3 text-xs">
-              {[
-                { l: "Governance Framework", h: "/about/governance" },
-                { l: "Selection Integrity", h: "/about/governance#selection" },
-                { l: "Evaluation Methodology", h: "/about/governance#methodology" },
-                { l: "EDI Matrix", h: "/about/governance#edi" },
-                { l: "FAQs", h: "/support" },
-                { l: "Sponsor Independence", h: "/about/governance#sponsors" },
-                { l: "Privacy", h: "/policies" },
-                { l: "Accessibility", h: "/policies#accessibility" },
-                { l: "Contact", h: "/contact" },
-              ].map((l) => (
-                <Link key={l.l} to={l.h} className="px-3 py-1.5 rounded-full border border-gold/25 text-ivory/75 hover:border-gold/55 hover:text-ivory">
-                  {l.l}
+                <Link to="/awards" className="ed-btn-ghost">
+                  See the Recognition Framework →
                 </Link>
-              ))}
+                <Link to="/get-involved" className="ed-btn-ghost">
+                  Volunteer or Partner →
+                </Link>
+              </div>
             </div>
-          </div>
-        </section>
-      </main>
+          </section>
+        </main>
+
+        <NESAFooter />
+        <BottomPageNav />
+      </div>
+
+      <BackToTopButton />
+      <MobileBottomNav />
+    </>
+  );
+}
+
+function Counter({ num, label }: { num: string | number; label: string }) {
+  return (
+    <div className="ed-dir-counter">
+      <div className="ed-dir-counter-num">{num}</div>
+      <div className="ed-dir-counter-label">{label}</div>
     </div>
   );
 }
 
-// ---------------------------------------------------------------------------
-// Inline helpers
-// ---------------------------------------------------------------------------
-
-function Section({
-  id, eyebrow, title, sub, children,
-}: {
-  id?: string;
-  eyebrow: string;
-  title: string;
-  sub?: string;
-  children: React.ReactNode;
-}) {
+function NomineeTile({ nominee }: { nominee: EnrichedDatabaseNominee }) {
   return (
-    <section id={id} aria-labelledby={`${id ?? title}-heading`} className="py-14 md:py-20 border-b border-gold/10">
-      <div className="container max-w-7xl mx-auto px-4">
-        <div className="mb-8 max-w-3xl">
-          <div className="text-[11px] uppercase tracking-[0.18em] text-gold/80 mb-2">{eyebrow}</div>
-          <h2 id={`${id ?? title}-heading`} className="font-playfair text-3xl md:text-4xl text-ivory font-bold mb-3">
-            {title}
-          </h2>
-          {sub && <p className="text-ivory/65 text-sm md:text-base">{sub}</p>}
-        </div>
-        {children}
+    <Link to={`/nominees/${encodeURIComponent(nominee.slug)}`} className="ed-nom-card">
+      <div className="ed-nom-media">
+        <img
+          src={nominee.photoUrl}
+          alt={nominee.name}
+          loading="lazy"
+          style={{ objectFit: nominee.imageType === "logo" ? "contain" : "cover" }}
+        />
       </div>
-    </section>
-  );
-}
-
-function TierChip({ active, onClick, label, count }: { active: boolean; onClick: () => void; label: string; count: number }) {
-  return (
-    <button
-      onClick={onClick}
-      className={`px-4 py-2 rounded-full text-sm border transition-all ${
-        active
-          ? "bg-gold text-charcoal border-gold font-semibold"
-          : "border-gold/25 text-ivory/80 hover:border-gold/55 hover:text-ivory"
-      }`}
-      aria-pressed={active}
-    >
-      {label} <span className="opacity-70 ml-1">· {count}</span>
-    </button>
+      <div className="ed-nom-body">
+        <div className="ed-nom-name">{nominee.name}</div>
+        <div className="ed-nom-meta">
+          {[nominee.country, nominee.categoryName].filter(Boolean).join(" · ")}
+        </div>
+        <span className="ed-nom-tag">
+          {nominee.nrcVerified ? "NRC Verified" : "Nomination Recorded"}
+        </span>
+      </div>
+    </Link>
   );
 }
