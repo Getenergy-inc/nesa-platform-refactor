@@ -418,6 +418,7 @@ function NomineeTile({ nominee }: { nominee: EnrichedDatabaseNominee }) {
           src={nominee.photoUrl}
           alt={nominee.name}
           loading="lazy"
+          onError={(e) => { (e.currentTarget as HTMLImageElement).src = "/images/placeholder.svg"; }}
           style={{ objectFit: nominee.imageType === "logo" ? "contain" : "cover" }}
         />
       </div>
