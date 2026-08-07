@@ -51,6 +51,19 @@ import {
   type SubpageVideo,
 } from "@/components/awards/subpage/AwardSubpageBlocks";
 import { getAwardTheme, awardThemeVars } from "@/config/awards/awardThemes";
+import {
+  AwardBrandBand,
+  AwardSectionNav,
+  AwardStoryBlock,
+  AwardPathwaysGrid,
+  type SectionLink,
+} from "@/components/awards/subpage/AwardSubpageBrandStory";
+import {
+  AwardSubpageNomination,
+  type AwardNominationConfig,
+} from "@/components/awards/subpage/AwardSubpageNomination";
+import type { AwardStory, PathwayCard } from "@/config/awards/subpageStory2026";
+
 
 export type {
   SubpageBenefit,
@@ -192,7 +205,22 @@ export interface AwardSubpageContent {
 
   /** Award-specific terms & conditions. */
   terms?: SubpageTerms;
+
+  // ── Category-page storytelling (2026 refactor) ────────────────────────────
+
+  /** Bold branding band under the hero. */
+  brand?: { name: string; code?: string; tagline?: string };
+
+  /** Narrative: why this category exists, under its tier. */
+  story?: AwardStory;
+
+  /** Subcategories (or Icon/Influencer classifications) with imagery. */
+  pathways?: { heading: string; label: string; intro?: string; items: PathwayCard[] };
+
+  /** Tailored nomination form embedded on the page. */
+  nomination?: AwardNominationConfig;
 }
+
 
 // ── Small building blocks ────────────────────────────────────────────────────
 
@@ -228,6 +256,22 @@ export function AwardSubpageTemplate({ content }: { content: AwardSubpageContent
   const integrityDefault =
     "NESA-Africa 2026 does not use public voting for award recognition. Sponsorship, donations, Gala tickets, merchandise, endorsements, GFAwzip Wallet transactions, AGC Participation Credits, follower numbers and public popularity do not influence verification or recognition.";
 
+  const sectionLinks: SectionLink[] = [
+    content.story ? { id: "story", label: "The story" } : null,
+    content.pathways
+      ? { id: "pathways", label: `${content.pathways.label}s` }
+      : null,
+    content.videos ? { id: "videos", label: "Watch" } : null,
+    content.nomination ? { id: "nominate", label: "Nominate now" } : null,
+    { id: "recognises", label: "What it recognises" },
+    { id: "who", label: "Who it's for" },
+    { id: "geography", label: "Where" },
+    { id: "featured", label: "Nominees" },
+    { id: "how-it-works", label: "How it works" },
+    { id: "faqs", label: "FAQs" },
+  ].filter(Boolean) as SectionLink[];
+
+
   return (
     <>
       <Helmet>
@@ -253,6 +297,20 @@ export function AwardSubpageTemplate({ content }: { content: AwardSubpageContent
           imageAlt={content.hero.imageAlt}
         />
 
+        {/* 1a. Bold category branding */}
+        {content.brand ? (
+          <AwardBrandBand
+            tierLabel={content.parentTierLabel}
+            tierHref={content.parentTierHref}
+            name={content.brand.name}
+            code={content.brand.code}
+            tagline={content.brand.tagline}
+          />
+        ) : null}
+
+        {/* 1b. In-page navigator */}
+        <AwardSectionNav links={sectionLinks} />
+
         <TrustIndicators />
 
         {content.notice ? (
@@ -261,8 +319,31 @@ export function AwardSubpageTemplate({ content }: { content: AwardSubpageContent
           </div>
         ) : null}
 
-        {/* 1b. Award-specific countdown (optional) */}
+        {/* 1c. Award-specific countdown (optional) */}
         {content.countdown ? <AwardCountdownBlock countdown={content.countdown} /> : null}
+
+        {/* 1d. Category story */}
+        {content.story ? <AwardStoryBlock story={content.story} /> : null}
+
+        {/* 1e. Subcategories & pathways */}
+        {content.pathways ? (
+          <AwardPathwaysGrid
+            heading={content.pathways.heading}
+            label={content.pathways.label}
+            intro={content.pathways.intro}
+            items={content.pathways.items}
+          />
+        ) : null}
+
+        {/* 1f. Category video advert */}
+        {content.videos ? (
+          <AwardVideosBlock heading={content.videos.heading} items={content.videos.items} />
+        ) : null}
+
+        {/* 1g. Tailored nomination form */}
+        {content.nomination ? <AwardSubpageNomination config={content.nomination} /> : null}
+
+
 
 
 
@@ -443,16 +524,13 @@ export function AwardSubpageTemplate({ content }: { content: AwardSubpageContent
         {content.benefits ? (
           <AwardBenefitsBlock heading={content.benefits.heading} items={content.benefits.items} />
         ) : null}
-        {content.countdown ? <AwardCountdownBlock countdown={content.countdown} /> : null}
         {content.timeline ? (
           <AwardTimelineBlock heading={content.timeline.heading} entries={content.timeline.entries} />
         ) : null}
         {content.gallery ? (
           <AwardGalleryBlock heading={content.gallery.heading} items={content.gallery.items} />
         ) : null}
-        {content.videos ? (
-          <AwardVideosBlock heading={content.videos.heading} items={content.videos.items} />
-        ) : null}
+
         {content.testimonials ? (
           <AwardTestimonialsBlock
             heading={content.testimonials.heading}
