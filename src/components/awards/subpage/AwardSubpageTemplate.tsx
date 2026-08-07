@@ -524,16 +524,13 @@ export function AwardSubpageTemplate({ content }: { content: AwardSubpageContent
         {content.benefits ? (
           <AwardBenefitsBlock heading={content.benefits.heading} items={content.benefits.items} />
         ) : null}
-        {content.countdown ? <AwardCountdownBlock countdown={content.countdown} /> : null}
         {content.timeline ? (
           <AwardTimelineBlock heading={content.timeline.heading} entries={content.timeline.entries} />
         ) : null}
         {content.gallery ? (
           <AwardGalleryBlock heading={content.gallery.heading} items={content.gallery.items} />
         ) : null}
-        {content.videos ? (
-          <AwardVideosBlock heading={content.videos.heading} items={content.videos.items} />
-        ) : null}
+
         {content.testimonials ? (
           <AwardTestimonialsBlock
             heading={content.testimonials.heading}
