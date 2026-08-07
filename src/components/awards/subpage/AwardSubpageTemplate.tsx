@@ -256,6 +256,22 @@ export function AwardSubpageTemplate({ content }: { content: AwardSubpageContent
   const integrityDefault =
     "NESA-Africa 2026 does not use public voting for award recognition. Sponsorship, donations, Gala tickets, merchandise, endorsements, GFAwzip Wallet transactions, AGC Participation Credits, follower numbers and public popularity do not influence verification or recognition.";
 
+  const sectionLinks: SectionLink[] = [
+    content.story ? { id: "story", label: "The story" } : null,
+    content.pathways
+      ? { id: "pathways", label: `${content.pathways.label}s` }
+      : null,
+    content.videos ? { id: "videos", label: "Watch" } : null,
+    content.nomination ? { id: "nominate", label: "Nominate now" } : null,
+    { id: "recognises", label: "What it recognises" },
+    { id: "who", label: "Who it's for" },
+    { id: "geography", label: "Where" },
+    { id: "featured", label: "Nominees" },
+    { id: "how-it-works", label: "How it works" },
+    { id: "faqs", label: "FAQs" },
+  ].filter(Boolean) as SectionLink[];
+
+
   return (
     <>
       <Helmet>
