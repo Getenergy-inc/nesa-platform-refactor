@@ -51,6 +51,19 @@ import {
   type SubpageVideo,
 } from "@/components/awards/subpage/AwardSubpageBlocks";
 import { getAwardTheme, awardThemeVars } from "@/config/awards/awardThemes";
+import {
+  AwardBrandBand,
+  AwardSectionNav,
+  AwardStoryBlock,
+  AwardPathwaysGrid,
+  type SectionLink,
+} from "@/components/awards/subpage/AwardSubpageBrandStory";
+import {
+  AwardSubpageNomination,
+  type AwardNominationConfig,
+} from "@/components/awards/subpage/AwardSubpageNomination";
+import type { AwardStory, PathwayCard } from "@/config/awards/subpageStory2026";
+
 
 export type {
   SubpageBenefit,
