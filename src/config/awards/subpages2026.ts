@@ -24,6 +24,21 @@ import {
 import type { TierSlug } from "@/config/recognition2026/tiers";
 import { getSubpageHeroImage } from "@/config/awards/subpageHeroImages";
 import { getSubpageModules } from "@/config/awards/subpageModules2026";
+import {
+  buildCategoryStory,
+  buildSubcategoryStory,
+  buildCategoryPathways,
+  buildClassificationPathways,
+  getCategoryVideos,
+} from "@/config/awards/subpageStory2026";
+
+/** Tier → nomination form family id. */
+const TIER_FAMILY: Record<TierSlug, string> = {
+  "africa-education-icon": "africa-education-icon",
+  "influencer-education-impact": "influencer",
+  platinum: "platinum",
+  "gold-blue-garnet": "gold-blue-garnet",
+};
 
 // ── Shared building blocks ──────────────────────────────────────────────────
 
@@ -203,6 +218,21 @@ function fromCategory(cat: CategoryDefinition): AwardSubpageContent {
     timeline: modules.timeline,
     countdown: modules.countdown,
     terms: modules.terms,
+    brand: {
+      name: cat.shortName,
+      code: cat.code,
+      tagline: cat.summary,
+    },
+    story: buildCategoryStory(cat),
+    pathways: buildCategoryPathways(cat),
+    videos: getCategoryVideos(cat.tier, slug, cat.shortName),
+    nomination: {
+      formSlug: cat.slug,
+      name: cat.shortName,
+      family: TIER_FAMILY[cat.tier],
+      fallbackHref: nominateHref,
+      directoryHref,
+    },
     finalCta: {
       heading: `Recognise an Enabler of ${cat.shortName}`,
       body: "Submit a fully evidenced nomination. NRC review begins as soon as evidence is complete.",
@@ -280,6 +310,22 @@ function fromSubcategory(
     timeline: modules.timeline,
     countdown: modules.countdown,
     terms: modules.terms,
+    brand: {
+      name: sub.name,
+      code: sub.code,
+      tagline: sub.description,
+    },
+    story: buildSubcategoryStory(parent, sub),
+    pathways: buildClassificationPathways(parent, sub),
+    videos: getCategoryVideos(parent.tier, slug, sub.name),
+    nomination: {
+      formSlug: slug,
+      name: sub.name,
+      family: TIER_FAMILY[parent.tier],
+      defaultSubcategorySlug: sub.code.toLowerCase(),
+      fallbackHref: nominateHref,
+      directoryHref,
+    },
     finalCta: {
       heading: `Recognise an Enabler — ${sub.name}`,
       body: "Submit a fully evidenced nomination. NRC review begins as soon as evidence is complete.",
