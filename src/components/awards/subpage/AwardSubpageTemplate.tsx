@@ -281,6 +281,20 @@ export function AwardSubpageTemplate({ content }: { content: AwardSubpageContent
           imageAlt={content.hero.imageAlt}
         />
 
+        {/* 1a. Bold category branding */}
+        {content.brand ? (
+          <AwardBrandBand
+            tierLabel={content.parentTierLabel}
+            tierHref={content.parentTierHref}
+            name={content.brand.name}
+            code={content.brand.code}
+            tagline={content.brand.tagline}
+          />
+        ) : null}
+
+        {/* 1b. In-page navigator */}
+        <AwardSectionNav links={sectionLinks} />
+
         <TrustIndicators />
 
         {content.notice ? (
@@ -289,8 +303,31 @@ export function AwardSubpageTemplate({ content }: { content: AwardSubpageContent
           </div>
         ) : null}
 
-        {/* 1b. Award-specific countdown (optional) */}
+        {/* 1c. Award-specific countdown (optional) */}
         {content.countdown ? <AwardCountdownBlock countdown={content.countdown} /> : null}
+
+        {/* 1d. Category story */}
+        {content.story ? <AwardStoryBlock story={content.story} /> : null}
+
+        {/* 1e. Subcategories & pathways */}
+        {content.pathways ? (
+          <AwardPathwaysGrid
+            heading={content.pathways.heading}
+            label={content.pathways.label}
+            intro={content.pathways.intro}
+            items={content.pathways.items}
+          />
+        ) : null}
+
+        {/* 1f. Category video advert */}
+        {content.videos ? (
+          <AwardVideosBlock heading={content.videos.heading} items={content.videos.items} />
+        ) : null}
+
+        {/* 1g. Tailored nomination form */}
+        {content.nomination ? <AwardSubpageNomination config={content.nomination} /> : null}
+
+
 
 
 
