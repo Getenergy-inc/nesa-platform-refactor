@@ -192,7 +192,22 @@ export interface AwardSubpageContent {
 
   /** Award-specific terms & conditions. */
   terms?: SubpageTerms;
+
+  // ── Category-page storytelling (2026 refactor) ────────────────────────────
+
+  /** Bold branding band under the hero. */
+  brand?: { name: string; code?: string; tagline?: string };
+
+  /** Narrative: why this category exists, under its tier. */
+  story?: AwardStory;
+
+  /** Subcategories (or Icon/Influencer classifications) with imagery. */
+  pathways?: { heading: string; label: string; intro?: string; items: PathwayCard[] };
+
+  /** Tailored nomination form embedded on the page. */
+  nomination?: AwardNominationConfig;
 }
+
 
 // ── Small building blocks ────────────────────────────────────────────────────
 
