@@ -44,7 +44,7 @@ export function PublicLayout({
   return (
     <div className="min-h-screen bg-charcoal flex flex-col">
       <NESAHeader />
-      <main id="main-content" tabIndex={-1} className="flex-1 pt-[88px] lg:pt-[132px] pb-16">
+      <main id="main-content" tabIndex={-1} className="flex-1 pt-[92px] xl:pt-[134px] pb-16">
         {children}
       </main>
       {showCTA && (

@@ -232,6 +232,7 @@ import Install from "./pages/Install";
 
 // 22-page canonical consolidators (2026 final refactor)
 import AboutConsolidated from "./pages/about/AboutConsolidated";
+import GlobalTeam from "./pages/about/GlobalTeam";
 import AboutCycle2026 from "./pages/about/AboutCycle2026";
 import AboutCycle2027 from "./pages/about/AboutCycle2027";
 import AboutCycle2028_2030 from "./pages/about/AboutCycle2028_2030";
@@ -662,6 +663,8 @@ const App = () => (
                       </WithLayout>
                     }
                   />
+                  <Route path="/about/team" element={<WithLayout><GlobalTeam /></WithLayout>} />
+                  <Route path="/team" element={<Navigate to="/about/team" replace />} />
                   <Route path="/about/nesa-africa-2026" element={<WithLayout><AboutCycle2026 /></WithLayout>} />
                   <Route path="/about/nesa-africa-2027" element={<WithLayout><AboutCycle2027 /></WithLayout>} />
                   <Route path="/about/nesa-africa-2028-2030" element={<WithLayout><AboutCycle2028_2030 /></WithLayout>} />
