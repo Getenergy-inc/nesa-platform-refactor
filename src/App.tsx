@@ -662,6 +662,8 @@ const App = () => (
                       </WithLayout>
                     }
                   />
+                  <Route path="/about/team" element={<WithLayout><GlobalTeam /></WithLayout>} />
+                  <Route path="/team" element={<Navigate to="/about/team" replace />} />
                   <Route path="/about/nesa-africa-2026" element={<WithLayout><AboutCycle2026 /></WithLayout>} />
                   <Route path="/about/nesa-africa-2027" element={<WithLayout><AboutCycle2027 /></WithLayout>} />
                   <Route path="/about/nesa-africa-2028-2030" element={<WithLayout><AboutCycle2028_2030 /></WithLayout>} />
