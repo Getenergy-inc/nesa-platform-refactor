@@ -62,7 +62,7 @@ export default function SubcategoryPage() {
     }
     if (country !== "all") r = r.filter((n) => n.country === country);
 
-    if (sort === "votes") r.sort((a, b) => b.publicVotes - a.publicVotes);
+    if (sort === "votes") r.sort((a, b) => Number(b.nrcVerified ?? false) - Number(a.nrcVerified ?? false) || a.name.localeCompare(b.name);
     else r.sort((a, b) => a.name.localeCompare(b.name));
 
     return r;

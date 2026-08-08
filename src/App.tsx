@@ -397,7 +397,6 @@ import {
   AdminNomineeImages,
   AdminNomineeMediaLibrary,
   AdminNomineeProfiles,
-  AdminVotingGovernance,
   AdminRebuild,
   AdminEDXAnalytics,
   AdminContributorPhotos,

@@ -90,7 +90,6 @@ export function toCatalogueNominee(n: MasterNominee): EnrichedDatabaseNominee | 
     imageType: "photo",
     status: n.workflowStatus === "nomination_cleared" ? "approved" : "pending",
     isPlatinum: mapping?.tier === "platinum",
-    publicVotes: 0,
     subcategoryName: n.subcategory || "Uncategorized",
     subcategorySlug: n.subcategorySlug || "uncategorized",
     categoryName: mapping?.displayName ?? n.category,

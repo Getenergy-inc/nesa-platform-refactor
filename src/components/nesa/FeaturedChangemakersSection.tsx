@@ -54,7 +54,7 @@ export function FeaturedChangemakersSection() {
   const featured = useMemo(() => {
     if (!nominees?.length) return [];
     return [...nominees]
-      .sort((a, b) => (b.publicVotes ?? 0) - (a.publicVotes ?? 0))
+      .sort((a, b) => Number(b.nrcVerified ?? false) - Number(a.nrcVerified ?? false) || a.name.localeCompare(b.name))
       .slice(0, 8);
   }, [nominees]);
 

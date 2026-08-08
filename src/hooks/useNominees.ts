@@ -154,7 +154,6 @@ function enrichNominee(nominee: DatabaseNominee): EnrichedDatabaseNominee {
     imageType,
     status: nominee.status || "pending",
     isPlatinum: nominee.is_platinum || false,
-    publicVotes: nominee.public_votes || 0,
     subcategoryName: nominee.subcategory_name || "Uncategorized",
     subcategorySlug: nominee.subcategory_slug || "uncategorized",
     categoryName: nominee.category_name || "General",

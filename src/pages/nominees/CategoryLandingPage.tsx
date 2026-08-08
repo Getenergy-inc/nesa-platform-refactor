@@ -88,7 +88,7 @@ export default function CategoryLandingPage() {
     }
     if (country !== "all") r = r.filter((n) => n.country === country);
 
-    if (sort === "votes") r.sort((a, b) => b.publicVotes - a.publicVotes);
+    if (sort === "votes") r.sort((a, b) => Number(b.nrcVerified ?? false) - Number(a.nrcVerified ?? false) || a.name.localeCompare(b.name);
     else if (sort === "name") r.sort((a, b) => a.name.localeCompare(b.name));
     else r.sort((a, b) => a.name.localeCompare(b.name));
 
@@ -197,7 +197,7 @@ export default function CategoryLandingPage() {
           {/* Featured spotlight (top 3 by votes within current filter scope) */}
           {!activeSub && (
             <FeaturedNomineeSpotlight
-              nominees={[...categoryData.nominees].sort((a, b) => b.publicVotes - a.publicVotes)}
+              nominees={[...categoryData.nominees].sort((a, b) => Number(b.nrcVerified ?? false) - Number(a.nrcVerified ?? false) || a.name.localeCompare(b.name)}
             />
           )}
 

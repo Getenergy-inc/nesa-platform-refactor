@@ -16,7 +16,6 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { useSeason } from "@/contexts/SeasonContext";
 import {
-  VotingCalendarCard,
   EarningMethodsGrid,
   AGCRulesCard,
   AGCConversionCard,
@@ -173,7 +172,6 @@ export default function AboutAGC() {
           <AGCConversionCard className="mb-12" />
 
           {/* Voting Calendar */}
-          <VotingCalendarCard className="mb-12" />
 
           {/* Earning Methods */}
           <EarningMethodsGrid className="mb-12" />

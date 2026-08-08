@@ -24,7 +24,7 @@ export default function TrendingPage() {
     const valid = nominees.filter(
       (n) => n.status === "approved" || n.status === "platinum" || n.status === "pending",
     );
-    const sorted = [...valid].sort((a, b) => b.publicVotes - a.publicVotes);
+    const sorted = [...valid].sort((a, b) => Number(b.nrcVerified ?? false) - Number(a.nrcVerified ?? false) || a.name.localeCompare(b.name);
     return { trending: sorted.slice(0, 24), mostVoted: sorted.slice(0, 12) };
   }, [nominees]);
 
