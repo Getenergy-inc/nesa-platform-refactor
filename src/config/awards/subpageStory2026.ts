@@ -159,7 +159,7 @@ export function buildSubcategoryStory(
       { heading: `The ${frame.label} standard`, body: frame.standard },
       {
         heading: "Evidence that counts",
-        body: `${sub.evidenceSummary} Claims are checked line by line by the Nominee Review Committee before any assessment begins.`,
+        body: `${sub.evidenceSummary} Claims are checked line by line by the Nominee Research Corps (NRC) before any assessment begins.`,
       },
       { heading: "How recognition is reached", body: frame.route },
     ],

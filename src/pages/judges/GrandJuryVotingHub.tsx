@@ -50,7 +50,7 @@ export default function GrandJuryVotingHub() {
   return (
     <div className="max-w-6xl mx-auto p-6 space-y-6">
       <header>
-        <p className="text-xs uppercase tracking-widest text-[#c9a24a]">Grand Jury Voting Arena</p>
+        <p className="text-xs uppercase tracking-widest text-[#c9a24a]">Grand Jury Deliberation Arena</p>
         <h1 className="mt-2 font-serif text-3xl text-white">
           2026 Africa Education Icon Grand Jury
         </h1>

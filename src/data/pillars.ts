@@ -102,7 +102,7 @@ export const PILLARS: Pillar[] = [
         title: "Africa Technical Educator Icon",
         description:
           "Honouring lifetime contributors to technical, vocational, practical, and skills-based education development.",
-        cta: "Nominate a Technical Education Icon",
+        cta: "Nominate a Technical Educator Icon",
         href: "/nominate?pillar=africa-education-icon&track=technical",
       },
     ],

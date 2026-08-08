@@ -97,7 +97,7 @@ const ICON: AwardPageContent = {
       "Independent third-party endorsements, publications or policy citations",
     ],
     region: "Continental. Three laureate classifications: Africans in Africa · Africans in the Diaspora · Friends of Africa.",
-    pathway: "Three recognition pathways: Africa Education Philanthropy Icon · Literary & New Curriculum Advocate Icon · Africa Technical Education Icon.",
+    pathway: "Three recognition pathways: Africa Education Philanthropy Icon · Literary & New Curriculum Advocate Icon · Africa Technical Educator Icon.",
   },
   hallFilter: { sourceIcon: true },
   exploreAllHref: "/nominees/africa-education-icon-award",
@@ -129,7 +129,7 @@ const ICON: AwardPageContent = {
     },
     {
       slug: "technical-educator-icon",
-      title: "Africa Technical Education Icon of the Period (2006–2026)",
+      title: "Africa Technical Educator Icon of the Period (2006–2026)",
       blurb:
         "Recognising pioneers of TVET, STEM, engineering, digital skills, innovation and entrepreneurship whose work positions education as a driver of skills, enterprise and economic transformation.",
       recognises: "TVET, STEM and technical education pioneers",

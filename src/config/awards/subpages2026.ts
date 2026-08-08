@@ -47,7 +47,7 @@ const INTEGRITY_2026 =
 
 const DEFAULT_STEPS: SubpageStep[] = [
   { title: "Nominate", description: "Submit the nominee with verifiable evidence of impact." },
-  { title: "NRC verification", description: "The Nominee Review Committee validates documents and citations." },
+  { title: "NRC verification", description: "The Nominee Research Corps (NRC) validates documents and citations." },
   { title: "Independent assessment", description: "Assigned reviewers score against the published EDI matrix." },
   { title: "Governance approval", description: "The Governance Board ratifies verified Education Enablers." },
   { title: "Recognition", description: "Enablers are announced and honoured at the 2026 Recognition Edition." },

@@ -18,6 +18,7 @@ import {
   ThumbsUp,
 } from "lucide-react";
 import { NomineeActions } from "@/components/nominees";
+import { isIconTierNominee } from "@/components/nesa/NomineeCard";
 
 interface ExistingNominee {
   id: string;
@@ -219,6 +220,7 @@ export function ExistingNomineesSection({
                       renominationCount: nominee.renomination_count,
                     }}
                     variant="icon-only"
+                    showRenominate={!isIconTierNominee({ categoryName })}
                     onRenominateSuccess={() => handleRenominateSuccess(nominee.id)}
                   />
                   <Link 
