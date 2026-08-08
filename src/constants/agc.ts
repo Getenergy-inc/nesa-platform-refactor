@@ -1,19 +1,19 @@
 /**
  * AGC (Afri Gold Coins) Constants
- * Unified copy and rules for voting credits across the platform
+ * Unified copy and rules for participation credits across the platform
  */
 
 // ============== DISCLAIMERS ==============
 
 export const AGC_NON_TRADEABLE_DISCLAIMER = 
-  "AGC is non-tradeable voting credit — no withdrawals, no cash-out, no payouts.";
+  "AGC is non-tradeable participation credit — no withdrawals, no cash-out, no payouts.";
 
 export const AGC_DISCLAIMER_SHORT = 
   "AGC is NOT tradeable. No withdrawals/payouts/cash-out.";
 
 export const AGC_DISCLAIMER_FULL = [
-  "AGC (Afri Gold Coin) is a non-tradeable internal voting credit.",
-  "Used only within the NESA-Africa/SCEF ecosystem for voting and participation.",
+  "AGC (Afri Gold Coin) is a non-tradeable internal participation credit.",
+  "Used only within the NESA-Africa/SCEF ecosystem for recognition support and participation.",
   "No cash-out. No withdrawals. No payouts. Not a cryptocurrency.",
 ];
 
