@@ -2,16 +2,17 @@ import { motion } from "framer-motion";
 import { Clock, Trophy, ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useCountdown } from "@/hooks/useCountdown";
+import { GALA_COUNTDOWN_TARGET } from "@/config/programme";
 
 /**
  * MAIN LANDING-PAGE COUNTDOWN
  *
- * Hard-locked to: NESA-Africa 2026 Recognition Gala — 13 December 2026, 18:00 WAT.
+ * Hard-locked to the canonical target: 13 December 2026, 00:00 WAT (UTC+1).
  * Do NOT reintroduce "first future event" auto-selection here.
  * Other intermediate milestones (TV shows, voting windows) live in
  * <UpcomingEventsSection /> and have their own countdowns.
  */
-const GALA_TARGET = new Date("2026-12-13T00:00:00+01:00");
+const GALA_TARGET = GALA_COUNTDOWN_TARGET;
 const GALA_LABEL = "NESA-Africa 2026 Recognition Gala";
 const SEASON_BADGE = "NESA-Africa 2026";
 

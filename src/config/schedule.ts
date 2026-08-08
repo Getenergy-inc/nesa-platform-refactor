@@ -2,6 +2,7 @@
 // All dates are relative to the current season - NO hardcoded years in UI
 
 import { type StageAction } from "./season";
+import { GALA_COUNTDOWN_TARGET } from "./programme";
 
 export interface ScheduledEvent {
   id: string;
@@ -216,7 +217,8 @@ export function buildScheduledEvents(
         id: "blue-garnet-gala",
         name: "Blue Garnet Awards Gala",
         type: "gala",
-        date: createSeasonDate(awardYear, template.galas.blueGarnetGala.monthDay, template.galas.blueGarnetGala.yearOffset),
+        // Canonical Gala countdown target: 13 Dec 2026, 00:00 WAT (see config/programme.ts)
+        date: awardYear === 2026 ? GALA_COUNTDOWN_TARGET : createSeasonDate(awardYear, template.galas.blueGarnetGala.monthDay, template.galas.blueGarnetGala.yearOffset),
         description: "Grand ceremony — 9 Blue Garnet winners",
         venue: "Lagos, Nigeria",
       },

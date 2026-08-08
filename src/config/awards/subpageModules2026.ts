@@ -148,7 +148,7 @@ const ICON_COUNTDOWN: SubpageCountdown = {
 
 const STANDARD_COUNTDOWN: SubpageCountdown = {
   heading: "Countdown to the 2026 Recognition Gala",
-  targetIso: PROGRAMME_END_DATETIME,
+  targetIso: GALA_COUNTDOWN_DATETIME,
   label: `NESA-Africa 2026 Recognition Gala · ${PROGRAMME_END_LABEL}, Lagos`,
   note: "Nominations open 30 August 2026. Verification runs continuously until the Gala.",
 };

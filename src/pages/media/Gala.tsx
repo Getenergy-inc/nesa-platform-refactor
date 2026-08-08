@@ -40,7 +40,7 @@ import {
 import galaHeroImage from "@/assets/events/award-gala.jpeg";
 
 // ============== EVENT DETAILS ==============
-const GALA_DATE = PROGRAMME_END;
+const GALA_DATE = GALA_COUNTDOWN_TARGET;
 const GALA = {
   title: "Blue Garnet Awards Gala",
   tagline: "The Night Africa Celebrates Education Changemakers",
