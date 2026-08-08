@@ -53,13 +53,11 @@ export function useEDXOverview() {
     queryFn: async (): Promise<EDXOverview> => {
       const [
         { count: nominationsCount },
-        { count: votesCount },
         { count: nomineesCount },
         { data: regions },
         { data: categories },
       ] = await Promise.all([
         supabase.from("nominations").select("*", { count: "exact", head: true }),
-        supabase.from("votes").select("*", { count: "exact", head: true }),
         supabase.from("nominees").select("*", { count: "exact", head: true }),
         supabase.from("regions").select("slug").eq("is_active", true),
         supabase.from("categories").select("id").eq("is_active", true),
@@ -78,7 +76,7 @@ export function useEDXOverview() {
 
       return {
         totalNominations: nominationsCount ?? 0,
-        totalVotes: votesCount ?? 0,
+        totalVotes: 0,
         totalNominees: nomineesCount ?? 0,
         totalRegionsActive: regions?.length ?? 0,
         totalCategoriesEngaged: categories?.length ?? 0,
@@ -113,10 +111,7 @@ export function useEDXCategoryEngagement() {
         .from("nominations")
         .select("subcategory_id, subcategories!inner(category_id)");
 
-      // Get votes per nominee category
-      const { data: votes } = await supabase
-        .from("votes")
-        .select("nominee_id, nominees!inner(subcategory_id, subcategories!inner(category_id))");
+      const votes: { nominee_id: string; nominees?: unknown }[] = [];
 
       // Aggregate
       const catMap = new Map<string, { nominations: number; votes: number }>();
@@ -178,9 +173,7 @@ export function useEDXRegionMetrics() {
         .from("nominees")
         .select("region");
 
-      const { data: votes } = await supabase
-        .from("votes")
-        .select("nominee_id, nominees!inner(region)");
+      const votes: { nominee_id: string; nominees?: { region?: string } }[] = [];
 
       // Count nominees per region
       const nomineeMap = new Map<string, number>();

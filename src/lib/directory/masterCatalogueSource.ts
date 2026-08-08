@@ -90,7 +90,6 @@ export function toCatalogueNominee(n: MasterNominee): EnrichedDatabaseNominee | 
     imageType: "photo",
     status: n.workflowStatus === "nomination_cleared" ? "approved" : "pending",
     isPlatinum: mapping?.tier === "platinum",
-    publicVotes: 0,
     subcategoryName: n.subcategory || "Uncategorized",
     subcategorySlug: n.subcategorySlug || "uncategorized",
     categoryName: mapping?.displayName ?? n.category,
@@ -100,6 +99,9 @@ export function toCatalogueNominee(n: MasterNominee): EnrichedDatabaseNominee | 
     geographicCategory: geographicFor(geo.region, n.country),
     achievement: n.achievement || "",
     nrcVerified: n.workflowStatus === "nomination_cleared",
+    // Historical register import — not a consented 2026 nomination.
+    dataSource: "historical_register_unconfirmed",
+    consentConfirmed: false,
     acceptanceStatus: null,
     awardFamily: mapping ? mapping.tier : null,
     recognitionClass: geo.classification,

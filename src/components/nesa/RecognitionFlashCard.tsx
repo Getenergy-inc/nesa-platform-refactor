@@ -17,7 +17,6 @@ interface FlashNominee {
   logo_url: string | null;
   region: string | null;
   is_platinum: boolean;
-  public_votes: number;
 }
 
 interface RecognitionFlashCardProps {
@@ -91,11 +90,11 @@ export function RecognitionFlashCard({
         const { data: noms } = await supabase
           .from("nominees")
           .select(
-            "id, name, slug, title, organization, photo_url, logo_url, region, is_platinum, public_votes"
+            "id, name, slug, title, organization, photo_url, logo_url, region, is_platinum"
           )
           .in("subcategory_id", subIds)
           .in("status", ["approved", "platinum"])
-          .order("public_votes", { ascending: false })
+          .order("name", { ascending: true })
           .limit(8);
 
         if (!cancelled) {

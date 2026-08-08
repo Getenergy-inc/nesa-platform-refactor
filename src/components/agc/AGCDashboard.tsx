@@ -39,7 +39,6 @@ interface WalletData {
   accountId: string;
   balanceAgcc: number;
   balanceAgc: number;
-  votesUsed: number;
 }
 
 function useAGCWallet() {
@@ -65,17 +64,10 @@ function useAGCWallet() {
         .eq("account_id", account.id)
         .maybeSingle();
 
-      // Count votes used this season
-      const { count: votesUsed } = await supabase
-        .from("votes")
-        .select("*", { count: "exact", head: true })
-        .eq("voter_id", user.id);
-
       return {
         accountId: account.id,
         balanceAgcc: balance?.balance_agcc ?? 0,
         balanceAgc: Number(balance?.balance_agc ?? 0),
-        votesUsed: votesUsed ?? 0,
       };
     },
     enabled: !!user,
@@ -157,22 +149,8 @@ export function AGCDashboard() {
           </CardContent>
         </Card>
 
-        {/* Votes Used */}
-        <Card className="border-muted">
-          <CardContent className="p-4">
-            <div className="flex items-center justify-between mb-2">
-              <span className="text-xs text-muted-foreground uppercase tracking-wide">Votes Cast</span>
-              <TrendingUp className="h-4 w-4 text-muted-foreground" />
-            </div>
-            {isLoading ? (
-              <Skeleton className="h-8 w-16" />
-            ) : (
-              <p className="text-2xl font-display font-bold">
-                {wallet?.votesUsed ?? 0}
-              </p>
-            )}
-          </CardContent>
-        </Card>
+        {/* Public voting retired — tile removed */}
+
       </div>
 
       {/* Conversion Progress */}

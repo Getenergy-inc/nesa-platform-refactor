@@ -397,7 +397,6 @@ import {
   AdminNomineeImages,
   AdminNomineeMediaLibrary,
   AdminNomineeProfiles,
-  AdminVotingGovernance,
   AdminRebuild,
   AdminEDXAnalytics,
   AdminContributorPhotos,
@@ -2099,10 +2098,7 @@ const App = () => (
                     path="/admin/nominee-profiles"
                     element={<AdminNomineeProfiles />}
                   />
-                  <Route
-                    path="/admin/voting"
-                    element={<AdminVotingGovernance />}
-                  />
+                  <Route path="/admin/voting" element={<Navigate to="/admin" replace />} />
                   <Route path="/admin/rebuild" element={<AdminRebuild />} />
                   <Route path="/admin/edx" element={<AdminEDXAnalytics />} />
                   <Route path="/admin/contributor-photos" element={<AdminContributorPhotos />} />

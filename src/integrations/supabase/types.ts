@@ -1614,91 +1614,6 @@ export type Database = {
           },
         ]
       }
-      fraud_flags: {
-        Row: {
-          admin_notes: string | null
-          created_at: string | null
-          description: string | null
-          device_hash: string | null
-          evidence: Json | null
-          flag_status: string | null
-          flag_type: string
-          id: string
-          ip_hash: string | null
-          nominee_id: string | null
-          resolved_at: string | null
-          resolved_by: string | null
-          season_id: string
-          severity: string
-          time_window_seconds: number | null
-          updated_at: string | null
-          vote_count: number | null
-          voter_id: string | null
-        }
-        Insert: {
-          admin_notes?: string | null
-          created_at?: string | null
-          description?: string | null
-          device_hash?: string | null
-          evidence?: Json | null
-          flag_status?: string | null
-          flag_type: string
-          id?: string
-          ip_hash?: string | null
-          nominee_id?: string | null
-          resolved_at?: string | null
-          resolved_by?: string | null
-          season_id: string
-          severity?: string
-          time_window_seconds?: number | null
-          updated_at?: string | null
-          vote_count?: number | null
-          voter_id?: string | null
-        }
-        Update: {
-          admin_notes?: string | null
-          created_at?: string | null
-          description?: string | null
-          device_hash?: string | null
-          evidence?: Json | null
-          flag_status?: string | null
-          flag_type?: string
-          id?: string
-          ip_hash?: string | null
-          nominee_id?: string | null
-          resolved_at?: string | null
-          resolved_by?: string | null
-          season_id?: string
-          severity?: string
-          time_window_seconds?: number | null
-          updated_at?: string | null
-          vote_count?: number | null
-          voter_id?: string | null
-        }
-        Relationships: [
-          {
-            foreignKeyName: "fraud_flags_nominee_id_fkey"
-            columns: ["nominee_id"]
-            isOneToOne: false
-            referencedRelation: "nominees"
-            referencedColumns: ["id"]
-          },
-          {
-            foreignKeyName: "fraud_flags_nominee_id_fkey"
-            columns: ["nominee_id"]
-            isOneToOne: false
-            referencedRelation: "public_nominees"
-            referencedColumns: ["id"]
-          },
-          {
-            foreignKeyName: "fraud_flags_season_id_fkey"
-            columns: ["season_id"]
-            isOneToOne: false
-            referencedRelation: "seasons"
-            referencedColumns: ["id"]
-          },
-        ]
-      }
       fund_accounts: {
         Row: {
           created_at: string | null
@@ -5436,11 +5351,13 @@ export type Database = {
           award_family: string | null
           bio: string | null
           category_fit_summary: string | null
+          consent_confirmed: boolean
           country: string | null
           country_iso2: string | null
           country_of_impact: string | null
           country_of_residence_iso2: string | null
           created_at: string | null
+          data_source: string
           diaspora_continent: string | null
           diaspora_status: boolean
           edi_band: Database["public"]["Enums"]["nrc_edi_band"] | null
@@ -5480,7 +5397,6 @@ export type Database = {
             | Database["public"]["Enums"]["nrc_public_display_status"]
             | null
           public_documents: Json
-          public_votes: number | null
           publication_status: Database["public"]["Enums"]["nominee_publication_status"]
           published_at: string | null
           published_by: string | null
@@ -5521,11 +5437,13 @@ export type Database = {
           award_family?: string | null
           bio?: string | null
           category_fit_summary?: string | null
+          consent_confirmed?: boolean
           country?: string | null
           country_iso2?: string | null
           country_of_impact?: string | null
           country_of_residence_iso2?: string | null
           created_at?: string | null
+          data_source?: string
           diaspora_continent?: string | null
           diaspora_status?: boolean
           edi_band?: Database["public"]["Enums"]["nrc_edi_band"] | null
@@ -5565,7 +5483,6 @@ export type Database = {
             | Database["public"]["Enums"]["nrc_public_display_status"]
             | null
           public_documents?: Json
-          public_votes?: number | null
           publication_status?: Database["public"]["Enums"]["nominee_publication_status"]
           published_at?: string | null
           published_by?: string | null
@@ -5606,11 +5523,13 @@ export type Database = {
           award_family?: string | null
           bio?: string | null
           category_fit_summary?: string | null
+          consent_confirmed?: boolean
           country?: string | null
           country_iso2?: string | null
           country_of_impact?: string | null
           country_of_residence_iso2?: string | null
           created_at?: string | null
+          data_source?: string
           diaspora_continent?: string | null
           diaspora_status?: boolean
           edi_band?: Database["public"]["Enums"]["nrc_edi_band"] | null
@@ -5650,7 +5569,6 @@ export type Database = {
             | Database["public"]["Enums"]["nrc_public_display_status"]
             | null
           public_documents?: Json
-          public_votes?: number | null
           publication_status?: Database["public"]["Enums"]["nominee_publication_status"]
           published_at?: string | null
           published_by?: string | null
@@ -8809,7 +8727,6 @@ export type Database = {
           jury_score: number | null
           nominee_id: string
           public_score: number | null
-          public_votes: number | null
           published_at: string | null
           published_by: string | null
           rank: number | null
@@ -8835,7 +8752,6 @@ export type Database = {
           jury_score?: number | null
           nominee_id: string
           public_score?: number | null
-          public_votes?: number | null
           published_at?: string | null
           published_by?: string | null
           rank?: number | null
@@ -8861,7 +8777,6 @@ export type Database = {
           jury_score?: number | null
           nominee_id?: string
           public_score?: number | null
-          public_votes?: number | null
           published_at?: string | null
           published_by?: string | null
           rank?: number | null
@@ -10298,151 +10213,6 @@ export type Database = {
           },
         ]
       }
-      vote_rejections: {
-        Row: {
-          contest_id: string | null
-          created_at: string | null
-          device_hash: string | null
-          id: string
-          ip_hash: string | null
-          metadata: Json | null
-          nominee_id: string | null
-          rejection_reason: Database["public"]["Enums"]["vote_rejection_reason"]
-          season_id: string | null
-          voter_id: string | null
-        }
-        Insert: {
-          contest_id?: string | null
-          created_at?: string | null
-          device_hash?: string | null
-          id?: string
-          ip_hash?: string | null
-          metadata?: Json | null
-          nominee_id?: string | null
-          rejection_reason: Database["public"]["Enums"]["vote_rejection_reason"]
-          season_id?: string | null
-          voter_id?: string | null
-        }
-        Update: {
-          contest_id?: string | null
-          created_at?: string | null
-          device_hash?: string | null
-          id?: string
-          ip_hash?: string | null
-          metadata?: Json | null
-          nominee_id?: string | null
-          rejection_reason?: Database["public"]["Enums"]["vote_rejection_reason"]
-          season_id?: string | null
-          voter_id?: string | null
-        }
-        Relationships: [
-          {
-            foreignKeyName: "vote_rejections_contest_id_fkey"
-            columns: ["contest_id"]
-            isOneToOne: false
-            referencedRelation: "contests"
-            referencedColumns: ["id"]
-          },
-          {
-            foreignKeyName: "vote_rejections_season_id_fkey"
-            columns: ["season_id"]
-            isOneToOne: false
-            referencedRelation: "seasons"
-            referencedColumns: ["id"]
-          },
-        ]
-      }
-      votes: {
-        Row: {
-          category_id: string | null
-          comment: string | null
-          contest_id: string | null
-          created_at: string | null
-          device_hash: string | null
-          id: string
-          ip_hash: string | null
-          nominee_id: string
-          score: number | null
-          season_id: string
-          subcategory_id: string | null
-          vote_type: Database["public"]["Enums"]["vote_type"]
-          voter_id: string
-        }
-        Insert: {
-          category_id?: string | null
-          comment?: string | null
-          contest_id?: string | null
-          created_at?: string | null
-          device_hash?: string | null
-          id?: string
-          ip_hash?: string | null
-          nominee_id: string
-          score?: number | null
-          season_id: string
-          subcategory_id?: string | null
-          vote_type: Database["public"]["Enums"]["vote_type"]
-          voter_id: string
-        }
-        Update: {
-          category_id?: string | null
-          comment?: string | null
-          contest_id?: string | null
-          created_at?: string | null
-          device_hash?: string | null
-          id?: string
-          ip_hash?: string | null
-          nominee_id?: string
-          score?: number | null
-          season_id?: string
-          subcategory_id?: string | null
-          vote_type?: Database["public"]["Enums"]["vote_type"]
-          voter_id?: string
-        }
-        Relationships: [
-          {
-            foreignKeyName: "votes_category_id_fkey"
-            columns: ["category_id"]
-            isOneToOne: false
-            referencedRelation: "categories"
-            referencedColumns: ["id"]
-          },
-          {
-            foreignKeyName: "votes_contest_id_fkey"
-            columns: ["contest_id"]
-            isOneToOne: false
-            referencedRelation: "contests"
-            referencedColumns: ["id"]
-          },
-          {
-            foreignKeyName: "votes_nominee_id_fkey"
-            columns: ["nominee_id"]
-            isOneToOne: false
-            referencedRelation: "nominees"
-            referencedColumns: ["id"]
-          },
-          {
-            foreignKeyName: "votes_nominee_id_fkey"
-            columns: ["nominee_id"]
-            isOneToOne: false
-            referencedRelation: "public_nominees"
-            referencedColumns: ["id"]
-          },
-          {
-            foreignKeyName: "votes_season_id_fkey"
-            columns: ["season_id"]
-            isOneToOne: false
-            referencedRelation: "seasons"
-            referencedColumns: ["id"]
-          },
-          {
-            foreignKeyName: "votes_subcategory_id_fkey"
-            columns: ["subcategory_id"]
-            isOneToOne: false
-            referencedRelation: "subcategories"
-            referencedColumns: ["id"]
-          },
-        ]
-      }
       wallet_accounts: {
         Row: {
           created_at: string | null
@@ -10852,8 +10622,10 @@ export type Database = {
           award_family: string | null
           bio: string | null
           category_fit_summary: string | null
+          consent_confirmed: boolean | null
           country: string | null
           created_at: string | null
+          data_source: string | null
           final_score: number | null
           id: string | null
           impact_area: string | null
@@ -10870,7 +10642,6 @@ export type Database = {
             | Database["public"]["Enums"]["nominee_profile_status"]
             | null
           public_documents: Json | null
-          public_votes: number | null
           publication_status:
             | Database["public"]["Enums"]["nominee_publication_status"]
             | null
@@ -10896,8 +10667,10 @@ export type Database = {
           award_family?: string | null
           bio?: string | null
           category_fit_summary?: string | null
+          consent_confirmed?: boolean | null
           country?: string | null
           created_at?: string | null
+          data_source?: string | null
           final_score?: number | null
           id?: string | null
           impact_area?: string | null
@@ -10914,7 +10687,6 @@ export type Database = {
             | Database["public"]["Enums"]["nominee_profile_status"]
             | null
           public_documents?: Json | null
-          public_votes?: number | null
           publication_status?:
             | Database["public"]["Enums"]["nominee_publication_status"]
             | null
@@ -10940,8 +10712,10 @@ export type Database = {
           award_family?: string | null
           bio?: string | null
           category_fit_summary?: string | null
+          consent_confirmed?: boolean | null
           country?: string | null
           created_at?: string | null
+          data_source?: string | null
           final_score?: number | null
           id?: string | null
           impact_area?: string | null
@@ -10958,7 +10732,6 @@ export type Database = {
             | Database["public"]["Enums"]["nominee_profile_status"]
             | null
           public_documents?: Json | null
-          public_votes?: number | null
           publication_status?:
             | Database["public"]["Enums"]["nominee_publication_status"]
             | null
@@ -11348,11 +11121,6 @@ export type Database = {
       }
       check_email_exists: { Args: { p_email: string }; Returns: boolean }
       check_nrc_quorum: { Args: { p_nomination_id: string }; Returns: Json }
-      compute_blue_garnet_results: {
-        Args: { p_season_id: string }
-        Returns: Json
-      }
-      compute_gold_results: { Args: { p_season_id: string }; Returns: Json }
       compute_icon_grand_jury_results: {
         Args: { p_group_id: string }
         Returns: undefined
@@ -11397,7 +11165,6 @@ export type Database = {
         }
         Returns: string
       }
-      detect_vote_fraud: { Args: { p_season_id: string }; Returns: Json }
       ensure_user_wallet: { Args: { _user_id: string }; Returns: string }
       escalate_overdue_nrc_assignments: { Args: never; Returns: number }
       export_nomination_batch: {
@@ -11571,10 +11338,6 @@ export type Database = {
       icon_governance_decide: {
         Args: { p_decision: string; p_group_id: string; p_notes: string }
         Returns: string
-      }
-      increment_public_votes: {
-        Args: { nominee_id: string }
-        Returns: undefined
       }
       ingest_nomination_intake_batch: {
         Args: { p_actor_id?: string; p_batch_id?: string; p_rows: Json }

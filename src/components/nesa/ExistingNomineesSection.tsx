@@ -28,7 +28,6 @@ interface ExistingNominee {
   organization: string | null;
   photo_url: string | null;
   is_platinum: boolean;
-  public_votes: number;
   renomination_count: number;
 }
 
@@ -67,12 +66,11 @@ export function ExistingNomineesSection({
           organization,
           photo_url,
           is_platinum,
-          public_votes,
-          renomination_count
+                    renomination_count
         `)
         .eq("subcategory_id", subcategoryId)
         .in("status", ["approved", "platinum"])
-        .order("public_votes", { ascending: false })
+        .order("name", { ascending: true })
         .limit(20);
 
       if (!error && data) {
@@ -196,10 +194,6 @@ export function ExistingNomineesSection({
                     {nominee.title && !nominee.organization && (
                       <span className="truncate">{nominee.title}</span>
                     )}
-                    <span className="shrink-0 flex items-center gap-0.5">
-                      <ThumbsUp className="h-3 w-3" />
-                      {nominee.public_votes}
-                    </span>
                     {nominee.renomination_count > 0 && (
                       <span className="shrink-0 flex items-center gap-0.5">
                         <UserPlus className="h-3 w-3" />

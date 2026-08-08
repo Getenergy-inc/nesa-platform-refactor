@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Award, Building2, MapPin, RotateCcw, ThumbsUp, Loader2, Globe2, Plane, Heart } from "lucide-react";
+import { Award, Building2, MapPin, RotateCcw, Globe2, Plane, Heart } from "lucide-react";
 import { NESAStamp } from "@/components/nesa/NESALogo";
 import { type NomineeImageType, isOrganization, normalizeYearReferences } from "@/lib/nesaData";
 import { NomineeActions, type NomineeActionsData } from "@/components/nominees";
@@ -17,7 +17,6 @@ export interface NomineeCardData {
   organization?: string | null;
   photoUrl?: string | null;
   isPlatinum?: boolean;
-  publicVotes?: number;
   categoryName?: string;
   subcategoryName?: string;
   region?: string;
@@ -27,6 +26,8 @@ export interface NomineeCardData {
   imageType?: NomineeImageType;
   /** Geographic category for display context */
   geographicCategory?: string;
+  /** Provenance of the record: live_verified vs historical/seed register. */
+  dataSource?: string;
   /** Award tier — Icon-tier nominees are judged, once-in-a-lifetime: no endorse/re-nominate. */
   tier?: string | null;
 }
@@ -40,18 +41,11 @@ export function isIconTierNominee(nominee: Pick<NomineeCardData, "tier" | "categ
 
 interface NomineeCardProps {
   nominee: NomineeCardData;
-  showVotes?: boolean;
   showRenominationCount?: boolean;
-  variant?: "default" | "compact" | "voting";
+  variant?: "default" | "compact";
   className?: string;
-  // Voting-specific props
-  hasVoted?: boolean;
-  isVoting?: boolean;
-  onVote?: () => void;
-  showLoginToVote?: boolean;
   // Action buttons
   showActions?: boolean;
-  onVoteSuccess?: () => void;
   onRenominateSuccess?: () => void;
 }
 
@@ -78,20 +72,13 @@ function getEffectiveImageType(nominee: NomineeCardData): NomineeImageType {
 
 export const NomineeCard = forwardRef<HTMLDivElement, NomineeCardProps>(function NomineeCard({
   nominee,
-  showVotes = true,
   showRenominationCount = false,
   variant = "default",
   className = "",
-  hasVoted = false,
-  isVoting = false,
-  onVote,
-  showLoginToVote = false,
   showActions = false,
-  onVoteSuccess,
   onRenominateSuccess,
 }, ref) {
   const isCompact = variant === "compact";
-  const isVotingVariant = variant === "voting";
   const imageType = getEffectiveImageType(nominee);
   const isLogo = imageType === "logo";
   
@@ -225,53 +212,12 @@ export const NomineeCard = forwardRef<HTMLDivElement, NomineeCardProps>(function
             </div>
           )}
 
-          {/* Votes section - for default and voting variants */}
-          {showVotes && !isCompact && (
-            <div className="mt-4 pt-4 border-t border-gold/10 w-full">
-              {isVotingVariant ? (
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-1.5 text-sm">
-                    <ThumbsUp className="h-4 w-4 text-gold" />
-                    <span className="font-semibold text-ivory">{nominee.publicVotes ?? 0}</span>
-                    <span className="text-ivory/50">votes</span>
-                  </div>
-                  
-                  {showLoginToVote ? (
-                    <Link to="/login">
-                      <Button size="sm" variant="outline" className="border-gold/30 text-gold hover:bg-gold/10">
-                        Login to Vote
-                      </Button>
-                    </Link>
-                  ) : onVote ? (
-                    <Button
-                      size="sm"
-                      onClick={(e) => {
-                        e.preventDefault();
-                        e.stopPropagation();
-                        onVote();
-                      }}
-                      disabled={hasVoted || isVoting}
-                      className={hasVoted 
-                        ? "bg-emerald-600 hover:bg-emerald-600 text-white cursor-default" 
-                        : "bg-gold hover:bg-gold-dark text-charcoal"
-                      }
-                    >
-                      {isVoting ? (
-                        <Loader2 className="h-4 w-4 animate-spin" />
-                      ) : hasVoted ? (
-                        <>✓ Voted</>
-                      ) : (
-                        <>Vote</>
-                      )}
-                    </Button>
-                  ) : null}
-                </div>
-              ) : (
-                <div className="flex items-center justify-center gap-2 text-sm">
-                  <span className="text-gold font-semibold">{nominee.publicVotes ?? 0}</span>
-                  <span className="text-ivory/50">votes</span>
-                </div>
-              )}
+          {/* Provenance notice — historical register records are not consented 2026 nominations */}
+          {nominee.dataSource && nominee.dataSource !== "live_verified" && !isCompact && (
+            <div className="mt-4 pt-3 border-t border-gold/10 w-full">
+              <Badge variant="outline" className="border-amber-500/40 text-amber-400 text-[10px] font-normal">
+                Historical register · unconfirmed
+              </Badge>
             </div>
           )}
 
@@ -291,7 +237,6 @@ export const NomineeCard = forwardRef<HTMLDivElement, NomineeCardProps>(function
                 }}
                 variant="compact"
                 showRenominate={!isIconTierNominee(nominee)}
-                onVoteSuccess={onVoteSuccess}
                 onRenominateSuccess={onRenominateSuccess}
               />
               {isIconTierNominee(nominee) ? (
@@ -306,11 +251,6 @@ export const NomineeCard = forwardRef<HTMLDivElement, NomineeCardProps>(function
       </CardContent>
     </Card>
   );
-
-  // For voting variant, don't wrap in Link (vote button handles interaction)
-  if (isVotingVariant) {
-    return <div ref={ref} className={className}>{cardContent}</div>;
-  }
 
   return (
     <Link to={`/nominees/${encodeURIComponent(nominee.slug)}`} className={className} ref={ref as any}>

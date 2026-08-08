@@ -87,10 +87,11 @@ export interface DatabaseNominee {
   logo_url: string | null;
   status: string | null;
   is_platinum: boolean | null;
-  public_votes: number | null;
   subcategory_id: string;
   season_id: string;
   nrc_verified?: boolean | null;
+  data_source?: string | null;
+  consent_confirmed?: boolean | null;
   acceptance_status?: string | null;
   award_family?: string | null;
   recognition_class?: string | null;
@@ -115,7 +116,6 @@ export interface EnrichedDatabaseNominee {
   imageType: NomineeImageType;
   status: string;
   isPlatinum: boolean;
-  publicVotes: number;
   subcategoryName: string;
   subcategorySlug: string;
   categoryName: string;
@@ -124,6 +124,10 @@ export interface EnrichedDatabaseNominee {
   achievement: string;
   /** NRC verification flag (governance badge). */
   nrcVerified: boolean;
+  /** 'live_verified' | 'historical_register_unconfirmed' | 'seed_unconfirmed'. */
+  dataSource: string;
+  /** True when the nominee has confirmed their nomination. */
+  consentConfirmed: boolean;
   /** Nominee acceptance state (accepted / pending / declined). */
   acceptanceStatus: string | null;
   awardFamily: string | null;
@@ -155,7 +159,6 @@ function enrichNominee(nominee: DatabaseNominee): EnrichedDatabaseNominee {
     imageType,
     status: nominee.status || "pending",
     isPlatinum: nominee.is_platinum || false,
-    publicVotes: nominee.public_votes || 0,
     subcategoryName: nominee.subcategory_name || "Uncategorized",
     subcategorySlug: nominee.subcategory_slug || "uncategorized",
     categoryName: nominee.category_name || "General",
@@ -163,6 +166,8 @@ function enrichNominee(nominee: DatabaseNominee): EnrichedDatabaseNominee {
     geographicCategory: getGeographicCategory(nominee.region, nominee.category_name || null),
     achievement: nominee.bio || nominee.title || "",
     nrcVerified: nominee.nrc_verified ?? false,
+    dataSource: nominee.data_source ?? "live_verified",
+    consentConfirmed: nominee.consent_confirmed ?? false,
     acceptanceStatus: nominee.acceptance_status ?? null,
     awardFamily: nominee.award_family ?? null,
     recognitionClass: nominee.recognition_class ?? null,
@@ -245,10 +250,11 @@ async function fetchNominees(): Promise<EnrichedDatabaseNominee[]> {
       logo_url: row.logo_url,
       status: row.status,
       is_platinum: row.is_platinum,
-      public_votes: row.public_votes,
       subcategory_id: row.subcategory_id,
       season_id: row.season_id,
       nrc_verified: row.nrc_verified,
+      data_source: row.data_source,
+      consent_confirmed: row.consent_confirmed,
       acceptance_status: row.acceptance_status,
       award_family: row.award_family,
       recognition_class: row.recognition_class,

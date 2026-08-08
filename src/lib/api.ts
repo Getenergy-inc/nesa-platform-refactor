@@ -152,7 +152,6 @@ export interface Nominee {
   photoUrl: string | null;
   status: string;
   isPlatinum: boolean;
-  publicVotes: number;
   juryScore: number;
   finalScore: number;
 }
@@ -201,7 +200,6 @@ export async function fetchNominees(filters?: {
     photoUrl: nom.photo_url,
     status: nom.status,
     isPlatinum: nom.is_platinum,
-    publicVotes: nom.public_votes,
     juryScore: Number(nom.jury_score),
     finalScore: Number(nom.final_score),
   }));
@@ -230,7 +228,6 @@ export async function fetchNomineeBySlug(slug: string): Promise<Nominee | null> 
     photoUrl: data.photo_url,
     status: data.status,
     isPlatinum: data.is_platinum,
-    publicVotes: data.public_votes,
     juryScore: Number(data.jury_score),
     finalScore: Number(data.final_score),
   };
@@ -475,7 +472,6 @@ export async function searchExistingNominees(query: string, subcategoryId?: stri
       photo_url,
       status,
       is_platinum,
-      public_votes,
       jury_score,
       final_score,
       renomination_count,
@@ -504,72 +500,11 @@ export async function searchExistingNominees(query: string, subcategoryId?: stri
     photoUrl: nom.photo_url,
     status: nom.status,
     isPlatinum: nom.is_platinum,
-    publicVotes: nom.public_votes,
     juryScore: Number(nom.jury_score),
     finalScore: Number(nom.final_score),
   }));
 }
 
-// ==========================================
-// VOTING API
-// ==========================================
-export async function submitPublicVote(nomineeId: string): Promise<void> {
-  const { data: user } = await supabase.auth.getUser();
-  if (!user.user) throw new Error("Must be logged in to vote");
-
-  const { data: season } = await supabase
-    .from("seasons")
-    .select("id")
-    .eq("is_active", true)
-    .single();
-
-  if (!season) throw new Error("No active season");
-
-  const { error } = await supabase.from("votes").insert({
-    nominee_id: nomineeId,
-    season_id: season.id,
-    voter_id: user.user.id,
-    vote_type: "public",
-    score: 1,
-  });
-
-  if (error) {
-    if (error.code === "23505") {
-      throw new Error("You have already voted for this nominee");
-    }
-    throw error;
-  }
-
-  // Increment nominee vote count via direct update
-  await supabase
-    .from("nominees")
-    .update({ public_votes: supabase.rpc as unknown as number }) // Will be handled by trigger
-    .eq("id", nomineeId);
-}
-
-export async function submitJuryScore(nomineeId: string, score: number, comment?: string): Promise<void> {
-  const { data: user } = await supabase.auth.getUser();
-  if (!user.user) throw new Error("Must be logged in");
-
-  const { data: season } = await supabase
-    .from("seasons")
-    .select("id")
-    .eq("is_active", true)
-    .single();
-
-  if (!season) throw new Error("No active season");
-
-  const { error } = await supabase.from("votes").insert({
-    nominee_id: nomineeId,
-    season_id: season.id,
-    voter_id: user.user.id,
-    vote_type: "jury",
-    score,
-    comment,
-  });
-
-  if (error) throw error;
-}
 
 // ==========================================
 // CERTIFICATES API

@@ -48,7 +48,7 @@ import {
   type DonationFrequencyType,
   type DonationCauseType,
 } from "@/config/galaConfig";
-import { AGC_BONUS_RATES, VOTING_SERVICES, REFERRAL_EARN_COPY } from "@/constants/agc";
+import { AGC_BONUS_RATES, PARTICIPATION_SERVICES, REFERRAL_EARN_COPY } from "@/constants/agc";
 import { TicketTierCards, ReferralLinkCard, AgcDisclosure } from "@/components/tickets";
 import { useReferralCode } from "@/hooks/useReferralCode";
 
@@ -261,7 +261,7 @@ export default function BuyYourTicket() {
                   </CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-3">
-                  {VOTING_SERVICES.map((service, i) => (
+                  {PARTICIPATION_SERVICES.map((service, i) => (
                     <div key={i} className="flex items-start gap-3 p-3 rounded-lg bg-muted/30">
                       <Check className="h-5 w-5 text-success shrink-0 mt-0.5" />
                       <div>

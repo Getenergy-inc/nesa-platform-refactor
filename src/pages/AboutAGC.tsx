@@ -8,7 +8,7 @@ import {
   UserPlus, 
   Trophy,
   ArrowRight,
-  Vote as VoteIcon,
+  Sparkles,
   Info,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -16,7 +16,6 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { useSeason } from "@/contexts/SeasonContext";
 import {
-  VotingCalendarCard,
   EarningMethodsGrid,
   AGCRulesCard,
   AGCConversionCard,
@@ -50,7 +49,7 @@ export default function AboutAGC() {
         <title>{`About Afri Gold Coin (AGC) | ${currentEdition?.name || 'NESA-Africa 2026'}`}</title>
         <meta 
           name="description" 
-          content="Learn about Afri Gold Coin (AGC), NESA-Africa's non-cash voting credit system. Earn AGCc, convert to AGC, and vote for Africa's education champions."
+          content="Learn about Afri Gold Coin (AGC), NESA-Africa's non-cash participation credit. Earn AGCc, convert to AGC, and support Africa's education enablers."
         />
       </Helmet>
 
@@ -109,11 +108,11 @@ export default function AboutAGC() {
               </CardHeader>
               <CardContent className="space-y-4">
                 <p className="text-muted-foreground">
-                  Afri Gold Coin (AGC) is a digital voting credit used exclusively on the NESA-Africa platform to:
+                  Afri Gold Coin (AGC) is a non-tradeable participation credit used exclusively on the NESA-Africa platform to:
                 </p>
                 <ul className="grid gap-3 sm:grid-cols-2">
                   {[
-                    "Vote for nominees in public voting phases",
+                    "Recognise and endorse verified education enablers",
                     "Participate in NESA Africa TV campaigns",
                     "Engage with award shows and events",
                     "Support education impact initiatives",
@@ -139,17 +138,17 @@ export default function AboutAGC() {
               </CardHeader>
               <CardContent className="space-y-4">
                 <p className="text-muted-foreground">
-                  AGC exists to support fair, verified, and transparent voting:
+                  AGC exists to support fair, verified, and transparent participation:
                 </p>
                 <div className="grid gap-4 sm:grid-cols-3">
                   {[
                     {
-                      title: "Transparent Voting",
-                      description: "Every vote is trackable and auditable",
+                      title: "Transparent Participation",
+                      description: "Every credit movement is trackable and auditable",
                     },
                     {
                       title: "Prevents Manipulation",
-                      description: "Verified credits prevent vote buying",
+                      description: "Verified credits prevent gaming and inflation of engagement",
                     },
                     {
                       title: "Encourages Participation",
@@ -173,7 +172,6 @@ export default function AboutAGC() {
           <AGCConversionCard className="mb-12" />
 
           {/* Voting Calendar */}
-          <VotingCalendarCard className="mb-12" />
 
           {/* Earning Methods */}
           <EarningMethodsGrid className="mb-12" />
@@ -183,7 +181,7 @@ export default function AboutAGC() {
             <Card>
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
-                  <VoteIcon className="h-5 w-5 text-primary" />
+                  <Sparkles className="h-5 w-5 text-primary" />
                   Where You Can Use AGC
                 </CardTitle>
               </CardHeader>
@@ -191,18 +189,18 @@ export default function AboutAGC() {
                 <div className="grid gap-4 sm:grid-cols-3">
                   {[
                     {
-                      title: "Gold Certificate Phase",
-                      description: "100% Public Voting with AGC",
-                      date: "April 10 – May 16, 2026",
+                      title: "Nomination Season",
+                      description: "Support and amplify verified nominations",
+                      date: "30 Aug – 14 Nov 2026",
                     },
                     {
-                      title: "Blue Garnet Award Phase",
-                      description: "40% Public Voting with AGC",
-                      date: "May 18 – June 17, 2026",
+                      title: "Recognition Gala",
+                      description: "Gala participation, merchandise and event credits",
+                      date: "13 December 2026",
                     },
                     {
                       title: "SCEF Services",
-                      description: "Voting credits for SCEF campaigns",
+                      description: "Participation credits for SCEF campaigns and donations",
                       date: "Ongoing",
                     },
                   ].map(({ title, description, date }) => (
@@ -234,7 +232,7 @@ export default function AboutAGC() {
                     {[
                       "Encourage genuine engagement",
                       "Reward advocacy for education",
-                      "Protect voting integrity",
+                      "Protect recognition integrity",
                     ].map((item) => (
                       <li key={item} className="flex items-center gap-2">
                         <div className="h-2 w-2 rounded-full bg-gold" />
@@ -282,7 +280,7 @@ export default function AboutAGC() {
               Ready to Get Started?
             </h2>
             <p className="text-white/70 mb-8 max-w-lg mx-auto">
-              Create an account, earn AGC, and start voting for Africa's education champions.
+              Create an account, earn AGC, and start supporting Africa's education enablers.
             </p>
             <div className="flex flex-wrap justify-center gap-3">
               <Link to="/register">

@@ -92,7 +92,7 @@ export default function NomineesHubPage() {
   const featured = useMemo(() => {
     const list = (nominees ?? []).slice();
     return list
-      .sort((a, b) => Number(b.nrcVerified) - Number(a.nrcVerified) || b.publicVotes - a.publicVotes)
+      .sort((a, b) => Number(b.nrcVerified) - Number(a.nrcVerified) || a.name.localeCompare(b.name))
       .slice(0, 8);
   }, [nominees]);
 

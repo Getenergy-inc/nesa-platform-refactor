@@ -93,10 +93,9 @@ export async function fetchFeaturedNominees(limit = 8): Promise<NomineeSummary[]
   const { data, error } = await supabase
     .from("nominees")
     .select(
-      "id, slug, name, title, organization, country, region, photo_url, logo_url, is_platinum, public_votes",
+      "id, slug, name, title, organization, country, region, photo_url, logo_url, is_platinum",
     )
     .in("status", ["approved", "platinum"])
-    .order("public_votes", { ascending: false })
     .limit(limit);
 
   if (error) throw error;
@@ -112,6 +111,5 @@ export async function fetchFeaturedNominees(limit = 8): Promise<NomineeSummary[]
     photoUrl: row.photo_url,
     logoUrl: row.logo_url,
     isPlatinum: Boolean(row.is_platinum),
-    publicVotes: row.public_votes ?? 0,
   }));
 }

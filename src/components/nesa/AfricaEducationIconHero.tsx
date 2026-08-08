@@ -18,7 +18,6 @@ interface IconNominee {
   region: string | null;
   country: string | null;
   is_platinum: boolean;
-  public_votes: number;
   subcategory_id: string | null;
 }
 
@@ -42,7 +41,6 @@ const fallbackNominees: SlideNominee[] = [
     region: "Global Partner",
     country: "Qatar",
     is_platinum: true,
-    public_votes: 0,
     subcategory_id: null,
     layer: "Friends of Africa",
   },
@@ -58,7 +56,6 @@ const fallbackNominees: SlideNominee[] = [
     region: "West Africa",
     country: "Nigeria",
     is_platinum: false,
-    public_votes: 0,
     subcategory_id: null,
     layer: "Africa-Based",
   },
@@ -74,7 +71,6 @@ const fallbackNominees: SlideNominee[] = [
     region: "African Diaspora",
     country: "United Kingdom",
     is_platinum: false,
-    public_votes: 0,
     subcategory_id: null,
     layer: "Diaspora",
   },
@@ -127,12 +123,12 @@ export function AfricaEducationIconHero() {
             const { data: noms } = await supabase
               .from("nominees")
               .select(
-                "id, name, slug, title, organization, photo_url, logo_url, region, country, is_platinum, public_votes, subcategory_id"
+                "id, name, slug, title, organization, photo_url, logo_url, region, country, is_platinum, subcategory_id"
               )
               .in("subcategory_id", subIds)
               .in("status", ["approved", "platinum"])
               .order("is_platinum", { ascending: false })
-              .order("public_votes", { ascending: false })
+              .order("name", { ascending: true })
               .limit(12);
             nomData = (noms ?? []) as IconNominee[];
           }

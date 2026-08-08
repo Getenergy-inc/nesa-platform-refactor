@@ -68,7 +68,7 @@ export function FeaturedNomineesBlock({
         }
         return true;
       })
-      .sort((a, b) => b.publicVotes - a.publicVotes)
+      .sort((a, b) => Number(b.nrcVerified ?? false) - Number(a.nrcVerified ?? false) || a.name.localeCompare(b.name))
       .slice(0, limit);
   }, [nominees, categorySlug, subcategorySlug, region, country, awardFamily, limit]);
 

@@ -15,7 +15,6 @@ export { categoriesApi } from "./categories.api";
 export { nominationsApi } from "./nominations.api";
 export { nomineesApi } from "./nominees.api";
 export { judgingApi } from "./judging.api";
-export { votingApi } from "./voting.api";
 export { paymentsApi } from "./payments.api";
 
 // Stubbed / not yet wired modules

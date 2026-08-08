@@ -1,32 +1,36 @@
 /**
  * AGC (Afri Gold Coins) Constants
- * Unified copy and rules for voting credits across the platform
+ * Unified copy and rules for participation credits across the platform
  */
 
 // ============== DISCLAIMERS ==============
 
 export const AGC_NON_TRADEABLE_DISCLAIMER = 
-  "AGC is non-tradeable voting credit — no withdrawals, no cash-out, no payouts.";
+  "AGC is non-tradeable participation credit — no withdrawals, no cash-out, no payouts.";
 
 export const AGC_DISCLAIMER_SHORT = 
   "AGC is NOT tradeable. No withdrawals/payouts/cash-out.";
 
 export const AGC_DISCLAIMER_FULL = [
-  "AGC (Afri Gold Coin) is a non-tradeable internal voting credit.",
-  "Used only within the NESA-Africa/SCEF ecosystem for voting and participation.",
+  "AGC (Afri Gold Coin) is a non-tradeable internal participation credit.",
+  "Used only within the NESA-Africa/SCEF ecosystem for recognition support and participation.",
   "No cash-out. No withdrawals. No payouts. Not a cryptocurrency.",
 ];
 
-// ============== VOTING COPY ==============
+// ============== PARTICIPATION COPY ==============
 
-export const VOTING_IS_AGC_ONLY = "Voting uses AGC voting credits. 1 vote = 1 AGC.";
+export const PARTICIPATION_IS_AGC_ONLY =
+  "Participation credits are AGC only. AGC never influences judging outcomes.";
 
-export const VOTING_SERVICES = [
-  { name: "NESA-Africa", description: "Awards and platform voting" },
-  { name: "Rebuild My School Africa", description: "Vote for priority schools for intervention" },
-  { name: "EduAid-Africa", description: "Vote for grant seekers and beneficiaries" },
-  { name: "eLibrary Nigeria", description: "Vote/rate books and reviews" },
+export const PARTICIPATION_SERVICES = [
+  { name: "NESA-Africa", description: "Awards participation and platform engagement" },
+  { name: "Rebuild My School Africa", description: "Support priority schools for intervention" },
+  { name: "EduAid-Africa", description: "Support grant seekers and beneficiaries" },
+  { name: "eLibrary Nigeria", description: "Access and review books in the eLibrary" },
 ];
+
+/** @deprecated Use PARTICIPATION_SERVICES. */
+export const VOTING_SERVICES = PARTICIPATION_SERVICES;
 
 // ============== EARNING METHODS ==============
 
@@ -132,7 +136,7 @@ export const CLAIM_SOURCES = {
     description: "Scan a sponsor QR code to claim AGC at events.",
   },
   publicPool: {
-    title: "Public Voting Pools",
-    description: "Check available sponsor-funded voting credits.",
+    title: "Public Sponsor Pools",
+    description: "Check available sponsor-funded participation credits.",
   },
 };

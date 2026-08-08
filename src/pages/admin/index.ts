@@ -4,7 +4,6 @@ export { default as AdminImpact } from "./AdminImpact";
 export { default as AdminNomineeImages } from "./NomineeImages";
 export { default as AdminNomineeMediaLibrary } from "./NomineeMediaLibrary";
 export { default as AdminNomineeProfiles } from "./NomineeProfiles";
-export { default as AdminVotingGovernance } from "./AdminVotingGovernance";
 export { default as AdminRebuild } from "./AdminRebuild";
 export { default as AdminEDXAnalytics } from "./AdminEDXAnalytics";
 export { default as AdminContributorPhotos } from "./AdminContributorPhotos";
