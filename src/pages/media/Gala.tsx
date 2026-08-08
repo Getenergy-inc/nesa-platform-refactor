@@ -1,4 +1,4 @@
-import { PROGRAMME_END, PROGRAMME_END_DATETIME, PROGRAMME_END_LABEL } from "@/config/programme";
+import { GALA_COUNTDOWN_TARGET, PROGRAMME_END_DATETIME, PROGRAMME_END_LABEL } from "@/config/programme";
 
 import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";

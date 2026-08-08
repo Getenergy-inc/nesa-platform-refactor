@@ -13,7 +13,7 @@ import type {
   SubpageTimelineEntry,
 } from "@/components/awards/subpage/AwardSubpageTemplate";
 import type { TierSlug } from "@/config/recognition2026/tiers";
-import { PROGRAMME_END_DATETIME, PROGRAMME_END_LABEL } from "@/config/programme";
+import { GALA_COUNTDOWN_DATETIME, PROGRAMME_END_LABEL } from "@/config/programme";
 
 export interface SubpageModules {
   benefits: { heading?: string; items: SubpageBenefit[] };
