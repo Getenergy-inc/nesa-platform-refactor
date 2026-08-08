@@ -27,6 +27,8 @@ export interface NavSection {
 
 export interface NavItem {
   label: string;
+  /** Compact label used by the desktop nav bar to prevent overlap. */
+  shortLabel?: string;
   href: string;
   children?: NavChild[];
   sections?: NavSection[];
@@ -73,12 +75,14 @@ export const SITE_NAV: NavItem[] = [
   },
   {
     label: "Recognition Hub 2026",
+    shortLabel: "Recognition",
     href: "/recognition",
     analyticsId: "nav_recognition",
     sections: RECOGNITION_SECTIONS,
   },
   {
     label: "Explore Enablers",
+    shortLabel: "Enablers",
     href: "/nominees",
     analyticsId: "nav_explore_enablers",
     children: [
@@ -92,6 +96,7 @@ export const SITE_NAV: NavItem[] = [
   },
   {
     label: "EduAid-Africa Impact",
+    shortLabel: "EduAid-Africa",
     href: "/eduaid-africa",
     analyticsId: "nav_eduaid",
     children: [
@@ -105,6 +110,7 @@ export const SITE_NAV: NavItem[] = [
   },
   {
     label: "Media & Events",
+    shortLabel: "Media",
     href: "/media",
     analyticsId: "nav_media",
     children: [
@@ -119,6 +125,7 @@ export const SITE_NAV: NavItem[] = [
   },
   {
     label: "Gala & Tickets",
+    shortLabel: "Gala",
     href: "/gala",
     analyticsId: "nav_gala",
     children: [
@@ -131,10 +138,12 @@ export const SITE_NAV: NavItem[] = [
   },
   {
     label: "Support & Get Involved",
+    shortLabel: "Support",
     href: "/support",
     analyticsId: "nav_support",
     children: [
       { label: "Support Centre", href: "/support" },
+      { label: "Meet Our Global Team", href: "/about/team" },
       { label: "Donate", href: "/donate" },
       { label: "Sponsors & Partners", href: "/partners-sponsors" },
       { label: "Merchandise", href: "/merch" },

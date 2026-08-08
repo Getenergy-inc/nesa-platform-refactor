@@ -185,13 +185,13 @@ function DropdownSectioned({ item }: { item: NavItem }) {
 function DesktopNav() {
   const location = useLocation();
   return (
-    <NavigationMenu className="hidden lg:flex mx-auto" aria-label="Primary">
-      <NavigationMenuList className="gap-0.5 flex-nowrap">
+    <NavigationMenu className="hidden xl:flex flex-1 min-w-0 justify-center" aria-label="Primary">
+      <NavigationMenuList className="gap-0 flex-nowrap">
 
         {SITE_NAV.map((item) => {
           const active = isActive(location.pathname, item.href);
           const triggerCls = cn(
-            "px-2.5 py-2 text-sm font-medium rounded-md transition-colors whitespace-nowrap",
+            "px-2 2xl:px-2.5 py-2 text-[13px] 2xl:text-sm font-medium rounded-md transition-colors whitespace-nowrap",
             FOCUS_RING,
             active ? "text-gold bg-gold/10" : "text-white/85 hover:text-gold hover:bg-gold/5",
           );
@@ -235,7 +235,7 @@ function DesktopNav() {
                   })
                 }
               >
-                {item.label}
+                {item.shortLabel ?? item.label}
               </NavigationMenuTrigger>
               <NavigationMenuContent>
                 {item.megaMenu === "education-enablers" ? (
@@ -314,7 +314,7 @@ function SecondaryPhaseCTA({ className }: { className?: string }) {
 
 function AccountActions() {
   return (
-    <div className="hidden lg:flex items-center gap-1">
+    <div className="hidden xl:flex items-center gap-1">
       <WorkspaceSwitcher />
       <LanguageSwitcher className="text-sm" />
       <AccountMenu />
@@ -438,7 +438,7 @@ function MobileMenu() {
           size="icon"
           aria-label={open ? "Close navigation" : "Open navigation"}
           aria-expanded={open}
-          className="lg:hidden text-white hover:text-gold hover:bg-gold/10 min-h-11 min-w-11"
+          className="xl:hidden text-white hover:text-gold hover:bg-gold/10 min-h-11 min-w-11"
         >
           <Menu className="h-6 w-6" aria-hidden />
         </Button>
@@ -569,7 +569,7 @@ function MobileMenu() {
 function UtilityNavBar() {
   const location = useLocation();
   return (
-    <div className="hidden lg:block border-b border-gold/15 bg-black/40">
+    <div className="hidden xl:block border-b border-gold/15 bg-black/40">
       <nav
         aria-label="Utility"
         className="container mx-auto px-4 h-8 flex items-center gap-6 overflow-x-auto"
@@ -620,11 +620,11 @@ export function SiteHeader() {
       >
         <AnnouncementBar />
         <UtilityNavBar />
-        <div className="container mx-auto px-4 flex items-center justify-between gap-3 h-14 lg:h-16">
+        <div className="container mx-auto px-4 flex items-center justify-between gap-2 h-14 xl:h-16">
           <BrandBlock />
           <DesktopNav />
-          <div className="flex items-center gap-2 shrink-0">
-            <NavSearch className="hidden sm:inline-flex" />
+          <div className="flex items-center gap-1.5 shrink-0">
+            <NavSearch className="hidden 2xl:inline-flex" />
             <NominateButton className="text-xs sm:text-sm px-3 sm:px-4 py-1.5 sm:py-2 h-9 sm:h-10 whitespace-nowrap" />
             <SecondaryPhaseCTA />
             <AccountActions />
