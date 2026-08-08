@@ -290,7 +290,7 @@ function SecondaryPhaseCTA({ className }: { className?: string }) {
       asChild
       variant="outline"
       className={cn(
-        "hidden min-[1700px]:inline-flex border-gold/60 text-gold hover:bg-gold/10 hover:text-gold whitespace-nowrap",
+        "hidden min-[1800px]:inline-flex border-gold/60 text-gold hover:bg-gold/10 hover:text-gold whitespace-nowrap",
         className,
       )}
 
