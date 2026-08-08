@@ -15,7 +15,7 @@ import {
   ArrowRight,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { SITE_STATS } from "@/config/siteStats";
+import { useSiteStats } from "@/config/siteStats";
 
 interface TeamGroup {
   icon: typeof Users;
@@ -122,7 +122,8 @@ function GroupCard({ group }: { group: TeamGroup }) {
 }
 
 export default function GlobalTeam() {
-  const regions = SITE_STATS?.regionsTotal ?? 15;
+  const stats = useSiteStats();
+  const regions = stats.africanRegions + stats.globalCommunities;
 
   return (
     <>
@@ -151,7 +152,7 @@ export default function GlobalTeam() {
               earned, evidenced and defensible.
             </p>
             <p className="mt-3 max-w-2xl text-sm text-white/55">
-              Recognising the Enablers of Education for All Across Africa — across {regions} regions.
+              Recognising the Enablers of Education for All Across Africa — across {regions} regions ({stats.africanRegions} African + {stats.globalCommunities} global).
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
               <Button asChild className="bg-gold text-charcoal hover:bg-gold/90 font-semibold">
