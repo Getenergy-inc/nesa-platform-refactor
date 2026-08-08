@@ -1,23 +1,23 @@
-// AwardLandingPagesIndex — visual index of the 22 standalone award landing
-// pages (Icon 3 · Influencer 3 · Platinum 7 · Gold-Blue Garnet 9).
+// AwardLandingPagesIndex — visual index of the 18 award category
+// pages (Icon 1 · Influencer 1 · Platinum 7 · Gold-Blue Garnet 9).
 // URL: /recognition/pages
 
 import { useMemo, useState } from "react";
 import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
 import { ArrowRight, Sparkles } from "lucide-react";
-import { SUBPAGES_2026 } from "@/config/awards/subpages2026";
+import { AWARD_CATEGORY_PAGES_2026 } from "@/config/awards/subpages2026";
 
 const TIERS: { slug: string; label: string; blurb: string }[] = [
   {
     slug: "africa-education-icon",
     label: "Africa Education Icon",
-    blurb: "Lifetime recognition across three pathways.",
+    blurb: "Lifetime recognition — one page, three jury pathways.",
   },
   {
     slug: "influencer-education-impact",
     label: "Influencer Education Impact",
-    blurb: "Platforms turned into measurable education impact.",
+    blurb: "One page, three influencer pathways.",
   },
   {
     slug: "platinum",
@@ -35,17 +35,17 @@ export default function AwardLandingPagesIndex() {
   const [active, setActive] = useState<string>("all");
 
   const visible = useMemo(
-    () => (active === "all" ? SUBPAGES_2026 : SUBPAGES_2026.filter((s) => s.tier === active)),
+    () => (active === "all" ? AWARD_CATEGORY_PAGES_2026 : AWARD_CATEGORY_PAGES_2026.filter((s) => s.tier === active)),
     [active],
   );
 
   return (
     <>
       <Helmet>
-        <title>All 22 Award Landing Pages · NESA-Africa 2026</title>
+        <title>All 18 Award Category Pages · NESA-Africa 2026</title>
         <meta
           name="description"
-          content="Browse all 22 NESA-Africa 2026 award landing pages — Africa Education Icon, Influencer Education Impact, Platinum and Gold-Blue Garnet — each with its own story, pathways and tailored nomination form."
+          content="Browse all 18 NESA-Africa 2026 award category pages — Africa Education Icon, Influencer Education Impact, Platinum and Gold-Blue Garnet — each with its own story, pathways and tailored nomination form."
         />
         <link rel="canonical" href="https://nesaafrica.lovable.app/recognition/pages" />
       </Helmet>
@@ -58,23 +58,23 @@ export default function AwardLandingPagesIndex() {
               NESA-Africa 2026 · Recognition Edition
             </p>
             <h1 className="font-playfair text-3xl text-white md:text-5xl">
-              The 22 Award Landing Pages
+              The 18 Award Category Pages
             </h1>
             <p className="mt-3 max-w-3xl text-sm text-white/75 md:text-base">
               Enablers of Education for All Across Africa. Every category has its own page —
               the story, the pathways, the recognition standards and a tailored nomination form.
             </p>
             <p className="mt-4 inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-3 py-1 text-xs text-white/70">
-              {SUBPAGES_2026.length} pages · 4 tiers · one form per page
+              {AWARD_CATEGORY_PAGES_2026.length} pages · 4 tiers · one form per page
             </p>
           </header>
 
           <nav aria-label="Filter by recognition tier" className="mb-8 flex flex-wrap gap-2">
-            {[{ slug: "all", label: `All ${SUBPAGES_2026.length}` }, ...TIERS].map((t) => {
+            {[{ slug: "all", label: `All ${AWARD_CATEGORY_PAGES_2026.length}` }, ...TIERS].map((t) => {
               const count =
                 t.slug === "all"
-                  ? SUBPAGES_2026.length
-                  : SUBPAGES_2026.filter((s) => s.tier === t.slug).length;
+                  ? AWARD_CATEGORY_PAGES_2026.length
+                  : AWARD_CATEGORY_PAGES_2026.filter((s) => s.tier === t.slug).length;
               return (
                 <button
                   key={t.slug}
