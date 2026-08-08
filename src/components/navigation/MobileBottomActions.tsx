@@ -1,11 +1,11 @@
-// Mobile bottom actions bar — 4 actions only: Explore · Nominate · Vote · Menu.
+// Mobile bottom actions bar — 4 actions only: Enablers · Nominate · Gala · Menu.
 // Menu opens the same mobile drawer used in SiteHeader (dispatches a
 // window-level event that SiteHeader listens for).
 
 import { Link, useLocation } from "react-router-dom";
-import { Compass, Award, Vote, Menu as MenuIcon } from "lucide-react";
+import { Compass, Award, Ticket, Menu as MenuIcon } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { CURRENT_PHASE, NOMINATE_CTA } from "@/config/campaignPhase";
+import { NOMINATE_CTA } from "@/config/campaignPhase";
 import { trackNav } from "@/lib/analytics";
 
 export const MOBILE_MENU_OPEN_EVENT = "nesa:mobile-menu-open";
