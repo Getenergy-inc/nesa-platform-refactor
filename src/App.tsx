@@ -1083,7 +1083,9 @@ const App = () => (
                   {/* 3-segment subcategory routes remain */}
                   <Route path="/recognition/gold-blue-garnet/:categorySlug/:subcategorySlug" element={<WithLayout><TierCategorySubcategoryPage /></WithLayout>} />
                   {/* Phase C — 22 unified subpages driven by src/config/awards/subpages2026.ts */}
+                  <Route path="/recognition/pages" element={<WithLayout><AwardLandingPagesIndex /></WithLayout>} />
                   <Route path="/recognition/subpage/:slug" element={<WithLayout><AwardSubpageRoute /></WithLayout>} />
+
                   {/* 18 dedicated category pages — unified renderer driven by src/config/recognition2026 */}
                   <Route path="/recognition/:tier/:category" element={<WithLayout><CategoryPage2026 /></WithLayout>} />
 
