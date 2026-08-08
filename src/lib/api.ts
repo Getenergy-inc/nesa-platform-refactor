@@ -152,7 +152,6 @@ export interface Nominee {
   photoUrl: string | null;
   status: string;
   isPlatinum: boolean;
-  publicVotes: number;
   juryScore: number;
   finalScore: number;
 }

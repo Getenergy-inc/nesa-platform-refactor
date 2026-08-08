@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { Award, ThumbsUp, Sparkles } from "lucide-react";
+import { Award, Sparkles } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import type { EnrichedDatabaseNominee } from "@/hooks/useNominees";
 
@@ -59,11 +59,6 @@ export function FeaturedNomineeSpotlight({ nominees, title = "Featured Nominees"
                 <p className="text-xs text-ivory/60 line-clamp-1 mt-1">
                   {n.subcategoryName}
                 </p>
-                <div className="flex items-center gap-1.5 mt-3 text-sm text-gold">
-                  <ThumbsUp className="w-3.5 h-3.5" />
-                  <span className="font-semibold">{n.publicVotes.toLocaleString()}</span>
-                  <span className="text-ivory/50 text-xs">votes</span>
-                </div>
               </div>
             </Link>
           </motion.div>
