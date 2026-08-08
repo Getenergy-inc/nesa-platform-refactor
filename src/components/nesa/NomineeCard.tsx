@@ -252,11 +252,6 @@ export const NomineeCard = forwardRef<HTMLDivElement, NomineeCardProps>(function
     </Card>
   );
 
-  // For voting variant, don't wrap in Link (vote button handles interaction)
-  if (isVotingVariant) {
-    return <div ref={ref} className={className}>{cardContent}</div>;
-  }
-
   return (
     <Link to={`/nominees/${encodeURIComponent(nominee.slug)}`} className={className} ref={ref as any}>
       {cardContent}

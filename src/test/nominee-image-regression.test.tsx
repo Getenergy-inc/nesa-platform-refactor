@@ -94,7 +94,7 @@ describe("nominee image regression — verified photos", () => {
               photoUrl: `/nominees/${v.file}`,
               imageType: "photo",
             }}
-            showVotes={false}
+           
           />
         </MemoryRouter>,
       );
