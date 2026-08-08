@@ -87,10 +87,11 @@ export interface DatabaseNominee {
   logo_url: string | null;
   status: string | null;
   is_platinum: boolean | null;
-  public_votes: number | null;
   subcategory_id: string;
   season_id: string;
   nrc_verified?: boolean | null;
+  data_source?: string | null;
+  consent_confirmed?: boolean | null;
   acceptance_status?: string | null;
   award_family?: string | null;
   recognition_class?: string | null;
@@ -123,6 +124,10 @@ export interface EnrichedDatabaseNominee {
   achievement: string;
   /** NRC verification flag (governance badge). */
   nrcVerified: boolean;
+  /** 'live_verified' | 'historical_register_unconfirmed' | 'seed_unconfirmed'. */
+  dataSource: string;
+  /** True when the nominee has confirmed their nomination. */
+  consentConfirmed: boolean;
   /** Nominee acceptance state (accepted / pending / declined). */
   acceptanceStatus: string | null;
   awardFamily: string | null;
@@ -161,6 +166,8 @@ function enrichNominee(nominee: DatabaseNominee): EnrichedDatabaseNominee {
     geographicCategory: getGeographicCategory(nominee.region, nominee.category_name || null),
     achievement: nominee.bio || nominee.title || "",
     nrcVerified: nominee.nrc_verified ?? false,
+    dataSource: nominee.data_source ?? "live_verified",
+    consentConfirmed: nominee.consent_confirmed ?? false,
     acceptanceStatus: nominee.acceptance_status ?? null,
     awardFamily: nominee.award_family ?? null,
     recognitionClass: nominee.recognition_class ?? null,
