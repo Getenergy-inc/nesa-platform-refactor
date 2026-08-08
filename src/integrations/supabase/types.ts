@@ -11135,14 +11135,11 @@ export type Database = {
           created_at: string | null
           description: string | null
           id: string | null
-          is_active: boolean | null
           name: string | null
           photo_urls: string[] | null
           region_id: string | null
           school_type: string | null
           student_count: number | null
-          updated_at: string | null
-          verification_status: string | null
           website: string | null
         }
         Insert: {
@@ -11150,14 +11147,11 @@ export type Database = {
           created_at?: string | null
           description?: string | null
           id?: string | null
-          is_active?: boolean | null
           name?: string | null
           photo_urls?: string[] | null
           region_id?: string | null
           school_type?: string | null
           student_count?: number | null
-          updated_at?: string | null
-          verification_status?: string | null
           website?: string | null
         }
         Update: {
@@ -11165,14 +11159,11 @@ export type Database = {
           created_at?: string | null
           description?: string | null
           id?: string | null
-          is_active?: boolean | null
           name?: string | null
           photo_urls?: string[] | null
           region_id?: string | null
           school_type?: string | null
           student_count?: number | null
-          updated_at?: string | null
-          verification_status?: string | null
           website?: string | null
         }
         Relationships: [
