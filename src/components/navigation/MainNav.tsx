@@ -758,12 +758,13 @@ function UserMenu() {
 // ============================================================================
 
 // 2026: No public award voting. Vote slot replaced with Directory discovery.
+// Labels mirror the 2026 IA site map (7 primary items).
 const mobileQuickActions = [
   { icon: Home, label: "Home", href: "/" },
+  { icon: Award, label: "Recognition", href: "/recognition" },
+  { icon: Globe, label: "Enablers", href: "/nominees" },
   { icon: Award, label: "Nominate", href: "/nominate" },
-  { icon: Globe, label: "Directory", href: "/nominees" },
   { icon: Heart, label: "Donate", href: "/donate" },
-  { icon: Globe, label: "Regions", href: "/regions" },
   { icon: LayoutDashboard, label: "Dashboard", href: "/dashboard" },
 ];
 

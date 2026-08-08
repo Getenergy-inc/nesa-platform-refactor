@@ -1,11 +1,11 @@
-// Mobile bottom actions bar — 4 actions only: Explore · Nominate · Vote · Menu.
+// Mobile bottom actions bar — 4 actions only: Enablers · Nominate · Gala · Menu.
 // Menu opens the same mobile drawer used in SiteHeader (dispatches a
 // window-level event that SiteHeader listens for).
 
 import { Link, useLocation } from "react-router-dom";
-import { Compass, Award, Vote, Menu as MenuIcon } from "lucide-react";
+import { Compass, Award, Ticket, Menu as MenuIcon } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { CURRENT_PHASE, NOMINATE_CTA } from "@/config/campaignPhase";
+import { NOMINATE_CTA } from "@/config/campaignPhase";
 import { trackNav } from "@/lib/analytics";
 
 export const MOBILE_MENU_OPEN_EVENT = "nesa:mobile-menu-open";
@@ -22,18 +22,13 @@ interface Action {
 export function MobileBottomActions() {
   const { pathname } = useLocation();
 
-  // Vote action uses the phase-driven primary/secondary from campaignPhase.
-  const voteTarget =
-    CURRENT_PHASE.phase === "nomination"
-      ? { label: "Vote", href: "/awards/gold-blue-garnet" } // still surface Vote even in nomination phase
-      : CURRENT_PHASE.phase === "voting"
-      ? { label: "Vote", href: CURRENT_PHASE.primary.href }
-      : { label: "Vote", href: "/awards/gold-blue-garnet" };
+  // 2026: no public award voting. Third slot surfaces the Gala instead.
+  const galaTarget = { label: "Gala", href: "/gala" };
 
   const actions: Action[] = [
     {
       id: "explore",
-      label: "Explore",
+      label: "Enablers",
       href: "/nominees",
       icon: Compass,
       matchPrefix: "/nominees",
@@ -46,11 +41,11 @@ export function MobileBottomActions() {
       matchPrefix: "/nominate",
     },
     {
-      id: "vote",
-      label: voteTarget.label,
-      href: voteTarget.href,
-      icon: Vote,
-      matchPrefix: "/awards/gold-blue-garnet",
+      id: "gala",
+      label: galaTarget.label,
+      href: galaTarget.href,
+      icon: Ticket,
+      matchPrefix: "/gala",
     },
     {
       id: "menu",
