@@ -136,7 +136,21 @@ export default function RecognitionHubPage() {
                 {tiers.length} tiers · {categories.length} categories · {subs.length} subcategories
               </p>
             )}
+            <div className="mt-6 flex flex-wrap items-center gap-3 rounded-2xl border border-gold/30 bg-black/40 p-4">
+              <p className="text-sm text-white/80">
+                <span className="font-semibold text-gold">New:</span> all 22 award landing pages
+                are live — each with its own story, pathways and tailored nomination form.
+              </p>
+              <Link
+                to="/recognition/pages"
+                className="inline-flex items-center gap-1 rounded-full bg-gold px-4 py-2 text-sm font-semibold text-charcoal hover:bg-gold/90"
+              >
+                Browse the 22 pages
+                <ChevronRight className="h-4 w-4" aria-hidden />
+              </Link>
+            </div>
           </header>
+
 
           {loading && (
             <div className="flex items-center gap-2 text-white/70" role="status">
