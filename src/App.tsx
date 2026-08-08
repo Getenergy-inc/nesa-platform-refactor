@@ -81,6 +81,8 @@ import NominateMvp from "./pages/NominateMvp";
 import NGOChooser from "./pages/nominate/NGOChooser";
 import IconNominatePage from "./pages/nominate/IconNominatePage";
 import NominateHub2026 from "./pages/nominate/NominateHub2026";
+import NominationFormPagesIndex from "./pages/nominate/NominationFormPagesIndex";
+
 import NominateCategoryShell from "./pages/nominate/NominateCategoryShell";
 import NominateSchool from "./pages/impact/NominateSchool";
 import Dashboard from "./pages/Dashboard";
@@ -1591,7 +1593,17 @@ const App = () => (
                       </WithLayout>
                     }
                   />
+                  {/* Index of the 22 tailored nomination-form landing pages */}
+                  <Route
+                    path="/nominate/pages"
+                    element={
+                      <WithLayout>
+                        <NominationFormPagesIndex />
+                      </WithLayout>
+                    }
+                  />
                   {/* 18 canonical nomination forms (Phase 1 shells) */}
+
                   <Route
                     path="/nominate/africa-education-icon"
                     element={

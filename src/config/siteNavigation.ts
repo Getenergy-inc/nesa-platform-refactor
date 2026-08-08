@@ -55,6 +55,8 @@ export const SITE_NAV: NavItem[] = [
         title: "Explore",
         items: [
           { label: "All 22 Award Landing Pages", href: "/recognition/pages" },
+          { label: "All 22 Nomination Forms", href: "/nominate/pages" },
+
           { label: "Recognition Architecture", href: "/recognition" },
         ],
       },
