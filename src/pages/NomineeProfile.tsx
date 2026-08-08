@@ -24,6 +24,7 @@ import {
   type EnrichedNominee,
 } from "@/lib/nesaData";
 import { NomineeActions, EnrichedProfileCard } from "@/components/nominees";
+import { isIconTierNominee } from "@/components/nesa/NomineeCard";
 import { NomineeEndorseShare } from "@/components/nominees/NomineeEndorseShare";
 import { NomineeImage } from "@/components/shared/NomineeImage";
 import { getResolvedNomineeImage } from "@/hooks/useResolvedNomineeImages";
@@ -320,6 +321,8 @@ export default function NomineeProfile() {
   const story = generateStory(nominee);
   const enrichedProfile = getEnrichedProfile(nominee.slug);
   const blueGarnet = isBlueGarnet(nominee.awardTitle);
+  // Icon tier is judged, once-in-a-lifetime — no endorsement or re-nomination.
+  const iconTier = isIconTierNominee({ categoryName: nominee.awardTitle });
   const pathway = getPathwayLabel(nominee.geographicCategory);
 
   return (
@@ -456,6 +459,8 @@ export default function NomineeProfile() {
                         referralCode,
                       }}
                       showVote={blueGarnet}
+              showRenominate={!iconTier}
+                      showRenominate={!iconTier}
                       onRenominateSuccess={() => setRenominationCount(c => c + 1)}
                     />
                     <Button asChild className="bg-gold hover:bg-gold-dark text-charcoal font-medium">
@@ -476,12 +481,14 @@ export default function NomineeProfile() {
             {/* Main Column */}
             <div className="lg:col-span-2 space-y-8">
               {/* Nominee-owned actions: shareable endorsement link + acceptance entry */}
+              {iconTier ? null : (
               <NomineeEndorseShare
                 nomineeName={nominee.name}
                 nomineeSlug={nominee.slug}
                 awardTitle={nominee.awardTitle}
                 subcategoryTitle={nominee.subcategoryTitle}
               />
+              )}
 
               {/* Impact Story Arc — Problem → Intervention → Results → Vision */}
               <ImpactStoryArc nominee={nominee} />
@@ -636,6 +643,7 @@ export default function NomineeProfile() {
                   nominee={nominee}
                   dbNomineeId={dbNomineeId}
                   blueGarnet={blueGarnet}
+                  iconTier={iconTier}
                   renominationCount={renominationCount}
                   referralCode={referralCode}
                   onRenominateSuccess={() => setRenominationCount(c => c + 1)}
@@ -673,6 +681,7 @@ export default function NomineeProfile() {
                   nominee={nominee}
                   dbNomineeId={dbNomineeId}
                   blueGarnet={blueGarnet}
+                  iconTier={iconTier}
                   renominationCount={renominationCount}
                   referralCode={referralCode}
                   onRenominateSuccess={() => setRenominationCount(c => c + 1)}
@@ -803,6 +812,7 @@ function ActionCTABar({
   nominee,
   dbNomineeId,
   blueGarnet,
+  iconTier,
   renominationCount,
   referralCode,
   onRenominateSuccess,
@@ -810,6 +820,7 @@ function ActionCTABar({
   nominee: EnrichedNominee;
   dbNomineeId: string | null;
   blueGarnet: boolean;
+  iconTier: boolean;
   renominationCount: number;
   referralCode?: string;
   onRenominateSuccess: () => void;
@@ -819,7 +830,7 @@ function ActionCTABar({
       <CardContent className="p-5 space-y-4">
         <h3 className="text-sm font-display text-ivory/90 font-medium">Nominee Actions</h3>
         <p className="text-ivory/80 text-xs">
-          Support this nominee through nomination, re-nomination{blueGarnet ? ", or voting" : ""}.
+          Support this nominee through nomination{iconTier ? "" : ", re-nomination"}{blueGarnet ? ", or voting" : ""}.
           {" "}Final confirmation requires sign-in.
         </p>
         <div className="flex flex-col gap-2">
@@ -845,6 +856,7 @@ function ActionCTABar({
                 referralCode,
               }}
               showVote={blueGarnet}
+              showRenominate={!iconTier}
               onRenominateSuccess={onRenominateSuccess}
             />
           )}
