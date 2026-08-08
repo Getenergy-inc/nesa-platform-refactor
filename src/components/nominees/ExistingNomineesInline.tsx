@@ -53,7 +53,7 @@ export function ExistingNomineesInline({
            subcategories:subcategory_id ( slug, categories:category_id ( slug ) )`,
         )
         .eq("status", "approved")
-        .order("public_votes", { ascending: false, nullsFirst: false })
+        .order("name", { ascending: true })
         .limit(Math.max(limit * 4, 40));
 
       if (cancelled) return;

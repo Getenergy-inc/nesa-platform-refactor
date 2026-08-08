@@ -194,10 +194,6 @@ export function ExistingNomineesSection({
                     {nominee.title && !nominee.organization && (
                       <span className="truncate">{nominee.title}</span>
                     )}
-                    <span className="shrink-0 flex items-center gap-0.5">
-                      <ThumbsUp className="h-3 w-3" />
-                      {nominee.public_votes}
-                    </span>
                     {nominee.renomination_count > 0 && (
                       <span className="shrink-0 flex items-center gap-0.5">
                         <UserPlus className="h-3 w-3" />
