@@ -38,8 +38,9 @@ export function AnnouncementBar() {
   };
 
   const inner = (
-    <span className="truncate">{current.text}</span>
+    <span className="block truncate max-w-full">{current.text}</span>
   );
+
 
   return (
     <div
@@ -47,18 +48,19 @@ export function AnnouncementBar() {
       aria-label="Site announcement"
       className="w-full bg-gold text-charcoal text-xs sm:text-[13px]"
     >
-      <div className="container mx-auto px-4 h-8 flex items-center justify-between gap-3">
+      <div className="container mx-auto px-4 h-8 flex items-center justify-between gap-2">
         <div className="flex-1 min-w-0 flex items-center justify-center">
           {current.href ? (
             <Link
               to={current.href}
               onClick={() => trackEvent(current.analyticsId ?? "announcement_click", { href: current.href, id: current.id })}
-              className="font-medium hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-charcoal rounded"
+              className="min-w-0 max-w-full font-medium hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-charcoal rounded"
             >
               {inner}
             </Link>
           ) : inner}
         </div>
+
         <button
           type="button"
           onClick={dismiss}
