@@ -52,6 +52,14 @@ export const SITE_NAV: NavItem[] = [
     analyticsId: "nav_recognition",
     sections: [
       {
+        title: "Explore",
+        items: [
+          { label: "All 22 Award Landing Pages", href: "/recognition/pages" },
+          { label: "Recognition Architecture", href: "/recognition" },
+        ],
+      },
+      {
+
         title: "Africa Education Icon",
         items: [
           { label: "Africa Education Icon Overview", href: "/awards/africa-education-icon" },
