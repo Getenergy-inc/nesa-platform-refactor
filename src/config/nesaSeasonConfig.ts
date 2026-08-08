@@ -1,7 +1,7 @@
 // NESA Africa Season Configuration
 // Centralized configuration for phases, dates, categories, and stage management
 
-import { PROGRAMME_END_DATE, PROGRAMME_END_DATETIME } from "@/config/programme";
+import { PROGRAMME_END_DATE, PROGRAMME_END_DATETIME, GALA_COUNTDOWN_TARGET } from "@/config/programme";
 
 export type NESAPhase = 
   | "pre-launch"
@@ -61,7 +61,7 @@ export const CURRENT_SEASON: SeasonEdition = {
   name: "NESA-Africa 2026",
   theme: "From Recognition to Real Impact Across Africa",
   tagline: "A Continental Platform for Education Transformation",
-  ceremonyDate: new Date(PROGRAMME_END_DATETIME),
+  ceremonyDate: GALA_COUNTDOWN_TARGET,
   ceremonyLocation: "Lagos, Nigeria",
   ceremonyVenue: "Eko Convention Centre",
 };

@@ -13,7 +13,7 @@ import type {
   SubpageTimelineEntry,
 } from "@/components/awards/subpage/AwardSubpageTemplate";
 import type { TierSlug } from "@/config/recognition2026/tiers";
-import { PROGRAMME_END_DATETIME, PROGRAMME_END_LABEL } from "@/config/programme";
+import { GALA_COUNTDOWN_DATETIME, PROGRAMME_END_LABEL } from "@/config/programme";
 
 export interface SubpageModules {
   benefits: { heading?: string; items: SubpageBenefit[] };
@@ -148,7 +148,7 @@ const ICON_COUNTDOWN: SubpageCountdown = {
 
 const STANDARD_COUNTDOWN: SubpageCountdown = {
   heading: "Countdown to the 2026 Recognition Gala",
-  targetIso: PROGRAMME_END_DATETIME,
+  targetIso: GALA_COUNTDOWN_DATETIME,
   label: `NESA-Africa 2026 Recognition Gala · ${PROGRAMME_END_LABEL}, Lagos`,
   note: "Nominations open 30 August 2026. Verification runs continuously until the Gala.",
 };
