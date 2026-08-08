@@ -1,18 +1,18 @@
-// NominationFormPagesIndex — visual index of the 22 tailored nomination-form
-// landing pages (Icon 3 · Influencer 3 · Platinum 7 · Gold-Blue Garnet 9).
+// NominationFormPagesIndex — visual index of the 18 tailored nomination-form
+// landing pages (Icon 1 · Influencer 1 · Platinum 7 · Gold-Blue Garnet 9).
 // URL: /nominate/pages — each card deep-links to that page's #nominate form.
 
 import { useMemo, useState } from "react";
 import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
 import { ArrowRight, FileCheck, ShieldCheck } from "lucide-react";
-import { SUBPAGES_2026 } from "@/config/awards/subpages2026";
+import { AWARD_CATEGORY_PAGES_2026 } from "@/config/awards/subpages2026";
 
 const TIERS: { slug: string; label: string; blurb: string }[] = [
   {
     slug: "africa-education-icon",
     label: "Africa Education Icon",
-    blurb: "Lifetime recognition — three nomination pathways.",
+    blurb: "Lifetime recognition — jury-nominated, three pathways.",
   },
   {
     slug: "influencer-education-impact",
@@ -35,17 +35,17 @@ export default function NominationFormPagesIndex() {
   const [active, setActive] = useState<string>("all");
 
   const visible = useMemo(
-    () => (active === "all" ? SUBPAGES_2026 : SUBPAGES_2026.filter((s) => s.tier === active)),
+    () => (active === "all" ? AWARD_CATEGORY_PAGES_2026 : AWARD_CATEGORY_PAGES_2026.filter((s) => s.tier === active)),
     [active],
   );
 
   return (
     <>
       <Helmet>
-        <title>All 22 Nomination Forms · NESA-Africa 2026</title>
+        <title>All 18 Nomination Forms · NESA-Africa 2026</title>
         <meta
           name="description"
-          content="Open any of the 22 NESA-Africa 2026 nomination forms — one tailored form per award category, free to submit, verified by the Nominee Research Corps (NRC)."
+          content="Open any of the 18 NESA-Africa 2026 nomination forms — one tailored form per award category, free to submit, verified by the Nominee Research Corps (NRC)."
         />
         <link rel="canonical" href="https://nesaafrica.lovable.app/nominate/pages" />
       </Helmet>
@@ -58,7 +58,7 @@ export default function NominationFormPagesIndex() {
               Nominations Open · NESA-Africa 2026
             </p>
             <h1 className="font-playfair text-3xl text-white md:text-5xl">
-              The 22 Nomination Forms
+              The 18 Nomination Forms
             </h1>
             <p className="mt-3 max-w-3xl text-sm text-white/75 md:text-base">
               Enablers of Education for All Across Africa. One tailored form per category —
@@ -66,7 +66,7 @@ export default function NominationFormPagesIndex() {
             </p>
             <div className="mt-4 flex flex-wrap gap-2 text-xs text-white/70">
               <span className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-3 py-1">
-                {SUBPAGES_2026.length} forms · 4 tiers
+                {AWARD_CATEGORY_PAGES_2026.length} forms · 4 tiers
               </span>
               <span className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-3 py-1">
                 <ShieldCheck className="h-3.5 w-3.5 text-gold" aria-hidden />
@@ -76,11 +76,11 @@ export default function NominationFormPagesIndex() {
           </header>
 
           <nav aria-label="Filter nomination forms by tier" className="mb-8 flex flex-wrap gap-2">
-            {[{ slug: "all", label: `All ${SUBPAGES_2026.length}` }, ...TIERS].map((t) => {
+            {[{ slug: "all", label: `All ${AWARD_CATEGORY_PAGES_2026.length}` }, ...TIERS].map((t) => {
               const count =
                 t.slug === "all"
-                  ? SUBPAGES_2026.length
-                  : SUBPAGES_2026.filter((s) => s.tier === t.slug).length;
+                  ? AWARD_CATEGORY_PAGES_2026.length
+                  : AWARD_CATEGORY_PAGES_2026.filter((s) => s.tier === t.slug).length;
               return (
                 <button
                   key={t.slug}

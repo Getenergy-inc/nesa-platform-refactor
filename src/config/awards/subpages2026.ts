@@ -1,4 +1,5 @@
-// subpages2026.ts — source of truth for all 22 NESA-Africa 2026 award subpages.
+// subpages2026.ts — source of truth for the 18 NESA-Africa 2026 award category
+// pages (plus the 6 legacy Icon/Influencer pathway pages kept live).
 //
 // The registry is generated from the canonical category taxonomy in
 // `src/config/recognition2026/categories/index.ts` so we never fork content:
@@ -335,48 +336,101 @@ function fromSubcategory(
   };
 }
 
-// ── Build the 22 ────────────────────────────────────────────────────────────
+// ── Build the pages ─────────────────────────────────────────────────────────
+//
+// IA refactor (2026 site-map): the canonical public structure is
+// 18 AWARD CATEGORY PAGES across 4 tiers —
+//   Tier 1 Africa Education Icon        → 1 bundled page (3 pathways)
+//   Tier 2 Influencer Education Impact  → 1 bundled page (3 pathways)
+//   Tier 3 Platinum Recognition         → 7 pages
+//   Tier 4 Gold-Blue Garnet Recognition → 9 pages
+//
+// The six Icon / Influencer *subcategory* pages remain published (no dead
+// URLs) but are no longer canonical entries — they redirect-in-content to
+// their bundled tier category page. See docs/refactor/ia-2026-migration.md.
 
-function buildAllSubpages(): AwardSubpageContent[] {
+/** Tier 1 is jury-nominated: no public nomination form on the category page. */
+const NO_PUBLIC_FORM_TIERS: TierSlug[] = ["africa-education-icon"];
+
+function bundleSubcategories(cat: CategoryDefinition, page: AwardSubpageContent): AwardSubpageContent {
+  if (!cat.subcategories.length) return page;
+  const noPublicForm = NO_PUBLIC_FORM_TIERS.includes(cat.tier);
+  return {
+    ...page,
+    recognises: {
+      ...page.recognises,
+      highlights: [
+        ...cat.subcategories.map((sub) => `${sub.name} — ${sub.description}`),
+        ...(page.recognises.highlights ?? []),
+      ],
+    },
+    // Tier 1 carries no embedded public form — nomination is jury-led.
+    nomination: noPublicForm ? undefined : page.nomination,
+    hero: noPublicForm
+      ? {
+          ...page.hero,
+          primary: { label: "How Icon recognition works", href: "/awards/africa-education-icon" },
+          secondary: { label: "Explore Icon Enablers", href: "/nominees?tier=africa-education-icon" },
+        }
+      : page.hero,
+    notice: noPublicForm
+      ? {
+          kind: "icon",
+          heading: "Jury-nominated tier",
+          body: "The Africa Education Icon Award is decided by an independent jury of 27 judges, producing 9 final Icons. There is no public nomination form on this tier.",
+        }
+      : page.notice,
+  };
+}
+
+/** The canonical 18 award category pages. */
+function buildCategoryPages(): AwardSubpageContent[] {
+  return CATEGORIES.map((cat) => bundleSubcategories(cat, fromCategory(cat)));
+}
+
+/** The six Icon / Influencer pathway subpages — published, non-canonical. */
+function buildPathwaySubpages(): AwardSubpageContent[] {
   const list: AwardSubpageContent[] = [];
-
   for (const cat of CATEGORIES) {
     if (cat.tier === "africa-education-icon" || cat.tier === "influencer-education-impact") {
-      // 3 subpages per tier — one per subcategory
-      for (const sub of cat.subcategories) {
-        list.push(fromSubcategory(cat, sub));
-      }
-    } else {
-      // Platinum & Gold-Blue Garnet: 1 subpage per category
-      list.push(fromCategory(cat));
+      for (const sub of cat.subcategories) list.push(fromSubcategory(cat, sub));
     }
   }
-
   return list;
 }
 
-export const SUBPAGES_2026: AwardSubpageContent[] = buildAllSubpages();
+/** Canonical navigation + index source: exactly 18 pages. */
+export const AWARD_CATEGORY_PAGES_2026: AwardSubpageContent[] = buildCategoryPages();
+
+/** Legacy pathway pages kept live so existing URLs never 404. */
+export const PATHWAY_SUBPAGES_2026: AwardSubpageContent[] = buildPathwaySubpages();
+
+/** Every resolvable /recognition/subpage/:slug page. */
+export const SUBPAGES_2026: AwardSubpageContent[] = [
+  ...AWARD_CATEGORY_PAGES_2026,
+  ...PATHWAY_SUBPAGES_2026,
+];
 
 export function getSubpage(slug: string): AwardSubpageContent | undefined {
   return SUBPAGES_2026.find((s) => s.slug === slug);
 }
 
 export function listSubpagesForTier(tier: TierSlug): AwardSubpageContent[] {
-  return SUBPAGES_2026.filter((s) => s.tier === tier);
+  return AWARD_CATEGORY_PAGES_2026.filter((s) => s.tier === tier);
 }
 
 // Runtime assertion: catch drift from the 22-subpage spec early.
 if (typeof console !== "undefined") {
-  const counts = SUBPAGES_2026.reduce<Record<string, number>>((acc, s) => {
+  const counts = AWARD_CATEGORY_PAGES_2026.reduce<Record<string, number>>((acc, s) => {
     acc[s.tier] = (acc[s.tier] ?? 0) + 1;
     return acc;
   }, {});
-  const expected = { "africa-education-icon": 3, "influencer-education-impact": 3, platinum: 7, "gold-blue-garnet": 9 };
+  const expected = { "africa-education-icon": 1, "influencer-education-impact": 1, platinum: 7, "gold-blue-garnet": 9 };
   for (const [tier, want] of Object.entries(expected)) {
     if ((counts[tier] ?? 0) !== want) {
       // eslint-disable-next-line no-console
       console.warn(
-        `[subpages2026] tier ${tier} has ${counts[tier] ?? 0} subpages, expected ${want}. Update src/config/recognition2026/categories to match the 22-page spec.`,
+        `[subpages2026] tier ${tier} has ${counts[tier] ?? 0} category pages, expected ${want}. Update src/config/recognition2026/categories to match the 18-page spec.`,
       );
     }
   }
