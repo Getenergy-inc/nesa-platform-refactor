@@ -46,7 +46,7 @@ export default function RegionNomineesHubPage({ region: regionProp }: { region?:
   }, [nominees, region]);
 
   const featured = useMemo(
-    () => [...regionNominees].sort((a, b) => Number(b.nrcVerified ?? false) - Number(a.nrcVerified ?? false) || a.name.localeCompare(b.name).slice(0, 6),
+    () => [...regionNominees].sort((a, b) => Number(b.nrcVerified ?? false) - Number(a.nrcVerified ?? false) || a.name.localeCompare(b.name)).slice(0, 6),
     [regionNominees]
   );
 
