@@ -28,7 +28,6 @@
 /support/voting-support                                      /contact             301
 /support/sponsorship-support                                 /contact             301
 /about/people                                                /about               301
-/about/team                                                  /about               301
 /about/volunteers                                            /volunteers          301
 /about/advisory-board                                        /about/governance    301
 /about/ambassadors                                           /ambassadors         301
@@ -61,7 +60,7 @@
 /cookie-policy                                               /policies            301
 /language                                                    /                    301
 
-# --- 2. SPA routes (507 explicit paths from src/App.tsx) ---
+# --- 2. SPA routes (509 explicit paths from src/App.tsx) ---
 /recognition/influencer-education-impact/african-sports-icons-supporting-education /index.html          200
 /recognition/influencer-education-impact/african-music-icons-supporting-education /index.html          200
 /recognition/influencer-education-impact/african-social-media-influencers /index.html          200
@@ -450,6 +449,7 @@ judges/:slug                                                 /index.html        
 /about/2026                                                  /index.html          200
 /about/2027                                                  /index.html          200
 /about/scef                                                  /index.html          200
+/about/team                                                  /index.html          200
 /auth/login                                                  /index.html          200
 /categories                                                  /index.html          200
 /edx-matrix                                                  /index.html          200
@@ -558,6 +558,7 @@ voting                                                       /index.html        
 /jury                                                        /index.html          200
 /news                                                        /index.html          200
 /shop                                                        /index.html          200
+/team                                                        /index.html          200
 /vote                                                        /index.html          200
 about                                                        /index.html          200
 audit                                                        /index.html          200
