@@ -39,7 +39,6 @@ interface WalletData {
   accountId: string;
   balanceAgcc: number;
   balanceAgc: number;
-  votesUsed: number;
 }
 
 function useAGCWallet() {

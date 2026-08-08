@@ -66,7 +66,6 @@ export type Nominee = {
   country?: string;
   region?: string;
   imageUrl?: string | null;
-  publicVotes?: number;
 };
 
 export type EvidenceFile = {

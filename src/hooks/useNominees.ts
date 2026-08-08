@@ -115,7 +115,6 @@ export interface EnrichedDatabaseNominee {
   imageType: NomineeImageType;
   status: string;
   isPlatinum: boolean;
-  publicVotes: number;
   subcategoryName: string;
   subcategorySlug: string;
   categoryName: string;

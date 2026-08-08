@@ -15,9 +15,6 @@ export type { HealthStatus, SeasonInfo, SeasonResponse, StageInfo, StageResponse
 export { default as nrcApi, getQueue, getStats, assignNomination, submitDecision, approveNomination, rejectNomination, requestInfo, getLogs } from "./nrc";
 export type { NominationQueueItem, NRCStats, NRCDecision, NRCDecisionResult, AuditLogItem } from "./nrc";
 
-// Voting APIs
-export { default as votingApi, getEligibility, getTally, getMyVotes, castVote, castJuryScore, hasVotedFor } from "./voting";
-export type { VotingEligibility, NomineeTally, CategoryTally, TallyResponse, UserVote, VoteResult } from "./voting";
 
 // Certificates APIs
 export { default as certificatesApi, verify, getMyCertificates, getById, certificatesAdmin } from "./certificates";

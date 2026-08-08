@@ -76,7 +76,7 @@ export function useEDXOverview() {
 
       return {
         totalNominations: nominationsCount ?? 0,
-        totalVotes: votesCount ?? 0,
+        totalVotes: 0,
         totalNominees: nomineesCount ?? 0,
         totalRegionsActive: regions?.length ?? 0,
         totalCategoriesEngaged: categories?.length ?? 0,

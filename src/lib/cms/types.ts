@@ -50,5 +50,4 @@ export interface NomineeSummary {
   photoUrl: string | null;
   logoUrl: string | null;
   isPlatinum: boolean;
-  publicVotes: number;
 }
