@@ -232,6 +232,7 @@ import Install from "./pages/Install";
 
 // 22-page canonical consolidators (2026 final refactor)
 import AboutConsolidated from "./pages/about/AboutConsolidated";
+import GlobalTeam from "./pages/about/GlobalTeam";
 import AboutCycle2026 from "./pages/about/AboutCycle2026";
 import AboutCycle2027 from "./pages/about/AboutCycle2027";
 import AboutCycle2028_2030 from "./pages/about/AboutCycle2028_2030";
