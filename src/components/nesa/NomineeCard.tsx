@@ -51,7 +51,6 @@ interface NomineeCardProps {
   showLoginToVote?: boolean;
   // Action buttons
   showActions?: boolean;
-  onVoteSuccess?: () => void;
   onRenominateSuccess?: () => void;
 }
 
@@ -87,7 +86,6 @@ export const NomineeCard = forwardRef<HTMLDivElement, NomineeCardProps>(function
   onVote,
   showLoginToVote = false,
   showActions = false,
-  onVoteSuccess,
   onRenominateSuccess,
 }, ref) {
   const isCompact = variant === "compact";
@@ -291,7 +289,6 @@ export const NomineeCard = forwardRef<HTMLDivElement, NomineeCardProps>(function
                 }}
                 variant="compact"
                 showRenominate={!isIconTierNominee(nominee)}
-                onVoteSuccess={onVoteSuccess}
                 onRenominateSuccess={onRenominateSuccess}
               />
               {isIconTierNominee(nominee) ? (

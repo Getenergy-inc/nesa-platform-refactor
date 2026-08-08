@@ -458,7 +458,6 @@ export default function NomineeProfile() {
                         renominationCount,
                         referralCode,
                       }}
-                      showVote={blueGarnet}
                       showRenominate={!iconTier}
                       onRenominateSuccess={() => setRenominationCount(c => c + 1)}
                     />
@@ -854,7 +853,6 @@ function ActionCTABar({
                 renominationCount,
                 referralCode,
               }}
-              showVote={blueGarnet}
               showRenominate={!iconTier}
               onRenominateSuccess={onRenominateSuccess}
             />
