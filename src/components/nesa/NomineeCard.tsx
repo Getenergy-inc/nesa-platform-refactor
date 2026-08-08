@@ -27,7 +27,16 @@ export interface NomineeCardData {
   imageType?: NomineeImageType;
   /** Geographic category for display context */
   geographicCategory?: string;
+  /** Award tier — Icon-tier nominees are judged, once-in-a-lifetime: no endorse/re-nominate. */
+  tier?: string | null;
 }
+
+/** Icon tier is judged and once-in-a-lifetime — endorsement / re-nomination is not permitted. */
+export function isIconTierNominee(nominee: Pick<NomineeCardData, "tier" | "categoryName">): boolean {
+  const haystack = `${nominee.tier ?? ""} ${nominee.categoryName ?? ""}`.toLowerCase();
+  return haystack.includes("icon");
+}
+
 
 interface NomineeCardProps {
   nominee: NomineeCardData;
