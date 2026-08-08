@@ -459,7 +459,6 @@ export default function NomineeProfile() {
                         referralCode,
                       }}
                       showVote={blueGarnet}
-              showRenominate={!iconTier}
                       showRenominate={!iconTier}
                       onRenominateSuccess={() => setRenominationCount(c => c + 1)}
                     />
