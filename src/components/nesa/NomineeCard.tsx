@@ -290,11 +290,18 @@ export const NomineeCard = forwardRef<HTMLDivElement, NomineeCardProps>(function
                   renominationCount: nominee.renominationCount,
                 }}
                 variant="compact"
+                showRenominate={!isIconTierNominee(nominee)}
                 onVoteSuccess={onVoteSuccess}
                 onRenominateSuccess={onRenominateSuccess}
               />
+              {isIconTierNominee(nominee) ? (
+                <p className="mt-2 text-[11px] text-ivory/50">
+                  Icon tier is judged once in a lifetime — endorsement and re-nomination are closed.
+                </p>
+              ) : null}
             </div>
           )}
+
         </div>
       </CardContent>
     </Card>
