@@ -74,7 +74,7 @@ export const SITE_NAV: NavItem[] = [
             href: "/recognition/subpage/literary-and-new-curriculum-advocate-icon",
           },
           {
-            label: "Africa Technical Education Icon",
+            label: "Africa Technical Educator Icon",
             href: "/recognition/subpage/africa-technical-education-icon",
           },
         ],

@@ -49,13 +49,13 @@ export function getCurrentIconPhase(now: Date = new Date()): IconPhaseInfo {
       label: "Specialist Panel Screening",
       currentStart: c.screeningOpen,
       nextStart: c.grandJuryOpen,
-      nextLabel: "Grand Jury Voting opens",
+      nextLabel: "Grand Jury Deliberation opens",
     };
   }
   if (now <= c.grandJuryClose) {
     return {
       phase: "grand_jury",
-      label: "Grand Jury Voting",
+      label: "Grand Jury Deliberation",
       currentStart: c.grandJuryOpen,
       nextStart: c.governanceOpen,
       nextLabel: "Governance Review begins",
@@ -82,7 +82,7 @@ export function getCurrentIconPhase(now: Date = new Date()): IconPhaseInfo {
 export const ICON_PHASE_TIMELINE: Array<{ key: IconPhase; label: string; date: Date }> = [
   { key: "pre_screening",      label: "NRC Verification",             date: ICON_CALENDAR.screeningOpen },
   { key: "screening",          label: "Specialist Panel Screening",   date: ICON_CALENDAR.screeningClose },
-  { key: "grand_jury",         label: "Grand Jury Voting",            date: ICON_CALENDAR.grandJuryClose },
+  { key: "grand_jury",         label: "Grand Jury Deliberation",            date: ICON_CALENDAR.grandJuryClose },
   { key: "governance_review",  label: "Governance Review",            date: ICON_CALENDAR.governanceClose },
   { key: "post_gala",          label: "Awards Gala",                  date: ICON_CALENDAR.gala },
 ];

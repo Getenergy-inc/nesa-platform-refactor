@@ -75,7 +75,7 @@ const ICON: CategoryDefinition = {
     },
     {
       code: "ICON-TECH",
-      name: "Africa Technical Education Icon",
+      name: "Africa Technical Educator Icon",
       description: "Lifetime contribution to technical, vocational and applied education across Africa.",
       nomineeTypes: ["individual"],
       evidenceSummary: "Institutional records, programme outcomes, TVET impact evidence, references.",

@@ -51,7 +51,7 @@ const PATHWAY_CARDS = [
   },
   {
     icon: Wrench,
-    title: "Africa Technical Education Icon",
+    title: "Africa Technical Educator Icon",
     body: "TVET, STEM, engineering, and digital-skills education that prepare Africa's workforce.",
   },
 ];

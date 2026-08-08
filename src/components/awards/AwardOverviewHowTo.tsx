@@ -32,7 +32,7 @@ const STEPS = [
   {
     icon: ShieldCheck,
     title: "NRC verification",
-    body: "Our Nominee Review Committee verifies claims, checks evidence and screens for conflicts of interest.",
+    body: "Our Nominee Research Corps (NRC) verifies claims, checks evidence and screens for conflicts of interest.",
   },
   {
     icon: Trophy,

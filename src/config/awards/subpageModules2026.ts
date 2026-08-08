@@ -26,7 +26,7 @@ export interface SubpageModules {
 
 const COMMON_TERMS: string[] = [
   "Nomination is free. No payment, sponsorship, donation, Gala ticket, merchandise purchase, GFAwzip Wallet transaction or AGC Participation Credit balance influences verification, assessment or recognition.",
-  "Every claim submitted must be independently verifiable. The Nominee Review Committee (NRC) may request original documents, referee contacts or third-party confirmation before a nomination proceeds.",
+  "Every claim submitted must be independently verifiable. The Nominee Research Corps (NRC) may request original documents, referee contacts or third-party confirmation before a nomination proceeds.",
   "Nominations containing falsified, plagiarised or unverifiable evidence are disqualified, and the submitting account may be suspended.",
   "Nominees must consent to publication of their verified profile, category, region and recognition status on NESA.Africa.",
   "Reviewers, NRC members and Governance Board members must declare and recuse themselves from any conflict of interest before assessing a nomination.",

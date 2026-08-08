@@ -41,7 +41,7 @@ const PATHWAYS = [
   },
   {
     slug: "technical-educator-icon",
-    label: "Africa Technical Education Icon",
+    label: "Africa Technical Educator Icon",
     blurb: "TVET, STEM, engineering, and digital-skills education.",
   },
 ] as const;

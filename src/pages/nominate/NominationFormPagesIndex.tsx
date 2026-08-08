@@ -45,7 +45,7 @@ export default function NominationFormPagesIndex() {
         <title>All 22 Nomination Forms · NESA-Africa 2026</title>
         <meta
           name="description"
-          content="Open any of the 22 NESA-Africa 2026 nomination forms — one tailored form per award category, free to submit, verified by the Nominee Review Committee."
+          content="Open any of the 22 NESA-Africa 2026 nomination forms — one tailored form per award category, free to submit, verified by the Nominee Research Corps (NRC)."
         />
         <link rel="canonical" href="https://nesaafrica.lovable.app/nominate/pages" />
       </Helmet>
