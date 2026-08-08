@@ -58,7 +58,7 @@ export default function NominationFormPagesIndex() {
               Nominations Open · NESA-Africa 2026
             </p>
             <h1 className="font-playfair text-3xl text-white md:text-5xl">
-              The 22 Nomination Forms
+              The 18 Nomination Forms
             </h1>
             <p className="mt-3 max-w-3xl text-sm text-white/75 md:text-base">
               Enablers of Education for All Across Africa. One tailored form per category —
