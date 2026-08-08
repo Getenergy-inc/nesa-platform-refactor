@@ -97,7 +97,7 @@ export function NESAFooter() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="bg-charcoal border-t border-gold/20 pb-28 md:pb-8" aria-labelledby="footer-heading">
+    <footer className="bg-charcoal border-t border-gold/20 pb-44 lg:pb-8" aria-labelledby="footer-heading">
       <h2 id="footer-heading" className="sr-only">Site footer</h2>
 
       <div className="container mx-auto px-4 pt-10 md:pt-14">

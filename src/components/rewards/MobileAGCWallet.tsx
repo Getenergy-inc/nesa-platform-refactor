@@ -13,7 +13,7 @@ import { cn } from "@/lib/utils";
  * Sits above MobileBottomNav (bottom-0, h-16) and BottomPageNav (bottom-16).
  */
 const QUICK = [
-  { label: "Vote",     reward: "+15 AGCc", to: "/nominees", icon: Vote },
+  { label: "Explore",  reward: "+15 AGCc", to: "/nominees", icon: Vote },
   { label: "Share",    reward: "+20 AGCc", to: "/nominees", icon: Share2 },
   { label: "Invite",   reward: "+1 AGC",   to: "/dashboard", icon: Users },
   { label: "Nominate", reward: "+3 AGC",   to: "/nominate", icon: Star },
@@ -200,7 +200,7 @@ export function MobileAGCWallet() {
       </div>
 
       {/* ===== Sticky "Earn AGC" bottom strip (subtle, full-width) ===== */}
-      {!open && (
+      {!open && user && (
         <Link
           to={user ? "/earn-agc" : "/auth/register"}
           aria-label="Earn AGC"
