@@ -197,6 +197,7 @@ import TierCategorySubcategoryPage from "./pages/awards/TierCategorySubcategoryP
 import TierClusterPage from "./pages/awards/cluster/TierClusterPage";
 import RecognitionHubPage from "./pages/recognition/RecognitionHubPage";
 import AwardSubpageRoute from "./pages/recognition/AwardSubpageRoute";
+import AwardLandingPagesIndex from "./pages/recognition/AwardLandingPagesIndex";
 import CategoryPage2026 from "./components/recognition2026/CategoryPage";
 import RedirectRoute from "./components/routing/RedirectRoute";
 import LegacyCategoryRedirect from "./components/routing/LegacyCategoryRedirect";
