@@ -65,17 +65,10 @@ function useAGCWallet() {
         .eq("account_id", account.id)
         .maybeSingle();
 
-      // Count votes used this season
-      const { count: votesUsed } = await supabase
-        .from("votes")
-        .select("*", { count: "exact", head: true })
-        .eq("voter_id", user.id);
-
       return {
         accountId: account.id,
         balanceAgcc: balance?.balance_agcc ?? 0,
         balanceAgc: Number(balance?.balance_agc ?? 0),
-        votesUsed: votesUsed ?? 0,
       };
     },
     enabled: !!user,

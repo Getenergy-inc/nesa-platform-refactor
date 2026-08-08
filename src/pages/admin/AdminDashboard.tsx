@@ -243,35 +243,11 @@ export default function AdminDashboard() {
     setAmbassadors(ambassadors);
   };
 
-  const loadVoteLogs = async (page: number) => {
-    const limit = 20;
-    const offset = (page - 1) * limit;
-
-    const { data, count } = await supabase
-      .from("votes")
-      .select(`
-        id,
-        voter_id,
-        nominee_id,
-        vote_type,
-        created_at,
-        nominees!inner(name)
-      `, { count: "exact" })
-      .order("created_at", { ascending: false })
-      .range(offset, offset + limit - 1);
-
-    const logs: VoteLog[] = (data ?? []).map(v => ({
-      id: v.id,
-      voter_id: v.voter_id,
-      nominee_id: v.nominee_id,
-      nominee_name: (v.nominees as any)?.name ?? 'Unknown',
-      vote_type: v.vote_type,
-      created_at: v.created_at!,
-    }));
-
-    setVoteLogs(logs);
-    setVoteLogsPage(page);
-    setVoteLogsTotalPages(Math.ceil((count ?? 0) / limit));
+  const loadVoteLogs = async (_page: number) => {
+    // Public voting has been retired — no vote logs exist.
+    setVoteLogs([]);
+    setVoteLogsPage(1);
+    setVoteLogsTotalPages(1);
   };
 
   const loadRevenueSplits = async () => {
