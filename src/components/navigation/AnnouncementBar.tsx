@@ -38,8 +38,9 @@ export function AnnouncementBar() {
   };
 
   const inner = (
-    <span className="truncate">{current.text}</span>
+    <span className="block truncate max-w-full">{current.text}</span>
   );
+
 
   return (
     <div
