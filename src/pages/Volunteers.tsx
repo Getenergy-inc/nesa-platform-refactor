@@ -231,11 +231,12 @@ export default function Volunteers() {
           <CounterCard label="Tasks Done" value={stats.tasks} icon={Sparkles} />
         </div>
         <p className="mt-3 text-center text-[11px] text-white/40">
-          Live counts from the verified volunteer, judge, NRC and chapter records. People are
-          de-duplicated by name across roles (known interim limitation: the role records share no
-          common person identifier yet). A person holding two roles shows one card under their volunteer
-          role; NRC members are counted but not listed individually.
+          Live counts from the verified volunteer, judge, NRC and chapter records. Volunteer, judge
+          and NRC roles can coexist under one person record, so someone holding several roles is
+          counted once and shown on a single card carrying all of their role badges. NRC members are
+          counted and badged, but not listed individually by name.
         </p>
+
       </section>
 
       {/* FEATURED */}
