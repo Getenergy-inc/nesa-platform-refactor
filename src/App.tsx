@@ -132,7 +132,6 @@ import SCEF from "./pages/about/SCEF";
 import Awards from "./pages/Awards";
 import Impact from "./pages/Impact";
 import Videos from "./pages/Videos";
-import EarnVotingCoins from "./pages/EarnVotingCoins";
 
 // Award Pages
 import PlatinumAward from "./pages/awards/PlatinumAward";
@@ -320,7 +319,6 @@ import {
   ImpactStorytelling,
 } from "./pages/guidelines";
 import { VOTING_SUNSET_REDIRECT } from "./config/featureFlags";
-import AboutAGC from "./pages/AboutAGC";
 import Trending from "./pages/Trending";
 import Tickets from "./pages/Tickets";
 import BuyYourTicket from "./pages/BuyYourTicket";
@@ -489,17 +487,10 @@ const App = () => (
                     }
                   />
 
-                  {/* AGC — Afri-Gold Coin Rewards */}
-                  <Route
-                    path="/earn-agc"
-                    element={
-                      <WithLayout>
-                        <EarnVotingCoins />
-                      </WithLayout>
-                    }
-                  />
-                  <Route path="/agc-rewards" element={<Navigate to="/earn-agc" replace />} />
-                  <Route path="/earn-voting-coins" element={<Navigate to="/earn-agc" replace />} />
+                  {/* Retired AGC/voting-credit surfaces → GFAwzip Wallet */}
+                  <Route path="/earn-agc" element={<Navigate to="/wallet/gfawzip" replace />} />
+                  <Route path="/agc-rewards" element={<Navigate to="/wallet/gfawzip" replace />} />
+                  <Route path="/earn-voting-coins" element={<Navigate to="/wallet/gfawzip" replace />} />
 
                   {/* === 301 LEGACY REDIRECTS === */}
                   {/* Auth legacy */}
@@ -567,7 +558,7 @@ const App = () => (
                   <Route path="/music" element={<Navigate to="/media" replace />} />
                   <Route path="/media/nesa-tv" element={<Navigate to="/media/tv" replace />} />
                   <Route path="/dashboard/wallet" element={<Navigate to="/wallet" replace />} />
-                  <Route path="/earn-credits" element={<Navigate to="/earn-agc" replace />} />
+                  <Route path="/earn-credits" element={<Navigate to="/wallet/gfawzip" replace />} />
                   <Route path="/volunteer-bod" element={<Navigate to="/volunteer" replace />} />
                   <Route path="/policies/coi" element={<Navigate to="/policies" replace />} />
                   <Route path="/policies/privacy" element={<Navigate to="/policies" replace />} />
@@ -1864,16 +1855,9 @@ const App = () => (
                   <Route path="/vote-with-agc" element={<Navigate to={VOTING_SUNSET_REDIRECT} replace />} />
                   <Route path="/vote/gold" element={<Navigate to={VOTING_SUNSET_REDIRECT} replace />} />
                   <Route path="/vote/blue-garnet" element={<Navigate to={VOTING_SUNSET_REDIRECT} replace />} />
-                  <Route
-                    path="/about-agc"
-                    element={
-                      <WithLayout>
-                        <AboutAGC />
-                      </WithLayout>
-                    }
-                  />
-                  <Route path="/earn-voting-credits" element={<Navigate to="/earn-agc" replace />} />
-                  <Route path="/claim-voting-credits" element={<Navigate to="/earn-agc" replace />} />
+                  <Route path="/about-agc" element={<Navigate to="/wallet/gfawzip" replace />} />
+                  <Route path="/earn-voting-credits" element={<Navigate to="/wallet/gfawzip" replace />} />
+                  <Route path="/claim-voting-credits" element={<Navigate to="/wallet/gfawzip" replace />} />
                   <Route
                     path="/gfawzip"
                     element={

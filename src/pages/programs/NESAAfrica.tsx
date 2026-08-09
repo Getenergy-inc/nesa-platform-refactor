@@ -13,7 +13,6 @@ import { LazySection } from "@/components/ui/lazy-section";
 import { ScrollProgressIndicator } from "@/components/nesa/ScrollProgressIndicator";
 
 // Lazy load below-fold sections
-const VoteWithAGCSection = lazy(() => import("@/components/nesa/VoteWithAGCSection").then(m => ({ default: m.VoteWithAGCSection })));
 const HowItWorksVisual = lazy(() => import("@/components/nesa/HowItWorksVisual").then(m => ({ default: m.HowItWorksVisual })));
 const LegacyImpactSection = lazy(() => import("@/components/nesa/LegacyImpactSection").then(m => ({ default: m.LegacyImpactSection })));
 const IntegritySection = lazy(() => import("@/components/nesa/IntegritySection").then(m => ({ default: m.IntegritySection })));
@@ -62,11 +61,6 @@ export default function NESAAfrica() {
         {/* How It Works */}
         <LazySection>
           <HowItWorksVisual />
-        </LazySection>
-        
-        {/* AGC Voting System */}
-        <LazySection>
-          <VoteWithAGCSection />
         </LazySection>
         
         {/* Integrity & Governance */}
