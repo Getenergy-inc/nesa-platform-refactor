@@ -1090,6 +1090,20 @@ const App = () => (
                   <Route path="/recognition/pages" element={<WithLayout><AwardLandingPagesIndex /></WithLayout>} />
                   <Route path="/recognition/subpage/:slug" element={<WithLayout><AwardSubpageRoute /></WithLayout>} />
 
+                  {/* Progressive-disclosure layer (src/config/brandHierarchy.ts):
+                      unified Education Impact Certificates door, the six
+                      indexable recognition-family pages, and the full catalogue. */}
+                  <Route path="/recognition/certificates" element={<WithLayout><EducationImpactCertificatesPage /></WithLayout>} />
+                  <Route path="/recognition/categories" element={<WithLayout><AllRecognitionCategoriesPage /></WithLayout>} />
+                  {RECOGNITION_FAMILIES.filter((f) => f.slug !== "influencer-education-impact").map((f) => (
+                    <Route
+                      key={f.slug}
+                      path={`/recognition/${f.slug}`}
+                      element={<WithLayout><RecognitionFamilyPage slugOverride={f.slug} /></WithLayout>}
+                    />
+                  ))}
+
+
                   {/* 18 dedicated category pages — unified renderer driven by src/config/recognition2026 */}
                   <Route path="/recognition/:tier/:category" element={<WithLayout><CategoryPage2026 /></WithLayout>} />
 
