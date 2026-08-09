@@ -16,6 +16,7 @@ import {
 } from "@/components/ui/select";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useVolunteers } from "@/hooks/useVolunteers";
+import { useGlobalTeamStats, formatStat } from "@/hooks/useGlobalTeamStats";
 import { TEAM_LABELS, type TeamSlug, tierFor, TIER_LABEL } from "@/lib/volunteersData";
 
 const fadeUp = {
@@ -24,6 +25,16 @@ const fadeUp = {
   viewport: { once: true, margin: "-60px" },
   transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] as const },
 };
+
+const ROLE_LABELS: Record<string, string> = {
+  volunteer: "Volunteer",
+  judge: "Judge",
+  nrc: "NRC Member",
+  leadership: "Team Leadership",
+  other: "Other",
+};
+
+const LEADERSHIP_TEAMS = new Set(["chapters", "ambassadors", "partnerships"]);
 
 function CounterCard({ label, value, icon: Icon }: { label: string; value: number | string; icon: typeof Users }) {
   return (
@@ -39,38 +50,110 @@ function CounterCard({ label, value, icon: Icon }: { label: string; value: numbe
 
 export default function Volunteers() {
   const { volunteers, loading } = useVolunteers();
+  const team_stats = useGlobalTeamStats();
   const [q, setQ] = useState("");
   const [country, setCountry] = useState<string>("all");
+  const [region, setRegion] = useState<string>("all");
+  const [role, setRole] = useState<string>("all");
   const [team, setTeam] = useState<string>("all");
   const [status, setStatus] = useState<"all" | "public" | "alumni">("all");
 
+  // Unified people list: volunteers (DB + published roster) merged with the
+  // public judge roster from useGlobalTeamStats. NRC members are counted only —
+  // `nrc_members` exposes no public name column, so they cannot be listed.
+  type Person = {
+    key: string;
+    name: string;
+    photoUrl?: string | null;
+    roleKey: keyof typeof ROLE_LABELS;
+    roleLabel: string;
+    country?: string | null;
+    regionName?: string | null;
+    href?: string;
+    score: number | null;
+    verified: boolean;
+    visibility: string;
+    teamSlug?: string;
+    searchText: string;
+  };
+
+  const people = useMemo<Person[]>(() => {
+    const seen = new Set<string>();
+    const out: Person[] = [];
+
+    for (const v of volunteers) {
+      const key = v.fullName.trim().toLowerCase();
+      seen.add(key);
+      const roleKey = v.teamSlug && LEADERSHIP_TEAMS.has(v.teamSlug) ? "leadership" : "volunteer";
+      out.push({
+        key: `v-${v.id}`,
+        name: v.fullName,
+        photoUrl: v.photoUrl,
+        roleKey,
+        roleLabel: v.teamSlug ? TEAM_LABELS[v.teamSlug] : v.role || ROLE_LABELS[roleKey],
+        country: v.country,
+        regionName: v.region,
+        href: `/volunteers/${v.slug}`,
+        score: v.contributionScore,
+        verified: v.badges.includes("verified"),
+        visibility: v.visibility,
+        teamSlug: v.teamSlug,
+        searchText: `${v.fullName} ${v.role ?? ""} ${v.country ?? ""} ${v.headline ?? ""}`.toLowerCase(),
+      });
+    }
+
+    // Dedupe across role tables on normalised full name (interim key — the
+    // role tables share no stable person identifier today).
+    for (const j of team_stats.judgeList) {
+      const key = j.name.trim().toLowerCase();
+      if (seen.has(key)) continue;
+      seen.add(key);
+      out.push({
+        key: `j-${j.id}`,
+        name: j.name,
+        photoUrl: j.photoUrl,
+        roleKey: "judge",
+        roleLabel: j.title || "Judge",
+        country: j.country,
+        regionName: j.region,
+        href: j.slug ? `/judges/${j.slug}` : undefined,
+        score: null,
+        verified: true,
+        visibility: "public",
+        searchText: `${j.name} ${j.title ?? ""} ${j.country ?? ""}`.toLowerCase(),
+      });
+    }
+
+    return out;
+  }, [volunteers, team_stats.judgeList]);
+
   const countries = useMemo(
-    () => Array.from(new Set(volunteers.map((v) => v.country).filter(Boolean))).sort() as string[],
-    [volunteers]
+    () => Array.from(new Set(people.map((p) => p.country).filter(Boolean))).sort() as string[],
+    [people]
+  );
+
+  const regions = useMemo(
+    () => Array.from(new Set(people.map((p) => p.regionName).filter(Boolean))).sort() as string[],
+    [people]
   );
 
   const filtered = useMemo(() => {
-    return volunteers.filter((v) => {
-      if (status !== "all" && v.visibility !== status) return false;
-      if (country !== "all" && v.country !== country) return false;
-      if (team !== "all" && v.teamSlug !== team) return false;
-      if (q) {
-        const needle = q.toLowerCase();
-        if (!`${v.fullName} ${v.role ?? ""} ${v.country ?? ""} ${v.headline ?? ""}`.toLowerCase().includes(needle))
-          return false;
-      }
+    return people.filter((p) => {
+      if (status !== "all" && p.visibility !== status) return false;
+      if (country !== "all" && p.country !== country) return false;
+      if (region !== "all" && p.regionName !== region) return false;
+      if (role !== "all" && p.roleKey !== role) return false;
+      if (team !== "all" && p.teamSlug !== team) return false;
+      if (q && !p.searchText.includes(q.toLowerCase())) return false;
       return true;
     });
-  }, [volunteers, q, country, team, status]);
+  }, [people, q, country, region, role, team, status]);
 
   const stats = useMemo(() => ({
-    total: volunteers.length,
-    countries: countries.length,
-    chapters: 10, // hub regions
     tasks: volunteers.reduce((s, v) => s + v.tasksCompleted, 0),
     referrals: volunteers.reduce((s, v) => s + v.referralCount, 0),
     hours: volunteers.length * 12,
-  }), [volunteers, countries.length]);
+  }), [volunteers]);
 
   const featured = useMemo(
     () => volunteers.filter((v) => v.isFeatured || v.contributionScore > 800).slice(0, 6),
@@ -80,7 +163,7 @@ export default function Volunteers() {
   return (
     <div className="min-h-screen bg-charcoal pb-24">
       <Helmet>
-        <title>Meet Our Volunteers — NESA-Africa</title>
+        <title>Global Volunteer Team — NESA-Africa</title>
         <meta name="description" content="Celebrating the volunteers, ambassadors, technologists, designers, and storytellers powering NESA-Africa across the continent and the diaspora." />
       </Helmet>
 
@@ -95,8 +178,11 @@ export default function Volunteers() {
               <Heart className="h-3 w-3 mr-1" /> Volunteer Ecosystem
             </Badge>
             <h1 className="font-playfair text-4xl md:text-6xl text-gold font-bold mb-5 leading-tight">
-              Meet Our Volunteers
+              Global Volunteer Team
             </h1>
+            <p className="font-playfair text-2xl md:text-3xl text-ivory mb-4">
+              {formatStat(team_stats.people)} People
+            </p>
             <p className="text-base md:text-lg text-white/80 max-w-3xl mx-auto leading-relaxed">
               Celebrating the contributors building Africa's education movement through technology,
               storytelling, data, media, partnerships, design, and community action.
@@ -119,13 +205,18 @@ export default function Volunteers() {
       {/* STATS */}
       <section className="container mx-auto px-4 -mt-10 relative z-10">
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3 md:gap-4">
-          <CounterCard label="Volunteers" value={stats.total} icon={Users} />
-          <CounterCard label="Countries" value={stats.countries} icon={Globe2} />
-          <CounterCard label="Chapters" value={stats.chapters} icon={MapPin} />
-          <CounterCard label="Tasks Done" value={stats.tasks} icon={BadgeCheck} />
-          <CounterCard label="Referrals" value={stats.referrals} icon={Share2} />
-          <CounterCard label="Hours" value={`${stats.hours}+`} icon={Sparkles} />
+          <CounterCard label="Volunteers" value={formatStat(team_stats.volunteers)} icon={Users} />
+          <CounterCard label="Judges" value={formatStat(team_stats.judges)} icon={ShieldCheck} />
+          <CounterCard label="NRC Members" value={formatStat(team_stats.nrcMembers)} icon={BadgeCheck} />
+          <CounterCard label="Countries" value={formatStat(team_stats.countries)} icon={Globe2} />
+          <CounterCard label="Active Chapters" value={formatStat(team_stats.activeChapters)} icon={MapPin} />
+          <CounterCard label="Tasks Done" value={stats.tasks} icon={Sparkles} />
         </div>
+        <p className="mt-3 text-center text-[11px] text-white/40">
+          Live counts from the verified volunteer, judge, NRC and chapter records. People are
+          de-duplicated by name across roles (known interim limitation: the role records share no
+          common person identifier yet). NRC members are counted but not listed individually.
+        </p>
       </section>
 
       {/* FEATURED */}
@@ -165,9 +256,9 @@ export default function Volunteers() {
       {/* FILTERS + DIRECTORY */}
       <section className="container mx-auto px-4 mt-16">
         <motion.div {...fadeUp}>
-          <h2 className="font-playfair text-2xl md:text-3xl text-gold mb-4">Volunteer Directory</h2>
+          <h2 className="font-playfair text-2xl md:text-3xl text-gold mb-4">Global Volunteer Team Directory</h2>
 
-          <div className="grid grid-cols-1 md:grid-cols-[1fr_auto_auto_auto] gap-3 mb-4">
+          <div className="grid grid-cols-1 md:grid-cols-[1fr_auto_auto_auto_auto_auto] gap-3 mb-4">
             <div className="relative">
               <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gold/60" />
               <Input
@@ -177,6 +268,26 @@ export default function Volunteers() {
                 className="pl-9 bg-black/40 border-gold/30 text-white placeholder:text-white/40"
               />
             </div>
+            <Select value={role} onValueChange={setRole}>
+              <SelectTrigger className="w-full md:w-44 bg-black/40 border-gold/30 text-white">
+                <SelectValue placeholder="Role" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="all">All roles</SelectItem>
+                {Object.entries(ROLE_LABELS).map(([k, label]) => (
+                  <SelectItem key={k} value={k}>{label}</SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+            <Select value={region} onValueChange={setRegion}>
+              <SelectTrigger className="w-full md:w-44 bg-black/40 border-gold/30 text-white">
+                <SelectValue placeholder="Region" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="all">All regions</SelectItem>
+                {regions.map((r) => <SelectItem key={r} value={r}>{r}</SelectItem>)}
+              </SelectContent>
+            </Select>
             <Select value={country} onValueChange={setCountry}>
               <SelectTrigger className="w-full md:w-44 bg-black/40 border-gold/30 text-white">
                 <SelectValue placeholder="Country" />
@@ -209,49 +320,52 @@ export default function Volunteers() {
           {loading ? (
             <div className="text-white/60 text-sm py-12 text-center">Loading volunteers…</div>
           ) : filtered.length === 0 ? (
-            <div className="text-white/60 text-sm py-12 text-center">No volunteers match these filters.</div>
+            <div className="text-white/60 text-sm py-12 text-center">No team members match these filters.</div>
           ) : (
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
-              {filtered.map((v) => {
-                const tier = tierFor(v.contributionScore);
+              {filtered.map((p) => {
+                const tier = p.score !== null ? tierFor(p.score) : null;
+                const card = (
+                  <Card className="group h-full border-gold/20 bg-gradient-to-br from-charcoal to-black overflow-hidden hover:border-gold/60 hover:shadow-[0_8px_30px_rgb(212,175,55,0.15)] transition">
+                    <div className="aspect-[4/3] bg-gold/10 overflow-hidden">
+                      {p.photoUrl ? (
+                        <img src={p.photoUrl} alt={p.name}
+                             className="h-full w-full object-cover group-hover:scale-105 transition duration-700" loading="lazy" />
+                      ) : (
+                        <div className="h-full w-full flex items-center justify-center text-gold/30">
+                          <Users className="h-16 w-16" />
+                        </div>
+                      )}
+                    </div>
+                    <div className="p-4">
+                      <div className="flex items-start justify-between gap-2">
+                        <div className="min-w-0">
+                          <div className="font-medium text-white truncate">{p.name}</div>
+                          <div className="text-[11px] text-gold/80 uppercase tracking-wider truncate">
+                            {p.roleLabel}
+                          </div>
+                        </div>
+                        {p.verified && <BadgeCheck className="h-4 w-4 text-gold shrink-0" />}
+                      </div>
+                      {p.country && (
+                        <div className="flex items-center gap-1 text-xs text-white/50 mt-1.5">
+                          <MapPin className="h-3 w-3" /> {p.country}
+                        </div>
+                      )}
+                      <div className="mt-3 flex items-center justify-between border-t border-gold/10 pt-2.5">
+                        <span className="text-[10px] text-white/60">
+                          {tier ? TIER_LABEL[tier] : ROLE_LABELS[p.roleKey]}
+                        </span>
+                        {p.score !== null && (
+                          <span className="text-xs font-mono text-gold">{p.score}</span>
+                        )}
+                      </div>
+                    </div>
+                  </Card>
+                );
                 return (
-                  <motion.div key={v.id} {...fadeUp}>
-                    <Link to={`/volunteers/${v.slug}`}>
-                      <Card className="group h-full border-gold/20 bg-gradient-to-br from-charcoal to-black overflow-hidden hover:border-gold/60 hover:shadow-[0_8px_30px_rgb(212,175,55,0.15)] transition">
-                        <div className="aspect-[4/3] bg-gold/10 overflow-hidden">
-                          {v.photoUrl ? (
-                            <img src={v.photoUrl} alt={v.fullName}
-                                 className="h-full w-full object-cover group-hover:scale-105 transition duration-700" loading="lazy" />
-                          ) : (
-                            <div className="h-full w-full flex items-center justify-center text-gold/30">
-                              <Users className="h-16 w-16" />
-                            </div>
-                          )}
-                        </div>
-                        <div className="p-4">
-                          <div className="flex items-start justify-between gap-2">
-                            <div className="min-w-0">
-                              <div className="font-medium text-white truncate">{v.fullName}</div>
-                              <div className="text-[11px] text-gold/80 uppercase tracking-wider truncate">
-                                {v.teamSlug ? TEAM_LABELS[v.teamSlug] : v.role}
-                              </div>
-                            </div>
-                            {v.badges.includes("verified") && (
-                              <BadgeCheck className="h-4 w-4 text-gold shrink-0" />
-                            )}
-                          </div>
-                          {v.country && (
-                            <div className="flex items-center gap-1 text-xs text-white/50 mt-1.5">
-                              <MapPin className="h-3 w-3" /> {v.country}
-                            </div>
-                          )}
-                          <div className="mt-3 flex items-center justify-between border-t border-gold/10 pt-2.5">
-                            <span className="text-[10px] text-white/60">{TIER_LABEL[tier]}</span>
-                            <span className="text-xs font-mono text-gold">{v.contributionScore}</span>
-                          </div>
-                        </div>
-                      </Card>
-                    </Link>
+                  <motion.div key={p.key} {...fadeUp}>
+                    {p.href ? <Link to={p.href}>{card}</Link> : card}
                   </motion.div>
                 );
               })}

@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import { Users, Globe2, ArrowRight, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { supabase } from "@/integrations/supabase/client";
-import { useGlobalTeamStats } from "@/hooks/useGlobalTeamStats";
+import { useGlobalTeamStats, formatStat } from "@/hooks/useGlobalTeamStats";
 import { STATIC_VOLUNTEERS } from "@/lib/volunteersData";
 
 
@@ -78,13 +78,12 @@ export function PoweredByVolunteersSection() {
         </motion.div>
 
         {/* Verified stats only — hide the row entirely when we have no verified counts */}
-        {(stats.count > 0 || vols.length > 0) && (
+        {(teamStats.loading || stats.count !== null || vols.length > 0) && (
           <div className="grid grid-cols-2 gap-3 md:gap-6 mb-12 max-w-2xl mx-auto">
             {[
-              { icon: Users, label: "Verified Volunteers", value: stats.count || vols.length },
+              { icon: Users, label: "Verified Volunteers", value: stats.count },
               { icon: Globe2, label: "Countries", value: stats.countries },
             ]
-              .filter((s) => Number(s.value) > 0)
               .map((s, i) => (
                 <motion.div
                   key={s.label}
@@ -95,7 +94,7 @@ export function PoweredByVolunteersSection() {
                   className="rounded-xl border border-gold/20 bg-white/5 p-4 md:p-6 text-center backdrop-blur"
                 >
                   <s.icon className="h-5 w-5 text-gold mx-auto mb-2" />
-                  <div className="font-playfair text-2xl md:text-3xl text-gold">{s.value}</div>
+                  <div className="font-playfair text-2xl md:text-3xl text-gold">{formatStat(s.value)}</div>
                   <div className="text-xs text-white/60 uppercase tracking-wider mt-1">{s.label}</div>
                 </motion.div>
               ))}
