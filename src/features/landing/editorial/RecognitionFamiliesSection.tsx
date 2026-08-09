@@ -3,7 +3,7 @@
 // deeper at /recognition/categories (progressive disclosure).
 
 import { Link } from "react-router-dom";
-import { RECOGNITION_FAMILIES } from "@/config/brandHierarchy";
+import { RECOGNITION_FAMILIES, BRAND } from "@/config/brandHierarchy";
 
 export function RecognitionFamiliesSection() {
   return (
@@ -12,13 +12,15 @@ export function RecognitionFamiliesSection() {
         <div className="ed-section-head">
           <div className="ed-eyebrow">Education Impact Certificates</div>
           <h2 id="ed-families-heading" className="ed-section-title">
-            Six Ways We Recognise Education Impact
+            One Continental Mission. Six Recognition Pathways.
           </h2>
           <p className="ed-section-sub">
-            Six recognition families under one umbrella programme — The African Blue-Garnet
-            Awards for Education.
+            The {BRAND.flagship} is NESA-Africa&apos;s flagship lifetime recognition, supported by
+            six Certificates of Recognition celebrating different forms of education-enabling
+            impact.
           </p>
         </div>
+
 
         <div className="ed-grid-3">
           {RECOGNITION_FAMILIES.map((f) => (
@@ -46,7 +48,7 @@ export function RecognitionFamiliesSection() {
                   to={`/recognition/${f.slug}`}
                   className="inline-flex h-9 items-center rounded-full border border-white/15 px-4 text-xs font-semibold text-white/80 hover:border-gold/40 hover:text-gold transition-colors"
                 >
-                  About This Award Category
+                  Explore {f.name} →
                 </Link>
               </div>
             </article>
