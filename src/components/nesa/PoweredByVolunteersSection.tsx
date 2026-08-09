@@ -4,6 +4,9 @@ import { motion } from "framer-motion";
 import { Users, Globe2, ArrowRight, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { supabase } from "@/integrations/supabase/client";
+import { useGlobalTeamStats } from "@/hooks/useGlobalTeamStats";
+import { STATIC_VOLUNTEERS } from "@/lib/volunteersData";
+
 
 type V = {
   id: string;
@@ -17,7 +20,8 @@ type V = {
 
 export function PoweredByVolunteersSection() {
   const [vols, setVols] = useState<V[]>([]);
-  const [stats, setStats] = useState({ count: 0, countries: 0 });
+  const teamStats = useGlobalTeamStats();
+  const stats = { count: teamStats.people, countries: teamStats.countries };
 
   useEffect(() => {
     (async () => {
@@ -28,17 +32,25 @@ export function PoweredByVolunteersSection() {
         .eq("verification_status", "approved")
         .order("contribution_score", { ascending: false })
         .limit(12);
-      setVols((data || []) as V[]);
-
-      const { count } = await supabase
-        .from("volunteers")
-        .select("id", { count: "exact", head: true })
-        .eq("visibility_status", "public")
-        .eq("verification_status", "approved");
-      const countries = new Set((data || []).map((v: any) => v.country).filter(Boolean)).size;
-      setStats({ count: count || 0, countries });
+      const rows = (data || []) as V[];
+      setVols(
+        rows.length
+          ? rows
+          : STATIC_VOLUNTEERS.filter((v) => v.visibility === "public")
+              .slice(0, 12)
+              .map((v) => ({
+                id: v.id,
+                slug: v.slug,
+                full_name: v.fullName,
+                photo_url: v.photoUrl ?? null,
+                country: v.country ?? null,
+                role: v.role ?? null,
+                team_slug: v.teamSlug ?? null,
+              }))
+      );
     })();
   }, []);
+
 
   return (
     <section className="relative py-20 px-4 bg-gradient-to-b from-charcoal via-charcoal to-black overflow-hidden">
