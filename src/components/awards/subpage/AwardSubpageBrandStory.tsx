@@ -222,7 +222,7 @@ export function AwardPathwaysGrid({
               </div>
               <div className="flex flex-1 flex-col p-5">
                 <h3 className="font-playfair text-lg text-white">{p.name}</h3>
-                <p className="mt-2 flex-1 text-sm text-white/75">{p.description}</p>
+                <LeadCopy text={p.description} className="mt-2 flex-1 text-sm text-white/75" />
                 {p.evidence ? (
                   <p className="mt-3 flex items-start gap-2 text-xs text-white/55">
                     <ShieldCheck className="mt-0.5 h-3.5 w-3.5 flex-none text-gold" aria-hidden />
