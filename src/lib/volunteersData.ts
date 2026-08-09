@@ -36,6 +36,8 @@ export interface VolunteerSocialLinks {
 
 export interface Volunteer {
   id: string;
+  /** Shared cross-role person key (volunteers/judges/nrc_members). Absent for static roster entries. */
+  personId?: string;
   slug: string;
   fullName: string;
   photoUrl?: string;
