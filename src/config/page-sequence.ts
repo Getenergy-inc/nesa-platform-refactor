@@ -37,13 +37,16 @@ export const PAGE_SEQUENCE: PageEntry[] = [
   { path: "/chapters", label: "Local Chapters & Volunteers", section: "Participate" },
   { path: "/vacancies", label: "Join Our Team", section: "Participate" },
 
-  // Regions & Impact
+  // Regions & Education Social Impact
   { path: "/regions", label: "Regions", section: "Impact" },
-  { path: "/impact", label: "Impact Programmes Hub", section: "Impact" },
+  { path: "/impact", label: "Education Social Impact Overview", section: "Impact" },
+  { path: "/eduaid-africa/rebuild-my-school", label: "Rebuild My School Africa", section: "Impact" },
+  { path: "/impact/special-needs-schools", label: "Support a Special-Needs School", section: "Impact" },
+  { path: "/impact/regional", label: "Regional School Interventions", section: "Impact" },
+  { path: "/afri-edutourism", label: "Afri-EduTourism 2027", section: "Impact" },
+  { path: "/impact/reports", label: "Impact Reports", section: "Impact" },
+  { path: "/impact/stories", label: "Impact Stories & Media", section: "Impact" },
   { path: "/eduaid-africa", label: "EduAid-Africa", section: "Impact" },
-  { path: "/rebuild-my-school", label: "Rebuild My School Africa", section: "Impact" },
-  { path: "/special-needs", label: "Special Needs Education", section: "Impact" },
-  { path: "/afri-edutourism", label: "Afri-EduTourism", section: "Impact" },
 
   // Media & Gala
   { path: "/media", label: "Media & Stories", section: "Media" },
