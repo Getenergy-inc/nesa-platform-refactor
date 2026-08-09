@@ -36,12 +36,24 @@ export default function EducationImpactCertificatesPage() {
             >
               <h2 className="font-display text-lg text-gold">{f.name}</h2>
               <p className="mt-2 flex-1 text-sm text-white/70">{f.lede}</p>
-              <div className="mt-5 flex flex-wrap gap-3 text-xs font-semibold">
-                <Link to={`/recognition/${f.slug}`} className="text-gold hover:underline">
-                  Explore Recognition →
+              <div className="mt-5 flex flex-wrap items-center gap-2">
+                <Link
+                  to={`/nominate?family=${f.slug}`}
+                  className="inline-flex h-9 items-center rounded-full bg-gold px-4 text-xs font-semibold text-charcoal hover:bg-gold/90 transition-colors"
+                >
+                  Nominate
                 </Link>
-                <Link to={`/nominees?family=${f.slug}`} className="text-white/70 hover:text-gold">
-                  Existing nominees →
+                <Link
+                  to={`/nominees?family=${f.slug}`}
+                  className="inline-flex h-9 items-center rounded-full border border-gold/40 px-4 text-xs font-semibold text-gold hover:bg-gold/10 transition-colors"
+                >
+                  Explore Existing Nominees
+                </Link>
+                <Link
+                  to={`/recognition/${f.slug}`}
+                  className="inline-flex h-9 items-center rounded-full border border-white/15 px-4 text-xs font-semibold text-white/80 hover:border-gold/40 hover:text-gold transition-colors"
+                >
+                  About This Award Category
                 </Link>
               </div>
             </article>

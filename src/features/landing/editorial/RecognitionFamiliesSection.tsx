@@ -29,9 +29,24 @@ export function RecognitionFamiliesSection() {
                 </Link>
               </h3>
               <p>{f.lede}</p>
-              <div className="ed-card-cta">
-                <Link to={`/recognition/${f.slug}`} className="ed-link-inline">
-                  Explore Recognition →
+              <div className="mt-4 flex flex-wrap items-center gap-2">
+                <Link
+                  to={`/nominate?family=${f.slug}`}
+                  className="inline-flex h-9 items-center rounded-full bg-gold px-4 text-xs font-semibold text-charcoal hover:bg-gold/90 transition-colors"
+                >
+                  Nominate
+                </Link>
+                <Link
+                  to={`/nominees?family=${f.slug}`}
+                  className="inline-flex h-9 items-center rounded-full border border-gold/40 px-4 text-xs font-semibold text-gold hover:bg-gold/10 transition-colors"
+                >
+                  Explore Existing Nominees
+                </Link>
+                <Link
+                  to={`/recognition/${f.slug}`}
+                  className="inline-flex h-9 items-center rounded-full border border-white/15 px-4 text-xs font-semibold text-white/80 hover:border-gold/40 hover:text-gold transition-colors"
+                >
+                  About This Award Category
                 </Link>
               </div>
             </article>
