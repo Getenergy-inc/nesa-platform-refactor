@@ -1,44 +1,77 @@
-// AboutCanonicalContent — verified canonical narrative block for /about.
-// Sourced from the approved "About NESA-Africa" master copy.
+// AboutCanonicalContent — canonical /about facts block.
+// Award-show density: one declarative line per idea, tables and stat callouts
+// instead of paragraph stacks. All governance / non-influence / no-public-voting
+// text below is protected and reproduced verbatim.
+
+const JOURNEY: [string, string][] = [
+  ["1997", "Founded as an educational tourism and cultural heritage vision, Minna, Niger State"],
+  ["2006", "Registered as a business name"],
+  ["2010", "Incorporated as an NGO — Santos Creations Educational Foundation (RC-41501)"],
+  ["2024", "New Education Standard Award Africa Ltd incorporated (RC-7381138)"],
+  ["2026", "NESA-Africa's inaugural public award cycle launches"],
+];
+
+const ARCHITECTURE: [string, string, string][] = [
+  ["Africa Education Icon Award (flagship)", "3 subcategories · 9 laureate positions", "NRC, Icon Jury, and Governance"],
+  ["Influencer Education Impact", "3 subcategories", "NRC and Governance"],
+  ["Platinum Certificates of Recognition", "7 categories · 27 subcategories", "Due diligence, NRC, and Governance"],
+  ["Gold-Blue Garnet Regional Certificates", "9 categories · 63 subcategories", "NRC and Governance"],
+];
+
+const REGIONS = [
+  "West Africa",
+  "East Africa",
+  "Central Africa",
+  "Southern Africa",
+  "North Africa",
+  "Horn of Africa",
+  "Sahel Region",
+  "Indian Ocean Islands",
+];
+
+const LEGAL: [string, string, string][] = [
+  ["Santos Creations Educational Foundation", "RC-41501", "28 October 2010"],
+  ["New Education Standard Award Africa Ltd", "RC-7381138", "4 March 2024"],
+  ["EduAid Africa Ltd", "RC-7736679", "22 July 2024"],
+  ["GFA Wzip Technology Limited", "RC-8755132", "28 August 2025"],
+];
+
+const BOARD = [
+  ["Dr. Martha R.L. Muhwezi", "Executive Director, Forum for African Women Educationalists (FAWE Africa)"],
+  ["Kossi Tsenou", "Senior Communications Officer, FAWE Africa Regional Secretariat"],
+  ["Jephthah Ighodaro", "Representative, Civil Society Action Coalition on Education for All (CSACEFA), Lagos Chapter"],
+  ["Folakemi Adesina, Barrister (Mrs.)", "Representative, CSACEFA Lagos Chapter"],
+];
+
+function H({ children }: { children: React.ReactNode }) {
+  return <h2 className="font-display text-3xl md:text-4xl text-gold">{children}</h2>;
+}
 
 export function AboutCanonicalContent() {
   return (
     <section
       aria-label="About NESA-Africa canonical overview"
-      className="bg-charcoal py-16 md:py-20 border-t border-gold/10"
+      className="bg-charcoal py-20 md:py-28 border-t border-gold/10"
     >
-      <div className="container mx-auto px-4 max-w-4xl space-y-10 text-ivory/90">
-        <div className="space-y-3">
-          <h2 className="font-display text-3xl md:text-4xl text-gold">Who We Are</h2>
-          <p>
-            <strong>New Education Standard Award Africa (NESA-Africa)</strong> — <em>The African
-            Blue-Garnet Awards for Education</em> — is a continental education recognition and
-            impact platform, a service of the <strong>Santos Creations Educational Foundation
-            (SCEF)</strong>.
-          </p>
-          <p>
-            NESA-Africa identifies, verifies, and recognises the{" "}
+      <div className="container mx-auto px-4 max-w-4xl space-y-20 text-ivory/90">
+        {/* WHO WE ARE — one statement */}
+        <div className="space-y-4">
+          <H>Who We Are</H>
+          <p className="text-xl md:text-2xl leading-snug text-ivory">
+            A continental education recognition and impact platform — a service of the{" "}
+            <strong>Santos Creations Educational Foundation (SCEF)</strong> — identifying, verifying
+            and recognising the{" "}
             <strong className="text-gold">
-              Enablers of Education for All across Africa — by Africans in Africa, Diaspora
-              Africans, and Friends of Africa
-            </strong>{" "}
-            (individuals, companies, or organisations).
+              Enablers of Education for All across Africa: Africans in Africa, Diaspora Africans,
+              and Friends of Africa
+            </strong>
+            .
           </p>
         </div>
 
-        <div className="space-y-3">
-          <h2 className="font-display text-3xl md:text-4xl text-gold">Our Story</h2>
-          <p>
-            From a 1997 vision for education and cultural heritage in Minna, Niger State, to a
-            registered Pan-African foundation, SCEF has spent nearly three decades building toward
-            Education for All across the continent. NESA-Africa itself launches its inaugural
-            public recognition cycle in 2026 — a new standard for verified, evidence-based
-            recognition across Africa.
-          </p>
-        </div>
-
-        <div className="space-y-3">
-          <h2 className="font-display text-3xl md:text-4xl text-gold">Our Journey</h2>
+        {/* JOURNEY */}
+        <div className="space-y-4">
+          <H>Our Journey</H>
           <div className="overflow-x-auto">
             <table className="w-full text-sm border border-gold/20">
               <thead className="bg-charcoal-light/40 text-gold">
@@ -48,13 +81,7 @@ export function AboutCanonicalContent() {
                 </tr>
               </thead>
               <tbody>
-                {[
-                  ["1997", "Founded as an educational tourism and cultural heritage vision, Minna, Niger State"],
-                  ["2006", "Registered as a business name"],
-                  ["2010", "Incorporated as an NGO — Santos Creations Educational Foundation (RC-41501)"],
-                  ["2024", "New Education Standard Award Africa Ltd incorporated (RC-7381138)"],
-                  ["2026", "NESA-Africa's inaugural public award cycle launches"],
-                ].map(([y, m]) => (
+                {JOURNEY.map(([y, m]) => (
                   <tr key={y} className="border-b border-gold/10">
                     <td className="p-3 text-gold font-semibold whitespace-nowrap">{y}</td>
                     <td className="p-3">{m}</td>
@@ -65,12 +92,24 @@ export function AboutCanonicalContent() {
           </div>
         </div>
 
-        <div className="space-y-3">
-          <h2 className="font-display text-3xl md:text-4xl text-gold">What We Recognise</h2>
-          <p>
-            <strong>Recognition Architecture at a Glance:</strong> Four tiers · Eighteen categories
-            · Ninety-six subcategories. Each category has its own nomination form, nominee type,
-            evidence requirements, and geographic classification.
+        {/* WHAT WE RECOGNISE */}
+        <div className="space-y-5">
+          <H>What We Recognise</H>
+          <div className="grid grid-cols-3 gap-3 text-center">
+            {[
+              ["4", "Tiers"],
+              ["18", "Categories"],
+              ["96", "Subcategories"],
+            ].map(([v, l]) => (
+              <div key={l} className="rounded-xl border border-gold/20 bg-white/[0.03] py-5">
+                <p className="font-mono text-3xl md:text-4xl text-gold">{v}</p>
+                <p className="text-xs uppercase tracking-[0.2em] text-ivory/60 mt-1">{l}</p>
+              </div>
+            ))}
+          </div>
+          <p className="text-ivory/75">
+            Each category has its own nomination form, nominee type, evidence requirements, and
+            geographic classification.
           </p>
           <div className="overflow-x-auto">
             <table className="w-full text-sm border border-gold/20">
@@ -82,12 +121,7 @@ export function AboutCanonicalContent() {
                 </tr>
               </thead>
               <tbody>
-                {[
-                  ["Africa Education Icon Award (flagship)", "3 subcategories · 9 laureate positions", "NRC, Icon Jury, and Governance"],
-                  ["Influencer Education Impact", "3 subcategories", "NRC and Governance"],
-                  ["Platinum Certificates of Recognition", "7 categories · 27 subcategories", "Due diligence, NRC, and Governance"],
-                  ["Gold-Blue Garnet Regional Certificates", "9 categories · 63 subcategories", "NRC and Governance"],
-                ].map(([t, s, r]) => (
+                {ARCHITECTURE.map(([t, s, r]) => (
                   <tr key={t} className="border-b border-gold/10">
                     <td className="p-3 text-gold">{t}</td>
                     <td className="p-3">{s}</td>
@@ -97,40 +131,53 @@ export function AboutCanonicalContent() {
               </tbody>
             </table>
           </div>
-          <p className="pt-2">
-            <strong className="text-gold">The Africa Education Icon Award</strong> — Lifetime
-            Achievement, evaluated across a rolling 2006–2026 window — recognises three pathways,
-            each once-in-a-lifetime:
+          <p>
+            <strong className="text-gold">Africa Education Icon Award</strong> — Lifetime
+            Achievement across a rolling 2006–2026 window. Three once-in-a-lifetime pathways:
           </p>
           <ul className="list-disc pl-6 space-y-1">
             <li><strong>Africa Education Philanthropy Icon</strong></li>
-            <li><strong>Literary & New Curriculum Advocate Icon</strong></li>
+            <li><strong>Literary &amp; New Curriculum Advocate Icon</strong></li>
             <li><strong>Africa Technical Educator Icon</strong></li>
           </ul>
           <p className="text-ivory/75 text-sm">
-            Nine Laureates are selected per cycle, drawn from 27 Grand Jury finalists — three per
+            Nine Laureates per cycle, drawn from 27 Grand Jury finalists — three per
             pathway-classification group.
           </p>
         </div>
 
-        <div className="space-y-3">
-          <h2 className="font-display text-3xl md:text-4xl text-gold">Our Reach</h2>
-          <p className="text-lg">
-            <strong>One continent · Eight African Regions · Two Global Communities</strong>
+        {/* REACH */}
+        <div className="space-y-5">
+          <H>Our Reach</H>
+          <p className="text-xl md:text-2xl text-ivory leading-snug">
+            One continent · Eight African Regions · Two Global Communities
           </p>
-          <p>
-            West Africa · East Africa · Central Africa · Southern Africa · North Africa · Horn of
-            Africa · Sahel Region · Indian Ocean Islands — connecting Education Enablers among{" "}
-            <strong className="text-gold">Diaspora Africans</strong> and through{" "}
-            <strong className="text-gold">Friends of Africa</strong>.
-          </p>
+          <div className="flex flex-wrap gap-2">
+            {REGIONS.map((r) => (
+              <span
+                key={r}
+                className="rounded-full border border-gold/25 bg-white/[0.03] px-4 py-1.5 text-sm text-ivory/85"
+              >
+                {r}
+              </span>
+            ))}
+            {["Diaspora Africans", "Friends of Africa"].map((r) => (
+              <span
+                key={r}
+                className="rounded-full border border-gold/50 bg-gold/10 px-4 py-1.5 text-sm text-gold font-medium"
+              >
+                {r}
+              </span>
+            ))}
+          </div>
         </div>
 
-        <div className="space-y-3">
-          <h2 className="font-display text-3xl md:text-4xl text-gold">How Recognition Works</h2>
+        {/* HOW RECOGNITION WORKS — protected text verbatim */}
+        <div className="space-y-4">
+          <H>How Recognition Works</H>
           <p>
             Every nomination is verified by the <strong>Nominee Research Corps (NRC)</strong> —
-            structured across Data Entry, Automated Review, and Human Review — using the{" "}
+            Data Entry, Automated Review, Human Review — using the{" "}
             <strong>Education Development Index (EDI) Matrix</strong>, a category-specific,
             weighted standard assessing access, quality, scale, inclusion, innovation,
             sustainability, evidence quality, partnerships, leadership integrity, and measurable
@@ -160,18 +207,20 @@ export function AboutCanonicalContent() {
           </p>
         </div>
 
-        <div className="space-y-3">
-          <h2 className="font-display text-3xl md:text-4xl text-gold">Governance</h2>
-          <p>
-            NESA-Africa operates under the <strong>Santos Creations Educational Foundation's Board
-            of Advisors</strong>, which oversees SCEF's full portfolio, including NESA-Africa and
-            EduAid-Africa. This Board includes confirmed civil-society representation:
+        {/* GOVERNANCE — protected COI text verbatim */}
+        <div className="space-y-4">
+          <H>Governance</H>
+          <p className="text-ivory/85">
+            NESA-Africa operates under SCEF's <strong>Board of Advisors</strong>, with confirmed
+            civil-society representation:
           </p>
-          <ul className="list-disc pl-6 space-y-1">
-            <li><strong>Dr. Martha R.L. Muhwezi</strong> — Executive Director, Forum for African Women Educationalists (FAWE Africa)</li>
-            <li><strong>Kossi Tsenou</strong> — Senior Communications Officer, FAWE Africa Regional Secretariat</li>
-            <li><strong>Jephthah Ighodaro</strong> — Representative, Civil Society Action Coalition on Education for All (CSACEFA), Lagos Chapter</li>
-            <li><strong>Folakemi Adesina, Barrister (Mrs.)</strong> — Representative, CSACEFA Lagos Chapter</li>
+          <ul className="space-y-2">
+            {BOARD.map(([name, role]) => (
+              <li key={name} className="border-l-2 border-gold/40 pl-4">
+                <span className="block text-ivory font-semibold">{name}</span>
+                <span className="block text-sm text-ivory/70">{role}</span>
+              </li>
+            ))}
           </ul>
           <p className="text-ivory/75 text-sm">
             All Board of Advisors members serve under SCEF's published Conflict of Interest Policy,
@@ -199,8 +248,9 @@ export function AboutCanonicalContent() {
           </div>
         </div>
 
-        <div className="space-y-3">
-          <h2 className="font-display text-3xl md:text-4xl text-gold">Legal & Registration</h2>
+        {/* LEGAL */}
+        <div className="space-y-4">
+          <H>Legal &amp; Registration</H>
           <div className="overflow-x-auto">
             <table className="w-full text-sm border border-gold/20">
               <thead className="bg-charcoal-light/40 text-gold">
@@ -211,12 +261,7 @@ export function AboutCanonicalContent() {
                 </tr>
               </thead>
               <tbody>
-                {[
-                  ["Santos Creations Educational Foundation", "RC-41501", "28 October 2010"],
-                  ["New Education Standard Award Africa Ltd", "RC-7381138", "4 March 2024"],
-                  ["EduAid Africa Ltd", "RC-7736679", "22 July 2024"],
-                  ["GFA Wzip Technology Limited", "RC-8755132", "28 August 2025"],
-                ].map(([e, rc, r]) => (
+                {LEGAL.map(([e, rc, r]) => (
                   <tr key={rc} className="border-b border-gold/10">
                     <td className="p-3">{e}</td>
                     <td className="p-3 text-gold whitespace-nowrap">{rc}</td>
@@ -228,19 +273,29 @@ export function AboutCanonicalContent() {
           </div>
         </div>
 
-        <div className="space-y-3">
-          <h2 className="font-display text-3xl md:text-4xl text-gold">The 2026 Inaugural Cycle</h2>
-          <p>
-            NESA-Africa's first public award cycle culminates in the{" "}
-            <strong className="text-gold">NESA-Africa 2026 Recognition Gala on 13 December 2026, Lagos, Nigeria</strong>.
-            A second cycle Gala follows in <strong>December 2027</strong> (exact date to be confirmed).
-          </p>
-        </div>
-
-        <div className="space-y-2">
-          <h2 className="font-display text-3xl md:text-4xl text-gold">Contact</h2>
-          <p>19 Godwin Okigbo Street, Marsha, Surulere, Lagos, Nigeria</p>
-          <p>+234 805 667 7770 · <a href="mailto:info@nesa.africa" className="text-gold underline">info@nesa.africa</a></p>
+        {/* CYCLE + CONTACT as stat callouts */}
+        <div className="grid md:grid-cols-2 gap-6">
+          <div className="rounded-2xl border border-gold/25 bg-white/[0.03] p-6">
+            <p className="text-xs uppercase tracking-[0.25em] text-ivory/55 mb-2">
+              2026 Inaugural Gala
+            </p>
+            <p className="font-mono text-2xl md:text-3xl text-gold">13 December 2026</p>
+            <p className="text-sm text-ivory/70 mt-2">
+              Lagos, Nigeria. Second cycle Gala follows in December 2027 (date to be confirmed).
+            </p>
+          </div>
+          <div className="rounded-2xl border border-gold/25 bg-white/[0.03] p-6">
+            <p className="text-xs uppercase tracking-[0.25em] text-ivory/55 mb-2">Contact</p>
+            <p className="text-sm text-ivory/85">
+              19 Godwin Okigbo Street, Marsha, Surulere, Lagos, Nigeria
+            </p>
+            <p className="text-sm text-ivory/85 mt-1">
+              +234 805 667 7770 ·{" "}
+              <a href="mailto:info@nesa.africa" className="text-gold underline">
+                info@nesa.africa
+              </a>
+            </p>
+          </div>
         </div>
       </div>
     </section>

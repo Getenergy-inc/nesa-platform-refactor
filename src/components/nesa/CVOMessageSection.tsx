@@ -161,47 +161,40 @@ export function CVOMessageSection() {
                 <span className="text-gold">Future Together</span>
               </h2>
 
-              <p className="mt-4 text-base md:text-lg text-white/70 leading-relaxed">
-                Education remains the greatest force for transforming lives,
-                communities, nations, and the future of our continent.
-              </p>
-
               {/* Pull-quote */}
               <div className="relative mt-8 pl-6 lg:pl-8 border-l-2 border-gold/60">
                 <Quote className="absolute -top-3 -left-3 h-6 w-6 text-gold/40 bg-charcoal px-0.5" aria-hidden="true" />
-                <blockquote className="text-lg md:text-xl text-white/95 leading-relaxed font-light italic">
-                  NESA-Africa is more than an award platform — it is a movement
-                  that turns <span className="text-gold not-italic font-medium">recognition</span> into{" "}
+                <blockquote className="text-xl md:text-2xl text-white/95 leading-snug font-light italic">
+                  NESA-Africa turns{" "}
+                  <span className="text-gold not-italic font-medium">recognition</span> into{" "}
                   <span className="text-gold not-italic font-medium">opportunity</span>, opportunity into{" "}
                   <span className="text-gold not-italic font-medium">transformation</span>, and transformation into{" "}
                   <span className="text-gold not-italic font-medium">legacy</span>.
                 </blockquote>
               </div>
 
-              {/* Why NESA-Africa was created */}
-              <div className="mt-8 space-y-4 text-white/80 leading-relaxed">
-                <p>
-                  For too long, Africa's educators, innovators, institutions,
-                  advocates, philanthropists, policymakers and community leaders
-                  have advanced education with little recognition beyond their
-                  immediate circles. Yet these are the people shaping the Africa
-                  we all desire — one learner, one classroom, one school at a time.
+              <div className="mt-8 text-white/80 leading-relaxed">
+                <p className="text-base md:text-lg">
+                  Africa's education enablers work largely unseen. We exist to change that.
                 </p>
-                <p>
-                  NESA-Africa was created to{" "}
-                  <span className="text-white font-medium">
-                    identify, celebrate, document, amplify and support
-                  </span>{" "}
-                  those changemakers. But recognition alone is not enough.
-                  That is why NESA-Africa was designed as part of a larger
-                  ecosystem under the stewardship of the{" "}
-                  <span className="text-gold font-medium">
-                    Santos Creations Educational Foundation (SCEF)
-                  </span>{" "}
-                  — connecting recognition to partnerships, partnerships to
-                  resources, and resources to measurable educational impact.
+                <ul className="mt-4 grid gap-2 text-sm md:text-base">
+                  {[
+                    "Identify and verify the people advancing education across Africa",
+                    "Document and amplify their evidence-based impact",
+                    "Connect recognition to partnerships, resources and intervention",
+                  ].map((line) => (
+                    <li key={line} className="flex gap-3">
+                      <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-gold" aria-hidden="true" />
+                      <span>{line}</span>
+                    </li>
+                  ))}
+                </ul>
+                <p className="mt-4 text-sm text-white/60">
+                  Stewarded by the{" "}
+                  <span className="text-gold font-medium">Santos Creations Educational Foundation (SCEF)</span>.
                 </p>
               </div>
+
 
               {/* Signature */}
               <div className="mt-8 pt-6 border-t border-gold/20 text-left">

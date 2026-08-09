@@ -2,6 +2,7 @@
 // Visual standard: Africa Education Icon Award 2006–2026 (/awards/africa-education-icon).
 // Used by every Tier / Pillar / Category page so the system feels unified.
 
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import {
@@ -17,10 +18,47 @@ import {
   Scale,
   Gavel,
   Trophy,
+  ChevronDown,
 } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { trackEvent } from "@/lib/analytics";
+
+/**
+ * Splits long institutional prose into a scannable lead statement and the
+ * remaining detail. Nothing is deleted — the remainder stays on-page behind a
+ * disclosure so the fold carries one declarative line, award-show style.
+ */
+export function splitLead(text: string, leadSentences = 1): [string, string] {
+  const parts = text.match(/[^.!?]+[.!?]+(\s|$)/g);
+  if (!parts || parts.length <= leadSentences) return [text.trim(), ""];
+  return [
+    parts.slice(0, leadSentences).join("").trim(),
+    parts.slice(leadSentences).join("").trim(),
+  ];
+}
+
+function MoreText({ text, label = "Read the full statement" }: { text: string; label?: string }) {
+  const [open, setOpen] = useState(false);
+  if (!text) return null;
+  return (
+    <div className="mt-4">
+      <button
+        type="button"
+        onClick={() => setOpen((v) => !v)}
+        aria-expanded={open}
+        className="inline-flex items-center gap-1.5 text-xs uppercase tracking-[0.18em] text-gold hover:text-gold/80"
+      >
+        {open ? "Show less" : label}
+        <ChevronDown className={`h-3.5 w-3.5 transition-transform ${open ? "rotate-180" : ""}`} />
+      </button>
+      {open && (
+        <p className="mt-4 text-sm md:text-base text-white/70 leading-relaxed">{text}</p>
+      )}
+    </div>
+  );
+}
+
 
 // ─────────────────────────────────────────────────────────────────────────────
 // Shared types
@@ -136,15 +174,19 @@ export function AwardHeroStandard({
             {titleAccent && <> <span className="text-gold">{titleAccent}</span></>}
           </h1>
           {subhead && (
-            <p className="mx-auto mt-5 max-w-2xl text-base md:text-lg text-white/80">
-              {subhead}
-            </p>
+            <div className="mx-auto mt-5 max-w-2xl">
+              <p className="text-lg md:text-xl text-white/85 leading-snug">
+                {splitLead(subhead)[0]}
+              </p>
+              <MoreText text={splitLead(subhead)[1]} label="More about this award" />
+            </div>
           )}
           {lead && (
             <p className="mx-auto mt-3 max-w-2xl text-sm md:text-base text-white/65">
               {lead}
             </p>
           )}
+
 
           {stats && stats.length > 0 && (
             <div className="mt-8 grid grid-cols-2 sm:grid-cols-4 gap-3 max-w-2xl mx-auto">
@@ -226,8 +268,9 @@ export function WhatThisRecognises({
   heading?: string;
   body: string;
 }) {
+  const [leadLine, rest] = splitLead(body);
   return (
-    <section className="py-14 lg:py-20">
+    <section className="py-20 lg:py-28">
       <div className="container mx-auto px-4 max-w-3xl text-center">
         <span className="text-[11px] uppercase tracking-[0.22em] text-gold font-semibold">
           For first-time visitors
@@ -235,12 +278,14 @@ export function WhatThisRecognises({
         <h2 className="mt-2 font-display text-3xl md:text-4xl font-bold text-white">
           {heading}
         </h2>
-        <p className="mt-5 text-base md:text-lg text-white/75 leading-relaxed">
-          {body}
+        <p className="mt-6 font-display text-xl md:text-2xl text-white/90 leading-snug">
+          {leadLine}
         </p>
+        <MoreText text={rest} />
       </div>
     </section>
   );
+
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -559,17 +604,20 @@ export function SubcategoryPathways({
               <h3 className="font-display text-lg font-bold text-white leading-snug">
                 {s.title}
               </h3>
-              <p className="mt-2 text-sm text-white/70 leading-relaxed">{s.blurb}</p>
+              <p className="mt-2 text-sm text-white/70 leading-relaxed line-clamp-2" title={s.blurb}>
+                {s.blurb}
+              </p>
               {s.recognises && (
-                <p className="mt-3 text-xs text-gold/80 italic border-l-2 border-gold/30 pl-3">
-                  Recognises: {s.recognises}
+                <p className="mt-3 text-xs text-gold/80 italic border-l-2 border-gold/30 pl-3 line-clamp-2">
+                  {s.recognises}
                 </p>
               )}
               {s.voteSplit && (
                 <p className="mt-2 text-[11px] text-white/55">
-                  Vote split: <span className="text-white/75">{s.voteSplit}</span>
+                  <span className="text-white/75">{s.voteSplit}</span>
                 </p>
               )}
+
               <div className="mt-5 flex flex-wrap gap-2 pt-3 border-t border-gold/10">
                 {s.viewHref && (
                   <Button
