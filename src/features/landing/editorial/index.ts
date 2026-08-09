@@ -8,3 +8,8 @@ export { BoardOfAdvisorsSection } from "./BoardOfAdvisorsSection";
 export { GallerySection } from "./GallerySection";
 export { GalaBandSection } from "./GalaBandSection";
 export { SupportSection } from "./SupportSection";
+export { RecognitionFamiliesSection } from "./RecognitionFamiliesSection";
+export { WhoCanBeEnablerSection } from "./WhoCanBeEnablerSection";
+export { ExploreNomineesSection } from "./ExploreNomineesSection";
+export { RecognitionToImpactSection } from "./RecognitionToImpactSection";
+export { JoinMovementSection } from "./JoinMovementSection";

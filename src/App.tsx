@@ -201,6 +201,13 @@ import RecognitionHubPage from "./pages/recognition/RecognitionHubPage";
 import AwardSubpageRoute from "./pages/recognition/AwardSubpageRoute";
 import AwardLandingPagesIndex from "./pages/recognition/AwardLandingPagesIndex";
 import CategoryPage2026 from "./components/recognition2026/CategoryPage";
+import EducationImpactCertificatesPage from "./pages/recognition/EducationImpactCertificatesPage";
+import AllRecognitionCategoriesPage from "./pages/recognition/AllRecognitionCategoriesPage";
+import RecognitionFamilyPage from "./pages/recognition/RecognitionFamilyPage";
+import HelpMeChoosePage from "./pages/nominate/HelpMeChoosePage";
+import ParticipatePage from "./pages/ParticipatePage";
+import TrustIntegrityPage from "./pages/TrustIntegrityPage";
+import { RECOGNITION_FAMILIES } from "@/config/brandHierarchy";
 import RedirectRoute from "./components/routing/RedirectRoute";
 import LegacyCategoryRedirect from "./components/routing/LegacyCategoryRedirect";
 import { LEGACY_RECOGNITION_REDIRECTS } from "./config/legacyRecognitionRedirects";
@@ -1090,6 +1097,20 @@ const App = () => (
                   <Route path="/recognition/pages" element={<WithLayout><AwardLandingPagesIndex /></WithLayout>} />
                   <Route path="/recognition/subpage/:slug" element={<WithLayout><AwardSubpageRoute /></WithLayout>} />
 
+                  {/* Progressive-disclosure layer (src/config/brandHierarchy.ts):
+                      unified Education Impact Certificates door, the six
+                      indexable recognition-family pages, and the full catalogue. */}
+                  <Route path="/recognition/certificates" element={<WithLayout><EducationImpactCertificatesPage /></WithLayout>} />
+                  <Route path="/recognition/categories" element={<WithLayout><AllRecognitionCategoriesPage /></WithLayout>} />
+                  {RECOGNITION_FAMILIES.filter((f) => f.slug !== "influencer-education-impact").map((f) => (
+                    <Route
+                      key={f.slug}
+                      path={`/recognition/${f.slug}`}
+                      element={<WithLayout><RecognitionFamilyPage slugOverride={f.slug} /></WithLayout>}
+                    />
+                  ))}
+
+
                   {/* 18 dedicated category pages — unified renderer driven by src/config/recognition2026 */}
                   <Route path="/recognition/:tier/:category" element={<WithLayout><CategoryPage2026 /></WithLayout>} />
 
@@ -1098,6 +1119,10 @@ const App = () => (
                   {/* Core spec URLs — render existing content at canonical paths */}
                   <Route path="/gala" element={<WithLayout><GalaConsolidated /></WithLayout>} />
                   <Route path="/support" element={<WithLayout><SupportConsolidated /></WithLayout>} />
+                  <Route path="/participate" element={<WithLayout><ParticipatePage /></WithLayout>} />
+                  <Route path="/trust" element={<WithLayout><TrustIntegrityPage /></WithLayout>} />
+                  <Route path="/nominate/help-me-choose" element={<WithLayout><HelpMeChoosePage /></WithLayout>} />
+                  <Route path="/help-me-choose" element={<Navigate to="/nominate/help-me-choose" replace />} />
                   <Route path="/education-enablers" element={<WithLayout><NomineeDirectory /></WithLayout>} />
                   <Route path="/special-needs" element={<WithLayout><EduAid /></WithLayout>} />
                   <Route path="/rebuild-my-school" element={<WithLayout><Rebuild /></WithLayout>} />

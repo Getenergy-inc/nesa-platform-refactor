@@ -27,7 +27,7 @@ export function EditorialHero() {
         </div>
 
         <div className="ed-hero-lead">
-          Africa Education <span className="ed-yr">Icon</span> Award
+          NESA-<span className="ed-yr">Africa</span>
         </div>
         <div className="ed-quote">&ldquo;The African Blue-Garnet Awards for Education&rdquo;</div>
 
@@ -36,16 +36,15 @@ export function EditorialHero() {
         </div>
 
         <h1 id="ed-hero-heading" className="ed-hero-headline">
-          Africa Sees Your Education Impact.
+          Africa&apos;s Education Enablers
           <br />
-          <span className="ed-accent">Africa Appreciates You.</span>
-          <br />
-          Africa Says Thank You.
+          <span className="ed-accent">Deserve to Be Recognised.</span>
         </h1>
 
         <p className="ed-hero-sub" style={{ fontWeight: 600, color: "var(--ed-gold-bright)" }}>
-          The Africa Education Icon Award is Africa&apos;s highest recognition for individuals and
-          organisations enabling Education for All across Africa.
+          NESA-Africa is the continental platform recognising the people and organisations
+          helping advance Education for All across Africa. Our flagship lifetime recognition is
+          the Africa Education Icon Award.
         </p>
         <p className="ed-hero-sub">
           Recognising the <b>Enablers of Education for All</b> across Africa — by Africans in
@@ -70,14 +69,14 @@ export function EditorialHero() {
             className="ed-btn-primary"
             onClick={() => trackEvent("hero_cta_click", { slot: "primary", href: "/nominate", surface: "home" })}
           >
-            Nominate an Education Icon
+            Nominate an Education Enabler
           </Link>
           <Link
             to="/nominees"
             className="ed-btn-ghost"
             onClick={() => trackEvent("hero_cta_click", { slot: "secondary", href: "/nominees", surface: "home" })}
           >
-            Explore the Impact Directory →
+            Explore Existing Nominees →
           </Link>
         </div>
       </div>
