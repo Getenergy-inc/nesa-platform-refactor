@@ -2168,46 +2168,10 @@ const App = () => (
                       </WithLayout>
                     }
                   />
-                  <Route
-                    path="/judges"
-                    element={
-                      <WithLayout>
-                        <Judges />
-                      </WithLayout>
-                    }
-                  />
-                  <Route
-                    path="/judges/directory"
-                    element={
-                      <WithLayout>
-                        <JudgesDirectory />
-                      </WithLayout>
-                    }
-                  />
-                  <Route
-                    path="/judges/nominee-pipeline"
-                    element={
-                      <WithLayout>
-                        <NomineePipeline />
-                      </WithLayout>
-                    }
-                  />
-                  <Route
-                    path="/judges/pathways/:pathwaySlug"
-                    element={
-                      <WithLayout>
-                        <PathwayWorkspace />
-                      </WithLayout>
-                    }
-                  />
-                  <Route
-                    path="/judges/:slug"
-                    element={
-                      <WithLayout>
-                        <JudgeProfile />
-                      </WithLayout>
-                    }
-                  />
+                  {/* Judges Arena routes are declared as one consolidated block
+                      further below so the protected arena paths are never
+                      shadowed by a public catch-all. */}
+
                   <Route path="/install" element={<Install />} />
 
                   {/* Judge Application Flow (Public) */}
