@@ -296,14 +296,26 @@ function DirectoryCard({
   );
 }
 
-function FormDirectory() {
+function FormDirectory({
+  narrowing = null,
+  initialNomineeType = "all",
+  linkQuery = "",
+}: {
+  /** Set only when /nominate?family=… resolves to a recognition family. */
+  narrowing?: FamilyNarrowing | null;
+  initialNomineeType?: string;
+  linkQuery?: string;
+} = {}) {
+  const narrowedForms = narrowing?.family ? narrowing.forms : null;
+  const source = narrowedForms ?? NOMINATION_FORMS;
+
   const [tier, setTier] = useState<TierSlug | "all">("all");
-  const [nomineeType, setNomineeType] = useState<string>("all");
+  const [nomineeType, setNomineeType] = useState<string>(initialNomineeType);
   const [region, setRegion] = useState<string>("all");
   const [q, setQ] = useState("");
 
   const filtered = useMemo(() => {
-    return NOMINATION_FORMS.filter((f) => {
+    return source.filter((f) => {
       if (tier !== "all" && f.tier !== tier) return false;
       if (nomineeType !== "all" && f.nomineeType !== nomineeType) return false;
       if (region !== "all") {
@@ -317,20 +329,24 @@ function FormDirectory() {
       }
       return true;
     });
-  }, [tier, nomineeType, region, q]);
+  }, [source, tier, nomineeType, region, q]);
 
   return (
     <section id="directory" className="border-b border-gold/10 py-14 md:py-20">
       <div className="container mx-auto max-w-6xl px-4">
         <div className="mb-8 max-w-3xl">
           <h2 className="font-playfair text-2xl text-gold sm:text-3xl md:text-4xl">
-            18-Form Directory
+            {narrowedForms
+              ? `${narrowing?.family?.name} — Choose a Category`
+              : "18-Form Directory"}
           </h2>
           <p className="mt-2 text-sm text-foreground/70">
-            Every recognition category has its own dedicated form. Filter by
-            tier, nominee type, or region — or search by keyword.
+            {narrowedForms
+              ? `Showing only the ${narrowedForms.length === 1 ? "category" : `${narrowedForms.length} categories`} inside this recognition family. Pick a category to open its tailored form, then choose the subcategory, region and classification inside.`
+              : "Every recognition category has its own dedicated form. Filter by tier, nominee type, or region — or search by keyword."}
           </p>
         </div>
+
 
         <div className="mb-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
           <Select value={tier} onValueChange={(v) => setTier(v as TierSlug | "all")}>
