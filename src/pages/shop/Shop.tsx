@@ -50,7 +50,7 @@ export default function Shop() {
         <title>Shop to Sponsor Impact | NESA-Africa Merchandise Store</title>
         <meta
           name="description"
-          content="Shop official NESA-Africa merchandise and fund education impact across Africa. Every purchase supports EduAid-Africa + SCEF services, including Rebuild My School (2026–2027). Secure multi-currency checkout, instant receipts, and bonus voting credits."
+          content="Shop official NESA-Africa merchandise and fund education impact across Africa. Every purchase supports EduAid-Africa + SCEF services, including Rebuild My School (2026–2027). Secure multi-currency checkout via the GFAwzip Wallet with instant receipts."
         />
       </Helmet>
 
@@ -210,7 +210,7 @@ export default function Shop() {
             <div className="max-w-2xl mx-auto">
               <div className="bg-warning/10 border border-warning/30 rounded-xl p-4 text-center">
                 <p className="text-sm text-warning font-medium mb-1">
-                  ⚠️ AGC is Non-Tradeable Voting Credit
+                  ⚠️ GFAwzip Wallet is a Payment Channel Only
                 </p>
                 <p className="text-xs text-muted-foreground">
                   No withdrawals, no cash-out, no payouts. AGC is used exclusively for voting within the NESA-Africa/SCEF ecosystem.

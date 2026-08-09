@@ -135,7 +135,7 @@ export default function SponsorLanding() {
 
       if (data?.ok) {
         setClaimed(true);
-        toast.success(`+${campaign.credit_per_claim_agc} AGC credited to your wallet!`);
+        toast.success(`Sponsor credit applied to your GFAwzip Wallet.`);
       } else {
         setClaimError(data?.error || "Claim failed");
       }
@@ -220,7 +220,7 @@ export default function SponsorLanding() {
                 <CardHeader className="text-center">
                   <div className="flex items-center justify-center gap-2 mb-2">
                     <GFAWalletIcon size={32} />
-                    <CardTitle className="text-2xl">Claim Voting Credits (AGC)</CardTitle>
+                    <CardTitle className="text-2xl">Claim Sponsor Payment Credit</CardTitle>
                   </div>
                   <p className="text-muted-foreground">
                     {sponsor.name} is sponsoring <span className="text-gold font-bold">+{campaign.credit_per_claim_agc} AGC</span> for verified users
@@ -232,7 +232,7 @@ export default function SponsorLanding() {
                   ) : !user ? (
                     <div className="space-y-4">
                       <p className="text-sm text-muted-foreground">
-                        Log in or sign up to claim your voting credits
+                        Log in or sign up to claim your sponsor payment credit
                       </p>
                       <div className="flex justify-center gap-3">
                         <Button asChild>
