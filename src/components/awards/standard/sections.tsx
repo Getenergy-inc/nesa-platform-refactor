@@ -30,13 +30,28 @@ import { trackEvent } from "@/lib/analytics";
  * disclosure so the fold carries one declarative line, award-show style.
  */
 export function splitLead(text: string, leadSentences = 1): [string, string] {
-  const parts = text.match(/[^.!?]+[.!?]+(\s|$)/g);
-  if (!parts || parts.length <= leadSentences) return [text.trim(), ""];
-  return [
-    parts.slice(0, leadSentences).join("").trim(),
-    parts.slice(leadSentences).join("").trim(),
-  ];
+  const clean = text.trim();
+  const parts = clean.match(/[^.!?]+[.!?]+(\s|$)/g);
+  if (parts && parts.length > leadSentences) {
+    return [
+      parts.slice(0, leadSentences).join("").trim(),
+      parts.slice(leadSentences).join("").trim(),
+    ];
+  }
+  // Single long sentence: break at the first natural clause boundary so the
+  // fold still carries one declarative line. The full sentence is preserved
+  // in the disclosure — nothing is reworded or removed.
+  if (clean.length > 150) {
+    const marker = [" — ", " – ", " - ", ", "].map((m) => ({ m, i: clean.indexOf(m) }))
+      .filter(({ i }) => i > 40 && i < 160)
+      .sort((a, b) => a.i - b.i)[0];
+    if (marker) {
+      return [`${clean.slice(0, marker.i).trim()}.`, clean];
+    }
+  }
+  return [clean, ""];
 }
+
 
 function MoreText({ text, label = "Read the full statement" }: { text: string; label?: string }) {
   const [open, setOpen] = useState(false);
