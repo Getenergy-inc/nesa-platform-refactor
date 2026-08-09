@@ -1119,6 +1119,10 @@ const App = () => (
                   {/* Core spec URLs — render existing content at canonical paths */}
                   <Route path="/gala" element={<WithLayout><GalaConsolidated /></WithLayout>} />
                   <Route path="/support" element={<WithLayout><SupportConsolidated /></WithLayout>} />
+                  <Route path="/participate" element={<WithLayout><ParticipatePage /></WithLayout>} />
+                  <Route path="/trust" element={<WithLayout><TrustIntegrityPage /></WithLayout>} />
+                  <Route path="/nominate/help-me-choose" element={<WithLayout><HelpMeChoosePage /></WithLayout>} />
+                  <Route path="/help-me-choose" element={<Navigate to="/nominate/help-me-choose" replace />} />
                   <Route path="/education-enablers" element={<WithLayout><NomineeDirectory /></WithLayout>} />
                   <Route path="/special-needs" element={<WithLayout><EduAid /></WithLayout>} />
                   <Route path="/rebuild-my-school" element={<WithLayout><Rebuild /></WithLayout>} />
