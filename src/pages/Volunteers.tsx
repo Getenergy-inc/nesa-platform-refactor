@@ -212,6 +212,11 @@ export default function Volunteers() {
           <CounterCard label="Active Chapters" value={formatStat(team_stats.activeChapters)} icon={MapPin} />
           <CounterCard label="Tasks Done" value={stats.tasks} icon={Sparkles} />
         </div>
+        <p className="mt-3 text-center text-[11px] text-white/40">
+          Live counts from the verified volunteer, judge, NRC and chapter records. People are
+          de-duplicated by name across roles (known interim limitation: the role records share no
+          common person identifier yet). NRC members are counted but not listed individually.
+        </p>
       </section>
 
       {/* FEATURED */}
