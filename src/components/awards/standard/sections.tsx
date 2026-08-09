@@ -604,17 +604,20 @@ export function SubcategoryPathways({
               <h3 className="font-display text-lg font-bold text-white leading-snug">
                 {s.title}
               </h3>
-              <p className="mt-2 text-sm text-white/70 leading-relaxed">{s.blurb}</p>
+              <p className="mt-2 text-sm text-white/70 leading-relaxed line-clamp-2" title={s.blurb}>
+                {s.blurb}
+              </p>
               {s.recognises && (
-                <p className="mt-3 text-xs text-gold/80 italic border-l-2 border-gold/30 pl-3">
-                  Recognises: {s.recognises}
+                <p className="mt-3 text-xs text-gold/80 italic border-l-2 border-gold/30 pl-3 line-clamp-2">
+                  {s.recognises}
                 </p>
               )}
               {s.voteSplit && (
                 <p className="mt-2 text-[11px] text-white/55">
-                  Vote split: <span className="text-white/75">{s.voteSplit}</span>
+                  <span className="text-white/75">{s.voteSplit}</span>
                 </p>
               )}
+
               <div className="mt-5 flex flex-wrap gap-2 pt-3 border-t border-gold/10">
                 {s.viewHref && (
                   <Button
