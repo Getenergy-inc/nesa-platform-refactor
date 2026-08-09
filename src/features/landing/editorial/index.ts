@@ -13,3 +13,7 @@ export { WhoCanBeEnablerSection } from "./WhoCanBeEnablerSection";
 export { ExploreNomineesSection } from "./ExploreNomineesSection";
 export { RecognitionToImpactSection } from "./RecognitionToImpactSection";
 export { JoinMovementSection } from "./JoinMovementSection";
+export { LivingGallerySection } from "./LivingGallerySection";
+export { DirectoryStatsSection } from "./DirectoryStatsSection";
+export { IconFlagshipSection } from "./IconFlagshipSection";
+export { HelpRecogniseSection } from "./HelpRecogniseSection";
