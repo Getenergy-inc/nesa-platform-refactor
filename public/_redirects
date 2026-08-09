@@ -60,7 +60,7 @@
 /cookie-policy                                               /policies            301
 /language                                                    /                    301
 
-# --- 2. SPA routes (521 explicit paths from src/App.tsx) ---
+# --- 2. SPA routes (527 explicit paths from src/App.tsx) ---
 /recognition/influencer-education-impact/african-sports-icons-supporting-education /index.html          200
 /recognition/influencer-education-impact/african-music-icons-supporting-education /index.html          200
 /recognition/influencer-education-impact/african-social-media-influencers /index.html          200
@@ -147,6 +147,7 @@
 /awards/africa-education-icon                                /index.html          200
 /awards/gold-blue-garnet/vote                                /index.html          200
 /awards/grants-global-support                                /index.html          200
+/impact/special-needs-schools                                /index.html          200
 /recognition/gold-blue-garnet                                /index.html          200
 /subcategories-to-recognition                                /index.html          200
 /about/nesa-africa-2028-2030                                 /index.html          200
@@ -234,6 +235,8 @@
 /claim-voting-credits                                        /index.html          200
 /contact/partnerships                                        /index.html          200
 /get-involved/partner                                        /index.html          200
+/impact/special-needs                                        /index.html          200
+/impact/stories-media                                        /index.html          200
 /nrc/dashboard/intake                                        /index.html          200
 /programs/nesa-africa                                        /index.html          200
 /recognition/platinum                                        /index.html          200
@@ -279,6 +282,7 @@ nominees/:nomineeId                                          /index.html        
 /guidelines/judges                                           /index.html          200
 /guidelines/voters                                           /index.html          200
 /icon-jury/sign-in                                           /index.html          200
+/impact/programmes                                           /index.html          200
 /influencer-impact                                           /index.html          200
 /judges/onboarding                                           /index.html          200
 /nominate/advanced                                           /index.html          200
@@ -327,6 +331,7 @@ governance-review                                            /index.html        
 /events/calendar                                             /index.html          200
 /forgot-password                                             /index.html          200
 /gala/attendance                                             /index.html          200
+/impact/regional                                             /index.html          200
 /judge/dashboard                                             /index.html          200
 /my-certificates                                             /index.html          200
 /nominees/region                                             /index.html          200
@@ -350,6 +355,7 @@ nominee-pipeline                                             /index.html        
 /gfawzip-wallet                                              /index.html          200
 /help-me-choose                                              /index.html          200
 /impact/reports                                              /index.html          200
+/impact/stories                                              /index.html          200
 /judge/settings                                              /index.html          200
 /judges/sign-in                                              /index.html          200
 /judges/sign-up                                              /index.html          200
