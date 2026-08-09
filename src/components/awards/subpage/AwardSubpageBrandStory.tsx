@@ -2,12 +2,48 @@
 // the subcategory / pathway grid and the sticky in-page section navigator
 // shared by all 22 NESA-Africa 2026 award category pages.
 
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { ArrowRight, ShieldCheck, Sparkles } from "lucide-react";
+import { ArrowRight, ChevronDown, ShieldCheck, Sparkles } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
+import { splitLead } from "@/components/awards/standard/sections";
 import type { AwardStory, PathwayCard } from "@/config/awards/subpageStory2026";
+
+/**
+ * Award-show density: one declarative line in view, the full copy one tap away.
+ * Nothing is deleted or reworded — the remainder stays on-page behind a disclosure.
+ */
+function LeadCopy({
+  text,
+  className,
+  label = "More",
+}: {
+  text: string;
+  className?: string;
+  label?: string;
+}) {
+  const [open, setOpen] = useState(false);
+  const [lead, rest] = splitLead(text);
+  return (
+    <div>
+      <p className={className}>{open ? text : lead}</p>
+      {rest ? (
+        <button
+          type="button"
+          onClick={() => setOpen((v) => !v)}
+          aria-expanded={open}
+          className="mt-2 inline-flex items-center gap-1 text-[11px] uppercase tracking-[0.16em] text-gold hover:text-gold/80"
+        >
+          {open ? "Show less" : label}
+          <ChevronDown className={cn("h-3 w-3 transition-transform", open && "rotate-180")} />
+        </button>
+      ) : null}
+    </div>
+  );
+}
+
 
 // ── 1. Bold brand band ───────────────────────────────────────────────────────
 
