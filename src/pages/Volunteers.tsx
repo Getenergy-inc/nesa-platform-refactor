@@ -150,13 +150,10 @@ export default function Volunteers() {
   }, [people, q, country, region, role, team, status]);
 
   const stats = useMemo(() => ({
-    total: volunteers.length,
-    countries: countries.length,
-    chapters: 10, // hub regions
     tasks: volunteers.reduce((s, v) => s + v.tasksCompleted, 0),
     referrals: volunteers.reduce((s, v) => s + v.referralCount, 0),
     hours: volunteers.length * 12,
-  }), [volunteers, countries.length]);
+  }), [volunteers]);
 
   const featured = useMemo(
     () => volunteers.filter((v) => v.isFeatured || v.contributionScore > 800).slice(0, 6),
@@ -166,7 +163,7 @@ export default function Volunteers() {
   return (
     <div className="min-h-screen bg-charcoal pb-24">
       <Helmet>
-        <title>Meet Our Volunteers — NESA-Africa</title>
+        <title>Global Volunteer Team — NESA-Africa</title>
         <meta name="description" content="Celebrating the volunteers, ambassadors, technologists, designers, and storytellers powering NESA-Africa across the continent and the diaspora." />
       </Helmet>
 
@@ -181,8 +178,11 @@ export default function Volunteers() {
               <Heart className="h-3 w-3 mr-1" /> Volunteer Ecosystem
             </Badge>
             <h1 className="font-playfair text-4xl md:text-6xl text-gold font-bold mb-5 leading-tight">
-              Meet Our Volunteers
+              Global Volunteer Team
             </h1>
+            <p className="font-playfair text-2xl md:text-3xl text-ivory mb-4">
+              {formatStat(team_stats.people)} People
+            </p>
             <p className="text-base md:text-lg text-white/80 max-w-3xl mx-auto leading-relaxed">
               Celebrating the contributors building Africa's education movement through technology,
               storytelling, data, media, partnerships, design, and community action.
@@ -205,12 +205,12 @@ export default function Volunteers() {
       {/* STATS */}
       <section className="container mx-auto px-4 -mt-10 relative z-10">
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3 md:gap-4">
-          <CounterCard label="Volunteers" value={stats.total} icon={Users} />
-          <CounterCard label="Countries" value={stats.countries} icon={Globe2} />
-          <CounterCard label="Chapters" value={stats.chapters} icon={MapPin} />
-          <CounterCard label="Tasks Done" value={stats.tasks} icon={BadgeCheck} />
-          <CounterCard label="Referrals" value={stats.referrals} icon={Share2} />
-          <CounterCard label="Hours" value={`${stats.hours}+`} icon={Sparkles} />
+          <CounterCard label="Volunteers" value={formatStat(team_stats.volunteers)} icon={Users} />
+          <CounterCard label="Judges" value={formatStat(team_stats.judges)} icon={ShieldCheck} />
+          <CounterCard label="NRC Members" value={formatStat(team_stats.nrcMembers)} icon={BadgeCheck} />
+          <CounterCard label="Countries" value={formatStat(team_stats.countries)} icon={Globe2} />
+          <CounterCard label="Active Chapters" value={formatStat(team_stats.activeChapters)} icon={MapPin} />
+          <CounterCard label="Tasks Done" value={stats.tasks} icon={Sparkles} />
         </div>
       </section>
 
@@ -251,9 +251,9 @@ export default function Volunteers() {
       {/* FILTERS + DIRECTORY */}
       <section className="container mx-auto px-4 mt-16">
         <motion.div {...fadeUp}>
-          <h2 className="font-playfair text-2xl md:text-3xl text-gold mb-4">Volunteer Directory</h2>
+          <h2 className="font-playfair text-2xl md:text-3xl text-gold mb-4">Global Volunteer Team Directory</h2>
 
-          <div className="grid grid-cols-1 md:grid-cols-[1fr_auto_auto_auto] gap-3 mb-4">
+          <div className="grid grid-cols-1 md:grid-cols-[1fr_auto_auto_auto_auto_auto] gap-3 mb-4">
             <div className="relative">
               <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gold/60" />
               <Input
@@ -263,6 +263,26 @@ export default function Volunteers() {
                 className="pl-9 bg-black/40 border-gold/30 text-white placeholder:text-white/40"
               />
             </div>
+            <Select value={role} onValueChange={setRole}>
+              <SelectTrigger className="w-full md:w-44 bg-black/40 border-gold/30 text-white">
+                <SelectValue placeholder="Role" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="all">All roles</SelectItem>
+                {Object.entries(ROLE_LABELS).map(([k, label]) => (
+                  <SelectItem key={k} value={k}>{label}</SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+            <Select value={region} onValueChange={setRegion}>
+              <SelectTrigger className="w-full md:w-44 bg-black/40 border-gold/30 text-white">
+                <SelectValue placeholder="Region" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="all">All regions</SelectItem>
+                {regions.map((r) => <SelectItem key={r} value={r}>{r}</SelectItem>)}
+              </SelectContent>
+            </Select>
             <Select value={country} onValueChange={setCountry}>
               <SelectTrigger className="w-full md:w-44 bg-black/40 border-gold/30 text-white">
                 <SelectValue placeholder="Country" />
@@ -295,49 +315,52 @@ export default function Volunteers() {
           {loading ? (
             <div className="text-white/60 text-sm py-12 text-center">Loading volunteers…</div>
           ) : filtered.length === 0 ? (
-            <div className="text-white/60 text-sm py-12 text-center">No volunteers match these filters.</div>
+            <div className="text-white/60 text-sm py-12 text-center">No team members match these filters.</div>
           ) : (
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
-              {filtered.map((v) => {
-                const tier = tierFor(v.contributionScore);
+              {filtered.map((p) => {
+                const tier = p.score !== null ? tierFor(p.score) : null;
+                const card = (
+                  <Card className="group h-full border-gold/20 bg-gradient-to-br from-charcoal to-black overflow-hidden hover:border-gold/60 hover:shadow-[0_8px_30px_rgb(212,175,55,0.15)] transition">
+                    <div className="aspect-[4/3] bg-gold/10 overflow-hidden">
+                      {p.photoUrl ? (
+                        <img src={p.photoUrl} alt={p.name}
+                             className="h-full w-full object-cover group-hover:scale-105 transition duration-700" loading="lazy" />
+                      ) : (
+                        <div className="h-full w-full flex items-center justify-center text-gold/30">
+                          <Users className="h-16 w-16" />
+                        </div>
+                      )}
+                    </div>
+                    <div className="p-4">
+                      <div className="flex items-start justify-between gap-2">
+                        <div className="min-w-0">
+                          <div className="font-medium text-white truncate">{p.name}</div>
+                          <div className="text-[11px] text-gold/80 uppercase tracking-wider truncate">
+                            {p.roleLabel}
+                          </div>
+                        </div>
+                        {p.verified && <BadgeCheck className="h-4 w-4 text-gold shrink-0" />}
+                      </div>
+                      {p.country && (
+                        <div className="flex items-center gap-1 text-xs text-white/50 mt-1.5">
+                          <MapPin className="h-3 w-3" /> {p.country}
+                        </div>
+                      )}
+                      <div className="mt-3 flex items-center justify-between border-t border-gold/10 pt-2.5">
+                        <span className="text-[10px] text-white/60">
+                          {tier ? TIER_LABEL[tier] : ROLE_LABELS[p.roleKey]}
+                        </span>
+                        {p.score !== null && (
+                          <span className="text-xs font-mono text-gold">{p.score}</span>
+                        )}
+                      </div>
+                    </div>
+                  </Card>
+                );
                 return (
-                  <motion.div key={v.id} {...fadeUp}>
-                    <Link to={`/volunteers/${v.slug}`}>
-                      <Card className="group h-full border-gold/20 bg-gradient-to-br from-charcoal to-black overflow-hidden hover:border-gold/60 hover:shadow-[0_8px_30px_rgb(212,175,55,0.15)] transition">
-                        <div className="aspect-[4/3] bg-gold/10 overflow-hidden">
-                          {v.photoUrl ? (
-                            <img src={v.photoUrl} alt={v.fullName}
-                                 className="h-full w-full object-cover group-hover:scale-105 transition duration-700" loading="lazy" />
-                          ) : (
-                            <div className="h-full w-full flex items-center justify-center text-gold/30">
-                              <Users className="h-16 w-16" />
-                            </div>
-                          )}
-                        </div>
-                        <div className="p-4">
-                          <div className="flex items-start justify-between gap-2">
-                            <div className="min-w-0">
-                              <div className="font-medium text-white truncate">{v.fullName}</div>
-                              <div className="text-[11px] text-gold/80 uppercase tracking-wider truncate">
-                                {v.teamSlug ? TEAM_LABELS[v.teamSlug] : v.role}
-                              </div>
-                            </div>
-                            {v.badges.includes("verified") && (
-                              <BadgeCheck className="h-4 w-4 text-gold shrink-0" />
-                            )}
-                          </div>
-                          {v.country && (
-                            <div className="flex items-center gap-1 text-xs text-white/50 mt-1.5">
-                              <MapPin className="h-3 w-3" /> {v.country}
-                            </div>
-                          )}
-                          <div className="mt-3 flex items-center justify-between border-t border-gold/10 pt-2.5">
-                            <span className="text-[10px] text-white/60">{TIER_LABEL[tier]}</span>
-                            <span className="text-xs font-mono text-gold">{v.contributionScore}</span>
-                          </div>
-                        </div>
-                      </Card>
-                    </Link>
+                  <motion.div key={p.key} {...fadeUp}>
+                    {p.href ? <Link to={p.href}>{card}</Link> : card}
                   </motion.div>
                 );
               })}
