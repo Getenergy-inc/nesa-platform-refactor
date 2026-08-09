@@ -30,6 +30,7 @@ interface Row {
 function rowToVolunteer(r: Row): Volunteer {
   return {
     id: r.id,
+    personId: r.person_id,
     slug: r.slug,
     fullName: r.full_name,
     photoUrl: r.photo_url ?? undefined,
