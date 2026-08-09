@@ -130,7 +130,7 @@ export default function Volunteers() {
         roleLabel: j.title || "Judge",
         country: j.country,
         regionName: j.region,
-        href: j.slug ? `/judges/${j.slug}` : undefined,
+        href: j.slug ? `/judges/directory/${j.slug}` : undefined,
         score: null,
         verified: true,
         visibility: "public",

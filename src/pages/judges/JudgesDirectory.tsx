@@ -433,7 +433,7 @@ export default function JudgesDirectory() {
                 {filtered.map((j) => (
                   <Link
                     key={j.id}
-                    to={`/judges/${j.slug}`}
+                    to={`/judges/directory/${j.slug}`}
                     className="group"
                     onClick={() => trackEvent("judge_profile_view", { judge_slug: j.slug })}
                   >
