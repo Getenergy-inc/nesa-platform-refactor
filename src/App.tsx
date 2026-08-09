@@ -314,7 +314,6 @@ import {
   ForNominators,
   ForNominees,
   ForJudges,
-  ForVoters,
   ContinueRecognition,
   ImpactStorytelling,
 } from "./pages/guidelines";
@@ -2549,11 +2548,7 @@ const App = () => (
                   />
                   <Route
                     path="/guidelines/voters"
-                    element={
-                      <WithLayout>
-                        <ForVoters />
-                      </WithLayout>
-                    }
+                    element={<Navigate to="/trust" replace />}
                   />
                   <Route
                     path="/guidelines/renomination"
