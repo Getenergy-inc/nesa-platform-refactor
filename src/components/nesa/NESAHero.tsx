@@ -104,11 +104,11 @@ export function NESAHero() {
           Celebrating Africa's education changemakers through recognition, visibility, partnerships, and measurable social impact — a continental education recognition and impact platform powered by Santos Creations Educational Foundation (SCEF).
         </p>
 
-        {/* AGC Voting Strip */}
+        {/* Recognition strip */}
         <div className="flex items-center gap-2 px-4 sm:px-6 py-2.5 rounded-full bg-gold/10 border border-gold/30 mb-6 sm:mb-8 animate-fade-in" style={{ animationDelay: '0.45s' }}>
           <Coins className="h-4 w-4 text-gold" />
           <span className="text-sm text-white/90">
-            Earn voting points through participation. <span className="text-gold font-medium">Explore Recognition</span> for Gold-Blue Garnet winners.
+            Nominate an enabler of education. <span className="text-gold font-medium">Explore Recognition</span> to see how winners are decided.
           </span>
         </div>
 
