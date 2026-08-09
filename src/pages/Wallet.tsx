@@ -6,12 +6,17 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { GFAWalletIcon } from "@/components/ui/GFAWalletIcon";
-import { Loader2, ArrowUpRight, ArrowDownLeft, Gift, Vote, Ticket, Users, ShoppingBag, Sparkles, Share2 } from "lucide-react";
+import { Loader2, ArrowUpRight, ArrowDownLeft, Gift, Ticket, Users, ShoppingBag, Heart, Award } from "lucide-react";
 import { useAuth } from "@/contexts/AuthContext";
 import { supabase } from "@/integrations/supabase/client";
 import { ReferralLinkCard } from "@/components/tickets";
-import { AGC_NON_TRADEABLE_DISCLAIMER } from "@/constants/agc";
-import { AGC_EARNING_METHODS, AGC_CONVERSION_RATE } from "@/config/agcConfig";
+import { AGC_NON_TRADEABLE_DISCLAIMER, EARN_METHODS } from "@/constants/agc";
+import {
+  WALLET_NAME,
+  WALLET_PAYMENT_PURPOSES,
+  WALLET_PROHIBITIONS,
+  WALLET_RECONCILIATION_NOTE,
+} from "@/config/walletBranding";
 
 interface WalletBalance {
   agc_total: number;
@@ -31,8 +36,8 @@ interface Transaction {
 }
 
 const REASON_ICONS: Record<string, React.ElementType> = {
-  SPONSOR_PUBLIC_CREDIT: Gift,
-  VOTE_SPEND: Vote,
+  SPONSOR_PUBLIC_CREDIT: Award,
+  DONATION: Heart,
   TICKET_BONUS: Ticket,
   REFERRAL_BONUS: Users,
   REFERRAL_BONUS_TICKET: Users,
@@ -43,15 +48,15 @@ const REASON_ICONS: Record<string, React.ElementType> = {
 };
 
 const REASON_LABELS: Record<string, string> = {
-  SPONSOR_PUBLIC_CREDIT: "Sponsor Pool Credit",
-  VOTE_SPEND: "Vote Spend",
-  TICKET_BONUS: "Ticket Bonus AGC",
-  REFERRAL_BONUS: "Referral Bonus AGC",
-  REFERRAL_BONUS_TICKET: "Referral Bonus AGC",
-  SHOP_BONUS: "Shop Bonus AGC",
-  DAILY_SIGNIN: "Daily Sign-in",
-  NOMINATION_REWARD: "Nomination Reward",
-  BONUS_FOR_PAYMENT: "Ticket Bonus AGC",
+  SPONSOR_PUBLIC_CREDIT: "Sponsor Credit",
+  DONATION: "Donation Payment",
+  TICKET_BONUS: "Ticket Payment",
+  REFERRAL_BONUS: "Referral Credit",
+  REFERRAL_BONUS_TICKET: "Referral Credit",
+  SHOP_BONUS: "Merchandise Credit",
+  DAILY_SIGNIN: "Account Credit",
+  NOMINATION_REWARD: "Account Credit",
+  BONUS_FOR_PAYMENT: "Ticket Payment",
 };
 
 export default function Wallet() {
@@ -125,13 +130,16 @@ export default function Wallet() {
   return (
     <InstitutionalDashboardLayout title="My Wallet" breadcrumbs={[{ label: "Wallet" }]}>
       <Helmet>
-        <title>My Wallet | NESA-Africa</title>
-        <meta name="description" content="View your AGC balance and transaction history." />
+        <title>GFAwzip Wallet | NESA-Africa</title>
+        <meta name="description" content="View your GFAwzip Wallet balance, payment history and receipts." />
       </Helmet>
 
       <div className="container mx-auto px-4 py-8">
         <div className="max-w-3xl mx-auto">
-          <h1 className="text-3xl font-display font-bold text-foreground mb-8">My Wallet</h1>
+          <h1 className="text-3xl font-display font-bold text-foreground mb-2">GFAwzip Wallet</h1>
+          <p className="text-sm text-muted-foreground mb-8">
+            Your approved payment channel for NESA-Africa, EduAid-Africa and SCEF transactions.
+          </p>
 
           {loading ? (
             <div className="flex items-center justify-center py-16">
@@ -145,7 +153,7 @@ export default function Wallet() {
                   <div className="flex items-center gap-4 mb-6">
                     <GFAWalletIcon size={48} />
                     <div>
-                      <p className="text-sm text-muted-foreground">Total AGC Balance</p>
+                      <p className="text-sm text-muted-foreground">Wallet Balance</p>
                       <p className="text-4xl font-bold text-gold">
                         {balance?.agc_total?.toLocaleString() || 0} AGC
                       </p>
@@ -154,7 +162,7 @@ export default function Wallet() {
 
                   <div className="grid grid-cols-2 gap-4">
                     <div className="text-center p-3 bg-card/50 rounded-lg">
-                      <p className="text-xs text-muted-foreground">Bonus AGC</p>
+                      <p className="text-xs text-muted-foreground">Credits Applied</p>
                       <p className="text-lg font-semibold text-gold">{balance?.agc_bonus || 0}</p>
                     </div>
                     <div className="text-center p-3 bg-card/50 rounded-lg">
@@ -165,15 +173,15 @@ export default function Wallet() {
 
                   <div className="mt-6 flex flex-wrap gap-3">
                     <Button asChild>
-                      <Link to="/awards/gold-blue-garnet">
-                        <Vote className="mr-2 h-4 w-4" />
-                        Explore Recognition
+                      <Link to="/donate">
+                        <Heart className="mr-2 h-4 w-4" />
+                        Donate to EduAid-Africa
                       </Link>
                     </Button>
                     <Button variant="outline" asChild>
-                      <Link to="/earn-voting-credits">
-                        <Sparkles className="mr-2 h-4 w-4" />
-                        Earn More
+                      <Link to="/buy-your-ticket">
+                        <Ticket className="mr-2 h-4 w-4" />
+                        Gala Tickets
                       </Link>
                     </Button>
                     <Button variant="outline" asChild>
@@ -194,7 +202,7 @@ export default function Wallet() {
               {/* Transactions */}
               <Card className="bg-card border-border mb-8">
                 <CardHeader>
-                  <CardTitle>Recent Transactions</CardTitle>
+                  <CardTitle>Recent Payments &amp; Credits</CardTitle>
                 </CardHeader>
                 <CardContent>
                   {transactions.length === 0 ? (
@@ -227,7 +235,7 @@ export default function Wallet() {
                               </div>
                             </div>
                             <div className={`font-bold ${isCredit ? "text-primary" : "text-destructive"}`}>
-                              {isCredit ? "+" : "-"}{tx.amount} AGC
+                              {isCredit ? "+" : "-"}{tx.amount}
                             </div>
                           </div>
                         );
@@ -244,41 +252,38 @@ export default function Wallet() {
                 </CardHeader>
                 <CardContent>
                   <Accordion type="single" collapsible>
-                    <AccordionItem value="what-is-agc">
-                      <AccordionTrigger>What is AGC?</AccordionTrigger>
+                    <AccordionItem value="what-is-wallet">
+                      <AccordionTrigger>What is the {WALLET_NAME}?</AccordionTrigger>
                       <AccordionContent>
-                        AGC (Afri Gold Coin) is a non-tradeable voting credit used within the NESA-Africa/SCEF ecosystem. You can earn AGC through various activities and use it to vote for nominees.
+                        The {WALLET_NAME} is the approved multi-currency payment channel for the
+                        NESA-Africa, EduAid-Africa and SCEF ecosystem. It handles payments only.
                       </AccordionContent>
                     </AccordionItem>
-                    <AccordionItem value="how-to-earn">
-                      <AccordionTrigger>How do I earn AGC?</AccordionTrigger>
+                    <AccordionItem value="what-can-i-pay-for">
+                      <AccordionTrigger>What can I pay for?</AccordionTrigger>
                       <AccordionContent>
                         <ul className="space-y-2 text-sm">
-                          {AGC_EARNING_METHODS.filter(m => m.isActive).map(method => (
-                            <li key={method.id}>• {method.title}: {method.reward}</li>
+                          {WALLET_PAYMENT_PURPOSES.map((purpose) => (
+                            <li key={purpose}>• {purpose}</li>
                           ))}
                         </ul>
-                        <p className="text-xs text-muted-foreground mt-2">
-                          {AGC_CONVERSION_RATE} AGCc = 1 AGC (1 Vote)
-                        </p>
-                        <div className="mt-3">
-                          <Button asChild size="sm" variant="outline">
-                            <Link to="/earn-voting-credits">
-                              <Sparkles className="mr-2 h-3 w-3" />
-                              View All Earning Methods
-                            </Link>
-                          </Button>
-                        </div>
+                        <ul className="mt-3 space-y-1 text-xs text-muted-foreground">
+                          {EARN_METHODS.map((m) => (
+                            <li key={m.id}>· {m.title} — {m.description}</li>
+                          ))}
+                        </ul>
                       </AccordionContent>
                     </AccordionItem>
-                    <AccordionItem value="can-withdraw">
-                      <AccordionTrigger>Can I withdraw or cash out AGC?</AccordionTrigger>
+                    <AccordionItem value="influence">
+                      <AccordionTrigger>Can payments influence recognition?</AccordionTrigger>
                       <AccordionContent>
-                        <p className="text-warning font-medium">
-                          No. AGC is non-tradeable—no withdrawals, no cash-out, no payouts.
-                        </p>
+                        <ul className="space-y-2 text-sm text-warning">
+                          {WALLET_PROHIBITIONS.map((rule) => (
+                            <li key={rule}>• {rule}</li>
+                          ))}
+                        </ul>
                         <p className="text-sm text-muted-foreground mt-2">
-                          AGC is used exclusively for voting within the NESA-Africa/SCEF ecosystem.
+                          {WALLET_RECONCILIATION_NOTE}
                         </p>
                       </AccordionContent>
                     </AccordionItem>
