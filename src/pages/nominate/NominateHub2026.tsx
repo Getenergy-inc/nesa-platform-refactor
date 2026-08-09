@@ -40,6 +40,12 @@ import {
 } from "@/config/nominate2026/forms";
 import { EDI_MATRIX_GENERIC } from "@/config/nominate2026/ediMatrix";
 import { getCategoryContent } from "@/config/nominate2026/categoryContent";
+import {
+  resolveFamilyNarrowing,
+  mapNomineeTypeParam,
+  type FamilyNarrowing,
+} from "@/config/nominate2026/familyNarrowing";
+
 import { supabase } from "@/integrations/supabase/client";
 
 /* ────────────────────────────────────────────────────────────────────────── */
