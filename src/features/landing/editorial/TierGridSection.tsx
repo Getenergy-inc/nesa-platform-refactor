@@ -10,7 +10,7 @@ const TIERS = [
     body:
       "Verified impact, not follower count. Recognising public figures whose platforms have genuinely advanced education.",
     href: "/awards/influencers-education-impact",
-    nominateHref: "/nominate/influencers-education-impact",
+    nominateHref: "/nominate/influencer-education-impact",
     nomineesHref: "/nominees?tier=influencer",
     videoId: "Hdu_qlFLfrQ",
     videoTitle: "About the Influencer Education Impact Award",
@@ -20,7 +20,7 @@ const TIERS = [
     body:
       "Institutions, research bodies, and leadership advancing education systems across the continent.",
     href: "/awards/platinum-recognition",
-    nominateHref: "/nominate/platinum-recognition",
+    nominateHref: "/nominate/pages?tier=platinum",
     nomineesHref: "/nominees?tier=platinum",
     videoId: "nQCXDX_X3rs",
     videoTitle: "About the Platinum Recognition Award",
@@ -30,7 +30,7 @@ const TIERS = [
     body:
       "Corporations, NGOs, and states enabling education across Africa's eight regions.",
     href: "/awards/gold-blue-garnet",
-    nominateHref: "/nominate/gold-blue-garnet",
+    nominateHref: "/nominate/pages?tier=gold-blue-garnet",
     nomineesHref: "/nominees?tier=blue-garnet",
     videoId: "DDREAU_bmRk",
     videoTitle: "About the Gold-Blue Garnet Regional Recognition Award",
