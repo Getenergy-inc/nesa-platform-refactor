@@ -16,6 +16,7 @@ import {
 } from "@/components/ui/select";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useVolunteers } from "@/hooks/useVolunteers";
+import { useGlobalTeamStats, formatStat } from "@/hooks/useGlobalTeamStats";
 import { TEAM_LABELS, type TeamSlug, tierFor, TIER_LABEL } from "@/lib/volunteersData";
 
 const fadeUp = {
@@ -24,6 +25,16 @@ const fadeUp = {
   viewport: { once: true, margin: "-60px" },
   transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] as const },
 };
+
+const ROLE_LABELS: Record<string, string> = {
+  volunteer: "Volunteer",
+  judge: "Judge",
+  nrc: "NRC Member",
+  leadership: "Team Leadership",
+  other: "Other",
+};
+
+const LEADERSHIP_TEAMS = new Set(["chapters", "ambassadors", "partnerships"]);
 
 function CounterCard({ label, value, icon: Icon }: { label: string; value: number | string; icon: typeof Users }) {
   return (
@@ -39,29 +50,104 @@ function CounterCard({ label, value, icon: Icon }: { label: string; value: numbe
 
 export default function Volunteers() {
   const { volunteers, loading } = useVolunteers();
+  const team_stats = useGlobalTeamStats();
   const [q, setQ] = useState("");
   const [country, setCountry] = useState<string>("all");
+  const [region, setRegion] = useState<string>("all");
+  const [role, setRole] = useState<string>("all");
   const [team, setTeam] = useState<string>("all");
   const [status, setStatus] = useState<"all" | "public" | "alumni">("all");
 
+  // Unified people list: volunteers (DB + published roster) merged with the
+  // public judge roster from useGlobalTeamStats. NRC members are counted only —
+  // `nrc_members` exposes no public name column, so they cannot be listed.
+  type Person = {
+    key: string;
+    name: string;
+    photoUrl?: string | null;
+    roleKey: keyof typeof ROLE_LABELS;
+    roleLabel: string;
+    country?: string | null;
+    regionName?: string | null;
+    href?: string;
+    score: number | null;
+    verified: boolean;
+    visibility: string;
+    teamSlug?: string;
+    searchText: string;
+  };
+
+  const people = useMemo<Person[]>(() => {
+    const seen = new Set<string>();
+    const out: Person[] = [];
+
+    for (const v of volunteers) {
+      const key = v.fullName.trim().toLowerCase();
+      seen.add(key);
+      const roleKey = v.teamSlug && LEADERSHIP_TEAMS.has(v.teamSlug) ? "leadership" : "volunteer";
+      out.push({
+        key: `v-${v.id}`,
+        name: v.fullName,
+        photoUrl: v.photoUrl,
+        roleKey,
+        roleLabel: v.teamSlug ? TEAM_LABELS[v.teamSlug] : v.role || ROLE_LABELS[roleKey],
+        country: v.country,
+        regionName: v.region,
+        href: `/volunteers/${v.slug}`,
+        score: v.contributionScore,
+        verified: v.badges.includes("verified"),
+        visibility: v.visibility,
+        teamSlug: v.teamSlug,
+        searchText: `${v.fullName} ${v.role ?? ""} ${v.country ?? ""} ${v.headline ?? ""}`.toLowerCase(),
+      });
+    }
+
+    // Dedupe across role tables on normalised full name (interim key — the
+    // role tables share no stable person identifier today).
+    for (const j of team_stats.judgeList) {
+      const key = j.name.trim().toLowerCase();
+      if (seen.has(key)) continue;
+      seen.add(key);
+      out.push({
+        key: `j-${j.id}`,
+        name: j.name,
+        photoUrl: j.photoUrl,
+        roleKey: "judge",
+        roleLabel: j.title || "Judge",
+        country: j.country,
+        regionName: j.region,
+        href: j.slug ? `/judges/${j.slug}` : undefined,
+        score: null,
+        verified: true,
+        visibility: "public",
+        searchText: `${j.name} ${j.title ?? ""} ${j.country ?? ""}`.toLowerCase(),
+      });
+    }
+
+    return out;
+  }, [volunteers, team_stats.judgeList]);
+
   const countries = useMemo(
-    () => Array.from(new Set(volunteers.map((v) => v.country).filter(Boolean))).sort() as string[],
-    [volunteers]
+    () => Array.from(new Set(people.map((p) => p.country).filter(Boolean))).sort() as string[],
+    [people]
+  );
+
+  const regions = useMemo(
+    () => Array.from(new Set(people.map((p) => p.regionName).filter(Boolean))).sort() as string[],
+    [people]
   );
 
   const filtered = useMemo(() => {
-    return volunteers.filter((v) => {
-      if (status !== "all" && v.visibility !== status) return false;
-      if (country !== "all" && v.country !== country) return false;
-      if (team !== "all" && v.teamSlug !== team) return false;
-      if (q) {
-        const needle = q.toLowerCase();
-        if (!`${v.fullName} ${v.role ?? ""} ${v.country ?? ""} ${v.headline ?? ""}`.toLowerCase().includes(needle))
-          return false;
-      }
+    return people.filter((p) => {
+      if (status !== "all" && p.visibility !== status) return false;
+      if (country !== "all" && p.country !== country) return false;
+      if (region !== "all" && p.regionName !== region) return false;
+      if (role !== "all" && p.roleKey !== role) return false;
+      if (team !== "all" && p.teamSlug !== team) return false;
+      if (q && !p.searchText.includes(q.toLowerCase())) return false;
       return true;
     });
-  }, [volunteers, q, country, team, status]);
+  }, [people, q, country, region, role, team, status]);
 
   const stats = useMemo(() => ({
     total: volunteers.length,
