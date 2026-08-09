@@ -76,7 +76,7 @@ export default function NGOChooser() {
         </div>
 
         <p className="mx-auto mt-8 max-w-2xl text-center text-xs text-ivory/60">
-          Vote split for this category: 60% Jury / 40% Public AGC Voting Coin.
+          Assessment for this category is jury-led. No public voting is used in the 2026 cycle.
         </p>
       </div>
     </section>

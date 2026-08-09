@@ -352,9 +352,9 @@ export function buildTimeline(
     },
     {
       id: "gold-voting",
-      phase: "Gold Certificate AGC Voting",
+      phase: "Gold Certificate Assessment",
       dateRange: `15 August – 15 September ${ceremonyYear}`,
-      description: "100% public AGC voting for the Influencers Education Impact Award.",
+      description: "Independent assessment for the Influencers Education Impact Award. No public voting.",
       type: "voting",
       stageAction: "public_voting",
     },
