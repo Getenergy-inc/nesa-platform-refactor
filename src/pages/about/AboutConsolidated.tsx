@@ -121,7 +121,7 @@ export default function AboutConsolidated() {
         eyebrow="Continental roadmap"
         title="Vision 2035"
         line="A decade-long roadmap from recognition to intervention across Africa's education systems."
-        standalone="/about/vision"
+        standalone="/about/vision-2035"
       >
         <Vision2035 />
       </Disclosure>
@@ -131,7 +131,7 @@ export default function AboutConsolidated() {
         eyebrow="Answers"
         title="Frequently Asked Questions"
         line="Eligibility, verification, nomination, judging and recognition — answered."
-        standalone="/about/faq"
+        standalone="/faqs"
       >
         <FAQ />
       </Disclosure>
