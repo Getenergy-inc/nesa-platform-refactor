@@ -59,13 +59,15 @@ export default function Volunteers() {
   const [status, setStatus] = useState<"all" | "public" | "alumni">("all");
 
   // Unified people list: volunteers (DB + published roster) merged with the
-  // public judge roster from useGlobalTeamStats. NRC members are counted only —
-  // `nrc_members` exposes no public name column, so they cannot be listed.
+  // public judge roster from useGlobalTeamStats. Roles coexist: rows sharing a
+  // `person_id` are the same human, so one card carries every role they hold.
+  // NRC members are counted and badged (via person_id) but never listed by
+  // name — `nrc_members` exposes no public name column.
   type Person = {
     key: string;
     name: string;
     photoUrl?: string | null;
-    roleKey: keyof typeof ROLE_LABELS;
+    roleKeys: string[];
     roleLabel: string;
     country?: string | null;
     regionName?: string | null;
@@ -78,18 +80,20 @@ export default function Volunteers() {
   };
 
   const people = useMemo<Person[]>(() => {
-    const seen = new Set<string>();
+    const byName = new Map<string, Person>();
+    const byPerson = new Map<string, Person>();
     const out: Person[] = [];
+    const nrcIds = new Set(team_stats.nrcPersonIds);
 
     for (const v of volunteers) {
-      const key = v.fullName.trim().toLowerCase();
-      seen.add(key);
       const roleKey = v.teamSlug && LEADERSHIP_TEAMS.has(v.teamSlug) ? "leadership" : "volunteer";
-      out.push({
+      const roleKeys = [roleKey];
+      if (v.personId && nrcIds.has(v.personId)) roleKeys.push("nrc");
+      const person: Person = {
         key: `v-${v.id}`,
         name: v.fullName,
         photoUrl: v.photoUrl,
-        roleKey,
+        roleKeys,
         roleLabel: v.teamSlug ? TEAM_LABELS[v.teamSlug] : v.role || ROLE_LABELS[roleKey],
         country: v.country,
         regionName: v.region,
@@ -99,27 +103,30 @@ export default function Volunteers() {
         visibility: v.visibility,
         teamSlug: v.teamSlug,
         searchText: `${v.fullName} ${v.role ?? ""} ${v.country ?? ""} ${v.headline ?? ""}`.toLowerCase(),
-      });
+      };
+      out.push(person);
+      byName.set(v.fullName.trim().toLowerCase(), person);
+      if (v.personId) byPerson.set(v.personId, person);
     }
 
-    // Dedupe across role tables on normalised full name (interim key — the
-    // role tables share no stable person identifier today).
-    // KNOWN LIMITATION: when the same person exists as both a volunteer and a
-    // judge they render as a single card, but the card keeps only the
-    // volunteer record's role label — the judge association is not shown and
-    // the person will not surface under the "Judge" role filter. Fixing this
-    // properly needs a shared person key across the role tables, which is a
-    // schema change deliberately out of scope here. Role *counts* remain
-    // per-table and therefore still reflect both roles.
     for (const j of team_stats.judgeList) {
-      const key = j.name.trim().toLowerCase();
-      if (seen.has(key)) continue;
-      seen.add(key);
-      out.push({
+      // Real cross-role link first; normalised name only covers the static
+      // roster entries, which carry no person_id.
+      const existing =
+        (j.personId ? byPerson.get(j.personId) : undefined) ??
+        byName.get(j.name.trim().toLowerCase());
+      if (existing) {
+        if (!existing.roleKeys.includes("judge")) existing.roleKeys.push("judge");
+        existing.searchText += ` judge ${j.title ?? ""}`.toLowerCase();
+        continue;
+      }
+      const roleKeys = ["judge"];
+      if (j.personId && nrcIds.has(j.personId)) roleKeys.push("nrc");
+      const person: Person = {
         key: `j-${j.id}`,
         name: j.name,
         photoUrl: j.photoUrl,
-        roleKey: "judge",
+        roleKeys,
         roleLabel: j.title || "Judge",
         country: j.country,
         regionName: j.region,
@@ -128,11 +135,15 @@ export default function Volunteers() {
         verified: true,
         visibility: "public",
         searchText: `${j.name} ${j.title ?? ""} ${j.country ?? ""}`.toLowerCase(),
-      });
+      };
+      out.push(person);
+      byName.set(j.name.trim().toLowerCase(), person);
+      if (j.personId) byPerson.set(j.personId, person);
     }
 
     return out;
-  }, [volunteers, team_stats.judgeList]);
+  }, [volunteers, team_stats.judgeList, team_stats.nrcPersonIds]);
+
 
   const countries = useMemo(
     () => Array.from(new Set(people.map((p) => p.country).filter(Boolean))).sort() as string[],
@@ -149,7 +160,7 @@ export default function Volunteers() {
       if (status !== "all" && p.visibility !== status) return false;
       if (country !== "all" && p.country !== country) return false;
       if (region !== "all" && p.regionName !== region) return false;
-      if (role !== "all" && p.roleKey !== role) return false;
+      if (role !== "all" && !p.roleKeys.includes(role)) return false;
       if (team !== "all" && p.teamSlug !== team) return false;
       if (q && !p.searchText.includes(q.toLowerCase())) return false;
       return true;
@@ -220,11 +231,12 @@ export default function Volunteers() {
           <CounterCard label="Tasks Done" value={stats.tasks} icon={Sparkles} />
         </div>
         <p className="mt-3 text-center text-[11px] text-white/40">
-          Live counts from the verified volunteer, judge, NRC and chapter records. People are
-          de-duplicated by name across roles (known interim limitation: the role records share no
-          common person identifier yet). A person holding two roles shows one card under their volunteer
-          role; NRC members are counted but not listed individually.
+          Live counts from the verified volunteer, judge, NRC and chapter records. Volunteer, judge
+          and NRC roles can coexist under one person record, so someone holding several roles is
+          counted once and shown on a single card carrying all of their role badges. NRC members are
+          counted and badged, but not listed individually by name.
         </p>
+
       </section>
 
       {/* FEATURED */}
@@ -352,6 +364,16 @@ export default function Volunteers() {
                           <div className="text-[11px] text-gold/80 uppercase tracking-wider truncate">
                             {p.roleLabel}
                           </div>
+                          <div className="mt-1.5 flex flex-wrap gap-1">
+                            {p.roleKeys.map((rk) => (
+                              <span
+                                key={rk}
+                                className="rounded-full border border-gold/30 bg-gold/10 px-2 py-0.5 text-[9px] uppercase tracking-wider text-gold"
+                              >
+                                {ROLE_LABELS[rk] ?? rk}
+                              </span>
+                            ))}
+                          </div>
                         </div>
                         {p.verified && <BadgeCheck className="h-4 w-4 text-gold shrink-0" />}
                       </div>
@@ -362,8 +384,9 @@ export default function Volunteers() {
                       )}
                       <div className="mt-3 flex items-center justify-between border-t border-gold/10 pt-2.5">
                         <span className="text-[10px] text-white/60">
-                          {tier ? TIER_LABEL[tier] : ROLE_LABELS[p.roleKey]}
+                          {tier ? TIER_LABEL[tier] : ROLE_LABELS[p.roleKeys[0]]}
                         </span>
+
                         {p.score !== null && (
                           <span className="text-xs font-mono text-gold">{p.score}</span>
                         )}

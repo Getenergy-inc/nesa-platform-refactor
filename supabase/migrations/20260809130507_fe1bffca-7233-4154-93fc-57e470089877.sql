@@ -1,0 +1,1 @@
+REVOKE ALL ON FUNCTION public.link_person_id() FROM PUBLIC, anon, authenticated;
