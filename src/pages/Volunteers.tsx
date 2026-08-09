@@ -363,6 +363,16 @@ export default function Volunteers() {
                           <div className="text-[11px] text-gold/80 uppercase tracking-wider truncate">
                             {p.roleLabel}
                           </div>
+                          <div className="mt-1.5 flex flex-wrap gap-1">
+                            {p.roleKeys.map((rk) => (
+                              <span
+                                key={rk}
+                                className="rounded-full border border-gold/30 bg-gold/10 px-2 py-0.5 text-[9px] uppercase tracking-wider text-gold"
+                              >
+                                {ROLE_LABELS[rk] ?? rk}
+                              </span>
+                            ))}
+                          </div>
                         </div>
                         {p.verified && <BadgeCheck className="h-4 w-4 text-gold shrink-0" />}
                       </div>
@@ -373,8 +383,9 @@ export default function Volunteers() {
                       )}
                       <div className="mt-3 flex items-center justify-between border-t border-gold/10 pt-2.5">
                         <span className="text-[10px] text-white/60">
-                          {tier ? TIER_LABEL[tier] : ROLE_LABELS[p.roleKey]}
+                          {tier ? TIER_LABEL[tier] : ROLE_LABELS[p.roleKeys[0]]}
                         </span>
+
                         {p.score !== null && (
                           <span className="text-xs font-mono text-gold">{p.score}</span>
                         )}
