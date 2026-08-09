@@ -93,7 +93,7 @@ export default function JudgeProfile() {
             `${judge.full_name} serves on the NESA-Africa 2026 independent jury panel.`
           }
         />
-        <link rel="canonical" href={`https://nesaafrica.lovable.app/judges/${judge.slug}`} />
+        <link rel="canonical" href={`https://nesaafrica.lovable.app/judges/directory/${judge.slug}`} />
         <meta property="og:title" content={`${judge.full_name} — NESA-Africa Judge`} />
         {judge.photo_url && <meta property="og:image" content={judge.photo_url} />}
         <script type="application/ld+json">

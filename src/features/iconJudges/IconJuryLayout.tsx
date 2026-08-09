@@ -16,6 +16,8 @@ import {
 const NAV = [
   { to: "/judges/dashboard", label: "Dashboard", icon: LayoutDashboard },
   { to: "/judges/my-panel", label: "My Panel", icon: Layers },
+  { to: "/judges/pathways", label: "Pathways", icon: Layers },
+  { to: "/judges/roster", label: "Judge Roster", icon: Users },
   { to: "/judges/assignments", label: "Assignments", icon: ClipboardList },
   { to: "/judges/nominees", label: "Nominees", icon: Users },
   { to: "/judges/conflicts", label: "Conflicts", icon: AlertTriangle },

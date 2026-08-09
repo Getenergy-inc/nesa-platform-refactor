@@ -164,7 +164,7 @@ function JudgeCard({ judge, index }: JudgeCardProps) {
       className="group relative"
     >
       {judge.slug ? (
-        <Link to={`/judges/${judge.slug}`} className="block h-full">
+        <Link to={`/judges/directory/${judge.slug}`} className="block h-full">
           {Inner}
         </Link>
       ) : (

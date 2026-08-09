@@ -234,6 +234,11 @@ import JudgesDirectory from "./pages/judges/JudgesDirectory";
 import JudgeProfile from "./pages/judges/JudgeProfile";
 import NomineePipeline from "./pages/judges/NomineePipeline";
 import PathwayWorkspace from "./pages/judges/PathwayWorkspace";
+import JudgesSignUp from "./pages/judges/JudgesSignUp";
+import JudgesForgotPassword from "./pages/judges/JudgesForgotPassword";
+import JudgesOnboarding from "./pages/judges/JudgesOnboarding";
+import IconPathwayIndex from "./pages/judges/IconPathwayIndex";
+import IconJudgeRoster from "./pages/judges/IconJudgeRoster";
 import Install from "./pages/Install";
 
 // 22-page canonical consolidators (2026 final refactor)
@@ -2168,46 +2173,10 @@ const App = () => (
                       </WithLayout>
                     }
                   />
-                  <Route
-                    path="/judges"
-                    element={
-                      <WithLayout>
-                        <Judges />
-                      </WithLayout>
-                    }
-                  />
-                  <Route
-                    path="/judges/directory"
-                    element={
-                      <WithLayout>
-                        <JudgesDirectory />
-                      </WithLayout>
-                    }
-                  />
-                  <Route
-                    path="/judges/nominee-pipeline"
-                    element={
-                      <WithLayout>
-                        <NomineePipeline />
-                      </WithLayout>
-                    }
-                  />
-                  <Route
-                    path="/judges/pathways/:pathwaySlug"
-                    element={
-                      <WithLayout>
-                        <PathwayWorkspace />
-                      </WithLayout>
-                    }
-                  />
-                  <Route
-                    path="/judges/:slug"
-                    element={
-                      <WithLayout>
-                        <JudgeProfile />
-                      </WithLayout>
-                    }
-                  />
+                  {/* Judges Arena routes are declared as one consolidated block
+                      further below so the protected arena paths are never
+                      shadowed by a public catch-all. */}
+
                   <Route path="/install" element={<Install />} />
 
                   {/* Judge Application Flow (Public) */}
@@ -2597,11 +2566,32 @@ const App = () => (
                     }
                   />
 
-                  {/* Africa Education Icon — Judges Arena (public + isolated jury portal) */}
+                  {/* ===== Africa Education Icon — Judges Arena =====
+                      Order matters: public entry points and onboarding first,
+                      then the gated arena. No catch-all `/judges/:slug` route
+                      exists, so protected paths can never be shadowed. */}
                   <Route path="/judges" element={<JudgesArenaLanding />} />
                   <Route path="/judges/enter" element={<JudgesEntry />} />
                   <Route path="/judges/sign-in" element={<IconJurySignIn />} />
+                  <Route path="/judges/sign-up" element={<JudgesSignUp />} />
+                  <Route path="/judges/forgot-password" element={<JudgesForgotPassword />} />
+                  <Route path="/judges/onboarding" element={<JudgesOnboarding />} />
                   <Route path="/icon-jury/sign-in" element={<Navigate to="/judges/sign-in" replace />} />
+
+                  {/* Public judging transparency pages */}
+                  <Route
+                    path="/judges/directory"
+                    element={<WithLayout><JudgesDirectory /></WithLayout>}
+                  />
+                  <Route
+                    path="/judges/directory/:slug"
+                    element={<WithLayout><JudgeProfile /></WithLayout>}
+                  />
+                  <Route
+                    path="/judges/panels"
+                    element={<WithLayout><Judges /></WithLayout>}
+                  />
+
                   <Route
                     path="/judges"
                     element={
@@ -2612,6 +2602,10 @@ const App = () => (
                   >
                     <Route path="dashboard" element={<IconJuryDashboard />} />
                     <Route path="my-panel" element={<MyPanel />} />
+                    <Route path="pathways" element={<IconPathwayIndex />} />
+                    <Route path="pathways/:pathwaySlug" element={<PathwayWorkspace />} />
+                    <Route path="roster" element={<IconJudgeRoster />} />
+                    <Route path="nominee-pipeline" element={<NomineePipeline />} />
                     <Route path="assignments" element={<IconJuryAssignments />} />
                     <Route path="nominees/:nomineeId" element={<IconJuryNomineeReview />} />
                     <Route path="nominee/:nomineeId" element={<IconJuryNomineeReview />} />
