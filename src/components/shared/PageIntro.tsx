@@ -3,7 +3,7 @@ import { cn } from "@/lib/utils";
 import { LucideIcon } from "lucide-react";
 
 interface PageIntroProps {
-  /** Page badge/label (e.g., "NESA 2025") */
+  /** Page badge/label (e.g., "NESA 2026") */
   badge?: string;
   /** Badge icon component */
   BadgeIcon?: LucideIcon;

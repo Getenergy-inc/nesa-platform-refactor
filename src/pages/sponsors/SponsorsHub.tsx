@@ -164,7 +164,7 @@ export default function SponsorsHub() {
         <div className="container mx-auto px-4">
           <div className="flex items-center justify-between mb-6">
             <h2 className="font-playfair text-2xl md:text-3xl text-foreground">Featured Sponsor Logos</h2>
-            <Badge variant="outline" className="border-gold/40 text-gold">Updated 2025</Badge>
+            <Badge variant="outline" className="border-gold/40 text-gold">Updated 2026</Badge>
           </div>
           <div className="grid grid-cols-3 md:grid-cols-6 gap-4">
             {Array.from({ length: 12 }).map((_, i) => (
