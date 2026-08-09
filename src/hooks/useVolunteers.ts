@@ -4,6 +4,7 @@ import { STATIC_VOLUNTEERS, type Volunteer, type TeamSlug } from "@/lib/voluntee
 
 interface Row {
   id: string;
+  person_id: string;
   slug: string;
   full_name: string;
   photo_url: string | null;
