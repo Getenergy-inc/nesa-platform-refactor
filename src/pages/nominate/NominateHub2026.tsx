@@ -280,7 +280,7 @@ function DirectoryCard({
       </p>
       <div className="mt-auto flex items-center gap-3 pt-4">
         <Link
-          to={form.route}
+          to={`${form.route}${linkQuery}`}
           className="inline-flex items-center gap-1.5 rounded-full bg-gold px-3.5 py-1.5 text-xs font-semibold text-charcoal hover:bg-gold/90"
         >
           Start Nomination <ArrowRight className="h-3 w-3" />
