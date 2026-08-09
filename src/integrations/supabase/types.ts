@@ -1978,33 +1978,48 @@ export type Database = {
       }
       icon_grand_jury_groups: {
         Row: {
+          ballots_locked_at: string | null
           classification_id: string
           created_at: string
           id: string
           panel_id: string
           pathway_id: string
+          results_approved_by: string | null
+          results_locked_at: string | null
           title: string
           updated_at: string
+          voting_closes_at: string | null
+          voting_opens_at: string | null
           voting_status: string
         }
         Insert: {
+          ballots_locked_at?: string | null
           classification_id: string
           created_at?: string
           id?: string
           panel_id: string
           pathway_id: string
+          results_approved_by?: string | null
+          results_locked_at?: string | null
           title: string
           updated_at?: string
+          voting_closes_at?: string | null
+          voting_opens_at?: string | null
           voting_status?: string
         }
         Update: {
+          ballots_locked_at?: string | null
           classification_id?: string
           created_at?: string
           id?: string
           panel_id?: string
           pathway_id?: string
+          results_approved_by?: string | null
+          results_locked_at?: string | null
           title?: string
           updated_at?: string
+          voting_closes_at?: string | null
+          voting_opens_at?: string | null
           voting_status?: string
         }
         Relationships: [
@@ -2213,7 +2228,8 @@ export type Database = {
           full_name: string | null
           id: string
           invited_by: string | null
-          token: string
+          revoked_at: string | null
+          token_hash: string | null
         }
         Insert: {
           consumed_at?: string | null
@@ -2224,7 +2240,8 @@ export type Database = {
           full_name?: string | null
           id?: string
           invited_by?: string | null
-          token?: string
+          revoked_at?: string | null
+          token_hash?: string | null
         }
         Update: {
           consumed_at?: string | null
@@ -2235,7 +2252,8 @@ export type Database = {
           full_name?: string | null
           id?: string
           invited_by?: string | null
-          token?: string
+          revoked_at?: string | null
+          token_hash?: string | null
         }
         Relationships: []
       }
@@ -2286,6 +2304,9 @@ export type Database = {
       }
       icon_judge_onboarding: {
         Row: {
+          activated_at: string | null
+          activated_by: string | null
+          appointment_accepted_at: string | null
           code_of_conduct: boolean
           completed_at: string | null
           confidentiality_signed: boolean
@@ -2293,12 +2314,18 @@ export type Database = {
           id: string
           identity_verified: boolean
           judge_id: string
+          mfa_enrolled_at: string | null
+          mou_signed_at: string | null
           profile_completed: boolean
           sample_review: boolean
           scoring_orientation: boolean
+          training_completed_at: string | null
           updated_at: string
         }
         Insert: {
+          activated_at?: string | null
+          activated_by?: string | null
+          appointment_accepted_at?: string | null
           code_of_conduct?: boolean
           completed_at?: string | null
           confidentiality_signed?: boolean
@@ -2306,12 +2333,18 @@ export type Database = {
           id?: string
           identity_verified?: boolean
           judge_id: string
+          mfa_enrolled_at?: string | null
+          mou_signed_at?: string | null
           profile_completed?: boolean
           sample_review?: boolean
           scoring_orientation?: boolean
+          training_completed_at?: string | null
           updated_at?: string
         }
         Update: {
+          activated_at?: string | null
+          activated_by?: string | null
+          appointment_accepted_at?: string | null
           code_of_conduct?: boolean
           completed_at?: string | null
           confidentiality_signed?: boolean
@@ -2319,9 +2352,12 @@ export type Database = {
           id?: string
           identity_verified?: boolean
           judge_id?: string
+          mfa_enrolled_at?: string | null
+          mou_signed_at?: string | null
           profile_completed?: boolean
           sample_review?: boolean
           scoring_orientation?: boolean
+          training_completed_at?: string | null
           updated_at?: string
         }
         Relationships: [
@@ -2474,9 +2510,11 @@ export type Database = {
           confidentiality_signed_at: string | null
           created_at: string
           id: string
+          institution: string | null
           judge_id: string
           linkedin_url: string | null
           photo_url: string | null
+          title: string | null
           updated_at: string
         }
         Insert: {
@@ -2487,9 +2525,11 @@ export type Database = {
           confidentiality_signed_at?: string | null
           created_at?: string
           id?: string
+          institution?: string | null
           judge_id: string
           linkedin_url?: string | null
           photo_url?: string | null
+          title?: string | null
           updated_at?: string
         }
         Update: {
@@ -2500,9 +2540,11 @@ export type Database = {
           confidentiality_signed_at?: string | null
           created_at?: string
           id?: string
+          institution?: string | null
           judge_id?: string
           linkedin_url?: string | null
           photo_url?: string | null
+          title?: string | null
           updated_at?: string
         }
         Relationships: [
@@ -2703,21 +2745,30 @@ export type Database = {
           author_user_id: string
           body: string
           created_at: string
+          deleted_at: string | null
           deliberation_id: string
+          edit_history: Json
+          edited_at: string | null
           id: string
         }
         Insert: {
           author_user_id: string
           body: string
           created_at?: string
+          deleted_at?: string | null
           deliberation_id: string
+          edit_history?: Json
+          edited_at?: string | null
           id?: string
         }
         Update: {
           author_user_id?: string
           body?: string
           created_at?: string
+          deleted_at?: string | null
           deliberation_id?: string
+          edit_history?: Json
+          edited_at?: string | null
           id?: string
         }
         Relationships: [
@@ -2737,8 +2788,11 @@ export type Database = {
           created_by: string | null
           decision_summary: string | null
           id: string
+          locked_at: string | null
           nominee_id: string | null
+          panel_id: string | null
           pathway_id: string | null
+          room_type: string
           status: string
           title: string
           updated_at: string
@@ -2749,8 +2803,11 @@ export type Database = {
           created_by?: string | null
           decision_summary?: string | null
           id?: string
+          locked_at?: string | null
           nominee_id?: string | null
+          panel_id?: string | null
           pathway_id?: string | null
+          room_type?: string
           status?: string
           title: string
           updated_at?: string
@@ -2761,8 +2818,11 @@ export type Database = {
           created_by?: string | null
           decision_summary?: string | null
           id?: string
+          locked_at?: string | null
           nominee_id?: string | null
+          panel_id?: string | null
           pathway_id?: string | null
+          room_type?: string
           status?: string
           title?: string
           updated_at?: string
@@ -2773,6 +2833,13 @@ export type Database = {
             columns: ["classification_id"]
             isOneToOne: false
             referencedRelation: "icon_classifications"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "icon_jury_deliberations_panel_id_fkey"
+            columns: ["panel_id"]
+            isOneToOne: false
+            referencedRelation: "icon_judge_panels"
             referencedColumns: ["id"]
           },
           {
@@ -2973,6 +3040,7 @@ export type Database = {
           finalist_3_nominee_id: string | null
           id: string
           justification: string | null
+          locked_at: string | null
           panel_id: string
           reserve_nominee_id: string | null
           secretary_signed_at: string | null
@@ -2988,6 +3056,7 @@ export type Database = {
           finalist_3_nominee_id?: string | null
           id?: string
           justification?: string | null
+          locked_at?: string | null
           panel_id: string
           reserve_nominee_id?: string | null
           secretary_signed_at?: string | null
@@ -3003,6 +3072,7 @@ export type Database = {
           finalist_3_nominee_id?: string | null
           id?: string
           justification?: string | null
+          locked_at?: string | null
           panel_id?: string
           reserve_nominee_id?: string | null
           secretary_signed_at?: string | null
@@ -3100,6 +3170,51 @@ export type Database = {
           name?: string
           slug?: string
           sort_order?: number
+        }
+        Relationships: []
+      }
+      icon_reopen_requests: {
+        Row: {
+          created_at: string
+          decided_at: string | null
+          decided_by: string | null
+          decision_notes: string | null
+          entity_id: string
+          entity_type: string
+          id: string
+          original_snapshot: Json
+          reason: string
+          requested_by: string
+          status: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          decided_at?: string | null
+          decided_by?: string | null
+          decision_notes?: string | null
+          entity_id: string
+          entity_type: string
+          id?: string
+          original_snapshot?: Json
+          reason: string
+          requested_by: string
+          status?: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          decided_at?: string | null
+          decided_by?: string | null
+          decision_notes?: string | null
+          entity_id?: string
+          entity_type?: string
+          id?: string
+          original_snapshot?: Json
+          reason?: string
+          requested_by?: string
+          status?: string
+          updated_at?: string
         }
         Relationships: []
       }
@@ -11112,6 +11227,7 @@ export type Database = {
           slug: string
         }[]
       }
+      activate_icon_judge: { Args: { p_judge_id: string }; Returns: undefined }
       approve_icon_laureate: {
         Args: { p_position_id: string }
         Returns: undefined
@@ -11164,6 +11280,10 @@ export type Database = {
           expires_at: string
           id: string
         }[]
+      }
+      decide_icon_reopen_request: {
+        Args: { p_approve: boolean; p_notes: string; p_request_id: string }
+        Returns: undefined
       }
       declare_icon_conflict: {
         Args: {
@@ -11343,11 +11463,25 @@ export type Database = {
         }
         Returns: boolean
       }
+      icon_check_invitation: {
+        Args: { p_token: string }
+        Returns: {
+          email_hint: string
+          full_name: string
+          valid: boolean
+        }[]
+      }
       icon_ensure_review: { Args: { p_assignment_id: string }; Returns: string }
       icon_governance_decide: {
         Args: { p_decision: string; p_group_id: string; p_notes: string }
         Returns: string
       }
+      icon_is_panel_member: { Args: { _panel_id: string }; Returns: boolean }
+      icon_is_recused: {
+        Args: { _judge_id: string; _panel_id: string }
+        Returns: boolean
+      }
+      icon_my_judge_id: { Args: never; Returns: string }
       ingest_nomination_intake_batch: {
         Args: { p_actor_id?: string; p_batch_id?: string; p_rows: Json }
         Returns: {
@@ -11369,6 +11503,11 @@ export type Database = {
         Args: { p_reference: string }
         Returns: boolean
       }
+      lock_icon_grand_jury_results: {
+        Args: { p_group_id: string }
+        Returns: undefined
+      }
+      lock_icon_shortlist: { Args: { p_panel_id: string }; Returns: undefined }
       mint_acceptance_token: {
         Args: { p_nominee_id: string }
         Returns: {
@@ -11377,6 +11516,10 @@ export type Database = {
           name: string
           token: string
         }[]
+      }
+      prepare_icon_grand_jury_ballots: {
+        Args: { p_group_id: string }
+        Returns: number
       }
       publish_results: {
         Args: { p_contest_type: string; p_season_id: string }
@@ -11441,6 +11584,7 @@ export type Database = {
           isSetofReturn: false
         }
       }
+      redeem_icon_invitation: { Args: { p_token: string }; Returns: string }
       reopen_icon_review: {
         Args: { p_reason: string; p_review_id: string }
         Returns: undefined
