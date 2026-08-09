@@ -4,6 +4,11 @@
 // `nrc_members`, `chapters`, merged with the published static roster
 // (`STATIC_VOLUNTEERS`) that /volunteers already renders.
 //
+// Identity: all three role tables carry an additive `person_id` column. Rows
+// sharing a `person_id` are the same human, so a volunteer who is also a judge
+// counts once and carries both roles. Normalised-name matching is used only to
+// fold the published static roster (which has no `person_id`) into the DB rows.
+//
 // Governance: only fields already flagged for public display are selected.
 // No email, phone, internal notes, or internal identifiers are queried here.
 // `nrc_members` exposes no public name column, so NRC is counted only (never
@@ -19,6 +24,8 @@ import { STATIC_VOLUNTEERS } from "@/lib/volunteersData";
 
 export interface GlobalTeamPerson {
   id: string;
+  /** Shared cross-role person key. */
+  personId?: string | null;
   name: string;
   role: "volunteer" | "judge";
   country?: string | null;
@@ -38,11 +45,13 @@ export interface GlobalTeamStats {
   activeChapters: number | null;
   /** Public-safe judge records (NRC members have no public name column). */
   judgeList: GlobalTeamPerson[];
+  /** person_id values that also hold an NRC seat (used for role badges). */
+  nrcPersonIds: string[];
   loading: boolean;
   error: Error | null;
 }
 
-const UNKNOWN: Omit<GlobalTeamStats, "loading" | "error" | "judgeList"> = {
+const UNKNOWN: Omit<GlobalTeamStats, "loading" | "error" | "judgeList" | "nrcPersonIds"> = {
   people: null,
   volunteers: null,
   judges: null,
@@ -57,6 +66,7 @@ const norm = (s: string | null | undefined) => (s || "").trim().toLowerCase();
 export function formatStat(value: number | null): string {
   return value === null ? "—" : value.toLocaleString();
 }
+
 
 export function useGlobalTeamStats(): GlobalTeamStats {
   const [stats, setStats] = useState<GlobalTeamStats>({
