@@ -94,42 +94,44 @@ export function NESALandingPage() {
         {/* 2. PUBLIC NOTICE — nominations open 30 August 2026 */}
         <PublicNominationsNotice />
 
-        {/* 3. AFRICA EDUCATION ICON — lifetime achievement */}
+        {/* 2. MEET THE AFRICA EDUCATION ICONS — flagship recognition */}
         <IconLifetimeSection />
 
-        {/* 4. RECOGNITION ARCHITECTURE */}
-        <ArchitectureTableSection />
+        {/* 3. SIX WAYS WE RECOGNISE EDUCATION IMPACT */}
+        <RecognitionFamiliesSection />
 
-        {/* 5. CERTIFICATE OF RECOGNITION TIERS */}
-        <TierGridSection />
+        {/* 4. WHO CAN BE AN EDUCATION ENABLER? */}
+        <WhoCanBeEnablerSection />
 
-        {/* 6. INTEGRITY SAFEGUARDS */}
+        {/* 5. EXPLORE EXISTING NOMINEES */}
+        <ExploreNomineesSection />
+
+        {/* 6. FROM RECOGNITION TO IMPACT */}
+        <RecognitionToImpactSection />
+
+        {/* 7. BUILT FOR TRUST */}
         <TrustBandSection />
 
-        {/* 7. VOLUNTEER BAND */}
-        <VolunteerBandSection />
-
-        {/* 8. BOARD OF ADVISORS */}
-        <BoardOfAdvisorsSection />
-
-        {/* 9. GALLERY */}
-        <GallerySection />
-
-        {/* 10. GALA COUNTDOWN — 13 December 2026 */}
+        {/* GALA COUNTDOWN — 13 December 2026 */}
         <GalaBandSection />
 
-        {/* 11. GET INVOLVED */}
-        <SupportSection />
+        {/* SUPPORTING BANDS — people and moments */}
+        <VolunteerBandSection />
+        <BoardOfAdvisorsSection />
+        <GallerySection />
 
-        {/* 12. GOVERNANCE & INTEGRITY FIREWALL */}
+        {/* 8. JOIN THE MOVEMENT */}
+        <JoinMovementSection />
+
+        {/* GOVERNANCE & INTEGRITY FIREWALL */}
         <LazySection>
           <GovernanceFirewallSection />
         </LazySection>
 
-        {/* 13. FINAL CTA */}
         <LazySection>
           <FinalCTASection />
         </LazySection>
+
 
         <NESAFooter />
         <BottomPageNav />
