@@ -268,8 +268,9 @@ export function WhatThisRecognises({
   heading?: string;
   body: string;
 }) {
+  const [leadLine, rest] = splitLead(body);
   return (
-    <section className="py-14 lg:py-20">
+    <section className="py-20 lg:py-28">
       <div className="container mx-auto px-4 max-w-3xl text-center">
         <span className="text-[11px] uppercase tracking-[0.22em] text-gold font-semibold">
           For first-time visitors
@@ -277,12 +278,14 @@ export function WhatThisRecognises({
         <h2 className="mt-2 font-display text-3xl md:text-4xl font-bold text-white">
           {heading}
         </h2>
-        <p className="mt-5 text-base md:text-lg text-white/75 leading-relaxed">
-          {body}
+        <p className="mt-6 font-display text-xl md:text-2xl text-white/90 leading-snug">
+          {leadLine}
         </p>
+        <MoreText text={rest} />
       </div>
     </section>
   );
+
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
