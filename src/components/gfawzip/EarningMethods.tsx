@@ -1,21 +1,50 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Gift, Clock, Users, Coins, type LucideIcon } from "lucide-react";
+import { Ticket, ShoppingBag, Heart, Users, Award, type LucideIcon } from "lucide-react";
 import { AGCDisclaimer } from "./AGCDisclaimer";
+import { PAYMENT_DESTINATIONS, WALLET_NAME } from "@/config/walletBranding";
 
-interface EarningMethod {
+interface PaymentPath {
   icon: LucideIcon;
   title: string;
   description: string;
+  payee: string;
 }
 
-const EARNING_METHODS: EarningMethod[] = [
-  { icon: Gift, title: "Support Bonus", description: "$1 = 5 Bonus AGC (eligible transactions)" },
-  { icon: Clock, title: "Daily Sign-in", description: "+1 AGCc/day (10 AGCc = 1 AGC)" },
-  { icon: Users, title: "Referral (1st Payment)", description: "+3 AGC when referred user pays" },
-  { icon: Users, title: "Referral (2nd Payment)", description: "+1 AGC on second payment" },
+const PAYMENT_PATHS: PaymentPath[] = [
+  {
+    icon: Ticket,
+    title: "Gala & Event Tickets",
+    description: "Instant QR e-ticket and receipt after payment.",
+    payee: PAYMENT_DESTINATIONS.nesa.payee,
+  },
+  {
+    icon: ShoppingBag,
+    title: "Merchandise",
+    description: "Official NESA-Africa merchandise in your local currency.",
+    payee: PAYMENT_DESTINATIONS.nesa.payee,
+  },
+  {
+    icon: Award,
+    title: "Sponsorship & Partnership",
+    description: "Settle sponsorship invoices with full reconciliation records.",
+    payee: PAYMENT_DESTINATIONS.nesa.payee,
+  },
+  {
+    icon: Heart,
+    title: "Education Donations",
+    description: "Rebuild My School Africa, scholarships and school interventions.",
+    payee: PAYMENT_DESTINATIONS.eduaid.payee,
+  },
+  {
+    icon: Users,
+    title: "Membership & Dues",
+    description: "Membership sign-up, ambassador and local chapter dues.",
+    payee: PAYMENT_DESTINATIONS.scef.payee,
+  },
 ];
 
+/** What the GFAwzip Wallet can be used to pay for, and who receives the money. */
 export function EarningMethods() {
   return (
     <section className="py-16 bg-muted/30">
@@ -25,39 +54,33 @@ export function EarningMethods() {
             <Badge className="mb-4 bg-gold/20 text-gold border-gold/30 font-semibold">
               GFAWzip for NESA-Africa 2026
             </Badge>
-            <h2 className="text-3xl font-display font-bold text-foreground mb-2 flex items-center justify-center gap-3">
-              <Coins className="h-8 w-8 text-gold" />
-              Earn AfriGold Coins (AGC)
+            <h2 className="text-3xl font-display font-bold text-foreground mb-2">
+              What you can pay for
             </h2>
-            <p className="text-lg text-gold font-semibold mb-2">
-              Vote for your favorite nominees with AGC!
-            </p>
             <p className="text-muted-foreground">
-              Participate and earn voting credits through various activities.
+              {WALLET_NAME} handles authorised payments across NESA-Africa, EduAid-Africa and SCEF.
+              Every payment shows the receiving organisation before checkout.
             </p>
           </div>
 
           <AGCDisclaimer />
 
           <div className="grid md:grid-cols-2 gap-6 mt-8">
-            {EARNING_METHODS.map((method) => (
-              <Card key={method.title} className="bg-card shadow-card border-border">
+            {PAYMENT_PATHS.map((path) => (
+              <Card key={path.title} className="bg-card shadow-card border-border">
                 <CardContent className="pt-6 flex items-start gap-4">
                   <div className="p-3 rounded-lg bg-primary/10">
-                    <method.icon className="h-6 w-6 text-primary" />
+                    <path.icon className="h-6 w-6 text-primary" />
                   </div>
                   <div>
-                    <h3 className="font-semibold text-foreground">{method.title}</h3>
-                    <p className="text-sm text-muted-foreground">{method.description}</p>
+                    <h3 className="font-semibold text-foreground">{path.title}</h3>
+                    <p className="text-sm text-muted-foreground">{path.description}</p>
+                    <p className="text-xs text-gold mt-1">Payment goes to: {path.payee}</p>
                   </div>
                 </CardContent>
               </Card>
             ))}
           </div>
-
-          <p className="text-xs text-muted-foreground text-center mt-6">
-            Sponsors may fund public participation pools that grant claimable AGC voting credits (where enabled).
-          </p>
         </div>
       </div>
     </section>
