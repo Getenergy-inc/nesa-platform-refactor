@@ -12,11 +12,6 @@
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://nesaafrica.lovable.app/about-agc</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
     <loc>https://nesaafrica.lovable.app/ambassadors</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -175,11 +170,6 @@
     <loc>https://nesaafrica.lovable.app/donate</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://nesaafrica.lovable.app/earn-agc</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://nesaafrica.lovable.app/ecosystem</loc>
