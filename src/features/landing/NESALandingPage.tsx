@@ -37,10 +37,12 @@ import { MobileStickyNominateCTA } from "@/components/nesa/MobileStickyNominateC
 import "./editorial/editorial.css";
 import {
   EditorialHero,
+  LivingGallerySection,
   IconLifetimeSection,
+  IconFlagshipSection,
   RecognitionFamiliesSection,
   WhoCanBeEnablerSection,
-  ExploreNomineesSection,
+  DirectoryStatsSection,
   RecognitionToImpactSection,
   TrustBandSection,
   VolunteerBandSection,
@@ -48,7 +50,9 @@ import {
   GallerySection,
   GalaBandSection,
   JoinMovementSection,
+  HelpRecogniseSection,
 } from "./editorial";
+
 
 const GovernanceFirewallSection = lazy(() =>
   import("@/components/nesa/GovernanceFirewallSection").then((m) => ({
