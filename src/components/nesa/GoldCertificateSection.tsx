@@ -7,7 +7,7 @@ import goldCertificateImage from "@/assets/certificates/gold-certificate-showcas
 export function GoldCertificateSection() {
   const features = [
     { icon: Vote, label: "100% Public Voting", description: "No jury influence — your votes decide winners" },
-    { icon: Globe, label: "5 African Regions", description: "North, West, East, Central & Southern Africa" },
+    { icon: Globe, label: "8 African Regions", description: "West, East, Central, Southern, North, Horn, Sahel & Indian Ocean Islands + 2 Global Communities" },
     { icon: Users, label: "Top 3 Per Subcategory", description: "405 Gold Certificate winners across 135 subcategories" },
     { icon: Trophy, label: "Feeds Blue Garnet", description: "All 405 Gold winners compete for the 9 Blue Garnet Awards" },
   ];
