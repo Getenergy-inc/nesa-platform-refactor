@@ -129,8 +129,12 @@ export function NESALandingPage() {
         <BoardOfAdvisorsSection />
         <GallerySection />
 
-        {/* 8. JOIN THE MOVEMENT */}
+        {/* 9. JOIN THE MOVEMENT */}
         <JoinMovementSection />
+
+        {/* 10. FINAL CTA */}
+        <HelpRecogniseSection />
+
 
         {/* GOVERNANCE & INTEGRITY FIREWALL */}
         <LazySection>
