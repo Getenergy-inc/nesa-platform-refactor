@@ -38,14 +38,16 @@ import "./editorial/editorial.css";
 import {
   EditorialHero,
   IconLifetimeSection,
-  ArchitectureTableSection,
-  TierGridSection,
+  RecognitionFamiliesSection,
+  WhoCanBeEnablerSection,
+  ExploreNomineesSection,
+  RecognitionToImpactSection,
   TrustBandSection,
   VolunteerBandSection,
   BoardOfAdvisorsSection,
   GallerySection,
   GalaBandSection,
-  SupportSection,
+  JoinMovementSection,
 } from "./editorial";
 
 const GovernanceFirewallSection = lazy(() =>
