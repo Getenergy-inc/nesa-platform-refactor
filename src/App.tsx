@@ -237,6 +237,8 @@ import PathwayWorkspace from "./pages/judges/PathwayWorkspace";
 import JudgesSignUp from "./pages/judges/JudgesSignUp";
 import JudgesForgotPassword from "./pages/judges/JudgesForgotPassword";
 import JudgesOnboarding from "./pages/judges/JudgesOnboarding";
+import IconPathwayIndex from "./pages/judges/IconPathwayIndex";
+import IconJudgeRoster from "./pages/judges/IconJudgeRoster";
 import Install from "./pages/Install";
 
 // 22-page canonical consolidators (2026 final refactor)
