@@ -47,9 +47,9 @@ const num = (v: unknown): number | null =>
   v === null || v === undefined || Number.isNaN(Number(v)) ? null : Number(v);
 
 /** Render helper: `null` -> em dash, real numbers (including 0) -> locale string. */
-export function formatImpactStat(value: number | null): string {
-  return value === null ? "—" : value.toLocaleString();
-}
+// Re-export the canonical sitewide formatter rather than re-implementing the
+// null="—" contract locally (single source of truth: useGlobalTeamStats).
+export { formatStat as formatImpactStat } from "@/hooks/useGlobalTeamStats";
 
 export function useEducationImpactStats(): EducationImpactStats {
   const [stats, setStats] = useState<EducationImpactStats>({
