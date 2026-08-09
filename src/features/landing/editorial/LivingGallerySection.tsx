@@ -34,26 +34,44 @@ function usePrefersReducedMotion() {
 
 function GalleryCard({ n }: { n: GalleryNominee }) {
   const place = [n.country, n.region].filter(Boolean).join(" · ");
+  const [broken, setBroken] = useState(false);
+  const initials = n.name
+    .split(/\s+/)
+    .slice(0, 2)
+    .map((w) => w[0])
+    .join("")
+    .toUpperCase();
   return (
     <article
       className="group relative flex w-[78vw] max-w-[320px] shrink-0 snap-center flex-col overflow-hidden rounded-2xl border border-gold/20 bg-white/[0.03] transition-colors hover:border-gold/50 focus-within:border-gold sm:w-[46vw] lg:w-[280px]"
     >
       <div className="relative aspect-[4/5] w-full overflow-hidden bg-charcoal/60">
-        <img
-          src={n.imageUrl}
-          alt={`${n.name}${place ? `, ${place}` : ""}`}
-          loading="lazy"
-          decoding="async"
-          sizes="(max-width: 640px) 78vw, (max-width: 1024px) 46vw, 280px"
-          className={`h-full w-full transition-transform duration-700 group-hover:scale-105 motion-reduce:transition-none motion-reduce:group-hover:scale-100 ${
-            n.imageKind === "logo" ? "object-contain p-6" : "object-cover"
-          }`}
-        />
+        {n.imageUrl && !broken ? (
+          <img
+            src={n.imageUrl}
+            alt={`${n.name}${place ? `, ${place}` : ""}`}
+            loading="lazy"
+            decoding="async"
+            onError={() => setBroken(true)}
+            sizes="(max-width: 640px) 78vw, (max-width: 1024px) 46vw, 280px"
+            className={`h-full w-full transition-transform duration-700 group-hover:scale-105 motion-reduce:transition-none motion-reduce:group-hover:scale-100 ${
+              n.imageKind === "logo" ? "object-contain p-6" : "object-cover"
+            }`}
+          />
+        ) : (
+          <div
+            className="flex h-full w-full items-center justify-center bg-gradient-to-br from-gold/20 to-charcoal"
+            aria-hidden="true"
+          >
+            <span className="font-serif text-4xl text-gold/70">{initials}</span>
+          </div>
+        )}
         <div
           className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/90 via-black/25 to-transparent"
           aria-hidden="true"
         />
       </div>
+
 
       <div className="flex flex-1 flex-col gap-2 p-4">
         {n.categoryLabel && (
