@@ -72,6 +72,7 @@ export function useGlobalTeamStats(): GlobalTeamStats {
   const [stats, setStats] = useState<GlobalTeamStats>({
     ...UNKNOWN,
     judgeList: [],
+    nrcPersonIds: [],
     loading: true,
     error: null,
   });
@@ -83,17 +84,17 @@ export function useGlobalTeamStats(): GlobalTeamStats {
         const [vRes, jRes, nRes, cRes] = await Promise.all([
           supabase
             .from("volunteers")
-            .select("id, full_name, country, region")
+            .select("id, person_id, full_name, country, region")
             .eq("visibility_status", "public")
             .eq("verification_status", "approved"),
           supabase
             .from("judges")
             .select(
-              "id, slug, full_name, photo_url, professional_title, region, country_residence"
+              "id, person_id, slug, full_name, photo_url, professional_title, region, country_residence"
             )
             .eq("profile_visibility", "public")
             .eq("verification_status", "verified"),
-          supabase.from("nrc_members").select("id", { count: "exact", head: true }),
+          supabase.from("nrc_members").select("person_id"),
           supabase
             .from("chapters")
             .select("id", { count: "exact", head: true })
@@ -108,12 +109,14 @@ export function useGlobalTeamStats(): GlobalTeamStats {
 
         const dbVolunteers = (vRes.data || []) as {
           id: string;
+          person_id: string;
           full_name: string;
           country: string | null;
           region: string | null;
         }[];
         const dbJudges = (jRes.data || []) as {
           id: string;
+          person_id: string;
           slug: string | null;
           full_name: string;
           photo_url: string | null;
@@ -121,22 +124,33 @@ export function useGlobalTeamStats(): GlobalTeamStats {
           region: string | null;
           country_residence: string | null;
         }[];
+        const nrcPersonIds = ((nRes.data || []) as { person_id: string }[]).map(
+          (n) => n.person_id
+        );
 
-        const nrcCount = nRes.count ?? 0;
+        const nrcCount = nrcPersonIds.length;
         const chapterCount = cRes.count ?? 0;
 
-        // --- People: dedupe across sources.
-        // Known limitation: volunteers / judges / nrc_members share no stable
-        // person key today, so cross-role dedupe falls back to normalised full
-        // name. NRC rows have no name at all, so they cannot be de-duplicated
-        // against the other two and are added as distinct people.
+        // --- People: dedupe on the shared `person_id` link across the three
+        // role tables, so one human holding several roles counts once. The
+        // published static roster carries no person_id, so it is folded in by
+        // normalised name against the DB volunteer rows only.
         const roster = STATIC_VOLUNTEERS.filter((v) => v.visibility !== "hidden");
-        const volunteerNames = new Set<string>();
-        for (const v of roster) volunteerNames.add(norm(v.fullName));
-        for (const v of dbVolunteers) volunteerNames.add(norm(v.full_name));
+        const dbVolunteerNames = new Set(dbVolunteers.map((v) => norm(v.full_name)));
 
-        const allNames = new Set(volunteerNames);
-        for (const j of dbJudges) allNames.add(norm(j.full_name));
+        const personKeys = new Set<string>();
+        for (const v of dbVolunteers) personKeys.add(v.person_id);
+        const volunteerKeyCount =
+          personKeys.size +
+          roster.filter((v) => !dbVolunteerNames.has(norm(v.fullName))).length;
+
+        for (const j of dbJudges) personKeys.add(j.person_id);
+        for (const id of nrcPersonIds) personKeys.add(id);
+        const rosterOnly = roster.filter(
+          (v) =>
+            !dbVolunteerNames.has(norm(v.fullName)) &&
+            !dbJudges.some((j) => norm(j.full_name) === norm(v.fullName))
+        );
 
         const countries = new Set<string>();
         for (const v of roster) if (v.country?.trim()) countries.add(v.country.trim());
@@ -145,14 +159,15 @@ export function useGlobalTeamStats(): GlobalTeamStats {
           if (j.country_residence?.trim()) countries.add(j.country_residence.trim());
 
         setStats({
-          people: allNames.size + nrcCount,
-          volunteers: volunteerNames.size,
+          people: personKeys.size + rosterOnly.length,
+          volunteers: volunteerKeyCount,
           judges: dbJudges.length,
           nrcMembers: nrcCount,
           countries: countries.size,
           activeChapters: chapterCount,
           judgeList: dbJudges.map((j) => ({
             id: j.id,
+            personId: j.person_id,
             name: j.full_name,
             role: "judge" as const,
             country: j.country_residence,
@@ -161,6 +176,7 @@ export function useGlobalTeamStats(): GlobalTeamStats {
             title: j.professional_title,
             slug: j.slug,
           })),
+          nrcPersonIds,
           loading: false,
           error: null,
         });
@@ -170,11 +186,13 @@ export function useGlobalTeamStats(): GlobalTeamStats {
         setStats({
           ...UNKNOWN,
           judgeList: [],
+          nrcPersonIds: [],
           loading: false,
           error: err instanceof Error ? err : new Error(String(err)),
         });
       }
     })();
+
     return () => {
       cancelled = true;
     };
