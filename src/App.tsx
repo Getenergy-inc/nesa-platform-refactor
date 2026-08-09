@@ -2561,11 +2561,32 @@ const App = () => (
                     }
                   />
 
-                  {/* Africa Education Icon — Judges Arena (public + isolated jury portal) */}
+                  {/* ===== Africa Education Icon — Judges Arena =====
+                      Order matters: public entry points and onboarding first,
+                      then the gated arena. No catch-all `/judges/:slug` route
+                      exists, so protected paths can never be shadowed. */}
                   <Route path="/judges" element={<JudgesArenaLanding />} />
                   <Route path="/judges/enter" element={<JudgesEntry />} />
                   <Route path="/judges/sign-in" element={<IconJurySignIn />} />
+                  <Route path="/judges/sign-up" element={<JudgesSignUp />} />
+                  <Route path="/judges/forgot-password" element={<JudgesForgotPassword />} />
+                  <Route path="/judges/onboarding" element={<JudgesOnboarding />} />
                   <Route path="/icon-jury/sign-in" element={<Navigate to="/judges/sign-in" replace />} />
+
+                  {/* Public judging transparency pages */}
+                  <Route
+                    path="/judges/directory"
+                    element={<WithLayout><JudgesDirectory /></WithLayout>}
+                  />
+                  <Route
+                    path="/judges/directory/:slug"
+                    element={<WithLayout><JudgeProfile /></WithLayout>}
+                  />
+                  <Route
+                    path="/judges/panels"
+                    element={<WithLayout><Judges /></WithLayout>}
+                  />
+
                   <Route
                     path="/judges"
                     element={
