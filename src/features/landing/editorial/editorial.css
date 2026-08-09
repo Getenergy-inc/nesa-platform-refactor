@@ -475,6 +475,19 @@
   letter-spacing: 0.08em;
   margin-top: 4px;
 }
+/* Narrow phones: stack the stats so long labels never crowd a neighbour. */
+@media (max-width: 520px) {
+  .nesa-ed .ed-vol-band {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  .nesa-ed .ed-vol-label {
+    font-size: 0.7rem;
+    letter-spacing: 0.06em;
+  }
+}
+
 
 /* ---------- board ---------- */
 .nesa-ed .ed-board-grid {
