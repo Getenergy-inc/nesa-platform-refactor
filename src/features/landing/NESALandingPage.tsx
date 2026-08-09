@@ -98,20 +98,25 @@ export function NESALandingPage() {
         {/* 2. PUBLIC NOTICE — nominations open 30 August 2026 */}
         <PublicNominationsNotice />
 
-        {/* 2. MEET THE AFRICA EDUCATION ICONS — flagship recognition */}
-        <IconLifetimeSection />
+        {/* 3. LIVING GALLERY — Meet Africa's Education Enablers (database-driven) */}
+        <LivingGallerySection />
 
-        {/* 3. SIX WAYS WE RECOGNISE EDUCATION IMPACT */}
+        {/* 4. ONE CONTINENTAL MISSION. SIX RECOGNITION PATHWAYS. */}
         <RecognitionFamiliesSection />
 
-        {/* 4. WHO CAN BE AN EDUCATION ENABLER? */}
+        {/* 5. AFRICA EDUCATION ICON — flagship prominence */}
+        <IconFlagshipSection />
+        <IconLifetimeSection />
+
+        {/* 6. WHO CAN BE AN EDUCATION ENABLER? */}
         <WhoCanBeEnablerSection />
 
-        {/* 5. EXPLORE EXISTING NOMINEES */}
-        <ExploreNomineesSection />
+        {/* 7. IMPACT DIRECTORY + LIVE STATS */}
+        <DirectoryStatsSection />
 
-        {/* 6. FROM RECOGNITION TO IMPACT */}
+        {/* 8. FROM RECOGNITION TO IMPACT */}
         <RecognitionToImpactSection />
+
 
         {/* 7. BUILT FOR TRUST */}
         <TrustBandSection />
