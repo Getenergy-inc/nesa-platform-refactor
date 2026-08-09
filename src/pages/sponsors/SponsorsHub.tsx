@@ -41,7 +41,7 @@ const benefits = [
   "Pan-African brand visibility across 54 countries",
   "Co-branding on certificates, ceremony, and digital channels",
   "Speaking slots at the NESA Africa Gala & forums",
-  "Sponsored AGC reward campaigns to engage 1M+ voters",
+  "Sponsor-funded programme campaigns reaching 1M+ supporters",
   "Direct access to laureates, NGOs and ministries",
   "Annual Education Impact Report co-authorship",
 ];

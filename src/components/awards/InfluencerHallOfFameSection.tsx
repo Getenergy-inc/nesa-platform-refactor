@@ -349,7 +349,7 @@ function PathwayCard({
 
         <div className="mt-auto">
           <p className="text-[11px] text-white/55 mb-3">
-            <span className="text-gold font-semibold">100% Public AGC Voting</span>
+            <span className="text-gold font-semibold">Verification-led assessment</span>
           </p>
           <div className="flex flex-col sm:flex-row gap-2">
             <Button

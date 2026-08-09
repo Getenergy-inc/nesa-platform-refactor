@@ -598,7 +598,7 @@ export default function RebuildHubPage() {
             <div className="rounded-xl border border-primary/20 bg-primary/5 p-6 space-y-4 text-white/75 text-sm leading-relaxed">
               <p>
                 Donation, pledge, sponsorship, public support, media visibility, endorsement, EduTourism
-                participation, regional voting, donation-supported voting, AGC participation, or AGC Voting Coin
+                participation, regional programme support, donations, or any GFAwzip Wallet payment
                 participation does <span className="text-gold font-semibold">not</span> guarantee that any school
                 will be selected as a beneficiary.
               </p>

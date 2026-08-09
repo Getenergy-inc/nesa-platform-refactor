@@ -61,7 +61,7 @@ const items: CardItem[] = [
     eyebrow: "Join the Network",
     title: "Become an Ambassador or SCEF Member",
     description:
-      "Join a local chapter and sign up as a NESA-Africa Ambassador or SCEF Active Member today — lead change in your region and earn AGC rewards.",
+      "Join a local chapter and sign up as a NESA-Africa Ambassador or SCEF Active Member today — lead change in your region.",
     cta: "Join the Movement",
     href: "/ambassadors",
     accent: "from-sky-500/15 to-sky-500/5",

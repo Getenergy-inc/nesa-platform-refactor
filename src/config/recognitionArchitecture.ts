@@ -89,9 +89,9 @@ export const RECOGNITION_PATHWAYS: RecognitionPathway[] = [
     tierNumber: 1,
     name: "Blue Garnet Award",
     subtitle: "Competitive Excellence",
-    oneLiner: "Flagship competitive recognition — 60% jury, 40% public AGC voting.",
+    oneLiner: "Flagship competitive recognition — independent jury assessment and governance ratification.",
     voteMechanic: "60-40-hybrid",
-    voteMechanicLabel: "60% Jury + 40% Public AGC Voting",
+    voteMechanicLabel: "Independent Jury Assessment",
     href: "/awards/blue-garnet",
   },
   {
@@ -111,7 +111,7 @@ export const RECOGNITION_PATHWAYS: RecognitionPathway[] = [
     subtitle: "Education Advocacy Through Culture",
     oneLiner: "Sports, music and social-media voices accelerating education.",
     voteMechanic: "public-agc-only",
-    voteMechanicLabel: "100% Public AGC Voting · No jury vote",
+    voteMechanicLabel: "Verification-led assessment · No public voting",
     href: "/awards/influencer-impact-2026",
   },
 ];

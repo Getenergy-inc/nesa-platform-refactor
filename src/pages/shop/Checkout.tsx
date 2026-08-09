@@ -294,7 +294,7 @@ export default function Checkout() {
                       </div>
                       <div className="flex items-center gap-1">
                         <CheckCircle className="h-3 w-3 text-primary" />
-                        Bonus AGC credited after payment confirmation
+                        Receipt issued after payment confirmation
                       </div>
                       <div className="flex items-center gap-1">
                         <CheckCircle className="h-3 w-3 text-primary" />

@@ -7,7 +7,6 @@ import { NESAFooter } from "@/components/nesa/NESAFooter";
 import { BottomPageNav } from "@/components/navigation/PageNavigation";
 import { ExitIntentPopup } from "@/components/nesa/ExitIntentPopup";
 import { PageFAQSection, FloatingFAQButton } from "@/components/nesa/PageFAQ";
-import { MobileAGCWallet } from "@/components/rewards/MobileAGCWallet";
 import { TrustSpine } from "@/components/trust/TrustSpine";
 import { ExploreNomineesCTA } from "@/components/nominees/ExploreNomineesCTA";
 import { MobileBottomActions } from "@/components/navigation/MobileBottomActions";
@@ -58,7 +57,6 @@ export function PublicLayout({
       <BottomPageNav />
       <ExitIntentPopup />
       <FloatingFAQButton />
-      <MobileAGCWallet />
       <MobileBottomActions />
     </div>
   );

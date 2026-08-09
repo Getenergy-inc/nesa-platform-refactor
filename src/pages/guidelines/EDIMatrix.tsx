@@ -62,7 +62,7 @@ const BLUE_GARNET_EDI = {
   subtitle: "10 categories · Public voting (40%) + Jury assessment (60%)",
   description: "The pinnacle competitive track. Nominees progress through public voting and expert jury evaluation. Top 3 finalists in each subcategory compete for the Blue Garnet Award.",
   scoringBreakdown: [
-    { label: "Public Voting (AGC)", weight: 40, description: "Verified public votes using Afrigold Participation Credit" },
+    { label: "Independent Jury Review", weight: 40, description: "Scored by independent judges — no public voting in the 2026 cycle" },
     { label: "Jury Assessment", weight: 60, description: "Independent expert panel scoring on 20-point scale" },
   ],
   judgingCriteria: [

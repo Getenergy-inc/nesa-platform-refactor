@@ -236,10 +236,10 @@ export default function Rebuild() {
               <Coins className="h-6 w-6 flex-shrink-0 mt-0.5" style={{ color: `hsl(42, 85%, 52%)` }} />
               <div>
                 <p className="text-sm font-medium" style={{ color: `hsl(210, 20%, 95%)` }}>
-                  Earn AGC Points for Impact
+                  Volunteer Recognition for Impact
                 </p>
                 <p className="text-xs leading-relaxed mt-1" style={{ color: `hsla(210, 20%, 90%, 0.6)` }}>
-                  Every contribution supports Rebuild My School Africa (2026–2027) and earns voting points
+                  Every contribution supports Rebuild My School Africa (2026–2027) and is receipted
                   for your favorite regional school! Purchases from the{" "}
                   <Link to="/shop" className="underline" style={{ color: `hsl(160, 70%, 50%)` }}>NESA Shop</Link>
                   {" "}also fund EduAid-Africa + SCEF services.
@@ -563,7 +563,7 @@ export default function Rebuild() {
                 style={{ color: `hsla(210, 20%, 90%, 0.6)` }}
               >
                 Help drive post-award impact, community nominations, and school support.
-                Earn AGC points for active volunteering and participation.
+                Get formally recognised for active volunteering and participation.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Link to="/ambassadors">

@@ -53,7 +53,7 @@ function RegionDashboardContent() {
               <div className="flex items-center gap-2 px-4 py-2 rounded-xl bg-gold/10 border border-gold/30">
                 <Coins className="h-5 w-5 text-gold" />
                 <div>
-                  <p className="text-xs text-muted-foreground">Afrigold Points</p>
+                  <p className="text-xs text-muted-foreground">Wallet Credits</p>
                   <p className="font-bold text-gold">--</p>
                 </div>
               </div>

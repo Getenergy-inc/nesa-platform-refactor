@@ -23,9 +23,10 @@ import {
   Globe,
   FileText,
   CheckCircle,
-  Coins,
+  ShieldCheck,
 } from "lucide-react";
 import gfawzipHeroImage from "@/assets/gfawzip-hero-woman.jpg";
+import { WALLET_SHORT_DISCLAIMER, WALLET_TAGLINE } from "@/config/walletBranding";
 
 const GFAWZIP_URL = "https://www.getfinance.africa";
 const GFA_WZIP_MARKUP_PERCENT = 2;
@@ -41,7 +42,7 @@ export default function GFAWzipWallet() {
         <title>GFAWzip Wallet | Multi-Currency Payments for NESA-Africa</title>
         <meta
           name="description"
-          content="Pay NESA-Africa tickets, donations, and sponsorships in any currency using the GFAWzip Wallet on getfinance.africa. Get instant receipts, confirmations, and AGC voting credit bonuses. AGC is non-tradeable — no cash-out."
+          content="Pay NESA-Africa tickets, merchandise, sponsorships, EduAid-Africa donations and SCEF membership dues in any currency with the GFAwzip Wallet. Instant receipts. Payments only — no voting credits."
         />
       </Helmet>
 
@@ -71,22 +72,21 @@ export default function GFAWzipWallet() {
                   </div>
                 </div>
 
-                {/* Prominent AGC Earning Message */}
                 <div className="mb-6 p-4 rounded-xl bg-gradient-to-r from-gold/10 to-primary/10 border border-gold/30">
                   <p className="text-xl md:text-2xl font-display font-bold text-gold flex items-center justify-center lg:justify-start gap-2">
-                    <Coins className="h-6 w-6" />
-                    Earn AfriGold Coins (AGC)
+                    <ShieldCheck className="h-6 w-6" />
+                    Payments only — never voting
                   </p>
                   <p className="text-sm text-muted-foreground mt-1">
-                    Every $1 spent = 5 AGC voting credits for NESA-Africa 2026
+                    {WALLET_SHORT_DISCLAIMER}
                   </p>
                 </div>
-                
+
                 <p className="text-lg text-foreground/80 mb-4">
-                  Pay in any currency. Get instant receipts. Earn voting credits.
+                  Pay in any currency. Get instant receipts. See exactly who receives your payment.
                 </p>
                 <p className="text-muted-foreground mb-8 max-w-xl mx-auto lg:mx-0">
-                  Secure, transparent checkout with multi-currency support for NESA-Africa payments.
+                  {WALLET_TAGLINE}
                 </p>
 
                 {/* Primary CTAs */}
@@ -125,8 +125,8 @@ export default function GFAWzipWallet() {
                   </Button>
                   <Button variant="ghost" size="sm" asChild>
                     <Link to="/wallet">
-                      <Coins className="mr-2 h-4 w-4" />
-                      View My Wallet
+                      <GFAWalletIcon size={16} />
+                      <span className="ml-2">View My Wallet</span>
                     </Link>
                   </Button>
                 </div>
@@ -320,7 +320,7 @@ export default function GFAWzipWallet() {
                 </li>
                 <li className="flex items-center gap-3">
                   <CheckCircle className="h-5 w-5 text-primary flex-shrink-0" />
-                  <span className="text-muted-foreground">Wallet audit trail for AGC credits and vote spending</span>
+                  <span className="text-muted-foreground">Full payment audit trail with receipts and reconciliation</span>
                 </li>
                 <li className="flex items-center gap-3">
                   <CheckCircle className="h-5 w-5 text-primary flex-shrink-0" />
@@ -344,8 +344,8 @@ export default function GFAWzipWallet() {
                 Ready to Get Started?
               </h2>
               <p className="text-lg text-gold font-semibold mb-6 flex items-center justify-center gap-2">
-                <Coins className="h-5 w-5" />
-                Earn AfriGold Coins with every payment!
+                <ShieldCheck className="h-5 w-5" />
+                Every payment receipted, reconciled and firewalled from recognition.
               </p>
               <div className="flex flex-wrap justify-center gap-4">
                 <Button
@@ -367,8 +367,8 @@ export default function GFAWzipWallet() {
                 </Button>
                 <Button size="lg" variant="outline" asChild>
                   <Link to="/wallet">
-                    <Coins className="mr-2 h-5 w-5" />
-                    View Wallet
+                    <GFAWalletIcon size={20} />
+                    <span className="ml-2">View Wallet</span>
                   </Link>
                 </Button>
               </div>

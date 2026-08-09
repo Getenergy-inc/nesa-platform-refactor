@@ -360,9 +360,9 @@ export function PersonalInfoStep({ accountType, data, onChange, onNext, onBack }
             <Gift className="h-5 w-5 text-primary" />
           </div>
           <div>
-            <p className="text-sm font-medium">Earn Afrigold Points by Nominating</p>
+            <p className="text-sm font-medium">Recognised Nominator Status</p>
             <p className="text-xs text-muted-foreground mt-0.5">
-              Submit verified nominations and earn +10 Afrigold Points per nomination. Use your points to vote for African education changemakers advocating Education for All.
+              Submit verified nominations and your nominator record is tracked on your dashboard. Nominations are assessed on evidence only.
             </p>
           </div>
         </CardContent>

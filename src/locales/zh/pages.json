@@ -67,7 +67,7 @@
       "blueGarnetDesc": "评审 + 公众",
       "legacy": "传承",
       "legacyDesc": "重建学校",
-      "agcNote": "参与解锁投票积分。投票在官方窗口期间使用AGC（不可交易）。",
+      "agcNote": "Participation happens through nominations and verified evidence during official windows.",
       "learnMore": "了解更多流程"
     },
     "voteWithAGC": {
@@ -101,7 +101,7 @@
       "auditPoint": "所有投票都有完整的审计记录",
       "learnAboutAGC": "了解AGC",
       "goToVoting": "前往投票",
-      "disclaimer": "AGC不可交易——不可提取、不可兑现、不可支付。AGC不是加密货币。"
+      "disclaimer": "The GFAwzip Wallet is a payment channel only — no voting credits, no cash-out, no payouts."
     },
     "integrity": {
       "badge": "治理与诚信",
@@ -118,7 +118,7 @@
       "auditTrail": "完整审计追踪",
       "verifiedCredentials": "已验证凭证",
       "secureVoting": "安全投票",
-      "agcDisclaimer": "AGC不可交易——不可提取或支付。"
+      "agcDisclaimer": "The GFAwzip Wallet is a payment channel only — no voting credits, no cash-out, no payouts."
     },
     "quickActions": {
       "nominate": "提名",

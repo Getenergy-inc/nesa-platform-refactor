@@ -58,7 +58,7 @@ export function ClaimHero() {
           <h1 className="font-display text-4xl md:text-6xl font-bold text-white mb-6">
             Claim Your{" "}
             <span className="relative">
-              <span className="text-gold">Voting Credits</span>
+              <span className="text-gold">Sponsor Credits</span>
               <motion.span
                 className="absolute -bottom-2 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-gold to-transparent"
                 initial={{ scaleX: 0 }}

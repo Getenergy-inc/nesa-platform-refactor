@@ -224,10 +224,10 @@ export const GALA_FAQS: FAQItem[] = [
 // ============== AGC DISCLOSURE ==============
 
 export const AGC_DISCLOSURE = {
-  title: 'AfriGold Coins (AGC) Disclosure',
+  title: 'GFAwzip Wallet Disclosure',
   points: [
     'AGC is not a tradeable coin.',
-    'Afri-Gold Coins (AGC) are non-tradeable internal credits used only within the ecosystem for services and records (tickets, receipts, donations).',
+    'The GFAwzip Wallet is a payment channel used only for authorised transactions (tickets, merchandise, donations, sponsorship and membership dues). It holds no voting credits.',
     'No cash-out. No withdrawals. No ticket payout.',
   ],
 };

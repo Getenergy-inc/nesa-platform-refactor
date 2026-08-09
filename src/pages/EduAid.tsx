@@ -775,14 +775,14 @@ export default function EduAid() {
                     </Button>
                   </div>
                   
-                  {/* AfriGold Coins */}
+                  {/* GFAwzip Wallet */}
                   <div 
                     className="flex items-center gap-4 p-4 rounded-xl"
                     style={{ backgroundColor: `${eduaidColors.brown}15` }}
                   >
                     <Sparkles className="h-8 w-8" style={{ color: eduaidColors.brown }} />
                     <div className="flex-1">
-                      <p className="text-white font-medium">Earn AfriGold Coins</p>
+                      <p className="text-white font-medium">Pay with the GFAwzip Wallet</p>
                       <p className="text-white/60 text-sm">
                         Get recognition points with every donation — unlock benefits and voting power.
                       </p>

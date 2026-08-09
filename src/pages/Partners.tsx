@@ -544,7 +544,7 @@ export default function Partners() {
                     </li>
                     <li className="flex items-start gap-3">
                       <Users className="w-5 h-5 text-primary mt-0.5" />
-                      <span className="text-muted-foreground">The public visits via your link and verified users can claim sponsor-funded Voting Credits (AGC)</span>
+                      <span className="text-muted-foreground">The public visits via your link and verified users can claim sponsor-funded programme credit through the GFAwzip Wallet</span>
                     </li>
                     <li className="flex items-start gap-3">
                       <GFAWalletIcon size={20} />

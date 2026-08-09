@@ -61,7 +61,7 @@ const sections: Section[] = [
     title: "Voting Integrity",
     content: [
       "Every vote is recorded with a device fingerprint and timestamp; duplicate-voting attempts are blocked at the database layer.",
-      "Gold Certificate voting is 100% public — 1 vote = 1 AGC (Afri-Gold Coin participation credit).",
+      "Recognition in the 2026 cycle uses no public voting: outcomes are decided by verification, assessment and governance ratification.",
       "Blue Garnet voting is hybrid: 40% public vote weight + 60% jury evaluation.",
       "Automated fraud detection monitors for burst voting (>10 votes/60s) and device reuse across accounts.",
     ],

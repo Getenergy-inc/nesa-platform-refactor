@@ -449,7 +449,7 @@ export default function Nominate() {
       clearDraft();
       setShowConfirmDialog(false);
       toast.success("Nomination Submitted Successfully!", {
-        description: "You earned 10 Afrigold Points. Share and engage to maximize your impact for quality education.",
+        description: "Your nomination is recorded. Share and engage to maximise your impact for quality education.",
       });
       navigate("/dashboard/nominations");
     } catch (error) {

@@ -57,7 +57,7 @@ const TABS_BY_SLUG: Record<string, AwardPageTab[]> = {
     { id: "nominees", label: "Existing Nominees" },
     { id: "voting", label: "Voting" },
     { id: "hall-of-fame", label: "Hall of Fame" },
-    { id: "nominate", label: "AfriGold Coin Participation" },
+    { id: "nominate", label: "How to Nominate" },
   ],
 };
 

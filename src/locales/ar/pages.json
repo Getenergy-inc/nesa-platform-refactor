@@ -84,7 +84,7 @@
       "blueGarnetDesc": "لجنة + عام",
       "legacy": "إرث",
       "legacyDesc": "إعادة بناء المدارس",
-      "agcNote": "المشاركة تفتح نقاط التصويت. التصويت يستخدم AGC (غير قابل للتداول) خلال النوافذ الرسمية.",
+      "agcNote": "Participation happens through nominations and verified evidence during official windows.",
       "learnMore": "تعرف على المزيد حول العملية"
     },
     "voteWithAGC": {
@@ -118,7 +118,7 @@
       "auditPoint": "جميع الأصوات مسجلة مع مسار تدقيق كامل",
       "learnAboutAGC": "تعرف على AGC",
       "goToVoting": "اذهب إلى التصويت",
-      "disclaimer": "AGC غير قابل للتداول — لا سحوبات، لا صرف نقدي، لا مدفوعات. AGC ليست عملة مشفرة."
+      "disclaimer": "The GFAwzip Wallet is a payment channel only — no voting credits, no cash-out, no payouts."
     },
     "integrity": {
       "badge": "الحوكمة والنزاهة",
@@ -135,7 +135,7 @@
       "auditTrail": "مسار تدقيق كامل",
       "verifiedCredentials": "أوراق اعتماد موثقة",
       "secureVoting": "تصويت آمن",
-      "agcDisclaimer": "AGC غير قابل للتداول — لا سحوبات، لا صرف نقدي، لا مدفوعات."
+      "agcDisclaimer": "The GFAwzip Wallet is a payment channel only — no voting credits, no cash-out, no payouts."
     },
     "quickActions": {
       "nominate": "رشح",

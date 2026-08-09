@@ -210,7 +210,7 @@ export const KEY_PROGRAMMES = [
     body: "Connects education recognition with learning travel, school visits, cultural exchange, impact commissioning and continental storytelling.",
   },
   {
-    title: "AGC Voting and Wallet Participation",
+    title: "GFAwzip Wallet Payment Operations",
     body: "Supports public voting, digital engagement and transparent community involvement.",
   },
 ] as const;
@@ -222,7 +222,7 @@ export const CAPABILITY_AREAS = [
   { title: "Media Production and Storytelling", body: "NESA Africa TV programming, documentary production, nominee interviews, public awareness campaigns, gala broadcast planning, social media activation and regional correspondent reporting." },
   { title: "Event and Gala Management", body: "Awards gala planning, recognition showcase production, stage and broadcast coordination, red carpet media, sponsor visibility integration, press conference coordination and winner announcement management." },
   { title: "Partnership and Sponsorship Engagement", body: "Corporate sponsorship packages, CSR visibility opportunities, donor engagement, embassy and bilateral partnership outreach, institutional partnership development and education impact partnership alignment." },
-  { title: "Public Engagement and Voting", body: "AGC voting education, nominee discovery campaigns, public voting coordination, digital engagement, community mobilisation and regional participation." },
+  { title: "Public Engagement", body: "Nominee discovery campaigns, digital engagement, community mobilisation and regional participation." },
   { title: "Impact Programme Activation", body: "Scholarship mobilisation, school support initiatives, special needs education support, EduAid-Africa webinars, Rebuild My School Africa campaigns and Afri-EduTourism legacy activities." },
 ] as const;
 

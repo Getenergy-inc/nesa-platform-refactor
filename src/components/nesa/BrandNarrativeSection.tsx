@@ -23,7 +23,7 @@ const slides = [
     eyebrow: "Africans • Diaspora • Friends of Africa",
     title: "One Continent. One Changemaker Movement.",
     body:
-      "Whether they are Africans in Africa, Africans in the diaspora, or Friends of Africa supporting education development, their contributions deserve celebration, AGC voting participation, and pan-African storytelling.",
+      "Whether they are Africans in Africa, Africans in the diaspora, or Friends of Africa supporting education development, their contributions deserve celebration, independent verification, and pan-African storytelling.",
   },
 ];
 

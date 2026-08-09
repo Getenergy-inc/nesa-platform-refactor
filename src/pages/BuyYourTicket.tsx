@@ -48,7 +48,7 @@ import {
   type DonationFrequencyType,
   type DonationCauseType,
 } from "@/config/galaConfig";
-import { AGC_BONUS_RATES, PARTICIPATION_SERVICES, REFERRAL_EARN_COPY } from "@/constants/agc";
+import { PARTICIPATION_SERVICES, REFERRAL_EARN_COPY } from "@/constants/agc";
 import { TicketTierCards, ReferralLinkCard, AgcDisclosure } from "@/components/tickets";
 import { useReferralCode } from "@/hooks/useReferralCode";
 
@@ -82,7 +82,6 @@ export default function BuyYourTicket() {
 
   const selectedTicket = TICKET_TIERS.find((t) => t.id === selectedTier);
   const subtotal = selectedTicket ? selectedTicket.price * quantity : 0;
-  const bonusAgc = subtotal * AGC_BONUS_RATES.purchaseBonus;
 
   const handleQuantityChange = (delta: number) => {
     const newQty = quantity + delta;
@@ -104,7 +103,7 @@ export default function BuyYourTicket() {
     
     toast({
       title: "🎟️ Ticket Reserved!",
-      description: `Your ${quantity}x ${selectedTicket?.name} ticket(s) have been reserved. +${bonusAgc} AGC bonus credited! QR e-ticket sent to your email.`,
+      description: `Your ${quantity}x ${selectedTicket?.name} ticket(s) have been reserved. QR e-ticket and receipt sent to your email.`,
     });
     setIsProcessing(false);
   };
@@ -243,10 +242,10 @@ export default function BuyYourTicket() {
                 NEW
               </Badge>
               <h2 className="font-display text-3xl font-bold">
-                🚀 Refer & Earn Voting Credits
+                🚀 Refer & Share the Gala
               </h2>
               <p className="mt-2 text-muted-foreground">
-                Invite friends to buy tickets and earn extra AGC voting credits.
+                Invite friends to attend. Your link tracks attendance only — it never affects recognition.
               </p>
             </div>
 
@@ -256,8 +255,8 @@ export default function BuyYourTicket() {
               <Card>
                 <CardHeader>
                   <CardTitle className="flex items-center gap-2">
-                    <Vote className="h-5 w-5 text-primary" />
-                    Where AGC is Used for Voting
+                    <Wallet className="h-5 w-5 text-primary" />
+                    Where GFAwzip Wallet Payments Go
                   </CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-3">
@@ -358,12 +357,6 @@ export default function BuyYourTicket() {
                     <span className="text-primary">${subtotal} USD</span>
                   </div>
 
-                  {/* Bonus AGC preview */}
-                  <div className="flex items-center justify-center gap-2 rounded-lg bg-gold/10 p-3 text-sm">
-                    <Gift className="h-4 w-4 text-gold" />
-                    <span>You'll earn <span className="font-bold text-gold">+{bonusAgc} AGC</span> bonus voting credits!</span>
-                  </div>
-
                   {referralCode && (
                     <div className="flex items-center gap-2 rounded-lg bg-primary/10 p-2 text-xs">
                       <Users className="h-4 w-4 text-primary" />
@@ -400,17 +393,17 @@ export default function BuyYourTicket() {
               <CardHeader className="text-center">
                 <CardTitle className="flex items-center justify-center gap-2">
                   <Gift className="h-6 w-6 text-gold" />
-                  🪙 Bonus AGC Voting Credits
+                  🧾 Receipts, Confirmations & Records
                 </CardTitle>
                 <CardDescription>
-                  Every ticket purchase earns Bonus Afri-Gold Coins (AGC) for voting across SCEF services.
+                  Every payment through the GFAwzip Wallet is receipted and reconciled across NESA-Africa, EduAid-Africa and SCEF services.
                 </CardDescription>
               </CardHeader>
               <CardContent className="space-y-4">
                 <div className="text-center p-4 rounded-lg bg-card/50">
                   <p className="text-lg">
-                    For every <span className="font-bold">$1 (USD-equivalent)</span> you pay, you receive{" "}
-                    <span className="font-bold text-gold text-2xl">{AGC_BONUS_RATES.purchaseBonus} AGC</span> Bonus.
+                    Payments are processed in your local currency, with an instant receipt and a
+                    permanent record in your wallet history.
                   </p>
                 </div>
                 
@@ -603,7 +596,7 @@ export default function BuyYourTicket() {
                   </h3>
                   <ul className="mt-2 space-y-1 text-sm text-muted-foreground">
                     <li>• Receipt + QR e-ticket (instant)</li>
-                    <li>• Bonus AGC credited to wallet</li>
+                    <li>• Payment recorded in your wallet history</li>
                   </ul>
                 </CardContent>
               </Card>
@@ -626,8 +619,8 @@ export default function BuyYourTicket() {
                     Referral Rewards
                   </h3>
                   <ul className="mt-2 space-y-1 text-sm text-muted-foreground">
-                    <li>• AGC credited to wallet</li>
-                    <li>• For voting only</li>
+                    <li>• Attendance tracked to your link</li>
+                    <li>• No effect on recognition outcomes</li>
                   </ul>
                 </CardContent>
               </Card>
@@ -666,12 +659,12 @@ export default function BuyYourTicket() {
                 ))}
                 <AccordionItem value="faq-extra-1">
                   <AccordionTrigger className="text-left">
-                    Can I earn AGC without buying a ticket?
+                    Can a ticket or donation influence who wins?
                   </AccordionTrigger>
                   <AccordionContent>
-                    Yes—AGC can be earned through other SCEF activities like daily check-ins, verified nominations, 
-                    and referrals. Sponsors may also fund public voting credits. Check the{" "}
-                    <Link to="/earn-voting-credits" className="text-primary underline">Earn Voting Credits</Link> page.
+                    No. Tickets, donations, merchandise and sponsorship are commercial or
+                    philanthropic transactions only. See the{" "}
+                    <Link to="/wallet/gfawzip" className="text-primary underline">GFAwzip Wallet</Link> page.
                   </AccordionContent>
                 </AccordionItem>
               </Accordion>

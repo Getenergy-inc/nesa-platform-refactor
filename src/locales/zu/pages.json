@@ -84,7 +84,7 @@
       "blueGarnetDesc": "Umahluleleli + Umphakathi",
       "legacy": "Ifa",
       "legacyDesc": "Yakha Kabusha Izikole",
-      "agcNote": "Ukubamba iqhaza kuvula amaphuzu okuvota. Ukuvota kusebenzisa i-AGC ngesikhathi samawindi asemthethweni.",
+      "agcNote": "Participation happens through nominations and verified evidence during official windows.",
       "learnMore": "Funda Kabanzi Ngenqubo"
     },
     "voteWithAGC": {
@@ -118,7 +118,7 @@
       "auditPoint": "Wonke amavoti abhalisiwe ngokulondoloza okugcwele",
       "learnAboutAGC": "Funda Nge-AGC",
       "goToVoting": "Iya Ekuvoteni",
-      "disclaimer": "I-AGC ayithengiselwani — akukho ukukhipha, akukho ukukhokha. I-AGC ayiyona i-crypto."
+      "disclaimer": "The GFAwzip Wallet is a payment channel only — no voting credits, no cash-out, no payouts."
     },
     "integrity": {
       "badge": "Ukubusa Nokwethembeka",
@@ -135,7 +135,7 @@
       "auditTrail": "Umzila Wokuhlola Ogcwele",
       "verifiedCredentials": "Izitifiketi Eziqinisekisiwe",
       "secureVoting": "Ukuvota Okuvikelekile",
-      "agcDisclaimer": "I-AGC ayithengiselwani — akukho ukukhipha noma ukukhokha."
+      "agcDisclaimer": "The GFAwzip Wallet is a payment channel only — no voting credits, no cash-out, no payouts."
     },
     "quickActions": {
       "nominate": "Qoka",

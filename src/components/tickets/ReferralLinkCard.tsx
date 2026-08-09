@@ -119,9 +119,9 @@ export function ReferralLinkCard({ compact = false }: ReferralLinkCardProps) {
       <Card className="border-primary/30 bg-gradient-to-br from-primary/5 to-primary/10">
         <CardContent className="p-6 text-center">
           <Gift className="mx-auto h-10 w-10 text-primary mb-3" />
-          <h3 className="font-semibold text-lg mb-2">Refer & Earn Voting Credits</h3>
+          <h3 className="font-semibold text-lg mb-2">Refer & Share</h3>
           <p className="text-sm text-muted-foreground mb-4">
-            Sign in to get your unique referral link and earn AGC when friends buy tickets.
+            Sign in to get your unique referral link and track who attends through you.
           </p>
           <Button onClick={() => navigate("/login?redirect=/buy-your-ticket")}>
             <LogIn className="mr-2 h-4 w-4" />

@@ -84,7 +84,7 @@
       "blueGarnetDesc": "Júri + Público",
       "legacy": "Legado",
       "legacyDesc": "Reconstruir Escolas",
-      "agcNote": "A participação desbloqueia pontos de votação. A votação usa AGC (não negociável) durante janelas oficiais.",
+      "agcNote": "Participation happens through nominations and verified evidence during official windows.",
       "learnMore": "Saiba Mais Sobre o Processo"
     },
     "voteWithAGC": {
@@ -118,7 +118,7 @@
       "auditPoint": "Todos os votos registados com trilha de auditoria completa",
       "learnAboutAGC": "Saiba Mais Sobre AGC",
       "goToVoting": "Ir para Votação",
-      "disclaimer": "AGC não é negociável — sem levantamentos, sem troca, sem pagamentos. AGC não é criptomoeda."
+      "disclaimer": "The GFAwzip Wallet is a payment channel only — no voting credits, no cash-out, no payouts."
     },
     "integrity": {
       "badge": "Governança e Integridade",
@@ -135,7 +135,7 @@
       "auditTrail": "Trilha de Auditoria Completa",
       "verifiedCredentials": "Credenciais Verificadas",
       "secureVoting": "Votação Segura",
-      "agcDisclaimer": "AGC não é negociável — sem levantamentos, sem troca, sem pagamentos."
+      "agcDisclaimer": "The GFAwzip Wallet is a payment channel only — no voting credits, no cash-out, no payouts."
     },
     "quickActions": {
       "nominate": "Nomear",

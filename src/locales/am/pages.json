@@ -84,7 +84,7 @@
       "blueGarnetDesc": "ዳኛ + ህዝብ",
       "legacy": "ቅርስ",
       "legacyDesc": "ት/ቤቶችን መልሶ መገንባት",
-      "agcNote": "ተሳትፎ የድምጽ ነጥቦችን ይከፍታል። ድምጽ መስጠት AGC (የማይገበያይ) ይጠቀማል።",
+      "agcNote": "Participation happens through nominations and verified evidence during official windows.",
       "learnMore": "ስለ ሂደቱ ተጨማሪ ይወቁ"
     },
     "voteWithAGC": {
@@ -118,7 +118,7 @@
       "auditPoint": "ሁሉም ድምጾች ከሙሉ ኦዲት ጋር ይመዘገባሉ",
       "learnAboutAGC": "ስለ AGC ይወቁ",
       "goToVoting": "ወደ ድምጽ ይሂዱ",
-      "disclaimer": "AGC የማይገበያይ ነው — ማውጣት፣ ማቀዝቀዝ ወይም ክፍያ የለም። AGC ክሪፕቶ አይደለም።"
+      "disclaimer": "The GFAwzip Wallet is a payment channel only — no voting credits, no cash-out, no payouts."
     },
     "integrity": {
       "badge": "አስተዳደር እና ታማኝነት",
@@ -135,7 +135,7 @@
       "auditTrail": "ሙሉ ኦዲት ዱካ",
       "verifiedCredentials": "የተረጋገጡ ምስክሮች",
       "secureVoting": "ደህንነቱ የተጠበቀ ድምጽ",
-      "agcDisclaimer": "AGC የማይገበያይ — ማውጣት ወይም ክፍያ የለም።"
+      "agcDisclaimer": "The GFAwzip Wallet is a payment channel only — no voting credits, no cash-out, no payouts."
     },
     "quickActions": {
       "nominate": "ይሰይሙ",

@@ -337,11 +337,11 @@ export const PAGE_FAQS: PageFAQ[] = [
     faqs: [
       {
         q: "What is public voting?",
-        a: "Public voting is the supporter-led component of selected NESA-Africa 2026 categories, using non-tradeable Afri-Gold Coin (AGC) voting credits within official voting windows.",
+        a: "There is no public voting in the NESA-Africa 2026 cycle. Recognition is decided by NRC verification, EDI Matrix assessment, independent judging and governance ratification.",
       },
       {
         q: "Who can vote?",
-        a: "Any registered supporter aged [CONFIRM] or above, with a verified account and available AGC voting credits.",
+        a: "Not applicable for the 2026 cycle — no public voting is used.",
       },
       {
         q: "How many times can someone vote?",
@@ -1011,7 +1011,7 @@ export const PAGE_FAQS: PageFAQ[] = [
     title: "Create an account — FAQ",
     subtitle: "Joining the NESA-Africa 2026 community.",
     faqs: [
-      { q: "Why should I create an account?", a: "To nominate, vote, earn AGC participation credits, follow nominees, register for events and receive official updates." },
+      { q: "Why should I create an account?", a: "To nominate, follow nominees, manage GFAwzip Wallet payments, register for events and receive official updates." },
       { q: "Is registration free?", a: "Yes. Basic registration is free." },
       { q: "Can institutions register?", a: "Yes. Institutional accounts support sponsors, partners, endorsers and chapter teams." },
       { q: "What if I do not receive a verification email?", a: "Check your spam folder, then request a new verification email from the sign-in page or contact info@nesa.africa." },
@@ -1118,11 +1118,11 @@ export const FULL_FAQ_GROUPS: FAQGroup[] = [
   },
   {
     title: "C. Nomination & Voting",
-    description: "How nominations and AGC voting work.",
+    description: "How nominations and assessment work.",
     faqs: [
       { q: "Who can be nominated?", a: "Educators, schools, NGOs, corporations, governments, foundations, influencers, media houses, diaspora communities and Friends of Africa." },
       { q: "How are nominees verified?", a: "By the independent Nomination Review Committee (NRC) against the 5-pillar Education Development Index." },
-      { q: "How does public voting work?", a: "Through Afri-Gold Coin (AGC) participation credits during official voting windows, with audit-grade anti-fraud controls. AGC is non-tradeable." },
+      { q: "How does public voting work?", a: "There is no public voting in the 2026 cycle. Recognition is decided by verification, assessment, judging and governance ratification." },
       { q: "When does voting open?", a: "Gold Certificate [CONFIRM DATE] – [CONFIRM DATE]; Blue Garnet [CONFIRM DATE] – [CONFIRM DATE]." },
     ],
   },

@@ -8,24 +8,33 @@ interface FAQ {
 
 const FAQS: FAQ[] = [
   {
-    question: "Can I withdraw AGC?",
-    answer: "No. AGC is non-tradeable voting credit. There is no cash-out, no withdrawals, and no payouts.",
+    question: "What is the GFAwzip Wallet used for?",
+    answer:
+      "It is the approved payment channel for authorised NESA-Africa, EduAid-Africa and SCEF transactions: sponsorship, merchandise, gala and event payments, approved programme contributions and other authorised transactions.",
   },
   {
-    question: "Is AGC cryptocurrency?",
-    answer: "No. AGC is an internal voting credit used only within the SCEF/NESA-Africa ecosystem.",
+    question: "Are there voting credits in the wallet?",
+    answer:
+      "No. There is no public voting for the 2026 cycle and no voting credits exist in any form. The wallet is a payment channel only.",
+  },
+  {
+    question: "Can a payment influence recognition?",
+    answer:
+      "No. No payment, donation, sponsorship or membership can increase a nominee's score, influence NRC verification or assessment, or purchase finalist or award status.",
   },
   {
     question: "What do I receive after payment?",
-    answer: "You receive instant receipts, QR e-tickets (for ticket purchases), donation confirmations, or sponsorship acknowledgements.",
+    answer:
+      "You receive an instant receipt, plus a QR e-ticket for ticket purchases, a donation confirmation for EduAid-Africa donations, or a sponsorship acknowledgement.",
   },
   {
-    question: "How do I earn AGC from payments?",
-    answer: "$1 = 5 Bonus AGC for eligible transactions. Credits are added to your wallet after successful payment.",
+    question: "Who receives my money?",
+    answer:
+      "Each payment path is separated. NESA-Africa receives tickets, merchandise and sponsorship. EduAid-Africa receives education donations. SCEF receives membership sign-up and dues. The receiving organisation is shown before you pay.",
   },
   {
-    question: "Where do I see my AGC?",
-    answer: "Visit your Wallet (/wallet) to view your balance and complete transaction history.",
+    question: "Where do I see my payment history?",
+    answer: "Visit your wallet at /wallet to view your balance, payments and receipts.",
   },
 ];
 

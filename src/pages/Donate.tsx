@@ -16,6 +16,10 @@ import {
   Users,
 } from "lucide-react";
 import { useState } from "react";
+import { toast } from "sonner";
+import { initPayment } from "@/api/payments";
+import { PaymentDestinationBadge } from "@/components/payments/PaymentDestinationBadge";
+import { paymentProgram, WALLET_NAME } from "@/config/walletBranding";
 import { MiniMusicPlayer } from "@/components/nesa/MiniMusicPlayer";
 import { DonorTrustPanel } from "@/components/governance/DonorTrustPanel";
 import africaMapImg from "@/assets/africa-map-silhouette.png";
@@ -45,17 +49,57 @@ export default function Donate() {
   const returnTo = searchParams.get("return_to");
   const isPledgeMode = Boolean(returnTo);
 
-  const handleDonate = () => {
-    const amount = customAmount || selectedAmount;
-    console.log(`${isPledgeMode ? "Pledging" : "Donating"} $${amount}`);
-    if (returnTo) {
-      try {
-        const url = new URL(returnTo, window.location.origin);
-        url.searchParams.set("pledged", "success");
-        navigate(url.pathname + url.search + url.hash, { replace: true });
-      } catch {
-        navigate(returnTo, { replace: true });
+  const [submitting, setSubmitting] = useState(false);
+
+  const handleDonate = async () => {
+    const amount = Number(customAmount || selectedAmount);
+
+    if (isPledgeMode) {
+      if (returnTo) {
+        try {
+          const url = new URL(returnTo, window.location.origin);
+          url.searchParams.set("pledged", "success");
+          navigate(url.pathname + url.search + url.hash, { replace: true });
+        } catch {
+          navigate(returnTo, { replace: true });
+        }
       }
+      return;
+    }
+
+    if (!amount || amount < 1) {
+      toast.error("Enter a donation amount of at least $1.");
+      return;
+    }
+
+    setSubmitting(true);
+    try {
+      // EduAid-Africa receives every donation made here (Rebuild My School Africa).
+      const { data, error } = await initPayment(
+        amount,
+        paymentProgram("eduaid", "rebuild_my_school"),
+        "USD",
+        { destination: "eduaid", cause: "rebuild_my_school_africa", wallet: WALLET_NAME }
+      );
+
+      if (error || !data?.success) {
+        toast.error(error || "We could not start that payment. Please try again.");
+        return;
+      }
+
+      if (data.payment_url) {
+        window.location.href = data.payment_url;
+        return;
+      }
+
+      toast.success(
+        data.message || "Donation recorded. A receipt will be sent once payment is confirmed."
+      );
+    } catch (e) {
+      console.error("Donation init failed", e);
+      toast.error("We could not start that payment. Please try again.");
+    } finally {
+      setSubmitting(false);
     }
   };
 
@@ -190,16 +234,22 @@ export default function Donate() {
                     </ul>
                   </div>
 
+                  <PaymentDestinationBadge
+                    org="eduaid"
+                    detail="Rebuild My School Africa — special-needs school interventions"
+                  />
+
                   {/* Security Note */}
                   <div className="flex items-center justify-center gap-2 text-xs text-white/50">
                     <Shield className="h-4 w-4" />
-                    Secure payment via Paystack / Flutterwave
+                    Secure checkout via the {WALLET_NAME} (Paystack / Flutterwave)
                   </div>
 
                   {/* Donate / Pledge Button */}
                   <Button
                     onClick={handleDonate}
                     size="lg"
+                    disabled={submitting}
                     className="w-full bg-primary text-primary-foreground"
                   >
                     {isPledgeMode ? (

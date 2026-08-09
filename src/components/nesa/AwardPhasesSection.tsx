@@ -17,7 +17,7 @@ export function AwardPhasesSection() {
 
   const getAgcNote = (index: number, phaseTitle: string) => {
     if (phaseTitle.toLowerCase().includes("gold")) {
-      return "Public participation is enabled through AGC voting points.";
+      return "Public participation happens through nominations and verified evidence.";
     }
     if (phaseTitle.toLowerCase().includes("blue garnet") && !phaseTitle.toLowerCase().includes("icon")) {
       return "Explore Recognition during the public window; final results combine public participation and jury review.";

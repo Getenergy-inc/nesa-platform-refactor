@@ -275,7 +275,7 @@ export default function EDXMatrixPage() {
                 {
                   step: "4",
                   title: "Jury & voting layer",
-                  body: "For Blue Garnet, public AGC voting and jury panels combine with EDX scores under the audited Blue Garnet formula.",
+                  body: "For Blue Garnet, independent jury panels combine with EDX scores under the audited Blue Garnet formula. No public voting is used in the 2026 cycle.",
                 },
                 {
                   step: "5",

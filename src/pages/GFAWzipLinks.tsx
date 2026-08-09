@@ -48,7 +48,7 @@ const QUICK_ACTIONS = [
     color: "hsl(var(--chart-1))",
     links: [
       { label: "My Dashboard", href: "/dashboard", icon: Coins, description: "View AGC balance & history" },
-      { label: "Top Up AGC", href: "/dashboard", icon: Zap, description: "Add voting credits" },
+      { label: "Top Up Wallet", href: "/wallet", icon: Zap, description: "Fund authorised payments" },
       { label: "About AGC", href: "/about-agc", icon: Gift, description: "Learn how AGC works" },
     ],
   },
@@ -91,7 +91,7 @@ const KEY_FEATURES = [
   { icon: Globe, title: "Multi-Currency", description: "Pay in your local currency" },
   { icon: Shield, title: "Secure", description: "Bank-grade encryption" },
   { icon: QrCode, title: "QR Receipts", description: "Instant e-tickets & confirmations" },
-  { icon: Gift, title: "+5 AGC/$1", description: "Earn voting credits on payments" },
+  { icon: Gift, title: "Instant Receipts", description: "Every payment receipted and reconciled" },
 ];
 
 export default function GFAWzipLinks() {
@@ -289,7 +289,7 @@ export default function GFAWzipLinks() {
             <div className="max-w-2xl mx-auto">
               <div className="bg-warning/10 border border-warning/30 rounded-xl p-4 text-center">
                 <p className="text-sm text-warning font-medium mb-1">
-                  ⚠️ AGC is Non-Tradeable Voting Credit
+                  ⚠️ GFAwzip Wallet is a Payment Channel Only
                 </p>
                 <p className="text-xs text-muted-foreground">
                   No withdrawals, no cash-out, no payouts. AGC is used exclusively for voting within the NESA-Africa ecosystem.

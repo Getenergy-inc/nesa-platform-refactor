@@ -16,6 +16,10 @@ import {
   ExternalLink
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { toast } from "sonner";
+import { initPayment } from "@/api/payments";
+import { PaymentDestinationBadge } from "@/components/payments/PaymentDestinationBadge";
+import { paymentProgram, WALLET_NAME } from "@/config/walletBranding";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import {
@@ -36,6 +40,8 @@ const whyJoinReasons = [
 
 const ambassadorTiers = [
   {
+    slug: "ambassador_1",
+    duesAmount: 50,
     tier: "Ambassador-1",
     description: "Local Chapter Project Ambassador (e.g., EduAid/NESA)",
     adminFee: "$10",
@@ -44,6 +50,8 @@ const ambassadorTiers = [
     highlight: false,
   },
   {
+    slug: "ambassador_2",
+    duesAmount: 80,
     tier: "Ambassador-2",
     description: "Country/Regional Representative across both EduAid & NESA",
     adminFee: "$20",
@@ -52,6 +60,8 @@ const ambassadorTiers = [
     highlight: true,
   },
   {
+    slug: "ambassador_3",
+    duesAmount: 200,
     tier: "Ambassador-3",
     description: "Global or Multi-Project Strategic Ambassador",
     adminFee: "$50",
@@ -104,13 +114,37 @@ const diasporaContributions = [
 
 const registrationSteps = [
   "Choose your Ambassador Tier (1, 2, or 3)",
-  "Pay a one-time administrative fee via the GFA Wallet: Amb-1: $10 | Amb-2: $20 | Amb-3: $50",
+  "Pay a one-time administrative fee via the GFAwzip Wallet: Amb-1: $10 | Amb-2: $20 | Amb-3: $50 (paid to SCEF)",
   "Complete your ambassador profile and select your chapter of affiliation",
   "Pay annual dues ($50, $80, or $200 respectively)",
   "Begin your ambassador journey with NESA-Africa 2026!",
 ];
 
 export default function Ambassadors() {
+  const payDues = async (slug: string, amount: number, label: string) => {
+    try {
+      // SCEF receives all membership and ambassador dues.
+      const { data, error } = await initPayment(
+        amount,
+        paymentProgram("scef", `${slug}_dues`),
+        "USD",
+        { destination: "scef", membership: label, wallet: WALLET_NAME }
+      );
+      if (error || !data?.success) {
+        toast.error(error || "We could not start that payment. Please try again.");
+        return;
+      }
+      if (data.payment_url) {
+        window.location.href = data.payment_url;
+        return;
+      }
+      toast.success(data.message || "Dues recorded. A receipt will follow once confirmed.");
+    } catch (e) {
+      console.error("Dues payment failed", e);
+      toast.error("We could not start that payment. Please try again.");
+    }
+  };
+
   return (
     <>
       <Helmet>
@@ -289,10 +323,23 @@ export default function Ambassadors() {
                       <div className="pt-2 border-t border-gold/20">
                         <p className="text-white/80 text-sm">{tier.benefits}</p>
                       </div>
+                      <Button
+                        className="w-full bg-gold hover:bg-gold/90 text-charcoal font-semibold"
+                        onClick={() => payDues(tier.slug, tier.duesAmount, tier.tier)}
+                      >
+                        Pay {tier.tier} Dues ({tier.annualDues})
+                      </Button>
                     </CardContent>
                   </Card>
                 </motion.div>
               ))}
+            </div>
+
+            <div className="max-w-2xl mx-auto mt-8">
+              <PaymentDestinationBadge
+                org="scef"
+                detail="Ambassador administrative fees and annual membership dues"
+              />
             </div>
 
             <p className="text-center text-white/60 mt-8 max-w-2xl mx-auto">
@@ -492,8 +539,8 @@ export default function Ambassadors() {
                 </div>
                 <div className="flex items-center justify-center gap-3 text-white/80">
                   <CreditCard className="h-5 w-5 text-gold" />
-                  <span>Payments via: <a href="https://www.getfinance.africa" target="_blank" rel="noopener noreferrer" className="text-gold hover:underline inline-flex items-center gap-1">
-                    GFA Wallet (www.getfinance.africa)
+                  <span>Payments via the {WALLET_NAME}: <a href="https://www.getfinance.africa" target="_blank" rel="noopener noreferrer" className="text-gold hover:underline inline-flex items-center gap-1">
+                    getfinance.africa
                     <ExternalLink className="h-3 w-3" />
                   </a></span>
                 </div>

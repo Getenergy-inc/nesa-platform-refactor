@@ -203,7 +203,7 @@ const TIERS: Tier[] = [
     tierNumber: 4,
     name: "Influencers Education Impact Award",
     type: "Public Recognition",
-    selection: "100% Public Vote (AfriGold Coin)",
+    selection: "Verification-led assessment · No public voting",
     selectionBadge: "Public Vote",
     winners: "3 Winners",
     purpose: "Public-driven recognition for influencers using their platforms to advance education.",

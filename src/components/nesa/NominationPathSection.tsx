@@ -30,10 +30,10 @@ export function NominationPathSection() {
       badge: "Public Voting",
       title: "Gold-Blue Garnet Certificate Awards",
       period: "Annual Competition",
-      description: "Open competition with public participation through AGC voting and expert judging.",
+      description: "Open competition with public nominations, independent verification and expert judging.",
       bullets: [
         "Nominate verified changemakers",
-        "Earn voting points through participation",
+        "Independent NRC verification of every nomination",
         "Explore Recognition during official public voting windows",
         "Winners protected by integrity controls"
       ],
