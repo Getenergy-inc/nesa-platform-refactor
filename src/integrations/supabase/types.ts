@@ -3733,6 +3733,7 @@ export type Database = {
           judge_status: Database["public"]["Enums"]["judge_status"]
           languages: string[]
           organization: string | null
+          person_id: string
           phone: string | null
           photo_url: string | null
           professional_title: string | null
@@ -3760,6 +3761,7 @@ export type Database = {
           judge_status?: Database["public"]["Enums"]["judge_status"]
           languages?: string[]
           organization?: string | null
+          person_id?: string
           phone?: string | null
           photo_url?: string | null
           professional_title?: string | null
@@ -3787,6 +3789,7 @@ export type Database = {
           judge_status?: Database["public"]["Enums"]["judge_status"]
           languages?: string[]
           organization?: string | null
+          person_id?: string
           phone?: string | null
           photo_url?: string | null
           professional_title?: string | null
@@ -6333,6 +6336,7 @@ export type Database = {
           last_active_at: string | null
           max_queue_size: number | null
           nrc_role: string | null
+          person_id: string
           review_count: number | null
           specialization: string[] | null
           status: string
@@ -6356,6 +6360,7 @@ export type Database = {
           last_active_at?: string | null
           max_queue_size?: number | null
           nrc_role?: string | null
+          person_id?: string
           review_count?: number | null
           specialization?: string[] | null
           status?: string
@@ -6379,6 +6384,7 @@ export type Database = {
           last_active_at?: string | null
           max_queue_size?: number | null
           nrc_role?: string | null
+          person_id?: string
           review_count?: number | null
           specialization?: string[] | null
           status?: string
@@ -10073,6 +10079,7 @@ export type Database = {
           id: string
           is_featured: boolean
           joined_at: string
+          person_id: string
           photo_url: string | null
           profile_views: number
           referral_code: string
@@ -10103,6 +10110,7 @@ export type Database = {
           id?: string
           is_featured?: boolean
           joined_at?: string
+          person_id?: string
           photo_url?: string | null
           profile_views?: number
           referral_code: string
@@ -10133,6 +10141,7 @@ export type Database = {
           id?: string
           is_featured?: boolean
           joined_at?: string
+          person_id?: string
           photo_url?: string | null
           profile_views?: number
           referral_code?: string
