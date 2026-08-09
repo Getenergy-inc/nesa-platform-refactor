@@ -165,18 +165,19 @@ export const MAIN_NAV: NavItem[] = [
     ],
   },
 
-  // 6. IMPACT PROGRAMS
+  // 6. NESA-AFRICA EDUCATION SOCIAL IMPACT
   {
-    label: "Impact Programs",
-    href: "/programs",
+    label: "Education Impact",
+    href: "/impact",
     icon: Heart,
     children: [
-      { label: "Special Needs School Intervention", href: "/eduaid", description: "Nominate → Verify → Intervention", icon: Heart, badge: "Flagship" },
-      { label: "EduAid-Africa", href: "/eduaid", description: "Scholarships, learning access & inclusion", icon: GraduationCap },
-      { label: "Rebuild My School Africa", href: "/rebuild", description: "Classrooms, infrastructure & accessibility", icon: Building2 },
-      { label: "NESA-Africa TV", href: "/media/tv", description: "Live streams & documentaries", icon: Tv, badge: "Live" },
-      { label: "Education Impact Webinars", href: "/media/webinars", description: "Continental webinar series", icon: Mic },
-      { label: "Post-Award Legacy", href: "/programs#legacy", description: "Long-term social impact", icon: Sparkles },
+      { label: "Education Social Impact Overview", href: "/impact", description: "Recognition that creates real education impact", icon: Heart },
+      { label: "Rebuild My School Africa", href: "/eduaid-africa/rebuild-my-school", description: "Transform a school. Change an education environment.", icon: Building2, badge: "Flagship" },
+      { label: "Support a Special-Needs School", href: "/impact/special-needs-schools", description: "Advance inclusive education", icon: GraduationCap },
+      { label: "Regional School Interventions", href: "/impact/regional", description: "Discover education impact across Africa", icon: Sparkles },
+      { label: "Afri-EduTourism 2027", href: "/afri-edutourism", description: "Learning journeys across the continent", icon: Sparkles },
+      { label: "Impact Reports", href: "/impact/reports", description: "Funds, allocation, delivery and outcomes", icon: FileCheck },
+      { label: "Impact Stories & Media", href: "/impact/stories", description: "Stories of education impact", icon: MessageSquare },
     ],
   },
 
