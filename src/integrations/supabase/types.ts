@@ -11294,6 +11294,25 @@ export type Database = {
         }
         Returns: string
       }
+      education_impact_public_schools: {
+        Args: never
+        Returns: {
+          country: string
+          description: string
+          id: string
+          intervention_end_date: string
+          intervention_notes: string
+          intervention_start_date: string
+          intervention_status: string
+          is_supported: boolean
+          name: string
+          photo_urls: string[]
+          region_id: string
+          school_type: string
+          student_count: number
+        }[]
+      }
+      education_impact_public_stats: { Args: never; Returns: Json }
       ensure_user_wallet: { Args: { _user_id: string }; Returns: string }
       escalate_overdue_nrc_assignments: { Args: never; Returns: number }
       export_nomination_batch: {

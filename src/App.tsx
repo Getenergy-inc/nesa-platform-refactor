@@ -251,7 +251,13 @@ import EduAidAfricaImpact from "./pages/eduaid/EduAidAfricaImpact";
 import MediaHubConsolidated from "./pages/media/MediaHubConsolidated";
 import GalaConsolidated from "./pages/gala/GalaConsolidated";
 import SupportConsolidated from "./pages/support/SupportConsolidated";
-import ImpactHub from "./pages/impact/ImpactHub";
+// Legacy `pages/impact/ImpactHub.tsx` is retained on disk (no programme data
+// deleted) but is superseded by EducationSocialImpactOverview at /impact.
+import EducationSocialImpactOverview from "./pages/impact/EducationSocialImpactOverview";
+import SpecialNeedsSchools from "./pages/impact/SpecialNeedsSchools";
+import RegionalInterventions from "./pages/impact/RegionalInterventions";
+import ImpactReports from "./pages/impact/ImpactReports";
+import ImpactStories from "./pages/impact/ImpactStories";
 import SponsorsPartners from "./pages/sponsors/SponsorsPartners";
 import EndorsementsPage from "./pages/endorsements/EndorsementsPage";
 import ChaptersConsolidated from "./pages/chapters/ChaptersConsolidated";
@@ -602,13 +608,15 @@ const App = () => (
                   <Route path="/education-enablers/submit-evidence" element={<Navigate to="/education-enablers?action=evidence" replace />} />
                   <Route path="/education-enablers/verification" element={<Navigate to="/governance#verification" replace />} />
 
-                  {/* Impact Programmes */}
+                  {/* NESA-Africa Education Social Impact — legacy paths preserved as redirects */}
                   <Route path="/impact/regional-voting" element={<Navigate to={VOTING_SUNSET_REDIRECT} replace />} />
-                  <Route path="/impact/regional-winners" element={<Navigate to="/impact" replace />} />
+                  <Route path="/impact/regional-winners" element={<Navigate to="/impact/regional" replace />} />
                   <Route path="/impact/donate" element={<Navigate to="/donate" replace />} />
                   <Route path="/impact/afri-edutourism-2027" element={<Navigate to="/afri-edutourism" replace />} />
-                  <Route path="/impact/reports" element={<Navigate to="/impact#reports" replace />} />
-                  <Route path="/impact/map" element={<Navigate to="/impact#map" replace />} />
+                  <Route path="/impact/map" element={<Navigate to="/impact/regional" replace />} />
+                  <Route path="/impact/programmes" element={<Navigate to="/impact" replace />} />
+                  <Route path="/impact/stories-media" element={<Navigate to="/impact/stories" replace />} />
+                  <Route path="/impact/special-needs" element={<Navigate to="/impact/special-needs-schools" replace />} />
 
                   {/* Media & Events */}
                   <Route path="/media-events" element={<Navigate to="/media" replace />} />
@@ -720,11 +728,43 @@ const App = () => (
                     path="/impact"
                     element={
                       <WithLayout>
-                        <ImpactHub />
+                        <EducationSocialImpactOverview />
                       </WithLayout>
                     }
                   />
-                  <Route path="/impact/regional-school-intervention" element={<Navigate to="/impact" replace />} />
+                  <Route
+                    path="/impact/special-needs-schools"
+                    element={
+                      <WithLayout>
+                        <SpecialNeedsSchools />
+                      </WithLayout>
+                    }
+                  />
+                  <Route
+                    path="/impact/regional"
+                    element={
+                      <WithLayout>
+                        <RegionalInterventions />
+                      </WithLayout>
+                    }
+                  />
+                  <Route
+                    path="/impact/reports"
+                    element={
+                      <WithLayout>
+                        <ImpactReports />
+                      </WithLayout>
+                    }
+                  />
+                  <Route
+                    path="/impact/stories"
+                    element={
+                      <WithLayout>
+                        <ImpactStories />
+                      </WithLayout>
+                    }
+                  />
+                  <Route path="/impact/regional-school-intervention" element={<Navigate to="/impact/regional" replace />} />
                   <Route path="/impact/rebuild-my-school-africa" element={<Navigate to="/eduaid-africa/rebuild-my-school" replace />} />
                   <Route
                     path="/impact/nominate-school"

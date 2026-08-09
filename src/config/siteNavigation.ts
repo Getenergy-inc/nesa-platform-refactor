@@ -1,6 +1,6 @@
 // Single source of truth for the NESA-Africa public navigation.
 // 2026 IA architecture — 7 primary items:
-//   Home · Recognition Hub 2026 ▼ · Explore Enablers ▼ · EduAid-Africa Impact ▼
+//   Home · Recognition Hub 2026 ▼ · Explore Enablers ▼ · Education Impact ▼
 //   · Media & Events ▼ · Gala & Tickets ▼ · Support & Get Involved ▼
 //
 // Rule: new content goes INSIDE an existing dropdown (or its overview page),
@@ -13,6 +13,11 @@
 // drawer) and NESAFooter.
 
 import { AWARD_CATEGORY_PAGES_2026 } from "./awards/subpages2026";
+import {
+  IMPACT_BRAND,
+  IMPACT_NAV_ITEMS,
+  IMPACT_NAV_FOOTER,
+} from "./educationSocialImpact";
 
 export interface NavChild {
   label: string;
@@ -34,6 +39,12 @@ export interface NavItem {
   sections?: NavSection[];
   megaMenu?: "education-enablers";
   analyticsId?: string;
+  /** Optional institutional heading rendered at the top of the dropdown panel. */
+  panelHeading?: string;
+  /** Optional one-line positioning statement under the panel heading. */
+  panelSubheading?: string;
+  /** Optional note + CTA rendered at the bottom of the dropdown panel. */
+  panelFooter?: { note: string; ctaLabel: string; ctaHref: string };
 }
 
 const TIER_ORDER = [
@@ -120,19 +131,20 @@ export const SITE_NAV: NavItem[] = [
     ],
   },
   {
-    label: "Impact",
-    href: "/eduaid-africa",
+    // NESA-Africa → Education Social Impact. EduAid-Africa is the funding /
+    // programme-infrastructure partner, never the parent brand — do not
+    // re-parent this item under "EduAid-Africa".
+    label: IMPACT_BRAND.navLabel,
+    href: "/impact",
     analyticsId: "nav_impact",
-    children: [
-      { label: "EduAid-Africa Overview", href: "/eduaid-africa" },
-      { label: "Rebuild My School Africa", href: "/eduaid-africa/rebuild-my-school" },
-      { label: "Nominate a Special-Needs School", href: "/impact/nominate-school" },
-      { label: "Regional School Interventions", href: "/impact/regional-school-intervention" },
-      { label: "Afri-EduTourism 2027", href: "/impact/afri-edutourism-2027" },
-      { label: "Impact Reports", href: "/impact/reports" },
-      { label: "Media & Events", href: "/media" },
-      { label: "Gala & Tickets · 13 December 2026", href: "/gala" },
-    ],
+    panelHeading: IMPACT_BRAND.name,
+    panelSubheading: IMPACT_BRAND.positioning,
+    children: IMPACT_NAV_ITEMS,
+    panelFooter: {
+      note: IMPACT_NAV_FOOTER.note,
+      ctaLabel: IMPACT_NAV_FOOTER.ctaLabel,
+      ctaHref: IMPACT_NAV_FOOTER.ctaHref,
+    },
   },
   {
     label: "Participate",
