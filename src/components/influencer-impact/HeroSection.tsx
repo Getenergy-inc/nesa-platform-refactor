@@ -80,7 +80,7 @@ export function HeroSection() {
                 variant="ghost"
                 className="text-white/80 hover:text-gold hover:bg-white/5 gap-2"
               >
-                <Coins className="h-4 w-4" /> Earn AGC Voting Coin
+                <Coins className="h-4 w-4" /> GFAwzip Wallet
               </Button>
             </Link>
           </div>

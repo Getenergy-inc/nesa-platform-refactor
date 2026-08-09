@@ -197,7 +197,7 @@ export function UpcomingEventsSection() {
             events={votingWindows}
             note={t("landing.upcomingEvents.votingNote", {
               defaultValue:
-                "Public participation happens during official windows. Vote using AGC voting points earned through platform participation.",
+                "Public participation happens during official nomination windows on the platform.",
             })}
             image={countdownVotingImg}
           />

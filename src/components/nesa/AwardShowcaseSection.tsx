@@ -36,7 +36,7 @@ const TIERS: AwardTier[] = [
     title: "Blue Garnet Awards",
     tagline: "Competitive Excellence Recognition",
     description:
-      "The flagship competitive track — public nominations, AGC voting, expert judging, and the Blue Garnet Gala finale.",
+      "The flagship competitive track — public nominations, independent verification, expert judging, and the Blue Garnet Gala finale.",
     href: "/awards/blue-garnet",
     cta: "See Blue Garnet Categories",
   },

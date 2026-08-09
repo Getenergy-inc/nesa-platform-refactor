@@ -38,7 +38,7 @@ const EDI_PILLARS = [
   { n: "02", icon: BookOpen, title: "Quality Learning", desc: "Improving teaching, curriculum, STEM, digital learning, research, libraries, and learning outcomes." },
   { n: "03", icon: Users, title: "Equity & Inclusion", desc: "Advancing girls' education, special needs, marginalised communities, diaspora, and inclusive participation." },
   { n: "04", icon: Sparkles, title: "Innovation & Technology", desc: "Recognising EduTech, AI, digital learning, media advocacy, STEM, and technology-enabled education solutions." },
-  { n: "05", icon: HeartHandshake, title: "Community & Social Impact", desc: "Mobilising public nominations, local chapters, re-nominations, AGC voting, and regional participation." },
+  { n: "05", icon: HeartHandshake, title: "Community & Social Impact", desc: "Mobilising public nominations, local chapters, re-nominations, and regional participation." },
   { n: "06", icon: Building2, title: "Infrastructure & School Support", desc: "Connecting recognition to school grants, infrastructure, learning materials, and Rebuild My School Africa." },
   { n: "07", icon: ShieldCheck, title: "Governance & Accountability", desc: "Strengthening trust via evidence review, jury onboarding, transparent voting, verification, and audit trails." },
   { n: "08", icon: Handshake, title: "Partnerships & Resource Mobilisation", desc: "Engaging CSR leaders, sponsors, donors, institutions, diaspora, and development partners for impact." },
@@ -228,11 +228,11 @@ const PANELS: Panel[] = [
     id: "participation",
     icon: Workflow,
     title: "How Participation Connects",
-    preview: "How nominations, AGC voting, jury review, and gala recognition work together.",
+    preview: "How nominations, verification, jury review, and gala recognition work together.",
     render: () => (
       <p>
         Public nominations identify changemakers. NRC verification and jury
-        review strengthen credibility. AGC voting drives public participation.
+        review strengthen credibility. Independent verification drives credibility.
         The gala celebrates recognised impact. Post-award programs connect
         recognition to measurable education support.
       </p>

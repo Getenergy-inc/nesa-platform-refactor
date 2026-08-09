@@ -37,7 +37,7 @@ const accountTypes: AccountTypeOption[] = [
     features: [
       "Official institutional profile",
       "Nominate staff & programs",
-      "Bulk voting credits",
+      "Bulk nomination submissions",
       "Priority support access",
     ],
   },
