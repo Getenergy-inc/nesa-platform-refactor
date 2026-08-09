@@ -31,6 +31,31 @@ Disallow: /judge-signup
 Disallow: /judge-verify
 Disallow: /otp
 
+# --- Judges Arena (confidential judging system; landing + public directory stay indexable) ---
+Disallow: /judges/sign-in
+Disallow: /judges/sign-up
+Disallow: /judges/forgot-password
+Disallow: /judges/onboarding
+Disallow: /judges/enter
+Disallow: /judges/dashboard
+Disallow: /judges/my-panel
+Disallow: /judges/pathways
+Disallow: /judges/roster
+Disallow: /judges/assignments
+Disallow: /judges/nominees
+Disallow: /judges/nominee
+Disallow: /judges/nominee-pipeline
+Disallow: /judges/conflicts
+Disallow: /judges/scoring
+Disallow: /judges/notes
+Disallow: /judges/voting
+Disallow: /judges/results
+Disallow: /judges/profile
+Disallow: /judges/audit
+Disallow: /judges/help
+Disallow: /icon-jury
+Disallow: /icon-jury/
+
 # --- Auth aliases (canonical pages are /login, /register) ---
 Disallow: /auth
 Disallow: /auth/
