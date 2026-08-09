@@ -60,7 +60,7 @@
 /cookie-policy                                               /policies            301
 /language                                                    /                    301
 
-# --- 2. SPA routes (509 explicit paths from src/App.tsx) ---
+# --- 2. SPA routes (515 explicit paths from src/App.tsx) ---
 /recognition/influencer-education-impact/african-sports-icons-supporting-education /index.html          200
 /recognition/influencer-education-impact/african-music-icons-supporting-education /index.html          200
 /recognition/influencer-education-impact/african-social-media-influencers /index.html          200
@@ -183,6 +183,7 @@
 /nrc/dashboard/my-reviews                                    /index.html          200
 /nrc/dashboard/review/:id                                    /index.html          200
 /partners/prospects/:slug                                    /index.html          200
+/recognition/certificates                                    /index.html          200
 /awards/gold-blue-garnet                                     /index.html          200
 /category/edutech-africa                                     /index.html          200
 /dashboard/notifications                                     /index.html          200
@@ -190,6 +191,7 @@
 /impact/regional-winners                                     /index.html          200
 /judges/nominee-pipeline                                     /index.html          200
 /media/behind-the-scenes                                     /index.html          200
+/nominate/help-me-choose                                     /index.html          200
 /nominees/region/:region                                     /index.html          200
 /nrc/handover/governance                                     /index.html          200
 /about/nesa-africa-2026                                      /index.html          200
@@ -204,6 +206,7 @@
 /nominees/profile/:slug                                      /index.html          200
 /nrc/dashboard/nominees                                      /index.html          200
 /nrc/dashboard/settings                                      /index.html          200
+/recognition/categories                                      /index.html          200
 /volunteer/share-assets                                      /index.html          200
 /africa-education-icon                                       /index.html          200
 /awards/:tier/criteria                                       /index.html          200
@@ -342,6 +345,7 @@ governance-review                                            /index.html        
 /become-sponsor                                              /index.html          200
 /category/:slug                                              /index.html          200
 /gfawzip-wallet                                              /index.html          200
+/help-me-choose                                              /index.html          200
 /impact/reports                                              /index.html          200
 /judge/settings                                              /index.html          200
 /judges/sign-in                                              /index.html          200
@@ -442,6 +446,7 @@ nominee/:slug                                                /index.html        
 /nrc/scoring                                                 /index.html          200
 /nrc/sign-in                                                 /index.html          200
 /olc/members                                                 /index.html          200
+/participate                                                 /index.html          200
 /prenominate                                                 /index.html          200
 /recognition                                                 /index.html          200
 /sponsorship                                                 /index.html          200
@@ -548,6 +553,7 @@ scoring                                                      /index.html        
 /music                                                       /index.html          200
 /press                                                       /index.html          200
 /store                                                       /index.html          200
+/trust                                                       /index.html          200
 judges                                                       /index.html          200
 voting                                                       /index.html          200
 /auth                                                        /index.html          200

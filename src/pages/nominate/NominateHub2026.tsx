@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import {
   ArrowRight,
@@ -40,6 +40,12 @@ import {
 } from "@/config/nominate2026/forms";
 import { EDI_MATRIX_GENERIC } from "@/config/nominate2026/ediMatrix";
 import { getCategoryContent } from "@/config/nominate2026/categoryContent";
+import {
+  resolveFamilyNarrowing,
+  mapNomineeTypeParam,
+  type FamilyNarrowing,
+} from "@/config/nominate2026/familyNarrowing";
+
 import { supabase } from "@/integrations/supabase/client";
 
 /* ────────────────────────────────────────────────────────────────────────── */
@@ -236,11 +242,19 @@ const TIER_FILTERS: { value: TierSlug | "all"; label: string }[] = [
   { value: "gold-blue-garnet", label: "Gold-Blue Garnet" },
 ];
 
-function DirectoryCard({ form }: { form: NominationFormMeta }) {
+function DirectoryCard({
+  form,
+  linkQuery = "",
+}: {
+  form: NominationFormMeta;
+  /** Optional query string (e.g. "?nomineeType=individual") appended to the form route. */
+  linkQuery?: string;
+}) {
   const content = getCategoryContent(form.category);
   const title = content?.hero.h1 ?? form.title;
   return (
     <div className="group flex h-full flex-col rounded-xl border border-[#2b3140] bg-[#15181f] p-5 transition hover:border-gold/60">
+
       <div className="mb-2 flex items-center justify-between gap-2">
         <span className="text-[10px] uppercase tracking-wide text-gold/70">
           {form.tier === "africa-education-icon"
@@ -272,7 +286,7 @@ function DirectoryCard({ form }: { form: NominationFormMeta }) {
       </p>
       <div className="mt-auto flex items-center gap-3 pt-4">
         <Link
-          to={form.route}
+          to={`${form.route}${linkQuery}`}
           className="inline-flex items-center gap-1.5 rounded-full bg-gold px-3.5 py-1.5 text-xs font-semibold text-charcoal hover:bg-gold/90"
         >
           Start Nomination <ArrowRight className="h-3 w-3" />
@@ -288,14 +302,26 @@ function DirectoryCard({ form }: { form: NominationFormMeta }) {
   );
 }
 
-function FormDirectory() {
+function FormDirectory({
+  narrowing = null,
+  initialNomineeType = "all",
+  linkQuery = "",
+}: {
+  /** Set only when /nominate?family=… resolves to a recognition family. */
+  narrowing?: FamilyNarrowing | null;
+  initialNomineeType?: string;
+  linkQuery?: string;
+} = {}) {
+  const narrowedForms = narrowing?.family ? narrowing.forms : null;
+  const source = narrowedForms ?? NOMINATION_FORMS;
+
   const [tier, setTier] = useState<TierSlug | "all">("all");
-  const [nomineeType, setNomineeType] = useState<string>("all");
+  const [nomineeType, setNomineeType] = useState<string>(initialNomineeType);
   const [region, setRegion] = useState<string>("all");
   const [q, setQ] = useState("");
 
   const filtered = useMemo(() => {
-    return NOMINATION_FORMS.filter((f) => {
+    return source.filter((f) => {
       if (tier !== "all" && f.tier !== tier) return false;
       if (nomineeType !== "all" && f.nomineeType !== nomineeType) return false;
       if (region !== "all") {
@@ -309,20 +335,24 @@ function FormDirectory() {
       }
       return true;
     });
-  }, [tier, nomineeType, region, q]);
+  }, [source, tier, nomineeType, region, q]);
 
   return (
     <section id="directory" className="border-b border-gold/10 py-14 md:py-20">
       <div className="container mx-auto max-w-6xl px-4">
         <div className="mb-8 max-w-3xl">
           <h2 className="font-playfair text-2xl text-gold sm:text-3xl md:text-4xl">
-            18-Form Directory
+            {narrowedForms
+              ? `${narrowing?.family?.name} — Choose a Category`
+              : "18-Form Directory"}
           </h2>
           <p className="mt-2 text-sm text-foreground/70">
-            Every recognition category has its own dedicated form. Filter by
-            tier, nominee type, or region — or search by keyword.
+            {narrowedForms
+              ? `Showing only the ${narrowedForms.length === 1 ? "category" : `${narrowedForms.length} categories`} inside this recognition family. Pick a category to open its tailored form, then choose the subcategory, region and classification inside.`
+              : "Every recognition category has its own dedicated form. Filter by tier, nominee type, or region — or search by keyword."}
           </p>
         </div>
+
 
         <div className="mb-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
           <Select value={tier} onValueChange={(v) => setTier(v as TierSlug | "all")}>
@@ -372,21 +402,33 @@ function FormDirectory() {
           </div>
         </div>
 
-        <p className="mb-4 text-xs text-foreground/60">
-          Showing {filtered.length} of {NOMINATION_FORMS.length} forms
+        <p className="mb-4 flex flex-wrap items-center gap-3 text-xs text-foreground/60">
+          <span>
+            Showing {filtered.length} of {source.length} forms
+          </span>
+          {narrowedForms && (
+            <Link
+              to="/nominate"
+              className="text-gold underline-offset-2 hover:underline"
+            >
+              Show all {NOMINATION_FORMS.length} forms
+            </Link>
+          )}
         </p>
 
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {filtered.map((f) => (
-            <DirectoryCard key={f.id} form={f} />
+            <DirectoryCard key={f.id} form={f} linkQuery={linkQuery} />
           ))}
         </div>
 
         {filtered.length === 0 && (
           <div className="rounded-xl border border-gold/20 bg-black/30 p-10 text-center text-sm text-foreground/70">
-            No forms match those filters. Try clearing them to see all 18.
+            No forms match those filters. Try clearing them to see all{" "}
+            {source.length}.
           </div>
         )}
+
       </div>
     </section>
   );
@@ -590,6 +632,24 @@ function FAQSection() {
 /* ────────────────────────────────────────────────────────────────────────── */
 
 export default function NominateHub2026() {
+  // Additive routing layer for /nominate/help-me-choose. With no query params
+  // present, `narrowing` is null and the hub renders exactly as before.
+  const [searchParams] = useSearchParams();
+  const familyParam = searchParams.get("family");
+  const nomineeTypeParam = searchParams.get("nomineeType");
+
+  const narrowing = useMemo(
+    () => resolveFamilyNarrowing(familyParam),
+    [familyParam],
+  );
+  const audience = useMemo(
+    () => mapNomineeTypeParam(nomineeTypeParam),
+    [nomineeTypeParam],
+  );
+  const linkQuery = nomineeTypeParam
+    ? `?nomineeType=${encodeURIComponent(nomineeTypeParam)}`
+    : "";
+
   return (
     <div className="min-h-screen bg-charcoal text-foreground">
       <Helmet>
@@ -606,6 +666,70 @@ export default function NominateHub2026() {
           Public Nominations Open · 30 August 2026 — NESA-Africa 2026
         </div>
       </div>
+
+      {/* Help-me-choose routing banner (only when a family param is present) */}
+      {narrowing?.family && (
+        <div className="border-b border-gold/20 bg-[#15181f]">
+          <div className="container mx-auto max-w-5xl px-4 py-4">
+            <p className="text-[11px] uppercase tracking-[0.18em] text-gold/80">
+              Routed from Help Me Choose
+            </p>
+            <h2 className="mt-1 font-playfair text-lg text-gold sm:text-xl">
+              {narrowing.family.name}
+            </h2>
+            <p className="mt-1 text-sm text-foreground/75">
+              {narrowing.family.lede} We&apos;ve narrowed the directory to{" "}
+              {narrowing.categoryNames.join(" · ")}
+              {audience ? " for the nominee type you selected" : ""}.
+            </p>
+            <div className="mt-3 flex flex-wrap gap-3 text-xs">
+              <a
+                href="#directory"
+                className="rounded-full bg-gold px-4 py-1.5 font-semibold text-charcoal hover:bg-gold/90"
+              >
+                Choose your category
+              </a>
+              <Link
+                to="/nominate"
+                className="rounded-full border border-gold/40 px-4 py-1.5 text-gold hover:bg-gold/10"
+              >
+                Show all {NOMINATION_FORMS.length} forms
+              </Link>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* "Still not sure" path — no category is forced; NRC classifies. */}
+      {narrowing?.unassigned && (
+        <div className="border-b border-gold/20 bg-[#15181f]">
+          <div className="container mx-auto max-w-5xl px-4 py-4">
+            <p className="text-[11px] uppercase tracking-[0.18em] text-gold/80">
+              NESA-Africa will classify this nomination
+            </p>
+            <p className="mt-1 text-sm text-foreground/75">
+              Submit the nominee&apos;s details and contribution story — the
+              Nominee Research Corps determines the correct recognition
+              pathway before review. You do not need to pick a category.
+            </p>
+            <div className="mt-3 flex flex-wrap gap-3 text-xs">
+              <Link
+                to={`/nominate/advanced${linkQuery}`}
+                className="rounded-full bg-gold px-4 py-1.5 font-semibold text-charcoal hover:bg-gold/90"
+              >
+                Start an unclassified nomination
+              </Link>
+              <a
+                href="#directory"
+                className="rounded-full border border-gold/40 px-4 py-1.5 text-gold hover:bg-gold/10"
+              >
+                Browse all categories instead
+              </a>
+            </div>
+          </div>
+        </div>
+      )}
+
 
       {/* HERO */}
       <section className="border-b border-gold/15 bg-gradient-to-b from-black/60 to-charcoal">
@@ -705,7 +829,12 @@ export default function NominateHub2026() {
       </section>
 
       {/* 18-FORM DIRECTORY */}
-      <FormDirectory />
+      <FormDirectory
+        narrowing={narrowing}
+        initialNomineeType={audience ?? "all"}
+        linkQuery={linkQuery}
+      />
+
 
       {/* HOW RECOGNITION WORKS */}
       <ProcessDiagram />
