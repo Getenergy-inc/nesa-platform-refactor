@@ -182,10 +182,12 @@ export function AwardHeroStandard({
             </div>
           )}
           {lead && (
-            <p className="mx-auto mt-3 max-w-2xl text-sm md:text-base text-white/65">
-              {lead}
-            </p>
+            <div className="mx-auto mt-3 max-w-2xl">
+              <p className="text-sm md:text-base text-white/65">{splitLead(lead)[0]}</p>
+              <MoreText text={splitLead(lead)[1]} label="More context" />
+            </div>
           )}
+
 
 
           {stats && stats.length > 0 && (
@@ -785,7 +787,13 @@ export function FinalAwardCTA({
         <h2 className="font-display text-3xl md:text-4xl font-bold text-white">
           {heading}
         </h2>
-        <p className="mt-4 text-white/75 text-base md:text-lg">{body}</p>
+        <p className="mt-4 text-white/75 text-base md:text-lg">{splitLead(body)[0]}</p>
+        {splitLead(body)[1] ? (
+          <div className="flex justify-center">
+            <MoreText text={splitLead(body)[1]} label="More detail" />
+          </div>
+        ) : null}
+
         <div className="mt-7 flex flex-wrap justify-center gap-3">
           <Button
             asChild
