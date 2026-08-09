@@ -8,10 +8,10 @@ interface PaymentStep {
 }
 
 const PAYMENT_STEPS: PaymentStep[] = [
-  { step: 1, title: "Choose", description: "Ticket / Donate / Sponsor" },
+  { step: 1, title: "Choose", description: "Ticket / Donate / Sponsor / Membership" },
   { step: 2, title: "Checkout", description: "GFAWzip Wallet (2% markup included)" },
   { step: 3, title: "Receive", description: "Receipt/confirmation instantly" },
-  { step: 4, title: "Earn", description: "AGC voting credits in your wallet" },
+  { step: 4, title: "Recorded", description: "Receipt and reconciliation record in your wallet" },
 ];
 
 export function PaymentSteps() {

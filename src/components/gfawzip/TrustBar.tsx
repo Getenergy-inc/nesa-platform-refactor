@@ -14,7 +14,7 @@ const TRUST_FEATURES: TrustFeature[] = [
   { icon: FileText, label: "Instant Receipts" },
   { icon: Shield, label: "Secure Checkout" },
   { icon: null, label: "2% Processing Fee", isMarkup: true },
-  { icon: null, label: "Wallet Audit Trail", isGFA: true },
+  { icon: null, label: "Payment Audit Trail", isGFA: true },
 ];
 
 export function TrustBar() {
