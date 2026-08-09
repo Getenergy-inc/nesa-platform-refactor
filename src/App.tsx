@@ -2600,6 +2600,10 @@ const App = () => (
                   >
                     <Route path="dashboard" element={<IconJuryDashboard />} />
                     <Route path="my-panel" element={<MyPanel />} />
+                    <Route path="pathways" element={<IconPathwayIndex />} />
+                    <Route path="pathways/:pathwaySlug" element={<PathwayWorkspace />} />
+                    <Route path="roster" element={<IconJudgeRoster />} />
+                    <Route path="nominee-pipeline" element={<NomineePipeline />} />
                     <Route path="assignments" element={<IconJuryAssignments />} />
                     <Route path="nominees/:nomineeId" element={<IconJuryNomineeReview />} />
                     <Route path="nominee/:nomineeId" element={<IconJuryNomineeReview />} />
