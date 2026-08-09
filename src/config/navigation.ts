@@ -413,7 +413,7 @@ export const MOBILE_NAV: NavItem[] = [
   { label: "Nominate", href: "/nominate", icon: FileCheck },
   { label: "Vote", href: "/awards/gold-blue-garnet", icon: Vote },
   { label: "Engage", href: "/get-involved", icon: Users },
-  { label: "Earn AGC", href: "/earn-agc", icon: Coins },
+  { label: "GFAwzip Wallet", href: "/wallet/gfawzip", icon: Coins },
   { label: "Tickets", href: "/tickets", icon: Ticket },
   { label: "Watch", href: "/media/tv", icon: Tv },
 ];

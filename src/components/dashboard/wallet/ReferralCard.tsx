@@ -111,7 +111,7 @@ export function ReferralCard({ referral, totalEarnings = 0, loading }: ReferralC
         {/* CTA */}
         <Button className="w-full" variant="default" onClick={handleCopy}>
           <ExternalLink className="mr-2 h-4 w-4" />
-          Invite Friends & Earn AGC
+          Invite Friends
         </Button>
 
         <p className="text-xs text-center text-muted-foreground">

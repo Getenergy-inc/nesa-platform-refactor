@@ -50,7 +50,7 @@ export function RegionalShowcase() {
           </h2>
           <p className="text-lg text-gold font-semibold flex items-center justify-center gap-2 mb-2">
             <Coins className="h-5 w-5" />
-            Earn AfriGold Coins with Every Payment
+            Local Currency Payments Across Africa
           </p>
           <p className="text-muted-foreground max-w-2xl mx-auto">
             From North to South, East to West — supporting NESA-Africa changemakers through seamless payments.

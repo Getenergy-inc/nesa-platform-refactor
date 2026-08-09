@@ -38,7 +38,7 @@ export function AgcDisclosure({ variant = "inline", className }: AgcDisclosurePr
     )}>
       <div className="flex items-center gap-2 mb-3">
         <Info className="h-5 w-5 text-amber-500" />
-        <h4 className="font-semibold text-foreground">Afri-Gold Coins (AGC) Disclosure</h4>
+        <h4 className="font-semibold text-foreground">GFAwzip Wallet Disclosure</h4>
       </div>
       <ul className="space-y-2">
         {AGC_DISCLAIMER_FULL.map((point, i) => (
