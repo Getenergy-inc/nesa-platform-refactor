@@ -54,7 +54,7 @@ export function HowItWorksSection() {
           <div className="flex items-center justify-center gap-2 mt-10 p-4 rounded-xl bg-gold/5 border border-gold/20">
             <Coins className="h-5 w-5 text-gold flex-shrink-0" />
             <p className="text-sm text-white/80">
-              Participation unlocks voting points. Voting uses AGC (non-tradeable) during official windows.
+              Participation happens through nominations and verified evidence during official windows.
             </p>
           </div>
         </div>

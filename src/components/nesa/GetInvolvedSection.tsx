@@ -26,7 +26,7 @@ export function GetInvolvedSection() {
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gold/10 border border-gold/30">
             <Coins className="h-4 w-4 text-gold" />
             <span className="text-sm text-white/80">
-              Explore Recognition voting points during official windows
+              Explore recognition categories during official windows
             </span>
           </div>
         </div>

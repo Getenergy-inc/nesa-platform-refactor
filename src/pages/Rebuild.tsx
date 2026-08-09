@@ -239,7 +239,7 @@ export default function Rebuild() {
                   Volunteer Recognition for Impact
                 </p>
                 <p className="text-xs leading-relaxed mt-1" style={{ color: `hsla(210, 20%, 90%, 0.6)` }}>
-                  Every contribution supports Rebuild My School Africa (2026–2027) and earns voting points
+                  Every contribution supports Rebuild My School Africa (2026–2027) and is receipted
                   for your favorite regional school! Purchases from the{" "}
                   <Link to="/shop" className="underline" style={{ color: `hsl(160, 70%, 50%)` }}>NESA Shop</Link>
                   {" "}also fund EduAid-Africa + SCEF services.

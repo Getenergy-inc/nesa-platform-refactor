@@ -55,7 +55,7 @@ export function GoldCertificateSection() {
                 <div>
                   <p className="text-white font-semibold mb-1">Explore Recognition Credits</p>
                   <p className="text-white/70 text-sm">
-                    Earn voting points through participation. Use AGC to vote for Gold winners. 
+                    Recognition is determined by independent verification and evidence review. 
                     <span className="text-amber-400"> 1 Vote = 1 AGC</span>
                   </p>
                 </div>
