@@ -1,17 +1,19 @@
 import { Link } from "react-router-dom";
-import { useSiteStats } from "@/config/siteStats";
+import { useGlobalTeamStats } from "@/hooks/useGlobalTeamStats";
 
 export function VolunteerBandSection() {
-  const stats = useSiteStats();
+  const stats = useGlobalTeamStats();
 
   const items = [
-    { num: stats.volunteers, label: "Volunteers" },
-    { num: stats.volunteerCountries, label: "Countries" },
-    { num: stats.activeVolunteerChapters, label: "Active Chapters" },
-  ];
+    { num: stats.people, label: "Volunteers, Judges & NRC" },
+    { num: stats.countries, label: "Countries" },
+    { num: stats.activeChapters, label: "Active Chapters" },
+  ].filter((i) => i.num > 0);
+
+  if (!items.length) return null;
 
   return (
-    <section className="ed-section ed-section-ink" aria-label="Volunteer movement">
+    <section className="ed-section ed-section-ink" aria-label="Global team">
       <div className="ed-wrap">
         <div className="ed-vol-band">
           {items.map((i) => (
@@ -22,7 +24,7 @@ export function VolunteerBandSection() {
           ))}
         </div>
         <p style={{ textAlign: "center", fontSize: "0.88rem" }}>
-          <Link to="/volunteers" className="ed-link-inline">
+          <Link to="/about/team" className="ed-link-inline">
             Meet the people behind the movement →
           </Link>
         </p>
