@@ -123,8 +123,8 @@ export const IMPACT_NAV_ITEMS: { label: string; href: string }[] = [
 export const IMPACT_NAV_FOOTER = {
   note: "Funded by Friends of EduAid-Africa",
   ctaLabel: "Become a Friend of EduAid-Africa →",
-  /** Secure support page — payment routing is resolved there, not in the menu. */
-  ctaHref: "/donate",
+  /** Movement page — payment routing is resolved downstream, not in the menu. */
+  ctaHref: "/impact/friends-of-eduaid-africa",
 } as const;
 
 /** Gala label always derives from the authoritative programme config. */

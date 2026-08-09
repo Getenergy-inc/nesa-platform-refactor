@@ -258,6 +258,7 @@ import SpecialNeedsSchools from "./pages/impact/SpecialNeedsSchools";
 import RegionalInterventions from "./pages/impact/RegionalInterventions";
 import ImpactReports from "./pages/impact/ImpactReports";
 import ImpactStories from "./pages/impact/ImpactStories";
+import FriendsOfEduAidAfrica from "./pages/impact/FriendsOfEduAidAfrica";
 import SponsorsPartners from "./pages/sponsors/SponsorsPartners";
 import EndorsementsPage from "./pages/endorsements/EndorsementsPage";
 import ChaptersConsolidated from "./pages/chapters/ChaptersConsolidated";
@@ -764,6 +765,15 @@ const App = () => (
                       </WithLayout>
                     }
                   />
+                  <Route
+                    path="/impact/friends-of-eduaid-africa"
+                    element={
+                      <WithLayout>
+                        <FriendsOfEduAidAfrica />
+                      </WithLayout>
+                    }
+                  />
+                  <Route path="/friends-of-eduaid-africa" element={<Navigate to="/impact/friends-of-eduaid-africa" replace />} />
                   <Route path="/impact/regional-school-intervention" element={<Navigate to="/impact/regional" replace />} />
                   <Route path="/impact/rebuild-my-school-africa" element={<Navigate to="/eduaid-africa/rebuild-my-school" replace />} />
                   <Route
