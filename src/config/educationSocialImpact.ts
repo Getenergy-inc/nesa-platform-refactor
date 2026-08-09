@@ -123,8 +123,8 @@ export const IMPACT_NAV_ITEMS: { label: string; href: string }[] = [
 export const IMPACT_NAV_FOOTER = {
   note: "Funded by Friends of EduAid-Africa",
   ctaLabel: "Become a Friend of EduAid-Africa →",
-  /** Secure support page — payment routing is resolved there, not in the menu. */
-  ctaHref: "/donate",
+  /** Movement page — payment routing is resolved downstream, not in the menu. */
+  ctaHref: "/impact/friends-of-eduaid-africa",
 } as const;
 
 /** Gala label always derives from the authoritative programme config. */
@@ -216,3 +216,89 @@ export const IMPACT_CTAS = {
   friend: "Become a Friend of EduAid-Africa",
   supportThisSchool: "Support This School →",
 } as const;
+
+/* -------------------------------------------------------------------------- */
+/* 9. Friends of EduAid-Africa — the global funding & support movement        */
+/* -------------------------------------------------------------------------- */
+
+/** Canonical route for the movement page. Referenced by nav + impact pages. */
+export const FRIENDS_ROUTE = "/impact/friends-of-eduaid-africa";
+
+export const FRIENDS_BRAND = {
+  name: "Friends of EduAid-Africa",
+  headline: "A Global Movement Supporting Education for All Across Africa.",
+  /** Short description — reuse anywhere a one-liner is needed. */
+  shortDescription:
+    "Friends of EduAid-Africa — The global funding and support movement helping advance Education for All across Africa.",
+  body:
+    "Friends of EduAid-Africa is the global community of individuals, families, organisations, companies, foundations, diaspora Africans, philanthropists, education advocates, and friends of Africa who support practical education impact across the continent. The movement provides the funding and support that enables EduAid-Africa services under Santos Creations Educational Foundation (SCEF) to support education interventions, while NESA-Africa Education Social Impact documents, connects, communicates and showcases the resulting impact.",
+  featureMessage:
+    "You don't have to build a school yourself to help transform one. Through Friends of EduAid-Africa, people around the world can contribute to verified education interventions and follow how their support helps create measurable change.",
+} as const;
+
+/** Ecosystem chain — visualised as a stepper. Payment ownership stays in SERVICE_OWNERS. */
+export const FRIENDS_ECOSYSTEM_CHAIN: { title: string; note: string }[] = [
+  { title: "Santos Creations Educational Foundation (SCEF)", note: "Institutional foundation." },
+  { title: "EduAid-Africa Services", note: "Delivers education-support services and programme infrastructure." },
+  { title: "Friends of EduAid-Africa", note: "Global funding and support community." },
+  { title: "Education Social Impact Projects", note: "Verified interventions, subject to eligibility and governance." },
+  { title: "Schools · Learners · Teachers · Communities", note: "Where the impact lands." },
+  { title: "NESA-Africa Education Social Impact", note: "Recognition, storytelling, documentation and accountability." },
+];
+
+/** Role clarity — these four lines must never be blurred. */
+export const FRIENDS_ROLE_CLARITY: { actor: string; role: string }[] = [
+  { actor: "Friends of EduAid-Africa", role: "Fund and support the movement." },
+  { actor: "EduAid-Africa", role: "Delivers education-support services." },
+  { actor: "SCEF", role: "Provides the institutional foundation." },
+  { actor: "NESA-Africa", role: "Communicates, recognises and showcases the wider education impact." },
+];
+
+export const FRIENDS_SUPPORT_AREAS: string[] = [
+  "Rebuild My School Africa",
+  "Special-needs and inclusive education",
+  "Learning materials and educational resources",
+  "Solar, WASH and school-environment improvements",
+  "Digital learning and connectivity",
+  "Teacher development and training",
+  "Scholarships and education access",
+  "Regional education interventions",
+  "Afri-EduTourism",
+  "Education impact research, reporting and storytelling",
+];
+
+export const FRIENDS_WHO_CAN_JOIN: string[] = [
+  "Individual supporters",
+  "Families",
+  "Students and young professionals",
+  "African diaspora communities",
+  "Corporate organisations",
+  "CSR and ESG partners",
+  "Foundations and philanthropists",
+  "NGOs and development organisations",
+  "International partners",
+  "Education advocates",
+  "Friends of Africa",
+];
+
+/**
+ * Three page CTAs. All funding routes through the existing EduAid-Africa
+ * support flow (`/donate`) — never through a NESA-Africa payment surface.
+ */
+export const FRIENDS_CTAS: { label: string; description: string; href: string }[] = [
+  {
+    label: "Become a Friend of EduAid-Africa",
+    description: "Join the global community supporting education impact.",
+    href: "/donate",
+  },
+  {
+    label: "Fund an Education Intervention",
+    description: "Support a verified school, learner, teacher or community intervention.",
+    href: "/eduaid-africa/rebuild-my-school",
+  },
+  {
+    label: "See the Impact",
+    description: "Explore projects, impact stories and published reports.",
+    href: "/impact/stories",
+  },
+];
