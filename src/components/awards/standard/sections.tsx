@@ -174,15 +174,19 @@ export function AwardHeroStandard({
             {titleAccent && <> <span className="text-gold">{titleAccent}</span></>}
           </h1>
           {subhead && (
-            <p className="mx-auto mt-5 max-w-2xl text-base md:text-lg text-white/80">
-              {subhead}
-            </p>
+            <div className="mx-auto mt-5 max-w-2xl">
+              <p className="text-lg md:text-xl text-white/85 leading-snug">
+                {splitLead(subhead)[0]}
+              </p>
+              <MoreText text={splitLead(subhead)[1]} label="More about this award" />
+            </div>
           )}
           {lead && (
             <p className="mx-auto mt-3 max-w-2xl text-sm md:text-base text-white/65">
               {lead}
             </p>
           )}
+
 
           {stats && stats.length > 0 && (
             <div className="mt-8 grid grid-cols-2 sm:grid-cols-4 gap-3 max-w-2xl mx-auto">
