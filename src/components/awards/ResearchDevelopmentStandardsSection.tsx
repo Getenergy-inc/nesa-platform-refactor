@@ -95,7 +95,7 @@ export function ResearchDevelopmentStandardsSection() {
         {/* 15-Point Criteria */}
         <div className="mb-12">
           <h3 className="font-playfair text-xl md:text-2xl text-gold mb-2 flex items-center gap-2">
-            <ShieldCheck className="h-5 w-5" /> 15-Point SCEF R&amp;D Eligibility &amp; Excellence Criteria (2025)
+            <ShieldCheck className="h-5 w-5" /> 15-Point SCEF R&amp;D Eligibility &amp; Excellence Criteria (2026)
           </h3>
           <p className="text-foreground/70 text-sm mb-4">
             All 15 criteria must be satisfied. Nominators should be prepared to evidence each point.

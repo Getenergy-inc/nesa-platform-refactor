@@ -8,7 +8,7 @@ import { MapPin, Building, ChevronRight } from "lucide-react";
 import { listPublicJudges, type PublicJudge } from "@/lib/api/judges.api";
 
 // Local fallback judges (used when the public directory is empty or fails to load).
-// These are the verified NESA-Africa 2025 panel members shipped with the app.
+// These are the verified NESA-Africa 2026 panel members shipped with the app.
 import judge1 from "@/assets/judges/judge1.png";
 import judge6 from "@/assets/judges/judge6.png";
 import judge7 from "@/assets/judges/judge7.png";

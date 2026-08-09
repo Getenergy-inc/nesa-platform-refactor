@@ -15,7 +15,7 @@ const assigned = [
 ];
 
 const announcements = [
-  { from: "NRC", title: "Cycle 2025 calibration window opens June 16", time: "2h ago" },
+  { from: "NRC", title: "Cycle 2026 calibration window opens June 16", time: "2h ago" },
   { from: "Panel Lead", title: "EDI rubric clarification posted for STEM category", time: "Yesterday" },
   { from: "Secretariat", title: "Submit all Gold-track scores by June 28, 23:59 GMT", time: "2 days ago" },
 ];
