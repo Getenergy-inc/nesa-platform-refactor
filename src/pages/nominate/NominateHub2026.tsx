@@ -632,6 +632,24 @@ function FAQSection() {
 /* ────────────────────────────────────────────────────────────────────────── */
 
 export default function NominateHub2026() {
+  // Additive routing layer for /nominate/help-me-choose. With no query params
+  // present, `narrowing` is null and the hub renders exactly as before.
+  const [searchParams] = useSearchParams();
+  const familyParam = searchParams.get("family");
+  const nomineeTypeParam = searchParams.get("nomineeType");
+
+  const narrowing = useMemo(
+    () => resolveFamilyNarrowing(familyParam),
+    [familyParam],
+  );
+  const audience = useMemo(
+    () => mapNomineeTypeParam(nomineeTypeParam),
+    [nomineeTypeParam],
+  );
+  const linkQuery = nomineeTypeParam
+    ? `?nomineeType=${encodeURIComponent(nomineeTypeParam)}`
+    : "";
+
   return (
     <div className="min-h-screen bg-charcoal text-foreground">
       <Helmet>
@@ -648,6 +666,70 @@ export default function NominateHub2026() {
           Public Nominations Open · 30 August 2026 — NESA-Africa 2026
         </div>
       </div>
+
+      {/* Help-me-choose routing banner (only when a family param is present) */}
+      {narrowing?.family && (
+        <div className="border-b border-gold/20 bg-[#15181f]">
+          <div className="container mx-auto max-w-5xl px-4 py-4">
+            <p className="text-[11px] uppercase tracking-[0.18em] text-gold/80">
+              Routed from Help Me Choose
+            </p>
+            <h2 className="mt-1 font-playfair text-lg text-gold sm:text-xl">
+              {narrowing.family.name}
+            </h2>
+            <p className="mt-1 text-sm text-foreground/75">
+              {narrowing.family.lede} We&apos;ve narrowed the directory to{" "}
+              {narrowing.categoryNames.join(" · ")}
+              {audience ? " for the nominee type you selected" : ""}.
+            </p>
+            <div className="mt-3 flex flex-wrap gap-3 text-xs">
+              <a
+                href="#directory"
+                className="rounded-full bg-gold px-4 py-1.5 font-semibold text-charcoal hover:bg-gold/90"
+              >
+                Choose your category
+              </a>
+              <Link
+                to="/nominate"
+                className="rounded-full border border-gold/40 px-4 py-1.5 text-gold hover:bg-gold/10"
+              >
+                Show all {NOMINATION_FORMS.length} forms
+              </Link>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* "Still not sure" path — no category is forced; NRC classifies. */}
+      {narrowing?.unassigned && (
+        <div className="border-b border-gold/20 bg-[#15181f]">
+          <div className="container mx-auto max-w-5xl px-4 py-4">
+            <p className="text-[11px] uppercase tracking-[0.18em] text-gold/80">
+              NESA-Africa will classify this nomination
+            </p>
+            <p className="mt-1 text-sm text-foreground/75">
+              Submit the nominee&apos;s details and contribution story — the
+              Nominee Research Corps determines the correct recognition
+              pathway before review. You do not need to pick a category.
+            </p>
+            <div className="mt-3 flex flex-wrap gap-3 text-xs">
+              <Link
+                to={`/nominate/advanced${linkQuery}`}
+                className="rounded-full bg-gold px-4 py-1.5 font-semibold text-charcoal hover:bg-gold/90"
+              >
+                Start an unclassified nomination
+              </Link>
+              <a
+                href="#directory"
+                className="rounded-full border border-gold/40 px-4 py-1.5 text-gold hover:bg-gold/10"
+              >
+                Browse all categories instead
+              </a>
+            </div>
+          </div>
+        </div>
+      )}
+
 
       {/* HERO */}
       <section className="border-b border-gold/15 bg-gradient-to-b from-black/60 to-charcoal">
