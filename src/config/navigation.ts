@@ -146,7 +146,7 @@ export const MAIN_NAV: NavItem[] = [
       { label: "Explore Existing Nominees", href: "/nominees", description: "Africa's Education Impact Directory", icon: Users },
       { label: "Vote", href: "/awards/gold-blue-garnet", description: "Cast your public vote", icon: Vote },
       { label: "Endorse a Nominee", href: "/endorse", description: "Institutional endorsements", icon: Shield },
-      { label: "Nominate a Special Needs School", href: "/eduaid", description: "Special Needs School Intervention", icon: Heart },
+      { label: "Support a Special-Needs School", href: "/impact/special-needs-schools", description: "Inclusive-education intervention pathway", icon: Heart },
     ],
   },
 
@@ -254,7 +254,7 @@ export const SUPPORT_CTAS: NavItem[] = [
   { label: "Buy Award Merchandise", href: "/shop", icon: ShoppingBag },
   { label: "Donate for Education Impact", href: "/donate", icon: Heart },
   { label: "Become a Sponsor", href: "/sponsor", icon: Sparkles },
-  { label: "Nominate a Special Needs School", href: "/eduaid", icon: Heart },
+  { label: "Support a Special-Needs School", href: "/impact/special-needs-schools", icon: Heart },
 ];
 
 // Mobile-first menu order (information architecture only — CTAs render separately)
@@ -264,7 +264,7 @@ export const MAIN_NAV_MOBILE_ORDER: readonly string[] = [
   "Awards",
   "Participate",
   "Sponsors & Partners",
-  "Impact Programs",
+  "Education Impact",
   "Media & Events",
   "Join the Movement",
   "Contact",
@@ -329,7 +329,7 @@ export const FOOTER_NAV: NavSection[] = [
     label: "Support",
     items: [
       { label: "Donate", href: "/donate" },
-      { label: "EduAid-Africa", href: "/eduaid" },
+      { label: "Education Impact", href: "/impact" },
       { label: "Rebuild My School Africa", href: "/eduaid-africa/rebuild-my-school" },
       { label: "Contact", href: "/contact" },
     ],
