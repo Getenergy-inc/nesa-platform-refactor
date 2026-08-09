@@ -402,21 +402,33 @@ function FormDirectory({
           </div>
         </div>
 
-        <p className="mb-4 text-xs text-foreground/60">
-          Showing {filtered.length} of {NOMINATION_FORMS.length} forms
+        <p className="mb-4 flex flex-wrap items-center gap-3 text-xs text-foreground/60">
+          <span>
+            Showing {filtered.length} of {source.length} forms
+          </span>
+          {narrowedForms && (
+            <Link
+              to="/nominate"
+              className="text-gold underline-offset-2 hover:underline"
+            >
+              Show all {NOMINATION_FORMS.length} forms
+            </Link>
+          )}
         </p>
 
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {filtered.map((f) => (
-            <DirectoryCard key={f.id} form={f} />
+            <DirectoryCard key={f.id} form={f} linkQuery={linkQuery} />
           ))}
         </div>
 
         {filtered.length === 0 && (
           <div className="rounded-xl border border-gold/20 bg-black/30 p-10 text-center text-sm text-foreground/70">
-            No forms match those filters. Try clearing them to see all 18.
+            No forms match those filters. Try clearing them to see all{" "}
+            {source.length}.
           </div>
         )}
+
       </div>
     </section>
   );
