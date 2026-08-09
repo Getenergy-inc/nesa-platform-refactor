@@ -160,7 +160,7 @@ export default function Volunteers() {
       if (status !== "all" && p.visibility !== status) return false;
       if (country !== "all" && p.country !== country) return false;
       if (region !== "all" && p.regionName !== region) return false;
-      if (role !== "all" && p.roleKey !== role) return false;
+      if (role !== "all" && !p.roleKeys.includes(role)) return false;
       if (team !== "all" && p.teamSlug !== team) return false;
       if (q && !p.searchText.includes(q.toLowerCase())) return false;
       return true;
