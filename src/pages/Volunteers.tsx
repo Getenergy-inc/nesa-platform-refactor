@@ -104,6 +104,13 @@ export default function Volunteers() {
 
     // Dedupe across role tables on normalised full name (interim key — the
     // role tables share no stable person identifier today).
+    // KNOWN LIMITATION: when the same person exists as both a volunteer and a
+    // judge they render as a single card, but the card keeps only the
+    // volunteer record's role label — the judge association is not shown and
+    // the person will not surface under the "Judge" role filter. Fixing this
+    // properly needs a shared person key across the role tables, which is a
+    // schema change deliberately out of scope here. Role *counts* remain
+    // per-table and therefore still reflect both roles.
     for (const j of team_stats.judgeList) {
       const key = j.name.trim().toLowerCase();
       if (seen.has(key)) continue;
@@ -215,7 +222,8 @@ export default function Volunteers() {
         <p className="mt-3 text-center text-[11px] text-white/40">
           Live counts from the verified volunteer, judge, NRC and chapter records. People are
           de-duplicated by name across roles (known interim limitation: the role records share no
-          common person identifier yet). NRC members are counted but not listed individually.
+          common person identifier yet). A person holding two roles shows one card under their volunteer
+          role; NRC members are counted but not listed individually.
         </p>
       </section>
 
