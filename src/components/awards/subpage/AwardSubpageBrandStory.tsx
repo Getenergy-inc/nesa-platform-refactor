@@ -161,7 +161,7 @@ export function AwardStoryBlock({ story }: { story: AwardStory }) {
                 {String(i + 1).padStart(2, "0")}
               </span>
               <h3 className="mt-2 font-playfair text-lg text-white sm:text-xl">{c.heading}</h3>
-              <p className="mt-3 text-sm leading-relaxed text-white/75">{c.body}</p>
+              <LeadCopy text={c.body} className="mt-3 text-sm leading-relaxed text-white/75" />
             </motion.article>
           ))}
         </div>
