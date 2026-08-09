@@ -661,7 +661,7 @@ export default function NomineeProfile() {
                     { label: "Subcategory", value: pathway },
                     { label: "Region", value: nominee.regionName || "—" },
                     { label: "Country", value: nominee.country || "—" },
-                    { label: "Season", value: "2025" },
+                    { label: "Register", value: "2025 register (historic)" },
                     { label: "Status", value: "Existing Nominee" },
                     { label: "Re-nominations", value: String(renominationCount) },
                   ].map(item => (
