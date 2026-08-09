@@ -30,13 +30,28 @@ import { trackEvent } from "@/lib/analytics";
  * disclosure so the fold carries one declarative line, award-show style.
  */
 export function splitLead(text: string, leadSentences = 1): [string, string] {
-  const parts = text.match(/[^.!?]+[.!?]+(\s|$)/g);
-  if (!parts || parts.length <= leadSentences) return [text.trim(), ""];
-  return [
-    parts.slice(0, leadSentences).join("").trim(),
-    parts.slice(leadSentences).join("").trim(),
-  ];
+  const clean = text.trim();
+  const parts = clean.match(/[^.!?]+[.!?]+(\s|$)/g);
+  if (parts && parts.length > leadSentences) {
+    return [
+      parts.slice(0, leadSentences).join("").trim(),
+      parts.slice(leadSentences).join("").trim(),
+    ];
+  }
+  // Single long sentence: break at the first natural clause boundary so the
+  // fold still carries one declarative line. The full sentence is preserved
+  // in the disclosure — nothing is reworded or removed.
+  if (clean.length > 150) {
+    const marker = [" — ", " – ", " - ", ", "].map((m) => ({ m, i: clean.indexOf(m) }))
+      .filter(({ i }) => i > 40 && i < 160)
+      .sort((a, b) => a.i - b.i)[0];
+    if (marker) {
+      return [`${clean.slice(0, marker.i).trim()}.`, clean];
+    }
+  }
+  return [clean, ""];
 }
+
 
 function MoreText({ text, label = "Read the full statement" }: { text: string; label?: string }) {
   const [open, setOpen] = useState(false);
@@ -182,10 +197,12 @@ export function AwardHeroStandard({
             </div>
           )}
           {lead && (
-            <p className="mx-auto mt-3 max-w-2xl text-sm md:text-base text-white/65">
-              {lead}
-            </p>
+            <div className="mx-auto mt-3 max-w-2xl">
+              <p className="text-sm md:text-base text-white/65">{splitLead(lead)[0]}</p>
+              <MoreText text={splitLead(lead)[1]} label="More context" />
+            </div>
           )}
+
 
 
           {stats && stats.length > 0 && (
@@ -551,6 +568,39 @@ export function HallOfFamePreview({
 // 5. SUBCATEGORY PATHWAYS
 // ─────────────────────────────────────────────────────────────────────────────
 
+/**
+ * Award-show card copy: one declarative line by default, full text on demand.
+ * Nothing is deleted — the remainder stays on-page behind a disclosure.
+ */
+function PathwayBlurb({ blurb, recognises }: { blurb: string; recognises?: string }) {
+  const [open, setOpen] = useState(false);
+  const [lead, rest] = splitLead(blurb);
+  const hasMore = Boolean(rest || recognises);
+  return (
+    <div className="mt-2">
+      <p className="text-sm text-white/70 leading-relaxed">{open ? blurb : lead}</p>
+      {open && recognises && (
+        <p className="mt-3 text-xs text-gold/80 italic border-l-2 border-gold/30 pl-3">
+          {recognises}
+        </p>
+      )}
+      {hasMore && (
+        <button
+          type="button"
+          onClick={() => setOpen((v) => !v)}
+          aria-expanded={open}
+          className="mt-2 inline-flex items-center gap-1 text-[11px] uppercase tracking-[0.16em] text-gold hover:text-gold/80"
+        >
+          {open ? "Show less" : "More"}
+          <ChevronDown className={`h-3 w-3 transition-transform ${open ? "rotate-180" : ""}`} />
+        </button>
+      )}
+    </div>
+  );
+}
+
+
+
 export function SubcategoryPathways({
   pageSlug,
   subcategories,
@@ -604,14 +654,8 @@ export function SubcategoryPathways({
               <h3 className="font-display text-lg font-bold text-white leading-snug">
                 {s.title}
               </h3>
-              <p className="mt-2 text-sm text-white/70 leading-relaxed line-clamp-2" title={s.blurb}>
-                {s.blurb}
-              </p>
-              {s.recognises && (
-                <p className="mt-3 text-xs text-gold/80 italic border-l-2 border-gold/30 pl-3 line-clamp-2">
-                  {s.recognises}
-                </p>
-              )}
+              <PathwayBlurb blurb={s.blurb} recognises={s.recognises} />
+
               {s.voteSplit && (
                 <p className="mt-2 text-[11px] text-white/55">
                   <span className="text-white/75">{s.voteSplit}</span>
@@ -785,7 +829,13 @@ export function FinalAwardCTA({
         <h2 className="font-display text-3xl md:text-4xl font-bold text-white">
           {heading}
         </h2>
-        <p className="mt-4 text-white/75 text-base md:text-lg">{body}</p>
+        <p className="mt-4 text-white/75 text-base md:text-lg">{splitLead(body)[0]}</p>
+        {splitLead(body)[1] ? (
+          <div className="flex justify-center">
+            <MoreText text={splitLead(body)[1]} label="More detail" />
+          </div>
+        ) : null}
+
         <div className="mt-7 flex flex-wrap justify-center gap-3">
           <Button
             asChild
