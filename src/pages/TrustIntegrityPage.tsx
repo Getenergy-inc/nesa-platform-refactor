@@ -10,6 +10,13 @@ import {
   ICON_NO_PUBLIC_VOTING_NOTE,
   SERVICE_OWNERS,
 } from "@/config/brandHierarchy";
+import {
+  RECOGNITION_INDEPENDENCE_2026,
+  WALLET_NAME,
+  WALLET_PAYMENT_PURPOSES,
+  WALLET_RECONCILIATION_NOTE,
+} from "@/config/walletBranding";
+
 
 const GLOSSARY = [
   { term: "NRC — Nominee Research Corps", body: "The independent volunteer research body that verifies every nomination's evidence before assessment." },
