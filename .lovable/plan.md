@@ -1,112 +1,53 @@
+# Judges Arena — port into this codebase
 
-# Refactor: 17 Dedicated Category Nomination Pages
+## Key finding first
 
-All 17 URLs already route through a single component (`src/pages/nominate/NominateCategoryShell.tsx`), so this is a **shell refactor + config expansion**, not 17 separate page rewrites. No new routes.
+The Judges Arena you described **already exists in this project**, in large part. Before building anything new I inspected the database and routes and found:
 
-## Scope
+- **29 tables** already namespaced `icon_*` covering pathways, judges, panels, panel members, assignments, invitations, onboarding, conflicts, scores, reviews, notes, shortlists, deliberations + messages, Grand Jury groups/finalists/ballots/results, governance reviews, moderation actions, result snapshots, notifications and an immutable audit log.
+- **11 server-side functions** already exist and do exactly what the spec's "key server-side operations" list asks: `submit_icon_score`, `submit_icon_shortlist`, `submit_icon_grand_jury_ballot`, `compute_icon_grand_jury_results`, `icon_governance_decide`, `icon_ensure_review`, plus role predicates `is_icon_judge` / `is_icon_moderator` / `is_icon_governance`.
+- A **navy/gold Arena design system** (`ArenaChrome`, `ArenaSeo`, `IconJuryLayout`) and an access gate (`IconJudgeGate`) that already enforces auth + `ICON_JUDGE`/`ICON_MODERATOR`/`ICON_GOVERNANCE` role + a live OTP session.
+- 18 routes already live under `/judges/*` and `/admin/icon-jury/*`.
 
-Update in place:
-- `/nominate/influencer-education-impact`
-- 7× `/nominate/platinum/:category`
-- 9× `/nominate/gold-blue-garnet/:category`
+**Recommendation: extend this, do not build a parallel `judges_arena_*` schema.** A second schema covering the same domain in the same Supabase project would double the RLS surface area — the opposite of the security goal — and would orphan the RPCs and audit log that already work. `icon_*` already satisfies the spec's "pick one namespace convention and use it consistently".
 
-Untouched: Icon page, /nominate hub, site nav/footer.
+If you disagree and want a clean-room `judges_arena_*` build, say so and I'll re-plan — but I'd be duplicating working, already-secured tables.
 
-## Design system (all 17 share it)
+## What is genuinely missing
 
-Match the live Icon page exactly — reuse existing nav, announcement bars, hero shell, card/button/select components.
-- bg `#0c0e13`, card `#15181f`, border `#2b3140`
-- Single gold `#d9a441` / dim `#8a6f34` — strip any tier-specific hue (teal/silver/garnet-red) currently on these pages
-- Playfair display for headings, system sans for body
+Current data state: 3 pathways, 3 classifications, **0 judges, 0 panels, 0 Grand Jury groups, 0 invitations**. So the schema is there; the 9-pathway structure (3 categories x 3 communities), the 27 seats, and several UI surfaces are not.
 
-## Section order (identical on every page)
+### Stage 1 — Schema completion (one migration)
+- Seed the **9 pathways** as `3 categories x 3 classifications` (Africans in Africa / Diaspora Africans / Friends of Africa), with the 3 categories as a first-class `icon_categories` table so `/judges/categories/:slug` has a real record to read.
+- Add the missing columns the spec needs and the schema lacks: reserve nominee on panel shortlists, `reopen_requests` table for formal governance reopen (preserves the original record, never overwrites), per-pathway **result rooms** and a **Final 27-Judge Results Review Room** on the deliberations table, and message edit-history preservation.
+- Add a `prepare_grand_jury_ballots(pathway)` RPC (missing) that materialises ballots once all 9 panel decisions are locked.
+- Harden `submit_icon_grand_jury_ballot` validation: reject duplicate finalist IDs, duplicate ranks, missing ranks, out-of-range ranks, and reject submission by a **recused** judge.
+- RLS audit pass across all 29 tables: verify Judge A cannot read Judge B's notes/scores/ballots, unassigned judges cannot read a pathway, and locked rows reject UPDATE at the policy level (not just the UI).
 
-1. Hero — tier badge, H1, italic tagline, description, 3 buttons: `Start Nomination` (#nominate), `Explore Existing Nominees` (#nominees), `Back to All Categories` (/nominate)
-2. **Nomination form** (`#nominate`) — immediately after hero, not at the bottom
-3. About This Category — two-column: paragraphs + 3 pillars (NRC-Verified · Non-competitive · Certificate on approval)
-4. Certificate Categories / Recognition Pathways — subcategory cards (Influencer uses 3 full pathway blocks matching Icon)
-5. **EDI Matrix** (`#edi-matrix`) — 10 core dimensions, two-column, category-specific weighting note, PDF download button (new section on most pages)
-6. Existing Nominees (`#nominees`) — real data or honest empty state, never fabricated
-7. Footer integrity line — category-specific wording
+### Stage 2 — Invitation onboarding (missing)
+- `/judges/sign-up` — single-use invitation token entry. Token compared as **SHA-256 hash** against `icon_judge_invitations`, tied to the approved email. Never logged.
+- `/judges/onboarding` — the sequence: profile (title, institution, country, bio 30+ chars) -> appointment acceptance -> MOU -> Code of Conduct -> confidentiality -> COI declaration -> training -> MFA -> awaits governance activation. Persisted to `icon_judge_onboarding`.
+- `/judges/forgot-password`.
 
-## Per-category form logic
+### Stage 3 — Missing workspace routes
+`/judges/categories`, `/judges/categories/:slug`, `/judges/pathways`, `/judges/pathways/:slug` (nominee queue + top-3 pipeline + reserve + pathway chat), `/judges/judge-profiles` (27-judge directory, auth-only), `/judges/finalists` (27 finalists), `/judges/chat-rooms` (3-column layout: room list / active room / details + confidentiality notice), `/judges/audit-log` (governance-only).
 
-Category-specific step 1 → shared skeleton (Classification → Nominee info → Evidence (≥2 sources) → Nominator/Declaration → "what happens next" ending "Certificate of Recognition released immediately on approval — no endorsement threshold.")
+### Stage 4 — Grand Jury + results
+- `/judges/general-voting` — select pathway -> review top 3 -> rank 1st/2nd/3rd -> submit, updatable until close, then locked. (Existing `/judges/voting` becomes an alias.)
+- `/judges/general-voting/results` and `/results/:pathwaySlug` — scoring matrix (judges as columns, finalists as rows, 1pt/2pt/3pt, **lowest total wins**), "Verified & Approved" locked cards.
+- **Status/completeness invariant:** the results view derives its status badge from the same lock state that gates the data. While a vote is open it renders a "Voting Open — results sealed" state with *no* provisional standings. A "Voting Live" badge can never appear next to revealed results. I'll add a unit test asserting this pairing.
 
-**Step 1 pathway selectors:**
-| Category | Selector |
-|---|---|
-| Influencer | pathway dropdown (Social Media / Sports / Music) → dependent recognition-area dropdown (10 each) |
-| 7 Platinum | single dropdown, 10 certificate options each (exact approved wording) |
-| CSR Africa, CSR Nigeria, NGO Africa | dual dropdown: region/zone → sector/programme |
-| EduTech, Media, NGO Nigeria, STEM, Creative Arts | single dropdown, 10–15 options |
-| Education-Friendly States | 6 certificate-name dropdown + 12-tag multi-select impact grid |
+### Stage 5 — Public landing + governance consistency
+- Rebuild `/judges` as the public explainer, linked from the Trust page as the proof behind "no public voting". Flagship naming from `BRAND.flagship`. No wallet/AGC references, no public-voting language.
+- Add `Disallow: /judges/` (keeping `/judges` itself indexable) to `robots.txt`, keep only `/judges` in the sitemap, and confirm `ArenaSeo` emits `noindex` on every confidential route.
 
-**Classification sets:**
-- Influencer, 7 Platinum, CSR (Africa), EduTech, NGO (Africa), STEM → `African in Africa / Diaspora African / Friend of Africa`
-- CSR (Nigeria), Media (Nigeria), NGO (Nigeria), Creative Arts (Nigeria) → `Nigerian in Nigeria / Nigerian in Diaspora / Friend of Nigeria`
-- Education-Friendly States → "Nominating capacity": State Ministry / Citizen or resident / Institutional or NGO
+## Technical notes
 
-## Governance copy (verbatim per tier)
+- Reuses existing auth: Supabase session + `user_roles.role_code` + OTP session, via `IconJudgeGate`. No parallel auth system, no service-role key in the browser.
+- All new writes go through `SECURITY DEFINER` RPCs with authorization checks inside the function; the client never supplies the acting judge's identity.
+- Gold/navy tokens come from the existing arena CSS variables and `brandHierarchy.ts` — no second gold.
+- Mobile: sidebar collapses to the existing arena mobile pattern; the scoring matrix becomes stacked cards below `md`, never a wide table.
 
-- **Influencer** — "Not a competition. No judges, no public voting. Recognition is based entirely on Nominee Research Corps verification and category EDI Matrix assessment — never on follower count or fame."
-- **Platinum** — "Institutional recognition. No judges, no voting, no competition. Multiple organisations may be recognised in the same category after Nominee Research Corps verification and Governance approval."
-- **Gold-Blue Garnet** — "Entirely evidence-based. No judges, no voting, no ranking. Multiple organisations may be recognised per category, region, or sector."
+## Sequencing
 
-Footer integrity: "Recognition in this category is based on verified education contribution, not popularity or public vote — verified by the Nominee Research Corps and approved by Governance." (adapted per category, same structure)
-
-No 5,000-endorsement gate, no public-vote language, no AGC unlock on these 17 pages.
-
-## Empty nominees state (when zero verified)
-
-```
-🕊 No Verified Nominees Yet
-This category is newly open for nominations. Once nominees are accepted and
-verified by the Nominee Research Corps, their profiles will appear here.
-```
-Real cards (photo, name, country, pathway tag, classification, verified-impact one-liner, NRC-Verified badge, profile link) only when the live DB returns verified rows for that category.
-
-## Technical plan
-
-**Config-first — one shell, driven by data:**
-
-1. `src/config/nominate2026/categoryContent.ts` (new) — for each of 17 category slugs:
-   - hero copy (H1, tagline, description)
-   - tier + tier badge label
-   - governance blurb key (influencer/platinum/gbg)
-   - classification set key (africa/nigeria/state-capacity)
-   - pathway selector shape (single / dependent / dual / dropdown-plus-tags) + option lists (exact approved wording)
-   - subcategory card list
-   - EDI weighting note + PDF href
-   - footer integrity sentence
-   - nominee-info field overrides (e.g. "Head librarian", "Jurisdiction")
-
-2. `src/config/nominate2026/ediMatrix.ts` — already exists; reuse the 10 core dimensions per category. Verify all 17 slugs resolve; fill gaps.
-
-3. `src/pages/nominate/NominateCategoryShell.tsx` — replace with the new 7-section layout above. Renders driven purely by `categoryContent[slug]`. Anchors `#nominate`, `#edi-matrix`, `#nominees` wired to hero buttons.
-
-4. New reusable sections under `src/components/nominate/category/`:
-   - `CategoryHero.tsx`
-   - `CategoryAboutPillars.tsx`
-   - `CategorySubcategoryCards.tsx` (+ `InfluencerPathwayBlocks.tsx` variant)
-   - `CategoryEDIMatrix.tsx` (two-column, PDF button, mobile stack)
-   - `CategoryExistingNominees.tsx` (queries verified nominees for the category via existing `nomineesApi`; empty state fallback)
-   - `CategoryFooterIntegrity.tsx`
-
-5. Form (`src/components/nominate/category/CategoryNominationForm.tsx`) — reuses existing `NativeCategoryNominationForm` skeleton for Classification/Nominee/Evidence/Nominator/Declaration steps; step 1 renders one of 4 selector variants from config.
-
-6. Strip old tier accent tokens (teal/silver/garnet-red) referenced by these pages — replace with shared gold token. Sweep only files these 17 pages import.
-
-7. Mobile: EDI two-column → single; dual dropdowns stack; tag grid stacks.
-
-## Out of scope
-
-- Icon page, /nominate hub, global nav/footer, unrelated routes
-- New nominee data (empty state only until DB has verified rows)
-- New UI dependencies
-
-## Deliverables
-
-- 1 new content config, 1 rewritten shell, 6 new section components, 1 form component
-- All 17 URLs render the unified structure; no route changes
-- Anchors verified; mobile stack verified; no fabricated nominees
+I'll do Stage 1 as a migration you approve, then build Stages 2-5 in order, reporting what's complete, what's partial, and what needs a follow-up pass.
