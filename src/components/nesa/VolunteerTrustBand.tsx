@@ -3,7 +3,7 @@
 
 import { Link } from "react-router-dom";
 import { Users, ArrowRight } from "lucide-react";
-import { useGlobalTeamStats } from "@/hooks/useGlobalTeamStats";
+import { useGlobalTeamStats, formatStat } from "@/hooks/useGlobalTeamStats";
 
 export function VolunteerTrustBand() {
   const stats = useGlobalTeamStats();
@@ -17,11 +17,11 @@ export function VolunteerTrustBand() {
           <p className="font-display text-gold uppercase tracking-[0.18em] text-xs">Powered by People</p>
         </div>
         <p className="text-white text-base md:text-lg flex-1">
-          <span className="font-bold text-gold">{stats.people}</span> volunteers, judges & NRC members ·{" "}
-          <span className="font-bold text-gold">{stats.countries}</span> countries ·{" "}
-          <span className="font-bold text-gold">{stats.activeChapters}</span> active chapters
+          <span className="font-bold text-gold">{formatStat(stats.people)}</span> volunteers, judges & NRC members ·{" "}
+          <span className="font-bold text-gold">{formatStat(stats.countries)}</span> countries ·{" "}
+          <span className="font-bold text-gold">{formatStat(stats.activeChapters)}</span> active chapters
         </p>
-        <Link to="/about/team" className="inline-flex items-center gap-1 text-gold font-semibold hover:underline">
+        <Link to="/volunteers" className="inline-flex items-center gap-1 text-gold font-semibold hover:underline">
           Meet the team <ArrowRight className="h-4 w-4" />
         </Link>
       </div>
