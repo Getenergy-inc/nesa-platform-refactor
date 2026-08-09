@@ -315,7 +315,7 @@ export default function AdminContributorsCMS() {
                   value={form.id}
                   disabled={!creating}
                   onChange={(e) => setForm({ ...form, id: e.target.value.toLowerCase() })}
-                  placeholder="e.g. v-2025-newcomer"
+                  placeholder="e.g. v-2026-newcomer"
                   className="bg-charcoal-light border-gold/20"
                 />
               </Field>

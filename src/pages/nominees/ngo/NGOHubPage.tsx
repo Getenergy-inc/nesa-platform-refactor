@@ -139,7 +139,7 @@ export default function NGOHubPage() {
         {/* Featured */}
         <section className="container mx-auto px-4 py-16">
           <h2 className="font-serif text-3xl font-bold text-white mb-2">Featured Verified NGOs</h2>
-          <p className="text-white/60 mb-8">Pre-verified from the 2025 nominee dataset.</p>
+          <p className="text-white/60 mb-8">Pre-verified from the NESA-Africa nominee register.</p>
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
             {featured.map((n) => (
               <NGOCardMini key={n.id} nominee={n} />
