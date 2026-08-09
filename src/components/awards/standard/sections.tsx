@@ -553,6 +553,39 @@ export function HallOfFamePreview({
 // 5. SUBCATEGORY PATHWAYS
 // ─────────────────────────────────────────────────────────────────────────────
 
+/**
+ * Award-show card copy: one declarative line by default, full text on demand.
+ * Nothing is deleted — the remainder stays on-page behind a disclosure.
+ */
+function PathwayBlurb({ blurb, recognises }: { blurb: string; recognises?: string }) {
+  const [open, setOpen] = useState(false);
+  const [lead, rest] = splitLead(blurb);
+  const hasMore = Boolean(rest || recognises);
+  return (
+    <div className="mt-2">
+      <p className="text-sm text-white/70 leading-relaxed">{open ? blurb : lead}</p>
+      {open && recognises && (
+        <p className="mt-3 text-xs text-gold/80 italic border-l-2 border-gold/30 pl-3">
+          {recognises}
+        </p>
+      )}
+      {hasMore && (
+        <button
+          type="button"
+          onClick={() => setOpen((v) => !v)}
+          aria-expanded={open}
+          className="mt-2 inline-flex items-center gap-1 text-[11px] uppercase tracking-[0.16em] text-gold hover:text-gold/80"
+        >
+          {open ? "Show less" : "More"}
+          <ChevronDown className={`h-3 w-3 transition-transform ${open ? "rotate-180" : ""}`} />
+        </button>
+      )}
+    </div>
+  );
+}
+
+
+
 export function SubcategoryPathways({
   pageSlug,
   subcategories,
