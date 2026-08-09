@@ -236,11 +236,19 @@ const TIER_FILTERS: { value: TierSlug | "all"; label: string }[] = [
   { value: "gold-blue-garnet", label: "Gold-Blue Garnet" },
 ];
 
-function DirectoryCard({ form }: { form: NominationFormMeta }) {
+function DirectoryCard({
+  form,
+  linkQuery = "",
+}: {
+  form: NominationFormMeta;
+  /** Optional query string (e.g. "?nomineeType=individual") appended to the form route. */
+  linkQuery?: string;
+}) {
   const content = getCategoryContent(form.category);
   const title = content?.hero.h1 ?? form.title;
   return (
     <div className="group flex h-full flex-col rounded-xl border border-[#2b3140] bg-[#15181f] p-5 transition hover:border-gold/60">
+
       <div className="mb-2 flex items-center justify-between gap-2">
         <span className="text-[10px] uppercase tracking-wide text-gold/70">
           {form.tier === "africa-education-icon"
