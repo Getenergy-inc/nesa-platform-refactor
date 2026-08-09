@@ -78,38 +78,74 @@ const FOCUS_RING =
 
 function DropdownSimple({ item }: { item: NavItem }) {
   const location = useLocation();
+  const wide = !!(item.panelHeading || item.panelFooter);
   return (
-    <ul className="grid w-[300px] gap-1 p-2 bg-charcoal border border-gold/20">
-      {item.children!.map((c) => {
-        const active = isActive(location.pathname, c.href);
-        return (
-          <li key={c.href}>
-            <NavigationMenuLink asChild>
-              <Link
-                to={c.href}
-                aria-current={active ? "page" : undefined}
-                onClick={() =>
-                  trackNav("dropdown_item_click", {
-                    parent: item.label,
-                    label: c.label,
-                    href: c.href,
-                    section: item.analyticsId,
-                    device: "desktop",
-                  })
-                }
-                className={cn(
-                  "block px-3 py-2 rounded-md text-sm hover:text-gold hover:bg-gold/10",
-                  FOCUS_RING,
-                  active ? "text-gold bg-gold/10" : "text-white/85",
-                )}
-              >
-                {c.label}
-              </Link>
-            </NavigationMenuLink>
-          </li>
-        );
-      })}
-    </ul>
+    <div className={cn(wide ? "w-[340px]" : "w-[300px]", "bg-charcoal border border-gold/20")}>
+      {item.panelHeading && (
+        <div className="px-3 pt-3 pb-2 border-b border-gold/15">
+          <p className="text-sm font-semibold text-gold leading-tight">{item.panelHeading}</p>
+          {item.panelSubheading && (
+            <p className="mt-1 text-[11px] text-white/60 leading-snug">{item.panelSubheading}</p>
+          )}
+        </div>
+      )}
+      <ul className="grid gap-1 p-2">
+        {item.children!.map((c) => {
+          const active = isActive(location.pathname, c.href);
+          return (
+            <li key={c.href}>
+              <NavigationMenuLink asChild>
+                <Link
+                  to={c.href}
+                  aria-current={active ? "page" : undefined}
+                  onClick={() =>
+                    trackNav("dropdown_item_click", {
+                      parent: item.label,
+                      label: c.label,
+                      href: c.href,
+                      section: item.analyticsId,
+                      device: "desktop",
+                    })
+                  }
+                  className={cn(
+                    "block px-3 py-2 rounded-md text-sm hover:text-gold hover:bg-gold/10",
+                    FOCUS_RING,
+                    active ? "text-gold bg-gold/10" : "text-white/85",
+                  )}
+                >
+                  {c.label}
+                </Link>
+              </NavigationMenuLink>
+            </li>
+          );
+        })}
+      </ul>
+      {item.panelFooter && (
+        <div className="px-3 pb-3 pt-2 border-t border-gold/15">
+          <p className="text-[11px] text-white/60">{item.panelFooter.note}</p>
+          <NavigationMenuLink asChild>
+            <Link
+              to={item.panelFooter.ctaHref}
+              onClick={() =>
+                trackNav("dropdown_cta_click", {
+                  parent: item.label,
+                  label: item.panelFooter!.ctaLabel,
+                  href: item.panelFooter!.ctaHref,
+                  section: item.analyticsId,
+                  device: "desktop",
+                })
+              }
+              className={cn(
+                "mt-2 block rounded-md bg-gold/15 px-3 py-2 text-sm font-semibold text-gold hover:bg-gold/25",
+                FOCUS_RING,
+              )}
+            >
+              {item.panelFooter.ctaLabel}
+            </Link>
+          </NavigationMenuLink>
+        </div>
+      )}
+    </div>
   );
 }
 
@@ -507,14 +543,33 @@ function MobileMenu() {
                       {item.label}
                     </AccordionTrigger>
                     <AccordionContent className="pb-1">
-                      <Link
-                        to={item.href}
-                        onClick={close}
-                        className={cn(linkCls, "font-semibold text-gold/90")}
-                      >
-                        {item.label} overview
-                      </Link>
+                      {item.panelHeading && (
+                        <p className="px-3 pb-1 text-[11px] uppercase tracking-wider text-gold/70 font-semibold">
+                          {item.panelHeading}
+                        </p>
+                      )}
+                      {!item.panelHeading && (
+                        <Link
+                          to={item.href}
+                          onClick={close}
+                          className={cn(linkCls, "font-semibold text-gold/90")}
+                        >
+                          {item.label} overview
+                        </Link>
+                      )}
                       {renderChildren(item)}
+                      {item.panelFooter && (
+                        <div className="mt-2 border-t border-gold/15 pt-2">
+                          <p className="px-3 pb-1 text-[11px] text-white/55">{item.panelFooter.note}</p>
+                          <Link
+                            to={item.panelFooter.ctaHref}
+                            onClick={close}
+                            className={cn(linkCls, "text-gold font-semibold")}
+                          >
+                            {item.panelFooter.ctaLabel}
+                          </Link>
+                        </div>
+                      )}
                     </AccordionContent>
                   </AccordionItem>
                 );

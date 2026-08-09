@@ -60,7 +60,7 @@
 /cookie-policy                                               /policies            301
 /language                                                    /                    301
 
-# --- 2. SPA routes (515 explicit paths from src/App.tsx) ---
+# --- 2. SPA routes (521 explicit paths from src/App.tsx) ---
 /recognition/influencer-education-impact/african-sports-icons-supporting-education /index.html          200
 /recognition/influencer-education-impact/african-music-icons-supporting-education /index.html          200
 /recognition/influencer-education-impact/african-social-media-influencers /index.html          200
@@ -147,7 +147,6 @@
 /awards/africa-education-icon                                /index.html          200
 /awards/gold-blue-garnet/vote                                /index.html          200
 /awards/grants-global-support                                /index.html          200
-/judges/pathways/:pathwaySlug                                /index.html          200
 /recognition/gold-blue-garnet                                /index.html          200
 /subcategories-to-recognition                                /index.html          200
 /about/nesa-africa-2028-2030                                 /index.html          200
@@ -189,7 +188,6 @@
 /dashboard/notifications                                     /index.html          200
 /guidelines/renomination                                     /index.html          200
 /impact/regional-winners                                     /index.html          200
-/judges/nominee-pipeline                                     /index.html          200
 /media/behind-the-scenes                                     /index.html          200
 /nominate/help-me-choose                                     /index.html          200
 /nominees/region/:region                                     /index.html          200
@@ -202,6 +200,8 @@
 /impact/nominate-school                                      /index.html          200
 /impact/regional-voting                                      /index.html          200
 /judge-application-form                                      /index.html          200
+/judges/directory/:slug                                      /index.html          200
+/judges/forgot-password                                      /index.html          200
 /nominee/decline/:token                                      /index.html          200
 /nominees/profile/:slug                                      /index.html          200
 /nrc/dashboard/nominees                                      /index.html          200
@@ -238,6 +238,7 @@
 /programs/nesa-africa                                        /index.html          200
 /recognition/platinum                                        /index.html          200
 /sponsorship-packages                                        /index.html          200
+pathways/:pathwaySlug                                        /index.html          200
 /about/social-impact                                         /index.html          200
 /admin/nominee-media                                         /index.html          200
 /admin/subcategories                                         /index.html          200
@@ -279,6 +280,7 @@ nominees/:nomineeId                                          /index.html        
 /guidelines/voters                                           /index.html          200
 /icon-jury/sign-in                                           /index.html          200
 /influencer-impact                                           /index.html          200
+/judges/onboarding                                           /index.html          200
 /nominate/advanced                                           /index.html          200
 /nominate/official                                           /index.html          200
 /nominee-directory                                           /index.html          200
@@ -335,6 +337,7 @@ governance-review                                            /index.html        
 /volunteer-teams                                             /index.html          200
 /volunteer/tasks                                             /index.html          200
 /voting-timeline                                             /index.html          200
+nominee-pipeline                                             /index.html          200
 /about/partners                                              /index.html          200
 /about/timeline                                              /index.html          200
 /awards/explore                                              /index.html          200
@@ -349,6 +352,7 @@ governance-review                                            /index.html        
 /impact/reports                                              /index.html          200
 /judge/settings                                              /index.html          200
 /judges/sign-in                                              /index.html          200
+/judges/sign-up                                              /index.html          200
 /media/webinars                                              /index.html          200
 /nominate/pages                                              /index.html          200
 /nominees/:slug                                              /index.html          200
@@ -370,6 +374,7 @@ voting/:groupId                                              /index.html        
 /gfawzip/links                                               /index.html          200
 /impact/donate                                               /index.html          200
 /judge/scoring                                               /index.html          200
+/judges/panels                                               /index.html          200
 /media/gallery                                               /index.html          200
 /media/nesa-tv                                               /index.html          200
 /nominate/icon                                               /index.html          200
@@ -408,7 +413,6 @@ voting/:groupId                                              /index.html        
 /judge/status                                                /index.html          200
 /judge/verify                                                /index.html          200
 /judges-arena                                                /index.html          200
-/judges/:slug                                                /index.html          200
 /judges/apply                                                /index.html          200
 /judges/enter                                                /index.html          200
 /media-events                                                /index.html          200
@@ -527,6 +531,7 @@ nrc/:slug                                                    /index.html        
 /tickets                                                     /index.html          200
 my-panel                                                     /index.html          200
 nominees                                                     /index.html          200
+pathways                                                     /index.html          200
 /awards                                                      /index.html          200
 /donate                                                      /index.html          200
 /eduaid                                                      /index.html          200
@@ -555,6 +560,7 @@ scoring                                                      /index.html        
 /store                                                       /index.html          200
 /trust                                                       /index.html          200
 judges                                                       /index.html          200
+roster                                                       /index.html          200
 voting                                                       /index.html          200
 /auth                                                        /index.html          200
 /cart                                                        /index.html          200

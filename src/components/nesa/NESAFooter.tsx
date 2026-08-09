@@ -56,12 +56,16 @@ const SECTIONS: FooterSection[] = [
   },
   {
     id: "impact",
-    title: "Impact",
+    title: "Education Impact",
     links: [
-      { label: "Impact Programmes", href: "/impact" },
-      { label: "EduAid-Africa", href: "/eduaid-africa" },
+      { label: "Education Social Impact Overview", href: "/impact" },
       { label: "Rebuild My School Africa", href: "/eduaid-africa/rebuild-my-school" },
-      { label: "Afri-EduTourism", href: "/impact/afri-edutourism-2027" },
+      { label: "Support a Special-Needs School", href: "/impact/special-needs-schools" },
+      { label: "Regional School Interventions", href: "/impact/regional" },
+      { label: "Afri-EduTourism 2027", href: "/afri-edutourism" },
+      { label: "Impact Reports", href: "/impact/reports" },
+      { label: "Impact Stories & Media", href: "/impact/stories" },
+      { label: "EduAid-Africa (programme infrastructure)", href: "/eduaid-africa" },
     ],
   },
   {
