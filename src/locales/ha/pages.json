@@ -84,7 +84,7 @@
       "blueGarnetDesc": "Alkali + Jama'a",
       "legacy": "Gado",
       "legacyDesc": "Sake Gina Makarantu",
-      "agcNote": "Shiga yana bude maki na jefa kuri'a. Jefa kuri'a yana amfani da AGC yayin tagogi na hukuma.",
+      "agcNote": "Participation happens through nominations and verified evidence during official windows.",
       "learnMore": "Kara Koyo Game da Tsarin"
     },
     "voteWithAGC": {
@@ -118,7 +118,7 @@
       "auditPoint": "Ana rubuta dukkan kuri'u tare da bin diddigi",
       "learnAboutAGC": "Koyi Game da AGC",
       "goToVoting": "Je Zuwa Jefa Kuri'a",
-      "disclaimer": "AGC ba za a iya cinikin ta ba — babu cirewa, babu biya. AGC ba kudin dijital ba ce."
+      "disclaimer": "The GFAwzip Wallet is a payment channel only — no voting credits, no cash-out, no payouts."
     },
     "integrity": {
       "badge": "Mulki da Gaskiya",
@@ -135,7 +135,7 @@
       "auditTrail": "Bin Diddigi Cikakke",
       "verifiedCredentials": "Takaddun Shaida Da Aka Tabbatar",
       "secureVoting": "Jefa Kuri'a Mai Tsaro",
-      "agcDisclaimer": "AGC ba za a iya cinikin ta ba — babu cirewa, babu biya."
+      "agcDisclaimer": "The GFAwzip Wallet is a payment channel only — no voting credits, no cash-out, no payouts."
     },
     "quickActions": {
       "nominate": "Tsaya",

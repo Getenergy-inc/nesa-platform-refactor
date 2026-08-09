@@ -290,7 +290,7 @@
       "blueGarnetDesc": "Jury + Public",
       "legacy": "Héritage",
       "legacyDesc": "Reconstruire les Écoles",
-      "agcNote": "La participation débloque des points de vote. Le vote utilise les AGC (non échangeables) pendant les fenêtres officielles.",
+      "agcNote": "Participation happens through nominations and verified evidence during official windows.",
       "learnMore": "En Savoir Plus sur le Processus"
     },
     "voteWithAGC": {
@@ -324,7 +324,7 @@
       "auditPoint": "Tous les votes enregistrés avec piste d'audit complète",
       "learnAboutAGC": "En Savoir Plus sur AGC",
       "goToVoting": "Aller au Vote",
-      "disclaimer": "L'AGC n'est pas échangeable — pas de retraits, pas d'encaissement, pas de paiements. L'AGC n'est pas une cryptomonnaie."
+      "disclaimer": "The GFAwzip Wallet is a payment channel only — no voting credits, no cash-out, no payouts."
     },
     "integrity": {
       "badge": "Gouvernance et Intégrité",
@@ -341,7 +341,7 @@
       "auditTrail": "Piste d'Audit Complète",
       "verifiedCredentials": "Références Vérifiées",
       "secureVoting": "Vote Sécurisé",
-      "agcDisclaimer": "L'AGC n'est pas échangeable — pas de retraits, pas d'encaissement, pas de paiements."
+      "agcDisclaimer": "The GFAwzip Wallet is a payment channel only — no voting credits, no cash-out, no payouts."
     },
     "quickActions": {
       "nominate": "Nominer",

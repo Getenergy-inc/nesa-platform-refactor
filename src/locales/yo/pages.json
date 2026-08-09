@@ -84,7 +84,7 @@
       "blueGarnetDesc": "Onídàájọ́ + Gbogbo Ènìyàn",
       "legacy": "Ogún",
       "legacyDesc": "Tún Àwọn Ilé-ìwé Kọ́",
-      "agcNote": "Ìkópa ṣí àwọn ìlà ìdìbò. Ìdìbò ń lo AGC (tí kò lè tà) nígbà fèrèsé ìpìlẹ̀.",
+      "agcNote": "Participation happens through nominations and verified evidence during official windows.",
       "learnMore": "Kọ́ Síwájú Nípa Ìlànà"
     },
     "voteWithAGC": {
@@ -118,7 +118,7 @@
       "auditPoint": "Gbogbo ìdìbò tí a kọ sílẹ̀ pẹ̀lú àbùdá ìṣàyẹ̀wò kíkún",
       "learnAboutAGC": "Kọ́ Nípa AGC",
       "goToVoting": "Lọ sí Ìdìbò",
-      "disclaimer": "AGC kò le tà — kò sí yíyọ, kò sí owó ìdá. AGC kìí ṣe owó oníhà."
+      "disclaimer": "The GFAwzip Wallet is a payment channel only — no voting credits, no cash-out, no payouts."
     },
     "integrity": {
       "badge": "Ìṣàkóso àti Ìmọ́tótó",
@@ -135,7 +135,7 @@
       "auditTrail": "Àbùdá Ìṣàyẹ̀wò Kíkún",
       "verifiedCredentials": "Àwọn Ẹ̀rí Tí A Fìdí Rẹ̀ Múlẹ̀",
       "secureVoting": "Ìdìbò Aláàbò",
-      "agcDisclaimer": "AGC kò le tà — kò sí yíyọ, kò sí owó ìdá."
+      "agcDisclaimer": "The GFAwzip Wallet is a payment channel only — no voting credits, no cash-out, no payouts."
     },
     "quickActions": {
       "nominate": "Yàn",

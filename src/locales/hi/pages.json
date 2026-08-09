@@ -84,7 +84,7 @@
       "blueGarnetDesc": "जूरी + सार्वजनिक",
       "legacy": "विरासत",
       "legacyDesc": "स्कूलों का पुनर्निर्माण",
-      "agcNote": "भागीदारी मतदान अंक खोलती है। मतदान AGC (गैर-व्यापार योग्य) का उपयोग करता है।",
+      "agcNote": "Participation happens through nominations and verified evidence during official windows.",
       "learnMore": "प्रक्रिया के बारे में और जानें"
     },
     "voteWithAGC": {
@@ -118,7 +118,7 @@
       "auditPoint": "सभी वोट पूर्ण ऑडिट ट्रेल के साथ दर्ज",
       "learnAboutAGC": "AGC के बारे में जानें",
       "goToVoting": "मतदान पर जाएं",
-      "disclaimer": "AGC गैर-व्यापार योग्य है — कोई निकासी, कोई नकदी, कोई भुगतान नहीं। AGC क्रिप्टोकरेंसी नहीं है।"
+      "disclaimer": "The GFAwzip Wallet is a payment channel only — no voting credits, no cash-out, no payouts."
     },
     "integrity": {
       "badge": "शासन और सत्यनिष्ठा",
@@ -135,7 +135,7 @@
       "auditTrail": "पूर्ण ऑडिट ट्रेल",
       "verifiedCredentials": "सत्यापित प्रमाण पत्र",
       "secureVoting": "सुरक्षित मतदान",
-      "agcDisclaimer": "AGC गैर-व्यापार योग्य — कोई निकासी या भुगतान नहीं।"
+      "agcDisclaimer": "The GFAwzip Wallet is a payment channel only — no voting credits, no cash-out, no payouts."
     },
     "quickActions": {
       "nominate": "नामांकित करें",

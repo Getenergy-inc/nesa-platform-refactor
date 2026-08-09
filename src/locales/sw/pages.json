@@ -84,7 +84,7 @@
       "blueGarnetDesc": "Jaji + Umma",
       "legacy": "Urithi",
       "legacyDesc": "Jenga Upya Shule",
-      "agcNote": "Ushiriki unafungua pointi za kura. Kura hutumia AGC (isiyoweza kuuzwa) wakati wa madirisha rasmi.",
+      "agcNote": "Participation happens through nominations and verified evidence during official windows.",
       "learnMore": "Jifunze Zaidi Kuhusu Mchakato"
     },
     "voteWithAGC": {
@@ -118,7 +118,7 @@
       "auditPoint": "Kura zote zinarekodiwa na ukaguzi kamili",
       "learnAboutAGC": "Jifunze Kuhusu AGC",
       "goToVoting": "Nenda Kupiga Kura",
-      "disclaimer": "AGC haiwezi kuuzwa — hakuna uondoaji, hakuna malipo ya pesa. AGC si sarafu ya dijiti."
+      "disclaimer": "The GFAwzip Wallet is a payment channel only — no voting credits, no cash-out, no payouts."
     },
     "integrity": {
       "badge": "Utawala na Uadilifu",
@@ -135,7 +135,7 @@
       "auditTrail": "Ukaguzi Kamili",
       "verifiedCredentials": "Vyeti Vilivyothibitishwa",
       "secureVoting": "Kura Salama",
-      "agcDisclaimer": "AGC haiwezi kuuzwa — hakuna uondoaji, hakuna malipo."
+      "agcDisclaimer": "The GFAwzip Wallet is a payment channel only — no voting credits, no cash-out, no payouts."
     },
     "quickActions": {
       "nominate": "Pendekeza",
