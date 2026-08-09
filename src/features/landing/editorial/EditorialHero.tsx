@@ -3,15 +3,7 @@ import { Sparkles } from "lucide-react";
 import stageBackdrop from "@/assets/nesa-stage-backdrop.jpg";
 import trophy from "@/assets/blue-garnet-trophy-icon.png";
 import { trackEvent } from "@/lib/analytics";
-
-const CERTIFICATES = [
-  "Influencer Education Impact",
-  "Diaspora Educational Impact",
-  "International Partnership & NGO Education",
-  "EduTech Innovation",
-  "CSR for Education",
-  "Media Organisation",
-];
+import { RECOGNITION_FAMILIES } from "@/config/brandHierarchy";
 
 export function EditorialHero() {
   return (
@@ -56,9 +48,9 @@ export function EditorialHero() {
           Supported by Six Certificates of Recognition
         </div>
         <div className="ed-stat-row">
-          {CERTIFICATES.map((c) => (
-            <div key={c} className="ed-stat-pill">
-              {c}
+          {RECOGNITION_FAMILIES.map((f) => (
+            <div key={f.slug} className="ed-stat-pill">
+              {f.name}
             </div>
           ))}
         </div>
@@ -83,7 +75,7 @@ export function EditorialHero() {
 
       <div className="ed-trophy-card">
         <img src={trophy} alt="NESA-Africa Blue-Garnet award trophy" />
-        <div className="ed-trophy-caption">Africa&apos;s Highest Education Honour</div>
+        <div className="ed-trophy-caption">Recognising the Enablers of Education for All</div>
       </div>
     </section>
   );

@@ -80,8 +80,8 @@ export const MASTER_TIMELINE_NOMINATION_WINDOWS = [
 ] as const;
 
 export const MASTER_TIMELINE_PUBLIC_NOTICE = {
-  title: "Public Nominations for All 4 Recognition Tiers Open 30 August 2026",
-  body: "Africa Education Icon: 30 August – 12 September 2026. Gold-Blue Garnet, Platinum Recognition and Influencer Education Impact: 30 August – 14 November 2026 — the longer window gives nominees time to request physical printed certificates ahead of the Gala.",
+  title: "Public Nominations Open 30 August 2026",
+  body: "Africa Education Icon Award: 30 August – 12 September 2026. Education Impact Certificates (all six recognition families): 30 August – 14 November 2026 — the longer window gives nominees time to request physical printed certificates ahead of the Gala.",
   effectiveDate: "2026-08-30T00:00:00Z",
   ctaLabel: "Nominate Now",
   ctaHref: "/nominate",
