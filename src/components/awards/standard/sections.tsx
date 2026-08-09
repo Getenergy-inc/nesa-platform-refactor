@@ -2,6 +2,7 @@
 // Visual standard: Africa Education Icon Award 2006–2026 (/awards/africa-education-icon).
 // Used by every Tier / Pillar / Category page so the system feels unified.
 
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import {
@@ -17,10 +18,47 @@ import {
   Scale,
   Gavel,
   Trophy,
+  ChevronDown,
 } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { trackEvent } from "@/lib/analytics";
+
+/**
+ * Splits long institutional prose into a scannable lead statement and the
+ * remaining detail. Nothing is deleted — the remainder stays on-page behind a
+ * disclosure so the fold carries one declarative line, award-show style.
+ */
+export function splitLead(text: string, leadSentences = 1): [string, string] {
+  const parts = text.match(/[^.!?]+[.!?]+(\s|$)/g);
+  if (!parts || parts.length <= leadSentences) return [text.trim(), ""];
+  return [
+    parts.slice(0, leadSentences).join("").trim(),
+    parts.slice(leadSentences).join("").trim(),
+  ];
+}
+
+function MoreText({ text, label = "Read the full statement" }: { text: string; label?: string }) {
+  const [open, setOpen] = useState(false);
+  if (!text) return null;
+  return (
+    <div className="mt-4">
+      <button
+        type="button"
+        onClick={() => setOpen((v) => !v)}
+        aria-expanded={open}
+        className="inline-flex items-center gap-1.5 text-xs uppercase tracking-[0.18em] text-gold hover:text-gold/80"
+      >
+        {open ? "Show less" : label}
+        <ChevronDown className={`h-3.5 w-3.5 transition-transform ${open ? "rotate-180" : ""}`} />
+      </button>
+      {open && (
+        <p className="mt-4 text-sm md:text-base text-white/70 leading-relaxed">{text}</p>
+      )}
+    </div>
+  );
+}
+
 
 // ─────────────────────────────────────────────────────────────────────────────
 // Shared types
