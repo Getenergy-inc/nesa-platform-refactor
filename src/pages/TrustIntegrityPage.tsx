@@ -101,6 +101,47 @@ export default function TrustIntegrityPage() {
           </Link>
         </div>
       </section>
+
+      <section
+        id="recognition-independence"
+        className="border-t border-gold/15 py-12 md:py-16"
+        aria-labelledby="independence"
+      >
+        <div className="container max-w-3xl">
+          <h2 id="independence" className="font-display text-2xl text-gold">
+            {RECOGNITION_INDEPENDENCE_2026.title}
+          </h2>
+          <p className="mt-3 text-sm leading-relaxed text-white/80">
+            {RECOGNITION_INDEPENDENCE_2026.summary}
+          </p>
+          <ul className="mt-5 space-y-3">
+            {RECOGNITION_INDEPENDENCE_2026.statements.map((s) => (
+              <li
+                key={s}
+                className="rounded-lg border border-white/10 bg-white/[0.03] p-4 text-sm text-white/75"
+              >
+                {s}
+              </li>
+            ))}
+          </ul>
+
+          <div className="mt-8 rounded-lg border border-gold/25 bg-gold/5 p-5">
+            <h3 className="font-display text-base text-gold">
+              What the {WALLET_NAME} is for
+            </h3>
+            <p className="mt-2 text-sm text-white/75">
+              The {WALLET_NAME} is an approved payment and transaction channel only, covering:
+            </p>
+            <ul className="mt-3 grid gap-1.5 text-sm text-white/70 sm:grid-cols-2">
+              {WALLET_PAYMENT_PURPOSES.map((p) => (
+                <li key={p}>· {p}</li>
+              ))}
+            </ul>
+            <p className="mt-3 text-xs text-white/60">{WALLET_RECONCILIATION_NOTE}</p>
+          </div>
+        </div>
+      </section>
     </div>
   );
 }
+
