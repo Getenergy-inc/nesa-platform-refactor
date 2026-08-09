@@ -829,7 +829,12 @@ export default function NominateHub2026() {
       </section>
 
       {/* 18-FORM DIRECTORY */}
-      <FormDirectory />
+      <FormDirectory
+        narrowing={narrowing}
+        initialNomineeType={audience ?? "all"}
+        linkQuery={linkQuery}
+      />
+
 
       {/* HOW RECOGNITION WORKS */}
       <ProcessDiagram />
