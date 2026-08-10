@@ -60,7 +60,7 @@
 /cookie-policy                                               /policies            301
 /language                                                    /                    301
 
-# --- 2. SPA routes (529 explicit paths from src/App.tsx) ---
+# --- 2. SPA routes (530 explicit paths from src/App.tsx) ---
 /recognition/influencer-education-impact/african-sports-icons-supporting-education /index.html          200
 /recognition/influencer-education-impact/african-music-icons-supporting-education /index.html          200
 /recognition/influencer-education-impact/african-social-media-influencers /index.html          200
@@ -528,6 +528,7 @@ nrc/:slug                                                    /index.html        
 /gallery                                                     /index.html          200
 /gfawzip                                                     /index.html          200
 /install                                                     /index.html          200
+/journal                                                     /index.html          200
 /nominee                                                     /index.html          200
 /partner                                                     /index.html          200
 /rebuild                                                     /index.html          200
