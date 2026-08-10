@@ -187,16 +187,32 @@ export default function Donate() {
         {/* Regional Special Needs School Intervention */}
         <RegionalSchoolInterventionSection />
 
+        {/* Role clarity — who does what */}
+        <section className="py-6">
+          <div className="container mx-auto px-4 max-w-3xl">
+            <h2 className="font-display text-lg font-bold text-gold mb-3">Who Does What</h2>
+            <div className="grid gap-3 sm:grid-cols-2">
+              {FRIENDS_ROLE_CLARITY.map((r) => (
+                <div key={r.actor} className="rounded-xl border border-white/10 bg-white/[0.03] p-4">
+                  <p className="text-sm font-semibold text-white">{r.actor}</p>
+                  <p className="mt-1 text-sm text-white/60">{r.role}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
         {/* Donation Section */}
         <section className="py-12 lg:py-16">
           <div className="container mx-auto px-4">
             <div className="mx-auto max-w-xl">
               <Card className="border-white/10 bg-white/5">
                 <CardHeader className="text-center">
-                  <CardTitle className="text-2xl text-white">Make Your Donation</CardTitle>
+                  <CardTitle className="text-2xl text-white">Become a Friend of EduAid-Africa</CardTitle>
                   <CardDescription className="text-white/60">
-                    Every contribution helps build a brighter future
+                    Your support funds verified education interventions across Africa
                   </CardDescription>
+
                 </CardHeader>
                 <CardContent className="space-y-6">
                   {/* Amount Selection */}
