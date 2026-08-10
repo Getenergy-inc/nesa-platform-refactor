@@ -113,25 +113,9 @@ function PathwayFallback() {
 
 export function LivingGallerySection() {
   const { nominees, loading, hasEnough } = useLivingGalleryNominees();
-  const reducedMotion = usePrefersReducedMotion();
-  const trackRef = useRef<HTMLDivElement | null>(null);
-  const [paused, setPaused] = useState(false);
+  // Shared strip motion (auto-advance, reduced-motion + pause-on-interaction).
+  const { ref: trackRef, pauseHandlers } = useStripAutoScroll<HTMLDivElement>(hasEnough);
 
-  // Auto-advance: gentle page-by-page scroll. Fully disabled under
-  // prefers-reduced-motion, and paused on hover / focus / pointer interaction.
-  useEffect(() => {
-    if (reducedMotion || paused || !hasEnough) return;
-    const el = trackRef.current;
-    if (!el) return;
-    const id = window.setInterval(() => {
-      const max = el.scrollWidth - el.clientWidth;
-      if (max <= 4) return;
-      const step = Math.max(el.clientWidth * 0.8, 260);
-      const next = el.scrollLeft + step >= max - 4 ? 0 : el.scrollLeft + step;
-      el.scrollTo({ left: next, behavior: "smooth" });
-    }, 4500);
-    return () => window.clearInterval(id);
-  }, [reducedMotion, paused, hasEnough]);
 
   return (
     <section className="ed-section" aria-labelledby="ed-living-gallery-heading">
