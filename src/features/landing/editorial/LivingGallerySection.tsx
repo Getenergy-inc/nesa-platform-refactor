@@ -6,7 +6,7 @@
 // Africa Education Icon + Six Recognition Pathways cards instead of an
 // awkward sparse carousel.
 
-import { useEffect, useRef, useState } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import { MapPin } from "lucide-react";
 import {
@@ -15,22 +15,8 @@ import {
   type GalleryNominee,
 } from "@/hooks/useLivingGallery";
 import { RECOGNITION_FAMILIES, BRAND } from "@/config/brandHierarchy";
+import { useStripAutoScroll } from "./useStripAutoScroll";
 
-function usePrefersReducedMotion() {
-  const [reduced, setReduced] = useState(() =>
-    typeof window !== "undefined" && typeof window.matchMedia === "function"
-      ? window.matchMedia("(prefers-reduced-motion: reduce)").matches
-      : false,
-  );
-  useEffect(() => {
-    if (typeof window === "undefined" || typeof window.matchMedia !== "function") return;
-    const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
-    const onChange = () => setReduced(mq.matches);
-    mq.addEventListener?.("change", onChange);
-    return () => mq.removeEventListener?.("change", onChange);
-  }, []);
-  return reduced;
-}
 
 function GalleryCard({ n }: { n: GalleryNominee }) {
   const place = [n.country, n.region].filter(Boolean).join(" · ");
