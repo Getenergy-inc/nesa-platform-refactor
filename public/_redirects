@@ -60,7 +60,7 @@
 /cookie-policy                                               /policies            301
 /language                                                    /                    301
 
-# --- 2. SPA routes (527 explicit paths from src/App.tsx) ---
+# --- 2. SPA routes (529 explicit paths from src/App.tsx) ---
 /recognition/influencer-education-impact/african-sports-icons-supporting-education /index.html          200
 /recognition/influencer-education-impact/african-music-icons-supporting-education /index.html          200
 /recognition/influencer-education-impact/african-social-media-influencers /index.html          200
@@ -129,6 +129,7 @@
 /eduaid-africa/rebuild-my-school                             /index.html          200
 /education-enablers/edtech/:slug                             /index.html          200
 /education-enablers/verification                             /index.html          200
+/impact/friends-of-eduaid-africa                             /index.html          200
 /impact/rebuild-my-school-africa                             /index.html          200
 /nominees/category/:categorySlug                             /index.html          200
 /category/africa-education-icon                              /index.html          200
@@ -175,6 +176,7 @@
 /awards/csr-for-education                                    /index.html          200
 /awards/platinum/diaspora                                    /index.html          200
 /category/library-nigeria                                    /index.html          200
+/friends-of-eduaid-africa                                    /index.html          200
 /guidelines/update-impact                                    /index.html          200
 /nominee/dashboard/:token                                    /index.html          200
 /nrc/dashboard/duplicates                                    /index.html          200
