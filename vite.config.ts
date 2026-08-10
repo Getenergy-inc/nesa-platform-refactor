@@ -167,4 +167,6 @@ export default defineConfig(({ mode }) => {
     legalComments: 'none',
     drop: mode === 'production' ? ['console', 'debugger'] : [],
   },
-}));
+  };
+});
+
