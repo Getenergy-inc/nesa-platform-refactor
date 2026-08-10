@@ -42,7 +42,7 @@ const WORKSPACES: Workspace[] = [
   {
     key: "governance",
     label: "Governance Dashboard",
-    href: "/dashboard/governance",
+    href: "/governance",
     icon: ScrollText,
     match: (r) => r.includes("admin"),
   },
@@ -56,7 +56,7 @@ const WORKSPACES: Workspace[] = [
   {
     key: "account",
     label: "My Account",
-    href: "/account",
+    href: "/dashboard",
     icon: LayoutDashboard,
     match: () => true,
   },

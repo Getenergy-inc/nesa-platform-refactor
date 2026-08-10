@@ -596,7 +596,7 @@ function MobileMenu() {
           <div className="mt-4 border-t border-gold/20 pt-3 space-y-1">
             {user ? (
               <>
-                <Link to="/account" onClick={close} className={linkCls}>My Account</Link>
+                <Link to="/dashboard" onClick={close} className={linkCls}>My Account</Link>
                 <div className="px-3 py-2"><LanguageSwitcher /></div>
                 <button
                   type="button"

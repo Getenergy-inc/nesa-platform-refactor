@@ -354,8 +354,7 @@ export const USER_DASHBOARD_NAV: NavItem[] = [
   { label: "Overview", href: "/dashboard", icon: Home },
   { label: "My Profile", href: "/dashboard/profile", icon: Users },
   { label: "My Nominations", href: "/dashboard/nominations", icon: FileCheck },
-  { label: "My Votes", href: "/dashboard/votes", icon: Vote },
-  { label: "Certificates", href: "/dashboard/certificates", icon: Award },
+  { label: "Certificates", href: "/certificates/guide", icon: Award },
   { label: "Wallet", href: "/dashboard/wallet", icon: Wallet },
   { label: "Notifications", href: "/dashboard/notifications", icon: MessageSquare },
   { label: "Settings", href: "/dashboard/settings", icon: Settings },
@@ -367,24 +366,24 @@ export const USER_DASHBOARD_NAV: NavItem[] = [
 
 export const NRC_DASHBOARD_NAV: NavItem[] = [
   { label: "Review Queue", href: "/nrc", icon: FileCheck },
-  { label: "Assigned Reviews", href: "/nrc/assigned", icon: Target },
+  { label: "Assigned Reviews", href: "/nrc/my-queue", icon: Target },
   { label: "Evidence Validation", href: "/nrc/evidence", icon: Shield },
-  { label: "Approval Logs", href: "/nrc/logs", icon: BookOpen },
-  { label: "Audit Trail", href: "/nrc/audit", icon: Shield },
+  { label: "Reports", href: "/nrc/reports", icon: BookOpen },
+  { label: "Audit Trail", href: "/nrc/audit-log", icon: Shield },
 ];
 
 export const JURY_DASHBOARD_NAV: NavItem[] = [
   { label: "Finalists", href: "/jury", icon: Trophy },
-  { label: "Scoring", href: "/jury/scoring", icon: Star },
-  { label: "Jury Discussion", href: "/jury/chat", icon: MessageSquare },
-  { label: "Locked Results", href: "/jury/results", icon: Shield },
+  { label: "Scoring", href: "/judges/scoring", icon: Star },
+  { label: "Jury Discussion", href: "/judges-arena/discussion", icon: MessageSquare },
+  { label: "Locked Results", href: "/judges/results", icon: Shield },
 ];
 
 export const CHAPTER_DASHBOARD_NAV: NavItem[] = [
-  { label: "Chapter Home", href: "/chapter", icon: Home },
-  { label: "Local Events", href: "/chapter/events", icon: Calendar },
-  { label: "Local Nominations", href: "/chapter/nominations", icon: FileCheck },
-  { label: "Reports", href: "/chapter/reports", icon: BookOpen },
+  { label: "Chapter Home", href: "/olc/dashboard", icon: Home },
+  { label: "Local Events", href: "/events", icon: Calendar },
+  { label: "Chapter Members", href: "/olc/members", icon: FileCheck },
+  { label: "Settlements", href: "/olc/settlements", icon: BookOpen },
 ];
 
 // OLC Coordinator Dashboard Navigation
@@ -397,13 +396,12 @@ export const OLC_DASHBOARD_NAV: NavItem[] = [
 
 export const ADMIN_DASHBOARD_NAV: NavItem[] = [
   { label: "Admin Home", href: "/admin", icon: Home },
-  { label: "Stage Control", href: "/admin/stages", icon: Settings },
-  { label: "Category Control", href: "/admin/categories", icon: Trophy },
-  { label: "User Roles", href: "/admin/users", icon: Users },
-  { label: "CMS", href: "/admin/cms", icon: BookOpen },
-  { label: "Media Scheduling", href: "/admin/media", icon: Tv },
-  { label: "Audit Logs", href: "/admin/logs", icon: Shield },
-  { label: "Compliance", href: "/admin/compliance", icon: Shield },
+  { label: "Subcategories", href: "/admin/subcategories", icon: Trophy },
+  { label: "Volunteers", href: "/admin/volunteers", icon: Users },
+  { label: "Nominee Profiles", href: "/admin/nominee-profiles", icon: BookOpen },
+  { label: "Media & Gallery", href: "/admin/gallery", icon: Tv },
+  { label: "Impact", href: "/admin/impact", icon: Shield },
+  { label: "Analytics (EDX)", href: "/admin/edx", icon: Shield },
 ];
 
 // ============================================================================
@@ -474,7 +472,7 @@ export const PAGE_REGISTRY: PageDefinition[] = [
   { path: "/tickets", title: "Tickets", description: "Event tickets", component: "Tickets", category: "public", stageGated: "tickets" },
   { path: "/buy-your-ticket", title: "Buy Your Ticket", description: "Gala tickets", component: "BuyYourTicket", category: "public" },
   { path: "/gfawzip", title: "GFAWzip Wallet", description: "Multi-currency payments", component: "GFAWzipWallet", category: "public" },
-  { path: "/events/tourism", title: "Education Tourism", description: "Educational experiences", component: "Tourism", category: "public" },
+  { path: "/events/afri-edutourism", title: "Education Tourism", description: "Educational experiences", component: "Tourism", category: "public" },
   
   // Support
   { path: "/donate", title: "Donate", description: "Support our mission", component: "Donate", category: "public" },

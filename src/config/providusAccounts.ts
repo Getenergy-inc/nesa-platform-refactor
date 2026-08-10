@@ -125,7 +125,7 @@ export const PROVIDUS_ACCOUNT_GROUPS: ProvidusAccountGroup[] = [
     quickActions: [
       { label: "Sponsor NESA-Africa", to: "/sponsor" },
       { label: "Buy Gala Ticket", to: "/gala" },
-      { label: "Support NESA TV", to: "/nesa-tv" },
+      { label: "Support NESA TV", to: "/media/tv" },
       { label: "Partner With NESA-Africa", to: "/partners" },
     ],
     primaryCta: { label: "Sponsor NESA-Africa", to: "/sponsor" },

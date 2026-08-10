@@ -37,7 +37,7 @@ const PROGRAMS: Program[] = [
     description:
       "Post-recognition legacy programme rebuilding classrooms, libraries, sanitation, and digital labs in under-resourced African schools.",
     bullets: ["Classroom Rebuilds", "Digital Labs", "WASH Facilities"],
-    href: "/impact/rebuild-my-school",
+    href: "/impact/rebuild-my-school-africa",
     cta: "Visit Rebuild My School",
   },
   {
@@ -59,7 +59,7 @@ const PROGRAMS: Program[] = [
     description:
       "Diaspora Africans and Friends of Africa co-learn, volunteer and co-fund education impact in host regions across the continent.",
     bullets: ["Regional Tours", "Diaspora Volunteers", "Cultural Exchange"],
-    href: "/impact/afri-edutourism",
+    href: "/impact/afri-edutourism-2027",
     cta: "Plan a Journey",
   },
 ];

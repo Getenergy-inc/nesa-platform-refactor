@@ -60,10 +60,10 @@ const ICON_TIER: Tier2026 = {
   url: "/awards/africa-education-icon",
   subPages: [
     { label: "About", href: "/awards/africa-education-icon" },
-    { label: "Categories", href: "/awards/africa-education-icon/categories" },
+    { label: "Categories", href: "/recognition/categories" },
     { label: "Existing Nominees", href: "/awards/africa-education-icon/nominees" },
-    { label: "Hall of Fame", href: "/awards/africa-education-icon/hall-of-fame" },
-    { label: "Eligibility", href: "/awards/africa-education-icon/eligibility" },
+    { label: "Hall of Fame", href: "/nominees/africa-education-icon-award" },
+    { label: "Eligibility", href: "/about/eligibility" },
     { label: "Nominate", href: "/nominate?tier=africa-education-icon" },
   ],
   categories: [
@@ -102,11 +102,10 @@ const BLUE_GARNET_TIER: Tier2026 = {
   url: "/awards/gold-blue-garnet",
   subPages: [
     { label: "Award Categories", href: "/awards/gold-blue-garnet/categories" },
-    { label: "Existing Nominees", href: "/awards/gold-blue-garnet/nominees" },
-    { label: "Hall of Fame", href: "/awards/gold-blue-garnet/hall-of-fame" },
-    { label: "Voting", href: "/awards/gold-blue-garnet/voting" },
-    { label: "Judging", href: "/awards/gold-blue-garnet/judging" },
-    { label: "Eligibility", href: "/awards/gold-blue-garnet/eligibility" },
+    { label: "Existing Nominees", href: "/nominees" },
+    { label: "Hall of Fame", href: "/nominees" },
+    { label: "Judging", href: "/about/how-it-works" },
+    { label: "Eligibility", href: "/about/eligibility" },
     { label: "Nominate", href: "/nominate?tier=gold-blue-garnet" },
   ],
   categories: [
@@ -143,11 +142,11 @@ const PLATINUM_TIER: Tier2026 = {
     "Institutional recognition honouring leadership, contribution and transformation by organisations enabling education across Africa. This tier celebrates Education Enablers and Institutional Impact — not competition.",
   url: "/awards/platinum-recognition",
   subPages: [
-    { label: "Recognition Categories", href: "/awards/platinum-recognition/categories" },
-    { label: "Existing Honourees", href: "/awards/platinum-recognition/honourees" },
-    { label: "Hall of Fame", href: "/awards/platinum-recognition/hall-of-fame" },
-    { label: "Eligibility", href: "/awards/platinum-recognition/eligibility" },
-    { label: "Recognition Process", href: "/awards/platinum-recognition/process" },
+    { label: "Recognition Categories", href: "/recognition/categories" },
+    { label: "Existing Honourees", href: "/awards/platinum-recognition" },
+    { label: "Hall of Fame", href: "/nominees" },
+    { label: "Eligibility", href: "/about/eligibility" },
+    { label: "Recognition Process", href: "/about/how-it-works" },
   ],
   categories: [
     { slug: "international-bilateral-education-partners", name: "International Bilateral Education Partners", tagline: "Bilateral partners enabling African education.", subcategories: [] },
@@ -186,12 +185,11 @@ const INFLUENCER_TIER: Tier2026 = {
     "Recognising influence that advances Education for All — across social media, sports and music. Public voting only.",
   url: "/awards/influencer-education-impact",
   subPages: [
-    { label: "Social Media Education Champions", href: "/awards/influencer-education-impact/social-media" },
-    { label: "Sports Icons Supporting Education", href: "/awards/influencer-education-impact/sports" },
-    { label: "Music Icons Supporting Education", href: "/awards/influencer-education-impact/music" },
+    { label: "Social Media Education Champions", href: "/nominees/category/social-media" },
+    { label: "Sports Icons Supporting Education", href: "/nominees/category/sports" },
+    { label: "Music Icons Supporting Education", href: "/nominees/category/music" },
     { label: "Existing Nominees", href: "/awards/influencer-education-impact/nominees" },
-    { label: "Voting", href: "/awards/influencer-education-impact/voting" },
-    { label: "Hall of Fame", href: "/awards/influencer-education-impact/hall-of-fame" },
+    { label: "Hall of Fame", href: "/awards/influencer-education-impact/nominees" },
   ],
   categories: [
     {

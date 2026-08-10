@@ -54,7 +54,7 @@ const SPECIAL_RECOGNITION = [
     href: "/awards/icon",
     variant: "icon" as const,
     cta: "Nominate Icon",
-    ctaSecondary: { label: "Past Icons", href: "/past-winners?tier=icon" }
+    ctaSecondary: { label: "Past Icons", href: "/nominees/africa-education-icon-award" }
   },
   {
     id: "voting",
@@ -65,7 +65,7 @@ const SPECIAL_RECOGNITION = [
     href: "/awards/gold",
     variant: "voting" as const,
     cta: "Nominate",
-    ctaSecondary: { label: "How It Works", href: "/how-it-works#voting" }
+    ctaSecondary: { label: "How It Works", href: "/about/how-it-works" }
   },
   {
     id: "expert",

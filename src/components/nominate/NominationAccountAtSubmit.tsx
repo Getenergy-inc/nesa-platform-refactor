@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import { Loader2, MailCheck, ShieldCheck, UserPlus, LogIn, CheckCircle2 } from "lucide-react";
 import { toast } from "@/hooks/use-toast";
 import { Button } from "@/components/ui/button";
@@ -159,10 +160,10 @@ export function NominationAccountAtSubmit({
         </p>
         <div className="mt-4 flex flex-wrap gap-2">
           <Button asChild className="bg-gold text-charcoal hover:bg-gold/90">
-            <a href="/nominator">Track my nomination</a>
+            <Link to="/dashboard/nominations">Track my nomination</Link>
           </Button>
           <Button asChild variant="outline" className="border-gold/40 text-gold hover:bg-gold/10">
-            <a href="/nominate">Nominate someone else</a>
+            <Link to="/nominate">Nominate someone else</Link>
           </Button>
         </div>
       </div>

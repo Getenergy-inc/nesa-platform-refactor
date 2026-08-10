@@ -507,7 +507,7 @@ export function RegionalLegacyEcosystem() {
                 <School className="h-4 w-4" /> Nominate a Special Needs School on EduAid.Africa
               </Button>
             </a>
-            <Link to="/eduaid/rebuild">
+            <Link to="/eduaid-africa/rebuild-my-school">
               <Button variant="outline" className="border-gold/40 text-gold hover:bg-gold/10 rounded-full gap-2 px-5">
                 View Legacy Projects <ArrowRight className="h-4 w-4" />
               </Button>
@@ -638,7 +638,7 @@ export function RegionalLegacyEcosystem() {
                 <HandCoins className="h-4 w-4" /> Donate to RMSA
               </Button>
             </Link>
-            <Link to="/eduaid/waiting-list">
+            <Link to="/eduaid">
               <Button variant="outline" className="border-gold/40 text-gold hover:bg-gold/10 rounded-full px-6 gap-2">
                 <Plane className="h-4 w-4" /> Join Edu-Tourism Waiting List
               </Button>
@@ -648,7 +648,7 @@ export function RegionalLegacyEcosystem() {
                 <Heart className="h-4 w-4" /> Partner for Impact
               </Button>
             </Link>
-            <Link to="/eduaid/rebuild">
+            <Link to="/eduaid-africa/rebuild-my-school">
               <Button variant="ghost" className="text-ivory/85 hover:text-gold hover:bg-gold/10 rounded-full px-6 gap-2">
                 <ArrowRight className="h-4 w-4" /> View Regional Legacy Projects
               </Button>

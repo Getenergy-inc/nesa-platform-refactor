@@ -81,10 +81,10 @@ export default function IconJuryDashboard() {
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3">
-        <Link to="/icon-jury/assignments"><Action icon={<ClipboardList className="h-4 w-4" />}>Continue Reviewing</Action></Link>
-        <Link to="/icon-jury/assignments"><Action icon={<ArrowRight className="h-4 w-4" />}>View Assignments</Action></Link>
-        <Link to="/icon-jury/conflicts"><Action icon={<AlertTriangle className="h-4 w-4" />}>Declare a Conflict</Action></Link>
-        <Link to="/icon-jury/scoring"><Action icon={<FileEdit className="h-4 w-4" />}>Scoring Guide</Action></Link>
+        <Link to="/judges/assignments"><Action icon={<ClipboardList className="h-4 w-4" />}>Continue Reviewing</Action></Link>
+        <Link to="/judges/assignments"><Action icon={<ArrowRight className="h-4 w-4" />}>View Assignments</Action></Link>
+        <Link to="/judges/conflicts"><Action icon={<AlertTriangle className="h-4 w-4" />}>Declare a Conflict</Action></Link>
+        <Link to="/judges/scoring"><Action icon={<FileEdit className="h-4 w-4" />}>Scoring Guide</Action></Link>
       </div>
 
       <div className="rounded-xl border border-gold/20 bg-gradient-to-br from-black/50 to-charcoal p-6">

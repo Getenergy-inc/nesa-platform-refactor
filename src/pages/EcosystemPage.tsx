@@ -37,7 +37,7 @@ const extendedFramework = [
     description:
       "Through EduAid Africa and Rebuild My School Africa — delivering special needs school support, infrastructure, and regional interventions.",
     categorySlugPatterns: ["%school%", "%special%", "%education-friendly%"],
-    exploreHref: "/programs/rebuild-my-school-africa",
+    exploreHref: "/impact/rebuild-my-school-africa",
   },
 ];
 

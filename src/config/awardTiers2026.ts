@@ -119,7 +119,7 @@ export const AWARD_TIERS_2026: AwardTier2026[] = [
     voteMechanic: "public-agc-only",
     voteMechanicLabel: "Verification-led assessment · No public voting",
     cta: "Nominate / Vote",
-    ctaHref: "/awards/influencer-impact-2026",
+    ctaHref: "/awards/influencer-education-impact",
     keyDates: "Noms close 10 Jul · Voting 15 Aug – 15 Sep · Winners 16 Sep 2026",
     categories: [
       {

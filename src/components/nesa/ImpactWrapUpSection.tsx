@@ -152,7 +152,7 @@ export function ImpactWrapUpSection() {
                       Support a Regional School
                     </Button>
                   </Link>
-                  <Link to="/eduaid-africa/edutourism-2027">
+                  <Link to="/impact/afri-edutourism-2027">
                     <Button variant="ghost" size="sm" className="text-gold/85 hover:text-gold hover:bg-gold/10 rounded-full">
                       Join EduTourism 2027
                     </Button>

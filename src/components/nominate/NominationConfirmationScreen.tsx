@@ -79,7 +79,7 @@ export function NominationConfirmationScreen({
           variant="outline"
           className="rounded-full border-white/20 text-white hover:bg-white/10 gap-2"
         >
-          <Link to="/nominate/guidelines">
+          <Link to="/policies/nomination-integrity">
             <BookOpen className="h-4 w-4" /> {t("flow.confirmation.guidelines")}
           </Link>
         </Button>

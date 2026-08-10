@@ -70,7 +70,7 @@ const GROUPS: ResourceGroup[] = [
       },
       {
         label: "Certificate Verification",
-        href: "/verify-certificate",
+        href: "/certificates/verify",
         description: "Confirm authenticity of any NESA-Africa credential.",
         icon: FileText,
       },

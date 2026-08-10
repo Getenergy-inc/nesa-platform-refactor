@@ -45,7 +45,7 @@ export default function ArenaDashboard() {
               <Link to="/judges-arena/nominees">Open my queue <ArrowRight className="ml-2 h-4 w-4" /></Link>
             </Button>
             <Button variant="outline" asChild className="border-gold/30 text-gold hover:bg-gold/10">
-              <Link to="/judges-arena/rubric">Review rubric</Link>
+              <Link to="/judges/scoring">Review rubric</Link>
             </Button>
           </div>
         </div>

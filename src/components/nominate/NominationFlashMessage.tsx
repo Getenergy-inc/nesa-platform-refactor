@@ -41,7 +41,7 @@ export function NominationFlashMessage({ onStart }: { onStart: () => void }) {
           variant="outline"
           className="rounded-full border-gold/40 text-gold hover:bg-gold/10 hover:text-gold gap-2"
         >
-          <Link to="/nominate/guidelines">
+          <Link to="/policies/nomination-integrity">
             <BookOpen className="h-4 w-4" />
             {t("flow.flash.guidelinesCta")}
           </Link>

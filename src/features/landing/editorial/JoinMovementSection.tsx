@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import { BRAND } from "@/config/brandHierarchy";
 
 const SECONDARY = [
-  { label: "Partner", href: "/partners-sponsors" },
+  { label: "Partner", href: "/partners" },
   { label: "Sponsor", href: "/get-involved/gala-sponsorship" },
   { label: "Support", href: "/support" },
 ];

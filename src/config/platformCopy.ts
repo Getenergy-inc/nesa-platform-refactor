@@ -96,7 +96,7 @@ export const WHO_WE_RECOGNISE_CLUSTERS = [
     id: "governments",
     title: "Governments and International Partners",
     body: "Government bodies, Nigerian states, development agencies, diplomatic missions, bilateral organisations and multilateral partners.",
-    href: "/awards/platinum-recognition/international-partnership",
+    href: "/awards/platinum-recognition",
     ctaLabel: "Explore Public and International Recognition",
   },
 ] as const;

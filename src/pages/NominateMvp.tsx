@@ -382,7 +382,7 @@ export default function NominateMvp() {
                   variant="outline"
                   className="rounded-full border-gold/40 text-gold hover:bg-gold/10 hover:text-gold gap-2"
                 >
-                  <Link to="/nominate/guidelines">
+                  <Link to="/policies/nomination-integrity">
                     <BookOpen className="h-4 w-4" />
                     Read Nomination Guidelines
                   </Link>
@@ -853,7 +853,7 @@ export default function NominateMvp() {
 
           {/* ── Footer links ─────────────────────────────────────────── */}
           <section className="pt-6 flex flex-wrap gap-x-6 gap-y-2 text-sm">
-            <Link to="/nominate/guidelines" className="text-gold hover:underline">
+            <Link to="/policies/nomination-integrity" className="text-gold hover:underline">
 
               Nomination Guidelines
             </Link>

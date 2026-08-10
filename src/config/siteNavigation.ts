@@ -154,7 +154,7 @@ export const SITE_NAV: NavItem[] = [
       { label: "Nominate an Education Enabler", href: "/nominate" },
       { label: "Help me choose a recognition", href: "/nominate/help-me-choose" },
       { label: "Sponsor", href: "/get-involved/gala-sponsorship" },
-      { label: "Partner", href: "/partners-sponsors" },
+      { label: "Partner", href: "/partners" },
       { label: "Endorse", href: "/endorsements" },
       { label: "Volunteer", href: "/vacancies" },
       { label: "Ambassador", href: "/chapters" },

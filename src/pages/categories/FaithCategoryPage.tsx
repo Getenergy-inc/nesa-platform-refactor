@@ -544,7 +544,7 @@ export function FaithCategoryPage({ config }: { config: FaithCategoryConfig }) {
               </Link>
             </Button>
             <Button asChild variant="outline" className="border-gold/40 text-gold hover:bg-gold/10">
-              <Link to="/hall-of-fame">Visit Hall of Fame</Link>
+              <Link to="/nominees">Explore Existing Nominees</Link>
             </Button>
           </div>
         </section>
