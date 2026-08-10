@@ -103,10 +103,14 @@ export function NESALandingPage() {
 
         {/* 3. AFRICA EDUCATION ICON — flagship first impression */}
         <IconFlagshipSection />
+        <IconTimelineSection />
         <IconLifetimeSection />
 
         {/* 4. LIVING GALLERY — Meet Africa's Education Enablers (database-driven) */}
         <LivingGallerySection />
+        <IconScaleSection />
+        <IconClosingSection />
+
 
         {/* 5. ONE CONTINENTAL MISSION. SIX RECOGNITION PATHWAYS. */}
         <RecognitionFamiliesSection />
