@@ -114,7 +114,7 @@ export const IMPACT_NAV_ITEMS: { label: string; href: string }[] = [
   { label: "Support a Special-Needs School", href: "/impact/special-needs-schools" },
   { label: "Regional School Interventions", href: "/impact/regional" },
   { label: "Afri-EduTourism 2027", href: "/afri-edutourism" },
-  { label: "Impact Reports", href: "/impact/reports" },
+  { label: "EduAid-Africa Journal", href: "/journal" },
   { label: "Impact Stories & Media", href: "/impact/stories" },
   { label: `Gala 2026 · ${PROGRAMME_END_LABEL}`, href: "/gala" },
 ];

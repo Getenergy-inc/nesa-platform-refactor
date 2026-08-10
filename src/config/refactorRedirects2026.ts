@@ -119,7 +119,7 @@ export const REFACTOR_REDIRECTS_2026: RefactorRedirect[] = [
 
   // Resources hub — reports consolidation
   { from: "/reports", to: "/resources#reports", reason: "Resources hub" },
-  { from: "/impact/reports", to: "/resources#impact-reports", reason: "Resources hub" },
+  { from: "/impact/reports", to: "/journal", reason: "EduAid-Africa Journal" },
 
   // Recognition tier alias (spec says /awards/platinum canonical)
   { from: "/awards/platinum-recognition", to: "/awards/platinum", reason: "Canonical tier slug" },
