@@ -99,38 +99,43 @@ export function NESALandingPage() {
         {/* 1. HERO */}
         <EditorialHero />
 
-        {/* 2. PUBLIC NOTICE — nominations open 30 August 2026 */}
+        {/* 2. PUBLIC NOTICE — nominations open 30 August 2026, with the Icon
+            key-dates ticker attached directly beneath it. */}
         <PublicNominationsNotice />
+        <IconTimelineTicker />
 
-        {/* 3. AFRICA EDUCATION ICON — flagship first impression */}
-        <IconFlagshipSection />
-        <IconTimelineSection />
-        <IconLifetimeSection />
-
-        {/* 4. LIVING GALLERY — Meet Africa's Education Enablers (database-driven) */}
+        {/* 3. LIVING GALLERY — Meet Africa's Education Enablers (database-driven).
+            Leads the page so the first thing a visitor meets is real people. */}
         <LivingGallerySection />
+
+        {/* 4. AFRICA EDUCATION ICON — the single flagship moment: intro band,
+            three pathway cards, then the Icon governance statement. */}
+        <IconFlagshipSection />
+        <IconLifetimeSection />
+        <IconGovernanceNote />
+
+        {/* 5. A CONTINENTAL SEARCH FOR EDUCATION ICONS — live stats */}
         <IconScaleSection />
-        <IconClosingSection />
 
-
-        {/* 5. ONE CONTINENTAL MISSION. SIX RECOGNITION PATHWAYS. */}
+        {/* 6. ONE CONTINENTAL MISSION. SIX RECOGNITION PATHWAYS. */}
         <RecognitionFamiliesSection />
 
-        {/* 6. WHO CAN BE AN EDUCATION ENABLER? */}
+        {/* 7. WHO CAN BE AN EDUCATION ENABLER? */}
         <WhoCanBeEnablerSection />
 
-        {/* 7. IMPACT DIRECTORY + LIVE STATS */}
+        {/* 8. IMPACT DIRECTORY + LIVE STATS */}
         <DirectoryStatsSection />
 
-        {/* 8. FROM RECOGNITION TO IMPACT */}
+        {/* 9. FROM RECOGNITION TO IMPACT */}
         <RecognitionToImpactSection />
 
-
-        {/* 7. BUILT FOR TRUST */}
+        {/* 10. BUILT FOR TRUST */}
         <TrustBandSection />
 
-        {/* GALA COUNTDOWN — 13 December 2026 */}
+        {/* 11. GALA COUNTDOWN — 13 December 2026 — immediately followed by the
+            Icon closing message, since both are Gala/closing content. */}
         <GalaBandSection />
+        <IconClosingSection />
 
         {/* SUPPORTING BANDS — people and moments */}
         <VolunteerBandSection />
