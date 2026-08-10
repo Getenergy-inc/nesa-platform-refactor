@@ -40,10 +40,7 @@ import {
   LivingGallerySection,
   IconLifetimeSection,
   IconFlagshipSection,
-  IconTimelineTicker,
   IconGovernanceNote,
-  IconScaleSection,
-  IconClosingSection,
   RecognitionFamiliesSection,
   WhoCanBeEnablerSection,
   DirectoryStatsSection,
@@ -55,6 +52,7 @@ import {
   JoinMovementSection,
   HelpRecogniseSection,
 } from "./editorial";
+
 
 
 
@@ -99,47 +97,40 @@ export function NESALandingPage() {
         {/* 1. HERO */}
         <EditorialHero />
 
-        {/* 2. PUBLIC NOTICE — nominations open 30 August 2026, with the Icon
-            key-dates ticker attached directly beneath it. */}
+        {/* 2. PUBLIC NOTICE — nominations open 30 August 2026 */}
         <PublicNominationsNotice />
-        <IconTimelineTicker />
 
-        {/* 3. LIVING GALLERY — Meet Africa's Education Enablers (database-driven).
-            Leads the page so the first thing a visitor meets is real people. */}
-        <LivingGallerySection />
-
-        {/* 4. AFRICA EDUCATION ICON — the single flagship moment: intro band,
+        {/* 3. AFRICA EDUCATION ICON — the single flagship moment: intro band,
             three pathway cards, then the Icon governance statement. */}
         <IconFlagshipSection />
         <IconLifetimeSection />
         <IconGovernanceNote />
 
-        {/* 5. A CONTINENTAL SEARCH FOR EDUCATION ICONS — live stats */}
-        <IconScaleSection />
+        {/* 4. LIVING GALLERY — Meet Africa's Education Enablers */}
+        <LivingGallerySection />
 
-        {/* 6. ONE CONTINENTAL MISSION. SIX RECOGNITION PATHWAYS. */}
+        {/* 5. ONE CONTINENTAL MISSION. SIX RECOGNITION PATHWAYS. */}
         <RecognitionFamiliesSection />
 
-        {/* 7. WHO CAN BE AN EDUCATION ENABLER? */}
+        {/* 6. WHO CAN BE AN EDUCATION ENABLER? */}
         <WhoCanBeEnablerSection />
 
-        {/* 8. IMPACT DIRECTORY + LIVE STATS */}
+        {/* 7. IMPACT DIRECTORY + LIVE STATS */}
         <DirectoryStatsSection />
 
-        {/* 9. FROM RECOGNITION TO IMPACT */}
+        {/* 8. FROM RECOGNITION TO IMPACT */}
         <RecognitionToImpactSection />
 
-        {/* 10. BUILT FOR TRUST */}
+        {/* 9. BUILT FOR TRUST */}
         <TrustBandSection />
 
-        {/* 11. GALA COUNTDOWN — 13 December 2026 — immediately followed by the
-            Icon closing message, since both are Gala/closing content. */}
+        {/* 10. GALA COUNTDOWN — 13 December 2026 */}
         <GalaBandSection />
-        <IconClosingSection />
 
         {/* SUPPORTING BANDS — people and moments */}
         <VolunteerBandSection />
         <BoardOfAdvisorsSection />
+
 
 
         {/* 9. JOIN THE MOVEMENT */}
