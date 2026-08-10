@@ -465,12 +465,12 @@ const App = () => (
         <AuthProvider>
           <SeasonProvider>
             <RegionProvider>
-              <Toaster />
-              <Sonner />
-              <CustomerCareChat />
-              <RegionPickerModal />
-              <RegionConfirmationPopup />
               <BrowserRouter>
+                <Toaster />
+                <Sonner />
+                <CustomerCareChat />
+                <RegionPickerModal />
+                <RegionConfirmationPopup />
                 <ScrollToTop />
                 <Routes>
                   {/* Landing - has its own header/footer */}
