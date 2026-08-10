@@ -158,9 +158,13 @@ async function fetchFamilyGallery(): Promise<FamilyGalleryEntry[]> {
     const meta = subMeta.get(r.subcategory_id);
     if (!meta) continue;
     const isOrg = looksLikeOrg(r.name);
-    const imageUrl =
-      normaliseUrl(isOrg ? r.logo_url || r.photo_url : r.photo_url || r.logo_url) ?? null;
+    const logo = normaliseUrl(r.logo_url);
+    const photo = normaliseUrl(r.photo_url);
+    const imageUrl = isOrg ? logo || photo : photo || logo;
     if (!imageUrl) continue;
+    // A logo must never be cropped like a portrait — key off the field the
+    // image actually came from, not just the name heuristic.
+    const imageKind: "photo" | "logo" = imageUrl === logo ? "logo" : "photo";
     const bucket = buckets.get(meta.familySlug) || [];
     if (bucket.length >= PER_FAMILY_LIMIT) continue;
     bucket.push({
@@ -168,7 +172,7 @@ async function fetchFamilyGallery(): Promise<FamilyGalleryEntry[]> {
       name: r.name,
       slug: r.slug,
       imageUrl,
-      imageKind: isOrg ? "logo" : "photo",
+      imageKind,
       country: tidy(r.country, 40),
       region: tidy(r.region, 40),
       categoryLabel: meta.label,
