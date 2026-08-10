@@ -331,7 +331,27 @@ export default function Donate() {
           </div>
         </section>
 
+        {/* Trust & governance */}
+        <section className="border-t border-white/10 py-12">
+          <div className="container mx-auto px-4 max-w-4xl">
+            <h2 className="font-display text-lg font-bold text-gold mb-4">Trust and Governance</h2>
+            <div className="grid gap-3 md:grid-cols-2">
+              {IMPACT_TRUST_STATEMENTS.slice(0, 2).map((t) => (
+                <div key={t.title} className="rounded-xl border border-white/10 bg-white/[0.03] p-5">
+                  <h3 className="text-sm font-semibold text-gold">{t.title}</h3>
+                  <p className="mt-2 text-sm text-white/65">{t.body}</p>
+                </div>
+              ))}
+            </div>
+            <p className="mt-4 text-xs text-white/45">
+              Support given through Friends of EduAid-Africa is received by EduAid-Africa under
+              Santos Creations Educational Foundation.
+            </p>
+          </div>
+        </section>
+
         {/* Other Ways Section */}
+
         <section className="border-t border-white/10 py-12">
           <div className="container mx-auto px-4">
             <div className="mx-auto flex max-w-2xl flex-wrap items-center justify-center gap-6">
