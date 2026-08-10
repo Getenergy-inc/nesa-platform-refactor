@@ -65,13 +65,12 @@ export default function SponsorCategoryPage() {
             <div className="flex flex-wrap gap-3">
               {isDeck ? (
                 <Button asChild className="bg-gold text-charcoal hover:bg-gold-dark font-semibold">
-                  <a
-                    href="/sponsorship-deck-2026.pdf"
-                    download
+                  <Link
+                    to="/sponsors/packages"
                     onClick={() => trackEvent("sponsor_deck_download", { from: "deck_hero" })}
                   >
-                    <Download className="mr-2 h-4 w-4" /> Download the Deck
-                  </a>
+                    <Download className="mr-2 h-4 w-4" /> View Sponsorship Packages
+                  </Link>
                 </Button>
               ) : (
                 <Button asChild className="bg-gold text-charcoal hover:bg-gold-dark font-semibold">

@@ -51,7 +51,7 @@ export function AccountAtSubmitPanel({
         email: email.trim(),
         password,
         options: {
-          emailRedirectTo: `${window.location.origin}/nominator`,
+          emailRedirectTo: `${window.location.origin}/dashboard/nominations`,
           data: { full_name: fullName.trim(), nomination_reference: reference ?? null },
         },
       });
@@ -81,7 +81,7 @@ export function AccountAtSubmitPanel({
     trackEvent("account_creation_started", { form: formSlug, reference, provider: "google" });
     const { error } = await supabase.auth.signInWithOAuth({
       provider: "google",
-      options: { redirectTo: `${window.location.origin}/nominator` },
+      options: { redirectTo: `${window.location.origin}/dashboard/nominations` },
     });
     if (error) toast.error(error.message);
   };
@@ -109,7 +109,7 @@ export function AccountAtSubmitPanel({
           nomination <span className="text-gold">{reference}</span>.
         </p>
         <Button asChild size="sm" className="mt-3 bg-gold text-charcoal hover:bg-gold/90">
-          <Link to={`/account/login?next=${encodeURIComponent("/nominator")}`}>Sign in</Link>
+          <Link to={`/account/login?next=${encodeURIComponent("/dashboard/nominations")}`}>Sign in</Link>
         </Button>
       </div>
     );

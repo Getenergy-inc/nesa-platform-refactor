@@ -27,7 +27,7 @@ const CARDS = [
     body:
       "Apply to the Nominee Research Corps and help verify the evidence behind every nomination.",
     cta: "Apply to the NRC",
-    href: "/nrc/apply",
+    href: "/judgeapply/nrc",
   },
 ];
 

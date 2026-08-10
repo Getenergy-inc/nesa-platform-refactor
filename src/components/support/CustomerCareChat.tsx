@@ -15,7 +15,7 @@ const CAPABILITY_LINKS: { label: string; to: string }[] = [
   { label: "Volunteering", to: "/volunteer" },
   { label: "Judging", to: "/judges" },
   { label: "Local Chapters", to: "/chapters" },
-  { label: "RMSA", to: "/rebuild-my-school-africa" },
+  { label: "RMSA", to: "/rebuild-my-school" },
   { label: "EduAid", to: "/eduaid-africa" },
 ];
 const WHATSAPP_URL = "https://wa.me/2348056677770";

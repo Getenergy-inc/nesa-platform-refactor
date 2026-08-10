@@ -38,7 +38,7 @@ const SECTIONS: FooterSection[] = [
     links: [
       { label: "About NESA-Africa", href: "/about" },
       { label: "Governance", href: "/governance" },
-      { label: "Nominee Research Corps (NRC)", href: "/about/nrc" },
+      { label: "Nominee Research Corps (NRC)", href: "/judgeapply/nrc" },
       { label: "SCEF", href: "/about/scef" },
       { label: "Leadership", href: "/about#leadership" },
     ],
@@ -73,10 +73,10 @@ const SECTIONS: FooterSection[] = [
     title: "Participate",
     links: [
       { label: "Nominate", href: "/nominate" },
-      { label: "Community", href: "/community" },
+      { label: "Community", href: "/get-involved" },
       { label: "Local Chapters", href: "/chapters" },
       { label: "Volunteer", href: "/volunteer" },
-      { label: "Partners & Sponsors", href: "/partners-sponsors" },
+      { label: "Partners & Sponsors", href: "/partners" },
     ],
   },
   {

@@ -29,11 +29,11 @@ const navItems = [
   { title: "Dashboard", url: "/judges-arena", icon: LayoutDashboard, end: true },
   { title: "My Assignments", url: "/judges-arena/nominees", icon: Users, badge: "12" },
   { title: "Discussion Arena", url: "/judges-arena/discussion", icon: MessageSquare, badge: "3" },
-  { title: "Scoring Rubrics", url: "/judges-arena/rubric", icon: Scale },
-  { title: "Calendar & Deadlines", url: "/judges-arena/calendar", icon: Calendar },
-  { title: "Reports & Analytics", url: "/judges-arena/reports", icon: BarChart3 },
-  { title: "Resources", url: "/judges-arena/resources", icon: BookOpen },
-  { title: "Guidelines", url: "/judges-arena/guidelines", icon: FileText },
+  { title: "Scoring Rubrics", url: "/judges/scoring", icon: Scale },
+  { title: "Calendar & Deadlines", url: "/events/calendar", icon: Calendar },
+  { title: "Reports & Analytics", url: "/judges/results", icon: BarChart3 },
+  { title: "Resources", url: "/resources", icon: BookOpen },
+  { title: "Guidelines", url: "/judges/help", icon: FileText },
 ];
 
 function ArenaNav({ onNavigate }: { onNavigate?: () => void }) {

@@ -136,7 +136,7 @@ export default function AboutCycle2026() {
         title="The Road to the 13 December 2026 Gala"
         subtitle="Phase-based awards-season roadmap with confirmed dates from the 2026 cycle calendar."
         phases={PHASES_2026}
-        footerCta={{ label: "View full cycle calendar", href: "/calendar" }}
+        footerCta={{ label: "View full cycle calendar", href: "/events/calendar" }}
       />
 
       <AboutCanonicalContent />

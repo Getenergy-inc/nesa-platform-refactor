@@ -112,7 +112,7 @@ export const RECOGNITION_PATHWAYS: RecognitionPathway[] = [
     oneLiner: "Sports, music and social-media voices accelerating education.",
     voteMechanic: "public-agc-only",
     voteMechanicLabel: "Verification-led assessment · No public voting",
-    href: "/awards/influencer-impact-2026",
+    href: "/awards/influencer-education-impact",
   },
 ];
 

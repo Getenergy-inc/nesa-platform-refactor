@@ -60,7 +60,7 @@ export default function AboutCycle2027() {
         title={<>About <span className="text-gold">NESA-Africa 2027</span></>}
         positioning="The second cycle builds on the 2026 inaugural launch — still fully verification-based across every tier, expanded chapter coverage, deeper EduAid-Africa integration."
         cyclePhase="Cycle Status · Pre-Launch · Full calendar pending 2026 cycle close"
-        primaryCta={{ label: "Notify Me When 2027 Opens", href: "/subscribe?cycle=2027", icon: "notify" }}
+        primaryCta={{ label: "Notify Me When 2027 Opens", href: "/contact?topic=2027", icon: "notify" }}
         secondaryCta={{ label: "Non-Influence Declaration", href: "#non-influence-protocol" }}
       />
 
@@ -90,7 +90,7 @@ export default function AboutCycle2027() {
       <AboutContactBlock
         headline="Stay With the 2027 Cycle"
         intro="Register interest to be the first to know when 2027 nominations open. Judge and NRC applications reopen after the 2026 gala."
-        primaryCta={{ label: "Notify Me When 2027 Opens", href: "/subscribe?cycle=2027" }}
+        primaryCta={{ label: "Notify Me When 2027 Opens", href: "/contact?topic=2027" }}
         secondaryCta={{ label: "Contact the Cycle Desk", href: "mailto:info@nesa.africa" }}
       />
     </>

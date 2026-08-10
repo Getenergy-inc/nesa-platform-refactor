@@ -65,7 +65,7 @@ export function HeroSection() {
                 <Search className="h-4 w-4" /> Explore Existing Nominees
               </Button>
             </a>
-            <Link to="/nrc/apply">
+            <Link to="/judgeapply/nrc">
               <Button
                 size="lg"
                 variant="ghost"

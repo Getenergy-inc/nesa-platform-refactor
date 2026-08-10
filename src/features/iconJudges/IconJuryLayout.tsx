@@ -19,7 +19,7 @@ const NAV = [
   { to: "/judges/pathways", label: "Pathways", icon: Layers },
   { to: "/judges/roster", label: "Judge Roster", icon: Users },
   { to: "/judges/assignments", label: "Assignments", icon: ClipboardList },
-  { to: "/judges/nominees", label: "Nominees", icon: Users },
+  { to: "/judges/nominee-pipeline", label: "Nominees", icon: Users },
   { to: "/judges/conflicts", label: "Conflicts", icon: AlertTriangle },
   { to: "/judges/scoring", label: "Scoring Guide", icon: FileEdit },
   { to: "/judges/notes", label: "My Notes", icon: StickyNote },

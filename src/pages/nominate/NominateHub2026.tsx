@@ -849,7 +849,7 @@ export default function NominateHub2026() {
             Every category is assessed against ten evidence-driven indicators.
             Each category page carries its own weighted version — the standard
             below is the shared foundation.{" "}
-            <Link to="/governance/edi-matrix" className="text-gold underline-offset-2 hover:underline">
+            <Link to="/governance#edi-matrix" className="text-gold underline-offset-2 hover:underline">
               Read the full methodology →
             </Link>
           </p>

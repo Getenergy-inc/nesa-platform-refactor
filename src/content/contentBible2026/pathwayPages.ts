@@ -170,7 +170,7 @@ export const RECOGNITION_PACKAGE: Record<AwardTier, string[]> = {
 
 export const TRUST_LINKS: CTA[] = [
   { label: "Independent Governance", href: "/governance" },
-  { label: "NRC Verification", href: "/about/nrc" },
+  { label: "NRC Verification", href: "/judgeapply/nrc" },
   { label: "Public Reporting", href: "/impact" },
   { label: "Policies", href: "/policies" },
   { label: "Full FAQ", href: "/faqs" },

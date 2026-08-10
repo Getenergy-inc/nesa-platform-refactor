@@ -12,7 +12,6 @@ import {
   LayoutDashboard,
   ClipboardList,
   Bookmark,
-  Vote,
   Coins,
   Settings,
   UserPlus,
@@ -31,12 +30,11 @@ import { useAuth } from "@/contexts/AuthContext";
 import { trackNav } from "@/lib/analytics";
 
 const SIGNED_IN = [
-  { label: "My Dashboard", href: "/account", icon: LayoutDashboard },
-  { label: "My Nominations", href: "/account/nominations", icon: ClipboardList },
-  { label: "Saved Enablers", href: "/account/saved", icon: Bookmark },
-  { label: "My Voting Activity", href: "/account/voting", icon: Vote },
+  { label: "My Dashboard", href: "/dashboard", icon: LayoutDashboard },
+  { label: "My Nominations", href: "/dashboard/nominations", icon: ClipboardList },
+  { label: "Saved Enablers", href: "/dashboard/profile", icon: Bookmark },
   { label: "AGC Activity", href: "/wallet", icon: Coins },
-  { label: "Account Settings", href: "/account/settings", icon: Settings },
+  { label: "Account Settings", href: "/dashboard/settings", icon: Settings },
 ] as const;
 
 export function AccountMenu({ className }: { className?: string }) {

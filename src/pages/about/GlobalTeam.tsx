@@ -43,7 +43,7 @@ const GOVERNANCE: TeamGroup[] = [
     title: "Nominee Research Corps (NRC)",
     blurb:
       "Independent researchers who verify every submission — evidence checks, duplicate detection and Education Development Index scoring before any file reaches a judge.",
-    href: "/about/nrc",
+    href: "/judgeapply/nrc",
     cta: "About the NRC",
   },
   {

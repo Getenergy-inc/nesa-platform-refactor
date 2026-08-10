@@ -8,7 +8,7 @@ import { BRAND, SERVICE_OWNERS } from "@/config/brandHierarchy";
 const ACTIONS = [
   { label: "Nominate", href: "/nominate", owner: "NESA-Africa", blurb: "Recognise an Education Enabler." },
   { label: "Sponsor", href: "/get-involved/gala-sponsorship", owner: "NESA-Africa", blurb: "Back the recognition programme and Gala." },
-  { label: "Partner", href: "/partners-sponsors", owner: "NESA-Africa", blurb: "Institutional and media partnerships." },
+  { label: "Partner", href: "/partners", owner: "NESA-Africa", blurb: "Institutional and media partnerships." },
   { label: "Endorse", href: "/endorsements", owner: "NESA-Africa", blurb: "Publicly endorse a nominee or the programme." },
   { label: "Volunteer", href: "/vacancies", owner: "SCEF", blurb: "Join the volunteer corps across 13 standing roles." },
   { label: "Ambassador", href: "/chapters", owner: "SCEF", blurb: "Represent NESA-Africa in your country or city." },

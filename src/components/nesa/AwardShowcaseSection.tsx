@@ -59,7 +59,7 @@ const TIERS: AwardTier[] = [
     tagline: "Creators Advancing Education",
     description:
       "Celebrating creators, broadcasters, and digital voices using media to advance education access and learning culture.",
-    href: "/awards/influencers",
+    href: "/awards/influencer-education-impact",
     cta: "Meet the Creators Track",
   },
 ];

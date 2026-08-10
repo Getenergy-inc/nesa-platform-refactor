@@ -60,16 +60,13 @@ export const REFACTOR_REDIRECTS_2026: RefactorRedirect[] = [
   { from: "/impact-directory", to: "/nominees", reason: "Alias into Africa Education Impact Directory" },
   { from: "/verified-profiles", to: "/nominees", reason: "Alias into Africa Education Impact Directory" },
 
-  // --- 5-region legacy pages → 8-region equivalents on /about/regions ---
-  { from: "/regions/north", to: "/about/regions#north-africa", reason: "Adopt 8-region model" },
-  { from: "/regions/south", to: "/about/regions#southern-africa", reason: "Adopt 8-region model" },
-  { from: "/regions/east", to: "/about/regions#east-africa", reason: "Adopt 8-region model" },
-  { from: "/regions/west", to: "/about/regions#west-africa", reason: "Adopt 8-region model" },
-  { from: "/regions/central", to: "/about/regions#central-africa", reason: "Adopt 8-region model" },
+  // --- Regions ---
+  // NOTE: /regions/north|south|east|west|central and /regions/friends-of-africa
+  // are REAL pages rendered by App.tsx. They previously redirected to
+  // /about/regions#... which does not exist (404). Only the bare
+  // /friends-of-africa alias needs redirecting.
+  { from: "/friends-of-africa", to: "/regions/friends-of-africa", reason: "Canonical region-family page" },
 
-  // --- Friends of Africa is a participation class, not a region ---
-  { from: "/regions/friends-of-africa", to: "/about/regions#friends-of-africa", reason: "Reclassified as participation class" },
-  { from: "/friends-of-africa", to: "/about/regions#friends-of-africa", reason: "Reclassified as participation class" },
 
   // --- Nomination hub cleanup ---
   { from: "/submit-nomination", to: "/nominate", reason: "Canonical nomination hub" },
@@ -80,12 +77,11 @@ export const REFACTOR_REDIRECTS_2026: RefactorRedirect[] = [
   { from: "/endorse", to: "/endorsements", reason: "Canonical endorsements hub" },
 
   // --- 22-page consolidation (Phase A) ---
-  // Partners + Sponsors merged into single /partners-sponsors entry page
-  { from: "/sponsors", to: "/partners-sponsors", reason: "Merged into Partners & Sponsors" },
-  { from: "/sponsors/packages", to: "/partners-sponsors#sponsor-packages", reason: "Merged" },
-  { from: "/sponsors/enquire", to: "/partners-sponsors#sponsor-enquire", reason: "Merged" },
-  { from: "/partners", to: "/partners-sponsors", reason: "Merged" },
-  { from: "/get-involved/partner", to: "/partners-sponsors#partner", reason: "Merged" },
+  // NOTE: /partners-sponsors was never built. /partners, /sponsors,
+  // /sponsors/packages, /sponsors/enquire and /get-involved/partner are all
+  // REAL pages, so the previous redirects sent every one of them to a 404.
+  // They are intentionally left un-redirected until a merged page exists.
+
 
   // Media Centre consolidation
   { from: "/nesatv", to: "/media/tv", reason: "Media Centre consolidation" },
@@ -124,8 +120,9 @@ export const REFACTOR_REDIRECTS_2026: RefactorRedirect[] = [
   // Recognition tier alias (spec says /awards/platinum canonical)
   { from: "/awards/platinum-recognition", to: "/awards/platinum", reason: "Canonical tier slug" },
 
-  // Community merges (Get Involved → Community)
-  { from: "/get-involved", to: "/community", reason: "Renamed to Community" },
+  // Community merges — /community was never built; /get-involved is the real
+  // Community hub page, so no redirect is registered for it.
+
   { from: "/membership/types", to: "/membership", reason: "Membership consolidation" },
   { from: "/membership/benefits", to: "/membership", reason: "Membership consolidation" },
 ];

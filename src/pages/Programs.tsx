@@ -86,7 +86,8 @@ const programs: Program[] = [
     tagline: "Connecting Educators Across Borders",
     description:
       "A professional development program facilitating knowledge sharing between educators across African nations.",
-    href: "/programs/teacher-exchange",
+    // No dedicated page yet (coming soon) — link to the programmes hub.
+    href: "/impact",
     icon: <Users className="h-8 w-8" />,
     status: "coming-soon",
   },
@@ -97,7 +98,8 @@ const programs: Program[] = [
     tagline: "Bridging the Digital Divide",
     description:
       "Empowering communities with essential digital skills for the 21st century economy.",
-    href: "/programs/digital-literacy",
+    // No dedicated page yet (coming soon) — link to the programmes hub.
+    href: "/impact",
     icon: <Globe className="h-8 w-8" />,
     status: "coming-soon",
   },

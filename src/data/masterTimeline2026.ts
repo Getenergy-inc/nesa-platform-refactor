@@ -373,7 +373,7 @@ export const MASTER_TIMELINE_2026: MasterTimelineEntry[] = [
     activity: "Open nominations for Rebuild My School Africa 2027.",
     outcome: "Build intervention database",
     track: "nominations",
-    href: "/programs/rebuild-my-school-africa",
+    href: "/impact/rebuild-my-school-africa",
   },
   {
     id: "final-verification-gala-production",

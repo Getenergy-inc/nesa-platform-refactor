@@ -604,7 +604,7 @@ const App = () => (
                   <Route path="/education-enablers/edtech" element={<Navigate to="/education-enablers?filter=edtech" replace />} />
                   <Route path="/education-enablers/edtech/:slug" element={<SlugRedirect to={(s) => `/education-enablers?edtech=${s}`} />} />
                   <Route path="/education-enablers/edtech/regions" element={<Navigate to="/education-enablers?filter=edtech" replace />} />
-                  <Route path="/education-enablers/edtech/prospects" element={<Navigate to="/prospective-organizations?filter=edtech" replace />} />
+                  <Route path="/education-enablers/edtech/prospects" element={<Navigate to="/education-enablers?filter=edtech" replace />} />
                   <Route path="/education-enablers/claim-profile" element={<Navigate to="/education-enablers?action=claim" replace />} />
                   <Route path="/education-enablers/submit-evidence" element={<Navigate to="/education-enablers?action=evidence" replace />} />
                   <Route path="/education-enablers/verification" element={<Navigate to="/governance#verification" replace />} />

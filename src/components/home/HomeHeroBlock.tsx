@@ -30,8 +30,8 @@ export function HomeHeroBlock() {
         }}
         tertiary={{
           label: "How recognition works",
-          href: "/how-it-works",
-          onClick: fire("tertiary", "/how-it-works"),
+          href: "/about/how-it-works",
+          onClick: fire("tertiary", "/about/how-it-works"),
         }}
         imageSrc={heroImage}
         imageAlt="African educators, students, and community leaders across the continent"
