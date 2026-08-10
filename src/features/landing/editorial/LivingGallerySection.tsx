@@ -127,12 +127,18 @@ function PathwayFallback() {
 /** Merge all three Icon pathways, interleaved so the strip mixes pathways. */
 function useIconGalleryPool() {
   return useMemo(() => {
-    const perPathway = ICON_PATHWAYS.map((p) => ({
-      name: p.name,
-      list: bySubcategory(p.slug as IconSubcategorySlug).filter((n) => !!n.image_url && !/placeholder/i.test(n.image_url)),
-    }));
+    const perPathway = ICON_PATHWAYS.map((p) => {
+      const all = bySubcategory(p.slug as IconSubcategorySlug);
+      return {
+        name: p.name,
+        all,
+        // Only records with a real portrait can be rendered as cards.
+        list: all.filter((n) => !!n.image_url && !/placeholder/i.test(n.image_url)),
+      };
+    });
 
-    const total = perPathway.reduce((sum, p) => sum + p.list.length, 0);
+    // Real nominee total across all three pathways (not just those with photos).
+    const total = perPathway.reduce((sum, p) => sum + p.all.length, 0);
 
     const entries: GalleryEntry[] = [];
     const longest = Math.max(0, ...perPathway.map((p) => p.list.length));
