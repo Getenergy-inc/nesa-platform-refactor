@@ -68,8 +68,8 @@ export default function ImpactStories() {
           </div>
 
           <div className="mt-8 flex flex-wrap gap-3">
-            <Link to="/impact/reports" className="rounded-lg border border-gold/40 px-5 py-3 text-sm font-semibold text-gold hover:bg-gold/10">
-              {IMPACT_CTAS.reports}
+            <Link to="/journal" className="rounded-lg border border-gold/40 px-5 py-3 text-sm font-semibold text-gold hover:bg-gold/10">
+              EduAid-Africa Journal
             </Link>
             <Link to="/media" className="rounded-lg border border-white/20 px-5 py-3 text-sm font-semibold text-white/85 hover:border-gold/40 hover:text-gold">
               Media &amp; Events
