@@ -109,11 +109,8 @@ export default function Donate() {
   return (
     <>
       <Helmet>
-        <title>Donate | Support African Education</title>
-        <meta
-          name="description"
-          content="Support African education through NESA-Africa. Your donation transforms lives across the continent."
-        />
+        <title>Friends of EduAid-Africa · Support Education for All</title>
+        <meta name="description" content={FRIENDS_BRAND.shortDescription} />
       </Helmet>
 
       <div className="min-h-screen bg-charcoal">
@@ -124,25 +121,46 @@ export default function Donate() {
             <img src={africaMapImg} alt="" className="w-[400px] h-auto opacity-[0.06]" aria-hidden="true" />
           </div>
           <div className="container mx-auto px-4 relative z-10">
-            <div className="mx-auto max-w-2xl text-center">
+            <div className="mx-auto max-w-3xl text-center">
               <div className="mb-4 inline-flex items-center gap-2 rounded-full bg-primary/10 px-4 py-2">
                 <Heart className="h-5 w-5 text-primary" />
-                <span className="text-sm font-medium text-primary">Rebuild My School Africa</span>
+                <span className="text-sm font-medium text-primary">
+                  Global funding and support movement
+                </span>
               </div>
-              <h1 className="mb-4 font-display text-3xl font-bold text-white md:text-4xl">
-                {TOTAL_REGIONS} Regions. {TOTAL_SLOTS} Nominations.{" "}
-                <span className="text-primary">{TOTAL_REGIONS} Schools Picked for 2027.</span>
+              <h1 className="mb-3 font-display text-3xl font-bold text-white md:text-4xl">
+                {FRIENDS_BRAND.name}
               </h1>
-              <p className="text-white/70">
-                Through EduAid-Africa and Rebuild My School Africa, NESA-Africa 2026
-                opens 20 Special Needs School nomination slots in each of the approved
-                8 African regions. After regional intervention voting, only{" "}
-                <span className="text-gold font-semibold">1 school per region</span> —
-                8 schools continent-wide — will be selected for the 2027 intervention.
+              <p className="text-lg text-white/85 mb-4">{FRIENDS_BRAND.headline}</p>
+              <p className="text-sm md:text-base text-white/65 leading-relaxed">
+                {FRIENDS_BRAND.body}
+              </p>
+              <Link
+                to="/impact/friends-of-eduaid-africa"
+                className="mt-5 inline-flex items-center gap-1 text-sm font-semibold text-gold hover:underline"
+              >
+                Learn more about Friends of EduAid-Africa →
+              </Link>
+            </div>
+
+            <div className="mx-auto mt-8 max-w-3xl rounded-2xl border border-gold/25 bg-gold/[0.06] p-6">
+              <p className="font-display text-base md:text-lg leading-snug text-white">
+                {FRIENDS_BRAND.featureMessage}
+              </p>
+            </div>
+
+            <div className="mx-auto mt-8 max-w-3xl rounded-2xl border border-white/10 bg-white/[0.03] p-6">
+              <p className="text-xs uppercase tracking-widest text-gold/80 mb-3">
+                Current focus · Rebuild My School Africa
+              </p>
+              <p className="text-sm text-white/70">
+                {TOTAL_REGIONS} regions · {TOTAL_SLOTS} nomination slots · 1 special-needs
+                school per region selected for the 2027 intervention.
               </p>
             </div>
           </div>
         </section>
+
 
         {isPledgeMode && (
           <section className="pt-2">
