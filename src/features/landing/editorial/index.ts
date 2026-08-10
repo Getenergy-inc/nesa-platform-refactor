@@ -9,6 +9,7 @@ export { GallerySection } from "./GallerySection";
 export { GalaBandSection } from "./GalaBandSection";
 export { SupportSection } from "./SupportSection";
 export { RecognitionFamiliesSection } from "./RecognitionFamiliesSection";
+export { FamilyLivingGalleryStrip } from "./FamilyLivingGalleryStrip";
 export { WhoCanBeEnablerSection } from "./WhoCanBeEnablerSection";
 export { ExploreNomineesSection } from "./ExploreNomineesSection";
 export { RecognitionToImpactSection } from "./RecognitionToImpactSection";

@@ -4,6 +4,7 @@
 
 import { Link } from "react-router-dom";
 import { RECOGNITION_FAMILIES, BRAND } from "@/config/brandHierarchy";
+import { FamilyLivingGalleryStrip } from "./FamilyLivingGalleryStrip";
 
 export function RecognitionFamiliesSection() {
   return (
@@ -21,6 +22,13 @@ export function RecognitionFamiliesSection() {
           </p>
         </div>
 
+        <div className="mb-10 text-center">
+          <Link to="/recognition/certificates" className="ed-btn-ghost">
+            Education Impact Certificates — one entry point
+          </Link>
+        </div>
+
+        <FamilyLivingGalleryStrip />
 
         <div className="ed-grid-3">
           {RECOGNITION_FAMILIES.map((f) => (
@@ -55,11 +63,6 @@ export function RecognitionFamiliesSection() {
           ))}
         </div>
 
-        <div className="mt-10 text-center">
-          <Link to="/recognition/certificates" className="ed-btn-ghost">
-            Education Impact Certificates — one entry point
-          </Link>
-        </div>
       </div>
     </section>
   );
