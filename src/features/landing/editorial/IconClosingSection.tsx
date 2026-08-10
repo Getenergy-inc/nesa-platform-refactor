@@ -6,7 +6,7 @@ import { ICON_CLOSING_SECTION, ICON_AWARD_SECTION } from "@/config/brandHierarch
 
 export function IconClosingSection() {
   return (
-    <section className="ed-section" aria-labelledby="ed-icon-closing-heading">
+    <section className="ed-section pt-0" aria-labelledby="ed-icon-closing-heading">
       <div className="ed-wrap">
         <div className="mx-auto max-w-3xl rounded-3xl border border-gold/35 bg-gradient-to-b from-gold/[0.09] to-transparent px-6 py-10 text-center sm:px-10">
           <h2 id="ed-icon-closing-heading" className="ed-section-title">
