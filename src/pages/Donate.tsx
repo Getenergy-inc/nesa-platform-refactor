@@ -26,6 +26,12 @@ import africaMapImg from "@/assets/africa-map-silhouette.png";
 import { RegionalSchoolInterventionSection } from "@/components/donate/RegionalSchoolInterventionSection";
 import { ProvidusBankAccounts } from "@/components/donate/ProvidusBankAccounts";
 import { TOTAL_REGIONS, TOTAL_SLOTS } from "@/config/specialNeedsSchoolSlots";
+import {
+  FRIENDS_BRAND,
+  FRIENDS_ROLE_CLARITY,
+  FRIENDS_SUPPORT_AREAS,
+  IMPACT_TRUST_STATEMENTS,
+} from "@/config/educationSocialImpact";
 
 const donationAmounts = [
   { value: "10", label: "$10" },
@@ -34,12 +40,9 @@ const donationAmounts = [
   { value: "100", label: "$100" },
 ];
 
-const impactPoints = [
-  "Accessibility upgrades for inclusive classrooms",
-  "Assistive learning tools & special-needs materials",
-  "Teacher support & inclusive education training",
-  "WASH, digital learning, and safety improvements",
-];
+// Framed with Friends of EduAid-Africa support-area language.
+const impactPoints = FRIENDS_SUPPORT_AREAS.slice(0, 4);
+
 
 export default function Donate() {
   const [selectedAmount, setSelectedAmount] = useState("25");
