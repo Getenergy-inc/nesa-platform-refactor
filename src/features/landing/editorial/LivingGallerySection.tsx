@@ -129,7 +129,7 @@ function useIconGalleryPool() {
   return useMemo(() => {
     const perPathway = ICON_PATHWAYS.map((p) => ({
       name: p.name,
-      list: bySubcategory(p.slug as IconSubcategorySlug).filter((n) => !!n.image_url),
+      list: bySubcategory(p.slug as IconSubcategorySlug).filter((n) => !!n.image_url && !/placeholder/i.test(n.image_url)),
     }));
 
     const total = perPathway.reduce((sum, p) => sum + p.list.length, 0);
