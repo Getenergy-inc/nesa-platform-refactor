@@ -260,7 +260,10 @@ export default function Donate() {
 
                   {/* Impact Points */}
                   <div className="rounded-lg bg-white/5 p-4">
-                    <p className="mb-3 text-sm font-medium text-white">Your donation supports:</p>
+                    <p className="mb-3 text-sm font-medium text-white">
+                      What Friends of EduAid-Africa support:
+                    </p>
+
                     <ul className="space-y-2">
                       {impactPoints.map((point) => (
                         <li key={point} className="flex items-center gap-2 text-sm text-white/70">
