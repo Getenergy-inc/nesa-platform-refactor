@@ -88,28 +88,53 @@ export const DISCOVERY_PATHWAYS: DiscoveryPathway[] = [
 
 // ── 3. Icon pathways + recognition communities (§9) ─────────────────────────
 
+/** Canonical Icon Award surface copy — shared by the homepage flagship
+ *  section and the award pages. Do not retype these strings in components. */
+export const ICON_AWARD_SECTION = {
+  eyebrow: "The Africa Education Icon Award",
+  title: "Lifetime Achievement, 2006–2026",
+  intro:
+    "For 20 years, quiet heroes have transformed education across our continent. This highest honour celebrates lifetime impact and legacy as Enablers of Education for All Across Africa.",
+  cardBadge: "LIFETIME ACHIEVEMENT · 2006–2026",
+  awardHref: "/awards/africa-education-icon",
+  nominateHref: "/nominate/africa-education-icon",
+} as const;
+
 export const ICON_PATHWAYS = [
   {
     slug: "education-philanthropy-icon",
     name: "Africa Education Philanthropy Icon",
     blurb:
       "Philanthropy, scholarships, infrastructure and education funding with lasting impact.",
+    description:
+      "Enablers of Education for All Across Africa who turned wealth into hope — building schools, funding thousands of scholarships, and changing entire systems.",
     nomineesHref: "/nominees/africa-education-icon-award/education-philanthropy-icon",
-  },
-  {
-    slug: "technical-educator-icon",
-    name: "Africa Technical Educator Icon",
-    blurb: "TVET, STEM, vocational and technical education pioneers.",
-    nomineesHref: "/nominees/africa-education-icon-award/technical-educator-icon",
+    nominateHref: "/nominate/africa-education-icon",
+    awardHref: "/awards/africa-education-icon",
   },
   {
     slug: "literary-new-curriculum-advocate",
     name: "Literary & New Curriculum Advocate Icon",
     blurb:
       "Authors, publishers, curriculum reformers, education writers and knowledge-system builders.",
+    description:
+      "Enablers of Education for All Across Africa who reshaped learning and identity — decolonising curricula and championing African stories and indigenous knowledge.",
     nomineesHref: "/nominees/africa-education-icon-award/literary-new-curriculum-advocate",
+    nominateHref: "/nominate/africa-education-icon",
+    awardHref: "/awards/africa-education-icon",
+  },
+  {
+    slug: "technical-educator-icon",
+    name: "Africa Technical Educator Icon",
+    blurb: "TVET, STEM, vocational and technical education pioneers.",
+    description:
+      "Enablers of Education for All Across Africa who taught the continent to build, code, innovate and lead through technical and digital skills.",
+    nomineesHref: "/nominees/africa-education-icon-award/technical-educator-icon",
+    nominateHref: "/nominate/africa-education-icon",
+    awardHref: "/awards/africa-education-icon",
   },
 ] as const;
+
 
 export const RECOGNITION_COMMUNITIES = [
   { slug: "africans-in-africa", name: "Africans in Africa" },

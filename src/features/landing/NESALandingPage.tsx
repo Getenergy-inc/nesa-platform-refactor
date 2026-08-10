@@ -47,7 +47,6 @@ import {
   TrustBandSection,
   VolunteerBandSection,
   BoardOfAdvisorsSection,
-  GallerySection,
   GalaBandSection,
   JoinMovementSection,
   HelpRecogniseSection,
@@ -98,15 +97,15 @@ export function NESALandingPage() {
         {/* 2. PUBLIC NOTICE — nominations open 30 August 2026 */}
         <PublicNominationsNotice />
 
-        {/* 3. LIVING GALLERY — Meet Africa's Education Enablers (database-driven) */}
-        <LivingGallerySection />
-
-        {/* 4. ONE CONTINENTAL MISSION. SIX RECOGNITION PATHWAYS. */}
-        <RecognitionFamiliesSection />
-
-        {/* 5. AFRICA EDUCATION ICON — flagship prominence */}
+        {/* 3. AFRICA EDUCATION ICON — flagship first impression */}
         <IconFlagshipSection />
         <IconLifetimeSection />
+
+        {/* 4. LIVING GALLERY — Meet Africa's Education Enablers (database-driven) */}
+        <LivingGallerySection />
+
+        {/* 5. ONE CONTINENTAL MISSION. SIX RECOGNITION PATHWAYS. */}
+        <RecognitionFamiliesSection />
 
         {/* 6. WHO CAN BE AN EDUCATION ENABLER? */}
         <WhoCanBeEnablerSection />
@@ -127,7 +126,7 @@ export function NESALandingPage() {
         {/* SUPPORTING BANDS — people and moments */}
         <VolunteerBandSection />
         <BoardOfAdvisorsSection />
-        <GallerySection />
+
 
         {/* 9. JOIN THE MOVEMENT */}
         <JoinMovementSection />

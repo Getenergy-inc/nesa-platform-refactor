@@ -6,7 +6,7 @@
 // Africa Education Icon + Six Recognition Pathways cards instead of an
 // awkward sparse carousel.
 
-import { useEffect, useRef, useState } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import { MapPin } from "lucide-react";
 import {
@@ -15,22 +15,8 @@ import {
   type GalleryNominee,
 } from "@/hooks/useLivingGallery";
 import { RECOGNITION_FAMILIES, BRAND } from "@/config/brandHierarchy";
+import { useStripAutoScroll } from "./useStripAutoScroll";
 
-function usePrefersReducedMotion() {
-  const [reduced, setReduced] = useState(() =>
-    typeof window !== "undefined" && typeof window.matchMedia === "function"
-      ? window.matchMedia("(prefers-reduced-motion: reduce)").matches
-      : false,
-  );
-  useEffect(() => {
-    if (typeof window === "undefined" || typeof window.matchMedia !== "function") return;
-    const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
-    const onChange = () => setReduced(mq.matches);
-    mq.addEventListener?.("change", onChange);
-    return () => mq.removeEventListener?.("change", onChange);
-  }, []);
-  return reduced;
-}
 
 function GalleryCard({ n }: { n: GalleryNominee }) {
   const place = [n.country, n.region].filter(Boolean).join(" · ");
@@ -127,25 +113,9 @@ function PathwayFallback() {
 
 export function LivingGallerySection() {
   const { nominees, loading, hasEnough } = useLivingGalleryNominees();
-  const reducedMotion = usePrefersReducedMotion();
-  const trackRef = useRef<HTMLDivElement | null>(null);
-  const [paused, setPaused] = useState(false);
+  // Shared strip motion (auto-advance, reduced-motion + pause-on-interaction).
+  const { ref: trackRef, pauseHandlers } = useStripAutoScroll<HTMLDivElement>(hasEnough);
 
-  // Auto-advance: gentle page-by-page scroll. Fully disabled under
-  // prefers-reduced-motion, and paused on hover / focus / pointer interaction.
-  useEffect(() => {
-    if (reducedMotion || paused || !hasEnough) return;
-    const el = trackRef.current;
-    if (!el) return;
-    const id = window.setInterval(() => {
-      const max = el.scrollWidth - el.clientWidth;
-      if (max <= 4) return;
-      const step = Math.max(el.clientWidth * 0.8, 260);
-      const next = el.scrollLeft + step >= max - 4 ? 0 : el.scrollLeft + step;
-      el.scrollTo({ left: next, behavior: "smooth" });
-    }, 4500);
-    return () => window.clearInterval(id);
-  }, [reducedMotion, paused, hasEnough]);
 
   return (
     <section className="ed-section" aria-labelledby="ed-living-gallery-heading">
@@ -181,14 +151,8 @@ export function LivingGallerySection() {
               role="group"
               aria-label="Education Enablers gallery — scroll or swipe to browse"
               tabIndex={0}
-              onMouseEnter={() => setPaused(true)}
-              onMouseLeave={() => setPaused(false)}
-              onFocus={() => setPaused(true)}
-              onBlur={(e) => {
-                if (!e.currentTarget.contains(e.relatedTarget as Node)) setPaused(false);
-              }}
-              onPointerDown={() => setPaused(true)}
-              onTouchStart={() => setPaused(true)}
+              {...pauseHandlers}
+
               className="flex snap-x snap-mandatory gap-4 overflow-x-auto pb-4 [scrollbar-width:thin] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-gold"
             >
               {nominees.map((n) => (
