@@ -96,9 +96,22 @@ export const ICON_AWARD_SECTION = {
   intro:
     "For 20 years, quiet heroes have transformed education across our continent. This highest honour celebrates lifetime impact and legacy as Enablers of Education for All Across Africa.",
   cardBadge: "LIFETIME ACHIEVEMENT · 2006–2026",
+  /** Supporting tagline reused wherever the Icon Award is introduced. */
+  tagline: "Africa's Flagship Lifetime Education Honour",
+  /** Copy for the homepage living gallery of already-nominated Icons. */
+  gallery: {
+    eyebrow: "Africa's Flagship Lifetime Education Honour",
+    title: "Meet Africa's Education Enablers",
+    /** `{count}` is replaced with the real nominee total at render time. */
+    lede:
+      "These are the {count} people and institutions already nominated for the 2026 Africa Education Icon Award — Africans living in Africa, Diaspora Africans and Friends of Africa, enabling education for all across Africa.",
+    invite:
+      "Join us at the Gala on 13 December 2026 in Lagos to celebrate the nine eventual Icon laureates drawn from this pool.",
+  },
   awardHref: "/awards/africa-education-icon",
   nominateHref: "/nominate/africa-education-icon",
 } as const;
+
 
 export const ICON_PATHWAYS = [
   {
