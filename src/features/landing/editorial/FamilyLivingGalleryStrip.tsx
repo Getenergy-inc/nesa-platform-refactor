@@ -22,6 +22,10 @@ const CARD_H = 350; // 4:5
 
 function FamilyCard({ entry }: { entry: FamilyGalleryEntry }) {
   const [broken, setBroken] = useState(false);
+  // Many enabler records store a wide logo in the photo field. Detect the
+  // natural aspect on load and letterbox wide/small artwork instead of
+  // cropping or upscaling it.
+  const [contain, setContain] = useState(entry.imageKind === "logo");
   const place = [entry.country, entry.region].filter(Boolean).join(" · ");
   const initials = entry.name
     .split(/\s+/)
@@ -42,10 +46,14 @@ function FamilyCard({ entry }: { entry: FamilyGalleryEntry }) {
             loading="lazy"
             decoding="async"
             onError={() => setBroken(true)}
+            onLoad={(e) => {
+              const img = e.currentTarget;
+              const wide = img.naturalWidth > img.naturalHeight * 1.05;
+              const small = img.naturalWidth < CARD_W || img.naturalHeight < CARD_H;
+              if (wide || small) setContain(true);
+            }}
             className={`h-full w-full transition-transform duration-700 group-hover:scale-105 motion-reduce:transition-none motion-reduce:group-hover:scale-100 ${
-              entry.imageKind === "logo"
-                ? "object-contain bg-white/[0.06] p-6"
-                : "object-cover"
+              contain ? "object-contain bg-white/[0.06] p-6" : "object-cover"
             }`}
           />
         ) : (
