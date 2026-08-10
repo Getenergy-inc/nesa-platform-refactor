@@ -47,7 +47,6 @@ import {
   TrustBandSection,
   VolunteerBandSection,
   BoardOfAdvisorsSection,
-  GallerySection,
   GalaBandSection,
   JoinMovementSection,
   HelpRecogniseSection,
