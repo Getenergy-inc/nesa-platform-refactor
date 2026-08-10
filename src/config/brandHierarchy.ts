@@ -159,6 +159,78 @@ export const RECOGNITION_COMMUNITIES = [
 export const ICON_NO_PUBLIC_VOTING_NOTE =
   "The Africa Education Icon Award has no public voting. Every Icon is assessed internally by the independent Judges Arena against published evidence criteria.";
 
+/**
+ * Icon-specific governance/trust statement. Rendered directly beside the
+ * Icon surfaces so trust language is never only on the separate Trust page.
+ */
+export const ICON_GOVERNANCE_STATEMENT = [
+  "Recognition is subject to eligibility, evidence review, verification and the applicable NESA-Africa governance process.",
+  "Sponsorship, partnerships and donations do not determine nominee eligibility, judging, recognition or award outcomes.",
+] as const;
+
+/**
+ * Africa Education Icon Award — 2026 nomination timeline.
+ * Dates mirror the canonical programme configuration:
+ *   open  30 August 2026, close 12 September 2026 (recognition2026 categories),
+ *   Gala  PROGRAMME_END_LABEL (13 December 2026).
+ * No selection/finalist date exists in backend config, so that step is
+ * intentionally left open-ended rather than fabricated.
+ */
+export const ICON_NOMINATION_TIMELINE = {
+  title: "Africa Education Icon Award — 2026 Nomination Timeline",
+  steps: [
+    {
+      key: "open",
+      label: "Public Nominations Open",
+      when: "30 August 2026",
+      body: "Anyone can nominate an Education Enabler for the flagship lifetime honour.",
+    },
+    {
+      key: "window",
+      label: "Nomination Window",
+      when: "30 August – 12 September 2026",
+      body: "Icon nominations close at 23:59 WAT on 12 September 2026.",
+    },
+    {
+      key: "review",
+      label: "Review & Verification",
+      when: "After nominations close",
+      body: "The Nomination Review Committee and governance processes review submissions, eligibility and supporting evidence.",
+    },
+    {
+      key: "selection",
+      label: "Icon Selection",
+      when: "Date to be confirmed",
+      body: "Following formal review and governance process, successful nominees progress toward final recognition.",
+    },
+    {
+      key: "gala",
+      label: "Recognition Gala",
+      when: `${PROGRAMME_END_LABEL} · Lagos, Nigeria`,
+      body: "Africa Education Icon laureates are celebrated at the NESA-Africa 2026 Gala.",
+    },
+  ],
+} as const;
+
+/** Closing Icon band copy. */
+export const ICON_CLOSING_SECTION = {
+  title: "Join Africa in Celebrating Its Education Icons",
+  body: `On ${PROGRAMME_END_LABEL}, Lagos becomes the meeting point for celebrating the people whose lifetime contributions have helped advance education across Africa.`,
+  lines: [
+    "Africa Education Icon Award",
+    "Africa's Flagship Lifetime Education Honour",
+    "Three Pathways. One Continental Mission. A Lifetime of Impact.",
+  ],
+} as const;
+
+/** Scale/credibility band above the closing message. */
+export const ICON_SCALE_SECTION = {
+  eyebrow: "Scale of the search",
+  title: "A Continental Search for Education Icons",
+  sub: "Live counts drawn from the Africa Education Icon nominee record across all three pathways.",
+} as const;
+
+
 // ── 4. Six Education Impact Certificate families (§3 pathway 2) ─────────────
 
 export interface RecognitionFamily {
