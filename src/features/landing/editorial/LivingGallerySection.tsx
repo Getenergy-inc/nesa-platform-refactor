@@ -151,14 +151,8 @@ export function LivingGallerySection() {
               role="group"
               aria-label="Education Enablers gallery — scroll or swipe to browse"
               tabIndex={0}
-              onMouseEnter={() => setPaused(true)}
-              onMouseLeave={() => setPaused(false)}
-              onFocus={() => setPaused(true)}
-              onBlur={(e) => {
-                if (!e.currentTarget.contains(e.relatedTarget as Node)) setPaused(false);
-              }}
-              onPointerDown={() => setPaused(true)}
-              onTouchStart={() => setPaused(true)}
+              {...pauseHandlers}
+
               className="flex snap-x snap-mandatory gap-4 overflow-x-auto pb-4 [scrollbar-width:thin] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-gold"
             >
               {nominees.map((n) => (
