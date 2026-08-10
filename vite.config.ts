@@ -1,11 +1,33 @@
-import { defineConfig } from "vite";
+import { defineConfig, loadEnv } from "vite";
 import react from "@vitejs/plugin-react-swc";
 import path from "path";
 import { componentTagger } from "lovable-tagger";
 import { VitePWA } from "vite-plugin-pwa";
 
+// Publishable backend identifiers. These are safe to ship to the browser and act
+// as a fallback so a production build never boots with an undefined client
+// (which crashes the whole app with "supabaseUrl is required").
+const FALLBACK_SUPABASE_URL = "https://sjghitoydzpirpqjules.supabase.co";
+const FALLBACK_SUPABASE_PUBLISHABLE_KEY =
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNqZ2hpdG95ZHpwaXJwcWp1bGVzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjkwMjA4OTksImV4cCI6MjA4NDU5Njg5OX0.TGMiFx-q_W9FhQMTDHaJ6IPcvJrlvsdBYegHgMQShBw";
+
 // https://vitejs.dev/config/
-export default defineConfig(({ mode }) => ({
+export default defineConfig(({ mode }) => {
+  const env = loadEnv(mode, process.cwd(), "");
+
+  return {
+  define: {
+    "import.meta.env.VITE_SUPABASE_URL": JSON.stringify(
+      env.VITE_SUPABASE_URL || FALLBACK_SUPABASE_URL,
+    ),
+    "import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY": JSON.stringify(
+      env.VITE_SUPABASE_PUBLISHABLE_KEY || FALLBACK_SUPABASE_PUBLISHABLE_KEY,
+    ),
+    "import.meta.env.VITE_SUPABASE_PROJECT_ID": JSON.stringify(
+      env.VITE_SUPABASE_PROJECT_ID || "sjghitoydzpirpqjules",
+    ),
+  },
+
   server: {
     host: "::",
     port: 8080,
@@ -145,4 +167,6 @@ export default defineConfig(({ mode }) => ({
     legalComments: 'none',
     drop: mode === 'production' ? ['console', 'debugger'] : [],
   },
-}));
+  };
+});
+
