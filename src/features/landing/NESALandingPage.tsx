@@ -40,6 +40,9 @@ import {
   LivingGallerySection,
   IconLifetimeSection,
   IconFlagshipSection,
+  IconTimelineSection,
+  IconScaleSection,
+  IconClosingSection,
   RecognitionFamiliesSection,
   WhoCanBeEnablerSection,
   DirectoryStatsSection,
@@ -51,6 +54,7 @@ import {
   JoinMovementSection,
   HelpRecogniseSection,
 } from "./editorial";
+
 
 
 const GovernanceFirewallSection = lazy(() =>
