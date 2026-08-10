@@ -695,3 +695,12 @@
     transition: none !important;
   }
 }
+
+/* Compact Icon key-dates ticker under the public notice banner. */
+.nesa-ed .ed-ticker-track {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.nesa-ed .ed-ticker-track::-webkit-scrollbar {
+  display: none;
+}
