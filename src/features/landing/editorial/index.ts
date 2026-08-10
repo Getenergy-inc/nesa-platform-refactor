@@ -17,6 +17,7 @@ export { LivingGallerySection } from "./LivingGallerySection";
 export { DirectoryStatsSection } from "./DirectoryStatsSection";
 export { IconFlagshipSection } from "./IconFlagshipSection";
 export { HelpRecogniseSection } from "./HelpRecogniseSection";
-export { IconTimelineSection } from "./IconTimelineSection";
+export { IconTimelineTicker } from "./IconTimelineTicker";
+export { IconGovernanceNote } from "./IconGovernanceNote";
 export { IconScaleSection } from "./IconScaleSection";
 export { IconClosingSection } from "./IconClosingSection";
