@@ -106,7 +106,7 @@ export const ICON_AWARD_SECTION = {
     lede:
       "These are the {count} people and institutions already nominated for the 2026 Africa Education Icon Award — Africans living in Africa, Diaspora Africans and Friends of Africa, enabling education for all across Africa.",
     invite:
-      "Join us at the Gala on 13 December 2026 in Lagos to celebrate the nine eventual Icon laureates drawn from this pool.",
+      "Join us at the Gala on {date} in Lagos to celebrate the nine eventual Icon laureates drawn from this pool.",
   },
   awardHref: "/awards/africa-education-icon",
   nominateHref: "/nominate/africa-education-icon",
