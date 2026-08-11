@@ -126,6 +126,11 @@ export function NESALandingPage() {
         {/* 9. BUILT FOR TRUST */}
         <TrustBandSection />
 
+        {/* 9b. ENDORSERS & PARTNERS */}
+        <PartnersBandSection />
+
+
+
         {/* 10. GALA COUNTDOWN — 13 December 2026 */}
         <GalaBandSection />
 
