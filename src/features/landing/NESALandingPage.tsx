@@ -51,6 +51,8 @@ import {
   GalaBandSection,
   JoinMovementSection,
   HelpRecogniseSection,
+  PartnersBandSection,
+
 } from "./editorial";
 
 
