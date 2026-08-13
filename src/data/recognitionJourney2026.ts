@@ -9,7 +9,6 @@ export type JourneyStatus =
   | "live"
   | "registration_open"
   | "nomination_open"
-  | "voting_open"
   | "closing_soon"
   | "closed";
 
@@ -368,7 +367,6 @@ export const STATUS_LABELS: Record<JourneyStatus, string> = {
   live: "Live",
   registration_open: "Registration Open",
   nomination_open: "Nomination Open",
-  voting_open: "Voting Open",
   closing_soon: "Closing Soon",
   closed: "Closed",
 };
@@ -381,7 +379,6 @@ export function computeLiveStatus(phase: JourneyPhase, now: Date = new Date()): 
   if (t < start) return phase.status === "registration_open" ? "registration_open" : "upcoming";
   if (t > end) return "closed";
   // active window
-  if (phase.id.includes("voting")) return "voting_open";
   if (phase.id.includes("nomination")) return "nomination_open";
   if (phase.status === "registration_open") return "registration_open";
   return "current";
