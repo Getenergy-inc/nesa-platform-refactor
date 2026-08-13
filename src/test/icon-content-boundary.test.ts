@@ -42,7 +42,7 @@ function* walk(p: string): Generator<string> {
 describe("Icon content boundary — Episodes 4 and 7", () => {
   it("the boundary applies to exactly Episodes 4 and 7", () => {
     expect(BOUNDARY_EPISODES.map((e) => e.episode)).toEqual([4, 7]);
-    expect(EDUAID_CONTENT_BOUNDARY.iconJudgingWindow).toContain("7 November 2026");
+    expect(EDUAID_CONTENT_BOUNDARY.iconJudgingWindow).toContain("24 November 2026");
   });
 
   it("has a non-empty Icon nominee roster to check against", () => {
