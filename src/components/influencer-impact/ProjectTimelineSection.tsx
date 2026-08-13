@@ -4,7 +4,7 @@ import { CalendarDays, Megaphone, ShieldCheck, Trophy, Sparkles, FileCheck } fro
  * Influencer Education Impact 2026 — project timeline.
  *
  * Dates are fixed to the "NESA-Africa 2026 — Complete Timeline Set":
- *   • Nominations: 30 August – 21 November 2026 (Influencer tier)
+ *   • Nominations: 6 September – 21 November 2026 (Influencer tier)
  *   • Rolling NRC verification: 16 September – 13 December 2026
  *   • Gala: Sunday, 13 December 2026
  * There is no public voting in this tier — recognition is NRC-verified.
