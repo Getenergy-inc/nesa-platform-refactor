@@ -6439,20 +6439,26 @@ export type Database = {
           approval_rate: number | null
           assigned_region: string | null
           avg_review_time_hours: number | null
+          bio: string | null
           category_checks: number | null
+          country: string | null
           created_at: string | null
           current_assignments: number | null
+          display_name: string | null
           evidence_checks: number | null
           id: string
           identity_checks: number | null
           invited_by: string | null
           is_available: boolean | null
+          is_public: boolean
           joined_at: string | null
           last_active_at: string | null
           max_queue_size: number | null
           nrc_role: string | null
           person_id: string
+          photo_url: string | null
           review_count: number | null
+          slug: string | null
           specialization: string[] | null
           status: string
           total_reviews: number | null
@@ -6463,20 +6469,26 @@ export type Database = {
           approval_rate?: number | null
           assigned_region?: string | null
           avg_review_time_hours?: number | null
+          bio?: string | null
           category_checks?: number | null
+          country?: string | null
           created_at?: string | null
           current_assignments?: number | null
+          display_name?: string | null
           evidence_checks?: number | null
           id?: string
           identity_checks?: number | null
           invited_by?: string | null
           is_available?: boolean | null
+          is_public?: boolean
           joined_at?: string | null
           last_active_at?: string | null
           max_queue_size?: number | null
           nrc_role?: string | null
           person_id?: string
+          photo_url?: string | null
           review_count?: number | null
+          slug?: string | null
           specialization?: string[] | null
           status?: string
           total_reviews?: number | null
@@ -6487,20 +6499,26 @@ export type Database = {
           approval_rate?: number | null
           assigned_region?: string | null
           avg_review_time_hours?: number | null
+          bio?: string | null
           category_checks?: number | null
+          country?: string | null
           created_at?: string | null
           current_assignments?: number | null
+          display_name?: string | null
           evidence_checks?: number | null
           id?: string
           identity_checks?: number | null
           invited_by?: string | null
           is_available?: boolean | null
+          is_public?: boolean
           joined_at?: string | null
           last_active_at?: string | null
           max_queue_size?: number | null
           nrc_role?: string | null
           person_id?: string
+          photo_url?: string | null
           review_count?: number | null
+          slug?: string | null
           specialization?: string[] | null
           status?: string
           total_reviews?: number | null
@@ -6685,7 +6703,7 @@ export type Database = {
           {
             foreignKeyName: "nrc_queue_nomination_id_fkey"
             columns: ["nomination_id"]
-            isOneToOne: true
+            isOneToOne: false
             referencedRelation: "nominations"
             referencedColumns: ["id"]
           },
@@ -6910,6 +6928,7 @@ export type Database = {
           nomination_id: string
           nominee_id: string | null
           primary_reviewer_id: string | null
+          public_summary_note: string | null
           reject_count: number | null
           review_count: number | null
           risk_cleared: boolean | null
@@ -6933,6 +6952,7 @@ export type Database = {
           nomination_id: string
           nominee_id?: string | null
           primary_reviewer_id?: string | null
+          public_summary_note?: string | null
           reject_count?: number | null
           review_count?: number | null
           risk_cleared?: boolean | null
@@ -6956,6 +6976,7 @@ export type Database = {
           nomination_id?: string
           nominee_id?: string | null
           primary_reviewer_id?: string | null
+          public_summary_note?: string | null
           reject_count?: number | null
           review_count?: number | null
           risk_cleared?: boolean | null
@@ -10673,6 +10694,39 @@ export type Database = {
           verification_status?:
             | Database["public"]["Enums"]["judge_verification_status"]
             | null
+        }
+        Relationships: []
+      }
+      nrc_public_members: {
+        Row: {
+          bio: string | null
+          country: string | null
+          created_at: string | null
+          display_name: string | null
+          id: string | null
+          photo_url: string | null
+          slug: string | null
+          specialization: string[] | null
+        }
+        Insert: {
+          bio?: string | null
+          country?: string | null
+          created_at?: string | null
+          display_name?: string | null
+          id?: string | null
+          photo_url?: string | null
+          slug?: string | null
+          specialization?: string[] | null
+        }
+        Update: {
+          bio?: string | null
+          country?: string | null
+          created_at?: string | null
+          display_name?: string | null
+          id?: string | null
+          photo_url?: string | null
+          slug?: string | null
+          specialization?: string[] | null
         }
         Relationships: []
       }
