@@ -695,14 +695,7 @@ const App = () => (
                   />
                   <Route path="/edx-matrix" element={<EDXMatrixPage />} />
                   <Route path="/edx" element={<Navigate to="/edx-matrix" replace />} />
-                  <Route
-                    path="/about/timeline"
-                    element={
-                      <WithLayout>
-                        <Timeline />
-                      </WithLayout>
-                    }
-                  />
+                  <Route path="/about/timeline" element={<Navigate to="/timeline" replace />} />
                   <Route
                     path="/timeline"
                     element={
