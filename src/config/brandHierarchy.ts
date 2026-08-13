@@ -15,6 +15,12 @@ import {
   PROGRAMME_END_LONG_LABEL,
   GALA_COUNTDOWN_DATETIME,
 } from "@/config/programme";
+import {
+  NOMINATIONS_OPEN_LABEL,
+  ICON_WINDOW_LABEL,
+  ICON_WINDOW_CLOSE_LABEL,
+  ICON_RECIPIENTS_CONFIRMED_LABEL,
+} from "@/config/nominationWindows2026";
 
 // ── 1. Brand hierarchy (locked) ─────────────────────────────────────────────
 
