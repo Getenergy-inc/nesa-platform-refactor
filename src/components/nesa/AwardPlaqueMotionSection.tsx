@@ -92,7 +92,7 @@ export function AwardPlaqueMotionSection() {
               )}
             </AnimatePresence>
 
-            <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 px-4 py-1.5 rounded-full bg-charcoal/85 backdrop-blur-sm border border-gold/30 whitespace-nowrap">
+            <div className="absolute -bottom-7 left-1/2 -translate-x-1/2 px-4 py-1.5 rounded-full bg-charcoal/85 backdrop-blur-sm border border-gold/30 whitespace-nowrap">
               <span className="text-xs text-gold font-medium">{CAPTIONS[current]}</span>
             </div>
           </div>
