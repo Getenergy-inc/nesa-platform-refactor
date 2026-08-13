@@ -22,6 +22,8 @@ import { useTranslation } from "react-i18next";
 import { LocalizedSEO } from "@/components/seo/LocalizedSEO";
 
 import { PublicNominationsNotice } from "@/components/nesa/PublicNominationsNotice";
+import { AwardPlaqueMotionSection } from "@/components/nesa/AwardPlaqueMotionSection";
+import { InteractiveAfricaMap } from "@/components/nesa/InteractiveAfricaMap";
 import { NESAFooter } from "@/components/nesa/NESAFooter";
 import { NESAHeader } from "@/components/nesa/NESAHeader";
 import { UtilityBar } from "@/components/nesa/UtilityBar";
@@ -108,8 +110,18 @@ export function NESALandingPage() {
         <IconLifetimeSection />
         <IconGovernanceNote />
 
+        {/* 3b. AWARD PLAQUE + LOGO MOTION GRAPHIC */}
+        <AwardPlaqueMotionSection />
+
         {/* 4. LIVING GALLERY — Meet Africa's Education Enablers */}
         <LivingGallerySection />
+
+        {/* 4b. INTERACTIVE AFRICA MAP — 8 regions */}
+        <LazySection>
+          <InteractiveAfricaMap />
+        </LazySection>
+
+
 
         {/* 5. ONE CONTINENTAL MISSION. SIX RECOGNITION PATHWAYS. */}
         <RecognitionFamiliesSection />
