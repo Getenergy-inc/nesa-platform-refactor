@@ -116,8 +116,7 @@ export function NESALandingPage() {
         {/* 4. LIVING GALLERY — Meet Africa's Education Enablers */}
         <LivingGallerySection />
 
-        {/* 4b. INTERACTIVE AFRICA MAP — 8 African regions */}
-        <InteractiveAfricaMap />
+
 
 
 
