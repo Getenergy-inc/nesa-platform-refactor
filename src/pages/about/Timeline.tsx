@@ -1,34 +1,80 @@
-// /timeline — "The Road to the 2026 Blue-Garnet Awards".
-// Every date is sourced from existing authoritative config: no new date literals.
-//  • Icon window  → ICON_NOMINATION_TIMELINE (brandHierarchy.ts)
-//  • Certificate window → MASTER_TIMELINE_NOMINATION_WINDOWS (masterTimeline2026.ts)
-//  • Gala → PROGRAMME_END_LABEL / GALA_COUNTDOWN_TARGET (config/programme.ts)
-//  • Governance wording → ICON_GOVERNANCE_STATEMENT (brandHierarchy.ts)
+// /timeline — NESA-Africa 2026 Recognition Journey.
+//
+// Content source: "NESA-Africa 2026 — CORRECTED Complete Timeline Set", held in
+// `@/data/masterTimeline2026` (chronological milestones) and
+// `@/data/eduaidWebinarSeries2026` (the 7 webinar weeks).
+//
+// Date literals are never typed here:
+//  • Nomination windows → @/config/nominationWindows2026
+//  • Gala               → @/config/programme
+//
+// The source document's internal editorial/production checklist section is
+// deliberately NOT rendered on this public page.
 
 import { Link } from "react-router-dom";
 import { AboutSeo } from "@/pages/about/AboutSeo";
 import { useCountdown } from "@/hooks/useCountdown";
 import { useTimelineStatus, formatCount } from "@/hooks/useTimelineStatus";
 import {
-  ICON_NOMINATION_TIMELINE,
-  ICON_GOVERNANCE_STATEMENT,
-} from "@/config/brandHierarchy";
-import { MASTER_TIMELINE_NOMINATION_WINDOWS } from "@/data/masterTimeline2026";
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
+import { ICON_GOVERNANCE_STATEMENT } from "@/config/brandHierarchy";
+import {
+  MASTER_TIMELINE_CHRONOLOGICAL,
+  MASTER_TIMELINE_NOMINATION_WINDOWS,
+  MASTER_TIMELINE_TRACK_LABELS,
+  type MasterTimelineEntry,
+  type MasterTimelineTrack,
+} from "@/data/masterTimeline2026";
+import { EDUAID_WEBINAR_SERIES_2026 } from "@/data/eduaidWebinarSeries2026";
 import { PROGRAMME_END_LABEL, GALA_COUNTDOWN_TARGET } from "@/config/programme";
+import {
+  NOMINATIONS_OPEN_LABEL,
+  ICON_WINDOW_LABEL,
+  CERTIFICATE_WINDOW_LABEL,
+} from "@/config/nominationWindows2026";
 import "@/features/landing/editorial/editorial.css";
-
-const ICON_OPEN = ICON_NOMINATION_TIMELINE.steps.find((s) => s.key === "open")!;
-const ICON_WINDOW = ICON_NOMINATION_TIMELINE.steps.find((s) => s.key === "window")!;
-const CERTIFICATE_WINDOW =
-  MASTER_TIMELINE_NOMINATION_WINDOWS.find((w) => w.id === "gold-blue-garnet")!.window;
 
 type Tone = "gold" | "stone" | "sapphire";
 
+/** Static class map — Tailwind cannot extract dynamically composed class names. */
 const TONE_CLASS: Record<Tone, string> = {
   gold: "text-[#e8c468] border-[#c9a227]/45 bg-[#c9a227]/10",
   stone: "text-[#b0afa8] border-white/15 bg-white/[0.04]",
   sapphire: "text-[#9db9e8] border-[#1b3a6b]/60 bg-[#1b3a6b]/25",
 };
+
+/** Static per-track chip classes — no template-literal class construction. */
+const TRACK_CHIP: Record<MasterTimelineTrack, string> = {
+  activation: "border-[#c9a227]/35 bg-[#c9a227]/10 text-[#e8c468]",
+  nominations: "border-[#c9a227]/45 bg-[#c9a227]/15 text-[#e8c468]",
+  verification: "border-[#2e6b63]/60 bg-[#2e6b63]/20 text-[#8fd3c7]",
+  webinar: "border-[#2f6b45]/60 bg-[#2f6b45]/20 text-[#9fd6b4]",
+  podcast: "border-[#4b3a70]/60 bg-[#4b3a70]/25 text-[#c3b0e8]",
+  judging: "border-white/15 bg-white/[0.05] text-[#cfcdc5]",
+  showcase: "border-[#1b3a6b]/60 bg-[#1b3a6b]/25 text-[#9db9e8]",
+  gala: "border-[#c9a227]/55 bg-[#c9a227]/20 text-[#f0d78d]",
+  news: "border-[#1f4d63]/60 bg-[#1f4d63]/25 text-[#9ecbdd]",
+  legacy: "border-[#4a5f22]/60 bg-[#4a5f22]/25 text-[#c6d98a]",
+};
+
+const MONTH_LABEL = (iso: string) =>
+  new Date(iso).toLocaleDateString("en-GB", { month: "long", year: "numeric", timeZone: "UTC" });
+
+/** Group the chronological milestones by month for a scannable reading rhythm. */
+function groupByMonth(entries: MasterTimelineEntry[]) {
+  const groups: { key: string; label: string; items: MasterTimelineEntry[] }[] = [];
+  for (const entry of entries) {
+    const key = entry.startsAt.slice(0, 7);
+    const last = groups[groups.length - 1];
+    if (last && last.key === key) last.items.push(entry);
+    else groups.push({ key, label: MONTH_LABEL(entry.startsAt), items: [entry] });
+  }
+  return groups;
+}
 
 export default function Timeline() {
   const status = useTimelineStatus();
@@ -49,7 +95,7 @@ export default function Timeline() {
     {
       step: "01",
       title: "Nominations",
-      body: "Education Enablers are nominated by the public across every NESA-Africa recognition pathway.",
+      body: `Education Enablers are nominated by the public from ${NOMINATIONS_OPEN_LABEL} across every NESA-Africa recognition pathway.`,
       statusLabel: "Open",
       tone: "gold",
       metric: status.loading ? "…" : formatCount(status.nominationsTotal),
@@ -57,9 +103,9 @@ export default function Timeline() {
     },
     {
       step: "02",
-      title: "NRC Review",
-      body: "The Nomination Review Committee verifies eligibility and supporting evidence for every nomination before it proceeds.",
-      statusLabel: nrcActive ? "In progress" : "Review begins once nominations close",
+      title: "NRC Verification",
+      body: "The Nominee Research Corps verifies eligibility, identity and supporting evidence for every nomination before it proceeds.",
+      statusLabel: nrcActive ? "In progress" : "Begins once nominations open",
       tone: nrcActive ? "gold" : "stone",
       metric: nrcActive ? formatCount(status.nrcVerified) : undefined,
       metricLabel: nrcActive ? "nominations verified" : undefined,
@@ -84,44 +130,13 @@ export default function Timeline() {
     },
   ];
 
-  const journey = [
-    {
-      when: ICON_OPEN.when,
-      title: "Public Nominations Open",
-      body: "Nominations open across all NESA-Africa recognition pathways — the Africa Education Icon Award and the six Education Impact Certificates (CSR for Education, EduTech Innovation, Media Organisation for Education, NGO & International Education Partnership, Diaspora Educational Impact, Influencer Education Impact).",
-    },
-    {
-      when: ICON_WINDOW.when,
-      title: "Africa Education Icon Award Nomination Window",
-      body: "The flagship lifetime honour closes first, giving the longest runway for NRC verification and Judges Arena review ahead of the Gala.",
-    },
-    {
-      when: CERTIFICATE_WINDOW,
-      title: "Education Impact Certificate Nomination Window",
-      body: "The six Certificate pathways remain open longer, reflecting their higher nomination volume and the additional time nominees may need to request physical printed certificates ahead of the Gala.",
-    },
-    {
-      when: "After each pathway's window closes",
-      title: "NRC Verification",
-      body: "The Nomination Review Committee reviews submissions, confirms eligibility, and verifies supporting evidence for every nomination before it can proceed to judging.",
-    },
-    {
-      when: "Following NRC Verification",
-      title: "Judges Arena Review",
-      body: "NRC-verified nominees move to their pathway's judging panel. Panels review evidence, select finalists, and the eligible judges cast a ranked-choice Grand Jury ballot. No public voting occurs at any stage — recognition is decided entirely through internal, audited judging.",
-    },
-    {
-      when: PROGRAMME_END_LABEL,
-      title: "The Blue-Garnet Awards Gala, Lagos",
-      body: "Africa Education Icon laureates and Education Impact Certificate winners are celebrated on stage.",
-    },
-  ];
+  const months = groupByMonth(MASTER_TIMELINE_CHRONOLOGICAL);
 
   return (
     <div className="nesa-ed min-h-screen">
       <AboutSeo
-        title="The Road to the 2026 Blue-Garnet Awards | NESA-Africa Timeline"
-        description="One continental recognition cycle — from nomination and NRC verification through Judges Arena review to the Blue-Garnet Awards Gala in Lagos on 13 December 2026."
+        title="NESA-Africa 2026 Recognition Journey | Full Timeline"
+        description={`Every dated milestone in the NESA-Africa 2026 cycle — nominations from ${NOMINATIONS_OPEN_LABEL}, NRC verification, Icon judging, the EduAid-Africa webinar weeks, TV showcases and the Recognition Gala in Lagos on ${PROGRAMME_END_LABEL}.`}
         path="/timeline"
         breadcrumbs={[
           { name: "Home", path: "/" },
@@ -134,14 +149,15 @@ export default function Timeline() {
         <div className="ed-wrap max-w-3xl text-center">
           <div className="ed-eyebrow">NESA-Africa 2026 Recognition Cycle</div>
           <h1 className="mt-4 font-serif text-4xl leading-tight sm:text-5xl">
-            The Road to the 2026 Blue-Garnet Awards
+            The NESA-Africa 2026 Recognition Journey
           </h1>
           <p className="mt-4 text-lg text-[#e8c468]">
-            One continental recognition cycle — from nomination to the Gala stage.
+            From public activation in July 2026 to the Recognition Gala in Lagos on{" "}
+            {PROGRAMME_END_LABEL}.
           </p>
           <p className="mt-4 text-[#b0afa8]">
-            A single continuous journey, from the moment a nomination is submitted to the night
-            nine Education Icons and category winners are celebrated in Lagos.
+            One continuous cycle — nomination, verification, judging, broadcast and the
+            year-long Impact &amp; Legacy phase that follows.
           </p>
         </div>
       </section>
@@ -156,7 +172,10 @@ export default function Timeline() {
             </h2>
           </div>
 
-          <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4" aria-busy={status.loading || undefined}>
+          <div
+            className="grid gap-4 md:grid-cols-2 lg:grid-cols-4"
+            aria-busy={status.loading || undefined}
+          >
             {stages.map((s) => (
               <div
                 key={s.title}
@@ -184,35 +203,157 @@ export default function Timeline() {
         </div>
       </section>
 
-      {/* SECTION 2 — the full journey */}
-      <section className="ed-section" aria-labelledby="tl-journey">
+      {/* SECTION 2 — nomination windows at a glance */}
+      <section className="ed-section" aria-labelledby="tl-windows">
         <div className="ed-wrap">
           <div className="ed-section-head">
-            <div className="ed-eyebrow">Every pathway, one cycle</div>
-            <h2 id="tl-journey" className="ed-section-title">
-              The Full Journey
+            <div className="ed-eyebrow">Key dates</div>
+            <h2 id="tl-windows" className="ed-section-title">
+              Nomination Windows
             </h2>
+            <p className="mt-3 text-sm text-[#b0afa8]">
+              All pathways open {NOMINATIONS_OPEN_LABEL}. The Africa Education Icon Award
+              closes first ({ICON_WINDOW_LABEL}) so judging can complete; the certificate
+              pathways stay open to {CERTIFICATE_WINDOW_LABEL.split("– ")[1]}.
+            </p>
           </div>
 
-          <ol className="relative mx-auto max-w-3xl border-l border-[#c9a227]/25 pl-6">
-            {journey.map((j) => (
-              <li key={j.title} className="relative pb-10 last:pb-0">
-                <span
-                  aria-hidden
-                  className="absolute -left-[31px] top-1.5 h-2.5 w-2.5 rounded-full bg-[#c9a227]"
-                />
-                <div className="ed-mono text-xs uppercase tracking-[0.12em] text-[#e8c468]">
-                  {j.when}
+          <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+            {MASTER_TIMELINE_NOMINATION_WINDOWS.map((w) => (
+              <Link
+                key={w.id}
+                to={w.href}
+                className="rounded-2xl border border-[#c9a227]/20 bg-white/[0.03] p-6 transition hover:border-[#c9a227]/50"
+              >
+                <h3 className="font-serif text-lg text-[#f3efe6]">{w.tier}</h3>
+                <div className="ed-mono mt-2 text-xs uppercase tracking-[0.12em] text-[#e8c468]">
+                  {w.window}
                 </div>
-                <h3 className="mt-2 font-serif text-xl text-[#f3efe6]">{j.title}</h3>
-                <p className="mt-2 text-sm text-[#b0afa8]">{j.body}</p>
-              </li>
+                <p className="mt-3 text-sm text-[#b0afa8]">{w.verification}</p>
+              </Link>
             ))}
-          </ol>
+          </div>
         </div>
       </section>
 
-      {/* SECTION 3 — governance */}
+      {/* SECTION 3 — the full chronological schedule */}
+      <section className="ed-section ed-section-ink" aria-labelledby="tl-schedule">
+        <div className="ed-wrap">
+          <div className="ed-section-head">
+            <div className="ed-eyebrow">Every milestone, in order</div>
+            <h2 id="tl-schedule" className="ed-section-title">
+              The Full 2026 Schedule
+            </h2>
+          </div>
+
+          <div className="mx-auto max-w-3xl space-y-12">
+            {months.map((group) => (
+              <div key={group.key}>
+                <h3 className="ed-mono text-xs uppercase tracking-[0.2em] text-[#6b6a63]">
+                  {group.label}
+                </h3>
+                <ol className="mt-4 border-l border-[#c9a227]/25 pl-6">
+                  {group.items.map((e) => (
+                    <li key={e.id} className="relative pb-8 last:pb-0">
+                      <span
+                        aria-hidden
+                        className={`absolute -left-[31px] top-2 h-2.5 w-2.5 rounded-full ${
+                          e.highlight ? "bg-[#e8c468]" : "bg-[#c9a227]/50"
+                        }`}
+                      />
+                      <div className="flex flex-wrap items-center gap-2">
+                        <span className="ed-mono text-xs uppercase tracking-[0.12em] text-[#e8c468]">
+                          {e.dateLabel}
+                        </span>
+                        <span
+                          className={`rounded-full border px-2 py-0.5 text-[10px] uppercase tracking-[0.1em] ${TRACK_CHIP[e.track]}`}
+                        >
+                          {MASTER_TIMELINE_TRACK_LABELS[e.track]}
+                        </span>
+                        {e.toBeConfirmed && (
+                          <span className="rounded-full border border-white/15 bg-white/[0.04] px-2 py-0.5 text-[10px] uppercase tracking-[0.1em] text-[#b0afa8]">
+                            To be confirmed
+                          </span>
+                        )}
+                      </div>
+                      <h4 className="mt-2 font-serif text-lg text-[#f3efe6]">
+                        {e.href ? (
+                          <Link to={e.href} className="hover:text-[#e8c468]">
+                            {e.milestone}
+                          </Link>
+                        ) : (
+                          e.milestone
+                        )}
+                      </h4>
+                      <p className="mt-1 text-sm text-[#b0afa8]">{e.activity}</p>
+                      <p className="ed-mono mt-2 text-[11px] uppercase tracking-[0.12em] text-[#6b6a63]">
+                        {e.outcome}
+                      </p>
+                    </li>
+                  ))}
+                </ol>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* SECTION 4 — EduAid-Africa webinar weeks */}
+      <section className="ed-section" aria-labelledby="tl-webinars">
+        <div className="ed-wrap">
+          <div className="ed-section-head">
+            <div className="ed-eyebrow">EduAid-Africa Webinar Series</div>
+            <h2 id="tl-webinars" className="ed-section-title">
+              The Seven Webinar Weeks
+            </h2>
+            <p className="mt-3 text-sm text-[#b0afa8]">
+              Bi-weekly Thursdays, 27 August – 19 November 2026. Open each week for the full
+              theme and the recognition pathways it promotes.
+            </p>
+          </div>
+
+          <Accordion type="single" collapsible className="mx-auto max-w-3xl">
+            {EDUAID_WEBINAR_SERIES_2026.map((ep) => (
+              <AccordionItem
+                key={ep.id}
+                value={ep.id}
+                className="border-b border-[#c9a227]/20"
+              >
+                <AccordionTrigger className="text-left hover:no-underline">
+                  <span className="flex flex-col gap-1 pr-4">
+                    <span className="ed-mono text-xs uppercase tracking-[0.12em] text-[#e8c468]">
+                      Week {ep.episode} · {ep.dateLabel}
+                      {ep.pilot ? " · pilot" : ""}
+                    </span>
+                    <span className="font-serif text-lg text-[#f3efe6]">{ep.title}</span>
+                  </span>
+                </AccordionTrigger>
+                <AccordionContent>
+                  <p className="text-sm text-[#cfcdc5]">{ep.subtitle}</p>
+                  <div className="ed-mono mt-4 text-[11px] uppercase tracking-[0.14em] text-[#6b6a63]">
+                    Promotes
+                  </div>
+                  <ul className="mt-2 flex flex-wrap gap-2">
+                    {ep.promotes.map((p) => (
+                      <li
+                        key={p}
+                        className="rounded-full border border-[#c9a227]/25 bg-[#c9a227]/[0.08] px-3 py-1 text-xs text-[#e8c468]"
+                      >
+                        {p}
+                      </li>
+                    ))}
+                  </ul>
+                  <p className="mt-4 text-xs text-[#8a8981]">
+                    {ep.tiers} · {ep.competitiveLabel}
+                  </p>
+                </AccordionContent>
+              </AccordionItem>
+            ))}
+          </Accordion>
+        </div>
+      </section>
+
+      {/* SECTION 5 — governance */}
       <section className="ed-section ed-section-ink" aria-labelledby="tl-governance">
         <div className="ed-wrap max-w-3xl">
           <div className="ed-eyebrow">Governance</div>
@@ -229,7 +370,7 @@ export default function Timeline() {
         </div>
       </section>
 
-      {/* SECTION 4 — close */}
+      {/* SECTION 6 — close */}
       <section className="ed-section" aria-labelledby="tl-close">
         <div className="ed-wrap max-w-2xl text-center">
           <h2 id="tl-close" className="ed-section-title">

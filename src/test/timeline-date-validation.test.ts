@@ -92,7 +92,9 @@ describe("Timeline date validation — labels match their ISO periods", () => {
       if (parsed.unresolved) {
         // Only explicitly flagged open items may carry an unresolved label.
         expect(
-          entry.flagged || /^[A-Za-z]+\s+\d{4}/.test(entry.dateLabel),
+          entry.flagged ||
+            entry.toBeConfirmed ||
+            /^[A-Za-z]+\s+\d{4}/.test(entry.dateLabel),
           `${entry.id}: unparseable label must be a flagged open item`,
         ).toBe(true);
         return;
@@ -159,18 +161,18 @@ describe("Timeline anchors — Complete Timeline Set source values", () => {
   };
 
   const CASES: [string, string, string | undefined][] = [
-    ["pre-launch", "2026-07-01", "2026-08-30"],
-    ["nrc-member-onboarding", "2026-08-01", "2026-08-28"],
-    ["public-nominations-open", "2026-08-30", undefined],
-    ["icon-nominations", "2026-08-30", "2026-09-12"],
-    ["tier234-nominations", "2026-08-30", "2026-11-14"],
-    ["icon-judges-onboarding", "2026-09-12", "2026-09-25"],
-    ["nrc-icon-review", "2026-09-13", "2026-09-26"],
-    ["gold-blue-garnet-verification", "2026-09-16", "2026-12-13"],
-    ["judges-final-review", "2026-09-26", "2026-10-31"],
-    ["final-verification-gala-production", "2026-10-10", "2026-10-14"],
-    ["tv-show-1", "2026-11-15", undefined],
-    ["tv-show-2", "2026-12-01", undefined],
+    ["pre-launch", "2026-07-08", "2026-09-06"],
+    ["nrc-member-onboarding", "2026-08-08", "2026-09-04"],
+    ["public-nominations-open", "2026-09-06", undefined],
+    ["icon-nominations", "2026-09-06", "2026-09-19"],
+    ["tier234-nominations", "2026-09-06", "2026-11-21"],
+    ["icon-judges-onboarding", "2026-09-19", "2026-10-02"],
+    ["nrc-icon-review", "2026-09-20", "2026-10-03"],
+    ["gold-blue-garnet-verification", "2026-09-23", "2026-12-13"],
+    ["judges-final-review", "2026-10-03", "2026-11-07"],
+    ["final-verification-gala-production", "2026-11-09", "2026-11-13"],
+    ["tv-show-1", "2026-11-22", undefined],
+    ["tv-show-2", "2026-12-08", undefined],
     ["recognition-gala", "2026-12-13", undefined],
   ];
 
@@ -193,15 +195,15 @@ describe("Timeline anchors — Complete Timeline Set source values", () => {
     const byId = Object.fromEntries(
       MASTER_TIMELINE_NOMINATION_WINDOWS.map((w) => [w.id, w]),
     );
-    expect(byId.icon.window).toBe("30 August – 12 September 2026");
+    expect(byId.icon.window).toBe("6 – 19 September 2026");
     for (const id of ["gold-blue-garnet", "platinum", "influencer"]) {
-      expect(byId[id].window, id).toBe("30 August – 14 November 2026");
+      expect(byId[id].window, id).toBe("6 September – 21 November 2026");
     }
   });
 
-  it("the public notice opens nominations on 30 August 2026", () => {
-    expect(isoDay(MASTER_TIMELINE_PUBLIC_NOTICE.effectiveDate)).toBe("2026-08-30");
-    expect(MASTER_TIMELINE_PUBLIC_NOTICE.title).toContain("30 August 2026");
+  it("the public notice opens nominations on 6 September 2026", () => {
+    expect(isoDay(MASTER_TIMELINE_PUBLIC_NOTICE.effectiveDate)).toBe("2026-09-06");
+    expect(MASTER_TIMELINE_PUBLIC_NOTICE.title).toContain("6 September 2026");
   });
 });
 
@@ -214,16 +216,21 @@ const ALLOWLIST = new Set<string>([
   CANONICAL,
   "src/test/timeline-date-validation.test.ts",
   "src/data/recognitionJourney2026.ts",
+  "src/test/gala-countdown.test.ts",
+  "src/config/nominationWindows2026.ts",
+  "src/data/eduaidWebinarSeries2026.ts",
 ]);
 
 const RETIRED: { pattern: RegExp; reason: string }[] = [
-  { pattern: /\b1\s+August\s+2026\b/i, reason: "Retired nominations-open date — now 30 August 2026" },
-  { pattern: /\b22\s+October\s+2026\b/i, reason: "Retired Gala date — now 13 December 2026" },
+  { pattern: /\b1\s+August\s+2026\b/i, reason: "Retired nominations-open date — now 6 September 2026" },
+  { pattern: /\b30\s+August\s+2026\b/i, reason: "Retired nominations-open date — now 6 September 2026" },
+  { pattern: /(gala|ceremony)[^.\n]{0,60}\b22\s+October\s+2026\b/i, reason: "Retired Gala date — now 13 December 2026" },
+  { pattern: /\b14\s+December\s+2026\b/i, reason: "Retired Gala date — now 13 December 2026" },
   { pattern: /\b5\s+July\s+2026\b/i, reason: "Retired Platinum Recognition Show date" },
-  { pattern: /\b10\s+July\s+2026\b/i, reason: "Retired Icon nominations close date — now 12 September 2026" },
+  { pattern: /\b10\s+July\s+2026\b/i, reason: "Retired Icon nominations close date — now 19 September 2026" },
   { pattern: /\b29\s+June\s*[–—-]\s*10\s+July\s+2026\b/i, reason: "Retired Icon nominations window" },
-  { pattern: /\b1\s*[–—-]\s*30\s+July\s+2026\b/i, reason: "Retired pre-launch window — now 1 July – 30 August 2026" },
-  { pattern: /nominations?[^.\n]{0,40}\b30\s+September\s+2026\b/i, reason: "Retired nominations-close date — now 14 November 2026" },
+  { pattern: /\b1\s*[–—-]\s*30\s+July\s+2026\b/i, reason: "Retired pre-launch window — now 8 July – 6 September 2026" },
+  { pattern: /nominations?[^.\n]{0,40}\b30\s+September\s+2026\b/i, reason: "Retired nominations-close date — now 21 November 2026" },
   { pattern: /NESA-?Africa\s*2025\s*\/\s*26|نيسا-أفريقيا\s*2025\/26/i, reason: "Retired branding — use 'NESA-Africa 2026'" },
 
 ];
@@ -258,15 +265,18 @@ describe("Retired timeline dates are gone from src/", () => {
 
   it("the Timeline page consumes the canonical master timeline", () => {
     const page = readFileSync(join(process.cwd(), "src/pages/about/Timeline.tsx"), "utf8");
-    expect(page).toContain("MasterTimelineTable");
+    expect(page).toContain("MASTER_TIMELINE_CHRONOLOGICAL");
+    expect(page).toContain("EDUAID_WEBINAR_SERIES_2026");
+    // Internal production "open items" must never reach the public page.
+    expect(page).not.toMatch(/open items/i);
     expect(page).not.toMatch(/\bpublic vote\b/i);
   });
 
   it("the label parser detects a corrupted date (sanity check)", () => {
     const p = parseDateLabel("Tuesday, 18 August 2026");
     expect(dayOf(p.start!)).toBe("2026-08-18");
-    expect(parseDateLabel("30 August – 12 September 2026").end!.toISOString()).toContain(
-      "2026-09-12",
+    expect(parseDateLabel("6 – 19 September 2026").end!.toISOString()).toContain(
+      "2026-09-19",
     );
     expect(parseDateLabel("Date to be confirmed").unresolved).toBe(true);
   });

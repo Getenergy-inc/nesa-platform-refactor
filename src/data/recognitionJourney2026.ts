@@ -9,7 +9,6 @@ export type JourneyStatus =
   | "live"
   | "registration_open"
   | "nomination_open"
-  | "voting_open"
   | "closing_soon"
   | "closed";
 
@@ -52,7 +51,7 @@ export const RECOGNITION_JOURNEY_2026: JourneyPhase[] = [
     number: 1,
     name: "Public Pre-Nomination Activation",
     shortName: "Pre-Nomination Activation",
-    dateRange: "1 July – 30 August 2026",
+    dateRange: "1 July – 6 September 2026",
     startsAt: "2026-07-01T00:00:00Z",
     endsAt: "2026-08-30T23:59:59Z",
     status: "registration_open",
@@ -60,7 +59,7 @@ export const RECOGNITION_JOURNEY_2026: JourneyPhase[] = [
     iconName: "Megaphone",
     accent: "rose",
     purpose:
-      "Launch the continental awareness campaign, introduce the four recognition tiers and prepare the public to nominate Education Enablers. Public nominations for all four tiers open on 30 August 2026.",
+      "Launch the continental awareness campaign, introduce the four recognition tiers and prepare the public to nominate Education Enablers. Public nominations for all four tiers open on 6 September 2026.",
     description:
       "Activates public participation through storytelling, regional outreach, ambassador campaigns and educational content — uncovering outstanding people and organisations enabling Education for All across the Eight Africa Regions, the Diaspora and Friends of Africa.",
     participants: [
@@ -117,7 +116,7 @@ export const RECOGNITION_JOURNEY_2026: JourneyPhase[] = [
     number: 3,
     name: "Public Nominations Open — All 4 Tiers",
     shortName: "Nominations Open",
-    dateRange: "From 30 August 2026",
+    dateRange: "From 6 September 2026",
     startsAt: "2026-08-30T00:00:00Z",
     endsAt: "2026-11-14T23:59:59Z",
     status: "upcoming",
@@ -127,7 +126,7 @@ export const RECOGNITION_JOURNEY_2026: JourneyPhase[] = [
     purpose:
       "Open nominations simultaneously for Africa Education Icon, Gold-Blue Garnet, Platinum Recognition and Influencer Education Impact.",
     description:
-      "Two distinct windows apply: Africa Education Icon closes early on 12 September 2026 so judges can complete their review, while Gold-Blue Garnet, Platinum Recognition and Influencer Education Impact stay open to 14 November 2026 — giving nominees time to request physical printed certificates before the Gala.",
+      "Two distinct windows apply: Africa Education Icon closes early on 19 September 2026 so judges can complete their review, while Gold-Blue Garnet, Platinum Recognition and Influencer Education Impact stay open to 21 November 2026 — giving nominees time to request physical printed certificates before the Gala.",
     selection: "NRC verification · Independent judging for Icon only",
     outcomes: ["Steady flow of nominations across all four tiers"],
     ctas: [{ label: "Nominate an Enabler", to: "/nominate" }],
@@ -137,7 +136,7 @@ export const RECOGNITION_JOURNEY_2026: JourneyPhase[] = [
     number: 4,
     name: "Africa Education Icon Nominations",
     shortName: "Icon Nominations",
-    dateRange: "30 August – 12 September 2026",
+    dateRange: "6 – 19 September 2026",
     startsAt: "2026-08-30T00:00:00Z",
     endsAt: "2026-09-12T23:59:59Z",
     status: "upcoming",
@@ -165,7 +164,7 @@ export const RECOGNITION_JOURNEY_2026: JourneyPhase[] = [
     number: 5,
     name: "Gold-Blue Garnet, Platinum & Influencer Nominations",
     shortName: "Tiers 2–4 Nominations",
-    dateRange: "30 August – 14 November 2026",
+    dateRange: "6 September – 21 November 2026",
     startsAt: "2026-08-30T00:00:00Z",
     endsAt: "2026-11-14T23:59:59Z",
     status: "upcoming",
@@ -175,7 +174,7 @@ export const RECOGNITION_JOURNEY_2026: JourneyPhase[] = [
     purpose:
       "Receive nominations for Gold-Blue Garnet, Platinum Recognition and Influencer Education Impact — all NRC-verified Certificates of Recognition.",
     description:
-      "The extended window closes on 14 November 2026 so verified Enablers have time to request physical printed certificates ahead of the Recognition Gala. These tiers are recognition-based, not competitive contests.",
+      "The extended window closes on 21 November 2026 so verified Enablers have time to request physical printed certificates ahead of the Recognition Gala. These tiers are recognition-based, not competitive contests.",
     selection: "NRC verification against the EDI Matrix · No public vote",
     outcomes: ["Verified Certificates of Recognition across three tiers"],
     ctas: [{ label: "Choose Your Category", to: "/nominate" }],
@@ -368,7 +367,6 @@ export const STATUS_LABELS: Record<JourneyStatus, string> = {
   live: "Live",
   registration_open: "Registration Open",
   nomination_open: "Nomination Open",
-  voting_open: "Voting Open",
   closing_soon: "Closing Soon",
   closed: "Closed",
 };
@@ -381,7 +379,6 @@ export function computeLiveStatus(phase: JourneyPhase, now: Date = new Date()): 
   if (t < start) return phase.status === "registration_open" ? "registration_open" : "upcoming";
   if (t > end) return "closed";
   // active window
-  if (phase.id.includes("voting")) return "voting_open";
   if (phase.id.includes("nomination")) return "nomination_open";
   if (phase.status === "registration_open") return "registration_open";
   return "current";

@@ -4,7 +4,7 @@ import { CalendarDays, Megaphone, ShieldCheck, Trophy, Sparkles, FileCheck } fro
  * Influencer Education Impact 2026 — project timeline.
  *
  * Dates are fixed to the "NESA-Africa 2026 — Complete Timeline Set":
- *   • Nominations: 30 August – 14 November 2026 (Influencer tier)
+ *   • Nominations: 6 September – 21 November 2026 (Influencer tier)
  *   • Rolling NRC verification: 16 September – 13 December 2026
  *   • Gala: Sunday, 13 December 2026
  * There is no public voting in this tier — recognition is NRC-verified.
@@ -21,7 +21,7 @@ interface TimelineMilestone {
 const MILESTONES: TimelineMilestone[] = [
   {
     id: "launch",
-    date: "Sunday, 30 August 2026",
+    date: "Sunday, 6 September 2026",
     phase: "Nominations Open",
     description:
       "Public and institutional nominations open across the three Influencer Education Impact subcategories — Social Media, Sports and Music.",
@@ -37,7 +37,7 @@ const MILESTONES: TimelineMilestone[] = [
   },
   {
     id: "close",
-    date: "Saturday, 14 November 2026",
+    date: "Saturday, 21 November 2026",
     phase: "Nominations Close",
     description:
       "The Influencer Education Impact nomination window closes. Late submissions are carried into the next recognition cycle.",
@@ -78,7 +78,7 @@ export function ProjectTimelineSection() {
             Project Timeline
           </p>
           <h2 className="font-display text-3xl md:text-4xl font-bold text-white mb-4">
-            From 30 August 2026 to the 13 December 2026 Gala
+            From 6 September 2026 to the 13 December 2026 Gala
           </h2>
           <p className="text-white/70">
             The complete project timeline for the NESA-Africa 2026 Influencer Education

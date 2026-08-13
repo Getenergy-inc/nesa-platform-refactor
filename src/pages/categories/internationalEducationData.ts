@@ -133,7 +133,7 @@ export const EDI_ROWS: Array<{ area: string; score: number; measured: string }> 
 ];
 
 export const TIMELINE_ROWS = [
-  { step: "Nominations open", date: "1 August – 12 September 2026", what: "Submit partner nominations and supporting evidence via the online portal" },
+  { step: "Nominations open", date: "6 September – 21 November 2026", what: "Submit partner nominations and supporting evidence via the online portal" },
   { step: "EDI Verification", date: "September 2026", what: "SCEF panels score submissions against the EDI Matrix (Evidence, Development Impact, Institutional Sustainability)" },
   { step: "NESA-Africa Recognition Gala", date: "13 December 2026", what: "Certificates awarded; feature spotlight on NESA TV" },
 ];

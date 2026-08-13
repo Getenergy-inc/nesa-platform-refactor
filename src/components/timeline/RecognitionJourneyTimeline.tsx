@@ -50,14 +50,14 @@ const ICONS: Record<string, React.ComponentType<{ className?: string }>> = {
   Clapperboard,
 };
 
-const ACCENTS: Record<JourneyPhase["accent"], { ring: string; chip: string; dot: string; glow: string }> = {
-  amber: { ring: "ring-amber-500/40", chip: "bg-amber-500/15 text-amber-200 border-amber-500/30", dot: "bg-amber-400", glow: "shadow-[0_0_30px_-10px_rgba(245,158,11,0.6)]" },
-  blue: { ring: "ring-blue-500/40", chip: "bg-blue-500/15 text-blue-200 border-blue-500/30", dot: "bg-blue-400", glow: "shadow-[0_0_30px_-10px_rgba(59,130,246,0.6)]" },
-  slate: { ring: "ring-slate-400/40", chip: "bg-slate-400/15 text-slate-200 border-slate-400/30", dot: "bg-slate-300", glow: "shadow-[0_0_30px_-10px_rgba(148,163,184,0.6)]" },
-  yellow: { ring: "ring-yellow-500/40", chip: "bg-yellow-500/15 text-yellow-200 border-yellow-500/30", dot: "bg-yellow-400", glow: "shadow-[0_0_30px_-10px_rgba(234,179,8,0.6)]" },
-  emerald: { ring: "ring-emerald-500/40", chip: "bg-emerald-500/15 text-emerald-200 border-emerald-500/30", dot: "bg-emerald-400", glow: "shadow-[0_0_30px_-10px_rgba(16,185,129,0.6)]" },
-  violet: { ring: "ring-violet-500/40", chip: "bg-violet-500/15 text-violet-200 border-violet-500/30", dot: "bg-violet-400", glow: "shadow-[0_0_30px_-10px_rgba(139,92,246,0.6)]" },
-  rose: { ring: "ring-rose-500/40", chip: "bg-rose-500/15 text-rose-200 border-rose-500/30", dot: "bg-rose-400", glow: "shadow-[0_0_30px_-10px_rgba(244,63,94,0.6)]" },
+const ACCENTS: Record<JourneyPhase["accent"], { ring: string; chip: string; dot: string; glow: string; icon: string }> = {
+  amber: { ring: "ring-amber-500/40", chip: "bg-amber-500/15 text-amber-200 border-amber-500/30", dot: "bg-amber-400", glow: "shadow-[0_0_30px_-10px_rgba(245,158,11,0.6)]" , icon: "text-amber-300" },
+  blue: { ring: "ring-blue-500/40", chip: "bg-blue-500/15 text-blue-200 border-blue-500/30", dot: "bg-blue-400", glow: "shadow-[0_0_30px_-10px_rgba(59,130,246,0.6)]" , icon: "text-blue-300" },
+  slate: { ring: "ring-slate-400/40", chip: "bg-slate-400/15 text-slate-200 border-slate-400/30", dot: "bg-slate-300", glow: "shadow-[0_0_30px_-10px_rgba(148,163,184,0.6)]" , icon: "text-slate-300" },
+  yellow: { ring: "ring-yellow-500/40", chip: "bg-yellow-500/15 text-yellow-200 border-yellow-500/30", dot: "bg-yellow-400", glow: "shadow-[0_0_30px_-10px_rgba(234,179,8,0.6)]" , icon: "text-yellow-300" },
+  emerald: { ring: "ring-emerald-500/40", chip: "bg-emerald-500/15 text-emerald-200 border-emerald-500/30", dot: "bg-emerald-400", glow: "shadow-[0_0_30px_-10px_rgba(16,185,129,0.6)]" , icon: "text-emerald-300" },
+  violet: { ring: "ring-violet-500/40", chip: "bg-violet-500/15 text-violet-200 border-violet-500/30", dot: "bg-violet-400", glow: "shadow-[0_0_30px_-10px_rgba(139,92,246,0.6)]" , icon: "text-violet-300" },
+  rose: { ring: "ring-rose-500/40", chip: "bg-rose-500/15 text-rose-200 border-rose-500/30", dot: "bg-rose-400", glow: "shadow-[0_0_30px_-10px_rgba(244,63,94,0.6)]" , icon: "text-rose-300" },
 };
 
 const STATUS_TONE: Record<JourneyStatus, string> = {
@@ -67,7 +67,6 @@ const STATUS_TONE: Record<JourneyStatus, string> = {
   live: "bg-rose-500/20 text-rose-100 border-rose-500/40 animate-pulse",
   registration_open: "bg-rose-500/15 text-rose-200 border-rose-500/30",
   nomination_open: "bg-amber-500/15 text-amber-200 border-amber-500/30",
-  voting_open: "bg-blue-500/15 text-blue-200 border-blue-500/30",
   closing_soon: "bg-orange-500/20 text-orange-100 border-orange-500/40",
   closed: "bg-white/5 text-white/50 border-white/10",
 };
@@ -100,7 +99,7 @@ function PhaseCard({ phase, side, expanded, onToggle }: PhaseCardProps) {
   const accent = ACCENTS[phase.accent];
   const liveStatus = computeLiveStatus(phase);
   const progress = phaseProgress(phase);
-  const showCountdown = ["registration_open", "nomination_open", "voting_open", "current", "closing_soon", "upcoming"].includes(liveStatus);
+  const showCountdown = ["registration_open", "nomination_open", "current", "closing_soon", "upcoming"].includes(liveStatus);
   const countdownTarget = liveStatus === "upcoming" ? phase.startsAt : phase.endsAt;
   const countdownLabel = liveStatus === "upcoming" ? "Starts in" : "Ends in";
 
@@ -331,7 +330,7 @@ export function RecognitionJourneyTimeline({
                 {/* Node */}
                 <div className="absolute left-4 top-6 z-10 -translate-x-1/2 md:left-1/2">
                   <div className={cn("flex h-5 w-5 items-center justify-center rounded-full ring-4 ring-charcoal", accent.chip)}>
-                    <CircleDot className={cn("h-3 w-3", `text-${phase.accent}-300`)} />
+                    <CircleDot className={cn("h-3 w-3", accent.icon)} />
                   </div>
                 </div>
 

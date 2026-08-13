@@ -2,7 +2,7 @@
 //
 // Section order:
 //   1.  Editorial hero (Icon Award lead, 6 certificate pills, dual CTA, trophy card)
-//   2.  Public nominations notice (30 August 2026) + compact Icon key-dates ticker
+//   2.  Public nominations notice (6 September 2026) + compact Icon key-dates ticker
 //   3.  Meet Africa's Education Enablers — living gallery (database-driven)
 //   4.  Africa Education Icon flagship + three pathway cards (ONE Icon moment)
 //   5.  Icon scale stats (live)
@@ -80,7 +80,7 @@ export function NESALandingPage() {
         )}
         description={t(
           "seo.landing.description",
-          "Recognising the Enablers of Education for All Across Africa. Nominations open 30 August 2026 across 4 tiers, 22 categories and 96 subcategories.",
+          "Recognising the Enablers of Education for All Across Africa. Nominations open 6 September 2026 across 4 tiers, 22 categories and 96 subcategories.",
         )}
         ogTitle={t("seo.landing.ogTitle", "NESA-Africa 2026 — A Continent in Recognition")}
         ogDescription={t(
@@ -99,7 +99,7 @@ export function NESALandingPage() {
         {/* 1. HERO */}
         <EditorialHero />
 
-        {/* 2. PUBLIC NOTICE — nominations open 30 August 2026 */}
+        {/* 2. PUBLIC NOTICE — nominations open 6 September 2026 */}
         <PublicNominationsNotice />
 
         {/* 3. AFRICA EDUCATION ICON — the single flagship moment: intro band,

@@ -15,6 +15,12 @@ import {
   PROGRAMME_END_LONG_LABEL,
   GALA_COUNTDOWN_DATETIME,
 } from "@/config/programme";
+import {
+  NOMINATIONS_OPEN_LABEL,
+  ICON_WINDOW_LABEL,
+  ICON_WINDOW_CLOSE_LABEL,
+  ICON_RECIPIENTS_CONFIRMED_LABEL,
+} from "@/config/nominationWindows2026";
 
 // ── 1. Brand hierarchy (locked) ─────────────────────────────────────────────
 
@@ -30,7 +36,7 @@ export const BRAND = {
   flagshipTagline:
     "Celebrating the people whose lifetime contributions have helped shape African education.",
   cycleLabel: "NESA-Africa 2026",
-  nominationsOpenLabel: "30 August 2026",
+  nominationsOpenLabel: NOMINATIONS_OPEN_LABEL,
   galaLabel: PROGRAMME_END_LABEL,
   galaLongLabel: PROGRAMME_END_LONG_LABEL,
   galaCountdownIso: GALA_COUNTDOWN_DATETIME,
@@ -171,7 +177,7 @@ export const ICON_GOVERNANCE_STATEMENT = [
 /**
  * Africa Education Icon Award — 2026 nomination timeline.
  * Dates mirror the canonical programme configuration:
- *   open  30 August 2026, close 12 September 2026 (recognition2026 categories),
+ *   open  6 September 2026, Icon closes 19 September 2026, certificate tiers 21 November 2026,
  *   Gala  PROGRAMME_END_LABEL (13 December 2026).
  * No selection/finalist date exists in backend config, so that step is
  * intentionally left open-ended rather than fabricated.
@@ -182,26 +188,26 @@ export const ICON_NOMINATION_TIMELINE = {
     {
       key: "open",
       label: "Public Nominations Open",
-      when: "30 August 2026",
+      when: NOMINATIONS_OPEN_LABEL,
       body: "Anyone can nominate an Education Enabler for the flagship lifetime honour.",
     },
     {
       key: "window",
       label: "Nomination Window",
-      when: "30 August – 12 September 2026",
-      body: "Icon nominations close at 23:59 WAT on 12 September 2026.",
+      when: ICON_WINDOW_LABEL,
+      body: `Icon nominations close at 23:59 WAT on ${ICON_WINDOW_CLOSE_LABEL}.`,
     },
     {
       key: "review",
       label: "Review & Verification",
-      when: "After nominations close",
-      body: "The Nomination Review Committee and governance processes review submissions, eligibility and supporting evidence.",
+      when: "20 September – 3 October 2026",
+      body: "The Nominee Research Corps verifies every Icon nomination — eligibility, identity and supporting evidence — before dossiers reach the Judges Arena.",
     },
     {
       key: "selection",
       label: "Icon Selection",
-      when: "Date to be confirmed",
-      body: "Following formal review and governance process, successful nominees progress toward final recognition.",
+      when: ICON_RECIPIENTS_CONFIRMED_LABEL,
+      body: "Judges complete their final review (3 October – 7 November) and all nine Africa Education Icon recipients are confirmed.",
     },
     {
       key: "gala",

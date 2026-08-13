@@ -372,7 +372,7 @@ export function FaithCategoryPage({ config }: { config: FaithCategoryConfig }) {
           <SectionHeading eyebrow="2026 season" title="Platinum recognition timeline" />
           <div className="space-y-3">
             {[
-              { step: "Nominations open", date: "1 August – 12 September 2026", what: "Submit institution nominations and supporting evidence via the online portal." },
+              { step: "Nominations open", date: "6 September – 21 November 2026", what: "Submit institution nominations and supporting evidence via the online portal." },
               { step: "EDI Verification", date: "September 2026", what: "SCEF panels score submissions against the EDI Matrix." },
               { step: "NESA-Africa Recognition Gala", date: "13 December 2026", what: "Certificates awarded; feature spotlight on NESA TV." },
             ].map((row) => (

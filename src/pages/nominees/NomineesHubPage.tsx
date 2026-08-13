@@ -147,7 +147,7 @@ export default function NomineesHubPage() {
             <div className="ed-dir-hero-inner">
               <div className="ed-badge">
                 <Sparkles className="h-3.5 w-3.5" aria-hidden="true" />
-                NOMINATIONS OPEN 30 AUGUST 2026 · NESA-AFRICA 2026
+                NOMINATIONS OPEN 6 SEPTEMBER 2026 · NESA-AFRICA 2026
               </div>
 
               <div className="ed-kicker" style={{ marginTop: 18 }}>
@@ -367,7 +367,7 @@ export default function NomineesHubPage() {
                   Someone You Know Belongs in This Register
                 </h2>
                 <p className="ed-section-sub">
-                  Nominations open 30 August 2026. Submission is free, and you can create your
+                  Nominations open 6 September 2026. Submission is free, and you can create your
                   account at the moment you submit.
                 </p>
               </div>
