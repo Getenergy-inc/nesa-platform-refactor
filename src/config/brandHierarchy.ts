@@ -182,26 +182,26 @@ export const ICON_NOMINATION_TIMELINE = {
     {
       key: "open",
       label: "Public Nominations Open",
-      when: "30 August 2026",
+      when: NOMINATIONS_OPEN_LABEL,
       body: "Anyone can nominate an Education Enabler for the flagship lifetime honour.",
     },
     {
       key: "window",
       label: "Nomination Window",
-      when: "30 August – 12 September 2026",
-      body: "Icon nominations close at 23:59 WAT on 12 September 2026.",
+      when: ICON_WINDOW_LABEL,
+      body: `Icon nominations close at 23:59 WAT on ${ICON_WINDOW_CLOSE_LABEL}.`,
     },
     {
       key: "review",
       label: "Review & Verification",
-      when: "After nominations close",
-      body: "The Nomination Review Committee and governance processes review submissions, eligibility and supporting evidence.",
+      when: "20 September – 3 October 2026",
+      body: "The Nominee Research Corps verifies every Icon nomination — eligibility, identity and supporting evidence — before dossiers reach the Judges Arena.",
     },
     {
       key: "selection",
       label: "Icon Selection",
-      when: "Date to be confirmed",
-      body: "Following formal review and governance process, successful nominees progress toward final recognition.",
+      when: ICON_RECIPIENTS_CONFIRMED_LABEL,
+      body: "Judges complete their final review (3 October – 7 November) and all nine Africa Education Icon recipients are confirmed.",
     },
     {
       key: "gala",
