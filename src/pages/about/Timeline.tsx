@@ -82,6 +82,7 @@ export default function Timeline() {
 
   const nrcActive = (status.nrcQueued ?? 0) + (status.nrcVerified ?? 0) > 0;
   const judgesActive = (status.judgeAssignments ?? 0) > 0 && (status.activeJudges ?? 0) > 0;
+  const nominationsOpen = Date.now() >= new Date(`${NOMINATIONS_OPEN_ISO}T00:00:00Z`).getTime();
 
   const stages: {
     step: string;
