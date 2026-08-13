@@ -2062,13 +2062,13 @@ const App = () => (
                     element={<NRCProtectedRoute><NRCTeamDetail /></NRCProtectedRoute>}
                   />
 
-                  {/* NRC operational pages (legacy screens retained) */}
-                  <Route path="/nrc/my-queue" element={<NRCMyQueue />} />
-                  <Route path="/nrc/members" element={<NRCMembersPage />} />
-                  <Route path="/nrc/settings" element={<NRCSettings />} />
+                  {/* NRC operational pages (legacy screens retained) — role-gated */}
+                  <Route path="/nrc/my-queue" element={<NRCProtectedRoute><NRCMyQueue /></NRCProtectedRoute>} />
+                  <Route path="/nrc/members" element={<NRCProtectedRoute><NRCMembersPage /></NRCProtectedRoute>} />
+                  <Route path="/nrc/settings" element={<NRCProtectedRoute><NRCSettings /></NRCProtectedRoute>} />
                   <Route
                     path="/nrc/scoring"
-                    element={<NRCScoringDashboard />}
+                    element={<NRCProtectedRoute><NRCScoringDashboard /></NRCProtectedRoute>}
                   />
 
                   {/* NRC Dashboard — new arena dashboard */}
@@ -2088,59 +2088,59 @@ const App = () => (
                   <Route path="/nrc/automation" element={<NRCProtectedRoute><NRCAutomation /></NRCProtectedRoute>} />
                   <Route
                     path="/nrc/dashboard/nominees"
-                    element={<NRCNomineeTable />}
+                    element={<NRCProtectedRoute><NRCNomineeTable /></NRCProtectedRoute>}
                   />
                   <Route
                     path="/nrc/dashboard/review/:id"
-                    element={<NRCNomineeReview />}
+                    element={<NRCProtectedRoute><NRCNomineeReview /></NRCProtectedRoute>}
                   />
                   <Route
                     path="/nrc/dashboard/reports"
-                    element={<NRCReports />}
+                    element={<NRCProtectedRoute><NRCReports /></NRCProtectedRoute>}
                   />
                   <Route
                     path="/nrc/dashboard/flagged"
-                    element={<NRCFlaggedCases />}
+                    element={<NRCProtectedRoute><NRCFlaggedCases /></NRCProtectedRoute>}
                   />
                   <Route
                     path="/nrc/dashboard/my-reviews"
-                    element={<NRCMyReviews />}
+                    element={<NRCProtectedRoute><NRCMyReviews /></NRCProtectedRoute>}
                   />
                   <Route
                     path="/nrc/dashboard/queue"
-                    element={<NRCNomineeTable />}
+                    element={<NRCProtectedRoute><NRCNomineeTable /></NRCProtectedRoute>}
                   />
                   <Route
                     path="/nrc/dashboard/intake"
-                    element={<NRCIntakeQueue />}
+                    element={<NRCProtectedRoute><NRCIntakeQueue /></NRCProtectedRoute>}
                   />
                   <Route
                     path="/nrc/dashboard/intake/:id"
-                    element={<NRCIntakeReview />}
+                    element={<NRCProtectedRoute><NRCIntakeReview /></NRCProtectedRoute>}
                   />
                   <Route
                     path="/nrc/dashboard/merge"
-                    element={<NRCMergeTool />}
+                    element={<NRCProtectedRoute><NRCMergeTool /></NRCProtectedRoute>}
                   />
                   <Route
                     path="/nrc/dashboard/duplicates"
-                    element={<NRCMergeTool />}
+                    element={<NRCProtectedRoute><NRCMergeTool /></NRCProtectedRoute>}
                   />
                   <Route
                     path="/nrc/dashboard/guidelines"
-                    element={<NRCSettings />}
+                    element={<NRCProtectedRoute><NRCSettings /></NRCProtectedRoute>}
                   />
                   <Route
                     path="/nrc/dashboard/edi-analytics"
-                    element={<EDIAnalyticsDashboard />}
+                    element={<NRCProtectedRoute><EDIAnalyticsDashboard /></NRCProtectedRoute>}
                   />
                   <Route
                     path="/nrc/dashboard/profile"
-                    element={<NRCSettings />}
+                    element={<NRCProtectedRoute><NRCSettings /></NRCProtectedRoute>}
                   />
                   <Route
                     path="/nrc/dashboard/settings"
-                    element={<NRCSettings />}
+                    element={<NRCProtectedRoute><NRCSettings /></NRCProtectedRoute>}
                   />
 
                   {/* OLC Coordinator Routes - use their own layout */}
