@@ -99,7 +99,7 @@ function PhaseCard({ phase, side, expanded, onToggle }: PhaseCardProps) {
   const accent = ACCENTS[phase.accent];
   const liveStatus = computeLiveStatus(phase);
   const progress = phaseProgress(phase);
-  const showCountdown = ["registration_open", "nomination_open", "voting_open", "current", "closing_soon", "upcoming"].includes(liveStatus);
+  const showCountdown = ["registration_open", "nomination_open", "current", "closing_soon", "upcoming"].includes(liveStatus);
   const countdownTarget = liveStatus === "upcoming" ? phase.startsAt : phase.endsAt;
   const countdownLabel = liveStatus === "upcoming" ? "Starts in" : "Ends in";
 
