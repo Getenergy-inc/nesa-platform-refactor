@@ -216,6 +216,7 @@ const ALLOWLIST = new Set<string>([
   CANONICAL,
   "src/test/timeline-date-validation.test.ts",
   "src/data/recognitionJourney2026.ts",
+  "src/test/gala-countdown.test.ts",
   "src/config/nominationWindows2026.ts",
   "src/data/eduaidWebinarSeries2026.ts",
 ]);
