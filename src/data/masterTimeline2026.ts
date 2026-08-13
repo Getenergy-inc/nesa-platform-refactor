@@ -4,7 +4,7 @@
 //
 // Governance notes carried from the corrected source document:
 //  • Public nominations open 6 September 2026 (supersedes 30 August).
-//  • Africa Education Icon nominations: 6 – 19 September 2026.
+//  • Africa Education Icon nominations: 6 September – 6 October 2026.
 //  • Gold-Blue Garnet, Platinum & Influencer Education Impact:
 //    6 September – 21 November 2026.
 //  • Recognition Gala: 13 December 2026, Lagos — re-confirmed, unchanged.
@@ -193,7 +193,7 @@ export const MASTER_TIMELINE_2026: MasterTimelineEntry[] = [
     id: "icon-nominations",
     dateLabel: ICON_WINDOW_LABEL,
     startsAt: "2026-09-06T00:00:00Z",
-    endsAt: "2026-09-19T23:59:59Z",
+    endsAt: "2026-10-06T23:59:59Z",
     milestone: "Africa Education Icon Nominations",
     activity:
       "Receive nominations and evidence for the three Icon subcategories across three origin groups (2006–2026 eligibility window).",
@@ -249,8 +249,8 @@ export const MASTER_TIMELINE_2026: MasterTimelineEntry[] = [
   },
   {
     id: "icon-nominations-close",
-    dateLabel: `Saturday, ${ICON_WINDOW_CLOSE_LABEL}`,
-    startsAt: "2026-09-19T00:00:00Z",
+    dateLabel: `Tuesday, ${ICON_WINDOW_CLOSE_LABEL}`,
+    startsAt: "2026-10-06T00:00:00Z",
     milestone: "Africa Education Icon Nominations Close",
     activity: "Close Icon nominations and hand the pool to the NRC.",
     outcome: "Begin NRC review of all Icon nominees",
@@ -258,9 +258,9 @@ export const MASTER_TIMELINE_2026: MasterTimelineEntry[] = [
   },
   {
     id: "icon-judges-onboarding",
-    dateLabel: "19 September – 2 October 2026",
-    startsAt: "2026-09-19T00:00:00Z",
-    endsAt: "2026-10-02T23:59:59Z",
+    dateLabel: "6 – 19 October 2026",
+    startsAt: "2026-10-06T00:00:00Z",
+    endsAt: "2026-10-19T23:59:59Z",
     milestone: "Icon Judges' Onboarding & Calibration",
     activity:
       "Confirm 27 judges, conflict-of-interest declarations, rubric training and sample scoring. Judges Arena opens for onboarding with no live nominee data.",
@@ -270,9 +270,9 @@ export const MASTER_TIMELINE_2026: MasterTimelineEntry[] = [
   },
   {
     id: "nrc-icon-review",
-    dateLabel: "20 September – 3 October 2026",
-    startsAt: "2026-09-20T00:00:00Z",
-    endsAt: "2026-10-03T23:59:59Z",
+    dateLabel: "7 – 20 October 2026",
+    startsAt: "2026-10-07T00:00:00Z",
+    endsAt: "2026-10-20T23:59:59Z",
     milestone: "NRC Review of All Icon Nominees → Judges Arena",
     activity:
       "The Nominee Research Corps verifies every Icon nomination and pushes the verified dossiers into the Judges Arena.",
@@ -325,8 +325,8 @@ export const MASTER_TIMELINE_2026: MasterTimelineEntry[] = [
   },
   {
     id: "judges-final-review",
-    dateLabel: "3 October – 7 November 2026",
-    startsAt: "2026-10-03T00:00:00Z",
+    dateLabel: "20 October – 7 November 2026",
+    startsAt: "2026-10-20T00:00:00Z",
     endsAt: "2026-11-07T23:59:59Z",
     milestone: "Judges' Final Review & Selection — all 9 Icon pathways",
     activity:

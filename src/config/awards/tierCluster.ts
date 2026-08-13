@@ -123,7 +123,7 @@ const ICON: TierClusterConfig = {
       "Undisclosed conflicts of interest",
     ],
     timelineNote:
-      "Icon nominations open 6 September 2026 and close 19 September 2026. Governance-approved laureates are announced at the NESA-Africa 2026 Recognition Gala on 13 December 2026 in Lagos.",
+      "Icon nominations open 6 September 2026 and close 6 October 2026. Governance-approved laureates are announced at the NESA-Africa 2026 Recognition Gala on 13 December 2026 in Lagos.",
   },
 
   nominees: {

@@ -177,7 +177,7 @@ export const ICON_GOVERNANCE_STATEMENT = [
 /**
  * Africa Education Icon Award — 2026 nomination timeline.
  * Dates mirror the canonical programme configuration:
- *   open  6 September 2026, Icon closes 19 September 2026, certificate tiers 21 November 2026,
+ *   open  6 September 2026, Icon closes 6 October 2026, certificate tiers 21 November 2026,
  *   Gala  PROGRAMME_END_LABEL (13 December 2026).
  * No selection/finalist date exists in backend config, so that step is
  * intentionally left open-ended rather than fabricated.

@@ -96,7 +96,7 @@ export const AWARD_TIERS_2026: AwardTier2026[] = [
     voteMechanicLabel: "Jury selected only · No public vote",
     cta: "Nominate",
     ctaHref: "/awards/icon",
-    keyDates: "Icon Show 12 Jul 2026 · Nominations 6 – 19 Sep 2026",
+    keyDates: "Icon Show 12 Jul 2026 · Nominations 6 Sep – 6 Oct 2026",
     categories: [
       {
         id: 17,
