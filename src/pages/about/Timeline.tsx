@@ -8,8 +8,8 @@
 //  • Nomination windows → @/config/nominationWindows2026
 //  • Gala               → @/config/programme
 //
-// The source document's "Open items carried into this version" section is
-// internal editorial/production content and is deliberately NOT rendered.
+// The source document's internal editorial/production checklist section is
+// deliberately NOT rendered on this public page.
 
 import { Link } from "react-router-dom";
 import { AboutSeo } from "@/pages/about/AboutSeo";

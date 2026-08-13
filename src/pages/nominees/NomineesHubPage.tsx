@@ -147,7 +147,7 @@ export default function NomineesHubPage() {
             <div className="ed-dir-hero-inner">
               <div className="ed-badge">
                 <Sparkles className="h-3.5 w-3.5" aria-hidden="true" />
-                NOMINATIONS OPEN 30 AUGUST 2026 · NESA-AFRICA 2026
+                NOMINATIONS OPEN 6 SEPTEMBER 2026 · NESA-AFRICA 2026
               </div>
 
               <div className="ed-kicker" style={{ marginTop: 18 }}>
