@@ -7013,7 +7013,7 @@ export type Database = {
           created_at: string | null
           decision_at: string | null
           evidence_verified: boolean | null
-          final_decision: string
+          final_decision: string | null
           id: string
           identity_verified: boolean | null
           lead_reviewer_id: string | null
@@ -7037,7 +7037,7 @@ export type Database = {
           created_at?: string | null
           decision_at?: string | null
           evidence_verified?: boolean | null
-          final_decision: string
+          final_decision?: string | null
           id?: string
           identity_verified?: boolean | null
           lead_reviewer_id?: string | null
@@ -7061,7 +7061,7 @@ export type Database = {
           created_at?: string | null
           decision_at?: string | null
           evidence_verified?: boolean | null
-          final_decision?: string
+          final_decision?: string | null
           id?: string
           identity_verified?: boolean | null
           lead_reviewer_id?: string | null
