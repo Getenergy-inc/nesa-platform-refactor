@@ -663,7 +663,7 @@ export default function NominateHub2026() {
       {/* Announcement bar */}
       <div className="border-b border-gold/20 bg-black/40">
         <div className="container mx-auto px-4 py-2 text-center text-xs sm:text-sm text-gold">
-          Public Nominations Open · 30 August 2026 — NESA-Africa 2026
+          Public Nominations Open · 6 September 2026 — NESA-Africa 2026
         </div>
       </div>
 

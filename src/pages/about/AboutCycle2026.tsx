@@ -39,17 +39,17 @@ const PHASES_2026: TimelinePhase[] = [
   },
   {
     phaseName: "Nominations Open",
-    window: "30 Aug – 20 Nov 2026",
+    window: "6 Sep – 21 Nov 2026",
     status: "upcoming",
     spotlight: true,
     events: [
-      { date: "30 Aug", title: "Public Nominations Open — all four tiers" },
-      { date: "30 Aug – 5 Sep", title: "Africa Education Icon window", detail: "Independent, shorter closing date" },
+      { date: "6 Sep", title: "Public Nominations Open — all four tiers" },
+      { date: "6 – 19 Sep", title: "Africa Education Icon window", detail: "Independent, shorter closing date" },
     ],
   },
   {
     phaseName: "NRC Verification",
-    window: "30 Aug – 20 Dec 2026",
+    window: "6 Sep – 21 Nov 2026",
     status: "upcoming",
     events: [
       { date: "By 10 Sep", title: "Icon NRC verification complete" },
@@ -105,7 +105,7 @@ export default function AboutCycle2026() {
           { name: "NESA-Africa 2026", path: "/about/nesa-africa-2026" },
         ]}
         faqs={[
-          { question: "When do NESA-Africa 2026 nominations open?", answer: "Public nominations open 30 August 2026 across all four tiers. The Africa Education Icon Award nomination window runs 30 August – 5 September 2026." },
+          { question: "When do NESA-Africa 2026 nominations open?", answer: "Public nominations open 6 September 2026 across all four tiers. The Africa Education Icon Award nomination window runs 6 – 19 September 2026." },
           { question: "When is the NESA-Africa 2026 Recognition Gala?", answer: "The Recognition Gala takes place on 13 December 2026 in Lagos, Nigeria, where the 9 Icon Laureates are announced and all Certificates of Recognition are formally presented." },
           { question: "Is there any public voting in the 2026 cycle?", answer: "No. There is no public voting mechanism at any stage of the 2026 cycle. Recognition is determined exclusively through Nominee Research Corps verification, the EDI Matrix, and — for the Icon Award only — independent judging and Governance ratification." },
         ]}
@@ -115,7 +115,7 @@ export default function AboutCycle2026() {
         eyebrow="Inaugural Public Cycle"
         title={<>About <span className="text-gold">NESA-Africa 2026</span></>}
         positioning="The platform's first public award cycle since incorporation — 18 recognition forms across four tiers, verified end-to-end, culminating in the Recognition Gala in Lagos on 13 December 2026."
-        cyclePhase="Cycle Status · Pre-Nomination · Nominations open 30 August 2026"
+        cyclePhase="Cycle Status · Pre-Nomination · Nominations open 6 September 2026"
         primaryCta={{ label: "Nominate Now", href: "/nominate", icon: "nominate" }}
         secondaryCta={{ label: "Non-Influence Declaration", href: "#non-influence-protocol" }}
       />

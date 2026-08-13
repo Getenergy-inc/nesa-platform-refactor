@@ -144,7 +144,7 @@ export default function InfluencerImpact2026() {
             Key <span className="text-gold">Dates</span>
           </h2>
           <div className="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-            <StatCard value="30 Aug 2026" label="Nominations Open" />
+            <StatCard value="6 Sep 2026" label="Nominations Open" />
             <StatCard value="14 Nov 2026" label="Nominations Close" />
             <StatCard value="16 Sep – 13 Dec 2026" label="Rolling NRC Verification" />
             <StatCard value="13 Dec 2026" label="Gold-Blue Garnet Gala" />

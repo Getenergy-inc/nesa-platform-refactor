@@ -367,7 +367,7 @@ export default function NomineesHubPage() {
                   Someone You Know Belongs in This Register
                 </h2>
                 <p className="ed-section-sub">
-                  Nominations open 30 August 2026. Submission is free, and you can create your
+                  Nominations open 6 September 2026. Submission is free, and you can create your
                   account at the moment you submit.
                 </p>
               </div>

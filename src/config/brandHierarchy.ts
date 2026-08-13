@@ -36,7 +36,7 @@ export const BRAND = {
   flagshipTagline:
     "Celebrating the people whose lifetime contributions have helped shape African education.",
   cycleLabel: "NESA-Africa 2026",
-  nominationsOpenLabel: "30 August 2026",
+  nominationsOpenLabel: NOMINATIONS_OPEN_LABEL,
   galaLabel: PROGRAMME_END_LABEL,
   galaLongLabel: PROGRAMME_END_LONG_LABEL,
   galaCountdownIso: GALA_COUNTDOWN_DATETIME,
@@ -177,7 +177,7 @@ export const ICON_GOVERNANCE_STATEMENT = [
 /**
  * Africa Education Icon Award — 2026 nomination timeline.
  * Dates mirror the canonical programme configuration:
- *   open  30 August 2026, close 12 September 2026 (recognition2026 categories),
+ *   open  6 September 2026, Icon closes 19 September 2026, certificate tiers 21 November 2026,
  *   Gala  PROGRAMME_END_LABEL (13 December 2026).
  * No selection/finalist date exists in backend config, so that step is
  * intentionally left open-ended rather than fabricated.

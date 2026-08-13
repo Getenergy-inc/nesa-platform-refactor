@@ -16,6 +16,6 @@ export const STANDARD_FAQS: FAQ[] = [
   { q: "What evidence is required?", a: "Category-specific evidence is listed on this page. Nominations without the required evidence cannot be advanced by the NRC." },
   { q: "How are duplicate nominations handled?", a: "The system detects duplicates automatically and links them to the canonical nominee profile. No nomination is deleted." },
   { q: "Does nomination guarantee recognition?", a: "No. Nomination is the first step. Recognition follows verification and governance approval." },
-  { q: "When do nominations close?", a: "Public nominations for all four tiers close on 12 September 2026 unless extended by governance notice." },
+  { q: "When do nominations close?", a: "The Africa Education Icon window closes 19 September 2026. Gold-Blue Garnet, Platinum Recognition and Influencer Education Impact close 21 November 2026, unless extended by governance notice." },
   { q: "What happens after submission?", a: "You receive a reference number. The nominee is invited to accept, complete their profile and submit supporting evidence. The NRC then verifies the record." },
 ];
