@@ -173,6 +173,10 @@ export const MASTER_TIMELINE_2026: MasterTimelineEntry[
     outcome: "Launch volunteer contributor network",
     track: "podcast",
     href: "/media",
+    details: [
+      "Topic: Who Is an Education Enabler?",
+      "Purpose: Launch volunteer contributor network",
+    ],
   },
   {
     id: "webinar-1",
@@ -194,6 +198,10 @@ export const MASTER_TIMELINE_2026: MasterTimelineEntry[
     outcome: "Promote influencer advocacy",
     track: "podcast",
     href: "/media",
+    details: [
+      "Topic: Fame With Purpose",
+      "Purpose: Promote influencer advocacy",
+    ],
   },
   {
     id: "public-nominations-open",
@@ -243,6 +251,10 @@ export const MASTER_TIMELINE_2026: MasterTimelineEntry[
     outcome: "Drive Icon nominations",
     track: "podcast",
     href: "/media",
+    details: [
+      "Topic: Education Legacies That Must Be Preserved",
+      "Purpose: Drive Icon nominations",
+    ],
   },
   {
     id: "webinar-2",
@@ -264,6 +276,10 @@ export const MASTER_TIMELINE_2026: MasterTimelineEntry[
     outcome: "Attract investment",
     track: "podcast",
     href: "/media",
+    details: [
+      "Topic: Funding Education for All",
+      "Purpose: Attract investment",
+    ],
   },
   {
     id: "podcast-5",
@@ -274,6 +290,10 @@ export const MASTER_TIMELINE_2026: MasterTimelineEntry[
     outcome: "Prepare school nominations",
     track: "podcast",
     href: "/media",
+    details: [
+      "Topic: Rebuild My School Africa 2027",
+      "Purpose: Prepare school nominations",
+    ],
   },
   {
     id: "gold-blue-garnet-verification",
@@ -307,6 +327,10 @@ export const MASTER_TIMELINE_2026: MasterTimelineEntry[
     outcome: "Prepare special-needs nominations",
     track: "podcast",
     href: "/media",
+    details: [
+      "Topic: No Learner Left Behind",
+      "Purpose: Prepare special-needs nominations",
+    ],
   },
   {
     id: "icon-nominations-close",
@@ -338,6 +362,10 @@ export const MASTER_TIMELINE_2026: MasterTimelineEntry[
     outcome: "Recruit volunteers",
     track: "podcast",
     href: "/media",
+    details: [
+      "Topic: Volunteers Sharing Knowledge",
+      "Purpose: Recruit volunteers",
+    ],
   },
   {
     id: "nrc-icon-review",
@@ -383,6 +411,10 @@ export const MASTER_TIMELINE_2026: MasterTimelineEntry[
     outcome: "To be confirmed",
     track: "podcast",
     toBeConfirmed: true,
+    details: [
+      "Topic: Not yet confirmed — no source record gives dates or themes for these two episodes.",
+      "Purpose: To be confirmed",
+    ],
   },
   {
     id: "judges-final-review",
@@ -417,6 +449,10 @@ export const MASTER_TIMELINE_2026: MasterTimelineEntry[
     outcome: "Connect to post-award delivery",
     track: "podcast",
     href: "/media",
+    details: [
+      "Topic: From Recognition to Social Impact",
+      "Purpose: Connect to post-award delivery",
+    ],
   },
   {
     id: "webinar-6",
